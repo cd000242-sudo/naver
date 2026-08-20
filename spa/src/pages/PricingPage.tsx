@@ -392,7 +392,11 @@ function PricingPage() {
         }}>
             <section className="pricing-page-shell" style={{ padding: '140px 20px 80px', maxWidth: 1320, margin: '0 auto' }}>
 
-                {pricingIntro}
+                {/*
+                  * PRICING 인트로는 뺐다(사장님 2026-08-20 "가격표에 다 보이니까").
+                  * 이벤트가·10/1 전환은 상점의 D-day 띠와 취소선이 이미 말한다.
+                  * 같은 말을 두 번 하면 화면만 길어진다.
+                  */}
 
                 {/* Product tabs */}
                 <div className="pricing-product-tabs" style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 36, flexWrap: 'wrap' }}>
@@ -815,30 +819,11 @@ function PricingPage() {
                 </div>
 
                 {/* Individual lifetime inquiry */}
-                <div style={{ maxWidth: 920, margin: '28px auto 0', padding: '26px 24px', background: 'linear-gradient(135deg, rgba(124,58,237,0.10), rgba(18,18,26,0.78))', border: '1px solid rgba(167,139,250,0.28)', borderRadius: 18 }}>
-                    <div style={{ textAlign: 'center', marginBottom: 20 }}>
-                        <span style={{ display: 'inline-flex', padding: '5px 12px', borderRadius: 8, border: '1px solid rgba(167,139,250,0.42)', color: '#A78BFA', fontSize: 12, fontWeight: 900, marginBottom: 12 }}>LIFETIME ONLY</span>
-                        <h3 style={{ fontSize: 24, fontWeight: 900, marginBottom: 8 }}>개별 제품은 영구제만 별도 문의로 구매 가능합니다</h3>
-                        <p style={{ color: 'rgba(255,255,255,0.62)', fontSize: 14, lineHeight: 1.7, margin: 0 }}>기간제는 올인원 코드로 구매하고, 특정 제품만 영구제로 쓰고 싶을 때는 1:1 문의로 발급합니다.</p>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 12 }}>
-                        {[
-                            ['Better Life Naver', '개별 영구제', '별도 문의'],
-                            ['Leadernam Orbit', '개별 영구제', '별도 문의'],
-                            ['LEWORD', '개별 영구제', '별도 문의'],
-                        ].map(([name, type, price]) => (
-                            <article key={name} style={{ padding: 18, borderRadius: 12, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)' }}>
-                                <strong style={{ display: 'block', color: '#fff', fontSize: 16, marginBottom: 6 }}>{name}</strong>
-                                <span style={{ display: 'block', color: '#A78BFA', fontSize: 13, fontWeight: 800, marginBottom: 8 }}>{type}</span>
-                                <b style={{ color: '#FFD700', fontSize: 22 }}>{price}</b>
-                            </article>
-                        ))}
-                    </div>
-                    <div style={{ textAlign: 'center', marginTop: 18 }}>
-                        <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minHeight: 46, padding: '12px 22px', borderRadius: 10, background: 'linear-gradient(135deg, #FEE500, #F5D100)', color: '#3C1E1E', fontSize: 14, fontWeight: 900, textDecoration: 'none' }}>개별 영구제 문의하기</a>
-                    </div>
-                </div>
-
+                {/*
+                  * "개별 영구제는 별도 문의" 블록은 뺐다 — 이제 개별 제품을
+                  * 기간제·영구제 모두 상점에서 직접 판다. 문의로 보내는 건
+                  * 팔 수 있는 것을 안 파는 것이 됐다.
+                  */}
                 {/* Refund banners */}
                 <div style={{ maxWidth: 720, margin: '14px auto 0', padding: '12px 20px', background: 'rgba(255,215,0,0.08)', border: '1px solid rgba(255,215,0,0.2)', borderRadius: 10, fontSize: 13, color: 'rgba(255,255,255,0.75)', textAlign: 'center' }}>
                     💡 라이선스 코드 발급 후 7일 이내, 서비스 미사용 시 전액 환불 가능합니다.{' '}

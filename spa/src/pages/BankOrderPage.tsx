@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
+import { normalPriceOf, PRODUCTS, TERMS, won, type TermId } from '../lib/productCatalog';
 import { color, gradient, onGold, whiteA } from '../styles/tokens';
 
 /**
@@ -57,6 +58,34 @@ async function fetchOrderStatus(orderId: string) {
     return parseGasJson(res);
 }
 
+/**
+ * 상점에서 담아온 주문(?items=naver,leword&term=yearly)을 읽는다.
+ *
+ * 상점의 [결제하기]가 이 주소로 보내는데, 예전 이 화면은 올인원 기간권만
+ * 알아서 담아온 것을 통째로 무시했다(사장님 실측 2026-08-20). 값은 카탈로그
+ * 실측이고, 10월 1일이 지나면 두 배가 된다 — 판단은 pricingSchedule 이 한다.
+ */
+function readCartOrder(params: URLSearchParams): { label: string; names: string[]; amount: number } | null {
+    const ids = (params.get('items') || '').split(',').map((id) => id.trim()).filter(Boolean);
+    const term = params.get('term') as TermId | null;
+    if (ids.length === 0 || !term || !TERMS.some((item) => item.id === term)) return null;
+    const picked = ids
+        .map((id) => PRODUCTS.find((product) => product.id === id && product.status === 'on'))
+        .filter((product): product is NonNullable<typeof product> => Boolean(product) && Boolean(product!.prices[term]));
+    if (picked.length === 0) return null;
+    const normal = isNormalPricingActive();
+    const amount = picked.reduce((sum, product) => {
+        const event = product.prices[term] || 0;
+        return sum + (normal ? normalPriceOf(event) : event);
+    }, 0);
+    const termLabel = TERMS.find((item) => item.id === term)?.label || '';
+    return {
+        label: `${picked.map((product) => product.name).join(' · ')} ${termLabel}`,
+        names: picked.map((product) => `${product.name} ${termLabel}`),
+        amount,
+    };
+}
+
 function BankOrderPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [tab, setTab] = useState<string>('naver');
@@ -70,6 +99,16 @@ function BankOrderPage() {
     const [licCopyLabel, setLicCopyLabel] = useState('📋 복사');
     const [shake, setShake] = useState<'name' | 'email' | null>(null);
     const pollingRef = useRef<number | null>(null);
+    /** 상점에서 담아온 주문. 있으면 기간권 고르기를 건너뛴다. */
+    const cartOrder = readCartOrder(searchParams);
+
+    useEffect(() => {
+        if (!cartOrder || selected) return;
+        // 아래 submitOrder 가 쓰는 모양 그대로 만든다 — futurePrice 를 안 주면
+        // productPrice 가 이 값을 그대로 돌려준다(전환 판단은 이미 끝났다).
+        setSelected({ id: 'cart', name: cartOrder.label, price: cartOrder.amount, period: '' });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         const prev = document.title;
@@ -161,9 +200,11 @@ function BankOrderPage() {
 
         setSubmitting(true);
         const orderAmount = productPrice(selected);
-        const productLabel = selected.name.startsWith('올인원')
-            ? `Leaders Pro ${selected.name}`
-            : `${PRODUCT_LABELS[tab]} ${selected.name}`;
+        const productLabel = cartOrder
+            ? selected.name
+            : selected.name.startsWith('올인원')
+                ? `Leaders Pro ${selected.name}`
+                : `${PRODUCT_LABELS[tab]} ${selected.name}`;
         try {
             const res = await fetch(GAS_URL, {
                 method: 'POST',
@@ -197,10 +238,28 @@ function BankOrderPage() {
             <div style={{ background: 'rgba(18,18,26,0.7)', backdropFilter: 'blur(20px)', border: '1px solid rgba(201,168,76,0.18)', borderRadius: 24, padding: 'clamp(24px, 4vw, 40px)' }}>
                 <div style={{ textAlign: 'center', marginBottom: 32 }}>
                     <h1 style={{ fontSize: 'clamp(24px, 4vw, 32px)', fontWeight: 900, marginBottom: 8, background: gradient.goldBright, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>💰 계좌이체 결제</h1>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>올인원 기간권 선택 → 정보 입력 → 입금 → 올인원 라이선스 발급</p>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>{cartOrder ? '주문 확인 → 정보 입력 → 입금 → 라이선스 발급' : '올인원 기간권 선택 → 정보 입력 → 입금 → 올인원 라이선스 발급'}</p>
                 </div>
 
-                {/* Step 1 */}
+                {/* Step 1 — 상점에서 담아왔으면 다시 고르게 하지 않는다. 주문 내역만 보여 준다. */}
+                {cartOrder ? (
+                    <Step n={1} label="주문 내역">
+                        <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(201,168,76,0.25)', borderRadius: 12, padding: '16px 18px' }}>
+                            {cartOrder.names.map((item) => (
+                                <div key={item} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: 14, color: 'rgba(255,255,255,0.85)' }}>
+                                    <span>{item}</span>
+                                </div>
+                            ))}
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 10, paddingTop: 12, borderTop: '1px solid rgba(201,168,76,0.2)' }}>
+                                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>합계 (부가세 별도)</span>
+                                <strong style={{ fontSize: 22, fontWeight: 800, color: '#FFD700' }}>{won(cartOrder.amount)}원</strong>
+                            </div>
+                        </div>
+                        <p style={{ margin: '10px 0 0', fontSize: 12.5, color: 'rgba(255,255,255,0.5)' }}>
+                            제품을 바꾸시려면 <a href="/pricing" style={{ color: '#FFD700' }}>가격표로 돌아가기 →</a>
+                        </p>
+                    </Step>
+                ) : (
                 <Step n={1} label="올인원 기간권 선택">
                     <div style={{ display: 'flex', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
                         {Object.keys(PRODUCT_LABELS).filter((k) => k === 'naver').map((k) => (
@@ -240,6 +299,7 @@ function BankOrderPage() {
                         })}
                     </div>
                 </Step>
+                )}
 
                 {/* Step 2 */}
                 <Step n={2} label="정보 입력">
@@ -294,7 +354,7 @@ function BankOrderPage() {
                 </button>
 
                 <div style={{ marginTop: 18, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7 }}>
-                    주문 접수 후 입금이 확인되면 올인원 라이선스 코드가 이메일로 발송됩니다.<br />
+                    주문 접수 후 입금이 확인되면 라이선스 코드가 이메일로 발송됩니다.<br />
                     결제 진행 시 <a href="/terms" style={{ color: '#FFD700' }}>이용약관</a> 및 <a href="/privacy" style={{ color: '#FFD700' }}>개인정보처리방침</a>에 동의하는 것으로 간주됩니다.
                 </div>
             </div>
@@ -338,7 +398,7 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                 <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, lineHeight: 1.8 }}>
                     {status === 'approved' && <>아래 올인원 라이선스 코드를 사용해주세요.<br />이메일로도 발송되었습니다.</>}
                     {status === 'rejected' && '문의 사항이 있으시면 아래 연락처로 연락주세요.'}
-                    {status === 'pending' && <>아래 계좌로 입금해주세요.<br />입금 확인 후 <strong>올인원 라이선스 코드</strong>가 이메일로 발송됩니다.<br /><span style={{ display: 'inline-block', marginTop: 8, color: '#c9a84c', fontSize: 13 }}>📡 이 페이지는 자동으로 상태가 갱신됩니다.</span></>}
+                    {status === 'pending' && <>아래 계좌로 입금해주세요.<br />입금 확인 후 <strong>라이선스 코드</strong>가 이메일로 발송됩니다.<br /><span style={{ display: 'inline-block', marginTop: 8, color: '#c9a84c', fontSize: 13 }}>📡 이 페이지는 자동으로 상태가 갱신됩니다.</span></>}
                 </div>
                 <div style={{ marginTop: 18, color: 'rgba(255,255,255,0.55)', fontSize: 13 }}>주문번호: <strong style={{ color: '#FFD700' }}>{orderId}</strong></div>
 
@@ -375,7 +435,7 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                 {status === 'approved' && code && (
                     <div style={{ background: 'linear-gradient(135deg, rgba(68,215,182,0.08), rgba(201,168,76,0.08))', border: '1px solid rgba(68,215,182,0.4)', borderRadius: 14, padding: 24, marginTop: 18, textAlign: 'left' }}>
                         <div style={{ fontSize: 36, textAlign: 'center', marginBottom: 8 }}>🎉</div>
-                        <div style={{ textAlign: 'center', color: '#44d7b6', fontSize: 18, fontWeight: 800, marginBottom: 16 }}>올인원 라이선스 발급 완료</div>
+                        <div style={{ textAlign: 'center', color: '#44d7b6', fontSize: 18, fontWeight: 800, marginBottom: 16 }}>라이선스 발급 완료</div>
                         <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, marginBottom: 6 }}>올인원 라이선스 코드</div>
                         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                             <input readOnly value={code} style={{ flex: 1, background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 10, padding: '14px 16px', color: '#c9a84c', fontFamily: 'monospace', fontSize: 16, fontWeight: 800, letterSpacing: 0.5 }} />

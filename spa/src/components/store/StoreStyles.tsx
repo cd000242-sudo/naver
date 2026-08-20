@@ -103,8 +103,10 @@ function StoreStyles() {
             .st-buy:hover { border-color: rgba(240,181,63,.45); }
             .st-buy.on { background: linear-gradient(180deg, #f7c455, var(--st-gold)); border-color: transparent; color: #171003; box-shadow: 0 6px 20px rgba(240,181,63,.26); }
 
+            /* 올인원은 줄 전체를 쓰고 가운데 선다(사장님 지정) — span 2 는 3열에서 왼쪽으로 쏠렸다. */
             .st-bundle {
-                grid-column: span 2;
+                grid-column: 1 / -1;
+                max-width: 640px; width: 100%; margin: 0 auto;
                 border-color: rgba(240,181,63,.42);
                 background:
                     radial-gradient(560px 260px at 12% 0%, rgba(240,181,63,.16), transparent 66%),
@@ -140,7 +142,6 @@ function StoreStyles() {
             .st-swap b { color: var(--st-gold-lit); }
             .st-swap button { margin-left: 6px; padding: 0; border: 0; background: none; cursor: pointer; font-family: inherit; font-size: 13.6px; color: var(--st-gold-lit); border-bottom: 1px solid rgba(255,216,138,.45); }
 
-            @media (max-width: 900px) { .st-bundle { grid-column: span 1; } }
             @media (max-width: 720px) {
                 .st-head h2 { font-size: 26px; }
                 .st-cart-total { margin-left: 0; text-align: left; }
