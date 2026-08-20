@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import LewordAuth from '../components/leword/LewordAuth';
+import { clearSession, daysLeft, loadSession, type LewordSession } from '../lib/lewordAuth';
 import { Link, useSearchParams } from 'react-router-dom';
 import AffiliateTab from '../components/leword/AffiliateTab';
 import AnalyzeTab from '../components/leword/AnalyzeTab';
@@ -43,6 +45,14 @@ function LewordPage() {
     const [handoffKeyword, setHandoffKeyword] = useState(searchParams.get('keyword') || '');
     /** 모바일 햄버거 메뉴 열림 상태. 탭을 고르면 닫힌다. */
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
+    /*
+     * 로그인 — 저장된 세션은 만료가 지나면 loadSession 이 스스로 지운다.
+     * 비로그인도 화면은 열어 둔다: 황금키워드 상위 5건만 맛보기로 보이고
+     * 나머지 탭은 잠긴다(사장님 사양 2026-08-20).
+     */
+    const [session, setSession] = useState<LewordSession | null>(loadSession);
+    const [authOpen, setAuthOpen] = useState(false);
+    const left = session ? daysLeft(session) : null;
     const activeMeta = TABS.find((tab) => tab.id === activeTab) ?? TABS[0];
 
     useEffect(() => {
@@ -118,9 +128,12 @@ function LewordPage() {
                             key={tab.id}
                             type="button"
                             // 탭별 고유색(사장님 지정 2026-08-20: 금·파랑·초록·주황·빨강·분홍·은색).
-                            className={`lw-navi lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}`}
+                            className={`lw-navi lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}${!session && tab.id !== 'golden' ? ' locked' : ''}`}
                             aria-current={activeTab === tab.id ? 'page' : undefined}
-                            onClick={() => selectTab(tab.id)}
+                            onClick={() => {
+                                if (!session && tab.id !== 'golden') { setAuthOpen(true); return; }
+                                selectTab(tab.id);
+                            }}
                         >
                             <span aria-hidden="true">{tab.icon}</span>
                             {/*
@@ -131,6 +144,7 @@ function LewordPage() {
                               */}
                             <em className="lw-navi-full">{tab.label}</em>
                             <em className="lw-navi-short">{tab.short}</em>
+                            {!session && tab.id !== 'golden' && <b className="lw-navi-lock" aria-label="로그인 필요">🔒</b>}
                         </button>
                     ))}
                 </nav>
@@ -143,7 +157,52 @@ function LewordPage() {
             </aside>
 
             <section className="lw-main">
-                {activeTab === 'golden' && <GoldenTab onAnalyze={sendToAnalyze} />}
+                {/*
+                  * 계정 줄 — 아이디와 **언제까지 쓸 수 있는지**가 늘 보여야 한다.
+                  * 30일 이하부터 노랑, 7일 이하부터 빨강. 만료 당일에 알면 늦다.
+                  */}
+                <div className="lw-acct">
+                    {session ? (
+                        <>
+                            <span className="lw-acct-face" aria-hidden="true">{session.userId.slice(0, 1).toUpperCase()}</span>
+                            <span className="lw-acct-id">{session.userId}</span>
+                            <span className="lw-acct-meta">
+                                {session.licenseType ? `${session.licenseType} · ` : ''}
+                                {session.expiresAt
+                                    ? `${new Date(session.expiresAt).toLocaleDateString('ko-KR')}까지`
+                                    : '기간 제한 없음'}
+                            </span>
+                            {typeof left === 'number' && (
+                                <span className={`lw-acct-left${left <= 7 ? ' out' : left <= 30 ? ' soon' : ''}`}>
+                                    <i aria-hidden="true" />{left}일 남음
+                                </span>
+                            )}
+                            <button
+                                type="button"
+                                className="lw-acct-btn"
+                                onClick={() => { clearSession(); setSession(null); selectTab('golden'); }}
+                            >로그아웃</button>
+                        </>
+                    ) : (
+                        <>
+                            <span className="lw-acct-meta">로그인하면 모든 기능이 열립니다 — 지금은 황금키워드 상위 5건만 보입니다.</span>
+                            <button type="button" className="lw-acct-btn on" onClick={() => setAuthOpen(true)}>
+                                로그인 · 계정 만들기
+                            </button>
+                        </>
+                    )}
+                </div>
+
+                {authOpen && !session && (
+                    <div className="lw-auth-wrap">
+                        <LewordAuth
+                            onDone={(next) => { setSession(next); setAuthOpen(false); }}
+                            onCancel={() => setAuthOpen(false)}
+                        />
+                    </div>
+                )}
+
+                {activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {activeTab === 'kin' && <KinGoldenTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
                 {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}

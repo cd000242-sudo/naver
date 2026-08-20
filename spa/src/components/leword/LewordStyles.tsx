@@ -271,6 +271,74 @@ function LewordStyles() {
              * lw-card 클래스를 쓰지 않는다. 그게 세로 쌓기라 grid 를 덮어써서
              * 카드가 가운데로 무너졌다(실측). 이 줄은 자기 배경을 직접 갖는다.
              */
+            /* ── 로그인 ─────────────────────────────────────────── */
+            .lw-acct {
+                display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+                padding: 10px 14px; margin-bottom: 14px;
+                border: 1px solid rgba(255,255,255,.09); border-radius: 11px; background: rgba(255,255,255,.035);
+            }
+            .lw-acct-face {
+                width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; flex: none;
+                background: rgba(124,92,255,.18); border: 1px solid rgba(124,92,255,.35);
+                color: #cfc2ff; font-weight: 700; font-size: 13px;
+            }
+            .lw-acct-id { font-weight: 700; font-size: 14.5px; color: #fff; }
+            .lw-acct-meta { color: #646b7d; font-size: 12.5px; font-family: ui-monospace, monospace; }
+            .lw-acct-left {
+                display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px;
+                font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums;
+                background: rgba(46,204,113,.13); color: #2ecc71;
+            }
+            .lw-acct-left.soon { background: rgba(255,165,0,.13); color: #ffd27a; }
+            .lw-acct-left.out { background: rgba(255,107,129,.13); color: #ff6b81; }
+            .lw-acct-left i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+            .lw-acct-btn {
+                margin-left: auto; padding: 6px 13px; border-radius: 8px; cursor: pointer;
+                border: 1px solid rgba(255,255,255,.16); background: transparent; color: rgba(235,242,250,.72); font-size: 12.5px;
+            }
+            .lw-acct-btn:hover { border-color: rgba(124,92,255,.5); color: #fff; }
+            .lw-acct-btn.on { border-color: rgba(255,165,0,.45); background: rgba(255,165,0,.1); color: #ffd27a; font-weight: 700; }
+
+            .lw-navi.locked { opacity: .55; }
+            .lw-navi-lock { margin-left: auto; font-size: 11px; font-weight: 400; }
+
+            .lw-auth-wrap { display: grid; place-items: center; padding: 26px 0 34px; }
+            .lw-auth { width: 100%; max-width: 400px; }
+            .lw-auth-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+            .lw-auth-logo {
+                width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; flex: none;
+                background: linear-gradient(135deg, #ffa500, #ffd700); color: #1a1206; font-weight: 700; font-size: 15px;
+            }
+            .lw-auth-brand b { font-size: 17px; color: #fff; }
+            .lw-auth-brand span { color: #646b7d; font-size: 13px; }
+            .lw-auth h3 { margin: 0 0 6px; font-size: 20px; color: #fff; }
+            .lw-auth-sub { margin: 0 0 20px; color: #646b7d; font-size: 13.5px; }
+            .lw-auth-msg {
+                display: flex; gap: 9px; padding: 11px 13px; border-radius: 9px; font-size: 13px;
+                line-height: 1.55; margin-bottom: 16px;
+            }
+            .lw-auth-msg.bad { background: rgba(255,107,129,.09); border: 1px solid rgba(255,107,129,.3); color: #ffc2cb; }
+            .lw-auth-msg b { color: #fff; }
+            .lw-auth-field { display: block; margin-bottom: 13px; font-size: 12.5px; color: rgba(235,242,250,.68); }
+            .lw-auth-field em { font-style: normal; color: #646b7d; font-size: 11.5px; }
+            .lw-auth-field input {
+                display: block; width: 100%; margin-top: 6px; padding: 11px 13px; border-radius: 9px;
+                border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.04);
+                color: #ebf2fa; font-size: 14px; font-family: inherit;
+            }
+            .lw-auth-field input.mono { font-family: ui-monospace, monospace; letter-spacing: .06em; }
+            .lw-auth-field input:focus { outline: 2px solid rgba(124,92,255,.5); outline-offset: 1px; border-color: rgba(124,92,255,.6); }
+            .lw-auth-cta {
+                width: 100%; margin-top: 8px; padding: 12px; border-radius: 9px; border: 0; cursor: pointer;
+                background: #7c5cff; color: #fff; font-size: 14.5px; font-weight: 700; font-family: inherit;
+            }
+            .lw-auth-cta.gold { background: linear-gradient(135deg, #ffa500, #ffc247); color: #1a1206; }
+            .lw-auth-cta:disabled { opacity: .6; cursor: not-allowed; }
+            .lw-auth-switch { margin: 16px 0 0; text-align: center; font-size: 13px; color: #646b7d; }
+            .lw-auth-switch button {
+                padding: 0; border: 0; background: none; cursor: pointer; font-family: inherit; font-size: 13px;
+                color: #cfc2ff; border-bottom: 1px solid rgba(207,194,255,.35);
+            }
             .lw-metric-verdict { padding: 2px 9px; border-radius: 999px; font-weight: 700; }
             /* 제휴 제목 만들기 — 세 레인(쿠팡·토스·브랜드커넥트)이 같은 모양을 쓴다. */
             /*

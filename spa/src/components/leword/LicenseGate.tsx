@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getStoredLicense, setStoredLicense } from '../../lib/keywordApi';
 import { hasAnyUserKey } from '../../lib/userKeys';
+import { loadSession } from '../../lib/lewordAuth';
 
 /**
  * 라이선스 잠금.
@@ -16,21 +17,19 @@ import { hasAnyUserKey } from '../../lib/userKeys';
 
 /** 지금 이 브라우저가 잠금을 풀 자격이 있는가. */
 export function isUnlocked(): boolean {
-    return Boolean(getStoredLicense().trim()) || hasAnyUserKey();
+    // 로그인한 사람이 1순위다 — 라이선스 코드가 계정에 이미 묶여 있다.
+    return loadSession() !== null || Boolean(getStoredLicense().trim()) || hasAnyUserKey();
 }
 
 /**
- * 베타 기간에는 **전부 연다.**
+ * 베타 개방은 끝났다(2026-08-20).
  *
- * 사장님(2026-08-12): "베타로 오픈해 놓은 거라서 로그인 기능 등등 나중에 넣어야
- * 될 거 아니에요. 당장 지금 바로 보이도록 해 주세요."
- *
- * 맞다. 로그인도 결제도 아직 없는데 5행만 보여 주면, 보드가 27행을 내도 사람이
- * 보는 것은 5행뿐이다 — 만들어 놓고 안 보여 주는 상태다.
- *
- * **로그인·결제가 붙으면 이 값을 5로 되돌린다.** 아래 상수 하나만 고치면 된다.
+ * 2026-08-12 에 전부 열어 둔 이유는 "로그인도 결제도 아직 없는데 5행만 보여
+ * 주면 만들어 놓고 안 보여 주는 상태"였기 때문이다. 그 조건이 사라졌다 —
+ * 로그인이 붙었고, 위 isUnlocked 가 로그인한 사람을 먼저 통과시킨다.
+ * 이제 비로그인만 5행을 본다(사장님 사양: "맛보기 상위 5개").
  */
-const BETA_OPEN = true;
+const BETA_OPEN = false;
 
 export const FREE_BOARD_ROWS = BETA_OPEN ? Number.MAX_SAFE_INTEGER : 5;
 export const FREE_LOOKUPS = BETA_OPEN ? 1000 : 10;
