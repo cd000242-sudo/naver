@@ -22,6 +22,8 @@ export type UserKeyField =
     | 'coupangSecretKey'
     | 'coupangSubId'
     | 'claudeToken'
+    /** 사용자가 고른 생성 엔진(claude|codex|gemini|grok). 비면 클로드 우선. */
+    | 'aiProvider'
     /** 회전식 refresh 토큰 — 만료 시 서버가 갱신하고 화면이 다시 저장한다. 손입력 UI 없음. */
     | 'claudeRefresh'
     | 'claudeExpiresAt'

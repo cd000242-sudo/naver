@@ -123,6 +123,8 @@ export async function bridgeKinAnswer(input: {
     body: string;
     withLink: boolean;
     blogUrl: string;
+    /** 사용자가 고른 엔진. 비면 앱이 순서대로 시도한다. */
+    provider?: string;
 }): Promise<BridgeKinAnswerResult> {
     const controller = new AbortController();
     const timer = window.setTimeout(() => controller.abort(), 120_000);

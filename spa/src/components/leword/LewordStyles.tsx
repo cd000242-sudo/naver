@@ -271,6 +271,20 @@ function LewordStyles() {
             .lw-kg-linkbox input { accent-color: #ffa500; width: 15px; height: 15px; }
             .lw-kg-linkbox.off { opacity: .45; cursor: not-allowed; }
             .lw-kg-bloginput { width: 100%; margin-top: 8px; padding: 9px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; }
+            /* 엔진 선택 목록 — 하나 골라 연동하고 그것으로 쓴다. */
+            .lw-engines-list { display: flex; flex-direction: column; gap: 8px; }
+            .lw-engine-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; background: rgba(255,255,255,.025); }
+            .lw-engine-row.on { border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.07); }
+            .lw-engine-name b { display: block; font-size: 14.5px; color: #ebf2fa; }
+            .lw-engine-name small { display: block; margin-top: 2px; font-size: 11.5px; color: rgba(235,242,250,.5); }
+            .lw-engine-state { font-size: 12px; font-weight: 700; color: rgba(235,242,250,.55); white-space: nowrap; }
+            .lw-engine-state.ok { color: #2ecc71; }
+            .lw-engine-actions { display: flex; gap: 6px; }
+            @media (max-width: 720px) {
+                .lw-engine-row { grid-template-columns: minmax(0, 1fr); }
+                .lw-engine-actions { justify-content: flex-start; }
+            }
+
             /* 폴백 체인 상태 — 어느 CLI 가 실제로 살아 있는지 한눈에. */
             .lw-agents-block { margin-top: 14px; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.08); }
             .lw-agents-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 9px; flex-wrap: wrap; }

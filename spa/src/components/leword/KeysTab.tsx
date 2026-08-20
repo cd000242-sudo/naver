@@ -17,10 +17,10 @@ import { TabIntro } from './LewordShared';
  * 같아야 한다. 화면 순서가 실제 실행 순서와 갈라지면 안내가 거짓말이 된다.
  */
 const AGENT_CHAIN = [
-    { id: 'claude', label: '클로드코드' },
-    { id: 'codex', label: '코덱스' },
-    { id: 'gemini', label: '제미나이 CLI' },
-    { id: 'grok', label: '그록' },
+    { id: 'claude', label: '클로드코드', sub: '클로드 구독 · 사이트에서 바로 연동(앱 불필요)' },
+    { id: 'codex', label: '코덱스', sub: '챗지피티 구독 · 로그인이 이 PC 로 돌아와 앱이 필요' },
+    { id: 'gemini', label: '제미나이 CLI', sub: '구글/제미나이 구독 · 로그인이 이 PC 로 돌아와 앱이 필요' },
+    { id: 'grok', label: '그록', sub: 'xAI 구독 · 로그인이 이 PC 로 돌아와 앱이 필요' },
 ] as const;
 
 /**
@@ -123,6 +123,9 @@ function KeysTab() {
     const bridgeReady = typeof bridge === 'object' && bridge !== null;
     const agentOf = (provider: string) => (bridgeReady ? (bridge.agents || []).find((agent) => agent.provider === provider) : undefined);
 
+    /** 지금 쓰기로 고른 엔진. 안 골랐으면 연동된 것 중 클로드 우선으로 본다. */
+    const activeProvider = String(keys.aiProvider || '') || (keys.claudeToken ? 'claude' : '');
+
     /** 제공자별 로그인 시작 — 앱이 그 PC 에서 로그인 창을 띄운다. */
     const [loginBusy, setLoginBusy] = useState('');
     const [loginNote, setLoginNote] = useState('');
@@ -205,102 +208,110 @@ function KeysTab() {
               * 옛 '연동하기'(앱 브리지) 버튼은 뺐다("이제 필요 없지 않아?") —
               * 앱 브리지는 화면 뒤 폴백으로만 남는다.
               */}
-            <section className="lw-panel" aria-label="AI 연동 (클로드 구독)">
+            <section className="lw-panel" aria-label="AI 연동">
                 <div className="lw-panel-head">
-                    <h2>AI 연동 (클로드 구독)</h2>
-                    <span className={keys.claudeToken ? 'lw-key-on' : ''}>
-                        {keys.claudeToken
-                            ? '✅ 연동됨 — 지식인 답변·마인드맵 추론·글 진단 전부 구독으로'
-                            : '미연동'}
+                    <h2>AI 연동 — 쓸 엔진을 골라 연동하세요</h2>
+                    <span className={activeProvider ? 'lw-key-on' : ''}>
+                        {activeProvider
+                            ? `● ${AGENT_CHAIN.find((item) => item.id === activeProvider)?.label} 사용 중`
+                            : '아직 고르지 않음'}
                     </span>
                 </div>
                 <p className="lw-card-note" style={{ marginBottom: 12 }}>
-                    <strong>버튼 한 번</strong>이면 됩니다: 클로드 로그인 확인 → 승인 → 화면에 뜨는 코드
-                    한 줄 붙여넣기. 이후 만료는 자동 갱신되어 다시 할 일이 없습니다. 추가 비용 0.
+                    구독을 이미 내고 있는 엔진 하나만 연동하면 됩니다 — 지식인 답변·마인드맵 추론·글 진단이
+                    그 엔진으로 돕니다(추가 비용 0). 여러 개 연동해 두고 [사용]으로 바꿔 쓸 수도 있습니다.
                 </p>
 
-                {!keys.claudeToken && (
-                    <div className="lw-claude-connect">
-                        <button type="button" className="lw-mini" onClick={startClaudeConnect} disabled={oauthBusy}>
-                            🔗 클로드 구독 연결 (버튼 한 번)
-                        </button>
-                        {oauth && (
-                            /*
-                             * 단계를 눈에 보이게 적는다 — 승인 코드를 아래 '토큰' 칸에
-                             * 잘못 넣어 무한루프가 났던 실사고(2026-08-20) 재발 방지.
-                             */
-                            <div className="lw-claude-steps">
-                                <p><b>① 새 탭</b>에서 승인을 누르세요. <b>② 그 화면에 뜬 코드</b>를 아래 칸에 붙여넣고 [연결 완료].</p>
-                                <div className="lw-claude-code">
-                                    <input
-                                        type="text"
-                                        value={oauthCode}
-                                        onChange={(event) => setOauthCode(event.target.value)}
-                                        placeholder="여기에 승인 코드 붙여넣기 (아래 토큰 칸 아님)"
-                                        aria-label="클로드 승인 코드"
-                                        autoFocus
-                                    />
-                                    <button type="button" className="lw-mini" onClick={finishClaudeConnect} disabled={oauthBusy || !oauthCode.trim()}>
-                                        {oauthBusy ? '연결 중…' : '연결 완료'}
-                                    </button>
+                <div className="lw-engines-list">
+                    {AGENT_CHAIN.map((item) => {
+                        const agent = agentOf(item.id);
+                        const linked = item.id === 'claude'
+                            ? Boolean(keys.claudeToken) || Boolean(agent?.available)
+                            : Boolean(agent?.available);
+                        const state = linked ? '✅ 연동됨'
+                            : item.id !== 'claude' && !bridgeReady ? '앱을 켜야 확인됩니다'
+                                : agent?.installed ? '로그인 필요'
+                                    : item.id === 'claude' ? '미연동' : '미설치';
+                        const active = activeProvider === item.id;
+                        return (
+                            <div key={item.id} className={`lw-engine-row${active ? ' on' : ''}`}>
+                                <div className="lw-engine-name">
+                                    <b>{item.label}</b>
+                                    <small>{item.sub}</small>
+                                </div>
+                                <span className={`lw-engine-state${linked ? ' ok' : ''}`}>{state}</span>
+                                <div className="lw-engine-actions">
+                                    {item.id === 'claude' ? (
+                                        keys.claudeToken ? (
+                                            <button
+                                                type="button"
+                                                className="lw-mini lw-mini-ghost"
+                                                onClick={() => {
+                                                    const next = { ...keys, claudeToken: '', claudeRefresh: '', claudeExpiresAt: '' };
+                                                    setKeys(next);
+                                                    saveUserKeys(next);
+                                                    setOauthNote('클로드 연동을 해제했습니다.');
+                                                }}
+                                            >해제</button>
+                                        ) : (
+                                            <button type="button" className="lw-mini" onClick={startClaudeConnect} disabled={oauthBusy}>연동</button>
+                                        )
+                                    ) : (
+                                        <button
+                                            type="button"
+                                            className="lw-mini"
+                                            onClick={() => startAgentLogin(item.id, item.label)}
+                                            disabled={Boolean(loginBusy)}
+                                        >{loginBusy === item.id ? '여는 중…' : linked ? '다시 로그인' : '연동'}</button>
+                                    )}
+                                    <button
+                                        type="button"
+                                        className={`lw-mini${active ? '' : ' lw-mini-ghost'}`}
+                                        onClick={() => {
+                                            const next = { ...keys, aiProvider: item.id };
+                                            setKeys(next);
+                                            saveUserKeys(next);
+                                            setLoginNote(`${item.label}(으)로 사용합니다 — 답변·추론·진단이 이 엔진으로 돕니다.`);
+                                        }}
+                                    >{active ? '사용 중' : '사용'}</button>
                                 </div>
                             </div>
-                        )}
+                        );
+                    })}
+                </div>
+
+                {/*
+                  * 클로드 승인 코드 입력 — [연동]을 누른 뒤에만 나타난다.
+                  * 코드 칸과 토큰 칸을 헷갈려 무한루프가 났던 실사고(2026-08-20)
+                  * 재발 방지로 단계를 번호로 적는다.
+                  */}
+                {oauth && !keys.claudeToken && (
+                    <div className="lw-claude-steps">
+                        <p><b>① 새 탭</b>에서 승인을 누르세요. <b>② 그 화면에 뜬 코드</b>를 아래 칸에 붙여넣고 [연결 완료].</p>
+                        <div className="lw-claude-code">
+                            <input
+                                type="text"
+                                value={oauthCode}
+                                onChange={(event) => setOauthCode(event.target.value)}
+                                placeholder="여기에 승인 코드 붙여넣기"
+                                aria-label="클로드 승인 코드"
+                                autoFocus
+                            />
+                            <button type="button" className="lw-mini" onClick={finishClaudeConnect} disabled={oauthBusy || !oauthCode.trim()}>
+                                {oauthBusy ? '연결 중…' : '연결 완료'}
+                            </button>
+                        </div>
                     </div>
-                )}
-                {keys.claudeToken && (
-                    <button
-                        type="button"
-                        className="lw-mini lw-mini-ghost"
-                        onClick={() => {
-                            const next = { ...keys, claudeToken: '', claudeRefresh: '', claudeExpiresAt: '' };
-                            setKeys(next);
-                            saveUserKeys(next);
-                            setOauthNote('연동을 해제했습니다 — 다시 연결하려면 버튼 한 번이면 됩니다.');
-                        }}
-                    >연동 해제</button>
                 )}
                 {oauthNote && <p className="lw-card-note" style={{ marginTop: 10, marginBottom: 0 }}>{oauthNote}</p>}
 
-                {/* 폴백 체인 — 클로드가 막히면 이 순서로 넘어간다. 상태는 앱이 실제로 찔러 본 결과다. */}
-                <div className="lw-agents-block">
-                    <div className="lw-agents-head">
-                        <b>앱 폴백 체인 — 클로드 → 코덱스 → 제미나이 → 그록</b>
-                        <button type="button" className="lw-mini lw-mini-ghost" onClick={refreshAgents} disabled={bridge === 'probing'}>
-                            {bridge === 'probing' ? '확인 중…' : '상태 확인'}
-                        </button>
-                    </div>
-                    {bridgeReady && bridge.connected ? (
-                        <div className="lw-agents">
-                            {AGENT_CHAIN.map((item) => {
-                                const agent = agentOf(item.id);
-                                const state = agent?.available ? 'ok' : agent?.installed ? 'warn' : 'off';
-                                const text = agent?.available ? '사용 가능'
-                                    : agent?.installed ? '로그인 필요'
-                                        : '미설치';
-                                return (
-                                    <span key={item.id} className={`lw-agent lw-agent-${state}`} title={agent?.detail || ''}>
-                                        {item.label} · {text}
-                                        {!agent?.available && (
-                                            <button
-                                                type="button"
-                                                className="lw-agent-login"
-                                                onClick={() => startAgentLogin(item.id, item.label)}
-                                                disabled={Boolean(loginBusy)}
-                                            >{loginBusy === item.id ? '여는 중…' : '로그인'}</button>
-                                        )}
-                                    </span>
-                                );
-                            })}
-                        </div>
-                    ) : (
-                        <p className="lw-card-note" style={{ margin: 0 }}>
-                            {bridge === 'probing' ? '앱에 연결하는 중…'
-                                : 'LEWORD 앱이 꺼져 있어 폴백 체인 상태를 못 잽니다 — 앱을 켜고 [상태 확인]을 누르면 네 CLI 의 로그인 여부가 여기 나옵니다.'}
-                        </p>
-                    )}
-                    {loginNote && <p className="lw-card-note" style={{ marginTop: 9, marginBottom: 0 }}>{loginNote}</p>}
+                <div className="lw-agents-head" style={{ marginTop: 12 }}>
+                    <b>코덱스·제미나이·그록 상태는 앱이 실제로 확인한 값입니다</b>
+                    <button type="button" className="lw-mini lw-mini-ghost" onClick={refreshAgents} disabled={bridge === 'probing'}>
+                        {bridge === 'probing' ? '확인 중…' : '상태 확인'}
+                    </button>
                 </div>
+                {loginNote && <p className="lw-card-note" style={{ margin: '8px 0 0' }}>{loginNote}</p>}
             </section>
 
             {KEY_GROUPS.map((group) => {

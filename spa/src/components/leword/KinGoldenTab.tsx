@@ -131,10 +131,21 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
             blogUrl: blogUrl.trim(),
         };
         /*
-         * 1순위: 내 API 키 탭의 클로드코드 **구독 토큰**(사장님 확정 2026-08-20
-         * "앱 안 켜도 어드민처럼 되게") — 앱 없이, 추가 비용 없이 서버가 바로
-         * 생성한다. 토큰/키가 없을 때만 LEWORD 앱(브리지)을 시도한다.
+         * 사용자가 고른 엔진을 따른다(사장님 확정 2026-08-20 "선택해서 연동하고
+         * 쓰는 것"). 클로드는 사이트가 직접(앱 불필요), 나머지는 앱이 그 엔진
+         * 하나로 실행한다 — 몰래 다른 엔진으로 갈아타지 않는다.
          */
+        const picked = String(loadUserKeys().aiProvider || '');
+        if (picked && picked !== 'claude') {
+            const viaApp = await bridgeKinAnswer({ ...input, provider: picked });
+            setGenerating(false);
+            if (viaApp.status === 'ok') { setDraft(viaApp.answer); return; }
+            setGenNote(viaApp.status === 'error'
+                ? `생성 실패(${picked}): ${viaApp.message}`
+                : `${picked} 는 LEWORD 앱을 통해 돕니다 — 앱을 켜고 다시 눌러 주세요(내 API 키 탭에서 다른 엔진으로 바꿀 수도 있습니다).`);
+            return;
+        }
+
         const viaKeys = await fetchKinAnswer(input);
         if (viaKeys.ok && viaKeys.data?.answer) {
             setGenerating(false);
