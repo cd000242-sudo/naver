@@ -190,7 +190,8 @@ function KeysTab() {
             setLoginNote(`${label} 로그인을 시작하지 못했습니다 — LEWORD 앱을 켠 뒤 다시 눌러 주세요(이 로그인은 내 PC 에서만 됩니다).`);
             return;
         }
-        if (result.state === 'already') setLoginNote(`${label}: 이미 로그인돼 있습니다.`);
+        if (result.state === 'installing') setLoginNote(`${label}: 설치 중입니다(1~2분) — 끝나면 로그인 창이 열립니다. [상태 확인]으로 지켜보세요.`);
+        else if (result.state === 'already') setLoginNote(`${label}: 이미 로그인돼 있습니다.`);
         else if (result.state === 'done') setLoginNote(`${label}: 로그인 완료.`);
         else if (result.state === 'failed') setLoginNote(`${label} 로그인 실패: ${result.message || ''}`);
         else setLoginNote(`${label}: 브라우저가 열렸습니다 — 승인한 뒤 [상태 확인]을 눌러 주세요.`);
@@ -351,6 +352,18 @@ function KeysTab() {
                                   * 구독 토큰이 존재하지 않아 칸 자체를 두지 않는다(빈 칸을 두면
                                   * 넣을 게 있는 줄 알고 API 키를 넣게 된다 — 그건 과금이다).
                                   */}
+                                {/*
+                                  * 사용량 줄(사장님 2026-08-20 "연동된 에이전트 전부 사용량
+                                  * 보이게, 할당량 없으면 없음이라고"). 코덱스·제미나이·그록은
+                                  * 사용량을 내주는 API 가 없다(실측) — 지어내지 않고 '제공
+                                  * 안 함'이라 적는다. 코덱스는 플랜(구독 등급)만 사실로 있다.
+                                  */}
+                                {item.id !== 'claude' && linked && (
+                                    <p className="lw-engine-usage">
+                                        {agent?.plan ? <b>{agent.plan.toUpperCase()} 구독</b> : '구독 확인됨'}
+                                        {' · '}사용량: 이 서비스는 제공하지 않습니다
+                                    </p>
+                                )}
                                 {item.id === 'claude' && hasToken && (
                                     <div className="lw-usage">
                                         <div className="lw-usage-head">

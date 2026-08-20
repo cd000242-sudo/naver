@@ -251,6 +251,8 @@ function LewordStyles() {
             .lw-kg-up { font-style: normal; color: #2ecc71; font-weight: 700; }
             /* 이미 작업한 질문 표시 — 중복 작업을 막는다. */
             .lw-kg-worked { font-style: normal; color: #ffa500; font-weight: 700; }
+            .lw-engine-usage { grid-column: 1 / -1; margin: 6px 0 0; font-size: 12px; color: #646b7d; }
+            .lw-engine-usage b { color: rgba(235,242,250,.8); font-weight: 700; }
             .lw-usage { margin: 10px 0 0; padding: 11px 13px; border: 1px solid rgba(124,92,255,.22); border-radius: 10px; background: rgba(124,92,255,.05); }
             .lw-usage-head { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
             .lw-usage-plan { padding: 2px 9px; border-radius: 999px; background: rgba(124,92,255,.2); color: #cfc2ff; font-size: 12px; font-weight: 700; letter-spacing: .2px; }

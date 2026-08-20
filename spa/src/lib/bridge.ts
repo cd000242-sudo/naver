@@ -11,6 +11,8 @@
 const BRIDGE_BASE = 'http://127.0.0.1:47615';
 
 export interface BridgeAgentStatus {
+    /** 구독 플랜(사실이 있는 엔진만 — 지금은 코덱스 id_token 뿐). 없으면 빈 값. */
+    plan?: string;
     provider: 'claude' | 'codex' | 'gemini';
     installed: boolean;
     loggedIn: boolean;
@@ -167,7 +169,7 @@ export async function bridgeAgentLogin(
     provider: 'claude' | 'codex' | 'gemini' | 'grok',
     switchAccount = false,
 ): Promise<
-    { state: 'already' | 'done' | 'browser-opened' | 'starting' | 'failed'; loggedIn?: boolean; message?: string } | null
+    { state: 'already' | 'done' | 'browser-opened' | 'starting' | 'installing' | 'failed'; loggedIn?: boolean; message?: string } | null
 > {
     const body = await bridgeFetch('/v1/bridge/agent-login', {
         method: 'POST',
