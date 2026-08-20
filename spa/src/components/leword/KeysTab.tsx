@@ -17,33 +17,34 @@ import { TabIntro } from './LewordShared';
  * 같아야 한다. 화면 순서가 실제 실행 순서와 갈라지면 안내가 거짓말이 된다.
  */
 /**
- * 엔진 목록. keyField 가 있으면 **앱 없이** 그 값만 넣으면 되고, 없으면
- * (코덱스 구독 등) 로그인이 이 PC 로 돌아와 앱이 다리를 놓는다.
- * issue 는 그 값을 어디서 받는지 — 사용자가 바로 갈 수 있어야 한다.
+ * 엔진 목록 — 전부 **구독**으로 쓴다. API 키 칸은 없앴다(사장님 확정
+ * 2026-08-20 "API 는 비용이 추가된다니까").
+ *
+ * 클로드만 사이트에서 토큰을 뽑을 수 있다 — 앤트로픽이 `claude setup-token`
+ * 이라는 이식 가능한 구독 토큰 발급 수단을 공식 제공하기 때문이다. 코덱스·
+ * 제미나이·그록은 같은 수단이 없어서(로그인이 그 PC 안에서만 끝난다) 앱이
+ * 다리를 놓는다 — 이 경우에도 비용은 구독 그대로, 추가 과금 0 이다.
  */
 const AGENT_CHAIN = [
     {
         id: 'claude', label: '클로드코드',
-        sub: '클로드 구독 · 버튼 한 번이면 끝(앱 불필요)',
-        keyField: 'claudeToken' as const, keyLabel: '구독 토큰', keyPlaceholder: 'sk-ant-oat...', issue: '',
+        sub: '클로드 구독 · 사이트에서 버튼 한 번(앱 불필요)',
+        webConnect: true,
     },
     {
-        id: 'gemini', label: '제미나이',
-        sub: '무료 API 키를 넣으면 앱 없이 바로(구독 CLI 를 쓰려면 앱 연동)',
-        keyField: 'geminiKey' as const, keyLabel: 'API 키(무료)', keyPlaceholder: 'AIzaSy...',
-        issue: 'https://aistudio.google.com/apikey',
+        id: 'codex', label: '코덱스 · 챗지피티 구독',
+        sub: '앱에서 [연동] → 챗지피티 로그인 → 그 구독으로 실행(추가 비용 0)',
+        webConnect: false,
     },
     {
-        id: 'codex', label: '코덱스 · 챗지피티',
-        sub: 'API 키를 넣으면 앱 없이(사용량 과금) · 챗지피티 구독으로 쓰려면 앱 연동',
-        keyField: 'openaiKey' as const, keyLabel: 'OpenAI API 키', keyPlaceholder: 'sk-...',
-        issue: 'https://platform.openai.com/api-keys',
+        id: 'gemini', label: '제미나이 CLI · 구글 구독',
+        sub: '앱에서 [연동] → 구글 로그인 → 그 구독으로 실행(추가 비용 0)',
+        webConnect: false,
     },
     {
-        id: 'grok', label: '그록',
-        sub: 'xAI API 키를 넣으면 앱 없이(사용량 과금) · 구독 CLI 로 쓰려면 앱 연동',
-        keyField: 'xaiKey' as const, keyLabel: 'xAI API 키', keyPlaceholder: 'xai-...',
-        issue: 'https://console.x.ai/',
+        id: 'grok', label: '그록 · xAI 구독',
+        sub: '앱에서 [연동] → xAI 로그인 → 그 구독으로 실행(추가 비용 0)',
+        webConnect: false,
     },
 ] as const;
 
@@ -242,19 +243,21 @@ function KeysTab() {
                     </span>
                 </div>
                 <p className="lw-card-note" style={{ marginBottom: 12 }}>
-                    구독을 이미 내고 있는 엔진 하나만 연동하면 됩니다 — 지식인 답변·마인드맵 추론·글 진단이
-                    그 엔진으로 돕니다(추가 비용 0). 여러 개 연동해 두고 [사용]으로 바꿔 쓸 수도 있습니다.
+                    <strong>전부 구독으로 씁니다 — API 키(사용량 과금)는 쓰지 않습니다.</strong> 이미 내고 있는
+                    구독 하나만 연동하면 지식인 답변·마인드맵 추론·글 진단이 그 엔진으로 돕니다.
+                    클로드는 사이트에서 바로, 나머지 셋은 LEWORD 앱이 그 CLI 로그인을 열어 줍니다
+                    (구독 로그인이 그 PC 안에서만 끝나는 방식이라 웹으로는 토큰을 뽑을 수 없습니다).
                 </p>
 
                 <div className="lw-engines-list">
                     {AGENT_CHAIN.map((item) => {
                         const agent = agentOf(item.id);
-                        const hasKey = Boolean(String(keys[item.keyField] || '').trim());
-                        const linked = hasKey || Boolean(agent?.available);
-                        const state = hasKey ? (item.id === 'claude' ? '✅ 연동됨' : '✅ 키 연동됨(앱 불필요)')
-                            : agent?.available ? '✅ 앱으로 연동됨'
+                        const hasToken = item.id === 'claude' && Boolean(String(keys.claudeToken || '').trim());
+                        const linked = hasToken || Boolean(agent?.available);
+                        const state = hasToken ? '✅ 연동됨(구독)'
+                            : agent?.available ? '✅ 연동됨(앱 · 구독)'
                                 : agent?.installed ? '앱: 로그인 필요'
-                                    : '미연동';
+                                    : item.webConnect ? '미연동' : '앱에서 연동';
                         const active = activeProvider === item.id;
                         return (
                             <div key={item.id} className={`lw-engine-row${active ? ' on' : ''}`}>
@@ -298,20 +301,24 @@ function KeysTab() {
                                         }}
                                     >{active ? '사용 중' : '사용'}</button>
                                 </div>
-                                {/* 앱 없이 쓰는 값 — 클로드는 버튼이 자동으로 채우고, 나머지는 직접 넣는다. */}
-                                {item.id !== 'claude' && (
+                                {/*
+                                  * 클로드만 토큰 칸이 있다 — 버튼이 자동으로 채우고, 다른 PC 에서
+                                  * 받은 토큰을 손으로 옮겨 넣을 수도 있다. 나머지 셋은 이식 가능한
+                                  * 구독 토큰이 존재하지 않아 칸 자체를 두지 않는다(빈 칸을 두면
+                                  * 넣을 게 있는 줄 알고 API 키를 넣게 된다 — 그건 과금이다).
+                                  */}
+                                {item.id === 'claude' && (
                                     <div className="lw-engine-key">
                                         <label>
-                                            {item.keyLabel}
+                                            구독 토큰 (버튼이 자동 저장 · 손입력도 가능)
                                             <input
                                                 type="password"
-                                                value={String(keys[item.keyField] || '')}
-                                                onChange={(event) => update(item.keyField, event.target.value)}
-                                                placeholder={item.keyPlaceholder}
+                                                value={String(keys.claudeToken || '')}
+                                                onChange={(event) => update('claudeToken', event.target.value)}
+                                                placeholder="sk-ant-oat..."
                                                 autoComplete="new-password"
                                             />
                                         </label>
-                                        {item.issue && <a href={item.issue} target="_blank" rel="noreferrer">발급받기 →</a>}
                                     </div>
                                 )}
                             </div>
