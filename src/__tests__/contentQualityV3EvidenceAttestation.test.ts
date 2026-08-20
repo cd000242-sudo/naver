@@ -171,7 +171,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-08-19] 노출 글 구조 블록 주입(promptLoader structureGuideBlock)으로 재계산
         // [2026-08-20] 홈판 제목 클릭사유 개편(title/homefeed/base.prompt 0점 패턴 추가)으로 재계산
         // [2026-08-20] 본선 배선(contentJsonPromptFormat clickReason·whyClick·훅 계약)으로 재계산
-        '125ab7636b3257ce84dfc571fdb48ec47734e5d180cc7b1cff30241e47a39a28',
+        // [2026-08-20] SEO 검색 클릭 계약 + 쇼핑 제품명+상황+후킹 계약 배선으로 재계산
+        'fc86a61c171a6b5881ea2c5d685978e1298560055e578db2f31ae3b628e54117',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

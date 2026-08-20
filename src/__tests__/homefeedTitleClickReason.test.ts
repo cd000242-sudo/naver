@@ -74,7 +74,7 @@ describe('homefeed formula pool has no summary-noun endings', () => {
 describe('main-path homefeed prompt wires click-reason inference', () => {
   // 본선 = 본문 생성 1회 호출(buildContentJsonOutputFormat)이 제목까지 만든다.
   // generateTitleOnlyPatch 는 프로덕션에서 꺼진 수리 경로다 — 본선에 반드시 배선돼야 한다.
-  function mainPrompt(mode: 'homefeed' | 'seo', categoryHint?: string): string {
+  function mainPrompt(mode: 'homefeed' | 'seo' | 'affiliate' | 'business', categoryHint?: string): string {
     return buildContentJsonOutputFormat({
       contentMode: mode,
       mode,
@@ -111,9 +111,30 @@ describe('main-path homefeed prompt wires click-reason inference', () => {
     expect(prompt).toContain('[요약 명사 종결 금지]');
   });
 
-  it('does not leak homefeed click contract into other modes', () => {
+  // [2026-08-20 2차] SEO·쇼핑도 클릭 사유 계약을 갖는다 — 단, 방향이 다르다:
+  //   SEO = 답 은닉이 아니라 "가장 직접적인 답" 약속으로 경쟁 글을 이긴다.
+  //   쇼핑 = 제품명+상황+후킹 ("제품명이 포함된 홈판").
+  it('seo carries a search-intent click contract, not the homefeed gap contract', () => {
     const prompt = mainPrompt('seo');
+    expect(prompt).toContain('"clickReason"');
+    expect(prompt).toContain('"whyClick"');
+    expect(prompt).toContain('[검색 클릭 계약]');
+    expect(prompt).toContain('[약속-상환]');
+    expect(prompt).not.toContain('[요약 명사 종결 금지]');
+  });
+
+  it('affiliate carries the product+situation+hook contract', () => {
+    const prompt = mainPrompt('affiliate');
+    expect(prompt).toContain('"clickReason"');
+    expect(prompt).toContain('"whyClick"');
+    expect(prompt).toContain('[쇼핑 클릭 계약 — 제품명+상황+후킹]');
+    expect(prompt).not.toContain('[검색 클릭 계약]');
+  });
+
+  it('does not leak click contracts into business mode', () => {
+    const prompt = mainPrompt('business');
     expect(prompt).not.toContain('whyClick');
+    expect(prompt).not.toContain('클릭 계약');
     expect(prompt).not.toContain('[요약 명사 종결 금지]');
   });
 });

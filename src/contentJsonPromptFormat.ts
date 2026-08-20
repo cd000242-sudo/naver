@@ -74,7 +74,8 @@ function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton:
   if (mode === 'seo' || mode === 'mate') {
     modeAxes = `
     "searchIntent": "정보형|비교형|거래형 중 판정 + 독자의 실제 질문 1문장",
-    "mustAnswer": ["본문이 반드시 답해야 할 질문들 — headings 소제목이 이 질문들에 대응해야 한다"],${mode === 'mate' ? `
+    "mustAnswer": ["본문이 반드시 답해야 할 질문들 — headings 소제목이 이 질문들에 대응해야 한다"],
+    "clickReason": "검색 결과 목록에서 경쟁 글 대신 이 글을 클릭할 이유 1문장 — searchIntent 의 질문에 가장 직접적인 답을 약속하는 지점과 자료에서 확인된 구체 신호(수치·조건·기준)로 도출",${mode === 'mate' ? `
     "citationAtoms": ["정의/기준/절차/비교/주의 중 자료에서 뽑을 수 있는 인용 원자 후보"],` : ''}`;
   } else if (mode === 'homefeed') {
     modeAxes = usesIssueStorySkeleton ? `
@@ -88,7 +89,8 @@ function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton:
     modeAxes = `
     "purchaseDecision": "구매가 갈리는 구체 조건 1~2개 (자료·후기에서 관찰되는 것만)",
     "objections": ["자료·후기에서 관찰되는 우려·반박 — 없으면 빈 배열, 지어내지 않는다"],
-    "evidenceMode": "FIRST_PARTY|REVIEW_SYNTHESIS|SPEC_ONLY 중 이 글의 근거 모드 판정",`;
+    "evidenceMode": "FIRST_PARTY|REVIEW_SYNTHESIS|SPEC_ONLY 중 이 글의 근거 모드 판정",
+    "clickReason": "이 제품 구매를 고민하는 사람이 이 글을 클릭할 단 하나의 이유 1문장 — purchaseDecision 의 갈리는 조건에서 도출, 자료·후기에 없는 체험 날조 금지",`;
   } else if (mode === 'business') {
     modeAxes = `
     "inquiryTrigger": "문의로 이어지는 고객 상황 — 입력된 업체 정보·자료 범위에서만",
@@ -116,13 +118,36 @@ function buildPreWritingAnalysisDirective(mode: PromptMode, usesIssueStorySkelet
   않으면 그 후보는 버린다. 억지 어미, 의미 불명 생략, 문법이 깨진 훅 = 0점.
 - [요약 명사 종결 금지] "~정리/~총정리/~가이드/~현황/~포인트/~모음/~대응/~의미/~근황"으로
   끝나는 제목은 보도자료 문형이라 0점 — 궁금증이 남는 서술이나 의문으로 끝낸다.` : '';
+  const seoClickContract = mode === 'seo' ? `
+- [검색 클릭 계약] 검색자는 이미 질문을 들고 결과 목록을 훑는다 — 홈판과 달리 답을 숨기면
+  지고, "내 질문에 가장 직접적인 답"을 약속하는 제목이 이긴다. 모든 titleCandidates 는
+  preWritingAnalysis.clickReason 에서 출발하고, 경쟁 글과의 차별점은 은닉이 아니라
+  구체성(수치·조건·기준·연도·대상)으로 만든다.
+- [whyClick 자가검증] 후보마다 whyClick 에 "검색자가 결과 목록에서 다른 글 대신 이 글을
+  고르는 이유"를 1문장으로 쓴다. 자연스럽게 써지지 않는 후보는 버리고 다시 만든다.
+  "정보가 많아서" 같은 빈말은 실패 — searchIntent 의 질문과 제목의 약속을 직접 연결해야 한다.
+- [훅은 말이 되어야 한다] 제목만 읽고 0.5초 안에 어떤 질문의 답인지 파악되지 않으면
+  그 후보는 버린다. 억지 어미, 의미 불명 생략, 문법이 깨진 훅 = 0점.
+- [약속-상환] 제목이 약속한 답은 introduction 과 headings 가 반드시 갚는다 —
+  약속만 하고 답이 없는 글은 이탈로 이어져 순위가 죽는다.` : '';
+  const affiliateClickContract = mode === 'affiliate' ? `
+- [쇼핑 클릭 계약 — 제품명+상황+후킹] 쇼핑커넥트 제목은 "제품명이 포함된 홈판"이다:
+  {브랜드+모델명} + {구매가 갈리는 구체 상황} + {그 상황의 판단이 궁금해지는 훅} 순서로
+  조립한다. 모든 titleCandidates 는 preWritingAnalysis.clickReason 에서 출발한다.
+  예: "린백 LB221HA, 허리 예민한 사람이 두 시간 앉아보면 갈린다" (제품명+상황+후킹)
+  ❌ 스펙 나열·"~후기/~추천" 단독 종결 — 상황과 훅이 없으면 클릭 이유가 없다.
+- [whyClick 자가검증] 후보마다 whyClick 에 "이 제품을 고민 중인 사람이 클릭하는 이유"를
+  1문장으로 쓴다. 자연스럽게 써지지 않는 후보는 버리고 다시 만든다. 훅은 purchaseDecision
+  의 갈리는 조건을 짚어야 하며, 자료·후기에 없는 체험·기간·가족 반응을 만들지 않는다.
+- [훅은 말이 되어야 한다] 제목만 읽고 0.5초 안에 어떤 제품·어떤 상황인지 파악되지 않으면
+  그 후보는 버린다. 억지 어미, 의미 불명 생략, 문법이 깨진 훅 = 0점.` : '';
   const modeExtra = (mode === 'seo' || mode === 'mate') ? `
 - headings 소제목은 mustAnswer 의 질문들에 대응한다. 질문에 대응하지 않는 소제목을 만들지 않는다.` : mode === 'affiliate' ? `
 - evidenceMode 판정과 다른 화자·근거를 본문에서 쓰지 않는다. objections 가 비어 있으면 반박 문단을 지어내지 않는다.` : mode === 'business' ? `
 - headings 는 inquiryTrigger 의 상황과 inquiryBarriers 의 장벽 해소에 대응한다 — 비용이 정해지는 조건·진행 절차·문의 전 확인 항목 같은 소제목을 장벽에 맞춰 배치한다. inquiryBarriers 가 비어 있으면 장벽 해소 문단을 지어내지 않는다.` : '';
   return `📌 [모든 모드 — 제목보다 추론이 먼저다]
 - preWritingAnalysis 를 반드시 가장 먼저 채운다. 크롤링 자료를 분석하기 전에 제목부터 쓰지 않는다.
-- whyNow 는 주어진 단서(뉴스 시점·상위글 반복 지점·지식iN 질문·검색량 지표)를 실제로 훑어 근거를 명시한다. 크롤링과 검색 API 가 이미 단서를 모아 왔다 — 훑지 않고 건너뛰지 않는다. 자료 밖 트렌드 이유는 지어내지 않는다.${issueExtra}${homefeedClickContract}${modeExtra}
+- whyNow 는 주어진 단서(뉴스 시점·상위글 반복 지점·지식iN 질문·검색량 지표)를 실제로 훑어 근거를 명시한다. 크롤링과 검색 API 가 이미 단서를 모아 왔다 — 훑지 않고 건너뛰지 않는다. 자료 밖 트렌드 이유는 지어내지 않는다.${issueExtra}${homefeedClickContract}${seoClickContract}${affiliateClickContract}${modeExtra}
 - 각 headings[].imagePrompt 는 imageDirection 을 따르되 그 소제목 본문의 구체 장면에서 도출한다 — 일반 소품 사진 묘사로 도망가지 않는다.
 - preWritingAnalysis 는 설계 메모다 — 그 문장들을 introduction·headings·conclusion 본문에 옮기지 않는다.
 
@@ -351,7 +376,7 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
 
 {${buildPreWritingAnalysisSchema(mode, usesIssueStorySkeleton)}
   "selectedTitle": "제목 1",
-  "titleCandidates": [${isHomefeed ? `
+  "titleCandidates": [${(isHomefeed || mode === 'seo' || mode === 'affiliate') ? `
     {"text": "제목 1", "score": 95, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"},
     {"text": "제목 2", "score": 90, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"},
     {"text": "제목 3", "score": 85, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"}` : `
