@@ -74,7 +74,7 @@ describe('homefeed formula pool has no summary-noun endings', () => {
 describe('main-path homefeed prompt wires click-reason inference', () => {
   // 본선 = 본문 생성 1회 호출(buildContentJsonOutputFormat)이 제목까지 만든다.
   // generateTitleOnlyPatch 는 프로덕션에서 꺼진 수리 경로다 — 본선에 반드시 배선돼야 한다.
-  function mainPrompt(mode: 'homefeed' | 'seo' | 'affiliate' | 'business', categoryHint?: string): string {
+  function mainPrompt(mode: 'homefeed' | 'seo' | 'affiliate' | 'business' | 'mate', categoryHint?: string): string {
     return buildContentJsonOutputFormat({
       contentMode: mode,
       mode,
@@ -131,10 +131,25 @@ describe('main-path homefeed prompt wires click-reason inference', () => {
     expect(prompt).not.toContain('[검색 클릭 계약]');
   });
 
-  it('does not leak click contracts into business mode', () => {
+  // [2026-08-20 3차] 사장님 지시 "업체홍보모드도 각 모드에 맞게 추론해야 돼" — 이전의
+  // business 미누출 잠금을 뒤집는다. 단, 복붙 금지 원칙은 유지: business 계약은 홈판 갭
+  // 은닉이 아니라 문의 전환 심리(inquiryTrigger·장벽 해소 약속)에서 도출돼야 한다.
+  it('business carries an inquiry-driven click contract, not the homefeed gap contract', () => {
     const prompt = mainPrompt('business');
-    expect(prompt).not.toContain('whyClick');
-    expect(prompt).not.toContain('클릭 계약');
+    expect(prompt).toContain('"clickReason"');
+    expect(prompt).toContain('"whyClick"');
+    expect(prompt).toContain('[업체홍보 클릭 계약]');
+    expect(prompt).toContain('[광고법·신뢰 우선]');
+    expect(prompt).not.toContain('[요약 명사 종결 금지]');
+    expect(prompt).not.toContain('[쇼핑 클릭 계약');
+  });
+
+  it('mate carries the answer+citation click contract', () => {
+    const prompt = mainPrompt('mate');
+    expect(prompt).toContain('"clickReason"');
+    expect(prompt).toContain('"whyClick"');
+    expect(prompt).toContain('[메이트 클릭 계약]');
+    expect(prompt).toContain('citationAtoms');
     expect(prompt).not.toContain('[요약 명사 종결 금지]');
   });
 });
@@ -142,11 +157,23 @@ describe('main-path homefeed prompt wires click-reason inference', () => {
 describe('homefeed title generation wires click-reason inference', () => {
   const source = readFileSync(resolve(__dirname, '..', 'contentGenerator.ts'), 'utf-8');
 
-  it('forces clickAnalysis before titles in the homefeed schema', () => {
-    expect(source).toMatch(/mode === 'homefeed'\s*\n?\s*\? `Output ONLY valid JSON[^`]*clickAnalysis/);
+  // [2026-08-20 3차] 패치 스키마가 홈판 전용 삼항이었다 — seo·affiliate 패치가 추론 없는
+  // 옛 스키마로 본선 계약 제목을 덮어쓰는 구멍(사장님: "발행해보니 예전 그대로 절대 안 돼").
+  // 이제 전 패치 모드가 clickAnalysis 선행 스키마 하나를 쓴다.
+  it('forces clickAnalysis before titles in every title-patch schema', () => {
+    expect(source).toMatch(/const schema = `Output ONLY valid JSON[^`]*clickAnalysis/);
     expect(source).toContain('"mostSurprisingFact"');
     expect(source).toContain('"readerQuestion"');
     expect(source).toContain('"clickReason"');
+  });
+
+  it('gives the affiliate title patch a purchase-axis inference step', () => {
+    expect(source).toContain('[0단계 — 구매 판단 축 추론');
+    expect(source).toContain('당연한 기능 결과');
+  });
+
+  it('gives the seo/mate title patch a search-click inference step', () => {
+    expect(source).toContain('[0단계 — 검색 클릭 사유 추론');
   });
 
   it('gives homefeed a larger article snippet for the inference step', () => {

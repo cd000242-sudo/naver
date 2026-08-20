@@ -94,7 +94,8 @@ function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton:
   } else if (mode === 'business') {
     modeAxes = `
     "inquiryTrigger": "문의로 이어지는 고객 상황 — 입력된 업체 정보·자료 범위에서만",
-    "inquiryBarriers": ["독자가 문의를 망설이는 장벽 — 가격 불안·업체 불신·절차 모름 중 자료·업체 정보에서 관찰되는 것만, 없으면 빈 배열. 근거 없는 장벽을 만들지 않는다"],`;
+    "inquiryBarriers": ["독자가 문의를 망설이는 장벽 — 가격 불안·업체 불신·절차 모름 중 자료·업체 정보에서 관찰되는 것만, 없으면 빈 배열. 근거 없는 장벽을 만들지 않는다"],
+    "clickReason": "이 상황의 잠재 고객이 검색 결과에서 다른 업체 글 대신 이 글을 클릭할 단 하나의 이유 1문장 — inquiryTrigger 의 상황과 inquiryBarriers 의 장벽 하나에서 도출, 업체 정보에 없는 실적·자격 날조 금지",`;
   }
 
   return `
@@ -130,6 +131,29 @@ function buildPreWritingAnalysisDirective(mode: PromptMode, usesIssueStorySkelet
   그 후보는 버린다. 억지 어미, 의미 불명 생략, 문법이 깨진 훅 = 0점.
 - [약속-상환] 제목이 약속한 답은 introduction 과 headings 가 반드시 갚는다 —
   약속만 하고 답이 없는 글은 이탈로 이어져 순위가 죽는다.` : '';
+  const mateClickContract = mode === 'mate' ? `
+- [메이트 클릭 계약] 메이트 글은 검색 결과와 AI 요약 인용, 두 자리를 동시에 노린다 — 검색자에게는
+  "내 질문에 가장 직접적인 답"을, AI 에게는 인용할 기준·조건·절차(citationAtoms)를 약속하는
+  제목이 이긴다. 모든 titleCandidates 는 preWritingAnalysis.clickReason 에서 출발하고,
+  차별점은 은닉이 아니라 판단 기준의 구체성(조건·비교·연도·대상)으로 만든다.
+- [whyClick 자가검증] 후보마다 whyClick 에 "검색자가 결과 목록에서 다른 글 대신 이 글을
+  고르는 이유"를 1문장으로 쓴다. 자연스럽게 써지지 않는 후보는 버리고 다시 만든다.
+  "정보가 많아서" 같은 빈말은 실패 — searchIntent 의 질문과 제목의 약속을 직접 연결해야 한다.
+- [훅은 말이 되어야 한다] 제목만 읽고 0.5초 안에 어떤 질문의 답인지 파악되지 않으면
+  그 후보는 버린다. 억지 어미, 의미 불명 생략, 문법이 깨진 훅 = 0점.
+- [약속-상환] 제목이 약속한 답과 기준은 introduction 첫 300자와 headings 가 반드시 갚는다.` : '';
+  const businessClickContract = mode === 'business' ? `
+- [업체홍보 클릭 계약] 이 글의 독자는 업체를 비교·검증하는 중인 잠재 고객이다 — 화려한 수식이
+  아니라 "내 상황을 정확히 아는 글"이 클릭된다. 모든 titleCandidates 는
+  preWritingAnalysis.clickReason 에서 출발한다: inquiryTrigger 의 고객 상황을 정면으로 짚고,
+  inquiryBarriers 의 장벽 하나(비용이 정해지는 조건·진행 절차·문의 전 확인 항목)를 해소한다고
+  약속하는 제목. 업체명 나열·자화자찬형 제목은 0점이다.
+- [whyClick 자가검증] 후보마다 whyClick 에 "이 상황의 잠재 고객이 다른 업체 글 대신 이 글을
+  여는 이유"를 1문장으로 쓴다. 자연스럽게 써지지 않는 후보는 버리고 다시 만든다.
+- [광고법·신뢰 우선] 최상급·보장·과장("1위"·"최고"·"100%")은 기존 business 규율 그대로 금지 —
+  클릭 계약은 그 규율 위에서만 동작하며, 문의 전환 구조(각도·CTA)는 기존 business 지시가 계속 소유한다.
+- [훅은 말이 되어야 한다] 제목만 읽고 0.5초 안에 어떤 상황의 어떤 답인지 파악되지 않으면
+  그 후보는 버린다. 억지 어미, 의미 불명 생략, 문법이 깨진 훅 = 0점.` : '';
   const affiliateClickContract = mode === 'affiliate' ? `
 - [쇼핑 클릭 계약 — 제품명+상황+후킹] 쇼핑커넥트 제목은 "제품명이 포함된 홈판"이다:
   {브랜드+모델명} + {구매가 갈리는 구체 상황} + {그 상황의 판단이 궁금해지는 훅} 순서로
@@ -147,7 +171,7 @@ function buildPreWritingAnalysisDirective(mode: PromptMode, usesIssueStorySkelet
 - headings 는 inquiryTrigger 의 상황과 inquiryBarriers 의 장벽 해소에 대응한다 — 비용이 정해지는 조건·진행 절차·문의 전 확인 항목 같은 소제목을 장벽에 맞춰 배치한다. inquiryBarriers 가 비어 있으면 장벽 해소 문단을 지어내지 않는다.` : '';
   return `📌 [모든 모드 — 제목보다 추론이 먼저다]
 - preWritingAnalysis 를 반드시 가장 먼저 채운다. 크롤링 자료를 분석하기 전에 제목부터 쓰지 않는다.
-- whyNow 는 주어진 단서(뉴스 시점·상위글 반복 지점·지식iN 질문·검색량 지표)를 실제로 훑어 근거를 명시한다. 크롤링과 검색 API 가 이미 단서를 모아 왔다 — 훑지 않고 건너뛰지 않는다. 자료 밖 트렌드 이유는 지어내지 않는다.${issueExtra}${homefeedClickContract}${seoClickContract}${affiliateClickContract}${modeExtra}
+- whyNow 는 주어진 단서(뉴스 시점·상위글 반복 지점·지식iN 질문·검색량 지표)를 실제로 훑어 근거를 명시한다. 크롤링과 검색 API 가 이미 단서를 모아 왔다 — 훑지 않고 건너뛰지 않는다. 자료 밖 트렌드 이유는 지어내지 않는다.${issueExtra}${homefeedClickContract}${seoClickContract}${mateClickContract}${businessClickContract}${affiliateClickContract}${modeExtra}
 - 각 headings[].imagePrompt 는 imageDirection 을 따르되 그 소제목 본문의 구체 장면에서 도출한다 — 일반 소품 사진 묘사로 도망가지 않는다.
 - preWritingAnalysis 는 설계 메모다 — 그 문장들을 introduction·headings·conclusion 본문에 옮기지 않는다.
 
@@ -376,7 +400,7 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
 
 {${buildPreWritingAnalysisSchema(mode, usesIssueStorySkeleton)}
   "selectedTitle": "제목 1",
-  "titleCandidates": [${(isHomefeed || mode === 'seo' || mode === 'affiliate') ? `
+  "titleCandidates": [${(isHomefeed || mode === 'seo' || mode === 'affiliate' || mode === 'mate' || mode === 'business') ? `
     {"text": "제목 1", "score": 95, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"},
     {"text": "제목 2", "score": 90, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"},
     {"text": "제목 3", "score": 85, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"}` : `

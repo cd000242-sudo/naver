@@ -670,9 +670,9 @@ async function generateTitleOnlyPatch(
   // the model must first extract from the crawled snippet why a passerby would click,
   // then derive every candidate from that reason. Summary-of-keywords titles were the
   // top user complaint ("~정리/~가이드" — no click reason, instant AI tell).
-  const schema = mode === 'homefeed'
-    ? `Output ONLY valid JSON. NO markdown.\n\n{"clickAnalysis": {"mostSurprisingFact": "string", "readerQuestion": "string", "clickReason": "string"}, "selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95, "whyClick": "string"}, {"text": "string", "score": 90, "whyClick": "string"}, {"text": "string", "score": 85, "whyClick": "string"}]}`
-    : `Output ONLY valid JSON. NO markdown.\n\n{"selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95}, {"text": "string", "score": 90}, {"text": "string", "score": 85}]}`;
+  // [2026-08-20 확장] 이 패치 경로가 본선 계약 제목을 옛 스타일로 덮어쓰는 구멍이었다
+  // (사장님: "발행해보니 예전 그대로 절대 나오면 안 돼") — 추론 선행을 전 패치 모드로.
+  const schema = `Output ONLY valid JSON. NO markdown.\n\n{"clickAnalysis": {"mostSurprisingFact": "string", "readerQuestion": "string", "clickReason": "string"}, "selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95, "whyClick": "string"}, {"text": "string", "score": 90, "whyClick": "string"}, {"text": "string", "score": 85, "whyClick": "string"}]}`;
 
   const subKeywords = Array.isArray((source.metadata as any)?.keywords)
     ? (source.metadata as any).keywords.slice(1).filter((k: any) => String(k).length >= 2 && !/^\d+$/.test(String(k))).slice(0, 5).join(', ')
@@ -717,6 +717,16 @@ ${mode === 'homefeed' ? `
      해소하고 싶어서"처럼 제목 속 구체 긴장을 짚어야 합니다.
 ` : ''}
 ${mode === 'affiliate' ? `
+🧲 [0단계 — 구매 판단 축 추론. 제목보다 먼저, 반드시 수행]
+clickAnalysis 를 먼저 채우세요:
+- mostSurprisingFact: 이 제품에서 **구매 판단이 갈리는 축** 1개 (관리 부담·소음 기준·궁합·
+  유지 비용·윗급 대비 차이 등). ⛔ 당연한 기능 결과("로봇청소기를 돌리면 깨끗해진다")는
+  축이 아닙니다 — 독자가 이미 알아서 클릭 이유가 못 됩니다. 그런 축이 나오면 다시 추론.
+- readerQuestion: 이 제품 구매를 고민 중인 사람이 답을 알고 싶은 질문 1개.
+- clickReason: 그 사람이 이 글을 클릭할 단 하나의 이유 (한 줄).
+→ 모든 제목 후보는 clickReason 에서 출발하고, 후보마다 whyClick 에 클릭 이유를 씁니다.
+  whyClick 이 자연스럽게 안 써지면 그 후보는 버리고 다시 만드세요.
+
 ⛔⛔⛔ [쇼핑커넥트 절대 규칙 — 위반 시 0점]
 1. 상품명의 모든 키워드를 넣지 마세요. "브랜드명 + 모델명"만 사용하세요.
    ❌ "린백 컴퓨터 학생 책상 의자 린백 후기" (키워드 나열 = 0점)
@@ -726,6 +736,17 @@ ${mode === 'affiliate' ? `
 4. originalTitle을 그대로 쓰거나 단어를 재배열하면 0점입니다.
 5. 반드시 25~45자 이내.
 ${buildAffiliateTitleEvidenceDirective(source)}
+` : ''}
+${(mode === 'seo' || mode === 'mate') ? `
+🧲 [0단계 — 검색 클릭 사유 추론. 제목보다 먼저, 반드시 수행]
+clickAnalysis 를 먼저 채우세요:
+- mostSurprisingFact: [ARTICLE SNIPPET]에서 검색자의 질문에 답이 되는 가장 구체적인
+  사실 1개 (수치·조건·기준·연도). ⛔ 원문에 없는 사실 날조 금지.
+- readerQuestion: 이 키워드를 검색한 사람이 실제로 들고 온 질문 1개.
+- clickReason: 검색 결과 목록에서 경쟁 글 대신 이 글을 고를 단 하나의 이유 (한 줄) —
+  답을 숨기는 낚시가 아니라 "가장 직접적인 답"의 약속으로.
+→ 모든 제목 후보는 clickReason 에서 출발하고, 후보마다 whyClick 에 고르는 이유를 씁니다.
+  "정보가 많아서" 같은 빈말이면 그 후보는 버리고 다시 만드세요.
 ` : ''}
 ${(mode === 'homefeed' || mode === 'seo' || mode === 'mate') && subKeywords ? `
 💡 [보조 키워드]
