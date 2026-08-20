@@ -131,7 +131,12 @@ function StoreStyles() {
                 font-size: 14.5px; font-weight: 700; box-shadow: 0 8px 26px rgba(240,181,63,.28);
             }
 
-            .st-swap { margin-top: 13px; padding: 14px 17px; border-left: 2px solid var(--st-gold); background: rgba(240,181,63,.07); border-radius: 0 11px 11px 0; font-size: 13.6px; line-height: 1.62; color: var(--st-dim); }
+            /*
+             * 좌측 액센트 바를 뺐다. 이미 금색을 값과 담기 버튼에 쓰고 있어
+             * 여기까지 칠하면 어디를 봐야 할지 모르게 된다. 테두리 하나로 두고
+             * 강조는 문장 안의 숫자에만 남긴다.
+             */
+            .st-swap { margin-top: 13px; padding: 14px 17px; border: 1px solid rgba(240,181,63,.22); background: rgba(240,181,63,.05); border-radius: 12px; font-size: 13.6px; line-height: 1.62; color: var(--st-dim); }
             .st-swap b { color: var(--st-gold-lit); }
             .st-swap button { margin-left: 6px; padding: 0; border: 0; background: none; cursor: pointer; font-family: inherit; font-size: 13.6px; color: var(--st-gold-lit); border-bottom: 1px solid rgba(255,216,138,.45); }
 
