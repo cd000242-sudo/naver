@@ -161,7 +161,13 @@ async function main() {
     /** 키워드 → 그 키워드를 만들어 낸 영상(제일 먼저 만난 것). */
     const source = new Map();
     for (const video of videos) {
-        const leads = [...new Set(chunksOf(video.title).flatMap(leadsOf))].slice(0, 4);
+        /*
+         * 후보 상한 4→8 (사장님 확인 2026-08-20). 4개면 제목 앞쪽 덩어리에서
+         * 끊겨 뒤쪽의 진짜 개체를 놓쳤다 — 실측: "과연 둠이 …? ≪어벤져스:
+         * 둠스데이≫ …" 에서 '어벤져스 둠스데이'가 잘려 그 영상은 빈손이었다.
+         * 자동완성은 무료라 비용은 없고 수집이 조금 느려질 뿐이다.
+         */
+        const leads = [...new Set(chunksOf(video.title).flatMap(leadsOf))].slice(0, 8);
         for (const lead of leads) {
             const matched = suggestionsFor(lead, await fetchAutocomplete(lead));
             await sleep(120);
