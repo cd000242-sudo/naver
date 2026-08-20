@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { TabIntro } from './LewordShared';
 import LicenseGate, { isUnlocked } from './LicenseGate';
+import AffiliateTitles from './AffiliateTitles';
 import CoupangBoard from './CoupangBoard';
 import { AFFILIATE_LANES, type LaneId } from './affiliateLanes';
 import { loadUserKeys } from '../../lib/userKeys';
@@ -31,6 +32,9 @@ type CampaignItem = {
     /** 니즈 검색어 — 사람들이 실제로 치는 검색어(실측 최고 수요). 성과의 진짜 입구다. */
     needKeyword?: string | null;
     needVolume?: number | null;
+    /** 니즈 검색어의 블로그 문서수와 검색량 대비 비율. 못 쟀으면 null. */
+    needDocs?: number | null;
+    needRatio?: number | null;
     /** 건당 수익(원) = 가격 × 수수료율 단순 산술. 요율이 없는 레인은 null. */
     perSaleWon?: number | null;
     /** 브랜드커넥트 상품 ID — 내 스페이스 ID와 합쳐야 링크발급 화면이 열린다. */
@@ -45,6 +49,22 @@ type CampaignSnapshot = {
     collectedAt: string;
     sites: Record<string, { label: string; items: CampaignItem[] }>;
 };
+
+/**
+ * 노출 판정 — 니즈 검색어로 1페이지에 갈 수 있나.
+ *
+ * 사장님 지적(2026-08-20): "노출이 돼야 뭐가 팔리든 말든 하니까."
+ * 예전엔 니즈 **검색량**만 보고 줄을 세웠다. 그래서 실측 결과
+ * 드리미 로봇청소기(검색 24,700 / 문서 44,383)가 1등이었다 — 검색량보다
+ * 글이 1.8배 많아 지수 낮은 사람은 근처도 못 가는 자리다.
+ * 이제 비율이 순서를 정하고, 화면도 그걸 그대로 말한다.
+ */
+function exposureVerdict(ratio: number | null | undefined) {
+    if (typeof ratio !== 'number') return null;
+    if (ratio >= 2) return { label: `노출 잘 됨 · 글이 ${ratio}배 부족`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' };
+    if (ratio >= 1) return { label: `해볼 만함 · 검색≈글 (${ratio}배)`, color: '#f5a623', bg: 'rgba(245,166,35,.14)' };
+    return { label: `노출 어려움 · 글이 ${Math.round(10 / Math.max(ratio, 0.1)) / 10}배 많음`, color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
+}
 
 /** 정면 실측 → 카드 배지. 쿠팡 레인과 같은 기준이라야 같은 뜻으로 읽힌다. */
 function verdictBadge(item: CampaignItem) {
@@ -172,9 +192,21 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             {typeof item.price === 'number' && item.price > 0 && (
                                                 <span className="lw-product-price"><strong>{item.price.toLocaleString('ko-KR')}원</strong></span>
                                             )}
+                                            {exposureVerdict(item.needRatio) && (
+                                                <span
+                                                    className="lw-metric lw-metric-verdict"
+                                                    style={{
+                                                        color: exposureVerdict(item.needRatio)?.color,
+                                                        background: exposureVerdict(item.needRatio)?.bg,
+                                                    }}
+                                                >{exposureVerdict(item.needRatio)?.label}</span>
+                                            )}
                                             {item.needKeyword && item.needVolume ? (
                                                 <span className="lw-product-need" title="사람들이 실제로 치는 검색어와 월 검색량(실측). 이 검색어로 글을 써서 상품을 답으로 소개하는 것이 성과의 입구입니다.">
                                                     니즈 <strong>{item.needKeyword}</strong> 월 <strong>{item.needVolume.toLocaleString('ko-KR')}</strong>
+                                                    {typeof item.needDocs === 'number' && (
+                                                        <> · 문서 <strong>{item.needDocs.toLocaleString('ko-KR')}</strong></>
+                                                    )}
                                                 </span>
                                             ) : null}
                                             {typeof item.perSaleWon === 'number' && item.perSaleWon > 0 && (
@@ -226,6 +258,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             </a>
                                         )}
                                     </div>
+                                    <AffiliateTitles keyword={query} product={item.name} onAnalyze={onAnalyze} />
                                 </li>
                             );
                         })}

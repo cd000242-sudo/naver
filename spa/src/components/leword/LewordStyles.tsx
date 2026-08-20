@@ -271,6 +271,24 @@ function LewordStyles() {
              * lw-card 클래스를 쓰지 않는다. 그게 세로 쌓기라 grid 를 덮어써서
              * 카드가 가운데로 무너졌다(실측). 이 줄은 자기 배경을 직접 갖는다.
              */
+            .lw-metric-verdict { padding: 2px 9px; border-radius: 999px; font-weight: 700; }
+            /* 제휴 제목 만들기 — 세 레인(쿠팡·토스·브랜드커넥트)이 같은 모양을 쓴다. */
+            .lw-aff-titles { margin-top: 10px; }
+            .lw-aff-make {
+                display: inline-flex; align-items: baseline; gap: 7px; padding: 7px 13px;
+                border: 1px solid rgba(255,165,0,.4); border-radius: 8px; background: rgba(255,165,0,.1);
+                color: #ffc966; font-size: 12.5px; font-weight: 700; cursor: pointer;
+            }
+            .lw-aff-make:hover:not(:disabled) { background: rgba(255,165,0,.2); color: #fff; }
+            .lw-aff-make:disabled { opacity: .6; cursor: not-allowed; }
+            .lw-aff-make span { font-weight: 400; font-size: 11.5px; color: #646b7d; }
+            .lw-aff-err { margin: 6px 0 0; color: #ff6b81; font-size: 12.5px; }
+            .lw-aff-ideas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+            .lw-aff-ideas li { padding: 9px 11px; border-radius: 8px; background: rgba(255,255,255,.04); }
+            .lw-aff-ideakey { padding: 0; border: 0; background: none; color: #ffd27a; font-size: 13px; font-weight: 700; cursor: pointer; text-align: left; }
+            .lw-aff-ideas button.lw-aff-ideakey:hover { text-decoration: underline; }
+            .lw-aff-ideas p { margin: 5px 0 0; font-size: 12.5px; line-height: 1.5; color: rgba(235,242,250,.84); overflow-wrap: anywhere; }
+            .lw-aff-ideas em { display: inline-block; min-width: 30px; margin-right: 5px; color: #646b7d; font-style: normal; font-size: 11px; }
             .lw-yt-meta { margin-left: auto; color: #646b7d; font-size: 12px; }
             .lw-yt-filters { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-top: 12px; }
             .lw-yt-forms, .lw-yt-cats { display: flex; flex-wrap: wrap; gap: 6px; }

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { createCoupangDeeplink, fetchAffiliateBoard, type AffiliateProduct } from '../../lib/keywordApi';
 import { type LaneId } from './affiliateLanes';
 import { goldenIndex } from '../../lib/goldenIndex';
+import AffiliateTitles from './AffiliateTitles';
 
 /**
  * 쿠팡 상품 보드 — 상품에서 출발한다.
@@ -189,6 +190,12 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                                 </a>
                             )}
                         </div>
+                        {/* 세 레인이 같은 부품을 쓴다 — 제목 교리를 갈라 놓지 않는다. */}
+                        <AffiliateTitles
+                            keyword={row.needKeyword || row.keyword}
+                            product={row.name}
+                            onAnalyze={onAnalyze}
+                        />
                     </li>
                 );
     };
