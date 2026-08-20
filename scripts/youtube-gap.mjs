@@ -170,8 +170,18 @@ async function main() {
         const ratio = documentCount > 0 ? searchVolume / documentCount : searchVolume;
         if (ratio < MIN_RATIO) continue;
         const video = source.get(keyword);
+        /*
+         * 확장 키워드 — 이 검색어에서 뻗어 나가는 실제 검색어들.
+         * 여기서도 자동완성이 공급원이다. 우리가 조합해 만들면 아무도 안 치는
+         * 말이 섞인다. 살아남은 행(60건 남짓)에만 물어 호출을 아낀다.
+         */
+        const expansions = suggestionsFor(keyword, await fetchAutocomplete(keyword))
+            .filter((suggestion) => suggestion !== keyword)
+            .slice(0, 6);
+        await sleep(120);
         rows.push({
             keyword,
+            expansions,
             searchVolume,
             documentCount,
             ratio: Math.round(ratio * 10) / 10,

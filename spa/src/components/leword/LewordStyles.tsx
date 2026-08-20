@@ -266,26 +266,62 @@ function LewordStyles() {
             .lw-usage-bar i { display: block; width: 100%; height: 100%; transform-origin: left center; transition: transform .3s ease; }
             .lw-usage-pct { width: 42px; text-align: right; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; flex: none; }
             .lw-usage-reset { color: #646b7d; white-space: nowrap; flex: none; }
-            /* 유튜브 빈자리 — 썸네일 / 본문 / 버튼 3단. 좁아지면 세로로 접힌다. */
+            /*
+             * 유튜브 빈자리 — 영상 / 실측 / 글감 3단(사장님 지정 배치 2026-08-20).
+             * lw-card 클래스를 쓰지 않는다. 그게 세로 쌓기라 grid 를 덮어써서
+             * 카드가 가운데로 무너졌다(실측). 이 줄은 자기 배경을 직접 갖는다.
+             */
             .lw-yt-meta { margin-left: auto; color: #646b7d; font-size: 12px; }
-            .lw-yt-gap { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
-            .lw-yt-row { display: grid; grid-template-columns: 128px 1fr auto; gap: 14px; align-items: center; padding: 12px 14px; }
-            .lw-yt-thumb { display: block; width: 128px; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; background: rgba(255,255,255,.06); }
-            .lw-yt-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+            .lw-yt-gap { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+            .lw-yt-row {
+                display: grid; grid-template-columns: 260px minmax(0, 1fr) minmax(0, 320px);
+                gap: 18px; align-items: start; padding: 14px;
+                border: 1px solid rgba(255,255,255,.09); border-radius: 12px; background: rgba(255,255,255,.025);
+            }
+            .lw-yt-video { width: 100%; aspect-ratio: 16 / 9; border-radius: 9px; overflow: hidden; background: rgba(255,255,255,.06); }
+            .lw-yt-video iframe { width: 100%; height: 100%; border: 0; display: block; }
+            .lw-yt-video > button { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+            .lw-yt-video img { width: 100%; height: 100%; object-fit: cover; display: block; }
+            .lw-yt-play {
+                position: absolute; inset: 0; margin: auto; width: 46px; height: 46px; border-radius: 50%;
+                display: grid; place-items: center; background: rgba(0,0,0,.62); color: #fff; font-size: 17px;
+                transition: transform .15s ease, background .15s ease;
+            }
+            .lw-yt-video > button:hover .lw-yt-play { background: rgba(255,0,0,.85); transform: scale(1.08); }
+
             .lw-yt-body { min-width: 0; }
-            .lw-yt-body h3 { margin: 0 0 6px; font-size: 16px; color: #fff; overflow-wrap: anywhere; }
+            .lw-yt-body h3 { margin: 0 0 8px; font-size: 18px; color: #fff; overflow-wrap: anywhere; }
             .lw-yt-metrics { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: rgba(235,242,250,.66); }
             .lw-yt-metrics strong { color: #fff; font-variant-numeric: tabular-nums; }
             .lw-yt-ratio strong { color: #ffa500; }
-            .lw-yt-row .lw-card-note { margin: 7px 0 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-            .lw-yt-actions { flex: none; }
-            .lw-yt-actions button { padding: 8px 14px; border: 1px solid rgba(124,92,255,.4); border-radius: 8px; background: rgba(124,92,255,.12); color: #cfc2ff; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
-            .lw-yt-actions button:hover { background: rgba(124,92,255,.22); color: #fff; }
-            @media (max-width: 720px) {
-                .lw-yt-row { grid-template-columns: 92px 1fr; }
-                .lw-yt-thumb { width: 92px; }
-                .lw-yt-actions { grid-column: 1 / -1; }
-                .lw-yt-actions button { width: 100%; }
+            .lw-yt-from { margin: 9px 0 0; color: #646b7d; font-size: 12.5px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+            .lw-yt-date { margin: 5px 0 0; color: #646b7d; font-size: 12px; }
+            .lw-yt-date span { color: rgba(235,242,250,.5); }
+            .lw-yt-analyze { margin-top: 11px; padding: 7px 13px; border: 1px solid rgba(124,92,255,.4); border-radius: 8px; background: rgba(124,92,255,.12); color: #cfc2ff; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+            .lw-yt-analyze:hover { background: rgba(124,92,255,.22); color: #fff; }
+
+            .lw-yt-write { min-width: 0; padding-left: 16px; border-left: 1px solid rgba(255,255,255,.07); }
+            .lw-yt-write h4 { margin: 0 0 9px; font-size: 12.5px; font-weight: 700; color: rgba(235,242,250,.62); }
+            .lw-yt-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+            .lw-yt-chips button { padding: 4px 9px; border: 1px solid rgba(255,255,255,.14); border-radius: 999px; background: transparent; color: rgba(235,242,250,.78); font-size: 12px; cursor: pointer; }
+            .lw-yt-chips button:hover { border-color: rgba(124,92,255,.5); color: #fff; }
+            .lw-yt-make { padding: 7px 13px; border: 1px solid rgba(255,165,0,.4); border-radius: 8px; background: rgba(255,165,0,.1); color: #ffc966; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+            .lw-yt-make:hover { background: rgba(255,165,0,.2); color: #fff; }
+            .lw-yt-hint { margin: 0; color: #646b7d; font-size: 12.5px; }
+            .lw-yt-err { margin: 0 0 6px; color: #ff6b81; font-size: 12.5px; }
+            .lw-yt-ideas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+            .lw-yt-ideas li { padding: 9px 10px; border-radius: 8px; background: rgba(255,255,255,.04); }
+            .lw-yt-ideakey { padding: 0; border: 0; background: none; color: #ffd27a; font-size: 13px; font-weight: 700; cursor: pointer; text-align: left; }
+            .lw-yt-ideakey:hover { text-decoration: underline; }
+            .lw-yt-ideas p { margin: 5px 0 0; font-size: 12.5px; line-height: 1.5; color: rgba(235,242,250,.84); overflow-wrap: anywhere; }
+            .lw-yt-ideas em { display: inline-block; min-width: 30px; margin-right: 5px; color: #646b7d; font-style: normal; font-size: 11px; }
+
+            @media (max-width: 1180px) {
+                .lw-yt-row { grid-template-columns: 220px minmax(0, 1fr); }
+                .lw-yt-write { grid-column: 1 / -1; padding-left: 0; padding-top: 12px; border-left: 0; border-top: 1px solid rgba(255,255,255,.07); }
+            }
+            @media (max-width: 680px) {
+                .lw-yt-row { grid-template-columns: 1fr; }
                 .lw-yt-meta { margin-left: 0; flex-basis: 100%; }
             }
             .lw-usage-err { margin: 4px 0 0; color: #ff6b81; font-size: 12.5px; }

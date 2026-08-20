@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -311,6 +311,16 @@ export const checkClaudeToken = (token: string) =>
 export type KinPostIdea = { keyword: string; why: string; clickWhy?: string; seo: string; home: string };
 export const fetchKinPostIdeas = (input: { title: string; body: string }) =>
     call<{ ideas: KinPostIdea[] }>('kin-post-ideas', { title: input.title, body: input.body })
+        .then((res) => { persistRenewed(res.data); return res; });
+
+/**
+ * 화제 검색어에서 글감 — 키워드마다 SEO·홈판 제목.
+ *
+ * 지식인 글감(fetchKinPostIdeas)과 같은 제목 교리를 쓴다. 씨앗만 다르다.
+ * context 는 화제가 된 영상 제목 — 없는 사실을 지어내지 않게 붙잡아 준다.
+ */
+export const fetchKeywordPostIdeas = (keyword: string, context: string) =>
+    call<{ ideas: KinPostIdea[] }>('keyword-post-ideas', { keyword, context })
         .then((res) => { persistRenewed(res.data); return res; });
 
 /**
