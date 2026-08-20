@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { fetchKinAnswer, fetchKinPostIdeas, fetchKinQuestion, formatCount, type KinPostIdea } from '../../lib/keywordApi';
+import { fetchKinAnswer, fetchKinPostIdeas, fetchKinQuestion, formatCount, searchKinQuestions, type KinPostIdea } from '../../lib/keywordApi';
 import { bridgeKinAnswer, probeBridge, type BridgeStatus } from '../../lib/bridge';
 import { loadUserKeys, saveUserKeys } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
@@ -50,6 +50,8 @@ const LANES = [
      * 이 브라우저에 남겨 둔다 — 수집이 바뀌어도 사라지지 않는다.
      */
     { id: 'worked', label: '내가 작업한 질문', hint: '답변 초안을 만든 질문 — 목록이 갱신돼도 여기 남습니다(이 브라우저 저장)' },
+    /* 키워드로 직접 찾기(사장님 지시 2026-08-20) — 수집을 기다리지 않고 원하는 주제의 질문을 찾는다. */
+    { id: 'search', label: '질문 검색', hint: '키워드로 지식인 질문을 직접 찾습니다 — 조회수·답변수는 질문 페이지 실측' },
 ] as const;
 
 type LaneId = (typeof LANES)[number]['id'];
@@ -104,6 +106,27 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
     const [draftCopied, setDraftCopied] = useState(false);
     /** 작업한 질문 보관함 — 수집이 갈려도 남는다. */
     const [worked, setWorked] = useState<WorkedItem[]>(() => loadWorked());
+    /* 질문 검색 — 지식인에서 직접 찾는다. */
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchRecent, setSearchRecent] = useState(false);
+    const [search, setSearch] = useState<{ status: 'idle' | 'loading' | 'done' | 'error'; list: KinQ[]; message?: string }>({ status: 'idle', list: [] });
+
+    const runSearch = async () => {
+        const query = searchQuery.trim();
+        if (!query || search.status === 'loading') return;
+        setSearch({ status: 'loading', list: [] });
+        const result = await searchKinQuestions(query, searchRecent);
+        if (result.ok && result.data) {
+            const list = (result.data.questions || []).map((q) => ({
+                title: q.title, link: q.link, summary: q.summary,
+                views: q.views, answers: q.answers, askedAt: q.askedAt || undefined,
+                keyword: query,
+            }));
+            setSearch({ status: 'done', list, message: list.length ? undefined : '검색 결과가 없습니다.' });
+            return;
+        }
+        setSearch({ status: 'error', list: [], message: result.message || result.error || '검색 실패' });
+    };
 
     const docIdOfLink = (link: string) => (link.match(/docId=(\d+)/) || [])[1] || link;
     /** 초안을 만들면 그 질문을 통째로 저장한다(같은 질문은 최신본으로 갱신). */
@@ -286,14 +309,15 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
     const docIdOf = (link: string) => (link.match(/docId=(\d+)/) || [])[1] || link;
 
     const laneItems = useMemo<KinQ[]>(() => {
-        // 보관함은 수집과 무관하다 — 데이터가 없어도 보인다.
+        // 보관함·검색은 수집과 무관하다 — 데이터가 없어도 보인다.
         if (lane === 'worked') return worked;
+        if (lane === 'search') return search.list;
         if (!data) return [];
         if (lane === 'realtime') return data.realtime || [];
         if (lane === 'rising') return data.rising || [];
         // 정렬은 수집기가 한다 — 지금 조회가 붙는 순. 화면이 다시 섞지 않는다.
         return data.hidden || [];
-    }, [data, lane, worked]);
+    }, [data, lane, worked, search]);
 
     /** 이미 작업한 질문인지 — 다른 레인에서도 표시해 중복 작업을 막는다. */
     const workedIds = useMemo(() => new Set(worked.map((item) => docIdOfLink(item.link))), [worked]);
@@ -320,10 +344,36 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                     >{item.label} <em>{item.id === 'realtime' ? (data?.realtime || []).length
                         : item.id === 'rising' ? (data?.rising || []).length
                             : item.id === 'worked' ? worked.length
-                                : (data?.hidden || []).length}</em></button>
+                                : item.id === 'search' ? search.list.length
+                                    : (data?.hidden || []).length}</em></button>
                 ))}
             </div>
             <p className="lw-write-hint">{LANES.find((item) => item.id === lane)?.hint}</p>
+
+            {lane === 'search' && (
+                <form className="lw-search" onSubmit={(event) => { event.preventDefault(); runSearch(); }}>
+                    <input
+                        type="search"
+                        value={searchQuery}
+                        onChange={(event) => setSearchQuery(event.target.value)}
+                        placeholder="찾을 키워드 (예: 전세보증금 반환)"
+                        aria-label="지식인 질문 검색어"
+                    />
+                    <label className="lw-kg-recent">
+                        <input type="checkbox" checked={searchRecent} onChange={(event) => setSearchRecent(event.target.checked)} />
+                        최신순만
+                    </label>
+                    <button type="submit" disabled={search.status === 'loading' || !searchQuery.trim()}>
+                        {search.status === 'loading' ? '찾는 중…' : '검색'}
+                    </button>
+                </form>
+            )}
+            {lane === 'search' && search.status !== 'loading' && search.message && (
+                <div className="lw-note">{search.message}</div>
+            )}
+            {lane === 'search' && search.status === 'idle' && !search.message && (
+                <div className="lw-note">키워드를 넣으면 그 주제의 지식인 질문을 찾아 조회수·답변수를 실측합니다.</div>
+            )}
 
             {status === 'loading' && <div className="lw-note">질문 실측을 불러오는 중입니다…</div>}
             {status === 'error' && (
@@ -349,7 +399,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                 <div className="lw-note">이번 실측에서 기준(조회 많음 · 답변 적음)을 만족한 숨은 질문이 없습니다.</div>
             )}
 
-            {(status === 'ready' || lane === 'worked') && laneItems.length > 0 && (
+            {(status === 'ready' || lane === 'worked' || lane === 'search') && laneItems.length > 0 && (
                 <ol className="lw-kg-list">
                     {laneItems.map((q, index) => (
                         <li key={q.link}>

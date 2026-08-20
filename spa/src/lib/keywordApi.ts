@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -312,6 +312,21 @@ export type KinPostIdea = { keyword: string; why: string; clickWhy?: string; seo
 export const fetchKinPostIdeas = (input: { title: string; body: string }) =>
     call<{ ideas: KinPostIdea[] }>('kin-post-ideas', { title: input.title, body: input.body })
         .then((res) => { persistRenewed(res.data); return res; });
+
+/**
+ * 지식인 질문 검색 — 키워드로 실제 질문을 찾고 조회수·답변수를 실측해 돌려준다.
+ * recentOnly 면 최근 기간의 최신순, 아니면 정확도순(기본값).
+ */
+export type KinSearchQuestion = {
+    title: string; link: string; summary?: string;
+    askedAt: string | null; views: number | null; answers: number | null;
+    expertAnswered?: boolean;
+};
+export const searchKinQuestions = (query: string, recentOnly: boolean) =>
+    call<{ questions: KinSearchQuestion[]; note?: string }>('kin-search', {
+        query,
+        recentOnly: recentOnly ? '1' : '',
+    });
 
 /** 지식인 질문 전문 — 답변 작업대는 질문이 안 잘리고 끝까지 보여야 한다. */
 export const fetchKinQuestion = (link: string) =>
