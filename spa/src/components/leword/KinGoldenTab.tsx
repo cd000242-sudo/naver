@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { fetchKinAnswer, fetchKinQuestion, formatCount } from '../../lib/keywordApi';
+import { fetchKinAnswer, fetchKinPostIdeas, fetchKinQuestion, formatCount, type KinPostIdea } from '../../lib/keywordApi';
 import { bridgeKinAnswer, probeBridge, type BridgeStatus } from '../../lib/bridge';
-import { loadUserKeys } from '../../lib/userKeys';
+import { loadUserKeys, saveUserKeys } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -100,14 +100,43 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
     };
     const agentReady = typeof bridgeState === 'object' && bridgeState !== null
         && bridgeState.connected && (bridgeState.agents || []).some((agent) => agent.available);
-    /** 키 탭의 토큰/키 — 있으면 앱과 무관하게 생성된다(1순위 경로). */
+    /** 클로드 구독 토큰 — 있으면 앱과 무관하게 서버가 생성한다(1순위 경로). */
     const storedKeys = loadUserKeys();
     const tokenReady = Boolean(storedKeys.claudeToken);
+    // 기존에 저장돼 있던 Gemini/OpenAI 키가 있으면 서버 폴백으로 여전히 쓰인다.
     const anyKeyReady = tokenReady || Boolean(storedKeys.geminiKey || storedKeys.openaiKey);
+
+    /*
+     * 이 질문으로 쓸 글감(사장님 지시 2026-08-20) — 키워드를 누르면 그 키워드의
+     * SEO·홈판 제목이 펼쳐진다. 답변만 달고 끝나는 게 아니라 글로 잇는 다리다.
+     */
+    const [ideas, setIdeas] = useState<{ status: 'idle' | 'loading' | 'done' | 'error'; list: KinPostIdea[]; message?: string }>({ status: 'idle', list: [] });
+    const [openIdea, setOpenIdea] = useState('');
+    const [copiedTitle, setCopiedTitle] = useState('');
+
+    const loadIdeas = async () => {
+        if (!work || ideas.status === 'loading') return;
+        setIdeas({ status: 'loading', list: [] });
+        const result = await fetchKinPostIdeas({ title: work.title, body: workBody.text });
+        if (result.ok && result.data?.ideas?.length) {
+            setIdeas({ status: 'done', list: result.data.ideas });
+            setOpenIdea(result.data.ideas[0].keyword);
+            return;
+        }
+        setIdeas({ status: 'error', list: [], message: result.message || result.error || '글감을 만들지 못했습니다.' });
+    };
+
+    const copyTitle = (text: string) => {
+        navigator.clipboard?.writeText(text);
+        setCopiedTitle(text);
+        window.setTimeout(() => setCopiedTitle(''), 1500);
+    };
 
     const openWork = (q: KinQ) => {
         probeOnce();
         setWork(q);
+        setIdeas({ status: 'idle', list: [] });
+        setOpenIdea('');
         setDraft('');
         setGenNote('');
         setWithLink(false);
@@ -130,10 +159,21 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
             blogUrl: blogUrl.trim(),
         };
         /*
-         * 1순위: 내 API 키 탭의 클로드코드 **구독 토큰**(사장님 확정 2026-08-20
-         * "앱 안 켜도 어드민처럼 되게") — 앱 없이, 추가 비용 없이 서버가 바로
-         * 생성한다. 토큰/키가 없을 때만 LEWORD 앱(브리지)을 시도한다.
+         * 사용자가 고른 엔진을 따른다(사장님 확정 2026-08-20 "선택해서 연동하고
+         * 쓰는 것"). 클로드는 사이트가 직접(앱 불필요), 나머지는 앱이 그 엔진
+         * 하나로 실행한다 — 몰래 다른 엔진으로 갈아타지 않는다.
          */
+        const picked = String(loadUserKeys().aiProvider || '');
+        if (picked && picked !== 'claude') {
+            const viaApp = await bridgeKinAnswer({ ...input, provider: picked });
+            setGenerating(false);
+            if (viaApp.status === 'ok') { setDraft(viaApp.answer); return; }
+            setGenNote(viaApp.status === 'error'
+                ? `생성 실패(${picked}): ${viaApp.message}`
+                : `${picked} 는 LEWORD 앱을 통해 돕니다 — 앱을 켜고 다시 눌러 주세요(내 API 키 탭에서 다른 엔진으로 바꿀 수도 있습니다).`);
+            return;
+        }
+
         const viaKeys = await fetchKinAnswer(input);
         if (viaKeys.ok && viaKeys.data?.answer) {
             setGenerating(false);
@@ -142,6 +182,16 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
         }
         if (viaKeys.error && viaKeys.error !== 'needs-keys') {
             setGenerating(false);
+            /*
+             * 폐기된 수동 토큰(갱신 토큰 없음)이 남아 있으면 이 오류가 반복된다 —
+             * 죽은 토큰은 지워 주고 버튼 재연결로 안내한다(사장님 실사고 2026-08-20).
+             */
+            const stored = loadUserKeys();
+            if (/invalid bearer|revoked|expired/i.test(viaKeys.message || '') && stored.claudeToken && !stored.claudeRefresh) {
+                saveUserKeys({ ...stored, claudeToken: '' });
+                setGenNote('저장돼 있던 토큰이 폐기된 것이라 지웠습니다 — 내 API 키 탭의 [구독 연결] 버튼으로 다시 연결하면 자동 갱신되는 토큰이 저장됩니다.');
+                return;
+            }
             setGenNote(`생성 실패: ${viaKeys.message || viaKeys.error}`);
             return;
         }
@@ -341,7 +391,13 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                                     <button type="button" onClick={copyDraft} disabled={!draft.trim()}>
                                         {draftCopied ? '복사됨 — 지식인에 붙여넣으세요' : '복사 → 지식인에 붙여넣기'}
                                     </button>
-                                    <a href={work.link} target="_blank" rel="noreferrer" className="lw-kg-open">질문 열기</a>
+                                    {/* 답변 편집기로 바로 — 로그인 상태면 그 화면이 열린다(앵커 실측: #smartEditorArea). */}
+                                    <a
+                                        href={`${work.link}${work.link.includes('?') ? '&' : '?'}answerWrite=Y#smartEditorArea`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="lw-kg-open"
+                                    >답변 바로 하러 가기</a>
                                     <label className={`lw-kg-linkbox${linkAllowed ? '' : ' off'}`} title={linkAllowed ? '' : '최근 9개 안에 링크 답변이 있습니다 — 링크 없이 더 달아야 합니다'}>
                                         <input
                                             type="checkbox"
@@ -363,6 +419,60 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                                         }}
                                         placeholder="자동화로 발행한 글 주소 (답변 끝에 사람 말투로 붙습니다)"
                                     />
+                                )}
+                            </section>
+
+                            {/* 이 질문으로 쓸 글감 — 키워드 클릭 시 SEO·홈판 제목이 펼쳐진다. */}
+                            <section>
+                                <strong>이 질문으로 쓸 글감 — 키워드를 누르면 제목이 나옵니다</strong>
+                                {ideas.status === 'idle' && (
+                                    <button type="button" className="lw-mini" onClick={loadIdeas}>글감 뽑기</button>
+                                )}
+                                {ideas.status === 'loading' && <p className="lw-kg-work-note">질문에서 검색어를 추론하는 중…</p>}
+                                {ideas.status === 'error' && (
+                                    <p className="lw-kg-work-note">
+                                        {ideas.message} <button type="button" className="lw-kg-kw" onClick={loadIdeas}>다시</button>
+                                    </p>
+                                )}
+                                {ideas.status === 'done' && (
+                                    <div className="lw-ideas">
+                                        {ideas.list.map((idea) => (
+                                            <div key={idea.keyword} className={`lw-idea${openIdea === idea.keyword ? ' on' : ''}`}>
+                                                <button
+                                                    type="button"
+                                                    className="lw-idea-head"
+                                                    aria-expanded={openIdea === idea.keyword}
+                                                    onClick={() => setOpenIdea(openIdea === idea.keyword ? '' : idea.keyword)}
+                                                >
+                                                    <b>{idea.keyword}</b>
+                                                    <span>{openIdea === idea.keyword ? '▲' : '▼'}</span>
+                                                </button>
+                                                {openIdea === idea.keyword && (
+                                                    <div className="lw-idea-body">
+                                                        {idea.why && <p className="lw-idea-why">{idea.why}</p>}
+                                                        {/* 왜 클릭하는가 — 제목을 짓기 전 세운 동기. 제목이 이걸 지키는지 눈으로 검증한다. */}
+                                                        {idea.clickWhy && <p className="lw-idea-click">왜 클릭하나 · {idea.clickWhy}</p>}
+                                                        {[{ tag: 'SEO', text: idea.seo }, { tag: '홈판', text: idea.home }].map(
+                                                            (row) => row.text && (
+                                                                <div key={row.tag} className="lw-idea-title">
+                                                                    <span>{row.tag}</span>
+                                                                    <em>{row.text}</em>
+                                                                    <button type="button" onClick={() => copyTitle(row.text)}>
+                                                                        {copiedTitle === row.text ? '복사됨' : '복사'}
+                                                                    </button>
+                                                                </div>
+                                                            ),
+                                                        )}
+                                                        {onAnalyze && (
+                                                            <button type="button" className="lw-kg-kw" onClick={() => onAnalyze(idea.keyword)}>
+                                                                이 키워드 분석하기 →
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
                                 )}
                             </section>
 

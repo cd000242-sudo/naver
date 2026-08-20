@@ -271,8 +271,57 @@ function LewordStyles() {
             .lw-kg-linkbox input { accent-color: #ffa500; width: 15px; height: 15px; }
             .lw-kg-linkbox.off { opacity: .45; cursor: not-allowed; }
             .lw-kg-bloginput { width: 100%; margin-top: 8px; padding: 9px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; }
+            /* 글감 드롭다운 — 키워드 하나에 SEO·홈판 제목이 접혀 있다. */
+            .lw-ideas { display: flex; flex-direction: column; gap: 7px; }
+            .lw-idea { border: 1px solid rgba(255,255,255,.1); border-radius: 10px; background: rgba(255,255,255,.025); overflow: hidden; }
+            .lw-idea.on { border-color: rgba(255,165,0,.42); }
+            .lw-idea-head { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 13px; border: 0; background: none; color: #ebf2fa; font-size: 14px; font-weight: 700; cursor: pointer; text-align: left; }
+            .lw-idea-head span { color: rgba(235,242,250,.45); font-size: 11px; }
+            .lw-idea-body { padding: 0 13px 12px; display: flex; flex-direction: column; gap: 7px; }
+            .lw-idea-why { margin: 0 0 3px; font-size: 12px; color: rgba(235,242,250,.55); }
+            .lw-idea-click { margin: 0 0 5px; font-size: 12px; color: #ffc169; }
+            .lw-idea-title { display: flex; align-items: center; gap: 9px; min-width: 0; }
+            .lw-idea-title span { flex: none; font-size: 11px; font-weight: 800; color: rgba(255,165,0,.9); border: 1px solid rgba(255,165,0,.35); border-radius: 6px; padding: 2px 7px; }
+            .lw-idea-title em { flex: 1; min-width: 0; font-style: normal; font-size: 13.5px; color: #fff; font-weight: 600; }
+            .lw-idea-title button { flex: none; border: 1px solid rgba(255,255,255,.16); border-radius: 7px; background: none; color: rgba(235,242,250,.7); font-size: 11.5px; padding: 3px 9px; cursor: pointer; }
+            .lw-idea-title button:hover { border-color: rgba(255,165,0,.5); color: #fff; }
+
+            /* 엔진 선택 목록 — 하나 골라 연동하고 그것으로 쓴다. */
+            .lw-engines-list { display: flex; flex-direction: column; gap: 8px; }
+            .lw-engine-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; background: rgba(255,255,255,.025); }
+            .lw-engine-row.on { border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.07); }
+            .lw-engine-name b { display: block; font-size: 14.5px; color: #ebf2fa; }
+            .lw-engine-name small { display: block; margin-top: 2px; font-size: 11.5px; color: rgba(235,242,250,.5); }
+            .lw-engine-state { font-size: 12px; font-weight: 700; color: rgba(235,242,250,.55); white-space: nowrap; }
+            .lw-engine-state.ok { color: #2ecc71; }
+            .lw-engine-actions { display: flex; gap: 6px; }
+            .lw-engine-key { grid-column: 1 / -1; display: flex; align-items: flex-end; gap: 10px; margin-top: 4px; }
+            .lw-engine-key label { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; color: rgba(235,242,250,.6); }
+            .lw-engine-key input { width: 100%; padding: 8px 11px; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; font-family: Consolas, monospace; }
+            .lw-engine-key input:focus { outline: none; border-color: rgba(255,165,0,.5); }
+            .lw-engine-key a { flex: none; font-size: 11.5px; color: #69b7ff; text-decoration: none; padding-bottom: 9px; }
+            @media (max-width: 720px) {
+                .lw-engine-row { grid-template-columns: minmax(0, 1fr); }
+                .lw-engine-actions { justify-content: flex-start; }
+            }
+
+            /* 폴백 체인 상태 — 어느 CLI 가 실제로 살아 있는지 한눈에. */
+            .lw-agents-block { margin-top: 14px; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.08); }
+            .lw-agents-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 9px; flex-wrap: wrap; }
+            .lw-agents-head b { font-size: 12.5px; font-weight: 800; color: rgba(235,242,250,.75); }
+            .lw-agents { display: flex; flex-wrap: wrap; gap: 7px; }
+            .lw-agent { font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); color: rgba(235,242,250,.55); white-space: nowrap; }
+            .lw-agent-ok { border-color: rgba(46,204,113,.45); color: #2ecc71; background: rgba(46,204,113,.08); }
+            .lw-agent-warn { border-color: rgba(255,193,7,.4); color: #ffc107; }
+            .lw-agent-login { margin-left: 7px; padding: 2px 8px; border: 1px solid rgba(255,255,255,.2); border-radius: 6px; background: none; color: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
+            .lw-agent-login:hover { border-color: rgba(255,165,0,.55); color: #fff; }
+            .lw-agent-login:disabled { opacity: .5; cursor: default; }
+
             /* 클로드 구독 연결(버튼 한 번) */
             .lw-claude-connect { display: flex; flex-direction: column; gap: 9px; margin-bottom: 12px; }
+            .lw-claude-steps { padding: 12px 14px; border: 1px solid rgba(255,165,0,.32); border-radius: 11px; background: rgba(255,165,0,.06); }
+            .lw-claude-steps p { margin: 0 0 9px; font-size: 13px; color: #ebf2fa; line-height: 1.6; }
+            .lw-claude-steps b { color: #ffa500; }
             .lw-claude-code { display: flex; gap: 8px; }
             .lw-claude-code input { flex: 1; min-width: 0; padding: 9px 12px; border: 1px solid rgba(255,255,255,.14); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 13px; }
             .lw-claude-code input:focus { outline: none; border-color: rgba(255,165,0,.5); }
@@ -298,6 +347,18 @@ function LewordStyles() {
             .lw-audit-q { display: block; margin-top: 3px; font-size: 11px; font-weight: 400; color: rgba(235,242,250,.45); white-space: nowrap; }
             .lw-audit-q-btn { border: 0; background: none; padding: 0; cursor: pointer; text-align: left; text-decoration: underline dotted; }
             .lw-audit-q-btn:hover { color: #69b7ff; }
+            /* 다른 검색엔진 칩 — 누르면 그 엔진 검색이 열린다(자동 판정의 수동 검증문). */
+            .lw-engines { display: flex; gap: 5px; flex-wrap: wrap; }
+            .lw-engine { font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 7px; border: 1px solid rgba(255,255,255,.14); color: rgba(235,242,250,.55); text-decoration: none; white-space: nowrap; }
+            .lw-engine-found { border-color: rgba(46,204,113,.45); color: #2ecc71; }
+            .lw-engine-blocked { border-color: rgba(255,193,7,.4); color: #ffc107; }
+            .lw-engine:hover { color: #fff; }
+            /* AI 평가 점수 — 실측이 아님을 라벨이 말한다. */
+            .lw-score-row { display: flex; gap: 12px; flex-wrap: wrap; }
+            .lw-score { flex: 1; min-width: 200px; padding: 11px 13px; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; background: rgba(255,255,255,.03); }
+            .lw-score em { font-style: normal; font-size: 22px; font-weight: 800; color: #ffa500; margin-right: 7px; }
+            .lw-score span { font-size: 12.5px; font-weight: 700; color: rgba(235,242,250,.7); }
+            .lw-score small { display: block; margin-top: 5px; font-size: 12px; color: rgba(235,242,250,.55); line-height: 1.5; }
             .lw-audit-table td { vertical-align: top; }
 
             /* 차트 호버 십자선 값 — 가리킨 점의 기간·상대값. */

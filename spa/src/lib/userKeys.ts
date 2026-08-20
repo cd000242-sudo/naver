@@ -22,11 +22,15 @@ export type UserKeyField =
     | 'coupangSecretKey'
     | 'coupangSubId'
     | 'claudeToken'
+    /** 사용자가 고른 생성 엔진(claude|codex|gemini|grok). 비면 클로드 우선. */
+    | 'aiProvider'
     /** 회전식 refresh 토큰 — 만료 시 서버가 갱신하고 화면이 다시 저장한다. 손입력 UI 없음. */
     | 'claudeRefresh'
     | 'claudeExpiresAt'
     | 'geminiKey'
     | 'openaiKey'
+    /** 그록(xAI) API 키 — 앱 없이 서버가 부른다. */
+    | 'xaiKey'
     | 'brandconnectSpaceId'
     | 'apihubKeyId'
     | 'apihubKey';
@@ -34,7 +38,7 @@ export type UserKeyField =
 export type UserKeys = Partial<Record<UserKeyField, string>>;
 
 export type KeyGroup = {
-    id: 'searchad' | 'openapi' | 'apihub' | 'youtube' | 'coupang' | 'brandconnect' | 'ai';
+    id: 'searchad' | 'openapi' | 'apihub' | 'youtube' | 'coupang' | 'brandconnect';
     label: string;
     desc: string;
     /** 어디서 발급받는지. 사용자가 바로 갈 수 있어야 한다. */
@@ -43,23 +47,6 @@ export type KeyGroup = {
 };
 
 export const KEY_GROUPS: readonly KeyGroup[] = [
-    {
-        /*
-         * 지식인 답변 생성(사장님 확정 2026-08-20 "앱 안 켜도 되게") — 1순위는
-         * 클로드코드 **구독 토큰**: 터미널에 `claude setup-token` 한 줄이면 나오고,
-         * 구독 정액이라 추가 과금이 없다. 앱을 켤 필요도 없다. 토큰·키는 이
-         * 브라우저에만 저장되고 요청에서만 쓰인다(서버 저장 없음).
-         */
-        id: 'ai',
-        label: 'AI 답변 생성 (지식인 황금질문)',
-        desc: '클로드코드 구독이 있으면 터미널에 claude setup-token 한 줄로 토큰을 만들어 넣으세요 — 앱 없이, 추가 비용 없이 생성됩니다. 구독이 없으면 Gemini 무료 키로도 됩니다.',
-        issueUrl: 'https://aistudio.google.com/apikey',
-        fields: [
-            { key: 'claudeToken', label: '클로드코드 토큰 (구독, 권장)', secret: true, placeholder: 'sk-ant-oat...' , minLength: 40 },
-            { key: 'geminiKey', label: 'Gemini API 키 (무료)', secret: true, placeholder: 'AIzaSy...' , minLength: 30 },
-            { key: 'openaiKey', label: 'OpenAI API 키 (선택)', secret: true, placeholder: 'sk-...' , minLength: 20 },
-        ],
-    },
     {
         id: 'searchad',
         label: '네이버 검색광고',
@@ -174,6 +161,7 @@ export function clearUserKeys(): void {
 
 /** 그룹 하나가 쓸 수 있는 상태인지(필수 항목이 전부 찼는지). */
 export function isGroupReady(group: KeyGroup, keys: UserKeys): boolean {
+    // 네이버·쿠팡 등은 키 세트가 한 몸이라 전부 있어야 한다(AI 는 위 엔진 목록 소관).
     return group.fields.every((field) => String(keys[field.key] || '').trim().length > 0);
 }
 

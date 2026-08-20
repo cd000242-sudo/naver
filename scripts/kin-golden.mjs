@@ -161,12 +161,20 @@ async function fetchSearchCandidates() {
         const docId = docIdOf(cleanLink);
         if (seen.has(docId)) continue;
         seen.add(docId);
+        /*
+         * 검색 결과의 설명 조각을 요약으로 싣는다 — 질문 페이지 파싱이 실패해도
+         * 답변 작업대가 빈손이 되지 않게 하는 안전망이다(2026-08-20 실사고).
+         */
+        const summary = ((block.match(/<dd>([\s\S]*?)<\/dd>/g) || [])
+          .map((dd) => dd.replace(/<[^>]*>/g, '').trim())
+          .find((text) => text.length > 20 && !/^\d{4}\./.test(text)) || '').slice(0, 300);
         rows.push({
           title: title.replace(/<[^>]*>/g, '').trim(),
           link: cleanLink,
           docId,
           askedAt: `${date[1]}.${date[2]}.${date[3]}`,
           answers: num(answers),
+          summary,
         });
       }
     } catch (error) {

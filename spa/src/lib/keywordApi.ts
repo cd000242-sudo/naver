@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'post-audit-analyze']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -263,31 +263,55 @@ export const fetchMindmapAI = (keyword: string) =>
  * 발행 글 진단(사장님 확정 2026-08-20 "글을 분석해야") — 실측 순위 3종 + 글
  * 전문을 구독 AI 가 읽고 원인·수정안을 사실 기반으로만 짚는다.
  */
+export type EngineExposure = Record<'google' | 'daum' | 'zum', 'found' | 'not-found' | 'blocked'>;
 export type PostAnalysis = {
     verdict: string;
+    /** AI 평가 점수(0~100) — 실측이 아니라 평가임을 화면이 라벨로 밝힌다. */
+    titleScore: number | null;
+    titleNote: string;
+    contentScore: number | null;
+    contentNote: string;
     targetKeyword: string;
+    /** 누락(제목검색 미노출)일 때만 — 원인 후보와 확인 방법. */
+    missReasons: string[];
     diagnosis: string[];
     fixes: string[];
     contentRead: boolean;
 };
 export const fetchPostAnalysis = (input: {
-    title: string; link: string;
+    title: string; link: string; platform?: string;
     kwQuery?: string; kwRank?: number | null;
     extQuery?: string; extRank?: number | null;
     titleRank?: number | null;
+    engines?: EngineExposure | null;
 }) => call<{ analysis: PostAnalysis }>('post-audit-analyze', {
     title: input.title,
     link: input.link,
+    platform: input.platform || '',
     kwQuery: input.kwQuery || '',
     kwRank: input.kwRank == null ? '' : String(input.kwRank),
     extQuery: input.extQuery || '',
     extRank: input.extRank == null ? '' : String(input.extRank),
     titleRank: input.titleRank == null ? '' : String(input.titleRank),
+    engines: input.engines ? JSON.stringify(input.engines) : '',
 }).then((res) => { persistRenewed(res.data); return res; });
 
 /** 승인 코드+검증값 → 구독 토큰 교환. 코드는 승인 화면의 "code#state" 그대로. */
 export const exchangeClaudeOauth = (code: string, verifier: string) =>
     call<{ accessToken: string; refreshToken: string; expiresAt: number }>('claude-oauth-exchange', { code, verifier });
+
+/** 저장 전에 그 토큰으로 실제 생성이 되는지 확인 — 죽은 값 저장 방지. */
+export const checkClaudeToken = (token: string) =>
+    call<Record<string, never>>('claude-token-check', { token });
+
+/**
+ * 이 질문으로 쓸 수 있는 글감 — 키워드마다 SEO 제목과 홈판(디스커버) 제목.
+ * 홈판 제목은 제목 교리(구어체·답 숨김·AI 티 0)를 서버 프롬프트가 강제한다.
+ */
+export type KinPostIdea = { keyword: string; why: string; clickWhy?: string; seo: string; home: string };
+export const fetchKinPostIdeas = (input: { title: string; body: string }) =>
+    call<{ ideas: KinPostIdea[] }>('kin-post-ideas', { title: input.title, body: input.body })
+        .then((res) => { persistRenewed(res.data); return res; });
 
 /** 지식인 질문 전문 — 답변 작업대는 질문이 안 잘리고 끝까지 보여야 한다. */
 export const fetchKinQuestion = (link: string) =>
