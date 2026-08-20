@@ -41,7 +41,18 @@ export async function ensureLicenseValid(): Promise<boolean> {
     // ✅ 대소문자 무시 비교 (서버가 'free', 'FREE', 'Free' 등 반환 가능)
     const licenseType = String((license as any).licenseType || '').trim().toLowerCase();
     if (licenseType === 'free') {
-        Logger.debug('[AuthUtils] ensureLicenseValid: 무료 라이선스 (항상 유효)');
+        /*
+         * [2026-08-21] 무료도 만료를 본다 — 여기의 '항상 유효'가 30일 제한을
+         * 무력화하던 구멍이었다(발행 게이트가 이 함수를 탄다). 만료일 없는
+         * 옛 무료는 30일 유예를 받고, 유예가 끝나면 여기서 잠긴다.
+         */
+        const { ensureFreeLicenseExpiry, isLicenseExpired } = await import('../../licenseManager.js');
+        const freeLicense = await ensureFreeLicenseExpiry(license);
+        if (isLicenseExpired(freeLicense)) {
+            Logger.debug('[AuthUtils] ensureLicenseValid: ❌ 무료 체험 30일 만료');
+            return false;
+        }
+        Logger.debug('[AuthUtils] ensureLicenseValid: 무료 라이선스 (만료 전 — 유효)');
         return true;
     }
 

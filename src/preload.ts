@@ -137,8 +137,11 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('defamation:checkPublishRisk', payload),
   launchLeword: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('leword:launch'), // ✅ LEWORD 황금키워드 앱 실행
-  freeActivate: (userInfo?: { email: string; nickname: string; phone: string }): Promise<{ success: boolean; message?: string }> =>
+  freeActivate: (userInfo?: { email: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('free:activate', userInfo),
+  // [2026-08-21] 무료 체험 이메일 인증번호 발송
+  freeRequestCode: (userInfo?: { email: string; phone: string }): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('free:requestCode', userInfo),
   forceQuit: (): Promise<{ success: boolean }> =>
     ipcRenderer.invoke('app:forceQuit'),
   minimizeToTray: (): Promise<void> =>

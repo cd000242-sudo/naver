@@ -1086,6 +1086,16 @@
           <input type="tel" id="trial-phone" placeholder="01012345678">
         </div>
 
+        <!-- ✅ [2026-08-21] 이메일 인증번호 — 로그인 없는 체험의 본인 확인 -->
+        <div class="trial-form-group">
+          <label for="trial-authcode">이메일 인증번호 <span style="color: #ef4444;">*</span></label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" id="trial-authcode" placeholder="메일로 받은 6자리" maxlength="6" inputmode="numeric" autocomplete="one-time-code" style="flex: 1;">
+            <button type="button" id="trial-code-btn" class="trial-submit-btn" style="margin: 0; width: auto; white-space: nowrap; padding: 0 14px;">인증번호 받기</button>
+          </div>
+          <div id="trial-code-hint" style="font-size: 12px; color: #94a3b8; margin-top: 6px; display: none;">메일함(스팸함 포함)에서 인증번호를 확인하세요. 유효시간 10분.</div>
+        </div>
+
         <div class="trial-consent-row">
           <input type="checkbox" id="trial-consent">
           <label for="trial-consent">체험 서비스 제공을 위해 이메일, 닉네임, 전화번호를 수집·이용하는 것에 동의합니다. 수집된 정보는 서비스 운영 목적으로만 사용됩니다.</label>
@@ -1662,6 +1672,62 @@
       }
     });
 
+    // ✅ [2026-08-21] 체험 모달: 이메일 인증번호 받기 (60초 재전송 쿨다운)
+    let trialCodeCooldown = 0;
+    let trialCodeTimer = null;
+    document.getElementById('trial-code-btn')?.addEventListener('click', async () => {
+      const emailInput = document.getElementById('trial-email');
+      const phoneInput = document.getElementById('trial-phone');
+      const errorMsg = document.getElementById('trial-error-msg');
+      const codeBtn = document.getElementById('trial-code-btn');
+      const codeHint = document.getElementById('trial-code-hint');
+
+      const email = (emailInput?.value || '').trim().toLowerCase();
+      const phone = (phoneInput?.value || '').trim().replace(/[-\s]/g, '');
+
+      [emailInput, phoneInput].forEach(el => el?.classList.remove('trial-input-error'));
+      if (errorMsg) { errorMsg.textContent = ''; errorMsg.classList.remove('show'); }
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailInput?.classList.add('trial-input-error');
+        if (errorMsg) { errorMsg.textContent = '인증번호를 받을 이메일을 먼저 입력하세요.'; errorMsg.classList.add('show'); }
+        return;
+      }
+      if (!phone || !/^01[0-9]{8,9}$/.test(phone)) {
+        phoneInput?.classList.add('trial-input-error');
+        if (errorMsg) { errorMsg.textContent = '전화번호를 먼저 입력하세요. (예: 01012345678)'; errorMsg.classList.add('show'); }
+        return;
+      }
+      if (trialCodeCooldown > 0) return;
+
+      if (codeBtn) { codeBtn.disabled = true; codeBtn.textContent = '발송 중...'; }
+      try {
+        const result = await ipcRenderer.invoke('free:requestCode', { email, phone });
+        if (!result || result.success !== true) {
+          if (errorMsg) { errorMsg.textContent = (result && result.message) || '인증번호 발송에 실패했습니다.'; errorMsg.classList.add('show'); }
+          if (codeBtn) { codeBtn.disabled = false; codeBtn.textContent = '인증번호 받기'; }
+          return;
+        }
+        if (codeHint) codeHint.style.display = 'block';
+        trialCodeCooldown = 60;
+        if (trialCodeTimer) clearInterval(trialCodeTimer);
+        trialCodeTimer = setInterval(() => {
+          trialCodeCooldown -= 1;
+          if (trialCodeCooldown <= 0) {
+            clearInterval(trialCodeTimer);
+            trialCodeTimer = null;
+            if (codeBtn) { codeBtn.disabled = false; codeBtn.textContent = '재전송'; }
+          } else if (codeBtn) {
+            codeBtn.textContent = `재전송 (${trialCodeCooldown})`;
+          }
+        }, 1000);
+        if (codeBtn) codeBtn.textContent = `재전송 (${trialCodeCooldown})`;
+      } catch (err) {
+        if (errorMsg) { errorMsg.textContent = '인증번호 발송에 실패했습니다. 인터넷 연결을 확인하세요.'; errorMsg.classList.add('show'); }
+        if (codeBtn) { codeBtn.disabled = false; codeBtn.textContent = '인증번호 받기'; }
+      }
+    });
+
     // ✅ [2026-03-26] 체험 모달: 제출 핸들러
     document.getElementById('trial-submit-btn')?.addEventListener('click', async () => {
       const emailInput = document.getElementById('trial-email');
@@ -1678,7 +1744,7 @@
       const phone = (phoneInput?.value || '').trim().replace(/[-\s]/g, '');
 
       // 입력 에러 초기화
-      [emailInput, nicknameInput, phoneInput].forEach(el => el?.classList.remove('trial-input-error'));
+      [emailInput, nicknameInput, phoneInput, document.getElementById('trial-authcode')].forEach(el => el?.classList.remove('trial-input-error'));
       if (errorMsg) { errorMsg.textContent = ''; errorMsg.classList.remove('show'); }
 
       // 유효성 검증
@@ -1697,6 +1763,14 @@
         if (errorMsg) { errorMsg.textContent = '올바른 전화번호를 입력하세요. (예: 01012345678)'; errorMsg.classList.add('show'); }
         return;
       }
+      // ✅ [2026-08-21] 이메일 인증번호 필수
+      const authCodeInput = document.getElementById('trial-authcode');
+      const authCode = (authCodeInput?.value || '').trim();
+      if (!/^\d{6}$/.test(authCode)) {
+        authCodeInput?.classList.add('trial-input-error');
+        if (errorMsg) { errorMsg.textContent = '메일로 받은 인증번호 6자리를 입력하세요. [인증번호 받기]를 먼저 누르세요.'; errorMsg.classList.add('show'); }
+        return;
+      }
       if (!consentCheck?.checked) {
         if (errorMsg) { errorMsg.textContent = '개인정보 수집·이용에 동의해주세요.'; errorMsg.classList.add('show'); }
         return;
@@ -1708,7 +1782,7 @@
       if (loginButton) loginButton.disabled = true;
 
       try {
-        const result = await ipcRenderer.invoke('free:activate', { email, nickname, phone });
+        const result = await ipcRenderer.invoke('free:activate', { email, nickname, phone, authCode });
 
         if (!result || result.success !== true) {
           const msg = (result && result.message) ? String(result.message) : '무료 체험 설정에 실패했습니다.';

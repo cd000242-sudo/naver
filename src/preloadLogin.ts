@@ -15,6 +15,7 @@ const ALLOWED_INVOKE_CHANNELS = [
   'login:success',
   'quota:getStatus',
   'free:activate',
+  'free:requestCode',
   'openExternalUrl',
   'admin:verifyPin',
 ];

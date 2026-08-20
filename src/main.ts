@@ -1023,7 +1023,48 @@ async function enforceFreeTier(action: QuotaType, amount: number = 1): Promise<{
   return { allowed: true, quota };
 }
 
-async function activateFreeTier(userInfo?: { email: string; nickname: string; phone: string }): Promise<{ success: boolean; message?: string }> {
+/**
+ * [2026-08-21] 무료 체험 이메일 인증번호 발송 요청.
+ * 사장님 지시: "이메일이랑 번호를 넣고 체험하는데 인증번호 오게끔."
+ * GAS 가 코드 발송·중복(전화/기기) 선차단·레이트리밋을 맡는다 — 앱은 형식만 거른다.
+ */
+async function requestTrialCode(userInfo?: { email: string; phone: string }): Promise<{ success: boolean; message?: string }> {
+  try {
+    const email = (userInfo?.email || '').trim().toLowerCase();
+    const phone = (userInfo?.phone || '').trim().replace(/[-\s]/g, '');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return { success: false, message: '올바른 이메일 주소를 입력하세요.' };
+    }
+    if (!/^01[0-9]{8,9}$/.test(phone)) {
+      return { success: false, message: '올바른 전화번호를 입력하세요. (예: 01012345678)' };
+    }
+    const gasUrl = process.env.LICENSE_SERVER_URL || DEFAULT_LICENSE_SERVER_URL;
+    const deviceId = await getDeviceId();
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    try {
+      const response = await fetch(gasUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ action: 'trial-request-code', email, phone, deviceId }),
+        signal: controller.signal,
+      });
+      const result = await response.json();
+      debugLog(`[Main] requestTrialCode: GAS 응답 — ${JSON.stringify(result)}`);
+      if (result.ok !== true) {
+        return { success: false, message: result.error || '인증번호 발송에 실패했습니다.' };
+      }
+      return { success: true };
+    } finally {
+      clearTimeout(timeout);
+    }
+  } catch (error) {
+    debugLog(`[Main] requestTrialCode 실패 — ${(error as Error).message}`);
+    return { success: false, message: '인증번호 발송에 실패했습니다. 인터넷 연결을 확인하세요.' };
+  }
+}
+
+async function activateFreeTier(userInfo?: { email: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; message?: string }> {
   try {
     const quota = await getFreeQuotaStatus();
     if (quota?.isPaywalled) {
@@ -1050,6 +1091,11 @@ async function activateFreeTier(userInfo?: { email: string; nickname: string; ph
     if (!/^01[0-9]{8,9}$/.test(normalizedPhone)) {
       return { success: false, message: '올바른 전화번호를 입력하세요. (예: 01012345678)' };
     }
+    // [2026-08-21] 이메일 인증번호 필수 — 메일로 받은 6자리를 함께 보내야 GAS 가 등록한다.
+    const authCode = (userInfo.authCode || '').trim();
+    if (!/^\d{6}$/.test(authCode)) {
+      return { success: false, message: '메일로 받은 인증번호 6자리를 입력하세요.' };
+    }
 
     try {
       const gasUrl = process.env.LICENSE_SERVER_URL || DEFAULT_LICENSE_SERVER_URL;
@@ -1059,6 +1105,7 @@ async function activateFreeTier(userInfo?: { email: string; nickname: string; ph
         email: normalizedEmail,
         nickname: userInfo.nickname.trim(),
         phone: normalizedPhone,
+        authCode,
         deviceId,
         appVersion: app.getVersion(),
       };
@@ -1082,8 +1129,13 @@ async function activateFreeTier(userInfo?: { email: string; nickname: string; ph
         return { success: false, message: result.error || '체험 등록에 실패했습니다.' };
       }
     } catch (gasError) {
-      // 네트워크 오류 시에도 체험은 허용 (오프라인 환경 대비)
-      debugLog(`[Main] activateFreeTier: GAS 전송 실패 (오프라인 허용) — ${(gasError as Error).message}`);
+      /*
+       * [2026-08-21] 오프라인 허용 폐지 — 인증번호를 도입한 이상 서버 확인 없이
+       * 체험을 열면 안 된다. 예전엔 네트워크 오류 시 허용했는데, 그 통로가
+       * "인터넷만 끊으면 인증·중복검사 전부 우회"라는 구멍이었다.
+       */
+      debugLog(`[Main] activateFreeTier: GAS 전송 실패 — 활성화 거부: ${(gasError as Error).message}`);
+      return { success: false, message: '서버 연결에 실패했습니다. 인터넷 연결을 확인한 뒤 다시 시도하세요.' };
     }
 
     /*
@@ -1101,6 +1153,11 @@ async function activateFreeTier(userInfo?: { email: string; nickname: string; ph
       ? existing.verifiedAt
       : new Date().toISOString();
     const trialExpiresAt = new Date(new Date(firstActivatedAt).getTime() + 30 * 24 * 60 * 60 * 1000).toISOString();
+    // [2026-08-21] 이미 30일이 지난 재활성화는 성공으로 속이지 않는다 — 저장하면
+    // "체험 시작됨" 안내 뒤 곧바로 잠겨 고장으로 읽힌다. 구매 안내로 정직하게.
+    if (new Date(trialExpiresAt).getTime() <= Date.now()) {
+      return { success: false, message: '무료 체험 30일이 이미 만료되었습니다. 계속 사용하려면 라이선스를 구매해 주세요.' };
+    }
     const license: LicenseInfo = {
       licenseCode: 'FREE-TIER',
       deviceId: await getDeviceId(),
@@ -2926,8 +2983,13 @@ ipcMain.handle('blog:getRecentPosts', async (_event, blogId: string) => {
   }
 });
 
-ipcMain.handle('free:activate', async (_event, userInfo?: { email: string; nickname: string; phone: string }) => {
+ipcMain.handle('free:activate', async (_event, userInfo?: { email: string; nickname: string; phone: string; authCode?: string }) => {
   return await activateFreeTier(userInfo);
+});
+
+// [2026-08-21] 무료 체험 이메일 인증번호 발송
+ipcMain.handle('free:requestCode', async (_event, userInfo?: { email: string; phone: string }) => {
+  return await requestTrialCode(userInfo);
 });
 
 // ✅ [2026-04-03] app:forceQuit → src/main/ipc/systemHandlers.ts로 이관

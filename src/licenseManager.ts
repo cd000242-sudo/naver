@@ -1219,6 +1219,23 @@ export async function verifyLicense(
 }
 
 /**
+ * [2026-08-21] 평생무료 금지 — 만료일 없는 옛 무료 라이선스에 지금부터 30일
+ * 유예 만료일을 박는다. 사장님 결정: "매일 3회씩 평생무료면 내 툴을 구매할
+ * 이유가 없거든" — v2.11.199 의 '기존 사용자 영구 유지'를 뒤집는 지시다.
+ * 소급 즉시만료(옛 활성화일 기준)가 아니라 지금부터 30일 — 예고 없는 차단을 피한다.
+ */
+export async function ensureFreeLicenseExpiry(license: LicenseInfo): Promise<LicenseInfo> {
+  if (license.licenseType !== 'free' || license.expiresAt) return license;
+  const migrated: LicenseInfo = {
+    ...license,
+    expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+  };
+  await saveLicense(migrated);
+  console.log(`[LicenseManager] 옛 무료 라이선스(만료일 없음)에 30일 유예 부여: ${migrated.expiresAt}`);
+  return migrated;
+}
+
+/**
  * 저장된 라이선스 재검증
  */
 export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
@@ -1236,11 +1253,12 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
    * 서버 재검증만 건너뛴다. 만료돼도 clearLicense 는 하지 않는다 — 지우면
    * 재활성화로 30일이 초기화되는 구멍이 된다.
    *
-   * 기존 사용자 보호: 이미 깔린 FREE-TIER 는 expiresAt 이 없어서
-   * isLicenseExpired 가 영구로 판정한다. 아무것도 잃지 않는다.
+   * [2026-08-21 정정] '기존 사용자 영구'는 하루 만에 뒤집혔다 — 평생무료면
+   * 구매 이유가 없다(사장님). 만료일 없는 옛 무료는 여기서 30일 유예를 받는다.
    */
   if (license.licenseType === 'free') {
-    return !isLicenseExpired(license);
+    const freeLicense = await ensureFreeLicenseExpiry(license);
+    return !isLicenseExpired(freeLicense);
   }
 
   // 만료 확인
