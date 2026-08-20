@@ -26,7 +26,11 @@ function daysToSwitch(): number | null {
 /** 담은 결과를 바깥(결제 구역)에 알려 준다. 아무것도 안 담았으면 null. */
 export type StorePick = { id: string; name: string; amount: number; desc: string };
 
-function ProductStore({ onPick }: { onPick?: (pick: StorePick | null) => void }) {
+function ProductStore({ onPick, onCardPay }: {
+    onPick?: (pick: StorePick | null) => void;
+    /** 결제수단 모달에서 카드를 고르면 부른다 — 카드 결제 구역으로 데려가는 몫은 바깥이 진다. */
+    onCardPay?: () => void;
+}) {
     const [term, setTerm] = useState<TermId>('yearly');
     const [cart, setCart] = useState<string[]>([]);
     const dday = daysToSwitch();
@@ -69,6 +73,12 @@ function ProductStore({ onPick }: { onPick?: (pick: StorePick | null) => void })
      * 않는다. 값은 위의 덧셈 그대로다.
      */
     const termLabel = TERMS.find((item) => item.id === term)?.label || '';
+    /*
+     * 결제수단 고르기 모달(사장님 지시 2026-08-21). 예전엔 [결제하기]가 곧장
+     * 계좌이체 페이지로 갔다 — 카드로 내고 싶은 사람이 길을 잃는다.
+     * 카드/계좌이체 둘 다 보여주고 고르게 한다.
+     */
+    const [payOpen, setPayOpen] = useState(false);
     useEffect(() => {
         if (!onPick) return;
         onPick(picked.length === 0 ? null : {
@@ -191,8 +201,43 @@ function ProductStore({ onPick }: { onPick?: (pick: StorePick | null) => void })
                             <em>{picked.length}개 · 부가세 별도</em>
                             <strong>{won(total)}원</strong>
                         </div>
-                        <a className="st-cart-go" href={`/bank-order?items=${cart.join(',')}&term=${term}`}>결제하기</a>
+                        <button type="button" className="st-cart-go" onClick={() => setPayOpen(true)}>결제하기</button>
                     </div>
+
+                    {payOpen && (
+                        <div className="st-pay-backdrop" role="dialog" aria-modal="true" aria-label="결제수단 선택" onClick={() => setPayOpen(false)}>
+                            <div className="st-pay" onClick={(event) => event.stopPropagation()}>
+                                <div className="st-pay-head">
+                                    <b>결제수단을 선택하세요</b>
+                                    <span>{picked.length}개 제품 · {won(total)}원 (부가세 별도)</span>
+                                    <button type="button" className="st-pay-close" aria-label="닫기" onClick={() => setPayOpen(false)}>✕</button>
+                                </div>
+                                <button
+                                    type="button"
+                                    className="st-pay-opt"
+                                    onClick={() => { setPayOpen(false); onCardPay?.(); }}
+                                >
+                                    <span className="st-pay-ico" aria-hidden="true">💳</span>
+                                    <span className="st-pay-body">
+                                        <b>카드결제</b>
+                                        <em>토스페이먼츠 보안 결제 · VAT 10% 포함 청구 · 바로 시작</em>
+                                    </span>
+                                    <i aria-hidden="true">→</i>
+                                </button>
+                                <a
+                                    className="st-pay-opt"
+                                    href={`/bank-order?items=${cart.join(',')}&term=${term}`}
+                                >
+                                    <span className="st-pay-ico" aria-hidden="true">🏦</span>
+                                    <span className="st-pay-body">
+                                        <b>계좌이체</b>
+                                        <em>본인 이름으로 입금 · 확인 즉시 오픈채팅으로 코드 안내</em>
+                                    </span>
+                                    <i aria-hidden="true">→</i>
+                                </a>
+                            </div>
+                        </div>
+                    )}
 
                     {showSwap && savedByBundle > 0 && (
                         <div className="st-swap">

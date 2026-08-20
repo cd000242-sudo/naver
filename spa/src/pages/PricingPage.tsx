@@ -728,9 +728,15 @@ function PricingPage() {
                         name: pick.name,
                         desc: pick.desc,
                         amount: pick.amount,
+                        // 카드 결제 교리: 카드는 VAT 10% 포함 금액을 청구한다.
+                        // 이게 없으면 담은 주문의 카드 청구가 부가세 없이 나갔다.
+                        amountCard: Math.round(pick.amount * 1.1),
                         period: '',
                         features: [],
                     } : null)}
+                    onCardPay={() => {
+                        paymentSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }}
                 />
                 </div>
 

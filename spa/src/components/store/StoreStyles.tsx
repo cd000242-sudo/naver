@@ -146,6 +146,39 @@ function StoreStyles() {
              * 여기까지 칠하면 어디를 봐야 할지 모르게 된다. 테두리 하나로 두고
              * 강조는 문장 안의 숫자에만 남긴다.
              */
+            .st-cart-go { border: 0; cursor: pointer; font-family: inherit; }
+
+            /* ── 결제수단 고르기 모달 ─────────────────────── */
+            .st-pay-backdrop {
+                position: fixed; inset: 0; z-index: 80; display: grid; place-items: center;
+                background: rgba(4, 6, 12, .68); backdrop-filter: blur(6px); padding: 18px;
+            }
+            .st-pay {
+                width: min(440px, 100%); border-radius: 18px; padding: 22px;
+                background: #10131c; border: 1px solid rgba(255,255,255,.1);
+                box-shadow: 0 24px 70px rgba(0,0,0,.5);
+            }
+            .st-pay-head { position: relative; margin-bottom: 16px; }
+            .st-pay-head b { display: block; color: #fff; font-size: 17px; font-weight: 900; }
+            .st-pay-head span { color: var(--st-dim); font-size: 13px; }
+            .st-pay-close {
+                position: absolute; top: -4px; right: -4px; border: 0; background: none;
+                color: var(--st-dim); font-size: 15px; cursor: pointer; padding: 6px;
+            }
+            .st-pay-close:hover { color: #fff; }
+            .st-pay-opt {
+                display: flex; align-items: center; gap: 13px; width: 100%; box-sizing: border-box;
+                padding: 15px 16px; margin-top: 10px; border-radius: 13px; text-align: left;
+                border: 1px solid rgba(255,255,255,.11); background: rgba(255,255,255,.03);
+                color: inherit; text-decoration: none; cursor: pointer; font-family: inherit;
+            }
+            .st-pay-opt:hover { border-color: rgba(240,181,63,.5); background: rgba(240,181,63,.06); }
+            .st-pay-ico { font-size: 22px; }
+            .st-pay-body { flex: 1; min-width: 0; }
+            .st-pay-body b { display: block; color: #fff; font-size: 15px; font-weight: 800; }
+            .st-pay-body em { font-style: normal; color: var(--st-dim); font-size: 12.5px; line-height: 1.5; }
+            .st-pay-opt i { color: var(--st-gold-lit); font-style: normal; font-weight: 800; }
+
             .st-swap { margin-top: 13px; padding: 14px 17px; border: 1px solid rgba(240,181,63,.22); background: rgba(240,181,63,.05); border-radius: 12px; font-size: 13.6px; line-height: 1.62; color: var(--st-dim); }
             .st-swap b { color: var(--st-gold-lit); }
             .st-swap button { margin-left: 6px; padding: 0; border: 0; background: none; cursor: pointer; font-family: inherit; font-size: 13.6px; color: var(--st-gold-lit); border-bottom: 1px solid rgba(255,216,138,.45); }
