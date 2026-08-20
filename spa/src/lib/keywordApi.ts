@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -466,3 +466,55 @@ export const createCoupangDeeplink = (url: string) =>
 export async function fetchAffiliateBoard() {
     return call<{ products: AffiliateProduct[]; needsKeys: boolean }>('keyword-coupang-board', {});
 }
+
+/*
+ * 외부유입 레이더(§29 PHASE 1) — 내 글 주소 하나로
+ *   ① 글 분석(핵심키워드·검색량 실측·의도·돈각도·질의 확장)
+ *   ② 네이버 4판(지식인·카페·블로그·웹) 검색 + 중복 제거
+ *   ③ AI 평가 → NOW/WATCH/SKIP
+ * 세 걸음을 각각 부른다 — 한 번에 묶으면 25초 타임아웃을 넘는다.
+ * 자동 게시는 없다. 기회를 보여주고, 게시는 사람이 한다.
+ */
+export type RadarAnalysis = {
+    url: string;
+    title: string;
+    metaDescription: string;
+    /** 검색량은 검색광고 실측 — 못 재면 null 로 온다(지어내지 않는다). */
+    coreKeywords: Array<{ keyword: string; searchVolume: number | null }>;
+    intents: string[];
+    moneyAngle: string;
+    queries: string[];
+};
+export type RadarCandidate = {
+    source: 'kin' | 'cafearticle' | 'blog' | 'webkr';
+    title: string;
+    link: string;
+    excerpt: string;
+    postdate: string;
+    matchedQueries: string[];
+    cheapScore: number;
+};
+export type RadarEvaluated = RadarCandidate & {
+    evaluated: boolean;
+    score?: number;
+    recommendedAction?: 'NOW' | 'WATCH' | 'SKIP';
+    reason?: string;
+    answerAngle?: string;
+    relevance?: number; urgency?: number; commercialValue?: number;
+    trafficPotential?: number; contentMatch?: number; spamRisk?: number;
+};
+export const fetchRadarAnalyze = (url: string) =>
+    call<{ analysis: RadarAnalysis }>('radar-analyze', { url });
+export const fetchRadarSearch = (queries: string[], coreKeywords: string[]) =>
+    call<{
+        items: RadarCandidate[];
+        providerStatus: Record<string, string>;
+        totalFound: number;
+        afterDedupe: number;
+    }>('radar-search', { queries: JSON.stringify(queries), coreKeywords: JSON.stringify(coreKeywords) });
+export const fetchRadarEvaluate = (items: RadarCandidate[], articleTitle: string, moneyAngle: string) =>
+    call<{ items: RadarEvaluated[] }>('radar-evaluate', {
+        items: JSON.stringify(items),
+        articleTitle,
+        moneyAngle,
+    });

@@ -80,6 +80,7 @@ function LewordStyles() {
             .lw-navi-kin { --tabc: #2ecc71; --tabc-soft: rgba(46,204,113,.14); --tabc-line: rgba(46,204,113,.4); }
             .lw-navi-affiliate { --tabc: #ff8a3d; --tabc-soft: rgba(255,138,61,.14); --tabc-line: rgba(255,138,61,.4); }
             .lw-navi-youtube { --tabc: #ff5b5b; --tabc-soft: rgba(255,91,91,.14); --tabc-line: rgba(255,91,91,.4); }
+            .lw-navi-radar { --tabc: #35d0ba; --tabc-soft: rgba(53,208,186,.14); --tabc-line: rgba(53,208,186,.4); }
             .lw-navi-rank { --tabc: #ff6bb3; --tabc-soft: rgba(255,107,179,.14); --tabc-line: rgba(255,107,179,.4); }
             .lw-navi-keys { --tabc: #c0c8d4; --tabc-soft: rgba(192,200,212,.12); --tabc-line: rgba(192,200,212,.36); }
             .lw-navi span { color: var(--tabc, currentColor); }
@@ -590,6 +591,80 @@ function LewordStyles() {
             .lw-chart-hover { font-size: 12px; font-weight: 700; fill: #ebf2fa; }
             .lw-spark-hover { color: #ebf2fa; font-weight: 700; }
             .lw-note-error { border-color: rgba(255,107,129,.32); background: rgba(255,107,129,.07); }
+            /* ── 외부유입 레이더 ───────────────────────────── */
+            .lw-radar-progress {
+                display: flex; gap: 8px; margin: 14px 0; flex-wrap: wrap;
+            }
+            .lw-radar-progress span {
+                padding: 7px 13px; border-radius: 999px; font-size: 12.5px; font-weight: 800;
+                border: 1px solid rgba(255,255,255,.1); color: #646b7d; background: rgba(255,255,255,.03);
+            }
+            .lw-radar-progress span.on {
+                border-color: rgba(53,208,186,.5); color: #35d0ba; background: rgba(53,208,186,.1);
+                animation: lwRadarPulse 1.2s ease-in-out infinite;
+            }
+            .lw-radar-progress span.ok { border-color: rgba(53,208,186,.28); color: #9be8dd; }
+            @keyframes lwRadarPulse { 50% { opacity: .55; } }
+            @media (prefers-reduced-motion: reduce) { .lw-radar-progress span.on { animation: none; } }
+
+            .lw-radar-brief { border-color: rgba(53,208,186,.22); }
+            .lw-radar-kws { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 2px; }
+            .lw-radar-kw {
+                display: inline-flex; align-items: baseline; gap: 7px;
+                padding: 6px 11px; border-radius: 9px; font-size: 13px; font-weight: 800; color: #ebedf2;
+                border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04);
+            }
+            .lw-radar-kw b { color: #35d0ba; font-size: 12px; font-variant-numeric: tabular-nums; }
+            .lw-radar-money { margin: 10px 0 0; color: #f5c518; font-size: 13px; font-weight: 700; }
+            .lw-radar-partial { margin: 10px 0 0; color: #c9a34a; font-size: 12.5px; }
+
+            .lw-radar-group .lw-panel-head h2 em {
+                margin-left: 4px; font-style: normal; font-size: 14px; color: #646b7d;
+                font-variant-numeric: tabular-nums;
+            }
+            .lw-radar-now { border-color: rgba(255,138,61,.3); }
+            .lw-radar-empty { margin: 0; color: #646b7d; font-size: 13.5px; }
+            .lw-radar-cards { display: grid; gap: 12px; }
+            .lw-radar-card {
+                padding: 14px 16px; border-radius: 12px;
+                border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.028);
+            }
+            .lw-radar-card.is-done { opacity: .55; }
+            .lw-radar-card.is-dismissed { opacity: .4; }
+            .lw-radar-card-head { display: flex; align-items: center; gap: 9px; margin-bottom: 7px; }
+            .lw-radar-src {
+                padding: 3px 8px; border-radius: 6px; font-size: 11.5px; font-weight: 800;
+                border: 1px solid rgba(255,255,255,.14); color: #aeb6c4;
+            }
+            .lw-radar-src.src-kin { color: #ffd15c; border-color: rgba(255,209,92,.35); }
+            .lw-radar-src.src-cafearticle { color: #7dd87d; border-color: rgba(125,216,125,.35); }
+            .lw-radar-src.src-blog { color: #69b7ff; border-color: rgba(105,183,255,.35); }
+            .lw-radar-score { color: #35d0ba; font-size: 14px; font-variant-numeric: tabular-nums; }
+            .lw-radar-state { font-style: normal; font-size: 11.5px; color: #2ecc71; font-weight: 800; }
+            .lw-radar-card h3 { margin: 0 0 6px; font-size: 15.5px; line-height: 1.4; }
+            .lw-radar-card h3 a { color: #fff; text-decoration: none; }
+            .lw-radar-card h3 a:hover { color: #35d0ba; }
+            .lw-radar-excerpt { margin: 0 0 7px; color: #9aa1b0; font-size: 13px; line-height: 1.55; }
+            .lw-radar-reason { margin: 0 0 4px; color: #c0c8d4; font-size: 12.5px; }
+            .lw-radar-angle { margin: 0 0 4px; color: #9be8dd; font-size: 12.5px; }
+            .lw-radar-meta { display: flex; flex-wrap: wrap; gap: 12px; margin: 7px 0 10px; color: #646b7d; font-size: 12px; }
+            .lw-radar-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+            .lw-radar-actions a, .lw-radar-actions button {
+                padding: 7px 13px; border-radius: 8px; font-size: 12.5px; font-weight: 800; cursor: pointer;
+                border: 1px solid rgba(255,255,255,.14); background: transparent; color: #c0c8d4;
+                text-decoration: none;
+            }
+            .lw-radar-actions a:hover, .lw-radar-actions button:hover { border-color: rgba(53,208,186,.5); color: #35d0ba; }
+            .lw-radar-actions button.pri { border-color: rgba(53,208,186,.5); background: rgba(53,208,186,.12); color: #35d0ba; }
+            .lw-radar-rest { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+            .lw-radar-rest li { display: flex; align-items: center; gap: 9px; font-size: 13px; }
+            .lw-radar-rest a { color: #aeb6c4; text-decoration: none; }
+            .lw-radar-rest a:hover { color: #35d0ba; }
+            .lw-radar-dismissed { color: #646b7d; font-size: 12.5px; }
+            .lw-radar-dismissed button {
+                border: 0; background: none; color: #35d0ba; font-weight: 800; cursor: pointer; font-size: 12.5px;
+            }
+
             .lw-note button {
                 margin-top: 10px; padding: 9px 16px;
                 border: none; border-radius: 10px;

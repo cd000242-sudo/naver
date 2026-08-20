@@ -9,6 +9,7 @@ import GoldenTab from '../components/leword/GoldenTab';
 import KeysTab from '../components/leword/KeysTab';
 import KinGoldenTab from '../components/leword/KinGoldenTab';
 import LewordStyles from '../components/leword/LewordStyles';
+import RadarTab from '../components/leword/RadarTab';
 import RankTab from '../components/leword/RankTab';
 import YoutubeTab from '../components/leword/YoutubeTab';
 
@@ -28,6 +29,7 @@ const TABS = [
     { id: 'kin', label: '지식인 황금질문', short: '황금질문', icon: '✦' },
     { id: 'affiliate', label: '제휴 황금키워드', short: '제휴', icon: '◇' },
     { id: 'youtube', label: '유튜브 급상승 글감', short: '유튜브 글감', icon: '▶' },
+    { id: 'radar', label: '외부유입 레이더', short: '레이더', icon: '⊚' },
     { id: 'rank', label: '노출 추적', short: '노출 추적', icon: '↗' },
     { id: 'keys', label: '내 API 키', short: 'API 키', icon: '⚿' },
 ] as const;
@@ -217,6 +219,7 @@ function LewordPage() {
                 {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
                 {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
+                {activeTab === 'radar' && <RadarTab />}
                 {activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} onAnalyze={sendToAnalyze} />}
                 {activeTab === 'keys' && <KeysTab />}
             </section>
