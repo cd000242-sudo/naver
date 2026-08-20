@@ -265,10 +265,11 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 {idea?.status === 'done' && (
                                     <ul className="lw-yt-ideas">
                                         {(idea.ideas || []).map((item) => (
-                                            <li key={item.keyword}>
+                                            <li className={item.recommended ? 'on' : undefined} key={item.keyword}>
                                                 <button type="button" className="lw-yt-ideakey" onClick={() => onAnalyze(item.keyword)}>
                                                     {item.keyword}
                                                 </button>
+                                                {item.recommended && <span className="lw-pick">추천 · 메인+서브+후킹</span>}
                                                 <p><em>SEO</em> {item.seo}</p>
                                                 <p><em>홈판</em> {item.home}</p>
                                             </li>

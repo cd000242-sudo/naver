@@ -291,6 +291,13 @@ function LewordStyles() {
             .lw-aff-err { margin: 6px 0 0; color: #ff6b81; font-size: 12.5px; }
             .lw-aff-ideas { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
             .lw-aff-ideas li { padding: 9px 11px; border-radius: 8px; background: rgba(255,255,255,.04); }
+            /* 공식을 다 갖춘 하나 — 테두리 하나로만 말한다. 여러 개를 강조하면 고를 값이 없다. */
+            .lw-aff-ideas li.on, .lw-yt-ideas li.on { background: rgba(255,165,0,.07); box-shadow: inset 0 0 0 1px rgba(255,165,0,.35); }
+            .lw-pick {
+                display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px;
+                background: rgba(255,165,0,.18); color: #ffd27a; font-size: 10.5px; font-weight: 700;
+                letter-spacing: .02em; vertical-align: 1px;
+            }
             .lw-aff-ideakey { padding: 0; border: 0; background: none; color: #ffd27a; font-size: 13px; font-weight: 700; cursor: pointer; text-align: left; }
             .lw-aff-ideas button.lw-aff-ideakey:hover { text-decoration: underline; }
             .lw-aff-ideas p { margin: 5px 0 0; font-size: 12.5px; line-height: 1.5; color: rgba(235,242,250,.84); overflow-wrap: anywhere; }

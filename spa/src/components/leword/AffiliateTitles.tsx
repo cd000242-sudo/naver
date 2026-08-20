@@ -48,12 +48,13 @@ function AffiliateTitles({ keyword, product, onAnalyze }: {
             {state.status === 'done' && (
                 <ul className="lw-aff-ideas">
                     {(state.ideas || []).map((idea) => (
-                        <li key={idea.keyword}>
+                        <li className={idea.recommended ? 'on' : undefined} key={idea.keyword}>
                             {onAnalyze ? (
                                 <button type="button" className="lw-aff-ideakey" onClick={() => onAnalyze(idea.keyword)}>
                                     {idea.keyword}
                                 </button>
                             ) : <b className="lw-aff-ideakey">{idea.keyword}</b>}
+                            {idea.recommended && <span className="lw-pick">추천 · 메인+서브+후킹</span>}
                             <p><em>SEO</em> {idea.seo}</p>
                             <p><em>홈판</em> {idea.home}</p>
                         </li>

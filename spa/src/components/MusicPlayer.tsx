@@ -30,6 +30,21 @@ const DEFAULT_MUSIC: MusicConfig = {
 const STORAGE_TIME = 'lp_music_time';
 const STORAGE_TIME_TS = 'lp_music_time_ts';
 const STORAGE_VOL = 'lp_music_volume';
+/*
+ * 이번 창에서 껐는가. sessionStorage 라 탭을 닫으면 사라진다 —
+ * "한 번 노래 끄면 창을 다시 열기 전까지 안 나오게"(사장님 2026-08-20).
+ * localStorage 로 두면 영영 안 나와서 껐다는 걸 잊은 사람이 고장으로 읽는다.
+ */
+const SESSION_OFF = 'lp_music_off_this_session';
+const isOffThisSession = () => {
+    try { return sessionStorage.getItem(SESSION_OFF) === '1'; } catch { return false; }
+};
+const setOffThisSession = (off: boolean) => {
+    try {
+        if (off) sessionStorage.setItem(SESSION_OFF, '1');
+        else sessionStorage.removeItem(SESSION_OFF);
+    } catch { /* 계속 */ }
+};
 let musicPlayerMountSeq = 0;
 
 function normalizeMusicConfig(input: unknown): MusicConfig {
@@ -114,6 +129,8 @@ function MusicPlayer({ hidden = false }: { hidden?: boolean } = {}) {
 
     useEffect(() => {
         if (!musicConfig.enabled || musicConfig.audioUrl) return;
+        // 이번 창에서 이미 껐으면 스스로 켜지지 않는다. 버튼을 누르면 그때 켜진다.
+        if (isOffThisSession()) return;
         const loadWhenIdle = () => setShouldLoadApi(true);
         const idleWindow = window as any;
         const idleId = 'requestIdleCallback' in idleWindow
@@ -177,13 +194,29 @@ function MusicPlayer({ hidden = false }: { hidden?: boolean } = {}) {
                 onReady: (event: any) => {
                     const vol = parseInt(localStorage.getItem(STORAGE_VOL) || '40', 10);
                     event.target.setVolume(isNaN(vol) ? 40 : vol);
-                    try { event.target.playVideo(); } catch {}
+                    /*
+                     * 재생목록을 섞는다. 안 섞으면 고정된 videoId 로 시작해서
+                     * 들어올 때마다 같은 노래가 나온다(사장님 2026-08-20).
+                     * 섞은 뒤 임의의 자리에서 시작해 회차마다 달라지게 한다.
+                     */
+                    try {
+                        event.target.setShuffle(true);
+                        const list = event.target.getPlaylist?.() || [];
+                        if (list.length > 1) event.target.playVideoAt(Math.floor(Math.random() * list.length));
+                        else event.target.playVideo();
+                    } catch {
+                        try { event.target.playVideo(); } catch { /* 계속 */ }
+                    }
                 },
                 onStateChange: (event: any) => {
                     if (!window.YT) return;
                     if (event.data === window.YT.PlayerState.PLAYING) {
                         setIsPlaying(true);
-                        setTrackTitle(musicConfig.title || DEFAULT_MUSIC.title);
+                        setOffThisSession(false);
+                        // 섞으면 곡이 바뀌므로 설정에 적힌 제목이 아니라 지금 나오는 곡을 적는다.
+                        let now = '';
+                        try { now = String(event.target.getVideoData?.()?.title || ''); } catch { /* 계속 */ }
+                        setTrackTitle(now || musicConfig.title || DEFAULT_MUSIC.title);
                     } else if (event.data === window.YT.PlayerState.PAUSED) {
                         setIsPlaying(false);
                     }
@@ -276,9 +309,14 @@ function MusicPlayer({ hidden = false }: { hidden?: boolean } = {}) {
             return;
         }
         try {
-            if (isPlaying) playerRef.current.pauseVideo();
-            else playerRef.current.playVideo();
-        } catch {}
+            if (isPlaying) {
+                playerRef.current.pauseVideo();
+                setOffThisSession(true); // 사람이 껐다 — 이번 창에서는 스스로 안 켜진다
+            } else {
+                setOffThisSession(false);
+                playerRef.current.playVideo();
+            }
+        } catch { /* 계속 */ }
     };
 
     if (!musicConfig.enabled) return null;
