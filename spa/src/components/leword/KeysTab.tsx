@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { exchangeClaudeOauth } from '../../lib/keywordApi';
+import { probeBridge, type BridgeStatus } from '../../lib/bridge';
 import {
     KEY_GROUPS,
     checkKeyShape,
@@ -10,6 +11,17 @@ import {
     type UserKeys,
 } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
+
+/**
+ * 앱 폴백 체인 — 앱 브리지의 kinAnswer 체인 순서(claude→codex→gemini→grok)와
+ * 같아야 한다. 화면 순서가 실제 실행 순서와 갈라지면 안내가 거짓말이 된다.
+ */
+const AGENT_CHAIN = [
+    { id: 'claude', label: '클로드코드' },
+    { id: 'codex', label: '코덱스' },
+    { id: 'gemini', label: '제미나이 CLI' },
+    { id: 'grok', label: '그록' },
+] as const;
 
 /**
  * 내 API 키.
@@ -86,8 +98,29 @@ function KeysTab() {
         setOauth(null);
         setOauthNote('✅ 연결됐습니다 — 추론·답변이 전부 구독으로, 앱 없이 돕니다. 만료는 자동 갱신됩니다.');
     };
-    // 앱 브리지 UI 는 뺐다(사장님 2026-08-20 "연동하기 버튼은 이제 필요 없지
-    // 않아?") — 구독 연결이 정문이고, 브리지는 작업대들이 뒤에서 폴백으로만 쓴다.
+    /*
+     * 폴백 체인 상태(사장님 지시 2026-08-20 "코덱스·제미나이 CLI·그록 연동
+     * 상태를 봐야 폴백에 걸릴 거 아냐") — 앱 브리지가 네 CLI 를 실제로 찔러
+     * 본 결과를 그대로 보여 준다. 지어낸 상태는 없다.
+     *
+     * 자동 조회는 크롬의 사설망 접근(PNA) 정책에 막힐 수 있어(https 페이지 →
+     * 127.0.0.1 은 사용자 클릭에서 시작된 요청에만 권한 팝업이 뜬다) 버튼도
+     * 함께 둔다. 버튼 경로는 앱이 브리지를 여는 시간까지 몇 초 재시도한다.
+     */
+    const [bridge, setBridge] = useState<BridgeStatus | 'probing' | null>(null);
+    useEffect(() => { probeBridge().then(setBridge); }, []);
+    const refreshAgents = async () => {
+        setBridge('probing');
+        let status: BridgeStatus | null = null;
+        for (let attempt = 0; attempt < 4; attempt += 1) {
+            status = await probeBridge();
+            if (status?.connected) break;
+            await new Promise((resolve) => { setTimeout(resolve, 2000); });
+        }
+        setBridge(status);
+    };
+    const bridgeReady = typeof bridge === 'object' && bridge !== null;
+    const agentOf = (provider: string) => (bridgeReady ? (bridge.agents || []).find((agent) => agent.provider === provider) : undefined);
 
     const update = (field: string, value: string) => {
         setKeys((previous) => ({ ...previous, [field]: value }));
@@ -180,6 +213,37 @@ function KeysTab() {
                     >연동 해제</button>
                 )}
                 {oauthNote && <p className="lw-card-note" style={{ marginTop: 10, marginBottom: 0 }}>{oauthNote}</p>}
+
+                {/* 폴백 체인 — 클로드가 막히면 이 순서로 넘어간다. 상태는 앱이 실제로 찔러 본 결과다. */}
+                <div className="lw-agents-block">
+                    <div className="lw-agents-head">
+                        <b>앱 폴백 체인 — 클로드 → 코덱스 → 제미나이 → 그록</b>
+                        <button type="button" className="lw-mini lw-mini-ghost" onClick={refreshAgents} disabled={bridge === 'probing'}>
+                            {bridge === 'probing' ? '확인 중…' : '상태 확인'}
+                        </button>
+                    </div>
+                    {bridgeReady && bridge.connected ? (
+                        <div className="lw-agents">
+                            {AGENT_CHAIN.map((item) => {
+                                const agent = agentOf(item.id);
+                                const state = agent?.available ? 'ok' : agent?.installed ? 'warn' : 'off';
+                                const text = agent?.available ? '사용 가능'
+                                    : agent?.installed ? '로그인 필요'
+                                        : '미설치';
+                                return (
+                                    <span key={item.id} className={`lw-agent lw-agent-${state}`} title={agent?.detail || ''}>
+                                        {item.label} · {text}
+                                    </span>
+                                );
+                            })}
+                        </div>
+                    ) : (
+                        <p className="lw-card-note" style={{ margin: 0 }}>
+                            {bridge === 'probing' ? '앱에 연결하는 중…'
+                                : 'LEWORD 앱이 꺼져 있어 폴백 체인 상태를 못 잽니다 — 앱을 켜고 [상태 확인]을 누르면 네 CLI 의 로그인 여부가 여기 나옵니다.'}
+                        </p>
+                    )}
+                </div>
             </section>
 
             {KEY_GROUPS.map((group) => {

@@ -271,6 +271,15 @@ function LewordStyles() {
             .lw-kg-linkbox input { accent-color: #ffa500; width: 15px; height: 15px; }
             .lw-kg-linkbox.off { opacity: .45; cursor: not-allowed; }
             .lw-kg-bloginput { width: 100%; margin-top: 8px; padding: 9px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; }
+            /* 폴백 체인 상태 — 어느 CLI 가 실제로 살아 있는지 한눈에. */
+            .lw-agents-block { margin-top: 14px; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.08); }
+            .lw-agents-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 9px; flex-wrap: wrap; }
+            .lw-agents-head b { font-size: 12.5px; font-weight: 800; color: rgba(235,242,250,.75); }
+            .lw-agents { display: flex; flex-wrap: wrap; gap: 7px; }
+            .lw-agent { font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); color: rgba(235,242,250,.55); white-space: nowrap; }
+            .lw-agent-ok { border-color: rgba(46,204,113,.45); color: #2ecc71; background: rgba(46,204,113,.08); }
+            .lw-agent-warn { border-color: rgba(255,193,7,.4); color: #ffc107; }
+
             /* 클로드 구독 연결(버튼 한 번) */
             .lw-claude-connect { display: flex; flex-direction: column; gap: 9px; margin-bottom: 12px; }
             .lw-claude-code { display: flex; gap: 8px; }
