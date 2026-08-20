@@ -1,133 +1,132 @@
-import { useCallback, useEffect, useState } from 'react';
-import {
-    fetchTrendingVideos,
-    formatCount,
-    type KeywordUsage,
-    type TrendingVideo,
-} from '../../lib/keywordApi';
-import { ErrorNote, TabIntro, UsageBar } from './LewordShared';
+import { useEffect, useState } from 'react';
+import { formatCount } from '../../lib/keywordApi';
+import { TabIntro } from './LewordShared';
 
 /**
- * 유튜브 실시간 · 급상승.
+ * 유튜브 급상승 → 네이버 빈자리.
  *
- * 유튜브가 직접 고른 한국 인기 목록(chart=mostPopular)을 그대로 보여 준다.
- * 순위를 우리가 다시 매기지 않는다 — 매기는 순간 유튜브 순위가 아니게 된다.
- * 조회수·좋아요·댓글수는 API 가 준 실측이다.
+ * 예전 이 탭은 유튜브 인기 목록을 그대로 다시 보여 줬다. 유튜브 앱을 켜면
+ * 똑같은 걸 본다 — 우리가 낼 값이 없었다(사장님 판정 2026-08-20).
+ *
+ * 지금은 영상이 아니라 **글감**을 준다. 급상승 영상 제목에서 네이버 자동완성이
+ * 인정한 실제 검색어를 뽑고, 그 검색량·문서수를 실측해 "찾는 사람은 있는데
+ * 글이 없는" 것만 남긴다. 수집은 15분 크론(scripts/youtube-gap.mjs)이 한다.
+ *
+ * 화면에서 계산하는 값은 없다. 전부 수집 때 잰 실측이다.
  */
 
-/*
- * 카테고리는 2026-08-19 KR mostPopular 실측으로 고른 것만 싣는다:
- *  - 여행(19)·교육(27)은 한국 급상승에서 404 — 목록에 넣으면 빈 화면이 된다.
- *  - 음악(10)은 글로벌 팝 뮤비 위주라 블로그·영상 재료가 안 된다(사장님 판정) — 제외.
- * 순서는 블로그 글 재료 가치 순 — 스타·연예 이슈가 맨 앞.
- */
-const CATEGORIES: Array<[string, string]> = [
-    ['', '전체'],
-    ['24', '스타·연예'],
-    ['25', '뉴스·이슈'],
-    ['22', '인물·브이로그'],
-    ['26', '노하우·스타일'],
-    ['1', '영화·애니'],
-    ['17', '스포츠'],
-    ['20', '게임'],
-    ['28', 'IT·과학'],
-    ['2', '자동차'],
-    ['15', '반려동물'],
-    ['23', '코미디'],
-];
+type GapRow = {
+    keyword: string;
+    searchVolume: number;
+    documentCount: number;
+    ratio: number;
+    video: {
+        videoId: string; title: string; channel: string;
+        thumbnail: string; viewCount: number | null; publishedAt: string;
+    };
+};
 
-function relativeTime(iso: string): string {
-    const time = new Date(iso).getTime();
-    if (!Number.isFinite(time)) return '';
-    const minutes = Math.round((Date.now() - time) / 60000);
-    if (minutes < 60) return `${Math.max(1, minutes)}분 전`;
-    if (minutes < 60 * 24) return `${Math.round(minutes / 60)}시간 전`;
-    return `${Math.round(minutes / (60 * 24))}일 전`;
+type GapData = {
+    collectedAt: string;
+    videoCount: number;
+    candidateCount: number;
+    gate: { minVolume: number; maxDocs: number; minRatio: number };
+    rows: GapRow[];
+};
+
+function collectedText(iso: string): string {
+    const at = new Date(iso);
+    if (Number.isNaN(at.getTime())) return '';
+    const minutes = Math.round((Date.now() - at.getTime()) / 60000);
+    if (minutes < 1) return '방금 수집';
+    if (minutes < 60) return `${minutes}분 전 수집`;
+    if (minutes < 60 * 24) return `${Math.round(minutes / 60)}시간 전 수집`;
+    return `${Math.round(minutes / (60 * 24))}일 전 수집`;
 }
 
 function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
-    const [category, setCategory] = useState('');
-    const [videos, setVideos] = useState<TrendingVideo[]>([]);
-    const [usage, setUsage] = useState<KeywordUsage | null>(null);
-    const [error, setError] = useState<{ code?: string; message?: string; missing?: string[] }>({});
-    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState<GapData | null>(null);
+    const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
 
-    const load = useCallback(async (categoryId: string) => {
-        setLoading(true);
-        setError({});
-        const response = await fetchTrendingVideos(categoryId);
-        setLoading(false);
-        if (response.usage) setUsage(response.usage);
-        if (response.ok && response.data) {
-            setVideos(response.data.items || []);
-            return;
-        }
-        setVideos([]);
-        setError({ code: response.error, message: response.message, missing: response.missing });
+    useEffect(() => {
+        let cancelled = false;
+        fetch('/data/youtube-gap.json')
+            .then((response) => (response.ok ? response.json() : Promise.reject(new Error(String(response.status)))))
+            .then((json) => { if (!cancelled) { setData(json); setStatus('ready'); } })
+            .catch(() => { if (!cancelled) setStatus('error'); });
+        return () => { cancelled = true; };
     }, []);
 
-    useEffect(() => { load(category); }, [category, load]);
+    const rows = data?.rows || [];
 
     return (
         <>
             <TabIntro
-                title="유튜브 실시간 · 급상승"
-                desc="유튜브가 고른 한국 인기 영상 목록입니다. 지금 사람들이 무엇을 보고 있는지 그대로 보여 줍니다."
-                source="YouTube Data API · chart=mostPopular (regionCode=KR)"
+                title="유튜브 급상승 → 네이버 빈자리"
+                desc="지금 유튜브에서 터지는 중인데 네이버엔 아직 글이 없는 검색어입니다. 영상 제목을 자른 게 아니라, 네이버 자동완성이 인정한 실제 검색어만 싣습니다."
+                source="유튜브 급상승 + 네이버 자동완성·검색량·문서수 실측"
             />
 
             <div className="lw-toolbar">
-                <div className="lw-segment lw-segment-wrap" role="group" aria-label="카테고리">
-                    {CATEGORIES.map(([id, label]) => (
-                        <button
-                            key={id || 'all'}
-                            type="button"
-                            className={category === id ? 'on' : ''}
-                            onClick={() => setCategory(id)}
-                        >{label}</button>
-                    ))}
-                </div>
-                <span className="lw-count">{loading ? '불러오는 중…' : `${videos.length}개`}</span>
+                <span className="lw-count">
+                    {status === 'loading' ? '불러오는 중…' : `빈자리 ${rows.length}건`}
+                </span>
+                {data && (
+                    <span className="lw-yt-meta">
+                        급상승 {data.videoCount}편에서 검색어 {data.candidateCount}개 실측 · {collectedText(data.collectedAt)}
+                    </span>
+                )}
             </div>
 
-            <UsageBar usage={usage} />
-            <ErrorNote error={error.code} message={error.message} missing={error.missing} />
+            {status === 'error' && (
+                <div className="lw-note">
+                    <strong>아직 수집분이 없습니다.</strong>
+                    <p>15분마다 도는 수집이 한 번 돌면 채워집니다.</p>
+                </div>
+            )}
 
-            <div className="lw-grid lw-grid-video">
-                {videos.map((video) => (
-                    <article key={video.videoId} className="lw-card lw-card-video">
+            {status === 'ready' && rows.length === 0 && (
+                <div className="lw-note">
+                    <strong>이번 회차엔 빈자리가 없었습니다.</strong>
+                    <p>
+                        급상승 검색어가 전부 이미 글이 많다는 뜻입니다
+                        (기준: 검색량 {data?.gate.minVolume}+ · 문서수 {data?.gate.maxDocs}↓).
+                    </p>
+                </div>
+            )}
+
+            <div className="lw-yt-gap">
+                {rows.map((row) => (
+                    <article key={row.keyword} className="lw-card lw-yt-row">
                         <a
-                            className="lw-video-thumb"
-                            href={`https://www.youtube.com/watch?v=${video.videoId}`}
+                            className="lw-yt-thumb"
+                            href={`https://www.youtube.com/watch?v=${row.video.videoId}`}
                             target="_blank"
                             rel="noreferrer"
+                            title={row.video.title}
                         >
-                            {video.thumbnail
-                                ? <img src={video.thumbnail} alt="" loading="lazy" referrerPolicy="no-referrer" />
+                            {row.video.thumbnail
+                                ? <img src={row.video.thumbnail} alt="" loading="lazy" referrerPolicy="no-referrer" />
                                 : <span className="lw-video-noimg" aria-hidden="true" />}
-                            <span className="lw-video-rank">{video.rank}</span>
                         </a>
-                        <h3>{video.title}</h3>
-                        <p className="lw-card-note">{video.channel} · {relativeTime(video.publishedAt)}</p>
-                        <div className="lw-card-metrics">
-                            <div><span>조회수</span><strong>{formatCount(video.viewCount)}</strong></div>
-                            <div><span>좋아요</span><strong>{formatCount(video.likeCount)}</strong></div>
-                            <div><span>댓글</span><strong>{formatCount(video.commentCount)}</strong></div>
+                        <div className="lw-yt-body">
+                            <h3>{row.keyword}</h3>
+                            <div className="lw-yt-metrics">
+                                <span>검색량 <strong>{formatCount(row.searchVolume)}</strong></span>
+                                <span>문서수 <strong>{formatCount(row.documentCount)}</strong></span>
+                                {/* 비율은 나눗셈 하나다 — 점수가 아니다. 클수록 자리가 넓다. */}
+                                <span className="lw-yt-ratio">검색 대비 글 <strong>{row.ratio}배 부족</strong></span>
+                            </div>
+                            <p className="lw-card-note">
+                                {row.video.channel} · 조회 {formatCount(row.video.viewCount)} · {row.video.title}
+                            </p>
                         </div>
-                        <div className="lw-card-actions">
-                            {/* 영상 제목을 그대로 키워드로 넘기지 않는다. 제목은 문장이라
-                                검색어가 아니다. 채널명·제목 앞부분만 사용자가 고쳐 쓰게 한다. */}
-                            <button type="button" onClick={() => onAnalyze(video.title.split(/[|\-–—[\]()]/)[0].trim().slice(0, 25))}>
-                                제목으로 키워드 분석
-                            </button>
+                        <div className="lw-yt-actions">
+                            <button type="button" onClick={() => onAnalyze(row.keyword)}>키워드 분석</button>
                         </div>
                     </article>
                 ))}
             </div>
-
-            {!loading && videos.length === 0 && !error.code && (
-                <div className="lw-note">표시할 영상이 없습니다.</div>
-            )}
         </>
     );
 }

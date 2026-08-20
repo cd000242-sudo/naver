@@ -266,6 +266,28 @@ function LewordStyles() {
             .lw-usage-bar i { display: block; width: 100%; height: 100%; transform-origin: left center; transition: transform .3s ease; }
             .lw-usage-pct { width: 42px; text-align: right; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; flex: none; }
             .lw-usage-reset { color: #646b7d; white-space: nowrap; flex: none; }
+            /* 유튜브 빈자리 — 썸네일 / 본문 / 버튼 3단. 좁아지면 세로로 접힌다. */
+            .lw-yt-meta { margin-left: auto; color: #646b7d; font-size: 12px; }
+            .lw-yt-gap { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+            .lw-yt-row { display: grid; grid-template-columns: 128px 1fr auto; gap: 14px; align-items: center; padding: 12px 14px; }
+            .lw-yt-thumb { display: block; width: 128px; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; background: rgba(255,255,255,.06); }
+            .lw-yt-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+            .lw-yt-body { min-width: 0; }
+            .lw-yt-body h3 { margin: 0 0 6px; font-size: 16px; color: #fff; overflow-wrap: anywhere; }
+            .lw-yt-metrics { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: rgba(235,242,250,.66); }
+            .lw-yt-metrics strong { color: #fff; font-variant-numeric: tabular-nums; }
+            .lw-yt-ratio strong { color: #ffa500; }
+            .lw-yt-row .lw-card-note { margin: 7px 0 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+            .lw-yt-actions { flex: none; }
+            .lw-yt-actions button { padding: 8px 14px; border: 1px solid rgba(124,92,255,.4); border-radius: 8px; background: rgba(124,92,255,.12); color: #cfc2ff; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+            .lw-yt-actions button:hover { background: rgba(124,92,255,.22); color: #fff; }
+            @media (max-width: 720px) {
+                .lw-yt-row { grid-template-columns: 92px 1fr; }
+                .lw-yt-thumb { width: 92px; }
+                .lw-yt-actions { grid-column: 1 / -1; }
+                .lw-yt-actions button { width: 100%; }
+                .lw-yt-meta { margin-left: 0; flex-basis: 100%; }
+            }
             .lw-usage-err { margin: 4px 0 0; color: #ff6b81; font-size: 12.5px; }
             .lw-usage-warn { margin: 9px 0 0; padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(245,197,24,.32); background: rgba(245,197,24,.07); color: rgba(235,242,250,.82); font-size: 12.5px; line-height: 1.55; }
             .lw-usage-warn.hard { border-color: rgba(255,107,129,.36); background: rgba(255,107,129,.08); }

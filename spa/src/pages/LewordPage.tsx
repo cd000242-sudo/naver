@@ -24,7 +24,7 @@ const TABS = [
     { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },
     { id: 'kin', label: '지식인 황금질문', short: '황금질문', icon: '✦' },
     { id: 'affiliate', label: '제휴 황금키워드', short: '제휴', icon: '◇' },
-    { id: 'youtube', label: '유튜브 실시간·급상승', short: '유튜브', icon: '▶' },
+    { id: 'youtube', label: '유튜브 급상승 글감', short: '유튜브 글감', icon: '▶' },
     { id: 'rank', label: '노출 추적', short: '노출 추적', icon: '↗' },
     { id: 'keys', label: '내 API 키', short: 'API 키', icon: '⚿' },
 ] as const;
