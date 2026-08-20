@@ -249,6 +249,8 @@ function LewordStyles() {
             .lw-kg-body small { display: block; margin-top: 7px; font-size: 12px; color: rgba(235,242,250,.6); }
             .lw-kg-body small b { color: #69b7ff; font-weight: 700; }
             .lw-kg-up { font-style: normal; color: #2ecc71; font-weight: 700; }
+            /* 이미 작업한 질문 표시 — 중복 작업을 막는다. */
+            .lw-kg-worked { font-style: normal; color: #ffa500; font-weight: 700; }
             .lw-kg-kw { border: 0; background: none; padding: 0; font-size: 12px; color: #69b7ff; cursor: pointer; text-decoration: underline; }
             .lw-kg-copy { flex: none; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: none; color: rgba(235,242,250,.65); font-size: 11.5px; padding: 6px 10px; cursor: pointer; white-space: nowrap; }
             .lw-kg-copy:hover { border-color: rgba(255,215,0,.5); color: #fff; }

@@ -44,6 +44,12 @@ const LANES = [
     { id: 'realtime', label: '실시간 Q&A', hint: '지식인 홈 "많이 본 Q&A" 30건 전부 — 지금 사람들이 실제로 읽는 질문' },
     { id: 'rising', label: '급상승 Q&A', hint: '직전 수집 대비 조회수가 붙는 속도 순 — 두 번 실측한 차이만 싣는다' },
     { id: 'hidden', label: '숨은 Q&A', hint: '목록엔 안 떴지만 조회 많고 답변 적은 최신 질문 — 답변 선점 자리' },
+    /*
+     * 내가 작업한 질문(사장님 지시 2026-08-20 "자꾸 바뀌니까 다시 찾아야 한다").
+     * 목록은 15분마다 갈리므로, 답변 초안을 만든 질문은 초안까지 통째로
+     * 이 브라우저에 남겨 둔다 — 수집이 바뀌어도 사라지지 않는다.
+     */
+    { id: 'worked', label: '내가 작업한 질문', hint: '답변 초안을 만든 질문 — 목록이 갱신돼도 여기 남습니다(이 브라우저 저장)' },
 ] as const;
 
 type LaneId = (typeof LANES)[number]['id'];
@@ -54,6 +60,19 @@ type LaneId = (typeof LANES)[number]['id'];
  * 최근 9개 안에 링크 답변이 있으면 체크박스를 잠근다.
  */
 const LEDGER_KEY = 'leaderspro.leword.kinAnswerLedger.v1';
+/** 작업한 질문 보관함 — 초안까지 함께 남긴다. */
+const WORKED_KEY = 'leaderspro.leword.kinWorked.v1';
+
+type WorkedItem = KinQ & { draft: string; savedAt: string; copied?: boolean };
+
+function loadWorked(): WorkedItem[] {
+    try {
+        const parsed = JSON.parse(localStorage.getItem(WORKED_KEY) || '[]');
+        return Array.isArray(parsed) ? parsed.slice(0, 200) : [];
+    } catch {
+        return [];
+    }
+}
 const BLOG_URL_KEY = 'leaderspro.leword.kinBlogUrl.v1';
 
 type LedgerEntry = { at: string; withLink: boolean };
@@ -83,6 +102,33 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
     const [blogUrl, setBlogUrl] = useState(() => localStorage.getItem(BLOG_URL_KEY) || '');
     const [ledger, setLedger] = useState<LedgerEntry[]>(() => loadLedger());
     const [draftCopied, setDraftCopied] = useState(false);
+    /** 작업한 질문 보관함 — 수집이 갈려도 남는다. */
+    const [worked, setWorked] = useState<WorkedItem[]>(() => loadWorked());
+
+    const docIdOfLink = (link: string) => (link.match(/docId=(\d+)/) || [])[1] || link;
+    /** 초안을 만들면 그 질문을 통째로 저장한다(같은 질문은 최신본으로 갱신). */
+    const rememberWorked = (q: KinQ, draftText: string, copiedFlag?: boolean) => {
+        setWorked((prev) => {
+            const id = docIdOfLink(q.link);
+            const rest = prev.filter((item) => docIdOfLink(item.link) !== id);
+            const before = prev.find((item) => docIdOfLink(item.link) === id);
+            const next = [{
+                ...q,
+                draft: draftText,
+                savedAt: new Date().toISOString(),
+                copied: copiedFlag ?? before?.copied ?? false,
+            }, ...rest].slice(0, 200);
+            try { localStorage.setItem(WORKED_KEY, JSON.stringify(next)); } catch { /* 계속 */ }
+            return next;
+        });
+    };
+    const forgetWorked = (link: string) => {
+        setWorked((prev) => {
+            const next = prev.filter((item) => docIdOfLink(item.link) !== docIdOfLink(link));
+            try { localStorage.setItem(WORKED_KEY, JSON.stringify(next)); } catch { /* 계속 */ }
+            return next;
+        });
+    };
 
     const linksInLast9 = ledger.slice(0, 9).filter((entry) => entry.withLink).length;
     const linkAllowed = linksInLast9 === 0;
@@ -167,7 +213,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
         if (picked && picked !== 'claude') {
             const viaApp = await bridgeKinAnswer({ ...input, provider: picked });
             setGenerating(false);
-            if (viaApp.status === 'ok') { setDraft(viaApp.answer); return; }
+            if (viaApp.status === 'ok') { setDraft(viaApp.answer); rememberWorked(work, viaApp.answer); return; }
             setGenNote(viaApp.status === 'error'
                 ? `생성 실패(${picked}): ${viaApp.message}`
                 : `${picked} 는 LEWORD 앱을 통해 돕니다 — 앱을 켜고 다시 눌러 주세요(내 API 키 탭에서 다른 엔진으로 바꿀 수도 있습니다).`);
@@ -178,6 +224,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
         if (viaKeys.ok && viaKeys.data?.answer) {
             setGenerating(false);
             setDraft(viaKeys.data.answer);
+            rememberWorked(work, viaKeys.data.answer);
             return;
         }
         if (viaKeys.error && viaKeys.error !== 'needs-keys') {
@@ -199,6 +246,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
         setGenerating(false);
         if (viaApp.status === 'ok') {
             setDraft(viaApp.answer);
+            rememberWorked(work, viaApp.answer);
             return;
         }
         if (viaApp.status === 'error') {
@@ -216,6 +264,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
         // 복사 = 게시로 간주해 장부에 적는다 — 10:1 규칙의 눈금이다.
         const next = [{ at: new Date().toISOString(), withLink: withLink && linkAllowed }, ...ledger].slice(0, 50);
         setLedger(next);
+        if (work) rememberWorked(work, draft, true);
         try { localStorage.setItem(LEDGER_KEY, JSON.stringify(next)); } catch { /* 계속 */ }
     };
 
@@ -237,12 +286,17 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
     const docIdOf = (link: string) => (link.match(/docId=(\d+)/) || [])[1] || link;
 
     const laneItems = useMemo<KinQ[]>(() => {
+        // 보관함은 수집과 무관하다 — 데이터가 없어도 보인다.
+        if (lane === 'worked') return worked;
         if (!data) return [];
         if (lane === 'realtime') return data.realtime || [];
         if (lane === 'rising') return data.rising || [];
         // 정렬은 수집기가 한다 — 지금 조회가 붙는 순. 화면이 다시 섞지 않는다.
         return data.hidden || [];
-    }, [data, lane]);
+    }, [data, lane, worked]);
+
+    /** 이미 작업한 질문인지 — 다른 레인에서도 표시해 중복 작업을 막는다. */
+    const workedIds = useMemo(() => new Set(worked.map((item) => docIdOfLink(item.link))), [worked]);
 
     const fetchedLabel = data?.fetchedAt
         ? new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(data.fetchedAt))
@@ -265,7 +319,8 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                         onClick={() => setLane(item.id)}
                     >{item.label} <em>{item.id === 'realtime' ? (data?.realtime || []).length
                         : item.id === 'rising' ? (data?.rising || []).length
-                            : (data?.hidden || []).length}</em></button>
+                            : item.id === 'worked' ? worked.length
+                                : (data?.hidden || []).length}</em></button>
                 ))}
             </div>
             <p className="lw-write-hint">{LANES.find((item) => item.id === lane)?.hint}</p>
@@ -284,11 +339,17 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                     {data?.criteria?.rising ? ` 기준: ${data.criteria.rising}` : ''}
                 </div>
             )}
+            {lane === 'worked' && laneItems.length === 0 && (
+                <div className="lw-note">
+                    아직 없습니다. 질문에서 [답변 달기] → [AI 답변 생성]을 하면 그 질문과 초안이 여기 남습니다
+                    — 목록이 15분마다 갱신돼도 사라지지 않습니다.
+                </div>
+            )}
             {status === 'ready' && lane === 'hidden' && laneItems.length === 0 && (
                 <div className="lw-note">이번 실측에서 기준(조회 많음 · 답변 적음)을 만족한 숨은 질문이 없습니다.</div>
             )}
 
-            {status === 'ready' && laneItems.length > 0 && (
+            {(status === 'ready' || lane === 'worked') && laneItems.length > 0 && (
                 <ol className="lw-kg-list">
                     {laneItems.map((q, index) => (
                         <li key={q.link}>
@@ -303,6 +364,12 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                                     )}
                                     {typeof q.answers === 'number' && <> · 답변 {q.answers}</>}
                                     {q.askedAt && <> · {q.askedAt.slice(5)} 질문</>}
+                                    {lane !== 'worked' && workedIds.has(docIdOfLink(q.link)) && (
+                                        <> · <em className="lw-kg-worked">✓ 작업함</em></>
+                                    )}
+                                    {lane === 'worked' && (q as WorkedItem).copied && (
+                                        <> · <em className="lw-kg-worked">✓ 복사함</em></>
+                                    )}
                                     {typeof q.perHour === 'number' && <> · <em className="lw-kg-up">시간당 +{formatCount(q.perHour)}</em></>}
                                     {q.keyword && (
                                         <> · 키워드 {onAnalyze
@@ -312,7 +379,12 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                                 </small>
                             </div>
                             <span className="lw-kg-row-actions">
-                                <button type="button" className="lw-kg-answer" onClick={() => openWork(q)}>답변 달기</button>
+                                {lane === 'worked' ? (
+                                    <button type="button" className="lw-kg-copy" onClick={() => forgetWorked(q.link)}>보관 해제</button>
+                                ) : null}
+                                <button type="button" className="lw-kg-answer" onClick={() => openWork(q)}>
+                                    {workedIds.has(docIdOfLink(q.link)) ? '이어서 작업' : '답변 달기'}
+                                </button>
                                 <button
                                     type="button"
                                     className="lw-kg-copy"
