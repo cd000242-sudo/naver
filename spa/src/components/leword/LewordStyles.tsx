@@ -273,11 +273,17 @@ function LewordStyles() {
              */
             .lw-metric-verdict { padding: 2px 9px; border-radius: 999px; font-weight: 700; }
             /* 제휴 제목 만들기 — 세 레인(쿠팡·토스·브랜드커넥트)이 같은 모양을 쓴다. */
-            .lw-aff-titles { margin-top: 10px; }
+            /*
+             * 카드(.lw-product)가 4칸 grid 라 이 블록이 5번째 칸으로 밀려
+             * 26px 짜리 첫 칸에 들어갔다 — 버튼 글자가 세로로 눌렸다
+             * (사장님 실측 2026-08-20). 한 줄을 통째로 쓰게 못박는다.
+             */
+            .lw-aff-titles { grid-column: 1 / -1; margin-top: 10px; min-width: 0; }
             .lw-aff-make {
                 display: inline-flex; align-items: baseline; gap: 7px; padding: 7px 13px;
                 border: 1px solid rgba(255,165,0,.4); border-radius: 8px; background: rgba(255,165,0,.1);
                 color: #ffc966; font-size: 12.5px; font-weight: 700; cursor: pointer;
+                white-space: nowrap;
             }
             .lw-aff-make:hover:not(:disabled) { background: rgba(255,165,0,.2); color: #fff; }
             .lw-aff-make:disabled { opacity: .6; cursor: not-allowed; }
