@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NewBadge from './NewBadge';
 import { useUnseenNoticeCount } from '../lib/useNoticeAlerts';
@@ -9,26 +8,13 @@ import { useUnseenNoticeCount } from '../lib/useNoticeAlerts';
  * 새소식은 안 읽은 공지가 있을 때만 나타나며 홈 공지 영역으로 보낸다.
  */
 /**
- * 접힘 상태는 이 브라우저에 남긴다 — 페이지를 옮길 때마다 다시 펴지면
- * 접은 의미가 없다. 기본은 펼침(사장님 2026-08-20 "기본적으로 보여주지만
- * 접었다 폈다 가능해?").
+ * 접힘 상태는 Layout 이 들고 있다 — 음악 플레이어와 같이 접혀야 하는데
+ * 그건 별도 컴포넌트라 이 안에 두면 공유가 안 된다(사장님 지적 2026-08-20
+ * "음악 재생 버튼은 같이 안 접히네?").
  */
-const OPEN_KEY = 'leaderspro.floatStack.open.v1';
-const loadOpen = () => {
-    try { return localStorage.getItem(OPEN_KEY) !== '0'; } catch { return true; }
-};
-
-function FloatStack() {
+function FloatStack({ open, onToggle }: { open: boolean; onToggle: () => void }) {
     const navigate = useNavigate();
     const unseenNoticeCount = useUnseenNoticeCount();
-    const [open, setOpen] = useState(loadOpen);
-    const toggle = () => {
-        setOpen((was) => {
-            const next = !was;
-            try { localStorage.setItem(OPEN_KEY, next ? '1' : '0'); } catch { /* 계속 */ }
-            return next;
-        });
-    };
     const baseStyle: React.CSSProperties = {
         position: 'fixed',
         right: 24,
@@ -158,7 +144,7 @@ function FloatStack() {
             <button
                 type="button"
                 className={`lp-float-toggle lp-float-toggle-${open ? 'open' : 'shut'}`}
-                onClick={toggle}
+                onClick={onToggle}
                 aria-expanded={open}
                 title={open ? '버튼 접기' : '문의·단톡방·유튜브 펴기'}
                 style={{

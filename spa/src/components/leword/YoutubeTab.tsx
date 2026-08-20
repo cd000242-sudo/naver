@@ -79,7 +79,12 @@ function dateText(iso: string): string {
 function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [data, setData] = useState<GapData | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
-    /** 지금 재생 중인 카드. 60개를 한꺼번에 띄우면 화면이 죽는다 — 누른 하나만 iframe 이 된다. */
+    /*
+     * 지금 재생 중인 **카드**. 열쇠는 videoId 가 아니라 검색어다 —
+     * 같은 영상에서 나온 카드가 여럿이라 videoId 로 잡으면 하나를 눌렀을 때
+     * 그 영상 카드가 전부 같이 재생됐다(사장님 실측 2026-08-20).
+     * 60개를 한꺼번에 띄우면 화면이 죽으니 누른 하나만 iframe 이 된다.
+     */
     const [playing, setPlaying] = useState('');
     const [ideas, setIdeas] = useState<Record<string, IdeaState>>({});
     const [form, setForm] = useState('');
@@ -186,7 +191,7 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     return (
                         <article key={row.keyword} className="lw-yt-row">
                             <div className="lw-yt-video">
-                                {playing === row.video.videoId ? (
+                                {playing === row.keyword ? (
                                     <iframe
                                         src={`https://www.youtube-nocookie.com/embed/${row.video.videoId}?autoplay=1`}
                                         title={row.video.title}
@@ -194,7 +199,7 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         allowFullScreen
                                     />
                                 ) : (
-                                    <button type="button" onClick={() => setPlaying(row.video.videoId)} aria-label={`${row.video.title} 재생`}>
+                                    <button type="button" onClick={() => setPlaying(row.keyword)} aria-label={`${row.video.title} 재생`}>
                                         {row.video.thumbnail
                                             ? <img src={row.video.thumbnail} alt="" loading="lazy" referrerPolicy="no-referrer" />
                                             : <span className="lw-video-noimg" aria-hidden="true" />}

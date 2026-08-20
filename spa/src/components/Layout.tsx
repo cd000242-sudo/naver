@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
@@ -7,6 +8,7 @@ import SummerEffect from './SummerEffect';
 import FloatStack from './FloatStack';
 import ScrollToTop from './ScrollToTop';
 import NoticeModal from './NoticeModal';
+import { loadFloatOpen, saveFloatOpen } from '../lib/floatStack';
 
 /**
  * 모든 페이지 공통 레이아웃.
@@ -15,6 +17,9 @@ import NoticeModal from './NoticeModal';
  */
 function Layout() {
     const location = useLocation();
+    // 우하단(문의 버튼 + 음악)은 하나로 접힌다 — 상태를 여기서 들고 둘에게 넘긴다.
+    const [floatOpen, setFloatOpen] = useState(loadFloatOpen);
+    const toggleFloat = () => setFloatOpen((was) => { saveFloatOpen(!was); return !was; });
     const pathname = location.pathname.replace(/\/$/, '') || '/';
     const isLewordConsole = pathname === '/leword' || pathname === '/leword.html';
     // 여름 이펙트가 계절 조건 없이 항상 떠서 겨울에도 태양 입자가 날렸다(잠복 결함).
@@ -45,13 +50,13 @@ function Layout() {
             </main>
             {!isLewordConsole && <Footer />}
             {!isLewordConsole && isSummerSeason() && <SummerEffect />}
-            {!musicOff && <MusicPlayer />}
+            {!musicOff && <MusicPlayer hidden={!floatOpen} />}
             {/*
               * 문의·단톡방·유튜브 버튼은 콘솔에서도 보인다(사장님 지시 2026-08-20
               * "우측 하단에 있던 버튼들이 다 어디 갔나요?"). 콘솔이라고 문의 경로를
               * 없애면 여기서 막힌 사람이 물어볼 데가 사라진다.
               */}
-            <FloatStack />
+            <FloatStack open={floatOpen} onToggle={toggleFloat} />
             {isHome && <NoticeModal />}
         </>
     );

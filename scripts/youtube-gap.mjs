@@ -52,6 +52,8 @@ const MIN_VOLUME = Number(process.env.YTGAP_MIN_VOLUME || 200);
 const MAX_DOCS = Number(process.env.YTGAP_MAX_DOCS || 5000);
 const MIN_RATIO = Number(process.env.YTGAP_MIN_RATIO || 1);
 const MAX_ROWS = Number(process.env.YTGAP_MAX_ROWS || 60);
+/** 영상 하나가 목록을 도배하지 못하게. */
+const MAX_PER_VIDEO = Number(process.env.YTGAP_MAX_PER_VIDEO || 2);
 
 /*
  * 제목 맨 앞이 흔한 부사면 자동완성이 엉뚱한 데로 샌다 — "과연" 을 물으면
@@ -218,7 +220,22 @@ async function main() {
 
     // 자리가 넓은 순 — 검색량 대비 글이 적을수록 앞이다.
     rows.sort((left, right) => right.ratio - left.ratio);
-    const kept = rows.slice(0, MAX_ROWS);
+
+    /*
+     * 한 영상이 목록을 도배하지 못하게 막는다(사장님 지적 2026-08-20
+     * "같은 소스로 만들었네?"). 영상 하나에서 최우수산 / 최우수산 재방송 /
+     * 최우수산 시청률 이 줄줄이 나와 화면이 같은 썸네일로 채워졌다.
+     * 자리가 제일 넓은 것부터 담되 영상당 둘까지만 — 공급은 172편이라 넉넉하다.
+     */
+    const perVideo = new Map();
+    const kept = [];
+    for (const row of rows) {
+        const used = perVideo.get(row.video.videoId) || 0;
+        if (used >= MAX_PER_VIDEO) continue;
+        perVideo.set(row.video.videoId, used + 1);
+        kept.push(row);
+        if (kept.length >= MAX_ROWS) break;
+    }
 
     mkdirSync(dirname(OUT), { recursive: true });
     writeFileSync(OUT, JSON.stringify({

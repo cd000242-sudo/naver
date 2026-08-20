@@ -66,7 +66,12 @@ export function isMusicSuppressed(): boolean {
     return false;
 }
 
-function MusicPlayer() {
+/**
+ * hidden 이면 보이는 부분만 감춘다 — **소리는 계속 난다**.
+ * 접기는 "우하단을 치워 달라"는 뜻이지 "음악을 꺼 달라"가 아니다.
+ * 오디오 엘리먼트는 이 아래 별도로 렌더되어 그대로 살아 있다.
+ */
+function MusicPlayer({ hidden = false }: { hidden?: boolean } = {}) {
     const hostRef = useRef<HTMLDivElement | null>(null);
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const playerElementIdRef = useRef('');
@@ -309,11 +314,11 @@ function MusicPlayer() {
             <div
                 className="lp-music-player"
                 style={{
+                    display: hidden ? 'none' : 'flex',
                     position: 'fixed',
                     bottom: 200,
                     right: 24,
                     zIndex: 10000,
-                    display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'flex-end',
                     gap: 8,
@@ -362,25 +367,39 @@ function MusicPlayer() {
                         if (!isPlaying) toggle();
                     }}
                     title="음악 플레이어"
+                    /*
+                     * 알약형 그라데이션을 걷어냈다(사장님 2026-08-20 "고급지고 사각형으로
+                     * 깔끔하게"). 어두운 유리판 + 금색 실선 하나, 글자는 한 줄.
+                     * 상태는 색이 아니라 왼쪽 표시자로 말한다 — 재생 중이면 금색이 켜진다.
+                     */
                     style={{
                         pointerEvents: 'auto',
-                        background: 'linear-gradient(135deg, rgba(255,183,197,0.25), rgba(201,168,76,0.25))',
-                        border: '1px solid rgba(255,183,197,0.5)',
-                        backdropFilter: 'blur(12px)',
-                        borderRadius: 28,
-                        padding: '10px 16px',
-                        color: '#fff',
+                        background: 'rgba(16,17,22,0.92)',
+                        border: '1px solid rgba(255,215,0,0.28)',
+                        backdropFilter: 'blur(16px)',
+                        borderRadius: 10,
+                        padding: '9px 14px',
+                        color: 'rgba(255,255,255,0.92)',
                         cursor: 'pointer',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: 8,
-                        fontWeight: 700,
-                        fontSize: 13,
-                        boxShadow: '0 4px 20px rgba(255,107,138,0.2)',
+                        gap: 10,
+                        fontWeight: 600,
+                        fontSize: 12.5,
+                        letterSpacing: '0.01em',
+                        boxShadow: '0 8px 28px rgba(0,0,0,0.42)',
                     }}
                 >
-                    <span style={{ fontSize: 16 }}>{isPlaying ? '일시정지' : '재생'}</span>
-                    <span>음악</span>
+                    <span
+                        aria-hidden="true"
+                        style={{
+                            width: 6, height: 6, borderRadius: 2, flex: 'none',
+                            background: isPlaying ? '#ffd700' : 'rgba(255,255,255,0.28)',
+                            boxShadow: isPlaying ? '0 0 8px rgba(255,215,0,0.7)' : 'none',
+                            transition: 'background .2s, box-shadow .2s',
+                        }}
+                    />
+                    <span>{isPlaying ? '음악 재생 중' : '음악'}</span>
                 </button>
             </div>
         </>
