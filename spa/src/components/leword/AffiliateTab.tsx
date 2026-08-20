@@ -213,7 +213,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 <span style={{
                                                     color: badge.color, background: badge.bg,
                                                     border: `1px solid ${badge.color}44`, borderRadius: 999,
-                                                    padding: '2px 10px', fontWeight: 700, fontSize: 12,
+                                                    padding: '2px 8px', fontWeight: 900, fontSize: 10.5,
                                                 }}>{badge.label}</span>
                                             )}
                                             {item.reward && <span className="lw-discount">{item.reward}</span>}
@@ -229,19 +229,29 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 : <span className="lw-linktag">발급 필요</span>}
                                         </div>
                                         {/*
-                                          * 토스는 공개 상품 페이지가 없다 — shopping.toss.im/product/{id} 는
-                                          * 전부 403 AccessDenied 였다(사장님 실측 2026-08-20, 원문 덤프에도
-                                          * 웹 주소 없음). 지어낸 주소로 보내느니 콘솔로 보내고 이름을 복사해
-                                          * 검색하게 한다.
+                                          * 토스는 공개 상품 페이지가 없다(전 URL 403 실측). 예전엔 없는
+                                          * 주소 대신 콘솔 홈으로 보냈는데, 콘솔엔 검색이 없어 막다른
+                                          * 길이었다(사장님 실측 2026-08-21 "홈으로 와지는데"). 링크가
+                                          * 없으면 링크인 척하지 않는다 — 이름을 복사해 주고 그렇게
+                                          * 말한다. 토스 앱 검색에 붙여넣는 재료다.
                                           */}
-                                        <a
-                                            className="lw-product-name"
-                                            href={item.url || active.consoleUrl}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            title={item.url ? undefined : '상품명 복사됨 — 콘솔 검색창에 붙여넣으세요'}
-                                            onClick={() => { if (!item.url) navigator.clipboard?.writeText(item.name); }}
-                                        >{item.name}</a>
+                                        {item.url ? (
+                                            <a className="lw-product-name" href={item.url} target="_blank" rel="noreferrer">{item.name}</a>
+                                        ) : (
+                                            <button
+                                                type="button"
+                                                className="lw-product-name lw-product-name-copy"
+                                                title="상품명 복사 — 토스 앱 쇼핑 검색에 붙여넣으세요"
+                                                onClick={() => {
+                                                    navigator.clipboard?.writeText(item.name);
+                                                    setCopied(`name:${item.name}`);
+                                                    window.setTimeout(() => setCopied(''), 1800);
+                                                }}
+                                            >
+                                                {item.name}
+                                                <em>{copied === `name:${item.name}` ? '복사됨 ✓' : '⧉ 이름 복사'}</em>
+                                            </button>
+                                        )}
                                         {titleLine && (
                                             <div title={titleLine.basis} style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '4px 0 2px', minWidth: 0 }}>
                                                 <span style={{ flexShrink: 0, padding: '1px 7px', borderRadius: 6, background: 'rgba(251,191,36,.14)', color: '#fbbf24', fontSize: 10, fontWeight: 800 }}>{titleLine.label}</span>

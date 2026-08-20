@@ -342,7 +342,7 @@ function LewordStyles() {
                 padding: 0; border: 0; background: none; cursor: pointer; font-family: inherit; font-size: 13px;
                 color: #cfc2ff; border-bottom: 1px solid rgba(207,194,255,.35);
             }
-            .lw-metric-verdict { padding: 2px 9px; border-radius: 999px; font-weight: 700; }
+            .lw-metric-verdict { padding: 3px 10px; border-radius: 8px; font-weight: 800; font-size: 12px; }
             .lw-reconnect-back { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; padding: 4vh 4vw; background: rgba(4,6,10,.78); }
             .lw-reconnect { width: 100%; max-width: 420px; padding: 22px; border: 1px solid rgba(255,165,0,.35); border-radius: 15px; background: #10131a; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
             .lw-reconnect h3 { margin: 0 0 8px; font-size: 18px; color: #fff; }
@@ -1090,10 +1090,33 @@ function LewordStyles() {
             .lw-rocket { border-color: rgba(90,169,255,.45); background: rgba(90,169,255,.13); color: #8ec5ff; }
             .lw-product-name { display: block; margin-bottom: 8px; color: #fff; font-size: 13.5px; font-weight: 800; line-height: 1.45; text-decoration: none; word-break: keep-all; }
             .lw-product-name:hover { color: #cfc4ff; }
-            .lw-product-metrics { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 9px; }
-            .lw-product-metrics span { color: rgba(235,242,250,.5); font-size: 11px; }
-            .lw-product-metrics .lw-product-price strong { color: #ffd700; font-size: 14px; }
-            .lw-product-metrics .lw-product-need { padding: 2px 8px; border: 1px solid rgba(46,204,113,.35); border-radius: 999px; background: rgba(46,204,113,.1); }
+            /* 링크 없는 상품명(토스) — 링크인 척하지 않는 복사 버튼. */
+            button.lw-product-name {
+                border: 0; background: none; padding: 0; text-align: left;
+                cursor: pointer; font-family: inherit; width: 100%;
+            }
+            .lw-product-name-copy em {
+                margin-left: 8px; font-style: normal; font-size: 11px; font-weight: 800;
+                color: rgba(235,242,250,.45); white-space: nowrap;
+            }
+            .lw-product-name-copy:hover em { color: #cfc4ff; }
+            /*
+             * 지표줄 한 규격(사장님 지적 2026-08-21 "박스들이 너무 엉성하잖아").
+             * 예전엔 판정 상자·니즈 알약·민짜 글씨가 제각각 키와 모양이라
+             * 줄이 울퉁불퉁했다. 규칙: 칩(판정·니즈)은 같은 높이·같은 8px
+             * 모서리·테두리 없는 옅은 바탕, 나머지 수치는 같은 12px 민짜.
+             */
+            .lw-product-metrics {
+                display: flex; align-items: center; gap: 6px 12px; flex-wrap: wrap;
+                margin-bottom: 9px; font-variant-numeric: tabular-nums;
+            }
+            .lw-product-metrics span { color: rgba(235,242,250,.55); font-size: 12px; line-height: 1.5; }
+            .lw-product-metrics .lw-product-price strong { color: #ffd700; font-size: 14px; margin-left: 0; }
+            .lw-product-metrics .lw-metric-verdict,
+            .lw-product-metrics .lw-product-need {
+                padding: 3px 10px; border-radius: 8px; border: 0;
+            }
+            .lw-product-metrics .lw-product-need { background: rgba(46,204,113,.1); color: rgba(235,242,250,.78); }
             .lw-product-metrics .lw-product-need strong { color: #2ecc71; }
             .lw-product-metrics .lw-product-persale strong { color: #ffa500; font-size: 13px; }
             .lw-product-metrics strong { color: #fff; font-size: 12px; font-weight: 800; margin-left: 3px; }
