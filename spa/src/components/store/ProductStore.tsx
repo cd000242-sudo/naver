@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../../lib/pricingSchedule';
+import { fetchSiteContent } from '../../lib/siteOps';
 import {
-    individualTotal, normalPriceOf, perMonth, sellableProducts, TERMS, won,
+    applyStoreOverrides, individualTotal, normalPriceOf, perMonth, sellableProducts, TERMS, won,
     type Product, type TermId,
 } from '../../lib/productCatalog';
 import StoreStyles from './StoreStyles';
@@ -30,7 +31,19 @@ function ProductStore({ onPick }: { onPick?: (pick: StorePick | null) => void })
     const [cart, setCart] = useState<string[]>([]);
     const dday = daysToSwitch();
     const normalActive = isNormalPricingActive();
-    const products = sellableProducts();
+    /*
+     * 어드민 [상점 제품] 저장값을 얹는다. 오기 전까지는 카탈로그 기본값으로
+     * 그린다 — 저장값이 없는 보통의 경우 화면이 한 번도 안 바뀐다.
+     */
+    const [catalog, setCatalog] = useState<Product[]>(() => applyStoreOverrides(null));
+    useEffect(() => {
+        let cancelled = false;
+        fetchSiteContent().then((content) => {
+            if (!cancelled && content?.store?.products) setCatalog(applyStoreOverrides(content.store.products));
+        }).catch(() => { /* 못 읽으면 기본값 그대로 */ });
+        return () => { cancelled = true; };
+    }, []);
+    const products = sellableProducts(catalog);
 
     const toggle = (product: Product) => {
         setCart((was) => {
@@ -117,7 +130,10 @@ function ProductStore({ onPick }: { onPick?: (pick: StorePick | null) => void })
                         >
                             {!product.bundle && (
                                 <div className="st-shot" style={{ ['--accent' as string]: product.accent }}>
-                                    <img src={product.image} alt="" loading="lazy" />
+                                    {/* 어드민이 새로 만든 제품은 그림이 없다 — 기호로 채운다. 빈 src 는 깨진 그림이 된다. */}
+                                    {product.image
+                                        ? <img src={product.image} alt="" loading="lazy" />
+                                        : <span className="st-shot-glyph" style={{ color: product.accent }} aria-hidden="true">{product.glyph}</span>}
                                     {product.trial && <span className="st-flag">무료 체험 있음</span>}
                                     {product.id === 'leword' && <span className="st-flag st-flag-web">설치 없이 바로</span>}
                                 </div>
@@ -146,7 +162,7 @@ function ProductStore({ onPick }: { onPick?: (pick: StorePick | null) => void })
                                 </div>
                                 <p className="st-permo">
                                     {monthly && term !== 'monthly' ? `월 ${won(monthly)}원 꼴` : ' '}
-                                    {product.bundle && ` · 따로 사면 ${won(individualTotal(term))}원`}
+                                    {product.bundle && ` · 따로 사면 ${won(individualTotal(term, catalog))}원`}
                                 </p>
 
                                 <button

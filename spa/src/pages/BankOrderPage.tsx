@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
-import { normalPriceOf, PRODUCTS, TERMS, won, type TermId } from '../lib/productCatalog';
+import { applyStoreOverrides, normalPriceOf, TERMS, won, type Product, type TermId } from '../lib/productCatalog';
+import { fetchSiteContent } from '../lib/siteOps';
 import { color, gradient, onGold, whiteA } from '../styles/tokens';
 
 /**
@@ -65,12 +66,12 @@ async function fetchOrderStatus(orderId: string) {
  * 알아서 담아온 것을 통째로 무시했다(사장님 실측 2026-08-20). 값은 카탈로그
  * 실측이고, 10월 1일이 지나면 두 배가 된다 — 판단은 pricingSchedule 이 한다.
  */
-function readCartOrder(params: URLSearchParams): { label: string; names: string[]; amount: number } | null {
+function readCartOrder(params: URLSearchParams, catalog: Product[]): { label: string; names: string[]; amount: number } | null {
     const ids = (params.get('items') || '').split(',').map((id) => id.trim()).filter(Boolean);
     const term = params.get('term') as TermId | null;
     if (ids.length === 0 || !term || !TERMS.some((item) => item.id === term)) return null;
     const picked = ids
-        .map((id) => PRODUCTS.find((product) => product.id === id && product.status === 'on'))
+        .map((id) => catalog.find((product) => product.id === id && product.status === 'on'))
         .filter((product): product is NonNullable<typeof product> => Boolean(product) && Boolean(product!.prices[term]));
     if (picked.length === 0) return null;
     const normal = isNormalPricingActive();
@@ -99,16 +100,28 @@ function BankOrderPage() {
     const [licCopyLabel, setLicCopyLabel] = useState('📋 복사');
     const [shake, setShake] = useState<'name' | 'email' | null>(null);
     const pollingRef = useRef<number | null>(null);
-    /** 상점에서 담아온 주문. 있으면 기간권 고르기를 건너뛴다. */
-    const cartOrder = readCartOrder(searchParams);
+    /*
+     * 상점에서 담아온 주문. 값은 상점과 **같은 저장값**(어드민 덮어쓰기)으로
+     * 계산해야 한다 — 아니면 상점에서 본 값과 결제 값이 어긋난다.
+     */
+    const [catalog, setCatalog] = useState<Product[]>(() => applyStoreOverrides(null));
+    useEffect(() => {
+        let cancelled = false;
+        fetchSiteContent().then((content) => {
+            if (!cancelled && content?.store?.products) setCatalog(applyStoreOverrides(content.store.products));
+        }).catch(() => { /* 기본값 그대로 */ });
+        return () => { cancelled = true; };
+    }, []);
+    const cartOrder = readCartOrder(searchParams, catalog);
 
     useEffect(() => {
-        if (!cartOrder || selected) return;
+        if (!cartOrder) return;
         // 아래 submitOrder 가 쓰는 모양 그대로 만든다 — futurePrice 를 안 주면
         // productPrice 가 이 값을 그대로 돌려준다(전환 판단은 이미 끝났다).
+        // 덮어쓰기가 늦게 도착해 값이 바뀌면 따라간다(제출 전까지만).
         setSelected({ id: 'cart', name: cartOrder.label, price: cartOrder.amount, period: '' });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [cartOrder?.label, cartOrder?.amount]);
 
     useEffect(() => {
         const prev = document.title;

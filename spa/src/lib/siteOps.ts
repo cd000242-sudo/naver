@@ -26,6 +26,18 @@ export type SiteContent = {
             metric?: string;
         }>;
     };
+    /** 상점 제품 덮어쓰기 — 어드민 [상점 제품] 탭이 저장한다. 카탈로그 기본값 위에 얹힌다. */
+    store?: {
+        products?: Record<string, {
+            name?: string;
+            tagline?: string;
+            summary?: string;
+            licensePlatform?: string;
+            status?: 'on' | 'off';
+            order?: number;
+            prices?: { monthly?: number; yearly?: number; lifetime?: number };
+        }>;
+    };
     pricing?: {
         page?: {
             eyebrow?: string;

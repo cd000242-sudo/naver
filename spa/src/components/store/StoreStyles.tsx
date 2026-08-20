@@ -74,6 +74,7 @@ function StoreStyles() {
 
             .st-shot { position: relative; aspect-ratio: 16 / 9.6; overflow: hidden; background: rgba(255,255,255,.04); }
             .st-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+            .st-shot-glyph { display: grid; place-items: center; width: 100%; height: 100%; font-size: 44px; opacity: .55; }
             .st-shot::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 46%, var(--st-card-2)); }
             .st-flag {
                 position: absolute; left: 13px; top: 13px; z-index: 2; padding: 3px 11px; border-radius: 999px;

@@ -1404,6 +1404,7 @@
                 </div>
                 <div class="editor-subtabs" role="tablist" aria-label="사이트 편집 영역">
                     <button type="button" class="editor-subtab active" id="editor-tab-home" role="tab" aria-selected="true" aria-controls="editor-sub-home" tabindex="0" data-editor-subtab="home" onclick="switchEditorSubtab('home')">일반 편집</button>
+                    <button type="button" class="editor-subtab" id="editor-tab-store-products" role="tab" aria-selected="false" aria-controls="editor-sub-store-products" tabindex="-1" data-editor-subtab="store-products" onclick="switchEditorSubtab('store-products')">상점 제품</button>
                     <button type="button" class="editor-subtab" id="editor-tab-pricing" role="tab" aria-selected="false" aria-controls="editor-sub-pricing" tabindex="-1" data-editor-subtab="pricing" onclick="switchEditorSubtab('pricing')">구매/요금제</button>
                     <button type="button" class="editor-subtab" id="editor-tab-products" role="tab" aria-selected="false" aria-controls="editor-sub-products" tabindex="-1" data-editor-subtab="products" onclick="switchEditorSubtab('products')">제품정보</button>
                     <button type="button" class="editor-subtab" id="editor-tab-downloads" role="tab" aria-selected="false" aria-controls="editor-sub-downloads" tabindex="-1" data-editor-subtab="downloads" onclick="switchEditorSubtab('downloads')">다운로드</button>
@@ -1563,6 +1564,16 @@
                     </div>
                 </div>
 
+                <div id="editor-sub-store-products" class="editor-subpanel" role="tabpanel" aria-labelledby="editor-tab-store-products" aria-hidden="true">
+                    <div class="editor-card">
+                        <h4>상점 제품 <span style="font-weight:400;font-size:.72rem;color:var(--text-secondary);">— 스위치를 끄면 상점에서 사라집니다 · 값을 비우면 그 기간은 안 팝니다</span></h4>
+                        <div id="store-products-editor"></div>
+                        <div style="margin-top:12px;">
+                            <button class="btn" type="button" onclick="addStoreProduct()">+ 새 제품 추가</button>
+                        </div>
+                        <p class="editor-help">기간별 가격(원): 1개월 · 1년 · 영구제. 10월 1일 정상가(2배) 전환은 사이트가 자동으로 합니다 — 여기엔 이벤트가만 적습니다. 저장은 아래 [사이트 콘텐츠 저장]과 같은 버튼입니다.</p>
+                    </div>
+                </div>
                 <div id="editor-sub-pricing" class="editor-subpanel" role="tabpanel" aria-labelledby="editor-tab-pricing" aria-hidden="true">
                     <div class="editor-card">
                         <h4>구매 탭 상단 문구</h4>
@@ -6450,6 +6461,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             const products = data.products || {};
             const downloads = data.downloads || {};
             const theme = data.theme || {};
+            initStoreProductsDraft(data.store && data.store.products);
 
             setValue('edit-hero-title', hero.title);
             setValue('edit-hero-desc', hero.desc);
@@ -6663,6 +6675,140 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             return obj;
         }
 
+        // ─── 상점 제품 편집기 (2026-08-20) ───────────────────────────
+        // 상점(productCatalog)의 네 제품이 씨앗이다. 여기서 바꾼 값은
+        // siteContent.store.products 로 저장되고 사이트가 덮어 읽는다.
+        const STORE_PRODUCT_SEED = [
+            { id: 'naver', name: 'Better Life Naver', tagline: '네이버 블로그 자동화', summary: '키워드만 넣으면 글·이미지 구성까지 만들어 예약 발행합니다.', licensePlatform: 'LEADERNAM', monthly: 29000, yearly: 300000, lifetime: 1500000, status: 'on' },
+            { id: 'orbit', name: 'Leadernam Orbit', tagline: '워드프레스 · 티스토리 · 블로그스팟', summary: '세 블로그에 글을 쓰고 관리합니다. 외부 유입용 글과 카드뉴스까지 만듭니다.', licensePlatform: 'ORBIT', monthly: 39000, yearly: 400000, lifetime: 2000000, status: 'on' },
+            { id: 'leword', name: 'LEWORD', tagline: '키워드마스터', summary: '검색결과를 직접 열어 보고 지금 들어갈 자리가 있는 키워드만 남깁니다.', licensePlatform: 'LEWORD', monthly: 9900, yearly: 150000, lifetime: 750000, status: 'on' },
+            { id: 'all', name: '올인원', tagline: '전 제품을 하나로', summary: '기간 안에 새 제품이 나오면 그것도 그대로 쓰실 수 있습니다.', licensePlatform: 'ALL', monthly: 50000, yearly: 400000, lifetime: 1650000, status: 'on' },
+        ];
+        let storeProductsDraft = null;
+
+        function initStoreProductsDraft(saved) {
+            const byId = saved && typeof saved === 'object' ? saved : {};
+            const seedIds = STORE_PRODUCT_SEED.map(item => item.id);
+            const rows = STORE_PRODUCT_SEED.map((seed, index) => {
+                const patch = byId[seed.id] || {};
+                const prices = patch.prices || {};
+                return { ...seed, order: index, ...patch,
+                    monthly: prices.monthly !== undefined ? prices.monthly : (patch.monthly !== undefined ? patch.monthly : seed.monthly),
+                    yearly: prices.yearly !== undefined ? prices.yearly : (patch.yearly !== undefined ? patch.yearly : seed.yearly),
+                    lifetime: prices.lifetime !== undefined ? prices.lifetime : (patch.lifetime !== undefined ? patch.lifetime : seed.lifetime),
+                    id: seed.id, seeded: true };
+            });
+            Object.keys(byId).forEach(id => {
+                if (seedIds.includes(id)) return;
+                const patch = byId[id] || {};
+                const prices = patch.prices || {};
+                rows.push({ id, status: 'on', ...patch,
+                    monthly: prices.monthly, yearly: prices.yearly, lifetime: prices.lifetime,
+                    seeded: false });
+            });
+            rows.forEach((row, index) => { if (typeof row.order !== 'number') row.order = index; });
+            rows.sort((a, b) => a.order - b.order);
+            storeProductsDraft = rows;
+            renderStoreProductsEditor();
+        }
+
+        function storeProductField(row, field, type, placeholder) {
+            const value = row[field] === undefined || row[field] === null ? '' : row[field];
+            return '<input type="' + (type || 'text') + '" value="' + cmsEscape(String(value)) + '" placeholder="' + (placeholder || '') + '"'
+                + ' oninput="updateStoreProduct(&quot;' + row.id + '&quot;, &quot;' + field + '&quot;, this.value)">';
+        }
+
+        function renderStoreProductsEditor() {
+            const target = document.getElementById('store-products-editor');
+            if (!target || !storeProductsDraft) return;
+            target.innerHTML = storeProductsDraft.map((row, index) => {
+                const off = row.status === 'off';
+                const q = '&quot;';
+                return '<div style="border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 14px;margin-bottom:10px;' + (off ? 'opacity:.55;' : '') + '">'
+                    + '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">'
+                    + '<button class="btn" type="button" ' + (index === 0 ? 'disabled' : '') + ' onclick="moveStoreProduct(' + q + row.id + q + ', -1)" title="위로">↑</button>'
+                    + '<button class="btn" type="button" ' + (index === storeProductsDraft.length - 1 ? 'disabled' : '') + ' onclick="moveStoreProduct(' + q + row.id + q + ', 1)" title="아래로">↓</button>'
+                    + '<label style="display:flex;align-items:center;gap:6px;font-size:.78rem;"><input type="checkbox" ' + (off ? '' : 'checked')
+                    + ' onchange="updateStoreProduct(' + q + row.id + q + ', ' + q + 'status' + q + ', this.checked ? ' + q.replace('&quot;', '&#39;') + 'on&#39; : &#39;off&#39;)"> 판매 중</label>'
+                    + '<strong style="font-size:.85rem;">' + cmsEscape(row.name || row.id) + '</strong>'
+                    + '<span style="font-size:.7rem;color:var(--text-secondary);">' + cmsEscape(row.licensePlatform || '') + '</span>'
+                    + (row.seeded ? '' : '<button class="btn" type="button" style="margin-left:auto;" onclick="removeStoreProduct(' + q + row.id + q + ')">삭제</button>')
+                    + '</div>'
+                    + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:8px;">'
+                    + '<div class="editor-field"><label>제품 이름</label>' + storeProductField(row, 'name') + '</div>'
+                    + '<div class="editor-field"><label>한 줄 소개</label>' + storeProductField(row, 'tagline') + '</div>'
+                    + '<div class="editor-field"><label>라이선스</label><select onchange="updateStoreProduct(' + q + row.id + q + ', ' + q + 'licensePlatform' + q + ', this.value)">'
+                    + ['LEADERNAM', 'ORBIT', 'LEWORD', 'ALL'].map(option => '<option value="' + option + '"' + (row.licensePlatform === option ? ' selected' : '') + '>' + option + '</option>').join('')
+                    + '</select></div>'
+                    + '</div>'
+                    + '<div class="editor-field" style="margin-bottom:8px;"><label>무엇을 해 주나 (한 문장)</label>' + storeProductField(row, 'summary') + '</div>'
+                    + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">'
+                    + '<div class="editor-field"><label>1개월(원)</label>' + storeProductField(row, 'monthly', 'number', '비우면 안 팝니다') + '</div>'
+                    + '<div class="editor-field"><label>1년(원)</label>' + storeProductField(row, 'yearly', 'number', '비우면 안 팝니다') + '</div>'
+                    + '<div class="editor-field"><label>영구제(원)</label>' + storeProductField(row, 'lifetime', 'number', '비우면 안 팝니다') + '</div>'
+                    + '</div>'
+                    + '</div>';
+            }).join('');
+        }
+
+        function updateStoreProduct(id, field, value) {
+            const row = (storeProductsDraft || []).find(item => item.id === id);
+            if (!row) return;
+            if (field === 'monthly' || field === 'yearly' || field === 'lifetime') {
+                const num = Number(String(value).replace(/[^0-9]/g, ''));
+                row[field] = value === '' || !Number.isFinite(num) ? '' : num;
+            } else {
+                row[field] = value;
+            }
+            markSiteContentDirty();
+            if (field === 'status') renderStoreProductsEditor();
+        }
+
+        function moveStoreProduct(id, delta) {
+            const rows = storeProductsDraft || [];
+            const index = rows.findIndex(item => item.id === id);
+            const next = index + delta;
+            if (index < 0 || next < 0 || next >= rows.length) return;
+            const swap = rows[index]; rows[index] = rows[next]; rows[next] = swap;
+            rows.forEach((row, at) => { row.order = at; });
+            markSiteContentDirty();
+            renderStoreProductsEditor();
+        }
+
+        function addStoreProduct() {
+            if (!storeProductsDraft) storeProductsDraft = [];
+            storeProductsDraft.push({
+                id: 'p' + Date.now().toString(36),
+                name: '새 제품', tagline: '', summary: '', licensePlatform: 'LEWORD',
+                monthly: '', yearly: '', lifetime: '', status: 'off',
+                order: storeProductsDraft.length, seeded: false,
+            });
+            markSiteContentDirty();
+            renderStoreProductsEditor();
+        }
+
+        function removeStoreProduct(id) {
+            storeProductsDraft = (storeProductsDraft || []).filter(item => item.id !== id || item.seeded);
+            markSiteContentDirty();
+            renderStoreProductsEditor();
+        }
+
+        function collectStoreProducts() {
+            const out = {};
+            (storeProductsDraft || []).forEach((row, index) => {
+                const prices = {};
+                ['monthly', 'yearly', 'lifetime'].forEach(term => {
+                    if (row[term] !== '' && row[term] !== undefined && row[term] !== null) prices[term] = Number(row[term]);
+                });
+                out[row.id] = compactObject({
+                    name: row.name, tagline: row.tagline, summary: row.summary,
+                    licensePlatform: row.licensePlatform, status: row.status || 'on',
+                    order: index, prices,
+                });
+            });
+            return out;
+        }
+
         function collectPricingPlans() {
             const plans = {};
             EDITOR_PLAN_DEFS.forEach(({ id }) => {
@@ -6844,6 +6990,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                     plans: collectPricingPlans()
                 },
                 productsPage: collectProductsPage(),
+                store: { products: collectStoreProducts() },
                 products: collectProducts(),
                 downloads: collectDownloads(),
                 chatbots: collectChatbotsTiles(),

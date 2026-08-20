@@ -114,15 +114,71 @@ export const NORMAL_PRICE_MULTIPLIER = 2;
 
 export const normalPriceOf = (eventPrice: number) => eventPrice * NORMAL_PRICE_MULTIPLIER;
 
+/** 어드민 [상점 제품] 탭이 저장하는 덮어쓰기 모양. */
+export type StoreProductOverride = {
+    name?: string; tagline?: string; summary?: string; licensePlatform?: string;
+    status?: 'on' | 'off'; order?: number;
+    prices?: Partial<Record<TermId, number>>;
+};
+
+/**
+ * 어드민 저장값을 카탈로그 위에 얹는다.
+ *
+ * 여기 네 제품은 씨앗이고, 어드민이 이름·값·순서·판매여부를 바꾸면 그쪽이
+ * 이긴다. 어드민이 새로 만든 제품(씨앗에 없는 id)도 카드가 된다 — 그림이
+ * 없으니 기호와 색만 기본값으로 받는다. 저장값이 없으면 씨앗 그대로다.
+ */
+export function applyStoreOverrides(
+    overrides?: Record<string, StoreProductOverride> | null,
+): Product[] {
+    if (!overrides || Object.keys(overrides).length === 0) return PRODUCTS;
+    const merged: Product[] = PRODUCTS.map((product) => {
+        const patch = overrides[product.id];
+        if (!patch) return product;
+        return {
+            ...product,
+            ...(patch.name ? { name: patch.name } : {}),
+            ...(patch.tagline ? { tagline: patch.tagline } : {}),
+            ...(patch.summary ? { summary: patch.summary } : {}),
+            ...(patch.licensePlatform ? { licensePlatform: patch.licensePlatform } : {}),
+            ...(patch.status ? { status: patch.status } : {}),
+            ...(patch.prices ? { prices: patch.prices } : {}),
+            order: patch.order,
+        } as Product & { order?: number };
+    });
+    for (const [id, patch] of Object.entries(overrides)) {
+        if (PRODUCTS.some((product) => product.id === id)) continue;
+        if (!patch.name || !patch.prices || Object.keys(patch.prices).length === 0) continue;
+        merged.push({
+            id,
+            name: patch.name,
+            tagline: patch.tagline || '',
+            summary: patch.summary || '',
+            licensePlatform: patch.licensePlatform || 'LEWORD',
+            image: '',
+            accent: '#f0b53f',
+            glyph: '✦',
+            prices: patch.prices,
+            features: [],
+            status: patch.status || 'off',
+        });
+    }
+    return merged.sort((left, right) => {
+        const a = (left as Product & { order?: number }).order;
+        const b = (right as Product & { order?: number }).order;
+        return (a ?? PRODUCTS.findIndex((item) => item.id === left.id)) - (b ?? PRODUCTS.findIndex((item) => item.id === right.id));
+    });
+}
+
 /** 팔고 있는 제품만. status 하나로 상점에서 뺀다. */
-export const sellableProducts = () => PRODUCTS.filter((product) => product.status === 'on');
+export const sellableProducts = (list: Product[] = PRODUCTS) => list.filter((product) => product.status === 'on');
 
 /** 묶음이 아닌 것들 — 개별 합계를 낼 때 쓴다. */
-export const singleProducts = () => sellableProducts().filter((product) => !product.bundle);
+export const singleProducts = (list: Product[] = PRODUCTS) => sellableProducts(list).filter((product) => !product.bundle);
 
 /** 이 기간에 개별로 다 사면 얼마인가. 올인원과 비교해 보여 주는 값이다. */
-export function individualTotal(term: TermId): number {
-    return singleProducts().reduce((sum, product) => sum + (product.prices[term] || 0), 0);
+export function individualTotal(term: TermId, list: Product[] = PRODUCTS): number {
+    return singleProducts(list).reduce((sum, product) => sum + (product.prices[term] || 0), 0);
 }
 
 /** 월 얼마 꼴인가. 단순 나눗셈이다 — 영구제는 나눌 기간이 없어 null. */
