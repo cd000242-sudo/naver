@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createCoupangDeeplink, fetchAffiliateBoard, type AffiliateProduct } from '../../lib/keywordApi';
 import { type LaneId } from './affiliateLanes';
+import { forgeShoppingTitle } from './shoppingTitle';
 import { goldenIndex } from '../../lib/goldenIndex';
 import AffiliateTitles from './AffiliateTitles';
 
@@ -91,6 +92,10 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
 
     const renderRow = (row: AffiliateProduct, rank: number) => {
                 const index2 = goldenIndex(row.searchVolume, row.documentCount);
+                // 홈판처럼 글 제목을 조립한다 — 제품명 + 서브 키워드 + 후킹(사장님 지시 2026-08-20).
+                const forged = forgeShoppingTitle({
+                    name: row.name, keyword: row.keyword, needKeyword: row.needKeyword,
+                });
                 return (
                     <li key={row.url} className="lw-product">
                         <span className="lw-product-rank">{rank}</span>
@@ -126,6 +131,17 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                                 </span>
                             </div>
                             <a className="lw-product-name" href={row.url} target="_blank" rel="noreferrer">{row.name}</a>
+                            {forged && (
+                                <div title={forged.basis} style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '4px 0 2px', minWidth: 0 }}>
+                                    <span style={{ flexShrink: 0, padding: '1px 7px', borderRadius: 6, background: 'rgba(251,191,36,.14)', color: '#fbbf24', fontSize: 10, fontWeight: 800 }}>✍ 글 제목</span>
+                                    <em style={{ fontStyle: 'normal', fontWeight: 700, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{forged.text}</em>
+                                    <button
+                                        type="button"
+                                        className="lw-mini"
+                                        onClick={() => copyText(`title:${row.url}`, forged.text)}
+                                    >{copiedKey === `title:${row.url}` ? '복사됨!' : '복사'}</button>
+                                </div>
+                            )}
                             <div className="lw-product-metrics">
                                 {typeof row.price === 'number' && row.price > 0 && (
                                     <span className="lw-product-price"><strong>{row.price.toLocaleString('ko-KR')}원</strong></span>

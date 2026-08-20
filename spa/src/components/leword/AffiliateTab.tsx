@@ -4,6 +4,7 @@ import LicenseGate, { isUnlocked } from './LicenseGate';
 import AffiliateTitles from './AffiliateTitles';
 import CoupangBoard from './CoupangBoard';
 import { AFFILIATE_LANES, type LaneId } from './affiliateLanes';
+import { forgeShoppingTitle } from './shoppingTitle';
 import { loadUserKeys } from '../../lib/userKeys';
 
 /**
@@ -43,6 +44,12 @@ type CampaignItem = {
     documentCount?: number | null;
     /** 블로그 검색 상위 10 정면 대응 실측. 쿠팡 레인과 같은 판정. */
     serpTop?: { sampled: number; exact: number; partial: number } | null;
+    /**
+     * 구독 CLI 가 제품을 읽고 추론해 지은 글 제목(affiliate-ai-titles.js, 스냅샷에 미리 구움).
+     * axis = 추론한 "구매 판단이 갈리는 축". 없으면 규칙 조립(shoppingTitle)이 폴백.
+     * 온디맨드 버튼(AffiliateTitles)과 역할이 다르다 — 이건 클릭 없이 바로 보이는 1줄이다.
+     */
+    aiTitle?: { text: string; axis?: string; whyClick?: string; provider?: string } | null;
 };
 
 type CampaignSnapshot = {
@@ -175,6 +182,24 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             // 분석·검색은 니즈 검색어가 우선 — 상품명 검색어는 수요가 없다(실측 0~140).
                             const query = item.needKeyword || item.keyword || item.name;
                             const badge = verdictBadge(item);
+                            // 글 제목 1줄 — AI 추론 제목(스냅샷) 우선, 없으면 규칙 조립 폴백.
+                            const forged = forgeShoppingTitle({
+                                name: item.name, brand: item.brand,
+                                keyword: item.keyword, needKeyword: item.needKeyword,
+                            });
+                            const titleLine = item.aiTitle?.text
+                                ? {
+                                    text: item.aiTitle.text,
+                                    label: '✍ AI 제목',
+                                    basis: [
+                                        item.aiTitle.axis ? `갈리는 축: ${item.aiTitle.axis}` : '',
+                                        item.aiTitle.whyClick ? `클릭 이유: ${item.aiTitle.whyClick}` : '',
+                                        `구독 CLI(${item.aiTitle.provider || 'AI'}) 추론 — 실측 재료 기반`,
+                                    ].filter(Boolean).join('\n'),
+                                }
+                                : forged
+                                    ? { text: forged.text, label: '✍ 글 제목', basis: forged.basis }
+                                    : null;
                             return (
                                 <li key={item.url || item.name} className="lw-product">
                                     <span className="lw-product-rank">{index + 1}</span>
@@ -216,6 +241,21 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             title={item.url ? undefined : '상품명 복사됨 — 콘솔 검색창에 붙여넣으세요'}
                                             onClick={() => { if (!item.url) navigator.clipboard?.writeText(item.name); }}
                                         >{item.name}</a>
+                                        {titleLine && (
+                                            <div title={titleLine.basis} style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '4px 0 2px', minWidth: 0 }}>
+                                                <span style={{ flexShrink: 0, padding: '1px 7px', borderRadius: 6, background: 'rgba(251,191,36,.14)', color: '#fbbf24', fontSize: 10, fontWeight: 800 }}>{titleLine.label}</span>
+                                                <em style={{ fontStyle: 'normal', fontWeight: 700, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{titleLine.text}</em>
+                                                <button
+                                                    type="button"
+                                                    className="lw-mini"
+                                                    onClick={() => {
+                                                        navigator.clipboard?.writeText(titleLine.text);
+                                                        setCopied(`title:${item.url || item.name}`);
+                                                        window.setTimeout(() => setCopied(''), 1400);
+                                                    }}
+                                                >{copied === `title:${item.url || item.name}` ? '복사됨' : '복사'}</button>
+                                            </div>
+                                        )}
                                         <div className="lw-product-metrics">
                                             {typeof item.price === 'number' && item.price > 0 && (
                                                 <span className="lw-product-price"><strong>{item.price.toLocaleString('ko-KR')}원</strong></span>
