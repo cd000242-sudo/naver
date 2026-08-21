@@ -24,10 +24,19 @@ function loadMarks(): Marks {
 }
 
 const SOURCE_LABEL: Record<string, string> = {
-    kin: '지식인', cafearticle: '카페', blog: '블로그', webkr: '웹문서',
+    kin: '지식인', cafearticle: '카페', blog: '블로그', webkr: '웹문서', community: '커뮤니티',
 };
 const PROVIDER_LABEL: Record<string, string> = {
-    kin: '지식인', cafearticle: '카페', blog: '블로그', webkr: '웹문서',
+    kin: '지식인', cafearticle: '카페', blog: '블로그', webkr: '웹문서', community: '커뮤니티(네이버 밖)',
+};
+
+/*
+ * 링크 정책 — 그 판에 링크를 달아도 되는가(사장님 지시 2026-08-21).
+ * 확인된 것만 단정한다. 모르면 '미확인'이라고 적고 사람이 판단하게 둔다 —
+ * 지어내면 계정이 날아간다.
+ */
+const POLICY_LABEL: Record<string, string> = {
+    ok: '링크 가능', careful: '링크 조심', banned: '링크 막힘', unknown: '정책 미확인',
 };
 
 const GROUPS = [
@@ -130,8 +139,8 @@ function RadarTab() {
         <div className="lw-radar">
             <TabIntro
                 title="외부유입 레이더"
-                desc="내 글 주소 하나면 됩니다 — 그 글로 사람을 데려올 수 있는 지식인·카페 질문을 찾고, 지금 답할 자리부터 보여줍니다. 게시는 직접 하세요(자동 게시 없음)."
-                source="네이버 오픈API 검색 실측 + 검색광고 검색량 실측 + AI 평가"
+                desc="내 글 주소 하나면 됩니다 — 지식인·카페는 물론 디시·클리앙·더쿠 같은 네이버 밖 커뮤니티까지 훑어 지금 답할 자리를 찾아 줍니다. 판마다 링크를 달아도 되는지도 함께 적습니다. 게시는 직접 하세요(자동 게시 없음)."
+                source="네이버 오픈API + 커뮤니티 20판(구글 색인) + 검색광고 검색량 실측 + AI 평가"
             />
 
             <form className="lw-search" onSubmit={run}>
@@ -210,7 +219,23 @@ function RadarTab() {
                                 return (
                                     <article key={item.link} className={`lw-radar-card${state ? ` is-${state}` : ''}`}>
                                         <div className="lw-radar-card-head">
-                                            <span className={`lw-radar-src src-${item.source}`}>{SOURCE_LABEL[item.source] || item.source}</span>
+                                            <span className={`lw-radar-src src-${item.source}`}>
+                                                {item.source === 'community' && item.siteName
+                                                    ? item.siteName
+                                                    : SOURCE_LABEL[item.source] || item.source}
+                                            </span>
+                                            {item.source === 'community' && item.linkPolicy && (
+                                                <span
+                                                    className={`lw-radar-policy pol-${item.linkPolicy}`}
+                                                    title={item.linkPolicy === 'banned'
+                                                        ? '이 판은 외부 링크가 삭제·차단됩니다 — 링크 없이 답만 다는 자리로 보세요'
+                                                        : item.linkPolicy === 'careful'
+                                                            ? '링크를 달 수 있으나 홍보로 보이면 지워집니다'
+                                                            : item.linkPolicy === 'unknown'
+                                                                ? '링크 정책을 아직 확인하지 못했습니다 — 직접 확인하고 판단하세요'
+                                                                : '링크를 달 수 있는 판입니다'}
+                                                >{POLICY_LABEL[item.linkPolicy]}</span>
+                                            )}
                                             {typeof item.score === 'number' && <b className="lw-radar-score">{item.score}점</b>}
                                             {state === 'done' && <i className="lw-radar-state">처리 완료</i>}
                                         </div>

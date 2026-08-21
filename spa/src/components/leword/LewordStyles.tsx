@@ -688,6 +688,16 @@ function LewordStyles() {
             .lw-radar-src.src-kin { color: #ffd15c; border-color: rgba(255,209,92,.35); }
             .lw-radar-src.src-cafearticle { color: #7dd87d; border-color: rgba(125,216,125,.35); }
             .lw-radar-src.src-blog { color: #69b7ff; border-color: rgba(105,183,255,.35); }
+            .lw-radar-src.src-community { color: #c9a8ff; border-color: rgba(201,168,255,.4); }
+            /* 링크 정책 — 막힌 판은 눈에 띄어야 헛수고를 막는다. */
+            .lw-radar-policy {
+                padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 800;
+                border: 1px solid transparent;
+            }
+            .lw-radar-policy.pol-ok { background: rgba(46,204,113,.14); color: #6fdc8c; }
+            .lw-radar-policy.pol-careful { background: rgba(255,165,0,.14); color: #ffc966; }
+            .lw-radar-policy.pol-banned { background: rgba(255,107,129,.14); color: #ff8fa0; }
+            .lw-radar-policy.pol-unknown { background: rgba(255,255,255,.06); color: #9aa1b2; }
             .lw-radar-score { color: #35d0ba; font-size: 14px; font-variant-numeric: tabular-nums; }
             .lw-radar-state { font-style: normal; font-size: 11.5px; color: #2ecc71; font-weight: 800; }
             .lw-radar-card h3 { margin: 0 0 6px; font-size: 15.5px; line-height: 1.4; }

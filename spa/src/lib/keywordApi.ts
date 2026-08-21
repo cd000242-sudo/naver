@@ -486,7 +486,12 @@ export type RadarAnalysis = {
     queries: string[];
 };
 export type RadarCandidate = {
-    source: 'kin' | 'cafearticle' | 'blog' | 'webkr';
+    source: 'kin' | 'cafearticle' | 'blog' | 'webkr' | 'community';
+    /** 커뮤니티일 때만 — 어느 판인가(아하·클리앙·더쿠…). */
+    siteName?: string;
+    siteKind?: string;
+    /** 그 판의 링크 정책 실측/확인 상태. unknown 이면 사람이 판단한다. */
+    linkPolicy?: 'ok' | 'careful' | 'banned' | 'unknown';
     title: string;
     link: string;
     excerpt: string;
