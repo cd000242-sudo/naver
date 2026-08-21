@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import {
     fetchRadarAnalyze, fetchRadarEvaluate, fetchRadarSearch, formatCount,
-    type RadarAnalysis, type RadarEvaluated,
+    type RadarAnalysis, type RadarEvaluated, type RadarGatedSite,
 } from '../../lib/keywordApi';
 import { TabIntro } from './LewordShared';
 
@@ -56,6 +56,8 @@ function RadarTab() {
     const [analysis, setAnalysis] = useState<RadarAnalysis | null>(null);
     const [providerStatus, setProviderStatus] = useState<Record<string, string>>({});
     const [counts, setCounts] = useState<{ found: number; deduped: number } | null>(null);
+    /** 훑지 않은 판 — 미리 가입해 두면 열리는 곳이 있다. */
+    const [gatedSites, setGatedSites] = useState<RadarGatedSite[]>([]);
     const [items, setItems] = useState<RadarEvaluated[]>([]);
     const [marks, setMarks] = useState<Marks>(loadMarks);
     const [showDismissed, setShowDismissed] = useState(false);
@@ -107,6 +109,7 @@ function RadarTab() {
         }
         setProviderStatus(searched.data.providerStatus || {});
         setCounts({ found: searched.data.totalFound, deduped: searched.data.afterDedupe });
+        setGatedSites(searched.data.gatedSites || []);
         if (searched.data.items.length === 0) {
             setPhase('done');
             return;
@@ -313,6 +316,29 @@ function RadarTab() {
                             <li key={item.link}>
                                 <span className={`lw-radar-src src-${item.source}`}>{SOURCE_LABEL[item.source] || item.source}</span>
                                 <a href={item.link} target="_blank" rel="noreferrer noopener">{item.title}</a>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            )}
+
+            {phase === 'done' && gatedSites.length > 0 && (
+                /*
+                 * 훑지 않은 판을 이유와 함께 보여준다. 클리앙처럼 "가입은 되는데
+                 * 보름 기다려야 하는" 판은 오늘 가입해 두면 그때부터 쓸 수 있다 —
+                 * 조용히 빼면 그 준비를 할 기회가 사라진다.
+                 */
+                <section className="lw-panel lw-radar-gated">
+                    <div className="lw-panel-head">
+                        <h2>지금은 답을 못 다는 판 <em>{gatedSites.length}</em></h2>
+                        <span>훑지 않았습니다 — 미리 가입해 두면 열리는 곳이 있습니다</span>
+                    </div>
+                    <ul>
+                        {gatedSites.map((site) => (
+                            <li key={site.domain} className={site.gate}>
+                                <a href={`https://${site.domain}`} target="_blank" rel="noreferrer noopener">{site.name}</a>
+                                <i>{site.gate === 'delayed' ? '기다리면 열림' : '가입 막힘'}</i>
+                                <span>{site.why || '확인된 근거 없음'}</span>
                             </li>
                         ))}
                     </ul>

@@ -738,6 +738,19 @@ function LewordStyles() {
             .lw-radar-rest li { display: flex; align-items: center; gap: 9px; font-size: 13px; }
             .lw-radar-rest a { color: #aeb6c4; text-decoration: none; }
             .lw-radar-rest a:hover { color: #35d0ba; }
+            /* 훑지 않은 판 — 기다리면 열리는 곳과 영영 막힌 곳을 갈라 적는다. */
+            .lw-radar-gated ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+            .lw-radar-gated li { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; font-size: 12.5px; }
+            .lw-radar-gated li a { color: #fff; font-weight: 800; text-decoration: none; }
+            .lw-radar-gated li a:hover { color: #35d0ba; }
+            .lw-radar-gated li i {
+                font-style: normal; font-size: 11px; font-weight: 800;
+                padding: 2px 8px; border-radius: 6px;
+            }
+            .lw-radar-gated li.delayed i { background: rgba(255,165,0,.14); color: #ffc966; }
+            .lw-radar-gated li.closed i { background: rgba(255,255,255,.06); color: #9aa1b2; }
+            .lw-radar-gated li span { flex: 1; min-width: 220px; color: rgba(235,242,250,.6); line-height: 1.55; }
+
             .lw-radar-dismissed { color: #646b7d; font-size: 12.5px; }
             .lw-radar-dismissed button {
                 border: 0; background: none; color: #35d0ba; font-weight: 800; cursor: pointer; font-size: 12.5px;

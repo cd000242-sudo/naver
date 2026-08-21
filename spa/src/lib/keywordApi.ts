@@ -520,12 +520,16 @@ export type RadarEvaluated = RadarCandidate & {
 };
 export const fetchRadarAnalyze = (url: string) =>
     call<{ analysis: RadarAnalysis }>('radar-analyze', { url });
+/** 훑지 않은 판과 그 이유 — 미리 가입해 두면 열리는 곳을 알 수 있게. */
+export type RadarGatedSite = { name: string; domain: string; gate: 'delayed' | 'closed'; why: string };
+
 export const fetchRadarSearch = (queries: string[], coreKeywords: string[], shortQueries: string[] = []) =>
     call<{
         items: RadarCandidate[];
         providerStatus: Record<string, string>;
         totalFound: number;
         afterDedupe: number;
+        gatedSites?: RadarGatedSite[];
     }>('radar-search', {
         queries: JSON.stringify(queries),
         coreKeywords: JSON.stringify(coreKeywords),
