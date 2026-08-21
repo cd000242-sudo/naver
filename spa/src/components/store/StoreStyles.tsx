@@ -145,6 +145,16 @@ function StoreStyles() {
             .st-bundle .st-body { padding: 22px; display: flex; flex-direction: column; }
             /* 담기 버튼은 카드 바닥에 붙는다 — 두 칸 높이가 달라도 줄이 맞는다. */
             .st-bundle .st-buy { margin-top: auto; }
+            /* 신뢰 지표 — 값과 담기 사이. 결정 직전에 눈에 드는 자리다. */
+            .st-trust {
+                display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 10px; margin: 16px 0 4px; padding: 14px 10px;
+                border-radius: 12px; background: rgba(255,255,255,.05);
+            }
+            .st-trust div { text-align: center; min-width: 0; }
+            .st-trust b { display: block; color: var(--st-ink); font-size: 14px; font-weight: 900; white-space: nowrap; }
+            .st-trust span { display: block; margin-top: 3px; color: var(--st-mute); font-size: 11px; }
+            @media (max-width: 400px) { .st-trust b { font-size: 12.5px; } }
             @media (max-width: 860px) {
                 .st-bundle { grid-template-columns: minmax(0, 1fr); }
                 .st-bundle-proof { border-right: 0; border-bottom: 1px solid var(--st-line); }

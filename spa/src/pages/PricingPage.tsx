@@ -731,6 +731,18 @@ function PricingPage() {
                      */
                     proof={<ProofShowcase compact variant="carousel" className="purchase-proof-inline" />}
                     /*
+                     * 신뢰 지표는 값 **바로 옆**에 선다(사장님 지시 2026-08-21).
+                     * 판 아래 따로 떠 있을 때는 값을 보고 결정하는 순간에 눈에
+                     * 안 들어왔다 — 별점·사용자 수·환불 보장은 그 순간 필요한 재료다.
+                     */
+                    trust={(
+                        <div className="st-trust">
+                            <div><b>⭐ 4.9 / 5</b><span>실사용 후기 기반</span></div>
+                            <div><b>2,847명</b><span>현재 활성 사용자</span></div>
+                            <div><b>🛡️ 7일 환불</b><span>미사용 시 전액 환불</span></div>
+                        </div>
+                    )}
+                    /*
                      * 값을 본 뒤 남는 물음 — FAQ·환불·계좌이체. 예전에는 이메일
                      * 입력칸이 딸린 별도 결제 구역에 얹혀 있었는데, 그 구역 자체가
                      * 상점과 겹쳐 사라졌다(결제는 이제 상점 결제창에서 끝난다).
@@ -772,24 +784,6 @@ function PricingPage() {
                         void requestPayment(mail);
                     }}
                 />
-                </div>
-
-                {/* Trust bar */}
-                <div style={{ maxWidth: 720, margin: '36px auto 18px', padding: '18px 22px', background: 'rgba(255,255,255,0.95)', borderRadius: 14, boxShadow: '0 6px 22px rgba(0,0,0,0.14)' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-around', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
-                        <div style={{ textAlign: 'center', minWidth: 90 }}>
-                            <div style={{ fontSize: 22, fontWeight: 800, color: '#c9a84c' }}>⭐ 4.9 / 5</div>
-                            <div style={{ fontSize: 12, color: '#5b6b7a', marginTop: 2 }}>실사용 후기 기반</div>
-                        </div>
-                        <div style={{ textAlign: 'center', minWidth: 90 }}>
-                            <div style={{ fontSize: 22, fontWeight: 800, color: '#14304d' }}>2,847명</div>
-                            <div style={{ fontSize: 12, color: '#5b6b7a', marginTop: 2 }}>현재 활성 사용자</div>
-                        </div>
-                        <div style={{ textAlign: 'center', minWidth: 90 }}>
-                            <div style={{ fontSize: 22, fontWeight: 800, color: '#44d7b6' }}>🛡️ 7일 환불</div>
-                            <div style={{ fontSize: 12, color: '#5b6b7a', marginTop: 2 }}>미사용 시 전액 환불</div>
-                        </div>
-                    </div>
                 </div>
 
 

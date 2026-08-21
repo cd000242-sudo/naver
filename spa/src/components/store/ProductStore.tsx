@@ -26,7 +26,7 @@ function daysToSwitch(): number | null {
 /** 담은 결과를 바깥(결제 구역)에 알려 준다. 아무것도 안 담았으면 null. */
 export type StorePick = { id: string; name: string; amount: number; desc: string };
 
-function ProductStore({ onPick, onCardPay, proof, notes }: {
+function ProductStore({ onPick, onCardPay, proof, notes, trust }: {
     onPick?: (pick: StorePick | null) => void;
     /** 결제창에서 카드를 고르면 이메일과 함께 부른다 — 결제 실행은 바깥이 맡는다. */
     onCardPay?: (email: string) => void;
@@ -39,6 +39,8 @@ function ProductStore({ onPick, onCardPay, proof, notes }: {
      */
     proof?: ReactNode;
     notes?: ReactNode;
+    /** 별점·사용자 수·환불 보장 — 값 바로 옆에 선다. 결정하는 순간에 필요한 재료다. */
+    trust?: ReactNode;
 }) {
     const [term, setTerm] = useState<TermId>('yearly');
     const [cart, setCart] = useState<string[]>([]);
@@ -228,6 +230,8 @@ function ProductStore({ onPick, onCardPay, proof, notes }: {
                                         </>
                                     );
                                 })()}
+
+                                {product.bundle && trust}
 
                                 <button
                                     type="button"
