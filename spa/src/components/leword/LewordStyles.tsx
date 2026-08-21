@@ -665,6 +665,14 @@ function LewordStyles() {
             }
             .lw-radar-kw b { color: #35d0ba; font-size: 12px; font-variant-numeric: tabular-nums; }
             .lw-radar-money { margin: 10px 0 0; color: #f5c518; font-size: 13px; font-weight: 700; }
+            .lw-radar-needkey {
+                margin: 10px 0 0; padding: 10px 13px; border-radius: 9px;
+                background: rgba(53,208,186,.07); border: 1px solid rgba(53,208,186,.2);
+                color: rgba(235,242,250,.8); font-size: 12.5px; line-height: 1.6;
+            }
+            .lw-radar-needkey b { color: #35d0ba; }
+            .lw-radar-needkey a { color: #35d0ba; font-weight: 800; }
+
             .lw-radar-partial { margin: 10px 0 0; color: #c9a34a; font-size: 12.5px; }
 
             .lw-radar-group .lw-panel-head h2 em {
@@ -688,6 +696,35 @@ function LewordStyles() {
             .lw-radar-src.src-kin { color: #ffd15c; border-color: rgba(255,209,92,.35); }
             .lw-radar-src.src-cafearticle { color: #7dd87d; border-color: rgba(125,216,125,.35); }
             .lw-radar-src.src-blog { color: #69b7ff; border-color: rgba(105,183,255,.35); }
+            .lw-radar-src.src-community { color: #c9a8ff; border-color: rgba(201,168,255,.4); }
+            /* 링크 정책 — 막힌 판은 눈에 띄어야 헛수고를 막는다. */
+            .lw-radar-policy {
+                padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 800;
+                border: 1px solid transparent;
+            }
+            .lw-radar-policy.pol-ok { background: rgba(46,204,113,.14); color: #6fdc8c; }
+            .lw-radar-policy.pol-careful { background: rgba(255,165,0,.14); color: #ffc966; }
+            .lw-radar-policy.pol-banned { background: rgba(255,107,129,.14); color: #ff8fa0; }
+            .lw-radar-policy.pol-unknown { background: rgba(255,255,255,.06); color: #9aa1b2; }
+            .lw-radar-gate {
+                padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 800;
+                background: rgba(53,208,186,.16); color: #6fe0d0;
+            }
+            .lw-radar-audience { margin: 10px 0 0; color: #c0c8d4; font-size: 13px; line-height: 1.6; }
+            /* 글 해부 — 답변 각도를 짤 때 꺼내 보는 재료. */
+            .lw-radar-anatomy { margin: 12px 0 0; }
+            .lw-radar-anatomy summary { cursor: pointer; color: #9be8dd; font-size: 12.5px; font-weight: 800; padding: 4px 0; }
+            .lw-radar-anatomy ul { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+            .lw-radar-anatomy li { border-left: 2px solid rgba(53,208,186,.35); padding-left: 10px; }
+            .lw-radar-anatomy li b { display: block; color: #fff; font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+            .lw-radar-anatomy li span { color: rgba(235,242,250,.72); font-size: 12.5px; line-height: 1.6; }
+            .lw-radar-gap {
+                margin-top: 11px; padding: 10px 12px; border-radius: 9px;
+                background: rgba(255,165,0,.07); border: 1px solid rgba(255,165,0,.22);
+            }
+            .lw-radar-gap b { display: block; color: #ffc966; font-size: 12.5px; margin-bottom: 4px; }
+            .lw-radar-gap p { margin: 0; color: rgba(235,242,250,.75); font-size: 12.5px; line-height: 1.6; }
+            .lw-radar-gap em { display: block; margin-top: 5px; font-style: normal; color: #646b7d; font-size: 11.5px; }
             .lw-radar-score { color: #35d0ba; font-size: 14px; font-variant-numeric: tabular-nums; }
             .lw-radar-state { font-style: normal; font-size: 11.5px; color: #2ecc71; font-weight: 800; }
             .lw-radar-card h3 { margin: 0 0 6px; font-size: 15.5px; line-height: 1.4; }
@@ -709,6 +746,35 @@ function LewordStyles() {
             .lw-radar-rest li { display: flex; align-items: center; gap: 9px; font-size: 13px; }
             .lw-radar-rest a { color: #aeb6c4; text-decoration: none; }
             .lw-radar-rest a:hover { color: #35d0ba; }
+            /* 훑지 않은 판 — 기다리면 열리는 곳과 영영 막힌 곳을 갈라 적는다. */
+            .lw-audit-progress {
+                margin-left: 10px; font-size: 12.5px; font-weight: 700; color: #35d0ba;
+                font-variant-numeric: tabular-nums;
+            }
+
+            /* 엔진별 칸 — 상태 하나만 담는다. 칩을 뭉치지 않는다. */
+            .lw-engine-cell { white-space: nowrap; }
+            .lw-engine-cell .lw-engine {
+                display: inline-block; padding: 3px 9px; border-radius: 7px;
+                font-size: 11.5px; font-weight: 800; text-decoration: none;
+            }
+            .lw-engine-cell .lw-engine-found { background: rgba(46,204,113,.14); color: #6fdc8c; }
+            .lw-engine-cell .lw-engine-blocked { background: rgba(255,201,102,.13); color: #ffc966; }
+            .lw-engine-cell .lw-engine-none { background: rgba(255,143,160,.12); color: #ff8fa0; }
+            .lw-engine-cell .lw-engine:hover { filter: brightness(1.2); }
+
+            .lw-radar-gated ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+            .lw-radar-gated li { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; font-size: 12.5px; }
+            .lw-radar-gated li a { color: #fff; font-weight: 800; text-decoration: none; }
+            .lw-radar-gated li a:hover { color: #35d0ba; }
+            .lw-radar-gated li i {
+                font-style: normal; font-size: 11px; font-weight: 800;
+                padding: 2px 8px; border-radius: 6px;
+            }
+            .lw-radar-gated li.delayed i { background: rgba(255,165,0,.14); color: #ffc966; }
+            .lw-radar-gated li.closed i { background: rgba(255,255,255,.06); color: #9aa1b2; }
+            .lw-radar-gated li span { flex: 1; min-width: 220px; color: rgba(235,242,250,.6); line-height: 1.55; }
+
             .lw-radar-dismissed { color: #646b7d; font-size: 12.5px; }
             .lw-radar-dismissed button {
                 border: 0; background: none; color: #35d0ba; font-weight: 800; cursor: pointer; font-size: 12.5px;

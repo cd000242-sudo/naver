@@ -93,7 +93,11 @@ function BankOrderPage() {
     const [tab, setTab] = useState<string>('naver');
     const [selected, setSelected] = useState<ProductOption | null>(null);
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    /*
+     * 상점 결제창에서 이미 적은 이메일을 이어받는다(?email=). 같은 주소를
+     * 두 번 적게 하면 흐름이 끊긴다 — 로그인이 없어 이 주소가 유일한 통로다.
+     */
+    const [email, setEmail] = useState(() => searchParams.get('email') || '');
     const [submitting, setSubmitting] = useState(false);
     const [result, setResult] = useState<ResultInfo | null>(null);
     const [pricingNow, setPricingNow] = useState(() => Date.now());

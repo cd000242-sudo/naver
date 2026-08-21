@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
 import {
     fetchRadarAnalyze, fetchRadarEvaluate, fetchRadarSearch, formatCount,
-    type RadarAnalysis, type RadarEvaluated,
+    type RadarAnalysis, type RadarEvaluated, type RadarGatedSite,
 } from '../../lib/keywordApi';
+import { loadUserKeys } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -24,10 +25,19 @@ function loadMarks(): Marks {
 }
 
 const SOURCE_LABEL: Record<string, string> = {
-    kin: '지식인', cafearticle: '카페', blog: '블로그', webkr: '웹문서',
+    kin: '지식인', cafearticle: '카페', blog: '블로그', webkr: '웹문서', community: '커뮤니티',
 };
 const PROVIDER_LABEL: Record<string, string> = {
-    kin: '지식인', cafearticle: '카페', blog: '블로그', webkr: '웹문서',
+    kin: '지식인', cafearticle: '카페', blog: '블로그', webkr: '웹문서', community: '커뮤니티(네이버 밖)',
+};
+
+/*
+ * 링크 정책 — 그 판에 링크를 달아도 되는가(사장님 지시 2026-08-21).
+ * 확인된 것만 단정한다. 모르면 '미확인'이라고 적고 사람이 판단하게 둔다 —
+ * 지어내면 계정이 날아간다.
+ */
+const POLICY_LABEL: Record<string, string> = {
+    ok: '링크 가능', careful: '링크 조심', banned: '링크 막힘', unknown: '정책 미확인',
 };
 
 const GROUPS = [
@@ -47,6 +57,8 @@ function RadarTab() {
     const [analysis, setAnalysis] = useState<RadarAnalysis | null>(null);
     const [providerStatus, setProviderStatus] = useState<Record<string, string>>({});
     const [counts, setCounts] = useState<{ found: number; deduped: number } | null>(null);
+    /** 훑지 않은 판 — 미리 가입해 두면 열리는 곳이 있다. */
+    const [gatedSites, setGatedSites] = useState<RadarGatedSite[]>([]);
     const [items, setItems] = useState<RadarEvaluated[]>([]);
     const [marks, setMarks] = useState<Marks>(loadMarks);
     const [showDismissed, setShowDismissed] = useState(false);
@@ -86,7 +98,11 @@ function RadarTab() {
 
         // ② 검색 — 프로바이더 일부가 죽어도 나머지로 계속한다(§26)
         setPhase('searching');
-        const searched = await fetchRadarSearch(meta.queries, meta.coreKeywords.map((k) => k.keyword));
+        const searched = await fetchRadarSearch(
+            meta.queries,
+            meta.coreKeywords.map((k) => k.keyword),
+            meta.shortQueries || [],
+        );
         if (!searched.ok || !searched.data) {
             setPhase('idle');
             setError(searched.message || '검색에 실패했습니다.');
@@ -94,6 +110,7 @@ function RadarTab() {
         }
         setProviderStatus(searched.data.providerStatus || {});
         setCounts({ found: searched.data.totalFound, deduped: searched.data.afterDedupe });
+        setGatedSites(searched.data.gatedSites || []);
         if (searched.data.items.length === 0) {
             setPhase('done');
             return;
@@ -130,8 +147,10 @@ function RadarTab() {
         <div className="lw-radar">
             <TabIntro
                 title="외부유입 레이더"
-                desc="내 글 주소 하나면 됩니다 — 그 글로 사람을 데려올 수 있는 지식인·카페 질문을 찾고, 지금 답할 자리부터 보여줍니다. 게시는 직접 하세요(자동 게시 없음)."
-                source="네이버 오픈API 검색 실측 + 검색광고 검색량 실측 + AI 평가"
+                desc="내 글 주소 하나면 됩니다 — 지식인·카페는 물론 디시·클리앙·더쿠 같은 네이버 밖 커뮤니티까지 훑어 지금 답할 자리를 찾아 줍니다. 판마다 링크를 달아도 되는지도 함께 적습니다. 게시는 직접 하세요(자동 게시 없음)."
+                source={loadUserKeys().brightDataToken
+                    ? '네이버 오픈API 4종 + 커뮤니티 31판(구글 색인) + 검색광고 검색량 실측 + AI 평가'
+                    : '네이버 오픈API 4종 + 검색광고 검색량 실측 + AI 평가 · 커뮤니티 31판은 내 API 키 탭에 Bright Data 토큰을 넣으면 함께 훑습니다'}
             />
 
             <form className="lw-search" onSubmit={run}>
@@ -174,8 +193,43 @@ function RadarTab() {
                             </span>
                         ))}
                     </div>
+                    {analysis.audience && (
+                        <p className="lw-radar-audience">이 글을 찾는 사람 · {analysis.audience}</p>
+                    )}
                     {analysis.moneyAngle && analysis.moneyAngle !== '없음' && (
                         <p className="lw-radar-money">돈과 닿는 지점 · {analysis.moneyAngle}</p>
+                    )}
+                    {(analysis.answers || []).length > 0 && (
+                        <details className="lw-radar-anatomy">
+                            <summary>이 글이 답하는 것 {(analysis.answers || []).length}가지 — 답변 각도의 재료</summary>
+                            <ul>
+                                {(analysis.answers || []).map((row) => (
+                                    <li key={row.q}>
+                                        <b>{row.q}</b>
+                                        <span>{row.a}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            {(analysis.notCovered || []).length > 0 && (
+                                <div className="lw-radar-gap">
+                                    <b>이 글이 답하지 못하는 것</b>
+                                    <p>{(analysis.notCovered || []).join(' · ')}</p>
+                                    <em>이런 질문에는 답을 달아도 유입이 안 붙습니다 — 글을 먼저 채우세요.</em>
+                                </div>
+                            )}
+                        </details>
+                    )}
+                    {providerStatus.community === 'needs-token' && (
+                        /*
+                         * 커뮤니티는 방문자 본인 Bright Data 키로만 훑는다. 서버에 키를
+                         * 두면 누가 돌리든 한 사람의 크레딧이 나간다(사장님 지적 2026-08-21).
+                         * 키가 없다고 기능이 죽지는 않는다 — 네이버 4판 결과는 그대로 나온다.
+                         */
+                        <p className="lw-radar-needkey">
+                            네이버 4판만 훑었습니다. 디시·아하·아카라이브 같은 <b>커뮤니티 31판</b>까지 보려면{' '}
+                            <a href="?tab=keys">내 API 키</a> 탭에 Bright Data 토큰을 넣어 주세요 —{' '}
+                            가입하면 매달 5,000건이 공짜라 레이더를 190회쯤 돌릴 수 있습니다.
+                        </p>
                     )}
                     {failedProviders.length > 0 && (
                         <p className="lw-radar-partial">
@@ -210,7 +264,28 @@ function RadarTab() {
                                 return (
                                     <article key={item.link} className={`lw-radar-card${state ? ` is-${state}` : ''}`}>
                                         <div className="lw-radar-card-head">
-                                            <span className={`lw-radar-src src-${item.source}`}>{SOURCE_LABEL[item.source] || item.source}</span>
+                                            <span className={`lw-radar-src src-${item.source}`}>
+                                                {item.source === 'community' && item.siteName
+                                                    ? item.siteName
+                                                    : SOURCE_LABEL[item.source] || item.source}
+                                            </span>
+                                            {item.source === 'community' && item.replyGate === 'instant' && (
+                                                <span className="lw-radar-gate" title={item.gateWhy || '지금 바로 답을 달 수 있는 판입니다'}>
+                                                    바로 답변 가능
+                                                </span>
+                                            )}
+                                            {item.source === 'community' && item.linkPolicy && (
+                                                <span
+                                                    className={`lw-radar-policy pol-${item.linkPolicy}`}
+                                                    title={item.linkPolicy === 'banned'
+                                                        ? '이 판은 외부 링크가 삭제·차단됩니다 — 링크 없이 답만 다는 자리로 보세요'
+                                                        : item.linkPolicy === 'careful'
+                                                            ? '링크를 달 수 있으나 홍보로 보이면 지워집니다'
+                                                            : item.linkPolicy === 'unknown'
+                                                                ? '링크 정책을 아직 확인하지 못했습니다 — 직접 확인하고 판단하세요'
+                                                                : '링크를 달 수 있는 판입니다'}
+                                                >{POLICY_LABEL[item.linkPolicy]}</span>
+                                            )}
                                             {typeof item.score === 'number' && <b className="lw-radar-score">{item.score}점</b>}
                                             {state === 'done' && <i className="lw-radar-state">처리 완료</i>}
                                         </div>
@@ -256,6 +331,29 @@ function RadarTab() {
                             <li key={item.link}>
                                 <span className={`lw-radar-src src-${item.source}`}>{SOURCE_LABEL[item.source] || item.source}</span>
                                 <a href={item.link} target="_blank" rel="noreferrer noopener">{item.title}</a>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            )}
+
+            {phase === 'done' && gatedSites.length > 0 && (
+                /*
+                 * 훑지 않은 판을 이유와 함께 보여준다. 클리앙처럼 "가입은 되는데
+                 * 보름 기다려야 하는" 판은 오늘 가입해 두면 그때부터 쓸 수 있다 —
+                 * 조용히 빼면 그 준비를 할 기회가 사라진다.
+                 */
+                <section className="lw-panel lw-radar-gated">
+                    <div className="lw-panel-head">
+                        <h2>지금은 답을 못 다는 판 <em>{gatedSites.length}</em></h2>
+                        <span>훑지 않았습니다 — 미리 가입해 두면 열리는 곳이 있습니다</span>
+                    </div>
+                    <ul>
+                        {gatedSites.map((site) => (
+                            <li key={site.domain} className={site.gate}>
+                                <a href={`https://${site.domain}`} target="_blank" rel="noreferrer noopener">{site.name}</a>
+                                <i>{site.gate === 'delayed' ? '기다리면 열림' : '가입 막힘'}</i>
+                                <span>{site.why || '확인된 근거 없음'}</span>
                             </li>
                         ))}
                     </ul>

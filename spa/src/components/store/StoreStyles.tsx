@@ -101,7 +101,16 @@ function StoreStyles() {
                 -webkit-background-clip: text; background-clip: text; color: transparent;
             }
             .st-price i { font-style: normal; font-size: 12.5px; color: var(--st-mute); }
-            .st-permo { margin: 4px 0 0; min-height: 17px; font-size: 11.5px; color: var(--st-mute); font-variant-numeric: tabular-nums; }
+            /*
+             * 큰 자리를 하루 값에 내줬으니, 이 줄이 실제 청구액을 말한다.
+             * 작지만 흐리지 않게 — 숨기는 것이 아니라 위계를 바꾼 것이다.
+             */
+            .st-permo {
+                margin: 5px 0 0; min-height: 17px; font-size: 12.5px;
+                color: var(--st-dim); font-variant-numeric: tabular-nums;
+            }
+            .st-permo strong { color: var(--st-ink); font-weight: 800; }
+            .st-permo s { margin-right: 5px; color: var(--st-mute); }
 
             .st-buy {
                 margin-top: 14px; padding: 12px; border: 1px solid var(--st-line-2); border-radius: 11px;
@@ -112,15 +121,44 @@ function StoreStyles() {
             .st-buy.on { background: linear-gradient(180deg, #f7c455, var(--st-gold)); border-color: transparent; color: #171003; box-shadow: 0 6px 20px rgba(240,181,63,.26); }
 
             /* 올인원은 줄 전체를 쓰고 가운데 선다(사장님 지정) — span 2 는 3열에서 왼쪽으로 쏠렸다. */
+            /*
+             * 올인원은 진열대의 얼굴이다 — 맨 앞, 전체 폭.
+             * 안에서 왼쪽은 발행 영상, 오른쪽은 값과 담기다. 값만 있는 카드보다
+             * 영상이 도는 카드가 먼저 눈에 들고, 올인원이 곧 전 제품이라
+             * 전 제품 영상이 놓일 자리도 여기다(사장님 지시 2026-08-21).
+             */
             .st-bundle {
                 grid-column: 1 / -1;
-                max-width: 640px; width: 100%; margin: 0 auto;
+                width: 100%; margin: 0 0 8px;
+                display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+                align-items: stretch;
                 border-color: rgba(240,181,63,.42);
                 background:
-                    radial-gradient(560px 260px at 12% 0%, rgba(240,181,63,.16), transparent 66%),
+                    radial-gradient(620px 300px at 10% 0%, rgba(240,181,63,.16), transparent 66%),
                     linear-gradient(180deg, var(--st-card-2), var(--st-card) 55%);
             }
-            .st-bundle .st-body { padding: 22px; }
+            .st-bundle-proof {
+                padding: 20px; border-right: 1px solid var(--st-line);
+                display: flex; align-items: center; min-width: 0;
+            }
+            .st-bundle-proof > * { width: 100%; }
+            .st-bundle .st-body { padding: 22px; display: flex; flex-direction: column; }
+            /* 담기 버튼은 카드 바닥에 붙는다 — 두 칸 높이가 달라도 줄이 맞는다. */
+            .st-bundle .st-buy { margin-top: auto; }
+            /* 신뢰 지표 — 값과 담기 사이. 결정 직전에 눈에 드는 자리다. */
+            .st-trust {
+                display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 10px; margin: 16px 0 4px; padding: 14px 10px;
+                border-radius: 12px; background: rgba(255,255,255,.05);
+            }
+            .st-trust div { text-align: center; min-width: 0; }
+            .st-trust b { display: block; color: var(--st-ink); font-size: 14px; font-weight: 900; white-space: nowrap; }
+            .st-trust span { display: block; margin-top: 3px; color: var(--st-mute); font-size: 11px; }
+            @media (max-width: 400px) { .st-trust b { font-size: 12.5px; } }
+            @media (max-width: 860px) {
+                .st-bundle { grid-template-columns: minmax(0, 1fr); }
+                .st-bundle-proof { border-right: 0; border-bottom: 1px solid var(--st-line); }
+            }
             .st-bundle h3 { font-size: 21px; }
             .st-bundle .st-price b { font-size: 30px; }
 
@@ -148,6 +186,24 @@ function StoreStyles() {
              */
             .st-cart-go { border: 0; cursor: pointer; font-family: inherit; }
 
+            /* 증거 — 진열대 위. 값을 보기 전에 눈에 들어와야 한다. */
+            .st-proof { margin: 0 0 22px; }
+
+            /* 값을 본 뒤 남는 물음 — 진열대 아래. 조용히 있다가 필요할 때 열린다. */
+            .st-notes { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--st-line); }
+            .st-faq { margin-bottom: 12px; }
+            .st-faq summary {
+                cursor: pointer; padding: 10px 0; color: var(--st-ink);
+                font-size: 13.5px; font-weight: 800;
+            }
+            .st-faq summary:hover { color: var(--st-gold-lit); }
+            .st-faq > div { padding: 4px 0 6px; display: grid; gap: 12px; }
+            .st-faq p { margin: 0; color: var(--st-dim); font-size: 13px; line-height: 1.7; }
+            .st-faq b { color: var(--st-ink); font-weight: 800; }
+            .st-note-line { margin: 8px 0 0; color: var(--st-mute); font-size: 12.5px; line-height: 1.6; }
+            .st-note-line a { color: var(--st-gold-lit); text-decoration: none; font-weight: 700; }
+            .st-note-line a:hover { text-decoration: underline; }
+
             /* ── 결제수단 고르기 모달 ─────────────────────── */
             .st-pay-backdrop {
                 position: fixed; inset: 0; z-index: 80; display: grid; place-items: center;
@@ -166,6 +222,33 @@ function StoreStyles() {
                 color: var(--st-dim); font-size: 15px; cursor: pointer; padding: 6px;
             }
             .st-pay-close:hover { color: #fff; }
+            /* 담은 내역 요약 — 얼마를 내는지가 창에서 바로 보여야 한다. */
+            .st-pay-sum {
+                display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+                padding: 12px 14px; border-radius: 11px; margin-bottom: 14px;
+                background: rgba(255,255,255,.04);
+            }
+            .st-pay-sum span { color: var(--st-dim); font-size: 12.5px; }
+            .st-pay-sum b { color: var(--st-gold-lit); font-size: 19px; font-weight: 900; font-variant-numeric: tabular-nums; }
+
+            /* 라이선스를 받을 이메일 — 로그인이 없으니 이 칸이 유일한 통로다. */
+            .st-pay-mail { display: block; margin-bottom: 14px; }
+            .st-pay-mail > span { display: block; margin-bottom: 6px; color: var(--st-ink); font-size: 13px; font-weight: 800; }
+            .st-pay-mail input {
+                width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 10px;
+                border: 1px solid rgba(255,255,255,.14); background: rgba(0,0,0,.32);
+                color: var(--st-ink); font: inherit; font-size: 14px;
+            }
+            .st-pay-mail input:focus { outline: 2px solid rgba(240,181,63,.5); outline-offset: 1px; }
+            .st-pay-mail input.warn { border-color: rgba(255,107,129,.6); }
+            .st-pay-mail em {
+                display: block; margin-top: 6px; font-style: normal;
+                color: var(--st-dim); font-size: 11.5px; line-height: 1.55;
+            }
+            .st-pay-mail input.warn + em { color: #ff8fa0; }
+
+            .st-pay-foot { margin: 14px 0 0; color: var(--st-mute); font-size: 11.5px; line-height: 1.6; }
+
             .st-pay-opt {
                 display: flex; align-items: center; gap: 13px; width: 100%; box-sizing: border-box;
                 padding: 15px 16px; margin-top: 10px; border-radius: 13px; text-align: left;

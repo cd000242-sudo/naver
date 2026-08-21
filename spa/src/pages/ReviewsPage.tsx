@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
+import { useEffect, useMemo, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
 import { isValidEmail, isValidPhone, maskContactText, maskEmail, maskPhone } from '../lib/privacy';
 
 /**
@@ -21,6 +21,8 @@ const AVATAR_COLORS: Array<[string, string]> = [
 interface Testimonial {
     author: string;
     role?: string;
+    /** 작성 시각 — 화면에 날짜로 적는다. 없으면 비운다. */
+    timestamp?: string;
     text: string;
     image?: string;
     mediaType?: 'image' | 'video';
@@ -30,6 +32,29 @@ interface Testimonial {
     email?: string;
     phone?: string;
 }
+
+/**
+ * 글쓴이가 넣은 줄바꿈을 문단으로 되살린다.
+ *
+ * 44건 중 28건이 여러 줄로 쓰였다(실측). 한 덩어리로 뭉치면 읽는 흐름이
+ * 사라진다 — 그 줄바꿈이 곧 글쓴이가 정한 읽는 속도다.
+ */
+function toParas(text: string): string[] {
+    return String(text || '')
+        .split(String.fromCharCode(10))
+        .map((line) => line.replace(String.fromCharCode(13), '').trim())
+        .filter(Boolean);
+}
+
+/** '2026-03-31T…' → '2026-03-31'. 못 읽으면 빈 문자열 — 지어내지 않는다. */
+function fmtDate(value?: string): string {
+    const at = new Date(String(value || ''));
+    if (Number.isNaN(at.getTime())) return '';
+    return at.toISOString().slice(0, 10);
+}
+
+/** 자세히 쓴 글을 가르는 기준. 이 아래는 짧은 한마디로 본다. */
+const LONG_REVIEW_CHARS = 300;
 
 function pickAvatarGradient(name: string) {
     let h = 0;
@@ -59,6 +84,7 @@ function normalizeReview(raw: any): Testimonial | null {
     return {
         author,
         role,
+        timestamp: firstText(raw?.timestamp, raw?.date, raw?.createdAt),
         text: maskContactText(text || '수익인증 자료를 등록한 후기입니다.'),
         image,
         mediaType,
@@ -92,6 +118,18 @@ function writeCachedReviews(items: Testimonial[]) {
 function ReviewsPage() {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+    /*
+     * 길이로 두 갈래로 나눈다 — 자세히 쓴 글은 앞에 넓게, 짧은 한마디는 격자로.
+     * 앞세우는 것은 셋까지다. 그 이상이면 '앞세운다'는 말이 무의미해진다.
+     */
+    const featured = useMemo(
+        () => testimonials.filter((t) => (t.text || '').length >= LONG_REVIEW_CHARS).slice(0, 3),
+        [testimonials],
+    );
+    const shorts = useMemo(
+        () => testimonials.filter((t) => !featured.includes(t)),
+        [testimonials, featured],
+    );
     const [loading, setLoading] = useState(true);
     const [modalOpen, setModalOpen] = useState(false);
     const [author, setAuthor] = useState('');
@@ -250,7 +288,15 @@ function ReviewsPage() {
 
     return (
         <div style={{ position: 'relative', zIndex: 1 }}>
-            <section className="reviews-page-shell" style={{ padding: '140px 20px 100px', maxWidth: 1200, margin: '0 auto' }}>
+            {/*
+              * 후기는 자기 바닥을 직접 칠한다.
+              *
+              * 이 사이트 배경은 계절 테마 사진(밝은 하늘)이라, 어두운 글씨와 옅은
+              * 카드가 그대로 얹히면 읽히지 않는다(사장님 실측 2026-08-21).
+              * 상점(ProductStore)이 같은 이유로 자기 판을 칠하고 있다 — 같은 방식을 쓴다.
+              */}
+            <section className="reviews-page-shell" style={{ padding: '120px 20px 90px', maxWidth: 1200, margin: '0 auto' }}>
+              <div className="reviews-ink">
                 <div className="reviews-page-head" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20, marginBottom: 42, flexWrap: 'wrap' }}>
                     <div>
                         <span style={{ display: 'inline-flex', minHeight: 30, alignItems: 'center', padding: '6px 14px', background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.28)', borderRadius: 8, color: '#44d7b6', fontSize: 12, fontWeight: 900, letterSpacing: 0, marginBottom: 16 }}>REVIEWS</span>
@@ -277,51 +323,154 @@ function ReviewsPage() {
                 </div>
 
                 {loading ? (
-                    <div style={{ padding: 34, borderRadius: 12, border: '1px solid rgba(255,255,255,0.10)', background: 'rgba(18,18,26,0.76)', color: 'rgba(255,255,255,0.72)' }}>후기를 불러오는 중입니다.</div>
+                    <div className="rv-empty">후기를 불러오는 중입니다.</div>
                 ) : testimonials.length === 0 ? (
-                    <div style={{ padding: '44px 28px', borderRadius: 12, border: '1px solid rgba(255,255,255,0.10)', background: 'rgba(18,18,26,0.76)', textAlign: 'center' }}>
-                        <h2 style={{ margin: '0 0 10px', fontSize: 24 }}>아직 공개된 후기가 없습니다</h2>
-                        <p style={{ margin: 0, color: 'rgba(255,255,255,0.62)', lineHeight: 1.7 }}>더미 후기는 표시하지 않습니다. 실제 수익인증과 후기가 승인되면 이곳에 노출됩니다.</p>
+                    <div className="rv-empty">
+                        <h2>아직 공개된 후기가 없습니다</h2>
+                        <p>더미 후기는 표시하지 않습니다. 실제 후기가 승인되면 이곳에 나옵니다.</p>
                     </div>
                 ) : (
-                    <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 22 }}>
-                        {testimonials.map((t, i) => (
-                            <article className="review-card" key={`${t.author}-${i}`} style={{ background: 'rgba(18,18,26,0.78)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, overflow: 'hidden', boxShadow: '0 18px 52px rgba(0,0,0,0.22)' }}>
-                                {t.image && (
-                                    <div style={{ background: '#080d14', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                                        {t.mediaType === 'video' ? (
-                                            <video src={t.image} controls playsInline style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }} />
-                                        ) : (
-                                            <img src={t.image} alt={t.imageAlt || '수익인증 이미지'} style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }} />
-                                        )}
-                                    </div>
-                                )}
-                                <div style={{ padding: 24 }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-                                        <div style={{ width: 42, height: 42, borderRadius: 8, background: t.gradient || pickAvatarGradient(t.author), display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 17, fontWeight: 900, color: '#fff' }}>
-                                            {(t.author.replace(/[^가-힣A-Za-z0-9]/g, '')[0] || '?').toUpperCase()}
-                                        </div>
-                                        <div>
-                                            <div style={{ fontWeight: 900, fontSize: 14, color: '#fff' }}>{t.author}</div>
-                                            {t.role && <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)' }}>{t.role}</div>}
-                                        </div>
-                                    </div>
-                                    {t.badge && <div style={{ display: 'inline-flex', padding: '6px 10px', borderRadius: 8, background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.26)', color: '#44d7b6', fontSize: 12, fontWeight: 800, marginBottom: 12 }}>{t.badge}</div>}
-                                    {(t.email || t.phone) && (
-                                        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
-                                            {t.email && <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.58)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 999, padding: '4px 8px' }}>{t.email}</span>}
-                                            {t.phone && <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.58)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 999, padding: '4px 8px' }}>{t.phone}</span>}
-                                        </div>
-                                    )}
-                                    <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.84)', lineHeight: 1.78, margin: 0, whiteSpace: 'pre-wrap' }}>{t.text}</p>
+                    <>
+                        {/*
+                          * 길이에 따라 자리가 다르다(사장님 선택 2026-08-21).
+                          * 자세히 쓴 글은 읽히라고 쓴 것이라 앞에 넓게 두고 접지 않는다.
+                          * 짧은 한마디는 뒤에 격자로 — 높이는 글이 정한다. 25자짜리를
+                          * 500자짜리 높이에 맞추면 카드 아래가 통째로 빈다.
+                          */}
+                        {featured.length > 0 && (
+                            <>
+                                <div className="rv-sec">
+                                    <h2>자세히 쓴 후기</h2>
+                                    <span>쓰는 데 몇 분씩 들인 글입니다 — 접지 않고 그대로 싣습니다</span>
                                 </div>
-                            </article>
-                        ))}
-                    </div>
+                                <div className="rv-feats">
+                                    {featured.map((t, i) => (
+                                        <article className="rv-feat" key={`f-${t.author}-${i}`} style={{ ['--i' as string]: i }}>
+                                            <div className="rv-mark" aria-hidden="true">&ldquo;</div>
+                                            <div>
+                                                <div className="rv-feat-text">
+                                                    {toParas(t.text).map((para, k) => <p key={k}>{para}</p>)}
+                                                </div>
+                                                <footer>
+                                                    <span className="rv-who">{t.author}</span>
+                                                    <span className="rv-stars">{'★'.repeat(5)}</span>
+                                                    {t.role && <span className="rv-role">{t.role}</span>}
+                                                    <time>{fmtDate(t.timestamp)}</time>
+                                                </footer>
+                                            </div>
+                                        </article>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+
+                        {shorts.length > 0 && (
+                            <>
+                                <div className="rv-sec">
+                                    <h2>나머지 후기</h2>
+                                    <span>짧게 남긴 한마디</span>
+                                </div>
+                                <div className="rv-grid">
+                                    {shorts.map((t, i) => (
+                                        <article className="rv-card" key={`s-${t.author}-${i}`} style={{ ['--i' as string]: i }}>
+                                            <header>
+                                                <span className="rv-who">{t.author}</span>
+                                                <span className="rv-stars">{'★'.repeat(5)}</span>
+                                            </header>
+                                            <div className="rv-body">
+                                                {toParas(t.text).map((para, k) => <p key={k}>{para}</p>)}
+                                            </div>
+                                            {(t.image || t.role) && (
+                                                <footer>
+                                                    {t.role ? <span className="rv-role">{t.role}</span> : <span />}
+                                                    <time>{fmtDate(t.timestamp)}</time>
+                                                </footer>
+                                            )}
+                                        </article>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                    </>
                 )}
+              </div>
             </section>
 
             <style>{`
+                /* ── 후기 판 ─────────────────────────────────────
+                   길이에 따라 자리가 다르다: 자세히 쓴 글은 앞에 넓게,
+                   짧은 한마디는 격자로. 높이는 글이 정한다 — 25자짜리를
+                   500자짜리 높이에 맞추면 카드 아래가 통째로 빈다. */
+                /* 후기 판의 바닥 — 밝은 배경 사진 위에서도 글이 읽히게. */
+                .reviews-ink {
+                    background: rgba(8, 10, 16, 0.94);
+                    backdrop-filter: blur(18px);
+                    border: 1px solid rgba(255,255,255,0.08);
+                    border-radius: 22px;
+                    padding: clamp(22px, 4vw, 40px);
+                }
+                .reviews-ink .reviews-page-head { margin-bottom: 32px; }
+
+                .rv-empty {
+                    padding: 44px 28px; border-radius: 14px; text-align: center;
+                    border: 1px solid rgba(255,255,255,.09); background: rgba(18,18,26,.76);
+                    color: rgba(255,255,255,.68); line-height: 1.7;
+                }
+                .rv-empty h2 { margin: 0 0 10px; font-size: 22px; color: #fff; }
+                .rv-empty p { margin: 0; }
+
+                .rv-sec { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin: 0 0 18px; }
+                .rv-sec h2 { margin: 0; font-size: 19px; font-weight: 900; letter-spacing: -.01em; }
+                .rv-sec span { color: rgba(255,255,255,.45); font-size: 12.5px; }
+
+                .rv-feats { display: grid; gap: 14px; margin-bottom: 46px; }
+                .rv-feat {
+                    display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 8px;
+                    padding: 22px 26px 20px; border-radius: 16px;
+                    border: 1px solid rgba(240,181,63,.2);
+                    background: linear-gradient(180deg, rgba(240,181,63,.05), transparent 42%), rgba(255,255,255,.03);
+                    opacity: 0; animation: rvUp 460ms cubic-bezier(.2,.8,.3,1) forwards;
+                    animation-delay: calc(.1s + var(--i) * .12s);
+                }
+                .rv-mark { font-size: 42px; line-height: .9; color: #f0b53f; opacity: .42; font-family: Georgia, serif; }
+                .rv-feat-text p { margin: 0 0 9px; font-size: 15px; line-height: 1.85; color: #eef2f8; word-break: keep-all; }
+                .rv-feat-text p:last-child { margin-bottom: 0; }
+                .rv-feat footer, .rv-card footer {
+                    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+                    margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.08);
+                }
+                .rv-who { font-size: 13.5px; font-weight: 800; color: #eef2f8; }
+                .rv-stars { color: #f0b53f; font-size: 12.5px; letter-spacing: 1.5px; }
+                .rv-role {
+                    padding: 3px 9px; border-radius: 6px; font-size: 11px; font-weight: 800;
+                    background: rgba(240,181,63,.12); color: #ffd88a;
+                }
+                .rv-feat time, .rv-card time { margin-left: auto; color: rgba(255,255,255,.42); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+
+                .rv-grid { columns: 3 300px; column-gap: 14px; }
+                .rv-card {
+                    break-inside: avoid; margin: 0 0 14px; padding: 16px 18px; border-radius: 13px;
+                    border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);
+                    opacity: 0; animation: rvUp 420ms cubic-bezier(.2,.8,.3,1) forwards;
+                    animation-delay: calc(.25s + var(--i) * .04s);
+                }
+                .rv-card header {
+                    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+                    padding-bottom: 9px; margin-bottom: 11px; border-bottom: 1px solid rgba(255,255,255,.08);
+                }
+                .rv-card .rv-body p { margin: 0 0 6px; color: rgba(238,242,248,.78); font-size: 13px; line-height: 1.76; word-break: keep-all; }
+                .rv-card .rv-body p:last-child { margin-bottom: 0; }
+                .rv-card footer { margin-top: 11px; padding-top: 11px; }
+
+                @keyframes rvUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+                @media (prefers-reduced-motion: reduce) {
+                    .rv-feat, .rv-card { animation: none; opacity: 1; transform: none; }
+                }
+                @media (max-width: 560px) {
+                    .rv-feat { grid-template-columns: minmax(0, 1fr); padding: 20px; }
+                    .rv-mark { display: none; }
+                }
+
                 @media (max-width: 640px) {
                     .reviews-page-shell {
                         padding: 104px 14px 64px !important;

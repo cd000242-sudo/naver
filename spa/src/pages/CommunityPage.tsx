@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
+import PostsPanel from '../components/community/PostsPanel';
 import { Link } from 'react-router-dom';
 import { isValidEmail, isValidPhone, maskContactText, maskEmail, maskPhone } from '../lib/privacy';
 import {
@@ -23,7 +24,7 @@ const COMMUNITY_RESPONSE_MAX_BYTES = 32 * 1024 * 1024;
 const COMMUNITY_DATA_MEDIA_MAX_CHARS = 32 * 1024 * 1024;
 const MAX_MEDIA_BYTES = 18 * 1024 * 1024;
 
-type TabKey = 'income' | 'tips';
+type TabKey = 'income' | 'tips' | 'posts';
 type WriteKind = 'income' | 'tips';
 
 interface CommunityMedia { media?: string; mediaType?: 'image' | 'video'; mediaName?: string; }
@@ -279,6 +280,124 @@ function CommunityPage() {
     return (
         <div style={{ position: 'relative', zIndex: 1 }}>
             <style>{`
+                /* ── 내 글 홍보 판 ─────────────────────────────
+                   상호성이 눈에 보여야 판이 돈다: 들른 수를 크게, 상대의
+                   품앗이 기록을 카드에 적는다. 화면이 만드는 숫자는 없다. */
+                .cp-head { margin-bottom: 22px; }
+                .cp-head h2 { margin: 0 0 8px; font-size: 24px; font-weight: 900; }
+                .cp-head p { margin: 0; color: rgba(255,255,255,.68); font-size: 14px; }
+                .cp-rules { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+                .cp-rules span {
+                    padding: 7px 13px; border-radius: 8px; font-size: 12.5px; font-weight: 700;
+                    background: rgba(255,255,255,.055); color: rgba(255,255,255,.72);
+                }
+                .cp-rules b { color: #5ee3ac; }
+
+                .cp-today {
+                    display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px;
+                    margin: 0 0 24px; padding: 18px 20px; border-radius: 14px;
+                    border: 1px solid rgba(22,196,127,.22);
+                    background: radial-gradient(420px 200px at 10% 0%, rgba(22,196,127,.1), transparent 70%), rgba(255,255,255,.03);
+                }
+                .cp-today div { min-width: 0; }
+                .cp-today b { display: block; font-size: 24px; font-weight: 900; font-variant-numeric: tabular-nums; }
+                .cp-today div:nth-child(1) b { color: #5ee3ac; }
+                .cp-today div:nth-child(3) b { color: #f0b53f; }
+                .cp-today span { display: block; margin-top: 2px; color: rgba(255,255,255,.5); font-size: 12px; }
+                @media (max-width: 620px) { .cp-today { grid-template-columns: 1fr; gap: 14px; } }
+
+                .cp-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+                .cp-chips { display: flex; gap: 7px; flex-wrap: wrap; }
+                .cp-chips button {
+                    padding: 7px 14px; border-radius: 999px; cursor: pointer; font: inherit;
+                    font-size: 12.5px; font-weight: 700; border: 1px solid rgba(255,255,255,.1);
+                    background: transparent; color: rgba(255,255,255,.5);
+                }
+                .cp-chips button.on { background: #16c47f; border-color: #16c47f; color: #061018; font-weight: 900; }
+                .cp-chips em { font-style: normal; opacity: .72; margin-left: 4px; }
+                .cp-write {
+                    margin-left: auto; padding: 11px 20px; border-radius: 9px; border: 0; cursor: pointer;
+                    background: #16c47f; color: #061018; font: inherit; font-size: 13.5px; font-weight: 900;
+                }
+
+                .cp-composer {
+                    margin-bottom: 24px; padding: 22px; border-radius: 16px;
+                    border: 1px solid rgba(22,196,127,.25); background: rgba(255,255,255,.03);
+                }
+                .cp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+                @media (max-width: 620px) { .cp-row { grid-template-columns: 1fr; } }
+                .cp-composer label, .cp-field { display: block; margin-bottom: 13px; }
+                .cp-composer label > span, .cp-field > span {
+                    display: block; margin-bottom: 5px; font-size: 12.5px; font-weight: 800; color: rgba(255,255,255,.78);
+                }
+                .cp-composer label i { font-style: normal; font-weight: 400; color: rgba(255,255,255,.42); }
+                .cp-composer input, .cp-composer textarea {
+                    width: 100%; box-sizing: border-box; padding: 11px 13px; border-radius: 9px;
+                    font: inherit; font-size: 13.5px; border: 1px solid rgba(255,255,255,.1);
+                    background: rgba(0,0,0,.32); color: #eef2f8;
+                }
+                .cp-composer textarea { min-height: 64px; resize: vertical; }
+                .cp-composer input[readonly] { color: rgba(255,255,255,.78); }
+                .cp-field em {
+                    display: block; margin-top: 5px; font-style: normal;
+                    color: rgba(255,255,255,.42); font-size: 11.5px; line-height: 1.55;
+                }
+                .cp-field em.ok { color: #5ee3ac; }
+                .cp-msg { margin: 4px 0 0; font-size: 12.5px; }
+                .cp-msg.ok { color: #5ee3ac; }
+                .cp-msg.error { color: #ff8fa0; }
+                .cp-composer-foot { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+                .cp-composer-foot span { color: rgba(255,255,255,.42); font-size: 12px; }
+                .cp-composer-foot button {
+                    margin-left: auto; padding: 12px 24px; border-radius: 9px; border: 0; cursor: pointer;
+                    background: #16c47f; color: #061018; font: inherit; font-size: 13.5px; font-weight: 900;
+                }
+                .cp-composer-foot button:disabled { opacity: .6; cursor: not-allowed; }
+
+                .cp-empty {
+                    padding: 40px 24px; border-radius: 14px; text-align: center;
+                    border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.03);
+                    color: rgba(255,255,255,.6);
+                }
+                .cp-empty b { display: block; margin-bottom: 8px; font-size: 17px; color: #fff; }
+                .cp-empty p { margin: 0; }
+
+                .cp-list { display: grid; gap: 10px; }
+                .cp-post {
+                    display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 16px; align-items: center;
+                    padding: 16px 18px; border-radius: 13px;
+                    border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);
+                    opacity: 0; animation: cpUp 400ms cubic-bezier(.2,.8,.3,1) forwards;
+                    animation-delay: calc(.1s + var(--i) * .04s);
+                }
+                @keyframes cpUp { from { opacity:0; transform: translateY(10px);} to { opacity:1; transform:none;} }
+                @media (max-width: 620px) { .cp-post { grid-template-columns: 1fr; gap: 12px; } }
+                .cp-post-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+                .cp-plat { padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; background: rgba(255,255,255,.06); color: rgba(255,255,255,.6); }
+                .cp-plat.naver { background: rgba(3,199,90,.14); color: #4ade80; }
+                .cp-plat.tistory { background: rgba(255,90,0,.14); color: #ff9e66; }
+                .cp-plat.blogspot { background: rgba(255,168,0,.14); color: #ffc966; }
+                .cp-when { color: rgba(255,255,255,.4); font-size: 11.5px; }
+                .cp-post h3 { margin: 0 0 4px; font-size: 15.5px; font-weight: 700; line-height: 1.45; }
+                .cp-post h3 a { color: #eef2f8; text-decoration: none; }
+                .cp-post h3 a:hover { color: #5ee3ac; }
+                .cp-desc { margin: 0 0 7px; color: rgba(255,255,255,.7); font-size: 13px; line-height: 1.6; }
+                .cp-meta { display: flex; gap: 12px; flex-wrap: wrap; color: rgba(255,255,255,.44); font-size: 12px; }
+                .cp-meta b { color: rgba(255,255,255,.75); font-weight: 700; font-variant-numeric: tabular-nums; }
+                .cp-go {
+                    display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;
+                    padding: 10px 16px; border-radius: 11px; font: inherit;
+                    border: 1px solid rgba(22,196,127,.4); background: rgba(22,196,127,.1);
+                    color: #5ee3ac; font-size: 12.5px; font-weight: 800; white-space: nowrap;
+                }
+                .cp-go:hover { background: rgba(22,196,127,.18); }
+                .cp-go b { font-size: 17px; font-weight: 900; font-variant-numeric: tabular-nums; }
+                .cp-go span { font-size: 11px; }
+                .cp-post.visited .cp-go {
+                    border-color: rgba(255,255,255,.1); background: rgba(255,255,255,.05); color: rgba(255,255,255,.45);
+                }
+                @media (prefers-reduced-motion: reduce) { .cp-post { animation: none; opacity: 1; transform: none; } }
+
                 .community-field::placeholder { color: rgba(226,232,240,0.64); opacity: 1; }
                 .community-field:focus {
                     border-color: rgba(68,215,182,0.76) !important;
@@ -319,6 +438,7 @@ function CommunityPage() {
                         [
                             ['income', '수익 인증'],
                             ['tips', '활용 팁'],
+                            ['posts', '내 글 홍보'],
                         ] as Array<[TabKey, string]>
                     ).map(([key, label]) => (
                         <button
@@ -353,6 +473,12 @@ function CommunityPage() {
                 )}
                 {tab === 'income' && <IncomePanel items={income.length > 0 ? income : managedIncome} onWrite={() => setWriter('income')} />}
                 {tab === 'tips' && <TipsPanel items={tips} onWrite={() => setWriter('tips')} />}
+                {/*
+                  * '내 글 홍보' — 서로 들러 주는 판(사장님 설계 2026-08-21).
+                  * 자기 판을 직접 그린다: 올리기·들르기·집계가 한 덩어리라
+                  * 바깥에서 상태를 나눠 갖지 않는 편이 고치기 쉽다.
+                  */}
+                {tab === 'posts' && <PostsPanel />}
             </section>
 
             {writer && (

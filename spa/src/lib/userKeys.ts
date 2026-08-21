@@ -33,12 +33,21 @@ export type UserKeyField =
     | 'xaiKey'
     | 'brandconnectSpaceId'
     | 'apihubKeyId'
-    | 'apihubKey';
+    | 'apihubKey'
+    /*
+     * Bright Data 토큰 — 네이버 밖 커뮤니티를 훑을 때만 쓴다.
+     *
+     * **반드시 방문자 본인 것이어야 한다.** 서버에 하나 박아 두면 누가 레이더를
+     * 돌리든 그 한 사람의 크레딧이 나간다(사장님 지적 2026-08-21 "내 BD를 다른
+     * 사용자들이 쓰면 안 되잖아"). 레이더 한 회차가 26건이라 몇 사람만 써도
+     * 월 예산이 사라진다. 키는 이 브라우저에만 있고 호출할 때만 서버로 간다.
+     */
+    | 'brightDataToken';
 
 export type UserKeys = Partial<Record<UserKeyField, string>>;
 
 export type KeyGroup = {
-    id: 'searchad' | 'openapi' | 'apihub' | 'youtube' | 'coupang' | 'brandconnect';
+    id: 'searchad' | 'openapi' | 'apihub' | 'youtube' | 'coupang' | 'brandconnect' | 'brightdata';
     label: string;
     desc: string;
     /** 어디서 발급받는지. 사용자가 바로 갈 수 있어야 한다. */
@@ -118,6 +127,15 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
         issueUrl: 'https://brandconnect.naver.com/',
         fields: [
             { key: 'brandconnectSpaceId', label: '내 스페이스 ID', secret: false, placeholder: '876491907827712', minLength: 8 },
+        ],
+    },
+    {
+        id: 'brightdata',
+        label: 'Bright Data (외부유입 레이더)',
+        desc: '네이버 밖 커뮤니티 31판을 훑을 때만 씁니다. 가입하면 매달 5,000건이 공짜라 레이더를 190회쯤 돌릴 수 있습니다. 키가 없으면 네이버 4판만 훑습니다.',
+        issueUrl: 'https://brightdata.com/cp/setting/users',
+        fields: [
+            { key: 'brightDataToken', label: 'API 토큰', secret: true, placeholder: '계정 설정 → API tokens', minLength: 20 },
         ],
     },
 ];

@@ -195,7 +195,6 @@ function PricingPage() {
     const [tab, setTab] = useState<TabKey>(TAB_KEYS.includes(initialTab as TabKey) ? (initialTab as TabKey) : 'naver');
     const [selected, setSelected] = useState<Plan | null>(null);
     const [email, setEmail] = useState('');
-    const [emailShake, setEmailShake] = useState(false);
     const [paying, setPaying] = useState(false);
     const [pricingNow, setPricingNow] = useState(() => Date.now());
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
@@ -204,7 +203,6 @@ function PricingPage() {
     // 체험하기 클릭 시 비밀번호를 바로 보여주는 모달. 이메일 답장을 못 받아 비번을
     // 모르는 이탈을 막는다 — 모든 다운로드 비번은 1645 로 동일하다.
     const [trialPwOpen, setTrialPwOpen] = useState(false);
-    const paymentSectionRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         const prev = document.title;
@@ -250,18 +248,20 @@ function PricingPage() {
             setTrialPwOpen(true);
             return;
         }
+        // 결제는 상점 결제창에서 끝난다 — 예전처럼 아래 구역으로 데려갈 곳이 없다.
         setSelected(p);
-        window.setTimeout(() => {
-            paymentSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 50);
     };
 
-    const requestPayment = async () => {
+    /*
+     * 이메일은 인자로도 받는다. 상점 창(ProductStore)이 담기·이메일·수단을 한
+     * 자리에서 받게 되면서, 아래 결제 구역까지 내려오지 않고 곧장 결제창을
+     * 띄우기 때문이다(사장님 지적 2026-08-21). 인자가 없으면 예전처럼
+     * 아래 구역의 입력값을 쓴다 — 두 길이 같은 함수를 공유한다.
+     */
+    const requestPayment = async (emailArg?: string) => {
         if (!selected || !tossRef.current) return;
-        const e = email.trim();
+        const e = (emailArg || email).trim();
         if (!e || !e.includes('@')) {
-            setEmailShake(true);
-            window.setTimeout(() => setEmailShake(false), 600);
             return;
         }
         setPaying(true);
@@ -723,6 +723,50 @@ function PricingPage() {
                   */}
                 <div style={{ background: 'rgba(8, 10, 16, 0.94)', backdropFilter: 'blur(18px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 22, padding: 'clamp(20px, 4vw, 40px)', marginBottom: 28 }}>
                 <ProductStore
+                    /*
+                     * 증거를 진열대 **위**에 둔다(사장님 지시 2026-08-21 "먼저
+                     * 보이게 하면 좋지 않니 · 한눈에 잘 보이면 좋겠어").
+                     * 예전에는 판 바깥 저 아래에 있어서, 값을 본 사람이 증거까지
+                     * 내려오지 않았다. 같은 판 안에 있어야 한 눈에 든다.
+                     */
+                    proof={<ProofShowcase compact variant="carousel" className="purchase-proof-inline" />}
+                    /*
+                     * 신뢰 지표는 값 **바로 옆**에 선다(사장님 지시 2026-08-21).
+                     * 판 아래 따로 떠 있을 때는 값을 보고 결정하는 순간에 눈에
+                     * 안 들어왔다 — 별점·사용자 수·환불 보장은 그 순간 필요한 재료다.
+                     */
+                    trust={(
+                        <div className="st-trust">
+                            <div><b>⭐ 4.9 / 5</b><span>실사용 후기 기반</span></div>
+                            <div><b>2,847명</b><span>현재 활성 사용자</span></div>
+                            <div><b>🛡️ 7일 환불</b><span>미사용 시 전액 환불</span></div>
+                        </div>
+                    )}
+                    /*
+                     * 값을 본 뒤 남는 물음 — FAQ·환불·계좌이체. 예전에는 이메일
+                     * 입력칸이 딸린 별도 결제 구역에 얹혀 있었는데, 그 구역 자체가
+                     * 상점과 겹쳐 사라졌다(결제는 이제 상점 결제창에서 끝난다).
+                     * 남길 값어치가 있는 것만 판 안으로 옮겼다.
+                     */
+                    notes={(
+                        <>
+                            <details className="st-faq">
+                                <summary>결제 전 자주 묻는 질문</summary>
+                                <div>
+                                    <p><b>결제 정보는 안전한가요?</b><br />토스페이먼츠 공식 PG 로 처리됩니다. 카드 정보는 저희 서버에 저장되지 않습니다.</p>
+                                    <p><b>환불이 정말 가능한가요?</b><br />라이선스 발급 후 7일 이내·서비스 미사용이면 전액 환불됩니다. 카카오톡 1:1 상담으로 바로 신청하실 수 있습니다.</p>
+                                    <p><b>사용법이 어렵지 않나요?</b><br />설치하고 키워드만 넣으면 글·이미지·발행까지 자동입니다. 처음 5분 안내 영상과 카카오톡 지원이 함께 갑니다.</p>
+                                </div>
+                            </details>
+                            <p className="st-note-line">
+                                라이선스 코드 발급 후 7일 이내, 서비스 미사용 시 전액 환불됩니다.{' '}
+                                <Link to="/refund">환불정책 보기 →</Link>
+                            </p>
+                            <p className="st-note-line">
+                                결제 진행 시 <Link to="/terms">이용약관</Link>과 <Link to="/privacy">개인정보처리방침</Link>에 동의하는 것으로 봅니다.
+                            </p>
+                        </>
+                    )}
                     onPick={(pick) => setSelected(pick ? {
                         id: pick.id,
                         name: pick.name,
@@ -734,150 +778,14 @@ function PricingPage() {
                         period: '',
                         features: [],
                     } : null)}
-                    onCardPay={() => {
-                        paymentSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    onCardPay={(mail) => {
+                        // 창에서 받은 이메일을 아래 구역에도 채워 둔다 — 되돌아왔을 때 다시 안 적게.
+                        setEmail(mail);
+                        void requestPayment(mail);
                     }}
                 />
                 </div>
 
-                {/* Trust bar */}
-                <div style={{ maxWidth: 720, margin: '36px auto 18px', padding: '18px 22px', background: 'rgba(255,255,255,0.95)', borderRadius: 14, boxShadow: '0 6px 22px rgba(0,0,0,0.14)' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-around', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
-                        <div style={{ textAlign: 'center', minWidth: 90 }}>
-                            <div style={{ fontSize: 22, fontWeight: 800, color: '#c9a84c' }}>⭐ 4.9 / 5</div>
-                            <div style={{ fontSize: 12, color: '#5b6b7a', marginTop: 2 }}>실사용 후기 기반</div>
-                        </div>
-                        <div style={{ textAlign: 'center', minWidth: 90 }}>
-                            <div style={{ fontSize: 22, fontWeight: 800, color: '#14304d' }}>2,847명</div>
-                            <div style={{ fontSize: 12, color: '#5b6b7a', marginTop: 2 }}>현재 활성 사용자</div>
-                        </div>
-                        <div style={{ textAlign: 'center', minWidth: 90 }}>
-                            <div style={{ fontSize: 22, fontWeight: 800, color: '#44d7b6' }}>🛡️ 7일 환불</div>
-                            <div style={{ fontSize: 12, color: '#5b6b7a', marginTop: 2 }}>미사용 시 전액 환불</div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Payment section */}
-                <div ref={paymentSectionRef} style={{ maxWidth: 720, margin: '0 auto', padding: '28px 24px', background: 'rgba(18,18,26,0.7)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,215,0,0.15)', borderRadius: 18 }}>
-                    <label style={{ display: 'block', marginBottom: 8, color: '#FFD700', fontSize: 14, fontWeight: 700 }}>📧 {pricingPage.paymentEmailLabel || '라이선스를 받을 이메일'}</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="example@email.com"
-                        style={{
-                            width: '100%', padding: '14px 16px',
-                            background: 'rgba(0,0,0,0.3)',
-                            border: '1px solid rgba(255,255,255,0.1)',
-                            borderRadius: 10, color: '#fff', fontSize: 14,
-                            outline: 'none', boxSizing: 'border-box',
-                            animation: emailShake ? 'shakePay 0.4s' : 'none',
-                        }}
-                    />
-                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 6, marginBottom: 14 }}>{pricingPage.paymentEmailHelp || '결제 완료 후 이 이메일로 올인원 라이선스 코드가 발송됩니다.'}</p>
-
-                    <button
-                        onClick={requestPayment}
-                        disabled={!selected || paying || !sdkReady}
-                        style={{
-                            width: '100%', padding: 18, borderRadius: 14, border: 'none',
-                            background: selected && sdkReady && !paying ? gradient.goldBright : whiteA(0.08),
-                            color: selected && sdkReady && !paying ? onGold.black : whiteA(0.4),
-                            fontSize: 16, fontWeight: 800,
-                            cursor: selected && sdkReady && !paying ? 'pointer' : 'not-allowed',
-                            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                        }}
-                    >
-                        {paying && <span style={{ width: 16, height: 16, border: '2px solid currentColor', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spinPay 0.8s linear infinite' }} />}
-                        <span>{paying ? '결제 중...' : chargeLabel}</span>
-                    </button>
-                    <p style={{ textAlign: 'center', color: '#c9a84c', fontSize: 13, marginTop: 10, lineHeight: 1.7 }}>
-                        {(pricingPage.paymentNote || '구매 시 올인원 코드 1개가 발급되며, 이용 기간 안에서 네이버 자동화툴·LEWORD·Leaders Orbit을 함께 사용할 수 있습니다.\n무료 다운로드 체험은 Better Life Naver 기준이며, LEWORD·Orbit은 올인원 구매 후 함께 이용합니다.').split('\n').map((line, index, arr) => (
-                            <Fragment key={`${line}-${index}`}>{line}{index < arr.length - 1 ? <br /> : null}</Fragment>
-                        ))}
-                    </p>
-                    <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: 12, marginTop: 8 }}>
-                        결제 진행 시 <Link to="/terms" style={{ color: '#FFD700' }}>이용약관</Link> 및 <Link to="/privacy" style={{ color: '#FFD700' }}>개인정보처리방침</Link>에 동의하는 것으로 간주됩니다.
-                    </p>
-
-                    <details style={{ marginTop: 16, padding: '12px 16px', background: 'rgba(20,48,77,0.15)', borderRadius: 10, border: '1px solid rgba(255,255,255,0.06)' }}>
-                        <summary style={{ cursor: 'pointer', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.8)' }}>❓ 결제 전 자주 묻는 질문</summary>
-                        <div style={{ marginTop: 12, fontSize: 13, lineHeight: 1.7, color: 'rgba(255,255,255,0.65)' }}>
-                            <p style={{ marginBottom: 10 }}><strong>Q. 결제 정보는 안전한가요?</strong><br />토스페이먼츠(Toss Payments) 공식 PG를 통해 처리됩니다. 카드 정보가 저희 서버에 저장되지 않으며, 토스 보안 인증을 거칩니다.</p>
-                            <p style={{ marginBottom: 10 }}><strong>Q. 환불이 정말 가능한가요?</strong><br />라이선스 발급 후 7일 이내·서비스 미사용 시 전액 환불됩니다. 카카오톡 1:1 상담으로 즉시 신청 가능합니다.</p>
-                            <p style={{ margin: 0 }}><strong>Q. 사용법이 어렵지 않나요?</strong><br />설치 후 키워드만 입력하면 AI가 자동으로 글·이미지·발행까지 처리합니다. 처음 5분 안내 영상 제공 + 카카오톡 무료 지원 포함.</p>
-                        </div>
-                    </details>
-                </div>
-
-                {/* Individual lifetime inquiry */}
-                {/*
-                  * "개별 영구제는 별도 문의" 블록은 뺐다 — 이제 개별 제품을
-                  * 기간제·영구제 모두 상점에서 직접 판다. 문의로 보내는 건
-                  * 팔 수 있는 것을 안 파는 것이 됐다.
-                  */}
-                {/* Refund banners */}
-                <div style={{ maxWidth: 720, margin: '14px auto 0', padding: '12px 20px', background: 'rgba(255,215,0,0.08)', border: '1px solid rgba(255,215,0,0.2)', borderRadius: 10, fontSize: 13, color: 'rgba(255,255,255,0.75)', textAlign: 'center' }}>
-                    💡 라이선스 코드 발급 후 7일 이내, 서비스 미사용 시 전액 환불 가능합니다.{' '}
-                    <Link to="/refund" style={{ color: '#FFD700' }}>환불정책 자세히 보기 →</Link>
-                </div>
-                <div style={{ maxWidth: 720, margin: '12px auto 0', padding: '12px 20px', background: 'linear-gradient(135deg, rgba(68,215,182,0.08), rgba(68,215,182,0.02))', border: '1px solid rgba(68,215,182,0.3)', borderRadius: 10, fontSize: 13, color: 'rgba(255,255,255,0.75)', textAlign: 'center' }}>
-                    🏦 카드 결제가 어려우신가요?{' '}
-                    <Link to="/bank-order" style={{ color: '#44d7b6' }}>계좌이체로 결제하기 →</Link>
-                </div>
-
-                {/*
-                  * 발행 영상·성과 인증은 구매창 **아래**로 내렸다(사장님 2026-08-20
-                  * "바로 구매창이 뜨는 게 낫지 않나"). 결정을 굳히는 증거는
-                  * 값을 본 다음에 온다 — 먼저 나오면 진열대를 미루는 벽이 된다.
-                  */}
-                <section className="purchase-proof-showcase" aria-label="실제 발행 영상과 수익 성과 인증">
-                    <div className="purchase-video-side">
-                        <div className="purchase-section-eyebrow">REAL WORKFLOW</div>
-                        <h3>결제 전, 실제로 글이 발행되는 장면부터 확인하세요</h3>
-                        <p>
-                            Better Life Naver와 Leadernam Orbit이 실제로 글을 만들고 각 채널에 발행되는 과정을 영상으로 먼저 보여줍니다.
-                            구매 페이지에서 기능이 말이 아니라 화면으로 증명되도록 배치했습니다.
-                        </p>
-                        <article className="purchase-main-video">
-                            <video
-                                src={PURCHASE_SHOWCASE_VIDEOS[0].src}
-                                controls
-                                muted
-                                loop
-                                playsInline
-                                preload="metadata"
-                                aria-label={PURCHASE_SHOWCASE_VIDEOS[0].title}
-                            />
-                            <div>
-                                <span>{PURCHASE_SHOWCASE_VIDEOS[0].label}</span>
-                                <strong>{PURCHASE_SHOWCASE_VIDEOS[0].title}</strong>
-                                <p>{PURCHASE_SHOWCASE_VIDEOS[0].desc}</p>
-                            </div>
-                        </article>
-                        <div className="purchase-video-grid">
-                            {PURCHASE_SHOWCASE_VIDEOS.slice(1).map((video) => (
-                                <article className="purchase-mini-video" key={video.src}>
-                                    <video
-                                        src={video.src}
-                                        controls
-                                        muted
-                                        playsInline
-                                        preload="metadata"
-                                        aria-label={video.title}
-                                    />
-                                    <div>
-                                        <span>{video.label}</span>
-                                        <strong>{video.title}</strong>
-                                    </div>
-                                </article>
-                            ))}
-                        </div>
-                    </div>
-
-                    <ProofShowcase compact variant="carousel" className="purchase-proof-side" />
-                </section>
 
                 <style>{`
                     @keyframes shakePay{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
