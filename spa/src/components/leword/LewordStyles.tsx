@@ -362,6 +362,29 @@ function LewordStyles() {
             }
             .lw-linktag.on { background: rgba(46,204,113,.15); color: #2ecc71; }
             .lw-linktag.ready { background: rgba(255,215,0,.13); color: #ffd700; }
+            /* 빈자리 판정 근거 — 무엇을 기준으로 셌는지 눈에 보이게. */
+            .lw-slot-basis {
+                margin-left: 4px; font-style: normal; font-size: 9.5px; font-weight: 700;
+                color: rgba(235,242,250,.4);
+            }
+            .lw-slots { margin: 10px 0 0; }
+            .lw-slots summary {
+                cursor: pointer; color: #9aa1b2; font-size: 12px; font-weight: 700;
+                padding: 5px 0;
+            }
+            .lw-slots summary:hover { color: #cfc4ff; }
+            .lw-slots ol { margin: 6px 0 0; padding: 0 0 0 4px; list-style: none; display: grid; gap: 5px; }
+            .lw-slots li { display: flex; align-items: baseline; gap: 8px; font-size: 12px; }
+            .lw-slots li b { width: 16px; color: #646b7d; font-variant-numeric: tabular-nums; }
+            .lw-slots li em {
+                flex: 1; min-width: 0; font-style: normal; color: rgba(235,242,250,.75);
+                overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            }
+            .lw-slots li i { font-style: normal; font-size: 11px; font-weight: 800; color: #646b7d; }
+            .lw-slots li.open i { color: #2ecc71; }
+            .lw-slots li.open em { color: #fff; }
+            .lw-slots p { margin: 8px 0 0; color: #646b7d; font-size: 11.5px; }
+
             /* 제휴 제목 만들기 — 세 레인(쿠팡·토스·브랜드커넥트)이 같은 모양을 쓴다. */
             /*
              * 카드(.lw-product)가 4칸 grid 라 이 블록이 5번째 칸으로 밀려

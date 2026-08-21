@@ -105,6 +105,11 @@ type PreemptionRow = {
         medianDaysAgo: number | null;
         /** 지금 그 자리를 차지한 글 제목 3개. */
         topTitles?: string[];
+        /*
+         * 자리 판정의 근거 — 잰 순간의 블로그탭 상위 제목과 커버리지.
+         * 커버리지 0.6 미만이면 그 자리를 '빈 것'으로 본다.
+         */
+        slots?: Array<{ rank: number; title: string; coverage: number }>;
     };
     firstSeenAt?: string | null;
 };
@@ -537,9 +542,22 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                           * 전부 찼다" 를 null 로 돌려주고, 그 아래는 보지 않았다.
                                           * '없음'이라고 적으면 안 잰 것을 단정하는 것이 된다.
                                           */}
+                                        {/*
+                                          * 근거를 함께 보여준다(사장님 반증 2026-08-21: "어딜 봐서
+                                          * 빈자리야?"). 무엇을 기준으로 셌는지(블로그탭)와 그 자리에
+                                          * 무엇이 있었는지를 안 보여주면 검증할 수 없는 주장이 된다.
+                                          * 순위는 몇 시간이면 바뀌므로 잰 순간의 제목을 남긴다.
+                                          */}
                                         <div className="hot">
-                                            <span>빈자리</span>
-                                            <strong title={row.openSlot ? `상위 ${row.openSlot}번째 자리가 비어 있습니다` : '상위 10개는 모두 차 있습니다 — 그 아래는 재지 않았습니다'}>
+                                            <span>빈자리<i className="lw-slot-basis">블로그탭</i></span>
+                                            <strong
+                                                title={(row.serp?.slots || []).length > 0
+                                                    ? `잰 순간의 블로그탭 상위 — 커버리지 0.6 미만이 빈자리\n${(row.serp?.slots || [])
+                                                        .map((slot) => `${slot.rank}. [${slot.coverage.toFixed(2)}] ${slot.title}`).join('\n')}`
+                                                    : (row.openSlot
+                                                        ? `블로그탭 상위 ${row.openSlot}번째 자리가 비어 있었습니다 (근거 제목은 이 회차에 저장되지 않음)`
+                                                        : '상위 10개는 모두 차 있습니다 — 그 아래는 재지 않았습니다')}
+                                            >
                                                 {row.openSlot ? `${row.openSlot}위` : '10위 내 없음'}
                                             </strong>
                                         </div>
@@ -548,6 +566,24 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             <strong>{typeof row.kinCount === 'number' ? formatCount(row.kinCount) : '—'}</strong>
                                         </div>
                                     </div>
+
+                                    {(row.serp?.slots || []).length > 0 && (
+                                        <details className="lw-slots">
+                                            <summary>
+                                                빈자리 근거 보기 — 잰 순간 블로그탭 상위 {(row.serp?.slots || []).length}개
+                                            </summary>
+                                            <ol>
+                                                {(row.serp?.slots || []).map((slot) => (
+                                                    <li key={slot.rank} className={slot.coverage < 0.6 ? 'open' : ''}>
+                                                        <b>{slot.rank}</b>
+                                                        <em>{slot.title}</em>
+                                                        <i>{slot.coverage < 0.6 ? '빈자리' : '찬자리'}</i>
+                                                    </li>
+                                                ))}
+                                            </ol>
+                                            <p>검색어를 제목이 60% 넘게 담으면 '찬자리'로 봅니다. 순위는 시간이 지나면 바뀝니다.</p>
+                                        </details>
+                                    )}
 
                                     {/* 지식인 최신 질문을 조회수 높은 순으로(사장님 지시 2026-08-19).
                                         조회수는 질문 페이지 실측 — 글감의 원료다: 사람들이 정확히 뭘 묻는지가 여기 있다. */}
