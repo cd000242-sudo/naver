@@ -157,6 +157,24 @@ function StoreStyles() {
              */
             .st-cart-go { border: 0; cursor: pointer; font-family: inherit; }
 
+            /* 증거 — 진열대 위. 값을 보기 전에 눈에 들어와야 한다. */
+            .st-proof { margin: 0 0 22px; }
+
+            /* 값을 본 뒤 남는 물음 — 진열대 아래. 조용히 있다가 필요할 때 열린다. */
+            .st-notes { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--st-line); }
+            .st-faq { margin-bottom: 12px; }
+            .st-faq summary {
+                cursor: pointer; padding: 10px 0; color: var(--st-ink);
+                font-size: 13.5px; font-weight: 800;
+            }
+            .st-faq summary:hover { color: var(--st-gold-lit); }
+            .st-faq > div { padding: 4px 0 6px; display: grid; gap: 12px; }
+            .st-faq p { margin: 0; color: var(--st-dim); font-size: 13px; line-height: 1.7; }
+            .st-faq b { color: var(--st-ink); font-weight: 800; }
+            .st-note-line { margin: 8px 0 0; color: var(--st-mute); font-size: 12.5px; line-height: 1.6; }
+            .st-note-line a { color: var(--st-gold-lit); text-decoration: none; font-weight: 700; }
+            .st-note-line a:hover { text-decoration: underline; }
+
             /* ── 결제수단 고르기 모달 ─────────────────────── */
             .st-pay-backdrop {
                 position: fixed; inset: 0; z-index: 80; display: grid; place-items: center;

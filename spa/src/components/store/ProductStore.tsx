@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../../lib/pricingSchedule';
 import { fetchSiteContent } from '../../lib/siteOps';
 import {
@@ -26,10 +26,19 @@ function daysToSwitch(): number | null {
 /** 담은 결과를 바깥(결제 구역)에 알려 준다. 아무것도 안 담았으면 null. */
 export type StorePick = { id: string; name: string; amount: number; desc: string };
 
-function ProductStore({ onPick, onCardPay }: {
+function ProductStore({ onPick, onCardPay, proof, notes }: {
     onPick?: (pick: StorePick | null) => void;
-    /** 결제수단 모달에서 카드를 고르면 부른다 — 카드 결제 구역으로 데려가는 몫은 바깥이 진다. */
+    /** 결제창에서 카드를 고르면 이메일과 함께 부른다 — 결제 실행은 바깥이 맡는다. */
     onCardPay?: (email: string) => void;
+    /*
+     * 판 하나에 다 담는다(사장님 지시 2026-08-21 "한눈에 잘 보이면 좋겠어").
+     *   proof — 값을 보기 **전에** 놓는 증거(발행 영상·성과). 진열대 위.
+     *   notes — 값을 본 **뒤** 남는 물음(FAQ·환불·계좌이체). 진열대 아래.
+     * 둘 다 바깥에서 넣는다. 상점은 무엇을 파는지만 알면 되고, 증거와 약관은
+     * 페이지의 몫이다.
+     */
+    proof?: ReactNode;
+    notes?: ReactNode;
 }) {
     const [term, setTerm] = useState<TermId>('yearly');
     const [cart, setCart] = useState<string[]>([]);
@@ -107,6 +116,8 @@ function ProductStore({ onPick, onCardPay }: {
                 <h2>필요한 것만 고르세요</h2>
                 <p className="st-sub">하나만 써도 되고 묶어서 써도 됩니다. 담아 보시면 어느 쪽이 싼지 바로 보입니다.</p>
                 <span className="st-rule" aria-hidden="true" />
+
+                {proof && <div className="st-proof">{proof}</div>}
 
                 <div className="st-terms" role="group" aria-label="이용 기간">
                     {TERMS.map((item) => (
@@ -319,6 +330,8 @@ function ProductStore({ onPick, onCardPay }: {
                     )}
                 </>
             )}
+
+            {notes && <div className="st-notes">{notes}</div>}
         </div>
     );
 }
