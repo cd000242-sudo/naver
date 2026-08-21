@@ -288,7 +288,15 @@ function ReviewsPage() {
 
     return (
         <div style={{ position: 'relative', zIndex: 1 }}>
-            <section className="reviews-page-shell" style={{ padding: '140px 20px 100px', maxWidth: 1200, margin: '0 auto' }}>
+            {/*
+              * 후기는 자기 바닥을 직접 칠한다.
+              *
+              * 이 사이트 배경은 계절 테마 사진(밝은 하늘)이라, 어두운 글씨와 옅은
+              * 카드가 그대로 얹히면 읽히지 않는다(사장님 실측 2026-08-21).
+              * 상점(ProductStore)이 같은 이유로 자기 판을 칠하고 있다 — 같은 방식을 쓴다.
+              */}
+            <section className="reviews-page-shell" style={{ padding: '120px 20px 90px', maxWidth: 1200, margin: '0 auto' }}>
+              <div className="reviews-ink">
                 <div className="reviews-page-head" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20, marginBottom: 42, flexWrap: 'wrap' }}>
                     <div>
                         <span style={{ display: 'inline-flex', minHeight: 30, alignItems: 'center', padding: '6px 14px', background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.28)', borderRadius: 8, color: '#44d7b6', fontSize: 12, fontWeight: 900, letterSpacing: 0, marginBottom: 16 }}>REVIEWS</span>
@@ -385,6 +393,7 @@ function ReviewsPage() {
                         )}
                     </>
                 )}
+              </div>
             </section>
 
             <style>{`
@@ -392,6 +401,16 @@ function ReviewsPage() {
                    길이에 따라 자리가 다르다: 자세히 쓴 글은 앞에 넓게,
                    짧은 한마디는 격자로. 높이는 글이 정한다 — 25자짜리를
                    500자짜리 높이에 맞추면 카드 아래가 통째로 빈다. */
+                /* 후기 판의 바닥 — 밝은 배경 사진 위에서도 글이 읽히게. */
+                .reviews-ink {
+                    background: rgba(8, 10, 16, 0.94);
+                    backdrop-filter: blur(18px);
+                    border: 1px solid rgba(255,255,255,0.08);
+                    border-radius: 22px;
+                    padding: clamp(22px, 4vw, 40px);
+                }
+                .reviews-ink .reviews-page-head { margin-bottom: 32px; }
+
                 .rv-empty {
                     padding: 44px 28px; border-radius: 14px; text-align: center;
                     border: 1px solid rgba(255,255,255,.09); background: rgba(18,18,26,.76);
