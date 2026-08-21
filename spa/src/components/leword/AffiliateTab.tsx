@@ -43,6 +43,8 @@ type CampaignItem = {
     /** 토스 콘솔 홈에서 이 상품이 떠 있는 구획 제목과 순위 — 발급하러 갔을 때 찾는 지도. */
     consoleSection?: string;
     consoleRank?: number | null;
+    /** 콘솔 '상품 조회' 목록에 이 이름 그대로 있다 — 거기 카드의 [링크 발급]을 누르면 끝. */
+    inConsoleList?: boolean;
     searchVolume?: number | null;
     documentCount?: number | null;
     /** 블로그 검색 상위 10 정면 대응 실측. 쿠팡 레인과 같은 판정. */
@@ -229,7 +231,9 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                               */}
                                             {readyLink(item)
                                                 ? <span className="lw-linktag on">링크 발급됨</span>
-                                                : <span className="lw-linktag">발급 필요</span>}
+                                                : item.inConsoleList
+                                                    ? <span className="lw-linktag ready" title="콘솔 '상품 조회' 목록에 있는 상품 — 거기서 바로 발급됩니다">발급 가능</span>
+                                                    : <span className="lw-linktag">발급 필요</span>}
                                         </div>
                                         {/*
                                           * 토스는 공개 상품 페이지가 없다(전 URL 403 실측). 예전엔 없는
@@ -329,25 +333,25 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             </button>
                                         ) : lane === 'toss' ? (
                                             /*
-                                             * 발급은 콘솔 홈에서 된다 — 이 목록 자체가 콘솔 홈
-                                             * 구획에서 긁어온 것이라, 같은 카드가 홈에 그대로 떠
-                                             * 있다(실측: 카드 클릭 → 모달 → 발급 버튼). 검색이
-                                             * 없는 대신 구획 제목+순위를 지도 삼아 찾는다.
-                                             * 폰이 편하면 토스 앱 상품 공유(↗)로도 발급된다.
+                                             * 발급 화면은 홈이 아니라 **상품 조회**다(2026-08-21 실측).
+                                             * 홈은 큐레이션이라 거기 뜬 상품이 상품 조회 목록에
+                                             * 거의 없다 — 그래서 "콘솔에서 발급"이 늘 막다른 홈이었다.
+                                             * 이제 목록 자체를 상품 조회에서 받아오므로, 그 화면에
+                                             * 같은 이름의 카드가 있고 카드마다 [링크 발급] 버튼이 있다.
                                              */
                                             <a
                                                 className="lw-act lw-act-gold"
-                                                href="https://sharelink.toss.im/home"
+                                                href="https://sharelink.toss.im/links/recommended-products"
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                title="폰이 편하면: 토스 앱 쇼핑 검색 → 상품 → 공유 → 쉐어링크 공유하기"
+                                                title="상품명이 복사됩니다 — 상품 조회 화면에서 Ctrl+F 로 붙여넣어 찾은 뒤 [링크 발급]"
                                                 onClick={() => navigator.clipboard?.writeText(item.name)}
                                             >
-                                                콘솔에서 발급
+                                                상품 조회에서 발급
                                                 <span className="lw-act-sub">
-                                                    {item.consoleSection
-                                                        ? `홈 '${item.consoleSection}' 구획 ${item.consoleRank ? `${item.consoleRank}위` : ''} 카드 클릭 → 발급`
-                                                        : '홈 목록에서 이 상품 카드 클릭 → 발급'}
+                                                    {item.inConsoleList
+                                                        ? '이름 복사됨 — Ctrl+F 로 찾아 [링크 발급]'
+                                                        : '이름 복사됨 — 목록에 없으면 토스 앱 공유로 발급'}
                                                 </span>
                                             </a>
                                         ) : (
