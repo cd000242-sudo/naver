@@ -121,15 +121,34 @@ function StoreStyles() {
             .st-buy.on { background: linear-gradient(180deg, #f7c455, var(--st-gold)); border-color: transparent; color: #171003; box-shadow: 0 6px 20px rgba(240,181,63,.26); }
 
             /* 올인원은 줄 전체를 쓰고 가운데 선다(사장님 지정) — span 2 는 3열에서 왼쪽으로 쏠렸다. */
+            /*
+             * 올인원은 진열대의 얼굴이다 — 맨 앞, 전체 폭.
+             * 안에서 왼쪽은 발행 영상, 오른쪽은 값과 담기다. 값만 있는 카드보다
+             * 영상이 도는 카드가 먼저 눈에 들고, 올인원이 곧 전 제품이라
+             * 전 제품 영상이 놓일 자리도 여기다(사장님 지시 2026-08-21).
+             */
             .st-bundle {
                 grid-column: 1 / -1;
-                max-width: 640px; width: 100%; margin: 0 auto;
+                width: 100%; margin: 0 0 8px;
+                display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+                align-items: stretch;
                 border-color: rgba(240,181,63,.42);
                 background:
-                    radial-gradient(560px 260px at 12% 0%, rgba(240,181,63,.16), transparent 66%),
+                    radial-gradient(620px 300px at 10% 0%, rgba(240,181,63,.16), transparent 66%),
                     linear-gradient(180deg, var(--st-card-2), var(--st-card) 55%);
             }
-            .st-bundle .st-body { padding: 22px; }
+            .st-bundle-proof {
+                padding: 20px; border-right: 1px solid var(--st-line);
+                display: flex; align-items: center; min-width: 0;
+            }
+            .st-bundle-proof > * { width: 100%; }
+            .st-bundle .st-body { padding: 22px; display: flex; flex-direction: column; }
+            /* 담기 버튼은 카드 바닥에 붙는다 — 두 칸 높이가 달라도 줄이 맞는다. */
+            .st-bundle .st-buy { margin-top: auto; }
+            @media (max-width: 860px) {
+                .st-bundle { grid-template-columns: minmax(0, 1fr); }
+                .st-bundle-proof { border-right: 0; border-bottom: 1px solid var(--st-line); }
+            }
             .st-bundle h3 { font-size: 21px; }
             .st-bundle .st-price b { font-size: 30px; }
 

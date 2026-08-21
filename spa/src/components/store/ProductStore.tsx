@@ -117,8 +117,6 @@ function ProductStore({ onPick, onCardPay, proof, notes }: {
                 <p className="st-sub">하나만 써도 되고 묶어서 써도 됩니다. 담아 보시면 어느 쪽이 싼지 바로 보입니다.</p>
                 <span className="st-rule" aria-hidden="true" />
 
-                {proof && <div className="st-proof">{proof}</div>}
-
                 <div className="st-terms" role="group" aria-label="이용 기간">
                     {TERMS.map((item) => (
                         <button
@@ -142,7 +140,14 @@ function ProductStore({ onPick, onCardPay, proof, notes }: {
             )}
 
             <div className="st-grid">
-                {products.map((product) => {
+                {/*
+                 * 올인원이 맨 앞이다(사장님 지시 2026-08-21 "올인원을 3개 제품 위에").
+                 * 전 제품을 묶어 파는 자리라 진열대의 초점이 여기여야 하고,
+                 * 발행 영상도 이 카드 안에서 돈다 — 올인원이 곧 전 제품이라
+                 * 전 제품 영상이 놓일 자리가 여기다. 목록 순서(어드민)는 그대로
+                 * 두고 그리는 순서만 바꾼다.
+                 */}
+                {[...products].sort((a, b) => Number(Boolean(b.bundle)) - Number(Boolean(a.bundle))).map((product) => {
                     const price = priceOf(product, term, normalActive);
                     if (!price) return null;
                     const inCart = cart.includes(product.id);
@@ -152,6 +157,9 @@ function ProductStore({ onPick, onCardPay, proof, notes }: {
                             key={product.id}
                             className={`st-card${product.bundle ? ' st-bundle' : ''}${inCart ? ' on' : ''}`}
                         >
+                            {product.bundle && proof && (
+                                <div className="st-bundle-proof">{proof}</div>
+                            )}
                             {!product.bundle && (
                                 <div className="st-shot" style={{ ['--accent' as string]: product.accent }}>
                                     {/* 어드민이 새로 만든 제품은 그림이 없다 — 기호로 채운다. 빈 src 는 깨진 그림이 된다. */}
