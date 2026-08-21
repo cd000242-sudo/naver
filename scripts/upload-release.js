@@ -193,12 +193,34 @@ function gitPush() {
         }
 
         // Push through the configured credential helper. Never put tokens in argv or logs.
-        try {
-            execFileSync('git', ['push', 'origin', 'main', TAG], opts);
-            console.log('   ✅ Push 완료');
-        } catch (e) {
-            console.log(`   ❌ Push 실패: ${e.message.substring(0, 100)}`);
-            throw new Error('Git push failed');
+        /*
+         * [2026-08-21] 푸시 경합 재시도 — 크론 봇(agent-worker)이 분 단위로 main 을
+         * 밀어서 non-fast-forward 로 두 번 연속(202·203) 릴리즈가 여기서 죽었다.
+         * 더 나쁜 건 태그는 이미 올라가 **빈 릴리즈가 Latest 를 차지**해
+         * latest.yml 이 404 — 전체 자동업데이트가 깨졌다(실사고). fetch→rebase→
+         * push 를 3회 재시도하고, 그래도 실패하면 올라간 태그를 지워 빈 릴리즈를
+         * 남기지 않는다.
+         */
+        let pushed = false;
+        for (let attempt = 1; attempt <= 3 && !pushed; attempt++) {
+            try {
+                execFileSync('git', ['push', 'origin', 'main', TAG], opts);
+                pushed = true;
+                console.log('   ✅ Push 완료');
+            } catch (e) {
+                console.log(`   ⚠️ Push 실패(${attempt}/3): ${e.message.substring(0, 80)} — fetch+rebase 후 재시도`);
+                try {
+                    execFileSync('git', ['fetch', 'origin'], opts);
+                    execFileSync('git', ['rebase', 'origin/main'], opts);
+                } catch (rebaseErr) {
+                    try { execFileSync('git', ['rebase', '--abort'], opts); } catch (abortErr) { /* no rebase in progress */ }
+                }
+            }
+        }
+        if (!pushed) {
+            // 빈 릴리즈 방지 — 부분 푸시된 태그를 회수한다(latest 404 사고 재발 차단).
+            try { execFileSync('git', ['push', 'origin', `:refs/tags/${TAG}`], opts); } catch (cleanupErr) { /* 태그 미푸시면 무시 */ }
+            throw new Error('Git push failed (3회 재시도 후)');
         }
     } catch (error) {
         console.log(`   ❌ Git 작업 실패: ${error.message.substring(0, 100)}`);
