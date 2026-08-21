@@ -15,30 +15,45 @@ import { useEffect, useRef, useState } from 'react';
 export type DemandPoint = { period: string; ratio: number };
 
 /**
- * 그릴 시계열을 고른다 — 24개월 실측(demandSeries)이 있으면 그것, 없으면
- * 카드에 이미 그려진 30일 실측(trend.series)으로 폴백한다. 어느 쪽인지는
- * caption 으로 화면에 정직하게 적는다. 30일 배열에는 월 라벨이 없으므로
- * "N일 전" 라벨을 계산한다 — 실측 순서 그대로이고 지어낸 값이 아니다.
+ * 그릴 시계열을 고른다.
+ *
+ * 두 실측이 있고 **서로 다른 그림이다**(사장님 질문 2026-08-21 "크게 보면 같은
+ * 그래프인데 왜 모양이 다른가요"). 카드의 작은 선은 30일 일별이고, 이 창의
+ * 큰 선은 21~24개월 월별이다. 확대판이 아니라 기간도 단위도 다른 두 자료라
+ * 모양이 같을 수가 없다. 그래서 둘 다 넘겨 주고 창에서 갈아 볼 수 있게 한다 —
+ * 하나만 보여 주면 "왜 다르지"가 계속 남는다.
+ *
+ * 30일 배열에는 월 라벨이 없으므로 "N일 전"을 계산한다 — 실측 순서 그대로다.
  */
+export type ChartRange = { points: DemandPoint[]; caption: string; id: 'monthly' | 'daily'; label: string };
+
 export function pickChartSeries(row: {
     demandSeries?: DemandPoint[] | null;
     trend?: { series: number[] } | null;
-}): { points: DemandPoint[]; caption: string } | null {
+}): { ranges: ChartRange[] } | null {
+    const ranges: ChartRange[] = [];
     const monthly = (row.demandSeries || []).filter((pt) => Number.isFinite(pt.ratio));
     if (monthly.length >= 2) {
-        return { points: monthly, caption: `최근 ${monthly.length}개월 상대 검색량` };
+        ranges.push({
+            id: 'monthly',
+            label: `${monthly.length}개월`,
+            points: monthly,
+            caption: `최근 ${monthly.length}개월 상대 검색량`,
+        });
     }
     const daily = (row.trend?.series || []).filter((value) => Number.isFinite(value));
     if (daily.length >= 2) {
-        return {
+        ranges.push({
+            id: 'daily',
+            label: `${daily.length}일`,
             points: daily.map((ratio, index) => ({
                 period: index === daily.length - 1 ? '오늘' : `${daily.length - 1 - index}일 전`,
                 ratio,
             })),
-            caption: `최근 ${daily.length}일 상대 검색량`,
-        };
+            caption: `최근 ${daily.length}일 상대 검색량 — 카드의 작은 선과 같은 자료`,
+        });
     }
-    return null;
+    return ranges.length > 0 ? { ranges } : null;
 }
 
 const W = 720;
@@ -53,10 +68,10 @@ function shortPeriod(period: string): string {
     return /일 전|오늘/.test(period) ? period : String(period).slice(0, 7);
 }
 
-function DemandChartModal({ keyword, series, caption, asOf, onClose }: {
+function DemandChartModal({ keyword, ranges, asOf, onClose }: {
     keyword: string;
-    series: DemandPoint[];
-    caption: string;
+    /** 볼 수 있는 기간들 — 월별과 30일. 하나뿐이면 고르개는 안 나온다. */
+    ranges: ChartRange[];
     asOf?: string | null;
     onClose: () => void;
 }) {
@@ -64,6 +79,10 @@ function DemandChartModal({ keyword, series, caption, asOf, onClose }: {
     const svgRef = useRef<SVGSVGElement>(null);
     /** 마우스가 가리키는 점 — 수치가 보여야 그래프가 읽힌다(사장님 지시 2026-08-19). */
     const [hover, setHover] = useState(-1);
+    const [rangeId, setRangeId] = useState(ranges[0]?.id);
+    const active = ranges.find((range) => range.id === rangeId) || ranges[0];
+    const series = active?.points || [];
+    const caption = active?.caption || '';
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
@@ -114,6 +133,19 @@ function DemandChartModal({ keyword, series, caption, asOf, onClose }: {
                     </div>
                     <button ref={closeRef} type="button" onClick={onClose} aria-label="닫기">✕</button>
                 </header>
+
+                {ranges.length > 1 && (
+                    <div className="lw-chart-ranges" role="group" aria-label="기간">
+                        {ranges.map((range) => (
+                            <button
+                                key={range.id}
+                                type="button"
+                                className={range.id === active?.id ? 'on' : ''}
+                                onClick={() => { setRangeId(range.id); setHover(-1); }}
+                            >{range.label}</button>
+                        ))}
+                    </div>
+                )}
 
                 <svg
                     ref={svgRef}

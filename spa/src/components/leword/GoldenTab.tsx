@@ -853,8 +853,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         return chartRow && chart ? (
                             <DemandChartModal
                                 keyword={chartRow.keyword}
-                                series={chart.points}
-                                caption={chart.caption}
+                                ranges={chart.ranges}
                                 asOf={chartRow.demandAsOf}
                                 onClose={() => setChartKeyword('')}
                             />

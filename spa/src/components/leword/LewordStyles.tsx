@@ -363,6 +363,18 @@ function LewordStyles() {
             .lw-linktag.on { background: rgba(46,204,113,.15); color: #2ecc71; }
             .lw-linktag.ready { background: rgba(255,215,0,.13); color: #ffd700; }
             /* 빈자리 판정 근거 — 무엇을 기준으로 셌는지 눈에 보이게. */
+            /* 수요 그래프 기간 고르개 — 월별과 30일은 다른 자료다. */
+            .lw-chart-ranges { display: flex; gap: 6px; margin: 2px 0 10px; }
+            .lw-chart-ranges button {
+                padding: 5px 12px; border-radius: 8px; cursor: pointer; font-family: inherit;
+                border: 1px solid rgba(255,255,255,.12); background: transparent;
+                color: rgba(235,242,250,.6); font-size: 12px; font-weight: 800;
+            }
+            .lw-chart-ranges button:hover { color: #fff; border-color: rgba(255,255,255,.24); }
+            .lw-chart-ranges button.on {
+                border-color: rgba(53,208,186,.55); background: rgba(53,208,186,.12); color: #6fe0d0;
+            }
+
             .lw-slot-basis {
                 margin-left: 4px; font-style: normal; font-size: 9.5px; font-weight: 700;
                 color: rgba(235,242,250,.4);
