@@ -665,6 +665,14 @@ function LewordStyles() {
             }
             .lw-radar-kw b { color: #35d0ba; font-size: 12px; font-variant-numeric: tabular-nums; }
             .lw-radar-money { margin: 10px 0 0; color: #f5c518; font-size: 13px; font-weight: 700; }
+            .lw-radar-needkey {
+                margin: 10px 0 0; padding: 10px 13px; border-radius: 9px;
+                background: rgba(53,208,186,.07); border: 1px solid rgba(53,208,186,.2);
+                color: rgba(235,242,250,.8); font-size: 12.5px; line-height: 1.6;
+            }
+            .lw-radar-needkey b { color: #35d0ba; }
+            .lw-radar-needkey a { color: #35d0ba; font-weight: 800; }
+
             .lw-radar-partial { margin: 10px 0 0; color: #c9a34a; font-size: 12.5px; }
 
             .lw-radar-group .lw-panel-head h2 em {

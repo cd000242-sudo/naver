@@ -3,6 +3,7 @@ import {
     fetchRadarAnalyze, fetchRadarEvaluate, fetchRadarSearch, formatCount,
     type RadarAnalysis, type RadarEvaluated, type RadarGatedSite,
 } from '../../lib/keywordApi';
+import { loadUserKeys } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -147,7 +148,9 @@ function RadarTab() {
             <TabIntro
                 title="외부유입 레이더"
                 desc="내 글 주소 하나면 됩니다 — 지식인·카페는 물론 디시·클리앙·더쿠 같은 네이버 밖 커뮤니티까지 훑어 지금 답할 자리를 찾아 줍니다. 판마다 링크를 달아도 되는지도 함께 적습니다. 게시는 직접 하세요(자동 게시 없음)."
-                source="네이버 오픈API + 커뮤니티 20판(구글 색인) + 검색광고 검색량 실측 + AI 평가"
+                source={loadUserKeys().brightDataToken
+                    ? '네이버 오픈API 4종 + 커뮤니티 31판(구글 색인) + 검색광고 검색량 실측 + AI 평가'
+                    : '네이버 오픈API 4종 + 검색광고 검색량 실측 + AI 평가 · 커뮤니티 31판은 내 API 키 탭에 Bright Data 토큰을 넣으면 함께 훑습니다'}
             />
 
             <form className="lw-search" onSubmit={run}>
@@ -215,6 +218,18 @@ function RadarTab() {
                                 </div>
                             )}
                         </details>
+                    )}
+                    {providerStatus.community === 'needs-token' && (
+                        /*
+                         * 커뮤니티는 방문자 본인 Bright Data 키로만 훑는다. 서버에 키를
+                         * 두면 누가 돌리든 한 사람의 크레딧이 나간다(사장님 지적 2026-08-21).
+                         * 키가 없다고 기능이 죽지는 않는다 — 네이버 4판 결과는 그대로 나온다.
+                         */
+                        <p className="lw-radar-needkey">
+                            네이버 4판만 훑었습니다. 디시·아하·아카라이브 같은 <b>커뮤니티 31판</b>까지 보려면{' '}
+                            <a href="?tab=keys">내 API 키</a> 탭에 Bright Data 토큰을 넣어 주세요 —{' '}
+                            가입하면 매달 5,000건이 공짜라 레이더를 190회쯤 돌릴 수 있습니다.
+                        </p>
                     )}
                     {failedProviders.length > 0 && (
                         <p className="lw-radar-partial">
