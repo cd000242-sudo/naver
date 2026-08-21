@@ -1727,11 +1727,13 @@
         if (status) {
           let line = '✅ 인증되었습니다 — 아래 [인증완료] 버튼을 눌러 체험을 시작하세요.';
           if (result.status === 'existing' && result.registeredAt) {
+            // [2026-08-21] 사장님 문구 확정: 1번호당 1회 인증 — 같은 번호는 새 체험이
+            // 아니라 기존 체험(남은 기간)을 이어받는다는 규칙이 문구에서 읽혀야 한다.
             const expiryMs = new Date(result.registeredAt).getTime() + 30 * 24 * 60 * 60 * 1000;
             const daysLeft = Math.max(0, Math.ceil((expiryMs - Date.now()) / (24 * 60 * 60 * 1000)));
             line = daysLeft > 0
-              ? `✅ 인증되었습니다 — 기존 체험 이어서 진행합니다. (남은 기간 D-${daysLeft})`
-              : '⚠️ 이 번호의 무료 체험 30일이 이미 만료되었습니다. 계속 사용하려면 라이선스를 구매해 주세요.';
+              ? `⚠️ 이미 인증한 번호입니다 (1번호당 1회 인증). 기존 체험을 이어서 진행합니다 — 남은 기간 D-${daysLeft}`
+              : '⛔ 이미 인증한 번호입니다 — 1번호당 1회 인증만 가능합니다. 무료 체험 30일이 만료되어 계속 사용하려면 라이선스를 구매해 주세요.';
             if (daysLeft <= 0) { trialVerified = false; setTrialSubmitEnabled(false); }
           }
           status.textContent = line;
