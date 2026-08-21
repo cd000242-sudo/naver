@@ -256,9 +256,15 @@ function PricingPage() {
         }, 50);
     };
 
-    const requestPayment = async () => {
+    /*
+     * 이메일은 인자로도 받는다. 상점 창(ProductStore)이 담기·이메일·수단을 한
+     * 자리에서 받게 되면서, 아래 결제 구역까지 내려오지 않고 곧장 결제창을
+     * 띄우기 때문이다(사장님 지적 2026-08-21). 인자가 없으면 예전처럼
+     * 아래 구역의 입력값을 쓴다 — 두 길이 같은 함수를 공유한다.
+     */
+    const requestPayment = async (emailArg?: string) => {
         if (!selected || !tossRef.current) return;
-        const e = email.trim();
+        const e = (emailArg || email).trim();
         if (!e || !e.includes('@')) {
             setEmailShake(true);
             window.setTimeout(() => setEmailShake(false), 600);
@@ -734,8 +740,10 @@ function PricingPage() {
                         period: '',
                         features: [],
                     } : null)}
-                    onCardPay={() => {
-                        paymentSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    onCardPay={(mail) => {
+                        // 창에서 받은 이메일을 아래 구역에도 채워 둔다 — 되돌아왔을 때 다시 안 적게.
+                        setEmail(mail);
+                        void requestPayment(mail);
                     }}
                 />
                 </div>
@@ -778,7 +786,7 @@ function PricingPage() {
                     <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 6, marginBottom: 14 }}>{pricingPage.paymentEmailHelp || '결제 완료 후 이 이메일로 올인원 라이선스 코드가 발송됩니다.'}</p>
 
                     <button
-                        onClick={requestPayment}
+                        onClick={() => void requestPayment()}
                         disabled={!selected || paying || !sdkReady}
                         style={{
                             width: '100%', padding: 18, borderRadius: 14, border: 'none',

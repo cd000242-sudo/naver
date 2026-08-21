@@ -175,6 +175,33 @@ function StoreStyles() {
                 color: var(--st-dim); font-size: 15px; cursor: pointer; padding: 6px;
             }
             .st-pay-close:hover { color: #fff; }
+            /* 담은 내역 요약 — 얼마를 내는지가 창에서 바로 보여야 한다. */
+            .st-pay-sum {
+                display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+                padding: 12px 14px; border-radius: 11px; margin-bottom: 14px;
+                background: rgba(255,255,255,.04);
+            }
+            .st-pay-sum span { color: var(--st-dim); font-size: 12.5px; }
+            .st-pay-sum b { color: var(--st-gold-lit); font-size: 19px; font-weight: 900; font-variant-numeric: tabular-nums; }
+
+            /* 라이선스를 받을 이메일 — 로그인이 없으니 이 칸이 유일한 통로다. */
+            .st-pay-mail { display: block; margin-bottom: 14px; }
+            .st-pay-mail > span { display: block; margin-bottom: 6px; color: var(--st-ink); font-size: 13px; font-weight: 800; }
+            .st-pay-mail input {
+                width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 10px;
+                border: 1px solid rgba(255,255,255,.14); background: rgba(0,0,0,.32);
+                color: var(--st-ink); font: inherit; font-size: 14px;
+            }
+            .st-pay-mail input:focus { outline: 2px solid rgba(240,181,63,.5); outline-offset: 1px; }
+            .st-pay-mail input.warn { border-color: rgba(255,107,129,.6); }
+            .st-pay-mail em {
+                display: block; margin-top: 6px; font-style: normal;
+                color: var(--st-dim); font-size: 11.5px; line-height: 1.55;
+            }
+            .st-pay-mail input.warn + em { color: #ff8fa0; }
+
+            .st-pay-foot { margin: 14px 0 0; color: var(--st-mute); font-size: 11.5px; line-height: 1.6; }
+
             .st-pay-opt {
                 display: flex; align-items: center; gap: 13px; width: 100%; box-sizing: border-box;
                 padding: 15px 16px; margin-top: 10px; border-radius: 13px; text-align: left;

@@ -29,7 +29,7 @@ export type StorePick = { id: string; name: string; amount: number; desc: string
 function ProductStore({ onPick, onCardPay }: {
     onPick?: (pick: StorePick | null) => void;
     /** 결제수단 모달에서 카드를 고르면 부른다 — 카드 결제 구역으로 데려가는 몫은 바깥이 진다. */
-    onCardPay?: () => void;
+    onCardPay?: (email: string) => void;
 }) {
     const [term, setTerm] = useState<TermId>('yearly');
     const [cart, setCart] = useState<string[]>([]);
@@ -79,6 +79,9 @@ function ProductStore({ onPick, onCardPay }: {
      * 카드/계좌이체 둘 다 보여주고 고르게 한다.
      */
     const [payOpen, setPayOpen] = useState(false);
+    /** 라이선스를 받을 이메일 — 로그인이 없으니 이 주소가 유일한 통로다. */
+    const [email, setEmail] = useState('');
+    const [mailWarn, setMailWarn] = useState(false);
     useEffect(() => {
         if (!onPick) return;
         onPick(picked.length === 0 ? null : {
@@ -237,17 +240,50 @@ function ProductStore({ onPick, onCardPay }: {
                     </div>
 
                     {payOpen && (
-                        <div className="st-pay-backdrop" role="dialog" aria-modal="true" aria-label="결제수단 선택" onClick={() => setPayOpen(false)}>
+                        /*
+                         * 담기부터 결제까지 **한 자리에서** 끝낸다(사장님 지적 2026-08-21
+                         * "가격표랑 아래 이메일이랑 합쳐야 되지 않니").
+                         *
+                         * 예전에는 [결제하기] → 이 창에서 수단 고르기 → **아래로 스크롤** →
+                         * 이메일 입력 → 다시 결제였다. 로그인이 없는 구조라 이메일이
+                         * 라이선스를 받는 유일한 통로인데, 그게 흐름 밖에 떨어져 있었다.
+                         * 창 안에서 담은 내역·이메일·수단을 다 보이게 두고 여기서 끝낸다.
+                         */
+                        <div className="st-pay-backdrop" role="dialog" aria-modal="true" aria-label="결제" onClick={() => setPayOpen(false)}>
                             <div className="st-pay" onClick={(event) => event.stopPropagation()}>
                                 <div className="st-pay-head">
-                                    <b>결제수단을 선택하세요</b>
-                                    <span>{picked.length}개 제품 · {won(total)}원 (부가세 별도)</span>
+                                    <b>결제</b>
+                                    <span>{picked.map((product) => product.name).join(' · ')} {termLabel}</span>
                                     <button type="button" className="st-pay-close" aria-label="닫기" onClick={() => setPayOpen(false)}>✕</button>
                                 </div>
+
+                                <div className="st-pay-sum">
+                                    <span>{picked.length}개 제품 · 부가세 별도</span>
+                                    <b>{won(total)}원</b>
+                                </div>
+
+                                <label className="st-pay-mail">
+                                    <span>라이선스를 받을 이메일</span>
+                                    <input
+                                        type="email"
+                                        value={email}
+                                        placeholder="example@email.com"
+                                        onChange={(event) => { setEmail(event.target.value); setMailWarn(false); }}
+                                        className={mailWarn ? 'warn' : ''}
+                                        autoComplete="email"
+                                    />
+                                    <em>{mailWarn ? '이메일을 정확히 적어 주세요 — 여기로만 코드가 갑니다.' : '결제가 끝나면 이 주소로 라이선스 코드가 갑니다. 따로 로그인이 없어 이 주소가 유일한 통로입니다.'}</em>
+                                </label>
+
                                 <button
                                     type="button"
                                     className="st-pay-opt"
-                                    onClick={() => { setPayOpen(false); onCardPay?.(); }}
+                                    onClick={() => {
+                                        const mail = email.trim();
+                                        if (!mail || !mail.includes('@')) { setMailWarn(true); return; }
+                                        setPayOpen(false);
+                                        onCardPay?.(mail);
+                                    }}
                                 >
                                     <span className="st-pay-ico" aria-hidden="true">💳</span>
                                     <span className="st-pay-body">
@@ -258,7 +294,7 @@ function ProductStore({ onPick, onCardPay }: {
                                 </button>
                                 <a
                                     className="st-pay-opt"
-                                    href={`/bank-order?items=${cart.join(',')}&term=${term}`}
+                                    href={`/bank-order?items=${cart.join(',')}&term=${term}${email.trim() ? `&email=${encodeURIComponent(email.trim())}` : ''}`}
                                 >
                                     <span className="st-pay-ico" aria-hidden="true">🏦</span>
                                     <span className="st-pay-body">
@@ -267,10 +303,13 @@ function ProductStore({ onPick, onCardPay }: {
                                     </span>
                                     <i aria-hidden="true">→</i>
                                 </a>
+
+                                <p className="st-pay-foot">
+                                    코드 발급 후 7일 이내 미사용이면 전액 환불됩니다 · 결제 진행 시 이용약관과 개인정보처리방침에 동의하는 것으로 봅니다.
+                                </p>
                             </div>
                         </div>
                     )}
-
                     {showSwap && savedByBundle > 0 && (
                         <div className="st-swap">
                             <b>올인원 {TERMS.find((item) => item.id === term)?.label}은 {won(bundlePrice)}원입니다.</b>
