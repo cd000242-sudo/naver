@@ -1024,8 +1024,9 @@ async function enforceFreeTier(action: QuotaType, amount: number = 1): Promise<{
 }
 
 /**
- * [2026-08-21] 무료 체험 이메일 인증번호 발송 요청.
- * 사장님 지시: "이메일이랑 번호를 넣고 체험하는데 인증번호 오게끔."
+ * [2026-08-21] 무료 체험 인증번호 발송 요청 — 현재는 휴면 배선이다.
+ * 이메일 인증은 도입 당일 제거됐고(사장님: "이메일인증은 없애주고 폰인증 기준으로"),
+ * 문자(SMS) 발송업체 연동이 되면 이 레일에 발송 채널만 갈아끼워 되살린다.
  * GAS 가 코드 발송·중복(전화/기기) 선차단·레이트리밋을 맡는다 — 앱은 형식만 거른다.
  */
 async function requestTrialCode(userInfo?: { email: string; phone: string }): Promise<{ success: boolean; message?: string }> {
@@ -1064,7 +1065,7 @@ async function requestTrialCode(userInfo?: { email: string; phone: string }): Pr
   }
 }
 
-async function activateFreeTier(userInfo?: { email: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; message?: string }> {
+async function activateFreeTier(userInfo?: { email: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; message?: string; expiresAt?: string }> {
   try {
     const quota = await getFreeQuotaStatus();
     if (quota?.isPaywalled) {
@@ -1091,12 +1092,17 @@ async function activateFreeTier(userInfo?: { email: string; nickname: string; ph
     if (!/^01[0-9]{8,9}$/.test(normalizedPhone)) {
       return { success: false, message: '올바른 전화번호를 입력하세요. (예: 01012345678)' };
     }
-    // [2026-08-21] 이메일 인증번호 필수 — 메일로 받은 6자리를 함께 보내야 GAS 가 등록한다.
+    /*
+     * [2026-08-21 정정] 이메일 인증은 도입 당일 제거(사장님: "이메일인증은 없애주고
+     * 폰인증 기준으로"). 문자 인증은 발송업체 연동 후에만 가능하므로, 연동 전까지
+     * authCode 는 선택값 — 오면 그대로 전달하고(GAS 스위치 대비), 없어도 막지 않는다.
+     * 중복 방지는 GAS 의 전화/기기 교차검사가 맡는다.
+     */
     const authCode = (userInfo.authCode || '').trim();
-    if (!/^\d{6}$/.test(authCode)) {
-      return { success: false, message: '메일로 받은 인증번호 6자리를 입력하세요.' };
-    }
 
+    // [2026-08-21] 30일의 닻은 서버 최초 등록일이다 — 로컬 날짜만 믿으면
+    // PC 를 바꿀 때마다 30일이 새로 시작된다(사장님 질문으로 드러난 구멍).
+    let serverRegisteredAt = '';
     try {
       const gasUrl = process.env.LICENSE_SERVER_URL || DEFAULT_LICENSE_SERVER_URL;
       const deviceId = await getDeviceId();
@@ -1128,6 +1134,9 @@ async function activateFreeTier(userInfo?: { email: string; nickname: string; ph
       if (result.ok === false) {
         return { success: false, message: result.error || '체험 등록에 실패했습니다.' };
       }
+      if (typeof result.registeredAt === 'string' && Number.isFinite(new Date(result.registeredAt).getTime())) {
+        serverRegisteredAt = result.registeredAt;
+      }
     } catch (gasError) {
       /*
        * [2026-08-21] 오프라인 허용 폐지 — 인증번호를 도입한 이상 서버 확인 없이
@@ -1141,16 +1150,19 @@ async function activateFreeTier(userInfo?: { email: string; nickname: string; ph
     /*
      * [2026-08-20] 체험은 30일이다(사장님 결정 — "한 달은 사용할 수 있게").
      *
-     * 만료 기준은 **처음 활성화한 날**이다. 디스크에 무료 라이선스가 이미
-     * 있으면(만료된 것 포함) 그 verifiedAt 을 그대로 쓴다 — 지우고 다시
-     * 활성화해서 30일을 초기화하는 구멍을 막는다.
-     * 기존 사용자는 이 코드를 다시 타지 않으니(라이선스가 이미 있다)
-     * expiresAt 없는 옛 판 그대로 영구다 — 뺏는 것이 없다.
+     * 만료 기준은 **처음 활성화한 날**이고, 닻은 로컬과 서버 중 더 이른 날짜다:
+     *   - 로컬 verifiedAt: 이 PC 에서 지우고 재활성화해 초기화하는 구멍 차단
+     *   - 서버 registeredAt: 다른 PC 에서 같은 이메일로 새로 시작해 초기화하는
+     *     구멍 차단(2026-08-21 — 사장님 질문 "다른 PC 로 하면 초기화되진 않지?")
      */
     const licenseModule = await import('./licenseManager.js');
     const existing = await licenseModule.loadLicense().catch(() => null);
-    const firstActivatedAt = existing?.licenseType === 'free' && existing.verifiedAt
-      ? existing.verifiedAt
+    const anchorCandidates = [
+      existing?.licenseType === 'free' && existing.verifiedAt ? existing.verifiedAt : '',
+      serverRegisteredAt,
+    ].filter((date) => date && Number.isFinite(new Date(date).getTime()));
+    const firstActivatedAt = anchorCandidates.length > 0
+      ? new Date(Math.min(...anchorCandidates.map((date) => new Date(date).getTime()))).toISOString()
       : new Date().toISOString();
     const trialExpiresAt = new Date(new Date(firstActivatedAt).getTime() + 30 * 24 * 60 * 60 * 1000).toISOString();
     // [2026-08-21] 이미 30일이 지난 재활성화는 성공으로 속이지 않는다 — 저장하면
@@ -1168,7 +1180,8 @@ async function activateFreeTier(userInfo?: { email: string; nickname: string; ph
       authMethod: 'code',
     };
     await licenseModule.saveLicense(license);
-    return { success: true };
+    // 만료일을 돌려준다 — 화면이 "언제까지"를 바로 보여줄 수 있게(사장님 지시: 기간 표시).
+    return { success: true, expiresAt: trialExpiresAt };
   } catch (error) {
     return { success: false, message: (error as Error).message };
   }

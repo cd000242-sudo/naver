@@ -279,7 +279,7 @@ interface AutomationAPI {
   // Excel 관련 API 제거됨
   cancelAutomation: (metadata?: { source?: string; reason?: string; contentRequestId?: string }) => Promise<boolean>;
   cancelContentGeneration: (request: { requestId: string; reason?: string }) => Promise<{ success: boolean; aborted: boolean; requestId?: string }>;
-  freeActivate: (userInfo?: { email: string; nickname: string; phone: string; authCode?: string }) => Promise<{ success: boolean; message?: string }>;
+  freeActivate: (userInfo?: { email: string; nickname: string; phone: string; authCode?: string }) => Promise<{ success: boolean; message?: string; expiresAt?: string }>;
   freeRequestCode: (userInfo?: { email: string; phone: string }) => Promise<{ success: boolean; message?: string }>;
   forceQuit: () => Promise<{ success: boolean }>;
   getQuotaStatus: () => Promise<{ success: boolean; isFree: boolean; quota: any }>;

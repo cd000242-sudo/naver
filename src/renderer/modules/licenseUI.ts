@@ -184,9 +184,29 @@ export async function initLicenseBadge(): Promise<void> {
             const isExhausted = remaining <= 0;
             const color = isExhausted ? '#ef4444' : '#22c55e';
             const text = `${usedPublish}/${limitPublish}`;
+
+            /*
+             * [2026-08-21] 체험 기간 표시 — "매일 3회"만 보이고 "언제까지"가 안
+             * 보이던 공백(사장님 지시). 만료일은 quota:getStatus 가 동봉한다.
+             */
+            let trialLine = '';
+            const trialExpiresAt = (status as any)?.trialExpiresAt;
+            if (typeof trialExpiresAt === 'string' && trialExpiresAt) {
+                const expiryMs = new Date(trialExpiresAt).getTime();
+                if (Number.isFinite(expiryMs)) {
+                    const daysLeft = Math.max(0, Math.ceil((expiryMs - Date.now()) / (24 * 60 * 60 * 1000)));
+                    const expiryLabel = new Date(trialExpiresAt).toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' });
+                    const trialColor = daysLeft <= 3 ? '#ef4444' : daysLeft <= 7 ? '#f59e0b' : 'rgba(255,255,255,0.72)';
+                    trialLine = daysLeft <= 0
+                        ? `<div style="font-size:0.72rem;font-weight:800;color:#ef4444;margin-top:4px;">체험 만료</div>`
+                        : `<div style="font-size:0.72rem;font-weight:800;color:${trialColor};margin-top:4px;">체험 D-${daysLeft} · ${expiryLabel}까지</div>`;
+                }
+            }
+
             counter.innerHTML =
                 `<div style="font-size:0.85rem;font-weight:900;letter-spacing:0.2px;color:rgba(255,255,255,0.92);margin-bottom:4px;">오늘 발행</div>` +
-                `<div style="font-size:1.45rem;font-weight:1000;color:${color};letter-spacing:0.2px;">${text}</div>`;
+                `<div style="font-size:1.45rem;font-weight:1000;color:${color};letter-spacing:0.2px;">${text}</div>` +
+                trialLine;
             counter.style.display = 'block';
         } catch (e) {
             const counter = ensureFreeQuotaCounter();

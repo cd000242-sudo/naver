@@ -137,7 +137,7 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('defamation:checkPublishRisk', payload),
   launchLeword: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('leword:launch'), // ✅ LEWORD 황금키워드 앱 실행
-  freeActivate: (userInfo?: { email: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; message?: string }> =>
+  freeActivate: (userInfo?: { email: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; message?: string; expiresAt?: string }> =>
     ipcRenderer.invoke('free:activate', userInfo),
   // [2026-08-21] 무료 체험 이메일 인증번호 발송
   freeRequestCode: (userInfo?: { email: string; phone: string }): Promise<{ success: boolean; message?: string }> =>
@@ -146,7 +146,7 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('app:forceQuit'),
   minimizeToTray: (): Promise<void> =>
     ipcRenderer.invoke('app:minimize-to-tray'),
-  getQuotaStatus: (): Promise<{ success: boolean; isFree: boolean; quota: any }> =>
+  getQuotaStatus: (): Promise<{ success: boolean; isFree: boolean; quota: any; trialExpiresAt?: string | null }> =>
     ipcRenderer.invoke('quota:getStatus'),
   // ✅ [2026-03-02] 이미지 API 일일 사용량 조회
   getImageApiUsage: (): Promise<{ success: boolean; todayCalls?: number; todayCostKrw?: number; date?: string }> =>
