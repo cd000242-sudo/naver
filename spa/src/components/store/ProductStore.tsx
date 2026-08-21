@@ -165,21 +165,47 @@ function ProductStore({ onPick, onCardPay }: {
                                     <p className="st-what">{product.summary}</p>
                                 )}
 
-                                <div className="st-price">
-                                    {!normalActive && <s>{won(normalPriceOf(price))}</s>}
-                                    <b>{won(price)}</b>
-                                    <i>원{term === 'lifetime' ? '' : term === 'yearly' ? ' / 년' : ' / 월'}</i>
-                                </div>
-                                <p className="st-permo">
-                                    {/* 하루 환산이 첫 자리 — 하루 가격이 싸 보인다(사장님 지시 2026-08-21). 실청구액은 위에 그대로. */}
-                                    {(() => {
-                                        const daily = perDay(price, term);
-                                        if (!daily) return ' ';
-                                        const monthlyTail = term !== 'monthly' && monthly ? ` · 월 ${won(monthly)}원` : '';
-                                        return `하루 ${won(daily)}원 꼴${monthlyTail}`;
-                                    })()}
-                                    {product.bundle && ` · 따로 사면 ${won(individualTotal(term, catalog))}원`}
-                                </p>
+                                {/*
+                                  * 큰 자리는 **하루 값**이다(사장님 지시 2026-08-21
+                                  * "하루에 얼마 꼴이 더 크게 보여야 싸게 보이지").
+                                  * 30만·40만이 먼저 눈에 박히면 비싸 보인다 — 사람이 체감하는
+                                  * 단위는 하루치다. 실제 청구액을 숨기지는 않는다: 바로 아래
+                                  * 줄에 연·월 금액을 그대로 적는다.
+                                  * 영구제는 기간이 없어 하루로 나눌 수 없으므로 총액이 큰 자리다.
+                                  */}
+                                {(() => {
+                                    const daily = perDay(price, term);
+                                    const termUnit = term === 'lifetime' ? '' : term === 'yearly' ? '년' : '월';
+                                    if (!daily) {
+                                        return (
+                                            <>
+                                                <div className="st-price">
+                                                    {!normalActive && <s>{won(normalPriceOf(price))}</s>}
+                                                    <b>{won(price)}</b>
+                                                    <i>원{termUnit ? ` / ${termUnit}` : ''}</i>
+                                                </div>
+                                                <p className="st-permo">
+                                                    {product.bundle ? `따로 사면 ${won(individualTotal(term, catalog))}원` : ' '}
+                                                </p>
+                                            </>
+                                        );
+                                    }
+                                    return (
+                                        <>
+                                            <div className="st-price">
+                                                <b>{won(daily)}</b>
+                                                <i>원 / 하루</i>
+                                            </div>
+                                            <p className="st-permo">
+                                                {!normalActive && <s>{won(normalPriceOf(price))}</s>}
+                                                <strong>{won(price)}원</strong>
+                                                {termUnit ? ` / ${termUnit}` : ''}
+                                                {term !== 'monthly' && monthly ? ` · 월 ${won(monthly)}원` : ''}
+                                                {product.bundle && ` · 따로 사면 ${won(individualTotal(term, catalog))}원`}
+                                            </p>
+                                        </>
+                                    );
+                                })()}
 
                                 <button
                                     type="button"

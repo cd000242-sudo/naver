@@ -101,7 +101,16 @@ function StoreStyles() {
                 -webkit-background-clip: text; background-clip: text; color: transparent;
             }
             .st-price i { font-style: normal; font-size: 12.5px; color: var(--st-mute); }
-            .st-permo { margin: 4px 0 0; min-height: 17px; font-size: 11.5px; color: var(--st-mute); font-variant-numeric: tabular-nums; }
+            /*
+             * 큰 자리를 하루 값에 내줬으니, 이 줄이 실제 청구액을 말한다.
+             * 작지만 흐리지 않게 — 숨기는 것이 아니라 위계를 바꾼 것이다.
+             */
+            .st-permo {
+                margin: 5px 0 0; min-height: 17px; font-size: 12.5px;
+                color: var(--st-dim); font-variant-numeric: tabular-nums;
+            }
+            .st-permo strong { color: var(--st-ink); font-weight: 800; }
+            .st-permo s { margin-right: 5px; color: var(--st-mute); }
 
             .st-buy {
                 margin-top: 14px; padding: 12px; border: 1px solid var(--st-line-2); border-radius: 11px;
