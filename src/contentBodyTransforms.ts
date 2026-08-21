@@ -7,6 +7,7 @@
 
 import type { StructuredContent } from './contentGenerator';
 import { removeEmojis, removeInternalStructureMarkersFromText } from './contentTextHelpers';
+import { balanceMobileLineBreaks } from './content/mobileLineBalance';
 
 export { removeInternalStructureMarkersFromText } from './contentTextHelpers';
 
@@ -246,6 +247,33 @@ export function ensureContentParagraphBreaks(content: StructuredContent): Struct
     content.headings = content.headings.map(h => ({
       ...h,
       content: h.content ? ensureParagraphBreaks(h.content) : h.content
+    }));
+  }
+
+  return content;
+}
+
+/**
+ * [v2.11.204] 모바일 꼬리 줄바꿈 보정 — 한 줄이 모바일 폭을 한두 글자 넘겨
+ * 마지막 글자만 아래로 떨어지는 것("...나오는 / 데,")을 어절 경계에서 다시 끊어 막는다.
+ * 깨끗하게 감싸지는 줄은 그대로 둔다.
+ */
+export function balanceContentMobileLines(content: StructuredContent): StructuredContent {
+  if (!content) return content;
+
+  if (content.bodyPlain) {
+    content.bodyPlain = balanceMobileLineBreaks(content.bodyPlain);
+  }
+  if ((content as any).introduction) {
+    (content as any).introduction = balanceMobileLineBreaks((content as any).introduction);
+  }
+  if ((content as any).conclusion) {
+    (content as any).conclusion = balanceMobileLineBreaks((content as any).conclusion);
+  }
+  if (content.headings) {
+    content.headings = content.headings.map((h) => ({
+      ...h,
+      content: h.content ? balanceMobileLineBreaks(h.content) : h.content,
     }));
   }
 
