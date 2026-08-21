@@ -1211,23 +1211,26 @@ async function activateFreeTier(userInfo?: { email?: string; nickname: string; p
       ? new Date(Math.min(...anchorCandidates.map((date) => new Date(date).getTime()))).toISOString()
       : new Date().toISOString();
     const trialExpiresAt = new Date(new Date(firstActivatedAt).getTime() + 30 * 24 * 60 * 60 * 1000).toISOString();
-    // [2026-08-21] 이미 30일이 지난 재활성화는 성공으로 속이지 않는다 — 저장하면
+    // [2026-08-21] 30일 정책은 9/1 시행(사장님: "지금 바로는 갑작스럽다") —
+    // 시행 전에는 만료일을 박지도, 만료를 이유로 거부하지도 않는다.
+    const policyActive = licenseModule.isFreeTrialPolicyActive();
+    // 이미 30일이 지난 재활성화는 성공으로 속이지 않는다 — 저장하면
     // "체험 시작됨" 안내 뒤 곧바로 잠겨 고장으로 읽힌다. 구매 안내로 정직하게.
-    if (new Date(trialExpiresAt).getTime() <= Date.now()) {
+    if (policyActive && new Date(trialExpiresAt).getTime() <= Date.now()) {
       return { success: false, message: '무료 체험 30일이 이미 만료되었습니다. 계속 사용하려면 라이선스를 구매해 주세요.' };
     }
     const license: LicenseInfo = {
       licenseCode: 'FREE-TIER',
       deviceId: await getDeviceId(),
       verifiedAt: firstActivatedAt,
-      expiresAt: trialExpiresAt,
+      expiresAt: policyActive ? trialExpiresAt : undefined,
       isValid: true,
       licenseType: 'free',
       authMethod: 'code',
     };
     await licenseModule.saveLicense(license);
     // 만료일을 돌려준다 — 화면이 "언제까지"를 바로 보여줄 수 있게(사장님 지시: 기간 표시).
-    return { success: true, expiresAt: trialExpiresAt };
+    return { success: true, ...(policyActive ? { expiresAt: trialExpiresAt } : {}) };
   } catch (error) {
     return { success: false, message: (error as Error).message };
   }

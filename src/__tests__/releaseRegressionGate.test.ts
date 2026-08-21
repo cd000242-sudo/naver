@@ -56,7 +56,12 @@ describe('release regression gate', () => {
   });
 
   it('does not publish a release when the source push fails', () => {
-    expect(uploader).toContain("throw new Error('Git push failed')");
+    // [2026-08-21] 크론 봇 푸시 경합으로 202·203 이 연속으로 여기서 죽고, 태그만
+    // 올라가 빈 릴리즈가 Latest 를 차지 → latest.yml 404(자동업데이트 전체 마비 실사고).
+    // 재시도(3회 rebase) + 최종 실패 시 올라간 태그 회수까지 잠근다.
+    expect(uploader).toContain("throw new Error('Git push failed (3회 재시도 후)')");
+    expect(uploader).toMatch(/for \(let attempt = 1; attempt <= 3/);
+    expect(uploader).toContain(':refs/tags/'); // 최종 실패 시 부분 푸시된 태그 회수
   });
 
   it('returns a failing shell exit code even when an early release stage aborts', () => {

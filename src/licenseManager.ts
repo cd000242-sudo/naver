@@ -1219,19 +1219,46 @@ export async function verifyLicense(
 }
 
 /**
- * [2026-08-21] 평생무료 금지 — 만료일 없는 옛 무료 라이선스에 지금부터 30일
- * 유예 만료일을 박는다. 사장님 결정: "매일 3회씩 평생무료면 내 툴을 구매할
- * 이유가 없거든" — v2.11.199 의 '기존 사용자 영구 유지'를 뒤집는 지시다.
- * 소급 즉시만료(옛 활성화일 기준)가 아니라 지금부터 30일 — 예고 없는 차단을 피한다.
+ * [2026-08-21] 무료 체험 30일 정책 **시행일** — 사장님: "지금 바로 해버리면
+ * 너무 갑작스럽잖아, 9월 1일부터." KST 자정 기준. 시행 전에는 옛 동작
+ * (기간 제한 없는 매일 3회) 그대로고, 시행일부터 30일 카운트가 시작된다.
+ */
+export const FREE_TRIAL_POLICY_START_MS = new Date('2026-09-01T00:00:00+09:00').getTime();
+
+export function isFreeTrialPolicyActive(): boolean {
+  return Date.now() >= FREE_TRIAL_POLICY_START_MS;
+}
+
+/**
+ * [2026-08-21] 평생무료 금지 — 만료일 없는 무료 라이선스에 30일 만료일을 박는다.
+ * 사장님 결정: "매일 3회씩 평생무료면 내 툴을 구매할 이유가 없거든."
+ *
+ * [같은 날 정정] 시행은 9/1 부터다. 그 전에는:
+ *   - 만료일을 박지 않고,
+ *   - 201/202 가 이미 박아둔 만료일이 있으면 **걷어내서** 옛 동작으로 되돌린다
+ *     (며칠 먼저 업데이트한 사용자만 30일 시한부가 되는 불공평 제거).
+ * 9/1 이후 첫 실행에서 그날 기준 30일이 부여된다 — 전원 같은 출발선이다.
  */
 export async function ensureFreeLicenseExpiry(license: LicenseInfo): Promise<LicenseInfo> {
-  if (license.licenseType !== 'free' || license.expiresAt) return license;
+  if (license.licenseType !== 'free') return license;
+
+  if (!isFreeTrialPolicyActive()) {
+    if (license.expiresAt) {
+      const restored: LicenseInfo = { ...license, expiresAt: undefined };
+      await saveLicense(restored);
+      console.log('[LicenseManager] 30일 정책 시행 전(9/1) — 미리 박힌 만료일을 걷어낸다');
+      return restored;
+    }
+    return license;
+  }
+
+  if (license.expiresAt) return license;
   const migrated: LicenseInfo = {
     ...license,
     expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
   };
   await saveLicense(migrated);
-  console.log(`[LicenseManager] 옛 무료 라이선스(만료일 없음)에 30일 유예 부여: ${migrated.expiresAt}`);
+  console.log(`[LicenseManager] 무료 라이선스에 30일 만료 부여(9/1 시행): ${migrated.expiresAt}`);
   return migrated;
 }
 
