@@ -1065,7 +1065,53 @@ async function requestTrialCode(userInfo?: { email: string; phone: string }): Pr
   }
 }
 
-async function activateFreeTier(userInfo?: { email: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; message?: string; expiresAt?: string }> {
+/**
+ * [2026-08-21 3차] 체험 [인증하기] — 등록 없이 자격만 서버에서 확인한다.
+ * 사장님 지시: "닉네임·폰번호 적고 인증하기 → 인증되면 인증완료 버튼으로 시작."
+ * 통과하면 status(new/existing)와, 기존 체험자는 registeredAt 을 돌려줘
+ * 화면이 남은 기간까지 미리 보여줄 수 있다.
+ */
+async function verifyTrialEligibility(userInfo?: { nickname: string; phone: string }): Promise<{ success: boolean; message?: string; status?: 'new' | 'existing'; registeredAt?: string }> {
+  try {
+    const nickname = (userInfo?.nickname || '').trim();
+    const phone = (userInfo?.phone || '').trim().replace(/[-\s]/g, '');
+    if (nickname.length < 2) {
+      return { success: false, message: '오픈채팅 닉네임을 2자 이상 정확하게 기재하세요.' };
+    }
+    if (!/^01[0-9]{8,9}$/.test(phone)) {
+      return { success: false, message: '올바른 전화번호를 입력하세요. (예: 01012345678)' };
+    }
+    const gasUrl = process.env.LICENSE_SERVER_URL || DEFAULT_LICENSE_SERVER_URL;
+    const deviceId = await getDeviceId();
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    try {
+      const response = await fetch(gasUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ action: 'trial-verify', nickname, phone, deviceId, appVersion: app.getVersion() }),
+        signal: controller.signal,
+      });
+      const result = await response.json();
+      debugLog(`[Main] verifyTrialEligibility: GAS 응답 — ${JSON.stringify(result)}`);
+      if (result.ok !== true) {
+        return { success: false, message: result.error || '인증에 실패했습니다.' };
+      }
+      return {
+        success: true,
+        status: result.status === 'existing' ? 'existing' : 'new',
+        ...(typeof result.registeredAt === 'string' && result.registeredAt ? { registeredAt: result.registeredAt } : {}),
+      };
+    } finally {
+      clearTimeout(timeout);
+    }
+  } catch (error) {
+    debugLog(`[Main] verifyTrialEligibility 실패 — ${(error as Error).message}`);
+    return { success: false, message: '인증에 실패했습니다. 인터넷 연결을 확인하세요.' };
+  }
+}
+
+async function activateFreeTier(userInfo?: { email?: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; message?: string; expiresAt?: string }> {
   try {
     const quota = await getFreeQuotaStatus();
     if (quota?.isPaywalled) {
@@ -1073,17 +1119,17 @@ async function activateFreeTier(userInfo?: { email: string; nickname: string; ph
       return { success: false, message: res.message };
     }
 
-    // ✅ [2026-03-26 v2] 필수 정보 검증 강화: 하나라도 안 적으면 체험 거부
-    if (!userInfo?.email || !userInfo?.nickname || !userInfo?.phone) {
-      return { success: false, message: '이메일, 닉네임, 전화번호를 모두 입력해야 합니다.' };
+    // ✅ [2026-08-21 3차] 본인 확인 키는 전화번호다(사장님: "닉네임·폰번호로
+    // 인증하기"). 이메일은 구버전 흐름 호환용 선택값 — 오면 형식만 확인한다.
+    if (!userInfo?.nickname || !userInfo?.phone) {
+      return { success: false, message: '오픈채팅 닉네임과 전화번호를 입력해야 합니다.' };
     }
 
-    // 이메일 서버사이드 정규화
-    const normalizedEmail = userInfo.email.trim().toLowerCase();
+    const normalizedEmail = (userInfo.email || '').trim().toLowerCase();
     const normalizedPhone = userInfo.phone.trim().replace(/[-\s]/g, '');
 
     // 입력 포맷 검증
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+    if (normalizedEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       return { success: false, message: '올바른 이메일 주소를 입력하세요.' };
     }
     if (userInfo.nickname.trim().length < 2) {
@@ -2996,13 +3042,18 @@ ipcMain.handle('blog:getRecentPosts', async (_event, blogId: string) => {
   }
 });
 
-ipcMain.handle('free:activate', async (_event, userInfo?: { email: string; nickname: string; phone: string; authCode?: string }) => {
+ipcMain.handle('free:activate', async (_event, userInfo?: { email?: string; nickname: string; phone: string; authCode?: string }) => {
   return await activateFreeTier(userInfo);
 });
 
-// [2026-08-21] 무료 체험 이메일 인증번호 발송
+// [2026-08-21] 무료 체험 이메일 인증번호 발송 (휴면 — SMS 연동 시 부활)
 ipcMain.handle('free:requestCode', async (_event, userInfo?: { email: string; phone: string }) => {
   return await requestTrialCode(userInfo);
+});
+
+// [2026-08-21 3차] 체험 [인증하기] — 자격 확인(등록 없음)
+ipcMain.handle('free:verify', async (_event, userInfo?: { nickname: string; phone: string }) => {
+  return await verifyTrialEligibility(userInfo);
 });
 
 // ✅ [2026-04-03] app:forceQuit → src/main/ipc/systemHandlers.ts로 이관

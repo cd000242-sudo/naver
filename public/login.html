@@ -1071,14 +1071,12 @@
           <p>간단한 정보 입력 후 매일 3회 무료 체험이 가능합니다</p>
         </div>
 
+        <!-- ✅ [2026-08-21 3차] 2단계 인증 흐름(사장님 지시): 닉네임·폰번호 →
+             [인증하기](서버 자격 확인) → 인증되면 [인증완료]로 체험 시작.
+             이메일 칸 제거 — 본인 확인 키는 전화번호다. -->
         <div class="trial-form-group">
-          <label for="trial-email">이메일 <span style="color: #ef4444;">*</span></label>
-          <input type="email" id="trial-email" placeholder="example@email.com">
-        </div>
-
-        <div class="trial-form-group">
-          <label for="trial-nickname">단톡방 닉네임 <span style="color: #ef4444;">*</span></label>
-          <input type="text" id="trial-nickname" placeholder="오픈채팅 닉네임을 입력하세요">
+          <label for="trial-nickname">오픈채팅 닉네임 <span style="color: #f59e0b; font-weight: 700;">(정확하게 기재)</span> <span style="color: #ef4444;">*</span></label>
+          <input type="text" id="trial-nickname" placeholder="오픈채팅방에서 쓰는 닉네임 그대로">
         </div>
 
         <div class="trial-form-group">
@@ -1086,17 +1084,18 @@
           <input type="tel" id="trial-phone" placeholder="01012345678">
         </div>
 
-        <!-- [2026-08-21] 인증번호 UI 는 제거(사장님: 이메일 인증 대신 전화번호 기준
-             중복 확인). 문자(SMS) 인증은 발송업체 연동 후 이 자리에 되살린다. -->
+        <button type="button" id="trial-verify-btn" class="trial-submit-btn" style="margin-bottom: 6px;">🔎 인증하기</button>
+        <div id="trial-verify-status" style="display: none; font-size: 13px; font-weight: 700; margin-bottom: 10px;"></div>
+
         <div class="trial-consent-row">
           <input type="checkbox" id="trial-consent">
-          <label for="trial-consent">체험 서비스 제공을 위해 이메일, 닉네임, 전화번호를 수집·이용하는 것에 동의합니다. 수집된 정보는 서비스 운영 목적으로만 사용됩니다.</label>
+          <label for="trial-consent">체험 서비스 제공을 위해 닉네임, 전화번호를 수집·이용하는 것에 동의합니다. 수집된 정보는 서비스 운영 목적으로만 사용됩니다.</label>
         </div>
 
         <div id="trial-error-msg" class="trial-error-msg"></div>
 
         <div class="trial-modal-actions">
-          <button type="button" id="trial-submit-btn" class="trial-submit-btn">🚀 체험 시작하기</button>
+          <button type="button" id="trial-submit-btn" class="trial-submit-btn" disabled style="opacity: 0.5; cursor: not-allowed;">✅ 인증완료 (체험 시작)</button>
           <button type="button" id="trial-cancel-btn" class="trial-cancel-btn">취소</button>
         </div>
       </div>
@@ -1664,9 +1663,89 @@
       }
     });
 
-    // ✅ [2026-03-26] 체험 모달: 제출 핸들러
+    /*
+     * ✅ [2026-08-21 3차] 2단계 인증 흐름(사장님 지시):
+     *   ① 닉네임·폰번호 입력 → [인증하기] — 서버(trial-verify)가 차단·중복·기존
+     *      체험 여부를 확인. 통과하면 초록 상태줄 + [인증완료] 활성화.
+     *   ② [인증완료] — free:activate 로 실제 등록·체험 시작.
+     * 입력을 고치면 인증이 풀린다 — 인증한 번호와 다른 번호로 시작하는 것을 막는다.
+     */
+    let trialVerified = false;
+    const setTrialSubmitEnabled = (enabled) => {
+      const btn = document.getElementById('trial-submit-btn');
+      if (!btn) return;
+      btn.disabled = !enabled;
+      btn.style.opacity = enabled ? '1' : '0.5';
+      btn.style.cursor = enabled ? 'pointer' : 'not-allowed';
+    };
+    const resetTrialVerification = () => {
+      trialVerified = false;
+      setTrialSubmitEnabled(false);
+      const status = document.getElementById('trial-verify-status');
+      if (status) { status.style.display = 'none'; status.textContent = ''; }
+      const verifyBtn = document.getElementById('trial-verify-btn');
+      if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.textContent = '🔎 인증하기'; }
+    };
+    document.getElementById('trial-nickname')?.addEventListener('input', resetTrialVerification);
+    document.getElementById('trial-phone')?.addEventListener('input', resetTrialVerification);
+
+    document.getElementById('trial-verify-btn')?.addEventListener('click', async () => {
+      const nicknameInput = document.getElementById('trial-nickname');
+      const phoneInput = document.getElementById('trial-phone');
+      const errorMsg = document.getElementById('trial-error-msg');
+      const verifyBtn = document.getElementById('trial-verify-btn');
+      const status = document.getElementById('trial-verify-status');
+
+      const nickname = (nicknameInput?.value || '').trim();
+      const phone = (phoneInput?.value || '').trim().replace(/[-\s]/g, '');
+
+      [nicknameInput, phoneInput].forEach(el => el?.classList.remove('trial-input-error'));
+      if (errorMsg) { errorMsg.textContent = ''; errorMsg.classList.remove('show'); }
+
+      if (!nickname || nickname.length < 2) {
+        nicknameInput?.classList.add('trial-input-error');
+        if (errorMsg) { errorMsg.textContent = '오픈채팅 닉네임을 정확하게 기재하세요. (2자 이상)'; errorMsg.classList.add('show'); }
+        return;
+      }
+      if (!phone || !/^01[0-9]{8,9}$/.test(phone)) {
+        phoneInput?.classList.add('trial-input-error');
+        if (errorMsg) { errorMsg.textContent = '올바른 전화번호를 입력하세요. (예: 01012345678)'; errorMsg.classList.add('show'); }
+        return;
+      }
+
+      if (verifyBtn) { verifyBtn.disabled = true; verifyBtn.textContent = '확인 중...'; }
+      try {
+        const result = await ipcRenderer.invoke('free:verify', { nickname, phone });
+        if (!result || result.success !== true) {
+          if (errorMsg) { errorMsg.textContent = (result && result.message) || '인증에 실패했습니다.'; errorMsg.classList.add('show'); }
+          if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.textContent = '🔎 인증하기'; }
+          return;
+        }
+        trialVerified = true;
+        setTrialSubmitEnabled(true);
+        if (verifyBtn) verifyBtn.textContent = '🔎 인증됨';
+        if (status) {
+          let line = '✅ 인증되었습니다 — 아래 [인증완료] 버튼을 눌러 체험을 시작하세요.';
+          if (result.status === 'existing' && result.registeredAt) {
+            const expiryMs = new Date(result.registeredAt).getTime() + 30 * 24 * 60 * 60 * 1000;
+            const daysLeft = Math.max(0, Math.ceil((expiryMs - Date.now()) / (24 * 60 * 60 * 1000)));
+            line = daysLeft > 0
+              ? `✅ 인증되었습니다 — 기존 체험 이어서 진행합니다. (남은 기간 D-${daysLeft})`
+              : '⚠️ 이 번호의 무료 체험 30일이 이미 만료되었습니다. 계속 사용하려면 라이선스를 구매해 주세요.';
+            if (daysLeft <= 0) { trialVerified = false; setTrialSubmitEnabled(false); }
+          }
+          status.textContent = line;
+          status.style.color = trialVerified ? '#22c55e' : '#ef4444';
+          status.style.display = 'block';
+        }
+      } catch (error) {
+        if (errorMsg) { errorMsg.textContent = `인증 오류: ${error.message}`; errorMsg.classList.add('show'); }
+        if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.textContent = '🔎 인증하기'; }
+      }
+    });
+
+    // ✅ [2026-03-26 → 2026-08-21 개편] 체험 모달: [인증완료] — 실제 등록·시작
     document.getElementById('trial-submit-btn')?.addEventListener('click', async () => {
-      const emailInput = document.getElementById('trial-email');
       const nicknameInput = document.getElementById('trial-nickname');
       const phoneInput = document.getElementById('trial-phone');
       const consentCheck = document.getElementById('trial-consent');
@@ -1675,28 +1754,15 @@
       const freeBtn = document.getElementById('free-use-button');
       const loginButton = document.getElementById('login-button');
 
-      const email = (emailInput?.value || '').trim().toLowerCase();
       const nickname = (nicknameInput?.value || '').trim();
       const phone = (phoneInput?.value || '').trim().replace(/[-\s]/g, '');
 
       // 입력 에러 초기화
-      [emailInput, nicknameInput, phoneInput].forEach(el => el?.classList.remove('trial-input-error'));
+      [nicknameInput, phoneInput].forEach(el => el?.classList.remove('trial-input-error'));
       if (errorMsg) { errorMsg.textContent = ''; errorMsg.classList.remove('show'); }
 
-      // 유효성 검증
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        emailInput?.classList.add('trial-input-error');
-        if (errorMsg) { errorMsg.textContent = '올바른 이메일을 입력하세요.'; errorMsg.classList.add('show'); }
-        return;
-      }
-      if (!nickname || nickname.length < 2) {
-        nicknameInput?.classList.add('trial-input-error');
-        if (errorMsg) { errorMsg.textContent = '닉네임을 2자 이상 입력하세요.'; errorMsg.classList.add('show'); }
-        return;
-      }
-      if (!phone || !/^01[0-9]{8,9}$/.test(phone)) {
-        phoneInput?.classList.add('trial-input-error');
-        if (errorMsg) { errorMsg.textContent = '올바른 전화번호를 입력하세요. (예: 01012345678)'; errorMsg.classList.add('show'); }
+      if (!trialVerified) {
+        if (errorMsg) { errorMsg.textContent = '먼저 [인증하기]로 인증을 완료하세요.'; errorMsg.classList.add('show'); }
         return;
       }
       if (!consentCheck?.checked) {
@@ -1710,7 +1776,7 @@
       if (loginButton) loginButton.disabled = true;
 
       try {
-        const result = await ipcRenderer.invoke('free:activate', { email, nickname, phone });
+        const result = await ipcRenderer.invoke('free:activate', { nickname, phone });
 
         if (!result || result.success !== true) {
           const msg = (result && result.message) ? String(result.message) : '무료 체험 설정에 실패했습니다.';
@@ -1722,7 +1788,7 @@
           } else {
             if (errorMsg) { errorMsg.textContent = msg; errorMsg.classList.add('show'); }
           }
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '🚀 체험 시작하기'; }
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '✅ 인증완료 (체험 시작)'; }
           if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = FREE_TRIAL_BUTTON_TEXT; }
           if (loginButton) loginButton.disabled = false;
           return;
@@ -1734,7 +1800,8 @@
           await ipcRenderer.invoke('config:save', {
             ...cfgNow,
             freeTrialActivated: true,
-            freeTrialEmail: email,
+            // [2026-08-21] 본인 확인 키가 전화번호로 바뀌었다 — 이메일 칸은 없다.
+            freeTrialPhone: phone,
           });
           console.log('[Login] ✅ 무료체험 등록 정보 config에 저장 완료');
         } catch (saveErr) {
@@ -1752,7 +1819,7 @@
         }, 1100);
       } catch (error) {
         if (errorMsg) { errorMsg.textContent = `오류: ${error.message}`; errorMsg.classList.add('show'); }
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '🚀 체험 시작하기'; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '✅ 인증완료 (체험 시작)'; }
         if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = FREE_TRIAL_BUTTON_TEXT; }
         if (loginButton) loginButton.disabled = false;
       }

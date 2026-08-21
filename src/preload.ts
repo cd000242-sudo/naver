@@ -137,11 +137,14 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('defamation:checkPublishRisk', payload),
   launchLeword: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('leword:launch'), // ✅ LEWORD 황금키워드 앱 실행
-  freeActivate: (userInfo?: { email: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; message?: string; expiresAt?: string }> =>
+  freeActivate: (userInfo?: { email?: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; message?: string; expiresAt?: string }> =>
     ipcRenderer.invoke('free:activate', userInfo),
-  // [2026-08-21] 무료 체험 이메일 인증번호 발송
+  // [2026-08-21] 무료 체험 이메일 인증번호 발송 (휴면 — SMS 연동 시 부활)
   freeRequestCode: (userInfo?: { email: string; phone: string }): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('free:requestCode', userInfo),
+  // [2026-08-21 3차] 체험 [인증하기] — 자격 확인(등록 없음)
+  freeVerify: (userInfo?: { nickname: string; phone: string }): Promise<{ success: boolean; message?: string; status?: 'new' | 'existing'; registeredAt?: string }> =>
+    ipcRenderer.invoke('free:verify', userInfo),
   forceQuit: (): Promise<{ success: boolean }> =>
     ipcRenderer.invoke('app:forceQuit'),
   minimizeToTray: (): Promise<void> =>
