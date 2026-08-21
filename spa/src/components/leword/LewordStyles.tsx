@@ -739,6 +739,22 @@ function LewordStyles() {
             .lw-radar-rest a { color: #aeb6c4; text-decoration: none; }
             .lw-radar-rest a:hover { color: #35d0ba; }
             /* 훑지 않은 판 — 기다리면 열리는 곳과 영영 막힌 곳을 갈라 적는다. */
+            .lw-audit-progress {
+                margin-left: 10px; font-size: 12.5px; font-weight: 700; color: #35d0ba;
+                font-variant-numeric: tabular-nums;
+            }
+
+            /* 엔진별 칸 — 상태 하나만 담는다. 칩을 뭉치지 않는다. */
+            .lw-engine-cell { white-space: nowrap; }
+            .lw-engine-cell .lw-engine {
+                display: inline-block; padding: 3px 9px; border-radius: 7px;
+                font-size: 11.5px; font-weight: 800; text-decoration: none;
+            }
+            .lw-engine-cell .lw-engine-found { background: rgba(46,204,113,.14); color: #6fdc8c; }
+            .lw-engine-cell .lw-engine-blocked { background: rgba(255,201,102,.13); color: #ffc966; }
+            .lw-engine-cell .lw-engine-none { background: rgba(255,143,160,.12); color: #ff8fa0; }
+            .lw-engine-cell .lw-engine:hover { filter: brightness(1.2); }
+
             .lw-radar-gated ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
             .lw-radar-gated li { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; font-size: 12.5px; }
             .lw-radar-gated li a { color: #fff; font-weight: 800; text-decoration: none; }

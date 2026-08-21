@@ -172,13 +172,22 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
         };
         persistAudit(state);
 
-        // 글 하나씩 순서대로 — 진행이 눈에 보이고, API 를 예의 있게 쓴다.
-        for (let index = 0; index < state.rows.length; index += 1) {
+        /*
+         * 네 건씩 나란히 확인한다.
+         *
+         * 예전에는 한 건씩 줄 세웠다. 글이 다섯 건일 때는 그래도 됐지만, 피드
+         * 대신 전량(200건)을 받게 되니 15분이 넘어간다(사장님 지시 2026-08-21
+         * "5건만 말고 전부"). 네 갈래면 넉넉히 4분 안쪽이고, 네이버 오픈API
+         * 하루 한도에 견주면 여전히 조용한 편이다.
+         */
+        const LANES = 4;
+        const checkOne = async (index: number) => {
             if (auditRunId.current !== runId) return;
             state = { ...state, rows: state.rows.map((row, i) => (i === index ? { ...row, status: 'checking' } : row)) };
             setAudit(state);
             const post = state.rows[index];
             const checked = await auditBlogCheck(post.title, post.link);
+            if (auditRunId.current !== runId) return;
             const payload = checked.ok ? checked.data as (typeof checked.data & {
                 keyword?: { query: string; rank: number | null };
                 extended?: { query: string; rank: number | null };
@@ -195,7 +204,18 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 : { ...post, status: 'error', rank: null, sampled: 0, sympathy: null };
             state = { ...state, rows: state.rows.map((row, i) => (i === index ? done : row)) };
             persistAudit(state);
-        }
+        };
+
+        let cursor = 0;
+        const lane = async () => {
+            while (cursor < state.rows.length) {
+                if (auditRunId.current !== runId) return;
+                const index = cursor;
+                cursor += 1;
+                await checkOne(index);
+            }
+        };
+        await Promise.all(Array.from({ length: LANES }, () => lane()));
         if (auditRunId.current === runId) setAuditLoading(false);
     };
 
@@ -283,7 +303,14 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
             {audit && audit.rows.length > 0 && (
                 <section className="lw-panel" aria-label="발행 글 노출 점검">
                     <div className="lw-panel-head">
-                        <h2>{PLATFORM_LABEL[audit.platform] || audit.platform} · 최근 발행 {audit.rows.length}건</h2>
+                        <h2>
+                            {PLATFORM_LABEL[audit.platform] || audit.platform} · 발행 글 {audit.rows.length}건
+                            {auditLoading && (
+                                <span className="lw-audit-progress">
+                                    {audit.rows.filter((row) => row.status === 'done' || row.status === 'error').length}건 확인
+                                </span>
+                            )}
+                        </h2>
                         <span>
                             순위 세 눈(각각 상위 100 실측): <strong>키워드</strong>(제목의 핵심어 검색 — 사람이 실제로 치는 것)
                             → <strong>확장</strong>(핵심어+한정어) → <strong>제목검색</strong>(제 제목으로도 안 잡히면 차단·저품질 의심).
@@ -300,8 +327,16 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                     <th scope="col">공감·댓글</th>
                                     <th scope="col">키워드 순위</th>
                                     <th scope="col">확장 순위</th>
-                                    <th scope="col" title="그 글의 제목을 그대로 검색했을 때의 자리 — 생존 확인">제목검색</th>
-                                    <th scope="col" title="구글·다음·줌 제목검색에 이 글 주소가 보이는가 — 칩을 누르면 그 검색이 열립니다">다른 검색</th>
+                                    <th scope="col" title="그 글의 제목을 그대로 검색했을 때의 자리 — 생존 확인">네이버 제목검색</th>
+                                    {/*
+                                      * 엔진을 칸마다 갈라 세운다(사장님 지시 2026-08-21
+                                      * "구글은 구글 다음은 다음 줌은 줌"). 한 칸에 칩 세 개를
+                                      * 뭉쳐 두면 어느 엔진이 문제인지 눈으로 못 고른다 —
+                                      * 엔진마다 대응이 다르므로 칸도 달라야 한다.
+                                      */}
+                                    {ENGINE_META.map((engine) => (
+                                        <th key={engine.id} scope="col" title={`${engine.label} 제목검색에 이 글 주소가 보이는가 — 눌러서 직접 확인`}>{engine.label}</th>
+                                    ))}
                                     <th scope="col" aria-label="분석" />
                                 </tr>
                             </thead>
@@ -344,25 +379,26 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                         <td className={row.rank === null ? 'lw-rank-out' : 'lw-rank-in'}>
                                             {row.status !== 'done' ? '—' : row.rank !== null ? `${row.rank}위` : `${row.sampled}건 중 없음`}
                                         </td>
-                                        <td>
-                                            {row.engines ? (
-                                                <span className="lw-engines">
-                                                    {ENGINE_META.map((engine) => {
-                                                        const state = row.engines![engine.id];
-                                                        return (
-                                                            <a
-                                                                key={engine.id}
-                                                                className={`lw-engine lw-engine-${state}`}
-                                                                href={engine.search(row.title)}
-                                                                target="_blank"
-                                                                rel="noreferrer"
-                                                                title={`${engine.label}: ${state === 'found' ? '노출됨' : state === 'blocked' ? '자동 측정 불가 — 눌러서 직접 확인' : '안 보임 — 눌러서 직접 확인'}`}
-                                                            >{engine.label}{state === 'found' ? ' ✓' : state === 'blocked' ? ' ?' : ' —'}</a>
-                                                        );
-                                                    })}
-                                                </span>
-                                            ) : '—'}
-                                        </td>
+                                        {ENGINE_META.map((engine) => {
+                                            const state = row.engines ? row.engines[engine.id] : null;
+                                            return (
+                                                <td key={engine.id} className="lw-engine-cell">
+                                                    {state ? (
+                                                        <a
+                                                            className={`lw-engine lw-engine-${state}`}
+                                                            href={engine.search(row.title)}
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                            title={state === 'found'
+                                                                ? `${engine.label}에 이 글이 보입니다`
+                                                                : state === 'blocked'
+                                                                    ? `${engine.label}은 자동 측정을 막습니다 — 눌러서 직접 확인하세요`
+                                                                    : `${engine.label}에서 안 보입니다 — 눌러서 직접 확인하세요`}
+                                                        >{state === 'found' ? '노출' : state === 'blocked' ? '확인 필요' : '없음'}</a>
+                                                    ) : '—'}
+                                                </td>
+                                            );
+                                        })}
                                         <td className="lw-row-actions">
                                             <button type="button" className="lw-mini" onClick={() => openAnalysis(row)} disabled={row.status !== 'done'}>
                                                 글 분석하기
