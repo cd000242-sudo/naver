@@ -1614,7 +1614,8 @@
     });
 
     document.getElementById('paywall-upgrade-btn')?.addEventListener('click', () => {
-      const url = 'https://open.kakao.com/o/sPcaslwh';
+      // [2026-08-21] 문의(카카오) → 결제 페이지 직행(사장님: "결제창 바로 가게").
+      const url = 'https://www.leaderspro.kr/pricing.html';
       try {
         if (window.api?.openExternalUrl) {
           window.api.openExternalUrl(url);
@@ -1671,6 +1672,15 @@
      * 입력을 고치면 인증이 풀린다 — 인증한 번호와 다른 번호로 시작하는 것을 막는다.
      */
     let trialVerified = false;
+    /** [2026-08-21] 결제 페이지 — 만료·한도 시 "결제창 바로"(사장님 지시). featureLockModal 과 같은 주소. */
+    const PRICING_URL = 'https://www.leaderspro.kr/pricing.html';
+    function openPricingPage() {
+      try {
+        if (window.api?.openExternalUrl) window.api.openExternalUrl(PRICING_URL);
+        else if (ipcRenderer?.invoke) ipcRenderer.invoke('openExternalUrl', PRICING_URL);
+        else window.open(PRICING_URL, '_blank');
+      } catch (e) { console.error('[Login] 결제 페이지 열기 실패:', e); }
+    }
     const setTrialSubmitEnabled = (enabled) => {
       const btn = document.getElementById('trial-submit-btn');
       if (!btn) return;
@@ -1733,8 +1743,13 @@
             const daysLeft = Math.max(0, Math.ceil((expiryMs - Date.now()) / (24 * 60 * 60 * 1000)));
             line = daysLeft > 0
               ? `⚠️ 이미 인증한 번호입니다 (1번호당 1회 인증). 기존 체험을 이어서 진행합니다 — 남은 기간 D-${daysLeft}`
-              : '⛔ 이미 인증한 번호입니다 — 1번호당 1회 인증만 가능합니다. 무료 체험 30일이 만료되어 계속 사용하려면 라이선스를 구매해 주세요.';
-            if (daysLeft <= 0) { trialVerified = false; setTrialSubmitEnabled(false); }
+              : '⛔ 이미 인증한 번호입니다 — 1번호당 1회 인증만 가능합니다. 무료 체험 30일이 만료되어 결제 페이지로 안내합니다.';
+            if (daysLeft <= 0) {
+              trialVerified = false;
+              setTrialSubmitEnabled(false);
+              // [2026-08-21] 사장님 지시: "기간 다 되면 결제창 바로 가게" — 만료 확인 즉시 결제 페이지.
+              openPricingPage();
+            }
           }
           status.textContent = line;
           status.style.color = trialVerified ? '#22c55e' : '#ef4444';
@@ -1782,7 +1797,8 @@
 
         if (!result || result.success !== true) {
           const msg = (result && result.message) ? String(result.message) : '무료 체험 설정에 실패했습니다.';
-          const isQuota = /할당량|quota|PAYWALL|소진|한도|초과|차단/i.test(msg);
+          // [2026-08-21] '만료' 추가 — 30일 만료 재입장도 결제 흐름(페이월 모달)으로 바로 보낸다.
+          const isQuota = /할당량|quota|PAYWALL|소진|한도|초과|차단|만료/i.test(msg);
           if (isQuota) {
             document.getElementById('trial-modal-backdrop').style.display = 'none';
             const paywallModal = document.getElementById('paywall-modal-backdrop');

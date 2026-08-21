@@ -187,4 +187,14 @@ export function perMonth(price: number, term: TermId): number | null {
     return months ? Math.round(price / months) : null;
 }
 
+/**
+ * 하루 얼마 꼴인가 — 사장님 지시(2026-08-21): "금액 전부 하루 가격으로 보여주면
+ * 싸 보이니까." 단순 나눗셈(월=30일·년=365일)이고 실제 청구액은 항상 병기한다.
+ * 영구제는 나눌 기간이 없어 null.
+ */
+export function perDay(price: number, term: TermId): number | null {
+    const days = term === 'monthly' ? 30 : term === 'yearly' ? 365 : null;
+    return days ? Math.round(price / days) : null;
+}
+
 export const won = (value: number) => value.toLocaleString('ko-KR');

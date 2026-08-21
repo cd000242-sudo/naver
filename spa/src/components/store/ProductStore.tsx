@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../../lib/pricingSchedule';
 import { fetchSiteContent } from '../../lib/siteOps';
 import {
-    applyStoreOverrides, individualTotal, normalPriceOf, perMonth, sellableProducts, TERMS, won,
+    applyStoreOverrides, individualTotal, normalPriceOf, perDay, perMonth, sellableProducts, TERMS, won,
     type Product, type TermId,
 } from '../../lib/productCatalog';
 import StoreStyles from './StoreStyles';
@@ -171,7 +171,13 @@ function ProductStore({ onPick, onCardPay }: {
                                     <i>원{term === 'lifetime' ? '' : term === 'yearly' ? ' / 년' : ' / 월'}</i>
                                 </div>
                                 <p className="st-permo">
-                                    {monthly && term !== 'monthly' ? `월 ${won(monthly)}원 꼴` : ' '}
+                                    {/* 하루 환산이 첫 자리 — 하루 가격이 싸 보인다(사장님 지시 2026-08-21). 실청구액은 위에 그대로. */}
+                                    {(() => {
+                                        const daily = perDay(price, term);
+                                        if (!daily) return ' ';
+                                        const monthlyTail = term !== 'monthly' && monthly ? ` · 월 ${won(monthly)}원` : '';
+                                        return `하루 ${won(daily)}원 꼴${monthlyTail}`;
+                                    })()}
                                     {product.bundle && ` · 따로 사면 ${won(individualTotal(term, catalog))}원`}
                                 </p>
 
