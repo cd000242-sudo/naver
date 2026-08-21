@@ -698,6 +698,25 @@ function LewordStyles() {
             .lw-radar-policy.pol-careful { background: rgba(255,165,0,.14); color: #ffc966; }
             .lw-radar-policy.pol-banned { background: rgba(255,107,129,.14); color: #ff8fa0; }
             .lw-radar-policy.pol-unknown { background: rgba(255,255,255,.06); color: #9aa1b2; }
+            .lw-radar-gate {
+                padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 800;
+                background: rgba(53,208,186,.16); color: #6fe0d0;
+            }
+            .lw-radar-audience { margin: 10px 0 0; color: #c0c8d4; font-size: 13px; line-height: 1.6; }
+            /* 글 해부 — 답변 각도를 짤 때 꺼내 보는 재료. */
+            .lw-radar-anatomy { margin: 12px 0 0; }
+            .lw-radar-anatomy summary { cursor: pointer; color: #9be8dd; font-size: 12.5px; font-weight: 800; padding: 4px 0; }
+            .lw-radar-anatomy ul { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+            .lw-radar-anatomy li { border-left: 2px solid rgba(53,208,186,.35); padding-left: 10px; }
+            .lw-radar-anatomy li b { display: block; color: #fff; font-size: 13px; font-weight: 800; margin-bottom: 3px; }
+            .lw-radar-anatomy li span { color: rgba(235,242,250,.72); font-size: 12.5px; line-height: 1.6; }
+            .lw-radar-gap {
+                margin-top: 11px; padding: 10px 12px; border-radius: 9px;
+                background: rgba(255,165,0,.07); border: 1px solid rgba(255,165,0,.22);
+            }
+            .lw-radar-gap b { display: block; color: #ffc966; font-size: 12.5px; margin-bottom: 4px; }
+            .lw-radar-gap p { margin: 0; color: rgba(235,242,250,.75); font-size: 12.5px; line-height: 1.6; }
+            .lw-radar-gap em { display: block; margin-top: 5px; font-style: normal; color: #646b7d; font-size: 11.5px; }
             .lw-radar-score { color: #35d0ba; font-size: 14px; font-variant-numeric: tabular-nums; }
             .lw-radar-state { font-style: normal; font-size: 11.5px; color: #2ecc71; font-weight: 800; }
             .lw-radar-card h3 { margin: 0 0 6px; font-size: 15.5px; line-height: 1.4; }

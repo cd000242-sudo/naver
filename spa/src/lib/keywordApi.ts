@@ -484,14 +484,24 @@ export type RadarAnalysis = {
     intents: string[];
     moneyAngle: string;
     queries: string[];
+    /** 글 해부 — 이 글이 답하는 질문과 답의 알맹이. */
+    answers?: Array<{ q: string; a: string }>;
+    audience?: string;
+    /** 이 글이 답하지 못하는 인접 문제 — 여기에 답을 달면 헛걸음이다. */
+    notCovered?: string[];
+    /** 커뮤니티용 짧은 말 — 긴 문장은 판을 좁힌 검색에서 0건이 된다. */
+    shortQueries?: string[];
 };
 export type RadarCandidate = {
     source: 'kin' | 'cafearticle' | 'blog' | 'webkr' | 'community';
-    /** 커뮤니티일 때만 — 어느 판인가(아하·클리앙·더쿠…). */
+    /** 커뮤니티일 때만 — 어느 판인가(아하·아카라이브·에펨…). */
     siteName?: string;
     siteKind?: string;
     /** 그 판의 링크 정책 실측/확인 상태. unknown 이면 사람이 판단한다. */
     linkPolicy?: 'ok' | 'careful' | 'banned' | 'unknown';
+    /** 지금 바로 답을 달 수 있는가. 닫힌·지연 판은 애초에 검색하지 않는다. */
+    replyGate?: 'instant' | 'delayed' | 'closed' | 'unknown';
+    gateWhy?: string;
     title: string;
     link: string;
     excerpt: string;
@@ -510,13 +520,17 @@ export type RadarEvaluated = RadarCandidate & {
 };
 export const fetchRadarAnalyze = (url: string) =>
     call<{ analysis: RadarAnalysis }>('radar-analyze', { url });
-export const fetchRadarSearch = (queries: string[], coreKeywords: string[]) =>
+export const fetchRadarSearch = (queries: string[], coreKeywords: string[], shortQueries: string[] = []) =>
     call<{
         items: RadarCandidate[];
         providerStatus: Record<string, string>;
         totalFound: number;
         afterDedupe: number;
-    }>('radar-search', { queries: JSON.stringify(queries), coreKeywords: JSON.stringify(coreKeywords) });
+    }>('radar-search', {
+        queries: JSON.stringify(queries),
+        coreKeywords: JSON.stringify(coreKeywords),
+        shortQueries: JSON.stringify(shortQueries),
+    });
 export const fetchRadarEvaluate = (items: RadarCandidate[], articleTitle: string, moneyAngle: string) =>
     call<{ items: RadarEvaluated[] }>('radar-evaluate', {
         items: JSON.stringify(items),

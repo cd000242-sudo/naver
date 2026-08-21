@@ -95,7 +95,11 @@ function RadarTab() {
 
         // ② 검색 — 프로바이더 일부가 죽어도 나머지로 계속한다(§26)
         setPhase('searching');
-        const searched = await fetchRadarSearch(meta.queries, meta.coreKeywords.map((k) => k.keyword));
+        const searched = await fetchRadarSearch(
+            meta.queries,
+            meta.coreKeywords.map((k) => k.keyword),
+            meta.shortQueries || [],
+        );
         if (!searched.ok || !searched.data) {
             setPhase('idle');
             setError(searched.message || '검색에 실패했습니다.');
@@ -183,8 +187,31 @@ function RadarTab() {
                             </span>
                         ))}
                     </div>
+                    {analysis.audience && (
+                        <p className="lw-radar-audience">이 글을 찾는 사람 · {analysis.audience}</p>
+                    )}
                     {analysis.moneyAngle && analysis.moneyAngle !== '없음' && (
                         <p className="lw-radar-money">돈과 닿는 지점 · {analysis.moneyAngle}</p>
+                    )}
+                    {(analysis.answers || []).length > 0 && (
+                        <details className="lw-radar-anatomy">
+                            <summary>이 글이 답하는 것 {(analysis.answers || []).length}가지 — 답변 각도의 재료</summary>
+                            <ul>
+                                {(analysis.answers || []).map((row) => (
+                                    <li key={row.q}>
+                                        <b>{row.q}</b>
+                                        <span>{row.a}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            {(analysis.notCovered || []).length > 0 && (
+                                <div className="lw-radar-gap">
+                                    <b>이 글이 답하지 못하는 것</b>
+                                    <p>{(analysis.notCovered || []).join(' · ')}</p>
+                                    <em>이런 질문에는 답을 달아도 유입이 안 붙습니다 — 글을 먼저 채우세요.</em>
+                                </div>
+                            )}
+                        </details>
                     )}
                     {failedProviders.length > 0 && (
                         <p className="lw-radar-partial">
@@ -224,6 +251,11 @@ function RadarTab() {
                                                     ? item.siteName
                                                     : SOURCE_LABEL[item.source] || item.source}
                                             </span>
+                                            {item.source === 'community' && item.replyGate === 'instant' && (
+                                                <span className="lw-radar-gate" title={item.gateWhy || '지금 바로 답을 달 수 있는 판입니다'}>
+                                                    바로 답변 가능
+                                                </span>
+                                            )}
                                             {item.source === 'community' && item.linkPolicy && (
                                                 <span
                                                     className={`lw-radar-policy pol-${item.linkPolicy}`}
