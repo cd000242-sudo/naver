@@ -19,13 +19,29 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DEST = path.join(ROOT, 'spa', 'public', 'data', 'kin-golden.json');
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36';
-/** 숨은 Q&A 판정 — 최신 질문인데 조회는 붙고 답변은 빈 자리. */
-const HIDDEN_MIN_VIEWS = 100;
-const HIDDEN_MAX_ANSWERS = 2;
+/*
+ * 숨은 Q&A 판정 — 최신 질문인데 조회는 붙고 답변은 빈 자리.
+ *
+ * 조회 하한을 100 -> 50 으로 내린 근거(실측 2026-08-22, 후보 118건 전수):
+ *   3일 창 · 답변 2 이하에서  조회 100+ = 1건 · 조회 50+ = 3건
+ *   30일까지 넓혀도 조회 100+ = 2건
+ * 즉 "답변이 안 달린 최신 질문"과 "조회 100+"는 사실상 양립하지 않는다 —
+ * 조회가 쌓이려면 시간이 필요하고, 그동안 답변이 붙기 때문이다.
+ * 100 을 그대로 두면 판이 비는 게 정상 동작이 된다(실제로 0건이 발행됐다).
+ *
+ * 절대 조회수는 결국 '나이'를 재는 셈이라, 줄 세우기는 viewsDelta(15분 사이
+ * 조회가 붙는 속도)가 맡는다. 하한은 "아무도 안 보는 질문"만 걷어내는 몫이다.
+ */
+const HIDDEN_MIN_VIEWS = Number(process.env.KIN_HIDDEN_MIN_VIEWS || 50);
+const HIDDEN_MAX_ANSWERS = Number(process.env.KIN_HIDDEN_MAX_ANSWERS || 2);
 /** 숨은 질문은 며칠 안 된 것이어야 한다(사장님: "무엇보다 최신이어야"). */
-const HIDDEN_FRESH_DAYS = 3;
-/** 숨은 후보 개별 실측 상한 — 크론 한 번의 예의 있는 폭. */
-const HIDDEN_CANDIDATE_CAP = 80;
+const HIDDEN_FRESH_DAYS = Number(process.env.KIN_HIDDEN_FRESH_DAYS || 3);
+/*
+ * 숨은 후보 개별 실측 상한 — 크론 한 번의 예의 있는 폭.
+ * 80 -> 140: 위 실측대로 통과율이 3% 안팎이라, 80건을 열면 기대 산출이 2~3건이다.
+ * 판을 채우려면 여는 폭이 통과율을 이겨야 한다(한 건당 약 0.25초).
+ */
+const HIDDEN_CANDIDATE_CAP = Number(process.env.KIN_HIDDEN_CANDIDATE_CAP || 140);
 /** 급상승 판정 — 이 정도는 붙어야 잰 값이지 노이즈가 아니다. */
 const RISING_MIN_DELTA = 20;
 
@@ -85,7 +101,11 @@ const HIDDEN_SEEDS = [
   // 경조사·관계
   '축의금', '부의금', '결혼식', '상견례', '예단', '예물', '돌잔치', '장례', '제사', '명절',
 ];
-const SEEDS_PER_RUN = 24;
+/*
+ * 회차당 시드 24 -> 36. 통과율이 낮으니 후보 풀부터 넓혀야 한다.
+ * 시드는 시간대별로 돌아가며 뽑히므로 전 사전을 여전히 하루에 여러 번 훑는다.
+ */
+const SEEDS_PER_RUN = Number(process.env.KIN_SEEDS_PER_RUN || 36);
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

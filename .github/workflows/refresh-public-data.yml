@@ -104,8 +104,8 @@ jobs:
             # 지식인 황금질문(실시간·급상승·숨은) — 급상승은 직전 스냅샷 대비라 15분 주기가 곧 눈금이다.
             timeout 300 node scripts/kin-golden.mjs || echo "지식인 황금질문 수집 실패/시간초과 — 기존 파일 유지"
             # 유튜브 급상승 → 네이버 빈자리. YOUTUBE_API_KEY 가 없으면 스스로 건너뛴다.
-            # 스크립트 자체 예산(6분)이 먼저 걸려 여기까지 오면 이미 저장된 뒤다.
-            timeout 480 node scripts/youtube-gap.mjs || echo "유튜브 빈자리 수집 실패/시간초과 — 기존 파일 유지"
+            # 스크립트 자체 예산(8분)이 먼저 걸려 여기까지 오면 이미 저장된 뒤다.
+            timeout 540 node scripts/youtube-gap.mjs || echo "유튜브 빈자리 수집 실패/시간초과 — 기존 파일 유지"
 
             # 0건이면 커밋하지 않는다. 좋은 데이터를 빈 데이터로 덮지 않기 위한 마지막 가드.
             for f in spa/public/data/source-signals.json spa/public/data/home-notices.json; do

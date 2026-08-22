@@ -66,7 +66,7 @@ const MAX_PER_VIDEO = Number(process.env.YTGAP_MAX_PER_VIDEO || 2);
  * 예산을 넘기면 거기까지 잰 것으로 저장한다. 몇 개를 못 쟀는지는 반드시
  * 로그에 남긴다 — 조용히 자르면 "다 봤다"로 읽히기 때문이다.
  */
-const BUDGET_MS = Number(process.env.YTGAP_BUDGET_MS || 6 * 60_000);
+const BUDGET_MS = Number(process.env.YTGAP_BUDGET_MS || 8 * 60_000);
 const STARTED_AT = Date.now();
 const overBudget = () => Date.now() - STARTED_AT > BUDGET_MS;
 
@@ -195,12 +195,20 @@ async function main() {
         }
         await sleep(120);
     }
-    // 롱폼·숏폼은 뜨는 방식이 달라 따로 봐야 한다(사장님 지시). 여기서 한 번만 잰다.
+    /*
+     * 롱폼·숏폼은 뜨는 방식이 달라 따로 봐야 한다(사장님 지시). 여기서 한 번만 잰다.
+     * 단계 마감을 넘기면 나머지는 form 을 비워 둔다 — 모르는 것을 짐작하지 않고,
+     * 뒤에 올 검색량·문서수 실측 예산을 지킨다(그게 빈자리 판정의 본체다).
+     */
+    const formDeadline = STARTED_AT + BUDGET_MS * 0.25;
+    let formSkipped = 0;
     for (const video of videos) {
+        if (Date.now() > formDeadline) { video.form = ''; formSkipped += 1; continue; }
         const short = await isShortForm(video.videoId);
         video.form = short === null ? '' : (short ? 'short' : 'long');
         await sleep(80);
     }
+    if (formSkipped > 0) log(`!! 숏폼 판정 단계 상한 — ${formSkipped}편은 폼을 못 쟀습니다(빈 값으로 둡니다)`);
     const shortCount = videos.filter((video) => video.form === 'short').length;
     log(`급상승 영상 ${videos.length}편 (숏폼 ${shortCount} · 롱폼 ${videos.length - shortCount})`);
     if (videos.length === 0) return;
@@ -208,7 +216,15 @@ async function main() {
     // ② 제목 → 자동완성 → 실제 검색어
     /** 키워드 → 그 키워드를 만들어 낸 영상(제일 먼저 만난 것). */
     const source = new Map();
+    /*
+     * 이 단계가 예산을 다 먹던 곳이다(실측 2026-08-22): 영상 172편 x 최대 8덩어리
+     * = 자동완성 1,300여 회를 부르느라 3분 45초를 썼고, 정작 검색량·문서수를
+     * 잴 시간이 남지 않아 "빈자리 0건"이 발행됐다. 마감을 걸고 몇 편을 못 봤는지 남긴다.
+     */
+    const expandDeadline = STARTED_AT + BUDGET_MS * 0.5;
+    let videosSkipped = 0;
     for (const video of videos) {
+        if (Date.now() > expandDeadline) { videosSkipped += 1; continue; }
         /*
          * 후보 상한 4→8 (사장님 확인 2026-08-20). 4개면 제목 앞쪽 덩어리에서
          * 끊겨 뒤쪽의 진짜 개체를 놓쳤다 — 실측: "과연 둠이 …? ≪어벤져스:
@@ -226,30 +242,47 @@ async function main() {
             }
         }
     }
+    if (videosSkipped > 0) log(`!! 검색어 확장 단계 상한 — 영상 ${videos.length}편 중 ${videosSkipped}편은 못 봤습니다`);
     log(`자동완성이 인정한 검색어 ${source.size}개`);
     if (source.size === 0) return;
 
-    // ③ 검색량 실측 — 검색광고 API 는 한 번에 5개
+    /*
+     * ③ 검색량 실측 — 검색광고 API 는 한 번에 5개.
+     *
+     * 예산을 **나눠 쓴다**(2026-08-22 실측 교훈). 처음엔 한 예산을 통으로 뒀더니
+     * 검색어 1,074개 검색량을 재는 데 다 써 버려 문서수를 한 건도 못 재고
+     * "빈자리 0건"이 발행됐다. 검색량은 넓게 훑는 단계라 절반까지만 쓰고,
+     * 나머지는 자리 판정(문서수)에 남긴다.
+     */
     const keywords = [...source.keys()];
+    const volumeDeadline = STARTED_AT + BUDGET_MS * 0.75;
     const volumes = new Map();
     let volumeStoppedAt = -1;
     for (let index = 0; index < keywords.length; index += 5) {
-        if (overBudget()) { volumeStoppedAt = index; break; }
+        if (Date.now() > volumeDeadline) { volumeStoppedAt = index; break; }
         for (const [name, detail] of await fetchVolumeDetails(keywords.slice(index, index + 5))) volumes.set(name, detail);
         await sleep(220);
     }
     if (volumeStoppedAt >= 0) {
-        log(`!! 시간 상한(${Math.round(BUDGET_MS / 60000)}분) — 검색어 ${keywords.length}개 중 ${volumeStoppedAt}개까지만 검색량을 쟀습니다`);
+        log(`!! 검색량 단계 상한 — 검색어 ${keywords.length}개 중 ${volumeStoppedAt}개까지만 쟀습니다(나머지 예산은 문서수에 씁니다)`);
     }
 
-    // ④ 검색량이 기준을 넘은 것만 문서수를 잰다 — 문서수 조회가 더 비싸다
+    /*
+     * ④ 검색량이 기준을 넘은 것만 문서수를 잰다 — 문서수 조회가 더 비싸다.
+     * **검색량이 큰 것부터** 잰다. 원래 순서대로 돌면 예산이 끊길 때
+     * 뒤쪽의 큰 자리들이 통째로 날아간다.
+     */
+    const measurable = keywords
+        .map((keyword) => ({ keyword, detail: volumes.get(keyword.replace(/\s+/g, '')) }))
+        .filter(({ detail }) => detail && Number.isFinite(detail.volume) && detail.volume >= MIN_VOLUME)
+        .sort((left, right) => right.detail.volume - left.detail.volume);
+    log(`검색량 ${MIN_VOLUME}+ ${measurable.length}개 → 문서수 조회`);
+
     const rows = [];
     let docChecked = 0;
     let docSkipped = 0;
-    for (const keyword of keywords) {
-        const detail = volumes.get(keyword.replace(/\s+/g, ''));
-        const searchVolume = detail ? detail.volume : null;
-        if (!Number.isFinite(searchVolume) || searchVolume < MIN_VOLUME) continue;
+    for (const { keyword, detail } of measurable) {
+        const searchVolume = detail.volume;
         /*
          * 자리가 넉넉히 모였거나 예산을 넘겼으면 멈춘다. 화면은 60건을 쓰는데
          * 1,000개를 끝까지 재려다 판 전체를 멈추게 하는 것이 지금까지의 손해였다.
