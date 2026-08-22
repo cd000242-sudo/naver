@@ -46,6 +46,34 @@ const CATEGORY_LABEL: Record<string, string> = {
 };
 
 /*
+ * 유튜브 분류를 그대로 믿지 않는다(사장님 지적 2026-08-22 "영화·애니 카테고리가
+ * 맞니? 이선민은 개그맨인데").
+ *
+ * 실측: 유튜브가 준 categoryId 가 1(영화·애니)인데 내용은 예능이었다 —
+ *   cat=1 | 아빠로 오해받은 이선민 #이선민 #예능
+ *   cat=1 | 카자흐스탄어 아님 #나혼산 #김신영
+ *   cat=1 | ... 한 직원의 최후 #숏드라마 #선행 #숏킹
+ * 업로더가 정하는 값이라 예능 클립을 영화·애니로 올리는 채널이 많다.
+ * 제목·해시태그에 **명확한 낱말**이 있을 때만 덮어쓴다. 애매하면 건드리지 않는다.
+ */
+const CATEGORY_OVERRIDE: Array<{ id: string; test: RegExp }> = [
+    { id: '24', test: /#?(예능|개그맨|개그우먼|코미디|나혼산|런닝맨|무한도전|라디오스타|아는형님|놀면뭐하니|유퀴즈|숏드라마|숏킹|드라마)/ },
+    { id: '17', test: /#?(축구|야구|농구|배구|골프|kbo|k리그|올림픽|월드컵|ufc|격투)/i },
+    { id: '20', test: /#?(게임|롤|리니지|배그|피파|넥슨|스팀|케스파|e스포츠)/i },
+    { id: '25', test: /#?(뉴스|속보|앵커|시사|국회|대통령|정부|광복절)/ },
+    { id: '28', test: /#?(ai|인공지능|챗gpt|gpt|반도체|테슬라|아이폰|갤럭시|코딩)/i },
+];
+
+/** 유튜브 분류 → 내용으로 본 분류. 근거가 없으면 원래 값 그대로. */
+function realCategoryId(row: GapRow): string {
+    const hay = `${row.video.title} ${row.keyword}`;
+    for (const rule of CATEGORY_OVERRIDE) {
+        if (rule.test.test(hay)) return rule.id;
+    }
+    return row.video.categoryId || '';
+}
+
+/*
  * 롱폼과 숏폼은 뜨는 방식이 다르다 — 섞어 놓으면 어느 쪽 재료인지 모른다
  * (사장님 지시 2026-08-20). 판정은 수집 때 /shorts/ 응답으로 실측한다.
  */
@@ -251,12 +279,12 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const allRows = data?.rows || [];
     const rows = allRows.filter((row) => (
         (!form || row.video.form === form)
-        && (!category || String(row.video.categoryId || '') === category)
+        && (!category || realCategoryId(row) === category)
         && (!topic || topicsFor(row).includes(topic))
     ));
     /** 지금 고른 형식 안에서 카테고리별 몇 건인지 — 빈 버튼을 누르게 두지 않는다. */
     const countIn = (categoryId: string) => allRows
-        .filter((row) => (!form || row.video.form === form) && String(row.video.categoryId || '') === categoryId).length;
+        .filter((row) => (!form || row.video.form === form) && realCategoryId(row) === categoryId).length;
     const formCount = (formId: string) => allRows.filter((row) => !formId || row.video.form === formId).length;
     const topicCount = (topicId: string) => allRows
         .filter((row) => (!form || row.video.form === form) && topicsFor(row).includes(topicId)).length;
@@ -415,8 +443,8 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             {row.video.form === 'short' ? '숏폼' : '롱폼'}
                                         </span>
                                     )}
-                                    {CATEGORY_LABEL[String(row.video.categoryId || '')] && (
-                                        <span className="lw-yt-cat">{CATEGORY_LABEL[String(row.video.categoryId)]}</span>
+                                    {CATEGORY_LABEL[realCategoryId(row)] && (
+                                        <span className="lw-yt-cat">{CATEGORY_LABEL[realCategoryId(row)]}</span>
                                     )}
                                     {topicsFor(row).includes('shopping') && (
                                         <span className="lw-yt-topic lw-yt-topic-shopping" title="광고 경쟁 실측 '높음' 또는 AI 에이전트가 '살 수 있는 물건'으로 판정">제휴·쇼핑각</span>
