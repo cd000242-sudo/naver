@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { checkClaudeToken, exchangeClaudeOauth, fetchClaudeUsage, type ClaudeUsage } from '../../lib/keywordApi';
-import { bridgeAgentLogin, probeBridge, type BridgeStatus } from '../../lib/bridge';
+import { bridgeAgentLogin, bridgeClaudeCredentials, probeBridge, type BridgeStatus } from '../../lib/bridge';
 import {
     KEY_GROUPS,
     checkKeyShape,
@@ -101,7 +101,41 @@ function KeysTab() {
     const base64url = (bytes: Uint8Array) => btoa(String.fromCharCode(...bytes))
         .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
+    /*
+     * [연동] — 앱이 켜져 있으면 **승인 창 없이 한 번에** 끝난다.
+     *
+     * 사장님 지시 2026-08-22: "앱만 켜놓고 연동시키고 나서 사이트도 같이
+     * 연동시키면 끝나는 거 아니야?" — 맞다. 클로드 CLI 는 로그인 자격을
+     * sk-ant 토큰으로 들고 있어 사이트 서버가 그대로 쓸 수 있다. 앱에서 이미
+     * 로그인해 둔 것을 건네받으면 브라우저 승인 절차가 통째로 필요 없다.
+     * 앱이 꺼져 있거나 클로드 로그인 전이면 예전처럼 승인 창으로 간다.
+     */
     const startClaudeConnect = async () => {
+        setOauthNote('앱에 물어보는 중…');
+        const fromApp = await bridgeClaudeCredentials();
+        if (fromApp.status === 'ok') {
+            const next = {
+                ...keys,
+                claudeToken: fromApp.token,
+                claudeRefresh: fromApp.refresh,
+                claudeExpiresAt: fromApp.expiresAt ? String(fromApp.expiresAt) : '',
+                aiProvider: keys.aiProvider || 'claude',
+            };
+            setKeys(next);
+            saveUserKeys(next);
+            setOauth(null);
+            const planText = fromApp.subscriptionType ? ` (${fromApp.subscriptionType} 구독)` : '';
+            setOauthNote(`✅ 앱에서 바로 연동했습니다${planText} — 이제 앱을 꺼도 사이트에서 전부 돕니다.`);
+            return;
+        }
+        if (fromApp.status === 'not-logged-in') {
+            setOauthNote('앱은 켜져 있는데 클로드 로그인이 없습니다 — 앱에서 클로드 로그인을 먼저 하시거나, 아래 승인 절차로 연결하세요.');
+        } else if (fromApp.status === 'outdated') {
+            setOauthNote('앱이 구버전이라 자동 연동이 안 됩니다 — 앱을 업데이트하시거나 아래 승인 절차로 연결하세요.');
+        } else {
+            setOauthNote('앱이 꺼져 있어 승인 절차로 연결합니다 (앱을 켜면 버튼 한 번으로 끝납니다).');
+        }
+
         const raw = new Uint8Array(32);
         crypto.getRandomValues(raw);
         const verifier = base64url(raw);
@@ -165,11 +199,29 @@ function KeysTab() {
         }
         setBridge(status);
     };
-    const bridgeReady = typeof bridge === 'object' && bridge !== null;
+    /*
+     * "앱이 켜져 있나"는 connected 로 판단한다.
+     * probeBridge 는 **실패해도** { connected: false } 객체를 돌려주므로
+     * 객체가 있는지만 보면 앱이 꺼져 있어도 항상 참이 된다(잠복 결함).
+     * 순서 안내가 이 값으로 "✅ 앱이 켜져 있습니다"를 찍기 시작하면서 드러났다.
+     */
+    const bridgeReady = typeof bridge === 'object' && bridge !== null && bridge.connected === true;
     const agentOf = (provider: string) => (bridgeReady ? (bridge.agents || []).find((agent) => agent.provider === provider) : undefined);
 
     /** 지금 쓰기로 고른 엔진. 안 골랐으면 연동된 것 중 클로드 우선으로 본다. */
     const activeProvider = String(keys.aiProvider || '') || (keys.claudeToken ? 'claude' : '');
+
+    /*
+     * 순서 안내가 "지금 어디까지 했는지"를 짚으려면 세 가지 사실이 필요하다.
+     * 전부 실측이다 — 앱이 실제로 응답했는지, 그 엔진이 실제로 쓸 수 있는지,
+     * 토큰이 실제로 저장돼 있는지.
+     */
+    const readyAgentLabels = AGENT_CHAIN
+        .filter((item) => agentOf(item.id)?.available)
+        .map((item) => item.label);
+    const anyAgentReady = readyAgentLabels.length > 0;
+    const claudeAgentReady = Boolean(agentOf('claude')?.available);
+    const hasClaudeToken = Boolean(String(keys.claudeToken || '').trim());
 
     /** 제공자별 로그인 시작 — 앱이 그 PC 에서 로그인 창을 띄운다. */
     const [loginBusy, setLoginBusy] = useState('');
@@ -289,8 +341,56 @@ function KeysTab() {
                 <p className="lw-card-note" style={{ marginBottom: 12 }}>
                     <strong>전부 구독으로 씁니다 — API 키(사용량 과금)는 쓰지 않습니다.</strong> 이미 내고 있는
                     구독 하나만 연동하면 지식인 답변·마인드맵 추론·글 진단이 그 엔진으로 돕니다.
-                    클로드는 사이트에서 바로, 나머지 셋은 LEWORD 앱이 그 CLI 로그인을 열어 줍니다
-                    (구독 로그인이 그 PC 안에서만 끝나는 방식이라 웹으로는 토큰을 뽑을 수 없습니다).
+                </p>
+
+                {/*
+                  * 연동 순서(사장님 지적 2026-08-22 "사용자가 문제없이 완벽히
+                  * 연동시키려면 순서가 어떻게 되는 건데?"). 어디에도 안 적혀 있어서
+                  * 화면이 "연동됨"이라고만 하고 무엇을 더 해야 하는지 말하지 않았다.
+                  */}
+                {/*
+                  * 단계마다 "지금 여기"를 짚어 준다(사장님 확정 2026-08-22:
+                  * "다운로드 먼저 유도 → 앱에서 연동 → 다 되면 사이트에서 연동").
+                  * 앱이 잡히는지에 따라 끝난 단계는 ✅, 지금 할 단계는 강조한다 —
+                  * 순서만 적어 두면 자기가 어디까지 했는지 여전히 모른다.
+                  */}
+                <ol className="lw-connect-steps">
+                    <li className={bridgeReady ? 'done' : 'now'}>
+                        <b>LEWORD 앱을 켭니다.</b>{' '}
+                        {bridgeReady
+                            ? <span className="lw-step-ok">✅ 앱이 켜져 있습니다</span>
+                            : (
+                                <>
+                                    앱이 CLI 설치·로그인을 대신 해 주고, 사이트 연동까지 버튼 한 번으로 끝냅니다.{' '}
+                                    <a className="lw-step-cta" href="/download">⬇ LEWORD 받기</a>
+                                    <em>클로드만 쓰실 거면 앱 없이 아래 [연동]으로도 됩니다 — 대신 승인 창을 한 번 거칩니다.</em>
+                                </>
+                            )}
+                    </li>
+                    <li className={bridgeReady && !anyAgentReady ? 'now' : (anyAgentReady ? 'done' : '')}>
+                        <b>앱에서 쓸 엔진에 로그인합니다.</b>{' '}
+                        {anyAgentReady
+                            ? <span className="lw-step-ok">✅ {readyAgentLabels.join(' · ')} 로그인됨</span>
+                            : '앱을 켜고 이 화면의 [연동]을 누르면 그 CLI 를 설치하고 로그인 창을 열어 줍니다. 구독 로그인이 그 PC 안에서만 끝나는 방식이라 웹에서는 못 엽니다.'}
+                        <em>구독이 있어야 합니다 — 클로드 Max/Pro · 챗지피티 Plus/Pro · 구글 · SuperGrok. 무료 계정은 CLI 로그인이 막힙니다.</em>
+                    </li>
+                    <li className={hasClaudeToken ? 'done' : (claudeAgentReady ? 'now' : '')}>
+                        <b>아래 클로드 줄에서 [연동].</b>{' '}
+                        {hasClaudeToken
+                            ? <span className="lw-step-ok">✅ 사이트까지 연동됐습니다 — 앱을 꺼도 돕니다</span>
+                            : '앱이 들고 있는 클로드 자격을 사이트로 넘깁니다. 이 한 번이면 앱을 꺼도 사이트가 전부 돕니다.'}
+                    </li>
+                    <li className={activeProvider ? 'done' : ''}>
+                        <b>쓸 엔진에서 [사용].</b>{' '}
+                        {activeProvider
+                            ? <span className="lw-step-ok">✅ {AGENT_CHAIN.find((item) => item.id === activeProvider)?.label} 사용 중</span>
+                            : '고른 엔진 하나로만 돕니다. 몰래 다른 엔진으로 갈아타지 않습니다.'}
+                    </li>
+                </ol>
+                <p className="lw-card-note" style={{ marginBottom: 12 }}>
+                    3번이 <b>클로드만</b> 되는 이유: 클로드 CLI 는 자격을 토큰으로 들고 있어 사이트 서버가 그대로 씁니다.
+                    코덱스·제미나이·그록은 각 서비스의 로그인 세션이라 서버가 쓸 토큰으로 바꿀 방법이 없습니다 —
+                    그 셋은 <b>앱을 켜 두면</b> 앱이 대신 돌려 줍니다.
                 </p>
 
                 <div className="lw-engines-list">
@@ -298,8 +398,24 @@ function KeysTab() {
                         const agent = agentOf(item.id);
                         const hasToken = item.id === 'claude' && Boolean(String(keys.claudeToken || '').trim());
                         const linked = hasToken || Boolean(agent?.available);
-                        const state = hasToken ? '✅ 연동됨(구독)'
-                            : agent?.available ? '✅ 연동됨(앱 · 구독)'
+                        /*
+                         * 상태를 셋으로 가른다(사장님 지적 2026-08-22:
+                         * "연동됐다면서 왜 구독토큰 필드가 초기화되니? 연동됨이랑 모순인데").
+                         *
+                         * 모순이 아니라 표현이 뭉개져 있었다. "연동됨(구독)"과
+                         * "연동됨(앱·구독)"은 **되는 범위가 다른 상태**인데 둘 다
+                         * "✅ 연동됨"으로 시작해 같아 보였다:
+                         *   토큰 있음 → 사이트 서버가 직접 쓴다. 앱을 꺼도 된다.
+                         *              토큰 칸이 채워지고 플랜·사용량도 이 토큰으로 잰다.
+                         *   앱만 연동 → 이 PC 의 CLI 로그인이다. 서버는 못 쓴다.
+                         *              그래서 토큰 칸은 비어 있는 게 맞다. 앱을 켜 둬야 한다.
+                         * 클로드는 앱에서 사이트로 넘길 수 있으니 그렇게 하라고 말해 준다.
+                         */
+                        const state = hasToken ? '✅ 사이트까지 연동 — 앱 없이 됩니다'
+                            : agent?.available
+                                ? (item.id === 'claude'
+                                    ? '⚠️ 앱에만 연동 — [연동]을 누르면 사이트도 끝'
+                                    : '✅ 앱에 연동 — 앱을 켜 두면 됩니다')
                                 : agent?.installed ? '앱: 로그인 필요'
                                     : item.webConnect ? '미연동' : '앱에서 연동';
                         const active = activeProvider === item.id;
@@ -309,7 +425,8 @@ function KeysTab() {
                                     <b>{item.label}</b>
                                     <small>{item.sub}</small>
                                 </div>
-                                <span className={`lw-engine-state${linked ? ' ok' : ''}`}>{state}</span>
+                                {/* 클로드가 앱에만 연동된 상태는 초록이 아니라 노랑이다 — 할 일이 남았다. */}
+                                <span className={`lw-engine-state${linked ? (item.id === 'claude' && !hasToken ? ' half' : ' ok') : ''}`}>{state}</span>
                                 <div className="lw-engine-actions">
                                     {item.id === 'claude' ? (
                                         keys.claudeToken ? (

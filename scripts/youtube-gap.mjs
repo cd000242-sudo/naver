@@ -56,6 +56,21 @@ const MAX_ROWS = Number(process.env.YTGAP_MAX_ROWS || 60);
 const MAX_PER_VIDEO = Number(process.env.YTGAP_MAX_PER_VIDEO || 2);
 
 /*
+ * 실측에 쓸 시간 상한(사장님 지적 2026-08-22 "며칠째 같은 것만 나온다").
+ *
+ * 무슨 일이 있었나: 크론 한 판은 25분인데 이 수집기가 자동완성 검색어
+ * 1,074개를 전부 실측하려다 17분을 쓰고 잘렸다. 잘리면 job 이 통째로
+ * 취소되어, **이미 다 끝난 지식인·황금보드 수집물까지 커밋되지 못했다**.
+ * 그래서 60회 연속 cancelled — 화면의 모든 판이 이틀째 같은 자리에 멈췄다.
+ *
+ * 예산을 넘기면 거기까지 잰 것으로 저장한다. 몇 개를 못 쟀는지는 반드시
+ * 로그에 남긴다 — 조용히 자르면 "다 봤다"로 읽히기 때문이다.
+ */
+const BUDGET_MS = Number(process.env.YTGAP_BUDGET_MS || 8 * 60_000);
+const STARTED_AT = Date.now();
+const overBudget = () => Date.now() - STARTED_AT > BUDGET_MS;
+
+/*
  * 제목 맨 앞이 흔한 부사면 자동완성이 엉뚱한 데로 샌다 — "과연" 을 물으면
  * "과연한우" 가 온다(실측). 사람 이름·작품명이 아닌 게 확실한 것만 막는다.
  */
@@ -180,12 +195,29 @@ async function main() {
         }
         await sleep(120);
     }
-    // 롱폼·숏폼은 뜨는 방식이 달라 따로 봐야 한다(사장님 지시). 여기서 한 번만 잰다.
-    for (const video of videos) {
-        const short = await isShortForm(video.videoId);
-        video.form = short === null ? '' : (short ? 'short' : 'long');
-        await sleep(80);
-    }
+    /*
+     * 롱폼·숏폼은 뜨는 방식이 달라 따로 봐야 한다(사장님 지시). 여기서 한 번만 잰다.
+     * 단계 마감을 넘기면 나머지는 form 을 비워 둔다 — 모르는 것을 짐작하지 않고,
+     * 뒤에 올 검색량·문서수 실측 예산을 지킨다(그게 빈자리 판정의 본체다).
+     */
+    const formDeadline = STARTED_AT + BUDGET_MS * 0.25;
+    let formSkipped = 0;
+    /*
+     * 여러 줄로 나눠 받는다. 한 줄로 172편을 돌면 3분이 넘어 82편이 잘렸다(실측).
+     * HEAD 요청 하나씩이라 서버 부담이 작고, 유튜브 제 도메인이라 예의 문제도 없다.
+     */
+    let formCursor = 0;
+    const formLane = async () => {
+        while (formCursor < videos.length) {
+            const video = videos[formCursor++];
+            if (Date.now() > formDeadline) { video.form = ''; formSkipped += 1; continue; }
+            const short = await isShortForm(video.videoId);
+            video.form = short === null ? '' : (short ? 'short' : 'long');
+            await sleep(60);
+        }
+    };
+    await Promise.all(Array.from({ length: 6 }, formLane));
+    if (formSkipped > 0) log(`!! 숏폼 판정 단계 상한 — ${formSkipped}편은 폼을 못 쟀습니다(빈 값으로 둡니다)`);
     const shortCount = videos.filter((video) => video.form === 'short').length;
     log(`급상승 영상 ${videos.length}편 (숏폼 ${shortCount} · 롱폼 ${videos.length - shortCount})`);
     if (videos.length === 0) return;
@@ -193,41 +225,100 @@ async function main() {
     // ② 제목 → 자동완성 → 실제 검색어
     /** 키워드 → 그 키워드를 만들어 낸 영상(제일 먼저 만난 것). */
     const source = new Map();
-    for (const video of videos) {
-        /*
-         * 후보 상한 4→8 (사장님 확인 2026-08-20). 4개면 제목 앞쪽 덩어리에서
-         * 끊겨 뒤쪽의 진짜 개체를 놓쳤다 — 실측: "과연 둠이 …? ≪어벤져스:
-         * 둠스데이≫ …" 에서 '어벤져스 둠스데이'가 잘려 그 영상은 빈손이었다.
-         * 자동완성은 무료라 비용은 없고 수집이 조금 느려질 뿐이다.
-         */
-        const leads = [...new Set(chunksOf(video.title).flatMap(leadsOf))].slice(0, 8);
-        for (const lead of leads) {
-            const matched = suggestionsFor(lead, await fetchAutocomplete(lead));
-            await sleep(120);
-            // 자동완성이 거의 없으면 사람들이 안 치는 말이다 — 버린다.
-            if (matched.length < 2) continue;
-            for (const keyword of matched.slice(0, 6)) {
-                if (!source.has(keyword)) source.set(keyword, video);
+    /*
+     * 이 단계가 예산을 다 먹던 곳이다(실측 2026-08-22): 영상 172편 x 최대 8덩어리
+     * = 자동완성 1,300여 회를 부르느라 3분 45초를 썼고, 정작 검색량·문서수를
+     * 잴 시간이 남지 않아 "빈자리 0건"이 발행됐다. 마감을 걸고 몇 편을 못 봤는지 남긴다.
+     */
+    const expandDeadline = STARTED_AT + BUDGET_MS * 0.5;
+    let videosSkipped = 0;
+    /*
+     * 같은 덩어리를 여러 영상이 공유한다(시리즈·재방송 제목). 한 번 물은 것은
+     * 다시 묻지 않는다 — 이것만으로 호출이 눈에 띄게 준다.
+     */
+    // 약속을 담아 둔다 — 값을 담으면 여러 줄이 동시에 같은 말을 물어본다.
+    const acCache = new Map();
+    const askAutocomplete = (lead) => {
+        if (!acCache.has(lead)) {
+            acCache.set(lead, (async () => {
+                const matched = suggestionsFor(lead, await fetchAutocomplete(lead));
+                await sleep(90);
+                return matched;
+            })());
+        }
+        return acCache.get(lead);
+    };
+    let expandCursor = 0;
+    const expandLane = async () => {
+        while (expandCursor < videos.length) {
+            const video = videos[expandCursor++];
+            if (Date.now() > expandDeadline) { videosSkipped += 1; continue; }
+            /*
+             * 후보 상한 4→8 (사장님 확인 2026-08-20). 4개면 제목 앞쪽 덩어리에서
+             * 끊겨 뒤쪽의 진짜 개체를 놓쳤다 — 실측: "과연 둠이 …? ≪어벤져스:
+             * 둠스데이≫ …" 에서 '어벤져스 둠스데이'가 잘려 그 영상은 빈손이었다.
+             * 자동완성은 무료라 비용은 없고 수집이 조금 느려질 뿐이다.
+             */
+            const leads = [...new Set(chunksOf(video.title).flatMap(leadsOf))].slice(0, 8);
+            for (const lead of leads) {
+                const matched = await askAutocomplete(lead);
+                // 자동완성이 거의 없으면 사람들이 안 치는 말이다 — 버린다.
+                if (matched.length < 2) continue;
+                for (const keyword of matched.slice(0, 6)) {
+                    if (!source.has(keyword)) source.set(keyword, video);
+                }
             }
         }
-    }
+    };
+    // 자동완성은 남의 서버다 — 줄을 4개까지만 쓴다.
+    await Promise.all(Array.from({ length: 4 }, expandLane));
+    if (videosSkipped > 0) log(`!! 검색어 확장 단계 상한 — 영상 ${videos.length}편 중 ${videosSkipped}편은 못 봤습니다`);
     log(`자동완성이 인정한 검색어 ${source.size}개`);
     if (source.size === 0) return;
 
-    // ③ 검색량 실측 — 검색광고 API 는 한 번에 5개
+    /*
+     * ③ 검색량 실측 — 검색광고 API 는 한 번에 5개.
+     *
+     * 예산을 **나눠 쓴다**(2026-08-22 실측 교훈). 처음엔 한 예산을 통으로 뒀더니
+     * 검색어 1,074개 검색량을 재는 데 다 써 버려 문서수를 한 건도 못 재고
+     * "빈자리 0건"이 발행됐다. 검색량은 넓게 훑는 단계라 절반까지만 쓰고,
+     * 나머지는 자리 판정(문서수)에 남긴다.
+     */
     const keywords = [...source.keys()];
+    const volumeDeadline = STARTED_AT + BUDGET_MS * 0.75;
     const volumes = new Map();
+    let volumeStoppedAt = -1;
     for (let index = 0; index < keywords.length; index += 5) {
+        if (Date.now() > volumeDeadline) { volumeStoppedAt = index; break; }
         for (const [name, detail] of await fetchVolumeDetails(keywords.slice(index, index + 5))) volumes.set(name, detail);
         await sleep(220);
     }
+    if (volumeStoppedAt >= 0) {
+        log(`!! 검색량 단계 상한 — 검색어 ${keywords.length}개 중 ${volumeStoppedAt}개까지만 쟀습니다(나머지 예산은 문서수에 씁니다)`);
+    }
 
-    // ④ 검색량이 기준을 넘은 것만 문서수를 잰다 — 문서수 조회가 더 비싸다
+    /*
+     * ④ 검색량이 기준을 넘은 것만 문서수를 잰다 — 문서수 조회가 더 비싸다.
+     * **검색량이 큰 것부터** 잰다. 원래 순서대로 돌면 예산이 끊길 때
+     * 뒤쪽의 큰 자리들이 통째로 날아간다.
+     */
+    const measurable = keywords
+        .map((keyword) => ({ keyword, detail: volumes.get(keyword.replace(/\s+/g, '')) }))
+        .filter(({ detail }) => detail && Number.isFinite(detail.volume) && detail.volume >= MIN_VOLUME)
+        .sort((left, right) => right.detail.volume - left.detail.volume);
+    log(`검색량 ${MIN_VOLUME}+ ${measurable.length}개 → 문서수 조회`);
+
     const rows = [];
-    for (const keyword of keywords) {
-        const detail = volumes.get(keyword.replace(/\s+/g, ''));
-        const searchVolume = detail ? detail.volume : null;
-        if (!Number.isFinite(searchVolume) || searchVolume < MIN_VOLUME) continue;
+    let docChecked = 0;
+    let docSkipped = 0;
+    for (const { keyword, detail } of measurable) {
+        const searchVolume = detail.volume;
+        /*
+         * 자리가 넉넉히 모였거나 예산을 넘겼으면 멈춘다. 화면은 60건을 쓰는데
+         * 1,000개를 끝까지 재려다 판 전체를 멈추게 하는 것이 지금까지의 손해였다.
+         */
+        if (overBudget() || rows.length >= MAX_ROWS * 3) { docSkipped += 1; continue; }
+        docChecked += 1;
         const documentCount = await fetchDocumentCount(keyword);
         await sleep(160);
         if (!Number.isFinite(documentCount) || documentCount > MAX_DOCS) continue;
@@ -259,6 +350,10 @@ async function main() {
                 categoryId: video.categoryId, form: video.form || '',
             },
         });
+    }
+
+    if (docSkipped > 0) {
+        log(`!! 문서수 실측 ${docChecked}건 · 상한에 걸려 건너뜀 ${docSkipped}건 (${Math.round((Date.now() - STARTED_AT) / 1000)}초 경과)`);
     }
 
     // 자리가 넓은 순 — 검색량 대비 글이 적을수록 앞이다.

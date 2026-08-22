@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchGapTopics, fetchKeywordPostIdeas, formatCount, type KinPostIdea } from '../../lib/keywordApi';
+import { bridgePostIdeas } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
 
@@ -153,16 +154,64 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
     const topicsFor = (row: GapRow) => [...new Set([...(row.topics || []), ...(aiTopics[row.keyword] || [])])];
 
+    /*
+     * 글감 추론 — 서버(사이트 토큰) 먼저, 안 되면 **앱(본인 구독)** 으로 넘긴다.
+     *
+     * 왜 폴백이 필요한가(사장님 지적 2026-08-22 "연동이 문제 있으면 절대 안 된다"):
+     * 코덱스·제미나이·그록은 이 PC 의 CLI 로그인이라 클라우드 워커가 못 쓴다.
+     * 앱에서 네 엔진이 전부 "연동됨"인데 이 카드만 "연동하세요"를 띄우고 있었다.
+     * 사용자가 고른 엔진을 그대로 앱에 넘긴다 — 몰래 다른 엔진으로 갈아타지 않는다.
+     */
     const makeIdeas = async (row: GapRow) => {
         if (ideas[row.keyword]?.status === 'loading') return;
         setIdeas((previous) => ({ ...previous, [row.keyword]: { status: 'loading' } }));
-        const result = await fetchKeywordPostIdeas(row.keyword, row.video.title);
-        setIdeas((previous) => ({
-            ...previous,
-            [row.keyword]: result.ok && result.data
-                ? { status: 'done', ideas: result.data.ideas }
-                : { status: 'error', message: result.message || result.error || '만들지 못했습니다.' },
-        }));
+        const done = (state: IdeaState) => setIdeas((previous) => ({ ...previous, [row.keyword]: state }));
+
+        const viaKeys = await fetchKeywordPostIdeas(row.keyword, row.video.title);
+        if (viaKeys.ok && viaKeys.data?.ideas?.length) {
+            done({ status: 'done', ideas: viaKeys.data.ideas });
+            return;
+        }
+        // 서버가 실제로 실패한 것(자격 문제가 아닌)은 그대로 알린다.
+        if (viaKeys.error && viaKeys.error !== 'needs-keys') {
+            done({ status: 'error', message: viaKeys.message || viaKeys.error });
+            return;
+        }
+
+        const viaApp = await bridgePostIdeas({
+            kind: 'keyword',
+            keyword: row.keyword,
+            context: row.video.title,
+            provider: String(loadUserKeys().aiProvider || ''),
+        });
+        if (viaApp.status === 'ok') {
+            /*
+             * 제목이 빠진 글감은 화면이 쓸 수 없다 — 빈칸을 채워 넣지 않고 버린다.
+             * 전부 빠졌으면 실패로 알린다(빈 목록을 성공으로 보여주지 않는다).
+             */
+            const usable = viaApp.ideas
+                .filter((idea) => idea.seo && idea.home)
+                .map((idea) => ({
+                    keyword: idea.keyword,
+                    why: idea.why || '',
+                    clickWhy: idea.clickWhy,
+                    seo: idea.seo as string,
+                    home: idea.home as string,
+                    sub: idea.sub,
+                }));
+            done(usable.length > 0
+                ? { status: 'done', ideas: usable }
+                : { status: 'error', message: `${viaApp.provider} 가 제목을 못 만들었습니다 — 다시 눌러 주세요.` });
+            return;
+        }
+        done({
+            status: 'error',
+            message: viaApp.status === 'outdated'
+                ? 'LEWORD 앱이 구버전이라 이 기능이 없습니다 — 앱을 업데이트해 주세요.'
+                : viaApp.status === 'offline'
+                    ? 'LEWORD 앱을 켜면 본인 구독으로 바로 만듭니다. 앱 없이 쓰려면 내 API 키 탭에서 클로드 [연동] 버튼을 눌러 주세요.'
+                    : `만들지 못했습니다: ${viaApp.message}`,
+        });
     };
 
     const copyKeyword = async (keyword: string) => {
