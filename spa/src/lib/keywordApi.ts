@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'youtube-trending']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -260,13 +260,31 @@ export const checkRank = (keyword: string, target: string) =>
  * 조회수는 어느 플랫폼도 공개 API 가 없어 싣지 않는다.
  */
 export type BlogAuditPost = { title: string; link: string; publishedAt: string | null; comments: number | null };
-export const auditBlogPosts = (url: string) =>
-    call<{ platform: string; blogId: string | null; posts: BlogAuditPost[]; note?: string }>('blog-audit-posts', { url });
+/**
+ * 발행 글 목록. limit 을 올리면 더 많이 받는다 — 네이버 블로그는 피드가
+ * 짧아 한 번에 50건쯤만 오므로, 화면이 [더 찾기]로 넓혀 부른다
+ * (사장님 지시 2026-08-22 "50건 더 찾기 해서 전체적으로 점검할 수 있게").
+ */
+export const auditBlogPosts = (url: string, limit?: number) =>
+    call<{ platform: string; blogId: string | null; posts: BlogAuditPost[]; note?: string }>('blog-audit-posts',
+        limit ? { url, limit: String(limit) } : { url });
 
 /**
  * 여러 검색어의 월 검색량 — "밀면 되는 자리"가 순위 옆에 붙일 값이다.
  * call() 은 문자열 파라미터만 싣으므로 줄바꿈으로 이어 보낸다.
  */
+/**
+ * 유튜브 급상승 즉석 수집 — 방문자 자기 키로 지금 가져온다
+ * (사장님 지시 2026-08-22 "실시간으로 바뀌어야 하고, 유튜브 API 도 개인 것으로").
+ * 15분 크론 스냅샷을 기다리지 않는 경로다.
+ */
+export type LiveTrendingVideo = {
+    videoId: string; title: string; channel: string;
+    publishedAt: string; thumbnail: string; viewCount: number | null; categoryId: string;
+};
+export const fetchYoutubeTrending = () =>
+    call<{ collectedAt: string; videos: LiveTrendingVideo[] }>('youtube-trending', {});
+
 export const fetchKeywordVolumes = (keywords: string[]) =>
     call<{ volumes: Record<string, number> }>('keyword-volumes', {
         keywords: keywords.join(String.fromCharCode(10)),
