@@ -79,7 +79,18 @@ function DemandChartModal({ keyword, ranges, asOf, onClose }: {
     const svgRef = useRef<SVGSVGElement>(null);
     /** 마우스가 가리키는 점 — 수치가 보여야 그래프가 읽힌다(사장님 지시 2026-08-19). */
     const [hover, setHover] = useState(-1);
-    const [rangeId, setRangeId] = useState(ranges[0]?.id);
+    /*
+     * 카드의 스파크라인과 **같은 구간**으로 연다(사장님 지적 2026-08-22
+     * "어제 그래프 클릭했을 때랑 상이한 거").
+     *
+     * 카드에 그려진 선은 일별(30일) 시리즈인데 이 창은 늘 월별(25개월)로
+     * 열렸다. 축이 다르니 같은 키워드인데 카드는 "상대값 74", 창은 "정점의
+     * 65%" 처럼 숫자가 어긋나 보인다 — 사용자는 같은 값을 기대한다.
+     * 일별이 있으면 그것으로 열고, 없을 때만 월별로 연다. 토글은 그대로 둔다.
+     */
+    const [rangeId, setRangeId] = useState(
+        (ranges.find((range) => range.id === 'daily') || ranges[0])?.id,
+    );
     const active = ranges.find((range) => range.id === rangeId) || ranges[0];
     const series = active?.points || [];
     const caption = active?.caption || '';
