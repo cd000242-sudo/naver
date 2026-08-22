@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchGapTopics, fetchKeywordPostIdeas, formatCount, type KinPostIdea } from '../../lib/keywordApi';
+import { fetchGapTopics, fetchKeywordPostIdeas, fetchYoutubeTrending, formatCount, type KinPostIdea, type LiveTrendingVideo } from '../../lib/keywordApi';
 import { bridgePostIdeas } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
@@ -111,6 +111,32 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [aiTopics, setAiTopics] = useState<Record<string, string[]>>({});
     /** 방금 복사한 키워드 — 버튼에 "복사됨"을 잠깐 보여준다. */
     const [copied, setCopied] = useState('');
+    /*
+     * 지금 갱신(사장님 지시 2026-08-22 "유튜브 급상승도 실시간으로 바뀌어야 하고,
+     * 유튜브 API 도 개개인 사용자 껄로").
+     *
+     * 아래 표는 15분 크론이 만든 스냅샷이다 — 검색량·문서수까지 실측하느라
+     * 그 시간이 든다. 이 버튼은 **지금 유튜브에서 뜨는 것**만 방문자 자기 키로
+     * 즉시 가져온다. 빈자리 판정(검색량·문서수)은 없다 — 그건 스냅샷의 몫이다.
+     */
+    const [live, setLive] = useState<{ at: string; videos: LiveTrendingVideo[] } | null>(null);
+    const [liveState, setLiveState] = useState<'idle' | 'loading' | 'error'>('idle');
+    const [liveNote, setLiveNote] = useState('');
+    const refreshLive = async () => {
+        if (liveState === 'loading') return;
+        setLiveState('loading');
+        setLiveNote('');
+        const result = await fetchYoutubeTrending();
+        if (result.ok && result.data?.videos?.length) {
+            setLive({ at: result.data.collectedAt, videos: result.data.videos });
+            setLiveState('idle');
+            return;
+        }
+        setLiveState('error');
+        setLiveNote(result.error === 'needs-keys'
+            ? '내 API 키 탭에 유튜브 API 키를 넣으면 지금 바로 가져옵니다 — 사장님 쿼터가 아니라 본인 키로 돕니다.'
+            : (result.message || result.error || '가져오지 못했습니다.'));
+    };
 
     useEffect(() => {
         let cancelled = false;
@@ -297,7 +323,40 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         급상승 {data.videoCount}편에서 검색어 {data.candidateCount}개 실측 · {agoText(data.collectedAt, '수집')}
                     </span>
                 )}
+                <button type="button" className="lw-yt-live-btn" onClick={() => { void refreshLive(); }} disabled={liveState === 'loading'}>
+                    {liveState === 'loading' ? '가져오는 중…' : '⚡ 지금 갱신'}
+                </button>
             </div>
+
+            {liveNote && <div className={`lw-note${liveState === 'error' ? ' lw-note-err' : ''}`}>{liveNote}</div>}
+            {live && (
+                <section className="lw-live-panel">
+                    <div className="lw-live-head">
+                        <b>지금 유튜브에서 뜨는 것 {live.videos.length}편</b>
+                        <span>{agoText(live.at, '가져옴')} · 본인 유튜브 키로 방금 받은 목록입니다 — 아래 빈자리 표는 검색량·문서수까지 잰 15분 스냅샷입니다.</span>
+                        <button type="button" onClick={() => setLive(null)}>닫기</button>
+                    </div>
+                    <div className="lw-live-grid">
+                        {live.videos.slice(0, 24).map((video) => (
+                            <a
+                                key={video.videoId}
+                                className="lw-live-card"
+                                href={`https://www.youtube.com/watch?v=${video.videoId}`}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                {video.thumbnail && <img src={video.thumbnail} alt="" loading="lazy" />}
+                                <b>{video.title}</b>
+                                <em>
+                                    {video.channel}
+                                    {typeof video.viewCount === 'number' ? ` · 조회 ${formatCount(video.viewCount)}` : ''}
+                                    {CATEGORY_LABEL[video.categoryId] ? ` · ${CATEGORY_LABEL[video.categoryId]}` : ''}
+                                </em>
+                            </a>
+                        ))}
+                    </div>
+                </section>
+            )}
 
             {status === 'error' && (
                 <div className="lw-note">

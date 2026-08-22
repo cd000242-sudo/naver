@@ -36,6 +36,13 @@ type CampaignItem = {
     /** 니즈 검색어의 블로그 문서수와 검색량 대비 비율. 못 쟀으면 null. */
     needDocs?: number | null;
     needRatio?: number | null;
+    /*
+     * 뚫리는 자리(사장님 지적 2026-08-22 "노출 어려움으로만 도배돼 있으면
+     * 노출된 걸 알려줘야 황금 제품 키워드 아니냐").
+     * 니즈 검색어가 막힌 상품에서 자동완성 롱테일을 뻗어, 검색량 >= 문서수 인
+     * 것만 싣는다. 조합해 만든 말이 아니라 자동완성이 인정한 검색어다.
+     */
+    slots?: Array<{ keyword: string; volume: number; documentCount: number; ratio: number }> | null;
     /** 건당 수익(원) = 가격 × 수수료율 단순 산술. 요율이 없는 레인은 null. */
     perSaleWon?: number | null;
     /** 브랜드커넥트 상품 ID — 내 스페이스 ID와 합쳐야 링크발급 화면이 열린다. */
@@ -295,6 +302,26 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                     )}
                                                 </span>
                                             ) : null}
+                                            {/*
+                                              * 막힌 니즈 옆에 실제로 쓸 수 있는 자리를 붙인다.
+                                              * 없으면 아무것도 안 적는다 — 없는 자리를 있다고 하지 않는다.
+                                              */}
+                                            {Array.isArray(item.slots) && item.slots.length > 0 && (
+                                                <span className="lw-product-slots" title="자동완성이 인정한 검색어 중 검색량이 문서수보다 많은 것 — 이 말로 쓰면 뚫립니다">
+                                                    ✅ 쓸 자리
+                                                    {item.slots.slice(0, 3).map((slot) => (
+                                                        <a
+                                                            key={slot.keyword}
+                                                            href={`https://search.naver.com/search.naver?ssc=tab.blog.all&query=${encodeURIComponent(slot.keyword)}`}
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                        >
+                                                            {slot.keyword}
+                                                            <em>검색 {slot.volume.toLocaleString('ko-KR')} / 문서 {slot.documentCount.toLocaleString('ko-KR')}</em>
+                                                        </a>
+                                                    ))}
+                                                </span>
+                                            )}
                                             {typeof item.perSaleWon === 'number' && item.perSaleWon > 0 && (
                                                 <span className="lw-product-persale" title="판매가 × 수수료율 단순 계산">건당 <strong>{item.perSaleWon.toLocaleString('ko-KR')}원</strong></span>
                                             )}

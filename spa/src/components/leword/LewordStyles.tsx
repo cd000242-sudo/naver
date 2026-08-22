@@ -673,6 +673,52 @@ function LewordStyles() {
             .lw-rank-go { color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor; }
             .lw-rank-go:hover { opacity: .8; }
 
+            /* 유튜브 지금 갱신 — 스냅샷과 별개라는 것이 눈에 보여야 한다. */
+            .lw-yt-live-btn {
+                margin-left: auto; padding: 8px 16px; border-radius: 9px; border: 0; cursor: pointer;
+                background: #ff4d4d; color: #fff; font: inherit; font-size: 12.5px; font-weight: 800; white-space: nowrap;
+            }
+            .lw-yt-live-btn:disabled { opacity: .6; cursor: not-allowed; }
+            .lw-live-panel {
+                margin: 14px 0 20px; padding: 16px 18px; border-radius: 14px;
+                border: 1px solid rgba(255,77,77,.3);
+                background: radial-gradient(420px 200px at 8% 0%, rgba(255,77,77,.09), transparent 70%), rgba(255,255,255,.03);
+            }
+            .lw-live-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+            .lw-live-head b { font-size: 15px; color: #ff8f8f; }
+            .lw-live-head span { flex: 1; min-width: 240px; font-size: 11.5px; color: rgba(235,242,250,.5); line-height: 1.55; }
+            .lw-live-head button {
+                border: 1px solid rgba(255,255,255,.14); background: transparent; color: rgba(235,242,250,.6);
+                border-radius: 8px; padding: 5px 12px; cursor: pointer; font: inherit; font-size: 12px;
+            }
+            .lw-live-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+            .lw-live-card {
+                display: flex; flex-direction: column; gap: 5px; text-decoration: none;
+                padding: 9px; border-radius: 11px; background: rgba(255,255,255,.035);
+                border: 1px solid rgba(255,255,255,.07);
+            }
+            .lw-live-card:hover { border-color: rgba(255,77,77,.42); }
+            .lw-live-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 7px; }
+            .lw-live-card b {
+                font-size: 12.5px; font-weight: 700; color: #ebf2fa; line-height: 1.45;
+                display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+            }
+            .lw-live-card em { font-style: normal; font-size: 11px; color: rgba(235,242,250,.45); }
+            .lw-note-err { border-color: rgba(255,143,160,.35); color: #ff8fa0; }
+
+            /* 제휴 — 막힌 니즈 옆에 실제로 뚫리는 자리. 초록은 "여기로 쓰면 된다"는 뜻이다. */
+            .lw-product-slots {
+                display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+                font-size: 11.5px; font-weight: 700; color: #5ee3ac;
+            }
+            .lw-product-slots a {
+                display: inline-flex; align-items: baseline; gap: 5px;
+                padding: 3px 9px; border-radius: 7px; text-decoration: none;
+                background: rgba(46,204,113,.12); border: 1px solid rgba(46,204,113,.32); color: #5ee3ac;
+            }
+            .lw-product-slots a:hover { background: rgba(46,204,113,.2); }
+            .lw-product-slots em { font-style: normal; font-weight: 500; font-size: 10.5px; opacity: .72; }
+
             /* 밀면 되는 자리 — 할 일이 구간마다 다르니 색으로 가른다. */
             .lw-band-keep { background: rgba(46,204,113,.14); color: #2ecc71; border: 1px solid rgba(46,204,113,.4); }
             .lw-band-push { background: rgba(255,165,0,.16); color: #ffa500; border: 1px solid rgba(255,165,0,.45); }
