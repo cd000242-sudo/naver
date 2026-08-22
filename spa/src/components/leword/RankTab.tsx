@@ -796,6 +796,9 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 <div className="lw-note lw-note-plain">
                     같은 글도 <b>탭마다 자리가 다릅니다</b> — 블로그 탭에서 3위인 글이 통합검색에는 없기도 합니다.
                     제목을 고친 뒤 여기서 바로 다시 재면 어느 탭에서 올랐는지 보입니다.
+                    <br />
+                    <b>로그인 없이 PC로 본 기준</b>입니다 — 새 방문자가 보는 화면과 같습니다.
+                    티스토리·카페 등 네이버 블로그가 아닌 결과도 함께 세므로 화면에서 눈으로 센 자리와 같습니다.
                 </div>
             )}
             {tabResult && (
