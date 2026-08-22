@@ -3662,6 +3662,11 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         ctaLink: formData.skipCta ? undefined : ctaLink,
         ctas: formData.skipCta ? [] : resolvedCtas,
         ctaPosition: formData.ctaPosition || 'bottom',
+        // [v2.11.206] 앱에서 미리 확정한 장소. 이 payload 는 필드를 하나씩 나열해
+        //   만들기 때문에, 여기 없으면 formData 에 값이 있어도 main 까지 못 간다.
+        placeName: formData.placeName || '',
+        placeAddress: formData.placeAddress || '',
+        placePosition: formData.placePosition || 'bottom',
         skipCta: formData.skipCta || false,
         contentMode: formData.contentMode || 'seo',
         affiliateLink: formData.affiliateLink,
