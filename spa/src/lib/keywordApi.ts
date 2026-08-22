@@ -288,8 +288,22 @@ export type LiveTrendingVideo = {
  * null 은 "못 쟀다" — 0위나 '없음'과 다르다.
  */
 export type TabRank = { rank: number | null; sampled: number } | null;
+/**
+ * 검색어를 비우면 서버가 그 글의 제목을 읽고 검색어를 **찾아서** 잰다
+ * (사장님 지적 2026-08-23 "주소만 넣어도 분석을 해 줘야 되는 거 아니니?").
+ * 무엇으로 쟀는지 queryFrom 으로 온다 — user(직접 입력) · title-keyword(제목에서
+ * 뽑아 실측으로 고름) · title(제목 그대로). 지어낸 말은 없다.
+ */
 export const fetchRankByTabs = (query: string, link: string) =>
-    call<{ query: string; link: string; checkedAt: string; tabs: Record<string, TabRank> }>('rank-by-tabs', { query, link });
+    call<{
+        query: string;
+        queryFrom?: 'user' | 'title-keyword' | 'title';
+        postTitle?: string;
+        pickedVolume?: number | null;
+        link: string;
+        checkedAt: string;
+        tabs: Record<string, TabRank>;
+    }>('rank-by-tabs', { query, link });
 
 export const fetchYoutubeTrending = () =>
     call<{ collectedAt: string; videos: LiveTrendingVideo[] }>('youtube-trending', {});

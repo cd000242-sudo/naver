@@ -171,7 +171,15 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
      */
     const [tabQuery, setTabQuery] = useState('');
     const [tabLink, setTabLink] = useState('');
-    const [tabResult, setTabResult] = useState<{ query: string; link: string; checkedAt: string; tabs: Record<string, TabRank> } | null>(null);
+    const [tabResult, setTabResult] = useState<{
+        query: string;
+        queryFrom?: 'user' | 'title-keyword' | 'title';
+        postTitle?: string;
+        pickedVolume?: number | null;
+        link: string;
+        checkedAt: string;
+        tabs: Record<string, TabRank>;
+    } | null>(null);
     const [tabState, setTabState] = useState<'idle' | 'loading' | 'error'>('idle');
     const [tabNote, setTabNote] = useState('');
     const TAB_META = [
@@ -186,8 +194,14 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
      */
     const runTabRank = async (query: string, link: string) => {
         if (tabState === 'loading') return;
-        if (!query.trim() || !link.trim()) {
-            setTabNote('확인할 키워드와 글 주소를 모두 넣어 주세요.');
+        /*
+         * 검색어는 **비워도 된다**(사장님 지적 2026-08-23: "이것도 추론해서
+         * 주소만 넣어도 분석을 해 줘야 되는 거 아니니?").
+         * 비우면 서버가 그 글의 제목을 읽고, 제목 안의 말들로 후보를 만들어
+         * 실측 검색량과 실측 자리로 골라 잰다. 무엇으로 쟀는지는 결과에 적힌다.
+         */
+        if (!link.trim()) {
+            setTabNote('글 주소를 넣어 주세요. 키워드는 비워 두면 글에서 찾아 씁니다.');
             return;
         }
         setTabState('loading');
@@ -766,7 +780,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
 
             <div className="lw-panel-head" style={{ marginTop: 26 }}>
                 <h2>글 하나 순위 확인</h2>
-                <span>검색어와 글 주소만 있으면 됩니다 · 통합검색·블로그·웹사이트를 각각 잽니다</span>
+                <span>글 주소만 넣어도 됩니다 · 키워드를 비우면 글에서 찾아 씁니다 · 통합검색·블로그·웹사이트를 각각 잽니다</span>
             </div>
 
             <form
@@ -777,7 +791,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                     type="search"
                     value={tabQuery}
                     onChange={(event) => setTabQuery(event.target.value)}
-                    placeholder="확인할 키워드"
+                    placeholder="확인할 키워드 (비워도 됩니다)"
                     aria-label="확인할 키워드"
                 />
                 <input
@@ -805,6 +819,14 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 <div className="lw-tabrank">
                     <div className="lw-tabrank-head">
                         <b>{tabResult.query}</b>
+                        {tabResult.queryFrom && tabResult.queryFrom !== 'user' && (
+                            /* 무엇으로 쟀는지 밝힌다 — 사용자가 안 넣은 말로 쟀으면 그 사실이 보여야 한다. */
+                            <span className="lw-rank-src">
+                                {tabResult.queryFrom === 'title-keyword'
+                                    ? `글 제목에서 찾음${typeof tabResult.pickedVolume === 'number' ? ` · 월 검색량 ${tabResult.pickedVolume.toLocaleString()}` : ''}`
+                                    : '글 제목 그대로'}
+                            </span>
+                        )}
                         <a href={tabResult.link} target="_blank" rel="noreferrer">{tabResult.link.replace(/^https?:\/\//, '')}</a>
                         <button type="button" onClick={() => { void runTabRank(tabResult.query, tabResult.link); }} disabled={tabState === 'loading'}>
                             {tabState === 'loading' ? '재는 중…' : '다시 재기'}
