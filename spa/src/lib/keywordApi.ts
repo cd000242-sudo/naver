@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'youtube-trending']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'youtube-trending', 'rank-by-tabs']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -282,6 +282,15 @@ export type LiveTrendingVideo = {
     videoId: string; title: string; channel: string;
     publishedAt: string; thumbnail: string; viewCount: number | null; categoryId: string;
 };
+/**
+ * 글 하나의 **탭별** 자리(사장님 지적 2026-08-22 "검색결과 탭마다 순위가 다르잖아").
+ * 실측: 같은 글이 블로그탭 3위인데 통합검색에는 없다.
+ * null 은 "못 쟀다" — 0위나 '없음'과 다르다.
+ */
+export type TabRank = { rank: number | null; sampled: number } | null;
+export const fetchRankByTabs = (query: string, link: string) =>
+    call<{ query: string; link: string; checkedAt: string; tabs: Record<string, TabRank> }>('rank-by-tabs', { query, link });
+
 export const fetchYoutubeTrending = () =>
     call<{ collectedAt: string; videos: LiveTrendingVideo[] }>('youtube-trending', {});
 

@@ -4,6 +4,8 @@ import {
     auditBlogPosts,
     checkRank,
     fetchKeywordVolumes,
+    fetchRankByTabs,
+    type TabRank,
     fetchPostAnalysis,
     type BlogAuditPost,
     type EngineExposure,
@@ -161,6 +163,47 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
     const [volumes, setVolumes] = useState<Record<string, number>>({});
     const [volumeState, setVolumeState] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
     const [volumeNote, setVolumeNote] = useState('');
+
+    /*
+     * 탭별 자리(사장님 지시 2026-08-22): "확인할 키워드"와 "순위 보고 싶은 글 주소"를
+     * 받아 통합검색·블로그·웹사이트 세 탭을 각각 잰다. 제목을 고친 뒤 바로
+     * 확인하는 자리이기도 하다 — 실제로 추천대로 제목을 바꿔 순위가 올랐다.
+     */
+    const [tabQuery, setTabQuery] = useState('');
+    const [tabLink, setTabLink] = useState('');
+    const [tabResult, setTabResult] = useState<{ query: string; link: string; checkedAt: string; tabs: Record<string, TabRank> } | null>(null);
+    const [tabState, setTabState] = useState<'idle' | 'loading' | 'error'>('idle');
+    const [tabNote, setTabNote] = useState('');
+    const TAB_META = [
+        { id: 'all', label: '통합검색', hint: '사람이 검색하면 처음 보는 화면' },
+        { id: 'blog', label: '블로그', hint: '블로그 탭 — 블로그 글은 여기가 본판' },
+        { id: 'web', label: '웹사이트', hint: '웹사이트 탭 — 자체 도메인 글은 여기' },
+    ];
+    const runTabRank = async (query: string, link: string) => {
+        if (tabState === 'loading') return;
+        /*
+         * 점검을 먼저 하라고 알린다(사장님 지시) — 글 주소를 손으로 넣는 것보다
+         * 점검 표에서 [이 글 다시 재기]를 누르는 편이 정확하고 빠르다.
+         */
+        if (!audit || audit.rows.length === 0) {
+            setTabNote('위에서 [전체 글 점검]을 먼저 돌려 주세요 — 그러면 글 주소를 직접 넣지 않아도 표에서 바로 잽니다.');
+            if (!link.trim()) return;
+        }
+        if (!query.trim() || !link.trim()) {
+            setTabNote('확인할 키워드와 글 주소를 모두 넣어 주세요.');
+            return;
+        }
+        setTabState('loading');
+        setTabNote('');
+        const result = await fetchRankByTabs(query.trim(), link.trim());
+        if (result.ok && result.data) {
+            setTabResult(result.data);
+            setTabState('idle');
+            return;
+        }
+        setTabState('error');
+        setTabNote(result.message || result.error || '순위를 못 쟀습니다.');
+    };
 
     /*
      * 글 진단(사장님 확정 2026-08-20 "키워드 추출이 아니라 글을 분석해야") —
@@ -697,6 +740,23 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                             <button type="button" className="lw-mini" onClick={() => openAnalysis(row)} disabled={row.status !== 'done'}>
                                                 글 분석하기
                                             </button>
+                                            {/*
+                                              * 제목을 고친 뒤 바로 확인하는 자리(사장님 2026-08-22
+                                              * "추천한 대로 제목만 바꿨는데도 글이 상단으로 올라왔네").
+                                              * 전체를 다시 돌릴 필요 없이 이 글만 잰다. 아래 탭별 칸도
+                                              * 같이 채워 준다 — 어느 탭에서 올랐는지가 바로 보인다.
+                                              */}
+                                            <button
+                                                type="button"
+                                                className="lw-mini lw-mini-ghost"
+                                                disabled={row.status === 'checking'}
+                                                onClick={() => {
+                                                    const query = row.extQuery || row.kwQuery || row.title;
+                                                    setTabQuery(query);
+                                                    setTabLink(row.link);
+                                                    void runTabRank(query, row.link);
+                                                }}
+                                            >탭별 순위</button>
                                         </td>
                                     </tr>
                                 ))}
@@ -708,39 +768,77 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
             )}
 
             <div className="lw-panel-head" style={{ marginTop: 26 }}>
-                <h2>키워드로 직접 확인</h2>
-                <span>특정 키워드에서 내 블로그가 몇 위인지 하나씩 볼 때</span>
+                <h2>글 하나를 탭별로 확인</h2>
+                <span>제목을 고친 뒤 바로 확인할 때 — 통합검색·블로그·웹사이트 자리를 각각 잽니다</span>
             </div>
 
             <form
                 className="lw-search lw-search-two"
-                onSubmit={(event) => { event.preventDefault(); run(keyword, target); }}
+                onSubmit={(event) => { event.preventDefault(); void runTabRank(tabQuery, tabLink); }}
             >
                 <input
                     type="search"
-                    value={keyword}
-                    onChange={(event) => setKeyword(event.target.value)}
+                    value={tabQuery}
+                    onChange={(event) => setTabQuery(event.target.value)}
                     placeholder="확인할 키워드"
                     aria-label="확인할 키워드"
                 />
                 <input
                     type="text"
-                    value={target}
-                    onChange={(event) => setTarget(event.target.value)}
-                    placeholder="내 블로그 주소 또는 아이디 (예: blog.naver.com/myid)"
-                    aria-label="내 블로그 주소 또는 아이디"
+                    value={tabLink}
+                    onChange={(event) => setTabLink(event.target.value)}
+                    placeholder="순위를 볼 글 주소 (예: blog.naver.com/myid/224385098124)"
+                    aria-label="순위를 볼 글 주소"
                 />
-                <button type="submit" disabled={loading || !keyword.trim() || !target.trim()}>
-                    {loading ? '확인 중…' : '순위 확인'}
+                <button type="submit" disabled={tabState === 'loading'}>
+                    {tabState === 'loading' ? '재는 중…' : '탭별 순위'}
                 </button>
             </form>
+            {tabNote && <div className={`lw-note${tabState === 'error' ? ' lw-note-err' : ''}`}>{tabNote}</div>}
+            {tabResult && (
+                <div className="lw-tabrank">
+                    <div className="lw-tabrank-head">
+                        <b>{tabResult.query}</b>
+                        <a href={tabResult.link} target="_blank" rel="noreferrer">{tabResult.link}</a>
+                    </div>
+                    <div className="lw-tabrank-grid">
+                        {TAB_META.map((tab) => {
+                            const value = tabResult.tabs[tab.id];
+                            return (
+                                <a
+                                    key={tab.id}
+                                    className={`lw-tabrank-card${value && value.rank ? ' on' : ''}`}
+                                    href={tab.id === 'all'
+                                        ? `https://search.naver.com/search.naver?query=${encodeURIComponent(tabResult.query)}`
+                                        : `https://search.naver.com/search.naver?ssc=tab.${tab.id}.all&query=${encodeURIComponent(tabResult.query)}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    title={tab.hint}
+                                >
+                                    <span>{tab.label}</span>
+                                    <b>{value === null || value === undefined
+                                        ? '못 쟀음'
+                                        : value.rank ? `${value.rank}위` : '없음'}</b>
+                                    <em>{value && value.sampled ? `이 탭에 뜬 ${value.sampled}개 중` : '결과 없음'}</em>
+                                </a>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
 
             <UsageBar usage={usage} />
             <ErrorNote error={error.code} message={error.message} missing={error.missing} />
 
-            {rows.length === 0 && !loading && !audit && (
+            {/*
+              * 옛 '추적 목록'은 이제 새로 쌓이지 않는다 — 위 칸이 탭별 순위로 바뀌면서
+              * 그 목록을 채우던 경로가 없어졌다. 지난 기록은 그대로 두되(사용자가
+              * 남겨 둔 값이다) 무엇이 바뀌었는지 적어 준다. 비어 있으면 아무 말도 하지 않는다.
+              */}
+            {rows.length > 0 && (
                 <div className="lw-note">
-                    블로그 주소를 넣고 전체 글 점검을 누르면 발행 글 전체의 노출 상태가 여기에 쌓입니다. 목록은 이 브라우저에만 저장됩니다.
+                    아래는 예전 방식으로 쌓아 둔 기록입니다. 지금은 위 칸에서 <b>탭별 순위</b>로 재고,
+                    발행 글 전체는 맨 위 <b>[전체 글 점검]</b>에서 봅니다.
                 </div>
             )}
 

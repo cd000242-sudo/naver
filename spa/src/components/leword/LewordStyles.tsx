@@ -673,6 +673,24 @@ function LewordStyles() {
             .lw-rank-go { color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor; }
             .lw-rank-go:hover { opacity: .8; }
 
+            /* 탭별 자리 — 같은 글도 탭마다 순위가 다르다. 한 줄로 나란히 보여 준다. */
+            .lw-tabrank { margin: 12px 0 18px; padding: 14px 16px; border-radius: 13px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
+            .lw-tabrank-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+            .lw-tabrank-head b { font-size: 14px; color: #ffa500; }
+            .lw-tabrank-head a { font-size: 11.5px; color: rgba(235,242,250,.45); text-decoration: none; word-break: break-all; }
+            .lw-tabrank-head a:hover { color: rgba(235,242,250,.7); }
+            .lw-tabrank-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+            .lw-tabrank-card {
+                display: flex; flex-direction: column; gap: 3px; text-decoration: none;
+                padding: 12px 14px; border-radius: 11px;
+                border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.025);
+            }
+            .lw-tabrank-card.on { border-color: rgba(46,204,113,.42); background: rgba(46,204,113,.08); }
+            .lw-tabrank-card span { font-size: 11.5px; color: rgba(235,242,250,.55); font-weight: 700; }
+            .lw-tabrank-card b { font-size: 20px; font-weight: 900; color: rgba(235,242,250,.5); font-variant-numeric: tabular-nums; }
+            .lw-tabrank-card.on b { color: #2ecc71; }
+            .lw-tabrank-card em { font-style: normal; font-size: 10.5px; color: rgba(235,242,250,.38); }
+
             /* 유튜브 지금 갱신 — 스냅샷과 별개라는 것이 눈에 보여야 한다. */
             .lw-yt-live-btn {
                 margin-left: auto; padding: 8px 16px; border-radius: 9px; border: 0; cursor: pointer;
