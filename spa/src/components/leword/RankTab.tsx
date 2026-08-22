@@ -50,6 +50,14 @@ type AuditRow = BlogAuditPost & {
     kwRank?: number | null;
     extQuery?: string;
     extRank?: number | null;
+    /*
+     * 이 순위가 **실제 검색 화면**에서 잰 값인가(사장님 지적 2026-08-22
+     * "2위라면서 2위가 아니네요?"). 오픈API 순위는 노출 순서와 다르다 —
+     * 실측 예: 오픈API 27위인 글이 실제 화면에서는 3위였다.
+     * live 가 아니면 "API 기준"이라고 화면에 밝힌다.
+     */
+    kwLive?: boolean;
+    extLive?: boolean;
     /** 구글·다음·줌 제목검색 노출 실측(구글은 차단 시 '측정 불가'로 정직하게). */
     engines?: EngineExposure | null;
     /*
@@ -104,7 +112,8 @@ const ENGINE_META: Array<{ id: keyof EngineExposure; label: string; search: (q: 
 
 /** 네이버에서 이 검색어로 실제 결과를 보는 주소 — 노출된 글은 바로 가서 확인한다. */
 const naverSearchUrl = (query: string) =>
-    `https://search.naver.com/search.naver?where=web&query=${encodeURIComponent(query)}`;
+    // 블로그탭 — 순위를 잰 화면과 같은 곳으로 보내야 눈으로 대조가 된다.
+    `https://search.naver.com/search.naver?ssc=tab.blog.all&query=${encodeURIComponent(query)}`;
 
 const PLATFORM_LABEL: Record<string, string> = {
     naver: '네이버 블로그',
@@ -133,6 +142,13 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
      * 나눠서 볼 수 있게"). 200건을 한 판에 두면 무엇을 손봐야 하는지 안 보인다.
      */
     const [auditFilter, setAuditFilter] = useState<'all' | 'in' | 'out' | 'push'>('all');
+    /*
+     * 한 번에 몇 건까지 가져올지(사장님 지시 2026-08-22 "50건 더 찾기 해서
+     * 발행한 글들 전체적으로 점검할 수 있게"). 네이버 블로그 RSS 는 50건이
+     * 상한이라 447건짜리 블로그가 50건만 점검됐다 — 목록 API 로 바꾸고
+     * 여기서 폭을 넓힌다.
+     */
+    const [auditLimit, setAuditLimit] = useState(50);
     /*
      * 밀면 되는 자리(사장님 제안 2026-08-22 "반대로 이걸 역이용해서 상위노출될 수
      * 있는 키워드를 찾는 방법도 있을 것 같은데").
@@ -238,7 +254,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
      * 새로고침하거나 탭을 떠나면 이 루프가 사라지고, 남은 줄은 '확인 전' 상태로
      * 저장된 채 영영 '—' 로 남았다 — 다시 시작할 방법조차 없었다.
      */
-    const runAudit = async (resume = false) => {
+    const runAudit = async (resume = false, nextLimit = auditLimit) => {
         const url = (resume && audit ? audit.url : auditUrl).trim();
         if (!url || auditLoading) return;
         const runId = auditRunId.current + 1;
@@ -254,7 +270,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 rows: audit.rows.map((row) => (row.status === 'done' ? row : { ...row, status: 'wait' as const })),
             };
         } else {
-            const listed = await auditBlogPosts(url);
+            const listed = await auditBlogPosts(url, nextLimit);
             if (!listed.ok || !listed.data) {
                 setAuditLoading(false);
                 setAuditError(listed.message || '피드를 읽지 못했습니다.');
@@ -287,8 +303,8 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
             const checked = await auditBlogCheck(post.title, post.link);
             if (auditRunId.current !== runId) return;
             const payload = checked.ok ? checked.data as (typeof checked.data & {
-                keyword?: { query: string; rank: number | null };
-                extended?: { query: string; rank: number | null };
+                keyword?: { query: string; rank: number | null; live?: boolean; apiRank?: number | null };
+                extended?: { query: string; rank: number | null; live?: boolean; apiRank?: number | null };
                 engines?: EngineExposure;
                 indexed?: { indexed: boolean; siteIndexed: boolean; sampled: number } | null;
                 searchSource?: 'blog' | 'web';
@@ -299,6 +315,8 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                     rank: payload.rank, sampled: payload.sampled, sympathy: payload.sympathy,
                     kwQuery: payload.keyword?.query, kwRank: payload.keyword ? payload.keyword.rank : undefined,
                     extQuery: payload.extended?.query, extRank: payload.extended ? payload.extended.rank : undefined,
+                    kwLive: payload.keyword?.live === true,
+                    extLive: payload.extended?.live === true,
                     engines: payload.engines || null,
                     // 색인 사실과 무엇으로 쟀는지를 화면까지 그대로 나른다.
                     indexed: payload.indexed ?? null,
@@ -448,6 +466,20 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                               * 새로고침하면 루프가 사라지고 남은 줄이 '—' 로 굳어 버렸다.
                               * 이미 본 줄은 다시 재지 않는다.
                               */}
+                            {/*
+                              * 더 찾기 — 목록을 넓혀 다시 받는다. 이미 본 글은
+                              * 다시 재지 않으므로 늘어난 만큼만 새로 걸린다.
+                              */}
+                            {!auditLoading && audit.rows.length >= auditLimit && (
+                                <div className="lw-audit-resume">
+                                    <span>지금 <b>{audit.rows.length}건</b>까지 받았습니다 — 발행 글이 더 있으면 넓혀서 받습니다.</span>
+                                    <button type="button" onClick={() => {
+                                        const next = auditLimit + 50;
+                                        setAuditLimit(next);
+                                        void runAudit(false, next);
+                                    }}>50건 더 찾기</button>
+                                </div>
+                            )}
                             {left > 0 && !auditLoading && (
                                 <div className="lw-audit-resume">
                                     <span>아직 못 본 글 <b>{left}건</b>이 남았습니다 — 새로고침하거나 탭을 옮기면 점검이 멈춥니다.</span>
@@ -608,7 +640,14 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                               * 검색어를 다시 쳐야 한다.
                                               */}
                                             {row.status !== 'done' ? '—' : row.kwRank != null
-                                                ? <a className="lw-rank-go" href={naverSearchUrl(row.kwQuery || '')} target="_blank" rel="noreferrer" title="이 검색결과 보기">{row.kwRank}위 ↗</a>
+                                                ? (
+                                                    <a
+                                                        className={`lw-rank-go${row.kwLive ? '' : ' lw-rank-api'}`}
+                                                        href={naverSearchUrl(row.kwQuery || '')}
+                                                        target="_blank" rel="noreferrer"
+                                                        title={row.kwLive ? '실제 검색 화면에서 잰 자리 — 눌러서 확인' : '오픈API 기준 — 실제 노출 순서와 다를 수 있습니다'}
+                                                    >{row.kwRank}위{row.kwLive ? ' ↗' : ' (API) ↗'}</a>
+                                                )
                                                 : row.kwQuery ? '없음' : '—'}
                                             {row.kwQuery && (onAnalyze
                                                 ? <button type="button" className="lw-audit-q lw-audit-q-btn" title="키워드 분석 탭으로" onClick={() => onAnalyze(row.kwQuery!)}>{row.kwQuery}</button>
@@ -616,7 +655,14 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                         </td>
                                         <td className={row.extRank === null ? 'lw-rank-out' : 'lw-rank-in'}>
                                             {row.status !== 'done' ? '—' : row.extRank != null
-                                                ? <a className="lw-rank-go" href={naverSearchUrl(row.extQuery || '')} target="_blank" rel="noreferrer" title="이 검색결과 보기">{row.extRank}위 ↗</a>
+                                                ? (
+                                                    <a
+                                                        className={`lw-rank-go${row.extLive ? '' : ' lw-rank-api'}`}
+                                                        href={naverSearchUrl(row.extQuery || '')}
+                                                        target="_blank" rel="noreferrer"
+                                                        title={row.extLive ? '실제 검색 화면에서 잰 자리 — 눌러서 확인' : '오픈API 기준 — 실제 노출 순서와 다를 수 있습니다'}
+                                                    >{row.extRank}위{row.extLive ? ' ↗' : ' (API) ↗'}</a>
+                                                )
                                                 : row.extQuery ? '없음' : '—'}
                                             {row.extQuery && row.extQuery !== row.kwQuery && (onAnalyze
                                                 ? <button type="button" className="lw-audit-q lw-audit-q-btn" title="키워드 분석 탭으로" onClick={() => onAnalyze(row.extQuery!)}>{row.extQuery}</button>

@@ -260,8 +260,14 @@ export const checkRank = (keyword: string, target: string) =>
  * 조회수는 어느 플랫폼도 공개 API 가 없어 싣지 않는다.
  */
 export type BlogAuditPost = { title: string; link: string; publishedAt: string | null; comments: number | null };
-export const auditBlogPosts = (url: string) =>
-    call<{ platform: string; blogId: string | null; posts: BlogAuditPost[]; note?: string }>('blog-audit-posts', { url });
+/**
+ * 발행 글 목록. limit 을 올리면 더 많이 받는다 — 네이버 블로그는 피드가
+ * 짧아 한 번에 50건쯤만 오므로, 화면이 [더 찾기]로 넓혀 부른다
+ * (사장님 지시 2026-08-22 "50건 더 찾기 해서 전체적으로 점검할 수 있게").
+ */
+export const auditBlogPosts = (url: string, limit?: number) =>
+    call<{ platform: string; blogId: string | null; posts: BlogAuditPost[]; note?: string }>('blog-audit-posts',
+        limit ? { url, limit: String(limit) } : { url });
 
 /**
  * 여러 검색어의 월 검색량 — "밀면 되는 자리"가 순위 옆에 붙일 값이다.
