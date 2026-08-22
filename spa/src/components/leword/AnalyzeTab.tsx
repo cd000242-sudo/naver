@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { goldenIndex } from '../../lib/goldenIndex';
 import {
     analyzeKeyword,
+    fetchKeywordDocs,
     fetchKeywordPostIdeas,
     formatCount,
     getStoredLicense,
@@ -60,6 +61,19 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
     const [licenseOpen, setLicenseOpen] = useState(false);
     const [licenseInput, setLicenseInput] = useState(getStoredLicense());
     const inputRef = useRef<HTMLInputElement | null>(null);
+    /*
+     * 확장 키워드 문서수 실측(사장님 지적 2026-08-23: "확장 키워드가 같이
+     * 분석이 되어서 아래에 보여줘야 되고, 확장 키워드에 또 확장 키워드를 해서
+     * 발굴을 할 수 있게 도와줘야지").
+     *
+     * 연관 목록에는 검색량만 있고 문서수가 없어서 비율도 자리 여부도 못 냈다.
+     * 문서수는 블로그검색 total 로 무료다 — 재서 붙이면 황금키워드 카드와 같은
+     * 판단(수요가 공급을 넘는가)을 여기서도 할 수 있다.
+     */
+    const [expDocs, setExpDocs] = useState<Record<string, number>>({});
+    const [expState, setExpState] = useState<'idle' | 'loading' | 'done'>('idle');
+    /** 파고든 경로 — 어디서 여기까지 왔는지 되짚어 갈 수 있게. */
+    const [trail, setTrail] = useState<string[]>([]);
 
     const run = useCallback(async (target: string) => {
         const trimmed = target.trim();
@@ -71,6 +85,8 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
         if (response.usage) setUsage(response.usage);
         if (response.ok && response.data) {
             setResult(response.data);
+            setExpDocs({});
+            setExpState('idle');
             return;
         }
         setResult(null);
@@ -92,6 +108,57 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
     const boardRow = result
         ? boardRows.find((row) => compact(row.keyword) === compact(result.keyword)) || null
         : null;
+
+    /*
+     * 확장 후보 = 회차 실측 풀(보드에 있으면) + 검색광고 연관 실측.
+     * 검색량이 있는 것만 남긴다 — 없는 것은 잴 값이 없다.
+     */
+    const expansionRows = (() => {
+        if (!result) return [] as Array<{ keyword: string; searchVolume: number | null }>;
+        const pool = boardRow
+            ? [...(boardRow.subKeywords || []), ...(boardRow.keywordPool || [])]
+            : [];
+        const merged = [
+            ...pool.map((p) => ({ keyword: p.keyword, searchVolume: p.searchVolume ?? null })),
+            ...result.related.map((r) => ({ keyword: r.keyword, searchVolume: r.searchVolume })),
+        ];
+        const seen = new Set<string>();
+        return merged
+            .filter((r) => {
+                const key = compact(r.keyword);
+                if (!key || key === compact(result.keyword) || seen.has(key)) return false;
+                seen.add(key);
+                return typeof r.searchVolume === 'number' && r.searchVolume > 0;
+            })
+            .sort((a, b) => (b.searchVolume || 0) - (a.searchVolume || 0))
+            .slice(0, 24);
+    })();
+
+    /*
+     * 문서수를 재서 붙인다. 화면이 열릴 때 자동으로 — 사장님이 버튼을 한 번 더
+     * 누르게 만들 이유가 없다. 못 잰 것은 빈칸으로 두고 0 으로 적지 않는다.
+     */
+    useEffect(() => {
+        if (!result || expansionRows.length === 0 || expState !== 'idle') return;
+        setExpState('loading');
+        let cancelled = false;
+        fetchKeywordDocs(expansionRows.map((r) => r.keyword)).then((res) => {
+            if (cancelled) return;
+            if (res.ok && res.data) setExpDocs(res.data.docs || {});
+            setExpState('done');
+        });
+        return () => { cancelled = true; };
+        // expansionRows 는 result 에서 파생된다 — result 가 바뀔 때만 다시 잰다.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [result, expState]);
+
+    /** 한 칸 더 파고든다 — 지금 검색어를 경로에 남기고 그 확장어로 분석을 다시 돌린다. */
+    const digInto = (next: string) => {
+        if (!result) return;
+        setTrail((prev) => [...prev, result.keyword].slice(-6));
+        setKeyword(next);
+        run(next);
+    };
 
     /*
      * 글감·제목(사장님 지적 2026-08-22 "왜 뜨는지 / 확장할 수 있는 키워드 /
@@ -340,33 +407,83 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                         </section>
                     )}
 
-                    {/* 확장 키워드 — 보드 회차가 실측으로 굳혀 둔 풀(검색량·문서수 붙은 실존 검색어). */}
-                    {boardRow && ((boardRow.keywordPool || []).length > 0 || (boardRow.subKeywords || []).length > 0) && (
+                    {/*
+                      * 확장 키워드 — 검색량 + 문서수 실측으로 **자리까지 판정**한다.
+                      * 사장님 지적(2026-08-23): 황금키워드 카드처럼 여기서도
+                      * 확장어가 같이 분석돼야 하고, 거기서 또 파고들 수 있어야 한다.
+                      */}
+                    {expansionRows.length > 0 && (
                         <section className="lw-panel" aria-label="확장 키워드">
                             <div className="lw-panel-head">
-                                <h2>확장 키워드 — 회차 실측 풀</h2>
-                                <span>전부 검색량 확인된 실존 검색어 · 누르면 이어서 분석합니다</span>
+                                <h2>확장 키워드 — 자리까지 실측</h2>
+                                <span>
+                                    검색량은 검색광고, 문서수는 블로그검색 실측
+                                    {expState === 'loading' ? ' · 문서수 재는 중…' : ''}
+                                    {' · 한 줄을 누르면 그 검색어로 이어서 파고듭니다'}
+                                </span>
                             </div>
-                            <div className="lw-analyze-pool">
-                                {[...(boardRow.subKeywords || []), ...(boardRow.keywordPool || [])]
-                                    .filter((p, idx, arr) => arr.findIndex((x) => x.keyword === p.keyword) === idx)
-                                    .slice(0, 14)
-                                    .map((p) => (
-                                        <button
-                                            key={p.keyword}
-                                            type="button"
-                                            onClick={() => { setKeyword(p.keyword); run(p.keyword); }}
-                                        >
-                                            {p.keyword}
-                                            <span>
-                                                {typeof p.searchVolume === 'number' ? formatCount(p.searchVolume) : '실측'}
-                                                {typeof (p as { documentCount?: number | null }).documentCount === 'number'
-                                                    ? ` / ${formatCount((p as { documentCount?: number | null }).documentCount as number)}`
-                                                    : ''}
-                                            </span>
+                            {trail.length > 0 && (
+                                <div className="lw-analyze-trail">
+                                    {trail.map((step) => (
+                                        <button key={step} type="button" onClick={() => { setKeyword(step); run(step); }}>
+                                            {step}
                                         </button>
                                     ))}
+                                    <span>→ {result.keyword}</span>
+                                </div>
+                            )}
+                            <div className="lw-table-scroll">
+                                <table className="lw-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">확장 키워드</th>
+                                            <th scope="col">월 검색량</th>
+                                            <th scope="col">문서수</th>
+                                            <th scope="col">비율</th>
+                                            <th scope="col">자리</th>
+                                            <th scope="col"> </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {expansionRows
+                                            .map((row) => {
+                                                const docs = expDocs[row.keyword];
+                                                const ratio = typeof docs === 'number' && docs > 0 && row.searchVolume
+                                                    ? row.searchVolume / docs
+                                                    : null;
+                                                return { ...row, docs, ratio };
+                                            })
+                                            /* 자리가 넓은 순 — 못 잰 것은 뒤로 민다(0 이 아니라 모름이다). */
+                                            .sort((a, b) => (b.ratio ?? -1) - (a.ratio ?? -1))
+                                            .map((row) => (
+                                                <tr key={row.keyword}>
+                                                    <td>{row.keyword}</td>
+                                                    <td>{typeof row.searchVolume === 'number' ? formatCount(row.searchVolume) : '—'}</td>
+                                                    <td>{typeof row.docs === 'number' ? formatCount(row.docs) : (expState === 'loading' ? '재는 중' : '—')}</td>
+                                                    <td>{row.ratio === null ? '—' : row.ratio.toFixed(2)}</td>
+                                                    <td>
+                                                        {row.ratio === null
+                                                            ? <span className="lw-slot-unknown">모름</span>
+                                                            : row.ratio >= 1
+                                                                ? <span className="lw-slot-open">자리 있음</span>
+                                                                : row.ratio >= 0.1
+                                                                    ? <span className="lw-slot-tight">좁음</span>
+                                                                    : <span className="lw-slot-none">글이 많음</span>}
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" className="lw-dig" onClick={() => digInto(row.keyword)}>
+                                                            더 파기 →
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                    </tbody>
+                                </table>
                             </div>
+                            <p className="lw-note lw-note-plain">
+                                <b>비율</b>은 월 검색량 ÷ 블로그 문서수입니다. 1 이 넘으면 찾는 사람이 쓰인 글보다 많다는 뜻이라
+                                새 글이 들어갈 자리가 있습니다. 판정의 최종 확인은 실제 검색 화면에서 하세요.
+                            </p>
                         </section>
                     )}
 

@@ -1790,6 +1790,16 @@ function LewordStyles() {
             .lw-analyze-why strong { display: block; margin-bottom: 5px; font-size: 12px; font-weight: 900; color: #b9a6ff; }
             .lw-analyze-why p { margin: 0; color: #ebf2fa; font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
             .lw-analyze-why small { display: block; margin-top: 5px; font-size: 11px; color: rgba(235,242,250,.5); }
+            /* 확장 키워드 자리 판정 — 색은 사실 셋(있음·좁음·없음)만 가른다. */
+            .lw-slot-open { color: #34d399; font-weight: 600; }
+            .lw-slot-tight { color: #fbbf24; }
+            .lw-slot-none { color: #8a94a6; }
+            .lw-slot-unknown { color: #64748b; }
+            .lw-dig { padding: 4px 10px; border: 1px solid rgba(255,255,255,.16); border-radius: 7px; background: none; color: #c9d6e6; font-size: 12px; cursor: pointer; white-space: nowrap; }
+            .lw-dig:hover { border-color: rgba(167,139,250,.55); color: #ede9fe; }
+            /* 파고든 경로 — 어디서 여기까지 왔는지 되짚어 간다. */
+            .lw-analyze-trail { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 10px; font-size: 12px; color: #8a94a6; }
+            .lw-analyze-trail button { padding: 3px 9px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; background: none; color: #c9d6e6; font-size: 12px; cursor: pointer; }
             .lw-analyze-pool { display: flex; flex-wrap: wrap; gap: 7px; }
             .lw-analyze-pool button { display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; border: 1px solid rgba(255,255,255,.13); border-radius: 999px; background: none; color: #ebf2fa; font-size: 13px; cursor: pointer; }
             .lw-analyze-pool button:hover { border-color: rgba(0,224,198,.5); color: #fff; }

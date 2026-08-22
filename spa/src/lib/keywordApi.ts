@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'youtube-trending', 'rank-by-tabs']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'youtube-trending', 'rank-by-tabs']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -307,6 +307,17 @@ export const fetchRankByTabs = (query: string, link: string) =>
 
 export const fetchYoutubeTrending = () =>
     call<{ collectedAt: string; videos: LiveTrendingVideo[] }>('youtube-trending', {});
+
+/**
+ * 확장 키워드에 **자리 판정**을 붙이기 위한 문서수 실측
+ * (사장님 지적 2026-08-23 "확장 키워드가 같이 분석이 되어서 아래에 보여줘야지").
+ * 검색량만 있고 문서수가 없으면 비율도 자리 여부도 못 낸다. 못 잰 것은 빠진다 — 0 이 아니다.
+ */
+export const fetchKeywordDocs = (keywords: string[]) =>
+    // call 은 문자열 파라미터만 받는다 — keyword-volumes 와 같이 줄바꿈으로 잇는다.
+    call<{ docs: Record<string, number> }>('keyword-docs', {
+        keywords: keywords.join(String.fromCharCode(10)),
+    });
 
 export const fetchKeywordVolumes = (keywords: string[]) =>
     call<{ volumes: Record<string, number> }>('keyword-volumes', {
