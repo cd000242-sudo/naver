@@ -51,7 +51,7 @@ async function isShortForm(videoId) {
 const MIN_VOLUME = Number(process.env.YTGAP_MIN_VOLUME || 200);
 const MAX_DOCS = Number(process.env.YTGAP_MAX_DOCS || 5000);
 const MIN_RATIO = Number(process.env.YTGAP_MIN_RATIO || 1);
-const MAX_ROWS = Number(process.env.YTGAP_MAX_ROWS || 60);
+const MAX_ROWS = Number(process.env.YTGAP_MAX_ROWS || 150);
 /** 영상 하나가 목록을 도배하지 못하게. */
 const MAX_PER_VIDEO = Number(process.env.YTGAP_MAX_PER_VIDEO || 2);
 
@@ -308,49 +308,63 @@ async function main() {
         .sort((left, right) => right.detail.volume - left.detail.volume);
     log(`검색량 ${MIN_VOLUME}+ ${measurable.length}개 → 문서수 조회`);
 
+    /*
+     * 문서수는 **여러 줄로 나눠** 잰다(사장님 지시 2026-08-22 "대량으로 가져와야
+     * 사람들이 보고 글감으로 쓴다").
+     *
+     * 한 줄로 돌던 회차 실측: 검색량을 넘긴 607개 중 287개만 재고 예산이 끝나
+     * 빈자리가 30건에 그쳤다 — 나머지 320개는 아예 못 봤다.
+     * 문서수 조회는 응답을 기다리는 시간이 대부분이라 나눠 받으면 그만큼 더 본다.
+     * 확장 검색어(자동완성)는 살아남은 행에만 물으므로 같은 줄에서 이어서 한다.
+     */
     const rows = [];
     let docChecked = 0;
     let docSkipped = 0;
-    for (const { keyword, detail } of measurable) {
-        const searchVolume = detail.volume;
-        /*
-         * 자리가 넉넉히 모였거나 예산을 넘겼으면 멈춘다. 화면은 60건을 쓰는데
-         * 1,000개를 끝까지 재려다 판 전체를 멈추게 하는 것이 지금까지의 손해였다.
-         */
-        if (overBudget() || rows.length >= MAX_ROWS * 3) { docSkipped += 1; continue; }
-        docChecked += 1;
-        const documentCount = await fetchDocumentCount(keyword);
-        await sleep(160);
-        if (!Number.isFinite(documentCount) || documentCount > MAX_DOCS) continue;
-        // 문서수 0 은 자리가 아니라 아무도 안 쓰는 말일 때가 많다 — 비율로 거른다.
-        const ratio = documentCount > 0 ? searchVolume / documentCount : searchVolume;
-        if (ratio < MIN_RATIO) continue;
-        const video = source.get(keyword);
-        /*
-         * 확장 키워드 — 이 검색어에서 뻗어 나가는 실제 검색어들.
-         * 여기서도 자동완성이 공급원이다. 우리가 조합해 만들면 아무도 안 치는
-         * 말이 섞인다. 살아남은 행(60건 남짓)에만 물어 호출을 아낀다.
-         */
-        const expansions = suggestionsFor(keyword, await fetchAutocomplete(keyword))
-            .filter((suggestion) => suggestion !== keyword)
-            .slice(0, 6);
-        await sleep(120);
-        rows.push({
-            keyword,
-            expansions,
-            searchVolume,
-            /** 광고 경쟁도 실측('높음'/'중간'/'낮음') — 쇼핑각 판정의 근거. */
-            compIdx: detail.compIdx || '',
-            topics: topicsOf(keyword, expansions, detail.compIdx),
-            documentCount,
-            ratio: Math.round(ratio * 10) / 10,
-            video: {
-                videoId: video.videoId, title: video.title, channel: video.channel,
-                thumbnail: video.thumbnail, viewCount: video.viewCount, publishedAt: video.publishedAt,
-                categoryId: video.categoryId, form: video.form || '',
-            },
-        });
-    }
+    let cursor = 0;
+    const docLane = async () => {
+        while (cursor < measurable.length) {
+            const index = cursor;
+            cursor += 1;
+            const { keyword, detail } = measurable[index];
+            const searchVolume = detail.volume;
+            // 자리가 넉넉히 모였거나 예산을 넘겼으면 멈춘다.
+            if (overBudget() || rows.length >= MAX_ROWS * 3) { docSkipped += 1; continue; }
+            docChecked += 1;
+            const documentCount = await fetchDocumentCount(keyword);
+            await sleep(140);
+            if (!Number.isFinite(documentCount) || documentCount > MAX_DOCS) continue;
+            // 문서수 0 은 자리가 아니라 아무도 안 쓰는 말일 때가 많다 — 비율로 거른다.
+            const ratio = documentCount > 0 ? searchVolume / documentCount : searchVolume;
+            if (ratio < MIN_RATIO) continue;
+            const video = source.get(keyword);
+            /*
+             * 확장 검색어 — 이 검색어에서 뻗어 나가는 실제 검색어들.
+             * 여기서도 자동완성이 공급원이다. 우리가 조합해 만들면 아무도 안 치는
+             * 말이 섞인다. 살아남은 행에만 물어 호출을 아낀다.
+             */
+            const expansions = suggestionsFor(keyword, await fetchAutocomplete(keyword))
+                .filter((suggestion) => suggestion !== keyword)
+                .slice(0, 6);
+            await sleep(100);
+            rows.push({
+                keyword,
+                expansions,
+                searchVolume,
+                /** 광고 경쟁도 실측('높음'/'중간'/'낮음') — 쇼핑각 판정의 근거. */
+                compIdx: detail.compIdx || '',
+                topics: topicsOf(keyword, expansions, detail.compIdx),
+                documentCount,
+                ratio: Math.round(ratio * 10) / 10,
+                video: {
+                    videoId: video.videoId, title: video.title, channel: video.channel,
+                    thumbnail: video.thumbnail, viewCount: video.viewCount, publishedAt: video.publishedAt,
+                    categoryId: video.categoryId, form: video.form || '',
+                },
+            });
+        }
+    };
+    // 네이버 API 다 — 줄을 5개까지만 쓴다(하루 한도보다 초당 쏠림이 먼저 걸린다).
+    await Promise.all(Array.from({ length: 5 }, docLane));
 
     if (docSkipped > 0) {
         log(`!! 문서수 실측 ${docChecked}건 · 상한에 걸려 건너뜀 ${docSkipped}건 (${Math.round((Date.now() - STARTED_AT) / 1000)}초 경과)`);
