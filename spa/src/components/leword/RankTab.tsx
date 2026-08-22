@@ -179,16 +179,13 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
         { id: 'blog', label: '블로그', hint: '블로그 탭 — 블로그 글은 여기가 본판' },
         { id: 'web', label: '웹사이트', hint: '웹사이트 탭 — 자체 도메인 글은 여기' },
     ];
+    /*
+     * 이 기능은 **혼자 돈다**(사장님 확인 2026-08-22 "확인할 키워드랑 내 글 주소
+     * 넣고 순위 확인은 따로야"). 전체 글 점검과 무관하다 — 검색어와 글 주소만
+     * 있으면 바로 잰다. 위 표에서 [탭별 순위]를 누르면 두 칸이 자동으로 채워질 뿐이다.
+     */
     const runTabRank = async (query: string, link: string) => {
         if (tabState === 'loading') return;
-        /*
-         * 점검을 먼저 하라고 알린다(사장님 지시) — 글 주소를 손으로 넣는 것보다
-         * 점검 표에서 [이 글 다시 재기]를 누르는 편이 정확하고 빠르다.
-         */
-        if (!audit || audit.rows.length === 0) {
-            setTabNote('위에서 [전체 글 점검]을 먼저 돌려 주세요 — 그러면 글 주소를 직접 넣지 않아도 표에서 바로 잽니다.');
-            if (!link.trim()) return;
-        }
         if (!query.trim() || !link.trim()) {
             setTabNote('확인할 키워드와 글 주소를 모두 넣어 주세요.');
             return;
@@ -768,8 +765,8 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
             )}
 
             <div className="lw-panel-head" style={{ marginTop: 26 }}>
-                <h2>글 하나를 탭별로 확인</h2>
-                <span>제목을 고친 뒤 바로 확인할 때 — 통합검색·블로그·웹사이트 자리를 각각 잽니다</span>
+                <h2>글 하나 순위 확인</h2>
+                <span>검색어와 글 주소만 있으면 됩니다 · 통합검색·블로그·웹사이트를 각각 잽니다</span>
             </div>
 
             <form
@@ -795,11 +792,20 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 </button>
             </form>
             {tabNote && <div className={`lw-note${tabState === 'error' ? ' lw-note-err' : ''}`}>{tabNote}</div>}
+            {!tabResult && !tabNote && tabState !== 'loading' && (
+                <div className="lw-note lw-note-plain">
+                    같은 글도 <b>탭마다 자리가 다릅니다</b> — 블로그 탭에서 3위인 글이 통합검색에는 없기도 합니다.
+                    제목을 고친 뒤 여기서 바로 다시 재면 어느 탭에서 올랐는지 보입니다.
+                </div>
+            )}
             {tabResult && (
                 <div className="lw-tabrank">
                     <div className="lw-tabrank-head">
                         <b>{tabResult.query}</b>
-                        <a href={tabResult.link} target="_blank" rel="noreferrer">{tabResult.link}</a>
+                        <a href={tabResult.link} target="_blank" rel="noreferrer">{tabResult.link.replace(/^https?:\/\//, '')}</a>
+                        <button type="button" onClick={() => { void runTabRank(tabResult.query, tabResult.link); }} disabled={tabState === 'loading'}>
+                            {tabState === 'loading' ? '재는 중…' : '다시 재기'}
+                        </button>
                     </div>
                     <div className="lw-tabrank-grid">
                         {TAB_META.map((tab) => {
@@ -827,68 +833,6 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 </div>
             )}
 
-            <UsageBar usage={usage} />
-            <ErrorNote error={error.code} message={error.message} missing={error.missing} />
-
-            {/*
-              * 옛 '추적 목록'은 이제 새로 쌓이지 않는다 — 위 칸이 탭별 순위로 바뀌면서
-              * 그 목록을 채우던 경로가 없어졌다. 지난 기록은 그대로 두되(사용자가
-              * 남겨 둔 값이다) 무엇이 바뀌었는지 적어 준다. 비어 있으면 아무 말도 하지 않는다.
-              */}
-            {rows.length > 0 && (
-                <div className="lw-note">
-                    아래는 예전 방식으로 쌓아 둔 기록입니다. 지금은 위 칸에서 <b>탭별 순위</b>로 재고,
-                    발행 글 전체는 맨 위 <b>[전체 글 점검]</b>에서 봅니다.
-                </div>
-            )}
-
-            {rows.length > 0 && (
-                <section className="lw-panel" aria-label="추적 중인 키워드">
-                    <div className="lw-panel-head">
-                        <h2>추적 목록</h2>
-                        <span>{rows.length}건 · 이 브라우저에만 저장</span>
-                    </div>
-                    <div className="lw-table-scroll">
-                        <table className="lw-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">키워드</th>
-                                    <th scope="col">순위</th>
-                                    <th scope="col">확인한 글</th>
-                                    <th scope="col">확인 시각</th>
-                                    <th scope="col" aria-label="동작" />
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {rows.map((row) => (
-                                    <tr key={row.id}>
-                                        <th scope="row">
-                                            {row.keyword}
-                                            <small>{row.target}</small>
-                                        </th>
-                                        <td className={row.rank === null ? 'lw-rank-out' : 'lw-rank-in'}>
-                                            {row.rank === null ? `${row.scanned}건 중 없음` : `${row.rank}위`}
-                                        </td>
-                                        <td className="lw-rank-title">
-                                            {row.link
-                                                ? <a href={row.link} target="_blank" rel="noreferrer">{row.title || '내 글'}</a>
-                                                : '—'}
-                                        </td>
-                                        <td>
-                                            {new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
-                                                .format(new Date(row.checkedAt))}
-                                        </td>
-                                        <td className="lw-row-actions">
-                                            <button type="button" className="lw-mini" onClick={() => run(row.keyword, row.target)}>다시</button>
-                                            <button type="button" className="lw-mini lw-mini-ghost" onClick={() => removeRow(row.id)}>삭제</button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            )}
             {/* 글 진단 창 — 실측 3종 + 본문을 읽은 결과만 싣는다. */}
             {analyzeRow && (
                 <div className="lw-plan-backdrop" role="presentation" onClick={() => setAnalyzeRow(null)}>

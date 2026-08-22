@@ -677,8 +677,14 @@ function LewordStyles() {
             .lw-tabrank { margin: 12px 0 18px; padding: 14px 16px; border-radius: 13px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
             .lw-tabrank-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
             .lw-tabrank-head b { font-size: 14px; color: #ffa500; }
-            .lw-tabrank-head a { font-size: 11.5px; color: rgba(235,242,250,.45); text-decoration: none; word-break: break-all; }
+            .lw-tabrank-head a { flex: 1; min-width: 160px; font-size: 11.5px; color: rgba(235,242,250,.45); text-decoration: none; word-break: break-all; }
             .lw-tabrank-head a:hover { color: rgba(235,242,250,.7); }
+            .lw-tabrank-head button {
+                border: 1px solid rgba(255,255,255,.14); background: transparent; color: rgba(235,242,250,.65);
+                border-radius: 8px; padding: 6px 13px; cursor: pointer; font: inherit; font-size: 12px; font-weight: 700;
+            }
+            .lw-tabrank-head button:hover:not(:disabled) { border-color: rgba(255,165,0,.5); color: #ffa500; }
+            .lw-tabrank-head button:disabled { opacity: .55; cursor: not-allowed; }
             .lw-tabrank-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
             .lw-tabrank-card {
                 display: flex; flex-direction: column; gap: 3px; text-decoration: none;
