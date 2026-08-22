@@ -92,11 +92,18 @@ function loadAudit(): AuditState | null {
 }
 
 /** 엔진별 수동 확인 링크 — 자동 판정이 애매하면 눈으로 검증하는 문이다. */
+/*
+ * 다음·줌은 뺐다(사장님 지시 2026-08-22). 유입이 사실상 없는 판이라 칸만
+ * 차지했고, 어차피 "없음"만 줄줄이 찍혔다. 구글 하나만 남긴다 —
+ * 방문자 브라이트데이터 키가 있으면 실제로 재고, 없으면 "확인 필요"다.
+ */
 const ENGINE_META: Array<{ id: keyof EngineExposure; label: string; search: (q: string) => string }> = [
     { id: 'google', label: '구글', search: (q) => `https://www.google.com/search?q=${encodeURIComponent(q)}` },
-    { id: 'daum', label: '다음', search: (q) => `https://search.daum.net/search?w=web&q=${encodeURIComponent(q)}` },
-    { id: 'zum', label: '줌', search: (q) => `https://search.zum.com/search.zum?method=webpage&option=accu&query=${encodeURIComponent(q)}` },
 ];
+
+/** 네이버에서 이 검색어로 실제 결과를 보는 주소 — 노출된 글은 바로 가서 확인한다. */
+const naverSearchUrl = (query: string) =>
+    `https://search.naver.com/search.naver?where=web&query=${encodeURIComponent(query)}`;
 
 const PLATFORM_LABEL: Record<string, string> = {
     naver: '네이버 블로그',
@@ -120,6 +127,11 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
     const [auditError, setAuditError] = useState('');
     /** 진행 중 감사를 새 감사가 밀어내면 이전 루프를 멈춘다. */
     const auditRunId = useRef(0);
+    /*
+     * 노출/미노출을 갈라 본다(사장님 지시 2026-08-22 "노출된 거랑 노출 안 된 거랑
+     * 나눠서 볼 수 있게"). 200건을 한 판에 두면 무엇을 손봐야 하는지 안 보인다.
+     */
+    const [auditFilter, setAuditFilter] = useState<'all' | 'in' | 'out'>('all');
 
     /*
      * 글 진단(사장님 확정 2026-08-20 "키워드 추출이 아니라 글을 분석해야") —
@@ -328,10 +340,29 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                         </h2>
                         <span>
                             순위 세 눈(각각 상위 100 실측): <strong>키워드</strong>(제목의 핵심어 검색 — 사람이 실제로 치는 것)
-                            → <strong>확장</strong>(핵심어+한정어) → <strong>제목검색</strong>(제 제목으로도 안 잡히면 차단·저품질 의심).
-                            각 칸 아래 회색 글씨가 실제 사용한 검색어입니다 · 조회수는 공개 API 가 없어 싣지 않습니다
+                            → <strong>확장</strong>(핵심어+한정어) → <strong>제목검색</strong>(제 제목으로 잡히는지).
+                            각 칸 아래 회색 글씨가 실제 사용한 검색어이고, <strong>순위를 누르면 그 검색결과로 갑니다</strong>.
+                            자체 도메인(워드프레스)은 웹문서 검색으로 잽니다 — 블로그 검색에는 원래 안 잡힙니다.
+                            조회수·공감은 공개 API 가 없어 싣지 않습니다.
                         </span>
                     </div>
+                    {(() => {
+                        const done = audit.rows.filter((row) => row.status === 'done');
+                        const shown = done.filter((row) => row.rank !== null).length;
+                        return (
+                            <div className="lw-audit-filters" role="group" aria-label="노출 여부로 나눠 보기">
+                                <button type="button" className={auditFilter === 'all' ? 'on' : ''} onClick={() => setAuditFilter('all')}>
+                                    전체 <em>{audit.rows.length}</em>
+                                </button>
+                                <button type="button" className={auditFilter === 'in' ? 'on' : ''} onClick={() => setAuditFilter('in')}>
+                                    노출됨 <em>{shown}</em>
+                                </button>
+                                <button type="button" className={auditFilter === 'out' ? 'on' : ''} onClick={() => setAuditFilter('out')}>
+                                    노출 안 됨 <em>{done.length - shown}</em>
+                                </button>
+                            </div>
+                        );
+                    })()}
                     <div className="lw-table-scroll">
                         <table className="lw-table lw-audit-table">
                             <thead>
@@ -339,7 +370,6 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                     <th scope="col">상태</th>
                                     <th scope="col">제목</th>
                                     <th scope="col">발행일</th>
-                                    <th scope="col">공감·댓글</th>
                                     <th scope="col">키워드 순위</th>
                                     <th scope="col">확장 순위</th>
                                     <th scope="col" title="그 글의 제목을 그대로 검색했을 때의 자리 — 생존 확인">네이버 제목검색</th>
@@ -356,7 +386,10 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                 </tr>
                             </thead>
                             <tbody>
-                                {audit.rows.map((row) => (
+                                {audit.rows.filter((row) => (auditFilter === 'all'
+                                    ? true
+                                    // 확인 전인 줄은 아직 어느 쪽인지 모른다 — 나눠 볼 때는 숨긴다.
+                                    : row.status === 'done' && (auditFilter === 'in' ? row.rank !== null : row.rank === null))).map((row) => (
                                     <tr key={row.link}>
                                         <td>
                                             {row.status === 'wait' && <span className="lw-audit-badge lw-audit-wait">대기</span>}
@@ -390,26 +423,32 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                             <a href={row.link} target="_blank" rel="noreferrer">{row.title}</a>
                                         </td>
                                         <td>{row.publishedAt || '—'}</td>
-                                        <td>
-                                            {row.sympathy !== null ? `공감 ${row.sympathy}` : ''}
-                                            {row.sympathy !== null && row.comments !== null ? ' · ' : ''}
-                                            {row.comments !== null ? `댓글 ${row.comments}` : ''}
-                                            {row.sympathy === null && row.comments === null ? '—' : ''}
-                                        </td>
                                         <td className={row.kwRank === null ? 'lw-rank-out' : 'lw-rank-in'}>
-                                            {row.status !== 'done' ? '—' : row.kwRank != null ? `${row.kwRank}위` : row.kwQuery ? '없음' : '—'}
+                                            {/*
+                                              * 노출된 자리는 눌러서 그 검색결과로 바로 간다
+                                              * (사장님 지시 2026-08-22 "노출됐으면 노출된 검색결과를
+                                              * 바로 갈 수 있게"). 순위만 적어 두면 눈으로 확인하려고
+                                              * 검색어를 다시 쳐야 한다.
+                                              */}
+                                            {row.status !== 'done' ? '—' : row.kwRank != null
+                                                ? <a className="lw-rank-go" href={naverSearchUrl(row.kwQuery || '')} target="_blank" rel="noreferrer" title="이 검색결과 보기">{row.kwRank}위 ↗</a>
+                                                : row.kwQuery ? '없음' : '—'}
                                             {row.kwQuery && (onAnalyze
                                                 ? <button type="button" className="lw-audit-q lw-audit-q-btn" title="키워드 분석 탭으로" onClick={() => onAnalyze(row.kwQuery!)}>{row.kwQuery}</button>
                                                 : <small className="lw-audit-q">{row.kwQuery}</small>)}
                                         </td>
                                         <td className={row.extRank === null ? 'lw-rank-out' : 'lw-rank-in'}>
-                                            {row.status !== 'done' ? '—' : row.extRank != null ? `${row.extRank}위` : row.extQuery ? '없음' : '—'}
+                                            {row.status !== 'done' ? '—' : row.extRank != null
+                                                ? <a className="lw-rank-go" href={naverSearchUrl(row.extQuery || '')} target="_blank" rel="noreferrer" title="이 검색결과 보기">{row.extRank}위 ↗</a>
+                                                : row.extQuery ? '없음' : '—'}
                                             {row.extQuery && row.extQuery !== row.kwQuery && (onAnalyze
                                                 ? <button type="button" className="lw-audit-q lw-audit-q-btn" title="키워드 분석 탭으로" onClick={() => onAnalyze(row.extQuery!)}>{row.extQuery}</button>
                                                 : <small className="lw-audit-q">{row.extQuery}</small>)}
                                         </td>
                                         <td className={row.rank === null ? 'lw-rank-out' : 'lw-rank-in'}>
-                                            {row.status !== 'done' ? '—' : row.rank !== null ? `${row.rank}위` : `${row.sampled}건 중 없음`}
+                                            {row.status !== 'done' ? '—' : row.rank !== null
+                                                ? <a className="lw-rank-go" href={naverSearchUrl(row.title)} target="_blank" rel="noreferrer" title="이 검색결과 보기">{row.rank}위 ↗</a>
+                                                : `${row.sampled}건 중 없음`}
                                         </td>
                                         {ENGINE_META.map((engine) => {
                                             const state = row.engines ? row.engines[engine.id] : null;
