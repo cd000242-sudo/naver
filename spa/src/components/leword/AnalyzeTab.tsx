@@ -182,7 +182,12 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                 return typeof r.searchVolume === 'number' && r.searchVolume > 0;
             })
             .sort((a, b) => (b.searchVolume || 0) - (a.searchVolume || 0))
-            .slice(0, 40);
+            /*
+             * 가지는 넉넉히 보여 준다(사장님 2026-08-23 "가지는 많을수록 좋아.
+             * 그래야 생각지도 못한 키워드를 찾거든"). 자리 판정(문서수)은
+             * 아래에서 상위 40건만 잰다 — 그 이상은 네이버가 속도로 막는다(실측).
+             */
+            .slice(0, 120);
     })();
 
     /*
@@ -202,7 +207,12 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
         docsFor.current = result.keyword;
         setExpState('loading');
         let cancelled = false;
-        fetchKeywordDocs(expansionRows.map((r) => r.keyword))
+        /*
+         * 문서수는 상위 40건만 — 실측: 40건은 100% 통과(6.7초), 60건은 83%,
+         * 92건은 54%. 검색량이 큰 쪽부터 재야 판정이 쓸모 있는 자리에 붙는다.
+         * 못 잰 줄도 표에는 남아 [더 파기]로 이어 갈 수 있다.
+         */
+        fetchKeywordDocs(expansionRows.slice(0, 40).map((r) => r.keyword))
             .then((res) => {
                 if (cancelled) return;
                 if (res.ok && res.data) setExpDocs(res.data.docs || {});
