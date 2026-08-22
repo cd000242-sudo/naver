@@ -105,7 +105,7 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
      * "만약 없으면 연관된 키워드를 넣어라, 방향만 살짝 바꿔서").
      * 자동완성이 공급원이라 같은 주제로 뻗는다.
      */
-    const [extraExp, setExtraExp] = useState<Array<{ keyword: string; searchVolume: number | null }>>([]);
+    const [extraExp, setExtraExp] = useState<Array<{ keyword: string; searchVolume: number | null; drifted?: boolean }>>([]);
     const [widenedFrom, setWidenedFrom] = useState<string | null>(null);
     /** 그래프 확대(사장님 지시 2026-08-23 "그래프 클릭하면 크게 볼 수 있게"). */
     const [chartOpen, setChartOpen] = useState(false);
@@ -163,15 +163,15 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
      * 검색량이 있는 것만 남긴다 — 없는 것은 잴 값이 없다.
      */
     const expansionRows = (() => {
-        if (!result) return [] as Array<{ keyword: string; searchVolume: number | null }>;
+        if (!result) return [] as Array<{ keyword: string; searchVolume: number | null; drifted?: boolean }>;
         const pool = boardRow
             ? [...(boardRow.subKeywords || []), ...(boardRow.keywordPool || [])]
             : [];
         const merged = [
-            ...pool.map((p) => ({ keyword: p.keyword, searchVolume: p.searchVolume ?? null })),
-            ...result.related.map((r) => ({ keyword: r.keyword, searchVolume: r.searchVolume })),
-            // 원래 말로 모자랄 때 자동완성으로 채운 것 — 같은 주제로 뻗은 말이다.
-            ...extraExp,
+            ...pool.map((p) => ({ keyword: p.keyword, searchVolume: p.searchVolume ?? null, drifted: false })),
+            ...result.related.map((r) => ({ keyword: r.keyword, searchVolume: r.searchVolume, drifted: false })),
+            // 자동완성·연관으로 뻗은 가지. drifted 는 주제가 옮겨간 새 가지다.
+            ...extraExp.map((r) => ({ keyword: r.keyword, searchVolume: r.searchVolume, drifted: Boolean(r.drifted) })),
         ];
         const seen = new Set<string>();
         return merged
@@ -182,7 +182,7 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                 return typeof r.searchVolume === 'number' && r.searchVolume > 0;
             })
             .sort((a, b) => (b.searchVolume || 0) - (a.searchVolume || 0))
-            .slice(0, 24);
+            .slice(0, 40);
     })();
 
     /*
@@ -228,15 +228,19 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
     useEffect(() => {
         if (!result) return;
         if (expFor.current === result.keyword) return;
-        // 보드 풀 + 연관으로 이미 충분하면 부르지 않는다.
-        const own = (boardRow ? [...(boardRow.subKeywords || []), ...(boardRow.keywordPool || [])] : []).length
-            + result.related.length;
-        if (own >= 6) return;
+        /*
+         * **늘 부른다**(2026-08-23 방향 수정). 처음엔 확장어가 얇을 때만 불렀는데,
+         * 사장님이 원하는 건 가지 뻗기다 — "조금이라도 연관된 키워드를 알려주면
+         * 관련된 걸 가지로 뻗어나가면서 전혀 관련 없는 키워드라도 황금키워드
+         * 발굴이 될 거 아냐." 그러니 충분해 보여도 가지를 더 준다.
+         */
         expFor.current = result.keyword;
         let cancelled = false;
         fetchKeywordExpansions(result.keyword).then((res) => {
             if (cancelled || !res.ok || !res.data) return;
-            setExtraExp(res.data.items.map((item) => ({ keyword: item.keyword, searchVolume: item.searchVolume })));
+            setExtraExp(res.data.items.map((item) => ({
+                keyword: item.keyword, searchVolume: item.searchVolume, drifted: item.drifted,
+            })));
             setWidenedFrom(res.data.widenedFrom);
         }).catch(() => { /* 보충이 없어도 표는 그대로 */ });
         return () => { cancelled = true; };
@@ -604,7 +608,13 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                                             .sort((a, b) => (b.ratio ?? -1) - (a.ratio ?? -1))
                                             .map((row) => (
                                                 <tr key={row.keyword}>
-                                                    <td>{row.keyword}</td>
+                                                    <td>
+                                                        {row.keyword}
+                                                        {row.drifted && (
+                                                            /* 주제가 옮겨간 말 — 버릴 것이 아니라 새로 뻗을 가지다. */
+                                                            <span className="lw-branch-new">새 가지</span>
+                                                        )}
+                                                    </td>
                                                     <td>{typeof row.searchVolume === 'number' ? formatCount(row.searchVolume) : '—'}</td>
                                                     <td>{typeof row.docs === 'number' ? formatCount(row.docs) : (expState === 'loading' ? '재는 중' : '—')}</td>
                                                     <td>{row.ratio === null ? '—' : row.ratio.toFixed(2)}</td>

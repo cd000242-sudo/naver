@@ -1805,6 +1805,7 @@ function LewordStyles() {
             .lw-analyze-spark-btn { display: block; width: 100%; text-align: left; border: 1px solid rgba(255,255,255,.09); cursor: pointer; position: relative; }
             .lw-analyze-spark-btn:hover { border-color: rgba(167,139,250,.5); }
             .lw-spark-more { position: absolute; top: 8px; right: 10px; font-size: 11px; color: #8a94a6; }
+            .lw-branch-new { margin-left: 7px; padding: 1px 7px; border: 1px solid rgba(167,139,250,.4); border-radius: 999px; color: #c4b5fd; font-size: 11px; }
             /* 확장 키워드 자리 판정 — 색은 사실 셋(있음·좁음·없음)만 가른다. */
             .lw-slot-open { color: #34d399; font-weight: 600; }
             .lw-slot-tight { color: #fbbf24; }
