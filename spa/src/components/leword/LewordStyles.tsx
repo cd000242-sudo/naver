@@ -567,9 +567,28 @@ function LewordStyles() {
             .lw-engine-row.on { border-color: rgba(255,165,0,.5); background: rgba(255,165,0,.07); }
             .lw-engine-name b { display: block; font-size: 14.5px; color: #ebf2fa; }
             .lw-engine-name small { display: block; margin-top: 2px; font-size: 11.5px; color: rgba(235,242,250,.5); }
-            .lw-engine-state { font-size: 12px; font-weight: 700; color: rgba(235,242,250,.55); white-space: nowrap; }
+            /* 상태 문구가 길어졌다 — "앱에만 연동"과 "사이트까지 연동"을 구분해야 해서다.
+               좁은 화면에서 줄바꿈되도록 nowrap 을 풀고 오른쪽 정렬로 붙인다. */
+            .lw-engine-state { font-size: 12px; font-weight: 700; color: rgba(235,242,250,.55); text-align: right; max-width: 230px; line-height: 1.45; }
             .lw-engine-state.ok { color: #2ecc71; }
-            .lw-engine-actions { display: flex; gap: 6px; }
+            /* 앱에만 연동된 상태 — 초록이 아니라 "할 일이 남았다"는 색으로 구분한다. */
+            .lw-engine-state.half { color: #f0b53f; }
+
+            /* 연동 순서 — 무엇을 먼저 해야 하는지가 화면에 없어서 생긴 혼선을 없앤다. */
+            .lw-connect-steps { margin: 0 0 12px; padding: 14px 16px 14px 34px; border: 1px solid rgba(255,165,0,.28); border-radius: 12px; background: rgba(255,165,0,.05); display: grid; gap: 7px; }
+            .lw-connect-steps li { font-size: 12.5px; line-height: 1.6; color: rgba(235,242,250,.72); }
+            .lw-connect-steps li b { color: #ebf2fa; }
+            /*
+             * 연동 버튼이 실제로 눌리게(사장님 지적 2026-08-22 "연동이 안 된다").
+             *
+             * 우측 플로팅 스택(단톡방·유튜브·1:1 문의 등, z-index 10001)이 화면에
+             * 고정돼 있어 이 줄의 버튼 위를 덮고 있었다. 실측: 제미나이·그록은
+             * [연동]·[사용] 둘 다, 코덱스는 [사용]이 클릭을 못 받았다
+             * (elementFromPoint 로 확인 — 그 좌표에서 잡히는 건 lp-float-link 였다).
+             * 화면엔 버튼이 보이는데 눌러도 아무 일이 없으니 "연동이 안 되는" 것으로만 보인다.
+             * 이 줄의 버튼을 플로팅보다 위로 올려 클릭을 되찾는다.
+             */
+            .lw-engine-actions { display: flex; gap: 6px; position: relative; z-index: 10002; }
             .lw-engine-key { grid-column: 1 / -1; display: flex; align-items: flex-end; gap: 10px; margin-top: 4px; }
             .lw-engine-key label { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; color: rgba(235,242,250,.6); }
             .lw-engine-key input { width: 100%; padding: 8px 11px; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; font-family: Consolas, monospace; }
