@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { checkClaudeToken, exchangeClaudeOauth, fetchClaudeUsage, type ClaudeUsage } from '../../lib/keywordApi';
-import { bridgeAgentLogin, probeBridge, type BridgeStatus } from '../../lib/bridge';
+import { bridgeAgentLogin, bridgeClaudeCredentials, probeBridge, type BridgeStatus } from '../../lib/bridge';
 import {
     KEY_GROUPS,
     checkKeyShape,
@@ -101,7 +101,41 @@ function KeysTab() {
     const base64url = (bytes: Uint8Array) => btoa(String.fromCharCode(...bytes))
         .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
+    /*
+     * [연동] — 앱이 켜져 있으면 **승인 창 없이 한 번에** 끝난다.
+     *
+     * 사장님 지시 2026-08-22: "앱만 켜놓고 연동시키고 나서 사이트도 같이
+     * 연동시키면 끝나는 거 아니야?" — 맞다. 클로드 CLI 는 로그인 자격을
+     * sk-ant 토큰으로 들고 있어 사이트 서버가 그대로 쓸 수 있다. 앱에서 이미
+     * 로그인해 둔 것을 건네받으면 브라우저 승인 절차가 통째로 필요 없다.
+     * 앱이 꺼져 있거나 클로드 로그인 전이면 예전처럼 승인 창으로 간다.
+     */
     const startClaudeConnect = async () => {
+        setOauthNote('앱에 물어보는 중…');
+        const fromApp = await bridgeClaudeCredentials();
+        if (fromApp.status === 'ok') {
+            const next = {
+                ...keys,
+                claudeToken: fromApp.token,
+                claudeRefresh: fromApp.refresh,
+                claudeExpiresAt: fromApp.expiresAt ? String(fromApp.expiresAt) : '',
+                aiProvider: keys.aiProvider || 'claude',
+            };
+            setKeys(next);
+            saveUserKeys(next);
+            setOauth(null);
+            const planText = fromApp.subscriptionType ? ` (${fromApp.subscriptionType} 구독)` : '';
+            setOauthNote(`✅ 앱에서 바로 연동했습니다${planText} — 이제 앱을 꺼도 사이트에서 전부 돕니다.`);
+            return;
+        }
+        if (fromApp.status === 'not-logged-in') {
+            setOauthNote('앱은 켜져 있는데 클로드 로그인이 없습니다 — 앱에서 클로드 로그인을 먼저 하시거나, 아래 승인 절차로 연결하세요.');
+        } else if (fromApp.status === 'outdated') {
+            setOauthNote('앱이 구버전이라 자동 연동이 안 됩니다 — 앱을 업데이트하시거나 아래 승인 절차로 연결하세요.');
+        } else {
+            setOauthNote('앱이 꺼져 있어 승인 절차로 연결합니다 (앱을 켜면 버튼 한 번으로 끝납니다).');
+        }
+
         const raw = new Uint8Array(32);
         crypto.getRandomValues(raw);
         const verifier = base64url(raw);

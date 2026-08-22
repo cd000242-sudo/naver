@@ -90,7 +90,18 @@ function RadarTab() {
         const analyzed = await fetchRadarAnalyze(target);
         if (!analyzed.ok || !analyzed.data) {
             setPhase('idle');
-            setError(analyzed.message || '글을 분석하지 못했습니다.');
+            /*
+             * 자격이 없어서 막힌 것은 "실패"가 아니라 "아직 준비가 안 된 것"이다.
+             * 앱에서 엔진이 다 연동돼 있어도 이 화면은 안 도는데, 그 이유가
+             * 화면에 없으면 사용자는 무엇을 더 해야 하는지 알 수가 없다
+             * (사장님 지적 2026-08-22 "연동이 문제 있으면 절대 안 된다").
+             * 레이더는 다른 화면과 달리 **자기 PC 의 앱으로 대신 돌 수 없다** —
+             * 남의 사이트를 대신 읽어 오는 브라이트데이터 몫이 서버에 있기 때문이다.
+             */
+            setError(analyzed.error === 'needs-keys'
+                ? '레이더는 [내 API 키] 탭에 ① 브라이트데이터 키와 ② 엔진 토큰(클로드 [연동] 버튼 한 번)이 둘 다 있어야 돕니다.'
+                  + ' 앱 연동만으로는 안 됩니다 — 이 화면은 남의 사이트를 대신 읽어 오는 부분이 서버에 있어서입니다.'
+                : (analyzed.message || '글을 분석하지 못했습니다.'));
             return;
         }
         const meta = analyzed.data.analysis;
@@ -123,7 +134,9 @@ function RadarTab() {
             // 평가가 죽어도 검색 결과는 보여준다 — 빈 화면이 최악이다(§27)
             setItems(searched.data.items.map((item) => ({ ...item, evaluated: false })));
             setPhase('done');
-            setError(evaluated.message || 'AI 평가에 실패해 검색 결과만 보여드립니다.');
+            setError(evaluated.error === 'needs-keys'
+                ? '판 평가는 엔진 토큰이 필요합니다 — [내 API 키] 탭의 클로드 [연동] 버튼 한 번이면 됩니다. 검색 결과는 그대로 보여드립니다.'
+                : (evaluated.message || 'AI 평가에 실패해 검색 결과만 보여드립니다.'));
             return;
         }
         setItems(evaluated.data.items);

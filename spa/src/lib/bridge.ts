@@ -179,6 +179,132 @@ export async function bridgeAgentLogin(
     return body?.result || null;
 }
 
+/**
+ * 앱이 들고 있는 클로드 구독 자격을 받아 온다 — [연동] 버튼 한 번의 실체.
+ *
+ * 사장님 지시 2026-08-22: "앱만 켜놓고 연동시키고 나서 사이트도 같이
+ * 연동시키면 끝나는 거 아니야?" — 맞다. 클로드는 CLI 가 자격을 sk-ant 토큰으로
+ * 들고 있어 사이트 서버가 그대로 쓸 수 있다. 이 한 번이면 사이트는 **앱을 꺼도**
+ * 전부 돈다(유튜브 글감·레이더·글 진단까지).
+ *
+ * 코덱스·제미나이·그록은 각 서비스의 로그인 세션이라 서버가 쓸 토큰으로 바꿀
+ * 방법이 없다(실측). 그 셋은 앱을 켜 두고 앱 경유로 쓴다.
+ */
+export type BridgeClaudeCredentials =
+    | {
+        status: 'ok';
+        token: string;
+        refresh: string;
+        expiresAt: number;
+        /** 실측 구독 유형(예: "max"). CLI 자격 파일에 그대로 있다. */
+        subscriptionType: string;
+        /** 실측 요금제 등급 — 사용량 안내에 쓴다. */
+        rateLimitTier: string;
+    }
+    | { status: 'not-logged-in' }
+    | { status: 'offline' }
+    /** 앱은 떠 있는데 이 경로가 없음(404) — 구버전. */
+    | { status: 'outdated' };
+
+export async function bridgeClaudeCredentials(): Promise<BridgeClaudeCredentials> {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 12_000);
+    try {
+        const response = await fetch(`${BRIDGE_BASE}/v1/bridge/claude-credentials`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            signal: controller.signal,
+        });
+        if (response.status === 404) return { status: 'outdated' };
+        const body = await response.json().catch(() => null) as
+            { ok?: boolean; result?: { ok?: boolean; token?: string; refresh?: string; expiresAt?: number; subscriptionType?: string; rateLimitTier?: string } } | null;
+        const result = body?.result;
+        if (response.ok && body?.ok && result?.ok && result.token) {
+            return {
+                status: 'ok',
+                token: result.token,
+                refresh: result.refresh || '',
+                expiresAt: Number(result.expiresAt) || 0,
+                subscriptionType: result.subscriptionType || '',
+                rateLimitTier: result.rateLimitTier || '',
+            };
+        }
+        return { status: 'not-logged-in' };
+    } catch {
+        return { status: 'offline' };
+    } finally {
+        window.clearTimeout(timer);
+    }
+}
+
+/**
+ * 글감 추론 — 앱(본인 구독)으로 돌린다.
+ *
+ * 왜 필요한가(사장님 지적 2026-08-22 "연동이 문제 있으면 절대 안 된다"):
+ * 유튜브 글감·레이더 카드는 클라우드 워커만 불렀다. 워커는 사이트에 저장된
+ * 토큰이 있어야 돌고 사용자 PC 의 CLI 로그인에는 닿을 수 없어서, 앱에서
+ * 네 엔진이 전부 "연동됨"인데도 화면은 "연동하세요"를 띄웠다.
+ * 서버가 needs-keys 를 돌려주면 이 경로로 넘어온다.
+ */
+export type BridgePostIdea = {
+    keyword: string;
+    sub?: string;
+    why?: string;
+    clickWhy?: string;
+    seo?: string;
+    home?: string;
+};
+
+export type BridgePostIdeasResult =
+    | { status: 'ok'; ideas: BridgePostIdea[]; provider: string }
+    /** 연결 자체가 안 됨 — 앱이 꺼져 있거나 설치 전. */
+    | { status: 'offline' }
+    /** 앱은 떠 있는데 이 경로가 없음(404) — 구버전, 업데이트가 답이다. */
+    | { status: 'outdated' }
+    | { status: 'error'; message: string };
+
+export async function bridgePostIdeas(input: {
+    kind: 'keyword' | 'kin';
+    keyword?: string;
+    context?: string;
+    title?: string;
+    body?: string;
+    /** 사용자가 고른 엔진. 비면 앱이 순서대로 시도한다. */
+    provider?: string;
+}): Promise<BridgePostIdeasResult> {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 150_000);
+    try {
+        const response = await fetch(`${BRIDGE_BASE}/v1/bridge/post-ideas`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+                kind: input.kind,
+                keyword: input.keyword || '',
+                context: input.context || '',
+                title: input.title || '',
+                body: input.body || '',
+                provider: input.provider || '',
+            }),
+            signal: controller.signal,
+        });
+        // 404 = 앱은 살아 있는데 이 기능이 실리기 전 버전이다 — "꺼짐"과 구분해야
+        // 사용자가 헛되이 앱을 껐다 켰다 하지 않는다(kin-answer 와 같은 규칙).
+        if (response.status === 404) return { status: 'outdated' };
+        const body = await response.json().catch(() => null) as
+            { ok?: boolean; error?: string; result?: { ideas?: BridgePostIdea[]; provider?: string } } | null;
+        const ideas = body?.result?.ideas;
+        if (response.ok && body?.ok && Array.isArray(ideas) && ideas.length > 0) {
+            return { status: 'ok', ideas, provider: body.result?.provider || 'unknown' };
+        }
+        return { status: 'error', message: body?.error || `앱 응답 ${response.status}` };
+    } catch {
+        return { status: 'offline' };
+    } finally {
+        window.clearTimeout(timer);
+    }
+}
+
 export async function bridgeAiSubs(keyword: string): Promise<{
     subs: Array<{ keyword: string; searchVolume: number | null; source?: string }>;
     ai?: { used: boolean; provider: string; proposed: number; verified: number };
