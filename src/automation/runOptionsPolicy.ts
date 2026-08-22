@@ -159,6 +159,10 @@ export function resolveNaverRunOptions(input: ResolveNaverRunOptionsInput): Reco
     ctaText: runOptions.ctaText?.trim(),
     ctas,
     ctaPosition: runOptions.ctaPosition || 'bottom',
+    // [v2.11.206] 장소는 앱에서 확정된 값만 통과시킨다 — 이름이 없으면 삽입 자체가 없다.
+    placeName: runOptions.placeName?.trim() || '',
+    placeAddress: runOptions.placeAddress?.trim() || '',
+    placePosition: runOptions.placePosition || 'bottom',
     skipCta: runOptions.skipCta || false,
     images: normalizeAutomationImages(runOptions.images, log),
     publishMode: (runOptions.publishMode ?? 'publish') as PublishMode,

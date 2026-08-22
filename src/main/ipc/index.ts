@@ -31,6 +31,8 @@ import { registerImageTableHandlers } from './imageTableHandlers';
 import { registerMiscHandlers, registerSessionDiagnosticsHandlers } from './miscHandlers';
 import { registerRecoveryHandlers } from './recoveryHandlers';
 import { registerSerpProbeHandlers } from './serpProbeHandlers';
+// [v2.11.206] 장소 미리 확정용 지역검색 IPC
+import { registerPlaceSearchHandlers } from './placeSearchHandlers';
 // [SPEC-IMAGE-MODEL-001 Phase 1] blob store IPC
 import { registerBlobHandlers } from './blobHandlers';
 // [SPEC-IMAGE-MODEL-001 Phase 6] migration IPC
@@ -109,6 +111,9 @@ export function registerAllHandlers(): void {
 
     // ✅ [v2.10.184 Phase 3.4] SERP 프로브 — 실측 검증 핸들러
     registerSerpProbeHandlers();
+
+    // ✅ [v2.11.206] 장소 검색 — 앱에서 장소를 미리 확정하기 위한 창구
+    registerPlaceSearchHandlers();
 
     // ✅ [SPEC-IMAGE-MODEL-001 Phase 1] blob store IPC
     registerBlobHandlers();

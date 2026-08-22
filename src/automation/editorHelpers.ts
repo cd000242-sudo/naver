@@ -36,7 +36,11 @@ import {
   getExpectedLinkCardMin,
   planEditorTail,
   selectSectionCtas,
+  shouldInsertPlaceAtHeading,
+  shouldInsertPlaceAtBottom,
 } from './editorTailPlan.js';
+// [v2.11.206] 장소(지도) 블록 삽입 — 앱에서 확정한 업체명/주소로만 동작한다.
+import { insertPlaceBlock } from './placeHelpers.js';
 import {
   buildExpectedOrderAnchors,
   countExpectedArticleTables,
@@ -2261,6 +2265,20 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           self.log(`   ✅ ${i + 1}번 소제목 CTA 삽입 완료`);
         }
 
+        // d-2) [v2.11.206] 장소 블록 — 앱에서 미리 확정해 둔 가게를 이 소제목 아래 삽입.
+        //   실패해도 발행은 그대로 간다(insertPlaceBlock은 throw 하지 않는다).
+        if (shouldInsertPlaceAtHeading(resolved.placeName, resolved.placePosition, i + 1)) {
+          self.log(`   → 장소 삽입 중... (${i + 1}번 소제목 아래, "${resolved.placeName}")`);
+          await page.keyboard.press('Enter');
+          await self.delay(self.DELAYS.MEDIUM);
+          const placeFrame = (await self.getAttachedFrame()) || frame;
+          await insertPlaceBlock(self, page, placeFrame, {
+            name: resolved.placeName,
+            address: resolved.placeAddress,
+          });
+          await self.delay(self.DELAYS.MEDIUM);
+        }
+
         // e) 다음 섹션 준비 (마지막 섹션이 아니면 구분선 추가)
         if (i < headings.length - 1) {
           self.log(`   → 구분선 생성 중...`);
@@ -2614,6 +2632,25 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
     // ✅ 중복 문구 제거됨: '쇼핑커넥트 수익이 발생할 수 있습니다' 문구는 
     // 이미 위에서 '제휴 마케팅 고지 문구'로 처리되므로 별도 추가하지 않음
+
+    // [v2.11.206] 장소 위치가 'bottom'이면 해시태그 바로 앞에 넣는다 — 맛집/여행 글의
+    //   관례적 위치. 소제목 위치를 고른 경우엔 섹션 루프에서 이미 들어갔으므로 건너뛴다.
+    if (shouldInsertPlaceAtBottom(resolved.placeName, resolved.placePosition)) {
+      const placePage = self.ensurePage();
+      const placeFrame = await self.getAttachedFrame();
+      if (placeFrame) {
+        self.log(`   → 장소 삽입 중... (본문 맨 끝, "${resolved.placeName}")`);
+        await placePage.keyboard.press('Enter');
+        await self.delay(self.DELAYS.MEDIUM);
+        await insertPlaceBlock(self, placePage, placeFrame, {
+          name: resolved.placeName,
+          address: resolved.placeAddress,
+        });
+        await self.delay(self.DELAYS.MEDIUM);
+      } else {
+        self.log('   ⚠️ [장소] 에디터 프레임을 잡지 못해 건너뜁니다.');
+      }
+    }
 
     const hashtagsToApply = tailPlan.hashtagsToApply;
     await applyTailHashtagsAfterCards({

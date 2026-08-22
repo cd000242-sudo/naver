@@ -215,6 +215,10 @@ type RendererAutomationPayload = {
   ctaText?: string;
   ctas?: Array<{ text: string; link?: string }>;
   ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
+  // [v2.11.206] 앱에서 미리 확정한 장소 — 발행 시 그대로 에디터에 꽂는다.
+  placeName?: string;
+  placeAddress?: string;
+  placePosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
   skipCta?: boolean; // ✅ CTA 없이 발행하기
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
@@ -670,6 +674,8 @@ interface AutomationAPI {
   analyzeExposedStructure: (url: string) => Promise<{ success: boolean; block: string; profile?: any; message?: string }>;
   matchImages: (payload: { headings: any[]; collectedImages: any[]; scSubImageSource?: 'ai' | 'collected' }) => Promise<{ success: boolean; assignments?: any[]; message?: string }>;
   searchNaverImages: (keyword: string) => Promise<{ success: boolean; images?: any[]; message?: string }>; // ✅ 네이버 이미지 검색 API
+  // [v2.11.206] 장소(지도) 미리 확정용 지역검색
+  searchPlaces: (query: string) => Promise<{ success: boolean; items?: any[]; message?: string }>;
   // ✅ [100점 개선] AI 이미지 검색어 최적화 API
   optimizeImageSearchQuery: (title: string, heading: string) => Promise<{
     success: boolean;

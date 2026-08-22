@@ -1426,6 +1426,10 @@ type AutomationRequest = {
   ctaText?: string;
   ctas?: Array<{ text: string; link?: string }>;
   ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
+  // [v2.11.206] 앱에서 미리 확정한 장소 — 발행 시 그대로 에디터에 꽂는다.
+  placeName?: string;
+  placeAddress?: string;
+  placePosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
   skipCta?: boolean; // ✅ [신규] CTA 없이 발행
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
@@ -4565,6 +4569,11 @@ import { registerFlowMarathonHandlers } from './main/ipc/flowMarathonHandlers.js
 registerFlowMarathonHandlers();
 import { registerTitleQualityHandlers } from './main/ipc/titleQualityHandlers.js';
 registerTitleQualityHandlers();
+// [v2.11.206] place:search — 앱에서 장소를 미리 확정하는 지역검색 창구.
+//   registerAllHandlers()는 여기서 호출되지 않으므로(위 v2.10.203/v2.11.34 주석 참고)
+//   index.ts 등록만으로는 죽은 핸들러가 된다. 반드시 여기서도 등록한다.
+import { registerPlaceSearchHandlers } from './main/ipc/placeSearchHandlers.js';
+registerPlaceSearchHandlers();
 // [v2.10.242] file:* 8개 IPC 핸들러 — main.ts에서 main/ipc/fileHandlers.ts 로 분리
 import { registerFileHandlers } from './main/ipc/fileHandlers.js';
 registerFileHandlers();

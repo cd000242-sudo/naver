@@ -44,6 +44,10 @@ export interface AutomationRequest {
     ctaText?: string;
     ctas?: any[];
     ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
+    // [v2.11.206] 앱에서 미리 확정한 장소 — 발행 시 그대로 에디터에 꽂는다.
+    placeName?: string;
+    placeAddress?: string;
+    placePosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
     skipCta?: boolean;
     skipImages?: boolean;
     thumbnailPath?: string;

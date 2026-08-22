@@ -50,6 +50,31 @@ export function resolveCtaPosition(cta: EditorTailCta | undefined, globalPositio
   return global || 'bottom';
 }
 
+/**
+ * [v2.11.206] 이 섹션 아래에 장소 블록을 넣을 차례인지.
+ *
+ * 장소는 CTA와 달리 글당 하나뿐이라 목록이 아니라 위치 문자열 하나만 본다.
+ * 이름이 비어 있으면(앱에서 확정 안 함) 어떤 위치든 삽입하지 않는다.
+ */
+export function shouldInsertPlaceAtHeading(
+  placeName: string | undefined,
+  placePosition: string | undefined,
+  headingNumber: number,
+): boolean {
+  if (!String(placeName || '').trim()) return false;
+  return String(placePosition || '').trim() === `heading-${headingNumber}`;
+}
+
+/** [v2.11.206] 본문 맨 끝(해시태그 앞)에 장소를 넣을 차례인지. */
+export function shouldInsertPlaceAtBottom(
+  placeName: string | undefined,
+  placePosition: string | undefined,
+): boolean {
+  if (!String(placeName || '').trim()) return false;
+  const position = String(placePosition || '').trim();
+  return position === '' || position === 'bottom';
+}
+
 /** [v2.11.142] CTAs that belong under heading N (1-based) — per-CTA position with global fallback. */
 export function selectSectionCtas(
   ctas: readonly EditorTailCta[] | undefined,

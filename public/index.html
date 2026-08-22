@@ -1414,6 +1414,43 @@
                                 </label>
                             </div>
 
+                            <!-- [v2.11.206] 장소(지도) 블록 — 맛집·여행 글에 네이버 플레이스를 붙인다.
+                                 발행 중에 고르면 동명 업체가 끼어들 수 있어, 여기서 미리 확정해 둔다. -->
+                            <div class="image-narrative-place-section" style="margin-top: 0.9rem; border: 1px solid var(--border-medium); border-radius: 10px; padding: 0.75rem;">
+                                <label style="display: flex; align-items: center; gap: 0.45rem; font-weight: 700; font-size: 0.85rem; color: var(--text-strong); cursor: pointer;">
+                                    <input type="checkbox" id="image-narrative-place-enabled" />
+                                    📍 글에 장소(지도) 넣기
+                                </label>
+                                <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0.4rem 0 0.6rem; line-height: 1.55;">
+                                    가게를 <strong>여기서 미리 확정</strong>해 두면, 발행할 때 그 가게 그대로 지도 블록이 들어갑니다. 안 고르면 지도는 넣지 않습니다.
+                                </p>
+                                <p style="font-size: 0.76rem; color: var(--text-muted); margin: 0 0 0.6rem; padding: 0.5rem 0.6rem; background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.15); border-radius: 8px; line-height: 1.6;">
+                                    ⚠️ <strong style="color: var(--text-strong);">맛집 · 여행 글에만 쓰세요.</strong> 사진으로 쓰는 후기 글이라 실제 다녀온 가게가 있을 때만 의미가 있습니다.
+                                    <br/>켜 둔 채로 다른 글을 발행하면 그 글에도 지도가 들어갑니다 — 안 쓸 땐 체크를 꺼주세요.
+                                </p>
+                                <div id="image-narrative-place-body" style="display: none;">
+                                    <div style="display: flex; gap: 0.4rem; align-items: center;">
+                                        <input type="text" id="image-narrative-place-query" placeholder="가게 이름으로 검색 (예: 강릉 순두부젤라또)" style="flex: 1; padding: 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem;" />
+                                        <button type="button" id="image-narrative-place-search-btn" style="white-space: nowrap; padding: 0.5rem 0.9rem; font-size: 0.82rem; font-weight: 700; cursor: pointer; background: rgba(212,175,55,0.12); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong);">검색</button>
+                                    </div>
+                                    <div id="image-narrative-place-results" style="margin-top: 0.5rem;"></div>
+                                    <div id="image-narrative-place-selected" style="margin-top: 0.5rem; font-size: 0.82rem; color: var(--text-muted);">아직 고른 장소가 없습니다.</div>
+                                    <label style="display: block; margin-top: 0.6rem; font-size: 0.82rem; color: var(--text-strong);">
+                                        넣을 위치
+                                        <select id="image-narrative-place-position" style="margin-left: 0.4rem; padding: 0.35rem 0.5rem; background: var(--bg-primary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong); font-size: 0.82rem;">
+                                            <option value="bottom">본문 맨 끝 (해시태그 앞)</option>
+                                            <option value="heading-1">1번 소제목 아래</option>
+                                            <option value="heading-2">2번 소제목 아래</option>
+                                            <option value="heading-3">3번 소제목 아래</option>
+                                            <option value="heading-4">4번 소제목 아래</option>
+                                            <option value="heading-5">5번 소제목 아래</option>
+                                            <option value="heading-6">6번 소제목 아래</option>
+                                            <option value="heading-7">7번 소제목 아래</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+
                             <!-- Vision은 메인 AI 글생성 엔진을 그대로 사용 (별도 선택 불필요) -->
                             <div class="image-narrative-provider-section">
                                 <label style="font-weight: 700; font-size: 0.85rem; color: var(--text-strong); display: block; margin-bottom: 0.4rem;">

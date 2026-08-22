@@ -336,6 +336,10 @@ export interface RunOptions {
   ctaText?: string;
   ctas?: Array<{ text: string; link?: string }>;
   ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
+  // [v2.11.206] 앱에서 미리 확정한 장소 — 발행 시 그대로 에디터에 꽂는다.
+  placeName?: string;
+  placeAddress?: string;
+  placePosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
   skipCta?: boolean; // ✅ CTA 없이 발행하기
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   thumbnailPath?: string; // 대표 이미지 경로
@@ -423,6 +427,10 @@ interface ResolvedRunOptions {
   ctaText?: string;
   ctas: Array<{ text: string; link?: string }>;
   ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
+  // [v2.11.206] 앱에서 미리 확정한 장소 — 발행 시 그대로 에디터에 꽂는다.
+  placeName?: string;
+  placeAddress?: string;
+  placePosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
   skipCta?: boolean; // ✅ CTA 없이 발행하기
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   imageMode?: 'full-auto' | 'semi-auto' | 'manual' | 'skip'; // 이미지 모드

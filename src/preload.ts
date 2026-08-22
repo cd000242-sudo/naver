@@ -49,6 +49,10 @@ type AutomationPayload = {
   ctaText?: string;
   ctas?: Array<{ text: string; link?: string }>;
   ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
+  // [v2.11.206] 앱에서 미리 확정한 장소 — 발행 시 그대로 에디터에 꽂는다.
+  placeName?: string;
+  placeAddress?: string;
+  placePosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
   skipCta?: boolean;
   skipImages?: boolean;
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
@@ -851,6 +855,9 @@ contextBridge.exposeInMainWorld('api', {
   // ✅ 네이버 이미지 검색 API
   searchNaverImages: (keyword: string): Promise<{ success: boolean; images?: any[]; message?: string }> =>
     ipcRenderer.invoke('image:searchNaver', keyword),
+  // ✅ [v2.11.206] 네이버 지역검색 — 장소(지도) 블록을 발행 전에 확정하기 위한 창구
+  searchPlaces: (query: string): Promise<{ success: boolean; items?: any[]; message?: string }> =>
+    ipcRenderer.invoke('place:search', query),
   // ✅ [100점 개선] AI 이미지 검색어 최적화 API
   optimizeImageSearchQuery: (title: string, heading: string): Promise<{
     success: boolean;
