@@ -37,7 +37,7 @@ import {
   planEditorTail,
   selectSectionCtas,
   shouldInsertPlaceAtHeading,
-  shouldInsertPlaceAtBottom,
+  shouldInsertPlaceAtTail,
 } from './editorTailPlan.js';
 // [v2.11.206] 장소(지도) 블록 삽입 — 앱에서 확정한 업체명/주소로만 동작한다.
 import { insertPlaceBlock } from './placeHelpers.js';
@@ -704,6 +704,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
   // [SPEC-STABILITY-2026 R2] Reset stale expectations from a previous post so
   // the pre-publish assertion never judges this run against old plans.
   self.__prePublishExpectations = null;
+  // [v2.11.206] 장소 삽입 여부도 글 단위 상태다. 연속발행은 같은 인스턴스를 재사용하므로
+  //   여기서 지우지 않으면 2번째 글부터 "이미 넣었다"고 판단해 장소가 통째로 빠진다.
+  self.__placeHandled = false;
   const strictEditorCommit = isMainProcessEditorCommitStrict(resolved);
 
   await self.retry(async () => {
@@ -1818,22 +1821,33 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             await ensureTailTypingReady(page, imageFrame, (m: string) => self.log(m)).catch(() => false);
             await self.insertImagesAtCurrentCursor(allSectionImages, page, imageFrame, resolved.affiliateLink);
             bodyFrame = (await self.getAttachedFrame());
-            // [2026-06-23] 이미지 직후 캐럿 복구 강화. SmartEditor는 읽기전용 컴포넌트 트리 +
-            // 숨은 입력 프록시 구조라, 이미지가 아직 렌더 중이면 텍스트 캐럿을 못 잡는다(특히 느린 PC
-            // + 다수 이미지). 단발 실패 후 곧장 본문으로 가면 본문이 dead proxy로 들어가 +0자
-            // (="소제목만 작성되고 본문 누락")가 된다. 렌더 안정 대기 + 클릭 기반 캐럿 고정으로 재시도.
-            let bodyReady = await ensureTailTypingReady(page, bodyFrame, (m: string) => self.log(m)).catch(() => false);
-            for (let r = 0; r < 3 && !bodyReady; r++) {
-              await self.delay(800);
-              bodyFrame = (await self.getAttachedFrame());
-              await focusLastEditableLine(page, bodyFrame).catch(() => undefined);
-              bodyReady = await ensureTailTypingReady(page, bodyFrame, (m: string) => self.log(m)).catch(() => false);
-            }
-            if (bodyReady) {
-              self.log('   ✅ 이미지 삽입 후 본문 입력 캐럿 복구 완료');
-            } else {
-              self.log('   ⚠️ 이미지 삽입 후 캐럿 복구가 4회 시도 후에도 불완전 — 본문 입력 단계에서 추가 복구합니다.');
-            }
+          }
+
+          // A-2. [v2.11.207] 본문 입력 직전 캐럿 확보 — 이미지 유무와 무관하게 항상.
+          //
+          // [2026-06-23] 이미지 직후 캐럿 복구 강화. SmartEditor는 읽기전용 컴포넌트 트리 +
+          // 숨은 입력 프록시 구조라, 이미지가 아직 렌더 중이면 텍스트 캐럿을 못 잡는다(특히 느린 PC
+          // + 다수 이미지). 단발 실패 후 곧장 본문으로 가면 본문이 dead proxy로 들어가 +0자
+          // (="소제목만 작성되고 본문 누락")가 된다. 렌더 안정 대기 + 클릭 기반 캐럿 고정으로 재시도.
+          //
+          // [v2.11.207] 이 사다리가 `이미지가 있을 때` 블록 안에 있었다. 그래서 이미지 없는
+          //   섹션은 복구를 통째로 건너뛰고, 소제목(인용구) 직후 캐럿이 본문에 안 잡힌 채로
+          //   본문 입력에 들어가 그대로 +0자가 됐다(사용자 진단 리포트 2026-08-22, v2.11.204:
+          //   섹션 1은 이미지가 있어 통과, 이미지 없는 섹션 2에서
+          //   "editor tail caret unavailable before rich paste" → 타이핑 폴백도 허공 → 발행 차단).
+          //   캐럿은 이미지가 아니라 "본문을 치기 전"에 필요한 것이므로 블록 밖으로 뺀다.
+          const caretContext = allSectionImages.length > 0 ? '이미지 삽입 후' : '소제목 직후';
+          let bodyReady = await ensureTailTypingReady(page, bodyFrame, (m: string) => self.log(m)).catch(() => false);
+          for (let r = 0; r < 3 && !bodyReady; r++) {
+            await self.delay(800);
+            bodyFrame = (await self.getAttachedFrame());
+            await focusLastEditableLine(page, bodyFrame).catch(() => undefined);
+            bodyReady = await ensureTailTypingReady(page, bodyFrame, (m: string) => self.log(m)).catch(() => false);
+          }
+          if (bodyReady) {
+            self.log(`   ✅ ${caretContext} 본문 입력 캐럿 확보 완료`);
+          } else {
+            self.log(`   ⚠️ ${caretContext} 캐럿 확보가 4회 시도 후에도 불완전 — 본문 입력 단계에서 추가 복구합니다.`);
           }
 
           // B. 본문 타이핑
@@ -2269,6 +2283,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         //   실패해도 발행은 그대로 간다(insertPlaceBlock은 throw 하지 않는다).
         if (shouldInsertPlaceAtHeading(resolved.placeName, resolved.placePosition, i + 1)) {
           self.log(`   → 장소 삽입 중... (${i + 1}번 소제목 아래, "${resolved.placeName}")`);
+          // 자리를 찾아 시도했다는 표시 — 꼬리에서 중복 삽입하지 않기 위해.
+          //   실패(주소 불일치 등)해도 표시한다. 꼬리에서 재시도해도 같은 이유로 또 실패한다.
+          self.__placeHandled = true;
           await page.keyboard.press('Enter');
           await self.delay(self.DELAYS.MEDIUM);
           const placeFrame = (await self.getAttachedFrame()) || frame;
@@ -2635,11 +2652,17 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
     // [v2.11.206] 장소 위치가 'bottom'이면 해시태그 바로 앞에 넣는다 — 맛집/여행 글의
     //   관례적 위치. 소제목 위치를 고른 경우엔 섹션 루프에서 이미 들어갔으므로 건너뛴다.
-    if (shouldInsertPlaceAtBottom(resolved.placeName, resolved.placePosition)) {
+    if (shouldInsertPlaceAtTail(resolved.placeName, self.__placeHandled === true)) {
       const placePage = self.ensurePage();
       const placeFrame = await self.getAttachedFrame();
       if (placeFrame) {
+        const askedHeading = String(resolved.placePosition || '').startsWith('heading-');
+        if (askedHeading) {
+          self.log(`   ℹ️ [장소] 지정한 위치(${resolved.placePosition})에 해당하는 소제목이 없어 본문 끝에 넣습니다.`);
+        }
         self.log(`   → 장소 삽입 중... (본문 맨 끝, "${resolved.placeName}")`);
+        // 링크 카드 삽입으로 캐럿이 본문 밖에 있을 수 있다 — CTA 꼬리와 같은 복구 사다리.
+        await ensureTailTypingReady(placePage, placeFrame, (m: string) => self.log(m)).catch(() => undefined);
         await placePage.keyboard.press('Enter');
         await self.delay(self.DELAYS.MEDIUM);
         await insertPlaceBlock(self, placePage, placeFrame, {

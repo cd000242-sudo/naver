@@ -65,14 +65,19 @@ export function shouldInsertPlaceAtHeading(
   return String(placePosition || '').trim() === `heading-${headingNumber}`;
 }
 
-/** [v2.11.206] 본문 맨 끝(해시태그 앞)에 장소를 넣을 차례인지. */
-export function shouldInsertPlaceAtBottom(
+/**
+ * [v2.11.206] 본문 맨 끝(해시태그 앞)에 장소를 넣을 차례인지.
+ *
+ * 위치를 'bottom'으로 고른 글뿐 아니라, 'heading-5'를 골랐는데 소제목이 3개뿐이라
+ * 그 자리가 아예 없었던 글도 여기로 온다. 사용자가 원한 건 "이 글에 지도"이지
+ * "5번 아래가 아니면 말고"가 아니다 — 자리를 못 찾았으면 꼬리에 넣고 로그를 남긴다.
+ */
+export function shouldInsertPlaceAtTail(
   placeName: string | undefined,
-  placePosition: string | undefined,
+  alreadyHandled: boolean,
 ): boolean {
   if (!String(placeName || '').trim()) return false;
-  const position = String(placePosition || '').trim();
-  return position === '' || position === 'bottom';
+  return !alreadyHandled;
 }
 
 /** [v2.11.142] CTAs that belong under heading N (1-based) — per-CTA position with global fallback. */

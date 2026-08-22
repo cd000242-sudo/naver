@@ -8,7 +8,7 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { pickMatchingPlaceCard } from '../automation/placeHelpers';
-import { shouldInsertPlaceAtHeading, shouldInsertPlaceAtBottom } from '../automation/editorTailPlan';
+import { shouldInsertPlaceAtHeading, shouldInsertPlaceAtTail } from '../automation/editorTailPlan';
 import { toPlaceSearchItems } from '../main/ipc/placeSearchHandlers';
 
 const ROOT = resolve(__dirname, '..', '..');
@@ -60,8 +60,8 @@ describe('장소 삽입 위치', () => {
   it('확정된 이름이 없으면 어떤 위치든 삽입하지 않는다', () => {
     expect(shouldInsertPlaceAtHeading('', 'heading-2', 2)).toBe(false);
     expect(shouldInsertPlaceAtHeading(undefined, 'heading-2', 2)).toBe(false);
-    expect(shouldInsertPlaceAtBottom('', 'bottom')).toBe(false);
-    expect(shouldInsertPlaceAtBottom('   ', undefined)).toBe(false);
+    expect(shouldInsertPlaceAtTail('', false)).toBe(false);
+    expect(shouldInsertPlaceAtTail('   ', false)).toBe(false);
   });
 
   it('지정한 소제목 번호에서만 삽입한다', () => {
@@ -70,10 +70,18 @@ describe('장소 삽입 위치', () => {
     expect(shouldInsertPlaceAtHeading('맛집', 'heading-2', 3)).toBe(false);
   });
 
-  it('소제목 위치를 고른 글은 하단에 중복 삽입하지 않는다', () => {
-    expect(shouldInsertPlaceAtBottom('맛집', 'heading-2')).toBe(false);
-    expect(shouldInsertPlaceAtBottom('맛집', 'bottom')).toBe(true);
-    expect(shouldInsertPlaceAtBottom('맛집', undefined)).toBe(true);
+  it('소제목에서 이미 처리했으면 꼬리에서 중복 삽입하지 않는다', () => {
+    expect(shouldInsertPlaceAtTail('맛집', true)).toBe(false);
+  });
+
+  it('지정한 소제목이 없어 아무 데도 못 넣었으면 꼬리에 넣는다', () => {
+    // heading-5 를 골랐는데 소제목이 3개뿐인 글 — 자리를 못 찾아 미처리로 남는다.
+    expect(shouldInsertPlaceAtTail('맛집', false)).toBe(true);
+  });
+
+  it('확정된 이름이 없으면 꼬리에서도 넣지 않는다', () => {
+    expect(shouldInsertPlaceAtTail('', false)).toBe(false);
+    expect(shouldInsertPlaceAtTail(undefined, false)).toBe(false);
   });
 });
 
@@ -119,6 +127,26 @@ describe('장소 기능 배선', () => {
     const source = read('src/renderer/modules/publishingHandlers.ts');
     expect(source.match(/placeName: pickedPlaceForPublish\?\.name/g)?.length).toBe(2);
     expect(source.match(/placePosition: pickedPlaceForPublish\?\.position/g)?.length).toBe(2);
+  });
+
+  it('IPC payload 빌더가 장소를 실어 보낸다 (필드 나열식이라 빠지면 죽는다)', () => {
+    // v2.11.206 개발 중 실제로 여기서 끊겨 있었다. formData 에는 값이 있는데
+    // executeBlogPublishing 이 payload 를 필드 하나씩 나열해 만들어 main 까지 못 갔다.
+    const source = read('src/renderer/modules/fullAutoFlow.ts');
+    expect(source).toContain('placeName: formData.placeName');
+    expect(source).toContain('placeAddress: formData.placeAddress');
+    expect(source).toContain('placePosition: formData.placePosition');
+  });
+
+  it('BlogExecutor 가 장소를 runOptions 로 넘긴다', () => {
+    const source = read('src/main/services/BlogExecutor.ts');
+    expect(source).toContain('placeName: payload.placeName');
+    expect(source).toContain('placePosition: payload.placePosition');
+  });
+
+  it('글마다 장소 삽입 상태를 초기화한다 (연속발행 2번째 글 누락 차단)', () => {
+    const source = read('src/automation/editorHelpers.ts');
+    expect(source).toContain('self.__placeHandled = false;');
   });
 
   it('발행 옵션 해석기가 장소를 통과시킨다', () => {
