@@ -25,6 +25,26 @@ const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_END
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
 const TIMEOUT_MS = 25000;
+/*
+ * 오래 걸리는 것이 정상인 액션들(2026-08-23).
+ *
+ * 25초는 대부분에 맞지만, 실제로 여러 번 재는 것들은 그 안에 못 끝낸다 —
+ * 그래서 화면에 "응답이 너무 오래 걸립니다"만 뜨고 결과를 통째로 잃었다.
+ *   rank-by-tabs      후보 14개 × 3탭 = 42회 실측 (실측 22초, 느리면 그 이상)
+ *   post-audit-analyze 내 글 + 상위 5개를 열어 재고 AI 까지 (실측 6초 + AI)
+ *   radar-*           여러 판을 훑고 AI 로 고른다
+ * 속도보다 정확도가 먼저라는 사장님 기준에 맞춰 넉넉히 준다.
+ */
+const SLOW_ACTIONS: Record<string, number> = {
+    'rank-by-tabs': 180000,
+    'post-audit-analyze': 180000,
+    'keyword-expansions': 90000,
+    'keyword-docs': 90000,
+    'radar-analyze': 120000,
+    'radar-search': 240000,
+    'radar-evaluate': 240000,
+};
+const timeoutFor = (action: string) => SLOW_ACTIONS[action] || TIMEOUT_MS;
 
 export type KeywordUsage = {
     /** 이 조회가 방문자 자기 키로 돌았는지. true 면 사장님 쿼터를 안 썼다. */
@@ -166,7 +186,7 @@ export function setStoredLicense(code: string): void {
 
 async function call<T>(action: string, params: Record<string, string>): Promise<KeywordApiResult<T>> {
     const controller = new AbortController();
-    const timer = window.setTimeout(() => controller.abort(), TIMEOUT_MS);
+    const timer = window.setTimeout(() => controller.abort(), timeoutFor(action));
     try {
         // POST 로 보낸다. 개인 API 키가 실리기 때문에 쿼리스트링에 두면
         // URL 로그·브라우저 기록·리퍼러에 키가 남는다.
