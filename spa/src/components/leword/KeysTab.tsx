@@ -205,7 +205,7 @@ function KeysTab() {
      * 객체가 있는지만 보면 앱이 꺼져 있어도 항상 참이 된다(잠복 결함).
      * 순서 안내가 이 값으로 "✅ 앱이 켜져 있습니다"를 찍기 시작하면서 드러났다.
      */
-    const bridgeReady = Boolean(bridge && bridge.connected);
+    const bridgeReady = typeof bridge === 'object' && bridge !== null && bridge.connected === true;
     const agentOf = (provider: string) => (bridgeReady ? (bridge.agents || []).find((agent) => agent.provider === provider) : undefined);
 
     /** 지금 쓰기로 고른 엔진. 안 골랐으면 연동된 것 중 클로드 우선으로 본다. */
