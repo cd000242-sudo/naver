@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -262,6 +262,15 @@ export const checkRank = (keyword: string, target: string) =>
 export type BlogAuditPost = { title: string; link: string; publishedAt: string | null; comments: number | null };
 export const auditBlogPosts = (url: string) =>
     call<{ platform: string; blogId: string | null; posts: BlogAuditPost[]; note?: string }>('blog-audit-posts', { url });
+
+/**
+ * 여러 검색어의 월 검색량 — "밀면 되는 자리"가 순위 옆에 붙일 값이다.
+ * call() 은 문자열 파라미터만 싣으므로 줄바꿈으로 이어 보낸다.
+ */
+export const fetchKeywordVolumes = (keywords: string[]) =>
+    call<{ volumes: Record<string, number> }>('keyword-volumes', {
+        keywords: keywords.join(String.fromCharCode(10)),
+    });
 
 export const auditBlogCheck = (title: string, link: string) =>
     call<{ rank: number | null; sampled: number; sympathy: number | null }>('blog-audit-check', { title, link });

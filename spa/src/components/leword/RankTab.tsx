@@ -3,6 +3,7 @@ import {
     auditBlogCheck,
     auditBlogPosts,
     checkRank,
+    fetchKeywordVolumes,
     fetchPostAnalysis,
     type BlogAuditPost,
     type EngineExposure,
@@ -131,7 +132,19 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
      * 노출/미노출을 갈라 본다(사장님 지시 2026-08-22 "노출된 거랑 노출 안 된 거랑
      * 나눠서 볼 수 있게"). 200건을 한 판에 두면 무엇을 손봐야 하는지 안 보인다.
      */
-    const [auditFilter, setAuditFilter] = useState<'all' | 'in' | 'out'>('all');
+    const [auditFilter, setAuditFilter] = useState<'all' | 'in' | 'out' | 'push'>('all');
+    /*
+     * 밀면 되는 자리(사장님 제안 2026-08-22 "반대로 이걸 역이용해서 상위노출될 수
+     * 있는 키워드를 찾는 방법도 있을 것 같은데").
+     *
+     * 점검이 이미 **내 글이 어느 검색어에서 몇 위인지**를 안다. 거기에 검색량만
+     * 붙이면 "17위인데 월 2,400이 치는 자리 = 조금만 밀면 1페이지"가 나온다.
+     * 새 글을 쓸 필요가 없다 — 이미 쓴 글로 노리는 자리다.
+     * 검색량은 검색광고 실측이고, 못 잰 검색어는 빈칸으로 둔다(0 과 모름은 다르다).
+     */
+    const [volumes, setVolumes] = useState<Record<string, number>>({});
+    const [volumeState, setVolumeState] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
+    const [volumeNote, setVolumeNote] = useState('');
 
     /*
      * 글 진단(사장님 확정 2026-08-20 "키워드 추출이 아니라 글을 분석해야") —
@@ -165,6 +178,50 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
     useEffect(() => {
         if (initialKeyword) setKeyword(initialKeyword);
     }, [initialKeyword]);
+
+    /**
+     * 이 글이 잡힌 자리들 — 검색어 하나당 한 줄. 순위가 있는 것만 낸다.
+     * 세 눈(키워드·확장·제목검색)에서 나온 검색어를 그대로 쓴다 — 새로 만들지 않는다.
+     */
+    type Slot = { query: string; rank: number; row: AuditRow; via: string };
+    const slotsOf = (row: AuditRow): Slot[] => {
+        const out: Slot[] = [];
+        if (row.kwQuery && row.kwRank != null) out.push({ query: row.kwQuery, rank: row.kwRank, row, via: '키워드' });
+        if (row.extQuery && row.extRank != null && row.extQuery !== row.kwQuery) {
+            out.push({ query: row.extQuery, rank: row.extRank, row, via: '확장' });
+        }
+        if (row.rank != null) out.push({ query: row.title, rank: row.rank, row, via: '제목' });
+        return out;
+    };
+
+    /** 순위 구간 — 무엇을 해야 하는지가 구간마다 다르다. */
+    const bandOf = (rank: number) => (rank <= 10 ? 'keep' : rank <= 30 ? 'push' : 'far');
+    const BAND_META: Record<string, { label: string; hint: string; cls: string }> = {
+        keep: { label: '지키기', hint: '이미 1페이지 — 경쟁자가 밀고 들어오는지 보면 됩니다', cls: 'lw-band-keep' },
+        push: { label: '밀면 됨', hint: '1페이지 바로 밖 — 제목·본문을 조금 손보면 넘어갑니다', cls: 'lw-band-push' },
+        far: { label: '보류', hint: '31위 아래 — 손봐서 되는 경우가 줄어듭니다', cls: 'lw-band-far' },
+    };
+
+    /** 검색량 재기 — 점검이 끝난 줄에서 나온 검색어만 모아 한 번에 묻는다. */
+    const measureVolumes = async () => {
+        if (!audit || volumeState === 'loading') return;
+        const queries = [...new Set(audit.rows.filter((row) => row.status === 'done').flatMap((row) => slotsOf(row).map((s) => s.query)))];
+        if (queries.length === 0) { setVolumeNote('아직 잡힌 자리가 없습니다 — 점검을 먼저 끝내 주세요.'); return; }
+        setVolumeState('loading');
+        setVolumeNote('');
+        const result = await fetchKeywordVolumes(queries.slice(0, 100));
+        if (result.ok && result.data?.volumes) {
+            setVolumes(result.data.volumes);
+            setVolumeState('done');
+            setVolumeNote(`검색어 ${queries.length}개 중 ${Object.keys(result.data.volumes).length}개 실측`);
+            return;
+        }
+        setVolumeState('error');
+        setVolumeNote(result.message || result.error || '검색량을 못 쟀습니다.');
+    };
+
+    /** 검색광고는 공백을 뗀 형태로 돌려준다 — 같은 규칙으로 찾는다. */
+    const volumeOf = (query: string) => volumes[query.replace(/\s+/g, '')] ?? null;
 
     const persistAudit = (state: AuditState | null) => {
         setAudit(state);
@@ -407,10 +464,82 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                 <button type="button" className={auditFilter === 'out' ? 'on' : ''} onClick={() => setAuditFilter('out')}>
                                     노출 안 됨 <em>{done.length - shown}</em>
                                 </button>
+                                {/*
+                                  * 역이용 — 이미 잡힌 자리에 검색량을 붙여 "밀면 되는 곳"을 고른다
+                                  * (사장님 제안 2026-08-22). 새 글이 아니라 쓴 글로 노리는 자리다.
+                                  */}
+                                <button type="button" className={auditFilter === 'push' ? 'on' : ''} onClick={() => setAuditFilter('push')}>
+                                    밀면 되는 자리 <em>{done.flatMap(slotsOf).length}</em>
+                                </button>
                             </div>
                           </>
                         );
                     })()}
+                    {auditFilter === 'push' ? (() => {
+                        const slots = audit.rows.filter((row) => row.status === 'done').flatMap(slotsOf)
+                            .sort((a, b) => {
+                                // 구간이 먼저(지키기 → 밀기 → 보류), 같은 구간 안에서는 검색량 큰 순.
+                                const order = { keep: 0, push: 1, far: 2 } as Record<string, number>;
+                                const oa = order[bandOf(a.rank)];
+                                const ob = order[bandOf(b.rank)];
+                                if (oa !== ob) return oa - ob;
+                                return (volumeOf(b.query) ?? -1) - (volumeOf(a.query) ?? -1);
+                            });
+                        return (
+                            <>
+                                <div className="lw-push-head">
+                                    <p>
+                                        이미 잡힌 자리에 <b>월 검색량</b>을 붙여 봅니다 — 새 글이 아니라 <b>이미 쓴 글</b>로 노리는 자리입니다.
+                                        검색량은 네이버 검색광고 실측이고, 못 잰 검색어는 빈칸으로 둡니다.
+                                    </p>
+                                    <button type="button" onClick={() => { void measureVolumes(); }} disabled={volumeState === 'loading'}>
+                                        {volumeState === 'loading' ? '재는 중…' : volumeState === 'done' ? '다시 재기' : '검색량 재기'}
+                                    </button>
+                                </div>
+                                {volumeNote && <p className={`lw-push-note${volumeState === 'error' ? ' error' : ''}`}>{volumeNote}</p>}
+                                {slots.length === 0 && <div className="lw-note">아직 잡힌 자리가 없습니다 — 점검을 끝내면 여기에 모입니다.</div>}
+                                <div className="lw-table-scroll">
+                                    <table className="lw-table lw-audit-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">할 일</th>
+                                                <th scope="col">검색어</th>
+                                                <th scope="col">현재 순위</th>
+                                                <th scope="col">월 검색량</th>
+                                                <th scope="col">어느 글</th>
+                                                <th scope="col" aria-label="분석" />
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {slots.map((slot) => {
+                                                const band = BAND_META[bandOf(slot.rank)];
+                                                const vol = volumeOf(slot.query);
+                                                return (
+                                                    <tr key={`${slot.row.link}-${slot.via}-${slot.query}`}>
+                                                        <td><span className={`lw-audit-badge ${band.cls}`} title={band.hint}>{band.label}</span></td>
+                                                        <td className="lw-rank-title">
+                                                            <a href={naverSearchUrl(slot.query)} target="_blank" rel="noreferrer">{slot.query} ↗</a>
+                                                            <small className="lw-audit-q">{slot.via} 검색</small>
+                                                        </td>
+                                                        <td className="lw-rank-in">{slot.rank}위</td>
+                                                        <td className={vol === null ? 'lw-rank-out' : 'lw-rank-in'}>
+                                                            {vol === null ? (volumeState === 'done' ? '못 쟀음' : '—') : vol.toLocaleString('ko-KR')}
+                                                        </td>
+                                                        <td className="lw-rank-title">
+                                                            <a href={slot.row.link} target="_blank" rel="noreferrer">{slot.row.title}</a>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" className="lw-mini" onClick={() => { void openAnalysis(slot.row); }}>글 분석하기</button>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </>
+                        );
+                    })() : (
                     <div className="lw-table-scroll">
                         <table className="lw-table lw-audit-table">
                             <thead>
@@ -528,6 +657,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                             </tbody>
                         </table>
                     </div>
+                    )}
                 </section>
             )}
 

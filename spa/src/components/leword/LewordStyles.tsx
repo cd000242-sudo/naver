@@ -673,6 +673,21 @@ function LewordStyles() {
             .lw-rank-go { color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor; }
             .lw-rank-go:hover { opacity: .8; }
 
+            /* 밀면 되는 자리 — 할 일이 구간마다 다르니 색으로 가른다. */
+            .lw-band-keep { background: rgba(46,204,113,.14); color: #2ecc71; border: 1px solid rgba(46,204,113,.4); }
+            .lw-band-push { background: rgba(255,165,0,.16); color: #ffa500; border: 1px solid rgba(255,165,0,.45); }
+            .lw-band-far  { background: rgba(255,255,255,.05); color: rgba(235,242,250,.5); border: 1px solid rgba(255,255,255,.12); }
+            .lw-push-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 14px 0 6px; }
+            .lw-push-head p { margin: 0; flex: 1; min-width: 260px; font-size: 12.5px; line-height: 1.65; color: rgba(235,242,250,.68); }
+            .lw-push-head p b { color: #ebf2fa; }
+            .lw-push-head button {
+                padding: 9px 18px; border-radius: 9px; border: 0; cursor: pointer;
+                background: #ffa500; color: #1a1200; font: inherit; font-size: 12.5px; font-weight: 800;
+            }
+            .lw-push-head button:disabled { opacity: .6; cursor: not-allowed; }
+            .lw-push-note { margin: 2px 0 8px; font-size: 12px; color: rgba(46,204,113,.85); }
+            .lw-push-note.error { color: #ff8fa0; }
+
             /* 중단된 점검을 이어서 — 남은 건수를 그대로 적는다. */
             .lw-audit-resume {
                 display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
