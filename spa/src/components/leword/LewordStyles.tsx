@@ -578,6 +578,18 @@ function LewordStyles() {
             .lw-connect-steps { margin: 0 0 12px; padding: 14px 16px 14px 34px; border: 1px solid rgba(255,165,0,.28); border-radius: 12px; background: rgba(255,165,0,.05); display: grid; gap: 7px; }
             .lw-connect-steps li { font-size: 12.5px; line-height: 1.6; color: rgba(235,242,250,.72); }
             .lw-connect-steps li b { color: #ebf2fa; }
+            /* 끝난 단계는 힘을 빼고, 지금 할 단계만 눈에 들어오게 한다. */
+            .lw-connect-steps li.done { color: rgba(235,242,250,.4); }
+            .lw-connect-steps li.done b { color: rgba(235,242,250,.55); font-weight: 600; }
+            .lw-connect-steps li.now { color: #ebf2fa; }
+            .lw-connect-steps li.now b { color: #ffa500; }
+            .lw-connect-steps .lw-step-ok { color: #2ecc71; font-weight: 700; }
+            .lw-connect-steps li em { display: block; margin-top: 3px; font-style: normal; font-size: 11.5px; color: rgba(235,242,250,.45); }
+            .lw-connect-steps .lw-step-cta {
+                display: inline-block; margin-top: 6px; padding: 7px 15px; border-radius: 8px;
+                background: #ffa500; color: #1a1200; font-weight: 800; font-size: 12.5px; text-decoration: none;
+            }
+            .lw-connect-steps .lw-step-cta:hover { background: #ffb733; }
             /*
              * 연동 버튼이 실제로 눌리게(사장님 지적 2026-08-22 "연동이 안 된다").
              *

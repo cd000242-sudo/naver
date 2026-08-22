@@ -199,11 +199,29 @@ function KeysTab() {
         }
         setBridge(status);
     };
-    const bridgeReady = typeof bridge === 'object' && bridge !== null;
+    /*
+     * "앱이 켜져 있나"는 connected 로 판단한다.
+     * probeBridge 는 **실패해도** { connected: false } 객체를 돌려주므로
+     * 객체가 있는지만 보면 앱이 꺼져 있어도 항상 참이 된다(잠복 결함).
+     * 순서 안내가 이 값으로 "✅ 앱이 켜져 있습니다"를 찍기 시작하면서 드러났다.
+     */
+    const bridgeReady = Boolean(bridge && bridge.connected);
     const agentOf = (provider: string) => (bridgeReady ? (bridge.agents || []).find((agent) => agent.provider === provider) : undefined);
 
     /** 지금 쓰기로 고른 엔진. 안 골랐으면 연동된 것 중 클로드 우선으로 본다. */
     const activeProvider = String(keys.aiProvider || '') || (keys.claudeToken ? 'claude' : '');
+
+    /*
+     * 순서 안내가 "지금 어디까지 했는지"를 짚으려면 세 가지 사실이 필요하다.
+     * 전부 실측이다 — 앱이 실제로 응답했는지, 그 엔진이 실제로 쓸 수 있는지,
+     * 토큰이 실제로 저장돼 있는지.
+     */
+    const readyAgentLabels = AGENT_CHAIN
+        .filter((item) => agentOf(item.id)?.available)
+        .map((item) => item.label);
+    const anyAgentReady = readyAgentLabels.length > 0;
+    const claudeAgentReady = Boolean(agentOf('claude')?.available);
+    const hasClaudeToken = Boolean(String(keys.claudeToken || '').trim());
 
     /** 제공자별 로그인 시작 — 앱이 그 PC 에서 로그인 창을 띄운다. */
     const [loginBusy, setLoginBusy] = useState('');
@@ -330,11 +348,44 @@ function KeysTab() {
                   * 연동시키려면 순서가 어떻게 되는 건데?"). 어디에도 안 적혀 있어서
                   * 화면이 "연동됨"이라고만 하고 무엇을 더 해야 하는지 말하지 않았다.
                   */}
+                {/*
+                  * 단계마다 "지금 여기"를 짚어 준다(사장님 확정 2026-08-22:
+                  * "다운로드 먼저 유도 → 앱에서 연동 → 다 되면 사이트에서 연동").
+                  * 앱이 잡히는지에 따라 끝난 단계는 ✅, 지금 할 단계는 강조한다 —
+                  * 순서만 적어 두면 자기가 어디까지 했는지 여전히 모른다.
+                  */}
                 <ol className="lw-connect-steps">
-                    <li><b>구독이 있어야 합니다.</b> 클로드 Max/Pro · 챗지피티 Plus/Pro · 구글 · SuperGrok. 무료 계정은 CLI 로그인이 막힙니다.</li>
-                    <li><b>LEWORD 앱에서 [연동]</b> — 앱이 그 CLI 를 설치하고 로그인 창을 열어 줍니다. 구독 로그인이 그 PC 안에서만 끝나는 방식이라 웹에서는 못 엽니다.</li>
-                    <li><b>여기 클로드 줄에서 [연동]</b> — 앱이 들고 있는 클로드 자격을 사이트로 넘깁니다. <b>이 한 번이면 앱을 꺼도</b> 사이트가 전부 돕니다.</li>
-                    <li><b>쓸 엔진에서 [사용]</b> — 고른 엔진 하나로만 돕니다. 몰래 다른 엔진으로 갈아타지 않습니다.</li>
+                    <li className={bridgeReady ? 'done' : 'now'}>
+                        <b>LEWORD 앱을 켭니다.</b>{' '}
+                        {bridgeReady
+                            ? <span className="lw-step-ok">✅ 앱이 켜져 있습니다</span>
+                            : (
+                                <>
+                                    앱이 CLI 설치·로그인을 대신 해 주고, 사이트 연동까지 버튼 한 번으로 끝냅니다.{' '}
+                                    <a className="lw-step-cta" href="/download">⬇ LEWORD 받기</a>
+                                    <em>클로드만 쓰실 거면 앱 없이 아래 [연동]으로도 됩니다 — 대신 승인 창을 한 번 거칩니다.</em>
+                                </>
+                            )}
+                    </li>
+                    <li className={bridgeReady && !anyAgentReady ? 'now' : (anyAgentReady ? 'done' : '')}>
+                        <b>앱에서 쓸 엔진에 로그인합니다.</b>{' '}
+                        {anyAgentReady
+                            ? <span className="lw-step-ok">✅ {readyAgentLabels.join(' · ')} 로그인됨</span>
+                            : '앱을 켜고 이 화면의 [연동]을 누르면 그 CLI 를 설치하고 로그인 창을 열어 줍니다. 구독 로그인이 그 PC 안에서만 끝나는 방식이라 웹에서는 못 엽니다.'}
+                        <em>구독이 있어야 합니다 — 클로드 Max/Pro · 챗지피티 Plus/Pro · 구글 · SuperGrok. 무료 계정은 CLI 로그인이 막힙니다.</em>
+                    </li>
+                    <li className={hasClaudeToken ? 'done' : (claudeAgentReady ? 'now' : '')}>
+                        <b>아래 클로드 줄에서 [연동].</b>{' '}
+                        {hasClaudeToken
+                            ? <span className="lw-step-ok">✅ 사이트까지 연동됐습니다 — 앱을 꺼도 돕니다</span>
+                            : '앱이 들고 있는 클로드 자격을 사이트로 넘깁니다. 이 한 번이면 앱을 꺼도 사이트가 전부 돕니다.'}
+                    </li>
+                    <li className={activeProvider ? 'done' : ''}>
+                        <b>쓸 엔진에서 [사용].</b>{' '}
+                        {activeProvider
+                            ? <span className="lw-step-ok">✅ {AGENT_CHAIN.find((item) => item.id === activeProvider)?.label} 사용 중</span>
+                            : '고른 엔진 하나로만 돕니다. 몰래 다른 엔진으로 갈아타지 않습니다.'}
+                    </li>
                 </ol>
                 <p className="lw-card-note" style={{ marginBottom: 12 }}>
                     3번이 <b>클로드만</b> 되는 이유: 클로드 CLI 는 자격을 토큰으로 들고 있어 사이트 서버가 그대로 씁니다.
