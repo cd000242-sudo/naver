@@ -359,13 +359,18 @@ function RadarTab() {
                 <section className="lw-panel lw-radar-gated">
                     <div className="lw-panel-head">
                         <h2>지금은 답을 못 다는 판 <em>{gatedSites.length}</em></h2>
-                        <span>훑지 않았습니다 — 미리 가입해 두면 열리는 곳이 있습니다</span>
+                        <span>훑지 않았습니다 — 미리 준비해 두면 열리는 곳이 있습니다</span>
                     </div>
                     <ul>
                         {gatedSites.map((site) => (
                             <li key={site.domain} className={site.gate}>
                                 <a href={`https://${site.domain}`} target="_blank" rel="noreferrer noopener">{site.name}</a>
-                                <i>{site.gate === 'delayed' ? '기다리면 열림' : '가입 막힘'}</i>
+                                {/*
+                                  * '기다리면 열림'은 블라인드(회사 이메일)에만 맞는 말이었다.
+                                  * 아하는 전문가 등록을 해야 열린다 — 기다린다고 열리지 않는다.
+                                  * 둘을 함께 담는 말로 바꾸고, 무엇을 해야 하는지는 아래 why 가 적는다.
+                                  */}
+                                <i>{site.gate === 'delayed' ? '조건 채우면 열림' : '가입 막힘'}</i>
                                 <span>{site.why || '확인된 근거 없음'}</span>
                             </li>
                         ))}
