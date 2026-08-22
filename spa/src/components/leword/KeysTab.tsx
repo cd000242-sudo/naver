@@ -126,6 +126,12 @@ function KeysTab() {
             setOauth(null);
             const planText = fromApp.subscriptionType ? ` (${fromApp.subscriptionType} 구독)` : '';
             setOauthNote(`✅ 앱에서 바로 연동했습니다${planText} — 이제 앱을 꺼도 사이트에서 전부 돕니다.`);
+            /*
+             * 바로 플랜·사용량을 잰다. 안 부르면 usage 가 초기 idle 그대로 남아
+             * 화면이 "플랜 확인 중"에서 멈춘 것처럼 보인다(사장님 지적 2026-08-22).
+             * loadUsage 는 저장소를 읽으므로 saveUserKeys 뒤에 불러야 한다.
+             */
+            void loadUsage();
             return;
         }
         if (fromApp.status === 'not-logged-in') {
@@ -484,7 +490,22 @@ function KeysTab() {
                                 {item.id === 'claude' && hasToken && (
                                     <div className="lw-usage">
                                         <div className="lw-usage-head">
-                                            <span className="lw-usage-plan">{usage.data?.plan || '플랜 확인 중'}</span>
+                                            {/*
+                                              * 상태를 그대로 말한다(사장님 지적 2026-08-22
+                                              * "플랜 확인 중이면 프로그레스를 띄우고, 다시 재기 눌러도 안 나온다").
+                                              * 예전엔 data 가 없으면 무조건 "플랜 확인 중"이라 **idle·error·loading
+                                              * 셋이 전부 같은 문구**였다. 아직 재지도 않았는데 "확인 중"으로 보이니
+                                              * 영원히 기다리게 된다.
+                                              */}
+                                            <span className="lw-usage-plan">
+                                                {usage.state === 'loading'
+                                                    ? <span className="lw-usage-spin" aria-label="재는 중" />
+                                                    : null}
+                                                {usage.data?.plan
+                                                    || (usage.state === 'loading' ? '재는 중…'
+                                                        : usage.state === 'error' ? '확인 실패'
+                                                            : '아직 안 쟀습니다')}
+                                            </span>
                                             {usage.data?.email && <span className="lw-usage-who">{usage.data.email}</span>}
                                             <button type="button" onClick={() => { void loadUsage(); }} disabled={usage.state === 'loading'}>
                                                 {usage.state === 'loading' ? '재는 중…' : '다시 재기'}
@@ -537,6 +558,14 @@ function KeysTab() {
                                                 type="password"
                                                 value={String(keys.claudeToken || '')}
                                                 onChange={(event) => update('claudeToken', event.target.value)}
+                                                /*
+                                                 * 붙여넣으면 그 자리에서 확인하고 저장한다
+                                                 * (사장님 지적 2026-08-22 "토큰 넣으면 자동 저장돼야 하지 않니?").
+                                                 * 예전엔 아래 [저장]을 따로 눌러야 했는데, 칸이 채워져 있으니
+                                                 * 저장된 줄 알고 넘어가게 된다 — 그러면 플랜도 안 재진다.
+                                                 * onChange 마다 부르면 한 글자씩 검사하게 되므로 칸을 떠날 때 한 번만 한다.
+                                                 */
+                                                onBlur={() => { void persist(); }}
                                                 placeholder="sk-ant-oat..."
                                                 autoComplete="new-password"
                                             />

@@ -590,6 +590,15 @@ function LewordStyles() {
                 background: #ffa500; color: #1a1200; font-weight: 800; font-size: 12.5px; text-decoration: none;
             }
             .lw-connect-steps .lw-step-cta:hover { background: #ffb733; }
+
+            /* 재는 중 표시 — 글자만으로는 멈춘 건지 도는 건지 알 수 없다. */
+            .lw-usage-spin {
+                display: inline-block; width: 11px; height: 11px; margin-right: 6px; vertical-align: -1px;
+                border: 2px solid rgba(255,255,255,.25); border-top-color: #ffa500; border-radius: 50%;
+                animation: lwSpin .7s linear infinite;
+            }
+            @keyframes lwSpin { to { transform: rotate(360deg); } }
+            @media (prefers-reduced-motion: reduce) { .lw-usage-spin { animation-duration: 2.4s; } }
             /*
              * 연동 버튼이 실제로 눌리게(사장님 지적 2026-08-22 "연동이 안 된다").
              *
