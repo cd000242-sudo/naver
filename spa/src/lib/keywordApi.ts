@@ -303,6 +303,18 @@ export const fetchRankByTabs = (query: string, link: string) =>
         link: string;
         checkedAt: string;
         tabs: Record<string, TabRank>;
+        /*
+         * 주소만 넣었을 때 잰 **후보 전부**. 하나만 고르면 노출된 자리를 놓친다
+         * (사장님 실측 2026-08-23: '청년내일저축계좌 만기'로는 세 탭 다 없음,
+         * '…만기 실업급여'로는 통합 9위·웹 6위).
+         */
+        candidates?: Array<{
+            keyword: string;
+            volume: number | null;
+            bestRank: number | null;
+            tabs: Record<string, TabRank>;
+        }>;
+        exposedCount?: number;
     }>('rank-by-tabs', { query, link });
 
 export const fetchYoutubeTrending = () =>

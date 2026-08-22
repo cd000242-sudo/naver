@@ -179,6 +179,8 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
         link: string;
         checkedAt: string;
         tabs: Record<string, TabRank>;
+        candidates?: Array<{ keyword: string; volume: number | null; bestRank: number | null; tabs: Record<string, TabRank> }>;
+        exposedCount?: number;
     } | null>(null);
     const [tabState, setTabState] = useState<'idle' | 'loading' | 'error'>('idle');
     const [tabNote, setTabNote] = useState('');
@@ -874,6 +876,63 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                             );
                         })}
                     </div>
+
+                    {/*
+                      * 후보를 **전부** 보여 준다(사장님 지시 2026-08-23:
+                      * "키워드 하나만 가져올 게 아니라 제목에 있는 키워드를 다시
+                      * 조합해서 확장키워드로 넣으니까 노출되어 있잖아").
+                      * 하나만 고르면 걸려 있는 자리를 통째로 놓친다 — 실측:
+                      * '청년내일저축계좌 만기'는 세 탭 다 없음인데
+                      * '…만기 실업급여'는 통합 9위·웹 6위였다.
+                      */}
+                    {Array.isArray(tabResult.candidates) && tabResult.candidates.length > 1 && (
+                        <div className="lw-tabrank-cands">
+                            <div className="lw-tabrank-cands-head">
+                                <b>제목에서 뽑은 검색어 {tabResult.candidates.length}개</b>
+                                <span>
+                                    {typeof tabResult.exposedCount === 'number'
+                                        ? `${tabResult.exposedCount}개에서 노출 중`
+                                        : ''}
+                                </span>
+                            </div>
+                            <div className="lw-table-scroll">
+                                <table className="lw-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">검색어</th>
+                                            <th scope="col">월 검색량</th>
+                                            {TAB_META.map((tab) => <th key={tab.id} scope="col">{tab.label}</th>)}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {tabResult.candidates.map((cand) => (
+                                            <tr key={cand.keyword} className={cand.bestRank !== null ? 'lw-cand-hit' : ''}>
+                                                <td>
+                                                    <a href={naverSearchUrl(cand.keyword)} target="_blank" rel="noreferrer">
+                                                        {cand.keyword}
+                                                    </a>
+                                                </td>
+                                                <td>{typeof cand.volume === 'number' ? cand.volume.toLocaleString() : '—'}</td>
+                                                {TAB_META.map((tab) => {
+                                                    const value = cand.tabs?.[tab.id];
+                                                    return (
+                                                        <td key={tab.id}>
+                                                            {value && typeof value.rank === 'number'
+                                                                ? <b className="lw-cand-rank">{value.rank}위</b>
+                                                                : '—'}
+                                                        </td>
+                                                    );
+                                                })}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p className="lw-note lw-note-plain">
+                                검색량이 안 잡히는 말도 함께 잽니다 — 검색광고에 수치가 없어도 실제로는 걸려 있는 자리가 있습니다.
+                            </p>
+                        </div>
+                    )}
                 </div>
             )}
 
