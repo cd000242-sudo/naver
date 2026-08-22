@@ -150,6 +150,12 @@ async function fetchSearchCandidates() {
         const link = (block.match(/href="(https:\/\/kin\.naver\.com\/qna\/detail\.naver[^"]+)"/) || [])[1];
         // 검색어 하이라이트(<b>) 가 제목 중간에 끼므로 태그 너머까지 받아 걷어낸다.
         const title = ((block.match(/_searchListTitleAnchor">([\s\S]*?)<\/a>/) || [])[1] || '').replace(/<[^>]*>/g, '');
+        /*
+         * 이 날짜는 **질문 작성일이 아니라 답변이 달린 날**이다(사장님 지적
+         * 2026-08-22: 목록엔 08.19 인데 들어가 보면 07.21 질문이었다).
+         * 그래서 후보를 좁히는 데만 쓰고, 화면에 실을 작성일은 질문 페이지에서
+         * 따로 실측해 덮어쓴다(fetchStats.askedAt).
+         */
         const date = (block.match(/class="txt_inline">(\d{4})\.(\d{2})\.(\d{2})\./) || []);
         const answers = (block.match(/class="hit">답변수\s*([\d,]+)/) || [])[1];
         // 전문가(변호사·의사…) 답변이 이미 붙은 질문은 뺀다 — 일반인이 답 달 자리가 아니다.
@@ -172,7 +178,8 @@ async function fetchSearchCandidates() {
           title: title.replace(/<[^>]*>/g, '').trim(),
           link: cleanLink,
           docId,
-          askedAt: `${date[1]}.${date[2]}.${date[3]}`,
+          /** 답변일(목록값) — 후보 정렬용. 작성일은 질문 페이지 실측으로 덮인다. */
+          answeredAt: `${date[1]}.${date[2]}.${date[3]}`,
           answers: num(answers),
           summary,
         });
@@ -186,18 +193,47 @@ async function fetchSearchCandidates() {
   return rows;
 }
 
-/** 질문 페이지에서 조회수·답변수 실측 — enrich 의 검증된 마크업 패턴 그대로. */
+/** 한국 날짜 문자열(YYYY.MM.DD) — 수집기는 UTC 러너에서 도는데 화면은 한국 시각이다. */
+function kstDateString(ms) {
+  return new Date(ms + 9 * 3_600_000).toISOString().slice(0, 10).replace(/-/g, '.');
+}
+
+/**
+ * 질문 작성일 실측.
+ *
+ * 두 가지 형태로 온다(실측 2026-08-22):
+ *   하루 지난 질문 → <span class="blind">작성일</span>2026.07.21
+ *   하루 안 질문   → <span class="blind">작성일</span>12시간 전
+ * 상대시간 쪽을 못 읽어 후보의 절반이 버려지고 있었는데, 하필 그쪽이
+ * 이 레인이 찾는 **가장 최신** 질문들이었다.
+ *
+ * 값이 붙어 있는 칸만 본다 — 넓게 훑으면 아래 답변의 날짜를 물어 온다.
+ */
+function parseAskedAt(html) {
+  const cell = html.match(/작성일<\/span>\s*([^<]{1,24})/);
+  const raw = cell ? cell[1].trim() : '';
+  const absolute = raw.match(/(\d{4})\.(\d{2})\.(\d{2})/);
+  if (absolute) return `${absolute[1]}.${absolute[2]}.${absolute[3]}`;
+  const relative = raw.match(/(\d+)\s*(초|분|시간|일)\s*전/);
+  if (relative) {
+    const count = Number(relative[1]);
+    const unit = { 초: 1_000, 분: 60_000, 시간: 3_600_000, 일: 86_400_000 }[relative[2]];
+    return kstDateString(Date.now() - count * unit);
+  }
+  if (/방금/.test(raw)) return kstDateString(Date.now());
+  return null;
+}
+
+/** 질문 페이지에서 조회수·답변수·작성일 실측 — enrich 의 검증된 마크업 패턴 그대로. */
 async function fetchStats(link) {
   try {
     const html = await fetchText(link);
     const views = (html.match(/조회수\s*([\d,]+)/) || [])[1];
     const answers = (html.match(/answerCount"\s*>\s*([\d,]+)\s*</) || [])[1];
-    // 작성일 — "질문에 날짜도 같이"(사장님 지시 2026-08-20). 패턴 실측 검증됨.
-    const asked = html.match(/작성일[\s\S]{0,40}?(\d{4})\.(\d{2})\.(\d{2})/);
     return {
       views: views === undefined ? null : num(views),
       answers: answers === undefined ? null : num(answers),
-      askedAt: asked ? `${asked[1]}.${asked[2]}.${asked[3]}` : null,
+      askedAt: parseAskedAt(html),
     };
   } catch {
     return { views: null, answers: null, askedAt: null };
@@ -221,24 +257,37 @@ async function main() {
 
   const realtimeIds = new Set(realtime.map((q) => docIdOf(q.link)));
 
-  // 숨은 후보: 수요 어휘 검색(최신 3일·답변 ≤2·전문가 제외 선필터)에서 온다.
+  // 숨은 후보: 수요 어휘 검색(답변일 3일 안 · 답변 ≤2 · 전문가 제외 선필터)에서 온다.
   const candidates = (await fetchSearchCandidates())
     .filter((q) => !realtimeIds.has(q.docId))
     // 창 안에서는 오래된 것부터 — 조회가 쌓였을 확률이 커 실측 예산이 아깝지 않다.
-    .sort((a, b) => a.askedAt.localeCompare(b.askedAt))
+    .sort((a, b) => a.answeredAt.localeCompare(b.answeredAt))
     .slice(0, HIDDEN_CANDIDATE_CAP);
   const hiddenPool = [];
   for (const q of candidates) {
     const stats = await fetchStats(q.link);
     if (stats.views !== null) {
+      /*
+       * 작성일은 **질문 페이지 실측값**을 쓴다(사장님 지적 2026-08-22).
+       * 목록의 날짜는 답변이 달린 날이라, 7월 질문에 8월 답변이 붙으면
+       * "8월 질문"으로 둔갑했다 — 조회 많고 답변 없는 최신 자리를 찾는
+       * 이 레인의 약속이 그 한 줄로 깨져 있었다.
+       * 못 잰 질문은 날짜를 지어내지 않고 버린다.
+       */
+      if (!stats.askedAt) continue;
       // 답변수는 페이지 실측이 더 최신이다 — 검색 스냅샷 이후 붙었을 수 있다.
-      hiddenPool.push({ ...q, views: stats.views, answers: stats.answers ?? q.answers });
+      hiddenPool.push({ ...q, askedAt: stats.askedAt, askedAtVerified: true, views: stats.views, answers: stats.answers ?? q.answers });
     }
     await sleep(120);
   }
+  /** 실측 작성일 기준 최신 창 — 목록 날짜로 통과한 묵은 질문을 여기서 떨군다. */
+  const askedFloorMs = Date.now() - HIDDEN_FRESH_DAYS * 24 * 3_600_000;
+  const staleAsked = hiddenPool.filter((q) => Date.parse(q.askedAt.replace(/\./g, '-')) < askedFloorMs).length;
   const freshHidden = hiddenPool
+    .filter((q) => Date.parse(q.askedAt.replace(/\./g, '-')) >= askedFloorMs)
     .filter((q) => q.views >= HIDDEN_MIN_VIEWS && typeof q.answers === 'number' && q.answers <= HIDDEN_MAX_ANSWERS)
-    .map(({ docId: _docId, ...rest }) => rest);
+    .map(({ docId: _docId, answeredAt: _answeredAt, ...rest }) => rest);
+  if (staleAsked > 0) console.log(`  작성일 실측으로 걸러낸 묵은 질문 ${staleAsked}건 (목록 날짜는 답변일이었다)`);
   /*
    * 누적 병합 + 생기 실측(사장님 지적 2026-08-20 "조회수가 4만이어도 지금 보는
    * 사람이 없으면 뭔 의미냐"). 조회수 스냅샷을 회차마다 비교해:
@@ -260,6 +309,12 @@ async function main() {
     return { ...q, viewsDelta: delta, staleRuns: delta > 0 ? 0 : (before.staleRuns || 0) + 1 };
   };
   const carried = (prev && Array.isArray(prev.hidden) ? prev.hidden : [])
+    /*
+     * 이월도 **작성일이 실측된 것**만 받는다(2026-08-22).
+     * 직전 스냅샷에는 답변일이 작성일 자리에 들어간 항목이 섞여 있다 —
+     * 표식이 없는 항목은 그 시절 값이므로 한 회차에 걸러 낸다.
+     */
+    .filter((q) => q.askedAtVerified)
     .filter((q) => q.askedAt && Date.parse(q.askedAt.replace(/\./g, '-')) >= freshFloorMs)
     .filter((q) => !currentIds.has(docIdOf(q.link)));
   const hidden = [...freshHidden.map(withLife), ...carried]

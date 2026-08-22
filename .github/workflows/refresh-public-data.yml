@@ -93,14 +93,19 @@ jobs:
 
           for pass in $(seq 1 "$PASSES"); do
             echo "::group::패스 $pass/$PASSES"
-            node scripts/refresh-public-data.mjs || echo "수집 실패 — 이번 패스 건너뜀"
+            # 단계마다 시간 상한을 둔다(2026-08-22).
+            # 왜: 유튜브 수집이 25분 예산을 다 먹고 job 이 취소되면서, 이미 끝난
+            # 지식인·황금보드 수집물까지 커밋되지 못했다 — 60회 연속 cancelled.
+            # 한 단계가 늦어도 나머지는 반드시 커밋 단계까지 간다.
+            timeout 300 node scripts/refresh-public-data.mjs || echo "수집 실패/시간초과 — 이번 패스 건너뜀"
             # 황금보드는 실시간 레인 결과를 후보로 쓰므로 그 뒤에 돈다.
             # 자격증명이 없으면 스스로 건너뛴다(기존 파일 유지).
-            node scripts/refresh-golden-briefing.mjs || echo "황금보드 갱신 실패 — 기존 파일 유지"
+            timeout 240 node scripts/refresh-golden-briefing.mjs || echo "황금보드 갱신 실패/시간초과 — 기존 파일 유지"
             # 지식인 황금질문(실시간·급상승·숨은) — 급상승은 직전 스냅샷 대비라 15분 주기가 곧 눈금이다.
-            node scripts/kin-golden.mjs || echo "지식인 황금질문 수집 실패 — 기존 파일 유지"
+            timeout 300 node scripts/kin-golden.mjs || echo "지식인 황금질문 수집 실패/시간초과 — 기존 파일 유지"
             # 유튜브 급상승 → 네이버 빈자리. YOUTUBE_API_KEY 가 없으면 스스로 건너뛴다.
-            node scripts/youtube-gap.mjs || echo "유튜브 빈자리 수집 실패 — 기존 파일 유지"
+            # 스크립트 자체 예산(6분)이 먼저 걸려 여기까지 오면 이미 저장된 뒤다.
+            timeout 480 node scripts/youtube-gap.mjs || echo "유튜브 빈자리 수집 실패/시간초과 — 기존 파일 유지"
 
             # 0건이면 커밋하지 않는다. 좋은 데이터를 빈 데이터로 덮지 않기 위한 마지막 가드.
             for f in spa/public/data/source-signals.json spa/public/data/home-notices.json; do
@@ -134,6 +139,15 @@ jobs:
               fi
             fi
             echo "::endgroup::"
+
+            # 발행에 성공했으면 더 돌지 않는다(2026-08-22).
+            # 왜: 패스를 무조건 3회 도느라 25분 예산을 넘겨 job 이 취소됐고,
+            # 그 바람에 1회차에 잘 모은 스냅샷까지 버려졌다. 크론이 15분마다
+            # 다시 오므로, 한 판에서 여러 번 도는 것은 재시도 용도로 족하다.
+            if [ "$published" = true ]; then
+              echo "1회 발행 완료 — 남은 패스는 돌지 않는다(다음 크론이 이어받는다)"
+              break
+            fi
 
             if [ "$pass" -lt "$PASSES" ]; then sleep "$GAP_SECONDS"; fi
           done

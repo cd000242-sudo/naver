@@ -56,6 +56,21 @@ const MAX_ROWS = Number(process.env.YTGAP_MAX_ROWS || 60);
 const MAX_PER_VIDEO = Number(process.env.YTGAP_MAX_PER_VIDEO || 2);
 
 /*
+ * 실측에 쓸 시간 상한(사장님 지적 2026-08-22 "며칠째 같은 것만 나온다").
+ *
+ * 무슨 일이 있었나: 크론 한 판은 25분인데 이 수집기가 자동완성 검색어
+ * 1,074개를 전부 실측하려다 17분을 쓰고 잘렸다. 잘리면 job 이 통째로
+ * 취소되어, **이미 다 끝난 지식인·황금보드 수집물까지 커밋되지 못했다**.
+ * 그래서 60회 연속 cancelled — 화면의 모든 판이 이틀째 같은 자리에 멈췄다.
+ *
+ * 예산을 넘기면 거기까지 잰 것으로 저장한다. 몇 개를 못 쟀는지는 반드시
+ * 로그에 남긴다 — 조용히 자르면 "다 봤다"로 읽히기 때문이다.
+ */
+const BUDGET_MS = Number(process.env.YTGAP_BUDGET_MS || 6 * 60_000);
+const STARTED_AT = Date.now();
+const overBudget = () => Date.now() - STARTED_AT > BUDGET_MS;
+
+/*
  * 제목 맨 앞이 흔한 부사면 자동완성이 엉뚱한 데로 샌다 — "과연" 을 물으면
  * "과연한우" 가 온다(실측). 사람 이름·작품명이 아닌 게 확실한 것만 막는다.
  */
@@ -217,17 +232,30 @@ async function main() {
     // ③ 검색량 실측 — 검색광고 API 는 한 번에 5개
     const keywords = [...source.keys()];
     const volumes = new Map();
+    let volumeStoppedAt = -1;
     for (let index = 0; index < keywords.length; index += 5) {
+        if (overBudget()) { volumeStoppedAt = index; break; }
         for (const [name, detail] of await fetchVolumeDetails(keywords.slice(index, index + 5))) volumes.set(name, detail);
         await sleep(220);
+    }
+    if (volumeStoppedAt >= 0) {
+        log(`!! 시간 상한(${Math.round(BUDGET_MS / 60000)}분) — 검색어 ${keywords.length}개 중 ${volumeStoppedAt}개까지만 검색량을 쟀습니다`);
     }
 
     // ④ 검색량이 기준을 넘은 것만 문서수를 잰다 — 문서수 조회가 더 비싸다
     const rows = [];
+    let docChecked = 0;
+    let docSkipped = 0;
     for (const keyword of keywords) {
         const detail = volumes.get(keyword.replace(/\s+/g, ''));
         const searchVolume = detail ? detail.volume : null;
         if (!Number.isFinite(searchVolume) || searchVolume < MIN_VOLUME) continue;
+        /*
+         * 자리가 넉넉히 모였거나 예산을 넘겼으면 멈춘다. 화면은 60건을 쓰는데
+         * 1,000개를 끝까지 재려다 판 전체를 멈추게 하는 것이 지금까지의 손해였다.
+         */
+        if (overBudget() || rows.length >= MAX_ROWS * 3) { docSkipped += 1; continue; }
+        docChecked += 1;
         const documentCount = await fetchDocumentCount(keyword);
         await sleep(160);
         if (!Number.isFinite(documentCount) || documentCount > MAX_DOCS) continue;
@@ -259,6 +287,10 @@ async function main() {
                 categoryId: video.categoryId, form: video.form || '',
             },
         });
+    }
+
+    if (docSkipped > 0) {
+        log(`!! 문서수 실측 ${docChecked}건 · 상한에 걸려 건너뜀 ${docSkipped}건 (${Math.round((Date.now() - STARTED_AT) / 1000)}초 경과)`);
     }
 
     // 자리가 넓은 순 — 검색량 대비 글이 적을수록 앞이다.
