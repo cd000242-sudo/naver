@@ -26,7 +26,12 @@ import {
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'spa/public/data/youtube-gap.json');
 
+import { probeShoppingClicks } from './shopping-insight.mjs';
+
 const YOUTUBE_KEY = String(process.env.YOUTUBE_API_KEY || '').trim();
+/* 쇼핑인사이트(HUB) — 있으면 '사는 말인가'를 실측으로 판정한다. 없으면 옛 기준으로 떨어진다. */
+const HUB_KEY_ID = String(process.env.NAVER_APIHUB_KEY_ID || '').trim();
+const HUB_KEY = String(process.env.NAVER_APIHUB_KEY || '').trim();
 
 /*
  * 카테고리 — 블로그 글감이 나오는 것만. 음악은 글로벌 뮤비라 재료가 안 된다.
@@ -109,18 +114,30 @@ const POLICY_TERMS = [
  */
 const AI_RE = /(^|[^a-z0-9])(ai|챗gpt|gpt|인공지능|클로드|제미나이|gemini|미드저니|딥페이크|생성형|오픈ai|openai|코파일럿)([^a-z0-9]|$)/;
 
-/** 검색어(+정책은 확장어까지)에서 주제를 판정한다. 쇼핑은 낱말이 아니라 광고경쟁 실측으로. */
-function topicsOf(keyword, expansions, compIdx) {
+/**
+ * 검색어(+정책은 확장어까지)에서 주제를 판정한다.
+ *
+ * 쇼핑각은 **사는 사람 쪽에서** 본다(2026-08-23). shoppingHit 은 쇼핑인사이트
+ * 실측(그 말이 쇼핑에서 실제로 클릭되는가)이고, 없으면 옛 기준인 광고 경쟁도로
+ * 떨어진다 — 키가 없는 환경에서도 회차가 죽지 않게.
+ */
+function topicsOf(keyword, expansions, compIdx, shoppingHit) {
     const haystack = [keyword, ...expansions].join(' ').toLowerCase();
     const topics = [];
     if (POLICY_TERMS.some((term) => haystack.includes(term))) topics.push('policy');
     if (AI_RE.test(keyword.toLowerCase())) topics.push('ai');
     /*
-     * 제휴·쇼핑각 — 쇼핑 검색 API 가 2026-07-31 종료돼 상품수 실측이 불가능하다.
-     * 남은 실측은 검색광고 경쟁도: 광고주가 입찰로 몰리는 검색어('높음')는
-     * 돈이 걸린 검색어다. 추정이 아니라 네이버가 준 값 그대로다.
+     * 제휴·쇼핑각.
+     *
+     * 옛 기준은 검색광고 경쟁도 '높음' 하나였다. 그런데 사장님 실측 —
+     * 급상승 50건에서 제휴가 2건밖에 안 떴다. 정작 돈이 되는 '나연 혀클리너'
+     * 같은 방송·유튜브 노출 제품은 광고 경쟁이 낮아 통째로 빠졌다.
+     * 광고주가 몰리는가(파는 쪽)가 아니라 사람들이 사러 오는가(사는 쪽)를
+     * 물어야 한다 — 쇼핑인사이트가 그걸 준다.
+     * 상품 수는 여전히 못 잰다(쇼핑 검색 API 는 종료). 있다/없다만 쓴다.
      */
-    if (compIdx === '높음') topics.push('shopping');
+    if (shoppingHit) topics.push('shopping');
+    else if (shoppingHit === undefined && compIdx === '높음') topics.push('shopping');
     return topics;
 }
 
@@ -348,6 +365,11 @@ async function main() {
             // 문서수 0 은 자리가 아니라 아무도 안 쓰는 말일 때가 많다 — 비율로 거른다.
             const ratio = documentCount > 0 ? searchVolume / documentCount : searchVolume;
             if (ratio < MIN_RATIO) continue;
+            /*
+             * 게이트를 통과한 것만 쇼핑에 물어본다 — 떨어질 것에 호출을 쓰지 않는다.
+             * 월 50,000회 중 대분류 9개까지 훑으므로 회차당 수백 회다(지금 사용량 0).
+             */
+            const shoppingHit = await probeShoppingClicks(keyword, HUB_KEY_ID, HUB_KEY);
             const video = source.get(keyword);
             /*
              * 확장 검색어 — 이 검색어에서 뻗어 나가는 실제 검색어들.
@@ -364,7 +386,7 @@ async function main() {
                 searchVolume,
                 /** 광고 경쟁도 실측('높음'/'중간'/'낮음') — 쇼핑각 판정의 근거. */
                 compIdx: detail.compIdx || '',
-                topics: topicsOf(keyword, expansions, detail.compIdx),
+                topics: topicsOf(keyword, expansions, detail.compIdx, shoppingHit),
                 documentCount,
                 ratio: Math.round(ratio * 10) / 10,
                 video: {
