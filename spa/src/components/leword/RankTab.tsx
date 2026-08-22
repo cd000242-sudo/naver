@@ -51,6 +51,16 @@ type AuditRow = BlogAuditPost & {
     extRank?: number | null;
     /** 구글·다음·줌 제목검색 노출 실측(구글은 차단 시 '측정 불가'로 정직하게). */
     engines?: EngineExposure | null;
+    /*
+     * 색인 사실 — 순위와 **다른 사실**이다(사장님 지적 2026-08-22
+     * "네이버 색인 성공한 글도 많은데 하나도 없다는 게 말이 안 되고").
+     * 상위 100 밖인 것과 아예 색인이 안 된 것은 할 일이 전혀 다르다:
+     * 전자는 제목·경쟁 문제, 후자는 색인 문제다.
+     * null 이면 못 쟀다는 뜻 — 모르는 것을 "없음"으로 단정하지 않는다.
+     */
+    indexed?: { indexed: boolean; siteIndexed: boolean; sampled: number } | null;
+    /** 무엇으로 쟀는지 — 블로그 글은 블로그검색, 자체 도메인은 웹문서검색. */
+    searchSource?: 'blog' | 'web';
 };
 
 function loadTracked(): TrackedRow[] {
@@ -82,11 +92,18 @@ function loadAudit(): AuditState | null {
 }
 
 /** 엔진별 수동 확인 링크 — 자동 판정이 애매하면 눈으로 검증하는 문이다. */
+/*
+ * 다음·줌은 뺐다(사장님 지시 2026-08-22). 유입이 사실상 없는 판이라 칸만
+ * 차지했고, 어차피 "없음"만 줄줄이 찍혔다. 구글 하나만 남긴다 —
+ * 방문자 브라이트데이터 키가 있으면 실제로 재고, 없으면 "확인 필요"다.
+ */
 const ENGINE_META: Array<{ id: keyof EngineExposure; label: string; search: (q: string) => string }> = [
     { id: 'google', label: '구글', search: (q) => `https://www.google.com/search?q=${encodeURIComponent(q)}` },
-    { id: 'daum', label: '다음', search: (q) => `https://search.daum.net/search?w=web&q=${encodeURIComponent(q)}` },
-    { id: 'zum', label: '줌', search: (q) => `https://search.zum.com/search.zum?method=webpage&option=accu&query=${encodeURIComponent(q)}` },
 ];
+
+/** 네이버에서 이 검색어로 실제 결과를 보는 주소 — 노출된 글은 바로 가서 확인한다. */
+const naverSearchUrl = (query: string) =>
+    `https://search.naver.com/search.naver?where=web&query=${encodeURIComponent(query)}`;
 
 const PLATFORM_LABEL: Record<string, string> = {
     naver: '네이버 블로그',
@@ -110,6 +127,11 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
     const [auditError, setAuditError] = useState('');
     /** 진행 중 감사를 새 감사가 밀어내면 이전 루프를 멈춘다. */
     const auditRunId = useRef(0);
+    /*
+     * 노출/미노출을 갈라 본다(사장님 지시 2026-08-22 "노출된 거랑 노출 안 된 거랑
+     * 나눠서 볼 수 있게"). 200건을 한 판에 두면 무엇을 손봐야 하는지 안 보인다.
+     */
+    const [auditFilter, setAuditFilter] = useState<'all' | 'in' | 'out'>('all');
 
     /*
      * 글 진단(사장님 확정 2026-08-20 "키워드 추출이 아니라 글을 분석해야") —
@@ -151,25 +173,43 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
         } catch { /* 저장 실패해도 화면은 산다 */ }
     };
 
-    const runAudit = async () => {
-        const url = auditUrl.trim();
+    /*
+     * resume=true 면 저장된 결과를 그대로 두고 **아직 못 본 줄만** 마저 본다
+     * (사장님 지적 2026-08-22 "얘네는 왜 이런 식으로 나오니?" — 아래쪽이 전부 '—').
+     *
+     * 200건은 4줄로 돌려도 4분쯤 걸린다(실측: 한 건 중앙값 4.5초). 그 사이
+     * 새로고침하거나 탭을 떠나면 이 루프가 사라지고, 남은 줄은 '확인 전' 상태로
+     * 저장된 채 영영 '—' 로 남았다 — 다시 시작할 방법조차 없었다.
+     */
+    const runAudit = async (resume = false) => {
+        const url = (resume && audit ? audit.url : auditUrl).trim();
         if (!url || auditLoading) return;
         const runId = auditRunId.current + 1;
         auditRunId.current = runId;
         setAuditLoading(true);
         setAuditError('');
-        const listed = await auditBlogPosts(url);
-        if (!listed.ok || !listed.data) {
-            setAuditLoading(false);
-            setAuditError(listed.message || '피드를 읽지 못했습니다.');
-            return;
+
+        let state: AuditState;
+        if (resume && audit && audit.rows.length > 0) {
+            // 이미 본 줄은 그대로 두고, 못 본 줄만 다시 대기로 돌린다.
+            state = {
+                ...audit,
+                rows: audit.rows.map((row) => (row.status === 'done' ? row : { ...row, status: 'wait' as const })),
+            };
+        } else {
+            const listed = await auditBlogPosts(url);
+            if (!listed.ok || !listed.data) {
+                setAuditLoading(false);
+                setAuditError(listed.message || '피드를 읽지 못했습니다.');
+                return;
+            }
+            state = {
+                url,
+                platform: listed.data.platform,
+                checkedAt: new Date().toISOString(),
+                rows: listed.data.posts.map((post) => ({ ...post, status: 'wait', rank: null, sampled: 0, sympathy: null })),
+            };
         }
-        let state: AuditState = {
-            url,
-            platform: listed.data.platform,
-            checkedAt: new Date().toISOString(),
-            rows: listed.data.posts.map((post) => ({ ...post, status: 'wait', rank: null, sampled: 0, sympathy: null })),
-        };
         persistAudit(state);
 
         /*
@@ -183,6 +223,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
         const LANES = 4;
         const checkOne = async (index: number) => {
             if (auditRunId.current !== runId) return;
+            try {
             state = { ...state, rows: state.rows.map((row, i) => (i === index ? { ...row, status: 'checking' } : row)) };
             setAudit(state);
             const post = state.rows[index];
@@ -192,6 +233,8 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 keyword?: { query: string; rank: number | null };
                 extended?: { query: string; rank: number | null };
                 engines?: EngineExposure;
+                indexed?: { indexed: boolean; siteIndexed: boolean; sampled: number } | null;
+                searchSource?: 'blog' | 'web';
             }) | null : null;
             const done: AuditRow = payload
                 ? {
@@ -200,10 +243,26 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                     kwQuery: payload.keyword?.query, kwRank: payload.keyword ? payload.keyword.rank : undefined,
                     extQuery: payload.extended?.query, extRank: payload.extended ? payload.extended.rank : undefined,
                     engines: payload.engines || null,
+                    // 색인 사실과 무엇으로 쟀는지를 화면까지 그대로 나른다.
+                    indexed: payload.indexed ?? null,
+                    searchSource: payload.searchSource,
                 }
                 : { ...post, status: 'error', rank: null, sampled: 0, sympathy: null };
-            state = { ...state, rows: state.rows.map((row, i) => (i === index ? done : row)) };
-            persistAudit(state);
+                state = { ...state, rows: state.rows.map((row, i) => (i === index ? done : row)) };
+                persistAudit(state);
+            } catch {
+                /*
+                 * 한 건이 터져도 그 줄만 실패로 두고 계속 간다. 예전엔 여기서
+                 * 예외가 나면 그 갈래가 통째로 죽어 나머지가 영영 '—' 로 남았다.
+                 */
+                state = {
+                    ...state,
+                    rows: state.rows.map((row, i) => (i === index
+                        ? { ...row, status: 'error' as const, rank: null, sampled: 0, sympathy: null }
+                        : row)),
+                };
+                persistAudit(state);
+            }
         };
 
         let cursor = 0;
@@ -212,6 +271,8 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 if (auditRunId.current !== runId) return;
                 const index = cursor;
                 cursor += 1;
+                // 이어하기에서 이미 본 줄은 다시 재지 않는다 — API 를 아낀다.
+                if (state.rows[index]?.status === 'done') continue;
                 await checkOne(index);
             }
         };
@@ -313,10 +374,43 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                         </h2>
                         <span>
                             순위 세 눈(각각 상위 100 실측): <strong>키워드</strong>(제목의 핵심어 검색 — 사람이 실제로 치는 것)
-                            → <strong>확장</strong>(핵심어+한정어) → <strong>제목검색</strong>(제 제목으로도 안 잡히면 차단·저품질 의심).
-                            각 칸 아래 회색 글씨가 실제 사용한 검색어입니다 · 조회수는 공개 API 가 없어 싣지 않습니다
+                            → <strong>확장</strong>(핵심어+한정어) → <strong>제목검색</strong>(제 제목으로 잡히는지).
+                            각 칸 아래 회색 글씨가 실제 사용한 검색어이고, <strong>순위를 누르면 그 검색결과로 갑니다</strong>.
+                            자체 도메인(워드프레스)은 웹문서 검색으로 잽니다 — 블로그 검색에는 원래 안 잡힙니다.
+                            조회수·공감은 공개 API 가 없어 싣지 않습니다.
                         </span>
                     </div>
+                    {(() => {
+                        const done = audit.rows.filter((row) => row.status === 'done');
+                        const shown = done.filter((row) => row.rank !== null).length;
+                        const left = audit.rows.length - done.length;
+                        return (
+                          <>
+                            {/*
+                              * 중단된 점검을 이어서 한다. 200건은 4분쯤 걸리는데 그 사이
+                              * 새로고침하면 루프가 사라지고 남은 줄이 '—' 로 굳어 버렸다.
+                              * 이미 본 줄은 다시 재지 않는다.
+                              */}
+                            {left > 0 && !auditLoading && (
+                                <div className="lw-audit-resume">
+                                    <span>아직 못 본 글 <b>{left}건</b>이 남았습니다 — 새로고침하거나 탭을 옮기면 점검이 멈춥니다.</span>
+                                    <button type="button" onClick={() => { void runAudit(true); }}>이어서 점검</button>
+                                </div>
+                            )}
+                            <div className="lw-audit-filters" role="group" aria-label="노출 여부로 나눠 보기">
+                                <button type="button" className={auditFilter === 'all' ? 'on' : ''} onClick={() => setAuditFilter('all')}>
+                                    전체 <em>{audit.rows.length}</em>
+                                </button>
+                                <button type="button" className={auditFilter === 'in' ? 'on' : ''} onClick={() => setAuditFilter('in')}>
+                                    노출됨 <em>{shown}</em>
+                                </button>
+                                <button type="button" className={auditFilter === 'out' ? 'on' : ''} onClick={() => setAuditFilter('out')}>
+                                    노출 안 됨 <em>{done.length - shown}</em>
+                                </button>
+                            </div>
+                          </>
+                        );
+                    })()}
                     <div className="lw-table-scroll">
                         <table className="lw-table lw-audit-table">
                             <thead>
@@ -324,7 +418,6 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                     <th scope="col">상태</th>
                                     <th scope="col">제목</th>
                                     <th scope="col">발행일</th>
-                                    <th scope="col">공감·댓글</th>
                                     <th scope="col">키워드 순위</th>
                                     <th scope="col">확장 순위</th>
                                     <th scope="col" title="그 글의 제목을 그대로 검색했을 때의 자리 — 생존 확인">네이버 제목검색</th>
@@ -341,43 +434,69 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                 </tr>
                             </thead>
                             <tbody>
-                                {audit.rows.map((row) => (
+                                {audit.rows.filter((row) => (auditFilter === 'all'
+                                    ? true
+                                    // 확인 전인 줄은 아직 어느 쪽인지 모른다 — 나눠 볼 때는 숨긴다.
+                                    : row.status === 'done' && (auditFilter === 'in' ? row.rank !== null : row.rank === null))).map((row) => (
                                     <tr key={row.link}>
                                         <td>
                                             {row.status === 'wait' && <span className="lw-audit-badge lw-audit-wait">대기</span>}
                                             {row.status === 'checking' && <span className="lw-audit-badge lw-audit-wait">확인 중…</span>}
                                             {row.status === 'error' && <span className="lw-audit-badge lw-audit-wait">확인 실패</span>}
+                                            {/*
+                                              * 순위와 색인을 갈라서 말한다(사장님 지적 2026-08-22).
+                                              * 예전엔 상위 100 밖이면 무조건 "차단(저품질) 의심"이라
+                                              * 찍었는데, 색인은 멀쩡한 경우가 대부분이다. 실측으로
+                                              * 확인한 사실만 적는다 — 못 쟀으면 못 쟀다고 한다.
+                                              */}
                                             {row.status === 'done' && (row.rank !== null
                                                 ? <span className="lw-audit-badge lw-audit-in">노출</span>
-                                                : <span className="lw-audit-badge lw-audit-out">누락</span>)}
+                                                : row.indexed?.indexed
+                                                    ? <span className="lw-audit-badge lw-audit-half">순위 밖</span>
+                                                    : <span className="lw-audit-badge lw-audit-out">못 찾음</span>)}
                                             {row.status === 'done' && row.rank === null && (
-                                                <small className="lw-audit-why">검색 미노출 · 차단(저품질) 의심</small>
+                                                <small className="lw-audit-why">
+                                                    {row.indexed === null || row.indexed === undefined
+                                                        ? '상위 100 밖 · 색인 여부는 못 쟀습니다'
+                                                        : row.indexed.indexed
+                                                            ? '색인은 됨 · 상위 100 밖(제목·경쟁 문제)'
+                                                            : row.indexed.siteIndexed
+                                                                ? '사이트는 색인됨 · 이 글은 아직 안 잡힘'
+                                                                : '이 사이트가 네이버에서 안 잡힙니다'}
+                                                    {row.searchSource === 'web' ? ' · 웹문서 검색 기준' : ''}
+                                                </small>
                                             )}
                                         </td>
                                         <td className="lw-rank-title">
                                             <a href={row.link} target="_blank" rel="noreferrer">{row.title}</a>
                                         </td>
                                         <td>{row.publishedAt || '—'}</td>
-                                        <td>
-                                            {row.sympathy !== null ? `공감 ${row.sympathy}` : ''}
-                                            {row.sympathy !== null && row.comments !== null ? ' · ' : ''}
-                                            {row.comments !== null ? `댓글 ${row.comments}` : ''}
-                                            {row.sympathy === null && row.comments === null ? '—' : ''}
-                                        </td>
                                         <td className={row.kwRank === null ? 'lw-rank-out' : 'lw-rank-in'}>
-                                            {row.status !== 'done' ? '—' : row.kwRank != null ? `${row.kwRank}위` : row.kwQuery ? '없음' : '—'}
+                                            {/*
+                                              * 노출된 자리는 눌러서 그 검색결과로 바로 간다
+                                              * (사장님 지시 2026-08-22 "노출됐으면 노출된 검색결과를
+                                              * 바로 갈 수 있게"). 순위만 적어 두면 눈으로 확인하려고
+                                              * 검색어를 다시 쳐야 한다.
+                                              */}
+                                            {row.status !== 'done' ? '—' : row.kwRank != null
+                                                ? <a className="lw-rank-go" href={naverSearchUrl(row.kwQuery || '')} target="_blank" rel="noreferrer" title="이 검색결과 보기">{row.kwRank}위 ↗</a>
+                                                : row.kwQuery ? '없음' : '—'}
                                             {row.kwQuery && (onAnalyze
                                                 ? <button type="button" className="lw-audit-q lw-audit-q-btn" title="키워드 분석 탭으로" onClick={() => onAnalyze(row.kwQuery!)}>{row.kwQuery}</button>
                                                 : <small className="lw-audit-q">{row.kwQuery}</small>)}
                                         </td>
                                         <td className={row.extRank === null ? 'lw-rank-out' : 'lw-rank-in'}>
-                                            {row.status !== 'done' ? '—' : row.extRank != null ? `${row.extRank}위` : row.extQuery ? '없음' : '—'}
+                                            {row.status !== 'done' ? '—' : row.extRank != null
+                                                ? <a className="lw-rank-go" href={naverSearchUrl(row.extQuery || '')} target="_blank" rel="noreferrer" title="이 검색결과 보기">{row.extRank}위 ↗</a>
+                                                : row.extQuery ? '없음' : '—'}
                                             {row.extQuery && row.extQuery !== row.kwQuery && (onAnalyze
                                                 ? <button type="button" className="lw-audit-q lw-audit-q-btn" title="키워드 분석 탭으로" onClick={() => onAnalyze(row.extQuery!)}>{row.extQuery}</button>
                                                 : <small className="lw-audit-q">{row.extQuery}</small>)}
                                         </td>
                                         <td className={row.rank === null ? 'lw-rank-out' : 'lw-rank-in'}>
-                                            {row.status !== 'done' ? '—' : row.rank !== null ? `${row.rank}위` : `${row.sampled}건 중 없음`}
+                                            {row.status !== 'done' ? '—' : row.rank !== null
+                                                ? <a className="lw-rank-go" href={naverSearchUrl(row.title)} target="_blank" rel="noreferrer" title="이 검색결과 보기">{row.rank}위 ↗</a>
+                                                : `${row.sampled}건 중 없음`}
                                         </td>
                                         {ENGINE_META.map((engine) => {
                                             const state = row.engines ? row.engines[engine.id] : null;

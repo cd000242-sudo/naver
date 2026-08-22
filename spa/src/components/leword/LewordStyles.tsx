@@ -656,6 +656,35 @@ function LewordStyles() {
             .lw-audit-badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 800; }
             .lw-audit-in { background: rgba(46,204,113,.15); color: #2ecc71; border: 1px solid rgba(46,204,113,.4); }
             .lw-audit-out { background: rgba(255,91,91,.14); color: #ff7b7b; border: 1px solid rgba(255,91,91,.4); }
+            /* 색인은 됐는데 순위만 밖 — 빨강(색인 실패)과 구분해야 할 일이 달라진다. */
+            .lw-audit-half { background: rgba(240,181,63,.14); color: #f0b53f; border: 1px solid rgba(240,181,63,.4); }
+
+            /* 노출 여부로 나눠 보기 — 200건을 한 판에 두면 손볼 것이 안 보인다. */
+            .lw-audit-filters { display: flex; gap: 7px; margin: 12px 0 4px; flex-wrap: wrap; }
+            .lw-audit-filters button {
+                padding: 7px 15px; border-radius: 999px; cursor: pointer; font: inherit;
+                font-size: 12.5px; font-weight: 700; border: 1px solid rgba(255,255,255,.12);
+                background: transparent; color: rgba(235,242,250,.6);
+            }
+            .lw-audit-filters button.on { background: #ffa500; border-color: #ffa500; color: #1a1200; font-weight: 900; }
+            .lw-audit-filters em { font-style: normal; margin-left: 5px; opacity: .75; font-variant-numeric: tabular-nums; }
+
+            /* 노출된 자리는 눌러서 그 검색결과로 간다. */
+            .lw-rank-go { color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor; }
+            .lw-rank-go:hover { opacity: .8; }
+
+            /* 중단된 점검을 이어서 — 남은 건수를 그대로 적는다. */
+            .lw-audit-resume {
+                display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+                margin: 12px 0 0; padding: 11px 14px; border-radius: 10px;
+                border: 1px solid rgba(240,181,63,.3); background: rgba(240,181,63,.07);
+                font-size: 12.5px; color: rgba(235,242,250,.78);
+            }
+            .lw-audit-resume b { color: #f0b53f; }
+            .lw-audit-resume button {
+                margin-left: auto; padding: 8px 16px; border-radius: 8px; border: 0; cursor: pointer;
+                background: #f0b53f; color: #1a1200; font: inherit; font-size: 12.5px; font-weight: 800;
+            }
             .lw-audit-wait { background: rgba(255,255,255,.05); color: rgba(235,242,250,.55); border: 1px solid rgba(255,255,255,.12); }
             .lw-audit-why { display: block; margin-top: 4px; font-size: 11px; color: rgba(255,123,123,.75); }
             /* 실제 사용한 검색어 — 순위의 기준이 눈에 보여야 신뢰가 생긴다. */
