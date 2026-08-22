@@ -55,12 +55,39 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
             .catch(() => { /* 보드 없음 = 결합 패널 없이 계속 */ });
         return () => { cancelled = true; };
     }, []);
+    /*
+     * 제휴 상품 실측(사장님 지시 2026-08-23: "제휴 보면 크롤링해서 가격이랑
+     * 잘 들고오잖아? 그걸 활용하고").
+     *
+     * 네이버 '쇼핑 상품수'는 쇼핑 검색 API 종료로 영영 못 잰다 — 그 자리에
+     * 계속 '—' 만 떠 있었다. 대신 제휴 회차가 실제로 긁어 온 상품(이름·브랜드·
+     * 가격)을 붙인다. 네이버 상품수와 다른 사실이므로 이름도 다르게 적는다.
+     */
+    const [affiliate, setAffiliate] = useState<Array<{ name: string; brand: string; price: unknown; keyword: string; url: string }>>([]);
+    useEffect(() => {
+        let cancelled = false;
+        fetch('/data/affiliate-campaigns.json', { cache: 'no-store' })
+            .then((res) => (res.ok ? res.json() : null))
+            .then((data) => {
+                if (cancelled || !data || !data.sites) return;
+                const flat: Array<{ name: string; brand: string; price: unknown; keyword: string; url: string }> = [];
+                for (const site of Object.values(data.sites as Record<string, unknown>)) {
+                    const list = Array.isArray(site) ? site : [];
+                    for (const item of list) flat.push(item as never);
+                }
+                setAffiliate(flat);
+            })
+            .catch(() => { /* 제휴 파일이 없어도 분석은 그대로 돈다 */ });
+        return () => { cancelled = true; };
+    }, []);
     const [usage, setUsage] = useState<KeywordUsage | null>(null);
     const [error, setError] = useState<{ code?: string; message?: string; missing?: string[] }>({});
     const [loading, setLoading] = useState(false);
     const [licenseOpen, setLicenseOpen] = useState(false);
     const [licenseInput, setLicenseInput] = useState(getStoredLicense());
     const inputRef = useRef<HTMLInputElement | null>(null);
+    /** 마지막 조회만 화면에 반영하기 위한 순번. */
+    const runTicket = useRef(0);
     /*
      * 확장 키워드 문서수 실측(사장님 지적 2026-08-23: "확장 키워드가 같이
      * 분석이 되어서 아래에 보여줘야 되고, 확장 키워드에 또 확장 키워드를 해서
@@ -77,10 +104,21 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
 
     const run = useCallback(async (target: string) => {
         const trimmed = target.trim();
-        if (!trimmed || loading) return;
+        /*
+         * loading 중이라고 무시하면 [더 파기]가 먹히지 않는다(사장님 지적
+         * 2026-08-23 "더 파기 누르면 한 번에 분석되게"). 같은 검색어를 다시
+         * 누른 게 아니라면 새 요청을 받는다.
+         */
+        if (!trimmed) return;
+        /*
+         * 요청 순번 — 빠르게 두 번 파고들면 먼저 띄운 응답이 늦게 와서
+         * 새 결과를 덮을 수 있다. 마지막 요청만 화면에 쓴다.
+         */
+        const ticket = ++runTicket.current;
         setLoading(true);
         setError({});
         const response = await analyzeKeyword(trimmed);
+        if (ticket !== runTicket.current) return;
         setLoading(false);
         if (response.usage) setUsage(response.usage);
         if (response.ok && response.data) {
@@ -138,26 +176,44 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
      * 문서수를 재서 붙인다. 화면이 열릴 때 자동으로 — 사장님이 버튼을 한 번 더
      * 누르게 만들 이유가 없다. 못 잰 것은 빈칸으로 두고 0 으로 적지 않는다.
      */
+    /*
+     * [버그 주의] 의존성에 expState 를 넣으면 안 된다(2026-08-23 실사고).
+     * setExpState('loading') 이 곧바로 이 effect 를 다시 돌리고, 그때 정리
+     * 함수가 **방금 띄운 요청을 취소**해서 화면이 영영 '재는 중'에 멈춘다.
+     * result 가 바뀔 때만 돈다. 중복 조회는 ref 로 막는다.
+     */
+    const docsFor = useRef<string>('');
     useEffect(() => {
-        if (!result || expansionRows.length === 0 || expState !== 'idle') return;
+        if (!result || expansionRows.length === 0) return;
+        if (docsFor.current === result.keyword) return;
+        docsFor.current = result.keyword;
         setExpState('loading');
         let cancelled = false;
-        fetchKeywordDocs(expansionRows.map((r) => r.keyword)).then((res) => {
-            if (cancelled) return;
-            if (res.ok && res.data) setExpDocs(res.data.docs || {});
-            setExpState('done');
-        });
+        fetchKeywordDocs(expansionRows.map((r) => r.keyword))
+            .then((res) => {
+                if (cancelled) return;
+                if (res.ok && res.data) setExpDocs(res.data.docs || {});
+                setExpState('done');
+            })
+            .catch(() => {
+                // 실패해도 '재는 중'에 묶어 두지 않는다 — 못 쟀다고 끝낸다.
+                if (!cancelled) setExpState('done');
+            });
         return () => { cancelled = true; };
         // expansionRows 는 result 에서 파생된다 — result 가 바뀔 때만 다시 잰다.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [result, expState]);
+    }, [result]);
 
     /** 한 칸 더 파고든다 — 지금 검색어를 경로에 남기고 그 확장어로 분석을 다시 돌린다. */
     const digInto = (next: string) => {
-        if (!result) return;
+        if (!result || !next.trim()) return;
         setTrail((prev) => [...prev, result.keyword].slice(-6));
         setKeyword(next);
-        run(next);
+        // 새 검색어의 문서수를 다시 재도록 잠금을 푼다.
+        docsFor.current = '';
+        setExpDocs({});
+        setExpState('idle');
+        void run(next);
     };
 
     /*
@@ -302,31 +358,64 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                                 </div>
                             );
                         })()}
-                        <div className="lw-metrics">
-                            <MetricCell label="월 검색량" value={formatCount(measured.searchVolume)} note="PC + 모바일" />
-                            <MetricCell label="PC" value={formatCount(measured.searchVolumePc)} />
-                            <MetricCell label="모바일" value={formatCount(measured.searchVolumeMobile)} />
-                            <MetricCell label="블로그 문서수" value={formatCount(measured.documentCount)} />
-                            <MetricCell label="지식인 질문" value={formatCount(measured.kinCount ?? null)} note="질문 많음 = 답 찾는 중" />
-                            <MetricCell
-                                label="검색량 ÷ 문서수"
-                                value={measured.ratio === null ? '—' : String(measured.ratio)}
-                                note="클수록 문서가 적다"
-                            />
-                            <MetricCell label="쇼핑 상품수" value={formatCount(measured.productCount)} />
-                            <MetricCell label="광고 경쟁도" value={measured.competition || '—'} note="검색광고 표기" />
-                            <MetricCell label="광고 노출 depth" value={formatCount(measured.adDepth)} />
-                            {/* 광고수·빈자리 — 검색결과를 직접 열어 본 회차 실측(보드에 있는 키워드만). */}
-                            {boardRow && typeof boardRow.serp?.adCount === 'number' && (
-                                <MetricCell label="광고수" value={String(boardRow.serp.adCount)} note="검색결과 상단 실측" />
+                        {/*
+                          * 지표는 왼쪽 두 줄(4 + 5), 그래프는 그 오른쪽(사장님 지시 2026-08-23:
+                          * "1열로 하지 말고 2줄로 첫 줄 4개, 우측 빈 공간에 황금키워드처럼 그래프를.
+                          * 아래에 두니까 보기 힘들어").
+                          * 뺀 것 둘 — '광고 노출 depth'와 '검색량 ÷ 문서수'. 후자는 바로 위
+                          * 황금지수 카드가 같은 값을 더 크게 말하고 있어 두 번 나왔다.
+                          */}
+                        <div className="lw-analyze-grid">
+                            <div className="lw-metrics lw-metrics-2row">
+                                <MetricCell label="월 검색량" value={formatCount(measured.searchVolume)} note="PC + 모바일" />
+                                <MetricCell label="PC" value={formatCount(measured.searchVolumePc)} />
+                                <MetricCell label="모바일" value={formatCount(measured.searchVolumeMobile)} />
+                                <MetricCell label="블로그 문서수" value={formatCount(measured.documentCount)} />
+                                <MetricCell label="지식인 질문" value={formatCount(measured.kinCount ?? null)} note="질문 많음 = 답 찾는 중" />
+                                {(() => {
+                                    /*
+                                     * 네이버 쇼핑 상품수는 못 잰다(검색 API 종료). 대신 제휴 회차가
+                                     * 실제로 긁어 온 상품을 센다. 다른 사실이므로 이름도 다르게 적는다.
+                                     */
+                                    const hits = affiliate.filter((item) =>
+                                        compact(String(item.keyword || '')) === compact(result.keyword)
+                                        || compact(String(item.name || '')).includes(compact(result.keyword)));
+                                    const prices = hits
+                                        .map((item) => Number(item.price))
+                                        .filter((n) => Number.isFinite(n) && n > 0);
+                                    const low = prices.length > 0 ? Math.min(...prices) : null;
+                                    return (
+                                        <MetricCell
+                                            label="제휴 상품"
+                                            value={hits.length > 0 ? `${hits.length}개` : '없음'}
+                                            note={low !== null ? `최저 ${low.toLocaleString('ko-KR')}원` : '제휴 회차 실측'}
+                                        />
+                                    );
+                                })()}
+                                <MetricCell label="광고 경쟁도" value={measured.competition || '—'} note="검색광고 표기" />
+                                {/* 광고수·빈자리 — 검색결과를 직접 열어 본 회차 실측(보드에 있는 키워드만). */}
+                                {boardRow && typeof boardRow.serp?.adCount === 'number' && (
+                                    <MetricCell label="광고수" value={String(boardRow.serp.adCount)} note="검색결과 상단 실측" />
+                                )}
+                                {boardRow && (
+                                    <MetricCell
+                                        label="빈자리"
+                                        value={boardRow.openSlot ? `${boardRow.openSlot}위` : '10위 내 없음'}
+                                        note="검색결과 배치 실측"
+                                    />
+                                )}
+                            </div>
+                            {/* 30일 추이 자동 표시 — "그래프가 보여야 이 키워드로 글을 써도 될지 안다". */}
+                            {result.trend && result.trend.series.length >= 2 && (
+                                <div className="lw-analyze-spark">
+                                    <TrendSparkline
+                                        series={result.trend.series}
+                                        height={72}
+                                        monthlyVolume={result.measured.searchVolume ?? null}
+                                    />
+                                </div>
                             )}
-                            {boardRow && (
-                                <MetricCell
-                                    label="빈자리"
-                                    value={boardRow.openSlot ? `${boardRow.openSlot}위` : '10위 내 없음'}
-                                    note="검색결과 배치 실측"
-                                />
-                            )}
+
                         </div>
                         {boardRow?.whySearch?.text && (
                             <div className="lw-analyze-why">
@@ -335,17 +424,6 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                                 {boardRow.whySearch.basis && <small>{boardRow.whySearch.basis}</small>}
                             </div>
                         )}
-                        {/* 30일 추이 자동 표시 — "그래프가 보여야 이 키워드로 글을 써도 될지 안다". */}
-                        {result.trend && result.trend.series.length >= 2 && (
-                            <div className="lw-analyze-spark">
-                                <TrendSparkline
-                                    series={result.trend.series}
-                                    height={72}
-                                    monthlyVolume={result.measured.searchVolume ?? null}
-                                />
-                            </div>
-                        )}
-
                         {/*
                           * 글감·제목(사장님 지적 2026-08-22) — 숫자만 보여 주면
                           * "그래서 뭘 쓰지"가 남는다. 왜 나오는 말인지·누가 왜 누르는지·

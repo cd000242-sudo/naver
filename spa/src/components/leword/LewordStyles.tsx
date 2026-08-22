@@ -1790,6 +1790,18 @@ function LewordStyles() {
             .lw-analyze-why strong { display: block; margin-bottom: 5px; font-size: 12px; font-weight: 900; color: #b9a6ff; }
             .lw-analyze-why p { margin: 0; color: #ebf2fa; font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
             .lw-analyze-why small { display: block; margin-top: 5px; font-size: 11px; color: rgba(235,242,250,.5); }
+            /*
+             * 분석 머리 — 지표 두 줄(왼쪽) + 추이 그래프(오른쪽).
+             * 그래프를 아래에 두면 숫자를 다 지나친 뒤에야 보인다(사장님 지적).
+             * 좁은 화면에서는 자연스럽게 위아래로 쌓인다.
+             */
+            .lw-analyze-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, 1fr); gap: 14px; align-items: start; }
+            .lw-metrics-2row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+            .lw-analyze-grid .lw-analyze-spark { margin: 0; padding: 12px 14px; border: 1px solid rgba(255,255,255,.09); border-radius: 12px; background: rgba(255,255,255,.02); }
+            @media (max-width: 980px) {
+              .lw-analyze-grid { grid-template-columns: 1fr; }
+              .lw-metrics-2row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            }
             /* 확장 키워드 자리 판정 — 색은 사실 셋(있음·좁음·없음)만 가른다. */
             .lw-slot-open { color: #34d399; font-weight: 600; }
             .lw-slot-tight { color: #fbbf24; }
