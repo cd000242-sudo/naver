@@ -28,8 +28,16 @@ const OUT = join(ROOT, 'spa/public/data/youtube-gap.json');
 
 const YOUTUBE_KEY = String(process.env.YOUTUBE_API_KEY || '').trim();
 
-/* 카테고리 — 블로그 글감이 나오는 것만. 음악은 글로벌 뮤비라 재료가 안 된다. */
-const CATEGORIES = ['24', '25', '22', '26', '1', '17', '20', '28'];
+/*
+ * 카테고리 — 블로그 글감이 나오는 것만. 음악은 글로벌 뮤비라 재료가 안 된다.
+ *
+ * [2026-08-23 확장] 사장님 지시: "특정 연예인이나 나혼자산다 등등 TV·유튜브에
+ * 나온 제품이 특히 광고가 돼서 잘 팔린다. 이걸 제휴로 올려 상위노출시키면
+ * 수익이 된다. 좀 더 대량으로 찾게 해 줘."
+ * 제품이 실제로 나오는 판을 더 연다 — 코미디(23)·교육(27)·여행(19)·반려(15).
+ * 유튜브 호출은 카테고리당 1단위라 11개를 다 불러도 하루 10,000 중 11단위다.
+ */
+const CATEGORIES = ['24', '25', '22', '26', '1', '17', '20', '28', '23', '19', '15'];
 
 /**
  * 숏폼인지 확인한다.
@@ -52,8 +60,12 @@ const MIN_VOLUME = Number(process.env.YTGAP_MIN_VOLUME || 200);
 const MAX_DOCS = Number(process.env.YTGAP_MAX_DOCS || 5000);
 const MIN_RATIO = Number(process.env.YTGAP_MIN_RATIO || 1);
 const MAX_ROWS = Number(process.env.YTGAP_MAX_ROWS || 150);
-/** 영상 하나가 목록을 도배하지 못하게. */
-const MAX_PER_VIDEO = Number(process.env.YTGAP_MAX_PER_VIDEO || 2);
+/*
+ * 영상 하나가 목록을 도배하지 못하게.
+ * 2 → 3 (2026-08-23): '나혼자산다' 한 회에 제품이 여럿 나온다. 2 로 묶으면
+ * 그 회의 나머지 제품이 통째로 버려진다.
+ */
+const MAX_PER_VIDEO = Number(process.env.YTGAP_MAX_PER_VIDEO || 3);
 
 /*
  * 실측에 쓸 시간 상한(사장님 지적 2026-08-22 "며칠째 같은 것만 나온다").
@@ -152,7 +164,7 @@ function suggestionsFor(lead, suggestions) {
 
 async function trendingVideos(categoryId) {
     const url = 'https://www.googleapis.com/youtube/v3/videos'
-        + `?part=snippet,statistics&chart=mostPopular&regionCode=KR&maxResults=25&key=${YOUTUBE_KEY}`
+        + `?part=snippet,statistics&chart=mostPopular&regionCode=KR&maxResults=50&key=${YOUTUBE_KEY}`
         + (categoryId ? `&videoCategoryId=${categoryId}` : '');
     try {
         const response = await fetch(url);
