@@ -173,25 +173,43 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
         } catch { /* 저장 실패해도 화면은 산다 */ }
     };
 
-    const runAudit = async () => {
-        const url = auditUrl.trim();
+    /*
+     * resume=true 면 저장된 결과를 그대로 두고 **아직 못 본 줄만** 마저 본다
+     * (사장님 지적 2026-08-22 "얘네는 왜 이런 식으로 나오니?" — 아래쪽이 전부 '—').
+     *
+     * 200건은 4줄로 돌려도 4분쯤 걸린다(실측: 한 건 중앙값 4.5초). 그 사이
+     * 새로고침하거나 탭을 떠나면 이 루프가 사라지고, 남은 줄은 '확인 전' 상태로
+     * 저장된 채 영영 '—' 로 남았다 — 다시 시작할 방법조차 없었다.
+     */
+    const runAudit = async (resume = false) => {
+        const url = (resume && audit ? audit.url : auditUrl).trim();
         if (!url || auditLoading) return;
         const runId = auditRunId.current + 1;
         auditRunId.current = runId;
         setAuditLoading(true);
         setAuditError('');
-        const listed = await auditBlogPosts(url);
-        if (!listed.ok || !listed.data) {
-            setAuditLoading(false);
-            setAuditError(listed.message || '피드를 읽지 못했습니다.');
-            return;
+
+        let state: AuditState;
+        if (resume && audit && audit.rows.length > 0) {
+            // 이미 본 줄은 그대로 두고, 못 본 줄만 다시 대기로 돌린다.
+            state = {
+                ...audit,
+                rows: audit.rows.map((row) => (row.status === 'done' ? row : { ...row, status: 'wait' as const })),
+            };
+        } else {
+            const listed = await auditBlogPosts(url);
+            if (!listed.ok || !listed.data) {
+                setAuditLoading(false);
+                setAuditError(listed.message || '피드를 읽지 못했습니다.');
+                return;
+            }
+            state = {
+                url,
+                platform: listed.data.platform,
+                checkedAt: new Date().toISOString(),
+                rows: listed.data.posts.map((post) => ({ ...post, status: 'wait', rank: null, sampled: 0, sympathy: null })),
+            };
         }
-        let state: AuditState = {
-            url,
-            platform: listed.data.platform,
-            checkedAt: new Date().toISOString(),
-            rows: listed.data.posts.map((post) => ({ ...post, status: 'wait', rank: null, sampled: 0, sympathy: null })),
-        };
         persistAudit(state);
 
         /*
@@ -205,6 +223,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
         const LANES = 4;
         const checkOne = async (index: number) => {
             if (auditRunId.current !== runId) return;
+            try {
             state = { ...state, rows: state.rows.map((row, i) => (i === index ? { ...row, status: 'checking' } : row)) };
             setAudit(state);
             const post = state.rows[index];
@@ -229,8 +248,21 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                     searchSource: payload.searchSource,
                 }
                 : { ...post, status: 'error', rank: null, sampled: 0, sympathy: null };
-            state = { ...state, rows: state.rows.map((row, i) => (i === index ? done : row)) };
-            persistAudit(state);
+                state = { ...state, rows: state.rows.map((row, i) => (i === index ? done : row)) };
+                persistAudit(state);
+            } catch {
+                /*
+                 * 한 건이 터져도 그 줄만 실패로 두고 계속 간다. 예전엔 여기서
+                 * 예외가 나면 그 갈래가 통째로 죽어 나머지가 영영 '—' 로 남았다.
+                 */
+                state = {
+                    ...state,
+                    rows: state.rows.map((row, i) => (i === index
+                        ? { ...row, status: 'error' as const, rank: null, sampled: 0, sympathy: null }
+                        : row)),
+                };
+                persistAudit(state);
+            }
         };
 
         let cursor = 0;
@@ -239,6 +271,8 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 if (auditRunId.current !== runId) return;
                 const index = cursor;
                 cursor += 1;
+                // 이어하기에서 이미 본 줄은 다시 재지 않는다 — API 를 아낀다.
+                if (state.rows[index]?.status === 'done') continue;
                 await checkOne(index);
             }
         };
@@ -349,7 +383,20 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                     {(() => {
                         const done = audit.rows.filter((row) => row.status === 'done');
                         const shown = done.filter((row) => row.rank !== null).length;
+                        const left = audit.rows.length - done.length;
                         return (
+                          <>
+                            {/*
+                              * 중단된 점검을 이어서 한다. 200건은 4분쯤 걸리는데 그 사이
+                              * 새로고침하면 루프가 사라지고 남은 줄이 '—' 로 굳어 버렸다.
+                              * 이미 본 줄은 다시 재지 않는다.
+                              */}
+                            {left > 0 && !auditLoading && (
+                                <div className="lw-audit-resume">
+                                    <span>아직 못 본 글 <b>{left}건</b>이 남았습니다 — 새로고침하거나 탭을 옮기면 점검이 멈춥니다.</span>
+                                    <button type="button" onClick={() => { void runAudit(true); }}>이어서 점검</button>
+                                </div>
+                            )}
                             <div className="lw-audit-filters" role="group" aria-label="노출 여부로 나눠 보기">
                                 <button type="button" className={auditFilter === 'all' ? 'on' : ''} onClick={() => setAuditFilter('all')}>
                                     전체 <em>{audit.rows.length}</em>
@@ -361,6 +408,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                     노출 안 됨 <em>{done.length - shown}</em>
                                 </button>
                             </div>
+                          </>
                         );
                     })()}
                     <div className="lw-table-scroll">
