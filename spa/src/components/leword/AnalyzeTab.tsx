@@ -2,12 +2,16 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { goldenIndex } from '../../lib/goldenIndex';
 import {
     analyzeKeyword,
+    fetchKeywordPostIdeas,
     formatCount,
     getStoredLicense,
     setStoredLicense,
     type KeywordAnalysis,
     type KeywordUsage,
+    type KinPostIdea,
 } from '../../lib/keywordApi';
+import { bridgePostIdeas } from '../../lib/bridge';
+import { loadUserKeys } from '../../lib/userKeys';
 import { ErrorNote, MetricCell, TabIntro, UsageBar } from './LewordShared';
 import { groupByIntent } from '../../lib/intentGroups';
 import TrendSparkline from './TrendSparkline';
@@ -88,6 +92,60 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
     const boardRow = result
         ? boardRows.find((row) => compact(row.keyword) === compact(result.keyword)) || null
         : null;
+
+    /*
+     * 글감·제목(사장님 지적 2026-08-22 "왜 뜨는지 / 확장할 수 있는 키워드 /
+     * 어떤 제목으로 쓰면 상위노출에 유리한지 — 제목 생성 버튼을 여기 달아야").
+     *
+     * 유튜브 글감과 같은 경로를 쓴다. 한 번에 키워드·왜 나오는지·누가 왜 클릭하는지·
+     * SEO 제목·홈판 제목이 같이 온다 — 셋이 한 자리에서 풀린다.
+     * 서버(사이트 토큰) 먼저, 안 되면 앱(본인 구독)으로 넘어간다.
+     */
+    const [ideas, setIdeas] = useState<{ status: 'idle' | 'loading' | 'done' | 'error'; list?: KinPostIdea[]; message?: string }>({ status: 'idle' });
+    const makeIdeas = async () => {
+        if (!result || ideas.status === 'loading') return;
+        setIdeas({ status: 'loading' });
+        const context = boardRow?.whySearch?.text || '';
+        const viaKeys = await fetchKeywordPostIdeas(result.keyword, context);
+        if (viaKeys.ok && viaKeys.data?.ideas?.length) {
+            setIdeas({ status: 'done', list: viaKeys.data.ideas });
+            return;
+        }
+        if (viaKeys.error && viaKeys.error !== 'needs-keys') {
+            setIdeas({ status: 'error', message: viaKeys.message || viaKeys.error });
+            return;
+        }
+        const viaApp = await bridgePostIdeas({
+            kind: 'keyword',
+            keyword: result.keyword,
+            context,
+            provider: String(loadUserKeys().aiProvider || ''),
+        });
+        if (viaApp.status === 'ok') {
+            const usable = viaApp.ideas
+                .filter((idea) => idea.seo && idea.home)
+                .map((idea) => ({
+                    keyword: idea.keyword,
+                    why: idea.why || '',
+                    clickWhy: idea.clickWhy,
+                    seo: idea.seo as string,
+                    home: idea.home as string,
+                    sub: idea.sub,
+                }));
+            setIdeas(usable.length > 0
+                ? { status: 'done', list: usable }
+                : { status: 'error', message: `${viaApp.provider} 가 제목을 못 만들었습니다 — 다시 눌러 주세요.` });
+            return;
+        }
+        setIdeas({
+            status: 'error',
+            message: viaApp.status === 'outdated'
+                ? 'LEWORD 앱이 구버전이라 이 기능이 없습니다 — 앱을 업데이트해 주세요.'
+                : viaApp.status === 'offline'
+                    ? 'LEWORD 앱을 켜면 본인 구독으로 바로 만듭니다. 앱 없이 쓰려면 내 API 키 탭에서 클로드 [연동]을 눌러 주세요.'
+                    : `만들지 못했습니다: ${viaApp.message}`,
+        });
+    };
     // 보드 지식인 실측(조회수 포함)이 있으면 그것이 우선이다 — API 는 조회수를 못 준다.
     const kinList = (boardRow?.kinTop?.length ? boardRow.kinTop : result?.kinTop) || [];
 
@@ -213,9 +271,42 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                         {/* 30일 추이 자동 표시 — "그래프가 보여야 이 키워드로 글을 써도 될지 안다". */}
                         {result.trend && result.trend.series.length >= 2 && (
                             <div className="lw-analyze-spark">
-                                <TrendSparkline series={result.trend.series} height={72} />
+                                <TrendSparkline
+                                    series={result.trend.series}
+                                    height={72}
+                                    monthlyVolume={result.measured.searchVolume ?? null}
+                                />
                             </div>
                         )}
+
+                        {/*
+                          * 글감·제목(사장님 지적 2026-08-22) — 숫자만 보여 주면
+                          * "그래서 뭘 쓰지"가 남는다. 왜 나오는 말인지·누가 왜 누르는지·
+                          * 어떤 제목으로 쓸지를 한 번에 낸다.
+                          */}
+                        <div className="lw-analyze-ideas">
+                            <div className="lw-analyze-ideas-head">
+                                <b>이 키워드로 뭘 쓸까</b>
+                                <span>왜 나오는 말인지 · 누가 왜 누르는지 · 검색용 제목과 홈판 제목까지</span>
+                                <button type="button" onClick={() => { void makeIdeas(); }} disabled={ideas.status === 'loading'}>
+                                    {ideas.status === 'loading' ? '만드는 중…' : ideas.status === 'done' ? '다시 만들기' : '글감·제목 만들기'}
+                                </button>
+                            </div>
+                            {ideas.status === 'error' && <p className="lw-analyze-ideas-err">{ideas.message}</p>}
+                            {ideas.status === 'done' && ideas.list && (
+                                <ul className="lw-idea-list">
+                                    {ideas.list.map((idea) => (
+                                        <li key={idea.keyword}>
+                                            <b>{idea.keyword}</b>
+                                            {idea.why && <em>{idea.why}</em>}
+                                            {idea.clickWhy && <em className="lw-idea-click">누가 왜 누르나 · {idea.clickWhy}</em>}
+                                            <p><span>검색용</span>{idea.seo}</p>
+                                            <p><span>홈판용</span>{idea.home}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
                         <p className="lw-panel-foot">
                             {Object.entries(result.sources).map(([, label]) => label).join(' · ')}
                         </p>

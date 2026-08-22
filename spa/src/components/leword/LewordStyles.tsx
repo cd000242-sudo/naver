@@ -673,6 +673,28 @@ function LewordStyles() {
             .lw-rank-go { color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor; }
             .lw-rank-go:hover { opacity: .8; }
 
+            /* 키워드 분석의 글감·제목 — 숫자만 보여 주면 "그래서 뭘 쓰지"가 남는다. */
+            .lw-analyze-ideas { margin-top: 16px; padding: 15px 17px; border-radius: 13px; border: 1px solid rgba(255,165,0,.24); background: rgba(255,165,0,.04); }
+            .lw-analyze-ideas-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+            .lw-analyze-ideas-head b { font-size: 14.5px; color: #ffa500; }
+            .lw-analyze-ideas-head span { flex: 1; min-width: 200px; font-size: 11.5px; color: rgba(235,242,250,.5); }
+            .lw-analyze-ideas-head button {
+                padding: 9px 18px; border-radius: 9px; border: 0; cursor: pointer;
+                background: #ffa500; color: #1a1200; font: inherit; font-size: 12.5px; font-weight: 800;
+            }
+            .lw-analyze-ideas-head button:disabled { opacity: .6; cursor: not-allowed; }
+            .lw-analyze-ideas-err { margin: 10px 0 0; font-size: 12px; color: #ff8fa0; line-height: 1.6; }
+            .lw-idea-list { list-style: none; margin: 13px 0 0; padding: 0; display: grid; gap: 10px; }
+            .lw-idea-list li { padding: 12px 14px; border-radius: 11px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); }
+            .lw-idea-list b { display: block; font-size: 13.5px; color: #ebf2fa; margin-bottom: 4px; }
+            .lw-idea-list em { display: block; font-style: normal; font-size: 11.5px; color: rgba(235,242,250,.5); line-height: 1.6; }
+            .lw-idea-list .lw-idea-click { color: rgba(255,165,0,.75); }
+            .lw-idea-list p { margin: 7px 0 0; font-size: 12.5px; color: rgba(235,242,250,.82); line-height: 1.6; }
+            .lw-idea-list p span {
+                display: inline-block; min-width: 44px; margin-right: 7px; padding: 2px 7px; border-radius: 6px;
+                background: rgba(255,255,255,.07); color: rgba(235,242,250,.55); font-size: 10.5px; font-weight: 800; text-align: center;
+            }
+
             /* 탭별 자리 — 같은 글도 탭마다 순위가 다르다. 한 줄로 나란히 보여 준다. */
             .lw-tabrank { margin: 12px 0 18px; padding: 14px 16px; border-radius: 13px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.03); }
             .lw-tabrank-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }

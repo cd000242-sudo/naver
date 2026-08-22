@@ -18,11 +18,20 @@ function buildCoords(series: number[], width: number, height: number, pad: numbe
     ]);
 }
 
-function TrendSparkline({ series, label, height = 56 }: {
+function TrendSparkline({ series, label, height = 56, monthlyVolume = null }: {
     series: number[];
     /** 실측 유형 라벨(에버그린·시즌성…) — 있으면 같이 보여 준다. */
     label?: string;
     height?: number;
+    /**
+     * 검색광고 월 검색량(실측). 주면 상대값을 **하루 몇 회**로 바꿔 읽어 준다
+     * (사장님 지적 2026-08-22 "상대값이면 초보자들은 뭔지 모르잖아").
+     *
+     * 계산은 단순 나눗셈이다: 그날 상대값 ÷ 30일 상대값 합 × 월 검색량.
+     * 데이터랩 상대값은 검색량에 비례하도록 만들어진 값이라 이 환산이 성립한다.
+     * 월 검색량이 없으면 예전처럼 상대값만 보여 준다 — 지어내지 않는다.
+     */
+    monthlyVolume?: number | null;
 }) {
     const [hover, setHover] = useState(-1);
     const svgRef = useRef<SVGSVGElement>(null);
@@ -33,6 +42,15 @@ function TrendSparkline({ series, label, height = 56 }: {
     const points = coords.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
     const last = series[series.length - 1];
     const peak = Math.max(...series);
+    /*
+     * 상대값 → 그날 검색 횟수. 월 검색량을 상대값 비중대로 나눈 단순 산술이다.
+     * 월 검색량이 없거나 상대값 합이 0이면 null — 그때는 상대값을 그대로 쓴다.
+     */
+    const sum = series.reduce((total, value) => total + value, 0);
+    const dailyOf = (index: number): number | null => {
+        if (!monthlyVolume || sum <= 0) return null;
+        return Math.round((series[index] / sum) * monthlyVolume);
+    };
     const rising = series.length >= 7
         && series.slice(-7).reduce((a, b) => a + b, 0) > series.slice(0, 7).reduce((a, b) => a + b, 0);
 
@@ -77,11 +95,15 @@ function TrendSparkline({ series, label, height = 56 }: {
                 {hover >= 0 ? (
                     // 호버 중에는 그 날의 실측값이 라벨을 대신한다 — 자리가 좁아 같이는 못 선다.
                     <span className="lw-spark-hover">
-                        {daysAgo === 0 ? '오늘' : `${daysAgo}일 전`} · 상대값 {series[hover]}
+                        {daysAgo === 0 ? '오늘' : `${daysAgo}일 전`}
+                        {' · '}
+                        {dailyOf(hover) !== null
+                            ? `약 ${dailyOf(hover)!.toLocaleString('ko-KR')}회`
+                            : `상대값 ${series[hover]}`}
                     </span>
                 ) : (
                     <>
-                        <span>최근 30일</span>
+                        <span>{monthlyVolume ? `최근 30일 · 월 ${monthlyVolume.toLocaleString('ko-KR')}회` : '최근 30일'}</span>
                         {label ? <em>{label}</em> : null}
                         <span className={last >= peak * 0.8 ? 'lw-spark-hot' : ''}>
                             {last >= peak * 0.8 ? '지금 정점권' : `정점 대비 ${Math.round((last / Math.max(peak, 1)) * 100)}%`}
