@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'youtube-trending', 'rank-by-tabs']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -313,6 +313,18 @@ export const fetchYoutubeTrending = () =>
  * (사장님 지적 2026-08-23 "확장 키워드가 같이 분석이 되어서 아래에 보여줘야지").
  * 검색량만 있고 문서수가 없으면 비율도 자리 여부도 못 낸다. 못 잰 것은 빠진다 — 0 이 아니다.
  */
+/**
+ * 확장 후보 — 롱테일로 파고들어도 **방향만 살짝 틀어** 이어 준다
+ * (사장님 지시 2026-08-23). 자동완성이 주 공급원이라 같은 주제로 뻗는다.
+ * widenedFrom 이 있으면 원래 말로는 모자라 씨앗을 줄였다는 뜻이다.
+ */
+export const fetchKeywordExpansions = (keyword: string) =>
+    call<{
+        keyword: string;
+        widenedFrom: string | null;
+        items: Array<{ keyword: string; seed: string; drifted: boolean; searchVolume: number | null }>;
+    }>('keyword-expansions', { keyword });
+
 export const fetchKeywordDocs = (keywords: string[]) =>
     // call 은 문자열 파라미터만 받는다 — keyword-volumes 와 같이 줄바꿈으로 잇는다.
     call<{ docs: Record<string, number> }>('keyword-docs', {

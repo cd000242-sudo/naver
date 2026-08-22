@@ -3,6 +3,7 @@ import { goldenIndex } from '../../lib/goldenIndex';
 import {
     analyzeKeyword,
     fetchKeywordDocs,
+    fetchKeywordExpansions,
     fetchKeywordPostIdeas,
     formatCount,
     getStoredLicense,
@@ -16,6 +17,7 @@ import { loadUserKeys } from '../../lib/userKeys';
 import { ErrorNote, MetricCell, TabIntro, UsageBar } from './LewordShared';
 import { groupByIntent } from '../../lib/intentGroups';
 import TrendSparkline from './TrendSparkline';
+import DemandChartModal, { pickChartSeries } from './DemandChartModal';
 
 /**
  * 키워드 분석 — 검색량·문서수·상품수·연관 키워드.
@@ -98,6 +100,15 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
      * 판단(수요가 공급을 넘는가)을 여기서도 할 수 있다.
      */
     const [expDocs, setExpDocs] = useState<Record<string, number>>({});
+    /*
+     * 원래 말로 확장어가 안 나올 때 쓰는 보충 목록(사장님 지시 2026-08-23
+     * "만약 없으면 연관된 키워드를 넣어라, 방향만 살짝 바꿔서").
+     * 자동완성이 공급원이라 같은 주제로 뻗는다.
+     */
+    const [extraExp, setExtraExp] = useState<Array<{ keyword: string; searchVolume: number | null }>>([]);
+    const [widenedFrom, setWidenedFrom] = useState<string | null>(null);
+    /** 그래프 확대(사장님 지시 2026-08-23 "그래프 클릭하면 크게 볼 수 있게"). */
+    const [chartOpen, setChartOpen] = useState(false);
     const [expState, setExpState] = useState<'idle' | 'loading' | 'done'>('idle');
     /** 파고든 경로 — 어디서 여기까지 왔는지 되짚어 갈 수 있게. */
     const [trail, setTrail] = useState<string[]>([]);
@@ -159,6 +170,8 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
         const merged = [
             ...pool.map((p) => ({ keyword: p.keyword, searchVolume: p.searchVolume ?? null })),
             ...result.related.map((r) => ({ keyword: r.keyword, searchVolume: r.searchVolume })),
+            // 원래 말로 모자랄 때 자동완성으로 채운 것 — 같은 주제로 뻗은 말이다.
+            ...extraExp,
         ];
         const seen = new Set<string>();
         return merged
@@ -204,6 +217,32 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result]);
 
+    /*
+     * 확장어가 얇으면 보충한다(2026-08-23).
+     *
+     * 실측: 롱테일로 파고들면 검색광고 연관이 그 말 자신 1건만 준다 —
+     * '주민세 미납 조회' · '인상주의를 넘어 예매' 둘 다 그랬고, 그래서 표가
+     * 통째로 비었다. 자동완성은 같은 주제로 뻗으므로 그걸로 채운다.
+     */
+    const expFor = useRef<string>('');
+    useEffect(() => {
+        if (!result) return;
+        if (expFor.current === result.keyword) return;
+        // 보드 풀 + 연관으로 이미 충분하면 부르지 않는다.
+        const own = (boardRow ? [...(boardRow.subKeywords || []), ...(boardRow.keywordPool || [])] : []).length
+            + result.related.length;
+        if (own >= 6) return;
+        expFor.current = result.keyword;
+        let cancelled = false;
+        fetchKeywordExpansions(result.keyword).then((res) => {
+            if (cancelled || !res.ok || !res.data) return;
+            setExtraExp(res.data.items.map((item) => ({ keyword: item.keyword, searchVolume: item.searchVolume })));
+            setWidenedFrom(res.data.widenedFrom);
+        }).catch(() => { /* 보충이 없어도 표는 그대로 */ });
+        return () => { cancelled = true; };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [result]);
+
     /** 한 칸 더 파고든다 — 지금 검색어를 경로에 남기고 그 확장어로 분석을 다시 돌린다. */
     const digInto = (next: string) => {
         if (!result || !next.trim()) return;
@@ -211,7 +250,10 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
         setKeyword(next);
         // 새 검색어의 문서수를 다시 재도록 잠금을 푼다.
         docsFor.current = '';
+        expFor.current = '';
         setExpDocs({});
+        setExtraExp([]);
+        setWidenedFrom(null);
         setExpState('idle');
         void run(next);
     };
@@ -407,13 +449,19 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                             </div>
                             {/* 30일 추이 자동 표시 — "그래프가 보여야 이 키워드로 글을 써도 될지 안다". */}
                             {result.trend && result.trend.series.length >= 2 && (
-                                <div className="lw-analyze-spark">
+    <button
+                                    type="button"
+                                    className="lw-analyze-spark lw-analyze-spark-btn"
+                                    onClick={() => setChartOpen(true)}
+                                    title="크게 보기"
+                                >
                                     <TrendSparkline
                                         series={result.trend.series}
                                         height={72}
                                         monthlyVolume={result.measured.searchVolume ?? null}
                                     />
-                                </div>
+                                    <span className="lw-spark-more">크게 보기 ⤢</span>
+                                </button>
                             )}
 
                         </div>
@@ -421,7 +469,15 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                             <div className="lw-analyze-why">
                                 <strong>왜 지금 검색되나</strong>
                                 <p>{boardRow.whySearch.text}</p>
-                                {boardRow.whySearch.basis && <small>{boardRow.whySearch.basis}</small>}
+                                {/*
+                                  * 근거는 **있을 때만** 적는다(사장님 지적 2026-08-23 "근거 부족은 뭐야").
+                                  * '근거 부족'은 우리 내부 사정이지 사장님이 읽을 말이 아니다.
+                                  * 게다가 그 라벨이 붙은 행도 내용 자체는 맞았다 — 라벨이 결과를 깎았다.
+                                  * 무엇을 보고 썼는지 말할 수 있을 때만 그대로 적는다.
+                                  */}
+                                {boardRow.whySearch.basis && !/근거 부족/.test(boardRow.whySearch.basis) && (
+                                    <small>{boardRow.whySearch.basis}</small>
+                                )}
                             </div>
                         )}
                         {/*
@@ -484,6 +540,19 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                             </div>
                         </section>
                     )}
+
+                    {chartOpen && result.trend && (() => {
+                        /* 카드의 작은 선과 같은 자료로 연다 — 다른 그림이면 사장님이 또 물으신다. */
+                        const ranges = pickChartSeries({ demandSeries: null, trend: result.trend });
+                        if (!ranges) return null;
+                        return (
+                            <DemandChartModal
+                                keyword={result.keyword}
+                                ranges={ranges.ranges}
+                                onClose={() => setChartOpen(false)}
+                            />
+                        );
+                    })()}
 
                     {/*
                       * 확장 키워드 — 검색량 + 문서수 실측으로 **자리까지 판정**한다.
