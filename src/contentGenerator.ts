@@ -320,7 +320,6 @@ import {
   // [v2.10.393] ensureContentParagraphBreaks 재활성화 (한국어 종결어미 한정 split).
   //   contentBodyTransforms.ts의 정규식이 (?<=[가-힣][.!?])로 영문 약어/소수점 회귀 차단.
   ensureContentParagraphBreaks,
-  balanceContentMobileLines,
   limitRegexOccurrences,
   truncateHeadingTitles,
   removeInternalStructureMarkersFromContent,
@@ -1342,10 +1341,11 @@ export function finalizeStructuredContent(
   //   정규식 한국어 limit (?<=[가-힣][.!?])로 해소.
   finalContent = ensureContentParagraphBreaks(finalContent);
 
-  // [v2.11.204] 모바일 꼬리 줄바꿈 보정 — 줄이 모바일 폭을 한두 글자 넘겨 마지막
-  //   글자만 아래 줄로 떨어지는 것("...섞여 나오는 / 데,")을 어절 경계 재분할로 차단.
-  //   깨끗하게 감싸지는 줄/리스트/소제목/URL은 손대지 않는다.
-  finalContent = balanceContentMobileLines(finalContent);
+  // [v2.11.205] 모바일 꼬리 줄바꿈 보정(v2.11.204)은 여기서 하지 않는다.
+  //   본문 원문을 문장 중간에서 끊으면 그 조각이 bodyPlain에 저장되고, 반자동 발행의
+  //   소제목 추출기가 "짧고 마침표 없는 줄"을 소제목으로 잡아 본문 일부에 인용구가
+  //   씌워졌다(사용자 실측). 보정은 붙여넣기 직전 표현 계층으로 옮겼다
+  //   — src/automation/richTextPaste.ts buildReadableParagraphs().
 
   // ✅ 소제목 길이 제한 (60자 이내로 완화 - 너무 짧으면 정보 전달력 하락)
   if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'truncate-heading-titles')) {

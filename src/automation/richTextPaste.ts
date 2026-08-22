@@ -1,4 +1,5 @@
 import type { Frame, KeyInput, Page } from 'puppeteer';
+import { balanceMobileLineBreaks } from '../content/mobileLineBalance.js';
 
 export interface MobileRichHtmlOptions {
   maxChunkChars?: number;
@@ -1083,11 +1084,19 @@ function buildReadableParagraphs(paragraph: string, maxChars: number): string[] 
 
   const sentences = splitSentencesForMobile(paragraph);
   const chunks: string[] = [];
+  const balanceForMobileWidth = maxChars <= DEFAULT_MAX_CHUNK_CHARS;
 
   for (const sentence of sentences) {
     const trimmed = sentence.trim();
     if (!trimmed) continue;
-    chunks.push(splitLongSentenceForMobile(trimmed, maxChars).join('\n'));
+    // [v2.11.205] 모바일 꼬리 줄바꿈 보정은 여기(표현 계층)에서만 한다. maxChars는 글자
+    //   수라 22자여도 모바일 폭(≈17.5 글자폭)을 넘겨 마지막 한두 글자가 아래로 떨어지는데,
+    //   이걸 본문 원문(bodyPlain)에서 미리 끊으면 문장이 조각나 저장되고, 그 조각이 반자동
+    //   소제목 추출기에 "짧고 마침표 없는 줄" = 소제목으로 잡혔다(사용자 실측: 본문 일부에
+    //   인용구가 씌워짐). 원문은 문장 그대로 두고, 붙여넣기 직전에만 줄을 나눈다.
+    //   호출부가 모바일보다 넓은 줄폭을 명시했으면(테스트/데스크톱 폭) 보정하지 않는다.
+    const joined = splitLongSentenceForMobile(trimmed, maxChars).join('\n');
+    chunks.push(balanceForMobileWidth ? balanceMobileLineBreaks(joined) : joined);
   }
 
   return chunks;

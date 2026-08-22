@@ -275,3 +275,63 @@ describe('semi-auto manual heading extractor', () => {
     expect(resolved.introduction).toBe(body);
   });
 });
+
+/**
+ * [v2.11.205] 문장 조각이 소제목으로 잡히던 회귀.
+ *
+ * 출처: 2026-08-22 사용자 실측 스크린샷 — 발행된 글 본문 한복판의 "그를 보유하고자 하며"에
+ * 인용구(버티컬라인) 소제목 스타일이 씌워져 있었다. v2.11.204가 본문 원문을 모바일 폭
+ * 기준으로 문장 중간에서 끊어 저장했고, normalizeReadableBodyText가 모든 줄을 빈 줄로
+ * 갈라놓기 때문에 prevBlank 조건이 무력화되면서 조각이 소제목 후보가 됐다.
+ */
+describe('semi-auto heading extractor — 문장 조각 차단', () => {
+  const shredded = [
+    '바이에른 뮌헨의 입장은 단호합니다.',
+    '',
+    "'김민재 스스로가 받아들이고 싶은 특별한 제안만이 유일한 예외다'라는 대목입니다.",
+    '',
+    '덧붙여 현재 상황으로는 바이에른이',
+    '',
+    '그를 보유하고자 하며',
+    '',
+    '계약 연장까지 검토 중이라는 이야기가 나옵니다.',
+  ].join('\n');
+
+  it('앞 줄이 문장을 닫지 않았으면 소제목으로 잡지 않는다', () => {
+    const titles = extractSemiAutoHeadingsFromBody(shredded).map((heading) => heading.title);
+    expect(titles).not.toContain('그를 보유하고자 하며');
+  });
+
+  it('완결된 문장 사이에 낀 진짜 소제목은 그대로 추출한다', () => {
+    const body = [
+      '이번 이적설은 생각보다 복잡합니다.',
+      '',
+      '바이에른이 김민재를 보는 진짜 시선',
+      '',
+      '구단 내부에서는 잔류 쪽으로 기울었다고 합니다.',
+      '',
+      '이적료 협상의 걸림돌',
+      '',
+      '금액 차이가 여전히 큽니다.',
+    ].join('\n');
+
+    expect(extractSemiAutoHeadingsFromBody(body).map((heading) => heading.title)).toEqual([
+      '바이에른이 김민재를 보는 진짜 시선',
+      '이적료 협상의 걸림돌',
+    ]);
+  });
+
+  it('마크다운 헤딩 마커는 앞 줄과 무관하게 소제목이다', () => {
+    const body = [
+      '도입부 문장입니다.',
+      '',
+      '이야기가 여기서 끊기고',
+      '',
+      '## 진짜 소제목',
+      '',
+      '이어지는 본문입니다.',
+    ].join('\n');
+
+    expect(extractSemiAutoHeadingsFromBody(body).map((heading) => heading.title)).toContain('진짜 소제목');
+  });
+});

@@ -49,6 +49,23 @@ export function normalizeSemiAutoHeadingTitle(raw: string): string {
     .trim();
 }
 
+/**
+ * [v2.11.205] 앞 줄이 문장을 닫았는지 — 소제목은 완결된 문장 뒤에만 온다.
+ *
+ * 모바일 줄바꿈 보정이 한 문장을 여러 줄로 끊어 저장한 글(v2.11.204 생성분)에서는
+ * "그를 보유하고자 하며" 같은 문장 조각이 짧고 마침표가 없다는 이유로 소제목 후보가
+ * 됐다(사용자 실측: 본문 일부에 인용구가 씌워짐). 앞 줄이 문장을 닫지 않았으면 그
+ * 줄은 이어지는 조각이지 소제목이 아니다.
+ *
+ * 판정은 관대하게 — 애매하면 "닫았다"로 봐서 기존 동작을 유지한다.
+ */
+function endsSentence(line: string): boolean {
+  const trimmed = String(line || '').trim().replace(/["'’”」』»)\]]+$/u, '');
+  if (!trimmed) return true;
+  if (/[.!?…。？！:：~〜]$/u.test(trimmed)) return true;
+  return /(?:다|요|죠|까|네|군|함|음|임|오|셈|것|중)$/u.test(trimmed);
+}
+
 export function isSemiAutoHeadingCandidate(lines: readonly string[], index: number): boolean {
   const raw = String(lines[index] || '').trim();
   if (!raw) return false;
@@ -72,6 +89,11 @@ export function isSemiAutoHeadingCandidate(lines: readonly string[], index: numb
 
   const prevBlank = index === 0 || String(lines[index - 1] || '').trim().length === 0;
   const nextNonEmpty = lines.slice(index + 1).find((line) => String(line || '').trim().length > 0)?.trim() || '';
+  // [v2.11.205] 앞 줄이 문장 중간에서 끊겼으면 이 줄은 그 문장의 뒷조각이다.
+  //   normalizeReadableBodyText가 모든 줄을 빈 줄로 갈라놓기 때문에 prevBlank는 항상
+  //   true라 단독으로는 아무것도 걸러내지 못한다.
+  const prevNonEmpty = lines.slice(0, index).reverse().find((line) => String(line || '').trim().length > 0)?.trim() || '';
+  const continuesPrevSentence = prevNonEmpty.length > 0 && !endsSentence(prevNonEmpty);
   // 문장/소제목 구분. 정중형 어미(습니다 등)와 마침표 종결은 길이 무관 문장으로 배제한다.
   // 단 평서형 '~다' 종결은 짧은 헤드라인일 수 있어("결국 남는 건 연락 여부다"), 길거나(>22자)
   // 마침표가 있을 때만 문장으로 본다 — 짧고 마침표 없는 '다' 종결은 소제목으로 허용.
@@ -87,7 +109,12 @@ export function isSemiAutoHeadingCandidate(lines: readonly string[], index: numb
   const hasHeadingKeyword =
     /(?:이유|지점|부분|질문|핵심|무엇인가|방법|정리|비교|분석|후기|반응|오해|결론|포인트|순서|기준|원인|진짜|체크리스트|루틴)$/u.test(title);
 
-  return prevBlank && nextNonEmpty.length > 0 && !sentenceLike && !startsLikeQuote && (title.length <= 34 || hasHeadingKeyword);
+  return prevBlank
+    && !continuesPrevSentence
+    && nextNonEmpty.length > 0
+    && !sentenceLike
+    && !startsLikeQuote
+    && (title.length <= 34 || hasHeadingKeyword);
 }
 
 function findSemiAutoHeadingMatches(lines: readonly string[]): SemiAutoHeadingMatch[] {

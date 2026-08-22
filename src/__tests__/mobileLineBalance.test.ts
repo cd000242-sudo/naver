@@ -14,6 +14,7 @@ import {
   ORPHAN_TAIL_WIDTH,
 } from '../content/mobileLineBalance';
 import { balanceContentMobileLines } from '../contentBodyTransforms';
+import { buildMobileRichHtml } from '../automation/richTextPaste';
 
 /** Lines the screenshots proved render on a single row. */
 const FITS = [
@@ -153,5 +154,30 @@ describe('balanceContentMobileLines — StructuredContent 배선', () => {
     const html = '<p>매체마다 46세와 47세가 섞여 나오는데, 계산 방식 차이입니다</p>';
     const out: any = balanceContentMobileLines({ bodyHtml: html } as any);
     expect(out.bodyHtml).toBe(html);
+  });
+});
+
+/**
+ * [v2.11.205] 보정 위치 이동 — 본문 원문(bodyPlain)이 아니라 붙여넣기 직전에만 줄을 나눈다.
+ *
+ * v2.11.204는 contentGenerator에서 bodyPlain을 미리 끊었는데, 그렇게 저장된 문장 조각이
+ * 반자동 소제목 추출기에 "짧고 마침표 없는 줄" = 소제목으로 잡혀 본문 일부에 인용구가
+ * 씌워졌다(2026-08-22 사용자 실측). 원문은 문장 그대로 두고 표현 계층에서만 보정한다.
+ */
+describe('mobileLineBalance — 붙여넣기 표현 계층 배선', () => {
+  it('리치 붙여넣기 결과의 모든 줄이 모바일 폭 이내로 들어간다', () => {
+    const body = [
+      '매체마다 46세와 47세가 섞여 나오는데, 정확한 나이는 아직 확인되지 않았습니다.',
+      '',
+      '덧붙여 현재 상황으로는 바이에른이 그를 보유하고자 하며 계약 연장까지 검토 중이라는 이야기가 나옵니다.',
+    ].join('\n');
+
+    const rich = buildMobileRichHtml(body, { fontSizePx: 19, highlight: false });
+    const lines = rich.plainText.split('\n').filter((line) => line.trim().length > 0);
+
+    expect(lines.length).toBeGreaterThan(2);
+    for (const line of lines) {
+      expect(measureMobileLineWidth(line)).toBeLessThanOrEqual(MAX_MOBILE_LINE_WIDTH);
+    }
   });
 });
