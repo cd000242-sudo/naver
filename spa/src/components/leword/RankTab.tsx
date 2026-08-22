@@ -806,6 +806,25 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 </button>
             </form>
             {tabNote && <div className={`lw-note${tabState === 'error' ? ' lw-note-err' : ''}`}>{tabNote}</div>}
+            {tabState === 'loading' && (
+                /*
+                 * 재는 동안 무엇을 하고 있는지 보여 준다(사장님 지적 2026-08-23
+                 * "분석 중이면 프로그래스 띄워 달라니까 빼먹었네").
+                 * 키워드를 비우면 제목 읽기·검색량·후보 실측까지 하느라 길어진다 —
+                 * 빈 화면으로 기다리게 두면 멈춘 줄 안다.
+                 */
+                <div className="lw-radar-progress" role="status" aria-live="polite">
+                    {tabQuery.trim()
+                        ? <span className="on">검색 화면에서 자리를 세는 중…</span>
+                        : (
+                            <>
+                                <span className="on">① 글 제목 읽기</span>
+                                <span>② 검색어 찾기</span>
+                                <span>③ 탭별 자리 재기</span>
+                            </>
+                        )}
+                </div>
+            )}
             {!tabResult && !tabNote && tabState !== 'loading' && (
                 <div className="lw-note lw-note-plain">
                     같은 글도 <b>탭마다 자리가 다릅니다</b> — 블로그 탭에서 3위인 글이 통합검색에는 없기도 합니다.

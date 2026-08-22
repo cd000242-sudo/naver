@@ -162,8 +162,8 @@ function RadarTab() {
                 title="외부유입 레이더"
                 desc="내 글 주소 하나면 됩니다 — 지식인·카페는 물론 디시·클리앙·더쿠 같은 네이버 밖 커뮤니티까지 훑어 지금 답할 자리를 찾아 줍니다. 판마다 링크를 달아도 되는지도 함께 적습니다. 게시는 직접 하세요(자동 게시 없음)."
                 source={loadUserKeys().brightDataToken
-                    ? '네이버 오픈API 4종 + 커뮤니티 31판(구글 색인) + 검색광고 검색량 실측 + AI 평가'
-                    : '네이버 오픈API 4종 + 검색광고 검색량 실측 + AI 평가 · 커뮤니티 31판은 내 API 키 탭에 Bright Data 토큰을 넣으면 함께 훑습니다'}
+                    ? '지식인·카페 + 커뮤니티 31판(구글 색인) + 검색광고 검색량 실측 + AI 평가'
+                    : '지식인·카페 + 검색광고 검색량 실측 + AI 평가 · 커뮤니티 31판은 내 API 키 탭에 Bright Data 토큰을 넣으면 함께 훑습니다'}
             />
 
             <form className="lw-search" onSubmit={run}>
@@ -183,7 +183,7 @@ function RadarTab() {
             {running && (
                 <div className="lw-radar-progress" role="status">
                     <span className={phase === 'analyzing' ? 'on' : 'ok'}>① 글 분석</span>
-                    <span className={phase === 'searching' ? 'on' : phase === 'evaluating' ? 'ok' : ''}>② 4판 검색</span>
+                    <span className={phase === 'searching' ? 'on' : phase === 'evaluating' ? 'ok' : ''}>② 질문 판 검색</span>
                     <span className={phase === 'evaluating' ? 'on' : ''}>③ AI 평가</span>
                 </div>
             )}
@@ -239,7 +239,7 @@ function RadarTab() {
                          * 키가 없다고 기능이 죽지는 않는다 — 네이버 4판 결과는 그대로 나온다.
                          */
                         <p className="lw-radar-needkey">
-                            네이버 4판만 훑었습니다. 디시·아하·아카라이브 같은 <b>커뮤니티 31판</b>까지 보려면{' '}
+                            지식인·카페만 훑었습니다. 디시·아하·아카라이브 같은 <b>커뮤니티 31판</b>까지 보려면{' '}
                             <a href="?tab=keys">내 API 키</a> 탭에 Bright Data 토큰을 넣어 주세요 —{' '}
                             가입하면 매달 5,000건이 공짜라 레이더를 190회쯤 돌릴 수 있습니다.
                         </p>
