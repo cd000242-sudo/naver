@@ -389,13 +389,35 @@ export type PostAnalysis = {
     fixes: string[];
     contentRead: boolean;
 };
+/**
+ * 상위노출 체크리스트 — **AI 평가가 아니라 실측**이다.
+ * 내 글과 그 검색어의 상위 글들을 같은 잣대로 재서 항목마다 통과/걸림을 낸다.
+ * AI 가 없어도 이건 나온다(사장님 지시 2026-08-23: 체크리스트로 점수를 매기고
+ * 수정 방향을 정해 주면 그걸 토대로 고쳐 상위노출을 만드는 게 목적).
+ */
+export type SeoChecklist = {
+    items: Array<{ id: string; label: string; weight: number; pass: boolean; detail: string }>;
+    score: number | null;
+    passed: number;
+    checked: number;
+    rivalSample: number;
+};
+
+export type PostShape = { charCount: number; images: number; headings: number; videos: number; imagesExact?: boolean };
+
 export const fetchPostAnalysis = (input: {
     title: string; link: string; platform?: string;
     kwQuery?: string; kwRank?: number | null;
     extQuery?: string; extRank?: number | null;
     titleRank?: number | null;
     engines?: EngineExposure | null;
-}) => call<{ analysis: PostAnalysis }>('post-audit-analyze', {
+}) => call<{
+    analysis: PostAnalysis | null;
+    checklist?: SeoChecklist;
+    measured?: { mine: PostShape | null; rivals: PostShape[] };
+    needsEngine?: boolean;
+    message?: string;
+}>('post-audit-analyze', {
     title: input.title,
     link: input.link,
     platform: input.platform || '',

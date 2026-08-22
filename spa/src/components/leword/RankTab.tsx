@@ -11,6 +11,7 @@ import {
     type EngineExposure,
     type KeywordUsage,
     type PostAnalysis,
+    type SeoChecklist,
     type RankResult,
 } from '../../lib/keywordApi';
 import { ErrorNote, TabIntro, UsageBar } from './LewordShared';
@@ -224,7 +225,16 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
      * 짚는다. 키워드 지표 분석은 각 순위 칸의 검색어 클릭으로 여전히 간다.
      */
     const [analyzeRow, setAnalyzeRow] = useState<AuditRow | null>(null);
-    const [analyzeState, setAnalyzeState] = useState<{ status: 'loading' | 'done' | 'error'; data?: PostAnalysis; message?: string }>({ status: 'loading' });
+    /*
+     * 체크리스트는 AI 평가와 **따로** 담는다(사장님 지시 2026-08-23).
+     * 실측이라 AI 가 실패해도 그대로 보여 줄 수 있다.
+     */
+    const [analyzeState, setAnalyzeState] = useState<{
+        status: 'loading' | 'done' | 'error';
+        data?: PostAnalysis | null;
+        checklist?: SeoChecklist;
+        message?: string;
+    }>({ status: 'loading' });
 
     const openAnalysis = async (row: AuditRow) => {
         setAnalyzeRow(row);
@@ -240,8 +250,17 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
             titleRank: row.rank,
             engines: row.engines || null,
         });
-        if (result.ok && result.data?.analysis) {
-            setAnalyzeState({ status: 'done', data: result.data.analysis });
+        if (result.ok && result.data) {
+            /*
+             * 체크리스트만 와도 '완료'다 — AI 엔진이 없으면 수정 방향만 빠진다.
+             * 실측 점수를 못 보여 줄 이유가 없다.
+             */
+            setAnalyzeState({
+                status: 'done',
+                data: result.data.analysis,
+                checklist: result.data.checklist,
+                message: result.data.needsEngine ? result.data.message : undefined,
+            });
             return;
         }
         setAnalyzeState({ status: 'error', message: result.message || result.error || '진단 실패' });
@@ -962,6 +981,49 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                 <p className="lw-kg-work-body">글 본문을 읽고 진단하는 중… (내 구독으로 실행)</p>
                             )}
                             {analyzeState.status === 'error' && (
+                                <p className="lw-kg-work-note">
+                                    {analyzeState.message} <a href="/leword?tab=keys">내 API 키 탭 열기</a>
+                                </p>
+                            )}
+                            {/*
+                              * 상위노출 체크리스트 — 실측이라 AI 보다 먼저 놓는다.
+                              * 사장님 지시(2026-08-23): 체크해서 점수를 매기고 수정
+                              * 방향을 정해 주면, 그걸 토대로 고쳐 상위노출을 만든다.
+                              */}
+                            {analyzeState.status === 'done' && analyzeState.checklist && (
+                                <section className="lw-seo-check">
+                                    <div className="lw-seo-check-head">
+                                        <b>상위노출 체크리스트</b>
+                                        {typeof analyzeState.checklist.score === 'number' && (
+                                            <strong className={
+                                                analyzeState.checklist.score >= 80 ? 'lw-seo-good'
+                                                    : analyzeState.checklist.score >= 50 ? 'lw-seo-mid' : 'lw-seo-bad'
+                                            }>{analyzeState.checklist.score}점</strong>
+                                        )}
+                                        <span>
+                                            {analyzeState.checklist.passed}/{analyzeState.checklist.checked} 통과
+                                            {analyzeState.checklist.rivalSample > 0
+                                                ? ` · 지금 상위 ${analyzeState.checklist.rivalSample}개 글과 견줌`
+                                                : ' · 상위 글을 못 재서 일반 기준으로 봤습니다'}
+                                        </span>
+                                    </div>
+                                    <ul className="lw-seo-items">
+                                        {analyzeState.checklist.items.map((item) => (
+                                            <li key={item.id} className={item.pass ? 'pass' : 'fail'}>
+                                                <i>{item.pass ? '통과' : '걸림'}</i>
+                                                <div>
+                                                    <b>{item.label}</b>
+                                                    <span>{item.detail}</span>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <p className="lw-kg-work-note">
+                                        전부 실제로 잰 값입니다 — 점수는 걸린 항목의 비중을 뺀 것입니다.
+                                    </p>
+                                </section>
+                            )}
+                            {analyzeState.status === 'done' && !analyzeState.data && analyzeState.message && (
                                 <p className="lw-kg-work-note">
                                     {analyzeState.message} <a href="/leword?tab=keys">내 API 키 탭 열기</a>
                                 </p>

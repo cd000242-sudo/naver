@@ -1805,6 +1805,18 @@ function LewordStyles() {
             .lw-analyze-spark-btn { display: block; width: 100%; text-align: left; border: 1px solid rgba(255,255,255,.09); cursor: pointer; position: relative; }
             .lw-analyze-spark-btn:hover { border-color: rgba(167,139,250,.5); }
             .lw-spark-more { position: absolute; top: 8px; right: 10px; font-size: 11px; color: #8a94a6; }
+            .lw-seo-check { margin-bottom: 16px; padding: 14px; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; background: rgba(255,255,255,.02); }
+            .lw-seo-check-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+            .lw-seo-check-head strong { font-size: 22px; }
+            .lw-seo-check-head span { font-size: 12px; color: #8a94a6; }
+            .lw-seo-good { color: #34d399; } .lw-seo-mid { color: #fbbf24; } .lw-seo-bad { color: #f87171; }
+            .lw-seo-items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+            .lw-seo-items li { display: flex; gap: 10px; align-items: flex-start; }
+            .lw-seo-items i { flex: 0 0 auto; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-style: normal; }
+            .lw-seo-items li.pass i { background: rgba(52,211,153,.14); color: #34d399; }
+            .lw-seo-items li.fail i { background: rgba(248,113,113,.14); color: #f87171; }
+            .lw-seo-items b { display: block; font-size: 13px; color: #ebf2fa; }
+            .lw-seo-items span { display: block; font-size: 12px; color: #8a94a6; line-height: 1.6; }
             .lw-tabrank-cands { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.08); }
             .lw-tabrank-cands-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; font-size: 13px; }
             .lw-tabrank-cands-head span { color: #34d399; }
