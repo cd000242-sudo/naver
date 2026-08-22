@@ -51,6 +51,16 @@ type AuditRow = BlogAuditPost & {
     extRank?: number | null;
     /** 구글·다음·줌 제목검색 노출 실측(구글은 차단 시 '측정 불가'로 정직하게). */
     engines?: EngineExposure | null;
+    /*
+     * 색인 사실 — 순위와 **다른 사실**이다(사장님 지적 2026-08-22
+     * "네이버 색인 성공한 글도 많은데 하나도 없다는 게 말이 안 되고").
+     * 상위 100 밖인 것과 아예 색인이 안 된 것은 할 일이 전혀 다르다:
+     * 전자는 제목·경쟁 문제, 후자는 색인 문제다.
+     * null 이면 못 쟀다는 뜻 — 모르는 것을 "없음"으로 단정하지 않는다.
+     */
+    indexed?: { indexed: boolean; siteIndexed: boolean; sampled: number } | null;
+    /** 무엇으로 쟀는지 — 블로그 글은 블로그검색, 자체 도메인은 웹문서검색. */
+    searchSource?: 'blog' | 'web';
 };
 
 function loadTracked(): TrackedRow[] {
@@ -192,6 +202,8 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 keyword?: { query: string; rank: number | null };
                 extended?: { query: string; rank: number | null };
                 engines?: EngineExposure;
+                indexed?: { indexed: boolean; siteIndexed: boolean; sampled: number } | null;
+                searchSource?: 'blog' | 'web';
             }) | null : null;
             const done: AuditRow = payload
                 ? {
@@ -200,6 +212,9 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                     kwQuery: payload.keyword?.query, kwRank: payload.keyword ? payload.keyword.rank : undefined,
                     extQuery: payload.extended?.query, extRank: payload.extended ? payload.extended.rank : undefined,
                     engines: payload.engines || null,
+                    // 색인 사실과 무엇으로 쟀는지를 화면까지 그대로 나른다.
+                    indexed: payload.indexed ?? null,
+                    searchSource: payload.searchSource,
                 }
                 : { ...post, status: 'error', rank: null, sampled: 0, sympathy: null };
             state = { ...state, rows: state.rows.map((row, i) => (i === index ? done : row)) };
@@ -347,11 +362,28 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                             {row.status === 'wait' && <span className="lw-audit-badge lw-audit-wait">대기</span>}
                                             {row.status === 'checking' && <span className="lw-audit-badge lw-audit-wait">확인 중…</span>}
                                             {row.status === 'error' && <span className="lw-audit-badge lw-audit-wait">확인 실패</span>}
+                                            {/*
+                                              * 순위와 색인을 갈라서 말한다(사장님 지적 2026-08-22).
+                                              * 예전엔 상위 100 밖이면 무조건 "차단(저품질) 의심"이라
+                                              * 찍었는데, 색인은 멀쩡한 경우가 대부분이다. 실측으로
+                                              * 확인한 사실만 적는다 — 못 쟀으면 못 쟀다고 한다.
+                                              */}
                                             {row.status === 'done' && (row.rank !== null
                                                 ? <span className="lw-audit-badge lw-audit-in">노출</span>
-                                                : <span className="lw-audit-badge lw-audit-out">누락</span>)}
+                                                : row.indexed?.indexed
+                                                    ? <span className="lw-audit-badge lw-audit-half">순위 밖</span>
+                                                    : <span className="lw-audit-badge lw-audit-out">못 찾음</span>)}
                                             {row.status === 'done' && row.rank === null && (
-                                                <small className="lw-audit-why">검색 미노출 · 차단(저품질) 의심</small>
+                                                <small className="lw-audit-why">
+                                                    {row.indexed === null || row.indexed === undefined
+                                                        ? '상위 100 밖 · 색인 여부는 못 쟀습니다'
+                                                        : row.indexed.indexed
+                                                            ? '색인은 됨 · 상위 100 밖(제목·경쟁 문제)'
+                                                            : row.indexed.siteIndexed
+                                                                ? '사이트는 색인됨 · 이 글은 아직 안 잡힘'
+                                                                : '이 사이트가 네이버에서 안 잡힙니다'}
+                                                    {row.searchSource === 'web' ? ' · 웹문서 검색 기준' : ''}
+                                                </small>
                                             )}
                                         </td>
                                         <td className="lw-rank-title">

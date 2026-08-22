@@ -656,6 +656,8 @@ function LewordStyles() {
             .lw-audit-badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 800; }
             .lw-audit-in { background: rgba(46,204,113,.15); color: #2ecc71; border: 1px solid rgba(46,204,113,.4); }
             .lw-audit-out { background: rgba(255,91,91,.14); color: #ff7b7b; border: 1px solid rgba(255,91,91,.4); }
+            /* 색인은 됐는데 순위만 밖 — 빨강(색인 실패)과 구분해야 할 일이 달라진다. */
+            .lw-audit-half { background: rgba(240,181,63,.14); color: #f0b53f; border: 1px solid rgba(240,181,63,.4); }
             .lw-audit-wait { background: rgba(255,255,255,.05); color: rgba(235,242,250,.55); border: 1px solid rgba(255,255,255,.12); }
             .lw-audit-why { display: block; margin-top: 4px; font-size: 11px; color: rgba(255,123,123,.75); }
             /* 실제 사용한 검색어 — 순위의 기준이 눈에 보여야 신뢰가 생긴다. */
