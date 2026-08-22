@@ -202,12 +202,21 @@ async function main() {
      */
     const formDeadline = STARTED_AT + BUDGET_MS * 0.25;
     let formSkipped = 0;
-    for (const video of videos) {
-        if (Date.now() > formDeadline) { video.form = ''; formSkipped += 1; continue; }
-        const short = await isShortForm(video.videoId);
-        video.form = short === null ? '' : (short ? 'short' : 'long');
-        await sleep(80);
-    }
+    /*
+     * 여러 줄로 나눠 받는다. 한 줄로 172편을 돌면 3분이 넘어 82편이 잘렸다(실측).
+     * HEAD 요청 하나씩이라 서버 부담이 작고, 유튜브 제 도메인이라 예의 문제도 없다.
+     */
+    let formCursor = 0;
+    const formLane = async () => {
+        while (formCursor < videos.length) {
+            const video = videos[formCursor++];
+            if (Date.now() > formDeadline) { video.form = ''; formSkipped += 1; continue; }
+            const short = await isShortForm(video.videoId);
+            video.form = short === null ? '' : (short ? 'short' : 'long');
+            await sleep(60);
+        }
+    };
+    await Promise.all(Array.from({ length: 6 }, formLane));
     if (formSkipped > 0) log(`!! 숏폼 판정 단계 상한 — ${formSkipped}편은 폼을 못 쟀습니다(빈 값으로 둡니다)`);
     const shortCount = videos.filter((video) => video.form === 'short').length;
     log(`급상승 영상 ${videos.length}편 (숏폼 ${shortCount} · 롱폼 ${videos.length - shortCount})`);
@@ -223,25 +232,46 @@ async function main() {
      */
     const expandDeadline = STARTED_AT + BUDGET_MS * 0.5;
     let videosSkipped = 0;
-    for (const video of videos) {
-        if (Date.now() > expandDeadline) { videosSkipped += 1; continue; }
-        /*
-         * 후보 상한 4→8 (사장님 확인 2026-08-20). 4개면 제목 앞쪽 덩어리에서
-         * 끊겨 뒤쪽의 진짜 개체를 놓쳤다 — 실측: "과연 둠이 …? ≪어벤져스:
-         * 둠스데이≫ …" 에서 '어벤져스 둠스데이'가 잘려 그 영상은 빈손이었다.
-         * 자동완성은 무료라 비용은 없고 수집이 조금 느려질 뿐이다.
-         */
-        const leads = [...new Set(chunksOf(video.title).flatMap(leadsOf))].slice(0, 8);
-        for (const lead of leads) {
-            const matched = suggestionsFor(lead, await fetchAutocomplete(lead));
-            await sleep(120);
-            // 자동완성이 거의 없으면 사람들이 안 치는 말이다 — 버린다.
-            if (matched.length < 2) continue;
-            for (const keyword of matched.slice(0, 6)) {
-                if (!source.has(keyword)) source.set(keyword, video);
+    /*
+     * 같은 덩어리를 여러 영상이 공유한다(시리즈·재방송 제목). 한 번 물은 것은
+     * 다시 묻지 않는다 — 이것만으로 호출이 눈에 띄게 준다.
+     */
+    // 약속을 담아 둔다 — 값을 담으면 여러 줄이 동시에 같은 말을 물어본다.
+    const acCache = new Map();
+    const askAutocomplete = (lead) => {
+        if (!acCache.has(lead)) {
+            acCache.set(lead, (async () => {
+                const matched = suggestionsFor(lead, await fetchAutocomplete(lead));
+                await sleep(90);
+                return matched;
+            })());
+        }
+        return acCache.get(lead);
+    };
+    let expandCursor = 0;
+    const expandLane = async () => {
+        while (expandCursor < videos.length) {
+            const video = videos[expandCursor++];
+            if (Date.now() > expandDeadline) { videosSkipped += 1; continue; }
+            /*
+             * 후보 상한 4→8 (사장님 확인 2026-08-20). 4개면 제목 앞쪽 덩어리에서
+             * 끊겨 뒤쪽의 진짜 개체를 놓쳤다 — 실측: "과연 둠이 …? ≪어벤져스:
+             * 둠스데이≫ …" 에서 '어벤져스 둠스데이'가 잘려 그 영상은 빈손이었다.
+             * 자동완성은 무료라 비용은 없고 수집이 조금 느려질 뿐이다.
+             */
+            const leads = [...new Set(chunksOf(video.title).flatMap(leadsOf))].slice(0, 8);
+            for (const lead of leads) {
+                const matched = await askAutocomplete(lead);
+                // 자동완성이 거의 없으면 사람들이 안 치는 말이다 — 버린다.
+                if (matched.length < 2) continue;
+                for (const keyword of matched.slice(0, 6)) {
+                    if (!source.has(keyword)) source.set(keyword, video);
+                }
             }
         }
-    }
+    };
+    // 자동완성은 남의 서버다 — 줄을 4개까지만 쓴다.
+    await Promise.all(Array.from({ length: 4 }, expandLane));
     if (videosSkipped > 0) log(`!! 검색어 확장 단계 상한 — 영상 ${videos.length}편 중 ${videosSkipped}편은 못 봤습니다`);
     log(`자동완성이 인정한 검색어 ${source.size}개`);
     if (source.size === 0) return;
