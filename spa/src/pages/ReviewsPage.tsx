@@ -1,6 +1,11 @@
 import { useEffect, useMemo, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
-import { ADSENSE_SITE_PROOFS } from '../lib/adsenseProofs';
+import { mergeAdsenseProofs } from '../lib/adsenseProofs';
 import { isValidEmail, isValidPhone, maskContactText, maskEmail, maskPhone } from '../lib/privacy';
+import {
+    fetchSiteContent,
+    managedHomeProofsToIncomeProofs,
+    type CommunityIncomeProof,
+} from '../lib/siteOps';
 
 /**
  * 후기 페이지
@@ -142,6 +147,33 @@ function ReviewsPage() {
     const [proofMediaType, setProofMediaType] = useState<'image' | 'video'>('image');
     const [submitting, setSubmitting] = useState(false);
     const [msg, setMsg] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+
+    /*
+     * 운영자가 등록한 인증 이미지(hero.proofs) — 네이버 조회수·방문자 인증 11장이
+     * 여기 있다.
+     *
+     * 왜 여기서 다시 부르나(사장님 2026-08-23 "커뮤니티에 있던 네이버 수익인증은
+     * 어디 갔니, 인증 이미지 말이야"): 수익인증을 커뮤니티에서 후기로 옮길 때
+     * (7ca10baf) 애드센스 5장만 가져오고 이 11장을 두고 왔다. 커뮤니티 쪽에서는
+     * 지웠으니 사이트 어디에서도 '수익 인증' 판에 안 나오게 됐다.
+     *
+     * 합치는 방식도 고쳤다. 커뮤니티는 `서버후기.length > 0 ? 서버후기 : 관리목록`
+     * 이라 서버 후기가 한 건이라도 있으면 이 11장이 통째로 가려졌다 — 둘은 성격이
+     * 다르니 고르는 게 아니라 같이 세운다.
+     */
+    const [managedProofs, setManagedProofs] = useState<CommunityIncomeProof[]>([]);
+    useEffect(() => {
+        let active = true;
+        fetchSiteContent()
+            .then((content) => {
+                if (active) setManagedProofs(managedHomeProofsToIncomeProofs(content?.hero?.proofs, 24));
+            })
+            .catch(() => undefined);
+        return () => { active = false; };
+    }, []);
+
+    /** 인증 갤러리 = 운영자 등록분 + 애드센스 성과. 같은 그림은 mergeAdsenseProofs 가 거른다. */
+    const proofGallery = useMemo(() => mergeAdsenseProofs(managedProofs), [managedProofs]);
 
     useEffect(() => {
         const prev = document.title;
@@ -324,17 +356,17 @@ function ReviewsPage() {
                 </div>
 
                 {/*
-                  * 애드센스 운영 성과 — 후기 판이 곧 수익인증 판이다
-                  * (사장님 지시 2026-08-23 "수익인증은 후기로 가야 되고
-                  * 탭도 수익인증 및 후기로"). 사용자 후기 앞에 세운다.
-                  * 전부 애드센스 화면 그대로이고 화면에서 만든 수치는 없다.
+                  * 수익 인증 — 후기 판이 곧 수익인증 판이다(사장님 지시 2026-08-23
+                  * "수익인증은 후기로 가야 되고 탭도 수익인증 및 후기로"). 사용자 후기
+                  * 앞에 세운다. 네이버 조회수·방문자 인증과 애드센스 성과를 함께 둔다 —
+                  * 전부 화면 그대로이고 여기서 만든 수치는 없다.
                   */}
                 <div className="rv-sec">
                     <h2>수익 인증</h2>
-                    <span>애드센스 화면 실측 — 운영 성과입니다</span>
+                    <span>네이버 조회수·방문자와 애드센스 화면 실측 그대로입니다</span>
                 </div>
                 <div className="rv-proofs">
-                    {ADSENSE_SITE_PROOFS.map((proof) => (
+                    {proofGallery.map((proof) => (
                         <figure key={proof.id}>
                             <img src={proof.media} alt={proof.mediaName || proof.amount} loading="lazy" decoding="async" />
                             <figcaption>
