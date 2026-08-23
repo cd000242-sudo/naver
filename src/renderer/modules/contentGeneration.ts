@@ -5,6 +5,7 @@
 
 // ✅ renderer.ts의 전역 변수/함수 참조
 import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
+import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
 import { ensureAgentEngineReady } from '../utils/agentModeGuard.js';
 import { applyKeywordPrefixToTitle } from '../utils/titleUtils.js';
 import { normalizeHashtags } from '../utils/hashtagUtils.js';
@@ -337,20 +338,31 @@ function sanitizeScrapedContent(content: any): void {
 //   - generateContentFromUrl (선택적 — 기존 분산 코드 유지하면 중복 위험)
 //   - paraphraseContent (✓ v2.11.0에서 통합)
 //   - postListUI 글 불러오기 (✓ v2.11.0에서 통합)
-function rebuildHeadingsFromPreferredBody(structuredContent: any): void {
+export function rebuildHeadingsFromPreferredBody(structuredContent: any): void {
   if (!structuredContent || typeof structuredContent !== 'object') return;
   const body = String(structuredContent.bodyPlain || structuredContent.content || '').trim();
   if (!body) return;
 
+  // [2026-08-23] 본문은 AI 소제목으로부터 합성된다(제목 줄 + 빈 줄 + 내용을 이어붙인다). 그래서 AI
+  //   소제목이 본문에 그대로 들어 있으면 이미 일치하고, 휴리스틱으로 다시 뽑을 이유가 없다.
+  //   실측: 정중형 어미로 끝나는 소제목("전환하면 실적이 그대로 인정돼요")은 추출기가 문장으로
+  //   보고 버려서, AI가 준 5개 중 1개가 통째로 사라지고 그 본문이 앞 섹션에 흡수됐다.
+  //   페러프레이징 프롬프트가 구어체 소제목을 요구하므로 이 손실은 상시 발생한다.
+  const aiTitles: string[] = (Array.isArray(structuredContent.headings) ? structuredContent.headings : [])
+    .map((heading: any) => String(heading?.title || '').trim())
+    .filter((title: string) => title.length > 0);
+  if (aiTitles.length > 0 && aiTitles.every((title: string) => body.includes(title))) return;
+
   const extracted = extractSemiAutoHeadingsFromBody(body);
-  structuredContent.headings = extracted.length > 0
-    ? extracted.map((heading) => ({
-        title: heading.title,
-        content: heading.content,
-        prompt: heading.prompt || heading.title,
-        source: 'paraphrase:body-heading',
-      }))
-    : [];
+  // 추출이 실패하면 기존 소제목을 유지한다. 빈 배열로 덮으면 미리보기·소제목 분석·이미지
+  // 배치가 한꺼번에 죽는다(사용자 보고: "소제목/본문 미리보기가 사라짐").
+  if (extracted.length === 0) return;
+  structuredContent.headings = extracted.map((heading) => ({
+    title: heading.title,
+    content: heading.content,
+    prompt: heading.prompt || heading.title,
+    source: 'paraphrase:body-heading',
+  }));
 }
 
 export async function applyContentPostProcessing(
@@ -2029,27 +2041,13 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
 }
 
 // [v2.10.170] 페러프레이징/글 생성 진행 모달 helper
+// [2026-08-23] DOM 제어는 appProgressModal로 옮겼다 — 이미지 관리 탭도 같은 오버레이를 쓴다.
 function showGenerationModal(title: string, message: string, percent: number): void {
-  try {
-    const modal = document.getElementById('generation-modal');
-    const titleEl = document.getElementById('generation-modal-title');
-    const msgEl = document.getElementById('generation-modal-message');
-    const progEl = document.getElementById('generation-modal-progress');
-    const pctEl = document.getElementById('generation-modal-percent');
-    if (!modal) return;
-    modal.style.display = 'flex';
-    if (titleEl) titleEl.textContent = title;
-    if (msgEl) msgEl.textContent = message;
-    if (progEl) progEl.style.width = `${Math.max(0, Math.min(100, percent))}%`;
-    if (pctEl) pctEl.textContent = `${Math.round(percent)}%`;
-  } catch { /* ignore */ }
+  showAppProgressModal(title, message, percent);
 }
 
 function hideGenerationModal(): void {
-  try {
-    const modal = document.getElementById('generation-modal');
-    if (modal) modal.style.display = 'none';
-  } catch { /* ignore */ }
+  hideAppProgressModal();
 }
 
 

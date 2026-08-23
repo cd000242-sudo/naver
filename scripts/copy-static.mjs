@@ -184,6 +184,7 @@ try {
     'publishInterruptionPolicy.js',
     'errorAndAutosave.js',
     'safeExecute.js',
+    'appProgressModal.js',  // [2026-08-23] #generation-modal 공용 드라이버 — 글생성/페러프레이징/소제목 분석이 함께 쓴다
     'htmlUtils.js',
     'headingKeyUtils.js',
     'storageUtils.js',

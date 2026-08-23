@@ -5,6 +5,8 @@
 import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
 import { createShoppingCollectedPublishImages } from '../../image/shoppingReferenceGeneration.js';
 import { getSubImageMode } from '../utils/subImageMode.js';
+import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
+import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
  
 
 // --- Global declarations (exposed by renderer.ts via window) ---
@@ -94,9 +96,43 @@ declare const aiProgressModal: {
 };
 declare function getHeadingTitleByIndex(index: number): string;
 
+/**
+ * The live structuredContent to analyze. autoAnalyzeHeadings writes the generated English
+ * prompts back into `headings[i].prompt`, and image generation reads them from the very same
+ * object, so the live object is returned (never a copy). When the loaded post carries no
+ * headings, they are recovered from the body the user is looking at.
+ */
+function resolveStructuredContentForHeadingAnalysis(): any | null {
+  const live = (window as any).currentStructuredContent;
+  if (live && typeof live === 'object' && Array.isArray(live.headings) && live.headings.length > 0) {
+    return live;
+  }
+
+  const bodyEl = document.getElementById('unified-generated-content') as HTMLTextAreaElement | null;
+  const body = String(bodyEl?.value || '').trim();
+  if (!body) return null;
+  const extracted = extractSemiAutoHeadingsFromBody(body);
+  if (extracted.length === 0) return null;
+
+  const target = (live && typeof live === 'object') ? live : {};
+  target.headings = extracted.map((heading) => ({
+    title: heading.title,
+    content: heading.content,
+    prompt: heading.prompt || heading.title,
+    source: 'image-tab:body-heading',
+  }));
+  if (!target.bodyPlain) target.bodyPlain = body;
+  if (!target.selectedTitle) {
+    const titleEl = document.getElementById('unified-generated-title') as HTMLInputElement | null;
+    const title = String(titleEl?.value || '').trim();
+    if (title) target.selectedTitle = title;
+  }
+  (window as any).currentStructuredContent = target;
+  return target;
+}
+
 export function initHeadingImageGeneration(): void {
   const analyzeBtn = document.getElementById('analyze-headings-btn') as HTMLButtonElement;
-  const headingAnalysisContent = document.getElementById('heading-analysis-content') as HTMLTextAreaElement;
   const headingsSelectionContainer = document.getElementById('headings-selection-container') as HTMLDivElement;
   const headingsCheckboxList = document.getElementById('headings-checkbox-list') as HTMLDivElement;
   const generateImagesBtn = document.getElementById('generate-heading-images-btn') as HTMLButtonElement;
@@ -107,82 +143,46 @@ export function initHeadingImageGeneration(): void {
   let analyzedHeadings: Array<{ title: string; imagePrompt: string; referenceImagePath?: string; referenceImageUrl?: string }> = [];
 
   // 소제목 분석 버튼
-  if (analyzeBtn && headingAnalysisContent) {
+  // [2026-08-23] 이전 핸들러는 index.html 에 존재하지 않는 #heading-analysis-content 를
+  //   함께 요구해서 리스너가 아예 배선되지 않았다 — 버튼을 눌러도 아무 일도 일어나지 않았다
+  //   (사용자 보고). 지금은 화면에 올라와 있는 글의 소제목을 그대로 분석하고, 오래 걸리는
+  //   동안 진행 모달을 띄운다.
+  if (analyzeBtn) {
     analyzeBtn.addEventListener('click', async () => {
-      const content = headingAnalysisContent.value.trim();
-      if (!content) {
-        alert('콘텐츠를 입력해주세요.');
+      if (analyzeBtn.disabled) return;
+      const structuredContent = resolveStructuredContentForHeadingAnalysis();
+      if (!structuredContent) {
+        alert('분석할 소제목을 찾지 못했습니다.\n\n먼저 글을 생성하거나 글 목록에서 불러온 뒤 다시 눌러주세요.');
         return;
       }
 
+      const originalLabel = analyzeBtn.innerHTML;
       analyzeBtn.disabled = true;
       analyzeBtn.textContent = '분석 중...';
       appendLog('🔍 소제목 분석 중...');
+      showAppProgressModal('🔍 소제목 분석 중...', '소제목별 이미지 프롬프트를 만드는 중입니다', 3);
 
       try {
-        // 구조화 콘텐츠 생성으로 소제목 추출
-        const apiClient = EnhancedApiClient.getInstance();
-        const apiResponse = await apiClient.call(
-          'generateStructuredContent',
-          [{
-            assembly: {
-              baseText: content,
-              generator: UnifiedDOMCache.getGenerator(), // ✅ [2026-02-22 FIX] perplexity 지원
-            }
-          }],
-          {
-            retryCount: 2,
-            retryDelay: 3000,
-            timeout: 900000      // ✅ 15분 (Main 모델 폴백 체인 최대 12분 + 여유)
-          }
-        );
-        const result = apiResponse.data || { success: false, message: apiResponse.error };
-
-        if (result.success && result.content?.headings && result.content.headings.length > 0) {
-          analyzedHeadings = result.content.headings.map((h: any) => ({
-            title: String(h.title || h),
-            imagePrompt: String(h.imagePrompt || h.title || h),
-            content: h.content || '', // ✅ [2026-03-03] 본문 맥락 보존 (옵션 B)
-          }));
-
-          // 체크박스 목록 생성 (최대 10개) (✅ HTML 이스케이프 적용)
-          const displayHeadings = analyzedHeadings.slice(0, 10);
-          headingsCheckboxList.innerHTML = displayHeadings.map((heading: any, index: number) => {
-            const safeTitle = escapeHtml(heading.title || '');
-            const safeImagePrompt = escapeHtml(heading.imagePrompt || '');
-            return `
-              <label style="display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.5rem; border-radius: 0.25rem; cursor: pointer; transition: background var(--transition-fast);">
-                <input type="checkbox" class="heading-checkbox" data-heading-index="${index}" checked style="margin-top: 0.25rem;">
-                <div style="flex: 1;">
-                  <div style="font-weight: 600; margin-bottom: 0.25rem;">${safeTitle}</div>
-                  <div style="font-size: 0.875rem; color: var(--text-muted);">프롬프트: ${safeImagePrompt}</div>
-                </div>
-              </label>
-            `;
-          }).join('');
-
-          // 체크박스 호버 효과
-          headingsCheckboxList.querySelectorAll('label').forEach(label => {
-            label.addEventListener('mouseenter', () => {
-              label.style.background = 'var(--bg-hover)';
-            });
-            label.addEventListener('mouseleave', () => {
-              label.style.background = 'transparent';
-            });
-          });
-
-          headingsSelectionContainer.style.display = 'block';
-          appendLog(`✅ ${displayHeadings.length}개의 소제목이 분석되었습니다.`);
-        } else {
-          appendLog(`❌ 소제목 분석 실패: ${result.message || '알 수 없는 오류'}`);
-          alert(`❌ 소제목 분석 실패: ${result.message || '알 수 없는 오류'}`);
-        }
+        await autoAnalyzeHeadings(structuredContent, {
+          onProgress: (done, total) => {
+            const percent = total > 0 ? 3 + Math.round((done / total) * 94) : 3;
+            showAppProgressModal(
+              '🔍 소제목 분석 중...',
+              `${done}/${total} 섹션 완료 — 소제목별 이미지 프롬프트 생성 중`,
+              percent,
+            );
+          },
+        });
+        showAppProgressModal('✅ 소제목 분석 완료', '이미지 생성 준비가 끝났습니다', 100);
+        toastManager.success('✅ 소제목 분석 완료! 이미지 생성을 진행할 수 있습니다.');
       } catch (error) {
-        appendLog(`❌ 분석 오류: ${(error as Error).message}`);
-        alert(`❌ 오류: ${(error as Error).message}`);
+        const message = (error as Error)?.message || '알 수 없는 오류';
+        appendLog(`❌ 소제목 분석 실패: ${message}`);
+        alert(`❌ 소제목 분석 실패: ${message}`);
       } finally {
+        hideAppProgressModal();
         analyzeBtn.disabled = false;
-        analyzeBtn.textContent = '소제목 분석하기';
+        analyzeBtn.innerHTML = originalLabel;
       }
     });
   }
@@ -3392,7 +3392,15 @@ export function generateImagePromptByIndex(heading: string, index: number, blogT
 }
 
 // 소제목 자동 분석 함수 (반자동 모드용)
-export async function autoAnalyzeHeadings(structuredContent: any): Promise<void> {
+export interface AutoAnalyzeHeadingsOptions {
+  /** Reports completed/total sections so a caller can drive a progress UI. */
+  onProgress?: (done: number, total: number) => void;
+}
+
+export async function autoAnalyzeHeadings(
+  structuredContent: any,
+  options: AutoAnalyzeHeadingsOptions = {},
+): Promise<void> {
   try {
     if (!structuredContent || !structuredContent.headings || structuredContent.headings.length === 0) {
       appendLog('⚠️ 소제목이 없어 분석을 건너뜁니다.');
@@ -3432,6 +3440,9 @@ export async function autoAnalyzeHeadings(structuredContent: any): Promise<void>
     }
 
     appendLog(`🔍 ${allSections.length}개 섹션 분석 시작... (서론: ${structuredContent.introduction ? '있음' : '없음'}, 마무리: ${structuredContent.conclusion ? '있음' : '없음'})`);
+    try {
+      options.onProgress?.(0, allSections.length);
+    } catch { /* progress reporting must never break the analysis */ }
 
     // 소제목을 이미지 관리 탭 형식으로 변환
     // ✅ [2026-03-22] 동시성 제한 (2개씩) — Promise.all 전체 동시 발사 → Rate limit 방지
@@ -3457,6 +3468,9 @@ export async function autoAnalyzeHeadings(structuredContent: any): Promise<void>
         };
       }));
       headings.push(...batchResults);
+      try {
+        options.onProgress?.(Math.min(headings.length, allSections.length), allSections.length);
+      } catch { /* progress reporting must never break the analysis */ }
     }
 
     // ✅ [2026-02-27 CRITICAL FIX] AI 프롬프트를 structuredContent.headings에 write-back

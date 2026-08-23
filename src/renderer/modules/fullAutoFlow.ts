@@ -1920,7 +1920,13 @@ function updateUnifiedImagePreview(headings, generatedImages) {
       </div>
     </div>`;
     }).join('');
-    integratedPreview.innerHTML = headerHtml + (integratedHtml || '<div style="color: var(--text-muted); font-style: italic;">소제목이 없습니다.</div>');
+    // [2026-08-23] 소제목이 없을 때 본문까지 지우면, 이미지 관리 탭을 다녀오는 것만으로
+    // 미리보기가 통째로 비워진다(이 함수는 탭 복귀 경로에서 headings=[]로 다시 불린다).
+    // 소제목이 없으면 본문 평문이라도 계속 보여준다.
+    const emptyHeadingsHtml = bodyPlain.trim()
+        ? `<div style="padding: 0.5rem; line-height: 1.7; white-space: pre-wrap; color: var(--text-strong); font-size: 0.95rem;">${escapeHtml(bodyPlain)}</div>`
+        : '<div style="color: var(--text-muted); font-style: italic;">소제목이 없습니다.</div>';
+    integratedPreview.innerHTML = headerHtml + (integratedHtml || emptyHeadingsHtml);
     const headingTitles = headings
         .map((h) => (typeof h === 'string' ? h : (h?.title || h)))
         .map((t) => String(t || '').trim())

@@ -597,6 +597,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/utils/agentStatusRefreshCoordinator.ts',
   'src/renderer/utils/apiClient.ts',
   'src/renderer/utils/appEventsHandler.ts',
+  'src/renderer/utils/appProgressModal.ts',
   'src/renderer/utils/articleTableClipboard.ts',
   'src/renderer/utils/articleTableUtils.ts',
   'src/renderer/utils/brokenImageRegistry.ts',
