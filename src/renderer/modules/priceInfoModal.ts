@@ -257,6 +257,12 @@ export async function refreshAgentStatusBadges(
       }
       if (!s.loggedIn || !s.available) announcedAgentLoginTargets.delete(el);
       const versionLabel = formatAgentVersionLabel(t.provider, s.version);
+      // A probe that could not answer must not be drawn as "not installed" / "log in required".
+      if (s.errorCode === 'timeout' || s.errorCode === 'aborted' || s.errorCode === 'spawn_failed') {
+        el.textContent = '\u23F3 \uC0C1\uD0DC \uD655\uC778 \uC9C0\uC5F0 \u2014 \uB85C\uADF8\uC778\uC740 \uADF8\uB300\uB85C \uC720\uC9C0\uB429\uB2C8\uB2E4 \u00B7 \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4';
+        el.style.color = '#b45309';
+        return;
+      }
       if (!s.installed) {
         el.textContent = '\u2B07\uFE0F \uBBF8\uC124\uCE58 \u2014 \uC544\uB798 \uBC84\uD2BC \uD55C \uBC88\uC73C\uB85C \uC124\uCE58+\uB85C\uADF8\uC778\uC774 \uC790\uB3D9 \uC9C4\uD589\uB429\uB2C8\uB2E4';
         el.style.color = '#b91c1c';

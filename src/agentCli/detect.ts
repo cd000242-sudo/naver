@@ -13,6 +13,14 @@ import {
   buildCodexSubscriptionEnv,
   buildGeminiSubscriptionEnv,
 } from './subscriptionEnv.js';
+import {
+  forgetVerifiedStatus,
+  rememberVerifiedStatus,
+  transientErrorCode,
+  transientProbeCode,
+  transientProbeDetail,
+  transientProbeStatus,
+} from './detectResilience.js';
 import type {
   AgentCliStatus,
   AgentErrorCode,
@@ -23,7 +31,13 @@ import {
   parseAgentVersionOutput,
 } from './version.js';
 
-const DETECT_TIMEOUT_MS = 8_000;
+// [2026-08-23] Budgets sized from the user's own log, not from the dev machine: an idle
+// `agent:status` already measured 5.1-7.6s there (13.8s worst) because the Windows npm shim has
+// no adjacent node.exe, so every probe boots Electron-as-node before the native binary. The old
+// shared 8s deadline turned a healthy login into "log in again" whenever a post's browser and
+// image work was still running.
+const DETECT_TIMEOUT_MS = 12_000;
+const LOGIN_PROBE_TIMEOUT_MS = 20_000;
 // agy's login probe boots a local backend and refreshes the keyring token before answering.
 // Measured at 3.2-3.6s on the dev machine against 78ms for `agy --version`, so the shared 8s
 // budget leaves almost no headroom on a slower user PC. Only this probe gets the wider window.
@@ -53,6 +67,9 @@ function advanceDetectionRevision(provider: AgentProvider): number {
 }
 
 export function clearAgentDetectionCache(provider?: AgentProvider): void {
+  // Logout/install/logout-like resets must also drop the remembered verified status, or a
+  // transient probe failure right after a logout could still be answered with "available".
+  forgetVerifiedStatus(provider);
   if (provider) {
     statusCache.delete(provider);
     advanceDetectionRevision(provider);
@@ -65,9 +82,13 @@ export function clearAgentDetectionCache(provider?: AgentProvider): void {
   advanceDetectionRevision('gemini');
 }
 
+function isCurrentDetection(provider: AgentProvider, revision: number): boolean {
+  return detectionRevisions.get(provider) === revision;
+}
+
 function cacheStatus(status: AgentCliStatus, revision: number): AgentCliStatus {
   const immutableStatus = { ...status };
-  if (detectionRevisions.get(status.provider) === revision) {
+  if (isCurrentDetection(status.provider, revision)) {
     statusCache.set(status.provider, { checkedAt: Date.now(), status: immutableStatus });
   }
   return immutableStatus;
@@ -86,8 +107,17 @@ function buildAgentSubscriptionEnv(provider: AgentProvider): NodeJS.ProcessEnv {
   return buildClaudeSubscriptionEnv();
 }
 
-/** Probe `<cli> --version`; ENOENT (or any error) means not installed. */
-async function probeVersion(provider: AgentProvider): Promise<string | undefined> {
+interface VersionProbe {
+  version?: string;
+  /** Set when the probe itself failed to answer; says nothing about the installation. */
+  transientCode?: AgentErrorCode;
+}
+
+/**
+ * Probe `<cli> --version`. ENOENT and a non-zero exit mean not installed; a timeout or a
+ * failed spawn only means this attempt could not answer and must not print install copy.
+ */
+async function probeVersion(provider: AgentProvider): Promise<VersionProbe> {
   try {
     const res = await spawnCollect({
       command: agentCommandName(provider),
@@ -97,13 +127,27 @@ async function probeVersion(provider: AgentProvider): Promise<string | undefined
       env: buildAgentSubscriptionEnv(provider),
     });
     if (res.code === 0) {
-      return parseAgentVersionOutput(provider, res.stdout, res.stderr)
-        ?? agentVersionFallbackLabel(provider);
+      return {
+        version: parseAgentVersionOutput(provider, res.stdout, res.stderr)
+          ?? agentVersionFallbackLabel(provider),
+      };
     }
-  } catch {
+  } catch (error) {
+    const transientCode = transientProbeCode(error);
+    if (transientCode) return { transientCode };
     // Missing binary or an unusable shim.
   }
-  return undefined;
+  return {};
+}
+
+/**
+ * A probe that timed out, was aborted, or failed to spawn proves nothing about the account.
+ * Keeping its own code is what stops the UI from telling a logged-in user to log in again.
+ */
+function transientLoginProbe(provider: AgentProvider, error: unknown): LoginProbe {
+  const code = transientProbeCode(error);
+  if (!code) return { loggedIn: false, errorCode: 'not_logged_in' };
+  return { loggedIn: false, errorCode: code, detail: transientProbeDetail(provider, code) };
 }
 
 /** Codex exposes `codex login status` (for example, "Logged in using ChatGPT"). */
@@ -113,7 +157,7 @@ async function probeCodexLogin(): Promise<LoginProbe> {
       command: 'codex',
       args: ['login', 'status'],
       provider: 'codex',
-      timeoutMs: DETECT_TIMEOUT_MS,
+      timeoutMs: LOGIN_PROBE_TIMEOUT_MS,
       env: buildCodexSubscriptionEnv(),
     });
     const out = `${res.stdout}\n${res.stderr}`.trim();
@@ -145,8 +189,8 @@ async function probeCodexLogin(): Promise<LoginProbe> {
       detail: safeOut,
       errorCode: 'not_logged_in',
     };
-  } catch {
-    return { loggedIn: false, errorCode: 'not_logged_in' };
+  } catch (error) {
+    return transientLoginProbe('codex', error);
   }
 }
 
@@ -191,7 +235,7 @@ async function probeClaudeLogin(): Promise<LoginProbe> {
       command: 'claude',
       args: ['auth', 'status'],
       provider: 'claude',
-      timeoutMs: DETECT_TIMEOUT_MS,
+      timeoutMs: LOGIN_PROBE_TIMEOUT_MS,
       env: buildClaudeSubscriptionEnv(),
     });
     const out = `${res.stdout}\n${res.stderr}`.trim();
@@ -259,8 +303,8 @@ async function probeClaudeLogin(): Promise<LoginProbe> {
       errorCode: 'subscription_inactive',
       detail: 'Claude 인증 출처를 안전하게 확인할 수 없습니다. 최신 Claude Code로 업데이트한 뒤 Claude.ai 유료 구독 계정으로 다시 로그인해주세요.',
     };
-  } catch {
-    return { loggedIn: false, errorCode: 'not_logged_in' };
+  } catch (error) {
+    return transientLoginProbe('claude', error);
   }
 }
 
@@ -298,8 +342,8 @@ async function probeAgyLogin(): Promise<LoginProbe> {
       detail: out ? sanitizeUserVisibleError(out) : undefined,
       errorCode: 'not_logged_in',
     };
-  } catch {
-    return { loggedIn: false, errorCode: 'not_logged_in' };
+  } catch (error) {
+    return transientLoginProbe('gemini', error);
   }
 }
 
@@ -314,7 +358,13 @@ export async function detectAgent(
   }
   const detectionRevision = advanceDetectionRevision(provider);
 
-  const version = await probeVersion(provider);
+  const { version, transientCode: versionTransientCode } = await probeVersion(provider);
+  if (versionTransientCode) {
+    return cacheStatus(
+      transientProbeStatus(provider, versionTransientCode, false),
+      detectionRevision,
+    );
+  }
   if (!version) {
     return cacheStatus({
       provider,
@@ -330,6 +380,13 @@ export async function detectAgent(
     : provider === 'gemini'
       ? await probeAgyLogin()
       : await probeClaudeLogin();
+  const loginTransientCode = login.loggedIn ? undefined : transientErrorCode(login.errorCode);
+  if (loginTransientCode) {
+    return cacheStatus(
+      transientProbeStatus(provider, loginTransientCode, true, version),
+      detectionRevision,
+    );
+  }
   if (!login.loggedIn) {
     return cacheStatus({
       provider,
@@ -354,19 +411,9 @@ export async function detectAgent(
     }, detectionRevision);
   }
 
-  if (provider === 'codex') {
-    return cacheStatus({
-      provider,
-      installed: true,
-      version,
-      loggedIn: true,
-      available: true,
-      availabilityCheck: 'authentication',
-      detail: login.detail,
-    }, detectionRevision);
-  }
-
-  return cacheStatus({
+  // Only a live, fully verified probe may seed the fallback used when a later probe cannot
+  // answer — a reused status must never refresh its own grace window.
+  const verified: AgentCliStatus = {
     provider,
     installed: true,
     version,
@@ -374,5 +421,8 @@ export async function detectAgent(
     available: true,
     availabilityCheck: 'authentication',
     detail: login.detail,
-  }, detectionRevision);
+  };
+  // A detection superseded by a logout/install reset must not re-seed the fallback.
+  if (isCurrentDetection(provider, detectionRevision)) rememberVerifiedStatus(verified);
+  return cacheStatus(verified, detectionRevision);
 }

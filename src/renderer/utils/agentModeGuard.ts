@@ -11,11 +11,22 @@ interface AgentStatusLike {
   detail?: string;
 }
 
+/** Probe outcomes that describe the attempt, not the account. */
+function isTransientStatusCode(code: string | undefined): boolean {
+  return code === 'timeout' || code === 'aborted' || code === 'spawn_failed';
+}
+
 function unavailableReason(provider: 'codex' | 'claude' | 'gemini', status?: AgentStatusLike): string {
   const providerLabel = provider === 'codex' ? 'Codex' : provider === 'gemini' ? 'Gemini' : 'Claude';
   if (status?.errorCode === 'provider_disabled') {
     return status.detail
       || `${providerLabel} 구독 로그인을 현재 사용할 수 없습니다. 상태를 새로고침한 뒤 다시 시도해주세요.`;
+  }
+  // A probe that timed out / could not spawn says nothing about the account, so it must never
+  // reach the install or login copy below.
+  if (isTransientStatusCode(status?.errorCode)) {
+    return status?.detail
+      || `${providerLabel} 상태 확인이 지연돼 응답을 받지 못했습니다. 잠시 후 다시 시도해주세요.`;
   }
   if (!status?.installed) return `${provider} CLI가 설치되어 있지 않습니다.`;
   if (!status.loggedIn) return `${provider} 구독 로그인이 필요합니다.`;
@@ -58,6 +69,8 @@ export async function ensureAgentEngineReady(generator: string): Promise<boolean
     const providerLabel = provider === 'codex' ? 'Codex' : provider === 'gemini' ? 'Gemini' : 'Claude';
     const action = status?.errorCode === 'provider_disabled'
       ? '다른 연결 방식(에이전트 또는 API 키)을 직접 선택해주세요.'
+      : isTransientStatusCode(status?.errorCode)
+      ? '로그인은 그대로 유지되어 있습니다. 잠시 후 다시 시도해주세요.'
       : status?.errorCode === 'subscription_inactive'
       ? `${providerLabel} 구독을 갱신한 뒤 환경설정에서 계정을 다시 로그인해주세요.`
       : !status?.installed

@@ -57,6 +57,15 @@ export async function generateWithAgent(
   // UI badges may use the short status cache, but the final execution boundary must observe
   // external logout/auth-route changes before a request can consume subscription or API usage.
   const status = await detectAgent(provider, { forceRefresh: true });
+  // A status probe that could not answer is not evidence of a logout: surfacing it as one
+  // told correctly logged-in users to log in again right after a post (see detectResilience).
+  if (status.errorCode === 'timeout' || status.errorCode === 'aborted' || status.errorCode === 'spawn_failed') {
+    throw new AgentCliError(
+      status.errorCode,
+      provider,
+      status.detail ?? `${provider} 상태 확인이 지연돼 응답을 받지 못했습니다. 잠시 후 다시 시도해주세요.`,
+    );
+  }
   if (!status.installed) {
     throw new AgentCliError('not_installed', provider, `${provider} CLI가 설치되어 있지 않습니다.`);
   }
