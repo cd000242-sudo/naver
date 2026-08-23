@@ -15,6 +15,12 @@ export type SemiAutoPublishStructureStrategy = 'body-sections' | 'existing-secti
 export interface SemiAutoPublishStructureOptions {
   bodyIsAuthoritative?: boolean;
   existingIntroduction?: string;
+  /**
+   * [2026-08-23] 이미지가 걸려 있는 소제목 제목들. 이미지가 존재한다는 것은 그 소제목이 실재했다는
+   * 증거다. 추출도 기존 소제목 슬라이스도 실패했을 때 마지막으로 이 제목들로 본문을 잘라 구조를
+   * 되살린다 — 실패하면 이미지가 통째로 빠진 채 발행된다(실측 사고).
+   */
+  imageHeadingTitles?: readonly string[];
 }
 
 export interface SemiAutoPublishStructure extends SemiAutoExtractedDocument {
@@ -243,6 +249,29 @@ export function resolveSemiAutoPublishStructure(
           ...completeExistingHeadings[index],
           title: section.title,
           content: section.content,
+        })),
+        strategy: 'body-sections',
+        orderLocked: true,
+      };
+    }
+  }
+
+  // [2026-08-23] 마지막 복구 시도: 이미지가 걸린 소제목 제목으로 본문을 자른다.
+  // 사용자가 이미지를 만들어 붙였다는 건 그 소제목이 본문에 실재한다는 뜻이다. 여기서 포기하면
+  // 본문이 통짜로 들어가고 이미지 삽입 지점이 0개가 된다(실측: 생성한 이미지 3장이 전부 유실).
+  const imageTitles = (options.imageHeadingTitles || [])
+    .map((title) => String(title || '').trim())
+    .filter((title) => title.length > 0);
+  if (imageTitles.length > 0) {
+    const slicedByImages = sliceBodyByExistingHeadingTitles(normalizedBody, imageTitles);
+    if (slicedByImages && slicedByImages.sections.every((section) => section.content.length > 0)) {
+      return {
+        introduction: slicedByImages.introduction,
+        headings: slicedByImages.sections.map((section) => ({
+          title: section.title,
+          content: section.content,
+          prompt: section.title,
+          source: 'publish:image-heading',
         })),
         strategy: 'body-sections',
         orderLocked: true,

@@ -888,6 +888,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     // 2. 서론(Introduction) 작성
     const headings = structured.headings || [];
     const bodyText = structured.bodyPlain || '';
+    // [2026-08-23] 이미지가 통째로 빠진 채 발행된 사고를 사후에 추적할 수 있어야 한다.
+    //   지금까지 이 값들은 렌더러 console 에만 있어서 로그 파일에 아무 흔적이 없었다.
+    self.log(
+      `🧾 [구조 진단] 소제목 ${headings.length}개 · 전달 이미지 ${(resolved.images || []).length}개 · `
+      + `strategy=${structured._manualStructureStrategy || '미지정'} · manualEdited=${!!structured._bodyManuallyEdited}`,
+    );
+    if (headings.length === 0 && (resolved.images || []).length > 0) {
+      self.log('   ⚠️ 소제목이 0개라 본문에 이미지를 넣을 자리가 없습니다 — 이미지 없이 진행됩니다.');
+    }
     const bodyTextHasHeadingMarkers = headings.some((h: any) => {
       const title = String(h?.title || '').trim();
       return title.length > 0 && bodyText.includes(title);

@@ -2250,11 +2250,47 @@ export async function handleSemiAutoPublish(): Promise<any> {
   );
 
   const existingSemiAutoHeadings = Array.isArray(structuredContent.headings) ? structuredContent.headings : [];
+  // [2026-08-23] 이미지가 걸린 소제목을 구조 복구의 마지막 근거로 넘긴다.
+  //   실측 사고: 이미지 3장을 만들어 붙였는데 소제목 추출이 0개가 되면서 본문이 통짜로 들어갔고,
+  //   에디터 이미지 컴포넌트가 0개인 채 발행됐다.
+  const imageHeadingTitles: string[] = (() => {
+    try {
+      const all = typeof ImageManager !== 'undefined' ? ImageManager.getAllImages() : [];
+      const seen = new Set<string>();
+      for (const image of Array.isArray(all) ? all : []) {
+        const title = String(image?.heading || '').trim();
+        if (title && !seen.has(title)) seen.add(title);
+      }
+      return Array.from(seen);
+    } catch {
+      return [];
+    }
+  })();
   const semiAutoPublishStructure = resolveSemiAutoPublishStructure(content, existingSemiAutoHeadings, {
     bodyIsAuthoritative: true,
     existingIntroduction: structuredContent.introduction || '',
+    imageHeadingTitles,
   });
   const resolvedSemiAutoHeadings = semiAutoPublishStructure.headings;
+  appendLog(
+    `🧾 발행 구조: 소제목 ${resolvedSemiAutoHeadings.length}개 (${semiAutoPublishStructure.strategy})`
+    + ` · 준비된 이미지 소제목 ${imageHeadingTitles.length}개`,
+  );
+
+  // 이미지를 만들어 뒀는데 넣을 자리가 하나도 없으면 조용히 텍스트만 내보내지 않는다.
+  // 사용자가 이미 비용과 시간을 쓴 결과물이 사라지는 경우라, 발행 여부는 사용자가 정한다.
+  if (resolvedSemiAutoHeadings.length === 0 && imageHeadingTitles.length > 0) {
+    const proceed = window.confirm(
+      `⚠️ 이미지 ${imageHeadingTitles.length}개가 준비돼 있는데, 본문에서 넣을 자리(소제목)를 찾지 못했습니다.\n\n`
+      + '이대로 발행하면 이미지 없이 글만 올라갑니다.\n\n'
+      + '확인 = 이미지 없이 그대로 발행 / 취소 = 발행 중단',
+    );
+    if (!proceed) {
+      appendLog('🛑 발행 중단: 이미지를 넣을 소제목을 찾지 못했습니다. 본문의 소제목 줄을 확인해주세요.');
+      return;
+    }
+    appendLog('⚠️ 사용자 확인 후 이미지 없이 발행을 계속합니다.');
+  }
 
   const updatedStructuredContent = {
     ...structuredContent,
