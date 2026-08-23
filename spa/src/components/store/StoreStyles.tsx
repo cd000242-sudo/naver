@@ -187,14 +187,24 @@ function StoreStyles() {
             .st-bundle .st-body { padding: 26px 28px; display: flex; flex-direction: column; }
             /* 넓어진 만큼 안쪽을 좌우로 — 영상과 값이 나란히 선다. */
             .st-bundle .st-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .82fr); gap: 22px 26px; align-items: start; }
-            .st-bundle .st-body > h3, .st-bundle .st-body > .st-tag { grid-column: 1 / -1; }
-            .st-bundle .st-incl { grid-column: 1; margin: 0; }
-            .st-bundle-media { grid-column: 1; margin: 0; }
-            .st-bundle .st-price, .st-bundle .st-permo, .st-bundle .st-trust, .st-bundle .st-buy { grid-column: 2; }
+            /*
+             * 줄 위치를 못 박는다(2026-08-23). 자동 배치에 맡겼더니 오른쪽
+             * 묶음이 제목 줄에 걸려 제목 아래가 크게 벌어졌다(화면으로 확인).
+             */
+            .st-bundle .st-body > h3 { grid-column: 1 / -1; grid-row: 1; }
+            .st-bundle .st-body > .st-tag { grid-column: 1 / -1; grid-row: 2; }
+            .st-bundle .st-incl { grid-column: 1; grid-row: 3; margin: 0; }
+            .st-bundle-media { grid-column: 1; grid-row: 4; margin: 0; }
+            /*
+             * 값·신뢰지표·담기를 한 덩어리로 세운다(2026-08-23).
+             * 따로 놓였을 때는 왼쪽의 긴 영상 줄에 끌려가 사이가 크게 벌어졌다.
+             */
+            .st-bundle-side { grid-column: 2; grid-row: 3 / span 2; display: flex; flex-direction: column; }
+            .st-bundle-side .st-buy { margin-top: auto; }
+            .st-plain-side { display: contents; }
             @media (max-width: 900px) {
                 .st-bundle .st-body { grid-template-columns: minmax(0, 1fr); }
-                .st-bundle .st-incl, .st-bundle-media, .st-bundle .st-price,
-                .st-bundle .st-permo, .st-bundle .st-trust, .st-bundle .st-buy { grid-column: 1; }
+                .st-bundle .st-incl, .st-bundle-media, .st-bundle-side { grid-column: 1; grid-row: auto; }
             }
             /* 영상은 기능 목록과 값 사이의 빈 자리를 채운다 — 남는 높이를 가져간다. */
             .st-bundle-media { margin: 14px 0 4px; min-height: 0; }

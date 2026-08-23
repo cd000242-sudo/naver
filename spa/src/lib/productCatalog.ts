@@ -95,7 +95,7 @@ export const PRODUCTS: Product[] = [
     },
     {
         id: 'all',
-        name: '올인원',
+        name: 'All in one',
         tagline: '전 제품을 하나로',
         summary: '기간 안에 새 제품이 나오면 그것도 그대로 쓰실 수 있습니다.',
         licensePlatform: 'ALL',

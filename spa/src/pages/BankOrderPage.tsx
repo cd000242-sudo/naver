@@ -18,15 +18,15 @@ interface ProductOption { id: string; name: string; price: number; futurePrice?:
 const ALL_PRODUCTS: Record<string, ProductOption[]> = {
     naver: [
         // [2026-08-21] 하루 환산 첫 자리(사장님 지시) — 실청구액은 price 로 그대로 노출.
-        { id: 'all-in-one-monthly', name: '올인원 1개월', price: 50000, futurePrice: 100000, period: '하루 1,667원꼴 · 10월 1일부터 100,000원', normalPeriod: '하루 3,333원꼴 · 정상가 적용 중' },
-        { id: 'all-in-one-quarterly', name: '올인원 3개월', price: 120000, futurePrice: 240000, period: '하루 1,333원꼴 (월 40,000원) · 10월 1일부터 240,000원', normalPeriod: '하루 2,667원꼴 (월 80,000원) · 정상가 적용 중' },
-        { id: 'all-in-one-yearly', name: '올인원 1년', price: 400000, futurePrice: 800000, period: '하루 1,096원꼴 (월 33,333원) · 10월 1일부터 800,000원', normalPeriod: '하루 2,192원꼴 (월 66,667원) · 정상가 적용 중' },
-        { id: 'all-in-one-lifetime', name: '올인원 영구제', price: 1650000, futurePrice: 3300000, period: '영구 이용 · 10월 1일부터 3,300,000원', normalPeriod: '영구 이용 · 정상가 적용 중' },
+        { id: 'all-in-one-monthly', name: 'All in one 1개월', price: 50000, futurePrice: 100000, period: '하루 1,667원꼴 · 10월 1일부터 100,000원', normalPeriod: '하루 3,333원꼴 · 정상가 적용 중' },
+        { id: 'all-in-one-quarterly', name: 'All in one 3개월', price: 120000, futurePrice: 240000, period: '하루 1,333원꼴 (월 40,000원) · 10월 1일부터 240,000원', normalPeriod: '하루 2,667원꼴 (월 80,000원) · 정상가 적용 중' },
+        { id: 'all-in-one-yearly', name: 'All in one 1년', price: 400000, futurePrice: 800000, period: '하루 1,096원꼴 (월 33,333원) · 10월 1일부터 800,000원', normalPeriod: '하루 2,192원꼴 (월 66,667원) · 정상가 적용 중' },
+        { id: 'all-in-one-lifetime', name: 'All in one 영구제', price: 1650000, futurePrice: 3300000, period: '영구 이용 · 10월 1일부터 3,300,000원', normalPeriod: '영구 이용 · 정상가 적용 중' },
     ],
 };
 
 const PRODUCT_LABELS: Record<string, string> = {
-    naver: 'Leaders Pro 올인원',
+    naver: 'Leaders Pro All in one',
 };
 
 type Status = 'pending' | 'approved' | 'rejected';
@@ -220,7 +220,8 @@ function BankOrderPage() {
         const orderAmount = productPrice(selected);
         const productLabel = cartOrder
             ? selected.name
-            : selected.name.startsWith('올인원')
+            /* 제품 이름을 'All in one' 으로 바꿨다 — 옛 이름으로 검사하면 안 걸린다. */
+            : selected.name.startsWith('All in one')
                 ? `Leaders Pro ${selected.name}`
                 : `${PRODUCT_LABELS[tab]} ${selected.name}`;
         try {
@@ -256,7 +257,7 @@ function BankOrderPage() {
             <div style={{ background: 'rgba(18,18,26,0.7)', backdropFilter: 'blur(20px)', border: '1px solid rgba(201,168,76,0.18)', borderRadius: 24, padding: 'clamp(24px, 4vw, 40px)' }}>
                 <div style={{ textAlign: 'center', marginBottom: 32 }}>
                     <h1 style={{ fontSize: 'clamp(24px, 4vw, 32px)', fontWeight: 900, marginBottom: 8, background: gradient.goldBright, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>💰 계좌이체 결제</h1>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>{cartOrder ? '주문 확인 → 정보 입력 → 입금 → 라이선스 발급' : '올인원 기간권 선택 → 정보 입력 → 입금 → 올인원 라이선스 발급'}</p>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>{cartOrder ? '주문 확인 → 정보 입력 → 입금 → 라이선스 발급' : 'All in one 기간권 선택 → 정보 입력 → 입금 → 라이선스 발급'}</p>
                 </div>
 
                 {/* Step 1 — 상점에서 담아왔으면 다시 고르게 하지 않는다. 주문 내역만 보여 준다. */}
@@ -278,7 +279,7 @@ function BankOrderPage() {
                         </p>
                     </Step>
                 ) : (
-                <Step n={1} label="올인원 기간권 선택">
+                <Step n={1} label="All in one 기간권 선택">
                     <div style={{ display: 'flex', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
                         {Object.keys(PRODUCT_LABELS).filter((k) => k === 'naver').map((k) => (
                             <button
@@ -414,7 +415,7 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                     {status === 'pending' && '주문이 접수되었습니다!'}
                 </div>
                 <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 14, lineHeight: 1.8 }}>
-                    {status === 'approved' && <>아래 올인원 라이선스 코드를 사용해주세요.<br />이메일로도 발송되었습니다.</>}
+                    {status === 'approved' && <>아래 All in one 라이선스 코드를 사용해주세요.<br />이메일로도 발송되었습니다.</>}
                     {status === 'rejected' && '문의 사항이 있으시면 아래 연락처로 연락주세요.'}
                     {status === 'pending' && <>아래 계좌로 입금해주세요.<br />입금 확인 후 <strong>라이선스 코드</strong>가 이메일로 발송됩니다.<br /><span style={{ display: 'inline-block', marginTop: 8, color: '#c9a84c', fontSize: 13 }}>📡 이 페이지는 자동으로 상태가 갱신됩니다.</span></>}
                 </div>
@@ -454,7 +455,7 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                     <div style={{ background: 'linear-gradient(135deg, rgba(68,215,182,0.08), rgba(201,168,76,0.08))', border: '1px solid rgba(68,215,182,0.4)', borderRadius: 14, padding: 24, marginTop: 18, textAlign: 'left' }}>
                         <div style={{ fontSize: 36, textAlign: 'center', marginBottom: 8 }}>🎉</div>
                         <div style={{ textAlign: 'center', color: '#44d7b6', fontSize: 18, fontWeight: 800, marginBottom: 16 }}>라이선스 발급 완료</div>
-                        <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, marginBottom: 6 }}>올인원 라이선스 코드</div>
+                        <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, marginBottom: 6 }}>All in one 라이선스 코드</div>
                         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                             <input readOnly value={code} style={{ flex: 1, background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 10, padding: '14px 16px', color: '#c9a84c', fontFamily: 'monospace', fontSize: 16, fontWeight: 800, letterSpacing: 0.5 }} />
                             <button onClick={() => copyLicense(code)} style={{ background: gradient.goldBright, color: onGold.black, border: 'none', borderRadius: 10, padding: '14px 18px', fontWeight: 800, cursor: 'pointer', fontSize: 14, whiteSpace: 'nowrap' }}>{licCopyLabel}</button>

@@ -207,6 +207,12 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                   * 줄에 연·월 금액을 그대로 적는다.
                                   * 영구제는 기간이 없어 하루로 나눌 수 없으므로 총액이 큰 자리다.
                                   */}
+                                {/*
+                                  * 올인원은 값·신뢰지표·담기를 **한 덩어리로** 묶는다(2026-08-23).
+                                  * 따로 두면 격자에서 각자 다른 줄에 놓여, 왼쪽의 긴
+                                  * 영상 줄에 끌려가 사이가 크게 벌어졌다(화면으로 확인).
+                                  */}
+                                <div className={product.bundle ? 'st-bundle-side' : 'st-plain-side'}>
                                 {(() => {
                                     const daily = perDay(price, term);
                                     const termUnit = term === 'lifetime' ? '' : term === 'yearly' ? '년' : '월';
@@ -249,8 +255,9 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                     onClick={() => toggle(product)}
                                     aria-pressed={inCart}
                                 >
-                                    {inCart ? '담았습니다 ✓' : product.bundle ? '올인원 담기' : '담기'}
+                                    {inCart ? '담았습니다 ✓' : product.bundle ? 'All in one 담기' : '담기'}
                                 </button>
+                                </div>
                             </div>
                         </article>
                     );
@@ -345,9 +352,9 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                     )}
                     {showSwap && savedByBundle > 0 && (
                         <div className="st-swap">
-                            <b>올인원 {TERMS.find((item) => item.id === term)?.label}은 {won(bundlePrice)}원입니다.</b>
+                            <b>All in one {TERMS.find((item) => item.id === term)?.label}은 {won(bundlePrice)}원입니다.</b>
                             {' '}전 제품을 다 쓰면서 <b>{won(savedByBundle)}원 더 쌉니다</b>.
-                            <button type="button" onClick={() => bundle && toggle(bundle)}>올인원으로 바꾸기 →</button>
+                            <button type="button" onClick={() => bundle && toggle(bundle)}>All in one 으로 바꾸기 →</button>
                         </div>
                     )}
                 </>
