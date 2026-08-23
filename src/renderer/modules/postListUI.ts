@@ -28,6 +28,8 @@ declare function saveGeneratedPosts(posts: any[]): void;
 declare function normalizeGeneratedPostCategoryKey(key: string): string;
 declare function getGeneratedPostCategoryLabel(key: string): string;
 declare function getRequiredImageBasePath(): Promise<string>;
+import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
+
 declare function updateUnifiedImagePreview(headings: any[], images: any[]): void;
 declare function displayGeneratedImages(images: any[]): void;
 declare function displayImageHeadingsWithPrompts(headings: any[]): void;
@@ -1017,6 +1019,30 @@ export function togglePostsView(): void {
 }
 
 // ✅ 생성된 글을 필드에 불러오기
+/**
+ * [2026-08-23] 저장된 글의 소제목이 비어 있으면 본문에서 되살린다.
+ *
+ * 페러프레이징이 소제목을 빈 배열로 덮던 시절(~v2.11.208)에 저장된 글은 headings=[] 인 채로
+ * 남아 있다. 그대로 불러오면 발행 경로가 본문을 통짜로 넣고 이미지 삽입 지점이 0개가 된다
+ * (실측 사고: 이미지 3장을 배치했는데 글만 발행됨). 불러오는 시점에 한 번 복구한다.
+ */
+function recoverHeadingsForLoadedPost(storedHeadings: unknown, body: string): any[] {
+  const headings = Array.isArray(storedHeadings) ? storedHeadings : [];
+  if (headings.length > 0) return headings;
+  if (!String(body || '').trim()) return [];
+
+  const recovered = extractSemiAutoHeadingsFromBody(String(body));
+  if (recovered.length === 0) return [];
+  // 번들 밖(테스트 등)에서는 appendLog 가 없다 — 복구 자체가 로그 때문에 죽으면 안 된다.
+  try { appendLog(`🧩 저장된 소제목이 비어 있어 본문에서 ${recovered.length}개를 복구했습니다.`); } catch { /* 로그는 선택적 */ }
+  return recovered.map((heading) => ({
+    title: heading.title,
+    content: heading.content,
+    prompt: heading.prompt || heading.title,
+    source: 'load:body-heading',
+  }));
+}
+
 export function reconstructGeneratedPostStructuredContent(post: any): any {
   const restoredHashtags = normalizeHashtags(post?.hashtags);
   const storedStructuredContent = post?.structuredContent
@@ -1031,7 +1057,12 @@ export function reconstructGeneratedPostStructuredContent(post: any): any {
     bodyPlain: post?.content,
     content: post?.content,
     hashtags: restoredHashtags,
-    headings: post?.headings || storedStructuredContent.headings || [],
+    headings: recoverHeadingsForLoadedPost(
+      (Array.isArray(post?.headings) && post.headings.length > 0)
+        ? post.headings
+        : storedStructuredContent.headings,
+      post?.content,
+    ),
     quality: post?.quality || undefined,
   };
 }

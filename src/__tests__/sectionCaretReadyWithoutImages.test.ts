@@ -14,10 +14,12 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
+// [2026-08-23] 줄끝 정규화: rebase/fresh checkout 이 CRLF 로 체크아웃하면 아래 소스 단언이
+// 실제 회귀 없이 깨진다. 검증 대상은 코드 구조지 줄끝이 아니다.
 const source = readFileSync(
   resolve(__dirname, '..', 'automation', 'editorHelpers.ts'),
   'utf8',
-);
+).replace(/\r\n/g, '\n');
 
 describe('섹션 본문 입력 전 캐럿 확보', () => {
   it('캐럿 복구 사다리가 이미지 분기 밖에 있다', () => {
