@@ -263,6 +263,51 @@ export type BridgePostIdeasResult =
     | { status: 'outdated' }
     | { status: 'error'; message: string };
 
+export type BridgeRadarResult =
+    | { ok: true; evaluations: Array<Record<string, number | string>>; provider?: string }
+    | { ok: false; reason: 'offline' | 'failed'; message?: string };
+
+/**
+ * 레이더 평가를 **앱(본인 구독)** 으로 돌린다
+ * (사장님 지시 2026-08-23: "레이더도 앱으로 넘어가게 붙여 줘").
+ * 사이트 토큰이 죽어도 앱만 켜 두면 계속 돈다. 재료만 보낸다 — 후보 목록과
+ * 내 글 요지뿐이고 문장은 앱이 만든다.
+ */
+export async function bridgeRadarEvaluate(input: {
+    items: Array<{ title: string; source: string; link: string }>;
+    myTitle: string;
+    mySummary: string;
+    provider?: string;
+}): Promise<BridgeRadarResult> {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 180_000);
+    try {
+        const response = await fetch(`${BRIDGE_BASE}/v1/bridge/radar-evaluate`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+                items: input.items.slice(0, 40),
+                myTitle: input.myTitle || '',
+                mySummary: input.mySummary || '',
+                provider: input.provider || '',
+            }),
+            signal: controller.signal,
+        });
+        if (!response.ok) return { ok: false, reason: 'failed', message: `앱 응답 ${response.status}` };
+        const parsed = await response.json();
+        const rows = parsed?.result?.evaluations;
+        if (!Array.isArray(rows) || rows.length === 0) {
+            return { ok: false, reason: 'failed', message: '앱이 평가를 돌려주지 못했습니다.' };
+        }
+        return { ok: true, evaluations: rows, provider: parsed?.result?.provider };
+    } catch {
+        // 앱이 꺼져 있거나 브리지가 안 열렸다 — 지어내지 않고 그대로 알린다.
+        return { ok: false, reason: 'offline' };
+    } finally {
+        window.clearTimeout(timer);
+    }
+}
+
 export async function bridgePostIdeas(input: {
     kind: 'keyword' | 'kin';
     keyword?: string;

@@ -4,7 +4,34 @@ import {
     type RadarAnalysis, type RadarEvaluated, type RadarGatedSite,
 } from '../../lib/keywordApi';
 import { loadUserKeys } from '../../lib/userKeys';
+import { bridgeRadarEvaluate } from '../../lib/bridge';
 import { TabIntro } from './LewordShared';
+
+/*
+ * 앱 경유 평가의 종합점수 — **정본은 워커의 RADAR_CONFIG** 다.
+ * 두 판이 갈라지면 같은 후보가 사이트에서와 앱에서 다르게 판정된다.
+ * 워커 쪽을 고치면 여기도 같이 고칠 것.
+ */
+const RADAR_WEIGHTS = {
+    searchDemand: 0.15, commercialValue: 0.20, problemUrgency: 0.15,
+    externalOpportunity: 0.20, siteFit: 0.15, freshness: 0.10, lowCompetitionBonus: 0.05,
+};
+const RADAR_THRESHOLDS = { now: 80, watch: 60 };
+
+function scoreFromAxes(a: Record<string, number>): { score: number; action: 'NOW' | 'WATCH' | 'SKIP' } {
+    const w = RADAR_WEIGHTS;
+    const score = Math.round(
+        (a.relevance || 0) * w.searchDemand
+        + (a.commercialValue || 0) * w.commercialValue
+        + (a.urgency || 0) * w.problemUrgency
+        + (a.trafficPotential || 0) * w.externalOpportunity
+        + (a.contentMatch || 0) * w.siteFit
+        + (a.relevance || 0) * w.freshness
+        + (100 - (a.spamRisk || 0)) * w.lowCompetitionBonus,
+    );
+    const action = score >= RADAR_THRESHOLDS.now ? 'NOW' : score >= RADAR_THRESHOLDS.watch ? 'WATCH' : 'SKIP';
+    return { score, action };
+}
 
 /**
  * 외부유입 레이더 — 내 글 주소 하나로 "이 글로 사람을 데려올 수 있는 바깥 자리"를
@@ -129,7 +156,46 @@ function RadarTab() {
 
         // ③ AI 평가 — 룰 점수 상위만 LLM 에 보낸다(§19 비용 원칙, 서버가 상한을 쥔다)
         setPhase('evaluating');
-        const evaluated = await fetchRadarEvaluate(searched.data.items, meta.title, meta.moneyAngle);
+        let evaluated = await fetchRadarEvaluate(searched.data.items, meta.title, meta.moneyAngle);
+        /*
+         * 사이트가 못 하면 **앱(본인 구독)** 으로 넘긴다
+         * (사장님 지시 2026-08-23: "레이더도 앱으로 넘어가게 붙여 줘").
+         * 다른 탭은 이미 이 길이 있는데 레이더만 없어서, 사이트 토큰 하나가
+         * 죽으면 통째로 멈췄다. 앱만 켜 두면 계속 돈다.
+         */
+        if (!evaluated.ok || !evaluated.data) {
+            const viaApp = await bridgeRadarEvaluate({
+                items: searched.data.items.map((item) => ({
+                    title: String(item.title || ''),
+                    source: String(item.source || ''),
+                    link: String(item.link || ''),
+                })),
+                myTitle: meta.title,
+                mySummary: meta.moneyAngle,
+                provider: String(loadUserKeys().aiProvider || ''),
+            });
+            if (viaApp.ok) {
+                const merged: RadarEvaluated[] = searched.data.items.map((item, index) => {
+                    const row = viaApp.evaluations.find((e) => Number(e.index) === index + 1);
+                    if (!row) return { ...item, evaluated: false };
+                    const axes = row as unknown as Record<string, number>;
+                    const { score, action } = scoreFromAxes(axes);
+                    return {
+                        ...item,
+                        evaluated: true,
+                        relevance: axes.relevance, urgency: axes.urgency,
+                        commercialValue: axes.commercialValue, trafficPotential: axes.trafficPotential,
+                        contentMatch: axes.contentMatch, spamRisk: axes.spamRisk,
+                        score, recommendedAction: action,
+                        reason: String(row.why || ''),
+                    };
+                });
+                setItems(merged);
+                setPhase('done');
+                setError('');
+                return;
+            }
+        }
         if (!evaluated.ok || !evaluated.data) {
             // 평가가 죽어도 검색 결과는 보여준다 — 빈 화면이 최악이다(§27)
             setItems(searched.data.items.map((item) => ({ ...item, evaluated: false })));
