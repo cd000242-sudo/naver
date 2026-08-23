@@ -94,6 +94,55 @@ const PLANS: Record<string, Plan[]> = {
     ],
 };
 
+/**
+ * 발행 데모 영상이 **돌아가며** 나오는 자리.
+ *
+ * 사장님 지적(2026-08-23): "올인원에는 영상이 돌아가면서 보여야 정상 아닌가요?
+ * 안 나오는데?" — 맞다. 영상 5개와 파일이 다 있는데 **그리는 코드가 없었다**.
+ * PURCHASE_SHOWCASE_VIDEOS 는 정의만 되고 어디서도 안 쓰이고 있었다(참조 1회).
+ *
+ * 한 편이 끝나면 다음으로 넘어간다 — 타이머로 자르면 발행 장면이 중간에 끊긴다.
+ * 소리는 끈 채로 자동 재생한다(브라우저가 소리 있는 자동재생을 막는다).
+ * 사용자가 직접 고를 수 있게 아래에 이름표를 둔다.
+ */
+function PurchaseVideoShowcase() {
+    const [index, setIndex] = useState(0);
+    const clip = PURCHASE_SHOWCASE_VIDEOS[index] || PURCHASE_SHOWCASE_VIDEOS[0];
+    const next = () => setIndex((i) => (i + 1) % PURCHASE_SHOWCASE_VIDEOS.length);
+    if (!clip) return null;
+    return (
+        <div className="purchase-video-rotor">
+            <div className="purchase-video-frame">
+                <video
+                    key={clip.src}
+                    src={clip.src}
+                    autoPlay
+                    muted
+                    playsInline
+                    controls
+                    preload="metadata"
+                    onEnded={next}
+                    aria-label={clip.title}
+                />
+            </div>
+            <div className="purchase-video-caption">
+                <b>{clip.label}</b>
+                <span>{clip.title}</span>
+            </div>
+            <div className="purchase-video-tabs" role="group" aria-label="발행 예시 영상 고르기">
+                {PURCHASE_SHOWCASE_VIDEOS.map((item, at) => (
+                    <button
+                        key={item.src}
+                        type="button"
+                        className={at === index ? 'on' : ''}
+                        onClick={() => setIndex(at)}
+                    >{item.label}</button>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 const PURCHASE_SHOWCASE_VIDEOS = [
     {
         title: 'Better-Life-Naver 글발행 예시 영상',
@@ -412,6 +461,24 @@ function PricingPage() {
                         margin: 0 0 34px;
                     }
 
+                    .purchase-proof-pair { display: grid; gap: 14px; }
+                    .purchase-video-rotor { display: flex; flex-direction: column; gap: 8px; }
+                    .purchase-video-frame {
+                        border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.1);
+                        background: #050812;
+                    }
+                    .purchase-video-frame video { width: 100%; display: block; max-height: 300px; object-fit: contain; background: #050812; }
+                    .purchase-video-caption { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+                    .purchase-video-caption b { color: #7dd3fc; font-size: 12px; font-weight: 900; }
+                    .purchase-video-caption span { color: rgba(255,255,255,.62); font-size: 12.5px; }
+                    .purchase-video-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+                    .purchase-video-tabs button {
+                        padding: 4px 10px; border-radius: 999px; cursor: pointer;
+                        border: 1px solid rgba(255,255,255,.12); background: none;
+                        color: rgba(255,255,255,.55); font: inherit; font-size: 11.5px; font-weight: 800;
+                    }
+                    .purchase-video-tabs button.on { border-color: rgba(56,189,248,.5); background: rgba(56,189,248,.14); color: #cfefff; }
+
                     .purchase-video-side {
                         border-radius: 18px;
                         border: 1px solid rgba(255, 255, 255, 0.10);
@@ -729,7 +796,12 @@ function PricingPage() {
                      * 예전에는 판 바깥 저 아래에 있어서, 값을 본 사람이 증거까지
                      * 내려오지 않았다. 같은 판 안에 있어야 한 눈에 든다.
                      */
-                    proof={<ProofShowcase compact variant="carousel" className="purchase-proof-inline" />}
+                    proof={(
+                        <div className="purchase-proof-pair">
+                            <ProofShowcase compact variant="carousel" className="purchase-proof-inline" />
+                            <PurchaseVideoShowcase />
+                        </div>
+                    )}
                     /*
                      * 신뢰 지표는 값 **바로 옆**에 선다(사장님 지시 2026-08-21).
                      * 판 아래 따로 떠 있을 때는 값을 보고 결정하는 순간에 눈에
