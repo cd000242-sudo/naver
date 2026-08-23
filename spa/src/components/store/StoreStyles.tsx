@@ -184,48 +184,36 @@ function StoreStyles() {
                 display: flex; align-items: center; min-width: 0;
             }
             .st-bundle-proof > * { width: 100%; }
-            .st-bundle .st-body { padding: 26px 28px; display: flex; flex-direction: column; }
-            /* 넓어진 만큼 안쪽을 좌우로 — 영상과 값이 나란히 선다. */
-            .st-bundle .st-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .82fr); gap: 22px 26px; align-items: start; }
             /*
-             * 줄 위치를 못 박는다(2026-08-23). 자동 배치에 맡겼더니 오른쪽
-             * 묶음이 제목 줄에 걸려 제목 아래가 크게 벌어졌다(화면으로 확인).
+             * 세로로 쌓는다(사장님 지시 2026-08-23 "이렇게 가로로 말고 / 영상 /
+             * 가격버튼 이런식으로"). 좌우로 나눴더니 한쪽이 길면 다른 쪽에
+             * 빈 구멍이 생겼다 — 위아래로 두면 그 문제가 원천적으로 없다.
              */
-            .st-bundle .st-body > h3 { grid-column: 1 / -1; grid-row: 1; }
-            .st-bundle .st-body > .st-tag { grid-column: 1 / -1; grid-row: 2; }
-            .st-bundle .st-incl { grid-column: 1; grid-row: 3; margin: 0; }
-            .st-bundle-media { grid-column: 1; grid-row: 4; margin: 0; }
-            /*
-             * 값·신뢰지표·담기를 한 덩어리로 세운다(2026-08-23).
-             * 따로 놓였을 때는 왼쪽의 긴 영상 줄에 끌려가 사이가 크게 벌어졌다.
-             */
-            .st-bundle-side { grid-column: 2; grid-row: 3 / span 2; display: flex; flex-direction: column; }
-            .st-bundle-side .st-buy { margin-top: auto; }
+            .st-bundle .st-body { padding: 26px 28px; display: flex; flex-direction: column; gap: 16px; }
+            .st-bundle .st-body > h3, .st-bundle .st-body > .st-tag { margin: 0; }
+            .st-bundle .st-incl { margin: 0; }
+            .st-bundle-media { margin: 0; }
+            /* 값·신뢰지표·담기는 한 덩어리로 — 영상 아래에 선다. */
+            .st-bundle-side { display: flex; flex-direction: column; gap: 12px; }
+            .st-bundle-side .st-price, .st-bundle-side .st-permo,
+            .st-bundle-side .st-trust, .st-bundle-side .st-buy { margin: 0; }
             .st-plain-side { display: contents; }
-            @media (max-width: 900px) {
-                .st-bundle .st-body { grid-template-columns: minmax(0, 1fr); }
-                .st-bundle .st-incl, .st-bundle-media, .st-bundle-side { grid-column: 1; grid-row: auto; }
-            }
-            /* 영상은 기능 목록과 값 사이의 빈 자리를 채운다 — 남는 높이를 가져간다. */
-            .st-bundle-media { margin: 14px 0 4px; min-height: 0; }
-            /* 담기 버튼은 카드 바닥에 붙는다 — 두 칸 높이가 달라도 줄이 맞는다. */
-            .st-bundle .st-buy { margin-top: auto; }
-            /* 신뢰 지표 — 값과 담기 사이. 결정 직전에 눈에 드는 자리다. */
+
+            /* [복구] 세로 배치로 바꾸면서 아래 규칙들을 통째로 지웠었다 —
+               신뢰지표가 한 줄로 뭉개져 "4.9 / 5실사용 후기 기반" 처럼 붙어 나왔다. */
             .st-trust {
                 display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 10px; margin: 16px 0 4px; padding: 14px 10px;
+                gap: 10px; margin: 0; padding: 14px 10px;
                 border-radius: 12px; background: rgba(255,255,255,.05);
             }
             .st-trust div { text-align: center; min-width: 0; }
             .st-trust b { display: block; color: var(--st-ink); font-size: 14px; font-weight: 900; white-space: nowrap; }
             .st-trust span { display: block; margin-top: 3px; color: var(--st-mute); font-size: 11px; }
             @media (max-width: 400px) { .st-trust b { font-size: 12.5px; } }
-            @media (max-width: 860px) {
-                .st-bundle { grid-template-columns: minmax(0, 1fr); }
-                .st-bundle-proof { border-right: 0; border-bottom: 1px solid var(--st-line); }
-            }
             .st-bundle h3 { font-size: 21px; }
             .st-bundle .st-price b { font-size: 30px; }
+            /* 영상은 카드 폭을 다 쓰되 너무 커지지 않게. */
+            .st-bundle-media .purchase-video-frame video { max-height: 340px; }
 
             .st-cart {
                 margin-top: 22px; border: 1px solid rgba(240,181,63,.3); border-radius: 15px;
