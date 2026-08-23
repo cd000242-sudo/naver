@@ -164,10 +164,15 @@ function StoreStyles() {
              * 영상이 도는 카드가 먼저 눈에 들고, 올인원이 곧 전 제품이라
              * 전 제품 영상이 놓일 자리도 여기다(사장님 지시 2026-08-21).
              */
+            /*
+             * 성과 카드를 커뮤니티로 옮겨 왼쪽 칸이 비었다 — 올인원이 그만큼
+             * 넓게 선다(사장님 지시 2026-08-23 "올인원을 크게 볼 수 있게").
+             * 이제 한 칸이므로 안쪽은 영상과 값이 좌우로 나뉜다.
+             */
             .st-bundle {
                 grid-column: 1 / -1;
                 width: 100%; margin: 0 0 8px;
-                display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+                display: grid; grid-template-columns: minmax(0, 1fr);
                 align-items: stretch;
                 border-color: rgba(240,181,63,.42);
                 background:
@@ -179,7 +184,18 @@ function StoreStyles() {
                 display: flex; align-items: center; min-width: 0;
             }
             .st-bundle-proof > * { width: 100%; }
-            .st-bundle .st-body { padding: 22px; display: flex; flex-direction: column; }
+            .st-bundle .st-body { padding: 26px 28px; display: flex; flex-direction: column; }
+            /* 넓어진 만큼 안쪽을 좌우로 — 영상과 값이 나란히 선다. */
+            .st-bundle .st-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .82fr); gap: 22px 26px; align-items: start; }
+            .st-bundle .st-body > h3, .st-bundle .st-body > .st-tag { grid-column: 1 / -1; }
+            .st-bundle .st-incl { grid-column: 1; margin: 0; }
+            .st-bundle-media { grid-column: 1; margin: 0; }
+            .st-bundle .st-price, .st-bundle .st-permo, .st-bundle .st-trust, .st-bundle .st-buy { grid-column: 2; }
+            @media (max-width: 900px) {
+                .st-bundle .st-body { grid-template-columns: minmax(0, 1fr); }
+                .st-bundle .st-incl, .st-bundle-media, .st-bundle .st-price,
+                .st-bundle .st-permo, .st-bundle .st-trust, .st-bundle .st-buy { grid-column: 1; }
+            }
             /* 영상은 기능 목록과 값 사이의 빈 자리를 채운다 — 남는 높이를 가져간다. */
             .st-bundle-media { margin: 14px 0 4px; min-height: 0; }
             /* 담기 버튼은 카드 바닥에 붙는다 — 두 칸 높이가 달라도 줄이 맞는다. */

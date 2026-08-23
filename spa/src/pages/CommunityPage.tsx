@@ -1,3 +1,4 @@
+import { mergeAdsenseProofs } from '../lib/adsenseProofs';
 import { useCallback, useEffect, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
 import PostsPanel from '../components/community/PostsPanel';
 import { Link } from 'react-router-dom';
@@ -490,7 +491,18 @@ function CommunityPage() {
                         수익 인증 최신 목록을 일시적으로 불러오지 못했습니다. 기존에 확인한 자료가 있으면 그대로 유지하며, 잠시 후 새로고침해주세요.
                     </div>
                 )}
-                {tab === 'income' && <IncomePanel items={income.length > 0 ? income : managedIncome} onWrite={() => setWriter('income')} />}
+                {/*
+                  * 애드센스 운영 성과를 함께 세운다(사장님 지시 2026-08-23
+                  * "이건 수익인증으로 옮겨주세요, 중복되는 거 빼고").
+                  * 같은 그림이 이미 올라와 있으면 그쪽을 남긴다 — 사용자가
+                  * 올린 인증이 우선이다.
+                  */}
+                {tab === 'income' && (
+                    <IncomePanel
+                        items={mergeAdsenseProofs(income.length > 0 ? income : managedIncome)}
+                        onWrite={() => setWriter('income')}
+                    />
+                )}
                 {tab === 'tips' && <TipsPanel items={tips} onWrite={() => setWriter('tips')} />}
                 {/*
                   * '내 글 홍보' — 서로 들러 주는 판(사장님 설계 2026-08-21).
