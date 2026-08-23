@@ -79,7 +79,9 @@ describe('homepage operations layout', () => {
     const community = readFileSync(join(process.cwd(), 'spa', 'src', 'pages', 'CommunityPage.tsx'), 'utf8');
 
     expect(community).toContain("type TabKey = 'income' | 'tips'");
-    expect(community).toContain("useState<TabKey>('income')");
+    // [2026-08-23] 기본 탭이 '내 글 홍보'(posts)로 바뀜다 — CommunityPage.tsx:204 사장님 지시.
+    //   이 단언은 바뀌기 전 기본값('income')을 박제하고 있어 소스가 아니라 테스트를 고친다.
+    expect(community).toContain("useState<TabKey>('posts')");
     expect(community).toContain("fetchCommunityIncomeProofs(80, { view: 'community', signal: controller.signal })");
     expect(community).toContain('공지사항은 홈에서 바로 확인할 수 있습니다.');
     expect(community).toContain('const COMMUNITY_CACHE_TTL_MS = 15 * 60 * 1000');
