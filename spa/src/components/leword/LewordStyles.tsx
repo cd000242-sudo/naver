@@ -1805,6 +1805,11 @@ function LewordStyles() {
             .lw-analyze-spark-btn { display: block; width: 100%; text-align: left; border: 1px solid rgba(255,255,255,.09); cursor: pointer; position: relative; }
             .lw-analyze-spark-btn:hover { border-color: rgba(167,139,250,.5); }
             .lw-spark-more { position: absolute; top: 8px; right: 10px; font-size: 11px; color: #8a94a6; }
+            .lw-snip-open { margin-left: 8px; padding: 2px 9px; border: 1px solid rgba(167,139,250,.4); border-radius: 999px; background: none; color: #c4b5fd; font-size: 11px; cursor: pointer; }
+            .lw-snip-open:hover { border-color: rgba(167,139,250,.8); }
+            .lw-snip-modal { max-width: 780px; }
+            .lw-snip-code { margin: 0 0 12px; padding: 14px; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; background: rgba(0,0,0,.35); color: #ebf2fa; font-size: 12.5px; line-height: 1.7; white-space: pre-wrap; word-break: break-word; max-height: 52vh; overflow: auto; }
+            .lw-snip-copy { padding: 8px 16px; border: 1px solid rgba(167,139,250,.5); border-radius: 8px; background: rgba(167,139,250,.14); color: #ede9fe; font-size: 13px; cursor: pointer; }
             .lw-seo-check { margin-bottom: 16px; padding: 14px; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; background: rgba(255,255,255,.02); }
             .lw-seo-check-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
             .lw-seo-check-head strong { font-size: 22px; }

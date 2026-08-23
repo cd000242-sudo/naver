@@ -225,6 +225,9 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
      * 짚는다. 키워드 지표 분석은 각 순위 칸의 검색어 클릭으로 여전히 간다.
      */
     const [analyzeRow, setAnalyzeRow] = useState<AuditRow | null>(null);
+    /** 붙여넣을 실물을 띄우는 창 — 코드를 눈으로 보고 그대로 복사한다. */
+    const [snippet, setSnippet] = useState<{ label: string; lang: 'html' | 'text'; code: string } | null>(null);
+    const [copied, setCopied] = useState(false);
     /*
      * 체크리스트는 AI 평가와 **따로** 담는다(사장님 지시 2026-08-23).
      * 실측이라 AI 가 실패해도 그대로 보여 줄 수 있다.
@@ -955,6 +958,45 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 </div>
             )}
 
+            {/*
+              * 붙여넣을 실물 창(사장님 지적 2026-08-23).
+              * 코드는 **그대로 보여 주고** 브라우저가 해석하지 않게 <pre> 안에 글자로 둔다.
+              */}
+            {snippet && (
+                <div className="lw-plan-backdrop" role="presentation" onClick={() => { setSnippet(null); setCopied(false); }}>
+                    <div
+                        className="lw-plan-modal lw-snip-modal"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label={snippet.label}
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <header className="lw-plan-head">
+                            <div>
+                                <h3>{snippet.label}</h3>
+                                <small className="lw-kg-work-meta">
+                                    {snippet.lang === 'html' ? '워드프레스·네이버 편집기에 HTML 로 붙여 넣으세요' : '그대로 복사해 쓰세요'}
+                                    {' · 대괄호 [ ] 자리는 직접 채우셔야 합니다'}
+                                </small>
+                            </div>
+                            <button type="button" className="lw-plan-close" onClick={() => { setSnippet(null); setCopied(false); }} aria-label="닫기">✕</button>
+                        </header>
+                        <div className="lw-plan-body">
+                            <pre className="lw-snip-code">{snippet.code}</pre>
+                            <button
+                                type="button"
+                                className="lw-snip-copy"
+                                onClick={() => {
+                                    navigator.clipboard?.writeText(snippet.code)
+                                        .then(() => { setCopied(true); window.setTimeout(() => setCopied(false), 2000); })
+                                        .catch(() => { /* 복사가 막힌 브라우저면 직접 선택해 복사한다 */ });
+                                }}
+                            >{copied ? '복사했습니다' : '복사하기'}</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* 글 진단 창 — 실측 3종 + 본문을 읽은 결과만 싣는다. */}
             {analyzeRow && (
                 <div className="lw-plan-backdrop" role="presentation" onClick={() => setAnalyzeRow(null)}>
@@ -1076,7 +1118,41 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                     {analyzeState.data.fixes.length > 0 && (
                                         <section>
                                             <strong>이렇게 고치세요</strong>
-                                            <ul>{analyzeState.data.fixes.map((line) => <li key={line}>{line}</li>)}</ul>
+                                            <ul>
+                                                {analyzeState.data.fixes.map((line, index) => {
+                                                    /*
+                                                      * 말로만 주면 사장님이 다시 만들어야 한다
+                                                      * (사장님 지적 2026-08-23). 그 수정안에 딸린
+                                                      * 붙여넣을 실물이 있으면 버튼으로 연다.
+                                                      */
+                                                    const snips = (analyzeState.data?.snippets || [])
+                                                        .filter((snip) => snip.forFix === index + 1);
+                                                    return (
+                                                        <li key={line}>
+                                                            {line}
+                                                            {snips.map((snip) => (
+                                                                <button
+                                                                    key={snip.label + snip.code.slice(0, 12)}
+                                                                    type="button"
+                                                                    className="lw-snip-open"
+                                                                    onClick={() => setSnippet(snip)}
+                                                                >{snip.lang === 'html' ? '📋 코드 보기' : '📋 문구 보기'}</button>
+                                                            ))}
+                                                        </li>
+                                                    );
+                                                })}
+                                            </ul>
+                                            {/* 어느 수정안에도 안 붙은 실물은 따로 모아 준다 — 버리지 않는다. */}
+                                            {(analyzeState.data.snippets || [])
+                                                .filter((snip) => !snip.forFix || snip.forFix > analyzeState.data!.fixes.length)
+                                                .map((snip) => (
+                                                    <button
+                                                        key={snip.label + snip.code.slice(0, 12)}
+                                                        type="button"
+                                                        className="lw-snip-open"
+                                                        onClick={() => setSnippet(snip)}
+                                                    >📋 {snip.label}</button>
+                                                ))}
                                         </section>
                                     )}
                                 </>

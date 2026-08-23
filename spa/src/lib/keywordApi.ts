@@ -407,6 +407,12 @@ export type PostAnalysis = {
     missReasons: string[];
     diagnosis: string[];
     fixes: string[];
+    /*
+     * 붙여넣을 실물(사장님 지적 2026-08-23: "고치는 거 추가할 글이나 HTML 코드를
+     * 같이 주면 좋지 않니?"). forFix 는 fixes 의 번호(1부터).
+     * 글에 없는 값은 [담당부서] 처럼 자리표시로 온다 — 지어낸 값이 발행되면 안 된다.
+     */
+    snippets?: Array<{ forFix: number; label: string; lang: 'html' | 'text'; code: string }>;
     contentRead: boolean;
 };
 /**
