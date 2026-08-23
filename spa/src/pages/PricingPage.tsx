@@ -156,12 +156,11 @@ const PURCHASE_SHOWCASE_VIDEOS = [
         desc: '외부유입용 글 발행 흐름을 한 번에 확인합니다.',
         src: '/videos/pricing-showcase/leadernam-orbit-publish-demo.mp4',
     },
-    {
-        title: 'LEADERNAM-Orbit 블로그스팟 발행 예시 영상',
-        label: '블로그스팟',
-        desc: 'Blogger 채널에 글이 올라가는 실제 장면입니다.',
-        src: '/videos/pricing-showcase/leadernam-orbit-blogspot-demo.mp4',
-    },
+    /*
+     * 블로그스팟은 뺐다(2026-08-23). 나머지 넷은 1280×720 원본으로 갈았는데
+     * 이것만 옛 400×224 라 혼자 뭉개져 보인다 — 나란히 두면 오히려 흠이 된다.
+     * 720p 원본을 받으면 그때 되살린다.
+     */
     {
         title: 'LEADERNAM-Orbit 워드프레스 발행 예시 영상',
         label: '워드프레스',
