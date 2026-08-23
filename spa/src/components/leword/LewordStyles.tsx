@@ -1807,6 +1807,9 @@ function LewordStyles() {
             .lw-spark-more { position: absolute; top: 8px; right: 10px; font-size: 11px; color: #8a94a6; }
             .lw-snip-open { margin-left: 8px; padding: 2px 9px; border: 1px solid rgba(167,139,250,.4); border-radius: 999px; background: none; color: #c4b5fd; font-size: 11px; cursor: pointer; }
             .lw-snip-open:hover { border-color: rgba(167,139,250,.8); }
+            .lw-snip-tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+            .lw-snip-tabs button { padding: 5px 14px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; background: none; color: #8a94a6; font-size: 12.5px; cursor: pointer; }
+            .lw-snip-tabs button.on { border-color: rgba(167,139,250,.55); background: rgba(167,139,250,.14); color: #ede9fe; }
             .lw-snip-modal { max-width: 780px; }
             .lw-snip-code { margin: 0 0 12px; padding: 14px; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; background: rgba(0,0,0,.35); color: #ebf2fa; font-size: 12.5px; line-height: 1.7; white-space: pre-wrap; word-break: break-word; max-height: 52vh; overflow: auto; }
             .lw-snip-copy { padding: 8px 16px; border: 1px solid rgba(167,139,250,.5); border-radius: 8px; background: rgba(167,139,250,.14); color: #ede9fe; font-size: 13px; cursor: pointer; }

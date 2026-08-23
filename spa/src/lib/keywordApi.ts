@@ -412,7 +412,12 @@ export type PostAnalysis = {
      * 같이 주면 좋지 않니?"). forFix 는 fixes 의 번호(1부터).
      * 글에 없는 값은 [담당부서] 처럼 자리표시로 온다 — 지어낸 값이 발행되면 안 된다.
      */
-    snippets?: Array<{ forFix: number; label: string; lang: 'html' | 'text'; code: string }>;
+    /*
+     * 같은 내용을 두 벌로 받는다(사장님 지시 2026-08-23: "코드만 보여 주는 게
+     * 아니라 글도 같이 보여줘야지 — 그냥 글만 넣고 싶은 사람이 있을 거 아냐").
+     * text 는 태그 없는 문장, html 은 같은 내용을 태그로. 한쪽만 있을 수도 있다.
+     */
+    snippets?: Array<{ forFix: number; label: string; text: string; html: string }>;
     contentRead: boolean;
 };
 /**

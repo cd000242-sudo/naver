@@ -226,7 +226,9 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
      */
     const [analyzeRow, setAnalyzeRow] = useState<AuditRow | null>(null);
     /** 붙여넣을 실물을 띄우는 창 — 코드를 눈으로 보고 그대로 복사한다. */
-    const [snippet, setSnippet] = useState<{ label: string; lang: 'html' | 'text'; code: string } | null>(null);
+    const [snippet, setSnippet] = useState<{ label: string; text: string; html: string } | null>(null);
+    /** 글로 볼지 코드로 볼지 — 기본은 글이다. 대부분은 글만 붙여 넣는다. */
+    const [snipMode, setSnipMode] = useState<'text' | 'html'>('text');
     const [copied, setCopied] = useState(false);
     /*
      * 체크리스트는 AI 평가와 **따로** 담는다(사장님 지시 2026-08-23).
@@ -975,23 +977,48 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                             <div>
                                 <h3>{snippet.label}</h3>
                                 <small className="lw-kg-work-meta">
-                                    {snippet.lang === 'html' ? '워드프레스·네이버 편집기에 HTML 로 붙여 넣으세요' : '그대로 복사해 쓰세요'}
-                                    {' · 대괄호 [ ] 자리는 직접 채우셔야 합니다'}
+                                    {snipMode === 'html'
+                                        ? '워드프레스·네이버 편집기에 HTML 로 붙여 넣으세요'
+                                        : '글 그대로 복사해 붙여 넣으세요'}
                                 </small>
                             </div>
                             <button type="button" className="lw-plan-close" onClick={() => { setSnippet(null); setCopied(false); }} aria-label="닫기">✕</button>
                         </header>
                         <div className="lw-plan-body">
-                            <pre className="lw-snip-code">{snippet.code}</pre>
+                            {/*
+                              * 글과 코드를 함께 준다(사장님 지시 2026-08-23).
+                              * 대부분은 글만 붙여 넣으므로 글이 기본이다.
+                              * 한쪽만 있으면 고르개를 띄우지 않는다.
+                              */}
+                            {snippet.text && snippet.html && (
+                                <div className="lw-snip-tabs" role="group" aria-label="붙여넣기 형태">
+                                    <button
+                                        type="button"
+                                        className={snipMode === 'text' ? 'on' : ''}
+                                        onClick={() => { setSnipMode('text'); setCopied(false); }}
+                                    >글</button>
+                                    <button
+                                        type="button"
+                                        className={snipMode === 'html' ? 'on' : ''}
+                                        onClick={() => { setSnipMode('html'); setCopied(false); }}
+                                    >코드(HTML)</button>
+                                </div>
+                            )}
+                            <pre className="lw-snip-code">
+                                {snipMode === 'html' ? (snippet.html || snippet.text) : (snippet.text || snippet.html)}
+                            </pre>
                             <button
                                 type="button"
                                 className="lw-snip-copy"
                                 onClick={() => {
-                                    navigator.clipboard?.writeText(snippet.code)
+                                    const body = snipMode === 'html'
+                                        ? (snippet.html || snippet.text)
+                                        : (snippet.text || snippet.html);
+                                    navigator.clipboard?.writeText(body)
                                         .then(() => { setCopied(true); window.setTimeout(() => setCopied(false), 2000); })
                                         .catch(() => { /* 복사가 막힌 브라우저면 직접 선택해 복사한다 */ });
                                 }}
-                            >{copied ? '복사했습니다' : '복사하기'}</button>
+                            >{copied ? '복사했습니다' : snipMode === 'html' ? '코드 복사' : '글 복사'}</button>
                         </div>
                     </div>
                 </div>
@@ -1132,11 +1159,11 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                                             {line}
                                                             {snips.map((snip) => (
                                                                 <button
-                                                                    key={snip.label + snip.code.slice(0, 12)}
+                                                                    key={snip.label + (snip.text || snip.html).slice(0, 12)}
                                                                     type="button"
                                                                     className="lw-snip-open"
-                                                                    onClick={() => setSnippet(snip)}
-                                                                >{snip.lang === 'html' ? '📋 코드 보기' : '📋 문구 보기'}</button>
+                                                                    onClick={() => { setSnippet(snip); setSnipMode(snip.text ? 'text' : 'html'); setCopied(false); }}
+                                                                >📋 붙여넣을 것 보기</button>
                                                             ))}
                                                         </li>
                                                     );
@@ -1147,10 +1174,10 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                                 .filter((snip) => !snip.forFix || snip.forFix > analyzeState.data!.fixes.length)
                                                 .map((snip) => (
                                                     <button
-                                                        key={snip.label + snip.code.slice(0, 12)}
+                                                        key={snip.label + (snip.text || snip.html).slice(0, 12)}
                                                         type="button"
                                                         className="lw-snip-open"
-                                                        onClick={() => setSnippet(snip)}
+                                                        onClick={() => { setSnippet(snip); setSnipMode(snip.text ? 'text' : 'html'); setCopied(false); }}
                                                     >📋 {snip.label}</button>
                                                 ))}
                                         </section>
