@@ -41,11 +41,21 @@ const fmt = (value: number | null | undefined) =>
     (typeof value === 'number' && Number.isFinite(value) ? value.toLocaleString('ko-KR') : '—');
 
 function ExternalTrafficBoard({
-    rows, onAnalyze, searchUrl,
+    rows, onAnalyze, searchUrl, locked = false,
 }: {
     rows: ReferenceRow[];
     onAnalyze?: (keyword: string) => void;
     searchUrl: (keyword: string) => string;
+    /**
+     * 비로그인이면 잠근다.
+     *
+     * 여기엔 잠금 판정이 아예 없었다 — 위 황금보드는 다섯 건만 여는데 바로 아래
+     * 이 칸은 71건이 통째로 열려 있었다(사장님 실측 2026-08-23, 렌더 확인).
+     * 사이드바의 '외부유입 레이더' 탭은 자물쇠인데 같은 성격의 자료가 여기로
+     * 새 나간 것이고, 머리말의 "지금은 황금키워드 상위 5건만 보입니다" 도
+     * 사실이 아니게 된다.
+     */
+    locked?: boolean;
 }) {
     /*
      * **기본으로 펼쳐 둔다** — 사장님 지시(2026-08-12): "외부유입용 키워드 80건도
@@ -100,7 +110,10 @@ function ExternalTrafficBoard({
             {open && (
                 <div className="lw-board-list lw-external-list">
                     {sorted.map((row) => (
-                        <article key={`${row.topic}-${row.keyword}`} className="lw-card lw-card-pre">
+                        <article
+                            key={`${row.topic}-${row.keyword}`}
+                            className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}
+                        >
                             <div>
                                 <div className="lw-card-tags">
                                     <span className="lw-ext-tag">외부 유입</span>
@@ -164,6 +177,11 @@ function ExternalTrafficBoard({
                                     }}
                                 >{copied === row.keyword ? '복사됨' : '복사'}</button>
                             </div>
+                            {locked && (
+                                <div className="lw-lock" aria-hidden="true">
+                                    <span>🔒</span>
+                                </div>
+                            )}
                         </article>
                     ))}
                 </div>

@@ -305,8 +305,21 @@ function LewordStyles() {
             .lw-navi.locked { opacity: .55; }
             .lw-navi-lock { margin-left: auto; font-size: 11px; font-weight: 400; }
 
-            .lw-auth-wrap { display: grid; place-items: center; padding: 26px 0 34px; }
-            .lw-auth { width: 100%; max-width: 400px; }
+            /*
+             * 로그인은 **덮개 위에** 뜬다.
+             *
+             * 예전엔 position 이 없어서 페이지 흐름 안에 그냥 끼워 넣은 블록이었다.
+             * 그래서 로그인 화면인데 그 아래로 보드가 통째로 다 보였다(사장님 실측
+             * 2026-08-23 "왜 아래에 모자이크 없이 다 보이니?"). 요금제 창
+             * (.lw-plan-backdrop)은 진작 이렇게 돼 있었는데 로그인만 빠져 있었다.
+             */
+            .lw-auth-wrap {
+                position: fixed; inset: 0; z-index: 95;
+                display: grid; place-items: center;
+                padding: 24px; overflow-y: auto;
+                background: rgba(6,8,15,.82); backdrop-filter: blur(6px);
+            }
+            .lw-auth { width: 100%; max-width: 400px; position: relative; z-index: 1; }
             .lw-auth-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
             .lw-auth-logo {
                 width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; flex: none;

@@ -41,14 +41,20 @@ const BETA_OPEN = false;
 export const FREE_BOARD_ROWS = BETA_OPEN ? Number.MAX_SAFE_INTEGER : 5;
 export const FREE_LOOKUPS = BETA_OPEN ? 1000 : 10;
 
-function LicenseGate({ onUnlock }: { onUnlock: () => void }) {
+/**
+ * @param remaining 로그인하면 열리는 남은 건수. 자리표시자였던 곳이다 —
+ *   화면에 `{남은 건수}` 라는 글자가 그대로 찍히고 있었다(사장님 실측 2026-08-23).
+ */
+function LicenseGate({ onUnlock, remaining }: { onUnlock: () => void; remaining?: number }) {
     return (
         <div className="lw-gate">
             <div className="lw-gate-body">
                 <strong>여기까지가 무료입니다</strong>
                 <p>
                     황금키워드 {FREE_BOARD_ROWS}건과 조회 {FREE_LOOKUPS}회까지 그냥 보실 수 있습니다.
-                    나머지 {'{'}남은 건수{'}'}는 로그인하면 열립니다 — 라이선스 코드가 있으면 1분이면 됩니다.
+                    {typeof remaining === 'number' && remaining > 0
+                        ? ` 나머지 ${remaining.toLocaleString('ko-KR')}건은 로그인하면 열립니다`
+                        : ' 나머지는 로그인하면 열립니다'} — 라이선스 코드가 있으면 1분이면 됩니다.
                 </p>
             </div>
 

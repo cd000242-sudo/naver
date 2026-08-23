@@ -65,6 +65,22 @@ function LewordPage() {
         return () => window.removeEventListener('leword:login', open);
     }, []);
 
+    /*
+     * 로그인 창이 덮개 위로 올라오면서 생긴 두 가지 — Esc 로 닫기, 뒤 배경 스크롤 잠금.
+     * 덮개가 화면을 가리는데 뒤가 따라 움직이면 어디를 보고 있었는지 잃는다.
+     */
+    useEffect(() => {
+        if (!authOpen || session) return;
+        const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setAuthOpen(false); };
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        window.addEventListener('keydown', onKey);
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            window.removeEventListener('keydown', onKey);
+        };
+    }, [authOpen, session]);
+
     useEffect(() => {
         const previous = document.title;
         document.title = 'LEWORD 키워드 도구 | Leaders Pro';
@@ -206,7 +222,13 @@ function LewordPage() {
                 </div>
 
                 {authOpen && !session && (
-                    <div className="lw-auth-wrap">
+                    <div
+                        className="lw-auth-wrap"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="LEWORD 로그인"
+                        onClick={(event) => { if (event.target === event.currentTarget) setAuthOpen(false); }}
+                    >
                         <LewordAuth
                             onDone={(next) => { setSession(next); setAuthOpen(false); }}
                             onCancel={() => setAuthOpen(false)}

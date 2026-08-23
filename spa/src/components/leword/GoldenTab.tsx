@@ -360,7 +360,28 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
          * 섞여 나오고, 주제 순서는 방문마다 바뀐다. 주제 안은 위의 등급순 그대로라
          * 품질 순서는 안 무너진다. 주제 필터를 걸면 원래 정렬로 돌아간다.
          */
-        if (topic !== '전체') return sorted;
+        /*
+         * 비로그인이면 **무료로 여는 다섯 건을 맨 앞으로 끌어올린다.**
+         *
+         * 왜(사장님 실측 2026-08-23 "무료는 5개 공개인데 다 가려놨네"): 무료 다섯
+         * 건은 발행본 순서 1~5번 '이름'으로 고정돼 있는데, 화면 순서는 바로 아래
+         * 인터리브가 방문마다 섞는다. 두 로직이 서로를 몰라서, 열려 있는 다섯 장이
+         * 60장 어딘가로 흩어졌다 — 위에서부터 보는 사람 눈에는 전부 블러였다.
+         *
+         * 순번으로 자르지 않고 이름을 그대로 쓰기 때문에, 주제·레인을 돌려 가며
+         * 새 키워드를 여는 구멍은 그대로 막혀 있다(아래 locked 판정과 같은 출처).
+         */
+        const hoistFree = (list: PreemptionRow[]) => {
+            if (unlocked) return list;
+            const freeNames = board?.freeSample?.keywords;
+            if (!freeNames || freeNames.length === 0) return list;
+            const open: PreemptionRow[] = [];
+            const rest: PreemptionRow[] = [];
+            for (const row of list) (freeNames.includes(row.keyword) ? open : rest).push(row);
+            return [...open, ...rest];
+        };
+
+        if (topic !== '전체') return hoistFree(sorted);
         const byTopicOrder = new Map<string, PreemptionRow[]>();
         for (const row of sorted) {
             const key = row.topic || '?';
@@ -392,8 +413,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             }
             depth += 1;
         }
-        return interleaved;
-    }, [board, topic, writeLane, shuffleSeed]);
+        return hoistFree(interleaved);
+    }, [board, topic, writeLane, shuffleSeed, unlocked]);
 
     /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
@@ -462,7 +483,10 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     <TopicFilter value={topic} onChange={setTopic} topics={topics} total={board.rows.length} />
 
                     {!unlocked && rows.length > FREE_BOARD_ROWS && (
-                        <LicenseGate onUnlock={() => setUnlocked(true)} />
+                        <LicenseGate
+                            onUnlock={() => setUnlocked(true)}
+                            remaining={rows.length - FREE_BOARD_ROWS}
+                        />
                     )}
 
                     <div className="lw-board-list">
@@ -845,6 +869,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         rows={(board.reference || []).filter((row) => topic === '전체' || row.topic === topic)}
                         onAnalyze={onAnalyze}
                         searchUrl={naverSearchUrl}
+                        locked={!unlocked}
                     />
 
                     {(() => {
