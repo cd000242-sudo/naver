@@ -39,45 +39,172 @@ export function getSafeHeadingTitle(promptItem: Element | null | undefined): str
 }
 
 /**
- * 인덱스로 소제목 제목 가져오기
+ * ✅ [2026-08-23] 이미지 슬롯 공간(slot space) — 인덱스 어긋남의 근본 차단
+ *
+ * 이미지 관리 탭의 카드 목록은 "🖼️ 썸네일"을 0번 슬롯으로 포함한다
+ * (displayImageHeadingsWithPrompts가 서론 섹션을 첫 카드로 그린다).
+ * 반면 ImageManager.headings는 호출 경로에 따라 둘 중 하나였다.
+ *   - AI 이미지 생성 경로   : filteredHeadings   → 썸네일 포함 (슬롯 공간)
+ *   - 글 불러오기/동기화 경로: structuredContent.headings → 썸네일 없음 (본문 공간)
+ * 그래서 같은 숫자 0이 어떤 때는 썸네일, 어떤 때는 소제목 1을 가리켰고
+ * "썸네일을 바꾸면 소제목 1이 바뀌고, 1번을 바꾸면 2번이 바뀌는" 밀림이 났다.
+ *
+ * 해법: 교체/배치 경로는 숫자를 버리고 **제목**을 그대로 들고 다닌다.
+ * 숫자가 남아있는 곳은 아래 슬롯 목록(= 카드가 실제로 그려진 순서)으로만 해석한다.
+ */
+export const THUMBNAIL_SLOT_TITLE = '🖼️ 썸네일';
+
+/** 카드 제목에 붙는 배지 텍스트(📌 썸네일)는 키가 아니다 — 비교 전에 떼어낸다. */
+function stripSlotBadge(title: unknown): string {
+    return String(title || '').replace(/📌\s*썸네일/g, '').replace(/\s+/g, ' ').trim();
+}
+
+export function isThumbnailSlotTitle(title: unknown): boolean {
+    const t = stripSlotBadge(title);
+    if (!t) return false;
+    return t === THUMBNAIL_SLOT_TITLE || t === '썸네일' || t === '🖼️썸네일';
+}
+
+/** 교체/배치 대상 지정 방식. 제목이 있으면 제목이 항상 우선한다. */
+export type ImageSlotRef = number | 'thumbnail' | { title?: string; isThumbnail?: boolean };
+
+export interface ImageSlotTarget {
+    /** ImageManager 키로 그대로 쓰이는 제목. */
+    title: string;
+    isThumbnail: boolean;
+    /** 카드 목록에서의 위치. 목록에 없으면 -1 (제목만으로 확정된 경우). */
+    slotIndex: number;
+}
+
+/**
+ * 순수 함수 — 슬롯 제목 목록에 대고 참조를 해석한다. (테스트 대상)
+ * DOM/전역을 읽지 않으므로 노드 환경에서 그대로 검증할 수 있다.
+ */
+export function resolveImageSlotFromTitles(
+    slotTitles: unknown,
+    ref: ImageSlotRef,
+): ImageSlotTarget | null {
+    const titles = (Array.isArray(slotTitles) ? slotTitles : [])
+        .map((t) => stripSlotBadge(t));
+
+    const indexOfTitle = (title: string): number =>
+        titles.findIndex((t) => t === title);
+
+    if (ref === 'thumbnail') {
+        return {
+            title: THUMBNAIL_SLOT_TITLE,
+            isThumbnail: true,
+            slotIndex: titles.findIndex((t) => isThumbnailSlotTitle(t)),
+        };
+    }
+
+    if (typeof ref === 'number') {
+        if (!Number.isFinite(ref) || ref < 0) return null;
+        const title = titles[ref];
+        if (!title) return null;
+        return { title, isThumbnail: isThumbnailSlotTitle(title), slotIndex: ref };
+    }
+
+    if (ref && typeof ref === 'object') {
+        if (ref.isThumbnail === true && !stripSlotBadge(ref.title)) {
+            return {
+                title: THUMBNAIL_SLOT_TITLE,
+                isThumbnail: true,
+                slotIndex: titles.findIndex((t) => isThumbnailSlotTitle(t)),
+            };
+        }
+        const title = stripSlotBadge(ref.title);
+        if (!title) return null;
+        // 제목이 썸네일이면 항상 정규 썸네일 키로 모은다 ('썸네일' 별칭 분산 방지).
+        if (isThumbnailSlotTitle(title)) {
+            return {
+                title: THUMBNAIL_SLOT_TITLE,
+                isThumbnail: true,
+                slotIndex: titles.findIndex((t) => isThumbnailSlotTitle(t)),
+            };
+        }
+        return { title, isThumbnail: false, slotIndex: indexOfTitle(title) };
+    }
+
+    return null;
+}
+
+/**
+ * 버튼의 data-heading-index가 가리키는 슬롯 목록.
+ * displayImageHeadingsWithPrompts가 카드와 _headingTitles를 같은 배열에서 만들므로
+ * _headingTitles가 이 인덱스의 정본이다. 없으면 카드 data-index로 재구성한다.
+ */
+export function getImageSlotTitles(): string[] {
+    try {
+        const list = (window as any)?._headingTitles;
+        if (Array.isArray(list) && list.length > 0) {
+            return list.map((t: unknown) => stripSlotBadge(t));
+        }
+    } catch (e) {
+        console.warn('[imageHelpers] catch ignored:', e);
+    }
+
+    try {
+        const cards = Array.from(
+            document.querySelectorAll('.prompt-item[data-index]'),
+        ) as HTMLElement[];
+        if (cards.length > 0) {
+            const titles: string[] = [];
+            cards.forEach((card) => {
+                const slot = Number(card.getAttribute('data-index') || '0') - 1;
+                if (!Number.isFinite(slot) || slot < 0) return; // 주입형 썸네일 카드(data-index="0")
+                titles[slot] = stripSlotBadge(getSafeHeadingTitle(card));
+            });
+            if (titles.some((t) => !!t)) return titles;
+        }
+    } catch (e) {
+        console.warn('[imageHelpers] catch ignored:', e);
+    }
+
+    // 최후 폴백: UI가 없는 문맥. 본문 공간일 수 있으므로 썸네일 슬롯을 앞에 채워 맞춘다.
+    try {
+        const headings = getImageManager()?.headings;
+        const titles = (Array.isArray(headings) ? headings : []).map((h: any) =>
+            stripSlotBadge(typeof h === 'string' ? h : h?.title),
+        );
+        if (titles.length === 0) return [];
+        return isThumbnailSlotTitle(titles[0]) ? titles : [THUMBNAIL_SLOT_TITLE, ...titles];
+    } catch (e) {
+        console.warn('[imageHelpers] catch ignored:', e);
+        return [];
+    }
+}
+
+/**
+ * 사용자가 화면에서 보는 슬롯 순서 (배치 모달용).
+ * 주입형 썸네일 카드까지 포함해 문서 순서 그대로 읽는다.
+ */
+export function getPlacementSlotTitles(): string[] {
+    try {
+        const cards = Array.from(
+            document.querySelectorAll('.prompt-item[data-heading-title]'),
+        ) as HTMLElement[];
+        const titles = cards
+            .map((card) => stripSlotBadge(card.getAttribute('data-heading-title')))
+            .filter((t) => !!t);
+        if (titles.length > 0) return titles;
+    } catch (e) {
+        console.warn('[imageHelpers] catch ignored:', e);
+    }
+    return getImageSlotTitles().filter((t) => !!t);
+}
+
+/** 슬롯 참조 → 교체/배치가 바로 쓸 수 있는 대상. */
+export function resolveImageSlotTarget(ref: ImageSlotRef): ImageSlotTarget | null {
+    return resolveImageSlotFromTitles(getImageSlotTitles(), ref);
+}
+
+/**
+ * 인덱스로 소제목 제목 가져오기 — 슬롯 공간 기준.
+ * (예전엔 ImageManager.headings를 먼저 봐서 경로에 따라 한 칸씩 밀렸다.)
  */
 export function getHeadingTitleByIndex(index: number): string {
-    try {
-        const ImageManager = getImageManager();
-        const headings = ImageManager?.headings;
-        const h = Array.isArray(headings) ? headings[index] : undefined;
-        if (h) {
-            if (typeof h === 'string') return String(h).trim();
-            const title = String(h?.title || '').trim();
-            if (title) return title;
-        }
-    } catch (e) {
-        console.warn('[imageHelpers] catch ignored:', e);
-    }
-
-    // ✅ [2026-03-16 FIX] _headingTitles 검사를 DOM 조회보다 먼저 수행
-    try {
-        const list = (window as any)._headingTitles;
-        if (Array.isArray(list) && list[index]) {
-            const t = String(list[index] || '').trim();
-            if (t) return t;
-        }
-    } catch (e) {
-        console.warn('[imageHelpers] catch ignored:', e);
-    }
-
-    // ✅ [2026-03-16 FIX] data-heading-title → .heading-title-pure 우선 (배지 오염 방지)
-    try {
-        const promptItem = document.querySelector(`.prompt-item[data-index="${index + 1}"]`) as HTMLElement | null;
-        if (promptItem) {
-            const safe = getSafeHeadingTitle(promptItem);
-            if (safe) return safe;
-        }
-    } catch (e) {
-        console.warn('[imageHelpers] catch ignored:', e);
-    }
-
-    return '';
+    return resolveImageSlotTarget(index)?.title || '';
 }
 
 /**

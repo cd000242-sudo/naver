@@ -1174,22 +1174,19 @@ const ImageManager = {
         const index = parseInt(String(el?.getAttribute('data-image-index') || '0'), 10);
         const image = images[index];
 
-        // Prefer explicit headingIndex if present, otherwise resolve from heading title
-        const headingIndex = Number.isFinite(Number(image?.headingIndex)) ? Number(image?.headingIndex) : -1;
-        if (headingIndex >= 0) {
-          await showSavedImagesForReplace(headingIndex);
-          return;
-        }
+        // [2026-08-23] 제목을 그대로 넘긴다. headingIndex는 기록 경로에 따라
+        //   썸네일 포함/미포함 목록을 기준으로 찍혀 서로 다른 공간이었고,
+        //   그 숫자를 그대로 쓰면 이웃 소제목이 교체됐다. (imageHelpers.ts 슬롯 공간 주석)
         const headingTitle = String(image?.heading || '').trim();
-        if (headingTitle) {
-          const idx = ImageManager.headings.findIndex((h: any) => {
-            const t = typeof h === 'string' ? h : (h?.title || '');
-            return String(t || '').trim() === headingTitle;
-          });
-          await showSavedImagesForReplace(idx >= 0 ? idx : 0);
+        if (image?.isThumbnail === true || headingTitle === '🖼️ 썸네일' || headingTitle === '썸네일') {
+          await showSavedImagesForReplace('thumbnail' as any);
           return;
         }
-        await showSavedImagesForReplace(index);
+        if (!headingTitle) {
+          toastManager.warning('교체할 소제목을 찾을 수 없습니다. 먼저 소제목 분석/생성을 다시 실행해주세요.');
+          return;
+        }
+        await showSavedImagesForReplace({ title: headingTitle } as any);
       });
     });
 

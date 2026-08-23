@@ -14,9 +14,26 @@ const sessionWriteLineMock = vi.fn();
 const sessionCancelMock = vi.fn();
 const detectAgentMock = vi.fn();
 const clearAgentDetectionCacheMock = vi.fn();
+const resolveWindowsSpawnTargetMock = vi.fn();
 vi.mock('../agentCli/spawnHelper', () => ({
   spawnCollect: (...args: unknown[]) => spawnMock(...args),
   startSpawnSession: (...args: unknown[]) => startSessionMock(...args),
+  resolveWindowsSpawnTarget: (...args: unknown[]) => resolveWindowsSpawnTargetMock(...args),
+}));
+// agy 로그인은 파이프 세션이 아니라 콘솔 창을 띄운다 — 실제 창이 뜨지 않게 막는다.
+const childSpawnMock = vi.fn(() => ({ unref: vi.fn() }));
+// agyLogin 은 tasklist/taskkill 을 execFile 로 불러 로그인 콘솔을 찾고 닫는다.
+// 테스트에선 "agy 프로세스 없음"으로 응답해 종료 대상이 생기지 않게 한다.
+const childExecFileMock = vi.fn((...args: unknown[]) => {
+  const done = args.find((a) => typeof a === 'function') as
+    | ((err: unknown, stdout: string, stderr: string) => void)
+    | undefined;
+  done?.(null, '', '');
+  return { unref: vi.fn() };
+});
+vi.mock('child_process', () => ({
+  spawn: (...args: unknown[]) => childSpawnMock(...args),
+  execFile: (...args: unknown[]) => childExecFileMock(...args),
 }));
 vi.mock('../agentCli/detect', () => ({
   clearAgentDetectionCache: (...args: unknown[]) => clearAgentDetectionCacheMock(...args),
@@ -58,6 +75,10 @@ beforeEach(() => {
   clearAgentDetectionCacheMock.mockReset();
   resolveNpmInvocationMock.mockReset();
   resolveNpmInvocationMock.mockResolvedValue(BUNDLED_INVOCATION);
+  resolveWindowsSpawnTargetMock.mockReset();
+  resolveWindowsSpawnTargetMock.mockReturnValue({ command: 'C:\agy\bin\agy.exe', args: [] });
+  childSpawnMock.mockClear();
+  childExecFileMock.mockClear();
   // Default: success with a version-like stdout (used by post-install detect()).
   spawnMock.mockResolvedValue({ code: 0, stdout: 'codex-cli 0.141.0', stderr: '' });
   startSessionMock.mockImplementation((options) => ({
@@ -322,12 +343,37 @@ describe('loginAgent', () => {
     expect(c.args).toEqual(['auth', 'login']);
   });
 
-  it('gemini → bare `gemini` (no dedicated login subcommand)', async () => {
-    await loginAgent('gemini');
-    const c = spawnMock.mock.calls[0][0];
-    expect(c.command).toBe('gemini');
-    expect(c.args).toEqual([]);
-  });
+  // [2026-08-23] gemini 제공자는 은퇴한 `gemini` CLI가 아니라 agy 를 쓴다.
+  //   그리고 agy 는 파이프 stdio 로는 로그인 UI 자체가 뜨지 않는다(agy 1.1.18 실측:
+  //   stdout/stderr 0바이트, OAuth URL 미출력). 그래서 codex/claude 처럼
+  //   startSpawnSession 으로 출력에서 URL을 긁는 계약이 성립하지 않는다.
+  //   이전 단언(spawn 커맨드 = 'agy', args = [])은 없는 동작을 박제한 것이라 교체한다.
+  it('gemini → 콘솔 창에서 agy 로그인 (파이프 세션 아님)', async () => {
+    // 1회차: 미로그인 → 터미널을 열고 폴링. 2회차부터: 로그인 완료.
+    const loggedOut = {
+      provider: 'gemini', installed: true, version: '1.1.18',
+      loggedIn: false, available: false, errorCode: 'not_logged_in',
+    };
+    const loggedIn = {
+      provider: 'gemini', installed: true, version: '1.1.18',
+      loggedIn: true, available: true, detail: 'Antigravity 로그인됨',
+    };
+    detectAgentMock.mockResolvedValueOnce(loggedOut).mockResolvedValue(loggedIn);
+
+    const status = await loginAgent('gemini');
+    expect(status).toMatchObject({ loggedIn: true, loginAction: 'authenticated' });
+
+    // 파이프 세션/자동 Y 입력 경로를 타지 않는다.
+    expect(startSessionMock).not.toHaveBeenCalled();
+    expect(sessionWriteLineMock).not.toHaveBeenCalled();
+
+    // 실행 대상은 해석된 agy 실행 파일이며, 은퇴한 gemini 바이너리가 아니다.
+    expect(childSpawnMock).toHaveBeenCalledOnce();
+    const spawnArgs = JSON.stringify(childSpawnMock.mock.calls[0]);
+    expect(spawnArgs).toContain('agy');
+    expect(spawnArgs).not.toContain('gemini-cli');
+    expect(resolveWindowsSpawnTargetMock).toHaveBeenCalled();
+  }, 20_000);
 
   it('keeps login stdin interactive and reports one validated browser URL without opening it', async () => {
     const onLoginUrl = vi.fn();
@@ -488,7 +534,10 @@ describe('logoutAgent', () => {
     expect(c.args).toEqual(['auth', 'logout']);
   });
 
-  it('gemini → deletes the OAuth credential file (no dedicated CLI subcommand)', async () => {
+  // [2026-08-23] agy keeps its session in the OS keyring, so logout deletes that credential.
+  //   The previous implementation removed ~/.gemini/oauth_creds.json (retired gemini CLI) and
+  //   agy stayed logged in — "계정 전환"이 항상 실패했다.
+  it('gemini → clears the agy keyring credential (no dedicated CLI subcommand)', async () => {
     detectAgentMock.mockResolvedValueOnce({
       provider: 'gemini',
       installed: true,
@@ -497,7 +546,14 @@ describe('logoutAgent', () => {
       errorCode: 'not_logged_in',
     });
     const status = await logoutAgent('gemini');
-    expect(spawnMock).not.toHaveBeenCalled();
+    const c = spawnMock.mock.calls[0][0];
+    // macOS/Linux use the platform keyring CLI; the credential identity is the invariant.
+    expect(JSON.stringify(c.args)).toContain('gemini');
+    expect(JSON.stringify(c.args)).toContain('antigravity');
+    if (process.platform === 'win32') {
+      expect(c.command.toLowerCase()).toContain('cmdkey');
+      expect(c.args).toEqual(['/delete:gemini:antigravity']);
+    }
     expect(clearAgentDetectionCacheMock).toHaveBeenCalledWith('gemini');
     expect(detectAgentMock).toHaveBeenCalledWith('gemini', { forceRefresh: true });
     expect(status).toMatchObject({ loggedIn: false });

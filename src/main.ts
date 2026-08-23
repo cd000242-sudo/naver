@@ -268,6 +268,7 @@ import { closeAllDropshotContexts as closeDropshotBrowserContexts } from './imag
 import { Logger, debugLog as newDebugLog, sanitizeFileName as utilSanitizeFileName, ensureMp4Dir as utilEnsureMp4Dir, ensureHeadingMp4Dir as utilEnsureHeadingMp4Dir, getUniqueMp4Path as utilGetUniqueMp4Path, validateLicenseAndQuota, validateLicenseOnly } from './main/utils/index.js';
 import * as AuthUtils from './main/utils/authUtils.js'; // ✅ 충돌 방지용 Namespace Import
 import { AutomationService, injectDependencies as injectBlogExecutorDeps } from './main/services/index.js';
+import type { IAutomationInstance } from './types/automation.js';
 import { registerAllHandlers, registerAccountHandlers, registerAdminHandlers } from './main/ipc/index.js';
 import { registerConfigHandlers } from './main/ipc/configHandlers.js';
 import { registerContentHandlers } from './main/ipc/contentHandlers.js';
@@ -3285,13 +3286,22 @@ ipcMain.handle('automation:closeBrowser', async (_event, naverId?: string) => {
 ipcMain.handle('automation:showTypingWindow', async (_event, naverId?: string) => {
   try {
     const normalizedId = String(naverId || '').trim().toLowerCase();
-    const candidates = new Set<NaverBlogAutomation>();
-    const mapped = normalizedId ? automationMap.get(normalizedId) : undefined;
+    // [2026-08-23] 발행 세션은 BlogExecutor가 AutomationService에만 등록한다. 레거시
+    //   automationMap/automation만 훑던 이전 구현은 실제 타이핑 중인 창을 한 번도 찾지 못해
+    //   "타이핑 중인 브라우저 창을 찾지 못했습니다"만 떴다. 두 레지스트리를 모두 후보로 넣는다.
+    const candidates = new Set<IAutomationInstance>();
+    const mapped = normalizedId
+      ? (automationMap.get(normalizedId) || AutomationService.get(normalizedId))
+      : undefined;
     if (mapped) candidates.add(mapped);
     if (automation) candidates.add(automation);
+    const current = AutomationService.getCurrentInstance();
+    if (current) candidates.add(current);
     for (const instance of automationMap.values()) candidates.add(instance);
+    for (const instance of AutomationService.getMap().values()) candidates.add(instance);
 
     for (const instance of candidates) {
+      if (typeof instance.showBrowserWindow !== 'function') continue;
       if (await instance.showBrowserWindow()) return { success: true };
     }
     return { success: false, message: '타이핑 중인 브라우저 창을 찾지 못했습니다.' };

@@ -199,46 +199,22 @@ export function displayGeneratedImages(images: any[]): void {
         const index = parseInt((e.target as HTMLElement).getAttribute('data-image-index') || '0');
         const image = validImages[index];
 
-        // [v2.11.141] 썸네일 카드의 교체는 썸네일 슬롯으로 라우팅.
-        //   기존: 수동 썸네일의 headingIndex=0이 소제목 1로 해석돼 소제목 1의 그리드/
-        //   미리보기에 교체 이미지가 들어가고 정작 썸네일(큰 미리보기)은 안 바뀌었다.
+        // [2026-08-23] 교체 대상은 이미지가 들고 있는 제목 그대로 넘긴다.
+        //   이전엔 headingIndex / ImageManager.headings 검색으로 숫자를 만들었는데,
+        //   그 목록은 경로에 따라 썸네일을 포함하기도 하고 아니기도 해서
+        //   같은 숫자가 다른 소제목을 가리켰다. (imageHelpers.ts 슬롯 공간 주석)
         const imageHeadingKey = String(image?.heading || '').trim();
         if (image?.isThumbnail === true || imageHeadingKey === '🖼️ 썸네일' || imageHeadingKey === '썸네일') {
           await showSavedImagesForReplace('thumbnail' as any);
           return;
         }
 
-        let targetHeadingIndex = Number(image?.headingIndex ?? -1);
-        if (!Number.isFinite(targetHeadingIndex) || targetHeadingIndex < 0) {
-          const headingTitle = String(image?.heading || '').trim();
-          if (headingTitle) {
-            try {
-              const norm = normalizeHeadingKeyForVideoCache(headingTitle);
-              const hs = (ImageManager as any)?.headings;
-              const list = Array.isArray(hs) ? hs : [];
-              const found = list.findIndex((it: any) => {
-                const t = typeof it === 'string' ? String(it || '').trim() : String(it?.title || it || '').trim();
-                if (!t) return false;
-                if (t === headingTitle) return true;
-                try {
-                  return normalizeHeadingKeyForVideoCache(t) === norm;
-                } catch {
-                  return false;
-                }
-              });
-              if (found >= 0) targetHeadingIndex = found;
-            } catch (e) {
-              console.warn('[imageDisplayGrid] catch ignored:', e);
-            }
-          }
-        }
-
-        if (!Number.isFinite(targetHeadingIndex) || targetHeadingIndex < 0) {
+        if (!imageHeadingKey) {
           toastManager.warning('교체할 소제목을 찾을 수 없습니다. 먼저 소제목 분석/생성을 다시 실행해주세요.');
           return;
         }
 
-        await showSavedImagesForReplace(targetHeadingIndex);
+        await showSavedImagesForReplace({ title: imageHeadingKey } as any);
       });
     });
 

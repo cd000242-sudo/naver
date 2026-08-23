@@ -76,7 +76,7 @@ declare function getCostRiskProviderLabel(provider: string): string;
 declare function getReviewProductAnchor(): string;
 declare function decomposeKoreanCompound(text: string, dict?: any): any;
 declare function getStableImageKey(img: any): string;
-declare function showSavedImagesForReplace(headingIndex: number | 'thumbnail'): void;
+declare function showSavedImagesForReplace(target: number | 'thumbnail' | { title?: string; isThumbnail?: boolean }): void;
 declare function showImageModal(imgSrc: string): void;
 declare function ensurePromptCardRemoveButtons(): void;
 declare function ensurePromptCardRemoveHandler(): void;
@@ -4103,8 +4103,19 @@ export function initUnifiedImageEventHandlers(): void {
       const btn = target.classList.contains('select-local-image-btn') ? target : target.closest('.select-local-image-btn') as HTMLElement;
       const headingIndex = parseInt(btn?.dataset.headingIndex || '0');
 
+      // ✅ [2026-08-23] 교체 대상은 자기 카드의 제목으로 확정한다.
+      //   기존엔 카드 슬롯 인덱스를 그대로 넘겼는데, ImageManager.headings가 글 불러오기
+      //   경로에서는 썸네일을 미포함하는 본문 목록이라 한 칸씩 밀렸다.
+      //   카드엔 data-heading-title이 항상 붙어 있으므로 인덱스를 다시 풀 이유가 없다.
+      const replaceCardTitle = String(
+        btn?.dataset.headingTitle
+        || (btn?.closest('.prompt-item') as HTMLElement | null)?.getAttribute('data-heading-title')
+        || '',
+      ).trim();
+      const replaceTarget: number | { title: string } = replaceCardTitle ? { title: replaceCardTitle } : headingIndex;
+
       // ✅ [v2.10.49] 사용자 보고 '변경 버튼 누르면 폴더 모달이 안 뜬다' — 진단 + 견고성 강화
-      console.warn('[변경 버튼] 클릭 — headingIndex:', headingIndex);
+      console.warn('[변경 버튼] 클릭 — 대상:', replaceCardTitle || `#${headingIndex}`);
       try {
         // window 폴백 우선 (showSavedImagesForReplace가 module 스코프 미해석 시 대비)
         const fn = (window as any).showSavedImagesForReplace || showSavedImagesForReplace;
@@ -4112,7 +4123,7 @@ export function initUnifiedImageEventHandlers(): void {
           alert('⚠️ 폴더 선택 모달 함수가 로드되지 않았습니다.\n앱을 재시작해주세요.');
           return;
         }
-        const result = fn(headingIndex);
+        const result = fn(replaceTarget);
         if (result && typeof result.catch === 'function') {
           result.catch((err: any) => {
             console.warn('[변경 버튼] showSavedImagesForReplace 실패:', err);

@@ -5160,6 +5160,57 @@ export function shouldRunLegacyPostDraftLlm(promptVariant: unknown): boolean {
   return promptVariant === 'legacy';
 }
 
+/**
+ * URL 모드인데 키워드가 비어 있으면 원문에서 핵심 검색 키워드를 정해 metadata에 채운다.
+ * 이미 사용자가 키워드를 넣었으면 손대지 않는다.
+ */
+async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void> {
+  try {
+    const rawText = String((source as any).rawText || '');
+    const isUrlMode = !!(source as any).url
+      || source.sourceType === 'naver_news'
+      || source.sourceType === 'daum_news';
+    if (!isUrlMode || rawText.length < 200) return;
+
+    const metadata = ((source as any).metadata ||= {}) as { keywords?: unknown[] };
+    const existing = Array.isArray(metadata.keywords)
+      ? String(metadata.keywords[0] ?? '').trim()
+      : '';
+    if (existing) return;
+
+    const apiKey = String(process.env.OPENAI_API_KEY || '').trim();
+    if (!apiKey) {
+      console.log('[UrlKeyword] OPENAI_API_KEY 없음 — 키워드 미선정으로 진행');
+      return;
+    }
+
+    const { resolveUrlModeKeyword, createOpenAiCandidateInferencer, createNaverVolumeLookup } =
+      await import('./content/urlModeKeywordResolve.js');
+
+    const pick = await resolveUrlModeKeyword(
+      rawText,
+      String((source as any).title || (source as any).sourceTitle || '').trim() || undefined,
+      {
+        inferCandidates: createOpenAiCandidateInferencer(apiKey),
+        lookupVolume: await createNaverVolumeLookup(),
+      },
+    );
+
+    if (!pick.keyword) {
+      console.log('[UrlKeyword] 키워드 미선정 — 기존 동작 유지');
+      return;
+    }
+
+    metadata.keywords = [pick.keyword, ...pick.candidates.filter((c) => c !== pick.keyword)];
+    console.log(
+      `[UrlKeyword] 핵심 키워드 확정: "${pick.keyword}" (${pick.decidedBy}, ${pick.reason}) `
+      + `· 후보 ${pick.candidates.join(' / ')}`,
+    );
+  } catch (error) {
+    console.warn('[UrlKeyword] 키워드 확정 실패 — 기존 동작 유지:', (error as Error)?.message);
+  }
+}
+
 async function generateStructuredContentInternal(
   source: ContentSource,
   options: GenerateOptions = {},
@@ -5179,6 +5230,14 @@ async function generateStructuredContentInternal(
     // 쇼핑커넥트는 품질 점수 때문에 두 번째 유료 생성을 호출하지 않는다.
     // 첫 호출에서 전환 계약을 적용하고 부족한 결과는 경고 후 발행한다.
     && source.contentMode !== 'affiliate';
+
+  // [2026-08-23] URL만 넣고 생성할 때의 핵심 검색 키워드 확정.
+  //   SEO 제목 강제(배치강제·커버리지 게이트·제목 품질 게이트)는 전부
+  //   metadata.keywords[0]에 매여 있는데, URL 입력엔 그 값이 비어 있어 전부 스킵됐다.
+  //   실측: 특별재난지역 기사 URL → "거제 통영 특별재난지역, 통영은 왜 2곳만 먼저인가"
+  //   (검색량이 붙은 말은 "재난지원금"이었다.)
+  //   실패는 전부 미선정으로 흡수한다 — 예전 동작 그대로이고 생성이 죽지 않는다.
+  await ensureUrlModePrimaryKeyword(source);
 
   // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 2] image-narrative mode branch
   if (source.contentMode === 'image-narrative') {
@@ -5646,10 +5705,16 @@ async function generateStructuredContentInternal(
           }
         } catch { /* silent — 정상 흐름 유지 */ }
 
-        const urlModeDirective = buildUrlModeDirective(source);
+        // [2026-08-23] contentMode 전달 필수 — 이 지시문은 시스템 프롬프트 맨 앞에 붙어
+        //   모드 프롬프트보다 위에서 작동한다. 모드를 안 넘기면 홈판/트래픽헌터로 URL 글을
+        //   뽑아도 "원본 형식 추종" 절이 모드 계약을 눌러 기사 재구성체가 나온다.
+        const urlModeDirective = buildUrlModeDirective({
+          ...(source as any),
+          contentMode: (source as any).contentMode,
+        });
         if (urlModeDirective) {
           systemPrompt = urlModeDirective + systemPrompt;
-          console.log('[ContentGenerator] 📜 URL 모드 강화 지시 prepend (원본 100% + 퀄리티 업그레이드)');
+          console.log(`[ContentGenerator] 📜 URL 모드 강화 지시 prepend (사실 보존 + 형식은 ${(source as any).contentMode || '기본'} 모드 우선)`);
         }
 
         const phase4SkipDict =

@@ -21,6 +21,8 @@ declare function syncHeadingVideoInPromptItems(): void;
 declare function syncHeadingVideoSlotsInUnifiedPreview(): void;
 declare function refreshGeneratedPostsList(): void;
 declare function toFileUrlMaybe(path: string): string;
+declare function getPlacementSlotTitles(): string[];
+declare function isThumbnailSlotTitle(title: unknown): boolean;
 
 // ✅ 폴더에서 이미지 불러오기 (IPC 사용)
 export async function loadImagesFromFolder(postId: string): Promise<any[]> {
@@ -764,10 +766,24 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
     // [v2.11.141] 배치 대상에 썸네일 슬롯 포함 (사용자 요청: 순서대로/일반 배치에서
     // 썸네일이 제외되던 문제). 첫 슬롯 = 서론 대표 썸네일('🖼️ 썸네일' — ImageManager
     // 키·발행 서론 삽입 키와 동일), 이후 슬롯 = 소제목 1..N (표시 번호 그대로 유지).
-    const placementTargets: Array<{ title: string; isThumbnail?: boolean }> = [
-      { title: '🖼️ 썸네일', isThumbnail: true },
-      ...headings.map((h: any) => ({ title: typeof h === 'string' ? h : (h?.title || '') })),
-    ];
+    //
+    // [2026-08-23] 슬롯 목록은 이미지 관리 탭에 실제로 그려진 카드 순서를 그대로 따른다.
+    //   이전엔 여기서 따로 썸네일을 붙여 만들었기 때문에, 카드 쪽에 썸네일이 없거나
+    //   순서가 다를 때 모달의 n번 슬롯과 화면의 n번 카드가 어긋난다.
+    const cardSlotTitles = (() => {
+      try {
+        const titles = getPlacementSlotTitles();
+        return Array.isArray(titles) ? titles.filter((t) => !!String(t || '').trim()) : [];
+      } catch {
+        return [];
+      }
+    })();
+    const placementTargets: Array<{ title: string; isThumbnail?: boolean }> = cardSlotTitles.length > 0
+      ? cardSlotTitles.map((title) => ({ title, isThumbnail: isThumbnailSlotTitle(title) }))
+      : [
+        { title: '🖼️ 썸네일', isThumbnail: true },
+        ...headings.map((h: any) => ({ title: typeof h === 'string' ? h : (h?.title || '') })),
+      ];
 
     // 모달 생성
     const modal = document.createElement('div');
@@ -824,13 +840,17 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
           <div id="heading-selection-list" style="display: flex; flex-direction: column; gap: 0.5rem;">
             ${placementTargets.map((target, index: number) => {
       const headingTitle = target.title;
+      // [2026-08-23] 소제목 번호는 썸네일 슬롯을 제외하고 1부터 센다.
+      //   이전엔 배열 위치(index)를 그대로 썼어서, 썸네일 슬롯이 없는 글에서는
+      //   첫 소제목이 "0."으로 보였다.
+      const headingNo = placementTargets.slice(0, index + 1).filter((t) => !t.isThumbnail).length;
       const hasImage = ImageManager.hasImage(headingTitle);
       const buttonStyle = hasImage
         ? 'padding: 0.75rem 1rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: 2px solid #10b981; border-radius: 8px; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 0.9rem; font-weight: 600;'
         : 'padding: 0.75rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 8px; text-align: left; cursor: pointer; transition: all 0.2s; font-weight: 500;';
       const iconPrefix = hasImage ? '✅ ' : '';
       // 썸네일(index 0)은 라벨 고정, 소제목은 1..N 번호 유지 (index가 곧 소제목 번호)
-      const label = target.isThumbnail ? '🖼️ 썸네일 (서론 대표)' : `${index}. ${headingTitle}`;
+      const label = target.isThumbnail ? '🖼️ 썸네일 (서론 대표)' : `${headingNo}. ${headingTitle}`;
       return `
               <button type="button" class="heading-select-btn" data-heading-index="${index}" style="${buttonStyle}">
                 ${iconPrefix}${label}
@@ -894,7 +914,7 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
         // ✅ 순서 모드인 경우
         if (clickOrderMode) {
           if (nextHeadingIndex >= placementTargets.length) {
-            alert(`모든 슬롯(썸네일 + 소제목 ${headings.length}개)에 이미지가 배치되었습니다!`);
+            alert(`모든 슬롯(${placementTargets.length}개)에 이미지가 배치되었습니다!`);
             return;
           }
 
@@ -977,7 +997,9 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
               console.warn('[localImageModals] catch ignored:', e);
             }
 
-            const slotLabel = target.isThumbnail ? '🖼️ 썸네일' : `${nextHeadingIndex}번 소제목`;
+            const slotLabel = target.isThumbnail
+              ? '🖼️ 썸네일'
+              : `${placementTargets.slice(0, nextHeadingIndex + 1).filter((t) => !t.isThumbnail).length}번 소제목`;
             appendLog(`✅ [${nextHeadingIndex + 1}/${placementTargets.length}] "${imageName}" → "${headingTitle}"`);
             toastManager.success(`✅ ${slotLabel}에 배치 완료!`);
 

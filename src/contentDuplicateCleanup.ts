@@ -1,7 +1,7 @@
 import { calculateSimilarity } from './contentDuplicateHeuristics.js';
 
 type HeadingLike = {
-  title: string;
+  title?: string;
 };
 
 export function removeDuplicateHeadings(bodyPlain: string, headings: HeadingLike[]): string {
@@ -10,7 +10,11 @@ export function removeDuplicateHeadings(bodyPlain: string, headings: HeadingLike
   let cleaned = bodyPlain;
 
   headings.forEach((heading) => {
-    const headingTitle = heading.title;
+    // [2026-08-23] A model can answer with headings that carry no `title` (plain strings, or
+    // `heading`/`name` aliases). Reading `.title` off those threw
+    // "Cannot read properties of undefined (reading 'replace')" and killed the whole post.
+    const headingTitle = typeof heading?.title === 'string' ? heading.title : '';
+    if (!headingTitle.trim()) return;
     const regex = new RegExp(headingTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
     const matches = cleaned.match(regex);
 

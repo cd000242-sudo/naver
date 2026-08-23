@@ -307,6 +307,59 @@ function extractBodyFromNestedContainers(
   return null;
 }
 
+/** A heading entry the rest of the pipeline can read: an object with a non-empty title. */
+function isUsableHeadingEntry(entry: unknown): boolean {
+  return isRecord(entry) && typeof entry.title === 'string' && entry.title.trim().length > 0;
+}
+
+const MAX_INLINE_HEADING_TITLE_CHARS = 80;
+const LINE_BREAK_PATTERN = /[\r\n]/;
+
+function normalizeHeadingEntry(entry: unknown, index: number): RecoveredHeading | LooseRecord {
+  if (typeof entry === 'string') {
+    const text = cleanWhitespace(entry);
+    const isTitleShaped = !!text && text.length <= MAX_INLINE_HEADING_TITLE_CHARS && !LINE_BREAK_PATTERN.test(text);
+    return isTitleShaped
+      ? { title: text, content: '', summary: '', keywords: [], imagePrompt: '' }
+      : { title: `본문 ${index + 1}`, content: text, summary: text, keywords: [], imagePrompt: '' };
+  }
+
+  const title = extractSectionTitle(entry, index);
+  const body = extractSectionBody(entry);
+  if (!isRecord(entry)) {
+    return { title, content: body, summary: body, keywords: [], imagePrompt: '' };
+  }
+
+  // Preserve every field the model did supply; only fill in the missing title/body.
+  return {
+    ...entry,
+    title,
+    content: typeof entry.content === 'string' && entry.content.trim() ? entry.content : body,
+    summary: typeof entry.summary === 'string' && entry.summary.trim() ? entry.summary : body,
+  };
+}
+
+/**
+ * Repair heading entries that exist but carry no readable `title`.
+ *
+ * [2026-08-23] Subscription CLIs (agy in particular) sometimes answer with
+ * `headings: ["소제목", ...]` or with `heading`/`name` aliases instead of `title`. Those pass
+ * the "headings are present" check, so nothing recovered them, and the first downstream
+ * consumer that read `heading.title.replace(...)` threw
+ * "Cannot read properties of undefined (reading 'replace')" — the whole post died after the
+ * model had already been paid for. Normalizing here also protects the publish-time code that
+ * reads `heading.title` without a guard.
+ */
+function normalizeExistingHeadings(content: LooseRecord): boolean {
+  if (!Array.isArray(content.headings) || content.headings.length === 0) return false;
+  if (content.headings.every(isUsableHeadingEntry)) return false;
+
+  content.headings = content.headings.map((entry: unknown, index: number) => (
+    isUsableHeadingEntry(entry) ? entry : normalizeHeadingEntry(entry, index)
+  ));
+  return true;
+}
+
 function hasUsableBody(content: LooseRecord): boolean {
   return typeof content.bodyPlain === 'string' && content.bodyPlain.trim().length > 0;
 }
@@ -346,6 +399,12 @@ export function recoverLooseStructuredContentFields(content: unknown): Structure
       result.bodyRecovered = true;
       result.bodySource = sectionBody.key;
     }
+  }
+
+  // Runs last so body extraction still sees the model's original section shapes.
+  if (normalizeExistingHeadings(content)) {
+    result.headingsRecovered = true;
+    result.headingsSource = result.headingsSource || 'headings.title-normalized';
   }
 
   return result;

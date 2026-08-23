@@ -1,5 +1,5 @@
 export interface DuplicateHeadingLike {
-  title: string;
+  title?: string;
 }
 
 export interface DuplicateValidationResult {
@@ -131,7 +131,8 @@ export function checkDuplicateHeadings(
   }
 
   if (bodyPlain.length >= 1500) {
-    const firstHeading = headings[0].title;
+    const firstHeading = typeof headings[0]?.title === 'string' ? headings[0].title : '';
+    if (!firstHeading.trim()) return { valid: true, errors: [] };
     const regex = new RegExp(escapeRegex(firstHeading), 'g');
     const matches = bodyPlain.match(regex);
     const count = matches ? matches.length : 0;
@@ -147,7 +148,8 @@ export function checkDuplicateHeadings(
   }
 
   for (const heading of headings) {
-    const headingTitle = heading.title;
+    const headingTitle = typeof heading?.title === 'string' ? heading.title : '';
+    if (!headingTitle.trim()) continue;
     const regex = new RegExp(escapeRegex(headingTitle), 'g');
     const matches = bodyPlain.match(regex);
     const count = matches ? matches.length : 0;
@@ -168,9 +170,13 @@ export function removeRepeatedFullContent(bodyPlain: string, headings: Duplicate
 
   const headingPositions: Array<{ title: string; index: number }> = [];
   for (const heading of headings) {
-    const index = bodyPlain.indexOf(heading.title);
+    // Same title-less heading guard as removeDuplicateHeadings: indexOf(undefined) would
+    // match the literal text "undefined" and escapeRegex() would then throw on it.
+    const title = typeof heading?.title === 'string' ? heading.title : '';
+    if (!title.trim()) continue;
+    const index = bodyPlain.indexOf(title);
     if (index !== -1) {
-      headingPositions.push({ title: heading.title, index });
+      headingPositions.push({ title, index });
     }
   }
 

@@ -118,7 +118,9 @@ import {
   isImageStylePromptForVeo, extractEnglishishProductName
 } from './utils/videoProviderUtils.js';
 // ✅ [2026-01-25 모듈화] 이미지 헬퍼
-import { getSafeHeadingTitle, getHeadingTitleByIndex, getStableImageKey, getRequiredImageBasePath } from './utils/imageHelpers.js';
+import { getSafeHeadingTitle, getHeadingTitleByIndex, getStableImageKey, getRequiredImageBasePath,
+  THUMBNAIL_SLOT_TITLE, resolveImageSlotTarget, getImageSlotTitles,
+  type ImageSlotRef, type ImageSlotTarget } from './utils/imageHelpers.js';
 // ✅ [2026-01-25 모듈화] Ken Burns 스타일
 import { ensureKenBurnsStyles } from './utils/kenBurnsStyles.js';
 // ✅ [2026-01-25 모듈화] 카테고리 정규화 유틸
@@ -848,7 +850,7 @@ declare global {
   function updateReserveImagesThumbnails(): void;
   function showHeadingSelectionModalV2(image: any, currentIndex: number): Promise<void>;
   function regenerateWithNewAI(index: number, heading: string): Promise<void>;
-  function showSavedImagesForReplace(targetIndex: number | 'thumbnail'): Promise<void>;
+  function showSavedImagesForReplace(target: ImageSlotRef): Promise<void>;
   function initDashboard(): void;
   function initTabSwitching(): void;
   function initUnifiedImageEventHandlers(): void;
@@ -9957,56 +9959,22 @@ async function regenerateWithNewAI(index: number, heading: string): Promise<void
 }
 
 // ✅ 저장된 이미지로 교체 모달
-async function showSavedImagesForReplace(targetIndex: number | 'thumbnail'): Promise<void> {
+/**
+ * ✅ [2026-08-23] 교체 대상은 숫자가 아니라 슬롯(제목)으로 받는다.
+ *   기존엔 카드 슬롯 인덱스(썸네일 포함)를 ImageManager.headings(썸네일 미포함)로 풀어서
+ *   썸네일→소제목 1, 소제목 1→소제목 2로 한 칸씩 밀렸다. 자세한 배경은
+ *   imageHelpers.ts의 "이미지 슬롯 공간" 주석 참고.
+ */
+async function showSavedImagesForReplace(target: ImageSlotRef): Promise<void> {
   try {
-    // [v2.11.141] 썸네일 카드의 교체는 소제목 인덱스가 아니라 썸네일 슬롯으로 라우팅.
-    //   기존엔 썸네일 이미지의 headingIndex=0이 소제목 1로 해석돼 엉뚱한 곳에 교체됐다.
-    if (targetIndex === 'thumbnail') {
-      await showFolderSelectionModal({
-        onFolderSelected: async (folderName: string) => {
-          await showLocalImagePickerForReplace(folderName, 'thumbnail');
-        },
-      });
+    const slot = resolveImageSlotTarget(target);
+    if (!slot) {
+      toastManager.error('교체할 소제목을 찾을 수 없습니다. 먼저 소제목 분석/생성을 다시 실행해주세요.');
       return;
     }
-    const normalizeTargetHeadingIndex = (idx: number): number => {
-      const rawIdx = Number.isFinite(idx) ? idx : 0;
-      const hs = (ImageManager as any)?.headings;
-      const headingsLen = Array.isArray(hs) ? hs.length : 0;
-      if (headingsLen > 0 && rawIdx >= headingsLen) {
-        const all = (window as any).imageManagementGeneratedImages || generatedImages || [];
-        const img = Array.isArray(all) ? all[rawIdx] : null;
-        const byIdx = Number(img?.headingIndex ?? -1);
-        if (Number.isFinite(byIdx) && byIdx >= 0) return byIdx;
-
-        const h = String(img?.heading || '').trim();
-        if (h) {
-          try {
-            const norm = normalizeHeadingKeyForVideoCache(h);
-            const list = Array.isArray(hs) ? hs : [];
-            const found = list.findIndex((it: any) => {
-              const t = typeof it === 'string' ? String(it || '').trim() : String(it?.title || it || '').trim();
-              if (!t) return false;
-              if (t === h) return true;
-              try {
-                return normalizeHeadingKeyForVideoCache(t) === norm;
-              } catch {
-                return false;
-              }
-            });
-            if (found >= 0) return found;
-          } catch (e) {
-            console.warn('[renderer] catch ignored:', e);
-          }
-        }
-      }
-      return rawIdx;
-    };
-
-    const normalizedIndex = normalizeTargetHeadingIndex(targetIndex);
     await showFolderSelectionModal({
       onFolderSelected: async (folderName: string) => {
-        await showLocalImagePickerForReplace(folderName, normalizedIndex);
+        await showLocalImagePickerForReplace(folderName, slot);
       },
     });
   } catch (error) {
@@ -10015,16 +9983,12 @@ async function showSavedImagesForReplace(targetIndex: number | 'thumbnail'): Pro
   }
 }
 
-async function showLocalImagePickerForReplace(folderName: string, targetIndex: number | 'thumbnail'): Promise<void> {
+async function showLocalImagePickerForReplace(folderName: string, slot: ImageSlotTarget): Promise<void> {
   try {
     if (!window.api.getUserHomeDir || !window.api.readDir || !window.api.checkFileExists) {
       toastManager.error('파일 시스템 API를 사용할 수 없습니다.');
       return;
     }
-
-    const resolveHeadingTitleByIndex = (index: number): string => {
-      return String(getHeadingTitleByIndex(index) || '').trim();
-    };
 
     const basePath = await getRequiredImageBasePath();
 
@@ -10092,7 +10056,7 @@ async function showLocalImagePickerForReplace(folderName: string, targetIndex: n
     });
     modal.querySelector('.back-to-folder-select')?.addEventListener('click', async () => {
       modal.remove();
-      await showSavedImagesForReplace(targetIndex);
+      await showSavedImagesForReplace({ title: slot.title, isThumbnail: slot.isThumbnail });
     });
 
     modal.querySelectorAll('.replace-image-pick').forEach((btn) => {
@@ -10102,11 +10066,9 @@ async function showLocalImagePickerForReplace(folderName: string, targetIndex: n
         const fileName = String((btn as HTMLElement).getAttribute('data-file-name') || '').trim();
         if (!filePath && !fileUrl) return;
 
-        // [v2.11.141] 썸네일 타깃은 소제목 인덱스 해석 없이 썸네일 키로 직접 등록.
-        const isThumbnailTarget = targetIndex === 'thumbnail';
-        const currentHeading = isThumbnailTarget
-          ? '🖼️ 썸네일'
-          : resolveHeadingTitleByIndex(targetIndex);
+        // [2026-08-23] 대상은 이미 제목으로 확정돼 있다 — 여기서 인덱스를 다시 풀지 않는다.
+        const isThumbnailTarget = slot.isThumbnail;
+        const currentHeading = isThumbnailTarget ? THUMBNAIL_SLOT_TITLE : slot.title;
         if (!currentHeading) {
           toastManager.error('소제목 제목을 찾을 수 없습니다. 먼저 소제목 분석/생성을 다시 실행해주세요.');
           return;
@@ -10464,9 +10426,10 @@ function updatePromptItemsWithImages(images: any[]): void {
     // ✅ [2026-03-14 FIX] 인덱스 기반 폴백 매칭 — heading 키 매칭 실패 시
     if ((!headingImages || headingImages.length === 0) && !primaryImage) {
       try {
-        // 1) ImageManager.headings[index0]으로 재시도
-        const headingEntry = ImageManager.headings?.[index0];
-        const fallbackTitle = typeof headingEntry === 'string' ? String(headingEntry).trim() : String(headingEntry?.title || '').trim();
+        // 1) 슬롯 공간(카드 순서)으로 재시도.
+        //    [2026-08-23] ImageManager.headings를 직접 읽던 이전 코드는 본문 공간이라
+        //    카드 한 칸 뒤(소제목 1 카드 → 소제목 2)의 이미지를 끌어왔다.
+        const fallbackTitle = String(getImageSlotTitles()[index0] || '').trim();
         if (fallbackTitle) {
           const fallbackKey = ImageManager.resolveHeadingKey(fallbackTitle);
           const fallbackPrimary = ImageManager.getImage(fallbackKey);
@@ -10482,9 +10445,18 @@ function updatePromptItemsWithImages(images: any[]): void {
     }
     // ✅ [2026-03-14 FIX] headingIndex 기반 폴백 매칭 — sourceImages에서
     if ((!headingImages || headingImages.length === 0) && !primaryImage) {
-      const indexFallback = (sourceImages || []).find((img: any) =>
-        typeof img?.headingIndex === 'number' && img.headingIndex === index0
+      // [2026-08-23] headingIndex는 기록 경로에 따라 본문/슬롯 공간이 섞여 있어, 소제목이
+      //   확정된 이미지를 이웃 카드가 가져가는 오배정의 통로였다. 그렇다고 폴백을 없애면
+      //   소제목 제목이 바뀌어 주인을 잃은 이미지를 못 건진다. 그래서 "지금 어느 카드에도
+      //   속하지 않는" 이미지에만 허용한다 — 남의 카드 것은 절대 끌어오지 않는다.
+      const slotTitleSet = new Set(
+        getImageSlotTitles().map((t) => String(t || '').trim()).filter(Boolean),
       );
+      const indexFallback = (sourceImages || []).find((img: any) => {
+        if (typeof img?.headingIndex !== 'number' || img.headingIndex !== index0) return false;
+        const owner = String(img?.heading || '').trim();
+        return !owner || !slotTitleSet.has(owner);
+      });
       if (indexFallback) {
         headingImages = [indexFallback];
         console.log(`[updatePromptItemsWithImages] ✅ headingIndex(${index0}) 기반 폴백 매칭 성공`);

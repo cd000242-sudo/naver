@@ -219,9 +219,12 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
  * method and opens the Google OAuth browser flow on first run (same interactive-session
  * shape as codex/claude login, which this service already drives via startSpawnSession).
  */
-function loginCommand(provider: AgentProvider): { command: string; args: string[] } {
+/**
+ * OAuth-over-pipe login command. gemini is absent on purpose: agy has no headless sign-in, so
+ * loginAgent() routes it to the terminal flow in agyLogin.ts before reaching here.
+ */
+function loginCommand(provider: 'codex' | 'claude'): { command: string; args: string[] } {
   if (provider === 'codex') return { command: 'codex', args: ['login'] };
-  if (provider === 'gemini') return { command: 'gemini', args: [] };
   return { command: 'claude', args: ['auth', 'login'] };
 }
 
@@ -242,13 +245,28 @@ export async function loginAgent(
       loginAction: 'already_authenticated' as const,
     });
   }
-  // [v2.11.140] Gemini: select oauth-personal (Login with Google) via settings.json before
-  // the login spawn. Without it the CLI errors "Please set an Auth method"; forcing GCA env
-  // instead selected the Code Assist tier that returns IneligibleTierError for individuals.
+  // [2026-08-23] The v2.11.140 ensureGeminiOAuthPersonalConfig() call is gone: it wrote
+  //   gemini-cli's ~/.gemini/settings.json (selectedType: oauth-personal), and gemini-cli is
+  //   no longer invoked at all. agy carries its own credential, so that write only risked
+  //   putting a foreign auth selector into the directory agy also uses.
+  // agy has no headless sign-in: with piped stdio it prints nothing and never
+  //   emits an OAuth URL (measured on agy 1.1.18). Its sign-in UI needs a real console, so the
+  //   app opens a terminal window and waits for the credential instead of parsing output.
   if (provider === 'gemini') {
-    const { ensureGeminiOAuthPersonalConfig } = await import('./geminiAuthConfig.js');
-    await ensureGeminiOAuthPersonalConfig();
+    const { loginAgyInInteractiveTerminal } = await import('./agyLogin.js');
+    await loginAgyInInteractiveTerminal(LOGIN_TIMEOUT_MS);
+    detection.clearAgentDetectionCache(provider);
+    const agyStatus = await detection.detectAgent(provider, { forceRefresh: true });
+    if (!agyStatus.loggedIn) {
+      throw new AgentCliError(
+        agyStatus.errorCode ?? 'not_logged_in',
+        provider,
+        agyStatus.detail || 'Antigravity 로그인 상태를 확인하지 못했습니다. 다시 로그인해주세요.',
+      );
+    }
+    return Object.freeze({ ...agyStatus, loginAction: 'authenticated' as const });
   }
+
   const { command, args } = loginCommand(provider);
   const observeLoginUrl = createAgentLoginUrlObserver(provider, (url) => {
     try { hooks.onLoginUrl?.(url); } catch { /* progress handoff is best-effort */ }
@@ -256,21 +274,10 @@ export async function loginAgent(
   const observeCodePrompt = createAgentLoginCodePromptObserver((attempt) => {
     try { hooks.onCodeRequired?.(attempt); } catch { /* renderer progress is best-effort */ }
   });
-  // [v2.11.140] Gemini(GCA)는 브라우저 열기 전 "Do you want to continue? [Y/n]"으로 확인을
-  // 받는데, 파이프 spawn(비-TTY)에는 사용자가 답할 터미널이 없다. 확인 프롬프트를 감지하면
-  // 자동으로 "Y"를 stdin에 써서 gemini가 OAuth 브라우저를 열도록 한다. (gemini 전용)
-  let geminiConfirmSent = false;
   let sessionWriteLine: ((value: string) => Promise<unknown>) | undefined;
-  const observeGeminiBrowserConfirm = (chunk: string): void => {
-    if (provider !== 'gemini' || geminiConfirmSent) return;
-    if (!/do you want to continue|\[y\/n\]|authentication page in your browser/i.test(chunk)) return;
-    geminiConfirmSent = true;
-    try { void sessionWriteLine?.('Y'); } catch { /* stdin write is best-effort */ }
-  };
   const observeLoginOutput = (chunk: string): void => {
     observeLoginUrl(chunk);
     observeCodePrompt(chunk);
-    observeGeminiBrowserConfirm(chunk);
   };
   const session = startSpawnSession({
     command,
@@ -326,16 +333,13 @@ function logoutCommand(provider: AgentProvider): { command: string; args: string
 }
 
 /**
- * gemini-cli has no `logout` subcommand; the OAuth credential file it writes is the same
- * artifact probeGeminiLogin() reads, so removing it is the symmetric logout action.
+ * agy has no `logout` subcommand; its session lives in the OS keyring plus
+ * ~/.gemini/google_accounts.json, so clearing both is the symmetric logout action.
+ * See agyLogout.ts for the measured storage locations.
  */
 async function logoutGeminiCredentialFile(): Promise<void> {
-  const { unlink } = await import('fs/promises');
-  const { homedir } = await import('os');
-  const { join } = await import('path');
-  await unlink(join(homedir(), '.gemini', 'oauth_creds.json')).catch((err: NodeJS.ErrnoException) => {
-    if (err?.code !== 'ENOENT') throw err;
-  });
+  const { logoutAgyAccount } = await import('./agyLogout.js');
+  await logoutAgyAccount();
 }
 
 /**
@@ -369,7 +373,7 @@ export async function logoutAgent(provider: AgentProvider): Promise<AgentCliStat
       throw new AgentCliError(
         'nonzero_exit',
         provider,
-        `${provider} 로그아웃에 실패했습니다. 홈 폴더의 .gemini/oauth_creds.json 파일을 직접 삭제해주세요.`,
+        `${provider} 로그아웃에 실패했습니다. Windows 자격 증명 관리자에서 "gemini:antigravity" 항목을 직접 삭제해주세요.`,
         sanitizeUserVisibleError((err as Error)?.message || ''),
       );
     }

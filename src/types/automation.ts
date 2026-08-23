@@ -19,6 +19,9 @@ export interface IAutomationInstance {
 
   /** 발행된 URL 가져오기 */
   getPublishedUrl(): string | null;
+
+  /** Bring the automation browser window to the front ("타이핑 보러가기"). */
+  showBrowserWindow?(): Promise<boolean>;
 }
 
 /**

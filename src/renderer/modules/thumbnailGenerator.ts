@@ -12,6 +12,9 @@ declare let generatedImages: any[];
 declare function generateImagesWithCostSafety(options: any): Promise<any>;
 declare function syncGlobalImagesFromImageManager(): void;
 declare function resolveFirstHeadingTitleForThumbnail(): string;
+// [2026-08-23] 썸네일 슬롯의 정본 키 — imageHelpers.ts
+declare const THUMBNAIL_SLOT_TITLE: string;
+declare function resolveImageSlotTarget(ref: any): { title: string; isThumbnail: boolean } | null;
 // [2026-08-06] 적용 후 이미지관리탭 소제목 카드(영어 프롬프트 + 미리보기) 재렌더용.
 declare function displayImageHeadingsWithPrompts(headings: any[]): void;
 declare function updatePromptItemsWithImages(images: any[]): void;
@@ -846,13 +849,15 @@ export class ThumbnailGenerator {
     const applyTarget = (document.getElementById('thumb-apply-target') as HTMLSelectElement)?.value || 'image-tab';
     console.log('[ThumbnailGen] 적용 대상:', applyTarget);
 
-    const thumbnailImage = {
+    const thumbnailImage: Record<string, any> = {
       heading: '썸네일',
       filePath: base64,
       previewDataUrl: base64,
       provider: 'thumbnail-generator',
       url: base64,
-      headingIndex: 0
+      headingIndex: 0,
+      // 발행 서론 삽입/필터가 이 플래그로 대표 썸네일을 가려낸다.
+      isThumbnail: true,
     };
 
     // ✅ 발행 모드별 썸네일 저장 (전역 상태)
@@ -888,12 +893,28 @@ export class ThumbnailGenerator {
         ? ImageManager.headings
         : ((window as any).imageManagementHeadings || []);
 
-      // 1번 소제목에 썸네일 적용 (무조건 1번에 배치)
+      // [2026-08-23] 썸네일은 '🖼️ 썸네일' 슬롯에 등록한다.
+      //   기존엔 resolveFirstHeadingTitleForThumbnail()이 돌려주는 **글 제목**을 키로 썼는데,
+      //   이미지 관리 탭의 썸네일 카드 키는 '🖼️ 썸네일'이라 어느 카드와도 안 맞는 새 버킷이
+      //   생겼다. 결과: 적용해도 화면에 아무것도 안 나타남(사용자 실측 "아무 반응이 없어").
+      //   '🖼️ 썸네일'은 발행 쪽 editorHelpers introImages / filterImagesForPublish 가 인식하는
+      //   정본 키이기도 하므로, 표시와 발행이 같은 키로 모인다.
+      const thumbnailSlotKey = (() => {
+        try {
+          const slot = resolveImageSlotTarget('thumbnail');
+          if (slot?.title) return slot.title;
+        } catch (e) {
+          console.warn('[ThumbnailGen] 썸네일 슬롯 해석 실패:', e);
+        }
+        return typeof THUMBNAIL_SLOT_TITLE === 'string' ? THUMBNAIL_SLOT_TITLE : '🖼️ 썸네일';
+      })();
+      // 글 제목은 키가 아니라 표시용 프롬프트로만 남긴다.
       const firstHeadingTitle = resolveFirstHeadingTitleForThumbnail();
-      thumbnailImage.heading = firstHeadingTitle;
+      thumbnailImage.heading = thumbnailSlotKey;
+      thumbnailImage.prompt = thumbnailImage.prompt || firstHeadingTitle || thumbnailSlotKey;
 
-      // ImageManager에 1번 소제목 이미지로 등록
-      ImageManager.setImage(firstHeadingTitle, thumbnailImage);
+      // ImageManager에 썸네일 슬롯 이미지로 등록
+      ImageManager.setImage(thumbnailSlotKey, thumbnailImage);
 
       // generatedImages 배열 업데이트 (1번 위치에 강제 배치)
       let existingImages: any[] = [];
@@ -955,9 +976,9 @@ export class ThumbnailGenerator {
       (window as any).thumbnailPath = base64;
       (window as any).selectedThumbnailImage = thumbnailImage;
 
-      appendLog(`✅ 썸네일이 1번 소제목 "${firstHeadingTitle}"에 적용되었습니다!`);
+      appendLog(`✅ 썸네일이 "${thumbnailSlotKey}" 슬롯에 적용되었습니다!`);
       appendLog(`📷 대표사진으로 자동 등록됩니다.`);
-      toastManager.success(`✅ 이미지관리탭 1번 소제목에 적용 + 대표사진 등록 완료!`);
+      toastManager.success(`✅ 이미지관리탭 썸네일 슬롯에 적용 + 대표사진 등록 완료!`);
     } else {
       // ✅ 다른 발행 모드 (풀오토/연속/다중계정) - 사전 세팅만 저장
       appendLog(`✅ ${modeLabels[applyTarget]}에 썸네일이 미리 세팅되었습니다.`);
