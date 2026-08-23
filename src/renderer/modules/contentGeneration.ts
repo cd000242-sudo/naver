@@ -1712,6 +1712,43 @@ const KOREAN_STOP_WORDS = new Set([
 // ✅ 다중 클릭 방지 플래그
 let isParaphrasing = false;
 
+/**
+ * 1단 분석 호출. 분석은 보조 단계라 어떤 실패도 페러프레이징을 멈추지 않는다 —
+ * 실패하면 재료 없이(=기존 동작) 2단으로 넘어간다. 결과는 로그로만 남긴다.
+ */
+async function analyzeParaphraseSourceSafely(
+  payload: { title: string; body: string; hashtags: string; generator: string },
+): Promise<{ analysis?: any; brief?: string } | null> {
+  const api = window.api as any;
+  if (typeof api?.analyzeParaphraseSource !== 'function') {
+    appendLog('ℹ️ 원본 분석 기능을 불러오지 못했습니다 — 분석 없이 재작성합니다.');
+    return null;
+  }
+  try {
+    const res = await api.analyzeParaphraseSource(payload);
+    if (!res?.success || !res.analysis) {
+      const reason = res?.reason === 'no_engine'
+        ? '분석에 쓸 API 키나 에이전트가 없습니다'
+        : res?.reason === 'unparsable'
+          ? '분석 응답을 해석하지 못했습니다'
+          : res?.message || '원인 미상';
+      appendLog(`⚠️ 원본 노출 분석 실패(${reason}) — 분석 없이 재작성합니다.`);
+      return null;
+    }
+    const analysis = res.analysis;
+    appendLog(`🔍 원본 노출 분석 완료 (${res.engine || '엔진 미상'}, ${Math.round((res.durationMs || 0) / 100) / 10}초)`);
+    if (analysis.exposureHypothesis) appendLog(`   └ 노출 근거: ${analysis.exposureHypothesis}`);
+    if (analysis.clickReason) appendLog(`   └ 클릭 이유: ${analysis.clickReason}`);
+    if (Array.isArray(analysis.gaps) && analysis.gaps.length > 0) {
+      appendLog(`   └ 상위호환 지점 ${analysis.gaps.length}개: ${analysis.gaps.join(' / ')}`);
+    }
+    return res;
+  } catch (error) {
+    appendLog(`⚠️ 원본 노출 분석 오류(${(error as Error)?.message || '알 수 없음'}) — 분석 없이 재작성합니다.`);
+    return null;
+  }
+}
+
 // ✅ 페러프레이징 모드로 글쓰기
 export async function paraphraseContent(): Promise<void> {
   console.log('[paraphraseContent] 함수 시작됨');
@@ -1784,14 +1821,42 @@ export async function paraphraseContent(): Promise<void> {
     if (content) originalContent += `본문:\n${content}\n\n`;
     if (hashtags) originalContent += `해시태그: ${hashtags}`;
 
+    // [2026-08-23] 1단: 원본이 왜 노출됐는지 먼저 읽는다.
+    //   원본은 이미 상위노출/홈판노출된 글이다. 그대로 바꿔 쓰는 대신 노출 요인을 읽어
+    //   2단 작성의 재료로 넘긴다. 분석이 실패해도 페러프레이징은 그대로 진행한다.
+    showUnifiedProgress(20, '원본 노출 분석 중...', '이 글이 왜 떴는지 읽는 중입니다');
+    showGenerationModal('🔍 원본 노출 분석 중...', '이 글이 왜 상위노출됐는지 읽고 있습니다', 20);
+    const sourceAnalysis = await analyzeParaphraseSourceSafely({ title, body: content, hashtags, generator });
+    const upgradeBrief = String(sourceAnalysis?.brief || '');
+
     // ✅ [결함 #8] 키워드 추출 개선 — 불용어 제거
-    const paraphraseKeywords = title
-      ? title.split(/[\s,]+/)
-          .filter((w: string) => w.length >= 2 && !KOREAN_STOP_WORDS.has(w))
-          .slice(0, 5)
-      : [];
+    // [2026-08-23] 1단 분석이 성공하면 그 메인/서브 키워드를 쓴다. 제목을 띄어쓰기로 잘라
+    //   앞 조각을 메인키워드로 삼던 방식은 "9월 30일 청약통장 전환 마감?" 같은 제목에서
+    //   메인키워드를 '9월'로 만들었다(실측). 복합어를 만들지 못하고 순서를 중요도로 착각한다.
+    const analyzedKeywords: string[] = [
+      String(sourceAnalysis?.analysis?.mainKeyword || '').trim(),
+      ...(Array.isArray(sourceAnalysis?.analysis?.subKeywords) ? sourceAnalysis.analysis.subKeywords : []),
+    ]
+      .map((keyword: unknown) => String(keyword || '').trim())
+      .filter((keyword: string) => keyword.length > 0)
+      .slice(0, 5);
+    const paraphraseKeywords = analyzedKeywords.length > 0
+      ? analyzedKeywords
+      : (title
+        ? title.split(/[\s,]+/)
+            .filter((w: string) => w.length >= 2 && !KOREAN_STOP_WORDS.has(w))
+            .slice(0, 5)
+        : []);
+    if (analyzedKeywords.length > 0) {
+      appendLog(`🎯 메인키워드: ${paraphraseKeywords[0]}${paraphraseKeywords.length > 1 ? ` (서브: ${paraphraseKeywords.slice(1).join(', ')})` : ''}`);
+    } else {
+      appendLog('⚠️ 분석 키워드를 얻지 못해 제목 기반 키워드로 진행합니다.');
+    }
 
     const paraphrasePrompt = `위 글을 완전히 새롭게 재작성해주세요.
+${upgradeBrief ? `
+${upgradeBrief}
+` : ''}
 
 ════════════════════════════════════════
 🔥 패러프레이징 100점 공식 🔥
@@ -1927,7 +1992,8 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
 
 결과물은 AI가 아닌 사람이 직접 쓴 것처럼 자연스러워야 합니다.`;
 
-    showUnifiedProgress(30, 'AI가 글을 개선 중...', '페러프레이징 및 퀄리티 향상 중');
+    showUnifiedProgress(40, 'AI가 상위호환으로 재작성 중...', '분석 결과를 재료로 글을 새로 쓰는 중');
+    showGenerationModal('✨ 상위호환으로 재작성 중...', '1단 분석 결과를 재료로 원본보다 한 겹 더 깊게 씁니다', 40);
     appendContentGenerationRetryNotice();
 
     // ✅ [결함 #3] 프롬프트 이중 주입 제거

@@ -290,6 +290,7 @@ import { loadContentPolicy } from './contentPolicy/policyLoader.js';
 import { PublicationStateStore } from './contentPolicy/publicationStateStore.js';
 import { evaluatePublicationAvailability } from './contentPolicy/publishGuard.js';
 import { registerAgentHandlers } from './main/ipc/agentHandlers.js';
+import { registerParaphraseAnalysisHandlers } from './main/ipc/paraphraseAnalysisHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 import { captureE2EPublishPayload } from './main/e2ePublishCapture.js';
 import {
@@ -4481,6 +4482,9 @@ registerContentHandlers({
   loadConfig,
   applyConfigToEnv
 });
+
+// [2026-08-23] 페러프레이징 1단 분석 — 원본이 왜 노출됐는지 읽어 2단 작성의 재료로 넘긴다.
+registerParaphraseAnalysisHandlers({ loadConfig: loadConfig as () => Promise<Record<string, unknown>> });
 
 // ✅ [2026-04-03] 소제목 이미지/영상 핸들러 → headingHandlers.ts로 추출
 registerHeadingHandlers({

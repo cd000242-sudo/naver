@@ -184,6 +184,9 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('apiKey:validate', provider, apiKey),
   generateContent: (prompt: string): Promise<GenerateContentResult> =>
     ipcRenderer.invoke('automation:generateContent', prompt),
+  // [2026-08-23] 페러프레이징 1단: 원본 노출 요인 분석 (실패해도 페러프레이징은 계속된다)
+  analyzeParaphraseSource: (payload: { title: string; body: string; hashtags?: string; generator: string }): Promise<{ success: boolean; analysis?: unknown; brief?: string; engine?: string; durationMs?: number; reason?: string; message?: string }> =>
+    ipcRenderer.invoke('paraphrase:analyzeSource', payload),
   // ✅ 에이전트 모드(codex/claude 구독 연동) — 설치/로그인 상태 + 글생성 브리지
   agentStatus: (provider: AgentProvider, options?: { forceRefresh?: boolean }): Promise<{ success: boolean; status?: AgentCliStatus; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:status', provider, options),
