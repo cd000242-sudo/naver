@@ -199,7 +199,11 @@ async function fetchCommunityAction(action: string, signal: AbortSignal): Promis
 }
 
 function CommunityPage() {
-    const [tab, setTab] = useState<TabKey>('income');
+    /*
+     * 기본 탭은 '내 글 홍보'다(사장님 지시 2026-08-23).
+     * 이 판에서 실제로 손이 오가는 곳이라 처음 여는 화면이 거기여야 한다.
+     */
+    const [tab, setTab] = useState<TabKey>('posts');
     const [income, setIncome] = useState<CommunityIncomeProof[]>([]);
     const [managedIncome, setManagedIncome] = useState<CommunityIncomeProof[]>([]);
     const [tips, setTips] = useState<Tip[]>([]);
@@ -403,6 +407,15 @@ function CommunityPage() {
                     border-color: rgba(68,215,182,0.76) !important;
                     box-shadow: 0 0 0 3px rgba(68,215,182,0.14) !important;
                 }
+                .cp-scrim {
+                    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+                    background:
+                        linear-gradient(180deg, rgba(6,10,18,.88) 0%, rgba(6,10,18,.72) 42%, rgba(6,10,18,.86) 100%);
+                }
+                .cp-shell { position: relative; z-index: 1; }
+                /* 막 위에서도 얇은 글씨가 흐려지지 않게 — 사진 대비가 큰 화면 대비. */
+                .cp-shell h1, .cp-shell h2, .cp-shell h3 { text-shadow: 0 1px 12px rgba(0,0,0,.55); }
+                .cp-shell p, .cp-shell span, .cp-shell b { text-shadow: 0 1px 8px rgba(0,0,0,.45); }
                 .community-write-button:hover,
                 .community-card:hover { transform: translateY(-2px); }
                 @media (max-width: 960px) {
@@ -413,7 +426,13 @@ function CommunityPage() {
                     .community-modal-grid { grid-template-columns: 1fr !important; }
                 }
             `}</style>
-            <section style={{ padding: '140px 20px 100px', maxWidth: 1200, margin: '0 auto' }}>
+            {/*
+              * 배경이 밝은 사진이라 흰 글씨가 그대로는 안 읽힌다(사장님 지적 2026-08-23).
+              * 사진을 없애지 않고 **어두운 막**을 깔아 글자만 살린다 —
+              * 위아래로 옅어지게 해서 사진이 완전히 죽지 않는다.
+              */}
+            <div className="cp-scrim" aria-hidden="true" />
+            <section className="cp-shell" style={{ padding: '140px 20px 100px', maxWidth: 1200, margin: '0 auto' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 18, marginBottom: 34, flexWrap: 'wrap' }}>
                     <div>
                         <span style={{ display: 'inline-flex', minHeight: 30, alignItems: 'center', padding: '6px 14px', background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.28)', borderRadius: 8, color: '#44d7b6', fontSize: 12, fontWeight: 900, letterSpacing: 0, marginBottom: 16 }}>COMMUNITY</span>
