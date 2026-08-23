@@ -461,13 +461,18 @@ function PricingPage() {
                         margin: 0 0 34px;
                     }
 
-                    .purchase-proof-pair { display: grid; gap: 14px; }
+                    /*
+                     * 성과 이미지와 영상을 **나란히** 둔다(사장님 지적 2026-08-23).
+                     * 위아래로 쌓았더니 왼쪽 칸이 두 배로 길어지고, 그만큼
+                     * 오른쪽 값·담기 칸에 큰 빈자리가 생겼다. 두 칸 높이가
+                     * 맞아야 카드가 균형을 잡는다.
+                     */
                     .purchase-video-rotor { display: flex; flex-direction: column; gap: 8px; }
                     .purchase-video-frame {
                         border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.1);
                         background: #050812;
                     }
-                    .purchase-video-frame video { width: 100%; display: block; max-height: 300px; object-fit: contain; background: #050812; }
+                    .purchase-video-frame video { width: 100%; display: block; max-height: 200px; object-fit: contain; background: #050812; }
                     .purchase-video-caption { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
                     .purchase-video-caption b { color: #7dd3fc; font-size: 12px; font-weight: 900; }
                     .purchase-video-caption span { color: rgba(255,255,255,.62); font-size: 12.5px; }
@@ -796,12 +801,13 @@ function PricingPage() {
                      * 예전에는 판 바깥 저 아래에 있어서, 값을 본 사람이 증거까지
                      * 내려오지 않았다. 같은 판 안에 있어야 한 눈에 든다.
                      */
-                    proof={(
-                        <div className="purchase-proof-pair">
-                            <ProofShowcase compact variant="carousel" className="purchase-proof-inline" />
-                            <PurchaseVideoShowcase />
-                        </div>
-                    )}
+                    proof={<ProofShowcase compact variant="carousel" className="purchase-proof-inline" />}
+                    /*
+                     * 발행 영상은 올인원 본문의 **빈 구멍**에 넣는다(2026-08-23).
+                     * 처음엔 성과 칸 옆에 나란히 놨는데, 그러면 성과 칸이 반토막
+                     * 나고 오른쪽 구멍은 그대로였다 — 실측 스크린샷으로 확인했다.
+                     */
+                    bundleMedia={<PurchaseVideoShowcase />}
                     /*
                      * 신뢰 지표는 값 **바로 옆**에 선다(사장님 지시 2026-08-21).
                      * 판 아래 따로 떠 있을 때는 값을 보고 결정하는 순간에 눈에

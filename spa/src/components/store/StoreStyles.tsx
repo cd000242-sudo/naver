@@ -143,6 +143,8 @@ function StoreStyles() {
             }
             .st-bundle-proof > * { width: 100%; }
             .st-bundle .st-body { padding: 22px; display: flex; flex-direction: column; }
+            /* 영상은 기능 목록과 값 사이의 빈 자리를 채운다 — 남는 높이를 가져간다. */
+            .st-bundle-media { margin: 14px 0 4px; min-height: 0; }
             /* 담기 버튼은 카드 바닥에 붙는다 — 두 칸 높이가 달라도 줄이 맞는다. */
             .st-bundle .st-buy { margin-top: auto; }
             /* 신뢰 지표 — 값과 담기 사이. 결정 직전에 눈에 드는 자리다. */

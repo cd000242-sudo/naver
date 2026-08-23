@@ -26,7 +26,7 @@ function daysToSwitch(): number | null {
 /** 담은 결과를 바깥(결제 구역)에 알려 준다. 아무것도 안 담았으면 null. */
 export type StorePick = { id: string; name: string; amount: number; desc: string };
 
-function ProductStore({ onPick, onCardPay, proof, notes, trust }: {
+function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
     onPick?: (pick: StorePick | null) => void;
     /** 결제창에서 카드를 고르면 이메일과 함께 부른다 — 결제 실행은 바깥이 맡는다. */
     onCardPay?: (email: string) => void;
@@ -38,6 +38,12 @@ function ProductStore({ onPick, onCardPay, proof, notes, trust }: {
      * 페이지의 몫이다.
      */
     proof?: ReactNode;
+    /*
+     * 올인원 카드 본문의 **빈 구멍**에 들어가는 것(사장님 지적 2026-08-23).
+     * 기능 목록과 값 사이가 크게 비어 있었다 — 영상을 왼쪽 성과 칸에 끼워
+     * 넣었더니 그 칸이 반토막 나고 오른쪽 구멍은 그대로였다. 구멍이 자리다.
+     */
+    bundleMedia?: ReactNode;
     notes?: ReactNode;
     /** 별점·사용자 수·환불 보장 — 값 바로 옆에 선다. 결정하는 순간에 필요한 재료다. */
     trust?: ReactNode;
@@ -187,6 +193,10 @@ function ProductStore({ onPick, onCardPay, proof, notes, trust }: {
                                     </ul>
                                 ) : (
                                     <p className="st-what">{product.summary}</p>
+                                )}
+
+                                {product.bundle && bundleMedia && (
+                                    <div className="st-bundle-media">{bundleMedia}</div>
                                 )}
 
                                 {/*
