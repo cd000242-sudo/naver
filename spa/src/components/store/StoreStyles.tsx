@@ -132,13 +132,30 @@ function StoreStyles() {
             .st-permo strong { color: var(--st-ink); font-weight: 800; }
             .st-permo s { margin-right: 5px; color: var(--st-mute); }
 
+            /*
+             * 담기 버튼은 **눌러야 할 것**이라 눈에 띄어야 한다(사장님 지적 2026-08-23
+             * "담기 버튼이 눈에 띄지 않네").
+             * 예전에는 거꾸로였다 — 기본이 rgba(255,255,255,.03) 로 거의 안 보이고,
+             * 이미 담은 것만 금색이었다. 눌러야 할 쪽이 흐리면 손이 안 간다.
+             * 기본을 금색으로 세우고, 담긴 뒤에는 테두리형으로 가라앉힌다 —
+             * 그건 이미 끝난 상태지 다시 누를 일이 아니다.
+             */
             .st-buy {
-                margin-top: 14px; padding: 12px; border: 1px solid var(--st-line-2); border-radius: 11px;
-                background: rgba(255,255,255,.03); color: var(--st-ink);
-                font-family: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
+                margin-top: 14px; padding: 13px; border: 0; border-radius: 11px;
+                background: linear-gradient(180deg, #f7c455, var(--st-gold)); color: #171003;
+                font-family: inherit; font-size: 14.5px; font-weight: 800; cursor: pointer;
+                box-shadow: 0 8px 22px rgba(240,181,63,.28);
+                transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
             }
-            .st-buy:hover { border-color: rgba(240,181,63,.45); }
-            .st-buy.on { background: linear-gradient(180deg, #f7c455, var(--st-gold)); border-color: transparent; color: #171003; box-shadow: 0 6px 20px rgba(240,181,63,.26); }
+            .st-buy:hover { filter: brightness(1.06); box-shadow: 0 10px 28px rgba(240,181,63,.38); }
+            .st-buy:active { transform: translateY(1px); }
+            .st-buy:focus-visible { outline: 2px solid #ffd97a; outline-offset: 2px; }
+            /* 담긴 뒤 — 상태 표시라 조용하게. 다시 누르면 빼는 것이므로 눌리기는 한다. */
+            .st-buy.on {
+                background: rgba(52,211,153,.1); color: #6ee7b7; border: 1px solid rgba(52,211,153,.45);
+                padding: 12px; font-weight: 700; box-shadow: none;
+            }
+            .st-buy.on:hover { filter: none; background: rgba(52,211,153,.16); box-shadow: none; }
 
             /* 올인원은 줄 전체를 쓰고 가운데 선다(사장님 지정) — span 2 는 3열에서 왼쪽으로 쏠렸다. */
             /*
