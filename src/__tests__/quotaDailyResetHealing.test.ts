@@ -55,7 +55,10 @@ beforeEach(() => {
 
 afterEach(() => {
   (electronAppMock as { getPath: (name: string) => string }).getPath = originalGetPath;
-  rmSync(tempDir, { recursive: true, force: true });
+  // [2026-08-23] Windows에서 쓰기 핸들이 아직 닫히지 않은 채 rmSync 가 돌면
+  //   ENOTEMPTY 로 죽는다 — 전체 병렬 실행(릴리즈 게이트)에서 실제로 터졌다.
+  //   로직 실패가 아니라 파일 락 레이스라 재시도로 해소한다.
+  rmSync(tempDir, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 });
 });
 
 describe('일일 쿼터 자기치유 (00시 초기화 고착 방지)', () => {

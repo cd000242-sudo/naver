@@ -1057,7 +1057,10 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
       .resolves.toBe(CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256);
     await expect(verifyContentQualityV3CandidateRuntimeFingerprint(workspaceRoot))
       .resolves.toBeUndefined();
-  }, 120_000);
+  // [2026-08-23] 120s → 300s. 단독 실행은 12.8초지만, 748개 파일 병렬 실행(릴리즈 게이트)에선
+  //   이 테스트가 전체 소스 클로저(~700파일)를 읽고 해싱하느라 120s 를 넘겨 터졌다.
+  //   해시 불일치가 아니라 IO 경합 문제라 제한시간만 늘린다.
+  }, 300_000);
 
   it('sorts paths before length-prefixed hashing and canonicalizes only CRLF to LF', async () => {
     const lfRoot = await createFixture({
