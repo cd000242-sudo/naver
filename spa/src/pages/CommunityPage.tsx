@@ -1,4 +1,3 @@
-import { mergeAdsenseProofs } from '../lib/adsenseProofs';
 import { useCallback, useEffect, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
 import PostsPanel from '../components/community/PostsPanel';
 import { Link } from 'react-router-dom';
@@ -438,11 +437,14 @@ function CommunityPage() {
                     <div>
                         <span style={{ display: 'inline-flex', minHeight: 30, alignItems: 'center', padding: '6px 14px', background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.28)', borderRadius: 8, color: '#44d7b6', fontSize: 12, fontWeight: 900, letterSpacing: 0, marginBottom: 16 }}>COMMUNITY</span>
                         <h1 style={{ fontSize: 'clamp(30px, 4vw, 46px)', fontWeight: 900, marginBottom: 12 }}>Leaders Pro 커뮤니티</h1>
-                        <p style={{ color: 'rgba(255,255,255,0.66)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>승인된 수익 인증과 실제 운영 성과, 운영자가 직접 남긴 활용 팁을 확인하세요. 공지사항은 홈에서 바로 확인할 수 있습니다.</p>
+                        {/*
+                            * 설명을 판에 맞춘다(2026-08-23). 수익 인증과 활용 팁은
+                            * [수익인증 및 후기] 로 옮겼는데 설명만 남아 있었다 —
+                            * 없는 것을 있다고 적어 두면 안 된다.
+                            */}
+                        <p style={{ color: 'rgba(255,255,255,0.66)', fontSize: 16, lineHeight: 1.7, margin: 0, wordBreak: 'keep-all' }}>내가 쓴 글을 올리고, 남의 글에 들러 주는 판입니다. 들른 만큼 내 글이 위로 올라갑니다.</p>
                     </div>
                     <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                        {tab === 'income' && <WriteButton label="수익인증 작성" onClick={() => setWriter('income')} />}
-                        {tab === 'tips' && <WriteButton label="활용팁 작성" onClick={() => setWriter('tips')} />}
                         <button
                             type="button"
                             onClick={() => refreshCommunity(true)}
@@ -453,32 +455,12 @@ function CommunityPage() {
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 34, flexWrap: 'wrap' }}>
-                    {(
-                        [
-                            ['income', '수익 인증'],
-                            ['tips', '활용 팁'],
-                            ['posts', '내 글 홍보'],
-                        ] as Array<[TabKey, string]>
-                    ).map(([key, label]) => (
-                        <button
-                            key={key}
-                            onClick={() => setTab(key)}
-                            style={{
-                                minHeight: 44,
-                                padding: '10px 22px',
-                                borderRadius: 8,
-                                background: tab === key ? '#16c47f' : 'rgba(255,255,255,0.06)',
-                                border: tab === key ? '1px solid rgba(68,215,182,0.7)' : '1px solid rgba(255,255,255,0.10)',
-                                color: tab === key ? '#061018' : 'rgba(255,255,255,0.72)',
-                                fontWeight: 900,
-                                cursor: 'pointer',
-                            }}
-                        >
-                            {label}
-                        </button>
-                    ))}
-                </div>
+                {/*
+                  * 탭을 없앴다(사장님 지시 2026-08-23: "커뮤니티는 활용팁도
+                  * 없애고 내 글 홍보만 있으면 됩니다").
+                  * 수익 인증은 [후기] 로 옮겼다 — 사는 사람이 보는 자리는 거기다.
+                  * 판이 하나뿐이면 고를 것이 없으므로 고르개도 두지 않는다.
+                  */}
 
                 {loading && (
                     <div style={{ ...panelStyle, padding: 24, marginBottom: 24, color: 'rgba(255,255,255,0.70)' }}>
@@ -486,30 +468,12 @@ function CommunityPage() {
                     </div>
                 )}
 
-                {tab === 'income' && incomeUnavailable && (
-                    <div role="status" style={{ ...panelStyle, padding: 18, marginBottom: 18, color: '#ffd18a', fontSize: 16, lineHeight: 1.65 }}>
-                        수익 인증 최신 목록을 일시적으로 불러오지 못했습니다. 기존에 확인한 자료가 있으면 그대로 유지하며, 잠시 후 새로고침해주세요.
-                    </div>
-                )}
-                {/*
-                  * 애드센스 운영 성과를 함께 세운다(사장님 지시 2026-08-23
-                  * "이건 수익인증으로 옮겨주세요, 중복되는 거 빼고").
-                  * 같은 그림이 이미 올라와 있으면 그쪽을 남긴다 — 사용자가
-                  * 올린 인증이 우선이다.
-                  */}
-                {tab === 'income' && (
-                    <IncomePanel
-                        items={mergeAdsenseProofs(income.length > 0 ? income : managedIncome)}
-                        onWrite={() => setWriter('income')}
-                    />
-                )}
-                {tab === 'tips' && <TipsPanel items={tips} onWrite={() => setWriter('tips')} />}
                 {/*
                   * '내 글 홍보' — 서로 들러 주는 판(사장님 설계 2026-08-21).
                   * 자기 판을 직접 그린다: 올리기·들르기·집계가 한 덩어리라
                   * 바깥에서 상태를 나눠 갖지 않는 편이 고치기 쉽다.
                   */}
-                {tab === 'posts' && <PostsPanel />}
+                <PostsPanel />
             </section>
 
             {writer && (

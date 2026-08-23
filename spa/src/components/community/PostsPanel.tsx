@@ -172,9 +172,11 @@ function PostsPanel() {
 
     return (
         <div className="cp">
+            {/*
+              * 판이 하나뿐이라 제목·설명이 페이지 머리와 겹쳤다(2026-08-23).
+              * 같은 말을 두 번 읽히지 않는다 — 여기서는 규칙만 남긴다.
+              */}
             <header className="cp-head">
-                <h2>내 글 홍보</h2>
-                <p>내가 쓴 글을 올리고, 남의 글에 들러 주는 판입니다. 들른 만큼 내 글이 위로 올라갑니다.</p>
                 <div className="cp-rules">
                     <span>하루 <b>{dailyLimit}개</b>까지</span>
                     <span>내가 쓴 글만</span>

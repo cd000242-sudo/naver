@@ -12,7 +12,8 @@ const NAV_LINKS = [
     { to: '/chatbots', label: '무료 챗봇' },
     { to: '/products', label: '제품정보' },
     { to: '/pricing', label: '무료체험 및 구매' },
-    { to: '/reviews', label: '후기' },
+    /* 후기 판이 곧 수익인증 판이다 — 이름표가 그걸 말해야 한다(사장님 지시 2026-08-23). */
+    { to: '/reviews', label: '수익인증 및 후기' },
     { to: '/community', label: '커뮤니티' },
     { to: '/download', label: '다운로드' },
     { to: '/lookup', label: '주문조회' },

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
+import { ADSENSE_SITE_PROOFS } from '../lib/adsenseProofs';
 import { isValidEmail, isValidPhone, maskContactText, maskEmail, maskPhone } from '../lib/privacy';
 
 /**
@@ -322,6 +323,28 @@ function ReviewsPage() {
                     </button>
                 </div>
 
+                {/*
+                  * 애드센스 운영 성과 — 후기 판이 곧 수익인증 판이다
+                  * (사장님 지시 2026-08-23 "수익인증은 후기로 가야 되고
+                  * 탭도 수익인증 및 후기로"). 사용자 후기 앞에 세운다.
+                  * 전부 애드센스 화면 그대로이고 화면에서 만든 수치는 없다.
+                  */}
+                <div className="rv-sec">
+                    <h2>수익 인증</h2>
+                    <span>애드센스 화면 실측 — 운영 성과입니다</span>
+                </div>
+                <div className="rv-proofs">
+                    {ADSENSE_SITE_PROOFS.map((proof) => (
+                        <figure key={proof.id}>
+                            <img src={proof.media} alt={proof.mediaName || proof.amount} loading="lazy" decoding="async" />
+                            <figcaption>
+                                <b>{proof.amount}</b>
+                                <span>{proof.desc}</span>
+                            </figcaption>
+                        </figure>
+                    ))}
+                </div>
+
                 {loading ? (
                     <div className="rv-empty">후기를 불러오는 중입니다.</div>
                 ) : testimonials.length === 0 ? (
@@ -419,6 +442,12 @@ function ReviewsPage() {
                 .rv-empty h2 { margin: 0 0 10px; font-size: 22px; color: #fff; }
                 .rv-empty p { margin: 0; }
 
+                .rv-proofs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin: 0 0 46px; }
+                .rv-proofs figure { margin: 0; border: 1px solid rgba(255,255,255,.09); border-radius: 14px; overflow: hidden; background: rgba(255,255,255,.03); }
+                .rv-proofs img { display: block; width: 100%; height: 170px; object-fit: cover; object-position: top; background: #0b1018; }
+                .rv-proofs figcaption { padding: 12px 14px 14px; }
+                .rv-proofs b { display: block; font-size: 14.5px; font-weight: 800; color: #eef4fb; }
+                .rv-proofs span { display: block; margin-top: 3px; font-size: 12.5px; color: rgba(255,255,255,.55); }
                 .rv-sec { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin: 0 0 18px; }
                 .rv-sec h2 { margin: 0; font-size: 19px; font-weight: 900; letter-spacing: -.01em; }
                 .rv-sec span { color: rgba(255,255,255,.45); font-size: 12.5px; }
