@@ -32,21 +32,41 @@ function StoreStyles() {
                 background: linear-gradient(176deg, #ffffff 24%, #cbb18a 100%);
                 -webkit-background-clip: text; background-clip: text; color: transparent;
             }
-            .st-sub { margin: 0 auto; max-width: 48ch; color: var(--st-dim); font-size: 14.5px; }
+            /*
+             * 한글은 낱말 안에서 끊으면 안 된다(사장님 지적 2026-08-23).
+             * 실측 스크린샷에서 "바로 보 / 입니다" 로 잘려 있었다 — 48ch 는
+             * 한글에 맞지 않는 단위라(0 자 너비 기준) 줄이 어중간하게 잘린다.
+             * keep-all 로 낱말을 지키고, balance 로 두 줄 길이를 고른다.
+             */
+            .st-sub {
+                margin: 0 auto; max-width: 36em; color: var(--st-dim); font-size: 14.5px;
+                word-break: keep-all; overflow-wrap: break-word; text-wrap: balance;
+            }
             .st-rule { display: block; width: 54px; height: 1px; margin: 18px auto 0; background: linear-gradient(90deg, transparent, var(--st-gold), transparent); }
 
             .st-terms { display: inline-flex; margin-top: 22px; padding: 4px; border: 1px solid var(--st-line-2); border-radius: 14px; background: rgba(255,255,255,.03); gap: 3px; flex-wrap: wrap; justify-content: center; }
+            /*
+             * 알약 폭이 들쭉날쭉했다 — '1년' 만 안내말이 붙어 두 배로 넓었다.
+             * 최소 폭을 줘서 줄이 맞고, 안내말은 아래 줄로 내려 폭을 안 늘린다.
+             */
             .st-terms button {
-                padding: 8px 17px; border: 0; border-radius: 11px; background: transparent;
+                display: inline-flex; flex-direction: column; align-items: center; gap: 1px;
+                min-width: 86px; padding: 7px 16px; border: 0; border-radius: 11px; background: transparent;
                 color: var(--st-dim); font-family: inherit; font-size: 13px; cursor: pointer; white-space: nowrap;
+                line-height: 1.3;
             }
             .st-terms button:hover { color: #fff; }
             .st-terms button.on { background: linear-gradient(180deg, #f7c455, var(--st-gold)); color: #171003; font-weight: 700; box-shadow: 0 3px 14px rgba(240,181,63,.3); }
-            .st-terms em { font-style: normal; font-size: 11px; opacity: .78; margin-left: 5px; }
+            .st-terms em { font-style: normal; font-size: 10.5px; opacity: .72; margin: 0; }
 
+            /*
+             * 알림 바가 카드 폭 전체를 가로지르는데 내용은 가운데 한 줄뿐이라
+             * 양옆이 텅 비어 보였다. 내용 폭에 맞춰 줄이고 가운데 세운다.
+             */
             .st-dday {
-                display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center;
-                margin: 0 0 20px; padding: 11px 18px; border-radius: 12px;
+                display: flex; width: fit-content; max-width: 100%;
+                align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center;
+                margin: 0 auto 20px; padding: 11px 20px; border-radius: 12px;
                 border: 1px solid rgba(251,113,133,.3);
                 background: linear-gradient(90deg, rgba(251,113,133,.1), rgba(240,181,63,.08));
                 font-size: 13.3px; color: var(--st-dim);
