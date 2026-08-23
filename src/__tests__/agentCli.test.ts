@@ -126,7 +126,11 @@ describe('spawnCollect — real node child (no CLI / no quota)', () => {
       'const { spawn } = require("child_process");',
       'const marker = process.argv[2];',
       'const readyMarker = process.argv[3];',
-      'const code = `setTimeout(() => require("fs").writeFileSync(process.argv[1], "alive"), 1000);`;',
+      // [2026-08-23] 손자가 마커를 쓰기까지의 여유를 1s → 3s 로 늘렸다.
+      //   이전엔 abort 후 프로세스 트리를 죽일 시간이 약 1초뿐이라, 전체 병렬 실행
+      //   부하에서 taskkill 이 늦으면 손자가 먼저 써버려 플레이크했다(릴리즈 게이트에서 실측).
+      //   “3초 안에 트리가 죽는다”는 계약은 그대로 유효하다.
+      'const code = `setTimeout(() => require("fs").writeFileSync(process.argv[1], "alive"), 3000);`;',
       'const child = spawn(process.execPath, ["-e", code, marker], { stdio: "ignore", windowsHide: true });',
       'require("fs").writeFileSync(readyMarker, String(child.pid));',
       'child.unref();',
@@ -350,7 +354,7 @@ describe('spawnCollect — real node child (no CLI / no quota)', () => {
     expect(grandchildStarted).toBe(true);
     await expect(result).rejects.toMatchObject({ code: 'aborted' });
 
-    await new Promise((resolve) => setTimeout(resolve, 1_200));
+    await new Promise((resolve) => setTimeout(resolve, 3_500));
     expect(existsSync(treeMarker())).toBe(false);
   });
 
