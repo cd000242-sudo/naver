@@ -33,8 +33,12 @@ describe('키워드 앞 배치 — 사용자 옵션 경로가 살아 있다', ()
     // [2026-08-06] 기준점을 후처리 분기(keywordTitleOpts.useKeywordTitlePrefix)로 고정한다.
     //   단순 'useKeywordTitlePrefix' 첫 매치는 옵션 세팅부(배선)에도 걸려, 그 사이 코드가
     //   늘면 근접 범위를 벗어나 오탐한다.
+    // [2026-08-26] 그 판정이 decideKeywordPrefix 로 옮겨갔다(starts-with-keyword +
+    //   흩어진 토큰까지 본다). 계약은 그대로이고 위치만 바뀌었으므로 여기서는 호출을
+    //   확인하고, 판정 자체는 keywordTitlePrefixPolicy.test.ts 가 직접 실행해 검증한다.
     const idx = src.indexOf('keywordTitleOpts.useKeywordTitlePrefix');
-    expect(src.slice(idx, idx + 900)).toMatch(/startsWith\(keyword\)/);
+    expect(src.slice(idx, idx + 900)).toMatch(/decideKeywordPrefix\(keyword, currentTitle\)/);
+    expect(src.slice(idx, idx + 900)).toMatch(/if \(!prefixDecision\.shouldPrefix\)/);
   });
 
   it('다중계정 경로에도 같은 처리가 있다', () => {

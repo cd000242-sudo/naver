@@ -6424,9 +6424,16 @@ async function generateStructuredContentInternal(
           const _subKws = _allKw.slice(1);
           if (_subKws.length > 0) {
             const { enforceSubKeywordCoverage } = require('./content/subKeywordCoverageGate');
+            // [2026-08-26] 소제목 강제 패치는 끈다(기본값). 붙이면 "카자흐스탄 렌터카 공증
+            //   전현무 렌터카 대여 장면에서 시작된 논란" 같은 소제목이 발행된다(실측).
+            //   롱테일 노출은 해시태그 전략이 본문을 건드리지 않고 담당한다.
             const cov = enforceSubKeywordCoverage(parsed, _subKws, { maxKeywords: 3 });
             const covered = cov.items.filter((i: any) => i.inHeadings || i.inBody).length;
-            console.log(`[SubKwCoverage] 서브키워드 ${cov.items.length}개 중 자연커버 ${covered} · 패치 ${cov.patchedCount}`);
+            const missed = cov.items.length - covered;
+            console.log(
+              `[SubKwCoverage] 서브키워드 ${cov.items.length}개 중 자연커버 ${covered}`
+              + (missed > 0 ? ` · 미커버 ${missed} (소제목은 건드리지 않음 — 해시태그로 보완)` : ''),
+            );
             if (cov.patchedCount > 0) {
               try { syncHeadingsWithBodyPlain(parsed); } catch { /* ignore */ }
             }

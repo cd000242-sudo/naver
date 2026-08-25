@@ -14,6 +14,7 @@ import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext
 import { resolveTextModelProfile, isAgentTextProvider } from '../../runtime/modelRegistry.js';
 import type { FillSemiAutoFieldsOptions } from '../types/index.js';
 import { resolveArticleTypeHint } from '../../shared/categoryTaxonomy.js';
+import { decideKeywordPrefix } from '../../content/keywordTitlePrefixPolicy.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -1317,9 +1318,16 @@ export async function generateContentFromKeywords(
         const currentTitle = String(structuredContent.selectedTitle || '').trim();
 
         if (keyword && currentTitle) {
-          // 이미 키워드로 시작하면 건너뜀
-          if (currentTitle.startsWith(keyword)) {
-            appendLog(`🔝 키워드 앞배치: 이미 키워드로 시작 — 건너뜀`);
+          // [2026-08-26] 키워드가 이미 충분히 들어 있으면 붙이지 않는다.
+          //   실측: 100점 제목에 "전현무 즉흥여행 논란"을 앞에 붙여 3점이 됐고,
+          //   중복 제거로 73점까지만 회복했다. 기존 중복 제거는 연속 일치만 봐서
+          //   토큰이 흩어져 있으면 못 잡는다.
+          const prefixDecision = decideKeywordPrefix(keyword, currentTitle);
+          if (!prefixDecision.shouldPrefix) {
+            appendLog(
+              `🔝 키워드 앞배치 건너뜀 (${prefixDecision.reason}`
+              + `${prefixDecision.totalTokens > 0 ? `, ${prefixDecision.coveredTokens}/${prefixDecision.totalTokens} 토큰 이미 포함` : ''})`,
+            );
           } else {
             // ✅ [2026-03-14] 강화된 키워드 중복 제거 (따옴표/어순 변형/겹치는 접미사 대응)
             const cleaned = cleanKeywordFromTitle(keyword, currentTitle);

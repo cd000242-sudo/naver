@@ -45,13 +45,25 @@ function tokenOverlap(a: string, b: string): number {
 }
 
 /**
- * 서브키워드 커버리지를 검사하고, 완전히 빠진 서브키워드를 소제목에 패치한다.
- * content.headings를 제자리 수정하며 결과 리포트를 반환한다.
+ * 서브키워드 커버리지를 검사한다.
+ *
+ * [2026-08-26 사용자 실측] 예전에는 빠진 서브키워드를 소제목 앞에 그냥 붙였다.
+ * 그 결과 이런 소제목이 발행됐다.
+ *   "카자흐스탄 렌터카 공증 전현무 렌터카 대여 장면에서 시작된 논란"
+ *   "나혼산 알마티 여행 제작진이 밝힌 대여 과정과 대사관 확인 결과"
+ * 앞쪽이 강제로 붙은 키워드다. 읽으면 바로 어색하고, 그 로그가 실측에서
+ * "자연커버 0 · 패치 3" 이었다 — 셋 다 억지로 넣은 것이다.
+ *
+ * 한국어에서 명사구를 문장형 소제목 앞에 얹으면 자연스러워질 방법이 없다.
+ * 붙였다가 중복 제거로 되돌리는 헛수고만 남는다. 그래서 기본값을 "보고만" 으로 바꾼다.
+ * 롱테일 노출은 이제 해시태그 전략(HT-1 두 층)이 본문을 건드리지 않고 담당한다.
+ *
+ * 그래도 붙이길 원하면 allowHeadingPatch 로 명시해야 한다 — 조용히 문장을 바꾸지 않는다.
  */
 export function enforceSubKeywordCoverage(
   content: CoverageContent,
   subKeywords: string[],
-  options: { maxKeywords?: number } = {},
+  options: { maxKeywords?: number; allowHeadingPatch?: boolean } = {},
 ): SubKeywordCoverageResult {
   const result: SubKeywordCoverageResult = { items: [], patchedCount: 0 };
   const headings = Array.isArray(content?.headings) ? content.headings : [];
@@ -102,6 +114,12 @@ export function enforceSubKeywordCoverage(
       }
     }
     if (bestIdx < 0) continue;
+
+    // 기본값은 보고만 — 소제목 문장을 조용히 바꾸지 않는다.
+    if (options.allowHeadingPatch !== true) {
+      item.skippedReason = 'heading-patch-disabled';
+      continue;
+    }
 
     headings[bestIdx] = {
       ...headings[bestIdx],

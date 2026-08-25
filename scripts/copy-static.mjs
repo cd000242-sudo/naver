@@ -358,6 +358,12 @@ try {
       filePath: path.join(projectRoot, 'dist', 'automation', 'ftcDisclosurePresets.js'),
     },
     {
+      // [2026-08-26] 키워드 앞배치 판정 — contentGeneration 이 값으로 가져온다.
+      //   등록하지 않으면 tsc/lint 는 통과하고 런타임에서만 터진다(인라인 번들 계약).
+      label: 'content/keywordTitlePrefixPolicy.js',
+      filePath: path.join(projectRoot, 'dist', 'content', 'keywordTitlePrefixPolicy.js'),
+    },
+    {
       label: 'runtime/textModelConstants.js',
       filePath: path.join(projectRoot, 'dist', 'runtime', 'textModelConstants.js'),
     },

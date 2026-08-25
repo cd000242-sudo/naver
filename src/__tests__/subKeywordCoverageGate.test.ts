@@ -21,33 +21,56 @@ const makeContent = () => ({
 });
 
 describe('서브키워드 커버리지 게이트', () => {
-  it('완전 부재 서브키워드는 토큰 겹침 최대 소제목에 선두 패치된다', () => {
+  /*
+   * [2026-08-26 사용자 실측으로 계약 변경] 예전에는 빠진 서브키워드를 소제목 앞에 그냥
+   * 붙였다. 그 결과 이런 소제목이 발행됐다.
+   *   "카자흐스탄 렌터카 공증 전현무 렌터카 대여 장면에서 시작된 논란"
+   * 실측 로그가 "자연커버 0 · 패치 3" — 셋 다 억지로 넣은 것이었다.
+   * 이제 기본값은 보고만이고, 붙이려면 allowHeadingPatch 를 명시해야 한다.
+   */
+  it('기본값은 소제목을 건드리지 않는다 (보고만)', () => {
+    const content = makeContent();
+    const before = content.headings[0].title;
+    const r = enforceSubKeywordCoverage(content, ['제습기 전기세'], {});
+    expect(r.patchedCount).toBe(0);
+    expect(content.headings[0].title).toBe(before);
+    expect(r.items[0].patched).toBe(false);
+    expect(r.items[0].skippedReason).toBe('heading-patch-disabled');
+  });
+
+  it('미커버는 그대로 보고한다 (해시태그로 보완할 수 있게)', () => {
     const content = makeContent();
     const r = enforceSubKeywordCoverage(content, ['제습기 전기세'], {});
+    expect(r.items[0].inHeadings).toBe(false);
+    expect(r.items[0].inBody).toBe(false);
+  });
+
+  it('명시로 켜면 예전처럼 선두 패치한다', () => {
+    const content = makeContent();
+    const r = enforceSubKeywordCoverage(content, ['제습기 전기세'], { allowHeadingPatch: true });
     expect(r.patchedCount).toBe(1);
-    // "제습기" 토큰이 겹치는 첫 소제목이 타깃
     expect(content.headings[0].title.startsWith('제습기 전기세 ')).toBe(true);
   });
 
   it('본문 어디든 이미 있으면 무변경 (자연 커버 존중 + 멱등)', () => {
     const content = makeContent();
     // "소음"은 heading[0].content에 존재
-    const r = enforceSubKeywordCoverage(content, ['소음'], {});
+    const r = enforceSubKeywordCoverage(content, ['소음'], { allowHeadingPatch: true });
     expect(r.patchedCount).toBe(0);
     expect(r.items[0].inBody).toBe(true);
     expect(content.headings[0].title).toBe('제습기 고르는 기준 3가지');
     // 멱등: 패치된 키워드 재실행 시 inHeadings=true → 무변경
     const c2 = makeContent();
-    enforceSubKeywordCoverage(c2, ['제습기 전기세'], {});
+    enforceSubKeywordCoverage(c2, ['제습기 전기세'], { allowHeadingPatch: true });
     const titleAfterFirst = c2.headings[0].title;
-    const r2 = enforceSubKeywordCoverage(c2, ['제습기 전기세'], {});
+    const r2 = enforceSubKeywordCoverage(c2, ['제습기 전기세'], { allowHeadingPatch: true });
     expect(r2.patchedCount).toBe(0);
     expect(c2.headings[0].title).toBe(titleAfterFirst);
   });
 
   it('소제목당 1키워드 — 서로 다른 서브키워드는 서로 다른 소제목으로', () => {
     const content = makeContent();
-    const r = enforceSubKeywordCoverage(content, ['제습기 전기세', '제습기 곰팡이'], {});
+    const r = enforceSubKeywordCoverage(content, ['제습기 전기세', '제습기 곰팡이'], { allowHeadingPatch: true });
     expect(r.patchedCount).toBe(2);
     const patchedTitles = content.headings.filter(
       (h) => h.title.includes('전기세') || h.title.includes('곰팡이'),
@@ -59,14 +82,14 @@ describe('서브키워드 커버리지 게이트', () => {
 
   it('인물+이슈 조합은 패치 스킵 (defamation 가드 재사용)', () => {
     const content = makeContent();
-    const r = enforceSubKeywordCoverage(content, ['박지성 논란'], {});
+    const r = enforceSubKeywordCoverage(content, ['박지성 논란'], { allowHeadingPatch: true });
     expect(r.patchedCount).toBe(0);
     expect(r.items[0].skippedReason).toBe('person-issue-keyword');
   });
 
   it('최대 3개 제한 + 빈/짧은 키워드 무시', () => {
     const content = makeContent();
-    const r = enforceSubKeywordCoverage(content, ['가나다라1', '가나다라2', '가나다라3', '가나다라4', 'x', ''], {});
+    const r = enforceSubKeywordCoverage(content, ['가나다라1', '가나다라2', '가나다라3', '가나다라4', 'x', ''], { allowHeadingPatch: true });
     expect(r.items.length).toBe(3); // maxKeywords 기본 3
   });
 });
