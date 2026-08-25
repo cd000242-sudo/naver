@@ -318,6 +318,22 @@ ${briefOverlay}`;
     }
   }
 
+  // 2.87 [2026-08-26] 해시태그 전략 — 지금까지 아무 데도 없었다.
+  //   스키마에 자리 5개와 "개수를 채우지 마라" 한 줄이 전부였고, 어떻게 만들지는
+  //   아무도 말해주지 않았다. 실측한 유입 글들은 단일어 + 조합 롱테일 두 층을 쓰고
+  //   있었다(#김병지 + #김병지칸쿤 / #나는솔로33기영숙직업). 그 자리가 비어 있으면
+  //   검색어와 겹칠 면이 그만큼 줄어든다.
+  if (mode === 'seo' || mode === 'homefeed' || mode === 'mate' || mode === 'affiliate') {
+    const hashtagOverlay = loadPromptFile('shared/hashtag-strategy.prompt');
+    if (hashtagOverlay) {
+      composed = `${composed}
+
+${hashtagOverlay}`;
+    } else {
+      console.warn('[PromptLoader] hashtag-strategy.prompt load failed - hashtag strategy skipped');
+    }
+  }
+
   // 2.9 Human writing anti-pattern overlay.
   // Prevents "AI pretending to be human" regressions: repeated crutches, fake first-person,
   // and identical paragraph templates across SEO/Homefeed/Mate/Affiliate/Business modes.
