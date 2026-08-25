@@ -470,6 +470,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/prompts/shared/headings-seo.prompt',
   'src/prompts/shared/homefeed-90-quality.prompt',
   'src/prompts/shared/human-writing-anti-pattern.prompt',
+  'src/prompts/shared/issue-brief-structure.prompt',
   'src/prompts/shared/mate-90-quality.prompt',
   'src/prompts/shared/official-exposure-rubric.prompt',
   'src/prompts/shared/seo-90-quality.prompt',

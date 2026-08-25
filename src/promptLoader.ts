@@ -281,6 +281,28 @@ export function buildSystemPrompt(
     }
   }
 
+  // 2.84 [2026-08-26] SEO 브리핑 골격 — 사장님 실제 검색 유입 글 4편에서 추출.
+  //
+  // 그 글들은 앱이 아니라 LLM 챗봇으로 쓴 것인데 공통 골격이 뚜렷했다.
+  //   글 맨 앞 사실 요약 표 → 날짜 앵커 도입부 → 전개 순서 소제목(인용 활용)
+  //   → 중간 구조 표 → 시사점 마무리, 그리고 FAQ 없음.
+  // 우리 SEO 는 요약 표를 강제하지 않고 오히려 FAQ 3~6개를 강제해 정반대로 가고 있었다.
+  //
+  // 근거가 이슈형 글(연예·스포츠·시사)에서 나왔으므로 같은 카테고리에만 먼저 건다.
+  // 절차·비용 글까지 넓히는 것은 이 골격의 효과를 실측한 뒤 결정한다 — 근거 없이
+  // 전 카테고리에 밀면 무엇이 효과였는지 영영 못 가린다.
+  // 소제목 스펙(2.82) 뒤에 두어 전개 순서 규칙이 마지막 말을 갖게 한다.
+  if ((mode === 'seo' || mode === 'mate') && HOMEFEED_ISSUE_STORY_CATEGORIES.has(category)) {
+    const briefOverlay = loadPromptFile('shared/issue-brief-structure.prompt');
+    if (briefOverlay) {
+      composed = `${composed}
+
+${briefOverlay}`;
+    } else {
+      console.warn('[PromptLoader] issue-brief-structure.prompt load failed - brief skeleton skipped');
+    }
+  }
+
   // 2.85 [v2.11.135] Homefeed issue-story skeleton.
   // Real homefeed-exposed Mate posts (20-sample analysis) follow a story
   // shape — quote-hook titles, timeline body, 0~3 headings, ultra-short
