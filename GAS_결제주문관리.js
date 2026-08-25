@@ -86,7 +86,9 @@ function doPost(e) {
       case 'update-naver-accounts':
         return handleUpdateNaverAccounts(data);
 
-      // ✅ [2026-03-26] 무료 체험 사용자 관리
+      // ✅ 무료 체험 사용자 관리
+      case 'trial-verify':
+        return handleTrialVerify(data);
       case 'trial-activate':
         return handleTrialActivate(data);
       case 'trial-list':
@@ -742,8 +744,147 @@ function getTrialSheet() {
   return sheet;
 }
 
+// ── trial-verify: [인증하기]에서 전화번호 기준으로 체험 이력을 조회 ──
+// 이 단계는 조회만 한다. PC 식별자는 복사·재설치·공용 PC 등으로 바뀔 수 있으므로,
+// 정상 사용자의 기존 체험 여부는 전화번호로만 판별한다.
+/**
+ * [2026-08-25 사장님 지시] 한 PC 에는 한 번호만.
+ *
+ * 전화번호를 본인 확인 키로 바꾸면서 기기 조건이 빠졌고, 그 결과 같은 PC 에서
+ * 아무 닉네임·아무 번호를 새로 넣으면 체험이 계속 새로 열렸다(사장님 실측).
+ *
+ * 오탐 방지: deviceId 가 16자 미만이면 신뢰하지 않는다(앱 getDeviceId 와 같은 기준).
+ * 같은 번호가 같은 기기로 돌아오는 것은 막지 않는다 — 재설치·재인증은 정상이다.
+ * deviceId 는 sha256(platform-hostname-username) 이라 재설치해도 값이 같다.
+ */
+/**
+ * [2026-08-25 사장님 지시] 한 번호에는 한 이름만.
+ * 번호는 같은데 닉네임만 바꿔 다시 신청하는 경로를 막는다.
+ * 표기 흔들림(공백·대소문자)은 흡수하고, 이름이 빈 옛 행은 근거로 쓰지 않는다.
+ */
+function normalizeTrialName_(name) {
+  return String(name || '').replace(/\s+/g, '').toLowerCase().trim();
+}
+
+function maskTrialName_(name) {
+  var value = String(name || '').trim();
+  if (!value) return '***';
+  if (value.length === 1) return value + '**';
+  return value.slice(0, 1) + '*'.repeat(Math.max(2, value.length - 1));
+}
+
+function findTrialNameOwner_(allData, phone, nickname) {
+  var target = normalizeTrialName_(nickname);
+  if (!phone || !target) return null;
+
+  for (var i = 1; i < allData.length; i++) {
+    var rowPhone = String(allData[i][2] || '').trim();
+    if (!rowPhone || rowPhone !== phone) continue;
+
+    var rowName = String(allData[i][1] || '').trim();
+    if (!rowName || normalizeTrialName_(rowName) === target) continue;
+
+    return { name: rowName };
+  }
+  return null;
+}
+
+function trialNameTakenResponse_(owner) {
+  return ContentService.createTextOutput(JSON.stringify({
+    ok: false, nameTaken: true,
+    error: '이 번호로 이미 등록된 이름이 있습니다 (' + maskTrialName_(owner.name) + '). '
+      + '처음 등록한 이름으로 진행하시거나 관리자에게 문의하세요.'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function maskTrialPhone_(phone) {
+  var digits = String(phone || '').replace(/[^0-9]/g, '');
+  if (digits.length < 7) return '***';
+  return digits.slice(0, 3) + '****' + digits.slice(-4);
+}
+
+function findTrialDeviceOwner_(allData, deviceId, phone) {
+  var id = String(deviceId || '').trim();
+  if (id.length < 16) return null;
+
+  for (var i = 1; i < allData.length; i++) {
+    var rowDevice = String(allData[i][3] || '').trim();
+    if (!rowDevice || rowDevice !== id) continue;
+
+    var rowPhone = String(allData[i][2] || '').trim();
+    if (!rowPhone || rowPhone === phone) continue;
+
+    return { phone: rowPhone };
+  }
+  return null;
+}
+
+function trialDeviceTakenResponse_(owner) {
+  return ContentService.createTextOutput(JSON.stringify({
+    ok: false, deviceTaken: true,
+    error: '이 PC 에서는 이미 ' + maskTrialPhone_(owner.phone) + ' 번호로 무료 체험을 사용했습니다. '
+      + '그 번호로 진행하시거나 관리자에게 문의하세요.'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+function handleTrialVerify(data) {
+  var nickname = (data.nickname || '').trim();
+  var phone = (data.phone || '').trim().replace(/[-\s]/g, '');
+  var deviceId = (data.deviceId || '').trim();
+
+  if (!nickname || nickname.length < 2) {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '오픈채팅 닉네임을 2자 이상 정확하게 기재하세요.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  if (!phone || !/^01[0-9]{8,9}$/.test(phone)) {
+    return ContentService.createTextOutput(JSON.stringify({
+      ok: false, error: '올바른 전화번호를 입력하세요. (예: 01012345678)'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var sheet = getTrialSheet();
+  var allData = sheet.getDataRange().getValues();
+
+  // 차단은 우회되면 안 되므로 전화번호·기기 모두 교차 검사한다.
+  for (var i = 1; i < allData.length; i++) {
+    var isBlocked = String(allData[i][5]).toLowerCase() === 'true' || String(allData[i][5]) === 'Y';
+    if (!isBlocked) continue;
+
+    var rowPhone = String(allData[i][2] || '').trim();
+    var rowDeviceId = String(allData[i][3] || '').trim();
+    if ((phone && rowPhone === phone) || (deviceId && rowDeviceId === deviceId)) {
+      return ContentService.createTextOutput(JSON.stringify({
+        ok: false, blocked: true, error: '차단된 사용자입니다. 관리자에게 문의하세요.'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+
+  // 한 PC 에는 한 번호만. 같은 기기가 다른 번호로 이미 체험을 열었으면 거부한다.
+  var deviceOwner = findTrialDeviceOwner_(allData, deviceId, phone);
+  if (deviceOwner) return trialDeviceTakenResponse_(deviceOwner);
+
+  // 한 번호에는 한 이름만.
+  var nameOwner = findTrialNameOwner_(allData, phone, nickname);
+  if (nameOwner) return trialNameTakenResponse_(nameOwner);
+
+  // 그 위에서 기존 체험은 전화번호 하나에 하나만 연결한다.
+  for (var j = 1; j < allData.length; j++) {
+    var rowPhone = String(allData[j][2] || '').trim();
+    if (rowPhone === phone) {
+      return ContentService.createTextOutput(JSON.stringify({
+        ok: true, status: 'existing', registeredAt: String(allData[j][6] || '')
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+
+  return ContentService.createTextOutput(JSON.stringify({
+    ok: true, status: 'new'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
 // ── trial-activate: 앱에서 무료 체험 시 호출 ──
-// ✅ [2026-03-26 v2] 배치 setValue, deviceId/phone 교차 차단, TextFinder 최적화
+// 인증 UI가 전화번호 기반이므로 이메일은 구버전 데이터와의 호환용 선택값이다.
 function handleTrialActivate(data) {
   var email = (data.email || '').trim().toLowerCase();
   var nickname = (data.nickname || '').trim();
@@ -751,8 +892,7 @@ function handleTrialActivate(data) {
   var deviceId = data.deviceId || '';
   var appVersion = data.appVersion || '';
 
-  // ✅ 필수 입력 검증 강화: 하나라도 비면 거부
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return ContentService.createTextOutput(JSON.stringify({
       ok: false, error: '올바른 이메일을 입력하세요.'
     })).setMimeType(ContentService.MimeType.JSON);
@@ -781,7 +921,7 @@ function handleTrialActivate(data) {
     var rowPhone = String(allData[i][2]).trim();
     var rowDeviceId = String(allData[i][3]).trim();
 
-    if (rowEmail === email ||
+    if ((email && rowEmail && rowEmail === email) ||
         (deviceId && rowDeviceId && rowDeviceId === deviceId) ||
         (phone && rowPhone && rowPhone === phone)) {
       Logger.log('[TrialActivate] 차단 교차 감지: email=' + email + ' matched blocked row=' + rowEmail);
@@ -791,8 +931,15 @@ function handleTrialActivate(data) {
     }
   }
 
-  // ✅ 기존 사용자 찾기 (이메일 기준 — TextFinder 최적화)
-  var finder = sheet.getRange('A:A').createTextFinder(email).matchCase(false).matchEntireCell(true);
+  // verify 를 건너뛰고 activate 만 직접 부르는 경로도 같은 규칙으로 막는다.
+  var activateDeviceOwner = findTrialDeviceOwner_(allData, deviceId, phone);
+  if (activateDeviceOwner) return trialDeviceTakenResponse_(activateDeviceOwner);
+
+  var activateNameOwner = findTrialNameOwner_(allData, phone, nickname);
+  if (activateNameOwner) return trialNameTakenResponse_(activateNameOwner);
+
+  // 기존 체험은 이메일이 아닌 인증한 전화번호로 찾는다.
+  var finder = sheet.getRange('C:C').createTextFinder(phone).matchCase(false).matchEntireCell(true);
   var found = finder.findNext();
 
   if (found) {
@@ -806,9 +953,10 @@ function handleTrialActivate(data) {
     ]]);
     SpreadsheetApp.flush();
 
-    Logger.log('[TrialActivate] 기존 사용자 업데이트: ' + email + ', count=' + (count + 1));
+    Logger.log('[TrialActivate] 기존 사용자 업데이트: phone=' + phone + ', count=' + (count + 1));
     return ContentService.createTextOutput(JSON.stringify({
-      ok: true, message: 'existing', activations: count + 1
+      ok: true, message: 'existing', activations: count + 1,
+      registeredAt: String(rowData[6] || '')
     })).setMimeType(ContentService.MimeType.JSON);
   }
 
@@ -816,9 +964,10 @@ function handleTrialActivate(data) {
   sheet.appendRow([email, nickname, phone, deviceId, appVersion, 'false', now, now, 1]);
   SpreadsheetApp.flush();
 
-  Logger.log('[TrialActivate] 신규 사용자 등록: ' + email);
+  Logger.log('[TrialActivate] 신규 사용자 등록: phone=' + phone);
   return ContentService.createTextOutput(JSON.stringify({
-    ok: true, message: 'new', activations: 1
+    ok: true, message: 'new', activations: 1,
+    registeredAt: now
   })).setMimeType(ContentService.MimeType.JSON);
 }
 
