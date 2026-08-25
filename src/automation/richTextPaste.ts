@@ -1440,7 +1440,27 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
   // Stitch such rows back together — but keep a blank line that separates two
   // COMPLETE tables (next pipe-line followed by its own |---| separator).
   const stitched = (() => {
-    const srcLines = normalized.split('\n');
+    /*
+     * [2026-08-25 사용자 실측] 표의 마지막 행이 표 밖으로 새어 평문으로 발행됐다.
+     *
+     * 원인은 LLM 이 마지막 행과 뒤따르는 문장을 한 줄에 붙여 쓴 것이었다.
+     *   "| 주의 요소 | 해체·세척 가이드 미흡, ... 불가 | 종합하면 오아 메가에어라이트..."
+     * 아래 isRow 는 줄이 '|' 로 끝나야 행으로 보므로 이 줄은 행이 아니게 되고, 표 블록에
+     * 못 들어간 채 normalizeOrphanPipeLine 이 "주의 요소 — ..." 문장으로 눌러버렸다.
+     * 발행물에는 표 한 행이 통째로 빠지고 그 내용이 본문 문장으로 나온다.
+     *
+     * 그래서 붙어 있는 줄을 먼저 가른다. 행은 행대로 표에 들어가고, 뒤 문장은 빈 줄로
+     * 떼어 별도 문단이 된다 — 빈 줄이 없으면 표 블록에 흡수됐다가 파이프가 없어 사라진다.
+     */
+    const srcLines = normalized.split('\n').flatMap((line) => {
+      // 뒤 문장에 파이프가 없어야 한다. 이 조건이 없으면 정규식이 백트래킹해
+      // 정상 행("| 구분 | 내용 |")까지 첫 파이프에서 갈라버린다(작성 중 실측).
+      const m = line.match(/^([ \t]*\|.*\|)[ \t]*([^|\s][^|]*)$/);
+      if (!m) return [line];
+      const trailing = m[2].trim();
+      if (trailing.length < 2) return [line];
+      return [m[1], '', trailing];
+    });
     const isRow = (s: string) => /^[ \t]*\|.*\|[ \t]*$/.test(s);
     const isSep = (s: string) => /^[ \t]*\|[ \t:|-]+\|[ \t]*$/.test(s) && s.includes('-');
     const out: string[] = [];
