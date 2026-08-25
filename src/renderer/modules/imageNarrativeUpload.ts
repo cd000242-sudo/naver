@@ -57,6 +57,33 @@ export function getUploadedImages(): readonly UploadedImage[] {
   return [..._uploadImages];
 }
 
+/**
+ * [2026-08-25] 썸네일 재배치 — 화면 순서가 곧 사진 번호다.
+ *
+ * 메모("1번은 저녁 식사")는 언제나 눈에 보이는 번호를 가리키므로, 사용자가 순서를 바꾸면
+ * Vision 에 넘기는 번호도 같은 배열을 봐야 한다. 원본은 건드리지 않고 새 배열을 돌려준다 —
+ * 렌더러 상태를 제자리에서 뒤집으면 되돌리기·재렌더가 어긋난다.
+ *
+ * 인덱스가 범위를 벗어나면 아무것도 하지 않고 현재 순서를 그대로 돌려준다. 드래그가
+ * 빗나갔을 때 사진이 사라지거나 엉뚱한 자리로 튀는 것보다 낫다.
+ */
+export function reorderUploadedImages(
+  images: readonly UploadedImage[],
+  fromIndex: number,
+  toIndex: number,
+): UploadedImage[] {
+  const next = [...images];
+  const lastIndex = next.length - 1;
+  const isValid = (index: number): boolean =>
+    Number.isInteger(index) && index >= 0 && index <= lastIndex;
+
+  if (!isValid(fromIndex) || !isValid(toIndex) || fromIndex === toIndex) return next;
+
+  const [moved] = next.splice(fromIndex, 1);
+  next.splice(toIndex, 0, moved);
+  return next;
+}
+
 /** Clears all uploaded images and resets the thumbnail grid. */
 export function clearUploadedImages(): void {
   _uploadImages.forEach((img) => URL.revokeObjectURL(img.previewUrl));

@@ -56,22 +56,26 @@ export function formatImageNarrativeContext(
     '=== 사용자 제공 사진 참고 정보 ===',
     ...lines,
     '위 정보는 사진 해석을 돕는 참고 배경입니다. 사진과 맞는 범위에서만 반영하고, 새로운 사실을 지어내지 마세요.',
-    '"N번" / "N~M번"처럼 번호가 언급되면 사용자가 올린 사진의 업로드 순서 번호를 뜻합니다. 해당 번호 묶음의 상황 설명을 그 사진들의 해석에 우선 적용하세요.',
+    '"N번" / "N~M번"처럼 번호가 언급되면 현재 화면에 표시된 사진 번호를 뜻합니다. 해당 번호 묶음의 상황 설명을 그 사진들의 해석에 우선 적용하세요.',
   ].join('\n');
 }
 
 /**
  * [2026-08-16] Per-image ordinal injection for direct uploads: the user numbers
  * situations in the notes ("1~4번은 호텔"), so each Vision call must know which
- * upload-order position the current photo holds. Appending to notes keeps every
- * adapter (gemini/openai/claude/agent) working without prompt-plumbing changes.
+ * position the current photo holds. Appending to notes keeps every adapter
+ * (gemini/openai/claude/agent) working without prompt-plumbing changes.
+ *
+ * [2026-08-25] 기준을 "업로드 순서"에서 "현재 화면 순서"로 바꿨다. 사용자가 썸네일을
+ * 드래그해 재배치하면 화면의 1번과 업로드 1번이 어긋나는데, 메모("1번은 저녁 식사")는
+ * 언제나 눈에 보이는 번호를 가리킨다. 두 기준이 갈리면 엉뚱한 사진에 설명이 붙는다.
  */
 export function withPhotoOrdinal(
   context: ImageNarrativeContext | undefined,
   ordinal: number,
   total: number,
 ): ImageNarrativeContext {
-  const marker = `[현재 사진 = 업로드 순서 ${ordinal}번 / 전체 ${total}장]`;
+  const marker = `[현재 사진 = 현재 화면 순서 ${ordinal}번 / 전체 ${total}장]`;
   const notes = context?.notes ? `${context.notes} ${marker}` : marker;
   return { ...(context ?? {}), notes };
 }
