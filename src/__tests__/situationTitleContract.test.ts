@@ -15,16 +15,26 @@ function read(rel: string): string {
  * 요즘은 상황이나 실제 경험이 들어간 제목이 먹히는 시대야. 쇼핑커넥트모드도 마찬가지."
  */
 describe('situation title contract', () => {
-  it('세 모드 모두 공식 폐기 선언 + 상황 조각을 필수로 요구한다', () => {
+  it('모든 모드가 옛 공식을 폐기하고 필수 조각을 요구한다', () => {
+    /*
+     * [2026-08-25 사장님 결정으로 갱신] 쇼핑만 요구 조각이 갈렸다.
+     *   "쇼핑모드는 SEO가 생명입니다. 홈판용 절대 아니에요."
+     * 그래서 쇼핑은 상황 묘사 대신 검색되는 '구매 축'을 필수로 요구한다.
+     * 나머지 모드는 상황 조각 그대로다. 공식 폐기 선언은 전 모드 공통으로 남는다.
+     */
     for (const mode of ['seo', 'homefeed', 'affiliate', 'other'] as const) {
       const c = buildSituationTitleContract(mode, {});
       expect(c, mode).toContain('제목 공식은 버린다');
-      expect(c, mode).toContain('[상황 조각 — 필수]');
-      // 옛 공식 계열을 이름으로 금지
       expect(c, mode).toContain('숫자 리스트형');
-      expect(c, mode).toContain('비밀 공개형');
       expect(c, mode).toContain('총정리형');
+      expect(c, mode).toContain(mode === 'affiliate' ? '[구매 축 — 필수]' : '[상황 조각 — 필수]');
     }
+  });
+
+  it('쇼핑은 상황 조각을 요구하지 않는다 (검색 우선)', () => {
+    const shopping = buildSituationTitleContract('affiliate', {});
+    expect(shopping).not.toContain('[상황 조각 — 필수]');
+    expect(shopping).toContain('검색으로 먹고산다');
   });
 
   /**
@@ -62,11 +72,22 @@ describe('situation title contract', () => {
     expect(c).not.toContain('메인 키워드는 제목 맨 앞에 그대로 둔다');
   });
 
-  it('쇼핑은 구매 갈림길을 요구하고 TOP5·한정·보장 문형을 금지한다', () => {
+  it('쇼핑은 검색 키워드 조합을 요구하고 TOP5·한정·보장 문형을 금지한다', () => {
     const c = buildSituationTitleContract('affiliate', {});
-    expect(c).toContain('구매 직전에 갈리는 지점');
+    // 사장님 요청: 여러 키워드를 조합해 SEO 에 유리한 제목
+    expect(c).toContain('[키워드 조합 — 필수]');
+    expect(c).toContain('브랜드 + 모델명');
+    expect(c).toContain('최소 둘은 제목에 그대로 보여야');
+    // 금지선은 그대로 유지된다
     expect(c).toContain('추천 TOP5');
     expect(c).toContain('품절 임박');
+  });
+
+  it('쇼핑 키워드 조합이 단어 나열로 새지 않게 막는다', () => {
+    const c = buildSituationTitleContract('affiliate', {});
+    expect(c).toContain('단어를 늘어놓으라는 뜻이 아니다');
+    expect(c).toContain('[중복 금지]');
+    expect(c).toContain('자료에 없는 용도·대상·공간을 지어내지 마라');
   });
 
   it('경험형 제목은 경험 메모가 있을 때만 열린다 (날조 차단)', () => {
