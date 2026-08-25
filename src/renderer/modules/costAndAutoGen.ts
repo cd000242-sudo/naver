@@ -772,7 +772,29 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
   }
   provider = String(options?.provider || provider || '').trim();
   if (!options.imageModel && provider === 'openai-image') {
+    /*
+     * [2026-08-25 사용자 실측] "GPT Image 2 를 골랐는데도 GPT Image 2 를 선택하라고 한다."
+     *
+     * 저장소가 갈려 있었다. 이미지 관리 탭의 모델 라디오는 config 에 저장하는데
+     * (imageManagementTab: saveConfig({ openaiImageModel })), 여기서는 localStorage 만
+     * 읽었다. 그래서 사용자가 화면에서 고른 값이 이 경로에 도달하지 못했고,
+     * 쇼핑커넥트 검사가 빈 모델을 보고 "gpt-image-2 를 선택해주세요"로 막았다.
+     *
+     * localStorage 를 먼저 보고(기존 동작 보존), 비어 있으면 config 로 내려간다.
+     */
     options.imageModel = String(rawPipeline.openaiImageModel || '').trim();
+    if (!options.imageModel) {
+      try {
+        const cfg = await (window as any).api?.getConfig?.();
+        const fromConfig = String(cfg?.openaiImageModel || '').trim();
+        if (fromConfig) {
+          options.imageModel = fromConfig;
+          console.log(`[Renderer] 🦆 OpenAI 이미지 모델 config 폴백: "${fromConfig}"`);
+        }
+      } catch (e) {
+        console.warn('[Renderer] OpenAI 이미지 모델 config 조회 실패:', e);
+      }
+    }
   }
   if (!options.imageStyle) {
     const savedStyle = rawPipeline.imageStyle;

@@ -668,6 +668,8 @@ export async function initImageManagementTab(): Promise<void> {
         const qr = document.querySelector(`input[name="openai-image-quality"][value="${savedQuality}"]`) as HTMLInputElement | null;
         if (mr) mr.checked = true;
         if (qr) qr.checked = true;
+        // 기존 사용자: config 에만 있던 값을 localStorage 로 끌어올린다.
+        try { localStorage.setItem('openaiImageModel', savedModel); } catch { /* 무시 */ }
       }
     } catch { /* config 미존재 — HTML 기본값 유지 */ }
     refreshOpenAICost();
@@ -679,6 +681,15 @@ export async function initImageManagementTab(): Promise<void> {
         const model = getOpenAISel('openai-image-model', 'gpt-image-1.5');
         const quality = getOpenAISel('openai-image-quality', 'medium');
         await (window as any).api?.saveConfig?.({ ...cfg, openaiImageModel: model, openaiImageQuality: quality });
+        /*
+         * [2026-08-25] localStorage 에도 같이 쓴다.
+         *
+         * 생성 경로(costAndAutoGen)는 파이프라인 설정을 localStorage 에서 읽는다.
+         * config 에만 저장하면 화면에서 고른 모델이 그쪽에 도달하지 못해
+         * 쇼핑커넥트가 "gpt-image-2 를 선택해주세요"로 막는다(사용자 실측).
+         * 읽는 쪽에 config 폴백을 뒀지만, 두 저장소를 함께 맞춰 두는 편이 안전하다.
+         */
+        try { localStorage.setItem('openaiImageModel', model); } catch { /* 저장 실패는 무시 */ }
         appendLog(`🦆 OpenAI 이미지 설정 저장: ${model} / ${quality}`);
       } catch (e: any) {
         console.warn('[OpenAIImageSettings] 설정 저장 실패:', e);
