@@ -103,11 +103,29 @@ async function runSearch(): Promise<void> {
 
   try {
     const api = (window as any).electronAPI;
-    const response = await api?.searchPlaces?.(query);
-    if (!response?.success) {
+    // [2026-08-25] "알 수 없는 오류"의 정체를 가르는 세 갈래.
+    //   기존에는 셋을 한 문구로 뭉개서, 화면만 보고는 키 문제인지 배선 문제인지
+    //   구분할 수 없었다(사용자 실측 스크린샷).
+    if (typeof api?.searchPlaces !== 'function') {
       if (results) {
         results.innerHTML =
-          `<div style="font-size: 0.82rem; color: var(--danger, #d9534f);">검색 실패: ${escapeHtml(response?.message || '알 수 없는 오류')}</div>`;
+          '<div style="font-size: 0.82rem; color: var(--danger, #d9534f);">검색 기능이 이 버전에 없습니다 — 앱을 최신 버전으로 업데이트한 뒤 다시 시도해주세요.</div>';
+      }
+      return;
+    }
+    const response = await api.searchPlaces(query);
+    if (!response) {
+      if (results) {
+        results.innerHTML =
+          '<div style="font-size: 0.82rem; color: var(--danger, #d9534f);">검색 응답이 오지 않았습니다 — 앱을 재시작한 뒤 다시 시도해주세요.</div>';
+      }
+      return;
+    }
+    if (!response.success) {
+      if (results) {
+        const detail = String(response.message || '').trim() || '원인 미상 (앱 로그를 확인해주세요)';
+        results.innerHTML =
+          `<div style="font-size: 0.82rem; color: var(--danger, #d9534f);">검색 실패: ${escapeHtml(detail)}</div>`;
       }
       return;
     }

@@ -5,7 +5,8 @@
 // 사용자가 화면에서 업체명 + 주소를 보고 하나 고르면, 발행은 그 값만 쓴다.
 
 import { ipcMain } from 'electron';
-import { callNaverSearch } from '../../naver/index.js';
+import { callNaverSearch, resolveAllNaverCredentials } from '../../naver/index.js';
+import { loadConfig } from '../../configManager.js';
 
 export interface PlaceSearchItem {
   readonly name: string;
@@ -65,16 +66,30 @@ export function registerPlaceSearchHandlers(): void {
     }
 
     try {
+      // [2026-08-25] 설정을 직접 읽어 넘긴다.
+      //   이 핸들러만 payload 없이 호출해서, 자격증명 해석이 process.env 에만 의존했다.
+      //   실측: payload 없이 = 자격증명 0개 -> status 412, payload 전달 = 200 OK.
+      //   applyConfigToEnv 는 legacy 키만 env 로 올리므로, HUB 키만 가진 사용자는
+      //   env 경로로는 영원히 검색이 안 된다. 설정을 직접 넘기면 두 모드 모두 산다.
+      const config = await loadConfig().catch(() => null);
+      const credentials = resolveAllNaverCredentials((config ?? undefined) as any);
+
       const result = await callNaverSearch<{ items?: NaverLocalItem[] }>('local', {
         query: keyword,
         display: 5,
+      }, {
+        credentials: credentials.length > 0 ? credentials : undefined,
+        maxAttempts: Math.max(2, credentials.length),
+        rotateOnQuota: true,
       });
 
       if (!result.ok || !result.data) {
-        return {
-          success: false,
-          message: result.error || `네이버 지역검색 실패 (status ${result.status})`,
-        };
+        // 원인을 삼키지 않는다. 이 메시지가 비면 화면에 "알 수 없는 오류"만 남는다.
+        const detail = result.error
+          || `네이버 지역검색 실패 (status ${result.status}, 시도 ${result.attempts}회`
+            + `${result.mode ? `, mode ${result.mode}` : ''})`;
+        console.warn(`[IPC] place:search 실패 — ${detail}`);
+        return { success: false, message: detail };
       }
 
       const items = toPlaceSearchItems(result.data.items || []);
@@ -84,7 +99,13 @@ export function registerPlaceSearchHandlers(): void {
       return { success: true, items };
     } catch (error) {
       console.error('[IPC] place:search 실패:', error);
-      return { success: false, message: (error as Error).message };
+      const raw = (error as Error)?.message;
+      return {
+        success: false,
+        message: raw && raw.trim()
+          ? raw
+          : `장소 검색 중 예기치 못한 오류 (${(error as Error)?.name || typeof error})`,
+      };
     }
   });
 
