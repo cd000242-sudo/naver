@@ -281,6 +281,22 @@ export function buildSystemPrompt(
     }
   }
 
+  // 2.83 [2026-08-26] 사실 요약 표 + 날짜 앵커 — 주제를 가리지 않는다.
+  //   실측한 유입 글은 예외 없이 본문 전에 사실을 먼저 줬다. 처음엔 이슈형에만 걸었는데
+  //   사장님 지적대로 절차·비용 글에 오히려 더 맞는다 — 신청 조건·요금·기준일은 독자가
+  //   가장 먼저 찾는 값이고, 정책은 바뀌므로 "언제 기준인지"가 그 자체로 정보다.
+  //   전개 순서 소제목과 FAQ 배제만 이슈형에 남기고, 이 둘은 전 카테고리로 넓힌다.
+  if (mode === 'seo' || mode === 'mate') {
+    const briefHeader = loadPromptFile('shared/fact-brief-header.prompt');
+    if (briefHeader) {
+      composed = `${composed}
+
+${briefHeader}`;
+    } else {
+      console.warn('[PromptLoader] fact-brief-header.prompt load failed - brief header skipped');
+    }
+  }
+
   // 2.84 [2026-08-26] SEO 브리핑 골격 — 사장님 실제 검색 유입 글 4편에서 추출.
   //
   // 그 글들은 앱이 아니라 LLM 챗봇으로 쓴 것인데 공통 골격이 뚜렷했다.

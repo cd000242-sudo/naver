@@ -58,7 +58,7 @@ describe('배선 — 콘텐츠 모드 전반', () => {
 
   it('이슈형 SEO 는 브리핑 골격과 해시태그 전략을 함께 받는다', () => {
     const prompt = buildSystemPrompt('seo', 'entertainment');
-    expect(prompt).toContain('[IB-1]');
+    expect(prompt).toContain('[IB-3]');   // 이슈 골격 (요약 표는 [BRIEF-HEAD] 로 이사)
     expect(prompt).toContain('[HT-1]');
   });
 
