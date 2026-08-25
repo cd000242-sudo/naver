@@ -195,6 +195,47 @@ function sliceBodyByExistingHeadingTitles(
   return { introduction: body.slice(0, positions[0].at).trim(), sections };
 }
 
+/**
+ * [2026-08-25] 추출이 일부만 잡았을 때, 아는 제목으로 본문을 잘라 구조를 되살린다.
+ *
+ * 되살린 결과가 추출보다 많을 때만 채택한다 — 같거나 적으면 추측을 뒤집을 이유가 없다.
+ * 제목이 본문에 순서대로 전부 있고 각 구간에 내용이 있을 때만 성립하므로, 근거 없이
+ * 구조를 만들어내지 않는다.
+ */
+function recoverStructureFromKnownTitles(
+  body: string,
+  extractedCount: number,
+  titleSets: ReadonlyArray<readonly string[]>,
+  existingHeadings: readonly any[],
+): SemiAutoPublishStructure | null {
+  for (const titles of titleSets) {
+    if (titles.length <= extractedCount) continue;
+
+    const sliced = sliceBodyByExistingHeadingTitles(body, titles);
+    if (!sliced) continue;
+    if (!sliced.sections.every((section) => section.content.length > 0)) continue;
+
+    return {
+      introduction: sliced.introduction,
+      headings: sliced.sections.map((section) => {
+        const previous = existingHeadings.find(
+          (heading) => String(heading?.title || '').trim() === section.title,
+        );
+        return {
+          ...(previous || {}),
+          title: section.title,
+          content: section.content,
+          prompt: String(previous?.prompt || section.title),
+          source: String(previous?.source || 'publish:known-heading-recovery'),
+        };
+      }),
+      strategy: 'body-sections',
+      orderLocked: true,
+    };
+  }
+  return null;
+}
+
 export function resolveSemiAutoPublishStructure(
   body: string,
   existingHeadings: readonly any[] = [],
@@ -203,7 +244,34 @@ export function resolveSemiAutoPublishStructure(
   const normalizedBody = String(body || '').replace(/\r\n/g, '\n').trim();
   const extracted = extractSemiAutoDocumentFromBody(normalizedBody);
 
+  const knownExistingTitles = existingHeadings
+    .map((heading) => String(heading?.title || '').trim())
+    .filter((title) => title.length > 0);
+  const knownImageTitles = (options.imageHeadingTitles || [])
+    .map((title) => String(title || '').trim())
+    .filter((title) => title.length > 0);
+
   if (extracted.headings.length > 0) {
+    /*
+     * [2026-08-25 사용자 실측] 소제목 여러 개짜리 글을 발행했더니 일부만 살아남고,
+     * 사라진 소제목에 걸려 있던 이미지가 전부 글 끝으로 쏠린 채 삽입되지 않았다.
+     *
+     * 아래 복구 사다리(기존 소제목 슬라이스 / 이미지 소제목 슬라이스)는 추출이 0개일 때만
+     * 돌았다. 추출 휴리스틱은 34자를 넘고 특정 어미로 끝나지 않는 제목을 조용히 버리므로
+     * "일부만 잡히는" 경우가 오히려 흔하다. 하나라도 잡히면 그대로 확정해 버려서 나머지
+     * 소제목과 그 이미지 슬롯이 통째로 사라졌다.
+     *
+     * 추출은 추측이고 기존/이미지 소제목은 증거다. 증거가 더 많고 본문에서 순서대로 전부
+     * 확인되면 증거를 쓴다. 확인되지 않으면 추측을 그대로 둔다(기존 동작 유지).
+     */
+    const recovered = recoverStructureFromKnownTitles(
+      normalizedBody,
+      extracted.headings.length,
+      [knownExistingTitles, knownImageTitles],
+      existingHeadings,
+    );
+    if (recovered) return recovered;
+
     return {
       introduction: extracted.introduction,
       headings: extracted.headings.map((heading) => ({ ...heading })),

@@ -66,6 +66,7 @@ import { tryAcquirePipelineRun, releasePipelineRun } from './utils/pipelineRunCo
 import { escapeHtml, removeMarkdownBold } from './utils/htmlUtils.js';
 import {
   extractSemiAutoDocumentFromBody,
+  resolveSemiAutoPublishStructure,
   extractSemiAutoHeadingsFromBody,
   isCurrentSemiAutoPasteRevision,
 } from './utils/semiAutoHeadingExtractor.js';
@@ -4277,6 +4278,19 @@ async function initUnifiedTab(): Promise<void> {
     }, 450);
   }
 
+  /** 이미지가 걸려 있는 소제목 제목 — 그 소제목이 실재한다는 증거다. */
+  function readSemiAutoImageHeadingTitles(): string[] {
+    try {
+      const raw = (window as any).__imageManagerHeadings || (window as any).headingImages || [];
+      const titles = (Array.isArray(raw) ? raw : [])
+        .map((entry: any) => String(entry?.heading || entry?.title || '').trim())
+        .filter((title: string) => title.length > 0);
+      return Array.from(new Set(titles));
+    } catch {
+      return [];
+    }
+  }
+
   function _syncSemiAutoManualHeadings(sc: any, body: string): void {
     if (!sc || !body || body.trim().length < 20) return;
     const extractedDocument = extractSemiAutoDocumentFromBody(body);
@@ -4307,8 +4321,22 @@ async function initUnifiedTab(): Promise<void> {
       sc._manualStructureStrategy = 'body-sections';
       return;
     }
-    sc.headings = extracted;
-    sc.introduction = extractedDocument.introduction;
+    /*
+     * [2026-08-25] 추출 결과로 기존 소제목을 통째로 덮지 않는다.
+     *
+     * 추출 휴리스틱은 34자를 넘고 특정 어미로 끝나지 않는 제목을 조용히 버린다. 여기서
+     * 그대로 덮으면 사용자가 만들어 둔 소제목 일부와 거기 걸린 이미지 슬롯이 사라진다
+     * (실측: 소제목 여러 개 중 일부만 남고 이미지가 전부 글 끝으로 쏠림).
+     * 해석기는 아는 제목이 본문에 순서대로 다 있으면 그것으로 되살리고, 근거가 없으면
+     * 추출 결과를 그대로 쓴다.
+     */
+    const resolved = resolveSemiAutoPublishStructure(body, sc.headings || [], {
+      bodyIsAuthoritative: true,
+      existingIntroduction: sc.introduction || '',
+      imageHeadingTitles: readSemiAutoImageHeadingTitles(),
+    });
+    sc.headings = resolved.headings.length > 0 ? resolved.headings : extracted;
+    sc.introduction = resolved.headings.length > 0 ? resolved.introduction : extractedDocument.introduction;
     sc._manualSectionOrderLocked = true;
     sc._manualStructureStrategy = 'body-sections';
     _scheduleSemiAutoHeadingAnalysis(sc); // introduction/썸네일 세팅은 여기 안에서 처리(양 경로 공유)
