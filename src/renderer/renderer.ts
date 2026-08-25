@@ -343,7 +343,7 @@ initModalBackdropClickGuard();
 // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode modules
 import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 // [v2.11.206] 장소(지도) 미리 확정 UI
-import { initPlacePicker, readPickedPlace } from './modules/placePicker.js';
+import { initPlacePicker, readPickedPlace, readPickedPlaces } from './modules/placePicker.js';
 // ✅ [SPEC-DROPSHOT-2026] 이미지 관리 → 🎨 이미지 생성 서브탭 (멀티엔진 대량 생성 스튜디오)
 import { initImageGenStudio } from './modules/imageGenStudio.js';
 // ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 로그인/확인 UI (엔진 선택 시 노출)
@@ -10771,6 +10771,7 @@ initImageNarrativeMode();
 // [v2.11.206] 장소(지도) 미리 확정 — 발행 payload 빌더가 window에서 읽어간다.
 initPlacePicker();
 (window as any).readPickedPlace = readPickedPlace;
+(window as any).readPickedPlaces = readPickedPlaces;
 // ✅ [SPEC-DROPSHOT-2026] 이미지 생성 스튜디오 서브탭 초기화
 initImageGenStudio();
 // ✅ [SPEC-DROPSHOT-2026 2단계] 이미지 관리 탭 엔진 셀렉터 — dropshot 선택 시 로그인/확인 노출

@@ -86,6 +86,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/manualLoginRecoveryPolicy.ts',
   'src/automation/naverImagePolicy.ts',
   'src/automation/placeHelpers.ts',
+  'src/automation/placePlacementPlan.ts',
   'src/automation/postPublishReviewPlan.ts',
   'src/automation/postRunBrowserPolicy.ts',
   'src/automation/postRunPageHealthPolicy.ts',

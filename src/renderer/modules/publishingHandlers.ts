@@ -681,7 +681,9 @@ export async function handleFullAutoPublish(): Promise<void> {
     // ✅ CTA 위치 고정
     const ctaPosition = (document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value || 'bottom';
     // [v2.11.206] 사진 모드에서 미리 확정해 둔 장소 (안 골랐으면 null)
-    const pickedPlaceForPublish = (window as any).readPickedPlace?.() || null;
+    const pickedPlacesForPublish: Array<{ name: string; address?: string; position?: string }> =
+    (window as any).readPickedPlaces?.() || [];
+  const pickedPlaceForPublish = pickedPlacesForPublish[0] || null;
     const selectedPreviousPost = readSelectedPreviousPostForPublish(
       resolvedContentModeForPublish,
       UnifiedDOMCache.getRealCategoryName?.() || UnifiedDOMCache.getRealCategory?.()
@@ -732,7 +734,8 @@ export async function handleFullAutoPublish(): Promise<void> {
       // ✅ [v2.11.206] 앱에서 미리 확정한 장소 — 안 골랐으면 전부 빈 값이라 삽입 자체가 없다.
       placeName: pickedPlaceForPublish?.name || '',
       placeAddress: pickedPlaceForPublish?.address || '',
-      placePosition: pickedPlaceForPublish?.position || 'bottom',
+      placePosition: pickedPlaceForPublish?.position || 'auto',
+      places: pickedPlacesForPublish,
       ctaType: linkPreviousPostChecked || selectedPreviousPost.url ? 'previous-post' : (ctasUi.length > 0 || finalCtaLink ? 'custom' : undefined),
       ctaUrl: selectedPreviousPost.url || finalCtaLink || undefined,
       previousPostTitle: selectedPreviousPost.title || undefined,
@@ -2495,7 +2498,9 @@ export async function handleSemiAutoPublish(): Promise<any> {
   // ✅ CTA 위치 고정
   const ctaPosition = (document.getElementById('unified-cta-position') as HTMLSelectElement | null)?.value || 'bottom';
   // [v2.11.206] 사진 모드에서 미리 확정해 둔 장소 (안 골랐으면 null)
-  const pickedPlaceForPublish = (window as any).readPickedPlace?.() || null;
+  const pickedPlacesForPublish: Array<{ name: string; address?: string; position?: string }> =
+    (window as any).readPickedPlaces?.() || [];
+  const pickedPlaceForPublish = pickedPlacesForPublish[0] || null;
   const semiAutoAffiliateLink = resolveAffiliateLink(
     (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || undefined,
     (document.querySelector('.unified-url-input') as HTMLInputElement)?.value?.trim()
@@ -2554,7 +2559,8 @@ export async function handleSemiAutoPublish(): Promise<any> {
     // ✅ [v2.11.206] 앱에서 미리 확정한 장소 — 안 골랐으면 전부 빈 값이라 삽입 자체가 없다.
     placeName: pickedPlaceForPublish?.name || '',
     placeAddress: pickedPlaceForPublish?.address || '',
-    placePosition: pickedPlaceForPublish?.position || 'bottom',
+    placePosition: pickedPlaceForPublish?.position || 'auto',
+    places: pickedPlacesForPublish,
     ctaType: linkPreviousPostChecked || selectedPreviousPost.url ? 'previous-post' : (ctasUi.length > 0 || finalCtaLink ? 'custom' : undefined),
     ctaUrl: selectedPreviousPost.url || finalCtaLink || undefined,
     previousPostTitle: selectedPreviousPost.title || undefined,

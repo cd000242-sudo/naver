@@ -36,11 +36,16 @@ import {
   getExpectedLinkCardMin,
   planEditorTail,
   selectSectionCtas,
-  shouldInsertPlaceAtHeading,
-  shouldInsertPlaceAtTail,
 } from './editorTailPlan.js';
 // [v2.11.206] 장소(지도) 블록 삽입 — 앱에서 확정한 업체명/주소로만 동작한다.
 import { insertPlaceBlock } from './placeHelpers.js';
+// [2026-08-25] 여러 장소를 어느 소제목 아래 넣을지 정하는 계획기(순수 함수).
+import {
+  placementsForHeading,
+  placementsForTail,
+  planPlacePlacements,
+  type PlacePlacement,
+} from './placePlacementPlan.js';
 import {
   buildExpectedOrderAnchors,
   countExpectedArticleTables,
@@ -888,6 +893,33 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     // 2. 서론(Introduction) 작성
     const headings = structured.headings || [];
     const bodyText = structured.bodyPlain || '';
+
+    /*
+     * [2026-08-25] 장소(지도) 배치 계획.
+     *
+     * 풀오토는 설정 시점에 소제목을 모르므로 사용자가 번호를 고를 수 없다. 여기서는
+     * 소제목이 이미 확정돼 있으니, '자동'인 장소를 본문이 실제로 언급한 소제목 아래로
+     * 보낸다(언급이 없으면 글 맨 끝). 근거 없이 아무 자리에나 꽂지 않는다.
+     *
+     * places 가 없는 구버전 payload 는 placeName/Address/Position 한 곳으로 취급한다.
+     */
+    const placeRequests = Array.isArray((resolved as any).places) && (resolved as any).places.length > 0
+      ? (resolved as any).places
+      : (resolved.placeName
+        ? [{ name: resolved.placeName, address: resolved.placeAddress, position: resolved.placePosition }]
+        : []);
+    const placePlan: PlacePlacement[] = planPlacePlacements(
+      placeRequests,
+      headings.map((h: any) => ({ title: h?.title || '', body: h?.content || '' })),
+    );
+    if (placePlan.length > 0) {
+      self.log(
+        `🗺️ [장소] ${placePlan.length}곳 배치 계획: `
+        + placePlan
+          .map((p) => `"${p.place.name}" → ${p.headingNumber === 0 ? '맨 끝' : `${p.headingNumber}번 소제목`}(${p.reason})`)
+          .join(', '),
+      );
+    }
     // [2026-08-23] 이미지가 통째로 빠진 채 발행된 사고를 사후에 추적할 수 있어야 한다.
     //   지금까지 이 값들은 렌더러 console 에만 있어서 로그 파일에 아무 흔적이 없었다.
     self.log(
@@ -2290,17 +2322,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
         // d-2) [v2.11.206] 장소 블록 — 앱에서 미리 확정해 둔 가게를 이 소제목 아래 삽입.
         //   실패해도 발행은 그대로 간다(insertPlaceBlock은 throw 하지 않는다).
-        if (shouldInsertPlaceAtHeading(resolved.placeName, resolved.placePosition, i + 1)) {
-          self.log(`   → 장소 삽입 중... (${i + 1}번 소제목 아래, "${resolved.placeName}")`);
-          // 자리를 찾아 시도했다는 표시 — 꼬리에서 중복 삽입하지 않기 위해.
-          //   실패(주소 불일치 등)해도 표시한다. 꼬리에서 재시도해도 같은 이유로 또 실패한다.
-          self.__placeHandled = true;
+        const placesHere = placementsForHeading(placePlan, i + 1);
+        for (const placement of placesHere) {
+          self.log(`   → 장소 삽입 중... (${i + 1}번 소제목 아래, "${placement.place.name}")`);
           await page.keyboard.press('Enter');
           await self.delay(self.DELAYS.MEDIUM);
           const placeFrame = (await self.getAttachedFrame()) || frame;
           await insertPlaceBlock(self, page, placeFrame, {
-            name: resolved.placeName,
-            address: resolved.placeAddress,
+            name: placement.place.name,
+            address: placement.place.address,
           });
           await self.delay(self.DELAYS.MEDIUM);
         }
@@ -2661,24 +2691,28 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
     // [v2.11.206] 장소 위치가 'bottom'이면 해시태그 바로 앞에 넣는다 — 맛집/여행 글의
     //   관례적 위치. 소제목 위치를 고른 경우엔 섹션 루프에서 이미 들어갔으므로 건너뛴다.
-    if (shouldInsertPlaceAtTail(resolved.placeName, self.__placeHandled === true)) {
+    const tailPlaces = placementsForTail(placePlan);
+    if (tailPlaces.length > 0) {
       const placePage = self.ensurePage();
       const placeFrame = await self.getAttachedFrame();
       if (placeFrame) {
-        const askedHeading = String(resolved.placePosition || '').startsWith('heading-');
-        if (askedHeading) {
-          self.log(`   ℹ️ [장소] 지정한 위치(${resolved.placePosition})에 해당하는 소제목이 없어 본문 끝에 넣습니다.`);
-        }
-        self.log(`   → 장소 삽입 중... (본문 맨 끝, "${resolved.placeName}")`);
         // 링크 카드 삽입으로 캐럿이 본문 밖에 있을 수 있다 — CTA 꼬리와 같은 복구 사다리.
         await ensureTailTypingReady(placePage, placeFrame, (m: string) => self.log(m)).catch(() => undefined);
-        await placePage.keyboard.press('Enter');
-        await self.delay(self.DELAYS.MEDIUM);
-        await insertPlaceBlock(self, placePage, placeFrame, {
-          name: resolved.placeName,
-          address: resolved.placeAddress,
-        });
-        await self.delay(self.DELAYS.MEDIUM);
+        for (const placement of tailPlaces) {
+          if (placement.reason === 'heading-missing') {
+            self.log(`   ℹ️ [장소] 지정한 위치(${placement.place.position})에 해당하는 소제목이 없어 본문 끝에 넣습니다.`);
+          } else if (placement.reason === 'no-evidence') {
+            self.log(`   ℹ️ [장소] 본문이 "${placement.place.name}"를 언급하지 않아 본문 끝에 넣습니다.`);
+          }
+          self.log(`   → 장소 삽입 중... (본문 맨 끝, "${placement.place.name}")`);
+          await placePage.keyboard.press('Enter');
+          await self.delay(self.DELAYS.MEDIUM);
+          await insertPlaceBlock(self, placePage, placeFrame, {
+            name: placement.place.name,
+            address: placement.place.address,
+          });
+          await self.delay(self.DELAYS.MEDIUM);
+        }
       } else {
         self.log('   ⚠️ [장소] 에디터 프레임을 잡지 못해 건너뜁니다.');
       }

@@ -216,9 +216,12 @@ type RendererAutomationPayload = {
   ctas?: Array<{ text: string; link?: string }>;
   ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
   // [v2.11.206] 앱에서 미리 확정한 장소 — 발행 시 그대로 에디터에 꽂는다.
+  //   [2026-08-25] 여러 곳을 지원하면서 places 가 정식 경로가 됐다. placeName/Address/Position
+  //   은 구버전 호환으로 첫 번째 장소를 그대로 실어 보낸다.
   placeName?: string;
   placeAddress?: string;
-  placePosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
+  placePosition?: 'bottom' | string; // 'auto' | 'bottom' | 'heading-1' ~ 'heading-10'
+  places?: Array<{ name: string; address?: string; position?: string }>;
   skipCta?: boolean; // ✅ CTA 없이 발행하기
   skipImages?: boolean; // 이미지 삽입 건너뛰기 (글만 발행하기용)
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
