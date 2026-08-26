@@ -379,15 +379,24 @@ export function scoreTitleForHomefeed(title: string, categoryHint?: string): {
     suggestions.push(`제목이 ${len}자로 길음 — 잘릴 위험`);
   }
 
-  // 2. 숫자 포함
-  if (/\d/.test(t)) {
-    breakdown['숫자 포함'] = 15;
-  } else {
-    suggestions.push('숫자 1개 포함 권장 ("3가지", "5분", "TOP 10")');
+  // 2. 구체 수치 — [2026-08-26] 리스트형 숫자는 계약이 금지한다.
+  //   situationTitleContract: 숫자 리스트형("○○ 5가지")은 쓰지 않는다.
+  //   예전엔 모든 숫자에 +15를 주고 "3가지 / TOP 10"을 권해, 제목 후보 재선택이
+  //   계약이 금지한 형태를 골라 올리고 있었다. 날짜·금액·조건 같은 구체 수치만 남긴다.
+  // 한국어 접미를 직접 나열한다 — JS 정규식의 \b 는 한글을 단어문자로 보지 않아
+  // "3가지"처럼 문자열 끝에 오면 경계가 성립하지 않는다(실측으로 확인).
+  // '위'는 "3위까지 오른 이유" 같은 사실 서술과 겹쳐 제외한다.
+  const isListNumber = /\d+\s*(?:가지|개|선)(?![가-힣])|(?:top|TOP)\s*\d+/i.test(t);
+  if (isListNumber) {
+    breakdown['리스트형 숫자 감점'] = -10;
+    suggestions.push('숫자 리스트형("N가지", "TOP N")은 쓰지 않는다 — 상황·조건으로 바꿔라');
+  } else if (/\d/.test(t)) {
+    breakdown['구체 수치'] = 15;
   }
 
   // 3. 감정어 강도 (과장 금지)
-  const emotionalWords = ['진짜', '드디어', '솔직히', '의외로', '생각보다', '처음', '인생', '최고'];
+  // [2026-08-26] '진짜'·'솔직히' 제외 — homefeed/base.prompt:115가 후렴 반복을 막는 표현이다.
+  const emotionalWords = ['드디어', '의외로', '생각보다', '처음', '인생', '최고'];
   const emoMatches = emotionalWords.filter(w => t.includes(w));
   if (emoMatches.length >= 1 && emoMatches.length <= 2) {
     breakdown['감정어 적정'] = 15;
@@ -409,23 +418,29 @@ export function scoreTitleForHomefeed(title: string, categoryHint?: string): {
   }
 
   // 5. 호기심·의문 (괄호·? 또는 암시)
-  if (/[?]|이유|비밀|방법|차이|어떻게|왜/.test(t)) {
+  // [2026-08-26] "비밀"·"방법"을 뺐다. situationTitleContract가 비밀 공개형과
+  //   "○○ 방법"을 금지어로 명시하는데 여기서 가산점을 주고 있었다.
+  if (/[?]|이유|차이|어떻게|왜/.test(t)) {
     breakdown['호기심 유발'] = 10;
   }
 
   // 6. 카테고리 키워드 포함 (CTR 앵커)
   const cat = resolveCTRCategory(categoryHint);
+  // [2026-08-26] 계약이 금지한 말은 앵커에서 뺐다.
+  //   situationTitleContract 금지어: "○○ 정리", "○○ 가이드", "○○ 방법", "○○ 총정리"
+  //   NEO_CLICHE_BLACKLIST: '꿀팁'
+  //   같은 단어에 한쪽은 가산점, 다른 쪽은 감점을 주고 있었다.
   const catKeywords: Record<CTRCategory, string[]> = {
     food: ['맛집', '후기', '메뉴', '추천'],
-    parenting: ['육아', '살림', '꿀팁', '노하우'],
+    parenting: ['육아', '살림', '노하우'],
     beauty: ['후기', '루틴', '추천', '꿀템'],
-    health: ['효과', '후기', '루틴', '가이드'],
+    health: ['효과', '후기', '루틴'],
     travel: ['여행', '코스', '후기', '추천'],
     tech: ['후기', '비교', '리뷰', '추천'],
-    lifestyle: ['일상', '루틴', '공유', '꿀팁'],
-    entertainment: ['후기', '정리', '분석', '감상'],
-    finance: ['정리', '가이드', '방법', '초보'],
-    general: ['후기', '공유', '정리'],
+    lifestyle: ['일상', '루틴', '공유'],
+    entertainment: ['후기', '분석', '감상'],
+    finance: ['초보', '조건', '기준'],
+    general: ['후기', '공유'],
   };
   const catHits = catKeywords[cat].filter(k => t.includes(k));
   if (catHits.length >= 1) {
