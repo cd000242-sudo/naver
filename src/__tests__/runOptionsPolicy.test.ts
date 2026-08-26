@@ -109,3 +109,47 @@ describe('runOptionsPolicy', () => {
     ]);
   });
 });
+
+/**
+ * [2026-08-26] 발행 시점 상한은 화면에 골라진 모드를 본다. 글이 다른 모드로
+ * 만들어졌으면 상한이 조용히 어긋나므로, 발행 로그에 알린다(막지는 않는다).
+ */
+describe('생성 모드와 발행 모드 불일치', () => {
+  const publish = (generatedMode: string | undefined, contentMode: string, log: any) =>
+    resolveNaverRunOptions({
+      runOptions: {
+        title: '제목',
+        content: '본문입니다.',
+        contentMode,
+        hashtags: ['a', 'b', 'c'],
+        structuredContent: {
+          bodyPlain: '구조화 본문입니다.',
+          ...(generatedMode ? { __generatedMode: generatedMode } : {}),
+        },
+      } as any,
+      defaults: {},
+      log,
+    });
+
+  it('어긋나면 두 모드를 이름으로 알린다', () => {
+    const log = vi.fn();
+    publish('homefeed', 'seo', log);
+    const said = log.mock.calls.map((c: any[]) => String(c[0])).join(' ');
+    expect(said).toContain('홈판');
+    expect(said).toContain('SEO');
+  });
+
+  it('같으면 아무 말도 하지 않는다', () => {
+    const log = vi.fn();
+    publish('seo', 'seo', log);
+    const said = log.mock.calls.map((c: any[]) => String(c[0])).join(' ');
+    expect(said).not.toContain('모드로 발행합니다');
+  });
+
+  it('각인 전에 만든 옛 글은 조용히 지나간다', () => {
+    const log = vi.fn();
+    expect(() => publish(undefined, 'seo', log)).not.toThrow();
+    const said = log.mock.calls.map((c: any[]) => String(c[0])).join(' ');
+    expect(said).not.toContain('모드로 발행합니다');
+  });
+});

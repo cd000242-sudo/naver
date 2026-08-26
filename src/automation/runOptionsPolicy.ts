@@ -1,4 +1,5 @@
 import { clampHashtags } from '../content/hashtagCountPolicy.js';
+import { describeGenerationModeMismatch, readGenerationMode } from '../content/generationModeStamp.js';
 import {
   removeOrdinalHeadingLabelsFromBody,
   stripAllFormatting,
@@ -124,6 +125,14 @@ export function resolveNaverRunOptions(input: ResolveNaverRunOptionsInput): Reco
 
   // [2026-08-26] 개수 상한은 hashtagCountPolicy 단일 출처. 예전엔 모드 무관 5개로 잘라
   // 프롬프트가 요구한 조합 롱테일 태그(SEO 10~15)가 발행 직전에 버려지고 있었다.
+  // [2026-08-26] 아래 상한은 발행 모드 기준이다. 글이 다른 모드로 만들어졌다면
+  // 알린다 — 일부러 바꿔 발행할 수 있으므로 막지는 않는다.
+  const modeMismatch = describeGenerationModeMismatch(
+    readGenerationMode(structured),
+    runOptions.contentMode,
+  );
+  if (modeMismatch) log?.(modeMismatch);
+
   const hashtags = normalizePublishHashtags(runOptions.hashtags, structured?.hashtags);
   const clamped = clampHashtags(hashtags, runOptions.contentMode);
   const normalizedHashtags = clamped.hashtags;

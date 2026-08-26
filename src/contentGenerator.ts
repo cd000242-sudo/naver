@@ -183,6 +183,8 @@ import {
 } from './contentDuplicateHeuristics.js';
 import { buildUrlModeDirective } from './contentUrlModeDirective.js';
 import { buildKeywordFactChecklist } from './content/sourceFactChecklist.js';
+import { checkTitlePayoff, describeTitlePayoff } from './content/titlePayoffCheck.js';
+import { stampGenerationMode } from './content/generationModeStamp.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
 import {
   applyManualTitleOverride,
@@ -417,7 +419,55 @@ export class ZeroPriceArtifactError extends Error {
 
 // [Phase 7.4-q] stripInternalMarkers -> contentTextHelpers.ts
 
+/**
+ * [2026-08-26] 클릭 계약의 뒷절반 — 제목이 부른 클릭을 본문이 갚는가.
+ *
+ * 앞절반(제목이 클릭을 부르는가)은 evaluateTitleQuality 가 이미 본다. 갚는지는
+ * 아무 코드도 보지 않았다. 제목이 "이유"를 꺼내고 도입부가 이유를 한 번도 다루지
+ * 않아도 통과했다.
+ *
+ * 상환 구간은 도입부 + 첫 소제목 본문이다 — 첫 화면에서 못 받으면 독자는 떠난다.
+ * 경고만 남기고 발행은 그대로 간다(사장님: 발행 차단 게이트 추가 금지).
+ */
+function logTitlePayoff(content: any, source: any): void {
+  try {
+    const firstSection = Array.isArray(content?.headings) ? content.headings[0] : null;
+    const result = checkTitlePayoff({
+      title: content?.selectedTitle || content?.title || '',
+      primaryKeyword: source?.keywords?.[0] || '',
+      payoffZone: [content?.introduction, firstSection?.heading, firstSection?.content]
+        .filter(Boolean)
+        .join('\n'),
+    });
+    const line = describeTitlePayoff(result);
+    if (line) console.log(line);
+    if (result.checked) (content as any).__titlePayoff = result;
+
+    // 모델이 스스로 적어 낸 클릭 사유도 같은 잣대로 본다. 사전분석은 본문에 실리지
+    // 않고 버려지는 값이라, 여기서 보지 않으면 지켜졌는지 알 길이 없다.
+    const declared = String(content?.preWritingAnalysis?.clickReason || '').trim();
+    if (declared) {
+      const reason = checkTitlePayoff({
+        title: declared,
+        primaryKeyword: source?.keywords?.[0] || '',
+        payoffZone: [content?.introduction, ...(Array.isArray(content?.headings)
+          ? content.headings.map((h: any) => `${h?.heading || ''}\n${h?.content || ''}`)
+          : [])].filter(Boolean).join('\n'),
+      });
+      if (reason.checked && reason.coverage < 0.5) {
+        console.log(`[TitlePayoff] ⚠️ 선언한 클릭 사유를 본문이 받지 않았다 — ${reason.message}`);
+      }
+    }
+  } catch (err) {
+    console.log('[TitlePayoff] 검사 생략:', err instanceof Error ? err.message : err);
+  }
+}
+
 function runPostGenValidator(content: any, source: any): void {
+  // [2026-08-26] 글이 자기 모드를 기억하게 한다. 발행 시점 계약(해시태그 상한 등)은
+  // 화면에 골라진 모드를 보므로, 불러와 발행할 때 어긋나도 알 길이 없었다.
+  stampGenerationMode(content, source?.contentMode);
+  logTitlePayoff(content, source);
   if (!isFeatureEnabled('validator')) return;
   let result: any;
   try {
