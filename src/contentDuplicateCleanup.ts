@@ -4,6 +4,22 @@ type HeadingLike = {
   title?: string;
 };
 
+/**
+ * Placeholder for a decimal point while sentences are split on periods.
+ *
+ * A private-use codepoint: it cannot occur in article text, so restoring is exact.
+ */
+const DECIMAL_POINT_PLACEHOLDER = '';
+
+/** Hides "7.2" so the sentence splitter cannot mistake the dot for a full stop. */
+function protectDecimalPoints(value: string): string {
+  return value.replace(/(\d)\.(\d)/g, `$1${DECIMAL_POINT_PLACEHOLDER}$2`);
+}
+
+function restoreDecimalPoints(value: string): string {
+  return value.split(DECIMAL_POINT_PLACEHOLDER).join('.');
+}
+
 export function removeDuplicateHeadings(bodyPlain: string, headings: HeadingLike[]): string {
   if (!bodyPlain || !headings || headings.length === 0) return bodyPlain;
 
@@ -171,7 +187,29 @@ export function removeDuplicateHeadings(bodyPlain: string, headings: HeadingLike
   let removedSentenceCount = 0;
 
   for (const paragraph of tailParagraphs) {
-    const sentences = paragraph.split(/[.!?。！？]\s*/).filter((sentence) => sentence.trim().length > 5);
+    /*
+     * [2026-08-27 사장님 실측] "이거 문단정리 어색해. 이런 게 네이버봇에 걸리면 AI 티가 난다고."
+     *
+     * 화면에 이렇게 나왔다.
+     *   가장 무거운 볼링공이 16파운드(약
+     *                                     ← 빈 문단
+     *   7. 2kg) 정도인데, 서인영은 무려
+     *
+     * 문장 분리가 소수점을 종결로 오인해 "7.2kg" 을 "7" 과 "2kg" 으로 쪼갰고,
+     * 다시 붙일 때 ". " 를 끼워 "7. 2kg" 이 됐다. 그러자 붙여넣기가 벌어진 자리를
+     * 문장 끝으로 보고 문단까지 갈랐다 — 한 문장이 두 문단이 됐다.
+     *
+     * 앞선 글들에도 같은 자국이 있었다: "10. 8km/L", "30. 6kgf·m", "4. 50%", "47. 2억원".
+     * 사람은 이렇게 쓰지 않는다.
+     *
+     * 소수점을 자리표로 감춰 두고 쪼갠 뒤 되돌린다. richTextPaste 의 순서 점(1. 2. 3.)
+     * 보호와 같은 방식이다.
+     */
+    const guarded = protectDecimalPoints(paragraph);
+    const sentences = guarded
+      .split(/[.!?。！？]\s*/)
+      .map(restoreDecimalPoints)
+      .filter((sentence) => sentence.trim().length > 5);
     totalSentenceCount += sentences.length;
     const uniqueSentences: string[] = [];
 
