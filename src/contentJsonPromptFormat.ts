@@ -5,6 +5,7 @@ import {
   HOMEFEED_ISSUE_STORY_CATEGORIES,
   type PromptMode,
 } from './promptLoader.js';
+import { describeTitleLength } from './content/titleLengthPolicy.js';
 import { preprocessLongKeyword } from './contentKeywordHelpers';
 import { buildVoiceProfileBlock, sampleVoiceProfile } from './contentVoiceProfile.js';
 
@@ -382,6 +383,9 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
   } = options;
 
   const isHomefeed = mode === 'homefeed';
+  // [2026-08-27] 길이 계약은 스키마 필드에 적는다. 프롬프트 산문("28~42자 권장")만으로는
+  //   지켜지지 않아 53자 제목이 발행됐다 — 평가기는 29점을 매겼는데도 그대로 나갔다.
+  const titleLength = describeTitleLength(mode as never);
   const isMate = mode === 'mate';
   const modeStructureRule = buildModeStructureRule(mode);
   const evidenceBlockRule = buildEvidenceBlockRule();
@@ -399,14 +403,14 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
 [출력 형식 — 반드시 이 순서와 JSON 형식으로]${modeStructureRule}${evidenceBlockRule}
 
 {${buildPreWritingAnalysisSchema(mode, usesIssueStorySkeleton)}
-  "selectedTitle": "제목 1",
+  "selectedTitle": "제목 1 (${titleLength} — 넘기면 피드·검색에서 뒷부분이 잘려 안 보인다)",
   "titleCandidates": [${(isHomefeed || mode === 'seo' || mode === 'affiliate' || mode === 'mate' || mode === 'business') ? `
-    {"text": "제목 1", "score": 95, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"},
-    {"text": "제목 2", "score": 90, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"},
-    {"text": "제목 3", "score": 85, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"}` : `
-    {"text": "제목 1", "score": 95},
-    {"text": "제목 2", "score": 90},
-    {"text": "제목 3", "score": 85}`}
+    {"text": "제목 1 (${titleLength})", "score": 95, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"},
+    {"text": "제목 2 (${titleLength})", "score": 90, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"},
+    {"text": "제목 3 (${titleLength})", "score": 85, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"}` : `
+    {"text": "제목 1 (${titleLength})", "score": 95},
+    {"text": "제목 2 (${titleLength})", "score": 90},
+    {"text": "제목 3 (${titleLength})", "score": 85}`}
   ],
   ${buildHeadingsExample()},${isHomefeed ? '' : `
   "summaryTable": [

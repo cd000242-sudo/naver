@@ -107,3 +107,70 @@ describe('한 덩어리 본문을 통째로 지우지 않는다 (2026-08-26 라�
     expect(text).toBe(onlyNotice);
   });
 });
+
+/**
+ * [2026-08-27 사장님 실측] 전현무 조작설 글에 박수홍 비행기 지연이 섞여 나왔다.
+ *
+ *   "2026. 08. 26 06:00조회수 집계가 시작된 스타뉴스 보도 등에서도 다뤄졌듯, …
+ *    포털 연예-방송 인기 급상승 뉴스 코너의 01박수홍 비행기 지연 이슈,
+ *    02카자흐스탄 정부 발표 논란, 03박수홍 추가 소식 등이 나란히 주목을 받았습니다."
+ *
+ * 두 가지가 함께 새어 들어왔다.
+ *   1. 발행시각+조회수 — "입력/수정" 접두가 없고 조회수 뒤가 숫자가 아니라 기존 규칙이 못 잡았다.
+ *   2. 인기순위 위젯 — "01제목 02제목 03제목" 은 뉴스 사이트 사이드바 자국이다. 규칙이 없었다.
+ *
+ * 지난번 "같은 날 함께 걸린 소식들" 지적과 같은 뿌리인데, 이번엔 줄이 아니라
+ * 문장 안에 녹아 있어 줄 단위 삭제로는 닿지 않았다.
+ */
+describe('뉴스 사이트 위젯 자국', () => {
+  it('접두 없는 발행시각+조회수 조각을 걷어낸다', () => {
+    const r = stripSourceNoise('2026. 08. 26 06:00조회수 집계가 시작된 스타뉴스 보도에서도 다뤄졌습니다.');
+    expect(r.text).not.toContain('06:00');
+    expect(r.text).not.toContain('조회수 집계');
+    expect(r.text).toContain('스타뉴스 보도에서도 다뤄졌습니다');
+  });
+
+  it('인기순위 위젯 나열을 걷어낸다', () => {
+    const r = stripSourceNoise(
+      '당시 연예계에서는 01박수홍 비행기 지연 이슈, 02카자흐스탄 정부 발표 논란, 03박수홍 추가 소식 등이 주목받았습니다.',
+    );
+    expect(r.text).not.toContain('01박수홍');
+    expect(r.text).not.toContain('02카자흐스탄');
+    expect(r.removedFragments).toBeGreaterThan(0);
+  });
+
+  it('두 개짜리 나열은 건드리지 않는다 — 위젯이라 단정할 수 없다', () => {
+    const text = '경기 결과는 01김철수 승, 02이영희 승으로 갈렸습니다.';
+    expect(stripSourceNoise(text).text).toContain('01김철수');
+  });
+
+  it('정상 문장의 숫자를 건드리지 않는다', () => {
+    const text = '29시간 즉흥 여행이었고 30분 만에 표를 구했습니다. 2026년 8월 26일 기준입니다.';
+    expect(stripSourceNoise(text).text).toBe(text);
+  });
+
+  it('위젯만 있는 자료를 통째로 비우지 않는다 — 페일오픈', () => {
+    const only = '01박수홍 이슈, 02카자흐스탄 논란, 03박수홍 소식';
+    expect(stripSourceNoise(only).text.trim().length).toBeGreaterThan(0);
+  });
+});
+
+describe('위젯 라벨', () => {
+  it('항목을 지운 뒤 남는 라벨도 걷어낸다', () => {
+    const r = stripSourceNoise('함께 포털 연예-방송 인기 급상승 뉴스 코너의 소식이 걸렸습니다.');
+    expect(r.text).not.toContain('인기 급상승 뉴스');
+  });
+
+  it('"많이 본 뉴스" / "실시간 인기 뉴스" 도 같다', () => {
+    // 문장 안에 있을 때를 본다 — 문자열 전체가 노이즈면 페일오픈이 원본을 지킨다.
+    expect(stripSourceNoise('그날 많이 본 뉴스 코너에도 이 소식이 걸렸습니다.').text)
+      .not.toContain('많이 본 뉴스');
+    expect(stripSourceNoise('실시간 인기 뉴스 섹션에서도 상위에 올랐습니다.').text)
+      .not.toContain('실시간 인기 뉴스');
+  });
+
+  it('보통 문장의 "뉴스"는 건드리지 않는다', () => {
+    const text = '이 뉴스가 전해진 뒤 반응이 갈렸습니다. 관련 뉴스를 찾아봤습니다.';
+    expect(stripSourceNoise(text).text).toBe(text);
+  });
+});

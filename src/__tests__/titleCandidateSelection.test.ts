@@ -173,3 +173,75 @@ describe('배선 — 라이브 제목 계약(situationTitleContract)', () => {
     expect(contract).toMatch(/입력 키워드를 그대로 제목으로 내놓지 않는다/);
   });
 });
+
+/**
+ * [2026-08-27 사장님 실측] 홈판 53자 제목이 발행됐다. 평가기는 -60(42자 초과)으로
+ * 29점을 매겼는데, 선별기는 점수만 비교하므로 "덜 나쁜 긴 제목"이 이겼다.
+ * 독자는 점수를 보지 않는다 — 피드에서 잘린 제목을 본다. 잘림이 점수보다 앞선다.
+ */
+describe('길이 계약이 점수보다 앞선다', () => {
+  const LONG = '전현무 나혼산 조작설 카자흐스탄 정부의 지원 발표와 사전에 섭외된 것 아니냐는 조작 의혹의 시작';
+  const FIT = '전현무 카자흐스탄 즉흥 여행 조작설, 무편집 영상이 뒤집었다';
+
+  it('선택된 제목이 상한을 넘으면 점수가 낮아도 들어맞는 후보로 간다', () => {
+    const result = selectBestTitleCandidate({
+      selectedTitle: LONG,
+      candidates: [{ text: FIT }],
+      keyword: '전현무 나혼산',
+      mode: 'homefeed',
+      scoreTitle: (t) => (t === LONG ? 90 : 40), // 긴 쪽이 더 높은 점수여도
+    });
+    expect(result.changed).toBe(true);
+    expect(result.title).toBe(FIT);
+    expect(result.reason).toBe('length-contract');
+  });
+
+  it('후보가 전부 길면 그대로 둔다 — 코드가 제목을 자르지 않는다', () => {
+    const other = `${LONG} 추가`;
+    const result = selectBestTitleCandidate({
+      selectedTitle: LONG,
+      candidates: [{ text: other }],
+      keyword: '전현무 나혼산',
+      mode: 'homefeed',
+      scoreTitle: () => 50,
+    });
+    expect(result.title).toBe(LONG);
+    expect(result.reason).toBe('kept');
+  });
+
+  it('모드를 모르면 가장 느슨한 범위만 쓴다 — 홈판 상한으로 남을 재단하지 않는다', () => {
+    // 44자: 홈판(42) 초과지만 폴백 범위(45) 안이다.
+    const midLength = '전현무 카자흐스탄 즉흥 여행 조작설을 뒤집은 무편집 영상 속 공항 30분의 기록';
+    expect(midLength.length).toBeGreaterThan(42);
+    expect(midLength.length).toBeLessThanOrEqual(45);
+
+    const withoutMode = selectBestTitleCandidate({
+      selectedTitle: midLength,
+      candidates: [{ text: FIT }],
+      keyword: '전현무 나혼산',
+      scoreTitle: (t) => (t === midLength ? 90 : 40),
+    });
+    expect(withoutMode.reason).not.toBe('length-contract');
+
+    // 같은 제목이라도 홈판이라고 알려주면 계약이 걸린다.
+    const withMode = selectBestTitleCandidate({
+      selectedTitle: midLength,
+      candidates: [{ text: FIT }],
+      keyword: '전현무 나혼산',
+      mode: 'homefeed',
+      scoreTitle: (t) => (t === midLength ? 90 : 40),
+    });
+    expect(withMode.reason).toBe('length-contract');
+  });
+
+  it('길이가 맞는 제목은 예전 규칙대로 점수로만 판단한다', () => {
+    const result = selectBestTitleCandidate({
+      selectedTitle: FIT,
+      candidates: [{ text: '전현무 조작설 무편집 영상이 보여준 공항의 30분' }],
+      keyword: '전현무 나혼산',
+      mode: 'homefeed',
+      scoreTitle: (t) => (t === FIT ? 90 : 40),
+    });
+    expect(result.reason).toBe('kept');
+  });
+});
