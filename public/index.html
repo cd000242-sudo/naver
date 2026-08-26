@@ -46,6 +46,14 @@
                     <span class="label">일일 권장</span>
                     <span class="value" data-risk-daily>3회</span>
                 </div>
+                <!-- [2026-08-26] 에이전트 구독 잔여 배찌 — 구독 CLI는 잔여 쿼터 조회를
+                     제공하지 않아, 이 앱이 기록한 호출 수와 실제로 막혔던 지점만 쓴다. -->
+                <div class="summary-card" id="agent-quota-badge" style="display: none;">
+                    <span class="label" id="agent-quota-badge-label">에이전트 잔여</span>
+                    <span class="value" id="agent-quota-badge-value">—</span>
+                    <span class="summary-note" id="agent-quota-badge-detail"
+                        style="font-size: 0.7rem; opacity: 0.75; margin-top: 0.2rem; display: block; line-height: 1.35;"></span>
+                </div>
             </div>
             <p class="summary-note" data-risk-warning>구조화 콘텐츠를 생성하면 최신 품질 · 위험 지표가 표시됩니다.</p>
             <!-- ✅ [SPEC-DEFAMATION-2026 P2 (D)] AI기본법(2026-01-22 시행) 상시 고지 — 앱 내부 전용(블로그 본문 미삽입) -->

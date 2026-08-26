@@ -59,3 +59,48 @@ ${numbered}
 
   return { block, facts };
 }
+
+/**
+ * 키워드 모드용 — URL 원본이 없어도 수집한 자료가 있으면 같은 목록을 준다.
+ *
+ * [2026-08-26 사장님 지시] "URL 글생성뿐만 아니라 키워드로 글생성도 마찬가지야."
+ * 키워드 모드도 검색·크롤링으로 모은 자료(rawText)를 재료로 쓴다. 재료가 있는데
+ * 결과물이 그 사실을 안 담는 문제는 URL 모드와 똑같다.
+ *
+ * URL 모드와 다른 점 하나: 그쪽은 "원본 한 편을 재구성"하지만 키워드 모드는
+ * 여러 자료를 모은 것이라 서로 어긋나는 내용이 섞일 수 있다. 그래서 "빠짐없이"
+ * 대신 "확인된 것만, 확인된 대로"를 앞세운다.
+ */
+export function buildKeywordFactChecklist(
+  rawText: string | null | undefined,
+  max: number = FACT_CHECKLIST_MAX,
+): FactChecklistResult {
+  const text = String(rawText ?? '').trim();
+  if (text.length < MIN_RAW_TEXT) return EMPTY;
+
+  const facts = extractCoreFacts(text, max);
+  if (facts.length === 0) return EMPTY;
+
+  const numbered = facts.map((fact, i) => `  ${i + 1}. ${fact}`).join('\n');
+
+  const block = `[수집 자료에서 지켜야 할 사실 ${facts.length}개]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+아래는 이번 글을 위해 모은 자료에서 뽑아낸 사실이다. 글이 완성됐는지는 분량이 아니라
+**이 목록을 다 다뤘는지**로 판단한다.
+
+${numbered}
+
+- 각 사실을 문장 안에 자연스럽게 녹인다. 목록을 그대로 나열하지 마라.
+- 숫자·날짜·인명·인용문은 **자료에 있는 그대로** 쓴다. 반올림하거나 바꿔 말하지 마라.
+- 자료끼리 어긋나면 지어내서 맞추지 말고, 어느 쪽이 어떤 조건에서 맞는지 그대로 쓴다.
+- 목록에 없어도 자료에 있는 사실은 함께 담아라. 이 목록은 최소선이다.
+- ⛔ 사실을 빠뜨린 채 감상·수식어로 자리를 채우지 마라. 그게 가장 나쁜 실패다.
+- ⛔ 목록에 없는 숫자·날짜·인용을 지어내지 마라. 없는 것은 없다고 쓴다.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+`;
+
+  return { block, facts };
+}

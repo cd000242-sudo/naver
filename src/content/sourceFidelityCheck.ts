@@ -52,6 +52,21 @@ const MIN_RAW_TEXT_FOR_CHECK = 500;
  * - 영문 고유명사 후보: 대문자 시작 + 2자 이상
  * - 한글 고유명사 후보: 흔한 명사 외 2~5자 (간이 휴리스틱)
  */
+/** 숫자 fact 뒤에 딸려온 조사를 뗀다. "25만원으로" → "25만원". */
+const NUMBER_TAIL_PARTICLES = [
+  '으로부터', '까지는', '에서는', '으로', '까지', '부터', '에서', '이며', '이고',
+  '보다', '만큼', '이상', '이하', '동안', '라고', '로', '은', '는', '이', '가', '을', '를', '도', '와', '과', '에',
+];
+
+function trimTrailingParticleFromNumber(value: string): string {
+  for (const particle of NUMBER_TAIL_PARTICLES) {
+    if (value.length > particle.length + 1 && value.endsWith(particle)) {
+      return value.slice(0, -particle.length);
+    }
+  }
+  return value;
+}
+
 export function extractCoreFacts(text: string, max: number = DEFAULT_MAX_FACTS): string[] {
   if (!text) return [];
   const facts = new Set<string>();
@@ -59,7 +74,10 @@ export function extractCoreFacts(text: string, max: number = DEFAULT_MAX_FACTS):
   // 1. 숫자 + 단위 (가장 강한 신호)
   const numberPattern = /\d+(?:[.,]\d+)?[가-힣A-Za-z%원만천백억배회개분초시일월년]+/g;
   for (const m of text.match(numberPattern) ?? []) {
-    if (m.length >= 2 && m.length <= 12) facts.add(m);
+    // [2026-08-26] 숫자 뒤에 조사가 딸려 온다("2.8%로", "25만원으로", "3.3%까지").
+    //   목록에 조사째로 올리면 모델이 어색하게 따라 쓰고, 결과물 대조도 어긋난다.
+    const trimmed = trimTrailingParticleFromNumber(m);
+    if (trimmed.length >= 2 && trimmed.length <= 12) facts.add(trimmed);
     if (facts.size >= max) break;
   }
 

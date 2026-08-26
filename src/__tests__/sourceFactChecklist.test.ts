@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildSourceFactChecklist } from '../content/sourceFactChecklist';
+import { buildSourceFactChecklist, buildKeywordFactChecklist } from '../content/sourceFactChecklist';
 import { toFactToken, extractKoreanFactTokens } from '../content/koreanFactTokens';
 
 /**
@@ -76,5 +76,37 @@ describe('원본 사실 체크리스트', () => {
   it('한 번만 스친 말은 담지 않는다 — 그 글의 뼈대가 아니다', () => {
     const once = `${'가나다라마바사아자차카타파하'.repeat(40)} 일회용어치 `;
     expect(extractKoreanFactTokens(once, 10)).not.toContain('일회용어치');
+  });
+});
+
+describe('키워드 모드도 같은 목록을 받는다 (2026-08-26 사장님 지시)', () => {
+  const RESEARCH = `2026년 청약통장 금리가 2.8%로 인상됐다. 국토교통부는 8월 20일 이를 발표했다.
+기존 가입자도 자동 적용되며, 청약통장 해지 시에는 이자가 달라진다.
+월 납입 인정 한도는 25만원으로 유지된다. 무주택 세대주 기준은 그대로다.
+청년우대형 청약통장은 최대 3.3%까지 적용된다고 국토교통부가 밝혔다.
+`.repeat(4);
+
+  const { facts, block } = buildKeywordFactChecklist(RESEARCH);
+
+  it('수집 자료의 수치와 기관명을 담는다', () => {
+    for (const f of ['2026년', '2.8%', '25만원', '3.3%', '국토교통부', '청약통장', '청년우대형']) {
+      expect(facts).toContain(f);
+    }
+  });
+
+  it('숫자에 조사를 붙여 담지 않는다', () => {
+    for (const junk of ['2.8%로', '25만원으로', '3.3%까지']) {
+      expect(facts).not.toContain(junk);
+    }
+  });
+
+  it('자료끼리 어긋날 때 지어내지 말라고 못박는다 (URL 모드와 다른 지점)', () => {
+    expect(block).toMatch(/자료끼리 어긋나면 지어내서 맞추지 말고/);
+    expect(block).toMatch(/지어내지 마라/);
+  });
+
+  it('자료가 없거나 짧으면 목록을 만들지 않는다', () => {
+    expect(buildKeywordFactChecklist('').facts).toHaveLength(0);
+    expect(buildKeywordFactChecklist('짧은 자료').block).toBe('');
   });
 });

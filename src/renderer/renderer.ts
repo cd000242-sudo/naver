@@ -29,6 +29,7 @@ import './modules/tailUIUtils.js';
 // ✅ [2026-02-26 모듈화] AI 어시스턴트 + 가격 정보 + 이미지 관리
 import { initAIAssistant } from './modules/aiAssistant.js';
 import { initPriceInfoModal } from './modules/priceInfoModal.js';
+import { initAgentQuotaBadge, refreshAgentQuotaBadge } from './modules/agentQuotaBadge.js';
 import { initNoticeAdmin } from './modules/noticeAdmin.js';
 import { initImageManagementTab } from './modules/imageManagementTab.js';
 import { testLicenseCode, initLicenseBadge, initCustomerServiceButton, initGlobalRefreshButton, performGlobalRefresh, initLicenseModal, showErrorAlertModal } from './modules/licenseUI.js';
@@ -1734,6 +1735,9 @@ function updateRiskIndicators(content: StructuredContent | null): void {
     }
   }
 
+  // [2026-08-26] 글을 한 편 뽑았으니 에이전트 사용량이 한 칸 줄었다 — 배찌 갱신.
+  void refreshAgentQuotaBadge();
+
   // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 활성화 + 데이터 동봉
   //   글 생성 완료 시 본문/키워드를 글로벌 변수에 저장 → 사용자가 버튼 클릭 시 사용
   try {
@@ -3171,6 +3175,8 @@ async function initializeApplication(): Promise<void> {
   initThumbnailGenerator(); _perfMark('initThumbnailGenerator'); await _yieldIfNeeded();
   initLicenseModal(); _perfMark('initLicenseModal'); await _yieldIfNeeded();
   initPriceInfoModal(); _perfMark('initPriceInfoModal'); await _yieldIfNeeded();
+  // [2026-08-26] 에이전트 구독 잔여 배찌 — 엔진 선택이 바뀔 때마다 스스로 갱신한다.
+  initAgentQuotaBadge(); _perfMark('initAgentQuotaBadge'); await _yieldIfNeeded();
   initNoticeAdmin(); _perfMark('initNoticeAdmin'); await _yieldIfNeeded();
   try { initGeminiModelSync(); } catch (e) { console.warn('[renderer] catch ignored:', e); }
   _perfMark('initGeminiModelSync'); await _yieldIfNeeded();

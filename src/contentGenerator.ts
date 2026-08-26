@@ -181,6 +181,7 @@ import {
   validateHeadingOrder,
 } from './contentDuplicateHeuristics.js';
 import { buildUrlModeDirective } from './contentUrlModeDirective.js';
+import { buildKeywordFactChecklist } from './content/sourceFactChecklist.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
 import {
   applyManualTitleOverride,
@@ -5725,6 +5726,16 @@ async function generateStructuredContentInternal(
         if (urlModeDirective) {
           systemPrompt = urlModeDirective + systemPrompt;
           console.log(`[ContentGenerator] 📜 URL 모드 강화 지시 prepend (사실 보존 + 형식은 ${(source as any).contentMode || '기본'} 모드 우선)`);
+        } else {
+          // [2026-08-26 사장님 지시] "URL 글생성뿐만 아니라 키워드로 글생성도 마찬가지야."
+          //   키워드 모드도 검색·크롤링으로 모은 자료를 재료로 쓴다. 재료가 있는데 결과물이
+          //   그 사실을 안 담는 문제는 URL 모드와 같다. 목록 형태도 같게 준다.
+          //   URL 지시문이 붙은 경우에는 그 안에 이미 목록이 들어 있어 중복 주입하지 않는다.
+          const keywordChecklist = buildKeywordFactChecklist((source as any).rawText);
+          if (keywordChecklist.block) {
+            systemPrompt = keywordChecklist.block + systemPrompt;
+            console.log(`[ContentGenerator] 📋 키워드 모드 사실 목록 prepend (${keywordChecklist.facts.length}개)`);
+          }
         }
 
         const phase4SkipDict =

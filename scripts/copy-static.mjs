@@ -364,6 +364,11 @@ try {
       filePath: path.join(projectRoot, 'dist', 'content', 'keywordTitlePrefixPolicy.js'),
     },
     {
+      // [2026-08-26] 에이전트 잔여 배찌 문구 — agentQuotaBadge 가 값으로 가져온다.
+      label: 'agentCli/usageBadge.js',
+      filePath: path.join(projectRoot, 'dist', 'agentCli', 'usageBadge.js'),
+    },
+    {
       label: 'runtime/textModelConstants.js',
       filePath: path.join(projectRoot, 'dist', 'runtime', 'textModelConstants.js'),
     },
@@ -425,6 +430,7 @@ try {
     'tutorialsTab.js',
     'apiGuideModals.js',
     'priceInfoModal.js',
+    'agentQuotaBadge.js',          // [2026-08-26] 에이전트 구독 잔여 배찌
     'noticeAdmin.js',
     'imageManagementTab.js',
     'guideModals.js',
