@@ -47,13 +47,12 @@ const NOISE_INLINE_PATTERNS: readonly RegExp[] = [
   /(?:기사)?(?:입력|수정|발행|등록)\s*(?:시각|일시)\s*[:：]?\s*\d{1,2}\s*[:시]\s*\d{0,2}분?/g,
   /(?:기사)?(?:입력|수정)\s*[:：]?\s*\d{4}[.\-/]\d{1,2}[.\-/]\d{1,2}\.?\s*(?:오전|오후)?\s*\d{0,2}[:시]?\d{0,2}분?/g,
   /조회\s*수?\s*[\d,]{2,}\s*회?/g,
-];
-
-/** 줄이 길어도 무조건 지우는 껍데기. 본문에 섞일 여지가 없는 문구만 둔다. */
-const ALWAYS_NOISE_LINE_PATTERNS: readonly RegExp[] = [
-  /무단\s*(?:전재|복제|배포)/,
-  /저작권자\s*(?:ⓒ|©|\(c\))/i,
-  /^ⓒ\s*\S+/,
+  // 저작권 고지 — 줄 단위로 지우면 한 덩어리 본문이 통째로 날아간다(2026-08-26 회귀).
+  //   조각으로만 걷어낸다: "<저작권자 ⓒ 스타뉴스, 무단전재 및 재배포 금지>"
+  //   끝맺음은 "금지/금합니다"로만 잡는다. "재배포"를 종료어에 넣으면 non-greedy 가
+  //   거기서 멈춰 " 금지>" 꼬리가 남는다(실측).
+  /[<([]?\s*저작권자[^<>()[\]\n]{0,80}?(?:금지|금합니다)[^\S\n]*[>)\]]?/g,
+  /무단\s*(?:전재|복제|배포)[^\n]{0,40}?(?:금지|금합니다)[^\S\n]*[>)\]]?/g,
 ];
 
 export interface SourceNoiseFilterResult {
@@ -74,10 +73,14 @@ export function stripSourceNoise(rawText: string | null | undefined): SourceNois
   const kept: string[] = [];
   for (const line of source.split('\n')) {
     const trimmed = line.trim();
+    // [2026-08-26 회귀] 길이 제한 없이 줄을 지우는 규칙을 뒀다가 기사 한 편이 통째로
+    //   날아갔다. 크롤러는 textContent 로 본문을 뽑아 줄바꿈이 거의 없는 한 덩어리를
+    //   만드는데, 그 덩어리 끝의 "무단전재 및 재배포 금지"가 걸려 전체가 삭제됐다
+    //   (사용자 실측: "원본 텍스트가 비어 있습니다"). 줄 삭제는 짧은 줄에만 건다.
+    //   긴 줄의 껍데기는 아래 조각 제거가 담당한다.
     const isNoiseLine = trimmed
-      && (ALWAYS_NOISE_LINE_PATTERNS.some((re) => re.test(trimmed))
-        || (trimmed.length <= MAX_NOISE_LINE_LENGTH
-          && NOISE_LINE_PATTERNS.some((re) => re.test(trimmed))));
+      && trimmed.length <= MAX_NOISE_LINE_LENGTH
+      && NOISE_LINE_PATTERNS.some((re) => re.test(trimmed));
     if (isNoiseLine) {
       removedLines++;
       continue;
@@ -92,9 +95,14 @@ export function stripSourceNoise(rawText: string | null | undefined): SourceNois
     kept.push(next.replace(/[ \t]{2,}/g, ' '));
   }
 
-  return {
-    text: kept.join('\n').replace(/\n{3,}/g, '\n\n').trim(),
-    removedLines,
-    removedFragments,
-  };
+  const cleaned = kept.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+
+  // [2026-08-26] 마지막 안전망. 내용이 있던 원문이 통째로 비면 그건 필터가 틀린 것이다.
+  //   껍데기 한 줄이 남는 것보다 기사 한 편을 잃는 쪽이 훨씬 나쁘다 — 원문을 그대로 쓴다.
+  if (!cleaned && source.trim()) {
+    console.warn('[SourceNoise] 필터가 원문을 전부 지웠다 — 원문을 그대로 쓴다.');
+    return { text: source, removedLines: 0, removedFragments: 0 };
+  }
+
+  return { text: cleaned, removedLines, removedFragments };
 }
