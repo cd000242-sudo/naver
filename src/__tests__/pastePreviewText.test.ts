@@ -101,3 +101,45 @@ describe('문장이 표 앞에 붙은 줄 (2026-08-26 사장님 실측 화면)',
     expect(buildPastePreviewHtml(trailing)).toMatch(/그리고 뒤 문장이 붙었습니다/);
   });
 });
+
+describe('표 폭과 줄바꿈 (2026-08-26 사장님 지적)', () => {
+  // "표가 크기가 넓을 필요가 있을까 싶네. 표 내용이 짤린 것도 있구요."
+  const TWO_COL = ['| 구분 | 내용 |', '| --- | --- |',
+    '| 기준일 | 2026년 8월 25일 |',
+    '| 주요 이슈 | SNS 커플 사진 공개 후 팬들의 장난스런 공개 연애 축하 소동 |'].join('\n');
+  const THREE_COL = ['| 구분 | MBC 입장 | 시점 |', '| --- | --- | --- |',
+    '| 의혹 직후 | "확인 중" | 8월 24일 |'].join('\n');
+
+  const tableStyleOf = (html: string) =>
+    (html.match(/<table[^>]*style="([^"]*)"/) || [])[1] || '';
+
+  it('표도 본문과 같은 520px 폭을 지킨다', () => {
+    // 문단·목록·소제목은 모두 max-width:520px 인데 표만 빠져 있어 혼자 넓게 퍼졌다.
+    const style = tableStyleOf(buildPastePreviewHtml(TWO_COL));
+    expect(style).toMatch(/max-width:520px/);
+    expect(style).toMatch(/margin:10px auto/);
+  });
+
+  it('가장 긴 셀이 열 폭을 흔들지 못하게 고정 레이아웃을 쓴다', () => {
+    expect(tableStyleOf(buildPastePreviewHtml(TWO_COL))).toMatch(/table-layout:fixed/);
+  });
+
+  it('셀 내용이 잘리지 않고 줄바꿈된다', () => {
+    // 고정 레이아웃에서 줄바꿈 속성이 없으면 넘친 글자가 잘려 보인다.
+    const html = buildPastePreviewHtml(TWO_COL);
+    expect(html).toMatch(/word-break:keep-all/);
+    expect(html).toMatch(/overflow-wrap:break-word/);
+    expect(html).toMatch(/장난스런 공개 연애 축하 소동/); // 내용이 통째로 살아 있다
+  });
+
+  it('두 열이면 라벨 칸을 좁게 잡는다 — 50:50은 내용 칸을 좁힌다', () => {
+    const html = buildPastePreviewHtml(TWO_COL);
+    expect(html).toMatch(/<colgroup>/);
+    expect(html).toMatch(/width:32%/);
+    expect(html).toMatch(/width:68%/);
+  });
+
+  it('세 열 이상은 균등 분할로 둔다', () => {
+    expect(buildPastePreviewHtml(THREE_COL)).not.toMatch(/<colgroup>/);
+  });
+});

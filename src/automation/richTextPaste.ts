@@ -560,11 +560,23 @@ function normalizeOrphanPipeLine(line: string): string | null {
   return replaced || null;
 }
 
+/**
+ * [2026-08-26 사장님 지적] "표가 크기가 넓을 필요가 있을까 싶네."
+ *
+ * 문단·목록·소제목은 모두 max-width:520px 로 묶여 있는데 표만 빠져 있었다.
+ * 그래서 표만 본문보다 넓게 퍼져 글의 폭이 들쭉날쭉해 보였다. 같은 폭으로 맞춘다.
+ *
+ * table-layout:fixed 도 함께 건다. auto 로 두면 가장 긴 셀이 열을 통째로 밀어
+ * 다른 열이 찌그러진다(실측 화면: 한 열만 넓고 나머지는 두 글자마다 줄바꿈).
+ * fixed 는 열을 고르게 나눠 어느 셀이 길어져도 폭이 흔들리지 않는다.
+ */
 function tableStyle(theme: SoftTableTheme): string {
   return [
     'width:100%',
+    'max-width:520px',
+    'margin:10px auto 16px',
+    'table-layout:fixed',
     'border-collapse:collapse',
-    'margin:10px 0 16px',
     'font-size:15px',
     'line-height:1.65',
     TEXT_DECORATION_RESET,
@@ -583,6 +595,9 @@ function tableCellStyle(theme: SoftTableTheme, rowIndex: number, header = false)
       'padding:9px 10px',
       'font-weight:700',
       'text-align:center',
+      // table-layout:fixed 에서는 넘치는 글자가 잘려 보인다 — 반드시 줄바꿈을 허용한다.
+      'word-break:keep-all',
+      'overflow-wrap:break-word',
       TEXT_DECORATION_RESET,
       FONT_STYLE_RESET,
     ].join(';');
@@ -593,6 +608,10 @@ function tableCellStyle(theme: SoftTableTheme, rowIndex: number, header = false)
     `border:1px solid ${theme.border}`,
     'padding:9px 10px',
     'vertical-align:top',
+    // 한국어는 어절 단위로 끊고(keep-all), 어절 하나가 칸보다 길면 그때만 쪼갠다.
+    // 이게 없으면 fixed 레이아웃에서 긴 값이 칸 밖으로 넘쳐 잘린 것처럼 보인다(실측).
+    'word-break:keep-all',
+    'overflow-wrap:break-word',
     TEXT_DECORATION_RESET,
     FONT_STYLE_RESET,
   ].join(';');
@@ -820,8 +839,19 @@ function markdownTableToHtml(lines: string[], theme: SoftTableTheme): { html: st
     .join('');
   const plain = rows.map(row => row.join('\t')).join('\n');
 
+  /*
+   * [2026-08-26] 열 비율. table-layout:fixed 는 지정이 없으면 열을 똑같이 나눈다.
+   * 그런데 우리가 만드는 표는 대부분 "구분 | 내용" 두 열이고, 왼쪽은 '기준일'·'당사자'
+   * 처럼 짧은 라벨이다. 50:50 이면 라벨 칸이 남아돌고 내용 칸이 좁아져 두세 글자마다
+   * 줄이 바뀐다(사장님 실측 화면). 두 열일 때만 라벨을 좁게 잡는다.
+   * 세 열 이상은 균등 분할이 무난하므로 지정하지 않는다.
+   */
+  const colgroup = header.length === 2
+    ? '<colgroup><col style="width:32%"><col style="width:68%"></colgroup>'
+    : '';
+
   return {
-    html: `<table data-rich-table-theme="${theme.name}" style="${tableStyle(theme)}"><thead><tr>${headerHtml}</tr></thead><tbody>${bodyHtml}</tbody></table>`,
+    html: `<table data-rich-table-theme="${theme.name}" style="${tableStyle(theme)}">${colgroup}<thead><tr>${headerHtml}</tr></thead><tbody>${bodyHtml}</tbody></table>`,
     plain,
   };
 }
