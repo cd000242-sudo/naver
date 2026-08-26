@@ -125,3 +125,51 @@ describe('관리자 패널 전화번호 (surge)', () => {
     expect(panel).toMatch(/indexOf\('82'\) === 0/);
   });
 });
+
+/**
+ * [2026-08-26] 인증 응답이 12.8초 걸려 설치본(제한시간 10초)이 먼저 끊었다.
+ * 원인은 한 번의 인증에 시트를 통째로 세 번 읽은 것이다 —
+ * 충돌 판정 / 이름 소유자 판정 / 행 조회가 각자 getDataRange().getValues() 를 불렀다.
+ * 서버를 빠르게 만들면 앱 릴리즈 없이도 구버전에서 통과한다.
+ */
+describe('체험 인증 서버 응답 속도 (GAS)', () => {
+  const gas = readGas();
+
+  it.skipIf(!gas)('세 판정이 미리 읽은 데이터를 나눠 쓴다', () => {
+    expect(gas).toMatch(/function findTrialConflict_\(sheet, email, phone, deviceId, preloaded\)/);
+    expect(gas).toMatch(/function findTrialNameOwner_\(sheet, phone, nickname, preloaded\)/);
+    expect(gas).toMatch(/function findTrialRowByPhone_\(sheet, phone, preloaded\)/);
+    // 안 넘기면 예전대로 스스로 읽는다 — 다른 호출부를 깨지 않는다.
+    expect(gas).toMatch(/preloaded \|\| sheet\.getDataRange\(\)\.getValues\(\)/);
+  });
+
+  it.skipIf(!gas)('trial-verify 는 시트를 한 번만 읽는다', () => {
+    const body = (gas || '').slice((gas || '').indexOf('function handleTrialVerify'));
+    const scope = body.slice(0, body.indexOf('\n}'));
+    // 주석에 "예전에는 …getValues() 를 불러" 처럼 원인 설명이 남아 있다 — 코드 줄만 센다.
+    const codeOnly = scope
+      .split('\n')
+      .filter((line) => {
+        const t = line.trim();
+        return t !== '' && !t.startsWith('//') && !t.startsWith('*') && !t.startsWith('/*');
+      })
+      .join('\n');
+    const reads = codeOnly.match(/getDataRange\(\)\.getValues\(\)/g) || [];
+    expect(reads.length).toBe(1);
+    expect(scope).toMatch(/findTrialConflict_\(sheet, '', phone, deviceId, trialData\)/);
+    expect(scope).toMatch(/findTrialNameOwner_\(sheet, phone, nickname, trialData\)/);
+    expect(scope).toMatch(/findTrialRowByPhone_\(sheet, phone, trialData\)/);
+  });
+
+  it.skipIf(!gas)('인증번호 발송도 시트를 한 번만 열고 한 번만 읽는다', () => {
+    expect(gas).toMatch(/var reqSheet = getTrialSheet\(trialProduct_\(data\)\)/);
+    expect(gas).toMatch(/findTrialConflict_\(reqSheet, email, phone, deviceId, reqData\)/);
+    expect(gas).toMatch(/findTrialNameOwner_\(reqSheet, phone, reqNickname, reqData\)/);
+  });
+
+  it.skipIf(!gas)('체험 등록도 한 번만 읽는다', () => {
+    expect(gas).toMatch(/var actData = sheet\.getDataRange\(\)\.getValues\(\)/);
+    expect(gas).toMatch(/findTrialConflict_\(sheet, email, phone, deviceId, actData\)/);
+    expect(gas).toMatch(/findTrialRowByPhone_\(sheet, phone, actData\)/);
+  });
+});
