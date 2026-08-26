@@ -82,3 +82,29 @@ describe('조립 결과 — 실제 프롬프트에 상충 지시가 함께 실�
     expect(p).toContain('[ISSUE-STORY]');
   });
 });
+
+describe('수치는 뜻과 함께 (2026-08-26 사장님 실측)', () => {
+  const exposure = readFileSync(
+    resolve(__dirname, '..', 'prompts', 'shared', 'exposure-structure.prompt'),
+    'utf-8',
+  );
+
+  it('숫자를 던지고 판단을 독자에게 넘기지 말라고 못박는다', () => {
+    // 실측 발행 문장: "운항정보 인용 보도의 70분·31분과 대한항공이 밝힌 51분·39분을
+    // 나란히 놓고 보시면 됩니다." — 숫자 넷을 던지고 무엇이 왜 다른지는 빠졌다.
+    expect(exposure).toMatch(/\[수치는 뜻과 함께\]/);
+    expect(exposure).toMatch(/비교를 독자에게 숙제로 넘기지 마라/);
+  });
+
+  it('결론에서 본문 수치를 다시 나열하지 말라고 한다', () => {
+    expect(exposure).toMatch(/본문에서 이미 설명한 수치를 결론에서 다시 나열하지 마라/);
+  });
+
+  it('사실 밀도 요구(ES-4)와 같은 자리에 둔다 — 숫자를 부르는 규칙 옆이어야 한다', () => {
+    const es4 = exposure.indexOf('[ES-4]');
+    const es5 = exposure.indexOf('[ES-5]');
+    const rule = exposure.indexOf('[수치는 뜻과 함께]');
+    expect(rule).toBeGreaterThan(es4);
+    expect(rule).toBeLessThan(es5);
+  });
+});
