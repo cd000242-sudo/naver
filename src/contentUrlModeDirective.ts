@@ -1,3 +1,4 @@
+import { buildSourceFactChecklist } from './content/sourceFactChecklist.js';
 export interface UrlModeDirectiveSource {
   url?: string;
   sourceType?: string;
@@ -44,7 +45,8 @@ const URL_MODE_SHAPE: Readonly<Record<string, string>> = Object.freeze({
   seo: `
 ## 5. 형식 — 검색 노출 우선
 - 제목은 원문 기사 제목을 따라가지 마라. **사람이 실제로 검색창에 칠 말**이 제목 앞에 와야 한다.
-- 본문 길이는 원본의 85% 이상 (필요하면 더 길게 쓰되 부풀리지 말 것).
+- 분량 기준은 두지 않는다. 위 사실 목록을 다 담으면 그게 필요한 길이다(seo R0-5와 같은 계약).
+  ⛔ 사실을 빠뜨린 채 짧게 끝내는 것도, 사실 없이 수식어로 늘리는 것도 똑같이 실패다.
 - 문단은 짧게, 소제목으로 호흡을 나눠라.
 `,
   homefeed: `
@@ -62,7 +64,8 @@ const URL_MODE_SHAPE: Readonly<Record<string, string>> = Object.freeze({
 
 const URL_MODE_SHAPE_DEFAULT = `
 ## 5. 형식
-- 본문 길이는 원본의 85% 이상 (필요하면 더 길게 쓰되 부풀리지 말 것).
+- 분량 기준은 두지 않는다. 위 사실 목록을 다 담으면 그게 필요한 길이다(seo R0-5와 같은 계약).
+  ⛔ 사실을 빠뜨린 채 짧게 끝내는 것도, 사실 없이 수식어로 늘리는 것도 똑같이 실패다.
 - 문단은 짧게, 한 문장 30~70자, 소제목으로 호흡을 나눠라.
 `;
 
@@ -84,5 +87,13 @@ export function buildUrlModeShapeClause(contentMode?: string): string {
 
 export function buildUrlModeDirective(source: UrlModeDirectiveSource): string {
   if (!shouldApplyUrlModeDirective(source)) return '';
-  return URL_MODE_CORE + buildUrlModeShapeClause(source.contentMode) + DIRECTIVE_FOOTER;
+  // [2026-08-26] "빠짐없이 포함하라"는 산문 한 줄로는 안 됐다(실측 보존율 17%).
+  //   원본에서 뽑은 사실을 목록으로 박아 준다. 지시 바로 뒤에 와야 같이 읽힌다.
+  const checklist = buildSourceFactChecklist(source.rawText).block;
+  return URL_MODE_CORE
+    + (checklist ? `
+${checklist}
+` : '')
+    + buildUrlModeShapeClause(source.contentMode)
+    + DIRECTIVE_FOOTER;
 }

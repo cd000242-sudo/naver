@@ -1,3 +1,4 @@
+import { extractKoreanFactTokens } from './koreanFactTokens.js';
 /**
  * Source Fidelity Engine — Phase 7 (사용자 식별 미흡 #2: URL 입력 시 LLM 압축·정보 누락)
  *
@@ -81,18 +82,16 @@ export function extractCoreFacts(text: string, max: number = DEFAULT_MAX_FACTS):
     }
   }
 
-  // 4. 한글 4자 이상 명사구 (간이) — 자주 등장하는 키워드
-  // ✅ [v2.10.176 시도→revert] 3자 한글 확장은 어절 끝부분 noise(가능합/이라고 등) 잡혀 false-positive.
-  //   Phase 1 LLM rubric의 의미적 보존 검증으로 처리 예정.
+  // 4. 한글 고유명사 — [2026-08-26] 어절 통짜 매칭을 버리고 조사를 떼고 센다.
+  //   예전 규칙([가-힣]{4,12} 2회 이상)은 한국 인명 대부분(세 글자)을 통째로 놓치고,
+  //   네 글자 이상은 조사가 붙은 형태로 잡았다.
+  //   실측: "옥상달빛 김윤주 / 십센치 권정열 / 박세진" 원문에서 잡힌 것은 "김윤주는" 하나뿐.
+  //   지금은 김윤주·옥상달빛·십센치·권정열·박세진 을 모두 잡는다.
+  //   과거 3자 확장 시도(v2.10.176)가 "가능합/이라고" 같은 조각을 물고 되돌려졌는데,
+  //   그건 조사를 떼지 않고 길이만 내렸기 때문이다. 여기서는 조사를 떼고 일반어를 막는다.
   if (facts.size < max) {
-    const wordCount = new Map<string, number>();
-    const koreanPattern = /[가-힣]{4,12}/g;
-    for (const m of text.match(koreanPattern) ?? []) {
-      wordCount.set(m, (wordCount.get(m) ?? 0) + 1);
-    }
-    const sorted = [...wordCount.entries()].sort((a, b) => b[1] - a[1]);
-    for (const [word, count] of sorted) {
-      if (count >= 2) facts.add(word);
+    for (const token of extractKoreanFactTokens(text, max - facts.size)) {
+      facts.add(token);
       if (facts.size >= max) break;
     }
   }

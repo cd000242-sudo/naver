@@ -54,12 +54,19 @@ describe('contentUrlModeDirective', () => {
       const d = withMode('seo');
       expect(d).toContain('검색창에 칠 말');
       expect(d).toContain('원문 기사 제목을 따라가지 마라');
-      expect(d).toContain('85%');
     });
 
-    it('모르는 모드는 기존 동작(원문 길이 추종)을 유지한다', () => {
-      expect(withMode('affiliate')).toContain('85%');
-      expect(withMode('')).toContain('85%');
+    // [2026-08-26] "원본의 85% 이상"이라는 분량 기준을 걷어냈다.
+    //   seo/base R0-5가 "채워야 할 글자수는 없다"로 바뀌었는데 URL 모드만 숫자를 들고
+    //   있어 같은 글에 반대 지시가 들어갔다. 이제 두 곳 다 "사실을 다 담았는가"로 본다.
+    //   실측 배경: 원문 9,787자 → 본문 900자(압축률 15%), fact 보존율 17%.
+    //   85%라는 숫자가 있어도 지켜지지 않았다 — 숫자가 아니라 목록이 필요했다.
+    it('분량 숫자 대신 사실 목록 완료를 기준으로 삼는다', () => {
+      for (const mode of ['seo', 'affiliate', '']) {
+        const d = withMode(mode);
+        expect(d).not.toContain('85%');
+        expect(d).toContain('분량 기준은 두지 않는다');
+      }
     });
   });
 });
