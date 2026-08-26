@@ -99,7 +99,12 @@ describe('본선 배선', () => {
   const source = readFileSync(resolve(__dirname, '../contentGenerator.ts'), 'utf-8');
 
   it('사후 검증기가 상환 검사를 부른다', () => {
-    expect(source).toMatch(/function runPostGenValidator[\s\S]{0,200}logTitlePayoff\(content, source\)/);
+    // 근접 거리로 단언하지 않는다 — 사이에 다른 진단이 늘면 의도와 무관하게 깨진다
+    //   (2026-08-27 Phase 0 진단 로그가 들어오며 실제로 깨졌다).
+    //   확인할 것은 "검증기 안에서 불린다" 하나뿐이다.
+    const body = source.slice(source.indexOf('function runPostGenValidator'));
+    const scope = body.slice(0, body.indexOf('\n}'));
+    expect(scope).toContain('logTitlePayoff(content, source)');
   });
 
   it('validator 기능이 꺼져 있어도 상환 검사는 돈다', () => {

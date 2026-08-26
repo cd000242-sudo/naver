@@ -185,6 +185,8 @@ import { buildUrlModeDirective } from './contentUrlModeDirective.js';
 import { buildKeywordFactChecklist } from './content/sourceFactChecklist.js';
 import { checkTitlePayoff, describeTitlePayoff } from './content/titlePayoffCheck.js';
 import { stampGenerationMode } from './content/generationModeStamp.js';
+import { buildTitleDiagnosticsLines } from './content/titleDiagnostics.js';
+import { describePublicReactionClaims, findUngroundedReactionClaims } from './content/publicReactionClaim.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
 import {
   applyManualTitleOverride,
@@ -463,11 +465,45 @@ function logTitlePayoff(content: any, source: any): void {
   }
 }
 
+/**
+ * [2026-08-27] 자료에 없는 여론 서술을 알린다.
+ *
+ * 실측: 원문 인용을 100% 살린 글이 그와 별개로 "계속 회자되는", "반응이 달라졌습니다"
+ * 처럼 원문에 없는 반응을 세 군데 지어냈다. 인물·숫자 날조보다 눈에 덜 띄지만 실존
+ * 인물 글에서는 더 위험하다 — 독자가 확인할 수 없고 당사자에게 불리하게 작동한다.
+ *
+ * 경고만 낸다. 사장님이 보고 지우면 되고, 발행은 그대로 간다.
+ */
+function logPublicReactionClaims(content: any, source: any): void {
+  try {
+    const body = [
+      content?.introduction,
+      ...(Array.isArray(content?.headings)
+        ? content.headings.map((h: any) => `${h?.heading || ''} ${h?.content || ''}`)
+        : []),
+      content?.conclusion,
+    ].filter(Boolean).join('\n');
+    const claims = findUngroundedReactionClaims(body, source?.rawText);
+    const message = describePublicReactionClaims(claims);
+    if (message) {
+      console.warn(`[ReactionClaim] ⚠️ ${message}`);
+      for (const claim of claims) console.warn(`[ReactionClaim]   · ${claim.sentence}`);
+    }
+  } catch (err) {
+    console.log('[ReactionClaim] 검사 생략:', err instanceof Error ? err.message : err);
+  }
+}
+
 function runPostGenValidator(content: any, source: any): void {
   // [2026-08-26] 글이 자기 모드를 기억하게 한다. 발행 시점 계약(해시태그 상한 등)은
   // 화면에 골라진 모드를 보므로, 불러와 발행할 때 어긋나도 알 길이 없었다.
   stampGenerationMode(content, source?.contentMode);
+  // [2026-08-27 Phase 0] 제목 재료를 로그에 드러낸다. 평가기가 100점을 준 제목을
+  //   사장님이 "클릭 안 하겠다"고 했는데, 재료가 약한 건지 재료를 못 살린 건지
+  //   가릴 근거가 로그에 없었다. 채점 축을 만들기 전에 이걸 먼저 본다.
+  for (const line of buildTitleDiagnosticsLines(content)) console.log(line);
   logTitlePayoff(content, source);
+  logPublicReactionClaims(content, source);
   if (!isFeatureEnabled('validator')) return;
   let result: any;
   try {
