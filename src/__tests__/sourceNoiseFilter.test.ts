@@ -434,3 +434,67 @@ describe('본문이 절반이 안 되는 페이지도 자른다', () => {
     expect(r.text).toContain('넷플릭스가 후속편을 논의');
   });
 });
+
+/**
+ * [2026-08-27 뉴스픽 실측] 꼬리 절단이 보강 자료까지 통째로 잘랐다.
+ *
+ *   [URL 심화보강] ✅ 1건 / 2681자 보강        원본 1,072자 + 보강 2,681자 = 3,753자
+ *   [SourceNoise] 꼬리 2766자 절단 → 3782자에서 1015자
+ *                                        ↑ 원본보다도 작다
+ *
+ * 보강은 원본 뒤에 "--- 참고 자료 ---" 로 붙는다. 원본 끝의 저작권 표시를 만난 절단이
+ * 그 뒤를 전부 날리면서, 애써 긁어온 블로그 자료가 통째로 사라졌다.
+ * 절단은 기사 본문의 끝을 찾는 장치지, 그 뒤에 의도적으로 붙인 자료를 지우는 장치가 아니다.
+ */
+describe('보강 자료는 꼬리 절단에 날아가지 않는다', () => {
+  const BODY = '김새롬이 40대에 달라진 결혼관을 말했다. 조건보다 매력을 본다고 밝혔다. '.repeat(14);
+  const NOTICE = '<저작권자 © 스포츠동아, 무단전재 및 재배포 금지>';
+  const SUPPLEMENT = '\n\n--- 참고 자료 (관련 상위글 1건) ---\n\n[상위글 1 — 김새롬]\n김새롬의 결혼관 이야기가 이어졌다. '.repeat(1);
+
+  it('참고 자료 구간은 남는다', () => {
+    const { text } = stripSourceNoise(BODY + NOTICE + SUPPLEMENT);
+    expect(text).toContain('참고 자료');
+    expect(text).toContain('[상위글 1 — 김새롬]');
+  });
+
+  it('기사 본문의 껍데기는 그대로 걷어낸다', () => {
+    const { text } = stripSourceNoise(BODY + NOTICE + SUPPLEMENT);
+    expect(text).not.toContain('저작권자');
+    expect(text).toContain('조건보다 매력을 본다');
+  });
+
+  it('보강이 없으면 예전대로 자른다', () => {
+    const { text } = stripSourceNoise(`${BODY}${NOTICE}관련기사 이것저것 더보기`);
+    expect(text).not.toContain('관련기사');
+  });
+});
+
+/**
+ * [2026-08-27 뉴스픽 실측] 본문에 그대로 남은 껍데기 두 가지.
+ *   "이 소식은 스포츠동아 이수진 기자가 전했습니다."   ← 바이라인
+ *   "All rights reserved."                            ← 영문 저작권
+ *   "'이미지 크게 보기' 안내가 함께 실렸고"             ← 이미지 UI 문구
+ * 기존 규칙은 한글 고지와 짧은 줄만 봤다.
+ */
+describe('영문 저작권과 이미지 UI 문구', () => {
+  const BODY = '김새롬이 40대에 달라진 결혼관을 말했다. 조건보다 매력을 본다고 밝혔다. '.repeat(14);
+
+  it('All rights reserved 를 걷어낸다', () => {
+    expect(stripSourceNoise(`${BODY}All rights reserved.`).text).not.toContain('rights reserved');
+  });
+
+  it('Copyright 표기도 걷어낸다', () => {
+    expect(stripSourceNoise(`${BODY}Copyright ⓒ 스포츠동아 All rights reserved.`).text)
+      .not.toContain('Copyright');
+  });
+
+  it('이미지 크게 보기 안내를 걷어낸다', () => {
+    expect(stripSourceNoise(`${BODY}이미지 크게 보기 사진은 유튜브 캡처`).text)
+      .not.toContain('이미지 크게 보기');
+  });
+
+  it('본문 속 "이미지"는 건드리지 않는다', () => {
+    const text = `${BODY}이미지가 공개되며 반응이 이어졌다.`;
+    expect(stripSourceNoise(text).text).toContain('이미지가 공개되며');
+  });
+});
