@@ -830,7 +830,16 @@ export class SmartCrawler {
           '.end_btn', '.end_ad', '.article_end',         // 기사 끝 광고
           '[class*="recommend"]', '[class*="popular"]',  // 클래스명에 포함된 경우
           '[class*="ranking"]', '[class*="related"]',
-          '[class*="other_news"]', '[class*="more_"]'
+          '[class*="other_news"]', '[class*="more_"]',
+          // ✅ [2026-08-26] Tailwind 유틸리티 클래스만 쓰는 매체 대응 (스타뉴스 실측).
+          //   위 셀렉터는 전부 "의미가 담긴 클래스명"을 노린다. 그런데 요즘 매체는
+          //   <li><h3 class="text-14/20 font-bold line-clamp-1"> 처럼 유틸리티 클래스만
+          //   쓴다 — 의미가 없어 하나도 걸리지 않았고, 같은 페이지의 다른 기사 제목들이
+          //   본문 재료로 들어가 "같은 날 함께 걸린 소식들" 같은 엉뚱한 섹션이 생겼다.
+          //   line-clamp 는 목록 카드에서 제목을 자를 때만 쓴다 — 본문 문단에는 쓰지 않는다.
+          '[class*="line-clamp"]',
+          //   목록 안의 제목은 링크 카드다. 본문 문단이 li > h3 로 오는 경우는 없다.
+          'li > h3', 'li > h4', 'li > strong > a'
         ];
 
         const title =
