@@ -178,6 +178,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/sourceNoiseFilter.ts',
   'src/content/subKeywordCoverageGate.ts',
   'src/content/summaryTable.ts',
+  'src/content/supplementTopicGuard.ts',
   'src/content/titleCandidateSelection.ts',
   'src/content/titleDiagnostics.ts',
   'src/content/titleLengthPolicy.ts',
