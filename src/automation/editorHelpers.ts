@@ -2,6 +2,7 @@
  * editorHelpers.ts - 에디터 조작/컨텐츠 적용 관련 함수
  * naverBlogAutomation.ts에서 추출됨
  */
+import { describeImagePath } from './imagePathResolve.js';
 import { Page, Frame, ElementHandle } from 'puppeteer';
 import {
   SELECTORS,
@@ -1537,8 +1538,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             } else {
               self.log(`   ✅[ImageManager] 최종 매칭 성공: ${headingImages.length}개 이미지 발견`);
               headingImages.forEach((img: any, idx: number) => {
-                const filePath = img.filePath || img.savedToLocal || img.url || '경로 없음';
-                self.log(`      [${idx + 1}] ${filePath.substring(0, 80)}...`);
+                // [2026-08-26] savedToLocal 은 boolean 일 수 있다(types.ts:39).
+                //   예전에는 그 값이 그대로 filePath 자리에 들어와 true.substring 으로
+                //   터졌고, 로그 한 줄 때문에 발행 전체가 멈췄다(사장님 실측).
+                self.log(`      [${idx + 1}] ${describeImagePath(img)}`);
               });
             }
           } else {

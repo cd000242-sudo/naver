@@ -4,6 +4,7 @@
  * 모든 함수는 self: any 파라미터를 통해 NaverBlogAutomation 인스턴스에 접근
  */
 
+import { resolveImagePath } from './imagePathResolve.js';
 import { safeKeyboardType } from './typingUtils.js';
 import { recordSilentFailure } from './silentFailureCounter.js';
 import * as fsPromises from 'fs/promises';
@@ -1524,7 +1525,9 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
 
     // ✅ [2026-04-10 FIX] previewDataUrl(base64) 폴백 추가
     // ImageFX 등에서 filePath/savedToLocal/url 모두 없고 previewDataUrl만 있는 경우 대응
-    const imagePath = image.filePath || image.savedToLocal || image.url || image.previewDataUrl;
+    // [2026-08-26] savedToLocal 이 boolean(true) 일 때 그대로 경로 자리에 들어가
+    //   뒤쪽 문자열 연산에서 터졌다. 문자열인 후보만 고른다(순서는 종전과 같다).
+    const imagePath = resolveImagePath(image);
     if (!imagePath) {
       failures.push(`이미지 ${imgIdx + 1}: 경로 없음 (heading="${image.heading || ''}", provider="${image.provider || ''}")`);
       self.log(`      ⚠️ 이미지 경로가 없음, 건너뜀 (heading: "${image.heading}", provider: "${image.provider}", 키: ${Object.keys(image).join(',')})`);
