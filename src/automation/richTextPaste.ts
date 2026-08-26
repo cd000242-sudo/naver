@@ -680,6 +680,11 @@ function paragraphSpacerHtml(fontSizePx: number, centerAlign: boolean): string {
  */
 function shouldInsertParagraphSpacer(html: string): boolean {
   return /^<p\b/.test(html)
+    // [2026-08-26 사장님 실측] "빈칸 줄바꿈은 한 번만 해도 되는데 4~5번은 한 것 같네."
+    //   맞다. 예전에는 문단 조각마다 스페이서를 넣어, 원본 2문단(각 2문장)이
+    //   문단 4개 + 빈칸 4개로 나갔다 — 문장 사이마다 빈 줄이 들어간 셈이다.
+    //   스페이서는 원본의 문단 경계에만 넣는다. 그 표시가 data-rich-para-end 다.
+    && html.includes('data-rich-para-end="true"')
     && !html.includes('data-rich-heading="true"')
     && !html.includes('data-rich-toc="true"')
     && !html.includes('data-rich-spacer="true"');
@@ -1436,7 +1441,11 @@ type RenderNode =
   | { type: 'list'; html: string; plain: string; count: number }
   | { type: 'heading'; id: string; title: string; level: number; index: number }
   | { type: 'qa-question'; text: string; plain: string; sectionIndex: number }
-  | { type: 'paragraph'; text: string; plain: string; score: number; priority: number; sectionIndex: number };
+  | {
+    type: 'paragraph'; text: string; plain: string; score: number; priority: number; sectionIndex: number;
+    /** 원본 한 줄이 문장 단위로 쪼개진 조각 중 마지막인가. 빈 문단 위치를 정한다. */
+    endsSourceLine?: boolean;
+  };
 
 interface HeadingEntry {
   id: string;
@@ -1756,7 +1765,7 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
        */
       const isStepChain = chunks.length > 1 && STEP_ARROW_RE.test(cleanedLine);
       const paragraphTexts = isStepChain ? [chunks.join('\n')] : chunks;
-      for (const chunk of paragraphTexts) {
+      paragraphTexts.forEach((chunk, chunkIndex) => {
         nodes.push({
           type: 'paragraph',
           text: chunk,
@@ -1764,8 +1773,11 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
           score: scoreImportantSentence(chunk),
           priority: highlightPriority(chunk),
           sectionIndex: currentSectionIndex,
+          // [2026-08-26] 원본 한 줄이 문장 단위로 쪼개진 조각 중 마지막인지.
+          //   빈 문단(스페이서)은 원본의 문단 경계에만 넣는다.
+          endsSourceLine: chunkIndex === paragraphTexts.length - 1,
         });
-      }
+      });
     }
   }
 
@@ -1828,8 +1840,11 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
     }
 
     const important = selectedHighlights.has(index);
+    // [2026-08-26] 원본 문단의 마지막 문장에만 표시를 남긴다.
+    //   빈 문단(스페이서)을 어디에 넣을지 결정하는 유일한 근거다.
+    const paraEnd = node.endsSourceLine === false ? '' : ' data-rich-para-end="true"';
     htmlParts.push(
-      `<p style="${paragraphStyle(fontSizePx, centerAlign)}">${formatInline(node.text, terms, important, highlightTheme)}</p>`
+      `<p${paraEnd} style="${paragraphStyle(fontSizePx, centerAlign)}">${formatInline(node.text, terms, important, highlightTheme)}</p>`
     );
     plainParts.push(node.plain);
     paragraphCount += 1;

@@ -18,7 +18,11 @@ describe('buildMobileRichHtml', () => {
     );
 
     expect(result.paragraphCount).toBeGreaterThan(1);
-    expect(result.html.match(/<p style=/g)?.length).toBe(result.paragraphCount);
+    // [2026-08-26] 속성 이름이 아니라 개수를 센다. 예전에는 '<p style=' 문자열을 세어,
+    //   문단에 속성이 하나 붙는 것만으로 깨졌다(data-rich-para-end 추가 시 실측).
+    const contentParagraphs = (result.html.match(/<p[^>]*style=/g) || []).length
+      - (result.html.match(/data-rich-spacer/g) || []).length;
+    expect(contentParagraphs).toBe(result.paragraphCount);
     expect(result.html).toContain('text-align:center');
     expect(result.html).toContain('max-width:520px');
   });

@@ -185,3 +185,30 @@ describe('화살표 순서 표기 (2026-08-26 사장님 실측)', () => {
     expect(buildPastePreviewHtml('아무 문장입니다.')).toMatch(/^<div style="background:#ffffff/);
   });
 });
+
+describe('빈 문단은 문단 경계에만 (2026-08-26 사장님 실측)', () => {
+  // "빈칸 줄바꿈은 한 번만 해도 되는데 4~5번은 한 것 같네."
+  // 예전에는 문장마다 스페이서가 붙어 원본 2문단이 문단 4개 + 빈칸 4개로 나갔다.
+  const TWO_PARAS = [
+    "'비행기에서 내렸다가 다시 탔다.' 초반에 가장 크게 돈 문장이 이거였어요.",
+    '짧고 강해서 여론이 한쪽으로 확 기울었죠. 그런데 이후 공개된 내용은 좀 달랐습니다.',
+  ].join('\n\n');
+
+  const spacerCount = (html: string) => (html.match(/data-rich-spacer/g) || []).length;
+
+  it('원본 문단 수만큼만 빈 문단이 생긴다', () => {
+    // 문단 2개 → 스페이서 2개(각 문단 끝). 문장 4개마다 붙지 않는다.
+    expect(spacerCount(buildPastePreviewHtml(TWO_PARAS))).toBe(2);
+  });
+
+  it('한 문단 안의 문장 사이에는 빈 문단을 넣지 않는다', () => {
+    const oneParaTwoSentences = '첫 문장입니다. 두 번째 문장도 같은 문단입니다.';
+    expect(spacerCount(buildPastePreviewHtml(oneParaTwoSentences))).toBe(1);
+  });
+
+  it('문단 끝 표시가 있는 문단에만 빈 문단이 따라붙는다', () => {
+    const html = buildPastePreviewHtml(TWO_PARAS);
+    const paraEnds = (html.match(/data-rich-para-end="true"/g) || []).length;
+    expect(paraEnds).toBe(2);
+  });
+});
