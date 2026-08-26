@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Restored from dist/renderer/modules/fullAutoFlow.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
+import { buildPastePreviewText } from '../../automation/richTextPaste.js';
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import {
@@ -1830,7 +1831,10 @@ function updateUnifiedImagePreview(headings, generatedImages) {
         const thumbBlock = thumbUrl
             ? `<div style="width: 60px; height: 40px; border-radius: 6px; overflow: hidden; border: 2px solid var(--border-color); flex-shrink: 0;"><img src="${escapeHtml(thumbUrl)}" alt="썸네일" style="width: 100%; height: 100%; object-fit: cover;"></div>`
             : '';
-        const safeIntro = escapeHtml(introductionText.substring(0, 600)) + (introductionText.length > 600 ? '...' : '');
+        // [2026-08-26] 붙여넣기가 실제로 만들 줄바꿈으로 보여준다. 미리보기에서 고쳐도
+        //   발행 결과의 줄바꿈이 달라서, 발행 후 블로그에서 다시 손봐야 했다(사장님 실측).
+        //   600자 자르기도 없앴다 — 잘린 뒤는 확인할 방법이 없어 검수가 반쪽이 된다.
+        const safeIntro = escapeHtml(buildPastePreviewText(introductionText));
         headerHtml = `<div style="margin-bottom: 1rem; padding: 0.75rem; background: var(--bg-tertiary); border-radius: 8px; border: 1px solid var(--border-light);">
       <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: ${introductionText ? '0.75rem' : '0'};">
         ${thumbBlock}
@@ -1866,7 +1870,9 @@ function updateUnifiedImagePreview(headings, generatedImages) {
                 headingContent = bodyPlain.substring(startIndex, endIndex).trim();
             }
         }
-        const safeContent = escapeHtml(headingContent.substring(0, 400)) + (headingContent.length > 400 ? '...' : '');
+        // [2026-08-26] 붙여넣기와 같은 줄바꿈으로. 400자 자르기도 제거 — 잘린 뒤 문단은
+        //   확인할 수 없어 "미리보기에서 고쳤는데 발행본이 다르다"가 반복된다.
+        const safeContent = escapeHtml(buildPastePreviewText(headingContent));
         let imageDisplay = '';
         const headingKey = encodeURIComponent(String(normalizedHeadingTitle || '').trim());
         const getFromCache2 = window.getHeadingVideoPreviewFromCache || getHeadingVideoPreviewFromCache;
@@ -1926,7 +1932,32 @@ function updateUnifiedImagePreview(headings, generatedImages) {
     const emptyHeadingsHtml = bodyPlain.trim()
         ? `<div style="padding: 0.5rem; line-height: 1.7; white-space: pre-wrap; color: var(--text-strong); font-size: 0.95rem;">${escapeHtml(bodyPlain)}</div>`
         : '<div style="color: var(--text-muted); font-style: italic;">소제목이 없습니다.</div>';
-    integratedPreview.innerHTML = headerHtml + (integratedHtml || emptyHeadingsHtml);
+    // [2026-08-26 사장님 지시] "소제목별 구조 및 이미지 미리보기는 끝까지 다 보여줘야지
+    //   마무리가 빠져있어." 예전에는 제목·도입부 + 소제목들에서 끝나 마무리와 해시태그가
+    //   화면에 아예 없었다. 발행하고 나서야 보이니 검수가 성립하지 않는다.
+    const conclusionText = String(structuredContent?.conclusion || '').trim();
+    const hashtagList = Array.isArray(structuredContent?.hashtags)
+        ? structuredContent.hashtags.map((t: any) => String(t || '').trim()).filter(Boolean)
+        : [];
+    let footerHtml = '';
+    if (conclusionText || hashtagList.length > 0) {
+        const conclusionBlock = conclusionText
+            ? `<div style="padding: 0.75rem; background: var(--bg-primary); border-radius: 6px; border-left: 3px solid var(--accent);">
+        <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem; font-size: 0.9rem;">🏁 마무리</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; white-space: pre-line;">${escapeHtml(buildPastePreviewText(conclusionText))}</div>
+      </div>`
+            : '';
+        const hashtagBlock = hashtagList.length > 0
+            ? `<div style="margin-top: ${conclusionText ? '0.75rem' : '0'}; padding: 0.75rem; background: var(--bg-primary); border-radius: 6px; border-left: 3px solid var(--primary);">
+        <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem; font-size: 0.9rem;">🏷️ 해시태그 ${hashtagList.length}개</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; word-break: break-all;">${escapeHtml(hashtagList.map((t: string) => (t.startsWith('#') ? t : `#${t}`)).join(' '))}</div>
+      </div>`
+            : '';
+        footerHtml = `<div style="margin-bottom: 1rem; padding: 0.75rem; background: var(--bg-tertiary); border-radius: 8px; border: 1px solid var(--border-light);">
+      ${conclusionBlock}${hashtagBlock}
+    </div>`;
+    }
+    integratedPreview.innerHTML = headerHtml + (integratedHtml || emptyHeadingsHtml) + footerHtml;
     const headingTitles = headings
         .map((h) => (typeof h === 'string' ? h : (h?.title || h)))
         .map((t) => String(t || '').trim())

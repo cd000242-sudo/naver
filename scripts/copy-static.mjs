@@ -364,6 +364,16 @@ try {
       filePath: path.join(projectRoot, 'dist', 'content', 'keywordTitlePrefixPolicy.js'),
     },
     {
+      // [2026-08-26] 붙여넣기 줄바꿈 미리보기 — fullAutoFlow 가 값으로 가져온다.
+      //   미리보기와 발행 결과가 갈리지 않도록 같은 함수를 쓴다.
+      label: 'automation/richTextPaste.js',
+      filePath: path.join(projectRoot, 'dist', 'automation', 'richTextPaste.js'),
+    },
+    {
+      label: 'content/mobileLineBalance.js',
+      filePath: path.join(projectRoot, 'dist', 'content', 'mobileLineBalance.js'),
+    },
+    {
       // [2026-08-26] 에이전트 잔여 배찌 문구 — agentQuotaBadge 가 값으로 가져온다.
       label: 'agentCli/usageBadge.js',
       filePath: path.join(projectRoot, 'dist', 'agentCli', 'usageBadge.js'),

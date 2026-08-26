@@ -1404,6 +1404,49 @@ function selectImportantParagraphs(nodes: RenderNode[], maxHighlights: number): 
   return new Set(selected);
 }
 
+/**
+ * 미리보기용 — 붙여넣기가 실제로 만들 줄바꿈을 그대로 돌려준다.
+ *
+ * [2026-08-26 사장님 지시] "타이핑할 때 리치 복붙을 하잖아. 줄바꿈이랑 문단 정리가
+ * 모바일 전용으로 되어 있는데 그걸 그대로 보여줘야 사용자가 보고 정확하게 줄바꿈이나
+ * 문단 정리를 했는지 알 수 있지 않니. 지금은 실컷 수정해도 줄바꿈이 이상하면 다시
+ * 블로그 가서 수정해야 돼."
+ *
+ * 원문(bodyPlain·introduction·conclusion)은 문장 그대로 저장한다(v2.11.205 — 미리 끊으면
+ * 조각이 반자동 소제목 추출기에 소제목으로 잡힌다). 줄을 나누는 것은 붙여넣기 직전뿐이라
+ * 미리보기와 발행 결과가 서로 달랐다.
+ *
+ * 그래서 저장 형태는 건드리지 않고, **표시할 때만** 붙여넣기와 같은 함수를 통과시킨다.
+ * buildReadableParagraphs 를 그대로 쓰므로 두 결과가 갈릴 수 없다.
+ *
+ * 표·목록 같은 블록 문법은 붙여넣기에서 따로 처리되므로 여기서는 줄을 건드리지 않고
+ * 그대로 돌려준다 — 미리보기에서 표가 문장으로 쪼개지면 오히려 오해를 부른다.
+ */
+export function buildPastePreviewText(
+  text: string,
+  options: { maxChunkChars?: number } = {},
+): string {
+  const source = String(text ?? '');
+  if (!source.trim()) return '';
+  const maxChunkChars = options.maxChunkChars ?? DEFAULT_MAX_CHUNK_CHARS;
+
+  const out: string[] = [];
+  for (const line of source.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      out.push('');
+      continue;
+    }
+    // 표 행·구분선·인용·목록 마커는 블록 문법이라 문장 분해 대상이 아니다.
+    if (/^\|.*\|$/.test(trimmed) || /^[-*+]\s/.test(trimmed) || /^>/.test(trimmed) || /^#{1,6}\s/.test(trimmed)) {
+      out.push(trimmed);
+      continue;
+    }
+    out.push(...buildReadableParagraphs(trimmed, maxChunkChars));
+  }
+  return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+
 export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions = {}): MobileRichHtmlResult {
   const normalized = normalizeMateReadableText(normalizeText(text));
   const maxChunkChars = options.maxChunkChars ?? DEFAULT_MAX_CHUNK_CHARS;
