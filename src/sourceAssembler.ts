@@ -1,7 +1,7 @@
 import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from './naver/index.js';
 import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
 import { orderFullTextCandidates } from './content/fullTextCandidateOrder.js';
-import { buildSupplementQuery, filterOnTopicSupplement } from './content/supplementTopicGuard.js';
+import { buildSupplementQuery, filterOnTopicSupplement, isOnTopicForKeyword } from './content/supplementTopicGuard.js';
 import Parser from 'rss-parser';
 import * as iconv from 'iconv-lite';
 import type { ContentSource, ContentGeneratorProvider, ArticleType } from './contentGenerator.js';
@@ -1673,6 +1673,7 @@ export async function collectTopArticleFullTexts(
     const usedUrls: string[] = [];
     let totalChars = 0;
     let staleParts = 0;   // [2026-08-11] 시점 경고를 붙인 자료 수
+    let offTopicSkipped = 0;  // [2026-08-27] 검색어와 주제가 다른 자료 수
 
     let stoppedByDeadline = false;
     for (const candidate of candidates) {
@@ -1696,6 +1697,18 @@ export async function collectTopArticleFullTexts(
         ]);
         const content = (article.content || '').trim();
         if (content.length < 300) continue;
+        /*
+         * [2026-08-27] 검색어와 주제를 대조한다.
+         *
+         * 키워드 모드에는 기준이 될 원본 기사가 없어 filterOnTopicSupplement 를 쓸 수
+         * 없다. 블로그 여러 편이 대등하게 섞이고, 그중 하나가 자동차 얘기면 그대로
+         * 들어온다 — "서인영 46kg" 글에 미니 컨트리맨 스펙이 소제목 두 개를 차지했다.
+         * 기준이 없으면 검색어 자체를 기준으로 삼는다.
+         */
+        if (!isOnTopicForKeyword(`${article.title || candidate.title || ''} ${content}`, keyword)) {
+          offTopicSkipped += 1;
+          continue;
+        }
         const excerpt = content.substring(0, FULLTEXT_PER_ARTICLE_CHARS);
         const title = article.title || candidate.title || '';
         /**
@@ -1719,6 +1732,9 @@ export async function collectTopArticleFullTexts(
       logger(`[플랫폼 콘텐츠 수집] ⏱️ 시간 예산 소진 — 확보한 ${parts.length}건으로 진행합니다 (전부 버리지 않습니다)`);
     }
     if (parts.length === 0) return { text: '', count: 0, urls: [] };
+    if (offTopicSkipped > 0) {
+      logger(`[플랫폼 콘텐츠 수집] ⚠️ 주제 밖 자료 ${offTopicSkipped}건 제외 (검색어의 고유명사가 하나도 없음)`);
+    }
     if (staleParts > 0) {
       logger(`[플랫폼 콘텐츠 수집] 🕐 1년 넘은 자료 ${staleParts}건 — 시점 경고를 붙였습니다 (작년 조건이 그대로 실리지 않도록)`);
     }

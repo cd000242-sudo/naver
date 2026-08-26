@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest';
 import {
   buildSupplementQuery,
   filterOnTopicSupplement,
+  isOnTopicForKeyword,
 } from '../content/supplementTopicGuard';
 
 /**
@@ -176,5 +177,69 @@ describe('보강은 원본을 넘어설 수 없다', () => {
   it('유지 건수는 실제 상위글 블록만 센다', () => {
     const two = `${block(1, '무덤 이야기.')}\n\n${block(2, '비석 이야기.')}`;
     expect(filterOnTopicSupplement(BASE, two).kept).toBe(2);
+  });
+});
+
+/**
+ * [2026-08-27 2번] 수집 단계에서 키워드와 주제를 대조한다.
+ *
+ * 지금까지의 주제 필터는 URL 모드의 심화보강에만 걸려 있었다. 기준이 될 원본 기사가
+ * 있어야 대조가 되기 때문이다. 키워드 모드는 그 원본이 없다 — 블로그 여러 편이 대등하게
+ * 섞이고, 그중 하나가 자동차 얘기면 그대로 들어온다.
+ *
+ * 실측: "서인영 46kg" 글에 미니 컨트리맨 스펙(전장 4445mm, 204마력, 4550만원)이
+ * 소제목 두 개를 차지했다. 기사에는 "서인영"이 있어도 "4445mm"는 없다.
+ *
+ * 기준 원본이 없으면 키워드 자체를 기준으로 삼는다. 검색어에 든 고유명사를 하나도
+ * 안 가진 글은 그 키워드의 자료가 아니다.
+ */
+describe('키워드로 주제를 대조한다', () => {
+  it('키워드의 고유명사를 가진 글은 통과한다', () => {
+    expect(isOnTopicForKeyword(
+      '서인영이 15kg을 감량해 46kg이 됐다고 밝혔다. 탄수화물을 끊었다고 한다.',
+      '서인영 46kg',
+    )).toBe(true);
+  });
+
+  it('키워드와 아무 관계 없는 글은 걸러낸다', () => {
+    expect(isOnTopicForKeyword(
+      '미니 컨트리맨은 전장 4445mm 전폭 1845mm이며 최고출력 204마력을 낸다.',
+      '서인영 46kg',
+    )).toBe(false);
+  });
+
+  it('키워드가 여러 낱말이면 하나만 겹쳐도 통과한다', () => {
+    expect(isOnTopicForKeyword('자판기처럼 애교가 나온다는 반응이 많다.', '서은광 애교 자판기'))
+      .toBe(true);
+  });
+
+  it('숫자만 든 조각은 키워드 근거가 되지 못한다', () => {
+    // "46kg" 은 토큰이 아니다 — 숫자가 섞인 말은 아무 글에나 있을 수 있다.
+    expect(isOnTopicForKeyword('체중 46kg을 유지하는 방법입니다.', '서인영 46kg')).toBe(false);
+  });
+
+  it('키워드에서 토큰을 못 뽑으면 판정하지 않는다 — 못 보는 가드는 막지 않는다', () => {
+    expect(isOnTopicForKeyword('아무 글이나', '2026')).toBe(true);
+    expect(isOnTopicForKeyword('아무 글이나', '')).toBe(true);
+  });
+
+  it('본문이 비면 판정하지 않는다', () => {
+    expect(isOnTopicForKeyword('', '서인영 46kg')).toBe(true);
+  });
+
+  it('어떤 입력에도 던지지 않는다', () => {
+    expect(() => isOnTopicForKeyword(null as never, undefined as never)).not.toThrow();
+  });
+});
+
+describe('수집기 배선', () => {
+  const src = readFileSync(resolve(__dirname, '../sourceAssembler.ts'), 'utf-8');
+
+  it('풀텍스트 수집이 키워드와 주제를 대조한다', () => {
+    expect(src).toMatch(/isOnTopicForKeyword\(/);
+  });
+
+  it('걸러낸 건수를 로그로 남긴다 — 조용히 버리지 않는다', () => {
+    expect(src).toMatch(/주제 밖[^\n]*건/);
   });
 });

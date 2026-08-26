@@ -18,6 +18,7 @@
  * The supplement is background material. When it is off-topic it is worse than nothing —
  * a thin source is better than the wrong subject.
  */
+import { toHashtagCandidate } from './hashtagCandidateFilter.js';
 import { extractKoreanFactTokens } from './koreanFactTokens.js';
 
 /** Longer queries drift: Naver tokenizes them and matches on the generic words. */
@@ -74,6 +75,50 @@ export function buildSupplementQuery(
   } catch {
     return '';
   }
+}
+
+/**
+ * True when the text belongs to the searched keyword's topic.
+ *
+ * [2026-08-27] `filterOnTopicSupplement` needs a base article to compare against, which
+ * keyword mode does not have: several blogs arrive as equals, and if one of them is about
+ * a car, the car goes in. 서인영's 46kg diet article carried a MINI Countryman spec sheet
+ * (4445mm, 204마력, 4550만원) across two sections.
+ *
+ * Without a base, the keyword itself is the anchor. A document that shares not one proper
+ * noun with the search terms is not material for that keyword.
+ *
+ * Fails open: when the keyword yields no usable token (digits only, one letter), nothing is
+ * filtered. A guard that cannot see must not act.
+ */
+export function isOnTopicForKeyword(
+  text: string | undefined,
+  keyword: string | undefined,
+): boolean {
+  try {
+    const body = String(text || '').trim();
+    if (!body) return true;
+
+    const tokens: string[] = [];
+    for (const word of String(keyword || '').split(/[^가-힣A-Za-z0-9]+/)) {
+      const token = toPromiseTokenFromKeyword(word);
+      if (token) tokens.push(token);
+    }
+    if (tokens.length === 0) return true;
+
+    return tokens.some((token) => body.includes(token));
+  } catch {
+    return true;
+  }
+}
+
+/** Keyword word → the noun worth matching on, or null when it proves nothing. */
+function toPromiseTokenFromKeyword(rawWord: string): string | null {
+  const word = String(rawWord || '').trim();
+  // 숫자가 섞인 말("46kg", "2026")은 아무 글에나 있어 주제의 근거가 못 된다.
+  if (!/^[가-힣]{2,}$/.test(word)) return null;
+  const core = toHashtagCandidate(word) || word;
+  return core.length >= 2 ? core : null;
 }
 
 export interface SupplementFilterResult {
