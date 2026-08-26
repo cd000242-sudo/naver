@@ -1,4 +1,4 @@
-import { scoreSearchMatch } from './content/titleModeObjective.js';
+import { scoreSearchMatch, scorePurchaseAxis } from './content/titleModeObjective.js';
 /**
  * [Phase 3-9/v2.10.147] contentGenerator god file decomposition — evaluateTitleQuality.
  *
@@ -209,6 +209,14 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
   //   물려 있어야 한다. 예전엔 keyword 를 "그대로 복사인지" 판정에만 써서,
   //   검색어를 통째로 버린 후보가 길이만 맞으면 이길 수 있었다. 홈판은 검색이
   //   아니라 피드에서 싸우므로 여기서 건드리지 않는다(ctrCombat·neoHook 담당).
+  // 쇼핑은 계약이 구매 축을 필수로 요구한다 — 없으면 결함으로 본다.
+  const purchaseAxis = scorePurchaseAxis(t, mode);
+  if (purchaseAxis.points !== 0) {
+    score += purchaseAxis.points;
+    issues.push(purchaseAxis.reason);
+    console.log(`[TitleQuality] ${purchaseAxis.points}점: ${purchaseAxis.reason}`);
+  }
+
   const searchMatch = scoreSearchMatch(t, keyword, mode);
   if (searchMatch.points !== 0) {
     score += searchMatch.points;

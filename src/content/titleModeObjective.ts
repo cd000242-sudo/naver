@@ -54,16 +54,86 @@ export function scoreSearchMatch(
   const { covered, total, ratio } = measureKeywordCoverage(keyword, title);
   if (total === 0) return NO_CHANGE;
 
+  // 가산점을 주지 않는다. 이 채점기는 100점에서 시작해 결함을 빼고 Math.min(100)으로
+  // 자르므로, 가산은 결함 없는 제목들 사이에서 묻히기만 하는 게 아니라 더 나쁘다 —
+  // 다른 항목의 감점을 흡수해 실제 결함을 가린다. (실측: 구매 축이 없어 -10 이어야 할
+  // 쇼핑 제목이 검색어 맞물림 +15에 상쇄되어 100점으로 나왔다.)
+  // 그래서 "물려 있음"은 0점이고, 안 물린 정도만 결함으로 뺀다.
   if (ratio >= 2 / 3) {
-    return { points: 15, reason: `검색어 맞물림 ${covered}/${total}`, covered, total };
+    return { points: 0, reason: `검색어 맞물림 ${covered}/${total}`, covered, total };
   }
   if (ratio >= 1 / 3) {
-    return { points: 5, reason: `검색어 부분 맞물림 ${covered}/${total}`, covered, total };
+    return {
+      points: -8,
+      reason: `검색어 부분 맞물림 ${covered}/${total} — 키워드가 분명히 보이지 않는다`,
+      covered,
+      total,
+    };
   }
   return {
     points: -20,
     reason: `검색어 이탈 ${covered}/${total} — 검색 유입이 끊긴다`,
     covered,
     total,
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// 쇼핑 — 구매 축
+// ═══════════════════════════════════════════════════════════════════
+//
+// situationTitleContract 의 쇼핑 분기는 "용도·대상·공간·비교 조건" 중 최소 1개를
+// 필수로 요구한다. 그런데 채점기에는 쇼핑 감점만 5종 있고 가산이 하나도 없었다.
+// 계약이 필수라고 한 것을 지켜도 점수가 오르지 않으니, 후보 재선택에서 구매 축이
+// 없는 밋밋한 제목이 이길 수 있었다.
+//
+// 아래는 닫힌 목록이 아니라 "모양"을 본다 — 프롬프트의 예시는 예시일 뿐이고
+// 자료마다 실제로 쓰이는 말이 다르기 때문이다. 못 잡으면 가산이 없을 뿐,
+// 잘못된 감점은 생기지 않는다(fail-open).
+
+const PURCHASE_AXIS_SHAPES: ReadonlyArray<{ readonly re: RegExp; readonly name: string }> = [
+  // 용도 — "침실용 / 사무실용 / 캠핑용"
+  { re: /[가-힣]{2,}용(?![어품량])/, name: '용도' },
+  // 대상 — "아기 있는 집 / 반려동물 / 어르신 / 처음 사는 사람"
+  { re: /(있는\s*집|아기|신생아|반려|어르신|초보|처음\s*(?:사|쓰|구매)|1인\s*가구|자취)/, name: '대상' },
+  // 공간·조건 — "원룸 / 좁은 방 / 예산 10만원대"
+  { re: /(원룸|투룸|좁은|작은\s*방|사무실|주방|욕실|차량|예산|만원대|이하로)/, name: '공간·예산' },
+  // 비교 축 — "저소음 / 무선 / 각도 조절 / 세척 편한"
+  { re: /(저소음|무소음|무선|유선|각도|조절|세척|분리|접이|경량|대용량|절전)/, name: '비교조건' },
+];
+
+export interface PurchaseAxisVerdict {
+  readonly points: number;
+  readonly reason: string;
+  readonly matched: readonly string[];
+}
+
+/**
+ * 쇼핑 제목이 구매 축을 갖고 있는지 본다. 없으면 감점한다.
+ *
+ * 가산이 아니라 감점인 이유: 이 채점기는 100점에서 시작해 결함을 빼는 구조이고,
+ * 최종 점수가 Math.min(100)으로 잘린다. 즉 결함 없는 제목들 사이에서는 가산점이
+ * 전부 묻혀 아무 차이도 만들지 못한다(후보 선택은 >= 75 같은 절대 임계도 쓴다).
+ * 계약이 "최소 1개 필수"라고 못박은 것의 부재는 결함이므로 감점이 맞는 자리다.
+ *
+ * 판별은 닫힌 목록이 아니라 모양을 본다 — 자료마다 실제로 쓰이는 말이 다르다.
+ * 그래서 감점 폭은 작게 둔다(-10). 못 잡아서 억울하게 깎이더라도 후보가
+ * 통째로 탈락하지는 않게 한다.
+ */
+export function scorePurchaseAxis(title: string, mode: string | undefined): PurchaseAxisVerdict {
+  if (String(mode || '').trim() !== 'affiliate') {
+    return { points: 0, reason: '', matched: [] };
+  }
+  const t = String(title || '').trim();
+  if (!t) return { points: 0, reason: '', matched: [] };
+
+  const matched = PURCHASE_AXIS_SHAPES.filter((s) => s.re.test(t)).map((s) => s.name);
+  if (matched.length > 0) {
+    return { points: 0, reason: `쇼핑 구매 축: ${matched.join('·')}`, matched };
+  }
+  return {
+    points: -10,
+    reason: '쇼핑: 구매 축 없음 (용도·대상·공간·비교조건 중 1개 필수)',
+    matched: [],
   };
 }

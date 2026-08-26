@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { scoreSearchMatch, isSearchDrivenTitleMode } from '../content/titleModeObjective';
+import { scoreSearchMatch, isSearchDrivenTitleMode, scorePurchaseAxis } from '../content/titleModeObjective';
 import { evaluateTitleQuality } from '../contentTitleEvaluator';
 import { buildSituationTitleContract } from '../content/situationTitleContract';
 
@@ -32,14 +32,26 @@ describe('검색 모드 제목은 검색어와 물려야 한다', () => {
   it('검색으로 먹고사는 네 모드에 모두 적용된다', () => {
     for (const mode of ['seo', 'mate', 'affiliate', 'business']) {
       expect(isSearchDrivenTitleMode(mode)).toBe(true);
-      expect(scoreSearchMatch('청약통장 해지 방법이 갈리는 조건', kw, mode).points).toBeGreaterThan(0);
+      // 충분히 물렸으면 결함 없음(0). 버렸으면 감점.
+      expect(scoreSearchMatch('청약통장 해지 방법이 갈리는 조건', kw, mode).points).toBe(0);
+      expect(scoreSearchMatch('2년 안 채우면 갈리는 조건', kw, mode).points).toBeLessThan(0);
     }
   });
 
-  it('부분 맞물림은 가산도 감점도 크게 하지 않는다', () => {
+  it('가산점을 주지 않는다 — 가산은 다른 항목의 감점을 흡수해 결함을 가린다', () => {
+    // 실측으로 잡은 함정: 구매 축이 없어 -10 이어야 할 쇼핑 제목이
+    // 검색어 맞물림 +15에 상쇄되어 100점으로 나왔다. 점수는 Math.min(100)으로 잘린다.
+    for (const t of ['청약통장 해지 방법이 갈리는 조건', '청약통장 들고 있는데 지금 어떻게 하나', '전혀 다른 제목']) {
+      expect(scoreSearchMatch(t, kw, 'seo').points).toBeLessThanOrEqual(0);
+    }
+  });
+
+  it('부분 맞물림은 이탈보다 약하게 깎는다', () => {
     const partial = scoreSearchMatch('청약통장 들고 있는데 지금 어떻게 하나', kw, 'seo');
-    expect(partial.points).toBe(5);
+    const away = scoreSearchMatch('2년 안 채우고 나오면 갈리는 지점', kw, 'seo');
     expect(partial.covered).toBe(1);
+    expect(partial.points).toBeLessThan(0);
+    expect(partial.points).toBeGreaterThan(away.points);
   });
 });
 
@@ -69,5 +81,28 @@ describe('모드마다 제목 계약이 자기 판에 맞게 갈린다', () => {
       (['seo', 'homefeed', 'affiliate', 'business'] as const).map((m) => build(m)),
     );
     expect(seen.size).toBe(4);
+  });
+});
+
+describe('쇼핑 제목은 구매 축이 있어야 한다', () => {
+  const kw = '오아 메가에어라이트 써큘레이터';
+
+  it('구매 축이 없으면 결함으로 본다 (계약: 최소 1개 필수)', () => {
+    const withAxis = evaluateTitleQuality('오아 메가에어라이트 써큘레이터, 원룸에서 저소음으로 쓸 만한지', kw, 'affiliate' as any);
+    const bare = evaluateTitleQuality('오아 메가에어라이트 써큘레이터 사용 후기', kw, 'affiliate' as any);
+    expect(withAxis.score).toBeGreaterThan(bare.score);
+    expect(bare.issues.join(' ')).toMatch(/구매 축 없음/);
+  });
+
+  it('용도·대상·공간·비교조건 네 갈래를 모두 인정한다', () => {
+    for (const t of ['써큘레이터 침실용으로 두 달', '써큘레이터 아기 있는 집에서', '원룸 써큘레이터 배치', '저소음 써큘레이터 실사용']) {
+      expect(scorePurchaseAxis(t, 'affiliate').points).toBe(0);
+    }
+  });
+
+  it('쇼핑이 아닌 모드는 건드리지 않는다', () => {
+    for (const mode of ['seo', 'homefeed', 'business', 'mate']) {
+      expect(scorePurchaseAxis('아무 제목', mode).points).toBe(0);
+    }
   });
 });
