@@ -634,11 +634,24 @@ function highlightStyle(theme: SoftHighlightTheme, strong = false): string {
   ].join(';');
 }
 
-function paragraphStyle(fontSizePx: number, centerAlign: boolean): string {
+/*
+ * [2026-08-27 사장님 실측] "줄바꿈 회귀됐나…? 또 엄청 넓네"
+ *
+ * 빈 문단은 회귀가 아니었다 — 원본 문단 수만큼만 들어가고 있었다. 넓어 보인 원인은
+ * 여백 값이다. 붙여넣기는 읽기 편하라고 문장마다 <p> 를 하나씩 만드는데, 그 <p> 가
+ * 전부 30px 을 달아 한 문단 안 문장 사이에도 문단 경계와 같은 간격이 들어갔다.
+ *
+ * 30px 은 스페이서가 없던 시절(v2.11.152) 문단 간격을 혼자 맡던 값이다. 지금은
+ * 문단 경계를 빈 문단이 맡으므로, 문장 사이는 좁혀야 둘이 구별된다.
+ */
+const SENTENCE_GAP_PX = 6;
+const PARAGRAPH_END_GAP_PX = 30;
+
+function paragraphStyle(fontSizePx: number, centerAlign: boolean, endsParagraph = true): string {
   return [
     `font-size:${fontSizePx}px`,
     'line-height:1.95',
-    'margin:0 auto 30px',
+    `margin:0 auto ${endsParagraph ? PARAGRAPH_END_GAP_PX : SENTENCE_GAP_PX}px`,
     'max-width:520px',
     centerAlign ? 'text-align:center' : 'text-align:left',
     'color:#5f4b45',
@@ -1842,9 +1855,10 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
     const important = selectedHighlights.has(index);
     // [2026-08-26] 원본 문단의 마지막 문장에만 표시를 남긴다.
     //   빈 문단(스페이서)을 어디에 넣을지 결정하는 유일한 근거다.
-    const paraEnd = node.endsSourceLine === false ? '' : ' data-rich-para-end="true"';
+    const endsParagraph = node.endsSourceLine !== false;
+    const paraEnd = endsParagraph ? ' data-rich-para-end="true"' : '';
     htmlParts.push(
-      `<p${paraEnd} style="${paragraphStyle(fontSizePx, centerAlign)}">${formatInline(node.text, terms, important, highlightTheme)}</p>`
+      `<p${paraEnd} style="${paragraphStyle(fontSizePx, centerAlign, endsParagraph)}">${formatInline(node.text, terms, important, highlightTheme)}</p>`
     );
     plainParts.push(node.plain);
     paragraphCount += 1;
