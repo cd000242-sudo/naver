@@ -48,6 +48,15 @@ const NOISE_INLINE_PATTERNS: readonly RegExp[] = [
   /(?:기사)?(?:입력|수정)\s*[:：]?\s*\d{4}[.\-/]\d{1,2}[.\-/]\d{1,2}\.?\s*(?:오전|오후)?\s*\d{0,2}[:시]?\d{0,2}분?/g,
   /조회\s*수?\s*[\d,]{2,}\s*회?/g,
   /*
+   * [2026-08-27] 기사 앞머리 껍데기. 꼬리를 자르고 나면 이게 남는다.
+   *   "…[레벨업]발행 : 2026.08.26 ・ 22:55조회수 :최진실 기자Google 검색 선호 출처로 추가"
+   * 생성된 글에 "22:55조회수 집계와 함께"로 새어 나온 자리다. 위 규칙들은 접두 뒤에
+   * "시각/일시"를 요구하거나 조회수 뒤에 숫자를 기대해 이 형태를 놓쳤다.
+   */
+  /(?:발행|입력|수정|등록)\s*[:：]\s*\d{4}[.\-/]\s*\d{1,2}[.\-/]\s*\d{1,2}\.?\s*[・·ㆍ|]?\s*\d{1,2}:\d{2}/g,
+  /조회\s*수\s*[:：]\s*/g,
+  /Google\s*검색\s*선호\s*출처로\s*추가/g,
+  /*
    * [2026-08-27] 접두 없는 발행시각이 조회수 문구에 바로 붙어 오는 실측 형태.
    *   "2026. 08. 26 06:00조회수 집계가 시작된 스타뉴스 보도…"
    * 위 두 규칙은 "입력/수정" 접두를 요구하고, 조회수 규칙은 뒤에 숫자를 기대해
@@ -80,9 +89,59 @@ export interface SourceNoiseFilterResult {
   readonly removedFragments: number;
 }
 
+/*
+ * [2026-08-27] 기사 본문이 끝나는 자리 표지.
+ *
+ * 사장님 실측: 스타뉴스 크롤 1,932자 중 뒤 640자(전체의 1/3)가 사이드바였고
+ * — 브리핑·추천 기사·인기 급상승 뉴스·최신 뉴스·AD — 모델이 그 640자로 소제목을
+ * 하나 만들어 냈다(지예은·김동준·코레일·아이유). 조각 규칙을 늘리는 방식으로는
+ * 못 막는다. 사이트마다 문구가 다르고, 크롤 결과에 줄바꿈이 없어 줄 단위로도 못 가른다.
+ *
+ * 대신 구조를 쓴다 — 저작권 표시가 본문의 끝이고 그 뒤는 전부 사이트 껍데기다.
+ * 표지를 못 찾으면 아무것도 자르지 않는다.
+ */
+const BODY_END_MARKERS: readonly RegExp[] = [
+  /[<([]?\s*저작권자\s*[©ⓒ]/,
+  /무단\s*(?:전재|복제|배포)/,
+  /추천\s*기사/,
+  /관련\s*기사/,
+  /인기\s*급상승\s*뉴스/,
+  /최신\s*뉴스/,
+  /많이\s*본\s*뉴스/,
+  /이슈\s*보러가기/,
+];
+
+/** 표지 앞에 이만큼은 남아야 자른다 — 앞머리 표지에 본문을 통째로 내주지 않는다. */
+const MIN_BODY_CHARS = 200;
+const MIN_BODY_RATIO = 0.4;
+
+/**
+ * Cuts everything after the earliest end-of-body marker.
+ *
+ * Returns the text unchanged when no marker is found, or when cutting there would
+ * take the article with it — a copyright line at the top must not truncate the piece.
+ */
+function cutTrailingChrome(text: string): { text: string; cutChars: number } {
+  let earliest = -1;
+  for (const re of BODY_END_MARKERS) {
+    const at = text.search(re);
+    if (at >= 0 && (earliest < 0 || at < earliest)) earliest = at;
+  }
+  if (earliest < 0) return { text, cutChars: 0 };
+  if (earliest < MIN_BODY_CHARS) return { text, cutChars: 0 };
+  if (earliest < text.length * MIN_BODY_RATIO) return { text, cutChars: 0 };
+  return { text: text.slice(0, earliest), cutChars: text.length - earliest };
+}
+
 export function stripSourceNoise(rawText: string | null | undefined): SourceNoiseFilterResult {
-  const source = String(rawText ?? '');
-  if (!source.trim()) return { text: source, removedLines: 0, removedFragments: 0 };
+  const original = String(rawText ?? '');
+  if (!original.trim()) return { text: original, removedLines: 0, removedFragments: 0 };
+
+  const tail = cutTrailingChrome(original);
+  const source = tail.text;
+  if (tail.cutChars > 0) {
+    console.log(`[SourceNoise] 본문 뒤 사이트 껍데기 ${tail.cutChars}자 절단`);
+  }
 
   let removedLines = 0;
   let removedFragments = 0;
@@ -116,9 +175,9 @@ export function stripSourceNoise(rawText: string | null | undefined): SourceNois
 
   // [2026-08-26] 마지막 안전망. 내용이 있던 원문이 통째로 비면 그건 필터가 틀린 것이다.
   //   껍데기 한 줄이 남는 것보다 기사 한 편을 잃는 쪽이 훨씬 나쁘다 — 원문을 그대로 쓴다.
-  if (!cleaned && source.trim()) {
+  if (!cleaned && original.trim()) {
     console.warn('[SourceNoise] 필터가 원문을 전부 지웠다 — 원문을 그대로 쓴다.');
-    return { text: source, removedLines: 0, removedFragments: 0 };
+    return { text: original, removedLines: 0, removedFragments: 0 };
   }
 
   return { text: cleaned, removedLines, removedFragments };

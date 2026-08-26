@@ -174,3 +174,98 @@ describe('위젯 라벨', () => {
     expect(stripSourceNoise(text).text).toBe(text);
   });
 });
+
+/**
+ * [2026-08-27 사장님 실측 2차] 티파니 글에 지예은·김동준·코레일·아이유가 한 소제목으로
+ * 통째로 들어왔다. 조각 규칙을 아무리 늘려도 못 막았다 — 원본을 다시 긁어 보니 이유가 나왔다.
+ *
+ * 스타뉴스 크롤 결과 1,932자, 줄바꿈 0개(한 덩어리). 그중 뒤 640자(전체의 1/3)가
+ * 사이드바였다: 브리핑 · 추천 기사 · 인기 급상승 뉴스 · 최신 뉴스 · AD.
+ * 모델은 재료를 다 쓰라는 지시를 따라 그 640자로 소제목을 하나 만들었다.
+ *
+ * 조각을 쫓는 대신 구조를 쓴다 — 저작권 표시가 기사 본문의 끝이다.
+ * 그 뒤는 전부 사이트 껍데기다.
+ */
+describe('본문 뒤 껍데기 잘라내기', () => {
+  // 실제 크롤 결과와 같은 규모로 둔다 — 하한(200자)은 앞머리 표지에 본문을 내주지
+  // 않기 위한 것이라, 시료가 짧으면 절단 자체가 일어나지 않는다.
+  const BODY =
+    '그룹 소녀시대 티파니가 유리의 눈웃음에 대해 말했다. 26일 유튜브 채널 효연의 레벨업에는 '
+    + '금쪽이들아 화해할래 아니면 나한테 꿀밤 맞을래라는 제목의 영상이 게재됐다. '
+    + '공개된 영상에서는 효리수의 불화를 중재하기 위해 나선 티파니의 모습이 그려졌다. '
+    + '티파니는 효리수 멤버들에게 "해체할 거였으면 진작 했어야 했고 이미 늦었다"라며 다독였다. '
+    + '하지만 수영은 "해체할 거였으면 나갈 사람은 나다"라고 말했고, 효연은 "나는 이미 나갔다"라며 맞섰다. '
+    + '티파니는 소녀시대의 합숙 시절을 살려 응원봉을 준비했고 "쌓이면 안 된다. '
+    + '쌓여서 무대에 올라가지 말자가 우리의 약간 그 주제였다"라고 설명했다. '
+    + '유리는 "내가 티파니의 눈웃음 띄워준 건데 몰랐다"라며 천연덕스러운 모습을 보였다.';
+  const TAIL =
+    '<저작권자 © 스타뉴스, 무단전재 및 재배포 금지>브리핑티파니는 오분 토크를 언급했다.'
+    + '추천 기사지예은, ♥바타와 결혼까지?.."책임 못 질거면 왜 만나"[미우새]'
+    + '김동준, 제아 재결합 언급 "좋은 기회 있다면" [윤주모]'
+    + '최진실 기자기자홈좋아요연예-방송의 인기 급상승 뉴스'
+    + '01박수홍, 딸 울어서 내렸다가 재탑승[스타이슈]02카자흐스탄 정부가 거짓말?[스타이슈]'
+    + '연예-방송의 최신 뉴스"누나보다 돈 많이 벌고파"...아이유, 남동생 소원에이슈 보러가기AD';
+
+  it('저작권 표시 뒤의 사이드바를 통째로 걷어낸다', () => {
+    const r = stripSourceNoise(BODY + TAIL);
+    expect(r.text).toContain('티파니가 유리의 눈웃음');
+    expect(r.text).not.toContain('지예은');
+    expect(r.text).not.toContain('01박수홍');
+    expect(r.text).not.toContain('아이유');
+    expect(r.text).not.toContain('이슈 보러가기');
+  });
+
+  it('본문은 한 글자도 잃지 않는다', () => {
+    expect(stripSourceNoise(BODY + TAIL).text.trim()).toBe(BODY.trim());
+  });
+
+  it('저작권 표시가 없으면 다른 껍데기 표지를 쓴다', () => {
+    const r = stripSourceNoise(`${BODY}추천 기사지예은, 결혼까지?김동준, 제아 재결합 언급`);
+    expect(r.text).not.toContain('지예은');
+    expect(r.text).toContain('티파니가 유리의 눈웃음');
+  });
+
+  it('앞머리에 표지가 오면 자르지 않는다 — 본문을 통째로 잃는다', () => {
+    const early = `<저작권자 © 스타뉴스, 무단전재 및 재배포 금지>${BODY}`;
+    const r = stripSourceNoise(early);
+    expect(r.text).toContain('티파니가 유리의 눈웃음');
+    expect(r.text.length).toBeGreaterThan(BODY.length * 0.9);
+  });
+
+  it('표지가 없는 자료는 그대로 둔다', () => {
+    expect(stripSourceNoise(BODY).text.trim()).toBe(BODY.trim());
+  });
+});
+
+/**
+ * [2026-08-27] 꼬리를 자르고 남은 앞머리 껍데기.
+ *   "…[레벨업]발행 : 2026.08.26 ・ 22:55조회수 :최진실 기자Google 검색 선호 출처로 추가"
+ * 생성된 글에 "22:55조회수 집계와 함께"로 새어 나온 자리다. 기존 규칙은 조회수 뒤에
+ * 숫자를 기대해 콜론만 붙은 이 형태를 놓쳤다.
+ */
+describe('기사 앞머리 껍데기', () => {
+  const HEAD = '발행 : 2026.08.26 ・ 22:55조회수 :최진실 기자Google 검색 선호 출처로 추가';
+  const BODY = '그룹 소녀시대 티파니가 유리의 눈웃음에 대해 말했다. '.repeat(8);
+
+  it('발행시각을 걷어낸다', () => {
+    expect(stripSourceNoise(HEAD + BODY).text).not.toContain('22:55');
+    expect(stripSourceNoise(HEAD + BODY).text).not.toContain('2026.08.26');
+  });
+
+  it('숫자 없는 조회수 라벨도 걷어낸다', () => {
+    expect(stripSourceNoise(HEAD + BODY).text).not.toContain('조회수');
+  });
+
+  it('검색 출처 안내 문구를 걷어낸다', () => {
+    expect(stripSourceNoise(HEAD + BODY).text).not.toContain('Google 검색 선호 출처');
+  });
+
+  it('본문은 그대로 남는다', () => {
+    expect(stripSourceNoise(HEAD + BODY).text).toContain('티파니가 유리의 눈웃음에 대해 말했다');
+  });
+
+  it('본문 속 정상 시각 표기는 건드리지 않는다', () => {
+    const text = `${BODY}오후 10시 55분에 공개됐습니다.`;
+    expect(stripSourceNoise(text).text).toContain('10시 55분');
+  });
+});
