@@ -1739,11 +1739,26 @@
           if (result.status === 'existing' && result.registeredAt) {
             // [2026-08-21] 사장님 문구 확정: 1번호당 1회 인증 — 같은 번호는 새 체험이
             // 아니라 기존 체험(남은 기간)을 이어받는다는 규칙이 문구에서 읽혀야 한다.
-            const expiryMs = new Date(result.registeredAt).getTime() + 30 * 24 * 60 * 60 * 1000;
-            const daysLeft = Math.max(0, Math.ceil((expiryMs - Date.now()) / (24 * 60 * 60 * 1000)));
-            line = daysLeft > 0
-              ? `⚠️ 이미 인증한 번호입니다 (1번호당 1회 인증). 기존 체험을 이어서 진행합니다 — 남은 기간 D-${daysLeft}`
-              : '⛔ 이미 인증한 번호입니다 — 1번호당 1회 인증만 가능합니다. 무료 체험 30일이 만료되어 결제 페이지로 안내합니다.';
+            // [2026-08-26] 30일 카운트는 등록일이 아니라 **정책 시행일(9/1)** 부터다.
+            //   사장님: "기존 사용자들은 9월 1일부터 30일 카운팅 들어가야 돼.
+            //            9월 5일부터 시작했다면 그때부터이고, 지금은 9월 1일 전이니까
+            //            기간 상관없이 사용 가능하다가 9월 1일부터 카운팅이 들어간다."
+            //   licenseManager.FREE_TRIAL_POLICY_START_MS 와 같은 규칙이다 —
+            //   여기만 등록일 기준으로 세고 있어서, 3월에 등록한 사람이 이미 만료로 떴다.
+            const POLICY_START_MS = new Date('2026-09-01T00:00:00+09:00').getTime();
+            const registeredMs = new Date(result.registeredAt).getTime();
+            // 카운트 시작 = 등록일과 시행일 중 **늦은** 쪽.
+            const countFromMs = Math.max(registeredMs, POLICY_START_MS);
+            const expiryMs = countFromMs + 30 * 24 * 60 * 60 * 1000;
+            const beforePolicy = Date.now() < POLICY_START_MS;
+            const daysLeft = beforePolicy
+              ? 30 // 시행 전에는 기간 제한이 없다 — 만료로 막지 않는다.
+              : Math.max(0, Math.ceil((expiryMs - Date.now()) / (24 * 60 * 60 * 1000)));
+            line = beforePolicy
+              ? '✅ 이미 인증한 번호입니다 — 그대로 이어서 쓰시면 됩니다. (무료 체험 30일은 9월 1일부터 시작됩니다)'
+              : daysLeft > 0
+                ? `⚠️ 이미 인증한 번호입니다 (1번호당 1회 인증). 기존 체험을 이어서 진행합니다 — 남은 기간 D-${daysLeft}`
+                : '⛔ 이미 인증한 번호입니다 — 1번호당 1회 인증만 가능합니다. 무료 체험 30일이 만료되어 결제 페이지로 안내합니다.';
             if (daysLeft <= 0) {
               trialVerified = false;
               setTrialSubmitEnabled(false);
