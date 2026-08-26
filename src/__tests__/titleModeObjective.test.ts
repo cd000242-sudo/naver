@@ -106,3 +106,35 @@ describe('쇼핑 제목은 구매 축이 있어야 한다', () => {
     }
   });
 });
+
+describe('홈판 제목 길이 계약 (2026-08-26 사장님 실측)', () => {
+  // 발행본 제목 51자: "박수홍 가족 괌행 비행기 지연 내렸다 다시 탄 게 아니었어요, KE415에서 실제 내려진 건"
+  // 채점기는 홈판 42자 초과에 -60점(가장 큰 감점)을 매기는데, 프롬프트는 홈판 제목
+  // 길이를 한 번도 말하지 않았다. SEO는 22~42자, 쇼핑·업체는 25~45자가 있었다.
+  const { readFileSync } = require('fs');
+  const { join } = require('path');
+  const issueStory = readFileSync(
+    join(__dirname, '..', 'prompts', 'homefeed', 'issue-story.prompt'),
+    'utf-8',
+  );
+
+  it('홈판 상황형 제목에 길이가 생겼다', () => {
+    const c = buildSituationTitleContract('homefeed', { rawText: 'x'.repeat(300) } as any);
+    expect(c).toMatch(/28~42자/);
+    expect(c).toMatch(/피드 카드에서 잘리면/);
+  });
+
+  it('이슈픽 3공식에도 길이가 생겼다 — 미완성 서술은 짧아야 산다', () => {
+    expect(issueStory).toMatch(/24~40자/);
+    expect(issueStory).toMatch(/그냥 잘린 것.*으로 보여 후킹이 죽는다/);
+  });
+
+  it('미완성 서술 허용은 유지한다 — 끊는 것 자체는 이 골격의 장치다', () => {
+    expect(issueStory).toMatch(/미완성 서술로 끊는 것은 허용된다/);
+  });
+
+  it('길이를 채우려 늘리지 말라고 양쪽 모두 못박는다', () => {
+    expect(buildSituationTitleContract('homefeed', {} as any)).toMatch(/길이를 채우려고 수식을 붙이지 마라/);
+    expect(issueStory).toMatch(/키워드를 더 넣겠다고 늘리지 마라/);
+  });
+});
