@@ -173,7 +173,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-08-20] 본선 배선(contentJsonPromptFormat clickReason·whyClick·훅 계약)으로 재계산
         // [2026-08-20] SEO 검색 클릭 계약 + 쇼핑 제품명+상황+후킹 계약 배선으로 재계산
         // [2026-08-20 3차] mate·business 클릭 계약 + 사진(imageNarrative) titleReason 계약으로 재계산
-        '4345407a452e68b1e27db10d3fabe4bfc7828323351ca7e7e71f3c87b9ae21a8',
+        // [2026-08-27] 프롬프트 슬림화 — 자가점검 체크리스트 제거 + 장식 구분선 220줄 제거로 재계산
+        'e898efc18e7d4dad200a7d5862fb1519c42049e1e73c459592fa1ac833e4c012',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

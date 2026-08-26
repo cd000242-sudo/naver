@@ -48,6 +48,14 @@ const VERB_ENDINGS = [
 /** 두 글자 조각의 끝소리로 자주 쓰이는 조사. */
 const SINGLE_PARTICLE_TAILS = new Set(['과', '을', '를', '이', '가', '는', '은', '에', '도', '와', '로', '의', '만']);
 
+/**
+ * True when the word is a conjugated verb/adjective rather than a noun.
+ * Exported because titlePayoffCheck needs the same judgement on title words.
+ */
+export function looksLikeConjugatedVerb(token: string): boolean {
+  return looksLikeVerb(token);
+}
+
 function looksLikeVerb(token: string): boolean {
   return VERB_ENDINGS.some(
     (ending) => token.length > ending.length && token.endsWith(ending),
