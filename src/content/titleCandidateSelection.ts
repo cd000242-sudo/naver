@@ -10,6 +10,8 @@
 // Re-ranking candidates costs nothing: they are already paid for and already in the response.
 // This module is pure so the policy can be tested without a model call.
 
+import { isWithinTitleLength, type TitleLengthMode } from './titleLengthPolicy.js';
+
 export interface TitleCandidateLike {
   readonly text?: unknown;
   readonly score?: unknown;
@@ -22,6 +24,8 @@ export interface TitleSelectionInput {
   readonly keyword?: string;
   /** Quality score for a title, 0-100. Injected so this module stays free of app imports. */
   readonly scoreTitle: (title: string) => number;
+  /** Content mode, for the length contract. Omitted → the widest range, so nothing is forced. */
+  readonly mode?: TitleLengthMode;
 }
 
 export interface TitleSelectionResult {
@@ -29,7 +33,7 @@ export interface TitleSelectionResult {
   readonly changed: boolean;
   readonly fromScore: number;
   readonly toScore: number;
-  readonly reason: 'keyword-echo' | 'higher-score' | 'kept';
+  readonly reason: 'keyword-echo' | 'higher-score' | 'length-contract' | 'kept';
 }
 
 /** Swap only on a clear win, so normal titles are not churned by scoring noise. */
@@ -127,6 +131,38 @@ export function selectBestTitleCandidate(input: TitleSelectionInput): TitleSelec
 
   if (echo) {
     return { title: best, changed: true, fromScore: selectedScore, toScore: bestScore, reason: 'keyword-echo' };
+  }
+
+  /*
+   * [2026-08-27] Truncation outranks score.
+   *
+   * A 53-character homefeed title shipped: the evaluator scored it 29 and named the reason,
+   * but the picker only compares scores, so the least-bad over-length title won. A reader
+   * never sees the score — they see a title cut off mid-word in the feed. So when the
+   * selected title would be truncated and some candidate would not, take the candidate,
+   * even at a lower score. When every candidate is over-length there is nothing to pick,
+   * and the title goes out as before rather than being cut by code.
+   */
+  if (!isWithinTitleLength(selected, input.mode)) {
+    const fitting = usable.filter((text) => isWithinTitleLength(text, input.mode));
+    if (fitting.length > 0) {
+      let pick = fitting[0];
+      let pickScore = score(pick);
+      for (const candidate of fitting.slice(1)) {
+        const candidateScore = score(candidate);
+        if (candidateScore > pickScore) {
+          pick = candidate;
+          pickScore = candidateScore;
+        }
+      }
+      return {
+        title: pick,
+        changed: true,
+        fromScore: selectedScore,
+        toScore: pickScore,
+        reason: 'length-contract',
+      };
+    }
   }
   if (!selected) {
     return { title: best, changed: true, fromScore: 0, toScore: bestScore, reason: 'higher-score' };

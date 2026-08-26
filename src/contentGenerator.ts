@@ -6019,6 +6019,7 @@ async function generateStructuredContentInternal(
               selectedTitle: parsed.selectedTitle,
               candidates: parsed.titleCandidates,
               keyword: titleKeyword,
+              mode: mode as never, // 길이 계약(모드별 상한)을 함께 본다
               scoreTitle: (t) => evaluateTitleQuality(
                 t,
                 titleKeyword,
