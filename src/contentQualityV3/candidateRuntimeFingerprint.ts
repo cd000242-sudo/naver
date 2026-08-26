@@ -171,6 +171,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/subKeywordCoverageGate.ts',
   'src/content/summaryTable.ts',
   'src/content/titleCandidateSelection.ts',
+  'src/content/titleModeObjective.ts',
   'src/content/urlModeKeywordPicker.ts',
   'src/content/urlModeKeywordResolve.ts',
   'src/contentAbortTimeoutPolicy.ts',

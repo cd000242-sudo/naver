@@ -47,6 +47,38 @@ function meaningfulTokens(keyword: string): string[] {
  * 위 실측 사례는 전현무·논란 2/3 이 걸려 건너뛰게 된다.
  * 토큰이 하나뿐이면 그 하나가 있으면 커버로 본다.
  */
+export interface KeywordCoverage {
+  /** 제목에 실제로 보이는 의미 토큰 수. */
+  readonly covered: number;
+  /** 키워드의 의미 토큰 총수. */
+  readonly total: number;
+  /** covered / total (총수 0이면 0). */
+  readonly ratio: number;
+}
+
+/**
+ * 키워드가 제목에 얼마나 물려 있는지 센다.
+ *
+ * [2026-08-26] 접두 판정과 검색 노출 채점이 같은 토큰 기준을 쓰게 하려고 뺐다.
+ * 두 곳이 다르게 쪼개면 "붙이지 않기로 해놓고 점수는 깎는" 모순이 생긴다.
+ */
+export function measureKeywordCoverage(keyword: string, title: string): KeywordCoverage {
+  const kw = String(keyword || '').trim();
+  const t = String(title || '').trim();
+  if (!kw || !t) return { covered: 0, total: 0, ratio: 0 };
+
+  const tokens = meaningfulTokens(kw);
+  const titleNorm = normalize(t);
+
+  if (tokens.length === 0) {
+    const covered = titleNorm.includes(normalize(kw)) ? 1 : 0;
+    return { covered, total: 1, ratio: covered };
+  }
+
+  const covered = tokens.filter((token) => titleNorm.includes(normalize(token))).length;
+  return { covered, total: tokens.length, ratio: covered / tokens.length };
+}
+
 export function decideKeywordPrefix(keyword: string, title: string): KeywordPrefixDecision {
   const kw = String(keyword || '').trim();
   const t = String(title || '').trim();

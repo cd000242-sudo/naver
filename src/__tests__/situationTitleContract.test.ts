@@ -120,9 +120,17 @@ describe('situation title wiring', () => {
   const gen = read('contentGenerator.ts');
 
   it('프롬프트 조립에 실제로 붙는다 (죽은 계약 재발 방지)', () => {
-    expect(gen).toContain("import { buildSituationTitleContract } from './content/situationTitleContract.js'");
+    // import 문 형태가 아니라 "배선되어 있는가"를 본다 — 타입 import를 함께
+    // 들여오는 등 형태만 바뀌어도 막히던 테스트였다.
+    expect(gen).toMatch(/import \{[^}]*buildSituationTitleContract[^}]*\} from '\.\/content\/situationTitleContract\.js'/);
     expect(gen).toContain('const situationTitle = usesIssueStoryTitle');
     expect(gen).toMatch(/\$\{situationTitle \? `\\n\\n\$\{situationTitle\}` : ''\}/);
+  });
+
+  it('모드마다 다른 계약을 넘긴다 — 메이트·업체가 일반 문구로 떨어지지 않는다', () => {
+    expect(gen).toMatch(/situationTitleMode: SituationTitleMode/);
+    expect(gen).toMatch(/contentMode === 'mate' \? 'seo'/);
+    expect(gen).toMatch(/contentMode === 'business' \? 'business'/);
   });
 
   it('홈판 이슈픽은 인용 훅 골격을 유지한다 (제3자 사건에 "내 상황" 강요 금지)', () => {

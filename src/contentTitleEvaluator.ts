@@ -1,3 +1,4 @@
+import { scoreSearchMatch } from './content/titleModeObjective.js';
 /**
  * [Phase 3-9/v2.10.147] contentGenerator god file decomposition — evaluateTitleQuality.
  *
@@ -202,6 +203,19 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
       score += b.points;
       console.log(`[TitleQuality] +${b.points}점: ${b.reason}`);
     }
+  }
+
+  // [2026-08-26] 검색으로 먹고사는 모드(SEO·메이트·쇼핑·업체)는 제목이 검색어와
+  //   물려 있어야 한다. 예전엔 keyword 를 "그대로 복사인지" 판정에만 써서,
+  //   검색어를 통째로 버린 후보가 길이만 맞으면 이길 수 있었다. 홈판은 검색이
+  //   아니라 피드에서 싸우므로 여기서 건드리지 않는다(ctrCombat·neoHook 담당).
+  const searchMatch = scoreSearchMatch(t, keyword, mode);
+  if (searchMatch.points !== 0) {
+    score += searchMatch.points;
+    if (searchMatch.points < 0) issues.push(searchMatch.reason);
+    console.log(
+      `[TitleQuality] ${searchMatch.points > 0 ? '+' : ''}${searchMatch.points}점: ${searchMatch.reason}`,
+    );
   }
 
   // ✅ [v3] 카테고리별 추가 보너스 적용
