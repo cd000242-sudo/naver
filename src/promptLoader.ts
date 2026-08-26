@@ -350,6 +350,23 @@ ${hashtagOverlay}`;
     }
   }
 
+  // 2.85 Reader-angle overlay.
+  // [2026-08-26 사장님 지시] "전문가 관점과 독자 관점, 일반인 관점을 동시에 공략해야
+  //   살아남는다." 실제로 프롬프트에 '관점' 축이 하나도 없었다(유일한 언급이 문단
+  //   나누기 규칙이었다). 같은 사실을 세 각도로 통과시키는 지시와, 전제 교정·반박 선점을
+  //   함께 얹는다. 이 셋은 사실을 새로 만들지 않고도 쓸 수 있는 장치만 골랐다.
+  //   human-writing 앞에 둔다 — 문체 교정이 마지막에 오도록.
+  if (mode === 'seo' || mode === 'homefeed' || mode === 'mate' || mode === 'affiliate' || mode === 'business' || mode === 'custom') {
+    const anglesOverlay = loadPromptFile('shared/reader-angles.prompt');
+    if (anglesOverlay) {
+      composed = `${composed}
+
+${anglesOverlay}`;
+    } else {
+      console.warn('[PromptLoader] reader-angles.prompt 로드 실패 - 관점 축 미적용');
+    }
+  }
+
   // 2.9 Human writing anti-pattern overlay.
   // Prevents "AI pretending to be human" regressions: repeated crutches, fake first-person,
   // and identical paragraph templates across SEO/Homefeed/Mate/Affiliate/Business modes.
