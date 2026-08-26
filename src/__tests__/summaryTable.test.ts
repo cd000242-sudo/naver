@@ -123,7 +123,7 @@ describe('배선 — 스키마와 생성 경로', () => {
 
   it('프롬프트가 본문 대신 스키마 필드를 채우라고 말한다', () => {
     expect(prompt).toContain('summaryTable');
-    expect(prompt).toContain('본문에 표를 직접 그리지 마라');
-    expect(prompt).toContain('introduction 안에 파이프');
+    expect(prompt).toContain('본문에 직접 그리지 마라');
+    expect(prompt).toContain('introduction 안에만 파이프');
   });
 });

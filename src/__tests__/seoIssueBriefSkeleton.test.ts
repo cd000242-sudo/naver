@@ -112,7 +112,11 @@ describe('fact-brief-header — 주제를 가리지 않는 첫 화면', () => {
      * 스키마 필드인 해시태그는 나왔다. 형태를 바꾸는 것이 위치를 바꾸는 것보다 강하다.
      */
     expect(header).toContain('summaryTable');
-    expect(header).toContain('본문에 표를 직접 그리지 마라');
+    expect(header).toContain('본문에 직접 그리지 마라');
+    // [2026-08-26] 이 금지는 맨 앞 요약 표에만 해당한다 — 본문 중간 비교표(ES-4/IB-4)까지
+    //   막으면 그쪽과 정면 충돌한다. 충돌 점검에서 잡아 범위를 좁혔다.
+    expect(header).toContain('맨 앞 요약 표에만');
+    expect(header).toContain('본문 중간의 비교표·일정표는');
   });
 
   it('라벨을 주제별로 짓게 안내한다 (기계적 반복 방지)', () => {
@@ -127,7 +131,8 @@ describe('fact-brief-header — 주제를 가리지 않는 첫 화면', () => {
     expect(header).toContain('확인되지 않은 행은 만들지 않는다');
     expect(header).toContain('label 이 전부 같으면');
     // 도입부에 직접 그리면 summaryTable 과 중복된다.
-    expect(header).toContain('introduction 안에 파이프');
+    expect(header).toContain('introduction 안에만 파이프');
+    expect(header).toContain('본문(headings) 안의 표는 그대로 쓴다');
   });
 
   it('날짜 앵커의 이유를 남긴다 (정책·요금은 바뀐다)', () => {
