@@ -1,5 +1,6 @@
 import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from './naver/index.js';
 import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
+import { buildSupplementQuery, filterOnTopicSupplement } from './content/supplementTopicGuard.js';
 import Parser from 'rss-parser';
 import * as iconv from 'iconv-lite';
 import type { ContentSource, ContentGeneratorProvider, ArticleType } from './contentGenerator.js';
@@ -7377,15 +7378,27 @@ ${reviewSection}
   ) {
     const naverClientId = input.naverClientId || process.env.NAVER_CLIENT_ID;
     const naverClientSecret = input.naverClientSecret || process.env.NAVER_CLIENT_SECRET;
-    const supplementQuery = baseTitle || (keywords.length > 0 ? keywords.slice(0, 3).join(' ') : '');
+    /*
+     * [2026-08-27] 예전에는 기사 제목을 통째로 검색어에 넣었다. 매체명 꼬리("| 스타뉴스")와
+     * 따옴표 인용까지 들어가, 네이버가 긴 문장을 토큰으로 쪼개면서 "논란 해명" 같은
+     * 일반어로 엉뚱한 글이 걸렸다 — 윤은혜 기사에 김수현 글 4건이 붙어 주제가 바뀌었다.
+     */
+    const supplementQuery = buildSupplementQuery(baseTitle, keywords);
     if (naverSearchAvailable(naverClientId, naverClientSecret) && supplementQuery) {
       console.log(`[URL 심화보강] 원본 ${baseBody.length}자 < ${URL_THIN_SUPPLEMENT_THRESHOLD}자 → "${supplementQuery}" 상위글 풀텍스트 수집`);
       try {
         const deep = await collectTopArticleFullTexts(supplementQuery, (naverClientId ?? ''), (naverClientSecret ?? ''));
-        if (deep.text && deep.count > 0) {
-          baseBody = `${baseBody}\n\n--- 참고 자료 (관련 상위글 ${deep.count}건) ---\n\n${deep.text}`;
-          warnings.push(`✅ 원본이 빈약해 관련 상위글 ${deep.count}건(${deep.text.length}자)을 보조 자료로 보강했습니다. (원본이 주 근거, 보충은 배경/맥락용)`);
-          console.log(`[URL 심화보강] ✅ ${deep.count}건 / ${deep.text.length}자 보강`);
+        // 주제가 다른 자료는 배경이 아니라 오염이다. 얇은 원본이 바뀐 주제보다 낫다.
+        const onTopic = filterOnTopicSupplement(baseBody, deep.text);
+        if (onTopic.dropped > 0) {
+          console.warn(`[URL 심화보강] ⚠️ 주제가 다른 자료 ${onTopic.dropped}건 제외 (원본과 겹치는 고유명사 없음)`);
+        }
+        if (onTopic.text && onTopic.kept > 0) {
+          baseBody = `${baseBody}\n\n--- 참고 자료 (관련 상위글 ${onTopic.kept}건) ---\n\n${onTopic.text}`;
+          warnings.push(`✅ 원본이 빈약해 관련 상위글 ${onTopic.kept}건(${onTopic.text.length}자)을 보조 자료로 보강했습니다. (원본이 주 근거, 보충은 배경/맥락용)`);
+          console.log(`[URL 심화보강] ✅ ${onTopic.kept}건 / ${onTopic.text.length}자 보강`);
+        } else if (deep.count > 0) {
+          console.warn(`[URL 심화보강] ⛔ 수집한 ${deep.count}건이 전부 주제 밖 — 보강 없이 원본으로 진행한다.`);
         }
       } catch (error) {
         console.warn('[URL 심화보강] 실패 (무시하고 원본으로 진행):', (error as Error).message);
