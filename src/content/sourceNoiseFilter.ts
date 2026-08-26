@@ -93,6 +93,24 @@ const NOISE_INLINE_PATTERNS: readonly RegExp[] = [
   //   조각으로만 걷어낸다: "<저작권자 ⓒ 스타뉴스, 무단전재 및 재배포 금지>"
   //   끝맺음은 "금지/금합니다"로만 잡는다. "재배포"를 종료어에 넣으면 non-greedy 가
   //   거기서 멈춰 " 금지>" 꼬리가 남는다(실측).
+  /*
+   * [2026-08-27 네이트 실측] 광고 CSS 와 자바스크립트가 본문 **중간**에 끼어 온다.
+   *   "…함께할 예정이다. div.news_view div.view_cont #ad_innerView {margin:0 auto;}
+   *    #ad_innerView{width:320px;height:auto;…}"
+   *   "// 감정 이모티콘 jQuery("#md-emotion-view .md-emotion").css({…});"
+   * 꼬리 절단은 본문 뒤만 보므로 여기 닿지 않는다.
+   *
+   * 중괄호나 세미콜론을 사이에 두고 양옆으로 한글 없는 구간이 10자 넘게 이어지면
+   * 본문이 아니라 코드다. 영문 인용("Love youuuu")이나 이메일(elnino8919@osen.co.kr)은
+   * 그 기호를 쓰지 않아 걸리지 않는다 — 기호를 요구하는 것이 이 규칙의 안전장치다.
+   */
+  /[^가-힣\n]{10,}[{};][^가-힣\n]{10,}/g,
+  /*
+   * 감정 반응 위젯 — "최고예요9훈훈해요5어이없어요107속상해요0화나요883".
+   * 라벨과 숫자가 공백 없이 붙어 나오는 형태만 본다. 본문의 "화나요라고" 같은 말은
+   * 뒤에 숫자가 없어 걸리지 않는다.
+   */
+  /(?:최고예요|훈훈해요|어이없어요|속상해요|화나요|추천해요)\s*\d+(?:\s*(?:최고예요|훈훈해요|어이없어요|속상해요|화나요|추천해요)\s*\d+)+/g,
   /[<([]?\s*저작권자[^<>()[\]\n]{0,80}?(?:금지|금합니다)[^\S\n]*[>)\]]?/g,
   /무단\s*(?:전재|복제|배포)[^\n]{0,40}?(?:금지|금합니다)[^\S\n]*[>)\]]?/g,
 ];
@@ -103,6 +121,16 @@ export interface SourceNoiseFilterResult {
   readonly removedLines: number;
   /** 줄 안에서 지워진 조각 수. */
   readonly removedFragments: number;
+  /**
+   * 본문 뒤 껍데기로 잘라낸 글자 수.
+   *
+   * [2026-08-27 회귀] 이 값이 없어서 사고가 났다. 호출부가 줄·조각 카운터만 보고
+   * "지운 게 있나"를 판단했는데, 꼬리 절단은 둘 다 올리지 않는다. 네이트 기사에서
+   * 3,028자를 잘라내고도 조건이 거짓이 되어 원문이 그대로 넘어갔다.
+   */
+  readonly removedTailChars: number;
+  /** 무언가 지웠는가. 호출부는 카운터가 아니라 이걸 봐야 한다. */
+  readonly changed: boolean;
 }
 
 /*
@@ -127,9 +155,15 @@ const BODY_END_MARKERS: readonly RegExp[] = [
   /이슈\s*보러가기/,
 ];
 
-/** 표지 앞에 이만큼은 남아야 자른다 — 앞머리 표지에 본문을 통째로 내주지 않는다. */
-const MIN_BODY_CHARS = 200;
-const MIN_BODY_RATIO = 0.4;
+/*
+ * 표지 앞에 이만큼은 남아야 자른다 — 앞머리 표지에 본문을 통째로 내주지 않는다.
+ *
+ * [2026-08-27] 네이트 기사는 본문이 전체의 43%뿐이었다(본문 2,282자 / 껍데기 3,026자).
+ * 하한이 40%였을 때 크롤 길이가 조금만 흔들려도 못 넘겨, 껍데기가 통째로 남았다.
+ * 비율은 낮추고 글자 수 하한을 올린다 — 앞머리 오절단은 글자 수가 막는다.
+ */
+const MIN_BODY_CHARS = 400;
+const MIN_BODY_RATIO = 0.25;
 
 /**
  * Cuts everything after the earliest end-of-body marker.
@@ -151,7 +185,9 @@ function cutTrailingChrome(text: string): { text: string; cutChars: number } {
 
 export function stripSourceNoise(rawText: string | null | undefined): SourceNoiseFilterResult {
   const original = String(rawText ?? '');
-  if (!original.trim()) return { text: original, removedLines: 0, removedFragments: 0 };
+  if (!original.trim()) {
+    return { text: original, removedLines: 0, removedFragments: 0, removedTailChars: 0, changed: false };
+  }
 
   const tail = cutTrailingChrome(original);
   const source = tail.text;
@@ -200,8 +236,15 @@ export function stripSourceNoise(rawText: string | null | undefined): SourceNois
   //   껍데기 한 줄이 남는 것보다 기사 한 편을 잃는 쪽이 훨씬 나쁘다 — 원문을 그대로 쓴다.
   if (!cleaned && original.trim()) {
     console.warn('[SourceNoise] 필터가 원문을 전부 지웠다 — 원문을 그대로 쓴다.');
-    return { text: original, removedLines: 0, removedFragments: 0 };
+    return { text: original, removedLines: 0, removedFragments: 0, removedTailChars: 0, changed: false };
   }
 
-  return { text: cleaned, removedLines, removedFragments };
+  return {
+    text: cleaned,
+    removedLines,
+    removedFragments,
+    removedTailChars: tail.cutChars,
+    // 원문과 다르면 무언가 지운 것이다. 카운터 합계로 판단하면 꼬리 절단을 놓친다.
+    changed: cleaned !== original.trim(),
+  };
 }

@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
 import { describe, it, expect } from 'vitest';
 import { stripSourceNoise } from '../content/sourceNoiseFilter';
 
@@ -197,7 +200,12 @@ describe('본문 뒤 껍데기 잘라내기', () => {
     + '하지만 수영은 "해체할 거였으면 나갈 사람은 나다"라고 말했고, 효연은 "나는 이미 나갔다"라며 맞섰다. '
     + '티파니는 소녀시대의 합숙 시절을 살려 응원봉을 준비했고 "쌓이면 안 된다. '
     + '쌓여서 무대에 올라가지 말자가 우리의 약간 그 주제였다"라고 설명했다. '
-    + '유리는 "내가 티파니의 눈웃음 띄워준 건데 몰랐다"라며 천연덕스러운 모습을 보였다.';
+    + '유리는 "내가 티파니의 눈웃음 띄워준 건데 몰랐다"라며 천연덕스러운 모습을 보였다. '
+    // 절단 하한(400자)을 넘겨야 검사가 돈다 — 실제 기사는 1,000자를 넘는다.
+    + '티파니는 "뭔가 다른 인상이 생길 것 같아서 걱정됐다"라고 토로했다. '
+    + '효리수 멤버들은 티파니의 말에 각자 다른 반응을 보이며 대립을 이어갔다. '
+    + '이날 방송에서는 소녀시대 데뷔 초의 대화 방식이 여러 차례 언급됐다. '
+    + '티파니는 쌓인 감정을 무대까지 가져가지 말자는 것이 팀의 원칙이었다고 설명했다.';
   const TAIL =
     '<저작권자 © 스타뉴스, 무단전재 및 재배포 금지>브리핑티파니는 오분 토크를 언급했다.'
     + '추천 기사지예은, ♥바타와 결혼까지?.."책임 못 질거면 왜 만나"[미우새]'
@@ -302,5 +310,127 @@ describe('발행일은 지우지 않고 살린다', () => {
   it('본문 속 날짜 표현은 건드리지 않는다', () => {
     const text = '두 사람은 2014년 6월에 결혼했다. 2026.08.26 기준 자료다.';
     expect(stripSourceNoise(text).text).toBe(text);
+  });
+});
+
+/**
+ * [2026-08-27 회귀 — 내가 만든 것] 껍데기를 잘라놓고 버리던 버그.
+ *
+ * 네이트 기사 실측 로그:
+ *   [SourceNoise] 본문 뒤 사이트 껍데기 3028자 절단
+ *   [ContentGenerator] rawText=5327자        ← 자르기 전 크기 그대로
+ *
+ * 호출부는 removedLines/removedFragments 가 0보다 클 때만 정리된 텍스트를 쓴다.
+ * 꼬리 절단은 두 카운터를 하나도 올리지 않으므로, 3,028자를 잘라내고도 조건이
+ * 거짓이 되어 원문이 그대로 넘어갔다. 광고 CSS·관련기사 목록·반응 수치가
+ * 본문에 그대로 실린 이유다.
+ *
+ * 결과가 원문과 다르면 무언가 지운 것이다 — 카운터가 아니라 그 사실을 알려야 한다.
+ */
+describe('잘라낸 결과가 버려지지 않는다', () => {
+  const BODY = '배우 하영의 소속사가 입장을 밝혔다. 넷플릭스는 후속편 논의 중이라고 전했다. '.repeat(12);
+  const TAIL = '<저작권자 © 뉴스, 무단전재 및 재배포 금지>관련기사 로제의 사진 지수의 인터뷰 한보름 기사 비비 기사';
+
+  it('꼬리만 잘라도 절단량을 보고한다', () => {
+    const r = stripSourceNoise(BODY + TAIL);
+    expect(r.removedTailChars).toBeGreaterThan(0);
+  });
+
+  it('무언가 지웠으면 changed 가 참이다 — 호출부가 이걸 본다', () => {
+    expect(stripSourceNoise(BODY + TAIL).changed).toBe(true);
+  });
+
+  it('지운 게 없으면 changed 가 거짓이다', () => {
+    expect(stripSourceNoise(BODY).changed).toBe(false);
+  });
+
+  it('꼬리 절단 결과가 실제로 반영된다', () => {
+    const r = stripSourceNoise(BODY + TAIL);
+    expect(r.text).not.toContain('관련기사');
+    expect(r.text.length).toBeLessThan((BODY + TAIL).length);
+  });
+});
+
+describe('호출부가 결과를 쓴다', () => {
+  it('카운터가 아니라 changed 로 판단한다', () => {
+    const src = readFileSync(resolve(__dirname, '../contentGenerator.ts'), 'utf-8');
+    const codeOnly = src.split('\n')
+      .filter((l) => { const t = l.trim(); return t && !t.startsWith('//') && !t.startsWith('*') && !t.startsWith('/*'); })
+      .join('\n');
+    expect(codeOnly).not.toMatch(/sourceNoise\.removedLines > 0 \|\| sourceNoise\.removedFragments > 0/);
+    expect(codeOnly).toMatch(/sourceNoise\.changed/);
+  });
+});
+
+/**
+ * [2026-08-27 사장님 실측 3차 — 네이트] 광고 CSS 와 감정 위젯 수치가 본문에 실렸다.
+ *
+ *   "코드에는 width:300px, left:0px, height:18px 같은 표시값이 들어가 있고,
+ *    광고 상태가 unfilled일 때의 문구도 보이는데요."
+ *   "최고예요 9, 훈훈해요 5, 어이없어요 107, 속상해요 0, 화나요 882"
+ *
+ * 크롤 결과 구조를 보니 두 가지가 겹쳤다.
+ *   1. 본문이 전체의 43%였다. 절단 하한이 40%라 아슬아슬하게 통과했다가, 크롤 길이가
+ *      조금 흔들리는 날엔 못 넘겨 껍데기가 통째로 남았다.
+ *   2. 광고 CSS 는 본문 **중간**에 끼어 있어 꼬리 절단이 닿지 않는다.
+ *
+ * 한국어 기사에서 한글 없이 중괄호·세미콜론이 이어지는 구간은 본문이 아니다.
+ */
+describe('코드 조각 제거', () => {
+  const BODY = '배우 하영의 소속사가 입장을 밝혔다. 넷플릭스는 후속편을 논의 중이라고 전했다. '.repeat(10);
+
+  it('광고 CSS 블록을 걷어낸다', () => {
+    const css = 'div.news_view div.view_cont #ad_innerView {margin:0 auto;} #ad_innerView{width:320px;height:auto;text-align:center;}';
+    const { text } = stripSourceNoise(`${BODY}${css}${BODY}`);
+    expect(text).not.toContain('width:320px');
+    expect(text).not.toContain('ad_innerView');
+    expect(text).toContain('넷플릭스는 후속편을 논의 중');
+  });
+
+  it('자바스크립트 조각을 걷어낸다', () => {
+    const js = 'jQuery("#md-emotion-view .md-emotion").css({ "pointer-events": "none" });';
+    expect(stripSourceNoise(`${BODY}${js}`).text).not.toContain('jQuery');
+  });
+
+  it('영문 인용은 건드리지 않는다 — 코드가 아니다', () => {
+    const text = `${BODY}신부는 "Love youuuu"라는 댓글을 남겼다.`;
+    expect(stripSourceNoise(text).text).toContain('Love youuuu');
+  });
+
+  it('이메일·URL 은 건드리지 않는다', () => {
+    const text = `${BODY}문의는 elnino8919@osen.co.kr 로 하면 된다.`;
+    expect(stripSourceNoise(text).text).toContain('elnino8919@osen.co.kr');
+  });
+});
+
+describe('감정 반응 위젯', () => {
+  const BODY = '배우 하영의 소속사가 입장을 밝혔다. 넷플릭스는 후속편을 논의 중이라고 전했다. '.repeat(10);
+
+  it('붙어 나온 반응 수치를 걷어낸다', () => {
+    const { text } = stripSourceNoise(`${BODY}최고예요9훈훈해요5어이없어요107속상해요0화나요883`);
+    expect(text).not.toContain('화나요');
+    expect(text).not.toContain('어이없어요');
+  });
+
+  it('본문 속 "화나요" 같은 말은 건드리지 않는다', () => {
+    const text = `${BODY}팬들은 화나요라고 말하지 않았다.`;
+    expect(stripSourceNoise(text).text).toContain('화나요라고');
+  });
+});
+
+describe('본문이 절반이 안 되는 페이지도 자른다', () => {
+  it('본문 43%짜리(네이트 실측 비율)를 자른다', () => {
+    const body = '배우 하영과 넷플릭스가 후속편을 논의 중이라고 전했다. '.repeat(20); // 약 560자
+    const chrome = '[관련기사]☞ 장동윤 결혼한다 ☞ 유깻잎 근황 ☞ 로제 사진 ☞ 한보름 비키니 '.repeat(12);
+    const r = stripSourceNoise(body + chrome);
+    expect(r.removedTailChars).toBeGreaterThan(0);
+    expect(r.text).not.toContain('장동윤');
+    expect(r.text).toContain('넷플릭스가 후속편을 논의');
+  });
+
+  it('앞머리에 표지가 오면 여전히 자르지 않는다', () => {
+    const body = '배우 하영과 넷플릭스가 후속편을 논의 중이라고 전했다. '.repeat(20);
+    const r = stripSourceNoise(`관련기사 안내${body}`);
+    expect(r.text).toContain('넷플릭스가 후속편을 논의');
   });
 });
