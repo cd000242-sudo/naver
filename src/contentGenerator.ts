@@ -187,6 +187,7 @@ import { checkTitlePayoff, describeTitlePayoff } from './content/titlePayoffChec
 import { stampGenerationMode } from './content/generationModeStamp.js';
 import { buildTitleDiagnosticsLines } from './content/titleDiagnostics.js';
 import { describePublicReactionClaims, findUngroundedReactionClaims } from './content/publicReactionClaim.js';
+import { describeUngroundedNumbers, findUngroundedNumbers } from './content/numericGroundingCheck.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
 import {
   applyManualTitleOverride,
@@ -489,6 +490,17 @@ function logPublicReactionClaims(content: any, source: any): void {
       console.warn(`[ReactionClaim] ⚠️ ${message}`);
       for (const claim of claims) console.warn(`[ReactionClaim]   · ${claim.sentence}`);
     }
+
+    /*
+     * [2026-08-27] 사실 보존은 100%인데 그 사실들이 잘못 조합된다.
+     *   자료의 "16시간 공복" 과 "파운드" 가 "약 16파운드 안팎의 체지방 감량" 으로 엮이고,
+     *   근거 있는 "16파운드"·"16시간" 옆에 "최소 16개월 동안" 이 끼어든다.
+     * 근거 게이트는 "자료에 있는가"만 보고 "자료에서 그렇게 쓰였는가"는 보지 않았다.
+     * 수치는 단위까지 같아야 같은 사실이다.
+     */
+    const ungrounded = findUngroundedNumbers(body, source?.rawText);
+    const numberMessage = describeUngroundedNumbers(ungrounded);
+    if (numberMessage) console.warn(`[NumberCheck] ⚠️ ${numberMessage}`);
   } catch (err) {
     console.log('[ReactionClaim] 검사 생략:', err instanceof Error ? err.message : err);
   }
