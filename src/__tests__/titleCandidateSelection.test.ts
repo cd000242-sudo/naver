@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+
+import { measureTitleWidth } from '../content/titleLengthPolicy';
 import { readFileSync } from 'fs';
 
 import {
@@ -210,10 +212,12 @@ describe('길이 계약이 점수보다 앞선다', () => {
   });
 
   it('모드를 모르면 가장 느슨한 범위만 쓴다 — 홈판 상한으로 남을 재단하지 않는다', () => {
-    // 44자: 홈판(42) 초과지만 폴백 범위(45) 안이다.
-    const midLength = '전현무 카자흐스탄 즉흥 여행 조작설을 뒤집은 무편집 영상 속 공항 30분의 기록';
-    expect(midLength.length).toBeGreaterThan(42);
-    expect(midLength.length).toBeLessThanOrEqual(45);
+    // [2026-08-27] 상한이 폭 기준으로 바뀌었다. 예전 시료는 44자였지만 숫자·공백이
+    //   섞여 35.5폭이라 이제 계약 안이다 — 순한글로 바꿔 폭으로도 넘게 한다.
+    // 42.5폭: 홈판(42) 초과지만 폴백 범위(45) 안이다.
+    const midLength = '카자흐스탄으로 떠난 즉흥 여행을 둘러싼 조작설을 뒤집은 무편집 영상과 그날의 공항 풍경';
+    expect(measureTitleWidth(midLength)).toBeGreaterThan(42);
+    expect(measureTitleWidth(midLength)).toBeLessThanOrEqual(45);
 
     const withoutMode = selectBestTitleCandidate({
       selectedTitle: midLength,

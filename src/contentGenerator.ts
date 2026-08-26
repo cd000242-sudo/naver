@@ -185,6 +185,7 @@ import { buildUrlModeDirective } from './contentUrlModeDirective.js';
 import { buildKeywordFactChecklist } from './content/sourceFactChecklist.js';
 import { checkTitlePayoff, describeTitlePayoff } from './content/titlePayoffCheck.js';
 import { stampGenerationMode } from './content/generationModeStamp.js';
+import { resolveTitleLengthRange } from './content/titleLengthPolicy.js';
 import { buildTitleDiagnosticsLines } from './content/titleDiagnostics.js';
 import { describePublicReactionClaims, findUngroundedReactionClaims } from './content/publicReactionClaim.js';
 import { describeUngroundedNumbers, findUngroundedNumbers } from './content/numericGroundingCheck.js';
@@ -1594,7 +1595,13 @@ export function finalizeStructuredContent(
     }
     // 제목에 주제가 완전히 빠진 경우만 보완한다. 이미 들어간 키워드를 첫 3글자로
     // 옮기거나 서론·결론에 다시 삽입하면 자연스러운 문장과 검색 의도가 훼손된다.
-    applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword);
+    //
+    // [2026-08-27] 상한을 모드 계약에서 가져온다. 예전에는 이 정책이 자체 상한 70자를
+    //   들고 있어, 스키마와 후보 선별기에 넣은 길이 계약(홈판 28~42)이 마지막 단계에서
+    //   깨졌다 — 장동윤 글의 제목 후보가 전부 52~54자로 나온 이유다.
+    applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword, {
+      maxWidth: resolveTitleLengthRange(source.contentMode as never).max,
+    });
   }
   applyHomefeedNarrativeHookBlock(finalContent, source);
   applySeoQualityHookBlock(finalContent, source);  // ✅ [2026-03-06] SEO 런타임 품질 게이트
