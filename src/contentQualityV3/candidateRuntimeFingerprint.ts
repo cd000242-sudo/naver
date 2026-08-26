@@ -176,6 +176,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/sourceFactChecklist.ts',
   'src/content/sourceFidelityCheck.ts',
   'src/content/sourceFreshness.ts',
+  'src/content/sourceMaterialAudit.ts',
   'src/content/sourceNoiseFilter.ts',
   'src/content/subKeywordCoverageGate.ts',
   'src/content/summaryTable.ts',
