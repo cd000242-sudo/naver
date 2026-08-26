@@ -60,8 +60,11 @@ describe('미리보기가 글을 끝까지 보여준다', () => {
   });
 
   it('미리보기 텍스트는 붙여넣기와 같은 함수를 지난다', () => {
-    expect(flow).toMatch(/buildPastePreviewText\(introductionText\)/);
-    expect(flow).toMatch(/buildPastePreviewText\(headingContent\)/);
-    expect(flow).toMatch(/buildPastePreviewText\(conclusionText\)/);
+    // 화면은 HTML 변형을 쓴다 — 붙여넣기와 같은 buildMobileRichHtml 을 지나므로
+    // 표가 마크다운 원문이 아니라 실제 표로 그려진다(사장님 실측 "도입부에 표부터
+    // 시작하네...?? 이게 맞니?"). 줄바꿈 계약은 아래 buildPastePreviewText 테스트가 지킨다.
+    expect(flow).toMatch(/buildPastePreviewHtml\(introductionText\)/);
+    expect(flow).toMatch(/buildPastePreviewHtml\(headingContent\)/);
+    expect(flow).toMatch(/buildPastePreviewHtml\(conclusionText\)/);
   });
 });

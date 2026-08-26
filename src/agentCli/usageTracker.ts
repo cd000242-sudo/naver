@@ -32,6 +32,14 @@ interface ProviderUsage {
    * recent observations rather than one all-time number.
    */
   observedLimits?: number[];
+  /**
+   * [2026-08-26] CLI 로그인에서 확인한 구독 유형(claude: max/pro/team …).
+   * 사장님 지적: "로그인하면 볼 수 있는 플랜이 있는데 그 플랜을 보면 가능하잖아."
+   * 실제로 .credentials.json 에 들어 있어(subscriptionType) 읽을 수 있다.
+   * 다만 그 플랜이 "글 몇 편"인지는 어디에도 없으므로, 표시만 하고 편수는
+   * observedLimits(실제로 막혀 본 지점)로만 계산한다.
+   */
+  plan?: string;
 }
 
 type UsageFile = Partial<Record<AgentProvider, ProviderUsage>>;
@@ -45,6 +53,8 @@ export interface AgentUsageWindow {
   observedLimit?: number;
   /** observedLimit이 있을 때만: 남은 것으로 보이는 글 수(0 이상). */
   estimatedRemaining?: number;
+  /** CLI 로그인에서 확인한 구독 유형(claude: max/pro …). 편수 계산에는 쓰지 않는다. */
+  plan?: string;
   /** Successful calls from THIS app inside the current rolling window. */
   callsInWindow: number;
   /** When the oldest in-window call leaves the window (ms epoch), if any. */
@@ -92,7 +102,20 @@ function pruned(entry: ProviderUsage | undefined, now: number): ProviderUsage {
     calls,
     ...(rateLimit ? { rateLimit } : {}),
     ...(observedLimits.length ? { observedLimits } : {}),
+    ...(entry?.plan ? { plan: entry.plan } : {}),
   };
+}
+
+/** CLI 로그인에서 확인한 구독 유형을 기억한다. 창이 지나도 유지한다. */
+export function recordAgentPlan(provider: AgentProvider, plan: string | undefined): void {
+  const normalized = String(plan ?? '').trim();
+  if (!normalized) return;
+  const data = loadFile();
+  const entry = pruned(data[provider], Date.now());
+  if (entry.plan === normalized) return; // 같은 값이면 파일을 다시 쓰지 않는다.
+  entry.plan = normalized;
+  data[provider] = entry;
+  saveFile(data);
 }
 
 /** Record one successful generate call. */

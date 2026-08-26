@@ -22,6 +22,8 @@ export interface AgentUsageBadgeInput {
   readonly windowOpensAt?: number;
   readonly rateLimitResetAt?: number;
   readonly rateLimitedAt?: number;
+  /** CLI 로그인에서 확인한 구독 유형(claude: max/pro …). */
+  readonly plan?: string;
 }
 
 export type AgentUsageBadgeTone = 'idle' | 'ok' | 'warn' | 'blocked';
@@ -44,6 +46,35 @@ export function agentProviderLabel(provider: string): string {
   return PROVIDER_LABELS[String(provider || '').trim()] || String(provider || '에이전트');
 }
 
+const PLAN_LABELS: Readonly<Record<string, string>> = Object.freeze({
+  max: 'Max',
+  pro: 'Pro',
+  team: 'Team',
+  enterprise: 'Enterprise',
+  free: 'Free',
+});
+
+/**
+ * 플랜 이름을 사람이 읽는 형태로. 모르는 값은 그대로 보여준다 — 숨기면 사용자가
+ * 자기 플랜을 확인할 방법이 없어진다.
+ *
+ * [2026-08-26] 플랜은 표시만 한다. "이 플랜은 글 몇 편"이라는 값은 어디에도 공개돼
+ * 있지 않고(공개된 것은 "5시간당 메시지 N개" 류다), 글 한 편이 몇 메시지를 쓰는지는
+ * 글마다 다르다. 편수는 실제로 막혀 본 지점(observedLimit)으로만 말한다.
+ */
+export function agentPlanLabel(plan: string | undefined): string {
+  const raw = String(plan || '').trim();
+  if (!raw) return '';
+  return PLAN_LABELS[raw.toLowerCase()] || raw;
+}
+
+/** "클로드코드 Max" 처럼 공급자 + 플랜. 플랜을 모르면 공급자만. */
+function providerWithPlan(provider: string, plan: string | undefined): string {
+  const label = agentProviderLabel(provider);
+  const planLabel = agentPlanLabel(plan);
+  return planLabel ? `${label} ${planLabel}` : label;
+}
+
 /** 남은 시간을 "1시간 20분" 꼴로. 1분 미만은 "곧". */
 export function formatRemainingTime(untilMs: number, now: number): string {
   const diff = untilMs - now;
@@ -60,7 +91,7 @@ export function buildAgentUsageBadge(
   input: AgentUsageBadgeInput,
   now: number = Date.now(),
 ): AgentUsageBadge {
-  const label = agentProviderLabel(input.provider);
+  const label = providerWithPlan(input.provider, input.plan);
   const used = Math.max(0, Math.round(Number(input.callsInWindow) || 0));
 
   // 1. 지금 막혀 있는 경우 — 추정할 것이 없다. 언제 풀리는지만 말한다.

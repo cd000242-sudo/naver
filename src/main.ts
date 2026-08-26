@@ -80,6 +80,12 @@ import { getDailyLimit, getTodayCount, incrementTodayCount, setDailyLimit } from
 import { isAccountBackedOff, getBotBackoff, computeLoginStaggerDelayMs } from './utils/botBackoff.js';
 import { generateStructuredContent, removeOrdinalHeadingLabelsFromBody } from './contentGenerator.js';
 import {
+  describeLicenseNetworkFailure,
+  classifyLicenseNetworkFailure,
+  LICENSE_SERVER_TIMEOUT_MS,
+  LICENSE_SERVER_READ_RETRIES,
+} from './licenseNetworkError.js';
+import {
   beginContentQualityV3Publication,
   enforceContentQualityV3PublicationBoundary,
   forkContentQualityV3PublicationTicket,
@@ -1044,7 +1050,7 @@ async function requestTrialCode(userInfo?: { email: string; phone: string }): Pr
     const gasUrl = process.env.LICENSE_SERVER_URL || DEFAULT_LICENSE_SERVER_URL;
     const deviceId = await getDeviceId();
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
+    const timeout = setTimeout(() => controller.abort(), LICENSE_SERVER_TIMEOUT_MS);
     try {
       const response = await fetch(gasUrl, {
         method: 'POST',
@@ -1063,7 +1069,7 @@ async function requestTrialCode(userInfo?: { email: string; phone: string }): Pr
     }
   } catch (error) {
     debugLog(`[Main] requestTrialCode 실패 — ${(error as Error).message}`);
-    return { success: false, message: '인증번호 발송에 실패했습니다. 인터넷 연결을 확인하세요.' };
+    return { success: false, message: describeLicenseNetworkFailure('인증번호 발송', error) };
   }
 }
 
@@ -1085,16 +1091,35 @@ async function verifyTrialEligibility(userInfo?: { nickname: string; phone: stri
     }
     const gasUrl = process.env.LICENSE_SERVER_URL || DEFAULT_LICENSE_SERVER_URL;
     const deviceId = await getDeviceId();
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
-    try {
-      const response = await fetch(gasUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ action: 'trial-verify', nickname, phone, deviceId, appVersion: app.getVersion() }),
-        signal: controller.signal,
-      });
-      const result = await response.json();
+    // [2026-08-26] 자격 조회는 읽기 전용이라 재시도해도 부작용이 없다.
+    //   Apps Script 응답이 3.7초~25초+ 로 크게 흔들려(실측) 한 번 끊겼다고 실패로
+    //   처리하면 서버가 멀쩡해도 사용자가 막힌다.
+    let result: any;
+    let lastError: unknown;
+    for (let attempt = 0; attempt <= LICENSE_SERVER_READ_RETRIES; attempt++) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), LICENSE_SERVER_TIMEOUT_MS);
+      try {
+        const response = await fetch(gasUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({ action: 'trial-verify', nickname, phone, deviceId, appVersion: app.getVersion() }),
+          signal: controller.signal,
+        });
+        result = await response.json();
+        lastError = undefined;
+        break;
+      } catch (err) {
+        lastError = err;
+        // 타임아웃일 때만 다시 시도한다. 연결 자체가 안 되면 반복해도 같다.
+        if (attempt >= LICENSE_SERVER_READ_RETRIES || classifyLicenseNetworkFailure(err) !== 'timeout') break;
+        debugLog(`[Main] verifyTrialEligibility: 응답 지연 — 재시도 ${attempt + 1}/${LICENSE_SERVER_READ_RETRIES}`);
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+    if (lastError) throw lastError;
+    {
       debugLog(`[Main] verifyTrialEligibility: GAS 응답 — ${JSON.stringify(result)}`);
       if (result.ok !== true) {
         return { success: false, message: result.error || '인증에 실패했습니다.' };
@@ -1104,12 +1129,10 @@ async function verifyTrialEligibility(userInfo?: { nickname: string; phone: stri
         status: result.status === 'existing' ? 'existing' : 'new',
         ...(typeof result.registeredAt === 'string' && result.registeredAt ? { registeredAt: result.registeredAt } : {}),
       };
-    } finally {
-      clearTimeout(timeout);
     }
   } catch (error) {
     debugLog(`[Main] verifyTrialEligibility 실패 — ${(error as Error).message}`);
-    return { success: false, message: '인증에 실패했습니다. 인터넷 연결을 확인하세요.' };
+    return { success: false, message: describeLicenseNetworkFailure('인증', error) };
   }
 }
 
@@ -1165,7 +1188,7 @@ async function activateFreeTier(userInfo?: { email?: string; nickname: string; p
       };
       debugLog(`[Main] activateFreeTier: GAS 체험 사용자 등록 요청 — ${normalizedEmail}`);
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 10000);
+      const timeout = setTimeout(() => controller.abort(), LICENSE_SERVER_TIMEOUT_MS);
       const response = await fetch(gasUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },

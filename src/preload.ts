@@ -192,7 +192,7 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('agent:status', provider, options),
   // [v2.11.135] 5시간 창 사용량 가시화 (앱 자체 기록 + rate limit 리셋 시각)
   // observedLimit/estimatedRemaining은 이 앱이 실제로 한도에 막혀 본 적이 있을 때만 온다.
-  agentUsage: (provider: AgentProvider): Promise<{ success: boolean; usage?: { callsInWindow: number; windowOpensAt?: number; rateLimitedAt?: number; rateLimitResetAt?: number; observedLimit?: number; estimatedRemaining?: number } }> =>
+  agentUsage: (provider: AgentProvider): Promise<{ success: boolean; usage?: { callsInWindow: number; windowOpensAt?: number; rateLimitedAt?: number; rateLimitResetAt?: number; observedLimit?: number; estimatedRemaining?: number; plan?: string } }> =>
     ipcRenderer.invoke('agent:usage', provider),
   agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }): Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:generate', payload),

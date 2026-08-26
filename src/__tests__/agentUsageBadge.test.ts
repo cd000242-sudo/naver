@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { describe, it, expect } from 'vitest';
-import { buildAgentUsageBadge, formatRemainingTime, agentProviderLabel } from '../agentCli/usageBadge';
+import { buildAgentUsageBadge, formatRemainingTime, agentProviderLabel, agentPlanLabel } from '../agentCli/usageBadge';
 
 const NOW = 1_800_000_000_000;
 
@@ -97,5 +97,31 @@ describe('배찌가 화면에 실제로 붙어 있는지 (2026-08-26 사장님 �
   it('렌더러 번들에 등록돼 있다 — 빠지면 런타임에서만 터진다', () => {
     expect(copyStatic).toMatch(/'agentQuotaBadge\.js'/);
     expect(copyStatic).toMatch(/agentCli['"], ['"]usageBadge\.js/);
+  });
+});
+
+describe('구독 플랜 표시 (2026-08-26 사장님 지적)', () => {
+  it('플랜을 알면 배찌에 함께 보여준다', () => {
+    // "로그인하면 볼 수 있는 플랜이 있는데 그 플랜을 보면 가능하잖아."
+    // 실제로 ~/.claude/.credentials.json 에 subscriptionType 이 들어 있다(실측: max).
+    const b = buildAgentUsageBadge({ provider: 'claude', callsInWindow: 7, plan: 'max' }, NOW);
+    expect(b.headline).toBe('클로드코드 Max 7편 사용');
+  });
+
+  it('플랜을 몰라도 배찌는 나온다', () => {
+    expect(buildAgentUsageBadge({ provider: 'codex', callsInWindow: 3 }, NOW).headline)
+      .toBe('코덱스 3편 사용');
+  });
+
+  it('모르는 플랜 값은 숨기지 않고 그대로 보여준다', () => {
+    expect(agentPlanLabel('some_new_tier')).toBe('some_new_tier');
+    expect(agentPlanLabel('')).toBe('');
+  });
+
+  it('플랜으로 편수를 추정하지 않는다 — 편수는 실측 한도로만', () => {
+    // 플랜이 있어도 관측 한도가 없으면 "약 N편"을 말하지 않는다.
+    const b = buildAgentUsageBadge({ provider: 'claude', callsInWindow: 7, plan: 'max' }, NOW);
+    expect(b.headline).not.toMatch(/약 \d+편/);
+    expect(b.detail).toMatch(/추정하지 않습니다/);
   });
 });

@@ -76,6 +76,7 @@ import { buildSituationDepthContract } from './content/situationDepthContract.js
 import { buildSituationTitleContract, type SituationTitleMode } from './content/situationTitleContract.js';
 import { selectBestTitleCandidate } from './content/titleCandidateSelection.js';
 import { normalizeSummaryRows, prependSummaryTable } from './content/summaryTable.js';
+import { stripSourceNoise } from './content/sourceNoiseFilter.js';
 import {
   buildEvidenceAndIntentFinalContract,
   buildEvidenceMetaLeakRule,
@@ -7652,6 +7653,17 @@ export async function generateStructuredContent(
   source: ContentSource,
   options: GenerateOptions = {},
 ): Promise<StructuredContent> {
+  // [2026-08-26 사장님 실측] 발행된 글에 "발행 시각 07:27조회수를 기록한 관련 소식에
+  //   따르면" 이 들어갔다. 원본 기사의 발행 시각·조회수가 재료로 흘러들어가 모델이
+  //   사실인 양 엮었다. 크롤러 셀렉터를 언론사마다 쫓는 대신 여기서 한 번 더 거른다.
+  //   생성기 입구라 URL·키워드 모드, IPC·내부 호출이 모두 이 지점을 지난다.
+  const sourceNoise = stripSourceNoise(source.rawText);
+  if (sourceNoise.removedLines > 0 || sourceNoise.removedFragments > 0) {
+    console.log(
+      `[SourceNoise] 기사 껍데기 제거: ${sourceNoise.removedLines}줄 · 조각 ${sourceNoise.removedFragments}개`,
+    );
+    source = { ...source, rawText: sourceNoise.text };
+  }
   const activation = resolveProductionContentQualityV3Activation(
     source.contentMode,
     options.provider,

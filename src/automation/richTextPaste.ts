@@ -1421,6 +1421,9 @@ function selectImportantParagraphs(nodes: RenderNode[], maxHighlights: number): 
  *
  * 표·목록 같은 블록 문법은 붙여넣기에서 따로 처리되므로 여기서는 줄을 건드리지 않고
  * 그대로 돌려준다 — 미리보기에서 표가 문장으로 쪼개지면 오히려 오해를 부른다.
+ *
+ * [화면은 buildPastePreviewHtml 을 쓴다] 표를 실제 표로 그려야 해서다. 이 평문 변형은
+ * 줄바꿈 계약을 테스트로 고정하고, 로그·진단처럼 HTML 이 필요 없는 곳에 쓴다.
  */
 export function buildPastePreviewText(
   text: string,
@@ -1445,6 +1448,34 @@ export function buildPastePreviewText(
     out.push(...buildReadableParagraphs(trimmed, maxChunkChars));
   }
   return out.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+
+/**
+ * 미리보기용 HTML — 붙여넣기가 만들 결과를 그대로 그린다.
+ *
+ * [2026-08-26 사장님 지시] 도입부 요약 표가 미리보기에서 "| 구분 | 내용 |" 마크다운
+ * 원문으로 보였다("도입부에 표부터 시작하네...?? 이게 맞니?"). 실제 발행본에서는 진짜
+ * 표로 바뀌는데, 화면이 그걸 못 보여주니 잘못된 것처럼 읽힌다.
+ *
+ * buildMobileRichHtml 을 그대로 쓴다 — 붙여넣기와 같은 함수라 결과가 갈릴 수 없다.
+ *
+ * 한 가지만 다르게 한다.
+ *  1. 테마를 고정한다. 실제 테마는 발행 시점에 글마다 무작위로 정해져(__richPasteThemes)
+ *     렌더러가 미리 알 수 없다. 미리보기가 약속하는 것은 색이 아니라 구조와 줄바꿈이다.
+ *
+ * 본문 이스케이프는 따로 하지 않는다 — buildMobileRichHtml 이 이미 텍스트를 이스케이프한다
+ * (실측: 모델이 <script>를 뱉어도 실행 가능한 태그로 나오지 않는다).
+ * 앞에서 한 번 더 걸면 &amp;lt;script&amp;gt; 처럼 이중 이스케이프가 되어 화면에 깨져 보인다.
+ */
+export function buildPastePreviewHtml(text: string): string {
+  const source = String(text ?? '');
+  if (!source.trim()) return '';
+  const fixed = () => 0;
+  return buildMobileRichHtml(source, {
+    tableTheme: pickSoftTableTheme(fixed),
+    highlightTheme: pickSoftHighlightTheme(fixed),
+    headingTheme: pickSoftHeadingTheme(fixed),
+  }).html;
 }
 
 export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions = {}): MobileRichHtmlResult {

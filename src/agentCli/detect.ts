@@ -287,6 +287,11 @@ async function probeClaudeLogin(): Promise<LoginProbe> {
       const detail = subscriptionType
         ? `${authMethod || 'claude.ai'} · ${subscriptionType}`
         : (authMethod || 'Claude OAuth 로그인 확인');
+      // [2026-08-26] 확인된 구독 유형을 사용량 파일에 남긴다 — 배찌가 플랜을 표시한다.
+      //   여기 말고는 렌더러가 플랜을 알 방법이 없다(AgentCliStatus 에 실려 있지 않다).
+      try {
+        void import('./usageTracker.js').then((m) => m.recordAgentPlan('claude', subscriptionType));
+      } catch { /* 표시용이다 — 실패해도 로그인 판정과 무관하다. */ }
       return { loggedIn: true, subscriptionType, authMethod, detail };
     }
 

@@ -33,3 +33,24 @@ describe('분량 계약은 한 곳에서만 정의된다', () => {
     expect(jsonFormat).toMatch(/분량은 목표가 아니라 결과다/);
   });
 });
+
+describe('결론부에 고정 골격을 두지 않는다 (2026-08-26)', () => {
+  it('"6줄 공식"과 "5개 체크리스트" 요구가 사라졌다', () => {
+    // 실측: 인물 근황 글 끝에 "- 관계 확인 / - 소동 계기 / - 최근 근황" 목록이 붙어
+    // 결론 문장과 엉켰다. 주제와 무관하게 매번 같은 덩어리가 붙는 구조였다.
+    expect(seoBase).not.toMatch(/결론부 6줄 공식/);
+    expect(seoBase).not.toMatch(/결론부 5개 체크리스트/);
+    expect(seoBase).not.toMatch(/5개 항목 체크리스트 블록/);
+  });
+
+  it('R0-3(고정 위치 금지)과 같은 방향으로 다시 썼다', () => {
+    expect(seoBase).toMatch(/\[결론부 — 공식 없음/);
+    expect(seoBase).toMatch(/항목 수를 맞추지 마라/);
+    expect(seoBase).toMatch(/결론마다 반복되는 덩어리/);
+  });
+
+  it('파생 Q&A도 실제 질문이 있을 때만으로 바뀌었다', () => {
+    expect(seoBase).not.toMatch(/\[검색 종결 Q&A 패턴 — 필수\]/);
+    expect(seoBase).toMatch(/실제 질문이 있을 때만/);
+  });
+});

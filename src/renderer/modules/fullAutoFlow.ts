@@ -1,7 +1,7 @@
 // @ts-nocheck
 // Restored from dist/renderer/modules/fullAutoFlow.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
-import { buildPastePreviewText } from '../../automation/richTextPaste.js';
+import { buildPastePreviewHtml } from '../../automation/richTextPaste.js';
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import {
@@ -1834,7 +1834,7 @@ function updateUnifiedImagePreview(headings, generatedImages) {
         // [2026-08-26] 붙여넣기가 실제로 만들 줄바꿈으로 보여준다. 미리보기에서 고쳐도
         //   발행 결과의 줄바꿈이 달라서, 발행 후 블로그에서 다시 손봐야 했다(사장님 실측).
         //   600자 자르기도 없앴다 — 잘린 뒤는 확인할 방법이 없어 검수가 반쪽이 된다.
-        const safeIntro = escapeHtml(buildPastePreviewText(introductionText));
+        const safeIntro = buildPastePreviewHtml(introductionText);
         headerHtml = `<div style="margin-bottom: 1rem; padding: 0.75rem; background: var(--bg-tertiary); border-radius: 8px; border: 1px solid var(--border-light);">
       <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: ${introductionText ? '0.75rem' : '0'};">
         ${thumbBlock}
@@ -1842,7 +1842,7 @@ function updateUnifiedImagePreview(headings, generatedImages) {
       </div>
       ${introductionText ? `<div style="padding: 0.75rem; background: var(--bg-primary); border-radius: 6px; border-left: 3px solid var(--primary);">
         <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem; font-size: 0.9rem;">✍️ 도입부</div>
-        <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; white-space: pre-line;">${safeIntro}</div>
+        <div style="font-size: 0.9rem; line-height: 1.7;">${safeIntro}</div>
       </div>` : ''}
     </div>`;
     }
@@ -1872,7 +1872,7 @@ function updateUnifiedImagePreview(headings, generatedImages) {
         }
         // [2026-08-26] 붙여넣기와 같은 줄바꿈으로. 400자 자르기도 제거 — 잘린 뒤 문단은
         //   확인할 수 없어 "미리보기에서 고쳤는데 발행본이 다르다"가 반복된다.
-        const safeContent = escapeHtml(buildPastePreviewText(headingContent));
+        const safeContent = buildPastePreviewHtml(headingContent);
         let imageDisplay = '';
         const headingKey = encodeURIComponent(String(normalizedHeadingTitle || '').trim());
         const getFromCache2 = window.getHeadingVideoPreviewFromCache || getHeadingVideoPreviewFromCache;
@@ -1922,7 +1922,7 @@ function updateUnifiedImagePreview(headings, generatedImages) {
       <!-- 소제목 + 본문 영역 -->
       <div style="padding: 0.75rem; background: var(--bg-primary); border-radius: 6px; border-left: 3px solid var(--success);">
         <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.75rem; font-size: 1rem; word-break: keep-all; line-height: 1.4; overflow-wrap: break-word;">📝 ${safeTitle}</div>
-        <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; white-space: pre-line;">${safeContent}</div>
+        <div style="font-size: 0.9rem; line-height: 1.7;">${safeContent}</div>
       </div>
     </div>`;
     }).join('');
@@ -1944,7 +1944,7 @@ function updateUnifiedImagePreview(headings, generatedImages) {
         const conclusionBlock = conclusionText
             ? `<div style="padding: 0.75rem; background: var(--bg-primary); border-radius: 6px; border-left: 3px solid var(--accent);">
         <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem; font-size: 0.9rem;">🏁 마무리</div>
-        <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; white-space: pre-line;">${escapeHtml(buildPastePreviewText(conclusionText))}</div>
+        <div style="font-size: 0.9rem; line-height: 1.7;">${buildPastePreviewHtml(conclusionText)}</div>
       </div>`
             : '';
         const hashtagBlock = hashtagList.length > 0

@@ -173,7 +173,7 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-08-20] 본선 배선(contentJsonPromptFormat clickReason·whyClick·훅 계약)으로 재계산
         // [2026-08-20] SEO 검색 클릭 계약 + 쇼핑 제품명+상황+후킹 계약 배선으로 재계산
         // [2026-08-20 3차] mate·business 클릭 계약 + 사진(imageNarrative) titleReason 계약으로 재계산
-        '193a9912184f9c777ae0fafe5448ce27820e0fc1bcb04a1b2a8d2cf6d9109214',
+        '4a7dc16bc21e59592118b87d451e74d1ad9c6b215ee2f5c227a8b66c395c065a',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
