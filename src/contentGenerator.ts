@@ -7745,9 +7745,17 @@ export async function generateStructuredContent(
   //   사실인 양 엮었다. 크롤러 셀렉터를 언론사마다 쫓는 대신 여기서 한 번 더 거른다.
   //   생성기 입구라 URL·키워드 모드, IPC·내부 호출이 모두 이 지점을 지난다.
   const sourceNoise = stripSourceNoise(source.rawText);
-  if (sourceNoise.removedLines > 0 || sourceNoise.removedFragments > 0) {
+  /*
+   * [2026-08-27 회귀] 예전에는 줄·조각 카운터가 0보다 클 때만 정리된 텍스트를 썼다.
+   * 꼬리 절단은 두 카운터를 하나도 올리지 않는다 — 네이트 기사에서 3,028자를 잘라내고도
+   * 조건이 거짓이 되어 원문이 그대로 넘어갔고, 광고 CSS·관련기사 목록·반응 수치가
+   * 본문에 실렸다. 카운터가 아니라 "무언가 달라졌는가"를 본다.
+   */
+  if (sourceNoise.changed) {
     console.log(
-      `[SourceNoise] 기사 껍데기 제거: ${sourceNoise.removedLines}줄 · 조각 ${sourceNoise.removedFragments}개`,
+      `[SourceNoise] 기사 껍데기 제거: ${sourceNoise.removedLines}줄 · 조각 ${sourceNoise.removedFragments}개`
+      + (sourceNoise.removedTailChars > 0 ? ` · 꼬리 ${sourceNoise.removedTailChars}자` : '')
+      + ` → ${String(source.rawText || '').length}자에서 ${sourceNoise.text.length}자`,
     );
     source = { ...source, rawText: sourceNoise.text };
   }
