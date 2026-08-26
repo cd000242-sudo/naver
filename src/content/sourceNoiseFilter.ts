@@ -41,6 +41,23 @@ const NOISE_LINE_PATTERNS: readonly RegExp[] = [
   /^[▶▷►■□]\s*(?:관련|추천|이전|다음)\s*(?:기사|글|뉴스)/,
 ];
 
+/*
+ * [2026-08-27 사장님 지적] "월이 빠져도 되는 거니?"
+ *
+ * 기사 본문은 "26일 유튜브 채널에는…" 처럼 일만 적는다 — 발행일이 머리에 붙어 있어
+ * 독자가 달을 안다. 그 발행일이 앞머리 껍데기 안에 있는데, 껍데기를 지우면서 연·월까지
+ * 함께 날리면 글에 "26일"만 남는다. 며칠만 지나도 어느 달인지 알 수 없는 글이 된다.
+ *
+ * 껍데기의 형식은 지우되 날짜라는 사실은 남긴다. 삭제 규칙보다 먼저 돌려 한국어
+ * 표기로 바꿔 두면, 뒤따르는 삭제 규칙은 이미 접두가 사라진 이 문자열을 건드리지 않는다.
+ */
+const NOISE_INLINE_REWRITES: readonly { re: RegExp; to: (m: RegExpMatchArray) => string }[] = [
+  {
+    re: /(?:기사)?(?:발행|입력|수정|등록)\s*[:：]?\s*(\d{4})[.\-/]\s*(\d{1,2})[.\-/]\s*(\d{1,2})\.?\s*[・·ㆍ|]?\s*(?:오전|오후)?\s*\d{1,2}\s*[:시]\s*\d{0,2}분?/g,
+    to: (m) => `${m[1]}년 ${Number(m[2])}월 ${Number(m[3])}일 `,
+  },
+];
+
 /** 줄 안에 섞여 있어도 걷어낼 조각. 줄 전체를 지우지 않고 이 부분만 뺀다. */
 const NOISE_INLINE_PATTERNS: readonly RegExp[] = [
   // "발행 시각 07:27" 이 문장 앞에 붙어 다음 문장과 엉키는 실측 사례
@@ -53,7 +70,6 @@ const NOISE_INLINE_PATTERNS: readonly RegExp[] = [
    * 생성된 글에 "22:55조회수 집계와 함께"로 새어 나온 자리다. 위 규칙들은 접두 뒤에
    * "시각/일시"를 요구하거나 조회수 뒤에 숫자를 기대해 이 형태를 놓쳤다.
    */
-  /(?:발행|입력|수정|등록)\s*[:：]\s*\d{4}[.\-/]\s*\d{1,2}[.\-/]\s*\d{1,2}\.?\s*[・·ㆍ|]?\s*\d{1,2}:\d{2}/g,
   /조회\s*수\s*[:：]\s*/g,
   /Google\s*검색\s*선호\s*출처로\s*추가/g,
   /*
@@ -162,6 +178,13 @@ export function stripSourceNoise(rawText: string | null | undefined): SourceNois
       continue;
     }
     let next = line;
+    // 삭제보다 먼저 — 지우면 사라질 사실(발행일)을 읽을 수 있는 형태로 남긴다.
+    for (const { re, to } of NOISE_INLINE_REWRITES) {
+      next = next.replace(re, (...args) => {
+        removedFragments++;
+        return to(args as unknown as RegExpMatchArray);
+      });
+    }
     for (const re of NOISE_INLINE_PATTERNS) {
       next = next.replace(re, () => {
         removedFragments++;
