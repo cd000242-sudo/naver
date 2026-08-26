@@ -113,6 +113,16 @@ const NOISE_INLINE_PATTERNS: readonly RegExp[] = [
   /(?:최고예요|훈훈해요|어이없어요|속상해요|화나요|추천해요)\s*\d+(?:\s*(?:최고예요|훈훈해요|어이없어요|속상해요|화나요|추천해요)\s*\d+)+/g,
   /[<([]?\s*저작권자[^<>()[\]\n]{0,80}?(?:금지|금합니다)[^\S\n]*[>)\]]?/g,
   /무단\s*(?:전재|복제|배포)[^\n]{0,40}?(?:금지|금합니다)[^\S\n]*[>)\]]?/g,
+  /*
+   * [2026-08-27 뉴스픽 실측] 본문 끝에 그대로 남던 껍데기 둘.
+   *   "All rights reserved."          ← 영문 저작권. 위 규칙은 전부 한글을 요구했다.
+   *   "'이미지 크게 보기' 안내"        ← 이미지 확대 버튼의 UI 문구
+   * 발행된 글에 "All rights reserved." 가 한 줄로 실렸다.
+   */
+  /(?:Copyright\s*[©ⓒc]?[^\n]{0,60}?)?All\s+rights\s+reserved\.?/gi,
+  /Copyright\s*[©ⓒ][^\n]{0,60}?(?=\s|$)/g,
+  // "이미지 크게 보기" 는 버튼 문구다. 본문의 "이미지가 공개되며" 같은 말과 형태가 다르다.
+  /이미지\s*크게\s*보기\s*/g,
 ];
 
 export interface SourceNoiseFilterResult {
@@ -171,7 +181,24 @@ const MIN_BODY_RATIO = 0.25;
  * Returns the text unchanged when no marker is found, or when cutting there would
  * take the article with it — a copyright line at the top must not truncate the piece.
  */
+/**
+ * Marks where the deliberately-attached supplement begins.
+ *
+ * [2026-08-27 뉴스픽 실측] 절단이 보강 자료를 통째로 날렸다.
+ *   원본 1,072자 + 보강 2,681자 = 3,753자 → 절단 후 1,015자.
+ * 원본 끝의 저작권 표시에서 자르면서 그 뒤에 붙여 둔 블로그 자료까지 사라졌다.
+ * 절단은 기사 본문의 끝을 찾는 장치지, 우리가 의도적으로 붙인 자료를 지우는 장치가 아니다.
+ */
+const SUPPLEMENT_BOUNDARY = /(?:^|\n)\s*(?:---\s*참고 자료|===\s*상위 노출 글 본문 발췌)/;
+
 function cutTrailingChrome(text: string): { text: string; cutChars: number } {
+  // 보강 구간은 손대지 않는다. 기사 본문 쪽만 잘라 내고 그대로 다시 붙인다.
+  const boundary = text.search(SUPPLEMENT_BOUNDARY);
+  if (boundary >= 0) {
+    const head = cutTrailingChrome(text.slice(0, boundary));
+    return { text: head.text + text.slice(boundary), cutChars: head.cutChars };
+  }
+
   let earliest = -1;
   for (const re of BODY_END_MARKERS) {
     const at = text.search(re);
