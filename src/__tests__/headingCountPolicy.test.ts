@@ -29,3 +29,19 @@ describe('소제목 개수 단일 출처 (2026-08-26 하네스 충돌 정리)', 
     expect(resolveHeadingCountRange('unknown-mode')).toEqual(resolveHeadingCountRange('seo'));
   });
 });
+
+describe('홈판 이슈 서사 소제목 경고 (2026-08-26)', () => {
+  it('검증기가 headingCountPolicy를 쓰고 자체 기준을 갖지 않는다', async () => {
+    const { readFileSync } = await import('fs');
+    const { join } = await import('path');
+    const src = readFileSync(
+      join(__dirname, '..', 'contentHomefeedValidator.ts'),
+      'utf-8',
+    );
+    // 지시를 따라 소제목 0개로 쓴 이슈 서사 글이 "심각 부족"으로 찍히던 문제.
+    expect(src).not.toMatch(/최소 3개 필요/);
+    expect(src).not.toMatch(/소제목 심각 부족/);
+    expect(src).toMatch(/resolveHeadingCountRange/);
+    expect(src).toMatch(/issueStory: isIssueStory/);
+  });
+});

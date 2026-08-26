@@ -1,3 +1,10 @@
+import {
+  resolveHeadingCountRange,
+  judgeHeadingCount,
+  describeHeadingCount,
+} from './content/headingCountPolicy.js';
+import { HOMEFEED_ISSUE_STORY_CATEGORIES, resolveCategory } from './promptLoader.js';
+
 import { checkHomefeedCriticalViolations } from './contentQualityChecker.js';
 import {
   sanitizeContentFakeSources,
@@ -70,7 +77,7 @@ export function validateHomefeedContent(
   const titleLength = title.length;
 
   if (titleLength < 28) {
-    warnings.push(`⚠️ 제목 너무 짧음: ${titleLength}자 (권장 28~40자)`);
+    warnings.push(`⚠️ 제목 너무 짧음: ${titleLength}자 (권장 28~42자)`);
     titleScore -= 15;
   } else if (titleLength > 42) {
     warnings.push(`⚠️ 제목 너무 김: ${titleLength}자 (권장 28~42자)`);
@@ -99,13 +106,19 @@ export function validateHomefeedContent(
 
   console.log(`[HomefeedValidator] 📊 제목 점수: ${titleScore}/100 ("${title.substring(0, 30)}...")`);
 
+  // [2026-08-26] 기준을 headingCountPolicy 단일 출처로 옮겼다.
+  // 예전엔 모든 홈판 글에 "최소 3개"를 요구했는데, homefeed/issue-story.prompt는
+  // "인물·근황 글은 소제목 없이 흐름으로"(0~3개)라고 지시한다. 지시를 따른 글이
+  // 부족 경고로 찍히고 있었다.
   const headingsCount = content.headings?.length || 0;
-  if (headingsCount < 3) {
-    warnings.push(`⚠️ 소제목 ${headingsCount}개 (최소 3개 필요)`);
-    console.warn(`[HomefeedValidator] ⚠️ 소제목 심각 부족: ${headingsCount}개`);
-  } else if (headingsCount > 8) {
-    warnings.push(`⚠️ 소제목 ${headingsCount}개 — 너무 많음 (8개 이하 권장)`);
-    console.warn(`[HomefeedValidator] ⚠️ 소제목 과다: ${headingsCount}개`);
+  const isIssueStory = HOMEFEED_ISSUE_STORY_CATEGORIES.has(
+    resolveCategory((source as any)?.categoryHint),
+  );
+  const headingRange = resolveHeadingCountRange('homefeed', { issueStory: isIssueStory });
+  if (judgeHeadingCount(headingsCount, headingRange) !== 'ok') {
+    const line = describeHeadingCount(headingsCount, headingRange);
+    warnings.push(line);
+    console.warn(`[HomefeedValidator] ${line}`);
   }
 
   const intro = content.introduction || '';
