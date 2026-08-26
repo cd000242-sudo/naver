@@ -1,5 +1,6 @@
 import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from './naver/index.js';
 import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
+import { orderFullTextCandidates } from './content/fullTextCandidateOrder.js';
 import { buildSupplementQuery, filterOnTopicSupplement } from './content/supplementTopicGuard.js';
 import Parser from 'rss-parser';
 import * as iconv from 'iconv-lite';
@@ -1646,17 +1647,27 @@ export async function collectTopArticleFullTexts(
       searchNaverForContent(keyword, clientId, clientSecret, 'blog', 8, 'sim'),
       searchNaverForContent(keyword, clientId, clientSecret, 'news', 4, 'sim'),
       searchNaverForContent(keyword, clientId, clientSecret, 'blog', 8, 'date'),
+      // [2026-08-27] 최신 기사를 따로 찾는다. 이슈 키워드는 방금 나온 기사가 뼈대다 —
+      //   sim 만 보면 오래된 기사가 상위를 차지해 지금 사건을 놓친다.
+      searchNaverForContent(keyword, clientId, clientSecret, 'news', 6, 'date'),
     ]);
     const blogLinks = settled[0].status === 'fulfilled' ? settled[0].value : [];
     const newsLinks = settled[1].status === 'fulfilled' ? settled[1].value : [];
     const recentBlogs = settled[2].status === 'fulfilled' ? settled[2].value : [];
+    const recentNews = settled[3].status === 'fulfilled' ? settled[3].value : [];
 
-    // Blogs first (closest to the target format), then news for hard facts.
-    // 최신 블로그를 앞에 둔다 — 프롬프트가 잘릴 때 살아남아야 할 쪽이다.
+    /*
+     * [2026-08-27 사장님 지적] 예전 주석은 "블로그가 결과물 형식에 가깝다"는 이유로
+     * 블로그를 앞세웠다. 그런데 예산이 5편·8,000자라, 앞의 블로그 8개가 다 먹으면
+     * 뉴스 4개는 차례가 오지 않는다. 이슈 키워드는 선점한 블로그가 아직 없어서
+     * 엉뚱한 블로그가 뼈대가 됐다 — 서인영 다이어트 글에 미니 컨트리맨 스펙이
+     * 소제목 두 개를 차지한 이유다.
+     *
+     * 기사가 1차 자료다. 결과물의 형식은 프롬프트가 정하지 재료가 정하지 않는다.
+     */
+    const mergedNews = mergeRecentFirst(recentNews, newsLinks, 6, (r) => String(r.link || ''));
     const mergedBlogs = mergeRecentFirst(recentBlogs, blogLinks, 8, (r) => String(r.link || ''));
-    const candidates = [...mergedBlogs, ...newsLinks]
-      .map((r) => ({ title: r.title, link: r.link, postdate: r.postdate }))
-      .filter((r) => typeof r.link === 'string' && /^https?:\/\//.test(r.link));
+    const candidates = orderFullTextCandidates({ news: mergedNews, blogs: mergedBlogs });
 
     const parts: string[] = [];
     const usedUrls: string[] = [];
