@@ -63,6 +63,9 @@ describe('self-test wiring (6.3)', () => {
     expect(orchestrator).toContain('delete process.env.ELECTRON_RUN_AS_NODE');
     expect(orchestrator).not.toContain('process.exit(');
     expect(orchestrator).toContain('finally {');
-    expect(orchestrator).toContain('fs.rmSync(isolatedRoot, { recursive: true, force: true })');
+    // [2026-08-27] 정리 호출의 인자 형태를 통째로 박제하지 않는다 — maxRetries 를 더하며
+    //   의도와 무관하게 깨졌다. 확인할 것은 "finally 에서 격리 폴더를 지운다" 하나다.
+    //   (정리 실패는 릴리즈를 막지 않는다 — 그 완화는 self-test.mjs 주석에 근거를 남겼다.)
+    expect(orchestrator).toMatch(/fs\.rmSync\(isolatedRoot,\s*\{[^}]*recursive:\s*true/);
   });
 });
