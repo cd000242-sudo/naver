@@ -1,3 +1,4 @@
+import { clampHashtags } from './content/hashtagCountPolicy.js';
 import type { ContentSource, StructuredContent } from './contentGenerator';
 import { recoverLooseStructuredContentFields } from './contentStructuredRecovery';
 import { detectPromptLeakageInTitle } from './contentTitleSafetyChecks';
@@ -382,8 +383,8 @@ export function validateStructuredContent(content: StructuredContent, source?: C
       });
     }
 
-    // 최대 8개로 제한
-    content.hashtags = generatedHashtags.slice(0, 8);
+    // 상한은 hashtagCountPolicy 단일 출처(HT-3).
+    content.hashtags = clampHashtags(generatedHashtags, (source as any)?.contentMode).hashtags;
     console.log(`[validateStructuredContent] hashtags 누락 → 자동 생성: ${content.hashtags.join(', ')}`);
   } else {
     // 기존 해시태그에 # 접두사가 없으면 추가
@@ -438,13 +439,12 @@ export function validateStructuredContent(content: StructuredContent, source?: C
     }
   }
 
-  if (normalizedHashtags.length < 5) {
-    ['정보', '꿀팁', '생활팁', '체크리스트', '비교정리'].forEach(tag => {
-      if (normalizedHashtags.length < 5) addHashtag(normalizedHashtags, tag);
-    });
-  }
-
-  content.hashtags = normalizedHashtags.slice(0, 8);
+  // [2026-08-26] 일반 태그 채우기(#정보 #꿀팁 #생활팁 …)를 제거했다.
+  // hashtag-strategy HT-2가 금지하는 "변형 채우기"가 정확히 이것이고,
+  // 검색되지 않는 태그는 자리만 차지하고 노출에 기여하지 않는다.
+  // 개수 상한도 모드 무관 8개 고정이 아니라 HT-3 기준(단일 출처)을 따른다.
+  const clampedHashtags = clampHashtags(normalizedHashtags, (source as any)?.contentMode);
+  content.hashtags = clampedHashtags.hashtags;
 
   // metadata 객체 복구
   if (!content.metadata || typeof content.metadata !== 'object') {

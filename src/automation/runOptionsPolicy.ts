@@ -1,3 +1,4 @@
+import { clampHashtags } from '../content/hashtagCountPolicy.js';
 import {
   removeOrdinalHeadingLabelsFromBody,
   stripAllFormatting,
@@ -121,10 +122,13 @@ export function resolveNaverRunOptions(input: ResolveNaverRunOptionsInput): Reco
   const ctas = normalizeCtas(runOptions);
   assertValidCtaLinks(ctas);
 
+  // [2026-08-26] 개수 상한은 hashtagCountPolicy 단일 출처. 예전엔 모드 무관 5개로 잘라
+  // 프롬프트가 요구한 조합 롱테일 태그(SEO 10~15)가 발행 직전에 버려지고 있었다.
   const hashtags = normalizePublishHashtags(runOptions.hashtags, structured?.hashtags);
-  const normalizedHashtags = hashtags.length > 5 ? hashtags.slice(0, 5) : hashtags;
-  if (hashtags.length > 5) {
-    log?.(`⚠️ 해시태그가 5개를 초과합니다. (${hashtags.length}개) 처음 5개만 사용됩니다.`);
+  const clamped = clampHashtags(hashtags, runOptions.contentMode);
+  const normalizedHashtags = clamped.hashtags;
+  if (clamped.droppedCount > 0) {
+    log?.(`⚠️ 해시태그 ${hashtags.length}개 중 ${clamped.max}개만 사용합니다. (${clamped.droppedCount}개 제외)`);
   }
 
   const rawTitle =

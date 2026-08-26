@@ -12,9 +12,36 @@ describe('runOptionsPolicy', () => {
       log: vi.fn(),
     });
 
-    expect(resolved.hashtags).toEqual(['A', 'b', 'c', 'd', 'e']);
+    // [2026-08-26] 예전에는 여기서 5개로 잘린 결과(['A','b','c','d','e'])를 단언했다.
+    // 그 5개 상한은 근거 기록이 없는 값이고, hashtag-strategy HT-3은 SEO 10~15를
+    // 요구한다. 잘린 동작을 단언하고 있어서 계약대로 고치면 이 테스트가 막았다.
+    expect(resolved.hashtags).toEqual(['A', 'b', 'c', 'd', 'e', 'f', 'g']);
     expect(runOptions.hashtags).toEqual(['A', '#b', 'a', 'c d']);
     expect(structuredContent.hashtags).toEqual(['B', 'e', 'f', 'g']);
+  });
+
+  it('모드 상한을 넘을 때만 잘라내고, 그 사실을 로그로 알린다', () => {
+    const log = vi.fn();
+    const many = Array.from({ length: 12 }, (_, i) => `tag${i + 1}`);
+    const resolved = resolveNaverRunOptions({
+      runOptions: { hashtags: many, title: '제목', content: '본문입니다.', contentMode: 'homefeed' },
+      defaults: {},
+      log,
+    });
+
+    expect(resolved.hashtags).toHaveLength(7); // 홈판 상한
+    expect(log).toHaveBeenCalledWith(expect.stringContaining('7개만 사용'));
+  });
+
+  it('SEO 모드는 12개를 그대로 발행한다 (예전 5개 절단 없음)', () => {
+    const many = Array.from({ length: 12 }, (_, i) => `tag${i + 1}`);
+    const resolved = resolveNaverRunOptions({
+      runOptions: { hashtags: many, title: '제목', content: '본문입니다.', contentMode: 'seo' },
+      defaults: {},
+      log: vi.fn(),
+    });
+
+    expect(resolved.hashtags).toHaveLength(12);
   });
 
   it('normalizes schedule date without changing the original runOptions object', () => {
