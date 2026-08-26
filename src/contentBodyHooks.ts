@@ -1,3 +1,9 @@
+import {
+  resolveHeadingCountRange,
+  judgeHeadingCount,
+  describeHeadingCount,
+} from './content/headingCountPolicy';
+
 /**
  * [Phase 3-15/v2.10.161] contentGenerator god file decomposition — homefeed/seo body hooks.
  *
@@ -222,21 +228,17 @@ export function applySeoQualityHookBlock(content: StructuredContent, source: Con
       console.log(`[SeoHook] ✅ 스크롤 트리거 양호 (${triggerCount}개)`);
     }
 
-    // ✅ 소제목 수 검증 (3~8개 — 구조 변동 엔진 대응)
+    // ✅ 소제목 수 검증 — 기준은 headingCountPolicy 단일 출처.
     const hCount = content.headings.length;
-    if (hCount < 3) {
-      console.log(`[SeoHook] ⚠️ 소제목 ${hCount}개 — 최소 3개 필요`);
-    } else if (hCount > 8) {
-      console.log(`[SeoHook] ⚠️ 소제목 ${hCount}개 — 8개 이하 권장`);
-    } else {
-      console.log(`[SeoHook] ✅ 소제목 ${hCount}개 — 구조 변동 엔진 허용 범위`);
-    }
+    const hRange = resolveHeadingCountRange(mode);
+    const hVerdict = judgeHeadingCount(hCount, hRange);
+    console.log(`[SeoHook] ${describeHeadingCount(hCount, hRange)}`);
 
     // ✅ SEO 본문 품질 종합 점수
     let seoBodyScore = 100;
     if (triggerCount < 3) seoBodyScore -= 10;
-    if (hCount < 3) seoBodyScore -= 15;
-    if (hCount > 8) seoBodyScore -= 5;
+    if (hVerdict === 'too-few') seoBodyScore -= 15;
+    if (hVerdict === 'too-many') seoBodyScore -= 5;
 
     // AI 표현 체크
     const seoBanned = [

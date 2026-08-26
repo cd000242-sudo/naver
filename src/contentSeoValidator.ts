@@ -1,3 +1,9 @@
+import {
+  resolveHeadingCountRange,
+  judgeHeadingCount,
+  describeHeadingCount,
+} from './content/headingCountPolicy';
+
 type SeoHeading = {
   title?: string;
   body?: unknown;
@@ -77,10 +83,15 @@ export function validateSeoContent(content: SeoValidationContent, source: SeoVal
 
   console.log(`[SeoValidator] 📊 제목 점수: ${titleScore}/100 ("${title.substring(0, 30)}...")`);
 
+  // [2026-08-26] 개수 기준은 headingCountPolicy 한 곳에서만 온다.
+  // 예전에는 여기서 5~7을 권했는데, 그 숫자를 요구하는 SEO 프롬프트가 없어
+  // contentBodyHooks(3~8)와 같은 글에 정반대 판정을 찍고 있었다.
   const headingsCount = content.headings?.length || 0;
-  if (headingsCount < 5) {
-    warnings.push(`⚠️ 소제목 ${headingsCount}개 (SEO 권장: 5~7개, 체류시간 ↑)`);
-    console.warn(`[SeoValidator] ⚠️ 소제목 부족: ${headingsCount}개`);
+  const headingRange = resolveHeadingCountRange(source.contentMode);
+  if (judgeHeadingCount(headingsCount, headingRange) !== 'ok') {
+    const line = describeHeadingCount(headingsCount, headingRange);
+    warnings.push(line);
+    console.warn(`[SeoValidator] ${line}`);
   }
 
   const bodyText = content.bodyPlain || '';
@@ -107,9 +118,12 @@ export function validateSeoContent(content: SeoValidationContent, source: SeoVal
     const escapedKeyword = seoPK.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const pkCount = (bodyText.match(new RegExp(escapedKeyword, 'gi')) || []).length;
     const density = (pkCount * seoPK.length) / bodyText.length * 100;
-    if (density < 1.0) {
-      warnings.push(`⚠️ 메인키워드 밀도 ${density.toFixed(1)}% (SEO 권장 1.5~3%)`);
-      console.warn(`[SeoValidator] ⚠️ 메인키워드 "${seoPK}" 밀도 ${density.toFixed(1)}% — 검색 노출 부족`);
+    // [2026-08-26] 하한(1.5~3% 권장)을 걷어냈다. seo/base R0-6이 "키워드 횟수와 밀도를
+    // 맞추지 않는다"고 못박는데 검증기가 정확히 그 반대를 권하고 있었다.
+    // 실제 문제는 밀도가 낮은 것이 아니라 키워드가 본문에 아예 없는 것이다.
+    if (pkCount === 0) {
+      warnings.push(`⚠️ 메인키워드 "${seoPK}"가 본문에 한 번도 없음`);
+      console.warn(`[SeoValidator] ⚠️ 메인키워드 "${seoPK}" 본문 미등장 — 주제 불일치 의심`);
     } else if (density > 4.0) {
       warnings.push(`⚠️ 메인키워드 밀도 ${density.toFixed(1)}% (키워드 스터핑 위험, 3% 이하 권장)`);
       console.warn(`[SeoValidator] ⚠️ 메인키워드 밀도 ${density.toFixed(1)}% — 스터핑 위험`);
@@ -149,12 +163,10 @@ export function validateSeoContent(content: SeoValidationContent, source: SeoVal
     }
   }
 
-  if (bodyText.length > 0 && bodyText.length < 2500) {
-    warnings.push(`⚠️ 본문 ${bodyText.length}자 (C-Rank 권장 2500자+)`);
-    console.warn(`[SeoValidator] ⚠️ 본문 ${bodyText.length}자 — C-Rank 문서 완성도 부족`);
-  } else if (bodyText.length >= 2500) {
-    console.log(`[SeoValidator] ✅ 본문 ${bodyText.length}자 — C-Rank 충족`);
-  }
+  // [2026-08-26] 2500자 하한 경고를 걷어냈다. 사장님 지시: "글자수가 중요하지 않다,
+  // 내용이 중요하다". seo/base 어디에도 2500자 계약이 없고, 이 경고만 분량을 채우라는
+  // 신호를 로그에 남기고 있었다. 분량은 기록만 하고 판정하지 않는다.
+  console.log(`[SeoValidator] 📏 본문 ${bodyText.length}자`);
 
   if (content.headings && content.headings.length > 0) {
     const questionPatterns = ['?', '할까', '일까', '인가', '나요', '은가', '를까', '었을까', '던가', '는지'];
@@ -162,11 +174,17 @@ export function validateSeoContent(content: SeoValidationContent, source: SeoVal
       const headingTitle = String(heading.title || '');
       return questionPatterns.some((pattern) => headingTitle.includes(pattern));
     }).length;
-    if (questionCount < 1) {
-      warnings.push('⚠️ 질문형 소제목 0개 (의미론적 SEO 약화, 1개+ 권장)');
-      console.warn('[SeoValidator] ⚠️ 질문형 소제목 없음 — 의미론적 SEO 약화');
+    // [2026-08-26] "0개면 약화" 경고를 걷어냈다. seo/base는 "실제 묻는 질문이 있을 때만"
+    // 질문형을 쓰라 하고 issue-brief-structure IB-3은 "1개까지만"으로 막는다.
+    // 없다고 경고하면 없는 질문을 만들라는 압력이 되어 계약과 정면으로 부딪힌다.
+    // 반대로 소제목 절반 이상이 질문형이면 그건 실제 AI 티 패턴이라 경고한다.
+    const questionRatioTooHigh =
+      content.headings.length >= 4 && questionCount * 2 > content.headings.length;
+    if (questionRatioTooHigh) {
+      warnings.push(`⚠️ 질문형 소제목 ${questionCount}/${content.headings.length}개 — 과다 (AI 티)`);
+      console.warn(`[SeoValidator] ⚠️ 질문형 소제목 과다: ${questionCount}/${content.headings.length}개`);
     } else {
-      console.log(`[SeoValidator] ✅ 질문형 소제목 ${questionCount}개 — 의미론적 SEO 강화`);
+      console.log(`[SeoValidator] ✅ 질문형 소제목 ${questionCount}개 — 적정`);
     }
   }
 

@@ -1,3 +1,5 @@
+import { decideKeywordPrefix } from './content/keywordTitlePrefixPolicy';
+
 export interface HeadingKeywordPatchHeading {
   title?: string;
   [key: string]: unknown;
@@ -175,11 +177,17 @@ export function applyHeadingKeywordPatch<T extends HeadingKeywordPatchHeading>(
       targetPrefixCleanedCount++;
     }
 
+    // [2026-08-26] 접두 판정은 제목과 같은 계약을 쓴다(decideKeywordPrefix).
+    // 핵심어 한 토큰만 보면, 키워드가 흩어진 형태로 이미 들어 있는 소제목
+    // ("해지 방법 정리" ← 키워드 "청약통장 해지 방법")에도 접두가 붙어 중복이 생긴다.
+    // 두 조건을 모두 통과해야 붙인다: 핵심어가 없고 + 키워드 커버리지도 부족할 때만.
+    const coreAbsent = !!coreNorm && !normalizeForMatch(originalTitle).includes(coreNorm);
+    const keywordDecision = decideKeywordPrefix(primaryKeyword, originalTitle);
     if (
       resolved.shouldPatch &&
       patchedCount < maxPatches &&
-      coreNorm &&
-      !normalizeForMatch(originalTitle).includes(coreNorm)
+      coreAbsent &&
+      keywordDecision.shouldPrefix
     ) {
       nextTitle = `${resolved.core} ${originalTitle}`.trim();
       patchedCount++;

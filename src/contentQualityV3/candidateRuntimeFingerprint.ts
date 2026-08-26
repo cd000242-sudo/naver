@@ -146,6 +146,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/generalContentGuard.ts',
   'src/content/groundingCostPolicy.ts',
   'src/content/hallucinationCheck.ts',
+  'src/content/headingCountPolicy.ts',
   'src/content/homefeedExposurePattern.ts',
   'src/content/internalLinkManager.ts',
   'src/content/keywordTitlePrefixPolicy.ts',

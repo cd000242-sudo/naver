@@ -107,3 +107,25 @@ describe('applyHeadingKeywordPatch', () => {
     expect(result.headings.filter((heading) => heading.title.startsWith('지원금 '))).toHaveLength(2);
   });
 });
+
+describe('키워드가 흩어져 이미 들어 있는 소제목 (2026-08-26)', () => {
+  it('키워드 토큰 2/3가 이미 보이면 핵심어를 앞에 붙이지 않는다', () => {
+    const result = applyHeadingKeywordPatch(
+      [{ title: '해지 방법, 중도 인출과 뭐가 다른가' }],
+      '청약통장 해지 방법',
+      { maxPatches: 2 },
+    );
+    expect(result.headings[0].title).toBe('해지 방법, 중도 인출과 뭐가 다른가');
+    expect(result.patchedCount).toBe(0);
+  });
+
+  it('키워드가 실제로 없으면 기존대로 붙인다', () => {
+    const result = applyHeadingKeywordPatch(
+      [{ title: '전기 요금이 얼마나 나올까' }],
+      '제습기 전기세',
+      { maxPatches: 2 },
+    );
+    expect(result.headings[0].title).toBe('제습기 전기 요금이 얼마나 나올까');
+    expect(result.patchedCount).toBe(1);
+  });
+});
