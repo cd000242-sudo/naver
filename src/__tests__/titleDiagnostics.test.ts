@@ -76,3 +76,36 @@ describe('본선 배선', () => {
     expect(source).toMatch(/buildTitleDiagnosticsLines\(/);
   });
 });
+
+/**
+ * [2026-08-27 Phase 3-B] 새로 세운 surprisingFact 도 로그에 드러낸다.
+ * 이 필드가 실제로 날카로운 값을 받아오는지 봐야 다음 판단이 선다 —
+ * 값이 여전히 밋밋하면 필드를 세운 것만으로는 부족했다는 뜻이다.
+ */
+describe('의외 지점 진단', () => {
+  const withFact = (surprisingFact: string) => buildTitleDiagnosticsLines({
+    selectedTitle: '제목',
+    preWritingAnalysis: { surprisingFact, clickReason: '클릭 사유' },
+    titleCandidates: [{ text: '제목', whyClick: '이유' }],
+  }).join('\n');
+
+  it('의외 지점을 클릭 사유보다 먼저 남긴다', () => {
+    const out = withFact('흰옷을 피했는데도 민폐 소리를 들었다');
+    expect(out).toContain('의외 지점');
+    expect(out.indexOf('의외 지점')).toBeLessThan(out.indexOf('클릭 사유'));
+  });
+
+  it('모델이 없다고 답하면 그대로 남긴다 — 빈 값과 구분된다', () => {
+    expect(withFact('자료 내 의외 지점 없음')).toContain('자료 내 의외 지점 없음');
+  });
+
+  it('값이 없으면 그 줄을 만들지 않는다', () => {
+    const out = buildTitleDiagnosticsLines({
+      selectedTitle: '제목',
+      preWritingAnalysis: { clickReason: '클릭 사유' },
+      titleCandidates: [{ text: '제목' }],
+    }).join('\n');
+    expect(out).not.toContain('의외 지점');
+    expect(out).toContain('클릭 사유');
+  });
+});
