@@ -673,10 +673,36 @@
             return '';
         }
 
+        /*
+         * [2026-08-27] 최신 릴리즈를 GitHub 에서 읽어 온다.
+         *
+         * download.html 은 2026-08-18 에 같은 이유로 고쳤다 — 하드코딩된 v2.11.67 이
+         * 남아 있어 릴리즈가 2.11.195 인데도 사이트 방문자는 계속 구버전을 받아갔다.
+         * 그 수정이 이 파일에는 반영되지 않아 여기만 v2.11.67 에 멈춰 있었다.
+         *
+         * 버전을 다시 박아 넣으면 다음 릴리즈에 또 어긋난다. 실패하면 릴리즈 페이지로
+         * 보낸다 — 한 번 더 눌러야 하지만 항상 최신이다.
+         */
+        const NAVER_GITHUB_REPO = 'cd000242-sudo/naver';
+        let naverLatestPromise = null;
+
+        function fetchNaverLatestExeUrl() {
+            if (naverLatestPromise) return naverLatestPromise;
+            naverLatestPromise = fetch(`https://api.github.com/repos/${NAVER_GITHUB_REPO}/releases/latest`)
+                .then((res) => (res.ok ? res.json() : null))
+                .then((release) => {
+                    const asset = (release && release.assets || []).find((a) => /\.exe$/i.test(a.name || ''));
+                    return asset ? asset.browser_download_url : '';
+                })
+                .catch(() => '');
+            return naverLatestPromise;
+        }
+
         function getDownloadUrl(product) {
             // Default download URLs (GitHub Releases)
             const defaults = {
-                naver: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-Setup-2.11.67.exe',
+                // 버전을 박지 않는다 — 최신 조회가 실패했을 때의 마지막 안전망이다.
+                naver: `https://github.com/${NAVER_GITHUB_REPO}/releases/latest`,
                 leword: 'https://github.com/cd000242-sudo/leword-app/releases/latest',
                 orbit: '',
                 tistory: ''
@@ -713,7 +739,10 @@
 
             if (pw === '1645') {
                 errorEl.classList.remove('visible');
-                const url = await getUploadedDownloadUrl(product) || getDownloadUrl(product);
+                // 순서: 관리자 업로드본 → GitHub 최신 릴리즈 → 릴리즈 페이지(안전망)
+                const url = await getUploadedDownloadUrl(product)
+                    || (product === 'naver' ? await fetchNaverLatestExeUrl() : '')
+                    || getDownloadUrl(product);
                 const name = PRODUCT_NAMES[product] || product;
                 if (!url) {
                     alert(`${name} 다운로드 파일이 아직 준비되지 않았습니다.\n관리자에게 문의해주세요.`);
