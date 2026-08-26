@@ -44,9 +44,14 @@ export async function refreshAgentQuotaBadge(): Promise<void> {
   }
 
   try {
-    const api = (window as any).electronAPI;
+    // [2026-08-26] agentUsage 는 window.api 에 있다(preload:103 브리지).
+    //   electronAPI(preload:1296)에는 없어서 처음엔 조용히 실패하고 배찌가 숨었다.
+    //   조회 실패 시 카드를 숨기는 설계라 화면에는 아무 흔적도 남지 않았다.
+    const api = (window as any).api;
     const res = await api?.agentUsage?.(provider);
     if (!res?.success || !res.usage) {
+      // 조용히 숨기면 "배찌가 왜 안 보이지"로 끝난다 — 이유를 남긴다.
+      console.warn('[AgentQuotaBadge] 사용량 조회 실패 — 배찌 숨김', res?.message ?? '(응답 없음)');
       card.style.display = 'none';
       return;
     }
@@ -60,8 +65,10 @@ export async function refreshAgentQuotaBadge(): Promise<void> {
     }
     if (detail) detail.textContent = badge.detail;
     card.style.display = '';
-  } catch {
+  } catch (err) {
     // 사용량 표시는 부가 정보다 — 조회가 실패해도 생성 흐름과 무관하다.
+    // 다만 원인을 남긴다. 조용한 숨김이 이 기능의 첫 버그였다.
+    console.warn('[AgentQuotaBadge] 배찌 갱신 실패:', (err as Error)?.message ?? err);
     card.style.display = 'none';
   }
 }

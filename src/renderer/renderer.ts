@@ -788,6 +788,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (restoreTextModelRadio(saved)) {
         console.log(`[Startup] 저장된 텍스트 모델 복원: ${saved}`);
       }
+      // [2026-08-26] 복원은 .checked 를 직접 바꾸므로 change 이벤트가 안 난다.
+      //   배찌는 change 로만 갱신되게 해뒀더니, 앱을 켜자마자 에이전트가 이미
+      //   선택돼 있는 사용자에게는 끝까지 안 보였다(사장님 실측 "배찌가 어디에 보이니").
+      //   복원 직후 한 번 직접 그린다.
+      await refreshAgentQuotaBadge();
     } catch (error) {
       console.warn("[Startup] 텍스트 모델 복원 실패:", error);
     }
