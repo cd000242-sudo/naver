@@ -1527,6 +1527,19 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
      * 떼어 별도 문단이 된다 — 빈 줄이 없으면 표 블록에 흡수됐다가 파이프가 없어 사라진다.
      */
     const srcLines = normalized.split('\n').flatMap((line) => {
+      /*
+       * [2026-08-26] 거울 케이스 — 문장이 표 **앞**에 붙은 줄.
+       *   "…공식 입장이 전해졌습니다.| 구분 | MBC 측 입장 |"
+       * 이러면 앞 문장이 헤더의 첫 칸으로 들어가 2열 표가 3열이 되고, 마지막 열이
+       * 통째로 빈 칸으로 발행된다(사장님 실측 화면).
+       * 문장은 문장대로 떼고 표는 표대로 남긴다 — 빈 줄로 갈라 문단이 표에 흡수되지 않게 한다.
+       */
+      const lead = line.match(/^([ \t]*[^|\s][^|]*?[.!?…"”'’)\]])[ \t]*(\|.*\|)[ \t]*$/);
+      if (lead) {
+        const prose = lead[1].trim();
+        // 앞부분이 문장이라고 볼 수 있을 때만 가른다 — 짧은 조각은 표 셀일 수 있다.
+        if (prose.length >= 6) return [prose, '', lead[2].trim()];
+      }
       // 뒤 문장에 파이프가 없어야 한다. 이 조건이 없으면 정규식이 백트래킹해
       // 정상 행("| 구분 | 내용 |")까지 첫 파이프에서 갈라버린다(작성 중 실측).
       const m = line.match(/^([ \t]*\|.*\|)[ \t]*([^|\s][^|]*)$/);

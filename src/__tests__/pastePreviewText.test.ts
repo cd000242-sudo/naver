@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'fs';
 import { join } from 'path';
-import { buildPastePreviewText } from '../automation/richTextPaste';
+import { buildPastePreviewText, buildPastePreviewHtml } from '../automation/richTextPaste';
 
 /**
  * [2026-08-26 사장님 지시] "타이핑할 때 리치 복붙을 하잖아. 줄바꿈이랑 문단 정리가
@@ -66,5 +66,38 @@ describe('미리보기가 글을 끝까지 보여준다', () => {
     expect(flow).toMatch(/buildPastePreviewHtml\(introductionText\)/);
     expect(flow).toMatch(/buildPastePreviewHtml\(headingContent\)/);
     expect(flow).toMatch(/buildPastePreviewHtml\(conclusionText\)/);
+  });
+});
+
+describe('문장이 표 앞에 붙은 줄 (2026-08-26 사장님 실측 화면)', () => {
+  const rows = (t: string) => {
+    const html = buildPastePreviewHtml(t);
+    return [...html.matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)].map((m) =>
+      [...m[1].matchAll(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g)]
+        .map((c) => c[1].replace(/<[^>]+>/g, '').replace(/&quot;/g, '"')));
+  };
+
+  const INLINE = `이후 별도 "촬영 지원·협찬 없었다"는 공식 입장이 전해졌습니다.| 구분 | MBC 측 입장 |
+| --- | --- |
+| 의혹 확산 직후 | "확인 중" |
+| 이후 공식 입장 | "촬영 지원·협찬 없었다" |`;
+
+  it('앞 문장이 헤더 칸으로 흡수되지 않는다', () => {
+    // 실측: 2열 표가 3열이 되고 마지막 열이 통째로 빈 칸으로 발행됐다.
+    const r = rows(INLINE);
+    expect(r[0]).toEqual(['구분', 'MBC 측 입장']);
+    for (const row of r) expect(row.length).toBe(2);
+  });
+
+  it('떼어낸 문장은 사라지지 않고 본문에 남는다', () => {
+    expect(buildPastePreviewHtml(INLINE)).toMatch(/공식 입장이 전해졌습니다/);
+  });
+
+  it('정상 표와 "행 뒤 문장" 케이스는 그대로 동작한다', () => {
+    const normal = ['| 구분 | 내용 |', '| --- | --- |', '| 기준일 | 2026년 8월 25일 |'].join('\n');
+    expect(rows(normal)[0]).toEqual(['구분', '내용']);
+    const trailing = `${normal} 그리고 뒤 문장이 붙었습니다.`;
+    expect(rows(trailing)[0]).toEqual(['구분', '내용']);
+    expect(buildPastePreviewHtml(trailing)).toMatch(/그리고 뒤 문장이 붙었습니다/);
   });
 });
