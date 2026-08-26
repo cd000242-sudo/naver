@@ -174,18 +174,11 @@ export function validateSeoContent(content: SeoValidationContent, source: SeoVal
       const headingTitle = String(heading.title || '');
       return questionPatterns.some((pattern) => headingTitle.includes(pattern));
     }).length;
-    // [2026-08-26] "0개면 약화" 경고를 걷어냈다. seo/base는 "실제 묻는 질문이 있을 때만"
-    // 질문형을 쓰라 하고 issue-brief-structure IB-3은 "1개까지만"으로 막는다.
-    // 없다고 경고하면 없는 질문을 만들라는 압력이 되어 계약과 정면으로 부딪힌다.
-    // 반대로 소제목 절반 이상이 질문형이면 그건 실제 AI 티 패턴이라 경고한다.
-    const questionRatioTooHigh =
-      content.headings.length >= 4 && questionCount * 2 > content.headings.length;
-    if (questionRatioTooHigh) {
-      warnings.push(`⚠️ 질문형 소제목 ${questionCount}/${content.headings.length}개 — 과다 (AI 티)`);
-      console.warn(`[SeoValidator] ⚠️ 질문형 소제목 과다: ${questionCount}/${content.headings.length}개`);
-    } else {
-      console.log(`[SeoValidator] ✅ 질문형 소제목 ${questionCount}개 — 적정`);
-    }
+    // [2026-08-26] 질문형 비율 판정은 여기서 하지 않는다. 이 축의 주인은
+    // validators/seo/h2QuestionRatioScanner 하나다(SPEC-AEO-EXPOSURE-2026 R1).
+    // 두 곳이 각자 기준을 가지면 같은 글에 "부족"과 "과다"가 동시에 찍힌다.
+    // 여기서는 세어서 기록만 한다.
+    console.log(`[SeoValidator] 📊 질문형 소제목 ${questionCount}/${content.headings.length}개`);
   }
 
   if (seoPK && content.introduction) {

@@ -36,3 +36,22 @@ describe('SeoValidator ↔ 프롬프트 계약', () => {
     expect(validator).not.toMatch(/C-Rank 권장 2500자/);
   });
 });
+
+describe('한 축에는 주인이 하나 (2026-08-26)', () => {
+  const scanner = readFileSync(
+    join(root, 'validators', 'seo', 'h2QuestionRatioScanner.ts'),
+    'utf-8',
+  );
+
+  it('질문형 비율을 판정하는 곳은 AEO 스캐너 하나뿐이다', () => {
+    // contentSeoValidator는 세기만 하고 판정하지 않는다 — 두 곳이 기준을 가지면
+    // 같은 글에 "부족"과 "과다"가 동시에 찍힌다.
+    expect(validator).not.toMatch(/질문형 소제목 과다/);
+    expect(validator).toMatch(/📊 질문형 소제목/);
+  });
+
+  it('스캐너 미달은 결함이 아니라 가설 측정임을 문구가 밝힌다', () => {
+    expect(scanner).toMatch(/AEO 가설 기준/);
+    expect(scanner).toMatch(/결함 아님/);
+  });
+});

@@ -48,12 +48,16 @@ export function scanH2QuestionRatio(
   const questionRatio = totalHeadings > 0 ? questionHeadingCount / totalHeadings : 0;
   const meetsMinRatio = totalHeadings > 0 && questionRatio >= minRatio;
 
+  // [2026-08-26] 문구를 "권장 미달"에서 "가설 기준 미달"로 바꿨다.
+  // seo/base는 "실제 묻는 질문이 있을 때만" 질문형을 쓰라 하고, IB-3은 "1개까지만"으로
+  // 막는다. 이 비율을 채우려면 없는 질문을 만들어야 하므로, 미달은 계약 위반이 아니라
+  // AEO 가설(AI 탭 passage 매칭)과의 거리일 뿐이다. 미달을 결함으로 읽고 쫓지 않게 한다.
   const warnings: string[] = [];
   if (totalHeadings > 0 && !meetsMinRatio) {
     warnings.push(
-      `질문형 소제목 비율 ${Math.round(questionRatio * 100)}% (권장 ${Math.round(
-        minRatio * 100,
-      )}% 이상, 선택)`,
+      `질문형 소제목 비율 ${Math.round(questionRatio * 100)}% ` +
+        `(AEO 가설 기준 ${Math.round(minRatio * 100)}% — 측정값이며 결함 아님. ` +
+        `질문형은 실제 묻는 질문이 있을 때만 쓴다: seo/base)`,
     );
   }
 
