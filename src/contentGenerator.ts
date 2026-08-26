@@ -75,6 +75,7 @@ import { describeGroundingDecision, isGroundingExplicitlyEnabled } from './conte
 import { buildSituationDepthContract } from './content/situationDepthContract.js';
 import { buildSituationTitleContract } from './content/situationTitleContract.js';
 import { selectBestTitleCandidate } from './content/titleCandidateSelection.js';
+import { normalizeSummaryRows, prependSummaryTable } from './content/summaryTable.js';
 import {
   buildEvidenceAndIntentFinalContract,
   buildEvidenceMetaLeakRule,
@@ -5913,6 +5914,24 @@ async function generateStructuredContentInternal(
               ...c,
               text: typeof c?.text === 'string' ? c.text.replace(/[\r\n]+/g, ' ').trim() : c?.text,
             }));
+          }
+
+          /*
+           * [2026-08-26] 글 맨 앞 사실 요약 표.
+           *
+           * 프롬프트로 "표를 써라"고 지시했지만 모델이 계속 흘렸다. 조립된 시스템
+           * 프롬프트가 40,377자였고 표 지시는 83% 지점(뒤쪽=강한 위치)에 있었는데도
+           * 안 나왔다. 같은 프롬프트에서 해시태그는 나왔는데, 그건 JSON 스키마 필드라
+           * 구조적으로 강제되기 때문이다. 그래서 표도 스키마 필드로 받고 마크다운
+           * 조립은 코드가 한다 — 형식이 어긋날 여지가 없다.
+           */
+          const withTable = prependSummaryTable(parsed.introduction, (parsed as any).summaryTable);
+          if (withTable && withTable !== String(parsed.introduction || '').trim()) {
+            const rowCount = normalizeSummaryRows((parsed as any).summaryTable).length;
+            console.log(`[SummaryTable] 요약 표 ${rowCount}행을 도입부 앞에 배치`);
+            parsed.introduction = withTable;
+          } else if (Array.isArray((parsed as any).summaryTable)) {
+            console.log('[SummaryTable] 쓸 수 있는 행이 없어 표 생략 (라벨·값이 비었거나 2행 미만)');
           }
 
           // [2026-08-08] Re-rank the titles this call already paid for.

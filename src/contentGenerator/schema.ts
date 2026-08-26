@@ -11,6 +11,11 @@ JSON 응답 형식 (반드시 이 구조를 따를 것):
   "headings": [
     {"title": "소제목", "content": "본문 내용 (4~5문장)", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 생성 프롬프트"}
   ],
+  "summaryTable": [
+    {"label": "기준일", "value": "자료에 있는 날짜"},
+    {"label": "주제에 맞는 축", "value": "확인된 값 (숫자·조건은 숫자로)"},
+    {"label": "또 다른 축", "value": "확인된 값"}
+  ],
   "introduction": "도입부 (3줄 이내)",
   "conclusion": "마무리 (2줄 이내)",
   "hashtags": ["해시태그1", "해시태그2", "해시태그3", "해시태그4", "해시태그5"],

@@ -64,7 +64,7 @@ describe('배선 — 이슈형 SEO 에만 얹는다', () => {
     for (const hint of ['tips', 'health', 'travel', 'general']) {
       const prompt = buildSystemPrompt('seo', hint);
       expect(prompt, hint).toContain('[BRIEF-HEAD]');
-      expect(prompt, hint).toContain('| 구분 | 내용 |');
+      expect(prompt, hint).toContain('summaryTable');
       expect(prompt, hint).not.toContain('[IB-3]');
       expect(prompt, hint).not.toContain('[IB-6]');
     }
@@ -105,8 +105,14 @@ describe('fact-brief-header — 주제를 가리지 않는 첫 화면', () => {
   it('요약 표와 날짜 앵커 둘만 담는다', () => {
     expect(header).toContain('[BH-1]');
     expect(header).toContain('[BH-2]');
-    expect(header).toContain('| 구분 | 내용 |');
     expect(header).toContain('YYYY년 M월 D일 기준,');
+    /*
+     * [2026-08-26] 표는 본문 마크다운이 아니라 JSON 스키마 필드로 받는다.
+     * 프롬프트 40,377자 안에서 문장 지시는 두 번 연속 흘렸는데, 같은 프롬프트에서
+     * 스키마 필드인 해시태그는 나왔다. 형태를 바꾸는 것이 위치를 바꾸는 것보다 강하다.
+     */
+    expect(header).toContain('summaryTable');
+    expect(header).toContain('본문에 표를 직접 그리지 마라');
   });
 
   it('라벨을 주제별로 짓게 안내한다 (기계적 반복 방지)', () => {
@@ -118,8 +124,10 @@ describe('fact-brief-header — 주제를 가리지 않는 첫 화면', () => {
 
   it('표가 본문을 대신하지 못하게 막는다', () => {
     expect(header).toContain('표는 입구이고');
-    expect(header).toContain('확인되지 않은 칸은 만들지 않는다');
-    expect(header).toContain('같은 라벨');
+    expect(header).toContain('확인되지 않은 행은 만들지 않는다');
+    expect(header).toContain('label 이 전부 같으면');
+    // 도입부에 직접 그리면 summaryTable 과 중복된다.
+    expect(header).toContain('introduction 안에 파이프');
   });
 
   it('날짜 앵커의 이유를 남긴다 (정책·요금은 바뀐다)', () => {
