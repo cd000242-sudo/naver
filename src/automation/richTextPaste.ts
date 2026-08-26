@@ -469,6 +469,11 @@ function normalizeInlineNumberedLists(value: string): string {
       const markers = line.match(/\b\d{1,2}[.)]\s+/g) || [];
       if (markers.length === 0) return line;
       if (markers.length === 1 && /^\s*\d{1,2}[.)]\s+/.test(line)) return line;
+      // [2026-08-26] 화살표로 이어진 순서는 목록이 아니라 한 흐름이다.
+      //   "1. 탑승 → 2. 딸의 울음 지속 → 3. …" 을 번호마다 문단으로 쪼개면
+      //   각 단계가 따로 떨어지고 사이에 빈 문단까지 끼어 읽히지 않는다(사장님 실측).
+      //   폭 맞추기는 뒤쪽 buildReadableParagraphs 가 화살표 앞에서 끊어 처리한다.
+      if (STEP_ARROW_RE.test(line)) return line;
       return line.replace(/\s+(?=\d{1,2}[.)]\s+)/g, '\n\n').trim();
     })
     .join('\n');
@@ -938,6 +943,26 @@ function restoreDomainDots(value: string): string {
   return value.replace(new RegExp(DOMAIN_DOT_PLACEHOLDER, 'g'), '.');
 }
 
+/** 화살표로 이어진 순서 표기. "1. 탑승 → 2. 딸의 울음 지속 → 3. …" */
+const STEP_ARROW_RE = /(→|➡|⇒|->|=>)/;
+
+/**
+ * [2026-08-26 사장님 실측] 화살표 순서가 이렇게 발행됐다.
+ *   1. 탑승 → 2.
+ *   딸의 울음 지속 → 3.
+ *   자발적 하기 요청 → 4.
+ * 번호 뒤 마침표("2.")를 문장 끝으로 봐서 거기서 끊었기 때문이다. 그래서 다음 단계의
+ * 번호만 앞줄 끝에 매달리고 내용은 아래로 떨어진다.
+ *
+ * 화살표로 이어진 줄에서는 "N." 이 문장 끝이 아니라 항목 번호다. 마침표를 잠시 감춰
+ * 문장 분해를 피하고, 폭 맞추기는 화살표 앞에서 끊게 한다(getMobileBreakCandidates).
+ * 화살표가 없는 평범한 문장은 건드리지 않는다.
+ */
+function protectStepChainDots(value: string): string {
+  if (!STEP_ARROW_RE.test(value)) return value;
+  return value.replace(/(^|[\s(\[])(\d{1,2})\.(?=\s)/g, (_m, lead, num) => `${lead}${num}${DOMAIN_DOT_PLACEHOLDER}`);
+}
+
 /**
  * [2026-08-06] 숫자 원자 — 중간에서 절대 자르지 않는 토큰.
  *
@@ -1000,7 +1025,7 @@ function moveCutOutsideDomainToken(value: string, cut: number, minCut: number, m
 function splitSentencesForMobile(value: string): string[] {
   const compact = value.replace(/\s+/g, ' ').trim();
   if (!compact) return [];
-  const protectedCompact = protectDomainDots(compact);
+  const protectedCompact = protectStepChainDots(protectDomainDots(compact));
   // [2026-07-03] 문장부호 뒤 닫는 따옴표("외롭다.'")는 문장에 붙들어 따옴표가 다음 줄로
   //   고립되지 않게 한다(dangling quote 재발 방지).
   const matches = protectedCompact.match(/[^.!?。！？\n]+[.!?。！？]?['"‘’“”]?/g);
@@ -1032,6 +1057,18 @@ function splitSentencesForMobile(value: string): string[] {
   return merged;
 }
 
+/** 순서 화살표 바로 앞 위치들. 항목 경계라 여기서 끊으면 순서가 온전히 읽힌다. */
+function getArrowBreakCandidates(windowText: string): number[] {
+  const cuts: number[] = [];
+  const re = /\s+(?=(?:→|➡|⇒|->|=>))/g;
+  let match: RegExpExecArray | null;
+  while ((match = re.exec(windowText)) !== null) {
+    const cut = match.index + match[0].length;
+    if (cut > 0 && cut < windowText.length) cuts.push(cut);
+  }
+  return cuts;
+}
+
 function getMobileBreakCandidates(windowText: string): number[] {
   const candidates: number[] = [];
   const semanticPatterns = [
@@ -1053,6 +1090,11 @@ function getMobileBreakCandidates(windowText: string): number[] {
     /、\s*/g,
     /·/g,
     /\//g,
+    // [2026-08-26] 순서 화살표 앞에서 끊는다. 화살표가 다음 줄 머리에 와야
+    //   "→ 4. 수화물 하역 작업" 처럼 읽히고, 앞줄 끝에 화살표만 남지 않는다.
+    //   \s+ 로 최소 한 칸을 요구한다 — \s* 로 두면 길이 0 매치가 되어
+    //   아래 exec 루프의 lastIndex 가 움직이지 않고 무한 루프에 빠진다(작성 중 실측).
+    /\s+(?=(?:→|➡|⇒|->|=>))/g,
     /\s+/g,
   ];
 
@@ -1062,6 +1104,8 @@ function getMobileBreakCandidates(windowText: string): number[] {
     while ((match = pattern.exec(windowText)) !== null) {
       const cut = match.index + match[0].length;
       if (cut > 0 && cut < windowText.length) candidates.push(cut);
+      // 길이 0 매치는 lastIndex 를 밀지 않아 무한 루프가 된다 — 강제로 한 칸 민다.
+      if (match[0].length === 0) pattern.lastIndex += 1;
     }
   }
 
@@ -1078,9 +1122,19 @@ function splitLongSentenceForMobile(sentence: string, maxChars: number): string[
     const minCut = Math.max(10, Math.floor(maxChars * 0.55));
     const target = Math.min(maxChars, Math.max(minCut, Math.floor(rest.length / 2)));
     const candidates = getMobileBreakCandidates(windowText).filter(cut => cut >= minCut);
-    let cut = candidates.length > 0
-      ? candidates.sort((a, b) => Math.abs(a - target) - Math.abs(b - target))[0]
-      : -1;
+    /*
+     * [2026-08-26] 순서 화살표가 창 안에 있으면 그 앞에서 끊는 것을 최우선으로 한다.
+     * 일반 후보는 "목표 길이에 가장 가까운 지점"을 고르는데, 그러면 항목 한가운데
+     * ("2. 딸의 울음 / 지속")에서 끊겨 순서가 읽히지 않는다. 화살표는 항목 경계라
+     * 거기서 끊으면 한 줄에 온전한 항목만 남는다. 들어가는 만큼 채우려고 가장 뒤쪽
+     * 화살표를 쓴다.
+     */
+    const arrowCuts = getArrowBreakCandidates(windowText).filter((cut) => cut >= minCut);
+    let cut = arrowCuts.length > 0
+      ? Math.max(...arrowCuts)
+      : candidates.length > 0
+        ? candidates.sort((a, b) => Math.abs(a - target) - Math.abs(b - target))[0]
+        : -1;
     if (cut < 0) {
       // [2026-06-11] No clause boundary in the window — back off to the
       // nearest SPACE instead of slicing inside a word ("범/위에" breaks).
@@ -1501,11 +1555,19 @@ export function buildPastePreviewHtml(text: string): string {
   const source = String(text ?? '');
   if (!source.trim()) return '';
   const fixed = () => 0;
-  return buildMobileRichHtml(source, {
+  const inner = buildMobileRichHtml(source, {
     tableTheme: pickSoftTableTheme(fixed),
     highlightTheme: pickSoftHighlightTheme(fixed),
     headingTheme: pickSoftHeadingTheme(fixed),
   }).html;
+
+  // [2026-08-26] 흰 종이 위에 올린다.
+  //   붙여넣기 HTML 은 네이버의 흰 본문을 전제로 문단마다 background-color:#ffffff 를
+  //   갖는다. 이걸 어두운 미리보기 패널에 그대로 넣으면 문단마다 흰 상자가 뜨고,
+  //   문단 스페이서(<p><br></p>)는 빈 흰 상자로 보인다(사장님 실측 화면).
+  //   스페이서는 네이버가 간격을 보장하는 유일한 수단이라 뺄 수 없다(v2.11.152 롤백).
+  //   그래서 빼는 대신 배경을 맞춘다 — 실제 발행 화면과 같아지므로 검수에도 더 낫다.
+  return `<div style="background:#ffffff;padding:16px 12px;border-radius:8px;color:#5f4b45;">${inner}</div>`;
 }
 
 export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions = {}): MobileRichHtmlResult {
@@ -1683,7 +1745,18 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
       pendingAnswerNumber = null;
 
       const chunks = buildReadableParagraphs(cleanedLine, maxChunkChars);
-      for (const chunk of chunks) {
+      /*
+       * [2026-08-26] 순서 화살표로 이어진 줄은 한 문단으로 묶는다.
+       * 조각마다 문단을 만들면 사이에 문단 스페이서(빈 문단)가 끼어
+       *   1. 탑승 → 2. 딸의 울음 지속
+       *   (빈 줄)
+       *   → 3. 자발적 하기 요청
+       * 처럼 한 순서가 여러 덩어리로 흩어진다(사장님 실측 화면).
+       * 순서는 한 호흡으로 읽혀야 하므로 줄바꿈(<br>)으로만 나눈다.
+       */
+      const isStepChain = chunks.length > 1 && STEP_ARROW_RE.test(cleanedLine);
+      const paragraphTexts = isStepChain ? [chunks.join('\n')] : chunks;
+      for (const chunk of paragraphTexts) {
         nodes.push({
           type: 'paragraph',
           text: chunk,

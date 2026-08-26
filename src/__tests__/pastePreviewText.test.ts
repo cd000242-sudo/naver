@@ -143,3 +143,45 @@ describe('표 폭과 줄바꿈 (2026-08-26 사장님 지적)', () => {
     expect(buildPastePreviewHtml(THREE_COL)).not.toMatch(/<colgroup>/);
   });
 });
+
+describe('화살표 순서 표기 (2026-08-26 사장님 실측)', () => {
+  // 발행본: "1. 탑승 → 2." / "딸의 울음 지속 → 3." — 다음 단계 번호만 앞줄 끝에 매달리고
+  // 내용은 아래로 떨어졌다. 게다가 단계마다 문단이 갈려 사이에 빈 문단이 끼었다.
+  const CHAIN = '1. 탑승 → 2. 딸의 울음 지속 → 3. 자발적 하기 요청 → 4. 수화물 하역 작업 → 5. 울음 그침 → 6. 재탑승';
+
+  it('번호 뒤 마침표에서 끊지 않는다 — 번호가 줄 끝에 매달리지 않는다', () => {
+    for (const line of buildPastePreviewText(CHAIN).split('\n')) {
+      expect(line.trim()).not.toMatch(/→\s*\d{1,2}\.$/);
+      expect(line.trim()).not.toMatch(/\d{1,2}\.$/);
+    }
+  });
+
+  it('화살표가 다음 줄 머리에 온다 — 항목이 통째로 읽힌다', () => {
+    const lines = buildPastePreviewText(CHAIN).split('\n').filter(Boolean);
+    expect(lines.length).toBeGreaterThan(1);
+    expect(lines.slice(1).some((l) => l.trim().startsWith('→'))).toBe(true);
+  });
+
+  it('순서 전체가 한 문단이다 — 단계마다 빈 문단이 끼지 않는다', () => {
+    const html = buildPastePreviewHtml(CHAIN);
+    const paragraphs = [...html.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/g)]
+      .map((m) => m[1].replace(/<[^>]+>/g, '').trim())
+      .filter(Boolean);
+    expect(paragraphs.length).toBe(1);
+    expect(paragraphs[0]).toMatch(/탑승/);
+    expect(paragraphs[0]).toMatch(/재탑승/);
+  });
+
+  it('화살표가 없는 번호 목록은 종전대로 문단을 나눈다', () => {
+    const list = '준비물은 이렇습니다. 1. 신분증 2. 통장 사본 3. 도장';
+    const html = buildPastePreviewHtml(list);
+    const paragraphs = [...html.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/g)]
+      .map((m) => m[1].replace(/<[^>]+>/g, '').trim())
+      .filter(Boolean);
+    expect(paragraphs.length).toBeGreaterThan(1);
+  });
+
+  it('미리보기는 흰 종이 위에 올린다 — 붙여넣기 스타일이 흰 본문을 전제한다', () => {
+    expect(buildPastePreviewHtml('아무 문장입니다.')).toMatch(/^<div style="background:#ffffff/);
+  });
+});
