@@ -1,4 +1,15 @@
-// JSON 스키마 설명 (구조화 콘텐츠 생성용)
+// ⚠️ [2026-08-26] 이 상수는 모델에게 전달되지 않는다 — 죽은 스키마다.
+//
+// 실제로 모델이 보는 출력 형식은 contentJsonPromptFormat.ts 의
+// buildContentJsonOutputFormat 이 만든다. 여기 있는 JSON_SCHEMA_DESCRIPTION 은
+// contentGenerator.ts 가 import 만 하고 어디에도 쓰지 않는다.
+//
+// 실측 사고: 요약 표(summaryTable)를 여기에만 추가해 두고 "표가 나온다"고 판단했다.
+// 모델은 그 필드를 요구받은 적이 없어 채우지 않았고, 발행된 글에 표가 없었다.
+// 스키마 필드를 늘릴 일이 있으면 contentJsonPromptFormat.ts 를 고쳐라.
+// 이 파일은 하위 호환 때문에 남겨 두었을 뿐이다.
+
+// JSON 스키마 설명 (구조화 콘텐츠 생성용) — 미사용
 export const JSON_SCHEMA_DESCRIPTION = `
 JSON 응답 형식 (반드시 이 구조를 따를 것):
 {

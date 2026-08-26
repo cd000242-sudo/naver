@@ -408,7 +408,12 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
     {"text": "제목 2", "score": 90},
     {"text": "제목 3", "score": 85}`}
   ],
-  ${buildHeadingsExample()},
+  ${buildHeadingsExample()},${isHomefeed ? '' : `
+  "summaryTable": [
+    {"label": "기준일", "value": "자료에 있는 날짜"},
+    {"label": "주제에 맞는 축", "value": "확인된 값 (숫자·조건은 숫자로)"},
+    {"label": "또 다른 축", "value": "확인된 값"}
+  ],`}
   "introduction": "${isHomefeed ? '도입부 (2~4개의 짧은 문장, 상황 + 읽을 이유)' : isMate ? '도입부 (첫 300자 안에 직접 답변)' : '도입부'}",
   "conclusion": "${isHomefeed ? '마무리 (핵심 판단 + 다음 확인 행동 또는 여운, 1~3문장)' : isMate ? '마무리 (핵심 요약 + 다음 행동)' : '마무리'}",
   "hashtags": ["해시태그1", "해시태그2", "해시태그3"],

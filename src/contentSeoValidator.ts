@@ -1,3 +1,4 @@
+import { measureKeywordCoverage } from './content/keywordTitlePrefixPolicy';
 import {
   resolveHeadingCountRange,
   judgeHeadingCount,
@@ -71,7 +72,11 @@ export function validateSeoContent(content: SeoValidationContent, source: SeoVal
   const keywords = getKeywords(source);
   const seoSubKws = keywords.slice(1).filter((keyword) => keyword.length >= 2 && !/^\d+$/.test(keyword)).slice(0, 3);
   if (seoSubKws.length > 0) {
-    const hasSubKwInTitle = seoSubKws.some((keyword) => title.includes(keyword));
+    // [2026-08-26] 서브키워드도 통문장으로 보면 "옥상달빛 럽스타그램" 같은 조합이
+    //   제목에 통째로 들어갈 리 없어 항상 미포함으로 찍혔다. 토큰 절반이면 걸린 것으로 본다.
+    const hasSubKwInTitle = seoSubKws.some(
+      (keyword) => measureKeywordCoverage(keyword, title).ratio >= 0.5,
+    );
     if (!hasSubKwInTitle) {
       warnings.push('⚠️ 제목에 서브키워드 없음 (검색 매칭 약화)');
       titleScore -= 10;
@@ -121,8 +126,12 @@ export function validateSeoContent(content: SeoValidationContent, source: SeoVal
     // [2026-08-26] 하한(1.5~3% 권장)을 걷어냈다. seo/base R0-6이 "키워드 횟수와 밀도를
     // 맞추지 않는다"고 못박는데 검증기가 정확히 그 반대를 권하고 있었다.
     // 실제 문제는 밀도가 낮은 것이 아니라 키워드가 본문에 아예 없는 것이다.
-    if (pkCount === 0) {
-      warnings.push(`⚠️ 메인키워드 "${seoPK}"가 본문에 한 번도 없음`);
+    // [2026-08-26 실측] 통문장(pkCount)으로 보면 안 된다. "김윤주 권정열 연애"처럼
+    //   다어절 키워드는 본문에 그대로 붙어 나올 일이 거의 없어, 주제를 제대로 다룬 글에도
+    //   "본문 미등장" 경고가 매번 떴다. 토큰이 하나도 안 보일 때만 주제 이탈로 본다.
+    const bodyCoverage = measureKeywordCoverage(seoPK, bodyText);
+    if (bodyCoverage.total > 0 && bodyCoverage.covered === 0) {
+      warnings.push(`⚠️ 메인키워드 "${seoPK}"의 어떤 말도 본문에 없음`);
       console.warn(`[SeoValidator] ⚠️ 메인키워드 "${seoPK}" 본문 미등장 — 주제 불일치 의심`);
     } else if (density > 4.0) {
       warnings.push(`⚠️ 메인키워드 밀도 ${density.toFixed(1)}% (키워드 스터핑 위험, 3% 이하 권장)`);
@@ -182,8 +191,11 @@ export function validateSeoContent(content: SeoValidationContent, source: SeoVal
   }
 
   if (seoPK && content.introduction) {
+    // [2026-08-26] 같은 이유로 통문장 매칭을 그만둔다 — 도입부가 "김윤주와 권정열의
+    //   연애설"처럼 풀어 써도 미포함으로 잡혔다. 의미 토큰 과반이 보이면 통과.
     const firstTwoSentences = String(content.introduction).trim().split(/[.!?]/).slice(0, 2).join(' ');
-    if (!firstTwoSentences.includes(seoPK)) {
+    const introCoverage = measureKeywordCoverage(seoPK, firstTwoSentences);
+    if (introCoverage.total > 0 && introCoverage.ratio < 0.5) {
       warnings.push('⚠️ 도입부 첫 2문장에 키워드 없음 (AI 스니펫 대응 약화)');
       console.warn(`[SeoValidator] ⚠️ 도입부에 키워드 "${seoPK}" 미포함 — AI 스니펫 대응 실패`);
     } else {

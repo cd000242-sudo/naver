@@ -1,3 +1,4 @@
+import { filterHashtagCandidates } from './content/hashtagCandidateFilter.js';
 import { clampHashtags } from './content/hashtagCountPolicy.js';
 import type { ContentSource, StructuredContent } from './contentGenerator';
 import { recoverLooseStructuredContentFields } from './contentStructuredRecovery';
@@ -342,12 +343,15 @@ export function validateStructuredContent(content: StructuredContent, source?: C
     }
 
     // 제목에서 핵심 키워드 추출
-    const titleKeywords = title
-      .replace(/[?!.,\-_"']/g, ' ')
-      .split(/\s+/)
-      .filter(word => word.length >= 2 && word.length <= 20)
-      .filter(word => !['하는', '되는', '있는', '없는', '위한', '대한', '이런', '저런', '그런', '어떤', '무엇', '어디', '언제', '누가', '왜', '어떻게'].includes(word))
-      .slice(0, 5);
+    // [2026-08-26 실측] 공백으로만 쪼개면 "한 장으로" → "#장으로" 같은 조각이 나온다.
+    //   실제로 발행된 글에 #8월 #25일 #장으로 가 붙었다. 조사·숫자 조각을 걸러낸다.
+    const titleKeywords = filterHashtagCandidates(
+      title
+        .replace(/[?!.,\-_"']/g, ' ')
+        .split(/\s+/)
+        .filter(word => word.length >= 2 && word.length <= 20)
+        .filter(word => !['하는', '되는', '있는', '없는', '위한', '대한', '이런', '저런', '그런', '어떤', '무엇', '어디', '언제', '누가', '왜', '어떻게'].includes(word)),
+    ).slice(0, 5);
 
     // 핵심 키워드를 해시태그로 변환
     titleKeywords.forEach(keyword => {
@@ -359,11 +363,12 @@ export function validateStructuredContent(content: StructuredContent, source?: C
     // headings에서 추가 키워드 추출
     if (content.headings && content.headings.length > 0) {
       content.headings.slice(0, 3).forEach(h => {
-        const headingWords = (h.title || '')
-          .replace(/[?!.,\-_"']/g, ' ')
-          .split(/\s+/)
-          .filter(word => word.length >= 2 && word.length <= 15)
-          .slice(0, 2);
+        const headingWords = filterHashtagCandidates(
+          (h.title || '')
+            .replace(/[?!.,\-_"']/g, ' ')
+            .split(/\s+/)
+            .filter(word => word.length >= 2 && word.length <= 15),
+        ).slice(0, 2);
 
         headingWords.forEach(word => {
           if (generatedHashtags.length < 8 && !generatedHashtags.some(tag => tag.includes(word))) {
