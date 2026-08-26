@@ -145,6 +145,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/exposureWinnersBlock.ts',
   'src/content/fabricationCheck.ts',
   'src/content/forbiddenPhrases.ts',
+  'src/content/fullTextCandidateOrder.ts',
   'src/content/generalContentGuard.ts',
   'src/content/generationModeStamp.ts',
   'src/content/groundingCostPolicy.ts',
