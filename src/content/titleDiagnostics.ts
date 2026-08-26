@@ -46,7 +46,19 @@ export function buildTitleDiagnosticsLines(content: unknown): string[] {
     const rawCandidates = Array.isArray(record.titleCandidates) ? record.titleCandidates : [];
     const selected = clip(record.selectedTitle ?? record.title, 90);
 
+    /*
+     * [2026-08-27 Phase 3-B] 의외 지점을 클릭 사유보다 먼저 찍는다.
+     *
+     * 6편을 모아 보니 사유의 유형이 제목의 상한을 정했고, 사유는 자꾸 "정리해주니까"로
+     * 흘렀다. 그래서 의외성만 묻는 필드를 따로 세웠다. 스키마 순서와 같게 두면
+     * 로그만 보고도 "재료가 날카로운데 사유가 무뎌졌는지"를 가릴 수 있다.
+     */
+    const surprising = analysis && typeof analysis === 'object'
+      ? clip(analysis.surprisingFact, 110)
+      : '';
+
     const lines: string[] = [];
+    if (surprising) lines.push(`[TitleDiag] 의외 지점: ${surprising}`);
     if (reason) lines.push(`[TitleDiag] 클릭 사유: ${reason}`);
 
     rawCandidates.slice(0, 5).forEach((candidate: any, index: number) => {

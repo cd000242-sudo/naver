@@ -60,6 +60,28 @@ function buildHeadingsExample(): string {
  * 없으면 "단서 없음"이라 적는다 — 트렌드 이유를 지어내는 통로를 막는다.
  * 파서는 preWritingAnalysis 를 소비하지 않으므로 본문에 누출될 수 없다.
  */
+/*
+ * [2026-08-27 Phase 3-B] 클릭 사유가 자꾸 "정리해주니까"로 흐르는 것을 막는다.
+ *
+ * 홈판 글 6편의 진단 로그를 모아 보니 사유의 유형이 제목의 상한을 정하고 있었다.
+ *   전제 뒤집기 1편 → "흰옷도 아닌데 민폐? … 3일 드레스 코드가 있었다"  (살아난 제목)
+ *   정리·해석형 4편 → "… 넷플릭스 입장은", "… 달라진 지점"             (밋밋)
+ *   밋밋 1편        → 사장님: "클릭을 부르는 제목이 아닌데?"
+ *
+ * clickReason 설명에는 이미 "자료 속 가장 의외의 사실이나 모순에서 도출"이라 적혀
+ * 있었는데도 그렇게 됐다. 필드 설명 안의 지시보다 **필드가 던지는 질문**이 답을
+ * 정하기 때문이다 — "왜 클릭하나?"라고 물으면 "정리해주니까"가 나온다.
+ *
+ * 그래서 질문을 따로 던진다. 이 필드는 클릭을 묻지 않고 의외성만 묻는다.
+ * 근거가 홈판 실측에서만 나왔으므로 홈판에만 적용한다 — 검색 기반 모드는
+ * "의외인가"보다 "내 질문에 답하는가"가 클릭을 만든다.
+ */
+const SURPRISING_FACT_FIELD = JSON.stringify(
+  '자료에서 가장 의외인 지점 1문장 — 상식과 어긋나는 것, 앞뒤가 안 맞는 것, 예상 밖의 수치·반응 중 하나. '
+  + '"A가 B했다" 같은 사건 요약이 아니라 "A인데 B였다" 처럼 어긋남이 드러나야 한다. '
+  + '자료에 있는 것만 쓰고, 훑어도 어긋남이 없으면 "자료 내 의외 지점 없음"이라 적는다',
+);
+
 function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton: boolean): string {
   const common = `
     "coreSubject": "입력 자료의 핵심을 1문장으로 (자료에 있는 것만)",
@@ -83,9 +105,11 @@ function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton:
     "confirmed": ["공식 발표·판결 등 확정 사실만"],
     "unconfirmed": ["보도·추측 등 미확정 — 여기 넣은 것은 제목·궁금증 소재로 쓰지 않는다"],
     "curiosityGaps": ["독자가 멈출 궁금증 갭 후보 2~3개 — 공적 활동(출연·하차·이적·복귀·편성·계약·수상)과 확정 사실 소재만"],
-    "clickReason": "지나가던 사람이 이 글을 클릭할 단 하나의 이유 1문장 — 자료 속 가장 의외의 확정 사실이나 모순에서 도출",` : `
+    "surprisingFact": ${SURPRISING_FACT_FIELD},
+    "clickReason": "지나가던 사람이 이 글을 클릭할 단 하나의 이유 1문장 — surprisingFact 에서 출발한다. 확정 사실만 쓴다",` : `
     "stopReason": "스크롤 중인 독자가 멈출 한 지점 — 자료에 실재하는 장면·조건·반복 지적만, 없으면 자료가 가장 구체적으로 다루는 것",
-    "clickReason": "지나가던 사람이 이 글을 클릭할 단 하나의 이유 1문장 — 자료 속 가장 의외의 사실이나 모순에서 도출, 자료 밖 사실 날조 금지",`;
+    "surprisingFact": ${SURPRISING_FACT_FIELD},
+    "clickReason": "지나가던 사람이 이 글을 클릭할 단 하나의 이유 1문장 — surprisingFact 에서 출발한다. 자료 밖 사실 날조 금지",`;
   } else if (mode === 'affiliate') {
     modeAxes = `
     "purchaseDecision": "구매가 갈리는 구체 조건 1~2개 (자료·후기에서 관찰되는 것만)",
