@@ -173,3 +173,28 @@ describe('체험 인증 서버 응답 속도 (GAS)', () => {
     expect(gas).toMatch(/findTrialRowByPhone_\(sheet, phone, actData\)/);
   });
 });
+
+/**
+ * [2026-08-26 사장님 실측] 중복 정리를 돌린 뒤에도 화면에 1072025380 / 1023783646 처럼
+ * 앞의 0 없는 번호가 남아 있었다. 정리는 중복(2행 이상)만 손대고 단일 행은 건너뛴다.
+ * 비교는 정규화가 흡수하지만, 보이는 값이 실제와 다르면 볼 때마다 의심하게 된다.
+ */
+describe('단일 행도 전화번호 형식을 바로잡는다 (GAS)', () => {
+  const gas = readGas();
+
+  it.skipIf(!gas)('정리 후 전체 행의 앞자리 0을 복원하는 단계가 있다', () => {
+    expect(gas).toMatch(/남은 모든 행의 전화번호 형식을 한 번에 바로잡는다/);
+    expect(gas).toMatch(/var fixedCount = 0;/);
+    expect(gas).toMatch(/앞자리 0 복원/);
+  });
+
+  it.skipIf(!gas)('휴대폰만 복원하고 지역번호는 건드리지 않는다', () => {
+    expect(gas).toMatch(/digits\.length === 10 && digits\.charAt\(0\) === '1'/);
+  });
+
+  it.skipIf(!gas)('열 전체를 한 번에 쓴다 — 행마다 쓰면 실행 시간이 터진다', () => {
+    expect(gas).toMatch(/var phoneRange = sheet\.getRange\(2, 3, phoneColumn\.length, 1\)/);
+    expect(gas).toMatch(/phoneRange\.setNumberFormat\('@'\)/);
+    expect(gas).toMatch(/phoneRange\.setValues\(phoneColumn\)/);
+  });
+});
