@@ -1,4 +1,5 @@
 import { scoreSearchMatch, scorePurchaseAxis } from './content/titleModeObjective.js';
+import { measureTitleWidth } from './content/titleLengthPolicy.js';
 /**
  * [Phase 3-9/v2.10.147] contentGenerator god file decomposition — evaluateTitleQuality.
  *
@@ -18,6 +19,8 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
   let score = 100;
   const issues: string[] = [];
   const t = String(title || '').trim();
+  // 잘림은 글자 수가 아니라 폭으로 정해진다 — 한글 1칸, 공백·숫자·영문 반 칸.
+  const titleWidth = measureTitleWidth(t);
   const kw = String(keyword || '').trim().toLowerCase();
 
   if (!t) return { score: 0, issues: ['빈 제목'] };
@@ -107,8 +110,10 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
     // 키워드 유사도 80% 이상
     { condition: Boolean(normalizedKeyword && normalizedTitle.startsWith(normalizedKeyword) && (normalizedTitle.length - normalizedKeyword.length) / normalizedTitle.length < 0.2), points: 40, reason: '키워드와 너무 유사' },
     // ✅ [2026-02-09 강화] 길이 기준 엄격화 (SEO 기준: 25~40자)
-    { condition: mode === 'seo' && t.length > 42, points: 30, reason: 'SEO: 42자 초과 (검색 잘림)' },
-    { condition: mode === 'homefeed' && t.length > 42, points: 60, reason: '홈피드: 42자 초과 (모바일 첫 화면 가독성 저하)' },
+    // [2026-08-27] 글자 수가 아니라 폭으로 잰다. 한글은 넓고 공백·숫자·영문은 절반이라,
+    //   숫자가 섞인 제목이 실제보다 길게 계산돼 억울하게 걸렸다(사장님 지적).
+    { condition: mode === 'seo' && titleWidth > 42, points: 30, reason: 'SEO: 42폭 초과 (검색 잘림)' },
+    { condition: mode === 'homefeed' && titleWidth > 42, points: 60, reason: '홈피드: 42폭 초과 (모바일 첫 화면 가독성 저하)' },
     { condition: t.length > 65, points: 40, reason: '65자 초과 (심각한 잘림)' },
     // 길이 부족
     { condition: t.length < 15, points: 20, reason: '15자 미만 (정보 부족)' },
@@ -192,9 +197,9 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
     { condition: /(\?|일까|할까|인가요)/.test(t), points: 5, reason: '질문형 종결 (호기심)' },
     // 홈피드 외 모드에서만 솔직 표현 가점
     { condition: mode !== 'homefeed' && mode !== 'affiliate' && /(솔직히|사실|실제로|진짜)/.test(t), points: 3, reason: '솔직한 표현 (신뢰)' },
-    { condition: mode === 'seo' && t.length >= 22 && t.length <= 40, points: 5, reason: 'SEO 이상적 길이 (22~40자)' },
+    { condition: mode === 'seo' && titleWidth >= 22 && titleWidth <= 40, points: 5, reason: 'SEO 이상적 길이 (22~40폭)' },
     // ✅ [v3] 홈피드 전용 보너스
-    { condition: mode === 'homefeed' && t.length >= 28 && t.length <= 42, points: 5, reason: '홈피드 이상적 길이 (28~42자)' },
+    { condition: mode === 'homefeed' && titleWidth >= 28 && titleWidth <= 42, points: 5, reason: '홈피드 이상적 길이 (28~42폭)' },
     // 홈피드 외 모드에서만 변화/비포애프터 가점
     { condition: mode !== 'homefeed' && mode !== 'affiliate' && /(전|후|변화|달라)/.test(t), points: 3, reason: '변화/비포애프터 요소' },
   ];

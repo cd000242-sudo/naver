@@ -7,6 +7,7 @@
 import type { StructuredContent } from './contentGenerator';
 import { collapseDuplicateLeadingYearTitle } from './contentTitleYearGuard';
 import { normalizeTitleWhitespace } from './contentTextHelpers';
+import { measureTitleWidth } from './content/titleLengthPolicy.js';
 
 export interface KeywordPrefixOptions {
   /**
@@ -24,6 +25,16 @@ export interface KeywordPrefixOptions {
    * 낮추면 그쪽 제목까지 잘린다 — 호출자가 필요할 때만 좁힌다.
    */
   maxLength?: number;
+  /**
+   * [2026-08-27] 폭 기준 상한. 지정하면 maxLength 대신 이걸 쓴다.
+   *
+   * 한글은 한 칸, 공백·숫자·영문은 반 칸으로 센다 — 잘림은 글자 수가 아니라 폭으로
+   * 정해지기 때문이다(사장님 지적: "글자수가 33자인데? 띄어쓰기는 왜 카운팅하는 거니?").
+   *
+   * 단위를 나눠 두는 이유: 쇼핑 경로의 45는 **글자 수**로 보정된 값이다. 그걸 폭으로
+   * 해석하면 영문 상품명이 훨씬 길어져 판단 문구가 밀린다. 새 단위는 지정한 쪽에만 건다.
+   */
+  maxWidth?: number;
 }
 
 /** 옵션 미지정 시의 제목 길이 상한 (기존 동작 유지). */
@@ -39,7 +50,8 @@ function titleStartsWithKeywordFront3(title: string, keyword: string): boolean {
 
 export function applyKeywordPrefixToTitle(title: string, keyword: string, options?: KeywordPrefixOptions): string {
   const cleanKeyword = (keyword || '').trim();
-  const maxTitleLength = options?.maxLength ?? DEFAULT_TITLE_MAX_LENGTH;
+  const useWidth = typeof options?.maxWidth === 'number';
+  const maxTitleLength = options?.maxWidth ?? options?.maxLength ?? DEFAULT_TITLE_MAX_LENGTH;
   if (!cleanKeyword) return collapseDuplicateLeadingYearTitle((title || '').trim());
 
   const cleanTitle = collapseDuplicateLeadingYearTitle((title || '').trim());
@@ -101,10 +113,26 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string, option
     // ✅ [2026-02-24] removeDuplicatePhrases 제거 (3중 실행 방지, 순수 길이 제한만)
     const t = collapseDuplicateLeadingYearTitle(normalizeWhitespace(String(s || '')).trim());
     if (!t) return '';
-    if (t.length <= maxLen) return t;
+    // [2026-08-27] maxWidth 가 지정된 호출만 폭으로 잰다. 나머지는 예전대로 글자 수다.
+    const measure = (v: string) => (useWidth ? measureTitleWidth(v) : v.length);
+    if (measure(t) <= maxLen) return t;
+
+    // 예산이 다하는 지점을 글자 자리로 환산한다.
+    const budgetIndex = (): number => {
+      let used = 0;
+      let index = 0;
+      for (const ch of t) {
+        const next = used + measure(ch);
+        if (next > maxLen) break;
+        used = next;
+        index += ch.length;
+      }
+      return index;
+    };
+    const cutAt = budgetIndex();
 
     // ✅ [2026-02-02] 불완전한 문장 방지: 더 나은 끊김 위치 찾기
-    let cut = t.slice(0, maxLen);
+    let cut = t.slice(0, cutAt);
 
     // 1. 완전한 문장 경계 찾기 (구두점)
     const lastPunctuation = Math.max(
@@ -125,7 +153,7 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string, option
     );
 
     // ✅ 우선순위: 구두점 > 구분자 > 공백
-    const minCutPosition = Math.floor(maxLen * 0.5);  // 최소 50% 이상 유지
+    const minCutPosition = Math.floor(cutAt * 0.5);  // 최소 절반 이상 유지
 
     if (lastPunctuation >= minCutPosition) {
       cut = t.slice(0, lastPunctuation + 1);
@@ -134,8 +162,8 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string, option
     } else if (lastSpace >= minCutPosition) {
       cut = t.slice(0, lastSpace);
     } else {
-      // 적절한 끊김 위치가 없으면 maxLen 위치에서 자르고 끝 정리
-      cut = t.slice(0, maxLen);
+      // 적절한 끊김 위치가 없으면 폭 예산이 다하는 자리에서 자르고 끝 정리
+      cut = t.slice(0, cutAt);
     }
 
     // ✅ [2026-02-02 FIX] 끝 정리: 불완전한 문자 제거 (+, &, |, 등)
@@ -207,6 +235,34 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string, option
   }
 
   const merged = rest ? `${cleanKeyword} ${rest}` : cleanKeyword;
+  /*
+   * [2026-08-27 사장님 실측] 붙여서 넘칠 바에는 붙이지 않는다.
+   *
+   * 장동윤 결혼 글의 제목 후보가 전부 52~54자로 나왔다. 셋 다 키워드 접두사
+   * "장동윤 김승윤 결혼발표" 로 시작했고, 발행 제목의 "결혼발표"·"결혼 발표" 중복도
+   * 거기서 나왔다. 상한을 걸어 보니 이번엔 clamp 가 제목 뒤를 잘라 "누룩 펀딩의 진실"
+   * 이 통째로 사라졌다 — 계약은 지켰는데 제목을 잃었다.
+   *
+   * 접두사는 주제가 빠진 제목을 보완하는 장치다. 그걸 붙이자고 원래 제목을 자르는 건
+   * 앞뒤가 바뀐 것이다. 넘치면 원래 제목을 그대로 둔다.
+   *
+   * 폭으로 잰다 — 한글은 넓고 공백·숫자·영문은 절반이라, 글자 수로 재면 숫자가 섞인
+   * 제목이 실제보다 길게 계산된다(사장님 지적).
+   */
+  const sizeOf = (v: string) => (useWidth ? measureTitleWidth(v) : v.length);
+  /*
+   * 폭 계약을 받은 경로에서만 생략한다.
+   *
+   * 쇼핑 경로는 상품명이 제목에 반드시 들어가야 하므로, 넘친다고 접두사를 빼면
+   * 상품명이 통째로 사라진다. 거기서는 예전대로 잘라 맞춘다.
+   */
+  if (useWidth && sizeOf(merged) > maxTitleLength && sizeOf(cleanTitle) <= maxTitleLength) {
+    console.log(
+      `[applyKeywordPrefix] 접두사를 붙이면 ${sizeOf(merged)}${useWidth ? '폭' : '자'}으로 `
+      + `상한(${maxTitleLength})을 넘어 생략: "${cleanTitle}"`,
+    );
+    return cleanTitle;
+  }
   return clampTitleLength(merged, maxTitleLength);
 }
 

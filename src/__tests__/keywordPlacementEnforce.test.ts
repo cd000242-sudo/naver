@@ -80,6 +80,9 @@ describe('finalize 배선 잠금 (의도 우선 SEO)', () => {
     const src = readFileSync(join(__dirname, '..', 'contentGenerator.ts'), 'utf8');
     expect(src).not.toContain('ensureFront3: _isSeoModeForKw');
     expect(src).not.toContain('enforceIntroConclusionKeyword(finalContent, primaryKeyword)');
-    expect(src).toContain('applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword);');
+    // [2026-08-27] 호출문 형태를 통째로 박제하지 않는다 — 인자가 늘면 의도와 무관하게
+    //   깨진다(폭 계약 maxWidth 를 넘기며 실제로 깨졌다). 확인할 것은 "이 경로가
+    //   기본 호출을 쓴다" 하나뿐이다.
+    expect(src).toMatch(/applyKeywordPrefixToStructuredContent\(\s*finalContent,\s*primaryKeyword/);
   });
 });

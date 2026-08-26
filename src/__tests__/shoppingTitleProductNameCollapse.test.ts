@@ -72,6 +72,9 @@ describe('쇼핑 제목 — 상품명 압사 차단', () => {
       /applyKeywordPrefixToStructuredContent\(finalContent, productName, \{ maxLength: 45 \}\)/,
     );
     // 메인 키워드(SEO) 경로에는 옵션을 붙이지 않는다
-    expect(gen).toContain('applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword);');
+    // [2026-08-27] 호출문 형태를 통째로 박제하지 않는다 — 인자가 늘면 의도와 무관하게
+    //   깨진다(폭 계약 maxWidth 를 넘기며 실제로 깨졌다). 확인할 것은 "이 경로가
+    //   기본 호출을 쓴다" 하나뿐이다.
+    expect(gen).toMatch(/applyKeywordPrefixToStructuredContent\(\s*finalContent,\s*primaryKeyword/);
   });
 });
