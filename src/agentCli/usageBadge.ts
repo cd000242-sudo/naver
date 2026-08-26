@@ -24,6 +24,8 @@ export interface AgentUsageBadgeInput {
   readonly rateLimitedAt?: number;
   /** CLI 로그인에서 확인한 구독 유형(claude: max/pro …). */
   readonly plan?: string;
+  /** 사용자가 직접 알려준 한도(5시간 창당 글 수). */
+  readonly manualLimit?: number;
 }
 
 export type AgentUsageBadgeTone = 'idle' | 'ok' | 'warn' | 'blocked';
@@ -105,38 +107,37 @@ export function buildAgentUsageBadge(
     };
   }
 
-  // 2. 관측된 한도가 있는 경우 — 남은 편수를 추정한다.
+  // 2. 한도를 아는 경우 — "쓴 편수 / 한도" 를 그대로 보여준다.
+  //    실측(막혀 본 값)이 사용자가 알려준 값보다 세다.
   const observedLimit = Number(input.observedLimit) || 0;
-  if (observedLimit > 0) {
-    const remaining = Math.max(0, Math.round(Number(input.estimatedRemaining) ?? (observedLimit - used)));
+  const manualLimit = Number(input.manualLimit) || 0;
+  const limit = observedLimit > 0 ? observedLimit : manualLimit;
+  if (limit > 0) {
+    const remaining = Math.max(0, limit - used);
+    const basis = observedLimit > 0 ? '실측 한도' : '입력한 한도';
     const windowNote = input.windowOpensAt && input.windowOpensAt > now
       ? ` · ${formatRemainingTime(input.windowOpensAt, now)} 뒤 한 편 분량 회복`
       : '';
     if (remaining <= 0) {
       return {
-        headline: `${label} 여유 없음`,
-        detail: `이번 창에서 ${used}편 사용 · 예전에 ${observedLimit}편에서 막혔습니다${windowNote}`,
+        headline: `${label} ${used}/${limit}편 — 여유 없음`,
+        detail: `${basis} ${limit}편을 다 썼습니다${windowNote}`,
         tone: 'warn',
       };
     }
     return {
-      headline: `${label} 약 ${remaining}편`,
-      detail: `이번 창 ${used}편 사용 · 실측 한도 ${observedLimit}편 기준 추정${windowNote}`,
+      headline: `${label} ${used}/${limit}편 · ${remaining}편 가능`,
+      detail: `${basis} 기준${windowNote}`,
       tone: remaining <= 2 ? 'warn' : 'ok',
     };
   }
 
-  // 3. 관측이 없는 경우 — 추정하지 않는다. 쓴 만큼만 말한다.
-  if (used === 0) {
-    return {
-      headline: `${label} 사용 전`,
-      detail: '구독 플랜은 남은 양을 알려주지 않습니다. 한 번 막혀 봐야 한도를 알 수 있어요.',
-      tone: 'idle',
-    };
-  }
+  // 3. 한도를 모르는 경우 — 지어내지 않는다. 대신 알려 달라고 한다.
+  //    구독 CLI 에는 잔여 조회 명령이 없고(claude --help 실측), 플랜 이름으로 편수를
+  //    환산할 공개 근거도 없다. 없는 숫자를 띄웠다가 그보다 일찍 막히는 쪽이 더 나쁘다.
   return {
     headline: `${label} ${used}편 사용`,
-    detail: '아직 한도에 닿은 적이 없어 남은 편수는 추정하지 않습니다 (5시간 창 기준)',
-    tone: 'ok',
+    detail: '배찌를 눌러 플랜 한도(5시간당 글 수)를 알려주시면 남은 편수를 계산합니다',
+    tone: used === 0 ? 'idle' : 'ok',
   };
 }

@@ -192,8 +192,11 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('agent:status', provider, options),
   // [v2.11.135] 5시간 창 사용량 가시화 (앱 자체 기록 + rate limit 리셋 시각)
   // observedLimit/estimatedRemaining은 이 앱이 실제로 한도에 막혀 본 적이 있을 때만 온다.
-  agentUsage: (provider: AgentProvider): Promise<{ success: boolean; usage?: { callsInWindow: number; windowOpensAt?: number; rateLimitedAt?: number; rateLimitResetAt?: number; observedLimit?: number; estimatedRemaining?: number; plan?: string } }> =>
+  agentUsage: (provider: AgentProvider): Promise<{ success: boolean; usage?: { callsInWindow: number; windowOpensAt?: number; rateLimitedAt?: number; rateLimitResetAt?: number; observedLimit?: number; estimatedRemaining?: number; plan?: string; manualLimit?: number } }> =>
     ipcRenderer.invoke('agent:usage', provider),
+  // [2026-08-26] 배찌에서 입력한 플랜 한도 저장 (5시간 창당 글 수).
+  agentSetUsageLimit: (provider: AgentProvider, limit: number): Promise<{ success: boolean; message?: string; usage?: Record<string, unknown> }> =>
+    ipcRenderer.invoke('agent:set-usage-limit', provider, limit),
   agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }): Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:generate', payload),
   agentInstall: (provider: AgentProvider): Promise<{ success: boolean; version?: string; code?: string; message?: string }> =>

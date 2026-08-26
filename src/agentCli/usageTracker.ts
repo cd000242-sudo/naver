@@ -40,6 +40,14 @@ interface ProviderUsage {
    * observedLimits(실제로 막혀 본 지점)로만 계산한다.
    */
   plan?: string;
+  /**
+   * [2026-08-26] 사용자가 직접 알려준 한도(5시간 창당 글 수).
+   * 구독 CLI 에는 잔여 조회 명령이 없다(claude --help 실측: agents/auth/doctor/gateway/
+   * import/install/mcp/plugin/project — usage·limit·quota 없음). 플랜 이름으로 편수를
+   * 환산할 공개 근거도 없다. 그래서 "몇 편 쓸 수 있나"는 사용자만 답할 수 있다.
+   * 실제로 막혀 본 값(observedLimits)이 생기면 그쪽을 우선한다 — 실측이 입력보다 세다.
+   */
+  manualLimit?: number;
 }
 
 type UsageFile = Partial<Record<AgentProvider, ProviderUsage>>;
@@ -55,6 +63,8 @@ export interface AgentUsageWindow {
   estimatedRemaining?: number;
   /** CLI 로그인에서 확인한 구독 유형(claude: max/pro …). 편수 계산에는 쓰지 않는다. */
   plan?: string;
+  /** 사용자가 직접 알려준 한도. observedLimit 이 없을 때만 쓴다. */
+  manualLimit?: number;
   /** Successful calls from THIS app inside the current rolling window. */
   callsInWindow: number;
   /** When the oldest in-window call leaves the window (ms epoch), if any. */
@@ -103,7 +113,19 @@ function pruned(entry: ProviderUsage | undefined, now: number): ProviderUsage {
     ...(rateLimit ? { rateLimit } : {}),
     ...(observedLimits.length ? { observedLimits } : {}),
     ...(entry?.plan ? { plan: entry.plan } : {}),
+    ...(entry?.manualLimit ? { manualLimit: entry.manualLimit } : {}),
   };
+}
+
+/** 사용자가 입력한 한도를 저장한다. 0 이하를 주면 지운다. */
+export function recordAgentManualLimit(provider: AgentProvider, limit: number): void {
+  const data = loadFile();
+  const entry = pruned(data[provider], Date.now());
+  const normalized = Math.floor(Number(limit) || 0);
+  if (normalized > 0) entry.manualLimit = normalized;
+  else delete entry.manualLimit;
+  data[provider] = entry;
+  saveFile(data);
 }
 
 /** CLI 로그인에서 확인한 구독 유형을 기억한다. 창이 지나도 유지한다. */
@@ -196,8 +218,10 @@ export function getAgentUsageWindow(
   const observedLimit = entry.observedLimits?.length
     ? Math.min(...entry.observedLimits)
     : undefined;
-  const estimatedRemaining = observedLimit !== undefined
-    ? Math.max(0, observedLimit - entry.calls.length)
+  // 실측 한도가 있으면 그것을, 없으면 사용자가 알려준 값을 쓴다.
+  const effectiveLimit = observedLimit ?? entry.manualLimit;
+  const estimatedRemaining = effectiveLimit !== undefined
+    ? Math.max(0, effectiveLimit - entry.calls.length)
     : undefined;
   return {
     provider,

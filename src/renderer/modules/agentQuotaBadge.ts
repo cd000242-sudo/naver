@@ -73,6 +73,38 @@ export async function refreshAgentQuotaBadge(): Promise<void> {
   }
 }
 
+/**
+ * 배찌를 눌러 플랜 한도를 입력받는다.
+ *
+ * [2026-08-26 사장님 지적] "몇 회 사용 가능 이게 나와야지 사용횟수만 보여주면 어쩌냐."
+ * 맞는 지적인데, 구독 CLI 에는 잔여 조회 명령이 없고(claude --help 실측: agents/auth/
+ * doctor/gateway/import/install/mcp/plugin/project — usage·limit·quota 없음),
+ * 플랜 이름으로 편수를 환산할 공개 근거도 없다. 없는 숫자를 지어 띄웠다가 그보다 일찍
+ * 막히면 더 나쁘다. 그래서 한도는 사용자가 알려주고, 실제로 막히면 그 값으로 자동 교정한다.
+ */
+async function promptForLimit(provider: string): Promise<void> {
+  const api = (window as any).api;
+  const current = await api?.agentUsage?.(provider).catch(() => null);
+  const now = Number(current?.usage?.manualLimit) || 0;
+  const answer = window.prompt(
+    '이 플랜으로 5시간 동안 글을 몇 편까지 뽑을 수 있나요?\n'
+    + '(모르면 비워두세요. 실제로 한도에 막히면 그 값으로 자동 보정됩니다.)',
+    now > 0 ? String(now) : '',
+  );
+  if (answer === null) return;
+  const value = Math.floor(Number(String(answer).trim()) || 0);
+  if (String(answer).trim() !== '' && (!Number.isFinite(value) || value < 0)) {
+    window.alert('숫자를 입력해주세요.');
+    return;
+  }
+  const res = await api?.agentSetUsageLimit?.(provider, value);
+  if (res && res.success === false) {
+    window.alert(res.message || '한도 저장에 실패했습니다.');
+    return;
+  }
+  await refreshAgentQuotaBadge();
+}
+
 let bound = false;
 
 /** 엔진 선택이 바뀌거나 글이 생성될 때 배찌를 갱신하도록 묶는다. */
@@ -83,5 +115,14 @@ export function initAgentQuotaBadge(): void {
     const target = event.target as HTMLInputElement | null;
     if (target?.name === 'primaryGeminiTextModel') void refreshAgentQuotaBadge();
   });
+  const card = document.getElementById('agent-quota-badge');
+  if (card) {
+    card.style.cursor = 'pointer';
+    card.title = '눌러서 플랜 한도(5시간당 글 수)를 입력';
+    card.addEventListener('click', () => {
+      const provider = resolveSelectedAgentProvider(readSelectedEngine());
+      if (provider) void promptForLimit(provider);
+    });
+  }
   void refreshAgentQuotaBadge();
 }

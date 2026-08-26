@@ -208,6 +208,24 @@ export function registerAgentHandlers(options: RegisterAgentHandlerOptions): voi
     }
   });
 
+  // [2026-08-26] 사용자가 알려준 플랜 한도 저장. CLI 에 잔여 조회 명령이 없고
+  //   (claude --help 실측) 플랜 이름으로 편수를 환산할 근거도 없어, 한도는 사용자만 안다.
+  ipcMain.handle('agent:set-usage-limit', async (event, provider: unknown, limit: unknown) => {
+    try {
+      assertTrustedAgentSender(event, trustedRendererPath);
+      const validatedProvider = requireAgentProvider(provider);
+      const value = Math.floor(Number(limit) || 0);
+      if (!Number.isFinite(value) || value < 0 || value > 10000) {
+        return { success: false, message: '한도는 0~10000 사이 숫자여야 합니다.' };
+      }
+      const { recordAgentManualLimit, getAgentUsageWindow } = await import('../../agentCli/usageTracker.js');
+      recordAgentManualLimit(validatedProvider, value);
+      return { success: true, usage: getAgentUsageWindow(validatedProvider) };
+    } catch (err) {
+      return { success: false, message: rendererSafeErrorMessage(err as Error, '한도 저장 실패') };
+    }
+  });
+
   // [v2.11.135] 5시간 창 사용량 (앱 자체 기록 — CLI는 잔여 쿼터 조회를 제공하지 않음)
   ipcMain.handle('agent:usage', async (event, provider: unknown) => {
     try {

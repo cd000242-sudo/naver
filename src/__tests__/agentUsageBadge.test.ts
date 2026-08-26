@@ -6,26 +6,26 @@ import { buildAgentUsageBadge, formatRemainingTime, agentProviderLabel, agentPla
 const NOW = 1_800_000_000_000;
 
 describe('에이전트 사용량 배찌 (2026-08-26 사장님 요청)', () => {
-  it('한 번도 안 막혀 봤으면 남은 편수를 추정하지 않는다', () => {
+  it('한도를 모르면 지어내지 않고 알려 달라고 한다', () => {
     const b = buildAgentUsageBadge({ provider: 'claude', callsInWindow: 4 }, NOW);
     expect(b.headline).toBe('클로드코드 4편 사용');
-    expect(b.detail).toMatch(/추정하지 않습니다/);
-    expect(b.headline).not.toMatch(/약 \d+편/);
+    expect(b.detail).toMatch(/배찌를 눌러 플랜 한도/);
+    expect(b.headline).not.toMatch(/\d+편 가능/);
   });
 
-  it('막혀 본 적이 있으면 그 실측을 근거로 남은 편수를 말한다', () => {
+  it('막혀 본 적이 있으면 그 실측으로 "쓴 편수 / 한도"를 보여준다', () => {
     const b = buildAgentUsageBadge(
-      { provider: 'codex', callsInWindow: 7, observedLimit: 12, estimatedRemaining: 5 },
+      { provider: 'codex', callsInWindow: 7, observedLimit: 12 },
       NOW,
     );
-    expect(b.headline).toBe('코덱스 약 5편');
-    expect(b.detail).toMatch(/실측 한도 12편 기준 추정/);
+    expect(b.headline).toBe('코덱스 7/12편 · 5편 가능');
+    expect(b.detail).toMatch(/실측 한도 기준/);
     expect(b.tone).toBe('ok');
   });
 
   it('두 편 이하로 남으면 경고 톤으로 바뀐다', () => {
     expect(
-      buildAgentUsageBadge({ provider: 'gemini', callsInWindow: 10, observedLimit: 12, estimatedRemaining: 2 }, NOW).tone,
+      buildAgentUsageBadge({ provider: 'gemini', callsInWindow: 10, observedLimit: 12 }, NOW).tone,
     ).toBe('warn');
   });
 
@@ -40,10 +40,10 @@ describe('에이전트 사용량 배찌 (2026-08-26 사장님 요청)', () => {
     expect(b.detail).not.toMatch(/추정/);
   });
 
-  it('아직 안 썼으면 왜 모르는지 설명한다', () => {
+  it('아직 안 썼으면 조용한 톤으로 둔다', () => {
     const b = buildAgentUsageBadge({ provider: 'claude', callsInWindow: 0 }, NOW);
     expect(b.tone).toBe('idle');
-    expect(b.detail).toMatch(/남은 양을 알려주지 않습니다/);
+    expect(b.detail).toMatch(/플랜 한도/);
   });
 
   it('남은 시간 표기', () => {
@@ -121,7 +121,31 @@ describe('구독 플랜 표시 (2026-08-26 사장님 지적)', () => {
   it('플랜으로 편수를 추정하지 않는다 — 편수는 실측 한도로만', () => {
     // 플랜이 있어도 관측 한도가 없으면 "약 N편"을 말하지 않는다.
     const b = buildAgentUsageBadge({ provider: 'claude', callsInWindow: 7, plan: 'max' }, NOW);
-    expect(b.headline).not.toMatch(/약 \d+편/);
-    expect(b.detail).toMatch(/추정하지 않습니다/);
+    expect(b.headline).not.toMatch(/\d+편 가능/);
+    expect(b.detail).toMatch(/플랜 한도/);
+  });
+});
+
+describe('사용자가 알려준 한도 (2026-08-26 사장님 지적)', () => {
+  // "몇 회 사용 가능 이게 나와야지 사용횟수만 보여주면 어쩌냐."
+  // CLI 에 잔여 조회 명령이 없어(claude --help 실측) 한도는 사용자만 안다.
+  it('입력한 한도로 "쓴 편수 / 한도 · 남은 편수"를 보여준다', () => {
+    const b = buildAgentUsageBadge({ provider: 'claude', callsInWindow: 1, plan: 'max', manualLimit: 20 }, NOW);
+    expect(b.headline).toBe('클로드코드 Max 1/20편 · 19편 가능');
+    expect(b.detail).toMatch(/입력한 한도 기준/);
+  });
+
+  it('다 쓰면 여유 없음으로 바뀐다', () => {
+    const b = buildAgentUsageBadge({ provider: 'claude', callsInWindow: 20, manualLimit: 20 }, NOW);
+    expect(b.headline).toMatch(/20\/20편 — 여유 없음/);
+    expect(b.tone).toBe('warn');
+  });
+
+  it('실측 한도가 입력값보다 우선한다 — 실제로 막힌 값이 더 세다', () => {
+    const b = buildAgentUsageBadge(
+      { provider: 'claude', callsInWindow: 5, manualLimit: 20, observedLimit: 12 }, NOW,
+    );
+    expect(b.headline).toBe('클로드코드 5/12편 · 7편 가능');
+    expect(b.detail).toMatch(/실측 한도 기준/);
   });
 });
