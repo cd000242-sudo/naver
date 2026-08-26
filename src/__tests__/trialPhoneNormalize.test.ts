@@ -83,3 +83,45 @@ describe('중복 체험 행 정리 (GAS)', () => {
     expect(gas).toMatch(/if \(phoneText\.length === 10\) phoneText = '0' \+ phoneText/);
   });
 });
+
+/**
+ * 관리자 패널(폰으로 급할 때 보는 화면)도 같은 규칙을 쓰는지 잠근다.
+ * 백엔드만 고치면 패널은 여전히 "01075451645" 로 검색해도 못 찾는다 —
+ * 시트에 앞의 0이 없는 행이 남아 있는 동안 특히 그렇다.
+ */
+const PANEL_PATH = 'C:/Users/박성현/Desktop/admin-panel/index.html';
+const readPanel = (): string | null => {
+  try {
+    return readFileSync(PANEL_PATH, 'utf-8');
+  } catch {
+    return null;
+  }
+};
+
+describe('관리자 패널 전화번호 (surge)', () => {
+  const panel = readPanel();
+
+  it.skipIf(!panel)('검색이 앞의 0을 가리지 않는다', () => {
+    expect(panel).toMatch(/function normalizeTrialPhoneForSearch/);
+    expect(panel).toMatch(/function matchTrialPhone/);
+    // 예전의 단순 포함 검사가 필터에 남아 있으면 안 된다.
+    expect(panel).not.toMatch(/\(u\.phone \|\| ''\)\.includes\(keyword\)/);
+  });
+
+  it.skipIf(!panel)('두 필터(로드·입력) 모두 새 판정을 쓴다', () => {
+    const hits = (panel || '').match(/matchTrialPhone\(u\.phone, keyword\)/g) || [];
+    expect(hits.length).toBe(2);
+  });
+
+  it.skipIf(!panel)('화면에는 앞의 0을 살려 보여준다', () => {
+    expect(panel).toMatch(/function formatTrialPhone/);
+    expect(panel).toMatch(/formatTrialPhone\(u\.phone\)/);
+    // 휴대폰(10자리, 1로 시작)만 복원한다 — 지역번호는 건드리지 않는다.
+    expect(panel).toMatch(/digits\.length === 10 && digits\.charAt\(0\) === '1'/);
+  });
+
+  it.skipIf(!panel)('GAS 와 같은 정규화 규칙을 쓴다 (뒤 10자리·국가번호)', () => {
+    expect(panel).toMatch(/digits\.slice\(-10\)/);
+    expect(panel).toMatch(/indexOf\('82'\) === 0/);
+  });
+});
