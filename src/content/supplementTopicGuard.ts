@@ -32,6 +32,18 @@ const BLOCK_MARKER = /(?=\[상위글\s*\d+)/;
 /** A block must share at least this many proper nouns with the base to count as on-topic. */
 const MIN_SHARED_TOKENS = 1;
 
+/*
+ * [2026-08-27] 보강은 원본의 몇 배까지만 쓴다.
+ *
+ * 황석정 실측: 원본 590자에 보강 6,544자가 붙어 원본이 8%가 됐다. 주제 필터를 통과한
+ * 블로그 안에도 잡다한 게 섞여 있었고(수집 원본 6,722 / 24,045 / 93,872자), 재료의
+ * 대부분이 블로그면 글의 주인이 바뀐다 — 2차전지 시황과 조선시대 품계가 본문에 실렸다.
+ *
+ * 보강 경고문은 처음부터 "원본이 주 근거, 보충은 배경/맥락용"이라 적고 있었다.
+ * 코드가 그 말을 강제하지 않았을 뿐이다.
+ */
+const MAX_SUPPLEMENT_RATIO = 3;
+
 /**
  * Search query for the supplement, derived from the headline.
  *
@@ -68,7 +80,10 @@ export interface SupplementFilterResult {
   /** Supplement text with off-topic blocks removed; empty when none survive. */
   readonly text: string;
   readonly kept: number;
+  /** Blocks dropped for being about something else. */
   readonly dropped: number;
+  /** Blocks dropped for exceeding the budget, after passing the topic check. */
+  readonly overflowDropped: number;
 }
 
 /**
@@ -85,16 +100,15 @@ export function filterOnTopicSupplement(
   try {
     const base = String(baseBody || '').trim();
     const supplement = String(supplementText || '').trim();
-    if (!supplement) return { text: '', kept: 0, dropped: 0 };
-    if (base.length < MIN_BASE_CHARS) {
-      return { text: supplement, kept: 1, dropped: 0 };
-    }
+    const asIs = (text: string) => ({ text, kept: 1, dropped: 0, overflowDropped: 0 });
+    if (!supplement) return { text: '', kept: 0, dropped: 0, overflowDropped: 0 };
+    if (base.length < MIN_BASE_CHARS) return asIs(supplement);
 
     const topic = extractKoreanFactTokens(base, 12);
-    if (topic.length === 0) return { text: supplement, kept: 1, dropped: 0 };
+    if (topic.length === 0) return asIs(supplement);
 
     const blocks = supplement.split(BLOCK_MARKER).map((b) => b.trim()).filter(Boolean);
-    if (blocks.length === 0) return { text: supplement, kept: 1, dropped: 0 };
+    if (blocks.length === 0) return asIs(supplement);
 
     const onTopic: string[] = [];
     let dropped = 0;
@@ -106,11 +120,35 @@ export function filterOnTopicSupplement(
 
     // 헤더만 남는 경우를 막는다 — 본문 블록이 하나도 없으면 보강 자체가 없는 것과 같다.
     const kept = onTopic.filter((b) => b.startsWith('[상위글')).length;
-    if (kept === 0 && dropped > 0) return { text: '', kept: 0, dropped };
+    if (kept === 0 && dropped > 0) return { text: '', kept: 0, dropped, overflowDropped: 0 };
 
-    return { text: onTopic.join('\n\n'), kept: onTopic.length, dropped };
+    /*
+     * 예산 안에서만 붙인다. 블록은 통째로만 자른다 — 중간에서 끊으면 문장이 잘린다.
+     * 첫 블록이 예산보다 커도 하나는 남긴다: 보강이 통째로 사라지면 원본이 얇다는
+     * 문제를 그대로 두는 셈이라, 주제가 맞는 자료 하나는 배경으로 쓸 값어치가 있다.
+     */
+    const budget = base.length * MAX_SUPPLEMENT_RATIO;
+    const within: string[] = [];
+    let used = 0;
+    let overflowDropped = 0;
+    for (const block of onTopic) {
+      if (within.length > 0 && used + block.length > budget) {
+        overflowDropped += 1;
+        continue;
+      }
+      within.push(block);
+      used += block.length;
+    }
+
+    return {
+      text: within.join('\n\n'),
+      // 실제 상위글 블록만 센다 — 머리말 조각이 건수에 섞이면 로그가 어긋난다.
+      kept: within.filter((b) => b.startsWith('[상위글')).length || within.length,
+      dropped,
+      overflowDropped,
+    };
   } catch {
     // 검사 실패로 보강을 잃지 않는다 — 원래 동작으로 돌아간다.
-    return { text: String(supplementText || ''), kept: 1, dropped: 0 };
+    return { text: String(supplementText || ''), kept: 1, dropped: 0, overflowDropped: 0 };
   }
 }

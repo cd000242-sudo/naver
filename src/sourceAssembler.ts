@@ -7393,6 +7393,13 @@ ${reviewSection}
         if (onTopic.dropped > 0) {
           console.warn(`[URL 심화보강] ⚠️ 주제가 다른 자료 ${onTopic.dropped}건 제외 (원본과 겹치는 고유명사 없음)`);
         }
+        if (onTopic.overflowDropped > 0) {
+          // 원본이 얇을수록 보강이 글의 주인이 된다. 배경 자료는 원본을 넘지 않는다.
+          console.warn(
+            `[URL 심화보강] ⚠️ 분량 초과 ${onTopic.overflowDropped}건 제외 `
+            + `(원본 ${baseBody.length}자 기준 보강 상한 초과)`,
+          );
+        }
         if (onTopic.text && onTopic.kept > 0) {
           baseBody = `${baseBody}\n\n--- 참고 자료 (관련 상위글 ${onTopic.kept}건) ---\n\n${onTopic.text}`;
           warnings.push(`✅ 원본이 빈약해 관련 상위글 ${onTopic.kept}건(${onTopic.text.length}자)을 보조 자료로 보강했습니다. (원본이 주 근거, 보충은 배경/맥락용)`);

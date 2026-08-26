@@ -125,3 +125,56 @@ describe('본선 배선', () => {
     expect(codeOnly).not.toMatch(/const supplementQuery = baseTitle \|\|/);
   });
 });
+
+/**
+ * [2026-08-27 사장님 실측 — 황석정 글] 2차전지 주식 시황과 조선시대 품계가 본문에 들어왔다.
+ *
+ *   원본 590자 (황석정 무덤 일화)
+ *   [URL 심화보강] ⚠️ 주제가 다른 자료 2건 제외   ← 주제 필터는 작동했다
+ *   [URL 심화보강] ✅ 3건 / 6544자 보강            ← 그런데 원본의 11배다
+ *   rawText 6,334자
+ *
+ * 주제 필터를 통과한 블로그 안에도 잡다한 게 섞여 있었다(수집된 블로그 원본은 각각
+ * 6,722자 / 24,045자 / 93,872자). 원본이 8%뿐이면 글의 주인은 이미 블로그다.
+ *
+ * 보강 경고문은 처음부터 이렇게 적고 있었다 — "원본이 주 근거, 보충은 배경/맥락용".
+ * 코드가 그 말을 강제하지 않았을 뿐이다.
+ */
+describe('보강은 원본을 넘어설 수 없다', () => {
+  const BASE = '황석정이 무덤 없는 땅을 샀는데 비석이 나왔다고 말했다. '.repeat(12); // 약 600자
+
+  const block = (n: number, body: string) => `[상위글 ${n} — 황석정]\n황석정 ${body}`;
+
+  it('원본의 몇 배를 넘으면 뒤쪽 블록을 버린다', () => {
+    const huge = [1, 2, 3, 4, 5].map((n) => block(n, '무덤 이야기가 이어졌다. '.repeat(60))).join('\n\n');
+    const r = filterOnTopicSupplement(BASE, huge);
+    expect(r.text.length).toBeLessThanOrEqual(BASE.length * 3 + 200);
+    expect(r.overflowDropped).toBeGreaterThan(0);
+  });
+
+  it('블록을 통째로만 자른다 — 문장이 끊기지 않는다', () => {
+    const huge = [1, 2, 3, 4, 5].map((n) => block(n, '무덤 이야기가 이어졌다. '.repeat(60))).join('\n\n');
+    const r = filterOnTopicSupplement(BASE, huge);
+    for (const part of r.text.split('\n\n')) {
+      if (part.trim()) expect(part.trim().startsWith('[상위글')).toBe(true);
+    }
+  });
+
+  it('예산 안이면 그대로 둔다', () => {
+    const small = block(1, '무덤 이야기가 짧게 이어졌다.');
+    const r = filterOnTopicSupplement(BASE, small);
+    expect(r.overflowDropped).toBe(0);
+    expect(r.text).toContain('무덤 이야기가 짧게');
+  });
+
+  it('첫 블록이 예산보다 커도 하나는 남긴다 — 보강이 통째로 사라지지 않게', () => {
+    const oneHuge = block(1, '무덤 이야기가 이어졌다. '.repeat(300));
+    const r = filterOnTopicSupplement(BASE, oneHuge);
+    expect(r.kept).toBe(1);
+  });
+
+  it('유지 건수는 실제 상위글 블록만 센다', () => {
+    const two = `${block(1, '무덤 이야기.')}\n\n${block(2, '비석 이야기.')}`;
+    expect(filterOnTopicSupplement(BASE, two).kept).toBe(2);
+  });
+});
