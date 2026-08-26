@@ -1,6 +1,7 @@
 import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from './naver/index.js';
 import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
 import { orderFullTextCandidates } from './content/fullTextCandidateOrder.js';
+import { auditSourceMaterial, classifySourceKind } from './content/sourceMaterialAudit.js';
 import { buildSupplementQuery, filterOnTopicSupplement, isOnTopicForKeyword } from './content/supplementTopicGuard.js';
 import Parser from 'rss-parser';
 import * as iconv from 'iconv-lite';
@@ -1739,6 +1740,27 @@ export async function collectTopArticleFullTexts(
       logger(`[플랫폼 콘텐츠 수집] 🕐 1년 넘은 자료 ${staleParts}건 — 시점 경고를 붙였습니다 (작년 조건이 그대로 실리지 않도록)`);
     }
     logger(`[플랫폼 콘텐츠 수집] 📚 상위글 풀텍스트 ${parts.length}건 확보 (${totalChars.toLocaleString()}자)`);
+
+    /*
+     * [2026-08-27 사장님 지시] "실시간 검색어가 떴다는 건 기사가 떴다는 소리이니까."
+     *
+     * 이슈 키워드로 검색했는데 기사를 하나도 못 긁었다면, 블로그 요약만으로 글을 쓰게 된다.
+     * "서은광 애교 자판기" 글이 그랬다 — 풀텍스트 4건이 전부 블로그였고 키 172cm·
+     * 발사이즈 250mm·차트 1위가 확정 사실처럼 실렸다. 원 기사로 확인된 건 하나도 없다.
+     *
+     * 막지 않고 알리기만 한다. 판단은 사장님 몫이다.
+     */
+    const newsCount = usedUrls.filter((u) => classifySourceKind(u) === 'news').length;
+    const audit = auditSourceMaterial({
+      newsCount,
+      blogCount: usedUrls.length - newsCount,
+      totalChars,
+    });
+    if (audit.message) {
+      logger(`[자료 점검] ${audit.level === 'severe' ? '⛔' : '⚠️'} ${audit.message}`);
+    } else {
+      logger(`[자료 점검] ✅ 기사 ${newsCount}건이 근거를 받칩니다`);
+    }
     return {
       text: `=== 상위 노출 글 본문 발췌 (사실 자료 — 수치·조건·절차는 이 자료 범위에서 사용) ===\n${parts.join('\n\n')}`,
       count: parts.length,
