@@ -211,10 +211,14 @@ describe('Business 모드 — 최종 강제 조건', () => {
     expect(prompt).toContain('이제 위 모든 정보를 종합하여 즉시 JSON으로 출력하라');
   });
 
-  it('글자수 지침 포함 (minChars 전달 시)', () => {
+  // [2026-08-26] 예전에는 프롬프트에 목표 글자수(1800자)가 박히는지를 단언했다.
+  // 분량 계약이 "채워야 할 글자수는 없다"(seo R0-5)로 통일되면서, 숫자가 박히는 것이
+  // 오히려 계약 위반이다. 지시가 들어가는지가 아니라 어떤 지시인지를 본다.
+  it('분량 지침은 목표 글자수가 아니라 답의 완결로 표현된다', () => {
     const source = makeSource({ businessInfo: REGIONAL_INFO });
     const prompt = buildModeBasedPrompt(source, 'business', undefined, 1800);
-    expect(prompt).toContain('1800자');
+    expect(prompt).not.toContain('목표 글자수: 1800자');
+    expect(prompt).toContain('분량은 목표가 아니라 결과다');
   });
 });
 
