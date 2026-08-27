@@ -1,15 +1,30 @@
 {
-  "_comment": "다운로드 기본 카탈로그. 관리자(GAS site-content)가 비워 두거나 잘못 넣었을 때 실제로 서빙되는 최종 안전망이다. scripts/status/probe-purchase.mjs 가 이 파일을 그대로 읽어 링크 생존을 검사하므로, 여기와 화면이 갈라지면 검사도 같이 헛돈다. 새 버전을 낼 때 여기만 고치면 화면과 하네스가 함께 따라온다.",
+  "_comment": "다운로드 기본 카탈로그. 관리자(GAS site-content)가 비워 두거나 잘못 넣었을 때 실제로 서빙되는 최종 안전망이다. scripts/status/probe-purchase.mjs 가 이 파일을 그대로 읽어 링크 생존을 검사하므로, 여기와 화면이 갈라지면 검사도 같이 헛돈다. 새 버전을 낼 때 여기만 고치면 화면과 하네스가 함께 따라온다. [2026-08-27] 폴백에 버전을 박아 두면 릴리즈 정리 때 404 가 된다 — 실제로 v2.11.195/v2.11.67 이 그렇게 죽었다. 윈도우만 현재 버전을 적고, 맥은 릴리즈 페이지로 보낸다.",
   "naver": {
     "name": "Better Life Naver",
-    "version": "네이버 블로그 자동화 · v2.11.195",
+    "version": "네이버 블로그 자동화 · v2.11.215",
     "image": "/images/feature-auto-publish.png",
     "accent": "#FFD700",
     "borderColor": "rgba(255,215,0,0.25)",
     "downloads": [
-      { "key": "windows", "label": "Windows", "detail": "2.11.195 · exe", "url": "https://github.com/cd000242-sudo/naver/releases/download/v2.11.195/Better-Life-Naver-Setup-2.11.195.exe" },
-      { "key": "mac-arm", "label": "Mac M1-M4", "detail": "2.11.67 · arm64 dmg", "url": "https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-2.11.67-arm64.dmg" },
-      { "key": "mac-intel", "label": "Mac Intel", "detail": "2.11.67 · x64 dmg", "url": "https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-2.11.67-x64.dmg" }
+      {
+        "key": "windows",
+        "label": "Windows",
+        "detail": "2.11.215 · exe",
+        "url": "https://github.com/cd000242-sudo/naver/releases/download/v2.11.215/Better-Life-Naver-Setup-2.11.215.exe"
+      },
+      {
+        "key": "mac-arm",
+        "label": "Mac M1-M4",
+        "detail": "릴리즈 페이지에서 확인",
+        "url": "https://github.com/cd000242-sudo/naver/releases/latest"
+      },
+      {
+        "key": "mac-intel",
+        "label": "Mac Intel",
+        "detail": "릴리즈 페이지에서 확인",
+        "url": "https://github.com/cd000242-sudo/naver/releases/latest"
+      }
     ]
   },
   "leword": {
@@ -19,10 +34,30 @@
     "accent": "#A78BFA",
     "borderColor": "rgba(124,58,237,0.25)",
     "downloads": [
-      { "key": "windows", "label": "Windows", "detail": "2.49.86 · exe", "url": "https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86.exe" },
-      { "key": "android", "label": "Android APK", "detail": "2.49.86 · apk", "url": "https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-mobile-0.1.0.apk" },
-      { "key": "mac-arm", "label": "Mac M1-M4", "detail": "2.49.86 · arm64 dmg", "url": "https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86-arm64.dmg" },
-      { "key": "mac-intel", "label": "Mac Intel", "detail": "2.49.86 · x64 dmg", "url": "https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86-x64.dmg" }
+      {
+        "key": "windows",
+        "label": "Windows",
+        "detail": "2.49.86 · exe",
+        "url": "https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86.exe"
+      },
+      {
+        "key": "android",
+        "label": "Android APK",
+        "detail": "2.49.86 · apk",
+        "url": "https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-mobile-0.1.0.apk"
+      },
+      {
+        "key": "mac-arm",
+        "label": "Mac M1-M4",
+        "detail": "2.49.86 · arm64 dmg",
+        "url": "https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86-arm64.dmg"
+      },
+      {
+        "key": "mac-intel",
+        "label": "Mac Intel",
+        "detail": "2.49.86 · x64 dmg",
+        "url": "https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86-x64.dmg"
+      }
     ]
   },
   "orbit": {
@@ -32,9 +67,24 @@
     "accent": "#44d7b6",
     "borderColor": "rgba(68,215,182,0.28)",
     "downloads": [
-      { "key": "windows", "label": "Windows", "detail": "3.8.231 · exe", "url": "https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231.exe" },
-      { "key": "mac-arm", "label": "Mac M1-M4", "detail": "3.8.231 · arm64 dmg", "url": "https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231-arm64.dmg" },
-      { "key": "mac-intel", "label": "Mac Intel", "detail": "3.8.231 · x64 dmg", "url": "https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231-x64.dmg" }
+      {
+        "key": "windows",
+        "label": "Windows",
+        "detail": "3.8.231 · exe",
+        "url": "https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231.exe"
+      },
+      {
+        "key": "mac-arm",
+        "label": "Mac M1-M4",
+        "detail": "3.8.231 · arm64 dmg",
+        "url": "https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231-arm64.dmg"
+      },
+      {
+        "key": "mac-intel",
+        "label": "Mac Intel",
+        "detail": "3.8.231 · x64 dmg",
+        "url": "https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231-x64.dmg"
+      }
     ]
   }
 }
