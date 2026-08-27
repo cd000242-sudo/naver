@@ -2,6 +2,10 @@ import { normalizeKeywordBriefing, type HomeKeywordBriefing } from './homeKeywor
 import { maskContactText } from './privacy';
 
 export const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
+// 읽기 전용 공개 데이터·방문로그는 엣지 방패(Cloudflare Worker)를 거친다.
+// 캐시 적중 시 0.5초(GAS 직행은 2~5초, 스파이크 때 그 이상 — 2026-08-27 실측 51초/0.5초).
+// 쓰기·라이선스·결제는 GAS_URL 직행 — 엣지는 그 액션들을 403 으로 거절한다.
+export const EDGE_URL = 'https://leaderspro-edge.leword.workers.dev';
 
 export type SiteContent = {
     /** 무료 챗봇 페이지 4타일 (2026-08-19) — 어드민 '사이트 콘텐츠 관리'에서 수정.
@@ -250,7 +254,7 @@ export async function fetchSiteContent(): Promise<SiteContent | null> {
     const staleCache = readCachedSiteContent(0);
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), SITE_CONTENT_FETCH_TIMEOUT_MS);
-    siteContentPromise = fetch(`${GAS_URL}?action=site-content`, { cache: 'default', signal: controller.signal })
+    siteContentPromise = fetch(`${EDGE_URL}?action=site-content`, { cache: 'default', signal: controller.signal })
         .then((res) => res.json())
         .then((data) => {
             if (data && (data.ok || data.success) && data.content) {
@@ -382,7 +386,7 @@ async function fetchLegacyHomeNotices(limit: number): Promise<HomeNotice[] | nul
     const timeout = window.setTimeout(() => controller.abort(), HOME_NOTICE_TIMEOUT_MS);
     homeNoticeRequest = (async () => {
     try {
-        const response = await fetch(`${GAS_URL}?action=get-notices`, { cache: 'no-store', signal: controller.signal });
+        const response = await fetch(`${EDGE_URL}?action=get-notices`, { cache: 'no-store', signal: controller.signal });
         if (!response.ok) return null;
         const payload = await response.json() as { success?: boolean; ok?: boolean; notices?: unknown[] };
         if (!payload || (!payload.success && !payload.ok) || !Array.isArray(payload.notices)) return null;
@@ -914,7 +918,7 @@ export function recordPageView(path: string) {
                     userAgent: navigator.userAgent,
                     timestamp: new Date().toISOString(),
                 };
-                fetch(GAS_URL, {
+                fetch(EDGE_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload),

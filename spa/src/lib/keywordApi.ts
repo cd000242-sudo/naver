@@ -21,7 +21,14 @@ const ENDPOINT = GAS_URL;
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
 const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs']);
-const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
+/**
+ * 장부(쿼터)가 필요해 GAS 에 남은 키워드 액션들은 엣지 방패(leaderspro-edge)를
+ * 거친다 — 같은 질문은 15분 캐시로 즉답(0.5초), 처음 질문만 GAS 로 간다(장부도
+ * 그때 기록된다). 목록에 없는 액션은 종전대로 GAS 직행이라 위험이 없다.
+ */
+const EDGE_ENDPOINT = 'https://leaderspro-edge.leword.workers.dev';
+const EDGE_ACTIONS = new Set(['keyword-analyze', 'keyword-rank', 'keyword-shopping', 'keyword-youtube', 'keyword-coupang']);
+const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : EDGE_ACTIONS.has(action) ? EDGE_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
 const TIMEOUT_MS = 25000;

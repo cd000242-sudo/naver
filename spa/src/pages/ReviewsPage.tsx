@@ -14,6 +14,7 @@ import {
  */
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
+const EDGE_URL = 'https://leaderspro-edge.leword.workers.dev'; // 읽기 전용 캐시 방패 (siteOps 참고)
 const REVIEWS_CACHE_KEY = 'leaderspro_reviews_cache_v2';
 const REVIEWS_TIMEOUT_MS = 4500;
 const MAX_MEDIA_BYTES = 18 * 1024 * 1024;
@@ -193,7 +194,8 @@ function ReviewsPage() {
 
         (async () => {
             try {
-                const res = await fetch(`${GAS_URL}?action=get-reviews`, { cache: 'no-store', signal: controller.signal });
+                // 읽기는 엣지 캐시 방패로 — 캐시 적중 0.5초 (siteOps 의 EDGE_URL 설명 참고)
+                const res = await fetch(`${EDGE_URL}?action=get-reviews`, { cache: 'no-store', signal: controller.signal });
                 const data = await res.json();
                 const list = Array.isArray(data?.reviews) ? data.reviews : [];
                 const normalized = list.map(normalizeReview).filter(Boolean) as Testimonial[];

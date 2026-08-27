@@ -192,8 +192,12 @@ async function readBoundedCommunityResponse(res: Response): Promise<unknown> {
     }
 }
 
+const EDGE_URL = 'https://leaderspro-edge.leword.workers.dev'; // 읽기 전용 캐시 방패 (siteOps 참고)
+const EDGE_READS = new Set(['get-notices', 'get-tips', 'income-list']);
+
 async function fetchCommunityAction(action: string, signal: AbortSignal): Promise<any> {
-    const res = await fetch(`${GAS_URL}?action=${action}`, { cache: 'no-store', signal });
+    const base = EDGE_READS.has(action) ? EDGE_URL : GAS_URL;
+    const res = await fetch(`${base}?action=${action}`, { cache: 'no-store', signal });
     if (!res.ok) throw new Error('community request failed');
     return readBoundedCommunityResponse(res);
 }
