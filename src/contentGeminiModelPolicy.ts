@@ -16,7 +16,8 @@ export interface GeminiModelChain {
 }
 
 export function buildGeminiModelChain(config?: GeminiModelChainConfig): GeminiModelChain {
-  const defaultModel = GEMINI_TEXT_MODELS.FLASH_LITE;
+  // [2026-08-28] 기본 3.1 Flash-Lite → 3.6 Flash (gemini.ts DEFAULT_MODEL 과 동일 이유).
+  const defaultModel = GEMINI_TEXT_MODELS.FLASH;
 
   let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || defaultModel;
   if (!primaryModel.startsWith('gemini-')) {

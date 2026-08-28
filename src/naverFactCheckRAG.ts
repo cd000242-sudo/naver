@@ -14,6 +14,7 @@
  */
 
 import { searchBlog, searchNews, searchKin, searchWebDoc, type BlogItem, type NewsItem, type KinItem, type WebDocItem } from './naverSearchApi.js';
+import { resolveFactSourceMix } from './content/factSourceTierPolicy.js';
 
 export interface FactCheckSourceOptions {
   /** 블로그 검색 결과 N개 (기본 5) */
@@ -167,7 +168,16 @@ export async function collectFactCheckSourceFromNaver(
 export async function fetchFactCheckRawText(keyword: string): Promise<string> {
   if (!keyword || !keyword.trim()) return '';
   try {
-    const result = await collectFactCheckSourceFromNaver(keyword.trim());
+    // [2026-08-28] 근거 구성을 주제에 맞춘다. 공공정보(지원금·공고)는 블로그·지식iN을
+    //   근거로 삼으면 안 된다 — 틀린 정보가 퍼져 있으면 "확인됨"으로 통과해 버린다.
+    //   네이버 검색 API는 일 25,000건 무료라 뉴스를 늘려도 추가 과금이 없다.
+    const mix = resolveFactSourceMix({ keyword: keyword.trim() });
+    console.log(`[NaverFactCheckRAG] 📚 근거 구성: ${mix.reason}`);
+    const result = await collectFactCheckSourceFromNaver(keyword.trim(), {
+      blogCount: mix.blogCount,
+      newsCount: mix.newsCount,
+      kinCount: mix.kinCount,
+    });
     if (result.totalChars < 100) {
       console.warn(`[NaverFactCheckRAG] ⚠️ 자료 너무 적음 (${result.totalChars}자) — LLM 환각 위험. keyword="${keyword}"`);
       return '';
@@ -219,7 +229,16 @@ export async function validateFactCheckSource(
     return { passed: false, reason: '키워드 비어있음', rawText: '', totalChars: 0, keywordCoverage: 0 };
   }
 
-  const result = await collectFactCheckSourceFromNaver(keyword.trim());
+  // [2026-08-28] 이 경로가 **글을 쓰는 재료**를 정한다(사후 대조가 아니라 사전 수집).
+  //   그래서 근거 구성 정책을 여기에도 건다 — 공공정보 글이 블로그 요약을 재료로
+  //   쓰기 시작하면 뒤에서 어떤 검증을 붙여도 늦다.
+  const mix = resolveFactSourceMix({ keyword: keyword.trim() });
+  console.log(`[NaverFactCheckRAG] 📚 재료 구성: ${mix.reason}`);
+  const result = await collectFactCheckSourceFromNaver(keyword.trim(), {
+    blogCount: mix.blogCount,
+    newsCount: mix.newsCount,
+    kinCount: mix.kinCount,
+  });
 
   if (result.totalChars < minChars) {
     return {

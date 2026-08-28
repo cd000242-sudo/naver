@@ -56,6 +56,8 @@ import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoO
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
+import { isFactDisciplineGuardEnabled, appendFactDisciplineGuard } from './content/factDisciplineGuard.js';
+import { appendPublicInfoFactTable, shouldRequireFactTable } from './content/publicInfoFactTable.js';
 import {
   assessQuality90Gate,
   isQuality90Mode,
@@ -176,6 +178,9 @@ import {
 } from './contentErrorDiagnostics.js';
 import { getAutoToneByCategory } from './contentTonePolicy.js';
 import { sanitizeStructuredContentClaims } from './contentClaimSanitizer.js';
+import { normalizeContentTableBlocks } from './content/tableBlockNormalizer.js';
+import { applyPostDraftFactCheck } from './content/postDraftFactCheck.js';
+import { checkTitleAnswer, describeTitleAnswer } from './content/titleAnswerCheck.js';
 import {
   detectDuplicateContent,
   removeRepeatedFullContent,
@@ -189,6 +194,7 @@ import { resolveTitleLengthRange } from './content/titleLengthPolicy.js';
 import { buildTitleDiagnosticsLines } from './content/titleDiagnostics.js';
 import { describePublicReactionClaims, findUngroundedReactionClaims } from './content/publicReactionClaim.js';
 import { describeUngroundedNumbers, findUngroundedNumbers } from './content/numericGroundingCheck.js';
+import { buildFactVerificationReport } from './content/factVerificationReport.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
 import {
   applyManualTitleOverride,
@@ -433,6 +439,37 @@ export class ZeroPriceArtifactError extends Error {
  * 상환 구간은 도입부 + 첫 소제목 본문이다 — 첫 화면에서 못 받으면 독자는 떠난다.
  * 경고만 남기고 발행은 그대로 간다(사장님: 발행 차단 게이트 추가 금지).
  */
+/**
+ * [2026-08-28] 제목이 꺼낸 말을 본문이 답했는가.
+ *
+ * logTitlePayoff 는 설계상 **도입부만** 본다. 그래서 제목을 도입부에서
+ * 그대로 되눐면 상환율 100% 가 나온다. 실측(gemini-3.1-flash-lite, 513자)에서
+ * "해외 남성 아티스트 최초 기록"을 도입부만 복창하고 본문은 공연 일정만
+ * 다뤄는데도 100% 가 찍혔다. 그 간극을 메운다. 경고 전용.
+ *
+ * 주: 기존 logTitlePayoff 는 h.heading 을 읽는데 실제 필드는 h.title 이라
+ * 소제목이 payoffZone 에 들어가지 않는다(기존 결함). 여기선 h.title 을 쓴다.
+ */
+function logTitleAnswer(content: any, source: any): void {
+  try {
+    const headings = Array.isArray(content?.headings) ? content.headings : [];
+    const result = checkTitleAnswer({
+      title: content?.selectedTitle || content?.title || '',
+      primaryKeyword: source?.keywords?.[0] || '',
+      introduction: String(content?.introduction || ''),
+      body: [
+        ...headings.map((h: any) => `${h?.title || ''}\n${h?.content || ''}`),
+        content?.conclusion,
+      ].filter(Boolean).join('\n'),
+    });
+    const line = describeTitleAnswer(result);
+    if (line) console.log(line);
+    if (result.checked) (content as any).__titleAnswer = result;
+  } catch (err) {
+    console.log('[TitleAnswer] 검사 생략:', err instanceof Error ? err.message : err);
+  }
+}
+
 function logTitlePayoff(content: any, source: any): void {
   try {
     const firstSection = Array.isArray(content?.headings) ? content.headings[0] : null;
@@ -502,6 +539,22 @@ function logPublicReactionClaims(content: any, source: any): void {
     const ungrounded = findUngroundedNumbers(body, source?.rawText);
     const numberMessage = describeUngroundedNumbers(ungrounded);
     if (numberMessage) console.warn(`[NumberCheck] ⚠️ ${numberMessage}`);
+
+    /*
+     * [2026-08-28] 집필 후 검증 패스. 외부 LLM 팩트체크 규칙의 12항은 본문 끝에
+     * 검증 푸터를 붙이라고 하지만, 근거 메타 서술의 본문 노출은 라이브 실측에서
+     * 이탈을 만들었다(evidenceIntegrity.buildEvidenceMetaLeakRule). 같은 정보를
+     * 로그·리포트로만 낸다. 본문은 건드리지 않고 발행도 막지 않는다.
+     */
+    const factReport = buildFactVerificationReport(body, source?.rawText);
+    if (factReport.checked) {
+      (content as any).__factVerification = factReport;
+      const level = factReport.issues.length > 0 ? console.warn : console.log;
+      level(`[FactVerify] ${factReport.issues.length > 0 ? '⚠️' : '✅'} ${factReport.summaryLine}`);
+      for (const issue of factReport.issues) {
+        console.warn(`[FactVerify]   · ${issue.kind}: ${issue.examples.join(', ')}`);
+      }
+    }
   } catch (err) {
     console.log('[ReactionClaim] 검사 생략:', err instanceof Error ? err.message : err);
   }
@@ -516,6 +569,7 @@ function runPostGenValidator(content: any, source: any): void {
   //   가릴 근거가 로그에 없었다. 채점 축을 만들기 전에 이걸 먼저 본다.
   for (const line of buildTitleDiagnosticsLines(content)) console.log(line);
   logTitlePayoff(content, source);
+  logTitleAnswer(content, source);
   logPublicReactionClaims(content, source);
   if (!isFeatureEnabled('validator')) return;
   let result: any;
@@ -1202,6 +1256,9 @@ export function finalizeStructuredContent(
     shouldRunLegacySemanticPostDraftMutation(promptVariant, 'apply-ordinal-heading-marker-fix');
   let finalContent = removeEmojisFromContent(content);
   finalContent = removeInternalStructureMarkersFromContent(finalContent);
+  // [2026-08-28] 표 마지막 행에 다음 문단이 붙어 나오는 실측 결함을 떼어 놓는다.
+  //   표는 리치 복붙으로 그대로 올라가므로 경계가 깨지면 발행물이 깨진다.
+  finalContent = normalizeContentTableBlocks(finalContent);
 
   // ✅ [Phase 7] Source Fidelity 측정 — URL 입력 시 LLM 압축·정보 누락 감지
   // 사용자 진단: "url 넣어서 발행하면 내용들이 많이 압축되고 중요한 내용도 빠짐"
@@ -2513,6 +2570,31 @@ export function buildModeBasedPrompt(
   if (contentMode !== 'affiliate' && isGeneralContentGuardEnabled() && !hasGroundingSource(source)) {
     systemPromptResult += `\n\n${buildGeneralContentGuardBlock()}`;
     console.log(`[PromptBuilder] 🔒 범용 근거부재 가드 적용 — ungrounded, mode=${contentMode}`);
+  }
+
+  // ✅ [2026-08-28] 전 주제 공통 팩트 규율 — 자료를 잘못 조립하는 다섯 경로 차단.
+  //   기존 HARD_CONSTRAINT/generalGuard가 "자료에 없는 사실"을 막는다면, 이 블록은
+  //   자료에 있는 재료를 섞어 만드는 오류(지역 혼합·한정어 승격·용어 치환·상대 날짜·
+  //   추정 창작)를 막는다. 둘은 검출 지점이 달라 중복이 아니다.
+  try {
+    const disciplineOn = isFactDisciplineGuardEnabled(getConfigSync() as Record<string, unknown>);
+    if (disciplineOn) {
+      systemPromptResult = appendFactDisciplineGuard(systemPromptResult, true);
+      console.log(`[PromptBuilder] 📐 팩트 규율 블록 적용 — mode=${contentMode}`);
+    }
+  } catch (e) {
+    console.warn('[PromptBuilder] 팩트 규율 블록 처리 중 예외 — 미적용:', e);
+  }
+
+  // ✅ [2026-08-28] 공공정보(지원금·수당·공고) 글은 집필 전 사실표를 채우게 한다.
+  //   제목/키워드에 신호가 있고 대조할 자료(rawText ≥ 300자)가 있을 때만 주입.
+  try {
+    if (shouldRequireFactTable(source as any)) {
+      systemPromptResult = appendPublicInfoFactTable(systemPromptResult, source as any);
+      console.log(`[PromptBuilder] 🧾 공공정보 사실표 요구 적용 — mode=${contentMode}`);
+    }
+  } catch (e) {
+    console.warn('[PromptBuilder] 공공정보 사실표 처리 중 예외 — 미적용:', e);
   }
 
   // ✅ [SPEC-DEFAMATION-2026 P0] 실존인물(연예/스포츠/homefeed) 미확인 단정 억제 — 허위조작정보법(7·7) 대응.
@@ -6972,44 +7054,10 @@ async function generateStructuredContentInternal(
 
         // ✅ [v2.11.134] 팩트체크 엔진 드롭다운 + 자동 폴백 라우터.
         //   auto: 크롤링 자료 대조 → (자료 빈약 시) 네이버 API → (키 있으면) Perplexity.
-        //   그라운딩 등 고비용 엔진은 사용자가 명시 선택했을 때만 실행.
-        //   기존 usePerplexityFactCheck 체크박스는 'perplexity' 선택으로 자동 마이그레이션.
+        //   [2026-08-28] 호출부를 content/postDraftFactCheck 로 뽑았다 — 분량 미달 분기에서도
+        //   같은 검사를 돌려야 하기 때문이다(그 분기가 팩트체크를 통째로 건너뛰고 있었다).
         if (allowLegacyPostDraftLlm) {
-          try {
-            const _config = await loadConfig().catch(() => null);
-            const { resolveFactCheckEngine, runFactCheck } = await import('./factCheckRouter.js');
-            const _fcEngine = resolveFactCheckEngine(_config as Record<string, unknown> | null);
-            if (_fcEngine !== 'off' && optimized.bodyPlain) {
-              const _topic = String((source as any).title || (source as any).keyword || (source as any).primaryKeyword || '').slice(0, 100);
-              const outcome = await runFactCheck(_fcEngine, {
-                bodyPlain: optimized.bodyPlain,
-                topic: _topic,
-                keyword: String((source as any).keyword || (source as any).primaryKeyword || '').slice(0, 60) || undefined,
-                rawText: String((source as any).rawText || (source as any).factCheckRawSource || ''),
-                config: _config as Record<string, unknown> | null,
-              });
-              for (const note of outcome.notes) {
-                console.log(`[FactCheck] ℹ️ ${note}`);
-              }
-              if (outcome.suspicious.length > 0) {
-                optimized.bodyPlain = outcome.corrected;
-                // bodyHtml에도 동일 치환 (간단 string replace — exact match)
-                if (optimized.bodyHtml) {
-                  for (const item of outcome.suspicious) {
-                    if (optimized.bodyHtml.includes(item.original)) {
-                      optimized.bodyHtml = optimized.bodyHtml.replace(item.original, item.replacement);
-                    }
-                  }
-                }
-                console.log(`[ContentGenerator] 🔎 팩트체크(${outcome.engineUsed}): ${outcome.suspicious.length}개 의심 문장 교정`);
-              } else {
-                console.log(`[ContentGenerator] 🔎 팩트체크(${outcome.engineUsed}): 의심 문장 없음`);
-              }
-            }
-          } catch (factCheckErr: any) {
-            // 팩트 검증 실패는 글 생성 자체 실패가 아니므로 swallow + warn
-            console.warn('[ContentGenerator] 팩트체크 실패 (글은 그대로 사용):', factCheckErr?.message || factCheckErr);
-          }
+          await applyPostDraftFactCheck(optimized as any, source as any, () => loadConfig() as any);
         }
 
         // quality에 AI 탐지 정보 추가
@@ -7677,6 +7725,14 @@ async function generateStructuredContentInternal(
           } catch (error) {
             console.warn('[ContentGenerator] 통계 파일 저장 실패:', (error as Error).message);
           }
+        }
+
+        // [2026-08-28] 분량이 모자란 글이야말로 팩트체크가 필요하다.
+        //   짧은 초안은 모델이 재료를 제대로 못 쓴 결과라 할루시네이션 위험이 더 크다.
+        //   이전에는 이 분기가 후처리를 통째로 건너뛰어, Gemini 같이 짧게 쓰는 엔진은
+        //   팩트체크를 한 번도 받지 못했다(실측 2026-08-28).
+        if (allowLegacyPostDraftLlm) {
+          await applyPostDraftFactCheck(optimized as any, source as any, () => loadConfig() as any);
         }
 
         return finalizeStructuredContent(optimized, source, promptVariant);

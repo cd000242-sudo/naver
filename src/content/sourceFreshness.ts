@@ -33,6 +33,30 @@ export function parseNaverPostDate(postdate: unknown): string {
   return `${raw.slice(0, 4)}-${raw.slice(4, 6)}-${raw.slice(6, 8)}`;
 }
 
+/**
+ * 뉴스 검색 API 의 pubDate(RFC 822, "Mon, 23 Jun 2026 09:00:00 +0900")를 ISO 날짜로.
+ *
+ * [2026-08-28] 블로그의 postdate 만 읽고 뉴스의 pubDate 는 버리고 있었다. 그래서
+ * 뉴스 재료에 시점이 없었고, 모델은 기사 속 "오는 29일"이 몇 월인지 알 수 없었다.
+ * 실측(스트레이 키즈 키워드)에서 월 없는 날짜 5건이 그대로 본문에 실렸다.
+ */
+export function parseNaverPubDate(pubDate: unknown): string {
+  const raw = String(pubDate ?? '').trim();
+  if (!raw) return '';
+  const parsed = new Date(raw);
+  if (Number.isNaN(parsed.getTime())) return '';
+  const year = parsed.getUTCFullYear();
+  if (year < 1990 || year > 2200) return '';
+  const month = String(parsed.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(parsed.getUTCDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+/** postdate(YYYYMMDD) 든 pubDate(RFC 822) 든 있는 쪽을 쓴다. */
+export function resolveSourceDate(item: { postdate?: unknown; pubDate?: unknown }): string {
+  return parseNaverPostDate(item?.postdate) || parseNaverPubDate(item?.pubDate);
+}
+
 /** 두 시점 사이 개월 수 (미래면 0) */
 export function monthsBetween(isoDate: string, now: Date = new Date()): number {
   const then = new Date(`${isoDate}T00:00:00Z`);

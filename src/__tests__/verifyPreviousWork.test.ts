@@ -154,16 +154,17 @@ describe('v1.4.13 — 발행 타임아웃 25분', () => {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 describe('Gemini 모델 체인 (자동 폴백 제거, v1.4.42+)', () => {
-  it('config 없을 때 기본 모델은 무료/선불 가성비 Flash-Lite', () => {
+  // [2026-08-28] 기본 3.1 Flash-Lite → 3.6 Flash (실측: Lite 는 849자·제목응답 20%).
+  it('config 없을 때 기본 모델은 3.6 Flash', () => {
     const { primaryModel, isPro } = buildGeminiModelChain();
-    expect(primaryModel).toBe('gemini-3.1-flash-lite');
+    expect(primaryModel).toBe('gemini-3.6-flash');
     expect(isPro).toBe(false);
   });
 
   it('v1.4.42 — 자동 폴백 제거: uniqueModels는 1개(사용자 선택)만 반환', () => {
     const { uniqueModels } = buildGeminiModelChain();
     expect(uniqueModels).toHaveLength(1);
-    expect(uniqueModels[0]).toBe('gemini-3.1-flash-lite');
+    expect(uniqueModels[0]).toBe('gemini-3.6-flash');
   });
 
   it('Pro 저장값은 선불 호환 Flash 한 개로 영구 이관', () => {
@@ -185,9 +186,9 @@ describe('Gemini 모델 체인 (자동 폴백 제거, v1.4.42+)', () => {
     expect(uniqueModels[0]).toBe('gemini-3.1-flash-lite');
   });
 
-  it('legacy paid 라벨도 신규 기본은 Flash-Lite', () => {
+  it('legacy paid 라벨도 신규 기본은 3.6 Flash', () => {
     const { primaryModel, isPro } = buildGeminiModelChain({ geminiPlanType: 'paid' });
-    expect(primaryModel).toBe('gemini-3.1-flash-lite');
+    expect(primaryModel).toBe('gemini-3.6-flash');
     expect(isPro).toBe(false);
   });
 });

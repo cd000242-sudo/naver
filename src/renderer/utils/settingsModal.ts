@@ -309,7 +309,7 @@ async function loadCurrentSettings(): Promise<void> {
     try {
         const api = (window as any).api;
         const loadedConfig = await api.getConfig();
-        const rawLoadedTextModel = loadedConfig.primaryGeminiTextModel || 'gemini-3.1-flash-lite';
+        const rawLoadedTextModel = loadedConfig.primaryGeminiTextModel || 'gemini-3.6-flash';
         const normalizedLoadedConfig = String(rawLoadedTextModel).startsWith('gemini-')
             ? { ...loadedConfig, primaryGeminiTextModel: normalizeGeminiTextModelId(rawLoadedTextModel) }
             : loadedConfig;
@@ -463,7 +463,7 @@ async function saveSettings(): Promise<void> {
             naverHubClientSecret: naverHubClientSecret,
             primaryGeminiTextModel: safeTextSelection.model,
             defaultAiProvider: safeTextSelection.provider,
-            geminiModel: els.geminiModelSelect?.value || 'gemini-3.1-flash-lite',
+            geminiModel: els.geminiModelSelect?.value || 'gemini-3.6-flash',
             perplexityModel: els.perplexityModelSelect?.value || 'sonar',
         };
 
@@ -646,7 +646,7 @@ function setupOpenAISearchCostConsent(): void {
                 // revert
                 const revertTo = previousValue && previousValue !== SEARCH_VALUE
                     ? previousValue
-                    : 'gemini-3.1-flash-lite';
+                    : 'gemini-3.6-flash';
                 const target = document.querySelector<HTMLInputElement>(
                     `input[name="primaryGeminiTextModel"][value="${revertTo}"]`
                 );

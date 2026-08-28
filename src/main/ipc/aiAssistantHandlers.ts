@@ -78,9 +78,9 @@ export function registerAiAssistantHandlers(): void {
             }
 
             if (!config.geminiModel) {
-                config.geminiModel = GEMINI_TEXT_MODELS.FLASH_LITE;
+                config.geminiModel = GEMINI_TEXT_MODELS.FLASH;
                 configChanged = true;
-                fixResults.push({ action: 'Gemini 모델 설정', success: true, message: `기본 모델 설정됨 (${GEMINI_TEXT_MODELS.FLASH_LITE})` });
+                fixResults.push({ action: 'Gemini 모델 설정', success: true, message: `기본 모델 설정됨 (${GEMINI_TEXT_MODELS.FLASH})` });
             }
 
             // 설정 저장

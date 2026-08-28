@@ -10,7 +10,7 @@ import type { ContentPolicyPayloadContext } from './contentPolicy/policyService.
 import { smartCrawler } from './crawler/smartCrawler.js';
 import { getProxyUrl, reportProxyFailed, reportProxySuccess } from './crawler/utils/proxyManager.js';
 import {
-  parseNaverPostDate, withFreshnessLabel, isStaleSource, mergeRecentFirst,
+  parseNaverPostDate, withFreshnessLabel, isStaleSource, mergeRecentFirst, resolveSourceDate,
 } from './content/sourceFreshness.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
 import { extractLabeledPrice, formatPriceOrEmpty, hasValidPrice, parsePrice } from './services/priceNormalizer.js';
@@ -168,6 +168,8 @@ interface NaverSearchResult {
    * 자세한 경위는 content/sourceFreshness.ts 주석 참고.
    */
   postdate?: string;
+  /** [2026-08-28] 뉴스 발행일(RFC 822). 문서 종류마다 필드명이 다르다. */
+  pubDate?: string;
 }
 
 // ✅ 네이버 쇼핑 검색 결과 타입
@@ -823,6 +825,8 @@ async function searchNaverForContent(
             link: item.link || item.originallink || '',
             // [2026-08-11] 시점 라벨용 — 예전엔 버렸다
             postdate: typeof item.postdate === 'string' ? item.postdate : undefined,
+            // [2026-08-28] 뉴스는 pubDate 로 온다. 이걸 안 읽어서 뉴스 재료에 시점이 없었다.
+            pubDate: typeof item.pubDate === 'string' ? item.pubDate : undefined,
           });
         }
       }
@@ -1582,7 +1586,10 @@ async function collectNaverSearchContent(
     const contentKey = result.description.slice(0, 100);
     if (!uniqueContents.has(contentKey)) {
       uniqueContents.add(contentKey);
-      cleanedResults.push(`【${result.title}】\n${result.description}`);
+      // [2026-08-28] 시점을 재료에 붙인다. 스니펙은 "오는 29일"처럼 발행일 기준
+      //   상대 표현을 쓰기 때문에, 기사 날짜가 없으면 모델이 월을 복원할 수 없다.
+      const sourceDate = resolveSourceDate(result as { postdate?: unknown; pubDate?: unknown });
+      cleanedResults.push(withFreshnessLabel(`【${result.title}】\n${result.description}`, sourceDate));
     }
   }
 
@@ -6921,9 +6928,38 @@ ${reviewSection}
       const naverResult = await collectNaverSearchContent(searchQuery, naverClientId!, naverClientSecret!);
 
       if (naverResult.content.length > 1000) {
-        naverApiContent = naverResult.content;
-        warnings.push(`✅ 네이버 API로 ${naverResult.totalChars}자 수집 완료! (${Date.now() - startTime}ms)`);
-        console.log(`✅ [네이버 API] ${naverResult.totalChars}자 수집 성공! (${Date.now() - startTime}ms)`);
+        // [2026-08-28] 스니펙만으로는 답이 안 된다.
+        //   검색 API 가 주는 description 은 100~200자 미리보기라, 기사 속
+        //   "오는 29일" 처럼 **월이 빠진 날짜**와 잘린 고유명사만 남는다.
+        //   실측(스트레이 키즈): 재료에 "8월 29일"은 없고 "오는 29일"만 있어
+        //   세 엔진이 모두 월 없는 날짜를 그대로 옮겼다.
+        //   collectContentFromPlatforms 는 이미 상위글 본문을 함께 쓰고 있었는데
+        //   이 경로만 스니펙에 멈춰 있었다. 같은 병합 방식을 그대로 가져온다.
+        //   본문을 앞에 둔다 — 뒤에서 잘리면 사실이 아니라 스니펙이 잘려야 한다.
+        //   크롤링이라 API 과금은 없고, 시간 예산(20초)은 함수 안에 박혀 있다.
+        //   실패하면 기존 스니펙 동작 그대로다.
+        let mergedContent = naverResult.content;
+        let fullTextCount = 0;
+        try {
+          const fullTextDeadline = Date.now() + FULLTEXT_COLLECT_BUDGET_MS;
+          const fullTexts = await collectTopArticleFullTexts(
+            searchQuery, naverClientId!, naverClientSecret!, console.log, fullTextDeadline,
+          );
+          if (fullTexts.text) {
+            mergedContent = `${fullTexts.text}
+
+=== 검색 결과 스니펙 (맥락 참고용) ===
+${naverResult.content}`;
+            fullTextCount = fullTexts.count;
+          }
+        } catch (fullTextError) {
+          console.warn(`⚠️ [상위글 본문] 수집 실패 — 스니펙만 사용: ${(fullTextError as Error).message}`);
+        }
+
+        naverApiContent = mergedContent;
+        const fullTextNote = fullTextCount > 0 ? ` + 상위글 본문 ${fullTextCount}건` : '';
+        warnings.push(`✅ 네이버 API로 ${naverResult.totalChars}자${fullTextNote} 수집 완료! (${Date.now() - startTime}ms)`);
+        console.log(`✅ [네이버 API] ${naverResult.totalChars}자${fullTextNote} 수집 성공! (${Date.now() - startTime}ms)`);
       } else {
         console.log(`⚠️ [네이버 API] 결과가 부족합니다 (${naverResult.content.length}자). 크롤링으로 보충...`);
       }

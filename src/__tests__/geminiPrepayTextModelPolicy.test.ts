@@ -9,9 +9,12 @@ import {
 import { buildGeminiModelChain } from '../contentGeminiModelPolicy';
 
 describe('Gemini prepaid/value text-model policy', () => {
-  it('uses the free-tier Flash-Lite model for a new or blank configuration', () => {
+  // [2026-08-28] 빈 설정의 기본 모델은 3.6 Flash 다.
+  //   정규화 함수(normalizeGeminiTextModelId)는 "알 수 없는 id → Lite" 매핑이라 그대로둔다.
+  //   앱 기본값은 buildGeminiModelChain 과 gemini.ts DEFAULT_MODEL 이 정한다.
+  it('uses the 3.6 Flash model for a new or blank configuration', () => {
     expect(normalizeGeminiTextModelId('')).toBe(GEMINI_TEXT_MODELS.FLASH_LITE);
-    expect(buildGeminiModelChain().primaryModel).toBe(GEMINI_TEXT_MODELS.FLASH_LITE);
+    expect(buildGeminiModelChain().primaryModel).toBe(GEMINI_TEXT_MODELS.FLASH);
     expect(resolveTextModelProfile('')).toMatchObject({
       vendor: 'gemini',
       tier: 'value',

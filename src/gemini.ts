@@ -60,7 +60,13 @@ export interface GenerateResult {
 // ==================== 상수 ====================
 
 // 신규/빈 설정은 API 무료 티어가 있는 Flash-Lite를 사용한다.
-const DEFAULT_MODEL = process.env.GEMINI_MODEL || GEMINI_TEXT_MODELS.FLASH_LITE;
+// [2026-08-28] 기본 모델을 3.1 Flash-Lite → 3.6 Flash 로 올렸다.
+//   실측(같은 키워드·같은 재료 11,588자): Flash-Lite 는 849자에 제목 응답 20% 로,
+//   제목이 약속한 답을 본문이 다루지 않았다. 3.6 Flash 는 1,828자.
+//   ⚠️ 3.6 은 무료 티어가 없다(geminiQuotaPolicy.freeTierAvailable=false).
+//   선불 결제가 없는 키는 생성이 실패한다 — 사용자가 이 전환을 명시적으로 지시했다.
+//   자동 폴백은 넣지 않는다(silent 폴백 금지 원칙).
+const DEFAULT_MODEL = process.env.GEMINI_MODEL || GEMINI_TEXT_MODELS.FLASH;
 
 // ✅ 사용 가능한 모델 목록 (환경설정에서 선택 가능)
 // [v1.4.49] 실측 기반 정확한 무료 할당량 표시

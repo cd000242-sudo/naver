@@ -109,9 +109,19 @@ describe('배선 잠금', () => {
   });
 
   it('contentGenerator가 라우터를 통해 팩트체크를 실행한다', () => {
+    // [2026-08-28] 호출부가 content/postDraftFactCheck 로 옮겨갔다.
+    //   단순 이동이 아니라 **두 분기 모두**에서 불려야 하는 게 계약이다:
+    //   분량이 목표를 넘은 경로와, 미달로 "글자수 경고 (최종)" 을 타는 경로.
+    //   후자가 팩트체크를 통째로 건너뛰고 있었다(실측 2026-08-28, gemini 770자).
+    const router = read('content/postDraftFactCheck.ts');
+    expect(router).toContain("import('../factCheckRouter.js')");
+    expect(router).toMatch(/resolveFactCheckEngine\(config\)/);
+    expect(router).toMatch(/runFactCheck\(engine,/);
+
     const code = read('contentGenerator.ts');
-    expect(code).toContain("import('./factCheckRouter.js')");
-    expect(code).toMatch(/resolveFactCheckEngine\(_config/);
+    expect(code).toContain("import { applyPostDraftFactCheck } from './content/postDraftFactCheck.js'");
+    const calls = code.match(/applyPostDraftFactCheck\(optimized as any/g) || [];
+    expect(calls.length).toBeGreaterThanOrEqual(2);
   });
 
   it('UI 드롭다운이 7개 선택지·기본 auto로 존재한다', () => {

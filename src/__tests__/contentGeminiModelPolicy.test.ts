@@ -2,10 +2,12 @@ import { describe, expect, it } from 'vitest';
 import { buildGeminiModelChain } from '../contentGeminiModelPolicy';
 
 describe('contentGeminiModelPolicy', () => {
-  it('defaults to the free/prepaid value model regardless of legacy plan label', () => {
-    expect(buildGeminiModelChain().primaryModel).toBe('gemini-3.1-flash-lite');
-    expect(buildGeminiModelChain({ geminiPlanType: 'paid' }).primaryModel).toBe('gemini-3.1-flash-lite');
-    expect(buildGeminiModelChain({ geminiPlanType: 'free' }).primaryModel).toBe('gemini-3.1-flash-lite');
+  // [2026-08-28] 기본값을 3.6 Flash 로 올렸다. Flash-Lite 는 같은 재료(11,588자)로
+  //   849자·제목 응답 20% 였다. 플랜 라벨은 기본값을 바꾸지 않는다는 계약은 그대로다.
+  it('defaults to the 3.6 Flash model regardless of legacy plan label', () => {
+    expect(buildGeminiModelChain().primaryModel).toBe('gemini-3.6-flash');
+    expect(buildGeminiModelChain({ geminiPlanType: 'paid' }).primaryModel).toBe('gemini-3.6-flash');
+    expect(buildGeminiModelChain({ geminiPlanType: 'free' }).primaryModel).toBe('gemini-3.6-flash');
   });
 
   it('respects an explicitly selected Gemini text model', () => {
