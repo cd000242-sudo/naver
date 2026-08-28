@@ -12,6 +12,7 @@ import { getProxyUrl, reportProxyFailed, reportProxySuccess } from './crawler/ut
 import {
   parseNaverPostDate, withFreshnessLabel, isStaleSource, mergeRecentFirst, resolveSourceDate,
 } from './content/sourceFreshness.js';
+import { resolveBulkSourceMix } from './content/factSourceTierPolicy.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
 import { extractLabeledPrice, formatPriceOrEmpty, hasValidPrice, parsePrice } from './services/priceNormalizer.js';
 import { validateProductInfo } from './schemas/productInfoSchema.js';
@@ -1550,10 +1551,13 @@ async function collectNaverSearchContent(
   const startTime = Date.now();
 
   // ✅ 블로그, 뉴스, 웹문서, 쇼핑을 병렬로 검색 (빠른 속도) — allSettled로 부분 실패 허용
+  // [2026-08-29] 지원금·공고 글에 블로그 30개가 재료로 들어오던 것을 막는다.
+  const bulkMix = resolveBulkSourceMix(query);
+  console.log(`[네이버 API] 📚 근거 구성: ${bulkMix.reason}`);
   const _settled = await Promise.allSettled([
-    searchNaverForContent(query, clientId, clientSecret, 'blog', 30),
-    searchNaverForContent(query, clientId, clientSecret, 'news', 20),
-    searchNaverForContent(query, clientId, clientSecret, 'webkr', 10),
+    searchNaverForContent(query, clientId, clientSecret, 'blog', bulkMix.blogCount),
+    searchNaverForContent(query, clientId, clientSecret, 'news', bulkMix.newsCount),
+    searchNaverForContent(query, clientId, clientSecret, 'webkr', bulkMix.webDocCount),
     searchNaverShopping(query, clientId, clientSecret, 20),
   ]);
   const blogResults = _settled[0].status === 'fulfilled' ? _settled[0].value : [];

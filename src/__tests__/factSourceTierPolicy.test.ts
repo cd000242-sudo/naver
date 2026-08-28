@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
+  GENERAL_BULK_MIX,
   GENERAL_SOURCE_MIX,
+  PUBLIC_INFO_BULK_MIX,
   PUBLIC_INFO_SOURCE_MIX,
+  resolveBulkSourceMix,
   resolveFactSourceMix,
 } from '../content/factSourceTierPolicy';
 
@@ -29,5 +32,26 @@ describe('factSourceTierPolicy', () => {
 
   it('falls back to the general mix when nothing is provided', () => {
     expect(resolveFactSourceMix({})).toBe(GENERAL_SOURCE_MIX);
+  });
+});
+
+describe('resolveBulkSourceMix — 주 재료 수집기', () => {
+  it('drops blogs for a public-information query and moves the budget to news', () => {
+    const mix = resolveBulkSourceMix('4차 민생지원금');
+    expect(mix).toBe(PUBLIC_INFO_BULK_MIX);
+    expect(mix.blogCount).toBe(0);
+    expect(mix.newsCount).toBe(50);
+  });
+
+  it('leaves a general query on the existing 30/20/10 mix', () => {
+    const mix = resolveBulkSourceMix('가을 캠핑 준비물');
+    expect(mix).toBe(GENERAL_BULK_MIX);
+    expect(mix.blogCount).toBe(30);
+    expect(mix.newsCount).toBe(20);
+    expect(mix.webDocCount).toBe(10);
+  });
+
+  it('falls back to the general mix on empty input', () => {
+    expect(resolveBulkSourceMix('')).toBe(GENERAL_BULK_MIX);
   });
 });

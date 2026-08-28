@@ -44,6 +44,46 @@ export const PUBLIC_INFO_SOURCE_MIX: FactSourceMix = Object.freeze({
   reason: '공공정보 주제 — 블로그·지식iN 제외, 뉴스 10건으로 대체',
 });
 
+/**
+ * 대량 수집기(sourceAssembler.collectNaverSearchContent)용 구성.
+ *
+ * [2026-08-29 실측] "4차 민생지원금" 으로 돌렸더니 재료가 **블로그 30개**로 채워졌다.
+ * 위의 FactSourceMix 는 naverFactCheckRAG 경로에만 걸려 있었고, 정작 **글을 쓰는 주
+ * 재료**를 모으는 이 수집기는 blog 30 / news 20 / webkr 10 을 하드코딩하고 있었다.
+ * 본문 크롤러(collectTopArticleFullTexts)를 안 부르던 것과 같은 종류의 누락이다.
+ *
+ * 공공정보는 블로그를 끄고 그만큼 뉴스로 돌린다. 네이버 검색 API 는 일 25,000건
+ * 무료라 뉴스를 늘려도 추가 과금이 없다.
+ */
+export interface FactSourceBulkMix {
+  readonly blogCount: number;
+  readonly newsCount: number;
+  readonly webDocCount: number;
+  readonly reason: string;
+}
+
+/** 기존 동작 그대로 — 일반 주제. */
+export const GENERAL_BULK_MIX: FactSourceBulkMix = Object.freeze({
+  blogCount: 30,
+  newsCount: 20,
+  webDocCount: 10,
+  reason: '일반 주제 — 기본 구성(블로그30/뉴스20/웹문서10)',
+});
+
+/** 공공정보 전용 — 블로그를 끄고 뉴스로 돌린다. 총 건수는 같다. */
+export const PUBLIC_INFO_BULK_MIX: FactSourceBulkMix = Object.freeze({
+  blogCount: 0,
+  newsCount: 50,
+  webDocCount: 10,
+  reason: '공공정보 주제 — 블로그 제외, 뉴스 50건으로 대체',
+});
+
+export function resolveBulkSourceMix(query: string): FactSourceBulkMix {
+  return isPublicInfoTopic({ keyword: String(query || '') })
+    ? PUBLIC_INFO_BULK_MIX
+    : GENERAL_BULK_MIX;
+}
+
 export interface FactSourceTopic {
   readonly keyword?: string;
   readonly title?: string;
