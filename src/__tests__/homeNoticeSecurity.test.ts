@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  EDGE_URL,
   fetchCommunityIncomeProofs,
   fetchHomeNotices,
   GAS_URL,
@@ -43,7 +44,11 @@ type NoticeRoute = 'secure' | 'snapshot' | 'legacy';
  */
 function routedFetch(handlers: Record<NoticeRoute, () => Response>) {
   const calls: NoticeRoute[] = [];
+  // [2026-08-29] 공지는 서버리스 엣지(EDGE_URL) 하나로 옵겨갔다.
+  //   이전 분류기는 "GAS 가 아니면 snapshot" 이라 엣지 호출까지 snapshot 으로
+  //   세었고, 그 탓에 은퇴한 경로를 요구하는 단언이 살아남았다.
   const classify = (url: string): NoticeRoute => {
+    if (url.startsWith(EDGE_URL)) return 'secure';
     if (url.startsWith(GAS_URL)) return 'legacy';
     return 'snapshot';
   };
@@ -82,7 +87,7 @@ describe('secure home notices', () => {
     const notices = await fetchHomeNotices(3);
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(String(fetchMock.mock.calls[0]?.[0])).toBe(`${GAS_URL}?action=get-notices`);
+    expect(String(fetchMock.mock.calls[0]?.[0])).toBe(`${EDGE_URL}?action=get-notices`);
     expect(notices[0]?.title).toBe('무료 체험');
     expect(notices[0]?.summary).toBe('하루 3회');
     expect(notices[0]?.body).not.toContain('<');
@@ -132,44 +137,45 @@ describe('secure home notices', () => {
 
     const notices = await fetchHomeNotices(3);
     expect(notices).toEqual([expect.objectContaining({ title: '기존 공지' })]);
-    // GAS 가 비면 아카이브를 먼저 확인하고, 그것도 비어야 캐시로 내려간다.
+    // 체인은 엣지 → 아카이브 → 캐시 다. 은퇴한 GAS 는 부르지 않는다.
+    expect(routes.count('secure')).toBe(1);
     expect(routes.count('snapshot')).toBe(1);
-    expect(routes.count('legacy')).toBe(1);
+    expect(routes.count('legacy')).toBe(0);
     expect(localStorage.getItem(HOME_NOTICE_CACHE_KEY)).toContain('기존 공지');
   });
 
   it('fetches notices directly from the serverless feed', async () => {
     const routes = routedFetch({
-      secure: () => { throw new Error('secure API unavailable'); },
-      snapshot: () => jsonResponse({ items: [] }),
-      legacy: () => jsonResponse({
+      secure: () => jsonResponse({
         success: true,
-        notices: [{ id: 'legacy-1', badge: 'tip', date: '2026.07.01', title: '기존 공지', preview: '이전 데이터', body: '이전 본문' }],
+        notices: [{ id: 'edge-1', badge: 'tip', date: '2026.07.01', title: '기존 공지', preview: '이전 데이터', body: '이전 본문' }],
       }),
+      snapshot: () => { throw new Error('snapshot route must not be called'); },
+      legacy: () => { throw new Error('retired GAS route must not be called'); },
     });
     vi.stubGlobal('fetch', routes.fetchMock);
 
     await expect(fetchHomeNotices(3)).resolves.toEqual([
       expect.objectContaining({ title: '기존 공지' }),
     ]);
-    expect(routes.order()).toEqual(['legacy']);
+    expect(routes.order()).toEqual(['secure']);
   });
 
-  it('does not call retired snapshot routes', async () => {
+  it('does not call retired snapshot or GAS routes', async () => {
     const routes = routedFetch({
-      secure: () => { throw new Error('retired API must not be called'); },
-      snapshot: () => { throw new Error('snapshot route must not be called'); },
-      legacy: () => jsonResponse({
+      secure: () => jsonResponse({
         success: true,
-        notices: [{ id: 'gas-1', badge: 'tip', date: '2026.08.01', title: 'GAS 공지', preview: '읽기 전용', body: '본문' }],
+        notices: [{ id: 'edge-1', badge: 'tip', date: '2026.08.01', title: '엣지 공지', preview: '읽기 전용', body: '본문' }],
       }),
+      snapshot: () => { throw new Error('snapshot route must not be called'); },
+      legacy: () => { throw new Error('retired GAS route must not be called'); },
     });
     vi.stubGlobal('fetch', routes.fetchMock);
 
     await expect(fetchHomeNotices(3)).resolves.toEqual([
-      expect.objectContaining({ title: 'GAS 공지' }),
+      expect.objectContaining({ title: '엣지 공지' }),
     ]);
-    expect(routes.order()).toEqual(['legacy']);
+    expect(routes.order()).toEqual(['secure']);
   });
 
   it('renders nothing rather than throwing when every source is down', async () => {
@@ -181,8 +187,8 @@ describe('secure home notices', () => {
     vi.stubGlobal('fetch', routes.fetchMock);
 
     await expect(fetchHomeNotices(3)).resolves.toEqual([]);
-    // 순서 계약: GAS(legacy) 먼저, 비어 있을 때만 아카이브(snapshot).
-    expect(routes.order()).toEqual(['legacy', 'snapshot']);
+    // 순서 계약: 서버리스 엣지 먼저, 비어 있을 때만 아카이브. 은퇴한 GAS 는 없다.
+    expect(routes.order()).toEqual(['secure', 'snapshot']);
   });
 
   it('loads only approved home income proofs and removes private or unsafe fields', async () => {
