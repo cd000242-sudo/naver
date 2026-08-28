@@ -1645,7 +1645,20 @@ export function finalizeStructuredContent(
       const pnN = n(pn);
       const pkN = n(primaryKeyword);
       if (pnN && pkN && (pnN.includes(pkN) || pkN.includes(pnN))) {
-        return removeInternalStructureMarkersFromContent(finalContent);
+        // [2026-08-29] 이 조기반환이 후처리 검사를 통째로 넘기고 있었다.
+        //   실측("4차 민생지원금"): 재료의 '상품권' 때문에 shopping_review 로
+        //   오분류되면서 제품명이 키워드와 같아져 여기로 빠졌고,
+        //   TitleAnswer·FactVerify 가 한 번도 돌지 않았다(상대날짜 4건·월없는날짜 5건을
+        //   가진 글이었다). 분류 오류는 따로 고쳤지만, 어떤 경로로 들어오든
+        //   **검사는 반드시 거친다**. 검사는 경고 전용이라 발행을 막지 않는다.
+        const earlyContent = removeInternalStructureMarkersFromContent(finalContent);
+        try {
+          runPostGenValidator(earlyContent, source);
+        } catch (validatorError) {
+          console.warn('[finalize] ⚠️ 조기반환 경로 검사 실패:',
+            validatorError instanceof Error ? validatorError.message : validatorError);
+        }
+        return earlyContent;
       }
     } catch (e) {
       console.warn('[contentGenerator] catch ignored:', e);

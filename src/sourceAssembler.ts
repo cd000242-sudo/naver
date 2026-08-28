@@ -13,6 +13,7 @@ import {
   parseNaverPostDate, withFreshnessLabel, isStaleSource, mergeRecentFirst, resolveSourceDate,
 } from './content/sourceFreshness.js';
 import { resolveBulkSourceMix } from './content/factSourceTierPolicy.js';
+import { isPublicInfoTopic } from './content/publicInfoFactTable.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
 import { extractLabeledPrice, formatPriceOrEmpty, hasValidPrice, parsePrice } from './services/priceNormalizer.js';
 import { validateProductInfo } from './schemas/productInfoSchema.js';
@@ -7618,12 +7619,28 @@ ${naverResult.content}`;
     const lowered = baseTitle.toLowerCase();
     const lowerBody = baseBody.toLowerCase();
 
+    // [2026-08-29] 공공정보 글은 리뷰로 보지 않는다.
+    //   실측: "4차 민생지원금" 재료에 "상품"이 11건 있었다 — 전부 지역사랑상품권·
+       //   온누리상품권이다. 그것만으로 shopping_review 로 분류돼
+       //   지원금 글이 쇼핑 리뷰 프롬프트로 쓰였고, 더 나쁜 건 finalize 의
+       //   제품명 조기반환에 걸려 **후처리 검사(제목응답·사실검증)가 통째로 스킵**됐다.
+    const publicInfoSignal = isPublicInfoTopic({
+      title: baseTitle,
+      keyword: keywords.join(' '),
+    });
+
     // 제품 리뷰 키워드 감지 (제목 + 본문)
-    if (lowered.includes('리뷰') || lowered.includes('사용기') || lowered.includes('후기') ||
+    //   본문 신호는 '상품권' 같은 부분 일치를 제외한다.
+    const bodyProductSignal = /구매|제품|상품(?!권)/.test(lowerBody);
+    if (!publicInfoSignal && (
+      lowered.includes('리뷰') || lowered.includes('사용기') || lowered.includes('후기') ||
       lowered.includes('추천') || lowered.includes('장단점') || lowered.includes('솔직') ||
-      lowerBody.includes('구매') || lowerBody.includes('제품') || lowerBody.includes('상품')) {
+      bodyProductSignal)) {
       console.log('[ArticleType] 리뷰 키워드 감지 → shopping_review');
       return (input as any).articleType || 'shopping_review';
+    }
+    if (publicInfoSignal) {
+      console.log('[ArticleType] 공공정보 주제 — 리뷰 분류 제외');
     }
 
     if (lowered.includes('it') || lowered.includes('노트북') || lowered.includes('스마트폰')) {
