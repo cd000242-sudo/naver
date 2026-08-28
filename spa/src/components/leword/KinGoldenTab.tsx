@@ -203,11 +203,20 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
 
     const openWork = (q: KinQ) => {
         probeOnce();
+        /*
+         * 지난번에 만든 답변을 **되살린다**(사장님 지적 2026-08-28: "저장되면
+         * 생성한 답변도 그대로 남아있어야 되지 않니? 초기화가 되어 버리는데").
+         *
+         * 저장은 되고 있었다 — rememberWorked 가 draft 까지 통째로 넣는다.
+         * 다시 열 때 무조건 비운 것이 문제였다. [이어서 작업]인데 빈 화면이 뜨면
+         * 다시 만들 수밖에 없고, 그건 구독을 한 번 더 태우는 일이다.
+         */
+        const saved = worked.find((item) => docIdOfLink(item.link) === docIdOfLink(q.link));
         setWork(q);
         setIdeas({ status: 'idle', list: [] });
         setOpenIdea('');
-        setDraft('');
-        setGenNote('');
+        setDraft(saved?.draft || '');
+        setGenNote(saved?.draft ? '지난번에 만든 답변입니다 — 그대로 쓰거나 다시 만들 수 있습니다.' : '');
         setWithLink(false);
         setDraftCopied(false);
         setWorkBody({ loading: true, text: '' });

@@ -258,45 +258,53 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
      */
     const APP_ONLY_ENGINES = ['gemini', 'codex', 'grok'];
 
+    /**
+     * 앱(본인 구독)으로 진단한다. 성공하면 화면에 담고 true.
+     * picked 가 비어 있으면 앱이 연동된 순서대로 고른다.
+     */
+    const analyzeViaApp = async (row: AuditRow, picked: string, keys: Record<string, string>) => {
+        const viaApp = await bridgePostAnalyze({
+            title: row.title,
+            link: row.link,
+            platform: audit?.platform,
+            kwQuery: row.kwQuery,
+            kwRank: row.kwRank ?? null,
+            extQuery: row.extQuery,
+            extRank: row.extRank ?? null,
+            titleRank: row.rank,
+            titleRankMeasured: row.titleRankMeasured !== false,
+            keys,
+            provider: picked,
+        });
+        if (viaApp.status === 'ok') {
+            setAnalyzeState({
+                status: 'done',
+                data: viaApp.analysis as PostAnalysis,
+                checklist: (viaApp.checklist as SeoChecklist) || undefined,
+            });
+            return { done: true, why: '' };
+        }
+        const why = viaApp.status === 'offline'
+            ? 'LEWORD 앱이 꺼져 있습니다 — 앱을 켠 뒤 다시 눌러 주세요.'
+            : viaApp.status === 'outdated'
+                ? 'LEWORD 앱이 이 기능이 실리기 전 버전입니다 — 앱을 최신으로 올린 뒤 다시 눌러 주세요.'
+                : `앱에서 진단하지 못했습니다: ${viaApp.status === 'error' ? viaApp.message : ''}`;
+        return { done: false, why };
+    };
+
     const openAnalysis = async (row: AuditRow) => {
         setAnalyzeRow(row);
         setAnalyzeState({ status: 'loading' });
-        const keys = loadUserKeys();
+        const keys = loadUserKeys() as Record<string, string>;
         const picked = String(keys.aiProvider || '');
+        /*
+         * 고른 엔진이 앱에서만 도는 것이면 곧장 앱으로 간다. 조용히 사이트 엔진으로
+         * 갈아타지 않는다 — 고른 것과 다른 엔진이 돌아 놓고 그 사실이 안 보인다.
+         */
         if (APP_ONLY_ENGINES.includes(picked)) {
-            const viaApp = await bridgePostAnalyze({
-                title: row.title,
-                link: row.link,
-                platform: audit?.platform,
-                kwQuery: row.kwQuery,
-                kwRank: row.kwRank ?? null,
-                extQuery: row.extQuery,
-                extRank: row.extRank ?? null,
-                titleRank: row.rank,
-                titleRankMeasured: row.titleRankMeasured !== false,
-                keys: keys as Record<string, string>,
-                provider: picked,
-            });
-            if (viaApp.status === 'ok') {
-                setAnalyzeState({
-                    status: 'done',
-                    data: viaApp.analysis as PostAnalysis,
-                    checklist: (viaApp.checklist as SeoChecklist) || undefined,
-                });
-                return;
-            }
-            /*
-             * 앱으로 못 돌았으면 **왜 못 돌았는지 말한다**. 조용히 사이트 엔진으로
-             * 갈아타면 고른 것과 다른 엔진이 돌아 놓고 그 사실이 안 보인다.
-             */
-            setAnalyzeState({
-                status: 'error',
-                message: viaApp.status === 'offline'
-                    ? `${picked}은(는) 이 PC 의 앱에서 도는 엔진입니다 — LEWORD 앱을 켠 뒤 다시 눌러 주세요.`
-                    : viaApp.status === 'outdated'
-                        ? 'LEWORD 앱이 이 기능이 실리기 전 버전입니다 — 앱을 최신으로 올린 뒤 다시 눌러 주세요.'
-                        : `앱에서 진단하지 못했습니다: ${viaApp.status === 'error' ? viaApp.message : ''}`,
-            });
+            const viaApp = await analyzeViaApp(row, picked, keys);
+            if (viaApp.done) return;
+            setAnalyzeState({ status: 'error', message: `${picked}은(는) 이 PC 의 앱에서 도는 구독 엔진입니다. ${viaApp.why}` });
             return;
         }
         const result = await fetchPostAnalysis({
@@ -324,7 +332,18 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
             });
             return;
         }
-        setAnalyzeState({ status: 'error', message: result.message || result.error || '진단 실패' });
+        /*
+         * 사이트가 못 하면 **앱으로 넘긴다**(사장님 실측 2026-08-28: 클로드 토큰이
+         * 취소돼 "연동된 엔진이 모두 실패했습니다"만 떴다). 앱에 연동된 구독이
+         * 멀쩡한데 사이트 토큰 하나 죽었다고 멈출 이유가 없다 — 레이더가 이미
+         * 쓰는 길이다. 앱까지 안 되면 두 사유를 함께 보여 준다.
+         */
+        const viaApp = await analyzeViaApp(row, picked, keys);
+        if (viaApp.done) return;
+        setAnalyzeState({
+            status: 'error',
+            message: `${result.message || result.error || '진단 실패'} · ${viaApp.why}`,
+        });
     };
 
     /*

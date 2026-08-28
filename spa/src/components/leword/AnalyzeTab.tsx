@@ -290,10 +290,15 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
             setIdeas({ status: 'done', list: viaKeys.data.ideas });
             return;
         }
-        if (viaKeys.error && viaKeys.error !== 'needs-keys') {
-            setIdeas({ status: 'error', message: viaKeys.message || viaKeys.error });
-            return;
-        }
+        /*
+         * 사이트가 실패해도 **앱을 한 번 더 시도한다**(사장님 실측 2026-08-28:
+         * 클로드 토큰이 취소돼 "연동된 엔진이 모두 실패했습니다"만 떴다).
+         * 예전에는 needs-keys 가 아닌 실패면 여기서 멈춰서, 앱에 연동된 구독이
+         * 멀쩡한데도 사이트 토큰 하나 죽었다고 통째로 죽었다.
+         * 앱까지 실패하면 아래에서 두 사유를 함께 보여 준다.
+         */
+        const siteWhy = viaKeys.error && viaKeys.error !== 'needs-keys'
+            ? (viaKeys.message || viaKeys.error) : '';
         const viaApp = await bridgePostIdeas({
             kind: 'keyword',
             keyword: result.keyword,
@@ -316,14 +321,12 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                 : { status: 'error', message: `${viaApp.provider} 가 제목을 못 만들었습니다 — 다시 눌러 주세요.` });
             return;
         }
-        setIdeas({
-            status: 'error',
-            message: viaApp.status === 'outdated'
-                ? 'LEWORD 앱이 구버전이라 이 기능이 없습니다 — 앱을 업데이트해 주세요.'
-                : viaApp.status === 'offline'
-                    ? 'LEWORD 앱을 켜면 본인 구독으로 바로 만듭니다. 앱 없이 쓰려면 내 API 키 탭에서 클로드 [연동]을 눌러 주세요.'
-                    : `만들지 못했습니다: ${viaApp.message}`,
-        });
+        const appWhy = viaApp.status === 'outdated'
+            ? 'LEWORD 앱이 구버전이라 이 기능이 없습니다 — 앱을 업데이트해 주세요.'
+            : viaApp.status === 'offline'
+                ? 'LEWORD 앱을 켜면 본인 구독으로 바로 만듭니다. 앱 없이 쓰려면 내 API 키 탭에서 클로드 [연동]을 눌러 주세요.'
+                : `만들지 못했습니다: ${viaApp.message}`;
+        setIdeas({ status: 'error', message: siteWhy ? `${siteWhy} · ${appWhy}` : appWhy });
     };
     // 보드 지식인 실측(조회수 포함)이 있으면 그것이 우선이다 — API 는 조회수를 못 준다.
     const kinList = (boardRow?.kinTop?.length ? boardRow.kinTop : result?.kinTop) || [];
