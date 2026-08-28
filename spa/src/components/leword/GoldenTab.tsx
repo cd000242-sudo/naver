@@ -8,6 +8,20 @@ import BoardCardHead from './BoardCardHead';
 import TrendSparkline from './TrendSparkline';
 import DemandChartModal, { pickChartSeries, type DemandPoint } from './DemandChartModal';
 import { fetchMindmapAI, formatCount } from '../../lib/keywordApi';
+
+/**
+ * 이 자리를 **언제 쟀는지**. 이월된 행이 섞이므로 며칠 지난 값인지 보여야
+ * "지금도 비어 있냐"는 물음에 사장님이 직접 판단할 수 있다.
+ * 못 읽으면 빈 문자열 — 지어내지 않는다.
+ */
+function measuredAgo(iso: string): string {
+    const t = Date.parse(iso);
+    if (!Number.isFinite(t)) return '';
+    const days = Math.floor((Date.now() - t) / 86_400_000);
+    if (days <= 0) return '오늘 잼';
+    if (days === 1) return '어제 잼';
+    return `${days}일 전 잼`;
+}
 import { loadUserKeys } from '../../lib/userKeys';
 import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
@@ -69,6 +83,8 @@ type PreemptionRow = {
     /** 24개월 실측 시계열(2026-08-19 배선) — 다음 회차부터 채워진다. 클릭 확대용. */
     demandSeries?: DemandPoint[] | null;
     demandAsOf?: string | null;
+    /** 이 자리를 실제로 잰 시각 — 며칠 지난 값인지 화면이 밝힌다. */
+    measuredAt?: string | null;
     /** "지금 왜 검색되는가" — 에이전트 추론 한 문장. 라벨로 실측과 구분한다. */
     whySearch?: { text: string; basis?: string } | null;
     /** 지식인 질문 수 실측 — 질문 많음 = 답을 못 찾는 중. */
@@ -573,7 +589,17 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                           * 순위는 몇 시간이면 바뀌므로 잰 순간의 제목을 남긴다.
                                           */}
                                         <div className="hot">
-                                            <span>빈자리<i className="lw-slot-basis">블로그탭</i></span>
+                                            {/*
+                                              * **언제 잰 값인지** 붙인다(사장님 지시 2026-08-28:
+                                              * "가치 입증이 제대로 되고 사용자의 반박 제거가 된다면").
+                                              * 이월된 행이 섞이므로, 이 숫자가 오늘 것인지 며칠 전
+                                              * 것인지 안 보이면 "지금도 비어 있냐"에 답할 수 없다.
+                                              * 순위는 몇 시간이면 바뀐다.
+                                              */}
+                                            <span>
+                                                빈자리<i className="lw-slot-basis">블로그탭</i>
+                                                {row.measuredAt && <i className="lw-slot-basis">{measuredAgo(row.measuredAt)}</i>}
+                                            </span>
                                             <strong
                                                 title={(row.serp?.slots || []).length > 0
                                                     ? `잰 순간의 블로그탭 상위 — 커버리지 0.6 미만이 빈자리\n${(row.serp?.slots || [])
