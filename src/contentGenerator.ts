@@ -1660,17 +1660,35 @@ export function finalizeStructuredContent(
       maxWidth: resolveTitleLengthRange(source.contentMode as never).max,
     });
   }
-  applyHomefeedNarrativeHookBlock(finalContent, source);
-  applySeoQualityHookBlock(finalContent, source);  // ✅ [2026-03-06] SEO 런타임 품질 게이트
-  if (allowLegacyOrdinalHeadingMarkerFix) {
+  /*
+   * [2026-08-29] 아래 변환들은 막판 후처리다. 예외가 나면 이 함수가 통째로 터져
+   * **runPostGenValidator 까지 날아간다** — 제목 응답·사실검증 검사가 통째로 사라진다.
+   *
+   * 실측(2026-08-29, "4차 민생지원금"): applyKeywordPrefix 로그는 찍혔는데
+   * TitleAnswer·FactVerify·TitleDiag 가 하나도 안 찍혔고 __ 키도 없었다.
+   * 같은 입력을 저장본으로 재생하면 세 검사 모두 checked=true 가 나온다
+   * (FactVerify 는 상대날짜 4건·월없는날짜 5건을 잡았을 글이었다).
+   * 즉 입력 문제가 아니라 도달을 못 한 것이다.
+   *
+   * 변환 실패로 검사를 잃지 않게 각각 감싼다. 어느 단계가 죽었는지 로그에 남긴다.
+   */
+  const runTailTransform = (label: string, fn: () => void): void => {
     try {
-      applyOrdinalHeadingMarkerFix(finalContent);
+      fn();
     } catch (e) {
-      console.warn('[contentGenerator] catch ignored:', e);
+      console.warn(`[finalize] ⚠️ ${label} 실패 — 건너뛰고 계속합니다:`, e instanceof Error ? e.message : e);
     }
+  };
+
+  runTailTransform('applyHomefeedNarrativeHookBlock', () => applyHomefeedNarrativeHookBlock(finalContent, source));
+  runTailTransform('applySeoQualityHookBlock', () => applySeoQualityHookBlock(finalContent, source));
+  if (allowLegacyOrdinalHeadingMarkerFix) {
+    runTailTransform('applyOrdinalHeadingMarkerFix', () => applyOrdinalHeadingMarkerFix(finalContent));
   }
-  sanitizeStructuredContentClaims(finalContent);
-  finalContent = removeInternalStructureMarkersFromContent(finalContent);
+  runTailTransform('sanitizeStructuredContentClaims', () => sanitizeStructuredContentClaims(finalContent));
+  runTailTransform('removeInternalStructureMarkers', () => {
+    finalContent = removeInternalStructureMarkersFromContent(finalContent);
+  });
 
   // ✅ [2026-01-19 수정] affiliate 모드 수익 배분 고지는 최상단에 삽입됨
   // 마무리글에 중복 삽입하지 않음 (사용자 요청)
@@ -1704,7 +1722,19 @@ export function finalizeStructuredContent(
     }
   }
 
-  runPostGenValidator(finalContent, source);
+  // [2026-08-29] 검사를 finally 로 옮긴다.
+  //   실측: "4차 민생지원금" 글은 applyKeywordPrefix 까지 로그가 남는데
+  //   runPostGenValidator 에 넣은 무조건 로그가 한 번도 안 찍혔다(3회 재현).
+  //   그 글은 상대날짜 4건·월 없는 날짜 5건을 가진 글이었고, 저장본으로 재생하면
+  //   세 검사 모두 checked=true 가 나온다 — 입력 문제가 아니라 도달을 못 한 것이다.
+  //   원인은 아직 모른다. 다만 그 사이에서 무슨 일이 생기든 **검사는 도달해야 한다**.
+  //   검사는 경고 전용이라 여기서 예외가 나도 발행을 막지 않는다.
+  try {
+    runPostGenValidator(finalContent, source);
+  } catch (validatorError) {
+    console.warn('[finalize] ⚠️ 후처리 검사 실패 — 글은 그대로 사용합니다:',
+      validatorError instanceof Error ? validatorError.message : validatorError);
+  }
   return finalContent;
 }
 
