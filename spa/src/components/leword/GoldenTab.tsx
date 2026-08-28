@@ -360,6 +360,33 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 searchVolume: row.searchVolume, documentCount: row.documentCount,
             }).tier];
             if (rank(a) !== rank(b)) return rank(a) - rank(b);
+            /*
+             * **오르는 중인 것을 위로**(사장님 지시 2026-08-29: "우상향이 예상되는
+             * 키워드가 특히 상위로 와야 된다").
+             *
+             * 예상이 아니라 **실측 시계열의 기울기**다 — 데이터랩 12개월 수요에서
+             * 최근 3개월 평균이 그 앞 3개월 평균보다 큰가. 앞으로 오를 것이라고
+             * 말하지 않는다(그건 추정이고 화면에 낼 수 없다). 지금까지 올라왔다는
+             * 사실만 쓰고, 그 사실로 순서를 정한다.
+             *
+             * 못 쟀으면(시계열 없음) 이 축을 건너뛴다 — 안 본 것을 '안 오른다'로
+             * 벌주지 않는다. 등급 다음에 두어 층 자체는 뒤집지 않는다.
+             */
+            const slope = (row: PreemptionRow) => {
+                /* demandSeries 는 {period, ratio} 객체 배열이다 — ratio 만 꺼내 쓴다. */
+                const series = (Array.isArray(row.demandSeries) ? row.demandSeries : [])
+                    .map((point) => Number(point?.ratio))
+                    .filter((n) => Number.isFinite(n));
+                if (series.length < 6) return null;
+                const avg = (list: number[]) => list.reduce((sum, n) => sum + n, 0) / list.length;
+                const recent = avg(series.slice(-3));
+                const before = avg(series.slice(-6, -3));
+                if (!(before > 0)) return null;
+                return recent / before;
+            };
+            const sa = slope(a);
+            const sb = slope(b);
+            if (sa !== null && sb !== null && Math.abs(sa - sb) > 0.05) return sb - sa;
             // 못 쟀으면 광고 축은 건너뛴다 — 안 본 것을 '광고 없음'으로 벌주지 않는다.
             const ads = (row: PreemptionRow) => (typeof row.serp?.adCount === 'number' ? row.serp.adCount : null);
             if (ads(a) !== null && ads(b) !== null && ads(a) !== ads(b)) return (ads(b) as number) - (ads(a) as number);
