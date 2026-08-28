@@ -448,6 +448,11 @@ export const fetchPostAnalysis = (input: {
     kwQuery?: string; kwRank?: number | null;
     extQuery?: string; extRank?: number | null;
     titleRank?: number | null;
+    /**
+     * 제목검색을 **쟀는가**. 글 하나 순위 확인은 탭별 자리만 재므로 false 로 온다 —
+     * 안 잰 것을 서버가 '누락'으로 단정하지 않게 한다. 안 넘기면 '쟀다'로 본다.
+     */
+    titleRankMeasured?: boolean;
     engines?: EngineExposure | null;
 }) => call<{
     analysis: PostAnalysis | null;
@@ -464,6 +469,7 @@ export const fetchPostAnalysis = (input: {
     extQuery: input.extQuery || '',
     extRank: input.extRank == null ? '' : String(input.extRank),
     titleRank: input.titleRank == null ? '' : String(input.titleRank),
+    titleRankMeasured: input.titleRankMeasured === false ? '0' : '',
     engines: input.engines ? JSON.stringify(input.engines) : '',
 }).then((res) => { persistRenewed(res.data); return res; });
 

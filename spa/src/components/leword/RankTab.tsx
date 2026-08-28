@@ -14,6 +14,8 @@ import {
     type SeoChecklist,
     type RankResult,
 } from '../../lib/keywordApi';
+import { bridgePostAnalyze } from '../../lib/bridge';
+import { loadUserKeys } from '../../lib/userKeys';
 import { ErrorNote, TabIntro, UsageBar } from './LewordShared';
 
 /**
@@ -73,6 +75,12 @@ type AuditRow = BlogAuditPost & {
     indexed?: { indexed: boolean; siteIndexed: boolean; sampled: number } | null;
     /** 무엇으로 쟀는지 — 블로그 글은 블로그검색, 자체 도메인은 웹문서검색. */
     searchSource?: 'blog' | 'web';
+    /**
+     * 제목검색을 **쟀는가**(2026-08-28). 노출 점검 표는 항상 잰다 — 기본은 참이다.
+     * 글 하나 순위 확인에서 만든 줄은 탭별 자리만 재므로 거짓이다:
+     * 안 잰 것을 화면과 AI 가 '누락'으로 단정하면 없는 사실을 말하는 것이다.
+     */
+    titleRankMeasured?: boolean;
 };
 
 function loadTracked(): TrackedRow[] {
@@ -241,9 +249,56 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
         message?: string;
     }>({ status: 'loading' });
 
+    /*
+     * 앱에서만 도는 엔진들(사장님 지시 2026-08-28 "제미나이를 사용할 수 있게 해 줘").
+     *
+     * 제미나이·코덱스·그록은 그 PC 의 구독 로그인이라 사이트 서버가 쓸 자격이 없다.
+     * 이걸 고른 사람의 진단은 앱으로 돌린다 — 서버가 몰래 클로드로 갈아타 주는 것은
+     * 고른 엔진으로 돌아야 한다는 요구를 어기는 것이다.
+     */
+    const APP_ONLY_ENGINES = ['gemini', 'codex', 'grok'];
+
     const openAnalysis = async (row: AuditRow) => {
         setAnalyzeRow(row);
         setAnalyzeState({ status: 'loading' });
+        const keys = loadUserKeys();
+        const picked = String(keys.aiProvider || '');
+        if (APP_ONLY_ENGINES.includes(picked)) {
+            const viaApp = await bridgePostAnalyze({
+                title: row.title,
+                link: row.link,
+                platform: audit?.platform,
+                kwQuery: row.kwQuery,
+                kwRank: row.kwRank ?? null,
+                extQuery: row.extQuery,
+                extRank: row.extRank ?? null,
+                titleRank: row.rank,
+                titleRankMeasured: row.titleRankMeasured !== false,
+                keys: keys as Record<string, string>,
+                provider: picked,
+            });
+            if (viaApp.status === 'ok') {
+                setAnalyzeState({
+                    status: 'done',
+                    data: viaApp.analysis as PostAnalysis,
+                    checklist: (viaApp.checklist as SeoChecklist) || undefined,
+                });
+                return;
+            }
+            /*
+             * 앱으로 못 돌았으면 **왜 못 돌았는지 말한다**. 조용히 사이트 엔진으로
+             * 갈아타면 고른 것과 다른 엔진이 돌아 놓고 그 사실이 안 보인다.
+             */
+            setAnalyzeState({
+                status: 'error',
+                message: viaApp.status === 'offline'
+                    ? `${picked}은(는) 이 PC 의 앱에서 도는 엔진입니다 — LEWORD 앱을 켠 뒤 다시 눌러 주세요.`
+                    : viaApp.status === 'outdated'
+                        ? 'LEWORD 앱이 이 기능이 실리기 전 버전입니다 — 앱을 최신으로 올린 뒤 다시 눌러 주세요.'
+                        : `앱에서 진단하지 못했습니다: ${viaApp.status === 'error' ? viaApp.message : ''}`,
+            });
+            return;
+        }
         const result = await fetchPostAnalysis({
             title: row.title,
             link: row.link,
@@ -253,6 +308,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
             extQuery: row.extQuery,
             extRank: row.extRank ?? null,
             titleRank: row.rank,
+            titleRankMeasured: row.titleRankMeasured !== false,
             engines: row.engines || null,
         });
         if (result.ok && result.data) {
@@ -269,6 +325,33 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
             return;
         }
         setAnalyzeState({ status: 'error', message: result.message || result.error || '진단 실패' });
+    };
+
+    /*
+     * 글 하나 순위 확인에서도 바로 진단으로 간다(사장님 지적 2026-08-28
+     * "글 하나 순위확인에는 글분석하기가 없네요"). 위 노출 점검 표에만 있었다.
+     *
+     * 넘기는 것은 방금 잰 사실뿐이다 — 무슨 검색어로 쟀는지, 그 검색어의 자리는
+     * 몇 위였는지. 블로그 탭을 먼저 쓰고(블로그 글의 본판), 못 쟀으면 통합검색을
+     * 쓴다. 제목검색은 이 자리에서 재지 않으므로 '안 쟀음'으로 넘긴다 —
+     * 안 잰 것을 누락으로 단정하면 없는 사실을 말하는 것이다.
+     */
+    const analyzeTabResult = () => {
+        if (!tabResult || !tabResult.postTitle) return;
+        const measured = tabResult.tabs.blog || tabResult.tabs.all || null;
+        void openAnalysis({
+            title: tabResult.postTitle,
+            link: tabResult.link,
+            publishedAt: null,
+            comments: null,
+            status: 'done',
+            rank: null,
+            titleRankMeasured: false,
+            sampled: measured ? measured.sampled : 0,
+            sympathy: null,
+            kwQuery: tabResult.query,
+            kwRank: measured ? measured.rank : null,
+        });
     };
 
     useEffect(() => {
@@ -876,6 +959,13 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                         <button type="button" onClick={() => { void runTabRank(tabResult.query, tabResult.link); }} disabled={tabState === 'loading'}>
                             {tabState === 'loading' ? '재는 중…' : '다시 재기'}
                         </button>
+                        {/* 제목을 못 읽었으면 진단할 재료가 없다 — 되는 척하지 않고 막고, 이유를 말한다. */}
+                        <button
+                            type="button"
+                            onClick={analyzeTabResult}
+                            disabled={tabState === 'loading' || !tabResult.postTitle}
+                            title={tabResult.postTitle ? '이 글의 본문·제목을 읽고 무엇을 고치면 되는지 짚습니다' : '글 제목을 못 읽어 진단할 수 없습니다'}
+                        >글 분석하기</button>
                     </div>
                     <div className="lw-tabrank-grid">
                         {TAB_META.map((tab) => {
@@ -1040,7 +1130,10 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                 <small className="lw-kg-work-meta">
                                     {analyzeRow.kwQuery ? `키워드 ${analyzeRow.kwRank != null ? `${analyzeRow.kwRank}위` : '없음'}` : ''}
                                     {analyzeRow.extQuery && analyzeRow.extQuery !== analyzeRow.kwQuery ? ` · 확장 ${analyzeRow.extRank != null ? `${analyzeRow.extRank}위` : '없음'}` : ''}
-                                    {` · 제목검색 ${analyzeRow.rank != null ? `${analyzeRow.rank}위` : '누락'}`}
+                                    {/* 안 잰 것을 '누락'이라 적지 않는다 — 다른 사실이다. */}
+                                    {analyzeRow.titleRankMeasured === false
+                                        ? ' · 제목검색 안 쟀음'
+                                        : ` · 제목검색 ${analyzeRow.rank != null ? `${analyzeRow.rank}위` : '누락'}`}
                                 </small>
                             </div>
                             <button type="button" className="lw-plan-close" onClick={() => setAnalyzeRow(null)} aria-label="닫기">✕</button>

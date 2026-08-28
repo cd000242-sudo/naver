@@ -308,6 +308,71 @@ export async function bridgeRadarEvaluate(input: {
     }
 }
 
+export type BridgePostAnalyzeResult =
+    | { status: 'ok'; analysis: unknown; checklist: unknown; measured: unknown; provider: string }
+    | { status: 'outdated' | 'offline' }
+    | { status: 'error'; message: string };
+
+/**
+ * 글 진단을 **앱(본인 구독)** 으로 돌린다(사장님 지시 2026-08-28
+ * "제미나이를 사용할 수 있게 해 줘").
+ *
+ * 제미나이·코덱스·그록은 그 PC 의 구독 로그인이라 사이트 서버가 못 쓴다.
+ * 그 엔진을 고른 회차는 이 길로 간다. 재료만 보낸다 — 실측도 프롬프트도
+ * 앱이 우리 서버에서 직접 받아 온다.
+ */
+export async function bridgePostAnalyze(input: {
+    title: string; link: string; platform?: string;
+    kwQuery?: string; kwRank?: number | null;
+    extQuery?: string; extRank?: number | null;
+    titleRank?: number | null; titleRankMeasured?: boolean;
+    keys: Record<string, string>;
+    provider?: string;
+}): Promise<BridgePostAnalyzeResult> {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 240_000);
+    try {
+        const response = await fetch(`${BRIDGE_BASE}/v1/bridge/post-analyze`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+                title: input.title,
+                link: input.link,
+                platform: input.platform || '',
+                kwQuery: input.kwQuery || '',
+                kwRank: input.kwRank ?? null,
+                extQuery: input.extQuery || '',
+                extRank: input.extRank ?? null,
+                titleRank: input.titleRank ?? null,
+                titleRankMeasured: input.titleRankMeasured !== false,
+                keys: input.keys,
+                provider: input.provider || '',
+            }),
+            signal: controller.signal,
+        });
+        // 404 = 앱은 살아 있는데 이 기능이 실리기 전 버전이다 — "꺼짐"과 구분해야
+        // 사용자가 헛되이 앱을 껐다 켰다 하지 않는다(post-ideas 와 같은 규칙).
+        if (response.status === 404) return { status: 'outdated' };
+        const body = await response.json().catch(() => null) as
+            { ok?: boolean; error?: string; result?: Record<string, unknown> } | null;
+        const result = body?.result;
+        if (response.ok && body?.ok && result && result.analysis) {
+            return {
+                status: 'ok',
+                analysis: result.analysis,
+                checklist: result.checklist ?? null,
+                measured: result.measured ?? null,
+                provider: String(result.provider || 'unknown'),
+            };
+        }
+        return { status: 'error', message: String(result?.error || body?.error || `앱 응답 ${response.status}`) };
+    } catch {
+        return { status: 'offline' };
+    } finally {
+        window.clearTimeout(timer);
+    }
+}
+
 export async function bridgePostIdeas(input: {
     kind: 'keyword' | 'kin';
     keyword?: string;
