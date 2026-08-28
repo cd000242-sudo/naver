@@ -99,6 +99,12 @@ function LewordPage() {
     };
 
     const sendToAnalyze = (keyword: string) => selectTab('analyze', keyword);
+    /*
+     * RPM 을 보고 "이 글에 사람을 데려올까"를 정한 다음 레이더로 넘어간다
+     * (사장님 지시 2026-08-28). 주소를 다시 붙여넣게 두지 않는다.
+     */
+    const [handoffPostUrl, setHandoffPostUrl] = useState('');
+    const sendToRadar = (pageUrl: string) => { setHandoffPostUrl(pageUrl); selectTab('radar'); };
 
     return (
         // <main> 이 아니라 <div> 다. 이유가 둘이다:
@@ -243,9 +249,9 @@ function LewordPage() {
                 {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
                 {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
-                {activeTab === 'radar' && <RadarTab />}
+                {activeTab === 'radar' && <RadarTab initialUrl={handoffPostUrl} />}
                 {activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} onAnalyze={sendToAnalyze} />}
-                {activeTab === 'rpm' && <RpmTab />}
+                {activeTab === 'rpm' && <RpmTab onRadar={sendToRadar} />}
                 {activeTab === 'keys' && <KeysTab />}
             </section>
         </div>

@@ -15,8 +15,8 @@
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
-    bridgeAdsenseLogin, bridgeAdsenseRpm, bridgeAdsenseStatus,
-    type AdsenseStatus, type RpmReport, type RpmRow,
+    bridgeAdsenseLogin, bridgeAdsensePageRpm, bridgeAdsenseRpm, bridgeAdsenseStatus,
+    type AdsenseStatus, type DailyRpm, type RpmReport, type RpmRow,
 } from '../../lib/bridge';
 import { TabIntro } from './LewordShared';
 
@@ -37,7 +37,7 @@ const PERIODS = [
     { days: 90, today: false, label: '90일' },
 ];
 
-export default function RpmTab() {
+export default function RpmTab({ onRadar }: { onRadar?: (pageUrl: string) => void }) {
     const [status, setStatus] = useState<AdsenseStatus | 'probing' | null>('probing');
     /* 기본은 오늘 — 방금 쓴 글을 보는 것이 이 탭의 주 용도다. */
     const [days, setDays] = useState(1);
@@ -57,6 +57,21 @@ export default function RpmTab() {
      */
     const [auto, setAuto] = useState(true);
     const [lastAt, setLastAt] = useState('');
+    /*
+     * 고른 글의 **날짜별 추이**(사장님 지시 2026-08-28). 이 탭의 결론은
+     * "이 글에 외부유입을 넣을까 말까"다 — 누적 수익이 아니라 추이가 그 답을 준다.
+     * 시작점이 낮으면 접고, 높게 시작하면 붓고, 나중에 올랐으면 언제부터인지 본다.
+     */
+    const [trend, setTrend] = useState<{ url: string; rows: DailyRpm[]; currency: string } | null>(null);
+    const [trendBusy, setTrendBusy] = useState('');
+
+    const openTrend = async (pageUrl: string) => {
+        setTrendBusy(pageUrl);
+        const result = await bridgeAdsensePageRpm(pageUrl, 30, 'USD');
+        setTrendBusy('');
+        if (result.status === 'ok') { setTrend({ url: pageUrl, rows: result.rows, currency: result.currency }); return; }
+        setNote(result.message);
+    };
 
     const linked = typeof status === 'object' && status !== null && status.connected;
 
@@ -296,6 +311,7 @@ export default function RpmTab() {
                                     <th scope="col">수익</th>
                                     <th scope="col">페이지뷰</th>
                                     <th scope="col">내 평균 대비</th>
+                                    <th scope="col" aria-label="추이·외부유입" />
                                 </tr>
                             </thead>
                             <tbody>
@@ -313,15 +329,68 @@ export default function RpmTab() {
                                             <td>{money(row.earnings, report.currency)}</td>
                                             <td>{count(row.pageViews)}</td>
                                             <td><em className={`lw-rpm-${mark.cls}`}>{mark.text}</em></td>
+                                            <td>
+                                                <button
+                                                    type="button" className="lw-mini"
+                                                    onClick={() => { void openTrend(row.pageUrl); }}
+                                                    disabled={trendBusy === row.pageUrl}
+                                                >{trendBusy === row.pageUrl ? '여는 중…' : '추이'}</button>
+                                                {/* 이 탭의 결론 — 이 글에 사람을 데려올지 말지. 바로 레이더로 넘긴다. */}
+                                                {onRadar && (
+                                                    <button
+                                                        type="button" className="lw-mini lw-mini-ghost"
+                                                        onClick={() => onRadar(`https://${row.pageUrl.replace(/^https?:\/\//, '')}`)}
+                                                    >외부유입</button>
+                                                )}
+                                            </td>
                                         </tr>
                                     );
                                 })}
                                 {rows.length === 0 && (
-                                    <tr><td colSpan={5}>그 주소로 수익이 잡힌 글이 없습니다.</td></tr>
+                                    <tr><td colSpan={6}>그 주소로 수익이 잡힌 글이 없습니다.</td></tr>
                                 )}
                             </tbody>
                         </table>
                     </div>
+
+                    {trend && (
+                        <section className="lw-panel" style={{ marginTop: 14 }}>
+                            <div className="lw-panel-head">
+                                <h2>날짜별 RPM</h2>
+                                <span>
+                                    {trend.url} · 최근 30일
+                                    {' — '}시작점이 낮으면 접고, 높게 시작하면 트래픽을 부으면 됩니다.
+                                    나중에 오른 날이 있으면 그날부터 무엇이 달라졌는지 보십시오.
+                                </span>
+                            </div>
+                            <div className="lw-audit-table lw-rpm-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">날짜</th>
+                                            <th scope="col">RPM</th>
+                                            <th scope="col">수익</th>
+                                            <th scope="col">페이지뷰</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {trend.rows.map((day) => (
+                                            <tr key={day.date}>
+                                                <td>{day.date}</td>
+                                                <td>{day.rpm == null ? '—' : money(day.rpm, trend.currency)}</td>
+                                                <td>{money(day.earnings, trend.currency)}</td>
+                                                <td>{count(day.pageViews)}</td>
+                                            </tr>
+                                        ))}
+                                        {trend.rows.length === 0 && (
+                                            <tr><td colSpan={4}>이 글로 잡힌 날이 없습니다 — 아직 방문자가 없거나 광고가 안 떴습니다.</td></tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <button type="button" className="lw-mini" style={{ marginTop: 10 }} onClick={() => setTrend(null)}>닫기</button>
+                        </section>
+                    )}
 
                     <div className="lw-note lw-note-plain">
                         <b>트래픽을 끌기 전에 RPM 부터 보십시오.</b> 1,000뷰당 $100 내는 글은 10명만 데려와도 $1 이지만,

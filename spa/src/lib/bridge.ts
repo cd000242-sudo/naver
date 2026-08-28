@@ -384,6 +384,35 @@ export async function bridgeAdsenseRpm(days: number, currencyCode = 'USD', inclu
     }
 }
 
+export type DailyRpm = { date: string; earnings: number; pageViews: number; rpm: number | null };
+
+/**
+ * 글 하나의 **날짜별** RPM. RPM 은 고정이 아니다 — 시작점이 낮으면 접고, 높게
+ * 시작하면 트래픽을 붓는다. 나중에 오른 글은 언제부터 올랐는지가 보여야
+ * 이유를 찾을 수 있다(사장님 지시 2026-08-28).
+ */
+export async function bridgeAdsensePageRpm(pageUrl: string, days = 30, currencyCode = 'USD'): Promise<
+    { status: 'ok'; rows: DailyRpm[]; currency: string } | { status: 'error'; message: string }
+> {
+    try {
+        const response = await fetch(`${BRIDGE_BASE}/v1/bridge/adsense-page-rpm`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ pageUrl, days, currencyCode }),
+        });
+        if (response.status === 404) return { status: 'error', message: 'LEWORD 앱이 구버전입니다 — 앱을 최신으로 올려 주세요.' };
+        const body = await response.json().catch(() => null) as
+            { ok?: boolean; error?: string; result?: { rows?: DailyRpm[]; currency?: string; error?: string } } | null;
+        const rows = body?.result?.rows;
+        if (response.ok && body?.ok && Array.isArray(rows)) {
+            return { status: 'ok', rows, currency: String(body.result?.currency || currencyCode) };
+        }
+        return { status: 'error', message: String(body?.result?.error || body?.error || `앱 응답 ${response.status}`) };
+    } catch {
+        return { status: 'error', message: 'LEWORD 앱이 꺼져 있습니다 — 앱을 켠 뒤 다시 눌러 주세요.' };
+    }
+}
+
 export type BridgePostAnalyzeResult =
     | { status: 'ok'; analysis: unknown; checklist: unknown; measured: unknown; provider: string }
     | { status: 'outdated' | 'offline' }

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
     fetchRadarAnalyze, fetchRadarEvaluate, fetchRadarSearch, formatCount,
     type RadarAnalysis, type RadarEvaluated, type RadarGatedSite,
@@ -77,9 +77,16 @@ function canonical(link: string): string {
     return link.replace(/[?#].*$/, '');
 }
 
-function RadarTab() {
-    const [url, setUrl] = useState('');
+/**
+ * @param initialUrl RPM 탭에서 [외부유입]으로 넘어온 글 주소.
+ *   RPM 을 보고 "이 글에 사람을 데려올까"를 정한 다음 여기로 온다
+ *   (사장님 지시 2026-08-28: "이걸로 외부유입을 이 글로 해야 될지 말지 판단이 선다").
+ */
+function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
+    const [url, setUrl] = useState(initialUrl || '');
     const [phase, setPhase] = useState<Phase>('idle');
+    /* 다른 탭에서 글을 들고 오면 칸을 그 글로 바꾼다 — 사용자가 다시 붙여넣지 않게. */
+    useEffect(() => { if (initialUrl) setUrl(initialUrl); }, [initialUrl]);
     const [error, setError] = useState('');
     const [analysis, setAnalysis] = useState<RadarAnalysis | null>(null);
     const [providerStatus, setProviderStatus] = useState<Record<string, string>>({});
