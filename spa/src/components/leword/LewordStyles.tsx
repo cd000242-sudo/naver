@@ -825,6 +825,21 @@ function LewordStyles() {
             .lw-score small { display: block; margin-top: 5px; font-size: 12px; color: rgba(235,242,250,.55); line-height: 1.5; }
             .lw-audit-table td { vertical-align: top; }
 
+            /* ── 글 RPM(애드센스 실측) 판정 배지 ─────────────────────────
+               내 평균 RPM 과의 비교다 — 밖에서 가져온 잣대가 아니라 내 글끼리 견준다.
+               숫자만 보면 어느 글을 밀지 못 고른다. 색으로 한눈에 갈라 준다. */
+            .lw-rpm-hot, .lw-rpm-ok, .lw-rpm-low, .lw-rpm-na {
+                display: inline-block; border-radius: 999px; padding: 3px 9px;
+                font-size: 11.5px; font-weight: 700; font-style: normal;
+                border: 1px solid; white-space: nowrap;
+            }
+            .lw-rpm-hot { color: #44d7b6; border-color: rgba(68,215,182,.4); background: rgba(68,215,182,.08); }
+            .lw-rpm-ok { color: rgba(235,242,250,.8); border-color: rgba(255,255,255,.14); }
+            .lw-rpm-low { color: #ff6b6b; border-color: rgba(255,107,107,.34); background: rgba(255,107,107,.06); }
+            .lw-rpm-na { color: #646b7d; border-color: rgba(255,255,255,.09); }
+            /* 돈·조회수는 자릿수가 맞아야 비교가 된다. RPM 표에만 준다. */
+            .lw-rpm-table td { font-variant-numeric: tabular-nums; }
+
             /* 차트 호버 십자선 값 — 가리킨 점의 기간·상대값. */
             .lw-chart-hover { font-size: 12px; font-weight: 700; fill: #ebf2fa; }
             .lw-spark-hover { color: #ebf2fa; font-weight: 700; }

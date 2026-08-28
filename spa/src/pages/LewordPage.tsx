@@ -11,6 +11,7 @@ import KinGoldenTab from '../components/leword/KinGoldenTab';
 import LewordStyles from '../components/leword/LewordStyles';
 import RadarTab from '../components/leword/RadarTab';
 import RankTab from '../components/leword/RankTab';
+import RpmTab from '../components/leword/RpmTab';
 import YoutubeTab from '../components/leword/YoutubeTab';
 
 /**
@@ -31,6 +32,7 @@ const TABS = [
     { id: 'youtube', label: '유튜브 급상승 글감', short: '유튜브 글감', icon: '▶' },
     { id: 'radar', label: '외부유입 레이더', short: '레이더', icon: '⊚' },
     { id: 'rank', label: '노출 추적', short: '노출 추적', icon: '↗' },
+    { id: 'rpm', label: '글 RPM 확인', short: 'RPM', icon: '$' },
     { id: 'keys', label: '내 API 키', short: 'API 키', icon: '⚿' },
 ] as const;
 
@@ -243,6 +245,7 @@ function LewordPage() {
                 {activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'radar' && <RadarTab />}
                 {activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} onAnalyze={sendToAnalyze} />}
+                {activeTab === 'rpm' && <RpmTab />}
                 {activeTab === 'keys' && <KeysTab />}
             </section>
         </div>

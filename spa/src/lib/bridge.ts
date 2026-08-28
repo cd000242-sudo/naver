@@ -308,6 +308,78 @@ export async function bridgeRadarEvaluate(input: {
     }
 }
 
+/* ── 애드센스 실측 RPM (사장님 지시 2026-08-28) ─────────────────────────
+ *
+ * 애드센스 토큰은 **앱에만** 있다. 사이트는 계산된 숫자만 받는다 — 수익 자료라
+ * 브라우저에 자격증명을 둘 이유가 없다(클로드 구독 토큰과 다른 대우다).
+ *
+ * 남의 글 RPM 은 존재하지 않는다: 수익도 페이지뷰도 계정 주인만 볼 수 있다.
+ * 그래서 이 경로가 내는 것은 전부 사장님 계정 실적이다.
+ */
+export type AdsenseStatus = {
+    hasCredentials: boolean;
+    connected: boolean;
+    need: '' | 'login' | 'credentials';
+};
+
+export async function bridgeAdsenseStatus(): Promise<AdsenseStatus | null> {
+    const body = await bridgeFetch('/v1/bridge/adsense-status', undefined, 8_000) as
+        { result?: AdsenseStatus } | null;
+    return body?.result || null;
+}
+
+/** 구글 로그인 창을 이 PC 에서 띄운다. 자격증명은 127.0.0.1 로만 간다. */
+export async function bridgeAdsenseLogin(clientId: string, clientSecret: string): Promise<
+    { ok: true } | { ok: false; reason: string }
+> {
+    try {
+        const response = await fetch(`${BRIDGE_BASE}/v1/bridge/adsense-login`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ clientId, clientSecret }),
+        });
+        if (response.status === 404) return { ok: false, reason: 'LEWORD 앱이 구버전입니다 — 앱을 최신으로 올려 주세요.' };
+        const body = await response.json().catch(() => null) as
+            { ok?: boolean; result?: { ok?: boolean; reason?: string } } | null;
+        if (body?.result?.ok) return { ok: true };
+        return { ok: false, reason: String(body?.result?.reason || '로그인을 끝내지 못했습니다.') };
+    } catch {
+        return { ok: false, reason: 'LEWORD 앱이 꺼져 있습니다 — 앱을 켠 뒤 다시 눌러 주세요.' };
+    }
+}
+
+export type RpmRow = { pageUrl: string; earnings: number; pageViews: number; rpm: number | null };
+export type RpmReport = {
+    rows: RpmRow[]; startDate: string; endDate: string; currency: string; account: string;
+};
+
+export async function bridgeAdsenseRpm(days: number, currencyCode = 'USD'): Promise<
+    { status: 'ok'; report: RpmReport } | { status: 'offline' | 'outdated' } | { status: 'error'; message: string }
+> {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 90_000);
+    try {
+        const response = await fetch(`${BRIDGE_BASE}/v1/bridge/adsense-rpm`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ days, currencyCode }),
+            signal: controller.signal,
+        });
+        if (response.status === 404) return { status: 'outdated' };
+        const body = await response.json().catch(() => null) as
+            { ok?: boolean; error?: string; result?: (RpmReport & { error?: string }) } | null;
+        const result = body?.result;
+        if (response.ok && body?.ok && result && Array.isArray(result.rows)) {
+            return { status: 'ok', report: result };
+        }
+        return { status: 'error', message: String(result?.error || body?.error || `앱 응답 ${response.status}`) };
+    } catch {
+        return { status: 'offline' };
+    } finally {
+        window.clearTimeout(timer);
+    }
+}
+
 export type BridgePostAnalyzeResult =
     | { status: 'ok'; analysis: unknown; checklist: unknown; measured: unknown; provider: string }
     | { status: 'outdated' | 'offline' }
