@@ -837,6 +837,12 @@ function LewordStyles() {
             .lw-rpm-ok { color: rgba(235,242,250,.8); border-color: rgba(255,255,255,.14); }
             .lw-rpm-low { color: #ff6b6b; border-color: rgba(255,107,107,.34); background: rgba(255,107,107,.06); }
             .lw-rpm-na { color: #646b7d; border-color: rgba(255,255,255,.09); }
+            /* 자동 갱신 토글 — 지켜보는 판이라 마지막으로 잰 시각이 같이 보여야 한다. */
+            .lw-rpm-auto {
+                display: inline-flex; align-items: center; gap: 7px;
+                color: rgba(235,242,250,.72); font-size: 12.5px; cursor: pointer;
+            }
+            .lw-rpm-auto b { color: #f4c95d; font-weight: 700; }
             /* 돈·조회수는 자릿수가 맞아야 비교가 된다. RPM 표에만 준다. */
             .lw-rpm-table td { font-variant-numeric: tabular-nums; }
 

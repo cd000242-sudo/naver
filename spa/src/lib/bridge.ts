@@ -353,7 +353,11 @@ export type RpmReport = {
     rows: RpmRow[]; startDate: string; endDate: string; currency: string; account: string;
 };
 
-export async function bridgeAdsenseRpm(days: number, currencyCode = 'USD'): Promise<
+/**
+ * @param includeToday 오늘까지 포함할지. 방금 쓴 글을 보려면 참이어야 한다 —
+ *   끝을 어제로 두면 오늘 올린 글은 아예 안 나온다(사장님 지적 2026-08-28).
+ */
+export async function bridgeAdsenseRpm(days: number, currencyCode = 'USD', includeToday = false): Promise<
     { status: 'ok'; report: RpmReport } | { status: 'offline' | 'outdated' } | { status: 'error'; message: string }
 > {
     const controller = new AbortController();
@@ -362,7 +366,7 @@ export async function bridgeAdsenseRpm(days: number, currencyCode = 'USD'): Prom
         const response = await fetch(`${BRIDGE_BASE}/v1/bridge/adsense-rpm`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ days, currencyCode }),
+            body: JSON.stringify({ days, currencyCode, includeToday }),
             signal: controller.signal,
         });
         if (response.status === 404) return { status: 'outdated' };

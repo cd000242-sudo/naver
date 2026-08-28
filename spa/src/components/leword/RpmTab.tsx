@@ -13,23 +13,35 @@
  * 애드센스 토큰은 앱에만 둔다 — 수익 자료라 브라우저에 자격증명을 둘 이유가 없다.
  * 사이트는 계산된 숫자만 받는다.
  */
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
     bridgeAdsenseLogin, bridgeAdsenseRpm, bridgeAdsenseStatus,
     type AdsenseStatus, type RpmReport, type RpmRow,
 } from '../../lib/bridge';
 import { TabIntro } from './LewordShared';
 
-/** 기간 — 애드센스가 확정한 값만 쓰므로 끝은 언제나 어제다. */
+/*
+ * 기간. **오늘**이 기본이다(사장님 지시 2026-08-28: "글을 올렸다면 그 글의
+ * RPM 을 실시간으로 알 수 있잖아").
+ *
+ * 처음엔 어제까지로 잘라 뒀는데, 그러면 오늘 올린 글은 아예 안 나온다 —
+ * 정작 쓰려는 경우가 그것이다.
+ *
+ * 오늘 값도 구글이 실제로 잰 것이다. 다만 15~30분마다 갱신되고 아직 움직인다
+ * (지연 집계가 있어 날짜 사이에서 값이 옮겨 다닌다). 그 사실을 화면에 적는다.
+ */
 const PERIODS = [
-    { days: 7, label: '7일' },
-    { days: 28, label: '28일' },
-    { days: 90, label: '90일' },
+    { days: 1, today: true, label: '오늘' },
+    { days: 7, today: false, label: '7일' },
+    { days: 28, today: false, label: '28일' },
+    { days: 90, today: false, label: '90일' },
 ];
 
 export default function RpmTab() {
     const [status, setStatus] = useState<AdsenseStatus | 'probing' | null>('probing');
-    const [days, setDays] = useState(28);
+    /* 기본은 오늘 — 방금 쓴 글을 보는 것이 이 탭의 주 용도다. */
+    const [days, setDays] = useState(1);
+    const [today, setToday] = useState(true);
     const [report, setReport] = useState<RpmReport | null>(null);
     const [loading, setLoading] = useState(false);
     const [note, setNote] = useState('');
@@ -38,6 +50,15 @@ export default function RpmTab() {
     const [loginBusy, setLoginBusy] = useState(false);
     /** 글 하나만 보기 — 표에서 그 주소를 찾아 낸다. 다시 부르지 않는다. */
     const [oneUrl, setOneUrl] = useState('');
+    /*
+     * 자동 갱신(사장님 지시 2026-08-28: "이 탭에서 실시간으로 RPM 값을 보게끔
+     * 하려는 게 목적"). 글 올리고 지켜보는 판이라 손으로 다시 누르게 두면 안 된다.
+     * 애드센스가 15~30분마다 갱신하므로 10분이면 놓치는 것이 없다.
+     */
+    const [auto, setAuto] = useState(true);
+    const [lastAt, setLastAt] = useState('');
+
+    const linked = typeof status === 'object' && status !== null && status.connected;
 
     const probe = async () => {
         setStatus('probing');
@@ -49,15 +70,34 @@ export default function RpmTab() {
         if (loading) return;
         setLoading(true);
         setNote('');
-        const result = await bridgeAdsenseRpm(days, 'USD');
+        const result = await bridgeAdsenseRpm(days, 'USD', today);
         setLoading(false);
-        if (result.status === 'ok') { setReport(result.report); return; }
+        if (result.status === 'ok') {
+            setReport(result.report);
+            setLastAt(new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }));
+            return;
+        }
         setNote(result.status === 'offline'
             ? 'LEWORD 앱이 꺼져 있습니다 — 앱을 켠 뒤 다시 눌러 주세요(애드센스 연결은 앱에만 있습니다).'
             : result.status === 'outdated'
                 ? 'LEWORD 앱이 이 기능이 실리기 전 버전입니다 — 앱을 최신으로 올려 주세요.'
                 : result.status === 'error' ? result.message : '재지 못했습니다.');
     };
+
+    /*
+     * 오늘을 보고 있을 때만 자동으로 다시 잰다 — 지난 기간 값은 변하지 않는다.
+     *
+     * 의존성 배열은 **반드시 있어야 한다**: 없으면 렌더마다 타이머가 새로 걸려
+     * 10분이 영영 오지 않는다(첫 판에서 그렇게 짰다가 잡았다).
+     * run 은 렌더마다 새로 만들어지므로 배열에 넣지 않고 ref 로 최신 것을 부른다.
+     */
+    const runRef = useRef(run);
+    runRef.current = run;
+    useEffect(() => {
+        if (!auto || !today || !linked) return undefined;
+        const timer = window.setInterval(() => { void runRef.current(); }, 10 * 60 * 1000);
+        return () => window.clearInterval(timer);
+    }, [auto, today, linked, days]);
 
     const login = async () => {
         setLoginBusy(true);
@@ -93,6 +133,14 @@ export default function RpmTab() {
     const verdict = (row: RpmRow) => {
         if (row.pageViews === 0) return { cls: 'na', text: '못 잼 · 페이지뷰 0' };
         if (row.rpm == null || !summary?.avgRpm) return { cls: 'na', text: '견줄 평균 없음' };
+        /*
+         * 표본이 적으면 RPM 이 크게 흔들린다 — 이걸 안 짚으면 **손해가 난다**
+         * (사장님 2026-08-28: 트래픽을 끌기 전에 그 글이 돈이 되는지 봐야 한다).
+         * 방문자 3명에 클릭 하나면 RPM 이 수십 달러로 찍힌다. 그 값을 믿고
+         * 트래픽을 부으면 평균으로 돌아오면서 그대로 손해다.
+         * 값을 감추지는 않는다 — 못 믿을 값이라는 사실을 함께 낸다.
+         */
+        if (row.pageViews < 100) return { cls: 'na', text: `표본 적음(${row.pageViews}뷰) · 더 쌓여야 압니다` };
         const ratio = row.rpm / summary.avgRpm;
         if (ratio >= 1.2) return { cls: 'hot', text: `${ratio.toFixed(1)}배 · 트래픽 끌면 됨` };
         if (ratio >= 0.8) return { cls: 'ok', text: '평균 수준' };
@@ -106,14 +154,12 @@ export default function RpmTab() {
         return report.rows.filter((row) => row.pageUrl.toLowerCase().includes(wanted));
     }, [report, oneUrl]);
 
-    const linked = typeof status === 'object' && status !== null && status.connected;
-
     return (
         <>
             <TabIntro
                 title="글 RPM 확인"
                 desc="애드센스가 준 글 주소별 수익과 페이지뷰로 RPM 을 냅니다(수익 ÷ 페이지뷰 × 1000). 여기 숫자는 전부 실제로 발생한 돈이며, 예상 수익은 표시하지 않습니다. 금액은 달러로 받습니다."
-                source="구글 애드센스 실적(글 주소별) · 확정된 어제까지"
+                source="구글 애드센스 실적(글 주소별) · 오늘 값은 15~30분마다 갱신됩니다"
             />
 
             {/* 연결 상태 — 무엇이 없어서 못 쓰는지까지 말한다. */}
@@ -166,23 +212,41 @@ export default function RpmTab() {
 
             <div className="lw-panel-head" style={{ marginTop: 22 }}>
                 <h2>내 글 전체 — RPM 높은 순</h2>
-                <span>기간 동안 수익이 난 글을 전부 가져옵니다 · 끝은 언제나 어제입니다(오늘 값은 애드센스가 아직 확정하지 않습니다)</span>
+                <span>기간 동안 수익이 난 글을 전부 가져옵니다 · 방금 쓴 글을 보려면 [오늘]로 두세요</span>
             </div>
             <form className="lw-search" onSubmit={(event) => { event.preventDefault(); void run(); }}>
                 <div className="lw-segment">
                     {PERIODS.map((period) => (
                         <button
                             key={period.days} type="button"
-                            className={days === period.days ? 'on' : ''}
-                            onClick={() => setDays(period.days)}
+                            className={days === period.days && today === period.today ? 'on' : ''}
+                            onClick={() => { setDays(period.days); setToday(period.today); }}
                         >{period.label}</button>
                     ))}
                 </div>
                 <button type="submit" disabled={loading || !linked}>
                     {loading ? '재는 중…' : 'RPM 재기'}
                 </button>
+                {today && (
+                    <label className="lw-rpm-auto">
+                        <input type="checkbox" checked={auto} onChange={(event) => setAuto(event.target.checked)} />
+                        10분마다 자동 갱신
+                        {lastAt && <b>{lastAt} 기준</b>}
+                    </label>
+                )}
             </form>
             {note && <div className={`lw-note${report ? '' : ' lw-note-err'}`}>{note}</div>}
+            {/*
+              * 오늘 값의 성격을 그대로 밝힌다. 애드센스 수익은 월말 정산 전까지
+              * 전부 '추정' 표기이고(어제 값도 그렇다), 오늘 값은 거기에 더해
+              * 아직 움직인다. 구글이 실제로 잰 값이지 우리가 만든 값은 아니다.
+              */}
+            {today && (
+                <div className="lw-note lw-note-plain">
+                    오늘 값은 <b>15~30분마다 갱신되며 아직 움직입니다</b> — 늦게 잡히는 노출·클릭이 있어 하루가 끝나야 자리를 잡습니다.
+                    방금 올린 글이면 페이지뷰가 쌓일 때까지 RPM 이 크게 흔들립니다. 애드센스 수익은 월말 정산 전까지 전부 추정 표기입니다.
+                </div>
+            )}
 
             {report && summary && (
                 <>
@@ -250,7 +314,11 @@ export default function RpmTab() {
                     </div>
 
                     <div className="lw-note lw-note-plain">
-                        네이버 블로그 글은 여기 나오지 않습니다 — 애드센스를 붙일 수 없는 곳이라 값 자체가 없습니다.
+                        <b>트래픽을 끌기 전에 RPM 부터 보십시오.</b> 1,000뷰당 $100 내는 글은 10명만 데려와도 $1 이지만,
+                        $0.01 짜리 글은 100명을 데려와도 $0.001 입니다. 같은 품이 드는데 결과가 다릅니다.
+                        단 <b>페이지뷰 100 미만은 아직 못 믿습니다</b> — 방문자 셋에 클릭 하나면 RPM 이 수십 달러로 찍히고,
+                        그걸 믿고 트래픽을 부으면 평균으로 돌아오면서 손해가 납니다.
+                        <br />네이버 블로그 글은 여기 나오지 않습니다 — 애드센스를 붙일 수 없는 곳이라 값 자체가 없습니다.
                         <br />남의 글 RPM 은 잴 수 없습니다: 수익도 페이지뷰도 계정 주인만 볼 수 있습니다.
                     </div>
                 </>
