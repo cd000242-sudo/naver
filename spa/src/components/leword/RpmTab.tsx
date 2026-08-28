@@ -140,11 +140,21 @@ export default function RpmTab() {
          * 트래픽을 부으면 평균으로 돌아오면서 그대로 손해다.
          * 값을 감추지는 않는다 — 못 믿을 값이라는 사실을 함께 낸다.
          */
-        if (row.pageViews < 100) return { cls: 'na', text: `표본 적음(${row.pageViews}뷰) · 더 쌓여야 압니다` };
         const ratio = row.rpm / summary.avgRpm;
-        if (ratio >= 1.2) return { cls: 'hot', text: `${ratio.toFixed(1)}배 · 트래픽 끌면 됨` };
-        if (ratio >= 0.8) return { cls: 'ok', text: '평균 수준' };
-        return { cls: 'low', text: `${ratio.toFixed(2)}배 · 사람은 오는데 돈이 안 됨` };
+        /*
+         * 비율은 **언제나 낸다**(사장님 지적 2026-08-28: "트래픽이 하나만 생겨도
+         * 그 글의 RPM 값을 알 수 있는데?"). 맞다 — 뷰가 하나여도 값은 존재한다.
+         * 앞서는 뷰 100 미만이면 비율을 통째로 감췄는데, 그러면 이제 막 시작한
+         * 사람에게는 이 탭이 아무 말도 안 해 준다.
+         *
+         * 대신 **몇 뷰짜리 값인지**를 붙인다. 뷰 셋에 클릭 하나면 RPM 이 수십
+         * 달러로 찍히고, 그 값만 믿고 트래픽을 부으면 평균으로 돌아오면서 손해다.
+         * 판단은 사장님이 한다 — 우리는 값과 그 값의 무게를 같이 낸다.
+         */
+        const thin = row.pageViews < 100 ? ` · ${count(row.pageViews)}뷰뿐` : '';
+        if (ratio >= 1.2) return { cls: thin ? 'na' : 'hot', text: `${ratio.toFixed(1)}배 · 트래픽 끌면 됨${thin}` };
+        if (ratio >= 0.8) return { cls: thin ? 'na' : 'ok', text: `평균 수준${thin}` };
+        return { cls: thin ? 'na' : 'low', text: `${ratio.toFixed(2)}배 · 사람은 오는데 돈이 안 됨${thin}` };
     };
 
     const rows = useMemo(() => {
@@ -316,8 +326,8 @@ export default function RpmTab() {
                     <div className="lw-note lw-note-plain">
                         <b>트래픽을 끌기 전에 RPM 부터 보십시오.</b> 1,000뷰당 $100 내는 글은 10명만 데려와도 $1 이지만,
                         $0.01 짜리 글은 100명을 데려와도 $0.001 입니다. 같은 품이 드는데 결과가 다릅니다.
-                        단 <b>페이지뷰 100 미만은 아직 못 믿습니다</b> — 방문자 셋에 클릭 하나면 RPM 이 수십 달러로 찍히고,
-                        그걸 믿고 트래픽을 부으면 평균으로 돌아오면서 손해가 납니다.
+                        방문자가 하나만 생겨도 그 글은 여기 뜹니다. 다만 <b>뷰가 적을수록 값이 크게 흔들립니다</b> —
+                        방문자 셋에 클릭 하나면 RPM 이 수십 달러로 찍힙니다. 그래서 뷰 100 미만이면 몇 뷰짜리인지 함께 적습니다.
                         <br />네이버 블로그 글은 여기 나오지 않습니다 — 애드센스를 붙일 수 없는 곳이라 값 자체가 없습니다.
                         <br />남의 글 RPM 은 잴 수 없습니다: 수익도 페이지뷰도 계정 주인만 볼 수 있습니다.
                     </div>
