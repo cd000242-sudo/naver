@@ -174,6 +174,27 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
     const tokenReady = Boolean(storedKeys.claudeToken);
     // 기존에 저장돼 있던 Gemini/OpenAI 키가 있으면 서버 폴백으로 여전히 쓰인다.
     const anyKeyReady = tokenReady || Boolean(storedKeys.geminiKey || storedKeys.openaiKey);
+    /*
+     * 지금 누르면 **무엇으로 생성되는가**. generate() 의 분기와 같은 값을 본다 —
+     * 화면과 실행이 다른 말을 하지 않게 한 곳에서 판정한다.
+     */
+    const ENGINE_LABEL: Record<string, string> = {
+        claude: '클로드', codex: '코덱스', gemini: '제미나이', grok: '그록',
+    };
+    const engineNote = (() => {
+        const picked = String(storedKeys.aiProvider || '');
+        if (picked && picked !== 'claude') {
+            const label = ENGINE_LABEL[picked] || picked;
+            if (agentReady) return { ok: true, text: `✅ ${label}(으)로 생성합니다 — 내 PC 의 앱 구독이라 추가 비용 없습니다.` };
+            if (bridgeState === 'probing' || bridgeState === null) return { ok: false, text: `${label}(으)로 생성합니다 — 앱 연동 확인 중…` };
+            return { ok: false, text: `${label}(으)로 생성합니다 — 이 엔진은 LEWORD 앱에서 돌아갑니다. 앱을 켜 주세요(내 API 키 탭에서 다른 엔진으로 바꿔도 됩니다).` };
+        }
+        if (tokenReady) return { ok: true, text: '✅ 클로드로 생성합니다 — 앱 없이, 구독이라 추가 비용 없습니다.' };
+        if (anyKeyReady) return { ok: true, text: '✅ 저장된 AI 키로 생성합니다 — 앱 없이 됩니다.' };
+        if (bridgeState === 'probing' || bridgeState === null) return { ok: false, text: '연동 상태 확인 중…' };
+        if (agentReady) return { ok: true, text: '✅ 내 PC 의 LEWORD 앱으로 생성합니다 — 구독이라 추가 비용 없습니다.' };
+        return { ok: false, text: '연동 전 — 내 API 키 탭에 클로드코드 토큰(claude setup-token, 구독 무료)을 넣으면 앱 없이 됩니다.' };
+    })();
 
     /*
      * 이 질문으로 쓸 글감(사장님 지시 2026-08-20) — 키워드를 누르면 그 키워드의
@@ -492,17 +513,16 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                             <section>
                                 <strong>답변 초안 — 깔끔·담백·정확, AI 티 0</strong>
                                 {/* 연동 상태 — 안 된 단계만 짚어 준다. 실측이고, 지어낸 상태 표시는 없다. */}
-                                <p className={`lw-kg-bridge${anyKeyReady || agentReady ? ' ok' : ''}`}>
-                                    {anyKeyReady
-                                        ? tokenReady
-                                            ? '✅ 클로드코드 토큰 연동됨 — 앱 없이, 구독으로 추가 비용 없이 생성'
-                                            : '✅ AI 키 연동됨 — 앱 없이 생성됩니다'
-                                        : bridgeState === 'probing' || bridgeState === null
-                                            ? '연동 상태 확인 중…'
-                                            : agentReady
-                                                ? '✅ 내 PC 의 LEWORD 앱 연동됨 — 구독으로 추가 비용 없이 생성'
-                                                : '연동 전 — 내 API 키 탭에 클로드코드 토큰(claude setup-token, 구독 무료)을 넣으면 앱 없이 됩니다.'}
-                                </p>
+                                {/*
+                                  * **무엇으로 생성되는지**를 적는다(사장님 지적 2026-08-28:
+                                  * 제미나이가 '사용 중'인데 "클로드코드 토큰 연동됨" 만 떴다).
+                                  *
+                                  * 예전엔 클로드 토큰이 있나만 보고 찍어서, 실제로는 앱의
+                                  * 제미나이로 갈 회차에 클로드로 돈다고 말했다. 실행 경로와
+                                  * 화면이 다른 말을 하면 눌러 보기 전엔 알 수가 없다.
+                                  * 아래 판정은 generate() 의 분기와 같은 값을 본다.
+                                  */}
+                                <p className={`lw-kg-bridge${engineNote.ok ? ' ok' : ''}`}>{engineNote.text}</p>
                                 <textarea
                                     className="lw-kg-draft"
                                     value={draft}
