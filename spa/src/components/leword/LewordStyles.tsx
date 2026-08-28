@@ -837,6 +837,9 @@ function LewordStyles() {
             .lw-rpm-ok { color: rgba(235,242,250,.8); border-color: rgba(255,255,255,.14); }
             .lw-rpm-low { color: #ff6b6b; border-color: rgba(255,107,107,.34); background: rgba(255,107,107,.06); }
             .lw-rpm-na { color: #646b7d; border-color: rgba(255,255,255,.09); }
+            /* 자격증명 받는 3단계 — 순서가 있는 일이라 번호를 그대로 쓴다. */
+            .lw-rpm-steps { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+            .lw-rpm-steps .lw-mini { text-decoration: none; cursor: pointer; }
             /* 자동 갱신 토글 — 지켜보는 판이라 마지막으로 잰 시각이 같이 보여야 한다. */
             .lw-rpm-auto {
                 display: inline-flex; align-items: center; gap: 7px;

@@ -114,6 +114,33 @@ export default function RpmTab({ onRadar }: { onRadar?: (pageUrl: string) => voi
         return () => window.clearInterval(timer);
     }, [auto, today, linked, days]);
 
+    /*
+     * 콘솔에서 내려받은 client_secret_….json 을 그대로 읽는다.
+     * 데스크톱 앱은 installed, 웹 앱은 web 키에 들어 있다 — 웹 앱이면
+     * 127.0.0.1 리다이렉트가 등록돼 있지 않아 로그인이 막히므로 그때 말해 준다.
+     */
+    const [credNote, setCredNote] = useState('');
+    const readCredentialsFile = async (file?: File) => {
+        if (!file) return;
+        try {
+            const parsed = JSON.parse(await file.text());
+            const desktop = parsed?.installed;
+            const web = parsed?.web;
+            const picked = desktop || web;
+            if (!picked?.client_id || !picked?.client_secret) {
+                setCredNote('이 파일에는 Client ID/Secret 이 없습니다 — 콘솔에서 받은 client_secret_….json 이 맞는지 확인해 주세요.');
+                return;
+            }
+            setClientId(String(picked.client_id));
+            setClientSecret(String(picked.client_secret));
+            setCredNote(desktop
+                ? '읽었습니다 — [구글 로그인]을 눌러 주세요.'
+                : '읽었습니다. 다만 이건 **웹 애플리케이션** 클라이언트라 로그인이 막힐 수 있습니다 — 막히면 콘솔에서 유형을 데스크톱 앱으로 하나 더 만들어 주세요.');
+        } catch {
+            setCredNote('JSON 을 읽지 못했습니다 — 콘솔에서 받은 파일을 그대로 넣어 주세요.');
+        }
+    };
+
     const login = async () => {
         setLoginBusy(true);
         setNote('구글 로그인 창을 이 PC 에서 엽니다 — 승인하면 돌아옵니다.');
@@ -209,10 +236,35 @@ export default function RpmTab({ onRadar }: { onRadar?: (pageUrl: string) => voi
                         <>
                             <div className="lw-note lw-note-plain">
                                 구글 클라우드 콘솔의 <b>데스크톱 앱</b> Client ID/Secret 이 필요합니다.
-                                블로그스팟·유튜브에 쓰시던 것과 같은 프로젝트면 그대로 됩니다 — 대신 그 프로젝트에서
-                                <b> AdSense Management API 를 켜 두셔야</b> 합니다.
+                                블로그스팟·유튜브에 쓰시던 것과 같은 프로젝트면 그대로 됩니다.
                                 <br />이 값은 이 PC 의 앱(127.0.0.1)으로만 갑니다. 사이트 서버로 나가지 않습니다.
                             </div>
+                            {/*
+                              * 콘솔에서 자동으로 끌어올 수는 없다(사장님 질문 2026-08-28
+                              * "버튼 만들어 줘야 되지 않니"): 표준 OAuth 클라이언트를 만드는
+                              * API 가 아예 없다. 자격증명을 받으려면 이미 자격증명이 있어야 하는
+                              * 순환이라 구글이 콘솔에서만 만들게 해 뒀다(gcloud 의 oauth-clients 는
+                              * IAP·워크포스 전용이라 데스크톱 앱에는 못 쓴다).
+                              *
+                              * 대신 손으로 옮겨 적는 일은 없앤다 — 콘솔이 주는 JSON 파일을
+                              * 그대로 넣으면 여기서 읽는다. 그리고 갈 곳을 버튼으로 연다.
+                              */}
+                            <div className="lw-rpm-steps">
+                                <a className="lw-mini" href="https://console.cloud.google.com/apis/library/adsense.googleapis.com" target="_blank" rel="noreferrer">
+                                    ① AdSense API 켜기
+                                </a>
+                                <a className="lw-mini" href="https://console.cloud.google.com/apis/credentials/oauthclient" target="_blank" rel="noreferrer">
+                                    ② 데스크톱 앱 클라이언트 만들기
+                                </a>
+                                <label className="lw-mini">
+                                    ③ 받은 JSON 넣기
+                                    <input
+                                        type="file" accept="application/json,.json" style={{ display: 'none' }}
+                                        onChange={(event) => { void readCredentialsFile(event.target.files?.[0]); }}
+                                    />
+                                </label>
+                            </div>
+                            {credNote && <div className="lw-note lw-note-plain">{credNote}</div>}
                             <div className="lw-search lw-search-two" style={{ marginTop: 10 }}>
                                 <input
                                     type="text" value={clientId} onChange={(event) => setClientId(event.target.value)}
