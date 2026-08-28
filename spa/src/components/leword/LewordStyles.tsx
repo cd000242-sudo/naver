@@ -837,6 +837,34 @@ function LewordStyles() {
             .lw-rpm-ok { color: rgba(235,242,250,.8); border-color: rgba(255,255,255,.14); }
             .lw-rpm-low { color: #ff6b6b; border-color: rgba(255,107,107,.34); background: rgba(255,107,107,.06); }
             .lw-rpm-na { color: #646b7d; border-color: rgba(255,255,255,.09); }
+            /* 사용법 — 접힌 채로 늘 그 자리에 있는다. 연결이 끝나도 지우지 않는다. */
+            .lw-rpm-help {
+                margin-top: 14px; border: 1px solid rgba(255,255,255,.09);
+                border-radius: 12px; background: rgba(255,255,255,.025);
+            }
+            .lw-rpm-help > summary {
+                cursor: pointer; padding: 12px 15px; font-weight: 700;
+                color: rgba(235,242,250,.86); font-size: 13.5px; list-style: none;
+            }
+            .lw-rpm-help > summary::-webkit-details-marker { display: none; }
+            .lw-rpm-help > summary::before { content: '▸ '; color: #f4c95d; }
+            .lw-rpm-help[open] > summary::before { content: '▾ '; }
+            .lw-rpm-help-body { padding: 0 15px 16px; color: rgba(235,242,250,.74); font-size: 13px; line-height: 1.7; }
+            .lw-rpm-help-body h4 {
+                margin: 16px 0 5px; color: #fff; font-size: 13.5px; font-weight: 700;
+            }
+            .lw-rpm-help-body p { margin: 0 0 6px; }
+            .lw-rpm-help-body ul { margin: 4px 0 0; padding-left: 18px; }
+            .lw-rpm-help-body li { margin-bottom: 5px; }
+            .lw-rpm-help-body code {
+                background: rgba(255,255,255,.07); border-radius: 4px;
+                padding: 1px 5px; font-size: 12px; color: #f4c95d;
+            }
+            .lw-rpm-warn {
+                display: inline-block; margin-left: 6px; border-radius: 999px;
+                padding: 1px 8px; font-size: 11px; font-weight: 700;
+                color: #ff6b6b; border: 1px solid rgba(255,107,107,.34); background: rgba(255,107,107,.07);
+            }
             /* 자격증명 받는 3단계 — 순서가 있는 일이라 번호를 그대로 쓴다. */
             .lw-rpm-steps { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
             .lw-rpm-steps .lw-mini { text-decoration: none; cursor: pointer; }
