@@ -141,10 +141,13 @@ export default function RpmTab({ onRadar }: { onRadar?: (pageUrl: string) => voi
         }
     };
 
-    const login = async () => {
+    const login = async (switchAccount = false) => {
+        if (switchAccount && !window.confirm('지금 연결된 애드센스 계정을 끊고 다른 구글 계정으로 다시 로그인합니다. 계속할까요?')) return;
         setLoginBusy(true);
-        setNote('구글 로그인 창을 이 PC 에서 엽니다 — 승인하면 돌아옵니다.');
-        const result = await bridgeAdsenseLogin(clientId.trim(), clientSecret.trim());
+        setNote(switchAccount
+            ? '연결을 끊고 계정 선택 창을 엽니다 — 수익이 나는 계정을 골라 주세요.'
+            : '구글 로그인 창을 이 PC 에서 엽니다 — 승인하면 돌아옵니다.');
+        const result = await bridgeAdsenseLogin(clientId.trim(), clientSecret.trim(), switchAccount);
         setLoginBusy(false);
         setNote(result.ok ? '연결됐습니다 — [RPM 재기]를 눌러 주세요.' : result.reason);
         if (result.ok) { setClientSecret(''); void probe(); }
@@ -354,10 +357,29 @@ export default function RpmTab({ onRadar }: { onRadar?: (pageUrl: string) => voi
                     )}
                     <button
                         type="button" className="lw-mini" style={{ marginTop: 10 }}
-                        onClick={() => { void login(); }}
+                        onClick={() => { void login(false); }}
                         disabled={loginBusy || (status.need === 'credentials' && (!clientId.trim() || !clientSecret.trim()))}
                     >{loginBusy ? '로그인 창을 여는 중…' : '구글 로그인'}</button>
                 </section>
+            )}
+
+            {/*
+              * **어느 계정에 붙어 있는지 보여 준다**(사장님 실측 2026-08-28).
+              * 수익이 나던 애드센스는 다른 지메일에 있었는데, 화면은 "연동됨"만
+              * 말하고 계정을 안 보여 줘서 3년치 0 의 이유를 알 수가 없었다.
+              */}
+            {typeof status === 'object' && status !== null && status.connected && (
+                <div className={`lw-note${status.accountState && status.accountState !== 'READY' ? ' lw-note-err' : ' lw-note-plain'}`}>
+                    연결된 계정: <b>{status.account || '(이름을 못 읽었습니다)'}</b>
+                    {status.accountState && status.accountState !== 'READY' && (
+                        <> · 상태 <b>{status.accountState}</b> — 이 계정은 광고를 내지 못하는 상태라 실적이 0 으로 나옵니다.</>
+                    )}
+                    {' '}
+                    <button type="button" className="lw-mini lw-mini-ghost" onClick={() => { void login(true); }} disabled={loginBusy}>
+                        {loginBusy ? '여는 중…' : '계정 바꾸기'}
+                    </button>
+                    <br />수익이 나는 애드센스가 다른 구글 계정에 있으면 [계정 바꾸기]로 그 계정을 골라 주세요.
+                </div>
             )}
 
             <div className="lw-panel-head" style={{ marginTop: 22 }}>

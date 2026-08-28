@@ -319,6 +319,10 @@ export async function bridgeRadarEvaluate(input: {
 export type AdsenseStatus = {
     hasCredentials: boolean;
     connected: boolean;
+    /** 지금 붙어 있는 계정 — "박성현 (pub-5114…)". 어느 계정인지 안 보이면 엉뚱한 계정이 붙어도 모른다. */
+    account?: string;
+    /** READY / NEEDS_ATTENTION 등 구글이 준 상태 그대로. */
+    accountState?: string;
     need: '' | 'login' | 'credentials';
 };
 
@@ -329,14 +333,14 @@ export async function bridgeAdsenseStatus(): Promise<AdsenseStatus | null> {
 }
 
 /** 구글 로그인 창을 이 PC 에서 띄운다. 자격증명은 127.0.0.1 로만 간다. */
-export async function bridgeAdsenseLogin(clientId: string, clientSecret: string): Promise<
+export async function bridgeAdsenseLogin(clientId: string, clientSecret: string, switchAccount = false): Promise<
     { ok: true } | { ok: false; reason: string }
 > {
     try {
         const response = await fetch(`${BRIDGE_BASE}/v1/bridge/adsense-login`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ clientId, clientSecret }),
+            body: JSON.stringify({ clientId, clientSecret, switchAccount }),
         });
         if (response.status === 404) return { ok: false, reason: 'LEWORD 앱이 구버전입니다 — 앱을 최신으로 올려 주세요.' };
         const body = await response.json().catch(() => null) as
