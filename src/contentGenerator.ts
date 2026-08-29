@@ -181,6 +181,7 @@ import { sanitizeStructuredContentClaims } from './contentClaimSanitizer.js';
 import { normalizeContentTableBlocks } from './content/tableBlockNormalizer.js';
 import { applyPostDraftFactCheck } from './content/postDraftFactCheck.js';
 import { checkTitleAnswer, describeTitleAnswer } from './content/titleAnswerCheck.js';
+import { appendParaphraseUpgradeBlock, hasParaphraseUpgradeBrief } from './content/paraphraseUpgradeBlock.js';
 import {
   detectDuplicateContent,
   removeRepeatedFullContent,
@@ -2613,6 +2614,13 @@ export function buildModeBasedPrompt(
   if (contentMode !== 'affiliate' && isGeneralContentGuardEnabled() && !hasGroundingSource(source)) {
     systemPromptResult += `\n\n${buildGeneralContentGuardBlock()}`;
     console.log(`[PromptBuilder] 🔒 범용 근거부재 가드 적용 — ungrounded, mode=${contentMode}`);
+  }
+
+  // ✅ [2026-08-29] 상위노출 원본을 URL 로 넣은 경우 — 노출 요인 분석을 얹는다.
+  //   모드 프롬프트를 대체하지 않고 덧붙인다 — "원하는 모드로 상위호환".
+  if (hasParaphraseUpgradeBrief((source as any).paraphraseUpgradeBrief)) {
+    systemPromptResult = appendParaphraseUpgradeBlock(systemPromptResult, (source as any).paraphraseUpgradeBrief);
+    console.log(`[PromptBuilder] ⬆️ 상위호환 브리프 적용 — mode=${contentMode}`);
   }
 
   // ✅ [2026-08-28] 전 주제 공통 팩트 규율 — 자료를 잘못 조립하는 다섯 경로 차단.

@@ -5908,6 +5908,34 @@ ipcMain.handle(
       const { source, warnings } = await assembleContentSource(payload.assembly);
       const provider = payload.assembly.generator ?? source.generator ?? 'gemini';
 
+      // [2026-08-29] URL 로 넣은 상위노출 글은 그 자체로 재료가 아니라 **이미 네이버가 고른 글**이다.
+      //   붙여넣기 페러프레이징은 "왜 떴는가"를 먼저 읽는 1단을 타는데, URL 경로는 그걸 건너뛰어
+      //   상위호환이 아닌 단순 재작성이 나왔다. 같은 1단을 여기서도 탄다.
+      //   보조 단계라 실패해도 기존 URL 모드 그대로 간다.
+      try {
+        const { attachParaphraseUpgradeBrief } = await import('./main/paraphraseUpgradeForUrl.js');
+        const upgrade = await attachParaphraseUpgradeBrief(
+          source as any,
+          (await loadConfig().catch(() => null)) as Record<string, unknown> ?? {},
+          String(provider),
+        );
+        if (upgrade.attached) {
+          (source as any).paraphraseUpgradeBrief = upgrade.brief;
+          // 원본이 실제로 노리는 키워드를 쓴다 — 제목 앞단어 추측보다 정확하다.
+          if (upgrade.mainKeyword && !(payload.assembly.keywords?.length)) {
+            (source as any).metadata = {
+              ...((source as any).metadata ?? {}),
+              keywords: [upgrade.mainKeyword, ...upgrade.subKeywords].slice(0, 5),
+            };
+          }
+          console.log(`[Main] ⬆️ 상위호환 1단 분석 완료 (${upgrade.reason}) — 메인키워드=${upgrade.mainKeyword || '(유지)'}`);
+        } else {
+          console.log(`[Main] ⬆️ 상위호환 분석 생략 — ${upgrade.reason}`);
+        }
+      } catch (upgradeError) {
+        console.warn('[Main] 상위호환 분석 예외 — 기존 경로로 진행:', (upgradeError as Error)?.message);
+      }
+
       // [v2.11.133] Empathy-mode reader-situation material (지식iN questions).
       // Runs BEFORE the fact-check block below so citation mode captures the
       // final material set. Non-fatal: failure keeps the assembled source as-is.

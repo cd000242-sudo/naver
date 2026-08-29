@@ -86,7 +86,7 @@ async function callAgent(provider: 'codex' | 'claude' | 'gemini', prompt: string
   return result.json ? JSON.stringify(result.json) : result.text;
 }
 
-interface AnalysisRoute {
+export interface AnalysisRoute {
   engine: string;
   callModel: (prompt: string) => Promise<string>;
 }
@@ -96,7 +96,8 @@ interface AnalysisRoute {
  * 설정된 키 중 가장 싼 순서(openai → gemini → claude)로 — factCheckRouter 와 같은 규칙이다.
  * 이건 사용자가 고른 *본문 생성* 엔진을 몰래 바꾸는 폴백이 아니라, 보조 분석 단계의 경로다.
  */
-function resolveRoute(generator: string, config: Record<string, unknown>): AnalysisRoute | null {
+/** [2026-08-29] URL 모드에서도 같은 라우팅을 쓰려고 export 한다 — 엔진 선택 규칙을 한 곳에 둔다. */
+export function resolveRoute(generator: string, config: Record<string, unknown>): AnalysisRoute | null {
   if (generator === 'agent-codex') return { engine: 'codex', callModel: (p) => callAgent('codex', p) };
   if (generator === 'agent-claude') return { engine: 'claude(구독)', callModel: (p) => callAgent('claude', p) };
   if (generator === 'agent-gemini') return { engine: 'gemini(구독)', callModel: (p) => callAgent('gemini', p) };
