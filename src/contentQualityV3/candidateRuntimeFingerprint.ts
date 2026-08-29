@@ -135,6 +135,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/celebrityAssertionSanitizer.ts',
   'src/content/chainCache.ts',
   'src/content/chainedGeneration.ts',
+  'src/content/credentialClearIntent.ts',
   'src/content/ctrCombat.ts',
   'src/content/evaluators/affiliateEval.ts',
   'src/content/evaluators/homefeedEval.ts',

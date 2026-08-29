@@ -1535,11 +1535,15 @@
     async function clearSavedCredentials() {
       try {
         const config = await ipcRenderer.invoke('config:get');
+        // [2026-08-29] 빈 문자열만 보내면 configManager 의 PRESERVE 방어가
+        //   디스크 값으로 되돌려 삭제가 먹지 않았다(실측: 꺼도 다른 계정으로 로그인 불가).
+        //   값이 아니라 **삭제 의도**를 싣는다.
         const updatedConfig = {
           ...config,
           rememberLicenseCredentials: false,
           savedLicenseUserId: '',
           savedLicensePassword: '',
+          __clearCredentialFields: ['savedLicenseUserId', 'savedLicensePassword'],
         };
         await ipcRenderer.invoke('config:save', updatedConfig);
         console.log('[Login] ✅ 저장된 자격증명이 삭제되었습니다.');

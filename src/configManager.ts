@@ -1,4 +1,9 @@
 import { app } from 'electron';
+import {
+  CLEAR_INTENT_FIELD,
+  isIntentionallyCleared,
+  readClearIntent,
+} from './content/credentialClearIntent.js';
 import { describeNaverKeyPosture } from './naver/index.js';
 import fs from 'fs/promises';
 import path from 'path';
@@ -457,17 +462,29 @@ export async function loadConfig(): Promise<AppConfig> {
           const aHas = (typeof av === 'string' && av.trim().length > 0)
             || (Array.isArray(av) && av.length > 0)
             || (typeof av === 'boolean' && av !== undefined);
+          // [2026-08-29] 계정 설정이 명시적으로 자동로그인을 꺼 둔 상태면
+          //   마스터의 자격증명을 다시 채워 넣지 않는다 — 그게 로그아웃을 무효로 만들었다.
+          if (
+            (k === 'savedLicenseUserId' || k === 'savedLicensePassword')
+            && parsed.rememberLicenseCredentials === false
+          ) continue;
+          if (
+            (k === 'savedNaverId' || k === 'savedNaverPassword')
+            && parsed.rememberCredentials === false
+          ) continue;
           if (mHas && !aHas) {
             parsed[k] = mv;
             mergedCount++;
           }
         }
-        // 자격증명 있으면 remember 자동 true
-        if (parsed.savedNaverId && parsed.savedNaverPassword && parsed.rememberCredentials !== true) {
+        // 자격증명이 있고 **사용자가 꺼 둔 적이 없을 때만** remember 를 켜 준다.
+        // [2026-08-29] 이전엔 false 여도 무조건 true 로 덮어, 자동로그인을 끔 수 없었다.
+        //   명시적 false 는 사용자 선택이다 — undefined(미설정)만 보정한다.
+        if (parsed.savedNaverId && parsed.savedNaverPassword && parsed.rememberCredentials === undefined) {
           parsed.rememberCredentials = true;
           mergedCount++;
         }
-        if (parsed.savedLicenseUserId && parsed.savedLicensePassword && parsed.rememberLicenseCredentials !== true) {
+        if (parsed.savedLicenseUserId && parsed.savedLicensePassword && parsed.rememberLicenseCredentials === undefined) {
           parsed.rememberLicenseCredentials = true;
           mergedCount++;
         }
@@ -740,6 +757,17 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
   // ✅ [v2.10.277] Destructure to avoid mutating the caller's object.
   // __userId should already be stripped by saveConfig(), but handle here as a safety net.
   const { __userId, ...restUpdate } = update as any;
+  // [2026-08-29] 사용자가 명시적으로 지우기로 한 자격증명.
+  //   아래 PRESERVE 방어가 이 필드만큼은 디스크 값으로 되돌리지 않게 한다.
+  //   지시 자체는 저장하지 않는다 — 한 번짜리 신호다.
+  const clearedCredentialFields = readClearIntent(update);
+  if (clearedCredentialFields.length > 0) {
+    console.log(`[Config] 자격증명 명시 삭제: ${clearedCredentialFields.join(', ')}`);
+  }
+  delete (restUpdate as Record<string, unknown>)[CLEAR_INTENT_FIELD];
+  for (const field of clearedCredentialFields) {
+    delete (restUpdate as Record<string, unknown>)[field];
+  }
   const previousConfig = cachedConfig ? { ...cachedConfig } : {};
   if (__userId && typeof __userId === 'string') {
     // Safety net: __userId normally processed synchronously in saveConfig()
@@ -911,6 +939,10 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         const dRealSecret = typeof dv === 'string'
           && stripSecretSchemaArtifacts(dv).length > 0
           && !isMaskedSecretValue(stripSecretSchemaArtifacts(dv));
+        // [2026-08-29] 사용자가 일부러 지운 자격증명은 되돌리지 않는다.
+        //   이 방어는 부분 저장으로 API 키가 날아가던 사고를 막으려는 것인데,
+        //   빈 문자열 하나로 "손실"과 "삭제 의도"를 구분하지 못해 로그아웃을 되돌렸다.
+        if (isIntentionallyCleared(k, clearedCredentialFields)) continue;
         if (dHas && (!cHas || (cMasked && dRealSecret))) {
           (cachedConfig as any)[k] = dv;
           preserved++;
