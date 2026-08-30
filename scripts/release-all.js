@@ -255,7 +255,9 @@ async function main() {
   try {
     // ═══ Step 1: 회귀 방지 게이트 (lint + full tests + build) ═══
     if (!executeStep(1, totalSteps, '회귀 방지 게이트 (lint + tests + build)', 'node scripts/release-gate.js', {
-      timeout: 900000,
+      // [2026-08-30] 게이트 9단계(lint·전체 테스트·커버리지 2종·빌드·IPC·self-test·E2E)
+      // 실측이 900초 턱밑까지 온다 — v2.11.217 릴리즈에서 캡에 걸려 잘렸다.
+      timeout: 1800000,
       showOutput: true,
     })) {
       fail('회귀 방지 게이트 실패 — 릴리즈 중단');
