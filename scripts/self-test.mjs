@@ -11,13 +11,22 @@ import os from 'node:os';
 import path from 'node:path';
 
 const TIMEOUT_MS = 120_000;
+/*
+ * [2026-08-30] Boot stage gets its own, larger budget.
+ *
+ * Measured on this dev PC: boot + 5 IPC handshakes pass in 92s, and a slow agent
+ * status probe adds more. A 120s budget cuts off runs that would have PASSED and
+ * reports ETIMEDOUT — that blocked the v2.11.217 release gate. A real boot failure
+ * still reports itself through the app's own exit code.
+ */
+const BOOT_TIMEOUT_MS = 300_000;
 
-function run(label, command, args, env = {}) {
+function run(label, command, args, env = {}, timeoutMs = TIMEOUT_MS) {
   console.log(`\n[self-test] ▶ ${label}`);
   const result = spawnSync(command, args, {
     stdio: 'inherit',
     shell: process.platform === 'win32',
-    timeout: TIMEOUT_MS,
+    timeout: timeoutMs,
     env: { ...process.env, ...env },
   });
   if (result.error) {
@@ -46,7 +55,7 @@ for (const dir of ['userdata', 'appdata', 'localappdata']) {
 // plain node로 떠서 ipcMain이 undefined가 된다 — 반드시 제거.
 delete process.env.ELECTRON_RUN_AS_NODE;
 try {
-  run('앱 부팅 + 번들 헬스 + IPC 핸드셰이크 5종', 'npx', ['electron', '.'], appEnv);
+  run('앱 부팅 + 번들 헬스 + IPC 핸드셰이크 5종', 'npx', ['electron', '.'], appEnv, BOOT_TIMEOUT_MS);
 } finally {
   /*
    * [2026-08-27] 임시 프로필 삭제 실패로 릴리즈를 막지 않는다.
