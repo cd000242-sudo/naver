@@ -28,7 +28,7 @@ const MAX_DEDUP_ATTEMPTS = 3;
 
 export function isDropshotTerminalSessionFailure(error: unknown): boolean {
   const message = String(error ?? '').trim();
-  if (/^(?:DROPSHOT_(?:LOGIN|SESSION|CLEANUP|BROWSER)(?:_[A-Z_]+)?|LOGIN_REQUIRED)\b/.test(message)) {
+  if (/^(?:DROPSHOT_(?:AUTH|LOGIN|SESSION|CLEANUP|BROWSER)(?:_[A-Z_]+)?|LOGIN_REQUIRED)\b/.test(message)) {
     return true;
   }
   return [

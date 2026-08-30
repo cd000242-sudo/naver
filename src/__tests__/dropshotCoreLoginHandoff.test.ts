@@ -4,6 +4,10 @@ const mocks = vi.hoisted(() => ({
   ensureDropshotControls: vi.fn(),
   getProfileDir: vi.fn(() => 'profile-dir'),
   isLoggedIn: vi.fn(),
+  // Tri-state resolver used by production code; the default derives from the
+  // boolean mock so each call site still consumes one queued isLoggedIn answer.
+  resolveDropshotAuthState: vi.fn(async (page: unknown) =>
+    (await mocks.isLoggedIn(page)) ? 'authenticated' : 'unauthenticated'),
   launchBrowser: vi.fn(),
   minimizeDropshotWindow: vi.fn(),
   navigateToDropshotBoard: vi.fn(),
@@ -20,6 +24,7 @@ vi.mock('../image/dropshotBrowser.js', () => ({
   ensureDropshotControls: mocks.ensureDropshotControls,
   getProfileDir: mocks.getProfileDir,
   isLoggedIn: mocks.isLoggedIn,
+  resolveDropshotAuthState: mocks.resolveDropshotAuthState,
   launchBrowser: mocks.launchBrowser,
   minimizeDropshotWindow: mocks.minimizeDropshotWindow,
   navigateToDropshotBoard: mocks.navigateToDropshotBoard,
@@ -82,6 +87,22 @@ describe('Dropshot generation-time login handoff', () => {
     await rejection;
     expect(mocks.setCached).not.toHaveBeenCalledWith(visibleContext, visiblePage);
     expect(mocks.closeTrackedDropshotContext).toHaveBeenCalledWith(visibleContext);
+  });
+
+  it('never opens the interactive login window when the session probe is unavailable', async () => {
+    const headlessPage = { id: 'headless-page' };
+    const headlessContext = { pages: vi.fn(() => [headlessPage]) };
+    mocks.launchBrowser.mockResolvedValue(headlessContext);
+    mocks.selectDropshotPage.mockImplementation(async (context: any) => context.pages()[0]);
+    mocks.resolveDropshotAuthState.mockResolvedValueOnce('unavailable');
+
+    await expect(ensurePage()).rejects.toThrow(/DROPSHOT_AUTH_UNAVAILABLE/);
+
+    // A probe that never answered is not a logout: the visible login browser
+    // must not interrupt an unattended publish.
+    expect(mocks.launchBrowser).toHaveBeenCalledTimes(1);
+    expect(mocks.launchBrowser).toHaveBeenCalledWith('profile-dir', true);
+    expect(mocks.minimizeDropshotWindow).not.toHaveBeenCalled();
   });
 
   it('reuses the minimized authenticated context without launching another browser', async () => {

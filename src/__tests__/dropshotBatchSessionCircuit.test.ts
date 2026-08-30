@@ -57,6 +57,7 @@ describe('Dropshot batch session circuit breaker', () => {
     for (const terminal of [
       'DROPSHOT_CLEANUP_INCOMPLETE: context close timed out',
       'DROPSHOT_SESSION_HIDE_FAILED: window could not be hidden',
+      'DROPSHOT_AUTH_UNAVAILABLE: 로그인 상태를 확인하지 못했습니다.',
       'Authentication required',
       'Not authenticated',
       'Browser context has been closed',

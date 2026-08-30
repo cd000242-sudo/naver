@@ -11,6 +11,7 @@ import {
   minimizeDropshotWindow,
   navigateToDropshotBoard,
   openDropshotImageWorkspace,
+  resolveDropshotAuthState,
   selectDropshotPage,
 } from './dropshotBrowser.js';
 import {
@@ -72,9 +73,16 @@ async function getHealthyCachedPage(onLog?: (m: string) => void): Promise<any | 
 
   try {
     await (page as any).evaluate(() => document.readyState);
-    if (!(await isLoggedIn(page))) {
+    const authState = await resolveDropshotAuthState(page, onLog);
+    if (authState === 'unauthenticated') {
       await closeBrowserCache();
       return null;
+    }
+    if (authState === 'unavailable') {
+      // The probe never answered. Discarding the cache here would report a
+      // logout the user never made and force a fresh login every failure.
+      onLog?.('[리더스 나노바나나] 로그인 확인 응답이 없어 저장된 세션을 그대로 사용합니다.');
+      return page;
     }
     if (!(await openDropshotImageWorkspace(page, onLog))) {
       onLog?.('[리더스 나노바나나] 로그인은 유지되며 이미지 작업 화면은 생성 단계에서 다시 준비합니다.');
@@ -115,9 +123,18 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
     const headlessProbePage = await selectDropshotPage(context);
     const boardOpened = await navigateToDropshotBoard(headlessProbePage, onLog);
     assertDropshotNavigationOpened(boardOpened);
-    const initialAuthenticated = await isLoggedIn(headlessProbePage);
+    const initialAuthState = await resolveDropshotAuthState(headlessProbePage, onLog);
+    if (initialAuthState === 'unavailable') {
+      // Opening the interactive login window here would interrupt an unattended
+      // publish and wipe a session that is still valid on disk.
+      await closeContext(context);
+      context = null;
+      throw new Error(
+        'DROPSHOT_AUTH_UNAVAILABLE: 리더스 나노바나나 로그인 상태를 확인하지 못했습니다(응답 지연). 저장된 로그인은 유지되니 잠시 후 다시 시도해주세요.',
+      );
+    }
 
-    if (initialAuthenticated) {
+    if (initialAuthState === 'authenticated') {
       try {
         const workspaceReady = await openDropshotImageWorkspace(headlessProbePage, onLog);
         if (workspaceReady) {

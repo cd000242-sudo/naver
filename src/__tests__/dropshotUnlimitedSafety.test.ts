@@ -59,7 +59,7 @@ describe('Dropshot unlimited mode safety', () => {
   });
 
   it('rechecks zero-cost controls after adopting the hidden interactive context', () => {
-    const cachedAuth = coreCode.indexOf('if (!(await isLoggedIn(page)))');
+    const cachedAuth = coreCode.indexOf("if (authState === 'unauthenticated')");
     const cachedWorkspace = coreCode.indexOf('if (!(await openDropshotImageWorkspace(page, onLog)))', cachedAuth);
     const cachedReturn = coreCode.indexOf('return page;', cachedWorkspace);
     expect(cachedAuth).toBeGreaterThan(-1);
@@ -67,7 +67,7 @@ describe('Dropshot unlimited mode safety', () => {
     expect(cachedReturn).toBeGreaterThan(cachedWorkspace);
 
     const initialBoard = coreCode.indexOf('await navigateToDropshotBoard(headlessProbePage, onLog)');
-    const initialAuth = coreCode.indexOf('await isLoggedIn(headlessProbePage)', initialBoard);
+    const initialAuth = coreCode.indexOf('await resolveDropshotAuthState(headlessProbePage, onLog)', initialBoard);
     const initialWorkspace = coreCode.indexOf('await openDropshotImageWorkspace(headlessProbePage, onLog)', initialBoard);
     const initialControls = coreCode.indexOf('await ensureDropshotControls(headlessProbePage, onLog)', initialWorkspace);
     const initialCache = coreCode.indexOf('setCached(context, headlessProbePage);', initialControls);

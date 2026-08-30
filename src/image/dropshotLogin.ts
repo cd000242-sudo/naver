@@ -12,6 +12,7 @@ import {
   minimizeDropshotWindow,
   navigateToDropshotBoard,
   openDropshotImageWorkspace,
+  resolveDropshotAuthState,
   sanitizeDropshotErrorMessage,
   selectDropshotPage,
   type DropshotLoginStatus,
@@ -101,13 +102,23 @@ async function checkCachedDropshotLogin(
 ): Promise<DropshotLoginStatus> {
   const cachedPage = getCachedPage();
   if (cachedPage) {
-    let cachedLoggedIn = false;
+    let cachedAuthState: 'authenticated' | 'unauthenticated' | 'unavailable' = 'unavailable';
     try {
-      cachedLoggedIn = await isLoggedIn(cachedPage);
+      cachedAuthState = await resolveDropshotAuthState(cachedPage, onLog);
     } catch {
       // A stale page is closed below before a fresh profile check.
     }
-    if (cachedLoggedIn) {
+    if (cachedAuthState === 'unavailable') {
+      // Never downgrade a live session to "logged out" on a probe that timed out.
+      return {
+        loggedIn: false,
+        message: '로그인 상태 응답이 지연됩니다. 저장된 로그인은 유지되며 잠시 후 다시 확인합니다.',
+        phase: 'checking',
+        ready: false,
+        code: 'AUTH_PROBE_UNAVAILABLE',
+      };
+    }
+    if (cachedAuthState === 'authenticated') {
       const authenticated: DropshotLoginStatus = {
         loggedIn: true,
         message: '저장된 로그인을 자동으로 인식했습니다. 무제한·0비용 모드는 생성 전에 다시 확인합니다.',

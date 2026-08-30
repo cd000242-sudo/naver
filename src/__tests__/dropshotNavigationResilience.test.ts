@@ -253,10 +253,12 @@ describe('Dropshot board navigation resilience', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
+  // A definitive 401 answers once; a transient failure is retried before the
+  // saved login may be reported as logged out.
   it.each([
-    ['HTTP 401', vi.fn().mockResolvedValue({ ok: false, status: 401 })],
-    ['network failure', vi.fn().mockRejectedValue(new Error('network unavailable'))],
-  ])('does not throw or authenticate when the Auth.js probe has %s', async (_label, fetchMock) => {
+    ['HTTP 401', vi.fn().mockResolvedValue({ ok: false, status: 401 }), 1],
+    ['network failure', vi.fn().mockRejectedValue(new Error('network unavailable')), 3],
+  ])('does not throw or authenticate when the Auth.js probe has %s', async (_label, fetchMock, expectedProbes) => {
     vi.stubGlobal('fetch', fetchMock);
     const page = {
       url: vi.fn().mockReturnValue(BOARD_URL),
@@ -265,7 +267,7 @@ describe('Dropshot board navigation resilience', () => {
     };
 
     await expect(isLoggedIn(page)).resolves.toBe(false);
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledTimes(expectedProbes);
   });
 
   it('does not trust a legacy Cognito JWT when the authoritative session API is unavailable', async () => {
@@ -285,7 +287,7 @@ describe('Dropshot board navigation resilience', () => {
     };
 
     await expect(isLoggedIn(page)).resolves.toBe(false);
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledTimes(3);
   });
 
   it('honors an explicit unauthenticated session response over a stale legacy JWT', async () => {

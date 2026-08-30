@@ -4,6 +4,10 @@ const mocks = vi.hoisted(() => ({
   ensureDropshotControls: vi.fn(),
   getProfileDir: vi.fn(() => 'profile-dir'),
   isLoggedIn: vi.fn(),
+  // Tri-state resolver used by production code; the default derives from the
+  // boolean mock so each call site still consumes one queued isLoggedIn answer.
+  resolveDropshotAuthState: vi.fn(async (page: unknown) =>
+    (await mocks.isLoggedIn(page)) ? 'authenticated' : 'unauthenticated'),
   launchBrowser: vi.fn(),
   minimizeDropshotWindow: vi.fn(),
   selectDropshotPage: vi.fn(),
@@ -27,6 +31,7 @@ vi.mock('../image/dropshotBrowser.js', () => ({
   ensureDropshotControls: mocks.ensureDropshotControls,
   getProfileDir: mocks.getProfileDir,
   isLoggedIn: mocks.isLoggedIn,
+  resolveDropshotAuthState: mocks.resolveDropshotAuthState,
   launchBrowser: mocks.launchBrowser,
   minimizeDropshotWindow: mocks.minimizeDropshotWindow,
   selectDropshotPage: mocks.selectDropshotPage,
@@ -89,6 +94,21 @@ describe('Dropshot interactive login lifecycle', () => {
     });
 
     expect(mocks.launchBrowser).not.toHaveBeenCalled();
+  });
+
+  it('keeps the saved session instead of reporting a logout when the probe is unavailable', async () => {
+    const page = { id: 'cached-page' };
+    const context = { pages: vi.fn(() => [page]), newPage: vi.fn(async () => page) };
+    mocks.getCachedContext.mockReturnValue(context);
+    mocks.getCachedPage.mockReturnValue(page);
+    mocks.resolveDropshotAuthState.mockResolvedValueOnce('unavailable');
+
+    await expect(checkDropshotLogin()).resolves.toMatchObject({
+      phase: 'checking',
+      code: 'AUTH_PROBE_UNAVAILABLE',
+    });
+
+    expect(mocks.closeBrowserCache).not.toHaveBeenCalled();
   });
 
   it('keeps passive status checks browser-free until the user explicitly starts login', async () => {

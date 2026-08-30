@@ -68,6 +68,13 @@ export interface DropshotLaunchOptions {
 }
 
 const DROPSHOT_AUTH_SESSION_PROBE_TIMEOUT_MS = 4_000;
+/**
+ * A slow PC or a stalled network makes the first session probe time out even
+ * though the saved login is intact. Retries with a longer budget keep those
+ * transient answers from being reported as a logout.
+ */
+const DROPSHOT_AUTH_RETRY_DELAYS_MS = [600, 1_400] as const;
+const DROPSHOT_AUTH_RETRY_PROBE_TIMEOUT_MS = 8_000;
 const DROPSHOT_AUTH_SESSION_NODE_TIMEOUT_MARGIN_MS = 250;
 const DROPSHOT_INITIAL_PAGE_WAIT_MS = 1_000;
 
@@ -580,15 +587,38 @@ export async function probeDropshotAuthSession(
   }
 }
 
+/**
+ * Three-state auth verdict with bounded retries. Callers that own session state
+ * MUST branch on 'unavailable' instead of treating it as a logout: the saved
+ * profile is still authenticated when the probe merely failed to answer.
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function isLoggedIn(page: any): Promise<boolean> {
+export async function resolveDropshotAuthState(
+  page: any,
+  onLog?: (m: string) => void,
+): Promise<DropshotAuthSessionProbeResult> {
   try {
     const pageUrl = typeof page?.url === 'function' ? String(page.url()) : '';
-    if (!isDropshotStudioOrigin(pageUrl)) return false;
-    return (await probeDropshotAuthSession(page)) === 'authenticated';
+    if (!isDropshotStudioOrigin(pageUrl)) return 'unauthenticated';
+
+    let state = await probeDropshotAuthSession(page);
+    for (const delayMs of DROPSHOT_AUTH_RETRY_DELAYS_MS) {
+      if (state !== 'unavailable') break;
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+      state = await probeDropshotAuthSession(page, DROPSHOT_AUTH_RETRY_PROBE_TIMEOUT_MS);
+    }
+    if (state === 'unavailable') {
+      onLog?.('[리더스 나노바나나] 로그인 상태 응답이 지연됩니다. 저장된 로그인은 그대로 유지합니다.');
+    }
+    return state;
   } catch {
-    return false;
+    return 'unavailable';
   }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function isLoggedIn(page: any): Promise<boolean> {
+  return (await resolveDropshotAuthState(page)) === 'authenticated';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

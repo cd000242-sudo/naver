@@ -24,7 +24,7 @@ describe('Dropshot login success policy', () => {
     const checkIndex = source.indexOf('async function checkCachedDropshotLogin');
     const loginIndex = source.indexOf('async function dropshotLoginInternal', checkIndex);
     const checkBlock = source.slice(checkIndex, loginIndex);
-    const cachedSuccessIndex = checkBlock.indexOf('if (cachedLoggedIn)');
+    const cachedSuccessIndex = checkBlock.indexOf("if (cachedAuthState === 'authenticated')");
     const cachedWorkspaceIndex = checkBlock.indexOf('await openDropshotImageWorkspace(cachedPage, onLog)', cachedSuccessIndex);
     const cachedControlsIndex = checkBlock.indexOf('await ensureDropshotControls(cachedPage, onLog)', cachedWorkspaceIndex);
     const cachedReturnIndex = checkBlock.indexOf('return authenticatedStatus(true', cachedControlsIndex);
@@ -66,7 +66,7 @@ describe('Dropshot login success policy', () => {
     const checkIndex = source.indexOf('async function checkCachedDropshotLogin');
     const loginIndex = source.indexOf('async function dropshotLoginInternal', checkIndex);
     const checkBlock = source.slice(checkIndex, loginIndex);
-    const authIndex = checkBlock.indexOf('if (cachedLoggedIn)');
+    const authIndex = checkBlock.indexOf("if (cachedAuthState === 'authenticated')");
     const successIndex = checkBlock.indexOf("phase: 'authenticated'", authIndex);
     const controlsIndex = checkBlock.indexOf('ensureDropshotControls', authIndex);
 
