@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { resolveSemiAutoPublishStructure } from '../renderer/utils/semiAutoHeadingExtractor';
+import { isNonBodyImageHeading, resolveSemiAutoPublishStructure } from '../renderer/utils/semiAutoHeadingExtractor';
 
 /**
  * 실측 사고(2026-08-23): 이미지 3장을 만들어 붙였는데 발행된 글에는 이미지가 하나도 없었다.
@@ -38,10 +38,59 @@ describe('발행 구조 복구 — 이미지 소제목', () => {
     expect(structure.headings).toHaveLength(0);
   });
 
+  /**
+   * 실측(2026-08-30 진단리포트): URL 로 이미지를 수집해 이미지 관리 탭에 붙였는데
+   * 발행 직전 "이미지 N개가 준비돼 있는데 넣을 자리를 찾지 못했습니다" 경고가 반복됐다.
+   * 썸네일은 본문에 글자로 존재하지 않는 가짜 소제목인데, 이것이 앵커 목록에 섞여
+   * "전부 순서대로 있어야 한다"는 조건을 깨뜨려 복구가 통째로 무산됐다.
+   */
+  it('썸네일이 섞여 있어도 본문에 실재하는 이미지 소제목으로 복구한다', () => {
+    const structure = resolveSemiAutoPublishStructure(body, [], {
+      bodyIsAuthoritative: true,
+      imageHeadingTitles: [
+        '🖼️ 썸네일',
+        '전환하면 실적이 그대로 인정돼요.',
+        '창구에서 준비물은 이것만 챙기세요.',
+      ],
+    });
+
+    expect(structure.strategy).toBe('body-sections');
+    expect(structure.headings).toHaveLength(2);
+    expect(structure.headings.map((heading) => heading.title)).not.toContain('🖼️ 썸네일');
+  });
+
+  it('본문에 없는 소제목 하나가 섞여도 나머지 실재 소제목은 살린다', () => {
+    const structure = resolveSemiAutoPublishStructure(body, [], {
+      bodyIsAuthoritative: true,
+      imageHeadingTitles: [
+        '전환하면 실적이 그대로 인정돼요.',
+        '본문에서 사용자가 지운 소제목',
+        '창구에서 준비물은 이것만 챙기세요.',
+      ],
+    });
+
+    expect(structure.strategy).toBe('body-sections');
+    expect(structure.headings).toHaveLength(2);
+  });
+
   it('이미지 정보가 없으면 기존 동작 그대로 plain-body 로 남는다', () => {
     const structure = resolveSemiAutoPublishStructure(body, [], { bodyIsAuthoritative: true });
 
     expect(structure.strategy).toBe('plain-body');
     expect(structure.headings).toHaveLength(0);
   });
+
+  it.each(['🖼️ 썸네일', '썸네일', '🖼️썸네일', '블로그 썸네일', '대표 이미지'])(
+    '%s 는 본문 앵커가 아니다',
+    (title) => {
+      expect(isNonBodyImageHeading(title)).toBe(true);
+    },
+  );
+
+  it.each(['전환하면 실적이 그대로 인정돼요.', '창구에서 준비물은 이것만 챙기세요.'])(
+    '%s 는 본문 앵커로 그대로 쓴다',
+    (title) => {
+      expect(isNonBodyImageHeading(title)).toBe(false);
+    },
+  );
 });

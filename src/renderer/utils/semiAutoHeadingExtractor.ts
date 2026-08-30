@@ -196,6 +196,50 @@ function sliceBodyByExistingHeadingTitles(
 }
 
 /**
+ * [2026-08-30] 썸네일은 본문에 글자로 존재하지 않는 가짜 소제목이다.
+ *
+ * ImageManager 는 썸네일을 '🖼️ 썸네일' 키로 들고 있어서, 이미지 소제목 목록에 그대로
+ * 섞여 들어온다. 아래 앵커 슬라이스는 "모든 제목이 본문에 순서대로 있어야 한다"를
+ * 요구하므로, 본문에 있을 수 없는 이 한 줄이 복구를 통째로 무산시켰다(실측: URL 로
+ * 이미지를 수집해 붙였는데 "넣을 자리를 찾지 못했습니다" 경고 반복).
+ */
+export function isNonBodyImageHeading(title: string): boolean {
+  const normalized = String(title || '').replace(/\s+/g, ' ').trim();
+  if (!normalized) return true;
+  return /썸네일/.test(normalized) || /^대표\s*이미지$/.test(normalized);
+}
+
+/**
+ * 본문에 실제로 있는 제목만 순서대로 앵커로 쓴다.
+ *
+ * 전부 있어야만 자르는 규칙(sliceBodyByExistingHeadingTitles)은 순서 무결성을 지키려는
+ * 것이지만, 사용자가 소제목 한 줄을 지웠거나 썸네일 같은 가짜 제목이 섞이면 남은 진짜
+ * 앵커까지 버려 이미지 삽입 지점이 0개가 된다. 본문에서 확인된 제목은 추측이 아니라
+ * 증거이므로, 확인된 것만으로 자른다.
+ */
+function sliceBodyByAvailableTitles(
+  body: string,
+  titles: readonly string[],
+): { introduction: string; sections: Array<{ title: string; content: string }> } | null {
+  const positions: Array<{ title: string; at: number }> = [];
+  let searchFrom = 0;
+  for (const title of titles) {
+    const at = body.indexOf(title, searchFrom);
+    if (at < 0) continue;
+    positions.push({ title, at });
+    searchFrom = at + title.length;
+  }
+  if (positions.length === 0) return null;
+
+  const sections = positions.map((position, index) => {
+    const contentStart = position.at + position.title.length;
+    const contentEnd = index + 1 < positions.length ? positions[index + 1].at : body.length;
+    return { title: position.title, content: body.slice(contentStart, contentEnd).trim() };
+  });
+  return { introduction: body.slice(0, positions[0].at).trim(), sections };
+}
+
+/**
  * [2026-08-25] 추출이 일부만 잡았을 때, 아는 제목으로 본문을 잘라 구조를 되살린다.
  *
  * 되살린 결과가 추출보다 많을 때만 채택한다 — 같거나 적으면 추측을 뒤집을 이유가 없다.
@@ -249,7 +293,7 @@ export function resolveSemiAutoPublishStructure(
     .filter((title) => title.length > 0);
   const knownImageTitles = (options.imageHeadingTitles || [])
     .map((title) => String(title || '').trim())
-    .filter((title) => title.length > 0);
+    .filter((title) => title.length > 0 && !isNonBodyImageHeading(title));
 
   if (extracted.headings.length > 0) {
     /*
@@ -329,9 +373,9 @@ export function resolveSemiAutoPublishStructure(
   // 본문이 통짜로 들어가고 이미지 삽입 지점이 0개가 된다(실측: 생성한 이미지 3장이 전부 유실).
   const imageTitles = (options.imageHeadingTitles || [])
     .map((title) => String(title || '').trim())
-    .filter((title) => title.length > 0);
+    .filter((title) => title.length > 0 && !isNonBodyImageHeading(title));
   if (imageTitles.length > 0) {
-    const slicedByImages = sliceBodyByExistingHeadingTitles(normalizedBody, imageTitles);
+    const slicedByImages = sliceBodyByAvailableTitles(normalizedBody, imageTitles);
     if (slicedByImages && slicedByImages.sections.every((section) => section.content.length > 0)) {
       return {
         introduction: slicedByImages.introduction,

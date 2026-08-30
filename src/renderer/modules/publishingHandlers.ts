@@ -6,6 +6,7 @@
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
 import {
   extractSemiAutoHeadingsFromBody,
+  isNonBodyImageHeading,
   resolveSemiAutoPublishStructure,
 } from '../utils/semiAutoHeadingExtractor.js';
 import {
@@ -2262,7 +2263,10 @@ export async function handleSemiAutoPublish(): Promise<any> {
       const seen = new Set<string>();
       for (const image of Array.isArray(all) ? all : []) {
         const title = String(image?.heading || '').trim();
-        if (title && !seen.has(title)) seen.add(title);
+        // [2026-08-30] 썸네일은 소제목 자리가 아니라 글 맨 위에 따로 들어간다. 이것을 세면
+        //   본문 소제목이 멀쩡해도 "넣을 자리를 찾지 못했다"는 경고가 뜬다(사용자 실측).
+        if (!title || isNonBodyImageHeading(title) || image?.isThumbnail === true) continue;
+        if (!seen.has(title)) seen.add(title);
       }
       return Array.from(seen);
     } catch {
