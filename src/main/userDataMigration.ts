@@ -202,6 +202,45 @@ function copyDirRecursive(src: string, dst: string): void {
 }
 
 /**
+ * [2026-08-30] 미러는 "복사"가 아니라 "동기화"다 — 원본에서 사라진 파일은 미러에서도 지운다.
+ *
+ * 실측: Documents/better-life-naver-backup/_safe/Local Storage 가 18.6GB(2,586개 파일).
+ * 같은 시점 실제 userData 의 Local Storage 는 14MB(10개 파일)였다. LevelDB 는 번호가
+ * 붙은 .log/.ldb 세대를 계속 새로 만들고 옛 세대를 지우는데, 복사만 하고 지우지 않으니
+ * 5월부터의 모든 세대가 미러에 그대로 쌓였다(1,300배). 이 미러는 새 프로필로 복원까지
+ * 되므로, 디스크를 채우고 릴리즈 게이트를 ENOSPC 로 막는 데까지 갔다.
+ *
+ * 지우는 범위는 우리가 미러링하는 폴더 안, 원본에 대응 항목이 없는 것뿐이다.
+ */
+function pruneMirrorExtras(src: string, dst: string): number {
+    let removed = 0;
+    let entries: string[];
+    try {
+        entries = fs.readdirSync(dst);
+    } catch {
+        return 0;
+    }
+
+    for (const name of entries) {
+        const srcPath = path.join(src, name);
+        const dstPath = path.join(dst, name);
+        if (fs.existsSync(srcPath)) {
+            try {
+                if (fs.statSync(dstPath).isDirectory() && fs.statSync(srcPath).isDirectory()) {
+                    removed += pruneMirrorExtras(srcPath, dstPath);
+                }
+            } catch { /* skip */ }
+            continue;
+        }
+        try {
+            fs.rmSync(dstPath, { recursive: true, force: true });
+            removed += 1;
+        } catch { /* skip — 다음 미러에서 다시 시도한다 */ }
+    }
+    return removed;
+}
+
+/**
  * sibling productName 폴더에서 active(setName) 폴더로 데이터 이주
  */
 export function migrateUserDataFolders(currentUserDataDir: string): { migrated: number } {
@@ -444,7 +483,7 @@ export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
     }
     _mirrorInFlight = true;
 
-    let stats = { files: 0, folders: 0, cookies: 0 };
+    let stats = { files: 0, folders: 0, cookies: 0, pruned: 0 };
     try {
         if (!fs.existsSync(userDataDir)) return;
         if (!fs.existsSync(mirrorDir)) fs.mkdirSync(mirrorDir, { recursive: true });
@@ -474,6 +513,7 @@ export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
                 if (fs.existsSync(src)) {
                     if (!fs.existsSync(dst)) fs.mkdirSync(dst, { recursive: true });
                     copyDirRecursive(src, dst);
+                    stats.pruned += pruneMirrorExtras(src, dst);
                     stats.folders++;
                 }
             } catch (folderErr: any) {
@@ -502,7 +542,7 @@ export function mirrorToSafe(userDataDir: string, mirrorDir: string): void {
         // [v2.10.275] Section 5 (session folder mirror) intentionally removed.
         // playwright-session*, puppeteer-session*, imagefx-chrome-profile are excluded
         // to prevent the 17-second I/O freeze. Sessions can be restored by re-login.
-        console.log(`[UserDataMirror] ✅ 미러 완료 — 파일 ${stats.files}, 폴더 ${stats.folders}, 쿠키 ${stats.cookies} (세션 폴더 제외)`);
+        console.log(`[UserDataMirror] ✅ 미러 완료 — 파일 ${stats.files}, 폴더 ${stats.folders}, 쿠키 ${stats.cookies}, 정리 ${stats.pruned} (세션 폴더 제외)`);
         _lastMirrorAt = Date.now();
     } catch (e: any) {
         console.warn(`[UserDataMirror] ⚠️ 미러 동기화 실패 (무시): ${e?.message}`);

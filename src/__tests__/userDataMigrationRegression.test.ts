@@ -92,9 +92,17 @@ function makeFsMock(vfs: Map<string, FileEntry>) {
     vfs.set(norm, { type: 'file', content: data });
   });
 
+  const rmSync = vi.fn((p: string, _opts?: { recursive?: boolean; force?: boolean }) => {
+    const norm = p.replace(/\\/g, '/');
+    for (const key of [...vfs.keys()]) {
+      if (key === norm || key.startsWith(norm + '/')) vfs.delete(key);
+    }
+    dirs.delete(norm);
+  });
+
   return {
     existsSync, readdirSync, statSync, copyFileSync,
-    mkdirSync, readFileSync, writeFileSync,
+    mkdirSync, readFileSync, writeFileSync, rmSync,
     vfs,
   };
 }
@@ -597,5 +605,68 @@ describe('M12: setImmediate-deferred mirror does not block main thread', () => {
     expect(configIdx).toBeLessThan(mainIdx);
     expect(mainIdx).toBeLessThan(mirrorIdx);
     expect(mirrorFn).toHaveBeenCalledTimes(1);
+  });
+});
+
+// --------------------------------------------------------------------------
+// M13 — 미러는 동기화다: 원본에서 사라진 파일은 미러에서도 지운다
+//
+// 실측(2026-08-30): _safe/Local Storage 가 18.6GB(2,586개 파일)까지 불어났다.
+// 같은 시점 실제 userData 의 Local Storage 는 14MB(10개 파일). LevelDB 가 번호 붙은
+// 세대를 계속 새로 만들고 옛 세대를 지우는데 미러는 복사만 해서 전부 쌓였다.
+// --------------------------------------------------------------------------
+describe('M13: 원본에 없는 미러 파일은 정리된다', () => {
+  it('사라진 LevelDB 세대를 미러에서 지우고 현재 세대는 남긴다', async () => {
+    const userDataDir = '/userData';
+    const mirrorDir = '/mirror/_safe';
+
+    const vfs = buildVfs({
+      '/userData': { type: 'dir' },
+      '/userData/settings.json': { type: 'file', content: '{}' },
+      '/userData/Local Storage': { type: 'dir' },
+      '/userData/Local Storage/leveldb': { type: 'dir' },
+      '/userData/Local Storage/leveldb/026723.ldb': { type: 'file', content: 'current' },
+      '/mirror/_safe': { type: 'dir' },
+      '/mirror/_safe/Local Storage': { type: 'dir' },
+      '/mirror/_safe/Local Storage/leveldb': { type: 'dir' },
+      '/mirror/_safe/Local Storage/leveldb/026723.ldb': { type: 'file', content: 'current' },
+      '/mirror/_safe/Local Storage/leveldb/018391.log': { type: 'file', content: 'stale', size: 1024 * 1024 * 97 },
+      '/mirror/_safe/Local Storage/leveldb/016999.log': { type: 'file', content: 'stale', size: 1024 * 1024 * 91 },
+    });
+
+    const fsMock = makeFsMock(vfs);
+    vi.doMock('fs', () => fsMock);
+
+    const { mirrorToSafe } = await import('../main/userDataMigration');
+    mirrorToSafe(userDataDir, mirrorDir);
+
+    expect(fsMock.vfs.has('/mirror/_safe/Local Storage/leveldb/018391.log')).toBe(false);
+    expect(fsMock.vfs.has('/mirror/_safe/Local Storage/leveldb/016999.log')).toBe(false);
+    // 현재 세대는 그대로 있어야 한다 — 복원 근거가 사라지면 안 된다.
+    expect(fsMock.vfs.has('/mirror/_safe/Local Storage/leveldb/026723.ldb')).toBe(true);
+  });
+
+  it('원본에만 있는 파일은 지우지 않는다 (미러 밖은 건드리지 않음)', async () => {
+    const userDataDir = '/userData';
+    const mirrorDir = '/mirror/_safe';
+
+    const vfs = buildVfs({
+      '/userData': { type: 'dir' },
+      '/userData/settings.json': { type: 'file', content: '{}' },
+      '/userData/Local Storage': { type: 'dir' },
+      '/userData/Local Storage/keep.ldb': { type: 'file', content: 'keep' },
+      '/mirror/_safe': { type: 'dir' },
+    });
+
+    const fsMock = makeFsMock(vfs);
+    vi.doMock('fs', () => fsMock);
+
+    const { mirrorToSafe } = await import('../main/userDataMigration');
+    mirrorToSafe(userDataDir, mirrorDir);
+
+    expect(fsMock.vfs.has('/userData/Local Storage/keep.ldb')).toBe(true);
+    const removedFromSource = fsMock.rmSync.mock.calls.some(([target]) =>
+      String(target).replace(/\\/g, '/').startsWith('/userData'));
+    expect(removedFromSource).toBe(false);
   });
 });
