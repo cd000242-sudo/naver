@@ -131,12 +131,26 @@ function readabilityFactor(context: QualityGateContext): number {
   return (titleFit * 0.2) + (summaryFit * 0.2) + (sentenceFit * 0.3) + (structureFit * 0.3);
 }
 
+/*
+ * [2026-08-31] 근거로 셀 자료의 범위를 넓혔다.
+ *
+ * 전에는 first_party 와 official 만 셌다. 그런데 resolvePolicySourceMaterialType 은
+ * 뉴스 URL 을 전부 'reference' 로, URL 없는 붙여넣기 자료를 'user_provided' 로 배정한다.
+ * 이슈·키워드 모드는 자료가 거의 전부 뉴스라, 근거가 사실상 0개가 된 채로 채점됐다.
+ *
+ * 그러면 숫자가 든 문장이 통째로 unsupported 로 몰리고 removeUnsupportedClaimSentences 가
+ * 문장째 지운다 — 기사에 그대로 적혀 있는 수치인데도 그렇다. 남는 건 숫자가 빠진 밋밋한 글이다.
+ *
+ * 여기서 묻는 것은 "이 숫자가 어디서 왔는가" 한 가지다. 그 답은 모델에게 실제로 건넨
+ * 자료 전부다. 자료의 신뢰 등급(사내 자료 > 공공 > 뉴스)은 first_party_score 가 따로 매긴다.
+ * 두 가지를 한 함수에서 겸하려다 근거를 통째로 잃고 있었다.
+ *
+ * 자료에 없는 숫자는 그대로 걸린다 — 완화가 아니라 잘못 놓인 기준을 되돌린 것이다.
+ */
 function evidenceTexts(input: ContentPolicyInput): string[] {
   return [
     ...input.business_facts,
-    ...(input.source_materials ?? [])
-      .filter((source) => source.type === 'first_party' || source.type === 'official')
-      .map((source) => source.content),
+    ...(input.source_materials ?? []).map((source) => source.content),
   ];
 }
 
