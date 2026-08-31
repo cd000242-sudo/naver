@@ -178,7 +178,9 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-08-27 3차] 홈판 사전분석에 surprisingFact(의외 지점) 필드 신설로 재계산
         // [2026-09-01] SEO 소제목 골격 반복 금지를 구체 확인 항목으로 바꾸며 재계산
         //   (실측: 소제목 6/6 이 "수치 나열, 명사형 설명구" 동일 골격이었다)
-        '36d46238038dd963eb9ce77deca9710d7cc83654f5c8880a056c6c983c433935',
+        // [2026-09-01 2차] GEO 오버레이에 유효 수치 정의 추가로 재계산
+        //   (실측: "사진 검색 결과 419개" 같은 파이프라인 내부 수치가 근거로 실렸다)
+        '2406d277eae038dec8935127553d695ae3c3828e7fe0122122caa94a81b0946e',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

@@ -68,9 +68,18 @@ describe('섞여 있으면 통과한다 — 정상을 괴롭히지 않는다', (
     expect(describeHeadingSkeletonWarnings(report)).toHaveLength(0);
   });
 
-  it('소제목이 적으면 판정하지 않는다 — 2~3개는 우연히 같을 수 있다', () => {
+  it('소제목이 둘뿐이면 판정하지 않는다 — 우연히 같을 수 있다', () => {
     const report = analyzeHeadingSkeletons(['수치 A, 설명 구간', '수치 B, 설명 지점']);
     expect(report.checked).toBe(0);
+  });
+
+  it('셋이면 판정한다 — 실측 글의 소제목이 3개였고 셋 다 같은 골격이었다', () => {
+    const three = analyzeHeadingSkeletons([
+      '1인 베란다있는방가구배치 변경과 수납장 활용 기준',
+      '1인 버터색 페인팅과 분위기 전환 셀프인테리어 포인트',
+      '무헤드침대프레임 및 라탄 수납장 공간 기획',
+    ]);
+    expect(three.checked).toBe(3);
   });
 
   it('빈 입력에 던지지 않는다', () => {

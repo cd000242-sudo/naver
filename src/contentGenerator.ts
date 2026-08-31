@@ -198,6 +198,7 @@ import { describeUngroundedNumbers, findUngroundedNumbers } from './content/nume
 import { auditExperienceSentences, describeExperienceAudit } from './content/experienceSentenceContract.js';
 import { analyzeHeadingSkeletons, describeHeadingSkeletonWarnings } from './content/headingSkeletonVariety.js';
 import { describeCrossSectionRepeats, findCrossSectionRepeats } from './content/crossSectionRepetition.js';
+import { describePipelineMetricLeaks, findPipelineMetricLeaks } from './content/pipelineMetricLeak.js';
 import { buildFactVerificationReport } from './content/factVerificationReport.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
 import {
@@ -589,6 +590,15 @@ function logPublicReactionClaims(content: any, source: any): void {
     );
     for (const line of describeCrossSectionRepeats(repeats)) {
       console.warn(`[SectionRepeat] ⚠️ ${line}`);
+    }
+
+    /*
+     * [2026-09-01] 파이프라인 내부 수치 누출. "사진 검색 결과 419개" 같은 값이
+     * 근거처럼 실린다. 근거 게이트로는 못 잡는다 — 그 숫자가 실제로 자료에 있기 때문이다.
+     * "자료에 있는가" 가 아니라 "독자에게 뜻이 있는가" 를 묻는 자리가 따로 필요하다.
+     */
+    for (const line of describePipelineMetricLeaks(findPipelineMetricLeaks(body))) {
+      console.warn(`[MetricLeak] ⚠️ ${line}`);
     }
 
     /*

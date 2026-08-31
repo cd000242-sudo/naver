@@ -171,6 +171,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/officialExposureRubric.ts',
   'src/content/paraphraseUpgradeBlock.ts',
   'src/content/personaBuilder.ts',
+  'src/content/pipelineMetricLeak.ts',
   'src/content/postDraftFactCheck.ts',
   'src/content/publicInfoFactTable.ts',
   'src/content/publicReactionClaim.ts',
