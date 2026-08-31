@@ -180,7 +180,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   (실측: 소제목 6/6 이 "수치 나열, 명사형 설명구" 동일 골격이었다)
         // [2026-09-01 2차] GEO 오버레이에 유효 수치 정의 추가로 재계산
         //   (실측: "사진 검색 결과 419개" 같은 파이프라인 내부 수치가 근거로 실렸다)
-        '2406d277eae038dec8935127553d695ae3c3828e7fe0122122caa94a81b0946e',
+        // [2026-09-01 3차] 시청 · 관람 경험을 체험 금지에서 분리하며 재계산
+        //   (드라마를 본 것은 실존 인물을 만난 것이 아니다 — 선은 작품이 아니라 사람에서 긋는다)
+        'd29660bdfb1a1e2c7e46d0b9c66f50c7eb62c4a9ae93c3024984ce4c173388e0',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
