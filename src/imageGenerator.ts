@@ -363,7 +363,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     'nano-banana-2': '나노바나나2 (Gemini 3.1 Flash Image, ₩97/장)',
     'nano-banana-pro': '나노바나나 프로 (Gemini 3 Pro Image, ₩185/장)',
     'deepinfra': '딥인프라 FLUX-2',
-    'openai-image': 'OpenAI 덕트테이프 (gpt-image-2)',
+    'openai-image': 'OpenAI 덕테이프',
     'dall-e-3': 'GPT 이미지 시리즈 (OpenAI, 기존 DALL-E 설정 자동 전환)',
     'leonardoai': 'Leonardo AI',
     'prodia': 'Prodia',
@@ -381,7 +381,17 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     options.forceSequential === true;
 
   // ✅ [2026-02-04] 선택된 엔진 명확히 표시 (한글 로그)
-  console.log(`[이미지생성] 🎨 선택된 AI 이미지 생성 엔진: ${displayName}`);
+  /*
+   * [2026-09-01 라이브 로그] 라벨이 실제 모델과 어긋났다.
+   *   [이미지생성] 선택된 AI 이미지 생성 엔진: OpenAI 덕트테이프 (gpt-image-2)
+   *   [OpenAI-Image] 총 1개 이미지 생성 시작 (모델: gpt-image-1.5, ...)
+   * providerDisplayNames 가 provider 만 보고 "(gpt-image-2)" 를 고정으로 붙여,
+   * 저장된 모델이 1.5 여도 2 를 쓰는 것처럼 보였다. 사장님이 "2를 골랐는데 2를 고르라 한다"
+   * 고 하신 이유가 이것이다 — 검사는 옳았고 표시가 거짓이었다.
+   * 라벨에서 모델명을 빼고, 실제 값을 옆에 적는다.
+   */
+  const modelSuffix = options.imageModel ? ` · 모델 ${options.imageModel}` : '';
+  console.log(`[이미지생성] 🎨 선택된 AI 이미지 생성 엔진: ${displayName}${modelSuffix}`);
 
   assertProviderFn(normalizedProvider as ImageProvider);
   if (options.isShoppingConnect) {

@@ -166,8 +166,16 @@ export async function generateWithOpenAIImage(
 
             // 스타일별 프롬프트 분기
             // ✅ [2026-03-03 FIX] DALL-E에도 스타일 프롬프트(STYLE_PROMPT_MAP) 적용 + 한국인 인물 지시
-            const dh = getImageDiversityHints(i);
-            console.log(`[OpenAI-Image] 🎲 다양성[${i}]: 📐${dh.angle.split(',')[0]} | 💡${dh.lighting.split(',')[0]} | 🎨${dh.color.split(',')[0]}`);
+            /*
+             * [2026-09-01] 호출자가 이미지를 한 장씩 넘기면 i 가 언제나 0 이라
+             * 0번 힌트(bird-eye view)만 나온다 — 전부 부감 전신샷이 되는 원인이었다.
+             * 소제목 순번이 실려 오면 그것을 쓰고, 없으면 기존대로 루프 인덱스를 쓴다.
+             */
+            const diversitySeed = Number.isFinite(item.diversityIndex as number)
+                ? Math.abs(Math.trunc(item.diversityIndex as number))
+                : i;
+            const dh = getImageDiversityHints(diversitySeed);
+            console.log(`[OpenAI-Image] 🎲 다양성[${diversitySeed}]: 📐${dh.angle.split(',')[0]} | 💡${dh.lighting.split(',')[0]} | 🎨${dh.color.split(',')[0]}`);
 
             // ✅ 스타일 프롬프트 적용 (stickman/roundy/2d/disney 등)
             const stylePromptText = STYLE_PROMPT_MAP[imageStyle] || STYLE_PROMPT_MAP['realistic'];

@@ -27,6 +27,15 @@ export interface ImageRequestItem {
   englishPrompt?: string; // 영어 프롬프트 (선택사항)
   /** Shared context wrapping 이전의 영어 장면 힌트. 영어 전용 엔진에서 문맥을 보존한다. */
   sourceEnglishPrompt?: string;
+  /*
+   * [2026-09-01] 다양성 힌트에 쓸 소제목 순번.
+   *
+   * 생성기는 `for (let i = 0; i < items.length; i++)` 의 i 로 각도 · 조명 · 색을 돌리는데,
+   * 호출자가 이미지를 한 장씩 넘기면 i 가 언제나 0 이라 0번 힌트(bird-eye view)만 나온다.
+   * 사장님 실측 "왜 전부 다 위에서 내려다보는 전신샷만 나오니?" 의 원인이 이것이다.
+   * 없으면 생성기가 기존대로 루프 인덱스를 쓴다.
+   */
+  diversityIndex?: number;
   isThumbnail?: boolean; // ✅ 썸네일 여부 (첫 번째 소제목만 true)
   allowText?: boolean; // ✅ 상세페이지/인포그래픽 등 텍스트 포함 허용
   category?: string; // ✅ 카테고리 (이미지 스타일 결정용)

@@ -1407,6 +1407,12 @@ export function initHeadingImageGeneration(): void {
                   englishPrompt: promptForImage,
                   isThumbnail: isThumbnailSection,
                   allowText: allowText,
+                  /*
+                   * [2026-09-01] 이미지를 한 장씩 넘기므로 생성기의 루프 인덱스가 늘 0 이고,
+                   * 0번 다양성 힌트(bird-eye view)만 나왔다 — 전부 부감 전신샷이 된 원인이다.
+                   * 소제목 순번을 실어 보내 각도 · 조명 · 색이 실제로 돌게 한다.
+                   */
+                  diversityIndex: i,
                 }],
                 postTitle: blogTitle,
                 isFullAuto: true,
