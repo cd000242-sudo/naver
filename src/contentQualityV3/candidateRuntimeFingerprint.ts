@@ -181,6 +181,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/reviewDecisionBlueprint.ts',
   'src/content/reviewGuard.ts',
   'src/content/sectionDistinctnessJudge.ts',
+  'src/content/sentenceParagraphs.ts',
   'src/content/shoppingEvidenceSource.ts',
   'src/content/situationDepthContract.ts',
   'src/content/situationTitleContract.ts',

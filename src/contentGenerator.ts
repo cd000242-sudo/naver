@@ -563,9 +563,14 @@ function logPublicReactionClaims(content: any, source: any): void {
      * 실측에서 6개 중 6개가 "수치 나열, 명사형 설명구" 였다.
      * headings-seo.prompt 는 이미 금지하고 있었는데도 그랬다 — 재는 장치가 있어야 지켜진다.
      */
-    const headingList = Array.isArray(content?.headings)
-      ? content.headings.map((h: any) => String(h?.heading || '')).filter(Boolean)
-      : [];
+    // 제목도 같이 본다. 제목이 소제목과 같은 골격이면 검색 결과 첫 줄부터 기계 티가 난다
+    // (실측: "가을철 환절기 비염 예방, 습도 숫자가 제각각일 때 기준" — 소제목과 같은 틀이었다).
+    const headingList = [
+      String(content?.title || ''),
+      ...(Array.isArray(content?.headings)
+        ? content.headings.map((h: any) => String(h?.heading || ''))
+        : []),
+    ].filter(Boolean);
     const skeleton = analyzeHeadingSkeletons(headingList);
     for (const line of describeHeadingSkeletonWarnings(skeleton)) {
       console.warn(`[HeadingVariety] ⚠️ ${line}`);

@@ -2800,9 +2800,34 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
     const imageSource = isShoppingConnect && formData.scSubImageMode === 'ai'
         ? (formData.scAIImageEngine || formData.imageSource)
         : formData.imageSource;
-    const imageModel = isShoppingConnect && formData.scSubImageMode === 'ai'
+    let imageModel = isShoppingConnect && formData.scSubImageMode === 'ai'
         ? (formData.scAIImageModel || formData.imageModel)
         : formData.imageModel;
+    /*
+     * [2026-09-01 사장님 실측] "덕테이프2로 선택하고 발행했는데도 2를 선택하라고 에러가 뜬다."
+     *
+     * 저장소가 갈려 있다. 이미지 관리 탭의 모델 라디오는 config 에 저장하는데
+     * (imageManagementTab: saveConfig({ openaiImageModel })), 이 경로는 formData 만 읽는다.
+     * 그래서 화면에서 고른 값이 도달하지 못하고, 빈 모델을 본 쇼핑커넥트 검사가
+     * "gpt-image-2 를 선택해주세요" 로 막는다.
+     *
+     * 2026-08-25 에 같은 증상을 costAndAutoGen 에서 고쳤는데, 이미지 생성 경로가 둘이라
+     * 실제 발행이 타는 이쪽에는 폴백이 없었다. 한쪽만 고치고 끝낸 것이 원인이다.
+     * 검사보다 먼저 채워야 한다.
+     */
+    if (!imageModel && (imageSource === 'openai-image' || imageSource === 'gpt-image-2')) {
+        try {
+            const cfg = await window.api?.getConfig?.();
+            const fromConfig = String(cfg?.openaiImageModel || '').trim();
+            if (fromConfig) {
+                imageModel = fromConfig;
+                console.log(`[AI Images] 🦆 OpenAI 이미지 모델 config 폴백: "${fromConfig}"`);
+            }
+        }
+        catch (e) {
+            console.warn('[AI Images] OpenAI 이미지 모델 config 조회 실패:', e);
+        }
+    }
     const imageStyle = formData.imageStyle;
     const imageRatio = formData.imageRatio;
     const imageFallbackPolicy = formData.imageFallbackPolicy;

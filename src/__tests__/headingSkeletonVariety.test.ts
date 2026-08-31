@@ -90,3 +90,20 @@ describe('한 개라도 예외가 있으면 봐준다 — 완전 균일만 잡�
     expect(analyzeHeadingSkeletons(mixed).uniformComma).toBe(false);
   });
 });
+
+describe('제목까지 같은 틀이면 더 짙은 신호다', () => {
+  /*
+   * [2026-09-01] 사장님이 준 제목이 소제목과 같은 골격이었다.
+   *   제목    가을철 환절기 비염 예방,  습도 숫자가 제각각일 때 기준
+   *   소제목  가을철 실내 습도 45~60%,  숫자가 갈리는 구간과 겹치는 구간
+   * 제목은 검색 결과에 먼저 보이는 줄이라, 여기까지 같으면 첫인상부터 기계 티가 난다.
+   */
+  it('제목을 같이 넣으면 함께 판정한다', () => {
+    const report = analyzeHeadingSkeletons([
+      '가을철 환절기 비염 예방, 습도 숫자가 제각각일 때 기준',
+      ...REAL_CASE,
+    ]);
+    expect(report.checked).toBe(7);
+    expect(report.uniformComma).toBe(true);
+  });
+});
