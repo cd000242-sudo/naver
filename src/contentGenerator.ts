@@ -196,6 +196,8 @@ import { buildTitleDiagnosticsLines } from './content/titleDiagnostics.js';
 import { describePublicReactionClaims, findUngroundedReactionClaims } from './content/publicReactionClaim.js';
 import { describeUngroundedNumbers, findUngroundedNumbers } from './content/numericGroundingCheck.js';
 import { auditExperienceSentences, describeExperienceAudit } from './content/experienceSentenceContract.js';
+import { analyzeHeadingSkeletons, describeHeadingSkeletonWarnings } from './content/headingSkeletonVariety.js';
+import { describeCrossSectionRepeats, findCrossSectionRepeats } from './content/crossSectionRepetition.js';
 import { buildFactVerificationReport } from './content/factVerificationReport.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
 import {
@@ -554,6 +556,34 @@ function logPublicReactionClaims(content: any, source: any): void {
     const experienceAudit = auditExperienceSentences(body);
     for (const line of describeExperienceAudit(experienceAudit)) {
       console.warn(`[Experience] ${line}`);
+    }
+
+    /*
+     * [2026-09-01] 소제목 골격이 전부 같으면 그 자체가 기계 서명이다.
+     * 실측에서 6개 중 6개가 "수치 나열, 명사형 설명구" 였다.
+     * headings-seo.prompt 는 이미 금지하고 있었는데도 그랬다 — 재는 장치가 있어야 지켜진다.
+     */
+    const headingList = Array.isArray(content?.headings)
+      ? content.headings.map((h: any) => String(h?.heading || '')).filter(Boolean)
+      : [];
+    const skeleton = analyzeHeadingSkeletons(headingList);
+    for (const line of describeHeadingSkeletonWarnings(skeleton)) {
+      console.warn(`[HeadingVariety] ⚠️ ${line}`);
+    }
+
+    /*
+     * [2026-09-01] 섹션 간 반복. 문단 단위 중복 제거는 문단 안만 보므로
+     * 결론이 앞 섹션 문장을 거의 그대로 옮겨도 아무도 보지 않았다.
+     * 지우지 않고 어디와 어디가 겹치는지만 알린다.
+     */
+    const repeats = findCrossSectionRepeats(
+      Array.isArray(content?.headings)
+        ? content.headings.map((h: any) => ({ heading: String(h?.heading || ''), content: String(h?.content || '') }))
+          .concat([{ heading: '마무리', content: String(content?.conclusion || '') }])
+        : [],
+    );
+    for (const line of describeCrossSectionRepeats(repeats)) {
+      console.warn(`[SectionRepeat] ⚠️ ${line}`);
     }
 
     /*

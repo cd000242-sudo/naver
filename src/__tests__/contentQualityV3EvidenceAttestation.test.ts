@@ -176,7 +176,9 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-08-27] 프롬프트 슬림화 — 자가점검 체크리스트 제거 + 장식 구분선 220줄 제거로 재계산
         // [2026-08-27 2차] 제목 길이 계약을 JSON 스키마 필드로 올리며 재계산
         // [2026-08-27 3차] 홈판 사전분석에 surprisingFact(의외 지점) 필드 신설로 재계산
-        '46e7e4f8b9820ae7c2b31c5dfbb1c9b2ce487a47c1bc5829d16162df63006af2',
+        // [2026-09-01] SEO 소제목 골격 반복 금지를 구체 확인 항목으로 바꾸며 재계산
+        //   (실측: 소제목 6/6 이 "수치 나열, 명사형 설명구" 동일 골격이었다)
+        '36d46238038dd963eb9ce77deca9710d7cc83654f5c8880a056c6c983c433935',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
