@@ -1,4 +1,5 @@
 import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from './naver/index.js';
+import { isSearchRedirectedToHome } from './content/searchRedirectedHome.js';
 import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
 import { orderFullTextCandidates } from './content/fullTextCandidateOrder.js';
 import { auditSourceMaterial, classifySourceKind } from './content/sourceMaterialAudit.js';
@@ -2149,6 +2150,12 @@ async function fetchWithPuppeteer(url: string): Promise<{ html: string; finalUrl
     const finalUrl = page.url();
     if (finalUrl !== url) {
       console.log(`[Puppeteer] 리디렉션됨: ${url} → ${finalUrl}`);
+      // [2026-09-01] fetch 경로와 같은 구멍이 여기에도 있었다.
+      //   검색 결과가 없어 홈으로 튕긴 페이지를 긁으면 그날의 헤드라인이 자료가 된다.
+      if (isSearchRedirectedToHome(url, finalUrl)) {
+        console.warn(`[Puppeteer] ⛔ 검색 결과 없음 → 홈으로 튕김. 자료로 쓰지 않는다: ${finalUrl}`);
+        throw new Error('SEARCH_REDIRECTED_TO_HOME');
+      }
     }
 
     // ✅ 네이버 블로그는 더 긴 대기 시간 (JavaScript 렌더링 대기)
@@ -5591,6 +5598,22 @@ ${product.title}에 대한 상세 정보입니다. 이 제품은 ${product.categ
       // 네이버 단축 URL인 경우 명시적으로 로깅
       if (/naver\.me/i.test(url)) {
         console.log(`[크롤링] 네이버 단축 URL 해결 완료: ${finalUrl}`);
+      }
+      /*
+       * [2026-09-01 사장님 실측] 검색 결과가 없어 홈으로 튕긴 페이지를 그대로 긁고 있었다.
+       *
+       *   https://news.google.com/search?q=추석+연휴+대비:+냉장고+파먹기...
+       *   → https://news.google.com/home?hl=ko&gl=KR&ceid=KR:ko
+       *
+       * 그 홈 화면의 오늘자 헤드라인(네팔 대홍수 · 개각 · 공소취소)이 냉장고 정리 글의
+       * 자료가 됐고, 헤드라인 옆 상대 시각이 본문의 사실 수치로 둔갑했다.
+       *   "46분 전 개각 보도"   -> "불과 46분 만에 성에 결정이 형성될 수 있습니다"
+       * 근거 게이트로는 못 잡는다 — 그 숫자가 실제로 자료에 있기 때문이다.
+       * 자료가 들어오는 이 문에서 버린다. 빈손이 오염된 자료보다 낫다.
+       */
+      if (isSearchRedirectedToHome(url, finalUrl)) {
+        console.warn(`[크롤링] ⛔ 검색 결과 없음 → 홈으로 튕김. 자료로 쓰지 않는다: ${finalUrl}`);
+        throw new Error('SEARCH_REDIRECTED_TO_HOME');
       }
     }
 
