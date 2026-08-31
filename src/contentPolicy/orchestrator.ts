@@ -119,13 +119,27 @@ function compactTopic(primaryKeyword: string): string {
   return shortened || firstSegment.slice(0, 60).trim();
 }
 
-function rewriteIntroductionForSimilarity(input: ContentPolicyInput, attempt: number): string {
+/*
+ * [2026-08-31 사장님 실측] 도입부 고정 템플릿을 없앤다.
+ *
+ * 카리나 홍콩 레드카펫 글의 첫 문장이 이렇게 나갔다.
+ *   "카리나 관련 선택을 앞두고 있다면 내 상황에 맞는 조건인지부터 확인해 보세요."
+ * 대출·지원금 같은 정책 글에나 쓸 문장이다. 모델이 쓴 도입부를 코드가 덮은 결과다.
+ *
+ * 목적은 "도입부가 최근 글과 겹치지 않게" 였는데, 걸린 글을 전부 같은 두 문장 중
+ * 하나로 시작하게 만든다 — 중복을 막겠다며 중복을 만들었다. 치료가 병보다 나빴다.
+ *
+ * 사장님 기준: "전문가가 읽어도 수긍하면서 맛있게 읽히는 글이어야 되는데 오히려 LLM 으로
+ * 쓴 게 더 나을 정도" — 후처리는 모델 결과물을 지킬 때만 값어치가 있다.
+ * 못 고칠 바에는 그대로 두고 알린다.
+ *
+ * 진짜 재작성은 rewriteDraft 콜백(모델 호출)이 할 일이다. 그게 없을 때 코드가
+ * 흉내 내려 하면 지금처럼 된다.
+ */
+function fillEmptyIntroduction(input: ContentPolicyInput): string {
+  // 도입부가 아예 비면 글이 성립하지 않는다. 그때만 최소한으로 채운다.
   const topic = compactTopic(input.primary_keyword);
-  const variants = [
-    `${topic} 정보를 찾고 있다면 눈에 띄는 문구보다 실제 사용 조건과 확인해야 할 기준을 함께 살펴보는 편이 좋습니다. 필요한 부분부터 차근차근 정리해 보겠습니다.`,
-    `${topic} 관련 선택을 앞두고 있다면 내 상황에 맞는 조건인지부터 확인해 보세요. 핵심 기준과 주의할 점을 순서대로 살펴보겠습니다.`,
-  ];
-  return variants[(Math.max(1, attempt) - 1) % variants.length];
+  return `${topic}에 대해 확인된 내용을 순서대로 정리했습니다.`;
 }
 
 function internalRewrite(
@@ -144,14 +158,21 @@ function internalRewrite(
   if (quality.unsupported_claims.length > 0 && !hasNonClaimReason) {
     return original;
   }
-  const shouldRewriteIntroduction = reasons.some((reason) => (
+  const originalIntroduction = original.introduction.trim();
+  /*
+   * 유사도만으로는 도입부를 건드리지 않는다. 비슷한 도입부는 고정 문장으로 덮는 것보다
+   * 낫다 — 덮으면 걸린 글이 전부 똑같이 시작한다. 알리기만 하고 모델 것을 지킨다.
+   */
+  const similarIntro = reasons.some((reason) => (
     reason === 'INTRO_NGRAM_COSINE_EXCEEDED'
     || reason === 'REPEATED_OPENING_PATTERN'
   ));
-  const originalIntroduction = original.introduction.trim();
-  const directIntro = shouldRewriteIntroduction || !originalIntroduction
-    ? rewriteIntroductionForSimilarity(input, attempt)
-    : originalIntroduction;
+  if (similarIntro && originalIntroduction) {
+    console.warn(
+      `[ContentPolicy] ⚠️ 도입부가 최근 글과 겹칩니다(${reasons.join(', ')}) — 모델 도입부를 그대로 둡니다.`,
+    );
+  }
+  const directIntro = originalIntroduction || fillEmptyIntroduction(input);
   let body = original.body_markdown;
   if (directIntro !== originalIntroduction && original.introduction && body.includes(original.introduction)) {
     body = body.replace(original.introduction, directIntro);

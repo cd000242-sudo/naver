@@ -6321,7 +6321,20 @@ ipcMain.handle(
         );
       }
       if (generatedContentGuard.policyResult.rewrite_count > 0) {
-        console.log(`[ContentPolicy] Generated draft repaired before image generation (${generatedContentGuard.policyResult.rewrite_count}회).`);
+        /*
+         * [2026-08-31] 왜 고쳤는지 함께 남긴다.
+         *
+         * 카리나 글의 도입부가 코드 템플릿으로 갈렸을 때, 로그에는 "2회 손봤다"만
+         * 있고 사유가 없어 원인을 찾는 데 시간이 걸렸다. 후처리가 모델 결과물을
+         * 건드렸으면 무엇 때문인지가 로그에 있어야 다음에 잡는다.
+         */
+        const why = (generatedContentGuard.policyResult.block_reasons || []).join(', ')
+          || (generatedContentGuard.advisoryReasons || []).join(', ')
+          || '사유 미기록';
+        console.log(
+          `[ContentPolicy] Generated draft repaired before image generation `
+          + `(${generatedContentGuard.policyResult.rewrite_count}회) — 사유: ${why}`,
+        );
       }
 
       // ✅ [v2.10.228 → v2.10.229] 자동 관련글 링크 삽입 — 발행 직전 본문 끝에 관련글 추가 (체류시간 ↑)
