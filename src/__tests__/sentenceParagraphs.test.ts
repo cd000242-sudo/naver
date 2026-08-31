@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
 import { describe, expect, it } from 'vitest';
 
 import { enforceSentenceParagraphs } from '../content/sentenceParagraphs';
@@ -88,5 +91,27 @@ describe('문단 경계는 보존한다', () => {
   it('빈 입력에 던지지 않는다', () => {
     expect(enforceSentenceParagraphs('')).toBe('');
     expect(() => enforceSentenceParagraphs(undefined as never)).not.toThrow();
+  });
+});
+
+describe('살아 있는 경로에 배선돼 있다', () => {
+  /*
+   * [2026-09-01] 처음에는 balanceContentMobileLines 에 걸었는데, 그 함수가
+   * 코드베이스 어디서도 호출되지 않는 죽은 코드였다 — 규칙이 어느 모드에서도 안 돌았다.
+   * 실제로 도는 것은 ensureContentParagraphBreaks 이고, contentGenerator 가 부른다.
+   *
+   * 기존 규칙에는 하한이 둘 있었다. ensureParagraphBreaks 는 200자 미만을,
+   * applyPerSentenceLineBreaks 는 80자 미만을 건드리지 않는다. 사장님이 본 뭉텅이가
+   * 그 사이 구간이었고, 나눌 때도 홑 개행이라 화면에서는 한 덩어리로 보였다.
+   */
+  it('죽은 함수가 아니라 실제로 불리는 함수에 걸려 있다', () => {
+    const transforms = readFileSync(resolve(__dirname, '..', 'contentBodyTransforms.ts'), 'utf-8');
+    const live = transforms.slice(transforms.indexOf('export function ensureContentParagraphBreaks'));
+    expect(live.slice(0, 1400)).toMatch(/enforceSentenceParagraphs/);
+  });
+
+  it('contentGenerator 가 그 함수를 부른다', () => {
+    const gen = readFileSync(resolve(__dirname, '..', 'contentGenerator.ts'), 'utf-8');
+    expect(gen).toMatch(/ensureContentParagraphBreaks\(/);
   });
 });

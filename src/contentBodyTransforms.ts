@@ -235,19 +235,35 @@ function ensureParagraphBreaks(text: string): string {
 export function ensureContentParagraphBreaks(content: StructuredContent): StructuredContent {
   if (!content) return content;
 
+  /*
+   * [2026-09-01] 문장마다 빈 줄을 넣는다.
+   *
+   * 사장님 실측: 쇼핑커넥트 발행글에서 두세 문장이 한 덩어리로 붙어 모바일에서
+   * 벽처럼 보였다. "마침표가 있다면 한 번 띄우는 규칙이 있어야 돼."
+   *
+   * 기존 규칙에는 하한이 둘 있다. ensureParagraphBreaks 는 200자 미만을,
+   * applyPerSentenceLineBreaks 는 80자 미만을 건드리지 않는다. 사장님이 본 뭉텅이가
+   * 그 사이 구간이었고, 나눌 때도 홑 개행이라 화면에서는 한 덩어리로 보인다
+   * (붙여넣기 계층은 문단 경계를 빈 문단으로 표현한다).
+   *
+   * 기존 규칙을 먼저 돌린 뒤 마지막에 얹는다. 표 · 번호 목록 · 소수점 · 말줄임표 ·
+   * 소제목 줄은 enforceSentenceParagraphs 가 건너뛴다.
+   */
+  const withBreaks = (text: string): string => enforceSentenceParagraphs(ensureParagraphBreaks(text));
+
   if (content.bodyPlain) {
-    content.bodyPlain = ensureParagraphBreaks(content.bodyPlain);
+    content.bodyPlain = withBreaks(content.bodyPlain);
   }
   if ((content as any).introduction) {
-    (content as any).introduction = ensureParagraphBreaks((content as any).introduction);
+    (content as any).introduction = withBreaks((content as any).introduction);
   }
   if ((content as any).conclusion) {
-    (content as any).conclusion = ensureParagraphBreaks((content as any).conclusion);
+    (content as any).conclusion = withBreaks((content as any).conclusion);
   }
   if (content.headings) {
     content.headings = content.headings.map(h => ({
       ...h,
-      content: h.content ? ensureParagraphBreaks(h.content) : h.content
+      content: h.content ? withBreaks(h.content) : h.content
     }));
   }
 
@@ -262,33 +278,19 @@ export function ensureContentParagraphBreaks(content: StructuredContent): Struct
 export function balanceContentMobileLines(content: StructuredContent): StructuredContent {
   if (!content) return content;
 
-  /*
-   * [2026-09-01] 문장마다 문단을 나눈다 — 줄바꿈 보정보다 먼저 돈다.
-   *
-   * 사장님 실측: 쇼핑커넥트 발행글에서 두세 문장이 한 덩어리로 붙어 모바일에서
-   * 벽처럼 보였다. "마침표가 있다면 한 번 띄우는 규칙이 있어야 돼."
-   *
-   * 문단 길이 규칙이 어디에도 없었다. contentOptimizer 는 400자를 넘을 때만,
-   * 그것도 한 번만 쪼갠다. 300자짜리 뭉텅이는 손도 대지 않고 지나간다.
-   *
-   * 순서가 중요하다. 문단을 먼저 나눠야 꼬리 줄바꿈 보정이 나뉜 문단 기준으로 돈다.
-   * 반대로 하면 보정이 이미 끝난 줄을 다시 쪼개 계산이 어긋난다.
-   */
-  const splitParagraphs = (text: string): string => balanceMobileLineBreaks(enforceSentenceParagraphs(text));
-
   if (content.bodyPlain) {
-    content.bodyPlain = splitParagraphs(content.bodyPlain);
+    content.bodyPlain = balanceMobileLineBreaks(content.bodyPlain);
   }
   if ((content as any).introduction) {
-    (content as any).introduction = splitParagraphs((content as any).introduction);
+    (content as any).introduction = balanceMobileLineBreaks((content as any).introduction);
   }
   if ((content as any).conclusion) {
-    (content as any).conclusion = splitParagraphs((content as any).conclusion);
+    (content as any).conclusion = balanceMobileLineBreaks((content as any).conclusion);
   }
   if (content.headings) {
     content.headings = content.headings.map((h) => ({
       ...h,
-      content: h.content ? splitParagraphs(h.content) : h.content,
+      content: h.content ? balanceMobileLineBreaks(h.content) : h.content,
     }));
   }
 
