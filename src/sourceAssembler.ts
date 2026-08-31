@@ -1,5 +1,5 @@
 import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from './naver/index.js';
-import { isSearchRedirectedToHome } from './content/searchRedirectedHome.js';
+import { isSearchRedirectedToHome, looksLikeEmptySearchResult } from './content/searchRedirectedHome.js';
 import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
 import { orderFullTextCandidates } from './content/fullTextCandidateOrder.js';
 import { auditSourceMaterial, classifySourceKind } from './content/sourceMaterialAudit.js';
@@ -6119,6 +6119,22 @@ ${product.title}에 대한 상세 정보입니다. 이 제품은 ${product.categ
 
     // ✅ [Fix] 이미지 수집 활성화 (Shopping Connect 모드 지원)
     console.log(`[fetchArticleContent] ${url}에서 텍스트 및 이미지(${imageUrls.length}장) 추출 완료`);
+
+    /*
+     * [2026-09-01 2차] "결과 없음" 검색 페이지를 자료로 쓰지 않는다.
+     *
+     * 홈 리디렉션만 막았더니 다음 글에서 다른 얼굴로 나왔다. 이번에는 홈으로
+     * 튕기지 않고 검색 페이지에 머물렀는데, 그 페이지가 "표시할 항목이 없습니다"
+     * + 사이드바 헤드라인이었다. 모델은 그 화면을 해설하는 글을 썼다 —
+     * 냉장고 정리법 대신 검색 화면 설명이 나왔다.
+     *
+     * URL 로 쫓으면 계속 새 얼굴이 나온다. 내용으로 판정한다.
+     * 여기는 모든 크롤이 지나는 문이라, 한 번 막으면 모든 수집 경로가 함께 막힌다.
+     */
+    if (looksLikeEmptySearchResult(content)) {
+      console.warn(`[fetchArticleContent] ⛔ 검색 결과 없음 페이지 — 자료로 쓰지 않는다: ${url}`);
+      throw new Error('EMPTY_SEARCH_RESULT_PAGE');
+    }
 
     return {
       title: title || undefined,

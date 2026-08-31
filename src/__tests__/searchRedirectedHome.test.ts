@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
-import { isSearchRedirectedToHome } from '../content/searchRedirectedHome';
+import { isSearchRedirectedToHome, looksLikeEmptySearchResult } from '../content/searchRedirectedHome';
 
 /**
  * [2026-09-01 라이브 로그] 냉장고 글에 뉴스 헤드라인이 통째로 실렸다.
@@ -94,5 +94,48 @@ describe('두 크롤링 경로 모두 막혀 있다', () => {
     const src = readFileSync(resolve(__dirname, '..', 'sourceAssembler.ts'), 'utf-8');
     const hits = src.match(/isSearchRedirectedToHome\(/gu) ?? [];
     expect(hits.length).toBeGreaterThanOrEqual(2);
+  });
+});
+
+describe('결과 없음 페이지도 자료로 쓰지 않는다', () => {
+  /*
+   * [2026-09-01 2차] 홈 리디렉션만 막았더니 다음 글에서 다른 얼굴로 나왔다.
+   *
+   * 이번에는 홈으로 튕기지 않고 검색 페이지에 그대로 머물렀는데,
+   * 그 페이지가 "표시할 항목이 없습니다" + 사이드바 헤드라인이었다.
+   * 모델은 그 화면을 해설하는 글을 썼다 — 냉장고 정리법 대신 검색 화면 설명이 나왔다.
+   *
+   * URL 로 쫓으면 계속 새 얼굴이 나온다. 내용으로 판정한다 —
+   * 결과 없음 페이지는 어느 검색엔진이든 같은 말을 한다.
+   */
+  it('구글 뉴스 결과 없음 문구를 잡는다', () => {
+    expect(looksLikeEmptySearchResult('표시할 항목이 없습니다. 내 브리핑 날씨 지역 뉴스')).toBe(true);
+  });
+
+  it('네이버 · 일반 검색의 결과 없음도 잡는다', () => {
+    for (const s of [
+      '검색결과가 없습니다. 다른 검색어를 입력해 주세요.',
+      '조건에 맞는 검색결과가 없습니다',
+      'No results found for your search',
+      '일치하는 정보가 없습니다',
+    ]) {
+      expect(looksLikeEmptySearchResult(s)).toBe(true);
+    }
+  });
+
+  it('정상 기사는 통과시킨다', () => {
+    const article = '냉동실 성에는 냉기 전달을 방해합니다. 전원을 뽑고 아이스박스로 옮긴 뒤 자연 해동하세요.';
+    expect(looksLikeEmptySearchResult(article)).toBe(false);
+  });
+
+  it('본문 안에서 그 표현을 인용한 긴 글은 잡지 않는다', () => {
+    // 결과 없음 문구는 짧은 페이지에서만 의미가 있다. 긴 본문에 한 번 나오는 것은 인용이다.
+    const long = `${'냉장고 정리 방법을 순서대로 설명합니다. '.repeat(90)}검색결과가 없습니다`;
+    expect(looksLikeEmptySearchResult(long)).toBe(false);
+  });
+
+  it('빈 입력에 던지지 않는다', () => {
+    expect(looksLikeEmptySearchResult('')).toBe(false);
+    expect(() => looksLikeEmptySearchResult(undefined as never)).not.toThrow();
   });
 });

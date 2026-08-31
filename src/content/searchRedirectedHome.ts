@@ -50,3 +50,38 @@ export function isSearchRedirectedToHome(
 
   return HOME_LIKE.test(to.pathname);
 }
+
+/**
+ * "결과 없음" 검색 페이지 판정.
+ *
+ * [2026-09-01 2차] 홈 리디렉션만 막았더니 다음 글에서 다른 얼굴로 나왔다.
+ * 이번에는 홈으로 튕기지 않고 검색 페이지에 머물렀는데, 그 페이지가
+ * "표시할 항목이 없습니다" + 사이드바 헤드라인이었다. 모델은 그 화면을
+ * 해설하는 글을 썼다 — 냉장고 정리법 대신 검색 화면 설명이 나왔다.
+ *
+ * URL 로 쫓으면 계속 새 얼굴이 나온다. 내용으로 판정한다.
+ */
+const EMPTY_RESULT_PHRASES = [
+  /표시할\s*항목이\s*없습니다/u,
+  /검색\s*결과가?\s*없습니다/u,
+  /조건에\s*맞는\s*검색\s*결과/u,
+  /일치하는\s*정보가?\s*없습니다/u,
+  /검색된\s*내용이\s*없습니다/u,
+  /no\s+results?\s+(?:found|were\s+found)/iu,
+  /did\s+not\s+match\s+any/iu,
+];
+
+/**
+ * 이 문구가 의미를 갖는 길이 상한.
+ *
+ * 결과 없음 페이지는 짧다. 긴 본문에 같은 표현이 한 번 나오는 것은
+ * 대개 인용이므로 잡지 않는다.
+ */
+const MAX_EMPTY_PAGE_CHARS = 1200;
+
+export function looksLikeEmptySearchResult(text: string | undefined): boolean {
+  const body = String(text ?? '').trim();
+  if (!body) return false;
+  if (body.length > MAX_EMPTY_PAGE_CHARS) return false;
+  return EMPTY_RESULT_PHRASES.some((phrase) => phrase.test(body));
+}
