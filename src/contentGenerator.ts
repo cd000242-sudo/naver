@@ -1985,6 +1985,11 @@ export interface ContentSource {
   articleType?: ArticleType;
   productInfo?: ProductInfo;
   personalExperience?: string;
+  // [2026-09-01] AI 경험 생성 — personalExperience 가 비었을 때의 대안이다.
+  //   메모가 있으면 그 범위 안에서만 1인칭을 쓰고, 비어 있고 이 값이 true 면
+  //   3요소 계약(제약 · 유보 · 비교)을 갖춘 체험 문장을 모델이 만든다.
+  //   리빙 글에는 필요하고 정보 글에는 아니라서, 전역 설정이 아니라 요청마다 받는다.
+  aiExperienceGeneration?: boolean;
   targetTraffic?: TargetTrafficStrategy;
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
   toneStyle?: 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'
@@ -2627,8 +2632,7 @@ export function buildModeBasedPrompt(
   //   설정이 없을 때 켜져 있으면 안 된다.
   //   실존 인물이 오가는 homefeed · 이슈 모드와, 사내 사실이 근거인 business 는 제외한다.
   try {
-    const expCfg = getConfigSync();
-    const experienceOn = (expCfg as any)?.aiExperienceGeneration === true;
+    const experienceOn = source.aiExperienceGeneration === true;
     const experienceEligibleMode = contentMode === 'seo' || contentMode === 'affiliate' || contentMode === 'mate' || contentMode === 'custom';
     if (experienceOn && experienceEligibleMode) {
       const overlay = loadPromptFile('shared/experience-contract.prompt');

@@ -45,15 +45,22 @@ describe('경험 계약 프롬프트', () => {
   });
 });
 
-describe('설정 배선', () => {
-  const config = read('configManager.ts');
+describe('요청 단위 옵션 — 전역 설정이 아니다', () => {
+  const generator = read('contentGenerator.ts');
+  const renderer = read('renderer', 'modules', 'contentGeneration.ts');
 
-  it('옵트인 설정 키가 선언돼 있다', () => {
-    expect(config).toMatch(/aiExperienceGeneration\?\s*:\s*boolean/);
+  /*
+   * 처음에는 설정 모달에 전역 토글로 넣었는데, 사장님 지적으로 옮겼다.
+   *   "글 생성이나 발행 옵션에 경험 생성을 넣어야 되는 거 아니니?"
+   * 맞다. 리빙 글에는 필요하고 정보 글에는 아니다 — 글마다 갈리는 판단이라
+   * 매번 설정 창을 열게 만들면 안 된다. personalExperience 와 같은 자리로 옮긴다.
+   */
+  it('ContentSource 에 실려 요청마다 전달된다', () => {
+    expect(generator).toMatch(/aiExperienceGeneration\?\s*:\s*boolean/);
   });
 
-  it('부분 저장에도 토글이 살아남는다 — 보존 화이트리스트에 있다', () => {
-    expect(config).toMatch(/'aiExperienceGeneration'/);
+  it('렌더러가 생성 옵션에서 값을 읽어 넘긴다', () => {
+    expect(renderer).toMatch(/ai-experience-generation/);
   });
 });
 
@@ -62,7 +69,7 @@ describe('프롬프트 주입', () => {
 
   it('기본 OFF 다 — 명시적으로 켰을 때만 붙는다', () => {
     // geoOptimization 은 `!== false` (기본 ON) 인데, 경험 생성은 반대다.
-    expect(generator).toMatch(/aiExperienceGeneration\s*===\s*true/);
+    expect(generator).toMatch(/source\.aiExperienceGeneration\s*===\s*true/);
   });
 
   it('실존 인물이 오가는 홈피드·이슈 모드에는 붙이지 않는다', () => {
@@ -81,7 +88,7 @@ describe('감사 로그', () => {
 
 describe('UI 배선 — 토글이 화면에 있고, 저장되고, 다시 읽힌다', () => {
   const html = readFileSync(resolve(__dirname, '..', '..', 'public', 'index.html'), 'utf-8');
-  const modal = read('renderer', 'modules', 'priceInfoModal.ts');
+
 
   it('체크박스가 존재하고 기본은 꺼져 있다', () => {
     const tag = html.match(/<input[^>]*id="ai-experience-generation"[^>]*>/u)?.[0] ?? '';
@@ -97,8 +104,28 @@ describe('UI 배선 — 토글이 화면에 있고, 저장되고, 다시 읽힌�
     expect(html).toMatch(/제약 · 유보 · 비교/);
   });
 
-  it('저장과 복원이 양쪽 다 배선돼 있다', () => {
-    expect(modal).toMatch(/aiExperienceGeneration:\s*\(document\.getElementById\('ai-experience-generation'\)/);
-    expect(modal).toMatch(/aiExperienceGeneration\s*===\s*true/);
+  it('경험 메모 바로 아래에 있다 — 메모가 비었을 때의 대안이라는 뜻이 자리로 드러난다', () => {
+    const memoAt = html.indexOf('unified-personal-experience');
+    const toggleAt = html.indexOf('ai-experience-generation');
+    expect(memoAt).toBeGreaterThan(0);
+    expect(toggleAt).toBeGreaterThan(memoAt);
+    // 사이에 다른 입력 블록이 끼지 않는다.
+    expect(html.slice(memoAt, toggleAt)).not.toMatch(/unified-realtime-crawl|keyword-as-title/);
+  });
+});
+
+describe('메모가 있으면 AI 경험 생성은 물러난다', () => {
+  const main = readFileSync(resolve(__dirname, '..', 'main.ts'), 'utf-8');
+
+  /*
+   * 두 기능이 겹치면 안 된다. 작성자가 실제 경험을 적었으면 그 범위 안에서 1인칭을 쓰므로
+   * 지어낼 이유가 없다. AI 생성은 "메모가 비었을 때의 대안" 이라는 자리에만 있어야 한다.
+   */
+  it('메모가 비었을 때만 켜진다', () => {
+    expect(main).toMatch(/aiExperienceGeneration\s*&&\s*!personalExperience/);
+  });
+
+  it('메모가 있으면 무시했다고 로그로 알린다 — 조용히 삼키지 않는다', () => {
+    expect(main).toMatch(/AI 경험 생성 무시/);
   });
 });

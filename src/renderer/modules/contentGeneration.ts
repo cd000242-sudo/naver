@@ -599,6 +599,11 @@ export async function generateContentFromUrl(
     || (document.getElementById('unified-personal-experience') as HTMLTextAreaElement | null)?.value
     || ''
   ).trim().slice(0, 4000) || undefined;
+
+  // [2026-09-01] AI 경험 생성 — 위 메모가 비었을 때의 대안이다.
+  //   리빙 글에는 필요하고 정보 글에는 아니라서 전역 설정이 아니라 생성 옵션으로 받는다.
+  //   토글이 없거나 꺼져 있으면 false — 기존 동작과 같다.
+  const aiExperienceGeneration = (document.getElementById('ai-experience-generation') as HTMLInputElement | null)?.checked === true;
   const contentPolicyContext = buildRendererContentPolicyContext({
     title: manualTitleOverride || keywordList[0] || url,
     content: '',
@@ -633,6 +638,7 @@ export async function generateContentFromUrl(
       structureGuideBlock: ((window as any).getExposedStructureBlock?.() || '') || undefined,
       manualTitleOverride,
       personalExperience,
+      aiExperienceGeneration,
     }
   };
 
@@ -1190,6 +1196,11 @@ export async function generateContentFromKeywords(
     || (document.getElementById('unified-personal-experience') as HTMLTextAreaElement | null)?.value
     || ''
   ).trim().slice(0, 4000) || undefined;
+
+  // [2026-09-01] AI 경험 생성 — 위 메모가 비었을 때의 대안이다.
+  //   리빙 글에는 필요하고 정보 글에는 아니라서 전역 설정이 아니라 생성 옵션으로 받는다.
+  //   토글이 없거나 꺼져 있으면 false — 기존 동작과 같다.
+  const aiExperienceGeneration = (document.getElementById('ai-experience-generation') as HTMLInputElement | null)?.checked === true;
   const contentPolicyContext = buildRendererContentPolicyContext({
     title: manualTitleOverride || title || keywordList[0] || keywords,
     content: crawledText || '',
@@ -1249,6 +1260,7 @@ export async function generateContentFromKeywords(
       contentPolicyContext,
       manualTitleOverride,
       personalExperience,
+      aiExperienceGeneration,
     }
   };
 

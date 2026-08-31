@@ -6079,6 +6079,17 @@ ipcMain.handle(
         console.log(`[Main] 쇼핑 실사용 메모 전달: ${personalExperience.length}자`);
       }
 
+      // [2026-09-01] AI 경험 생성 — 위 메모가 비었을 때만 뜻이 있는 옵션이다.
+      //   메모를 적었으면 그 범위 안에서 1인칭을 쓰므로 지어낼 이유가 없다.
+      //   켜져 있어도 홈피드 · 이슈 · 업체 모드에는 프롬프트가 붙지 않는다(buildModeBasedPrompt).
+      const aiExperienceGeneration = (payload.assembly as any).aiExperienceGeneration === true;
+      if (aiExperienceGeneration && !personalExperience) {
+        source.aiExperienceGeneration = true;
+        console.log('[Main] 🧭 AI 경험 생성 ON — 제약 · 유보 · 비교 3요소 계약 적용');
+      } else if (aiExperienceGeneration) {
+        console.log('[Main] 🧭 AI 경험 생성 무시 — 작성자 경험 메모가 있어 그 범위로 씁니다');
+      }
+
       // ✅ 사용자 정의 프롬프트 전달
       const customPrompt = (payload.assembly as any).customPrompt as string | undefined;
       if (customPrompt) {
