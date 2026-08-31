@@ -8,6 +8,7 @@ import {
     deduplicateReferenceImages,
 } from '../../image/referenceImagePolicy.js';
 import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
+import { appendViewpointHint, engineInjectsViewpoint } from '../../image/imageViewpointRotation.js';
 import {
     assertShoppingReferenceGenerationSelectionSupported,
     createShoppingCollectedPublishImages,
@@ -3110,12 +3111,23 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
                 ? formData.scSubImageMode === 'ai'
                 : (formData.useAiImage ?? true);
             const sectionContent = resolveImageSectionContent(heading);
-            const englishPrompt = await generateEnglishPromptForHeading(
+            let englishPrompt = await generateEnglishPromptForHeading(
                 heading,
                 formData.keywords,
                 imageStyle,
                 sectionContent,
             );
+            /*
+             * [2026-09-01 사장님 실측] "왜 전부 위에서 내려다보는 전신샷만 나오니?"
+             *
+             * 책임 공백이었다. 프롬프트 생성기는 "각도는 시스템이 넣을 테니 쓰지 마라" 고
+             * LLM 을 막는데, 그 시스템은 Flow 뿐이었다(flowPromptInjection). 덕테이프 ·
+             * 나노바나나에는 아무도 안 넣어서, 모델이 가장 안전한 중앙 정렬 부감으로 수렴했다.
+             * Flow 는 이미 넣으므로 건너뛴다 — 두 번 넣으면 지시가 충돌한다.
+             */
+            if (!engineInjectsViewpoint(imageSource)) {
+                englishPrompt = appendViewpointHint(englishPrompt, i);
+            }
             console.log(`[AI Images] ${i + 1}/${headings.length} - 스타일: ${imageStyle}, 프롬프트: ${englishPrompt}`);
             console.log(`[AI Images] ${i + 1}번 소제목 - heading: "${heading.title}", isThumbnail: ${isThumbnail}, allowText: ${shouldIncludeText}, useAiImage: ${useAiImageChecked} (쇼핑커넥트: ${isShoppingConnect})`);
             let ref = {};

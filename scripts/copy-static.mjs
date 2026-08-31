@@ -374,6 +374,12 @@ try {
       filePath: path.join(projectRoot, 'dist', 'content', 'mobileLineBalance.js'),
     },
     {
+      // [2026-09-01] 소제목별 카메라 시점 순환 — fullAutoFlow 가 값으로 가져온다.
+      //   등록하지 않으면 tsc/lint/유닛테스트는 전부 통과하고 런타임에서만 ReferenceError 로 터진다.
+      label: 'image/imageViewpointRotation.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'imageViewpointRotation.js'),
+    },
+    {
       // [2026-08-26] 에이전트 잔여 배찌 문구 — agentQuotaBadge 가 값으로 가져온다.
       label: 'agentCli/usageBadge.js',
       filePath: path.join(projectRoot, 'dist', 'agentCli', 'usageBadge.js'),
