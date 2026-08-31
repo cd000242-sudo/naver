@@ -1214,6 +1214,15 @@ export async function initPriceInfoModal(): Promise<void> {
       console.warn('[priceInfoModal] GEO 최적화 토글 로드 실패:', e);
     }
 
+    // [2026-08-31] AI 경험 생성 토글 복원 — 기본 OFF (옵트인)
+    //   GEO 와 달리 `=== true` 다. 켠 사람이 책임지는 기능이라 설정이 없을 때 켜져 있으면 안 된다.
+    try {
+      const expEl = document.getElementById('ai-experience-generation') as HTMLInputElement | null;
+      if (expEl) expEl.checked = (config as any).aiExperienceGeneration === true;
+    } catch (e) {
+      console.warn('[priceInfoModal] AI 경험 생성 토글 로드 실패:', e);
+    }
+
     // ✅ [v2.10.73] 네이버 fact-check RAG 토글 로드 — 기본 ON (LLM 환각 차단)
     //   네이버 검색 API 키가 있을 때만 작동 (키 없으면 자동 OFF처럼 동작)
     try {
@@ -1498,6 +1507,8 @@ export async function initPriceInfoModal(): Promise<void> {
           subWorkProvider: ((document.getElementById('sub-work-provider') as HTMLSelectElement | null)?.value as 'same' | 'gpt-mini' | 'gemini-flash' | 'haiku') || 'same',
           // ✅ [v2.10.62] GEO/AEO 최적화 토글 저장 (기본 OFF)
           geoOptimization: (document.getElementById('geo-optimization') as HTMLInputElement | null)?.checked || false,
+          // [2026-08-31] AI 경험 생성 토글 저장 (기본 OFF · 옵트인)
+          aiExperienceGeneration: (document.getElementById('ai-experience-generation') as HTMLInputElement | null)?.checked || false,
           // ✅ [v2.10.73] 네이버 fact-check RAG 토글 저장 (기본 ON, undefined도 true 취급)
           useNaverFactCheck: (() => {
             const el = document.getElementById('use-naver-factcheck') as HTMLInputElement | null;

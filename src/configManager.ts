@@ -127,6 +127,11 @@ export interface AppConfig {
   //   ON 시: 시점 시그널 + 인용 친화 fact-block + 권위 표현 자연 삽입 패치 활성
   //   네이버 H6(출처 단어 금지) 룰과 충돌 없는 패턴만 사용 — 네이버 SEO 점수 동결
   geoOptimization?: boolean;
+  // [2026-08-31] AI 경험 생성 — 리빙 · 후기처럼 경험이 있어야 성립하는 글에 체험 문장을 허용한다.
+  //   기본 OFF (옵트인). 켜면 3요소 계약(제약 · 유보 · 비교)을 갖춘 문장만 쓰도록 프롬프트가 붙는다.
+  //   생성된 경험의 사실 여부는 사용자 책임이다 — 켜는 것 자체가 그 판단이다.
+  //   실존 인물이 오가는 홈피드 · 이슈 모드에는 켜도 붙지 않는다.
+  aiExperienceGeneration?: boolean;
   // ✅ [v2.10.73] 네이버 검색 API 기반 fact-check RAG — 키워드 → 네이버 검색 → 본문 자료 주입 → LLM 환각 차단
   //   기본 ON: 네이버 검색 API 키가 있을 때만 작동 (키 없으면 자동 OFF)
   //   ON 시: 키워드 입력 후 자동으로 블로그 5건 + 뉴스 3건 + 지식인 3건 검색 → 결과 텍스트를 LLM 프롬프트 [Article Content]로 주입
@@ -911,6 +916,8 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         'costSaverMode', 'useCompressedPrompt', 'useCrawlSummary', 'subWorkProvider',
         // ✅ [v2.10.62] GEO 토글 보존
         'geoOptimization',
+        // [2026-08-31] AI 경험 생성 토글 보존
+        'aiExperienceGeneration',
         // ✅ [v2.10.73] 네이버 fact-check RAG 토글 보존
         'useNaverFactCheck',
         // ✅ [v2.10.228] 자동 관련글 링크 토글 보존

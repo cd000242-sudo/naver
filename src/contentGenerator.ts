@@ -195,6 +195,7 @@ import { resolveTitleLengthRange } from './content/titleLengthPolicy.js';
 import { buildTitleDiagnosticsLines } from './content/titleDiagnostics.js';
 import { describePublicReactionClaims, findUngroundedReactionClaims } from './content/publicReactionClaim.js';
 import { describeUngroundedNumbers, findUngroundedNumbers } from './content/numericGroundingCheck.js';
+import { auditExperienceSentences, describeExperienceAudit } from './content/experienceSentenceContract.js';
 import { buildFactVerificationReport } from './content/factVerificationReport.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
 import {
@@ -540,6 +541,20 @@ function logPublicReactionClaims(content: any, source: any): void {
     const ungrounded = findUngroundedNumbers(body, source?.rawText);
     const numberMessage = describeUngroundedNumbers(ungrounded);
     if (numberMessage) console.warn(`[NumberCheck] ⚠️ ${numberMessage}`);
+
+    /*
+     * [2026-08-31] 경험 문장 3요소 계약 감사.
+     *
+     * 경험 생성을 껐어도 돌린다. 모델이 스스로 체험 문장을 쓰는 경우가 있고,
+     * 그때야말로 "누가 봐도 AI 가 적었구나" 하는 문장이 나오기 때문이다.
+     *
+     * 제약 · 유보 · 비교 셋을 갖추지 못한 체험 문장과, 체험 문장이 너무 많은 경우를
+     * 함께 본다. 경고만 낸다 — 문장을 고치거나 지우지 않고 발행도 막지 않는다.
+     */
+    const experienceAudit = auditExperienceSentences(body);
+    for (const line of describeExperienceAudit(experienceAudit)) {
+      console.warn(`[Experience] ${line}`);
+    }
 
     /*
      * [2026-08-28] 집필 후 검증 패스. 외부 LLM 팩트체크 규칙의 12항은 본문 끝에
@@ -2597,6 +2612,35 @@ export function buildModeBasedPrompt(
     }
   } catch (e) {
     console.warn('[PromptBuilder] GEO 오버레이 처리 중 예외 — 미적용:', e);
+  }
+
+  // [2026-08-31] AI 경험 생성 오버레이 — 기본 OFF (옵트인)
+  //   리빙 · 후기 · 제품처럼 경험이 있어야 성립하는 글이 있다. 그런데
+  //   human-writing-anti-pattern:35 는 체험을 "작성자 메모에 있을 때만" 으로 걸어뒀고,
+  //   그 메모를 입력할 UI 경로가 코드베이스에 없어서 체험 문장은 영구 차단 상태였다.
+  //
+  //   사장님 판단: "사용자마저 경험이 없다면 어중이떠중이 글이 되는 것보다는 낫다."
+  //   다만 조건이 붙는다 — "과한 과장은 티가 나고 네이버 봇도 그걸 알 테고."
+  //   그래서 문을 열되 3요소 계약(제약 · 유보 · 비교)을 함께 건다.
+  //
+  //   geoOptimization 과 달리 `=== true` 다. 경험 생성은 켠 사람이 책임지는 기능이라
+  //   설정이 없을 때 켜져 있으면 안 된다.
+  //   실존 인물이 오가는 homefeed · 이슈 모드와, 사내 사실이 근거인 business 는 제외한다.
+  try {
+    const expCfg = getConfigSync();
+    const experienceOn = (expCfg as any)?.aiExperienceGeneration === true;
+    const experienceEligibleMode = contentMode === 'seo' || contentMode === 'affiliate' || contentMode === 'mate' || contentMode === 'custom';
+    if (experienceOn && experienceEligibleMode) {
+      const overlay = loadPromptFile('shared/experience-contract.prompt');
+      if (overlay) {
+        systemPromptResult += `\n\n${overlay}`;
+        console.log(`[PromptBuilder] 🧭 경험 계약 오버레이 적용 (mode=${contentMode}, 옵트인)`);
+      } else {
+        console.warn('[PromptBuilder] experience-contract.prompt 로드 실패 — 미적용');
+      }
+    }
+  } catch (e) {
+    console.warn('[PromptBuilder] 경험 계약 오버레이 처리 중 예외 — 미적용:', e);
   }
 
   // ✅ [v2.10.74 Phase 2] LLM 충실도 강제 — 네이버 fact-check RAG 자료 있을 때만 적용
