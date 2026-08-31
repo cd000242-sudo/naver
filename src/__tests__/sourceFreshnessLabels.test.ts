@@ -109,7 +109,10 @@ describe('배선', () => {
   });
 
   it('본문 수집이 최신순을 섞는다 (sim 단독 금지)', () => {
-    expect(assembler).toContain("searchNaverForContent(keyword, clientId, clientSecret, 'blog', 8, 'date')");
+    // [2026-09-01] 호출 인자까지 통째로 박제했더니, 검색어 변수명이 바뀌자
+    //   ('keyword' -> 'searchKeyword', 문장형 키워드 좁힘) 의도와 무관하게 깨졌다.
+    //   이 테스트의 뜻은 "date 정렬을 함께 긁는가" 하나다. 그것만 본다.
+    expect(assembler).toMatch(/searchNaverForContent\([^)]*'blog',\s*8,\s*'date'\)/u);
     expect(assembler).toContain('mergeRecentFirst(recentBlogs, blogLinks');
   });
 

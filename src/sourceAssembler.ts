@@ -1,5 +1,6 @@
 import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from './naver/index.js';
 import { isSearchRedirectedToHome, looksLikeEmptySearchResult } from './content/searchRedirectedHome.js';
+import { narrowSearchQueries } from './content/searchQueryNarrowing.js';
 import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
 import { orderFullTextCandidates } from './content/fullTextCandidateOrder.js';
 import { auditSourceMaterial, classifySourceKind } from './content/sourceMaterialAudit.js';
@@ -1657,13 +1658,24 @@ export async function collectTopArticleFullTexts(
      *   전부 1년 이상 지난 글(2022·2024)이었고, 그 2024년 조건이 2026년 글에 섞여 나갔다.
      *   date 를 섞으면 현재 공고 글이 재료에 반드시 들어온다.
      */
+    /*
+     * [2026-09-01] 문장형 키워드는 여기서도 0건이다. 검색 가능한 형태로 좁혀 쓴다.
+     * 원문이 짧으면 narrowSearchQueries 가 원문 하나만 돌려주므로 기존 동작과 같다.
+     * 두 번째 후보(콜론 뒤 본체)가 있으면 그것으로 찾는다 — 앞머리 "추석 연휴 대비" 는
+     * 맥락일 뿐 검색어가 아니다.
+     */
+    const searchQueries = narrowSearchQueries(keyword);
+    const searchKeyword = searchQueries[1] || searchQueries[0] || keyword;
+    if (searchKeyword !== keyword) {
+      logger(`[상위글 수집] 🔎 검색어를 좁힙니다: "${keyword}" → "${searchKeyword}"`);
+    }
     const settled = await Promise.allSettled([
-      searchNaverForContent(keyword, clientId, clientSecret, 'blog', 8, 'sim'),
-      searchNaverForContent(keyword, clientId, clientSecret, 'news', 4, 'sim'),
-      searchNaverForContent(keyword, clientId, clientSecret, 'blog', 8, 'date'),
+      searchNaverForContent(searchKeyword, clientId, clientSecret, 'blog', 8, 'sim'),
+      searchNaverForContent(searchKeyword, clientId, clientSecret, 'news', 4, 'sim'),
+      searchNaverForContent(searchKeyword, clientId, clientSecret, 'blog', 8, 'date'),
       // [2026-08-27] 최신 기사를 따로 찾는다. 이슈 키워드는 방금 나온 기사가 뼈대다 —
       //   sim 만 보면 오래된 기사가 상위를 차지해 지금 사건을 놓친다.
-      searchNaverForContent(keyword, clientId, clientSecret, 'news', 6, 'date'),
+      searchNaverForContent(searchKeyword, clientId, clientSecret, 'news', 6, 'date'),
     ]);
     const blogLinks = settled[0].status === 'fulfilled' ? settled[0].value : [];
     const newsLinks = settled[1].status === 'fulfilled' ? settled[1].value : [];
@@ -7777,7 +7789,29 @@ export async function collectContentFromPlatforms(
       logger(`[플랫폼 콘텐츠 수집] ⚡ 네이버 검색 API 우선 호출 (빠르고 안정적)...`);
 
       try {
-        const apiResult = await collectNaverSearchContent(keyword, (clientId ?? ''), (clientSecret ?? ''));
+        /*
+         * [2026-09-01] 문장형 키워드로는 어느 검색엔진도 결과를 내지 못한다.
+         *
+         * 사장님 실측 키워드가 "추석 연휴 대비: 냉장고 파먹기 식재료 정리 및 성에 제거" 였다.
+         * 이건 검색어가 아니라 문장이다. 네이버 API 가 383자만 내놓았고, 부족하다며
+         * 구글 뉴스로 넘어갔는데 거기서도 0건이라 "표시할 항목이 없습니다" 화면을 긁었다.
+         * 그 화면의 뉴스 헤드라인이 자료가 됐고, 그 숫자가 냉장고 사실로 둔갑했다.
+         *
+         * 뿌리는 크롤러가 아니라 질의였다. 원문으로 먼저 시도하고(그게 되면 가장 정확하다),
+         * 모자라면 콜론 뒤 본체 · 접속어로 갈린 조각 순으로 좁혀 다시 찾는다.
+         * 사장님 말대로 답은 생성을 멈추는 것이 아니라 자료를 제대로 찾는 것이다.
+         */
+        let apiResult = await collectNaverSearchContent(keyword, (clientId ?? ''), (clientSecret ?? ''));
+        if (!apiResult.content || apiResult.content.length <= 500) {
+          for (const narrowed of narrowSearchQueries(keyword).slice(1)) {
+            logger(`[플랫폼 콘텐츠 수집] 🔎 자료 부족 → 검색어를 좁혀 재시도: "${narrowed}"`);
+            const retry = await collectNaverSearchContent(narrowed, (clientId ?? ''), (clientSecret ?? ''));
+            if (retry.content && retry.content.length > (apiResult.content?.length || 0)) {
+              apiResult = retry;
+            }
+            if (apiResult.content && apiResult.content.length > 500) break;
+          }
+        }
 
         if (apiResult.content && apiResult.content.length > 500) {
           logger(`[플랫폼 콘텐츠 수집] ✅ 네이버 API 성공: ${apiResult.content.length}자 (${apiResult.sources.join(', ')})`);
