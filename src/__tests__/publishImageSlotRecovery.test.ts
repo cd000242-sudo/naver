@@ -73,6 +73,25 @@ describe('발행 구조 복구 — 이미지 소제목', () => {
     expect(structure.headings).toHaveLength(2);
   });
 
+  /**
+   * 썸네일은 소제목이 아니라 "제목"과 매칭된다 — main.ts 의 전용 썸네일은
+   * `heading: title || '🖼️ 썸네일'` 로 만들어져 heading 이 글 제목인 경우가 정상이다.
+   * 그 이름이 본문에 없다고 나머지 진짜 소제목까지 버리면 안 된다.
+   */
+  it('제목 이름을 단 썸네일이 섞여도 본문 소제목 앵커는 살린다', () => {
+    const structure = resolveSemiAutoPublishStructure(body, [], {
+      bodyIsAuthoritative: true,
+      imageHeadingTitles: [
+        '청약통장 전환, 지금 해도 되나 — 실적 인정 기준 정리',
+        '전환하면 실적이 그대로 인정돼요.',
+        '창구에서 준비물은 이것만 챙기세요.',
+      ],
+    });
+
+    expect(structure.strategy).toBe('body-sections');
+    expect(structure.headings).toHaveLength(2);
+  });
+
   it('이미지 정보가 없으면 기존 동작 그대로 plain-body 로 남는다', () => {
     const structure = resolveSemiAutoPublishStructure(body, [], { bodyIsAuthoritative: true });
 

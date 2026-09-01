@@ -2257,22 +2257,40 @@ export async function handleSemiAutoPublish(): Promise<any> {
   // [2026-08-23] 이미지가 걸린 소제목을 구조 복구의 마지막 근거로 넘긴다.
   //   실측 사고: 이미지 3장을 만들어 붙였는데 소제목 추출이 0개가 되면서 본문이 통짜로 들어갔고,
   //   에디터 이미지 컴포넌트가 0개인 채 발행됐다.
-  const imageHeadingTitles: string[] = (() => {
+  //
+  // [2026-08-30] 썸네일은 소제목이 아니라 "제목"과 매칭된다.
+  //   실제 코드(main.ts): 전용 썸네일은 `heading: title || '🖼️ 썸네일'` 로 만들어진다.
+  //   즉 썸네일의 heading 은 보통 글 제목이고 '🖼️ 썸네일' 은 제목이 없을 때의 폴백이다.
+  //   그래서 본문 앵커에서 빼야 할 것은 "이름이 썸네일류" + "글 제목과 같은 것" 두 가지다.
+  //   반대로 isThumbnail 플래그만 보고 빼면 안 된다 — 사용자가 본문 소제목 이미지를 대표
+  //   이미지로 고르면 그 이미지에도 플래그가 붙어(normalizePublishImageSequence) 멀쩡한
+  //   본문 앵커를 잃는다. 플래그는 "자리가 필요한 이미지 수"를 셀 때만 쓴다.
+  const postTitleForImages = String(title || '').trim();
+  const isThumbnailHeading = (name: string): boolean =>
+    isNonBodyImageHeading(name) || (postTitleForImages.length > 0 && name === postTitleForImages);
+
+  const semiAutoImageTitles = (() => {
     try {
       const all = typeof ImageManager !== 'undefined' ? ImageManager.getAllImages() : [];
+      const anchors: string[] = [];
       const seen = new Set<string>();
+      let bodySlotImages = 0;
       for (const image of Array.isArray(all) ? all : []) {
-        const title = String(image?.heading || '').trim();
-        // [2026-08-30] 썸네일은 소제목 자리가 아니라 글 맨 위에 따로 들어간다. 이것을 세면
-        //   본문 소제목이 멀쩡해도 "넣을 자리를 찾지 못했다"는 경고가 뜬다(사용자 실측).
-        if (!title || isNonBodyImageHeading(title) || image?.isThumbnail === true) continue;
-        if (!seen.has(title)) seen.add(title);
+        const name = String(image?.heading || '').trim();
+        if (!name) continue;
+        const thumbnailLike = isThumbnailHeading(name);
+        if (!thumbnailLike && image?.isThumbnail !== true) bodySlotImages += 1;
+        if (thumbnailLike || seen.has(name)) continue;
+        seen.add(name);
+        anchors.push(name);
       }
-      return Array.from(seen);
+      return { anchors, bodySlotImages };
     } catch {
-      return [];
+      return { anchors: [] as string[], bodySlotImages: 0 };
     }
   })();
+  const imageHeadingTitles: string[] = semiAutoImageTitles.anchors;
+  const bodySlotImageCount = semiAutoImageTitles.bodySlotImages;
   const semiAutoPublishStructure = resolveSemiAutoPublishStructure(content, existingSemiAutoHeadings, {
     bodyIsAuthoritative: true,
     existingIntroduction: structuredContent.introduction || '',
@@ -2281,14 +2299,14 @@ export async function handleSemiAutoPublish(): Promise<any> {
   const resolvedSemiAutoHeadings = semiAutoPublishStructure.headings;
   appendLog(
     `🧾 발행 구조: 소제목 ${resolvedSemiAutoHeadings.length}개 (${semiAutoPublishStructure.strategy})`
-    + ` · 준비된 이미지 소제목 ${imageHeadingTitles.length}개`,
+    + ` · 준비된 이미지 소제목 ${imageHeadingTitles.length}개 (본문 자리 필요 ${bodySlotImageCount}개)`,
   );
 
   // 이미지를 만들어 뒀는데 넣을 자리가 하나도 없으면 조용히 텍스트만 내보내지 않는다.
   // 사용자가 이미 비용과 시간을 쓴 결과물이 사라지는 경우라, 발행 여부는 사용자가 정한다.
-  if (resolvedSemiAutoHeadings.length === 0 && imageHeadingTitles.length > 0) {
+  if (resolvedSemiAutoHeadings.length === 0 && bodySlotImageCount > 0) {
     const proceed = window.confirm(
-      `⚠️ 이미지 ${imageHeadingTitles.length}개가 준비돼 있는데, 본문에서 넣을 자리(소제목)를 찾지 못했습니다.\n\n`
+      `⚠️ 이미지 ${bodySlotImageCount}개가 준비돼 있는데, 본문에서 넣을 자리(소제목)를 찾지 못했습니다.\n\n`
       + '이대로 발행하면 이미지 없이 글만 올라갑니다.\n\n'
       + '확인 = 이미지 없이 그대로 발행 / 취소 = 발행 중단',
     );

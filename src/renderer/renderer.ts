@@ -4289,13 +4289,20 @@ async function initUnifiedTab(): Promise<void> {
     }, 450);
   }
 
-  /** 이미지가 걸려 있는 소제목 제목 — 그 소제목이 실재한다는 증거다. */
+  /**
+   * 이미지가 걸려 있는 소제목 제목 — 그 소제목이 실재한다는 증거다.
+   *
+   * [2026-08-30] 단, 썸네일은 소제목이 아니라 "제목"과 매칭된다(main.ts 의 전용 썸네일은
+   * `heading: title || '🖼️ 썸네일'`). 글 제목과 같은 이름은 본문 소제목의 증거가 아니므로
+   * 앵커에서 뺀다. 이름이 썸네일류인 경우는 추출기(semiAutoHeadingExtractor)가 한 번 더 거른다.
+   */
   function readSemiAutoImageHeadingTitles(): string[] {
     try {
       const raw = (window as any).__imageManagerHeadings || (window as any).headingImages || [];
+      const postTitle = String((window as any).currentStructuredContent?.selectedTitle || '').trim();
       const titles = (Array.isArray(raw) ? raw : [])
         .map((entry: any) => String(entry?.heading || entry?.title || '').trim())
-        .filter((title: string) => title.length > 0);
+        .filter((title: string) => title.length > 0 && !(postTitle.length > 0 && title === postTitle));
       return Array.from(new Set(titles));
     } catch {
       return [];
