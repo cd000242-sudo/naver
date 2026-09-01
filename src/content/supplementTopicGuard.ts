@@ -106,7 +106,19 @@ export function isOnTopicForKeyword(
     }
     if (tokens.length === 0) return true;
 
-    return tokens.some((token) => body.includes(token));
+    /*
+     * [2026-09-01] "하나라도 포함" 은 너무 느슨했다.
+     *
+     * 명절 냉장고 정리 글에 김치냉장고 제품 스펙(RK70F49M1ZG · 199만 원)이 통째로 실렸다.
+     * 30개 블로그 중 1건만 걸러졌는데, 구매 글도 "냉장고" 를 포함하니 통과했기 때문이다.
+     * 정리 · 냄새 제거와 제품 구매는 완전히 다른 의도인데 낱말 하나로 묶였다.
+     *
+     * 주제어가 여럿이면 그중 둘 이상이 있어야 같은 주제로 본다.
+     * 주제어가 하나뿐인 짧은 키워드("냉장고")는 그 하나로 판정한다 — 안 그러면 아무것도 못 쓴다.
+     */
+    const matched = tokens.filter((token) => body.includes(token)).length;
+    const required = tokens.length >= 2 ? 2 : 1;
+    return matched >= required;
   } catch {
     return true;
   }
