@@ -498,7 +498,7 @@ function logTitlePayoff(content: any, source: any): void {
         title: declared,
         primaryKeyword: source?.keywords?.[0] || '',
         payoffZone: [content?.introduction, ...(Array.isArray(content?.headings)
-          ? content.headings.map((h: any) => `${h?.heading || ''}\n${h?.content || ''}`)
+          ? content.headings.map((h: any) => `${h?.title || h?.heading || ''}\n${h?.content || ''}`)
           : [])].filter(Boolean).join('\n'),
       });
       if (reason.checked && reason.coverage < 0.5) {
@@ -524,7 +524,13 @@ function logPublicReactionClaims(content: any, source: any): void {
     const body = [
       content?.introduction,
       ...(Array.isArray(content?.headings)
-        ? content.headings.map((h: any) => `${h?.heading || ''} ${h?.content || ''}`)
+        /*
+         * [2026-09-01] h.heading 은 존재하지 않는 필드다 — 실제 필드는 h.title 이다
+         * (HeadingPlan, contentGenerator.ts:2101). 그래서 이 감사용 본문에 소제목이
+         * 한 글자도 들어가지 않았고, 아래 감사기 여섯 개가 전부 소제목을 못 봤다.
+         * :456 주석이 이 결함을 이미 알고 있었는데 한 곳만 국소 우회했다.
+         */
+        ? content.headings.map((h: any) => `${h?.title || h?.heading || ''} ${h?.content || ''}`)
         : []),
       content?.conclusion,
     ].filter(Boolean).join('\n');
@@ -570,7 +576,9 @@ function logPublicReactionClaims(content: any, source: any): void {
     const headingList = [
       String(content?.title || ''),
       ...(Array.isArray(content?.headings)
-        ? content.headings.map((h: any) => String(h?.heading || ''))
+        // [2026-09-01] h.title 이 실제 필드다. heading 만 읽어 소제목이 전부 빈 문자열이 됐고,
+        //   하한(3개)에 걸려 이 감지기는 한 번도 발화하지 못했다.
+        ? content.headings.map((h: any) => String(h?.title || h?.heading || ''))
         : []),
     ].filter(Boolean);
     const skeleton = analyzeHeadingSkeletons(headingList);
@@ -585,7 +593,7 @@ function logPublicReactionClaims(content: any, source: any): void {
      */
     const repeats = findCrossSectionRepeats(
       Array.isArray(content?.headings)
-        ? content.headings.map((h: any) => ({ heading: String(h?.heading || ''), content: String(h?.content || '') }))
+        ? content.headings.map((h: any) => ({ heading: String(h?.title || h?.heading || ''), content: String(h?.content || '') }))
           .concat([{ heading: '마무리', content: String(content?.conclusion || '') }])
         : [],
     );
