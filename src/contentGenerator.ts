@@ -463,7 +463,7 @@ function logTitleAnswer(content: any, source: any): void {
     const headings = Array.isArray(content?.headings) ? content.headings : [];
     const result = checkTitleAnswer({
       title: content?.selectedTitle || content?.title || '',
-      primaryKeyword: source?.keywords?.[0] || '',
+      primaryKeyword: getPrimaryKeywordFromSource(source as any),
       introduction: String(content?.introduction || ''),
       body: [
         ...headings.map((h: any) => `${h?.title || ''}\n${h?.content || ''}`),
@@ -483,7 +483,7 @@ function logTitlePayoff(content: any, source: any): void {
     const firstSection = Array.isArray(content?.headings) ? content.headings[0] : null;
     const result = checkTitlePayoff({
       title: content?.selectedTitle || content?.title || '',
-      primaryKeyword: source?.keywords?.[0] || '',
+      primaryKeyword: getPrimaryKeywordFromSource(source as any),
       payoffZone: [content?.introduction, firstSection?.heading, firstSection?.content]
         .filter(Boolean)
         .join('\n'),
@@ -498,7 +498,7 @@ function logTitlePayoff(content: any, source: any): void {
     if (declared) {
       const reason = checkTitlePayoff({
         title: declared,
-        primaryKeyword: source?.keywords?.[0] || '',
+        primaryKeyword: getPrimaryKeywordFromSource(source as any),
         payoffZone: [content?.introduction, ...(Array.isArray(content?.headings)
           ? content.headings.map((h: any) => `${h?.title || h?.heading || ''}\n${h?.content || ''}`)
           : [])].filter(Boolean).join('\n'),
@@ -665,7 +665,7 @@ function runPostGenValidator(content: any, source: any): void {
   let result: any;
   try {
     const mode: 'homefeed' | 'seo' = source?.contentMode === 'seo' ? 'seo' : 'homefeed';
-    const mainKeyword = source?.keywords?.[0] || source?.title || '';
+    const mainKeyword = getPrimaryKeywordFromSource(source as any) || source?.title || '';
     // ✅ [SPEC-AEO-EXPOSURE-2026 R2] external rules — file absent → DEFAULT (unchanged behavior).
     // Read per call so aeo_rules.json edits take effect without a rebuild (beta tuning).
     const aeoRules = loadAeoRules(path.join(app.getPath('userData'), 'aeo_rules.json'));

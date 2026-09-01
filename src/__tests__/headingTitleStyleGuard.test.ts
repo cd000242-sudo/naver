@@ -37,7 +37,21 @@ describe('heading title style guard (v2.11.140)', () => {
         subKeywords: '',
       });
       expect(prompt).toContain('[소제목 스타일 — 모든 모드 공통]');
-      expect(prompt).toContain('완결 문장으로 끝나는 소제목 금지');
+      /*
+       * [2026-09-01] "완결 문장으로 끝나는 소제목 금지" 문구를 박제하고 있었다.
+       *
+       * 그 금지가 headings-homefeed.prompt:17 의 모범 예시("이 조건에서 갈립니다")와
+       * headings-seo.prompt:40 의 "최소 하나는 서술형으로 끝낸다" 를 정면으로 막았다.
+       * JSON 출력 형식은 조립 맨 뒤라 앞선 프롬프트를 이긴다 —
+       * 우리 규칙이 우리 정답을 금지하고 있었고, 그 결과가 실측의 "소제목 6개 동일 종결" 이다.
+       *
+       * 이 테스트의 본래 목적(문장형 소제목이 발행 구조 파싱을 깨뜨리던 사고 방지)은
+       * 길이 상한과 감지기로 지킨다. 발행측은 이미 위치 재분할로 방어한다
+       * (contentBodyTransforms: "Publish-side now survives via position-slicing").
+       * 문구가 아니라 그 뜻 — "한 종결형으로 통일하지 마라" — 을 본다.
+       */
+      expect(prompt).toMatch(/같은 종결형으로 통일하지 않는다/u);
+      expect(prompt).toMatch(/30자/u);
     }
   });
 });

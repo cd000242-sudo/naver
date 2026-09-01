@@ -188,7 +188,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   (expert_review 가 매 H3 마지막에 [한 줄 판정] 을 강제하고 있었다 — 앞 내용 재진술이라 이탈을 부른다)
         // [2026-09-01 6차] evidence 근거 인용 필드 신설 + 요약표 조건 칸 + 분량 압력 제거로 재계산
         //   (사장님: "검사를 해서 다시쓰기를 하면 의미가 없어" — 첫 호출에서 지키게 하는 유일한 레버가 스키마 필드다)
-        'fb32d6e29aff8085dd315f76140cf455178c3a80ec3666ab102efa2829768e4f',
+        // [2026-09-01 7차] 소제목 종결형 강제 해제로 재계산
+        //   (출력 형식이 조립 맨 뒤라 headings-homefeed 의 모범 예시 "이 조건에서 갈립니다" 를 금지하고 있었다)
+        'f5666cfda42fe4439bb4d6b7b2ef7987db31de99d27344174bc4e642e84d355e',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
