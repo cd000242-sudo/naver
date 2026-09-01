@@ -52,7 +52,9 @@ describe('shopping AI reference pipeline', () => {
     expect(fullAuto).toContain('formData.imageModel');
     expect(generator).toContain('assertShoppingReferenceGenerationSelectionSupported(');
     expect(generator).toContain('options.imageModel');
-    expect(generator).toContain('orderedCollectedImages as string[],\n        options.imageModel,');
+    // [2026-09-01] 줄바꿈을 통째로 박제해 CRLF 체크아웃에서 깨졌다.
+    //   뜻은 "이미지 인자 바로 뒤에 imageModel 이 넘어간다" 하나다. 줄끝은 보지 않는다.
+    expect(generator).toMatch(/orderedCollectedImages as string\[\],\s*options\.imageModel,/u);
     expect(costBoundary).toContain('assertShoppingReferenceGenerationSelectionSupported(provider, options.imageModel)');
     expect(continuous).toContain('itemPipelineCfg.shopping.aiImageModel');
     expect(multi).toContain('itemPipelineCfg.shopping.aiImageModel');

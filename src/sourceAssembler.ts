@@ -1746,7 +1746,10 @@ export async function collectTopArticleFullTexts(
          */
         const dated = withFreshnessLabel(excerpt, parseNaverPostDate(candidate.postdate));
         if (isStaleSource(parseNaverPostDate(candidate.postdate))) staleParts += 1;
-        parts.push(`[상위글 ${parts.length + 1}${title ? ` — ${title}` : ''}]\n${dated}`);
+        // [2026-09-01] "[상위글 N]" 이라는 내부 라벨을 모델이 출처 이름으로 알고
+        //   본문에 옮겼다("상위 글에서 정리 주기는…"). 독자는 그게 무엇인지 모른다.
+        //   번호표만 남기고 우리 용어는 뺀다.
+        parts.push(`[자료 ${parts.length + 1}${title ? ` — ${title}` : ''}]\n${dated}`);
         usedUrls.push(candidate.link);
         totalChars += excerpt.length;
         await new Promise((resolve) => setTimeout(resolve, 300));
@@ -1803,7 +1806,8 @@ export async function collectTopArticleFullTexts(
       totalChars,
     });
     return {
-      text: `${tierNotice ? `${tierNotice}\n\n` : ''}=== 상위 노출 글 본문 발췌 (사실 자료 — 수치·조건·절차는 이 자료 범위에서 사용) ===\n${parts.join('\n\n')}`,
+      text: `${tierNotice ? `${tierNotice}\n\n` : ''}=== 사실 자료 (수치·조건·절차는 이 범위에서만 사용) ===
+※ 이 묶음의 이름과 번호표는 내부 표기다. 본문에 옮겨 적지 마라 — \"상위 글에서\", \"참고 자료에 따르면\" 같은 말을 독자는 알아듣지 못한다. 출처를 밝힐 때는 실제 출처로 쓴다: \"후기에서는\", \"블로그 사례에서는\", \"삼성 안내에는\".\n${parts.join('\n\n')}`,
       count: parts.length,
       urls: usedUrls,
     };

@@ -199,6 +199,7 @@ import { auditExperienceSentences, describeExperienceAudit } from './content/exp
 import { analyzeHeadingSkeletons, describeHeadingSkeletonWarnings } from './content/headingSkeletonVariety.js';
 import { describeCrossSectionRepeats, findCrossSectionRepeats } from './content/crossSectionRepetition.js';
 import { describePipelineMetricLeaks, findPipelineMetricLeaks } from './content/pipelineMetricLeak.js';
+import { describeMaterialLabelLeaks, findMaterialLabelLeaks } from './content/materialLabelLeak.js';
 import { buildFactVerificationReport } from './content/factVerificationReport.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
 import {
@@ -599,6 +600,15 @@ function logPublicReactionClaims(content: any, source: any): void {
      */
     for (const line of describePipelineMetricLeaks(findPipelineMetricLeaks(body))) {
       console.warn(`[MetricLeak] ⚠️ ${line}`);
+    }
+
+    /*
+     * [2026-09-01] 자료 라벨 누출. "상위 글에서", "참고 자료에 따르면" 은
+     * 우리가 자료를 부르는 내부 명칭이라 독자는 알아듣지 못한다.
+     * 자료 헤더에서 그 용어를 뺐지만, 모델이 스스로 만들어 쓸 수도 있어 함께 잰다.
+     */
+    for (const line of describeMaterialLabelLeaks(findMaterialLabelLeaks(body))) {
+      console.warn(`[LabelLeak] ⚠️ ${line}`);
     }
 
     /*
