@@ -5438,7 +5438,7 @@ export async function researchWithGeminiGrounding(keyword: string): Promise<{
 - 한국어로 작성
 - 각 항목을 소제목과 함께 구조화
 - 구체적인 수치, 날짜, 출처 포함
-- 최소 2000자 이상 작성
+- 분량 기준 없음. 확인된 것만 쓰고 없으면 짧아도 된다 — 채우려고 일반론을 덧붙이지 마라
 - 실제 정보 기반으로 정확하게 작성 (추측 금지)
 `.trim();
 
@@ -7857,9 +7857,8 @@ async function generateStructuredContentInternal(
         if (!optimized.quality.warnings) {
           optimized.quality.warnings = [];
         }
-        optimized.quality.warnings.push(
-          `본문 길이가 목표보다 짧습니다 (${plainLength}자 / 목표: ${minChars}자). 내용의 질을 우선시하여 통과합니다.`
-        );
+        // [2026-09-01] 분량 미달을 사용자 경고로 띄우지 않는다 — 분량은 판정 기준이 아니다.
+        console.log(`[ContentGenerator] 본문 ${plainLength}자 (요청 ${minChars}자) — 분량은 판정 기준이 아니다`);
 
         // ✅ 이모지 자동 제거 (AI가 생성한 이모지 제거)
         return finalizeStructuredContent(optimized, source, promptVariant);
@@ -7891,17 +7890,23 @@ async function generateStructuredContentInternal(
           optimized.quality.warnings = [];
         }
 
-        if (plainLength >= minChars * 0.5) {
-          optimized.quality.warnings.push(
-            `본문 길이가 목표보다 약간 짧습니다 (${plainLength}자 / 목표: ${minChars}자). 최대한 내용을 보존하여 출력합니다.`
-          );
-        } else {
-          // ✅ [2026-03-23] 50% 미만이어도 에러 없이 진행 — 연속발행 안정성 최우선
-          console.warn(`[ContentGenerator] ⚠️ 본문 길이 미달 (${plainLength}자 / 목표: ${minChars}자, ${Math.round((plainLength / minChars) * 100)}%) - 그래도 진행`);
-          optimized.quality.warnings.push(
-            `⚠️ 본문이 목표보다 많이 짧습니다 (${plainLength}자 / 목표: ${minChars}자). 내용 보강을 권장합니다.`
-          );
-        }
+        /*
+         * [2026-09-01] 분량 미달 경고를 사용자에게 띄우지 않는다.
+         *
+         * 사장님 판단: "2000자가 안 되어도 제목에 대한 후킹이나 내용에 대한 답변이
+         * 정확하게 들어가 있다면 분량은 굳이 신경 안 써도 상위노출이나 홈판노출이 가능하다."
+         * 이 판단이 검증된 근거와 맞는다 — "2,000자 기준" 은 새벽 조사에서 출처 없는
+         * 속설로 분류해 폐기했고, D.I.A.+ 는 길이가 아니라 "질의 의도가 문서에 실제로
+         * 포함되어 있는지" 를 본다.
+         *
+         * 실측: 제미나이 SEO 글 647자에서 제목 상환 86% · 본문 응답 86% · 지어낸 수치 0건.
+         * 짧지만 답을 갚았는데 앱은 "목표 2500자, 26%" 라고 경고했다.
+         *
+         * 경고를 남겨두면 사용자가 분량을 채우려 하고, 채우기는 뻔한 말을 부른다.
+         * 분량 대신 답을 재는 지표(TitlePayoff · TitleAnswer)가 이미 로그로 나간다.
+         * 진단용 로그는 남기되 사용자 경고 목록에는 넣지 않는다.
+         */
+        console.log(`[ContentGenerator] 본문 ${plainLength}자 (요청 ${minChars}자) — 분량은 판정 기준이 아니다`);
 
         // ✅ 성공 통계 (경고 후 통과)
         if (statsFile) {

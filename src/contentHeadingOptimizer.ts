@@ -49,10 +49,23 @@ export function dedupeRepeatedPhrasesInHeadingTitle(rawTitle: string): string {
     for (let index = 1; index < tokens.length; index++) {
       const suffixTokens = tokens.slice(index);
       if (suffixTokens.length < 2) continue;
-      const prefix = tokens.slice(0, index).join(' ');
-      const suffix = suffixTokens.join(' ');
-      if (prefix.includes(suffix)) {
-        return tokens.slice(0, index).join(' ').trim();
+      /*
+       * [2026-09-01] 글자 비교라 멀쩡한 소제목을 잘랐다.
+       *
+       *   원본   추석 전에 비워 둘 자리와 남겨 둘 자리
+       *   index=6 에서 suffix="둘 자리", prefix="추석 전에 비워 둘 자리와 남겨"
+       *   prefix.includes("둘 자리") 가 "자리와" 안의 "자리" 에 걸려 참이 됐다
+       *   결과   추석 전에 비워 둘 자리와 남겨      ← 사장님 실측 그대로
+       *
+       * "자리와" 와 "자리" 는 다른 어절이다. 어절 배열로 비교한다.
+       */
+      const prefixTokens = tokens.slice(0, index);
+      const repeats = prefixTokens.some((_, start) => (
+        start + suffixTokens.length <= prefixTokens.length
+        && suffixTokens.every((word, offset) => prefixTokens[start + offset] === word)
+      ));
+      if (repeats) {
+        return prefixTokens.join(' ').trim();
       }
     }
   }

@@ -273,7 +273,7 @@ function buildSplitPrompt(topic: string, options: GenerateOptions = {}): { syste
 - **주제**: ${topic}
 - **타겟 독자**: ${targetAudience}
 - **톤**: ${toneGuide[tone]}
-- **목표 분량**: ${wordCount}자 (±200자)
+- **분량**: 기준 없음. 주제에 답하는 데 필요한 만큼만 — 채우려고 일반론을 덧붙이지 마라
 ${keywords.length > 0 ? `- **필수 키워드**: ${keywords.join(', ')} (자연스럽게 3회 이상 포함)` : ''}
 ${includeImages ? '- **이미지 삽입 위치**: [이미지: 설명] 형태로 표시' : ''}
 

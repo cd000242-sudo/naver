@@ -169,7 +169,7 @@ ${topic}
 
 - 타겟 독자: ${targetAudience}
 - 톤: ${toneGuide[tone] || toneGuide.friendly}
-- 목표 분량: ${wordCount}자 내외
+- 분량: 기준 없음. 주제에 답하는 데 필요한 만큼만 — 채우려고 일반론을 덧붙이지 마라
 ${keywords.length > 0 ? `- 자연스럽게 녹여낼 키워드: ${keywords.join(', ')}` : ''}
 
 위 주제를 *직접 경험한 블로거*처럼 작성해주세요. system 메시지의 구조와 톤 가이드를 따르되, 형식적 보고체가 아닌 자연스러운 흐름으로.`,

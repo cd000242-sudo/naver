@@ -186,7 +186,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   (실측: 본문은 "과대포장을 덜어냈을 때의 체감"인데 표는 "30% 늘어난 사례"로 단정)
         // [2026-09-01 5차] 매 섹션 강제 템플릿 완화로 재계산
         //   (expert_review 가 매 H3 마지막에 [한 줄 판정] 을 강제하고 있었다 — 앞 내용 재진술이라 이탈을 부른다)
-        'f59806d07c70935f71f200b033d3eefeedb89711ed6b6525101a3490c05678d8',
+        // [2026-09-01 6차] evidence 근거 인용 필드 신설 + 요약표 조건 칸 + 분량 압력 제거로 재계산
+        //   (사장님: "검사를 해서 다시쓰기를 하면 의미가 없어" — 첫 호출에서 지키게 하는 유일한 레버가 스키마 필드다)
+        'fb32d6e29aff8085dd315f76140cf455178c3a80ec3666ab102efa2829768e4f',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
