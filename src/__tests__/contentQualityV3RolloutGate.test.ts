@@ -631,6 +631,12 @@ describe('Content Quality V3 rollout gate', () => {
     expect(Object.isFrozen(APPROVED_CONTENT_QUALITY_V3_EVIDENCE_ARTIFACT_SHA256)).toBe(true);
   });
 
+  /*
+   * [2026-09-01] 전체 스위트(8,239개) 동시 실행에서만 30초 상한에 걸렸다.
+   * 단독 실행은 통과하고 전체 실행에서만 32~37초 — 수백 개 소스 파일을 읽고
+   * 해싱하는 I/O 테스트라 워커 경합에 그대로 노출된다. 검증 내용이 아니라
+   * 실행 시간 문제이므로 상한만 올린다.
+   */
   it('blocks evidence tampering and rejects stale current-artifact pins', () => {
     const original = attestInput(makePassingInput());
     const metricTamper = {
@@ -698,7 +704,7 @@ describe('Content Quality V3 rollout gate', () => {
     const stalePinResult = evaluateContentQualityV3Rollout(metadataTamper);
     expect(stalePinResult.decision).toBe('BLOCK');
     expect(stalePinResult.reasonCodes).toContain('INVALID_EVIDENCE_ATTESTATION');
-  });
+  }, 300_000);
 
   it('blocks malformed attestation records without reading accessors', () => {
     const original = attestInput(makePassingInput());
@@ -730,7 +736,7 @@ describe('Content Quality V3 rollout gate', () => {
       expect(result.reasonCodes).toContain('INVALID_EVIDENCE_ATTESTATION');
     }
     expect(accessorReads).toBe(0);
-  });
+  }, 300_000);
 
   it('requires four strict lowercase SHA-256 provenance fields on every provider case', () => {
     const passing = makePassingInput();

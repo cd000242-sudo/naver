@@ -991,7 +991,8 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
     expect(unresolvedEdges).toEqual([]);
     expect(missingRuntimeSources).toEqual([]);
     expect(CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS).toEqual(expectedRuntimeSources);
-  }, 30_000);
+    /* [2026-09-01] 30_000 은 전체 스위트 동시 실행에서 부족했다 (실측 35.2초). */
+  }, 300_000);
 
   it('fails closed on computed module loads while resolving static TypeScript module forms', async () => {
     const root = await createFixture({
