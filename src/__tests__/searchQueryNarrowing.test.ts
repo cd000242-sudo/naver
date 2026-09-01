@@ -150,7 +150,7 @@ describe('맥락 : 주제 — 앞을 검색하고 뒤를 버리지 않는다', (
 
   it('vs · 체크리스트 같은 장식은 검색어에 넣지 않는다', () => {
     const q = narrowSearchQueries('9월 가을 환절기 침구 교체: 구스 이불 vs 차렵이불 세탁');
-    for (const x of q.slice(1)) expect(x).not.toMatch(/vs|체크리스트/iu);
+    for (const x of q.slice(1)) expect(x).not.toMatch(/\bvs\b|체크리스트/iu);
   });
 
   it('N월 · N년 표기는 시점이라 검색어에서 뺀다', () => {

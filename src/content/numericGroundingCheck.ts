@@ -18,7 +18,7 @@
  */
 
 /** Units worth checking. Narrow on purpose — a bare number is too common to judge. */
-const UNITS = [
+export const UNITS = [
   '년', '개월', '달', '주', '일', '시간', '분', '초', '차',
   'kg', 'g', 'mg', 't', '파운드', 'lb',
   'km', 'm', 'cm', 'mm', '평',
@@ -28,7 +28,7 @@ const UNITS = [
 ];
 
 /** Longest first so "만원" wins over "원", "개월" over "개". */
-const UNIT_PATTERN = [...UNITS]
+export const UNIT_PATTERN = [...UNITS]
   .sort((a, b) => b.length - a.length)
   .map((u) => u.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
   .join('|');

@@ -1,4 +1,5 @@
 import { extractKoreanFactTokens } from './koreanFactTokens.js';
+import { UNIT_PATTERN } from './numericGroundingCheck.js';
 /**
  * Source Fidelity Engine — Phase 7 (사용자 식별 미흡 #2: URL 입력 시 LLM 압축·정보 누락)
  *
@@ -72,7 +73,39 @@ export function extractCoreFacts(text: string, max: number = DEFAULT_MAX_FACTS):
   const facts = new Set<string>();
 
   // 1. 숫자 + 단위 (가장 강한 신호)
-  const numberPattern = /\d+(?:[.,]\d+)?[가-힣A-Za-z%원만천백억배회개분초시일월년]+/g;
+  /*
+   * [2026-09-02] 열린 문자 클래스가 쓰레기를 사실로 승격시켰다.
+   *
+   * 실측: 냉장고 글 본문에 이 문장이 실렸다 —
+   *   "4e4fee07-…라는 식별 문자열과 함께 99번째, 100번째, 3대, 3일, 1개월,
+   *    75%만, 4단계 … 라는 표기가 섞여 있습니다"
+   * UUID 를 이 정규식이 4e · 4fee · 98d · 2f 로 잘라 사실 목록에 올렸고,
+   * sourceFactChecklist 가 "이 목록을 다 다뤄야 끝난 글" 계약을 씌운다.
+   * "4e" 를 문장에 녹일 방법이 없으니 모델이 택한 유일한 준수 방법이
+   * 그것을 독자에게 설명하는 것이었다. 침구 글의 "5G와 6G처럼 …" 도 같은 자리다.
+   *
+   * 더 나쁜 것은 자리 독식이다 — 상한 30칸 중 22칸이 쓰레기로 차면
+   * 진짜 고유명사·인용문은 8칸만 받는다.
+   *
+   * [가-힣A-Za-z…]+ 는 숫자 뒤 아무 글자나 받는다. 닫힌 단위 목록으로 바꾼다.
+   * 목록은 numericGroundingCheck 가 이미 갖고 있다 — 두 벌로 만들지 않는다.
+   */
+  /*
+   * numericGroundingCheck 의 단위 목록은 '수치 검증' 용이라 날짜·글자수가 없다.
+   * 사실 추출에는 그것들도 사실이다 — "8월", "300자" 는 본문이 지켜야 할 값이다.
+   * 그 차이만 여기서 보탠다. 목록 본체는 여전히 한 곳(UNITS)에서 온다.
+   *
+   * 대문자 표기("10CM")는 두 글자 이상만 따로 넣는다.
+   * 정규식 전체에 i 를 걸면 'g'(그램) 때문에 "5G" 가 사실이 된다 —
+   * 침구 글의 "5G와 6G처럼 …" 문장을 만든 것이 정확히 그 경로다.
+   */
+  const EXTRA_UNITS = ['월', '자', '쪽', '줄', '가구', '세대', '병', '캔', '팩',
+    // 두 글자 이상 대문자 표기만 — 'CM' 은 살리고 'G'(5G) 는 살리지 않는다.
+    'CM', 'KM', 'MM', 'KG', 'ML', 'KCAL'];
+  const numberPattern = new RegExp(
+    '\\d+(?:[.,]\\d+)?(?:' + [UNIT_PATTERN, ...EXTRA_UNITS].join('|') + ')',
+    'g',
+  );
   for (const m of text.match(numberPattern) ?? []) {
     // [2026-08-26] 숫자 뒤에 조사가 딸려 온다("2.8%로", "25만원으로", "3.3%까지").
     //   목록에 조사째로 올리면 모델이 어색하게 따라 쓰고, 결과물 대조도 어긋난다.
