@@ -1590,7 +1590,22 @@ async function collectNaverSearchContent(
   const uniqueContents = new Set<string>();
   const cleanedResults: string[] = [];
 
+  /*
+   * [2026-09-01] 여기에도 같은 출구 게이트를 단다.
+   *
+   * 크롤링 경로에만 주제 검사가 있었고, 정작 자료의 대부분을 대는 이 API 경로에는
+   * 없었다. 에어컨 글에 KT&G 릴 토니노 람보르기니 가격과 필립모리스 캡슐 갑당 가격이
+   * 실린 것이 이 문으로 들어온 것이다 — 질의가 "필터 청소 및 내부" 였을 때
+   * 뉴스 11개 안에 담배 신제품 뉴스가 섞였다.
+   *
+   * 질의를 고쳤어도 검색엔진은 늘 무관한 것을 섞어 준다. 문은 그대로 달아 둔다.
+   */
+  let offTopicDropped = 0;
   for (const result of allResults) {
+    if (!isOnTopicForKeyword(`${result.title} ${result.description}`, query)) {
+      offTopicDropped += 1;
+      continue;
+    }
     const contentKey = result.description.slice(0, 100);
     if (!uniqueContents.has(contentKey)) {
       uniqueContents.add(contentKey);
@@ -1605,6 +1620,9 @@ async function collectNaverSearchContent(
   const elapsed = Date.now() - startTime;
 
   console.log(`[네이버 API] ✅ ${combinedContent.length}자 수집 완료! (${elapsed}ms, ${sources.join(', ')})`);
+  if (offTopicDropped > 0) {
+    console.log(`[네이버 API] ⛔ 주제와 무관한 결과 ${offTopicDropped}건 버림`);
+  }
 
   return {
     content: combinedContent,
@@ -7822,14 +7840,25 @@ export async function collectContentFromPlatforms(
          * 사장님 말대로 답은 생성을 멈추는 것이 아니라 자료를 제대로 찾는 것이다.
          */
         let apiResult = await collectNaverSearchContent(keyword, (clientId ?? ''), (clientSecret ?? ''));
-        if (!apiResult.content || apiResult.content.length <= 500) {
-          for (const narrowed of narrowSearchQueries(keyword).slice(1)) {
-            logger(`[플랫폼 콘텐츠 수집] 🔎 자료 부족 → 검색어를 좁혀 재시도: "${narrowed}"`);
-            const retry = await collectNaverSearchContent(narrowed, (clientId ?? ''), (clientSecret ?? ''));
-            if (retry.content && retry.content.length > (apiResult.content?.length || 0)) {
-              apiResult = retry;
-            }
-            if (apiResult.content && apiResult.content.length > 500) break;
+        /*
+         * [2026-09-01 실측] 좁힘을 "500자 미만일 때만" 돌렸더니 큰 이득을 놓치고 있었다.
+         *
+         *   "여름 에어컨 가을 보관 전 필수: 필터 청소 및 내부 건조"
+         *     →  2,254자 (뉴스 3, 웹문서 10, 블로그 0)   ← 문장이라 블로그가 하나도 안 걸린다
+         *   "에어컨 보관 필터 청소"
+         *     → 10,895자 (블로그 30, 뉴스 20, 웹문서 10)
+         *
+         * 4.8배다. 그런데 원문이 2,254자로 500자를 넘겼기 때문에 좁힘이 돌지 않았다.
+         * "부족하면 좁힌다" 가 아니라 "문장형이면 좁힌 것도 해보고 나은 쪽을 쓴다" 가 맞다.
+         * 네이버 검색 API 는 하루 25,000건 무료라 한 번 더 부르는 비용이 없다.
+         */
+        for (const narrowed of narrowSearchQueries(keyword).slice(1)) {
+          if ((apiResult.content?.length || 0) > 8000) break;
+          logger(`[플랫폼 콘텐츠 수집] 🔎 검색어를 좁혀 함께 시도: "${narrowed}"`);
+          const retry = await collectNaverSearchContent(narrowed, (clientId ?? ''), (clientSecret ?? ''));
+          if (retry.content && retry.content.length > (apiResult.content?.length || 0)) {
+            logger(`[플랫폼 콘텐츠 수집] ✅ 좁힌 검색어가 더 많이 물었습니다: ${apiResult.content?.length || 0}자 → ${retry.content.length}자`);
+            apiResult = retry;
           }
         }
 
@@ -8003,6 +8032,27 @@ export async function collectContentFromPlatforms(
           const combinedContent = article.title
             ? `[${article.title}]\n\n${article.content}`
             : article.content;
+
+          /*
+           * [2026-09-01] 출구 게이트 — 주제어가 없는 자료는 여기서 버린다.
+           *
+           * 그동안 들어오는 문을 하나씩 막았다(홈 리디렉션 → 결과 없음 페이지 → 질의 좁힘).
+           * 막을 때마다 다른 문으로 들어왔다. 실측만 넷이다.
+           *   구글 뉴스 홈 헤드라인 → "46분 전 개각" 이 "46분 만에 성에" 로 둔갑
+           *   검색 결과 없음 화면   → 그 화면을 해설하는 글이 나옴
+           *   일반어로 좁힌 질의    → 에어컨 글에 담배 신제품 가격이 실림
+           *   사이트 루트 크롤      → 에어컨 글에 날씨 예보가 들어옴
+           *
+           * 입구가 몇 개인지 모르는 채로 하나씩 막는 것은 끝이 없다.
+           * 어느 문으로 들어왔든 나갈 때 주제어가 없으면 버린다.
+           *
+           * 이게 이 도구의 존재 이유와 직결된다. 자료를 넣는 것이 강점인데
+           * 그 자료가 주제와 무관하면, 자료를 안 넣는 LLM 보다 못한 글이 나온다.
+           */
+          if (!isOnTopicForKeyword(combinedContent, keyword)) {
+            logger(`[플랫폼 콘텐츠 수집] ⛔ (${i + 1}/${maxUrls}) 주제와 무관한 자료 — 버립니다`);
+            continue;
+          }
 
           contentParts.push(combinedContent);
           successCount++;
