@@ -20,6 +20,8 @@
  */
 
 /** 이보다 오래되면 "지금 조건과 다를 수 있다" 고 경고한다 */
+import { annotateRelativeDates } from './relativeDateResolution.js';
+
 export const STALE_AFTER_MONTHS = 12;
 
 /** 네이버 검색 API 의 postdate 형식(YYYYMMDD)을 ISO 날짜로 */
@@ -100,7 +102,19 @@ export function buildFreshnessLabel(isoDate: string, now: Date = new Date()): st
  */
 export function withFreshnessLabel(content: string, isoDate: string, now: Date = new Date()): string {
   const label = buildFreshnessLabel(isoDate, now);
-  const body = String(content ?? '');
+  /*
+   * [2026-09-02] 라벨만 붙이던 것을 본문의 상대 표현까지 풀어 준다.
+   *
+   * 호출부(sourceAssembler:1613)의 주석이 이 문제를 이미 예언해 뒀다 —
+   * "스니펫은 '오는 29일'처럼 발행일 기준 상대 표현을 쓰기 때문에,
+   *  기사 날짜가 없으면 모델이 월을 복원할 수 없다."
+   * 날짜는 붙였는데 복원은 안 됐다. 모델이 두 숫자를 갖고도 산수를 하지 않는다.
+   *
+   * 실측 두 건 — "오는 17일부터"(1년 전 끝난 행사), "지난 5일 오후 3시"(달 없는 날짜).
+   * 계산은 우리가 하고 답을 옆에 적는다. 이 자리를 고르면 스니펫과 전문,
+   * 두 경로가 함께 고쳐진다.
+   */
+  const body = annotateRelativeDates(String(content ?? ''), isoDate);
   if (!label) return body;
   return `${label}\n${body}`;
 }
