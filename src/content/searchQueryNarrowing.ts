@@ -42,7 +42,19 @@ const FILLER_WORDS = new Set([
   //   시점을 가리키는 관형어와 글의 성격을 말하는 낱말은 검색어에서 뜻을 보태지 않는다.
   '다가오는', '앞둔', '임박', '코앞', '올해', '내년', '지난해',
   '핵심', '기준', '정리', '점검', '체크', '노하우', '팁', '리스트',
+  /*
+   * [2026-09-02] 사장님 키워드 셋이 전부 "맥락 : 주제" 구조였다.
+   *   "9월 가을 환절기 침구 교체 : 구스 이불 vs 차렵이불 세탁"
+   *   "2026년 가을 이사철 : 신축 아파트 셀프 입주청소 체크리스트 및 하자"
+   * 앞은 계절 포장이고 뒤가 진짜 쓰려는 내용이다. 그런데 앞을 검색했다.
+   * 환절기 · 이사철 · 시즌은 계절과 같은 급의 시점어다 — 이미 버리기로 한 것들이다.
+   */
+  '환절기', '이사철', '시즌', '무렵', '초입', '체크리스트',
+  'vs', 'VS', 'Vs',
 ]);
+
+/** N월 · N년 · N일 — 계절과 같은 시점 표기다. 검색 결과를 좁히기만 한다. */
+const TIME_TOKEN = /^\d+\s*(?:년|월|일|주차)$/u;
 
 function stripParticles(word: string): string {
   return word.replace(/[,·…]/gu, '').trim();
@@ -51,7 +63,17 @@ function stripParticles(word: string): string {
 function isContentWord(word: string): boolean {
   const w = stripParticles(word);
   if (w.length < 2) return false;
+  if (TIME_TOKEN.test(w)) return false;
   return !FILLER_WORDS.has(w);
+}
+
+/** 한 조각에서 실질 명사만 순서대로 뽑는다. */
+function contentWordsOf(segment: string): string[] {
+  return segment
+    .split(/\s+/u)
+    .map(stripParticles)
+    .filter(Boolean)
+    .filter(isContentWord);
 }
 
 export function narrowSearchQueries(keyword: string | undefined): string[] {
@@ -64,25 +86,47 @@ export function narrowSearchQueries(keyword: string | undefined): string[] {
     if (v && v.length >= 2 && !candidates.includes(v)) candidates.push(v);
   };
 
-  const words = original
+  const allWords = original
     .replace(/[:：]/gu, ' ')
     .split(/\s+/u)
     .map(stripParticles)
     .filter(Boolean);
-  if (words.length <= SENTENCE_LIKE_WORDS) return candidates;
+  if (allWords.length <= SENTENCE_LIKE_WORDS) return candidates;
 
-  const contentWords = words.filter(isContentWord);
-  if (contentWords.length === 0) return candidates;
+  /*
+   * [2026-09-02] 콜론 앞은 맥락, 뒤가 주제다.
+   *
+   * 실측 셋 중 둘이 여기서 무너졌다 — 앞을 검색하고 뒤를 버렸다:
+   *   "…침구 교체 : 구스 이불 vs 차렵이불 세탁"  → "9월 환절기 침구 교체" 로 검색
+   *     세탁법이 자료에 없으니 본문이 백화점 행사 얘기로 채워졌다.
+   *   "…이사철 : 신축 아파트 셀프 입주청소 … 하자" → "2026년 이사철 신축 아파트" 로 검색
+   *     청소법이 없으니 본문이 잠실 개발 · 양도소득세로 채워졌다.
+   * 제대로 검색된 하나("냉장고 찌든 냄새 제거")만 쓸 만한 글이 나왔다.
+   *
+   * 그렇다고 "콜론 뒤가 본체" 로 되돌리면 에어컨 회귀가 난다 —
+   * 거기서는 주제어(에어컨)가 앞에 있었다. 둘 다 잃지 않는 방법은 이것이다:
+   *   주제는 뒤에서 가져오고, 앞의 첫 실질 명사 하나만 닻으로 붙인다.
+   * 에어컨은 그 닻으로 살아남고, 침구·이사철은 주제를 되찾는다.
+   */
+  const colonAt = original.search(/[:：]/u);
+  const front = colonAt >= 0 ? contentWordsOf(original.slice(0, colonAt)) : [];
+  const back = contentWordsOf(colonAt >= 0 ? original.slice(colonAt + 1) : original);
 
-  // 앞에서부터 실질 명사만 모은다 — 주제어는 대개 맨 앞에 온다.
-  push(contentWords.slice(0, MAX_QUERY_WORDS).join(' '));
+  const subject = back.length > 0 ? back : front;
+  if (subject.length === 0) return candidates;
 
-  // 더 좁힌 후보: 주제어 + 뒤쪽 핵심어. 앞 후보로도 부족할 때 쓴다.
-  if (contentWords.length > 2) {
-    push([contentWords[0], ...contentWords.slice(-2)].join(' '));
+  // 앞 조각은 맥락이므로 첫 낱말 하나만 남긴다 — 그것이 주제어일 때(에어컨)를 위해서다.
+  const anchor = back.length > 0 && front.length > 0 ? front[0] : undefined;
+  const head = anchor ? [anchor, ...subject] : subject;
+
+  push(head.slice(0, MAX_QUERY_WORDS).join(' '));
+
+  // 더 좁힌 후보: 닻 + 꼬리. 행위어(세탁 · 제거)는 대개 맨 뒤에 온다.
+  if (subject.length > 2) {
+    push([head[0], ...subject.slice(-2)].join(' '));
   }
-  if (contentWords.length > 1) {
-    push(contentWords.slice(0, 2).join(' '));
+  if (head.length > 1) {
+    push(head.slice(0, 2).join(' '));
   }
 
   return candidates;
