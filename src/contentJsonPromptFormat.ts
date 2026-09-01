@@ -101,12 +101,19 @@ const SURPRISING_FACT_FIELD = JSON.stringify(
   + '자료에 있는 것만 쓰고, 훑어도 어긋남이 없으면 "자료 내 의외 지점 없음"이라 적는다',
 );
 
-function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton: boolean): string {
+function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton: boolean, todayLabel: string): string {
   const common = `
     "coreSubject": "입력 자료의 핵심을 1문장으로 (자료에 있는 것만)",
     "entityCheck": "키워드 속 고유명사 판별 — 작품명·인물명·브랜드를 크롤링 자료와 대조해 식별한다. 수식어처럼 보이는 구절이 실제 드라마·예능·영화 제목일 수 있다(예: 키워드 앞부분 전체가 작품명). 작품명은 쪼개거나 일반 수식어로 취급하지 않으며, 자료에 근거 없는 실체 단정은 하지 않는다",
     "whyNow": "이 키워드가 지금 검색·소비되는 이유를 입력 단서에서 추론 — 단서는 이미 주어져 있다: 뉴스·상위 노출 글의 발행 시점과 사건, 여러 자료에서 반복되는 지점, 지식iN 질문이 보여주는 독자 상황, 월간검색량·문서량 지표. 이 중 실제로 찾은 단서를 근거로 명시한다. 자료 밖 트렌드 이유를 지어내지 않으며, 훑고도 시점 단서가 없으면 '자료 내 시점 단서 없음'이라 적고 자료가 가장 두텁게 다루는 지점을 대신 근거로 쓴다",
-    "readerSituation": "독자가 어떤 상황·막힌 지점에서 이 글을 만나는지 추론 (독자에 대한 추론 — 작성자 체험 주장 아님)",`;
+    "readerSituation": "독자가 어떤 상황·막힌 지점에서 이 글을 만나는지 추론 (독자에 대한 추론 — 작성자 체험 주장 아님)",
+    "dateBasis": {
+      "todayIs": "${todayLabel}",
+      "materialDates": ["자료에 적힌 날짜·기간·연도를 원문 그대로 옮긴다. 없으면 빈 배열"],
+      "alreadyPast": ["위 중 오늘보다 이전인 것 — 본문에서 반드시 과거형으로 쓴다. 지난해 행사면 연도를 밝힌다"],
+      "notYetHappened": ["위 중 오늘 이후인 것 — 실적·결과·반응을 과거형으로 단정하면 거짓이 된다"],
+      "relativeExpressions": ["자료가 쓴 \\"오는 17일\\" \\"다음 달\\" \\"이번 주\\" 같은 상대 표현. 본문에는 이것을 그대로 옮기지 않고 절대 날짜로 바꿔 쓴다"]
+    },`;
   const title = `
     "titleRationale": "titleCandidates 3개가 각각 어떤 각도·어떤 근거를 쓰는지, 도입이 그 약속을 어떻게 갚는지 1~2문장"`;
   const image = `,
@@ -215,7 +222,13 @@ function buildPreWritingAnalysisDirective(mode: PromptMode, usesIssueStorySkelet
 - headings 는 inquiryTrigger 의 상황과 inquiryBarriers 의 장벽 해소에 대응한다 — 비용이 정해지는 조건·진행 절차·문의 전 확인 항목 같은 소제목을 장벽에 맞춰 배치한다. inquiryBarriers 가 비어 있으면 장벽 해소 문단을 지어내지 않는다.` : '';
   return `📌 [모든 모드 — 제목보다 추론이 먼저다]
 - preWritingAnalysis 를 반드시 가장 먼저 채운다. 크롤링 자료를 분석하기 전에 제목부터 쓰지 않는다.
-- whyNow 는 주어진 단서(뉴스 시점·상위글 반복 지점·지식iN 질문·검색량 지표)를 실제로 훑어 근거를 명시한다. 크롤링과 검색 API 가 이미 단서를 모아 왔다 — 훑지 않고 건너뛰지 않는다. 자료 밖 트렌드 이유는 지어내지 않는다.${issueExtra}${homefeedClickContract}${seoClickContract}${mateClickContract}${businessClickContract}${affiliateClickContract}${modeExtra}
+- whyNow 는 주어진 단서(뉴스 시점·상위글 반복 지점·지식iN 질문·검색량 지표)를 실제로 훑어 근거를 명시한다. 크롤링과 검색 API 가 이미 단서를 모아 왔다 — 훑지 않고 건너뛰지 않는다. 자료 밖 트렌드 이유는 지어내지 않는다.
+- [날짜 대조] dateBasis 를 본문보다 먼저 채운다. 자료의 날짜를 todayIs 와 하나씩 대보고
+  alreadyPast · notYetHappened 로 가른 뒤에 쓴다. 본문은 그 판정과 어긋나면 안 된다:
+  · alreadyPast 의 일은 과거형으로 쓴다. 지난해 것이면 연도를 밝힌다("2025년 10월에 열린 행사입니다").
+  · notYetHappened 의 기간은 실적·결과·반응을 쓰지 않는다. 아직 일어나지 않았으므로 결과가 없다.
+  · relativeExpressions 는 본문에 그대로 옮기지 않는다 — 자료의 절대 날짜로 바꾼다.
+    지난해 행사를 "오는 17일부터 열립니다"로 옮기면 독자가 없는 행사를 찾아간다.${issueExtra}${homefeedClickContract}${seoClickContract}${mateClickContract}${businessClickContract}${affiliateClickContract}${modeExtra}
 - 각 headings[].imagePrompt 는 imageDirection 을 따르되 그 소제목 본문의 구체 장면에서 도출한다 — 일반 소품 사진 묘사로 도망가지 않는다.
 - preWritingAnalysis 는 설계 메모다 — 그 문장들을 introduction·headings·conclusion 본문에 옮기지 않는다.
 
@@ -459,7 +472,7 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
 ────────────────────
 [출력 형식 — 반드시 이 순서와 JSON 형식으로]${modeStructureRule}${evidenceBlockRule}
 
-{${buildPreWritingAnalysisSchema(mode, usesIssueStorySkeleton)}
+{${buildPreWritingAnalysisSchema(mode, usesIssueStorySkeleton, todayLabel)}
   "selectedTitle": "제목 1 (${titleLength} — 넘기면 피드·검색에서 뒷부분이 잘려 안 보인다)",
   "titleCandidates": [${(isHomefeed || mode === 'seo' || mode === 'affiliate' || mode === 'mate' || mode === 'business') ? `
     {"text": "제목 1 (${titleLength})", "score": 95, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"},

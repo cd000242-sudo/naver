@@ -73,3 +73,54 @@ describe('본문 프롬프트의 날짜 규율', () => {
     expect(dateIdx).toBeGreaterThan(gateIdx);
   });
 });
+
+/*
+ * [2026-09-02 2차] 산문 지시만으로는 안 됐다 — 실측으로 확인.
+ *
+ * 위 블록(최종 강제 조건 8번)을 넣고 빌드·재시작한 뒤 같은 키워드로 다시 뽑았더니
+ * 똑같은 문장이 또 나왔다:
+ *   [DateClaim] 아직 오지 않은 날("9월 26일")을 이미 일어난 일처럼 썼습니다
+ *   "9월 26일~10월 9일 침구류 매출은 전주 대비 25% 증가했다는 기록도 있습…"
+ * dist:450 에 문구가 있는 것도 확인했다. 프롬프트는 도착했고 모델이 흘렸다.
+ *
+ * 이 저장소가 다섯 번 확인한 원칙이다 — 산문 지시는 흘리고 스키마 필드는 지킨다
+ * (해시태그 · 제목 길이 · 요약표 · clickReason · evidence). 형태를 바꾼다.
+ * dateBasis 는 본문보다 먼저 채워지는 자리라, 모델이 자료 날짜를 오늘과
+ * 하나씩 대보지 않고는 JSON 을 완성할 수 없다.
+ */
+describe('dateBasis — 쓰기 전에 날짜를 오늘과 대보게 만든다', () => {
+  const MODES2 = [`seo`, `homefeed`, `mate`, `business`] as const;
+
+  it.each(MODES2.map((m) => [m]))('%s 모드 스키마에 dateBasis 가 있다', (mode) => {
+    const prompt = build(mode);
+    expect(prompt).toContain('"dateBasis"');
+    expect(prompt).toContain('"todayIs"');
+    expect(prompt).toContain('"alreadyPast"');
+    expect(prompt).toContain('"notYetHappened"');
+    expect(prompt).toContain('"relativeExpressions"');
+  });
+
+  it('todayIs 에 실제 오늘 날짜가 값으로 박힌다 — 설명문이 아니라 값이다', () => {
+    const now = new Date();
+    const label = `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일`;
+    expect(build(`seo`)).toContain(`"todayIs": "${label}"`);
+  });
+
+  it('본문보다 먼저 채워지는 자리에 있다 — 제목·본문 필드보다 앞선다', () => {
+    const prompt = build(`seo`);
+    const dateIdx = prompt.indexOf('"dateBasis"');
+    const titleIdx = prompt.indexOf('"selectedTitle"');
+    const introIdx = prompt.indexOf('"introduction"');
+    expect(dateIdx).toBeGreaterThan(-1);
+    expect(dateIdx).toBeLessThan(titleIdx);
+    expect(dateIdx).toBeLessThan(introIdx);
+  });
+
+  it('그 판정을 본문에 어떻게 쓰라는 계약이 함께 간다', () => {
+    const prompt = build(`seo`);
+    expect(prompt).toContain('[날짜 대조] dateBasis 를 본문보다 먼저 채운다');
+    expect(prompt).toContain('alreadyPast 의 일은 과거형으로 쓴다');
+    expect(prompt).toContain('notYetHappened 의 기간은 실적·결과·반응을 쓰지 않는다');
+    expect(prompt).toContain('relativeExpressions 는 본문에 그대로 옮기지 않는다');
+  });
+});
