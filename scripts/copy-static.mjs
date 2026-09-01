@@ -506,6 +506,7 @@ try {
       'contentPolicyDashboard.js',
       'revenueOperationsDashboard.js',
       'exposedStructureRef.js',
+      'aiExperienceToggleGate.js',
   ];
   let modulesSource = rendererRuntimeDependencySource;
   for (const modFile of modulesFiles) {

@@ -15,6 +15,8 @@ import { generateEnglishPromptForHeading, decomposeKoreanCompound, koreanMorphem
 import { isPaywallPayload, activatePaywall, initPaywallSystem } from './modules/paywallSystem.js';
 // ✅ [2026-02-26 모듈화] 향상된 fetch + 자격증명 + 글자수
 import { enhancedFetch } from './modules/enhancedFetch.js';
+
+import { syncAiExperienceToggleForMode } from './modules/aiExperienceToggleGate.js';
 import { initCredentialsSave } from './modules/credentialsSave.js';
 import { initCharCountDisplay } from './modules/charCountDisplay.js';
 // ✅ [2026-02-26 모듈화] 사용법 영상 + API 가이드 + 사용 가이드 모달
@@ -7178,6 +7180,7 @@ function initUnifiedModeSelection(): void {
     customPromptAreaInit.style.display = 'block';
     const initialMode = (document.getElementById('unified-content-mode') as HTMLInputElement)?.value || 'seo';
     syncCustomPromptUiForMode(initialMode);
+    syncAiExperienceToggleForMode(initialMode);
   }
 
   // ✅ 콘텐츠 모드 선택 버튼 클릭 이벤트 (SEO / 홈판 / 제휴마케팅 / 사용자정의)
@@ -7235,6 +7238,14 @@ function initUnifiedModeSelection(): void {
       if (affiliateDescEl) affiliateDescEl.style.display = mode === 'affiliate' ? 'block' : 'none';
       if (customDescEl) customDescEl.style.display = mode === 'custom' ? 'block' : 'none';
       if (businessDescEl) businessDescEl.style.display = mode === 'business' ? 'block' : 'none';
+
+      /*
+       * [2026-09-02] AI 경험 생성 체크박스는 모드를 탄다.
+       * 안 걸리는 모드에서도 클릭이 됐고, main.ts 는 그때도 "ON — 3요소 계약 적용" 을 찍었다.
+       * 사장님 지적: "체크해도 안 되는거 왜 활성화시켜놓니". 맞다 —
+       * 입력을 받아놓고 아무 일도 안 하는 컨트롤은 없느니만 못하다.
+       */
+      syncAiExperienceToggleForMode(mode);
 
       // [2026-05-27 작업 13-B] 개인 프롬프트 영역: 모든 모드에서 표시 (체크박스 + 모달 + 모드별 localStorage)
       if (customPromptArea) {

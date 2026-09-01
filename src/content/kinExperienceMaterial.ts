@@ -208,8 +208,25 @@ export async function collectKinExperienceAnswers(
   if (!query) return { block: '', answerCount: 0, reason: 'no-keyword' };
 
   try {
+    /*
+     * [2026-09-02] 문장형 키워드는 지식iN 에서 0건이 나온다.
+     *
+     * 라이브 실측: keywords=["9월 가을 환절기 침구 교체: 구스 이불 vs 차렵이불 세탁"]
+     * → reason=no-results. 같은 실행에서 크롤러는 28,934자를 가져왔다.
+     * 차이는 하나다 — sourceAssembler:1686 은 narrowSearchQueries 를 쓰고 여기는 안 썼다.
+     * 카테고리 문을 열어도 검색어가 문장이면 재료는 0 이다.
+     *
+     * 원문이 이미 짧으면 후보가 하나뿐이라 기존 동작과 같다.
+     */
+    const { narrowSearchQueries } = await import('./searchQueryNarrowing.js');
+    const narrowed = narrowSearchQueries(query);
+    const searchQuery = narrowed[1] || narrowed[0] || query;
+    if (searchQuery !== query) {
+      console.log(`[kinExperienceMaterial] 🔎 검색어를 좁힙니다: "${query}" → "${searchQuery}"`);
+    }
+
     const { searchKin } = await import('../naverSearchApi.js');
-    const result = await searchKin({ query, display: 6, sort: 'sim' });
+    const result = await searchKin({ query: searchQuery, display: 6, sort: 'sim' });
     const items = (result?.items || []).filter(
       (item) => typeof item?.link === 'string' && /^https?:\/\//.test(item.link),
     );
@@ -235,7 +252,7 @@ export async function collectKinExperienceAnswers(
 
     if (answers.length === 0) return { block: '', answerCount: 0, reason: 'no-answers' };
     const block = buildKinAnswerBlock(answers, categoryHint);
-    console.log(`[kinExperienceMaterial] 💬 겪은 사람 말투 재료 ${answers.length}건 확보 ("${query}")`);
+    console.log(`[kinExperienceMaterial] 💬 겪은 사람 말투 재료 ${answers.length}건 확보 ("${searchQuery}")`);
     return { block, answerCount: answers.length, reason: 'ok' };
   } catch (error) {
     const message = String((error as Error)?.message || error);
