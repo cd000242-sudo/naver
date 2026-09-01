@@ -194,7 +194,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   (expert_review 가 "3년간 200개 봤습니다" 를 시키면서 같은 파일이 그것을 금지했다)
         // [2026-09-01 9차] storyteller 오감·시간축 강제 해소 + mate FAQ 개수 강제 해소로 재계산
         //   (프롬프트가 자료로는 채울 수 없는 것을 "반드시"로 요구하던 자리들)
-        '096fe0434cc145d252ef09653bf6a435c129302591bcd29063745e1d3c669d5b',
+        // [2026-09-02 10차] 본문 프롬프트에 오늘 날짜 주입으로 재계산
+        //   (지난해 행사를 "오는 17일부터" 로 옮겨 없는 행사를 안내하던 것)
+        '7408df854e9aa2e4c251e5696baa875c97eab26cd3d9cd37caa9d50a317b7b4d',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
