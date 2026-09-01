@@ -190,7 +190,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   (사장님: "검사를 해서 다시쓰기를 하면 의미가 없어" — 첫 호출에서 지키게 하는 유일한 레버가 스키마 필드다)
         // [2026-09-01 7차] 소제목 종결형 강제 해제로 재계산
         //   (출력 형식이 조립 맨 뒤라 headings-homefeed 의 모범 예시 "이 조건에서 갈립니다" 를 금지하고 있었다)
-        'f5666cfda42fe4439bb4d6b7b2ef7987db31de99d27344174bc4e642e84d355e',
+        // [2026-09-01 8차] 페르소나 교착 해소 + 업체 해시태그 배선으로 재계산
+        //   (expert_review 가 "3년간 200개 봤습니다" 를 시키면서 같은 파일이 그것을 금지했다)
+        '8431d2930635457bf56f5e9d1c0738a74a87899a95a7d37e2ba1847d293e50db',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

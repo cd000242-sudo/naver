@@ -130,6 +130,16 @@ export function sanitizeContentMetaCritique(content: SanitizableContent): number
   if (content.title) content.title = tryFix(content.title);
   if (content.introduction) content.introduction = tryFix(content.introduction)!;
   if (content.conclusion) content.conclusion = tryFix(content.conclusion)!;
+  /*
+   * [2026-09-01] bodyPlain · bodyHtml 이 빠져 있었다.
+   *
+   * 발행은 headings[] 가 아니라 bodyPlain 을 타이핑한다(editorHelpers). 그래서
+   * 소제목 본문에서 지워도 독자에게 가는 글에는 자가검수 메타 문장이 그대로 남았다.
+   * 형제 함수들은 둘 다 처리한다 — HTML 태그 제거도, 가짜 출처 제거도.
+   * 타입에도 이미 선언돼 있다. 이 함수만 빼먹었다.
+   */
+  if (content.bodyPlain) content.bodyPlain = tryFix(content.bodyPlain);
+  if (content.bodyHtml) content.bodyHtml = tryFix(content.bodyHtml);
   if (Array.isArray(content.headings)) {
     for (const h of content.headings) {
       if (h.title) h.title = tryFix(h.title);
