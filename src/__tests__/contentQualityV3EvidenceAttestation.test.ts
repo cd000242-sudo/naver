@@ -192,7 +192,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   (출력 형식이 조립 맨 뒤라 headings-homefeed 의 모범 예시 "이 조건에서 갈립니다" 를 금지하고 있었다)
         // [2026-09-01 8차] 페르소나 교착 해소 + 업체 해시태그 배선으로 재계산
         //   (expert_review 가 "3년간 200개 봤습니다" 를 시키면서 같은 파일이 그것을 금지했다)
-        '8431d2930635457bf56f5e9d1c0738a74a87899a95a7d37e2ba1847d293e50db',
+        // [2026-09-01 9차] storyteller 오감·시간축 강제 해소 + mate FAQ 개수 강제 해소로 재계산
+        //   (프롬프트가 자료로는 채울 수 없는 것을 "반드시"로 요구하던 자리들)
+        '096fe0434cc145d252ef09653bf6a435c129302591bcd29063745e1d3c669d5b',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
