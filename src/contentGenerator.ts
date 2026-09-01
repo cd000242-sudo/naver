@@ -200,6 +200,7 @@ import { analyzeHeadingSkeletons, describeHeadingSkeletonWarnings } from './cont
 import { describeCrossSectionRepeats, findCrossSectionRepeats } from './content/crossSectionRepetition.js';
 import { describePipelineMetricLeaks, findPipelineMetricLeaks } from './content/pipelineMetricLeak.js';
 import { describeMaterialLabelLeaks, findMaterialLabelLeaks } from './content/materialLabelLeak.js';
+import { describeFutureDatedPastClaims, findFutureDatedPastClaims } from './content/futureDatedPastClaim.js';
 import { buildFactVerificationReport } from './content/factVerificationReport.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
 import {
@@ -621,6 +622,15 @@ function logPublicReactionClaims(content: any, source: any): void {
     }
 
     /*
+     * [2026-09-01] 아직 오지 않은 날을 과거형으로 쓴 문장.
+     * 근거 게이트로는 못 잡는다 — 그 날짜가 자료에 실제로 있기 때문이다.
+     * 독자가 그 날짜에 맞춰 움직이면 아무 일도 없다. 신뢰가 한 번에 무너진다.
+     */
+    for (const line of describeFutureDatedPastClaims(findFutureDatedPastClaims(body))) {
+      console.warn(`[DateClaim] ⚠️ ${line}`);
+    }
+
+    /*
      * [2026-08-28] 집필 후 검증 패스. 외부 LLM 팩트체크 규칙의 12항은 본문 끝에
      * 검증 푸터를 붙이라고 하지만, 근거 메타 서술의 본문 노출은 라이브 실측에서
      * 이탈을 만들었다(evidenceIntegrity.buildEvidenceMetaLeakRule). 같은 정보를
@@ -892,7 +902,19 @@ async function generateTitleOnlyPatch(
     titlePrompt += `\n\n📅 [현재 년도 컨텍스트] 지금은 ${__currentYear}년입니다.\n` +
       `시즌성/연도 기반 콘텐츠(정부지원금/법규/트렌드/연도별 정보)에서 년도를 표기할 때는\n` +
       `반드시 "${__currentYear}년" 형태로 정확히 쓰세요. "올해", "최신", "현재" 같은 추상 표현보다\n` +
-      `구체적인 년도 숫자가 SEO/신뢰도 관점에서 유리합니다. (단, 체험 기간은 여전히 금지)\n`;
+      `구체적인 년도 숫자가 SEO/신뢰도 관점에서 유리합니다. (단, 체험 기간은 여전히 금지)\n` +
+      /*
+       * [2026-09-01 실측] 이 지시가 자료의 과거 날짜까지 갱신하게 만들었다.
+       *   자료: "2025 구스&울 페어 10월 17일~11월 9일" (지난해 보도자료)
+       *   본문: "2026년 10월 17일부터 11월 9일까지 진행되는 2025 구스&울 페어"
+       * 행사 이름은 2025인데 기간만 2026으로 바뀌었다. 게다가 오늘(9월 1일) 이후인
+       * "10월 9일까지 매출이 25% 증가했습니다" 처럼 오지 않은 날을 과거형으로 단정했다.
+       * 독자가 그 날짜에 맞춰 백화점에 가면 행사가 없다.
+       */
+      `⛔ 단, 자료에 적힌 날짜·연도·기간은 그대로 옮기세요. 올해로 바꾸지 마세요.\n` +
+      `   자료가 지난해 것이면 지난해 일로 씁니다("2025년 10월에 열린 행사입니다").\n` +
+      `⛔ 오늘 이후의 날짜를 이미 일어난 일처럼 쓰지 마세요.\n` +
+      `   아직 오지 않은 기간의 실적·결과·반응을 과거형으로 단정하면 그 자체가 거짓입니다.\n`;
   }
 
   // ✅ [v1.4.47] 기본 규칙 (프롬프트 로드 실패 시 폴백) — 하드코딩된 기간 예시 제거
