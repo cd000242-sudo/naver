@@ -19,6 +19,10 @@ export interface HeadingSkeletonReport {
   uniformEnding: boolean;
   /** 모든 소제목이 숫자로 시작하는 나열을 앞세운다. */
   uniformNumberLead: boolean;
+  /** 모든 소제목이 같은 낱말로 시작한다면 그 낱말. 아니면 빈 문자열. */
+  sharedPrefix: string;
+  /** 어미 없이 끊긴 소제목들. */
+  incomplete: string[];
 }
 
 /**
@@ -49,6 +53,33 @@ const QUESTION_ENDING = /(?:까|나요|는가|을까|ㄹ까|\?)\s*$/u;
 
 const NUMBER_LEAD = /^[^,]{0,30}\d/u;
 
+/*
+ * [2026-09-01 실측] 소제목 4개가 전부 "추석" 으로 시작했다. 둘은 문법적으로 붙지도
+ * 않는다("추석 성에가"). 키워드를 앞에 박느라 말이 무너진 자리다.
+ * human-writing-anti-pattern 이 이미 금지했는데도 4/4 였다 — 재는 장치가 필요하다.
+ */
+function findSharedPrefix(list: readonly string[]): string {
+  const firsts = list.map((h) => h.split(/\s+/u)[0] ?? '');
+  const head = firsts[0];
+  if (!head || head.length < 2) return '';
+  return firsts.every((word) => word === head) ? head : '';
+}
+
+/*
+ * 말이 끊긴 소제목. 마지막 어절이 어미 없이 어간으로 끝나면 문장이 완성되지 않은 것이다.
+ * "…자리와 남겨" 처럼 저비용 모델에서 나오는 마무리 붕괴를 잡는다.
+ * 명사로 끝나는 소제목은 정상이므로, 용언 어간으로 끝나는 경우만 본다.
+ */
+const VERB_STEM_TAIL = /(?:겨|여|어|아|워|러)$/u;
+const SAFE_NOUN_TAIL = /(?:것|점|법|편|축|줄|칸|자리|순서|주기|기준|조건|이유|차이|방법|사람|구간|지점|일|때|곳|글|수|중|후|전|용기|용량)$/u;
+
+function isIncompleteHeading(heading: string): boolean {
+  const last = heading.split(/\s+/u).pop() ?? '';
+  if (!last || last.length < 2) return false;
+  if (SAFE_NOUN_TAIL.test(last)) return false;
+  return VERB_STEM_TAIL.test(last);
+}
+
 function hasCommaSkeleton(heading: string): boolean {
   // "앞부분, 뒷부분" — 쉼표 양쪽에 실질 내용이 있어야 골격이다.
   const at = heading.indexOf(',');
@@ -62,7 +93,10 @@ export function analyzeHeadingSkeletons(headings: readonly string[] | undefined)
     .filter(Boolean);
 
   if (list.length < MIN_HEADINGS) {
-    return { checked: 0, uniformComma: false, uniformEnding: false, uniformNumberLead: false };
+    return {
+      checked: 0, uniformComma: false, uniformEnding: false, uniformNumberLead: false,
+      sharedPrefix: '', incomplete: [],
+    };
   }
 
   const everyNoun = list.every(endsWithNoun);
@@ -73,6 +107,8 @@ export function analyzeHeadingSkeletons(headings: readonly string[] | undefined)
     uniformComma: list.every(hasCommaSkeleton),
     uniformEnding: everyNoun || everyQuestion,
     uniformNumberLead: list.every((heading) => NUMBER_LEAD.test(heading)),
+    sharedPrefix: findSharedPrefix(list),
+    incomplete: list.filter(isIncompleteHeading),
   };
 }
 
@@ -88,6 +124,12 @@ export function describeHeadingSkeletonWarnings(report: HeadingSkeletonReport): 
   }
   if (report.uniformNumberLead) {
     lines.push(`소제목 ${report.checked}개가 전부 숫자를 앞세웁니다 — 수치가 없는 축을 하나쯤 두세요.`);
+  }
+  if (report.sharedPrefix) {
+    lines.push(`소제목 ${report.checked}개가 전부 "${report.sharedPrefix}" 로 시작합니다 — 주제어를 모든 소제목에 박으면 기계가 쓴 목차로 읽힙니다.`);
+  }
+  for (const heading of report.incomplete) {
+    lines.push(`소제목의 말이 끊겼습니다: "${heading}"`);
   }
   return lines;
 }
