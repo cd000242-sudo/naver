@@ -294,6 +294,7 @@ import {
 import {
   optimizeHeadingsForMode,
   syncHeadingsWithBodyPlain,
+  snapshotHeadingTitles,
 } from './contentHeadingOptimizer.js';
 import { characterCount, visibleCharacterCount } from './contentTextMetrics.js';
 import { formatPrice } from './services/priceNormalizer.js';
@@ -6589,12 +6590,18 @@ async function generateStructuredContentInternal(
       }
 
       // ✅ [소제목 최적화 마스터 모듈] - 구조 검증 후, 모드별 헤딩 타이틀만 보정
+      // [2026-09-01] 바꾸기 직전 제목을 찍어 둔다. 그래야 무엇이 바뀌었는지 알고
+      //   본문에 그것만 반영할 수 있다. 이 스냅샷이 없으면 동기화는 아무것도 하지 않는다.
+      const headingTitlesBeforeOptimize = snapshotHeadingTitles(parsed as any);
       if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'optimize-headings-for-mode')) {
         optimizeHeadingsForMode(parsed, source);
       }
 
-      // ✅ [소제목 본문 동기화] - Stage 1 짧은 소제목을 Stage 2 본문의 전체 소제목으로 업데이트
-      syncHeadingsWithBodyPlain(parsed);
+      // ✅ [소제목 본문 동기화] - 보정된 소제목을 본문에도 반영한다.
+      //   발행은 headings[] 가 아니라 bodyPlain 을 타이핑하므로, 여기서 반영하지 않으면
+      //   보정이 독자에게 도달하지 않는다. 게다가 발행 코드가 소제목 문자열을 본문에서
+      //   글자 그대로 찾기 때문에(editorHelpers:935 · :966) 어긋나면 이미지 자리도 잃는다.
+      syncHeadingsWithBodyPlain(parsed, headingTitlesBeforeOptimize);
 
       // ✅ [v2.10.297] HTML 태그 박멸 — 모든 모드에 무조건 적용 (모드별 검증 함수 우회 시에도 보장)
       sanitizeContentHtmlTags(parsed);
@@ -6765,6 +6772,8 @@ async function generateStructuredContentInternal(
           //   방어: ① kwCore의 선행/후행 punct 제거 ② 패치 후 "kwCore kwCore" 연속 중복 collapse
           //   [2026-08-14] maxPatches를 모드별로 분기 — 홈판은 검색어 접두가 노출이 아니라
           //   광고 신호다. 정리(조사 prefix 제거·중복 collapse)는 유지하고 강제 접두만 끈다.
+          // [2026-09-01] 패치 전 제목을 찍어 둔다 — 아래 재동기화가 이 스냅샷으로 본문을 고친다.
+          const titlesBeforeKeywordPatch = snapshotHeadingTitles(parsed as any);
           const headingPatch = applyHeadingKeywordPatch(parsed.headings as any, primaryKw, {
             maxPatches: resolveHeadingKeywordPatchMax(mode),
           });
@@ -6795,8 +6804,9 @@ async function generateStructuredContentInternal(
               ...(parsed.quality.warnings || []),
               `HeadingPatch(${mode}): ${headingPatch.patchedCount}개 소제목에 메인 키워드 자동 추가`,
             ];
-            // bodyPlain 재동기화
-            try { syncHeadingsWithBodyPlain(parsed); } catch { /* ignore */ }
+            // bodyPlain 재동기화 — [2026-09-01] 스냅샷을 넘겨야 실제로 반영된다.
+            //   이걸 안 넘기던 동안 SEO 메인키워드 앞배치가 독자에게 도달하지 않았다.
+            try { syncHeadingsWithBodyPlain(parsed, titlesBeforeKeywordPatch); } catch { /* ignore */ }
           }
         }
       }
@@ -6817,6 +6827,7 @@ async function generateStructuredContentInternal(
             // [2026-08-26] 소제목 강제 패치는 끈다(기본값). 붙이면 "카자흐스탄 렌터카 공증
             //   전현무 렌터카 대여 장면에서 시작된 논란" 같은 소제목이 발행된다(실측).
             //   롱테일 노출은 해시태그 전략이 본문을 건드리지 않고 담당한다.
+            const titlesBeforeSubKwPatch = snapshotHeadingTitles(parsed as any);
             const cov = enforceSubKeywordCoverage(parsed, _subKws, { maxKeywords: 3 });
             const covered = cov.items.filter((i: any) => i.inHeadings || i.inBody).length;
             const missed = cov.items.length - covered;
@@ -6825,7 +6836,7 @@ async function generateStructuredContentInternal(
               + (missed > 0 ? ` · 미커버 ${missed} (소제목은 건드리지 않음 — 해시태그로 보완)` : ''),
             );
             if (cov.patchedCount > 0) {
-              try { syncHeadingsWithBodyPlain(parsed); } catch { /* ignore */ }
+              try { syncHeadingsWithBodyPlain(parsed, titlesBeforeSubKwPatch); } catch { /* ignore */ }
             }
           }
         } catch (e) {

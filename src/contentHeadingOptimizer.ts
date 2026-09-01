@@ -1,4 +1,5 @@
 import { removeEmojis, normalizeTitleWhitespace } from './contentTextHelpers';
+import { applyHeadingRenames, collectHeadingRenames } from './content/headingRenameSync.js';
 import { stripOrdinalHeadingPrefix } from './contentTitleHelpers';
 
 type HeadingLike = {
@@ -119,6 +120,48 @@ export function optimizeHeadingsForMode(content: HeadingOptimizationContent, sou
   });
 }
 
-export function syncHeadingsWithBodyPlain(_content: HeadingOptimizationContent): void {
-  console.log('[syncHeadingsWithBodyPlain] 비활성화됨 - AI 생성 고유 소제목 유지');
+/**
+ * 소제목 보정 결과를 본문에 반영한다.
+ *
+ * [2026-09-01] 이 함수는 로그 한 줄만 찍는 빈 껍데기였다. 그런데 호출부가 셋이고,
+ * 그 앞에서 소제목을 실제로 바꾸는 곳이 둘이다(optimizeHeadingsForMode ·
+ * applyHeadingKeywordPatch). 발행은 headings[] 가 아니라 bodyPlain 을 타이핑하므로,
+ * 두 보정이 독자에게 한 번도 도달하지 않았다. SEO 메인키워드 앞배치도 같이 사문화였다.
+ *
+ * 옛 휴리스틱 동기화를 되살리지는 않는다 — "AI 생성 고유 소제목 유지" 를 위해
+ * 의도적으로 껐던 것이고, 그 판단은 지금도 맞다. 대신 우리가 직접 바꾼 것만
+ * 리터럴로 반영한다. 바꾸기 전후 문자열을 알고 있으므로 추측이 필요 없다.
+ *
+ * 호출 규약: 소제목을 바꾸기 직전에 snapshotHeadingTitles 로 제목을 찍어 두고,
+ * 바꾼 뒤 그 스냅샷과 함께 부른다. 스냅샷이 없으면 아무것도 하지 않는다(기존 동작).
+ */
+export function syncHeadingsWithBodyPlain(
+  content: HeadingOptimizationContent,
+  beforeTitles?: readonly string[],
+): void {
+  try {
+    if (!content || !Array.isArray(beforeTitles) || beforeTitles.length === 0) return;
+    const after = snapshotHeadingTitles(content);
+    const renames = collectHeadingRenames(beforeTitles, after);
+    if (renames.length === 0) return;
+
+    const target = content as unknown as { bodyPlain?: string; bodyHtml?: string };
+    if (typeof target.bodyPlain === 'string' && target.bodyPlain) {
+      target.bodyPlain = applyHeadingRenames(target.bodyPlain, renames);
+    }
+    if (typeof target.bodyHtml === 'string' && target.bodyHtml) {
+      target.bodyHtml = applyHeadingRenames(target.bodyHtml, renames);
+    }
+    console.log(`[syncHeadingsWithBodyPlain] ✅ 소제목 ${renames.length}건을 본문에 반영: `
+      + renames.map((r) => `"${r.from}" → "${r.to}"`).join(', '));
+  } catch (error) {
+    console.warn('[syncHeadingsWithBodyPlain] 본문 반영 실패 — 소제목만 바뀐 상태로 진행합니다:', error);
+  }
+}
+
+/** 소제목을 바꾸기 직전 제목을 찍어 둔다. */
+export function snapshotHeadingTitles(content: HeadingOptimizationContent): string[] {
+  const headings = (content as unknown as { headings?: Array<{ title?: unknown }> })?.headings;
+  if (!Array.isArray(headings)) return [];
+  return headings.map((h) => String(h?.title ?? '').trim());
 }

@@ -159,6 +159,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/hashtagCandidateFilter.ts',
   'src/content/hashtagCountPolicy.ts',
   'src/content/headingCountPolicy.ts',
+  'src/content/headingRenameSync.ts',
   'src/content/headingSkeletonVariety.ts',
   'src/content/homefeedExposurePattern.ts',
   'src/content/internalLinkManager.ts',
