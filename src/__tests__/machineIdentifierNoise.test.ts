@@ -58,12 +58,23 @@ describe('숫자 사실 추출이 쓰레기를 승격시키지 않는다', () =>
       expect(facts).not.toContain(junk);
     }
   });
-
-  it('의미 없는 세는말·기호를 사실로 올리지 않는다', () => {
-    const facts = extractCoreFacts('3대 4단계 1단계 3가지 5G와 6G처럼');
-    for (const junk of ['3대', '4단계', '1단계', '3가', '5G', '6G처럼']) {
+  /*
+   * [정정] 처음에는 '3대'·'4단계'·'3가지' 도 쓰레기로 박았다. 틀렸다 —
+   * 차 3대, 절차 4단계는 진짜 사실이다. 실측 글에서 쓰레기처럼 보였던 것은
+   * 그 낱말들이 UUID 옆 잡동사니 구간에 있었기 때문이지 낱말 자체의 문제가 아니었다.
+   * 한 글에서 본 맥락을 낱말의 성질로 굳히면 그게 하드코딩이다.
+   */
+  it('라틴 한 글자 접미는 사실이 아니다 — UUID 조각과 통신 규격 표기', () => {
+    const facts = extractCoreFacts('4e 98d 5G와 6G처럼');
+    for (const junk of ['4e', '98d', '5G', '6G']) {
       expect(facts).not.toContain(junk);
     }
+  });
+
+  it('숫자 + 한글 단위는 살린다 — 맥락이 나빴을 뿐 낱말은 사실이다', () => {
+    const facts = extractCoreFacts('차량 3대와 절차 4단계를 확인했습니다');
+    expect(facts).toContain('3대');
+    expect(facts).toContain('4단계');
   });
 
   it('진짜 수치는 그대로 살린다 — 이게 깨지면 글이 앙상해진다', () => {
@@ -79,7 +90,38 @@ describe('숫자 사실 추출이 쓰레기를 승격시키지 않는다', () =>
     const facts = extractCoreFacts(stripSourceNoise(raw).text);
     const real = facts.filter((f) => ['25만원', '2.8%', '3일'].includes(f));
     expect(real).toHaveLength(3);
-    // 고치기 전에는 15개 중 12개가 쓰레기였다. 이제 진짜가 과반이어야 한다.
-    expect(real.length * 2).toBeGreaterThan(facts.length);
+    // 걸러야 할 것은 UUID 조각과 라틴 한 글자뿐이다.
+    for (const junk of ['4e', '4fee', '98d', '2f', '1898c', '5G', '6G']) {
+      expect(facts).not.toContain(junk);
+    }
+  });
+});
+
+describe('실측 네 편에 없던 단위도 살아야 한다 — 하드코딩 방지', () => {
+  /*
+   * 사장님 지적: "내가 준 글을 분석한 기반은 되어야 되지만
+   *              그게 하드코딩이 되어버리면 안 된다".
+   *
+   * 처음 고칠 때 단위를 나열했다가 되돌렸다. 나열하면 내가 떠올린 것만 들어간다 —
+   * 요리 글의 "2큰술", 한약의 "5첩", 장롱의 "3자" 는 실측 네 편에 없었다는 이유로
+   * 없는 단위가 된다. 이 테스트는 그 목록에 한 번도 적힌 적 없는 단위를 쓴다.
+   * 여기가 빨개지면 누군가 구조 규칙을 나열로 되돌린 것이다.
+   */
+  it.each([['2큰술'], ['4인분'], ['5첩'], ['3자'], ['2관'], ['7모'], ['3꼬치']])(
+    '%s 처럼 코드에 적힌 적 없는 한글 단위도 사실로 잡는다',
+    (token) => {
+      expect(extractCoreFacts(`재료는 ${token} 입니다`)).toContain(token);
+    },
+  );
+
+  it('라틴 한 글자는 계속 막는다 — 5G 가 돌아오면 그 문장도 돌아온다', () => {
+    for (const junk of ['5G', '6G', '4e', '3T']) {
+      expect(extractCoreFacts(`표기 ${junk} 가 있다`)).not.toContain(junk);
+    }
+  });
+
+  it('한글 접미가 길면 단위가 아니다 — 문장 조각을 사실로 올리지 않는다', () => {
+    const facts = extractCoreFacts('3번째로중요한것은');
+    expect(facts.join(' ')).not.toContain('중요한것은');
   });
 });
