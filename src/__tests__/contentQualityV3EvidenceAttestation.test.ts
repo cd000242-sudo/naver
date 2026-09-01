@@ -184,7 +184,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   (드라마를 본 것은 실존 인물을 만난 것이 아니다 — 선은 작품이 아니라 사람에서 긋는다)
         // [2026-09-01 4차] 요약표 규율(본문보다 강하게 말하지 않기 · 무관한 축 금지)로 재계산
         //   (실측: 본문은 "과대포장을 덜어냈을 때의 체감"인데 표는 "30% 늘어난 사례"로 단정)
-        '192e71ed8077f940829a7ea69432fcfb0b91e2c38199d41e17312d7b66ea7e01',
+        // [2026-09-01 5차] 매 섹션 강제 템플릿 완화로 재계산
+        //   (expert_review 가 매 H3 마지막에 [한 줄 판정] 을 강제하고 있었다 — 앞 내용 재진술이라 이탈을 부른다)
+        'f59806d07c70935f71f200b033d3eefeedb89711ed6b6525101a3490c05678d8',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

@@ -455,11 +455,24 @@ function normalizeDanglingQuotes(value: string): string {
     .replace(/(^|\n)[ \t]*(['"‘“])[ \t]*\n+[ \t]*(?=\S)/g, '$1$2');
 }
 
+/*
+ * [2026-09-01] 여는 대괄호 앵커가 `\[\s*` 라 대괄호 직후 공백만 허용했다.
+ * 그런데 프롬프트가 "[▶ 한 줄 판정: …]" 처럼 선행 기호를 붙이라고 못박고 있어서
+ * (promptLoader:647, 이번에 함께 걷어냄) 정작 우리가 지시한 형태만 안 걸렸다.
+ *
+ * 선행 기호 한두 자(▶ ■ ※ · 등)를 허용하고, 안의 따옴표도 함께 벗긴다.
+ * 라벨 낱말 매칭은 그대로 둔다 — 무차별로 대괄호를 먹으면
+ * "[자료 1 — 삼성 안내]" 같은 자료 라벨과 표 기호까지 지운다.
+ */
 function normalizeKoreanVerdictLabels(value: string): string {
   const verdictLabel = '(?:한\\s*줄\\s*(?:판정|결론|정리)|한줄\\s*(?:판정|결론|정리))';
+  const leadMark = '[\\s▶■※◆●▪·>\\-]{0,3}';
   return value
-    .replace(new RegExp(`^\\s*\\[\\s*${verdictLabel}\\s*[:：]\\s*([^\\]\\n]{4,220})\\s*\\]\\s*$`, 'gim'), '$1')
-    .replace(new RegExp(`^\\s*${verdictLabel}\\s*[:：]\\s*`, 'gim'), '');
+    .replace(
+      new RegExp(`^\\s*\\[${leadMark}${verdictLabel}\\s*[:：]\\s*["'“”‘’]?([^\\]\\n]{4,220}?)["'“”‘’]?\\s*\\]\\s*$`, 'gim'),
+      '$1',
+    )
+    .replace(new RegExp(`^\\s*${leadMark}${verdictLabel}\\s*[:：]\\s*`, 'gim'), '');
 }
 
 function normalizeInlineNumberedLists(value: string): string {
