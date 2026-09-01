@@ -34,7 +34,45 @@ export const EXPERIENCE_CATEGORY_HINTS: readonly string[] = [
   '반려동물',
   '여행',
   '패션',
+  /*
+   * [2026-09-01] 경험이 가장 필요한 네 축이 닫혀 있었다.
+   *
+   * 실측: 사장님이 뽑아 보여준 비염 글은 '건강' 이라 이 파이프가 한 번도 돌지 않았다.
+   * 비염 · 다이어트 · 영양제는 "나는 이랬는데" 가 글의 전부인 주제인데, 재료가 0이니
+   * 모델에게 남은 선택지는 지어내기뿐이었다. 상품리뷰('쇼핑')도 같다 —
+   * "써보니 이렇더라" 가 핵심인 자리에서 겪은 사람 말을 한 줄도 넣지 않고 있었다.
+   *
+   * 뉴스 · 스펙 축(사회 · 경제 · 연예 · IT · 영화 · 드라마)은 그대로 닫아 둔다.
+   * 거기서는 겪은 사람 말보다 확인된 사실이 앞선다.
+   *
+   * 다만 건강 · 쇼핑 · 자동차는 답변을 그대로 옮기면 위험하다.
+   * CATEGORY_CAUTION 이 재료 블록에 경고를 함께 실어 보낸다.
+   */
+  '건강',
+  '쇼핑',
+  '자동차',
+  '스포츠',
 ];
+
+/**
+ * Category-specific cautions appended to the material block.
+ *
+ * The base header stops the model from *rewriting* answers as its own
+ * first-person experience. These stop it from *trusting* answers that
+ * laypeople or advertisers wrote. Unknown category yields no extra line.
+ */
+const CATEGORY_CAUTION: Readonly<Record<string, string>> = {
+  건강:
+    '⚠️ 건강 주제 — 아래 답변에는 의료인이 아닌 일반인이 쓴 것이 섞여 있습니다. ' +
+    '진단 · 치료 · 복용량 · 효과를 사실로 옮기지 마세요. ' +
+    '"이런 경우가 있더라" 는 정황과 "병원에서 확인하세요" 라는 안내까지만 쓸 수 있습니다.',
+  쇼핑:
+    '⚠️ 상품 주제 — 아래 답변에는 특정 제품 · 업체를 미는 홍보성 답변이 섞여 있습니다. ' +
+    '제품명 · 업체명 추천은 근거로 쓰지 말고, 고를 때 확인할 조건(설치 요건 · 소음 · AS 같은 것)만 가져오세요.',
+  자동차:
+    '⚠️ 자동차 주제 — 정비 · 개조 답변은 차종과 연식에 따라 갈립니다. ' +
+    '특정 조치를 단정하지 말고 정비소에서 확인할 지점으로만 옮기세요.',
+};
 
 export function isExperienceCategory(categoryHint?: string | null): boolean {
   const hint = String(categoryHint || '').trim();
@@ -127,15 +165,17 @@ export async function parseKinAnswers(html: string, maxAnswers: number = MAX_ANS
  * Builds the prompt material block. The header is the guard: relay/advice
  * voice only — never the author's fabricated first-person experience.
  */
-export function buildKinAnswerBlock(answers: readonly string[]): string {
+export function buildKinAnswerBlock(answers: readonly string[], categoryHint?: string): string {
   const usable = answers.filter((answer) => String(answer || '').trim().length >= MIN_ANSWER_CHARS);
   if (usable.length === 0) return '';
   const numbered = usable.map((answer, index) => `[답변 ${index + 1}] ${answer}`);
+  const caution = CATEGORY_CAUTION[String(categoryHint || '').trim()];
   return (
     `=== 겪은 사람들의 말 (지식iN 답변 — 조언·전달 재료) ===\n` +
     `⚠️ 아래는 이 주제를 실제로 겪은 사람들이 남긴 답변입니다. 조언형("~하실 거면 ~ 확인하세요")이나 ` +
     `출처를 밝힌 전달형("겪은 사람들 답변에서 반복되는 얘기는 ~")으로만 옮기세요. ` +
     `작성자 본인의 1인칭 경험으로 바꾸거나, 답변에 없는 수치·기간·결과를 만들지 마세요.\n` +
+    (caution ? `${caution}\n` : '') +
     numbered.join('\n\n') + '\n'
   );
 }
@@ -162,6 +202,7 @@ async function fetchKinPageHtml(url: string): Promise<string> {
 export async function collectKinExperienceAnswers(
   keyword: string,
   maxTotalAnswers: number = 3,
+  categoryHint?: string,
 ): Promise<KinAnswerMaterial> {
   const query = String(keyword || '').trim();
   if (!query) return { block: '', answerCount: 0, reason: 'no-keyword' };
@@ -193,7 +234,7 @@ export async function collectKinExperienceAnswers(
     }
 
     if (answers.length === 0) return { block: '', answerCount: 0, reason: 'no-answers' };
-    const block = buildKinAnswerBlock(answers);
+    const block = buildKinAnswerBlock(answers, categoryHint);
     console.log(`[kinExperienceMaterial] 💬 겪은 사람 말투 재료 ${answers.length}건 확보 ("${query}")`);
     return { block, answerCount: answers.length, reason: 'ok' };
   } catch (error) {

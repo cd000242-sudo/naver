@@ -5964,7 +5964,7 @@ ipcMain.handle(
           && situationKeywords.length > 0
           && isExperienceCategory(kinCategoryHint);
         if (answerEligible) {
-          const answerMaterial = await collectKinExperienceAnswers(kinQuery);
+          const answerMaterial = await collectKinExperienceAnswers(kinQuery, 3, kinCategoryHint);
           if (answerMaterial.block) {
             source.rawText = source.rawText && source.rawText.trim().length >= 50
               ? `${source.rawText}\n\n${answerMaterial.block}`

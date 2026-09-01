@@ -1061,7 +1061,13 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
   // [2026-08-23] 120s → 300s. 단독 실행은 12.8초지만, 748개 파일 병렬 실행(릴리즈 게이트)에선
   //   이 테스트가 전체 소스 클로저(~700파일)를 읽고 해싱하느라 120s 를 넘겨 터졌다.
   //   해시 불일치가 아니라 IO 경합 문제라 제한시간만 늘린다.
-  }, 300_000);
+  // [2026-09-01] 300s → 600s. 두 번째 상향이다 — 실측 302.4초로 상한을 4초 넘겼다.
+  //   비용의 절반은 이 테스트가 클로저를 두 번 해싱한다는 데 있다:
+  //   verifyContentQualityV3CandidateRuntimeFingerprint(candidateRuntimeFingerprint.ts:937)가
+  //   내부에서 computeContentQualityV3CandidateRuntimeSha256 을 다시 부른다.
+  //   둘 다 검사하는 것은 의도다(계산과 생산 API 를 각각 잠근다). 다음에 또 넘치면
+  //   상한이 아니라 클로저 크기나 해싱 비용을 봐야 한다 — 상향은 여기까지다.
+  }, 600_000);
 
   it('sorts paths before length-prefixed hashing and canonicalizes only CRLF to LF', async () => {
     const lfRoot = await createFixture({
