@@ -4,6 +4,7 @@ import { narrowSearchQueries } from './content/searchQueryNarrowing.js';
 import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
 import { orderFullTextCandidates } from './content/fullTextCandidateOrder.js';
 import { auditSourceMaterial, classifySourceKind } from './content/sourceMaterialAudit.js';
+import { buildMaterialTierNotice } from './content/materialTierNotice.js';
 import { buildSupplementQuery, filterOnTopicSupplement, isOnTopicForKeyword } from './content/supplementTopicGuard.js';
 import Parser from 'rss-parser';
 import * as iconv from 'iconv-lite';
@@ -1786,8 +1787,23 @@ export async function collectTopArticleFullTexts(
     } else {
       logger(`[자료 점검] ✅ 기사 ${newsCount}건이 근거를 받칩니다`);
     }
+    /*
+     * [2026-09-01] 자료 등급을 모델에게도 알린다.
+     *
+     * 지금까지 이 판정은 로그에만 찍혔다. 사장님은 "블로그 4건이 전부" 를 보지만
+     * 모델은 그 사실을 모르니, 블로그에서 온 수치를 공식 사실처럼 단정한다.
+     * 냉장고 글의 "1cm", "주 1회" 가 그렇게 나왔다 — 원출처는 제조사 안내인데
+     * 우리가 받은 것은 블로그가 옮긴 인용이다.
+     *
+     * 모델을 바꿔도 이건 안 고쳐진다. 자료의 급을 알려줘야 귀속해서 쓸 수 있다.
+     */
+    const tierNotice = buildMaterialTierNotice({
+      newsCount,
+      blogCount: usedUrls.length - newsCount,
+      totalChars,
+    });
     return {
-      text: `=== 상위 노출 글 본문 발췌 (사실 자료 — 수치·조건·절차는 이 자료 범위에서 사용) ===\n${parts.join('\n\n')}`,
+      text: `${tierNotice ? `${tierNotice}\n\n` : ''}=== 상위 노출 글 본문 발췌 (사실 자료 — 수치·조건·절차는 이 자료 범위에서 사용) ===\n${parts.join('\n\n')}`,
       count: parts.length,
       urls: usedUrls,
     };

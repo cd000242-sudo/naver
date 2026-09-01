@@ -1,0 +1,51 @@
+import { auditSourceMaterial, type SourceMaterialInput } from './sourceMaterialAudit.js';
+
+/**
+ * 자료 등급을 모델에게 알리는 문구.
+ *
+ * 사장님 질문: "퍼플렉시티로 해도 잘못된 정보가 나온다면 뭘 수정해야 되는 거니?"
+ *
+ * 모델을 바꿔서 될 일이 아니다. 잘못된 정보는 네 갈래인데 모델 교체로 풀리는 것은
+ * "자료를 못 찾음" 한 갈래뿐이고, 나머지 셋(자료가 틀림 · 조합이 틀림 · 자료가 낡음)은
+ * 어느 모델을 써도 그대로다.
+ *
+ * 냉장고 글의 위험이 "자료가 틀림" 이었다. 로그가 말해줬다.
+ *   [자료 점검] ⚠️ 기사를 하나도 찾지 못했습니다 — 블로그 4건이 재료의 전부입니다
+ * 삼성 · LG 안내의 원출처는 공식 문서인데 블로그를 거쳐 받았다.
+ *
+ * 그런데 그 판정이 로그에만 찍히고 모델에게는 가지 않았다. 모델은 자료가 2차인 줄
+ * 모르니 공식 사실처럼 단정한다. 등급을 알려주면 귀속해서 쓸 수 있다.
+ *
+ * 막지 않는다. 알려주기만 한다.
+ */
+export function buildMaterialTierNotice(input: SourceMaterialInput | undefined): string {
+  try {
+    if (!input) return '';
+    const audit = auditSourceMaterial(input);
+    if (audit.level === 'ok') return '';
+
+    const lines = [
+      '[자료 등급 — 이 글의 재료가 어디서 왔는지]',
+      audit.message,
+    ];
+
+    if (audit.level === 'severe') {
+      lines.push(
+        '→ 본문을 확보하지 못했으므로 수치 · 날짜 · 인용을 새로 쓰지 마라.'
+        + ' 자료에 있는 것만, 있는 그대로 쓴다.',
+      );
+    } else {
+      lines.push(
+        '→ 이 재료에서 나온 수치 · 기준 · 절차는 공식 확인을 거치지 않았다.'
+        + ' 단정하지 말고 출처를 밝혀 써라: "후기에서는 ~라고 합니다",'
+        + ' "블로그 사례에서는 ~였습니다".',
+        '→ 제조사 · 기관의 공식 안내로 확인된 것처럼 쓰지 마라.'
+        + ' 자료가 그 안내를 인용하고 있더라도, 우리가 받은 것은 그 인용이지 원문이 아니다.',
+      );
+    }
+
+    return lines.join('\n');
+  } catch {
+    return '';
+  }
+}
