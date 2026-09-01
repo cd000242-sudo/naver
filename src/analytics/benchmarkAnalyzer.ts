@@ -13,6 +13,7 @@
  */
 
 import type { EvaluationResult } from '../content/qualityEvaluator';
+import { describeSignal, formatSignalValue } from './benchmarkPlainLanguage.js';
 import type { SerpProbeReport } from './serpProbe';
 
 export interface GapSignal {
@@ -54,19 +55,31 @@ function classifyGap(gap: number, isHigherBetter: boolean = true): GapSignal['re
   return 'urgent';
 }
 
+/*
+ * [2026-09-02] 사장님 지적: "초보자들도 보기 쉽게".
+ *
+ * 이전 문구는 이랬다 — "안전성 부족 심각 — 우리 35.0 vs 상위 노출 평균 65.0 (즉시 보완)".
+ * SERP 를 처음 보는 부업 사용자에게 내부 지표 이름과 숨은 0~100 척도의 소수점을 내밀고,
+ * 정작 무엇을 하라는 말은 없었다. 손쓸 수 없는 진단은 소음이다.
+ *
+ * 셋을 바꾼다: 사람이 쓰는 말(label) · 맞는 단위(unit) · 할 일 한 줄(action).
+ * 숫자는 반올림한다 — 35.0 은 0.1 단위로 잰 값처럼 읽히지만 휴리스틱 점수다.
+ */
 function gapMessage(signal: string, ours: number, serp: number, rec: GapSignal['recommendation'], isHigherBetter: boolean = true): string {
-  const ourStr = typeof ours === 'number' ? ours.toFixed(1) : String(ours);
-  const serpStr = typeof serp === 'number' ? serp.toFixed(1) : String(serp);
-  const dir = isHigherBetter ? (ours > serp ? '우월' : '부족') : (ours < serp ? '우월' : '부족');
+  const { label, unit, action } = describeSignal(signal);
+  const ourStr = formatSignalValue(ours, unit);
+  const serpStr = formatSignalValue(serp, unit);
+  const behind = isHigherBetter ? ours < serp : ours > serp;
+  const head = `${label} ${ourStr} · 상위 노출 글 ${serpStr}`;
   switch (rec) {
     case 'urgent':
-      return `${signal} ${dir} 심각 — 우리 ${ourStr} vs 상위 노출 평균 ${serpStr} (즉시 보완)`;
+      return action ? `${head} → ${action}` : `${head} → 가장 먼저 손볼 곳입니다`;
     case 'improve':
-      return `${signal} ${dir} — 우리 ${ourStr} vs 상위 ${serpStr} (개선 권장)`;
+      return action ? `${head} → ${action}` : `${head} → 조금 더 채우면 좋겠습니다`;
     case 'maintain':
-      return `${signal} 비슷 — 우리 ${ourStr} vs 상위 ${serpStr}`;
+      return `${head} → 상위 글과 비슷합니다`;
     case 'lead':
-      return `${signal} 우위 — 우리 ${ourStr} vs 상위 ${serpStr}`;
+      return behind ? `${head}` : `${head} → 상위 글보다 좋습니다`;
   }
 }
 

@@ -11271,12 +11271,20 @@ function showSerpAlertCard(autoSerp: any, type: 'warn' | 'good' = 'warn'): void 
   const card = document.createElement('div');
   card.id = 'serp-auto-alert-card';
   const isGood = type === 'good';
-  const bgColor = isGood
-    ? 'linear-gradient(135deg, rgba(74, 222, 128, 0.18), rgba(34, 197, 94, 0.10))'
-    : 'linear-gradient(135deg, rgba(239, 68, 68, 0.20), rgba(251, 191, 36, 0.12))';
+  /*
+   * [2026-09-02] 사장님 지적: "박스가 투명해서 글씨가 겹쳐서 보기 힘들어".
+   *
+   * 알파 0.20 / 0.12 위에 흰 글씨를 얹고 있었다. 카드가 생성 옵션 패널 위에 뜨는데
+   * 뒤의 체크박스 라벨("AI가 경험을 대신 써주기" 등)이 그대로 비쳐 글자가 겹쳤다.
+   * 색조는 그대로 두고, 불투명한 바탕을 밑에 깔아 그 위에 얹는다.
+   */
+  const tint = isGood
+    ? 'linear-gradient(135deg, rgba(74, 222, 128, 0.20), rgba(34, 197, 94, 0.12))'
+    : 'linear-gradient(135deg, rgba(239, 68, 68, 0.22), rgba(251, 191, 36, 0.14))';
+  const bgColor = `${tint}, #12161d`;
   const borderColor = isGood ? '#4ade80' : '#fbbf24';
   const icon = isGood ? '💪' : '🔍';
-  const titleText = isGood ? 'SERP 실측 비교 — 양호' : 'SERP 실측 비교 — 보완 필요';
+  const titleText = isGood ? '검색 상위 글과 비교 — 좋습니다' : '검색 상위 글과 비교 — 보완하면 좋겠어요';
 
   card.style.cssText = `
     position: fixed; top: 20px; left: 20px; z-index: 10001;
@@ -11284,7 +11292,7 @@ function showSerpAlertCard(autoSerp: any, type: 'warn' | 'good' = 'warn'): void 
     border: 2px solid ${borderColor};
     border-radius: 12px;
     padding: 1rem 1.2rem;
-    max-width: 360px;
+    max-width: 420px;
     color: #fff;
     box-shadow: 0 8px 24px rgba(0,0,0,0.5);
     animation: serpAlertSlideIn 0.4s ease-out;
@@ -11294,9 +11302,9 @@ function showSerpAlertCard(autoSerp: any, type: 'warn' | 'good' = 'warn'): void 
   const fixCount = autoSerp.topPriorityFix?.length || 0;
   const fixListHtml = !isGood && fixCount > 0
     ? `<div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.78rem; color: #fbbf24;">
-        🎯 보완 우선순위 ${Math.min(2, fixCount)}건:
+        🎯 먼저 손볼 곳 ${Math.min(2, fixCount)}가지
         <ul style="margin: 0.3rem 0 0 1.2rem; padding: 0;">
-          ${(autoSerp.topPriorityFix || []).slice(0, 2).map((p: string) => `<li style="margin: 0.15rem 0;">${p.replace(/^[•·\-]\s*/, '').slice(0, 80)}</li>`).join('')}
+          ${(autoSerp.topPriorityFix || []).slice(0, 2).map((p: string) => `<li style="margin: 0.15rem 0;">${p.replace(/^[•·\-]\s*/, '')}</li>`).join('')}
         </ul>
       </div>`
     : '';
@@ -11329,7 +11337,8 @@ function showSerpAlertCard(autoSerp: any, type: 'warn' | 'good' = 'warn'): void 
       <div style="flex: 1;">
         <div style="font-weight: 700; color: ${borderColor}; margin-bottom: 0.3rem;">${icon} ${titleText}</div>
         <div style="font-size: 0.78rem; line-height: 1.4; color: rgba(255,255,255,0.92);">
-          [<strong>${autoSerp.keyword}</strong>] 우리 <strong>${autoSerp.ourFinalScore}</strong>점 vs 상위 평균 <strong>${autoSerp.serpAvgFinalScore}</strong>점 (중앙값 ${autoSerp.serpMedianFinalScore})
+          <div style="opacity: 0.75; margin-bottom: 0.2rem;">${autoSerp.keyword}</div>
+          내 글 <strong>${autoSerp.ourFinalScore}점</strong> · 상위 노출 글 평균 <strong>${autoSerp.serpAvgFinalScore}점</strong>
         </div>
         ${difficultyHtml}
         ${fixListHtml}

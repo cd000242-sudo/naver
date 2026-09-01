@@ -47,6 +47,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/agents/trendAnalyzer.ts',
   'src/aiHumanizer.ts',
   'src/analytics/benchmarkAnalyzer.ts',
+  'src/analytics/benchmarkPlainLanguage.ts',
   'src/analytics/dynamicSerpProbe.ts',
   'src/analytics/keywordAnalyzer.ts',
   'src/analytics/postMetricsStore.ts',

@@ -147,7 +147,13 @@ describe('analyzeBenchmark', () => {
   it('formatBenchmarkReport는 정상 문자열 반환', () => {
     const report = analyzeBenchmark(mockOurEval, 1500, 2, 5, mockSerpReport);
     const formatted = formatBenchmarkReport(report);
-    expect(formatted).toContain('통합 점수');
+    /*
+     * [2026-09-02] 내부 지표 이름 "통합 점수" 를 박제하고 있었다.
+     * 그 이름은 부업 사용자에게 보이는 자리에도 그대로 나갔다 —
+     * 사장님 지적("초보자들도 보기 쉽게")으로 "전체 점수" 로 바꿨다.
+     * 이 테스트의 의도는 "리포트가 신호를 담은 문자열을 낸다" 였다. 그 뜻만 남긴다.
+     */
+    expect(formatted).toContain('전체 점수');
     expect(formatted).toContain('우선순위');
     expect(typeof formatted).toBe('string');
   });
