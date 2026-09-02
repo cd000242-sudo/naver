@@ -11,7 +11,7 @@ import {
 } from '../automation/richTextPaste';
 
 describe('buildMobileRichHtml', () => {
-  it('splits long prose into mobile-friendly centered paragraphs', () => {
+  it('splits long prose into mobile-friendly left-aligned paragraphs', () => {
     const result = buildMobileRichHtml(
       'Naver Mate selection becomes easier when the first paragraph shows the topic and conclusion clearly. The next paragraph should keep each sentence short enough for mobile readers, because long blocks are hard to scan on a phone.',
       { maxChunkChars: 54, highlight: false }
@@ -23,7 +23,9 @@ describe('buildMobileRichHtml', () => {
     const contentParagraphs = (result.html.match(/<p[^>]*style=/g) || []).length
       - (result.html.match(/data-rich-spacer/g) || []).length;
     expect(contentParagraphs).toBe(result.paragraphCount);
-    expect(result.html).toContain('text-align:center');
+    // [2026-09-02 사장님 결정] 문단 기본은 왼쪽 정렬. 가운데는 centerAlign:true 를 명시할 때만.
+    expect(result.html).toContain('text-align:left');
+    expect(result.html).not.toMatch(/<p[^>]*text-align:center/);
     expect(result.html).toContain('max-width:520px');
   });
 

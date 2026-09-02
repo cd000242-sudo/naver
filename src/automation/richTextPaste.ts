@@ -475,10 +475,21 @@ function normalizeKoreanVerdictLabels(value: string): string {
     .replace(new RegExp(`^\\s*${leadMark}${verdictLabel}\\s*[:：]\\s*`, 'gim'), '');
 }
 
+/**
+ * [2026-09-02 사장님 화면] 요약 표의 "규격" 행이 셀 1개(폭 100%)로 발행되고 나머지 행이 "라벨 — 값" 문단으로 샜다.
+ * 뿌리: 아래 인라인 목록 확장기가 표 행 "| 규격 | 210x256x277(mm) / 1. 5kg |" 안의 "1. " 을 번호 목록으로 보고
+ * 그 앞에 빈 줄을 넣어 행을 두 동강 냈다. 잘린 앞쪽은 셀 1개짜리 행이 되고(그 100% 셀이 1열을 밀어 2열이
+ * 한 글자 폭으로 눌린다), 뒤쪽 행들은 표 블록 밖으로 떨어져 normalizeOrphanPipeLine 이 문장으로 눌렀다.
+ * 표 행(파이프로 시작하는 줄)은 어떤 인라인 확장기도 건드리지 않는다 — 번호·대시·Q/A 전부.
+ */
+function isMarkdownTableLine(line: string): boolean {
+  return /^[ \t]*\|/.test(line);
+}
 function normalizeInlineNumberedLists(value: string): string {
   return value
     .split('\n')
     .map((line) => {
+      if (isMarkdownTableLine(line)) return line;
       const markers = line.match(/\b\d{1,2}[.)]\s+/g) || [];
       if (markers.length === 0) return line;
       if (markers.length === 1 && /^\s*\d{1,2}[.)]\s+/.test(line)) return line;
@@ -496,6 +507,7 @@ function normalizeInlineDashLists(value: string): string {
   return value
     .split('\n')
     .map((line) => {
+      if (isMarkdownTableLine(line)) return line;
       if (!/(^|\s)-\s+\S/.test(line)) return line;
       return line.replace(/\s+-\s+/g, '\n\n- ').trim();
     })
@@ -504,8 +516,13 @@ function normalizeInlineDashLists(value: string): string {
 
 function normalizeInlineQaMarkers(value: string): string {
   return value
-    .replace(/[ \t]+(?=Q\s*\d*\s*[\.:]\s+)/gi, '\n\n')
-    .replace(/[ \t]+(?=A\s*\d*\s*[\.:]\s+)/gi, '\n');
+    .split('\n')
+    .map((line) => (isMarkdownTableLine(line)
+      ? line
+      : line
+        .replace(/[ \t]+(?=Q\s*\d*\s*[\.:]\s+)/gi, '\n\n')
+        .replace(/[ \t]+(?=A\s*\d*\s*[\.:]\s+)/gi, '\n')))
+    .join('\n');
 }
 
 function normalizeMateReadableText(value: string): string {
@@ -1629,7 +1646,10 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
   const headingTheme = options.headingTheme ?? fallbackThemes().headingTheme;
   const enableToc = options.toc === true;
   const boxedHeadings = options.boxedHeadings !== false;
-  const centerAlign = options.centerAlign !== false;
+  // [2026-09-02 사장님 결정] "문단정리 중앙정렬 말고 좌측정렬로." 붙여넣기 문단의 기본을 왼쪽으로 —
+  //   에디터 진입 정렬(editorHelpers)만 바꿔서는 여기서 박는 text-align:center 가 이긴다. 가운데는 명시할 때만.
+  //   소제목 상자·표 셀·목차 같은 장식은 그대로다 — 문단 이야기다.
+  const centerAlign = options.centerAlign === true;
 
   if (!normalized) {
     return { html: '', plainText: '', highlightCount: 0, tableCount: 0, paragraphCount: 0 };

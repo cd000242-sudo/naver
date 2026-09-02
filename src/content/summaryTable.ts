@@ -18,8 +18,15 @@ export interface SummaryTableRow {
 export const SUMMARY_TABLE_MIN_ROWS = 2;
 export const SUMMARY_TABLE_MAX_ROWS = 6;
 
+/**
+ * [2026-09-02 사장님 화면] 모델이 규격 값을 "1. 5kg" 로 적었다 — 소수점 뒤 공백. 표 안에서는 문장 경계가 아니라
+ * 숫자다. 숫자.공백.숫자 는 소수점으로 붙인다. 문장("…합니다. 5개")은 셀 값에 오지 않는다 — 표는 문장을 담지 않는다.
+ */
+function collapseDecimalGap(value: string): string {
+  return value.replace(/(\d)\.\s+(?=\d)/g, '$1.');
+}
 function text(value: unknown): string {
-  return typeof value === 'string' ? value.replace(/\s+/g, ' ').trim() : '';
+  return typeof value === 'string' ? collapseDecimalGap(value.replace(/\s+/g, ' ').trim()) : '';
 }
 
 /** 표 안에서 파이프는 열 구분자라 그대로 두면 표가 깨진다. */
