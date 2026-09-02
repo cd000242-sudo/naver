@@ -13,6 +13,7 @@ import {
   shouldUseStructuredImageContext,
 } from '../../image/contextualImagePrompt.js';
 import { assertShoppingReferenceGenerationSelectionSupported } from '../../image/shoppingReferenceGeneration.js';
+import { reconcileOpenaiImageModelSelection } from '../../image/openaiImageModelReconcile.js';
 
 // 전역 스코프 의존성
 declare let generatedImages: any[];
@@ -771,30 +772,29 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
     }
   }
   provider = String(options?.provider || provider || '').trim();
-  if (!options.imageModel && provider === 'openai-image') {
+  if (provider === 'openai-image') {
     /*
-     * [2026-08-25 사용자 실측] "GPT Image 2 를 골랐는데도 GPT Image 2 를 선택하라고 한다."
+     * [2026-08-25 · 09-01 · 09-02 세 번째] "gpt-image-2 를 골랐는데 2 를 선택하라고 한다."
      *
-     * 저장소가 갈려 있었다. 이미지 관리 탭의 모델 라디오는 config 에 저장하는데
-     * (imageManagementTab: saveConfig({ openaiImageModel })), 여기서는 localStorage 만
-     * 읽었다. 그래서 사용자가 화면에서 고른 값이 이 경로에 도달하지 못했고,
-     * 쇼핑커넥트 검사가 빈 모델을 보고 "gpt-image-2 를 선택해주세요"로 막았다.
+     * 앞의 두 수정은 "비어 있으면 config 로" 였다. 오늘 값은 비어 있지 않고 틀렸다 —
+     * 부팅이 낡은 계정(acct1) config 를 먼저 복원하고 imageManagementTab 이 그 값(1.5)을
+     * localStorage 에 도장 찍는다. 진짜 계정 config 는 2 다. 여기가 localStorage 를 먼저
+     * 믿어서 낡은 값으로 검사를 받았다. P1(텍스트 모델 라벨) 과 같은 부류, 같은 실수다.
      *
-     * localStorage 를 먼저 보고(기존 동작 보존), 비어 있으면 config 로 내려간다.
+     * 그래서 localStorage·화면을 믿지 않는다. 지금 이 순간의 config 가 SSOT 다.
+     * 어긋나면 config 로 맞추고 경고를 찍는다 — 조용히 하지 않는다.
      */
-    options.imageModel = String(rawPipeline.openaiImageModel || '').trim();
-    if (!options.imageModel) {
-      try {
-        const cfg = await (window as any).api?.getConfig?.();
-        const fromConfig = String(cfg?.openaiImageModel || '').trim();
-        if (fromConfig) {
-          options.imageModel = fromConfig;
-          console.log(`[Renderer] 🦆 OpenAI 이미지 모델 config 폴백: "${fromConfig}"`);
-        }
-      } catch (e) {
-        console.warn('[Renderer] OpenAI 이미지 모델 config 조회 실패:', e);
-      }
+    const screenModel = String(options.imageModel || rawPipeline.openaiImageModel || '').trim();
+    let configModel = '';
+    try {
+      const cfg = await (window as any).api?.getConfig?.();
+      configModel = String(cfg?.openaiImageModel || '').trim();
+    } catch (e) {
+      console.warn('[Renderer] OpenAI 이미지 모델 config 조회 실패:', e);
     }
+    const imageModelFix = reconcileOpenaiImageModelSelection(screenModel, configModel);
+    if (imageModelFix.corrected) console.warn(`[Renderer] 🦆 ${imageModelFix.reason}`);
+    options.imageModel = imageModelFix.model;
   }
   if (!options.imageStyle) {
     const savedStyle = rawPipeline.imageStyle;

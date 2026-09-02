@@ -21,6 +21,7 @@ import {
     resolveUsableShoppingReferenceSource,
     selectShoppingBodyHeadingSlotsForMode,
 } from '../../image/shoppingReferenceGeneration.js';
+import { reconcileOpenaiImageModelSelection } from '../../image/openaiImageModelReconcile.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emitLog = emitLog;
 exports.resolveImageManagerKeys = resolveImageManagerKeys;
@@ -2816,18 +2817,24 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
      * 실제 발행이 타는 이쪽에는 폴백이 없었다. 한쪽만 고치고 끝낸 것이 원인이다.
      * 검사보다 먼저 채워야 한다.
      */
-    if (!imageModel && (imageSource === 'openai-image' || imageSource === 'gpt-image-2')) {
+    if (imageSource === 'openai-image' || imageSource === 'gpt-image-2') {
+        /*
+         * [2026-09-02 세 번째] 위 09-01 수정은 빈 값만 config 로 메웠다. 오늘 값은 비어 있지
+         * 않고 틀렸다 — formData 는 부팅 때 낡은 계정(acct1) config 로 그려졌고(1.5),
+         * 진짜 계정 config 는 2 다. costAndAutoGen 과 같은 규칙: 지금 이 순간의 config 가
+         * SSOT 다. 어긋나면 config 로 맞추고 경고를 찍는다.
+         */
+        let configModel = '';
         try {
             const cfg = await window.api?.getConfig?.();
-            const fromConfig = String(cfg?.openaiImageModel || '').trim();
-            if (fromConfig) {
-                imageModel = fromConfig;
-                console.log(`[AI Images] 🦆 OpenAI 이미지 모델 config 폴백: "${fromConfig}"`);
-            }
+            configModel = String(cfg?.openaiImageModel || '').trim();
         }
         catch (e) {
             console.warn('[AI Images] OpenAI 이미지 모델 config 조회 실패:', e);
         }
+        const imageModelFix = reconcileOpenaiImageModelSelection(imageModel, configModel);
+        if (imageModelFix.corrected) console.warn(`[AI Images] 🦆 ${imageModelFix.reason}`);
+        imageModel = imageModelFix.model;
     }
     const imageStyle = formData.imageStyle;
     const imageRatio = formData.imageRatio;

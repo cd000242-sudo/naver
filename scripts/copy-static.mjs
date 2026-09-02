@@ -401,6 +401,11 @@ try {
       filePath: path.join(projectRoot, 'dist', 'image', 'shoppingReferenceGeneration.js'),
     },
     {
+      // [2026-09-02] 쇼핑커넥트 OpenAI 이미지 모델 교정 — 렌더러 두 경로가 import 한다
+      label: 'image/openaiImageModelReconcile.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'openaiImageModelReconcile.js'),
+    },
+    {
       label: 'image/publishImageSequence.js',
       filePath: path.join(projectRoot, 'dist', 'image', 'publishImageSequence.js'),
     },

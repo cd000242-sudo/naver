@@ -34,6 +34,7 @@ import {
   createShoppingRepresentativeThumbnail,
   resolveShoppingRepresentativeReference,
 } from './image/shoppingReferenceGeneration.js';
+import { reconcileOpenaiImageModelSelection } from './image/openaiImageModelReconcile.js';
 import {
   buildAppManagedReferenceImageRoots,
   loadReferenceImageData,
@@ -390,6 +391,23 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
    * 고 하신 이유가 이것이다 — 검사는 옳았고 표시가 거짓이었다.
    * 라벨에서 모델명을 빼고, 실제 값을 옆에 적는다.
    */
+  if (options.isShoppingConnect && normalizedProvider === 'openai-image') {
+    /*
+     * [2026-09-02 세 번째] 렌더러가 보낸 imageModel 은 낡은 계정(acct1) 값일 수 있다 —
+     * 부팅이 그 계정을 먼저 복원하고 화면·localStorage·formData 가 그 값을 든다.
+     * 렌더러 두 경로(costAndAutoGen · fullAutoFlow)에도 같은 교정을 걸었지만, main 은
+     * 진짜 활성 계정의 config 를 안다. 여기가 마지막 단이다 — 아래 로그와 검사가 교정된 값을 본다.
+     */
+    try {
+      const { loadConfig } = await import('./configManager.js');
+      const configModel = String((await loadConfig()).openaiImageModel || '').trim();
+      const imageModelFix = reconcileOpenaiImageModelSelection(options.imageModel, configModel);
+      if (imageModelFix.corrected) console.warn(`[이미지생성] 🦆 ${imageModelFix.reason}`);
+      options = { ...options, imageModel: imageModelFix.model };
+    } catch (e) {
+      console.warn('[이미지생성] OpenAI 이미지 모델 config 조회 실패:', e);
+    }
+  }
   const modelSuffix = options.imageModel ? ` · 모델 ${options.imageModel}` : '';
   console.log(`[이미지생성] 🎨 선택된 AI 이미지 생성 엔진: ${displayName}${modelSuffix}`);
 
