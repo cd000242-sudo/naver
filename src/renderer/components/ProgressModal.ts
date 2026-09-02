@@ -1,3 +1,4 @@
+import { openProgressImageViewer } from './ProgressImageViewer.js';
 /**
  * ✅ [2026-01-25 모듈화] 진행상황 모달 관리 클래스
  * - renderer.ts에서 분리됨
@@ -876,55 +877,21 @@ export class ProgressModal {
     }
 
     private openFullImagePreview(src: string, heading?: string): void {
+        /*
+         * [2026-09-02 사장님] "클릭하면 전체보기, 좌우 화살표로 다음 이미지." 한 장짜리 오버레이였다.
+         * 지금 그리드에 있는 목록(currentImages) 전체를 뷰어에 넘기고, 클릭한 타일 자리에서 시작한다.
+         */
         const safeSrc = toFileUrlSafe(src);
         if (!safeSrc) return;
-
-        document.querySelectorAll('.progress-full-image-preview-overlay').forEach((el) => el.remove());
-
-        const modal = document.createElement('div');
-        modal.className = 'progress-full-image-preview-overlay';
-        modal.tabIndex = -1;
-        modal.style.cssText = `
-            position: fixed; inset: 0; z-index: 2147483647;
-            display: flex; align-items: center; justify-content: center;
-            padding: 2rem; background: rgba(0,0,0,0.94); cursor: zoom-out;
-            isolation: isolate; pointer-events: auto;
-        `;
-        const closeButton = document.createElement('button');
-        closeButton.type = 'button';
-        closeButton.setAttribute('aria-label', 'Close preview');
-        closeButton.textContent = 'X';
-        closeButton.style.cssText = 'position:fixed; top:18px; right:18px; z-index:2147483647; width:48px; height:48px; border:1px solid rgba(255,255,255,0.35); border-radius:10px; background:rgba(15,23,42,0.92); color:white; font-size:1.35rem; font-weight:800; line-height:1; cursor:pointer; box-shadow:0 8px 28px rgba(0,0,0,0.45);';
-
-        const imageEl = document.createElement('img');
-        imageEl.src = safeSrc;
-        imageEl.alt = heading || '';
-        imageEl.style.cssText = 'max-width:94vw; max-height:90vh; object-fit:contain; border-radius:8px; box-shadow:0 20px 70px rgba(0,0,0,0.65); cursor:default;';
-
-        function closePreview() {
-            window.removeEventListener('keydown', handleKeydown, true);
-            modal.remove();
+        const list = (this.currentImages || [])
+            .map((image, idx) => ({ src: toFileUrlSafe(getProgressImageSource(image)), heading: String(image?.heading || `Image ${idx + 1}`) }))
+            .filter((image) => !!image.src);
+        const startIndex = list.findIndex((image) => image.src === safeSrc);
+        if (startIndex >= 0) {
+            openProgressImageViewer(list, startIndex);
+            return;
         }
-
-        function handleKeydown(event: KeyboardEvent) {
-            if (event.key === 'Escape') closePreview();
-        }
-
-        modal.appendChild(closeButton);
-        modal.appendChild(imageEl);
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal || event.target === closeButton) {
-                closePreview();
-            }
-        });
-        closeButton.addEventListener('click', (event) => {
-            event.stopPropagation();
-            closePreview();
-        });
-        imageEl.addEventListener('click', (event) => event.stopPropagation());
-        document.body.appendChild(modal);
-        window.addEventListener('keydown', handleKeydown, true);
-        modal.focus();
+        openProgressImageViewer([{ src: safeSrc, heading: String(heading || '') }], 0);
     }
 
     private hideMainProgressPreview(): void {

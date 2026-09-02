@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
+import { toCollectedImagePreviews } from './collectedImagePreview.js';
 import {
   extractSemiAutoHeadingsFromBody,
   isNonBodyImageHeading,
@@ -827,10 +828,12 @@ export async function handleFullAutoPublish(): Promise<void> {
         // ✅ 모달에 이미지 그리드 표시
         const collectedImages = structuredContent?.collectedImages || structuredContent?.images || [];
         if (collectedImages.length > 0) {
-          const imageData = collectedImages.slice(0, 10).map((url: string, idx: number) => ({
-            url,
-            heading: idx === 0 ? '대표 이미지' : `이미지 ${idx}`
-          }));
+          /*
+           * [2026-09-02 사장님 화면] 수집 8장인데 모달은 "1개" + "Image preview unavailable".
+           * 원소는 객체({url, filePath, …})인데 문자열로 취급해 { url: <객체> } 로 감쌌다 —
+           * 주소가 전부 "[object Object]" 가 되어 중복 제거가 8→1 로 뭉갰다. 형태를 보고 감싼다.
+           */
+          const imageData = toCollectedImagePreviews(collectedImages, 10);
           modal?.showImages(imageData, `🛒 수집된 상품 이미지 (${collectedImages.length}장)`);
         }
       }

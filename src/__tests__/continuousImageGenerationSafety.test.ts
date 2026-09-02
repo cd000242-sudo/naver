@@ -150,12 +150,18 @@ describe('continuous and multi-account image generation safety', () => {
   it('allows progress grid images to open a full-size preview', () => {
     const code = read('renderer/components/ProgressModal.ts');
 
+    // [2026-09-02] 전체보기가 뷰어 컴포넌트(ProgressImageViewer)로 옮겨갔다 — ‹ › 로 다음 이미지를 본다.
+    // 모달은 목록과 시작 자리를 넘겨 위임만 한다. 오버레이 자체의 계약은 뷰어 파일에서 잠근다.
+    const viewer = read('renderer/components/ProgressImageViewer.ts');
     expect(code).toMatch(/private openFullImagePreview/);
-    expect(code).toMatch(/progress-full-image-preview-overlay/);
-    expect(code).toMatch(/z-index:\s*2147483647/);
-    expect(code).toMatch(/Close preview/);
-    expect(code).toMatch(/removeEventListener\('keydown'/);
-    expect(code).toMatch(/document\.createElement\('img'\)/);
+    expect(code).toMatch(/openProgressImageViewer\(list, startIndex\)/);
+    expect(viewer).toMatch(/progress-full-image-preview-overlay/);
+    expect(viewer).toMatch(/z-index:\s*2147483647/);
+    expect(viewer).toMatch(/Close preview/);
+    expect(viewer).toMatch(/removeEventListener\('keydown'/);
+    expect(viewer).toMatch(/document\.createElement\('img'\)/);
+    expect(viewer).toMatch(/ArrowLeft[\s\S]{0,80}?step\(-1\)/);
+    expect(viewer).toMatch(/ArrowRight[\s\S]{0,80}?step\(1\)/);
     expect(code).toMatch(/private\s+renderProgressImageTile/);
     expect(code).toMatch(/targetItem\.onclick\s*=\s*\(\)\s*=>\s*\{[\s\S]{0,180}?this\.openFullImagePreview/);
     expect(code).toMatch(/this\.hideMainProgressPreview\(\)/);

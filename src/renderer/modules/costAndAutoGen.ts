@@ -14,6 +14,7 @@ import {
 } from '../../image/contextualImagePrompt.js';
 import { assertShoppingReferenceGenerationSelectionSupported } from '../../image/shoppingReferenceGeneration.js';
 import { reconcileOpenaiImageModelSelection } from '../../image/openaiImageModelReconcile.js';
+import { resolveImagePreviewPosition } from './imagePreviewBatch.js';
 
 // 전역 스코프 의존성
 declare let generatedImages: any[];
@@ -360,7 +361,13 @@ function getProgressModalForImagePreview(): any {
 }
 
 function updateGeneratedImagePreview(data: { image: any; index: number; total: number }): void {
-  const { index, total, image } = data;
+  const { image } = data;
+  /*
+   * [2026-09-02 사장님] 이미지 관리 탭 "프롬프트대로 생성" 은 소제목마다 IPC 를 한 번씩 부른다.
+   * main 은 호출마다 index 0 / total 1 을 보내니 1번 타일만 계속 바뀌었다.
+   * 루프가 자기 자리를 알려주면(imagePreviewBatch) 그 자리로 옮긴다. 배치가 없으면 그대로다.
+   */
+  const { index, total } = resolveImagePreviewPosition(data.index, data.total);
   if (!image) return;
 
   try {

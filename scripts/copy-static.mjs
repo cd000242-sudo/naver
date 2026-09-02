@@ -297,6 +297,8 @@ try {
   // renderer.ts에서 import하는 모든 components 포함
   const componentsDir = path.join(projectRoot, 'dist', 'renderer', 'components');
   const componentModules = [
+    // [2026-09-02] 그리드 타일 클릭 → ‹ › 뷰어. ProgressModal 이 부른다
+    'ProgressImageViewer.js',
     'ProgressModal.js',
     'VeoProgressOverlay.js',
     'PromptEditModal.js',
@@ -434,6 +436,9 @@ try {
   // ✅ [2026-02-24] modules 디렉토리 인라인 (renderer.ts에서 추출된 대규모 모듈)
   const modulesDir = path.join(projectRoot, 'dist', 'renderer', 'modules');
   const modulesFiles = [
+    // [2026-09-02] 수집 이미지 → 모달 미리보기 형태 변환 · 프롬프트대로 루프의 자리 추적 (function 선언만이라 순서 무관)
+    'collectedImagePreview.js',
+    'imagePreviewBatch.js',
     // ✅ [Phase 5B] renderer.ts에서 추출된 모듈 (의존성 순서: 유틸→DOM캐시→이미지→포스트→기능)
     'rendererUtils.js',            // 5B-1: 이벤트리스너, DOM캐시, 디바운스, 버튼, 로깅
     'unifiedDOMCache.js',          // 5B-2: UnifiedDOMCache 객체

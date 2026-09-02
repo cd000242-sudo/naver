@@ -5,6 +5,7 @@
 import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
 import { createShoppingCollectedPublishImages } from '../../image/shoppingReferenceGeneration.js';
 import { getSubImageMode } from '../utils/subImageMode.js';
+import { beginImagePreviewBatch, endImagePreviewBatch, setImagePreviewBatchSlot } from './imagePreviewBatch.js';
 import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
 import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
  
@@ -1833,9 +1834,13 @@ export function initHeadingImageGeneration(): void {
         appendLog(`🎨 비어있는 ${emptyHeadings.length}개 소제목에 이미지 생성 시작...`, 'images-log-output');
         aiProgressModal.addLog(`🎨 비어있는 ${emptyHeadings.length}개 소제목에 이미지 생성 시작...`);
 
+        // [2026-09-02 사장님] 소제목마다 IPC 한 번 → main 은 늘 index 0 → 1번 타일만 바뀌던 것. 루프가 자리를 알려준다.
+        beginImagePreviewBatch(emptyHeadings.length);
+        try {
         for (let i = 0; i < emptyHeadings.length; i++) {
           const heading = emptyHeadings[i];
           const originalIndex = headings.findIndex((h: any) => h.title === heading.title);
+          setImagePreviewBatchSlot(i);
 
           appendLog(`📸 [${i + 1}/${emptyHeadings.length}] "${heading.title}" 이미지 생성 중...`, 'images-log-output');
           // ✅ [2026-02-23] 종합 이미지 생성 정보 로그 (엔진 + 모델 + 스타일 + 다양성)
@@ -1872,6 +1877,7 @@ export function initHeadingImageGeneration(): void {
 
           await regenerateSingleImageForHeading(originalIndex, heading.title, heading.prompt);
         }
+        } finally { endImagePreviewBatch(); }
 
         // ✅ 영어 프롬프트 이미지 미리보기 업데이트
         const allImages = (window as any).imageManagementGeneratedImages || [];
