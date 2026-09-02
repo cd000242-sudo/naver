@@ -57,9 +57,13 @@ describe('사장님이 받은 본문으로 확인', () => {
       + ' 그래서 제가 왔다."라고 설명했죠.',
   ].join('\n\n');
 
-  it('문장이 많아도 빈 문단은 문단 수만큼만 생긴다', () => {
-    const html = buildMobileRichHtml(text).html;
-    expect((html.match(/data-rich-spacer/g) || []).length).toBe(2);
+  it('빈 문단은 문단 수만큼 생긴다 — 2~3문장 묶음 하나가 문단이다', () => {
+    // [2026-09-03] 흐름 모드 안전망: 빈 줄 없는 긴 줄도 2~3문장씩 문단으로 나뉘고, 문단마다 빈 문단이 붙는다.
+    //   예전 계약(원본 문단 수만큼만)은 문장마다 <p> 를 만들던 시절의 것이다. 벽(사장님 화면)을 막는 쪽이 이긴다.
+    const result = buildMobileRichHtml(text);
+    const spacers = (result.html.match(/data-rich-spacer/g) || []).length;
+    expect(spacers).toBe(result.paragraphCount);
+    expect(spacers).toBeGreaterThanOrEqual(2);
   });
 
   it('30px 짜리 문장 간격이 남아 있지 않다', () => {

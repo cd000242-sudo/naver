@@ -14,6 +14,7 @@ import {
   pickPrimaryKeyword,
   buildShoppingKeywordInferencePrompt,
   pickShoppingSearchKeyword,
+  normalizeAdKeyword,
   type ShoppingKeywordPick,
   type KeywordVolume,
   type UrlKeywordPick,
@@ -116,7 +117,10 @@ export async function createNaverVolumeLookup(): Promise<UrlKeywordDeps['lookupV
     return async (keyword: string): Promise<number | null> => {
       // analyzeKeyword는 블로그 문서수까지 함께 조회한다. 광고 API만 따로 부르는 공개 진입점이
       // 없어 이걸 쓴다 — 후보 3개 상한을 둔 이유이기도 하다.
-      const analysis = await analyzer.analyzeKeyword(keyword);
+      // [2026-09-03 라이브] 광고 API 는 띄어쓰기 있는 hintKeywords 를 11001 로 거절한다 — 기존 지표 수집처럼 공백을 지워 부른다.
+      const adKeyword = normalizeAdKeyword(keyword);
+      if (!adKeyword) return null;
+      const analysis = await analyzer.analyzeKeyword(adKeyword);
       const adData = (analysis as { naverAdData?: Record<string, number> })?.naverAdData;
       const pc = Number(adData?.monthlyPcQcCnt);
       const mobile = Number(adData?.monthlyMobileQcCnt);

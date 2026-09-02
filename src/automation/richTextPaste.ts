@@ -1,5 +1,6 @@
 import type { Frame, KeyInput, Page } from 'puppeteer';
 import { balanceMobileLineBreaks } from '../content/mobileLineBalance.js';
+import { paragraphGroupSizes } from '../content/sentenceParagraphs.js';
 
 export interface MobileRichHtmlOptions {
   maxChunkChars?: number;
@@ -1228,7 +1229,20 @@ function buildReadableParagraphs(paragraph: string, maxChars: number, flowParagr
     if (STEP_ARROW_RE.test(compactParagraph)) {
       return [compactParagraph.replace(/\s+(?=(?:→|➡|⇒|->|=>))/g, '\n')];
     }
-    return [compactParagraph];
+    /*
+     * [2026-09-03 새벽 사장님 화면] 빈 줄 없는 긴 한 줄이 통째로 문단 하나가 되어 벽이 됐다(편집 경로가 줄바꿈을 잃음).
+     * 흐름 모드도 문단 규칙은 같다 — 한 줄에 문장이 3개를 넘으면 2~3문장씩 묶어 문단을 나눈다. 어떤 입력이 와도 벽은 없다.
+     */
+    const flowSentences = splitSentencesForMobile(compactParagraph).map((s) => s.trim()).filter(Boolean);
+    if (flowSentences.length <= 3) return [compactParagraph];
+    const sizes = paragraphGroupSizes(flowSentences.length);
+    const grouped: string[] = [];
+    let cursor = 0;
+    for (const size of sizes) {
+      grouped.push(flowSentences.slice(cursor, cursor + size).join(' '));
+      cursor += size;
+    }
+    return grouped;
   }
   const sentences = splitSentencesForMobile(paragraph);
   const chunks: string[] = [];
@@ -1361,6 +1375,23 @@ function applyTermHighlights(escapedText: string, terms: string[], theme: SoftHi
       .join('');
   }
   return result;
+}
+
+/**
+ * [2026-09-03 사장님 화면] "하이라이트는 사람들이 꼭 읽어야 되는 구간에 읽히게 해야 되는데 이게 뭐야" — 문단 통째로 칠해졌다.
+ * 예전엔 문단 하나가 문장 하나라 한 문장만 칠해졌는데, 흐름 모드는 문단이 2~3문장(벽이면 더)이라 통째로 칠한다.
+ * 문단 안에서 가장 중요한 한 문장만 칠한다. 문장이 하나면 그대로.
+ */
+function formatInlineHighlightBestSentence(text: string, terms: string[], theme: SoftHighlightTheme): string {
+  const sentences = splitSentencesForMobile(text).map((s) => s.trim()).filter(Boolean);
+  if (sentences.length <= 1) return formatInline(text, terms, true, theme);
+  let bestIndex = 0;
+  let bestScore = -Infinity;
+  sentences.forEach((sentence, index) => {
+    const score = scoreImportantSentence(sentence);
+    if (score > bestScore) { bestScore = score; bestIndex = index; }
+  });
+  return sentences.map((sentence, index) => formatInline(sentence, terms, index === bestIndex, theme)).join(' ');
 }
 
 function formatInline(text: string, _terms: string[], highlightWhole: boolean, theme: SoftHighlightTheme): string {
@@ -1838,7 +1869,7 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
           sectionIndex: currentSectionIndex,
           // [2026-08-26] 원본 한 줄이 문장 단위로 쪼개진 조각 중 마지막인지.
           //   빈 문단(스페이서)은 원본의 문단 경계에만 넣는다.
-          endsSourceLine: chunkIndex === paragraphTexts.length - 1,
+          endsSourceLine: flowParagraphs ? true : chunkIndex === paragraphTexts.length - 1,
         });
       });
     }
@@ -1908,7 +1939,7 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
     const endsParagraph = node.endsSourceLine !== false;
     const paraEnd = endsParagraph ? ' data-rich-para-end="true"' : '';
     htmlParts.push(
-      `<p${paraEnd} style="${paragraphStyle(fontSizePx, centerAlign, endsParagraph)}">${formatInline(node.text, terms, important, highlightTheme)}</p>`
+      `<p${paraEnd} style="${paragraphStyle(fontSizePx, centerAlign, endsParagraph)}">${(important ? formatInlineHighlightBestSentence(node.text, terms, highlightTheme) : formatInline(node.text, terms, false, highlightTheme))}</p>`
     );
     plainParts.push(node.plain);
     paragraphCount += 1;

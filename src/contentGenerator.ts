@@ -352,6 +352,7 @@ import {
 import { getPrimaryKeywordFromSource, getSecondaryKeywordsFromSource, preprocessLongKeyword } from './contentKeywordHelpers';
 import { isSearchDrivenTitleMode } from './content/titleModeObjective.js';
 import { compareTitleWithSerp } from './analytics/serpTitleBenchmark.js';
+import { stripStoreTagBrackets } from './contentTitleHelpers';
 // [SPEC-PROMPT-2026-REFRESH Phase 1/v2.10.231] 일반론 도망 감지 + 인용 토큰 밀도 측정
 import { detectPlatitudes } from './contentPlatitudeDetector';
 // [Gap C 시맨틱 / SPEC-REVIEW-001 확장] 옵트인 섹션 변별 판정 (기본 OFF, ungrounded 1회 호출)
@@ -1725,6 +1726,12 @@ export function finalizeStructuredContent(
   // ✅ 제품/쇼핑/IT 리뷰: 상품명 prefix 우선 적용 (제목이 상품명으로 반드시 시작)
   if (
     isReviewArticleType(source?.articleType)
+    /*
+     * [2026-09-03 라이브 — 헬스헬퍼 맥스컷] 이 단계가 모델 제목 앞에 스토어 상품명(꼬리표 포함, 32자)을 통째로 붙이고
+     * 45자로 잘라 후보 3개를 전부 "…[슈퍼적립+사은품 증정] 헬스헬퍼 맥스컷" 로 만들었다 — 모델이 쓴 제목은 13자만 남았다.
+     * 쇼핑은 상품명이 아니라 검색어가 앞에 와야 한다(노출 우선). 검색어 앞 배치는 아래 ensureFront3 단계가 맡는다.
+     */
+    && source.contentMode !== 'affiliate'
     && shouldRunLegacySemanticPostDraftMutation(promptVariant, 'apply-keyword-prefix-to-structured-content')
   ) {
     const productName = getReviewProductName(source);
@@ -1736,6 +1743,7 @@ export function finalizeStructuredContent(
       applyKeywordPrefixToStructuredContent(finalContent, productName, { maxLength: 45 });
     }
   }
+  let skipKeywordPrefix = false;
   const primaryKeyword = (source.metadata as any)?.keywords?.[0]
     ? String((source.metadata as any).keywords[0]).trim()
     : '';
@@ -1755,14 +1763,10 @@ export function finalizeStructuredContent(
         //   TitleAnswer·FactVerify 가 한 번도 돌지 않았다(상대날짜 4건·월없는날짜 5건을
         //   가진 글이었다). 분류 오류는 따로 고쳤지만, 어떤 경로로 들어오든
         //   **검사는 반드시 거친다**. 검사는 경고 전용이라 발행을 막지 않는다.
-        const earlyContent = removeInternalStructureMarkersFromContent(finalContent);
-        try {
-          runPostGenValidator(earlyContent, source);
-        } catch (validatorError) {
-          console.warn('[finalize] ⚠️ 조기반환 경로 검사 실패:',
-            validatorError instanceof Error ? validatorError.message : validatorError);
-        }
-        return earlyContent;
+        // [2026-09-03] 예전엔 여기서 통째로 반환해 최종 제목 게이트까지 건너뛰었다(상품명≈키워드인 쇼핑 글 전부).
+        //   이제 반환하지 않는다. 상품명 단계가 이미 접두를 했을 때(비쇼핑)만 키워드 접두를 생략하고, 게이트·꼬리 검사는 늘 돈다.
+        skipKeywordPrefix = source.contentMode !== 'affiliate';
+        console.log(`[finalize] 상품명≈키워드 — ${skipKeywordPrefix ? '키워드 접두 생략(상품명 단계가 했다)' : '쇼핑: 검색어 앞 배치 단계 진행'}`);
       }
     } catch (e) {
       console.warn('[contentGenerator] catch ignored:', e);
@@ -1773,13 +1777,15 @@ export function finalizeStructuredContent(
     // [2026-08-27] 상한을 모드 계약에서 가져온다. 예전에는 이 정책이 자체 상한 70자를
     //   들고 있어, 스키마와 후보 선별기에 넣은 길이 계약(홈판 28~42)이 마지막 단계에서
     //   깨졌다 — 장동윤 글의 제목 후보가 전부 52~54자로 나온 이유다.
-    applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword, {
-      // [2026-09-02 사장님 승인] SPEC-KEYWORD-ENDGAME Phase 1 의 앞 3자 강제(ensureFront3)가 코드·단위 테스트만 있고
-      //   부르는 곳이 없어 죽어 있었다. 검색으로 들어오는 모드(seo·mate·affiliate·business)에만 건다 —
-      //   홈판은 피드에서 싸우므로 손대지 않는다. 이미 선두면 무변경, 아니면 재배치.
-      ensureFront3: isSearchDrivenTitleMode(source.contentMode),
-      maxWidth: resolveTitleLengthRange(source.contentMode as never).max,
-    });
+    if (!skipKeywordPrefix) {
+      applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword, {
+        // [2026-09-02 사장님 승인] SPEC-KEYWORD-ENDGAME Phase 1 의 앞 3자 강제(ensureFront3)가 코드·단위 테스트만 있고
+        //   부르는 곳이 없어 죽어 있었다. 검색으로 들어오는 모드(seo·mate·affiliate·business)에만 건다 —
+        //   홈판은 피드에서 싸우므로 손대지 않는다. 이미 선두면 무변경, 아니면 재배치.
+        ensureFront3: isSearchDrivenTitleMode(source.contentMode),
+        maxWidth: resolveTitleLengthRange(source.contentMode as never).max,
+      });
+    }
   }
   /*
    * [2026-08-29] 아래 변환들은 막판 후처리다. 예외가 나면 이 함수가 통째로 터져
@@ -1862,7 +1868,7 @@ export function finalizeStructuredContent(
           // 접두사로 인한 훼손 → cleanup만 재적용하여 복구 시도
           finalContent.selectedTitle = removeDuplicatePhrasesFromTitle(
             cleanupColonQuotePattern(cleanupTrailingTitleTokens(
-              cleanupStartingTitleTokens(sanitizeTitleSpecialChars(finalContent.selectedTitle))
+              cleanupStartingTitleTokens(stripStoreTagBrackets(sanitizeTitleSpecialChars(finalContent.selectedTitle)))
             ))
           ).trim();
           const rescueCheck = evaluateTitleQuality(finalContent.selectedTitle, String(finalPK), finalMode, finalCategoryHint, source.articleType);
@@ -5610,7 +5616,7 @@ async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void>
       const { resolveShoppingSearchKeyword, createOpenAiCandidateInferencer, createNaverVolumeLookup } =
         await import('./content/urlModeKeywordResolve.js');
       const lookupVolume = await createNaverVolumeLookup();
-      const productName = String((source as any).metadata?.productInfo?.name || (source as any).title || '').trim();
+      const productName = stripStoreTagBrackets(String((source as any).metadata?.productInfo?.name || (source as any).title || '').trim());
       const pick = await resolveShoppingSearchKeyword(rawText, productName, existing, {
         inferCandidates: createOpenAiCandidateInferencer(shoppingApiKey),
         lookupVolume,

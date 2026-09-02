@@ -24,8 +24,8 @@ describe('쇼핑 제목 채점 — 구매 축이 있는 후보가 상품명 나�
     const repaired = evaluateTitleQuality(REPAIRED_1, KW, 'affiliate' as never);
     const cand2 = evaluateTitleQuality(CAND_2, KW, 'affiliate' as never);
     expect(cand2.score).toBeGreaterThan(repaired.score);
-    expect(repaired.issues.join(' ')).toMatch(/옵션 조합/u);
-    expect(cand2.issues.join(' ')).not.toMatch(/옵션 조합/u);
+    expect(repaired.issues.join(' ')).toMatch(/옵션·스토어 꼬리표|옵션 조합/u);
+    expect(cand2.issues.join(' ')).not.toMatch(/옵션·스토어 꼬리표|옵션 조합/u);
   });
 
   it('구매 축 없는 쇼핑 제목은 -30 — 95점으로 통과하던 상품명 나열이 더는 안 된다', () => {
@@ -46,5 +46,21 @@ describe('배선: 최종 게이트는 고쳐 쓰기 전에 후보 최고점을 �
     expect(gate).toContain('후보 중 최고점 선택');
     // 고쳐 쓰기(복구)는 후보 선택이 안 됐을 때의 else 가지다
     expect(gate.indexOf('후보 중 최고점 선택')).toBeLessThan(gate.indexOf('repair-title-after-quality-gate'));
+  });
+});
+
+describe('[2026-09-03 헬스헬퍼] 쇼핑 제목을 망가뜨리던 두 단계', () => {
+  const src = readFileSync(resolve(__dirname, '..', 'contentGenerator.ts'), 'utf-8').replace(/\r/g, '');
+
+  it('상품명 접두(45자 자르기)는 쇼핑에서 돌지 않는다 — 검색어 앞 배치가 대신한다', () => {
+    const at = src.indexOf('isReviewArticleType(source?.articleType)');
+    expect(src.slice(at, at + 700)).toMatch(/&& source\.contentMode !== 'affiliate'/u);
+  });
+
+  it('상품명≈키워드 조기 반환이 없다 — 게이트는 늘 돈다', () => {
+    const fn = src.slice(src.indexOf('export function finalizeStructuredContent'), src.indexOf('[FinalQualityGate] ⚠️ 최종 제목 품질 미달'));
+    expect(fn).not.toContain('return earlyContent;');
+    expect(fn).toMatch(/skipKeywordPrefix = source\.contentMode !== 'affiliate';/u);
+    expect(fn).toMatch(/if \(!skipKeywordPrefix\) \{/u);
   });
 });

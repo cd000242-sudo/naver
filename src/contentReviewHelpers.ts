@@ -12,6 +12,7 @@
 import type { ArticleType, ContentSource } from './contentGenerator';
 import { normalizeTitleWhitespace, removeEmojis } from './contentTextHelpers';
 import { preprocessLongKeyword } from './contentKeywordHelpers';
+import { stripStoreTagBrackets } from './contentTitleHelpers';
 
 /**
  * 리뷰형 글 타입인지 판정.
@@ -58,16 +59,17 @@ function shortenProductNameForTitle(name: string): string {
 }
 
 export function getReviewProductName(source?: ContentSource): string {
-  const fromInfo = String((source as any)?.productInfo?.name || '').trim();
+  // [2026-09-03 라이브] 스토어 꼬리표("[슈퍼적립+사은품 증정]")는 상품명이 아니다 — 모델 입력·제목·키워드 모두 이 앞에서 걷어낸다.
+  const fromInfo = stripStoreTagBrackets(String((source as any)?.productInfo?.name || '').trim());
   if (fromInfo) {
     const extracted = extractLikelyProductNameFromTitle(fromInfo);
     const normalized = normalizeReviewProductName(fromInfo);
     const picked = extracted && extracted.length <= normalized.length ? extracted : normalized;
     return shortenProductNameForTitle(picked);
   }
-  const fromTitle = String(source?.title || '').trim();
+  const fromTitle = stripStoreTagBrackets(String(source?.title || '').trim());
   if (fromTitle) return shortenProductNameForTitle(extractLikelyProductNameFromTitle(fromTitle));
-  const fromMeta = String((source as any)?.metadata?.keywords?.[0] || '').trim();
+  const fromMeta = stripStoreTagBrackets(String((source as any)?.metadata?.keywords?.[0] || '').trim());
   return shortenProductNameForTitle(fromMeta);
 }
 

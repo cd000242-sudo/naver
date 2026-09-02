@@ -149,11 +149,14 @@ export function scoreOptionNoise(title: string, mode: string | undefined): Purch
   if (String(mode || '').trim() !== 'affiliate') return { points: 0, reason: '', matched: [] };
   const t = String(title || '').trim();
   const combos = t.match(/[^\s+]+\+[^\s+]+/g) || [];
-  if (combos.length === 0) return { points: 0, reason: '', matched: [] };
+  // [2026-09-03] 대괄호 꼬리표("[슈퍼적립+사은품 증정]")도 스토어 표기다 — 형태만 본다.
+  const tags = t.match(/\[[^\]]+\]|【[^】]+】/g) || [];
+  const noise = [...combos, ...tags.filter((tag) => !combos.some((c) => tag.includes(c)))];
+  if (noise.length === 0) return { points: 0, reason: '', matched: [] };
   return {
     points: -20,
-    reason: `쇼핑: 상품 옵션 조합 표기가 제목에 들어감 (${combos.join(', ')})`,
-    matched: combos,
+    reason: `쇼핑: 상품 옵션·스토어 꼬리표 표기가 제목에 들어감 (${noise.join(', ')})`,
+    matched: noise,
   };
 }
 

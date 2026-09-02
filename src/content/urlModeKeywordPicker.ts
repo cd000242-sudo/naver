@@ -241,3 +241,12 @@ export function pickShoppingSearchKeyword(
     reason: `검색량 ${bestVolume.toLocaleString()}회/월 (기존 ${existingVolume === null ? '미확인' : existingVolume.toLocaleString()}) — 교체`,
   };
 }
+
+/**
+ * [2026-09-03 라이브] 네이버 광고 API 11001 "hintKeywords 파라미터가 유효하지 않습니다" — 띄어쓰기 있는 키워드를 그대로 보냈다.
+ * 기존 지표 수집(trendAnalyzer)은 공백을 지우고 부른다. 같은 규칙: 공백 제거, 2자 미만이면 조회하지 않는다.
+ */
+export function normalizeAdKeyword(keyword: string): string {
+  const cleaned = String(keyword || '').replace(/\s+/g, '').trim();
+  return cleaned.length >= 2 ? cleaned : '';
+}

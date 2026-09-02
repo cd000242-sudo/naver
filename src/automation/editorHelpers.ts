@@ -1063,7 +1063,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         self.log(`   ⚖️ 공정위 문구 최상단 삽입 중 (사용자 ON)...`);
         await page.keyboard.press('Home').catch(() => {});
         await self.delay(100);
-        await safeKeyboardType(page, ftcText, { delay: 15 });
+        await insertFtcDisclosureStyled(self, page, ftcText);
         recordAppliedFtcDisclosure(resolved, ftcText);
         await self.delay(300);
         await page.keyboard.press('Enter');
@@ -1257,7 +1257,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         self.log(`   ⚖️ 공정위 문구 최상단 삽입 중 (서론 없음, 사용자 ON)...`);
         await page.keyboard.press('Home').catch(() => {});
         await self.delay(100);
-        await safeKeyboardType(page, ftcTextNoIntro, { delay: 15 });
+        await insertFtcDisclosureStyled(self, page, ftcTextNoIntro);
         recordAppliedFtcDisclosure(resolved, ftcTextNoIntro);
         await self.delay(300);
         await page.keyboard.press('Enter');
@@ -3002,6 +3002,38 @@ export function pickDeviceToggleTarget(
 }
 
 // ── setupMobileViewAndCenterAlign ──
+// ── insertFtcDisclosureStyled ──
+/**
+ * [2026-09-03 사장님] "공정위 문구는 19픽셀로 두껍게 중앙정렬로 빨간색상으로."
+ * 지금까지는 키보드로 타이핑해 에디터의 그 순간 서식(직전 상태)을 따라갔다 — 어떤 날은 빨갛고 어떤 날은 아니다.
+ * 서식은 HTML 붙여넣기로 못 박는다. 붙여넣기가 실패하면 예전처럼 타이핑한다(발행을 막지 않는다).
+ */
+const FTC_DISCLOSURE_STYLE = 'text-align:center;font-size:19px;font-weight:700;color:#ff0000;line-height:1.7;margin:0 auto 12px;';
+function escapeFtcHtml(value: string): string {
+  return String(value || '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+export async function insertFtcDisclosureStyled(self: any, page: any, text: string): Promise<boolean> {
+  const clean = String(text || '').trim();
+  if (!clean) return false;
+  try {
+    const frame = await self.getAttachedFrame();
+    if (frame) {
+      const html = `<p style="${FTC_DISCLOSURE_STYLE}">${escapeFtcHtml(clean)}</p>`;
+      const result = await pasteRichHtmlAtCursor(page, frame, html, clean, 0);
+      if (result?.ok) {
+        self.log('   ⚖️ 공정위 문구 서식 붙여넣기 (19px · 굵게 · 가운데 · 빨강)');
+        return true;
+      }
+      self.log('   ⚠️ 공정위 문구 서식 붙여넣기 실패 → 타이핑으로 대체');
+    }
+  } catch (e) {
+    self.log(`   ⚠️ 공정위 문구 서식 붙여넣기 예외 → 타이핑으로 대체: ${(e as Error).message}`);
+  }
+  await safeKeyboardType(page, clean, { delay: 15 });
+  return false;
+}
+
 // [2026-05-27] 에디터 진입 직후 테블릿 화면 모드 + 가운데 정렬 자동 적용 (사용자 명시 요청)
 // [2026-09-02 사장님] "중앙정렬 말고 좌측정렬로" — 정렬 단계만 왼쪽으로 되돌린다. 화면 모드 단계는 그대로.
 //   함수 이름은 호출처(naverBlogAutomation·editorHelpers 1-0단계)를 건드리지 않으려 유지한다.

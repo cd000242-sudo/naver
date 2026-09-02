@@ -52,6 +52,15 @@ describe('상위 글 제목 대조', () => {
     expect(r.lines.some((l) => l.includes('잘립니다'))).toBe(true);
   });
 
+  it('상위 글 대부분이 검색어를 안 쓰면 off-keyword — 제목이 아니라 키워드 문제라고 말한다 (헬스헬퍼 실측)', () => {
+    const r = compareTitleWithSerp('헬스헬퍼 맥스컷 프로 크롬 [슈퍼적립+사은품 증정]', '헬스헬퍼 맥스컷 프로 크롬', [
+      '맥스컷 후기, 식후 혈당 관리에 도움 됐을까', '헬스헬퍼 맥스컷 한 달 복용기', '가르시니아 다이어트 보조제 비교',
+      '식후 나른함 줄이는 방법', '맥스컷 프로 성분 정리', '다이어트 보조제 고르는 기준', '혈당 관리 영양제 추천', '헬스헬퍼 제품 정리',
+    ]);
+    expect(r.verdict).toBe('off-keyword');
+    expect(r.lines[0]).toMatch(/키워드를 다시 보세요/u);
+    expect(r.lines.join(' ')).not.toMatch(/내 제목도 그렇습니다/u);
+  });
   it('표본이 3개 미만이면 판정하지 않는다', () => {
     const r = compareTitleWithSerp('종아리 마사지기 추천', KW, TOP.slice(0, 2));
     expect(r.verdict).toBe('insufficient');

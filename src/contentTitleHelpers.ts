@@ -171,3 +171,17 @@ export function cleanupColonQuotePattern(raw: string): string {
 
   return t;
 }
+
+/**
+ * [2026-09-03 라이브 — 헬스헬퍼 맥스컷] 스토어 상품명의 꼬리표 "[슈퍼적립+사은품 증정]" 가 제목 후보 3개 전부와 최종 제목에
+ * 그대로 남았다. 대괄호 꼬리표는 스토어의 프로모션·옵션 표기지 검색어도 판단도 아니다 — 형태(괄호)만 보고 걷어낸다.
+ * 소괄호는 내용일 수 있어("(mm)") 건드리지 않는다.
+ */
+export function stripStoreTagBrackets(raw: string): string {
+  return String(raw || '')
+    .replace(/\s*\[[^\]]*\]\s*/g, ' ')
+    .replace(/\s*【[^】]*】\s*/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/\s+([,.!?])/g, '$1')
+    .trim();
+}
