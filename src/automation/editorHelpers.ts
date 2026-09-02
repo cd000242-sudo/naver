@@ -3003,6 +3003,8 @@ export function pickDeviceToggleTarget(
 
 // ── setupMobileViewAndCenterAlign ──
 // [2026-05-27] 에디터 진입 직후 테블릿 화면 모드 + 가운데 정렬 자동 적용 (사용자 명시 요청)
+// [2026-09-02 사장님] "중앙정렬 말고 좌측정렬로" — 정렬 단계만 왼쪽으로 되돌린다. 화면 모드 단계는 그대로.
+//   함수 이름은 호출처(naverBlogAutomation·editorHelpers 1-0단계)를 건드리지 않으려 유지한다.
 // 셀렉터 실패 시 무시 (본문 작성 흐름 차단 금지)
 export async function setupMobileViewAndCenterAlign(self: any): Promise<void> {
   const frame = await self.getAttachedFrame();
@@ -3097,7 +3099,7 @@ export async function setupMobileViewAndCenterAlign(self: any): Promise<void> {
     self.log(`⚠️ 모바일 화면 전환 실패 (무시): ${(e as Error).message}`);
   }
 
-  // 2. 정렬 드롭다운 → 가운데 정렬
+  // 2. 정렬 드롭다운 → 왼쪽 정렬 (2026-09-02 사장님 결정 — 에디터 기본값이지만 직전 상태가 남을 수 있어 명시로 누른다)
   try {
     const alignBtn = await findElement(frame, SELECTORS.editor.alignDropdownButton, 'alignDropdownButton');
     if (!alignBtn) {
@@ -3106,17 +3108,17 @@ export async function setupMobileViewAndCenterAlign(self: any): Promise<void> {
     }
     await alignBtn.click();
     await self.delay(200);
-    const centerBtn = await findElement(frame, SELECTORS.editor.alignCenterButton, 'alignCenterButton');
-    if (centerBtn) {
-      await centerBtn.click();
-      self.log('📍 가운데 정렬 활성화');
+    const leftBtn = await findElement(frame, SELECTORS.editor.alignLeftButton, 'alignLeftButton');
+    if (leftBtn) {
+      await leftBtn.click();
+      self.log('📍 왼쪽 정렬 활성화');
       await self.delay(200);
     } else {
-      self.log('ℹ️ 가운데 정렬 버튼 미발견 → 드롭다운 닫기 시도');
+      self.log('ℹ️ 왼쪽 정렬 버튼 미발견 → 드롭다운 닫기 시도');
       try { await alignBtn.click(); } catch { /* ignore */ }
     }
   } catch (e) {
-    self.log(`⚠️ 가운데 정렬 설정 실패 (무시): ${(e as Error).message}`);
+    self.log(`⚠️ 왼쪽 정렬 설정 실패 (무시): ${(e as Error).message}`);
   }
 }
 

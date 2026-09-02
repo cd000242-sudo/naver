@@ -26,6 +26,7 @@ export type EditorSelectorKey =
   | 'viewModeTablet'
   | 'alignDropdownButton'
   | 'alignCenterButton'
+  | 'alignLeftButton'
   | 'popupLayer'
   | 'autocompleteLayer'
   | 'stickerLayer'
@@ -209,6 +210,16 @@ export const EDITOR_SELECTORS: SelectorMap<EditorSelectorKey> = {
       'button.se-toolbar-option-icon-button[data-value="center"]',
     ],
     '가운데 정렬 옵션 (드롭다운 펼친 후)',
+  ),
+  // [2026-09-02 사장님] 문단은 왼쪽 정렬이 기본 — 5/27 의 가운데 정렬 요청을 되돌린다
+  alignLeftButton: entry(
+    'button.se-toolbar-option-align-left-button',
+    [
+      'button[data-value="left"][data-name="align-drop-down-with-justify"]',
+      'button[data-log="prt.left"]',
+      'button.se-toolbar-option-icon-button[data-value="left"]',
+    ],
+    '왼쪽 정렬 옵션 (드롭다운 펼친 후)',
   ),
 
   // --- 팝업 / 레이어 ---

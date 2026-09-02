@@ -24,7 +24,7 @@ describe('issue-story 골격 파일', () => {
     expect(prompt).toContain('뉴스 리드형');
     expect(prompt).toContain('타임라인 서사');
     expect(prompt).toContain('소제목은 0~3개');
-    expect(prompt).toContain('문단은 1~2문장');
+    expect(prompt).toContain('문단은 2~3문장'); // [2026-09-02 사장님 결정] 1~2 → 2~3(모바일 2~3줄)
   });
 
   it('환각·명예훼손 가드를 골격보다 우선한다고 명시한다', () => {

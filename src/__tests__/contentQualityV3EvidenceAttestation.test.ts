@@ -200,7 +200,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-09-02 12차] 검색용 조합어 표시 배선으로 재계산
         // [2026-09-02 13차] dateBasis 서술 금지 조항 추가로 재계산
         // [2026-09-02 14차] 멘토 어미 믹싱 · 공통 격식 오르내림 조항으로 재계산
-        '36e72aada80f82189785f4b565c9a58d9cc2cb0de0fb72025a05edc8c93dcd15',
+        // [2026-09-02 15차] 홈판 문단 규칙 1~2문장 → 2~3문장(사장님 결정)으로 재계산
+        '1eb836482e581878cc705e280bee235e4058e61de31d47aaf26c60526d9f55ef',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

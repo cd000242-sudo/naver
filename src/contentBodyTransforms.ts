@@ -209,7 +209,8 @@ function ensureParagraphBreaks(text: string): string {
   // [v2.10.393b] paragraph 안 문장도 \n 줄바꿈 (모바일 친화)
   const result: string[] = [];
   let current: string[] = [];
-  const breakAfter = () => Math.floor(Math.random() * 3) + 1; // 1~3문장
+  // [2026-09-02 사장님 결정] 1~3 → 2~3. 1이 뽑히면 문장 하나가 문단 하나가 된다 — 기본값은 2~3줄 묶음이다.
+  const breakAfter = () => Math.floor(Math.random() * 2) + 2; // 2~3문장
   let nextBreak = breakAfter();
 
   for (let i = 0; i < sentences.length; i++) {
