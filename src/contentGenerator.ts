@@ -2660,6 +2660,7 @@ export function buildModeBasedPrompt(
         reviewCount: 0,
         hasSpec: Boolean(source.productSpec),
         hasPrice: Boolean(productPriceForPrompt),
+        aiExperienceOptIn: source.aiExperienceGeneration === true,
       })}`;
       console.log('[PromptBuilder] 🔒 P0 review guard applied: reviews=0 (SPEC-REVIEW-001)');
     } else if (affiliateEvidence.mode === 'first_party') {

@@ -32,6 +32,8 @@ export interface ReviewGuardContext {
   reviewCount: number;
   hasSpec: boolean;
   hasPrice: boolean;
+  /** [2026-09-02 사장님 결정 (a)] AI 경험 옵트인 — 현재형 사용 장면 서술만 허용, 구매·기간 주장 금지 유지 */
+  readonly aiExperienceOptIn?: boolean;
 }
 
 export function isReviewAvailable(reviews: unknown): boolean {
@@ -52,6 +54,13 @@ export function buildReviewGuardBlock(ctx: ReviewGuardContext): string {
   if (ctx.hasSpec) availableData.push('스펙');
   if (ctx.hasPrice) availableData.push('가격');
   const inventoryLine = availableData.join(' / ');
+  const optInLine = ctx.aiExperienceOptIn === true
+    ? `
+[AI 경험 옵트인 — 이 가드의 예외 (사용자가 켬)]
+체험 의존 단계 생략과 과거 체험 주장 금지는 그대로다. 다만 확인된 스펙·구성에서 도출한 사용 장면을
+1인칭 현재형·조건형("쓰면", "켜 두면", "~할 때")으로 그리는 것은 허용한다. 장면 하나는 사실 하나에서 나온다.
+구매 사실·사용 기간·내돈내산·"N주 써보니"·가족 반응은 여전히 금지다.`
+    : '';
 
   return `
 ═══════════════════════════════════════════════════════════
@@ -88,7 +97,7 @@ export function buildReviewGuardBlock(ctx: ReviewGuardContext): string {
 
 [1단계 — 입력 데이터 인벤토리]
 지금 사용 가능한 입력: **${inventoryLine}**
-리뷰 데이터는 없습니다. 이것이 이 가드가 발동한 이유입니다.
+리뷰 데이터는 없습니다. 이것이 이 가드가 발동한 이유입니다.${optInLine}
 
 **입력에 없는 정보는 단 한 글자도 추가하지 마세요.**
 다음은 모두 입력에 없으므로 **언급 금지**: 제조사 보증/AS 기간, 배송 정책,

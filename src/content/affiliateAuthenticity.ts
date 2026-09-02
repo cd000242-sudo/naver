@@ -10,6 +10,8 @@ export interface AffiliateEvidenceInput {
   readonly productReviews?: unknown;
   readonly productSpec?: unknown;
   readonly productPrice?: unknown;
+  /** [2026-09-02 사장님 결정 (a)] "AI가 경험을 대신 써주기" 옵트인 — 사용 장면 서술만, 구매·기간 주장은 계속 금지. */
+  readonly aiExperienceGeneration?: unknown;
 }
 
 export interface AffiliateEvidenceClassification {
@@ -406,10 +408,31 @@ export function buildAffiliateAuthenticityContract(input: AffiliateEvidenceInput
 작성자는 이 제품을 사용하지 않았다. 제품 페이지를 대신 꼼꼼히 읽어준 친구처럼 스펙이 생활에서 무엇을 뜻하는지 풀어준다.
 사용 장면을 사실처럼 꾸미거나 후기·인기·만족도를 암시하지 않는다. 정보가 부족하면 짧게 쓰고 확인할 항목을 남긴다.`;
 
+  /*
+   * [2026-09-02 사장님 결정 (a)] 쇼핑 모드에서 AI 경험 생성.
+   * "구매자 의견은 후기를 직접 보면 보인다. 없는 실사용 정보를 사람들이 원한다." 옵트인이 켜졌는데도
+   * 이 계약과 쇼핑 프롬프트가 "FIRST_PARTY 아니면 1인칭 금지" 를 못 박아 "구매자 의견이 있어요" 로만 나왔다.
+   * 근거 모드는 그대로 둔다 — 자료는 늘어나지 않는다. 허용하는 것은 자료에서 도출한 사용 장면의 현재형 서술뿐이고,
+   * 구매 사실·사용 기간·내돈내산 같은 검증 불가 주장은 계속 금지다(범위 b 는 사장님이 고르지 않았다).
+   */
+  const aiExperienceOptIn = evidence.mode !== 'first_party' && input.aiExperienceGeneration === true;
+  const optInBlock = aiExperienceOptIn
+    ? `
+[AI 경험 옵트인 — 사용 장면 서술 (사용자가 켬)]
+위 근거 모드는 그대로다. 자료가 늘어난 것이 아니라 서술 방식이 열린 것이다.
+허용: 확인된 스펙·구성·후기에서 도출한 사용 장면을 1인칭 현재형·조건형으로 그린다 —
+  "착용하면 발끝부터 공기가 차오른다", "누워서 쓰면 소음이 거슬리지 않는다", "지퍼를 올릴 때 한 번 걸린다".
+  장면 하나는 자료의 사실 하나에서 나온다. 사실이 없으면 장면도 없다.
+금지(그대로): 구매 사실·구매 시점·사용 기간·내돈내산·"N주 써보니"·가족 반응·다른 제품과의 사용 비교처럼
+  검증할 수 없는 주장. 후기 문장을 작성자 체험으로 바꾸지 않는다. 자료에 없는 수치·기관명·효과는 만들지 않는다.
+형태: 과거 체험 주장("써보니", "받아보니", "한 달 쓰고")은 쓰지 않고, 현재형·조건형("쓰면", "켜 두면", "~할 때")으로 쓴다.
+이 옵트인이 켜진 동안 위 모드의 "사용 장면을 사실처럼 꾸미지 않는다"·"제가 써보니를 쓰지 않는다" 는
+현재형 장면 서술에는 적용하지 않는다. 구매·기간 주장 금지는 그대로다.`
+    : '';
   return `[AFFILIATE AUTHENTICITY CONTRACT — ${evidence.mode.toUpperCase()}]
 이 계약은 앞의 쇼핑·SEO·톤·후킹 지시와 충돌할 때 항상 우선한다.
 
-${modeInstruction}
+${modeInstruction}${optInBlock}
 
 [친한 친구에게 말하는 글의 기준]
 1. 인사나 글 진행 안내 없이, 독자가 가장 망설이는 구체 조건부터 말한다.
