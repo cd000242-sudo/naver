@@ -20,6 +20,7 @@
  */
 import { toHashtagCandidate } from './hashtagCandidateFilter.js';
 import { extractKoreanFactTokens } from './koreanFactTokens.js';
+import { isContentWord } from './searchQueryNarrowing.js';
 
 /** Longer queries drift: Naver tokenizes them and matches on the generic words. */
 const MAX_QUERY_WORDS = 4;
@@ -208,4 +209,49 @@ export function filterOnTopicSupplement(
     // 검사 실패로 보강을 잃지 않는다 — 원래 동작으로 돌아간다.
     return { text: String(supplementText || ''), kept: 1, dropped: 0, overflowDropped: 0 };
   }
+}
+
+/**
+ * 주제 적합도를 통과/탈락이 아니라 정도로 잰다.
+ *
+ * [2026-09-02 실측] isOnTopicForKeyword 는 토큰 2개면 통과시킨다. 그 판정 자체는 옳다 —
+ * 실외기 화재 기사도 실제로 아파트와 베란다를 말하므로 버릴 근거가 없다.
+ * 문제는 통과한 자료가 **얼마나 실릴지**를 아무도 정하지 않는다는 것이었다.
+ *
+ *   "장마 아파트 베란다 창문" 으로 모은 자료의 절반이
+ *   실외기 화재 통계와 지하주차장 침수 대피였다.
+ *   창문 글인데 본문 절반이 창문이 아니다.
+ *
+ * 게이트를 조이면 자료가 마른다. 대신 **머리 명사**를 본다 —
+ * 한국어 명사구의 머리는 마지막 실질 명사다("아파트 베란다 창문" 의 머리는 창문).
+ * 머리를 말하는 자료가 그 글의 본류고, 나머지는 곁가지다.
+ * 곁가지를 버리지 않고 몫만 제한하면 자료량은 지키면서 주제는 안 샌다.
+ */
+export interface TopicMatch {
+  /** 주제어 중 본문에 나타난 비율. 0~1 */
+  readonly score: number;
+  /** 머리 명사가 본문에 있는가 */
+  readonly hasHead: boolean;
+}
+
+export function scoreTopicMatch(text: string | undefined, keyword: string | undefined): TopicMatch {
+  const body = String(text || '');
+  const tokens: string[] = [];
+  for (const word of String(keyword || '').split(/[^가-힣A-Za-z0-9]+/u)) {
+    const token = toPromiseTokenFromKeyword(word);
+    if (token && isContentWord(token)) tokens.push(token);
+  }
+  if (!body.trim() || tokens.length === 0) {
+    // 판정할 수 없으면 본류로 본다 — 볼 수 없는 가드는 움직이지 않는다.
+    return { score: 1, hasHead: true };
+  }
+
+  const matched = tokens.filter((token) => body.includes(token)).length;
+  const head = tokens[tokens.length - 1];
+  return { score: matched / tokens.length, hasHead: body.includes(head) };
+}
+
+/** 이 글의 본류인가. 머리 명사를 말하고 주제어 절반 이상이 나와야 한다. */
+export function isPrimaryTopicMaterial(match: TopicMatch): boolean {
+  return match.hasHead && match.score >= 0.5;
 }

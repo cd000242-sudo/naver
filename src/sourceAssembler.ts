@@ -5,7 +5,7 @@ import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
 import { orderFullTextCandidates } from './content/fullTextCandidateOrder.js';
 import { auditSourceMaterial, classifySourceKind } from './content/sourceMaterialAudit.js';
 import { buildMaterialTierNotice } from './content/materialTierNotice.js';
-import { buildSupplementQuery, filterOnTopicSupplement, isOnTopicForKeyword } from './content/supplementTopicGuard.js';
+import { buildSupplementQuery, filterOnTopicSupplement, isOnTopicForKeyword, isPrimaryTopicMaterial, scoreTopicMatch } from './content/supplementTopicGuard.js';
 import Parser from 'rss-parser';
 import * as iconv from 'iconv-lite';
 import type { ContentSource, ContentGeneratorProvider, ArticleType } from './contentGenerator.js';
@@ -1636,6 +1636,18 @@ async function collectNaverSearchContent(
 // This fetches the FULL TEXT of top-ranked posts so the model has concrete
 // facts to cite. Failures are non-fatal — callers fall back to snippets alone.
 const FULLTEXT_TOTAL_BUDGET_CHARS = 8000;
+/*
+ * [2026-09-02 실측] 곁가지 자료의 몫 상한.
+ *
+ * "장마 아파트 베란다 창문" 으로 모은 자료의 절반이 실외기 화재와 지하주차장 침수였다.
+ * 주제 게이트(isOnTopicForKeyword)는 그것들을 정상 통과시킨다 — 실제로 아파트와 베란다를
+ * 말하니 버릴 근거가 없다. 문제는 통과한 뒤 얼마나 실릴지를 아무도 정하지 않은 것이다.
+ * URL 모드는 MAX_SUPPLEMENT_RATIO 로 보강 자료 비중을 잡는데 키워드 모드에는 대응물이 없었다.
+ *
+ * 게이트를 조이면 자료가 마른다. 머리 명사(창문)를 말하는 본류는 예산 안에서 다 받고,
+ * 곁가지는 예산의 이 비율까지만 받는다. 초과분은 버리고 건수를 남긴다. 발행은 막지 않는다.
+ */
+const FULLTEXT_SECONDARY_RATIO = 0.3;
 const FULLTEXT_PER_ARTICLE_CHARS = 2500;
 const FULLTEXT_MAX_SUCCESS = 5;
 
@@ -1719,6 +1731,8 @@ export async function collectTopArticleFullTexts(
     let totalChars = 0;
     let staleParts = 0;   // [2026-08-11] 시점 경고를 붙인 자료 수
     let offTopicSkipped = 0;  // [2026-08-27] 검색어와 주제가 다른 자료 수
+    let secondaryChars = 0;     // [2026-09-02] 곁가지(머리 명사 없음) 자료가 차지한 글자 수
+    let secondaryDropped = 0;   // [2026-09-02] 곁가지 몫 초과로 버린 자료 수
 
     let stoppedByDeadline = false;
     for (const candidate of candidates) {
@@ -1754,6 +1768,21 @@ export async function collectTopArticleFullTexts(
           offTopicSkipped += 1;
           continue;
         }
+        /*
+         * [2026-09-02] 통과한 자료를 본류와 곁가지로 나눈다.
+         * 본류(머리 명사를 말하고 주제어 절반 이상)는 예산 안에서 다 받는다.
+         * 곁가지는 예산의 FULLTEXT_SECONDARY_RATIO 까지만 — 그래야 창문 글의 절반이
+         * 화재 통계로 채워지지 않는다. 버린 건수는 로그로 남겨 추적 가능하게 한다.
+         */
+        const topicMatch = scoreTopicMatch(`${article.title || candidate.title || ''} ${content}`, keyword);
+        const excerptLength = Math.min(content.length, FULLTEXT_PER_ARTICLE_CHARS);
+        if (!isPrimaryTopicMaterial(topicMatch)) {
+          if (secondaryChars + excerptLength > FULLTEXT_TOTAL_BUDGET_CHARS * FULLTEXT_SECONDARY_RATIO) {
+            secondaryDropped += 1;
+            continue;
+          }
+          secondaryChars += excerptLength;
+        }
         const excerpt = content.substring(0, FULLTEXT_PER_ARTICLE_CHARS);
         const title = article.title || candidate.title || '';
         /**
@@ -1782,6 +1811,9 @@ export async function collectTopArticleFullTexts(
     if (parts.length === 0) return { text: '', count: 0, urls: [] };
     if (offTopicSkipped > 0) {
       logger(`[플랫폼 콘텐츠 수집] ⚠️ 주제 밖 자료 ${offTopicSkipped}건 제외 (검색어의 고유명사가 하나도 없음)`);
+    }
+    if (secondaryDropped > 0) {
+      logger(`[플랫폼 콘텐츠 수집] ⚖️ 곁가지 자료 ${secondaryDropped}건 제외 (주제 머리 명사가 없어 예산의 ${Math.round(FULLTEXT_SECONDARY_RATIO * 100)}% 몫 초과)`);
     }
     if (staleParts > 0) {
       logger(`[플랫폼 콘텐츠 수집] 🕐 1년 넘은 자료 ${staleParts}건 — 시점 경고를 붙였습니다 (작년 조건이 그대로 실리지 않도록)`);
