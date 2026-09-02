@@ -807,6 +807,28 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
 
   // Remove empty strings to avoid clutter
   if (!cachedConfig) cachedConfig = {};
+  /*
+   * [2026-09-02 실측] 기동 직후 config:set 이 한 번 터졌다.
+   *   Cannot read properties of null (reading 'configEncrypted')
+   *     at migrateConfigToEncrypted ← _saveConfigImpl
+   *
+   * 저장 본체는 _enqueueSaveConfig 로 직렬화되지만, saveConfig 의 __userId 프롤로그는
+   * v2.10.273 의도대로 큐 밖에서 동기로 cachedConfig = null 을 한다. 그래서 이 본체가
+   * 아래 await(_retryOnEBUSY 두 번)에 멈춘 사이 두 번째 호출의 프롤로그가 캐시를 비우면,
+   * 여기서 만든 병합본이 사라진 채 migrate 블록이 null 을 읽는다.
+   *
+   * 프롤로그를 큐에 넣으면 v2.10.273(동시 loadConfig 가 새 계정을 즉시 보게)이 깨진다.
+   * 대신 이 본체가 await 뒤에 공유 캐시를 다시 읽지 않게 한다 — 지금 완성한 병합본을
+   * 여기서 붙들고, 디스크에는 그것을 쓴다. filePath 도 이미 이 시점의 계정으로 굳었다.
+   *
+   * 흔한 수정(cachedConfig ?? {})은 더 나쁘다 — 바로 뒤 writeFile 이 설정 파일을 {} 로
+   * 덮어 API 키 · 네이버 계정이 전부 사라진다. 그래서 스냅샷이 비었는데 직전 설정에는
+   * 키가 있었다면 쓰지 않고 소리 내어 멈춘다.
+   */
+  const configToPersist: AppConfig = cachedConfig;
+  if (Object.keys(configToPersist).length === 0 && Object.keys(previousConfig).length > 0) {
+    throw new Error('[Config] 저장 중단: 병합본이 비어 있어 기존 설정을 빈 파일로 덮어쓸 뻔했다');
+  }
   Object.keys(cachedConfig).forEach((key) => {
     const typedKey = key as keyof AppConfig;
     const value = cachedConfig?.[typedKey];
@@ -968,7 +990,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
   //   - failure는 silent fallback 금지 (feedback_no_fallback) → console.error.
   {
     const { config: persistedConfig, report } = migrateConfigToEncrypted(
-      cachedConfig as unknown as Record<string, unknown>,
+      configToPersist as unknown as Record<string, unknown>,
     );
     if (report.failures.length > 0) {
       console.error(`[Config] ❌ safeStorage 암호화 실패 ${report.failures.length}건 (평문 그대로 저장):`);

@@ -575,3 +575,71 @@ describe('Risk-10: EBUSY retry / backoff on async readFile', () => {
     vi.useRealTimers();
   });
 });
+
+/**
+ * [2026-09-02 실측] 기동 직후 config:set 이 한 번 터졌다.
+ *   Cannot read properties of null (reading 'configEncrypted')
+ *     at migrateConfigToEncrypted ← _saveConfigImpl
+ *
+ * 저장 본체는 _enqueueSaveConfig 로 직렬화되지만, saveConfig 의 __userId 프롤로그는
+ * v2.10.273 의도대로 큐 밖에서 동기로 cachedConfig = null 을 한다.
+ * 첫 저장이 디스크 읽기 await 에 멈춘 사이 계정 전환 저장이 들어오면,
+ * 첫 저장이 완성해 둔 병합본이 사라진 채 migrate 블록이 null 을 읽는다.
+ *
+ * 흔한 수정(cachedConfig ?? {})은 더 나쁘다 — 바로 뒤 writeFile 이 파일을 {} 로 덮는다.
+ * 소스 계약(스냅샷 · 빈 파일 방어)은 configSaveSnapshotContract.test.ts 가 잠근다 —
+ * 이 파일은 fs 를 diskStore 로 모킹해서 소스를 읽을 수 없다.
+ */
+describe('저장 도중 계정 전환이 끼어들어도 (경합)', () => {
+  // 이 파일은 describe 마다 자기 모킹을 다시 설치한다. vi.clearAllMocks 는 호출 기록만
+  // 지우고 구현은 남기므로, 앞 describe 가 남긴 "EBUSY: always busy" 가 여기로 흘러온다.
+  const diskRead = async (pth: string) => {
+    if (diskStore[pth] === undefined) {
+      const err: any = new Error(`ENOENT: ${pth}`);
+      err.code = 'ENOENT';
+      throw err;
+    }
+    return diskStore[pth];
+  };
+  const diskWrite = async (pth: string, data: string) => { diskStore[pth] = data; };
+
+  beforeEach(() => {
+    clearDisk();
+    vi.clearAllMocks();
+    (fsMod.default.readFile as any).mockImplementation(diskRead);
+    (fsMod.default.writeFile as any).mockImplementation(diskWrite);
+  });
+
+  it('첫 저장이 null 을 만나 죽지 않고, 병합본을 그대로 쓴다', async () => {
+    writeDisk(SETTINGS_PATH, { existingKey: 'keep-me', anotherKey: 'also-keep' });
+
+    // 첫 저장을 디스크 읽기에서 매달아 둔다 — 그 사이가 경합 창이다
+    let release!: () => void;
+    const parked = new Promise<void>((r) => { release = r; });
+    (fsMod.default.readFile as any).mockImplementationOnce(async (pth: string) => {
+      await parked;
+      return diskRead(pth);
+    });
+
+    const first = saveConfig({ raceKeyA: 'v1' } as any);
+    await new Promise((r) => setTimeout(r, 0)); // 큐 안의 첫 저장이 await 에 도달할 시간
+
+    // 두 번째: 계정 전환 — 프롤로그가 큐 밖에서 동기로 cachedConfig = null 을 한다
+    const second = saveConfig({ __userId: 'race-account', raceKeyB: 'v2' } as any);
+
+    release();
+    await expect(first).resolves.toBeDefined();
+    await expect(second).resolves.toBeDefined();
+
+    // 첫 저장이 쓴 파일이 빈 객체가 아니어야 한다.
+    // 경로를 박지 않는다 — 이 파일은 모듈 상태(_activeUserId)를 테스트끼리 공유해서
+    // 앞 테스트가 남긴 계정에 따라 첫 저장이 계정별 파일에 갈 수 있다(머리 주석 참고).
+    // 계약은 "병합본이 어딘가에 비어 있지 않게 쓰였다" 다.
+    const writtenFiles = Object.values(diskStore).map((raw) => JSON.parse(raw) as Record<string, any>);
+    const withFirst = writtenFiles.find((obj) => obj.raceKeyA === 'v1');
+    expect(withFirst, '첫 저장의 병합본이 어느 파일에도 없다').toBeDefined();
+    expect(Object.keys(withFirst!).length).toBeGreaterThan(1);
+    // 어떤 파일도 {} 로 덮이지 않았어야 한다
+    for (const obj of writtenFiles) expect(Object.keys(obj).length).toBeGreaterThan(0);
+  });
+});
