@@ -44,7 +44,7 @@ export function annotateSearchOnlyCompounds(subKeywords: string): string {
       const token = part.trim();
       if (!isSearchOnlyCompound(token)) return part;
       touched = true;
-      return `${token}(검색용 조합어 — 본문 문장에는 그대로 쓰지 말고 띄어 쓴 말로 푼다)`;
+      return `${token}(검색용 조합어 — 본문에서 이 표기를 언급하거나 설명하지 마라. 뜻만 띄어 쓴 말로 쓴다)`;
     })
     .join(',');
 

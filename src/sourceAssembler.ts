@@ -1601,6 +1601,11 @@ async function collectNaverSearchContent(
    * 질의를 고쳤어도 검색엔진은 늘 무관한 것을 섞어 준다. 문은 그대로 달아 둔다.
    */
   let offTopicDropped = 0;
+  // [2026-09-02] 스니펫 경로에도 곁가지 몫을 건다. 전문 수집에만 걸었더니 홈판 글이
+  //   스니펫만으로 에버랜드 정기권 · 크린토피아 세일 섹션을 만들었다. 같은 규칙, 같은 비율.
+  let snippetPrimaryChars = 0;
+  let snippetSecondaryChars = 0;
+  let snippetSecondaryDropped = 0;
   for (const result of allResults) {
     if (!isOnTopicForKeyword(`${result.title} ${result.description}`, query)) {
       offTopicDropped += 1;
@@ -1612,6 +1617,18 @@ async function collectNaverSearchContent(
       // [2026-08-28] 시점을 재료에 붙인다. 스니펙은 "오는 29일"처럼 발행일 기준
       //   상대 표현을 쓰기 때문에, 기사 날짜가 없으면 모델이 월을 복원할 수 없다.
       const sourceDate = resolveSourceDate(result as { postdate?: unknown; pubDate?: unknown });
+      const snippetMatch = scoreTopicMatch(`${result.title} ${result.description}`, query);
+      const snippetLen = String(result.description || '').length;
+      if (isPrimaryTopicMaterial(snippetMatch)) {
+        snippetPrimaryChars += snippetLen;
+      } else {
+        const cap = (snippetPrimaryChars + snippetSecondaryChars + snippetLen) * FULLTEXT_SECONDARY_RATIO;
+        if (snippetSecondaryChars + snippetLen > cap) {
+          snippetSecondaryDropped += 1;
+          continue;
+        }
+        snippetSecondaryChars += snippetLen;
+      }
       cleanedResults.push(withFreshnessLabel(`【${result.title}】\n${result.description}`, sourceDate));
     }
   }
@@ -1622,6 +1639,9 @@ async function collectNaverSearchContent(
   console.log(`[네이버 API] ✅ ${combinedContent.length}자 수집 완료! (${elapsed}ms, ${sources.join(', ')})`);
   if (offTopicDropped > 0) {
     console.log(`[네이버 API] ⛔ 주제와 무관한 결과 ${offTopicDropped}건 버림`);
+  }
+  if (snippetSecondaryDropped > 0) {
+    console.log(`[네이버 API] ⚖️ 곁가지 스니펫 ${snippetSecondaryDropped}건 버림 (주제 머리 명사 없음, 몫 초과)`);
   }
 
   return {
@@ -1857,7 +1877,7 @@ export async function collectTopArticleFullTexts(
     });
     return {
       text: `${tierNotice ? `${tierNotice}\n\n` : ''}=== 사실 자료 (수치·조건·절차는 이 범위에서만 사용) ===
-※ 이 묶음의 이름과 번호표는 내부 표기다. 본문에 옮겨 적지 마라 — \"상위 글에서\", \"참고 자료에 따르면\" 같은 말을 독자는 알아듣지 못한다. 출처를 밝힐 때는 실제 출처로 쓴다: \"후기에서는\", \"블로그 사례에서는\", \"삼성 안내에는\".\n※ 대괄호·【】 안의 글 제목은 **다른 사람이 쓴 글의 이름**이다. 근거로 인용하거나 본문에 옮겨 적지 마라 — 남의 제목을 끌어오면 독자에게는 뜬금없다. 쓸 것은 제목이 아니라 그 아래 본문의 수치·조건·절차다.\n${parts.join('\n\n')}`,
+※ 이 묶음의 이름과 번호표, 그리고 이 안내문 자체는 내부 표기다. 본문에 옮겨 적지 마라. 출처를 밝혀야 하면 그 자료가 실제로 어디서 왔는지 — 그 매체 이름, 그 기관 이름, 그 글의 성격 — 을 있는 그대로 쓴다. 여기 적힌 낱말을 예시로 삼아 베끼지 마라.\n※ 대괄호·【】 안의 글 제목은 **다른 사람이 쓴 글의 이름**이다. 근거로 인용하거나 본문에 옮겨 적지 마라 — 남의 제목을 끌어오면 독자에게는 뜬금없다. 쓸 것은 제목이 아니라 그 아래 본문의 수치·조건·절차다.\n${parts.join('\n\n')}`,
       count: parts.length,
       urls: usedUrls,
     };

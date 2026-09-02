@@ -224,7 +224,9 @@ function buildPreWritingAnalysisDirective(mode: PromptMode, usesIssueStorySkelet
   return `📌 [모든 모드 — 제목보다 추론이 먼저다]
 - preWritingAnalysis 를 반드시 가장 먼저 채운다. 크롤링 자료를 분석하기 전에 제목부터 쓰지 않는다.
 - whyNow 는 주어진 단서(뉴스 시점·상위글 반복 지점·지식iN 질문·검색량 지표)를 실제로 훑어 근거를 명시한다. 크롤링과 검색 API 가 이미 단서를 모아 왔다 — 훑지 않고 건너뛰지 않는다. 자료 밖 트렌드 이유는 지어내지 않는다.
-- [날짜 대조] dateBasis 를 본문보다 먼저 채운다. 자료의 날짜를 todayIs 와 하나씩 대보고
+- [날짜 대조] dateBasis 는 너의 내부 판정이다. 본문에 서술하지 마라 — 오늘이 며칠인지 알려주거나,
+  연도를 견주는 문장(이전 해 자료를 단순 비교하기보다 …)을 쓰지 마라. 판정은 시제로만 드러난다.
+  dateBasis 를 본문보다 먼저 채운다. 자료의 날짜를 todayIs 와 하나씩 대보고
   alreadyPast · notYetHappened 로 가른 뒤에 쓴다. 본문은 그 판정과 어긋나면 안 된다:
   · alreadyPast 의 일은 과거형으로 쓴다. 지난해 것이면 연도를 밝힌다("2025년 10월에 열린 행사입니다").
   · notYetHappened 의 기간은 실적·결과·반응을 쓰지 않는다. 아직 일어나지 않았으므로 결과가 없다.

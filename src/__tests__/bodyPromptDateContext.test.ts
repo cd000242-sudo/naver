@@ -118,7 +118,10 @@ describe('dateBasis — 쓰기 전에 날짜를 오늘과 대보게 만든다', 
 
   it('그 판정을 본문에 어떻게 쓰라는 계약이 함께 간다', () => {
     const prompt = build(`seo`);
-    expect(prompt).toContain('[날짜 대조] dateBasis 를 본문보다 먼저 채운다');
+    // [2026-09-02] M2 이후 [날짜 대조] 첫 줄은 "내부 판정 · 서술 금지" 선언이고,
+    //   "본문보다 먼저 채운다" 는 그 뒤에 온다. 계약이 있는지를 보는 것이 이 단언의 뜻이다.
+    expect(prompt).toContain('[날짜 대조] dateBasis 는 너의 내부 판정이다');
+    expect(prompt).toContain('dateBasis 를 본문보다 먼저 채운다');
     expect(prompt).toContain('alreadyPast 의 일은 과거형으로 쓴다');
     expect(prompt).toContain('notYetHappened 의 기간은 실적·결과·반응을 쓰지 않는다');
     expect(prompt).toContain('relativeExpressions 는 본문에 그대로 옮기지 않는다');
