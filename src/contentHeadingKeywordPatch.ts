@@ -1,4 +1,5 @@
 import { decideKeywordPrefix } from './content/keywordTitlePrefixPolicy';
+import { isContentWord } from './content/searchQueryNarrowing.js';
 
 export interface HeadingKeywordPatchHeading {
   title?: string;
@@ -137,8 +138,25 @@ export function resolveHeadingKeywordCore(primaryKeyword: string): HeadingKeywor
 
   const tokens = raw.split(/[\s,/\-]+/).map((token) => token.trim()).filter(Boolean);
   const meaningful = tokens.filter((token) => stripKoreanTargetParticle(token).length >= 2);
-  // 관형형이 아닌 토큰 우선(명사 후보). 전부 관형형이면 기존 동작 폴백(첫 유의미 토큰).
-  const firstRaw = meaningful.find((token) => !isVerbalModifierToken(stripKoreanTargetParticle(token)))
+  /*
+   * [2026-09-02 실측] "9월" 이 소제목 넷에 전부 앞에 박혔다.
+   *   메인키워드 "9월 가을 환절기 침구 교체: 구스 이불 vs 차렵이불 세탁"
+   *   → core="9월" → "9월 교체의 구스 선택" (한국어로 읽히지 않는다)
+   * 감지기도 잡았다 — [HeadingVariety] 소제목 4개가 전부 숫자를 앞세웁니다.
+   *
+   * 숫자 시점 표기는 문법적으로 수식어다. "9월 침구" 의 머리는 침구다.
+   * 계절·시점 낱말도 마찬가지다. 그 판정은 searchQueryNarrowing 이 이미 갖고 있으므로
+   * 목록을 두 벌로 만들지 않고 가져다 쓴다.
+   *
+   * 셋 다 통과하는 토큰이 없으면 기존 동작으로 떨어진다(fail-open) —
+   * 핵심어를 못 고르는 것보다 예전처럼 고르는 편이 낫다.
+   */
+  const isUsableCore = (token: string): boolean => {
+    const bare = stripKoreanTargetParticle(token);
+    return !isVerbalModifierToken(bare) && isContentWord(bare);
+  };
+  const firstRaw = meaningful.find(isUsableCore)
+    || meaningful.find((token) => !isVerbalModifierToken(stripKoreanTargetParticle(token)))
     || meaningful[0]
     || raw;
   const core = stripKoreanTargetParticle(firstRaw);

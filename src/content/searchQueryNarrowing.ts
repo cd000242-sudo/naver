@@ -60,7 +60,15 @@ function stripParticles(word: string): string {
   return word.replace(/[,·…]/gu, '').trim();
 }
 
-function isContentWord(word: string): boolean {
+/**
+ * 뜻을 보태는 낱말인가.
+ *
+ * [2026-09-02] 소제목 핵심어 선택(contentHeadingKeywordPatch)도 같은 판정을 쓴다.
+ * 거기서 "9월" 이 핵심어로 뽑혀 소제목 앞에 박혔는데, 시점어를 거르는 규칙을
+ * 그쪽에 따로 만들면 목록이 두 벌이 된다 — 이 저장소가 반복해서 겪은 실패다.
+ * 판정은 여기 하나만 둔다.
+ */
+export function isContentWord(word: string): boolean {
   const w = stripParticles(word);
   if (w.length < 2) return false;
   if (TIME_TOKEN.test(w)) return false;
