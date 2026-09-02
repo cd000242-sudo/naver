@@ -162,3 +162,82 @@ export function buildKeywordInferencePrompt(rawText: string, sourceTitle?: strin
     body,
   ].filter(Boolean).join('\n');
 }
+
+/**
+ * [2026-09-02 사장님 승인 ②] 쇼핑 경로의 검색량 기반 키워드 선정.
+ * 쇼핑 URL 흐름에서는 상위호환 1단 분석이 메인 키워드를 모델 판단으로만 정한다(닥터웰: "닥터웰 종아리 마사지기", 검색량 80).
+ * 사람들이 실제로 치는 상품 검색어(품목형·브랜드+품목형)를 후보로 받아 검색량으로 고른다.
+ */
+export function buildShoppingKeywordInferencePrompt(rawText: string, productName: string, existingKeyword: string): string {
+  const body = String(rawText || '').slice(0, 3000);
+  return [
+    '아래 상품 정보를 읽고, **이 상품을 사려는 한국 사람이 네이버 검색창에 실제로 칠 말**을 골라라.',
+    '',
+    '규칙:',
+    '- 품목형(브랜드 없이: "종아리 마사지기 추천", "다리 공기압 마사지기")과 브랜드+품목형("닥터웰 종아리 마사지기")을 섞어라.',
+    '- 옵션·색상·모델코드·스토어명·수식어는 넣지 마라. 사람들은 그런 말로 검색하지 않는다.',
+    '- 검색량이 많을 것 같은 순서로 최대 5개. 한 줄에 하나.',
+    '',
+    `상품명: ${String(productName || '').trim()}`,
+    `현재 키워드: ${String(existingKeyword || '').trim()}`,
+    '',
+    '상품 정보:',
+    body,
+  ].join('\n');
+}
+
+export interface ShoppingKeywordPick {
+  readonly keyword: string;
+  readonly replaced: boolean;
+  readonly candidates: readonly string[];
+  readonly reason: string;
+}
+
+/** 품목의 머리 명사 — 기존 키워드의 마지막 어절. 후보는 이것을 품어야 상품 검색어다("후기"·"소음" 같은 곁말 배제). */
+export function shoppingHeadNoun(existingKeyword: string): string {
+  const parts = String(existingKeyword || '').trim().split(/\s+/).filter(Boolean);
+  return parts.length ? parts[parts.length - 1] : '';
+}
+
+/**
+ * 기존 키워드를 검색량이 확실히 더 큰 상품 검색어로만 바꾼다.
+ *   · 검색량을 하나도 못 구했으면 바꾸지 않는다 — 모델 판단만으로 바꾸는 것은 자동 폴백과 같은 부류다.
+ *   · 머리 명사를 품지 않는 후보는 버린다.
+ *   · 기존보다 검색량이 큰 후보가 없으면 기존 유지.
+ */
+export function pickShoppingSearchKeyword(
+  existingKeyword: string,
+  candidates: readonly string[],
+  volumes: readonly KeywordVolume[],
+): ShoppingKeywordPick {
+  const existing = String(existingKeyword || '').trim();
+  const head = shoppingHeadNoun(existing);
+  const usable = candidates
+    .map((c) => String(c || '').trim())
+    .filter((c) => c && isUsableKeyword(c) && c !== existing && (!head || c.includes(head)));
+  const byKeyword = new Map<string, number>();
+  for (const v of volumes) {
+    const key = String(v?.keyword || '').trim();
+    if (!key || typeof v?.monthlySearches !== 'number' || !Number.isFinite(v.monthlySearches) || v.monthlySearches <= 0) continue;
+    byKeyword.set(key, Math.max(byKeyword.get(key) ?? 0, v.monthlySearches));
+  }
+  const existingVolume = byKeyword.get(existing) ?? null;
+  let best = '';
+  let bestVolume = -1;
+  for (const c of usable) {
+    const v = byKeyword.get(c);
+    if (typeof v === 'number' && v > bestVolume) { best = c; bestVolume = v; }
+  }
+  if (!best || bestVolume <= 0) {
+    return { keyword: existing, replaced: false, candidates: usable, reason: '검색량을 구한 후보 없음 — 기존 유지' };
+  }
+  if (existingVolume !== null && bestVolume <= existingVolume) {
+    return { keyword: existing, replaced: false, candidates: usable, reason: `기존 키워드 검색량(${existingVolume.toLocaleString()})이 더 크거나 같음 — 유지` };
+  }
+  return {
+    keyword: best,
+    replaced: true,
+    candidates: usable,
+    reason: `검색량 ${bestVolume.toLocaleString()}회/월 (기존 ${existingVolume === null ? '미확인' : existingVolume.toLocaleString()}) — 교체`,
+  };
+}

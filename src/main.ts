@@ -5946,6 +5946,8 @@ ipcMain.handle(
             (source as any).metadata = {
               ...((source as any).metadata ?? {}),
               keywords: [upgrade.mainKeyword, ...upgrade.subKeywords].slice(0, 5),
+              // [2026-09-02] 출처 표시 — 사용자가 넣은 키워드가 아니라 분석이 정한 것. 쇼핑 경로는 이 경우에만 검색량으로 재검토한다.
+              keywordOrigin: 'upgrade-analysis',
             };
           }
           console.log(`[Main] ⬆️ 상위호환 1단 분석 완료 (${upgrade.reason}) — 메인키워드=${upgrade.mainKeyword || '(유지)'}`);

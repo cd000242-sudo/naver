@@ -298,3 +298,27 @@ function computeBaseline(posts: ProbedPost[]): SerpProbeReport['baseline'] {
     medianFinalScore: median,
   };
 }
+
+/**
+ * [2026-09-02 사장님 승인 ③] 제목만 — 상위 글 제목을 생성 단계에서 미리 받아 최종 제목 게이트가 대조한다.
+ * 본문은 가져오지 않는다(프로브의 무거운 부분은 뺀다). 자격증명이 없거나 실패하면 빈 배열 — 생성을 막지 않는다.
+ */
+export async function fetchSerpTitles(keyword: string, display: number = 10): Promise<string[]> {
+  const query = String(keyword || '').trim();
+  if (!query) return [];
+  try {
+    const credentials = resolveAllNaverCredentials();
+    if (!credentials.length) return [];
+    const result = await callNaverSearch<any>(
+      'blog',
+      { query, display: Math.min(30, Math.max(1, display)), sort: 'sim' },
+      { credentials, maxAttempts: Math.max(2, credentials.length), rotateOnQuota: true, timeoutMs: 8000 },
+    );
+    if (!result.ok) return [];
+    const items = (result.data?.items || []) as Array<{ title?: string }>;
+    return items.map((it) => stripHtmlTags(String(it.title || ''))).filter((t) => t.length > 0);
+  } catch (error) {
+    console.warn('[SerpTitles] 상위 글 제목 조회 실패 — 대조 없이 진행:', (error as Error)?.message);
+    return [];
+  }
+}

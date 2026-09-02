@@ -12,6 +12,9 @@ import {
   buildKeywordInferencePrompt,
   parseKeywordCandidates,
   pickPrimaryKeyword,
+  buildShoppingKeywordInferencePrompt,
+  pickShoppingSearchKeyword,
+  type ShoppingKeywordPick,
   type KeywordVolume,
   type UrlKeywordPick,
 } from './urlModeKeywordPicker.js';
@@ -124,4 +127,42 @@ export async function createNaverVolumeLookup(): Promise<UrlKeywordDeps['lookupV
     console.warn('[UrlKeyword] 검색량 조회기 준비 실패:', (error as Error)?.message);
     return undefined;
   }
+}
+
+/** 쇼핑 경로: 검색량을 확인할 후보 수 — 기존 키워드 1 + 후보 4. */
+const MAX_SHOPPING_VOLUME_LOOKUPS = 5;
+
+/**
+ * [2026-09-02 사장님 승인 ②] 쇼핑 경로의 검색량 기반 키워드 선정 — IO 층.
+ * 상위호환 1단 분석이 정한 메인 키워드(모델 판단)를, 사람들이 실제로 치는 상품 검색어 중 검색량이
+ * 확실히 더 큰 것으로만 바꾼다. 검색량을 못 구하면(광고 키 없음) 바꾸지 않는다. 실패는 전부 "유지" 로 흡수한다.
+ */
+export async function resolveShoppingSearchKeyword(
+  rawText: string,
+  productName: string,
+  existingKeyword: string,
+  deps: UrlKeywordDeps,
+): Promise<ShoppingKeywordPick> {
+  const existing = String(existingKeyword || '').trim();
+  const keep = (reason: string): ShoppingKeywordPick => ({ keyword: existing, replaced: false, candidates: [], reason });
+  if (!existing) return keep('기존 키워드 없음');
+  if (!deps.lookupVolume) return keep('검색량 조회 불가(광고 키 없음) — 모델 판단만으로는 바꾸지 않는다');
+  let candidates: string[] = [];
+  try {
+    const answer = await deps.inferCandidates(buildShoppingKeywordInferencePrompt(rawText, productName, existing));
+    candidates = parseKeywordCandidates(answer);
+  } catch (error) {
+    console.warn('[ShoppingKeyword] 후보 추론 실패 — 기존 유지:', (error as Error)?.message);
+    return keep('후보 추론 실패');
+  }
+  const targets = [existing, ...candidates.filter((c) => c !== existing)].slice(0, MAX_SHOPPING_VOLUME_LOOKUPS);
+  const volumes: KeywordVolume[] = await Promise.all(targets.map(async (keyword) => {
+    try {
+      return { keyword, monthlySearches: await deps.lookupVolume!(keyword) };
+    } catch (error) {
+      console.warn(`[ShoppingKeyword] 검색량 조회 실패(${keyword}):`, (error as Error)?.message);
+      return { keyword, monthlySearches: null };
+    }
+  }));
+  return pickShoppingSearchKeyword(existing, candidates, volumes);
 }

@@ -350,6 +350,8 @@ import {
 // [Phase 3-17/v2.10.163] 제목 안전성 검증 helper는 contentStructuredValidator.ts에서 사용
 // [Phase 3-18/v2.10.164] 키워드 전처리 helper
 import { getPrimaryKeywordFromSource, getSecondaryKeywordsFromSource, preprocessLongKeyword } from './contentKeywordHelpers';
+import { isSearchDrivenTitleMode } from './content/titleModeObjective.js';
+import { compareTitleWithSerp } from './analytics/serpTitleBenchmark.js';
 // [SPEC-PROMPT-2026-REFRESH Phase 1/v2.10.231] 일반론 도망 감지 + 인용 토큰 밀도 측정
 import { detectPlatitudes } from './contentPlatitudeDetector';
 // [Gap C 시맨틱 / SPEC-REVIEW-001 확장] 옵트인 섹션 변별 판정 (기본 OFF, ungrounded 1회 호출)
@@ -1772,6 +1774,10 @@ export function finalizeStructuredContent(
     //   들고 있어, 스키마와 후보 선별기에 넣은 길이 계약(홈판 28~42)이 마지막 단계에서
     //   깨졌다 — 장동윤 글의 제목 후보가 전부 52~54자로 나온 이유다.
     applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword, {
+      // [2026-09-02 사장님 승인] SPEC-KEYWORD-ENDGAME Phase 1 의 앞 3자 강제(ensureFront3)가 코드·단위 테스트만 있고
+      //   부르는 곳이 없어 죽어 있었다. 검색으로 들어오는 모드(seo·mate·affiliate·business)에만 건다 —
+      //   홈판은 피드에서 싸우므로 손대지 않는다. 이미 선두면 무변경, 아니면 재배치.
+      ensureFront3: isSearchDrivenTitleMode(source.contentMode),
       maxWidth: resolveTitleLengthRange(source.contentMode as never).max,
     });
   }
@@ -1827,11 +1833,25 @@ export function finalizeStructuredContent(
          * 게이트는 selectedTitle(1번, 상품명 두 번 붙인 58자)만 보고 고쳐 써서 "그레이 본체+다리, 설명서 소음 후기"
          * 를 내보냈다. 고쳐 쓰기 전에 후보를 같은 잣대로 채점해 최고점을 고른다 — 후보가 전부 미달일 때만 고쳐 쓴다.
          */
+        /*
+         * [2026-09-02 사장님 승인 ③] 상위 글 제목 대조 — 생성 단계에서 미리 받은 source.serpTitles 로.
+         * 상위 글 다수가 검색어를 그대로/앞쪽에 두는데 후보가 그렇지 않으면 -8. 가산은 없다(결함을 가린다).
+         */
+        const serpTitles: string[] = Array.isArray((source as any).serpTitles) ? (source as any).serpTitles : [];
+        const serpLagPenalty = (text: string): number => {
+          if (finalMode !== 'affiliate' || serpTitles.length < 3) return 0;
+          const bench = compareTitleWithSerp(text, String(finalPK), serpTitles);
+          return bench.verdict === 'lagging' ? -8 : 0;
+        };
+        if (serpTitles.length >= 3) {
+          const ours = compareTitleWithSerp(finalContent.selectedTitle, String(finalPK), serpTitles);
+          console.log(`[TitleDiag] 상위 글 제목 대조(${ours.sampleSize}개): 검색어 그대로 ${Math.round(ours.intactShare * 100)}% · 앞쪽 ${Math.round(ours.frontShare * 100)}% · 내 제목 ${ours.verdict}${ours.lines[0] ? ' — ' + ours.lines[0] : ''}`);
+        }
         const candidateTexts = (Array.isArray(finalContent.titleCandidates) ? finalContent.titleCandidates : [])
           .map((c: any) => (typeof c?.text === 'string' ? c.text.trim() : ''))
           .filter((t: string) => t.length > 0 && t !== finalContent.selectedTitle);
         const scoredCandidates = candidateTexts
-          .map((text: string) => ({ text, score: evaluateTitleQuality(text, String(finalPK), finalMode, finalCategoryHint, source.articleType).score }))
+          .map((text: string) => ({ text, score: evaluateTitleQuality(text, String(finalPK), finalMode, finalCategoryHint, source.articleType).score + serpLagPenalty(text) }))
           .sort((a: { score: number }, b: { score: number }) => b.score - a.score);
         const bestCandidate = scoredCandidates[0];
         if (bestCandidate && bestCandidate.score >= 50 && bestCandidate.score > finalCheck.score) {
@@ -5578,6 +5598,32 @@ async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void>
     const existing = Array.isArray(metadata.keywords)
       ? String(metadata.keywords[0] ?? '').trim()
       : '';
+    const derivedByUpgrade = (metadata as any).keywordOrigin === 'upgrade-analysis';
+    if (existing && source.contentMode === 'affiliate' && derivedByUpgrade) {
+      /*
+       * [2026-09-02 사장님 승인 ②] 쇼핑 경로는 상위호환 1단 분석이 메인 키워드를 모델 판단으로만 정한다
+       * (닥터웰: "닥터웰 종아리 마사지기", 검색량 80). 사람들이 실제로 치는 상품 검색어 중 검색량이 확실히
+       * 더 큰 것이 있으면 그것을 메인으로, 기존은 서브로 내린다. 검색량을 못 구하면 바꾸지 않는다.
+       */
+      const shoppingApiKey = String(process.env.OPENAI_API_KEY || '').trim();
+      if (!shoppingApiKey) return;
+      const { resolveShoppingSearchKeyword, createOpenAiCandidateInferencer, createNaverVolumeLookup } =
+        await import('./content/urlModeKeywordResolve.js');
+      const lookupVolume = await createNaverVolumeLookup();
+      const productName = String((source as any).metadata?.productInfo?.name || (source as any).title || '').trim();
+      const pick = await resolveShoppingSearchKeyword(rawText, productName, existing, {
+        inferCandidates: createOpenAiCandidateInferencer(shoppingApiKey),
+        lookupVolume,
+      });
+      if (pick.replaced) {
+        const rest = (metadata.keywords as unknown[]).map((k) => String(k ?? '').trim()).filter((k) => k && k !== pick.keyword);
+        metadata.keywords = [pick.keyword, ...rest];
+        console.log(`[ShoppingKeyword] 메인 키워드 교체: "${existing}" → "${pick.keyword}" (${pick.reason}) · 후보 ${pick.candidates.join(' / ')}`);
+      } else {
+        console.log(`[ShoppingKeyword] 메인 키워드 유지: "${existing}" (${pick.reason})`);
+      }
+      return;
+    }
     if (existing) return;
 
     const apiKey = String(process.env.OPENAI_API_KEY || '').trim();
@@ -5640,6 +5686,23 @@ async function generateStructuredContentInternal(
   //   (검색량이 붙은 말은 "재난지원금"이었다.)
   //   실패는 전부 미선정으로 흡수한다 — 예전 동작 그대로이고 생성이 죽지 않는다.
   await ensureUrlModePrimaryKeyword(source);
+  /*
+   * [2026-09-02 사장님 승인 ③] 최종 제목 게이트(finalizeStructuredContent)는 동기라 여기서 상위 글 제목을 미리 받아
+   * source 에 실어 둔다. 게이트가 후보를 채점할 때 상위 글 다수와 어긋나면 감점한다. 실패하면 빈 배열 — 대조 없이 진행.
+   */
+  if (source.contentMode === 'affiliate') {
+    try {
+      const serpKeyword = getPrimaryKeywordFromSource(source);
+      if (serpKeyword) {
+        const { fetchSerpTitles } = await import('./analytics/serpProbe.js');
+        const serpTitles = await fetchSerpTitles(serpKeyword, 10);
+        (source as any).serpTitles = serpTitles;
+        console.log(`[SerpTitles] "${serpKeyword}" 상위 글 제목 ${serpTitles.length}개 확보 — 제목 게이트 대조용`);
+      }
+    } catch (serpError) {
+      console.warn('[SerpTitles] 상위 글 제목 조회 실패 — 대조 없이 진행:', (serpError as Error)?.message);
+    }
+  }
 
   // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 2] image-narrative mode branch
   if (source.contentMode === 'image-narrative') {
