@@ -73,6 +73,30 @@ const UnifiedDOMCache = {
     if (this.unifiedGenerator && hiddenValue && hiddenValue !== rawHiddenValue) {
       this.unifiedGenerator.value = hiddenValue;
     }
+    /*
+     * [2026-09-02 실측 3회] 낡은 hidden 값이 라디오를 이겨 매번 생성이 터졌다.
+     *
+     *   [ContentGenerator] ❌ TEXT_MODEL_PROVIDER_MISMATCH:
+     *       expected=claude, selected=openai-gpt41, actual=openai
+     *
+     * 라디오는 GPT(openai-gpt41)를 가리키는데 #unified-generator 에 남은 'claude' 가
+     * 아래 return 으로 먼저 나갔다. 그 값이 provider 가 되고, main 은 모델을
+     * primaryGeminiTextModel(=openai-gpt41)에서 읽으므로 벤더가 어긋나 던진다.
+     * 자동 폴백 금지라 가드는 정직하게 멈춘다 — 가드는 제 일을 했고 값이 틀렸다.
+     *
+     * 매번 자료 수집을 끝낸 뒤에 터져서, 크롤링 3만 자를 통째로 버렸다.
+     *
+     * 바로 위 주석(29~32행)이 에이전트 모드에서 같은 stale 문제를 이미 고쳐 뒀다.
+     * API 엔진 쪽만 안 고쳤을 뿐이다 — 한 곳만 고치고 나머지를 남긴 그 유형이다.
+     *
+     * 모델 라디오가 SSOT 다. 그 값이 실제로 호출할 모델을 정하므로 provider 도
+     * 거기서 나와야 한다. 어긋나면 라디오를 따르고 hidden 을 맞춰 스스로 낫게 한다.
+     */
+    if (selectedProvider && hiddenValue && hiddenValue !== selectedProvider) {
+      if (this.unifiedGenerator) this.unifiedGenerator.value = selectedProvider;
+      return selectedProvider;
+    }
+
     if (hiddenValue && hiddenValue !== 'gemini') {
       return hiddenValue; // 명시적으로 설정된 값 (perplexity, openai, claude 등)
     }
