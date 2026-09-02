@@ -197,7 +197,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-09-02 10차] 본문 프롬프트에 오늘 날짜 주입으로 재계산
         //   (지난해 행사를 "오는 17일부터" 로 옮겨 없는 행사를 안내하던 것)
         // [2026-09-02 11차] 산문 지시가 흘려서 dateBasis 스키마 필드로 형태 변경
-        '9168a85b538329a2c767e4bedc6e65332b3c91c1e6c2857d1a3303ba8cc08102',
+        // [2026-09-02 12차] 검색용 조합어 표시 배선으로 재계산
+        'dd022c41875bac4610d153ec3fce46f64acdf95d252bafbb583141b32841bcd8',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

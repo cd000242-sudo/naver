@@ -8,6 +8,7 @@ import {
 import { describeTitleLength } from './content/titleLengthPolicy.js';
 import { preprocessLongKeyword } from './contentKeywordHelpers';
 import { buildVoiceProfileBlock, sampleVoiceProfile } from './contentVoiceProfile.js';
+import { annotateSearchOnlyCompounds } from './content/searchOnlyCompoundKeyword.js';
 
 type ContentJsonPromptSource = {
   previousTitles?: string[];
@@ -530,7 +531,7 @@ ${buildPreviousTitlesBlock(source, contentMode)}${contentMode === 'business' ? b
 ${title ? `📌 원본 제목 참고: "${title}"
    → 핵심 주제와 사실 범위를 유지하면서 독자가 얻을 답·판단 기준이 보이는 제목으로 다듬는다.
 ` : ''}${buildPrimaryKeywordBlock(primaryKeyword)}
-${subKeywords ? `🔖 서브 키워드: ${subKeywords}
+${subKeywords ? `🔖 서브 키워드: ${annotateSearchOnlyCompounds(subKeywords)}
    → 독자의 실제 하위 질문을 설명할 때만 자연스럽게 사용
    → 도입부·결론부·소제목에 횟수를 맞춰 넣지 말 것` : ''}
 ${contentMode === 'homefeed' && subKeywords ? `
