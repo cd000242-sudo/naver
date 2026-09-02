@@ -15,6 +15,7 @@
 import type { EvaluationResult } from '../content/qualityEvaluator';
 import { describeSignal, formatSignalValue } from './benchmarkPlainLanguage.js';
 import type { SerpProbeReport } from './serpProbe';
+import { compareTitleWithSerp } from './serpTitleBenchmark.js';
 
 export interface GapSignal {
   signal: string;             // 신호 이름
@@ -89,6 +90,7 @@ export function analyzeBenchmark(
   ourConcreteNumbers: number,
   ourDirectExperience: number,
   serpReport: SerpProbeReport,
+  ourTitle?: string,
 ): BenchmarkReport {
   const baseline = serpReport.baseline;
   if (!baseline) {
@@ -208,6 +210,20 @@ export function analyzeBenchmark(
 
   const summary = `[${serpReport.keyword}] 우리 ${ourEvaluation.finalScore}점 vs 상위 ${serpReport.successCount}개 평균 ${baseline.avgFinalScore}점 (중앙값 ${baseline.medianFinalScore}) — ${rankingLabel}`;
 
+  /*
+   * [2026-09-02 사장님] "사람들이 제목으로 정하는 걸 참고해서 대량으로 학습하고 내 거랑 대조."
+   * 프로브가 이미 가져온 상위 글 제목과 내 제목을 형태(구절 온전성·앞쪽 배치·길이)로 대조한다.
+   * 뒤처지면 첫 번째 고칠 점으로, 맞으면 강점으로 적는다. 제목이 안 넘어오면 건너뛴다.
+   */
+  const titleBench = ourTitle && ourTitle.trim()
+    ? compareTitleWithSerp(ourTitle, serpReport.keyword, serpReport.posts.map((p) => p.item.title))
+    : null;
+  const finalUrgent = titleBench && titleBench.verdict === 'lagging'
+    ? [...titleBench.lines, ...urgentFix].slice(0, 3)
+    : urgentFix;
+  const finalStrengths = titleBench && titleBench.verdict === 'aligned'
+    ? [...strengths, ...titleBench.lines]
+    : strengths;
   return {
     keyword: serpReport.keyword,
     ourFinalScore: ourEvaluation.finalScore,
@@ -215,8 +231,8 @@ export function analyzeBenchmark(
     serpMedianFinalScore: baseline.medianFinalScore,
     ranking,
     signalGaps: gaps,
-    topPriorityFix: urgentFix,
-    strengths,
+    topPriorityFix: finalUrgent,
+    strengths: finalStrengths,
     summary,
   };
 }

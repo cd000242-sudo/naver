@@ -156,3 +156,24 @@ export function scoreOptionNoise(title: string, mode: string | undefined): Purch
     matched: combos,
   };
 }
+
+/**
+ * [2026-09-02 사장님] "팔린다 → 고객이 본다 → 노출된다 → 상위노출될 제목을 쓴다." 쇼핑 제목의 첫 임무는 검색에 걸리는 것.
+ * scoreSearchMatch 는 낱말 단위라 "닥터웰 … 마사지기, 종아리 …" 처럼 흩어져 있어도 만점이었다.
+ * 검색어는 사람들이 치는 구절이다 — 구절이 그대로 붙어 있어야 하고, 앞쪽에 있어야 한다. 형태만 본다.
+ */
+export function scoreSearchPhraseIntact(title: string, keyword: string, mode: string | undefined): PurchaseAxisVerdict {
+  if (String(mode || '').trim() !== 'affiliate') return { points: 0, reason: '', matched: [] };
+  const norm = (v: string) => String(v || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  const t = norm(title);
+  const k = norm(keyword);
+  if (!t || !k) return { points: 0, reason: '', matched: [] };
+  const at = t.indexOf(k);
+  if (at < 0) {
+    return { points: -10, reason: `검색어 구절이 토막 나 있다 — "${keyword}" 를 그대로 붙여야 검색에 걸린다`, matched: [] };
+  }
+  if (at > Math.floor(t.length * 0.4)) {
+    return { points: -4, reason: `검색어 구절이 뒤로 밀렸다 (${at}번째 글자) — 앞쪽에 둔다`, matched: [keyword] };
+  }
+  return { points: 0, reason: '', matched: [keyword] };
+}

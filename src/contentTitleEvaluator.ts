@@ -1,4 +1,4 @@
-import { scoreSearchMatch, scorePurchaseAxis, scoreOptionNoise } from './content/titleModeObjective.js';
+import { scoreSearchMatch, scorePurchaseAxis, scoreOptionNoise, scoreSearchPhraseIntact } from './content/titleModeObjective.js';
 import { measureTitleWidth } from './content/titleLengthPolicy.js';
 /**
  * [Phase 3-9/v2.10.147] contentGenerator god file decomposition — evaluateTitleQuality.
@@ -222,6 +222,13 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
     console.log(`[TitleQuality] ${purchaseAxis.points}점: ${purchaseAxis.reason}`);
   }
 
+  // [2026-09-02 사장님] 쇼핑 제목은 검색어 구절이 그대로 앞쪽에 — 노출이 먼저다.
+  const phraseIntact = scoreSearchPhraseIntact(t, keyword, mode);
+  if (phraseIntact.points !== 0) {
+    score += phraseIntact.points;
+    issues.push(phraseIntact.reason);
+    console.log(`[TitleQuality] ${phraseIntact.points}점: ${phraseIntact.reason}`);
+  }
   // [2026-09-02] 스토어 옵션 조합("그레이 본체+다리")은 제목의 결함이다 — 닥터웰 실측.
   const optionNoise = scoreOptionNoise(t, mode);
   if (optionNoise.points !== 0) {

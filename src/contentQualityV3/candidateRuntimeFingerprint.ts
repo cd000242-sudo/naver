@@ -54,6 +54,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/analytics/publishedPostTracker.ts',
   'src/analytics/serpHistory.ts',
   'src/analytics/serpProbe.ts',
+  'src/analytics/serpTitleBenchmark.ts',
   'src/analytics/unifiedSerpProbe.ts',
   'src/apiUsageTracker.ts',
   'src/auth/authFailureMessagePolicy.ts',

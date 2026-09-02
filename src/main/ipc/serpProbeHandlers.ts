@@ -127,7 +127,7 @@ export function registerSerpProbeHandlers(): void {
       const ourDirectExp = (ourEval.humanlikeScore.details as Record<string, number>).directExperience ?? 0;
 
       // 3) benchmark 비교
-      const benchmark = analyzeBenchmark(ourEval, req.ourBody.length, ourConcrete, ourDirectExp, serpReport);
+      const benchmark = analyzeBenchmark(ourEval, req.ourBody.length, ourConcrete, ourDirectExp, serpReport, req.ourTitle);
 
       return { ok: true, serpReport, benchmark };
     } catch (err) {
