@@ -132,8 +132,27 @@ export function scorePurchaseAxis(title: string, mode: string | undefined): Purc
     return { points: 0, reason: `쇼핑 구매 축: ${matched.join('·')}`, matched };
   }
   return {
-    points: -10,
+    // [2026-09-02 사장님: "문제는 팔려야 되잖아"] -10 은 너무 약했다 — 구매 축 없는 상품명 나열 제목이 95점으로 통과했다(닥터웰).
+    //   구매 축은 쇼핑 제목의 존재 이유다. 후보 채점에서 구매 축 있는 후보가 이기게 무게를 준다.
+    points: -30,
     reason: '쇼핑: 구매 축 없음 (용도·대상·공간·비교조건 중 1개 필수)',
     matched: [],
+  };
+}
+
+/**
+ * [2026-09-02 닥터웰 실측] 스토어 상품명의 옵션 조합("그레이 본체+다리")이 제목에 그대로 들어갔다.
+ * "A+B" 로 이어진 토큰은 구매 옵션 표기지 검색어도 판단도 아니다 — 독자에게 아무것도 주지 않고 자리만 먹는다.
+ * 낱말을 나열하지 않는다: '+' 로 묶인 조합이라는 형태만 본다.
+ */
+export function scoreOptionNoise(title: string, mode: string | undefined): PurchaseAxisVerdict {
+  if (String(mode || '').trim() !== 'affiliate') return { points: 0, reason: '', matched: [] };
+  const t = String(title || '').trim();
+  const combos = t.match(/[^\s+]+\+[^\s+]+/g) || [];
+  if (combos.length === 0) return { points: 0, reason: '', matched: [] };
+  return {
+    points: -20,
+    reason: `쇼핑: 상품 옵션 조합 표기가 제목에 들어감 (${combos.join(', ')})`,
+    matched: combos,
   };
 }

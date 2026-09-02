@@ -1,4 +1,4 @@
-import { scoreSearchMatch, scorePurchaseAxis } from './content/titleModeObjective.js';
+import { scoreSearchMatch, scorePurchaseAxis, scoreOptionNoise } from './content/titleModeObjective.js';
 import { measureTitleWidth } from './content/titleLengthPolicy.js';
 /**
  * [Phase 3-9/v2.10.147] contentGenerator god file decomposition — evaluateTitleQuality.
@@ -222,6 +222,13 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
     console.log(`[TitleQuality] ${purchaseAxis.points}점: ${purchaseAxis.reason}`);
   }
 
+  // [2026-09-02] 스토어 옵션 조합("그레이 본체+다리")은 제목의 결함이다 — 닥터웰 실측.
+  const optionNoise = scoreOptionNoise(t, mode);
+  if (optionNoise.points !== 0) {
+    score += optionNoise.points;
+    issues.push(optionNoise.reason);
+    console.log(`[TitleQuality] ${optionNoise.points}점: ${optionNoise.reason}`);
+  }
   const searchMatch = scoreSearchMatch(t, keyword, mode);
   if (searchMatch.points !== 0) {
     score += searchMatch.points;

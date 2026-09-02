@@ -1821,6 +1821,23 @@ export function finalizeStructuredContent(
       if (finalCheck.score < 50) {
         console.warn(`[FinalQualityGate] ⚠️ 최종 제목 품질 미달 (${finalCheck.score}점): "${finalContent.selectedTitle}"`);
         console.warn(`[FinalQualityGate]   issues: ${finalCheck.issues.join(', ')}`);
+        /*
+         * [2026-09-02 사장님: "글을 잘 적는 것도 중요한데 문제는 팔려야 되잖아"]
+         * 19:05 닥터웰 실측: 모델이 후보 3개를 냈고 2번("…종아리 압박 위치 후기", 구매 축 있음)이 멀쩡했는데,
+         * 게이트는 selectedTitle(1번, 상품명 두 번 붙인 58자)만 보고 고쳐 써서 "그레이 본체+다리, 설명서 소음 후기"
+         * 를 내보냈다. 고쳐 쓰기 전에 후보를 같은 잣대로 채점해 최고점을 고른다 — 후보가 전부 미달일 때만 고쳐 쓴다.
+         */
+        const candidateTexts = (Array.isArray(finalContent.titleCandidates) ? finalContent.titleCandidates : [])
+          .map((c: any) => (typeof c?.text === 'string' ? c.text.trim() : ''))
+          .filter((t: string) => t.length > 0 && t !== finalContent.selectedTitle);
+        const scoredCandidates = candidateTexts
+          .map((text: string) => ({ text, score: evaluateTitleQuality(text, String(finalPK), finalMode, finalCategoryHint, source.articleType).score }))
+          .sort((a: { score: number }, b: { score: number }) => b.score - a.score);
+        const bestCandidate = scoredCandidates[0];
+        if (bestCandidate && bestCandidate.score >= 50 && bestCandidate.score > finalCheck.score) {
+          console.log(`[FinalQualityGate] 후보 중 최고점 선택: "${bestCandidate.text}" (${bestCandidate.score}점) — 고쳐 쓰기 대신`);
+          finalContent.selectedTitle = bestCandidate.text;
+        } else
         if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'repair-title-after-quality-gate')) {
           // 접두사로 인한 훼손 → cleanup만 재적용하여 복구 시도
           finalContent.selectedTitle = removeDuplicatePhrasesFromTitle(
