@@ -22,6 +22,7 @@ import {
 } from './scheduler/scheduledPostLookupPolicy.js';
 // ✅ [v2.7.53] modelRegistry SSOT
 import { CLAUDE_MODELS, GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
+import { reconcileProviderWithModel } from './main/reconcileProviderWithModel.js';
 import { isDirectLaunchLewordAsset, selectLewordReleaseAsset } from './utils/lewordReleaseAssets.js';
 
 // ✅ [2026-04-03] 앱 시작 디버그 로그 (silent crash 진단용)
@@ -5906,7 +5907,26 @@ ipcMain.handle(
       console.log(`[Main] assembly 입력: keywords=${JSON.stringify(payload.assembly.keywords)}, draftText=${(payload.assembly.draftText || '').substring(0, 50)}, title=${(_asm.title || '').substring(0, 30)}, rssUrl=${payload.assembly.rssUrl || '없음'}`);
 
       const { source, warnings } = await assembleContentSource(payload.assembly);
-      const provider = payload.assembly.generator ?? source.generator ?? 'gemini';
+      /*
+       * [2026-09-02 실측 4회] TEXT_MODEL_PROVIDER_MISMATCH: expected=claude, selected=openai-gpt41
+       *
+       * 부팅이 lastActiveUserId(낡은 계정)를 먼저 복원하고 렌더러가 그 계정 값으로 라디오 · hidden 을
+       * 그린 뒤, 진짜 계정으로 바뀌어도 렌더러에 알리는 이벤트가 없다. 화면은 옛 이름표를 보내고
+       * main 은 새 계정의 primaryGeminiTextModel 로 모델을 고른다. 같은 부류 세 번째
+       * (06-30 에이전트 · 08-19 라디오 복원 · 오늘). 화면 이름표를 고치는 수정은 늘 한 곳을 남겼다.
+       *
+       * 이름표를 믿지 않는다. 모델이 SSOT 다 — 어긋나면 모델은 그대로 두고 provider 만 그 모델의
+       * 벤더로 맞춘다. 사용자가 고른 모델이 그대로 도니 자동 폴백이 아니다. 조용히 하지 않는다.
+       */
+      const rawProvider = payload.assembly.generator ?? source.generator ?? 'gemini';
+      const providerFix = reconcileProviderWithModel(
+        rawProvider,
+        (await loadConfig() as any)?.primaryGeminiTextModel,
+      );
+      if (providerFix.corrected) {
+        console.warn(`[Main] ⚠️ 엔진 라벨 보정: ${providerFix.reason}`);
+      }
+      const provider = providerFix.provider;
 
       // [2026-08-29] URL 로 넣은 상위노출 글은 그 자체로 재료가 아니라 **이미 네이버가 고른 글**이다.
       //   붙여넣기 페러프레이징은 "왜 떴는가"를 먼저 읽는 1단을 타는데, URL 경로는 그걸 건너뛰어
