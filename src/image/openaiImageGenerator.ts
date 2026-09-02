@@ -15,10 +15,10 @@ import { addThumbnailTextOverlay } from './textOverlay.js';
 import { AutomationService } from '../main/services/AutomationService.js';
 import {
     buildAppManagedReferenceImageRoots,
-    createReferenceImageDataUrl,
     loadReferenceImageData,
     type LoadedReferenceImageData,
 } from './referenceImageLoader.js';
+import { buildOpenaiImageEditsRequest } from './openaiImageEditsRequest.js';
 // [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — gpt-image-2 b64_json 1.18MB+
 import { decodeBase64Async } from '../main/utils/base64Async.js';
 import { buildContextualImagePrompt } from './contextualImagePrompt.js';
@@ -251,26 +251,45 @@ export async function generateWithOpenAIImage(
                         requestBody.response_format = 'b64_json'; // dall-e-3는 명시 필요
                     }
 
-                    // gpt-image-1은 image 파라미터로 참조 이미지 전달 가능
-                    // dall-e-3는 image 파라미터 미지원 (text-to-image only)
-                    if (cachedReferenceImage && !isDallE3) {
-                        requestBody.image = createReferenceImageDataUrl(cachedReferenceImage);
-                        console.log(`[OpenAI-Image] 🖼️ 참조 이미지를 image 파라미터로 전달 (img2img 모드)`);
+                    /*
+                     * [2026-09-02 라이브] status 400, code unknown_parameter: "Unknown parameter: 'image'."
+                     * 2026-03-03 부터 참조 이미지를 generations 에 JSON image 필드로 보냈다 — 그 엔드포인트는
+                     * image 를 모른다. 참조 이미지는 edits 에 multipart 로 간다. 쇼핑커넥트 img2img 는 그날
+                     * 이후 한 번도 성공한 적이 없고, 3회 재시도가 매번 같은 400 을 받았다.
+                     * dall-e-3 는 참조를 받지 않는다(text-to-image only).
+                     */
+                    const editsRequest = (cachedReferenceImage && !isDallE3)
+                        ? buildOpenaiImageEditsRequest(cachedReferenceImage, {
+                            model: currentModel,
+                            prompt,
+                            n: 1,
+                            size: requestBody.size,
+                            quality: requestBody.quality,
+                        })
+                        : null;
+                    if (editsRequest) {
+                        console.log(`[OpenAI-Image] 🖼️ 참조 이미지를 edits 엔드포인트에 multipart 로 전달 (img2img 모드, ${editsRequest.fileName})`);
                     }
 
-                    const response = await axios.post(
-                        OPENAI_IMAGES_API_URL,
-                        requestBody,
-                        {
-                            headers: {
-                                'Authorization': `Bearer ${apiKey}`,
-                                'Content-Type': 'application/json'
-                            },
-                            timeout: 120000, // 2분 타임아웃
+                    const response = editsRequest
+                        ? await axios.post(editsRequest.url, editsRequest.body, {
+                            // Content-Type 은 axios 가 multipart boundary 와 함께 붙인다 — 직접 박으면 boundary 가 빠진다
+                            headers: { 'Authorization': `Bearer ${apiKey}` },
+                            timeout: 120000,
                             responseType: 'json'
-                        }
-                    );
-
+                        })
+                        : await axios.post(
+                            OPENAI_IMAGES_API_URL,
+                            requestBody,
+                            {
+                                headers: {
+                                    'Authorization': `Bearer ${apiKey}`,
+                                    'Content-Type': 'application/json'
+                                },
+                                timeout: 120000, // 2분 타임아웃
+                                responseType: 'json'
+                            }
+                        );
                     // base64 또는 URL 응답 처리
                     const imageData = response.data?.data?.[0];
 

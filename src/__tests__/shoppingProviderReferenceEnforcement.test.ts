@@ -30,7 +30,10 @@ describe('shopping provider reference enforcement', () => {
 
     expect(source).toContain('SHOPPING_REFERENCE_LOAD_FAILED');
     expect(source).toContain('loadReferenceImageData(firstImage');
-    expect(source).toContain('requestBody.image = createReferenceImageDataUrl(cachedReferenceImage);');
+    // [2026-09-02 라이브] 위 한 줄이 바로 버그였다 — generations 는 image 파라미터를 모른다(400 unknown_parameter).
+    // 참조 이미지는 edits 에 multipart 로 간다. 옛 형태가 돌아오면 여기가 빨개져야 한다.
+    expect(source).toContain('buildOpenaiImageEditsRequest(cachedReferenceImage');
+    expect(source).not.toContain('requestBody.image =');
     expect(source).not.toContain('data:image/png;base64,${cachedReferenceBase64}');
     expect(source).toContain('Include a Korean person only when the section topic naturally requires a person');
     expect(source).not.toContain('showing this exact product being used by a Korean person (20-40s)');
