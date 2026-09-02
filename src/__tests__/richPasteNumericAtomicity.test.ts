@@ -65,7 +65,7 @@ describe('rich paste — 숫자·금액·날짜 원자성', () => {
     expect(result.plainText).not.toMatch(/\n\s*\d+%/);
   });
 
-  it('긴 금액 나열에서도 각 줄이 최대 길이를 크게 넘지 않는다 (가독성 유지)', () => {
+  it('긴 금액 나열도 흐름 모드에서는 한 줄이고 숫자는 깨지지 않는다', () => {
     const result = buildMobileRichHtml(
       '지원 금액은 1,000,000원에서 시작해 2,500,000원, 5,000,000원까지 조건별로 나뉩니다.',
       { maxChunkChars: 22, highlight: false },
@@ -73,15 +73,22 @@ describe('rich paste — 숫자·금액·날짜 원자성', () => {
     assertNoNumericSplit(result.plainText);
     const longest = result.plainText.split('\n').reduce((m, l) => Math.max(m, l.trim().length), 0);
     // 원자 보호로 일부 줄이 길어질 수 있으나, 두 배를 넘으면 가독성이 무너진다.
-    expect(longest).toBeLessThanOrEqual(44);
+    // [2026-09-02 사장님 참고글] 흐름 모드 — 문단 안 문장은 이어지고 22자 하드 줄바꿈이 없다. 옛 청킹은 flowParagraphs:false 로만.
+    expect(longest).toBeGreaterThan(0);
   });
 
-  it('일반 문장 줄 나눔은 그대로 동작한다 (회귀)', () => {
+  it('일반 문장은 흐름 모드에서 한 줄, 옛 청킹(flowParagraphs:false)에서만 여러 줄', () => {
     const result = buildMobileRichHtml(
       '이 문장은 특별한 숫자가 없지만 모바일에서 읽기 좋게 여러 줄로 나뉘어야 하는 충분히 긴 문장입니다.',
       { maxChunkChars: 22, highlight: false },
     );
-    expect(result.plainText.split('\n').length).toBeGreaterThan(1);
+    // [2026-09-02 사장님 참고글] 흐름 모드 — 문단 안 문장은 이어지고 22자 하드 줄바꿈이 없다. 옛 청킹은 flowParagraphs:false 로만.
+    expect(result.plainText.split('\n').length).toBe(1);
+    const legacy = buildMobileRichHtml(
+      '이 문장은 특별한 숫자가 없지만 모바일에서 읽기 좋게 여러 줄로 나뉘어야 하는 충분히 긴 문장입니다.',
+      { maxChunkChars: 22, highlight: false, flowParagraphs: false },
+    );
+    expect(legacy.plainText.split('\n').length).toBeGreaterThan(1);
   });
 });
 

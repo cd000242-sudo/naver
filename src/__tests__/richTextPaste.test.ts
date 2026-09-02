@@ -10,14 +10,19 @@ import {
   SOFT_TABLE_THEMES,
 } from '../automation/richTextPaste';
 
+// [2026-09-02] 문단 스페이서(<p><br></p>)는 정당한 <br> 다 — 본문 <p> 안의 <br> 만 본다.
+const withoutSpacers = (html: string): string => html.replace(/<p[^>]*data-rich-spacer[^>]*><br><.p>/g, '');
+
 describe('buildMobileRichHtml', () => {
-  it('splits long prose into mobile-friendly left-aligned paragraphs', () => {
+  it('keeps long prose as one flowing left-aligned paragraph', () => {
     const result = buildMobileRichHtml(
       'Naver Mate selection becomes easier when the first paragraph shows the topic and conclusion clearly. The next paragraph should keep each sentence short enough for mobile readers, because long blocks are hard to scan on a phone.',
       { maxChunkChars: 54, highlight: false }
     );
 
-    expect(result.paragraphCount).toBeGreaterThan(1);
+    // [2026-09-02 사장님 참고글] 흐름 모드 — 문단 안 문장은 이어지고 22자 하드 줄바꿈이 없다. 옛 청킹은 flowParagraphs:false 로만.
+    expect(result.paragraphCount).toBe(1);
+    expect(withoutSpacers(result.html)).not.toContain('<br>');
     // [2026-08-26] 속성 이름이 아니라 개수를 센다. 예전에는 '<p style=' 문자열을 세어,
     //   문단에 속성이 하나 붙는 것만으로 깨졌다(data-rich-para-end 추가 시 실측).
     const contentParagraphs = (result.html.match(/<p[^>]*style=/g) || []).length
@@ -126,9 +131,9 @@ describe('buildMobileRichHtml', () => {
     const highlighted = `<span style="background-color:${theme.background}`;
     expect(result.highlightCount).toBe(1);
     expect(result.html).toContain(`${highlighted}`);
-    expect(result.html).toContain('The most important action is to highlight<br>');
-    expect(result.html).toContain('the point quickly.</span>');
-    expect(result.html).not.toContain('point quickly.</p>');
+    // [2026-09-02 사장님 참고글] 흐름 모드 — 문단 안 문장은 이어지고 22자 하드 줄바꿈이 없다. 옛 청킹은 flowParagraphs:false 로만.
+    expect(result.html).toContain(`${importantSentence}</span>`);
+    expect(withoutSpacers(result.html)).not.toContain('<br>');
   });
 
   it('converts markdown tables into HTML tables for Naver rich paste', () => {
@@ -264,7 +269,7 @@ describe('buildMobileRichHtml', () => {
     expect(result.plainText).toContain('First sentence.\n\nSecond sentence.');
   });
 
-  it('keeps sentence-ending paragraphs separated by a real blank line in rich paste payloads', () => {
+  it('keeps three sentences on one source line as one flowing paragraph, and real blank lines as spacers', () => {
     const result = buildMobileRichHtml(
       [
         '광고에서는 벤딕트 휴대용 선풍기가 조용하게 작동한다고 하지만, 실제로는 소음이 상당하다.',
@@ -274,13 +279,17 @@ describe('buildMobileRichHtml', () => {
       { maxChunkChars: 38, highlight: false }
     );
 
-    expect(result.plainText).toContain('소음이 상당하다.\n\n특히,');
-    expect(result.plainText).toContain('사용하기 어렵다.\n\n이 부분은');
+    // [2026-09-02 사장님 참고글] 흐름 모드 — 문단 안 문장은 이어지고 22자 하드 줄바꿈이 없다. 옛 청킹은 flowParagraphs:false 로만.
+    expect(result.plainText).toContain('소음이 상당하다. 특히,');
+    expect(result.plainText).toContain('사용하기 어렵다. 이 부분은');
+    expect(result.paragraphCount).toBe(1);
+    const two = buildMobileRichHtml('첫 문단입니다. 이어집니다.\n\n둘째 문단입니다.', { highlight: false });
+    expect(two.plainText).toContain('이어집니다.\n\n둘째');
+    expect(two.html).toContain('data-rich-spacer="true"');
     // [2026-08-04] 스페이서 복원 — v2.11.152에서 margin이 간격을 담당한다고 보고
     // 스페이서를 제거했으나, 라이브에서 문단이 한 덩어리로 붙는 회귀 발생.
     // 네이버 에디터는 인라인 margin 간격을 보장하지 않으므로 실제 빈 문단
     // (Enter 2회 동일)이 유일하게 신뢰 가능한 문단 구분이다.
-    expect(result.html).toContain('data-rich-spacer="true"');
   });
 
   it('splits long Korean sentences near a semantic midpoint for mobile reading', () => {
@@ -402,11 +411,15 @@ describe('mobile line-break readability (2026-06-11)', () => {
     }
   });
 
-  it('defaults to the ~22-char line width measured from the user reference', () => {
+  it('does not cut lines at ~22 chars any more — the 2026-06-11 width reference is superseded by the 2026-09-02 reference', () => {
     const result = buildMobileRichHtml(SAMPLE, { highlight: false });
     const lines = result.plainText.split('\n').map((l) => l.trim()).filter(Boolean);
-    expect(Math.max(...lines.map((l) => l.length))).toBeLessThanOrEqual(22 + 13);
-    expect(lines.length).toBeGreaterThanOrEqual(3);
+    // [2026-09-02 사장님 참고글] 흐름 모드 — 문단 안 문장은 이어지고 22자 하드 줄바꿈이 없다. 옛 청킹은 flowParagraphs:false 로만.
+    expect(withoutSpacers(result.html)).not.toContain('<br>');
+    const legacy = buildMobileRichHtml(SAMPLE, { highlight: false, flowParagraphs: false });
+    const legacyLines = legacy.plainText.split('\n').map((l) => l.trim()).filter(Boolean);
+    expect(Math.max(...legacyLines.map((l) => l.length))).toBeLessThanOrEqual(22 + 13);
+    expect(legacyLines.length).toBeGreaterThanOrEqual(3);
   });
 
   it('keeps website domains intact when sentence wrapping on periods', () => {

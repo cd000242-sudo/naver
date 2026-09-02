@@ -164,17 +164,12 @@ export function normalizeContentLineBreaks(content: StructuredContent): Structur
 //   bullet/numbered list (• ... / 1. ...)는 split 안 함 — "당시 대중 반응 요약" 같은
 //   별개 섹션의 리스트 형식 보존.
 function applyPerSentenceLineBreaks(paragraph: string): string {
-  const trimmed = paragraph.trim();
-  if (!trimmed || trimmed.length < 80) return paragraph; // 짧은 단락 그대로
-  // bullet/numbered list 첫 줄 보존 (split 시 list 깨짐)
-  if (/^\s*[•·▪◦\-\*\d]/.test(trimmed)) return paragraph;
-
-  const sentences = trimmed
-    .split(/(?<=[가-힣][.!?。！？])\s+/)
-    .map(s => s.trim())
-    .filter(s => s.length > 0);
-  if (sentences.length <= 1) return paragraph;
-  return sentences.join('\n');
+  /*
+   * [2026-09-02 사장님 참고글] 문단 안에서 문장은 이어진다 — 자연 줄바꿈. v2.10.393b 의 "문장마다 줄바꿈" 을
+   * 되돌린다(참고글: 2~3문장이 한 덩어리로 흐르고 문단 사이만 빈 줄). 붙여넣기(richTextPaste 흐름 모드)도 같은 규칙.
+   * 함수는 호출처를 지키려 남기고, 문단을 그대로 돌려준다.
+   */
+  return paragraph;
 }
 
 function ensureParagraphBreaks(text: string): string {
@@ -213,7 +208,7 @@ function ensureParagraphBreaks(text: string): string {
   const sizes = paragraphGroupSizes(sentences.length);
   let cursor = 0;
   for (const size of sizes) {
-    result.push(sentences.slice(cursor, cursor + size).join('\n')); // [v2.10.393b] paragraph 안 문장도 줄바꿈
+    result.push(sentences.slice(cursor, cursor + size).join(' ')); // [2026-09-02] 문단 안은 이어 쓴다 — 흐름
     cursor += size;
   }
 

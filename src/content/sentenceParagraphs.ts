@@ -67,6 +67,17 @@ export function enforceSentenceParagraphs(
       if (/^\n{2,}$/u.test(segment)) return segment;
       return segment
         .split('\n')
+        // [2026-09-02 사장님 참고글] 빈 줄이 문단 경계다. 그 안의 홑 줄바꿈(모델이 문장마다 넣은 것)은 같은 문단이라
+        //   평문 줄끼리 먼저 잇고 나서 2~3문장씩 묶는다. 표·목록·소제목·인용 줄은 따로 둔다.
+        .reduce<string[]>((acc, line) => {
+          const prev = acc.length ? acc[acc.length - 1] : undefined;
+          if (prev !== undefined && line.trim() && !KEEP_WHOLE.test(line) && !KEEP_WHOLE.test(prev) && prev.trim()) {
+            acc[acc.length - 1] = `${prev.trim()} ${line.trim()}`;
+          } else {
+            acc.push(line);
+          }
+          return acc;
+        }, [])
         .map((line) => regroupLine(line, maxSentences))
         .join('\n');
     })

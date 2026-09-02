@@ -24,9 +24,10 @@ describe('문단 안 문장 간격', () => {
   const inner = tags.filter((t) => !t.includes('data-rich-para-end') && !t.includes('data-rich-spacer'));
   const ends = tags.filter((t) => t.includes('data-rich-para-end'));
 
-  it('문단 안 문장은 좁게 붙는다', () => {
-    expect(inner.length).toBeGreaterThan(0);
-    for (const tag of inner) expect(gapOf(tag)).toBeLessThanOrEqual(10);
+  it('흐름 모드: 문단 하나가 <p> 하나다 — 문단 안에 문장 <p> 가 따로 없다', () => {
+    // [2026-09-02 사장님 참고글] 흐름 모드 — 문단 안 문장은 이어지고 22자 하드 줄바꿈이 없다. 옛 청킹은 flowParagraphs:false 로만.
+    expect(inner.length).toBe(0);
+    expect(ends.length).toBe(2);
   });
 
   it('문단 끝은 넓게 벌린다 — 경계가 보여야 한다', () => {
@@ -34,8 +35,13 @@ describe('문단 안 문장 간격', () => {
     for (const tag of ends) expect(gapOf(tag)).toBeGreaterThanOrEqual(20);
   });
 
-  it('문단 경계가 문장 사이보다 확실히 넓다', () => {
-    expect(gapOf(ends[0])).toBeGreaterThan(gapOf(inner[0]) * 2);
+  it('옛 청킹(flowParagraphs:false)에서는 문단 경계가 문장 사이보다 확실히 넓다', () => {
+    const legacy = buildMobileRichHtml('첫 문장입니다. 둘째 문장입니다.\n\n다음 문단입니다.', { flowParagraphs: false }).html;
+    const lt = legacy.match(/<p[^>]*>/g) || [];
+    const li = lt.filter((t) => !t.includes('data-rich-para-end') && !t.includes('data-rich-spacer'));
+    const le = lt.filter((t) => t.includes('data-rich-para-end'));
+    expect(li.length).toBeGreaterThan(0);
+    expect(gapOf(le[0])).toBeGreaterThan(gapOf(li[0]) * 2);
   });
 
   it('빈 문단은 문단 경계에만 남는다 — 이전 수정이 유지된다', () => {

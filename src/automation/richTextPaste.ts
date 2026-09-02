@@ -12,6 +12,8 @@ export interface MobileRichHtmlOptions {
   toc?: boolean;
   boxedHeadings?: boolean;
   centerAlign?: boolean;
+  /** [2026-09-02 사장님 참고글] 문단 안 문장은 이어 쓴다 — 문장별 <p>·22자 하드 줄바꿈 없이 자연 줄바꿈. 기본 true. */
+  flowParagraphs?: boolean;
 }
 
 export interface MobileRichHtmlResult {
@@ -1208,12 +1210,26 @@ function splitLongSentenceForMobile(sentence: string, maxChars: number): string[
   return chunks;
 }
 
-function buildReadableParagraphs(paragraph: string, maxChars: number): string[] {
+function buildReadableParagraphs(paragraph: string, maxChars: number, flowParagraphs: boolean = true): string[] {
   const compactParagraph = paragraph.replace(/\s+/g, ' ').trim();
   if (/^\[\s*.+\s*\]$/.test(compactParagraph)) {
     return [compactParagraph];
   }
 
+  /*
+   * [2026-09-02 사장님 참고글] "이런식으로 원하는데" — 문단 안에서 문장이 이어지고(자연 줄바꿈),
+   * 2~3문장이 한 덩어리, 문단 사이만 빈 줄. 지금까지는 문장마다 <p> 를 만들고 22자마다 <br> 를 박아
+   * 데스크톱에서 짧은 줄이 들쭉날쭉했다(닥터웰 화면). 흐름 모드에서는 한 줄(=2~3문장 문단)이 <p> 하나다.
+   * 줄 폭은 네이버가 화면에 맞춰 접는다. 모바일 꼬리 보정도 하지 않는다 — 하드 줄바꿈이 없으니 꼬리도 없다.
+   */
+  if (flowParagraphs) {
+    if (!compactParagraph) return [];
+    // 순서 화살표 체인(2026-08-26 사장님 실측)은 흐름 모드에서도 화살표가 다음 줄 머리에 온다 — 항목이 통째로 읽힌다.
+    if (STEP_ARROW_RE.test(compactParagraph)) {
+      return [compactParagraph.replace(/\s+(?=(?:→|➡|⇒|->|=>))/g, '\n')];
+    }
+    return [compactParagraph];
+  }
   const sentences = splitSentencesForMobile(paragraph);
   const chunks: string[] = [];
   const balanceForMobileWidth = maxChars <= DEFAULT_MAX_CHUNK_CHARS;
@@ -1650,6 +1666,7 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
   //   에디터 진입 정렬(editorHelpers)만 바꿔서는 여기서 박는 text-align:center 가 이긴다. 가운데는 명시할 때만.
   //   소제목 상자·표 셀·목차 같은 장식은 그대로다 — 문단 이야기다.
   const centerAlign = options.centerAlign === true;
+  const flowParagraphs = options.flowParagraphs !== false;
 
   if (!normalized) {
     return { html: '', plainText: '', highlightCount: 0, tableCount: 0, paragraphCount: 0 };
@@ -1799,7 +1816,7 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
         : lineWithoutAnswerPrefix;
       pendingAnswerNumber = null;
 
-      const chunks = buildReadableParagraphs(cleanedLine, maxChunkChars);
+      const chunks = buildReadableParagraphs(cleanedLine, maxChunkChars, flowParagraphs);
       /*
        * [2026-08-26] 순서 화살표로 이어진 줄은 한 문단으로 묶는다.
        * 조각마다 문단을 만들면 사이에 문단 스페이서(빈 문단)가 끼어

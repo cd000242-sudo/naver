@@ -10,13 +10,11 @@ import { buildPastePreviewText, buildPastePreviewHtml } from '../automation/rich
  * 블로그 가서 수정해야 돼. 발행해놓고 수정하면 그것도 안 좋다고."
  */
 describe('미리보기는 붙여넣기와 같은 줄바꿈을 보여준다', () => {
-  it('긴 문장을 모바일 폭으로 나눈다 — 원문 한 줄이 아니다', () => {
+  it('흐름 모드: 미리보기도 붙여넣기처럼 긴 문장을 한 줄로 둔다 — 22자 나누기는 2026-09-02 참고글로 대체', () => {
     const long = '옥상달빛 김윤주가 십센치 권정열과 함께 찍은 사진을 올린 뒤 팬들과 유쾌한 소통을 이어가 눈길을 끌었습니다.';
     const out = buildPastePreviewText(long);
-    expect(out.split('\n').length).toBeGreaterThan(1);
-    for (const line of out.split('\n')) {
-      expect(line.length).toBeLessThanOrEqual(30);
-    }
+    expect(out.split('\n').filter(Boolean)).toHaveLength(1);
+    expect(out.trim()).toBe(long);
   });
 
   it('표 행은 문장으로 쪼개지 않는다 — 쪼개면 표가 아니게 된다', () => {

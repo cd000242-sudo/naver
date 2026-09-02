@@ -18,9 +18,11 @@ import {
  *    셀렉터 추가 + 스캔 폴백(후보 로깅).
  */
 describe('mobile line width + view mode (v2.11.144)', () => {
-  it('실측 문장(33자)이 기본 청킹으로 22자 이하 줄로 분할된다', () => {
+  it('흐름 모드 기본: 33자 문장은 한 줄 — 옛 청킹(flowParagraphs:false)에서만 22자 이하로 분할', () => {
     const sentence = '소상공인 경영안정 바우처 카드가 바뀌지 않거나 결제가 거절됐다면 먼저 분리해야 합니다.';
-    const rich = buildMobileRichHtml(sentence, { highlight: false });
+    const flow = buildMobileRichHtml(sentence, { highlight: false });
+    expect(flow.plainText.split('\n').map((l) => l.trim()).filter(Boolean)).toHaveLength(1);
+    const rich = buildMobileRichHtml(sentence, { highlight: false, flowParagraphs: false });
     // 렌더된 plainText의 각 줄이 22+여유(구두점 수용 2자) 이내
     const lines = rich.plainText.split('\n').map((l) => l.trim()).filter(Boolean);
     expect(lines.length).toBeGreaterThan(1);

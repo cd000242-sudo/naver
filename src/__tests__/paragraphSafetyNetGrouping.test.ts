@@ -22,11 +22,11 @@ const SEVEN = [
 ];
 
 describe('긴 문단 안전망도 2~3문장씩 고르게 — 혼자 남는 문장 없음', () => {
-  it('빈 줄 없는 7문장(230자↑) → 3+2+2, 문단 안 문장은 줄바꿈으로', () => {
+  it('빈 줄 없는 7문장(230자↑) → 3+2+2, 문단 안 문장은 이어 쓴다', () => {
     const out = ensureContentParagraphBreaks({ bodyPlain: SEVEN.join(' '), headings: [] } as never).bodyPlain as string;
     const paragraphs = out.split('\n\n');
-    expect(paragraphs.map((p) => p.split('\n').length)).toEqual([3, 2, 2]);
-    expect(paragraphs.flatMap((p) => p.split('\n'))).toEqual(SEVEN);
+    // [2026-09-02 사장님 참고글] 문단 안 문장은 이어진다(자연 줄바꿈) — 줄바꿈으로 나누던 것을 되돌렸다.
+    expect(paragraphs).toEqual([SEVEN.slice(0, 3).join(' '), SEVEN.slice(3, 5).join(' '), SEVEN.slice(5, 7).join(' ')]);
   });
 
   it('여러 번 돌려도 같다 — 랜덤이 아니다', () => {

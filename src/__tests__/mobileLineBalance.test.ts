@@ -165,14 +165,16 @@ describe('balanceContentMobileLines — StructuredContent 배선', () => {
  * 씌워졌다(2026-08-22 사용자 실측). 원문은 문장 그대로 두고 표현 계층에서만 보정한다.
  */
 describe('mobileLineBalance — 붙여넣기 표현 계층 배선', () => {
-  it('리치 붙여넣기 결과의 모든 줄이 모바일 폭 이내로 들어간다', () => {
+  it('흐름 모드에서는 붙여넣기 줄을 미리 끊지 않는다 — 옛 청킹(flowParagraphs:false)에서만 모바일 폭 보정', () => {
     const body = [
       '매체마다 46세와 47세가 섞여 나오는데, 정확한 나이는 아직 확인되지 않았습니다.',
       '',
       '덧붙여 현재 상황으로는 바이에른이 그를 보유하고자 하며 계약 연장까지 검토 중이라는 이야기가 나옵니다.',
     ].join('\n');
 
-    const rich = buildMobileRichHtml(body, { fontSizePx: 19, highlight: false });
+    const flow = buildMobileRichHtml(body, { fontSizePx: 19, highlight: false });
+    expect(flow.plainText.split('\n').filter((line) => line.trim().length > 0)).toHaveLength(2);
+    const rich = buildMobileRichHtml(body, { fontSizePx: 19, highlight: false, flowParagraphs: false });
     const lines = rich.plainText.split('\n').filter((line) => line.trim().length > 0);
 
     expect(lines.length).toBeGreaterThan(2);
