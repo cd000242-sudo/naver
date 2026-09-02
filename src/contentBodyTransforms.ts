@@ -8,7 +8,7 @@
 import type { StructuredContent } from './contentGenerator';
 import { removeEmojis, removeInternalStructureMarkersFromText } from './contentTextHelpers';
 import { balanceMobileLineBreaks } from './content/mobileLineBalance';
-import { enforceSentenceParagraphs } from './content/sentenceParagraphs';
+import { enforceSentenceParagraphs, paragraphGroupSizes } from './content/sentenceParagraphs';
 
 export { removeInternalStructureMarkersFromText } from './contentTextHelpers';
 
@@ -208,22 +208,13 @@ function ensureParagraphBreaks(text: string): string {
   // [v2.10.390] 1~3문장마다 \n\n 삽입 (사후 안전망 — AI 단락 침범 최소화)
   // [v2.10.393b] paragraph 안 문장도 \n 줄바꿈 (모바일 친화)
   const result: string[] = [];
-  let current: string[] = [];
-  // [2026-09-02 사장님 결정] 1~3 → 2~3. 1이 뽑히면 문장 하나가 문단 하나가 된다 — 기본값은 2~3줄 묶음이다.
-  const breakAfter = () => Math.floor(Math.random() * 2) + 2; // 2~3문장
-  let nextBreak = breakAfter();
-
-  for (let i = 0; i < sentences.length; i++) {
-    current.push(sentences[i]);
-
-    if (current.length >= nextBreak && i < sentences.length - 1) {
-      result.push(current.join('\n')); // [v2.10.393b] ' ' → '\n' (paragraph 안 문장도 줄바꿈)
-      current = [];
-      nextBreak = breakAfter();
-    }
-  }
-  if (current.length > 0) {
-    result.push(current.join('\n')); // [v2.10.393b] 동상
+  // [2026-09-02 사장님 결정] 랜덤 1~3 묶음은 마지막 문장을 혼자 남겼다(실측 7문장 → 2+2+2+1).
+  //   후처리기(sentenceParagraphs)와 같은 규칙으로 2~3문장씩 고르게 나눈다 — 세 자리가 같은 값을 말해야 한다.
+  const sizes = paragraphGroupSizes(sentences.length);
+  let cursor = 0;
+  for (const size of sizes) {
+    result.push(sentences.slice(cursor, cursor + size).join('\n')); // [v2.10.393b] paragraph 안 문장도 줄바꿈
+    cursor += size;
   }
 
   const fixed = result.join('\n\n');
