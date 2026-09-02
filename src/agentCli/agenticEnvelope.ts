@@ -10,6 +10,11 @@
 // is told what to obsess over for that mode — the upgrade must beat the base prompt per mode,
 // not just generically.
 //
+// [2026-09-02] Grounding is restated inside the loop itself: the CLI runs with every tool blocked,
+// so each revise pass can only add facts from memory. The self-critique now checks that every
+// number/date/org/product/procedure exists in the supplied materials, and the revise step is told
+// to drop or narrow rather than invent. Form rule, not a word list.
+//
 // Contract preserved: the final message must be a single JSON object so the app's existing
 // safeParseJson / quality gates keep working. The iteration happens inside one subscription
 // call, so request count (and rate-limit pressure) does not increase.
@@ -84,10 +89,11 @@ function buildHeader(modeKey?: string): string {
    - 각 소제목이 서로 다른 정보 단위인가 — 같은 결론·같은 정보를 소제목만 바꿔 반복하지 않았는가
    - 같은 단어·표현·문장 패턴을 과하게 반복하지 않았는가
    - "상황 + 판단"이 입력 근거와 일치하고, 없는 작성자 경험을 만들지 않았는가
+   - 본문의 수치·날짜·기관명·제품명·절차가 전부 [작업 명세]의 자료 안에 있는가 — 자료에 없는 것은 하나라도 환각이다. 검색이 막혀 있으니 기억으로 보태지 마라
    - 앱이 [작업 명세]에서 지정한 카테고리·글톤·금지어를 그대로 지켰는가
    - 키워드·서브키워드·분량·문체 요구를 모두 지켰는가
    - 요구된 JSON 스키마를 정확히 따랐는가
-4. 수정: 비평에서 찾은 문제를 고친다. 기준을 통과할 때까지 3~4단계를 반복한다.
+4. 수정: 비평에서 찾은 문제를 고친다. 고칠 때 자료에 없는 사실을 새로 넣지 않는다 — 근거가 없으면 빼거나 범위를 좁힌다. 기준을 통과할 때까지 3~4단계를 반복한다.
 5. 제출: 통과한 최종본만 출력한다.
 ${focusBlock}
 [제출 형식 — 절대 규칙]
