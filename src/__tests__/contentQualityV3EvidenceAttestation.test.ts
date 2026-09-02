@@ -199,7 +199,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-09-02 11차] 산문 지시가 흘려서 dateBasis 스키마 필드로 형태 변경
         // [2026-09-02 12차] 검색용 조합어 표시 배선으로 재계산
         // [2026-09-02 13차] dateBasis 서술 금지 조항 추가로 재계산
-        '0b78f9773bb902dc348b77bea14878474eec7d88ff5de688e133290293abce10',
+        // [2026-09-02 14차] 멘토 어미 믹싱 · 공통 격식 오르내림 조항으로 재계산
+        '36e72aada80f82189785f4b565c9a58d9cc2cb0de0fb72025a05edc8c93dcd15',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

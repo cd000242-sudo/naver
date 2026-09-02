@@ -225,7 +225,7 @@ DateClaim · FactVerify · HeadingVariety · 경험 3요소 계약 · platitude 
 
 ---
 
-### P7 — 어미 믹싱 (사장님 지적 2026-09-02, 5번째 글)
+### P7 — 어미 믹싱 (사장님 지적 2026-09-02, 5번째 글) ✅ 완료 — 라이브 검증 대기
 
 홈판 제목은 잘 나왔다. 문제는 **종결어미 혼용 / 어미 다양화**가 제대로 안 되는 것.
 합니다/해요만 오가고 `~거든요 · ~잖아요 · ~죠` 같은 부연·동의 어미가 거의 없다.
@@ -254,3 +254,16 @@ DateClaim · FactVerify · HeadingVariety · 경험 3요소 계약 · platitude 
 - 조합어 표시문을 언급 대상으로 삼음
 → 예시 문구 제거 · "내부 판정, 서술 금지" 조항 · 표시문을 "언급·설명 금지" 로.
 스니펫 경로에도 곁가지 몫 확장(④ 에버랜드 섹션).
+
+---
+
+### P8 — 쇼핑+라이프 카테고리 프롬프트 부재 (라이브 2026-09-02)
+
+```
+[PromptLoader] 프롬프트 파일 로드 실패: affiliate/life.prompt ENOENT
+[ContentPolicy] 품질/정책 경고 후 이미지 단계 계속: BLOCK_KEYWORD_BODY_MISMATCH
+```
+`loadPromptFile` 은 ENOENT 에 `''` 를 돌려주는 **조용한 폴백**(promptLoader:148)이라
+쇼핑 모드 라이프 카테고리는 카테고리 규격 없이 써진다. 그 글이 키워드-본문 불일치 경고를 받았다.
+**방향**: (a) affiliate/life.prompt 를 만들거나 (b) 라이프를 있는 affiliate 카테고리로 매핑.
+카테고리별 파일이 없는 조합을 전수로 세서 같은 구멍이 더 있는지 볼 것.
