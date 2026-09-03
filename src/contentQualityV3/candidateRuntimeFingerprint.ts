@@ -375,6 +375,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/crawler/shopping/utils/reviewTextSelection.ts',
   'src/crawler/smartCrawler.ts',
   'src/crawler/specLineFilter.ts',
+  'src/crawler/storeCrawlSanity.ts',
   'src/crawler/utils/proxyManager.ts',
   'src/debug/diagnosticsBuffer.ts',
   'src/debug/domDumpManager.ts',

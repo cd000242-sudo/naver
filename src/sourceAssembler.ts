@@ -1,4 +1,5 @@
 import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from './naver/index.js';
+import { isEmptyProductCrawl } from './crawler/storeCrawlSanity.js';
 import { isSearchRedirectedToHome, looksLikeEmptySearchResult } from './content/searchRedirectedHome.js';
 import { narrowSearchQueries } from './content/searchQueryNarrowing.js';
 import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
@@ -6392,7 +6393,19 @@ async function fetchSingleSource(
           // HTTP HEAD 1회 수준.
           const productInfo = await crawlFromAffiliateLink(isShortUrl ? url : resolvedUrl);
 
-          if (productInfo && productInfo.name && productInfo.name !== '상품명을 불러올 수 없습니다') {
+          // [2026-09-03 라이브] 429 에러 페이지에서 스토어 제목("… : 네이버 스마트스토어")을 상품명으로 알고 가격 0·리뷰 0·스펙 없음인 채
+          //   "성공"으로 넘어가 재료 0으로 글이 생성됐다. 빈 크롤은 결과 부족이다 — 아래 OG 폴백/실패 경로로 보낸다.
+          const emptyCrawl = productInfo ? isEmptyProductCrawl({
+            name: productInfo.name,
+            price: productInfo.price,
+            description: productInfo.description,
+            specText: (productInfo as any).detailSpecText ?? (productInfo as any).specText,
+            reviewTexts: productInfo.reviewTexts,
+          }) : false;
+          if (emptyCrawl) {
+            console.warn(`[fetchSingleSource] ⚠️ 상품 정보가 비어 있음 — 상품명="${String(productInfo?.name || '').slice(0, 50)}", 가격·리뷰·스펙 없음 → 결과 부족(에러 페이지/429 가능성)`);
+          }
+          if (productInfo && productInfo.name && productInfo.name !== '상품명을 불러올 수 없습니다' && !emptyCrawl) {
             const productName = productInfo.name;
             const priceNum = parsePrice(productInfo.price);
             const priceLine = priceNum !== null ? `가격: ${priceNum.toLocaleString()}원\n` : '';

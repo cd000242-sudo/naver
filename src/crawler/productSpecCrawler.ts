@@ -5,6 +5,7 @@
 
 import { dropRegulatorySpecLines } from './specLineFilter.js';
 import { stripReviewOptionLabel } from '../content/reviewMaterialHygiene.js';
+import { looksLikeStoreErrorPage } from './storeCrawlSanity.js';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import axios from 'axios';
@@ -2611,6 +2612,19 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
           try {
             await bcPage.waitForSelector(STORE_SELECTORS.waitFor, { timeout: 8000 });
           } catch { console.log('[AffiliateCrawler] ⚠️ 상품명 셀렉터 대기 타임아웃, 계속 진행'); }
+
+          // [2026-09-03 라이브] 스토어가 429 에러 페이지("[에러] 에러페이지 - 시스템오류")를 주는데도 계속 진행해
+          //   스토어 제목을 상품명으로 알고 "성공"을 보고했다 — 재료 0으로 글이 생성됐다. 에러/차단 페이지면 실패다.
+          const storePageProbe = await bcPage.evaluate(() => ({
+            title: document.title || '',
+            body: (document.body?.innerText || '').slice(0, 800),
+          })).catch(() => ({ title: '', body: '' }));
+          if (looksLikeStoreErrorPage(storePageProbe.title, storePageProbe.body)) {
+            console.log(`[AffiliateCrawler] ❌ 스토어 페이지가 에러/차단 페이지: "${storePageProbe.title.slice(0, 60)}" — 429·접속 제한 가능성, 실패로 처리`);
+            await releasePage(bcPage);
+            bcPage = null;
+            return null;
+          }
 
           await bcPage.waitForTimeout(1000 + Math.random() * 500);
 

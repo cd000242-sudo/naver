@@ -5918,6 +5918,31 @@ ipcMain.handle(
 
       const { source, warnings } = await assembleContentSource(payload.assembly);
       /*
+       * [2026-09-03 라이브] 네이버 스토어가 429 에러 페이지를 주는데 크롤러가 스토어 제목을 상품명으로 알고 "성공"을
+       * 보고했고, 상품명·가격·리뷰·스펙 0 인 채로 글이 생성돼 발행 직전까지 갔다("네이버 쿠폰 삼성전자공식파트너 쇼마젠시…").
+       * 품질 게이트는 경고만 하지만 이건 품질이 아니라 재료 0 이다 — 글 생성 전에 멈추고 이유를 말한다.
+       * 스토어 링크(naver.me·smartstore·brand·brandconnect)일 때만 본다.
+       */
+      {
+        const asmAny = payload.assembly as any;
+        const storeLinkCandidates = [asmAny.rssUrl, asmAny.affiliateLink, asmAny.url, ...(Array.isArray(asmAny.urlPatterns) ? asmAny.urlPatterns : [])]
+          .map((v: unknown) => String(v || ''));
+        const isStoreLink = storeLinkCandidates.some((u: string) => /naver\.me\/|smartstore\.naver\.com|brand\.naver\.com|brandconnect\.naver\.com/i.test(u));
+        if (isStoreLink) {
+          const srcAny = source as any;
+          const productName = String(srcAny.productInfo?.name || srcAny.metadata?.productInfo?.name || '').trim();
+          const reviewCount = Array.isArray(srcAny.productReviews) ? srcAny.productReviews.length : 0;
+          const hasSpec = String(srcAny.productSpec || '').trim().length >= 40;
+          const hasPrice = Boolean(srcAny.productPrice || srcAny.productInfo?.price);
+          const { isStorePageTitle } = await import('./crawler/storeCrawlSanity.js');
+          const nameUsable = productName.length >= 3 && !isStorePageTitle(productName);
+          if (!nameUsable && reviewCount === 0 && !hasSpec && !hasPrice) {
+            console.error(`[Main] ❌ 스토어 상품 재료 0 — 상품명="${productName.slice(0, 60)}" 리뷰=0 스펙=없음 가격=없음. 글 생성을 시작하지 않습니다.`);
+            throw new Error('상품 페이지를 읽지 못했습니다. 네이버 스토어가 접속을 막았거나(429 에러 페이지) 상품 정보가 비어 있습니다. 10~30분 뒤 같은 링크로 다시 시도해 주세요. 이 상태로 글을 만들면 상품과 무관한 글이 나옵니다.');
+          }
+        }
+      }
+      /*
        * [2026-09-02 실측 4회] TEXT_MODEL_PROVIDER_MISMATCH: expected=claude, selected=openai-gpt41
        *
        * 부팅이 lastActiveUserId(낡은 계정)를 먼저 복원하고 렌더러가 그 계정 값으로 라디오 · hidden 을
