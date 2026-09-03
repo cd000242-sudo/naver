@@ -22,8 +22,6 @@ import {
 
 /** 검색량을 확인할 후보 수 상한 — 광고 API 호출을 늘리지 않기 위한 제한. */
 const MAX_VOLUME_LOOKUPS = 3;
-const INFERENCE_TIMEOUT_MS = 30_000;
-const KEYWORD_INFERENCE_MODEL = 'gpt-4.1-mini';
 
 export interface UrlKeywordDeps {
   /** 프롬프트를 넣으면 후보 목록 텍스트를 돌려준다. */
@@ -70,26 +68,6 @@ export async function resolveUrlModeKeyword(
   }
 
   return pickPrimaryKeyword(candidates, volumes);
-}
-
-/** OpenAI 저비용 모델로 후보를 뽑는다. 키가 없으면 호출하지 않는다. */
-export function createOpenAiCandidateInferencer(apiKey: string): UrlKeywordDeps['inferCandidates'] {
-  return async (prompt: string): Promise<string> => {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
-      body: JSON.stringify({
-        model: KEYWORD_INFERENCE_MODEL,
-        messages: [{ role: 'user', content: prompt }],
-        // max_completion_tokens: 최신 모델은 max_tokens를 거부한다 (2026-07 교훈).
-        max_completion_tokens: 256,
-      }),
-      signal: AbortSignal.timeout(INFERENCE_TIMEOUT_MS),
-    });
-    if (!response.ok) throw new Error(`OpenAI ${response.status}`);
-    const data = (await response.json()) as { choices?: Array<{ message?: { content?: string } }> };
-    return data.choices?.[0]?.message?.content || '';
-  };
 }
 
 /**

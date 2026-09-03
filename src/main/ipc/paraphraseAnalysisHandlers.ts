@@ -121,25 +121,9 @@ export interface AnalysisRoute {
  */
 /** [2026-08-29] URL 모드에서도 같은 라우팅을 쓰려고 export 한다 — 엔진 선택 규칙을 한 곳에 둔다. */
 export function resolveRoute(generator: string, config: Record<string, unknown>): AnalysisRoute | null {
-  if (generator === 'agent-codex') return { engine: 'codex', callModel: (p) => callAgent('codex', p) };
-  if (generator === 'agent-claude') return { engine: 'claude(구독)', callModel: (p) => callAgent('claude', p) };
-  if (generator === 'agent-gemini') return { engine: 'gemini(구독)', callModel: (p) => callAgent('gemini', p) };
-
-  const openaiKey = typeof config.openaiApiKey === 'string' ? config.openaiApiKey.trim() : '';
-  if (openaiKey) return { engine: OPENAI_ANALYSIS_MODEL, callModel: (p) => callOpenAi(p, openaiKey) };
-
-  const geminiKey = typeof config.geminiApiKey === 'string' ? config.geminiApiKey.trim() : '';
-  if (geminiKey) {
-    const model = typeof config.geminiModel === 'string' && config.geminiModel.trim()
-      ? config.geminiModel.trim()
-      : GEMINI_ANALYSIS_MODEL;
-    return { engine: model, callModel: (p) => callGemini(p, geminiKey, model) };
-  }
-
-  const claudeKey = typeof config.claudeApiKey === 'string' ? config.claudeApiKey.trim() : '';
-  if (claudeKey) return { engine: CLAUDE_ANALYSIS_MODEL, callModel: (p) => callClaude(p, claudeKey) };
-
-  return null;
+  // [2026-09-03 사장님] 예전엔 API 모드에서 "키 있는 순서(openai → gemini → claude)" 로 골랐다 — 사용자가 Gemini 를
+  //   골랐어도 OpenAI 키가 있으면 OpenAI 로 갔다. 이제 고른 엔진 그대로만 간다 (아래 resolveSelectedEngineRoute).
+  return resolveSelectedEngineRoute(generator, config);
 }
 
 /**

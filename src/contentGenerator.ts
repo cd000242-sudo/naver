@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { stripAiConclusionOpenersFromContent } from './content/aiConclusionOpener.js';
+import { stripMaterialNarrationFromContent } from './content/materialNarrationStrip.js';
 import { stripResearchNoteChatter } from './content/researchNoteHygiene.js';
 import { applyReviewMaterialHygiene } from './content/reviewMaterialHygiene.js';
 import OpenAI from 'openai';
@@ -1353,13 +1354,9 @@ async function repairHeadingsBeforeFinalize(content: StructuredContent, source: 
   try {
     // [2026-09-03 사장님] 보정도 사용자가 고른 엔진으로 — OpenAI 키를 박아 쓰지 않는다. 고른 엔진의 키/구독이
     //   없으면 건너뛴다(다른 벤더로 조용히 넘어가지 않는다).
-    const { loadConfig } = await import('./configManager.js');
-    const { resolveSelectedEngineRoute } = await import('./main/ipc/paraphraseAnalysisHandlers.js');
-    const generator = String(source.generator || '').trim();
-    const config = ((await loadConfig().catch(() => null)) as Record<string, unknown> | null) ?? {};
-    const route = resolveSelectedEngineRoute(generator, config);
+    const route = await resolveSideTaskRoute(source);
     if (!route) {
-      console.log(`[HeadingRepair] 선택 엔진(${generator || '미지정'})의 키/구독이 없어 소제목 보정 건너뜀`);
+      console.log(`[HeadingRepair] 선택 엔진(${String(source.generator || '미지정')})의 키/구독이 없어 소제목 보정 건너뜀`);
       return;
     }
     const { repairSentenceStyleHeadings } = await import('./content/headingStyleRepair.js');
@@ -1403,6 +1400,8 @@ export function finalizeStructuredContent(
   finalContent = normalizeContentTableBlocks(finalContent);
   // [2026-09-03] "정리하면 …" AI wrap-up opener — the checker flags it, the model still writes it. Dropped here.
   finalContent = stripAiConclusionOpenersFromContent(finalContent);
+  // [2026-09-03 사장님 지적 ④] "검색 결과에는 …" 자료 목록 서술 — 프롬프트 금지만으로는 안 지켜져 여기서 뗀다.
+  finalContent = stripMaterialNarrationFromContent(finalContent);
 
   // ✅ [Phase 7] Source Fidelity 측정 — URL 입력 시 LLM 압축·정보 누락 감지
   // 사용자 진단: "url 넣어서 발행하면 내용들이 많이 압축되고 중요한 내용도 빠짐"
@@ -3690,7 +3689,9 @@ async function callGemini(
           });
         };
         // ✅ [2026-01-28 FIX] 첫 응답 타임아웃 60초로 증가 (유료 API 안정성)
-        const firstResponseTimeoutMs = Math.min(timeoutMs, 60_000);
+        // [2026-09-03 실측] gemini-3.5-flash 는 생각(thinking) 이 끝나야 첫 청크가 온다 — 53~55초 걸린 두 번은 통과, 세 번째는
+        //   60초를 넘겨 "연결 타임아웃" 으로 죽었다. 3.x 모델은 첫 응답을 120초까지 기다린다(전체 스트림 상한 3분은 그대로).
+        const firstResponseTimeoutMs = Math.min(timeoutMs, /gemini-3\.\d/i.test(modelName) ? 120_000 : 60_000);
 
         console.log(`[Gemini] 🚀 ${modelName} 호출 (Search Grounding: ${useGrounding ? 'ON +$0.035' : 'OFF (비용 절감)'})${cachedContentName ? ' [캐시 시도 ✅]' : ''}`);
         await throttleGeminiRequest(modelName, config, options.signal);
@@ -5622,6 +5623,17 @@ export function shouldRunLegacyPostDraftLlm(promptVariant: unknown): boolean {
  * URL 모드인데 키워드가 비어 있으면 원문에서 핵심 검색 키워드를 정해 metadata에 채운다.
  * 이미 사용자가 키워드를 넣었으면 손대지 않는다.
  */
+/**
+ * [2026-09-03 사장님] 보조 LLM 호출(키워드 선정·소제목 보정)은 사용자가 고른 엔진으로만 — 벤더 하드코딩 금지,
+ * 키 있는 다른 벤더로 조용히 넘어가지 않는다. 고른 엔진의 키/구독이 없으면 null (호출 측이 그 단계를 건너뛴다).
+ */
+async function resolveSideTaskRoute(source: ContentSource): Promise<{ engine: string; callModel: (prompt: string) => Promise<string> } | null> {
+  const { loadConfig } = await import('./configManager.js');
+  const { resolveSelectedEngineRoute } = await import('./main/ipc/paraphraseAnalysisHandlers.js');
+  const config = ((await loadConfig().catch(() => null)) as Record<string, unknown> | null) ?? {};
+  return resolveSelectedEngineRoute(String(source.generator || '').trim(), config);
+}
+
 async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void> {
   try {
     const rawText = String((source as any).rawText || '');
@@ -5641,14 +5653,15 @@ async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void>
        * (닥터웰: "닥터웰 종아리 마사지기", 검색량 80). 사람들이 실제로 치는 상품 검색어 중 검색량이 확실히
        * 더 큰 것이 있으면 그것을 메인으로, 기존은 서브로 내린다. 검색량을 못 구하면 바꾸지 않는다.
        */
-      const shoppingApiKey = String(process.env.OPENAI_API_KEY || '').trim();
-      if (!shoppingApiKey) return;
-      const { resolveShoppingSearchKeyword, createOpenAiCandidateInferencer, createNaverVolumeLookup } =
+      // [2026-09-03 사장님] 키워드 선정도 고른 엔진으로 — OpenAI 키를 박아 쓰지 않는다.
+      const shoppingRoute = await resolveSideTaskRoute(source);
+      if (!shoppingRoute) return;
+      const { resolveShoppingSearchKeyword, createNaverVolumeLookup } =
         await import('./content/urlModeKeywordResolve.js');
       const lookupVolume = await createNaverVolumeLookup();
       const productName = stripStoreTagBrackets(String((source as any).metadata?.productInfo?.name || (source as any).title || '').trim());
       const pick = await resolveShoppingSearchKeyword(rawText, productName, existing, {
-        inferCandidates: createOpenAiCandidateInferencer(shoppingApiKey),
+        inferCandidates: shoppingRoute.callModel,
         lookupVolume,
       });
       if (pick.replaced) {
@@ -5662,20 +5675,20 @@ async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void>
     }
     if (existing) return;
 
-    const apiKey = String(process.env.OPENAI_API_KEY || '').trim();
-    if (!apiKey) {
-      console.log('[UrlKeyword] OPENAI_API_KEY 없음 — 키워드 미선정으로 진행');
+    const route = await resolveSideTaskRoute(source);
+    if (!route) {
+      console.log(`[UrlKeyword] 선택 엔진(${String((source as any).generator || '미지정')})의 키/구독 없음 — 키워드 미선정으로 진행`);
       return;
     }
 
-    const { resolveUrlModeKeyword, createOpenAiCandidateInferencer, createNaverVolumeLookup } =
+    const { resolveUrlModeKeyword, createNaverVolumeLookup } =
       await import('./content/urlModeKeywordResolve.js');
 
     const pick = await resolveUrlModeKeyword(
       rawText,
       String((source as any).title || (source as any).sourceTitle || '').trim() || undefined,
       {
-        inferCandidates: createOpenAiCandidateInferencer(apiKey),
+        inferCandidates: route.callModel,
         lookupVolume: await createNaverVolumeLookup(),
       },
     );
@@ -6708,6 +6721,9 @@ async function generateStructuredContentInternal(
       }
 
       // ✅ 제목 전체가 그대로 붙어버린 소제목들에서 제목 부분을 한 번 더 제거 (모드/카테고리 무관 공통 처리)
+      // [2026-09-03] 소제목이 "과 신규 가입" 처럼 앞이 잘린 채 나왔는데 어느 단계가 잘랐는지 로그로는 못 잡았다.
+      //   모델 원출력 소제목을 여기 한 줄 남긴다 — 변환 전후를 비교하는 유일한 기준점.
+      console.log(`[Headings] 모델 원출력 소제목: ${JSON.stringify((parsed.headings || []).map((h: any) => String(h?.title || '')))}`);
       if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'strip-selected-title-prefix-from-headings')) {
         stripSelectedTitlePrefixFromHeadings(parsed);
       }

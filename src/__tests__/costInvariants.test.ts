@@ -49,9 +49,11 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
         }),
       ];
 
+      // [2026-09-03 실측] 3.x flash 는 생각 토큰이 출력 한도에 잡혀 8192·12288 에서 본문이 잘렸다(2,161자·3,017자).
+      //   매번 잘리는 상한은 비용 절감이 아니라 고장이라 FLASH 구간을 16384 로 — 총 상한 16384 는 그대로다.
       expect(currentTierConfigs.map((config) => config.maxOutputTokens)).toEqual([
         8192,
-        12288,
+        16384,
         16384,
       ]);
       expect(currentTierConfigs.every((config) => (

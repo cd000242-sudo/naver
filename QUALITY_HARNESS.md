@@ -238,6 +238,8 @@ API 키·네이버 계정이 전부 날아간다. 지금의 크래시가 그 쓰
 | P24 | "어떤 글이든 이런 식으로" — 주제·모드 3종(seo 청년도약계좌 / custom 비염 / homefeed 전세) 자체 생성으로 일반화 확인 | ✅ 4지적 세 편 모두 0 · ⬜ 새로 보인 4건 수정 후 재생성 — OpenAI 크레딧 소진으로 미실행 |
 | P25 | 클로드코드(구독 CLI) 엔진이 360초 타임아웃으로 매번 죽던 것 — CLI 타임아웃·렌더러 상한을 엔진별 15분으로 | ✅ 드라이버로 seo 글 1편 완주(CLI 145초) · ⬜ 라이브 앱에서 1편 |
 | P26 | 제목이 "○○ 관련 콘텐츠, …총정리" · "핵심 정보: 정의 …" · "○○ === 사실 자료 …" 로 갈아엎히던 것 — 구조 검증기의 키워드 출처 | ✅ 회귀 테스트 5건 · ⬜ 클로드코드 글 1편 재생성으로 제목 확인 |
+| P27 | 남아 있던 OpenAI 우선 보조 호출 2곳(상위호환 분석 키 순서 폴백 · URL/쇼핑 키워드 선정 OpenAI 전용)을 고른 엔진으로 | ✅ OpenAI 3편(보정기 gpt-4.1-mini 로 4건 교체 로그) · ✅ Gemini 1편 완주(출력 한도·첫 응답 대기 수정 후) |
+| P28 | OpenAI 재검증에서 나온 것 — "검색 결과에는 …" 자료 서술 재발(프롬프트 금지 무력) · 소제목 "청년도약계좌 과 신규 가입"(앞 낱말 잘림) · gemini-3.5-flash 응답 2,161자 절단 | ✅ 자료 서술 finalize 제거 · ⬜ 소제목 절단은 원출력 로그 추가 후 재현 · ✅ Gemini 3.x flash 출력 16,384 + 첫 응답 120초 |
 | P5-릴리즈 | v2.11.220 배포(2026-09-03 13:2x) — P21(스토어 429 가드) 포함. 게이트 재핀 교훈: bump→build→핀 순서 | ⬜ 사장님 설치본 자동업데이트 2.11.220 수신 후 쇼핑 글 1편(429 풀린 뒤) |
 
 **검증용 키워드 3종**
@@ -501,6 +503,20 @@ image 를 모른다. 참조 이미지는 `/v1/images/edits` 에 multipart 로 �
 **수정(2겹)** — ① 텍스트 상자 채울 때 `_preferBodyPlain` 이어도 본문에 소제목 제목이 하나도 없으면 소제목에서 재조립(표는 소제목 content 에도 들어 있어 잃지 않음). ② 해석기: 본문이 권위여도 제목이 전무하고 소제목 데이터가 온전하면 `existing-sections` 로 그 데이터를 쓴다(`bodyLacksAllHeadingTitles`). 테스트 3건.
 
 **미확인** — 사장님 글이 표 적용 경로였는지 페러프레이징 경로였는지는 렌더러 로그가 없어 못 봤다. 두 경로 모두 같은 수정으로 막힌다.
+
+### P28 — OpenAI·Gemini 재검증(2026-09-03 21:26~21:29)에서 나온 것
+
+**OpenAI 3편(seo 청년도약계좌 / custom 비염 / homefeed 전세)** — 4지적 0(자료 서술 1건 제외), 제목 정상, 보정기가 gpt-4.1-mini 로 4건 교체(고른 엔진 확인). 새로 보인 것: ① seo 글 "막상 검색 결과에는 나이와 개인소득, 가구소득을 함께 언급하는 내용이 섞여 있죠." — 사장님 지적 ④ 재발. 프롬프트 금지만으로는 gpt-4.1 이 안 지킨다 → `materialNarrationStrip`: 검색 결과/자료를 서술하는 문장만 finalize 에서 뗀다(문단이 그 문장뿐이면 유지). ② seo 소제목 "청년도약계좌 과 신규 가입" — 키워드 접두 전에 이미 "과 신규 가입"(앞 낱말이 잘리고 조사만 남음). `stripSelectedTitlePrefixFromHeadings`·`stripReviewTitlePrefixFromHeading`·`dedupeRepeatedPhrasesInHeadingTitle`·`applyHeadingKeywordPatch` 전부 조사 잔여 보호가 있거나 앞을 자르지 않는다 → 어느 단계인지 미확정. 모델 원출력 소제목을 `[Headings] 모델 원출력 소제목:` 로 남기도록 추가하고 재현 예정.
+
+**Gemini(gemini-3.5-flash, seo) — 4회 실측** — ① 8,192: 2,161자 절단 실패 ② 16,384: 5,334자 완주(55초) ③ 12,288: 3,017자 절단 실패(비용 상한 12,288 을 지키려던 시도) ④ 16,384 + 첫 응답 대기 60→120초: 47초 완주, 게이트 87 통과. 뿌리 둘: `buildGeminiGenerationConfig` 가 3.x flash 에 8,192/12,288 을 주는데 3.x 는 생각 토큰이 출력 한도에 같이 잡힌다 → lite 아닌 3.x flash 는 16,384(costInvariants 구간 [8192, 16384, 16384] 로 갱신 — 매번 잘리는 상한은 비용 절감이 아니라 고장). `firstResponseTimeoutMs` 60초는 생각이 끝나야 첫 청크가 오는 3.x 에 짧다(53~55초 통과, 세 번째 초과) → 3.x 는 120초. 남은 흠: Gemini 글이 얇다(1,314~1,488자·소제목 2~3개, 게이트 "regenerate" 경고 1회) — 모델 성향, 프롬프트 과제.
+
+### P27 — 보조 호출의 OpenAI 우선 정리 (2026-09-03 21:25 사장님 "왜 자꾸 오픈 API를 고수하냐") ✅ 코드 반영
+
+**지적** — 검증을 OpenAI 크레딧에 묶어 기다렸고, 코드에도 OpenAI 를 먼저 잡는 자리가 남아 있었다. 설정엔 OpenAI·Gemini·Claude·Perplexity 키가 전부 있다.
+
+**수정** — ① `resolveRoute`(상위호환 분석): 키 있는 순서(openai→gemini→claude) → `resolveSelectedEngineRoute` 위임(고른 엔진 그대로). ② `ensureUrlModePrimaryKeyword`(URL 모드·쇼핑 키워드 선정): `OPENAI_API_KEY` + OpenAI 전용 추론기 → 같은 라우트의 `callModel`. OpenAI 전용 추론기(`createOpenAiCandidateInferencer`)와 상수는 고아가 되어 삭제. contentGenerator 에 `resolveSideTaskRoute(source)` 하나로 통일(소제목 보정도 이걸 씀). 남은 OpenAI 고정: 팩트체크 엔진 `auto`(사용자 설정값이라 유지, 설정에서 고를 수 있음).
+
+**검증 계획** — OpenAI 엔진 3편(seo·custom·homefeed) + Gemini 1편으로 재확인.
 
 ### P26 — 구조 검증기가 제목을 갈아엎던 뿌리 (2026-09-03 21:00 클로드코드 글 "환절기 비염 관리법 === 사실 자료 …") ✅ 수정
 
