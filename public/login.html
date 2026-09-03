@@ -1043,7 +1043,7 @@
           작업이 일시 중단되었습니다!</h2>
         <div class="paywall-message-box"
           style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.2); color: rgba(255,255,255,0.95);">
-          <div style="font-size: 16px; margin-bottom: 14px;">오늘 무료 사용량을 모두 쓰셨습니다.</div>
+          <div id="paywall-reason-text" style="font-size: 16px; margin-bottom: 14px;">오늘 무료 사용량을 모두 쓰셨습니다.</div>
           <div style="color: #ef4444; font-weight: 700;">지금 멈추면 블로그 지수 상승도 멈춥니다.</div>
           <div
             style="margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.1); color: #22c55e; font-weight: 700;">
@@ -1611,6 +1611,20 @@
       hideError();
     });
 
+    /*
+     * [2026-09-03] 페이월 모달은 문구가 하드코딩돼 있어, 어떤 사유로 열리든
+     * "오늘 무료 사용량을 모두 쓰셨습니다" 만 보였다. 한 번도 쓰지 않은
+     * 사용자에게 그 문장이 뜬 원인 — 사유를 반드시 함께 받는다.
+     */
+    const PAYWALL_QUOTA_TEXT = '오늘 무료 사용량을 모두 쓰셨습니다.';
+
+    function showPaywallModal(reasonText) {
+      const reasonEl = document.getElementById('paywall-reason-text');
+      if (reasonEl) reasonEl.textContent = reasonText || PAYWALL_QUOTA_TEXT;
+      const modal = document.getElementById('paywall-modal-backdrop');
+      if (modal) modal.style.display = 'flex';
+    }
+
     // 페이월 모달 이벤트 리스너
     document.getElementById('paywall-later-btn')?.addEventListener('click', () => {
       const modal = document.getElementById('paywall-modal-backdrop');
@@ -1641,8 +1655,7 @@
           const used = Number(status?.quota?.usage?.publish) || 0;
           const limit = resolveFreeTrialPublishLimit(status);
           if (status?.success && status?.isFree && (status?.quota?.isPaywalled || used >= limit)) {
-            const paywallModal = document.getElementById('paywall-modal-backdrop');
-            if (paywallModal) paywallModal.style.display = 'flex';
+            showPaywallModal(PAYWALL_QUOTA_TEXT);
             return;
           }
         } catch (e) { /* ignore */ }
@@ -1816,12 +1829,17 @@
 
         if (!result || result.success !== true) {
           const msg = (result && result.message) ? String(result.message) : '무료 체험 설정에 실패했습니다.';
-          // [2026-08-21] '만료' 추가 — 30일 만료 재입장도 결제 흐름(페이월 모달)으로 바로 보낸다.
-          const isQuota = /할당량|quota|PAYWALL|소진|한도|초과|차단|만료/i.test(msg);
-          if (isQuota) {
+          /*
+           * [2026-09-03] 거절 사유를 문구 정규식(/…|초과|차단|만료/)으로 때려맞히던
+           * 것을 걷어냈다. '인증번호가 만료되었습니다', '차단된 사용자입니다' 처럼
+           * 사용량과 무관한 거절까지 페이월로 둔갑해, 쓰지도 않은 사용자에게
+           * "오늘 무료 사용량을 모두 쓰셨습니다" 가 떴다. 이제 main.ts 가 붙여 보내는
+           * code 만 믿고, 그 외에는 서버가 준 진짜 사유를 그대로 보여준다.
+           */
+          const code = result && result.code;
+          if (code === 'PAYWALL' || code === 'TRIAL_EXPIRED') {
             document.getElementById('trial-modal-backdrop').style.display = 'none';
-            const paywallModal = document.getElementById('paywall-modal-backdrop');
-            if (paywallModal) paywallModal.style.display = 'flex';
+            showPaywallModal(code === 'TRIAL_EXPIRED' ? msg : PAYWALL_QUOTA_TEXT);
           } else {
             if (errorMsg) { errorMsg.textContent = msg; errorMsg.classList.add('show'); }
           }
@@ -2267,8 +2285,7 @@
               const limit = resolveFreeTrialPublishLimit(status);
               if (status?.quota?.isPaywalled || used >= limit) {
                 console.log('[Login] ⚠️ 무료체험 할당량 소진 — 페이월 표시');
-                const paywallModal = document.getElementById('paywall-modal-backdrop');
-                if (paywallModal) paywallModal.style.display = 'flex';
+                showPaywallModal(PAYWALL_QUOTA_TEXT);
                 if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = FREE_TRIAL_BUTTON_TEXT; }
                 initAdminPanel();
                 return;

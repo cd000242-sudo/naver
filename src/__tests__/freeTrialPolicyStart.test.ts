@@ -62,6 +62,18 @@ describe('세 곳이 같은 규칙을 쓴다', () => {
     expect(login).toMatch(/9월 1일부터 시작됩니다/);
   });
 
+  it('체험 활성화(main.ts) 가 등록일 + 30일로 세지 않는다', () => {
+    // [2026-09-03 실측] activateFreeTier 가 firstActivatedAt + 30일로만 세어,
+    // 9/1 00:00 KST 를 넘긴 순간 8/2 이전 등록자 전원이 즉시 '만료' 판정을 받았다.
+    // 그 거절 문구('만료')가 login.html 의 정규식에 걸려 페이월 모달로 둔갑,
+    // 한 번도 쓰지 않은 사용자에게 '오늘 무료 사용량을 모두 쓰셨습니다' 가 떴다.
+    const main = readFileSync(join(__dirname, '..', 'main.ts'), 'utf-8');
+    expect(main).not.toMatch(
+      /const trialExpiresAt = new Date\(new Date\(firstActivatedAt\)\.getTime\(\) \+ 30 \* 24 \* 60 \* 60 \* 1000\)/
+    );
+    expect(main).toMatch(/Math\.max\(\s*new Date\(firstActivatedAt\)\.getTime\(\),\s*licenseModule\.FREE_TRIAL_POLICY_START_MS/);
+  });
+
   it('GAS 도 같은 시행일 규칙을 쓴다', () => {
     let gas: string;
     try {

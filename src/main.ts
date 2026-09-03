@@ -1137,12 +1137,12 @@ async function verifyTrialEligibility(userInfo?: { nickname: string; phone: stri
   }
 }
 
-async function activateFreeTier(userInfo?: { email?: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; message?: string; expiresAt?: string }> {
+async function activateFreeTier(userInfo?: { email?: string; nickname: string; phone: string; authCode?: string }): Promise<{ success: boolean; code?: 'PAYWALL' | 'TRIAL_EXPIRED'; message?: string; expiresAt?: string }> {
   try {
     const quota = await getFreeQuotaStatus();
     if (quota?.isPaywalled) {
       const res = await getPaywallResponse();
-      return { success: false, message: res.message };
+      return { success: false, code: 'PAYWALL', message: res.message };
     }
 
     // ✅ [2026-08-21 3차] 본인 확인 키는 전화번호다(사장님: "닉네임·폰번호로
@@ -1236,14 +1236,24 @@ async function activateFreeTier(userInfo?: { email?: string; nickname: string; p
     const firstActivatedAt = anchorCandidates.length > 0
       ? new Date(Math.min(...anchorCandidates.map((date) => new Date(date).getTime()))).toISOString()
       : new Date().toISOString();
-    const trialExpiresAt = new Date(new Date(firstActivatedAt).getTime() + 30 * 24 * 60 * 60 * 1000).toISOString();
+    /*
+     * [2026-09-03] 카운트 시작 = 등록일과 시행일(9/1 KST) 중 **늦은** 쪽.
+     * 그동안 여기만 등록일 + 30일로 세어, 9/1 00:00 을 넘긴 순간 8/2 이전
+     * 등록자 전원이 즉시 만료 판정을 받았다. GAS 는 처음부터
+     * Math.max(registered, FREE_TRIAL_POLICY_START_MS_) 였다 — 앱만 어긋나 있었다.
+     */
+    const trialCountFromMs = Math.max(
+      new Date(firstActivatedAt).getTime(),
+      licenseModule.FREE_TRIAL_POLICY_START_MS,
+    );
+    const trialExpiresAt = new Date(trialCountFromMs + 30 * 24 * 60 * 60 * 1000).toISOString();
     // [2026-08-21] 30일 정책은 9/1 시행(사장님: "지금 바로는 갑작스럽다") —
     // 시행 전에는 만료일을 박지도, 만료를 이유로 거부하지도 않는다.
     const policyActive = licenseModule.isFreeTrialPolicyActive();
     // 이미 30일이 지난 재활성화는 성공으로 속이지 않는다 — 저장하면
     // "체험 시작됨" 안내 뒤 곧바로 잠겨 고장으로 읽힌다. 구매 안내로 정직하게.
     if (policyActive && new Date(trialExpiresAt).getTime() <= Date.now()) {
-      return { success: false, message: '무료 체험 30일이 이미 만료되었습니다. 계속 사용하려면 라이선스를 구매해 주세요.' };
+      return { success: false, code: 'TRIAL_EXPIRED', message: '무료 체험 30일이 이미 만료되었습니다. 계속 사용하려면 라이선스를 구매해 주세요.' };
     }
     const license: LicenseInfo = {
       licenseCode: 'FREE-TIER',

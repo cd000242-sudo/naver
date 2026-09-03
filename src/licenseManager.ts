@@ -1252,7 +1252,26 @@ export async function ensureFreeLicenseExpiry(license: LicenseInfo): Promise<Lic
     return license;
   }
 
-  if (license.expiresAt) return license;
+  /*
+   * [2026-09-03] 이미 박힌 만료일이라도 시행일 + 30일보다 이르면 잘못된 값이다.
+   * 카운트 시작은 등록일과 9/1 중 늦은 쪽이므로, 무료 체험의 만료일은 어떤
+   * 경우에도 10/1 보다 이를 수 없다. 9/1~9/3 사이에 activateFreeTier 의
+   * 옛 계산(등록일 + 30일)으로 이른 만료일이 저장된 설치본을 여기서 되돌린다.
+   */
+  const MIN_TRIAL_EXPIRY_MS = FREE_TRIAL_POLICY_START_MS + 30 * 24 * 60 * 60 * 1000;
+  if (license.expiresAt) {
+    const current = new Date(license.expiresAt).getTime();
+    if (Number.isFinite(current) && current < MIN_TRIAL_EXPIRY_MS) {
+      const corrected: LicenseInfo = {
+        ...license,
+        expiresAt: new Date(MIN_TRIAL_EXPIRY_MS).toISOString(),
+      };
+      await saveLicense(corrected);
+      console.log(`[LicenseManager] 시행일 규칙보다 이른 만료일 교정: ${license.expiresAt} → ${corrected.expiresAt}`);
+      return corrected;
+    }
+    return license;
+  }
   const migrated: LicenseInfo = {
     ...license,
     expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
