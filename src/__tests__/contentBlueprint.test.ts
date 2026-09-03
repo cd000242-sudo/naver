@@ -185,3 +185,17 @@ describe('parseBlueprint — 문자열 안의 이스케이프 안 된 따옴표'
     expect(parsed!.blueprint.skeleton).toHaveLength(3);
   });
 });
+
+describe('snapToMaterial — 문장 끝을 고쳐 옮긴 발췌', () => {
+  it('끝맺음이 달라도 조각 투표로 자료 구간을 찾고, 두 문장을 합성한 발췌는 버린다', async () => {
+    const { snapToMaterial } = await import('../content/blueprint/parseBlueprint');
+    // 자료: "지원 대상은 만 19세부터 34세까지 무주택 청년으로, 월 최대 20만원을 12개월간 지원한다."
+    const rewritten = '지원 대상은 만 19세부터 34세까지 무주택 청년이며 월 최대 20만원을 12개월간 지원합니다';
+    const snapped = snapToMaterial(rewritten, MATERIAL);
+    expect(snapped).not.toBeNull();
+    expect(snapped!.startsWith('지원 대상은 만 19세부터 34세까지')).toBe(true);
+    expect(MATERIAL.replace(/\s+/g, ' ')).toContain(snapped!);
+    const composed = '국토교통부는 2026년 9월 1일 접수를 시작한다고 밝혔고 소득 기준은 중위소득 60% 이하이며 신청은 주민센터에서도 된다';
+    expect(snapToMaterial(composed, MATERIAL)).toBeNull();
+  });
+});

@@ -128,36 +128,61 @@ function isVerbatim(fragment: string, material: string): boolean {
   return needle.length > 0 && material.includes(needle);
 }
 
-const SNAP_EDGE_CHARS = 10;
+const SHINGLE_CHARS = 8;
+const SHINGLE_STEP = 3;
+const SHINGLE_MIN_HIT_RATIO = 0.55;
 
 function collapseSpaces(value: string): string {
   return String(value || '').replace(/["“”'‘’]/gu, '').replace(/\s+/gu, ' ').trim();
 }
 
+function allIndexes(haystack: string, needle: string, cap = 12): number[] {
+  const out: number[] = [];
+  let from = 0;
+  while (out.length < cap) {
+    const at = haystack.indexOf(needle, from);
+    if (at < 0) break;
+    out.push(at);
+    from = at + 1;
+  }
+  return out;
+}
+
 /**
- * Models rarely copy a passage byte-for-byte: a particle changes, a comma moves. Rather than drop
- * the passage, find its span in the material by its first and last characters and return the
- * material's own text for that span. Only a span of plausible length counts; otherwise null.
- * Measured 09-04: strict matching dropped 8/8 facts and 2/5 quotes on the first live post.
+ * Models rarely copy a passage byte-for-byte: a particle changes, the sentence ending is trimmed,
+ * a comma moves. Rather than drop the passage, locate it in the material by voting with short
+ * character shingles and return the material's own text for that span. Measured 09-04: strict
+ * matching dropped 8/8 facts; edge matching (first/last 10 chars) still dropped 5/8 because the
+ * model rewrites sentence endings. Shingles from the whole passage survive that.
  */
 export function snapToMaterial(fragment: string, material: string): string | null {
   const needle = collapseSpaces(fragment);
   const haystack = collapseSpaces(material);
-  if (needle.length < SNAP_EDGE_CHARS * 2 || haystack.length === 0) return null;
-  const head = needle.slice(0, SNAP_EDGE_CHARS);
-  const tail = needle.slice(-SNAP_EDGE_CHARS);
-  let from = 0;
-  while (from < haystack.length) {
-    const start = haystack.indexOf(head, from);
-    if (start < 0) return null;
-    const end = haystack.indexOf(tail, start + head.length);
-    if (end < 0) return null;
-    const span = haystack.slice(start, end + tail.length);
-    const ratio = span.length / needle.length;
-    if (ratio >= 0.8 && ratio <= 1.35) return span;
-    from = start + 1;
+  if (needle.length < SHINGLE_CHARS * 2 || haystack.length === 0) return null;
+  const shingles: string[] = [];
+  for (let i = 0; i + SHINGLE_CHARS <= needle.length; i += SHINGLE_STEP) shingles.push(needle.slice(i, i + SHINGLE_CHARS));
+  // The final window anchors the span end when the model kept the sentence ending.
+  const lastWindow = needle.slice(-SHINGLE_CHARS);
+  if (shingles[shingles.length - 1] !== lastWindow) shingles.push(lastWindow);
+  const hits: Array<{ pos: number; idx: number }> = [];
+  shingles.forEach((sh, idx) => { for (const pos of allIndexes(haystack, sh)) hits.push({ pos, idx }); });
+  if (hits.length === 0) return null;
+  hits.sort((a, b) => a.pos - b.pos);
+  const window = Math.ceil(needle.length * 1.35);
+  let best: { from: number; to: number; count: number } | null = null;
+  for (let i = 0; i < hits.length; i += 1) {
+    const seen = new Set<number>();
+    let last = hits[i].pos;
+    for (let k = i; k < hits.length && hits[k].pos - hits[i].pos <= window; k += 1) {
+      seen.add(hits[k].idx);
+      last = hits[k].pos;
+    }
+    if (!best || seen.size > best.count) best = { from: hits[i].pos, to: last + SHINGLE_CHARS, count: seen.size };
   }
-  return null;
+  if (!best || best.count / shingles.length < SHINGLE_MIN_HIT_RATIO) return null;
+  const span = haystack.slice(best.from, best.to).trim();
+  const ratio = span.length / needle.length;
+  return ratio >= 0.6 && ratio <= 1.35 ? span : null;
 }
 
 /** Exact (normalized) match keeps the model's text; otherwise snap to the material's own span. */
