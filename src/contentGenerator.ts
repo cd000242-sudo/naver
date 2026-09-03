@@ -4723,7 +4723,7 @@ async function callAgent(
   const shouldWrapAgenticEnvelope = !raw && agenticEnvelope !== false;
   const agenticPrompt = shouldWrapAgenticEnvelope ? wrapAsAgenticTask(prompt, mode) : prompt;
   const modeTag = raw ? 'raw' : (mode || 'generic');
-  console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (자율 반복 모드: ${modeTag}, 별도 API 키 불필요 · 플랜 한도 적용)`);
+  console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (자율 반복 모드: ${modeTag}, 프롬프트 ${agenticPrompt.length}자, 제한 ${Math.round(AGENTIC_TIMEOUT_MS / 1000)}초, 별도 API 키 불필요 · 플랜 한도 적용)`);
   const result = await generateWithAgent(
     {
       provider: cliProvider,

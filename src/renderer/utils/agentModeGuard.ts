@@ -44,8 +44,13 @@ function showBlockingMessage(message: string): void {
 }
 
 /** Return true only when the selected subscription agent is currently usable. */
+/** Subscription CLI engines (Claude Code / Codex / Antigravity) — they run outside the API clients. */
+export function isAgentEngine(generator: string): boolean {
+  return generator === 'agent-codex' || generator === 'agent-claude' || generator === 'agent-gemini';
+}
+
 export async function ensureAgentEngineReady(generator: string): Promise<boolean> {
-  if (generator !== 'agent-codex' && generator !== 'agent-claude' && generator !== 'agent-gemini') return true;
+  if (!isAgentEngine(generator)) return true;
 
   const api = window.api;
   const provider: 'codex' | 'claude' | 'gemini' = generator === 'agent-codex'

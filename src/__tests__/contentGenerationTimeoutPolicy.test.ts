@@ -27,7 +27,12 @@ describe('content generation timeout policy', () => {
 
   it('caps renderer-side AI content generation wait time before users sit for 20+ minutes', () => {
     expect(src).toMatch(/CONTENT_GENERATION_TIMEOUT_MS\s*=\s*360000/);
-    expect(src).toMatch(/timeout:\s*CONTENT_GENERATION_TIMEOUT_MS/g);
+    // [2026-09-03] 구독 CLI 엔진(Claude Code/Codex/Antigravity)만 15분 — 65K자 프롬프트를 CLI 안에서
+    //   자기비평까지 돌리느라 6분을 넘긴다(실측: 12K자 프로브 144초, 실제 글 2회 연속 360초 초과). API 엔진은 6분 유지.
+    expect(src).toMatch(/AGENT_CONTENT_GENERATION_TIMEOUT_MS\s*=\s*900000/);
+    expect(src).toMatch(/isAgentEngine\(String\(generator \|\| ''\)\) \? AGENT_CONTENT_GENERATION_TIMEOUT_MS : CONTENT_GENERATION_TIMEOUT_MS/);
+    expect((src.match(/timeout:\s*resolveContentGenerationTimeoutMs\(generator\)/g) ?? []).length).toBe(3);
+    expect(src).not.toMatch(/timeout:\s*900000/);
   });
 
   it('does not stack renderer retries over provider-level Gemini retries', () => {
@@ -40,7 +45,8 @@ describe('content generation timeout policy', () => {
     expect(fullAutoSrc).toMatch(/FULL_AUTO_CONTENT_GENERATION_TIMEOUT_MS\s*=\s*360000/);
     expect(fullAutoSrc).toMatch(/FULL_AUTO_CONTENT_GENERATION_RETRY_COUNT\s*=\s*0/);
     expect(fullAutoSrc).toMatch(/retryCount:\s*FULL_AUTO_CONTENT_GENERATION_RETRY_COUNT/);
-    expect(fullAutoSrc).toMatch(/timeout:\s*FULL_AUTO_CONTENT_GENERATION_TIMEOUT_MS/);
+    expect(fullAutoSrc).toMatch(/FULL_AUTO_AGENT_CONTENT_GENERATION_TIMEOUT_MS\s*=\s*900000/);
+    expect(fullAutoSrc).toMatch(/timeout:\s*resolveFullAutoContentGenerationTimeoutMs\(formData\.generator\)/);
     expect(fullAutoSrc).not.toMatch(/timeout:\s*900000/);
   });
 

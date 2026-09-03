@@ -3,6 +3,7 @@
 "use strict";
 import { buildPastePreviewHtml } from '../../automation/richTextPaste.js';
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
+import { isAgentEngine } from '../utils/agentModeGuard.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import {
     deduplicateReferenceImages,
@@ -44,6 +45,10 @@ exports.generateLibraryImagesForHeadings = generateLibraryImagesForHeadings;
 exports.generateAIImagesForHeadings = generateAIImagesForHeadings;
 exports.executeBlogPublishing = executeBlogPublishing;
 const FULL_AUTO_CONTENT_GENERATION_TIMEOUT_MS = 360000;
+// [2026-09-03] Same engine-aware cap as contentGeneration.ts — see the note there.
+const FULL_AUTO_AGENT_CONTENT_GENERATION_TIMEOUT_MS = 900000;
+const resolveFullAutoContentGenerationTimeoutMs = (generator: unknown): number =>
+  (isAgentEngine(String(generator || '')) ? FULL_AUTO_AGENT_CONTENT_GENERATION_TIMEOUT_MS : FULL_AUTO_CONTENT_GENERATION_TIMEOUT_MS);
 const FULL_AUTO_CONTENT_GENERATION_RETRY_COUNT = 0;
 const FULL_AUTO_IMAGE_MAX_ATTEMPTS = 3;
 const FULL_AUTO_IMAGE_TOTAL_BUDGET_MS = 35 * 60 * 1000;
@@ -2521,7 +2526,7 @@ async function generateFullAutoContent(formData) {
     const apiResponse = await apiClient.call('generateStructuredContent', [payload], {
         retryCount: FULL_AUTO_CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: FULL_AUTO_CONTENT_GENERATION_TIMEOUT_MS
+        timeout: resolveFullAutoContentGenerationTimeoutMs(formData.generator)
     });
     const result = apiResponse.data || { success: false, message: apiResponse.error };
     if (isPaywallPayload(result)) {

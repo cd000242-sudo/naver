@@ -7,7 +7,7 @@
 import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
 import { bodyIsTitlelessReconstruction } from '../utils/semiAutoHeadingExtractor.js';
 import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
-import { ensureAgentEngineReady } from '../utils/agentModeGuard.js';
+import { ensureAgentEngineReady, isAgentEngine } from '../utils/agentModeGuard.js';
 import { applyKeywordPrefixToTitle } from '../utils/titleUtils.js';
 import { normalizeHashtags } from '../utils/hashtagUtils.js';
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
@@ -112,6 +112,13 @@ declare function getReviewHeadingSeed(...args: any[]): any;
 declare function applyReviewHeadingPrefix(...args: any[]): void;
 
 const CONTENT_GENERATION_TIMEOUT_MS = 360000;
+// [2026-09-03] Subscription CLI engines (Claude Code / Codex / Antigravity) run the CLI's own
+//   reasoning loop over a ~65K-char prompt; a 12K-char probe answered in 144s, the real prompt takes
+//   longer. The 6-minute cap aborted every such post before it finished (twice, retry included).
+//   API engines keep the 6-minute cap.
+const AGENT_CONTENT_GENERATION_TIMEOUT_MS = 900000;
+const resolveContentGenerationTimeoutMs = (generator: string): number =>
+  (isAgentEngine(String(generator || '')) ? AGENT_CONTENT_GENERATION_TIMEOUT_MS : CONTENT_GENERATION_TIMEOUT_MS);
 const CONTENT_GENERATION_RETRY_COUNT = 0;
 const CONTENT_GENERATION_RETRY_NOTICE = '응답이 6분 이상 지연되면 진행 중인 요청을 중단합니다. 같은 요청을 중복으로 다시 보내지 않으니 안심하세요.';
 
@@ -662,7 +669,7 @@ export async function generateContentFromUrl(
       {
         retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort
+        timeout: resolveContentGenerationTimeoutMs(generator) // ✅ 6분(구독 CLI 엔진 15분) 타임아웃 + timeout 시 main 요청 abort
       }
     );
 
@@ -1284,7 +1291,7 @@ export async function generateContentFromKeywords(
       {
         retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort
+        timeout: resolveContentGenerationTimeoutMs(generator) // ✅ 6분(구독 CLI 엔진 15분) 타임아웃 + timeout 시 main 요청 abort
       }
     );
 
@@ -2053,7 +2060,7 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
       {
         retryCount: CONTENT_GENERATION_RETRY_COUNT,
         retryDelay: 3000,
-        timeout: CONTENT_GENERATION_TIMEOUT_MS // ✅ 6분 타임아웃 + timeout 시 main 요청 abort
+        timeout: resolveContentGenerationTimeoutMs(generator) // ✅ 6분(구독 CLI 엔진 15분) 타임아웃 + timeout 시 main 요청 abort
       }
     );
 

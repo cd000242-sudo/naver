@@ -19,8 +19,14 @@
 // safeParseJson / quality gates keep working. The iteration happens inside one subscription
 // call, so request count (and rate-limit pressure) does not increase.
 
-/** Recommended hard deadline for an agentic run — internal iteration is slower than one-shot. */
-export const AGENTIC_TIMEOUT_MS = 360_000;
+/**
+ * Recommended hard deadline for an agentic run — internal iteration is slower than one-shot.
+ * [2026-09-03 self-run 20:15] 360s killed every Claude Code post twice in a row (retry included).
+ * Measured on the same runner/env/args: a 12K-char prompt answers in 144s on the CLI's default
+ * model; the app's real prompt is ~3-4x that and the body is 3,000자, so 360s was below the
+ * normal completion time, not a safety net. A timeout must sit above the honest run time.
+ */
+export const AGENTIC_TIMEOUT_MS = 900_000;
 
 // Mode-specific focus injected into the self-critique step. Keyed by the app's PromptMode
 // (plus 'photo' for the image-narrative path). Unknown modes fall back to no focus block.
