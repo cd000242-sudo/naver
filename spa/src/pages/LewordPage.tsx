@@ -6,6 +6,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import AffiliateTab from '../components/leword/AffiliateTab';
 import AnalyzeTab from '../components/leword/AnalyzeTab';
 import GoldenTab from '../components/leword/GoldenTab';
+import IssueNicheTab from '../components/leword/IssueNicheTab';
 import KeysTab from '../components/leword/KeysTab';
 import KinGoldenTab from '../components/leword/KinGoldenTab';
 import LewordStyles from '../components/leword/LewordStyles';
@@ -26,6 +27,7 @@ import YoutubeTab from '../components/leword/YoutubeTab';
 
 const TABS = [
     { id: 'golden', label: '리더남 전용 황금키워드', short: '황금키워드', icon: '◆' },
+    { id: 'issue', label: '실검 틈새키워드', short: '실검 틈새', icon: '⚡' },
     { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },
     { id: 'kin', label: '지식인 황금질문', short: '황금질문', icon: '✦' },
     { id: 'affiliate', label: '제휴 황금키워드', short: '제휴', icon: '◇' },
@@ -37,6 +39,13 @@ const TABS = [
 ] as const;
 
 type TabId = (typeof TABS)[number]['id'];
+
+/**
+ * 비로그인도 열리는 탭 — 황금키워드와 실검 틈새. 둘 다 정적 보드라 상위 5건은
+ * 맛보기로 보이고 나머지는 카드 잠금이 막는다(사장님 사양 2026-09-02:
+ * "황금키워드보드처럼 사람들에게 보여주기만").
+ */
+const GUEST_TABS: ReadonlySet<string> = new Set(['golden', 'issue']);
 
 function isTabId(value: string): value is TabId {
     return TABS.some((tab) => tab.id === value);
@@ -164,10 +173,10 @@ function LewordPage() {
                             key={tab.id}
                             type="button"
                             // 탭별 고유색(사장님 지정 2026-08-20: 금·파랑·초록·주황·빨강·분홍·은색).
-                            className={`lw-navi lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}${!session && tab.id !== 'golden' ? ' locked' : ''}`}
+                            className={`lw-navi lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}${!session && !GUEST_TABS.has(tab.id) ? ' locked' : ''}`}
                             aria-current={activeTab === tab.id ? 'page' : undefined}
                             onClick={() => {
-                                if (!session && tab.id !== 'golden') { setAuthOpen(true); return; }
+                                if (!session && !GUEST_TABS.has(tab.id)) { setAuthOpen(true); return; }
                                 selectTab(tab.id);
                             }}
                         >
@@ -180,7 +189,7 @@ function LewordPage() {
                               */}
                             <em className="lw-navi-full">{tab.label}</em>
                             <em className="lw-navi-short">{tab.short}</em>
-                            {!session && tab.id !== 'golden' && <b className="lw-navi-lock" aria-label="로그인 필요">🔒</b>}
+                            {!session && !GUEST_TABS.has(tab.id) && <b className="lw-navi-lock" aria-label="로그인 필요">🔒</b>}
                         </button>
                     ))}
                 </nav>
@@ -245,6 +254,7 @@ function LewordPage() {
                 )}
 
                 {activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
+                {activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {activeTab === 'kin' && <KinGoldenTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
                 {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
