@@ -21,12 +21,14 @@ function hasHardAffiliateIssue(
   value: string,
   evidenceMode: AffiliateEvidenceMode,
   asTitle = false,
+  aiExperienceOptIn = false,
 ): boolean {
   if (!value.trim()) return false;
   const report = auditAffiliateAuthenticity({
     title: asTitle ? value : '',
     body: asTitle ? '' : value,
     evidenceMode,
+    aiExperienceOptIn,
   });
   return report.issues.some(issue => issue.hard);
 }
@@ -34,6 +36,7 @@ function hasHardAffiliateIssue(
 function removeHardAffiliateSentences(
   value: string | undefined,
   evidenceMode: AffiliateEvidenceMode,
+  aiExperienceOptIn = false,
 ): { text: string; changed: boolean } {
   if (!value?.trim()) return { text: value || '', changed: false };
   let changed = false;
@@ -42,7 +45,7 @@ function removeHardAffiliateSentences(
     if (!line.trim()) return '';
     const sentences = line.split(/(?<=[.!?])\s+/u);
     const kept = sentences.filter((sentence) => {
-      const remove = hasHardAffiliateIssue(sentence, evidenceMode);
+      const remove = hasHardAffiliateIssue(sentence, evidenceMode, false, aiExperienceOptIn);
       if (remove) changed = true;
       return !remove;
     });
@@ -54,14 +57,14 @@ function removeHardAffiliateSentences(
   };
 }
 
-function repairAffiliateTitle(title: string, evidenceMode: AffiliateEvidenceMode): string {
-  if (!hasHardAffiliateIssue(title, evidenceMode, true)) return title;
+function repairAffiliateTitle(title: string, evidenceMode: AffiliateEvidenceMode, aiExperienceOptIn = false): string {
+  if (!hasHardAffiliateIssue(title, evidenceMode, true, aiExperienceOptIn)) return title;
   const subject = title
     .replace(/(?:직접|사용\s*후기|후기|리뷰|사용기|체험기|오늘만|무조건|놓치면\s*후회|지금이\s*마지막)/gu, ' ')
     .replace(/\s+/gu, ' ')
     .trim();
   const candidate = `${subject || '상품'} 구매 전 확인 가이드`.slice(0, 60).trim();
-  return hasHardAffiliateIssue(candidate, evidenceMode, true)
+  return hasHardAffiliateIssue(candidate, evidenceMode, true, aiExperienceOptIn)
     ? '상품 구매 전 확인 가이드'
     : candidate;
 }
@@ -76,19 +79,20 @@ export function repairContentQualityV3AffiliateTitle(
 function repairAffiliateHardFailures(
   content: Readonly<StructuredContent>,
   evidenceMode: AffiliateEvidenceMode,
+  aiExperienceOptIn = false,
 ): { content: StructuredContent; repaired: boolean } {
   const disclosureRepair = stripModelGeneratedShoppingDisclosures(content);
   const workingContent = disclosureRepair.content;
-  const selectedTitle = repairAffiliateTitle(workingContent.selectedTitle, evidenceMode);
-  const body = removeHardAffiliateSentences(workingContent.bodyPlain, evidenceMode);
-  const introduction = removeHardAffiliateSentences(workingContent.introduction, evidenceMode);
-  const conclusion = removeHardAffiliateSentences(workingContent.conclusion, evidenceMode);
+  const selectedTitle = repairAffiliateTitle(workingContent.selectedTitle, evidenceMode, aiExperienceOptIn);
+  const body = removeHardAffiliateSentences(workingContent.bodyPlain, evidenceMode, aiExperienceOptIn);
+  const introduction = removeHardAffiliateSentences(workingContent.introduction, evidenceMode, aiExperienceOptIn);
+  const conclusion = removeHardAffiliateSentences(workingContent.conclusion, evidenceMode, aiExperienceOptIn);
   let headingChanged = false;
   const headings = workingContent.headings.map((heading, index) => {
-    const safeTitle = hasHardAffiliateIssue(heading.title, evidenceMode, true)
+    const safeTitle = hasHardAffiliateIssue(heading.title, evidenceMode, true, aiExperienceOptIn)
       ? `상품 정보 ${index + 1}`
       : heading.title;
-    const safeContent = removeHardAffiliateSentences(heading.content, evidenceMode);
+    const safeContent = removeHardAffiliateSentences(heading.content, evidenceMode, aiExperienceOptIn);
     if (safeTitle !== heading.title || safeContent.changed) headingChanged = true;
     return {
       ...heading,
@@ -157,13 +161,16 @@ export function evaluateContentQualityV3AffiliateGuard(
   options: ContentQualityV3AffiliateGuardOptions,
 ): ContentQualityV3AffiliateGuardDecision {
   const evidenceMode = classifyAffiliateEvidence(options.source).mode;
+  // [2026-09-03 사장님] 옵트인이 켜지면 1인칭 체험 문장을 하드 실패로 지우지 않는다 — 요구사항이다.
+  const aiExperienceOptIn = evidenceMode !== 'first_party' && options.source.aiExperienceGeneration === true;
   const localRepair = options.allowLocalRepair === false
     ? { content: options.content as StructuredContent, repaired: false }
-    : repairAffiliateHardFailures(options.content, evidenceMode);
+    : repairAffiliateHardFailures(options.content, evidenceMode, aiExperienceOptIn);
   const authenticity = auditAffiliateAuthenticity({
     title: localRepair.content.selectedTitle,
     body: localRepair.content.bodyPlain,
     evidenceMode,
+    aiExperienceOptIn,
   });
   const authenticityReason = `shopping authenticity ${authenticity.score}/100: ${authenticity.issues
     .map(issue => issue.code)
@@ -172,6 +179,7 @@ export function evaluateContentQualityV3AffiliateGuard(
     title: localRepair.content.selectedTitle,
     body: localRepair.content.bodyPlain,
     productReviews: options.source.productReviews,
+    aiExperienceOptIn,
   });
 
   if (

@@ -17,6 +17,8 @@ export interface AffiliateReviewDepthInput {
   readonly title?: unknown;
   readonly body?: unknown;
   readonly productReviews?: unknown;
+  /** [2026-09-03 사장님] AI 경험 옵트인 — 1인칭 체험 글이라 후기 출처 표기를 요구하지 않는다. */
+  readonly aiExperienceOptIn?: boolean;
 }
 
 export interface AffiliateReviewDepthReport {
@@ -69,11 +71,11 @@ function countUsedReviewEvidence(body: string, reviews: readonly string[]): numb
   }, 0);
 }
 
-function makeRetryDirective(issues: readonly AffiliateReviewDepthIssue[]): string {
+function makeRetryDirective(issues: readonly AffiliateReviewDepthIssue[], firstPerson = false): string {
   if (issues.length === 0) return '';
   return `[후기 근거 중심 재작성 보강]
 ${issues.map(issue => `- ${issue.message}`).join('\n')}
-- 구매자 후기의 구체 상황을 작성자 경험으로 바꾸지 말고 출처를 분명히 한다.
+${firstPerson ? '- 후기의 구체 상황을 작성자가 직접 겪은 1인칭 장면으로 쓴다. "후기에서는" 같은 출처 중계 문장은 쓰지 않는다.' : '- 구매자 후기의 구체 상황을 작성자 경험으로 바꾸지 말고 출처를 분명히 한다.'}
 - 상품명과 기능을 다시 설명하지 말고, 후기에서 확인된 문제 → 사용 결과·해결 또는 남은 한계 → 맞는 사람과 맞지 않는 사람으로 다시 구성한다.`;
 }
 
@@ -107,7 +109,7 @@ export function auditAffiliateReviewDepth(
       message: '수집된 구매자 후기의 구체적인 불편·설치·사용 조건이 본문 중심에 사용되지 않았습니다.',
     }));
   }
-  if (!REVIEW_ATTRIBUTION_PATTERN.test(body)) {
+  if (input.aiExperienceOptIn !== true && !REVIEW_ATTRIBUTION_PATTERN.test(body)) {
     issues.push(Object.freeze({
       code: 'MISSING_REVIEW_ATTRIBUTION',
       message: '구매자 후기 근거가 있지만 본문에서 구매자 의견이라는 출처가 드러나지 않습니다.',
@@ -136,6 +138,6 @@ export function auditAffiliateReviewDepth(
     usedReviewEvidenceCount,
     issues: frozenIssues,
     advisoryAccepted: issues.length > 0,
-    retryDirective: makeRetryDirective(frozenIssues),
+    retryDirective: makeRetryDirective(frozenIssues, input.aiExperienceOptIn === true),
   });
 }

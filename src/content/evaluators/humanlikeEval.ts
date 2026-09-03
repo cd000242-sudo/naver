@@ -279,6 +279,7 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
       title: input.title,
       body,
       evidenceMode: affiliateEvidenceMode,
+      aiExperienceOptIn: input.aiExperienceOptIn === true,
     });
     const fabricated = authenticity.issues.some(issue => issue.code === 'FABRICATED_FIRST_PERSON');
     if (fabricated) {

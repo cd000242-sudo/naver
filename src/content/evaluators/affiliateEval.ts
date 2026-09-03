@@ -78,6 +78,7 @@ export function evaluateAffiliate(input: EvaluationInput): SubScore {
     title,
     body,
     evidenceMode,
+    aiExperienceOptIn: input.aiExperienceOptIn === true,
   });
   const evidenceIssues = authenticity.issues.filter(issue =>
     issue.code === 'FABRICATED_FIRST_PERSON'

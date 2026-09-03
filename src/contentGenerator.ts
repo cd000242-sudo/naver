@@ -2658,6 +2658,7 @@ export function buildModeBasedPrompt(
       spec: source.productSpec,
       price: productPriceForPrompt,
       reviews: source.productReviews,
+      aiExperienceGeneration: source.aiExperienceGeneration === true,
     };
 
     // P0 review guard (SPEC-REVIEW-001): detect missing review data before
@@ -2763,6 +2764,7 @@ export function buildModeBasedPrompt(
   //   실존 인물이 오가는 homefeed · 이슈 모드와, 사내 사실이 근거인 business 는 제외한다.
   try {
     const experienceOn = source.aiExperienceGeneration === true;
+    console.log(`[PromptBuilder] 🧭 AI 경험 옵트인: ${experienceOn ? 'ON — 1인칭 체험' : 'OFF — 후기 중계'} (mode=${contentMode})`);
     const experienceEligibleMode = contentMode === 'seo' || contentMode === 'affiliate' || contentMode === 'mate' || contentMode === 'custom';
     if (experienceOn && experienceEligibleMode) {
       const overlay = loadPromptFile('shared/experience-contract.prompt');
@@ -7473,6 +7475,7 @@ async function generateStructuredContentInternal(
             affiliateEvidenceMode: source.contentMode === 'affiliate'
               ? classifyAffiliateEvidence(source).mode
               : undefined,
+            aiExperienceOptIn: source.aiExperienceGeneration === true,
           });
           const _modeLabelMap: Record<string, string> = { seo: 'SEO', homefeed: '홈판', affiliate: '제휴', business: '비즈니스', custom: '커스텀', mate: '메이트' };
           const _modeLabel = _modeLabelMap[_modeForGate] || _modeForGate;
@@ -7600,6 +7603,7 @@ async function generateStructuredContentInternal(
                   affiliateEvidenceMode: source.contentMode === 'affiliate'
                     ? classifyAffiliateEvidence(source).mode
                     : undefined,
+                  aiExperienceOptIn: source.aiExperienceGeneration === true,
                 });
                 _quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate);
                 console.log(`[QualityGate90] patch 후 재평가: mode=${_gateResult.modeScore.score}/100 · final=${_gateResult.finalScore}/100 · human=${_gateResult.humanlikeScore.score}/100 · miss=${_quality90Assessment.miss}`);
@@ -7770,11 +7774,13 @@ async function generateStructuredContentInternal(
             title: finalStructuredContent.selectedTitle,
             body: finalStructuredContent.bodyPlain,
             evidenceMode,
+            aiExperienceOptIn: source.aiExperienceGeneration === true,
           });
           const reviewDepth = auditAffiliateReviewDepth({
             title: finalStructuredContent.selectedTitle,
             body: finalStructuredContent.bodyPlain,
             productReviews: source.productReviews,
+            aiExperienceOptIn: source.aiExperienceGeneration === true,
           });
 
           if (allowPaidPostGenerationRepair && authenticity.score < 85 && !_affiliateAuthenticityRetryUsed && attempt < MAX_ATTEMPTS) {

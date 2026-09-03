@@ -131,6 +131,31 @@ export function createContentQualityV3InitialPromptOptions(
   });
 }
 
+/**
+ * [2026-09-03 사장님] "1인칭 시점에서 글이 나와야지, 후기가 이렇다 식으로 넣지 말라."
+ * AI 경험 옵트인이 켜진 쇼핑 글은 위 affiliate 계약의 화자 규칙(구매자 의견으로 귀속)을 이 블록이 대체한다.
+ * 자료는 늘어나지 않는다 — 숫자 기간·구매 시점·내돈내산·가족 반응·자료에 없는 수치는 그대로 금지.
+ */
+const AFFILIATE_FIRST_PERSON_OVERRIDE = `
+[VOICE_OVERRIDE: FIRST_PERSON_EXPERIENCE — 사용자가 AI 경험 생성을 켬]
+- 이 블록은 위 MODE_CONTRACT 와 SOURCE_TRUTH 의 "구매자 의견으로 귀속" 규칙을 대체한다.
+- productReviews·spec 의 사실을 재료로 쓰되, 문장은 작성자가 직접 겪은 1인칭 체험으로 쓴다("써보니", "저는", "제 경우엔", 과거형·현재형 모두).
+- "후기에서는", "구매자들은", "리뷰에 따르면", "~라는 의견이 있었다" 같은 중계 문장은 한 줄도 쓰지 않는다. 남의 경험을 설명해 주는 느낌이 나면 실패다.
+- 여러 후기의 사실을 한 사람의 서사로 엮어도 된다. 장면 하나는 사실 하나에서 나온다.
+- 그대로 금지: 숫자 기간("3주 써보니", "한 달 사용"), 구매 시점, 내돈내산, 가족 반응, 다른 제품과의 사용 비교, 자료에 없는 수치·기관명·효과.
+- 근거의 한계를 해설하는 문장은 쓰지 않는다("해당 구매자의 경험이며 제품 전체의 결과로 묶어 말할 수는 없다", "해석할 근거는 없으므로", "같은 의미로 보기는 어렵다"). 그 자리는 내 경험 한 줄로 채운다.
+- 인증번호·제조국·품명/모델명 나열·약관 위치·품질보증 고시는 본문에 쓰지 않는다. 규격은 표 한 번이면 끝이다.
+- 결론은 단정한다 — 이런 사람은 사도 되고, 이런 사람은 사지 마라. "~일 수 있어요", "~긴 해요" 로 끝나는 문장은 문단당 하나를 넘기지 않는다.
+- 단점도 내 경험으로 한 번은 짚는다.`;
+
+function affiliateFirstPersonOverride(options: ContentQualityV3PromptOptions): string {
+  if (options.mode !== 'affiliate') return '';
+  const source = options.source as { aiExperienceGeneration?: unknown; personalExperience?: unknown } | undefined;
+  if (source?.aiExperienceGeneration !== true) return '';
+  if (typeof source.personalExperience === 'string' && source.personalExperience.trim().length >= 8) return '';
+  return `\n\n${AFFILIATE_FIRST_PERSON_OVERRIDE}`;
+}
+
 const MODE_CONTRACTS: Readonly<Record<ContentQualityV3Mode, string>> = Object.freeze({
   seo: `[MODE_CONTRACT: SEARCH_INTENT_FIRST]
 - 검색자가 이 글을 연 이유에 대한 직접 답을 도입부 200자 안에 제시한다.
@@ -513,7 +538,7 @@ export function buildContentQualityV3Prompt(options: ContentQualityV3PromptOptio
     throw new ContentQualityV3PromptError('unsupported_mode');
   }
 
-  const system = `${COMMON_SYSTEM_PROMPT}\n\n${MODE_CONTRACTS[options.mode]}`;
+  const system = `${COMMON_SYSTEM_PROMPT}\n\n${MODE_CONTRACTS[options.mode]}${affiliateFirstPersonOverride(options)}`;
   if (system.length > CONTENT_QUALITY_V3_SYSTEM_MAX_CHARS) {
     throw new ContentQualityV3PromptError('invalid_input');
   }

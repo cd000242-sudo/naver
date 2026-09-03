@@ -129,6 +129,7 @@ export function evaluateSafety(input: EvaluationInput): SubScore {
       title: input.title,
       body,
       evidenceMode: input.affiliateEvidenceMode,
+      aiExperienceOptIn: input.aiExperienceOptIn === true,
     });
     details.affiliateAuthenticity = authenticity.score;
     if (authenticity.hardFail) {

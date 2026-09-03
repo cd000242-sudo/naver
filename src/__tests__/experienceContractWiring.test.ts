@@ -90,10 +90,11 @@ describe('UI 배선 — 토글이 화면에 있고, 저장되고, 다시 읽힌�
   const html = readFileSync(resolve(__dirname, '..', '..', 'public', 'index.html'), 'utf-8');
 
 
-  it('체크박스가 존재하고 기본은 꺼져 있다', () => {
+  // [2026-09-03 사장님] 기본 켬 — "왜 3인칭이냐"는 물음의 절반은 이 체크가 꺼져 있어서였다. 끄는 건 여전히 사용자 몫.
+  it('체크박스가 존재하고 기본은 켜져 있다', () => {
     const tag = html.match(/<input[^>]*id="ai-experience-generation"[^>]*>/u)?.[0] ?? '';
     expect(tag).toBeTruthy();
-    expect(tag).not.toContain('checked');
+    expect(tag).toContain('checked');
   });
 
   it('책임 소재를 화면에 밝힌다 — 켜는 것이 곧 동의다', () => {

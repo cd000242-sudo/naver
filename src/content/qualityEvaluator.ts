@@ -72,6 +72,8 @@ export interface EvaluationInput {
   readonly groundingText?: string;
   /** 쇼핑 글의 작성자 경험 근거. 구매자 리뷰는 first_party가 아니다. */
   readonly affiliateEvidenceMode?: AffiliateEvidenceMode;
+  /** [2026-09-03 사장님] AI 경험 옵트인 — 쇼핑 글의 1인칭 체험을 날조로 감점하지 않는다. */
+  readonly aiExperienceOptIn?: boolean;
 }
 
 const WEIGHTS: Readonly<Record<Mode, Weights>> = {

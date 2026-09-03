@@ -8,6 +8,8 @@
  */
 export interface AffiliateConversionStructureSource {
   personalExperience?: unknown;
+  /** [2026-09-03 사장님] AI 경험 옵트인 — 메모가 없어도 확인된 사실을 작성자 1인칭 장면으로 쓴다. */
+  aiExperienceGeneration?: unknown;
 }
 
 const hasFirstPartyMemo = (source: AffiliateConversionStructureSource): boolean =>
@@ -18,7 +20,9 @@ export function buildAffiliateConversionStructureContract(
 ): string {
   const storyRule = hasFirstPartyMemo(source)
     ? '5. 스토리텔링 — "작성자 직접 사용 메모"에 적힌 사실만 1인칭 장면으로 쓴다. 메모에 없는 감각·기간·가족 반응은 보태지 않는다. (Experience)'
-    : '5. 스토리텔링 — 독자의 하루를 2인칭으로 시뮬레이션한 장면("퇴근하고 돌아왔을 때 ○○ 때문에 …라면") 또는 구매자 후기의 장면으로 만든다. 작성자 1인칭 체험으로 위장하지 않는다. (Experience)';
+    : source?.aiExperienceGeneration === true
+      ? '5. 스토리텔링 — 확인된 스펙·후기의 사실을 작성자가 직접 겪은 1인칭 장면으로 쓴다("써보니", "제 경우엔"). "후기에서는" 같은 중계 문장은 쓰지 않는다. 숫자 기간·구매 시점·가족 반응은 자료에 있을 때만 쓴다.'
+      : '5. 스토리텔링 — 독자의 하루를 2인칭으로 시뮬레이션한 장면("퇴근하고 돌아왔을 때 ○○ 때문에 …라면") 또는 구매자 후기의 장면으로 만든다. 작성자 1인칭 체험으로 위장하지 않는다. (Experience)';
 
   return `[CONVERSION STRUCTURE — 구매 전환 10단 골격 + EEAT]
 글 전체는 아래 순서를 따른다. 각 단계는 근거가 있을 때만 쓰고, 근거가 없으면
