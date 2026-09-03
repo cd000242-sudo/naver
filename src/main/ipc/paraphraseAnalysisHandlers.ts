@@ -86,6 +86,29 @@ async function callAgent(provider: 'codex' | 'claude' | 'gemini', prompt: string
   return result.json ? JSON.stringify(result.json) : result.text;
 }
 
+/** 구독 에이전트로 자유 형식 텍스트 답을 받는다 — 스키마가 분석용이라 다른 보조 작업에는 맞지 않는다. */
+async function callAgentText(provider: 'codex' | 'claude' | 'gemini', prompt: string): Promise<string> {
+  const { generateWithAgent } = await import('../../agentCli/index.js');
+  const { createAgentProductPolicyContext } = await import('../../agentCli/productPolicy.js');
+  const result = await generateWithAgent(
+    { provider, prompt, timeoutMs: ANALYSIS_TIMEOUT_MS },
+    createAgentProductPolicyContext({ allowClaudeSubscription: true }),
+  );
+  return result.text;
+}
+
+async function callPerplexity(prompt: string, apiKey: string, model: string): Promise<string> {
+  const response = await fetch('https://api.perplexity.ai/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+    body: JSON.stringify({ model, messages: [{ role: 'user', content: prompt }], max_tokens: 2048 }),
+    signal: AbortSignal.timeout(ANALYSIS_TIMEOUT_MS),
+  });
+  if (!response.ok) throw new Error(`Perplexity ${response.status}`);
+  const data = (await response.json()) as { choices?: Array<{ message?: { content?: string } }> };
+  return data.choices?.[0]?.message?.content || '';
+}
+
 export interface AnalysisRoute {
   engine: string;
   callModel: (prompt: string) => Promise<string>;
@@ -116,6 +139,40 @@ export function resolveRoute(generator: string, config: Record<string, unknown>)
   const claudeKey = typeof config.claudeApiKey === 'string' ? config.claudeApiKey.trim() : '';
   if (claudeKey) return { engine: CLAUDE_ANALYSIS_MODEL, callModel: (p) => callClaude(p, claudeKey) };
 
+  return null;
+}
+
+/**
+ * [2026-09-03 사장님] 보조 호출(소제목 보정 등)은 사용자가 고른 엔진 *그대로* 간다.
+ * resolveRoute 와 달리 키가 있는 다른 벤더로 건너가지 않는다 — 고른 엔진의 키가 없으면 null 이고
+ * 호출 측은 그 단계를 건너뛴다(조용한 폴백 금지). 에이전트면 그 구독 CLI, API 키 모드면 그 벤더의
+ * 키와 그 벤더의 저비용 모델. 원래 소제목 보정기가 OpenAI gpt-4.1-mini 로 박혀 있던 것을 고친 자리.
+ */
+export function resolveSelectedEngineRoute(generator: string, config: Record<string, unknown>): AnalysisRoute | null {
+  const key = (name: string): string => (typeof config[name] === 'string' ? (config[name] as string).trim() : '');
+  if (generator === 'agent-codex') return { engine: 'codex(구독)', callModel: (p) => callAgentText('codex', p) };
+  if (generator === 'agent-claude') return { engine: 'claude(구독)', callModel: (p) => callAgentText('claude', p) };
+  if (generator === 'agent-gemini') return { engine: 'gemini(구독)', callModel: (p) => callAgentText('gemini', p) };
+  if (generator === 'openai') {
+    const openaiKey = key('openaiApiKey');
+    return openaiKey ? { engine: OPENAI_ANALYSIS_MODEL, callModel: (p) => callOpenAi(p, openaiKey) } : null;
+  }
+  if (generator === 'gemini') {
+    const geminiKey = key('geminiApiKey');
+    if (!geminiKey) return null;
+    const model = key('geminiModel') || GEMINI_ANALYSIS_MODEL;
+    return { engine: model, callModel: (p) => callGemini(p, geminiKey, model) };
+  }
+  if (generator === 'claude') {
+    const claudeKey = key('claudeApiKey');
+    return claudeKey ? { engine: CLAUDE_ANALYSIS_MODEL, callModel: (p) => callClaude(p, claudeKey) } : null;
+  }
+  if (generator === 'perplexity') {
+    const perplexityKey = key('perplexityApiKey');
+    if (!perplexityKey) return null;
+    const model = key('perplexityModel') || 'sonar';
+    return { engine: model, callModel: (p) => callPerplexity(p, perplexityKey, model) };
+  }
   return null;
 }
 

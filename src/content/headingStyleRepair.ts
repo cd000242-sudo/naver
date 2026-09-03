@@ -2,7 +2,8 @@
  * [2026-09-03 live 224399815476] Sentence-style headings ("출발 전엔 개화와 혼잡을 따로 봐야 해요")
  * kept slipping through the prompt contract; the generator only warned. For search-driven modes
  * (seo / custom / mate / business / homefeed) a heading is a noun phrase or a short question, so
- * offending titles are rewritten once with the low-cost model. Affiliate is excluded — its
+ * offending titles are rewritten once by the engine the user selected (the same route the
+ * paraphrase analysis uses — never another vendor's key). Affiliate is excluded — its
  * first-person voice allows sentence headings on purpose. Homefeed is excluded too: its heading
  * contract (shared/headings-homefeed.prompt) uses sentence signposts ("이 조건에서 갈립니다") by design.
  *
@@ -10,7 +11,6 @@
  */
 import { isSentenceStyleHeadingTitle } from '../contentBodyTransforms.js';
 
-export const HEADING_REPAIR_MODEL = 'gpt-4.1-mini';
 const MAX_TITLE_CHARS = 26;
 
 export interface HeadingLike {
@@ -92,25 +92,7 @@ export async function repairSentenceStyleHeadings<T extends { headings?: readonl
     indexes.forEach((index, position) => log(`[HeadingRepair] ✏️ "${titles[position]}" → "${repaired[position]}"`));
     return { ...content, headings: nextHeadings };
   } catch (error) {
-    log(`[HeadingRepair] ⚠️ 저비용 모델 호출 실패 — 원래 소제목 유지: ${(error as Error)?.message || error}`);
+    log(`[HeadingRepair] ⚠️ 선택 엔진 호출 실패 — 원래 소제목 유지: ${(error as Error)?.message || error}`);
     return content;
   }
-}
-
-export function createOpenAiHeadingRepairCompleter(apiKey: string, timeoutMs = 20_000): HeadingRepairDeps['complete'] {
-  return async (prompt: string): Promise<string> => {
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
-      body: JSON.stringify({
-        model: HEADING_REPAIR_MODEL,
-        messages: [{ role: 'user', content: prompt }],
-        max_completion_tokens: 300,
-      }),
-      signal: AbortSignal.timeout(timeoutMs),
-    });
-    if (!response.ok) throw new Error(`OpenAI ${response.status}`);
-    const data = (await response.json()) as { choices?: Array<{ message?: { content?: string } }> };
-    return data.choices?.[0]?.message?.content || '';
-  };
 }

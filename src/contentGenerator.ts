@@ -1351,15 +1351,24 @@ JSON:
  */
 async function repairHeadingsBeforeFinalize(content: StructuredContent, source: ContentSource): Promise<void> {
   try {
-    const apiKey = String(process.env.OPENAI_API_KEY || '').trim();
-    if (!apiKey) return;
-    const { repairSentenceStyleHeadings, createOpenAiHeadingRepairCompleter } = await import('./content/headingStyleRepair.js');
+    // [2026-09-03 사장님] 보정도 사용자가 고른 엔진으로 — OpenAI 키를 박아 쓰지 않는다. 고른 엔진의 키/구독이
+    //   없으면 건너뛴다(다른 벤더로 조용히 넘어가지 않는다).
+    const { loadConfig } = await import('./configManager.js');
+    const { resolveSelectedEngineRoute } = await import('./main/ipc/paraphraseAnalysisHandlers.js');
+    const generator = String(source.generator || '').trim();
+    const config = ((await loadConfig().catch(() => null)) as Record<string, unknown> | null) ?? {};
+    const route = resolveSelectedEngineRoute(generator, config);
+    if (!route) {
+      console.log(`[HeadingRepair] 선택 엔진(${generator || '미지정'})의 키/구독이 없어 소제목 보정 건너뜀`);
+      return;
+    }
+    const { repairSentenceStyleHeadings } = await import('./content/headingStyleRepair.js');
     const repaired = await repairSentenceStyleHeadings(content, {
       mode: source.contentMode,
       keyword: getPrimaryKeywordFromSource(source),
     }, {
-      complete: createOpenAiHeadingRepairCompleter(apiKey),
-      log: (message) => console.log(message),
+      complete: route.callModel,
+      log: (message) => console.log(`${message} · 엔진 ${route.engine}`),
     });
     // The finalize call sites are pinned verbatim by the V3 wiring contracts
     // (contentQualityV3EarlyReturnWiring / GenerationIntegration), so the repaired
