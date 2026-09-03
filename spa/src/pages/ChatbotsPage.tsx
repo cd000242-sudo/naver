@@ -25,33 +25,6 @@ const CHATBOTS: Chatbot[] = [
         accent: 'gold',
     },
     {
-        category: '애드센스',
-        title: '애드센스 키워드 도우미',
-        subtitle: '카테고리별 키워드 발굴',
-        desc: '애드센스 승인 글을 준비할 때 카테고리 기준으로 키워드 후보를 넓게 뽑아보는 챗봇입니다.',
-        bestFor: ['승인 글 카테고리 선정', '키워드 후보 100개 이상 발굴', '주제 방향 정리'],
-        url: 'https://chatgpt.com/g/g-682528d677908191a1c9b7e71c181709-edeusenseu-kiweodeu-doumi',
-        accent: 'green',
-    },
-    {
-        category: '애드센스',
-        title: '애드센스 승인 글쓰기 전문가',
-        subtitle: '승인용 글 작성 보조',
-        desc: '키워드를 넣고 승인용 글 초안을 만드는 챗봇입니다. 영어 초안이 먼저 나오면 안내에 따라 진행하면 됩니다.',
-        bestFor: ['애드센스 승인 글 초안', '키워드 기반 글쓰기', '구조화된 정보 글'],
-        url: 'https://chatgpt.com/g/g-68075a10c7c08191841f0d4255fd2a07-seungin-geulsseugi-jeonmunga',
-        accent: 'green',
-    },
-    {
-        category: '애드센스',
-        title: '사람처럼 경험글 변환기',
-        subtitle: 'AI 느낌 줄이는 경험형 문장 변환',
-        desc: '작성한 글을 사람의 경험이 들어간 문장처럼 다듬는 챗봇입니다. 승인 여부를 보장하지는 않지만 글의 자연스러움을 높이는 데 도움됩니다.',
-        bestFor: ['AI 문장 자연화', '경험형 문장 보강', '승인 글 최종 다듬기'],
-        url: 'https://chatgpt.com/g/g-67fdb02274d88191ab9c4ed51b909b91-seungin-haegsim-saramceoreom-gyeongheomgeul-byeonhwangi',
-        accent: 'rose',
-    },
-    {
         category: '글로벌 블로그',
         title: 'LEADERNAM TOP BLOG GPTS',
         subtitle: '워드프레스·티스토리·블로그스팟 글쓰기',
@@ -99,7 +72,6 @@ const CHATBOTS: Chatbot[] = [
 ];
 
 const FLOWS = [
-    ['애드센스 승인 준비', '키워드 도우미 → 승인 글쓰기 전문가 → 경험글 변환기'],
     ['네이버 글 작성', '상위 글 내용 참고 → SEO/홈판 챗봇 → 제목 선택 후 본문 작성'],
     ['외부유입 운영', '원본 글 작성 → 외부유입 전용글 생성기 → 채널별 문안 배포'],
 ];
@@ -114,7 +86,7 @@ const accentMap: Record<Chatbot['accent'], string> = {
 
 /** 4타일 기본값 — 어드민(SiteContent.chatbots)이 비어 있어도 페이지는 이 값으로 완전하다 */
 const TILE_DEFAULTS = {
-    chatgpt: { title: '쳇지피티 무료챗봇', desc: '리더남 GPTs 9종 — 초안·애드센스·네이버·외부유입·지식인까지 목적별로 골라 쓰세요.' },
+    chatgpt: { title: '쳇지피티 무료챗봇', desc: '리더남 GPTs 6종 — 초안·글로벌 블로그·네이버·외부유입·지식인까지 목적별로 골라 쓰세요.' },
     gemini: {
         title: '무료 제미나이 챗봇',
         desc: '부티크 인포의 글쓰기 프롬프트 탭에서 제미나이 전용 챗봇을 바로 사용합니다.',
@@ -178,7 +150,7 @@ function ChatbotsPage() {
                             <span className="chatbots-kicker">FREE CHATBOTS</span>
                             <h1>무료 챗봇 모음</h1>
                             <p>
-                                블로그 초안, 애드센스 승인 글, 네이버 노출 글, 외부유입 글까지 바로 사용할 수 있는
+                                블로그 초안, 네이버 노출 글, 외부유입 글까지 바로 사용할 수 있는
                                 리더남 GPTs를 한곳에 정리했습니다.
                             </p>
                             <div className="chatbots-actions">
