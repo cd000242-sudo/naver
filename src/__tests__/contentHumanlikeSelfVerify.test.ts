@@ -323,6 +323,30 @@ describe('자체검증: detectPlatitudes — 일반론 남발 감지 / 구체 �
   });
 });
 
+// [2026-09-04 실측 회귀 잠금] 본문 프롬프트가 [자료N] 토큰을 금지하므로 토큰 밀도는 계약상 항상 0.
+//   기본 호출에서는 토큰 기준이 재생성을 트리거하면 안 된다(기준선 4/4편 유료 재생성 사고).
+describe('자체검증: detectPlatitudes — 인용 토큰 기준은 요청한 호출자에게만', () => {
+  const concrete = {
+    introduction: '9월 1일부터 청년월세지원 2차 접수가 시작됐다. 월 최대 20만원을 12개월간 준다.',
+    headings: [
+      { title: '대상', body: '만 19세부터 34세까지 무주택 청년이 대상이다. 소득 기준은 중위소득 60% 이하다.' },
+      { title: '신청', body: '복지로 누리집 또는 주민센터 방문으로 신청한다. 첫 주에는 접속이 몰린다.' },
+      { title: '지급', body: '심사는 접수 후 45일 안에 끝난다. 지급은 매월 25일이다.' },
+    ],
+  };
+  it('토큰 0개 · 일반론 0회 → 기본 호출은 임계 미초과', () => {
+    const r = detectPlatitudes(concrete);
+    expect(r.totalCitations).toBe(0);
+    expect(r.exceedsThreshold).toBe(false);
+    expect(r.reason).toBe('정상');
+  });
+  it('citationTokensExpected 를 켠 호출자만 토큰 밀도 기준을 받는다', () => {
+    const r = detectPlatitudes(concrete, { citationTokensExpected: true });
+    expect(r.exceedsThreshold).toBe(true);
+    expect(r.reason).toContain('인용 밀도');
+  });
+});
+
 // [Gap A — 옵트인 하드블록 플래그] 기본 OFF, 명시적 truthy 값에서만 ON.
 //   무인 자동화가 예고 없이 멈추지 않도록 기본 OFF 보장이 핵심.
 describe('자체검증: isPlatitudeHardBlockEnabled — 옵트인 차단 플래그', () => {

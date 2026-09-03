@@ -143,7 +143,7 @@ const MIN_CITATION_PLACEMENT_RATIO = 0.5;
  */
 export function detectPlatitudes(
   content: DetectableContent,
-  options?: { ragSource?: string },
+  options?: { ragSource?: string; citationTokensExpected?: boolean },
 ): PlatitudeDetectionResult {
   const fullText = collectFullText(content);
   const paragraphCount = countParagraphs(content);
@@ -177,9 +177,16 @@ export function detectPlatitudes(
 
   // 5. 임계 판정 (v1 + v2 통합)
   const platitudeExceeds = platitudeHitCount > MAX_PLATITUDE_HITS;
-  const citationLow = citationDensity < MIN_CITATION_DENSITY;
+  // [2026-09-04 measured] Every body prompt forbids `[자료N]` tokens in the text (seo/base F2,
+  //   shared/exposure-structure), so the token count is 0 by contract and the density/placement
+  //   criteria fired on 4/4 baseline posts — each one a full paid regeneration that could never
+  //   pass. Token criteria now apply only when the caller says the prompt asked for tokens.
+  //   Platitude count and RAG overlap still gate on their own.
+  const citationTokensExpected = options?.citationTokensExpected === true;
+  const citationLow = citationTokensExpected && citationDensity < MIN_CITATION_DENSITY;
   const overlapLow = ragSource !== '' && rougeLOverlap < MIN_ROUGE_L_OVERLAP;
-  const placementLow = placementStats.factualParagraphCount >= 3
+  const placementLow = citationTokensExpected
+    && placementStats.factualParagraphCount >= 3
     && placementStats.placementRatio < MIN_CITATION_PLACEMENT_RATIO;
   const exceedsThreshold = platitudeExceeds || citationLow || overlapLow || placementLow;
 
