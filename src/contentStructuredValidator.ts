@@ -69,7 +69,13 @@ export function validateStructuredContent(content: StructuredContent, source?: C
   }
 
   // ✅ 프롬프트 지침 누출 감지 및 수정
-  const primaryKeyword = String((source as any)?.keyword || source?.title || (source as any)?.rawText?.slice(0, 50) || '').trim();
+  // [2026-09-03 실측 3건] 사용자 키워드(metadata.keywords[0])가 1순위다. 예전엔 source.keyword → title → 원문 앞 50자 순이라
+  //   제목 없는 키워드 글에서 자리표시 제목("○○ 관련 콘텐츠")이나 자료 머리글("=== 사실 자료 …")이 "키워드"가 됐고,
+  //   그 결과 멀쩡한 제목이 "키워드와 무관"으로 찍혀 그 쓰레기로 다시 지어졌다. 원문 앞부분은 키워드가 아니다.
+  const keywordFromMetadata = Array.isArray((source?.metadata as any)?.keywords)
+    ? String((source!.metadata as any).keywords[0] ?? '').trim()
+    : '';
+  const primaryKeyword = (keywordFromMetadata || String((source as any)?.keyword || source?.title || '')).trim();
   if (content.selectedTitle && primaryKeyword) {
     const leakageCheck = detectPromptLeakageInTitle(content.selectedTitle, primaryKeyword);
 
@@ -105,6 +111,11 @@ export function validateStructuredContent(content: StructuredContent, source?: C
       }
 
       // 유효한 대안이 없으면 키워드 기반 제목 생성
+      if (!validTitle && leakageCheck.leakagePatterns.length === 0) {
+        // [2026-09-03] 키워드 불일치만으로는 제목을 갈아엎지 않는다 — 검사기 오판이 실제 제목보다 비쌌다.
+        validTitle = content.selectedTitle;
+        console.warn(`[validateStructuredContent] 대안 없음 · 지침 누출 아님 → 원래 제목 유지: "${validTitle}"`);
+      }
       if (!validTitle) {
         // 키워드를 활용해 기본 제목 생성
         validTitle = `${primaryKeyword}, 알아두면 좋은 핵심 정보 총정리`;

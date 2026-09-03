@@ -189,7 +189,9 @@ describe('contentStructuredValidator', () => {
       ],
     });
 
-    validateStructuredContent(content, baseSource({ title: 'Exact Main Title' }));
+    // [2026-09-03] 검증기의 키워드 1순위가 metadata.keywords 로 바뀌어(제목·원문 앞부분은 키워드가 아니다),
+    //   픽스처의 키워드도 제목과 같은 것으로 둔다 — 이 테스트의 관심사는 bodyPlain 보존이다.
+    validateStructuredContent(content, baseSource({ title: 'Exact Main Title', metadata: { keywords: ['Exact Main Title'] } }));
 
     expect(content.headings[0].title).toBe('Second valid heading');
     expect(content.bodyPlain).toBe(bodyPlain);
