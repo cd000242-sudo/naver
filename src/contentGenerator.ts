@@ -1,5 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { stripAiConclusionOpenersFromContent } from './content/aiConclusionOpener.js';
+// [SPEC-BLUEPRINT-2026 Phase 2] 본문 호출 전 설계도 — 인용·사실·상황·소제목을 재료로 넘긴다.
+import { generateBlueprint } from './content/blueprint/generateBlueprint';
+import { renderBlueprintMaterial } from './content/blueprint/renderBlueprintMaterial';
+import { insertBlueprintIntoPrompt } from './content/blueprint/insertBlueprintIntoPrompt';
 import { stripMaterialNarrationFromContent } from './content/materialNarrationStrip.js';
 import { stripResearchNoteChatter } from './content/researchNoteHygiene.js';
 import { applyReviewMaterialHygiene } from './content/reviewMaterialHygiene.js';
@@ -6075,6 +6079,45 @@ async function generateStructuredContentInternal(
   const warningMinChars = Math.round(minChars * 0.50); // 경고 기준 50%
 
   let extraInstruction = '';
+
+  /*
+   * [SPEC-BLUEPRINT-2026 Phase 2 · 2026-09-04] 본문 호출 전에 설계도 1회.
+   *   실측(09-03~04): 모델은 규칙("인용하라")은 무시하고 재료(발언 원문 5개)는 따른다.
+   *   그래서 고른 엔진의 저비용 라우트로 자료에서 발언·사실·독자 상황·소제목 후보를
+   *   먼저 뽑아 [원본 텍스트] 뒤에 재료로 준다. 실패·타임아웃은 생략(폴백 엔진 없음).
+   *   끄기: CONTENT_BLUEPRINT=0. 쇼핑(affiliate)·V3 는 대상 아님.
+   */
+  let blueprintBlock = '';
+  let blueprintQuotes: string[] = [];
+  const blueprintMode = String(source.contentMode || 'seo');
+  const blueprintEligible = !isV3Prompt
+    && process.env.CONTENT_BLUEPRINT !== '0'
+    && ['seo', 'homefeed', 'custom', 'mate', 'business'].includes(blueprintMode)
+    && String((source as any).rawText || '').length >= 200;
+  if (blueprintEligible) {
+    const blueprintRoute = await resolveSideTaskRoute(source);
+    if (!blueprintRoute) {
+      console.log(`[Blueprint] 선택 엔진(${String(source.generator || '미지정')})의 라우트 없음 — 설계도 생략`);
+    } else {
+      const blueprintRun = await generateBlueprint(
+        {
+          keyword: getPrimaryKeywordFromSource(source) || String(source.title || '').trim(),
+          mode: blueprintMode,
+          material: String((source as any).rawText || ''),
+        },
+        {
+          complete: blueprintRoute.callModel,
+          log: (message) => console.log(message),
+          timeoutMs: blueprintRoute.engine.startsWith('agent-') ? 180_000 : 45_000,
+        },
+      );
+      if (blueprintRun.result) {
+        blueprintBlock = renderBlueprintMaterial(blueprintRun.result.blueprint, { quoteFloor: 2 });
+        blueprintQuotes = blueprintRun.result.blueprint.quotes.map((q) => q.text);
+        console.log(`[Blueprint] 📐 엔진 ${blueprintRoute.engine} · 재료 ${blueprintBlock.length}자 · ${blueprintRun.elapsedMs}ms`);
+      }
+    }
+  }
   let supplementalInstructionInitialized = false;
   let lastFailReason = ''; // ✅ [2026-03-23] 실패 원인 추적
   let _fidelityRetryUsed = false; // ✅ [Phase 7-B] Source Fidelity 자동 재시도 1회 가드
@@ -6243,6 +6286,12 @@ async function generateStructuredContentInternal(
         // [2026-08-23] contentMode 전달 필수 — 이 지시문은 시스템 프롬프트 맨 앞에 붙어
         //   모드 프롬프트보다 위에서 작동한다. 모드를 안 넘기면 홈판/트래픽헌터로 URL 글을
         //   뽑아도 "원본 형식 추종" 절이 모드 계약을 눌러 기사 재구성체가 나온다.
+        if (blueprintBlock) {
+          // 편별 재료는 [원본 텍스트] 뒤(user 파트)에 둔다 — system 접두가 바뀌면 캐시가 통째로 빠진다.
+          systemPrompt = insertBlueprintIntoPrompt(systemPrompt, blueprintBlock);
+          console.log('[Blueprint] 📐 설계도 재료를 [원본 텍스트] 뒤에 주입 (키워드 사실 목록 대체)');
+        }
+
         const urlModeDirective = buildUrlModeDirective({
           ...(source as any),
           contentMode: (source as any).contentMode,
@@ -6250,7 +6299,7 @@ async function generateStructuredContentInternal(
         if (urlModeDirective) {
           systemPrompt = urlModeDirective + systemPrompt;
           console.log(`[ContentGenerator] 📜 URL 모드 강화 지시 prepend (사실 보존 + 형식은 ${(source as any).contentMode || '기본'} 모드 우선)`);
-        } else {
+        } else if (!blueprintBlock) {
           // [2026-08-26 사장님 지시] "URL 글생성뿐만 아니라 키워드로 글생성도 마찬가지야."
           //   키워드 모드도 검색·크롤링으로 모은 자료를 재료로 쓴다. 재료가 있는데 결과물이
           //   그 사실을 안 담는 문제는 URL 모드와 같다. 목록 형태도 같게 준다.
@@ -7119,7 +7168,7 @@ async function generateStructuredContentInternal(
         extraInstruction = prependFaithfulnessRetryInstruction({
           matchedTriggers: platitudeList,
           previousInstruction: extraInstruction,
-          quoteCandidates: extractDirectQuotes(source.rawText, 5),
+          quoteCandidates: blueprintQuotes.length > 0 ? blueprintQuotes : extractDirectQuotes(source.rawText, 5),
         });
         continue;
       }
