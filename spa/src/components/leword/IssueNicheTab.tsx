@@ -25,9 +25,13 @@ import {
  * 그대로 돌려 제목·서브·실측 풀·지식인·30일 추세를 붙이고, 화면은 PreemptionCard 를
  * 같이 쓴다. 지표 줄만 다르다 — 이슈 행은 SERP 를 안 쟀으니 광고수·빈자리 대신 정면 글.
  *
- * 두 범주는 섞지 않는다(사장님 결정 A):
- *   틈새     = 데이터랩에 최근 7일 수요가 실측되고 문서수 ≤ 3,000 — 지금 쓰면 자리가 있다
- *   선점 후보 = 문서수 ≤ 300 인데 수요는 아직 안 잡힘 — 터지면 먼저 있는 글이 먹는다
+ * 두 범주는 섞지 않는다(사장님 결정 A, 정의 강화 2026-09-03 "황금키워드만 적으면
+ * 상위노출이 될 수도 있지만 더욱 확률 높고 트래픽을 몰고 올 수 있는 키워드가 틈새키워드"):
+ *   틈새     = 세 실측을 다 통과한 행만 — 트래픽(검색광고 검색량 300+, 상승 중이면 100+)
+ *              · 수요(데이터랩 최근 7일 + 문서수 ≤ 3,000) · 자리(블로그탭 상위 10 에 정면글 0건)
+ *   선점 후보 = 자리는 비었는데 트래픽 증거가 아직 없음 — 문서수 ≤ 300 에 수요 미포착
+ *              (no-demand), 또는 수요·자리는 잡혔는데 검색량이 없음(demand-no-volume)
+ *   대기     = 트래픽·수요는 통과했는데 자리를 아직 못 잼(회차당 12건 상한) — 싣지 않고 건수만
  * 세 번째 판 '이슈 흐름'은 이슈 단위의 추론 계층이다 — 왜 뜨나·몰린 말·다음 물결.
  * 수치는 전부 실측이다. 추정 검색량은 발행기가 null 로 내보내고, 화면은 '—' 로 적는다.
  */
@@ -48,8 +52,8 @@ function freeNamesOf(board: IssueBoard | null | undefined): string[] {
 }
 
 const VIEWS: { id: View; label: string; hint: string }[] = [
-    { id: 'niche', label: '틈새', hint: '데이터랩에 최근 7일 수요가 실측됐고 문서수 3,000 이하 — 지금 쓰면 자리가 있다' },
-    { id: 'preemption', label: '선점 후보', hint: '문서수 300 이하인데 수요는 아직 안 잡힘 — 이슈가 커지면 먼저 있는 글이 먹는다' },
+    { id: 'niche', label: '틈새', hint: '세 실측을 다 통과한 것만 — 검색량 300+(상승 중이면 100+) · 데이터랩 최근 7일 수요와 문서수 3,000 이하 · 블로그탭 상위 10에 정면글 0건. 황금보다 좁고, 쓰면 트래픽이 온다' },
+    { id: 'preemption', label: '선점 후보', hint: '자리는 비었는데 트래픽 증거는 아직 없음 — 문서수 300 이하에 수요 미포착이거나, 수요는 잡혔는데 검색량이 없음. 이슈가 커지면 먼저 있는 글이 먹는다' },
     { id: 'flow', label: '이슈 흐름', hint: '이슈마다 왜 뜨나(헤드라인 검증) · 사람들이 이미 치는 말(실측) · 다음에 몰릴 검색어(에이전트 추론) — 선점할 말을 고르는 판' },
 ];
 
@@ -171,7 +175,7 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
     const measured = board?.measured;
     const current = VIEWS.find((item) => item.id === view);
 
-    /** 카드 머리 배지 — 이슈명(흐름 판이 있으면 뛴다)·실측 수요·상승·급상승·레인·이월. */
+    /** 카드 머리 배지 — 이슈명(흐름 판이 있으면 뛴다)·자리 실측·실측 수요·상승·급상승·레인·이월. */
     const headTags = (row: IssueBoardRow) => (
         <>
             <span className="lw-trend-tag">
@@ -186,6 +190,19 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                     <>이슈 · {row.issue}</>
                 )}
             </span>
+            {/*
+              * 자리 실측 배지 — 블로그탭 상위 10 을 실제로 받아 정면글이 0건이었다는 뜻.
+              * 이게 틈새를 황금과 가르는 세 번째 게이트다. 툴팁에 잰 시각과 상위 제목을 단다.
+              */}
+            {row.serp?.verdict === 'WINNABLE' && (
+                <span
+                    className="lw-tier-tag tier-d"
+                    title={`블로그탭 상위 ${row.serp.sampledTitles}개 중 정면글 ${row.serp.exactTitleHits}건 · 부분 ${row.serp.partialTitleHits}건 (${fmtTime(row.serp.measuredAt)} 잼)`}
+                >상위 10 정면글 0건 — 자리 있음</span>
+            )}
+            {row.preemptionKind === 'demand-no-volume' && (
+                <span className="lw-intent-tag" title="데이터랩 수요와 자리는 잡혔지만 검색광고 검색량이 없다 — 트래픽은 아직 증명 안 됨">수요 잡힘 · 검색량 미확인</span>
+            )}
             {row.hasLiveDemand && <span className="lw-tier-tag tier-a">실측 수요 ▲</span>}
             {row.demandStatus === 'rising' && <span className="lw-intent-tag">최근 7일 상승</span>}
             {row.isHot && <span className="lw-warn-tag">급상승 이슈</span>}
@@ -198,7 +215,7 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
         <>
             <TabIntro
                 title="실검 틈새키워드"
-                desc="실시간 검색어·IT 이슈를 쪼개 데이터랩 최근 7일 수요와 블로그 문서수를 실측하고, 지금 쓰면 자리가 있는 것만 싣습니다. 카드는 황금키워드와 같은 보강(제목·서브키워드·실측 풀·지식인·30일 추세)을 거칩니다. 검색량·문서수·수요는 전부 실측이고, 추정치는 '—' 로 비워 둡니다."
+                desc="실시간 검색어·IT 이슈를 쪼개 세 가지를 실측합니다 — 트래픽(검색광고 검색량), 수요(데이터랩 최근 7일 · 블로그 문서수), 자리(네이버 블로그탭 상위 10 정면글). 셋을 다 통과한 것만 '틈새'로 싣습니다. 황금키워드보다 좁지만, 쓰면 상위 노출 확률이 높고 트래픽이 옵니다. 카드는 황금키워드와 같은 보강(제목·서브키워드·실측 풀·지식인·30일 추세)을 거치고, 추정치는 '—' 로 비워 둡니다."
                 source={`실시간 이슈 실측 회차${publishedLabel ? ` · ${publishedLabel} 발행` : ''} · ${board?.schedule || '매일 07·13·19시(KST) 갱신'}`}
             />
 
@@ -218,7 +235,13 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
             <p className="lw-write-hint">
                 {current?.hint}
                 {measured && typeof measured.candidates === 'number' && measured.candidates > 0 && (
-                    <> · 이번 회차 이슈 {measured.issues ?? '—'}개 → 후보 {measured.candidates}개 실측 → 틈새 {measured.niche ?? 0} · 선점 후보 {measured.preemption ?? 0}</>
+                    <>
+                        {' '}· 이번 회차 이슈 {measured.issues ?? '—'}개 → 후보 {measured.candidates}개 실측 → 틈새 {measured.niche ?? 0} · 선점 후보 {measured.preemption ?? 0}
+                        {/* 자리 대기 = 트래픽·수요는 통과했는데 블로그탭을 아직 못 잼(회차당 12건). 못 잰 건 싣지 않는다 — 건수만 밝힌다. */}
+                        {typeof measured.pending === 'number' && measured.pending > 0 && (
+                            <> · 자리 대기 {measured.pending}<i title="트래픽·수요는 통과했지만 블로그탭 상위 10 을 아직 못 잰 행 — 다음 회차에 잰다. 못 잰 것은 싣지 않습니다"> (다음 회차 실측)</i></>
+                        )}
+                    </>
                 )}
             </p>
 
@@ -230,7 +253,7 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                 </div>
             )}
             {status === 'empty' && (
-                <div className="lw-note">이번 회차에는 기준(실측 수요 · 문서수 3,000 이하)을 만족한 키워드가 없습니다. 다음 회차는 {board?.schedule || '07·13·19시(KST)'} 입니다.</div>
+                <div className="lw-note">이번 회차에는 세 실측(검색량 300+ · 데이터랩 최근 7일 수요와 문서수 3,000 이하 · 블로그탭 상위 10 정면글 0건)을 다 통과한 키워드가 없습니다. 다음 회차는 {board?.schedule || '07·13·19시(KST)'} 입니다.</div>
             )}
 
             {status === 'ready' && board && (
@@ -268,7 +291,12 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                     ) : (
                         <>
                             {rows.length === 0 && (
-                                <div className="lw-note">이번 회차의 {current?.label} 판정은 0건입니다. 다른 범주를 열어 보세요.</div>
+                                <div className="lw-note">
+                                    이번 회차의 {current?.label} 판정은 0건입니다.
+                                    {view === 'niche' && typeof measured?.pending === 'number' && measured.pending > 0
+                                        ? ` 트래픽·수요를 통과한 ${measured.pending}건이 자리 실측을 기다리고 있습니다 — 다음 회차에 블로그탭을 재고 통과분만 싣습니다.`
+                                        : ' 다른 범주를 열어 보세요.'}
+                                </div>
                             )}
 
                             {!unlocked && rows.length > FREE_ISSUE_ROWS && (

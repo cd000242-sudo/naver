@@ -33,6 +33,9 @@ export const EVIDENCE_ICON: Record<string, string> = {
     'next-wave': '🌊',
     autocomplete: '⌨',
     related: '⇄',
+    // 실검 틈새 세 게이트 — 트래픽(검색광고 검색량 실측)·자리(블로그탭 상위 10 실측).
+    traffic: '⇡',
+    slot: '⌖',
 };
 
 /** 블로그탭으로 바로 보낸다 — 사용자가 자리를 자기 눈으로 확인할 수 있어야 한다. */
