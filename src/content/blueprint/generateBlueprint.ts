@@ -7,9 +7,11 @@ import { buildBlueprintPrompt, type BlueprintPromptInput } from './buildBlueprin
 import { parseBlueprint, type ParsedBlueprint } from './parseBlueprint';
 
 export const BLUEPRINT_TIMEOUT_MS = 20_000;
+/** Side-call routes default to 2,048 output tokens; a Korean 설계도 with quotes and excerpts needs more. */
+export const BLUEPRINT_MAX_TOKENS = 4096;
 
 export interface BlueprintDeps {
-  readonly complete: (prompt: string) => Promise<string>;
+  readonly complete: (prompt: string, options?: { maxTokens?: number }) => Promise<string>;
   readonly log?: (message: string) => void;
   readonly timeoutMs?: number;
   readonly now?: () => number;
@@ -40,11 +42,15 @@ export async function generateBlueprint(input: BlueprintPromptInput, deps: Bluep
     return { result: null, reason: 'empty-material', elapsedMs: 0 };
   }
   try {
-    const raw = await withTimeout(deps.complete(buildBlueprintPrompt(input)), deps.timeoutMs ?? BLUEPRINT_TIMEOUT_MS);
+    const raw = await withTimeout(
+      deps.complete(buildBlueprintPrompt(input), { maxTokens: BLUEPRINT_MAX_TOKENS }),
+      deps.timeoutMs ?? BLUEPRINT_TIMEOUT_MS,
+    );
     const parsed = parseBlueprint(raw, material);
     const elapsedMs = now() - started;
     if (!parsed) {
-      log(`[Blueprint] ⚠️ 응답을 설계도로 읽을 수 없어 생략 (${elapsedMs}ms)`);
+      const preview = String(raw || '').replace(/\s+/g, ' ').trim();
+      log(`[Blueprint] ⚠️ 응답을 설계도로 읽을 수 없어 생략 (${elapsedMs}ms, ${preview.length}자) · 앞: ${preview.slice(0, 160)} · 뒤: ${preview.slice(-120)}`);
       return { result: null, reason: 'unparsable', elapsedMs };
     }
     const b = parsed.blueprint;

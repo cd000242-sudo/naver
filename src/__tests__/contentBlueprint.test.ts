@@ -105,3 +105,41 @@ describe('generateBlueprint — 실패는 생략, 예외 없음', () => {
     expect(BLUEPRINT_TIMEOUT_MS).toBe(20_000);
   });
 });
+
+describe('parseBlueprint — 출력 상한에 잘린 JSON 복구', () => {
+  it('배열 중간에서 끊긴 응답도 마지막 완전한 값까지 살린다', () => {
+    const full = JSON.parse(RESPONSE);
+    const text = JSON.stringify(full, null, 1);
+    // facts 두 번째 항목 뒤, 세 번째 항목 중간에서 자른다.
+    const cutAt = text.indexOf('예산 1조원') + 3;
+    const truncated = text.slice(0, cutAt);
+    const parsed = parseBlueprint(truncated, MATERIAL);
+    expect(parsed).not.toBeNull();
+    expect(parsed!.blueprint.quotes).toHaveLength(1);
+    expect(parsed!.blueprint.facts.map((f) => f.claim)).toEqual(['월 최대 20만원, 12개월', '소득 기준 중위소득 60% 이하']);
+    // skeleton 은 잘려 나간 뒤라 비어 있다 — 있는 것만 쓴다.
+    expect(parsed!.blueprint.skeleton).toEqual([]);
+  });
+
+  it('문자열 안의 중괄호·이스케이프 따옴표에 속지 않는다', () => {
+    const tricky = '{"angle":"a {b} c","readerSituation":"복지로에서 \\"대상\\" 확인","quotes":[],"facts":[],"skeleton":["지원 대상 조건","신청 방법과 접수처","탈락하는 경우"],"offTopic":["x"';
+    const parsed = parseBlueprint(tricky, MATERIAL);
+    expect(parsed?.blueprint.skeleton).toHaveLength(3);
+    expect(parsed?.blueprint.readerSituation).toContain('대상');
+  });
+});
+
+describe('generateBlueprint — 호출 옵션과 진단', () => {
+  it('설계도 호출은 maxTokens 4096 을 요청하고, 해석 불가 시 응답 앞뒤를 로그에 남긴다', async () => {
+    const seen: Array<{ prompt: string; options?: { maxTokens?: number } }> = [];
+    const logs: string[] = [];
+    const run = await generateBlueprint(
+      { keyword: 'k', mode: 'seo', material: MATERIAL },
+      { complete: async (prompt, options) => { seen.push({ prompt, options }); return '설계도를 만들 수 없습니다 ' + 'x'.repeat(400); }, log: (m) => logs.push(m) },
+    );
+    expect(run.reason).toBe('unparsable');
+    expect(seen[0].options?.maxTokens).toBe(4096);
+    expect(logs[0]).toContain('앞: 설계도를 만들 수 없습니다');
+    expect(logs[0]).toContain('자)');
+  });
+});

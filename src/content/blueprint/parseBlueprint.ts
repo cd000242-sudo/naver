@@ -23,16 +23,57 @@ function clip(value: unknown, max: number): string {
   return String(value ?? '').replace(/\s+/gu, ' ').trim().slice(0, max);
 }
 
+/** Closing brackets needed to balance `text` (string-aware). */
+function computeClosers(text: string): string {
+  const stack: string[] = [];
+  let inString = false;
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i];
+    if (inString) {
+      if (ch === '\\') i += 1;
+      else if (ch === '"') inString = false;
+      continue;
+    }
+    if (ch === '"') inString = true;
+    else if (ch === '{') stack.push('}');
+    else if (ch === '[') stack.push(']');
+    else if (ch === '}' || ch === ']') stack.pop();
+  }
+  return stack.reverse().join('');
+}
+
+/**
+ * Output caps cut a long 설계도 mid-array. Rather than losing everything, cut back to the last
+ * complete value and close the brackets; the verified-substring rules still apply to what is left.
+ */
+function repairTruncatedJson(text: string): unknown {
+  let candidate = text;
+  for (let round = 0; round < 8; round += 1) {
+    const cut = Math.max(candidate.lastIndexOf('}'), candidate.lastIndexOf(']'));
+    if (cut <= 0) return null;
+    candidate = candidate.slice(0, cut + 1);
+    try {
+      return JSON.parse(candidate.replace(/,\s*$/u, '') + computeClosers(candidate));
+    } catch {
+      candidate = candidate.slice(0, cut);
+    }
+  }
+  return null;
+}
+
 function extractJsonObject(raw: string): unknown {
   const text = String(raw || '').trim();
   const start = text.indexOf('{');
+  if (start < 0) return null;
   const end = text.lastIndexOf('}');
-  if (start < 0 || end <= start) return null;
-  try {
-    return JSON.parse(text.slice(start, end + 1));
-  } catch {
-    return null;
+  if (end > start) {
+    try {
+      return JSON.parse(text.slice(start, end + 1));
+    } catch {
+      /* fall through to truncation repair */
+    }
   }
+  return repairTruncatedJson(text.slice(start));
 }
 
 function isVerbatim(fragment: string, material: string): boolean {
