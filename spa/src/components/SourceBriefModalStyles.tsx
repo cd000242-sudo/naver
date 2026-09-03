@@ -245,6 +245,42 @@ function SourceBriefModalStyles() {
                 text-decoration: none;
             }
             .brief-modal-chips a:hover { background: rgba(255,255,255,0.09); color: #fff; }
+            .brief-modal-chips a b { margin-left: 5px; color: #ffa500; font-size: 11px; font-weight: 800; }
+
+            /* ── 이슈 흐름(실검 틈새 회차) — 왜 뜨나 · 몰린 말 · 다음 물결 ── */
+            .brief-modal-flow { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+            .brief-modal-flow-issue {
+                display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+                margin: 0 0 10px; color: #fff; font-size: 14px; font-weight: 800; word-break: keep-all;
+            }
+            .brief-modal-flow-issue em {
+                padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.14);
+                color: rgba(235,242,250,0.7); font-style: normal; font-size: 11px; font-weight: 800;
+            }
+            .brief-modal-flow-issue em.hot { border-color: rgba(255,107,107,0.45); color: #ff8a8a; }
+            .brief-modal-flow-why {
+                margin: 0 0 12px; padding: 10px 12px;
+                border-left: 3px solid #ffd700; border-radius: 0 10px 10px 0;
+                background: rgba(255,215,0,0.06);
+                color: rgba(240,246,252,0.92); font-size: 13.5px; line-height: 1.6; word-break: keep-all;
+            }
+            .brief-modal-flow-why b { display: inline-block; margin-right: 6px; color: #ffd700; font-size: 11.5px; font-weight: 900; }
+            .brief-modal-flow-why small { display: block; margin-top: 5px; color: rgba(235,242,250,0.42); font-size: 11px; }
+            .brief-modal-flow-why.muted { border-left-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.03); color: rgba(235,242,250,0.6); }
+            .brief-modal-flow-why.muted b { color: rgba(235,242,250,0.55); }
+            .brief-modal-flow-row { margin-bottom: 10px; }
+            .brief-modal-flow-row .brief-modal-intent-label small { margin-left: 4px; font-weight: 600; opacity: 0.7; }
+            .brief-modal-flow-wave { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
+            .brief-modal-flow-wave li {
+                padding: 8px 11px; border: 1px solid rgba(56,189,248,0.28); border-radius: 10px;
+                background: rgba(56,189,248,0.07);
+            }
+            .brief-modal-flow-wave a { color: #bae6fd; font-size: 13px; font-weight: 800; text-decoration: none; }
+            .brief-modal-flow-wave a:hover { color: #fff; text-decoration: underline; }
+            .brief-modal-flow-wave a b { margin-left: 5px; color: #ffa500; font-size: 11px; }
+            .brief-modal-flow-wave span { display: block; margin-top: 3px; color: rgba(235,242,250,0.58); font-size: 12px; line-height: 1.5; word-break: keep-all; }
+            .brief-modal-flow-more { display: inline-block; margin-top: 6px; color: #ffd700; font-size: 12px; font-weight: 800; text-decoration: none; }
+            .brief-modal-flow-more:hover { text-decoration: underline; }
 
             .brief-modal-foot {
                 display: flex;

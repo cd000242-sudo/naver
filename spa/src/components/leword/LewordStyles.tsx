@@ -1960,6 +1960,58 @@ function LewordStyles() {
             }
             .lw-lock span { font-size: 22px; }
 
+            /* ── 실검 틈새 · 이슈 흐름(왜 뜨나 · 몰린 말 · 다음 물결) ── */
+            /* 카드 머리 '이슈 ·' 태그가 버튼이다 — 눌러서 그 이슈의 흐름으로 뛴다. */
+            .lw-issue-jump { all: unset; cursor: pointer; }
+            .lw-issue-jump:hover { color: #fff; }
+            .lw-issue-flow-list { display: grid; gap: 12px; }
+            .lw-issue-flow {
+                position: relative; padding: 14px 16px;
+                border: 1px solid rgba(255,255,255,.09); border-radius: 14px;
+                background: rgba(255,255,255,.028);
+            }
+            .lw-issue-flow.hot { border-color: rgba(245,197,24,.28); }
+            .lw-issue-flow-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+            .lw-issue-flow-head h3 {
+                display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+                margin: 0; color: #fff; font-size: 16px; font-weight: 900; flex: 1;
+            }
+            .lw-issue-flow-head a { color: #9aa1b2; font-size: 12px; font-weight: 700; text-decoration: none; }
+            .lw-issue-flow-head a:hover { color: #fff; }
+            .lw-why-empty { border-left-color: rgba(255,255,255,.18); background: rgba(255,255,255,.03); }
+            .lw-why-empty em { color: #9aa1b2; }
+            .lw-issue-flow-heads { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 3px; }
+            .lw-issue-flow-heads li { display: flex; gap: 8px; align-items: baseline; font-size: 12px; color: rgba(235,242,250,.6); }
+            .lw-issue-flow-heads li::before { content: '·'; color: rgba(235,242,250,.35); }
+            .lw-issue-flow-heads a { color: rgba(235,242,250,.7); text-decoration: none; }
+            .lw-issue-flow-heads a:hover { color: #fff; text-decoration: underline; }
+            .lw-issue-flow-heads small { color: rgba(235,242,250,.35); font-size: 10.5px; white-space: nowrap; }
+            .lw-issue-flow-row { position: relative; margin-top: 10px; }
+            .lw-issue-flow-row > em {
+                display: block; margin-bottom: 6px;
+                font-style: normal; color: #9aa1b2; font-size: 11.5px; font-weight: 800;
+            }
+            .lw-issue-flow-row > em small { font-weight: 600; opacity: .7; margin-left: 4px; }
+            .lw-issue-flow-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+            .lw-issue-flow-chips button {
+                display: inline-flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
+                padding: 6px 12px; border-radius: 999px;
+                border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04);
+                color: rgba(235,242,250,.88); font-size: 12.5px; font-weight: 700; cursor: pointer;
+                font-family: inherit;
+            }
+            .lw-issue-flow-chips button:hover { background: rgba(255,255,255,.09); color: #fff; }
+            .lw-issue-flow-chips button b { font-weight: 800; color: #ffa500; font-size: 11px; }
+            .lw-issue-flow-chips button i { font-style: normal; font-size: 11px; }
+            .lw-issue-flow-chips button small { flex-basis: 100%; font-size: 10.5px; font-weight: 500; color: rgba(235,242,250,.5); }
+            .lw-issue-flow-wave .lw-issue-flow-chips button { border-color: rgba(56,189,248,.3); background: rgba(56,189,248,.08); color: #bae6fd; }
+            .lw-issue-flow-wave .lw-issue-flow-chips button:hover { background: rgba(56,189,248,.16); color: #fff; }
+            .lw-issue-flow-wave .lw-issue-flow-chips button.on-board.niche { border-color: rgba(0,224,198,.45); }
+            .lw-issue-flow-wave .lw-issue-flow-chips button.on-board.preemption { border-color: rgba(255,165,0,.45); }
+            /* 비로그인은 다음 물결만 가린다 — 왜 뜨나·몰린 말은 열어 둔다. */
+            .lw-issue-flow-wave.locked > *:not(.lw-lock) { filter: blur(5px); opacity: .5; pointer-events: none; user-select: none; }
+            .lw-issue-flow-wave.locked .lw-lock { border-radius: 10px; }
+
             /* ── 내 API 키 ── */
             .lw-key-on { color: #00e0c6 !important; font-weight: 900; }
             .lw-key-issue { margin-left: auto; color: #9aa1b2; font-size: 12.5px; font-weight: 700; }

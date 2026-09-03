@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { EVIDENCE_ICON, SURFACE_TAG, TIER_BADGE, TIMING_BADGE } from './preemptionMeta';
 import { preemptionIndex } from '../../lib/preemptionIndex';
 
@@ -46,9 +47,11 @@ export type CardHeadRow = {
  * '지금이 선점 적기'·경고 배지도 뺐다 — 셋만 두라는 지시가 명시적이었다.
  * 경고에 해당하는 사실은 아래 근거 줄에 그대로 남아 있다.
  */
-function BoardCardHead({ row, rank, onCopy, copied }: {
+function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
     row: CardHeadRow;
     rank?: number;
+    /** 배지 줄 맨 앞에 끼울 태그 — 실검 틈새 탭이 이슈명·실측 수요·급상승을 넣는다. */
+    extraTags?: ReactNode;
     /** 키워드 복사 — 액션 줄에서 홀로 밀려나던 버튼을 주인공(키워드) 옆으로 옮겼다. */
     onCopy?: () => void;
     copied?: boolean;
@@ -66,6 +69,7 @@ function BoardCardHead({ row, rank, onCopy, copied }: {
          */
         <div className="lw-card-head">
             <div className="lw-card-tags">
+                {extraTags}
                 {row.layoutBestFor && SURFACE_TAG[row.layoutBestFor] && (
                     <span className={`lw-surface-tag surface-${row.layoutBestFor}`}>
                         {SURFACE_TAG[row.layoutBestFor]}

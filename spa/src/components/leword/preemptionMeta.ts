@@ -29,6 +29,10 @@ export const EVIDENCE_ICON: Record<string, string> = {
     fresh: '✦',
     'not-realtime': '◇',
     demand: '▲',
+    // 실검 틈새 행의 출처 근거 — 다음 물결(에이전트 추론)·자동완성 실측·연관 실측.
+    'next-wave': '🌊',
+    autocomplete: '⌨',
+    related: '⇄',
 };
 
 /** 블로그탭으로 바로 보낸다 — 사용자가 자리를 자기 눈으로 확인할 수 있어야 한다. */

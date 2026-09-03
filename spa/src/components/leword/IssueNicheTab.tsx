@@ -1,9 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
-import { formatCount } from '../../lib/keywordApi';
 import { TopicFilter } from './BoardFilters';
 import LicenseGate, { isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
 import { naverSearchUrl } from './preemptionMeta';
+import DemandChartModal, { pickChartSeries } from './DemandChartModal';
+import PreemptionCard from './PreemptionCard';
+import PreemptionPlan from './PreemptionPlan';
+import IssueFlowBrief from './IssueFlowBrief';
+import { useMindmap } from './useMindmap';
+import {
+    compactKey, fetchIssueBoard, rowsOfIssue,
+    type IssueBoard, type IssueBoardRow, type IssueBrief, type IssueLane, type IssueVerdict,
+} from '../../lib/issueFlow';
 
 /**
  * 실검 틈새키워드 — 좌측 메뉴의 독립 탭(사장님 설계 2026-09-02).
@@ -12,46 +20,19 @@ import { naverSearchUrl } from './preemptionMeta';
  * 실시간 이슈를 돌려 정적 JSON 을 발행하고, 여기서는 읽기만 한다.
  * 방문자마다 돌리지 않으므로 키도, 서버 AI 도 없다.
  *
+ * 카드는 황금키워드 카드 그 자체다(사장님 지시 2026-09-03: "황금키워드랑 똑같이
+ * 버튼이랑 연관키워드 등등 그래프도 똑같이 전부"). 회차가 황금 보강기(enrich-board)를
+ * 그대로 돌려 제목·서브·실측 풀·지식인·30일 추세를 붙이고, 화면은 PreemptionCard 를
+ * 같이 쓴다. 지표 줄만 다르다 — 이슈 행은 SERP 를 안 쟀으니 광고수·빈자리 대신 정면 글.
+ *
  * 두 범주는 섞지 않는다(사장님 결정 A):
  *   틈새     = 데이터랩에 최근 7일 수요가 실측되고 문서수 ≤ 3,000 — 지금 쓰면 자리가 있다
  *   선점 후보 = 문서수 ≤ 300 인데 수요는 아직 안 잡힘 — 터지면 먼저 있는 글이 먹는다
+ * 세 번째 판 '이슈 흐름'은 이슈 단위의 추론 계층이다 — 왜 뜨나·몰린 말·다음 물결.
  * 수치는 전부 실측이다. 추정 검색량은 발행기가 null 로 내보내고, 화면은 '—' 로 적는다.
  */
 
-type Verdict = 'niche' | 'preemption';
-type Lane = 'realtime' | 'tech' | 'policy';
-
-type IssueRow = {
-    keyword: string;
-    issue: string;
-    lane: Lane;
-    issueType: string;
-    isDerived: boolean;
-    verdict: Verdict;
-    documentCount: number | null;
-    documentCountMeasured: boolean;
-    searchVolume: number | null;
-    hasLiveDemand: boolean;
-    demandStatus: string;
-    demandRatio: number | null;
-    issueStatus: string;
-    isHot: boolean;
-    frontalDocCount: number | null;
-    freshFrontalCount: number | null;
-    reasons: string[];
-    measuredAt: string;
-    carried?: boolean;
-};
-
-type IssueBoard = {
-    publishedAt?: string;
-    schedule?: string;
-    measured?: { issues?: number; candidates?: number; niche?: number; preemption?: number };
-    freeSample?: { day: string; keywords: string[] };
-    rows: IssueRow[];
-};
-
-const BOARD_URL = '/data/issue-niche-board.json';
+type View = IssueVerdict | 'flow';
 
 /*
  * 비로그인 무료 건수 — 황금키워드보드(FREE_BOARD_ROWS 5)와 다르게 **3건**이다
@@ -66,12 +47,13 @@ function freeNamesOf(board: IssueBoard | null | undefined): string[] {
     return (board?.freeSample?.keywords || []).slice(0, FREE_ISSUE_ROWS);
 }
 
-const VERDICTS: { id: Verdict; label: string; hint: string }[] = [
+const VIEWS: { id: View; label: string; hint: string }[] = [
     { id: 'niche', label: '틈새', hint: '데이터랩에 최근 7일 수요가 실측됐고 문서수 3,000 이하 — 지금 쓰면 자리가 있다' },
     { id: 'preemption', label: '선점 후보', hint: '문서수 300 이하인데 수요는 아직 안 잡힘 — 이슈가 커지면 먼저 있는 글이 먹는다' },
+    { id: 'flow', label: '이슈 흐름', hint: '이슈마다 왜 뜨나(헤드라인 검증) · 사람들이 이미 치는 말(실측) · 다음에 몰릴 검색어(에이전트 추론) — 선점할 말을 고르는 판' },
 ];
 
-const LANE_LABEL: Record<Lane, string> = { realtime: '실검', tech: 'IT·AI', policy: '정책' };
+const LANE_LABEL: Record<IssueLane, string> = { realtime: '실검', tech: 'IT·AI', policy: '정책' };
 
 const fmtTime = (iso?: string) => (iso
     ? new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(iso))
@@ -86,32 +68,36 @@ function agoLabel(iso: string, nowMs: number): string {
     return `${Math.floor(hours / 24)}일 전 잼`;
 }
 
+/** 이슈 흐름 앵커 id — 카드의 '이슈 ·' 태그가 여기로 뛴다. */
+const flowAnchor = (issue: string) => `issue-flow-${compactKey(issue).replace(/[^\w가-힣]/g, '')}`;
+
 function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
     const [board, setBoard] = useState<IssueBoard | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
-    const [verdict, setVerdict] = useState<Verdict>('niche');
+    const [view, setView] = useState<View>('niche');
     const [lane, setLane] = useState('전체');
     const [copied, setCopied] = useState('');
+    const [openPlan, setOpenPlan] = useState('');
+    const [chartKeyword, setChartKeyword] = useState('');
+    const [jumpTo, setJumpTo] = useState('');
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     const [nowMs] = useState(() => Date.now());
+    const { mindmap, openMindmap } = useMindmap();
 
     useEffect(() => {
         let alive = true;
         let lastStamp = '';
         const load = () => {
-            fetch(BOARD_URL, { cache: 'no-store' })
-                .then((response) => (response.ok ? response.json() : Promise.reject(new Error('no board'))))
-                .then((data) => {
-                    if (!alive) return;
-                    // 같은 판이면 화면을 안 건드린다 — 스크롤이 튀지 않게.
-                    const stamp = String(data?.publishedAt || '');
-                    if (stamp && stamp === lastStamp) return;
-                    lastStamp = stamp;
-                    const rows: IssueRow[] = Array.isArray(data?.rows) ? data.rows : [];
-                    setBoard({ ...data, rows });
-                    setStatus(rows.length > 0 ? 'ready' : 'empty');
-                })
-                .catch(() => { if (alive && !lastStamp) setStatus('error'); });
+            fetchIssueBoard().then((data) => {
+                if (!alive) return;
+                if (!data) { if (!lastStamp) setStatus('error'); return; }
+                // 같은 판이면 화면을 안 건드린다 — 스크롤이 튀지 않게.
+                const stamp = String(data.publishedAt || '');
+                if (stamp && stamp === lastStamp) return;
+                lastStamp = stamp;
+                setBoard(data);
+                setStatus(data.rows.length > 0 || data.issues.length > 0 ? 'ready' : 'empty');
+            });
         };
         load();
         // 하루 3회 회차 + 탭에 돌아온 순간 다시 읽는다 — 황금키워드보드와 같다.
@@ -125,20 +111,40 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
         };
     }, []);
 
-    const verdictRows = useMemo(() => (board?.rows || []).filter((row) => row.verdict === verdict), [board, verdict]);
+    // 카드 태그 → 이슈 흐름으로 뛴다. 판이 바뀌어 그려진 뒤에 스크롤해야 한다.
+    useEffect(() => {
+        if (!jumpTo || view !== 'flow') return;
+        const el = document.getElementById(jumpTo);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setJumpTo('');
+    }, [jumpTo, view]);
 
-    /** 실제로 행이 있는 공급원만 칩으로 낸다. */
+    const verdictRows = useMemo(
+        () => (view === 'flow' ? [] : (board?.rows || []).filter((row) => row.verdict === view)),
+        [board, view],
+    );
+
+    /** 이슈 흐름 판의 재료 — 왜·몰린 말·다음 물결 중 하나라도 있는 이슈만. */
+    const briefs = useMemo<IssueBrief[]>(
+        () => (board?.issues || []).filter((issue) => issue.why || issue.concentrated.length > 0 || issue.nextWave.length > 0),
+        [board],
+    );
+
+    /** 실제로 행(또는 이슈)이 있는 공급원만 칩으로 낸다. */
     const lanes = useMemo<[string, number][]>(() => {
         const counts = new Map<string, number>();
-        for (const row of verdictRows) {
-            const label = LANE_LABEL[row.lane] || row.lane;
+        const items: Array<{ lane: IssueLane }> = view === 'flow' ? briefs : verdictRows;
+        for (const item of items) {
+            const label = LANE_LABEL[item.lane] || item.lane;
             counts.set(label, (counts.get(label) || 0) + 1);
         }
         return [...counts.entries()];
-    }, [verdictRows]);
+    }, [verdictRows, briefs, view]);
+
+    const inLane = (item: { lane: IssueLane }) => lane === '전체' || (LANE_LABEL[item.lane] || item.lane) === lane;
 
     const rows = useMemo(() => {
-        const list = lane === '전체' ? verdictRows : verdictRows.filter((row) => (LANE_LABEL[row.lane] || row.lane) === lane);
+        const list = verdictRows.filter(inLane);
         if (unlocked) return list;
         // 무료 3건은 발행본이 하루 동안 고정한 이름이다 — 위로 올려 블러 사이에 흩어지지 않게 한다.
         const freeNames = freeNamesOf(board);
@@ -146,35 +152,65 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
         return [...list.filter((row) => freeNames.includes(row.keyword)), ...list.filter((row) => !freeNames.includes(row.keyword))];
     }, [verdictRows, lane, unlocked, board]);
 
-    const copy = (keyword: string) => {
-        navigator.clipboard?.writeText(keyword);
-        setCopied(keyword);
-        window.setTimeout(() => setCopied(''), 1400);
-    };
+    const flowItems = useMemo(() => briefs.filter(inLane), [briefs, lane]);
+
+    // 무료 3건 키워드가 속한 이슈는 다음 물결까지 연다 — 카드 3건을 그냥 보여 주면서
+    // 그 이슈의 흐름만 잠그면 '왜 이 카드인가'가 안 보인다. 나머지 이슈는 잠근다.
+    const freeIssueKeys = useMemo(() => {
+        const freeNames = new Set(freeNamesOf(board));
+        return new Set((board?.rows || []).filter((row) => freeNames.has(row.keyword)).map((row) => compactKey(row.issue)));
+    }, [board]);
+    const isFlowLocked = (issue: IssueBrief) => !unlocked && !freeIssueKeys.has(compactKey(issue.issue));
+    const lockedWaveCount = flowItems.reduce((sum, issue) => sum + (isFlowLocked(issue) ? issue.nextWave.length : 0), 0);
+
+    const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
 
     const publishedLabel = fmtTime(board?.publishedAt);
     const measured = board?.measured;
+    const current = VIEWS.find((item) => item.id === view);
+
+    /** 카드 머리 배지 — 이슈명(흐름으로 뛴다)·실측 수요·상승·급상승·레인·이월. */
+    const headTags = (row: IssueBoardRow) => (
+        <>
+            <span className="lw-trend-tag">
+                <button
+                    type="button"
+                    className="lw-issue-jump"
+                    title="이 이슈의 흐름(왜 뜨나 · 다음 물결) 보기"
+                    onClick={() => { setView('flow'); setJumpTo(flowAnchor(row.issue)); }}
+                >이슈 · {row.issue} ›</button>
+            </span>
+            {row.hasLiveDemand && <span className="lw-tier-tag tier-a">실측 수요 ▲</span>}
+            {row.demandStatus === 'rising' && <span className="lw-intent-tag">최근 7일 상승</span>}
+            {row.isHot && <span className="lw-warn-tag">급상승 이슈</span>}
+            {row.lane !== 'realtime' && <span className="lw-trend-tag">{LANE_LABEL[row.lane]}</span>}
+            {row.carried && <span className="lw-trend-tag" title={row.measuredAt}>{agoLabel(row.measuredAt, nowMs)}</span>}
+        </>
+    );
 
     return (
         <>
             <TabIntro
                 title="실검 틈새키워드"
-                desc="실시간 검색어·IT 이슈를 카테고리 세부 키워드로 쪼개고, 데이터랩 최근 7일 수요와 블로그 문서수를 실측해 지금 쓰면 자리가 있는 것만 싣습니다. 검색량·문서수·수요는 전부 실측이고, 추정치는 '—' 로 비워 둡니다."
+                desc="실시간 검색어·IT 이슈를 쪼개 데이터랩 최근 7일 수요와 블로그 문서수를 실측하고, 지금 쓰면 자리가 있는 것만 싣습니다. 카드는 황금키워드와 같은 보강(제목·서브키워드·실측 풀·지식인·30일 추세)을 거칩니다. 검색량·문서수·수요는 전부 실측이고, 추정치는 '—' 로 비워 둡니다."
                 source={`실시간 이슈 실측 회차${publishedLabel ? ` · ${publishedLabel} 발행` : ''} · ${board?.schedule || '매일 07·13·19시(KST) 갱신'}`}
             />
 
             <div className="lw-segment lw-segment-wrap" role="group" aria-label="판정">
-                {VERDICTS.map((item) => (
+                {VIEWS.map((item) => (
                     <button
                         key={item.id}
                         type="button"
-                        className={verdict === item.id ? 'on' : ''}
-                        onClick={() => { setVerdict(item.id); setLane('전체'); }}
-                    >{item.label} <em>{(board?.rows || []).filter((row) => row.verdict === item.id).length}</em></button>
+                        className={view === item.id ? 'on' : ''}
+                        onClick={() => { setView(item.id); setLane('전체'); }}
+                    >
+                        {item.label}{' '}
+                        <em>{item.id === 'flow' ? briefs.length : (board?.rows || []).filter((row) => row.verdict === item.id).length}</em>
+                    </button>
                 ))}
             </div>
             <p className="lw-write-hint">
-                {VERDICTS.find((item) => item.id === verdict)?.hint}
+                {current?.hint}
                 {measured && typeof measured.candidates === 'number' && measured.candidates > 0 && (
                     <> · 이번 회차 이슈 {measured.issues ?? '—'}개 → 후보 {measured.candidates}개 실측 → 틈새 {measured.niche ?? 0} · 선점 후보 {measured.preemption ?? 0}</>
                 )}
@@ -194,88 +230,104 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
             {status === 'ready' && board && (
                 <>
                     {lanes.length > 1 && (
-                        <TopicFilter value={lane} onChange={setLane} topics={lanes} total={verdictRows.length} />
+                        <TopicFilter value={lane} onChange={setLane} topics={lanes} total={view === 'flow' ? briefs.length : verdictRows.length} />
                     )}
 
-                    {rows.length === 0 && (
-                        <div className="lw-note">이번 회차의 {VERDICTS.find((item) => item.id === verdict)?.label} 판정은 0건입니다. 다른 범주를 열어 보세요.</div>
+                    {view === 'flow' ? (
+                        <>
+                            {flowItems.length === 0 && (
+                                <div className="lw-note">이번 회차에 검증된 이슈 흐름이 없습니다. 다음 회차를 기다려 주세요.</div>
+                            )}
+                            {lockedWaveCount > 0 && (
+                                <LicenseGate
+                                    onUnlock={() => setUnlocked(true)}
+                                    remaining={lockedWaveCount}
+                                    freeRows={FREE_ISSUE_ROWS}
+                                    boardLabel="실검 틈새키워드"
+                                />
+                            )}
+                            <div className="lw-issue-flow-list">
+                                {flowItems.map((issue) => (
+                                    <IssueFlowBrief
+                                        key={issue.issue}
+                                        anchorId={flowAnchor(issue.issue)}
+                                        brief={issue}
+                                        rows={rowsOfIssue(board, issue)}
+                                        locked={isFlowLocked(issue)}
+                                        onAnalyze={onAnalyze}
+                                    />
+                                ))}
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            {rows.length === 0 && (
+                                <div className="lw-note">이번 회차의 {current?.label} 판정은 0건입니다. 다른 범주를 열어 보세요.</div>
+                            )}
+
+                            {!unlocked && rows.length > FREE_ISSUE_ROWS && (
+                                <LicenseGate
+                                    onUnlock={() => setUnlocked(true)}
+                                    remaining={rows.length - FREE_ISSUE_ROWS}
+                                    freeRows={FREE_ISSUE_ROWS}
+                                    boardLabel="실검 틈새키워드"
+                                />
+                            )}
+
+                            <div className="lw-board-list">
+                                {rows.map((row, index) => {
+                                    const freeNames = freeNamesOf(board);
+                                    const locked = unlocked
+                                        ? false
+                                        : (freeNames.length > 0 ? !freeNames.includes(row.keyword) : index >= FREE_ISSUE_ROWS);
+                                    return (
+                                        <PreemptionCard
+                                            key={`${row.issue}-${row.keyword}`}
+                                            row={row}
+                                            rank={index + 1}
+                                            variant="issue"
+                                            headTags={headTags(row)}
+                                            locked={locked}
+                                            copied={copied === row.keyword}
+                                            onCopy={() => {
+                                                navigator.clipboard?.writeText(row.keyword);
+                                                setCopied(row.keyword);
+                                                window.setTimeout(() => setCopied(''), 1400);
+                                            }}
+                                            planOpen={openPlan === row.keyword}
+                                            onTogglePlan={() => setOpenPlan(openPlan === row.keyword ? '' : row.keyword)}
+                                            onOpenChart={() => setChartKeyword(row.keyword)}
+                                            mindmap={mindmap[row.keyword]}
+                                            onMindmap={() => openMindmap(row)}
+                                            onAnalyze={onAnalyze}
+                                        />
+                                    );
+                                })}
+                            </div>
+
+                            {(() => {
+                                const chartRow = rows.find((row) => row.keyword === chartKeyword);
+                                const chart = chartRow ? pickChartSeries(chartRow) : null;
+                                return chartRow && chart ? (
+                                    <DemandChartModal
+                                        keyword={chartRow.keyword}
+                                        ranges={chart.ranges}
+                                        asOf={chartRow.measuredAt.slice(0, 10)}
+                                        onClose={() => setChartKeyword('')}
+                                    />
+                                ) : null;
+                            })()}
+
+                            {planRow && (
+                                <PreemptionPlan
+                                    row={planRow}
+                                    onClose={() => setOpenPlan('')}
+                                    onAnalyze={(keyword) => onAnalyze?.(keyword)}
+                                    searchUrl={naverSearchUrl(planRow.keyword)}
+                                />
+                            )}
+                        </>
                     )}
-
-                    {!unlocked && rows.length > FREE_ISSUE_ROWS && (
-                        <LicenseGate
-                            onUnlock={() => setUnlocked(true)}
-                            remaining={rows.length - FREE_ISSUE_ROWS}
-                            freeRows={FREE_ISSUE_ROWS}
-                            boardLabel="실검 틈새키워드"
-                        />
-                    )}
-
-                    <div className="lw-board-list">
-                        {rows.map((row, index) => {
-                            const freeNames = freeNamesOf(board);
-                            const locked = unlocked
-                                ? false
-                                : (freeNames.length > 0 ? !freeNames.includes(row.keyword) : index >= FREE_ISSUE_ROWS);
-                            return (
-                                <article key={`${row.issue}-${row.keyword}`} className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
-                                    <div className="lw-card-head">
-                                        <div className="lw-card-tags">
-                                            <span className="lw-trend-tag">이슈 · {row.issue}</span>
-                                            {row.hasLiveDemand && <span className="lw-tier-tag tier-a">실측 수요 ▲</span>}
-                                            {row.demandStatus === 'rising' && <span className="lw-intent-tag">최근 7일 상승</span>}
-                                            {row.isHot && <span className="lw-warn-tag">급상승 이슈</span>}
-                                            {row.lane !== 'realtime' && <span className="lw-trend-tag">{LANE_LABEL[row.lane]}</span>}
-                                            {row.carried && <span className="lw-trend-tag" title={row.measuredAt}>{agoLabel(row.measuredAt, nowMs)}</span>}
-                                        </div>
-                                        <h3 className="lw-card-keyword">
-                                            <span className="lw-rank">{index + 1}</span>
-                                            {row.keyword}
-                                            <button
-                                                type="button"
-                                                className="lw-copy-mini"
-                                                title="키워드 복사"
-                                                aria-label={`${row.keyword} 복사`}
-                                                onClick={() => copy(row.keyword)}
-                                            >{copied === row.keyword ? '복사됨' : '⧉'}</button>
-                                        </h3>
-                                        <ul className="lw-evidence">
-                                            {row.reasons.map((text) => (
-                                                <li key={text}><span aria-hidden="true">·</span>{text}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-
-                                    {/* 못 잰 값은 '—' 다. 0 으로 채우면 안 본 것이 '없음'이 된다. */}
-                                    <div className="lw-card-metrics">
-                                        <div><span>문서수</span><strong>{formatCount(row.documentCount)}</strong></div>
-                                        <div><span>정면 글</span><strong>{typeof row.frontalDocCount === 'number' ? `${row.frontalDocCount}건` : '—'}</strong></div>
-                                        <div><span>최근 정면</span><strong>{typeof row.freshFrontalCount === 'number' ? `${row.freshFrontalCount}건` : '—'}</strong></div>
-                                        <div><span>검색량</span><strong>{formatCount(row.searchVolume)}</strong></div>
-                                    </div>
-
-                                    <div className="lw-card-actions">
-                                        <a href={naverSearchUrl(row.keyword)} target="_blank" rel="noreferrer">
-                                            네이버 검색결과<small>자리 확인</small>
-                                        </a>
-                                        <a
-                                            href={`https://datalab.naver.com/keyword/trendSearch.naver?keyword=${encodeURIComponent(row.keyword)}`}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >데이터랩 그래프</a>
-                                        <button type="button" onClick={() => onAnalyze?.(row.keyword)}>
-                                            LEWORD 키워드 분석
-                                        </button>
-                                    </div>
-
-                                    {locked && (
-                                        <div className="lw-lock" aria-hidden="true">
-                                            <span>🔒</span>
-                                        </div>
-                                    )}
-                                </article>
-                            );
-                        })}
-                    </div>
                 </>
             )}
         </>

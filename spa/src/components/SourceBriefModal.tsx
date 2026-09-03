@@ -1,5 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { groupByIntent } from '../lib/intentGroups';
+import { ISSUE_TYPE_LABEL, findIssueBrief, loadIssueBoardOnce, type IssueBrief } from '../lib/issueFlow';
+import { formatCount } from '../lib/keywordApi';
+import { isUnlocked } from './leword/LicenseGate';
 import {
     buildSourceSearchUrl,
     cleanLiveText, trimToCompleteSentence,
@@ -16,7 +19,14 @@ import {
  *
  * 여기서 새로 만드는 문장은 없다. facts 는 기사 원문 그대로이고, 제목·주제는
  * 배치가 계산해 스냅샷에 담아 준 값을 그대로 보여준다.
+ *
+ * 이슈 흐름(2026-09-03, 사장님: "실시간 검색어 브릿지가 너무 빈약해"): 실검 틈새
+ * 회차(하루 3회 CI)가 실측·추론해 발행한 "왜 뜨나 · 몰린 말 · 다음 물결"을 이
+ * 검색어의 이슈 묶음에서 찾아 붙인다. 못 찾으면 구획 자체가 없다.
  */
+
+/** 비로그인에게 보이는 다음 물결 수 — 실검 틈새 탭의 무료 3건과 같은 눈금. */
+const FREE_WAVE_CHIPS = 3;
 
 type Props = {
     lane: SourceLane;
@@ -55,6 +65,20 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
         ? (titles as { summary?: string }).summary
         : '';
     const expansions = (item.expansions || []).slice(0, 12);
+
+    // 실검 틈새 회차의 이슈 묶음. 페이지에 한 번만 받고, 검색어가 바뀌면 다시 찾는다.
+    const [flow, setFlow] = useState<IssueBrief | null>(null);
+    useEffect(() => {
+        let alive = true;
+        loadIssueBoardOnce().then((board) => {
+            if (alive) setFlow(findIssueBrief(board, keyword));
+        });
+        return () => { alive = false; };
+    }, [keyword]);
+    const unlocked = isUnlocked();
+    const waveAll = flow?.nextWave || [];
+    const wave = unlocked ? waveAll : waveAll.slice(0, FREE_WAVE_CHIPS);
+    const waveHidden = waveAll.length - wave.length;
 
     // ESC 로 닫고, 열려 있는 동안 뒤 화면은 스크롤되지 않게 한다.
     // 모달 뒤가 같이 굴러가면 닫았을 때 보던 자리를 잃는다.
@@ -145,6 +169,72 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                     )}
 
                     <aside className="brief-modal-side">
+                        {flow && (
+                            <section className="brief-modal-flow" aria-label={`${keyword} 이슈 흐름`}>
+                                <div className="brief-modal-section-head">
+                                    <strong>이슈 흐름 — 왜 뜨나 · 몰린 말 · 다음 물결</strong>
+                                    <small>실검 틈새 회차 실측</small>
+                                </div>
+                                <p className="brief-modal-flow-issue">
+                                    <span>{flow.issue}</span>
+                                    <em>{ISSUE_TYPE_LABEL[flow.issueType] || flow.issueType}</em>
+                                    {flow.isHot && <em className="hot">급상승</em>}
+                                    {flow.rowCount > 0 && <em>실측 카드 {flow.rowCount}</em>}
+                                </p>
+                                {flow.why ? (
+                                    <div className="brief-modal-flow-why">
+                                        <b>왜 지금?</b>{flow.why}
+                                        <small>뉴스 헤드라인 {flow.headlines.length}건으로 검증된 추론만 싣습니다</small>
+                                    </div>
+                                ) : (
+                                    <div className="brief-modal-flow-why muted">
+                                        <b>왜 지금?</b>검증된 이유 없음
+                                        <small>헤드라인과 맞지 않는 추론은 싣지 않습니다</small>
+                                    </div>
+                                )}
+                                {flow.concentrated.length > 0 && (
+                                    <div className="brief-modal-flow-row">
+                                        <em className="brief-modal-intent-label">몰린 말 <small>자동완성·연관검색어 실측</small></em>
+                                        <div className="brief-modal-chips">
+                                            {flow.concentrated.slice(0, 10).map((word) => (
+                                                <a
+                                                    key={word.keyword}
+                                                    href={buildSourceSearchUrl(lane.id, word.keyword)}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    {word.keyword}
+                                                    {typeof word.searchVolume === 'number' && <b>{formatCount(word.searchVolume)}</b>}
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                                {waveAll.length > 0 && (
+                                    <div className="brief-modal-flow-row">
+                                        <em className="brief-modal-intent-label">다음 물결 <small>에이전트 추론 — 먼저 잡아 둘 말</small></em>
+                                        <ul className="brief-modal-flow-wave">
+                                            {wave.map((next) => (
+                                                <li key={next.keyword}>
+                                                    <a href={buildSourceSearchUrl(lane.id, next.keyword)} target="_blank" rel="noreferrer">
+                                                        🌊 {next.keyword}
+                                                        {typeof next.searchVolume === 'number' && <b>{formatCount(next.searchVolume)}</b>}
+                                                    </a>
+                                                    <span>{next.reason}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        {waveHidden > 0 && (
+                                            <a className="brief-modal-flow-more" href="/leword?tab=issue">
+                                                나머지 {waveHidden}개는 실검 틈새 탭에서 로그인 후 열립니다 →
+                                            </a>
+                                        )}
+                                    </div>
+                                )}
+                                <a className="brief-modal-flow-more" href="/leword?tab=issue">실검 틈새 보드에서 카드로 보기 →</a>
+                            </section>
+                        )}
+
                         {(titles.seo || titles.home) && (
                             <section aria-label={`${keyword} 추천 제목`}>
                                 <div className="brief-modal-section-head">
