@@ -1080,7 +1080,7 @@ async function requestTrialCode(userInfo?: { email: string; phone: string }): Pr
  * 통과하면 status(new/existing)와, 기존 체험자는 registeredAt 을 돌려줘
  * 화면이 남은 기간까지 미리 보여줄 수 있다.
  */
-async function verifyTrialEligibility(userInfo?: { nickname: string; phone: string }): Promise<{ success: boolean; message?: string; status?: 'new' | 'existing'; registeredAt?: string }> {
+async function verifyTrialEligibility(userInfo?: { nickname: string; phone: string }): Promise<{ success: boolean; message?: string; status?: 'new' | 'existing'; registeredAt?: string; codeSent?: boolean }> {
   try {
     const nickname = (userInfo?.nickname || '').trim();
     const phone = (userInfo?.phone || '').trim().replace(/[-\s]/g, '');
@@ -1128,6 +1128,9 @@ async function verifyTrialEligibility(userInfo?: { nickname: string; phone: stri
       return {
         success: true,
         status: result.status === 'existing' ? 'existing' : 'new',
+        // [2026-09-03] 문자가 실제로 나갔는지를 화면까지 전달한다. 이걸 버리면
+        // 인증번호 칸을 띄울 근거가 없어, 솔라피를 켜는 순간 등록이 전부 막힌다.
+        codeSent: result.codeSent === true,
         ...(typeof result.registeredAt === 'string' && result.registeredAt ? { registeredAt: result.registeredAt } : {}),
       };
     }
