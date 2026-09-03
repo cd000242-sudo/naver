@@ -2463,10 +2463,13 @@ async function callOpenAIChatCompletionsRest(
       const requestId = readHeaderValue(response.headers, 'x-request-id') || readHeaderValue(response.headers, 'openai-request-id') || '(none)';
       const promptTokens = payload?.usage?.prompt_tokens ?? '(n/a)';
       const completionTokens = payload?.usage?.completion_tokens ?? '(n/a)';
+      // [2026-09-04 비용] 캐시 적중 토큰 — 규칙부가 글마다 같아야 입력 단가가 1/10 로 떨어진다. 잡히는지 여기서 본다.
+      const cachedTokens = payload?.usage?.prompt_tokens_details?.cached_tokens ?? '(n/a)';
+      const reasoningTokens = payload?.usage?.completion_tokens_details?.reasoning_tokens ?? '(n/a)';
       const textLength = String(payload?.choices?.[0]?.message?.content || '').length;
       emitOpenAiDiagnosticLog(
         `CHAT_RESPONSE_OK status=${response.status} model=${modelName} elapsedMs=${Date.now() - requestStart} ` +
-        `requestId=${requestId} promptTokens=${promptTokens} completionTokens=${completionTokens} textLength=${textLength}`,
+        `requestId=${requestId} promptTokens=${promptTokens} cachedTokens=${cachedTokens} completionTokens=${completionTokens} reasoningTokens=${reasoningTokens} textLength=${textLength}`,
       );
     }
 
@@ -4513,10 +4516,13 @@ async function callOpenAI(
           : {
               inputTokens: (response as any)?.usage?.prompt_tokens || 0,
               outputTokens: (response as any)?.usage?.completion_tokens || 0,
+              // [2026-09-04 비용] 캐시 읽기 토큰은 단가가 다르다 — 대시보드가 실효 비용을 알게 넘긴다.
+              cacheReadTokens: (response as any)?.usage?.prompt_tokens_details?.cached_tokens || 0,
             };
         trackApiUsage('openai', {
           inputTokens: oaiUsage.inputTokens,
           outputTokens: oaiUsage.outputTokens,
+          cacheReadTokens: (oaiUsage as any).cacheReadTokens || 0,
           model: modelName,
         });
 

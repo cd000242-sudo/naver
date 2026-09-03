@@ -12,6 +12,7 @@
 | A6 | vitest 전체 GREEN, 지문 핀·레거시 베이스라인 갱신, 계약 테스트 유지, 새 파일 ≤300줄 | `npx vitest run`, `fingerprint-pin`, `wc -l` |
 | A7 | 설계도 실패 시 기존 경로로 완주(엔진 불변) | 타임아웃 주입 테스트 + 로그 `[Blueprint] 생략` |
 | A8 | 라이브: 사용자정의 1편 + 홈판 1편 발행, 게이트 pass, 발행본에 도입부·인용 반영 | 앱 로그 + 발행 글 확인 |
+| A10 | 편당 비용(캐시 반영 실효) $0.355 → ≤ $0.15 (GPT-5.6 Terra 기준), 캐시 적중률 ≥ 70% | `[OpenAIDiag] cachedTokens`, apiUsageTracker costUSD |
 | A9 | 최극한 모드 ON 10편: 게이트 최종 pass 비율 ≥ 90%, 홈판 모드 점수 중앙값 ≥ 85, OFF 대비 비용·시간 배수를 로그로 보고(추정치 아닌 실측) | `품질 정책: max=ON` 로그, apiUsageTracker 토큰, 소요 시간 |
 
 통과 기준: A1~A7 전부 + A8 두 편 중 두 편.
