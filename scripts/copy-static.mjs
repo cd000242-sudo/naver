@@ -391,6 +391,12 @@ try {
       filePath: path.join(projectRoot, 'dist', 'runtime', 'textModelConstants.js'),
     },
     {
+      // [2026-09-03 가드] 렌더러 3곳(contentGeneration·priceInfoModal·imageNarrativeQuickMode)이 import 하는데 번들에 정의가 없었다.
+      //   textModelConstants·geminiTextModelNormalization 뒤에 온다 — 상위 const 가 그 값을 참조한다.
+      label: 'runtime/modelRegistry.js',
+      filePath: path.join(projectRoot, 'dist', 'runtime', 'modelRegistry.js'),
+    },
+    {
       label: 'image/contextualImagePrompt.js',
       filePath: path.join(projectRoot, 'dist', 'image', 'contextualImagePrompt.js'),
     },
@@ -406,6 +412,21 @@ try {
       // [2026-09-02] 쇼핑커넥트 OpenAI 이미지 모델 교정 — 렌더러 두 경로가 import 한다
       label: 'image/openaiImageModelReconcile.js',
       filePath: path.join(projectRoot, 'dist', 'image', 'openaiImageModelReconcile.js'),
+    },
+    {
+      // [2026-09-03 런타임 ReferenceError] richTextPaste(렌더러 번들)가 paragraphGroupSizes 를 import 한다 — 등록 누락이었다
+      label: 'content/sentenceParagraphs.js',
+      filePath: path.join(projectRoot, 'dist', 'content', 'sentenceParagraphs.js'),
+    },
+    {
+      // [2026-09-03 가드] licenseUI 가 import — 번들에 정의가 없었다(FREE_TRIAL_DAILY_PUBLISH_LIMIT 호출만 존재).
+      label: 'freeTrialPolicy.js',
+      filePath: path.join(projectRoot, 'dist', 'freeTrialPolicy.js'),
+    },
+    {
+      // [2026-09-03 가드] scheduleManager 가 import — 번들에 정의가 없었다(selectScheduledPostCandidate 호출만 존재).
+      label: 'scheduler/scheduledPostLookupPolicy.js',
+      filePath: path.join(projectRoot, 'dist', 'scheduler', 'scheduledPostLookupPolicy.js'),
     },
     {
       label: 'image/publishImageSequence.js',
@@ -775,13 +796,13 @@ try {
     sanitized = `// ===== UTILS MODULES INLINED =====\n${utilsSource}\n// ===== END UTILS MODULES =====\n\n${sanitized}`;
   }
 
-  // ✅ [2026-01-25] 모든 남은 _js_1 모듈 참조 제거 (categoryModalUtils, appEventsHandler 등)
-  // (0, xxx_js_1.functionName)() -> functionName()
-  sanitized = sanitized.replace(/\(0,\s*(\w+)_js_1\.(\w+)\)/g, '$2');
-  // xxx_js_1.functionName -> functionName
-  sanitized = sanitized.replace(/(\w+)_js_1\.(\w+)/g, '$2');
-  // xxx_js_1['functionName'] -> functionName
-  sanitized = sanitized.replace(/(\w+)_js_1\[["'](\w+)["']\]/g, '$2');
+  // ✅ [2026-01-25] 모든 남은 _js_N 모듈 참조 제거 — [2026-09-03] 같은 모듈을 두 import 문으로 들이면 tsc 가 _js_2 를 낸다(renderer.ts 의 settingsModal) (categoryModalUtils, appEventsHandler 등)
+  // (0, xxx_js_\d+.functionName)() -> functionName()
+  sanitized = sanitized.replace(/\(0,\s*(\w+)_js_\d+\.(\w+)\)/g, '$2');
+  // xxx_js_\d+.functionName -> functionName
+  sanitized = sanitized.replace(/(\w+)_js_\d+\.(\w+)/g, '$2');
+  // xxx_js_\d+['functionName'] -> functionName
+  sanitized = sanitized.replace(/(\w+)_js_\d+\[["'](\w+)["']\]/g, '$2');
 
   // ✅ [2026-03-24] tsc가 .js 확장자 없이 import한 모듈에 대해 _1 suffix를 사용하는 패턴 정리
   // time24Select_1.createTime24Select → createTime24Select 등

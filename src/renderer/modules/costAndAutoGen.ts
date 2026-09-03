@@ -222,7 +222,8 @@ function normalizeImageFallbackPolicy(value: any): ImageFallbackPolicy {
     : 'engine-only';
 }
 
-function normalizeImageProvider(value: any): string {
+// [2026-09-03] 이름 변경: runtime/modelRegistry.normalizeImageProvider(딥인프라 별칭 접기) 와 번들 단일 스코프에서 충돌했다 — 이건 표시용 trim 이다
+function normalizeImageProviderLabel(value: any): string {
   return String(value || '').trim();
 }
 
@@ -231,7 +232,7 @@ function getImageItemCount(options: any): number {
 }
 
 function isLongRunImageGeneration(options: any): boolean {
-  const provider = normalizeImageProvider(options?.provider);
+  const provider = normalizeImageProviderLabel(options?.provider);
   return options?.isFullAuto === true
     || options?.isContinuousMode === true
     || options?.isMultiAccount === true
@@ -240,7 +241,7 @@ function isLongRunImageGeneration(options: any): boolean {
 }
 
 function estimateImageGenerationTimeoutMs(options: any): number {
-  const provider = normalizeImageProvider(options?.provider);
+  const provider = normalizeImageProviderLabel(options?.provider);
   const count = getImageItemCount(options);
   if (provider === 'flow') {
     return Math.min(FLOW_IMAGE_GENERATION_MAX_TIMEOUT_MS, 120_000 + (count * 210_000));
@@ -257,7 +258,7 @@ function estimateImageGenerationTimeoutMs(options: any): number {
 }
 
 function getImageStabilizeDelayMs(options: any): number {
-  const provider = normalizeImageProvider(options?.provider);
+  const provider = normalizeImageProviderLabel(options?.provider);
   if (provider === 'flow') return FLOW_IMAGE_STABILIZE_MS;
   if (UI_AUTOMATION_IMAGE_PROVIDERS.has(provider)) return UI_AUTOMATION_IMAGE_STABILIZE_MS;
   if (isLongRunImageGeneration(options) || SLOW_IMAGE_PROVIDERS.has(provider)) return LONG_RUN_IMAGE_STABILIZE_MS;
@@ -273,7 +274,7 @@ function logImageQueueMessage(message: string): void {
 }
 
 function resolveImageGenerationTimeoutMs(options: any): number {
-  const provider = normalizeImageProvider(options?.provider);
+  const provider = normalizeImageProviderLabel(options?.provider);
   const rawTimeoutValue = options?.imageGenerationTimeoutMs
     ?? options?.timeoutMs
     ?? options?.timeout;
@@ -327,7 +328,7 @@ async function runQueuedImageGeneration<T>(options: any, task: () => Promise<T>)
     const elapsedSinceLast = Date.now() - lastImageGenerationFinishedAt;
     if (elapsedSinceLast < stabilizeMs) {
       const waitMs = stabilizeMs - elapsedSinceLast;
-      logImageQueueMessage(`[Image Queue] Waiting ${Math.ceil(waitMs / 1000)}s before next image job (${normalizeImageProvider(options?.provider) || 'unknown'}).`);
+      logImageQueueMessage(`[Image Queue] Waiting ${Math.ceil(waitMs / 1000)}s before next image job (${normalizeImageProviderLabel(options?.provider) || 'unknown'}).`);
       await new Promise((resolve) => setTimeout(resolve, waitMs));
     }
   }

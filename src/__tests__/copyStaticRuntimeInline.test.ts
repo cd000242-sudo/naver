@@ -99,4 +99,34 @@ describe('copy-static runtime inline contract', () => {
     expect(sanitized).not.toContain('referenceImagePolicy_js_1');
     expect(sanitized).not.toContain('exports.');
   });
+
+  // [2026-09-03] runtime/modelRegistry 를 등록하자 렌더러 번들이 통째로 죽던 뿌리:
+  //   `export { X } from './y.js'` 를 tsc 가 `var y_js_2 = require(...)` + defineProperty getter 로 내는데
+  //   정제기는 `const` require 와 `_js_1` 만 알았다. 같은 모듈을 두 import 문으로 들여도 `_js_2` 가 남는다(renderer.ts 의 settingsModal).
+  it('strips re-export getters, var/let requires and _js_N aliases beyond _js_1', () => {
+    const compiledSource = [
+      'Object.defineProperty(exports, "__esModule", { value: true });',
+      'exports.isAgentTextProvider = exports.AGENT_TEXT_PROVIDERS = void 0;',
+      'const textModelConstants_js_1 = require("./textModelConstants.js");',
+      'var geminiTextModelNormalization_js_2 = require("./geminiTextModelNormalization.js");',
+      'Object.defineProperty(exports, "GEMINI_TEXT_MODELS", { enumerable: true, get: function () { return geminiTextModelNormalization_js_2.GEMINI_TEXT_MODELS; } });',
+      'var textModelConstants_js_2 = require("./textModelConstants.js");',
+      'Object.defineProperty(exports, "CLAUDE_MODELS", { enumerable: true, get: function () { return textModelConstants_js_2.CLAUDE_MODELS; } });',
+      'let settingsModal_js_3 = require("./utils/settingsModal.js");',
+      'exports.AGENT_TEXT_PROVIDERS = ["agent-codex"];',
+      'function isAgentTextProvider(value) {',
+      '    return (0, settingsModal_js_3.restoreTextModelRadio)(value) || textModelConstants_js_1.CLAUDE_MODELS.includes(value);',
+      '}',
+      'exports.isAgentTextProvider = isAgentTextProvider;',
+    ].join('\n');
+
+    const sanitized = sanitizeRendererRuntimeDependency(compiledSource);
+
+    expect(sanitized).toContain('const AGENT_TEXT_PROVIDERS = ["agent-codex"]');
+    expect(sanitized).toContain('return restoreTextModelRadio(value) || CLAUDE_MODELS.includes(value);');
+    expect(sanitized).not.toMatch(/\brequire\s*\(/);
+    expect(sanitized).not.toMatch(/\bexports\b/);
+    expect(sanitized).not.toMatch(/_js_\d+/);
+    expect(sanitized).not.toContain('defineProperty');
+  });
 });

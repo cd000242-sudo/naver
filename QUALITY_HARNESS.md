@@ -218,6 +218,7 @@ API 키·네이버 계정이 전부 날아간다. 지금의 크래시가 그 쓰
 | P18-2 | ① 앞 3자 강제 배선 ② 쇼핑 검색량 키워드 ③ 상위 제목 → 게이트 감점 | ⬜ 쇼핑 글 1편 — 로그에 [ShoppingKeyword] 교체/유지 · [SerpTitles] N개 확보 · [TitleDiag] 상위 글 제목 대조 가 찍히고, 제목이 검색어로 시작하는지 |
 | P16-2 | 벽 방지 — 붙여넣기 흐름 모드도 2~3문장 묶음 | ⬜ 새 글 1편 — 편집을 거쳐도 벽 없이 2~3문장 문단 + 빈 줄 |
 | P16-3 | 벽의 뿌리 — 주장 정제기 `\s{2,}` 가 문단 빈 줄을 지우던 것 | ⬜ 새 글 1편 — 편집 화면 본문에 문단 빈 줄이 그대로 보이고, 발행글도 2~3문장 문단 |
+| P16-4 | 렌더러 번들 등록 누락 — `paragraphGroupSizes is not defined` 로 전체 자동화가 터진 것 + 같은 부류 잠복 4건 | ⬜ 새 글 1편 — 전체 자동화가 ReferenceError 없이 발행까지 가고, 시작 시 저장된 텍스트 모델 라디오가 복원된다 |
 | P18-3 | 광고 API 키워드 정규화 · 스토어 꼬리표 제거 · 상품명 접두 생략 · 조기반환 제거 · off-keyword | ⬜ 쇼핑 글 1편 — [ShoppingKeyword] 교체/유지 가 11001 없이 찍히고, 제목에 [꼬리표]·상품명 통째가 없어야 |
 | P19 | 후기 라디오 금지 · 하이라이트 한 문장 · 공정위 19px 굵게 가운데 빨강 | ⬜ 쇼핑 글 1편 — "구매자 후기에는…" 보고 문장 3개 이하, 형광펜이 한 문장, 공정위 문구 서식 |
 
@@ -408,6 +409,25 @@ image 를 모른다. 참조 이미지는 `/v1/images/edits` 에 multipart 로 �
 홑 줄바꿈 평문을 먼저 잇고 2~3문장씩 묶음. 옛 청킹은 `flowParagraphs:false` 로만 남겨 테스트가 두 길을 다 잠근다.
 
 **남은 것(사장님 결정 필요)**: 참고글의 소제목 스타일(큰 따옴표 + 굵은 글씨 + 구분선). 지금은 색 상자 소제목. 원하시면 다음 항목.
+
+### P16-4 — 번들 등록 누락 (사장님 로그 2026-09-03: `ReferenceError: paragraphGroupSizes is not defined`) ✅ 수정 완료 — 라이브 미검증
+
+**증상** — 전체 자동화가 문단 정리 직전에 `paragraphGroupSizes is not defined` 로 죽는다. tsc·lint·build 는 전부 통과했다.
+
+**뿌리** — 렌더러는 단일 스코프 인라인 번들(`scripts/copy-static.mjs`)이라, 렌더러 밖 모듈을 import 하면 그 파일을 등록 목록에 손으로 넣어야 한다. `richTextPaste` 가 새로 import 한 `content/sentenceParagraphs` 가 빠져 있었다. 빌드는 이런 누락을 잡지 못한다 — 런타임에서만 터진다.
+
+**같은 부류를 가드 테스트로 전수 조사** (`rendererBundleImportRegistry.test.ts` 신설) → 이미 잠복해 있던 등록 누락 3건이 더 나왔다. 번들에 정의 없이 호출만 있던 것들:
+- `runtime/modelRegistry` (엔진 라벨·가격 모달·이미지 서사 퀵모드가 `isAgentTextProvider`/`resolveTextModelProfile` 호출)
+- `freeTrialPolicy` (라이선스 UI 가 `FREE_TRIAL_DAILY_PUBLISH_LIMIT` 참조)
+- `scheduler/scheduledPostLookupPolicy` (예약 관리가 `selectScheduledPostCandidate` 호출)
+
+**등록하자 드러난 둘째 뿌리** — modelRegistry 는 `export { X } from './y.js'` 재수출을 쓰는데, tsc 는 이걸 `var y_js_2 = require(...)` + `Object.defineProperty(exports, …getter)` 로 낸다. 의존 파일 정제기(`scripts/rendererRuntimeDependencyInline.mjs`)는 `const` require 와 `_js_1` 접두만 알아서 그대로 새어 나왔고, 그 상태로 앱을 띄웠다면 렌더러가 통째로 죽었을 것이다(번들 검증에서 잡아 재시작 전에 막음). 정제기를 `const|var|let` · `_js_N` · 재수출 getter 제거로 일반화했다.
+
+**덤으로 잡힌 기존 잠복 버그** — `renderer.ts` 가 `settingsModal` 을 두 import 문으로 들여 `settingsModal_js_2.restoreTextModelRadio` 가 번들에 남아 있었다(try/catch 안이라 조용히 실패). 시작 시 저장된 텍스트 모델 라디오 복원이 그동안 실행되지 않았다. `_js_N` 일반화로 함께 해소.
+
+**충돌 1건** — 렌더러 로컬 헬퍼 `normalizeImageProvider`(표시용 trim) 가 modelRegistry 의 같은 이름(딥인프라 별칭 접기) 과 단일 스코프에서 겹쳐 빌드 중복 스캐너가 막았다 → 로컬 쪽을 `normalizeImageProviderLabel` 로 개명.
+
+**검증** — 번들: 정의 8종 각 1개, `exports`/`require("./`/`_js_N.` 잔재 0, `node --check` OK. 정제기 잠금 테스트(재수출 getter·var require·`_js_2`) 추가.
 
 ### P17 — 쇼핑 제목이 팔리는 제목이 아니던 것 (사장님 2026-09-02 밤: "문제는 팔려야 되잖아") ✅ 1차 수정 — 라이브 검증 대기
 
