@@ -696,6 +696,41 @@ function paragraphStyle(fontSizePx: number, centerAlign: boolean, endsParagraph 
   ].join(';');
 }
 
+/**
+ * [2026-09-03] Typing-style reset paragraph.
+ * SmartEditor ONE copies the caret paragraph's alignment and inline text style into every
+ * paragraph created with Enter. A styled block (the FTC notice: centered, 19px, bold, red)
+ * left an empty red centered paragraph at the document tail, so the last pasted section
+ * merged into it (centered) and everything typed afterwards (divider, next-post hook,
+ * hashtags) came out red. This paragraph carries the body defaults explicitly; a zero-width
+ * space keeps the editor from dropping it as an empty block.
+ */
+export function buildTypingStyleResetHtml(): string {
+  const style = [
+    'font-size:15px',
+    'line-height:1.95',
+    'margin:0 auto 18px',
+    'max-width:520px',
+    'text-align:left',
+    'font-weight:400',
+    'color:#5f4b45',
+    'background-color:#ffffff',
+    TEXT_DECORATION_RESET,
+    FONT_STYLE_RESET,
+  ].join(';');
+  return `<p data-rich-style-reset="true" style="${style}"><span style="${style}">\u200b</span></p>`;
+}
+
+/** Paste a reset paragraph at the caret so subsequent Enter/typing inherits body defaults. */
+export async function pasteTypingStyleReset(page: Page, frame: Frame): Promise<boolean> {
+  try {
+    const result = await pasteRichHtmlAtCursor(page, frame, buildTypingStyleResetHtml(), '\u200b', 0);
+    return result?.ok === true;
+  } catch {
+    return false;
+  }
+}
+
 function paragraphSpacerHtml(fontSizePx: number, centerAlign: boolean): string {
   return `<p data-rich-spacer="true" style="${[
     `font-size:${fontSizePx}px`,

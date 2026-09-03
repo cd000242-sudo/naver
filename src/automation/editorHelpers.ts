@@ -22,7 +22,7 @@ import { pickBannerHook } from './bannerPhrasePool.js';
 import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
-import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, ensureTailTypingReady, focusLastEditableLine } from './richTextPaste.js';
+import { buildMobileRichHtml, pasteRichHtmlAtCursor, buildTypingStyleResetHtml, pickRichArticleThemes, ensureTailTypingReady, focusLastEditableLine } from './richTextPaste.js';
 import { planTypingFallback, splitFallbackParagraphs, sliceParagraphFromNormalizedOffset } from './typingFallbackPlan.js';
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 import {
@@ -3008,7 +3008,15 @@ export function pickDeviceToggleTarget(
  * 지금까지는 키보드로 타이핑해 에디터의 그 순간 서식(직전 상태)을 따라갔다 — 어떤 날은 빨갛고 어떤 날은 아니다.
  * 서식은 HTML 붙여넣기로 못 박는다. 붙여넣기가 실패하면 예전처럼 타이핑한다(발행을 막지 않는다).
  */
-const FTC_DISCLOSURE_STYLE = 'text-align:center;font-size:19px;font-weight:700;color:#ff0000;line-height:1.7;margin:0 auto 12px;';
+// [2026-09-03 사장님 실측] 문단 자체에 가운데·빨강을 박으면 Enter 로 생기는 다음 문단이 그 서식을 물려받아
+//   문서 끝의 빈 빨간 문단에 마지막 섹션이 합쳐지고(가운데 정렬), 그 뒤 타이핑(구분선·다음 글·해시태그)이 빨갛게 나왔다.
+//   → 정렬만 문단에, 글자 서식은 span 에, 그리고 뒤에 본문 기본값 리셋 문단을 같이 붙여 캐럿이 거기서 이어지게 한다.
+const FTC_DISCLOSURE_PARAGRAPH_STYLE = 'text-align:center;line-height:1.7;margin:0 auto 12px;';
+const FTC_DISCLOSURE_TEXT_STYLE = 'font-size:19px;font-weight:700;color:#ff0000;';
+
+export function buildFtcDisclosureHtml(text: string): string {
+  return `<p style="${FTC_DISCLOSURE_PARAGRAPH_STYLE}"><span style="${FTC_DISCLOSURE_TEXT_STYLE}">${escapeFtcHtml(text)}</span></p>${buildTypingStyleResetHtml()}`;
+}
 function escapeFtcHtml(value: string): string {
   return String(value || '')
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -3019,7 +3027,7 @@ export async function insertFtcDisclosureStyled(self: any, page: any, text: stri
   try {
     const frame = await self.getAttachedFrame();
     if (frame) {
-      const html = `<p style="${FTC_DISCLOSURE_STYLE}">${escapeFtcHtml(clean)}</p>`;
+      const html = buildFtcDisclosureHtml(clean);
       const result = await pasteRichHtmlAtCursor(page, frame, html, clean, 0);
       if (result?.ok) {
         self.log('   ⚖️ 공정위 문구 서식 붙여넣기 (19px · 굵게 · 가운데 · 빨강)');

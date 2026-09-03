@@ -17,6 +17,7 @@ import {
   getAllSelectors,
   getSelectorStrings,
 } from './selectors';
+import { pasteTypingStyleReset } from './richTextPaste.js';
 
 // ✅ [2026-03-20] 이전글 후킹 문구 공유 상수 (editorHelpers에서도 import하여 사용)
 export const PREV_POST_HOOKS = [
@@ -162,6 +163,12 @@ export async function insertEnhancedCta(
         await page.keyboard.press('Escape');
         await self.delay(200);
 
+        // [2026-09-03] 꼬리 타이핑(구분선·다음 글·해시태그)은 캐럿 문단의 서식을 물려받는다 — 앞선 서식 블록이
+        //   남긴 가운데·빨강이 통째로 번졌다(사장님 실측). 본문 기본값 리셋 문단을 먼저 붙이고 그 안에서 이어간다.
+        try {
+          const tailFrame = await self.getAttachedFrame();
+          if (tailFrame && await pasteTypingStyleReset(page, tailFrame)) self.log('   🔄 꼬리 서식 리셋 (좌측·본문색·15px)');
+        } catch { /* best-effort */ }
         // ✅ 2. 구분선 삽입
         const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
         await page.keyboard.press('Enter'); // ✅ [2026-01-19] 엔터 1회로 축소
