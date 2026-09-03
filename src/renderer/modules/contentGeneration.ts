@@ -5,6 +5,7 @@
 
 // ✅ renderer.ts의 전역 변수/함수 참조
 import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
+import { bodyIsTitlelessReconstruction } from '../utils/semiAutoHeadingExtractor.js';
 import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
 import { ensureAgentEngineReady } from '../utils/agentModeGuard.js';
 import { applyKeywordPrefixToTitle } from '../utils/titleUtils.js';
@@ -1600,10 +1601,23 @@ export function fillSemiAutoFields(
   const contentTextarea = document.getElementById('unified-generated-content') as HTMLTextAreaElement;
   if (contentTextarea) {
     let body = structuredContent.bodyPlain || structuredContent.content || '';
-    const preferBodyPlain =
+    // [2026-09-03 사장님 라이브] 표 적용(applyPendingArticleTables)이 세운 _preferBodyPlain 으로 텍스트 상자가 생성기의
+    //   bodyPlain(소제목 제목 줄 없음, 실측 0/5)이 됐고, 발행 해석기가 소제목을 못 찾아 "이미지 넣을 자리 없음" 확인창이 떴다.
+    //   제목만 빠진 재조립(내용은 소제목과 같음)이면 bodyPlain 우선을 풀고 소제목에서 다시 조립한다.
+    //   페러프레이징은 본문이 진짜 권위라 예외 — 그 경로는 rebuildHeadingsFromPreferredBody 가 맡는다.
+    const titlelessReconstruction = structuredContent._source !== 'paraphrase'
+      && structuredContent._paraphrased !== true
+      && Array.isArray(structuredContent.headings)
+      && structuredContent.headings.length > 0
+      && bodyIsTitlelessReconstruction(body, structuredContent.headings);
+    if (titlelessReconstruction) {
+      console.warn('[fillSemiAutoFields] ⚠️ bodyPlain 우선이지만 소제목 제목이 본문에 없는 재조립본 → headings 에서 재구성 (이미지 자리 보존)');
+    }
+    const preferBodyPlain = !titlelessReconstruction && (
       structuredContent._preferBodyPlain === true ||
       structuredContent._source === 'paraphrase' ||
-      structuredContent._paraphrased === true;
+      structuredContent._paraphrased === true
+    );
 
     // ✅ [핵심 수정] 소제목이 있으면 항상 headings에서 본문 재구성
     // 미리보기(headings)와 편집 필드(bodyPlain)가 다른 내용일 수 있으므로 동기화

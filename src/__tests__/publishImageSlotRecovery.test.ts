@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isNonBodyImageHeading, resolveSemiAutoPublishStructure } from '../renderer/utils/semiAutoHeadingExtractor';
+import { bodyLacksAllHeadingTitles, isNonBodyImageHeading, resolveSemiAutoPublishStructure } from '../renderer/utils/semiAutoHeadingExtractor';
 
 /**
  * 실측 사고(2026-08-23): 이미지 3장을 만들어 붙였는데 발행된 글에는 이미지가 하나도 없었다.
@@ -113,3 +113,40 @@ describe('발행 구조 복구 — 이미지 소제목', () => {
     },
   );
 });
+
+// [2026-09-03 사장님 라이브] "이미지 5개가 준비돼 있는데 본문에서 넣을 자리(소제목)를 찾지 못했습니다"
+//   표 적용·페러프레이징이 세운 _preferBodyPlain 으로 텍스트 상자가 bodyPlain(소제목 제목 줄 없음, 실측 0/5)이 됐고,
+//   발행 해석기가 제목을 하나도 못 찾아 0개 → 이미지 자리 소실 확인창.
+describe('발행 구조 복구 — 제목 줄 없는 bodyPlain', () => {
+  const headings = [
+    { title: '운동 뒤, 손으로 풀기 번거로울 때', content: '운동하고 집에 와서 다리가 뻐근한 날에는 누워서 착용해 작동만 시키는 쪽이 훨씬 손이 덜 갔어요.' },
+    { title: '압박 위치는 기대와 다를 수 있어요', content: '종아리를 기대했는데 허벅지 쪽 압이 먼저 들어오는 느낌도 있었어요.' },
+    { title: '거창에서는 노을까지 기다려도 돼요', content: '한 시간 정도 여유를 두면 노을까지 볼 수 있습니다.' },
+  ];
+  const bodyWithoutTitles = headings.map((h) => h.content).join('\n\n');
+
+  it('bodyLacksAllHeadingTitles — 제목이 하나도 없을 때만 true', () => {
+    expect(bodyLacksAllHeadingTitles(bodyWithoutTitles, headings)).toBe(true);
+    expect(bodyLacksAllHeadingTitles(`${headings[0].title}\n\n${bodyWithoutTitles}`, headings)).toBe(false);
+    expect(bodyLacksAllHeadingTitles(bodyWithoutTitles, [])).toBe(false);
+  });
+
+  it('본문이 권위여도 제목이 전무하고 소제목 데이터가 온전하면 소제목 데이터를 쓴다 — 이미지 자리가 산다', () => {
+    const resolved = resolveSemiAutoPublishStructure(bodyWithoutTitles, headings, {
+      bodyIsAuthoritative: true,
+      existingIntroduction: '도입부입니다.',
+      imageHeadingTitles: headings.map((h) => h.title),
+    });
+    expect(resolved.strategy).toBe('existing-sections');
+    expect(resolved.headings.map((h) => h.title)).toEqual(headings.map((h) => h.title));
+    expect(resolved.introduction).toBe('도입부입니다.');
+  });
+
+  it('본문에 제목 줄이 있으면 예전대로 본문에서 자른다', () => {
+    const bodyWithTitles = headings.map((h) => `${h.title}\n${h.content}`).join('\n\n');
+    const resolved = resolveSemiAutoPublishStructure(bodyWithTitles, headings, { bodyIsAuthoritative: true, imageHeadingTitles: headings.map((h) => h.title) });
+    expect(resolved.strategy).toBe('body-sections');
+    expect(resolved.headings.length).toBe(3);
+  });
+});
+

@@ -280,6 +280,39 @@ function recoverStructureFromKnownTitles(
   return null;
 }
 
+/**
+ * [2026-09-03 사장님 라이브] "이미지 5개가 준비돼 있는데 본문에서 넣을 자리(소제목)를 찾지 못했습니다".
+ * 표 적용(applyPendingArticleTables)·페러프레이징 경로는 _preferBodyPlain 을 세워 텍스트 상자를 bodyPlain 으로
+ * 채우는데, 생성기의 bodyPlain 은 소제목 제목 줄이 없다(실측 0/5). 제목이 하나도 없는 본문은 편집본이 아니라
+ * 제목 없이 조립된 본문이다 — 그때는 소제목 데이터가 증거다.
+ */
+export function bodyLacksAllHeadingTitles(body: unknown, headings: readonly any[]): boolean {
+  const text = String(body || '');
+  const titles = (headings || []).map((heading) => String(heading?.title || '').trim()).filter((title) => title.length >= 2);
+  if (titles.length === 0) return false;
+  return titles.every((title) => !text.includes(title));
+}
+
+/**
+ * 본문이 "제목 줄만 빠진 소제목 재조립" 인가 — 제목은 전무하고 각 소제목의 content 가 본문에 순서대로 있다.
+ * 사용자가 새로 쓴 본문(v2.11.140 계약: plain-body 유지)과 구분하는 기준이다. 내용까지 같으면 편집본이 아니다.
+ */
+export function bodyIsTitlelessReconstruction(body: unknown, headings: readonly any[]): boolean {
+  if (!bodyLacksAllHeadingTitles(body, headings)) return false;
+  const collapse = (value: unknown): string => String(value || '').replace(/\s+/g, ' ').trim();
+  const text = collapse(body);
+  let cursor = 0;
+  for (const heading of headings || []) {
+    const content = collapse(heading?.content || heading?.summary || '');
+    if (!content) return false;
+    const probe = content.length > 60 ? content.slice(0, 60) : content;
+    const at = text.indexOf(probe, cursor);
+    if (at < 0) return false;
+    cursor = at + probe.length;
+  }
+  return true;
+}
+
 export function resolveSemiAutoPublishStructure(
   body: string,
   existingHeadings: readonly any[] = [],
@@ -334,6 +367,15 @@ export function resolveSemiAutoPublishStructure(
   const canPreserveExisting = completeExistingHeadings.length > 0
     && completeExistingHeadings.every((heading) => heading.content.length > 0);
 
+  // [2026-09-03] 본문이 권위여도 제목 줄만 빠진 재조립(내용은 소제목과 동일)이면 편집본이 아니다 — 소제목 데이터를 쓴다. 새로 쓴 본문은 v2.11.140 대로 plain-body.
+  if (options.bodyIsAuthoritative === true && canPreserveExisting && bodyIsTitlelessReconstruction(normalizedBody, completeExistingHeadings)) {
+    return {
+      introduction: String(options.existingIntroduction || '').trim(),
+      headings: completeExistingHeadings,
+      strategy: 'existing-sections',
+      orderLocked: true,
+    };
+  }
   if (options.bodyIsAuthoritative !== true && canPreserveExisting) {
     return {
       introduction: String(options.existingIntroduction || '').trim(),
