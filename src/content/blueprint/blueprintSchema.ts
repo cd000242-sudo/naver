@@ -39,7 +39,7 @@ export interface Blueprint {
 
 export const BLUEPRINT_LIMITS = Object.freeze({
   quotesMax: 5,
-  factsMax: 8,
+  factsMax: 10,
   skeletonMin: 3,
   skeletonMax: 6,
   offTopicMax: 6,

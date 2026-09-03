@@ -42,3 +42,12 @@ describe('renderBlueprintMaterial', () => {
     expect(renderBlueprintMaterial(BP)).toBe(renderBlueprintMaterial(BP));
   });
 });
+
+describe('renderBlueprintMaterial — 최소선 문구', () => {
+  it('설계도가 상한이 아니라 최소선임을 첫 줄 다음에 밝힌다', () => {
+    const out = renderBlueprintMaterial(BP);
+    const lines = out.split('\n');
+    expect(lines[1]).toContain('이 설계도는 최소선이다');
+    expect(lines[1]).toContain('요청 분량을 채운다');
+  });
+});

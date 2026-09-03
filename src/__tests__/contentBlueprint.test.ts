@@ -72,6 +72,7 @@ describe('buildBlueprintPrompt', () => {
     expect(prompt).toContain('"청년월세지원"');
     expect(prompt).toContain('한 글자도 바꾸지 않고');
     expect(prompt).toContain(`최대 ${BLUEPRINT_LIMITS.quotesMax}개`);
+    expect(prompt).toContain('최대 10개');
     expect(prompt).toContain('피드에서 이 글을 만난다');
     expect(prompt).toContain('[자료]');
     expect(prompt.length).toBeLessThan(1_200 + 1_500);

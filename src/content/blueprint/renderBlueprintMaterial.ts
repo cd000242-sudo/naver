@@ -31,7 +31,13 @@ function renderFacts(blueprint: Blueprint): string[] {
 
 export function renderBlueprintMaterial(blueprint: Blueprint, options: RenderBlueprintOptions = {}): string {
   const floor = Math.max(1, Math.floor(options.quoteFloor ?? 2));
-  const lines: string[] = ['[설계도 — 이 글은 아래 재료로 쓴다]'];
+  const lines: string[] = [
+    '[설계도 — 이 글은 아래 재료로 쓴다]',
+    // Measured 09-04: replacing the 30-fact checklist with a 5~8-fact blueprint shortened bodies
+    // (SEO 1,746 → 1,379 chars) and two posts fell under the length floor. The blueprint is a floor,
+    // not a ceiling — the rest of the material stays in play, only the excluded subjects leave.
+    '- 이 설계도는 최소선이다. 여기 적힌 것만 쓰고 끝내지 말고, 자료에 있는 다른 사실도 함께 담아 요청 분량을 채운다. 빼는 것은 아래에 제외 주제로 적은 것뿐이다.',
+  ];
   if (blueprint.angle) lines.push(`- 이 글이 답할 질문: ${blueprint.angle}`);
   if (blueprint.readerSituation) {
     lines.push(`- 독자 상황(도입부 첫 문장은 이 장면에서 시작한다): ${blueprint.readerSituation}`);
