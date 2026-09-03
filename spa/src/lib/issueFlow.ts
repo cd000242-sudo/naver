@@ -27,6 +27,10 @@ export type IssueBoardRow = {
     documentCount: number | null;
     documentCountMeasured: boolean;
     searchVolume: number | null;
+    /** 키워드도구가 PC·모바일 한쪽 이상을 "< 10" 으로 답함 — 실측이지 추정이 아니다. 양쪽 다면 searchVolume 은 null. */
+    searchVolumeLt10?: boolean;
+    /** 이월 중 검색량을 다시 잰 시각(재측정 단계). 없으면 measuredAt 에 잰 것. */
+    searchVolumeMeasuredAt?: string;
     hasLiveDemand: boolean;
     demandStatus: string;
     demandRatio: number | null;
@@ -46,7 +50,7 @@ export type IssueBoardRow = {
     } | null;
     subKeywords?: { keyword: string; searchVolume: number | null; frame?: string }[];
     keywordPool?: Array<{ keyword: string; searchVolume: number | null; documentCount?: number | null; source?: string }> | null;
-    trend?: { series: number[]; label?: string; recommendation?: string } | null;
+    trend?: { series: number[]; label?: string; recommendation?: string; measuredAt?: string } | null;
     kinCount?: number | null;
     kinTop?: Array<{ title: string; link: string; views?: number | null; answers?: number | null }> | null;
     monetize?: { verdict: 'good' | 'bad' | 'mixed'; points: Array<{ text: string }>; angle?: string } | null;

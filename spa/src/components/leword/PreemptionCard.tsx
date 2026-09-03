@@ -90,6 +90,10 @@ export type PreemptionRow = {
     earlyMover?: boolean;
     earlyMoverReasons?: string[];
     searchVolume: number | null;
+    /** 키워드도구가 PC·모바일 한쪽 이상을 "< 10" 으로 답함(실측). 양쪽 다면 searchVolume 은 null 인데 '—'(미측정)가 아니라 "10 미만"이다. */
+    searchVolumeLt10?: boolean;
+    /** 이슈 행: 헌터의 데이터랩 수요 실측이 잡혔는가. 안 잡혔으면 30일 그래프도 없는 게 정상(검색 기록 0). */
+    hasLiveDemand?: boolean;
     documentCount: number | null;
     evidence: Evidence[];
     serp?: {
@@ -174,6 +178,19 @@ function PreemptionCard({
                             >
                                 <TrendSparkline series={row.trend.series!} label={row.trend.label} />
                             </button>
+                        ) : variant === 'issue' ? (
+                            /*
+                             * 이슈 행에 그래프가 없는 이유를 적는다(사장님 2026-09-03: "그래프는
+                             * 안 되는 거니?"). 데이터랩은 검색이 잡힌 날만 주는데 선점 후보는
+                             * 한 날도 없다 — 0점은 그릴 게 없다. 수요가 잡혔는데도 없으면
+                             * 회차가 아직 안 잰 것이다. 둘을 구분해 적는다.
+                             */
+                            <p className="lw-why lw-why-empty">
+                                <em>30일 그래프 없음</em>
+                                {row.hasLiveDemand
+                                    ? '추세 미측정 — 다음 회차에 다시 잰다'
+                                    : '데이터랩에 아직 검색이 잡힌 날이 없다 — 선점 자리'}
+                            </p>
                         ) : null}
                         {row.whySearch?.text && (
                             <p className="lw-why" title={row.whySearch.basis || 'AI 추론'}>
@@ -192,7 +209,14 @@ function PreemptionCard({
                       * 못 쟀으면 '—' 다. 0건이라고 쓰면 안 본 것이 '광고 없음'이 된다.
                       */}
                     <div className="lw-card-metrics">
-                        <div><span>검색량</span><strong>{formatCount(row.searchVolume)}</strong></div>
+                        {/*
+                          * 키워드도구의 "< 10" 은 실측 답이다 — '—'(못 잼)와 다르다. 양쪽 다
+                          * "< 10" 이면 "10 미만", 한쪽만이면 숫자를 싣고 툴팁에 밝힌다.
+                          */}
+                        <div title={row.searchVolumeLt10 ? '키워드도구 실측 — PC·모바일 한쪽 이상이 월 10회 미만' : undefined}>
+                            <span>검색량</span>
+                            <strong>{row.searchVolume === null && row.searchVolumeLt10 ? '10 미만' : formatCount(row.searchVolume)}</strong>
+                        </div>
                         <div><span>문서수</span><strong>{formatCount(row.documentCount)}</strong></div>
                         {variant === 'issue' ? (
                             <>
