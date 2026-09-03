@@ -129,6 +129,8 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
         () => (board?.issues || []).filter((issue) => issue.why || issue.concentrated.length > 0 || issue.nextWave.length > 0),
         [board],
     );
+    /** 흐름 판이 실제로 있는 이슈 — 이월 행의 이슈가 이번 회차 묶음에서 빠졌으면 뛸 곳이 없다. */
+    const briefKeys = useMemo(() => new Set(briefs.map((issue) => compactKey(issue.issue))), [briefs]);
 
     /** 실제로 행(또는 이슈)이 있는 공급원만 칩으로 낸다. */
     const lanes = useMemo<[string, number][]>(() => {
@@ -169,16 +171,20 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
     const measured = board?.measured;
     const current = VIEWS.find((item) => item.id === view);
 
-    /** 카드 머리 배지 — 이슈명(흐름으로 뛴다)·실측 수요·상승·급상승·레인·이월. */
+    /** 카드 머리 배지 — 이슈명(흐름 판이 있으면 뛴다)·실측 수요·상승·급상승·레인·이월. */
     const headTags = (row: IssueBoardRow) => (
         <>
             <span className="lw-trend-tag">
-                <button
-                    type="button"
-                    className="lw-issue-jump"
-                    title="이 이슈의 흐름(왜 뜨나 · 다음 물결) 보기"
-                    onClick={() => { setView('flow'); setJumpTo(flowAnchor(row.issue)); }}
-                >이슈 · {row.issue} ›</button>
+                {briefKeys.has(compactKey(row.issue)) ? (
+                    <button
+                        type="button"
+                        className="lw-issue-jump"
+                        title="이 이슈의 흐름(왜 뜨나 · 다음 물결) 보기"
+                        onClick={() => { setView('flow'); setJumpTo(flowAnchor(row.issue)); }}
+                    >이슈 · {row.issue} ›</button>
+                ) : (
+                    <>이슈 · {row.issue}</>
+                )}
             </span>
             {row.hasLiveDemand && <span className="lw-tier-tag tier-a">실측 수요 ▲</span>}
             {row.demandStatus === 'rising' && <span className="lw-intent-tag">최근 7일 상승</span>}
