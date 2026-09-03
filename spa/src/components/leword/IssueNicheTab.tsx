@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { formatCount } from '../../lib/keywordApi';
 import { TopicFilter } from './BoardFilters';
-import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
+import LicenseGate, { isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
 import { naverSearchUrl } from './preemptionMeta';
 
@@ -52,6 +52,19 @@ type IssueBoard = {
 };
 
 const BOARD_URL = '/data/issue-niche-board.json';
+
+/*
+ * 비로그인 무료 건수 — 황금키워드보드(FREE_BOARD_ROWS 5)와 다르게 **3건**이다
+ * (사장님 사양 2026-09-03 "틈새키워드도 하루 3개만"). 발행기 DEFAULT_FREE_ROWS 와
+ * 같은 수다. 발행본 표본이 이보다 길어도(옛 5건 표본이 그날 안엔 남는다) 화면이
+ * 앞 3건으로 자른다 — 어느 쪽이 먼저 배포되든 3건 넘게 열리지 않는다.
+ */
+const FREE_ISSUE_ROWS = 3;
+
+/** 발행본이 하루 동안 고정한 무료 이름. 잘라서 쓴다(위 주석). */
+function freeNamesOf(board: IssueBoard | null | undefined): string[] {
+    return (board?.freeSample?.keywords || []).slice(0, FREE_ISSUE_ROWS);
+}
 
 const VERDICTS: { id: Verdict; label: string; hint: string }[] = [
     { id: 'niche', label: '틈새', hint: '데이터랩에 최근 7일 수요가 실측됐고 문서수 3,000 이하 — 지금 쓰면 자리가 있다' },
@@ -127,8 +140,8 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
     const rows = useMemo(() => {
         const list = lane === '전체' ? verdictRows : verdictRows.filter((row) => (LANE_LABEL[row.lane] || row.lane) === lane);
         if (unlocked) return list;
-        // 무료 5건은 발행본이 하루 동안 고정한 이름이다 — 위로 올려 블러 사이에 흩어지지 않게 한다.
-        const freeNames = board?.freeSample?.keywords || [];
+        // 무료 3건은 발행본이 하루 동안 고정한 이름이다 — 위로 올려 블러 사이에 흩어지지 않게 한다.
+        const freeNames = freeNamesOf(board);
         if (freeNames.length === 0) return list;
         return [...list.filter((row) => freeNames.includes(row.keyword)), ...list.filter((row) => !freeNames.includes(row.keyword))];
     }, [verdictRows, lane, unlocked, board]);
@@ -188,16 +201,21 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                         <div className="lw-note">이번 회차의 {VERDICTS.find((item) => item.id === verdict)?.label} 판정은 0건입니다. 다른 범주를 열어 보세요.</div>
                     )}
 
-                    {!unlocked && rows.length > FREE_BOARD_ROWS && (
-                        <LicenseGate onUnlock={() => setUnlocked(true)} remaining={rows.length - FREE_BOARD_ROWS} />
+                    {!unlocked && rows.length > FREE_ISSUE_ROWS && (
+                        <LicenseGate
+                            onUnlock={() => setUnlocked(true)}
+                            remaining={rows.length - FREE_ISSUE_ROWS}
+                            freeRows={FREE_ISSUE_ROWS}
+                            boardLabel="실검 틈새키워드"
+                        />
                     )}
 
                     <div className="lw-board-list">
                         {rows.map((row, index) => {
-                            const freeNames = board.freeSample?.keywords;
+                            const freeNames = freeNamesOf(board);
                             const locked = unlocked
                                 ? false
-                                : (freeNames && freeNames.length > 0 ? !freeNames.includes(row.keyword) : index >= FREE_BOARD_ROWS);
+                                : (freeNames.length > 0 ? !freeNames.includes(row.keyword) : index >= FREE_ISSUE_ROWS);
                             return (
                                 <article key={`${row.issue}-${row.keyword}`} className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
                                     <div className="lw-card-head">

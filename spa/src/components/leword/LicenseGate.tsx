@@ -44,14 +44,23 @@ export const FREE_LOOKUPS = BETA_OPEN ? 1000 : 10;
 /**
  * @param remaining 로그인하면 열리는 남은 건수. 자리표시자였던 곳이다 —
  *   화면에 `{남은 건수}` 라는 글자가 그대로 찍히고 있었다(사장님 실측 2026-08-23).
+ * @param freeRows 이 보드의 무료 건수. 보드마다 다르다 — 황금키워드 5, 실검 틈새 3
+ *   (사장님 사양 2026-09-03). 안 주면 황금키워드 기본.
+ * @param boardLabel 안내문에 찍히는 보드 이름. 틈새 탭이 "황금키워드 5건" 이라고
+ *   말하고 있었다 — 보드가 다른데 같은 문장을 쓴 탓이다.
  */
-function LicenseGate({ onUnlock, remaining }: { onUnlock: () => void; remaining?: number }) {
+function LicenseGate({ onUnlock, remaining, freeRows = FREE_BOARD_ROWS, boardLabel = '황금키워드' }: {
+    onUnlock: () => void;
+    remaining?: number;
+    freeRows?: number;
+    boardLabel?: string;
+}) {
     return (
         <div className="lw-gate">
             <div className="lw-gate-body">
                 <strong>여기까지가 무료입니다</strong>
                 <p>
-                    황금키워드 {FREE_BOARD_ROWS}건과 조회 {FREE_LOOKUPS}회까지 그냥 보실 수 있습니다.
+                    {boardLabel} {freeRows}건과 조회 {FREE_LOOKUPS}회까지 그냥 보실 수 있습니다.
                     {typeof remaining === 'number' && remaining > 0
                         ? ` 나머지 ${remaining.toLocaleString('ko-KR')}건은 로그인하면 열립니다`
                         : ' 나머지는 로그인하면 열립니다'} — 라이선스 코드가 있으면 1분이면 됩니다.
