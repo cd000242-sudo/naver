@@ -30,6 +30,11 @@ describe('조작 검사 — 마크다운 강조 표시는 대조에서 무시한
     expect(result.findings.filter((f) => f.kind === 'org')).toEqual([]);
   });
 
+  it("'처럼'·'원인' 같은 이어짐도 기관명이 아니다 (2026-09-03 3편 실측 '알레르기처럼', '근저당권처럼')", () => {
+    const result = checkFabrication(material, '알레르기처럼 면역 반응이 과한 상황과 근저당권처럼 등기부에 적힌 권리, 그리고 비염의 원인부터 봅니다.');
+    expect(result.findings.filter((f) => f.kind === 'org')).toEqual([]);
+  });
+
   it('자료에 정말 없는 날짜는 여전히 잡는다', () => {
     const result = checkFabrication(material, '평창 효석문화제는 2026년 10월 2일 개막입니다.');
     expect(result.findings.map((f) => f.claim)).toEqual(['2026년 10월 2일']);

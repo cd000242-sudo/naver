@@ -169,7 +169,7 @@ export function buildRendererContentPolicyContext(
   const primaryKeyword = keywords[0]
     || text(embeddedInput.primary_keyword || embeddedInput.primaryKeyword)
     || text(structured.primary_keyword || structured.primaryKeyword)
-    || source.title.trim();
+    || String(source.title || '').trim(); // [2026-09-03] keyword posts no longer carry a placeholder title
   const headings = normalizeHeadings(structured.headings);
   const relatedQuestions = stringList(structured.related_questions || structured.relatedQuestions)
     .concat(stringList(embeddedInput.related_questions || embeddedInput.relatedQuestions))

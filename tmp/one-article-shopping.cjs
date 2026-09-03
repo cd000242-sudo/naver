@@ -113,7 +113,8 @@ async function main() {
     const up = await attachParaphraseUpgradeBrief(source, config, provider);
     if (up.attached) {
       source.paraphraseUpgradeBrief = up.brief;
-      if (up.mainKeyword) source.metadata = { ...(source.metadata || {}), keywords: [up.mainKeyword, ...up.subKeywords].slice(0, 5) };
+      // [2026-09-03] main.ts 와 같은 조건 — 사용자가 넣은 키워드가 있으면 분석 결과로 덮지 않는다.
+      if (up.mainKeyword && !(Array.isArray(source.metadata?.keywords) && source.metadata.keywords.length)) source.metadata = { ...(source.metadata || {}), keywords: [up.mainKeyword, ...up.subKeywords].slice(0, 5), keywordOrigin: 'upgrade-analysis' };
       console.log(`[one-article] ⬆️ 상위호환 1단 분석 완료 (${up.reason}) — 메인키워드=${up.mainKeyword}`);
     } else {
       console.log(`[one-article] ⬆️ 상위호환 분석 생략 — ${up.reason}`);

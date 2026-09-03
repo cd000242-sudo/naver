@@ -7818,7 +7818,10 @@ ${naverResult.content}`;
   const source: ContentSource = {
     sourceType: shoppingEvidence ? 'custom_text' : (urlPatterns.length > 0 ? 'naver_news' : 'custom_text'),
     url: allUrls.length > 0 ? (allUrls.length === 1 ? allUrls[0] : allUrls.join(', ')) : undefined,
-    title: baseTitle || (keywords.length ? `${keywords[0]} 관련 콘텐츠` : undefined),
+    // [2026-09-03 self-run 08:46] `${keyword} 관련 콘텐츠` was a placeholder, but every consumer treats
+    //   source.title as a real title: the title prompt's originalTitle, the upgrade analysis
+    //   (which copied it back as the main keyword), the '원본 제목 활용 지침'. A keyword post has no title.
+    title: baseTitle || undefined,
     rawText: baseBody,
     crawledTime: published || new Date().toISOString(),
     categoryHint: keywords.length ? keywords[0] : undefined,

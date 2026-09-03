@@ -172,11 +172,44 @@ function applyPerSentenceLineBreaks(paragraph: string): string {
   return paragraph;
 }
 
+/**
+ * [2026-09-03 self-run 08:47] "- 채소와 제철 과일 …" list lines were sentence-split and re-joined with
+ * spaces: "골라 보세요. - 채소와 … - 낮과 밤 …". A list line is a unit, not a sentence. Prose around a
+ * list is split as before; the list block keeps one line per item. Same marker set as
+ * sentenceParagraphs.KEEP_WHOLE so the two passes agree.
+ */
+const LIST_LINE_RE = /^\s*(?:[-*+•]\s|\d+[.)]\s)/u;
+
+interface ProseOrListBlock {
+  readonly list: boolean;
+  readonly text: string;
+}
+
+function splitProseAndListBlocks(text: string): ProseOrListBlock[] {
+  return text.split('\n').reduce<ProseOrListBlock[]>((blocks, rawLine) => {
+    const line = rawLine.trim();
+    if (!line) return blocks;
+    const list = LIST_LINE_RE.test(line);
+    const last = blocks[blocks.length - 1];
+    if (last && last.list === list) {
+      return [...blocks.slice(0, -1), { list, text: `${last.text}${list ? '\n' : ' '}${line}` }];
+    }
+    return [...blocks, { list, text: line }];
+  }, []);
+}
+
 function ensureParagraphBreaks(text: string): string {
   if (!text || text.length < 200) return text;
   // [2026-09-03 자체 실행 비평] 표 행("| 출시연월 | … 표기됩니다. |")도 문장으로 잘려 "표기됩니다."+빈 줄+"|" 로 깨졌다.
   //   표가 든 덩어리는 문단 나누기를 건너뛴다 — 표는 빈 줄 두 개로 이미 제 자리에 있고, 행은 쪼개면 안 된다.
   if (!text.includes('\n\n') && /^\s*\|/m.test(text)) return text;
+  // [2026-09-03] A chunk holding list lines: split prose as usual, keep the list block line-per-item.
+  if (!text.includes('\n\n') && text.includes('\n') && text.split('\n').some((line) => LIST_LINE_RE.test(line))) {
+    const blocks = splitProseAndListBlocks(text);
+    if (blocks.length > 1 || blocks[0]?.list) {
+      return blocks.map((block) => (block.list ? block.text : ensureParagraphBreaks(block.text))).join('\n\n');
+    }
+  }
 
   // 이미 \n\n이 있으면 각 문단만 개별 검사
   if (text.includes('\n\n')) {
