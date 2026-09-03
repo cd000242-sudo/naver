@@ -7363,11 +7363,20 @@ async function generateStructuredContentInternal(
           const _rb = extractResultBody(optimized as any);
           // ✅ [v2.10.173] URL 모드 strict 임계 — 원본 100% 보존 강제
           const _isUrlModeForRetry = !!source.url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news';
-          const _fid = checkSourceFidelity({
-            rawText: source.rawText ?? '',
-            resultBody: _rb,
-            ...(_isUrlModeForRetry ? { minCompressionRatio: 0.85, minRetentionScore: 0.92 } : {}),
-          });
+          /*
+           * [2026-09-04 실측] 압축률·보존율 재시도는 URL 모드(원문 한 편 재구성)에서만 뜻이 있다.
+           *   키워드 모드의 rawText 는 여러 출처를 모은 15~45K자라 3,000자 본문은 압축률 7~34% 로
+           *   항상 미달 — 기준선 배치에서 매 편 통과 불가능한 유료 재생성 1회가 붙었다(편당 +$0.15).
+           *   키워드 모드의 사실 규율은 조작 검사·설계도 사실 발췌·게이트가 맡는다. 환각 표지 검사는 유지.
+           */
+          const _fid = _isUrlModeForRetry
+            ? checkSourceFidelity({
+              rawText: source.rawText ?? '',
+              resultBody: _rb,
+              minCompressionRatio: 0.85,
+              minRetentionScore: 0.92,
+            })
+            : null;
 
           // [v2.10.169] 환각 표지 탐지 — sentiment mismatch + 부정 키워드 환각
           let _hallucinationFail = false;
@@ -7388,12 +7397,12 @@ async function generateStructuredContentInternal(
             }
           } catch { /* hallucination 모듈 실패 시 무시 */ }
 
-          if (!_fid.passed || _hallucinationFail) {
+          if ((_fid && !_fid.passed) || _hallucinationFail) {
             _fidelityRetryUsed = true;
-            console.warn(`[Fidelity] Phase 7-B 자동 재시도: ${_fid.reason ?? ''}${_hallucinationFail ? ' + 환각 의심' : ''}`);
+            console.warn(`[Fidelity] Phase 7-B 자동 재시도: ${_fid?.reason ?? ''}${_hallucinationFail ? ' + 환각 의심' : ''}`);
             // ✅ [v2.10.173] URL 모드 strict 임계를 재시도 지시문에도 반영
-            const _retryThresholds = _isUrlModeForRetry ? { minCompressionRatio: 0.85, minRetentionScore: 0.92 } : undefined;
-            extraInstruction = `${buildFidelityRetryInstruction(_fid, _retryThresholds)}\n${_hallRetryInstruction}\n${extraInstruction}`;
+            const _fidInstruction = _fid ? buildFidelityRetryInstruction(_fid, { minCompressionRatio: 0.85, minRetentionScore: 0.92 }) : '';
+            extraInstruction = `${_fidInstruction}\n${_hallRetryInstruction}\n${extraInstruction}`;
             continue; // for 루프 다음 attempt — 같은 attempt 카운트 보존
           }
         } catch (_e) { /* fidelity 모듈 실패 시 정상 흐름 */ }
