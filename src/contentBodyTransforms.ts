@@ -314,10 +314,50 @@ export function limitRegexOccurrences(text: string, regex: RegExp, maxCount: num
  * and used to wipe the publish structure (renderer heading re-extraction rejects
  * sentences). Publish-side now survives via position-slicing; this detector keeps
  * the generation-side violation visible in logs so prompt drift gets caught early.
+ *
+ * [2026-09-03 self-run 07:55] The fixed suffix list (해요/합니다/...) missed "~갈려요",
+ * "~아니에요", "~보세요" — three of four headings were sentences and the repair never ran.
+ * A Korean sentence ending is a shape, not a word list: polite "-요" after an open-vowel
+ * stem syllable, "-죠", "-니다", and "-다" after ㄴ/ㅆ/ㅄ finals. Nouns that end in 요
+ * (필요, 중요, 수요, 가요) are excluded by the stem shape or by name.
  */
+const HANGUL_BASE = 0xac00;
+const HANGUL_LAST = 0xd7a3;
+/** Open-vowel stems that take polite "-요": ㅏ ㅐ ㅓ ㅔ ㅕ ㅖ ㅘ ㅙ ㅚ ㅝ ㅞ. */
+const POLITE_STEM_VOWELS = new Set([0, 1, 4, 5, 6, 7, 9, 10, 11, 14, 15]);
+/** Final-consonant indexes that make "-다" a verb ending: ㄴ(한다·된다), ㅄ(없다), ㅆ(했다·있다). */
+const VERB_FINALS_BEFORE_DA = new Set([4, 18, 20]);
+const NOUNS_ENDING_IN_YO = ['가요', '수요', '필요', '중요', '주요'];
+const SENTENCE_FINAL_DA_WORDS = ['같다', '좋다', '많다', '낫다', '맞다', '다르다', '싶다', '크다', '작다', '길다', '짧다', '어렵다', '쉽다', '아니다', '것이다', '때문이다', '답이다', '뿐이다', '편이다', '셈이다', '중이다'];
+
+function syllableVowel(ch: string): number {
+  const code = ch.charCodeAt(0);
+  if (code < HANGUL_BASE || code > HANGUL_LAST) return -1;
+  return Math.floor((code - HANGUL_BASE) / 28) % 21;
+}
+
+function syllableFinal(ch: string): number {
+  const code = ch.charCodeAt(0);
+  if (code < HANGUL_BASE || code > HANGUL_LAST) return -1;
+  return (code - HANGUL_BASE) % 28;
+}
+
 export function isSentenceStyleHeadingTitle(title: string): boolean {
   const cleaned = String(title || '').trim().replace(/[.!?。？！]\s*$/u, '');
-  return /(?:습니다|합니다|됩니다|입니다|했어요|해요|하죠|돼요|이에요|예요|이었어요|드립니다|했다|였다|이었다|됐다)$/u.test(cleaned);
+  if (cleaned.length < 2) return false;
+  const last = cleaned.slice(-1);
+  const prev = cleaned.slice(-2, -1);
+  if (last === '요') {
+    if (NOUNS_ENDING_IN_YO.some((noun) => cleaned.endsWith(noun))) return false;
+    return syllableFinal(prev) === 0 && POLITE_STEM_VOWELS.has(syllableVowel(prev));
+  }
+  if (last === '죠') return syllableVowel(prev) >= 0;
+  if (last === '다') {
+    if (cleaned.endsWith('니다')) return true;
+    if (VERB_FINALS_BEFORE_DA.has(syllableFinal(prev))) return true;
+    return SENTENCE_FINAL_DA_WORDS.some((word) => cleaned.endsWith(word));
+  }
+  return false;
 }
 
 /**

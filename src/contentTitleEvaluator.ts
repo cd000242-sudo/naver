@@ -73,7 +73,8 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
   const hasDuplicateKeywords = duplicateWords.length > 0;
 
   // ✅ [2026-02-09 강화] 숫자+단위 반복 감지 (0원, 3분 등)
-  const numberUnits = t.match(/\d+[가-힣]{1,2}/g) || [];
+  // [2026-09-03 실측] "9월 꽃구경 …, 9월 초·중순" 의 달·날짜 표기를 '0원 반복' 으로 오판해 -30 — 달력 단위(월·일·년)는 제외한다.
+  const numberUnits = (t.match(/\d+[가-힣]{1,2}/g) || []).filter((token) => !/\d+(?:월|일|년|주|시|분|초)$/.test(token) || /\d+(?:분|초)$/.test(token));
   const unitFreq = new Map<string, number>();
   for (const u of numberUnits) {
     unitFreq.set(u, (unitFreq.get(u) || 0) + 1);

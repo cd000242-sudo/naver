@@ -14,8 +14,28 @@ describe('heading title style guard (v2.11.140)', () => {
   it('detects the exact incident titles as sentence-style', () => {
     expect(isSentenceStyleHeadingTitle('올다르크 잠실 개표소 출입을 막았다는 사건으로 보도됐습니다')).toBe(true);
     expect(isSentenceStyleHeadingTitle('법원은 증거인멸과 도주 우려가 없다고 판단했습니다')).toBe(true);
-    expect(isSentenceStyleHeadingTitle('이번 결정이 알려지자 반응이 갈렸어요.')).toBe(false); // 갈렸어요는 목록 외 — 보수적 감지
+    expect(isSentenceStyleHeadingTitle('이번 결정이 알려지자 반응이 갈렸어요.')).toBe(true); // [2026-09-03] 목록이 아니라 종결 모양으로 본다
     expect(isSentenceStyleHeadingTitle('구속영장이 기각됐다')).toBe(true);
+  });
+
+  // [2026-09-03 self-run 07:55] 목록 밖 종결("~갈려요/~아니에요/~보세요")이 3/4를 통과시켰다.
+  it('detects polite/plain sentence endings by shape, not by a word list', () => {
+    expect(isSentenceStyleHeadingTitle('9월 꽃구경, 일정은 이렇게 갈려요')).toBe(true);
+    expect(isSentenceStyleHeadingTitle('평창 메밀꽃은 꽃만 보는 축제가 아니에요')).toBe(true);
+    expect(isSentenceStyleHeadingTitle('자라섬은 비용과 날짜를 같이 보세요')).toBe(true);
+    expect(isSentenceStyleHeadingTitle('야간 운영은 가을에도 그대로일까요?')).toBe(true);
+    expect(isSentenceStyleHeadingTitle('출발 전에 확인해야 하죠')).toBe(true);
+    expect(isSentenceStyleHeadingTitle('이 조건에서 갈린다')).toBe(true);
+    expect(isSentenceStyleHeadingTitle('야간 이동은 체력 부담이 크다')).toBe(true);
+  });
+
+  it('keeps nouns that merely end in 요/다 out of the detector', () => {
+    expect(isSentenceStyleHeadingTitle('한탄강 야간과 감악산 꽃별의 차이')).toBe(false);
+    expect(isSentenceStyleHeadingTitle('메밀꽃가요제와 백일장 일정')).toBe(false);
+    expect(isSentenceStyleHeadingTitle('출발 전 준비물 필요')).toBe(false);
+    expect(isSentenceStyleHeadingTitle('가을 꽃축제 수요')).toBe(false);
+    expect(isSentenceStyleHeadingTitle('속 시원한 사이다')).toBe(false);
+    expect(isSentenceStyleHeadingTitle('가평 가는 길의 바다')).toBe(false);
   });
 
   it('keeps noun/phrase-style titles (정상 소제목) out of the detector', () => {

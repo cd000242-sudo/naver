@@ -52,7 +52,7 @@ const INTRO_OVERLAP_PATTERNS = [
 ];
 
 /** AI 정리형 마무리 금지 표현 */
-const AI_CONCLUSION_PHRASES = [
+export const AI_CONCLUSION_PHRASES = [
   '결론적으로', '정리하면', '요약하면', '종합하면',
   '마무리하자면', '살펴보았습니다', '알아보았습니다',
   '에 대해 알아보았', '를 소개해드렸', '를 살펴보았'

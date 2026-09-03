@@ -202,7 +202,9 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-09-02 14차] 멘토 어미 믹싱 · 공통 격식 오르내림 조항으로 재계산
         // [2026-09-02 15차] 홈판 문단 규칙 1~2문장 → 2~3문장(사장님 결정)으로 재계산
         // [2026-09-03] 쇼핑 1인칭 전환 — promptLoader(리뷰 라벨·활용 지침 분기) + 평가기 옵트인 스레딩 + qualityEvaluator 입력으로 재계산
-        '0f5bfd2f351b0a56ba5bf1dc2f716c3aae5e0121123f705d8f26990e5827fedf',
+        // [2026-09-03] 여행 글 4지적 대응 — 재료 등급 안내 중계 금지 · 소제목 명사구/질문형 · 키워드 글 안전점수 URL 임계 분리로 재계산
+        //   (safetyEval sourceIsUrl · qualityEvaluator · seo/base.prompt R0-3 · headings-seo.prompt)
+        'cc2f9194107b83429ddc0b194dd18c5d1def9213fa9f0538ad28f99edb01ba8c',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

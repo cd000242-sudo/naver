@@ -1,4 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { stripAiConclusionOpenersFromContent } from './content/aiConclusionOpener.js';
+import { stripResearchNoteChatter } from './content/researchNoteHygiene.js';
 import { applyReviewMaterialHygiene } from './content/reviewMaterialHygiene.js';
 import OpenAI from 'openai';
 // ✅ [2026-05-25 v2.10.356] OpenAI RPM preemptive throttler + 누진 backoff
@@ -1343,6 +1345,31 @@ JSON:
 
 // [Phase 3-21/v2.10.167] mergeSeoWithHomefeedOverlay -> contentMergeOverlay.ts
 
+/**
+ * [2026-09-03 라이브 224399815476] 문장형 소제목("출발 전엔 개화와 혼잡을 따로 봐야 해요")은 경고만 하고 발행됐다.
+ * 검색형 모드(쇼핑 제외)에서는 저비용 모델로 명사구/질문형으로 한 번 고쳐 쓴다. 키가 없거나 실패하면 원본 유지.
+ */
+async function repairHeadingsBeforeFinalize(content: StructuredContent, source: ContentSource): Promise<void> {
+  try {
+    const apiKey = String(process.env.OPENAI_API_KEY || '').trim();
+    if (!apiKey) return;
+    const { repairSentenceStyleHeadings, createOpenAiHeadingRepairCompleter } = await import('./content/headingStyleRepair.js');
+    const repaired = await repairSentenceStyleHeadings(content, {
+      mode: source.contentMode,
+      keyword: getPrimaryKeywordFromSource(source),
+    }, {
+      complete: createOpenAiHeadingRepairCompleter(apiKey),
+      log: (message) => console.log(message),
+    });
+    // The finalize call sites are pinned verbatim by the V3 wiring contracts
+    // (contentQualityV3EarlyReturnWiring / GenerationIntegration), so the repaired
+    // headings are written onto the same object instead of re-binding the caller's const.
+    if (repaired !== content) content.headings = repaired.headings;
+  } catch (error) {
+    console.warn('[HeadingRepair] 보정 단계 예외 — 원본 유지:', (error as Error)?.message || error);
+  }
+}
+
 export function finalizeStructuredContent(
   content: StructuredContent,
   source: ContentSource,
@@ -1365,6 +1392,8 @@ export function finalizeStructuredContent(
   // [2026-08-28] 표 마지막 행에 다음 문단이 붙어 나오는 실측 결함을 떼어 놓는다.
   //   표는 리치 복붙으로 그대로 올라가므로 경계가 깨지면 발행물이 깨진다.
   finalContent = normalizeContentTableBlocks(finalContent);
+  // [2026-09-03] "정리하면 …" AI wrap-up opener — the checker flags it, the model still writes it. Dropped here.
+  finalContent = stripAiConclusionOpenersFromContent(finalContent);
 
   // ✅ [Phase 7] Source Fidelity 측정 — URL 입력 시 LLM 압축·정보 누락 감지
   // 사용자 진단: "url 넣어서 발행하면 내용들이 많이 압축되고 중요한 내용도 빠짐"
@@ -5362,6 +5391,7 @@ export async function researchWithPerplexity(keyword: string): Promise<{
 - 구체적인 수치, 날짜, 출처 포함
 - 최소 2000자 이상 상세히 작성
 - 실제 검색 결과 기반으로 정확하게 작성
+- 서두 안내문, 자료 소개, 후속 제안(제목 후보·홍보 문구·완성 글 제안 등), 맺음 인사는 쓰지 않는다. 사실 항목만 쓴다.
 `.trim();
 
     const response = await Promise.race([
@@ -5400,17 +5430,11 @@ export async function researchWithPerplexity(keyword: string): Promise<{
     const elapsed = Date.now() - startTime;
     console.log(`✅ [Perplexity Research] 리서치 완료! ${cleanedContent.length}자 (${elapsed}ms)`);
 
-    // 제목 추출
-    let title = keyword;
-    const firstLine = cleanedContent.split('\n').find(l => l.trim().length > 0);
-    if (firstLine) {
-      const cleaned = firstLine.replace(/^#+\s*/, '').replace(/^\*\*|\*\*$/g, '').trim();
-      if (cleaned.length > 5 && cleaned.length < 100) {
-        title = cleaned;
-      }
-    }
-
-    return { content: cleanedContent, title, success: true };
+    // [2026-09-03 self-run 08:14] A research note has no title — its first line is a section
+    // header ("## 핵심 정보: 정의, 개념, 배경"). Taking it as the title fed sourceAssembler's
+    // baseTitle and the article came out as "핵심 정보: 정의 주말에 떠나는 …". The keyword is the title.
+    // Chat intro/offer lines are not material either — see researchNoteHygiene.
+    return { content: stripResearchNoteChatter(cleanedContent), title: keyword, success: true };
   } catch (error) {
     const errMsg = (error as Error).message;
     // API 키 오류는 로그만 남기고 조용히 실패
@@ -5546,19 +5570,11 @@ export async function researchWithGeminiGrounding(keyword: string): Promise<{
         const elapsed = Date.now() - startTime;
         console.log(`✅ [Gemini Grounding] 리서치 완료! ${text.length}자, ${sources.length}개 출처 (${elapsed}ms)`);
 
-        // 제목 추출 (첫 줄이 # 으로 시작하거나, 키워드 기반)
-        let title = keyword;
-        const firstLine = text.split('\n').find(l => l.trim().length > 0);
-        if (firstLine) {
-          const cleaned = firstLine.replace(/^#+\s*/, '').trim();
-          if (cleaned.length > 5 && cleaned.length < 100) {
-            title = cleaned;
-          }
-        }
-
+        // [2026-09-03] Same as researchWithPerplexity: a grounding note's first line is a section
+        // header, not a title. The keyword stays the title.
         return {
-          content: text,
-          title,
+          content: stripResearchNoteChatter(text),
+          title: keyword,
           sources,
           success: true,
         };
@@ -7479,6 +7495,7 @@ async function generateStructuredContentInternal(
               ? classifyAffiliateEvidence(source).mode
               : undefined,
             aiExperienceOptIn: source.aiExperienceGeneration === true,
+            sourceIsUrl: !!(source as any).url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news',
           });
           const _modeLabelMap: Record<string, string> = { seo: 'SEO', homefeed: '홈판', affiliate: '제휴', business: '비즈니스', custom: '커스텀', mate: '메이트' };
           const _modeLabel = _modeLabelMap[_modeForGate] || _modeForGate;
@@ -7607,6 +7624,7 @@ async function generateStructuredContentInternal(
                     ? classifyAffiliateEvidence(source).mode
                     : undefined,
                   aiExperienceOptIn: source.aiExperienceGeneration === true,
+                  sourceIsUrl: !!(source as any).url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news',
                 });
                 _quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate);
                 console.log(`[QualityGate90] patch 후 재평가: mode=${_gateResult.modeScore.score}/100 · final=${_gateResult.finalScore}/100 · human=${_gateResult.humanlikeScore.score}/100 · miss=${_quality90Assessment.miss}`);
@@ -7892,8 +7910,10 @@ async function generateStructuredContentInternal(
 
         // ✅ 최종 구조화 및 클리닝 (이모지, [공지], ?: 등 제거)
         if (finalStructuredContent !== optimized) {
+          await repairHeadingsBeforeFinalize(finalStructuredContent, source);
           return finalizeStructuredContent(finalStructuredContent, source, promptVariant);
         }
+        await repairHeadingsBeforeFinalize(optimized, source);
         return finalizeStructuredContent(optimized, source, promptVariant);
       }
 
@@ -7957,6 +7977,7 @@ async function generateStructuredContentInternal(
         console.log(`[ContentGenerator] 본문 ${plainLength}자 (요청 ${minChars}자) — 분량은 판정 기준이 아니다`);
 
         // ✅ 이모지 자동 제거 (AI가 생성한 이모지 제거)
+        await repairHeadingsBeforeFinalize(optimized, source);
         return finalizeStructuredContent(optimized, source, promptVariant);
       }
 
@@ -8031,6 +8052,7 @@ async function generateStructuredContentInternal(
           await applyPostDraftFactCheck(optimized as any, source as any, () => loadConfig() as any);
         }
 
+        await repairHeadingsBeforeFinalize(optimized, source);
         return finalizeStructuredContent(optimized, source, promptVariant);
       }
 

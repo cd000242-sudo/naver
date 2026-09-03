@@ -205,7 +205,10 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string, option
       const merged = `${cleanKeyword} ${rest}`.replace(new RegExp(`^${escapeRegex(cleanKeyword)}(?:\\s+${escapeRegex(cleanKeyword)})+`), cleanKeyword).trim();
       return clampTitleLength(merged, maxTitleLength);
     }
-    return clampTitleLength(`${cleanKeyword}${rest ? ` ${rest}` : ''}`.trim(), maxTitleLength);
+    // [2026-09-03 실측] 앞 3자 강제로 검색어를 앞에 붙이면 "9월 꽃구경 국내여행지 주말 하루 비울 때 평창 메밀꽃과…" 처럼
+    //   41자 나열이 된다. 검색어 뒤에 상황이 이어질 때는 쉼표로 끊는다(제목 공식 "검색어, 상황"). 이미 구두점·조사로 시작하면 그대로.
+    const joiner = options?.ensureFront3 && rest && /^[가-힣A-Za-z0-9]/.test(rest) && !/^(?:은|는|이|가|을|를|의|에|로|와|과|도)\s/.test(rest) ? ', ' : ' ';
+    return clampTitleLength(`${cleanKeyword}${rest ? `${joiner}${rest}` : ''}`.trim(), maxTitleLength);
   }
 
   const removed = cleanTitle.split(cleanKeyword).join(' ').replace(/\s+/g, ' ').trim();

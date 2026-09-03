@@ -184,7 +184,14 @@ export function normalizePublishImageSequence<T extends PublishImageLike>(
   }
   if (source.length === 0) return [];
 
-  const thumbnailEntries = source.filter(entry => isThumbnailImage(entry.image));
+  const allThumbnailEntries = source.filter(entry => isThumbnailImage(entry.image));
+  // [2026-09-03 사장님 라이브 224399815476] 썸네일 생성기로 적용한 뒤 풀오토 발행하니 대표 이미지가 두 번 올라갔다
+  //   (thumbnail_<ts>.png 와 <제목>_<ts>.png — 이미지관리탭 항목과 풀오토 프리셋 항목이 둘 다 isThumbnail). 대표는 하나다.
+  //   첫 항목만 남기고 나머지는 버린다 — 발행 순서 계약은 '썸네일 슬롯 0 하나' 다.
+  const thumbnailEntries = allThumbnailEntries.slice(0, 1);
+  if (allThumbnailEntries.length > 1) {
+    console.warn(`[PublishImageSequence] ⚠️ 대표 이미지 항목 ${allThumbnailEntries.length}개 → 첫 항목만 사용 (중복 업로드 방지)`);
+  }
   const bodyEntries = source.filter(entry => !isThumbnailImage(entry.image));
   const thumbnailOffset = thumbnailEntries.length > 0 ? 1 : 0;
   const thumbnails = thumbnailEntries.map(({ image }) => {

@@ -74,6 +74,8 @@ export interface EvaluationInput {
   readonly affiliateEvidenceMode?: AffiliateEvidenceMode;
   /** [2026-09-03 사장님] AI 경험 옵트인 — 쇼핑 글의 1인칭 체험을 날조로 감점하지 않는다. */
   readonly aiExperienceOptIn?: boolean;
+  /** [2026-09-03] URL 원문 모드인가 — 키워드 검색 재료에는 원문 압축률/보존율(URL 임계)을 적용하지 않는다. */
+  readonly sourceIsUrl?: boolean;
 }
 
 const WEIGHTS: Readonly<Record<Mode, Weights>> = {

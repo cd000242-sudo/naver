@@ -29,7 +29,9 @@ const FORBIDDEN_PATTERNS: { pattern: RegExp; label: string }[] = [
 export function evaluateSafety(input: EvaluationInput): SubScore {
   const body = input.body || '';
   const rawText = input.rawText || '';
-  const hasRawSource = rawText.length >= 500;
+  // [2026-09-03 실측] 키워드 글(검색 재료 3,418자)에 URL 원문 임계(압축률 85%·보존율 92%)를 적용해 안전 35 → regenerate 오판.
+  //   원문을 옮기는 URL 모드가 아니면 fidelity 슬롯을 비운다(가중치 재분배).
+  const hasRawSource = rawText.length >= 500 && input.sourceIsUrl !== false;
 
   const details: Record<string, number> = {};
   const issues: string[] = [];

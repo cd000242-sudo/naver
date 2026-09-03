@@ -56,16 +56,36 @@ const PEOPLE = /\d[\d,]*\s*(?:명|가구|세대|팀)/gu;
  * 대신 ORG_MIN_CHARS 로 "종합병원", "국세청" 같은 짧은 일반명사를 걸러낸다 —
  * 지어내서 위험한 쪽은 그럴듯하게 긴 이름이다.
  */
-const ORG = /[가-힣]{2,}(?:청|부|처|원|공단|공사|재단|협회|위원회|센터)/gu;
+// [2026-09-03 self-run 08:19] "야간인지부터" 가 기관명 "야간인지부" 로 잡혔다 — 조사 '부터' 는 기관 접미가 아니다.
+const ORG = /[가-힣]{2,}(?:청|부|처|원|공단|공사|재단|협회|위원회|센터)(?!터)/gu;
 const ORG_MIN_CHARS = 5;
 
 const KIND_LABEL: Readonly<Record<FabricationFinding['kind'], string>> = Object.freeze({
   money: '금액', percent: '비율', date: '날짜', people: '인원', org: '기관명',
 });
 
-/** 숫자 표기 흔들림을 흡수한다 — "1,200만원" 과 "1200 만 원" 을 같게 본다 */
+/**
+ * 숫자 표기 흔들림을 흡수한다 — "1,200만원" 과 "1200 만 원" 을 같게 본다.
+ * [2026-09-03 self-run 08:06] 리서치 자료는 마크다운이라 "2026년 **9월 4일**" 처럼 강조 표시가
+ * 숫자 사이에 끼어 든다. 그대로 대조하면 자료에 있는 날짜를 "없는 날짜" 로 오판했다.
+ */
 function normalizeForMatch(value: string): string {
-  return value.replace(/[\s,]/gu, '');
+  return value.replace(/[\s,*_`]/gu, '');
+}
+
+/**
+ * [2026-09-03 self-run 08:14] "2026년 9월 4일" 을 없는 날짜로 잡았다 — 자료는 "2026년 축제는 9월 4일~13일"
+ * 이라 연도와 월일이 떨어져 있다. 월일이 자료에 있고 그 연도가 자료 어딘가에 있으면 조립된 날짜다.
+ */
+const YEAR_MONTH_DAY = /^(\d{4})년(\d{1,2}월\d{1,2}일)$/u;
+
+function isDateComposedFromSource(finding: FabricationFinding, normalizedSource: string): boolean {
+  if (finding.kind !== 'date') return false;
+  const match = normalizeForMatch(finding.claim).match(YEAR_MONTH_DAY);
+  if (!match) return false;
+  const [, year, monthDay] = match;
+  return normalizedSource.includes(monthDay)
+    && (normalizedSource.includes(`${year}년`) || normalizedSource.includes(`${year}.`));
 }
 
 function isBenign(claim: string): boolean {
@@ -126,7 +146,8 @@ export function checkFabrication(
   const claims = extractVerifiableClaims(body);
   const normalizedSource = normalizeForMatch(source);
   const findings = claims.filter(
-    finding => !normalizedSource.includes(normalizeForMatch(finding.claim)),
+    finding => !normalizedSource.includes(normalizeForMatch(finding.claim))
+      && !isDateComposedFromSource(finding, normalizedSource),
   );
 
   const warnings = findings.map(
