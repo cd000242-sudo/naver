@@ -135,6 +135,7 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
         if (response.ok && response.data) {
             setResult(response.data);
             setExpDocs({});
+            docsAsked.current = new Set();
             setExpState('idle');
             return;
         }
@@ -198,34 +199,47 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
      * [버그 주의] 의존성에 expState 를 넣으면 안 된다(2026-08-23 실사고).
      * setExpState('loading') 이 곧바로 이 effect 를 다시 돌리고, 그때 정리
      * 함수가 **방금 띄운 요청을 취소**해서 화면이 영영 '재는 중'에 멈춘다.
-     * result 가 바뀔 때만 돈다. 중복 조회는 ref 로 막는다.
+     * 그래서 여기엔 취소가 없다 — 늦게 온 응답도 그냥 합친다(문서수는
+     * 검색어의 사실이라 어느 분석에서 왔든 같은 값이다).
+     *
+     * [실사고 2026-09-03] "확장 키워드 — 자리까지 실측인데 문서수·비율·자리가
+     * 안 뜬다". 이 effect 가 result 가 바뀔 때 한 번만 돌아서, 그 뒤에 도착하는
+     * 자동완성 보충(fetchKeywordExpansions)·보드 풀 줄은 영영 안 쟀다. 롱테일은
+     * 검색광고 연관이 0건이라 첫 실행에 잴 줄이 없고 → 표 전체가 '모름'이었다.
+     * 지금은 표의 상위 40줄 가운데 **아직 안 잰 줄만** 골라 그때그때 잰다.
      */
-    const docsFor = useRef<string>('');
+    const docsAsked = useRef<Set<string>>(new Set());
+    const docsInFlight = useRef(0);
+    /*
+     * 상위 40건만 — 실측: 40건은 100% 통과(6.7초), 60건은 83%, 92건은 54%.
+     * 검색량이 큰 쪽부터 재야 판정이 쓸모 있는 자리에 붙는다.
+     * 못 잰 줄도 표에는 남아 [더 파기]로 이어 갈 수 있다.
+     */
+    const docsWanted = expansionRows.slice(0, 40).map((r) => r.keyword);
+    const docsKey = docsWanted.join('\n');
     useEffect(() => {
-        if (!result || expansionRows.length === 0) return;
-        if (docsFor.current === result.keyword) return;
-        docsFor.current = result.keyword;
+        if (!result) return;
+        const targets = docsWanted.filter((k) => !docsAsked.current.has(k));
+        if (targets.length === 0) return;
+        targets.forEach((k) => docsAsked.current.add(k));
+        docsInFlight.current += 1;
         setExpState('loading');
-        let cancelled = false;
-        /*
-         * 문서수는 상위 40건만 — 실측: 40건은 100% 통과(6.7초), 60건은 83%,
-         * 92건은 54%. 검색량이 큰 쪽부터 재야 판정이 쓸모 있는 자리에 붙는다.
-         * 못 잰 줄도 표에는 남아 [더 파기]로 이어 갈 수 있다.
-         */
-        fetchKeywordDocs(expansionRows.slice(0, 40).map((r) => r.keyword))
+        fetchKeywordDocs(targets)
             .then((res) => {
-                if (cancelled) return;
-                if (res.ok && res.data) setExpDocs(res.data.docs || {});
-                setExpState('done');
+                if (res.ok && res.data) {
+                    const got = res.data.docs || {};
+                    setExpDocs((prev) => ({ ...prev, ...got }));
+                }
             })
-            .catch(() => {
-                // 실패해도 '재는 중'에 묶어 두지 않는다 — 못 쟀다고 끝낸다.
-                if (!cancelled) setExpState('done');
+            .catch(() => { /* 실패한 줄은 '—' 로 남는다 — 0 으로 적지 않는다. */ })
+            .finally(() => {
+                docsInFlight.current -= 1;
+                // 실패해도 '재는 중'에 묶어 두지 않는다 — 마지막 요청이 끝나면 끝낸다.
+                if (docsInFlight.current === 0) setExpState('done');
             });
-        return () => { cancelled = true; };
-        // expansionRows 는 result 에서 파생된다 — result 가 바뀔 때만 다시 잰다.
+        // 표의 상위 40줄이 바뀔 때(연관 도착·보충 도착·보드 풀 합류)마다 안 잰 줄을 잰다.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [result]);
+    }, [result, docsKey]);
 
     /*
      * 확장어가 얇으면 보충한다(2026-08-23).
@@ -263,7 +277,7 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
         setTrail((prev) => [...prev, result.keyword].slice(-6));
         setKeyword(next);
         // 새 검색어의 문서수를 다시 재도록 잠금을 푼다.
-        docsFor.current = '';
+        docsAsked.current = new Set();
         expFor.current = '';
         setExpDocs({});
         setExtraExp([]);
