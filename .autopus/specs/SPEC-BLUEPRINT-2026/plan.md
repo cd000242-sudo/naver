@@ -24,6 +24,12 @@
 - `quotes` 소비: 본문 인용 0 이고 설계도 quotes 가 있으면 삽입 보정(`quoteInsertionPatch`, 짧은 호출: 어느 문단 뒤에 어떤 발언을 넣을지 JSON) — 재생성보다 싸다. 실패 시 기존 Faithfulness 재시도 경로.
 - 로그: `[Blueprint] 바인딩: 도입부 패치 n · 인용 삽입 n`.
 
+## Phase 3.5 · 품질 최극한 모드 (0.5일, 사장님 제안)
+- `configManager` 에 `qualityMaxMode?: boolean`(SENSITIVE 아님) + 설정 모달(priceInfoModal) 체크박스 1개, 문구: "품질 최극한 모드 — 추가 비용과 시간이 더 걸립니다. 대신 상위노출·홈판노출 가능성을 끌어올립니다."
+- `geminiCostOptimizer.resolveContentGenerationCostPolicy` 에 `qualityMax` 플래그 → contentGenerator 에서 QUALITY_ATTEMPT_LIMIT +1, quality90 하드 목표, 소보정 항상, 최종 자기비평 1회, 설계도 항상(에이전트 포함).
+- 생성 로그 첫 줄에 `품질 정책: max=ON` 과 예상 배수 표시. 렌더러 진행 문구에도 "최극한 모드: 시간이 더 걸립니다".
+- 테스트: 정책 해석 3건(OFF 기본·ON·env 우선), 예산 계산 2건.
+
 ## Phase 4 · 효과 검증 (0.5일)
 - Phase 0 과 같은 20편 재생성 → 발화율·인용·도입부·곁가지·길이·시간·비용 비교표(하네스 P30).
 - 엔진 3종(GPT-5.6 Terra, Gemini 3.6 flash, Codex) 각 3편으로 엔진 간 편차 확인.
