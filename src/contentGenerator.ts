@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { applyReviewMaterialHygiene } from './content/reviewMaterialHygiene.js';
 import OpenAI from 'openai';
 // ✅ [2026-05-25 v2.10.356] OpenAI RPM preemptive throttler + 누진 backoff
 // ✅ [2026-06-02] 호출 간 최소 간격(10s) + 30→60→90→120 누진 backoff
@@ -352,7 +353,7 @@ import {
 import { getPrimaryKeywordFromSource, getSecondaryKeywordsFromSource, preprocessLongKeyword } from './contentKeywordHelpers';
 import { isSearchDrivenTitleMode } from './content/titleModeObjective.js';
 import { compareTitleWithSerp } from './analytics/serpTitleBenchmark.js';
-import { stripStoreTagBrackets } from './contentTitleHelpers';
+import { stripStoreTagBrackets, stripOptionCombo } from './contentTitleHelpers';
 // [SPEC-PROMPT-2026-REFRESH Phase 1/v2.10.231] 일반론 도망 감지 + 인용 토큰 밀도 측정
 import { detectPlatitudes } from './contentPlatitudeDetector';
 // [Gap C 시맨틱 / SPEC-REVIEW-001 확장] 옵트인 섹션 변별 판정 (기본 OFF, ungrounded 1회 호출)
@@ -1829,6 +1830,8 @@ export function finalizeStructuredContent(
       const finalMode = (source.contentMode || 'seo') as PromptMode;
       const finalCategoryHint = (source as any).categoryHint as string | undefined;
       const finalPK = primaryKeyword || (source.metadata as any)?.keywords?.[0] || '';
+      // [2026-09-03 4차 생성 실측] 옵션 조합("그레이 본체+다리")은 채점 전에 뗀다 — 감점만으로는 다른 후보가 더 깎이면 그대로 통과했다.
+      if (finalMode === 'affiliate') finalContent.selectedTitle = stripOptionCombo(String(finalContent.selectedTitle || ''));
       const finalCheck = evaluateTitleQuality(finalContent.selectedTitle, String(finalPK), finalMode, finalCategoryHint, source.articleType);
       if (finalCheck.score < 50) {
         console.warn(`[FinalQualityGate] ⚠️ 최종 제목 품질 미달 (${finalCheck.score}점): "${finalContent.selectedTitle}"`);
@@ -1854,7 +1857,7 @@ export function finalizeStructuredContent(
           console.log(`[TitleDiag] 상위 글 제목 대조(${ours.sampleSize}개): 검색어 그대로 ${Math.round(ours.intactShare * 100)}% · 앞쪽 ${Math.round(ours.frontShare * 100)}% · 내 제목 ${ours.verdict}${ours.lines[0] ? ' — ' + ours.lines[0] : ''}`);
         }
         const candidateTexts = (Array.isArray(finalContent.titleCandidates) ? finalContent.titleCandidates : [])
-          .map((c: any) => (typeof c?.text === 'string' ? c.text.trim() : ''))
+          .map((c: any) => (typeof c?.text === 'string' ? stripOptionCombo(c.text.trim()) : ''))
           .filter((t: string) => t.length > 0 && t !== finalContent.selectedTitle);
         const scoredCandidates = candidateTexts
           .map((text: string) => ({ text, score: evaluateTitleQuality(text, String(finalPK), finalMode, finalCategoryHint, source.articleType).score + serpLagPenalty(text) }))
@@ -1868,7 +1871,7 @@ export function finalizeStructuredContent(
           // 접두사로 인한 훼손 → cleanup만 재적용하여 복구 시도
           finalContent.selectedTitle = removeDuplicatePhrasesFromTitle(
             cleanupColonQuotePattern(cleanupTrailingTitleTokens(
-              cleanupStartingTitleTokens(stripStoreTagBrackets(sanitizeTitleSpecialChars(finalContent.selectedTitle)))
+              cleanupStartingTitleTokens(stripOptionCombo(stripStoreTagBrackets(sanitizeTitleSpecialChars(finalContent.selectedTitle))))
             ))
           ).trim();
           const rescueCheck = evaluateTitleQuality(finalContent.selectedTitle, String(finalPK), finalMode, finalCategoryHint, source.articleType);
@@ -8126,6 +8129,18 @@ export async function generateStructuredContent(
       + ` → ${String(source.rawText || '').length}자에서 ${sourceNoise.text.length}자`,
     );
     source = { ...source, rawText: sourceNoise.text };
+  }
+  // [2026-09-03 자체 실행 비평] 쇼핑 재료 위생 — 옵션 라벨("구성: (그레이)본체+다리")이 리뷰에 붙어 오고, 1인칭 옵트인에서는
+  //   리뷰어 신상(인대 파열·복싱·부모님·2년 전 안마의자·강아지)이 한 화자에 붙었다. 프롬프트 금지로는 안 막혀 재료에서 지운다.
+  //   productReviews 와 rawText 의 후기 섹션 둘 다(모델은 두 사본을 다 읽는다). 원본 source 는 바꾸지 않는다.
+  if (source.contentMode === 'affiliate') {
+    const memo = String((source as any).personalExperience ?? '').trim();
+    const firstPerson = (source as any).aiExperienceGeneration === true && memo.length < 8;
+    const hygiene = applyReviewMaterialHygiene(source, firstPerson);
+    if (hygiene.changed > 0) {
+      source = hygiene.source;
+      console.log(`[ReviewHygiene] 리뷰 재료 정리 ${hygiene.changed}건 (옵션 라벨${firstPerson ? ' · 신상 절 제거' : ''})`);
+    }
   }
   const activation = resolveProductionContentQualityV3Activation(
     source.contentMode,

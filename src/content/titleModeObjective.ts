@@ -100,6 +100,10 @@ const PURCHASE_AXIS_SHAPES: ReadonlyArray<{ readonly re: RegExp; readonly name: 
   { re: /(원룸|투룸|좁은|작은\s*방|사무실|주방|욕실|차량|예산|만원대|이하로)/, name: '공간·예산' },
   // 비교 축 — "저소음 / 무선 / 각도 조절 / 세척 편한"
   { re: /(저소음|무소음|무선|유선|각도|조절|세척|분리|접이|경량|대용량|절전)/, name: '비교조건' },
+  // [2026-09-03 4차 생성 실측] "소음 있는 다리 안마기 괜찮을까", "보관 공간까지 보고 고를 때" 가 '구매 축 없음' -30 을 맞아
+  //   옵션 꼬리표 붙은 후보에 졌다. 제품 조건 낱말과 '조건 물음' 형태도 구매 축이다.
+  { re: /(소음|보관|공간|설명서|조작|리모컨|배송|무게|크기|사이즈|세척|충전|배터리|전원|콘센트|설치)/, name: '제품조건' },
+  { re: /(괜찮을까|맞을까|갈린다|갈리는|볼\s*(?:것|점|부분)|알아둘|감수|따져|고를\s*때|사기\s*전|전에\s*볼|후회)/, name: '조건물음' },
 ];
 
 export interface PurchaseAxisVerdict {
@@ -154,7 +158,8 @@ export function scoreOptionNoise(title: string, mode: string | undefined): Purch
   const noise = [...combos, ...tags.filter((tag) => !combos.some((c) => tag.includes(c)))];
   if (noise.length === 0) return { points: 0, reason: '', matched: [] };
   return {
-    points: -20,
+    // [2026-09-03 6차 실측] 제품 조건(설명서·소음)이 구매 축으로 인정되자 옵션 조합 붙은 후보(70)가 깨끗한 후보(60)를 이겼다 — 조합은 축보다 큰 결함이다.
+    points: -35,
     reason: `쇼핑: 상품 옵션·스토어 꼬리표 표기가 제목에 들어감 (${noise.join(', ')})`,
     matched: noise,
   };
@@ -165,6 +170,19 @@ export function scoreOptionNoise(title: string, mode: string | undefined): Purch
  * scoreSearchMatch 는 낱말 단위라 "닥터웰 … 마사지기, 종아리 …" 처럼 흩어져 있어도 만점이었다.
  * 검색어는 사람들이 치는 구절이다 — 구절이 그대로 붙어 있어야 하고, 앞쪽에 있어야 한다. 형태만 본다.
  */
+/**
+ * [2026-09-03 생성 실측] "닥터웰 종아리 마사지기 DR-5180, 운동 뒤 유선 사용은" — 조사로 끝나는 제목은 잘린 문장으로
+ * 읽혀 클릭이 안 된다. 쇼핑 제목이 은/는/이/가/의/을/를/도/에/로 로 끝나면 결함으로 본다. 물음표·서술어·명사로 닫아야 한다.
+ */
+const DANGLING_ENDING = /(?:[가-힣])(?:은|는|이|가|의|을|를|도|에|로|와|과)\s*$/;
+export function scoreDanglingEnding(title: string, mode: string | undefined): PurchaseAxisVerdict {
+  if (String(mode || '').trim() !== 'affiliate') return { points: 0, reason: '', matched: [] };
+  const t = String(title || '').replace(/["'”’)]+$/, '').trim();
+  if (!t || /[?!.]$/.test(t)) return { points: 0, reason: '', matched: [] };
+  if (!DANGLING_ENDING.test(t)) return { points: 0, reason: '', matched: [] };
+  return { points: -15, reason: `쇼핑: 제목이 조사로 끝난다 ("…${t.slice(-8)}") — 잘린 문장으로 읽힌다. 물음·서술어·명사로 닫는다`, matched: [] };
+}
+
 export function scoreSearchPhraseIntact(title: string, keyword: string, mode: string | undefined): PurchaseAxisVerdict {
   if (String(mode || '').trim() !== 'affiliate') return { points: 0, reason: '', matched: [] };
   const norm = (v: string) => String(v || '').toLowerCase().replace(/\s+/g, ' ').trim();

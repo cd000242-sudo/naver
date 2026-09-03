@@ -290,7 +290,7 @@ export function applyKeywordPrefixToStructuredContent(content: StructuredContent
   }
 }
 
-export function sanitizeReviewTitle(title: string, productName: string): string {
+export function sanitizeReviewTitle(title: string, productName: string, options?: { ensureProductPrefix?: boolean }): string {
   const base = String(title || '').trim();
   const prod = String(productName || '').trim();
 
@@ -324,7 +324,9 @@ export function sanitizeReviewTitle(title: string, productName: string): string 
   }
 
   // 4. 제품명 prefix 보장 (1회만)
-  if (prod) {
+  // [2026-09-03 생성 실측] 쇼핑은 검색어가 앞에 와야 한다(ensureFront3). 여기서 상품명 앞머리를 붙이면
+  //   "닥터웰 종아리 공기압 마사지기 닥터웰 종아리 마사지기 DR-5180 …" 처럼 검색어와 겹쳐 중복 제거기가 제목을 토막 냈다.
+  if (prod && options?.ensureProductPrefix !== false) {
     t = applyKeywordPrefixToTitle(t, prod);
   }
 

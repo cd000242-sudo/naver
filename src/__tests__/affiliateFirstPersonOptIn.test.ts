@@ -133,4 +133,38 @@ describe('AI 경험 옵트인 — 작성자 1인칭 체험 (쇼핑)', () => {
     expect(clean.issues.map(i => i.code)).not.toContain('FABRICATED_FIRST_PERSON');
     expect(clean.issues.map(i => i.code)).not.toContain('EVIDENCE_META_NARRATED');
   });
+
+  // [2026-09-03 생성 실측 2026-09-03T02-20-52] "구매자" 만 0이 되고 화자는 그대로 남 — 동의어 중계도 잡는다
+  it('동의어 중계(사례에서는·~한 사람이 남겼어요·말이 나왔죠·N건의 리뷰)도 REVIEW_RELAY_VOICE 다', () => {
+    const body = '출산 뒤 다리저림을 느껴 사용한 사례에서는 허벅지 쪽 압이 더 잘 들어오는 듯했다는 말이 나왔죠. 무릎을 다친 뒤에도 복싱을 이어 간 사람이 누워서 쓰기 편했다고 남겼어요. 단계별로 나눠 썼다는 경험도 있었고, 안마의자보다 시끄럽다는 비교도 나왔고요. 12건의 리뷰에는 서로 다른 장면이 담겨 있습니다. 접어서 보관하면 자리를 거의 차지하지 않았다는 반응이 있었어요.';
+    const report = auditAffiliateAuthenticity({ body, evidenceMode: 'review_synthesis', aiExperienceOptIn: true });
+    expect(report.issues.map(i => i.code)).toContain('REVIEW_RELAY_VOICE');
+    const contract = buildAffiliateAuthenticityContract(optIn);
+    expect(contract).toContain('[FIRST_PERSON_EXPERIENCE');
+    expect(contract).not.toContain('[REVIEW_SYNTHESIS — 구매자 후기 종합');
+    expect(contract).toContain('주어는 나다');
+    const intent = buildAffiliateReviewIntentContract(optIn);
+    expect(intent).toContain('[EXPERIENCE FACTS');
+    expect(intent).toMatch(/FACT_1:/u);
+    expect(intent).not.toMatch(/REVIEW_1:/u);
+  });
+
+  // [2026-09-03 2차 생성 실측] 리뷰어 다섯의 인생이 한 화자에 붙었다 — 남의 신상 차용은 잡고, "기대한 사람에게는" 은 중계가 아니다
+  it('남의 신상(부상·치료·부모님·N년 전 구매·반려동물) 차용은 BORROWED_BIOGRAPHY, "~한 사람에게는" 은 오탐이 아니다', () => {
+    const borrowed = '무릎 내측인대가 파열돼 거의 3개월 고생한 때에는 복싱을 하고 돌아오면 다리 관리가 더 신경 쓰였습니다. 부모님이 병원에서 추천받았다는 말을 듣고 급하게 찾았어요. 2년 전에 들인 안마의자보다 시끄러웠지만 집에 있던 강아지는 짖지 않았어요. 저는 누워서 장화처럼 신고 20분 켜 두면 다리가 가벼워졌습니다.';
+    const codes = auditAffiliateAuthenticity({ body: borrowed, evidenceMode: 'review_synthesis', aiExperienceOptIn: true }).issues.map(i => i.code);
+    expect(codes).toContain('BORROWED_BIOGRAPHY');
+    const plain = '누워서 쓰는 안마기인 만큼 리모컨을 기대한 사람에게는 아쉬울 수 있죠. 꺼내 놓을 공간조차 빠듯한 사람에게는 맞지 않아요. 저는 장화처럼 신고 20분 켜 두면 다리가 가벼워졌습니다.';
+    const plainCodes = auditAffiliateAuthenticity({ body: plain, evidenceMode: 'review_synthesis', aiExperienceOptIn: true }).issues.map(i => i.code);
+    expect(plainCodes).not.toContain('REVIEW_RELAY_VOICE');
+    expect(plainCodes).not.toContain('BORROWED_BIOGRAPHY');
+    expect(buildAffiliateAuthenticityContract(optIn)).toContain('내 배경은 비워 둔다');
+  });
+
+  // [2026-09-03 5차 실측] 후기 원문 인용 "…라는 말처럼" 도 중계다
+  it('따옴표 인용 + "라는 말/장점" 은 REVIEW_RELAY_VOICE', () => {
+    const body = '"진짜 만족하면서 사용하고 있어요! 힘도 엄청 세고 3단으로만 사용해도 충분히 시원하더라고요."라는 말처럼, 강한 압박감을 원하는 사람이라면 후보에 둘 이유가 있어요. 저는 3단 20분이 잘 맞았습니다.';
+    const codes = auditAffiliateAuthenticity({ body, evidenceMode: 'review_synthesis', aiExperienceOptIn: true }).issues.map(i => i.code);
+    expect(codes).toContain('REVIEW_RELAY_VOICE');
+  });
 });

@@ -180,17 +180,19 @@ export function validateStructuredContent(content: StructuredContent, source?: C
   // ✅ 제품/쇼핑/IT 리뷰: 과한 훅/감정 트리거 반복 방지 + 제목 상품명 prefix 강제
   if (isReviewArticleType(source?.articleType)) {
     const productName = getReviewProductName(source);
+    // [2026-09-03] 쇼핑(affiliate)은 검색어가 앞이다 — 상품명 접두는 finalize 의 ensureFront3 와 겹쳐 제목을 망가뜨렸다.
+    const reviewTitleOptions = { ensureProductPrefix: source?.contentMode !== 'affiliate' };
     if (productName) {
-      content.selectedTitle = sanitizeReviewTitle(content.selectedTitle || '', productName);
+      content.selectedTitle = sanitizeReviewTitle(content.selectedTitle || '', productName, reviewTitleOptions);
       if (Array.isArray(content.titleAlternatives)) {
         content.titleAlternatives = content.titleAlternatives
-          .map((t) => sanitizeReviewTitle(String(t || ''), productName))
+          .map((t) => sanitizeReviewTitle(String(t || ''), productName, reviewTitleOptions))
           .filter(Boolean);
       }
       if (Array.isArray(content.titleCandidates)) {
         content.titleCandidates = content.titleCandidates.map((c) => ({
           ...c,
-          text: sanitizeReviewTitle(String(c?.text || ''), productName),
+          text: sanitizeReviewTitle(String(c?.text || ''), productName, reviewTitleOptions),
         }));
       }
     }

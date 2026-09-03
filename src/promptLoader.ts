@@ -1389,7 +1389,9 @@ ${neoHookBlock ? '⚠️ [홈판 제목 제약]은 제목 보조 규칙이며, �
       productBlock += `📋 스펙: ${productInfo.spec}\n`;
     }
     if (productInfo.reviews && productInfo.reviews.length > 0) {
-      productBlock += `⭐ 실제 구매자 리뷰:\n`;
+      productBlock += productInfo.aiExperienceGeneration === true
+        ? `🧭 내 사용 경험 재료 (후기에서 추린 사실 — 이 글에서는 전부 내가 겪은 일이다. 출처를 말하지 않는다):\n`
+        : `⭐ 실제 구매자 리뷰:\n`;
       // [v2.11.133] 200 -> 500 chars: truncating dropped exactly the
       // late-sentence details (noise, install, defects) the post needs.
       // [v2.11.134] 500 -> 600 — aligned with the crawler's per-review cap so

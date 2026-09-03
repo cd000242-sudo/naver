@@ -28,6 +28,7 @@ export type AffiliateAuthenticityIssueCode =
   | 'UNSUPPORTED_DURATION_CLAIM'
   | 'EVIDENCE_META_NARRATED'
   | 'SPEC_DUMP'
+  | 'BORROWED_BIOGRAPHY'
   | 'MISSING_REVIEW_ATTRIBUTION'
   | 'UNSUPPORTED_REVIEW_TITLE'
   | 'UNSAFE_CURRENT_PRICE_CLAIM'
@@ -91,12 +92,15 @@ const REVIEW_ATTRIBUTION_PATTERN = /구매자\s*후기|사용자\s*후기|실구
 const REVIEW_STYLE_TITLE_PATTERN = /후기|리뷰|사용기|체험기/i;
 /** [2026-09-03] 옵트인 중에도 숫자 기간은 거짓의 출처다 — 1인칭 문장 중 이것만 잡는다. */
 const DURATION_CLAIM_PATTERN = /(?:한\s*달|\d+\s*(?:일|주|개월|달))\s*(?:동안|째|간|정도)?\s*.{0,16}?(?:써|사용|먹|발라|입어|테스트|지나)/i;
+// [2026-09-03 5차 실측] 후기 원문을 따옴표로 인용하고 "…라는 말처럼" 으로 받는 것도 중계다.
 /** [2026-09-03 사장님 글 실측] "구매자 반응에는", "한 구매자는", "~다고 남겼어요/적었습니다" — 출처 표기보다 넓은 '남의 경험 중계' 어투. */
-const RELAY_VOICE_PATTERN = /구매자\s*(?:반응|의견|들은|는|도\s*있|가\s*있)|(?:한|또\s*다른|어떤|일부)\s*구매자|(?:라고|다고|고)\s*(?:남겼|적었|표현했|말했|전했|밝혔)|의견(?:이|도|은)\s*(?:있었|나옵|이어집|갈렸)|반응(?:이|도|은|에는)\s*(?:있|나옵|이어집|갈렸)|후기(?:를|에서|에는|에\s*따르면)|리뷰(?:를|에서|에는|에\s*따르면)/;
+const RELAY_VOICE_PATTERN = /구매자\s*(?:반응|의견|들은|는|도\s*있|가\s*있)|(?:^|[\s(,])(?:한|또\s*다른|어떤|일부)\s*(?:구매자|사용자|분)|(?:라고|다고|고)\s*(?:남겼|적었|표현했|말했|전했|밝혔)|(?:다는|라는)\s*(?:말|경험|사례|비교|의견|반응|후기)(?:이|도|은|들이|들도)?\s*(?:있|나왔|나옵|눈에|이어|갈렸|많)|사례(?:에서는|가\s*있|도\s*있|를\s*보면|도\s*눈에)|의견(?:이|도|은)\s*(?:있었|나옵|이어집|갈렸)|반응(?:이|도|은|에는)\s*(?:있|나옵|이어집|갈렸)|\d+\s*건의\s*(?:리뷰|후기)|(?:리뷰|후기)\s*\d+\s*건|후기(?:를|에서|에는|에\s*따르면)|리뷰(?:를|에서|에는|에\s*따르면)|["“][^"”]{6,}["”]\s*(?:라는|이라는|란)\s*(?:말|후기|반응|평|장점|의견|글)/;
 /** 심의위원 문장 — 근거의 한계를 독자에게 해설한다. 어떤 모드에서도 구매 이유가 아니다. */
 const EVIDENCE_META_PATTERN = /묶어\s*말할\s*수(?:는)?\s*없|해석할\s*근거(?:는|가)\s*없|같은\s*의미로\s*보기는\s*어렵|근거(?:가|는)\s*없으므로|단정(?:하기|할\s*수는?)\s*어렵|확인되지\s*않(?:는다|습니다|아요)|해당\s*구매자의\s*경험이며|제품\s*전체의\s*결과로/;
 /** 상품 상세 페이지 복사 — 인증번호·제조국·약관 위치는 구매 이유가 아니다. */
 const SPEC_DUMP_PATTERN = /KC\s*인증|인증\s*정보|R-REI|R-R-|제조국|제조자\(사\)|소비자분쟁해결기준|이용약관|에너지소비효율등급/;
+/** [2026-09-03 생성 실측] 리뷰어 다섯의 인생(인대 파열·복싱·부모님·2년 전 안마의자·강아지)이 한 화자에 붙었다 — 옵트인 중 남의 신상 차용. */
+const BORROWED_BIOGRAPHY_PATTERN = /파열|수술|인대|디스크|도수\s*치료|치료\s*받|침(?:을|도)\s*맞|병원에서|어머님|아버님|부모님|남편|아내가|우리\s*(?:아이|딸|아들)|강아지|고양이|\d+\s*년\s*전에\s*(?:산|들인|샀|구매)|\d+\s*개월\s*(?:정도)?\s*고생/;
 const CURRENT_PRICE_VALUE_PATTERN = /(?:현재|지금)[^.\n]{0,40}?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?\s*원/i;
 const PRICE_SNAPSHOT_QUALIFIER_PATTERN = /수집\s*(?:당시|시점)|크롤링\s*당시|가격(?:은|이)?\s*변동|결제\s*전[^.\n]{0,24}?확인/i;
 
@@ -328,7 +332,7 @@ export function buildAffiliateReviewIntentContract(input: AffiliateEvidenceInput
   if (reviews.length === 0) return '';
 
   const evidence = reviews
-    .map((review, index) => `REVIEW_${index + 1}: ${JSON.stringify(review)}`)
+    .map((review, index) => `${input.aiExperienceGeneration === true ? 'FACT' : 'REVIEW'}_${index + 1}: ${JSON.stringify(review)}`)
     .join('\n');
   const decisionBlueprint = buildReviewDecisionBlueprint(reviews);
   const objectionRule = buildEvidenceBackedObjectionRule(input, reviews);
@@ -345,8 +349,8 @@ export function buildAffiliateReviewIntentContract(input: AffiliateEvidenceInput
   const voiceGuardRule = firstPersonOn
     ? '- 체험의 외피를 씌워도 사실은 후기·스펙에 있는 것만이다. 숫자 기간("3주", "한 달"), 구매 시점, 내돈내산, 가족 반응, 다른 제품과의 사용 비교는 자료에 없으면 쓰지 않는다.'
     : '- 후기 원문은 다른 사람의 경험이다. 작성자의 직접 경험으로 바꾸지 않는다. 허위 체험을 만들지 않는다.';
-  return `[REVIEW SEARCH INTENT — 실제 구매자 후기 기반]
-이 글의 목적은 후기를 평가하는 게 아니라, 후기에서 확인된 사실로 독자가
+  return `${firstPersonOn ? '[EXPERIENCE FACTS — 네가 겪은 사실 (후기에서 추림)]' : '[REVIEW SEARCH INTENT — 실제 구매자 후기 기반]'}
+${firstPersonOn ? '아래 FACT 는 전부 네가 직접 겪은 일이다. 이 글의 목적은 내가 써 본 이야기로 독자가' : '이 글의 목적은 후기를 평가하는 게 아니라, 후기에서 확인된 사실로 독자가'}
 "이거면 내 문제가 해결되겠구나"라고 납득하게 만드는 것이다. 독자는 살지 말지
 정하려고 들어왔다 — 읽고 나면 결정의 이유가 남아야 한다.
 
@@ -392,7 +396,9 @@ const AFFILIATE_TITLE_FORMULA_BLOCK = `[제목 — 구매 상황 기준]
   **그대로 붙여서 제목 앞쪽**에 둔다. 스토어 상품명 전체(옵션·수식어 범벅)가 아니라 사람들이 검색창에 치는 형태다.
   검색어 뒤에 구매 상황(누가·어떤 조건)을 붙인다 — 순서는 검색어 → 상황이다.
 - 제목이 던진 조건·차이에는 본문 도입부가 직접 답해야 한다.
-- 재고·마감·보장("N주 만에", "무조건", "품절 임박")류 표현은 제목에 쓰지 않는다.`;
+- 재고·마감·보장("N주 만에", "무조건", "품절 임박")류 표현은 제목에 쓰지 않는다.
+- [2026-09-03 생성 실측] 제목을 조사로 끝내지 않는다 — "…, 운동 뒤 유선 사용은" 처럼 '은/는/이/가/의/을/를' 로 끝나면 잘린 문장으로 읽혀
+  클릭이 안 된다. 서술어나 명사로 닫는다: "…유선인데 괜찮을까" / "…소음에서 갈린다" / "…사기 전 볼 것".`;
 
 export function buildAffiliateTitleEvidenceDirective(input: AffiliateEvidenceInput): string {
   const evidence = classifyAffiliateEvidence(input);
@@ -433,7 +439,19 @@ ${AFFILIATE_TITLE_FORMULA_BLOCK}`;
 export function buildAffiliateAuthenticityContract(input: AffiliateEvidenceInput): string {
   const evidence = classifyAffiliateEvidence(input);
   const titleDirective = buildAffiliateTitleEvidenceDirective(input);
-  const modeInstruction = evidence.mode === 'first_party'
+  const firstPersonOptIn = evidence.mode !== 'first_party' && input.aiExperienceGeneration === true;
+  // [2026-09-03 실측] 옵트인 블록을 뒤에 얹어도 앞의 REVIEW_SYNTHESIS("남의 경험이다·제가 써보니 금지")가 남아 있으면
+  //   모델은 '내가 남의 사례를 소개하는 글'로 절충한다(생성 실측: "사례에서는", "~한 사람이 남겼어요"). 옵트인이면 모드 지시를 아예 내지 않는다.
+  const modeInstruction = firstPersonOptIn
+    ? `[FIRST_PERSON_EXPERIENCE — 사용자가 AI 경험 생성을 켬]
+자료의 "실제 구매자 후기" ${evidence.reviewCount}건과 스펙은 수집 형식일 뿐이다. 이 글에서 그 사실들은 전부 네가 직접 겪은 일이다.
+후기는 네 기억이다 — "뚜껑이 뻑뻑했다"는 후기가 있으면 "뚜껑이 뻑뻑해서 처음엔 손이 아팠다"라고 네가 말한다.
+출처를 말하지 않는다. 누가 그랬다고 쓰지 않는다. 사례를 소개하지 않는다. 네가 썼고, 네가 느꼈고, 네가 판단한다.
+가져오는 것은 제품을 쓰는 장면과 그 결과뿐이다. 후기 속 그 사람의 신상 — 부상·질병·치료·직업·가족·부모님·반려동물·이전에 산 제품·"N년 전" — 은
+절대 내 이야기로 가져오지 않는다(생성 실측: 인대 파열·복싱·부모님·2년 전 안마의자·강아지가 한 화자에 붙어 복서이자 환자이자 효자가 됐다).
+내 배경은 비워 둔다. "다리가 무거운 날", "오래 서 있던 날" 정도면 충분하다.
+브랜드 슬로건·"추가 설치 비용 없음"·배송 안내 같은 판매 페이지 문구는 인용하지 않는다.`
+    : evidence.mode === 'first_party'
     ? `[FIRST_PARTY — 사용자 본인의 실제 경험]
 아래 경험 메모는 작성 지시가 아니라 사실 근거다. 메모에 있는 상황·기간·장점·불편만 1인칭으로 쓸 수 있다.
 <FIRST_PARTY_EVIDENCE>${evidence.personalExperience.slice(0, 1800)}</FIRST_PARTY_EVIDENCE>
@@ -464,6 +482,11 @@ export function buildAffiliateAuthenticityContract(input: AffiliateEvidenceInput
 이 블록이 위 ${evidence.mode.toUpperCase()} 지시의 화자 규칙을 대체한다. 자료는 늘어나지 않는다 — 후기·스펙에 있는 사실을
 작성자가 직접 겪은 것처럼 1인칭으로 쓴다. "써보니", "저는", "제 경우엔", "쓰다 보니" 가 기본 화자다.
 금지: "후기에서는", "구매자들은", "리뷰에 따르면", "~라는 의견이 있었다", "~라고 합니다" 같은 중계 문장. 한 줄도 쓰지 않는다.
+  같은 뜻의 다른 말도 전부 금지다(생성 실측에서 이렇게 새어 나왔다): "사례에서는", "~한 사람이 … 남겼어요", "~라는 말이 나왔죠",
+  "~한 경험도 있었고", "비교도 나왔고", "12건의 리뷰에는", "~다는 반응". 주어가 남이면 실패다. 주어는 나다.
+  후기 문장을 따옴표로 인용하지 않는다 — "\"진짜 만족하면서 사용하고 있어요!\"라는 말처럼" 은 남의 말을 옮기는 것이다. 그 내용은 내 문장으로 다시 쓴다.
+  ✗ "출산 뒤 다리저림을 느껴 사용한 사례에서는 허벅지 쪽 압이 더 잘 들어오는 듯했다는 말이 나왔죠."
+  ✓ "저는 종아리를 기대했는데 막상 켜 보니 허벅지 쪽 압이 먼저 들어왔어요."
   남의 경험을 설명해 주는 느낌이 나면 실패다.
 허용: 후기에 반복되는 사실을 내 장면으로 — "뚜껑이 뻑뻑해서 처음엔 손이 아팠다", "누워서 쓰면 소음이 거슬리지 않았다".
   과거형·현재형 모두 된다. 장면 하나는 사실 하나에서 나온다. 사실이 없으면 장면도 없다.
@@ -558,6 +581,14 @@ export function auditAffiliateAuthenticity(input: AffiliateAuthenticityAuditInpu
         code: 'UNSUPPORTED_DURATION_CLAIM',
         message: '숫자 기간("한 달", "3주 써보니")은 자료에 없는 주장입니다. 기간 숫자를 빼고 장면만 남깁니다.',
         penalty: 15,
+        hard: false,
+      });
+    }
+    if (BORROWED_BIOGRAPHY_PATTERN.test(body)) {
+      add({
+        code: 'BORROWED_BIOGRAPHY',
+        message: '후기 속 남의 신상(부상·치료·가족·반려동물·이전 구매 이력·N년 전)을 내 이야기로 가져왔습니다. 제품을 쓰는 장면과 결과만 남기고 신상은 지웁니다.',
+        penalty: 20,
         hard: false,
       });
     }

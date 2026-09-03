@@ -45,13 +45,56 @@ export function splitTrailingProse(line: string): string[] {
  * 본문 한 덩어리에서 표 뒤에 붙은 문장을 떼어 낸다.
  * 표가 없거나 붙은 게 없으면 입력을 그대로 돌려준다.
  */
+/**
+ * [2026-09-03 실측] 모델이 셀 하나를 닫지 않고 빈 줄 + 외로운 파이프로 다음 행을 이었다:
+ *   "| 단계별·부위별 조절 | 그날 … 후보가 됩니다." / "" / "|" / "| 모드 ABC·방1-4 표기 | … |"
+ * 붙여넣기에서 표가 통째로 깨진다. 파이프로 시작하되 파이프로 끝나지 않는 행 뒤에 (빈 줄을 건너)
+ * 파이프로 시작하는 줄이 오면 그 행을 닫는다. 외로운 파이프 줄은 삼킨다. 다음 줄이 산문이면 건드리지 않는다
+ * (그 경우는 splitTrailingProse 의 몫).
+ */
+/**
+ * [2026-09-03 5차 실측] 모델이 표 머리행을 앞 문장 뒤에 이어 썼다: "…잘 맞아요. | 보관 상황 | 판단 |".
+ * 산문(종결 부호로 끝남) 뒤에 파이프 행이 오면 [산문, 행] 으로 나눈다.
+ */
+const PROSE_THEN_ROW = /^(.*?[.!?。])\s*(\|.*\|)\s*$/u;
+export function splitLeadingProse(line: string): string[] {
+  if (line.trim().startsWith('|')) return [line];
+  const match = line.match(PROSE_THEN_ROW);
+  if (!match) return [line];
+  const row = match[2];
+  if ((row.match(/\|/g) || []).length < 3) return [line];
+  return [match[1].trim(), row.trim()];
+}
+
+export function closeUnterminatedRows(lines: readonly string[]): string[] {
+  const out: string[] = [];
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    const trimmed = line.trim();
+    if (!trimmed.startsWith('|') || trimmed.endsWith('|')) { out.push(line); continue; }
+    let j = i + 1;
+    while (j < lines.length && lines[j].trim() === '') j += 1;
+    const next = j < lines.length ? lines[j].trim() : '';
+    if (!next.startsWith('|')) { out.push(line); continue; }
+    out.push(`${line.trimEnd()} |`);
+    if (next === '|') i = j;  // 외로운 파이프(와 그 앞 빈 줄)를 삼킨다
+    else i = j - 1;           // 빈 줄만 삼키고 다음 행은 그대로 둔다
+  }
+  return out;
+}
+
 export function normalizeTableBlocks(text: unknown): string {
   const body = typeof text === 'string' ? text : '';
   if (!body || !body.includes('|')) return body;
 
   const out: string[] = [];
   let changed = false;
-  for (const line of body.split('\n')) {
+  const rawLines = body.split('\n');
+  const originalLines = rawLines.flatMap(splitLeadingProse);
+  if (originalLines.length !== rawLines.length) changed = true;
+  const closed = closeUnterminatedRows(originalLines);
+  if (closed.length !== originalLines.length || closed.some((line, index) => line !== originalLines[index])) changed = true;
+  for (const line of closed) {
     const parts = splitTrailingProse(line);
     if (parts.length > 1) changed = true;
     out.push(...parts);

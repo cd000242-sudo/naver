@@ -3,6 +3,8 @@
  * Coupang, Naver Shopping, 스마트스토어 등에서 실제 제품 정보 추출
  */
 
+import { dropRegulatorySpecLines } from './specLineFilter.js';
+import { stripReviewOptionLabel } from '../content/reviewMaterialHygiene.js';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import axios from 'axios';
@@ -25,6 +27,9 @@ import {
     collectProductNoticeSpecText,
     closeTopLayer,
 } from './shopping/providers/brandStore/brandStoreDom.js';
+
+/** [2026-09-03] DOM 리뷰에 옵션 라벨("구성: (그레이)본체+다리")이 앞에 붙어 온다 — 본문에 "핑크 본체+다리 구성은" 으로 샜다. */
+const stripReviewOptionLabels = (texts: readonly string[]): string[] => texts.map((text) => stripReviewOptionLabel(text)).filter(Boolean);
 
 /**
  * Apply 5-stage price fallback when the primary extraction yielded 0 or empty.
@@ -2778,6 +2783,12 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
             if (!detailSpecText) {
               detailSpecText = await bcPage.evaluate(collectProductDetailSpecText);
             }
+            // [2026-09-03] 인증번호·제조국·약관 행은 글 재료가 아니다 — 본문에 그대로 실리던 것(사장님 발행글 실측).
+            if (detailSpecText) {
+              const filtered = dropRegulatorySpecLines(detailSpecText);
+              if (filtered.dropped > 0) console.log(`[AffiliateCrawler] 🧹 제공고시 행 ${filtered.dropped}개 제거 (인증·제조국·약관)`);
+              detailSpecText = filtered.text.trim();
+            }
             if (detailSpecText) {
               console.log(`[AffiliateCrawler] 📋 상세 스펙 수집: ${detailSpecText.split('\n').length}행 (${detailSpecText.length}자)`);
             } else {
@@ -2790,10 +2801,10 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
           // Collect review text only after every official gallery source is
           // captured. Opening a review panel must never reduce product images.
           const visibleReviewTexts = await collectVisibleProductReviewTexts(bcPage);
-          const collectedReviewTexts = selectDecisionUsefulReviewTexts([
+          const collectedReviewTexts = selectDecisionUsefulReviewTexts(stripReviewOptionLabels([
             ...jsonLdInfo.reviewTexts,
             ...visibleReviewTexts,
-          ]);
+          ]));
           console.log(`[AffiliateCrawler] 📝 리뷰 최종: JSON-LD ${jsonLdInfo.reviewTexts.length}건 + DOM ${visibleReviewTexts.length}건 → 정선 ${collectedReviewTexts.length}건`);
 
           await releasePage(bcPage);
@@ -3276,7 +3287,7 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
                 // The review panel is opened only after the product gallery has
                 // been fully captured, so review collection cannot hide thumbnails.
                 const visibleReviewTexts = await collectVisibleProductReviewTexts(page);
-                const collectedReviewTexts = selectDecisionUsefulReviewTexts(visibleReviewTexts);
+                const collectedReviewTexts = selectDecisionUsefulReviewTexts(stripReviewOptionLabels(visibleReviewTexts));
 
                 // ✅ [2026-03-13] 페이지만 해제 (브라우저 컨텍스트는 재사용)
                 const cleanupResources = async () => {

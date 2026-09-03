@@ -1,4 +1,4 @@
-import { scoreSearchMatch, scorePurchaseAxis, scoreOptionNoise, scoreSearchPhraseIntact } from './content/titleModeObjective.js';
+import { scoreSearchMatch, scorePurchaseAxis, scoreOptionNoise, scoreSearchPhraseIntact, scoreDanglingEnding } from './content/titleModeObjective.js';
 import { measureTitleWidth } from './content/titleLengthPolicy.js';
 /**
  * [Phase 3-9/v2.10.147] contentGenerator god file decomposition — evaluateTitleQuality.
@@ -230,6 +230,13 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
     console.log(`[TitleQuality] ${phraseIntact.points}점: ${phraseIntact.reason}`);
   }
   // [2026-09-02] 스토어 옵션 조합("그레이 본체+다리")은 제목의 결함이다 — 닥터웰 실측.
+  // [2026-09-03 생성 실측] "…운동 뒤 유선 사용은" — 조사로 끝나는 쇼핑 제목은 결함이다.
+  const dangling = scoreDanglingEnding(t, mode);
+  if (dangling.points !== 0) {
+    score += dangling.points;
+    issues.push(dangling.reason);
+    console.log(`[TitleQuality] ${dangling.points}점: ${dangling.reason}`);
+  }
   const optionNoise = scoreOptionNoise(t, mode);
   if (optionNoise.points !== 0) {
     score += optionNoise.points;

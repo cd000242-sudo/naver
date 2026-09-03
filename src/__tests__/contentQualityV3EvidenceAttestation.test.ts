@@ -201,7 +201,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-09-02 13차] dateBasis 서술 금지 조항 추가로 재계산
         // [2026-09-02 14차] 멘토 어미 믹싱 · 공통 격식 오르내림 조항으로 재계산
         // [2026-09-02 15차] 홈판 문단 규칙 1~2문장 → 2~3문장(사장님 결정)으로 재계산
-        '1eb836482e581878cc705e280bee235e4058e61de31d47aaf26c60526d9f55ef',
+        // [2026-09-03] 쇼핑 1인칭 전환 — promptLoader(리뷰 라벨·활용 지침 분기) + 평가기 옵트인 스레딩 + qualityEvaluator 입력으로 재계산
+        '0f5bfd2f351b0a56ba5bf1dc2f716c3aae5e0121123f705d8f26990e5827fedf',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

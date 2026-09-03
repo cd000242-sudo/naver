@@ -174,6 +174,9 @@ function applyPerSentenceLineBreaks(paragraph: string): string {
 
 function ensureParagraphBreaks(text: string): string {
   if (!text || text.length < 200) return text;
+  // [2026-09-03 자체 실행 비평] 표 행("| 출시연월 | … 표기됩니다. |")도 문장으로 잘려 "표기됩니다."+빈 줄+"|" 로 깨졌다.
+  //   표가 든 덩어리는 문단 나누기를 건너뛴다 — 표는 빈 줄 두 개로 이미 제 자리에 있고, 행은 쪼개면 안 된다.
+  if (!text.includes('\n\n') && /^\s*\|/m.test(text)) return text;
 
   // 이미 \n\n이 있으면 각 문단만 개별 검사
   if (text.includes('\n\n')) {
@@ -195,6 +198,14 @@ function ensureParagraphBreaks(text: string): string {
     .map(s => s.trim())
     .filter(s => s.length > 0);
 
+  // [2026-09-03 5차 실측] 따옴표 안의 "!" 에서 문장이 갈려 인용문이 두 문단에 걸쳤다 — 여는 따옴표가 닫히기 전에는 붙인다.
+  const quoteBalanced = (value: string): boolean => ((value.match(/["“”]/g) || []).length % 2) === 0;
+  for (let i = 1; i < sentences.length; i += 1) {
+    if (!quoteBalanced(sentences[i - 1])) {
+      sentences.splice(i - 1, 2, `${sentences[i - 1]} ${sentences[i]}`);
+      i -= 1;
+    }
+  }
   if (sentences.length <= 2) {
     // 문장이 2개 이하면 그대로 반환 (분리할 필요 없음)
     return text;

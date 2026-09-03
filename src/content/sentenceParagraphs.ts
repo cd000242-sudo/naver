@@ -42,6 +42,13 @@ export function paragraphGroupSizes(sentenceCount: number, maxSentences: number 
 function regroupLine(line: string, maxSentences: number): string {
   if (KEEP_WHOLE.test(line)) return line;
   const sentences = line.split(SENTENCE_BOUNDARY).filter((s) => s.length > 0);
+  // [2026-09-03 5차 실측] 인용문 안 "!" 에서 갈려 따옴표가 두 문단에 걸쳤다 — 여는 따옴표가 닫히기 전에는 붙인다.
+  for (let i = 1; i < sentences.length; i += 1) {
+    if (((sentences[i - 1].match(/["“”]/g) || []).length % 2) === 1) {
+      sentences.splice(i - 1, 2, `${sentences[i - 1]} ${sentences[i]}`);
+      i -= 1;
+    }
+  }
   if (sentences.length <= maxSentences) return line;
   const sizes = paragraphGroupSizes(sentences.length, maxSentences);
   const paragraphs: string[] = [];

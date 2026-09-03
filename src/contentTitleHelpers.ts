@@ -177,6 +177,26 @@ export function cleanupColonQuotePattern(raw: string): string {
  * 그대로 남았다. 대괄호 꼬리표는 스토어의 프로모션·옵션 표기지 검색어도 판단도 아니다 — 형태(괄호)만 보고 걷어낸다.
  * 소괄호는 내용일 수 있어("(mm)") 건드리지 않는다.
  */
+/**
+ * [2026-09-03 4차 생성 실측] 스토어 옵션 조합("그레이 본체+다리")이 제목에 남은 후보가 뽑혔다.
+ * 감점(scoreOptionNoise)만으로는 다른 후보가 더 깎이면 그대로 통과한다 — 복구 체인에서 조합 자체를 뗀다.
+ * 색상 낱말 하나 + '+' 로 묶인 토큰 형태만 본다(낱말 목록 없음).
+ */
+const OPTION_COMBO = /\s*(?:(?:그레이|블랙|화이트|핑크|블루|레드|베이지|네이비|실버|골드|아이보리|그린|브라운|옐로우|퍼플|민트)\s*)?[가-힣A-Za-z0-9]{1,8}\+[가-힣A-Za-z0-9]{1,8}(?:\s*,)?/g;
+
+export function stripOptionCombo(raw: string): string {
+  const text = String(raw || '');
+  if (!text.includes('+')) return text;
+  return text
+    .replace(OPTION_COMBO, (match) => (match.trimEnd().endsWith(',') ? ',' : ' '))
+    .replace(/\s*,\s*,/g, ',')
+    .replace(/^\s*,\s*/, '')
+    .replace(/\s*$/, '')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/\s*,/g, ',')
+    .trim();
+}
+
 export function stripStoreTagBrackets(raw: string): string {
   return String(raw || '')
     .replace(/\s*\[[^\]]*\]\s*/g, ' ')

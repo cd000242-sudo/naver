@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { scoreSearchMatch, isSearchDrivenTitleMode, scorePurchaseAxis } from '../content/titleModeObjective';
+import { scoreDanglingEnding, scoreSearchMatch, isSearchDrivenTitleMode, scorePurchaseAxis } from '../content/titleModeObjective';
 import { evaluateTitleQuality } from '../contentTitleEvaluator';
 import { buildSituationTitleContract } from '../content/situationTitleContract';
 
@@ -137,4 +137,28 @@ describe('홈판 제목 길이 계약 (2026-08-26 사장님 실측)', () => {
     expect(buildSituationTitleContract('homefeed', {} as any)).toMatch(/길이를 채우려고 수식을 붙이지 마라/);
     expect(issueStory).toMatch(/키워드를 더 넣겠다고 늘리지 마라/);
   });
+
+// [2026-09-03 생성 실측] "닥터웰 종아리 마사지기 DR-5180, 운동 뒤 유선 사용은" — 조사로 끝나 잘린 문장으로 읽힌다
+describe('scoreDanglingEnding — 쇼핑 제목의 조사 종결', () => {
+  it('은/는/이/가 로 끝나면 -15, 물음·서술어·명사로 닫으면 0', () => {
+    expect(scoreDanglingEnding('닥터웰 종아리 마사지기 DR-5180, 운동 뒤 유선 사용은', 'affiliate').points).toBe(-15);
+    expect(scoreDanglingEnding('닥터웰 종아리 마사지기, 소음·보관은', 'affiliate').points).toBe(-15);
+    expect(scoreDanglingEnding('닥터웰 종아리 마사지기, 유선인데 괜찮을까', 'affiliate').points).toBe(0);
+    expect(scoreDanglingEnding('닥터웰 종아리 마사지기, 소음에서 갈린다', 'affiliate').points).toBe(0);
+    expect(scoreDanglingEnding('닥터웰 종아리 마사지기 사기 전 볼 것', 'affiliate').points).toBe(0);
+    expect(scoreDanglingEnding('닥터웰 종아리 마사지기, 운동 뒤 유선 사용은?', 'affiliate').points).toBe(0);
+  });
+  it('쇼핑 밖 모드는 건드리지 않는다', () => {
+    expect(scoreDanglingEnding('추석 냉장고 정리는', 'seo').points).toBe(0);
+  });
+});
+
+// [2026-09-03 4차 생성 실측] 제품 조건·조건 물음도 구매 축이다
+describe('scorePurchaseAxis — 제품 조건·조건 물음', () => {
+  it('소음/보관/설명서 같은 제품 조건이나 "괜찮을까/고를 때" 물음이 있으면 감점하지 않는다', () => {
+    expect(scorePurchaseAxis('닥터웰 종아리 마사지기 DR-5180, 소음 있는 다리 안마기 괜찮을까', 'affiliate').points).toBe(0);
+    expect(scorePurchaseAxis('닥터웰 종아리 마사지기 DR-5180, 보관 공간까지 보고 고를 때', 'affiliate').points).toBe(0);
+    expect(scorePurchaseAxis('닥터웰 종아리 마사지기 DR-5180 그레이 본체+다리', 'affiliate').points).toBe(-30);
+  });
+});
 });
