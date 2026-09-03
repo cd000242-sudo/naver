@@ -228,12 +228,17 @@ export function checkHallucination(
   if (suspiciousNegative.length >= 3) {
     warnings.push(`원본에 없는 부정 키워드 ${suspiciousNegative.length}개 결과에 출현: ${suspiciousNegative.slice(0, 5).join(', ')}`);
   }
-  if (missingPositive.length >= 3) {
-    warnings.push(`원본의 긍정 키워드 ${missingPositive.length}개 결과에 누락: ${missingPositive.slice(0, 5).join(', ')}`);
-  }
-  if (sentimentMismatch > 0.4) {
-    const origMain = orig.positive >= orig.negative ? '긍정' : '부정';
-    const resultMain = result.positive >= result.negative ? '긍정' : '부정';
+  /*
+   * [2026-09-04 measured] Omitting the source's positive words is not a hallucination. On a 32-post
+   *   batch, 8 of 9 "hallucination warnings" were this omission (기부·나눔·선한·희망 from a charity
+   *   snippet mixed into multi-source material), and each warning halves the safety sub-score into
+   *   the critical band, which buys a paid regeneration. The list stays in the result for logs.
+   * The direction warning likewise fired on 긍정→긍정 because it measured ratio distance; it now
+   *   requires the dominant direction to actually flip.
+   */
+  const origMain = orig.positive >= orig.negative ? '긍정' : '부정';
+  const resultMain = result.positive >= result.negative ? '긍정' : '부정';
+  if (sentimentMismatch > 0.4 && origMain !== resultMain) {
     warnings.push(`감정 방향 mismatch: 원본=${origMain}(P${orig.positive}/N${orig.negative}) → 결과=${resultMain}(P${result.positive}/N${result.negative})`);
   }
 
