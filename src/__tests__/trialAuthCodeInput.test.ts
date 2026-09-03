@@ -29,9 +29,31 @@ describe('무료 체험 문자 인증 — 앱 입력 경로', () => {
     expect(login).toMatch(/invoke\('free:activate',\s*\{[^}]*authCode/);
   });
 
-  it('인증번호 칸은 문자가 실제로 발송됐을 때만(codeSent) 나타난다', () => {
-    // 솔라피가 꺼져 있는 동안에는 예전 흐름 그대로여야 한다 — 과도기 보호.
-    expect(login).toMatch(/codeSent/);
+  it('인증번호 칸은 문자가 실제로 나간 뒤에만 열린다', () => {
+    // 발송 성공 응답을 받은 뒤에만 trialCodeRequired 가 켜지고 칸이 열린다.
+    // 솔라피가 꺼져 있으면 발송 버튼째 숨어 예전 흐름 그대로 진행된다.
+    expect(login).toMatch(/trialCodeRequired = true;/);
+    expect(login).toMatch(/trial-auth-code-group[\s\S]{0,80}display: none/);
+  });
+
+  it('[인증번호 받기] 버튼이 [인증하기] 와 분리돼 있다', () => {
+    // [2026-09-03 사장님 지시] 예전에는 [인증하기] 하나가 자격확인과 문자발송을
+    // 겸했다. 단계를 나눠, 자격이 확인된 뒤 눌러서 문자를 받게 한다.
+    expect(login).toMatch(/id="trial-send-code-btn"/);
+    expect(login).toMatch(/invoke\('free:requestCode'/);
+  });
+
+  it('인증번호 요구 여부는 서버(smsRequired)가 정한다', () => {
+    // 솔라피가 꺼져 있으면 서버가 코드를 요구하지 않는다 — 그때는 버튼도 숨긴다.
+    expect(login).toMatch(/smsRequired/);
+    expect(mainSource).toMatch(/smsRequired:\s*result\.smsRequired === true/);
+  });
+
+  it('인증번호 발송은 이메일 없이 전화번호만으로 된다', () => {
+    // main.ts 가 이메일을 필수로 검사해, 이메일 칸을 없앤 뒤로 이 경로가 막혀 있었다.
+    expect(mainSource).toMatch(/requestTrialCode\(userInfo\?: \{ email\?:/);
+    // 서버의 중복·이름 검사가 닉네임을 보므로 함께 보낸다.
+    expect(mainSource).toMatch(/action: 'trial-request-code'[\s\S]{0,160}nickname/);
   });
 
   it('verifyTrialEligibility 가 codeSent 를 화면까지 전달한다', () => {

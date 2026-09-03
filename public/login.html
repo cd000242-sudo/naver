@@ -1087,8 +1087,14 @@
         <button type="button" id="trial-verify-btn" class="trial-submit-btn" style="margin-bottom: 6px;">🔎 인증하기</button>
         <div id="trial-verify-status" style="display: none; font-size: 13px; font-weight: 700; margin-bottom: 10px;"></div>
 
-        <!-- [2026-09-03] 문자 인증번호 — codeSent 일 때만 나타난다.
-             솔라피가 꺼져 있으면 서버가 코드를 요구하지 않으므로 숨긴 채로 둔다. -->
+        <!-- [2026-09-03] 인증번호 발송은 별도 버튼이 맡는다. [인증하기]는 자격 확인만.
+             서버가 smsRequired 로 "이 서버는 인증번호를 요구한다"고 알려줄 때만 나타난다. -->
+        <button type="button" id="trial-send-code-btn" class="trial-submit-btn"
+          style="display: none; margin-bottom: 6px;">📩 인증번호 받기</button>
+
+        <!-- [2026-09-03] 문자 인증번호 — [📩 인증번호 받기] 로 문자가 실제로
+             나간 뒤에만 나타난다. 솔라피가 꺼져 있으면 서버가 코드를 요구하지
+             않으므로(smsRequired=false) 발송 버튼째 숨긴 채로 둔다. -->
         <div class="form-group" id="trial-auth-code-group" style="display: none;">
           <label for="trial-auth-code">문자로 받은 인증번호 <span style="color: #ef4444;">*</span></label>
           <input type="text" id="trial-auth-code" inputmode="numeric" autocomplete="one-time-code"
@@ -1711,6 +1717,8 @@
     }
     // [2026-09-03] 이번 인증에서 문자가 실제로 나갔는가 — 나갔다면 인증번호가 필수다.
     let trialCodeRequired = false;
+    // 이 서버가 인증번호를 요구하는가(솔라피 켜짐 + 만료 아님). 서버가 알려준다.
+    let trialSmsRequired = false;
 
     const setTrialSubmitEnabled = (enabled) => {
       const btn = document.getElementById('trial-submit-btn');
@@ -1727,6 +1735,9 @@
       const verifyBtn = document.getElementById('trial-verify-btn');
       if (verifyBtn) { verifyBtn.disabled = false; verifyBtn.textContent = '🔎 인증하기'; }
       trialCodeRequired = false;
+      trialSmsRequired = false;
+      const sendBtn = document.getElementById('trial-send-code-btn');
+      if (sendBtn) { sendBtn.style.display = 'none'; sendBtn.disabled = false; sendBtn.textContent = '📩 인증번호 받기'; }
       const codeGroup = document.getElementById('trial-auth-code-group');
       if (codeGroup) codeGroup.style.display = 'none';
       const codeInput = document.getElementById('trial-auth-code');
@@ -1734,6 +1745,41 @@
     };
     document.getElementById('trial-nickname')?.addEventListener('input', resetTrialVerification);
     document.getElementById('trial-phone')?.addEventListener('input', resetTrialVerification);
+
+    // [2026-09-03] 인증번호 발송 — [인증하기](자격 확인)와 분리된 두 번째 단계.
+    document.getElementById('trial-send-code-btn')?.addEventListener('click', async () => {
+      const nickname = (document.getElementById('trial-nickname')?.value || '').trim();
+      const phone = (document.getElementById('trial-phone')?.value || '').trim().replace(/[-\s]/g, '');
+      const errorMsg = document.getElementById('trial-error-msg');
+      const status = document.getElementById('trial-verify-status');
+      const sendBtn = document.getElementById('trial-send-code-btn');
+      if (errorMsg) { errorMsg.textContent = ''; errorMsg.classList.remove('show'); }
+      if (sendBtn) { sendBtn.disabled = true; sendBtn.textContent = '발송 중...'; }
+      try {
+        const r = await ipcRenderer.invoke('free:requestCode', { nickname, phone });
+        if (!r || r.success !== true) {
+          // 레이트리밋(1시간 5회)·차단·중복이 여기서 걸린다 — 서버 문구를 그대로 보여준다.
+          if (errorMsg) { errorMsg.textContent = (r && r.message) || '인증번호 발송에 실패했습니다.'; errorMsg.classList.add('show'); }
+          if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = '📩 인증번호 받기'; }
+          return;
+        }
+        trialCodeRequired = true;
+        const codeGroup = document.getElementById('trial-auth-code-group');
+        if (codeGroup) codeGroup.style.display = 'block';
+        const codeInput = document.getElementById('trial-auth-code');
+        if (codeInput) { codeInput.value = ''; codeInput.focus(); }
+        setTrialSubmitEnabled(true);
+        if (status) {
+          status.textContent = '📨 인증번호를 보냈습니다 — 6자리를 입력하고 [인증완료] 를 누르세요.';
+          status.style.color = '#22c55e';
+          status.style.display = 'block';
+        }
+        if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = '📩 인증번호 다시 받기'; }
+      } catch (error) {
+        if (errorMsg) { errorMsg.textContent = '오류: ' + error.message; errorMsg.classList.add('show'); }
+        if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = '📩 인증번호 받기'; }
+      }
+    });
 
     document.getElementById('trial-verify-btn')?.addEventListener('click', async () => {
       const nicknameInput = document.getElementById('trial-nickname');
@@ -1771,8 +1817,8 @@
         setTrialSubmitEnabled(true);
         if (verifyBtn) verifyBtn.textContent = '🔎 인증됨';
         if (status) {
-          let line = result.codeSent === true
-            ? '📨 인증번호를 문자로 보냈습니다 — 아래에 6자리를 입력한 뒤 [인증완료]를 누르세요.'
+          let line = result.smsRequired === true
+            ? '✅ 자격이 확인됐습니다 — [📩 인증번호 받기] 를 눌러 문자를 받으세요.'
             : '✅ 인증되었습니다 — 아래 [인증완료] 버튼을 눌러 체험을 시작하세요.';
           if (result.status === 'existing' && result.registeredAt) {
             // [2026-08-21] 사장님 문구 확정: 1번호당 1회 인증 — 같은 번호는 새 체험이
@@ -1808,14 +1854,17 @@
           status.style.color = trialVerified ? '#22c55e' : '#ef4444';
           status.style.display = 'block';
 
-          // [2026-09-03] 문자가 실제로 나간 경우에만 인증번호를 요구한다.
-          //   만료로 자격이 없어진 경우(trialVerified=false)에는 펼치지 않는다.
-          if (trialVerified && result.codeSent === true) {
-            trialCodeRequired = true;
-            const codeGroup = document.getElementById('trial-auth-code-group');
-            if (codeGroup) codeGroup.style.display = 'block';
-            const codeInput = document.getElementById('trial-auth-code');
-            if (codeInput) { codeInput.value = ''; codeInput.focus(); }
+          /*
+           * [2026-09-03] 인증번호가 필요한 서버면 [📩 인증번호 받기] 를 띄우고,
+           * 문자를 받기 전까지 [인증완료] 를 잠근다. 코드 없이 눌러봐야 서버가
+           * 거절하므로, 누를 수 있게 두면 실패만 겪게 된다.
+           * 만료로 자격이 없어진 경우(trialVerified=false)에는 띄우지 않는다.
+           */
+          if (trialVerified && result.smsRequired === true) {
+            trialSmsRequired = true;
+            setTrialSubmitEnabled(false);
+            const sendBtn = document.getElementById('trial-send-code-btn');
+            if (sendBtn) sendBtn.style.display = 'block';
           }
         }
       } catch (error) {

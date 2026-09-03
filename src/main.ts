@@ -1038,11 +1038,17 @@ async function enforceFreeTier(action: QuotaType, amount: number = 1): Promise<{
  * 문자(SMS) 발송업체 연동이 되면 이 레일에 발송 채널만 갈아끼워 되살린다.
  * GAS 가 코드 발송·중복(전화/기기) 선차단·레이트리밋을 맡는다 — 앱은 형식만 거른다.
  */
-async function requestTrialCode(userInfo?: { email: string; phone: string }): Promise<{ success: boolean; message?: string }> {
+async function requestTrialCode(userInfo?: { email?: string; phone: string; nickname?: string }): Promise<{ success: boolean; message?: string }> {
   try {
     const email = (userInfo?.email || '').trim().toLowerCase();
     const phone = (userInfo?.phone || '').trim().replace(/[-\s]/g, '');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    const nickname = (userInfo?.nickname || '').trim();
+    /*
+     * [2026-09-03] 이메일은 선택값이다. 본인 확인 키가 전화번호로 바뀌면서
+     * 화면의 이메일 칸은 사라졌는데 이 검사만 남아, [인증번호 받기] 경로가
+     * 통째로 막혀 있었다(빈 이메일 → 항상 거절). 서버도 이메일이 있을 때만 본다.
+     */
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return { success: false, message: '올바른 이메일 주소를 입력하세요.' };
     }
     if (!/^01[0-9]{8,9}$/.test(phone)) {
@@ -1056,7 +1062,8 @@ async function requestTrialCode(userInfo?: { email: string; phone: string }): Pr
       const response = await fetch(gasUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({ action: 'trial-request-code', email, phone, deviceId }),
+        // 서버의 중복·이름 검사가 닉네임을 본다 — 빠뜨리면 '한 번호 한 이름' 규칙이 샌다.
+        body: JSON.stringify({ action: 'trial-request-code', email, phone, nickname, deviceId }),
         signal: controller.signal,
       });
       const result = await response.json();
@@ -1080,7 +1087,7 @@ async function requestTrialCode(userInfo?: { email: string; phone: string }): Pr
  * 통과하면 status(new/existing)와, 기존 체험자는 registeredAt 을 돌려줘
  * 화면이 남은 기간까지 미리 보여줄 수 있다.
  */
-async function verifyTrialEligibility(userInfo?: { nickname: string; phone: string }): Promise<{ success: boolean; message?: string; status?: 'new' | 'existing'; registeredAt?: string; codeSent?: boolean }> {
+async function verifyTrialEligibility(userInfo?: { nickname: string; phone: string }): Promise<{ success: boolean; message?: string; status?: 'new' | 'existing'; registeredAt?: string; codeSent?: boolean; smsRequired?: boolean }> {
   try {
     const nickname = (userInfo?.nickname || '').trim();
     const phone = (userInfo?.phone || '').trim().replace(/[-\s]/g, '');
@@ -1131,6 +1138,9 @@ async function verifyTrialEligibility(userInfo?: { nickname: string; phone: stri
         // [2026-09-03] 문자가 실제로 나갔는지를 화면까지 전달한다. 이걸 버리면
         // 인증번호 칸을 띄울 근거가 없어, 솔라피를 켜는 순간 등록이 전부 막힌다.
         codeSent: result.codeSent === true,
+        // [2026-09-03] 이 서버가 인증번호를 요구하는가. 화면은 이 값으로
+        //   [인증번호 받기] 버튼을 띄울지 정한다 — 솔라피가 꺼져 있으면 숨긴다.
+        smsRequired: result.smsRequired === true,
         ...(typeof result.registeredAt === 'string' && result.registeredAt ? { registeredAt: result.registeredAt } : {}),
       };
     }
@@ -3093,7 +3103,7 @@ ipcMain.handle('free:activate', async (_event, userInfo?: { email?: string; nick
 });
 
 // [2026-08-21] 무료 체험 이메일 인증번호 발송 (휴면 — SMS 연동 시 부활)
-ipcMain.handle('free:requestCode', async (_event, userInfo?: { email: string; phone: string }) => {
+ipcMain.handle('free:requestCode', async (_event, userInfo?: { email?: string; phone: string; nickname?: string }) => {
   return await requestTrialCode(userInfo);
 });
 
