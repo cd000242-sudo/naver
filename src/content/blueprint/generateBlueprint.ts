@@ -15,6 +15,8 @@ export interface BlueprintDeps {
   readonly log?: (message: string) => void;
   readonly timeoutMs?: number;
   readonly now?: () => number;
+  /** Log the raw model response (compact) so a batch can be re-parsed offline without another call. */
+  readonly dumpRaw?: boolean;
 }
 
 export interface BlueprintRun {
@@ -46,6 +48,9 @@ export async function generateBlueprint(input: BlueprintPromptInput, deps: Bluep
       deps.complete(buildBlueprintPrompt(input), { maxTokens: BLUEPRINT_MAX_TOKENS }),
       deps.timeoutMs ?? BLUEPRINT_TIMEOUT_MS,
     );
+    if (deps.dumpRaw) {
+      log(`[Blueprint] RAW ${String(raw || '').replace(/\s+/g, ' ').slice(0, 6000)}`);
+    }
     const parsed = parseBlueprint(raw, material);
     const elapsedMs = now() - started;
     if (!parsed) {

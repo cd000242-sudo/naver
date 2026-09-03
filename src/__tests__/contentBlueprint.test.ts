@@ -143,3 +143,34 @@ describe('generateBlueprint — 호출 옵션과 진단', () => {
     expect(logs[0]).toContain('자)');
   });
 });
+
+describe('parseBlueprint — 자료 스냅(모델이 조사 하나 바꿔 옮긴 발언·발췌)', () => {
+  it('앞뒤 10자로 자료 안의 원문 구간을 찾아 자료 문장으로 바꿔 싣는다', () => {
+    const drifted = JSON.stringify({
+      angle: 'a', readerSituation: '', skeleton: [], offTopic: [],
+      quotes: [{ text: '접수 첫 주에는 복지로 사이트 접속이 몰리므로 오후 시간대를 권한다', speaker: '담당자' }],
+      facts: [{ claim: '지원 대상', snippet: '지원 대상은 만 19세부터 34세까지 무주택 청년으로 월 최대 20만원을 12개월간 지원한다' }],
+    });
+    const parsed = parseBlueprint(drifted, MATERIAL)!;
+    expect(parsed.blueprint.quotes[0].text).toBe('접수 첫 주에는 복지로 사이트 접속이 몰리니 오후 시간대를 권한다');
+    expect(parsed.blueprint.facts[0].snippet).toBe('지원 대상은 만 19세부터 34세까지 무주택 청년으로, 월 최대 20만원을 12개월간 지원한다');
+    expect(parsed.dropped).toEqual({ quotes: 0, facts: 0, skeleton: 0 });
+  });
+
+  it('앞뒤가 자료에 없거나 구간 길이가 어긋나면 여전히 버린다', () => {
+    const fake = JSON.stringify({
+      angle: 'a', readerSituation: '', skeleton: [], offTopic: [],
+      quotes: [{ text: '이번 지원은 역대 최대 규모라고 자신한다고 밝혔다', speaker: '' }],
+      facts: [{ claim: 'x', snippet: '국토교통부는 2026년 9월 1일 (중략 아주 길게 늘어난 문장이 여기 계속 이어진다고 치자 그리고 더) 중위소득 60% 이하다' }],
+    });
+    expect(parseBlueprint(fake, MATERIAL)).toBeNull();
+  });
+});
+
+describe('generateBlueprint — dumpRaw', () => {
+  it('dumpRaw 를 켜면 원응답을 한 줄로 로그에 남긴다(오프라인 재해석용)', async () => {
+    const logs: string[] = [];
+    await generateBlueprint({ keyword: 'k', mode: 'seo', material: MATERIAL }, { complete: async () => RESPONSE, log: (m) => logs.push(m), dumpRaw: true });
+    expect(logs[0].startsWith('[Blueprint] RAW {"angle"')).toBe(true);
+  });
+});

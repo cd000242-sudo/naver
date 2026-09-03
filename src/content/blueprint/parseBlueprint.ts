@@ -81,6 +81,44 @@ function isVerbatim(fragment: string, material: string): boolean {
   return needle.length > 0 && material.includes(needle);
 }
 
+const SNAP_EDGE_CHARS = 10;
+
+function collapseSpaces(value: string): string {
+  return String(value || '').replace(/["“”'‘’]/gu, '').replace(/\s+/gu, ' ').trim();
+}
+
+/**
+ * Models rarely copy a passage byte-for-byte: a particle changes, a comma moves. Rather than drop
+ * the passage, find its span in the material by its first and last characters and return the
+ * material's own text for that span. Only a span of plausible length counts; otherwise null.
+ * Measured 09-04: strict matching dropped 8/8 facts and 2/5 quotes on the first live post.
+ */
+export function snapToMaterial(fragment: string, material: string): string | null {
+  const needle = collapseSpaces(fragment);
+  const haystack = collapseSpaces(material);
+  if (needle.length < SNAP_EDGE_CHARS * 2 || haystack.length === 0) return null;
+  const head = needle.slice(0, SNAP_EDGE_CHARS);
+  const tail = needle.slice(-SNAP_EDGE_CHARS);
+  let from = 0;
+  while (from < haystack.length) {
+    const start = haystack.indexOf(head, from);
+    if (start < 0) return null;
+    const end = haystack.indexOf(tail, start + head.length);
+    if (end < 0) return null;
+    const span = haystack.slice(start, end + tail.length);
+    const ratio = span.length / needle.length;
+    if (ratio >= 0.8 && ratio <= 1.35) return span;
+    from = start + 1;
+  }
+  return null;
+}
+
+/** Exact (normalized) match keeps the model's text; otherwise snap to the material's own span. */
+function groundToMaterial(fragment: string, materialNorm: string, material: string): string | null {
+  if (isVerbatim(fragment, materialNorm)) return fragment;
+  return snapToMaterial(fragment, material);
+}
+
 export function parseBlueprint(raw: string, material: string): ParsedBlueprint | null {
   const parsed = extractJsonObject(raw) as Record<string, unknown> | null;
   if (!parsed || typeof parsed !== 'object') return null;
@@ -90,8 +128,10 @@ export function parseBlueprint(raw: string, material: string): ParsedBlueprint |
   const quotesRaw = Array.isArray(parsed.quotes) ? parsed.quotes : [];
   const quotes: BlueprintQuote[] = [];
   for (const item of quotesRaw) {
-    const text = clip((item as Record<string, unknown>)?.text, L.quoteMaxChars).replace(/^["“”]+|["“”]+$/gu, '').trim();
-    if (text.length < L.quoteMinChars || !isVerbatim(text, materialNorm)) continue;
+    const proposed = clip((item as Record<string, unknown>)?.text, L.quoteMaxChars).replace(/^["“”]+|["“”]+$/gu, '').trim();
+    if (proposed.length < L.quoteMinChars) continue;
+    const text = groundToMaterial(proposed, materialNorm, material);
+    if (!text || text.length < L.quoteMinChars || text.length > L.quoteMaxChars) continue;
     if (quotes.some((q) => q.text === text)) continue;
     quotes.push({ text, speaker: clip((item as Record<string, unknown>)?.speaker, 40) });
     if (quotes.length >= L.quotesMax) break;
@@ -101,8 +141,10 @@ export function parseBlueprint(raw: string, material: string): ParsedBlueprint |
   const facts: BlueprintFact[] = [];
   for (const item of factsRaw) {
     const claim = clip((item as Record<string, unknown>)?.claim, 160);
-    const snippet = clip((item as Record<string, unknown>)?.snippet, L.snippetMaxChars);
-    if (!claim || snippet.length < L.snippetMinChars || !isVerbatim(snippet, materialNorm)) continue;
+    const proposedSnippet = clip((item as Record<string, unknown>)?.snippet, L.snippetMaxChars);
+    if (!claim || proposedSnippet.length < L.snippetMinChars) continue;
+    const snippet = groundToMaterial(proposedSnippet, materialNorm, material);
+    if (!snippet || snippet.length < L.snippetMinChars || snippet.length > L.snippetMaxChars) continue;
     facts.push({ claim, snippet });
     if (facts.length >= L.factsMax) break;
   }

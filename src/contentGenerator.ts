@@ -6109,6 +6109,7 @@ async function generateStructuredContentInternal(
           complete: blueprintRoute.callModel,
           log: (message) => console.log(message),
           timeoutMs: blueprintRoute.engine.startsWith('agent-') ? 180_000 : 45_000,
+          dumpRaw: process.env.BLUEPRINT_DEBUG === '1',
         },
       );
       if (blueprintRun.result) {
