@@ -76,6 +76,7 @@ function LewordStyles() {
              * 아이콘은 항상 제 색이고, 활성 탭은 그 색으로 물든다.
              */
             .lw-navi-golden { --tabc: #ffd700; --tabc-soft: rgba(255,215,0,.14); --tabc-line: rgba(255,215,0,.4); }
+            .lw-navi-issue { --tabc: #ff4d4d; --tabc-soft: rgba(255,77,77,.14); --tabc-line: rgba(255,77,77,.4); }
             .lw-navi-analyze { --tabc: #69b7ff; --tabc-soft: rgba(105,183,255,.14); --tabc-line: rgba(105,183,255,.4); }
             .lw-navi-kin { --tabc: #2ecc71; --tabc-soft: rgba(46,204,113,.14); --tabc-line: rgba(46,204,113,.4); }
             .lw-navi-affiliate { --tabc: #ff8a3d; --tabc-soft: rgba(255,138,61,.14); --tabc-line: rgba(255,138,61,.4); }
