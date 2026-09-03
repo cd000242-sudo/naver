@@ -1,12 +1,12 @@
 {
- "publishedAt": "2026-09-03T00:07:34.934Z",
+ "publishedAt": "2026-09-03T02:28:59.415Z",
  "generator": "issue-niche-board",
  "schedule": "매일 07·13·19시(KST) 갱신",
  "measured": {
   "issues": 18,
   "candidates": 80,
-  "niche": 8,
-  "preemption": 3
+  "niche": 7,
+  "preemption": 4
  },
  "freeSample": {
   "day": "2026-09-03",
@@ -19,6 +19,342 @@
   ]
  },
  "rows": [
+  {
+   "keyword": "김종철 프로필",
+   "issue": "김종철 경찰청장 대행",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "niche",
+   "documentCount": 645,
+   "documentCountMeasured": true,
+   "searchVolume": 6620,
+   "hasLiveDemand": true,
+   "demandStatus": "rising",
+   "demandRatio": 3.2635648625413394,
+   "issueStatus": "stable",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "검색량 6,620",
+    "문서수 645",
+    "데이터랩 실측 수요",
+    "수요 상승중"
+   ],
+   "measuredAt": "2026-09-03T02:28:49.016Z"
+  },
+  {
+   "keyword": "김종철 경찰청장 대행",
+   "issue": "김종철 경찰청장 대행",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": false,
+   "verdict": "niche",
+   "documentCount": 425,
+   "documentCountMeasured": true,
+   "searchVolume": 200,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 1,
+   "issueStatus": "stable",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "검색량 200",
+    "문서수 425",
+    "데이터랩 실측 수요"
+   ],
+   "measuredAt": "2026-09-03T02:28:49.016Z"
+  },
+  {
+   "keyword": "김종철 경찰청장",
+   "issue": "김종철 경찰청장 대행",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "niche",
+   "documentCount": 1607,
+   "documentCountMeasured": true,
+   "searchVolume": 320,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 1,
+   "issueStatus": "stable",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "검색량 320",
+    "문서수 1,607",
+    "데이터랩 실측 수요"
+   ],
+   "measuredAt": "2026-09-03T02:28:49.016Z"
+  },
+  {
+   "keyword": "뮤즈 스파크",
+   "issue": "뮤즈 스파크 1.3",
+   "lane": "tech",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "niche",
+   "documentCount": 2567,
+   "documentCountMeasured": true,
+   "searchVolume": 350,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 1.3920516392786677,
+   "issueStatus": "unknown",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "검색량 350",
+    "문서수 2,567",
+    "데이터랩 실측 수요"
+   ],
+   "measuredAt": "2026-09-03T02:28:49.016Z"
+  },
+  {
+   "keyword": "제미나이 3.8 플래시",
+   "issue": "제미나이 3.8 플래시",
+   "lane": "tech",
+   "issueType": "fresh",
+   "isDerived": false,
+   "verdict": "niche",
+   "documentCount": 257,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 1,
+   "issueStatus": "stable",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 257",
+    "데이터랩 실측 수요"
+   ],
+   "measuredAt": "2026-09-03T02:28:49.016Z"
+  },
+  {
+   "keyword": "제미나이 3.8",
+   "issue": "제미나이 3.8 플래시",
+   "lane": "tech",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "niche",
+   "documentCount": 2067,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 1,
+   "issueStatus": "stable",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 2,067",
+    "데이터랩 실측 수요"
+   ],
+   "measuredAt": "2026-09-03T02:28:49.016Z"
+  },
+  {
+   "keyword": "아틀라스 브라우저",
+   "issue": "아틀라스",
+   "lane": "tech",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "niche",
+   "documentCount": 1723,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 1,
+   "issueStatus": "stable",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 1,723",
+    "데이터랩 실측 수요",
+    "추정치"
+   ],
+   "measuredAt": "2026-09-03T02:28:49.016Z"
+  },
+  {
+   "keyword": "S26 FE 출시일",
+   "issue": "갤럭시 S26 FE",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "niche",
+   "documentCount": 2592,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": true,
+   "demandStatus": "rising",
+   "demandRatio": 1.8003915077224906,
+   "issueStatus": "rising",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 2,592",
+    "데이터랩 실측 수요",
+    "수요 상승중"
+   ],
+   "measuredAt": "2026-09-03T01:35:51.845Z",
+   "carried": true
+  },
+  {
+   "keyword": "S26 FE 색상",
+   "issue": "갤럭시 S26 FE",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "niche",
+   "documentCount": 1634,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 1,
+   "issueStatus": "rising",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 1,634",
+    "데이터랩 실측 수요"
+   ],
+   "measuredAt": "2026-09-03T01:35:51.845Z",
+   "carried": true
+  },
+  {
+   "keyword": "왕즈이 프로필",
+   "issue": "왕 즈이",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "niche",
+   "documentCount": 289,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": true,
+   "demandStatus": "declining",
+   "demandRatio": 0.47736381754099894,
+   "issueStatus": "stable",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 289",
+    "데이터랩 실측 수요"
+   ],
+   "measuredAt": "2026-09-03T01:35:51.845Z",
+   "carried": true
+  },
+  {
+   "keyword": "S26 FE 스펙",
+   "issue": "갤럭시 S26 FE",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "niche",
+   "documentCount": 2449,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 1,
+   "issueStatus": "rising",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 2,449",
+    "데이터랩 실측 수요"
+   ],
+   "measuredAt": "2026-09-03T01:35:51.845Z",
+   "carried": true
+  },
+  {
+   "keyword": "왕즈이 나이",
+   "issue": "왕 즈이",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "niche",
+   "documentCount": 620,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": true,
+   "demandStatus": "declining",
+   "demandRatio": 0.3339729900795714,
+   "issueStatus": "stable",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 620",
+    "데이터랩 실측 수요"
+   ],
+   "measuredAt": "2026-09-03T01:35:51.845Z",
+   "carried": true
+  },
+  {
+   "keyword": "김종철 대행",
+   "issue": "김종철 경찰청장 대행",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "niche",
+   "documentCount": 1393,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 1,
+   "issueStatus": "stable",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 1,393",
+    "데이터랩 실측 수요"
+   ],
+   "measuredAt": "2026-09-03T01:35:51.845Z",
+   "carried": true
+  },
+  {
+   "keyword": "왕 즈이",
+   "issue": "왕 즈이",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": false,
+   "verdict": "niche",
+   "documentCount": 2370,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 0.6294920640602483,
+   "issueStatus": "stable",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 2,370",
+    "데이터랩 실측 수요"
+   ],
+   "measuredAt": "2026-09-03T01:35:51.845Z",
+   "carried": true
+  },
   {
    "keyword": "유병훈 프로필",
    "issue": "유병훈",
@@ -42,7 +378,8 @@
     "데이터랩 실측 수요",
     "수요 상승중"
    ],
-   "measuredAt": "2026-09-03T00:05:05.975Z"
+   "measuredAt": "2026-09-03T00:05:05.975Z",
+   "carried": true
   },
   {
    "keyword": "용혜인 프로필",
@@ -67,7 +404,8 @@
     "데이터랩 실측 수요",
     "수요 상승중"
    ],
-   "measuredAt": "2026-09-03T00:05:05.975Z"
+   "measuredAt": "2026-09-03T00:05:05.975Z",
+   "carried": true
   },
   {
    "keyword": "지예은 프로필",
@@ -92,7 +430,8 @@
     "데이터랩 실측 수요",
     "수요 상승중"
    ],
-   "measuredAt": "2026-09-03T00:05:05.975Z"
+   "measuredAt": "2026-09-03T00:05:05.975Z",
+   "carried": true
   },
   {
    "keyword": "용혜인 학력",
@@ -116,7 +455,8 @@
     "문서수 968",
     "데이터랩 실측 수요"
    ],
-   "measuredAt": "2026-09-03T00:05:05.975Z"
+   "measuredAt": "2026-09-03T00:05:05.975Z",
+   "carried": true
   },
   {
    "keyword": "뮤즈 스파크 성능",
@@ -140,7 +480,8 @@
     "데이터랩 실측 수요",
     "추정치"
    ],
-   "measuredAt": "2026-09-03T00:05:05.975Z"
+   "measuredAt": "2026-09-03T00:05:05.975Z",
+   "carried": true
   },
   {
    "keyword": "용혜인 남편",
@@ -164,7 +505,8 @@
     "데이터랩 실측 수요",
     "추정치"
    ],
-   "measuredAt": "2026-09-03T00:05:05.975Z"
+   "measuredAt": "2026-09-03T00:05:05.975Z",
+   "carried": true
   },
   {
    "keyword": "용혜인 나이",
@@ -188,7 +530,8 @@
     "데이터랩 실측 수요",
     "추정치"
    ],
-   "measuredAt": "2026-09-03T00:05:05.975Z"
+   "measuredAt": "2026-09-03T00:05:05.975Z",
+   "carried": true
   },
   {
    "keyword": "지예은 남편",
@@ -212,7 +555,8 @@
     "데이터랩 실측 수요",
     "추정치"
    ],
-   "measuredAt": "2026-09-03T00:05:05.975Z"
+   "measuredAt": "2026-09-03T00:05:05.975Z",
+   "carried": true
   },
   {
    "keyword": "뮤즈 스파크 1.3",
@@ -221,7 +565,7 @@
    "issueType": "fresh",
    "isDerived": false,
    "verdict": "preemption",
-   "documentCount": 102,
+   "documentCount": 110,
    "documentCountMeasured": true,
    "searchVolume": null,
    "hasLiveDemand": false,
@@ -232,10 +576,130 @@
    "frontalDocCount": 0,
    "freshFrontalCount": 0,
    "reasons": [
-    "문서수 102",
-    "선점 후보 — 경쟁 문서 102건, 수요 미검출"
+    "문서수 110",
+    "선점 후보 — 경쟁 문서 110건, 수요 미검출"
    ],
-   "measuredAt": "2026-09-03T00:05:05.975Z"
+   "measuredAt": "2026-09-03T02:28:49.016Z"
+  },
+  {
+   "keyword": "휴온스엔 춘천공장 PSM",
+   "issue": "휴온스엔 춘천공장 PSM",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": false,
+   "verdict": "preemption",
+   "documentCount": 4,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": false,
+   "demandStatus": "unknown",
+   "demandRatio": 0,
+   "issueStatus": "unknown",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 4",
+    "선점 후보 — 경쟁 문서 4건, 수요 미검출",
+    "추정치"
+   ],
+   "measuredAt": "2026-09-03T02:28:49.016Z"
+  },
+  {
+   "keyword": "월드랩스 리페이",
+   "issue": "월드랩스",
+   "lane": "tech",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "preemption",
+   "documentCount": 7,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": false,
+   "demandStatus": "unknown",
+   "demandRatio": 0,
+   "issueStatus": "stable",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 7",
+    "선점 후보 — 경쟁 문서 7건, 수요 미검출",
+    "추정치"
+   ],
+   "measuredAt": "2026-09-03T02:28:49.016Z"
+  },
+  {
+   "keyword": "춘천공장 PSM",
+   "issue": "휴온스엔 춘천공장 PSM",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "preemption",
+   "documentCount": 121,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": false,
+   "demandStatus": "unknown",
+   "demandRatio": 0,
+   "issueStatus": "unknown",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 121",
+    "선점 후보 — 경쟁 문서 121건, 수요 미검출",
+    "추정치"
+   ],
+   "measuredAt": "2026-09-03T02:28:49.016Z"
+  },
+  {
+   "keyword": "온코닉 자큐보 헬리코박터",
+   "issue": "온코닉 자큐보 헬리코박터",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": false,
+   "verdict": "preemption",
+   "documentCount": 99,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": false,
+   "demandStatus": "unknown",
+   "demandRatio": 0,
+   "issueStatus": "unknown",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 99",
+    "선점 후보 — 경쟁 문서 99건, 수요 미검출"
+   ],
+   "measuredAt": "2026-09-03T01:35:51.845Z",
+   "carried": true
+  },
+  {
+   "keyword": "왕즈이 국적",
+   "issue": "왕 즈이",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": true,
+   "verdict": "preemption",
+   "documentCount": 178,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": false,
+   "demandStatus": "unknown",
+   "demandRatio": 0,
+   "issueStatus": "stable",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 178",
+    "선점 후보 — 경쟁 문서 178건, 수요 미검출"
+   ],
+   "measuredAt": "2026-09-03T01:35:51.845Z",
+   "carried": true
   },
   {
    "keyword": "유병훈 학력",
@@ -259,7 +723,8 @@
     "선점 후보 — 경쟁 문서 83건, 수요 미검출",
     "추정치"
    ],
-   "measuredAt": "2026-09-03T00:05:05.975Z"
+   "measuredAt": "2026-09-03T00:05:05.975Z",
+   "carried": true
   },
   {
    "keyword": "뮤즈 스파크 스펙",
@@ -283,7 +748,8 @@
     "선점 후보 — 경쟁 문서 243건, 수요 미검출",
     "추정치"
    ],
-   "measuredAt": "2026-09-03T00:05:05.975Z"
+   "measuredAt": "2026-09-03T00:05:05.975Z",
+   "carried": true
   }
  ]
 }
