@@ -57,4 +57,13 @@ describe('렌더러 번들에 들어가는 소스의 밖 import 는 copy-static 
     }
     expect(missing, missing.join('\n')).toEqual([]);
   });
+
+  // [2026-09-03 TDZ] prepend 는 나중에 붙일수록 번들 앞으로 간다. runtime 모듈(import 0)이 의존 파일보다 앞에 오려면
+  //   utils 블록을 먼저, runtime 블록을 나중에 붙여야 한다. 반대면 modelRegistry 상위 const 가 GEMINI_TEXT_MODELS 를 선언 전에 읽는다.
+  it('prepends runtime modules after utils so they land at the very top of the bundle', () => {
+    const utilsAt = copyStatic.indexOf('if (utilsSource) {');
+    const runtimeAt = copyStatic.indexOf('if (runtimeSource) {');
+    expect(utilsAt).toBeGreaterThan(0);
+    expect(runtimeAt).toBeGreaterThan(utilsAt);
+  });
 });

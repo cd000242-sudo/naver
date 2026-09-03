@@ -788,12 +788,14 @@ try {
   }
 
   // ✅ [2026-01-25] utils 모듈들을 가장 앞에 추가 (의존성 순서 주의)
-  if (runtimeSource) {
-    sanitized = `// ===== RUNTIME MODULES INLINED =====\n${runtimeSource}\n// ===== END RUNTIME MODULES =====\n\n${sanitized}`;
-  }
-
+  // [2026-09-03 TDZ] 앞에 붙일수록(prepend) 번들에서 뒤로 간다. runtime 모듈(import 0)이 번들 최상단에 오도록 utils 를 먼저 붙이고 runtime 을 나중에 붙인다.
+  //   반대였을 때: 의존 파일 modelRegistry 의 상위 const 가 GEMINI_TEXT_MODELS 를 선언 전에 읽어 `Cannot access before initialization` 으로 렌더러가 죽었다.
   if (utilsSource) {
     sanitized = `// ===== UTILS MODULES INLINED =====\n${utilsSource}\n// ===== END UTILS MODULES =====\n\n${sanitized}`;
+  }
+
+  if (runtimeSource) {
+    sanitized = `// ===== RUNTIME MODULES INLINED =====\n${runtimeSource}\n// ===== END RUNTIME MODULES =====\n\n${sanitized}`;
   }
 
   // ✅ [2026-01-25] 모든 남은 _js_N 모듈 참조 제거 — [2026-09-03] 같은 모듈을 두 import 문으로 들이면 tsc 가 _js_2 를 낸다(renderer.ts 의 settingsModal) (categoryModalUtils, appEventsHandler 등)

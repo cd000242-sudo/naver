@@ -427,6 +427,8 @@ image 를 모른다. 참조 이미지는 `/v1/images/edits` 에 multipart 로 �
 
 **충돌 1건** — 렌더러 로컬 헬퍼 `normalizeImageProvider`(표시용 trim) 가 modelRegistry 의 같은 이름(딥인프라 별칭 접기) 과 단일 스코프에서 겹쳐 빌드 중복 스캐너가 막았다 → 로컬 쪽을 `normalizeImageProviderLabel` 로 개명.
 
+**셋째 뿌리 — 조립 순서(사장님 2차 보고: `Cannot access 'GEMINI_TEXT_MODELS' before initialization`)** — copy-static 은 utils(의존 파일 포함) → runtime 순으로 앞에 붙이는데(prepend), 나중에 붙일수록 번들 앞으로 간다. 결과적으로 runtime 모듈이 의존 파일보다 **뒤**에 놓여, modelRegistry 의 상위 `const VISION_MODELS = { …GEMINI_TEXT_MODELS… }` 가 선언 전 접근(TDZ)으로 죽었다. runtime 두 모듈은 import 가 0 이라 최상단이 맞다 → 붙이는 순서를 바꿔 runtime 이 번들 최상단에 오게 했다. 가드 테스트에 순서 잠금 추가.
+
 **검증** — 번들: 정의 8종 각 1개, `exports`/`require("./`/`_js_N.` 잔재 0, `node --check` OK. 정제기 잠금 테스트(재수출 getter·var require·`_js_2`) 추가.
 
 ### P17 — 쇼핑 제목이 팔리는 제목이 아니던 것 (사장님 2026-09-02 밤: "문제는 팔려야 되잖아") ✅ 1차 수정 — 라이브 검증 대기
