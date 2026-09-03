@@ -174,3 +174,14 @@ describe('generateBlueprint — dumpRaw', () => {
     expect(logs[0].startsWith('[Blueprint] RAW {"angle"')).toBe(true);
   });
 });
+
+describe('parseBlueprint — 문자열 안의 이스케이프 안 된 따옴표', () => {
+  it('"…없다"고 밝혔다" 식 인용을 살려 읽는다', () => {
+    const raw = '{"angle":"a","readerSituation":"복지로에서 "대상" 확인","quotes":[{"text":"접수 첫 주에는 복지로 사이트 접속이 몰리니 오후 시간대를 권한다"고 말했다","speaker":"담당자"}],"facts":[],"skeleton":["지원 대상 조건","지원 금액과 기간","신청 방법과 접수처"],"offTopic":[]}';
+    const parsed = parseBlueprint(raw, MATERIAL);
+    expect(parsed).not.toBeNull();
+    expect(parsed!.blueprint.readerSituation).toBe('복지로에서 "대상" 확인');
+    expect(parsed!.blueprint.quotes).toHaveLength(1);
+    expect(parsed!.blueprint.skeleton).toHaveLength(3);
+  });
+});

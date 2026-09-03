@@ -61,19 +61,66 @@ function repairTruncatedJson(text: string): unknown {
   return null;
 }
 
+/**
+ * Korean reporting quotes a speaker as `…없다"고 밝혔다` — the model copies that straight into a JSON
+ * string without escaping, and the parse dies at that character (measured 09-04: 2/2 posts).
+ * A quote inside a string is a closer only when the next non-space character continues the JSON
+ * (`,` `}` `]` `:`); every other inner quote is escaped.
+ */
+export function escapeUnescapedQuotes(text: string): string {
+  let out = '';
+  let inString = false;
+  for (let i = 0; i < text.length; i += 1) {
+    const ch = text[i];
+    if (!inString) {
+      if (ch === '"') inString = true;
+      out += ch;
+      continue;
+    }
+    if (ch === '\\') {
+      out += ch + (text[i + 1] ?? '');
+      i += 1;
+      continue;
+    }
+    if (ch === '"') {
+      let j = i + 1;
+      while (j < text.length && /\s/u.test(text[j])) j += 1;
+      const next = text[j] ?? '';
+      if (next === ',' || next === '}' || next === ']' || next === ':' || next === '') {
+        inString = false;
+        out += ch;
+      } else {
+        out += '\\"';
+      }
+      continue;
+    }
+    out += ch;
+  }
+  return out;
+}
+
+function tryParse(text: string): unknown {
+  try {
+    return JSON.parse(text);
+  } catch {
+    return undefined;
+  }
+}
+
 function extractJsonObject(raw: string): unknown {
   const text = String(raw || '').trim();
   const start = text.indexOf('{');
   if (start < 0) return null;
   const end = text.lastIndexOf('}');
-  if (end > start) {
-    try {
-      return JSON.parse(text.slice(start, end + 1));
-    } catch {
-      /* fall through to truncation repair */
-    }
-  }
-  return repairTruncatedJson(text.slice(start));
+  const body = end > start ? text.slice(start, end + 1) : text.slice(start);
+  const direct = tryParse(body);
+  if (direct !== undefined) return direct;
+  // From here on work on the whole tail: a `}` inside a string must not cut the candidate short.
+  const whole = text.slice(start);
+  const escaped = escapeUnescapedQuotes(whole);
+  const repairedQuotes = tryParse(escaped);
+  if (repairedQuotes !== undefined) return repairedQuotes;
+  return repairTruncatedJson(escaped);
 }
 
 function isVerbatim(fragment: string, material: string): boolean {
