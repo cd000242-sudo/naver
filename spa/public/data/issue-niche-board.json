@@ -1,24 +1,602 @@
 {
- "publishedAt": "2026-09-03T02:28:59.415Z",
+ "publishedAt": "2026-09-03T04:49:32.056Z",
  "generator": "issue-niche-board",
  "schedule": "매일 07·13·19시(KST) 갱신",
  "measured": {
   "issues": 18,
   "candidates": 80,
-  "niche": 7,
-  "preemption": 4
+  "niche": 4,
+  "preemption": 6
  },
  "freeSample": {
   "day": "2026-09-03",
   "keywords": [
    "유병훈 프로필",
    "용혜인 프로필",
-   "지예은 프로필",
-   "용혜인 학력",
-   "뮤즈 스파크 성능"
+   "지예은 프로필"
   ]
  },
  "rows": [
+  {
+   "keyword": "베슬AI",
+   "issue": "베슬AI",
+   "topic": "베슬AI",
+   "lane": "tech",
+   "issueType": "fresh",
+   "isDerived": false,
+   "origin": "head",
+   "originReason": null,
+   "verdict": "niche",
+   "documentCount": 1463,
+   "documentCountMeasured": true,
+   "searchVolume": 1350,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 1.1248429405967975,
+   "issueStatus": "stable",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "검색량 1,350",
+    "문서수 1,463",
+    "데이터랩 실측 수요"
+   ],
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
+    },
+    {
+     "code": "empty-field",
+     "text": "정면으로 다룬 글 0건 (최근 0건)"
+    }
+   ],
+   "whySearch": {
+    "text": "베슬AI가 SK바이오팜에 엔비디아 B200 GPU 128장을 공급한다.",
+    "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+   },
+   "intentLabel": "분류 안 됨",
+   "adsenseFit": null,
+   "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+   "titles": {
+    "seo": {
+     "text": "베슬AI SK바이오팜 B200 GPU 128장 공급 내용 정리",
+     "frame": "ai",
+     "basis": "실측 풀 근거 AI 작성"
+    },
+    "home": {
+     "text": "베슬AI 채용 지금 지원해도 되나 싶었는데 답이 있더라고요",
+     "frame": "ai",
+     "basis": "메인+서브+후킹 (실측 근거)"
+    }
+   },
+   "subKeywords": [
+    {
+     "keyword": "베슬AI 채용",
+     "searchVolume": 20,
+     "frame": "generic"
+    }
+   ],
+   "keywordPool": [
+    {
+     "keyword": "베슬AI 채용",
+     "searchVolume": 20,
+     "documentCount": 124,
+     "source": "ai-verified"
+    }
+   ],
+   "trend": {
+    "series": [
+     29,
+     43,
+     100,
+     23,
+     30,
+     54,
+     71,
+     53,
+     33,
+     41,
+     25,
+     9,
+     10,
+     64,
+     79,
+     57,
+     64,
+     22,
+     14,
+     72,
+     46,
+     54,
+     80,
+     85,
+     18,
+     11,
+     72,
+     47,
+     56
+    ]
+   },
+   "kinCount": 733,
+   "kinTop": null,
+   "monetize": null,
+   "measuredAt": "2026-09-03T04:46:25.082Z"
+  },
+  {
+   "keyword": "제미나이 옴니",
+   "issue": "에이전트 비디오 분석",
+   "topic": "에이전트 비디오 분석",
+   "lane": "tech",
+   "issueType": "fresh",
+   "isDerived": true,
+   "origin": "next-wave",
+   "originReason": "영상 생성 모델 궁금",
+   "verdict": "niche",
+   "documentCount": 1933,
+   "documentCountMeasured": true,
+   "searchVolume": 920,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 0.998566659968649,
+   "issueStatus": "unknown",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "검색량 920",
+    "문서수 1,933",
+    "데이터랩 실측 수요"
+   ],
+   "evidence": [
+    {
+     "code": "next-wave",
+     "text": "다음 물결 — 영상 생성 모델 궁금"
+    },
+    {
+     "code": "demand",
+     "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+    },
+    {
+     "code": "empty-field",
+     "text": "정면으로 다룬 글 0건 (최근 0건)"
+    }
+   ],
+   "whySearch": {
+    "text": "구글이 제미나이에 필요한 장면을 스스로 탐색하는 '에이전트 비디오 분석'을 도입했다.",
+    "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+   },
+   "intentLabel": "분류 안 됨",
+   "adsenseFit": null,
+   "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+   "titles": {
+    "seo": {
+     "text": "제미나이 옴니 1.1 플래시 4K 업스케일링 영상 생성 정리",
+     "frame": "ai",
+     "basis": "실측 풀 근거 AI 작성"
+    },
+    "home": {
+     "text": "제미나이 옴니 무료로 써보니 프로랑 이게 다르더라고요",
+     "frame": "ai",
+     "basis": "메인+서브+후킹 (실측 근거)"
+    }
+   },
+   "subKeywords": [
+    {
+     "keyword": "제미나이 챗지피티 비교",
+     "searchVolume": 2330,
+     "frame": "compare"
+    },
+    {
+     "keyword": "제미나이 무료",
+     "searchVolume": 41900,
+     "frame": "generic"
+    },
+    {
+     "keyword": "제미나이 프로",
+     "searchVolume": 7800,
+     "frame": "generic"
+    }
+   ],
+   "keywordPool": [
+    {
+     "keyword": "제미나이 무료",
+     "searchVolume": 41900,
+     "documentCount": 65349,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 프로",
+     "searchVolume": 7800,
+     "documentCount": 47262,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 사용법",
+     "searchVolume": 7780,
+     "documentCount": 80279,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 요금제",
+     "searchVolume": 3770,
+     "documentCount": 27128,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 챗지피티 비교",
+     "searchVolume": 2330,
+     "documentCount": 8071,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 이미지 생성",
+     "searchVolume": 1480,
+     "documentCount": 57274,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 앱",
+     "searchVolume": 1440,
+     "documentCount": 69584,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 나노바나나",
+     "searchVolume": 990,
+     "documentCount": 13109,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 영상 생성",
+     "searchVolume": 50,
+     "documentCount": 39246,
+     "source": "ai-verified"
+    }
+   ],
+   "trend": {
+    "series": [
+     100,
+     62,
+     58,
+     62,
+     16,
+     82,
+     44,
+     87,
+     91,
+     64,
+     53,
+     42,
+     27,
+     44,
+     76,
+     84,
+     91,
+     44,
+     58,
+     89,
+     62,
+     93,
+     60,
+     51,
+     64,
+     47,
+     73,
+     84,
+     84
+    ]
+   },
+   "kinCount": 8,
+   "kinTop": [
+    {
+     "title": "제미나이 옴니 플래시로 영상 편집, 초보자도 쉽게 할 수 있....",
+     "link": "https://kin.naver.com/qna/detail.naver?dirId=302140101&docId=493700267&answerNo=0",
+     "views": 56,
+     "answers": 2
+    },
+    {
+     "title": "근데 캡컷이 조만간 제미나이랑 연동된다는데",
+     "link": "https://kin.naver.com/qna/detail.naver?dirId=1020401&docId=494037388&answerNo=1",
+     "views": 53,
+     "answers": 2
+    },
+    {
+     "title": "구글 제미나이 앱, 일상에서 얼마나 유용할까요?",
+     "link": "https://kin.naver.com/qna/detail.naver?dirId=30103&docId=493496676&answerNo=0",
+     "views": 40,
+     "answers": 1
+    },
+    {
+     "title": "구글의 제미나이 옴니와 퍼스널 아바타, 실제로 사용해보니 ....",
+     "link": "https://kin.naver.com/qna/detail.naver?dirId=10905&docId=494424979&answerNo=1",
+     "views": 34,
+     "answers": 1
+    }
+   ],
+   "monetize": null,
+   "measuredAt": "2026-09-03T04:46:25.082Z"
+  },
+  {
+   "keyword": "제미나이 vs 챗지피티",
+   "issue": "제미나이 3.8 플래시",
+   "topic": "제미나이 3.8 플래시",
+   "lane": "tech",
+   "issueType": "fresh",
+   "isDerived": true,
+   "origin": "next-wave",
+   "originReason": "성능 비교",
+   "verdict": "niche",
+   "documentCount": 2606,
+   "documentCountMeasured": true,
+   "searchVolume": 1100,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 0.8571429532091477,
+   "issueStatus": "stable",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "검색량 1,100",
+    "문서수 2,606",
+    "데이터랩 실측 수요"
+   ],
+   "evidence": [
+    {
+     "code": "next-wave",
+     "text": "다음 물결 — 성능 비교"
+    },
+    {
+     "code": "demand",
+     "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.9배"
+    },
+    {
+     "code": "empty-field",
+     "text": "정면으로 다룬 글 0건 (최근 0건)"
+    }
+   ],
+   "whySearch": {
+    "text": "구글이 제미나이 3.8 플래시를 출시했으나 프로는 또 지연됐다.",
+    "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+   },
+   "intentLabel": "분류 안 됨",
+   "adsenseFit": null,
+   "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+   "titles": {
+    "seo": {
+     "text": "제미나이 vs 챗지피티 3.8 플래시 코딩 성능 비교",
+     "frame": "ai",
+     "basis": "실측 풀 근거 AI 작성"
+    },
+    "home": {
+     "text": "제미나이 vs 챗지피티 써보니 차이가 여기서 갈리더라고요",
+     "frame": "ai",
+     "basis": "메인+서브+후킹 (실측 근거)"
+    }
+   },
+   "subKeywords": [
+    {
+     "keyword": "챗지피티 제미나이 비교",
+     "searchVolume": 2540,
+     "frame": "compare"
+    },
+    {
+     "keyword": "제미나이 챗지피티 차이",
+     "searchVolume": 100,
+     "frame": "compare"
+    }
+   ],
+   "keywordPool": [
+    {
+     "keyword": "챗지피티 제미나이 비교",
+     "searchVolume": 2540,
+     "documentCount": 8071,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 챗지피티 차이",
+     "searchVolume": 100,
+     "documentCount": 6397,
+     "source": "ai-verified"
+    }
+   ],
+   "trend": {
+    "series": [
+     52,
+     70,
+     55,
+     18,
+     48,
+     68,
+     100,
+     80,
+     93,
+     77,
+     63,
+     57,
+     39,
+     79,
+     100,
+     70,
+     50,
+     20,
+     45,
+     82,
+     89,
+     75,
+     55,
+     55,
+     36,
+     43,
+     50,
+     80,
+     50
+    ]
+   },
+   "kinCount": 132,
+   "kinTop": [
+    {
+     "title": "클로드 vs 제미나이 vs 챗지피티 vs 그록 - 이 넷 중 뭐가 가장 ....",
+     "link": "https://kin.naver.com/qna/detail.naver?dirId=110408&docId=493667352&answerNo=6",
+     "views": 2864,
+     "answers": 6
+    },
+    {
+     "title": "제미나이 vs 챗지피티",
+     "link": "https://kin.naver.com/qna/detail.naver?dirId=61303&docId=493057393&answerNo=10",
+     "views": 1496,
+     "answers": 10
+    },
+    {
+     "title": "지피티 vs 제미나이",
+     "link": "https://kin.naver.com/qna/detail.naver?dirId=814&docId=494400453&answerNo=9",
+     "views": 290,
+     "answers": 9
+    },
+    {
+     "title": "제미나이vs챗지피티",
+     "link": "https://kin.naver.com/qna/detail.naver?dirId=40308&docId=494533102&answerNo=2",
+     "views": 149,
+     "answers": 2
+    },
+    {
+     "title": "지방 실거주 매매 구축 vs 준신축",
+     "link": "https://kin.naver.com/qna/detail.naver?dirId=40201&docId=494800514&answerNo=1",
+     "views": 104,
+     "answers": 1
+    }
+   ],
+   "monetize": null,
+   "measuredAt": "2026-09-03T04:46:25.082Z"
+  },
+  {
+   "keyword": "제미나이 3.8 플래시",
+   "issue": "제미나이 3.8 플래시",
+   "topic": "제미나이 3.8 플래시",
+   "lane": "tech",
+   "issueType": "fresh",
+   "isDerived": false,
+   "origin": "head",
+   "originReason": null,
+   "verdict": "niche",
+   "documentCount": 278,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": true,
+   "demandStatus": "stable",
+   "demandRatio": 1,
+   "issueStatus": "stable",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 278",
+    "데이터랩 실측 수요"
+   ],
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+    },
+    {
+     "code": "empty-field",
+     "text": "정면으로 다룬 글 0건 (최근 0건)"
+    }
+   ],
+   "whySearch": {
+    "text": "구글이 제미나이 3.8 플래시를 출시했으나 프로는 또 지연됐다.",
+    "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+   },
+   "intentLabel": "분류 안 됨",
+   "adsenseFit": null,
+   "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+   "titles": {
+    "seo": {
+     "text": "제미나이 3.8 플래시 vs 프로 코딩 성능 차이",
+     "frame": "ai",
+     "basis": "실측 풀 근거 AI 작성"
+    },
+    "home": {
+     "text": "제미나이 3.8 플래시 써보니 프로 기다릴 이유가 없더라고요",
+     "frame": "ai",
+     "basis": "메인+서브+후킹 (실측 근거)"
+    }
+   },
+   "subKeywords": [
+    {
+     "keyword": "구글 제미나이",
+     "searchVolume": 1090100,
+     "frame": "generic"
+    },
+    {
+     "keyword": "제미나이 무료",
+     "searchVolume": 41900,
+     "frame": "generic"
+    },
+    {
+     "keyword": "제미나이 프로",
+     "searchVolume": 7800,
+     "frame": "generic"
+    }
+   ],
+   "keywordPool": [
+    {
+     "keyword": "구글 제미나이",
+     "searchVolume": 1090100,
+     "documentCount": 156817,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 무료",
+     "searchVolume": 41900,
+     "documentCount": 65349,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 프로",
+     "searchVolume": 7800,
+     "documentCount": 47262,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 사용법",
+     "searchVolume": 7780,
+     "documentCount": 80279,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 요금제",
+     "searchVolume": 3770,
+     "documentCount": 27128,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 api",
+     "searchVolume": 1480,
+     "documentCount": 13989,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 앱",
+     "searchVolume": 1440,
+     "documentCount": 69584,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "제미나이 플래시",
+     "searchVolume": 630,
+     "documentCount": 8729,
+     "source": "ai-verified"
+    }
+   ],
+   "trend": null,
+   "kinCount": 1,
+   "kinTop": null,
+   "monetize": null,
+   "measuredAt": "2026-09-03T04:46:25.082Z"
+  },
   {
    "keyword": "김종철 프로필",
    "issue": "김종철 경찰청장 대행",
@@ -42,7 +620,8 @@
     "데이터랩 실측 수요",
     "수요 상승중"
    ],
-   "measuredAt": "2026-09-03T02:28:49.016Z"
+   "measuredAt": "2026-09-03T02:28:49.016Z",
+   "carried": true
   },
   {
    "keyword": "김종철 경찰청장 대행",
@@ -66,7 +645,8 @@
     "문서수 425",
     "데이터랩 실측 수요"
    ],
-   "measuredAt": "2026-09-03T02:28:49.016Z"
+   "measuredAt": "2026-09-03T02:28:49.016Z",
+   "carried": true
   },
   {
    "keyword": "김종철 경찰청장",
@@ -90,7 +670,8 @@
     "문서수 1,607",
     "데이터랩 실측 수요"
    ],
-   "measuredAt": "2026-09-03T02:28:49.016Z"
+   "measuredAt": "2026-09-03T02:28:49.016Z",
+   "carried": true
   },
   {
    "keyword": "뮤즈 스파크",
@@ -114,30 +695,8 @@
     "문서수 2,567",
     "데이터랩 실측 수요"
    ],
-   "measuredAt": "2026-09-03T02:28:49.016Z"
-  },
-  {
-   "keyword": "제미나이 3.8 플래시",
-   "issue": "제미나이 3.8 플래시",
-   "lane": "tech",
-   "issueType": "fresh",
-   "isDerived": false,
-   "verdict": "niche",
-   "documentCount": 257,
-   "documentCountMeasured": true,
-   "searchVolume": null,
-   "hasLiveDemand": true,
-   "demandStatus": "stable",
-   "demandRatio": 1,
-   "issueStatus": "stable",
-   "isHot": false,
-   "frontalDocCount": 0,
-   "freshFrontalCount": 0,
-   "reasons": [
-    "문서수 257",
-    "데이터랩 실측 수요"
-   ],
-   "measuredAt": "2026-09-03T02:28:49.016Z"
+   "measuredAt": "2026-09-03T02:28:49.016Z",
+   "carried": true
   },
   {
    "keyword": "제미나이 3.8",
@@ -160,7 +719,8 @@
     "문서수 2,067",
     "데이터랩 실측 수요"
    ],
-   "measuredAt": "2026-09-03T02:28:49.016Z"
+   "measuredAt": "2026-09-03T02:28:49.016Z",
+   "carried": true
   },
   {
    "keyword": "아틀라스 브라우저",
@@ -184,7 +744,8 @@
     "데이터랩 실측 수요",
     "추정치"
    ],
-   "measuredAt": "2026-09-03T02:28:49.016Z"
+   "measuredAt": "2026-09-03T02:28:49.016Z",
+   "carried": true
   },
   {
    "keyword": "S26 FE 출시일",
@@ -561,11 +1122,14 @@
   {
    "keyword": "뮤즈 스파크 1.3",
    "issue": "뮤즈 스파크 1.3",
+   "topic": "뮤즈 스파크 1.3",
    "lane": "tech",
    "issueType": "fresh",
    "isDerived": false,
+   "origin": "head",
+   "originReason": null,
    "verdict": "preemption",
-   "documentCount": 110,
+   "documentCount": 118,
    "documentCountMeasured": true,
    "searchVolume": null,
    "hasLiveDemand": false,
@@ -576,10 +1140,456 @@
    "frontalDocCount": 0,
    "freshFrontalCount": 0,
    "reasons": [
-    "문서수 110",
-    "선점 후보 — 경쟁 문서 110건, 수요 미검출"
+    "문서수 118",
+    "선점 후보 — 경쟁 문서 118건, 수요 미검출"
    ],
-   "measuredAt": "2026-09-03T02:28:49.016Z"
+   "evidence": [
+    {
+     "code": "empty-field",
+     "text": "정면으로 다룬 글 0건 (최근 0건)"
+    }
+   ],
+   "whySearch": {
+    "text": "메타가 뮤즈 스파크 1.3을 출시해 오픈AI를 제치고 세계 3위 성능을 기록했다.",
+    "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+   },
+   "intentLabel": "분류 안 됨",
+   "adsenseFit": null,
+   "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+   "titles": {
+    "seo": {
+     "text": "뮤즈 스파크 1.3 성능 오픈AI 제치고 세계 3위",
+     "frame": "ai",
+     "basis": "실측 풀 근거 AI 작성"
+    },
+    "home": {
+     "text": "뮤즈 스파크 1.3 사용법 이대로만 하니까 바로 되네요",
+     "frame": "ai",
+     "basis": "메인+서브+후킹 (실측 근거)"
+    }
+   },
+   "subKeywords": [
+    {
+     "keyword": "뮤즈 스파크 사용법",
+     "searchVolume": null,
+     "frame": "howto"
+    }
+   ],
+   "keywordPool": null,
+   "trend": null,
+   "kinCount": 2,
+   "kinTop": null,
+   "monetize": null,
+   "measuredAt": "2026-09-03T04:46:25.082Z"
+  },
+  {
+   "keyword": "서울불꽃축제 점검 중인",
+   "issue": "서울불꽃축제 점검 중인",
+   "topic": "서울불꽃축제 점검 중인",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": false,
+   "origin": "head",
+   "originReason": null,
+   "verdict": "preemption",
+   "documentCount": 23,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": false,
+   "demandStatus": "unknown",
+   "demandRatio": 0,
+   "issueStatus": "unknown",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 23",
+    "선점 후보 — 경쟁 문서 23건, 수요 미검출",
+    "추정치"
+   ],
+   "evidence": [
+    {
+     "code": "empty-field",
+     "text": "정면으로 다룬 글 0건 (최근 0건)"
+    },
+    {
+     "code": "fresh",
+     "text": "이슈 자체가 지금 뜨는 중(HOT)"
+    }
+   ],
+   "whySearch": {
+    "text": "정부가 가을철 인파사고 위험요소 사전 제거에 나섰다.",
+    "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+   },
+   "intentLabel": "분류 안 됨",
+   "adsenseFit": null,
+   "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+   "titles": {
+    "seo": {
+     "text": "서울불꽃축제 점검 중인 2025 어떤 정보가 있는지",
+     "frame": "generic",
+     "basis": "파생 키워드 실측 '서울불꽃축제 2025' (검색량 890) — 1페이지 0개 제목에 없는 프레임"
+    },
+    "home": {
+     "text": "서울불꽃축제 점검 중인데 명당은 이렇게 잡아야 안 밀려요",
+     "frame": "ai",
+     "basis": "메인+서브+후킹 (실측 근거)"
+    }
+   },
+   "subKeywords": [
+    {
+     "keyword": "서울불꽃축제 2025",
+     "searchVolume": 890,
+     "frame": "generic"
+    },
+    {
+     "keyword": "서울불꽃축제 명당 자리",
+     "searchVolume": 130,
+     "frame": "generic"
+    },
+    {
+     "keyword": "서울불꽃축제 좌석 예매",
+     "searchVolume": 10,
+     "frame": "generic"
+    }
+   ],
+   "keywordPool": [
+    {
+     "keyword": "서울불꽃축제 2025",
+     "searchVolume": 890,
+     "documentCount": 27901,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "서울불꽃축제 명당 자리",
+     "searchVolume": 130,
+     "documentCount": 23496,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "서울불꽃축제 좌석 예매",
+     "searchVolume": 10,
+     "documentCount": 4323,
+     "source": "ai-verified"
+    }
+   ],
+   "trend": null,
+   "kinCount": 0,
+   "kinTop": null,
+   "monetize": null,
+   "measuredAt": "2026-09-03T04:46:25.082Z"
+  },
+  {
+   "keyword": "부천시 Gemini Pro",
+   "issue": "부천시 Gemini Pro",
+   "topic": "부천시 Gemini Pro",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": false,
+   "origin": "head",
+   "originReason": null,
+   "verdict": "preemption",
+   "documentCount": 49,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": false,
+   "demandStatus": "unknown",
+   "demandRatio": 0,
+   "issueStatus": "unknown",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 49",
+    "선점 후보 — 경쟁 문서 49건, 수요 미검출",
+    "추정치"
+   ],
+   "evidence": [
+    {
+     "code": "empty-field",
+     "text": "정면으로 다룬 글 0건 (최근 0건)"
+    },
+    {
+     "code": "fresh",
+     "text": "이슈 자체가 지금 뜨는 중(HOT)"
+    }
+   ],
+   "whySearch": {
+    "text": "부천시가 청년 대상 무료 'Gemini Pro 취업 부트캠프'를 개강했다.",
+    "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+   },
+   "intentLabel": "분류 안 됨",
+   "adsenseFit": null,
+   "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+   "titles": {
+    "seo": {
+     "text": "부천시 Gemini Pro 부트캠프 40명 전액 무료 모집",
+     "frame": "ai",
+     "basis": "실측 풀 근거 AI 작성"
+    },
+    "home": {
+     "text": "부천시 Gemini Pro 부트캠프 전액 무료라 놓치면 후회해요",
+     "frame": "ai",
+     "basis": "메인+서브+후킹 (실측 근거)"
+    }
+   },
+   "subKeywords": null,
+   "keywordPool": null,
+   "trend": null,
+   "kinCount": 0,
+   "kinTop": null,
+   "monetize": null,
+   "measuredAt": "2026-09-03T04:46:25.082Z"
+  },
+  {
+   "keyword": "베슬AI 상장",
+   "issue": "베슬AI",
+   "topic": "베슬AI",
+   "lane": "tech",
+   "issueType": "fresh",
+   "isDerived": true,
+   "origin": "next-wave",
+   "originReason": "IPO 여부 관심",
+   "verdict": "preemption",
+   "documentCount": 242,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": false,
+   "demandStatus": "unknown",
+   "demandRatio": 0,
+   "issueStatus": "stable",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 242",
+    "선점 후보 — 경쟁 문서 242건, 수요 미검출",
+    "추정치"
+   ],
+   "evidence": [
+    {
+     "code": "next-wave",
+     "text": "다음 물결 — IPO 여부 관심"
+    },
+    {
+     "code": "empty-field",
+     "text": "정면으로 다룬 글 0건 (최근 0건)"
+    }
+   ],
+   "whySearch": {
+    "text": "베슬AI가 SK바이오팜에 엔비디아 B200 GPU 128장을 공급한다.",
+    "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+   },
+   "intentLabel": "분류 안 됨",
+   "adsenseFit": null,
+   "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+   "titles": {
+    "seo": {
+     "text": "베슬AI 상장 전망과 SK바이오팜 B200 128장 공급 내용",
+     "frame": "ai",
+     "basis": "실측 풀 근거 AI 작성"
+    },
+    "home": {
+     "text": "베슬AI 상장 기다리다 주가 흐름 보니 답이 보이네요",
+     "frame": "ai",
+     "basis": "메인+서브+후킹 (실측 근거)"
+    }
+   },
+   "subKeywords": [
+    {
+     "keyword": "베슬AI 주가",
+     "searchVolume": 20,
+     "frame": "generic"
+    },
+    {
+     "keyword": "베슬AI 채용",
+     "searchVolume": 20,
+     "frame": "generic"
+    }
+   ],
+   "keywordPool": [
+    {
+     "keyword": "베슬AI 주가",
+     "searchVolume": 20,
+     "documentCount": 315,
+     "source": "ai-verified"
+    },
+    {
+     "keyword": "베슬AI 채용",
+     "searchVolume": 20,
+     "documentCount": 124,
+     "source": "ai-verified"
+    }
+   ],
+   "trend": null,
+   "kinCount": 0,
+   "kinTop": null,
+   "monetize": null,
+   "measuredAt": "2026-09-03T04:46:25.082Z"
+  },
+  {
+   "keyword": "AG 축구 조편성",
+   "issue": "이민성",
+   "topic": "이민성",
+   "lane": "realtime",
+   "issueType": "fresh",
+   "isDerived": true,
+   "origin": "next-wave",
+   "originReason": "대진 확인",
+   "verdict": "preemption",
+   "documentCount": 220,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": false,
+   "demandStatus": "unknown",
+   "demandRatio": 0,
+   "issueStatus": "stable",
+   "isHot": true,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 220",
+    "선점 후보 — 경쟁 문서 220건, 수요 미검출",
+    "추정치"
+   ],
+   "evidence": [
+    {
+     "code": "next-wave",
+     "text": "다음 물결 — 대진 확인"
+    },
+    {
+     "code": "empty-field",
+     "text": "정면으로 다룬 글 0건 (최근 0건)"
+    },
+    {
+     "code": "fresh",
+     "text": "이슈 자체가 지금 뜨는 중(HOT)"
+    }
+   ],
+   "whySearch": {
+    "text": "이민성 감독이 아시안게임 남자축구 4연패 금메달을 목표로 밝혔다.",
+    "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+   },
+   "intentLabel": "분류 안 됨",
+   "adsenseFit": null,
+   "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+   "titles": {
+    "seo": {
+     "text": "AG 축구 조편성 대진표·남자축구 일정·대표팀 명단 정리",
+     "frame": "ai",
+     "basis": "실측 풀 근거 AI 작성"
+    },
+    "home": {
+     "text": "AG 축구 조편성 나오니까 아시안게임 대진표 이렇게 갈리네요",
+     "frame": "ai",
+     "basis": "메인+서브+후킹 (실측 근거)"
+    }
+   },
+   "subKeywords": [
+    {
+     "keyword": "아시안게임 축구 조편성",
+     "searchVolume": 380,
+     "frame": "generic"
+    },
+    {
+     "keyword": "아시안게임 축구 일정",
+     "searchVolume": null,
+     "frame": "schedule"
+    },
+    {
+     "keyword": "아시안게임 축구 대진표",
+     "searchVolume": null,
+     "frame": "generic"
+    }
+   ],
+   "keywordPool": [
+    {
+     "keyword": "아시안게임 축구 조편성",
+     "searchVolume": 380,
+     "documentCount": 3857,
+     "source": "ai-verified"
+    }
+   ],
+   "trend": null,
+   "kinCount": 68,
+   "kinTop": null,
+   "monetize": null,
+   "measuredAt": "2026-09-03T04:46:25.082Z"
+  },
+  {
+   "keyword": "아스트라 vs 제미나이",
+   "issue": "아스트라",
+   "topic": "아스트라",
+   "lane": "tech",
+   "issueType": "fresh",
+   "isDerived": true,
+   "origin": "next-wave",
+   "originReason": "성능 비교",
+   "verdict": "preemption",
+   "documentCount": 236,
+   "documentCountMeasured": true,
+   "searchVolume": null,
+   "hasLiveDemand": false,
+   "demandStatus": "unknown",
+   "demandRatio": 0,
+   "issueStatus": "stable",
+   "isHot": false,
+   "frontalDocCount": 0,
+   "freshFrontalCount": 0,
+   "reasons": [
+    "문서수 236",
+    "선점 후보 — 경쟁 문서 236건, 수요 미검출",
+    "추정치"
+   ],
+   "evidence": [
+    {
+     "code": "next-wave",
+     "text": "다음 물결 — 성능 비교"
+    },
+    {
+     "code": "empty-field",
+     "text": "정면으로 다룬 글 0건 (최근 0건)"
+    }
+   ],
+   "whySearch": {
+    "text": "오픈AI 차세대 아스트라가 자율 공격 가능한 최고 위험등급 판정을 받았다.",
+    "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+   },
+   "intentLabel": "분류 안 됨",
+   "adsenseFit": null,
+   "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+   "titles": {
+    "seo": {
+     "text": "아스트라 vs 제미나이 출시 임박 보안등급 위험 비교",
+     "frame": "ai",
+     "basis": "실측 풀 근거 AI 작성"
+    },
+    "home": {
+     "text": "오픈AI 아스트라 vs 제미나이 갈아타려다 이거 보고 멈췄어요",
+     "frame": "ai",
+     "basis": "메인+서브+후킹 (실측 근거)"
+    }
+   },
+   "subKeywords": [
+    {
+     "keyword": "오픈AI 아스트라",
+     "searchVolume": 180,
+     "frame": "generic"
+    }
+   ],
+   "keywordPool": [
+    {
+     "keyword": "오픈AI 아스트라",
+     "searchVolume": 180,
+     "documentCount": 4348,
+     "source": "ai-verified"
+    }
+   ],
+   "trend": null,
+   "kinCount": 0,
+   "kinTop": null,
+   "monetize": null,
+   "measuredAt": "2026-09-03T04:46:25.082Z"
   },
   {
    "keyword": "휴온스엔 춘천공장 PSM",
@@ -603,7 +1613,8 @@
     "선점 후보 — 경쟁 문서 4건, 수요 미검출",
     "추정치"
    ],
-   "measuredAt": "2026-09-03T02:28:49.016Z"
+   "measuredAt": "2026-09-03T02:28:49.016Z",
+   "carried": true
   },
   {
    "keyword": "월드랩스 리페이",
@@ -627,7 +1638,8 @@
     "선점 후보 — 경쟁 문서 7건, 수요 미검출",
     "추정치"
    ],
-   "measuredAt": "2026-09-03T02:28:49.016Z"
+   "measuredAt": "2026-09-03T02:28:49.016Z",
+   "carried": true
   },
   {
    "keyword": "춘천공장 PSM",
@@ -651,7 +1663,8 @@
     "선점 후보 — 경쟁 문서 121건, 수요 미검출",
     "추정치"
    ],
-   "measuredAt": "2026-09-03T02:28:49.016Z"
+   "measuredAt": "2026-09-03T02:28:49.016Z",
+   "carried": true
   },
   {
    "keyword": "온코닉 자큐보 헬리코박터",
@@ -750,6 +1763,1451 @@
    ],
    "measuredAt": "2026-09-03T00:05:05.975Z",
    "carried": true
+  }
+ ],
+ "issues": [
+  {
+   "issue": "행정 공공기관 이전",
+   "issueType": "fresh",
+   "lane": "realtime",
+   "issueStatus": "stable",
+   "isHot": true,
+   "why": "내년 상반기 법무·성평등부 세종 이전과 공공기관 350곳 지방 이전이 발표됐다.",
+   "headlines": [
+    {
+     "title": "내년 공공기관 이전 착수…\"수도권 잔류 최소화·109개 감축\"(종합)",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-09-03T03:34:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016287800?sid=100"
+    },
+    {
+     "title": "행안장관 \"내년 상반기부터 법무부·성평등부 등 순차 이전\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-09-03T02:03:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014166466?sid=100"
+    },
+    {
+     "title": "법무·성평등부, 내년 세종 간다…공공기관 350곳 지역 이전",
+     "press": "hani.co.kr",
+     "publishedAt": "2026-09-03T02:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/028/0002821432?sid=100"
+    }
+   ],
+   "concentrated": [],
+   "nextWave": [
+    {
+     "keyword": "공공기관 이전 지역",
+     "reason": "내 지역 오는지 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "세종 이전 일정",
+     "reason": "실행 시점 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "이전 기관 명단",
+     "reason": "350곳 대상 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "세종 부동산",
+     "reason": "이전 수혜지 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "109개 감축",
+     "reason": "통폐합 대상 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 0
+  },
+  {
+   "issue": "서울불꽃축제 점검 중인",
+   "issueType": "fresh",
+   "lane": "realtime",
+   "issueStatus": "unknown",
+   "isHot": true,
+   "why": "정부가 가을철 인파사고 위험요소 사전 제거에 나섰다.",
+   "headlines": [
+    {
+     "title": "호텔업계 불꽃축제 바가지요금 여전한데… 정부·지자체 \"행정처분 불가...",
+     "press": "sisaweek.com",
+     "publishedAt": "2026-08-28T03:26:00.000Z",
+     "link": "https://www.sisaweek.com/news/articleView.html?idxno=237553"
+    },
+    {
+     "title": "정부·통신 3사, AI 통신 인프라 투자 확대…연내 규제·세제 개선안 마...",
+     "press": "ceoscoredaily.com",
+     "publishedAt": "2026-08-27T07:22:00.000Z",
+     "link": "https://www.ceoscoredaily.com/page/view/2026082716204081088"
+    },
+    {
+     "title": "정부, 서울 불꽃축제 등 가을철 인파사고 위험요소 사전 제거",
+     "press": "korea.kr",
+     "publishedAt": "2025-09-10T08:10:00.000Z",
+     "link": "https://www.korea.kr/news/policyNewsView.do?newsId=148949008&call_from=naver_news"
+    }
+   ],
+   "concentrated": [],
+   "nextWave": [
+    {
+     "keyword": "불꽃축제 날짜",
+     "reason": "개최일 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "불꽃축제 실시간",
+     "reason": "현장 상황 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "불꽃축제 우천시",
+     "reason": "기상 취소 여부",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "불꽃축제 명당 예약",
+     "reason": "자리 선점",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "불꽃축제 통제구간",
+     "reason": "이동 계획",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 1
+  },
+  {
+   "issue": "LS전선 동해시 1억원",
+   "issueType": "fresh",
+   "lane": "realtime",
+   "issueStatus": "unknown",
+   "isHot": true,
+   "why": "LS전선이 동해시 취약계층 교육비·환경 개선에 1억원을 기탁했다.",
+   "headlines": [
+    {
+     "title": "LS전선, 동해시 취약계층 지원에 1억원 기탁…누적 14억원",
+     "press": "newsis.com",
+     "publishedAt": "2026-09-03T01:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014166414?sid=101"
+    },
+    {
+     "title": "LS전선, 동해시 취약계층 지원 위해 1억원 기탁",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-09-03T01:53:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/018/0006362977?sid=101"
+    },
+    {
+     "title": "LS전선, 동해시 취약계층 위해 1억원 기탁",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-09-03T01:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005811381?sid=101"
+    }
+   ],
+   "concentrated": [],
+   "nextWave": [
+    {
+     "keyword": "LS전선 채용",
+     "reason": "공장 관심에 취업 연결",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "LS전선 주가",
+     "reason": "기업 관심 확산",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "동해공장 증설",
+     "reason": "지역 투자 후속",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "LS전선 해저케이블",
+     "reason": "주력 사업 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "LS전선 연봉",
+     "reason": "지역 일자리 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 0
+  },
+  {
+   "issue": "정점식 국민의힘 원내대표",
+   "issueType": "fresh",
+   "lane": "realtime",
+   "issueStatus": "unknown",
+   "isHot": true,
+   "why": "정점식이 이 대통령 레임덕 본격화를 주장하며 재판 속개를 요구했다.",
+   "headlines": [
+    {
+     "title": "정점식 \"靑, 대법원장 제청권 침해…사법부 단호히 대응해야\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-09-03T00:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014166094?sid=100"
+    },
+    {
+     "title": "“李 대통령, 레임덕 본격화…재판 속개해야” 정점식의 말",
+     "press": "munhwa.com",
+     "publishedAt": "2026-09-02T11:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002815893?sid=100"
+    },
+    {
+     "title": "조국, 공소취소 경고하자…정점식 \"李 대통령 레임덕 본격화\"",
+     "press": "hankyung.com",
+     "publishedAt": "2026-09-02T00:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/015/0005327762?sid=100"
+    }
+   ],
+   "concentrated": [],
+   "nextWave": [
+    {
+     "keyword": "이재명 재판",
+     "reason": "속개 요구 관련",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "조국 발언",
+     "reason": "공방 상대",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "공소취소",
+     "reason": "쟁점 키워드",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "정점식 지역구",
+     "reason": "인물 배경 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "레임덕 뜻",
+     "reason": "용어 검색",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 0
+  },
+  {
+   "issue": "이민성",
+   "issueType": "fresh",
+   "lane": "realtime",
+   "issueStatus": "stable",
+   "isHot": true,
+   "why": "이민성 감독이 아시안게임 남자축구 4연패 금메달을 목표로 밝혔다.",
+   "headlines": [
+    {
+     "title": "아시안게임 각오 밝히는 이민성 감독",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-09-01T08:32:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/001/0016283693"
+    },
+    {
+     "title": "\"온 우주가 이민성을 돕는다\" 'AG 와카 듀오' 엄지성→양현준 릴레이골...",
+     "press": "sportschosun.com",
+     "publishedAt": "2026-09-03T00:10:00.000Z",
+     "link": "https://m.sports.naver.com/wfootball/article/076/0004442138"
+    },
+    {
+     "title": "AG 앞둔 이민성 \"그동안 부진 보약 삼아 반드시 4연패\"",
+     "press": "news.sbs.co.kr",
+     "publishedAt": "2026-09-01T09:14:00.000Z",
+     "link": "https://m.sports.naver.com/kfootball/article/055/0001385068"
+    }
+   ],
+   "concentrated": [
+    {
+     "keyword": "이민성 감독",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "이민성호",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "호주이민성",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "이민성 피아니스트",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "피아니스트 이민성",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    }
+   ],
+   "nextWave": [
+    {
+     "keyword": "아시안게임 축구 일정",
+     "reason": "경기 시간 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "축구 대표팀 명단",
+     "reason": "소집 선수 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "AG 축구 조편성",
+     "reason": "대진 확인",
+     "searchVolume": null,
+     "documentCount": 220,
+     "onBoard": true
+    },
+    {
+     "keyword": "와일드카드",
+     "reason": "선발 논란 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "이민성 선수시절",
+     "reason": "인물 배경",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 1
+  },
+  {
+   "issue": "부천시 Gemini Pro",
+   "issueType": "fresh",
+   "lane": "realtime",
+   "issueStatus": "unknown",
+   "isHot": true,
+   "why": "부천시가 청년 대상 무료 'Gemini Pro 취업 부트캠프'를 개강했다.",
+   "headlines": [
+    {
+     "title": "부천시, 'Gemini Pro 취업 부트캠프' 개강",
+     "press": "gukjenews.com",
+     "publishedAt": "2026-09-03T04:06:00.000Z",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3683682"
+    },
+    {
+     "title": "부천시, AI 활용 사무인재 양성…‘Gemini Pro 취업 부트캠프’ 개강",
+     "press": "sentv.co.kr",
+     "publishedAt": "2026-09-03T04:22:00.000Z",
+     "link": "https://www.sentv.co.kr/article/view/sentv202609030115"
+    },
+    {
+     "title": "\"AI 잘 쓰면 취업문 열린다\"… 부천시 'Gemini Pro 부트캠프'",
+     "press": "mt.co.kr",
+     "publishedAt": "2026-08-19T01:54:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/008/0005401769?sid=102"
+    }
+   ],
+   "concentrated": [],
+   "nextWave": [
+    {
+     "keyword": "부트캠프 신청",
+     "reason": "참여 방법 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "Gemini Pro 사용법",
+     "reason": "교육 내용 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "부천시 청년 지원",
+     "reason": "다른 혜택 검색",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "AI 자격증",
+     "reason": "취업 연계 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "모집 인원",
+     "reason": "경쟁률 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 1
+  },
+  {
+   "issue": "트럼프 알래스카 LNG",
+   "issueType": "fresh",
+   "lane": "realtime",
+   "issueStatus": "unknown",
+   "isHot": true,
+   "why": "트럼프가 한국·일본이 알래스카 LNG 프로젝트에 참여한다고 재차 거론했다.",
+   "headlines": [
+    {
+     "title": "트럼프, 선거 지원하며 또 \"알래스카 LNG 韓·日로\"",
+     "press": "newsis.com",
+     "publishedAt": "2026-09-02T23:08:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014165680?sid=104"
+    },
+    {
+     "title": "트럼프 \"韓日, 알래스카로 간다\"…LNG 프로젝트서 또 거론",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-09-02T21:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016286533?sid=104"
+    },
+    {
+     "title": "트럼프 \"한국과 일본, 알래스카로 간다\"…LNG 프로젝트 언급",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-09-02T21:56:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004185409?sid=104"
+    }
+   ],
+   "concentrated": [],
+   "nextWave": [
+    {
+     "keyword": "LNG 수입 영향",
+     "reason": "에너지 가격 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "한국 참여 여부",
+     "reason": "실제 합의 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "트럼프 관세",
+     "reason": "통상 압박 연결",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "가스공사",
+     "reason": "수혜 기업 검색",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "알래스카 프로젝트 규모",
+     "reason": "사업 정보",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 0
+  },
+  {
+   "issue": "청년 일자리 문제와",
+   "issueType": "fresh",
+   "lane": "realtime",
+   "issueStatus": "unknown",
+   "isHot": true,
+   "why": "내년 예산에서 청년일자리에 7천억 늘려 3.3조를 투입한다.",
+   "headlines": [
+    {
+     "title": "월급 꼬박꼬박 받아도 “돈이 없다”…학자금 못 갚는 청년 6만명 넘었...",
+     "press": "sedaily.com",
+     "publishedAt": "2026-09-03T00:04:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/011/0004658101?sid=102"
+    },
+    {
+     "title": "청년 일경험 예산 4년 새 4배…취업성과 관리는 ‘사각지대’",
+     "press": "biz.heraldcorp.com",
+     "publishedAt": "2026-09-03T00:12:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/016/0002692156?sid=101"
+    },
+    {
+     "title": "장동혁 “청년 내 집 마련 꿈 막는 李정권…주거권 되찾겠다”",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-09-02T04:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005729251?sid=100"
+    }
+   ],
+   "concentrated": [],
+   "nextWave": [
+    {
+     "keyword": "첫 취업 지원금",
+     "reason": "신설 제도 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "청년 지원 신청",
+     "reason": "수혜 방법 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "학자금 상환",
+     "reason": "부담 대책 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "청년 주거 지원",
+     "reason": "내 집 마련 정책",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "2027 예산안",
+     "reason": "전체 규모 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 0
+  },
+  {
+   "issue": "중국공산당",
+   "issueType": "fresh",
+   "lane": "realtime",
+   "issueStatus": "stable",
+   "isHot": false,
+   "why": "아르헨티나 관료가 네팔 대홍수를 중국 공산당 탓이라 주장해 중국이 반발했다.",
+   "headlines": [
+    {
+     "title": "“네팔 대홍수는 중국 공산당 때문” 아르헨 관료의 말",
+     "press": "munhwa.com",
+     "publishedAt": "2026-09-02T21:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/021/0002815911?sid=104"
+    },
+    {
+     "title": "“네팔 대홍수, 중국 공산당 때문이다”…아르헨 관료 말에 中 “악의적...",
+     "press": "mk.co.kr",
+     "publishedAt": "2026-09-02T23:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/009/0005729676?sid=104"
+    },
+    {
+     "title": "아르헨 관료 \"네팔 대홍수는 中공산당 탓\"…中 \"악의적 비방\"",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-09-02T21:01:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016286522?sid=104"
+    }
+   ],
+   "concentrated": [
+    {
+     "keyword": "중국 공산당원",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "중국 공산당 서열",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "중국 공산당 역사",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "중국 공산당 창당",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "중국 공산당원 수",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "중국 공산당 대장정",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "중국 공산당 창건일",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "중국 공산당 깃발",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    }
+   ],
+   "nextWave": [
+    {
+     "keyword": "네팔 홍수 원인",
+     "reason": "진위 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "중국 댐",
+     "reason": "방류 의혹 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "중국 외교부 반응",
+     "reason": "대응 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "네팔 피해 규모",
+     "reason": "참사 상황",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "아르헨티나 중국",
+     "reason": "양국 관계",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 0
+  },
+  {
+   "issue": "소지섭 아시아 팬미팅",
+   "issueType": "entertainment",
+   "lane": "realtime",
+   "issueStatus": "unknown",
+   "isHot": true,
+   "why": "소지섭이 10월부터 마카오 등 아시아 5개 도시 팬미팅 투어에 나선다.",
+   "headlines": [
+    {
+     "title": "소지섭, 아시아 5개국 팬미팅 투어",
+     "press": "munhwa.com",
+     "publishedAt": "2026-09-03T03:11:00.000Z",
+     "link": "https://m.entertain.naver.com/article/021/0002816117"
+    },
+    {
+     "title": "'김부장' 소지섭, 아시아 팬미팅 투어 나선다",
+     "press": "edaily.co.kr",
+     "publishedAt": "2026-09-03T02:16:00.000Z",
+     "link": "https://m.entertain.naver.com/article/018/0006363005"
+    },
+    {
+     "title": "힙합 무대 오나요…소지섭 아시아 팬미팅 투어 개최 [공식]",
+     "press": "sports.donga.com",
+     "publishedAt": "2026-09-03T01:36:00.000Z",
+     "link": "https://m.entertain.naver.com/article/382/0001291726"
+    }
+   ],
+   "concentrated": [],
+   "nextWave": [
+    {
+     "keyword": "팬미팅 티켓",
+     "reason": "예매 방법 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "팬미팅 서울",
+     "reason": "국내 개최 여부",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "소지섭 김부장",
+     "reason": "화제작 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "팬미팅 일정",
+     "reason": "도시별 날짜",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "소지섭 신곡",
+     "reason": "힙합 무대 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 0
+  },
+  {
+   "issue": "베슬AI",
+   "issueType": "fresh",
+   "lane": "tech",
+   "issueStatus": "stable",
+   "isHot": false,
+   "why": "베슬AI가 SK바이오팜에 엔비디아 B200 GPU 128장을 공급한다.",
+   "headlines": [
+    {
+     "title": "베슬AI, 제약·바이오 분야로 네오클라우드 서비스 확장",
+     "press": "datanet.co.kr",
+     "publishedAt": "2026-09-03T00:56:00.000Z",
+     "link": "https://www.datanet.co.kr/news/articleView.html?idxno=214221"
+    },
+    {
+     "title": "베슬AI, SK바이오팜에 엔비디아 B200 GPU 128장 공급",
+     "press": "platum.kr",
+     "publishedAt": "2026-09-03T00:36:00.000Z",
+     "link": "https://platum.kr/archives/293894"
+    },
+    {
+     "title": "베슬AI, SK바이오팜에 B200 GPU 128장 규모 클라우드 공급",
+     "press": "ddaily.co.kr",
+     "publishedAt": "2026-09-02T23:55:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/138/0002240011?sid=105"
+    }
+   ],
+   "concentrated": [
+    {
+     "keyword": "베슬ai주가",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    }
+   ],
+   "nextWave": [
+    {
+     "keyword": "베슬AI 상장",
+     "reason": "IPO 여부 관심",
+     "searchVolume": null,
+     "documentCount": 242,
+     "onBoard": true
+    },
+    {
+     "keyword": "베슬AI 주가",
+     "reason": "투자 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "SK바이오팜 주가",
+     "reason": "파트너 수혜",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "네오클라우드",
+     "reason": "사업 모델 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "B200 성능",
+     "reason": "GPU 스펙 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 2
+  },
+  {
+   "issue": "아스트라",
+   "issueType": "fresh",
+   "lane": "tech",
+   "issueStatus": "stable",
+   "isHot": false,
+   "why": "오픈AI 차세대 아스트라가 자율 공격 가능한 최고 위험등급 판정을 받았다.",
+   "headlines": [
+    {
+     "title": "오픈AI 차세대 AI 아스트라 출시 임박…사이버보안 기능은 제한 공개",
+     "press": "view.asiae.co.kr",
+     "publishedAt": "2026-09-02T07:23:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/277/0005811015?sid=105"
+    },
+    {
+     "title": "오픈AI '아스트라', 너무 강력했나…사이버보안 '위험' 등급",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-09-02T01:36:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/079/0004185040?sid=104"
+    },
+    {
+     "title": "오픈AI 차세대 '아스트라', 자율 공격 가능…최고 위험단계 도달",
+     "press": "newsis.com",
+     "publishedAt": "2026-09-02T07:41:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/003/0014165027?sid=104"
+    }
+   ],
+   "concentrated": [
+    {
+     "keyword": "아스트라 아토베리어",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "아스트라제네카",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "아스트라 크림",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "아스트랄",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "아스트라 선크림",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "아스트라페",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "아스트라백",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "5080 아스트랄",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    }
+   ],
+   "nextWave": [
+    {
+     "keyword": "아스트라 출시일",
+     "reason": "공개 시점 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "아스트라 사용법",
+     "reason": "이용 방법",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "아스트라 vs 제미나이",
+     "reason": "성능 비교",
+     "searchVolume": null,
+     "documentCount": 236,
+     "onBoard": true
+    },
+    {
+     "keyword": "오픈AI 위험",
+     "reason": "안전성 논란",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "아스트라 요금",
+     "reason": "이용 조건 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 1
+  },
+  {
+   "issue": "제미나이 3.8 플래시",
+   "issueType": "fresh",
+   "lane": "tech",
+   "issueStatus": "stable",
+   "isHot": false,
+   "why": "구글이 제미나이 3.8 플래시를 출시했으나 프로는 또 지연됐다.",
+   "headlines": [
+    {
+     "title": "구글 '제미나이3.8 플래시' 공개…'프로'는 또 지연",
+     "press": "news1.kr",
+     "publishedAt": "2026-09-03T02:52:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009148821?sid=105"
+    },
+    {
+     "title": "구글, '제미나이 3.8 플래시' 출시…코딩·에이전트 성능 끌어올렸다",
+     "press": "joseilbo.com",
+     "publishedAt": "2026-09-03T01:30:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/123/0002389531?sid=004"
+    },
+    {
+     "title": "구글, 3주 만에 새 경량 모델 ‘제미나이 3.8 플래시’ 출시",
+     "press": "biz.chosun.com",
+     "publishedAt": "2026-09-03T01:44:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/366/0001190120?sid=105"
+    }
+   ],
+   "concentrated": [],
+   "nextWave": [
+    {
+     "keyword": "제미나이 프로 출시",
+     "reason": "플래그십 시점 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "제미나이 사용법",
+     "reason": "이용 방법",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "제미나이 vs 챗지피티",
+     "reason": "성능 비교",
+     "searchVolume": 1100,
+     "documentCount": 2606,
+     "onBoard": true
+    },
+    {
+     "keyword": "제미나이 무료",
+     "reason": "이용 조건",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "제미나이 3.8 차이",
+     "reason": "신기능 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 2
+  },
+  {
+   "issue": "여수",
+   "issueType": "fresh",
+   "lane": "tech",
+   "issueStatus": "stable",
+   "isHot": false,
+   "why": "여수세계섬박람회가 5일 개막한다.",
+   "headlines": [
+    {
+     "title": "'바다와 미래를 잇는 섬' 여수세계섬박람회 5일 개막",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-09-03T03:00:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016287726?sid=103"
+    },
+    {
+     "title": "여수세계섬박람회 D-3, 미리 가보니",
+     "press": "ohmynews.com",
+     "publishedAt": "2026-09-03T01:11:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/047/0002527615?sid=102"
+    },
+    {
+     "title": "여수 공무원 사칭 금품 사기 잇따라",
+     "press": "news.kbs.co.kr",
+     "publishedAt": "2026-09-03T00:14:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/056/0012250168?sid=102"
+    }
+   ],
+   "concentrated": [
+    {
+     "keyword": "여수 날씨",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "여수 가볼만한곳",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "여수 맛집",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "여수 숙소",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "여수 라테라스",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "여수 펜션",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "여수 호텔",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "여수 유월드",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    }
+   ],
+   "nextWave": [
+    {
+     "keyword": "섬박람회 입장료",
+     "reason": "관람 비용 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "섬박람회 주차",
+     "reason": "방문 준비",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "섬박람회 볼거리",
+     "reason": "프로그램 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "여수 가볼만한곳",
+     "reason": "여행 연계",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "섬박람회 셔틀",
+     "reason": "교통 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 0
+  },
+  {
+   "issue": "UAE",
+   "issueType": "fresh",
+   "lane": "tech",
+   "issueStatus": "stable",
+   "isHot": false,
+   "why": "백악관 특사가 UAE 실권자와 비공개 회동해 이란 압박 공조를 논의했다.",
+   "headlines": [
+    {
+     "title": "백악관 특사, UAE 실세 전격 회동…대이란 압박 후속 조치 논의",
+     "press": "news1.kr",
+     "publishedAt": "2026-09-03T01:59:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/421/0009148561?sid=104"
+    },
+    {
+     "title": "\"美특사, UAE 실권자와 '비공개 회동'… 이란 압박 공조 논의\"",
+     "press": "newspim.com",
+     "publishedAt": "2026-09-03T00:38:00.000Z",
+     "link": "https://www.newspim.com/news/view/20260903000286"
+    },
+    {
+     "title": "티엑스알로보틱스, 해외 시장 진출 가속화…UAE 진출 타진",
+     "press": "daily.hankooki.com",
+     "publishedAt": "2026-09-02T00:08:00.000Z",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1401709"
+    }
+   ],
+   "concentrated": [
+    {
+     "keyword": "uae 수도",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "UAE 시간",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "uae 환율",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "UAE 이란",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "uae 국기",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "uae opec",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "uae한인회",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "uae 지도",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    }
+   ],
+   "nextWave": [
+    {
+     "keyword": "미국 이란",
+     "reason": "긴장 국면 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "이란 정세",
+     "reason": "후속 상황 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "티엑스알로보틱스 주가",
+     "reason": "진출 기업 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "UAE 진출",
+     "reason": "기업 협력 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "중동 정세",
+     "reason": "지역 정세 확산",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 0
+  },
+  {
+   "issue": "뮤즈 스파크 1.3",
+   "issueType": "fresh",
+   "lane": "tech",
+   "issueStatus": "unknown",
+   "isHot": false,
+   "why": "메타가 뮤즈 스파크 1.3을 출시해 오픈AI를 제치고 세계 3위 성능을 기록했다.",
+   "headlines": [
+    {
+     "title": "메타, '뮤즈 스파크 1.3' 출시...오픈AI 제치고 세계 3위 성능",
+     "press": "aitimes.com",
+     "publishedAt": "2026-09-02T21:46:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=214774"
+    },
+    {
+     "title": "토큰 25% 줄인 메타 뮤즈 스파크 1.3 공개",
+     "press": "tokenpost.kr",
+     "publishedAt": "2026-09-02T20:14:00.000Z",
+     "link": "https://www.tokenpost.kr/news/ai/401941"
+    },
+    {
+     "title": "[미국 특징주] 메타, 신규 AI 모델 출시…경쟁사 수준 근접 자평",
+     "press": "newspim.com",
+     "publishedAt": "2026-09-02T23:13:00.000Z",
+     "link": "https://www.newspim.com/news/view/20260903000074"
+    }
+   ],
+   "concentrated": [],
+   "nextWave": [
+    {
+     "keyword": "뮤즈 스파크 사용법",
+     "reason": "이용 방법 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "뮤즈 스파크 무료",
+     "reason": "이용 조건",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "메타 vs 구글",
+     "reason": "성능 비교",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "뮤즈 스파크 순위",
+     "reason": "성능 위치 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "메타 AI 접속",
+     "reason": "이용 경로",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 1
+  },
+  {
+   "issue": "메타",
+   "issueType": "fresh",
+   "lane": "tech",
+   "issueStatus": "stable",
+   "isHot": false,
+   "why": "구글 신모델이 같은 날 나온 메타에 성능이 밀렸다.",
+   "headlines": [
+    {
+     "title": "3주만에 또 경량 AI모델 내놓은 구글…같은날 나온 메타에 뒤져",
+     "press": "yna.co.kr",
+     "publishedAt": "2026-09-03T00:15:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/001/0016286780?sid=104"
+    },
+    {
+     "title": "구글, 3주만에 또 경량 AI모델 출시…성능 평가선 메타에 밀려",
+     "press": "donga.com",
+     "publishedAt": "2026-09-03T02:25:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/020/0003745446?sid=105"
+    },
+    {
+     "title": "'제미나이의 굴욕' 구글 AI 새 모델, 메타에 성능 뒤져",
+     "press": "biz.sbs.co.kr",
+     "publishedAt": "2026-09-03T01:06:00.000Z",
+     "link": "https://n.news.naver.com/mnews/article/374/0000530938?sid=104"
+    }
+   ],
+   "concentrated": [
+    {
+     "keyword": "메타tft",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "메타 ai 글라스",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "메타 뜻",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "메타 주가",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "메타몽",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "메타 AI",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "메타 안경",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    },
+    {
+     "keyword": "메타베이프",
+     "searchVolume": null,
+     "origin": "autocomplete"
+    }
+   ],
+   "nextWave": [
+    {
+     "keyword": "메타 주가",
+     "reason": "투자 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "메타 AI 글라스",
+     "reason": "신제품 궁금",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "메타 vs 구글",
+     "reason": "성능 비교",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "메타 AI 사용법",
+     "reason": "이용 방법",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "메타 실적",
+     "reason": "기업 성과 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 0
+  },
+  {
+   "issue": "에이전트 비디오 분석",
+   "issueType": "fresh",
+   "lane": "tech",
+   "issueStatus": "unknown",
+   "isHot": false,
+   "why": "구글이 제미나이에 필요한 장면을 스스로 탐색하는 '에이전트 비디오 분석'을 도입했다.",
+   "headlines": [
+    {
+     "title": "\"필요한 장면 스스로 탐색\"...구글, 제미나이 '에이전트 비디오 분석' 도...",
+     "press": "aitimes.com",
+     "publishedAt": "2026-09-02T10:18:00.000Z",
+     "link": "https://www.aitimes.com/news/articleView.html?idxno=214749"
+    },
+    {
+     "title": "비디오 생성 AI '제미나이 옴니 1.1 플래시' 공개… \"4K 업스케일링 및 ...",
+     "press": "aitimes.kr",
+     "publishedAt": "2026-08-29T00:36:00.000Z",
+     "link": "https://www.aitimes.kr/news/articleView.html?idxno=41654"
+    },
+    {
+     "title": "삼성, AI 영상 에이전트 '루카스' 도입…VXT 사이니지 콘텐츠 자동화 구...",
+     "press": "theguru.co.kr",
+     "publishedAt": "2026-08-18T02:08:00.000Z",
+     "link": "https://www.theguru.co.kr/news/article.html?no=105901"
+    }
+   ],
+   "concentrated": [],
+   "nextWave": [
+    {
+     "keyword": "제미나이 옴니",
+     "reason": "영상 생성 모델 궁금",
+     "searchVolume": 920,
+     "documentCount": 1933,
+     "onBoard": true
+    },
+    {
+     "keyword": "비디오 분석 사용법",
+     "reason": "이용 방법",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "제미나이 동영상",
+     "reason": "기능 활용 관심",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "4K 업스케일링",
+     "reason": "신기능 확인",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    },
+    {
+     "keyword": "제미나이 vs 소라",
+     "reason": "영상 AI 비교",
+     "searchVolume": null,
+     "documentCount": null,
+     "onBoard": false
+    }
+   ],
+   "rowCount": 1
   }
  ]
 }
