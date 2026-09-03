@@ -771,6 +771,10 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     color: #1b1405;
                     background: #f4c95d;
                 }
+                .home-ops-tab-issue { text-decoration: none; border-color: rgba(255, 77, 77, .45); }
+                .home-ops-tab-issue:hover { border-color: rgba(255, 77, 77, .9); }
+                .home-ops-tab-issue strong { color: #ff4d4d; }
+                .home-ops-issue-flag { color: #fff; background: #ff4d4d; }
                 .home-ops-sidenav {
                     position: sticky;
                     top: 80px;
@@ -1175,6 +1179,12 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                         <span className="home-ops-featured-flag">오늘 무료 공개</span>
                         <strong>무료 선정 황금키워드</strong>
                         <small>검색은 많은데 아직 글이 적은 키워드만 골랐습니다. 지금 바로 확인 →</small>
+                    </a>
+                    {/* 실검 틈새키워드 — 하루 3회 CI 가 정적으로 발행하는 보드(/leword?tab=issue). 황금키워드와 같은 이유로 일반 <a> 다. */}
+                    <a className="home-ops-tab home-ops-tab-issue" href="/leword?tab=issue">
+                        <span className="home-ops-featured-flag home-ops-issue-flag">하루 3번 갱신</span>
+                        <strong>실검 틈새키워드</strong>
+                        <small>지금 뜨는 실시간 이슈에서 검색은 있는데 글이 적은 키워드만 골랐습니다 →</small>
                     </a>
                     {HOME_OPS_TAB_ORDER.map((tab) => (
                         <button
