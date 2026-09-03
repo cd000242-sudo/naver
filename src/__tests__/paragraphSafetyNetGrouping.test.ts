@@ -38,7 +38,8 @@ describe('긴 문단 안전망도 2~3문장씩 고르게 — 혼자 남는 문�
 
   it('안전망이 후처리기의 묶음 함수를 쓴다', () => {
     const src = readFileSync(resolve(__dirname, '..', 'contentBodyTransforms.ts'), 'utf-8');
-    expect(src).toMatch(/const sizes = paragraphGroupSizes\(sentences\.length\);/u);
+    // [2026-09-04] 홈판은 1~2문장 — maxSentences 를 finalize 가 넘긴다
+    expect(src).toMatch(/const sizes = paragraphGroupSizes\(sentences\.length, maxSentences\);/u);
     expect(src).not.toMatch(/Math\.random\(\) \* [23]\) \+ [12]/u);
   });
 

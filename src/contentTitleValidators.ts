@@ -8,6 +8,7 @@
 
 import type { ContentSource } from './contentGenerator';
 import { classifyAffiliateEvidence } from './content/affiliateAuthenticity';
+import { SITUATION_CUES, VALUE_CUES } from './content/evaluators/homefeedEval';
 
 /**
  * SEO 모드 제목의 치명적 이슈 감지.
@@ -252,7 +253,9 @@ export function computeAffiliateTitleCriticalIssues(title: string, source: Conte
 }
 
 /**
- * 홈피드 도입부의 치명적 이슈 감지 — 길이 검증만.
+ * 홈피드 도입부의 치명적 이슈 감지 — 길이 + [2026-09-04] 독자 상황 결여.
+ * 홈판 평가기(homefeedEval)의 같은 단서로 판정한다: "첫 화면에서 독자 상황과 읽을 이유가 함께 드러나지 않음" 이
+ * 게이트에서만 찍히고 도입부 패치는 길이만 봐서, 엔진을 바꿔도 같은 지적이 반복됐다.
  */
 export function computeHomefeedIntroCriticalIssues(intro: string | undefined): string[] {
   const issues: string[] = [];
@@ -260,5 +263,8 @@ export function computeHomefeedIntroCriticalIssues(intro: string | undefined): s
   if (!s) return issues;
   const lines = s.split(/[.!?]\s*/).filter(x => x.trim().length > 0).length;
   if (lines > 5) issues.push('도입부가 너무 김');
+  const head = s.slice(0, 260);
+  if (!SITUATION_CUES.test(head)) issues.push('도입부에 독자가 겪는 구체 상황이 없음 — 첫 문장은 독자의 상황(처음·헷갈·고민·~할 때)으로 시작');
+  if (!VALUE_CUES.test(head)) issues.push('도입부에 이 글에서 얻을 판단 기준·차이·확인 항목이 없음');
   return issues;
 }

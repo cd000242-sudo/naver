@@ -153,7 +153,7 @@ describe('content generation timeout policy', () => {
     expect(promptAdherenceSrc).toMatch(/PROMPT_ADHERENCE_REPAIR/);
     expect(generatorSrc).toMatch(/const\s+promptRepairMinAttempts\s*=\s*0/);
     expect(generatorSrc).toMatch(/const\s+customPromptAdherence\s*=\s*assessCustomPromptAdherence\(parsed,\s*source\)/);
-    expect(generatorSrc).toMatch(/allowPaidPostGenerationRepair\s*&&\s*!customPromptAdherence\.passed\s*&&\s*attempt\s*<\s*MAX_ATTEMPTS/);
+    expect(generatorSrc).toMatch(/allowPaidPostGenerationRepair\s*&&\s*!customPromptAdherence\.passed\s*&&\s*attempt\s*<\s*QUALITY_ATTEMPT_LIMIT/); // [2026-09-04] 품질 예산 1회
     expect(generatorSrc).toMatch(/customPromptAdherence\.retryInstruction/);
   });
 
@@ -225,11 +225,11 @@ describe('content generation timeout policy', () => {
     expect(generatorSrc).toMatch(/await\s+throttleProviderRequest\('Perplexity'/);
   });
 
-  it('keeps hidden post-generation LLM patch calls explicit opt-in', () => {
+  it('keeps post-generation LLM patches on by default with an explicit opt-out (2026-09-04)', () => {
     expect(costPolicySrc).toMatch(/CONTENT_ALLOW_EXTRA_LLM_PATCHES/);
     // [v2.11.133] Opt-in now comes from either the env var (authoritative when
     // set) or the app-setting toggle — never silently enabled.
-    expect(costPolicySrc).toMatch(/allowLocalizedRepair\s*=\s*patchOverride\s*!=\s*null\s*\n?\s*\?\s*patchOverride\s*===\s*'1'\s*\n?\s*:\s*config\?\.allowQualityRepairPass\s*===\s*true/);
+    expect(costPolicySrc).toMatch(/allowLocalizedRepair\s*=\s*patchOverride\s*!=\s*null\s*\n?\s*\?\s*patchOverride\s*===\s*'1'\s*\n?\s*:\s*config\?\.allowQualityRepairPass\s*!==\s*false/);
     expect(costPolicySrc).not.toMatch(/modelProfile\.tier\s*!==\s*'value'/);
   });
 

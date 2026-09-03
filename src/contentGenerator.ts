@@ -347,6 +347,8 @@ import {
   // [v2.10.393] ensureContentParagraphBreaks 재활성화 (한국어 종결어미 한정 split).
   //   contentBodyTransforms.ts의 정규식이 (?<=[가-힣][.!?])로 영문 약어/소수점 회귀 차단.
   ensureContentParagraphBreaks,
+  homefeedParagraphSentences,
+  paragraphizeForEvaluation,
   limitRegexOccurrences,
   truncateHeadingTitles,
   removeInternalStructureMarkersFromContent,
@@ -1287,6 +1289,7 @@ async function generateHomefeedIntroOnlyPatch(
   current: StructuredContent,
   provider?: string,
   agentProductPolicyContext?: AgentProductPolicyContext,
+  issues: readonly string[] = [],
 ): Promise<{ introduction?: string } | null> {
   const categoryHint = source.categoryHint as string | undefined;
   const systemPrompt = buildFullPrompt('homefeed', categoryHint, false, undefined, undefined, (source as any).hookHint, buildRecentWinnersBlock(source), undefined, undefined, (source as any).structureGuideBlock);
@@ -1306,6 +1309,8 @@ ${schema}
 - 배경 설명/요약/정리 금지
 - 문체: 사용자 설정 글톤 어미 적용 (기본: 자연스러운 구어체)
 - ⚠️ 서브키워드 1개 이상 도입부에 자연스럽게 포함
+- 첫 문장은 독자가 겪는 구체 상황으로 시작한다(처음·헷갈·고민·~할 때·~하면). 둘째 문장에 이 글에서 얻을 기준·차이·확인 항목을 말한다.
+${issues.length > 0 ? `- 고칠 점(게이트 지적):\n${issues.map((issue) => `  · ${issue}`).join('\n')}` : ''}
 
 제목: ${selectedTitle || '(없음)'}
 ${(() => {
@@ -1360,6 +1365,8 @@ async function repairHeadingsBeforeFinalize(content: StructuredContent, source: 
       return;
     }
     const { repairSentenceStyleHeadings } = await import('./content/headingStyleRepair.js');
+    // [2026-09-03] 발행은 headings[] 가 아니라 bodyPlain 을 타이핑한다 — 고친 소제목을 본문에도 반영해야 독자에게 닿는다.
+    const titlesBeforeRepair = snapshotHeadingTitles(content as any);
     const repaired = await repairSentenceStyleHeadings(content, {
       mode: source.contentMode,
       keyword: getPrimaryKeywordFromSource(source),
@@ -1370,7 +1377,10 @@ async function repairHeadingsBeforeFinalize(content: StructuredContent, source: 
     // The finalize call sites are pinned verbatim by the V3 wiring contracts
     // (contentQualityV3EarlyReturnWiring / GenerationIntegration), so the repaired
     // headings are written onto the same object instead of re-binding the caller's const.
-    if (repaired !== content) content.headings = repaired.headings;
+    if (repaired !== content) {
+      content.headings = repaired.headings;
+      syncHeadingsWithBodyPlain(content as any, titlesBeforeRepair);
+    }
   } catch (error) {
     console.warn('[HeadingRepair] 보정 단계 예외 — 원본 유지:', (error as Error)?.message || error);
   }
@@ -1641,7 +1651,7 @@ export function finalizeStructuredContent(
   //   AI prompt(v2.10.389-392)만으론 모바일 친화 단락 불완전 → 사후 안전망 필요.
   //   v2.10.391 OFF 이유(영문 약어/소수점/이니셜 잘림)는 contentBodyTransforms.ts의
   //   정규식 한국어 limit (?<=[가-힣][.!?])로 해소.
-  finalContent = ensureContentParagraphBreaks(finalContent);
+  finalContent = ensureContentParagraphBreaks(finalContent, { maxSentences: homefeedParagraphSentences(source.contentMode) });
 
   // [v2.11.205] 모바일 꼬리 줄바꿈 보정(v2.11.204)은 여기서 하지 않는다.
   //   본문 원문을 문장 중간에서 끊으면 그 조각이 bodyPlain에 저장되고, 반자동 발행의
@@ -5720,10 +5730,13 @@ async function generateStructuredContentInternal(
   const submissionMode = options.submissionMode ?? DEFAULT_GENERATION_SUBMISSION_MODE;
   const allowAutomaticProviderRetry = shouldAllowAutomaticProviderRetry(submissionMode);
   const allowLegacyPostDraftLlm = shouldRunLegacyPostDraftLlm(promptVariant);
+  // [2026-09-04 사장님 결정] "한 번 생성에 완성도를 담아라" — 게이트가 미달이라고 하면 다시 쓰는 장치가 환경변수
+  //   opt-in(=== '1') 과 1회 제출 정책에 묶여 실제 앱에서는 한 번도 돌지 않았다(라이브 58점도 그냥 통과).
+  //   기본 ON 으로 바꾸고 opt-out(=== '0') 만 남긴다. 추가 유료 생성은 글당 최대 1회(QUALITY_ATTEMPT_LIMIT),
+  //   전송 오류·파싱 실패 재시도는 여전히 MAX_ATTEMPTS(1회 제출) 를 따른다.
   const allowPaidPostGenerationRepair =
     !isV3Prompt
-    && allowAutomaticProviderRetry
-    && process.env.CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR === '1'
+    && process.env.CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR !== '0'
     // 쇼핑커넥트는 품질 점수 때문에 두 번째 유료 생성을 호출하지 않는다.
     // 첫 호출에서 전환 계약을 적용하고 부족한 결과는 경고 후 발행한다.
     && source.contentMode !== 'affiliate';
@@ -6000,6 +6013,8 @@ async function generateStructuredContentInternal(
   const MAX_ATTEMPTS = isV3Prompt || !allowAutomaticProviderRetry
     ? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY.maxTopLevelRetries
     : configuredMaxAttempts;
+  // 품질 미달로 인한 재생성만 한 번 더 허용한다 — 전송·파싱 재시도(attempt < MAX_ATTEMPTS)와는 별개의 예산.
+  const QUALITY_ATTEMPT_LIMIT = allowPaidPostGenerationRepair ? MAX_ATTEMPTS + 1 : MAX_ATTEMPTS;
   const RETRY_DELAYS = [0, 1200, 2000, 3000, 4500, 6000, 8000];
   console.log(`[ContentGenerator] 품질 정책: tier=${costPolicy.modelTier}, costSaver=${costPolicy.costSaverOn ? 'ON' : 'OFF'}, same-engine retries=${MAX_ATTEMPTS}, reliability=${sameEngineReliabilityMinAttempts}, promptRepair=${promptRepairMinAttempts}, quality90=${qualityTargetMinAttempts}`);
 
@@ -6087,7 +6102,7 @@ async function generateStructuredContentInternal(
     });
   };
 
-  for (let attempt = 0; attempt <= MAX_ATTEMPTS; attempt += 1) {
+  for (let attempt = 0; attempt <= QUALITY_ATTEMPT_LIMIT; attempt += 1) {
     try {
       // ✅ [2026-04-03] 매 시도 전 abort 체크
       throwIfContentGenerationAborted(signal);
@@ -6672,7 +6687,7 @@ async function generateStructuredContentInternal(
       const isLastAttempt = attempt >= MAX_ATTEMPTS;
       const duplicateContentValidation = detectDuplicateContent(parsed.bodyPlain || '', parsed.headings, isLastAttempt);
 
-      if (allowPaidPostGenerationRepair && !duplicateContentValidation.valid && attempt < MAX_ATTEMPTS) {
+      if (allowPaidPostGenerationRepair && !duplicateContentValidation.valid && attempt < QUALITY_ATTEMPT_LIMIT) {
         const errs = duplicateContentValidation.errors.slice(0, 3).join(', ');
         console.warn(`[ContentGenerator] 중복/패턴 하드게이트 실패: ${errs}`);
         lastFailReason = `중복/패턴 감지: ${errs}`;
@@ -6691,7 +6706,7 @@ async function generateStructuredContentInternal(
         ];
 
         // ✅ 첫 번째 시도에서만 한 번 재시도 (속도와 품질 균형)
-        if (allowPaidPostGenerationRepair && attempt < MAX_ATTEMPTS) {
+        if (allowPaidPostGenerationRepair && attempt < QUALITY_ATTEMPT_LIMIT) {
           console.warn(`[ContentGenerator] 검증 실패 (1회 재시도): ${validationErrors.slice(0, 2).join(', ')}`);
           extraInstruction = prependValidationRetryInstruction(extraInstruction);
           continue; // 한 번만 재시도
@@ -6786,7 +6801,7 @@ async function generateStructuredContentInternal(
       if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && (mode === 'seo' || mode === 'mate')) {
         const seoKeyword = getPrimaryKeywordFromSource(source);
         const issues = computeSeoTitleCriticalIssues(parsed.selectedTitle, seoKeyword);
-        if (issues.length > 0 && attempt < MAX_ATTEMPTS) {
+        if (issues.length > 0 && attempt < QUALITY_ATTEMPT_LIMIT) {
           if (costPolicy.allowLlmTitlePatch) {
             try {
               const patch = await generateTitleOnlyPatch(
@@ -6837,7 +6852,7 @@ async function generateStructuredContentInternal(
       if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && mode === 'homefeed') {
         const hfKeyword = getPrimaryKeywordFromSource(source);
         const titleIssues = computeHomefeedTitleCriticalIssues(parsed.selectedTitle, hfKeyword);
-        if (titleIssues.length > 0 && attempt < MAX_ATTEMPTS) {
+        if (titleIssues.length > 0 && attempt < QUALITY_ATTEMPT_LIMIT) {
           if (costPolicy.allowLlmTitlePatch) {
             try {
               const patch = await generateTitleOnlyPatch(
@@ -6878,12 +6893,15 @@ async function generateStructuredContentInternal(
 
         // ✅ 비용 절감 모드 기본 ON — 도입부 재작성 비활성화 (사용자 명시 OFF 시에만 동작)
         const introIssues = computeHomefeedIntroCriticalIssues(parsed.introduction);
-        if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && introIssues.length > 0 && attempt < MAX_ATTEMPTS && costPolicy.allowLlmIntroPatch) {
+        // [2026-09-04] 도입부 패치는 짧은 호출이라 재생성 예산(attempt 상한)에 묶지 않는다 — 1차에서 고친 도입부가
+        //   Faithfulness 재생성으로 날아가고, 2차에서는 attempt 상한에 막혀 다시 못 고치던 구멍.
+        if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && introIssues.length > 0 && costPolicy.allowLlmIntroPatch) {
           const patch = await generateHomefeedIntroOnlyPatch(
             source,
             parsed,
             provider,
             options.agentProductPolicyContext,
+            introIssues,
           );
           if (patch?.introduction) {
             parsed.introduction = patch.introduction;
@@ -7019,7 +7037,7 @@ async function generateStructuredContentInternal(
           missingFeatures: customPromptAdherence.missingFeatures,
         };
 
-        if (allowPaidPostGenerationRepair && !customPromptAdherence.passed && attempt < MAX_ATTEMPTS) {
+        if (allowPaidPostGenerationRepair && !customPromptAdherence.passed && attempt < QUALITY_ATTEMPT_LIMIT) {
           lastFailReason = `사용자 프롬프트 미준수: ${customPromptAdherence.issues.join(' / ')}`;
           console.warn(`[PromptAdherence] 🔁 자동 보정 재시도: ${lastFailReason}`);
           extraInstruction = `${customPromptAdherence.retryInstruction}\n${extraInstruction}`;
@@ -7084,22 +7102,24 @@ async function generateStructuredContentInternal(
       // ✅ [v2.10.234 Phase 1b] 일반론 도망 감지 시 첫 시도(attempt === 0)에서 재생성 트리거
       //   재생성 시 prompt에 faithfulness 강화 추가 지시 + 일반론 어휘 명시 회피 요청.
       //   2회 이상 시도부터는 재생성 X (속도 vs 품질 균형 — 기존 검증 실패 재시도 패턴과 동일).
-      // ✅ [2026-05-31 S2] attempt===0 한정 → attempt < MAX_ATTEMPTS 로 확대.
+      // ✅ [2026-05-31 S2] attempt===0 한정 → attempt < QUALITY_ATTEMPT_LIMIT 로 확대.
       //   2회 이상 시도에서도 일반론 도망이 감지되면 재생성(여전히 MAX_ATTEMPTS로 bounded).
       //   기존엔 첫 시도만 잡아 재시도 중 다시 일반론이 나와도 통과되던 갭(분석 팀3) 차단.
-      if (allowPaidPostGenerationRepair && platitudeReportRef && platitudeReportRef.exceedsThreshold && attempt < MAX_ATTEMPTS) {
+      if (allowPaidPostGenerationRepair && platitudeReportRef && platitudeReportRef.exceedsThreshold && attempt < QUALITY_ATTEMPT_LIMIT) {
         console.warn(`[ContentGenerator] 🔄 Faithfulness 실패 — 재시도(attempt ${attempt}): ${platitudeReportRef.reason}`);
         lastFailReason = `Faithfulness 실패: ${platitudeReportRef.reason}`;
         const platitudeList = platitudeReportRef.matchedTriggers.slice(0, 5).join(', ');
+        const { extractDirectQuotes } = await import('./content/quoteCoverage.js');
         extraInstruction = prependFaithfulnessRetryInstruction({
           matchedTriggers: platitudeList,
           previousInstruction: extraInstruction,
+          quoteCandidates: extractDirectQuotes(source.rawText, 5),
         });
         continue;
       }
 
       // ✅ [Gap A — SPEC-REVIEW-001 확장] 재시도 소진 후에도 임계 초과(terminal).
-      //   여기 도달했다는 건 위 재시도 조건(attempt < MAX_ATTEMPTS)이 false라는 뜻 →
+      //   여기 도달했다는 건 위 재시도 조건(attempt < QUALITY_ATTEMPT_LIMIT)이 false라는 뜻 →
       //   더 이상 재생성 기회가 없는데도 Faithfulness가 미해결인 상태다.
       //   기존엔 quality.warnings 한 줄만 남기고 그대로 발행되던 갭.
       //   - 항상: aiDetectionRisk='high'로 격상 + 구조적 경고(UI 위험 표시가 정직해짐).
@@ -7157,7 +7177,7 @@ async function generateStructuredContentInternal(
         const verdict = await judgeSectionDistinctness(parsed, judgeCaller);
         if (verdict.judged && !verdict.distinct) {
           console.warn(`[DistinctnessJudge] 🔁 섹션 중복 감지: ${verdict.reason}`);
-          if (allowPaidPostGenerationRepair && attempt < MAX_ATTEMPTS) {
+          if (allowPaidPostGenerationRepair && attempt < QUALITY_ATTEMPT_LIMIT) {
             lastFailReason = `섹션 중복(시맨틱): ${verdict.reason}`;
             extraInstruction = prependSectionDistinctnessRetryInstruction(extraInstruction);
             continue;
@@ -7181,7 +7201,7 @@ async function generateStructuredContentInternal(
       }
 
       // ✅ [2026-02-01] 쇼핑커넥트(affiliate) 모드 제목 검증 및 패치
-      // ✅ [FIX] 모든 시도에서 제목 패치 적용 (attempt < MAX_ATTEMPTS 조건 제거)
+      // ✅ [FIX] 모든 시도에서 제목 패치 적용 (attempt < QUALITY_ATTEMPT_LIMIT 조건 제거)
       // ✅ [2026-02-04 FIX] isShoppingConnectMode도 체크하여 URL 기반 쇼핑커넥트에서도 제목 패치 작동
       if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && (isShoppingConnectMode || mode === 'affiliate')) {
         const titleIssues = computeAffiliateTitleCriticalIssues(parsed.selectedTitle, source);
@@ -7282,7 +7302,7 @@ async function generateStructuredContentInternal(
 
       // ✅ [Phase 7-B] Source Fidelity 자동 재시도 (한 호출에 1회만)
       // 길이 검증 *전에* — fidelity 미달이면 LLM에 누락 fact 명시해 재요청.
-      if (allowPaidPostGenerationRepair && !_fidelityRetryUsed && (source.url || (source.rawText ?? '').length >= 500) && attempt < MAX_ATTEMPTS) {
+      if (allowPaidPostGenerationRepair && !_fidelityRetryUsed && (source.url || (source.rawText ?? '').length >= 500) && attempt < QUALITY_ATTEMPT_LIMIT) {
         try {
           const { checkSourceFidelity, extractResultBody, buildFidelityRetryInstruction } = require('./content/sourceFidelityCheck');
           const _rb = extractResultBody(optimized as any);
@@ -7502,7 +7522,13 @@ async function generateStructuredContentInternal(
         try {
           const { evaluate: evaluateQuality } = require('./content/qualityEvaluator');
           _gateResult = evaluateQuality({
-            body: optimized.bodyPlain || '',
+            // [2026-09-04] 발행될 모양(문단 묶음 뒤)으로 평가한다 — 묶기 전 본문을 재서 "문단이 길어" 오탐이 났다.
+            // [2026-09-04] bodyPlain 은 소제목 본문만 합성한 것이라 도입부(introduction)가 없다 — 게이트가 "첫 화면" 을
+            //   첫 소제목 본문에서 찾았고, 도입부 패치를 두 번 해도 같은 지적이 났다. 독자가 보는 순서(도입부 → 본문)로 평가한다.
+            body: paragraphizeForEvaluation(
+              [String((optimized as any).introduction || '').trim(), optimized.bodyPlain || ''].filter(Boolean).join('\n\n'),
+              homefeedParagraphSentences(source.contentMode),
+            ),
             title: optimized.selectedTitle || '',
             headings: optimized.headings || [],
             rawText: source.rawText || '',
@@ -7576,7 +7602,7 @@ async function generateStructuredContentInternal(
           && _gateResult
           && (_gateResult.decision === 'regenerate' || _quality90Assessment?.miss)
           && !_qualityGateRetryUsed
-          && attempt < MAX_ATTEMPTS
+          && attempt < QUALITY_ATTEMPT_LIMIT
         ) {
           _qualityGateRetryUsed = true;
           const _gateDirective = _quality90Assessment?.miss
@@ -7686,7 +7712,7 @@ async function generateStructuredContentInternal(
           allowPaidPostGenerationRepair
           && _quality90Assessment?.miss
           && !_quality90FollowupRetryUsed
-          && attempt < MAX_ATTEMPTS
+          && attempt < QUALITY_ATTEMPT_LIMIT
         ) {
           _quality90FollowupRetryUsed = true;
           console.warn(`[QualityGate90] 🔁 patch 후에도 90점 미달 — 추가 전체 재시도 (${_quality90Assessment.reasons.join(', ')})`);
@@ -7694,7 +7720,7 @@ async function generateStructuredContentInternal(
           continue;
         }
 
-        if (allowPaidPostGenerationRepair && _quality90Assessment?.miss && attempt < MAX_ATTEMPTS) {
+        if (allowPaidPostGenerationRepair && _quality90Assessment?.miss && attempt < QUALITY_ATTEMPT_LIMIT) {
           console.warn(`[QualityGate90] 🔁 90점 미달 결과를 반환하지 않고 남은 동일 엔진 시도를 사용합니다 (${attempt + 1}/${MAX_ATTEMPTS + 1})`);
           extraInstruction = `${_quality90Assessment.directive}\n${extraInstruction}`;
           continue;
@@ -7829,7 +7855,7 @@ async function generateStructuredContentInternal(
             aiExperienceOptIn: source.aiExperienceGeneration === true,
           });
 
-          if (allowPaidPostGenerationRepair && authenticity.score < 85 && !_affiliateAuthenticityRetryUsed && attempt < MAX_ATTEMPTS) {
+          if (allowPaidPostGenerationRepair && authenticity.score < 85 && !_affiliateAuthenticityRetryUsed && attempt < QUALITY_ATTEMPT_LIMIT) {
             _affiliateAuthenticityRetryUsed = true;
             extraInstruction = `${authenticity.retryDirective}\n${extraInstruction}`;
             lastFailReason = `쇼핑 진정성 ${authenticity.score}/100: ${authenticity.issues.map(issue => issue.code).join(', ')}`;
@@ -7874,7 +7900,7 @@ async function generateStructuredContentInternal(
           const validation = validateShoppingConnectContent(finalStructuredContent, validationMinChars);
           const shoppingQualityDisposition = resolveShoppingConnectQualityDisposition(validation.score);
           const shoppingQualityPublishable = shoppingQualityDisposition.qualityFloorReached;
-          if (allowPaidPostGenerationRepair && !shoppingQualityPublishable && !_shoppingValidationRetryUsed && attempt < MAX_ATTEMPTS) {
+          if (allowPaidPostGenerationRepair && !shoppingQualityPublishable && !_shoppingValidationRetryUsed && attempt < QUALITY_ATTEMPT_LIMIT) {
             _shoppingValidationRetryUsed = true;
             const corrections = validation.feedback
               .filter(message => message.startsWith('❌') || message.startsWith('⚠️'))
@@ -7946,7 +7972,7 @@ async function generateStructuredContentInternal(
       const minAcceptableChars = warningMinChars; // 50% 기준
       if (plainLength >= minAcceptableChars) {
         if (isQuality90Mode(generationQualityMode)) {
-          if (allowPaidPostGenerationRepair && attempt < MAX_ATTEMPTS) {
+          if (allowPaidPostGenerationRepair && attempt < QUALITY_ATTEMPT_LIMIT) {
             lastFailReason = `90점 품질 모드 본문 길이 미달: ${plainLength}자 / 최소 검증선 ${validationMinChars}자`;
             extraInstruction = buildContentExpansionRetryInstruction({
               plainLength,

@@ -96,10 +96,12 @@ export function resolveContentGenerationCostPolicy(
   // opt-in so a usable first draft is never discarded by a score-only gate.
   // [v2.11.133] The env var stays authoritative when set; otherwise the
   // app-setting opt-in (allowQualityRepairPass) enables the repair pass.
+  // [2026-09-04 사장님 결정] "한 번 생성에 완성도를" — 소보정(제목·도입부·자기비평)은 기본 ON, 설정에서 끄면(false) 또는
+  //   env '0' 이면 OFF. 통과 글은 소보정이 발화하지 않아 추가 비용이 없다.
   const patchOverride = env.CONTENT_ALLOW_EXTRA_LLM_PATCHES;
   const allowLocalizedRepair = patchOverride != null
     ? patchOverride === '1'
-    : config?.allowQualityRepairPass === true;
+    : config?.allowQualityRepairPass !== false;
 
   return {
     costSaverOn,

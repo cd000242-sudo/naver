@@ -73,21 +73,32 @@ describe('Gemini cost optimizer policy', () => {
   it('keeps localized paid repair disabled by default for every model tier', () => {
     const valuePolicy = resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'openai-gpt4o-mini' });
     expect(valuePolicy.modelTier).toBe('value');
-    expect(valuePolicy.allowLlmTitlePatch).toBe(false);
-    expect(valuePolicy.allowLlmIntroPatch).toBe(false);
-    expect(valuePolicy.allowQualityGateSelfCritique).toBe(false);
+    expect(valuePolicy.allowLlmTitlePatch).toBe(true);
+    expect(valuePolicy.allowLlmIntroPatch).toBe(true);
+    expect(valuePolicy.allowQualityGateSelfCritique).toBe(true);
 
     const balancedPolicy = resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'claude-sonnet' });
     expect(balancedPolicy.modelTier).toBe('balanced');
-    expect(balancedPolicy.allowLlmTitlePatch).toBe(false);
-    expect(balancedPolicy.allowLlmIntroPatch).toBe(false);
-    expect(balancedPolicy.allowQualityGateSelfCritique).toBe(false);
+    expect(balancedPolicy.allowLlmTitlePatch).toBe(true);
+    expect(balancedPolicy.allowLlmIntroPatch).toBe(true);
+    expect(balancedPolicy.allowQualityGateSelfCritique).toBe(true);
 
     const premiumPolicy = resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'openai-gpt4o' });
     expect(premiumPolicy.modelTier).toBe('premium');
-    expect(premiumPolicy.allowLlmTitlePatch).toBe(false);
-    expect(premiumPolicy.allowLlmIntroPatch).toBe(false);
-    expect(premiumPolicy.allowQualityGateSelfCritique).toBe(false);
+    expect(premiumPolicy.allowLlmTitlePatch).toBe(true);
+    expect(premiumPolicy.allowLlmIntroPatch).toBe(true);
+    expect(premiumPolicy.allowQualityGateSelfCritique).toBe(true);
+  });
+
+  // [2026-09-04 사장님 결정] 소보정은 기본 ON — 위 기본값 기대치가 true 로 바뀐 이유. 설정에서 끄면 OFF.
+  it('turns localized repair off only when the app setting is explicitly false', () => {
+    const offPolicy = resolveContentGenerationCostPolicy(
+      { primaryGeminiTextModel: 'openai-gpt4o-mini', allowQualityRepairPass: false },
+      {},
+    );
+    expect(offPolicy.allowLlmTitlePatch).toBe(false);
+    expect(offPolicy.allowLlmIntroPatch).toBe(false);
+    expect(offPolicy.allowQualityGateSelfCritique).toBe(false);
   });
 
   it('allows operators to explicitly opt in to extra localized repair', () => {
@@ -115,11 +126,12 @@ describe('Gemini cost optimizer policy', () => {
     expect(policy.maxAttempts).toBe(0);
   });
 
-  it('keeps repair off by default and lets the env var override the app setting', () => {
+  // [2026-09-04 사장님 결정] 기본 ON — env 는 여전히 설정보다 우선한다.
+  it('keeps repair on by default and lets the env var override the app setting', () => {
     expect(resolveContentGenerationCostPolicy(
       { primaryGeminiTextModel: 'openai-gpt4o-mini' },
       {},
-    ).allowQualityGateSelfCritique).toBe(false);
+    ).allowQualityGateSelfCritique).toBe(true);
 
     expect(resolveContentGenerationCostPolicy(
       { primaryGeminiTextModel: 'openai-gpt4o-mini', allowQualityRepairPass: true },

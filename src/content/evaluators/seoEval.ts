@@ -7,6 +7,7 @@
 import type { SubScore, EvaluationInput } from '../qualityEvaluator';
 import { evaluateOfficialExposure } from '../officialExposureRubric';
 import { auditEvidenceIntegrity, collectUnsupportedConcreteClaims } from '../evidenceIntegrity';
+import { QUOTE_COVERAGE_ISSUE, QUOTE_COVERAGE_SUGGESTION, assessQuoteCoverage } from '../quoteCoverage.js';
 
 const ANSWER_CUES = /핵심|먼저|기준|조건|순서|방법|차이|이유|확인|주의|가능|필요|해당|결론|key answer|short answer|first check|criterion|condition|order|method|difference|reason|caution|conclusion/i;
 const CAUTIOUS_CUES = /확인이 필요|자료 기준|경우에 따라|조건에 따라|다를 수|단정하기 어렵|공식.*확인|check the official|depending on|may differ|source does not confirm/i;
@@ -141,6 +142,15 @@ export function evaluateSeo(input: EvaluationInput): SubScore {
   const structured = /^\s*(?:[-*]|\d+[.)])\s+/m.test(body) || /\|.+\|/.test(body) || /체크|순서|기준|주의/.test(body);
   details.utility = structured ? 5 : 2;
   total += details.utility;
+
+  // [2026-09-04 사장님 결정] 재료에 당사자 발언이 있는데 본문에 직접 인용이 0이면 감점 — 재작성 지시문에 실린다.
+  const quoteCoverage = assessQuoteCoverage(input.groundingText || input.rawText || '', body);
+  details.quoteCoverage = quoteCoverage.bodyQuotes;
+  if (quoteCoverage.missing) {
+    total -= 5;
+    issues.push(QUOTE_COVERAGE_ISSUE);
+    suggestions.push(QUOTE_COVERAGE_SUGGESTION);
+  }
 
   const intentFirstScore = Math.round(Math.max(0, Math.min(100, total)));
   const officialExposure = evaluateOfficialExposure(input);

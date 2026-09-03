@@ -133,8 +133,8 @@ describe('Content Quality V3 production wiring', () => {
     expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*allowLegacyPostDraftLlm\s*&&\s*_gateResult[\s\S]{0,900}selfCritiqueAndRewrite/);
 
     expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_gateResult\s*&& \(_gateResult\.decision === 'regenerate' \|\| _quality90Assessment\?\.miss\)/);
-    expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_quality90Assessment\?\.miss\s*&& !_quality90FollowupRetryUsed\s*&& attempt < MAX_ATTEMPTS/);
-    expect(generator).toMatch(/if \(allowPaidPostGenerationRepair && _quality90Assessment\?\.miss && attempt < MAX_ATTEMPTS\)/);
+    expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_quality90Assessment\?\.miss\s*&& !_quality90FollowupRetryUsed\s*&& attempt < QUALITY_ATTEMPT_LIMIT/);
+    expect(generator).toMatch(/if \(allowPaidPostGenerationRepair && _quality90Assessment\?\.miss && attempt < QUALITY_ATTEMPT_LIMIT\)/);
   });
 
   it('keeps every semantic deterministic post-draft mutator behind the exact legacy policy', () => {

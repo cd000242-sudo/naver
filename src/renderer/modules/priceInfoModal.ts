@@ -1226,7 +1226,7 @@ export async function initPriceInfoModal(): Promise<void> {
     // [v2.11.133] 품질 보정 패스 토글 로드 — 기본 OFF (opt-in, 저비용 2-pass 보정)
     try {
       const repairEl = document.getElementById('quality-repair-pass') as HTMLInputElement | null;
-      if (repairEl) repairEl.checked = (config as any).allowQualityRepairPass === true;
+      if (repairEl) repairEl.checked = (config as any).allowQualityRepairPass !== false; // [2026-09-04] 기본 ON
     } catch (e) {
       console.warn('[priceInfoModal] 품질 보정 패스 토글 로드 실패:', e);
     }

@@ -8,7 +8,7 @@
 import type { StructuredContent } from './contentGenerator';
 import { removeEmojis, removeInternalStructureMarkersFromText } from './contentTextHelpers';
 import { balanceMobileLineBreaks } from './content/mobileLineBalance';
-import { enforceSentenceParagraphs, paragraphGroupSizes } from './content/sentenceParagraphs';
+import { DEFAULT_MAX_SENTENCES_PER_PARAGRAPH, enforceSentenceParagraphs, paragraphGroupSizes } from './content/sentenceParagraphs';
 
 export { removeInternalStructureMarkersFromText } from './contentTextHelpers';
 
@@ -198,7 +198,7 @@ function splitProseAndListBlocks(text: string): ProseOrListBlock[] {
   }, []);
 }
 
-function ensureParagraphBreaks(text: string): string {
+function ensureParagraphBreaks(text: string, maxSentences: number = DEFAULT_MAX_SENTENCES_PER_PARAGRAPH): string {
   if (!text || text.length < 200) return text;
   // [2026-09-03 자체 실행 비평] 표 행("| 출시연월 | … 표기됩니다. |")도 문장으로 잘려 "표기됩니다."+빈 줄+"|" 로 깨졌다.
   //   표가 든 덩어리는 문단 나누기를 건너뛴다 — 표는 빈 줄 두 개로 이미 제 자리에 있고, 행은 쪼개면 안 된다.
@@ -207,7 +207,7 @@ function ensureParagraphBreaks(text: string): string {
   if (!text.includes('\n\n') && text.includes('\n') && text.split('\n').some((line) => LIST_LINE_RE.test(line))) {
     const blocks = splitProseAndListBlocks(text);
     if (blocks.length > 1 || blocks[0]?.list) {
-      return blocks.map((block) => (block.list ? block.text : ensureParagraphBreaks(block.text))).join('\n\n');
+      return blocks.map((block) => (block.list ? block.text : ensureParagraphBreaks(block.text, maxSentences))).join('\n\n');
     }
   }
 
@@ -215,7 +215,7 @@ function ensureParagraphBreaks(text: string): string {
   if (text.includes('\n\n')) {
     const paragraphs = text.split('\n\n');
     const fixed = paragraphs.map(p => {
-      const recursed = ensureParagraphBreaks(p.trim());
+      const recursed = ensureParagraphBreaks(p.trim(), maxSentences);
       // [v2.10.393b] 분할 후에도 한 뭉텅이로 남아있으면 매 문장 \n 적용
       return recursed.includes('\n') ? recursed : applyPerSentenceLineBreaks(recursed);
     });
@@ -249,7 +249,7 @@ function ensureParagraphBreaks(text: string): string {
   const result: string[] = [];
   // [2026-09-02 사장님 결정] 랜덤 1~3 묶음은 마지막 문장을 혼자 남겼다(실측 7문장 → 2+2+2+1).
   //   후처리기(sentenceParagraphs)와 같은 규칙으로 2~3문장씩 고르게 나눈다 — 세 자리가 같은 값을 말해야 한다.
-  const sizes = paragraphGroupSizes(sentences.length);
+  const sizes = paragraphGroupSizes(sentences.length, maxSentences);
   let cursor = 0;
   for (const size of sizes) {
     result.push(sentences.slice(cursor, cursor + size).join(' ')); // [2026-09-02] 문단 안은 이어 쓴다 — 흐름
@@ -263,7 +263,28 @@ function ensureParagraphBreaks(text: string): string {
   return fixed;
 }
 
-export function ensureContentParagraphBreaks(content: StructuredContent): StructuredContent {
+/**
+ * [2026-09-03 사장님 결정] 홈판은 문단을 1~2문장으로 — 노출 글 40편 실측이 문단 평균 36자였고, 홈판 평가기도
+ * "문단이 길어 모바일에서 한 판단씩 읽기 어려움" 을 짚었다. 검색 글은 2~3문장 그대로.
+ */
+export function homefeedParagraphSentences(contentMode: unknown): number {
+  return String(contentMode || '') === 'homefeed' ? 2 : DEFAULT_MAX_SENTENCES_PER_PARAGRAPH;
+}
+
+/**
+ * [2026-09-04] The quality gate used to score `bodyPlain` before paragraph grouping ran at finalize,
+ * so "문단이 길어" fired on text the reader never sees (published paragraphs were 2~3 sentences).
+ * Evaluate the body in the shape it will be published.
+ */
+export function paragraphizeForEvaluation(text: string, maxSentences: number = DEFAULT_MAX_SENTENCES_PER_PARAGRAPH): string {
+  const max = Math.max(1, Math.floor(maxSentences));
+  return enforceSentenceParagraphs(ensureParagraphBreaks(String(text || ''), max), max);
+}
+
+export function ensureContentParagraphBreaks(
+  content: StructuredContent,
+  options: { readonly maxSentences?: number } = {},
+): StructuredContent {
   if (!content) return content;
 
   /*
@@ -280,7 +301,8 @@ export function ensureContentParagraphBreaks(content: StructuredContent): Struct
    * 기존 규칙을 먼저 돌린 뒤 마지막에 얹는다. 표 · 번호 목록 · 소수점 · 말줄임표 ·
    * 소제목 줄은 enforceSentenceParagraphs 가 건너뛴다.
    */
-  const withBreaks = (text: string): string => enforceSentenceParagraphs(ensureParagraphBreaks(text));
+  const maxSentences = Math.max(1, Math.floor(options.maxSentences ?? DEFAULT_MAX_SENTENCES_PER_PARAGRAPH));
+  const withBreaks = (text: string): string => enforceSentenceParagraphs(ensureParagraphBreaks(text, maxSentences), maxSentences);
 
   if (content.bodyPlain) {
     content.bodyPlain = withBreaks(content.bodyPlain);

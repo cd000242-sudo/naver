@@ -106,7 +106,8 @@ describe('죽은 제목 프롬프트 트리에 손대지 않았음을 기록한�
     const fnAt = gen.lastIndexOf('async function generateTitleOnlyPatch', loaderAt);
     expect(fnAt).toBeGreaterThan(-1);
     expect(loaderAt).toBeGreaterThan(fnAt);
-    expect(gen).toMatch(/CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR === '1'/u);
+    // [2026-09-04] 유료 보수는 기본 ON, opt-out 은 '0' — 게이트 자체는 그대로 있다.
+    expect(gen).toMatch(/CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR !== '0'/u);
   });
 
   it('살아 있는 제목 규칙은 situationTitleContract 가 소유한다', () => {

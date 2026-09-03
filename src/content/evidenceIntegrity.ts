@@ -40,8 +40,16 @@ function meaningful(value: unknown): string {
   return text.length >= 8 ? text : '';
 }
 
+/** [2026-09-04] "1546만5천원"(자료) 과 "1546만5000원"(본문) 이 다른 주장으로 갈려 안전 점수를 35 로 끌어내렸다 — 천 단위 표기를 맞춘다. */
 function normalizeClaim(value: string): string {
-  return value.toLowerCase().replace(/[,\s]/g, '');
+  return value.toLowerCase().replace(/[,\s]/g, '').replace(/(\d+)천원/g, (_m, n: string) => `${n}000원`);
+}
+
+/** A bare year ("2026년") is context, not a fabricated figure, when the year appears anywhere in the material. */
+function isYearGroundedInText(claim: string, groundingText: string): boolean {
+  const match = /^(\d{4})\s*년$/.exec(claim.trim());
+  // 올해 연도는 앱이 프롬프트에 오늘 날짜를 넣어 주므로 자료에 없어도 조립된 문맥이다("2026년 9월 2일" 의 2026).
+  return !!match && (groundingText.includes(match[1]) || Number(match[1]) === new Date().getFullYear());
 }
 
 function unique(values: readonly string[]): string[] {
@@ -110,8 +118,9 @@ export function collectUnsupportedConcreteClaims(text: string, groundingText: st
   const groundedClaims = new Set(
     unique(String(groundingText || '').match(CONCRETE_CLAIM_PATTERN) || []).map(normalizeClaim),
   );
+  const grounding = String(groundingText || '');
   return claims
-    .filter((claim) => !groundedClaims.has(normalizeClaim(claim)))
+    .filter((claim) => !groundedClaims.has(normalizeClaim(claim)) && !isYearGroundedInText(claim, grounding))
     .slice(0, 8);
 }
 

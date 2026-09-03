@@ -7,10 +7,11 @@
 import type { SubScore, EvaluationInput } from '../qualityEvaluator';
 import { evaluateOfficialExposure } from '../officialExposureRubric';
 import { auditEvidenceIntegrity } from '../evidenceIntegrity';
+import { QUOTE_COVERAGE_ISSUE, QUOTE_COVERAGE_SUGGESTION, assessQuoteCoverage } from '../quoteCoverage.js';
 
 const CLICKBAIT = /충격|경악|소름|대박|레전드|폭로|진실\s*공개|알고보니|난리|실화|100%|무조건/gi;
-const VALUE_CUES = /확인|기준|순서|차이|이유|체크|주의|비교|방법|줄일|피할|고르는|판단|check|criterion|order|difference|reason|caution|compare|method|avoid|decision|useful clue|next action/i;
-const SITUATION_CUES = /처음|먼저|버튼|신청|고민|헷갈|불편|놓치|다시|막히|필요|찾을|때|하면|first|before|form|application|delay|mistake|miss|need|when|again|blocking/i;
+export const VALUE_CUES = /확인|기준|순서|차이|이유|체크|주의|비교|방법|줄일|피할|고르는|판단|check|criterion|order|difference|reason|caution|compare|method|avoid|decision|useful clue|next action/i;
+export const SITUATION_CUES = /처음|먼저|버튼|신청|고민|헷갈|불편|놓치|다시|막히|필요|찾을|때|하면|first|before|form|application|delay|mistake|miss|need|when|again|blocking/i;
 const EMOTION_CUES = /걱정|답답|당황|헷갈|다행|아쉽|불편|편하|놀라|기쁘|속상|부담|frustrating|worried|confused|relieved|uncomfortable/gi;
 
 function titleLengthFits(title: string): boolean {
@@ -134,6 +135,15 @@ export function evaluateHomefeed(input: EvaluationInput): SubScore {
   details.utility = hasStructuredValue ? 5 : 1;
   total += details.utility;
   if (!hasStructuredValue) suggestions.push('독자가 다시 볼 수 있는 기준·주의점·짧은 체크리스트 중 하나 추가');
+
+  // [2026-09-04 사장님 결정] 재료에 당사자 발언이 있는데 본문에 직접 인용이 0이면 감점 — 재작성 지시문에 실린다.
+  const quoteCoverage = assessQuoteCoverage(input.groundingText || input.rawText || '', body);
+  details.quoteCoverage = quoteCoverage.bodyQuotes;
+  if (quoteCoverage.missing) {
+    total -= 5;
+    issues.push(QUOTE_COVERAGE_ISSUE);
+    suggestions.push(QUOTE_COVERAGE_SUGGESTION);
+  }
 
   const legacyScore = Math.round(Math.max(0, Math.min(100, total)));
   const officialExposure = evaluateOfficialExposure(input);
