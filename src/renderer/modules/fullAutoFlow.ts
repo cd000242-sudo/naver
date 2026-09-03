@@ -46,7 +46,7 @@ exports.generateAIImagesForHeadings = generateAIImagesForHeadings;
 exports.executeBlogPublishing = executeBlogPublishing;
 const FULL_AUTO_CONTENT_GENERATION_TIMEOUT_MS = 360000;
 // [2026-09-03] Same engine-aware cap as contentGeneration.ts — see the note there.
-const FULL_AUTO_AGENT_CONTENT_GENERATION_TIMEOUT_MS = 900000;
+const FULL_AUTO_AGENT_CONTENT_GENERATION_TIMEOUT_MS = 1800000; // [2026-09-04] 재생성 1회 포함 30분
 const resolveFullAutoContentGenerationTimeoutMs = (generator: unknown): number =>
   (isAgentEngine(String(generator || '')) ? FULL_AUTO_AGENT_CONTENT_GENERATION_TIMEOUT_MS : FULL_AUTO_CONTENT_GENERATION_TIMEOUT_MS);
 const FULL_AUTO_CONTENT_GENERATION_RETRY_COUNT = 0;

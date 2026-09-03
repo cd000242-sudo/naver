@@ -116,7 +116,8 @@ const CONTENT_GENERATION_TIMEOUT_MS = 360000;
 //   reasoning loop over a ~65K-char prompt; a 12K-char probe answered in 144s, the real prompt takes
 //   longer. The 6-minute cap aborted every such post before it finished (twice, retry included).
 //   API engines keep the 6-minute cap.
-const AGENT_CONTENT_GENERATION_TIMEOUT_MS = 900000;
+// [2026-09-04 사장님 결정] 품질 미달 시 재생성 1회가 붙으면 Claude Code 는 2편 분량(최대 9분×2)이라 15분을 넘긴다 → 30분.
+const AGENT_CONTENT_GENERATION_TIMEOUT_MS = 1800000;
 const resolveContentGenerationTimeoutMs = (generator: string): number =>
   (isAgentEngine(String(generator || '')) ? AGENT_CONTENT_GENERATION_TIMEOUT_MS : CONTENT_GENERATION_TIMEOUT_MS);
 const CONTENT_GENERATION_RETRY_COUNT = 0;
