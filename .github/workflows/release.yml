@@ -40,31 +40,10 @@ jobs:
             exit 1
           fi
 
-      - name: Generate release highlights
-        id: highlights
-        env:
-          TAG_NAME: ${{ github.ref_name }}
-        run: |
-          TAG_VERSION="${TAG_NAME#v}"
-          cat > release_body.md <<EOF
-          ## Better Life Naver ${TAG_VERSION}
-
-          ### 이번 업데이트 핵심
-          - Mac 환경에서 URL 글생성이 멈출 때 원인을 콘솔 로그로 바로 확인할 수 있게 개선
-          - OpenAI 글생성 요청을 더 빠르게 중단·진단하도록 안정화
-          - SEO, 홈판, 반자동, 풀오토, 다중계정 발행에서 해시태그와 이전글 엮기 전달 보강
-
-          ### 사용자에게 보이는 변화
-          - 글생성이 실패했을 때 “막연한 시간 초과” 대신 네트워크, 인증, 모델 접근, 서버 응답 단계가 로그에 남습니다.
-          - 이전글 엮기와 해시태그가 발행 단계에서 빠지는 문제를 줄였습니다.
-          - Windows와 macOS 릴리스 파일을 같은 버전으로 배포합니다.
-
-          ### Notes
-          - macOS 파일은 GitHub Actions의 macOS 러너에서 별도로 빌드되어 같은 릴리스에 업로드됩니다.
-          EOF
-
+      # [2026-09-03 v2.11.219 실측] 여기서 하드코딩된 '이번 업데이트 핵심'(2.11.9x 시절 문구)으로 본문을 덮어써서,
+      #   scripts/upload-release.js 가 tmp/release-notes-v<버전>.md 로 붙인 진짜 노트가 7초 뒤 옛 문구로 바뀌었다.
+      #   body 를 주지 않으면 softprops 는 기존 본문을 건드리지 않는다 — 노트는 로컬 업로더(또는 gh release edit)가 책임진다.
       - name: Create GitHub Release
         uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2
         with:
-          body_path: release_body.md
-          generate_release_notes: true
+          generate_release_notes: false
