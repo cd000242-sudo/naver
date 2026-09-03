@@ -98,6 +98,19 @@ export const ISSUE_TYPE_LABEL: Record<string, string> = {
     policy: '정책', incident: '사건', entertainment: '연예', fresh: '이슈',
 };
 
+/**
+ * 행의 배열 필드를 배열로 맞춘다 — 카드(BoardCardHead)는 `row.evidence.map` 을 그대로
+ * 부른다. 발행 스키마가 바뀌기 전 회차의 행이 48시간 이월로 섞여 오면(2026-09-03
+ * 실사고: 28행에 evidence 없음) 탭 전체가 죽었다. 읽는 쪽 경계에서 막는다.
+ */
+function normalizeRow(row: IssueBoardRow): IssueBoardRow {
+    return {
+        ...row,
+        reasons: Array.isArray(row.reasons) ? row.reasons : [],
+        evidence: Array.isArray(row.evidence) ? row.evidence : [],
+    };
+}
+
 /** 발행본을 읽는다. 없거나 깨졌으면 null — 화면이 '아직 없음'으로 적는다. */
 export async function fetchIssueBoard(): Promise<IssueBoard | null> {
     try {
@@ -106,7 +119,7 @@ export async function fetchIssueBoard(): Promise<IssueBoard | null> {
         const data = await response.json();
         return {
             ...data,
-            rows: Array.isArray(data?.rows) ? data.rows : [],
+            rows: Array.isArray(data?.rows) ? data.rows.map(normalizeRow) : [],
             issues: Array.isArray(data?.issues) ? data.issues : [],
         };
     } catch {
