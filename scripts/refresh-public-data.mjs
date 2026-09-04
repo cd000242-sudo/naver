@@ -723,6 +723,54 @@ function cleanNewsValue(value, limit = 220) {
   return decodeHtml(value).replace(/\s*\|\s*[^|]{1,40}$/u, '').slice(0, limit).trim();
 }
 
+/**
+ * 인용할 문장 고르기 — 글자 수로 자르지 않는다.
+ *
+ * 왜(사장님 지적 2026-09-05 "기사를 인용해서 중요한 문장만 들고오면 되. 전부
+ * 들고오려하니까 글이 중간에 ...으로 짤리자나"): 예전에는 `.slice(0, 260)` 으로 잘라서
+ * "…곳곳에서 탄성이 터져 나왔습" 처럼 **단어 한가운데**가 끊겼다. 실제 발행본에
+ * 그런 문장이 153건 있었다.
+ *
+ * 대신 문장 단위로 끊고, **완결된 문장만** 예산 안에서 이어 붙인다. 검색어가 들어간
+ * 문장을 먼저 놓는다 — 같은 기사라도 검색어와 상관없는 문단이 섞여 오기 때문이다.
+ * 완결 문장이 하나도 없으면 빈 문자열이고, 부르는 쪽이 제목으로 간다.
+ */
+function pickQuotedSentences(value, keyword = '', maxChars = 260, maxSentences = 2) {
+  const text = String(value || '').replace(/\s+/g, ' ').trim();
+  if (!text) return '';
+  // 한국어 종결( ~다/~요/~죠 뒤 공백 )과 문장부호로 끊는다.
+  const pieces = text
+    .split(/(?<=[.!?])\s+|(?<=[다요죠])\s+(?=[가-힣A-Z0-9‘“'"(])/u)
+    .map((piece) => piece.trim())
+    .filter(Boolean);
+  const complete = pieces.filter((piece) => (
+    piece.length >= 12
+    // 끝이 잘린 조각은 버린다 — 종결부호나 한국어 종결어미로 끝나야 한다.
+    && /(?:[.!?]|[다요음함됨죠네까])["”'’)\]]*$/u.test(piece)
+    && !/(?:\.{2,}|…)$/u.test(piece)
+  ));
+  if (complete.length === 0) return '';
+  const tokens = String(keyword || '')
+    .split(/\s+/)
+    .map((token) => token.trim())
+    .filter((token) => token.length >= 2);
+  const hits = tokens.length
+    ? complete.filter((piece) => tokens.some((token) => piece.includes(token)))
+    : [];
+  const ordered = hits.length ? hits.concat(complete.filter((piece) => !hits.includes(piece))) : complete;
+
+  const picked = [];
+  let used = 0;
+  for (const piece of ordered) {
+    if (picked.length >= maxSentences) break;
+    // 첫 문장은 예산을 넘겨도 통째로 쓴다 — 반 토막보다 긴 완결 문장이 낫다.
+    if (picked.length > 0 && used + piece.length + 1 > maxChars) break;
+    picked.push(piece);
+    used += piece.length + 1;
+  }
+  return picked.join(' ').trim();
+}
+
 function safeHttpUrl(value) {
   const url = String(value || '').trim();
   return /^https?:\/\//i.test(url) ? url : '';
@@ -772,7 +820,7 @@ function parseNaverNewsResults(html) {
       const url = safeHttpUrl(props.contentHref || props.titleHref);
       if (!title || !url || seen.has(url)) continue;
       seen.add(url);
-      const excerpt = cleanNewsValue(props.content, 260) || title;
+      const excerpt = pickQuotedSentences(decodeHtml(props.content), title, 260) || title;
       const press = cleanNewsValue(props.sourceProfile?.title, 60) || new URL(url).hostname;
       const image = safeHttpUrl(props.imageSrc);
       rows.push({ title, excerpt, url, press, image });
@@ -811,7 +859,10 @@ function cleanArticleExcerpt(value, fallback) {
     .replace(/(?:무단\s*전재|재배포\s*금지)[\s\S]*$/u, '')
     .replace(/\s+/g, ' ')
     .trim();
-  return (text || cleanNewsValue(fallback, 420)).slice(0, 420).trim();
+  // 글자 수로 자르지 않는다 — 완결 문장만 남긴다(pickQuotedSentences 주석 참조).
+  return pickQuotedSentences(text, '', 420, 3)
+    || pickQuotedSentences(decodeHtml(fallback), '', 420, 3)
+    || '';
 }
 
 async function extractFirstArticleWithPlaywright(context, keyword, fallbackArticle) {

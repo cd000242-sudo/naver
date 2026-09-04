@@ -113,6 +113,41 @@ export function inspectSnapshot(data, options = {}) {
     results.push(ok('signals.links', '브리프 출처 링크', `출처 없음 ${noLink}건 · 추천 제목 없음 ${noTitle}건`));
   }
 
+  /*
+   * 문장이 한가운데서 끊겼는지. 예전에는 요약을 글자 수로 잘라(.slice(0, 260))
+   * "…곳곳에서 탄성이 터져 나왔습" 처럼 단어 중간이 날아갔다 — 발행본에 153건
+   * 있었다(2026-09-05 실측). 인용은 완결 문장만 쓰기로 했으니 여기서 지킨다.
+   */
+  let cutFacts = 0;
+  let totalFacts = 0;
+  const cutSample = [];
+  for (const lane of lanes.values()) {
+    for (const item of lane.items || []) {
+      for (const fact of (item.insight?.facts || [])) {
+        const text = String(fact?.text || '').trim();
+        if (!text) continue;
+        totalFacts += 1;
+        const endsClean = /(?:[.!?]|[다요음함됨죠네까])["”'’)\]]*$/u.test(text) && !/(?:\.{2,}|…)$/u.test(text);
+        if (!endsClean) {
+          cutFacts += 1;
+          if (cutSample.length < 2) cutSample.push(text.slice(-24));
+        }
+      }
+    }
+  }
+  if (totalFacts === 0) {
+    results.push(skip('signals.fact-cut', '인용 문장 완결', '사실 문장이 없어 검사할 것이 없다'));
+  } else if (cutFacts > 0) {
+    results.push(fail(
+      'signals.fact-cut',
+      '인용 문장 완결',
+      `${cutFacts}/${totalFacts}건이 문장 중간에서 끊겼다 (예: …${cutSample.join(' / …')})`,
+      '글자 수로 자르지 말고 완결 문장만 인용한다(pickQuotedSentences)',
+    ));
+  } else {
+    results.push(ok('signals.fact-cut', '인용 문장 완결', `${totalFacts}건 모두 완결 문장`));
+  }
+
   const unknown = [...lanes.keys()].filter((id) => !REQUIRED_LANES.some((r) => r.id === id));
   if (unknown.length > 0) results.push(warn('signals.unknown-lane', '알 수 없는 레인', unknown.join(', ')));
 

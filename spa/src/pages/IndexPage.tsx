@@ -14,6 +14,7 @@ import {
     type SourceLaneConfig,
     type SourceLaneId,
     type SourceSignal,
+    trimToCompleteSentence,
 } from '../lib/sourceSignalTypes';
 
 type LiveGoldenPreview = {
@@ -1045,7 +1046,13 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     }
 
     const keyword = cleanLiveText(item.keyword || item.title, lane.label);
-    const description = cleanLiveText(item.description || item.title, lane.description);
+    /*
+     * 출처가 잘라서 준 요약을 그대로 쓰면 문장 한가운데서 '...' 로 끊긴다.
+     * 온전한 문장만 남기고, 하나도 없으면 제목으로 간다 — 제목은 항상 완결돼 있다.
+     * (브리프 모달은 진작 이렇게 하고 있었는데 홈만 빠져 있었다.)
+     */
+    const description = trimToCompleteSentence(cleanLiveText(item.description, ''))
+        || cleanLiveText(item.title, lane.description);
     const searchUrl = buildSourceSearchUrl(lane.id, keyword);
     const rank = Math.max(1, Number(item.rank) || (101 - Number(item.priority || 100)));
 
@@ -1373,7 +1380,9 @@ function IndexPage() {
                                         </article>
                                     ) : activeSourceItems.map((item, index) => {
                                         const keyword = cleanLiveText(item.keyword || item.title, activeSourceLane.label);
-                                        const description = cleanLiveText(item.description || item.title, activeSourceLane.description);
+                                        // 잘린 요약 대신 완결 문장 — 없으면 제목.
+                                        const description = trimToCompleteSentence(cleanLiveText(item.description, ''))
+                                            || cleanLiveText(item.title, activeSourceLane.description);
                                         return (
                                             <article key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className={`hero-source-row${activeSourceInsightItem === item ? ' active' : ''}`}>
                                                 <button
@@ -2097,15 +2106,17 @@ function IndexPage() {
                     font-weight: 900;
                 }
 
+                /*
+                 * 2줄 자르기를 뺐다(사장님 2026-09-05 "글이 중간에 ...으로 짤리자나").
+                 * 이제 여기 들어오는 건 완결 문장이라 끝까지 보여도 지저분하지 않다.
+                 * 자르기를 남겨 두면 완결 문장을 만들어 놓고 화면이 다시 자른다.
+                 */
                 .source-insight-desc {
                     margin: 0;
                     color: rgba(255,255,255,0.62);
                     font-size: 11px;
-                    line-height: 1.45;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
-                    overflow: hidden;
+                    line-height: 1.5;
+                    word-break: keep-all;
                 }
 
                 .source-insight-panel-rich {
