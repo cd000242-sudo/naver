@@ -13,7 +13,8 @@ import { formatCount } from '../../lib/keywordApi';
  * 실검 틈새 탭이 같은 카드를 쓴다. 판정은 하나도 안 한다 — 회차가 실측·보강해
  * 준 값을 읽어 그릴 뿐이다. 상태(복사·계획 창·그래프·마인드맵)는 부모가 들고
  * 있고 여기는 콜백만 받는다. 지표 줄만 판마다 다르다(variant): 황금은 광고수·빈자리
- * (SERP 실측), 이슈는 정면 글(헌터 실측) — 이슈 행은 SERP 를 안 쟀으므로.
+ * (SERP 실측), 이슈는 정면 글(헌터 실측) + 자리(블로그탭 상위 10 실측, 2026-09-04 부터 —
+ * 광고수는 안 잰다).
  */
 
 /**
@@ -90,6 +91,10 @@ export type PreemptionRow = {
     earlyMover?: boolean;
     earlyMoverReasons?: string[];
     searchVolume: number | null;
+    /** 키워드도구가 PC·모바일 한쪽 이상을 "< 10" 으로 답함(실측). 양쪽 다면 searchVolume 은 null 인데 '—'(미측정)가 아니라 "10 미만"이다. */
+    searchVolumeLt10?: boolean;
+    /** 이슈 행: 헌터의 데이터랩 수요 실측이 잡혔는가. 안 잡혔으면 30일 그래프도 없는 게 정상(검색 기록 0). */
+    hasLiveDemand?: boolean;
     documentCount: number | null;
     evidence: Evidence[];
     serp?: {
@@ -99,9 +104,13 @@ export type PreemptionRow = {
         partialTitleHits: number;
         /** 상단 파워링크 광고 건수(실측). 없으면 못 잰 회차다. */
         adCount?: number | null;
-        medianDaysAgo: number | null;
-        /** 지금 그 자리를 차지한 글 제목 3개. */
+        /** 황금 행만 잰다. 이슈 행의 자리 실측(블로그탭 상위 10 제목 판정)에는 없다. */
+        medianDaysAgo?: number | null;
+        /** 지금 그 자리를 차지한 글 제목(황금 3개 · 이슈 상위 10). */
         topTitles?: string[];
+        /** 이슈 행의 자리 판정 — WINNABLE 만 틈새로 실린다. 잰 시각을 같이 둔다. */
+        verdict?: 'WINNABLE' | 'CONTESTED' | 'LOCKED' | 'NO_DATA';
+        measuredAt?: string;
         /*
          * 자리 판정의 근거 — 잰 순간의 블로그탭 상위 제목과 커버리지.
          * 커버리지 0.6 미만이면 그 자리를 '빈 것'으로 본다.
@@ -174,6 +183,19 @@ function PreemptionCard({
                             >
                                 <TrendSparkline series={row.trend.series!} label={row.trend.label} />
                             </button>
+                        ) : variant === 'issue' ? (
+                            /*
+                             * 이슈 행에 그래프가 없는 이유를 적는다(사장님 2026-09-03: "그래프는
+                             * 안 되는 거니?"). 데이터랩은 검색이 잡힌 날만 주는데 선점 후보는
+                             * 한 날도 없다 — 0점은 그릴 게 없다. 수요가 잡혔는데도 없으면
+                             * 회차가 아직 안 잰 것이다. 둘을 구분해 적는다.
+                             */
+                            <p className="lw-why lw-why-empty">
+                                <em>30일 그래프 없음</em>
+                                {row.hasLiveDemand
+                                    ? '추세 미측정 — 다음 회차에 다시 잰다'
+                                    : '데이터랩에 아직 검색이 잡힌 날이 없다 — 선점 자리'}
+                            </p>
                         ) : null}
                         {row.whySearch?.text && (
                             <p className="lw-why" title={row.whySearch.basis || 'AI 추론'}>
@@ -192,12 +214,19 @@ function PreemptionCard({
                       * 못 쟀으면 '—' 다. 0건이라고 쓰면 안 본 것이 '광고 없음'이 된다.
                       */}
                     <div className="lw-card-metrics">
-                        <div><span>검색량</span><strong>{formatCount(row.searchVolume)}</strong></div>
+                        {/*
+                          * 키워드도구의 "< 10" 은 실측 답이다 — '—'(못 잼)와 다르다. 양쪽 다
+                          * "< 10" 이면 "10 미만", 한쪽만이면 숫자를 싣고 툴팁에 밝힌다.
+                          */}
+                        <div title={row.searchVolumeLt10 ? '키워드도구 실측 — PC·모바일 한쪽 이상이 월 10회 미만' : undefined}>
+                            <span>검색량</span>
+                            <strong>{row.searchVolume === null && row.searchVolumeLt10 ? '10 미만' : formatCount(row.searchVolume)}</strong>
+                        </div>
                         <div><span>문서수</span><strong>{formatCount(row.documentCount)}</strong></div>
                         {variant === 'issue' ? (
                             <>
                                 {/*
-                                  * 이슈 행은 SERP(광고수·빈자리)를 안 쟀다 — 대신 헌터가 잰 정면 글 수다.
+                                  * 이슈 행은 광고수를 안 쟀다 — 헌터가 잰 정면 글 수와 자리 실측(아래)이다.
                                   * 못 잰 값은 '—' 다. 0 으로 채우면 안 본 것이 '없음'이 된다.
                                   */}
                                 <div title="제목이 검색어를 정면으로 담은 글 수 — 블로그 상위 실측">
@@ -207,6 +236,27 @@ function PreemptionCard({
                                 <div title="최근 글 중 정면으로 다룬 수">
                                     <span>최근 정면</span>
                                     <strong>{typeof row.freshFrontalCount === 'number' ? `${row.freshFrontalCount}건` : '—'}</strong>
+                                </div>
+                                {/*
+                                  * 자리(블로그탭 상위 10) — 틈새의 세 번째 게이트. 회차가 Bright Data 로
+                                  * 실제 블로그탭을 받아 제목을 판정한 값이다. 틈새 행은 정면 0건(WINNABLE)
+                                  * 만 실린다. 안 잰 행은 '—' — 0 으로 채우면 안 본 것이 '비었음'이 된다.
+                                  */}
+                                <div
+                                    className={row.serp?.verdict === 'WINNABLE' ? 'hot' : ''}
+                                    title={row.serp?.verdict
+                                        ? `잰 순간의 블로그탭 상위 ${row.serp.sampledTitles}개 — 정면 ${row.serp.exactTitleHits}건 · 부분 ${row.serp.partialTitleHits}건`
+                                        : '이 회차엔 블로그탭 상위 10 을 재지 않았습니다'}
+                                >
+                                    <span>
+                                        자리<i className="lw-slot-basis">블로그탭</i>
+                                        {row.serp?.measuredAt && <i className="lw-slot-basis">{measuredAgo(row.serp.measuredAt)}</i>}
+                                    </span>
+                                    <strong>
+                                        {row.serp?.verdict
+                                            ? `정면 ${row.serp.exactTitleHits} / ${row.serp.sampledTitles}`
+                                            : '—'}
+                                    </strong>
                                 </div>
                             </>
                         ) : (
@@ -272,6 +322,33 @@ function PreemptionCard({
                                 ))}
                             </ol>
                             <p>검색어를 제목이 60% 넘게 담으면 '찬자리'로 봅니다. 순위는 시간이 지나면 바뀝니다.</p>
+                        </details>
+                    )}
+
+                    {/*
+                      * 이슈 행의 자리 근거 — 잰 순간 블로그탭 상위 제목을 그대로 보인다(사장님 반증
+                      * 2026-08-21 "어딜 봐서 빈자리야?"). 제목이 검색어를 정면으로 담았는지는 회차가
+                      * 셌고(exactTitleHits), 여기서는 그 제목들을 검증용으로 늘어놓기만 한다.
+                      */}
+                    {variant === 'issue' && row.serp?.verdict && (row.serp.topTitles || []).length > 0 && (
+                        <details className="lw-slots">
+                            <summary>
+                                자리 근거 보기 — 잰 순간 블로그탭 상위 {(row.serp.topTitles || []).length}개 제목
+                                {row.serp.measuredAt ? ` (${measuredAgo(row.serp.measuredAt)})` : ''}
+                            </summary>
+                            <ol>
+                                {(row.serp.topTitles || []).map((title, index) => (
+                                    <li key={`${index}-${title}`} className={row.serp?.verdict === 'WINNABLE' ? 'open' : ''}>
+                                        <b>{index + 1}</b>
+                                        <em>{title}</em>
+                                    </li>
+                                ))}
+                            </ol>
+                            <p>
+                                {row.serp.verdict === 'WINNABLE'
+                                    ? `상위 ${row.serp.sampledTitles}개 중 검색어를 정면으로 담은 제목이 0건이었습니다 — 정면으로 쓰면 자리가 있습니다. 순위는 시간이 지나면 바뀝니다.`
+                                    : `상위 ${row.serp.sampledTitles}개 중 정면 ${row.serp.exactTitleHits}건 · 부분 ${row.serp.partialTitleHits}건. 순위는 시간이 지나면 바뀝니다.`}
+                            </p>
                         </details>
                     )}
 

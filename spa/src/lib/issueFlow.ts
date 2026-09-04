@@ -12,6 +12,25 @@
 export type IssueLane = 'realtime' | 'tech' | 'policy';
 export type IssueVerdict = 'niche' | 'preemption';
 export type IssueOrigin = 'head' | 'next-wave' | 'autocomplete' | 'derived' | 'related';
+/**
+ * 선점 후보의 갈래 — 'no-demand' 는 문서수 ≤ 300 인데 수요가 아직 안 잡힘,
+ * 'demand-no-volume' 은 수요·자리는 잡혔는데 검색광고 검색량이 없음(트래픽 미확인).
+ */
+export type IssuePreemptionKind = 'no-demand' | 'demand-no-volume';
+
+/**
+ * 자리 실측 — 회차가 Bright Data 로 받은 네이버 블로그탭 상위 10 의 제목 판정.
+ * 틈새 행은 WINNABLE(정면글 0건)만 실린다. 잰 순간의 제목을 남겨 근거로 보인다.
+ */
+export type IssueSlotSerp = {
+    verdict: 'WINNABLE' | 'CONTESTED' | 'LOCKED' | 'NO_DATA';
+    reason: string;
+    exactTitleHits: number;
+    partialTitleHits: number;
+    sampledTitles: number;
+    topTitles: string[];
+    measuredAt: string;
+};
 
 /** 발행 행 — 황금키워드 카드(PreemptionRow)가 읽는 필드를 그대로 갖춘다. */
 export type IssueBoardRow = {
@@ -24,9 +43,17 @@ export type IssueBoardRow = {
     origin?: IssueOrigin;
     originReason?: string | null;
     verdict: IssueVerdict;
+    /** 선점 후보만 값이 있다. 틈새 행은 null. 옛 회차 행엔 없다. */
+    preemptionKind?: IssuePreemptionKind | null;
+    /** 자리 실측(블로그탭 상위 10). 틈새 행은 WINNABLE 이 실려 있다. 발행본의 null(안 잼)은 normalizeRow 가 undefined 로 맞춘다. */
+    serp?: IssueSlotSerp;
     documentCount: number | null;
     documentCountMeasured: boolean;
     searchVolume: number | null;
+    /** 키워드도구가 PC·모바일 한쪽 이상을 "< 10" 으로 답함 — 실측이지 추정이 아니다. 양쪽 다면 searchVolume 은 null. */
+    searchVolumeLt10?: boolean;
+    /** 이월 중 검색량을 다시 잰 시각(재측정 단계). 없으면 measuredAt 에 잰 것. */
+    searchVolumeMeasuredAt?: string;
     hasLiveDemand: boolean;
     demandStatus: string;
     demandRatio: number | null;
@@ -46,7 +73,7 @@ export type IssueBoardRow = {
     } | null;
     subKeywords?: { keyword: string; searchVolume: number | null; frame?: string }[];
     keywordPool?: Array<{ keyword: string; searchVolume: number | null; documentCount?: number | null; source?: string }> | null;
-    trend?: { series: number[]; label?: string; recommendation?: string } | null;
+    trend?: { series: number[]; label?: string; recommendation?: string; measuredAt?: string } | null;
     kinCount?: number | null;
     kinTop?: Array<{ title: string; link: string; views?: number | null; answers?: number | null }> | null;
     monetize?: { verdict: 'good' | 'bad' | 'mixed'; points: Array<{ text: string }>; angle?: string } | null;
@@ -85,7 +112,8 @@ export type IssueBoard = {
     publishedAt?: string;
     generator?: string;
     schedule?: string;
-    measured?: { issues?: number; candidates?: number; niche?: number; preemption?: number };
+    /** pending = 트래픽·수요는 통과했는데 자리(블로그탭)를 아직 못 잰 행 — 싣지 않고 건수만 적는다. */
+    measured?: { issues?: number; candidates?: number; niche?: number; preemption?: number; pending?: number };
     freeSample?: { day: string; keywords: string[] };
     rows: IssueBoardRow[];
     issues: IssueBrief[];
@@ -104,8 +132,11 @@ export const ISSUE_TYPE_LABEL: Record<string, string> = {
  * 실사고: 28행에 evidence 없음) 탭 전체가 죽었다. 읽는 쪽 경계에서 막는다.
  */
 function normalizeRow(row: IssueBoardRow): IssueBoardRow {
+    // 발행본은 안 잰 자리를 null 로 적는다. 카드(PreemptionRow.serp)는 없음을 undefined 로 읽는다.
+    const serp = row.serp && typeof row.serp === 'object' && typeof row.serp.verdict === 'string' ? row.serp : undefined;
     return {
         ...row,
+        serp,
         reasons: Array.isArray(row.reasons) ? row.reasons : [],
         evidence: Array.isArray(row.evidence) ? row.evidence : [],
     };
