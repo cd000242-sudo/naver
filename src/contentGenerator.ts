@@ -7461,8 +7461,17 @@ async function generateStructuredContentInternal(
         );
       }
 
+      /*
+       * [2026-09-04 사장님 결정] "걷어내버리고 — 제목의 궁금증을 본문이 확실히 풀고, 환각이 없고, 알차고,
+       *   모드에 맞게 노출급이면 글이 짧아도 상관없다." 길이는 게이트의 입장 조건이 아니다.
+       *   이전: 본문이 요청 분량의 75% 아래면(최종 시도 50~75% 예외) 품질·안전 평가를 통째로 건너뛰고
+       *   경고만 남긴 채 반환했다 — 2차 재측정 SEO 2편(1,142·1,188자)이 평가 없이 나갔다.
+       *   이제 길이와 무관하게 같은 게이트를 지난다. 짧은 글이 문제라면 게이트의 항목(첫 화면 답·근거·
+       *   상투구·인용)이 잡고, 길이 자체로는 재생성·차단하지 않는다(feedback_body_length_not_a_criterion).
+       */
+      const evaluateQualityRegardlessOfLength = true;
       // 검증: 질과 길이의 균형
-      if (plainLength >= validationMinChars || finalNearThresholdQualityEvaluation) {
+      if (evaluateQualityRegardlessOfLength || plainLength >= validationMinChars || finalNearThresholdQualityEvaluation) {
         // ✅ 성공 통계 업데이트
         if (statsFile) {
           stats.success++;
