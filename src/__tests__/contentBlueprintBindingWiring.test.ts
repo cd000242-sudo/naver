@@ -19,3 +19,11 @@ describe('설계도 필드 바인딩 배선', () => {
     expect(source).toContain('[Blueprint] 바인딩: 도입부 패치 ${blueprintIntroPatched} · 인용 삽입 ${blueprintQuoteInserted}');
   });
 });
+
+describe('구독 엔진 설계도 예산', () => {
+  it('구독 CLI 는 5분, API 는 45초 — 라벨이 아니라 subscription 플래그로 가른다', () => {
+    expect(source).toContain('timeoutMs: route.subscription ? 300_000 : 45_000');
+    expect(source).toContain('...(route.subscription ? { timeoutMs: 300_000 } : {})');
+    expect(source).not.toContain("blueprintRoute.engine.startsWith('agent-')");
+  });
+});

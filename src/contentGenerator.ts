@@ -5650,7 +5650,14 @@ export function shouldRunLegacyPostDraftLlm(promptVariant: unknown): boolean {
  * [2026-09-03 사장님] 보조 LLM 호출(키워드 선정·소제목 보정)은 사용자가 고른 엔진으로만 — 벤더 하드코딩 금지,
  * 키 있는 다른 벤더로 조용히 넘어가지 않는다. 고른 엔진의 키/구독이 없으면 null (호출 측이 그 단계를 건너뛴다).
  */
-async function resolveSideTaskRoute(source: ContentSource): Promise<{ engine: string; callModel: (prompt: string) => Promise<string> } | null> {
+interface SideTaskRoute {
+  readonly engine: string;
+  /** True for subscription CLIs (codex/claude/gemini) — they take minutes, not seconds. */
+  readonly subscription?: boolean;
+  readonly callModel: (prompt: string, options?: { maxTokens?: number; timeoutMs?: number }) => Promise<string>;
+}
+
+async function resolveSideTaskRoute(source: ContentSource): Promise<SideTaskRoute | null> {
   const { loadConfig } = await import('./configManager.js');
   const { resolveSelectedEngineRoute } = await import('./main/ipc/paraphraseAnalysisHandlers.js');
   const config = ((await loadConfig().catch(() => null)) as Record<string, unknown> | null) ?? {};
@@ -6102,7 +6109,8 @@ async function generateStructuredContentInternal(
     && String((source as any).rawText || '').length >= 200;
   if (blueprintEligible) {
     blueprintRoute = await resolveSideTaskRoute(source);
-    if (!blueprintRoute) {
+    const route = blueprintRoute;
+    if (!route) {
       console.log(`[Blueprint] 선택 엔진(${String(source.generator || '미지정')})의 라우트 없음 — 설계도 생략`);
     } else {
       const blueprintRun = await generateBlueprint(
@@ -6112,9 +6120,14 @@ async function generateStructuredContentInternal(
           material: String((source as any).rawText || ''),
         },
         {
-          complete: blueprintRoute.callModel,
+          complete: (prompt, options) => route.callModel(prompt, {
+            ...options,
+            ...(route.subscription ? { timeoutMs: 300_000 } : {}),
+          }),
           log: (message) => console.log(message),
-          timeoutMs: blueprintRoute.engine.startsWith('agent-') ? 180_000 : 45_000,
+          // [2026-09-04] 라벨은 'claude(구독)' 이라 'agent-' 로 시작하지 않는다. 구독 CLI 는 분 단위가 걸리므로
+          //   플래그로 판별한다 — 라벨로 재던 탓에 에이전트 모드에서 설계도가 매번 45초에 잘렸다.
+          timeoutMs: route.subscription ? 300_000 : 45_000,
           dumpRaw: process.env.BLUEPRINT_DEBUG === '1',
         },
       );
@@ -6123,7 +6136,7 @@ async function generateStructuredContentInternal(
         blueprintQuotes = blueprintRun.result.blueprint.quotes.map((q) => q.text);
         blueprintQuoteItems = blueprintRun.result.blueprint.quotes.map((q) => ({ text: q.text, speaker: q.speaker }));
         blueprintReaderSituation = blueprintRun.result.blueprint.readerSituation;
-        console.log(`[Blueprint] 📐 엔진 ${blueprintRoute.engine} · 재료 ${blueprintBlock.length}자 · ${blueprintRun.elapsedMs}ms`);
+        console.log(`[Blueprint] 📐 엔진 ${route.engine} · 재료 ${blueprintBlock.length}자 · ${blueprintRun.elapsedMs}ms`);
       }
     }
   }

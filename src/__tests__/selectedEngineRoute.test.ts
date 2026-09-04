@@ -28,3 +28,17 @@ describe('보조 호출 경로 — 사용자가 고른 엔진 그대로', () => 
     expect(resolveSelectedEngineRoute('whatever', allKeys)).toBeNull();
   });
 });
+
+/**
+ * [2026-09-04 라이브] 에이전트 모드에서 설계도가 매번 45초에 잘렸다. 라우트 라벨이 'claude(구독)' 이라
+ * 'agent-' 로 시작하지 않는데 호출부가 라벨로 구독 여부를 재고 있었다. 플래그로 판별한다.
+ */
+describe('구독 라우트 표시', () => {
+  it('에이전트 3종만 subscription=true, API 키 라우트는 아니다', () => {
+    for (const g of ['agent-codex', 'agent-claude', 'agent-gemini']) {
+      expect(resolveSelectedEngineRoute(g, {})?.subscription).toBe(true);
+    }
+    expect(resolveSelectedEngineRoute('openai', { openaiApiKey: 'o' })?.subscription).toBeUndefined();
+    expect(resolveSelectedEngineRoute('gemini', { geminiApiKey: 'g' })?.subscription).toBeUndefined();
+  });
+});

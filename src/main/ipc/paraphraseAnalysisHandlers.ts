@@ -23,6 +23,13 @@ const DEFAULT_MAX_OUTPUT_TOKENS = 2048;
 
 export interface AnalysisCallOptions {
   readonly maxTokens?: number;
+  /** Subscription CLIs are far slower than an API call; a caller that can wait says so. */
+  readonly timeoutMs?: number;
+}
+
+function resolveTimeout(options?: AnalysisCallOptions): number {
+  const requested = Number(options?.timeoutMs);
+  return Number.isFinite(requested) && requested > 0 ? Math.min(600_000, Math.floor(requested)) : ANALYSIS_TIMEOUT_MS;
 }
 
 function resolveMaxTokens(options?: AnalysisCallOptions): number {
@@ -98,11 +105,11 @@ async function callAgent(provider: 'codex' | 'claude' | 'gemini', prompt: string
 }
 
 /** 구독 에이전트로 자유 형식 텍스트 답을 받는다 — 스키마가 분석용이라 다른 보조 작업에는 맞지 않는다. */
-async function callAgentText(provider: 'codex' | 'claude' | 'gemini', prompt: string): Promise<string> {
+async function callAgentText(provider: 'codex' | 'claude' | 'gemini', prompt: string, options?: AnalysisCallOptions): Promise<string> {
   const { generateWithAgent } = await import('../../agentCli/index.js');
   const { createAgentProductPolicyContext } = await import('../../agentCli/productPolicy.js');
   const result = await generateWithAgent(
-    { provider, prompt, timeoutMs: ANALYSIS_TIMEOUT_MS },
+    { provider, prompt, timeoutMs: resolveTimeout(options) },
     createAgentProductPolicyContext({ allowClaudeSubscription: true }),
   );
   return result.text;
@@ -122,6 +129,8 @@ async function callPerplexity(prompt: string, apiKey: string, model: string, opt
 
 export interface AnalysisRoute {
   engine: string;
+  /** True for the subscription CLIs — callers budget minutes, not seconds. */
+  subscription?: boolean;
   callModel: (prompt: string, options?: AnalysisCallOptions) => Promise<string>;
 }
 
@@ -145,9 +154,9 @@ export function resolveRoute(generator: string, config: Record<string, unknown>)
  */
 export function resolveSelectedEngineRoute(generator: string, config: Record<string, unknown>): AnalysisRoute | null {
   const key = (name: string): string => (typeof config[name] === 'string' ? (config[name] as string).trim() : '');
-  if (generator === 'agent-codex') return { engine: 'codex(구독)', callModel: (p) => callAgentText('codex', p) };
-  if (generator === 'agent-claude') return { engine: 'claude(구독)', callModel: (p) => callAgentText('claude', p) };
-  if (generator === 'agent-gemini') return { engine: 'gemini(구독)', callModel: (p) => callAgentText('gemini', p) };
+  if (generator === 'agent-codex') return { engine: 'codex(구독)', subscription: true, callModel: (p, o) => callAgentText('codex', p, o) };
+  if (generator === 'agent-claude') return { engine: 'claude(구독)', subscription: true, callModel: (p, o) => callAgentText('claude', p, o) };
+  if (generator === 'agent-gemini') return { engine: 'gemini(구독)', subscription: true, callModel: (p, o) => callAgentText('gemini', p, o) };
   if (generator === 'openai') {
     const openaiKey = key('openaiApiKey');
     return openaiKey ? { engine: OPENAI_ANALYSIS_MODEL, callModel: (p, o) => callOpenAi(p, openaiKey, o) } : null;
