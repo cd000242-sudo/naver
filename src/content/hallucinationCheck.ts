@@ -238,7 +238,12 @@ export function checkHallucination(
    */
   const origMain = orig.positive >= orig.negative ? '긍정' : '부정';
   const resultMain = result.positive >= result.negative ? '긍정' : '부정';
-  if (sentimentMismatch > 0.4 && origMain !== resultMain) {
+  // [2026-09-04 measured] 전세보증보험 material: P16/N19 (전세사기·논란 words in the news mix) vs a body
+  //   with P5/N0 — flagged as a direction flip and bought a paid regeneration. A source that is
+  //   negative by three words has no direction to flip. Require clear dominance on the source side.
+  const origPosRatio = origTotal > 0 ? orig.positive / origTotal : 0.5;
+  const sourceHasClearDirection = origTotal >= 3 && Math.abs(origPosRatio - 0.5) >= 0.15;
+  if (sentimentMismatch > 0.4 && origMain !== resultMain && sourceHasClearDirection) {
     warnings.push(`감정 방향 mismatch: 원본=${origMain}(P${orig.positive}/N${orig.negative}) → 결과=${resultMain}(P${result.positive}/N${result.negative})`);
   }
 

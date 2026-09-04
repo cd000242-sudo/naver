@@ -26,6 +26,13 @@ describe('checkHallucination — 경고 범위', () => {
     expect(r.warnings.find((w) => w.includes('감정 방향'))).toBeUndefined();
   });
 
+  it('원본이 근소하게 부정(P16/N19)인 정보성 자료는 방향이 없다 — 결과가 긍정이어도 경고하지 않는다', () => {
+    const source = '기부 '.repeat(16) + '논란 '.repeat(19);
+    const body = '기부 나눔 도움 감동 희망';
+    const r = checkHallucination(source, body);
+    expect(r.warnings.find((w) => w.includes('감정 방향'))).toBeUndefined();
+  });
+
   it('원본 긍정 → 결과 부정으로 방향이 뒤집히면 경고한다', () => {
     const source = '기부 나눔 도움 감동 희망 소중 진심 배려';
     const body = '논란 의혹 폭로 거짓 사기 기만 위선';
