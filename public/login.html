@@ -1031,6 +1031,18 @@
       </div>
 
       <button type="submit" id="login-button" class="login-button">인증하기</button>
+
+      <!-- [2026-09-05] 본인인증·비밀번호 변경 상시 버튼.
+           이전에는 로그인 성공 10초 뒤 창이 닫히기 직전에만 인증창이 스쳐 지나가
+           사용자가 버튼을 찾을 수 없었다(사장님 지적). 이제 여기서 아무 때나 연다. -->
+      <div style="display: flex; gap: 8px; margin-top: 10px;">
+        <button type="button" id="open-phone-verify-btn"
+          style="flex: 1; padding: 11px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.5); background: rgba(59, 130, 246, 0.1); color: #60a5fa; font-size: 13px; font-weight: 700; cursor: pointer;">📱
+          본인인증</button>
+        <button type="button" id="open-password-reset-btn"
+          style="flex: 1; padding: 11px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.1); color: #fbbf24; font-size: 13px; font-weight: 700; cursor: pointer;">🔑
+          비밀번호 변경</button>
+      </div>
     </form>
 
     <!-- 페이월 모달 - 삭감 문구 적용 -->
@@ -1162,6 +1174,56 @@
         <button type="button" id="phone-verify-confirm-btn" class="trial-submit-btn" style="display: none;">✅ 인증 완료</button>
         <button type="button" id="phone-verify-later-btn"
           style="background: transparent; border: none; color: rgba(255,255,255,0.4); font-size: 13px; padding: 12px; cursor: pointer;">나중에 하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- [2026-09-05] 비밀번호 변경 — 로그인 전에 연다(비번을 잊은 사람은 못 들어온다).
+       본인 증명은 본인인증 때 등록해 둔 번호로 오는 문자다. 번호가 등록돼 있지
+       않은 계정은 서버가 거절한다 — 아이디만 아는 사람이 계정을 뺏으면 안 된다. -->
+  <div id="pw-reset-backdrop" class="trial-modal-backdrop">
+    <div class="trial-modal">
+      <div class="trial-modal-header">
+        <span class="trial-icon">🔑</span>
+        <h2>비밀번호 변경</h2>
+        <p>본인인증한 번호로 문자를 보내 드립니다. 확인 후 새 비밀번호를 정하세요.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="pw-reset-userid">아이디 <span style="color: #ef4444;">*</span></label>
+        <input type="text" id="pw-reset-userid" autocomplete="username" placeholder="등록한 아이디">
+      </div>
+
+      <div class="form-group">
+        <label for="pw-reset-phone">본인인증한 전화번호 <span style="color: #ef4444;">*</span></label>
+        <input type="tel" id="pw-reset-phone" inputmode="numeric" autocomplete="tel"
+          maxlength="13" placeholder="01012345678">
+      </div>
+
+      <button type="button" id="pw-reset-send-btn" class="trial-submit-btn" style="margin-bottom: 6px;">📩 인증번호 받기</button>
+
+      <div id="pw-reset-step2" style="display: none;">
+        <div class="form-group">
+          <label for="pw-reset-code">문자로 받은 인증번호 <span style="color: #ef4444;">*</span></label>
+          <input type="text" id="pw-reset-code" inputmode="numeric" autocomplete="one-time-code"
+            maxlength="6" placeholder="6자리 숫자">
+        </div>
+        <div class="form-group">
+          <label for="pw-reset-new">새 비밀번호 <span style="color: #ef4444;">*</span></label>
+          <input type="password" id="pw-reset-new" autocomplete="new-password" placeholder="4자 이상">
+        </div>
+        <div class="form-group">
+          <label for="pw-reset-new2">새 비밀번호 확인 <span style="color: #ef4444;">*</span></label>
+          <input type="password" id="pw-reset-new2" autocomplete="new-password" placeholder="한 번 더 입력">
+        </div>
+      </div>
+
+      <div id="pw-reset-status" style="display: none; font-size: 13px; font-weight: 700; margin-bottom: 10px; white-space: pre-line;"></div>
+
+      <div class="trial-modal-actions">
+        <button type="button" id="pw-reset-confirm-btn" class="trial-submit-btn" style="display: none;">✅ 비밀번호 변경</button>
+        <button type="button" id="pw-reset-close-btn"
+          style="background: transparent; border: none; color: rgba(255,255,255,0.4); font-size: 13px; padding: 12px; cursor: pointer;">닫기</button>
       </div>
     </div>
   </div>
@@ -1306,7 +1368,12 @@
      * 강제하지 않는다: [나중에 하기]를 누르면 그대로 들어간다(사장님 결정).
      * 인증을 마치면 서버가 phoneVerified 를 내려주므로 다음부터는 뜨지 않는다.
      */
-    async function finishLogin() {
+    /*
+     * [2026-09-05] 성공 화면 **전에** 부른다. 예전에는 finishLogin 안에서만 불러
+     * "10초 후 창이 닫힙니다" 를 다 기다린 뒤에야 인증창이 떴다 — 사용자는 인증
+     * 버튼을 볼 기회조차 없었다. 두 번 불려도 안전하다(인증을 마치면 needed:false).
+     */
+    async function maybePhoneVerify() {
       try {
         const status = await ipcRenderer.invoke('license:phoneStatus');
         if (status && status.needed === true) {
@@ -1315,6 +1382,10 @@
       } catch (e) {
         console.warn('[Login] 본인인증 확인 실패 — 그냥 진행합니다:', e);
       }
+    }
+
+    async function finishLogin() {
+      await maybePhoneVerify();
       return ipcRenderer.invoke('login:success');
     }
 
@@ -1340,6 +1411,14 @@
 
         backdrop.style.display = 'flex';
         say('');
+        // 버튼으로 다시 열 수 있게 되면서 이전 상태가 남는다 — 열 때마다 처음으로 되돌린다.
+        if (codeGroup) codeGroup.style.display = 'none';
+        if (codeInput) codeInput.value = '';
+        confirmBtn.style.display = 'none';
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = '✅ 인증 완료';
+        sendBtn.disabled = false;
+        sendBtn.textContent = '📩 인증번호 받기';
 
         sendBtn.onclick = async () => {
           const phone = (phoneInput.value || '').trim().replace(/[-\s]/g, '');
@@ -1394,6 +1473,143 @@
         laterBtn.onclick = done;
       });
     }
+
+    /*
+     * ── [본인인증] 버튼 (2026-09-05) ──────────────────────────────────────
+     *
+     * 인증은 세션으로 본인을 증명한다 — 로그인 전에는 부를 수 없다. 그래서
+     * "로그인부터 하세요"와 "이미 인증됐습니다"를 구분해 말한다(예전에는 둘 다
+     * needed:false 로 뭉개져 버튼이 아무 반응도 안 하는 것처럼 보였다).
+     */
+    document.getElementById('open-phone-verify-btn')?.addEventListener('click', async () => {
+      let status = null;
+      try {
+        status = await ipcRenderer.invoke('license:phoneStatus');
+      } catch (e) {
+        showInfoModal('본인인증', '상태를 확인하지 못했습니다: ' + e.message);
+        return;
+      }
+      if (!status || status.loggedIn !== true) {
+        showInfoModal('📱 본인인증', '먼저 아이디/비밀번호로 인증(로그인)한 뒤에 이용할 수 있습니다.');
+        return;
+      }
+      if (status.verified === true) {
+        showInfoModal('📱 본인인증', '이미 본인인증이 완료된 계정입니다. 올인원·여러 코드를 쓰셔도 한 번이면 전부 인증됩니다.');
+        return;
+      }
+      await runPhoneVerification();
+    });
+
+    /*
+     * ── [비밀번호 변경] 버튼 (2026-09-05) ─────────────────────────────────
+     *
+     * 로그인 전에 연다 — 비밀번호를 잊은 사람은 로그인 자체를 못 한다.
+     * 본인 증명은 본인인증 때 등록해 둔 번호로 가는 문자다. 서버가 번호 일치를
+     * 확인하고, 같은 아이디의 **모든** 라이선스 행에 새 비밀번호를 쓴다.
+     */
+    function openPasswordReset() {
+      const backdrop = document.getElementById('pw-reset-backdrop');
+      const userIdInput = document.getElementById('pw-reset-userid');
+      const phoneInput = document.getElementById('pw-reset-phone');
+      const step2 = document.getElementById('pw-reset-step2');
+      const codeInput = document.getElementById('pw-reset-code');
+      const newInput = document.getElementById('pw-reset-new');
+      const new2Input = document.getElementById('pw-reset-new2');
+      const sendBtn = document.getElementById('pw-reset-send-btn');
+      const confirmBtn = document.getElementById('pw-reset-confirm-btn');
+      const closeBtn = document.getElementById('pw-reset-close-btn');
+      const statusEl = document.getElementById('pw-reset-status');
+      if (!backdrop || !userIdInput || !phoneInput || !sendBtn || !confirmBtn || !closeBtn) return;
+
+      const say = (text, isError) => {
+        if (!statusEl) return;
+        statusEl.style.display = text ? 'block' : 'none';
+        statusEl.style.color = isError ? '#ef4444' : '#10b981';
+        statusEl.textContent = text;
+      };
+
+      // 열 때마다 처음 상태로. 아이디는 로그인 칸에 적어 둔 값을 그대로 채워 준다.
+      backdrop.style.display = 'flex';
+      say('');
+      if (step2) step2.style.display = 'none';
+      if (codeInput) codeInput.value = '';
+      if (newInput) newInput.value = '';
+      if (new2Input) new2Input.value = '';
+      confirmBtn.style.display = 'none';
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = '✅ 비밀번호 변경';
+      sendBtn.disabled = false;
+      sendBtn.textContent = '📩 인증번호 받기';
+      if (!userIdInput.value) {
+        const loginId = document.getElementById('user-id')?.value || document.getElementById('user-id-init')?.value || '';
+        userIdInput.value = loginId.trim();
+      }
+
+      sendBtn.onclick = async () => {
+        const userId = (userIdInput.value || '').trim();
+        const phone = (phoneInput.value || '').trim().replace(/[-\s]/g, '');
+        if (!userId) { say('아이디를 입력하세요.', true); return; }
+        if (!/^01[0-9]{8,9}$/.test(phone)) { say('올바른 전화번호를 입력하세요. (예: 01012345678)', true); return; }
+        sendBtn.disabled = true;
+        sendBtn.textContent = '📩 보내는 중...';
+        try {
+          const r = await ipcRenderer.invoke('license:passwordResetRequest', { userId, phone });
+          if (!r || r.ok !== true) {
+            say((r && r.message) || '인증번호 발송에 실패했습니다.', true);
+            sendBtn.disabled = false;
+            sendBtn.textContent = '📩 인증번호 받기';
+            return;
+          }
+          if (step2) step2.style.display = 'block';
+          confirmBtn.style.display = 'block';
+          if (codeInput) codeInput.focus();
+          sendBtn.disabled = false;
+          sendBtn.textContent = '📩 인증번호 다시 받기';
+          say('📩 인증번호를 보냈습니다 — 문자로 받은 6자리와 새 비밀번호를 입력하세요.', false);
+        } catch (e) {
+          say('발송 오류: ' + e.message, true);
+          sendBtn.disabled = false;
+          sendBtn.textContent = '📩 인증번호 받기';
+        }
+      };
+
+      confirmBtn.onclick = async () => {
+        const userId = (userIdInput.value || '').trim();
+        const phone = (phoneInput.value || '').trim().replace(/[-\s]/g, '');
+        const authCode = ((codeInput && codeInput.value) || '').trim();
+        const newPassword = ((newInput && newInput.value) || '').trim();
+        const newPassword2 = ((new2Input && new2Input.value) || '').trim();
+        if (!/^\d{6}$/.test(authCode)) { say('문자로 받은 인증번호 6자리를 입력하세요.', true); return; }
+        if (newPassword.length < 4) { say('새 비밀번호는 4자 이상이어야 합니다.', true); return; }
+        if (newPassword !== newPassword2) { say('새 비밀번호가 서로 다릅니다.', true); return; }
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = '변경 중...';
+        try {
+          const r = await ipcRenderer.invoke('license:passwordResetConfirm', { userId, phone, authCode, newPassword });
+          if (!r || r.ok !== true) {
+            say((r && r.message) || '비밀번호 변경에 실패했습니다.', true);
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = '✅ 비밀번호 변경';
+            return;
+          }
+          say('✅ 비밀번호가 변경되었습니다. 새 비밀번호로 로그인해 주세요.', false);
+          // 바로 로그인할 수 있게 아이디/비밀번호 칸을 채워 둔다.
+          const idField = document.getElementById('user-id');
+          const pwField = document.getElementById('password');
+          if (idField) idField.value = userId;
+          if (pwField) pwField.value = newPassword;
+          setTimeout(() => { backdrop.style.display = 'none'; }, 1500);
+        } catch (e) {
+          say('오류: ' + e.message, true);
+          confirmBtn.disabled = false;
+          confirmBtn.textContent = '✅ 비밀번호 변경';
+        }
+      };
+
+      closeBtn.onclick = () => { backdrop.style.display = 'none'; };
+    }
+
+    document.getElementById('open-password-reset-btn')?.addEventListener('click', openPasswordReset);
 
     async function loadDeviceId() {
       try {
@@ -2219,6 +2435,9 @@
               }
             }
 
+            // 본인인증은 성공 박스보다 **먼저** — 10초 대기 뒤에 띄우면 아무도 못 본다.
+            await maybePhoneVerify();
+
             // 성공 메시지 표시 및 창 닫기 (재인증 모드에서도 동일하게 처리)
             const successMessage = document.createElement('div');
             successMessage.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #4CAF50; color: white; padding: 30px 50px; border-radius: 10px; font-size: 18px; font-weight: bold; z-index: 10000; box-shadow: 0 4px 20px rgba(0,0,0,0.3); text-align: center;';
@@ -2356,6 +2575,9 @@
               console.error('[Login] 아이디/비밀번호 저장 실패:', error);
             }
           }
+
+          // 본인인증도 성공 모달 **전에** — 3.5초 뒤에 띄우면 스쳐 지나간다.
+          await maybePhoneVerify();
 
           // [개선] 고급스러운 성공 모달 표시
           const successBackdrop = document.getElementById('success-modal-backdrop');

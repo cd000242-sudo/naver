@@ -3144,8 +3144,11 @@ async function callLicensePhoneGas(action: string, payload: Record<string, unkno
 ipcMain.handle('license:phoneStatus', async () => {
   try {
     const license = await loadLicense();
-    if (!license?.userId || !license?.sessionToken) return { needed: false };
-    return { needed: license.phoneVerified !== true, userId: license.userId };
+    // loggedIn/verified 를 따로 돌려준다 — [본인인증] 버튼이 "로그인부터 하세요"와
+    // "이미 인증됐습니다"를 구분해 말해야 한다. needed:false 하나로는 둘이 뭉개진다.
+    if (!license?.userId || !license?.sessionToken) return { needed: false, loggedIn: false, verified: false };
+    const verified = license.phoneVerified === true;
+    return { needed: !verified, loggedIn: true, verified, userId: license.userId };
   } catch (error) {
     debugLog(`[Main] license:phoneStatus 실패 — ${(error as Error).message}`);
     return { needed: false };
@@ -3181,6 +3184,80 @@ ipcMain.handle('license:phoneConfirm', async (_event, args?: { phone?: string; a
   } catch (error) {
     debugLog(`[Main] license:phoneConfirm 실패 — ${(error as Error).message}`);
     return { ok: false, message: describeLicenseNetworkFailure('본인인증', error) };
+  }
+});
+
+/*
+ * ── 비밀번호 재설정 (2026-09-05) ─────────────────────────────────────────
+ *
+ * 비밀번호를 잊은 사람이 부르는 경로라 **세션이 없다**. 그래서
+ * callLicensePhoneGas 를 쓸 수 없고(그건 로그인 상태를 요구한다) 서버를 직접 부른다.
+ * 본인 증명은 시트에 등록된 번호로 가는 문자다 — 판단은 전부 서버가 한다.
+ */
+async function callLicenseResetGas(action: string, payload: Record<string, unknown>): Promise<any> {
+  const gasUrl = process.env.LICENSE_SERVER_URL || DEFAULT_LICENSE_SERVER_URL;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), LICENSE_SERVER_TIMEOUT_MS);
+  try {
+    const response = await fetch(gasUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action, ...payload }),
+      signal: controller.signal,
+    });
+    return await response.json();
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+ipcMain.handle('license:passwordResetRequest', async (_event, args?: { userId?: string; phone?: string }) => {
+  try {
+    const userId = String(args?.userId || '').trim();
+    const phone = String(args?.phone || '').trim().replace(/[-\s]/g, '');
+    if (!userId) return { ok: false, message: '아이디를 입력하세요.' };
+    if (!/^01[0-9]{8,9}$/.test(phone)) {
+      return { ok: false, message: '올바른 전화번호를 입력하세요. (예: 01012345678)' };
+    }
+    const result = await callLicenseResetGas('license-password-reset-request', { userId, phone });
+    if (result?.ok !== true) return { ok: false, message: result?.error || '인증번호 발송에 실패했습니다.' };
+    return { ok: true };
+  } catch (error) {
+    debugLog(`[Main] license:passwordResetRequest 실패 — ${(error as Error).message}`);
+    return { ok: false, message: describeLicenseNetworkFailure('인증번호 발송', error) };
+  }
+});
+
+ipcMain.handle('license:passwordResetConfirm', async (
+  _event,
+  args?: { userId?: string; phone?: string; authCode?: string; newPassword?: string },
+) => {
+  try {
+    const userId = String(args?.userId || '').trim();
+    const phone = String(args?.phone || '').trim().replace(/[-\s]/g, '');
+    const authCode = String(args?.authCode || '').trim();
+    const newPassword = String(args?.newPassword || '').trim();
+    if (newPassword.length < 4) {
+      return { ok: false, message: '새 비밀번호는 4자 이상이어야 합니다.' };
+    }
+    const result = await callLicenseResetGas('license-password-reset-confirm', {
+      userId, phone, authCode, newPassword,
+    });
+    if (result?.ok !== true) return { ok: false, message: result?.error || '비밀번호 변경에 실패했습니다.' };
+
+    // 저장해 둔 자동 로그인 비밀번호가 옛것이면 다음 실행에서 로그인이 실패한다.
+    try {
+      const config = await loadConfig();
+      if (config?.rememberLicenseCredentials && String((config as any).savedLicenseUserId || '').trim() === userId) {
+        await saveConfig({ ...config, savedLicensePassword: newPassword } as any);
+      }
+    } catch (configError) {
+      debugLog(`[Main] 저장된 비밀번호 갱신 실패 — ${(configError as Error).message}`);
+    }
+    return { ok: true };
+  } catch (error) {
+    debugLog(`[Main] license:passwordResetConfirm 실패 — ${(error as Error).message}`);
+    return { ok: false, message: describeLicenseNetworkFailure('비밀번호 변경', error) };
   }
 });
 
