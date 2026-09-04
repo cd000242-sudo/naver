@@ -127,8 +127,18 @@ export function inspectSnapshot(data, options = {}) {
         const text = String(fact?.text || '').trim();
         if (!text) continue;
         totalFacts += 1;
-        const endsClean = /(?:[.!?]|[다요음함됨죠네까])["”'’)\]]*$/u.test(text) && !/(?:\.{2,}|…)$/u.test(text);
-        if (!endsClean) {
+        /*
+         * 무엇이 "잘린 것"인가. 종결어미로 끝나야 한다는 규칙은 너무 넓었다 —
+         * 기사 제목("…실업률 4.1%", "스타뉴스 최신 기사 · …강조 여행")까지 잡았다.
+         * 제목은 원래 종결어미로 안 끝난다. 진짜 절단의 자국만 본다:
+         *   ① 꼬리에 말줄임표가 남았거나
+         *   ② 끝나다 만 어간(…터져 나왔습)으로 끝났거나
+         *   ③ 공백 뒤 한 글자 조각(…김지훈 / 제)으로 끝났다.
+         */
+        const cutTail = /(?:\.{2,}|…)\s*$/u.test(text);
+        const cutStem = /(?:습|았|었|였|왔|됐|겼|냈|랐|뤘|췄)$/u.test(text);
+        const cutOneChar = /\s\S$/u.test(text) && /[가-힣]$/u.test(text);
+        if (cutTail || cutStem || cutOneChar) {
           cutFacts += 1;
           if (cutSample.length < 2) cutSample.push(text.slice(-24));
         }

@@ -337,6 +337,31 @@ async function fetchWinnableKeywords(): Promise<WinnableKeyword[]> {
     }
 }
 
+/**
+ * 줄에 얹을 한 문장 — 첫 문장 하나만 쓴다.
+ *
+ * 기사 요약을 통째로 넣으면 화면이 다시 자르고, 그 자국('...')이 사장님 눈에 걸린다.
+ * 문단 전체가 필요하면 줄을 눌러 브리프를 열면 된다. 목록은 한 문장이면 충분하다.
+ */
+/**
+ * 문장이 아직 안 끝났다는 표시 — '다' 로 끝난다고 다 끝난 문장이 아니다.
+ * 실측(2026-09-05): "…정부 대책 어떤 것을 풀면 지금보다" 가 '보다' 때문에
+ * 완결 문장으로 통과해 화면에 끊긴 채로 나갈 뻔했다.
+ */
+const UNFINISHED_TAIL_RE = /(보다|부터|까지|에서|으로|하고|지만|면서|인데|하며|이며|라며|대해|위해|따라|관련)$/u;
+
+function firstSentenceOnly(value: string): string {
+    const text = String(value || '').trim();
+    if (!text) return '';
+    const pieces = text.split(/(?<=[.!?])\s+|(?<=[다요죠])\s+(?=[가-힣A-Z0-9‘“'"(])/u);
+    for (const piece of pieces) {
+        const candidate = trimToCompleteSentence(String(piece || '').trim());
+        if (candidate && !UNFINISHED_TAIL_RE.test(candidate.replace(/["”'’)\]]+$/u, ''))) return candidate;
+    }
+    // 쓸 만한 문장이 없으면 비운다 — 끊긴 조각을 보여 주느니 키워드만 두는 게 낫다.
+    return '';
+}
+
 async function loadHomeLiveState(): Promise<HomeLiveState> {
     const fallback = buildFallbackHomeLiveState('error');
     // fetchHomeJson 은 서버가 죽으면 null 이 아니라 throw 한다. 여기서 안 잡으면
@@ -1338,6 +1363,21 @@ function IndexPage() {
         || liveState.lanes[0]
         || { ...SOURCE_LANE_CONFIGS[0], items: [] };
     const activeSourceItems = activeSourceLane.items.slice(0, 10);
+    /*
+     * 줄마다 같은 문장이 반복되면 그건 정보가 아니라 잡음이다.
+     * 실측(2026-09-05): 네이버 레인 10줄이 전부 "네이버 실시간 흐름에서 수집한 검색
+     * 신호입니다." 한 문장이었다 — 판다랭크 목록과 나란히 놓았을 때 지저분해 보인 이유다.
+     * 문구를 하드코딩해 지우지 않는다. **레인 안에서 겹치는 설명**을 데이터로 찾아낸다.
+     */
+    const repeatedDescriptions = useMemo(() => {
+        const counts = new Map<string, number>();
+        for (const item of activeSourceItems) {
+            const text = String(item.description || '').trim();
+            if (!text) continue;
+            counts.set(text, (counts.get(text) || 0) + 1);
+        }
+        return new Set([...counts.entries()].filter(([, n]) => n > 1).map(([text]) => text));
+    }, [activeSourceItems]);
     const activeSourceInsightItem = activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === activeSourceKeyword) || activeSourceItems[0] || null;
     const briefModalItem = briefModalKeyword
         ? activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === briefModalKeyword) || null
@@ -1452,9 +1492,18 @@ function IndexPage() {
                                         </article>
                                     ) : activeSourceItems.map((item, index) => {
                                         const keyword = cleanLiveText(item.keyword || item.title, activeSourceLane.label);
-                                        // 잘린 요약 대신 완결 문장 — 없으면 제목.
-                                        const description = trimToCompleteSentence(cleanLiveText(item.description, ''))
-                                            || cleanLiveText(item.title, activeSourceLane.description);
+                                        /*
+                                         * 한 줄 요약 — 줄마다 다른 정보일 때만 보여 준다.
+                                         * ① 그 항목만의 설명(완결 문장) ② 없으면 기사에서 뽑은 첫 사실 문장
+                                         * ③ 그것도 없으면 아예 안 쓴다. 같은 문장을 열 줄에 반복하느니 비우는 게 낫다.
+                                         */
+                                        const ownDescription = repeatedDescriptions.has(String(item.description || '').trim())
+                                            ? ''
+                                            : trimToCompleteSentence(cleanLiveText(item.description, ''));
+                                        const firstFact = trimToCompleteSentence(
+                                            cleanLiveText((item.insight?.facts || [])[0]?.text, ''),
+                                        );
+                                        const description = firstSentenceOnly(ownDescription || firstFact);
                                         return (
                                             <article key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className={`hero-source-row${activeSourceInsightItem === item ? ' active' : ''}`}>
                                                 <button
@@ -1470,7 +1519,7 @@ function IndexPage() {
                                                     <span>{index + 1}</span>
                                                     <div>
                                                         <strong>{keyword}</strong>
-                                                        <p>{description}</p>
+                                                        {description ? <p>{description}</p> : null}
                                                     </div>
                                                     {/* 왼쪽 번호가 이미 순위다. 오른쪽에 "N위"를 또 쓰면 같은
                                                         정보가 두 번 나가고, 정작 필요한 게시 시각 자리가 없다.
@@ -1849,14 +1898,21 @@ function IndexPage() {
                     white-space: nowrap;
                 }
 
+                /*
+                 * 한 줄에 밀어 넣고 '…' 로 자르던 것을 두 줄 흐름으로 바꿨다
+                 * (사장님 2026-09-05 "글이 중간에 ...으로 짤리자나").
+                 * 들어오는 건 첫 문장 하나라 두 줄이면 대개 다 들어간다.
+                 */
                 .hero-source-row p {
-                    margin: 2px 0 0;
+                    margin: 3px 0 0;
                     color: rgba(255,255,255,0.58);
-                    font-size: 14px;
-                    line-height: 1.45;
+                    font-size: 13.5px;
+                    line-height: 1.5;
+                    word-break: keep-all;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
                     overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
                 }
 
                 .hero-source-row-main > small {
