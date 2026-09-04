@@ -15,6 +15,10 @@ mkdir -p "$DST"
 for f in config.json blog-accounts.json "Local State" .last_active_user .last-version settings.json; do
   [ -e "$SRC/$f" ] && cp "$SRC/$f" "$DST/"
 done
+# [2026-09-04] license/ 를 함께 복사한다. 이 폴더의 device.id 가 없으면 앱이 새 기기 ID 를 만들고,
+#   서버의 1계정 1기기 정책이 그것을 "다른 기기 로그인" 으로 보아 사장님 세션을 밀어낸다.
+#   드라이버는 지금 라이선스 경로를 타지 않지만, 타게 되는 순간 사고가 되므로 미리 막는다.
+[ -d "$SRC/license" ] && cp -r "$SRC/license" "$DST/"
 cp "$SRC"/settings_*.json "$DST/" 2>/dev/null
 if [ ! -s "$DST/.last_active_user" ]; then
   one=$(ls "$DST"/settings_*.json 2>/dev/null | head -1)
