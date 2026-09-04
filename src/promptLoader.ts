@@ -334,6 +334,27 @@ ${briefOverlay}`;
     }
   }
 
+  // 2.86 [2026-09-04 사장님 실측 10항] 사건/의혹 글의 주장·사실 규율.
+  //   분쟁 글에서 (1) 같은 사실 반복 (2) 전체 피해 주장액과 차용증 기재액 혼동
+  //   (3) 출처 없는 해석 문장 (4) 작성자 개인 의견 (5) 사과 요구를 '합의'로 확대
+  //   (6) 확인 안 한 '최초 폭로' 가 함께 나왔다. 죄명 확정(2·6항)은 실존인물 가드가
+  //   이미 막지만 나머지는 어디에도 없었다.
+  //   골격(2.84/2.85) 뒤에 두어 서술 규칙이 마지막 말을 갖게 한다. 이슈형 카테고리에만
+  //   건다 — IC-3/IC-4 는 일상·후기 글의 1인칭 체험 문체와 정면으로 충돌한다.
+  if (
+    (mode === 'seo' || mode === 'mate' || mode === 'homefeed')
+    && HOMEFEED_ISSUE_STORY_CATEGORIES.has(category)
+  ) {
+    const claimDiscipline = loadPromptFile('shared/issue-claim-discipline.prompt');
+    if (claimDiscipline) {
+      composed = `${composed}
+
+${claimDiscipline}`;
+    } else {
+      console.warn('[PromptLoader] issue-claim-discipline.prompt load failed - claim discipline skipped');
+    }
+  }
+
   // 2.87 [2026-08-26] 해시태그 전략 — 지금까지 아무 데도 없었다.
   //   스키마에 자리 5개와 "개수를 채우지 마라" 한 줄이 전부였고, 어떻게 만들지는
   //   아무도 말해주지 않았다. 실측한 유입 글들은 단일어 + 조합 롱테일 두 층을 쓰고

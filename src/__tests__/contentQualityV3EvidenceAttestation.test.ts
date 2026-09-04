@@ -207,7 +207,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-09-03 2차] 주제 3종 자체 생성 — exposure-structure 에 같은 수 다른 표기 되풀이 금지 추가로 재계산
         // [2026-09-04] 홈판·SEO 평가기에 직접 인용 커버리지 항목 추가로 재계산
         // [2026-09-04 2차] 홈판 평가기 상황·가치 단서 export(도입부 패치가 같은 단서를 씀)로 재계산
-        '85b839eddb94deed05330e301273658a3adb650201679f74765e7cbcd1bc892a',
+        // [2026-09-04 3차] 사건/의혹 글 주장·사실 규율(issue-claim-discipline) promptLoader 배선으로 재계산
+        'b377e11c5b6d56eb0cc45a93725039a97e6d7f3a9b524853360f4f9be0542db0',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

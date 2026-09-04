@@ -188,6 +188,7 @@ import { getAutoToneByCategory } from './contentTonePolicy.js';
 import { sanitizeStructuredContentClaims } from './contentClaimSanitizer.js';
 import { normalizeContentTableBlocks } from './content/tableBlockNormalizer.js';
 import { applyPostDraftFactCheck } from './content/postDraftFactCheck.js';
+import { applyIssueDisciplineAudit } from './content/issueDisciplineAudit.js';
 import { checkTitleAnswer, describeTitleAnswer } from './content/titleAnswerCheck.js';
 import { appendParaphraseUpgradeBlock, hasParaphraseUpgradeBrief } from './content/paraphraseUpgradeBlock.js';
 import {
@@ -7532,6 +7533,19 @@ async function generateStructuredContentInternal(
           await applyPostDraftFactCheck(optimized as any, source as any, () => loadConfig() as any);
         }
 
+        // ✅ [2026-09-04 사장님 실측 10항] 사건/의혹 글 자동 검수 — 규칙 탐지 + 저비용 LLM 1회 교정.
+        //   프롬프트(issue-claim-discipline)로 억제하고도 남는 것을 여기서 잡는다.
+        //   이슈형 카테고리에서만 돌고, 교정문이 규칙에 다시 걸리면 그 치환은 버린다.
+        //   팩트체크와 달리 promptVariant 게이트 밖에 둔다 — 이건 legacy 후처리가 아니라
+        //   변형과 무관하게 항상 받아야 하는 검수다.
+        {
+          await applyIssueDisciplineAudit(
+            optimized as any,
+            source as any,
+            () => resolveSideTaskRoute(source),
+          );
+        }
+
         // quality에 AI 탐지 정보 추가
         if (!optimized.quality) {
           optimized.quality = {
@@ -8225,6 +8239,19 @@ async function generateStructuredContentInternal(
         //   팩트체크를 한 번도 받지 못했다(실측 2026-08-28).
         if (allowLegacyPostDraftLlm) {
           await applyPostDraftFactCheck(optimized as any, source as any, () => loadConfig() as any);
+        }
+
+        // ✅ [2026-09-04 사장님 실측 10항] 사건/의혹 글 자동 검수 — 규칙 탐지 + 저비용 LLM 1회 교정.
+        //   프롬프트(issue-claim-discipline)로 억제하고도 남는 것을 여기서 잡는다.
+        //   이슈형 카테고리에서만 돌고, 교정문이 규칙에 다시 걸리면 그 치환은 버린다.
+        //   팩트체크와 달리 promptVariant 게이트 밖에 둔다 — 이건 legacy 후처리가 아니라
+        //   변형과 무관하게 항상 받아야 하는 검수다.
+        {
+          await applyIssueDisciplineAudit(
+            optimized as any,
+            source as any,
+            () => resolveSideTaskRoute(source),
+          );
         }
 
         await repairHeadingsBeforeFinalize(optimized, source);
