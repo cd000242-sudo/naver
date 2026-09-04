@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-03T18:14:31.096Z",
+  "publishedAt": "2026-09-03T23:57:49.496Z",
   "generator": "issue-niche-board",
   "schedule": "매일 07·13·19시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 80,
     "niche": 0,
-    "preemption": 2,
+    "preemption": 11,
     "pending": 0
   },
   "freeSample": {
@@ -19,18 +19,18 @@
   },
   "rows": [
     {
-      "keyword": "경기도 2027년 본예산",
-      "issue": "경기도 2027년 본예산",
-      "topic": "경기도 2027년 본예산",
+      "keyword": "나태훈 처벌",
+      "issue": "전혜원 알리바이 조작",
+      "topic": "전혜원 알리바이 조작",
       "lane": "realtime",
       "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "진범 규명 후 결말 궁금",
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 108,
+      "documentCount": 1,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": true,
@@ -38,99 +38,71 @@
       "demandStatus": "unknown",
       "demandRatio": 0,
       "issueStatus": "unknown",
-      "isHot": false,
+      "isHot": true,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "문서수 108",
-        "선점 후보 — 경쟁 문서 108건, 수요 미검출"
+        "문서수 1",
+        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
       ],
       "evidence": [
         {
+          "code": "next-wave",
+          "text": "다음 물결 — 진범 규명 후 결말 궁금"
+        },
+        {
           "code": "empty-field",
           "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
       "whySearch": {
-        "text": "2027년 경기도 본예산의 규모와 편성 내역, 주요 사업 예산을 미리 확인하려는 의도",
-        "basis": "AI 추론 — 실측 확인된 확장어 5개"
+        "text": "드라마 '욕망의 덫'에서 전혜원이 조작된 알리바이를 간파해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "경기도 2027년 본예산 규모와 전년 대비 증감·편성 일정 정리",
+          "text": "나태훈 처벌 욕망의 덫 20화 알리바이 조작 결말",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "경기도 2027년 본예산 규모 보고 이게 맞나 싶었어요",
+          "text": "욕망의 덫 나태훈 처벌 이렇게 흘러가더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "subKeywords": [
         {
-          "keyword": "경기도 추경",
-          "searchVolume": 1070,
-          "source": "ai-verified",
-          "frame": "generic"
-        },
-        {
-          "keyword": "경기도 예산 규모",
-          "searchVolume": 80,
-          "source": "ai-verified",
-          "frame": "generic"
-        },
-        {
-          "keyword": "경기도 예산안",
-          "searchVolume": 50,
+          "keyword": "욕망의 덫 나태훈",
+          "searchVolume": 60,
           "frame": "generic"
         }
       ],
       "keywordPool": [
         {
-          "keyword": "경기도 추경",
-          "searchVolume": 1070,
-          "source": "ai-verified",
-          "documentCount": 65546
-        },
-        {
-          "keyword": "경기도 예산 규모",
-          "searchVolume": 80,
-          "source": "ai-verified",
-          "documentCount": 394829
-        },
-        {
-          "keyword": "경기도 예산안",
-          "searchVolume": 50,
-          "source": "ai-verified",
-          "documentCount": 72341
-        },
-        {
-          "keyword": "경기도 예산 편성",
-          "searchVolume": 40,
-          "source": "ai-verified",
-          "documentCount": 112284
-        },
-        {
-          "keyword": "경기도 본예산",
-          "searchVolume": 10,
-          "source": "ai-verified",
-          "documentCount": 15861
+          "keyword": "욕망의 덫 나태훈",
+          "searchVolume": 60,
+          "documentCount": 84,
+          "source": "ai-verified"
         }
       ],
       "trend": null,
       "kinCount": 0,
       "kinTop": [],
       "monetize": null,
-      "measuredAt": "2026-09-03T18:12:46.729Z",
+      "measuredAt": "2026-09-03T23:54:13.488Z",
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 6,
-        "verified": 5
+        "proposed": 0,
+        "verified": 0
       }
     },
     {
@@ -145,7 +117,296 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 237,
+      "documentCount": 238,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 238",
+        "선점 후보 — 경쟁 문서 238건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인월드 AI가 TTS-2를 공개하고 MS와 게임 NPC 생성형 AI 툴킷을 개발해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인월드 AI 게임 NPC 붙이는 법과 실제 요금",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인월드 AI로 NPC 대화 붙여봤더니 이게 되네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-03T23:54:13.488Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 6,
+        "verified": 0
+      }
+    },
+    {
+      "keyword": "전혜원 알리바이 조작",
+      "issue": "전혜원 알리바이 조작",
+      "topic": "전혜원 알리바이 조작",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 49,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 49",
+        "선점 후보 — 경쟁 문서 49건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "드라마 '욕망의 덫'에서 전혜원이 조작된 알리바이를 간파해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "전혜원 알리바이 조작 나태훈 가짜 일정 간파한 결정적 단서",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "전혜원 알리바이 조작 장서희가 막아도 캘린더 글씨체에 딱 걸렸네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "욕망의 덫 전혜원",
+          "searchVolume": 2440,
+          "frame": "generic"
+        },
+        {
+          "keyword": "욕망의 덫 알리바이 조작",
+          "searchVolume": 340,
+          "frame": "generic"
+        },
+        {
+          "keyword": "전혜원 장서희",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "욕망의 덫 전혜원",
+          "searchVolume": 2440,
+          "documentCount": 2331,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "욕망의 덫 알리바이 조작",
+          "searchVolume": 340,
+          "documentCount": 199,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "전혜원 장서희",
+          "searchVolume": 10,
+          "documentCount": 2049,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-03T23:54:13.488Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "유지애 웨딩화보",
+      "issue": "곽시양과 유지애 결혼",
+      "topic": "곽시양과 유지애 결혼",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "결혼 후 공개",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 47,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 47",
+        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 결혼 후 공개"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "배우 곽시양과 러블리즈 출신 유지애가 11월 비공개 결혼을 발표해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "유지애 웨딩화보 곽시양과 1년 열애 11월 결혼",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "유지애 웨딩화보 곽시양이랑? 열애설도 없었는데",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "곽시양 유지애 결혼",
+          "searchVolume": 57020,
+          "frame": "generic"
+        },
+        {
+          "keyword": "유지애 나이",
+          "searchVolume": 910,
+          "frame": "generic"
+        },
+        {
+          "keyword": "러블리즈 유지애 프로필",
+          "searchVolume": 560,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "곽시양 유지애 결혼",
+          "searchVolume": 57020,
+          "documentCount": 927,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "유지애 나이",
+          "searchVolume": 910,
+          "documentCount": 1176,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "러블리즈 유지애 프로필",
+          "searchVolume": 560,
+          "documentCount": 703,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "유지애 프로필",
+          "searchVolume": 30,
+          "documentCount": 914,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "러블리즈 유지애 결혼",
+          "searchVolume": 20,
+          "documentCount": 1118,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "곽시양 유지애 나이차",
+          "searchVolume": 10,
+          "documentCount": 118,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-03T23:54:13.488Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "인월드 NPC 게임",
+      "issue": "인월드 AI",
+      "topic": "인월드 AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "적용 게임",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 72,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": true,
@@ -157,8 +418,96 @@
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "문서수 237",
-        "선점 후보 — 경쟁 문서 237건, 수요 미검출"
+        "문서수 72",
+        "선점 후보 — 경쟁 문서 72건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 적용 게임"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인월드 AI가 TTS-2를 공개하고 MS와 게임 NPC 생성형 AI 툴킷을 개발해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인월드 NPC 게임 뜻과 적용된 게임 5가지 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인월드 NPC 게임 AI가 말대꾸하는 거 보고 소름 돋았어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인월드 AI",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "AI 게임 캐릭터",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인월드 AI",
+          "searchVolume": 10,
+          "source": "ai-verified",
+          "documentCount": 238
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-03T23:54:13.488Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 4,
+        "verified": 1
+      }
+    },
+    {
+      "keyword": "경기도 2027년 본예산",
+      "issue": "경기도 2027년 본예산",
+      "topic": "경기도 2027년 본예산",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 113,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 113",
+        "선점 후보 — 경쟁 문서 113건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -167,7 +516,7 @@
         }
       ],
       "whySearch": {
-        "text": "인월드 AI가 MS와 게임 NPC용 생성형 AI 툴킷 개발 착수",
+        "text": "경기도가 2027년 본예산을 원점 재검토하고 시군 보조율을 30%로 제한해서",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -175,12 +524,112 @@
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "인월드 AI 사용법과 가격, 게임 NPC 적용까지",
+          "text": "경기도 2027년 본예산 보조율 30% 상한, 시군 부담 정리",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "인월드 AI로 NPC 만들다 이거 몰라서 반나절 날렸네요",
+          "text": "경기도 2027년 본예산 원점 재검토에 경기도 예산안 이렇게 되네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "경기도 예산 삭감",
+          "searchVolume": 500,
+          "frame": "generic"
+        },
+        {
+          "keyword": "경기도 예산안",
+          "searchVolume": 50,
+          "frame": "generic"
+        },
+        {
+          "keyword": "경기도 본예산",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "경기도 예산 삭감",
+          "searchVolume": 500,
+          "documentCount": 38805,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경기도 예산안",
+          "searchVolume": 50,
+          "documentCount": 72447,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경기도 본예산",
+          "searchVolume": 10,
+          "documentCount": 15882,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-03T23:54:13.488Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "TRM 오픈소스",
+      "issue": "순환 추론",
+      "topic": "순환 추론",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "공개 여부",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 116,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 116",
+        "선점 후보 — 경쟁 문서 116건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 공개 여부"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "삼성이 공개한 7M 소형 재귀모델 TRM의 깃허브 코드와 ARC-AGI 성능을 확인하려는 개발자 검색",
+        "basis": "AI 추론 — 근거 부족"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "TRM 오픈소스 7M 파라미터로 ARC-AGI 뚫은 삼성 소형모델 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "TRM 오픈소스 깃허브 받아 돌려보니 이게 진짜였네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -188,15 +637,452 @@
       "subKeywords": null,
       "keywordPool": null,
       "trend": null,
-      "kinCount": 1,
+      "kinCount": 0,
       "kinTop": [],
       "monetize": null,
-      "measuredAt": "2026-09-03T18:12:46.729Z",
+      "measuredAt": "2026-09-03T23:54:13.488Z",
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 6,
+        "proposed": 7,
         "verified": 0
+      }
+    },
+    {
+      "keyword": "속초항 터미널 재개",
+      "issue": "강정호",
+      "topic": "강정호",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "정상화 시점",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 181,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 181",
+        "선점 후보 — 경쟁 문서 181건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 정상화 시점"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "강정호 강원도의원이 속초항 국제여객터미널 정상화 현안을 점검해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "속초항 터미널 재개 국제여객터미널 정상화 현안 어디까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "속초항 터미널 재개된다더니 국제여객터미널 아직 이러고 있네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "속초항 국제여객터미널",
+          "searchVolume": 160,
+          "frame": "generic"
+        },
+        {
+          "keyword": "속초항 크루즈",
+          "searchVolume": 120,
+          "frame": "generic"
+        },
+        {
+          "keyword": "속초항 여객터미널",
+          "searchVolume": 70,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "속초항 국제여객터미널",
+          "searchVolume": 160,
+          "documentCount": 2752,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "속초항 크루즈",
+          "searchVolume": 120,
+          "documentCount": 5479,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "속초항 여객터미널",
+          "searchVolume": 70,
+          "documentCount": 3815,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "속초항 페리",
+          "searchVolume": 10,
+          "documentCount": 456,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-03T23:54:13.488Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "인월드 국내",
+      "issue": "인월드 AI",
+      "topic": "인월드 AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "한국 지원",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 163,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 163",
+        "선점 후보 — 경쟁 문서 163건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 한국 지원"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인월드 AI가 TTS-2를 공개하고 MS와 게임 NPC 생성형 AI 툴킷을 개발해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인월드 국내 출시 여부와 가격까지 한번에 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인월드 AI 국내에서 되나 했는데 이렇게 풀리네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인월드 AI",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인월드 AI",
+          "searchVolume": 10,
+          "documentCount": 238,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-03T23:54:13.488Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 4,
+        "verified": 0
+      }
+    },
+    {
+      "keyword": "곽시양 신혼집",
+      "issue": "곽시양과 유지애 결혼",
+      "topic": "곽시양과 유지애 결혼",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "결혼 근황 관심",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 222,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 222",
+        "선점 후보 — 경쟁 문서 222건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 결혼 근황 관심"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "배우 곽시양과 러블리즈 출신 유지애가 11월 비공개 결혼을 발표해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "곽시양 신혼집 유지애와 1년 교제 끝 11월 결혼",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "곽시양 신혼집 검색하다 유지애 결혼에 깜짝 놀랐네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "곽시양 유지애 결혼",
+          "searchVolume": 57020,
+          "frame": "generic"
+        },
+        {
+          "keyword": "곽시양 유지애",
+          "searchVolume": 6040,
+          "frame": "generic"
+        },
+        {
+          "keyword": "곽시양 결혼",
+          "searchVolume": 1700,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "곽시양 유지애 결혼",
+          "searchVolume": 57020,
+          "documentCount": 927,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "곽시양 유지애",
+          "searchVolume": 6040,
+          "documentCount": 942,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "곽시양 결혼",
+          "searchVolume": 1700,
+          "documentCount": 4367,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "곽시양 나이",
+          "searchVolume": 1080,
+          "documentCount": 2869,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "곽시양 유지애 나이차",
+          "searchVolume": 10,
+          "documentCount": 118,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 5,
+      "kinTop": [
+        {
+          "title": "150905 우결 김소연 곽시양 커플 노래!",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010203&docId=234236087&answerNo=1",
+          "views": 1200,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-03T23:54:13.488Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "기본소득당 존폐",
+      "issue": "용혜인 보조금 사퇴",
+      "topic": "용혜인 보조금 사퇴",
+      "lane": "realtime",
+      "issueType": "policy",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "당 운명 관심",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 290,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 290",
+        "선점 후보 — 경쟁 문서 290건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 당 운명 관심"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "군소정당 기본소득당이 계속 유지될지, 용혜인 중심의 당 존속 여부와 의석·지지율을 확인하려는 것",
+        "basis": "AI 추론 — 실측 확인된 확장어 5개"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "기본소득당 존폐 용혜인 의석수로 본 존속 전망",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "기본소득당 존폐설 진짜인가 싶어 용혜인 의석수 찾아봤더니",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "기본소득당 용혜인",
+          "searchVolume": 970,
+          "frame": "generic"
+        },
+        {
+          "keyword": "기본소득당 의원",
+          "searchVolume": 330,
+          "frame": "generic"
+        },
+        {
+          "keyword": "기본소득당 국고보조금",
+          "searchVolume": 170,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "기본소득당 용혜인",
+          "searchVolume": 970,
+          "source": "ai-verified",
+          "documentCount": 14803
+        },
+        {
+          "keyword": "기본소득당 지지율",
+          "searchVolume": 80,
+          "source": "ai-verified",
+          "documentCount": 2903
+        },
+        {
+          "keyword": "기본소득당 의석수",
+          "searchVolume": 70,
+          "source": "ai-verified",
+          "documentCount": 3171
+        },
+        {
+          "keyword": "기본소득당 정책",
+          "searchVolume": 40,
+          "source": "ai-verified",
+          "documentCount": 12148
+        },
+        {
+          "keyword": "기본소득당 국회의원",
+          "searchVolume": null,
+          "source": "ai-verified",
+          "documentCount": 17344
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-03T23:54:13.488Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 7,
+        "verified": 5
       }
     },
     {
@@ -323,11 +1209,12 @@
           0,
           0,
           0,
+          4,
           100
         ],
         "label": "🚀 떡상",
         "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-09-03T13:39:33.303Z"
+        "measuredAt": "2026-09-03T23:57:50.127Z"
       },
       "kinCount": 1,
       "kinTop": [],
@@ -341,79 +1228,9 @@
         "verified": 3
       },
       "searchVolumeLt10": false,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "preemptionKind": "demand-no-volume",
       "serp": null
-    },
-    {
-      "keyword": "전혜원 알리바이 조작",
-      "issue": "전혜원 알리바이 조작",
-      "topic": "전혜원 알리바이 조작",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "documentCount": 26,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 26",
-        "선점 후보 — 경쟁 문서 26건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "전혜원이 용의자 캘린더의 같은 글씨체로 조작된 알리바이를 간파했다.",
-        "basis": "뉴스 헤드라인 4건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "전혜원 알리바이 조작 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "근거 프레임 없음 — 일반형"
-        },
-        "home": {
-          "text": "전혜원 알리바이 조작 이거 보고 나서 생각이 완전 바뀌었어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-03T14:16:29.657Z",
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 0,
-        "verified": 0
-      },
-      "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z"
     },
     {
       "keyword": "고양시 Y-CITY 소송",
@@ -447,7 +1264,7 @@
         }
       ],
       "whySearch": {
-        "text": "Y-CITY 분양 계약자가 소송 진행 상황과 환불·계약해지 가능 여부를 확인하려는 검색",
+        "text": "고양시 Y-CITY(와이시티) 부동산·분양 관련 분쟁을 두고 소송 진행상황과 결과를 확인하려는 의도로 보인다.",
         "basis": "AI 추론 — 근거 부족"
       },
       "intentLabel": "분류 안 됨",
@@ -455,12 +1272,12 @@
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "고양시 Y-CITY 소송 계약 해지·환불 절차와 진행 상황",
+          "text": "고양시 Y-CITY 소송 진행상황과 판결 결과 정리",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "고양시 Y-CITY 소송 걸린 계약자들 환불 이렇게 받더라고요",
+          "text": "고양시 Y-CITY 소송 이거 알고 갔더니 마음이 좀 놓이더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -474,10 +1291,10 @@
       "measuredAt": "2026-09-03T14:16:29.657Z",
       "kinMode": "date-views-v2",
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 7,
+        "proposed": 3,
         "verified": 0
       }
     },
@@ -518,25 +1335,31 @@
         }
       ],
       "whySearch": {
-        "text": "마인드로직이 만든 팩트체크 AI 챗봇이 뭐고 어떻게 쓰는지 확인하려는 검색",
-        "basis": "AI 추론 — 실측 확인된 확장어 1개"
+        "text": "마인드로직이 만든 팩트챗이 어떤 서비스인지, 답이 정확한지, 기존 가상친구 앱과 뭐가 다른지 확인하려는 검색",
+        "basis": "AI 추론 — 실측 확인된 확장어 2개"
       },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "마인드로직 ai 팩트챗 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "파생 키워드 실측 '마인드로직 팩트챗' (검색량 10) — 1페이지 0개 제목에 없는 프레임"
+          "text": "마인드로직 ai 팩트챗 가상친구 앱과 뭐가 다른지 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "마인드로직 ai 팩트챗 직접 써보니 이게 되네요",
+          "text": "마인드로직 ai 팩트챗 이거 믿어도 되나 직접 써봤어요",
           "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
+          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
         }
       },
       "subKeywords": [
+        {
+          "keyword": "마인드로직 채용",
+          "searchVolume": 20,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
         {
           "keyword": "마인드로직 팩트챗",
           "searchVolume": 10,
@@ -545,6 +1368,12 @@
         }
       ],
       "keywordPool": [
+        {
+          "keyword": "마인드로직 채용",
+          "searchVolume": 20,
+          "source": "ai-verified",
+          "documentCount": 1270
+        },
         {
           "keyword": "마인드로직 팩트챗",
           "searchVolume": 10,
@@ -561,8 +1390,8 @@
       "carried": true,
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 4,
-        "verified": 1
+        "proposed": 6,
+        "verified": 2
       }
     },
     {
@@ -601,7 +1430,7 @@
         }
       ],
       "whySearch": {
-        "text": "한화M&S 직원·구직자가 육아동행지원금의 지급 대상·금액·신청 방법을 확인하려는 의도",
+        "text": "한화M&S 재직·구직자가 육아동행지원금 신청 자격과 지급액을 확인하려는 검색",
         "basis": "AI 추론 — 근거 부족"
       },
       "intentLabel": "분류 안 됨",
@@ -609,12 +1438,12 @@
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "한화M&S 육아동행지원금 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "근거 프레임 없음 — 일반형"
+          "text": "한화M&S 육아동행지원금 신청조건 지급금액 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "한화M&S 육아동행지원금 신청 대상 몰라서 놓칠 뻔했네요",
+          "text": "한화M&S 육아동행지원금 신청 안 하면 손해더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -627,11 +1456,11 @@
       "monetize": null,
       "measuredAt": "2026-09-03T13:31:16.574Z",
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 5,
+        "proposed": 7,
         "verified": 0
       }
     },
@@ -674,7 +1503,18 @@
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": null,
+      "titles": {
+        "seo": {
+          "text": "전혜원과 장서희의 대치 전체 장면 정리와 결말",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "전혜원과 장서희의 대치 그 장면 다시 보니까 소름이 돋더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
       "subKeywords": null,
       "keywordPool": null,
       "trend": null,
@@ -690,8 +1530,13 @@
       "monetize": null,
       "measuredAt": "2026-09-03T13:31:16.574Z",
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
-      "kinMode": "date-views-v2"
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 0,
+        "verified": 0
+      }
     },
     {
       "keyword": "용혜인 언더조직 논란",
@@ -808,7 +1653,7 @@
       "monetize": null,
       "measuredAt": "2026-09-03T13:31:16.574Z",
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinMode": "date-views-v2"
     },
     {
@@ -965,7 +1810,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "욕망의 덫 장서희 전혜원 신경전 대치 이 장면에서 터지더라고요",
+          "text": "욕망의 덫 장서희 전혜원 신경전 대치 이 장면에서 갈리더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -1009,100 +1854,7 @@
       },
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z"
-    },
-    {
-      "keyword": "유지애 웨딩화보",
-      "issue": "유지애",
-      "topic": "유지애",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "결혼 다음 화보 관심",
-      "verdict": "preemption",
-      "documentCount": 39,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 39",
-        "선점 후보 — 경쟁 문서 39건, 수요 미검출",
-        "추정치"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 결혼 다음 화보 관심"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "유지애 웨딩화보 공개 소식에 실제 사진과 결혼·남편 정보를 확인하려는 검색",
-        "basis": "AI 추론 — 실측 확인된 확장어 1개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "유지애 웨딩화보 결혼 남편 나이 한번에 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "러블리즈 유지애 웨딩화보 보고 다들 이 나이 맞냐고 하네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "러블리즈 유지애",
-          "searchVolume": 1920,
-          "frame": "generic"
-        },
-        {
-          "keyword": "유지애 나이",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "유지애 나이",
-          "searchVolume": 10,
-          "source": "ai-verified",
-          "documentCount": 1109
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-03T08:42:57.811Z",
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 6,
-        "verified": 1
-      },
-      "carried": true,
-      "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z"
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z"
     },
     {
       "keyword": "이파피루스 공모가",
@@ -1140,7 +1892,7 @@
         }
       ],
       "whySearch": {
-        "text": "상장 앞둔 이파피루스의 공모가·청약일정·경쟁률을 확인해 청약 참여 여부를 정하려는 의도",
+        "text": "이파피루스 상장 앞두고 공모주 청약을 넣을지 판단하려 공모가·경쟁률·상장일을 확인하려는 의도",
         "basis": "AI 추론 — 근거 부족"
       },
       "intentLabel": "분류 안 됨",
@@ -1153,7 +1905,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "이파피루스 공모가 보고 상장날 청약할지 아직도 못 정했네요",
+          "text": "이파피루스 공모가랑 상장일 보고 청약 마음 접었네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -1186,7 +1938,7 @@
       },
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z"
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z"
     },
     {
       "keyword": "이파피루스 상장일",
@@ -1224,8 +1976,8 @@
         }
       ],
       "whySearch": {
-        "text": "이파피루스는 전자문서·문서보안 솔루션 업체로, 공모주 청약과 상장일 일정을 확인하려는 투자자가 검색.",
-        "basis": "AI 추론 — 실측 확인된 확장어 1개"
+        "text": "이파피루스 상장일에 맞춰 공모주 청약 일정과 공모가를 확인해 청약 참여를 준비하려는 사람들",
+        "basis": "AI 추론 — 근거 부족"
       },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
@@ -1237,7 +1989,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "이파피루스 공모주 청약 넣기 전에 상장일부터 봤어야 했네요",
+          "text": "이파피루스 상장일 공모주 청약 잘못 넣으면 이렇게 물립니다",
           "frame": "ai",
           "basis": "메인+후킹 (실측 근거·확장어 미포함)"
         }
@@ -1271,12 +2023,12 @@
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 10,
-        "verified": 1
+        "proposed": 9,
+        "verified": 0
       },
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z"
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z"
     },
     {
       "keyword": "PyMuPDF 사용법",
@@ -1314,7 +2066,7 @@
         }
       ],
       "whySearch": {
-        "text": "파이썬으로 PDF에서 텍스트·이미지·표를 추출하려는 개발자가 설치법과 한글깨짐 해결을 찾음",
+        "text": "파이썬으로 PDF에서 텍스트·이미지를 추출하려는 개발자가 fitz 설치와 기본 사용법을 익히려 검색한다",
         "basis": "AI 추론 — 실측 확인된 확장어 1개"
       },
       "intentLabel": "분류 안 됨",
@@ -1322,12 +2074,12 @@
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "PyMuPDF 사용법 설치부터 텍스트·이미지·표 추출까지 정리",
+          "text": "PyMuPDF 사용법 텍스트 이미지 추출 예제 모음",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "설치는 됐는데 PyMuPDF 사용법에서 막히더라고요 이거였네요",
+          "text": "PyMuPDF 사용법 헤매다 설치부터 다시 보니 풀리더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -1355,12 +2107,12 @@
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 9,
+        "proposed": 8,
         "verified": 1
       },
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z"
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z"
     },
     {
       "keyword": "이소영 인준",
@@ -1465,124 +2217,7 @@
       "kinMode": "date-views-v2",
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z"
-    },
-    {
-      "keyword": "곽시양 신혼집",
-      "issue": "유지애",
-      "topic": "유지애",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "신혼 관심",
-      "verdict": "preemption",
-      "documentCount": 197,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 197",
-        "선점 후보 — 경쟁 문서 197건, 수요 미검출",
-        "추정치"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 신혼 관심"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "곽시양이 아나운서 임현주와 결혼한 뒤 신혼집 위치·정보와 부부 나이차를 궁금해하는 사람들",
-        "basis": "AI 추론 — 실측 확인된 확장어 3개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "곽시양 신혼집 위치부터 임현주 나이차까지 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "곽시양 신혼집 보고 임현주랑 나이차 실화냐 싶었네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "곽시양 나이",
-          "searchVolume": 340,
-          "frame": "generic"
-        },
-        {
-          "keyword": "곽시양 결혼",
-          "searchVolume": 200,
-          "frame": "generic"
-        },
-        {
-          "keyword": "곽시양 유지애",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "곽시양 임현주",
-          "searchVolume": 700,
-          "source": "ai-verified",
-          "documentCount": 462
-        },
-        {
-          "keyword": "곽시양 나이",
-          "searchVolume": 340,
-          "source": "ai-verified",
-          "documentCount": 2606
-        },
-        {
-          "keyword": "곽시양 결혼",
-          "searchVolume": 200,
-          "source": "ai-verified",
-          "documentCount": 3736
-        }
-      ],
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": [
-        {
-          "title": "150905 우결 김소연 곽시양 커플 노래!",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010203&docId=234236087&answerNo=1",
-          "views": 1197,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-03T08:42:57.811Z",
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 8,
-        "verified": 3
-      },
-      "carried": true,
-      "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z"
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z"
     },
     {
       "keyword": "래블업 청약일",
@@ -1688,7 +2323,7 @@
       },
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z"
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z"
     },
     {
       "keyword": "방시혁 불구속 송치",
@@ -1702,7 +2337,7 @@
       "verdict": "preemption",
       "documentCount": 212,
       "documentCountMeasured": true,
-      "searchVolume": null,
+      "searchVolume": 2230,
       "hasLiveDemand": false,
       "demandStatus": "unknown",
       "demandRatio": 0,
@@ -1782,7 +2417,43 @@
           "documentCount": 4063
         }
       ],
-      "trend": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          100
+        ],
+        "label": "🚀 떡상",
+        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
+        "measuredAt": "2026-09-03T23:57:50.127Z"
+      },
       "kinCount": 0,
       "kinTop": [],
       "monetize": null,
@@ -1795,7 +2466,7 @@
       },
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z"
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z"
     },
     {
       "keyword": "입찰 유령업체 세무조사",
@@ -1890,7 +2561,7 @@
       },
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z"
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z"
     },
     {
       "keyword": "RX ART 2026",
@@ -1941,7 +2612,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "RX ART 2026 직접 보니까 생각이랑 다르네요",
+          "text": "RX ART 2026 직접 가보니까 얘기가 좀 다르더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -1999,7 +2670,7 @@
         }
       ],
       "whySearch": {
-        "text": "베슬AI(AI 인프라 스타트업)가 상장하는지, 공모주 청약이 가능한지 확인하려는 검색",
+        "text": "AI 스타트업 베슬AI가 실제 상장하는지, 공모주 청약·투자로 참여 가능한지 확인하려는 검색",
         "basis": "AI 추론 — 실측 확인된 확장어 1개"
       },
       "intentLabel": "분류 안 됨",
@@ -2007,12 +2678,12 @@
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "베슬AI 상장 공모주 청약 일정과 예상 기업가치",
+          "text": "베슬AI 상장 공모주 청약일정과 주가·기업가치 전망",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "베슬AI 상장 얘기 나오길래 주가까지 들여다봤더니 이러네요",
+          "text": "베슬AI 상장 소식에 주가부터 찾아봤는데 이게 좀 애매하더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -2039,11 +2710,11 @@
       "measuredAt": "2026-09-03T05:48:11.001Z",
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 7,
+        "proposed": 5,
         "verified": 1
       }
     },
@@ -2091,7 +2762,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "뮤즈 스파크 1.3 사용법 이렇게 하니까 바로 되더라고요",
+          "text": "뮤즈 스파크 1.3 사용법 이렇게 하니까 딱 풀리네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -2104,14 +2775,50 @@
         }
       ],
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          100
+        ],
+        "label": "🚀 떡상",
+        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
+        "measuredAt": "2026-09-03T23:57:50.127Z"
+      },
       "kinCount": 2,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-03T04:46:25.082Z",
       "carried": true,
       "searchVolumeLt10": false,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
@@ -2235,7 +2942,7 @@
       "measuredAt": "2026-09-03T04:46:25.082Z",
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
@@ -2292,7 +2999,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "부천시 Gemini Pro 써보니까 이래서 다들 갈아타더라고요",
+          "text": "부천시 Gemini Pro 써보니까 이래서 다들 난리였네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -2306,7 +3013,7 @@
       "measuredAt": "2026-09-03T04:46:25.082Z",
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
@@ -2404,7 +3111,7 @@
       "measuredAt": "2026-09-03T04:46:25.082Z",
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinMode": "date-views-v2"
     },
     {
@@ -2532,7 +3239,7 @@
       "measuredAt": "2026-09-03T04:46:25.082Z",
       "carried": true,
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
@@ -2566,7 +3273,7 @@
       "carried": true,
       "evidence": [],
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinCount": 0,
       "kinTop": [],
       "kinMode": "date-views-v2",
@@ -2575,13 +3282,25 @@
           "keyword": "PSM 공정안전관리",
           "searchVolume": 50,
           "source": "ai-verified",
-          "documentCount": 10564
+          "documentCount": 10565
         },
         {
           "keyword": "휴온스엔 채용",
           "searchVolume": 20,
           "source": "ai-verified",
           "documentCount": 2624
+        },
+        {
+          "keyword": "휴온스엔 연봉",
+          "searchVolume": 20,
+          "source": "ai-verified",
+          "documentCount": 1076
+        },
+        {
+          "keyword": "휴온스엔 춘천공장",
+          "searchVolume": 10,
+          "source": "ai-verified",
+          "documentCount": 310
         }
       ],
       "subKeywords": [
@@ -2596,24 +3315,34 @@
           "searchVolume": 20,
           "source": "ai-verified",
           "frame": "generic"
+        },
+        {
+          "keyword": "휴온스엔 연봉",
+          "searchVolume": 20,
+          "source": "ai-verified",
+          "frame": "generic"
         }
       ],
       "titles": {
         "seo": {
-          "text": "휴온스엔 춘천공장 PSM 등급과 안전관리자 채용 조건",
+          "text": "휴온스엔 춘천공장 PSM 등급과 인증 절차 정리",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "휴온스엔 춘천공장 PSM 공정안전관리 뭔지 모르고 갔다 헤맸네요",
+          "text": "휴온스엔 춘천공장 PSM 채용 이거 모르면 헛수고네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 4,
-        "verified": 2
+        "proposed": 5,
+        "verified": 4
+      },
+      "whySearch": {
+        "text": "휴온스엔 춘천공장의 공정안전관리(PSM) 현황과 채용·근무 정보를 확인하려는 지원자·업계 종사자의 검색.",
+        "basis": "AI 추론 — 실측 확인된 확장어 4개"
       }
     },
     {
@@ -2642,7 +3371,7 @@
       "carried": true,
       "evidence": [],
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinCount": 0,
       "kinTop": [],
       "kinMode": "date-views-v2",
@@ -2653,7 +3382,7 @@
           "basis": "근거 프레임 없음 — 일반형"
         },
         "home": {
-          "text": "월드랩스 리페이 이거 모르고 넘어가면 나중에 후회하더라고요",
+          "text": "월드랩스 리페이 이런 방식일 줄은 몰랐네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -2690,7 +3419,7 @@
       "carried": true,
       "evidence": [],
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinCount": 0,
       "kinTop": [],
       "kinMode": "date-views-v2",
@@ -2793,7 +3522,7 @@
       "carried": true,
       "evidence": [],
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinCount": 0,
       "kinTop": [],
       "kinMode": "date-views-v2",
@@ -2884,7 +3613,7 @@
       "carried": true,
       "evidence": [],
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinCount": 0,
       "kinTop": [],
       "kinMode": "date-views-v2",
@@ -2976,7 +3705,7 @@
       "carried": true,
       "evidence": [],
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinCount": 1,
       "kinTop": [],
       "kinMode": "date-views-v2",
@@ -3003,7 +3732,7 @@
           "basis": "파생 키워드 실측 '유병훈 프로필' (검색량 740) — 1페이지 0개 제목에 없는 프레임"
         },
         "home": {
-          "text": "유병훈 학력 찾다가 프로필까지 싹 뒤져봤네요",
+          "text": "유병훈 프로필 찾다가 학력 보고 이래서 그랬구나 싶었네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -3014,8 +3743,8 @@
       },
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 5,
-        "verified": 1
+        "proposed": 0,
+        "verified": 0
       }
     },
     {
@@ -3044,7 +3773,7 @@
       "carried": true,
       "evidence": [],
       "searchVolumeLt10": true,
-      "searchVolumeMeasuredAt": "2026-09-03T18:14:31.702Z",
+      "searchVolumeMeasuredAt": "2026-09-03T23:57:50.127Z",
       "kinCount": 0,
       "kinTop": [],
       "kinMode": "date-views-v2",
@@ -3055,7 +3784,7 @@
           "basis": "근거 프레임 없음 — 일반형"
         },
         "home": {
-          "text": "뮤즈 스파크 스펙 이거 보고 나서야 감이 잡히더라고요",
+          "text": "뮤즈 스파크 스펙 이 부분 보고 마음 정했네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -3069,193 +3798,85 @@
   ],
   "issues": [
     {
-      "issue": "포즈",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "박찬욱 감독과 송중기·유해진 등 배우들이 포토행사에서 포즈를 취함",
-      "headlines": [
-        {
-          "title": "포즈 취하는 김은희 작가",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-03T11:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016289084?sid=103"
-        },
-        {
-          "title": "포즈 취하는 배우 안재홍",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-03T11:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016289082?sid=103"
-        },
-        {
-          "title": "포즈 취하는 배우 유해진",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-03T10:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016289075?sid=103"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "포즈간츠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인생네컷 포즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포포즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포즈난",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "사진포즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포즈의원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "포포즈 장례식장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "죠죠 포즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "개봉일",
-          "reason": "영화 개봉 시점 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "출연진",
-          "reason": "전체 캐스팅 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "예고편",
-          "reason": "티저 공개 대기",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "시놉시스",
-          "reason": "줄거리 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "공개 플랫폼",
-          "reason": "OTT·극장 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "오스틴 36호 홈런",
+      "issue": "전혜원 알리바이 조작",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "LG 오스틴이 36호 홈런을 치며 두산전 스윕과 4연승을 이끔",
+      "why": "드라마 '욕망의 덫'에서 전혜원이 조작된 알리바이를 간파해서",
       "headlines": [
         {
-          "title": "2년 차 박시원으로 두산 곽빈 잡은 LG…오스틴은 36호 홈런",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-03T12:17:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/001/0016289135"
+          "title": "\"불륜 루머 유포\" 장서희, 이사 선임 막았다…전혜원은 '알리바이 조작...",
+          "press": "tvreport.co.kr",
+          "publishedAt": "2026-09-03T12:28:00.000Z",
+          "link": "https://m.entertain.naver.com/article/213/0001399991"
         },
         {
-          "title": "오스틴 홈런·손주영 세이브…LG, 두산과 3연전 싹쓸이하고 4연승 질주",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-03T12:18:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/003/0014168403"
+          "title": "‘욕망의 덫’ 20화 예고 심상찮다…나부장 알리바이 조작에 은설 의심...",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-09-03T14:16:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1157132"
         },
         {
-          "title": "박시원 5이닝 무실점-오스틴 36호 홈런… LG, 두산전 싹쓸이하며 4연승",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-09-03T13:23:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/025/0003548998"
+          "title": "'욕망의 덫' 전혜원, '나태훈' 가짜 일정 간파",
+          "press": "enter.etoday.co.kr",
+          "publishedAt": "2026-09-03T16:00:00.000Z",
+          "link": "https://enter.etoday.co.kr/news/view/301929"
         }
       ],
       "concentrated": [],
       "nextWave": [
         {
-          "keyword": "홈런왕 경쟁",
-          "reason": "시즌 타이틀 향방",
+          "keyword": "나태훈 처벌",
+          "reason": "진범 규명 후 결말 궁금",
+          "searchVolume": null,
+          "documentCount": 1,
+          "onBoard": true
+        },
+        {
+          "keyword": "욕망의 덫 결말",
+          "reason": "마지막회 향방",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "LG 매직넘버",
-          "reason": "우승 확정 시점",
+          "keyword": "은설 복수",
+          "reason": "다음 전개 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "오스틴 40홈런",
-          "reason": "대기록 달성 여부",
+          "keyword": "전혜원 진실",
+          "reason": "엄마 살해 규명",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "오스틴 재계약",
-          "reason": "내년 잔류 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "가을야구",
-          "reason": "포스트시즌 활약",
+          "keyword": "장서희 몰락",
+          "reason": "악역 최후 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 2
     },
     {
-      "issue": "곽시양과 유지애",
+      "issue": "곽시양과 유지애 결혼",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "곽시양과 유지애가 1년 교제 끝에 11월 비공개 결혼 발표",
+      "why": "배우 곽시양과 러블리즈 출신 유지애가 11월 비공개 결혼을 발표해서",
       "headlines": [
         {
-          "title": "열애설 없이 결혼 발표 직행…곽시양·유지애, 11월 부부 된다",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-03T06:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005729965?sid=103"
+          "title": "배우 곽시양, 러블리즈 출신 유지애 결혼…1년 교제",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-09-03T08:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002821507?sid=103"
         },
         {
           "title": "배우 곽시양·러블리즈 출신 유지애 결혼…“11월에 비공개로”",
@@ -3264,45 +3885,308 @@
           "link": "https://n.news.naver.com/mnews/article/020/0003745506?sid=102"
         },
         {
-          "title": "배우 곽시양, 러블리즈 출신 유지애 결혼…1년 교제",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-09-03T08:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002821507?sid=103"
+          "title": "열애설 없이 결혼 발표 직행…곽시양·유지애, 11월 부부 된다",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-03T06:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005729965?sid=103"
         }
       ],
       "concentrated": [],
       "nextWave": [
         {
-          "keyword": "결혼식 장소",
-          "reason": "예식 장소 궁금",
+          "keyword": "곽시양 결혼식",
+          "reason": "11월 날짜 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "웨딩화보",
-          "reason": "공개 여부",
+          "keyword": "유지애 웨딩화보",
+          "reason": "결혼 후 공개",
+          "searchVolume": null,
+          "documentCount": 47,
+          "onBoard": true
+        },
+        {
+          "keyword": "곽시양 신혼집",
+          "reason": "결혼 근황 관심",
+          "searchVolume": null,
+          "documentCount": 222,
+          "onBoard": true
+        },
+        {
+          "keyword": "유지애 활동",
+          "reason": "결혼 후 행보",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "러블리즈 축하",
-          "reason": "멤버 반응",
+          "keyword": "곽시양 유지애 만남",
+          "reason": "교제 계기 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 2
+    },
+    {
+      "issue": "경상수지 흑자",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "7월 경상수지가 반도체 호황에 420억달러 흑자로 동월 역대 최대여서",
+      "headlines": [
+        {
+          "title": "[속보] 7월 경상수지 흑자 420억달러 돌파…반도체 호황에 수출도 ‘역...",
+          "press": "kyeonggi.com",
+          "publishedAt": "2026-09-03T23:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/666/0000121933?sid=101"
+        },
+        {
+          "title": "7월 경상수지 420.8억달러 흑자…반도체 호황에 동월 역대 최대",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-03T23:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016289260?sid=101"
+        },
+        {
+          "title": "[속보] 7월 경상수지 421억달러 흑자…반도체 호황에 동월 역대 최대",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-03T23:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005328617?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "경상수지 흑자 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경상수지 흑자 규모",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경상수지 흑자국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경상수지 흑자 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "8월 경상수지",
+          "reason": "다음 발표 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "곽시양 차기작",
-          "reason": "결혼 후 활동",
+          "keyword": "경상수지 연간전망",
+          "reason": "올해 총액 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "신혼집",
-          "reason": "거주지 관심",
+          "keyword": "환율 영향",
+          "reason": "흑자와 원화 관계",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "반도체 수출 전망",
+          "reason": "견인 지속성",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "무역수지 발표",
+          "reason": "관련 지표 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "김정관 관세 불리하지",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "김정관이 美 반도체 관세를 경쟁국보다 불리하지 않은 대우로 논의한다고 밝혀서",
+      "headlines": [
+        {
+          "title": "김정관 \"美반도체 관세 '불리하지 않은 대우' 정신 하에 논의\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-03T20:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016289199?sid=104"
+        },
+        {
+          "title": "김정관 \"美반도체 관세 불리 않을것…대미투자 1호 9월 마무리\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-03T20:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014168509?sid=104"
+        },
+        {
+          "title": "김정관 “美 반도체 관세, 경쟁국보다 불리하지 않게 논의”",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-03T22:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006363469?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "반도체 관세율",
+          "reason": "실제 세율 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "대미투자 내용",
+          "reason": "1호 규모 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼성 관세 영향",
+          "reason": "기업별 여파",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "관세 협상 결과",
+          "reason": "최종 타결 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "하이닉스 관세",
+          "reason": "업체 영향 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "체포",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "지하철 2호선에서 여성들을 추행한 50대가 현행범으로 체포돼서",
+      "headlines": [
+        {
+          "title": "경찰, 지하철 2호선서 여성들 추행한 50대 체포…구속영장 검토",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-03T10:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014168358?sid=102"
+        },
+        {
+          "title": "경찰, 지하철 2호선서 여성들 잇따라 추행한 남성 현행범 체포",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-03T08:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009150015?sid=102"
+        },
+        {
+          "title": "[속보]지하철 2호선서 女 뒤에 딱붙어…SNS 달군 50대男 체포",
+          "press": "munhwa.com",
+          "publishedAt": "2026-09-03T14:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/021/0002816199?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "체포적부심",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "긴급체포",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "체포왕",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "체포하겠어",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "현행범체포",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경찰 체포",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "현행범체포 요건",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "경찰 긴급체포",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "추행 50대 신상",
+          "reason": "신원 공개 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "구속영장 결과",
+          "reason": "발부 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "지하철 성범죄 통계",
+          "reason": "재발 우려",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "성추행 처벌 수위",
+          "reason": "형량 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "몰카 처벌 사례",
+          "reason": "유사 사건 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -3316,7 +4200,7 @@
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "경기도가 2027년 본예산을 구조조정하며 시군 보조율 30% 상한 통보",
+      "why": "경기도가 2027년 본예산을 원점 재검토하고 시군 보조율을 30%로 제한해서",
       "headlines": [
         {
           "title": "경기도, 2027년 본예산 원점 재검토…안전·민생·광역사무 집중",
@@ -3325,51 +4209,51 @@
           "link": "http://www.newstown.co.kr/news/articleView.html?idxno=714690"
         },
         {
-          "title": "경기도, 2027년 본예산 강력 세출 구조조정...31개 시군과 재정 협력 논...",
-          "press": "newspim.com",
-          "publishedAt": "2026-09-03T11:20:00.000Z",
-          "link": "https://www.newspim.com/news/view/20260903001248"
+          "title": "경기도, 내년 보조율 30% 상한 통보…시군 재정 부담 커진다",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-03T10:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016289043?sid=102"
         },
         {
-          "title": "[단독] 경기도, 국비 매칭 도비 끊고 보조율 30% 제한...시·군 거센 반발...",
-          "press": "kyeonggi.com",
-          "publishedAt": "2026-09-03T08:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/666/0000121888?sid=102"
+          "title": "경기도, 내년도 시군 보조사업 보조율 30%까지만 적용",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-03T12:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014168407?sid=102"
         }
       ],
       "concentrated": [],
       "nextWave": [
         {
-          "keyword": "시군 반발",
-          "reason": "지자체 대응 주목",
+          "keyword": "시군 반발 대응",
+          "reason": "협의 결과 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "경기도 예산 확정",
+          "reason": "최종 규모",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "복지사업 축소",
-          "reason": "보조율 여파",
+          "reason": "삭감 대상 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "김동연 예산",
-          "reason": "도지사 방침",
+          "reason": "도지사 입장",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "경기도의회",
-          "reason": "예산 심의",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "내년 세수",
-          "reason": "재정 전망",
+          "keyword": "보조율 조정",
+          "reason": "완화 여부",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -3378,488 +4262,240 @@
       "rowCount": 1
     },
     {
-      "issue": "서울라이트 DDP 개막",
-      "issueType": "fresh",
+      "issue": "용혜인 보조금 사퇴",
+      "issueType": "policy",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": false,
-      "why": "서울라이트 DDP 2026 가을이 DDP에서 개막",
-      "headlines": [
-        {
-          "title": "‘서울라이트 DDP 가을’ 개막",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-03T12:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009150183?sid=102"
-        },
-        {
-          "title": "서울라이트 DDP 2026 가을",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-03T11:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016289095?sid=103"
-        },
-        {
-          "title": "\"DDP를 거대한 빛의 공연장으로\"…서울라이트 DDP 개막",
-          "press": "fnnews.com",
-          "publishedAt": "2026-09-03T10:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005570890?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "관람 시간",
-          "reason": "운영 시간 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "예약 방법",
-          "reason": "사전신청 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "포토스팟",
-          "reason": "사진 명소 찾기",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "종료일",
-          "reason": "언제까지 관람",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "주차 정보",
-          "reason": "방문 편의",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "스낳대",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "스낳대 풀리그에서 ACDC와 영써티즈가 6승으로 결승 청신호",
-      "headlines": [
-        {
-          "title": "[스낳대] '스낳대' 풀리그 2일차, ACDC 결승행 '청신호'",
-          "press": "inven.co.kr",
-          "publishedAt": "2026-09-03T16:20:00.000Z",
-          "link": "https://m.sports.naver.com/esports/article/442/0000196226"
-        },
-        {
-          "title": "[스낳대] '스낳대' 풀리그 1일차, ACDC&영 써티즈 나란히 6승 챙기며 공...",
-          "press": "inven.co.kr",
-          "publishedAt": "2026-09-02T17:40:00.000Z",
-          "link": "https://m.sports.naver.com/esports/article/442/0000196169"
-        },
-        {
-          "title": "[스낳대] \"크랭크, 소우릎 캐리\" 영써티즈 6대 2 완승",
-          "press": "gametoc.co.kr",
-          "publishedAt": "2026-09-02T17:52:00.000Z",
-          "link": "https://www.gametoc.co.kr/news/articleView.html?idxno=111170"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "2026 스낳대",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "치지직 스낳대",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스낳대 예매",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "결승 일정",
-          "reason": "결승전 날짜",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "우승팀",
-          "reason": "최종 결과",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "예매 오픈",
-          "reason": "티켓 구하기",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "대진표",
-          "reason": "매치업 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "스낳대 다시보기",
-          "reason": "경기 VOD",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "용인 안전문화살롱",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "용인시가 용인비전 2040 연계 제19회 안전문화살롱 개최",
-      "headlines": [
-        {
-          "title": "'용인비전 2040' 연계 안전시스템 구축…안전문화살롱 개최",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-03T07:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014168139?sid=102"
-        },
-        {
-          "title": "이상일 용인시장 “반도체 산단 공사 대비 안전 시스템 구축”",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-09-03T11:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005811736?sid=102"
-        },
-        {
-          "title": "용인시, 19회 안전문화살롱 개최…안전 시스템 강화 논의",
-          "press": "gukjenews.com",
-          "publishedAt": "2026-09-03T07:28:00.000Z",
-          "link": "https://www.gukjenews.com/news/articleView.html?idxno=3684008"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "반도체 산단",
-          "reason": "공사 진행 상황",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "용인비전2040",
-          "reason": "계획 내용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "이상일 시장",
-          "reason": "시정 행보",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "다음 살롱",
-          "reason": "차기 개최 일정",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "용인 호재",
-          "reason": "지역 개발 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "LG 박시원",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
       "isHot": true,
-      "why": "LG 2년차 박시원이 데뷔 첫 승으로 두산 곽빈을 꺾음",
+      "why": "용혜인이 6년 전 국고보조금 폐지를 주장한 사실이 재조명돼서",
       "headlines": [
         {
-          "title": "2년 차 박시원으로 두산 곽빈 잡은 LG…오스틴은 36호 홈런",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-03T12:17:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/001/0016289135"
-        },
-        {
-          "title": "'데뷔 첫 승리' LG 박시원 \"곽빈과 맞대결 의식 안해…주영이 형 믿었다...",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-03T13:17:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/003/0014168421"
-        },
-        {
-          "title": "'2년차 무명' 박시원, '최고 에이스' 곽빈 잡았다...LG, 잠실 3연전 싹쓸...",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-03T12:15:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/018/0006363375"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "다음 등판",
-          "reason": "등판 일정 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "선발 안착",
-          "reason": "로테이션 합류",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "박시원 구위",
-          "reason": "투구 스탯",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "신인왕",
-          "reason": "후보 거론",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "가을야구 등판",
-          "reason": "포스트시즌 기용",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "제미나이",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "구글이 제미나이 3.8 플래시를 출시하고 프로는 지연",
-      "headlines": [
-        {
-          "title": "구글 '제미나이3.8 플래시' 공개…'프로'는 또 지연",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-03T02:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009148821?sid=105"
-        },
-        {
-          "title": "구글, 제미나이 3.8 플래시·플래시 사이버 출시",
-          "press": "it.chosun.com",
-          "publishedAt": "2026-09-03T10:50:00.000Z",
-          "link": "https://it.chosun.com/news/articleView.html?idxno=2023092169465"
-        },
-        {
-          "title": "구글, '제미나이 3.8 플래시' 출시…코딩·에이전트 성능 끌어올렸다",
-          "press": "joseilbo.com",
-          "publishedAt": "2026-09-03T01:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/123/0002389531?sid=004"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제미나이 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제미나이 유료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제미나이 학생",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제미나이 챗지피티",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제미나이 사용법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제미나이 프롬프트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "제미나이 사주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "제미나이 프로",
-          "reason": "프로 출시 시점",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "챗gpt 비교",
-          "reason": "성능 차이",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "무료 사용",
-          "reason": "이용 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "요금제",
-          "reason": "유료 가격",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "코딩 활용",
-          "reason": "개발 적용",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "챗gpt",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "챗GPT 광고가 200일 만에 연매출 1조3700억원 돌파",
-      "headlines": [
-        {
-          "title": "챗GPT 광고 시작 200일만에…연매출 1조3700억원 돌파",
+          "title": "용혜인, 6년 전엔 \"국고보조금은 기생충 정당만 키운다\"",
           "press": "hankyung.com",
-          "publishedAt": "2026-09-01T12:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005327470?sid=105"
+          "publishedAt": "2026-09-03T22:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005328609?sid=100"
         },
         {
-          "title": "구글, 네이버 두달째 추월…챗GPT 이용시간 11% 늘었다",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-03T04:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006363095?sid=105"
+          "title": "용혜인, 6년 전 \"기생충 정당 없애자…국고보조금 폐지\" 주장",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-03T22:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001967216?sid=100"
         },
         {
-          "title": "'엔리케 오른팔' 모레노 임시 감독…'챗 GPT' 의존은 흑역사",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-01T21:00:00.000Z",
-          "link": "https://m.sports.naver.com/kfootball/article/003/0014162831"
+          "title": "용혜인, 6년 전엔 “국고보조금 기생충 정치…폐지하라” 주장",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-09-03T21:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003549090?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "용혜인 사퇴 여부",
+          "reason": "거취 결정",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "국고보조금 지급",
+          "reason": "지급 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "기본소득당 존폐",
+          "reason": "당 운명 관심",
+          "searchVolume": null,
+          "documentCount": 290,
+          "onBoard": true
+        },
+        {
+          "keyword": "용혜인 입장문",
+          "reason": "해명 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "정당보조금 논란",
+          "reason": "여론 향방",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "강정호",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "강정호 강원도의원이 속초항 국제여객터미널 정상화 현안을 점검해서",
+      "headlines": [
+        {
+          "title": "강정호는 2할8푼 친다고 장담했는데…이정후 ML 풀타임의 벽인가, 핑계...",
+          "press": "mydaily.co.kr",
+          "publishedAt": "2026-09-03T12:00:00.000Z",
+          "link": "https://m.sports.naver.com/wbaseball/article/117/0004101609"
+        },
+        {
+          "title": "'나성범 이후 11년' 역대급 유격수 탄생하나, ML행 보증 수표 임박했다...",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-09-02T03:43:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/076/0004441726"
+        },
+        {
+          "title": "강정호 도의원, 속초항 국제여객터미널 정상화 등 현안 점검",
+          "press": "kwnews.co.kr",
+          "publishedAt": "2026-08-27T06:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/087/0001213971?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "챗 GPT 무료",
+          "keyword": "강정호 나무위키",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "챗 GPT 유료",
+          "keyword": "강정화",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "챗gpt 프롬프트",
+          "keyword": "강정호 치과의사",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "챗gpt 사주",
+          "keyword": "강정호 기록",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "챗gpt go",
+          "keyword": "배우강정화",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "챗gpt 프로",
+          "keyword": "강정환",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "미니쉬 강정호",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강정호 원장",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "광고 방식",
-          "reason": "노출 형태 궁금",
+          "keyword": "속초항 터미널 재개",
+          "reason": "정상화 시점",
+          "searchVolume": null,
+          "documentCount": 181,
+          "onBoard": true
+        },
+        {
+          "keyword": "강정호 복귀",
+          "reason": "야구 근황",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "EU 규제",
-          "reason": "규제 영향",
+          "keyword": "강원도 항만",
+          "reason": "정책 방향",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "유료 요금",
-          "reason": "구독 비용",
+          "keyword": "속초 관광",
+          "reason": "항만 영향",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "제미나이 비교",
-          "reason": "경쟁 구도",
+          "keyword": "강정호 방송",
+          "reason": "활동 근황",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "KT 선두 탈환",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "안현민 연타석 홈런으로 KT가 한화를 13-11로 꺾고 선두를 탈환해서",
+      "headlines": [
+        {
+          "title": "'안현민 연타석 홈런' KT, 한화 13-11 꺾고 선두 탈환…한화 9연패",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-03T13:28:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/003/0014168424"
+        },
+        {
+          "title": "'안현민 2홈런 5타점' KT, 난타전 끝 선두 탈환…한화 9연패",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-03T13:14:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/421/0009150216"
+        },
+        {
+          "title": "'해결사' 안현민, 연타석 홈런으로 역전승…KT 선두 탈환",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-03T22:50:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/055/0001385825"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "KT 정규시즌 우승",
+          "reason": "선두 굳히기",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "오픈AI 상장",
-          "reason": "IPO 관심",
+          "keyword": "안현민 타율",
+          "reason": "시즌 성적",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "한화 연패 탈출",
+          "reason": "반등 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KT 포스트시즌",
+          "reason": "가을야구 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KT 한화 재대결",
+          "reason": "다음 경기",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -3868,65 +4504,132 @@
       "rowCount": 0
     },
     {
-      "issue": "순환 추론",
+      "issue": "이정후 대타 1타점",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "선발 제외된 이정후가 대타로 나와 1타점 2루타로 4경기 만에 안타를 쳐서",
+      "headlines": [
+        {
+          "title": "대타 이정후, 1타점 2루타로 4경기 만에 안타…타율 0.283",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-03T21:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016289233?sid=104"
+        },
+        {
+          "title": "'대타 출전' 이정후, 4경기 만에 안타…1타점 2루타, 타율 0.283",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-03T21:42:00.000Z",
+          "link": "https://m.sports.naver.com/wbaseball/article/421/0009150368"
+        },
+        {
+          "title": "‘선발 제외’ 이정후, 7회 대타 출격→1타점 2루타 쾅 ‘SF는 2-5 패’",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-09-03T21:01:00.000Z",
+          "link": "https://m.sports.naver.com/wbaseball/article/382/0001291886"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "이정후 선발 복귀",
+          "reason": "라인업 복귀",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "이정후 타율 반등",
+          "reason": "성적 회복",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "이정후 트레이드",
+          "reason": "거취 우려",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "SF 순위",
+          "reason": "팀 성적 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "이정후 시즌 마감",
+          "reason": "최종 성적",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "GPT-6 아스트라",
       "issueType": "fresh",
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "오픈AI가 아스트라에 순환 추론을 적용해 성능 높였으나 보안 우려",
+      "why": "오픈AI가 위험등급 AI GPT-6 아스트라를 출시하며 AGI 시대를 선언해서",
       "headlines": [
         {
-          "title": "오픈AI, '아스트라'에 '순환 추론' 적용...성능 높였지만 보안 우려도",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-03T09:10:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=214782"
+          "title": "인간 시대의 끝이 도래했다?…오픈AI, 위험 등급 AI '아스트라' 공개",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-03T23:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001967250?sid=104"
         },
         {
-          "title": "\"AI 모델만으론 부족…에이전트 AI 활용 확대해야\"",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-03T05:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002436118?sid=105"
+          "title": "오픈AI, 위험등급 AI '아스트라' 공개…\"AGI시대 온 것 환영\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-03T22:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016289259?sid=104"
         },
         {
-          "title": "초소형 AI 순환추론 모델 'TRM', 논리 테스트에서 대형 LLM 제압",
-          "press": "itdaily.kr",
-          "publishedAt": "2025-12-04T07:44:00.000Z",
-          "link": "http://www.itdaily.kr/news/articleView.html?idxno=236686"
+          "title": "오픈AI GPT-6 아스트라 출시…\"범용인공지능, AGI 시대 열었다\"",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-09-03T22:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000637365?sid=104"
         }
       ],
       "concentrated": [],
       "nextWave": [
         {
-          "keyword": "아스트라 출시",
-          "reason": "출시 시점",
+          "keyword": "GPT-6 한국",
+          "reason": "국내 출시 시점",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "보안 우려",
-          "reason": "위험성 논란",
+          "keyword": "아스트라 요금제",
+          "reason": "구독 방식",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "TRM 성능",
-          "reason": "벤치마크 결과",
+          "keyword": "GPT-6 API",
+          "reason": "개발자 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "오픈AI 발표",
-          "reason": "공식 입장",
+          "keyword": "아스트라 후속",
+          "reason": "다음 모델",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "에이전트 활용",
-          "reason": "실제 적용",
+          "keyword": "AGI 위험성",
+          "reason": "안전 논란",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -3940,25 +4643,25 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "미 정부가 NYT 소송에서 AI 학습을 공정이용으로 보며 오픈AI 편들어",
+      "why": "엔비디아 허깅페이스 인수와 오픈AI 아스트라 공개가 겹쳐서",
       "headlines": [
         {
-          "title": "“AI 학습은 공정 이용”… 美 정부, NYT 소송서 오픈AI 편들었다",
-          "press": "segye.com",
-          "publishedAt": "2026-09-03T12:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004156221?sid=104"
+          "title": "엔비디아, '개방형 AI 허브' 허깅페이스 18조원 인수…주가 1.8%↑(종합)",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-03T23:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014168613?sid=104"
         },
         {
-          "title": "오픈AI, '캐나다 총기난사 방조'로 교사·학생에 추가 피소",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-02T18:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016286479?sid=104"
+          "title": "AI칩 이어 모델 유통까지…엔비디아, 허깅페이스 인수",
+          "press": "inews24.com",
+          "publishedAt": "2026-09-03T22:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/031/0001055341?sid=104"
         },
         {
-          "title": "에퀴닉스, 엔비디아 손잡고 오픈소스 AI 지원 플랫폼 공개",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-02T23:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0003996436?sid=105"
+          "title": "인간 시대의 끝이 도래했다?…오픈AI, 위험 등급 AI '아스트라' 공개",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-03T23:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001967250?sid=104"
         }
       ],
       "concentrated": [
@@ -3968,17 +4671,12 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
           "keyword": "오픈ai 주가",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "오픈ai 뜻",
+          "keyword": "오픈ai 대표",
           "searchVolume": null,
           "origin": "autocomplete"
         },
@@ -3988,7 +4686,7 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "오픈ai 주식",
+          "keyword": "오픈ai 뜻",
           "searchVolume": null,
           "origin": "autocomplete"
         },
@@ -3998,43 +4696,48 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "오픈ai api",
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "챗지피티 오픈ai",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "상장일",
-          "reason": "IPO 시점 관심",
+          "keyword": "허깅페이스 인수 영향",
+          "reason": "오픈소스 판도",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "주가 전망",
-          "reason": "투자 판단",
+          "keyword": "NYT 소송 결과",
+          "reason": "저작권 판결",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "NYT 판결",
-          "reason": "소송 결과",
+          "keyword": "오픈AI 기업공개",
+          "reason": "상장 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "총기난사 소송",
-          "reason": "추가 피소 향방",
+          "keyword": "엔비디아 주가",
+          "reason": "인수 반응",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "기업가치",
-          "reason": "밸류 규모",
+          "keyword": "AI 저작권 규제",
+          "reason": "정책 방향",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4043,12 +4746,79 @@
       "rowCount": 0
     },
     {
+      "issue": "순환 추론",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "오픈AI 아스트라에 차세대 순환 추론이 적용돼 성능이 대폭 향상돼서",
+      "headlines": [
+        {
+          "title": "오픈AI, '아스트라'에 차세대 '순환 추론' 적용으로 성능 대폭 향상",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-03T09:10:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=214782"
+        },
+        {
+          "title": "초소형 AI 순환추론 모델 'TRM', 논리 테스트에서 대형 LLM 제압",
+          "press": "itdaily.kr",
+          "publishedAt": "2025-12-04T07:44:00.000Z",
+          "link": "http://www.itdaily.kr/news/articleView.html?idxno=236686"
+        },
+        {
+          "title": "\"AI 모델만으론 부족…에이전트 AI 활용 확대해야\"",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-03T05:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002436118?sid=105"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "순환추론 활용",
+          "reason": "적용 분야",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "TRM 오픈소스",
+          "reason": "공개 여부",
+          "searchVolume": null,
+          "documentCount": 116,
+          "onBoard": true
+        },
+        {
+          "keyword": "소형모델 대세",
+          "reason": "트렌드 전환",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "추론 AI 비교",
+          "reason": "모델 성능",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "순환추론 한계",
+          "reason": "기술 약점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
       "issue": "H3-월드",
       "issueType": "fresh",
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "텐센트가 WASD로 영상 생성하는 인터랙티브 월드모델 H3-월드 발표",
+      "why": "텐센트가 WASD로 영상을 생성하는 인터랙티브 월드모델 H3-월드를 발표해서",
       "headlines": [
         {
           "title": "\"WASD 누르면 영상 생성\"... 텐센트, 인터랙티브 월드모델 'H3-월드' 발표",
@@ -4072,36 +4842,36 @@
       "concentrated": [],
       "nextWave": [
         {
-          "keyword": "공개 시점",
-          "reason": "정식 출시일",
+          "keyword": "H3-월드 공개",
+          "reason": "이용 시점",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "아틀라스 비교",
-          "reason": "경쟁 모델",
+          "keyword": "월드모델 게임",
+          "reason": "게임 적용",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "사용 방법",
-          "reason": "이용 방식",
+          "keyword": "텐센트 월드랩스 경쟁",
+          "reason": "경쟁 구도",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "게임 활용",
-          "reason": "실제 적용",
+          "keyword": "월드모델 원리",
+          "reason": "작동 방식",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "국내 지원",
-          "reason": "이용 가능 여부",
+          "keyword": "H3-월드 체험",
+          "reason": "사용 방법",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4115,7 +4885,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "인월드 AI가 맥락·감정 읽는 음성 모델 실시간 TTS-2 공개",
+      "why": "인월드 AI가 맥락과 감정을 읽는 음성모델 실시간 TTS-2를 공개해서",
       "headlines": [
         {
           "title": "인월드 AI, 맥락·감정 읽는 음성 모델 '실시간 TTS-2' 공개...아티피셜 ...",
@@ -4139,36 +4909,36 @@
       "concentrated": [],
       "nextWave": [
         {
-          "keyword": "사용 방법",
-          "reason": "이용 방식",
+          "keyword": "TTS-2 사용법",
+          "reason": "이용 방법",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "일레븐랩스 비교",
-          "reason": "경쟁 모델",
+          "keyword": "음성 AI 활용",
+          "reason": "적용 분야",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "국내 출시",
-          "reason": "지원 여부",
+          "keyword": "AI 성우 대체",
+          "reason": "성우 일자리",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "요금",
-          "reason": "가격 정보",
+          "keyword": "TTS-2 한국어",
+          "reason": "국내 지원",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "성우 대체",
-          "reason": "업계 영향",
+          "keyword": "음성복제 논란",
+          "reason": "악용 우려",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4182,7 +4952,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "인월드 AI가 MS와 게임 NPC용 생성형 AI 툴킷 개발 착수",
+      "why": "인월드 AI가 TTS-2를 공개하고 MS와 게임 NPC 생성형 AI 툴킷을 개발해서",
       "headlines": [
         {
           "title": "인월드 AI, 맥락·감정 읽는 음성 모델 '실시간 TTS-2' 공개...아티피셜 ...",
@@ -4206,42 +4976,35 @@
       "concentrated": [],
       "nextWave": [
         {
-          "keyword": "툴킷 출시",
-          "reason": "공개 시점",
+          "keyword": "인월드 NPC 게임",
+          "reason": "적용 게임",
+          "searchVolume": null,
+          "documentCount": 72,
+          "onBoard": true
+        },
+        {
+          "keyword": "게임 AI 논란",
+          "reason": "개발자 반응",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "적용 게임",
-          "reason": "어디에 도입",
+          "keyword": "인월드 국내",
+          "reason": "한국 지원",
           "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
+          "documentCount": 163,
+          "onBoard": true
         },
         {
-          "keyword": "엑스박스",
-          "reason": "콘솔 지원",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "개발자 도구",
-          "reason": "사용 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "게임업계 반응",
-          "reason": "산업 영향",
+          "keyword": "AI NPC 체험",
+          "reason": "사용 사례",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         }
       ],
-      "rowCount": 1
+      "rowCount": 3
     },
     {
       "issue": "라온피플",
@@ -4249,7 +5012,7 @@
       "lane": "tech",
       "issueStatus": "rising",
       "isHot": true,
-      "why": "라온피플이 702억 규모 피지컬 AI 국책과제 선정되며 상한가",
+      "why": "라온피플이 702억 규모 피지컬 AI 국책사업에 선정돼 상한가를 기록해서",
       "headlines": [
         {
           "title": "라온피플 주가, 상한가... 왜?",
@@ -4292,11 +5055,6 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "라온피플 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
           "keyword": "라온피플 로봇",
           "searchVolume": null,
           "origin": "autocomplete"
@@ -4307,43 +5065,48 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "라온피플 본사",
+          "keyword": "라온피플 실적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "라온피플 관련주",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "목표주가",
-          "reason": "주가 전망",
+          "keyword": "라온피플 목표주가",
+          "reason": "상승 여력",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "피지컬AI 뜻",
-          "reason": "개념 이해",
+          "keyword": "피지컬AI 수혜주",
+          "reason": "관련 종목",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "관련주",
-          "reason": "테마주 확산",
+          "keyword": "라온피플 실적",
+          "reason": "사업 매출",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "실적 발표",
-          "reason": "매출 확인",
+          "keyword": "무인공장 상용화",
+          "reason": "도입 시점",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "무인공장",
-          "reason": "사업 내용",
+          "keyword": "라온피플 로봇",
+          "reason": "사업 확대",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4357,7 +5120,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "마인드로직이 95억 AI 온이음 사업 수주해 고교생 12만명 지원",
+      "why": "마인드로직이 AI 온이음 사업자로 선정돼 고교생 12만명을 지원해서",
       "headlines": [
         {
           "title": "마인드로직, 95억 정부 교육 사업 수주…고교생 12만명에 챗GPT·클로드 ...",
@@ -4385,22 +5148,17 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "마인드로직 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
           "keyword": "마인드로직 면접",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "마인드로직 ai 팩트챗",
+          "keyword": "마인드로직 채용",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "마인드로직(주)",
+          "keyword": "마인드로직 ai 팩트챗",
           "searchVolume": null,
           "origin": "autocomplete"
         },
@@ -4412,218 +5170,42 @@
       ],
       "nextWave": [
         {
-          "keyword": "온이음 신청",
-          "reason": "대상·방법 궁금",
+          "keyword": "AI 온이음 신청",
+          "reason": "참여 방법",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "상장 여부",
-          "reason": "IPO 관심",
+          "keyword": "마인드로직 상장",
+          "reason": "기업 성장",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "서비스 내용",
-          "reason": "무엇을 지원",
+          "keyword": "AI 교육 확대",
+          "reason": "대상 확대",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "제공 모델",
-          "reason": "챗gpt·클로드",
+          "keyword": "온이음 지원학교",
+          "reason": "참여 학교",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "실적 전망",
-          "reason": "매출 추이",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "크라우드웍스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "크라우드웍스가 정부 AI 에이전트 안전·신뢰성 검증 사업 수주",
-      "headlines": [
-        {
-          "title": "크라우드웍스, AI 에이전트 검증 체계 지원 정부 사업 수주",
-          "press": "news.mtn.co.kr",
-          "publishedAt": "2026-09-03T05:30:00.000Z",
-          "link": "https://news.mtn.co.kr/news-detail/2026090312385559175"
-        },
-        {
-          "title": "크라우드웍스, AI 에이전트 안전·신뢰성 검증 사업 수주",
-          "press": "epnc.co.kr",
-          "publishedAt": "2026-09-03T06:40:00.000Z",
-          "link": "https://www.epnc.co.kr/news/articleView.html?idxno=406493"
-        },
-        {
-          "title": "예약·결제하는 AI, 답보다 과정 검증…크라우드웍스 7,000건 데이터 구...",
-          "press": "venturesquare.net",
-          "publishedAt": "2026-09-03T05:19:00.000Z",
-          "link": "https://www.venturesquare.net/1110611/"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "크라우드웍스 알바 후기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "크라우드웍스 알바",
-          "searchVolume": 790,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "크라우드웍스 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "크라우드웍스 상장폐지",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "크라우드웍스 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "크라우드웍스 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "크라우드웍스 기업정보",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "크라우드웍스 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "목표주가",
-          "reason": "주가 전망",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "알바 방법",
-          "reason": "부업 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "상장폐지",
-          "reason": "리스크 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "실적 발표",
-          "reason": "매출 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "관련주",
-          "reason": "테마 확산",
+          "keyword": "마인드로직 제품",
+          "reason": "서비스 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         }
       ],
       "rowCount": 0
-    },
-    {
-      "issue": "전혜원 알리바이 조작",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "전혜원이 용의자 캘린더의 같은 글씨체로 조작된 알리바이를 간파했다.",
-      "headlines": [
-        {
-          "title": "\"불륜 루머 유포\" 장서희, 이사 선임 막았다…전혜원은 '알리바이 조작...",
-          "press": "tvreport.co.kr",
-          "publishedAt": "2026-09-03T12:28:00.000Z",
-          "link": "https://m.entertain.naver.com/article/213/0001399991"
-        },
-        {
-          "title": "전혜원, 결정적 단서 찾았다…조작 흔적에 \"보란 듯이 일부러?\" 충격('욕...",
-          "press": "celuvmedia.com",
-          "publishedAt": "2026-09-03T11:58:00.000Z",
-          "link": "http://www.celuvmedia.com/article.php?aid=1788435801526966006"
-        },
-        {
-          "title": "전혜원, 용의자들 캘린더서 똑같은 글씨체 발견…조작된 알리바이?",
-          "press": "slist.kr",
-          "publishedAt": "2026-09-03T11:30:00.000Z",
-          "link": "https://www.slist.kr/news/articleView.html?idxno=763478"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "진범 정체",
-          "reason": "조작 간파 후 범인 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "드라마 결말",
-          "reason": "복수 결말 예측",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "다음회 예고",
-          "reason": "전개 확인 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "시청률",
-          "reason": "화제성 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "재방송",
-          "reason": "놓친 회차 다시보기",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
     },
     {
       "issue": "고양시 Y-CITY 소송",
@@ -4855,80 +5437,6 @@
         }
       ],
       "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "유지애",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "곽시양과 유지애가 11월 결혼한다.",
-      "headlines": [
-        {
-          "title": "열애설 없이 결혼 발표 직행…곽시양·유지애, 11월 부부 된다",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-03T06:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005729965?sid=103"
-        },
-        {
-          "title": "배우 곽시양·러블리즈 유지애, 11월 결혼…“미래 약속해”",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-09-03T07:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003468302?sid=103"
-        },
-        {
-          "title": "러블리즈 유지애·배우 곽시양 11월 결혼 [자막뉴스]",
-          "press": "ichannela.com",
-          "publishedAt": "2026-09-03T06:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/449/0000359300?sid=103"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "러블리즈 유지애",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "유지애 웨딩화보",
-          "reason": "결혼 다음 화보 관심",
-          "searchVolume": null,
-          "documentCount": 39,
-          "onBoard": true
-        },
-        {
-          "keyword": "결혼식 장소",
-          "reason": "예식장 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "곽시양 신혼집",
-          "reason": "신혼 관심",
-          "searchVolume": null,
-          "documentCount": 197,
-          "onBoard": true
-        },
-        {
-          "keyword": "러블리즈 축하",
-          "reason": "멤버 반응",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "유지애 활동",
-          "reason": "결혼 후 활동 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 2,
       "carried": true
     },
     {
@@ -6012,25 +6520,23 @@
       "carried": true
     }
   ],
-  "enrichedAt": "2026-09-03T18:20:07.920Z",
+  "enrichedAt": "2026-09-04T00:01:57.085Z",
   "enrichStats": {
-    "enriched": 24,
-    "subsAdded": 9,
+    "enriched": 22,
+    "subsAdded": 2,
     "titleUpgraded": 0,
-    "proposed": 109,
-    "verified": 37,
+    "proposed": 81,
+    "verified": 14,
     "judged": 0,
     "judgedBad": 0,
     "related": 0,
     "picked": 0,
-    "pooled": 37,
-    "aiTitled": 24,
+    "pooled": 14,
+    "aiTitled": 22,
     "trended": 0,
-    "homeRetried": 14,
-    "whyAdded": 15,
-    "homeRetryFailed": 1,
-    "homeRejected": 1,
-    "aiCalls": 25,
+    "homeRetried": 13,
+    "whyAdded": 10,
+    "aiCalls": 22,
     "partial": false
   }
 }
