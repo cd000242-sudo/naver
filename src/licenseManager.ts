@@ -1439,6 +1439,21 @@ export async function revalidateLicenseBackground(serverUrl?: string): Promise<b
 /**
  * 세션 유효성 검증 (중복 로그인 체크)
  */
+/**
+ * 서버가 "이 세션은 끝났다" 고 분명히 밝힌 코드만 강제 로그아웃 사유다.
+ * 서버 예외·미상 오류는 여기 없다 — 그런 응답으로는 손님을 쫓아내지 않는다.
+ */
+const SESSION_INVALIDATION_CODES = new Set<string>([
+  'SESSION_EXPIRED_BY_OTHER_LOGIN',
+  'NO_SESSION',
+  'INVALID_CREDENTIALS',
+  'LICENSE_EXPIRED',
+  'LICENSE_NOT_ACTIVATED',
+  'USER_BLOCKED',
+  'DEVICE_BLOCKED',
+  'PLATFORM_MISMATCH',
+]);
+
 export async function validateSession(serverUrl?: string): Promise<SessionValidationResult> {
   const license = await loadLicense();
 
@@ -1484,13 +1499,28 @@ export async function validateSession(serverUrl?: string): Promise<SessionValida
 
       // 세션이 무효화됨 (다른 기기에서 로그인)
       // 서버 응답: { ok: false, valid: false, code: 'SESSION_EXPIRED_BY_OTHER_LOGIN' }
-      if (!result.valid || result.code === 'SESSION_EXPIRED_BY_OTHER_LOGIN' || result.code === 'NO_SESSION') {
+      if (!result.valid || SESSION_INVALIDATION_CODES.has(String(result.code || ''))) {
         if (isMaintenanceResponse(result)) {
           return {
             valid: false,
             message: getServerErrorMessage(result, '현재 서비스 점검 중입니다. 잠시 후 다시 시도해주세요.'),
             forceLogout: true,
           };
+        }
+        /*
+         * [2026-09-04 실장애] 서버가 코드 없이 예외 문자열만 돌려줬다 —
+         *   "세션 무효화됨 - 코드: undefined 메시지: ReferenceError: phoneVerifiedColV is not defined".
+         *   GAS 백엔드의 오타 하나로 전 고객이 강제 로그아웃되고 라이선스 파일까지 지워졌다.
+         *   서버가 "세션이 무효다" 라고 분명히 말하지 않으면 로그아웃하지 않는다 —
+         *   증명되지 않은 신호로 손님을 쫓아내는 것이 서버 버그보다 나쁘다.
+         */
+        const declaredCode = String(result.code || '').trim();
+        if (!SESSION_INVALIDATION_CODES.has(declaredCode)) {
+          console.warn(
+            '[LicenseManager] 서버가 세션 무효 사유를 밝히지 않음 — 로컬 세션 유지 (코드:',
+            declaredCode || 'none', '메시지:', result.error, ')',
+          );
+          return { valid: true };
         }
         console.log('[LicenseManager] 세션 무효화됨 - 코드:', result.code, '메시지:', result.error);
         await clearLicense();
