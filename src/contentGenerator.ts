@@ -1294,6 +1294,7 @@ async function generateHomefeedIntroOnlyPatch(
   provider?: string,
   agentProductPolicyContext?: AgentProductPolicyContext,
   issues: readonly string[] = [],
+  readerSituation: string = '',
 ): Promise<{ introduction?: string } | null> {
   const categoryHint = source.categoryHint as string | undefined;
   const systemPrompt = buildFullPrompt('homefeed', categoryHint, false, undefined, undefined, (source as any).hookHint, buildRecentWinnersBlock(source), undefined, undefined, (source as any).structureGuideBlock);
@@ -1315,6 +1316,7 @@ ${schema}
 - ⚠️ 서브키워드 1개 이상 도입부에 자연스럽게 포함
 - 첫 문장은 독자가 겪는 구체 상황으로 시작한다(처음·헷갈·고민·~할 때·~하면). 둘째 문장에 이 글에서 얻을 기준·차이·확인 항목을 말한다.
 ${issues.length > 0 ? `- 고칠 점(게이트 지적):\n${issues.map((issue) => `  · ${issue}`).join('\n')}` : ''}
+${readerSituation ? `- 독자 상황(설계도, 첫 문장은 이 장면에서 시작한다): ${readerSituation}` : ''}
 
 제목: ${selectedTitle || '(없음)'}
 ${(() => {
@@ -6089,13 +6091,16 @@ async function generateStructuredContentInternal(
    */
   let blueprintBlock = '';
   let blueprintQuotes: string[] = [];
+  let blueprintQuoteItems: Array<{ text: string; speaker: string }> = [];
+  let blueprintReaderSituation = '';
+  let blueprintRoute: Awaited<ReturnType<typeof resolveSideTaskRoute>> = null;
   const blueprintMode = String(source.contentMode || 'seo');
   const blueprintEligible = !isV3Prompt
     && process.env.CONTENT_BLUEPRINT !== '0'
     && ['seo', 'homefeed', 'custom', 'mate', 'business'].includes(blueprintMode)
     && String((source as any).rawText || '').length >= 200;
   if (blueprintEligible) {
-    const blueprintRoute = await resolveSideTaskRoute(source);
+    blueprintRoute = await resolveSideTaskRoute(source);
     if (!blueprintRoute) {
       console.log(`[Blueprint] 선택 엔진(${String(source.generator || '미지정')})의 라우트 없음 — 설계도 생략`);
     } else {
@@ -6115,6 +6120,8 @@ async function generateStructuredContentInternal(
       if (blueprintRun.result) {
         blueprintBlock = renderBlueprintMaterial(blueprintRun.result.blueprint, { quoteFloor: 2 });
         blueprintQuotes = blueprintRun.result.blueprint.quotes.map((q) => q.text);
+        blueprintQuoteItems = blueprintRun.result.blueprint.quotes.map((q) => ({ text: q.text, speaker: q.speaker }));
+        blueprintReaderSituation = blueprintRun.result.blueprint.readerSituation;
         console.log(`[Blueprint] 📐 엔진 ${blueprintRoute.engine} · 재료 ${blueprintBlock.length}자 · ${blueprintRun.elapsedMs}ms`);
       }
     }
@@ -6905,6 +6912,8 @@ async function generateStructuredContentInternal(
         }
       }
 
+      // [SPEC-BLUEPRINT-2026 Phase 3] 필드 바인딩 집계 — 도입부는 설계도 readerSituation 으로, 인용은 삽입 보정으로.
+      let blueprintIntroPatched = 0;
       if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && mode === 'homefeed') {
         const hfKeyword = getPrimaryKeywordFromSource(source);
         const titleIssues = computeHomefeedTitleCriticalIssues(parsed.selectedTitle, hfKeyword);
@@ -6958,9 +6967,11 @@ async function generateStructuredContentInternal(
             provider,
             options.agentProductPolicyContext,
             introIssues,
+            blueprintReaderSituation,
           );
           if (patch?.introduction) {
             parsed.introduction = patch.introduction;
+            blueprintIntroPatched = 1;
             if (!parsed.quality) {
               parsed.quality = {
                 aiDetectionRisk: 'low',
@@ -6977,6 +6988,31 @@ async function generateStructuredContentInternal(
             ];
           }
         }
+      }
+
+      // [SPEC-BLUEPRINT-2026 Phase 3] 인용 삽입 보정 — 설계도에 검증된 발언이 있는데 본문에 직접 인용이 0이면
+      //   본문 재생성 대신 짧은 호출로 자리와 연결 문장만 받아 넣는다. 발언 원문은 글자 단위로 대조한다.
+      let blueprintQuoteInserted = 0;
+      if (allowPaidPostGenerationRepair && blueprintRoute && blueprintQuoteItems.length > 0 && Array.isArray(parsed.headings) && parsed.headings.length > 0) {
+        const { countDirectQuotes } = await import('./content/quoteCoverage.js');
+        const bodyForQuotes = [parsed.introduction, ...parsed.headings.map((h: any) => h.content), parsed.conclusion].filter(Boolean).join('\n');
+        if (countDirectQuotes(bodyForQuotes) === 0) {
+          const { runQuoteInsertionPatch } = await import('./content/blueprint/quoteInsertionPatch.js');
+          const patched = await runQuoteInsertionPatch(
+            {
+              headings: parsed.headings.map((h: any) => ({ title: String(h.title || ''), content: String(h.content || '') })),
+              quotes: blueprintQuoteItems,
+            },
+            { complete: blueprintRoute.callModel, log: (message) => console.log(message) },
+          );
+          if (patched.inserted > 0) {
+            parsed.headings = parsed.headings.map((h: any, i: number) => ({ ...h, content: patched.headings[i].content }));
+            blueprintQuoteInserted = patched.inserted;
+          }
+        }
+      }
+      if (blueprintBlock) {
+        console.log(`[Blueprint] 바인딩: 도입부 패치 ${blueprintIntroPatched} · 인용 삽입 ${blueprintQuoteInserted}`);
       }
 
       // ✅ [v2.10.300] TitlePatch/IntroPatch 후 HTML sanitize 재적용 —

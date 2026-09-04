@@ -138,6 +138,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/blueprint/generateBlueprint.ts',
   'src/content/blueprint/insertBlueprintIntoPrompt.ts',
   'src/content/blueprint/parseBlueprint.ts',
+  'src/content/blueprint/quoteInsertionPatch.ts',
   'src/content/blueprint/renderBlueprintMaterial.ts',
   'src/content/businessIndustryDetector.ts',
   'src/content/categoryClassifier.ts',
