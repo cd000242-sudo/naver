@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues']);
 /**
  * 장부(쿼터)가 필요해 GAS 에 남은 키워드 액션들은 엣지 방패(leaderspro-edge)를
  * 거친다 — 같은 질문은 15분 캐시로 즉답(0.5초), 처음 질문만 GAS 로 간다(장부도
@@ -346,6 +346,35 @@ export const fetchRankByTabs = (query: string, link: string) =>
 
 export const fetchYoutubeTrending = () =>
     call<{ collectedAt: string; videos: LiveTrendingVideo[] }>('youtube-trending', {});
+
+/**
+ * 지금 실시간 검색어 — Worker 크론(5분)이 채워 둔 것을 읽기만 한다.
+ *
+ * 왜 따로 두나: 실검 보드는 CI 가 하루 3회 발행이라 최대 8시간 낡는다. 목록만
+ * 받아 오는 일은 HTTP 1회라 싸서, 비싼 틈새 판정과 떼어 자주 돌린다.
+ * sourceAgeMs 는 **소스(signal.bz)가 순위를 뜬 뒤 흐른 시간**이고,
+ * seenAgeMs 는 **우리가 그 키워드를 처음 본 뒤 흐른 시간**이다. 둘은 다르다 —
+ * 트렌드가 실제로 시작된 시각은 아무도 알려주지 않으므로 지어내지 않는다.
+ */
+export const fetchRealtimeIssues = () =>
+    call<{
+        /** 크론이 마지막으로 확인한 때 — 안 움직이면 폴러가 죽은 것이다. */
+        checkedAt: number | null;
+        /** 목록이 실제로 달라진 때. 확인 시각과 다르다. */
+        changedAt: number | null;
+        sourceBatchAt: number | null;
+        sourceAgeMs: number | null;
+        items: Array<{
+            rank: number;
+            keyword: string;
+            state: string;
+            firstSeenAt: number | null;
+            seenAgeMs: number | null;
+            prevRank: number | null;
+            rankDelta: number | null;
+        }>;
+        note?: string;
+    }>('realtime-issues', {});
 
 /**
  * 확장 키워드에 **자리 판정**을 붙이기 위한 문서수 실측

@@ -1348,6 +1348,36 @@ function LewordStyles() {
             .lw-trend-tag  { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.16); color: #9aa1b2; }
             /* 경고는 눈에 띄되 카드를 지배하지 않게. 버리라는 뜻이 아니라 알려주는 것이다. */
             .lw-warn-tag   { background: rgba(245,197,24,.10); border-color: rgba(245,197,24,.32); color: #f5c518; }
+
+            /*
+             * 지금 실시간 줄 — 아래 실측 카드와 눈으로 구분되어야 한다.
+             * 이건 "판정"이 아니라 "지금 뭐가 뜨는지"라서, 카드처럼 무겁게 그리지 않고
+             * 한 줄 칩으로 흘린다. 이미 판정이 있는 것만 금색 테두리로 이어 준다.
+             */
+            .lw-realtime-strip {
+                margin: 10px 0 14px; padding: 10px 12px;
+                background: rgba(255,255,255,.03);
+                border: 1px solid rgba(255,255,255,.10); border-radius: 12px;
+            }
+            .lw-realtime-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+            .lw-realtime-head strong { font-size: 13px; color: #e8ebf2; letter-spacing: -.2px; }
+            .lw-realtime-meta { font-size: 11.5px; color: #8b93a5; }
+            .lw-realtime-items { display: flex; flex-wrap: wrap; gap: 6px; }
+            .lw-realtime-item {
+                display: inline-flex; align-items: center; gap: 6px;
+                padding: 5px 10px; border-radius: 999px; cursor: pointer;
+                background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12);
+                color: #cfd5e2; font-size: 12px; font-weight: 700;
+            }
+            .lw-realtime-item:hover { background: rgba(255,255,255,.08); }
+            .lw-realtime-item.measured { border-color: rgba(255,215,0,.42); }
+            .lw-realtime-rank { color: #8b93a5; font-variant-numeric: tabular-nums; }
+            .lw-realtime-word { color: #e8ebf2; }
+            .lw-realtime-delta { font-size: 11px; font-weight: 800; }
+            .lw-realtime-delta.up { color: #4ade80; }
+            .lw-realtime-delta.down { color: #94a3b8; }
+            .lw-realtime-new { font-size: 10.5px; font-weight: 800; color: #f5c518; }
+            .lw-realtime-measured { font-size: 10.5px; font-weight: 800; color: #ffd700; }
             /*
              * 황금지수 판. 사장님 지정 색: 약함 노랑 · 적당 초록 · 황금 적색 · 초황금 금색.
              * 색만 바꾸고 구조는 같게 둔다 — 단계가 달라도 눈이 같은 자리를 읽는다.

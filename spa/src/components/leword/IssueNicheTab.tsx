@@ -7,6 +7,7 @@ import DemandChartModal, { pickChartSeries } from './DemandChartModal';
 import PreemptionCard from './PreemptionCard';
 import PreemptionPlan from './PreemptionPlan';
 import IssueFlowBrief from './IssueFlowBrief';
+import RealtimeStrip from './RealtimeStrip';
 import { useMindmap } from './useMindmap';
 import {
     compactKey, fetchIssueBoard, rowsOfIssue,
@@ -171,6 +172,11 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
 
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
 
+    /** 실시간 줄에서 "판정 있음"을 가르려고 쓴다 — 발행본에 이미 있는 키워드. */
+    const measuredKeySet = useMemo(
+        () => new Set((board?.rows || []).map((row) => compactKey(row.keyword))),
+        [board],
+    );
     const publishedLabel = fmtTime(board?.publishedAt);
     const measured = board?.measured;
     const current = VIEWS.find((item) => item.id === view);
@@ -218,6 +224,12 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                 desc="실시간 검색어·IT 이슈를 쪼개 세 가지를 실측합니다 — 트래픽(검색광고 검색량), 수요(데이터랩 최근 7일 · 블로그 문서수), 자리(네이버 블로그탭 상위 10 정면글). 셋을 다 통과한 것만 '틈새'로 싣습니다. 황금키워드보다 좁지만, 쓰면 상위 노출 확률이 높고 트래픽이 옵니다. 카드는 황금키워드와 같은 보강(제목·서브키워드·실측 풀·지식인·30일 추세)을 거치고, 추정치는 '—' 로 비워 둡니다."
                 source={`실시간 이슈 실측 회차${publishedLabel ? ` · ${publishedLabel} 발행` : ''} · ${board?.schedule || '매일 07·13·19시(KST) 갱신'}`}
             />
+
+            {/*
+              * 살아 있는 줄 — 아래 카드는 하루 3회 실측 판정이라 최대 8시간 낡는다.
+              * 목록만 5분마다 따로 받아 "지금 뭐가 뜨는지"를 먼저 보여 준다.
+              */}
+            <RealtimeStrip measuredKeys={measuredKeySet} />
 
             <div className="lw-segment lw-segment-wrap" role="group" aria-label="판정">
                 {VIEWS.map((item) => (
