@@ -1131,6 +1131,41 @@
     <div class="device-id" id="device-id"></div>
   </div>
 
+  <!-- [2026-09-04] 유료 라이선스 휴대폰 본인인증 — 로그인 직후 1회.
+       비밀번호를 잊었을 때 본인을 확인할 유일한 수단이라 번호를 받아 둔다.
+       사장님 결정: 강제하지 않는다([나중에 하기]). 한 번 마치면 다시 뜨지 않는다. -->
+  <div id="phone-verify-backdrop" class="trial-modal-backdrop">
+    <div class="trial-modal">
+      <div class="trial-modal-header">
+        <span class="trial-icon">📱</span>
+        <h2>휴대폰 본인인증</h2>
+        <p>비밀번호를 잊으셨을 때 본인 확인에 쓰입니다. 최초 1회만 하면 다시 묻지 않습니다.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="phone-verify-input">전화번호 <span style="color: #ef4444;">*</span></label>
+        <input type="tel" id="phone-verify-input" inputmode="numeric" autocomplete="tel"
+          maxlength="13" placeholder="01012345678">
+      </div>
+
+      <button type="button" id="phone-verify-send-btn" class="trial-submit-btn" style="margin-bottom: 6px;">📩 인증번호 받기</button>
+
+      <div class="form-group" id="phone-verify-code-group" style="display: none;">
+        <label for="phone-verify-code">문자로 받은 인증번호 <span style="color: #ef4444;">*</span></label>
+        <input type="text" id="phone-verify-code" inputmode="numeric" autocomplete="one-time-code"
+          maxlength="6" placeholder="6자리 숫자">
+      </div>
+
+      <div id="phone-verify-status" style="display: none; font-size: 13px; font-weight: 700; margin-bottom: 10px;"></div>
+
+      <div class="trial-modal-actions">
+        <button type="button" id="phone-verify-confirm-btn" class="trial-submit-btn" style="display: none;">✅ 인증 완료</button>
+        <button type="button" id="phone-verify-later-btn"
+          style="background: transparent; border: none; color: rgba(255,255,255,0.4); font-size: 13px; padding: 12px; cursor: pointer;">나중에 하기</button>
+      </div>
+    </div>
+  </div>
+
   <div id="purchase-modal-backdrop" class="purchase-modal-backdrop">
     <div id="purchase-modal" class="purchase-modal">
       <div class="purchase-modal-header">
@@ -1263,6 +1298,103 @@
     let deviceId = '';
 
     // 기기 ID 가져오기
+
+    /*
+     * [2026-09-04] 로그인 성공 → (미인증이면) 휴대폰 본인인증 1회 → 메인 창.
+     *
+     * 유료 사용자에게만 뜬다 — 무료 체험자는 아이디·세션이 없어 needed:false 다.
+     * 강제하지 않는다: [나중에 하기]를 누르면 그대로 들어간다(사장님 결정).
+     * 인증을 마치면 서버가 phoneVerified 를 내려주므로 다음부터는 뜨지 않는다.
+     */
+    async function finishLogin() {
+      try {
+        const status = await ipcRenderer.invoke('license:phoneStatus');
+        if (status && status.needed === true) {
+          await runPhoneVerification();
+        }
+      } catch (e) {
+        console.warn('[Login] 본인인증 확인 실패 — 그냥 진행합니다:', e);
+      }
+      return ipcRenderer.invoke('login:success');
+    }
+
+    function runPhoneVerification() {
+      return new Promise((resolve) => {
+        const backdrop = document.getElementById('phone-verify-backdrop');
+        const phoneInput = document.getElementById('phone-verify-input');
+        const codeGroup = document.getElementById('phone-verify-code-group');
+        const codeInput = document.getElementById('phone-verify-code');
+        const sendBtn = document.getElementById('phone-verify-send-btn');
+        const confirmBtn = document.getElementById('phone-verify-confirm-btn');
+        const laterBtn = document.getElementById('phone-verify-later-btn');
+        const statusEl = document.getElementById('phone-verify-status');
+        if (!backdrop || !phoneInput || !sendBtn || !confirmBtn || !laterBtn) { resolve(); return; }
+
+        const say = (text, isError) => {
+          if (!statusEl) return;
+          statusEl.style.display = text ? 'block' : 'none';
+          statusEl.style.color = isError ? '#ef4444' : '#10b981';
+          statusEl.textContent = text;
+        };
+        const done = () => { backdrop.style.display = 'none'; resolve(); };
+
+        backdrop.style.display = 'flex';
+        say('');
+
+        sendBtn.onclick = async () => {
+          const phone = (phoneInput.value || '').trim().replace(/[-\s]/g, '');
+          if (!/^01[0-9]{8,9}$/.test(phone)) { say('올바른 전화번호를 입력하세요. (예: 01012345678)', true); return; }
+          sendBtn.disabled = true;
+          sendBtn.textContent = '📩 보내는 중...';
+          try {
+            const r = await ipcRenderer.invoke('license:phoneRequestCode', { phone });
+            if (!r || r.ok !== true) {
+              say((r && r.message) || '인증번호 발송에 실패했습니다.', true);
+              sendBtn.disabled = false;
+              sendBtn.textContent = '📩 인증번호 받기';
+              return;
+            }
+            if (codeGroup) codeGroup.style.display = 'block';
+            confirmBtn.style.display = 'block';
+            if (codeInput) codeInput.focus();
+            sendBtn.disabled = false;
+            sendBtn.textContent = '📩 인증번호 다시 받기';
+            say('📩 인증번호를 보냈습니다 — 문자로 받은 6자리를 입력하세요.', false);
+          } catch (e) {
+            say('발송 오류: ' + e.message, true);
+            sendBtn.disabled = false;
+            sendBtn.textContent = '📩 인증번호 받기';
+          }
+        };
+
+        confirmBtn.onclick = async () => {
+          const phone = (phoneInput.value || '').trim().replace(/[-\s]/g, '');
+          const authCode = ((codeInput && codeInput.value) || '').trim();
+          if (!/^\d{6}$/.test(authCode)) { say('문자로 받은 인증번호 6자리를 입력하세요.', true); return; }
+          confirmBtn.disabled = true;
+          confirmBtn.textContent = '확인 중...';
+          try {
+            const r = await ipcRenderer.invoke('license:phoneConfirm', { phone, authCode });
+            if (!r || r.ok !== true) {
+              say((r && r.message) || '인증에 실패했습니다.', true);
+              confirmBtn.disabled = false;
+              confirmBtn.textContent = '✅ 인증 완료';
+              return;
+            }
+            say('✅ 본인인증이 완료되었습니다.', false);
+            setTimeout(done, 800);
+          } catch (e) {
+            say('오류: ' + e.message, true);
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = '✅ 인증 완료';
+          }
+        };
+
+        // 강제하지 않는다 — 다음 로그인 때 다시 물어본다.
+        laterBtn.onclick = done;
+      });
+    }
+
     async function loadDeviceId() {
       try {
         deviceId = await ipcRenderer.invoke('license:getDeviceId');
@@ -1406,7 +1538,7 @@
             if (result?.valid === true) {
               // 자동 로그인 성공
               console.log('[Login] ✅ 자동 로그인 성공');
-              await ipcRenderer.invoke('login:success');
+              await finishLogin();
               window.close();
             } else {
               // 자동 로그인 실패
@@ -1963,7 +2095,7 @@
           `무료 ${FREE_TRIAL_DAILY_PUBLISH_LIMIT}회 발행 가능합니다.\nPro 버전은 오픈채팅으로 문의해주세요.`
         );
         window.setTimeout(async () => {
-          try { await ipcRenderer.invoke('login:success'); } catch (e) { /* ignore */ }
+          try { await finishLogin(); } catch (e) { /* ignore */ }
           window.close();
         }, 1100);
       } catch (error) {
@@ -2095,7 +2227,7 @@
 
             console.log('✅ 재인증 성공! 10초 후 창이 닫힙니다.');
             setTimeout(async () => {
-              await ipcRenderer.invoke('login:success');
+              await finishLogin();
               window.close();
             }, 10000);
 
@@ -2275,7 +2407,7 @@
 
           console.log('✅ 인증 성공! 메인 창으로 이동합니다.');
           setTimeout(async () => {
-            await ipcRenderer.invoke('login:success');
+            await finishLogin();
             window.close();
           }, 3500); // 3.5초 후 이동
         } else {
@@ -2387,7 +2519,7 @@
 
               // ✅ 정상 무료체험 사용자 → 자동 진입
               console.log('[Login] ✅ 무료체험 자동 로그인 성공!');
-              await ipcRenderer.invoke('login:success');
+              await finishLogin();
               window.close();
               return;
             } else {

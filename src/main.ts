@@ -218,6 +218,7 @@ import { IntelligentImagePlacer } from './intelligentImagePlacer.js';
 import { thumbnailService } from './thumbnailService.js';
 import {
   loadLicense,
+  saveLicense,
   verifyLicense,
   verifyLicenseWithCredentials,
   checkPatchFile,
@@ -3105,6 +3106,82 @@ ipcMain.handle('free:activate', async (_event, userInfo?: { email?: string; nick
 // [2026-08-21] 무료 체험 이메일 인증번호 발송 (휴면 — SMS 연동 시 부활)
 ipcMain.handle('free:requestCode', async (_event, userInfo?: { email?: string; phone: string; nickname?: string }) => {
   return await requestTrialCode(userInfo);
+});
+
+/*
+ * ── 유료 라이선스 휴대폰 본인인증 (2026-09-04) ────────────────────────────
+ *
+ * 왜: 비밀번호를 잊은 고객을 되살릴 수단이 지금 없다. 휴대폰이 그 수단이고,
+ * 번호는 계정에 붙어 있어야 쓸모가 있다(유료 356행 중 등록 1건, 실측).
+ * 사장님 결정: 유료는 **강제하지 않는다** — [나중에 하기]. 대신 한 번 마치면
+ * 다시 묻지 않는다(서버 phoneVerified).
+ *
+ * 본인 증명은 로그인 세션(userId + sessionToken)으로 한다 — 앱에 관리자 토큰을
+ * 심을 수 없다. 무료 체험자는 세션 자체가 없으므로 창이 뜨지 않는다.
+ */
+async function callLicensePhoneGas(action: string, payload: Record<string, unknown>): Promise<any> {
+  const license = await loadLicense();
+  if (!license?.userId || !license?.sessionToken) {
+    return { ok: false, error: '로그인 정보가 없습니다. 다시 로그인해 주세요.' };
+  }
+  const gasUrl = process.env.LICENSE_SERVER_URL || DEFAULT_LICENSE_SERVER_URL;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), LICENSE_SERVER_TIMEOUT_MS);
+  try {
+    const response = await fetch(gasUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action, userId: license.userId, sessionToken: license.sessionToken, ...payload }),
+      signal: controller.signal,
+    });
+    return await response.json();
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+// 인증 창을 띄워야 하는가 — 로그인창이 login:success 직전에 묻는다.
+ipcMain.handle('license:phoneStatus', async () => {
+  try {
+    const license = await loadLicense();
+    if (!license?.userId || !license?.sessionToken) return { needed: false };
+    return { needed: license.phoneVerified !== true, userId: license.userId };
+  } catch (error) {
+    debugLog(`[Main] license:phoneStatus 실패 — ${(error as Error).message}`);
+    return { needed: false };
+  }
+});
+
+ipcMain.handle('license:phoneRequestCode', async (_event, args?: { phone?: string }) => {
+  try {
+    const phone = String(args?.phone || '').trim().replace(/[-\s]/g, '');
+    if (!/^01[0-9]{8,9}$/.test(phone)) {
+      return { ok: false, message: '올바른 전화번호를 입력하세요. (예: 01012345678)' };
+    }
+    const result = await callLicensePhoneGas('license-phone-request-code', { phone });
+    if (result?.ok !== true) return { ok: false, message: result?.error || '인증번호 발송에 실패했습니다.' };
+    return { ok: true };
+  } catch (error) {
+    debugLog(`[Main] license:phoneRequestCode 실패 — ${(error as Error).message}`);
+    return { ok: false, message: describeLicenseNetworkFailure('인증번호 발송', error) };
+  }
+});
+
+ipcMain.handle('license:phoneConfirm', async (_event, args?: { phone?: string; authCode?: string }) => {
+  try {
+    const phone = String(args?.phone || '').trim().replace(/[-\s]/g, '');
+    const authCode = String(args?.authCode || '').trim();
+    const result = await callLicensePhoneGas('license-phone-confirm', { phone, authCode });
+    if (result?.ok !== true) return { ok: false, message: result?.error || '인증에 실패했습니다.' };
+
+    // 로컬에도 적어 둔다 — 다음 실행에서 서버를 기다리지 않고 바로 건너뛴다.
+    const license = await loadLicense();
+    if (license) await saveLicense({ ...license, phoneVerified: true });
+    return { ok: true };
+  } catch (error) {
+    debugLog(`[Main] license:phoneConfirm 실패 — ${(error as Error).message}`);
+    return { ok: false, message: describeLicenseNetworkFailure('본인인증', error) };
+  }
 });
 
 // [2026-08-21 3차] 체험 [인증하기] — 자격 확인(등록 없음)

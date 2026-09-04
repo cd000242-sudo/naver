@@ -126,6 +126,10 @@ export interface LicenseInfo {
   authMethod?: 'code' | 'credentials'; // 인증 방식
   userId?: string; // 아이디/비밀번호 방식일 때 사용
   sessionToken?: string; // 서버 발급 세션 토큰 (중복 로그인 방지)
+  // [2026-09-04] 휴대폰 본인인증을 마쳤는가. 비밀번호를 잊었을 때 본인을 확인할
+  //   유일한 수단이라 계정에 번호가 붙어 있어야 한다. 유료는 강제하지 않는다
+  //   ([나중에 하기]) — 대신 한 번 마치면 다시 묻지 않는다.
+  phoneVerified?: boolean;
 }
 
 const LICENSE_FILE = 'license.json';
@@ -856,6 +860,7 @@ export async function verifyLicenseWithCredentials(
         userId,
         maxDevices: result.maxDevices,
         sessionToken, // 서버 세션 토큰 저장
+        phoneVerified: result.phoneVerified === true,
       };
 
       await saveLicense(license);
