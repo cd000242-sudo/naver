@@ -61,8 +61,16 @@ describe('유료 라이선스 휴대폰 본인인증 배선', () => {
     expect(login.match(/await finishLogin\(\)/g)?.length).toBeGreaterThanOrEqual(5);
   });
 
-  it('앱 버전이 2.11.222 다', () => {
+  // [2026-09-04] 정확한 버전을 박으면 다음 릴리즈마다 게이트가 막힌다(v2.11.223 에서 실제로 막혔다).
+  //   지키려던 것은 "이 기능이 2.11.222 이상에 들어 있다" 이므로 하한만 본다.
+  it('앱 버전이 2.11.222 이상이다', () => {
     const pkg = JSON.parse(read('package.json'));
-    expect(pkg.version).toBe('2.11.222');
+    const toParts = (v: string) => String(v).split('.').map((n) => Number(n) || 0);
+    const [major, minor, patch] = toParts(pkg.version);
+    const [rMajor, rMinor, rPatch] = toParts('2.11.222');
+    const ordered = major > rMajor
+      || (major === rMajor && minor > rMinor)
+      || (major === rMajor && minor === rMinor && patch >= rPatch);
+    expect(ordered).toBe(true);
   });
 });
