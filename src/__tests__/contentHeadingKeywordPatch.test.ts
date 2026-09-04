@@ -128,4 +128,17 @@ describe('키워드가 흩어져 이미 들어 있는 소제목 (2026-08-26)', (
     expect(result.headings[0].title).toBe('제습기 전기 요금이 얼마나 나올까');
     expect(result.patchedCount).toBe(1);
   });
+  /**
+   * [2026-09-04 실측] 모델이 키워드를 뺀 자리에 조사만 남긴 소제목("의 출발점")에 접두를 띄어 붙여
+   * "전세보증보험 의 출발점" 이 발행됐다. 조사로 시작하는 소제목은 띄어쓰기 없이 잇는다.
+   */
+  it('조사로 시작하는 소제목은 핵심어와 붙여 쓴다', () => {
+    const result = applyHeadingKeywordPatch(
+      [{ title: '의 출발점' }, { title: '과 보장 범위' }],
+      '전세보증보험 가입조건',
+      { maxPatches: 2 },
+    );
+    expect(result.headings.map((h) => h.title)).toEqual(['전세보증보험의 출발점', '전세보증보험과 보장 범위']);
+    expect(result.patchedCount).toBe(2);
+  });
 });

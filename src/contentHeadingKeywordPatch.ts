@@ -61,6 +61,9 @@ const PERSON_ISSUE_TERMS = [
   '누구',
 ];
 
+/** A heading that starts with a bare particle ("의 출발점") lost the noun it belonged to. */
+const LONE_LEADING_PARTICLE_RE = /^\s*(의|은|는|이|가|을|를|과|와|도|에|로|에서|부터|까지)(\s|$)/u;
+
 function escapeRegex(value: string): string {
   return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -207,7 +210,12 @@ export function applyHeadingKeywordPatch<T extends HeadingKeywordPatchHeading>(
       coreAbsent &&
       keywordDecision.shouldPrefix
     ) {
-      nextTitle = `${resolved.core} ${originalTitle}`.trim();
+      // [2026-09-04 measured] The model sometimes hands back the first heading with the keyword
+      //   already dropped: "의 출발점", "의 핵심". Prefixing with a space produced "전세보증보험 의 출발점".
+      //   A title that opens with a lone particle joins directly.
+      nextTitle = (LONE_LEADING_PARTICLE_RE.test(originalTitle)
+        ? `${resolved.core}${originalTitle.trim()}`
+        : `${resolved.core} ${originalTitle}`).trim();
       patchedCount++;
     }
 
