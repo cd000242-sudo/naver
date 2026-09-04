@@ -58,7 +58,9 @@ describe('유료 라이선스 휴대폰 본인인증 배선', () => {
     expect(login).toContain('나중에 하기');
     // 모든 성공 경로가 finishLogin 을 지나야 한다 — 남은 직접 호출은 finishLogin 안의 1개뿐.
     expect(login.match(/ipcRenderer\.invoke\('login:success'\)/g)?.length).toBe(1);
-    expect(login.match(/await finishLogin\(\)/g)?.length).toBeGreaterThanOrEqual(5);
+    // [2026-09-05] 5 → 4. 자동 로그인 경로를 없애면서 그 성공 지점 하나가 사라졌다.
+    // 남은 4곳(무료체험 활성화·재인증·초기등록·무료체험 자동진입)은 전부 실제 성공 경로다.
+    expect(login.match(/await finishLogin\(\)/g)?.length).toBeGreaterThanOrEqual(4);
   });
 
   // [2026-09-04] 정확한 버전을 박으면 다음 릴리즈마다 게이트가 막힌다(v2.11.223 에서 실제로 막혔다).

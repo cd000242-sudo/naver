@@ -986,31 +986,10 @@
     <div id="error-message" class="error-message"></div>
 
     <form id="login-form">
-      <!-- 초기 인증: 라이선스 코드 + 아이디/비밀번호 + 이메일 -->
-      <div id="initial-auth-section">
-        <div class="form-group">
-          <label for="license-code-init">라이선스 코드 <span style="color: #ff6b6b;">*</span></label>
-          <input type="text" id="license-code-init" placeholder="XXXX-XXXX-XXXX-XXXX (하이픈 없어도 됩니다)">
-        </div>
-
-        <div class="form-group">
-          <label for="user-id-init">아이디 (원하는 아이디) <span style="color: #ff6b6b;">*</span></label>
-          <input type="text" id="user-id-init" placeholder="사용할 아이디를 입력하세요">
-        </div>
-
-        <div class="form-group">
-          <label for="password-init">비밀번호 (원하는 비밀번호) <span style="color: #ff6b6b;">*</span></label>
-          <input type="password" id="password-init" placeholder="사용할 비밀번호를 입력하세요">
-        </div>
-
-        <div class="form-group">
-          <label for="email-init">이메일 <span style="color: #ff6b6b;">*</span></label>
-          <input type="email" id="email-init" placeholder="이메일을 입력하세요">
-        </div>
-      </div>
-
-      <!-- 재인증: 아이디/비밀번호만 -->
-      <div id="reauth-section" style="display: none;">
+      <!-- [2026-09-05] 로그인이 기본이다. 코드 등록은 평생 한 번, 로그인은 매일이다.
+           예전에는 등록 화면이 기본이라 매일 쓰는 사람이 "이미 등록했나요?" 링크를
+           매번 눌러야 했다(사장님 지적). -->
+      <div id="reauth-section">
         <div class="form-group">
           <label for="user-id">아이디 <span style="color: #ff6b6b;">*</span></label>
           <input type="text" id="user-id" placeholder="등록한 아이디를 입력하세요">
@@ -1025,22 +1004,24 @@
           <input type="checkbox" id="remember-credentials">
           <label for="remember-credentials" style="margin: 0; font-weight: normal;">아이디/비밀번호 기억하기</label>
         </div>
-        <button type="button" id="clear-credentials-btn"
-          style="width: 100%; padding: 10px; margin-top: 8px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.5); background: rgba(239, 68, 68, 0.1); color: #ef4444; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;">🗑️
-          저장된 로그인 정보 삭제</button>
       </div>
 
       <button type="submit" id="login-button" class="login-button">인증하기</button>
 
-      <!-- [2026-09-05] 본인인증·비밀번호 변경 상시 버튼.
-           이전에는 로그인 성공 10초 뒤 창이 닫히기 직전에만 인증창이 스쳐 지나가
-           사용자가 버튼을 찾을 수 없었다(사장님 지적). 이제 여기서 아무 때나 연다. -->
-      <div style="display: flex; gap: 8px; margin-top: 10px;">
+      <!-- [2026-09-05] 하단 버튼 4개. 로그인 화면에서 갈 수 있어야 하는 곳 전부다.
+           본인인증은 예전에 진입점이 아예 없어 성공 화면 10초 뒤에만 스쳐 지나갔다. -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px;">
+        <button type="button" id="open-license-register-btn"
+          style="padding: 11px; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.55); background: rgba(212, 175, 55, 0.1); color: var(--text-gold); font-size: 13px; font-weight: 700; cursor: pointer;">🎫
+          라이선스코드 등록</button>
+        <button type="button" id="open-purchase-btn"
+          style="padding: 11px; border-radius: 8px; border: 1px solid rgba(34, 197, 94, 0.5); background: rgba(34, 197, 94, 0.1); color: #4ade80; font-size: 13px; font-weight: 700; cursor: pointer;">🛒
+          구매하러 가기</button>
         <button type="button" id="open-phone-verify-btn"
-          style="flex: 1; padding: 11px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.5); background: rgba(59, 130, 246, 0.1); color: #60a5fa; font-size: 13px; font-weight: 700; cursor: pointer;">📱
-          본인인증</button>
+          style="padding: 11px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.5); background: rgba(59, 130, 246, 0.1); color: #60a5fa; font-size: 13px; font-weight: 700; cursor: pointer;">📱
+          본인인증하기</button>
         <button type="button" id="open-password-reset-btn"
-          style="flex: 1; padding: 11px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.1); color: #fbbf24; font-size: 13px; font-weight: 700; cursor: pointer;">🔑
+          style="padding: 11px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.1); color: #fbbf24; font-size: 13px; font-weight: 700; cursor: pointer;">🔑
           비밀번호 변경</button>
       </div>
     </form>
@@ -1131,14 +1112,8 @@
     </div>
 
 
-    <button type="button" id="price-button" class="price-button">💬 구매 문의하기</button>
 
 
-    <div class="divider-text" style="margin-top: 15px;">
-      <a href="#" id="toggle-auth-mode" style="color: var(--text-gold); text-decoration: none; font-size: 13px;">이미
-        등록했나요? 로그인하기</a>
-    </div>
-    </form>
 
     <div class="device-id" id="device-id"></div>
   </div>
@@ -1152,6 +1127,14 @@
         <span class="trial-icon">📱</span>
         <h2>휴대폰 본인인증</h2>
         <p>비밀번호를 잊으셨을 때 본인 확인에 쓰입니다. 최초 1회만 하면 다시 묻지 않습니다.</p>
+      </div>
+
+      <!-- 어느 계정에 붙는 인증인지 보여준다. 고칠 수는 없다 — 인증은 로그인한
+           세션으로만 성립하므로 다른 아이디를 넣는다는 개념 자체가 없다. -->
+      <div class="form-group">
+        <label for="phone-verify-userid">아이디</label>
+        <input type="text" id="phone-verify-userid" readonly
+          style="background: #232323; border-style: dashed; cursor: default;">
       </div>
 
       <div class="form-group">
@@ -1223,6 +1206,48 @@
       <div class="trial-modal-actions">
         <button type="button" id="pw-reset-confirm-btn" class="trial-submit-btn" style="display: none;">✅ 비밀번호 변경</button>
         <button type="button" id="pw-reset-close-btn"
+          style="background: transparent; border: none; color: rgba(255,255,255,0.4); font-size: 13px; padding: 12px; cursor: pointer;">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- [2026-09-05] 라이선스코드 등록 — 평생 한 번 쓰는 화면이라 모달로 뺐다.
+       입력 항목(코드·아이디·비밀번호·이메일)은 하나도 바뀌지 않았다. 등록 처리도
+       기존 login-form 의 초기 인증 분기를 그대로 탄다 — 검증된 경로를 새로 쓰지 않는다. -->
+  <div id="license-register-backdrop" class="trial-modal-backdrop">
+    <div class="trial-modal">
+      <div class="trial-modal-header">
+        <span class="trial-icon">🎫</span>
+        <h2>라이선스코드 등록</h2>
+        <p>처음 한 번만 등록하면 됩니다. 이후에는 아이디·비밀번호로 로그인하세요.</p>
+      </div>
+
+
+        <div class="form-group">
+          <label for="license-code-init">라이선스 코드 <span style="color: #ff6b6b;">*</span></label>
+          <input type="text" id="license-code-init" placeholder="XXXX-XXXX-XXXX-XXXX (하이픈 없어도 됩니다)">
+        </div>
+
+        <div class="form-group">
+          <label for="user-id-init">아이디 (원하는 아이디) <span style="color: #ff6b6b;">*</span></label>
+          <input type="text" id="user-id-init" placeholder="사용할 아이디를 입력하세요">
+        </div>
+
+        <div class="form-group">
+          <label for="password-init">비밀번호 (원하는 비밀번호) <span style="color: #ff6b6b;">*</span></label>
+          <input type="password" id="password-init" placeholder="사용할 비밀번호를 입력하세요">
+        </div>
+
+        <div class="form-group">
+          <label for="email-init">이메일 <span style="color: #ff6b6b;">*</span></label>
+          <input type="email" id="email-init" placeholder="이메일을 입력하세요">
+        </div>
+
+      <div id="license-register-status" style="display: none; font-size: 13px; font-weight: 700; margin-bottom: 10px; white-space: pre-line; color: #ef4444;"></div>
+
+      <div class="trial-modal-actions">
+        <button type="button" id="license-register-submit" class="trial-submit-btn">✅ 등록하고 시작하기</button>
+        <button type="button" id="license-register-close"
           style="background: transparent; border: none; color: rgba(255,255,255,0.4); font-size: 13px; padding: 12px; cursor: pointer;">닫기</button>
       </div>
     </div>
@@ -1377,7 +1402,7 @@
       try {
         const status = await ipcRenderer.invoke('license:phoneStatus');
         if (status && status.needed === true) {
-          await runPhoneVerification();
+          await runPhoneVerification(status.userId);
         }
       } catch (e) {
         console.warn('[Login] 본인인증 확인 실패 — 그냥 진행합니다:', e);
@@ -1389,7 +1414,7 @@
       return ipcRenderer.invoke('login:success');
     }
 
-    function runPhoneVerification() {
+    function runPhoneVerification(loggedInUserId) {
       return new Promise((resolve) => {
         const backdrop = document.getElementById('phone-verify-backdrop');
         const phoneInput = document.getElementById('phone-verify-input');
@@ -1411,6 +1436,9 @@
 
         backdrop.style.display = 'flex';
         say('');
+        // 어느 계정에 붙는 인증인지 보여준다(읽기전용).
+        const userIdField = document.getElementById('phone-verify-userid');
+        if (userIdField) userIdField.value = loggedInUserId || '';
         // 버튼으로 다시 열 수 있게 되면서 이전 상태가 남는다 — 열 때마다 처음으로 되돌린다.
         if (codeGroup) codeGroup.style.display = 'none';
         if (codeInput) codeInput.value = '';
@@ -1497,7 +1525,7 @@
         showInfoModal('📱 본인인증', '이미 본인인증이 완료된 계정입니다. 올인원·여러 코드를 쓰셔도 한 번이면 전부 인증됩니다.');
         return;
       }
-      await runPhoneVerification();
+      await runPhoneVerification(status.userId);
     });
 
     /*
@@ -1636,165 +1664,43 @@
       }
     }
 
-    // 저장된 자격증명 로드 (자동 로그인은 하지 않음, 초기 인증창만 표시)
-    async function loadSavedCredentials() {
+    /*
+     * [2026-09-05] 저장된 자격증명은 **채우기만** 한다.
+     *
+     * 예전에는 기억하기가 켜져 있으면 license:verifyWithCredentials 를 직접 불러
+     * 앱이 알아서 로그인하고 창까지 닫았다. 사장님 지시: 저장은 저장이고 로그인은
+     * 사용자가 누르는 것이다 — 다른 계정으로 바꿔 넣을 여지도 남아야 한다.
+     */
+    async function prefillSavedCredentials() {
       try {
         const config = await ipcRenderer.invoke('config:get');
-
-        // 저장된 자격증명이 있는지 확인 (자동 로그인은 하지 않고, 재인증 모드로 전환할 때만 사용)
-        const hasCredentials = config &&
-          config.rememberLicenseCredentials === true &&
-          config.savedLicenseUserId &&
-          config.savedLicensePassword &&
-          config.savedLicenseUserId.trim() !== '' &&
-          config.savedLicensePassword.trim() !== '';
-
-        if (hasCredentials) {
-          console.log('저장된 자격증명이 있습니다. 재인증 모드로 전환 시 사용 가능합니다.');
-        } else {
-          console.log('저장된 자격증명이 없습니다. 초기 인증창을 표시합니다.');
-        }
-
-        // 초기 인증창을 기본으로 표시 (자동 로그인 하지 않음)
-        // 사용자가 "이미 등록했나요?"를 클릭하면 재인증 모드로 전환
-      } catch (error) {
-        console.error('저장된 자격증명 로드 실패:', error);
-      }
-    }
-
-    // 재인증 모드로 전환 및 자동 로그인 시도 (사용자가 "이미 등록했나요?" 클릭 시)
-    async function switchToReauthModeAndAutoLogin() {
-      try {
-        const config = await ipcRenderer.invoke('config:get');
-
-        // 저장된 자격증명이 있는지 확인
-        const hasCredentials = config &&
-          config.rememberLicenseCredentials === true &&
-          config.savedLicenseUserId &&
-          config.savedLicensePassword &&
-          config.savedLicenseUserId.trim() !== '' &&
-          config.savedLicensePassword.trim() !== '';
-
+        const hasCredentials = config
+          && config.rememberLicenseCredentials === true
+          && String(config.savedLicenseUserId || '').trim() !== ''
+          && String(config.savedLicensePassword || '').trim() !== '';
         if (!hasCredentials) {
-          console.log('저장된 자격증명이 없습니다. 수동 로그인만 가능합니다.');
-          // 재인증 모드로 전환하되 자동 로그인은 하지 않음
-          isReauthMode = true;
-          const initialSection = document.getElementById('initial-auth-section');
-          const reauthSection = document.getElementById('reauth-section');
-          const toggleLink = document.getElementById('toggle-auth-mode');
-
-          initialSection.style.display = 'none';
-          reauthSection.style.display = 'block';
-          toggleLink.textContent = '처음 사용하시나요? 등록하기';
+          console.log('[Login] 저장된 자격증명이 없습니다. 직접 입력해 주세요.');
           return;
         }
 
-        // 재인증 모드로 전환
-        isReauthMode = true;
-        const initialSection = document.getElementById('initial-auth-section');
-        const reauthSection = document.getElementById('reauth-section');
-        const toggleLink = document.getElementById('toggle-auth-mode');
-
-        initialSection.style.display = 'none';
-        reauthSection.style.display = 'block';
-        toggleLink.textContent = '처음 사용하시나요? 등록하기';
-
-        const rememberCheckbox = document.getElementById('remember-credentials');
         const userIdInput = document.getElementById('user-id');
         const passwordInput = document.getElementById('password');
-        const loginButton = document.getElementById('login-button');
-
-        // 저장된 자격증명으로 필드 채우기
-        if (userIdInput) {
-          userIdInput.value = config.savedLicenseUserId;
-        }
-        if (passwordInput) {
-          passwordInput.value = config.savedLicensePassword;
-        }
-
-        // 사용자가 이전에 체크박스를 체크했다면 자동으로 체크하고 자동 로그인 시도
-        if (rememberCheckbox && config.rememberLicenseCredentials === true) {
-          rememberCheckbox.checked = true;
-          console.log('저장된 자격증명이 있고 자동 로그인이 활성화되어 있습니다. 자동 로그인을 시도합니다...');
-
-          // 자동 로그인 시도 (15초 타임아웃)
-          if (loginButton) {
-            loginButton.disabled = true;
-            loginButton.textContent = '자동 로그인 중...';
-          }
-
-          try {
-            // 15초 타임아웃 설정
-            const timeoutPromise = new Promise((_, reject) => {
-              setTimeout(() => reject(new Error('자동 로그인 타임아웃 (15초)')), 15000);
-            });
-
-            const verifyPromise = ipcRenderer.invoke('license:verifyWithCredentials', config.savedLicenseUserId, config.savedLicensePassword, deviceId);
-
-            const result = await Promise.race([verifyPromise, timeoutPromise]);
-
-            console.log('[Login] 자동 로그인 응답:', result);
-            console.log('[Login] 자동 로그인 응답 전체 (JSON):', JSON.stringify(result, null, 2));
-
-            // 디버그 정보 출력
-            if (result && result.debugInfo) {
-              console.log('🔍 [Login] 자동 로그인 디버그 정보:');
-              if (result.debugInfo.verify) {
-                console.log('🔍 [Login] - action:', result.debugInfo.verify.action);
-                console.log('🔍 [Login] - userId:', result.debugInfo.verify.userId);
-                console.log('🔍 [Login] - fullResponse:', JSON.stringify(result.debugInfo.verify.fullResponse, null, 2));
-                console.log('🔍 [Login] - ok:', result.debugInfo.verify.ok);
-                console.log('🔍 [Login] - valid:', result.debugInfo.verify.valid);
-              }
-            }
-
-            // 원본 응답은 진단에만 사용하고, 성공 여부는 메인 프로세스의 정규화 결과를 따른다.
-            const verifyResponse = result?.debugInfo?.verify?.fullResponse;
-
-            if (result?.valid === true) {
-              // 자동 로그인 성공
-              console.log('[Login] ✅ 자동 로그인 성공');
-              await finishLogin();
-              window.close();
-            } else {
-              // 자동 로그인 실패
-              const errorMessage = resolveLoginAuthenticationResultError(
-                result,
-                verifyResponse,
-                '자동 로그인에 실패했습니다. 다시 로그인해주세요.',
-              );
-
-              console.log('[Login] ❌ 자동 로그인 실패:', errorMessage);
-              showError(errorMessage);
-              if (loginButton) {
-                loginButton.disabled = false;
-                loginButton.textContent = '인증하기';
-              }
-            }
-          } catch (error) {
-            console.error('[Login] 자동 로그인 오류:', error);
-            console.error('[Login] 자동 로그인 오류 상세:', {
-              message: error.message,
-              stack: error.stack,
-              name: error.name
-            });
-            showError(`자동 로그인 중 오류가 발생했습니다: ${error.message}`);
-            if (loginButton) {
-              loginButton.disabled = false;
-              loginButton.textContent = '인증하기';
-            }
-          }
-        } else {
-          // 자동 로그인이 활성화되지 않았거나 저장된 자격증명이 없음
-          console.log('저장된 자격증명으로 필드를 채웠습니다. 사용자가 직접 "인증하기" 버튼을 눌러야 합니다.');
-        }
+        const rememberCheckbox = document.getElementById('remember-credentials');
+        if (userIdInput) userIdInput.value = config.savedLicenseUserId;
+        if (passwordInput) passwordInput.value = config.savedLicensePassword;
+        if (rememberCheckbox) rememberCheckbox.checked = true;
+        console.log('[Login] 저장된 자격증명을 채웠습니다. 로그인은 사용자가 [인증하기]로 합니다.');
       } catch (error) {
-        console.error('재인증 모드 전환 실패:', error);
+        console.error('[Login] 저장된 자격증명 채우기 실패:', error);
       }
     }
 
     // 에러 메시지 표시 (+ 라이선스 만료 시 ACCESS DENIED 모달 표시)
     function showError(message) {
+      // 등록 모달이 떠 있으면 뒤쪽 화면의 에러 줄은 보이지 않는다 — 모달에도 같이 띄운다.
+      if (typeof isRegisterModalOpen === 'function' && isRegisterModalOpen()) {
+        setRegisterStatus(String(message));
+      }
       // 먼저 ACCESS DENIED 모달 표시 여부 확인
       const expiredKeywords = ['라이선스 만료', '이용 기간이 종료', '기간이 종료', '만료되었습니다', '만료', '종료', 'expired', 'license expired'];
       const isExpired = expiredKeywords.some(kw => String(message).toLowerCase().includes(kw.toLowerCase()));
@@ -1919,29 +1825,6 @@
       }
     }
 
-    // ✅ 저장된 로그인 정보 삭제 버튼 이벤트
-    document.getElementById('clear-credentials-btn')?.addEventListener('click', async () => {
-      const confirmed = confirm('저장된 로그인 정보를 삭제하시겠습니까?\n\n삭제 후에는 다시 아이디/비밀번호를 입력해야 합니다.');
-      if (!confirmed) return;
-
-      const success = await clearSavedCredentials();
-      if (success) {
-        // UI 업데이트
-        const rememberCheckbox = document.getElementById('remember-credentials');
-        const userIdInput = document.getElementById('user-id');
-        const passwordInput = document.getElementById('password');
-
-        if (rememberCheckbox) rememberCheckbox.checked = false;
-        if (userIdInput) userIdInput.value = '';
-        if (passwordInput) passwordInput.value = '';
-
-        // 성공 메시지
-        showInfoModal('✅ 삭제 완료', '저장된 로그인 정보가 삭제되었습니다.\n이제 직접 아이디/비밀번호를 입력해주세요.');
-      } else {
-        showError('로그인 정보 삭제에 실패했습니다.');
-      }
-    });
-
     // ✅ 체크박스 해제 시 저장된 자격증명 삭제
     document.getElementById('remember-credentials')?.addEventListener('change', async (e) => {
       const checkbox = e.target;
@@ -1952,28 +1835,44 @@
       }
     });
 
-    // 인증 모드 토글
-    let isReauthMode = false;
+    /*
+     * [2026-09-05] 이제 기본은 로그인이다(isReauthMode = true).
+     *
+     * 등록은 [🎫 라이선스코드 등록] 모달에서만 일어난다. 모달의 [등록하고 시작하기]는
+     * 제출 로직을 새로 쓰지 않고 **기존 login-form 의 초기 인증 분기를 그대로 태운다**
+     * — 등록은 서버 상태를 바꾸는 경로라 검증된 코드를 복제하면 안 된다.
+     */
+    let isReauthMode = true;
 
-    document.getElementById('toggle-auth-mode')?.addEventListener('click', async (e) => {
-      e.preventDefault();
-
-      if (!isReauthMode) {
-        // 초기 인증 모드 → 재인증 모드로 전환 (자동 로그인 시도)
-        await switchToReauthModeAndAutoLogin();
-      } else {
-        // 재인증 모드 → 초기 인증 모드로 전환
-        isReauthMode = false;
-        const initialSection = document.getElementById('initial-auth-section');
-        const reauthSection = document.getElementById('reauth-section');
-        const toggleLink = document.getElementById('toggle-auth-mode');
-
-        initialSection.style.display = 'block';
-        reauthSection.style.display = 'none';
-        toggleLink.textContent = '이미 등록했나요? 로그인하기';
+    function setRegisterModal(open) {
+      const backdrop = document.getElementById('license-register-backdrop');
+      if (!backdrop) return;
+      backdrop.style.display = open ? 'flex' : 'none';
+      isReauthMode = !open;
+      if (open) {
+        hideError();
+        setRegisterStatus('');
+        document.getElementById('license-code-init')?.focus();
       }
+    }
 
-      hideError();
+    function setRegisterStatus(text) {
+      const el = document.getElementById('license-register-status');
+      if (!el) return;
+      el.style.display = text ? 'block' : 'none';
+      el.textContent = text;
+    }
+
+    function isRegisterModalOpen() {
+      const backdrop = document.getElementById('license-register-backdrop');
+      return !!backdrop && backdrop.style.display === 'flex';
+    }
+
+    document.getElementById('open-license-register-btn')?.addEventListener('click', () => setRegisterModal(true));
+    document.getElementById('license-register-close')?.addEventListener('click', () => setRegisterModal(false));
+    document.getElementById('license-register-submit')?.addEventListener('click', () => {
+      // 폼 제출로 넘긴다 — 등록 분기(isReauthMode === false)가 받는다.
+      document.getElementById('login-form')?.requestSubmit();
     });
 
     /*
@@ -2340,7 +2239,7 @@
     };
 
     // ✅ [2026-03-24 FIX] 구매문의 버튼 → 사이트 직접 이동 (모달 제거)
-    document.getElementById('price-button')?.addEventListener('click', async () => {
+    document.getElementById('open-purchase-btn')?.addEventListener('click', async () => {
       try {
         await ipcRenderer.invoke('openExternalUrl', 'https://cd000242-sudo.github.io/naver/');
       } catch (error) {
@@ -2550,6 +2449,10 @@
           // 인증 성공 - 축하 메시지 표시
           console.log('[Login] ✅ 등록 성공 - result.valid:', result?.valid, 'registerResponse.ok:', registerResponse?.ok);
 
+          // 등록 모달을 먼저 닫는다 — 성공 화면이 모달 뒤에 가리면 안 된다.
+          const registerBackdrop = document.getElementById('license-register-backdrop');
+          if (registerBackdrop) registerBackdrop.style.display = 'none';
+
           // 초기 인증 모드인 경우 아이디/비밀번호 자동 저장 (2차 로그인을 위해)
           if (!isReauthMode) {
             try {
@@ -2704,7 +2607,7 @@
     async function initialize() {
       await loadDeviceId();
       await loadAppVersion(); // ✅ [2026-02-05] 버전 표시
-      await loadSavedCredentials();
+      await prefillSavedCredentials();
 
       // ✅ 무료로 체험하기 버튼 활성화 여부 체크 + 자동 로그인
       try {
