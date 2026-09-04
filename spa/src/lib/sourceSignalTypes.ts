@@ -56,6 +56,12 @@ export type SourceLaneConfig = {
 
 export type SourceLane = SourceLaneConfig & {
     items: SourceSignal[];
+    /**
+     * 이 레인만의 갱신 시각. 레인마다 공급원이 달라 신선도가 다르다 —
+     * 네이버 실검은 화면이 Worker 에서 바로 받아 오고(수 분), 나머지는 크론이 커밋한
+     * 정적 스냅샷이다(수 시간). 하나의 시각으로 뭉뚱그리면 어느 한쪽이 거짓말이 된다.
+     */
+    updatedAt?: string;
 };
 
 /** 레인별 원본 검색 주소. 브리프의 사실을 사용자가 직접 확인하는 경로다. */

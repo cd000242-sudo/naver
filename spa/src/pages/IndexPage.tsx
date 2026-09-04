@@ -5,6 +5,7 @@ import ParticlesCanvas from '../components/ParticlesCanvas';
 import SourceBriefModal from '../components/SourceBriefModal';
 import SourceBriefModalStyles from '../components/SourceBriefModalStyles';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
+import { fetchRealtimeIssues } from '../lib/keywordApi';
 import {
     SOURCE_SEARCH_PATHS,
     buildSourceSearchUrl,
@@ -230,6 +231,42 @@ async function overlayBriefTitles(
 }
 
 
+/**
+ * 네이버 실검 레인만 **화면이 직접** 최신으로 받아 덮는다.
+ *
+ * 왜 필요한가(2026-09-04 실측): 홈의 실시간 검색어는 15분 크론이 커밋하는 정적
+ * 스냅샷인데, GitHub 스케줄러가 실제로는 2~5시간에 한 번 돌린다(실행 이력:
+ * 15:01 → 11:23 → 06:14 → 01:24). 그래서 배포본이 165분 낡은 채로 서빙됐다.
+ * Worker 쪽은 읽을 때 스스로 갱신하므로(크론에 안 기댄다) 수 분 안쪽이다.
+ *
+ * 갈아끼우지 않고 **병합**한다 — 최신 순위를 기준으로 삼되, 스냅샷이 이미 들고 있는
+ * 키워드는 기사 브리프(제목·사실·사진)를 그대로 물려받는다. 새로 뜬 키워드는
+ * 브리프 없이 줄만 나온다. 실패하면 스냅샷 그대로 간다 — 홈은 절대 안 죽는다.
+ */
+const compactKeyword = (value: unknown): string => String(value ?? '').replace(/\s+/g, '').toLowerCase();
+
+async function overlayLiveNaverLane(lanes: SourceLane[]): Promise<SourceLane[]> {
+    try {
+        const result = await fetchRealtimeIssues();
+        const payload = result?.ok ? result.data : null;
+        const live = payload && Array.isArray(payload.items) ? payload.items : [];
+        if (live.length === 0) return lanes;
+        const naver = lanes.find((lane) => lane.id === 'naver');
+        if (!naver) return lanes;
+        const known = new Map(naver.items.map((item) => [compactKeyword(item.keyword), item]));
+        const merged = live.map((row, index) => {
+            const cached = known.get(compactKeyword(row.keyword));
+            return cached
+                ? { ...cached, rank: index + 1 }
+                : { keyword: row.keyword, rank: index + 1, source: 'signal.bz' };
+        });
+        const updatedAt = payload && payload.checkedAt ? new Date(payload.checkedAt).toISOString() : undefined;
+        return lanes.map((lane) => (lane.id === 'naver' ? { ...lane, items: merged, updatedAt } : lane));
+    } catch {
+        return lanes;
+    }
+}
+
 async function loadHomeLiveState(): Promise<HomeLiveState> {
     const fallback = buildFallbackHomeLiveState('error');
     // fetchHomeJson 은 서버가 죽으면 null 이 아니라 throw 한다. 여기서 안 잡으면
@@ -239,7 +276,7 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
     // 서버도 스냅샷도 죽었으면 빈 상태를 표시한다. 하드코딩 키워드를
     // LIVE로 위장하지 않고, 기사로 검증된 다음 스냅샷만 보여준다.
     if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) return fallback;
-    const lanes = await overlayBriefTitles(normalizeSourceLanes(sourcePayload));
+    const lanes = await overlayLiveNaverLane(await overlayBriefTitles(normalizeSourceLanes(sourcePayload)));
     const hasLiveData = lanes.some((lane) => lane.items.length > 0);
     if (!hasLiveData) return fallback;
     writeCachedSourceLanes(sourcePayload);
@@ -1126,6 +1163,22 @@ function formatLiveUpdatedAt(value?: string): string {
     return new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(date);
 }
 
+/**
+ * 레인 하나의 신선도. 레인마다 공급원이 달라 신선도가 다르므로, 머리글의 한 시각으로
+ * 뭉뚱그리지 않고 그 레인이 언제 갱신됐는지를 따로 적는다.
+ */
+function laneFreshnessLabel(value?: string): string {
+    if (!value) return '';
+    const at = Date.parse(value);
+    if (!Number.isFinite(at)) return '';
+    const minutes = Math.floor((Date.now() - at) / 60000);
+    if (minutes < 1) return '방금 갱신';
+    if (minutes < 60) return `${minutes}분 전 갱신`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}시간 전 갱신`;
+    return `${Math.floor(hours / 24)}일 전 갱신`;
+}
+
 function cssBackgroundUrl(value?: string): string {
     const raw = String(value || '').trim();
     if (!/^(data:image\/|https?:\/\/|\/images\/|\/)/i.test(raw)) return '';
@@ -1302,7 +1355,13 @@ function IndexPage() {
                                     <strong>{activeSourceLane.label}</strong>
                                     <p>{activeSourceLane.description}</p>
                                 </div>
-                                <small>{activeSourceItems.length}개 표시</small>
+                                {/* 레인마다 공급원이 달라 신선도가 다르다 — 그 레인의 갱신 시각을 적는다. */}
+                                <small>
+                                    {activeSourceItems.length}개 표시
+                                    {laneFreshnessLabel(activeSourceLane.updatedAt)
+                                        ? ` · ${laneFreshnessLabel(activeSourceLane.updatedAt)}`
+                                        : ''}
+                                </small>
                             </div>
                             <div className="hero-source-body">
                                 <div className="hero-source-list-shell">
