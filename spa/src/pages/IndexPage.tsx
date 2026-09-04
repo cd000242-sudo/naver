@@ -268,6 +268,75 @@ async function overlayLiveNaverLane(lanes: SourceLane[]): Promise<SourceLane[]> 
     }
 }
 
+/**
+ * 이슈별 "로직을 이기는 키워드" — 실검 틈새 회차가 **자리까지 실측한** 행이다.
+ *
+ * 사장님(2026-09-05): "내가 원하는 건 로직을 이기는 키워드야."
+ * 실시간 순위는 무엇이 뜨는지만 알려 준다. 정작 필요한 건 그 이슈에서 **내 글이
+ * 1페이지에 들어갈 수 있는 말**이다. 회차가 트래픽(검색광고 검색량)·수요(데이터랩
+ * 최근 7일 + 문서수)·자리(블로그탭 상위 10 정면글 0건) 셋을 다 재서 발행한다.
+ *
+ * 여기서 새로 계산하지 않는다 — 발행본에 실린 실측값만 옮긴다. 없으면 아무것도
+ * 안 보여 준다. 지어낼 바에는 비워 두는 게 낫다.
+ */
+type WinnableKeyword = {
+    issue: string;
+    keyword: string;
+    searchVolume: number | null;
+    documentCount: number | null;
+    exactTitleHits: number;
+    sampledTitles: number;
+};
+
+/**
+ * 같은 이슈인지 어절 겹침으로 본다 — 정확히 같은 문자열을 기대하면 안 된다.
+ * 실측(2026-09-05): 보드는 "밤하늘 전야제 불꽃", 실시간은 "전야제 밤하늘 불꽃" 으로
+ * **같은 말인데 어절 순서가 달랐다.** 그래서 정확 일치로는 9건 중 0건이 붙었다.
+ */
+const issueTokens = (value: unknown): string[] => String(value ?? '')
+    .split(/\s+/)
+    .map((token) => token.replace(/[^\p{L}\p{N}]/gu, ''))
+    .filter((token) => token.length >= 2);
+
+function sameIssue(left: unknown, right: unknown): boolean {
+    const a = new Set(issueTokens(left));
+    const b = new Set(issueTokens(right));
+    if (a.size === 0 || b.size === 0) return false;
+    let shared = 0;
+    for (const token of a) if (b.has(token)) shared += 1;
+    // 두 어절 이상 겹치면 같은 이슈로 본다. 한쪽이 한 어절뿐이면(예: "UAE") 그 하나로 판단한다.
+    return shared >= 2 || (Math.min(a.size, b.size) === 1 && shared === 1);
+}
+
+async function fetchWinnableKeywords(): Promise<WinnableKeyword[]> {
+    try {
+        const response = await fetch('/data/issue-niche-board.json', { cache: 'no-cache' });
+        if (!response.ok) return [];
+        const payload = await response.json() as { rows?: Array<Record<string, unknown>> };
+        const rows: WinnableKeyword[] = [];
+        for (const row of payload.rows || []) {
+            const serp = row.serp as { verdict?: string; exactTitleHits?: number; sampledTitles?: number } | undefined;
+            if (!serp || serp.verdict !== 'WINNABLE') continue;
+            const keyword = String(row.keyword || '').trim();
+            const issue = String(row.issue || '').trim();
+            if (!keyword || !issue) continue;
+            rows.push({
+                issue,
+                keyword,
+                searchVolume: typeof row.searchVolume === 'number' ? row.searchVolume : null,
+                documentCount: typeof row.documentCount === 'number' ? row.documentCount : null,
+                exactTitleHits: Number(serp.exactTitleHits) || 0,
+                sampledTitles: Number(serp.sampledTitles) || 0,
+            });
+        }
+        // 검색량이 큰 것부터 — 같은 이슈에 여러 개면 앞엣것을 쓴다(실측된 값만 비교한다).
+        return rows.sort((a, b) => (b.searchVolume ?? 0) - (a.searchVolume ?? 0));
+    } catch {
+        // 발행본이 없거나 못 읽으면 조용히 넘어간다 — 홈은 이것 때문에 죽지 않는다.
+        return [];
+    }
+}
+
 async function loadHomeLiveState(): Promise<HomeLiveState> {
     const fallback = buildFallbackHomeLiveState('error');
     // fetchHomeJson 은 서버가 죽으면 null 이 아니라 throw 한다. 여기서 안 잡으면
@@ -1199,6 +1268,8 @@ function cssBackgroundUrl(value?: string): string {
  */
 function IndexPage() {
     const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
+    // 이슈별 '로직을 이기는 키워드'(자리까지 실측된 행). 없으면 비어 있고 화면은 그대로다.
+    const [winnableRows, setWinnableRows] = useState<WinnableKeyword[]>([]);
     const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
     const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
     /** 카드를 누르면 중앙 모달로 크게 펼친다. 우측 패널은 그대로 요약을 유지한다. */
@@ -1231,6 +1302,7 @@ function IndexPage() {
     useEffect(() => {
         let alive = true;
         const cancel = runAfterFirstPaint(() => {
+            fetchWinnableKeywords().then((rows) => { if (alive) setWinnableRows(rows); });
             loadHomeLiveState()
                 .then((state) => {
                     if (alive) setLiveState(state);
@@ -1409,6 +1481,32 @@ function IndexPage() {
                                                 </button>
                                                 {/* 크롤링한 기사가 있으면 검색이 아니라 기사로 바로 간다(사장님 2026-08-19). */}
                                                 <a className="hero-source-row-search" href={item.articleUrl || buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer">{item.articleUrl ? '기사' : '검색'}</a>
+                                                {/*
+                                                  * 이 이슈에서 실제로 먹을 수 있는 말. 회차가 자리까지 재서 발행한 것만 싣는다
+                                                  * (검색광고 검색량 · 블로그 문서수 · 블로그탭 상위 10 정면글 수는 전부 실측이다).
+                                                  * 없으면 아무것도 안 나온다 — 지어내지 않는다.
+                                                  */}
+                                                {(() => {
+                                                    const win = winnableRows.find((row) => sameIssue(row.issue, keyword));
+                                                    if (!win) return null;
+                                                    return (
+                                                        <a
+                                                            className="hero-source-row-win"
+                                                            href={buildSourceSearchUrl('naver', win.keyword)}
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                            title={`블로그탭 상위 ${win.sampledTitles}개 중 제목으로 정면 대응한 글 ${win.exactTitleHits}건 — 자리가 비어 있다`}
+                                                        >
+                                                            <b>로직을 이기는 키워드</b>
+                                                            <span>{win.keyword}</span>
+                                                            <small>
+                                                                {win.searchVolume != null ? `검색량 ${win.searchVolume.toLocaleString()}` : '검색량 —'}
+                                                                {win.documentCount != null ? ` · 문서수 ${win.documentCount.toLocaleString()}` : ''}
+                                                                {` · 상위 ${win.sampledTitles} 정면글 ${win.exactTitleHits}건`}
+                                                            </small>
+                                                        </a>
+                                                    );
+                                                })()}
                                             </article>
                                         );
                                     })}
@@ -1768,6 +1866,41 @@ function IndexPage() {
                     white-space: nowrap;
                 }
 
+                /*
+                 * "로직을 이기는 키워드" 줄 — 실검 순위 아래에 실측 결과를 붙인다.
+                 * 줄 전체를 차지한다(위 grid 는 2칸이라 세 번째 자식은 다음 줄로 간다).
+                 * 자리가 비었다는 사실이 이 화면에서 제일 값진 정보라 눈에 띄게 둔다.
+                 */
+                .hero-source-row-win {
+                    grid-column: 1 / -1;
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: baseline;
+                    gap: 6px;
+                    margin: 0 10px 9px 10px;
+                    padding: 7px 10px;
+                    border-radius: 7px;
+                    border: 1px solid rgba(68,215,182,0.34);
+                    background: rgba(68,215,182,0.08);
+                    text-decoration: none;
+                }
+                .hero-source-row-win b {
+                    font-size: 10.5px;
+                    font-weight: 900;
+                    color: #44d7b6;
+                    letter-spacing: -0.2px;
+                }
+                .hero-source-row-win span {
+                    font-size: 13px;
+                    font-weight: 800;
+                    color: rgba(255,255,255,0.94);
+                    word-break: keep-all;
+                }
+                .hero-source-row-win small {
+                    font-size: 11px;
+                    color: rgba(255,255,255,0.62);
+                }
+                .hero-source-row-win:hover { background: rgba(68,215,182,0.14); }
                 .hero-source-row-search {
                     width: 48px;
                     min-height: 48px;
