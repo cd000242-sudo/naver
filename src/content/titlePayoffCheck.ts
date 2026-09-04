@@ -46,11 +46,50 @@ function toPromiseToken(rawWord: string): string | null {
   // Conjugated forms are grammar, not promise, and their endings shift between title
   // and body ("있었다" vs "있습니다") so matching them would only invent false gaps.
   if (looksLikeConjugatedVerb(core)) return null;
+  if (looksLikeVerbForm(core)) return null;
   if (core.endsWith('다')) return null;
   // A two-letter word ending in a particle is a fragment, not a promise
   // ("오는", "글과"). Longer words already had their particle stripped above.
   if (core.length === 2 && PARTICLE_TAILS.has(core[1])) return null;
   return core;
+}
+
+/**
+ * [2026-09-04 measured, 56 posts] The promise list was picking up verb forms and particle
+ * fragments — "가야", "봐야", "할까요", "보면", "잡으려", "껐던", "공제받", "직전까". A title asks
+ * a question with verbs; the promise is the noun the question is about. Counting the verbs put
+ * the average payoff at 66% when the openings had actually answered the nouns.
+ *
+ * Each pattern below is anchored and narrow so ordinary nouns survive: 분야·시야 keep their 야,
+ * 화면·라면 keep their 면, 배려·우려 keep their 려, 분할 keeps its 할, 대기·인기 keep their 기.
+ */
+const VERB_FORM_PATTERNS: readonly RegExp[] = [
+  /^(하|되|보|가|오|주|받|쓰|넣|찾|맞|남|들|알)면$/u, // 보면 · 하면            (화면 · 라면 · 측면 은 제외)
+  /으려$/u,                                 // 잡으려                 (배려 · 우려 는 제외)
+  /던$/u,                                   // 껐던 · 하던
+  /.{2,}할$/u,                              // 외출할 · 신청할        (분할 은 두 글자라 남는다)
+  /(까요|세요|어요|아요|에요|예요|네요|지요|해요)$/u, // 할까요 · 확인하세요
+  /.{2,}받$/u,                              // 공제받
+  /^.{1,3}까$/u,                            // 직전까                 (조사 "까지" 가 잘린 조각)
+  /(쓰기|하기|되기|보기|가기|읽기|먹기)$/u,  // 쓰기 · 하기            (대기 · 인기 · 시기 는 제외)
+];
+
+const HANGUL_BASE = 0xac00;
+const HANGUL_LAST = 0xd7a3;
+/** 종결 어미 '-아/-어' 가 줄어붙은 형태의 모음: ㅏ ㅐ ㅓ ㅔ ㅕ ㅘ ㅝ. */
+const CONTRACTED_STEM_VOWELS = new Set([0, 1, 4, 5, 6, 9, 14]);
+
+/** 가야 · 봐야 · 줄여야 는 동사, 분야 · 시야 는 명사 — 앞 음절의 받침과 모음이 갈라 준다. */
+function isVerbStemPlusYa(core: string): boolean {
+  if (!core.endsWith('야') || core.length < 2) return false;
+  const prev = core.charCodeAt(core.length - 2);
+  if (prev < HANGUL_BASE || prev > HANGUL_LAST) return false;
+  const offset = prev - HANGUL_BASE;
+  return offset % 28 === 0 && CONTRACTED_STEM_VOWELS.has(Math.floor(offset / 28) % 21);
+}
+
+function looksLikeVerbForm(core: string): boolean {
+  return isVerbStemPlusYa(core) || VERB_FORM_PATTERNS.some((pattern) => pattern.test(core));
 }
 
 /** Below this share of promised words present in the opening, the title reads unpaid. */

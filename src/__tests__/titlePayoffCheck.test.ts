@@ -117,7 +117,10 @@ describe('본선 배선', () => {
   });
 
   it('상환 구간은 도입부와 첫 소제목이다 — 뒤에서 갚는 건 이미 늦다', () => {
-    expect(source).toMatch(/firstSection\?\.heading, firstSection\?\.content/);
+    // [2026-09-04] 필드는 title 이다. heading 을 읽던 탓에 첫 소제목이 상환 구역에서 빠져 있었고,
+    //   이 단언이 그 결함을 박제하고 있었다(실측 38편 상환 65%→72%).
+    expect(source).toMatch(/firstSection\?\.title, firstSection\?\.content/);
+    expect(source).not.toMatch(/firstSection\?\.heading/);
   });
 
   it('모델이 선언한 클릭 사유도 대조한다', () => {

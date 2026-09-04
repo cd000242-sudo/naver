@@ -468,8 +468,8 @@ export class ZeroPriceArtifactError extends Error {
  * "해외 남성 아티스트 최초 기록"을 도입부만 복창하고 본문은 공연 일정만
  * 다뤄는데도 100% 가 찍혔다. 그 간극을 메운다. 경고 전용.
  *
- * 주: 기존 logTitlePayoff 는 h.heading 을 읽는데 실제 필드는 h.title 이라
- * 소제목이 payoffZone 에 들어가지 않는다(기존 결함). 여기선 h.title 을 쓴다.
+ * 주: 두 검사 모두 h.title 을 쓴다 — 예전에 logTitlePayoff 가 h.heading 을 읽어
+ * 첫 소제목이 상환 구역에서 빠지던 결함은 2026-09-04 에 고쳤다.
  */
 function logTitleAnswer(content: any, source: any): void {
   try {
@@ -497,7 +497,8 @@ function logTitlePayoff(content: any, source: any): void {
     const result = checkTitlePayoff({
       title: content?.selectedTitle || content?.title || '',
       primaryKeyword: getPrimaryKeywordFromSource(source as any),
-      payoffZone: [content?.introduction, firstSection?.heading, firstSection?.content]
+      // [2026-09-04] 필드는 title 이다 — heading 을 읽던 탓에 첫 소제목이 상환 구역에서 빠져 있었다(주석에만 남아 있던 결함).
+      payoffZone: [content?.introduction, firstSection?.title, firstSection?.content]
         .filter(Boolean)
         .join('\n'),
     });
