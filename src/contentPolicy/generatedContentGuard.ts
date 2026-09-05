@@ -1,4 +1,5 @@
 import { runContentPolicyPipeline } from './orchestrator.js';
+import { resolveLockedTitle } from '../contentKeywordTitlePolicy.js';
 import {
   acceptContentPolicyAdvisories,
   repairDeclaredForbiddenClaims,
@@ -98,7 +99,10 @@ function applyResult<T extends Record<string, any>>(
     };
   }
   if (result.rewrite_count > 0) {
-    next.selectedTitle = result.article.title;
+    // A user-confirmed title (keyword-as-title / manual override) survives the rewrite —
+    // this stage runs after the generation-side lock and used to silently undo it.
+    const lockedTitle = resolveLockedTitle(content);
+    next.selectedTitle = lockedTitle || result.article.title;
     next.summary = result.article.summary;
     next.introduction = result.article.introduction;
     next.headings = result.article.headings?.map((heading) => ({ ...heading })) || next.headings;

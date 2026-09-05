@@ -978,7 +978,13 @@ export async function generateContentFromKeywords(
     const keywordTitlePrefixEl = document.getElementById('keyword-title-prefix') as HTMLInputElement | null;
     const useKeywordAsTitle = keywordAsTitleEl?.checked === true;
     const useKeywordTitlePrefix = keywordTitlePrefixEl?.checked === true;
-    const keywordForTitle = String(keywords || '').split(',')[0].trim();
+    // [2026-09-05] "제목으로 사용"은 입력 전체가 제목이다. split(',')로 자르면 쉼표가 든
+    //   문장형 제목("한 번 입은 옷, 옷장에 …" 실사고)이 앞토막만 잠기고, 뒷부분 의도가
+    //   유실된 채 검색·생성이 앞토막 기준으로 흘러 본문까지 주제가 밀린다.
+    //   앞배치(prefix)는 기존대로 첫 키워드만 쓴다 — 문장 전체를 접두로 붙이면 제목이 깨진다.
+    const wholeInputTitle = String(keywords || '').replace(/\s+/g, ' ').trim();
+    const firstKeyword = String(keywords || '').split(',')[0].trim();
+    const keywordForTitle = useKeywordAsTitle ? wholeInputTitle : firstKeyword;
 
     if ((useKeywordAsTitle || useKeywordTitlePrefix) && keywordForTitle) {
       (window as any)._keywordTitleOptions = {

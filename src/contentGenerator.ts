@@ -6102,8 +6102,14 @@ async function generateStructuredContentInternal(
   let blueprintQuotes: string[] = [];
   let blueprintQuoteItems: Array<{ text: string; speaker: string }> = [];
   let blueprintReaderSituation = '';
+  let blueprintOffTopic: string[] = [];
   let blueprintRoute: Awaited<ReturnType<typeof resolveSideTaskRoute>> = null;
   const blueprintMode = String(source.contentMode || 'seo');
+  // [2026-09-05] 사용자 확정 제목(키워드 그대로 / 수동 지정). 설계도의 angle 과 본문 호출
+  //   양쪽에 전달한다 — 지금까지는 잠금이 생성 후 치환이라, 모델이 자기 제목을 상정하고
+  //   본문을 써서 제목 따로 본문 따로가 됐다("한 번 입은 옷" 실사고).
+  const confirmedTitleForBody = resolveKeywordAsTitleValue(source)
+    || normalizeManualTitleOverride((source as any).manualTitleOverride);
   const blueprintEligible = !isV3Prompt
     && process.env.CONTENT_BLUEPRINT !== '0'
     && ['seo', 'homefeed', 'custom', 'mate', 'business'].includes(blueprintMode)
@@ -6119,6 +6125,7 @@ async function generateStructuredContentInternal(
           keyword: getPrimaryKeywordFromSource(source) || String(source.title || '').trim(),
           mode: blueprintMode,
           material: String((source as any).rawText || ''),
+          confirmedTitle: confirmedTitleForBody || undefined,
         },
         {
           complete: (prompt, options) => route.callModel(prompt, {
@@ -6137,6 +6144,7 @@ async function generateStructuredContentInternal(
         blueprintQuotes = blueprintRun.result.blueprint.quotes.map((q) => q.text);
         blueprintQuoteItems = blueprintRun.result.blueprint.quotes.map((q) => ({ text: q.text, speaker: q.speaker }));
         blueprintReaderSituation = blueprintRun.result.blueprint.readerSituation;
+        blueprintOffTopic = blueprintRun.result.blueprint.offTopic.slice();
         console.log(`[Blueprint] 📐 엔진 ${route.engine} · 재료 ${blueprintBlock.length}자 · ${blueprintRun.elapsedMs}ms`);
       }
     }
@@ -6313,6 +6321,19 @@ async function generateStructuredContentInternal(
           // 편별 재료는 [원본 텍스트] 뒤(user 파트)에 둔다 — system 접두가 바뀌면 캐시가 통째로 빠진다.
           systemPrompt = insertBlueprintIntoPrompt(systemPrompt, blueprintBlock);
           console.log('[Blueprint] 📐 설계도 재료를 [원본 텍스트] 뒤에 주입 (키워드 사실 목록 대체)');
+        }
+
+        // [2026-09-05] 확정 제목을 본문 호출에 알린다. 잠금은 생성 후 치환이라 모델은
+        //   여태 자기 제목을 상정하고 본문을 썼다 — 제목은 공감형인데 본문이 다른 질문에
+        //   답하는 어긋남의 뿌리. 편별 재료이므로 [원본 텍스트] 뒤(user 파트)에 둔다.
+        //   V3 는 자체 제목 계약(v3TitleContract)이 있어 제외한다.
+        if (confirmedTitleForBody && !isV3Prompt) {
+          systemPrompt = insertBlueprintIntoPrompt(systemPrompt, [
+            `[확정 제목] "${confirmedTitleForBody}"`,
+            '- 이 제목은 사용자가 확정했다. 다른 제목을 짓지 말고 selectedTitle 에 이 제목을 그대로 쓴다.',
+            '- 도입부·소제목·본문 전체가 이 제목이 던지는 질문에 답한다. 자료에 있어도 이 질문에 답하지 않는 내용은 관련 단어가 같아도 쓰지 않는다.',
+          ].join('\n'));
+          console.log(`[ContentGenerator] 📌 확정 제목을 본문 호출에 주입: "${confirmedTitleForBody.slice(0, 40)}"`);
         }
 
         const urlModeDirective = buildUrlModeDirective({
@@ -7028,6 +7049,32 @@ async function generateStructuredContentInternal(
       }
       if (blueprintBlock) {
         console.log(`[Blueprint] 바인딩: 도입부 패치 ${blueprintIntroPatched} · 인용 삽입 ${blueprintQuoteInserted}`);
+      }
+
+      // [2026-09-05] 설계도가 "빼라"고 한 주제가 본문에 남았는지 사후 확인. 지금까지는
+      //   프롬프트 한 줄로 부탁만 하고 검사가 없어, 보관법 글에 중고거래·섬유 폐기물
+      //   섹션이 그대로 실렸다. 경고-only — 발행은 막지 않고 로그와 warnings 에 남긴다.
+      if (blueprintOffTopic.length > 0 && Array.isArray(parsed.headings)) {
+        try {
+          const { findOffTopicRemnants } = await import('./content/blueprint/offTopicPostCheck.js');
+          const remnants = findOffTopicRemnants(blueprintOffTopic, parsed.headings);
+          if (remnants.length > 0) {
+            const summary = remnants
+              .map((hit) => `"${hit.subject}" → 소제목 "${hit.heading}"`)
+              .join(' · ');
+            console.warn(`[Blueprint] ⚠️ 제외 주제가 본문에 남음(${remnants.length}건): ${summary}`);
+            if (!parsed.quality) {
+              parsed.quality = {
+                aiDetectionRisk: 'low', legalRisk: 'safe',
+                seoScore: 70, originalityScore: 70, readabilityScore: 70, warnings: [],
+              };
+            }
+            parsed.quality.warnings = [
+              ...(parsed.quality.warnings || []),
+              `[제외주제 잔존] ${summary}`,
+            ];
+          }
+        } catch { /* 검사 실패로 생성을 잃지 않는다 */ }
       }
 
       // ✅ [v2.10.300] TitlePatch/IntroPatch 후 HTML sanitize 재적용 —

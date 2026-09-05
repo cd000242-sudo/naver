@@ -65,3 +65,30 @@ export function applyKeywordAsTitleLock<T extends {
     titleCandidates: [{ text: exactTitle, score: 100, reasoning: '사용자 지정 키워드 제목(verbatim)' }],
   };
 }
+
+/**
+ * [2026-09-05] The user-confirmed title carried by a generated content object, or ''.
+ *
+ * The generation-side lock (applyKeywordAsTitleLock / applyManualTitleOverride) runs inside
+ * contentGenerator, but the content-policy rewrite runs *after* it in main.ts and used to copy
+ * result.article.title straight over selectedTitle — silently undoing the lock. ("한 번 입은 옷…"
+ * incident: the confirmed title came back as a rewritten question.) Every post-lock stage that
+ * wants to replace the title must go through this resolver first.
+ */
+export function resolveLockedTitle(content: {
+  keywordAsTitleLocked?: boolean;
+  keywordAsTitleValue?: string;
+  manualTitleLocked?: boolean;
+  manualTitleValue?: string;
+} | null | undefined): string {
+  if (!content) return '';
+  if (content.keywordAsTitleLocked === true) {
+    const value = String(content.keywordAsTitleValue || '').trim();
+    if (value) return value;
+  }
+  if (content.manualTitleLocked === true) {
+    const value = String(content.manualTitleValue || '').trim();
+    if (value) return value;
+  }
+  return '';
+}

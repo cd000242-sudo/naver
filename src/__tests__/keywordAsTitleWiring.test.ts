@@ -46,4 +46,16 @@ describe('keyword-as-title wiring (일반 키워드 발행)', () => {
     const renderer = readFileSync(new URL('../renderer/renderer.ts', import.meta.url), 'utf8');
     expect(renderer).toMatch(/setupMutualExclusiveCheckboxes\('keyword-as-title', 'keyword-title-prefix'\)/);
   });
+
+  /**
+   * [2026-09-05 사용자 실측] 쉼표가 든 문장형 제목("한 번 입은 옷, 옷장에 …")을
+   * "제목으로 사용"으로 잠갔는데 split(',')[0] 이 앞토막만 남겨 의도가 유실됐다.
+   * 제목으로 사용 = 입력 전체가 제목. 앞배치(prefix)만 첫 키워드를 쓴다.
+   */
+  it('제목으로 사용 시 입력 전체를 잠근다 — split(",")[0] 절단 금지', () => {
+    expect(gen).toMatch(/wholeInputTitle/);
+    expect(gen).toMatch(/useKeywordAsTitle \? wholeInputTitle : firstKeyword/);
+    // 옛 절단 코드가 keywordForTitle 에 직접 돌아오면 안 된다.
+    expect(gen).not.toMatch(/const keywordForTitle = String\(keywords \|\| ''\)\.split\(','\)\[0\]/);
+  });
 });

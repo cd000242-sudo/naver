@@ -234,6 +234,25 @@ export interface TopicMatch {
   readonly hasHead: boolean;
 }
 
+/*
+ * [2026-09-05] 문장형 키워드는 머리 명사 판정을 포기한다.
+ *
+ * "제목으로 사용" 흐름은 문장을 통째로 키워드로 쓴다("한 번 입은 옷, 옷장에 넣기는
+ * 찝찝하고 빨기는 애매하다면 ??"). 이때 마지막 토큰은 "애매하다면" 같은 서술어라
+ * 어떤 자료에도 없다 — 실측(09-05): 정답 자료(보관법)조차 hasHead=false 로 본류 0건,
+ * 전 자료가 곁가지 몫(30%)으로 잘리고 낱말만 겹치는 자료가 그 자리를 채웠다.
+ *
+ * 키워드 낱말에 서술어 꼴이 섞여 있으면 명사구가 아니라 문장이다. 그때는 머리를
+ * 고르지 않고 hasHead=true 로 두어 본류/곁가지를 score(주제어 절반 이상)로만 가른다
+ * — 볼 수 없는 가드는 움직이지 않는다(위 filterOnTopicSupplement 와 같은 원칙).
+ */
+const PREDICATE_ENDING = /(하고|하며|해서|하면|다면|기는|기가|거나|지만|은데|는데|나요|까요|세요|어요|네요|더라도|합니다|입니다|할까|될까)$/;
+
+function isSentenceKeyword(keyword: string): boolean {
+  const words = String(keyword || '').split(/[^가-힣A-Za-z0-9]+/u).filter(Boolean);
+  return words.some((word) => word.length >= 3 && PREDICATE_ENDING.test(word));
+}
+
 export function scoreTopicMatch(text: string | undefined, keyword: string | undefined): TopicMatch {
   const body = String(text || '');
   const tokens: string[] = [];
@@ -247,6 +266,9 @@ export function scoreTopicMatch(text: string | undefined, keyword: string | unde
   }
 
   const matched = tokens.filter((token) => body.includes(token)).length;
+  if (isSentenceKeyword(String(keyword || ''))) {
+    return { score: matched / tokens.length, hasHead: true };
+  }
   const head = tokens[tokens.length - 1];
   return { score: matched / tokens.length, hasHead: body.includes(head) };
 }

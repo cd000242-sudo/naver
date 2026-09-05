@@ -3,6 +3,7 @@ import { ensureTrackedPublishedPost } from '../analytics/publishedPostTracker.js
 import { extractNaverBlogPostIdentity } from '../automation/publishOutcomeResolver.js';
 import { resolveScheduledPublishAt } from '../scheduler/appScheduleQueue.js';
 import { runContentPolicyPipeline } from './orchestrator.js';
+import { resolveLockedTitle } from '../contentKeywordTitlePolicy.js';
 import {
   approveRecentPostManualReview,
   isOnlyRecentPostManualReviewReasons,
@@ -241,8 +242,11 @@ function applyResultToPayload<T extends ContentPolicyPayload>(
     ...(payload.structuredContent || {}),
     contentPolicy: result,
   };
+  // A user-confirmed title (keyword-as-title / manual override) survives the rewrite —
+  // this stage runs after the generation-side lock and used to silently undo it.
+  const lockedTitle = resolveLockedTitle(payload.structuredContent as Record<string, any> | undefined);
   if (result.rewrite_count > 0) {
-    structured.selectedTitle = result.article.title;
+    structured.selectedTitle = lockedTitle || result.article.title;
     structured.introduction = result.article.introduction;
     if (result.article.headings) {
       structured.headings = result.article.headings.map((heading) => ({ ...heading }));
@@ -255,7 +259,7 @@ function applyResultToPayload<T extends ContentPolicyPayload>(
   }
   return {
     ...payload,
-    title: result.rewrite_count > 0 ? result.article.title : payload.title,
+    title: result.rewrite_count > 0 ? (lockedTitle || result.article.title) : payload.title,
     content: result.rewrite_count > 0 ? result.article.body_markdown : payload.content,
     structuredContent: structured,
     contentPolicyContext: {
