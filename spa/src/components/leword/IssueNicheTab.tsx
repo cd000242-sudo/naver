@@ -9,7 +9,7 @@ import PreemptionPlan from './PreemptionPlan';
 import IssueFlowBrief from './IssueFlowBrief';
 import RealtimeStrip from './RealtimeStrip';
 import { useMindmap } from './useMindmap';
-import { fetchRealtimeIssues } from '../../lib/keywordApi';
+import { fetchHotKeywords, fetchRealtimeIssues } from '../../lib/keywordApi';
 import {
     compactKey, fetchIssueBoard, rowsOfIssue,
     type IssueBoard, type IssueBoardRow, type IssueBrief, type IssueLane, type IssueVerdict,
@@ -127,24 +127,41 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
      */
     type RealtimePayload = NonNullable<Awaited<ReturnType<typeof fetchRealtimeIssues>>['data']>;
     const [realtime, setRealtime] = useState<RealtimePayload | null>(null);
+    /*
+     * 대조 풀은 넓을수록 좋다 — signal.bz(realtime-issues) 9건만으로는 발행 이슈와
+     * 겹칠 확률이 낮다. 인기(네이트)·구글 급상승(hot-keywords)까지 합쳐 "지금 어디서든
+     * 검색되고 있나"를 본다. {키워드, 순위, 진입경과} 로 평평하게 편다.
+     */
+    const [livePool, setLivePool] = useState<Array<{ keyword: string; rank: number; ageMs: number | null }>>([]);
     useEffect(() => {
         let alive = true;
         const load = () => {
-            fetchRealtimeIssues().then((r) => { if (alive && r.ok && r.data) setRealtime(r.data); }).catch(() => { /* 없으면 배지만 안 뜬다 */ });
+            Promise.all([fetchRealtimeIssues().catch(() => null), fetchHotKeywords().catch(() => null)]).then(([rt, hot]) => {
+                if (!alive) return;
+                if (rt?.ok && rt.data) setRealtime(rt.data);
+                const pool: Array<{ keyword: string; rank: number; ageMs: number | null }> = [];
+                for (const it of (rt?.ok && rt.data?.items) || []) pool.push({ keyword: it.keyword, rank: it.rank, ageMs: it.seenAgeMs });
+                const lanes = hot?.ok ? hot.data?.lanes : null;
+                for (const laneId of ['popular', 'google'] as const) {
+                    for (const it of (lanes?.[laneId]?.items) || []) pool.push({ keyword: it.keyword, rank: it.rank, ageMs: it.seenAgeMs });
+                }
+                setLivePool(pool);
+            });
         };
         load();
         const timer = window.setInterval(load, 5 * 60_000);
         return () => { alive = false; window.clearInterval(timer); };
     }, []);
-    /** 카드 이슈/키워드가 지금 실검에 살아있으면 그 순위·진입 경과를 준다. 없으면 null. */
+    /** 카드 이슈/키워드가 지금 어디선가 실시간으로 검색되면 그 순위·진입 경과를 준다. */
     const liveFor = (row: IssueBoardRow): { rank: number; ago: string } | null => {
-        const items = realtime?.items || [];
-        for (const item of items) {
+        let best: { rank: number; ago: string } | null = null;
+        for (const item of livePool) {
             if (sameIssue(item.keyword, row.issue) || sameIssue(item.keyword, row.keyword)) {
-                return { rank: item.rank, ago: liveAgo(item.seenAgeMs) };
+                // 여러 소스에 걸리면 순위가 가장 높은(숫자 작은) 것을 쓴다.
+                if (!best || item.rank < best.rank) best = { rank: item.rank, ago: liveAgo(item.ageMs) };
             }
         }
-        return null;
+        return best;
     };
 
     useEffect(() => {
