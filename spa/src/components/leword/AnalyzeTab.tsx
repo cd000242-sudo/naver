@@ -18,6 +18,7 @@ import { ErrorNote, MetricCell, TabIntro, UsageBar } from './LewordShared';
 import { groupByIntent } from '../../lib/intentGroups';
 import TrendSparkline from './TrendSparkline';
 import DemandChartModal, { pickChartSeries } from './DemandChartModal';
+import { naverSearchUrl } from './preemptionMeta';
 
 /**
  * 키워드 분석 — 검색량·문서수·상품수·연관 키워드.
@@ -43,6 +44,8 @@ type BoardJoinRow = {
 
 function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
     const [keyword, setKeyword] = useState(initialKeyword);
+    /** 방금 복사한 키워드 — 결과 헤더의 복사 버튼이 잠깐 "복사됨"으로 바뀐다. */
+    const [copied, setCopied] = useState('');
     const [result, setResult] = useState<KeywordAnalysis | null>(null);
     const [boardRows, setBoardRows] = useState<BoardJoinRow[]>([]);
 
@@ -407,6 +410,18 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                         <div className="lw-panel-head">
                             <h2>{result.keyword}</h2>
                             <span>실측값</span>
+                            {/* 복사·네이버 검색 — 다른 탭 카드에는 있는데 분석 결과에만 없었다(사장님 2026-09-06). */}
+                            <div className="lw-analyze-head-actions">
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        navigator.clipboard?.writeText(result.keyword)
+                                            .then(() => { setCopied(result.keyword); window.setTimeout(() => setCopied(''), 1400); })
+                                            .catch(() => { /* 복사가 막힌 브라우저면 직접 선택 */ });
+                                    }}
+                                >{copied === result.keyword ? '복사됨' : '복사'}</button>
+                                <a href={naverSearchUrl(result.keyword)} target="_blank" rel="noreferrer">네이버 검색</a>
+                            </div>
                         </div>
 
                         {(() => {

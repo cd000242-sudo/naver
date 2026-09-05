@@ -1068,6 +1068,17 @@ function LewordStyles() {
             .lw-panel-head h2 { margin: 0; color: #fff; font-size: 19px; font-weight: 900; }
             .lw-panel-head span { color: #646b7d; font-size: 12.5px; font-weight: 700; }
             .lw-panel-foot { margin: 12px 0 0; color: #646b7d; font-size: 12px; }
+            /* 분석 결과 헤더의 복사·네이버 검색 — 오른쪽으로 민다. */
+            .lw-analyze-head-actions { margin-left: auto; display: inline-flex; gap: 7px; align-items: center; }
+            .lw-analyze-head-actions button,
+            .lw-analyze-head-actions a {
+                padding: 6px 12px; border-radius: 8px; cursor: pointer; font-family: inherit;
+                font-size: 12.5px; font-weight: 800; text-decoration: none;
+                border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.05); color: #cfd6e6;
+            }
+            .lw-analyze-head-actions a { border-color: rgba(46,211,111,.4); color: #7ff0a8; }
+            .lw-analyze-head-actions button:hover,
+            .lw-analyze-head-actions a:hover { border-color: rgba(124,92,255,.5); color: #fff; }
 
             .lw-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 10px; }
             .lw-metric {
