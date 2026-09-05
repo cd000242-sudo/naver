@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchGapTopics, fetchKeywordPostIdeas, fetchYoutubeTrending, formatCount, type KinPostIdea, type LiveTrendingVideo } from '../../lib/keywordApi';
 import { bridgePostIdeas } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
+import { cleanYoutubeSnapshot } from '../../lib/youtubeTopicQuality.mjs';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -168,9 +169,9 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
     useEffect(() => {
         let cancelled = false;
-        fetch('/data/youtube-gap.json')
+        fetch('/data/youtube-gap.json', { cache: 'no-store' })
             .then((response) => (response.ok ? response.json() : Promise.reject(new Error(String(response.status)))))
-            .then((json) => { if (!cancelled) { setData(json); setStatus('ready'); } })
+            .then((json) => { if (!cancelled) { setData(cleanYoutubeSnapshot(json)); setStatus('ready'); } })
             .catch(() => { if (!cancelled) setStatus('error'); });
         return () => { cancelled = true; };
     }, []);

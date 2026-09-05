@@ -44,6 +44,9 @@ jobs:
         working-directory: spa
         run: npm run build
 
+      - name: Verify keyword quality and campaign freshness
+        run: node --test scripts/tests/youtube-topic-quality.test.mjs scripts/tests/affiliate-freshness.test.mjs
+
       - name: Prepare deploy directory
         run: |
           mkdir -p _site

@@ -18,6 +18,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isUsefulYoutubeTopic } from '../spa/src/lib/youtubeTopicQuality.mjs';
 import {
     fetchAutocomplete, fetchDocumentCount, fetchVolumeDetails,
     missingNaverCredentials, sleep,
@@ -172,6 +173,7 @@ function leadsOf(chunk) {
 function suggestionsFor(lead, suggestions) {
     const head = lead.toLowerCase();
     return suggestions.filter((suggestion) => {
+        if (!isUsefulYoutubeTopic(suggestion)) return false;
         const text = suggestion.toLowerCase();
         if (!text.startsWith(head)) return false;
         const next = text.charAt(head.length);

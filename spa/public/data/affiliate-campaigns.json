@@ -1,5 +1,6 @@
 {
  "collectedAt": "2026-08-21T04:29:53.427Z",
+ "checkedAt": "2026-09-05T23:17:33.600Z",
  "sites": {
   "toss": {
    "label": "토스쇼핑 쉐어링크",
@@ -2077,7 +2078,8 @@
       "provider": "claude"
      }
     }
-   ]
+   ],
+   "collectedAt": "2026-08-21T04:29:53.427Z"
   },
   "brandconnect": {
    "label": "네이버 브랜드커넥트",
@@ -2250,7 +2252,10 @@
       "provider": "claude"
      }
     }
-   ]
+   ],
+   "collectedAt": "2026-08-21T04:29:53.427Z",
+   "checkedAt": "2026-09-05T23:17:33.600Z",
+   "status": "login-required"
   }
  }
 }

@@ -6,6 +6,7 @@ import CoupangBoard from './CoupangBoard';
 import { AFFILIATE_LANES, type LaneId } from './affiliateLanes';
 import { forgeShoppingTitle } from './shoppingTitle';
 import { loadUserKeys } from '../../lib/userKeys';
+import { campaignFreshness } from '../../lib/affiliateFreshness.mjs';
 
 /**
  * 제휴 황금키워드 — 플랫폼별 서브탭.
@@ -66,7 +67,7 @@ type CampaignItem = {
 
 type CampaignSnapshot = {
     collectedAt: string;
-    sites: Record<string, { label: string; items: CampaignItem[] }>;
+    sites: Record<string, { label: string; items: CampaignItem[]; collectedAt?: string | null; checkedAt?: string; status?: string }>;
 };
 
 /**
@@ -108,11 +109,14 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
      */
     useEffect(() => {
         let alive = true;
-        fetch('/data/affiliate-campaigns.json', { cache: 'no-store' })
+        const refresh = () => fetch('/data/affiliate-campaigns.json', { cache: 'no-store' })
             .then((response) => (response.ok ? response.json() : null))
             .then((data) => { if (alive && data?.sites) setSnapshot(data as CampaignSnapshot); })
             .catch(() => { /* 없으면 없는 대로 */ });
-        return () => { alive = false; };
+        refresh();
+        const timer = window.setInterval(refresh, 60000);
+        window.addEventListener('focus', refresh);
+        return () => { alive = false; window.clearInterval(timer); window.removeEventListener('focus', refresh); };
     }, []);
 
     const active = AFFILIATE_LANES.find((item) => item.id === lane)!;
@@ -157,8 +161,9 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     );
 
     const campaigns = lane === 'coupang' ? null : (snapshot?.sites?.[lane] ?? null);
-    const collectedLabel = snapshot?.collectedAt
-        ? new Date(snapshot.collectedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+    const freshness = campaignFreshness(snapshot, lane);
+    const collectedLabel = freshness.collectedAt && Number.isFinite(Date.parse(freshness.collectedAt))
+        ? new Date(freshness.collectedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
         : '';
 
     return (
@@ -190,6 +195,12 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         <strong>{active.label} 캠페인</strong> — 콘솔에서 받아온 실제 목록입니다.
                         {collectedLabel && <span style={{ opacity: .7 }}> · {collectedLabel} 수집</span>}
                     </p>
+                    {(freshness.stale || freshness.failed) && (
+                        <p role="status" style={{ color: '#f5a623', margin: '0 0 16px', fontSize: 14 }}>
+                            {freshness.needsLogin ? '수집 계정의 로그인이 만료되어 갱신이 중단됐습니다.' : '최신 상품 목록이 아직 확인되지 않았습니다.'}
+                            {' '}위 수집 시각의 마지막 확인 목록입니다. 판매 여부와 수수료는 제휴 콘솔에서 다시 확인해주세요.
+                        </p>
+                    )}
                     <ol className="lw-product-list">
                         {campaigns.items.map((item, index) => {
                             // 분석·검색은 니즈 검색어가 우선 — 상품명 검색어는 수요가 없다(실측 0~140).

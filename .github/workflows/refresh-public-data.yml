@@ -40,6 +40,9 @@ jobs:
           npm ci --ignore-scripts
           npx playwright install --with-deps chromium
 
+      - name: Verify YouTube topic selection
+        run: node --test scripts/tests/youtube-topic-quality.test.mjs
+
       # 브리프 제목의 두뇌를 API 키가 아니라 **구독**으로 돌리기 위한 준비다.
       # 토큰이 없으면 설치를 건너뛰고 기존 경로(API 키 → 템플릿)로 내려간다.
       #
