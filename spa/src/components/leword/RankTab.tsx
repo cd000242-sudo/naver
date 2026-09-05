@@ -1069,70 +1069,6 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 </div>
             )}
 
-            {/*
-              * 붙여넣을 실물 창(사장님 지적 2026-08-23).
-              * 코드는 **그대로 보여 주고** 브라우저가 해석하지 않게 <pre> 안에 글자로 둔다.
-              */}
-            {snippet && (
-                <div className="lw-plan-backdrop" role="presentation" onClick={() => { setSnippet(null); setCopied(false); }}>
-                    <div
-                        className="lw-plan-modal lw-snip-modal"
-                        role="dialog"
-                        aria-modal="true"
-                        aria-label={snippet.label}
-                        onClick={(event) => event.stopPropagation()}
-                    >
-                        <header className="lw-plan-head">
-                            <div>
-                                <h3>{snippet.label}</h3>
-                                <small className="lw-kg-work-meta">
-                                    {snipMode === 'html'
-                                        ? '워드프레스·네이버 편집기에 HTML 로 붙여 넣으세요'
-                                        : '글 그대로 복사해 붙여 넣으세요'}
-                                </small>
-                            </div>
-                            <button type="button" className="lw-plan-close" onClick={() => { setSnippet(null); setCopied(false); }} aria-label="닫기">✕</button>
-                        </header>
-                        <div className="lw-plan-body">
-                            {/*
-                              * 글과 코드를 함께 준다(사장님 지시 2026-08-23).
-                              * 대부분은 글만 붙여 넣으므로 글이 기본이다.
-                              * 한쪽만 있으면 고르개를 띄우지 않는다.
-                              */}
-                            {snippet.text && snippet.html && (
-                                <div className="lw-snip-tabs" role="group" aria-label="붙여넣기 형태">
-                                    <button
-                                        type="button"
-                                        className={snipMode === 'text' ? 'on' : ''}
-                                        onClick={() => { setSnipMode('text'); setCopied(false); }}
-                                    >글</button>
-                                    <button
-                                        type="button"
-                                        className={snipMode === 'html' ? 'on' : ''}
-                                        onClick={() => { setSnipMode('html'); setCopied(false); }}
-                                    >코드(HTML)</button>
-                                </div>
-                            )}
-                            <pre className="lw-snip-code">
-                                {snipMode === 'html' ? (snippet.html || snippet.text) : (snippet.text || snippet.html)}
-                            </pre>
-                            <button
-                                type="button"
-                                className="lw-snip-copy"
-                                onClick={() => {
-                                    const body = snipMode === 'html'
-                                        ? (snippet.html || snippet.text)
-                                        : (snippet.text || snippet.html);
-                                    navigator.clipboard?.writeText(body)
-                                        .then(() => { setCopied(true); window.setTimeout(() => setCopied(false), 2000); })
-                                        .catch(() => { /* 복사가 막힌 브라우저면 직접 선택해 복사한다 */ });
-                                }}
-                            >{copied ? '복사했습니다' : snipMode === 'html' ? '코드 복사' : '글 복사'}</button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
             {/* 글 진단 창 — 실측 3종 + 본문을 읽은 결과만 싣는다. */}
             {analyzeRow && (
                 <div className="lw-plan-backdrop" role="presentation" onClick={() => setAnalyzeRow(null)}>
@@ -1296,6 +1232,74 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                     )}
                                 </>
                             )}
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/*
+              * 붙여넣을 실물 창(사장님 지적 2026-08-23).
+              * 코드는 **그대로 보여 주고** 브라우저가 해석하지 않게 <pre> 안에 글자로 둔다.
+              *
+              * 진단 창 **뒤에** 렌더한다(사장님 실사고 2026-09-06 "붙여넣기 열면 모달
+              * 뒤에서 열려") — 두 모달의 z-index 가 같아 DOM 순서가 앞뒤를 정하는데,
+              * 이 창을 여는 버튼이 진단 창 안에 있으니 이 창이 항상 위여야 한다.
+              */}
+            {snippet && (
+                <div className="lw-plan-backdrop" role="presentation" onClick={() => { setSnippet(null); setCopied(false); }}>
+                    <div
+                        className="lw-plan-modal lw-snip-modal"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label={snippet.label}
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <header className="lw-plan-head">
+                            <div>
+                                <h3>{snippet.label}</h3>
+                                <small className="lw-kg-work-meta">
+                                    {snipMode === 'html'
+                                        ? '워드프레스·네이버 편집기에 HTML 로 붙여 넣으세요'
+                                        : '글 그대로 복사해 붙여 넣으세요'}
+                                </small>
+                            </div>
+                            <button type="button" className="lw-plan-close" onClick={() => { setSnippet(null); setCopied(false); }} aria-label="닫기">✕</button>
+                        </header>
+                        <div className="lw-plan-body">
+                            {/*
+                              * 글과 코드를 함께 준다(사장님 지시 2026-08-23).
+                              * 대부분은 글만 붙여 넣으므로 글이 기본이다.
+                              * 한쪽만 있으면 고르개를 띄우지 않는다.
+                              */}
+                            {snippet.text && snippet.html && (
+                                <div className="lw-snip-tabs" role="group" aria-label="붙여넣기 형태">
+                                    <button
+                                        type="button"
+                                        className={snipMode === 'text' ? 'on' : ''}
+                                        onClick={() => { setSnipMode('text'); setCopied(false); }}
+                                    >글</button>
+                                    <button
+                                        type="button"
+                                        className={snipMode === 'html' ? 'on' : ''}
+                                        onClick={() => { setSnipMode('html'); setCopied(false); }}
+                                    >코드(HTML)</button>
+                                </div>
+                            )}
+                            <pre className="lw-snip-code">
+                                {snipMode === 'html' ? (snippet.html || snippet.text) : (snippet.text || snippet.html)}
+                            </pre>
+                            <button
+                                type="button"
+                                className="lw-snip-copy"
+                                onClick={() => {
+                                    const body = snipMode === 'html'
+                                        ? (snippet.html || snippet.text)
+                                        : (snippet.text || snippet.html);
+                                    navigator.clipboard?.writeText(body)
+                                        .then(() => { setCopied(true); window.setTimeout(() => setCopied(false), 2000); })
+                                        .catch(() => { /* 복사가 막힌 브라우저면 직접 선택해 복사한다 */ });
+                                }}
+                            >{copied ? '복사했습니다' : snipMode === 'html' ? '코드 복사' : '글 복사'}</button>
                         </div>
                     </div>
                 </div>

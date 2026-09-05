@@ -711,8 +711,8 @@ export type RadarAnalysis = {
     url: string;
     title: string;
     metaDescription: string;
-    /** 검색량은 검색광고 실측 — 못 재면 null 로 온다(지어내지 않는다). */
-    coreKeywords: Array<{ keyword: string; searchVolume: number | null }>;
+    /** 검색량은 검색광고 실측, 문서수는 블로그검색 실측 — 못 재면 null 로 온다(지어내지 않는다). */
+    coreKeywords: Array<{ keyword: string; searchVolume: number | null; documentCount?: number | null }>;
     intents: string[];
     moneyAngle: string;
     queries: string[];

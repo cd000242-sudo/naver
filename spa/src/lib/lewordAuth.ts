@@ -156,6 +156,61 @@ export async function login(userId: string, userPassword: string): Promise<AuthR
  * 기간이 끝난 사람이 새 코드를 넣는 것도 이것으로 처리된다. 아이디·비밀번호를
  * 그대로 넣으면 같은 계정에 새 코드가 붙고, 저장해 둔 작업 기록이 살아남는다.
  */
+export type PhoneActionResult = { ok: boolean; message?: string };
+
+/**
+ * 휴대폰 본인인증 — 번호 받기 / 확인.
+ *
+ * 데스크톱 앱은 로그인 세션으로 본인을 증명하지만(license-phone-*), 웹 로그인은
+ * 세션을 만들지 않는다(그러면 그 PC 의 데스크톱 앱이 튕긴다). 그래서 웹은
+ * **아이디+비밀번호**로 본인을 다시 증명하는 별도 경로(license-phone-web-*)를 쓴다.
+ * 로직은 데스크톱과 같다 — 같은 시트에 번호를 등록하고, 등록되면 다음부터 인식된다.
+ */
+export async function requestPhoneVerifyCode(userId: string, userPassword: string, phone: string): Promise<PhoneActionResult> {
+    try {
+        const payload = await callGas({ action: 'license-phone-web-request', userId, userPassword, phone });
+        if (!payload.ok) return { ok: false, message: String(payload.error || payload.message || '인증번호 발송에 실패했습니다.') };
+        return { ok: true };
+    } catch (error) {
+        return { ok: false, message: error instanceof Error ? error.message : '연결에 실패했습니다.' };
+    }
+}
+
+export async function confirmPhoneVerify(userId: string, userPassword: string, phone: string, authCode: string): Promise<PhoneActionResult> {
+    try {
+        const payload = await callGas({ action: 'license-phone-web-confirm', userId, userPassword, phone, authCode });
+        if (!payload.ok) return { ok: false, message: String(payload.error || payload.message || '본인인증에 실패했습니다.') };
+        return { ok: true };
+    } catch (error) {
+        return { ok: false, message: error instanceof Error ? error.message : '연결에 실패했습니다.' };
+    }
+}
+
+/**
+ * 비밀번호 변경 — 로그인 전에도 연다(비번을 잊은 사람은 로그인 자체를 못 한다).
+ * 본인 증명은 본인인증 때 등록해 둔 번호로 오는 문자다. 세션이 필요 없어
+ * 데스크톱과 같은 서버 경로(license-password-reset-*)를 웹에서 그대로 쓴다.
+ */
+export async function requestPasswordResetCode(userId: string, phone: string): Promise<PhoneActionResult> {
+    try {
+        const payload = await callGas({ action: 'license-password-reset-request', userId, phone });
+        if (!payload.ok) return { ok: false, message: String(payload.error || payload.message || '인증번호 발송에 실패했습니다.') };
+        return { ok: true };
+    } catch (error) {
+        return { ok: false, message: error instanceof Error ? error.message : '연결에 실패했습니다.' };
+    }
+}
+
+export async function confirmPasswordReset(userId: string, phone: string, authCode: string, newPassword: string): Promise<PhoneActionResult> {
+    try {
+        const payload = await callGas({ action: 'license-password-reset-confirm', userId, phone, authCode, newPassword });
+        if (!payload.ok) return { ok: false, message: String(payload.error || payload.message || '비밀번호 변경에 실패했습니다.') };
+        return { ok: true };
+    } catch (error) {
+        return { ok: false, message: error instanceof Error ? error.message : '연결에 실패했습니다.' };
+    }
+}
+
 export async function registerWithLicense(
     userId: string,
     userPassword: string,

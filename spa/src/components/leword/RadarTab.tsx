@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
+    fetchKinAnswer,
     fetchRadarAnalyze, fetchRadarEvaluate, fetchRadarSearch, formatCount,
     type RadarAnalysis, type RadarEvaluated, type RadarGatedSite,
 } from '../../lib/keywordApi';
@@ -96,6 +97,53 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
     const [items, setItems] = useState<RadarEvaluated[]>([]);
     const [marks, setMarks] = useState<Marks>(loadMarks);
     const [showDismissed, setShowDismissed] = useState(false);
+
+    /*
+     * 답변 작업대(사장님 2026-09-06 "지식인처럼 바로 답변을 만들어서 복사·붙여넣기,
+     * 링크 포함해서"). "지금 답하면 유입"인데 답을 손으로 쓰게 두면 그 자리를 놓친다.
+     * 지식인 답변 초안(kin-answer)을 그대로 재사용한다 — 내 구독으로 돌고, 내 글
+     * 링크를 답변에 넣어 준다.
+     */
+    const [answerFor, setAnswerFor] = useState<RadarEvaluated | null>(null);
+    const [draft, setDraft] = useState('');
+    const [genBusy, setGenBusy] = useState(false);
+    const [genNote, setGenNote] = useState('');
+    const [copied, setCopied] = useState(false);
+    const [withLink, setWithLink] = useState(true);
+
+    const openAnswer = (item: RadarEvaluated) => {
+        setAnswerFor(item);
+        setDraft('');
+        setGenNote('');
+        setCopied(false);
+        setWithLink(item.linkPolicy !== 'banned');
+    };
+    const generateAnswer = async () => {
+        if (!answerFor || genBusy) return;
+        setGenBusy(true);
+        setGenNote('');
+        const body = [answerFor.title, answerFor.excerpt].filter(Boolean).join('\n');
+        const res = await fetchKinAnswer({
+            title: answerFor.title,
+            body: body || answerFor.title,
+            withLink: withLink && answerFor.linkPolicy !== 'banned',
+            blogUrl: url.trim(),
+        });
+        setGenBusy(false);
+        if (!res.ok || !res.data) {
+            setGenNote(res.error === 'needs-keys'
+                ? '답변 생성은 엔진이 필요합니다 — [내 API 키] 탭에서 Gemini·OpenAI 키를 넣거나 클로드 [연동]을 하세요.'
+                : (res.message || 'AI 답변 생성에 실패했습니다. 잠시 후 다시 시도하세요.'));
+            return;
+        }
+        setDraft(res.data.answer);
+        setCopied(false);
+    };
+    const copyAnswer = () => {
+        navigator.clipboard?.writeText(draft)
+            .then(() => { setCopied(true); window.setTimeout(() => setCopied(false), 2000); })
+            .catch(() => { /* 막힌 브라우저면 직접 선택 복사 */ });
+    };
 
     const running = phase === 'analyzing' || phase === 'searching' || phase === 'evaluating';
 
@@ -275,7 +323,12 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                         {analysis.coreKeywords.map((k) => (
                             <span key={k.keyword} className="lw-radar-kw">
                                 {k.keyword}
-                                <b>{k.searchVolume == null ? '측정 불가' : `월 ${formatCount(k.searchVolume)}`}</b>
+                                {/*
+                                  검색량이 없어도 문서수는 잡힌다 — "측정 불가" 대신 있는 실측을
+                                  보여준다(사장님 2026-09-06). 둘 다 없을 때만 검색량 없음으로 둔다.
+                                */}
+                                <b>{k.searchVolume == null ? '검색량 미집계' : `월 ${formatCount(k.searchVolume)}`}</b>
+                                {k.documentCount != null && <b className="doc">문서 {formatCount(k.documentCount)}</b>}
                             </span>
                         ))}
                     </div>
@@ -386,6 +439,9 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                                             {item.postdate && <span>{item.postdate}</span>}
                                         </div>
                                         <div className="lw-radar-actions">
+                                            {group.id !== 'SKIP' && (
+                                                <button type="button" className="pri" onClick={() => openAnswer(item)}>✏️ 답변 만들기</button>
+                                            )}
                                             <a href={item.link} target="_blank" rel="noreferrer noopener">원문 열기</a>
                                             {state === 'dismissed' ? (
                                                 <button type="button" onClick={() => mark(item.link, null)}>되살리기</button>
@@ -395,7 +451,7 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                                             {state === 'done' ? (
                                                 <button type="button" onClick={() => mark(item.link, null)}>완료 취소</button>
                                             ) : (
-                                                <button type="button" className="pri" onClick={() => mark(item.link, 'done')}>처리 완료</button>
+                                                <button type="button" onClick={() => mark(item.link, 'done')}>처리 완료</button>
                                             )}
                                         </div>
                                     </article>
@@ -458,6 +514,76 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                         {showDismissed ? '숨기기' : '보기'}
                     </button>
                 </p>
+            )}
+
+            {/*
+              답변 작업대 — 지식인 답변 초안(kin-answer)을 그대로 재사용한다.
+              전부 내 구독으로 돌고, 링크를 켜면 내 글 주소가 답변에 들어간다.
+              게시는 사람이 한다(자동 게시 없음) — 복사해 붙여 넣는다.
+            */}
+            {answerFor && (
+                <div className="lw-plan-backdrop" role="presentation" onClick={() => setAnswerFor(null)}>
+                    <div
+                        className="lw-plan-modal"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label={`${answerFor.title} 답변 만들기`}
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <header className="lw-plan-head">
+                            <div>
+                                <h3>{answerFor.title}</h3>
+                                <small className="lw-kg-work-meta">
+                                    {SOURCE_LABEL[answerFor.source] || answerFor.source}
+                                    {answerFor.linkPolicy ? ` · ${POLICY_LABEL[answerFor.linkPolicy]}` : ''}
+                                </small>
+                            </div>
+                            <button type="button" className="lw-plan-close" onClick={() => setAnswerFor(null)} aria-label="닫기">✕</button>
+                        </header>
+                        <div className="lw-plan-body">
+                            {answerFor.excerpt && (
+                                <section>
+                                    <strong>질문·글 내용</strong>
+                                    <p className="lw-kg-work-body">{answerFor.excerpt}</p>
+                                </section>
+                            )}
+                            <section>
+                                <strong>답변 초안 — 깔끔·담백·정확, AI 티 0</strong>
+                                <textarea
+                                    className="lw-kg-draft"
+                                    value={draft}
+                                    onChange={(event) => setDraft(event.target.value)}
+                                    placeholder="'AI 답변 생성'을 누르면 내 구독으로 초안이 만들어집니다. 고쳐 쓰셔도 됩니다."
+                                    rows={9}
+                                />
+                                {genNote && (
+                                    <p className="lw-kg-work-note">
+                                        {genNote} <a href="/leword?tab=keys">내 API 키 탭 열기</a>
+                                    </p>
+                                )}
+                                <div className="lw-kg-work-actions">
+                                    <button type="button" className="lw-kg-generate" onClick={generateAnswer} disabled={genBusy}>
+                                        {genBusy ? '생성 중… (내 구독)' : draft ? '다시 생성' : 'AI 답변 생성'}
+                                    </button>
+                                    <button type="button" onClick={copyAnswer} disabled={!draft.trim()}>
+                                        {copied ? '복사됨 — 원문에 붙여넣으세요' : '복사 → 붙여넣기'}
+                                    </button>
+                                    <a href={answerFor.link} target="_blank" rel="noreferrer noopener" className="lw-kg-open">답변하러 가기</a>
+                                    <label className={`lw-kg-linkbox${answerFor.linkPolicy === 'banned' ? ' off' : ''}`} title={answerFor.linkPolicy === 'banned' ? '이 판은 외부 링크가 삭제·차단됩니다' : ''}>
+                                        <input
+                                            type="checkbox"
+                                            checked={withLink && answerFor.linkPolicy !== 'banned'}
+                                            disabled={answerFor.linkPolicy === 'banned'}
+                                            onChange={(event) => setWithLink(event.target.checked)}
+                                        />
+                                        내 글 링크 추가
+                                    </label>
+                                </div>
+                                <p className="lw-kg-work-note">게시는 직접 하세요 — 자동 게시는 없습니다. 붙여 넣고 확인 후 올리시면 됩니다.</p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );

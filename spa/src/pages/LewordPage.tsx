@@ -244,7 +244,12 @@ function LewordPage() {
                         role="dialog"
                         aria-modal="true"
                         aria-label="LEWORD 로그인"
-                        onClick={(event) => { if (event.target === event.currentTarget) setAuthOpen(false); }}
+                        /*
+                         * 바깥 클릭으로는 닫지 않는다(사장님 2026-09-06 "비번 누르려는데
+                         * 가끔씩 닫혀서 불편해, 드래그하니까 닫혀 자꾸"). 입력칸에서 드래그를
+                         * 시작해 바깥에서 손을 떼면 클릭으로 잡혀 창이 사라졌다.
+                         * 닫기는 ✕ 버튼·[먼저 둘러보기]·Esc 뿐이다.
+                         */
                     >
                         <LewordAuth
                             onDone={(next) => { setSession(next); setAuthOpen(false); }}

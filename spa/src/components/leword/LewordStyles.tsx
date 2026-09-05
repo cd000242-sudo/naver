@@ -335,7 +335,16 @@ function LewordStyles() {
                 line-height: 1.55; margin-bottom: 16px;
             }
             .lw-auth-msg.bad { background: rgba(255,107,129,.09); border: 1px solid rgba(255,107,129,.3); color: #ffc2cb; }
+            .lw-auth-msg.good { background: rgba(68,215,182,.10); border: 1px solid rgba(68,215,182,.32); color: #9df0dd; }
             .lw-auth-msg b { color: #fff; }
+            /* 본인인증·비밀번호 변경 진입 버튼 — 로그인 폼 아래 두 갈래. */
+            .lw-auth-tools { display: flex; gap: 8px; margin-top: 14px; }
+            .lw-auth-tools button {
+                flex: 1; padding: 10px; border-radius: 9px; cursor: pointer; font-family: inherit;
+                font-size: 13px; font-weight: 700; color: #cfd6e6;
+                border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.04);
+            }
+            .lw-auth-tools button:hover { border-color: rgba(124,92,255,.5); color: #fff; }
             .lw-auth-field { display: block; margin-bottom: 13px; font-size: 12.5px; color: rgba(235,242,250,.68); }
             .lw-auth-field em { font-style: normal; color: #646b7d; font-size: 11.5px; }
             .lw-auth-field input {
@@ -906,6 +915,7 @@ function LewordStyles() {
                 border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04);
             }
             .lw-radar-kw b { color: #35d0ba; font-size: 12px; font-variant-numeric: tabular-nums; }
+            .lw-radar-kw b.doc { color: #8ab4ff; }
             .lw-radar-money { margin: 10px 0 0; color: #f5c518; font-size: 13px; font-weight: 700; }
             .lw-radar-needkey {
                 margin: 10px 0 0; padding: 10px 13px; border-radius: 9px;
