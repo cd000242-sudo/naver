@@ -322,18 +322,23 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                             </details>
                         )}
 
-                        {/* 추출 키워드 — 접어 둔다. 기사 제목에 두 번 이상 나온 명사만(정확도 개선 2026-09-06). */}
+                        {/*
+                          이 검색어로 쓸 수 있는 확장 키워드 — 네이버 자동완성 실측(사장님
+                          2026-09-06 "기사 명사가 아니라 실시간 검색어로 만들 수 있는 확장·틈새
+                          키워드여야 한다"). 눌러 두 곳 이상일 때가 많아 접어 둔다. 칩을 누르면
+                          그 확장어로 네이버 검색이 열려 자리를 바로 확인할 수 있다.
+                        */}
                         {(brief?.extractedKeywords || []).length > 0 && (
-                            <details className="brief-modal-fold">
+                            <details className="brief-modal-fold" open>
                                 <summary>
-                                    <strong>추출 키워드</strong>
-                                    <small>기사 제목에 두 곳 이상 나온 말 · 눌러서 펼치기</small>
+                                    <strong>이 검색어로 쓸 수 있는 키워드</strong>
+                                    <small>네이버 자동완성 실측 · {(brief?.extractedKeywords || []).length}개 · 눌러 검색</small>
                                 </summary>
                                 <div className="brief-modal-chips">
-                                    {(brief?.extractedKeywords || []).slice(0, 8).map((word) => (
+                                    {(brief?.extractedKeywords || []).slice(0, 12).map((word) => (
                                         <a
                                             key={word}
-                                            href={buildSourceSearchUrl(lane.id, `${keyword} ${word}`)}
+                                            href={buildSourceSearchUrl(lane.id, word)}
                                             target="_blank"
                                             rel="noreferrer"
                                         >{word}</a>
