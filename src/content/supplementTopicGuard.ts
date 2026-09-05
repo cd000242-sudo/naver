@@ -248,7 +248,12 @@ export interface TopicMatch {
  */
 const PREDICATE_ENDING = /(하고|하며|해서|하면|다면|기는|기가|거나|지만|은데|는데|나요|까요|세요|어요|네요|더라도|합니다|입니다|할까|될까)$/;
 
-function isSentenceKeyword(keyword: string): boolean {
+/**
+ * True when the keyword is a sentence, not a noun phrase — the "제목으로 사용" flow feeds
+ * whole titles in as keywords. Exported for the heading keyword patch, which must not pick
+ * a "core" token out of a sentence ("입은" 접두 실사고 2026-09-05).
+ */
+export function isSentenceKeyword(keyword: string): boolean {
   const words = String(keyword || '').split(/[^가-힣A-Za-z0-9]+/u).filter(Boolean);
   return words.some((word) => word.length >= 3 && PREDICATE_ENDING.test(word));
 }

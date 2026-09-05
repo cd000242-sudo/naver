@@ -141,4 +141,34 @@ describe('키워드가 흩어져 이미 들어 있는 소제목 (2026-08-26)', (
     expect(result.headings.map((h) => h.title)).toEqual(['전세보증보험의 출발점', '전세보증보험과 보장 범위']);
     expect(result.patchedCount).toBe(2);
   });
+
+  /**
+   * [2026-09-05 실측] 문장형 키워드("제목으로 사용" 흐름)에서 첫 의미 토큰 "입은"(동사
+   * 관형형)이 핵심어로 뽑혀 소제목 2개에 "입은 " 접두가 붙어 발행됐다. -은 관형형은
+   * 은으로 끝나는 이름(지은·하은) 때문에 어미로 못 거른다 — 문장형이면 접두 자체를 끈다.
+   */
+  it('문장형 키워드는 강제 접두를 통째로 끈다 ("입은" 실사고 회귀)', () => {
+    const result = applyHeadingKeywordPatch(
+      [{ title: '바로 옷장에 넣으면 안 되는 이유' }, { title: '즉시 세탁할 옷과 환기 가능한 옷 구분하기' }],
+      '한 번 입은 옷, 옷장에 넣기는 찝찝하고 빨기는 애매하다면 ??',
+      { maxPatches: 2 },
+    );
+    expect(result.shouldPatch).toBe(false);
+    expect(result.reason).toBe('sentence-keyword');
+    expect(result.patchedCount).toBe(0);
+    expect(result.headings.map((h) => h.title)).toEqual([
+      '바로 옷장에 넣으면 안 되는 이유',
+      '즉시 세탁할 옷과 환기 가능한 옷 구분하기',
+    ]);
+  });
+
+  it('명사구 키워드는 문장형 판정에 걸리지 않는다 (기존 접두 유지 회귀)', () => {
+    const result = applyHeadingKeywordPatch(
+      [{ title: '전기 요금이 얼마나 나올까' }],
+      '제습기 전기세',
+      { maxPatches: 2 },
+    );
+    expect(result.reason).not.toBe('sentence-keyword');
+    expect(result.patchedCount).toBe(1);
+  });
 });

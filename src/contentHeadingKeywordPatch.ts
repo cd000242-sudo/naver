@@ -1,5 +1,6 @@
 import { decideKeywordPrefix } from './content/keywordTitlePrefixPolicy';
 import { isContentWord } from './content/searchQueryNarrowing.js';
+import { isSentenceKeyword } from './content/supplementTopicGuard.js';
 
 export interface HeadingKeywordPatchHeading {
   title?: string;
@@ -138,6 +139,18 @@ function isVerbalModifierToken(token: string): boolean {
 export function resolveHeadingKeywordCore(primaryKeyword: string): HeadingKeywordCoreResult {
   const raw = String(primaryKeyword || '').trim();
   if (!raw) return { core: '', shouldPatch: false, reason: 'empty-keyword' };
+
+  /*
+   * [2026-09-05 실측] 문장형 키워드("제목으로 사용" 흐름: "한 번 입은 옷, 옷장에 넣기는
+   * 찝찝하고 빨기는 애매하다면 ??")에서 첫 의미 토큰이 "입은"(동사 관형형)으로 뽑혀
+   * 소제목 2개에 "입은 " 접두가 붙었다 — "오는"(2026-07)·"9월"(2026-09-02)과 같은 계열.
+   * -은 관형형은 은으로 끝나는 이름(지은·하은) 때문에 어미 필터로 못 거른다.
+   * 문장에는 '핵심어 한 토큰'이라는 개념 자체가 성립하지 않으므로, 문장형이면 강제
+   * 접두를 통째로 끈다(홈판 maxPatches=0과 같은 방식 — 정리 패스는 그대로 돈다).
+   */
+  if (isSentenceKeyword(raw)) {
+    return { core: '', shouldPatch: false, reason: 'sentence-keyword' };
+  }
 
   const tokens = raw.split(/[\s,/\-]+/).map((token) => token.trim()).filter(Boolean);
   const meaningful = tokens.filter((token) => stripKoreanTargetParticle(token).length >= 2);
