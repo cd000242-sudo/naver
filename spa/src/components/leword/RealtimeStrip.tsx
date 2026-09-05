@@ -25,20 +25,33 @@ const agoText = (ms: number | null | undefined): string => {
     return `${Math.floor(hours / 24)}일 전`;
 };
 
+type Payload = NonNullable<Awaited<ReturnType<typeof fetchRealtimeIssues>>['data']>;
+
 type Props = {
     /** 아래 실측 판에 이미 올라온 키워드 — 겹치는 것은 "판정 있음"으로 표시한다. */
     measuredKeys?: Set<string>;
     onPick?: (keyword: string) => void;
+    /*
+     * 부모(IssueNicheTab)가 이미 받아 둔 실시간 목록. 카드가 "지금 실검에 살아있나"를
+     * 대조하는 데 같은 데이터를 쓰므로, 두 번 받지 않게 위에서 내려 준다.
+     * 없으면(다른 화면에서 쓰면) 예전처럼 자체로 받는다 — 하위호환.
+     */
+    data?: Payload | null;
 };
 
-export default function RealtimeStrip({ measuredKeys, onPick }: Props) {
-    type Payload = NonNullable<Awaited<ReturnType<typeof fetchRealtimeIssues>>['data']>;
-    const [data, setData] = useState<Payload | null>(null);
+export default function RealtimeStrip({ measuredKeys, onPick, data: injected }: Props) {
+    const [selfData, setSelfData] = useState<Payload | null>(null);
     const [failed, setFailed] = useState(false);
     // 화면에 떠 있는 동안 나이가 굳지 않게 1분마다 다시 그린다(재요청은 5분마다).
     const [tick, setTick] = useState(0);
+    const data = injected !== undefined ? injected : selfData;
 
     useEffect(() => {
+        // 부모가 데이터를 내려 주면 자체 로드는 하지 않는다(중복 요청 방지).
+        if (injected !== undefined) {
+            const repaintOnly = setInterval(() => setTick((n) => n + 1), 60 * 1000);
+            return () => clearInterval(repaintOnly);
+        }
         let alive = true;
         const load = () => {
             fetchRealtimeIssues()
@@ -46,7 +59,7 @@ export default function RealtimeStrip({ measuredKeys, onPick }: Props) {
                     if (!alive) return;
                     // 실패는 조용히 접는다 — 이 줄이 없다고 아래 실측 판이 못 볼 이유가 없다.
                     if (!result.ok || !result.data) { setFailed(true); return; }
-                    setData(result.data);
+                    setSelfData(result.data);
                     setFailed(false);
                 })
                 .catch(() => { if (alive) setFailed(true); });
@@ -55,7 +68,7 @@ export default function RealtimeStrip({ measuredKeys, onPick }: Props) {
         const reload = setInterval(load, 5 * 60 * 1000);
         const repaint = setInterval(() => setTick((n) => n + 1), 60 * 1000);
         return () => { alive = false; clearInterval(reload); clearInterval(repaint); };
-    }, []);
+    }, [injected]);
 
     const items = data?.items || [];
     /*

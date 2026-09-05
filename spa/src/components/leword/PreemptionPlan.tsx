@@ -32,8 +32,18 @@ export type PlanRow = {
     earlyMover?: boolean;
     earlyMoverReasons?: string[];
     searchVolume: number | null;
+    searchVolumeLt10?: boolean;
     documentCount: number | null;
-    serp?: { medianDaysAgo?: number | null; topTitles?: string[] };
+    /** 데이터랩 최근 7일 수요가 잡혔는가(이슈 행). 트래픽 근거로 쓴다. */
+    hasLiveDemand?: boolean;
+    demandStatus?: string;
+    serp?: {
+        medianDaysAgo?: number | null;
+        topTitles?: string[];
+        verdict?: 'WINNABLE' | 'CONTESTED' | 'LOCKED' | 'NO_DATA';
+        exactTitleHits?: number;
+        sampledTitles?: number;
+    };
     /*
      * 집필 브리핑 재료(2026-08-19 재구성) — 카드와 겹치던 지표·근거를 걷어내고
      * "글을 실제로 쓰게 만드는 것"만 남기라는 사장님 지시. 전부 회차 실측이다.
@@ -54,9 +64,11 @@ type Props = {
     onAnalyze: (keyword: string) => void;
     /** 사용자가 자기 눈으로 자리를 확인할 수 있어야 한다. */
     searchUrl: string;
+    /** 지금 실검에 살아있으면 그 순위·진입 경과(이슈 탭이 대조해 넘긴다). 트래픽 근거. */
+    live?: { rank: number; ago: string } | null;
 };
 
-function PreemptionPlan({ row, onClose, onAnalyze, searchUrl }: Props) {
+function PreemptionPlan({ row, onClose, onAnalyze, searchUrl, live }: Props) {
     const closeRef = useRef<HTMLButtonElement>(null);
     /** 방금 복사한 제목 — 제목은 복사해서 바로 쓰라고 있는 것이다. */
     const [copiedTitle, setCopiedTitle] = useState('');
@@ -93,6 +105,37 @@ function PreemptionPlan({ row, onClose, onAnalyze, searchUrl }: Props) {
     // 지금 그 자리를 차지한 글 제목. 무엇을 넘어야 하는지 보여 주는 가장 직접적인 사실이다.
     const rivals = row.serp?.topTitles || [];
 
+    /*
+     * 이 키워드로 트래픽을 어떻게 끄는가 — 초보자 3단계(사장님 2026-09-06
+     * "이 키워드로 어떻게 트래픽을 끌고 오는지 초보자들은 모른다. 그냥 글만 적는다고
+     * 되는 게 아니다"). 전부 회차 실측을 문장으로 옮긴 것이고, 없는 근거는 넣지 않는다.
+     *   ① 수요가 있다(왜 트래픽인가): 검색량·데이터랩 7일·지금 실검
+     *   ② 자리가 있다(왜 지금인가): 블로그탭 상위 10 정면글 수
+     *   ③ 그래서 이렇게: 제목으로 선점 + 빠른 발행
+     */
+    const trafficSteps: Array<{ head: string; body: string }> = [];
+    const demandBits: string[] = [];
+    if (live) demandBits.push(`지금 실시간 검색어 ${live.rank}위${live.ago ? `(${live.ago} 진입)` : ''}로 사람이 몰리는 중`);
+    if (typeof row.searchVolume === 'number') demandBits.push(`검색광고 실측 월 ${formatCount(row.searchVolume)}회`);
+    else if (row.searchVolumeLt10) demandBits.push('검색광고 실측 월 10회 미만(신생 검색어)');
+    if (row.hasLiveDemand) demandBits.push('데이터랩 최근 7일 수요 확인');
+    if (demandBits.length > 0) {
+        trafficSteps.push({
+            head: '① 수요가 있다 — 그래서 트래픽이 된다',
+            body: `${demandBits.join(' · ')}. 아무도 안 찾는 말은 상위에 올라도 트래픽이 없습니다. 이 키워드는 지금 검색되고 있는 게 실측으로 확인됐습니다.`,
+        });
+    }
+    if (row.serp?.verdict === 'WINNABLE' && typeof row.serp.sampledTitles === 'number') {
+        trafficSteps.push({
+            head: '② 자리가 있다 — 그래서 내 글이 올라간다',
+            body: `블로그탭 상위 ${row.serp.sampledTitles}개 중 이 검색어를 제목에 정면으로 담은 글이 ${row.serp.exactTitleHits ?? 0}건입니다. 정면으로 쓴 글이 없으니, 제목만 맞추면 그 빈자리를 받습니다 — 글을 잘 써서가 아니라 자리가 비어서입니다.`,
+        });
+    }
+    trafficSteps.push({
+        head: '③ 그래서 이렇게 — 제목 선점 + 빠른 발행',
+        body: `${(row.titles?.seo || row.titles?.home) ? '아래 제목을 그대로 복사해 쓰고, ' : '검색어를 제목 앞자리에 넣고, '}본문은 아래 지식인 질문에 답하며 서브키워드로 넓히세요. 실시간 이슈는 시간이 관건입니다 — 남들이 쓰기 전에 지금 올리는 게 트래픽을 가장 많이 받습니다.`,
+    });
+
     return (
         <div className="lw-plan-backdrop" role="presentation" onClick={onClose}>
             <div
@@ -120,6 +163,19 @@ function PreemptionPlan({ row, onClose, onAnalyze, searchUrl }: Props) {
                 {plan.when && <p className="lw-plan-when">{plan.when}</p>}
 
                 <div className="lw-plan-body">
+                    {/* 트래픽을 어떻게 끄나 — 이 창의 첫 자리(사장님 2026-09-06: 틈새의 목적은 트래픽). */}
+                    <section className="lw-plan-traffic">
+                        <strong>이 키워드로 트래픽을 어떻게 끄나</strong>
+                        <ol>
+                            {trafficSteps.map((step) => (
+                                <li key={step.head}>
+                                    <b>{step.head}</b>
+                                    <span>{step.body}</span>
+                                </li>
+                            ))}
+                        </ol>
+                    </section>
+
                     {row.whySearch?.text && (
                         <section className="lw-plan-why">
                             <strong>글의 도입 각도 — 왜 지금 검색되나</strong>

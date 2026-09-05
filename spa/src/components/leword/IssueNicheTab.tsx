@@ -9,6 +9,7 @@ import PreemptionPlan from './PreemptionPlan';
 import IssueFlowBrief from './IssueFlowBrief';
 import RealtimeStrip from './RealtimeStrip';
 import { useMindmap } from './useMindmap';
+import { fetchRealtimeIssues } from '../../lib/keywordApi';
 import {
     compactKey, fetchIssueBoard, rowsOfIssue,
     type IssueBoard, type IssueBoardRow, type IssueBrief, type IssueLane, type IssueVerdict,
@@ -76,6 +77,35 @@ function agoLabel(iso: string, nowMs: number): string {
 /** 이슈 흐름 앵커 id — 카드의 '이슈 ·' 태그가 여기로 뛴다. */
 const flowAnchor = (issue: string) => `issue-flow-${compactKey(issue).replace(/[^\w가-힣]/g, '')}`;
 
+/** 2자 이상 어절 집합 — 실검 목록과 카드 이슈를 대조하는 데 쓴다. */
+function issueTokens(value: string): Set<string> {
+    return new Set(String(value || '')
+        .split(/\s+/)
+        .map((token) => token.replace(/[^\p{L}\p{N}]/gu, ''))
+        .filter((token) => token.length >= 2));
+}
+/**
+ * 같은 이슈인가 — 어절 두 개 이상 겹치면 같은 것으로 본다(한쪽이 한 어절뿐이면 그 하나로).
+ * 실검 "이란 유조선 3척 타격" 과 카드 이슈 "이란 유조선 타격" 은 순서가 달라도 같은 말이다.
+ */
+function sameIssue(a: string, b: string): boolean {
+    const sa = issueTokens(a);
+    const sb = issueTokens(b);
+    if (sa.size === 0 || sb.size === 0) return false;
+    let shared = 0;
+    for (const token of sa) if (sb.has(token)) shared += 1;
+    return shared >= 2 || (Math.min(sa.size, sb.size) === 1 && shared === 1);
+}
+
+const liveAgo = (ms: number | null | undefined): string => {
+    if (ms == null || !Number.isFinite(ms)) return '';
+    const minutes = Math.floor(ms / 60000);
+    if (minutes < 1) return '방금';
+    if (minutes < 60) return `${minutes}분 전`;
+    const hours = Math.floor(minutes / 60);
+    return hours < 24 ? `${hours}시간 전` : `${Math.floor(hours / 24)}일 전`;
+};
+
 function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
     const [board, setBoard] = useState<IssueBoard | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
@@ -88,6 +118,34 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     const [nowMs] = useState(() => Date.now());
     const { mindmap, openMindmap } = useMindmap();
+
+    /*
+     * 지금 실시간 목록(사장님 2026-09-06 "실질적으로 실시간으로 검색되고 있는
+     * 키워드가 맞는지가 관건"). 틈새의 목적은 트래픽이고, 트래픽의 첫 증거는
+     * "지금 이 순간 사람들이 검색하고 있다"이다. 목록을 한 번 받아 RealtimeStrip 과
+     * 카드 대조에 같이 쓴다(두 번 받지 않는다).
+     */
+    type RealtimePayload = NonNullable<Awaited<ReturnType<typeof fetchRealtimeIssues>>['data']>;
+    const [realtime, setRealtime] = useState<RealtimePayload | null>(null);
+    useEffect(() => {
+        let alive = true;
+        const load = () => {
+            fetchRealtimeIssues().then((r) => { if (alive && r.ok && r.data) setRealtime(r.data); }).catch(() => { /* 없으면 배지만 안 뜬다 */ });
+        };
+        load();
+        const timer = window.setInterval(load, 5 * 60_000);
+        return () => { alive = false; window.clearInterval(timer); };
+    }, []);
+    /** 카드 이슈/키워드가 지금 실검에 살아있으면 그 순위·진입 경과를 준다. 없으면 null. */
+    const liveFor = (row: IssueBoardRow): { rank: number; ago: string } | null => {
+        const items = realtime?.items || [];
+        for (const item of items) {
+            if (sameIssue(item.keyword, row.issue) || sameIssue(item.keyword, row.keyword)) {
+                return { rank: item.rank, ago: liveAgo(item.seenAgeMs) };
+            }
+        }
+        return null;
+    };
 
     useEffect(() => {
         let alive = true;
@@ -181,9 +239,20 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
     const measured = board?.measured;
     const current = VIEWS.find((item) => item.id === view);
 
-    /** 카드 머리 배지 — 이슈명(흐름 판이 있으면 뛴다)·자리 실측·실측 수요·상승·급상승·레인·이월. */
-    const headTags = (row: IssueBoardRow) => (
+    /** 카드 머리 배지 — 지금 실검·이슈명·자리 실측·실측 수요·상승·급상승·레인·이월. */
+    const headTags = (row: IssueBoardRow) => {
+        const live = liveFor(row);
+        return (
         <>
+            {/*
+              지금 실검에 살아있는가 — 틈새의 목적(트래픽)을 뒷받침하는 가장 직접적인
+              증거다(사장님 2026-09-06). "지금 N위, N분 전 진입"은 실측이라 그대로 싣는다.
+            */}
+            {live && (
+                <span className="lw-warn-tag" title={`지금 실시간 검색어 ${live.rank}위 — 사람들이 이 순간 검색하고 있습니다${live.ago ? ` (${live.ago} 진입)` : ''}`}>
+                    🔴 지금 실검 {live.rank}위{live.ago ? ` · ${live.ago} 진입` : ''}
+                </span>
+            )}
             <span className="lw-trend-tag">
                 {briefKeys.has(compactKey(row.issue)) ? (
                     <button
@@ -215,13 +284,14 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
             {row.lane !== 'realtime' && <span className="lw-trend-tag">{LANE_LABEL[row.lane]}</span>}
             {row.carried && <span className="lw-trend-tag" title={row.measuredAt}>{agoLabel(row.measuredAt, nowMs)}</span>}
         </>
-    );
+        );
+    };
 
     return (
         <>
             <TabIntro
                 title="실검 틈새키워드"
-                desc="실시간 검색어·IT 이슈를 쪼개 세 가지를 실측합니다 — 트래픽(검색광고 검색량), 수요(데이터랩 최근 7일 · 블로그 문서수), 자리(네이버 블로그탭 상위 10 정면글). 셋을 다 통과한 것만 '틈새'로 싣습니다. 황금키워드보다 좁지만, 쓰면 상위 노출 확률이 높고 트래픽이 옵니다. 카드는 황금키워드와 같은 보강(제목·서브키워드·실측 풀·지식인·30일 추세)을 거치고, 추정치는 '—' 로 비워 둡니다."
+                desc="틈새키워드의 목적은 트래픽입니다 — 지금 사람들이 실제로 검색하는 말(수요)이면서, 상위 10에 정면으로 쓴 글이 없는(자리) 키워드만 고릅니다. 셋을 다 실측합니다: 트래픽(검색광고 검색량 + 지금 실검 순위), 수요(데이터랩 최근 7일 · 블로그 문서수), 자리(네이버 블로그탭 상위 10 정면글). 카드마다 '지금 실검 N위' 배지로 실시간 검색 여부를, [어떻게 쓸까]에서 이 키워드로 트래픽을 끄는 3단계를 보여 줍니다. 추정치는 '—' 로 비워 둡니다."
                 source={`실시간 이슈 실측 회차${publishedLabel ? ` · ${publishedLabel} 발행` : ''} · ${board?.schedule || '매일 07·13·19시(KST) 갱신'}`}
             />
 
@@ -229,7 +299,7 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
               * 살아 있는 줄 — 아래 카드는 하루 3회 실측 판정이라 최대 8시간 낡는다.
               * 목록만 5분마다 따로 받아 "지금 뭐가 뜨는지"를 먼저 보여 준다.
               */}
-            <RealtimeStrip measuredKeys={measuredKeySet} />
+            <RealtimeStrip measuredKeys={measuredKeySet} data={realtime} />
 
             <div className="lw-segment lw-segment-wrap" role="group" aria-label="판정">
                 {VIEWS.map((item) => (
@@ -370,6 +440,7 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                                     onClose={() => setOpenPlan('')}
                                     onAnalyze={(keyword) => onAnalyze?.(keyword)}
                                     searchUrl={naverSearchUrl(planRow.keyword)}
+                                    live={liveFor(planRow)}
                                 />
                             )}
                         </>

@@ -1879,6 +1879,13 @@ function LewordStyles() {
             .lw-plan-caution strong { color: #f5c518; }
 
             /* ── 집필 브리핑 재구성(2026-08-19) — 카드와 안 겹치는 것만 남긴 창 ── */
+            /* 트래픽 만드는 법 — 이 창의 첫 섹션. 초록 계열로 "실행" 성격을 준다. */
+            .lw-plan-traffic { padding: 13px 15px; border-radius: 11px; background: rgba(53,208,186,.09); border: 1px solid rgba(53,208,186,.28); margin-bottom: 4px; }
+            .lw-plan-traffic > strong { display: block; font-size: 14px; color: #7ff0dc; margin-bottom: 9px; }
+            .lw-plan-traffic ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+            .lw-plan-traffic li { display: block; }
+            .lw-plan-traffic li b { display: block; font-size: 13px; color: #eafaf6; margin-bottom: 2px; }
+            .lw-plan-traffic li span { display: block; font-size: 12.5px; line-height: 1.62; color: rgba(226,242,238,.78); word-break: keep-all; }
             .lw-plan-why { padding: 11px 13px; border-radius: 10px; background: rgba(124,92,255,.1); border: 1px solid rgba(124,92,255,.25); }
             .lw-plan-why p { margin: 0; color: #ebf2fa; font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
             .lw-plan-why small { display: block; margin-top: 5px; font-size: 11px; color: rgba(235,242,250,.5); }
