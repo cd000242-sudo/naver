@@ -5,7 +5,7 @@ import ParticlesCanvas from '../components/ParticlesCanvas';
 import SourceBriefModal from '../components/SourceBriefModal';
 import SourceBriefModalStyles from '../components/SourceBriefModalStyles';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
-import { fetchIssueBrief, fetchRealtimeIssues } from '../lib/keywordApi';
+import { fetchHotKeywords, fetchIssueBrief, fetchRealtimeIssues, type HotLaneItem } from '../lib/keywordApi';
 import {
     SOURCE_SEARCH_PATHS,
     buildSourceSearchUrl,
@@ -79,7 +79,11 @@ type HomeLiveState = {
 const HOME_LIVE_CACHE_KEY = 'leaderspro.home.sourceSignals.v1';
 
 const SOURCE_LANE_CONFIGS: SourceLaneConfig[] = [
+    // 사장님 2026-09-06: "인기 서브탭 따로, 네이버는 바꿔주고, 구글 서브탭 그대로."
+    // 인기 = 네이트 실시간 이슈(분 단위 원본), 구글 = 트렌드 급상승 RSS. 둘 다 받은 그대로.
+    { id: 'popular', label: '인기', accent: '#ff8a3d', description: '실시간 이슈 키워드 원본 그대로' },
     { id: 'naver', label: '네이버', accent: '#2ed36f', description: '실시간 검색과 블로그 수요' },
+    { id: 'google', label: '구글', accent: '#8ab4ff', description: '구글 트렌드 급상승 그대로' },
     { id: 'daum', label: '다음', accent: '#4d93ff', description: '생활/뉴스 검색 신호' },
     { id: 'nate', label: '네이트', accent: '#ff6b6b', description: '이슈와 방송 검색 흐름' },
     { id: 'zum', label: '줌', accent: '#f4c95d', description: '포털 이슈 보조 신호' },
@@ -269,6 +273,47 @@ async function overlayLiveNaverLane(lanes: SourceLane[]): Promise<SourceLane[]> 
 }
 
 /**
+ * 인기(네이트 실시간 이슈)·구글(트렌드 급상승) 레인 — 사장님 2026-09-06
+ * "키워드로 짜르지 말고 그대로 가져와서 보여줘". 워커가 원천에서 받은 목록을
+ * 문자열·순서 그대로 옮긴다. 브리프는 줄을 누를 때 즉석으로 만들어지므로(issue-brief)
+ * 여기서 미리 채우지 않는다. 실패하면 그 레인만 비어 있고 홈은 그대로 산다.
+ */
+async function overlayHotLanes(lanes: SourceLane[]): Promise<SourceLane[]> {
+    try {
+        const result = await fetchHotKeywords();
+        const payload = result?.ok ? result.data : null;
+        const hot = payload?.lanes;
+        if (!hot) return lanes;
+        const toItems = (laneId: SourceLaneId, items: HotLaneItem[] | undefined, source: string): SourceSignal[] =>
+            (items || []).slice(0, 10).map((row) => ({
+                id: `${laneId}-${row.rank}`,
+                keyword: row.keyword,
+                rank: row.rank,
+                source,
+            }));
+        return lanes.map((lane) => {
+            if (lane.id === 'popular' && hot.popular) {
+                return {
+                    ...lane,
+                    items: toItems('popular', hot.popular.items, '네이트 실시간 이슈'),
+                    updatedAt: hot.popular.updatedAt ? new Date(hot.popular.updatedAt).toISOString() : lane.updatedAt,
+                };
+            }
+            if (lane.id === 'google' && hot.google) {
+                return {
+                    ...lane,
+                    items: toItems('google', hot.google.items, 'Google 트렌드'),
+                    updatedAt: hot.google.updatedAt ? new Date(hot.google.updatedAt).toISOString() : lane.updatedAt,
+                };
+            }
+            return lane;
+        });
+    } catch {
+        return lanes;
+    }
+}
+
+/**
  * 이슈별 "로직을 이기는 키워드" — 실검 틈새 회차가 **자리까지 실측한** 행이다.
  *
  * 사장님(2026-09-05): "내가 원하는 건 로직을 이기는 키워드야."
@@ -371,7 +416,7 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
     // 서버도 스냅샷도 죽었으면 빈 상태를 표시한다. 하드코딩 키워드를
     // LIVE로 위장하지 않고, 기사로 검증된 다음 스냅샷만 보여준다.
     if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) return fallback;
-    const lanes = await overlayLiveNaverLane(await overlayBriefTitles(normalizeSourceLanes(sourcePayload)));
+    const lanes = await overlayHotLanes(await overlayLiveNaverLane(await overlayBriefTitles(normalizeSourceLanes(sourcePayload))));
     const hasLiveData = lanes.some((lane) => lane.items.length > 0);
     if (!hasLiveData) return fallback;
     writeCachedSourceLanes(sourcePayload);
@@ -1309,7 +1354,8 @@ function IndexPage() {
      * 화면에 겹쳐 쓴다 — 발행본 데이터를 덮어쓰지 않는다.
      */
     const [onDemandBriefs, setOnDemandBriefs] = useState<Record<string, { facts: Array<{ text: string; sourceIndex: number }>; links: Array<{ url: string; press: string }> }>>({});
-    const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
+    // 기본 탭은 인기 — 분 단위로 움직이는 실시간 원본이 먼저 보인다(2026-09-06).
+    const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('popular');
     const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
     /** 카드를 누르면 중앙 모달로 크게 펼친다. 우측 패널은 그대로 요약을 유지한다. */
     const [briefModalKeyword, setBriefModalKeyword] = useState('');

@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues', 'issue-brief']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues', 'issue-brief', 'hot-keywords']);
 /**
  * 장부(쿼터)가 필요해 GAS 에 남은 키워드 액션들은 엣지 방패(leaderspro-edge)를
  * 거친다 — 같은 질문은 15분 캐시로 즉답(0.5초), 처음 질문만 GAS 로 간다(장부도
@@ -370,6 +370,37 @@ export const fetchIssueBrief = (keyword: string) =>
         links: Array<{ url: string; press: string }>;
         headlines: string[];
     }>('issue-brief', { keyword });
+
+/** 한 레인의 실시간 항목 — 워커가 원천에서 받은 그대로다(필터·다듬기 없음). */
+export type HotLaneItem = {
+    rank: number;
+    keyword: string;
+    /** 네이트가 준 변동 상태(up/down/same/new). 구글 항목엔 없다. */
+    state: string | null;
+    stateDelta: number | null;
+    /** 구글이 준 대략 검색량 표기("2,000+") — 우리가 만든 추정이 아니라 원본 표기다. */
+    approxTraffic: string | null;
+    startedAt: number | null;
+    prevRank: number | null;
+    rankDelta: number | null;
+    firstSeenAt: number | null;
+    seenAgeMs: number | null;
+};
+
+/**
+ * 인기(네이트 실시간 이슈)·구글(트렌드 급상승) 목록 — 사장님 2026-09-06
+ * "키워드로 짜르지 말고 그대로 가져와서 보여줘". 판다랭크 직결은 CF IP 403 이라
+ * 판다랭크가 쓰는 원천을 워커가 직접 받는다.
+ */
+export const fetchHotKeywords = () =>
+    call<{
+        checkedAt: number | null;
+        lanes: {
+            popular?: { updatedAt: number | null; items: HotLaneItem[] };
+            google?: { updatedAt: number | null; items: HotLaneItem[] };
+        } | null;
+        note?: string;
+    }>('hot-keywords', {});
 
 export const fetchRealtimeIssues = () =>
     call<{

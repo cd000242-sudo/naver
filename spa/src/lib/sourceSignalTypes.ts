@@ -5,7 +5,7 @@
  * 필드는 전부 **수집된 실측값**이다. 화면에서 새로 계산해 채워 넣지 않는다.
  */
 
-export type SourceLaneId = 'naver' | 'daum' | 'nate' | 'zum' | 'sports' | 'policy' | 'issue';
+export type SourceLaneId = 'popular' | 'naver' | 'google' | 'daum' | 'nate' | 'zum' | 'sports' | 'policy' | 'issue';
 
 export type SourceInsight = {
     /** 배치가 계산해 담아준다. 여기서 다시 만들지 않는다. */
@@ -66,6 +66,9 @@ export type SourceLane = SourceLaneConfig & {
 
 /** 레인별 원본 검색 주소. 브리프의 사실을 사용자가 직접 확인하는 경로다. */
 export const SOURCE_SEARCH_PATHS: Record<SourceLaneId, (keyword: string) => string> = {
+    // 인기 레인 원본은 네이트 실시간 이슈 — 네이트 뉴스 검색이 원문 확인 경로다.
+    popular: (keyword) => `https://news.nate.com/search?q=${encodeURIComponent(keyword)}`,
+    google: (keyword) => `https://www.google.com/search?q=${encodeURIComponent(keyword)}`,
     naver: (keyword) => `https://search.naver.com/search.naver?query=${encodeURIComponent(keyword)}`,
     daum: (keyword) => `https://search.daum.net/search?w=tot&q=${encodeURIComponent(keyword)}`,
     nate: (keyword) => `https://search.nate.com/search/all.html?q=${encodeURIComponent(keyword)}`,
