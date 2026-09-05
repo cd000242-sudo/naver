@@ -9,8 +9,9 @@
  * 그래야 하나만 필요한 사람은 개별로 사고, 둘 이상 필요한 사람이 스스로
  * 올인원을 고른다. 강요가 아니라 산수다.
  *
- * 10월 1일 0시 정각에 모든 값이 두 배가 된다 — pricingSchedule 이 그 시각을 쥐고
- * 있고, 여기서는 이벤트가만 적는다. 정가는 두 배로 계산된다.
+ * 자동 인상은 없다(사장님 2026-09-06 "너무 인상해버리면 몰매맞아") — 10월 1일
+ * "두 배 자동 전환"을 끄고, 인상 안내는 시점·폭 없이 "인상 예정"이라고만 한다.
+ * 올인원은 이날 1년 40만→50만·영구 165만→200만으로 즉시 조정됐다.
  */
 
 export type TermId = 'monthly' | 'yearly' | 'lifetime';
@@ -102,15 +103,19 @@ export const PRODUCTS: Product[] = [
         image: '/images/leword/hero-banner.png',
         accent: '#ffd88a',
         glyph: '★',
-        prices: { monthly: 50000, yearly: 400000, lifetime: 1650000 },
+        prices: { monthly: 50000, yearly: 500000, lifetime: 2000000 },
         features: ['Better Life Naver 이용', 'Leadernam Orbit 이용', 'LEWORD 이용', '앞으로 나올 제품 포함', '1:1 우선 지원'],
         bundle: true,
         status: 'on',
     },
 ];
 
-/** 10월 1일부터의 정가. 규칙이 하나라 곱셈으로 둔다 — 제품마다 적으면 어긋난다. */
-export const NORMAL_PRICE_MULTIPLIER = 2;
+/**
+ * 자동 인상 배수. 1 = 10월 1일이 지나도 값이 저절로 바뀌지 않는다
+ * (사장님 2026-09-06 — 2배 자동 전환 폐기, 인상은 나중에 손으로 정한다).
+ * 1보다 크게 돌리면 취소선(정상가)과 전환 청구가 되살아난다.
+ */
+export const NORMAL_PRICE_MULTIPLIER = 1;
 
 export const normalPriceOf = (eventPrice: number) => eventPrice * NORMAL_PRICE_MULTIPLIER;
 

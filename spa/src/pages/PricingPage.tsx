@@ -51,9 +51,7 @@ const PLANS: Record<string, Plan[]> = {
             desc: '3개 앱을 한 번에 가볍게 시작',
             amount: 50000,
             amountCard: 55000,
-            futureAmount: 100000,
-            futureAmountCard: 110000,
-            eventLabel: '10월 1일부터 정상가 100,000원',
+            eventLabel: '10월 1일부터 금액 인상 예정',
             period: '/ 월 (공급가)',
             features: ['Better Life Naver 이용', 'LEWORD 키워드 분석 이용', 'Leadernam Orbit 이용', '이메일 고객 지원'],
         },
@@ -61,22 +59,20 @@ const PLANS: Record<string, Plan[]> = {
             id: 'all-in-one-quarterly',
             name: '올인원 3개월',
             desc: '블로그 자동화 흐름을 안정적으로 운영',
-            amount: 120000,
-            futureAmount: 240000,
-            eventLabel: '10월 1일부터 정상가 240,000원',
+            amount: 150000,
+            eventLabel: '10월 1일부터 금액 인상 예정',
             period: '/ 3개월',
-            monthly: '월 40,000원',
+            monthly: '월 50,000원',
             features: ['Better Life Naver 이용', 'LEWORD 전체 기능 이용', 'Leadernam Orbit 이용', '우선 고객 지원'],
         },
         {
             id: 'all-in-one-yearly',
             name: '올인원 1년',
             desc: '가장 합리적인 전체 제품 기간권',
-            amount: 400000,
-            futureAmount: 800000,
-            eventLabel: '10월 1일부터 정상가 800,000원',
+            amount: 500000,
+            eventLabel: '10월 1일부터 금액 인상 예정',
             period: '/ 년',
-            monthly: '월 33,333원',
+            monthly: '월 41,667원',
             badge: { text: '👑 BEST VALUE', type: 'best' },
             features: ['모든 자동화툴 기간 내 이용', '라이선스 기간 내 업데이트', '전용 커뮤니티 안내', '1:1 우선 지원'],
         },
@@ -84,9 +80,8 @@ const PLANS: Record<string, Plan[]> = {
             id: 'all-in-one-lifetime',
             name: '올인원 영구제',
             desc: '한 번 구매로 장기 운영하는 영구 이용권',
-            amount: 1650000,
-            futureAmount: 3300000,
-            eventLabel: '10월 1일부터 정상가 3,300,000원',
+            amount: 2000000,
+            eventLabel: '10월 1일부터 금액 인상 예정',
             period: '영구 이용',
             badge: { text: '🌟 LIFETIME', type: 'lifetime' },
             features: ['3개 앱 모두 영구 이용', '영구제 전용 라이선스', '장기 운영자 우선 지원', '주요 업데이트 포함'],
@@ -346,14 +341,14 @@ function PricingPage() {
     const pricingPage = siteContent?.pricing?.page || {};
     const pricingBgImage = siteContent?.theme?.pricingBgImage;
     const pricingTitle = normalPricingActive
-        ? (pricingPage.titleNormal || '10월 1일부터 가격이 단계적으로 조정 중입니다')
-        : (pricingPage.title || '지금 이벤트가로 이용하고, 10월 1일부터 가격이 점진적으로 상승합니다');
+        ? (pricingPage.titleNormal || '올인원 라이선스로 시작하세요')
+        : (pricingPage.title || '지금 이벤트가로 이용하세요 — 10월 1일부터 금액이 인상될 예정입니다');
     const pricingEventTitle = normalPricingActive
-        ? (pricingPage.eventTitleNormal || '가격이 단계적으로 조정 중입니다.')
-        : (pricingPage.eventTitle || '현재 가격은 7월 31일까지 이벤트가입니다.');
+        ? (pricingPage.eventTitleNormal || '올인원 라이선스 안내')
+        : (pricingPage.eventTitle || '현재 가격은 9월 30일까지 이벤트가입니다.');
     const pricingEventDesc = normalPricingActive
-        ? (pricingPage.eventDescNormal || '2026년 10월 1일부터 가격이 점진적으로 상승하고 있습니다.')
-        : (pricingPage.eventDesc || '2026년 10월 1일부터 가격이 점진적으로 상승합니다.');
+        ? (pricingPage.eventDescNormal || '자세한 가격은 아래 가격표를 확인해 주세요.')
+        : (pricingPage.eventDesc || '2026년 10월 1일부터 금액이 인상될 예정입니다.');
     const pricingIntro = (
         <div style={{ textAlign: 'center', margin: '42px 0 36px' }}>
             <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>{pricingPage.eyebrow || 'PRICING'}</span>
@@ -367,7 +362,8 @@ function PricingPage() {
                 </div>
                 <div>{pricingEventDesc}</div>
                 <div style={{ marginTop: 4, color: '#fff7b0', fontSize: 15 }}>
-                    {pricingPage.eventLine || '10월 1일부터 단계별 인상 예정 · 1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원'}
+                    {/* 인상 폭·금액은 못 박지 않는다(사장님 2026-09-06). */}
+                    {pricingPage.eventLine || '10월 1일부터 금액 인상 예정'}
                 </div>
             </div>
         </div>

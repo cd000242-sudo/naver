@@ -142,7 +142,8 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
             {dday !== null && (
                 <div className="st-dday">
                     <span className="st-dday-tag">이벤트가</span>
-                    <span>10월 1일 0시에 모든 값이 <b>두 배</b>가 됩니다</span>
+                    {/* 폭·시점을 못 박지 않는다(사장님 2026-09-06) — "두 배" 안내 폐기. */}
+                    <span>10월 1일부터 <b>금액이 인상</b>될 예정입니다</span>
                     <span className="st-dday-count">D-{dday}</span>
                 </div>
             )}
@@ -220,7 +221,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                         return (
                                             <>
                                                 <div className="st-price">
-                                                    {!normalActive && <s>{won(normalPriceOf(price))}</s>}
+                                                    {!normalActive && normalPriceOf(price) > price && <s>{won(normalPriceOf(price))}</s>}
                                                     <b>{won(price)}</b>
                                                     <i>원{termUnit ? ` / ${termUnit}` : ''}</i>
                                                 </div>
@@ -237,7 +238,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                                 <i>원 / 하루</i>
                                             </div>
                                             <p className="st-permo">
-                                                {!normalActive && <s>{won(normalPriceOf(price))}</s>}
+                                                {!normalActive && normalPriceOf(price) > price && <s>{won(normalPriceOf(price))}</s>}
                                                 <strong>{won(price)}원</strong>
                                                 {termUnit ? ` / ${termUnit}` : ''}
                                                 {term !== 'monthly' && monthly ? ` · 월 ${won(monthly)}원` : ''}
@@ -365,7 +366,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
     );
 }
 
-/** 지금 받을 값. 10월 1일이 지나면 두 배가 된다 — 판단은 pricingSchedule 이 한다. */
+/** 지금 받을 값. 자동 인상은 껐다(배수 1) — 배수를 되살리면 여기서 전환된다. */
 function priceOf(product: Product, term: TermId, normalActive: boolean): number {
     const event = product.prices[term] || 0;
     if (!event) return 0;

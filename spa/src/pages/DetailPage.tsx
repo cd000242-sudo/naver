@@ -224,9 +224,10 @@ const TESTIMONIALS = [
 const PLANS = [
     // [2026-08-21] 하루 환산이 첫 자리 — "하루 커피 한 잔 값"이 팔린다(사장님 지시).
     // 단순 나눗셈(1개월=30일·3개월=90일·1년=365일)이고 실제 청구액은 그대로 병기.
-    { name: '스타터', period: '1개월 · 하루 ₩1,667꼴', original: '₩100,000', current: '₩50,000', discount: '8/1 정상가 대비 50% 이벤트', features: ['AI 10종 엔진 풀 액세스', 'AI 이미지 6종 엔진', '풀오토 자동 발행', '다중계정 관리', '쇼핑 커넥트 수익화', '무제한 글 생성'] },
-    { name: '프로', period: '3개월 · 하루 ₩1,333꼴 (월 ₩40,000)', original: '₩240,000', current: '₩120,000', discount: '8/1 정상가 대비 50% 이벤트', popular: true, features: ['스타터의 모든 기능', '우선 기술 지원', '신기능 얼리 액세스', '보너스 키워드팩 증정', '카카오 VIP 채널 초대'] },
-    { name: '마스터', period: '1년 · 하루 ₩1,096꼴 (월 ₩33,333)', original: '₩800,000', current: '₩400,000', discount: '8/1 정상가 대비 50% 이벤트', features: ['프로의 모든 기능', '전담 매니저 배정', '커스텀 프롬프트 설정', '베타 기능 우선 체험', '블로그 성장 컨설팅'] },
+    // [2026-09-06] 즉시 조정(3개월 15만·1년 50만) + 할인 대비 문구 폐기 — 인상 예고는 금액 없이.
+    { name: '스타터', period: '1개월 · 하루 ₩1,667꼴', original: '', current: '₩50,000', discount: '10월 1일부터 금액 인상 예정', features: ['AI 10종 엔진 풀 액세스', 'AI 이미지 6종 엔진', '풀오토 자동 발행', '다중계정 관리', '쇼핑 커넥트 수익화', '무제한 글 생성'] },
+    { name: '프로', period: '3개월 · 하루 ₩1,667꼴 (월 ₩50,000)', original: '', current: '₩150,000', discount: '10월 1일부터 금액 인상 예정', popular: true, features: ['스타터의 모든 기능', '우선 기술 지원', '신기능 얼리 액세스', '보너스 키워드팩 증정', '카카오 VIP 채널 초대'] },
+    { name: '마스터', period: '1년 · 하루 ₩1,370꼴 (월 ₩41,667)', original: '', current: '₩500,000', discount: '10월 1일부터 금액 인상 예정', features: ['프로의 모든 기능', '전담 매니저 배정', '커스텀 프롬프트 설정', '베타 기능 우선 체험', '블로그 성장 컨설팅'] },
 ];
 
 const FAQS = [
@@ -656,7 +657,7 @@ function DetailPage() {
                             }}>
                                 {p.popular && <div style={{ position: 'absolute', top: -16, left: '50%', transform: 'translateX(-50%)', background: C.gradFire, padding: '6px 28px', borderRadius: 50, fontSize: 13, fontWeight: 800, color: '#fff' }}>🔥 가장 인기</div>}
                                 <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 16 }}>{p.name}</h3>
-                                <div style={{ fontSize: 16, color: C.textSecondary, textDecoration: 'line-through', opacity: 0.6 }}>{p.original}</div>
+                                {p.original && <div style={{ fontSize: 16, color: C.textSecondary, textDecoration: 'line-through', opacity: 0.6 }}>{p.original}</div>}
                                 <div style={{ fontSize: 44, fontWeight: 900, background: C.gradGold, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: 1.1 }}>{p.current}</div>
                                 <div style={{ fontSize: 14, color: C.neonGreen, fontWeight: 600, marginTop: 4 }}>{p.period}</div>
                                 <div style={{ display: 'inline-block', background: 'rgba(255,107,0,0.15)', color: '#ff8c00', fontSize: 12, fontWeight: 700, padding: '3px 10px', borderRadius: 6, marginTop: 8 }}>{p.discount}</div>
@@ -679,7 +680,7 @@ function DetailPage() {
                         ))}
                     </div>
                     <div style={{ marginTop: 36, textAlign: 'center' }}>
-                        <Link to="/pricing" style={{ display: 'inline-flex', alignItems: 'center', gap: 12, background: 'linear-gradient(135deg, rgba(45,27,105,0.6), rgba(26,26,46,0.8))', backdropFilter: 'blur(12px)', border: `1px solid ${C.gold}`, borderRadius: 16, padding: '18px 48px', fontSize: 16, fontWeight: 700, color: C.gold, textDecoration: 'none' }}>🏆 올인원 1년, 하루 ₩1,096꼴 — ₩400,000 (8/1 정상가 800,000원 전 이벤트가)</Link>
+                        <Link to="/pricing" style={{ display: 'inline-flex', alignItems: 'center', gap: 12, background: 'linear-gradient(135deg, rgba(45,27,105,0.6), rgba(26,26,46,0.8))', backdropFilter: 'blur(12px)', border: `1px solid ${C.gold}`, borderRadius: 16, padding: '18px 48px', fontSize: 16, fontWeight: 700, color: C.gold, textDecoration: 'none' }}>🏆 올인원 1년, 하루 ₩1,370꼴 — ₩500,000 (10월 1일부터 금액 인상 예정)</Link>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', gap: 32, flexWrap: 'wrap', marginTop: 40, paddingTop: 32, borderTop: '1px solid rgba(255,255,255,0.04)' }}>
                         {[

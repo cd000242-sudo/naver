@@ -18,10 +18,11 @@ interface ProductOption { id: string; name: string; price: number; futurePrice?:
 const ALL_PRODUCTS: Record<string, ProductOption[]> = {
     naver: [
         // [2026-08-21] 하루 환산 첫 자리(사장님 지시) — 실청구액은 price 로 그대로 노출.
-        { id: 'all-in-one-monthly', name: 'All in one 1개월', price: 50000, futurePrice: 100000, period: '하루 1,667원꼴 · 10월 1일부터 100,000원', normalPeriod: '하루 3,333원꼴 · 정상가 적용 중' },
-        { id: 'all-in-one-quarterly', name: 'All in one 3개월', price: 120000, futurePrice: 240000, period: '하루 1,333원꼴 (월 40,000원) · 10월 1일부터 240,000원', normalPeriod: '하루 2,667원꼴 (월 80,000원) · 정상가 적용 중' },
-        { id: 'all-in-one-yearly', name: 'All in one 1년', price: 400000, futurePrice: 800000, period: '하루 1,096원꼴 (월 33,333원) · 10월 1일부터 800,000원', normalPeriod: '하루 2,192원꼴 (월 66,667원) · 정상가 적용 중' },
-        { id: 'all-in-one-lifetime', name: 'All in one 영구제', price: 1650000, futurePrice: 3300000, period: '영구 이용 · 10월 1일부터 3,300,000원', normalPeriod: '영구 이용 · 정상가 적용 중' },
+        // [2026-09-06] 즉시 조정(1년 50만·영구 200만) + 10월 1일 자동 2배 폐기 — 인상 예고는 금액 없이.
+        { id: 'all-in-one-monthly', name: 'All in one 1개월', price: 50000, period: '하루 1,667원꼴 · 10월 1일부터 금액 인상 예정' },
+        { id: 'all-in-one-quarterly', name: 'All in one 3개월', price: 150000, period: '하루 1,667원꼴 (월 50,000원) · 10월 1일부터 금액 인상 예정' },
+        { id: 'all-in-one-yearly', name: 'All in one 1년', price: 500000, period: '하루 1,370원꼴 (월 41,667원) · 10월 1일부터 금액 인상 예정' },
+        { id: 'all-in-one-lifetime', name: 'All in one 영구제', price: 2000000, period: '영구 이용 · 10월 1일부터 금액 인상 예정' },
     ],
 };
 
@@ -65,7 +66,7 @@ async function fetchOrderStatus(orderId: string) {
  *
  * 상점의 [결제하기]가 이 주소로 보내는데, 예전 이 화면은 올인원 기간권만
  * 알아서 담아온 것을 통째로 무시했다(사장님 실측 2026-08-20). 값은 카탈로그
- * 실측이고, 10월 1일이 지나면 두 배가 된다 — 판단은 pricingSchedule 이 한다.
+ * 실측이다. 자동 인상은 껐다(배수 1) — 배수를 되살리면 여기서도 전환된다.
  */
 function readCartOrder(params: URLSearchParams, catalog: Product[]): { label: string; names: string[]; amount: number } | null {
     const ids = (params.get('items') || '').split(',').map((id) => id.trim()).filter(Boolean);
