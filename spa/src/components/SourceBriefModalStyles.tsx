@@ -153,13 +153,44 @@ function SourceBriefModalStyles() {
             .brief-modal-facts img {
                 display: block;
                 width: 100%;
-                max-height: 340px;
-                margin-bottom: 16px;
+                /* 안 짤리게 — height 를 고정하지 않고 원본 비율대로 편다(사장님 2026-09-06).
+                   자막·얼굴이 잘리지 않게 contain 을 넘어 아예 자르지 않는다. */
+                height: auto;
+                max-height: none;
+                margin-bottom: 14px;
                 border-radius: 12px;
                 object-fit: contain;
-                object-position: top center;
                 background: rgba(255,255,255,0.045);
             }
+
+            /* 우측 핵심 요약 — 기사 원문 문장 목록. */
+            .brief-modal-summary-list {
+                display: flex; flex-direction: column; gap: 10px;
+                margin: 0; padding: 0; list-style: none;
+            }
+            .brief-modal-summary-list li {
+                position: relative; padding-left: 16px;
+                color: rgba(240,246,252,0.9); font-size: 14px; line-height: 1.68; word-break: keep-all;
+            }
+            .brief-modal-summary-list li::before {
+                content: ''; position: absolute; left: 2px; top: 9px;
+                width: 5px; height: 5px; border-radius: 50%; background: rgba(255,215,0,0.7);
+            }
+
+            /* 접이식 섹션(출처·추출 키워드) — 기본 닫힘. */
+            .brief-modal-fold { border: 1px solid rgba(255,255,255,0.09); border-radius: 12px; background: rgba(255,255,255,0.025); }
+            .brief-modal-fold > summary {
+                display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+                padding: 12px 14px; cursor: pointer; list-style: none;
+            }
+            .brief-modal-fold > summary::-webkit-details-marker { display: none; }
+            .brief-modal-fold > summary::after { content: '▾'; margin-left: auto; color: rgba(235,242,250,0.5); font-size: 12px; }
+            .brief-modal-fold[open] > summary::after { content: '▴'; }
+            .brief-modal-fold > summary strong { color: #fff; font-size: 15px; font-weight: 900; }
+            .brief-modal-fold > summary small { color: rgba(235,242,250,0.5); font-size: 12px; }
+            .brief-modal-fold > ul,
+            .brief-modal-fold > .brief-modal-chips { padding: 0 14px 14px; }
+            .brief-modal-fold > ul { list-style: none; margin: 0; }
 
             /* 요약이 먼저 읽히도록 본문 문장보다 크고 밝게. */
             .brief-modal-summary {

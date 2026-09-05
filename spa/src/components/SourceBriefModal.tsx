@@ -148,48 +148,27 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
 
                 <div className="brief-modal-body">
                     {facts.length > 0 ? (
-                        <section className="brief-modal-facts" aria-label={`${keyword} 무슨 일이 있었나`}>
+                        <section className="brief-modal-facts" aria-label={`${keyword} 관련 보도 사진`}>
                             <div className="brief-modal-section-head">
                                 <strong>무슨 일이 있었나</strong>
-                                <small>
-                                    {freshness || (summary ? '핵심 요약 · 원문 문장은 아래' : '기사 원문에서 확인된 문장입니다')}
-                                </small>
+                                <small>{freshness || '기사 대표 사진 — 원본 그대로'}</small>
                             </div>
                             {/*
-                              기사 문장을 통째로 늘어놓으면 정작 무슨 일인지 읽어내는 데
-                              시간이 걸린다. 두 문장 요약을 앞에 세우고, 원문 문장은
-                              근거로 아래에 남긴다 — 요약만 있고 근거가 없으면 못 믿는다.
+                              사진이 이 칸의 주인공이다(사장님 2026-09-06 "이미지 안 짤리게").
+                              전부 contain 으로 원본 비율을 지킨다 — cover 로 자르면 얼굴·자막이
+                              잘린다. 요약 문장은 우측 '핵심 요약'으로 옮겼다(사장님 "요약문도 우측에").
                             */}
                             {summary && <p className="brief-modal-summary">{summary}</p>}
-                            {photos.length > 0 && (
+                            {photos.map((src) => (
                                 <img
-                                    src={photos[0]}
+                                    key={src}
+                                    src={src}
                                     alt={`${keyword} 관련 보도 사진`}
                                     loading="lazy"
                                     referrerPolicy="no-referrer"
                                     onError={(event) => { (event.currentTarget as HTMLImageElement).style.display = 'none'; }}
                                 />
-                            )}
-                            {photos.length > 1 && (
-                                <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-                                    {photos.slice(1).map((src) => (
-                                        <img
-                                            key={src}
-                                            src={src}
-                                            alt={`${keyword} 관련 보도 사진`}
-                                            loading="lazy"
-                                            referrerPolicy="no-referrer"
-                                            onError={(event) => { (event.currentTarget as HTMLImageElement).style.display = 'none'; }}
-                                            style={{ width: 'calc(50% - 4px)', maxHeight: 150, objectFit: 'cover', borderRadius: 10, border: '1px solid rgba(255,255,255,0.1)' }}
-                                        />
-                                    ))}
-                                </div>
-                            )}
-                            <ul>
-                                {facts.map((fact) => (
-                                    <li key={fact.text.slice(0, 60)}>{fact.text}</li>
-                                ))}
-                            </ul>
+                            ))}
                         </section>
                     ) : (
                         <section className="brief-modal-facts brief-modal-empty">
@@ -205,6 +184,21 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                     )}
 
                     <aside className="brief-modal-side">
+                        {/* 핵심 요약 — 왼쪽 사진 옆 우측에(사장님 2026-09-06 "요약문도 우측에"). 전부 기사 원문 문장. */}
+                        {facts.length > 0 && (
+                            <section aria-label={`${keyword} 핵심 요약`}>
+                                <div className="brief-modal-section-head">
+                                    <strong>핵심 요약</strong>
+                                    <small>기사 원문에서 확인된 문장</small>
+                                </div>
+                                <ul className="brief-modal-summary-list">
+                                    {facts.map((fact) => (
+                                        <li key={fact.text.slice(0, 60)}>{fact.text}</li>
+                                    ))}
+                                </ul>
+                            </section>
+                        )}
+
                         {flow && (
                             <section className="brief-modal-flow" aria-label={`${keyword} 이슈 흐름`}>
                                 <div className="brief-modal-section-head">
@@ -294,12 +288,13 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                             </section>
                         )}
 
+                        {/* 출처 기사 — 접어 둔다(사장님 2026-09-06 "접었다폈다 가능하게 하고 접어주세요"). */}
                         {(articleUrl || links.length > 0) && (
-                            <section aria-label={`${keyword} 출처`}>
-                                <div className="brief-modal-section-head">
+                            <details className="brief-modal-fold">
+                                <summary>
                                     <strong>출처 기사</strong>
-                                    <small>눌러서 원문 확인</small>
-                                </div>
+                                    <small>{(articleUrl ? 1 : 0) + links.filter((link) => link.url !== articleUrl).length}곳 · 눌러서 펼치기</small>
+                                </summary>
                                 <ul className="brief-modal-links">
                                     {articleUrl && (
                                         <li key={articleUrl}>
@@ -324,15 +319,16 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                                         );
                                     })}
                                 </ul>
-                            </section>
+                            </details>
                         )}
 
+                        {/* 추출 키워드 — 접어 둔다. 기사 제목에 두 번 이상 나온 명사만(정확도 개선 2026-09-06). */}
                         {(brief?.extractedKeywords || []).length > 0 && (
-                            <section aria-label={`${keyword} 추출 키워드`}>
-                                <div className="brief-modal-section-head">
+                            <details className="brief-modal-fold">
+                                <summary>
                                     <strong>추출 키워드</strong>
-                                    <small>기사 두 곳 이상에서 나온 말 — 세어서 뽑았습니다</small>
-                                </div>
+                                    <small>기사 제목에 두 곳 이상 나온 말 · 눌러서 펼치기</small>
+                                </summary>
                                 <div className="brief-modal-chips">
                                     {(brief?.extractedKeywords || []).slice(0, 8).map((word) => (
                                         <a
@@ -343,7 +339,7 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                                         >{word}</a>
                                     ))}
                                 </div>
-                            </section>
+                            </details>
                         )}
 
                         {expansions.length > 0 && (
