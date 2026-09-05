@@ -15,7 +15,8 @@ import {
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
 const EDGE_URL = 'https://leaderspro-edge.leword.workers.dev'; // 읽기 전용 캐시 방패 (siteOps 참고)
-const REVIEWS_CACHE_KEY = 'leaderspro_reviews_cache_v2';
+// v3: summary(100자 절단)가 아니라 detail(전문)을 싣는다 — 옛 캐시는 잘린 글이라 버린다.
+const REVIEWS_CACHE_KEY = 'leaderspro_reviews_cache_v3';
 const REVIEWS_TIMEOUT_MS = 4500;
 const MAX_MEDIA_BYTES = 18 * 1024 * 1024;
 
@@ -81,7 +82,12 @@ function normalizeReview(raw: any): Testimonial | null {
     const email = firstText(raw?.email);
     const phone = firstText(raw?.phone, raw?.tel, raw?.mobile);
     const author = firstText(raw?.author, raw?.name, raw?.nickname, email ? maskEmail(email) : '', '익명');
-    const text = firstText(raw?.reviewText, raw?.review, raw?.text, raw?.summary, raw?.detail);
+    /*
+     * detail 이 summary 보다 먼저다. GAS 목록은 summary(100자에서 자름)와
+     * detail(전문)을 같이 주는데, summary 를 먼저 집으면 모든 후기가 100자에서
+     * 끊긴다(사장님 2026-09-06 "후기 글이 짤림" — 실측: summary 100자 vs detail 최대 379자).
+     */
+    const text = firstText(raw?.reviewText, raw?.review, raw?.text, raw?.detail, raw?.summary);
     const image = firstText(raw?.proofMedia, raw?.proofImage, raw?.video, raw?.videoUrl, raw?.image, raw?.imageUrl, raw?.proof, raw?.screenshot);
     const mediaType = firstText(raw?.mediaType).startsWith('video') || image.startsWith('data:video') ? 'video' : 'image';
     const role = firstText(raw?.role, raw?.period, raw?.usagePeriod, raw?.product);
@@ -175,6 +181,18 @@ function ReviewsPage() {
 
     /** 인증 갤러리 = 운영자 등록분 + 애드센스 성과. 같은 그림은 mergeAdsenseProofs 가 거른다. */
     const proofGallery = useMemo(() => mergeAdsenseProofs(managedProofs), [managedProofs]);
+
+    /*
+     * 눌러서 크게 본다(사장님 2026-09-06 "수익인증 후기도 클릭하면 이미지를 크게").
+     * 격자의 170px 잘린 썸네일로는 조회수·금액 숫자가 안 읽힌다 — 원본 비율 그대로 편다.
+     */
+    const [zoomProof, setZoomProof] = useState<CommunityIncomeProof | null>(null);
+    useEffect(() => {
+        if (!zoomProof) return;
+        const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setZoomProof(null); };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [zoomProof]);
 
     useEffect(() => {
         const prev = document.title;
@@ -370,7 +388,14 @@ function ReviewsPage() {
                 <div className="rv-proofs">
                     {proofGallery.map((proof) => (
                         <figure key={proof.id}>
-                            <img src={proof.media} alt={proof.mediaName || proof.amount} loading="lazy" decoding="async" />
+                            <button
+                                type="button"
+                                className="rv-proof-open"
+                                onClick={() => { if (proof.media) setZoomProof(proof); }}
+                                aria-label={`${proof.amount} 수익인증 크게 보기`}
+                            >
+                                <img src={proof.media} alt={proof.mediaName || proof.amount} loading="lazy" decoding="async" />
+                            </button>
                             <figcaption>
                                 <b>{proof.amount}</b>
                                 <span>{proof.desc}</span>
@@ -478,6 +503,8 @@ function ReviewsPage() {
 
                 .rv-proofs { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin: 0 0 46px; }
                 .rv-proofs figure { margin: 0; border: 1px solid rgba(255,255,255,.09); border-radius: 14px; overflow: hidden; background: rgba(255,255,255,.03); }
+                /* 썸네일은 버튼이다 — 눌러서 원본 비율로 크게 본다. */
+                .rv-proof-open { display: block; width: 100%; padding: 0; margin: 0; border: none; background: none; cursor: zoom-in; }
                 .rv-proofs img { display: block; width: 100%; height: 170px; object-fit: cover; object-position: top; background: #0b1018; }
                 .rv-proofs figcaption { padding: 12px 14px 14px; }
                 .rv-proofs b { display: block; font-size: 14.5px; font-weight: 800; color: #eef4fb; }
@@ -574,6 +601,42 @@ function ReviewsPage() {
                     }
                 }
             `}</style>
+
+            {zoomProof && (
+                <div
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label={`${zoomProof.amount} 수익인증 크게 보기`}
+                    onClick={() => setZoomProof(null)}
+                    style={{
+                        position: 'fixed', inset: 0, zIndex: 10001,
+                        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                        gap: 14, padding: 20,
+                        background: 'rgba(2, 6, 12, 0.88)', backdropFilter: 'blur(8px)',
+                        cursor: 'zoom-out',
+                    }}
+                >
+                    <img
+                        src={zoomProof.media}
+                        alt={zoomProof.mediaName || zoomProof.amount}
+                        style={{ maxWidth: 'min(1100px, 94vw)', maxHeight: '82vh', objectFit: 'contain', borderRadius: 12, boxShadow: '0 30px 90px rgba(0,0,0,0.6)' }}
+                    />
+                    <div style={{ textAlign: 'center', color: '#fff' }}>
+                        <b style={{ fontSize: 16 }}>{zoomProof.amount}</b>
+                        <div style={{ marginTop: 3, fontSize: 13, color: 'rgba(255,255,255,0.62)' }}>{zoomProof.desc}</div>
+                    </div>
+                    <button
+                        type="button"
+                        aria-label="닫기"
+                        onClick={() => setZoomProof(null)}
+                        style={{
+                            position: 'absolute', top: 18, right: 22, background: 'rgba(255,255,255,0.08)',
+                            border: '1px solid rgba(255,255,255,0.2)', borderRadius: 10, color: '#fff',
+                            fontSize: 20, lineHeight: 1, padding: '8px 12px', cursor: 'pointer',
+                        }}
+                    >×</button>
+                </div>
+            )}
 
             {modalOpen && (
                 <div
