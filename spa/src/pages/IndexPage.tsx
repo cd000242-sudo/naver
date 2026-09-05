@@ -5,7 +5,7 @@ import ParticlesCanvas from '../components/ParticlesCanvas';
 import SourceBriefModal from '../components/SourceBriefModal';
 import SourceBriefModalStyles from '../components/SourceBriefModalStyles';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
-import { fetchRealtimeIssues } from '../lib/keywordApi';
+import { fetchIssueBrief, fetchRealtimeIssues } from '../lib/keywordApi';
 import {
     SOURCE_SEARCH_PATHS,
     buildSourceSearchUrl,
@@ -1107,7 +1107,7 @@ function SourceInsightLoading({ keyword, accent, step }: { keyword: string; acce
  * 데이터는 이미 로컬에 있어서 실제로 기다릴 필요는 없지만, 여러 카드가
  * 동시에 갈아치워지면 사용자가 뭘 봐야 하는지 놓친다.
  */
-function SourceSignalInsight(props: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[] }) {
+function SourceSignalInsight(props: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[]; onOpen?: () => void }) {
     const keyword = props.item ? cleanLiveText(props.item.keyword || props.item.title, props.lane.label) : '';
     const [shownKeyword, setShownKeyword] = useState(keyword);
     const [step, setStep] = useState(ANALYZE_STEPS.length - 1);
@@ -1129,7 +1129,7 @@ function SourceSignalInsight(props: { lane: SourceLane; item: SourceSignal | nul
     return <SourceSignalInsightPanel {...props} />;
 }
 
-function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[] }) {
+function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[]; onOpen?: () => void }) {
     if (!item) {
         return (
             <aside className="source-insight-panel source-insight-panel-empty">
@@ -1164,7 +1164,10 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
                 <span style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>직접 수집 확인 · {lane.label} {rank}위</span>
                 <strong>{keyword}</strong>
                 <p>{lane.label} 원본 실시간 목록에서 직접 수집한 검색 신호입니다. 관련 보도는 자동 매칭될 때만 기사 브리프로 함께 표시합니다.</p>
-                <a href={searchUrl} target="_blank" rel="noreferrer" style={{ justifySelf: 'start', color: lane.accent, fontSize: 12, fontWeight: 900 }}>원본에서 검색</a>
+                <div className="source-insight-actions">
+                    <a href={searchUrl} target="_blank" rel="noreferrer" style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>원본에서 검색</a>
+                    {onOpen ? <button type="button" className="source-insight-open" onClick={onOpen}>크게 보기</button> : null}
+                </div>
             </aside>
         );
     }
@@ -1176,7 +1179,11 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
                     <span style={{ color: lane.accent }}>선택 키워드 기사 브리프</span>
                     <strong>{keyword}</strong>
                 </div>
-                <a href={searchUrl} target="_blank" rel="noreferrer">검색결과</a>
+                <div className="source-insight-actions">
+                    <a href={searchUrl} target="_blank" rel="noreferrer">검색결과</a>
+                    {/* 브리프를 한 번 더 눌러야 크게 열린다 — 줄을 누르는 것만으로 화면을 덮지 않는다. */}
+                    {onOpen ? <button type="button" className="source-insight-open" onClick={onOpen}>크게 보기</button> : null}
+                </div>
             </div>
             <p className="source-insight-desc">{description}</p>
 
@@ -1295,6 +1302,13 @@ function IndexPage() {
     const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
     // 이슈별 '로직을 이기는 키워드'(자리까지 실측된 행). 없으면 비어 있고 화면은 그대로다.
     const [winnableRows, setWinnableRows] = useState<WinnableKeyword[]>([]);
+    /*
+     * 즉석 브리프 — 고른 키워드에 기사 문장이 없으면 그때 받아 채운다.
+     * 배치가 훑기 전에 뜬 키워드는 브리프가 비어 있는데, 그 상태가 사장님 눈에
+     * "브리프가 제대로 안 나온다"로 보였다(2026-09-05). 받아 온 것은 여기 모아 두고
+     * 화면에 겹쳐 쓴다 — 발행본 데이터를 덮어쓰지 않는다.
+     */
+    const [onDemandBriefs, setOnDemandBriefs] = useState<Record<string, { facts: Array<{ text: string; sourceIndex: number }>; links: Array<{ url: string; press: string }> }>>({});
     const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
     const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
     /** 카드를 누르면 중앙 모달로 크게 펼친다. 우측 패널은 그대로 요약을 유지한다. */
@@ -1378,10 +1392,49 @@ function IndexPage() {
         }
         return new Set([...counts.entries()].filter(([, n]) => n > 1).map(([text]) => text));
     }, [activeSourceItems]);
-    const activeSourceInsightItem = activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === activeSourceKeyword) || activeSourceItems[0] || null;
+    const rawActiveInsightItem = activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === activeSourceKeyword) || activeSourceItems[0] || null;
+
+    /** 받아 온 브리프를 항목에 겹쳐 준다 — 원래 있던 것이 있으면 그대로 둔다. */
+    const withOnDemandBrief = (item: SourceSignal | null, lane: SourceLane): SourceSignal | null => {
+        if (!item) return item;
+        if ((item.insight?.facts || []).length > 0) return item;
+        const key = cleanLiveText(item.keyword || item.title, lane.label);
+        const extra = onDemandBriefs[key];
+        if (!extra || extra.facts.length === 0) return item;
+        return { ...item, insight: { ...(item.insight || {}), facts: extra.facts, links: extra.links } };
+    };
+
+    const activeSourceInsightItem = withOnDemandBrief(rawActiveInsightItem, activeSourceLane);
     const briefModalItem = briefModalKeyword
-        ? activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === briefModalKeyword) || null
+        ? withOnDemandBrief(
+            activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === briefModalKeyword) || null,
+            activeSourceLane,
+        )
         : null;
+    /*
+     * 고른 키워드에 기사 문장이 없으면 그때 한 번 받아 온다(서버가 30분 캐시).
+     * 목록 전체를 미리 받지 않는다 — 사람이 실제로 누른 것만 만든다.
+     */
+    const activeInsightKeyword = rawActiveInsightItem
+        ? cleanLiveText(rawActiveInsightItem.keyword || rawActiveInsightItem.title, activeSourceLane.label)
+        : '';
+    const activeInsightHasFacts = (rawActiveInsightItem?.insight?.facts || []).length > 0;
+    useEffect(() => {
+        if (!activeInsightKeyword || activeInsightHasFacts) return;
+        if (onDemandBriefs[activeInsightKeyword]) return;
+        let alive = true;
+        fetchIssueBrief(activeInsightKeyword)
+            .then((result) => {
+                if (!alive || !result.ok || !result.data) return;
+                setOnDemandBriefs((prev) => ({
+                    ...prev,
+                    [activeInsightKeyword]: { facts: result.data!.facts || [], links: result.data!.links || [] },
+                }));
+            })
+            .catch(() => { /* 못 받아도 화면은 원래 폴백으로 간다 */ });
+        return () => { alive = false; };
+    }, [activeInsightKeyword, activeInsightHasFacts, onDemandBriefs]);
+
     const selectSourceLane = (laneId: SourceLaneId) => {
         setActiveSourceLaneId(laneId);
         setActiveSourceKeyword('');
@@ -1509,11 +1562,15 @@ function IndexPage() {
                                                 <button
                                                     type="button"
                                                     className="hero-source-row-main"
-                                                    aria-haspopup="dialog"
-                                                    title={`${keyword} 기사 브리프 크게 보기`}
+                                                    title={`${keyword} 브리프 보기`}
                                                     onClick={() => {
+                                                        /*
+                                                         * 줄을 누르면 **고르기만** 한다(사장님 2026-09-05
+                                                         * "클릭을 하면 브릿지를 볼 수 있게 해줘야지 왜 크게 보이나요").
+                                                         * 곧바로 큰 창을 띄우면 브리프를 보기도 전에 화면이 덮인다.
+                                                         * 크게 보는 것은 그 브리프를 한 번 더 눌렀을 때다.
+                                                         */
                                                         setActiveSourceKeyword(keyword);
-                                                        setBriefModalKeyword(keyword);
                                                     }}
                                                 >
                                                     <span>{index + 1}</span>
@@ -1566,7 +1623,17 @@ function IndexPage() {
                                         </span>
                                     )}
                                 </div>
-                                <SourceSignalInsight lane={activeSourceLane} item={activeSourceInsightItem} items={activeSourceItems} />
+                                <SourceSignalInsight
+                                    lane={activeSourceLane}
+                                    item={activeSourceInsightItem}
+                                    items={activeSourceItems}
+                                    onOpen={() => {
+                                        // 브리프를 한 번 더 눌렀을 때만 크게 연다.
+                                        const target = activeSourceInsightItem;
+                                        if (!target) return;
+                                        setBriefModalKeyword(cleanLiveText(target.keyword || target.title, activeSourceLane.label));
+                                    }}
+                                />
                             </div>
                         </div>
                     </div>
@@ -2051,6 +2118,23 @@ function IndexPage() {
                     border-radius: 50%;
                     background: rgba(68,215,182,0.85);
                 }
+                .source-insight-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    justify-self: start;
+                }
+                .source-insight-open {
+                    border: 1px solid rgba(68,215,182,0.45);
+                    background: rgba(68,215,182,0.10);
+                    color: #44d7b6;
+                    border-radius: 999px;
+                    padding: 5px 11px;
+                    font-size: 12px;
+                    font-weight: 900;
+                    cursor: pointer;
+                }
+                .source-insight-open:hover { background: rgba(68,215,182,0.18); }
                 .source-brief-links {
                     display: flex;
                     align-items: center;

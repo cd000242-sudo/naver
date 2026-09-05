@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues', 'issue-brief']);
 /**
  * 장부(쿼터)가 필요해 GAS 에 남은 키워드 액션들은 엣지 방패(leaderspro-edge)를
  * 거친다 — 같은 질문은 15분 캐시로 즉답(0.5초), 처음 질문만 GAS 로 간다(장부도
@@ -356,6 +356,21 @@ export const fetchYoutubeTrending = () =>
  * seenAgeMs 는 **우리가 그 키워드를 처음 본 뒤 흐른 시간**이다. 둘은 다르다 —
  * 트렌드가 실제로 시작된 시각은 아무도 알려주지 않으므로 지어내지 않는다.
  */
+/**
+ * 즉석 브리프 — 배치가 아직 안 훑은 키워드의 기사 문장을 그때 받아 온다.
+ *
+ * 홈 목록이 최신이 되자 방금 뜬 키워드는 브리프가 비어 있었다(사장님 지적 2026-09-05).
+ * 배치 주기를 줄이는 길은 GitHub 스케줄러가 막고 있어서, 화면이 필요할 때 만든다.
+ * 문장은 전부 기사 원문이고 출처가 붙는다 — 서버가 지어내지 않는다.
+ */
+export const fetchIssueBrief = (keyword: string) =>
+    call<{
+        keyword: string;
+        facts: Array<{ text: string; sourceIndex: number }>;
+        links: Array<{ url: string; press: string }>;
+        headlines: string[];
+    }>('issue-brief', { keyword });
+
 export const fetchRealtimeIssues = () =>
     call<{
         /** 크론이 마지막으로 확인한 때 — 안 움직이면 폴러가 죽은 것이다. */
