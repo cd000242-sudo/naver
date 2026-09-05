@@ -1353,7 +1353,12 @@ function IndexPage() {
      * "브리프가 제대로 안 나온다"로 보였다(2026-09-05). 받아 온 것은 여기 모아 두고
      * 화면에 겹쳐 쓴다 — 발행본 데이터를 덮어쓰지 않는다.
      */
-    const [onDemandBriefs, setOnDemandBriefs] = useState<Record<string, { facts: Array<{ text: string; sourceIndex: number }>; links: Array<{ url: string; press: string }> }>>({});
+    const [onDemandBriefs, setOnDemandBriefs] = useState<Record<string, {
+        facts: Array<{ text: string; sourceIndex: number }>;
+        links: Array<{ url: string; press: string }>;
+        images: string[];
+        latestArticleAt?: string;
+    }>>({});
     // 기본 탭은 인기 — 분 단위로 움직이는 실시간 원본이 먼저 보인다(2026-09-06).
     const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('popular');
     const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
@@ -1440,14 +1445,28 @@ function IndexPage() {
     }, [activeSourceItems]);
     const rawActiveInsightItem = activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === activeSourceKeyword) || activeSourceItems[0] || null;
 
-    /** 받아 온 브리프를 항목에 겹쳐 준다 — 원래 있던 것이 있으면 그대로 둔다. */
+    /*
+     * 받아 온 즉석 브리프를 항목에 겹쳐 준다 — **즉석이 이긴다**.
+     * 스냅샷 브리프는 몇 시간 전 배치가 만든 것이고, 즉석은 최신순 뉴스 검색으로
+     * 방금 지은 것이다(사장님 2026-09-06 "반드시 실시간 기준으로 — 최신이 관건").
+     * 즉석에 사실 문장이 없으면 스냅샷을 그대로 둔다 — 빈 것으로 덮지 않는다.
+     */
     const withOnDemandBrief = (item: SourceSignal | null, lane: SourceLane): SourceSignal | null => {
         if (!item) return item;
-        if ((item.insight?.facts || []).length > 0) return item;
         const key = cleanLiveText(item.keyword || item.title, lane.label);
         const extra = onDemandBriefs[key];
         if (!extra || extra.facts.length === 0) return item;
-        return { ...item, insight: { ...(item.insight || {}), facts: extra.facts, links: extra.links } };
+        const existingImages = item.insight?.images || [];
+        return {
+            ...item,
+            insight: {
+                ...(item.insight || {}),
+                facts: extra.facts,
+                links: extra.links.length > 0 ? extra.links : (item.insight?.links || []),
+                images: [...extra.images, ...existingImages.filter((src) => !extra.images.includes(src))],
+                ...(extra.latestArticleAt ? { latestArticleAt: extra.latestArticleAt } : {}),
+            },
+        };
     };
 
     const activeSourceInsightItem = withOnDemandBrief(rawActiveInsightItem, activeSourceLane);
@@ -1458,15 +1477,16 @@ function IndexPage() {
         )
         : null;
     /*
-     * 고른 키워드에 기사 문장이 없으면 그때 한 번 받아 온다(서버가 30분 캐시).
-     * 목록 전체를 미리 받지 않는다 — 사람이 실제로 누른 것만 만든다.
+     * 고른 키워드는 **항상** 즉석 브리프를 받아 온다(서버 5분 캐시).
+     * 예전엔 스냅샷에 문장이 있으면 건너뛰었는데, 그 스냅샷이 몇 시간 전 것이라
+     * "1시간 전 기준"으로 보였다(사장님 2026-09-06). 목록 전체를 미리 받지는
+     * 않는다 — 사람이 실제로 고른 것만, 페이지에서 키워드당 한 번.
      */
     const activeInsightKeyword = rawActiveInsightItem
         ? cleanLiveText(rawActiveInsightItem.keyword || rawActiveInsightItem.title, activeSourceLane.label)
         : '';
-    const activeInsightHasFacts = (rawActiveInsightItem?.insight?.facts || []).length > 0;
     useEffect(() => {
-        if (!activeInsightKeyword || activeInsightHasFacts) return;
+        if (!activeInsightKeyword) return;
         if (onDemandBriefs[activeInsightKeyword]) return;
         let alive = true;
         fetchIssueBrief(activeInsightKeyword)
@@ -1474,12 +1494,17 @@ function IndexPage() {
                 if (!alive || !result.ok || !result.data) return;
                 setOnDemandBriefs((prev) => ({
                     ...prev,
-                    [activeInsightKeyword]: { facts: result.data!.facts || [], links: result.data!.links || [] },
+                    [activeInsightKeyword]: {
+                        facts: result.data!.facts || [],
+                        links: result.data!.links || [],
+                        images: result.data!.images || [],
+                        ...(result.data!.latestArticleAt ? { latestArticleAt: result.data!.latestArticleAt } : {}),
+                    },
                 }));
             })
             .catch(() => { /* 못 받아도 화면은 원래 폴백으로 간다 */ });
         return () => { alive = false; };
-    }, [activeInsightKeyword, activeInsightHasFacts, onDemandBriefs]);
+    }, [activeInsightKeyword, onDemandBriefs]);
 
     const selectSourceLane = (laneId: SourceLaneId) => {
         setActiveSourceLaneId(laneId);

@@ -11,12 +11,14 @@ export type SourceInsight = {
     /** 배치가 계산해 담아준다. 여기서 다시 만들지 않는다. */
     titles?: { seo?: string; home?: string; topic?: string; topicGroup?: string; summary?: string };
     facts?: Array<{ text: string; sourceIndex: number }>;
-    links?: Array<{ url: string; press: string }>;
+    links?: Array<{ url: string; press: string; publishedAt?: string | null }>;
     images?: string[];
     press?: string[];
     headlines?: string[];
     extraction?: 'playwright' | 'search-card';
     collectedAt?: string;
+    /** 브리프에 실린 기사 중 가장 최신 발행 시각 — 즉석 브리프(최신순)가 채운다. */
+    latestArticleAt?: string;
 };
 
 export type SourceSignal = {

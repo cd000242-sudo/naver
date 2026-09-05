@@ -28,6 +28,22 @@ import {
 /** 비로그인에게 보이는 다음 물결 수 — 실검 틈새 탭의 무료 3건과 같은 눈금. */
 const FREE_WAVE_CHIPS = 3;
 
+/**
+ * 기사 발행 시각 → "N분 전 기사 기준". 실검은 선점 싸움이라(사장님 2026-09-06
+ * "최신이 관건") 브리프가 언제 기사를 근거로 하는지 그대로 밝힌다. 못 읽으면 빈 문자열.
+ */
+function articleAgoLabel(iso?: string): string {
+    if (!iso) return '';
+    const at = Date.parse(iso);
+    if (!Number.isFinite(at)) return '';
+    const minutes = Math.max(0, Math.round((Date.now() - at) / 60000));
+    if (minutes < 1) return '방금 나온 기사 기준';
+    if (minutes < 60) return `${minutes}분 전 기사 기준`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}시간 전 기사 기준`;
+    return `${Math.floor(hours / 24)}일 전 기사 기준`;
+}
+
 type Props = {
     lane: SourceLane;
     item: SourceSignal;
@@ -58,7 +74,10 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
     const brief = item.insight;
     const facts = brief?.facts || [];
     const links = (brief?.links || []).slice(0, 6);
-    const photo = (brief?.images || [])[0] || item.image;
+    // 사진은 최신 기사 것부터 최대 3장 — 첫 장을 크게, 나머지는 아래 줄에.
+    const photos = (brief?.images || []).filter(Boolean).slice(0, 3);
+    if (photos.length === 0 && item.image) photos.push(item.image);
+    const freshness = articleAgoLabel(brief?.latestArticleAt);
     const titles = brief?.titles || {};
     // 에이전트가 지은 두 문장 요약(있을 때만). 없으면 기존처럼 원문 문장만 보인다.
     const summary = typeof (titles as { summary?: string }).summary === 'string'
@@ -132,7 +151,9 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                         <section className="brief-modal-facts" aria-label={`${keyword} 무슨 일이 있었나`}>
                             <div className="brief-modal-section-head">
                                 <strong>무슨 일이 있었나</strong>
-                                <small>{summary ? '핵심 요약 · 원문 문장은 아래' : '기사 원문에서 확인된 문장입니다'}</small>
+                                <small>
+                                    {freshness || (summary ? '핵심 요약 · 원문 문장은 아래' : '기사 원문에서 확인된 문장입니다')}
+                                </small>
                             </div>
                             {/*
                               기사 문장을 통째로 늘어놓으면 정작 무슨 일인지 읽어내는 데
@@ -140,14 +161,29 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                               근거로 아래에 남긴다 — 요약만 있고 근거가 없으면 못 믿는다.
                             */}
                             {summary && <p className="brief-modal-summary">{summary}</p>}
-                            {photo && (
+                            {photos.length > 0 && (
                                 <img
-                                    src={photo}
+                                    src={photos[0]}
                                     alt={`${keyword} 관련 보도 사진`}
                                     loading="lazy"
                                     referrerPolicy="no-referrer"
                                     onError={(event) => { (event.currentTarget as HTMLImageElement).style.display = 'none'; }}
                                 />
+                            )}
+                            {photos.length > 1 && (
+                                <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+                                    {photos.slice(1).map((src) => (
+                                        <img
+                                            key={src}
+                                            src={src}
+                                            alt={`${keyword} 관련 보도 사진`}
+                                            loading="lazy"
+                                            referrerPolicy="no-referrer"
+                                            onError={(event) => { (event.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                                            style={{ width: 'calc(50% - 4px)', maxHeight: 150, objectFit: 'cover', borderRadius: 10, border: '1px solid rgba(255,255,255,0.1)' }}
+                                        />
+                                    ))}
+                                </div>
                             )}
                             <ul>
                                 {facts.map((fact) => (
@@ -270,11 +306,17 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                                             <a href={articleUrl} target="_blank" rel="noreferrer">원문 기사 바로가기</a>
                                         </li>
                                     )}
-                                    {links.filter((link) => link.url !== articleUrl).map((link) => (
-                                        <li key={link.url}>
-                                            <a href={link.url} target="_blank" rel="noreferrer">{link.press || '기사 원문'}</a>
-                                        </li>
-                                    ))}
+                                    {links.filter((link) => link.url !== articleUrl).map((link) => {
+                                        const linkAgo = articleAgoLabel(link.publishedAt || undefined).replace('기사 기준', '기사');
+                                        return (
+                                            <li key={link.url}>
+                                                <a href={link.url} target="_blank" rel="noreferrer">
+                                                    {link.press || '기사 원문'}
+                                                    {linkAgo && <small style={{ marginLeft: 6, opacity: 0.6 }}>{linkAgo}</small>}
+                                                </a>
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             </section>
                         )}
