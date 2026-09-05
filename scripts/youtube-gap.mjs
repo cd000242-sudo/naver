@@ -18,7 +18,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isUsefulYoutubeTopic } from '../spa/src/lib/youtubeTopicQuality.mjs';
+import { isUsefulYoutubeTopic, isUsefulYoutubeLead, isRelevantYoutubeTopic } from '../spa/src/lib/youtubeTopicQuality.mjs';
 import {
     fetchAutocomplete, fetchDocumentCount, fetchVolumeDetails,
     missingNaverCredentials, sleep,
@@ -290,11 +290,11 @@ async function main() {
              * 둠스데이≫ …" 에서 '어벤져스 둠스데이'가 잘려 그 영상은 빈손이었다.
              * 자동완성은 무료라 비용은 없고 수집이 조금 느려질 뿐이다.
              */
-            const leads = [...new Set(chunksOf(video.title).flatMap(leadsOf))].slice(0, 8);
+            const leads = [...new Set(chunksOf(video.title).flatMap(leadsOf))].filter(isUsefulYoutubeLead).slice(0, 8);
             for (const lead of leads) {
-                const matched = await askAutocomplete(lead);
-                // 자동완성이 거의 없으면 사람들이 안 치는 말이다 — 버린다.
-                if (matched.length < 2) continue;
+                const matched = (await askAutocomplete(lead)).filter((keyword) => isRelevantYoutubeTopic(keyword, video.title));
+                // 엉뚱한 자동완성을 제거한 뒤 하나만 남아도 실제 수요는 실측으로 확인한다.
+                if (matched.length === 0) continue;
                 for (const keyword of matched.slice(0, 6)) {
                     if (!source.has(keyword)) source.set(keyword, video);
                 }
@@ -379,7 +379,7 @@ async function main() {
              * 말이 섞인다. 살아남은 행에만 물어 호출을 아낀다.
              */
             const expansions = suggestionsFor(keyword, await fetchAutocomplete(keyword))
-                .filter((suggestion) => suggestion !== keyword)
+                .filter((suggestion) => suggestion !== keyword && isRelevantYoutubeTopic(suggestion, video.title))
                 .slice(0, 6);
             await sleep(100);
             rows.push({
