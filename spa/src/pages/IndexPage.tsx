@@ -1200,6 +1200,19 @@ function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceL
     const briefLinks = (brief?.links || []).slice(0, 3);
     const briefImage = (brief?.images || [])[0];
     const briefTitles = brief?.titles || {};
+    const briefKeywords = (brief?.extractedKeywords || []).slice(0, 8);
+
+    /** 기사 발행 경과 — 선점 판단 근거라 그대로 밝힌다. 못 읽으면 빈 문자열. */
+    const publishedAgo = (iso?: string | null): string => {
+        if (!iso) return '';
+        const at = Date.parse(iso);
+        if (!Number.isFinite(at)) return '';
+        const minutes = Math.max(0, Math.round((Date.now() - at) / 60000));
+        if (minutes < 1) return '방금';
+        if (minutes < 60) return `${minutes}분 전`;
+        const hours = Math.floor(minutes / 60);
+        return hours < 24 ? `${hours}시간 전` : `${Math.floor(hours / 24)}일 전`;
+    };
 
     // 기사 자동 매칭이 없더라도 직접 수집한 포털 순위는 실시간 신호의
     // 근거다. 빈 마인드맵을 만들지 않고, 수집 원본과 순위를 정직하게 보여준다.
@@ -1244,6 +1257,11 @@ function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceL
                         <small>기사에서 확인된 내용입니다</small>
                     </div>
                     <div className="source-brief-body">
+                        {/*
+                          사진이 판의 주인공이다(사장님 2026-09-06 "크게보기 누르지 않아도
+                          이미지는 크게 — 공간을 낭비하지 마"). 썸네일 옆 배치를 버리고
+                          전폭으로 편다.
+                        */}
                         {briefImage && (
                             <img
                                 className="source-brief-photo"
@@ -1260,12 +1278,31 @@ function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceL
                             ))}
                         </ul>
                     </div>
+                    {/*
+                      출처 줄마다 그 기사의 요약을 붙인다(사장님 2026-09-06 "출처 기사를
+                      줄지어 놨는데 여기에 요약문이 있어야 하지 않나"). 문장은 전부 그
+                      기사에서 그대로 가져온 것이고, 발행 경과를 같이 적는다.
+                    */}
                     {briefLinks.length > 0 && (
-                        <div className="source-brief-links">
-                            <span>공식 확인</span>
+                        <ul className="source-brief-sources">
                             {briefLinks.map((link) => (
-                                <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
-                                    {link.press || '기사 원문'}
+                                <li key={link.url}>
+                                    <a href={link.url} target="_blank" rel="noreferrer">
+                                        <b>{link.press || '기사 원문'}</b>
+                                        {publishedAgo(link.publishedAt) && <small>{publishedAgo(link.publishedAt)} 기사</small>}
+                                    </a>
+                                    {link.summary && <p>{link.summary}</p>}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                    {/* 추출 키워드 — 기사 제목·요약에서 두 곳 이상 등장한 말을 센 것(추론 아님). */}
+                    {briefKeywords.length > 0 && (
+                        <div className="source-brief-links">
+                            <span>추출 키워드</span>
+                            {briefKeywords.map((word) => (
+                                <a key={word} href={buildSourceSearchUrl(lane.id, `${keyword} ${word}`)} target="_blank" rel="noreferrer">
+                                    {word}
                                 </a>
                             ))}
                         </div>
@@ -1355,8 +1392,9 @@ function IndexPage() {
      */
     const [onDemandBriefs, setOnDemandBriefs] = useState<Record<string, {
         facts: Array<{ text: string; sourceIndex: number }>;
-        links: Array<{ url: string; press: string }>;
+        links: Array<{ url: string; press: string; publishedAt?: string | null; summary?: string }>;
         images: string[];
+        keywords: string[];
         latestArticleAt?: string;
     }>>({});
     // 기본 탭은 인기 — 분 단위로 움직이는 실시간 원본이 먼저 보인다(2026-09-06).
@@ -1464,6 +1502,7 @@ function IndexPage() {
                 facts: extra.facts,
                 links: extra.links.length > 0 ? extra.links : (item.insight?.links || []),
                 images: [...extra.images, ...existingImages.filter((src) => !extra.images.includes(src))],
+                ...(extra.keywords.length > 0 ? { extractedKeywords: extra.keywords } : {}),
                 ...(extra.latestArticleAt ? { latestArticleAt: extra.latestArticleAt } : {}),
             },
         };
@@ -1498,6 +1537,7 @@ function IndexPage() {
                         facts: result.data!.facts || [],
                         links: result.data!.links || [],
                         images: result.data!.images || [],
+                        keywords: result.data!.keywords || [],
                         ...(result.data!.latestArticleAt ? { latestArticleAt: result.data!.latestArticleAt } : {}),
                     },
                 }));
@@ -2151,17 +2191,18 @@ function IndexPage() {
                     font-size: 11px;
                     color: rgba(255,255,255,0.52);
                 }
+                /* 사진이 판의 주인공 — 전폭으로 크게(2026-09-06 "크게보기 안 눌러도 크게"). */
                 .source-brief-body {
                     display: flex;
-                    gap: 12px;
-                    align-items: flex-start;
+                    flex-direction: column;
+                    gap: 10px;
                 }
                 .source-brief-photo {
-                    width: 104px;
-                    height: 78px;
+                    width: 100%;
+                    max-height: 200px;
                     object-fit: cover;
-                    border-radius: 8px;
-                    flex: none;
+                    object-position: top;
+                    border-radius: 10px;
                     background: rgba(255,255,255,0.06);
                 }
                 .source-brief-facts {
@@ -2206,6 +2247,37 @@ function IndexPage() {
                     cursor: pointer;
                 }
                 .source-insight-open:hover { background: rgba(68,215,182,0.18); }
+                /* 출처마다 그 기사의 요약 한 문장 — 매체명·발행 경과·문장이 한 덩어리다. */
+                .source-brief-sources {
+                    list-style: none;
+                    margin: 11px 0 0;
+                    padding: 10px 0 0;
+                    border-top: 1px solid rgba(255,255,255,0.08);
+                    display: grid;
+                    gap: 9px;
+                }
+                .source-brief-sources a {
+                    display: inline-flex;
+                    align-items: baseline;
+                    gap: 7px;
+                    text-decoration: none;
+                }
+                .source-brief-sources b {
+                    font-size: 12px;
+                    font-weight: 800;
+                    color: #63efd0;
+                }
+                .source-brief-sources small {
+                    font-size: 11px;
+                    color: rgba(255,255,255,0.45);
+                    font-variant-numeric: tabular-nums;
+                }
+                .source-brief-sources p {
+                    margin: 3px 0 0;
+                    font-size: 12px;
+                    line-height: 1.6;
+                    color: rgba(255,255,255,0.72);
+                }
                 .source-brief-links {
                     display: flex;
                     align-items: center;

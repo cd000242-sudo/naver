@@ -367,10 +367,12 @@ export const fetchIssueBrief = (keyword: string) =>
     call<{
         keyword: string;
         facts: Array<{ text: string; sourceIndex: number }>;
-        links: Array<{ url: string; press: string; publishedAt?: string | null }>;
+        links: Array<{ url: string; press: string; publishedAt?: string | null; summary?: string }>;
         headlines: string[];
         /** 최신 기사 3곳의 대표 사진(og:image) — 서버가 기사 페이지에서 그대로 꺼낸 것. */
         images?: string[];
+        /** 기사 제목·요약에서 세어 뽑은 말(두 기사 이상 등장) — 지어낸 것이 아니다. */
+        keywords?: string[];
         /** 실린 기사 중 가장 최신 발행 시각 — "N분 전 기사 기준"의 근거. */
         latestArticleAt?: string | null;
     }>('issue-brief', { keyword });

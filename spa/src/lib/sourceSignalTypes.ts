@@ -11,7 +11,9 @@ export type SourceInsight = {
     /** 배치가 계산해 담아준다. 여기서 다시 만들지 않는다. */
     titles?: { seo?: string; home?: string; topic?: string; topicGroup?: string; summary?: string };
     facts?: Array<{ text: string; sourceIndex: number }>;
-    links?: Array<{ url: string; press: string; publishedAt?: string | null }>;
+    links?: Array<{ url: string; press: string; publishedAt?: string | null; summary?: string }>;
+    /** 기사 제목·요약에서 세어 뽑은 말(두 기사 이상 등장) — 즉석 브리프가 채운다. */
+    extractedKeywords?: string[];
     images?: string[];
     press?: string[];
     headlines?: string[];

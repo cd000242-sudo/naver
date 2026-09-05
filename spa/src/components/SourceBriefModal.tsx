@@ -314,10 +314,35 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                                                     {link.press || '기사 원문'}
                                                     {linkAgo && <small style={{ marginLeft: 6, opacity: 0.6 }}>{linkAgo}</small>}
                                                 </a>
+                                                {/* 그 기사에서 그대로 가져온 요약 한 문장(2026-09-06 "출처에 요약문이 있어야"). */}
+                                                {link.summary && (
+                                                    <p style={{ margin: '3px 0 0', fontSize: 12.5, lineHeight: 1.62, color: 'rgba(255,255,255,0.68)' }}>
+                                                        {link.summary}
+                                                    </p>
+                                                )}
                                             </li>
                                         );
                                     })}
                                 </ul>
+                            </section>
+                        )}
+
+                        {(brief?.extractedKeywords || []).length > 0 && (
+                            <section aria-label={`${keyword} 추출 키워드`}>
+                                <div className="brief-modal-section-head">
+                                    <strong>추출 키워드</strong>
+                                    <small>기사 두 곳 이상에서 나온 말 — 세어서 뽑았습니다</small>
+                                </div>
+                                <div className="brief-modal-chips">
+                                    {(brief?.extractedKeywords || []).slice(0, 8).map((word) => (
+                                        <a
+                                            key={word}
+                                            href={buildSourceSearchUrl(lane.id, `${keyword} ${word}`)}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >{word}</a>
+                                    ))}
+                                </div>
                             </section>
                         )}
 
