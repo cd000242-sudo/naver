@@ -230,6 +230,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/titlePayoffCheck.ts',
   'src/content/urlModeKeywordPicker.ts',
   'src/content/urlModeKeywordResolve.ts',
+  'src/content/verdictStructure.ts',
   'src/contentAbortTimeoutPolicy.ts',
   'src/contentAiTabPrompt.ts',
   'src/contentBodyHooks.ts',

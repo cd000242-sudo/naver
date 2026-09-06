@@ -190,6 +190,7 @@ import { normalizeContentTableBlocks } from './content/tableBlockNormalizer.js';
 import { applyPostDraftFactCheck } from './content/postDraftFactCheck.js';
 import { applyIssueDisciplineAudit } from './content/issueDisciplineAudit.js';
 import { checkTitleAnswer, describeTitleAnswer } from './content/titleAnswerCheck.js';
+import { checkVerdictStructure, describeVerdictStructure } from './content/verdictStructure.js';
 import { appendParaphraseUpgradeBlock, hasParaphraseUpgradeBrief } from './content/paraphraseUpgradeBlock.js';
 import {
   detectDuplicateContent,
@@ -492,6 +493,21 @@ function logTitleAnswer(content: any, source: any): void {
   }
 }
 
+/**
+ * [2026-09-06 R2] 관점 계약의 구조 검사. 본문 호출은 headings 앞에 finalVerdict 를 세우고
+ * conclusion 은 거기로 돌아오기로 계약했다. 여기서는 두 자리가 비었는지만 본다 — 실제로
+ * 돌아왔는지는 R3 서브모델 판정 몫이다(어휘 겹침은 두 번 실측해 버렸다). 경고 전용.
+ */
+function logVerdictStructure(content: any): void {
+  try {
+    const result = checkVerdictStructure(content);
+    console.log(describeVerdictStructure(result));
+    (content as any).__verdictStructure = result;
+  } catch (err) {
+    console.log('[Verdict] 검사 생략:', err instanceof Error ? err.message : err);
+  }
+}
+
 function logTitlePayoff(content: any, source: any): void {
   try {
     const firstSection = Array.isArray(content?.headings) ? content.headings[0] : null;
@@ -675,6 +691,7 @@ function runPostGenValidator(content: any, source: any): void {
   for (const line of buildTitleDiagnosticsLines(content)) console.log(line);
   logTitlePayoff(content, source);
   logTitleAnswer(content, source);
+  logVerdictStructure(content);
   logPublicReactionClaims(content, source);
   if (!isFeatureEnabled('validator')) return;
   let result: any;

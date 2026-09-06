@@ -208,7 +208,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-09-04] 홈판·SEO 평가기에 직접 인용 커버리지 항목 추가로 재계산
         // [2026-09-04 2차] 홈판 평가기 상황·가치 단서 export(도입부 패치가 같은 단서를 씀)로 재계산
         // [2026-09-04 3차] 사건/의혹 글 주장·사실 규율(issue-claim-discipline) promptLoader 배선으로 재계산
-        'b377e11c5b6d56eb0cc45a93725039a97e6d7f3a9b524853360f4f9be0542db0',
+        // [2026-09-06 R2] finalVerdict 스키마 필드 + 모드별 결론 계약 교체(contentJsonPromptFormat · mate/base.prompt)로 재계산
+        '2c8a0834d8e6e1f78ebe540fb4e23e69541cc3ef440470e79d8e27e5edaebf94',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
