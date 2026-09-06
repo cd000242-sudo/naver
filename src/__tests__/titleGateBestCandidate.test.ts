@@ -4,6 +4,15 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import { evaluateTitleQuality } from '../contentTitleEvaluator';
+import { removeDuplicatePhrases } from '../contentTitleDuplicateRemoval';
+import {
+  cleanupColonQuotePattern,
+  cleanupStartingTitleTokens,
+  cleanupTrailingTitleTokens,
+  sanitizeTitleSpecialChars,
+  stripOptionCombo,
+  stripStoreTagBrackets,
+} from '../contentTitleHelpers';
 
 /**
  * [2026-09-02 사장님: "글을 잘 적는 것도 중요한데 문제는 팔려야 되잖아"]
@@ -38,14 +47,47 @@ describe('쇼핑 제목 채점 — 구매 축이 있는 후보가 상품명 나�
 describe('배선: 최종 게이트는 고쳐 쓰기 전에 후보 최고점을 고른다', () => {
   const src = readFileSync(resolve(__dirname, '..', 'contentGenerator.ts'), 'utf-8').replace(/\r/g, '');
   const gateAt = src.indexOf('[FinalQualityGate] ⚠️ 최종 제목 품질 미달');
-  const gate = src.slice(gateAt, gateAt + 3500);
+  const gate = src.slice(gateAt, gateAt + 4500);
 
   it('후보를 같은 잣대로 채점해 최고점을 고르고, 후보가 전부 미달일 때만 고쳐 쓴다', () => {
     expect(gate).toMatch(/finalContent\.titleCandidates/u);
     expect(gate).toMatch(/bestCandidate\.score >= 50 && bestCandidate\.score > finalCheck\.score/u);
     expect(gate).toContain('후보 중 최고점 선택');
     // 고쳐 쓰기(복구)는 후보 선택이 안 됐을 때의 else 가지다
-    expect(gate.indexOf('후보 중 최고점 선택')).toBeLessThan(gate.indexOf('repair-title-after-quality-gate'));
+    expect(gate.indexOf('후보 중 최고점 선택')).toBeLessThan(gate.lastIndexOf('repair-title-after-quality-gate'));
+  });
+
+  /**
+   * [2026-09-06 사장님: "특히 쇼핑모드로 제목을 생성해줄때가 문제야"] 닥터웰 2차 실측.
+   * 모델 선택 "…DR-5180, 운동 후 다리 부종 관리로 써보니"(= 소제목 1·도입·판단·결론의 축)가
+   * 키워드 중복(-40/-30)으로 0점 → 게이트가 후보 "착용 방식과 압박감은"(55점)으로 갈아탐 → TitlePayoff 40%.
+   * 같은 제목을 제자리 수리 사슬에 넣으면 0 → 70점, 약속은 그대로다. 쇼핑은 후보로 가기 전에
+   * 제자리 수리를 먼저 본다 — 수리본이 50 이상이면 그걸로 끝. 후보 최고점·고쳐 쓰기는 그 뒤다.
+   */
+  it('쇼핑은 후보 교체 전에 제자리 수리를 먼저 본다 — 약속 보존', () => {
+    const rescueAt = gate.indexOf('제자리 수리로 통과');
+    expect(rescueAt).toBeGreaterThan(0);
+    expect(rescueAt).toBeLessThan(gate.indexOf('후보 중 최고점 선택'));
+    expect(gate.slice(0, rescueAt)).toMatch(/finalMode === 'affiliate'[\s\S]{0,300}removeDuplicatePhrasesFromTitle\(/u);
+    expect(gate.slice(0, rescueAt)).toMatch(/rescuedCheck\.score >= 50/u);
+  });
+});
+
+describe('[2026-09-06 닥터웰 2차] 제자리 수리가 모델 선택을 바닥(50) 위로 올린다', () => {
+  const PICKED = '다리 공기압 마사지기 닥터웰 공기압 마사지기 DR-5180, 운동 후 다리 부종 관리로 써보니';
+
+  it('중복 키워드 제거만으로 0점 → 50점 이상, 구매 질문("운동 후 부종 관리")은 남는다', () => {
+    const before = evaluateTitleQuality(PICKED, '다리 공기압 마사지기', 'affiliate' as never);
+    expect(before.score).toBeLessThan(50);
+    const rescued = removeDuplicatePhrases(
+      cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(
+        stripOptionCombo(stripStoreTagBrackets(sanitizeTitleSpecialChars(PICKED))),
+      ))),
+    ).trim();
+    const after = evaluateTitleQuality(rescued, '다리 공기압 마사지기', 'affiliate' as never);
+    expect(after.score).toBeGreaterThanOrEqual(50);
+    expect(rescued).toContain('운동 후');
+    expect(rescued).toContain('부종 관리');
   });
 });
 

@@ -1935,14 +1935,38 @@ export function finalizeStructuredContent(
           const ours = compareTitleWithSerp(finalContent.selectedTitle, String(finalPK), serpTitles);
           console.log(`[TitleDiag] 상위 글 제목 대조(${ours.sampleSize}개): 검색어 그대로 ${Math.round(ours.intactShare * 100)}% · 앞쪽 ${Math.round(ours.frontShare * 100)}% · 내 제목 ${ours.verdict}${ours.lines[0] ? ' — ' + ours.lines[0] : ''}`);
         }
+        /*
+         * [2026-09-06 사장님: "특히 쇼핑모드로 제목을 생성해줄때가 문제야"] 닥터웰 2차 실측.
+         * 모델 선택 "…DR-5180, 운동 후 다리 부종 관리로 써보니"(= 소제목 1·도입·판단·결론의 축)가 키워드 중복으로
+         * 0점이 되자 이 게이트가 후보 "착용 방식과 압박감은"(55점)으로 갈아탔고, TitlePayoff 가 40% 로 떨어졌다.
+         * 쇼핑 후보는 같은 상품에 구매 질문만 다른 제목이라 본문을 다 쓴 뒤의 교체는 약속을 끊는다.
+         * 같은 제목을 아래 고쳐 쓰기 사슬에 넣으면 0 → 70점, 질문은 그대로다. 그래서 쇼핑은 순서를 바꾼다:
+         * 제자리 수리 → (그래도 50 미만이면) 후보 최고점 → (전부 미달이면) 고쳐 쓰기.
+         */
+        let promiseKept = false;
+        if (finalMode === 'affiliate' && shouldRunLegacySemanticPostDraftMutation(promptVariant, 'repair-title-after-quality-gate')) {
+          const rescued = removeDuplicatePhrasesFromTitle(
+            cleanupColonQuotePattern(cleanupTrailingTitleTokens(
+              cleanupStartingTitleTokens(stripOptionCombo(stripStoreTagBrackets(sanitizeTitleSpecialChars(finalContent.selectedTitle))))
+            ))
+          ).trim();
+          const rescuedCheck = rescued ? evaluateTitleQuality(rescued, String(finalPK), finalMode, finalCategoryHint, source.articleType) : null;
+          if (rescuedCheck && rescuedCheck.score >= 50) {
+            console.log(`[FinalQualityGate] 제자리 수리로 통과 (${finalCheck.score}점 → ${rescuedCheck.score}점): "${rescued}" — 약속 보존, 후보 교체 안 함`);
+            finalContent.selectedTitle = rescued;
+            promiseKept = true;
+          }
+        }
         const candidateTexts = (Array.isArray(finalContent.titleCandidates) ? finalContent.titleCandidates : [])
           .map((c: any) => (typeof c?.text === 'string' ? stripOptionCombo(c.text.trim()) : ''))
           .filter((t: string) => t.length > 0 && t !== finalContent.selectedTitle);
-        const scoredCandidates = candidateTexts
+        const scoredCandidates = promiseKept ? [] : candidateTexts
           .map((text: string) => ({ text, score: evaluateTitleQuality(text, String(finalPK), finalMode, finalCategoryHint, source.articleType).score + serpLagPenalty(text) }))
           .sort((a: { score: number }, b: { score: number }) => b.score - a.score);
         const bestCandidate = scoredCandidates[0];
-        if (bestCandidate && bestCandidate.score >= 50 && bestCandidate.score > finalCheck.score) {
+        if (promiseKept) {
+          // Rescued in place above; the candidate swap and the rewrite below are skipped on purpose.
+        } else if (bestCandidate && bestCandidate.score >= 50 && bestCandidate.score > finalCheck.score) {
           console.log(`[FinalQualityGate] 후보 중 최고점 선택: "${bestCandidate.text}" (${bestCandidate.score}점) — 고쳐 쓰기 대신`);
           finalContent.selectedTitle = bestCandidate.text;
         } else
@@ -6608,11 +6632,23 @@ async function generateStructuredContentInternal(
           //   Candidates are already in the response, so this costs nothing.
           if (!source.useKeywordAsTitle && !source.manualTitleOverride) {
             const titleKeyword = getPrimaryKeywordFromSource(source) || '';
+            /*
+             * [2026-09-06 사장님: "특히 쇼핑모드로 제목을 생성해줄때가 문제야"] 닥터웰 DR-5180 실측.
+             * 쇼핑 후보 3개는 같은 상품에 구매 질문만 다른 제목이고 본문은 모델이 고른 하나에만 답한다.
+             * 여기서 점수로 갈아타면("매일 꺼내 쓰기엔 어떨까" 70 → "착용 방식이 편할까" 100) 본문 소제목
+             * 어디에도 없는 질문이 제목이 된다 — 16편 전수에서 교체 4/4 가 본문 축을 벗어났다.
+             * 쇼핑은 약속을 바꾸지 않는 교체(에코·길이)만 두고, 교체가 하던 순기능(스토어 꼬리표
+             * "그레이 본체+다리" 제거)은 최종 게이트와 같은 헬퍼로 제자리에서 처리한다.
+             */
+            if (mode === 'affiliate') {
+              parsed.selectedTitle = stripOptionCombo(stripStoreTagBrackets(String(parsed.selectedTitle || ''))).trim();
+            }
             const pick = selectBestTitleCandidate({
               selectedTitle: parsed.selectedTitle,
               candidates: parsed.titleCandidates,
               keyword: titleKeyword,
               mode: mode as never, // 길이 계약(모드별 상한)을 함께 본다
+              preservePromise: mode === 'affiliate',
               scoreTitle: (t) => evaluateTitleQuality(
                 t,
                 titleKeyword,

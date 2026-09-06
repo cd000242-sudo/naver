@@ -249,3 +249,99 @@ describe('길이 계약이 점수보다 앞선다', () => {
     expect(result.reason).toBe('kept');
   });
 });
+
+/**
+ * [2026-09-06 사장님: "특히 쇼핑모드로 제목을 생성해줄때가 문제야"] 닥터웰 DR-5180 실측.
+ * 모델은 "매일 꺼내 쓰기엔 어떨까"(95)를 골랐고 본문(도입 첫 문장·소제목 1·finalVerdict)을
+ * 그 질문으로 썼다. 채점기는 '구매 축 없음' -30 으로 70점을 매기고 "착용 방식이 편할까"(100)로
+ * 갈아탔는데, 본문 어디에도 착용 방식은 없다. 쇼핑 후보 3개는 같은 상품에 구매 질문만 다른
+ * 제목이라, 본문을 다 쓴 뒤 점수만 보고 바꾸면 제목의 약속을 본문이 못 받는다.
+ * 쇼핑 16편 전수: 교체 4/4 전부 모델 원선택이 본문 축이었고, 교체 글 관통 miss 2/3 vs 비교체 1/6.
+ * 약속을 바꾸지 않는 교체(에코·길이)만 남긴다.
+ */
+describe('쇼핑 — 약속 보존(preservePromise): 점수로는 제목을 갈아타지 않는다', () => {
+  const PICKED = '다리 공기압 마사지기 닥터웰 DR-5180, 매일 꺼내 쓰기엔 어떨까';
+  const OTHER = '다리 공기압 마사지기 고를 때 닥터웰 DR-5180 착용 방식이 편할까';
+  const scoreLive = (t: string) => (t === PICKED ? 70 : 100);
+
+  it('실측 케이스: 100점 후보가 있어도 모델이 고른 70점 제목을 지킨다', () => {
+    const result = selectBestTitleCandidate({
+      selectedTitle: PICKED,
+      candidates: [{ text: PICKED }, { text: OTHER }],
+      keyword: '다리 공기압 마사지기',
+      mode: 'affiliate',
+      preservePromise: true,
+      scoreTitle: scoreLive,
+    });
+    expect(result.changed).toBe(false);
+    expect(result.reason).toBe('kept');
+    expect(result.title).toBe(PICKED);
+  });
+
+  it('보존을 켜지 않으면 예전대로 점수로 교체한다 (다른 모드 불변)', () => {
+    const result = selectBestTitleCandidate({
+      selectedTitle: PICKED,
+      candidates: [{ text: OTHER }],
+      keyword: '다리 공기압 마사지기',
+      mode: 'affiliate',
+      scoreTitle: scoreLive,
+    });
+    expect(result.reason).toBe('higher-score');
+  });
+
+  it('키워드 에코는 약속이 아니다 — 보존 중에도 교체한다', () => {
+    const result = selectBestTitleCandidate({
+      selectedTitle: '다리 공기압 마사지기',
+      candidates: [{ text: OTHER }],
+      keyword: '다리 공기압 마사지기',
+      mode: 'affiliate',
+      preservePromise: true,
+      scoreTitle: () => 80,
+    });
+    expect(result.reason).toBe('keyword-echo');
+    expect(result.title).toBe(OTHER);
+  });
+
+  it('상한 초과는 독자가 잘린 제목을 보므로 보존 중에도 교체한다', () => {
+    const LONG = '다리 공기압 마사지기 닥터웰 DR-5180 그레이 본체 다리 세트 매일 꺼내 쓰기엔 번거롭지 않을까 궁금하다면';
+    const result = selectBestTitleCandidate({
+      selectedTitle: LONG,
+      candidates: [{ text: OTHER }],
+      keyword: '다리 공기압 마사지기',
+      mode: 'affiliate',
+      preservePromise: true,
+      scoreTitle: () => 80,
+    });
+    expect(result.reason).toBe('length-contract');
+    expect(result.title).toBe(OTHER);
+  });
+
+  it('selectedTitle 이 비면 보존할 약속이 없다 — 최고점 후보를 세운다', () => {
+    const result = selectBestTitleCandidate({
+      selectedTitle: '',
+      candidates: [{ text: PICKED }, { text: OTHER }],
+      keyword: '다리 공기압 마사지기',
+      mode: 'affiliate',
+      preservePromise: true,
+      scoreTitle: scoreLive,
+    });
+    expect(result.changed).toBe(true);
+    expect(result.title).toBe(OTHER);
+  });
+});
+
+describe('배선 — 쇼핑은 꼬리표를 제자리에서 떼고, 약속은 보존한다', () => {
+  const generator = readFileSync(new URL('../contentGenerator.ts', import.meta.url), 'utf8');
+  const call = generator.indexOf('selectBestTitleCandidate({');
+  const around = generator.slice(Math.max(0, call - 1200), call + 900);
+
+  it('재선택은 쇼핑에서 preservePromise 를 켠다', () => {
+    expect(around).toMatch(/preservePromise:\s*mode === 'affiliate'/);
+  });
+
+  it('교체 대신 스토어 꼬리표("본체+다리", 대괄호)를 선택 제목에서 먼저 뗀다 — 순기능은 유지', () => {
+    // 교체 4편 중 3편의 원선택에 "그레이 본체+다리" 가 붙어 있었다. 교체를 끄면 이게 그대로 나가므로
+    // 최종 게이트(1913)와 같은 헬퍼로 재선택 전에 제자리에서 제거한다.
+    expect(around).toMatch(/if \(mode === 'affiliate'\)[\s\S]{0,200}stripOptionCombo\(stripStoreTagBrackets\(String\(parsed\.selectedTitle/);
+  });
+});

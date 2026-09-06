@@ -26,6 +26,18 @@ export interface TitleSelectionInput {
   readonly scoreTitle: (title: string) => number;
   /** Content mode, for the length contract. Omitted → the widest range, so nothing is forced. */
   readonly mode?: TitleLengthMode;
+  /**
+   * Keep the model's promise: never swap on score alone. Echo and over-length swaps still apply,
+   * because neither changes what the title promises — an echo promises nothing, and a truncated
+   * title is unreadable regardless.
+   *
+   * Why (2026-09-06, 닥터웰 DR-5180): shopping candidates are the same product with a different
+   * purchase question each ("매일 꺼내 쓰기엔 어떨까" / "착용 방식이 편할까"), and the body answers
+   * exactly one — the one the model selected. A score-only swap after the body is written leaves
+   * the reader with a question the body never takes up. 16 shopping articles: every score swap
+   * (4/4) moved off the body's axis; throughline miss 2/3 on swapped vs 1/6 on unswapped.
+   */
+  readonly preservePromise?: boolean;
 }
 
 export interface TitleSelectionResult {
@@ -167,6 +179,7 @@ export function selectBestTitleCandidate(input: TitleSelectionInput): TitleSelec
   if (!selected) {
     return { title: best, changed: true, fromScore: 0, toScore: bestScore, reason: 'higher-score' };
   }
+  if (input.preservePromise) return kept;
   if (bestScore - selectedScore >= TITLE_SWAP_MIN_GAIN) {
     return { title: best, changed: true, fromScore: selectedScore, toScore: bestScore, reason: 'higher-score' };
   }
