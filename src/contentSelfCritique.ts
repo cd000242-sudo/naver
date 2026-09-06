@@ -14,12 +14,20 @@ export type SelfCritiqueResult = {
   body: string;
   rewrote: boolean;
   source: 'critique' | 'fallback' | 'skipped';
+  /** Present only when a conclusion was passed in; the (possibly rewritten) conclusion. */
+  conclusion?: string;
 };
 
 const MAX_BODY_CHARS_FOR_CRITIQUE = 4500;
 const MIN_BODY_CHARS_FOR_CRITIQUE = 200;
 
-function buildCritiquePrompt(text: string, personaCard: string, extraDirective?: string): string {
+/**
+ * [2026-09-06 R0] The conclusion is published as its own field, so it rides along under a delimiter line
+ * and is split back out afterwards. Plain text on purpose — the critique rule strips bracketed tokens.
+ */
+export const CONCLUSION_DELIMITER = '===== 마무리 =====';
+
+function buildCritiquePrompt(text: string, personaCard: string, extraDirective?: string, hasConclusion?: boolean): string {
   const trimmedText = text.length > MAX_BODY_CHARS_FOR_CRITIQUE
     ? text.substring(0, MAX_BODY_CHARS_FOR_CRITIQUE) + '\n[...뒷부분 평가 생략]'
     : text;
@@ -28,6 +36,9 @@ function buildCritiquePrompt(text: string, personaCard: string, extraDirective?:
   //   patch decision 시 *구체적 미달 항목*을 selfCritique에 전달 → 정확한 patch
   const extraBlock = (extraDirective && extraDirective.trim())
     ? `\n[Quality Gate 추가 지시 — 우선 반영]\n${extraDirective.trim()}\n`
+    : '';
+  const conclusionRule = hasConclusion
+    ? `\n- 본문 끝의 "${CONCLUSION_DELIMITER}" 구분선 아래는 마무리 문단이다. 마무리도 점검 대상이며, 구분선 줄은 글자 하나 바꾸지 말고 그대로 남겨라.`
     : '';
 
   return `당신은 한국어 블로그 글의 편집자입니다.
@@ -47,7 +58,7 @@ ${extraBlock}
 - 문장 단위로만 수정. 전체 구조나 정보는 그대로 보존.
 - 수정 대상은 가장 어색한 문장 최대 3개. 더 많이 손대지 말 것.
 - 정보 추가·삭제 금지. 표현 자연스러움만 개선.
-- 수정할 게 없으면 원본을 그대로 반환.
+- 수정할 게 없으면 원본을 그대로 반환.${conclusionRule}
 
 [응답 형식 — JSON only, 마크다운 펜스 금지]
 JSON으로만 답하세요. 설명이나 코드 블록을 덧붙이지 마세요.
@@ -87,34 +98,60 @@ export async function selfCritiqueAndRewrite(
   personaCard: string,
   geminiCall: (prompt: string) => Promise<string>,
   extraDirective?: string,
+  conclusion?: string,
 ): Promise<SelfCritiqueResult> {
+  const hasConclusion = typeof conclusion === 'string' && conclusion.trim().length > 0;
+  const keepOriginal = (source: SelfCritiqueResult['source']): SelfCritiqueResult => (
+    hasConclusion
+      ? { body: text, rewrote: false, source, conclusion }
+      : { body: text, rewrote: false, source }
+  );
   if (!text || text.trim().length < MIN_BODY_CHARS_FOR_CRITIQUE) {
-    return { body: text, rewrote: false, source: 'skipped' };
+    return keepOriginal('skipped');
   }
 
+  const composite = hasConclusion ? `${text}\n\n${CONCLUSION_DELIMITER}\n${conclusion.trim()}` : text;
+
   try {
-    const prompt = buildCritiquePrompt(text, personaCard, extraDirective);
+    const prompt = buildCritiquePrompt(composite, personaCard, extraDirective, hasConclusion);
     const raw = await geminiCall(prompt);
     const parsed = parseCritiqueResponse(raw);
 
     if (!parsed.rewrote || !parsed.body.trim()) {
-      return { body: text, rewrote: false, source: 'critique' };
+      return keepOriginal('critique');
     }
 
     // Sanity check: if the rewrite drops more than 30% of the original length,
     // assume the model truncated or lost information and reject the rewrite.
-    const lengthRatio = parsed.body.length / text.length;
+    const lengthRatio = parsed.body.length / composite.length;
     if (lengthRatio < 0.7 || lengthRatio > 1.5) {
       console.warn(`[SelfCritique] 길이 변화율(${(lengthRatio * 100).toFixed(0)}%)이 안전 범위를 벗어남 — 원본 유지`);
-      return { body: text, rewrote: false, source: 'fallback' };
+      return keepOriginal('fallback');
     }
 
-    return { body: parsed.body, rewrote: true, source: 'critique' };
+    if (!hasConclusion) {
+      return { body: parsed.body, rewrote: true, source: 'critique' };
+    }
+    const split = splitConclusion(parsed.body);
+    if (!split) {
+      console.warn('[SelfCritique] 마무리 구분선이 사라져 본문/결론 경계를 알 수 없음 — 원본 유지');
+      return keepOriginal('fallback');
+    }
+    return { body: split.body, rewrote: true, source: 'critique', conclusion: split.conclusion };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.warn(`[SelfCritique] 호출/파싱 실패, 원본 유지: ${msg.substring(0, 120)}`);
-    return { body: text, rewrote: false, source: 'fallback' };
+    return keepOriginal('fallback');
   }
+}
+
+function splitConclusion(rewritten: string): { body: string; conclusion: string } | null {
+  const at = rewritten.lastIndexOf(CONCLUSION_DELIMITER);
+  if (at < 0) return null;
+  const body = rewritten.substring(0, at).trim();
+  const conclusion = rewritten.substring(at + CONCLUSION_DELIMITER.length).trim();
+  if (!body || !conclusion) return null;
+  return { body, conclusion };
 }
 
 export function isSelfCritiqueEnabled(config?: { enableSelfCritique?: boolean }): boolean {

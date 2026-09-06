@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import {
+  CONCLUSION_DELIMITER,
   parseCritiqueResponse,
   selfCritiqueAndRewrite,
   isSelfCritiqueEnabled,
@@ -137,6 +138,69 @@ describe('selfCritiqueAndRewrite', () => {
     });
     await selfCritiqueAndRewrite(LONG_BODY, FAKE_PERSONA, geminiCall);
     expect(captured[0]).not.toContain('Quality Gate 추가 지시');
+  });
+});
+
+/**
+ * [2026-09-06 R0] patch 경로가 결론(conclusion)도 고칠 수 있어야 한다.
+ * 이전에는 bodyPlain 만 넘겨서 "결론을 고쳐라"는 지시가 고칠 대상에 닿지 못했다.
+ */
+describe('selfCritiqueAndRewrite — 결론 편입', () => {
+  const CONCLUSION = '결국 이 제품은 매일 쓰는 사람에게만 값을 합니다. 가끔 쓸 거면 사지 마세요.';
+
+  it('결론을 주면 구분선 아래에 결론을 붙여 보내고, 구분선을 지키라고 지시한다', async () => {
+    const captured: string[] = [];
+    const call = vi.fn().mockImplementation(async (prompt: string) => {
+      captured.push(prompt);
+      return JSON.stringify({ rewrote: false, body: LONG_BODY });
+    });
+    await selfCritiqueAndRewrite(LONG_BODY, FAKE_PERSONA, call, undefined, CONCLUSION);
+    expect(captured[0]).toContain(CONCLUSION_DELIMITER);
+    expect(captured[0]).toContain(CONCLUSION);
+    expect(captured[0].indexOf(CONCLUSION_DELIMITER)).toBeLessThan(captured[0].indexOf(CONCLUSION));
+    expect(captured[0]).toMatch(/구분선.*그대로/);
+  });
+
+  it('구분선이 살아 돌아오면 본문과 결론을 갈라서 돌려준다', async () => {
+    const newBody = LONG_BODY.replace('가벼워졌고', '한층 가벼워진 느낌이고');
+    const newConclusion = '결국 이 제품은 매일 쓰는 사람에게 값을 합니다. 가끔 쓸 거면 사지 않는 편이 낫습니다.';
+    const call = vi.fn().mockResolvedValue(
+      JSON.stringify({ rewrote: true, body: `${newBody}\n\n${CONCLUSION_DELIMITER}\n${newConclusion}` }),
+    );
+    const result = await selfCritiqueAndRewrite(LONG_BODY, FAKE_PERSONA, call, undefined, CONCLUSION);
+    expect(result.rewrote).toBe(true);
+    expect(result.body).toBe(newBody.trim());
+    expect(result.conclusion).toBe(newConclusion);
+    expect(result.body).not.toContain(CONCLUSION_DELIMITER);
+  });
+
+  it('구분선이 사라져 돌아오면 어디까지가 결론인지 모르므로 둘 다 원본을 지킨다', async () => {
+    const call = vi.fn().mockResolvedValue(
+      JSON.stringify({ rewrote: true, body: `${LONG_BODY}\n\n${CONCLUSION}` }),
+    );
+    const result = await selfCritiqueAndRewrite(LONG_BODY, FAKE_PERSONA, call, undefined, CONCLUSION);
+    expect(result.rewrote).toBe(false);
+    expect(result.source).toBe('fallback');
+    expect(result.body).toBe(LONG_BODY);
+    expect(result.conclusion).toBe(CONCLUSION);
+  });
+
+  it('수정 없음(rewrote=false)이면 결론도 원본 그대로다', async () => {
+    const call = vi.fn().mockResolvedValue(JSON.stringify({ rewrote: false, body: '' }));
+    const result = await selfCritiqueAndRewrite(LONG_BODY, FAKE_PERSONA, call, undefined, CONCLUSION);
+    expect(result.rewrote).toBe(false);
+    expect(result.conclusion).toBe(CONCLUSION);
+  });
+
+  it('결론을 안 주면 프롬프트에 구분선이 없고 결과에도 conclusion 이 없다', async () => {
+    const captured: string[] = [];
+    const call = vi.fn().mockImplementation(async (prompt: string) => {
+      captured.push(prompt);
+      return JSON.stringify({ rewrote: false, body: LONG_BODY });
+    });
+    const result = await selfCritiqueAndRewrite(LONG_BODY, FAKE_PERSONA, call);
+    expect(captured[0]).not.toContain(CONCLUSION_DELIMITER);
+    expect(result.conclusion).toBeUndefined();
   });
 });
 

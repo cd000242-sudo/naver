@@ -353,7 +353,7 @@ import {
   //   contentBodyTransforms.ts의 정규식이 (?<=[가-힣][.!?])로 영문 약어/소수점 회귀 차단.
   ensureContentParagraphBreaks,
   homefeedParagraphSentences,
-  paragraphizeForEvaluation,
+  readerOrderTextForEvaluation,
   limitRegexOccurrences,
   truncateHeadingTitles,
   removeInternalStructureMarkersFromContent,
@@ -7704,16 +7704,19 @@ async function generateStructuredContentInternal(
         const _modeForGate = (source.contentMode === 'homefeed' || source.contentMode === 'affiliate' || source.contentMode === 'business' || source.contentMode === 'custom' || source.contentMode === 'mate')
           ? source.contentMode
           : 'seo';
+        // [2026-09-04] 발행될 모양(문단 묶음 뒤)으로 평가한다 — 묶기 전 본문을 재서 "문단이 길어" 오탐이 났다.
+        // [2026-09-04] bodyPlain 은 소제목 본문만 합성한 것이라 도입부(introduction)가 없다 — 게이트가 "첫 화면" 을
+        //   첫 소제목 본문에서 찾았고, 도입부 패치를 두 번 해도 같은 지적이 났다. 독자가 보는 순서(도입부 → 본문)로 평가한다.
+        // [2026-09-06 R0] 결론(conclusion)도 같은 이유로 편입 — 게이트가 결론을 한 번도 읽지 않아 어떤 지시도 결론에 닿지 못했다.
+        //   patch 후 재평가도 같은 텍스트를 써야 앞뒤 점수가 비교된다(이전엔 재평가가 도입부조차 빼고 쟀다).
+        const _gateBodyText = () => readerOrderTextForEvaluation(
+          { introduction: (optimized as any).introduction, bodyPlain: optimized.bodyPlain, conclusion: optimized.conclusion },
+          homefeedParagraphSentences(source.contentMode),
+        );
         try {
           const { evaluate: evaluateQuality } = require('./content/qualityEvaluator');
           _gateResult = evaluateQuality({
-            // [2026-09-04] 발행될 모양(문단 묶음 뒤)으로 평가한다 — 묶기 전 본문을 재서 "문단이 길어" 오탐이 났다.
-            // [2026-09-04] bodyPlain 은 소제목 본문만 합성한 것이라 도입부(introduction)가 없다 — 게이트가 "첫 화면" 을
-            //   첫 소제목 본문에서 찾았고, 도입부 패치를 두 번 해도 같은 지적이 났다. 독자가 보는 순서(도입부 → 본문)로 평가한다.
-            body: paragraphizeForEvaluation(
-              [String((optimized as any).introduction || '').trim(), optimized.bodyPlain || ''].filter(Boolean).join('\n\n'),
-              homefeedParagraphSentences(source.contentMode),
-            ),
+            body: _gateBodyText(),
             title: optimized.selectedTitle || '',
             headings: optimized.headings || [],
             rawText: source.rawText || '',
@@ -7816,6 +7819,8 @@ async function generateStructuredContentInternal(
           && _gateResult.decision === 'pass'
           && _gateResult.humanlikeScore.score < 55;
         const _quality90HardMiss = Boolean(_quality90Assessment?.miss);
+        // [2026-09-06 R0] 결론도 patch 대상 — 게이트 지시가 결론을 짚어도 고칠 수 있게 함께 넘기고 갈라 받는다.
+        const _patchConclusion = String(optimized.conclusion || '').trim();
         if (
           allowPaidPostGenerationRepair
           && allowLegacyPostDraftLlm
@@ -7833,16 +7838,19 @@ async function generateStructuredContentInternal(
             const _patchResult = await selfCritiqueAndRewrite(
               optimized.bodyPlain,
               _patchPersona,
-              (prompt: string) => callSelectedProviderForQualityRepair(prompt, optimized.bodyPlain?.length || 1500),
+              (prompt: string) => callSelectedProviderForQualityRepair(prompt, (optimized.bodyPlain?.length || 1500) + _patchConclusion.length),
               _quality90Assessment?.directive || _gateResult.retryDirective || '',
+              _patchConclusion || undefined,
             );
             if (_patchResult.rewrote) {
-              console.log(`[QualityGate] ✅ patch 적용 (${_patchResult.source}) — 본문 부분 재작성됨`);
+              const _conclusionChanged = typeof _patchResult.conclusion === 'string' && _patchResult.conclusion !== _patchConclusion;
+              console.log(`[QualityGate] ✅ patch 적용 (${_patchResult.source}) — 본문 부분 재작성됨${_conclusionChanged ? ' · 결론도 수정' : ''}`);
               optimized.bodyPlain = _patchResult.body;
+              if (_conclusionChanged) optimized.conclusion = _patchResult.conclusion;
               try {
                 const { evaluate: evaluateQualityAfterPatch } = require('./content/qualityEvaluator');
                 _gateResult = evaluateQualityAfterPatch({
-                  body: optimized.bodyPlain || '',
+                  body: _gateBodyText(),
                   title: optimized.selectedTitle || '',
                   headings: optimized.headings || [],
                   rawText: source.rawText || '',

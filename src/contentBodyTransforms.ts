@@ -281,6 +281,22 @@ export function paragraphizeForEvaluation(text: string, maxSentences: number = D
   return enforceSentenceParagraphs(ensureParagraphBreaks(String(text || ''), max), max);
 }
 
+/**
+ * [2026-09-06 R0] The gate evaluates what the reader reads, in reading order: introduction → body → conclusion.
+ * `bodyPlain` holds only the heading sections, so introduction (added 2026-09-04) and conclusion had to be
+ * joined here — without the conclusion the gate never saw it, and no directive could reach it.
+ */
+export function readerOrderTextForEvaluation(
+  parts: { readonly introduction?: string; readonly bodyPlain?: string; readonly conclusion?: string },
+  maxSentences: number = DEFAULT_MAX_SENTENCES_PER_PARAGRAPH,
+): string {
+  const joined = [parts.introduction, parts.bodyPlain, parts.conclusion]
+    .map((p) => String(p || '').trim())
+    .filter(Boolean)
+    .join('\n\n');
+  return paragraphizeForEvaluation(joined, maxSentences);
+}
+
 export function ensureContentParagraphBreaks(
   content: StructuredContent,
   options: { readonly maxSentences?: number } = {},
