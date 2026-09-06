@@ -191,6 +191,13 @@ import { applyPostDraftFactCheck } from './content/postDraftFactCheck.js';
 import { applyIssueDisciplineAudit } from './content/issueDisciplineAudit.js';
 import { checkTitleAnswer, describeTitleAnswer } from './content/titleAnswerCheck.js';
 import { checkVerdictStructure, describeVerdictStructure } from './content/verdictStructure.js';
+import {
+  buildThroughlineDirective,
+  describeThroughline,
+  isThroughlineJudgeEnabled,
+  judgeThroughline,
+  type ThroughlineJudgement,
+} from './content/throughlineJudge.js';
 import { appendParaphraseUpgradeBlock, hasParaphraseUpgradeBrief } from './content/paraphraseUpgradeBlock.js';
 import {
   detectDuplicateContent,
@@ -6174,6 +6181,7 @@ async function generateStructuredContentInternal(
   let _qualityGateRetryUsed = false; // ✅ [v2.10.178 Phase 2] qualityGate decision='regenerate' 재시도 1회 가드
   let _quality90FollowupRetryUsed = false; // 90점 미달 patch 후에도 부족하면 추가 전체 재생성 1회
   let _distinctnessJudgeUsed = false; // ✅ [Gap C 시맨틱] 섹션 변별 LLM 판정 — 생성당 1회만 호출(비용 가드)
+  let _throughlineJudgeUsed = false; // [2026-09-06 R3] 관통 판정(제목 질문→결론 복귀) — 생성당 1회(비용 가드)
   let _affiliateAuthenticityRetryUsed = false;
   let _shoppingValidationRetryUsed = false;
   // ✅ [2026-04-03] signal 추출 — 중지 시 즉시 abort
@@ -7803,6 +7811,34 @@ async function generateStructuredContentInternal(
           console.warn('[QualityGate] 평가 실패 (정상 흐름 유지):', (gateErr as Error)?.message);
         }
 
+        // [2026-09-06 R3] 관통 판정 — 제목이 던진 질문을 도입·본문·결론이 끝까지 붙잡았는지 선택 엔진에 1회 묻는다.
+        //   소비자는 아래 기존 재생성/patch 뿐이다(새 재생성 트리거 없음 — 편당 비용을 늘리지 않는다).
+        //   재생성이 어차피 뜨면 지시만 얹고, 아니면 patch(본문+결론 재작성)를 부른다. 도입만 어긋난 경우는
+        //   patch 가 도입을 못 만지므로 경고로만 남긴다. costSaver 가 selfCritique 를 막으면 판정도 돌지 않는다
+        //   — 판정만 하고 못 고치는 호출은 낭비다.
+        let _throughline: ThroughlineJudgement | null = null;
+        if (
+          allowPaidPostGenerationRepair
+          && allowLegacyPostDraftLlm
+          && costPolicy.allowQualityGateSelfCritique
+          && _gateResult
+          && !_throughlineJudgeUsed
+          && isThroughlineJudgeEnabled()
+        ) {
+          _throughlineJudgeUsed = true;
+          _throughline = await judgeThroughline(optimized as any, () => resolveSideTaskRoute(source));
+          console.log(describeThroughline(_throughline));
+          (optimized as any).__throughline = _throughline;
+        }
+        const _throughlineDirective = _throughline ? buildThroughlineDirective(_throughline) : '';
+        const _throughlinePatch = Boolean(_throughline?.judged && !_throughline.holds && _throughline.patchable);
+        if (_throughlineDirective && optimized.quality) {
+          optimized.quality.warnings = [
+            ...(optimized.quality.warnings || []),
+            `흐름 관통 실패(${_throughline!.breakAt}): ${_throughline!.reason}`,
+          ];
+        }
+
         // ✅ [v2.10.179 Phase 2.2] qualityGate decision='regenerate' 전체 자동 재시도 활성화
         //   v2.10.178: safety < 50 (환각·금지패턴)만 활성화
         //   v2.10.179: decision='regenerate' 전체 — finalScore < 60도 포함 (근본적 미달)
@@ -7824,7 +7860,8 @@ async function generateStructuredContentInternal(
                 ? `safety ${_gateResult.safetyScore.score} < 50`
                 : `finalScore ${_gateResult.finalScore} < 60`);
           console.warn(`[QualityGate] 🚨 ${_trigger} — 자동 재시도 트리거 (decision=${_gateResult.decision})`);
-          extraInstruction = `${_gateDirective}\n${extraInstruction}`;
+          // [R3] 관통 판정 지시는 재생성에 편승한다 — 재생성은 게이트가 소유하고, 판정은 지시만 보탠다.
+          extraInstruction = `${_throughlineDirective ? `${_throughlineDirective}\n` : ''}${_gateDirective}\n${extraInstruction}`;
           continue; // for 루프 다음 attempt
         }
 
@@ -7843,25 +7880,28 @@ async function generateStructuredContentInternal(
         const _quality90HardMiss = Boolean(_quality90Assessment?.miss);
         // [2026-09-06 R0] 결론도 patch 대상 — 게이트 지시가 결론을 짚어도 고칠 수 있게 함께 넘기고 갈라 받는다.
         const _patchConclusion = String(optimized.conclusion || '').trim();
+        // [R3] 관통 지시가 있으면 게이트 지시 앞에 둔다 — 결론 복귀가 먼저, 점수 항목은 그 다음.
+        const _patchDirective = [_throughlineDirective, _quality90Assessment?.directive || _gateResult?.retryDirective || ''].filter(Boolean).join('\n');
+        const _throughlinePatchLabel = _throughlinePatch ? `흐름 관통 실패(${_throughline?.breakAt})` : '';
         if (
           allowPaidPostGenerationRepair
           && allowLegacyPostDraftLlm
           && _gateResult
           && optimized.bodyPlain
-          && (_gateResult.decision === 'patch' || _humanFloorMiss || _quality90HardMiss)
+          && (_gateResult.decision === 'patch' || _humanFloorMiss || _quality90HardMiss || _throughlinePatch)
           && (costPolicy.allowQualityGateSelfCritique || _quality90HardMiss)
         ) {
           try {
             const _patchPersona = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
             const _patchReason = _quality90HardMiss
               ? `QualityGate90 미달(${_quality90Assessment?.reasons.join(', ')})`
-              : (_humanFloorMiss ? `humanlike 플로어 미달(human=${_gateResult.humanlikeScore.score}<55)` : `patch decision (final=${_gateResult.finalScore})`);
+              : (_humanFloorMiss ? `humanlike 플로어 미달(human=${_gateResult.humanlikeScore.score}<55)` : (_throughlinePatchLabel || `patch decision (final=${_gateResult.finalScore})`));
             console.log(`[QualityGate] 📝 ${_patchReason} — selfCritique 자동 활성화`);
             const _patchResult = await selfCritiqueAndRewrite(
               optimized.bodyPlain,
               _patchPersona,
               (prompt: string) => callSelectedProviderForQualityRepair(prompt, (optimized.bodyPlain?.length || 1500) + _patchConclusion.length),
-              _quality90Assessment?.directive || _gateResult.retryDirective || '',
+              _patchDirective,
               _patchConclusion || undefined,
             );
             if (_patchResult.rewrote) {
