@@ -198,6 +198,13 @@ import {
   judgeThroughline,
   type ThroughlineJudgement,
 } from './content/throughlineJudge.js';
+import {
+  auditReviewVoice,
+  buildReviewVoiceDirective,
+  describeReviewVoice,
+  isAffiliateFirstPersonVoice,
+  type ReviewVoiceAudit,
+} from './content/reviewVoiceAudit.js';
 import { appendParaphraseUpgradeBlock, hasParaphraseUpgradeBrief } from './content/paraphraseUpgradeBlock.js';
 import {
   detectDuplicateContent,
@@ -7879,6 +7886,29 @@ async function generateStructuredContentInternal(
           ];
         }
 
+        // [2026-09-06] Shopping first-person voice audit — buyer-review sentences copied verbatim, and
+        //   reviewer usage numbers / purchase / family claims rewritten as the author's (9/3 voice rule).
+        //   Consumer is the same single patch slot the throughline judge uses: no extra paid call.
+        let _reviewVoice: ReviewVoiceAudit | null = null;
+        if (isAffiliateFirstPersonVoice(source) && optimized.bodyPlain) {
+          _reviewVoice = auditReviewVoice({
+            body: optimized.bodyPlain,
+            conclusion: optimized.conclusion,
+            reviews: source.productReviews || [],
+            ignore: [source.productInfo?.name || '', source.title || '', getPrimaryKeywordFromSource(source) || ''],
+          });
+          console.log(describeReviewVoice(_reviewVoice));
+          (optimized as any).__reviewVoice = _reviewVoice;
+          if (_reviewVoice.patchable && optimized.quality) {
+            optimized.quality.warnings = [
+              ...(optimized.quality.warnings || []),
+              ..._reviewVoice.issues.map((issue) => `쇼핑 1인칭 화자 위반(${issue.code}): ${issue.message}`),
+            ];
+          }
+        }
+        const _reviewVoiceDirective = _reviewVoice ? buildReviewVoiceDirective(_reviewVoice) : '';
+        const _reviewVoicePatch = Boolean(_reviewVoiceDirective);
+
         // ✅ [v2.10.179 Phase 2.2] qualityGate decision='regenerate' 전체 자동 재시도 활성화
         //   v2.10.178: safety < 50 (환각·금지패턴)만 활성화
         //   v2.10.179: decision='regenerate' 전체 — finalScore < 60도 포함 (근본적 미달)
@@ -7921,16 +7951,19 @@ async function generateStructuredContentInternal(
         // [2026-09-06 R0] 결론도 patch 대상 — 게이트 지시가 결론을 짚어도 고칠 수 있게 함께 넘기고 갈라 받는다.
         const _patchConclusion = String(optimized.conclusion || '').trim();
         // [R3] 관통 지시가 있으면 게이트 지시 앞에 둔다 — 결론 복귀가 먼저, 점수 항목은 그 다음.
-        const _patchDirective = [_throughlineDirective, _quality90Assessment?.directive || _gateResult?.retryDirective || ''].filter(Boolean).join('\n');
-        const _throughlinePatchLabel = _throughlinePatch ? `흐름 관통 실패(${_throughline?.breakAt})` : '';
-        // [2026-09-06] Shopping enters this patch only for a throughline miss; every other reason still needs the full repair flag.
-        const _allowGatePatch = allowPaidPostGenerationRepair || (allowThroughlineRepair && _throughlinePatch);
+        const _patchDirective = [_throughlineDirective, _reviewVoiceDirective, _quality90Assessment?.directive || _gateResult?.retryDirective || ''].filter(Boolean).join('\n');
+        const _throughlinePatchLabel = [
+          _throughlinePatch ? `흐름 관통 실패(${_throughline?.breakAt})` : '',
+          _reviewVoicePatch ? `쇼핑 화자 위반(${_reviewVoice?.issues.map((i) => i.code).join(',')})` : '',
+        ].filter(Boolean).join(' · ');
+        // [2026-09-06] Shopping enters this patch only for a throughline miss or a voice violation; every other reason still needs the full repair flag.
+        const _allowGatePatch = allowPaidPostGenerationRepair || (allowThroughlineRepair && (_throughlinePatch || _reviewVoicePatch));
         if (
           _allowGatePatch
           && allowLegacyPostDraftLlm
           && _gateResult
           && optimized.bodyPlain
-          && (_gateResult.decision === 'patch' || _humanFloorMiss || _quality90HardMiss || _throughlinePatch)
+          && (_gateResult.decision === 'patch' || _humanFloorMiss || _quality90HardMiss || _throughlinePatch || _reviewVoicePatch)
           && (costPolicy.allowQualityGateSelfCritique || _quality90HardMiss)
         ) {
           try {
@@ -7951,6 +7984,17 @@ async function generateStructuredContentInternal(
               console.log(`[QualityGate] ✅ patch 적용 (${_patchResult.source}) — 본문 부분 재작성됨${_conclusionChanged ? ' · 결론도 수정' : ''}`);
               optimized.bodyPlain = _patchResult.body;
               if (_conclusionChanged) optimized.conclusion = _patchResult.conclusion;
+              if (_reviewVoice) {
+                // Re-audit only to record what the single patch left behind — there is no second patch.
+                const _reviewVoiceAfter = auditReviewVoice({
+                  body: optimized.bodyPlain,
+                  conclusion: optimized.conclusion,
+                  reviews: source.productReviews || [],
+                  ignore: [source.productInfo?.name || '', source.title || '', getPrimaryKeywordFromSource(source) || ''],
+                });
+                console.log(`[ReviewVoice] patch 후: ${describeReviewVoice(_reviewVoiceAfter).replace('[ReviewVoice] ', '')}`);
+                (optimized as any).__reviewVoiceAfterPatch = _reviewVoiceAfter;
+              }
               try {
                 const { evaluate: evaluateQualityAfterPatch } = require('./content/qualityEvaluator');
                 _gateResult = evaluateQualityAfterPatch({

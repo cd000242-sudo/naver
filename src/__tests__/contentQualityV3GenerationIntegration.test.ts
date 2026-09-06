@@ -131,7 +131,7 @@ describe('Content Quality V3 production wiring', () => {
     expect(generator).toMatch(/if \(\s*allowAutomaticProviderRetry\s*&& allowLegacyPostDraftLlm\s*&& isSelfCritiqueEnabled/);
     expect(generator).toMatch(/const useLlmRubric = allowAutomaticProviderRetry\s*&&\s*allowLegacyPostDraftLlm\s*&& isLlmRubricEnabled/);
     // [2026-09-06] patch 게이트 첫 피연산자는 _allowGatePatch(= 유료 수리 OR 쇼핑 관통 patch) — 레거시 정책 가드는 그대로.
-    expect(generator).toMatch(/const _allowGatePatch = allowPaidPostGenerationRepair \|\| \(allowThroughlineRepair && _throughlinePatch\);/);
+    expect(generator).toMatch(/const _allowGatePatch = allowPaidPostGenerationRepair \|\| \(allowThroughlineRepair && \(_throughlinePatch \|\| _reviewVoicePatch\)\);/);
     expect(generator).toMatch(/if \(\s*_allowGatePatch\s*&&\s*allowLegacyPostDraftLlm\s*&&\s*_gateResult[\s\S]{0,900}selfCritiqueAndRewrite/);
 
     expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_gateResult\s*&& \(_gateResult\.decision === 'regenerate' \|\| _quality90Assessment\?\.miss\)/);

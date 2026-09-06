@@ -201,7 +201,7 @@ describe('contentGenerator 배선 — 소비자는 기존 재생성/patch 뿐', 
   });
   it('patch 조건에 _throughlinePatch 가 들어가고 지시가 함께 넘어간다', () => {
     expect(src).toMatch(/_gateResult\.decision === 'patch' \|\| _humanFloorMiss \|\| _quality90HardMiss \|\| _throughlinePatch/);
-    expect(src).toMatch(/const _patchDirective = \[_throughlineDirective, _quality90Assessment\?\.directive \|\| _gateResult\?\.retryDirective \|\| ''\]\.filter\(Boolean\)\.join\('\\n'\)/);
+    expect(src).toMatch(/const _patchDirective = \[_throughlineDirective, _reviewVoiceDirective, _quality90Assessment\?\.directive \|\| _gateResult\?\.retryDirective \|\| ''\]\.filter\(Boolean\)\.join\('\\n'\)/);
     expect(src).toMatch(/selfCritiqueAndRewrite\(\s*optimized\.bodyPlain,\s*_patchPersona,[^;]*_patchDirective,\s*_patchConclusion \|\| undefined,/);
   });
   /**
@@ -217,7 +217,7 @@ describe('contentGenerator 배선 — 소비자는 기존 재생성/patch 뿐', 
     expect(block).not.toContain('allowPaidPostGenerationRepair');
   });
   it('쇼핑 patch 는 관통 실패 사유일 때만 — 전체 재생성 게이트는 그대로 allowPaidPostGenerationRepair', () => {
-    expect(src).toMatch(/const _allowGatePatch\s*=\s*allowPaidPostGenerationRepair\s*\|\|\s*\(allowThroughlineRepair\s*&&\s*_throughlinePatch\);/);
+    expect(src).toMatch(/const _allowGatePatch\s*=\s*allowPaidPostGenerationRepair\s*\|\|\s*\(allowThroughlineRepair\s*&&\s*\(_throughlinePatch \|\| _reviewVoicePatch\)\);/);
     expect(src).toMatch(/if \(\s*_allowGatePatch\s*&&\s*allowLegacyPostDraftLlm\s*&&\s*_gateResult\s*&&\s*optimized\.bodyPlain/);
     expect(src).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_gateResult\s*&& \(_gateResult\.decision === 'regenerate'/);
     expect(src).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_quality90Assessment\?\.miss\s*&& !_quality90FollowupRetryUsed/);
