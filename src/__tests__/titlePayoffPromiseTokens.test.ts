@@ -28,3 +28,14 @@ describe('제목 약속 토큰 — 동사 활용형과 조각은 약속이 아�
     expect(promises('국민연금 수령 나이 변경, 순서와 이유')).toEqual(expect.arrayContaining(['수령', '순서', '이유']));
   });
 });
+
+describe('[2026-09-06 실측 59편] 의문사·활용형 오탐 추가 제거', () => {
+  it('어디·어디서·갈리나·앞두고는 약속이 아니다', () => {
+    const p = promises('청년도약계좌 가입조건, 어디서 갈리나 앞두고 확인');
+    for (const bad of ['어디서', '갈리나', '앞두고', '어디']) expect(p).not.toContain(bad);
+    expect(p).toEqual(expect.arrayContaining(['가입조건', '확인']));
+  });
+  it('하나·대기·범위 같은 명사는 남는다', () => {
+    expect(promises('국민연금 수령 나이 변경, 하나 범위 대기')).toEqual(expect.arrayContaining(['하나', '범위', '대기']));
+  });
+});

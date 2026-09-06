@@ -225,6 +225,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/tableBlockNormalizer.ts',
   'src/content/throughlineJudge.ts',
   'src/content/titleAnswerCheck.ts',
+  'src/content/titleAnswerRetry.ts',
   'src/content/titleCandidateSelection.ts',
   'src/content/titleDiagnostics.ts',
   'src/content/titleLengthPolicy.ts',

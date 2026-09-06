@@ -31,6 +31,9 @@ const FUNCTION_WORDS = new Set([
   '정말', '진짜', '너무', '아주', '매우', '특히', '물론', '역시', '바로', '먼저', '다시', '함께',
   '가장', '더욱', '훨씬', '조금', '거의', '결국', '이제', '아직', '항상', '전혀',
   '때문', '통해', '대해', '위해', '관련', '지금', '오늘', '이번',
+  // [2026-09-06 measured, 59 posts] Question words are the *form* of the promise, not the noun asked
+  //   about — a body answers "어디로 가야" with a place name, never with the word "어디".
+  '어디', '어디서', '어디로', '어떻게', '언제', '언제부터', '무엇', '뭐', '누가', '누구', '왜', '얼마', '얼마나', '어느',
 ]);
 
 /** Particles that commonly end a two-letter fragment. */
@@ -72,6 +75,8 @@ const VERB_FORM_PATTERNS: readonly RegExp[] = [
   /.{2,}받$/u,                              // 공제받
   /^.{1,3}까$/u,                            // 직전까                 (조사 "까지" 가 잘린 조각)
   /(쓰기|하기|되기|보기|가기|읽기|먹기)$/u,  // 쓰기 · 하기            (대기 · 인기 · 시기 는 제외)
+  /.두고$/u,                                // 앞두고 · 놔두고
+  /(리나|되나|하나요|되나요|일까|을까|할까|될까|볼까|갈까)$/u, // 갈리나 · 할까     (하나 는 제외)
 ];
 
 const HANGUL_BASE = 0xac00;

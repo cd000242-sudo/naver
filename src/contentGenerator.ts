@@ -190,6 +190,8 @@ import { normalizeContentTableBlocks } from './content/tableBlockNormalizer.js';
 import { applyPostDraftFactCheck } from './content/postDraftFactCheck.js';
 import { applyIssueDisciplineAudit } from './content/issueDisciplineAudit.js';
 import { checkTitleAnswer, describeTitleAnswer } from './content/titleAnswerCheck.js';
+// [2026-09-06 사장님] 제목의 궁금증을 본문이 안 풀면 한 번 다시 쓴다 — 기준 1번의 재생성 연결.
+import { buildTitleAnswerRetryInstruction, shouldRetryForTitleAnswer } from './content/titleAnswerRetry.js';
 import { checkVerdictStructure, describeVerdictStructure } from './content/verdictStructure.js';
 import {
   buildThroughlineDirective,
@@ -6213,6 +6215,7 @@ async function generateStructuredContentInternal(
   let supplementalInstructionInitialized = false;
   let lastFailReason = ''; // ✅ [2026-03-23] 실패 원인 추적
   let _fidelityRetryUsed = false; // ✅ [Phase 7-B] Source Fidelity 자동 재시도 1회 가드
+  let _titleAnswerRetryUsed = false; // [2026-09-06] 제목 약속 미이행 재생성 1회 가드
   let _qualityGateRetryUsed = false; // ✅ [v2.10.178 Phase 2] qualityGate decision='regenerate' 재시도 1회 가드
   let _quality90FollowupRetryUsed = false; // 90점 미달 patch 후에도 부족하면 추가 전체 재생성 1회
   let _distinctnessJudgeUsed = false; // ✅ [Gap C 시맨틱] 섹션 변별 LLM 판정 — 생성당 1회만 호출(비용 가드)
@@ -7582,6 +7585,36 @@ async function generateStructuredContentInternal(
             continue; // for 루프 다음 attempt — 같은 attempt 카운트 보존
           }
         } catch (_e) { /* fidelity 모듈 실패 시 정상 흐름 */ }
+      }
+
+      /*
+       * [2026-09-06 사장님] "글 올리면 굳이 글을 신경 안 써도 되게" — 기준 1번(제목의 궁금증을 본문이 푸는가).
+       *   TitleAnswer 는 그동안 로그만 남겼다. 59편 실측: 본문 응답률 60% 미만 10편(17%), 0% 도 나갔다.
+       *   다른 기준은 게이트가 잡아 다시 쓰게 하는데 이것만 빠져 있었다. 바닥(0.6) 아래면 미상환 항목을
+       *   그대로 적어 한 번 다시 쓰게 한다. 새 차단은 없다 — 두 번째도 미달이면 그대로 나간다(경고 로그).
+       */
+      if (allowPaidPostGenerationRepair && !_titleAnswerRetryUsed && attempt < QUALITY_ATTEMPT_LIMIT) {
+        try {
+          const _taHeadings = Array.isArray((optimized as any)?.headings) ? (optimized as any).headings : [];
+          const _taTitle = String((optimized as any)?.selectedTitle || (optimized as any)?.title || '');
+          const _ta = checkTitleAnswer({
+            title: _taTitle,
+            primaryKeyword: getPrimaryKeywordFromSource(source as any),
+            introduction: String((optimized as any)?.introduction || ''),
+            body: [
+              ..._taHeadings.map((h: any) => `${h?.title || ''}\n${h?.content || ''}`),
+              (optimized as any)?.conclusion,
+            ].filter(Boolean).join('\n'),
+          });
+          if (shouldRetryForTitleAnswer(_ta)) {
+            _titleAnswerRetryUsed = true;
+            const _bodyForUnpaid = [String((optimized as any)?.introduction || ''), ..._taHeadings.map((h: any) => `${h?.title || ''} ${h?.content || ''}`), String((optimized as any)?.conclusion || '')].join(' ');
+            const _unpaid = _ta.promised.filter((word) => !_bodyForUnpaid.includes(word));
+            console.warn(`[TitleAnswer] 🔁 제목 약속 미이행 — 재생성 1회 (응답 ${Math.round(_ta.answerRate * 100)}%, 미상환: ${_unpaid.join(', ') || _ta.echoedOnly.join(', ')})`);
+            extraInstruction = `${buildTitleAnswerRetryInstruction(_taTitle, _ta, _unpaid.length > 0 ? _unpaid : _ta.echoedOnly)}\n${extraInstruction}`;
+            continue; // 같은 attempt 카운트 보존 — Fidelity 재시도와 같은 규칙
+          }
+        } catch (_e) { /* 검사 실패 시 정상 흐름 */ }
       }
 
       // Final near-threshold output still deserves the real quality/safety
