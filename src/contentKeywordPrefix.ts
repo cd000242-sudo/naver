@@ -40,6 +40,24 @@ export interface KeywordPrefixOptions {
 /** 옵션 미지정 시의 제목 길이 상한 (기존 동작 유지). */
 const DEFAULT_TITLE_MAX_LENGTH = 70;
 
+/**
+ * True when `text` contains a run of consecutive keyword tokens as one phrase
+ * (whitespace-insensitive) that is at least two tokens and at least half the keyword,
+ * e.g. "이불 세탁 방법" of "가을 이불 세탁 방법". One shared token is ordinary overlap, and a
+ * two-token run out of a ten-token product name is not a variant of that product name.
+ */
+function hasKeywordTokenRun(text: string, keyword: string): boolean {
+  const squash = (s: string) => String(s || '').toLowerCase().replace(/\s+/g, '');
+  const tokens = String(keyword || '').split(/\s+/).filter((t) => t.length >= 2);
+  const haystack = squash(text);
+  if (!haystack || tokens.length < 2) return false;
+  const minRun = Math.max(2, Math.ceil(tokens.length / 2));
+  for (let start = 0; start + minRun <= tokens.length; start += 1) {
+    if (haystack.includes(squash(tokens.slice(start, start + minRun).join(' ')))) return true;
+  }
+  return false;
+}
+
 /** 스캐너(mainKeywordPositionScanner)와 동일 기준: 정규화 후 제목 앞 3자 == 키워드 앞 3자. */
 function titleStartsWithKeywordFront3(title: string, keyword: string): boolean {
   const norm = (s: string) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
@@ -213,6 +231,25 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string, option
 
   const removed = cleanTitle.split(cleanKeyword).join(' ').replace(/\s+/g, ' ').trim();
   let rest = removed.replace(/^[\s\-–—:|·•]+/, '').trim();
+
+  /*
+   * [2026-09-06 9/6 batch] A near-variant of the keyword already in the title means
+   * prefixing duplicates the phrase, and the duplicate remover then chops the sentence.
+   *
+   *   "가을 이불 세탁 방법" + "여름 이불 세탁 방법, 소재별로 …"
+   *     → "가을 이불 세탁 방법 여름 이불 세탁 방법, …" → dedupe → "가을 이불 세탁 방법 여름, …" (shipped at 100)
+   *   "다리 공기압 마사지기" + "닥터웰 공기압 마사지기 DR-5180, …"
+   *     → "다리 공기압 마사지기 닥터웰 공기압 마사지기 …" (0 → the gate swapped the promise away)
+   *
+   * A run of consecutive keyword tokens (two or more, at least half the keyword) left after
+   * exact-phrase removal is that variant. Leave the title alone: a missed front-3 is a
+   * warning, a chopped title is not. Scattered tokens (ENDGAME hole), an exact phrase moved
+   * to the front, and long product names sharing only a couple of tokens are unaffected.
+   */
+  if (hasKeywordTokenRun(rest, cleanKeyword)) {
+    console.log(`[applyKeywordPrefix] 검색어 변형구가 이미 제목에 있음 → 접두사 생략: "${cleanKeyword}" in "${cleanTitle}"`);
+    return cleanTitle;
+  }
 
   const kwStem = stripTrailingKeywordSuffix(cleanKeyword);
   if (kwStem && rest) {

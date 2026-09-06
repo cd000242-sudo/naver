@@ -19,17 +19,19 @@ describe('쇼핑 제목 — 검증기의 상품명 접두', () => {
   });
 
   it('검증기: 쇼핑(affiliate)이면 제목·후보에 상품명이 안 붙고, 다른 리뷰형은 예전대로 붙는다', () => {
-    const make = (contentMode: string) => ({
-      content: { selectedTitle: title, titleAlternatives: [title], bodyPlain: '본문 '.repeat(200), headings: [] } as any,
+    const make = (contentMode: string, selectedTitle = title) => ({
+      content: { selectedTitle, titleAlternatives: [selectedTitle], bodyPlain: '본문 '.repeat(200), headings: [] } as any,
       source: { articleType: 'shopping_review', contentMode, productInfo: { name: productName }, title: productName } as any,
     });
     const shop = make('affiliate');
     validateStructuredContent(shop.content, shop.source);
     expect(shop.content.selectedTitle).toBe(title);
     expect(shop.content.titleAlternatives[0]).toBe(title);
-    const seo = make('seo');
+    // 다른 리뷰형: 상품명이 없는 제목에는 예전대로 붙는다 (상품명을 이미 품은 제목은 변형구 판정이 생략)
+    const bare = '유선인데 괜찮을까, 압박 위치가 관건';
+    const seo = make('seo', bare);
     validateStructuredContent(seo.content, seo.source);
-    expect(seo.content.selectedTitle).not.toBe(title);
+    expect(seo.content.selectedTitle).not.toBe(bare);
     expect(seo.content.selectedTitle.startsWith('닥터웰')).toBe(true);
   });
 });
