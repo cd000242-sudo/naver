@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-06T08:43:41.312Z",
+  "publishedAt": "2026-09-06T13:52:38.600Z",
   "generator": "issue-niche-board",
   "schedule": "매일 07·13·19시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
-    "niche": 1,
-    "preemption": 11,
+    "niche": 2,
+    "preemption": 15,
     "pending": 0
   },
   "freeSample": {
@@ -19,10 +19,10 @@
   },
   "rows": [
     {
-      "keyword": "리리아나 보넷",
-      "issue": "리리아 3.5",
-      "topic": "리리아 3.5",
-      "lane": "tech",
+      "keyword": "이범호 아들",
+      "issue": "이범호 감독 네일",
+      "topic": "이범호 감독 네일",
+      "lane": "realtime",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
@@ -31,33 +31,38 @@
       "preemptionKind": null,
       "serp": {
         "verdict": "WINNABLE",
-        "reason": "상위 5개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
         "exactTitleHits": 0,
         "partialTitleHits": 0,
-        "sampledTitles": 5,
+        "sampledTitles": 10,
         "topTitles": [
-          "대멀희 아기의 모자 브랜드 추천| 꼬숑, 뮤렌, 베네베네, 리리아나",
-          "4개월 작은 여자아기 가을옷 소비기록ෆ | 씨스프레이, 머미크럼브, h m베이비, 실리실라스, 더로하, 리리아나",
-          "[육아일기 4] 모자빨 심한 아기들 여기여기 모여라!!!!",
-          "[D+92~99]RSV접종, 비자발급, 월동준비",
-          "인천 스튜디오 베이비촬영 오락필름 9컷 사진 돌촬영 후기"
+          "“끝난 줄 알았는데” KIA 오선우를 이범호 감독이 다시 부르려는 진짜 이유는? 저는 아직 한 방이 남았다고 봅니다",
+          "불쌍한 이범호·김원형…광주일고에 당하고 4위 다툼",
+          "17살 아들이 여자아이돌 보고 엄마 앞에서 \"심장 쿵쾅\"…집에 연예인 3명인데 왜?",
+          "\"내가 왔으니 이제 잘할 것\"…광주는 지금 '아들' 쟁탈전, 박재현의 진짜 스승이 돌아왔다",
+          "[프로야구] 너무 잘나가는 기아의 \"이범호 감독\" 당신은 계획이 다 있었군요? 설마 우승까지도?",
+          "\"이건 진짜 파격\" KIA 나성범, 이범호가 2027년까지 주장 맡기는 이유는? 성적보다 더 큰 걸 봤다고 생각합니다",
+          "\"86구면 얘기가 다르다\" KIA 양현종 194승, 이범호도 결국 6회를 허락한 이유는? 대투수는 아직 끝나지 않았습니다",
+          "김도영 다이빙 태그에 이범호 감독이 웃으며 한 말…야구팬들 \"이게 진짜 슈퍼스타\"",
+          "서장훈 이웃집 백만장자 이범호 돈마루 대표 돼지농부 연매출 2000억원 나이 학력 가족 입사 1호 공동대표",
+          "김도영의 다이빙 태그, 알고 보니 '도루 금지' 덕분? 이범호 감독의 너스레에 야구팬들 난리"
         ],
-        "measuredAt": "2026-09-06T08:39:49.976Z"
+        "measuredAt": "2026-09-05T13:26:52.186Z"
       },
-      "documentCount": 5,
+      "documentCount": 1852,
       "documentCountMeasured": true,
-      "searchVolume": 370,
-      "searchVolumeLt10": true,
+      "searchVolume": 330,
+      "searchVolumeLt10": false,
       "hasLiveDemand": true,
       "demandStatus": "stable",
-      "demandRatio": 0.9671547526376122,
+      "demandRatio": 1.228070219970985,
       "issueStatus": "unknown",
-      "isHot": false,
+      "isHot": true,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 370",
-        "문서수 5",
+        "검색량 330",
+        "문서수 1,852",
         "데이터랩 실측 수요",
         "블로그탭 상위 10 정면글 0건 — 자리 있음"
       ],
@@ -68,82 +73,330 @@
         },
         {
           "code": "traffic",
-          "text": "검색광고 월 검색량 370 실측 — 트래픽 하한 통과"
+          "text": "검색광고 월 검색량 330 실측 — 트래픽 하한 통과"
         },
         {
           "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
         },
         {
           "code": "slot",
-          "text": "블로그탭 상위 5 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
         },
         {
           "code": "empty-field",
           "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "whySearch": null,
+      "whySearch": {
+        "text": "이범호 감독이 네일의 10승 달성을 축하했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "리리아나 보넷 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "근거 프레임 없음 — 일반형"
+          "text": "이범호 아들부터 아내까지, KIA 감독 이범호 가족",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "리리아나 보넷 매장에서 써보고 나오는 길에 다시 들어갔던 이유가 있더라고요",
+          "text": "이범호 감독 네일 10승 축하하던 날 아들 얘기가 유독 많더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
-      "subKeywords": null,
-      "keywordPool": null,
+      "subKeywords": [
+        {
+          "keyword": "이범호 감독",
+          "searchVolume": 8080,
+          "frame": "generic"
+        },
+        {
+          "keyword": "이범호 아내",
+          "searchVolume": 90,
+          "frame": "generic"
+        },
+        {
+          "keyword": "이범호 딸",
+          "searchVolume": 70,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이범호 감독",
+          "searchVolume": 8080,
+          "documentCount": 30381,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이범호 아내",
+          "searchVolume": 90,
+          "documentCount": 755,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이범호 딸",
+          "searchVolume": 70,
+          "documentCount": 873,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이범호 은퇴",
+          "searchVolume": 70,
+          "documentCount": 3697,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이범호 선수시절",
+          "searchVolume": 30,
+          "documentCount": 5569,
+          "source": "ai-verified"
+        }
+      ],
       "trend": {
         "series": [
-          12,
+          13,
           0,
-          10,
-          31,
-          19,
+          27,
+          15,
+          21,
           21,
           0,
-          100,
-          62,
-          25,
-          31,
-          31,
+          27,
+          0,
+          13,
+          19,
+          19,
+          13,
+          21,
           23,
-          19,
-          15,
+          29,
           0,
-          19,
-          12,
-          0,
-          31,
-          17,
-          17,
           27,
-          27,
-          15,
-          35,
+          42,
+          40,
+          13,
+          21,
+          100,
           25,
-          12,
-          40
-        ]
+          15,
+          19,
+          0,
+          15,
+          10
+        ],
+        "label": "📉 단발성",
+        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음"
       },
-      "kinCount": 0,
-      "kinTop": [],
+      "kinCount": 97,
+      "kinTop": [
+        {
+          "title": "기아타이거즈 이범호 은퇴식",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020208&docId=331137187&answerNo=1",
+          "views": 1424,
+          "answers": 1
+        }
+      ],
       "monetize": null,
-      "measuredAt": "2026-09-06T08:38:35.631Z",
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 0,
-        "verified": 0
-      }
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "이범호 계약기간",
+      "issue": "이범호 감독 네일",
+      "topic": "이범호 감독 네일",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 2건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 2,
+        "sampledTitles": 10,
+        "topTitles": [
+          "이제는 2위 노립니다! KIA 타이거즈, 왜 이렇게 잘하나?",
+          "\"이범호 나가라\"던 기아 팬들, 정말 야구 보고 하는말일까요? '이범호를 재계약 해야 하는 이유'",
+          "“벌금 대신 계약해” 이범호 김호령 계약 제안, 공식 협상과 다른 진짜 이유",
+          "15억 버리고 7억 택한 남자, 4개월 만에 모두가 인정했다…함평에 사람 몰린 진짜 이유",
+          "15억 던지고 광주행, 4개월 만에 드러난 진짜 이유 | 491경기 베테랑의 반격",
+          "15억 놓친 남자, 4개월 만에 삼자범퇴…KIA 팬들 함평까지 몰려간 이유",
+          "15억 놓고 7억 택한 남자, 함평에 팬들 몰린 진짜 이유",
+          "15억 던지고 광주행 택한 16년차…4개월 공백 깬 순간, 모두가 숨죽였다",
+          "김호령 FA 행선지 비교, KIA 잔류와 계약 규모 전망",
+          "15억 버리고 친정팀 간 투수의 배짱…4개월 만의 복귀전, 광주 팬들 앞에 무슨 일이 벌어질까"
+        ],
+        "measuredAt": "2026-09-05T13:26:44.079Z"
+      },
+      "documentCount": 2236,
+      "documentCountMeasured": true,
+      "searchVolume": 800,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.230769354207829,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 800",
+        "문서수 2,236",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 800 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이범호 감독이 네일의 10승 달성을 축하했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이범호 계약기간 KIA 감독 연봉과 재계약 시점",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이범호 계약기간 연봉 같이 찾다 보면 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이범호 감독 프로필",
+          "searchVolume": 1030,
+          "frame": "generic"
+        },
+        {
+          "keyword": "이범호 감독 연봉",
+          "searchVolume": 130,
+          "frame": "generic"
+        },
+        {
+          "keyword": "이범호 감독 계약",
+          "searchVolume": 50,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이범호 감독 프로필",
+          "searchVolume": 1030,
+          "documentCount": 707,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이범호 감독 연봉",
+          "searchVolume": 130,
+          "documentCount": 3606,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이범호 감독 계약",
+          "searchVolume": 50,
+          "documentCount": 6776,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          0,
+          9,
+          7,
+          16,
+          9,
+          30,
+          37,
+          34,
+          21,
+          17,
+          26,
+          59,
+          63,
+          99,
+          66,
+          100,
+          20,
+          34,
+          41,
+          16,
+          24,
+          31,
+          27,
+          44,
+          23,
+          56,
+          53,
+          100,
+          34
+        ],
+        "label": "❄️ 시즌성",
+        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보"
+      },
+      "kinCount": 64,
+      "kinTop": [
+        {
+          "title": "이범호기아에잔류할까요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020201&docId=235939315&answerNo=3",
+          "views": 2701,
+          "answers": 3
+        },
+        {
+          "title": "기아타이거즈 감독 이범호",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020208&docId=488561409&answerNo=1",
+          "views": 95,
+          "answers": 2
+        },
+        {
+          "title": "기아타이거즈 이범호감독 2군감독교체",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010105&docId=493966646&answerNo=2",
+          "views": 51,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2"
     },
     {
       "keyword": "오늘의 월드뉴스",
@@ -391,7 +644,7 @@
         }
       ],
       "whySearch": {
-        "text": "UAE로 이주·출장 온 교민이 한인회 연락처와 두바이·아부다비 한인 커뮤니티를 찾으려는 검색",
+        "text": "UAE 이주·거주 한국인이 두바이·아부다비 한인 커뮤니티와 연락처 정보를 찾으려 검색",
         "basis": "AI 추론 — 근거 부족"
       },
       "intentLabel": "분류 안 됨",
@@ -399,12 +652,12 @@
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "uae한인회 두바이 아부다비 지회 연락처 안내",
+          "text": "uae한인회 두바이 아부다비 지부 연락처와 가입 안내",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "uae한인회 연락처 찾다가 두바이 한인 카페부터 봤어야 했네요",
+          "text": "uae한인회 두바이랑 아부다비 어디부터 알아봐야 할지 헷갈렸어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -545,7 +798,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "이상순 갈비집 주차부터 웨이팅까지 안 겪어보면 모르는 게 있더라고요",
+          "text": "이상순 갈비집 소문 듣고 갔는데 계산할 때 영수증을 한참 들여다봤어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -600,398 +853,9 @@
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 7,
+        "proposed": 0,
         "verified": 0
       },
-      "carried": true
-    },
-    {
-      "keyword": "이범호 아들",
-      "issue": "이범호 감독 칭찬",
-      "topic": "이범호 감독 칭찬",
-      "lane": "realtime",
-      "issueType": "entertainment",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "“끝난 줄 알았는데” KIA 오선우를 이범호 감독이 다시 부르려는 진짜 이유는? 저는 아직 한 방이 남았다고 봅니다",
-          "불쌍한 이범호·김원형…광주일고에 당하고 4위 다툼",
-          "17살 아들이 여자아이돌 보고 엄마 앞에서 \"심장 쿵쾅\"…집에 연예인 3명인데 왜?",
-          "\"내가 왔으니 이제 잘할 것\"…광주는 지금 '아들' 쟁탈전, 박재현의 진짜 스승이 돌아왔다",
-          "[프로야구] 너무 잘나가는 기아의 \"이범호 감독\" 당신은 계획이 다 있었군요? 설마 우승까지도?",
-          "\"이건 진짜 파격\" KIA 나성범, 이범호가 2027년까지 주장 맡기는 이유는? 성적보다 더 큰 걸 봤다고 생각합니다",
-          "\"86구면 얘기가 다르다\" KIA 양현종 194승, 이범호도 결국 6회를 허락한 이유는? 대투수는 아직 끝나지 않았습니다",
-          "김도영 다이빙 태그에 이범호 감독이 웃으며 한 말…야구팬들 \"이게 진짜 슈퍼스타\"",
-          "서장훈 이웃집 백만장자 이범호 돈마루 대표 돼지농부 연매출 2000억원 나이 학력 가족 입사 1호 공동대표",
-          "김도영의 다이빙 태그, 알고 보니 '도루 금지' 덕분? 이범호 감독의 너스레에 야구팬들 난리"
-        ],
-        "measuredAt": "2026-09-05T13:26:52.186Z"
-      },
-      "documentCount": 1844,
-      "documentCountMeasured": true,
-      "searchVolume": 330,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.2362638077307382,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 330",
-        "문서수 1,844",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 330 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "KIA 감독 이범호의 아들이 야구를 하는지, 이름·나이 등 가족 정보를 궁금해 검색한다.",
-        "basis": "AI 추론 — 실측 확인된 확장어 3개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이범호 아들 나이 이름 야구선수인지 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이범호 감독 아들도 야구하냐길래 찾아봤더니 이렇더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "이범호 감독",
-          "searchVolume": 7800,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이범호 아내",
-          "searchVolume": 90,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이범호 딸",
-          "searchVolume": 70,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "이범호 아내",
-          "searchVolume": 90,
-          "source": "ai-verified",
-          "documentCount": 755
-        },
-        {
-          "keyword": "이범호 딸",
-          "searchVolume": 70,
-          "source": "ai-verified",
-          "documentCount": 872
-        },
-        {
-          "keyword": "이범호 자녀",
-          "searchVolume": 20,
-          "source": "ai-verified",
-          "documentCount": 247
-        }
-      ],
-      "trend": {
-        "series": [
-          13,
-          0,
-          27,
-          15,
-          21,
-          21,
-          0,
-          27,
-          0,
-          13,
-          19,
-          19,
-          13,
-          21,
-          23,
-          29,
-          0,
-          27,
-          42,
-          40,
-          13,
-          21,
-          100,
-          25,
-          15,
-          19,
-          0,
-          15,
-          10
-        ],
-        "label": "📉 단발성",
-        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-09-06T08:43:41.986Z"
-      },
-      "kinCount": 97,
-      "kinTop": [
-        {
-          "title": "기아타이거즈 이범호 은퇴식",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020208&docId=331137187&answerNo=1",
-          "views": 1422,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-05T13:26:07.848Z",
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 10,
-        "verified": 3
-      },
-      "carried": true
-    },
-    {
-      "keyword": "이범호 계약기간",
-      "issue": "이범호 감독 칭찬",
-      "topic": "이범호 감독 칭찬",
-      "lane": "realtime",
-      "issueType": "entertainment",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 2건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 2,
-        "sampledTitles": 10,
-        "topTitles": [
-          "이제는 2위 노립니다! KIA 타이거즈, 왜 이렇게 잘하나?",
-          "\"이범호 나가라\"던 기아 팬들, 정말 야구 보고 하는말일까요? '이범호를 재계약 해야 하는 이유'",
-          "“벌금 대신 계약해” 이범호 김호령 계약 제안, 공식 협상과 다른 진짜 이유",
-          "15억 버리고 7억 택한 남자, 4개월 만에 모두가 인정했다…함평에 사람 몰린 진짜 이유",
-          "15억 던지고 광주행, 4개월 만에 드러난 진짜 이유 | 491경기 베테랑의 반격",
-          "15억 놓친 남자, 4개월 만에 삼자범퇴…KIA 팬들 함평까지 몰려간 이유",
-          "15억 놓고 7억 택한 남자, 함평에 팬들 몰린 진짜 이유",
-          "15억 던지고 광주행 택한 16년차…4개월 공백 깬 순간, 모두가 숨죽였다",
-          "김호령 FA 행선지 비교, KIA 잔류와 계약 규모 전망",
-          "15억 버리고 친정팀 간 투수의 배짱…4개월 만의 복귀전, 광주 팬들 앞에 무슨 일이 벌어질까"
-        ],
-        "measuredAt": "2026-09-05T13:26:44.079Z"
-      },
-      "documentCount": 2232,
-      "documentCountMeasured": true,
-      "searchVolume": 780,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.2147663760293523,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 780",
-        "문서수 2,232",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 780 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "KIA 이범호 감독이 김도영 등 선수들을 잇달아 칭찬해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이범호 계약기간 몇 년, KIA 감독 연봉과 성적까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이범호 계약기간에 감독 연봉까지 이러네요 싶더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "이범호 프로필",
-          "searchVolume": 5240,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이범호 감독 연봉",
-          "searchVolume": 110,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이범호 감독 나이",
-          "searchVolume": 70,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "이범호 프로필",
-          "searchVolume": 5240,
-          "documentCount": 926,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이범호 감독 연봉",
-          "searchVolume": 110,
-          "documentCount": 3595,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이범호 감독 나이",
-          "searchVolume": 70,
-          "documentCount": 3580,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이범호 감독 계약기간",
-          "searchVolume": 50,
-          "documentCount": 1914,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이범호 재계약",
-          "searchVolume": 40,
-          "documentCount": 2300,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": {
-        "series": [
-          0,
-          9,
-          7,
-          16,
-          9,
-          30,
-          37,
-          34,
-          21,
-          17,
-          26,
-          59,
-          63,
-          99,
-          66,
-          100,
-          20,
-          34,
-          41,
-          16,
-          24,
-          31,
-          27,
-          44,
-          23,
-          56,
-          53,
-          100,
-          34
-        ],
-        "label": "❄️ 시즌성",
-        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-09-06T08:43:41.986Z"
-      },
-      "kinCount": 64,
-      "kinTop": [
-        {
-          "title": "이범호기아에잔류할까요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020201&docId=235939315&answerNo=3",
-          "views": 2699,
-          "answers": 3
-        },
-        {
-          "title": "기아타이거즈 감독 이범호",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020208&docId=488561409&answerNo=1",
-          "views": 93,
-          "answers": 2
-        },
-        {
-          "title": "기아타이거즈 이범호감독 2군감독교체",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010105&docId=493966646&answerNo=2",
-          "views": 48,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-05T13:26:07.848Z",
-      "kinMode": "date-views-v2",
       "carried": true
     },
     {
@@ -1268,7 +1132,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "밤하늘극장 ai로 영화 고르다 새벽까지 못 잤는데 이유가 있더라고요",
+          "text": "밤하늘극장 ai 자막을 켜뒀더니 다른 장면이 보이기 시작했어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -1322,52 +1186,32 @@
       "carried": true
     },
     {
-      "keyword": "중기부 장관 하마평",
-      "issue": "중기부 APEC AI",
-      "topic": "중기부 APEC AI",
-      "lane": "realtime",
+      "keyword": "리리아나 보넷",
+      "issue": "리리아 3.5",
+      "topic": "리리아 3.5",
+      "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "①'청와대' 장관교체 발표 명단(개각) 평가 및 전망",
-          "4성 장군부터 90년대생까지 … 이재명 정부 6개 부처 개각, 명단 총정리",
-          "6일 만에 수리된 사표, 법무부 장관이 마지막으로 남긴 의미심장한 말",
-          "하마평만 무성한 2차 개각…금융당국 수장도 '연쇄 이동설'",
-          "'건강 악화'라더니…퇴근길에 쏟아낸 정성호의 진짜 고백, 법무부 6일 공백의 의미",
-          "[예측] 청와대, 장관교체 개각 윤곽 예상",
-          "검찰개혁 마무리하고 물러난 정성호 ㅡ 개각 시계는 진짜 빨라졌나",
-          "엿새 만에 수리된 사표…정성호가 남기고 간 '수면 장애' 한마디에 여의도가 술렁인다",
-          "\"견딜 수 없는 한계가 와서\"…정성호 장관 6일 만에 사표 수리, 이재명의 칼자루는 어디로?",
-          "견딜 수 없는 한계가 왔다 정성호의 이별 선언…칼자루 쥔 이재명, 6일간의 침묵 깨진 이유"
-        ],
-        "measuredAt": "2026-09-04T11:51:36.884Z"
-      },
-      "documentCount": 184,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 5,
       "documentCountMeasured": true,
-      "searchVolume": 440,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.1300896948336807,
+      "searchVolume": 370,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "unknown",
-      "isHot": true,
+      "isHot": false,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 440",
-        "문서수 184",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "검색량 370",
+        "문서수 5",
+        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -1376,15 +1220,389 @@
         },
         {
           "code": "traffic",
-          "text": "검색광고 월 검색량 440 실측 — 트래픽 하한 통과"
+          "text": "검색광고 월 검색량 370 실측 — 트래픽 하한 통과"
         },
         {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "구글이 음악 생성 AI '리리아 3.5'를 공개했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "리리아나 보넷 어떤 정보가 있는지",
+          "frame": "generic",
+          "basis": "근거 프레임 없음 — 일반형"
+        },
+        "home": {
+          "text": "리리아나 보넷 실물 받고 매장에서 봤던 색이랑 왜 이렇게 다른가 했네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": {
+        "series": [
+          12,
+          0,
+          10,
+          31,
+          19,
+          21,
+          0,
+          100,
+          62,
+          25,
+          31,
+          31,
+          23,
+          19,
+          15,
+          0,
+          19,
+          12,
+          0,
+          31,
+          17,
+          17,
+          27,
+          27,
+          15,
+          35,
+          25,
+          12,
+          40
+        ]
+      },
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 0,
+        "verified": 0
+      }
+    },
+    {
+      "keyword": "리리아브로우",
+      "issue": "리리아 3.5",
+      "topic": "리리아 3.5",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 36,
+      "documentCountMeasured": true,
+      "searchVolume": 150,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 150",
+        "문서수 36",
+        "선점 후보 — 경쟁 문서 36건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "눈썹 화장·반영구 관련 브로우 제품으로, 실제 사용 후기와 지속력·색상·사용법을 확인하려는 검색",
+        "basis": "AI 추론 — 근거 부족"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "리리아브로우 후기 사용법 지속력 색상 3주 변화",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "리리아브로우 눈썹 그려봤는데 지속력에서 많이들 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          42,
+          50,
+          0,
+          58,
+          0,
+          0,
+          0,
+          42,
+          83,
+          50,
+          83,
+          0,
+          0,
+          0,
+          75,
+          0,
+          75,
+          0,
+          0,
+          100,
+          50,
+          42,
+          0,
+          42,
+          42,
+          42,
+          0
+        ]
+      },
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 6,
+        "verified": 0
+      }
+    },
+    {
+      "keyword": "리리앙원피스",
+      "issue": "리리아 3.5",
+      "topic": "리리아 3.5",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 4,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 4",
+        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "원피스 쇼핑몰 '리리앙'의 상품과 사이즈·후기를 확인해 구매하려는 검색",
+        "basis": "AI 추론 — 근거 부족"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "리리앙원피스 하객원피스 사이즈와 실착 후기 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "리리앙원피스 하객룩으로 주문했는데 사이즈에서 많이들 헷갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 0,
+        "verified": 0
+      }
+    },
+    {
+      "keyword": "김현정 MBK 김승원",
+      "issue": "김현정 MBK 김승원",
+      "topic": "김현정 MBK 김승원",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 14,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 14",
+        "선점 후보 — 경쟁 문서 14건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "김현정 의원이 MBK에 김승원 후보자 흔들기 중단을 요구했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김현정 MBK 김승원 흔들기 의혹과 MBK 사실무근 공방 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김현정 MBK 김승원 법무부장관 후보자 얘기 나온 뒤로 분위기가 달라졌더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김승원 의원 프로필",
+          "searchVolume": 14770,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김승원 법무부장관",
+          "searchVolume": 6130,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김승원 법무부장관 후보자",
+          "searchVolume": 150,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김승원 의원 프로필",
+          "searchVolume": 14770,
+          "documentCount": 501,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김승원 법무부장관",
+          "searchVolume": 6130,
+          "documentCount": 4470,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김승원 법무부장관 후보자",
+          "searchVolume": 150,
+          "documentCount": 3691,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "법무부장관 후보자 김승원",
+          "searchVolume": 40,
+          "documentCount": 3691,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "kia네비 다운방법",
+      "issue": "KIA 김범수",
+      "topic": "KIA 김범수",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 265,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 265",
+        "선점 후보 — 경쟁 문서 265건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
           "code": "empty-field",
@@ -1396,115 +1614,1097 @@
         }
       ],
       "whySearch": {
-        "text": "인선 국면에서 차기 중기부 장관 후보로 거론되는 인물이 누구인지 확인하려는 검색",
-        "basis": "AI 추론 — 실측 확인된 확장어 4개"
+        "text": "기아 순정 내비 지도를 SD카드·USB로 내려받아 업데이트하려는 차주들의 검색",
+        "basis": "AI 추론 — 근거 부족"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "kia네비 다운방법 SD카드 USB 지도 업데이트 순서",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "kia네비 다운방법 그대로 했는데 SD카드에서 자꾸 막히더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 22,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 0,
+        "verified": 0
+      }
+    },
+    {
+      "keyword": "리리아 무직전생",
+      "issue": "리리아 3.5",
+      "topic": "리리아 3.5",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 20,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 20",
+        "선점 후보 — 경쟁 문서 20건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "무직전생 하녀 캐릭터 리리아가 누구인지, 아이샤 엄마·파울과의 관계를 확인하려는 검색",
+        "basis": "AI 추론 — 실측 확인된 확장어 3개"
       },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "중기부 장관 하마평 유력 후보와 인선 시점까지 정리",
+          "text": "리리아 무직전생 아이샤 친엄마 파울과의 관계",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "중기부 장관 하마평 후보에 낯선 이름 하나 껴있네요",
+          "text": "리리아 무직전생 아이샤 엄마인 거 모르는 분 의외로 많더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "subKeywords": [
         {
-          "keyword": "중기부 장관 후보",
-          "searchVolume": 2670,
+          "keyword": "무직전생 아이샤",
+          "searchVolume": 130,
           "source": "ai-verified",
           "frame": "generic"
         },
         {
-          "keyword": "중기부 장관 후임",
-          "searchVolume": 40,
+          "keyword": "무직전생 리리아",
+          "searchVolume": 60,
           "source": "ai-verified",
           "frame": "generic"
         },
         {
-          "keyword": "중기부 장관 인사청문회",
-          "searchVolume": 40,
+          "keyword": "무직전생 파울",
+          "searchVolume": null,
           "source": "ai-verified",
           "frame": "generic"
         }
       ],
       "keywordPool": [
         {
-          "keyword": "중기부 장관 후보",
-          "searchVolume": 2670,
+          "keyword": "무직전생 아이샤",
+          "searchVolume": 130,
           "source": "ai-verified",
-          "documentCount": 7850
+          "documentCount": 409
         },
         {
-          "keyword": "중기부 장관 후임",
-          "searchVolume": 40,
+          "keyword": "무직전생 리리아",
+          "searchVolume": 60,
           "source": "ai-verified",
-          "documentCount": 787
+          "documentCount": 20
         },
         {
-          "keyword": "중기부 장관 인사청문회",
-          "searchVolume": 40,
-          "source": "ai-verified",
-          "documentCount": 2314
-        },
-        {
-          "keyword": "중소벤처기업부 장관",
+          "keyword": "무직전생 파울",
           "searchVolume": null,
           "source": "ai-verified",
-          "documentCount": 153717
+          "documentCount": 14
         }
       ],
-      "trend": {
-        "series": [
-          0,
-          10,
-          35,
-          31,
-          22,
-          43,
-          22,
-          10,
-          10,
-          20,
-          49,
-          55,
-          100,
-          49,
-          22,
-          35,
-          47,
-          49,
-          35,
-          27,
-          41,
-          0,
-          37,
-          33,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "measuredAt": "2026-09-06T08:43:41.986Z"
-      },
-      "kinCount": 0,
-      "kinTop": [],
+      "trend": null,
+      "kinCount": 6,
+      "kinTop": [
+        {
+          "title": "무직전생 빨간 구체",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=304&docId=436649391&answerNo=1",
+          "views": 420,
+          "answers": 1
+        },
+        {
+          "title": "무직전생 라노벨",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3070103&docId=248324381&answerNo=1",
+          "views": 386,
+          "answers": 1
+        },
+        {
+          "title": "무직전생 리리아와 시노하라 아키토에 대해",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3070103&docId=287777248&answerNo=0",
+          "views": 52,
+          "answers": null
+        }
+      ],
       "monetize": null,
-      "measuredAt": "2026-09-04T11:51:18.593Z",
+      "measuredAt": "2026-09-06T13:47:11.492Z",
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 8,
-        "verified": 4
+        "proposed": 6,
+        "verified": 3
+      }
+    },
+    {
+      "keyword": "반민정 신혼집",
+      "issue": "반민정 오늘 결혼",
+      "topic": "반민정 오늘 결혼",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "결혼 후 근황",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 28,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 28",
+        "선점 후보 — 경쟁 문서 28건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 결혼 후 근황"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "배우 반민정이 오늘 사업가와 결혼했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
-      "carried": true
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "반민정 신혼집 6일 결혼한 각시탈 배우 사업가 남편",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "반민정 신혼집 궁금해서 봤더니 각시탈 시절 나이가 더 눈에 들어오더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "반민정 프로필",
+          "searchVolume": 670,
+          "frame": "generic"
+        },
+        {
+          "keyword": "반민정 각시탈",
+          "searchVolume": 170,
+          "frame": "generic"
+        },
+        {
+          "keyword": "반민정 나이",
+          "searchVolume": 80,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "반민정 프로필",
+          "searchVolume": 670,
+          "documentCount": 242,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 각시탈",
+          "searchVolume": 170,
+          "documentCount": 512,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 나이",
+          "searchVolume": 80,
+          "documentCount": 540,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 배우",
+          "searchVolume": 20,
+          "documentCount": 1822,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "이하정 사교육",
+      "issue": "이하정",
+      "topic": "이하정",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "라이딩 일상 관심",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 37,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 37",
+        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 라이딩 일상 관심"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이하정이 두 아이 매니저로 바쁘게 산다고 밝혔다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이하정 사교육 라이딩에 두 아이 매니저로 사는 근황",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "잘나가던 아나운서 이하정이 요즘 애들 사교육 라이딩에 매달리는 근황이네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이하정 아나운서",
+          "searchVolume": 550,
+          "frame": "generic"
+        },
+        {
+          "keyword": "이하정 나이",
+          "searchVolume": 90,
+          "frame": "generic"
+        },
+        {
+          "keyword": "이하정 정준호",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이하정 아나운서",
+          "searchVolume": 550,
+          "documentCount": 2357,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이하정 나이",
+          "searchVolume": 90,
+          "documentCount": 1965,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이하정 정준호",
+          "searchVolume": 40,
+          "documentCount": 4670,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이하정 남편",
+          "searchVolume": 10,
+          "documentCount": 2043,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "반민정 차라리 죽여",
+      "issue": "반민정 오늘 결혼",
+      "topic": "반민정 오늘 결혼",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 59,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 59",
+        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "배우 반민정이 오늘 사업가와 결혼했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "반민정 차라리 죽여 각시탈 배우 6일 사업가와 결혼",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "반민정 차라리 죽여 찾다가 각시탈 그 배우 결혼 상대에 눈이 갔네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "반민정 프로필",
+          "searchVolume": 670,
+          "frame": "generic"
+        },
+        {
+          "keyword": "반민정 각시탈",
+          "searchVolume": 170,
+          "frame": "generic"
+        },
+        {
+          "keyword": "반민정 나이",
+          "searchVolume": 80,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "반민정 프로필",
+          "searchVolume": 670,
+          "documentCount": 242,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 각시탈",
+          "searchVolume": 170,
+          "documentCount": 512,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 나이",
+          "searchVolume": 80,
+          "documentCount": 540,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 배우",
+          "searchVolume": 20,
+          "documentCount": 1822,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 7,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "리리아 노래방",
+      "issue": "리리아 3.5",
+      "topic": "리리아 3.5",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 83,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 83",
+        "선점 후보 — 경쟁 문서 83건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "구글이 음악 생성 AI '리리아 3.5'를 공개했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "리리아 노래방 아닌 구글 리리아 3.5 제미나이 적용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "리리아 노래방 처음 갔다가 계산할 때 영수증을 몇 번이나 다시 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 9,
+      "kinTop": [
+        {
+          "title": "금영노래방&amp;태진노래방 노래번호질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80701&docId=250561528&answerNo=1",
+          "views": 14257,
+          "answers": 1
+        },
+        {
+          "title": "노래방노래추천(내공 70)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30213&docId=159042349&answerNo=1",
+          "views": 4404,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 0,
+        "verified": 0
+      }
+    },
+    {
+      "keyword": "리리아 3.5",
+      "issue": "리리아 3.5",
+      "topic": "리리아 3.5",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 119,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 119",
+        "선점 후보 — 경쟁 문서 119건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "구글이 음악 생성 AI '리리아 3.5'를 공개했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "리리아 3.5 제미나이·API 적용, 수노와 차이 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "리리아 3.5 업데이트하고 처음 켰을 때 화면 보고 한참을 그대로 있었네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 8,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 0,
+        "verified": 0
+      }
+    },
+    {
+      "keyword": "이하정 성형 전",
+      "issue": "이하정",
+      "topic": "이하정",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 146,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 146",
+        "선점 후보 — 경쟁 문서 146건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "인물 이하정의 과거 외모와 현재를 비교하려 성형 전 사진과 프로필을 찾는 의도",
+        "basis": "AI 추론 — 실측 확인된 확장어 2개"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이하정 성형 전후 과거 사진 프로필 나이 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이하정 성형 전 사진 보다 남편 나이까지 찾아보게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이하정 나이",
+          "searchVolume": 90,
+          "frame": "generic"
+        },
+        {
+          "keyword": "이하정 인스타",
+          "searchVolume": 70,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
+        {
+          "keyword": "이하정 남편",
+          "searchVolume": 10,
+          "source": "ai-verified",
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이하정 인스타",
+          "searchVolume": 70,
+          "source": "ai-verified",
+          "documentCount": 1362
+        },
+        {
+          "keyword": "이하정 남편",
+          "searchVolume": 10,
+          "source": "ai-verified",
+          "documentCount": 2043
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 6,
+        "verified": 2
+      }
+    },
+    {
+      "keyword": "반민정 결혼식 사진",
+      "issue": "반민정 오늘 결혼",
+      "topic": "반민정 오늘 결혼",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "현장 사진 관심",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 159,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 159",
+        "선점 후보 — 경쟁 문서 159건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 현장 사진 관심"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "배우 반민정이 오늘 사업가와 결혼했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "반민정 결혼식 사진 6일 각시탈 배우 사업가 남편 결혼",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "반민정 결혼식 사진 보다가 각시탈 시절 프로필까지 다시 찾아보게 되네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "반민정 프로필",
+          "searchVolume": 670,
+          "frame": "generic"
+        },
+        {
+          "keyword": "반민정 각시탈",
+          "searchVolume": 170,
+          "frame": "generic"
+        },
+        {
+          "keyword": "반민정 나이",
+          "searchVolume": 80,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "반민정 프로필",
+          "searchVolume": 670,
+          "documentCount": 242,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 각시탈",
+          "searchVolume": 170,
+          "documentCount": 512,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 나이",
+          "searchVolume": 80,
+          "documentCount": 540,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 배우",
+          "searchVolume": 20,
+          "documentCount": 1822,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "반민정 근황",
+      "issue": "반민정 오늘 결혼",
+      "topic": "반민정 오늘 결혼",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 297,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 297",
+        "선점 후보 — 경쟁 문서 297건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "배우 반민정이 오늘 사업가와 결혼했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "반민정 근황 오늘 사업가와 결혼 늦게 찾아온 인연",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "반민정 근황 각시탈 배우가 늦게 찾아온 인연 만나 오늘 결혼한다네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "반민정 프로필",
+          "searchVolume": 670,
+          "frame": "generic"
+        },
+        {
+          "keyword": "반민정 각시탈",
+          "searchVolume": 170,
+          "frame": "generic"
+        },
+        {
+          "keyword": "반민정 나이",
+          "searchVolume": 80,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "반민정 프로필",
+          "searchVolume": 670,
+          "documentCount": 242,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 각시탈",
+          "searchVolume": 170,
+          "documentCount": 512,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 나이",
+          "searchVolume": 80,
+          "documentCount": 540,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "반민정 배우",
+          "searchVolume": 20,
+          "documentCount": 1822,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "이하정 종교",
+      "issue": "이하정",
+      "topic": "이하정",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 249,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 249",
+        "선점 후보 — 경쟁 문서 249건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이하정이 두 아이 매니저로 바쁘게 산다고 밝혔다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이하정 종교 정준호 아내 전 아나운서 시절 근황",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이하정 종교 궁금해 찾다가 정준호랑 어떻게 만났나 보고 있네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이하정 아나운서",
+          "searchVolume": 550,
+          "frame": "generic"
+        },
+        {
+          "keyword": "이하정 나이",
+          "searchVolume": 90,
+          "frame": "generic"
+        },
+        {
+          "keyword": "이하정 정준호",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이하정 아나운서",
+          "searchVolume": 550,
+          "documentCount": 2357,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이하정 나이",
+          "searchVolume": 90,
+          "documentCount": 1965,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이하정 정준호",
+          "searchVolume": 40,
+          "documentCount": 4670,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이하정 남편",
+          "searchVolume": 10,
+          "documentCount": 2043,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 8,
+      "kinTop": [
+        {
+          "title": "광안리 이하정 꽃게정식 근처 안드레교회는 뭐하는곳?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60901&docId=222162594&answerNo=4",
+          "views": 382,
+          "answers": 4
+        },
+        {
+          "title": "원불교이하정교무본명",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60905&docId=318643633&answerNo=1",
+          "views": 145,
+          "answers": 1
+        },
+        {
+          "title": "원불교이하정교무인사이동사황",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60905&docId=317813473&answerNo=0",
+          "views": 68,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-06T13:47:11.492Z",
+      "kinMode": "date-views-v2"
     },
     {
       "keyword": "오디세이 관객평",
@@ -1645,204 +2845,8 @@
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-06T08:38:35.631Z",
-      "kinMode": "date-views-v2"
-    },
-    {
-      "keyword": "리리앙원피스",
-      "issue": "리리아 3.5",
-      "topic": "리리아 3.5",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 4,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 4",
-        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "여성의류 브랜드 '리리앙'의 원피스를 구매·비교하려는 검색이다.",
-        "basis": "AI 추론 — 뉴스 헤드라인 6건"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리리앙원피스 사이즈별 실착 후기와 코디 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리리앙원피스 요즘 계속 입고 다녔더니 주변 반응이 좀 달라지더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-06T08:38:35.631Z",
       "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 0,
-        "verified": 0
-      }
-    },
-    {
-      "keyword": "리리아 무직전생",
-      "issue": "리리아 3.5",
-      "topic": "리리아 3.5",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 20,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 20",
-        "선점 후보 — 경쟁 문서 20건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "무직전생 하녀 리리아의 성우·나이와 딸 아이샤와의 관계를 확인하려는 검색",
-        "basis": "AI 추론 — 실측 확인된 확장어 3개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리리아 무직전생 성우 나이 아이샤 관계까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리리아 무직전생 보다 아이샤랑 무슨 사이인지 많이들 헷갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "무직전생 등장인물",
-          "searchVolume": 270,
-          "source": "ai-verified",
-          "frame": "generic"
-        },
-        {
-          "keyword": "무직전생 아이샤",
-          "searchVolume": 130,
-          "source": "ai-verified",
-          "frame": "generic"
-        },
-        {
-          "keyword": "무직전생 리리아",
-          "searchVolume": 60,
-          "source": "ai-verified",
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "무직전생 등장인물",
-          "searchVolume": 270,
-          "source": "ai-verified",
-          "documentCount": 781
-        },
-        {
-          "keyword": "무직전생 아이샤",
-          "searchVolume": 130,
-          "source": "ai-verified",
-          "documentCount": 409
-        },
-        {
-          "keyword": "무직전생 리리아",
-          "searchVolume": 60,
-          "source": "ai-verified",
-          "documentCount": 20
-        }
-      ],
-      "trend": null,
-      "kinCount": 6,
-      "kinTop": [
-        {
-          "title": "무직전생 빨간 구체",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=304&docId=436649391&answerNo=1",
-          "views": 418,
-          "answers": 1
-        },
-        {
-          "title": "무직전생 라노벨",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3070103&docId=248324381&answerNo=1",
-          "views": 383,
-          "answers": 1
-        },
-        {
-          "title": "무직전생 리리아와 시노하라 아키토에 대해",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3070103&docId=287777248&answerNo=0",
-          "views": 50,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-06T08:38:35.631Z",
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 8,
-        "verified": 3
-      }
+      "carried": true
     },
     {
       "keyword": "주문하신 낙태펀치",
@@ -1895,9 +2899,9 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "주문하신 낙태펀치 상자를 열어보니 이게 맞나 싶어서 영수증을 다시 봤네요",
+          "text": "주문하신 낙태펀치가 진짜 음식 나왔쏭처럼 왔길래 영수증을 다시 봤네요",
           "frame": "ai",
-          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
+          "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "subKeywords": [
@@ -1925,7 +2929,9 @@
         "provider": "claude",
         "proposed": 0,
         "verified": 0
-      }
+      },
+      "carried": true,
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "서울런 5주년 성과공유회",
@@ -2039,200 +3045,9 @@
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-06T08:38:35.631Z",
-      "kinMode": "date-views-v2"
-    },
-    {
-      "keyword": "반민정 차라리 죽여",
-      "issue": "반민정",
-      "topic": "반민정",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 59,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 59",
-        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "각시탈 배우 반민정이 오늘 사업가와 결혼해 남편·결혼 정보를 찾는 사람들",
-        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 4개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "반민정 차라리 죽여 그 배우 오늘 46세에 결혼",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "반민정 차라리 죽여로 각시탈에서 봤던 배우 나이가 궁금해서 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "반민정 각시탈",
-          "searchVolume": 170,
-          "frame": "generic"
-        },
-        {
-          "keyword": "각시탈 반민정",
-          "searchVolume": 100,
-          "frame": "generic"
-        },
-        {
-          "keyword": "반민정 나이",
-          "searchVolume": 80,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "반민정 각시탈",
-          "searchVolume": 170,
-          "documentCount": 446,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "각시탈 반민정",
-          "searchVolume": 100,
-          "documentCount": 454,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "반민정 나이",
-          "searchVolume": 80,
-          "documentCount": 487,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "반민정 배우",
-          "searchVolume": 20,
-          "documentCount": 1729,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 7,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-06T08:38:35.631Z",
-      "kinMode": "date-views-v2"
-    },
-    {
-      "keyword": "리리아 노래방",
-      "issue": "리리아 3.5",
-      "topic": "리리아 3.5",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 83,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 83",
-        "선점 후보 — 경쟁 문서 83건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "구글이 음악 생성 AI 리리아 3.5를 공개해 노래 제작 활용을 찾는 검색",
-        "basis": "AI 추론 — 뉴스 헤드라인 6건"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리리아 노래방 구글 리리아 3.5 제미나이 탑재 후 달라진 점",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리리아 노래방 처음 갔다가 예약 방식 몰라서 헤맸네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 9,
-      "kinTop": [
-        {
-          "title": "금영노래방&amp;태진노래방 노래번호질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80701&docId=250561528&answerNo=1",
-          "views": 14256,
-          "answers": 1
-        },
-        {
-          "title": "노래방노래추천(내공 70)",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30213&docId=159042349&answerNo=1",
-          "views": 4401,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-06T08:38:35.631Z",
       "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 0,
-        "verified": 0
-      }
+      "carried": true,
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "주문하신 자오짤",
@@ -2285,9 +3100,9 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "주문하신 자오짤 나왔쏭 알림 뜨자마자 배달앱부터 켰는데 화면 보고 잠깐 멈칫했어요",
+          "text": "주문하신 자오짤 받고 영수증을 한참 들여다봤는데 이게 맞나 싶더라고요",
           "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
+          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
         }
       },
       "subKeywords": [
@@ -2315,70 +3130,9 @@
         "provider": "claude",
         "proposed": 0,
         "verified": 0
-      }
-    },
-    {
-      "keyword": "리리아 3.5",
-      "issue": "리리아 3.5",
-      "topic": "리리아 3.5",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 117,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 117",
-        "선점 후보 — 경쟁 문서 117건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리리아 3.5 제미나이 적용과 수노 음질 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리리아 3.5 처음 켜보고 화면을 몇 번이나 다시 봤네요 이게 이렇게 흘러갈 줄은",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
       },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 8,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-06T08:38:35.631Z",
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 0,
-        "verified": 0
-      }
+      "carried": true,
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "김동아 가수 나이",
@@ -2501,117 +3255,9 @@
       ],
       "monetize": null,
       "measuredAt": "2026-09-06T08:38:35.631Z",
-      "kinMode": "date-views-v2"
-    },
-    {
-      "keyword": "반민정 근황",
-      "issue": "반민정",
-      "topic": "반민정",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 278,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 278",
-        "선점 후보 — 경쟁 문서 278건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "각시탈 배우 반민정이 6일 결혼 소식이 알려져 남편·나이 등 근황을 찾는다",
-        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 4개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "반민정 근황 46세 결혼 신랑은 1살 연상 사업가",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "반민정 근황 각시탈 그 배우가 46세에 결혼했다길래 신랑 봤더니",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "반민정 프로필",
-          "searchVolume": 670,
-          "frame": "generic"
-        },
-        {
-          "keyword": "반민정 각시탈",
-          "searchVolume": 170,
-          "frame": "generic"
-        },
-        {
-          "keyword": "반민정 나이",
-          "searchVolume": 80,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "반민정 프로필",
-          "searchVolume": 670,
-          "documentCount": 228,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "반민정 각시탈",
-          "searchVolume": 170,
-          "documentCount": 446,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "반민정 나이",
-          "searchVolume": 80,
-          "documentCount": 487,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "반민정 배우",
-          "searchVolume": 20,
-          "documentCount": 1729,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-06T08:38:35.631Z",
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true,
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "안세영 결승과 우익",
@@ -2732,7 +3378,7 @@
         "verified": 5
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "gpt-6 spud",
@@ -2785,7 +3431,7 @@
           "basis": "근거 프레임 없음 — 일반형"
         },
         "home": {
-          "text": "gpt-6 spud 처음 켰다가 왜 다들 이러나 싶었어요",
+          "text": "gpt-6 spud 처음 써보고 나서 검색창을 닫아버렸네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -2804,7 +3450,7 @@
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "gpt-6 polymarket",
@@ -2844,7 +3490,7 @@
         }
       ],
       "whySearch": {
-        "text": "gpt-6 출시 시점을 두고 폴리마켓에 걸린 배당과 예측 확률을 확인하려는 검색",
+        "text": "폴리마켓의 GPT-6 출시 시점 베팅 배당률을 확인하려는 사람들",
         "basis": "AI 추론 — 근거 부족"
       },
       "intentLabel": "분류 안 됨",
@@ -2852,12 +3498,12 @@
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "gpt-6 polymarket 출시일 배당률 확인하고 참여하는 법",
+          "text": "gpt-6 polymarket 출시일 배당률 실시간 확인법",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "폴리마켓 gpt-6 출시 언제로 걸렸나 보다가 다시 확인한 게 있어요",
+          "text": "gpt-6 polymarket 배당이 요즘 이쪽으로 기울더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -2872,11 +3518,11 @@
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 1,
+        "proposed": 3,
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "마포구청장배 복싱대회",
@@ -3028,7 +3674,7 @@
         }
       ],
       "whySearch": {
-        "text": "마포구가 여는 체스대회로, 참가 신청과 일정·접수 마감을 확인하려는 사람들이 검색한다.",
+        "text": "마포구 주최 체스대회의 참가 신청·일정·준비물을 확인하려는 참가자와 학부모의 검색",
         "basis": "AI 추론 — 근거 부족"
       },
       "intentLabel": "분류 안 됨",
@@ -3036,12 +3682,12 @@
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "마포구청장배체스대회 신청 방법과 일정 접수 마감일 정리",
+          "text": "마포구청장배체스대회 참가신청과 대회일정 확인하기",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "마포구청장배체스대회 접수하려다 마감일에서 의외로 많이들 걸리더라고요",
+          "text": "마포구청장배체스대회 처음 나가면 준비물에서 많이들 헤매더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -3056,11 +3702,11 @@
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 3,
+        "proposed": 0,
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "여학생 스토킹 집유",
@@ -3197,7 +3843,7 @@
       "monetize": null,
       "measuredAt": "2026-09-05T08:13:55.931Z",
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z",
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z",
       "kinMode": "date-views-v2"
     },
     {
@@ -3251,7 +3897,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "MAI 트랜스크라이브 성능 기대하고 써봤다가 여기서 갈리더라고요",
+          "text": "MAI 트랜스크라이브 성능 실제 회의 녹음 돌려보니 생각보다 다르더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -3270,7 +3916,7 @@
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "MAI-트랜스크라이브-2",
@@ -3319,7 +3965,7 @@
           "basis": "근거 프레임 없음 — 일반형"
         },
         "home": {
-          "text": "MAI-트랜스크라이브-2 회의록 받아쓰기 맡겨봤더니 다시 듣게 되네요",
+          "text": "MAI-트랜스크라이브-2 회의 녹음 돌려봤더니 자막이 이렇게 나오더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -3338,7 +3984,7 @@
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "MAI 트랜스크라이브",
@@ -3387,7 +4033,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "MAI 트랜스크라이브 무료로 녹음 풀다가 여기서 다들 막히더라고요",
+          "text": "MAI 트랜스크라이브로 회의 녹음 통째로 돌렸더니 생각보다 이러네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -3402,11 +4048,11 @@
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 6,
+        "proposed": 0,
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "HPLS 전기로",
@@ -3459,7 +4105,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "HPLS 전기로 진짜 궁금해서 현대제철 전기로 직접 보러 갔더니 이렇더라고요",
+          "text": "HPLS 전기로 현대제철 전기로 현장 가봤더니 생각보다 조용하더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -3496,7 +4142,7 @@
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "서강준 실물 미술품",
@@ -3741,7 +4387,7 @@
       "measuredAt": "2026-09-04T23:59:05.005Z",
       "kinMode": "date-views-v2",
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "김연섭 프로 동생",
@@ -3794,7 +4440,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "김연섭 프로 동생이 프로필 보다가 어라 싶어서 다시 봤네요",
+          "text": "김연섭 프로 동생 프로필 찾아보다 생각보다 다른 사람 얘기가 나오더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -3826,7 +4472,7 @@
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "유가람 체스 사이트",
@@ -3883,7 +4529,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "유가람 체스 사이트 들어가려다 유가람 배구 선수 이야기에 붙잡혔네요",
+          "text": "유가람 체스 사이트 들어가봤더니 프로필에 배구가 있더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -3926,7 +4572,7 @@
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "유가람 수희",
@@ -3983,7 +4629,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "유가람 수희 배구 프로필 살펴보다가 이 부분에서 생각보다 오래 멈췄네요",
+          "text": "유가람 수희 프로필 찾아보다 배구 이력 이 대목에서 눈이 멈췄더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -4026,7 +4672,7 @@
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "김연섭 데몬",
@@ -4079,7 +4725,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "김연섭 데몬 처음엔 그냥 넘겼는데 자꾸 다시 들여다보게 되더라고요",
+          "text": "김연섭 데몬 실물로 보고 나서 생각이 좀 바뀌었어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -4098,7 +4744,7 @@
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "대원제약 김연섭",
@@ -4138,20 +4784,20 @@
         }
       ],
       "whySearch": {
-        "text": "대원제약 임원 김연섭이 누구인지·직책과 이력을 확인하려는 검색",
-        "basis": "AI 추론 — 실측 확인된 확장어 4개"
+        "text": "대원제약 경영진(임원·대표) 인물인 김연섭의 직책·나이·학력 등 프로필을 확인하려는 검색으로 보인다.",
+        "basis": "AI 추론 — 근거 부족"
       },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "대원제약 김연섭 주가 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "파생 키워드 실측 '대원제약 주가' (검색량 8500) — 1페이지 0개 제목에 없는 프레임"
+          "text": "대원제약 김연섭 대표 나이 학력 이력까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "대원제약 김연섭 대표 얘기 나오길래 주가 흐름까지 다시 들여다봤네요",
+          "text": "대원제약 김연섭 대표 이력 찾다가 의외로 헷갈리는 부분",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -4210,11 +4856,11 @@
       "kinMode": "date-views-v2",
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 0,
+        "proposed": 7,
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "유가람 농구",
@@ -4271,7 +4917,7 @@
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "유가람 농구 얘기만 하다가 유가람 배구 하는 영상 봤는데 생각보다 다르더라고요",
+          "text": "유가람 농구 하다가 배구로 갈아탄 사연이 궁금해서 프로필 다시 봤어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -4314,7 +4960,7 @@
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "유가람 SOOP",
@@ -4416,7 +5062,7 @@
       "measuredAt": "2026-09-04T14:17:18.201Z",
       "kinMode": "date-views-v2",
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "유가람 체스",
@@ -4473,7 +5119,7 @@
           "basis": "파생 키워드 실측 '유가람 프로필' (검색량 60) — 1페이지 0개 제목에 없는 프레임"
         },
         "home": {
-          "text": "유가람 체스 얘기 나온 김에 배구 하던 시절 프로필까지 다시 봤네요",
+          "text": "유가람 체스 실력이 배구 하던 시절이랑 이렇게 이어질 줄은 몰랐네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -4523,7 +5169,7 @@
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     },
     {
       "keyword": "김연섭 상금",
@@ -4576,7 +5222,7 @@
           "basis": "파생 키워드 실측 '김연섭 프로' (검색량 30) — 1페이지 0개 제목에 없는 프레임"
         },
         "home": {
-          "text": "김연섭 상금 얼마길래 프로필 검색이 이렇게 늘었나 싶더라고요",
+          "text": "김연섭 상금 얼마나 쌓였나 세다가 김연섭 프로필까지 다시 들여다봤네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -4614,560 +5260,1894 @@
         "verified": 0
       },
       "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
-    },
-    {
-      "keyword": "농심 신상열 결혼",
-      "issue": "농심 신상열 결혼",
-      "topic": "농심 신상열 결혼",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 20,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 20",
-        "선점 후보 — 경쟁 문서 20건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "농심 오너가 3세 신상열 상무의 결혼 소식에 결혼 상대·나이·프로필을 확인하려는 검색",
-        "basis": "AI 추론 — 실측 확인된 확장어 3개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "농심 신상열 결혼 상대와 나이 신동원 아들 프로필",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "농심 신상열 결혼 상대 찾다가 프로필에서 답이 딱 나오네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "농심 신상열 프로필",
-          "searchVolume": 10,
-          "source": "ai-verified",
-          "frame": "generic"
-        },
-        {
-          "keyword": "농심 3세 신상열",
-          "searchVolume": 10,
-          "source": "ai-verified",
-          "frame": "generic"
-        },
-        {
-          "keyword": "신상열 부인",
-          "searchVolume": 10,
-          "source": "ai-verified",
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "농심 신상열 프로필",
-          "searchVolume": 10,
-          "source": "ai-verified",
-          "documentCount": 19
-        },
-        {
-          "keyword": "신상열 부인",
-          "searchVolume": 10,
-          "source": "ai-verified",
-          "documentCount": 48
-        },
-        {
-          "keyword": "농심 3세 신상열",
-          "searchVolume": 10,
-          "source": "ai-verified",
-          "documentCount": 299
-        }
-      ],
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          100,
-          74
-        ],
-        "label": "🚀 떡상",
-        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-09-06T08:43:41.986Z"
-      },
-      "kinCount": 0,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-04T11:51:18.593Z",
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 8,
-        "verified": 3
-      },
-      "carried": true
-    },
-    {
-      "keyword": "초대 중수청장 압축",
-      "issue": "초대 중수청장 압축",
-      "topic": "초대 중수청장 압축",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 67,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 67",
-        "선점 후보 — 경쟁 문서 67건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "초대 중수청장 후보가 김관정·김지용·문홍주·이윤제 4명으로 압축됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "초대 중수청장 압축 후보군 3인 비교와 유력 인선 시점",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "초대 중수청장 압축 얘기가 나오길래 후보 명단을 하나씩 다시 들여다보게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "초대 중수청장 후보",
-          "searchVolume": 200,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "초대 중수청장 후보",
-          "searchVolume": 200,
-          "documentCount": 438,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-04T11:51:18.593Z",
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 0,
-        "verified": 0
-      },
-      "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
-    },
-    {
-      "keyword": "박세완 비키니 자태",
-      "issue": "박세완 비키니 자태",
-      "topic": "박세완 비키니 자태",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 70,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 70",
-        "선점 후보 — 경쟁 문서 70건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "박세완이 과감한 비키니 자태를 선보였다.",
-        "basis": "뉴스 헤드라인 4건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "박세완 비키니 자태 수영장 화보와 북한 아이유 별명 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "박세완 비키니 자태 보다가 드라마 필모까지 뒤졌네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "박세완 프로필",
-          "searchVolume": 790,
-          "frame": "generic"
-        },
-        {
-          "keyword": "박세완 나이",
-          "searchVolume": 120,
-          "frame": "generic"
-        },
-        {
-          "keyword": "박세완 드라마",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "박세완 프로필",
-          "searchVolume": 790,
-          "documentCount": 464,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "박세완 나이",
-          "searchVolume": 120,
-          "documentCount": 1597,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "박세완 드라마",
-          "searchVolume": 10,
-          "documentCount": 7083,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-04T11:51:18.593Z",
-      "kinMode": "date-views-v2",
-      "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
-    },
-    {
-      "keyword": "박세완 미드",
-      "issue": "박세완 비키니 자태",
-      "topic": "박세완 비키니 자태",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 84,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 84",
-        "선점 후보 — 경쟁 문서 84건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "박세완이 과감한 비키니 자태를 선보였다.",
-        "basis": "뉴스 헤드라인 4건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "박세완 미드 북한 아이유 비키니 화보 나이 프로필",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "박세완 미드 나이 프로필 찾다가 드라마까지 다 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "박세완 프로필",
-          "searchVolume": 790,
-          "frame": "generic"
-        },
-        {
-          "keyword": "박세완 나이",
-          "searchVolume": 120,
-          "frame": "generic"
-        },
-        {
-          "keyword": "박세완 드라마",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "박세완 프로필",
-          "searchVolume": 790,
-          "documentCount": 464,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "박세완 나이",
-          "searchVolume": 120,
-          "documentCount": 1597,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "박세완 드라마",
-          "searchVolume": 10,
-          "documentCount": 7083,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-04T11:51:18.593Z",
-      "kinMode": "date-views-v2",
-      "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
-    },
-    {
-      "keyword": "GS칼텍스 SOOP 트레이드",
-      "issue": "GS칼텍스 SOOP 트레이드",
-      "topic": "GS칼텍스 SOOP 트레이드",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 112,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 112",
-        "선점 후보 — 경쟁 문서 112건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "GS칼텍스와 SOOP 트레이드로 오간 선수가 누군지 확인하려는 배구 팬",
-        "basis": "AI 추론 — 근거 부족"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "GS칼텍스 SOOP 트레이드 명단 정리, 어느 선수 오갔나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "GS칼텍스 SOOP 트레이드 SOOP 배구단 이렇게 됐네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "SOOP 배구단",
-          "searchVolume": 12420,
-          "source": "ai-verified",
-          "frame": "generic"
-        },
-        {
-          "keyword": "GS칼텍스 배구",
-          "searchVolume": 210,
-          "source": "ai-verified",
-          "frame": "generic"
-        },
-        {
-          "keyword": "GS칼텍스 KIXX",
-          "searchVolume": 80,
-          "source": "ai-verified",
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "SOOP 배구단",
-          "searchVolume": 12420,
-          "source": "ai-verified",
-          "documentCount": 2454
-        },
-        {
-          "keyword": "GS칼텍스 배구",
-          "searchVolume": 210,
-          "source": "ai-verified",
-          "documentCount": 38814
-        },
-        {
-          "keyword": "GS칼텍스 KIXX",
-          "searchVolume": 80,
-          "source": "ai-verified",
-          "documentCount": 9678
-        },
-        {
-          "keyword": "여자배구 트레이드",
-          "searchVolume": 60,
-          "source": "ai-verified",
-          "documentCount": 6161
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-04T11:51:18.593Z",
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 5,
-        "verified": 0
-      },
-      "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T08:43:41.986Z"
+      "searchVolumeMeasuredAt": "2026-09-06T13:52:39.287Z"
     }
   ],
   "issues": [
+    {
+      "issue": "사랑이",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "영화 '가능한 사랑'이 베니스영화제에 입성해 화제다",
+      "headlines": [
+        {
+          "title": "‘가능한 사랑’ 베니스영화제 입성…설경구 “초심으로 돌아가는 ‘이...",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-09-06T12:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003468779?sid=103"
+        },
+        {
+          "title": "또 통한 '놀런 매직'...한국은 왜 놀런을 사랑하나",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-09-06T08:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002403437?sid=103"
+        },
+        {
+          "title": "양키스 40억원 제안 거절한 하현승 \"한국서 사랑받으며 야구하고파\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-06T03:04:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/003/0014171930"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "사랑이 온다",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "드라마 사랑이 온다",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑이 온다 출연진",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑이온다재방송",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑이 온다 몇부작",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑이온다 ost",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑이온다 한결",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑인가요",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "가능한 사랑 개봉일",
+          "reason": "국내 개봉 시점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "가능한 사랑 예매",
+          "reason": "관람 준비",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "베니스 수상",
+          "reason": "결과 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "조여정 드레스",
+          "reason": "레드카펫 화제",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "설경구 인터뷰",
+          "reason": "초심 발언 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "삼성 LG 경기",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "삼성이 LG를 꺾고 1위를 지켰다",
+      "headlines": [
+        {
+          "title": "KIA 김도영, 최연소 40홈런 무산…삼성, LG 꺾고 1위 수성(종합)",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-06T12:44:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/003/0014172508"
+        },
+        {
+          "title": "'대패' LG, 멀어져가는 선두권",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-06T11:12:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/421/0009153850"
+        },
+        {
+          "title": "삼성 후라도, 61일 만에 복귀해 시즌 6승…5⅔이닝 4실점",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-06T12:29:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/055/0001386290"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "삼성전자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성 라이온즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성전자 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성 서비스센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성 페스티벌",
+          "searchVolume": 61100,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성닷컴",
+          "searchVolume": 598600,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성 폴드8",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sdi",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "삼성 정규우승",
+          "reason": "1위 확정 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼성 매직넘버",
+          "reason": "우승 카운트다운",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼성 포스트시즌",
+          "reason": "가을야구 진출",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "LG 순위 반등",
+          "reason": "선두권 회복 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼성 LG 재대결",
+          "reason": "다음 맞대결",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "반민정 오늘 결혼",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "배우 반민정이 오늘 사업가와 결혼했다",
+      "headlines": [
+        {
+          "title": "배우 반민정, 오늘 사업가와 결혼…\"늦게 찾아온 인연\"",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-06T12:00:00.000Z",
+          "link": "https://m.entertain.naver.com/article/008/0005410042"
+        },
+        {
+          "title": "배우 반민정, 오늘 결혼 “늦게 찾아온 인연인 만큼 소중히…”",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-09-06T11:55:00.000Z",
+          "link": "https://m.entertain.naver.com/article/144/0001136464"
+        },
+        {
+          "title": "'각시탈' 반민정, 오늘(6일) 결혼 “늦은 인연 소중히 여길 것”",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-09-06T09:01:00.000Z",
+          "link": "https://m.entertain.naver.com/article/437/0000509731"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "반민정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "반민정 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "반민정 근황",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "반민정 결혼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "반민정 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "반민정 배우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "반민정 사건",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "반민정 영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "반민정 결혼식 사진",
+          "reason": "현장 사진 관심",
+          "searchVolume": null,
+          "documentCount": 159,
+          "onBoard": true
+        },
+        {
+          "keyword": "반민정 신혼집",
+          "reason": "결혼 후 근황",
+          "searchVolume": null,
+          "documentCount": 28,
+          "onBoard": true
+        },
+        {
+          "keyword": "반민정 남편 직업",
+          "reason": "사업가 정체 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "반민정 복귀작",
+          "reason": "활동 재개 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "반민정 하객",
+          "reason": "참석 스타 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 4
+    },
+    {
+      "issue": "이범호 감독 네일",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "이범호 감독이 네일의 10승 달성을 축하했다",
+      "headlines": [
+        {
+          "title": "[사진]이범호 감독,'네일 10승 축하해'",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-09-06T11:35:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/109/0005602279"
+        },
+        {
+          "title": "[포토] 이범호 감독, 네일 10승 달성 축하해",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-09-06T11:29:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/076/0004443423"
+        },
+        {
+          "title": "이범호 감독 ‘네일, 승리 축하해’[포토]",
+          "press": "xportsnews.com",
+          "publishedAt": "2026-09-06T11:28:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/311/0002054283"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "이범호",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이범호 감독",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이범호 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이범호 계약기간",
+          "searchVolume": 800,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이범호 프로필",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이범호 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "기아 이범호",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이범호 한화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "네일 재계약",
+          "reason": "내년 잔류 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "네일 다승왕",
+          "reason": "타이틀 경쟁",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KIA 순위",
+          "reason": "팀 성적 연동",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "네일 등판 일정",
+          "reason": "다음 선발 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KIA 포스트시즌",
+          "reason": "가을야구 진출",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 2
+    },
+    {
+      "issue": "KIA 김범수",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "KIA 김범수가 등판해 위기를 막았다",
+      "headlines": [
+        {
+          "title": "역투하는 KIA 김범수",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-06T10:58:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/421/0009153831"
+        },
+        {
+          "title": "'5-2' 굳이기 나선 KIA, 김범수 등판",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-06T10:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014172460?sid=102"
+        },
+        {
+          "title": "[사진]김범수,'위기는 없다'",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-09-06T10:42:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/109/0005602239"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "KIA 타이거즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kia",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kia 자동차",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kiaf",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kia connect",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kiaf 서울 2026",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kiaf 2026",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kiaf seoul",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "김도영 40홈런",
+          "reason": "기록 재도전 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KIA 순위",
+          "reason": "팀 성적 연동",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김범수 마무리",
+          "reason": "보직 변화 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KIA 포스트시즌",
+          "reason": "가을야구 진출",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KIA 불펜 운영",
+          "reason": "필승조 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "모델",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "GS건설·LGU+가 모듈러 데이터센터 표준모델을 공동개발한다",
+      "headlines": [
+        {
+          "title": "LGU+, AIDC 모듈러 모델 개발… 구축기간 줄인다",
+          "press": "fnnews.com",
+          "publishedAt": "2026-09-06T09:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005571621?sid=105"
+        },
+        {
+          "title": "GS건설·LGU+ 등, 모듈러 데이터센터 표준모델 공동개발 맞손",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-06T00:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016292165?sid=101"
+        },
+        {
+          "title": "GS건설, AI 데이터센터 모듈러 표준모델 개발…공급 속도 높인다",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-06T02:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014171868?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "모델y",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "테슬라 모델 Y",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "모델3",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "모델x",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "테슬라 모델 YL",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "모델s",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "모델y 주니퍼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "테슬라 모델3",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "데이터센터 착공",
+          "reason": "실제 구축 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "모듈러 건설사",
+          "reason": "참여 기업 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "AI 데이터센터 전력",
+          "reason": "전력 수급 이슈",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "모듈러 아파트",
+          "reason": "확장 적용 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "데이터센터 부지",
+          "reason": "입지 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "전남 보건환경연구원 대기시험",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "전남보건환경연구원이 대기분야 숙련도 시험에 적합 판정을 받았다",
+      "headlines": [
+        {
+          "title": "전남보건환경연구원, 대기분야 숙련도 시험 모두 '적합'",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-09-06T12:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004186369?sid=102"
+        },
+        {
+          "title": "전남보환연, 대기분야 숙련도시험 '적합'",
+          "press": "namdonews.com",
+          "publishedAt": "2026-09-06T08:54:00.000Z",
+          "link": "https://www.namdonews.com/news/articleView.html?idxno=922423"
+        },
+        {
+          "title": "광주보건환경硏, 대기·악취·생활환경 분석 숙련도 '적합'",
+          "press": "newsis.com",
+          "publishedAt": "2026-08-30T23:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014157542?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "전남광주특별시",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남대학교",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남 가볼만한곳",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남드래곤즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남대",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남대학교병원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남 축제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남과학대학교",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "보건환경연구원 채용",
+          "reason": "취업 준비 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "미세먼지 측정",
+          "reason": "대기질 연결 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "숙련도 시험 항목",
+          "reason": "평가 내용 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "보건환경연구원 연봉",
+          "reason": "직업 정보 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "대기 측정소",
+          "reason": "지역 측정 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "이하정",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "이하정이 두 아이 매니저로 바쁘게 산다고 밝혔다",
+      "headlines": [
+        {
+          "title": "'정준호♥' 이하정, 잘 나가던 아나운서였는데...\"애들 매니저로 사는 ...",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-09-06T06:01:00.000Z",
+          "link": "https://m.entertain.naver.com/article/076/0004443216"
+        },
+        {
+          "title": "‘정준호♥’ 이하정, 사교육 라이딩 때문에 바쁜가 “두 아이 매니저로...",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-09-06T06:20:00.000Z",
+          "link": "https://m.entertain.naver.com/article/109/0005602046"
+        },
+        {
+          "title": "'이하정♥' 정준호, 이게 집이야 궁궐이야…코 앞에 골프장 뷰까지 \"전...",
+          "press": "xportsnews.com",
+          "publishedAt": "2026-09-06T12:38:00.000Z",
+          "link": "https://m.entertain.naver.com/article/311/0002054295"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "이하정 간장게장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이하정 배우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이하정아나운서",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이하정 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이하정 종교",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이하정 집안",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이하정 인스타",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이하정 정준호",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "이하정 사교육",
+          "reason": "라이딩 일상 관심",
+          "searchVolume": null,
+          "documentCount": 37,
+          "onBoard": true
+        },
+        {
+          "keyword": "정준호 집 공개",
+          "reason": "궁궐 같은 집 화제",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "이하정 방송복귀",
+          "reason": "활동 재개 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "이하정 자녀 학교",
+          "reason": "교육 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "이하정 다이어트",
+          "reason": "동안 비결 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 3
+    },
+    {
+      "issue": "김현정 MBK 김승원",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "김현정 의원이 MBK에 김승원 후보자 흔들기 중단을 요구했다",
+      "headlines": [
+        {
+          "title": "與김현정 \"MBK, '김승원 흔들기' 중단하라\"…MBK \"사실무근\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-06T07:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014172301?sid=100"
+        },
+        {
+          "title": "김현정 의원 \"MBK, 김승원 후보자 흔들기 사실이면 즉각 중단해야\"",
+          "press": "inews24.com",
+          "publishedAt": "2026-09-06T08:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/031/0001055796?sid=100"
+        },
+        {
+          "title": "김현정 “MBK, 김승원 법무부장관 후보자 임명 저지 의혹...사실이면 즉...",
+          "press": "kyeonggi.com",
+          "publishedAt": "2026-09-06T08:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/666/0000122171?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김현정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김현정가수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김현정 노래",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김현정 멍",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김현정 앵커",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김현정의 고수다",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김현정 리즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "가수 김현정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "김승원 인사청문회",
+          "reason": "검증 절차 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김승원 임명",
+          "reason": "최종 임명 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "MBK 해명",
+          "reason": "의혹 반박 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김승원 재산",
+          "reason": "청문 검증 항목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김현정 페이스북",
+          "reason": "발언 원문 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "스기모토 타구에 맞음",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": null,
+      "headlines": [],
+      "concentrated": [
+        {
+          "keyword": "스기모토",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 스기모토",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스기모토 코우키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스기모토 유미",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "히로시 스기모토",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스기모토 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스기모토 히로시",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스기모토 중식도",
+          "searchVolume": 150,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "스기모토 부상 정도",
+          "reason": "부상 심각성 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "스기모토 결장",
+          "reason": "출전 여부 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "스기모토 엔트리",
+          "reason": "말소 여부 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KT 대체 선수",
+          "reason": "공백 메우기 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "스기모토 복귀",
+          "reason": "복귀 시점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "프로젝트 제니스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "마이크로소프트가 개발자용 윈도우11 '프로젝트 제니스'를 공개했다",
+      "headlines": [
+        {
+          "title": "마이크로소프트 ‘프로젝트 제니스’, 개발자용 윈도우11에 540만 원짜리...",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-09-06T13:26:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1157637"
+        },
+        {
+          "title": "MS, AI 개발자 전용 윈도우 11 '프로젝트 제니스' 공개… \"30B 모델 로컬...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-06T07:28:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=214904"
+        },
+        {
+          "title": "[IFA 2026] “로컬 PC에서 시작해 기업 전체로”…AMD·MS·수세 ‘프로젝...",
+          "press": "ddaily.co.kr",
+          "publishedAt": "2026-09-04T14:39:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/138/0002240309?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "프로젝트 헤일메리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "프로젝트y",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "프로젝트엠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "프로젝트 프로덕트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "프로젝트21",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "올데이프로젝트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "프로젝트 헤일메리 ott",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "프로젝트 세카이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "프로젝트 제니스 출시일",
+          "reason": "출시 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "국내 출시",
+          "reason": "한국 도입 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "제니스 사양",
+          "reason": "요구 스펙 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "제니스 사용법",
+          "reason": "활용 방법 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "로컬 AI 모델",
+          "reason": "온디바이스 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "MS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MS가 팀즈 무료 사용자에 연령 확인을 도입한다",
+      "headlines": [
+        {
+          "title": "MS, 팀즈 무료에 연령 확인… 미인증 땐 AI·녹화 제한",
+          "press": "it.chosun.com",
+          "publishedAt": "2026-09-06T07:18:00.000Z",
+          "link": "https://it.chosun.com/news/articleView.html?idxno=2023092169572"
+        },
+        {
+          "title": "엔비디아·구글·아마존·MS 모인다…'LG 스파크 2026' 개최",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-09-04T01:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004185851?sid=103"
+        },
+        {
+          "title": "MS, 엑스박스 클라우드 게임에 '월간 이용 시간제' 도입…\"운영 비용 급...",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-04T00:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002436220?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ms 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스",
+          "searchVolume": 24120,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MSM",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "msn",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MSDS",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 365",
+          "searchVolume": 11850,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "msafer",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "팀즈 연령 인증",
+          "reason": "인증 방법 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "게임패스 요금",
+          "reason": "요금제 변화 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "엑스박스 이용시간",
+          "reason": "제한 기준 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "MS 애저 실적",
+          "reason": "매출 규모 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "클라우드 게임 축소",
+          "reason": "서비스 변화 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "리리아 3.5",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "구글이 음악 생성 AI '리리아 3.5'를 공개했다",
+      "headlines": [
+        {
+          "title": "구글 리리아 3.5 제미나이 전면 탑재, 수노 패소 직후 저작권 가드레일...",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-09-04T17:14:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1157362"
+        },
+        {
+          "title": "구글, 음악 생성 모델 '리리아 3.5' 제미나이·API에 적용...대중화 본격...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-06T06:26:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=214901"
+        },
+        {
+          "title": "구글, 차세대 음악 AI '리리아 3.5' 공개… 구글 플로우 뮤직 적용으로 ...",
+          "press": "aitimes.kr",
+          "publishedAt": "2026-07-30T04:56:00.000Z",
+          "link": "https://www.aitimes.kr/news/articleView.html?idxno=41247"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "리리아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "리리아나",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "리리아나 보넷",
+          "searchVolume": 370,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아이프리 리리아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "리리아브로우",
+          "searchVolume": 150,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "리리아 노래",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "리리아 노래방",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "리리앙원피스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "리리아 무료",
+          "reason": "이용 조건 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "리리아 사용법",
+          "reason": "활용 방법 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "수노 비교",
+          "reason": "경쟁 서비스 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "리리아 저작권",
+          "reason": "가드레일 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "리리아 한국어",
+          "reason": "국내 지원 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 6
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "구글 어시스턴트가 제미나이로 교체된다",
+      "headlines": [
+        {
+          "title": "[뉴스AS] 구글 앱 이용자, 두달 연속 네이버 앞섰다는데…진짜?",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-09-06T05:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002821815?sid=105"
+        },
+        {
+          "title": "‘헤이 구글’ 시대 저문다…구글 어시스턴트, 제미나이에 자리 내줘”",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-06T13:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006364584?sid=105"
+        },
+        {
+          "title": "게임업계, 구글 인앱결제 피해 배상 촉구…\"미국처럼 한국에도 배상하라...",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-03T08:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014168176?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글usa",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 타임라인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글지도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글맵",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "제미나이 사용법",
+          "reason": "전환 방법 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "어시스턴트 종료일",
+          "reason": "종료 시점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "구글 픽스 출시일",
+          "reason": "신규 앱 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "인앱결제 배상",
+          "reason": "보상 여부 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "제미나이 무료",
+          "reason": "이용 조건 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "머스크",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "머스크가 미 중간선거를 앞두고 자금 지원에 나섰다",
+      "headlines": [
+        {
+          "title": "\"머스크 측근, '엑스터시 신약' FDA 승인 신청\"…환각제 합법화 추진?",
+          "press": "hankookilbo.com",
+          "publishedAt": "2026-09-06T05:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/469/0000952350?sid=104"
+        },
+        {
+          "title": "머스크·베이조스도 올라탄 AI붐…억만장자 자산 첫 2경원",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-05T05:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005329002?sid=102"
+        },
+        {
+          "title": "美중간선거 앞두고 트럼프·머스크 본격 '자금 지원 사격'",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-06T01:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006364357?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "머스크향",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "머스크멜론",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "일론머스크",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "머스크 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "일론머스크 재산",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "머스크향 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "커먼머스크터틀",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "머스크메론",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "중간선거 결과",
+          "reason": "판세 영향 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "머스크 자산 순위",
+          "reason": "부자 순위 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "엑스터시 신약",
+          "reason": "승인 여부 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "머스크 트럼프 관계",
+          "reason": "동맹 지속 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "머스크 지출",
+          "reason": "자금 규모 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "세이프마인드",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "크라우드스트라이크가 자율 레드팀 AI '세이프마인드'를 공개했다",
+      "headlines": [
+        {
+          "title": "엔비디아·크라우드스트라이크, '공격·방어 동시 수행' 사이버 보안 AI...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-06T02:44:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=214905"
+        },
+        {
+          "title": "크라우드스트라이크, 공격·방어 AI 결합한 자율 레드팀 '세이프마인드...",
+          "press": "digitaltoday.co.kr",
+          "publishedAt": "2026-09-01T20:00:00.000Z",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=697435"
+        },
+        {
+          "title": "크라우드스트라이크, 자율 레드팀 AI 세이프마인드 공개",
+          "press": "tokenpost.kr",
+          "publishedAt": "2026-09-01T20:40:00.000Z",
+          "link": "https://www.tokenpost.kr/news/ai/401705"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "세이프마인드 출시일",
+          "reason": "출시 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "세이프마인드 도입",
+          "reason": "적용 기업 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "크라우드스트라이크 주가",
+          "reason": "실적 영향 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "AI 보안 시장",
+          "reason": "업계 판도 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "세이프마인드 사용법",
+          "reason": "활용 방법 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "오픈AI가 '챗지피티-6 아스트라'를 공개했다",
+      "headlines": [
+        {
+          "title": "“지브리풍 AI 이미지 재미·의미 없어”…지브리 스튜디오 의장 첫 의...",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-09-06T11:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003468749?sid=104"
+        },
+        {
+          "title": "\"AI로 진짜 지브리 표현 불가능…미야자키, AI 자체 몰라\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-06T09:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016292867?sid=104"
+        },
+        {
+          "title": "\"AI가 해낼 줄이야\"...'이 나라' 대졸자들 졸지에 일자리 잃었다",
+          "press": "wowtv.co.kr",
+          "publishedAt": "2026-09-06T08:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/215/0001265029?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 아스트라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 상장일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "GPT-6 사용법",
+          "reason": "활용 방법 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "GPT-6 구독료",
+          "reason": "요금 변화 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "GPT-6 국내 출시",
+          "reason": "한국 이용 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "아스트라 성능",
+          "reason": "성능 비교 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 상장일",
+          "reason": "IPO 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "LGU+",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "LGU+가 GS건설과 모듈러 데이터센터 표준모델을 개발한다",
+      "headlines": [
+        {
+          "title": "GS건설, LGU+ 손잡고 '모듈러 데이터센터' 개발 본격화",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-09-06T05:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004186316?sid=101"
+        },
+        {
+          "title": "GS건설·LGU+ 등, 모듈러 데이터센터 표준모델 공동개발 맞손",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-06T00:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016292165?sid=101"
+        },
+        {
+          "title": "LGU+, GS건설 등과 모듈러 데이터센터 동맹",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-09-06T07:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/382/0001292257?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "lg u+ 고객센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "lg u+ 매장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "lgu+알뜰폰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "lg u+ 요금제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "LGU+ 인터넷",
+          "searchVolume": 3880,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "lg u+ 대리점",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "lg u+ 직영점",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "lg u+ 로밍",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "데이터센터 위치",
+          "reason": "부지 입지 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "데이터센터 착공",
+          "reason": "구축 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "LGU+ 주가",
+          "reason": "신사업 영향 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "LGU+ AI 사업",
+          "reason": "사업 확장 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "모듈러 데이터센터 비용",
+          "reason": "구축 효율 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
     {
       "issue": "오디세이 관객",
       "issueType": "fresh",
@@ -5238,7 +7218,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "서울런 5주년 성과공유회",
@@ -5310,7 +7291,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "김동아",
@@ -5382,79 +7364,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
-    },
-    {
-      "issue": "반민정",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "반민정, 오늘 1세 연상 사업가와 결혼",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-05T21:37:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014171579"
-        },
-        {
-          "title": "‘각시탈’ 반민정, 오늘(6일) 결혼…♥신랑은 사업가",
-          "press": "isplus.com",
-          "publishedAt": "2026-09-05T21:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/241/0003529125"
-        },
-        {
-          "title": "반민정 \"늦게 찾아온 인연\" 오늘(6일) 결혼 소감..남편은 47세 사업가",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-09-06T07:21:00.000Z",
-          "link": "https://m.entertain.naver.com/article/108/0003468245"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "반민정 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "반민정 근황",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "반민정 결혼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "반민정 나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "반민정 배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "반민정 사건",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "반민정 영화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "반민정 수취인불명",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 2
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "주문하신 음식 나왔쏭",
@@ -5526,79 +7437,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 2
-    },
-    {
-      "issue": "리리아 3.5",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": null,
-      "headlines": [
-        {
-          "title": "구글 리리아 3.5 제미나이 전면 탑재, 수노 패소 직후 저작권 가드레일...",
-          "press": "wikitree.co.kr",
-          "publishedAt": "2026-09-04T17:14:00.000Z",
-          "link": "https://www.wikitree.co.kr/articles/1157362"
-        },
-        {
-          "title": "구글, 음악 생성 모델 '리리아 3.5' 제미나이·API에 적용...대중화 본격...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-06T06:26:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=214901"
-        },
-        {
-          "title": "구글, 차세대 음악 AI '리리아 3.5' 공개… 구글 플로우 뮤직 적용으로 ...",
-          "press": "aitimes.kr",
-          "publishedAt": "2026-07-30T04:56:00.000Z",
-          "link": "https://www.aitimes.kr/news/articleView.html?idxno=41247"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "리리아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "리리아나",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "리리아나 보넷",
-          "searchVolume": 370,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아이프리 리리아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "리리아브로우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "리리아 노래",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "리리아 노래방",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "리리앙원피스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 5
+      "rowCount": 2,
+      "carried": true
     },
     {
       "issue": "안세영 결승과 우익",
@@ -6062,108 +7902,6 @@
         {
           "keyword": "불꽃축제 내년 일정",
           "reason": "다음 개최일 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 2,
-      "carried": true
-    },
-    {
-      "issue": "이범호 감독 칭찬",
-      "issueType": "entertainment",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "KIA 이범호 감독이 김도영 등 선수들을 잇달아 칭찬해서",
-      "headlines": [
-        {
-          "title": "KIA 연이틀 대어 잡았다! 이범호 감독, 선수들 줄줄이 칭찬 릴레이 → \"...",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-09-05T11:47:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/076/0004443067"
-        },
-        {
-          "title": "홈런 급해도 내 스윙 지키는 김도영…이범호 감독도 칭찬 “본능적인 것...",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-09-04T09:01:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/144/0001136138"
-        },
-        {
-          "title": "이범호 KIA 감독 \"전상현 병살 유도, 기대에 부응\"",
-          "press": "hansbiz.co.kr",
-          "publishedAt": "2026-09-05T12:00:00.000Z",
-          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=862467"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "이범호",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이범호 감독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이범호 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이범호 계약기간",
-          "searchVolume": 780,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이범호 프로필",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이범호 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "기아 이범호",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "무창포 이범호",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "김도영 홈런 기록",
-          "reason": "시즌 최다 기록 경쟁",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "KIA 포스트시즌",
-          "reason": "가을야구 진출 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김도영 MVP",
-          "reason": "수상 경쟁 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "이범호 감독 성적",
-          "reason": "시즌 마무리 평가",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -7123,569 +8861,24 @@
       ],
       "rowCount": 4,
       "carried": true
-    },
-    {
-      "issue": "농심 신상열 결혼",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "농심 3세 신상열 부사장이 SK텔레콤 직원과 13일 결혼한다.",
-      "headlines": [
-        {
-          "title": "'농심 3세' 신상열 부사장, 13일 결혼…'신라면' 들고 웨딩사진 촬영",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-04T10:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009152165?sid=101"
-        },
-        {
-          "title": "[단독] 농심 3세 신상열 부사장, SK텔레콤 평사원과 13일 결혼",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-09-04T08:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000637505?sid=101"
-        },
-        {
-          "title": "'농심 3세' 신상열 부사장, SK텔레콤 평사원과 13일 결혼",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-04T10:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016291045?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "농심",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "농심몰",
-          "searchVolume": 36840,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "농심 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "농심 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "농심 레드포스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "농심라면",
-          "searchVolume": 9720,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "농심호텔",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "농심 삼계탕",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "신상열 결혼식장",
-          "reason": "결혼일 임박, 장소 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "신상열 신혼집",
-          "reason": "재벌가 신혼집 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "농심 승계",
-          "reason": "3세 후계구도 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "신상열 학력",
-          "reason": "인물 기본정보 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "신상열 재산",
-          "reason": "오너가 자산 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "초대 중수청장 압축",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "초대 중수청장 후보가 김관정·김지용·문홍주·이윤제 4명으로 압축됐다.",
-      "headlines": [
-        {
-          "title": "초대 중수청장 후보 4명 압축…김관정·김지용·문홍주·이윤제",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-04T09:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016290958?sid=100"
-        },
-        {
-          "title": "'초대 중수청장' 후보 4명 압축…김관정·김지용·문홍주·이윤제",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-04T09:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014170454?sid=102"
-        },
-        {
-          "title": "초대 중수청장 후보자 4명으로 압축…김관정·김지용·문홍주·이윤제",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-09-04T09:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012251260?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "초대한정식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "초대리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "초대형소녀",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "초대졸 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "초대",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나에게로의 초대",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "슬픈초대장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "돌잔치 초대장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "중수청장 임명",
-          "reason": "최종 낙점 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "중수청 권한",
-          "reason": "신설기관 역할 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "중수청 인사청문회",
-          "reason": "임명 절차 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "중수청 조직",
-          "reason": "출범 구성 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "검찰 개편",
-          "reason": "검찰과 관계 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "GS칼텍스 SOOP 트레이드",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "SOOP과 GS칼텍스가 유가람과 박사랑을 1대1 트레이드했다.",
-      "headlines": [
-        {
-          "title": "여자배구 SOOP·GS칼텍스, 박사랑↔유가람 트레이드 단행",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-04T09:22:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/003/0014170485"
-        },
-        {
-          "title": "프로배구 GS칼텍스-SOOP, 리베로 유가람↔세터 박사랑 트레이드",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-04T08:16:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/001/0016290878"
-        },
-        {
-          "title": "SOOP 박사랑↔GS칼텍스 유가람 1대1 트레이드 단행",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-04T08:39:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/421/0009152041"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "gs칼텍스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "gs칼텍스 주유소",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "gs칼텍스 상품권",
-          "searchVolume": 2130,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "gs칼텍스 포인트카드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "gs칼텍스 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "gs칼텍스 배구단",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "gs칼텍스 포인트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "gs칼텍스 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "트레이드 이유",
-          "reason": "맞교환 배경 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "SOOP 전력",
-          "reason": "영입 후 전력 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "GS칼텍스 세터",
-          "reason": "세터 보강 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "유가람 활약",
-          "reason": "이적 후 활약 기대",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "박사랑 데뷔전",
-          "reason": "새 팀 첫 경기",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "중기부 APEC AI",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "중기부가 APEC 중기 장관회의에서 중소기업 AI 혁신 전략을 공유했다.",
-      "headlines": [
-        {
-          "title": "\"K-중소·벤처 AI전략\"…중기부, APEC회의서 공유",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-04T10:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014170509?sid=101"
-        },
-        {
-          "title": "중기부, APEC서 ‘중소기업 AI 혁신 전략’ 공유",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-09-04T10:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002693077?sid=101"
-        },
-        {
-          "title": "중기부, '제32차 APEC 中企 장관회의'서 한국 AI 정책 공유",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-04T10:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016291030?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "중기부 장관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중기부",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중기부 장관 후보",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중기부 차관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중기부 예산",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중기부 수출바우처",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중기부 장관 하마평",
-          "searchVolume": 440,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "임신 중기 분비물",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "딥테크 펀드규모",
-          "reason": "펀드 크기 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "스마트공장 지원",
-          "reason": "지원 대상 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "GPU 지원대상",
-          "reason": "전용 GPU 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "AI정책 일정",
-          "reason": "추진 시점 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "중소기업 수혜",
-          "reason": "지원 혜택 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "박세완 비키니 자태",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "박세완이 과감한 비키니 자태를 선보였다.",
-      "headlines": [
-        {
-          "title": "‘북한 아이유’ 박세완, 담요 두르고 과감한 비키니 자태",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-09-04T07:39:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001136123"
-        },
-        {
-          "title": "박세완, 안 어울리는 비키니가 없는 뼈말라 자태‥물속 청량미 폭발",
-          "press": "newsen.com",
-          "publishedAt": "2026-09-04T07:07:00.000Z",
-          "link": "https://m.entertain.naver.com/article/609/0001165022"
-        },
-        {
-          "title": "박세완, 수영장서 깜짝 비키니 자태…반전 매력 [DA★]",
-          "press": "sports.donga.com",
-          "publishedAt": "2026-09-04T10:39:00.000Z",
-          "link": "https://m.entertain.naver.com/article/382/0001292055"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "박세완",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "배우박세완",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박세완 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박세완 발",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박세완 결혼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박세완 다리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박세완 미드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박세완 배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "화보 촬영지",
-          "reason": "촬영 장소 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "박세완 신작",
-          "reason": "차기작 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "박세완 다이어트",
-          "reason": "몸매 관리법 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "박세완 열애설",
-          "reason": "사생활 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "박세완 광고",
-          "reason": "활동 확장 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 2,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-09-06T08:49:09.208Z",
+  "enrichedAt": "2026-09-06T13:58:12.459Z",
   "enrichStats": {
     "enriched": 28,
     "subsAdded": 2,
     "titleUpgraded": 0,
-    "proposed": 38,
-    "verified": 10,
+    "proposed": 28,
+    "verified": 5,
     "judged": 0,
     "judgedBad": 0,
     "related": 0,
     "picked": 0,
-    "pooled": 10,
+    "pooled": 5,
     "aiTitled": 28,
     "trended": 0,
     "homeRetried": 20,
-    "whyAdded": 6,
+    "whyAdded": 9,
     "aiCalls": 28,
     "partial": false
   }
