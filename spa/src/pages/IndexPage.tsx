@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type KeyboardEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 import HomeOperationsBoard from '../components/HomeOperationsBoard';
 import ParticlesCanvas from '../components/ParticlesCanvas';
@@ -1442,6 +1442,34 @@ function IndexPage() {
         return () => {
             alive = false;
             cancel();
+        };
+    }, []);
+
+    /*
+     * 실시간 레인은 열어 둔 채로도 스스로 갱신되어야 한다(사장님 2026-09-06 "12시
+     * 42분인데 10시 걸 들고 오고 갱신이 안 된다"). 워커는 4분 전 값으로 살아 있는데
+     * 홈은 페이지 로드 때 한 번만 받아서, 열어 둔 화면이 처음 값에 굳었다.
+     * 5분마다, 그리고 탭으로 돌아올 때 네이버·인기·구글 레인만 다시 받아 덮는다
+     * (source-signals 스냅샷 재요청은 안 한다 — 실시간 레인만 워커에서 새로 온다).
+     */
+    const lanesRef = useRef(liveState.lanes);
+    useEffect(() => { lanesRef.current = liveState.lanes; }, [liveState.lanes]);
+    useEffect(() => {
+        let alive = true;
+        const refresh = async () => {
+            try {
+                // 실시간 레인(네이버·인기·구글)만 워커에서 새로 받아 덮는다. 나머지는 그대로.
+                const merged = await overlayHotLanes(await overlayLiveNaverLane(lanesRef.current));
+                if (alive) setLiveState((c) => ({ ...c, lanes: merged }));
+            } catch { /* 실패하면 직전 값 유지 — 화면은 안 죽는다 */ }
+        };
+        const timer = window.setInterval(refresh, 5 * 60_000);
+        const onVisible = () => { if (document.visibilityState === 'visible') refresh(); };
+        document.addEventListener('visibilitychange', onVisible);
+        return () => {
+            alive = false;
+            window.clearInterval(timer);
+            document.removeEventListener('visibilitychange', onVisible);
         };
     }, []);
 
