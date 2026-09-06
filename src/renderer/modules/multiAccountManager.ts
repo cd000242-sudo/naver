@@ -12,6 +12,7 @@ import {
     resolveUsableShoppingReferenceSource,
 } from '../../image/shoppingReferenceGeneration.js';
 import { normalizePublishImageSequence } from '../../image/publishImageSequence.js';
+import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
 import { escapeHtml } from '../utils/htmlUtils.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initMultiAccountManager = initMultiAccountManager;
@@ -525,18 +526,34 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         }
     }
     const items = [];
+    // [2026-09-06 R-A/B] Callers prepend a thumbnail pseudo-heading whose content is the intro;
+    // that intro doubles as the article-level context for every section image.
+    const introContext = String(
+        options.articleContext
+        || headings.find((h) => h?.isThumbnail === true)?.content
+        || '',
+    ).trim();
+    const imageBodyPlain = String(options.bodyPlain || '');
     for (let headingIdx = 0; headingIdx < headings.length; headingIdx++) {
         const h = headings[headingIdx];
         const title = h.title || h.text || h.heading || (typeof h === 'string' ? h : '');
         if (!title || title.trim() === '')
             continue;
         const isThumb = h.isThumbnail === true;
+        // Section text feeds both the translation cache key and the contextual brief's
+        // SECTION EVIDENCE; without it the brief falls back to the heading title alone.
+        const sectionContent = resolveSectionContentForImage({
+            heading: h,
+            headings,
+            bodyPlain: imageBodyPlain,
+            maxChars: 900,
+        });
         let rawPrompt;
         if (isThumb) {
             try {
                 const globalImgSettings = typeof getGlobalImageSettings === 'function' ? getGlobalImageSettings() : {};
                 const thumbStyle = globalImgSettings.imageStyle || '';
-                rawPrompt = await generateEnglishPromptForHeading(postTitle, '', thumbStyle);
+                rawPrompt = await generateEnglishPromptForHeading(postTitle, '', thumbStyle, sectionContent);
                 console.log(`[generateImagesForAutomation] 🎨 AI 썸네일 프롬프트: "${rawPrompt.substring(0, 60)}..."`);
             }
             catch {
@@ -548,7 +565,9 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             try {
                 const globalImgSettings = typeof getGlobalImageSettings === 'function' ? getGlobalImageSettings() : {};
                 const subheadingStyle = globalImgSettings.imageStyle || '';
-                rawPrompt = await generateEnglishPromptForHeading(title, postTitle, subheadingStyle);
+                // Translator reads `.title`; normalize so text/heading-keyed objects never stringify.
+                const headingForPrompt = typeof h === 'string' ? { title } : { ...h, title };
+                rawPrompt = await generateEnglishPromptForHeading(headingForPrompt, postTitle, subheadingStyle, sectionContent);
                 console.log(`[generateImagesForAutomation] 🎨 소제목[${headingIdx}] AI 프롬프트: "${rawPrompt.substring(0, 60)}..."`);
             }
             catch {
@@ -565,6 +584,8 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             // [2026-09-06 R-A] main rewrites originalIndex per call; this is the section ordinal the
             // contextual brief rotates the camera line from (items are sent one per call).
             diversityIndex: headingIdx,
+            sectionContent,
+            articleContext: introContext || undefined,
             allowText: isThumb ? includeThumbnailText : false,
             referenceImagePath: isShoppingConnect
                 ? usableShoppingReferenceUrl

@@ -1074,7 +1074,13 @@ async function executeFullAutoFlow(formData) {
                             const thumbImageStyle = formData.imageStyle;
                             let thumbnailPrompt;
                             try {
-                                const aiTranslated = await generateEnglishPromptForHeading(fullAutoTitle, formData.keywords, thumbImageStyle);
+                                // [2026-09-06 R-A/B] Intro is the thumbnail's section evidence — same as the item below.
+                                const aiTranslated = await generateEnglishPromptForHeading(
+                                    fullAutoTitle,
+                                    formData.keywords,
+                                    thumbImageStyle,
+                                    String(structuredContent.introduction || '').trim(),
+                                );
                                 thumbnailPrompt = aiTranslated;
                                 appendLog(`🎨 AI 썸네일 프롬프트: "${aiTranslated.substring(0, 60)}..."`);
                             }
