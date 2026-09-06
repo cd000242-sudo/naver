@@ -59,8 +59,11 @@ export async function generateBlueprint(input: BlueprintPromptInput, deps: Bluep
       return { result: null, reason: 'unparsable', elapsedMs };
     }
     const b = parsed.blueprint;
+    // The angle is the question the conclusion must return to; keep it in the same line so a log
+    // reader can compare it with the finished conclusion without re-parsing the RAW dump.
+    const angleTail = b.angle ? ` · 질문 "${b.angle}"` : '';
     log(`[Blueprint] ✅ 인용 ${b.quotes.length}·사실 ${b.facts.length}·소제목 ${b.skeleton.length}·제외 ${b.offTopic.length}`
-      + ` (버림: 인용 ${parsed.dropped.quotes}·사실 ${parsed.dropped.facts}) · ${elapsedMs}ms`);
+      + ` (버림: 인용 ${parsed.dropped.quotes}·사실 ${parsed.dropped.facts}) · ${elapsedMs}ms${angleTail}`);
     return { result: parsed, reason: 'ok', elapsedMs };
   } catch (error) {
     const elapsedMs = now() - started;

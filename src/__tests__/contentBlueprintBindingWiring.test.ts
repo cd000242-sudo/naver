@@ -20,6 +20,14 @@ describe('설계도 필드 바인딩 배선', () => {
   });
 });
 
+describe('설계도 질문(angle) 보존 — 2026-09-06 R1 계측', () => {
+  it('설계도의 질문을 생성 결과에 __blueprintAngle 로 남겨 결론과 대조할 수 있게 한다', () => {
+    expect(source).toContain("let blueprintAngle = '';");
+    expect(source).toContain('blueprintAngle = blueprintRun.result.blueprint.angle;');
+    expect(source).toMatch(/if \(blueprintAngle\) \(parsed as any\)\.__blueprintAngle = blueprintAngle;/);
+  });
+});
+
 describe('구독 엔진 설계도 예산', () => {
   it('구독 CLI 는 5분, API 는 45초 — 라벨이 아니라 subscription 플래그로 가른다', () => {
     expect(source).toContain('timeoutMs: route.subscription ? 300_000 : 45_000');

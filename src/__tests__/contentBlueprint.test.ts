@@ -168,6 +168,25 @@ describe('parseBlueprint — 자료 스냅(모델이 조사 하나 바꿔 옮긴
   });
 });
 
+describe('generateBlueprint — ✅ 로그에 질문(angle) 꼬리', () => {
+  it('설계도가 답하려는 질문을 성공 로그 끝에 남긴다 — 결론이 그 질문으로 돌아왔는지 대조할 기준', async () => {
+    const logs: string[] = [];
+    await generateBlueprint({ keyword: 'k', mode: 'seo', material: MATERIAL }, { complete: async () => RESPONSE, log: (m) => logs.push(m) });
+    const ok = logs.find((line) => line.startsWith('[Blueprint] ✅'));
+    expect(ok).toBeDefined();
+    expect(ok).toContain('· 질문 "청년월세지원 2차, 나는 대상이고 어떻게 신청하나"');
+  });
+
+  it('질문이 비어 있으면 꼬리를 붙이지 않는다', async () => {
+    const logs: string[] = [];
+    const noAngle = JSON.stringify({ ...JSON.parse(RESPONSE), angle: '' });
+    await generateBlueprint({ keyword: 'k', mode: 'seo', material: MATERIAL }, { complete: async () => noAngle, log: (m) => logs.push(m) });
+    const ok = logs.find((line) => line.startsWith('[Blueprint] ✅'));
+    expect(ok).toBeDefined();
+    expect(ok).not.toContain('· 질문');
+  });
+});
+
 describe('generateBlueprint — dumpRaw', () => {
   it('dumpRaw 를 켜면 원응답을 한 줄로 로그에 남긴다(오프라인 재해석용)', async () => {
     const logs: string[] = [];

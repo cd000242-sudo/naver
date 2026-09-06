@@ -6102,6 +6102,7 @@ async function generateStructuredContentInternal(
   let blueprintQuotes: string[] = [];
   let blueprintQuoteItems: Array<{ text: string; speaker: string }> = [];
   let blueprintReaderSituation = '';
+  let blueprintAngle = '';
   let blueprintOffTopic: string[] = [];
   let blueprintRoute: Awaited<ReturnType<typeof resolveSideTaskRoute>> = null;
   const blueprintMode = String(source.contentMode || 'seo');
@@ -6144,6 +6145,7 @@ async function generateStructuredContentInternal(
         blueprintQuotes = blueprintRun.result.blueprint.quotes.map((q) => q.text);
         blueprintQuoteItems = blueprintRun.result.blueprint.quotes.map((q) => ({ text: q.text, speaker: q.speaker }));
         blueprintReaderSituation = blueprintRun.result.blueprint.readerSituation;
+        blueprintAngle = blueprintRun.result.blueprint.angle;
         blueprintOffTopic = blueprintRun.result.blueprint.offTopic.slice();
         console.log(`[Blueprint] 📐 엔진 ${route.engine} · 재료 ${blueprintBlock.length}자 · ${blueprintRun.elapsedMs}ms`);
       }
@@ -7050,6 +7052,9 @@ async function generateStructuredContentInternal(
       if (blueprintBlock) {
         console.log(`[Blueprint] 바인딩: 도입부 패치 ${blueprintIntroPatched} · 인용 삽입 ${blueprintQuoteInserted}`);
       }
+      // [2026-09-06 R1] 설계도가 답하기로 한 질문을 결과에 남긴다. 지금까지는 프롬프트에 넣고 버려서,
+      //   완성된 결론이 그 질문으로 돌아왔는지 사후에 대조할 기준이 어디에도 없었다.
+      if (blueprintAngle) (parsed as any).__blueprintAngle = blueprintAngle;
 
       // [2026-09-05] 설계도가 "빼라"고 한 주제가 본문에 남았는지 사후 확인. 지금까지는
       //   프롬프트 한 줄로 부탁만 하고 검사가 없어, 보관법 글에 중고거래·섬유 폐기물
