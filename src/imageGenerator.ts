@@ -43,6 +43,7 @@ import {
   prepareProviderContextualImagePrompt,
   shouldApplyContextualPromptForProvider,
 } from './image/contextualImagePrompt.js';
+import { engineRotatesViewpoint } from './image/imageViewpointRotation.js';
 import { thumbnailService } from './thumbnailService.js';
 import { AutomationService } from './main/services/AutomationService.js'; // ✅ [2026-01-29 FIX] 중지 체크용
 import * as fs from 'fs/promises';
@@ -496,6 +497,13 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       const articleTitle = item.articleTitle || options.articleTitle || options.postTitle;
       const globalSubject = item.globalSubject || options.globalSubject || options.articleTitle || options.postTitle;
       const articleContext = item.articleContext || options.articleContext;
+      // [2026-09-06 R-A] The brief owns the camera line. `originalIndex` is rewritten to the
+      // array position in main.ts and callers send one item per call, so only a producer-sent
+      // `diversityIndex` can tell sections apart; a lone item without one keeps the generic line.
+      const diversityIndex = Number.isFinite(item.diversityIndex) ? item.diversityIndex : undefined;
+      const viewpointIndex = engineRotatesViewpoint(normalizedProvider)
+        ? undefined
+        : (diversityIndex ?? (generationSourceItems.length > 1 ? idx : undefined));
       const prompt = prepareProviderContextualImagePrompt(normalizedProvider, {
         articleTitle,
         globalSubject,
@@ -509,6 +517,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         isThumbnail: item.isThumbnail === true,
         isShoppingConnect: options.isShoppingConnect === true,
         hasReferenceImage: options.isShoppingConnect === true && Boolean(representativeReferenceUrl),
+        viewpointIndex,
       });
 
       return {
@@ -518,6 +527,8 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         globalSubject,
         articleContext,
         sectionContent: item.sectionContent,
+        diversityIndex: item.diversityIndex, // openai/leonardo rotate from this; it was dropped here before
+
         isThumbnail: item.isThumbnail || false, // ✅ isThumbnail 플래그 전달
         allowText, // text is thumbnail-only in auto publish contexts
         englishPrompt: useContextualPrompt ? prompt : item.englishPrompt,

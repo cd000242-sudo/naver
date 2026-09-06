@@ -309,7 +309,8 @@ export async function generateWithLeonardoAI(
 
             // 스타일별 프롬프트 분기
             // ✅ [2026-03-03 FIX] Leonardo에도 스타일 프롬프트(STYLE_PROMPT_MAP) 적용 + 한국인 인물 지시
-            const dh = getImageDiversityHints(i);
+            // [2026-09-06 R-A] Callers send one item per call, so `i` alone is always 0.
+            const dh = getImageDiversityHints(item.diversityIndex ?? i);
             console.log(`[LeonardoAI] 🎲 다양성[${i}]: 📐${dh.angle.split(',')[0]} | 💡${dh.lighting.split(',')[0]} | 🎨${dh.color.split(',')[0]}`);
 
             // ✅ 스타일 프롬프트 적용 (stickman/roundy/2d/disney 등)

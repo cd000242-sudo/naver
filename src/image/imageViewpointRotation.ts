@@ -34,6 +34,20 @@ export function engineInjectsViewpoint(engine: string | undefined): boolean {
   return /flow/iu.test(String(engine || ''));
 }
 
+/**
+ * [2026-09-06 R-A] Does the engine rotate its own viewpoint from `diversityIndex`?
+ *
+ * The contextual brief in main is the single owner of the camera line. Engines that
+ * already prepend their own angle (flow via injectHeadingVariation; openai/deepinfra/
+ * leonardo via getImageDiversityHints) must not get a second, conflicting one.
+ */
+export function engineRotatesViewpoint(engine: string | undefined): boolean {
+  const normalized = String(engine || '').trim().toLowerCase();
+  if (!normalized) return false;
+  return engineInjectsViewpoint(normalized)
+    || /openai|gpt-image|deepinfra|leonardo/u.test(normalized);
+}
+
 /** 원본 프롬프트 뒤에 시점 한 줄을 덧붙인다. 무엇을 그릴지는 건드리지 않는다. */
 export function appendViewpointHint(prompt: string | undefined, headingIndex: number): string {
   const base = String(prompt ?? '');

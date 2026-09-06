@@ -5,6 +5,8 @@
  * imagePrompt. A generated hint can be vague or drift; title/body are the
  * authoritative source.
  */
+import { IMAGE_VIEWPOINT_HINTS } from './imageViewpointRotation.js';
+
 export interface ContextualImagePromptInput {
   articleTitle?: string;
   globalSubject?: string;
@@ -16,6 +18,22 @@ export interface ContextualImagePromptInput {
   isThumbnail?: boolean;
   isShoppingConnect?: boolean;
   hasReferenceImage?: boolean;
+  /**
+   * [2026-09-06 R-A] Section ordinal used to rotate the camera line. The brief is the
+   * single owner of viewpoint; undefined (or a thumbnail) keeps the generic composition.
+   */
+  viewpointIndex?: number;
+}
+
+const GENERIC_COMPOSITION_LINE = '- Choose the clearest viewpoint for the section action: close detail for inspection, medium shot for hands-on action, or wide shot only when spatial layout is the subject.';
+
+/** Camera line for the section, or null when the generic composition should stay. */
+function resolveViewpointLine(input: ContextualImagePromptInput): string | null {
+  if (input.isThumbnail) return null;
+  const index = input.viewpointIndex;
+  if (typeof index !== 'number' || !Number.isFinite(index)) return null;
+  const safe = Math.abs(Math.trunc(index)) % IMAGE_VIEWPOINT_HINTS.length;
+  return `- ${IMAGE_VIEWPOINT_HINTS[safe]}`;
 }
 
 const NON_GENERATIVE_IMAGE_PROVIDERS = new Set([
@@ -124,6 +142,7 @@ export interface StructuredImageContextDecisionInput {
 }
 
 const MAX_PROMPT_CHARS = 4_000;
+const COMPACT_PROMPT_CHARS = 1_800;
 
 const NON_CONTENT_HTML_TAGS = new Set([
   'script', 'style', 'template', 'noscript', 'iframe', 'object', 'svg', 'head', 'title',
@@ -401,18 +420,26 @@ function buildCompactContextualImagePrompt(input: ContextualImagePromptInput): s
   const referencePolicy = input.hasReferenceImage
     ? REFERENCE_IDENTITY_POLICY
     : NO_REFERENCE_IDENTITY_POLICY;
+  const viewpointLine = resolveViewpointLine(input);
 
-  return [
+  const compose = (visualHint: string): string => [
     CONTEXTUAL_PROMPT_MARKER,
     `GLOBAL SUBJECT: ${quoted(globalSubject)}`,
     `SECTION HEADING: ${quoted(sectionHeading)}`,
     `SECTION EVIDENCE: ${quoted(sectionContent)}`,
     `ARTICLE TITLE: ${quoted(articleTitle)}`,
-    existingPrompt ? `VISUAL HINT: ${quoted(existingPrompt)}` : '',
+    visualHint ? `VISUAL HINT: ${quoted(visualHint)}` : '',
     'Create one literal, physically plausible scene in which the section evidence is visually recognizable. Keep the subject dominant and omit unrelated generic interiors or posed people.',
+    viewpointLine ? viewpointLine.replace(/^- /, '') : '',
     referencePolicy,
     textPolicy,
-  ].filter(Boolean).join('\n').slice(0, 1_800);
+  ].filter(Boolean).join('\n');
+
+  // The head-slice cuts the tail, where the policies live. Drop the secondary
+  // visual hint before letting the text policy fall off the end.
+  const full = compose(existingPrompt);
+  const fitted = full.length <= COMPACT_PROMPT_CHARS ? full : compose('');
+  return fitted.slice(0, COMPACT_PROMPT_CHARS);
 }
 
 export function prepareProviderContextualImagePrompt(
@@ -485,7 +512,7 @@ export function buildContextualImagePrompt(input: ContextualImagePromptInput): s
     '- The section action or diagnostic detail is the dominant visual event; supporting surroundings stay minimal and relevant.',
     '',
     'COMPOSITION:',
-    '- Choose the clearest viewpoint for the section action: close detail for inspection, medium shot for hands-on action, or wide shot only when spatial layout is the subject.',
+    resolveViewpointLine(input) || GENERIC_COMPOSITION_LINE,
     '- Keep the required subject sharp, unobstructed, and visually dominant with natural depth and realistic scale.',
     '',
     referencePolicy,

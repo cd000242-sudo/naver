@@ -562,6 +562,9 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             englishPrompt: rawPrompt,
             isThumbnail: isThumb,
             originalIndex: headingIdx,
+            // [2026-09-06 R-A] main rewrites originalIndex per call; this is the section ordinal the
+            // contextual brief rotates the camera line from (items are sent one per call).
+            diversityIndex: headingIdx,
             allowText: isThumb ? includeThumbnailText : false,
             referenceImagePath: isShoppingConnect
                 ? usableShoppingReferenceUrl
