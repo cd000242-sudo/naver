@@ -191,7 +191,7 @@ import { applyPostDraftFactCheck } from './content/postDraftFactCheck.js';
 import { applyIssueDisciplineAudit } from './content/issueDisciplineAudit.js';
 import { checkTitleAnswer, describeTitleAnswer } from './content/titleAnswerCheck.js';
 // [2026-09-06 사장님] 제목의 궁금증을 본문이 안 풀면 한 번 다시 쓴다 — 기준 1번의 재생성 연결.
-import { buildTitleAnswerRetryInstruction, shouldRetryForTitleAnswer } from './content/titleAnswerRetry.js';
+import { TITLE_ANSWER_RETRY_FLOOR, buildTitleAnswerRetryInstruction, shouldRetryForTitleAnswer } from './content/titleAnswerRetry.js';
 import { checkVerdictStructure, describeVerdictStructure } from './content/verdictStructure.js';
 import {
   buildThroughlineDirective,
@@ -1920,6 +1920,20 @@ export function finalizeStructuredContent(
       const finalPK = primaryKeyword || (source.metadata as any)?.keywords?.[0] || '';
       // [2026-09-03 4차 생성 실측] 옵션 조합("그레이 본체+다리")은 채점 전에 뗀다 — 감점만으로는 다른 후보가 더 깎이면 그대로 통과했다.
       if (finalMode === 'affiliate') finalContent.selectedTitle = stripOptionCombo(String(finalContent.selectedTitle || ''));
+      // [2026-09-07 사장님 "제목은 왜 약속을 안 지키니"] 본문을 다 쓴 뒤의 후보 교체는 본문이 갚는 제목만 —
+      //   실측: 본문은 보일러 설정 골격인데 게이트가 후킹 90점 후보 "공공임대 14개 기계실" 로 교체 → 응답 20%.
+      //   쇼핑에만 있던 "본문 모르는 점수 교체 차단" 을 전 모드로. 약속을 뽑을 수 없는 짧은 제목은 막지 않는다.
+      const bodyForTitleSwap = [
+        ...(Array.isArray(finalContent.headings) ? finalContent.headings : []).map((h: any) => `${h?.title || ''}\n${h?.content || ''}`),
+        finalContent.conclusion,
+      ].filter(Boolean).join('\n');
+      const bodyKeepsPromise = (text: string): boolean => {
+        const ta = checkTitleAnswer({ title: text, primaryKeyword: String(finalPK), introduction: String(finalContent.introduction || ''), body: bodyForTitleSwap });
+        if (!ta.checked) return true;
+        if (ta.answerRate >= TITLE_ANSWER_RETRY_FLOOR) return true;
+        console.log(`[FinalQualityGate] 후보 제외 — 본문이 약속을 안 갚음(응답 ${Math.round(ta.answerRate * 100)}%, 미상환: ${ta.promised.filter((w) => !bodyForTitleSwap.includes(w)).join(', ')}): "${text}"`);
+        return false;
+      };
       const finalCheck = evaluateTitleQuality(finalContent.selectedTitle, String(finalPK), finalMode, finalCategoryHint, source.articleType);
       if (finalCheck.score < 50) {
         console.warn(`[FinalQualityGate] ⚠️ 최종 제목 품질 미달 (${finalCheck.score}점): "${finalContent.selectedTitle}"`);
@@ -1968,7 +1982,8 @@ export function finalizeStructuredContent(
         }
         const candidateTexts = (Array.isArray(finalContent.titleCandidates) ? finalContent.titleCandidates : [])
           .map((c: any) => (typeof c?.text === 'string' ? stripOptionCombo(c.text.trim()) : ''))
-          .filter((t: string) => t.length > 0 && t !== finalContent.selectedTitle);
+          .filter((t: string) => t.length > 0 && t !== finalContent.selectedTitle)
+          .filter(bodyKeepsPromise);
         const scoredCandidates = promiseKept ? [] : candidateTexts
           .map((text: string) => ({ text, score: evaluateTitleQuality(text, String(finalPK), finalMode, finalCategoryHint, source.articleType).score + serpLagPenalty(text) }))
           .sort((a: { score: number }, b: { score: number }) => b.score - a.score);
@@ -7866,6 +7881,39 @@ async function generateStructuredContentInternal(
         //   재생성이 어차피 뜨면 지시만 얹고, 아니면 patch(본문+결론 재작성)를 부른다. 도입만 어긋난 경우는
         //   patch 가 도입을 못 만지므로 경고로만 남긴다. costSaver 가 selfCritique 를 막으면 판정도 돌지 않는다
         //   — 판정만 하고 못 고치는 호출은 낭비다. 쇼핑도 판정+관통 patch 는 돈다(allowThroughlineRepair).
+        /*
+         * [2026-09-06 사장님] "글 올리면 굳이 글을 신경 안 써도 되게" — 기준 1번(제목의 궁금증을 본문이 푸는가).
+         *   [09-07 라이브] 처음엔 게이트 앞(Fidelity 옆)에 뒀더니 제목이 확정되기 전이라 약속이 2개 미만으로 잡혀
+         *   조용히 건너뛰었다(응답 50% 글이 그대로 나감). 게이트·제목 보정을 지난 뒤, 90점 재시도 바로 앞에서 검사한다.
+         *   TitleAnswer 는 그동안 로그만 남겼다. 59편 실측: 본문 응답률 60% 미만 10편(17%), 0% 도 나갔다.
+         *   다른 기준은 게이트가 잡아 다시 쓰게 하는데 이것만 빠져 있었다. 바닥(0.6) 아래면 미상환 항목을
+         *   그대로 적어 한 번 다시 쓰게 한다. 새 차단은 없다 — 두 번째도 미달이면 그대로 나간다(경고 로그).
+         */
+        if (allowPaidPostGenerationRepair && !_titleAnswerRetryUsed && attempt < QUALITY_ATTEMPT_LIMIT) {
+          try {
+            const _taHeadings = Array.isArray((optimized as any)?.headings) ? (optimized as any).headings : [];
+            const _taTitle = String((optimized as any)?.selectedTitle || (optimized as any)?.title || '');
+            const _ta = checkTitleAnswer({
+              title: _taTitle,
+              primaryKeyword: getPrimaryKeywordFromSource(source as any),
+              introduction: String((optimized as any)?.introduction || ''),
+              body: [
+                ..._taHeadings.map((h: any) => `${h?.title || ''}\n${h?.content || ''}`),
+                (optimized as any)?.conclusion,
+              ].filter(Boolean).join('\n'),
+            });
+            console.log(`[TitleAnswer] 검사: ${_ta.checked ? `응답 ${Math.round(_ta.answerRate * 100)}% (약속 ${_ta.promised.length}: ${_ta.promised.join(', ')})` : '판정 재료 부족(약속 2개 미만 또는 본문 없음)'} · 제목 "${_taTitle.slice(0, 60)}"`);
+            if (shouldRetryForTitleAnswer(_ta)) {
+              _titleAnswerRetryUsed = true;
+              const _bodyForUnpaid = [String((optimized as any)?.introduction || ''), ..._taHeadings.map((h: any) => `${h?.title || ''} ${h?.content || ''}`), String((optimized as any)?.conclusion || '')].join(' ');
+              const _unpaid = _ta.promised.filter((word) => !_bodyForUnpaid.includes(word));
+              console.warn(`[TitleAnswer] 🔁 제목 약속 미이행 — 재생성 1회 (응답 ${Math.round(_ta.answerRate * 100)}%, 미상환: ${_unpaid.join(', ') || _ta.echoedOnly.join(', ')})`);
+              extraInstruction = `${buildTitleAnswerRetryInstruction(_taTitle, _ta, _unpaid.length > 0 ? _unpaid : _ta.echoedOnly)}\n${extraInstruction}`;
+              continue; // 같은 attempt 카운트 보존 — Fidelity 재시도와 같은 규칙
+            }
+          } catch (_e) { console.warn('[TitleAnswer] 검사 실패 (정상 흐름 유지):', (_e as Error)?.message || _e); }
+        }
+
         let _throughline: ThroughlineJudgement | null = null;
         if (
           allowThroughlineRepair
@@ -7916,39 +7964,6 @@ async function generateStructuredContentInternal(
         //   v2.10.178: safety < 50 (환각·금지패턴)만 활성화
         //   v2.10.179: decision='regenerate' 전체 — finalScore < 60도 포함 (근본적 미달)
         //   여전히 1회 한도 (_qualityGateRetryUsed) + attempt 여유 조건
-        /*
-         * [2026-09-06 사장님] "글 올리면 굳이 글을 신경 안 써도 되게" — 기준 1번(제목의 궁금증을 본문이 푸는가).
-         *   [09-07 라이브] 처음엔 게이트 앞(Fidelity 옆)에 뒀더니 제목이 확정되기 전이라 약속이 2개 미만으로 잡혀
-         *   조용히 건너뛰었다(응답 50% 글이 그대로 나감). 게이트·제목 보정을 지난 뒤, 90점 재시도 바로 앞에서 검사한다.
-         *   TitleAnswer 는 그동안 로그만 남겼다. 59편 실측: 본문 응답률 60% 미만 10편(17%), 0% 도 나갔다.
-         *   다른 기준은 게이트가 잡아 다시 쓰게 하는데 이것만 빠져 있었다. 바닥(0.6) 아래면 미상환 항목을
-         *   그대로 적어 한 번 다시 쓰게 한다. 새 차단은 없다 — 두 번째도 미달이면 그대로 나간다(경고 로그).
-         */
-        if (allowPaidPostGenerationRepair && !_titleAnswerRetryUsed && attempt < QUALITY_ATTEMPT_LIMIT) {
-          try {
-            const _taHeadings = Array.isArray((optimized as any)?.headings) ? (optimized as any).headings : [];
-            const _taTitle = String((optimized as any)?.selectedTitle || (optimized as any)?.title || '');
-            const _ta = checkTitleAnswer({
-              title: _taTitle,
-              primaryKeyword: getPrimaryKeywordFromSource(source as any),
-              introduction: String((optimized as any)?.introduction || ''),
-              body: [
-                ..._taHeadings.map((h: any) => `${h?.title || ''}\n${h?.content || ''}`),
-                (optimized as any)?.conclusion,
-              ].filter(Boolean).join('\n'),
-            });
-            console.log(`[TitleAnswer] 검사: ${_ta.checked ? `응답 ${Math.round(_ta.answerRate * 100)}% (약속 ${_ta.promised.length}: ${_ta.promised.join(', ')})` : '판정 재료 부족(약속 2개 미만 또는 본문 없음)'} · 제목 "${_taTitle.slice(0, 60)}"`);
-            if (shouldRetryForTitleAnswer(_ta)) {
-              _titleAnswerRetryUsed = true;
-              const _bodyForUnpaid = [String((optimized as any)?.introduction || ''), ..._taHeadings.map((h: any) => `${h?.title || ''} ${h?.content || ''}`), String((optimized as any)?.conclusion || '')].join(' ');
-              const _unpaid = _ta.promised.filter((word) => !_bodyForUnpaid.includes(word));
-              console.warn(`[TitleAnswer] 🔁 제목 약속 미이행 — 재생성 1회 (응답 ${Math.round(_ta.answerRate * 100)}%, 미상환: ${_unpaid.join(', ') || _ta.echoedOnly.join(', ')})`);
-              extraInstruction = `${buildTitleAnswerRetryInstruction(_taTitle, _ta, _unpaid.length > 0 ? _unpaid : _ta.echoedOnly)}\n${extraInstruction}`;
-              continue; // 같은 attempt 카운트 보존 — Fidelity 재시도와 같은 규칙
-            }
-          } catch (_e) { console.warn('[TitleAnswer] 검사 실패 (정상 흐름 유지):', (_e as Error)?.message || _e); }
-        }
-
         if (
           allowPaidPostGenerationRepair
           && _gateResult
