@@ -5809,6 +5809,10 @@ async function generateStructuredContentInternal(
     // 쇼핑커넥트는 품질 점수 때문에 두 번째 유료 생성을 호출하지 않는다.
     // 첫 호출에서 전환 계약을 적용하고 부족한 결과는 경고 후 발행한다.
     && source.contentMode !== 'affiliate';
+  // [2026-09-06 approved] Shopping keeps skipping the second full paid generation, but the throughline
+  //   judge (one small side call) and its patch (one partial rewrite) run there too — without them the
+  //   9/6 shopping smoke produced no [Throughline] line at all. Other patch reasons stay affiliate-off.
+  const allowThroughlineRepair = !isV3Prompt && process.env.CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR !== '0';
 
   // [2026-08-23] URL만 넣고 생성할 때의 핵심 검색 키워드 확정.
   //   SEO 제목 강제(배치강제·커버리지 게이트·제목 품질 게이트)는 전부
@@ -7851,10 +7855,10 @@ async function generateStructuredContentInternal(
         //   소비자는 아래 기존 재생성/patch 뿐이다(새 재생성 트리거 없음 — 편당 비용을 늘리지 않는다).
         //   재생성이 어차피 뜨면 지시만 얹고, 아니면 patch(본문+결론 재작성)를 부른다. 도입만 어긋난 경우는
         //   patch 가 도입을 못 만지므로 경고로만 남긴다. costSaver 가 selfCritique 를 막으면 판정도 돌지 않는다
-        //   — 판정만 하고 못 고치는 호출은 낭비다.
+        //   — 판정만 하고 못 고치는 호출은 낭비다. 쇼핑도 판정+관통 patch 는 돈다(allowThroughlineRepair).
         let _throughline: ThroughlineJudgement | null = null;
         if (
-          allowPaidPostGenerationRepair
+          allowThroughlineRepair
           && allowLegacyPostDraftLlm
           && costPolicy.allowQualityGateSelfCritique
           && _gateResult
@@ -7919,8 +7923,10 @@ async function generateStructuredContentInternal(
         // [R3] 관통 지시가 있으면 게이트 지시 앞에 둔다 — 결론 복귀가 먼저, 점수 항목은 그 다음.
         const _patchDirective = [_throughlineDirective, _quality90Assessment?.directive || _gateResult?.retryDirective || ''].filter(Boolean).join('\n');
         const _throughlinePatchLabel = _throughlinePatch ? `흐름 관통 실패(${_throughline?.breakAt})` : '';
+        // [2026-09-06] Shopping enters this patch only for a throughline miss; every other reason still needs the full repair flag.
+        const _allowGatePatch = allowPaidPostGenerationRepair || (allowThroughlineRepair && _throughlinePatch);
         if (
-          allowPaidPostGenerationRepair
+          _allowGatePatch
           && allowLegacyPostDraftLlm
           && _gateResult
           && optimized.bodyPlain

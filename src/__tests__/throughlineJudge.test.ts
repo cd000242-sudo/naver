@@ -204,6 +204,24 @@ describe('contentGenerator 배선 — 소비자는 기존 재생성/patch 뿐', 
     expect(src).toMatch(/const _patchDirective = \[_throughlineDirective, _quality90Assessment\?\.directive \|\| _gateResult\?\.retryDirective \|\| ''\]\.filter\(Boolean\)\.join\('\\n'\)/);
     expect(src).toMatch(/selfCritiqueAndRewrite\(\s*optimized\.bodyPlain,\s*_patchPersona,[^;]*_patchDirective,\s*_patchConclusion \|\| undefined,/);
   });
+  /**
+   * [2026-09-06 사장님 승인 "남은것 전부 승인"] 쇼핑(affiliate)은 allowPaidPostGenerationRepair 가 꺼져 있어
+   *   판정·patch 가 통째로 생략됐다(9/6 쇼핑 스모크 [Throughline] 0줄). 두 번째 전체 유료 생성은 그대로 막고,
+   *   판정 1회 + 관통 실패 patch 1회만 쇼핑에도 허용한다. 다른 patch 사유(decision/humanFloor/quality90)는
+   *   쇼핑에서 여전히 안 돈다 — 비용 계약을 넓히지 않는다.
+   */
+  it('쇼핑도 판정은 돈다 — 판정 게이트는 affiliate 제외 없는 allowThroughlineRepair', () => {
+    expect(src).toMatch(/const allowThroughlineRepair\s*=\s*!isV3Prompt\s*&&\s*process\.env\.CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR !== '0';/);
+    const block = src.slice(src.indexOf('let _throughline:'), src.indexOf('_throughlineJudgeUsed = true;'));
+    expect(block).toContain('allowThroughlineRepair');
+    expect(block).not.toContain('allowPaidPostGenerationRepair');
+  });
+  it('쇼핑 patch 는 관통 실패 사유일 때만 — 전체 재생성 게이트는 그대로 allowPaidPostGenerationRepair', () => {
+    expect(src).toMatch(/const _allowGatePatch\s*=\s*allowPaidPostGenerationRepair\s*\|\|\s*\(allowThroughlineRepair\s*&&\s*_throughlinePatch\);/);
+    expect(src).toMatch(/if \(\s*_allowGatePatch\s*&&\s*allowLegacyPostDraftLlm\s*&&\s*_gateResult\s*&&\s*optimized\.bodyPlain/);
+    expect(src).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_gateResult\s*&& \(_gateResult\.decision === 'regenerate'/);
+    expect(src).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_quality90Assessment\?\.miss\s*&& !_quality90FollowupRetryUsed/);
+  });
   it('지문 allowlist 에 등록돼 있다', () => {
     expect(read('contentQualityV3/candidateRuntimeFingerprint.ts')).toContain("'src/content/throughlineJudge.ts'");
   });
