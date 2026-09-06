@@ -3412,6 +3412,24 @@ async function retryRunAutomationAfterRecoverablePublishFailure(apiClient, paylo
     appendLog(`❌ 브라우저 세션 복구 재시도도 실패했습니다: ${String(retryErrorMsg).substring(0, 120)}`);
     throw new Error(retryErrorMsg);
 }
+// [2026-09-06 R-A/C] Measurement only: aHash the local image files and log how alike they
+// are. Never blocks publishing — any failure is swallowed after a console warning.
+async function logImageDiversityBeforePublish(generatedImages, postTitle) {
+    try {
+        const paths = (Array.isArray(generatedImages) ? generatedImages : [])
+            .map((img) => String(img?.filePath || img?.savedToLocal || '').trim())
+            .filter((p) => p && !/^(https?:|data:)/i.test(p));
+        if (paths.length < 2 || typeof window.api?.reportImageDiversity !== 'function') return;
+        const report = await window.api.reportImageDiversity(paths, String(postTitle || ''));
+        if (!report) return;
+        const line = `[ImageDiversity] ${report.summary} (임계 ${report.threshold})`;
+        console.log(line, report.nearDuplicatePairs);
+        appendLog(`📏 ${line}`);
+    }
+    catch (error) {
+        console.warn('[ImageDiversity] 측정 실패 (발행은 계속):', error?.message || error);
+    }
+}
 async function executeBlogPublishing(structuredContent, generatedImages, formData) {
     formData = createPipelineFormDataSnapshot('full-auto', formData || {});
     if (window.stopFullAutoPublish === true) {
@@ -3451,6 +3469,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         throw new Error('네이버 아이디와 비밀번호가 설정되지 않았습니다.');
     }
     appendLog('🔐 네이버 계정 정보를 확인했습니다.');
+    await logImageDiversityBeforePublish(generatedImages, structuredContent?.selectedTitle);
     showUnifiedProgress(87, '페이로드 구성 중...', '발행할 콘텐츠를 준비하고 있습니다.');
     let ctaText = formData.ctaText;
     let ctaLink = formData.ctaLink;

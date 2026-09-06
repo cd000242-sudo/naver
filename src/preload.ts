@@ -280,6 +280,12 @@ contextBridge.exposeInMainWorld('api', {
   // 미노출이라 렌더러가 "아직 준비 안 됨" 폴백만 탔다. AI 영상 mp4 자동 불러오기 활성화.
   importMp4: (payload: { sourcePath: string; dirPath: string }): Promise<{ success: boolean; filePath?: string; message?: string }> =>
     ipcRenderer.invoke('media:importMp4', payload),
+  // [2026-09-06 R-A/C] Pre-publish image-set similarity measurement (aHash pairwise Hamming).
+  reportImageDiversity: (paths: string[], postTitle?: string): Promise<{
+    count: number; validCount: number; pairs: number; minHamming: number | null; meanHamming: number | null;
+    threshold: number; nearDuplicatePairs: Array<{ a: number; b: number; distance: number }>; summary: string; skipped: number[];
+  } | null> =>
+    ipcRenderer.invoke('image:diversityReport', { paths, postTitle }),
 
   generateVeoVideo: (payload: {
     prompt: string;

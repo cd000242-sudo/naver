@@ -9257,6 +9257,7 @@ app.whenReady().then(async () => {
       const { registerSystemHandlers, registerFileHandlers, registerDialogHandlers } = await import('./main/ipc/systemHandlers.js');
       const { registerMiscHandlers } = await import('./main/ipc/miscHandlers.js');
       const { registerScheduleHandlers } = await import('./main/ipc/scheduleHandlers.js');
+      const { registerImageDiversityHandler } = await import('./main/ipc/imageDiversityHandler.js');
       const ctx = {
         getMainWindow: () => mainWindow,
         getAutomationMap: () => automationMap,
@@ -9265,6 +9266,8 @@ app.whenReady().then(async () => {
       };
       registerImageHandlers(ctx);
       registerMediaHandlers(ctx);
+      // [2026-09-06 R-A/C] image-set aHash measurement behind the [ImageDiversity] log line
+      registerImageDiversityHandler(ctx);
       registerSystemHandlers(ctx);
       registerFileHandlers(ctx);
       registerDialogHandlers(ctx);

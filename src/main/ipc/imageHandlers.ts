@@ -41,7 +41,7 @@ function safeHandle(channel: string, handler: (...args: any[]) => any): void {
 //   v2.10.241에서 existsSync 제거로 "존재 확인 후 접근" 단계가 단일 fsp 호출로 단순화되며
 //   허용 루트 외부 임의 경로 접근면이 직접 노출됨. resolve 후 허용 루트 startsWith로 제한.
 //   기본 허용: userData + os.tmpdir(). 핸들러별로 extraRoots 추가 가능.
-function assertPathWithinAllowedRoots(
+export function assertPathWithinAllowedRoots(
     targetPath: string,
     label: string,
     extraRoots: string[] = []
