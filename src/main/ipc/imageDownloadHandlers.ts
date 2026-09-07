@@ -22,6 +22,7 @@ import {
 } from './imageDownloadPathPolicy.js';
 import { summarizeBatchImageDownloads } from './imageDownloadResultPolicy.js';
 import { resolveExtensionFromBytes } from './imageExtensionPolicy.js';
+import { verifyImagePayload } from './imagePayloadPolicy.js';
 
 export function registerImageDownloadHandlers(): void {
     ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string, category?: string) => {
@@ -32,6 +33,7 @@ export function registerImageDownloadHandlers(): void {
 
             let buffer: Buffer;
             let ext = '.jpg';
+            let isRemoteDownload = false;
 
             const trimmedUrl = String(imageUrl || '').trim();
             if (!trimmedUrl) {
@@ -65,9 +67,27 @@ export function registerImageDownloadHandlers(): void {
                     ext = path.extname(localFilePath) || '.jpg';
                 } else {
                     // 3) http(s) 다운로드
+                    // [2026-09-08] User-Agent 없이 요청하면 위키미디어 등이 200과 함께
+                    //   robot-policy 안내 텍스트를 돌려준다. 그 본문이 .jpg 로 저장돼
+                    //   발행이 통째로 멈췄다(사용자 실측). 배치 다운로더와 같은 헤더를 쓴다.
                     const client = parsedUrl.protocol === 'https:' ? https : http;
+                    isRemoteDownload = true;
                     buffer = await new Promise<Buffer>((resolve, reject) => {
-                        client.get(trimmedUrl, { timeout: 30000 }, (response: any) => {
+                        client.get(trimmedUrl, {
+                            timeout: 30000,
+                            headers: {
+                                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                                'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+                                'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+                                'Referer': `${parsedUrl.protocol}//${parsedUrl.host}/`,
+                            },
+                        }, (response: any) => {
+                            const status = Number(response.statusCode || 0);
+                            if (status < 200 || status >= 300) {
+                                response.resume();
+                                reject(new Error(`HTTP ${status}`));
+                                return;
+                            }
                             const chunks: Buffer[] = [];
                             response.on('data', (chunk: Buffer) => chunks.push(chunk));
                             response.on('end', () => resolve(Buffer.concat(chunks)));
@@ -84,6 +104,14 @@ export function registerImageDownloadHandlers(): void {
             //   3회 재시도 후 발행이 중단됐다(사용자 실측 2026-08-18).
             //   매직 바이트로 실제 포맷을 판별해 네이버가 받는 확장자로 강제한다.
             ext = resolveExtensionFromBytes(buffer, ext);
+
+            // [2026-09-08] 깨진 응답을 이미지 파일로 저장하지 않는다 — 저장되면 발행
+            //   단계에서 네이버가 거부하고 IMAGE_INSERTION_FAILED 로 발행이 중단된다.
+            const verdict = verifyImagePayload(buffer, isRemoteDownload);
+            if (!verdict.ok) {
+                console.warn(`[Main] ⚠️ 이미지 다운로드 폐기 (${trimmedUrl.slice(0, 120)}): ${verdict.reason}`);
+                return { success: false, message: `이미지를 받지 못했습니다: ${verdict.reason}` };
+            }
 
             // ✅ [v2.10.21] image:downloadAndSave 저장 경로를 다른 IPC와 통일 — 사용자 보고
             //   '풀오토만 폴더 생성되고 URL 이미지 수집은 안 된다'
@@ -236,8 +264,11 @@ export function registerImageDownloadHandlers(): void {
                         // ✅ axios 1.x: response.headers['content-type']가 union type 반환 → String() 변환
                         const contentType = String(response.headers['content-type'] || 'image/jpeg');
 
-                        if (buffer.length < 1024) {
-                            console.warn(`[Main] ⚠️ 이미지 크기 너무 작음 (${buffer.length}bytes), 재시도 ${attempt}/${maxRetries}`);
+                        // [2026-09-08] 크기뿐 아니라 매직 바이트까지 본다 — 1KB 넘는
+                        //   에러 페이지가 200으로 오면 종전 검사를 그대로 통과했다.
+                        const verdict = verifyImagePayload(buffer, true);
+                        if (!verdict.ok) {
+                            console.warn(`[Main] ⚠️ 이미지 응답 폐기 (${verdict.reason}), 재시도 ${attempt}/${maxRetries}`);
                             if (attempt < maxRetries) {
                                 await new Promise(r => setTimeout(r, 500 * attempt));
                                 continue;
