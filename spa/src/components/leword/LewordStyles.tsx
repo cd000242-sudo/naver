@@ -1956,6 +1956,10 @@ function LewordStyles() {
             .lw-cand-hit { background: rgba(52,211,153,.06); }
             .lw-cand-rank { color: #34d399; }
             .lw-branch-new { margin-left: 7px; padding: 1px 7px; border: 1px solid rgba(167,139,250,.4); border-radius: 999px; color: #c4b5fd; font-size: 11px; }
+            /* 확장 표의 구역 제목 줄 — 층(주제 그대로 → 새 가지)이 바뀌는 자리. */
+            .lw-tier-row td { padding: 12px 10px 6px; color: #e2e8f0; font-weight: 700; font-size: 13px; border-top: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.025); }
+            .lw-tier-row td em { margin-left: 6px; color: #8a94a6; font-style: normal; font-weight: 400; font-size: 12px; }
+            .lw-frontal-hot { color: #fbbf24; font-weight: 600; }
             /* 확장 키워드 자리 판정 — 색은 사실 셋(있음·좁음·없음)만 가른다. */
             .lw-slot-open { color: #34d399; font-weight: 600; }
             .lw-slot-tight { color: #fbbf24; }

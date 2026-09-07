@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues', 'issue-brief', 'hot-keywords']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-frontal', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues', 'issue-brief', 'hot-keywords']);
 /**
  * 장부(쿼터)가 필요해 GAS 에 남은 키워드 액션들은 엣지 방패(leaderspro-edge)를
  * 거친다 — 같은 질문은 15분 캐시로 즉답(0.5초), 처음 질문만 GAS 로 간다(장부도
@@ -47,6 +47,7 @@ const SLOW_ACTIONS: Record<string, number> = {
     'post-audit-analyze': 180000,
     'keyword-expansions': 90000,
     'keyword-docs': 90000,
+    'keyword-frontal': 90000,
     'radar-analyze': 120000,
     'radar-search': 240000,
     'radar-evaluate': 240000,
@@ -442,12 +443,23 @@ export const fetchKeywordExpansions = (keyword: string) =>
     call<{
         keyword: string;
         widenedFrom: string | null;
-        items: Array<{ keyword: string; seed: string; drifted: boolean; searchVolume: number | null }>;
+        /** tier 는 워커가 매긴 층(1~4, lib/expansionTier 와 같은 규칙). 화면은 다시 계산해 쓴다. */
+        items: Array<{ keyword: string; seed: string; drifted: boolean; tier?: number; searchVolume: number | null }>;
     }>('keyword-expansions', { keyword });
 
 export const fetchKeywordDocs = (keywords: string[]) =>
     // call 은 문자열 파라미터만 받는다 — keyword-volumes 와 같이 줄바꿈으로 잇는다.
     call<{ docs: Record<string, number> }>('keyword-docs', {
+        keywords: keywords.join(String.fromCharCode(10)),
+    });
+
+/**
+ * 정면 글 재료 — **실제 블로그 탭 화면** 상위 10개 제목(노출 순서). 12개까지.
+ * 오픈API 상위 제목은 스팸이 먹어 정면 0/10 이 나오던 것을 실제 화면은 10/10 으로
+ * 냈다(실측 2026-09-07 '티빙 유출 보상'). 마크업이 바뀌면 빈 값이 온다 — 화면은 '—'.
+ */
+export const fetchKeywordFrontal = (keywords: string[]) =>
+    call<{ titles: Record<string, string[]> }>('keyword-frontal', {
         keywords: keywords.join(String.fromCharCode(10)),
     });
 

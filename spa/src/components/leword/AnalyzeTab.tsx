@@ -4,6 +4,7 @@ import {
     analyzeKeyword,
     fetchKeywordDocs,
     fetchKeywordExpansions,
+    fetchKeywordFrontal,
     fetchKeywordPostIdeas,
     formatCount,
     getStoredLicense,
@@ -12,6 +13,7 @@ import {
     type KeywordUsage,
     type KinPostIdea,
 } from '../../lib/keywordApi';
+import { expansionTier, frontalCount, tierHeading, FRONTAL_SATURATION } from '../../lib/expansionTier';
 import { bridgePostIdeas } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
 import { ErrorNote, MetricCell, TabIntro, UsageBar } from './LewordShared';
@@ -103,6 +105,8 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
      * 판단(수요가 공급을 넘는가)을 여기서도 할 수 있다.
      */
     const [expDocs, setExpDocs] = useState<Record<string, number>>({});
+    /** 실제 블로그 탭 화면 상위 10개 제목(keyword-frontal) — 정면 글 수(lib/expansionTier)를 센다. */
+    const [expTitles, setExpTitles] = useState<Record<string, string[]>>({});
     /*
      * 원래 말로 확장어가 안 나올 때 쓰는 보충 목록(사장님 지시 2026-08-23
      * "만약 없으면 연관된 키워드를 넣어라, 방향만 살짝 바꿔서").
@@ -167,7 +171,7 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
      * 검색량이 있는 것만 남긴다 — 없는 것은 잴 값이 없다.
      */
     const expansionRows = (() => {
-        if (!result) return [] as Array<{ keyword: string; searchVolume: number | null; drifted?: boolean }>;
+        if (!result) return [] as Array<{ keyword: string; searchVolume: number | null; drifted?: boolean; tier: number }>;
         const pool = boardRow
             ? [...(boardRow.subKeywords || []), ...(boardRow.keywordPool || [])]
             : [];
@@ -185,7 +189,13 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                 seen.add(key);
                 return typeof r.searchVolume === 'number' && r.searchVolume > 0;
             })
-            .sort((a, b) => (b.searchVolume || 0) - (a.searchVolume || 0))
+            /*
+             * 층을 매긴다(사장님 2026-09-07 "순서가 잘못됐다"). 주제 그대로인 가지가
+             * 먼저, 꼬리말만 같은 것은 뒤. 층 안에서는 검색량 순. 그래야 아래의
+             * 문서수 실측(상위 40)도 줄기 쪽에 먼저 붙는다.
+             */
+            .map((r) => ({ ...r, tier: expansionTier(r.keyword, result.keyword) }))
+            .sort((a, b) => (a.tier - b.tier) || ((b.searchVolume || 0) - (a.searchVolume || 0)))
             /*
              * 가지는 넉넉히 보여 준다(사장님 2026-08-23 "가지는 많을수록 좋아.
              * 그래야 생각지도 못한 키워드를 찾거든"). 자리 판정(문서수)은
@@ -243,6 +253,30 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
         // 표의 상위 40줄이 바뀔 때(연관 도착·보충 도착·보드 풀 합류)마다 안 잰 줄을 잰다.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result, docsKey]);
+
+    /*
+     * 정면 글 — 실제 블로그 탭 화면을 긁는다(사장님 2026-09-07). 화면 한 장이 400KB 라
+     * 줄기(①②층) 상위 12줄만 잰다. 그 아래는 비율만 보고 [더 파기]로 이어 간다.
+     * 문서수와 같은 방식으로 "아직 안 잰 줄만" 그때그때 — 재는 중 상태에 묶지 않는다.
+     */
+    const frontalAsked = useRef<Set<string>>(new Set());
+    const frontalWanted = expansionRows.filter((r) => r.tier <= 2).slice(0, 12).map((r) => r.keyword);
+    const frontalKey = frontalWanted.join('\n');
+    useEffect(() => {
+        if (!result) return;
+        const targets = frontalWanted.filter((k) => !frontalAsked.current.has(k));
+        if (targets.length === 0) return;
+        targets.forEach((k) => frontalAsked.current.add(k));
+        fetchKeywordFrontal(targets)
+            .then((res) => {
+                if (res.ok && res.data && res.data.titles) {
+                    const titles = res.data.titles;
+                    if (Object.keys(titles).length > 0) setExpTitles((prev) => ({ ...prev, ...titles }));
+                }
+            })
+            .catch(() => { /* 못 잰 줄은 '—' 로 남는다 */ });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [result, frontalKey]);
 
     /*
      * 확장어가 얇으면 보충한다(2026-08-23).
@@ -633,55 +667,79 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                                             <th scope="col">월 검색량</th>
                                             <th scope="col">문서수</th>
                                             <th scope="col">비율</th>
+                                            <th scope="col">정면 글</th>
                                             <th scope="col">자리</th>
                                             <th scope="col"> </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {expansionRows
-                                            .map((row) => {
+                                        {(() => {
+                                            const measured = expansionRows.map((row) => {
                                                 const docs = expDocs[row.keyword];
                                                 const ratio = typeof docs === 'number' && docs > 0 && row.searchVolume
                                                     ? row.searchVolume / docs
                                                     : null;
-                                                return { ...row, docs, ratio };
-                                            })
-                                            /* 자리가 넓은 순 — 못 잰 것은 뒤로 민다(0 이 아니라 모름이다). */
-                                            .sort((a, b) => (b.ratio ?? -1) - (a.ratio ?? -1))
-                                            .map((row) => (
-                                                <tr key={row.keyword}>
-                                                    <td>
-                                                        {row.keyword}
-                                                        {row.drifted && (
-                                                            /* 주제가 옮겨간 말 — 버릴 것이 아니라 새로 뻗을 가지다. */
-                                                            <span className="lw-branch-new">새 가지</span>
-                                                        )}
-                                                    </td>
-                                                    <td>{typeof row.searchVolume === 'number' ? formatCount(row.searchVolume) : '—'}</td>
-                                                    <td>{typeof row.docs === 'number' ? formatCount(row.docs) : (expState === 'loading' ? '재는 중' : '—')}</td>
-                                                    <td>{row.ratio === null ? '—' : row.ratio.toFixed(2)}</td>
-                                                    <td>
-                                                        {row.ratio === null
-                                                            ? <span className="lw-slot-unknown">모름</span>
-                                                            : row.ratio >= 1
-                                                                ? <span className="lw-slot-open">자리 있음</span>
-                                                                : row.ratio >= 0.1
-                                                                    ? <span className="lw-slot-tight">좁음</span>
-                                                                    : <span className="lw-slot-none">글이 많음</span>}
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" className="lw-dig" onClick={() => digInto(row.keyword)}>
-                                                            더 파기 →
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            ))}
+                                                const frontal = frontalCount(expTitles[row.keyword], row.keyword);
+                                                const saturated = typeof frontal === 'number' && frontal >= FRONTAL_SATURATION;
+                                                return { ...row, docs, ratio, frontal, saturated };
+                                            });
+                                            /*
+                                             * 구역 = 층. 구역 안에서는 정면 글 8/10↑(초보가 못 비집는 자리)를
+                                             * 뒤로 보내고, 그다음 자리가 넓은 순. 못 잰 것은 맨 뒤(0 이 아니라 모름).
+                                             * 황금보드와 같은 기준이다(board-order).
+                                             */
+                                            const inTier = (tier: number) => measured
+                                                .filter((row) => row.tier === tier)
+                                                .sort((a, b) => (Number(a.saturated) - Number(b.saturated)) || ((b.ratio ?? -1) - (a.ratio ?? -1)));
+                                            return ([1, 2, 3, 4] as const).flatMap((tier) => {
+                                                const rows = inTier(tier);
+                                                if (rows.length === 0) return [];
+                                                return [
+                                                    <tr key={`tier-${tier}`} className="lw-tier-row">
+                                                        <td colSpan={7}>{tierHeading(tier, result.keyword)} <em>{rows.length}</em></td>
+                                                    </tr>,
+                                                    ...rows.map((row) => (
+                                                        <tr key={row.keyword}>
+                                                            <td>{row.keyword}</td>
+                                                            <td>{typeof row.searchVolume === 'number' ? formatCount(row.searchVolume) : '—'}</td>
+                                                            <td>{typeof row.docs === 'number' ? formatCount(row.docs) : (expState === 'loading' ? '재는 중' : '—')}</td>
+                                                            <td>{row.ratio === null ? '—' : row.ratio.toFixed(2)}</td>
+                                                            <td>
+                                                                {row.frontal === null
+                                                                    ? <span className="lw-slot-unknown">—</span>
+                                                                    : <span className={row.saturated ? 'lw-frontal-hot' : ''}>{row.frontal}/{Math.min(10, (expTitles[row.keyword] || []).length)}</span>}
+                                                            </td>
+                                                            <td>
+                                                                {row.ratio === null
+                                                                    ? <span className="lw-slot-unknown">모름</span>
+                                                                    : row.saturated
+                                                                        /* 비율이 좋아도 상위가 정면 글로 찼으면 자리라고 말하지 않는다. */
+                                                                        ? <span className="lw-slot-tight">정면 글 많음</span>
+                                                                        : row.ratio >= 1
+                                                                            ? <span className="lw-slot-open">자리 있음</span>
+                                                                            : row.ratio >= 0.1
+                                                                                ? <span className="lw-slot-tight">좁음</span>
+                                                                                : <span className="lw-slot-none">글이 많음</span>}
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" className="lw-dig" onClick={() => digInto(row.keyword)}>
+                                                                    더 파기 →
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    )),
+                                                ];
+                                            });
+                                        })()}
                                     </tbody>
                                 </table>
                             </div>
                             <p className="lw-note lw-note-plain">
-                                <b>비율</b>은 월 검색량 ÷ 블로그 문서수입니다. 1 이 넘으면 찾는 사람이 쓰인 글보다 많다는 뜻이라
-                                새 글이 들어갈 자리가 있습니다. 판정의 최종 확인은 실제 검색 화면에서 하세요.
+                                <b>구역</b>은 씨앗과 얼마나 같은 주제인가입니다 — ① 주제 그대로 ② 주제는 같고 방향이 다름
+                                ③ 꼬리말만 같음 ④ 새 가지. 가지는 자동완성·뉴스 제목 어휘·검색광고 연관에서 전부 실측으로 뻗습니다.
+                                구역 안에서는 자리가 넓은 순이고, <b>정면 글</b>(실제 블로그 탭 화면 상위 10개 제목 중 이 검색어를
+                                그대로 다룬 글 수 — ①② 구역 상위 12줄만 잽니다)이 8 이상이면 비율이 좋아도 뒤로 갑니다.
+                                <b>비율</b>은 월 검색량 ÷ 블로그 문서수 — 1 이 넘으면 찾는 사람이 쓰인 글보다 많다는 뜻입니다.
                             </p>
                         </section>
                     )}
