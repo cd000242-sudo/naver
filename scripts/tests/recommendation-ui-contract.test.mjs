@@ -14,3 +14,15 @@ test('unverified generated titles cannot be displayed as measured recommendation
   assert.doesNotMatch(read('components/leword/AffiliateTab.tsx'), /item\.aiTitle\?\.text/);
   assert.doesNotMatch(read('components/leword/CoupangBoard.tsx'), /forgeShoppingTitle/);
 });
+
+test('Coupang discovery keeps a separate default and does not masquerade as search-qualified writing', () => {
+  const source = read('components/leword/CoupangBoard.tsx');
+  assert.match(source, /useState<'discovery' \| 'search'>\('discovery'\)/);
+  assert.match(source, /useState<'all' \| 'candidate'>\('all'\)/);
+  assert.match(source, /!discoveryMode && <AffiliateTitles/);
+  assert.match(source, /discoveryMode && <CoupangDiscoveryBrief/);
+  assert.match(source, /<img src=\{row.image \|\|/);
+  assert.equal((source.match(/await fetchAffiliateBoard\(\)/g) || []).length, 1);
+  assert.match(source, /discovery\.sourceLabel/);
+  assert.doesNotMatch(source, /goldboxRank\}위|bestRank.*\}위/);
+});

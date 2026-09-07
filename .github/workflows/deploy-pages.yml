@@ -45,7 +45,7 @@ jobs:
         run: npm run build
 
       - name: Verify keyword quality and campaign freshness
-        run: node --test scripts/tests/youtube-topic-quality.test.mjs scripts/tests/affiliate-freshness.test.mjs scripts/tests/recommendation-view.test.mjs scripts/tests/recommendation-ui-contract.test.mjs scripts/tests/issue-recommendation-view.test.mjs scripts/tests/affiliate-recommendation.test.mjs scripts/tests/recommendation-expiry.test.mjs
+        run: node --test scripts/tests/youtube-topic-quality.test.mjs scripts/tests/affiliate-freshness.test.mjs scripts/tests/recommendation-view.test.mjs scripts/tests/recommendation-ui-contract.test.mjs scripts/tests/issue-recommendation-view.test.mjs scripts/tests/affiliate-recommendation.test.mjs scripts/tests/recommendation-expiry.test.mjs scripts/tests/coupang-discovery.test.mjs scripts/tests/coupang-worker-patch.test.mjs
 
       - name: Prepare deploy directory
         run: |

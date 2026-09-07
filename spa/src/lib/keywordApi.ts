@@ -683,7 +683,7 @@ export type AffiliateProduct = {
     goldboxRank: number;
     /** 실시간 공급 출처 — '가전디지털' 같은 베스트셀러 카테고리 또는 '골드박스 특가'. */
     source?: string;
-    /** 그 출처 안에서의 판매 순위. */
+    /** 해당 출처 API 응답의 위치. 실제 판매량 순위로 검증된 값은 아니다. */
     bestRank?: number;
     /** 규칙 기반 구매·사용 욕구 문구 — 글 첫 줄 재료. 서버가 만든다. */
     angles?: { text: string; kind: string }[];
