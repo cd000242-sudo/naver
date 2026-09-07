@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { fetchKinAnswer, fetchKinPostIdeas, fetchKinQuestion, formatCount, searchKinQuestions, type KinPostIdea } from '../../lib/keywordApi';
 import { bridgeKinAnswer, probeBridge, type BridgeStatus } from '../../lib/bridge';
 import { loadUserKeys, saveUserKeys } from '../../lib/userKeys';
+import { CLAUDE_POLICY_NOTE, claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked } from '../../lib/claudeAuthPolicy';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -273,14 +274,27 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
             return;
         }
 
-        const viaKeys = await fetchKinAnswer(input);
+        /*
+         * 사이트 토큰 경로는 **차단이 확인되면 건너뛴다**(2026-09-07).
+         * 앤트로픽이 구독 토큰의 외부 사용을 막아서, 켜져 있는 앱을 두고도 매번
+         * 워커에 헛걸음한 뒤 거기서 멈췄다(사장님 실측 "앱 켜고 사용 중인데 안 되잖아").
+         */
+        const viaKeys = claudePolicyBlocked()
+            ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
+            : await fetchKinAnswer(input);
         if (viaKeys.ok && viaKeys.data?.answer) {
             setGenerating(false);
             setDraft(viaKeys.data.answer);
             rememberWorked(work, viaKeys.data.answer);
             return;
         }
-        if (viaKeys.error && viaKeys.error !== 'needs-keys') {
+        /*
+         * 정책 차단이면 **멈추지 않고 앱으로 넘어간다.** 토큰이 죽은 게 아니라
+         * 이 경로 자체가 막힌 것이라, 재연결을 권하면 무한루프가 된다.
+         */
+        const policyBlocked = viaKeys.error === 'claude-policy' || isClaudePolicyBlocked(viaKeys.message);
+        if (policyBlocked) markClaudePolicyBlocked();
+        if (!policyBlocked && viaKeys.error && viaKeys.error !== 'needs-keys') {
             setGenerating(false);
             /*
              * 폐기된 수동 토큰(갱신 토큰 없음)이 남아 있으면 이 오류가 반복된다 —
@@ -306,7 +320,10 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
             setGenNote(`생성 실패: ${viaApp.message}`);
             return;
         }
-        setGenNote('내 API 키 탭에 클로드코드 토큰(터미널에서 claude setup-token 한 줄, 구독이라 무료)을 넣으면 앱 없이 바로 생성됩니다. Gemini 무료 키나 LEWORD 앱 실행으로도 됩니다.');
+        // 앱도 못 잡혔다. 정책 차단이 원인이면 그 사실부터 말한다 — 토큰을 다시 넣게 두지 않는다.
+        setGenNote(policyBlocked
+            ? CLAUDE_POLICY_NOTE
+            : 'LEWORD 앱을 켜면 앱이 이 PC 의 클로드코드로 대신 돌려 줍니다. 앱 없이 쓰시려면 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요.');
     };
 
     const copyDraft = () => {

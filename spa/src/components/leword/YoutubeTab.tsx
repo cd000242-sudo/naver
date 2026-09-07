@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchGapTopics, fetchKeywordPostIdeas, fetchYoutubeTrending, formatCount, type KinPostIdea, type LiveTrendingVideo } from '../../lib/keywordApi';
 import { bridgePostIdeas } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
+import { claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked } from '../../lib/claudeAuthPolicy';
 import { cleanYoutubeSnapshot } from '../../lib/youtubeTopicQuality.mjs';
 import { TabIntro } from './LewordShared';
 
@@ -222,13 +223,21 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         setIdeas((previous) => ({ ...previous, [row.keyword]: { status: 'loading' } }));
         const done = (state: IdeaState) => setIdeas((previous) => ({ ...previous, [row.keyword]: state }));
 
-        const viaKeys = await fetchKeywordPostIdeas(row.keyword, row.video.title);
+        /*
+         * 사이트 토큰이 정책으로 막혀 있으면 건너뛴다(2026-09-07) — 앤트로픽이 구독
+         * 토큰의 외부 사용을 막았다. 앱이 켜져 있어도 여기서 멈춰 "생성 실패"만 났다.
+         */
+        const viaKeys = claudePolicyBlocked()
+            ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
+            : await fetchKeywordPostIdeas(row.keyword, row.video.title);
         if (viaKeys.ok && viaKeys.data?.ideas?.length) {
             done({ status: 'done', ideas: viaKeys.data.ideas });
             return;
         }
-        // 서버가 실제로 실패한 것(자격 문제가 아닌)은 그대로 알린다.
-        if (viaKeys.error && viaKeys.error !== 'needs-keys') {
+        const policyBlocked = viaKeys.error === 'claude-policy' || isClaudePolicyBlocked(viaKeys.message);
+        if (policyBlocked) markClaudePolicyBlocked();
+        // 서버가 실제로 실패한 것(자격·정책 문제가 아닌)은 그대로 알린다.
+        if (!policyBlocked && viaKeys.error && viaKeys.error !== 'needs-keys') {
             done({ status: 'error', message: viaKeys.message || viaKeys.error });
             return;
         }
@@ -264,7 +273,7 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             message: viaApp.status === 'outdated'
                 ? 'LEWORD 앱이 구버전이라 이 기능이 없습니다 — 앱을 업데이트해 주세요.'
                 : viaApp.status === 'offline'
-                    ? 'LEWORD 앱을 켜면 본인 구독으로 바로 만듭니다. 앱 없이 쓰려면 내 API 키 탭에서 클로드 [연동] 버튼을 눌러 주세요.'
+                    ? 'LEWORD 앱을 켜면 이 PC 의 구독으로 바로 만듭니다. 앱 없이 쓰시려면 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요.'
                     : `만들지 못했습니다: ${viaApp.message}`,
         });
     };

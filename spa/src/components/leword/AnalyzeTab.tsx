@@ -14,6 +14,7 @@ import {
     type KinPostIdea,
 } from '../../lib/keywordApi';
 import { expansionTier, frontalCount, tierHeading, FRONTAL_SATURATION } from '../../lib/expansionTier';
+import { claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked } from '../../lib/claudeAuthPolicy';
 import { bridgePostIdeas } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
 import { ErrorNote, MetricCell, TabIntro, UsageBar } from './LewordShared';
@@ -336,11 +337,18 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
         if (!result || ideas.status === 'loading') return;
         setIdeas({ status: 'loading' });
         const context = boardRow?.whySearch?.text || '';
-        const viaKeys = await fetchKeywordPostIdeas(result.keyword, context);
+        /*
+         * 정책 차단이 확인됐으면 사이트 토큰 경로를 건너뛴다(2026-09-07) — 앤트로픽이
+         * 구독 토큰의 외부 사용을 막아서 매번 헛걸음이다. 앱 폴백은 아래에 이미 있다.
+         */
+        const viaKeys = claudePolicyBlocked()
+            ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
+            : await fetchKeywordPostIdeas(result.keyword, context);
         if (viaKeys.ok && viaKeys.data?.ideas?.length) {
             setIdeas({ status: 'done', list: viaKeys.data.ideas });
             return;
         }
+        if (isClaudePolicyBlocked(viaKeys.message)) markClaudePolicyBlocked();
         /*
          * 사이트가 실패해도 **앱을 한 번 더 시도한다**(사장님 실측 2026-08-28:
          * 클로드 토큰이 취소돼 "연동된 엔진이 모두 실패했습니다"만 떴다).

@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { fetchKeywordPostIdeas, type KinPostIdea } from '../../lib/keywordApi';
+import { bridgePostIdeas } from '../../lib/bridge';
+import { loadUserKeys } from '../../lib/userKeys';
+import { CLAUDE_POLICY_NOTE, claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked } from '../../lib/claudeAuthPolicy';
 
 /**
  * 제휴 상품 하나의 제목 만들기 — SEO 와 홈판을 동시에 노린다.
@@ -28,10 +31,51 @@ function AffiliateTitles({ keyword, product, onAnalyze }: {
     const make = async () => {
         if (state.status === 'loading' || !keyword) return;
         setState({ status: 'loading' });
-        const result = await fetchKeywordPostIdeas(keyword, product);
-        setState(result.ok && result.data
-            ? { status: 'done', ideas: result.data.ideas }
-            : { status: 'error', message: result.message || result.error || '만들지 못했습니다.' });
+        /*
+         * 사이트 토큰이 정책으로 막혀 있으면 건너뛴다(2026-09-07) — 앤트로픽이 구독
+         * 토큰의 외부 사용을 막았다. 여기엔 앱 폴백이 아예 없어서, 앱을 켜 둬도
+         * "Request not allowed" 한 줄로 끝났다(사장님 실측 "앱 켜고 사용 중인데 안 되잖아").
+         */
+        const result = claudePolicyBlocked()
+            ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
+            : await fetchKeywordPostIdeas(keyword, product);
+        if (result.ok && result.data) {
+            setState({ status: 'done', ideas: result.data.ideas });
+            return;
+        }
+        const policyBlocked = result.error === 'claude-policy' || isClaudePolicyBlocked(result.message);
+        if (policyBlocked) markClaudePolicyBlocked();
+        // 앱(이 PC 의 구독)으로 넘긴다 — 다른 탭이 이미 쓰는 길이다.
+        const viaApp = await bridgePostIdeas({
+            kind: 'keyword',
+            keyword,
+            context: product,
+            provider: String(loadUserKeys().aiProvider || ''),
+        });
+        if (viaApp.status === 'ok') {
+            const usable = viaApp.ideas
+                .filter((idea) => idea.seo && idea.home)
+                .map((idea) => ({
+                    keyword: idea.keyword,
+                    why: idea.why || '',
+                    clickWhy: idea.clickWhy,
+                    seo: idea.seo as string,
+                    home: idea.home as string,
+                    sub: idea.sub,
+                })) as KinPostIdea[];
+            setState(usable.length > 0
+                ? { status: 'done', ideas: usable }
+                : { status: 'error', message: `${viaApp.provider} 가 제목을 못 만들었습니다 — 다시 눌러 주세요.` });
+            return;
+        }
+        setState({
+            status: 'error',
+            message: policyBlocked
+                ? CLAUDE_POLICY_NOTE
+                : viaApp.status === 'offline'
+                    ? 'LEWORD 앱을 켜면 이 PC 의 구독으로 바로 만듭니다. 앱 없이 쓰시려면 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요.'
+                    : (result.message || result.error || '만들지 못했습니다.'),
+        });
     };
 
     if (!keyword) return null;

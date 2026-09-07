@@ -5,7 +5,8 @@ import {
     type RadarAnalysis, type RadarEvaluated, type RadarGatedSite,
 } from '../../lib/keywordApi';
 import { loadUserKeys } from '../../lib/userKeys';
-import { bridgeRadarEvaluate } from '../../lib/bridge';
+import { bridgeKinAnswer, bridgeRadarEvaluate } from '../../lib/bridge';
+import { CLAUDE_POLICY_NOTE, claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked } from '../../lib/claudeAuthPolicy';
 import { TabIntro } from './LewordShared';
 
 /*
@@ -123,21 +124,42 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
         setGenBusy(true);
         setGenNote('');
         const body = [answerFor.title, answerFor.excerpt].filter(Boolean).join('\n');
-        const res = await fetchKinAnswer({
+        const input = {
             title: answerFor.title,
             body: body || answerFor.title,
             withLink: withLink && answerFor.linkPolicy !== 'banned',
             blogUrl: url.trim(),
-        });
-        setGenBusy(false);
-        if (!res.ok || !res.data) {
-            setGenNote(res.error === 'needs-keys'
-                ? '답변 생성은 엔진이 필요합니다 — [내 API 키] 탭에서 Gemini·OpenAI 키를 넣거나 클로드 [연동]을 하세요.'
-                : (res.message || 'AI 답변 생성에 실패했습니다. 잠시 후 다시 시도하세요.'));
+        };
+        /*
+         * 사이트 토큰이 정책으로 막혀 있으면 건너뛴다(2026-09-07) — 앤트로픽이 구독
+         * 토큰의 외부 사용을 막았다. 여기엔 앱 폴백이 아예 없어서, 앱을 켜 둬도
+         * "생성 실패" 한 줄로 끝났다(사장님 실측).
+         */
+        const res = claudePolicyBlocked()
+            ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
+            : await fetchKinAnswer(input);
+        if (res.ok && res.data) {
+            setGenBusy(false);
+            setDraft(res.data.answer);
+            setCopied(false);
             return;
         }
-        setDraft(res.data.answer);
-        setCopied(false);
+        const policyBlocked = res.error === 'claude-policy' || isClaudePolicyBlocked(res.message);
+        if (policyBlocked) markClaudePolicyBlocked();
+        // 앱(이 PC 의 클로드코드)으로 넘긴다 — 정책상 정상인 길이다.
+        if (policyBlocked || res.error === 'needs-keys') {
+            const viaApp = await bridgeKinAnswer({ ...input, provider: String(loadUserKeys().aiProvider || '') });
+            setGenBusy(false);
+            if (viaApp.status === 'ok') { setDraft(viaApp.answer); setCopied(false); return; }
+            setGenNote(viaApp.status === 'error'
+                ? `생성 실패: ${viaApp.message}`
+                : (policyBlocked
+                    ? CLAUDE_POLICY_NOTE
+                    : '답변 생성은 엔진이 필요합니다 — LEWORD 앱을 켜거나 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요.'));
+            return;
+        }
+        setGenBusy(false);
+        setGenNote(res.message || 'AI 답변 생성에 실패했습니다. 잠시 후 다시 시도하세요.');
     };
     const copyAnswer = () => {
         navigator.clipboard?.writeText(draft)
@@ -255,9 +277,12 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
             // 평가가 죽어도 검색 결과는 보여준다 — 빈 화면이 최악이다(§27)
             setItems(searched.data.items.map((item) => ({ ...item, evaluated: false })));
             setPhase('done');
-            setError(evaluated.error === 'needs-keys'
-                ? '판 평가는 엔진 토큰이 필요합니다 — [내 API 키] 탭의 클로드 [연동] 버튼 한 번이면 됩니다. 검색 결과는 그대로 보여드립니다.'
-                : (evaluated.message || 'AI 평가에 실패해 검색 결과만 보여드립니다.'));
+            if (isClaudePolicyBlocked(evaluated.message)) markClaudePolicyBlocked();
+            setError(isClaudePolicyBlocked(evaluated.message)
+                ? `판 평가를 못 했습니다 — ${CLAUDE_POLICY_NOTE} 검색 결과는 그대로 보여드립니다.`
+                : evaluated.error === 'needs-keys'
+                    ? '판 평가는 엔진이 필요합니다 — LEWORD 앱을 켜거나 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요. 검색 결과는 그대로 보여드립니다.'
+                    : (evaluated.message || 'AI 평가에 실패해 검색 결과만 보여드립니다.'));
             return;
         }
         setItems(evaluated.data.items);
