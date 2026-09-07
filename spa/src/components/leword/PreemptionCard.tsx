@@ -54,6 +54,17 @@ export type PreemptionRow = {
     /** 시기 그룹(지금 적기/준비 시기/지금 뜨는 중/연중 상시). 빈 문자열 = 미측정. */
     timingGroup?: string;
     monthsToPeak?: number | null;
+    /**
+     * 12개월 시계열의 최고치가 있던 달(1~12)과 그것이 지금의 몇 배인지(단순 나눗셈).
+     * 발행이 board-order 로 계산한다(2026-09-07). 배수가 2 이상일 때만 카드에 적는다.
+     * peakVolume 은 순서를 정하는 키일 뿐 화면에 숫자로 내지 않는다 — 추정치다.
+     */
+    peakMonth?: number;
+    peakMultiplier?: number;
+    /** 재작년에도 같은 달(±1)이 최고였나. 2년치가 없으면 null — 그때는 시기를 말하지 않는다. */
+    peakRecurring?: boolean | null;
+    /** 상위 10개 제목 중 정면 일치 8개↑ — 초보가 비집을 자리가 없다. 발행이 뒤로 보낸다. */
+    frontalSaturated?: boolean;
     /** 애드센스 적합 실측 판정. null = 재료 부족(미판정). */
     adsenseFit?: boolean | null;
     /** 보강이 붙인 수익 결론 — bad 는 애드센스 레인에서 빠진다(이유는 카드에 남는다). */

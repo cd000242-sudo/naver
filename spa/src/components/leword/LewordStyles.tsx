@@ -1610,6 +1610,7 @@ function LewordStyles() {
             .lw-timing-tag.timing-prep { border-color: rgba(96,165,250,.5); color: #93c5fd; background: rgba(96,165,250,.12); }
             .lw-timing-tag.timing-rising { border-color: rgba(248,113,113,.5); color: #fca5a5; background: rgba(248,113,113,.12); }
             .lw-timing-tag.timing-evergreen { border-color: rgba(148,163,184,.45); color: #cbd5e1; background: rgba(148,163,184,.1); }
+            .lw-timing-tag.timing-passed { border-color: rgba(251,191,36,.45); color: #fcd34d; background: rgba(251,191,36,.1); }
             /* 애드센스 적합 배지 — 의도·CPC 실측 판정. 미판정(null)은 배지 없음. */
             .lw-adsense-tag {
                 padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 800;

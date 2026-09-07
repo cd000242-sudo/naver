@@ -22,6 +22,11 @@ export type CardHeadRow = {
     layoutBestFor?: string | null;
     /** "언제 쓸 것" — 데이터랩 24개월 실측 산술. 빈 문자열 = 미측정. */
     timingGroup?: string;
+    /** 12개월 최고치의 달·평소 대비 배수·2년 반복 여부·남은 달 — 발행(board-order)이 단순 산술로 채운다. */
+    peakMonth?: number;
+    peakMultiplier?: number;
+    peakRecurring?: boolean | null;
+    monthsToPeak?: number | null;
     /** 애드센스 적합 — 의도·CPC 실측 판정. null 은 재료 부족(미판정)이지 부적합이 아니다. */
     adsenseFit?: boolean | null;
     adsenseReason?: string;
@@ -123,6 +128,28 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
             </h3>
 
             <ul className="lw-evidence">
+                {/*
+                  * 시기 한 줄(사장님 2026-09-07 "검색량이 폭발적이면서 상위노출이 되어야").
+                  * 실측 두 가지와 달력 산술만 적는다 — "작년 그 달이 지금의 몇 배였나",
+                  * "다음 그 달까지 몇 달인가". 그때 검색량이 얼마일지는 적지 않는다(추정).
+                  * 주민세 납부기간이 "지금 27,110" 으로만 보이면 지금 쓸 키워드로 읽히는데,
+                  * 실은 8월에 30배가 되는 키워드다 — 이 줄이 그걸 말한다.
+                  */}
+                {typeof row.peakMultiplier === 'number' && row.peakMultiplier >= 2 && row.peakMonth && (
+                    <li className="lw-evidence-early">
+                        <span aria-hidden="true">◔</span>
+                        {row.peakRecurring === true
+                            /* 2년 연속 같은 달 최고 — 실측이라 "매년"이라 말할 수 있다. */
+                            ? `매년 ${row.peakMonth}월 최고(2년 실측) — 평소의 ${row.peakMultiplier}배`
+                            /* 한 해뿐이거나 재작년은 달랐음 — 사실만 적고 시기는 말하지 않는다. */
+                            : `12개월 최고치는 ${row.peakMonth}월 — 평소의 ${row.peakMultiplier}배${row.peakRecurring === false ? ' · 재작년은 달랐음' : ''}`}
+                        {row.peakRecurring === true && typeof row.monthsToPeak === 'number' && (
+                            row.monthsToPeak === 0 ? ' · 이번 달'
+                                : row.monthsToPeak <= 6 ? ` · ${row.peakMonth}월까지 ${row.monthsToPeak}개월`
+                                    : ` · ${12 - row.monthsToPeak}개월 전에 지남`
+                        )}
+                    </li>
+                )}
                 {(row.earlyMoverReasons || []).map((text) => (
                     <li key={text} className="lw-evidence-early"><span aria-hidden="true">↗</span>{text}</li>
                 ))}
