@@ -14,7 +14,7 @@ import {
     type KinPostIdea,
 } from '../../lib/keywordApi';
 import { expansionTier, frontalCount, tierHeading, FRONTAL_SATURATION } from '../../lib/expansionTier';
-import { claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked } from '../../lib/claudeAuthPolicy';
+import { claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked, siteCanGenerate } from '../../lib/claudeAuthPolicy';
 import { bridgePostIdeas } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
 import { ErrorNote, MetricCell, TabIntro, UsageBar } from './LewordShared';
@@ -341,7 +341,7 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
          * 정책 차단이 확인됐으면 사이트 토큰 경로를 건너뛴다(2026-09-07) — 앤트로픽이
          * 구독 토큰의 외부 사용을 막아서 매번 헛걸음이다. 앱 폴백은 아래에 이미 있다.
          */
-        const viaKeys = claudePolicyBlocked()
+        const viaKeys = (claudePolicyBlocked() || !siteCanGenerate(loadUserKeys()))
             ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
             : await fetchKeywordPostIdeas(result.keyword, context);
         if (viaKeys.ok && viaKeys.data?.ideas?.length) {

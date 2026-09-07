@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { fetchKeywordPostIdeas, type KinPostIdea } from '../../lib/keywordApi';
 import { bridgePostIdeas } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
-import { CLAUDE_POLICY_NOTE, claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked } from '../../lib/claudeAuthPolicy';
+import { claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked, siteCanGenerate } from '../../lib/claudeAuthPolicy';
 
 /**
  * 제휴 상품 하나의 제목 만들기 — SEO 와 홈판을 동시에 노린다.
@@ -32,20 +32,10 @@ function AffiliateTitles({ keyword, product, onAnalyze }: {
         if (state.status === 'loading' || !keyword) return;
         setState({ status: 'loading' });
         /*
-         * 사이트 토큰이 정책으로 막혀 있으면 건너뛴다(2026-09-07) — 앤트로픽이 구독
-         * 토큰의 외부 사용을 막았다. 여기엔 앱 폴백이 아예 없어서, 앱을 켜 둬도
-         * "Request not allowed" 한 줄로 끝났다(사장님 실측 "앱 켜고 사용 중인데 안 되잖아").
+         * **앱을 먼저 쓴다**(사장님 지시 2026-09-07 "실패가 안 되어야지").
+         * 앤트로픽이 구독 토큰의 외부 사용을 막은 뒤로 사이트를 먼저 던지면 한 번은
+         * 반드시 실패하고 그 실패가 화면에 뜬다. 앱은 이 PC 의 구독이라 정상이다.
          */
-        const result = claudePolicyBlocked()
-            ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
-            : await fetchKeywordPostIdeas(keyword, product);
-        if (result.ok && result.data) {
-            setState({ status: 'done', ideas: result.data.ideas });
-            return;
-        }
-        const policyBlocked = result.error === 'claude-policy' || isClaudePolicyBlocked(result.message);
-        if (policyBlocked) markClaudePolicyBlocked();
-        // 앱(이 PC 의 구독)으로 넘긴다 — 다른 탭이 이미 쓰는 길이다.
         const viaApp = await bridgePostIdeas({
             kind: 'keyword',
             keyword,
@@ -68,13 +58,27 @@ function AffiliateTitles({ keyword, product, onAnalyze }: {
                 : { status: 'error', message: `${viaApp.provider} 가 제목을 못 만들었습니다 — 다시 눌러 주세요.` });
             return;
         }
+        /*
+         * 앱이 못 하면 사이트로 — 단 **쓸 수 있는 자격이 있을 때만** 부른다.
+         * 클로드 토큰만 있는 상태로 부르면 거절이 확정이라 시도하지 않는다.
+         */
+        if (siteCanGenerate(loadUserKeys()) && !claudePolicyBlocked()) {
+            const result = await fetchKeywordPostIdeas(keyword, product);
+            if (result.ok && result.data) {
+                setState({ status: 'done', ideas: result.data.ideas });
+                return;
+            }
+            if (isClaudePolicyBlocked(result.message)) markClaudePolicyBlocked();
+            else {
+                setState({ status: 'error', message: result.message || result.error || '만들지 못했습니다.' });
+                return;
+            }
+        }
         setState({
             status: 'error',
-            message: policyBlocked
-                ? CLAUDE_POLICY_NOTE
-                : viaApp.status === 'offline'
-                    ? 'LEWORD 앱을 켜면 이 PC 의 구독으로 바로 만듭니다. 앱 없이 쓰시려면 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요.'
-                    : (result.message || result.error || '만들지 못했습니다.'),
+            message: viaApp.status === 'outdated'
+                ? 'LEWORD 앱이 구버전이라 이 기능이 없습니다 — 앱을 업데이트해 주세요.'
+                : 'LEWORD 앱을 켜면 이 PC 의 구독으로 바로 만듭니다. 앱 없이 쓰시려면 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요.',
         });
     };
 

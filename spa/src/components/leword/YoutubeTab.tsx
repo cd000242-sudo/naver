@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchGapTopics, fetchKeywordPostIdeas, fetchYoutubeTrending, formatCount, type KinPostIdea, type LiveTrendingVideo } from '../../lib/keywordApi';
 import { bridgePostIdeas } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
-import { claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked } from '../../lib/claudeAuthPolicy';
+import { claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked, siteCanGenerate } from '../../lib/claudeAuthPolicy';
 import { cleanYoutubeSnapshot } from '../../lib/youtubeTopicQuality.mjs';
 import { TabIntro } from './LewordShared';
 
@@ -224,10 +224,12 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         const done = (state: IdeaState) => setIdeas((previous) => ({ ...previous, [row.keyword]: state }));
 
         /*
-         * 사이트 토큰이 정책으로 막혀 있으면 건너뛴다(2026-09-07) — 앤트로픽이 구독
-         * 토큰의 외부 사용을 막았다. 앱이 켜져 있어도 여기서 멈춰 "생성 실패"만 났다.
+         * 사이트는 **쓸 수 있는 자격이 있을 때만** 부른다(사장님 지시 2026-09-07
+         * "실패가 안 되어야지"). 앤트로픽이 구독 토큰의 외부 사용을 막았으므로,
+         * 클로드 토큰만 있는 상태로 부르면 거절이 확정이다 — 시도하지 않는다.
+         * 아래 앱 폴백이 이 PC 의 구독으로 대신 만든다.
          */
-        const viaKeys = claudePolicyBlocked()
+        const viaKeys = (claudePolicyBlocked() || !siteCanGenerate(loadUserKeys()))
             ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
             : await fetchKeywordPostIdeas(row.keyword, row.video.title);
         if (viaKeys.ok && viaKeys.data?.ideas?.length) {

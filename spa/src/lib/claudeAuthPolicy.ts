@@ -67,3 +67,19 @@ export function clearClaudePolicyBlocked(): void {
 
 /** 화면에 그대로 쓸 안내. 재연결을 권하지 않는다 — 다시 연결해도 같기 때문이다. */
 export const CLAUDE_POLICY_NOTE = '앤트로픽이 구독 토큰의 외부 사용을 막았습니다 — 다시 연결해도 같습니다. LEWORD 앱을 켜 두면 앱이 이 PC 의 클로드코드로 대신 돌려 줍니다(추가 비용 없음). 앱 없이 쓰시려면 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요.';
+
+/**
+ * 사이트 서버가 **지금 실제로 쓸 수 있는** 생성 자격이 있는가.
+ *
+ * 사장님 지시(2026-09-07): "실패가 안 되어야지". 폴백이 있어도 못 쓰는 자격을 먼저
+ * 던지면 한 번은 반드시 실패한다 — 그 실패가 화면에 뜬다. 그러니 **시도 자체를
+ * 하지 않는다.**
+ *
+ * 클로드 구독 토큰은 세지 않는다. 저장돼 있어도 앤트로픽이 서버 호출을 거절하므로
+ * "있는 자격"이 아니다. Gemini·OpenAI·xAI 키는 각사 API 키라 서버가 그대로 쓴다.
+ */
+export function siteCanGenerate(keys: Record<string, unknown> | null | undefined): boolean {
+    const k = keys || {};
+    const has = (name: string) => String(k[name] || '').trim().length > 0;
+    return has('geminiKey') || has('openaiKey') || has('xaiKey');
+}

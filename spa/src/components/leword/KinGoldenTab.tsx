@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { fetchKinAnswer, fetchKinPostIdeas, fetchKinQuestion, formatCount, searchKinQuestions, type KinPostIdea } from '../../lib/keywordApi';
 import { bridgeKinAnswer, probeBridge, type BridgeStatus } from '../../lib/bridge';
 import { loadUserKeys, saveUserKeys } from '../../lib/userKeys';
-import { CLAUDE_POLICY_NOTE, claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked } from '../../lib/claudeAuthPolicy';
+import { CLAUDE_POLICY_NOTE, claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked, siteCanGenerate } from '../../lib/claudeAuthPolicy';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -275,11 +275,29 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
         }
 
         /*
-         * 사이트 토큰 경로는 **차단이 확인되면 건너뛴다**(2026-09-07).
-         * 앤트로픽이 구독 토큰의 외부 사용을 막아서, 켜져 있는 앱을 두고도 매번
-         * 워커에 헛걸음한 뒤 거기서 멈췄다(사장님 실측 "앱 켜고 사용 중인데 안 되잖아").
+         * **앱이 켜져 있으면 앱을 먼저 쓴다**(사장님 지시 2026-09-07 "실패가 안 되어야지").
+         *
+         * 앤트로픽이 구독 토큰의 외부 사용을 막은 뒤로 사이트 경로는 클로드로 못 간다.
+         * 그런데 사이트를 먼저 던지면 한 번은 반드시 실패하고, 그 실패가 화면에 뜬다.
+         * 앱은 이 PC 의 클로드코드라 정책상 정상이고 구독 그대로다 — 그러니 앱이
+         * 잡히면 그리로 곧장 간다. 실패할 수 있는 길을 애초에 밟지 않는다.
          */
-        const viaKeys = claudePolicyBlocked()
+        const appKnownOffline = typeof bridgeState === 'object' && bridgeState !== null && !bridgeState.connected;
+        if (!appKnownOffline) {
+            const first = await bridgeKinAnswer(input);
+            if (first.status === 'ok') {
+                setGenerating(false);
+                setDraft(first.answer);
+                rememberWorked(work, first.answer);
+                return;
+            }
+            // 앱이 못 하면 아래 사이트 경로로 이어 간다 — 여기서 멈추지 않는다.
+        }
+        /*
+         * 사이트는 **쓸 수 있는 자격이 있을 때만** 부른다. 클로드 토큰만 있는 상태로
+         * 부르면 거절당하는 것이 확정이라 시도하지 않는다(siteCanGenerate).
+         */
+        const viaKeys = (claudePolicyBlocked() || !siteCanGenerate(loadUserKeys()))
             ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
             : await fetchKinAnswer(input);
         if (viaKeys.ok && viaKeys.data?.answer) {

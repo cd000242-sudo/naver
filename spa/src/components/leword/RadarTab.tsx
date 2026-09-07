@@ -6,7 +6,7 @@ import {
 } from '../../lib/keywordApi';
 import { loadUserKeys } from '../../lib/userKeys';
 import { bridgeKinAnswer, bridgeRadarEvaluate } from '../../lib/bridge';
-import { CLAUDE_POLICY_NOTE, claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked } from '../../lib/claudeAuthPolicy';
+import { CLAUDE_POLICY_NOTE, claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked, siteCanGenerate } from '../../lib/claudeAuthPolicy';
 import { TabIntro } from './LewordShared';
 
 /*
@@ -131,11 +131,11 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
             blogUrl: url.trim(),
         };
         /*
-         * 사이트 토큰이 정책으로 막혀 있으면 건너뛴다(2026-09-07) — 앤트로픽이 구독
-         * 토큰의 외부 사용을 막았다. 여기엔 앱 폴백이 아예 없어서, 앱을 켜 둬도
-         * "생성 실패" 한 줄로 끝났다(사장님 실측).
+         * 사이트는 **쓸 수 있는 자격이 있을 때만** 부른다(사장님 지시 2026-09-07
+         * "실패가 안 되어야지"). 앤트로픽이 구독 토큰의 외부 사용을 막았으므로
+         * 클로드 토큰만 있는 상태로 부르면 거절이 확정이다 — 아래 앱 폴백으로 간다.
          */
-        const res = claudePolicyBlocked()
+        const res = (claudePolicyBlocked() || !siteCanGenerate(loadUserKeys()))
             ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
             : await fetchKinAnswer(input);
         if (res.ok && res.data) {
