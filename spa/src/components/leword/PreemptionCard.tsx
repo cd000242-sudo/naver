@@ -54,6 +54,17 @@ export type PreemptionRow = {
     /** 시기 그룹(지금 적기/준비 시기/지금 뜨는 중/연중 상시). 빈 문자열 = 미측정. */
     timingGroup?: string;
     monthsToPeak?: number | null;
+    /**
+     * 12개월 시계열의 최고치가 있던 달(1~12)과 그것이 지금의 몇 배인지(단순 나눗셈).
+     * 발행이 board-order 로 계산한다(2026-09-07). 배수가 2 이상일 때만 카드에 적는다.
+     * peakVolume 은 순서를 정하는 키일 뿐 화면에 숫자로 내지 않는다 — 추정치다.
+     */
+    peakMonth?: number;
+    peakMultiplier?: number;
+    /** 재작년에도 같은 달(±1)이 최고였나. 2년치가 없으면 null — 그때는 시기를 말하지 않는다. */
+    peakRecurring?: boolean | null;
+    /** 상위 10개 제목 중 정면 일치 8개↑ — 초보가 비집을 자리가 없다. 발행이 뒤로 보낸다. */
+    frontalSaturated?: boolean;
     /** 애드센스 적합 실측 판정. null = 재료 부족(미판정). */
     adsenseFit?: boolean | null;
     /** 보강이 붙인 수익 결론 — bad 는 애드센스 레인에서 빠진다(이유는 카드에 남는다). */
@@ -132,6 +143,7 @@ export type MindmapEntry = {
 };
 
 type Props = {
+    observation?: boolean;
     row: PreemptionRow;
     rank: number;
     locked: boolean;
@@ -151,13 +163,14 @@ type Props = {
 
 function PreemptionCard({
     row, rank, locked, copied, onCopy, planOpen, onTogglePlan, onOpenChart, mindmap, onMindmap, onAnalyze,
-    variant = 'golden', headTags,
+    variant = 'golden', headTags, observation = false,
 }: Props) {
     return (
                 <article className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
                     <BoardCardHead
                         row={row}
-                        rank={rank}
+                        rank={observation ? undefined : rank}
+                        observation={observation}
                         extraTags={headTags}
                         copied={copied}
                         onCopy={onCopy}
@@ -194,7 +207,7 @@ function PreemptionCard({
                                 <em>30일 그래프 없음</em>
                                 {row.hasLiveDemand
                                     ? '추세 미측정 — 다음 회차에 다시 잰다'
-                                    : '데이터랩에 아직 검색이 잡힌 날이 없다 — 선점 자리'}
+                                    : '최근 수요가 확인되지 않았습니다 — 작성 추천과 구분해 관찰하세요'}
                             </p>
                         ) : null}
                         {row.whySearch?.text && (
@@ -346,7 +359,7 @@ function PreemptionCard({
                             </ol>
                             <p>
                                 {row.serp.verdict === 'WINNABLE'
-                                    ? `상위 ${row.serp.sampledTitles}개 중 검색어를 정면으로 담은 제목이 0건이었습니다 — 정면으로 쓰면 자리가 있습니다. 순위는 시간이 지나면 바뀝니다.`
+                                    ? `상위 ${row.serp.sampledTitles}개 중 검색어를 정면으로 담은 제목이 0건이었습니다. 다른 표현으로 같은 질문에 답한 본문이 있는지 확인해야 하며, 순위와 트래픽을 보장하지 않습니다.`
                                     : `상위 ${row.serp.sampledTitles}개 중 정면 ${row.serp.exactTitleHits}건 · 부분 ${row.serp.partialTitleHits}건. 순위는 시간이 지나면 바뀝니다.`}
                             </p>
                         </details>
@@ -380,7 +393,7 @@ function PreemptionCard({
                       * 전부 회차 실측에서 조립된 값이고, 옛 회차 데이터에는 없으므로
                       * 있을 때만 그린다. 서브는 마인드맵 확장의 시작점이다.
                       */}
-                    {(row.titles?.seo || row.titles?.home || (row.subKeywords?.length ?? 0) > 0) && (
+                    {!observation && (row.titles?.seo || row.titles?.home || (row.subKeywords?.length ?? 0) > 0) && (
                         <div className="lw-forge">
                             {row.titles?.seo && (
                                 <div className="lw-forge-title" title={row.titles.seo.basis || ''}>

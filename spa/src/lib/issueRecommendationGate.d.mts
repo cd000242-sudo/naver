@@ -1,0 +1,2 @@
+export function inspectIssueRelation(issue: unknown, keyword: unknown, headlines?: readonly {title:string;link?:string}[]): {related:boolean;evidence:string|null};
+export function classifyIssuePublication(row: {keyword:string;issue:string;hasLiveDemand?:boolean;demandStatus?:string;preemptionKind?:string|null}, headlines?: readonly {title:string;link?:string}[]): {status:'recommend'|'observe'|'reject';reason:string|null};

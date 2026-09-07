@@ -367,9 +367,9 @@ function KeysTab() {
                             ? <span className="lw-step-ok">✅ 앱이 켜져 있습니다</span>
                             : (
                                 <>
-                                    앱이 CLI 설치·로그인을 대신 해 주고, 사이트 연동까지 버튼 한 번으로 끝냅니다.{' '}
+                                    앱이 CLI 설치·로그인을 대신 해 주고, 생성도 이 PC 의 구독으로 대신 돌려 줍니다.{' '}
                                     <a className="lw-step-cta" href="/download">⬇ LEWORD 받기</a>
-                                    <em>클로드만 쓰실 거면 앱 없이 아래 [연동]으로도 됩니다 — 대신 승인 창을 한 번 거칩니다.</em>
+                                    <em>앱 없이 쓰시려면 아래에서 Gemini 무료 키를 넣으세요 — 구독 토큰은 2026-09 부터 사이트에서 못 씁니다.</em>
                                 </>
                             )}
                     </li>
@@ -380,12 +380,11 @@ function KeysTab() {
                             : '앱을 켜고 이 화면의 [연동]을 누르면 그 CLI 를 설치하고 로그인 창을 열어 줍니다. 구독 로그인이 그 PC 안에서만 끝나는 방식이라 웹에서는 못 엽니다.'}
                         <em>구독이 있어야 합니다 — 클로드 Max/Pro · 챗지피티 Plus/Pro · 구글 · SuperGrok. 무료 계정은 CLI 로그인이 막힙니다.</em>
                     </li>
-                    <li className={hasClaudeToken ? 'done' : (claudeAgentReady ? 'now' : '')}>
-                        <b>아래 클로드 줄에서 [연동].</b>{' '}
-                        {hasClaudeToken
-                            ? <span className="lw-step-ok">✅ 사이트까지 연동됐습니다 — 앱을 꺼도 돕니다</span>
-                            : '앱이 들고 있는 클로드 자격을 사이트로 넘깁니다. 이 한 번이면 앱을 꺼도 사이트가 전부 돕니다.'}
-                    </li>
+                    {/*
+                      * 3번 단계는 뺐다(2026-09-07). "앱이 들고 있는 클로드 자격을 사이트로
+                      * 넘긴다"가 앤트로픽 정책으로 더는 성립하지 않는다 — 넘겨도 사이트
+                      * 서버가 쓰면 거절당한다. 남겨 두면 사장님이 그 단계를 계속 밟게 된다.
+                      */}
                     <li className={activeProvider ? 'done' : ''}>
                         <b>쓸 엔진에서 [사용].</b>{' '}
                         {activeProvider
@@ -394,9 +393,10 @@ function KeysTab() {
                     </li>
                 </ol>
                 <p className="lw-card-note" style={{ marginBottom: 12 }}>
-                    3번이 <b>클로드만</b> 되는 이유: 클로드 CLI 는 자격을 토큰으로 들고 있어 사이트 서버가 그대로 씁니다.
-                    코덱스·제미나이·그록은 각 서비스의 로그인 세션이라 서버가 쓸 토큰으로 바꿀 방법이 없습니다 —
-                    그 셋은 <b>앱을 켜 두면</b> 앱이 대신 돌려 줍니다.
+                    <b>구독은 앱을 통해서만 씁니다.</b> 앤트로픽이 2026년 9월부터 구독 토큰을 클로드코드 밖에서 쓰지 못하게
+                    막았습니다 — 사이트 서버가 그 토큰으로 부르면 <i>Request not allowed</i> 로 거절당합니다.
+                    클로드·코덱스·제미나이·그록 모두 <b>앱을 켜 두면</b> 앱이 이 PC 의 구독으로 대신 돌려 줍니다(추가 비용 없음).
+                    앱 없이 쓰시려면 아래에서 <b>Gemini 무료 키</b>를 넣으세요.
                 </p>
 
                 <div className="lw-engines-list">
@@ -417,11 +417,16 @@ function KeysTab() {
                          *              그래서 토큰 칸은 비어 있는 게 맞다. 앱을 켜 둬야 한다.
                          * 클로드는 앱에서 사이트로 넘길 수 있으니 그렇게 하라고 말해 준다.
                          */
-                        const state = hasToken ? '✅ 사이트까지 연동 — 앱 없이 됩니다'
+                        /*
+                         * 클로드 토큰으로 "앱 없이 된다"고 말하지 않는다(2026-09-07).
+                         * 앤트로픽이 구독 토큰의 외부 사용을 막아서, 사이트 서버가 그
+                         * 토큰으로 부르면 "Request not allowed" 로 거절당한다. 토큰이
+                         * 저장돼 있어도 실제로 도는 것은 앱이다 — 화면이 그대로 말한다.
+                         */
+                        const state = hasToken
+                            ? (agent?.available ? '✅ 앱으로 됩니다 — 앱을 켜 두세요' : '⚠️ 앱을 켜야 합니다')
                             : agent?.available
-                                ? (item.id === 'claude'
-                                    ? '⚠️ 앱에만 연동 — [연동]을 누르면 사이트도 끝'
-                                    : '✅ 앱에 연동 — 앱을 켜 두면 됩니다')
+                                ? '✅ 앱에 연동 — 앱을 켜 두면 됩니다'
                                 : agent?.installed ? '앱: 로그인 필요'
                                     : item.webConnect ? '미연동' : '앱에서 연동';
                         const active = activeProvider === item.id;

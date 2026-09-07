@@ -1346,11 +1346,20 @@ function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceL
     );
 }
 
+/**
+ * 머리글 시각 — **절대시각과 얼마나 지났는지를 함께** 적는다.
+ *
+ * 절대시각만 있으면 그게 방금인지 어제인지 읽는 사람이 계산해야 한다.
+ * 실측(2026-09-07 01:06)에서 머리글은 "09. 06. 오후 10:12" 였는데 실제로는
+ * 2시간 54분 전이었다 — 옆에 "2분 전 갱신"이 붙어 있으니 어느 쪽도 못 믿게 된다.
+ */
 function formatLiveUpdatedAt(value?: string): string {
     if (!value) return '실시간 대기';
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return '실시간 갱신';
-    return new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(date);
+    const stamp = new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(date);
+    const fresh = laneFreshnessLabel(value);
+    return fresh ? `${stamp} · ${fresh}` : stamp;
 }
 
 /**
@@ -1488,12 +1497,26 @@ function IndexPage() {
 
     useEffect(() => runAfterFirstPaint(() => setDecorationsReady(true), 1700), []);
 
-    const liveUpdatedAt = formatLiveUpdatedAt(liveState.updatedAt);
     const liveStatusLabel = liveState.status === 'ready' ? 'LIVE' : liveState.status === 'error' ? 'FAST FALLBACK' : 'LOADING';
     const activeSourceLane = liveState.lanes.find((lane) => lane.id === activeSourceLaneId)
         || liveState.lanes[0]
         || { ...SOURCE_LANE_CONFIGS[0], items: [] };
     const activeSourceItems = activeSourceLane.items.slice(0, 10);
+    /*
+     * 머리글 시각은 **지금 보고 있는 레인의 것**이다.
+     *
+     * 사장님 지적(2026-09-07): "하나는 10:12분 갱신이고 하나는 2분 전이라 하고 뭐야".
+     * 둘 다 각자는 사실이었는데 서로 다른 것을 가리키고 있었다 —
+     *   머리글  liveState.updatedAt  = source-signals.json 전체 스냅샷(실측 2시간 54분 전)
+     *   패널    lane.updatedAt       = 그 레인만의 갱신 시각(인기는 별도 소스라 2분 전)
+     * 인기·구글은 읽을 때 갱신되는 별도 공급원이라 늘 신선하고, 나머지 일곱 레인은
+     * updatedAt 자체가 없어(실측) 패널에 상대시각이 안 붙는다. 그래서 인기 탭에서만
+     * 두 시각이 나란히 어긋나 보였다.
+     *
+     * 레인 시각이 있으면 그것을, 없으면 스냅샷 시각을 쓴다. 그러면 머리글과 패널이
+     * 같은 사실을 말한다.
+     */
+    const liveUpdatedAt = formatLiveUpdatedAt(activeSourceLane.updatedAt || liveState.updatedAt);
     /*
      * 줄마다 같은 문장이 반복되면 그건 정보가 아니라 잡음이다.
      * 실측(2026-09-05): 네이버 레인 10줄이 전부 "네이버 실시간 흐름에서 수집한 검색
@@ -1666,13 +1689,12 @@ function IndexPage() {
                                     <strong>{activeSourceLane.label}</strong>
                                     <p>{activeSourceLane.description}</p>
                                 </div>
-                                {/* 레인마다 공급원이 달라 신선도가 다르다 — 그 레인의 갱신 시각을 적는다. */}
-                                <small>
-                                    {activeSourceItems.length}개 표시
-                                    {laneFreshnessLabel(activeSourceLane.updatedAt)
-                                        ? ` · ${laneFreshnessLabel(activeSourceLane.updatedAt)}`
-                                        : ''}
-                                </small>
+                                {/*
+                                  * 갱신 시각은 머리글이 말한다 — 이제 머리글도 이 레인의
+                                  * 시각을 쓰므로 여기 또 적으면 같은 말이 두 번이다.
+                                  * 사장님 지적(2026-09-07)의 그 두 자리가 바로 여기와 머리글이었다.
+                                  */}
+                                <small>{activeSourceItems.length}개 표시</small>
                             </div>
                             <div className="hero-source-body">
                                 <div className="hero-source-list-shell">

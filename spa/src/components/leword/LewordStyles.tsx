@@ -1610,6 +1610,7 @@ function LewordStyles() {
             .lw-timing-tag.timing-prep { border-color: rgba(96,165,250,.5); color: #93c5fd; background: rgba(96,165,250,.12); }
             .lw-timing-tag.timing-rising { border-color: rgba(248,113,113,.5); color: #fca5a5; background: rgba(248,113,113,.12); }
             .lw-timing-tag.timing-evergreen { border-color: rgba(148,163,184,.45); color: #cbd5e1; background: rgba(148,163,184,.1); }
+            .lw-timing-tag.timing-passed { border-color: rgba(251,191,36,.45); color: #fcd34d; background: rgba(251,191,36,.1); }
             /* 애드센스 적합 배지 — 의도·CPC 실측 판정. 미판정(null)은 배지 없음. */
             .lw-adsense-tag {
                 padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 800;
@@ -1955,6 +1956,10 @@ function LewordStyles() {
             .lw-cand-hit { background: rgba(52,211,153,.06); }
             .lw-cand-rank { color: #34d399; }
             .lw-branch-new { margin-left: 7px; padding: 1px 7px; border: 1px solid rgba(167,139,250,.4); border-radius: 999px; color: #c4b5fd; font-size: 11px; }
+            /* 확장 표의 구역 제목 줄 — 층(주제 그대로 → 새 가지)이 바뀌는 자리. */
+            .lw-tier-row td { padding: 12px 10px 6px; color: #e2e8f0; font-weight: 700; font-size: 13px; border-top: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.025); }
+            .lw-tier-row td em { margin-left: 6px; color: #8a94a6; font-style: normal; font-weight: 400; font-size: 12px; }
+            .lw-frontal-hot { color: #fbbf24; font-weight: 600; }
             /* 확장 키워드 자리 판정 — 색은 사실 셋(있음·좁음·없음)만 가른다. */
             .lw-slot-open { color: #34d399; font-weight: 600; }
             .lw-slot-tight { color: #fbbf24; }

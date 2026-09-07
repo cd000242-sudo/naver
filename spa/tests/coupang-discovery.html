@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ws://127.0.0.1:*" />
+  <title>쿠팡 발견 UI — 로컬 합성 데이터 테스트</title>
+</head>
+<body style="background:#101b2c;color:#eef2f8;font-family:sans-serif;margin:24px">
+  <h1>로컬 합성 데이터 테스트 — 실제 상품 추천 아님</h1>
+  <p id="network">모의 API 호출 0회 · 외부 네트워크 차단</p>
+  <p id="errors">화면 오류 0건</p>
+  <div id="root"></div>
+  <script type="module" src="./coupang-discovery.tsx"></script>
+</body>
+</html>

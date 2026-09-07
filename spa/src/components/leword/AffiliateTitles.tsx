@@ -1,66 +1,32 @@
 import { useState } from 'react';
-import { fetchKeywordPostIdeas, type KinPostIdea } from '../../lib/keywordApi';
+import { affiliateWritingBrief, type WritingAssessment } from '../../lib/recommendationView.mjs';
 
-/**
- * 제휴 상품 하나의 제목 만들기 — SEO 와 홈판을 동시에 노린다.
- *
- * 사장님 지시(2026-08-20): "노출 가능성 높은 제목도 같이 보여주면 되겠네.
- * SEO 노출과 홈판을 동시에 노리는 거지. 브랜드커넥트뿐만 아니라 토스
- * 쉐어링크랑 쿠팡 파트너스도 마찬가지야."
- *
- * 세 레인이 같은 부품을 쓴다. 레인마다 따로 만들면 제목 교리가 갈라진다.
- * 제목은 유튜브 글감 탭과 **같은 엔진·같은 교리**로 만든다(keyword-post-ideas).
- *
- * 누를 때만 만든다 — 목록에 있는 것을 미리 다 만들면 구독을 헛되이 태운다.
- */
-
-type State = { status: 'idle' | 'loading' | 'done' | 'error'; ideas?: KinPostIdea[]; message?: string };
-
-function AffiliateTitles({ keyword, product, onAnalyze }: {
-    /** 글을 걸 검색어 — 니즈 검색어가 있으면 그것, 없으면 상품명 검색어. */
+/** Same evidence-first writing brief in all lanes. No per-view AI calls. */
+function AffiliateTitles({ keyword, product, item, assessment, onAnalyze }: {
     keyword: string;
-    /** 상품명. 없는 사실을 지어내지 않게 붙잡아 주는 재료다. */
     product: string;
+    item?: unknown;
+    assessment?: WritingAssessment;
     onAnalyze?: (keyword: string) => void;
 }) {
-    const [state, setState] = useState<State>({ status: 'idle' });
-
-    const make = async () => {
-        if (state.status === 'loading' || !keyword) return;
-        setState({ status: 'loading' });
-        const result = await fetchKeywordPostIdeas(keyword, product);
-        setState(result.ok && result.data
-            ? { status: 'done', ideas: result.data.ideas }
-            : { status: 'error', message: result.message || result.error || '만들지 못했습니다.' });
-    };
-
-    if (!keyword) return null;
-
+    const [open, setOpen] = useState(false);
+    const brief = affiliateWritingBrief(item || { name: product, keyword }, assessment);
     return (
         <div className="lw-aff-titles">
-            {state.status !== 'done' && (
-                <button type="button" className="lw-aff-make" onClick={make} disabled={state.status === 'loading'}>
-                    {state.status === 'loading' ? '만드는 중…' : '노출 노리는 제목 만들기'}
-                    <span>SEO + 홈판</span>
-                </button>
-            )}
-            {state.status === 'error' && <p className="lw-aff-err">{state.message}</p>}
-            {state.status === 'done' && (
-                <ul className="lw-aff-ideas">
-                    {(state.ideas || []).map((idea) => (
-                        <li className={idea.recommended ? 'on' : undefined} key={idea.keyword}>
-                            {onAnalyze ? (
-                                <button type="button" className="lw-aff-ideakey" onClick={() => onAnalyze(idea.keyword)}>
-                                    {idea.keyword}
-                                </button>
-                            ) : <b className="lw-aff-ideakey">{idea.keyword}</b>}
-                            {idea.recommended && <span className="lw-pick">추천 · 메인+서브+후킹</span>}
-                            <p><em>SEO</em> {idea.seo}</p>
-                            <p><em>홈판</em> {idea.home}</p>
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <button type="button" className="lw-aff-make" aria-expanded={open} onClick={() => setOpen(!open)}>
+                {open ? '작성 근거 접기' : '작성 근거·본문 구성 보기'}
+                <span>수요 → 상품 → 근거</span>
+            </button>
+            {open && <div style={{ padding: 12, fontSize: 13, lineHeight: 1.7 }}>
+                <p>{brief.warning}</p>
+                <p><strong>공략 검색어</strong> {brief.query}{onAnalyze && <button type="button" className="lw-mini" onClick={() => onAnalyze(brief.query)}>분석</button>}</p>
+                <ul>{brief.reasons.map((reason, i) => <li key={i}>{reason}</li>)}</ul>
+                <p><strong>{brief.title.label}</strong><br />{brief.title.text}</p>
+                <ol>{brief.sections.map(section => <li key={section}>{section}</li>)}</ol>
+                <strong>확인된 공식 제품 자료</strong>
+                {brief.sources.length === 0 ? <p>상세 사양의 출처가 아직 없습니다. 제품 성능·비교 우위·사용 후기를 단정하지 마세요.</p>
+                    : <ul>{brief.sources.map((source, i) => <li key={source.id + '-' + i}><a href={source.url} target="_blank" rel="noreferrer">원문 확인</a> · {source.excerpt}{source.measuredAt && <> · {source.measuredAt}</>}</li>)}</ul>}
+            </div>}
         </div>
     );
 }

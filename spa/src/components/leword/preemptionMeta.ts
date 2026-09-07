@@ -115,4 +115,9 @@ export const TIMING_BADGE: Record<string, { cls: string }> = {
     '준비 시기': { cls: 'timing-prep' },
     '지금 뜨는 중': { cls: 'timing-rising' },
     '연중 상시': { cls: 'timing-evergreen' },
+    /*
+     * 피크가 최근 1~5개월 안에 지났다(2026-09-07, board-order). 예전엔 이런 행에
+     * '지금 뜨는 중'이 붙은 채 옆줄에 "최고치의 12%"가 찍혀 서로 모순으로 보였다.
+     */
+    '성수기 지남': { cls: 'timing-passed' },
 };

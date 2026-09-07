@@ -22,6 +22,11 @@ export type CardHeadRow = {
     layoutBestFor?: string | null;
     /** "언제 쓸 것" — 데이터랩 24개월 실측 산술. 빈 문자열 = 미측정. */
     timingGroup?: string;
+    /** 12개월 최고치의 달·평소 대비 배수·2년 반복 여부·남은 달 — 발행(board-order)이 단순 산술로 채운다. */
+    peakMonth?: number;
+    peakMultiplier?: number;
+    peakRecurring?: boolean | null;
+    monthsToPeak?: number | null;
     /** 애드센스 적합 — 의도·CPC 실측 판정. null 은 재료 부족(미판정)이지 부적합이 아니다. */
     adsenseFit?: boolean | null;
     adsenseReason?: string;
@@ -47,7 +52,7 @@ export type CardHeadRow = {
  * '지금이 선점 적기'·경고 배지도 뺐다 — 셋만 두라는 지시가 명시적이었다.
  * 경고에 해당하는 사실은 아래 근거 줄에 그대로 남아 있다.
  */
-function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
+function BoardCardHead({ row, rank, onCopy, copied, extraTags, observation = false }: {
     row: CardHeadRow;
     rank?: number;
     /** 배지 줄 맨 앞에 끼울 태그 — 실검 틈새 탭이 이슈명·실측 수요·급상승을 넣는다. */
@@ -55,8 +60,9 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
     /** 키워드 복사 — 액션 줄에서 홀로 밀려나던 버튼을 주인공(키워드) 옆으로 옮겼다. */
     onCopy?: () => void;
     copied?: boolean;
+    observation?: boolean;
 }) {
-    const index = preemptionIndex({
+    const index = observation ? null : preemptionIndex({
         searchVolume: row.searchVolume,
         documentCount: row.documentCount,
     });
@@ -70,12 +76,13 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
         <div className="lw-card-head">
             <div className="lw-card-tags">
                 {extraTags}
-                {row.layoutBestFor && SURFACE_TAG[row.layoutBestFor] && (
+                {observation && <span className="lw-warn-tag">관찰 전용 · 수요 미확인</span>}
+                {!observation && row.layoutBestFor && SURFACE_TAG[row.layoutBestFor] && (
                     <span className={`lw-surface-tag surface-${row.layoutBestFor}`}>
                         {SURFACE_TAG[row.layoutBestFor]}
                     </span>
                 )}
-                {row.tier && TIER_BADGE[row.tier] && (
+                {!observation && row.tier && TIER_BADGE[row.tier] && (
                     <span className={`lw-tier-tag ${TIER_BADGE[row.tier].cls}`}>{TIER_BADGE[row.tier].text}</span>
                 )}
                 {/*
@@ -83,12 +90,12 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
                   * 트렌드 배지를 **대체**한다 — 같은 실측의 더 행동적인 표현이라
                   * 배지 수를 늘리지 않는다. 없으면 기존 트렌드 배지 그대로.
                   */}
-                {row.timingGroup && TIMING_BADGE[row.timingGroup] ? (
+                {!observation && (row.timingGroup && TIMING_BADGE[row.timingGroup] ? (
                     <span className={`lw-timing-tag ${TIMING_BADGE[row.timingGroup].cls}`}>{row.timingGroup}</span>
                 ) : (row.trendLabel && row.trendLabel !== '판정불가' && (
                     <span className="lw-trend-tag">{row.trendLabel}</span>
-                ))}
-                {row.adsenseFit === true && (
+                )))}
+                {!observation && row.adsenseFit === true && (
                     <span className="lw-adsense-tag" title={row.adsenseReason || ''}>AdSense</span>
                 )}
             </div>
@@ -107,9 +114,9 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
               */}
             <h3 className="lw-card-keyword">
                 {rank !== undefined && <span className="lw-rank">{rank}</span>}
-                <span className={`lw-index lw-index-${index.tier}`} title={index.reason}>
+                {index && <span className={`lw-index lw-index-${index.tier}`} title={index.reason}>
                     {index.label}
-                </span>
+                </span>}
                 {row.keyword}
                 {onCopy && (
                     <button
@@ -123,10 +130,32 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
             </h3>
 
             <ul className="lw-evidence">
-                {(row.earlyMoverReasons || []).map((text) => (
+                {/*
+                  * 시기 한 줄(사장님 2026-09-07 "검색량이 폭발적이면서 상위노출이 되어야").
+                  * 실측 두 가지와 달력 산술만 적는다 — "작년 그 달이 지금의 몇 배였나",
+                  * "다음 그 달까지 몇 달인가". 그때 검색량이 얼마일지는 적지 않는다(추정).
+                  * 주민세 납부기간이 "지금 27,110" 으로만 보이면 지금 쓸 키워드로 읽히는데,
+                  * 실은 8월에 30배가 되는 키워드다 — 이 줄이 그걸 말한다.
+                  */}
+                {!observation && typeof row.peakMultiplier === 'number' && row.peakMultiplier >= 2 && row.peakMonth && (
+                    <li className="lw-evidence-early">
+                        <span aria-hidden="true">◔</span>
+                        {row.peakRecurring === true
+                            /* 2년 연속 같은 달 최고 — 실측이라 "매년"이라 말할 수 있다. */
+                            ? `매년 ${row.peakMonth}월 최고(2년 실측) — 평소의 ${row.peakMultiplier}배`
+                            /* 한 해뿐이거나 재작년은 달랐음 — 사실만 적고 시기는 말하지 않는다. */
+                            : `12개월 최고치는 ${row.peakMonth}월 — 평소의 ${row.peakMultiplier}배${row.peakRecurring === false ? ' · 재작년은 달랐음' : ''}`}
+                        {row.peakRecurring === true && typeof row.monthsToPeak === 'number' && (
+                            row.monthsToPeak === 0 ? ' · 이번 달'
+                                : row.monthsToPeak <= 6 ? ` · ${row.peakMonth}월까지 ${row.monthsToPeak}개월`
+                                    : ` · ${12 - row.monthsToPeak}개월 전에 지남`
+                        )}
+                    </li>
+                )}
+                {(!observation ? row.earlyMoverReasons || [] : []).map((text) => (
                     <li key={text} className="lw-evidence-early"><span aria-hidden="true">↗</span>{text}</li>
                 ))}
-                {row.evidence.map((item) => (
+                {row.evidence.filter(item => !observation || !['demand', 'slot', 'early'].includes(item.code)).map((item) => (
                     <li key={item.code}>
                         <span aria-hidden="true">{EVIDENCE_ICON[item.code] || '·'}</span>{item.text}
                     </li>
