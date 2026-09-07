@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useEvidenceClock } from './useEvidenceClock';
+import { expireIssueBoard } from '../../lib/recommendationExpiry.mjs';
 import { TopicFilter } from './BoardFilters';
 import LicenseGate, { isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
@@ -38,7 +40,7 @@ import {
  * 수치는 전부 실측이다. 추정 검색량은 발행기가 null 로 내보내고, 화면은 '—' 로 적는다.
  */
 
-type View = IssueVerdict | 'flow';
+type View = IssueVerdict | 'flow' | 'observe';
 
 /*
  * 비로그인 무료 건수 — 황금키워드보드(FREE_BOARD_ROWS 5)와 다르게 **3건**이다
@@ -54,8 +56,9 @@ function freeNamesOf(board: IssueBoard | null | undefined): string[] {
 }
 
 const VIEWS: { id: View; label: string; hint: string }[] = [
-    { id: 'niche', label: '틈새', hint: '세 실측을 다 통과한 것만 — 검색량 300+(상승 중이면 100+) · 데이터랩 최근 7일 수요와 문서수 3,000 이하 · 블로그탭 상위 10에 정면글 0건. 황금보다 좁고, 쓰면 트래픽이 온다' },
-    { id: 'preemption', label: '선점 후보', hint: '자리는 비었는데 트래픽 증거는 아직 없음 — 문서수 300 이하에 수요 미포착이거나, 수요는 잡혔는데 검색량이 없음. 이슈가 커지면 먼저 있는 글이 먹는다' },
+    { id: 'niche', label: '틈새', hint: '같은 이슈 관계·검색량·최근 수요를 확인한 후보입니다. 제목 일치가 적어도 상위 글의 본문 경쟁과 노출 가능성은 별도 검토가 필요합니다.' },
+    { id: 'preemption', label: '선점 후보', hint: '최근 상대 수요는 잡혔지만 절대 검색량이 미확인인 후보입니다. 충분한 트래픽이 검증된 추천과 구분해 판단하세요.' },
+    { id: 'observe', label: '관찰 · 수요 미확인', hint: '작성 추천이 아닙니다. 경쟁이 적어도 수요 증거가 없는 후보는 이곳에서 관찰하며, 숫자를 추정해 채우지 않습니다.' },
     { id: 'flow', label: '이슈 흐름', hint: '이슈마다 왜 뜨나(헤드라인 검증) · 사람들이 이미 치는 말(실측) · 다음에 몰릴 검색어(에이전트 추론) — 선점할 말을 고르는 판' },
 ];
 
@@ -107,7 +110,7 @@ const liveAgo = (ms: number | null | undefined): string => {
 };
 
 function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
-    const [board, setBoard] = useState<IssueBoard | null>(null);
+    const [snapshot, setBoard] = useState<IssueBoard | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
     const [view, setView] = useState<View>('niche');
     const [lane, setLane] = useState('전체');
@@ -116,7 +119,8 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
     const [chartKeyword, setChartKeyword] = useState('');
     const [jumpTo, setJumpTo] = useState('');
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
-    const [nowMs] = useState(() => Date.now());
+    const nowMs = useEvidenceClock();
+    const board = useMemo(() => snapshot ? expireIssueBoard(snapshot, nowMs) : null, [snapshot, nowMs]);
     const { mindmap, openMindmap } = useMindmap();
 
     /*
@@ -156,7 +160,7 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
     const liveFor = (row: IssueBoardRow): { rank: number; ago: string } | null => {
         let best: { rank: number; ago: string } | null = null;
         for (const item of livePool) {
-            if (sameIssue(item.keyword, row.issue) || sameIssue(item.keyword, row.keyword)) {
+            if (compactKey(item.keyword) === compactKey(row.keyword)) {
                 // 여러 소스에 걸리면 순위가 가장 높은(숫자 작은) 것을 쓴다.
                 if (!best || item.rank < best.rank) best = { rank: item.rank, ago: liveAgo(item.ageMs) };
             }
@@ -172,11 +176,11 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                 if (!alive) return;
                 if (!data) { if (!lastStamp) setStatus('error'); return; }
                 // 같은 판이면 화면을 안 건드린다 — 스크롤이 튀지 않게.
-                const stamp = String(data.publishedAt || '');
+                const stamp = String(data.publishedAt || '') + JSON.stringify([data.rows.map(row => row.keyword), data.observations?.map(row => row.keyword)]);
                 if (stamp && stamp === lastStamp) return;
                 lastStamp = stamp;
                 setBoard(data);
-                setStatus(data.rows.length > 0 || data.issues.length > 0 ? 'ready' : 'empty');
+                setStatus(data.rows.length > 0 || data.issues.length > 0 || (data.observations?.length || 0) > 0 ? 'ready' : 'empty');
             });
         };
         load();
@@ -200,7 +204,7 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
     }, [jumpTo, view]);
 
     const verdictRows = useMemo(
-        () => (view === 'flow' ? [] : (board?.rows || []).filter((row) => row.verdict === view)),
+        () => (view === 'flow' ? [] : view === 'observe' ? (board?.observations || []) : (board?.rows || []).filter((row) => row.verdict === view)),
         [board, view],
     );
 
@@ -290,7 +294,7 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                 <span
                     className="lw-tier-tag tier-d"
                     title={`블로그탭 상위 ${row.serp.sampledTitles}개 중 정면글 ${row.serp.exactTitleHits}건 · 부분 ${row.serp.partialTitleHits}건 (${fmtTime(row.serp.measuredAt)} 잼)`}
-                >상위 10 정면글 0건 — 자리 있음</span>
+                >상위 제목 정면 0건 · 본문 경쟁 별도 확인</span>
             )}
             {row.preemptionKind === 'demand-no-volume' && (
                 <span className="lw-intent-tag" title="데이터랩 수요와 자리는 잡혔지만 검색광고 검색량이 없다 — 트래픽은 아직 증명 안 됨">수요 잡힘 · 검색량 미확인</span>
@@ -308,7 +312,7 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
         <>
             <TabIntro
                 title="실검 틈새키워드"
-                desc="틈새키워드의 목적은 트래픽입니다 — 지금 사람들이 실제로 검색하는 말(수요)이면서, 상위 10에 정면으로 쓴 글이 없는(자리) 키워드만 고릅니다. 셋을 다 실측합니다: 트래픽(검색광고 검색량 + 지금 실검 순위), 수요(데이터랩 최근 7일 · 블로그 문서수), 자리(네이버 블로그탭 상위 10 정면글). 카드마다 '지금 실검 N위' 배지로 실시간 검색 여부를, [어떻게 쓸까]에서 이 키워드로 트래픽을 끄는 3단계를 보여 줍니다. 추정치는 '—' 로 비워 둡니다."
+                desc="실제 이슈와 같은 사건·인물을 다루는 세부 검색어인지 먼저 확인합니다. 최근 수요와 검색량이 확인된 틈새, 절대 검색량 미확인 선점 후보, 수요 미확인 관찰을 구분합니다. '지금 실검' 배지는 정확히 같은 검색어가 현재 목록에 있을 때만 표시하며, 노출과 트래픽을 보장하지 않습니다."
                 source={`실시간 이슈 실측 회차${publishedLabel ? ` · ${publishedLabel} 발행` : ''} · ${board?.schedule || '매일 07·13·19시(KST) 갱신'}`}
             />
 
@@ -327,15 +331,16 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                         onClick={() => { setView(item.id); setLane('전체'); }}
                     >
                         {item.label}{' '}
-                        <em>{item.id === 'flow' ? briefs.length : (board?.rows || []).filter((row) => row.verdict === item.id).length}</em>
+                        <em>{item.id === 'flow' ? briefs.length : item.id === 'observe' ? (board?.observations?.length || 0) : (board?.rows || []).filter((row) => row.verdict === item.id).length}</em>
                     </button>
                 ))}
             </div>
             <p className="lw-write-hint">
                 {current?.hint}
+                {!!board?.rejectedCount && <> · 이슈 관계가 확인되지 않은 {board.rejectedCount}건은 추천에서 제외했습니다.</>}
                 {measured && typeof measured.candidates === 'number' && measured.candidates > 0 && (
                     <>
-                        {' '}· 이번 회차 이슈 {measured.issues ?? '—'}개 → 후보 {measured.candidates}개 실측 → 틈새 {measured.niche ?? 0} · 선점 후보 {measured.preemption ?? 0}
+                        {' '}· 회차 측정: 이슈 {measured.issues ?? '—'}개 · 후보 {measured.candidates}개 · 현재 검증 통과 건수는 위 탭에 표시합니다.
                         {/* 자리 대기 = 트래픽·수요는 통과했는데 블로그탭을 아직 못 잼(회차당 12건). 못 잰 건 싣지 않는다 — 건수만 밝힌다. */}
                         {typeof measured.pending === 'number' && measured.pending > 0 && (
                             <> · 자리 대기 {measured.pending}<i title="트래픽·수요는 통과했지만 블로그탭 상위 10 을 아직 못 잰 행 — 다음 회차에 잰다. 못 잰 것은 싣지 않습니다"> (다음 회차 실측)</i></>
@@ -417,8 +422,9 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                                         <PreemptionCard
                                             key={`${row.issue}-${row.keyword}`}
                                             row={row}
-                                            rank={index + 1}
+                                            rank={view === 'observe' ? 0 : index + 1}
                                             variant="issue"
+                                            observation={view === 'observe'}
                                             headTags={headTags(row)}
                                             locked={locked}
                                             copied={copied === row.keyword}

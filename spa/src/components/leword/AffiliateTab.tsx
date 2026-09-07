@@ -4,7 +4,10 @@ import LicenseGate, { isUnlocked } from './LicenseGate';
 import AffiliateTitles from './AffiliateTitles';
 import CoupangBoard from './CoupangBoard';
 import { AFFILIATE_LANES, type LaneId } from './affiliateLanes';
-import { forgeShoppingTitle } from './shoppingTitle';
+import { affiliateTitle, recommendationReason } from '../../lib/recommendationView.mjs';
+import { assessAffiliateRecommendation, compareAffiliateRecommendations } from '../../lib/affiliateRecommendation.mjs';
+import { useEvidenceClock } from './useEvidenceClock';
+import RecommendationFilter, { type RecommendationStatus } from './RecommendationFilter';
 import { loadUserKeys } from '../../lib/userKeys';
 import { campaignFreshness } from '../../lib/affiliateFreshness.mjs';
 
@@ -22,6 +25,8 @@ import { campaignFreshness } from '../../lib/affiliateFreshness.mjs';
 
 /** 로컬 세션 수집기가 발행한 스냅샷. 계약은 scripts/affiliate-campaigns.js 가 만든다. */
 type CampaignItem = {
+    keywordEvidence?: unknown[];
+    productEvidence?: unknown[];
     name: string;
     brand: string;
     image: string;
@@ -81,16 +86,14 @@ type CampaignSnapshot = {
  */
 function exposureVerdict(ratio: number | null | undefined) {
     if (typeof ratio !== 'number') return null;
-    if (ratio >= 2) return { label: `노출 잘 됨 · 글이 ${ratio}배 부족`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' };
-    if (ratio >= 1) return { label: `해볼 만함 · 검색≈글 (${ratio}배)`, color: '#f5a623', bg: 'rgba(245,166,35,.14)' };
-    return { label: `노출 어려움 · 글이 ${Math.round(10 / Math.max(ratio, 0.1)) / 10}배 많음`, color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
+    return { label: `검색량÷문서수 ${ratio.toFixed(2)} · 참고값`, color: '#aebccc', bg: 'rgba(174,188,204,.12)' };
 }
 
 /** 정면 실측 → 카드 배지. 쿠팡 레인과 같은 기준이라야 같은 뜻으로 읽힌다. */
 function verdictBadge(item: CampaignItem) {
     const top = item.serpTop;
     if (!top || !top.sampled) return null;
-    if (top.exact <= 2) return { label: `자리 있음 · 정면 ${top.exact}개 — 고르세요`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' };
+    if (top.exact <= 2) return { label: `제목 정면 ${top.exact}개 · 본문 확인 필요`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' };
     if (top.exact <= 5) return { label: `경합 · 정면 ${top.exact}개`, color: '#f5a623', bg: 'rgba(245,166,35,.14)' };
     return { label: `포화 · 정면 ${top.exact}개`, color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
 }
@@ -99,8 +102,10 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [lane, setLane] = useState<LaneId>('coupang');
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     const [snapshot, setSnapshot] = useState<CampaignSnapshot | null>(null);
+    const nowMs = useEvidenceClock();
     /** 방금 복사한 상품 — 눌렀는데 아무 반응이 없으면 됐는지 알 수가 없다. */
     const [copied, setCopied] = useState('');
+    const [recommendationView, setRecommendationView] = useState<RecommendationStatus>('ready');
 
     /*
      * 토스·브랜드커넥트는 공개 API 가 없어 캠페인 목록이 로그인 뒤에 있다.
@@ -162,6 +167,16 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
     const campaigns = lane === 'coupang' ? null : (snapshot?.sites?.[lane] ?? null);
     const freshness = campaignFreshness(snapshot, lane);
+    const assessed = (campaigns?.items || []).map(item => {
+        const recommendation = assessAffiliateRecommendation(item, { now: nowMs, collectedAt: freshness.collectedAt });
+        if (freshness.failed && recommendation.status === 'ready') {
+            return { item, recommendation: { ...recommendation, status: 'research' as const, reasons: [...recommendation.reasons, 'collection-failed'] } };
+        }
+        return { item, recommendation };
+    }).sort(compareAffiliateRecommendations);
+    const counts = { ready: 0, research: 0, excluded: 0 };
+    for (const entry of assessed) counts[entry.recommendation.status] += 1;
+    const displayed = assessed.filter(entry => entry.recommendation.status === recommendationView);
     const collectedLabel = freshness.collectedAt && Number.isFinite(Date.parse(freshness.collectedAt))
         ? new Date(freshness.collectedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
         : '';
@@ -170,7 +185,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         <>
             <TabIntro
                 title="제휴 황금키워드"
-                desc="지금 팔리는 상품에서 출발합니다. 상품마다 그 검색어의 월 검색량과 블로그 문서수를 실제로 재서, 찾는 사람이 많고 쓴 글이 적은 순으로 세웁니다. 확률은 만들지 않습니다."
+                desc="실제 제휴 상품과 동일 검색어의 구매 의도·수요·경쟁 근거를 연결합니다. 근거 통과 작성 후보와 추가 조사 대상을 구분하며, 상품별 작성 근거·본문 구성을 제공합니다. 성과를 보장하거나 미확인 수치를 만들지 않습니다."
                 source="쿠팡 파트너스 베스트셀러·골드박스 · 네이버 검색광고 · 블로그 검색 API"
             />
 
@@ -182,7 +197,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         role="tab"
                         aria-selected={lane === item.id}
                         className={lane === item.id ? 'on' : ''}
-                        onClick={() => setLane(item.id)}
+                        onClick={() => { setLane(item.id); setRecommendationView('ready'); }}
                     >{item.label}</button>
                 ))}
             </div>
@@ -201,32 +216,17 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             {' '}위 수집 시각의 마지막 확인 목록입니다. 판매 여부와 수수료는 제휴 콘솔에서 다시 확인해주세요.
                         </p>
                     )}
+                    <RecommendationFilter value={recommendationView} onChange={setRecommendationView} counts={counts} />
                     <ol className="lw-product-list">
-                        {campaigns.items.map((item, index) => {
+                        {displayed.map(({ item, recommendation }, index) => {
                             // 분석·검색은 니즈 검색어가 우선 — 상품명 검색어는 수요가 없다(실측 0~140).
-                            const query = item.needKeyword || item.keyword || item.name;
-                            const badge = verdictBadge(item);
+                            const query = recommendation.demand.status === 'verified' ? recommendation.query : item.keyword || item.name;
+                            const badge = { label: recommendation.status === 'ready' ? '근거 통과 · 성과 보장 아님' : recommendation.status === 'excluded' ? '추천 제외 · 보관' : '추가 조사 필요', color: recommendation.status === 'ready' ? '#2ecc71' : '#f5a623', bg: 'rgba(245,166,35,.14)' };
                             // 글 제목 1줄 — AI 추론 제목(스냅샷) 우선, 없으면 규칙 조립 폴백.
-                            const forged = forgeShoppingTitle({
-                                name: item.name, brand: item.brand,
-                                keyword: item.keyword, needKeyword: item.needKeyword,
-                            });
-                            const titleLine = item.aiTitle?.text
-                                ? {
-                                    text: item.aiTitle.text,
-                                    label: '✍ AI 제목',
-                                    basis: [
-                                        item.aiTitle.axis ? `갈리는 축: ${item.aiTitle.axis}` : '',
-                                        item.aiTitle.whyClick ? `클릭 이유: ${item.aiTitle.whyClick}` : '',
-                                        `구독 CLI(${item.aiTitle.provider || 'AI'}) 추론 — 실측 재료 기반`,
-                                    ].filter(Boolean).join('\n'),
-                                }
-                                : forged
-                                    ? { text: forged.text, label: '✍ 글 제목', basis: forged.basis }
-                                    : null;
+                            const titleLine = affiliateTitle(item);
                             return (
                                 <li key={item.url || item.name} className="lw-product">
-                                    <span className="lw-product-rank">{index + 1}</span>
+                                    <span className="lw-product-rank">{recommendationView === 'ready' ? index + 1 : '·'}</span>
                                     {item.image
                                         ? <img src={item.image} alt="" loading="lazy" />
                                         : <span />}
@@ -292,6 +292,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 >{copied === `title:${item.url || item.name}` ? '복사됨' : '복사'}</button>
                                             </div>
                                         )}
+                                        <p style={{ fontSize: 12, color: '#f5a623', lineHeight: 1.6 }}>{recommendation.reasons.map(recommendationReason).join(' ')}</p>
                                         <div className="lw-product-metrics">
                                             {typeof item.price === 'number' && item.price > 0 && (
                                                 <span className="lw-product-price"><strong>{item.price.toLocaleString('ko-KR')}원</strong></span>
@@ -306,8 +307,8 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 >{exposureVerdict(item.needRatio)?.label}</span>
                                             )}
                                             {item.needKeyword && item.needVolume ? (
-                                                <span className="lw-product-need" title="사람들이 실제로 치는 검색어와 월 검색량(실측). 이 검색어로 글을 써서 상품을 답으로 소개하는 것이 성과의 입구입니다.">
-                                                    니즈 <strong>{item.needKeyword}</strong> 월 <strong>{item.needVolume.toLocaleString('ko-KR')}</strong>
+                                                <span className="lw-product-need" title="관련 검색어의 관측값입니다. 이 상품이나 작성 제목의 수요를 뜻하지는 않습니다.">
+                                                    관련어 관측 <strong>{item.needKeyword}</strong> 월 <strong>{item.needVolume.toLocaleString('ko-KR')}</strong>
                                                     {typeof item.needDocs === 'number' && (
                                                         <> · 문서 <strong>{item.needDocs.toLocaleString('ko-KR')}</strong></>
                                                     )}
@@ -318,8 +319,8 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                               * 없으면 아무것도 안 적는다 — 없는 자리를 있다고 하지 않는다.
                                               */}
                                             {Array.isArray(item.slots) && item.slots.length > 0 && (
-                                                <span className="lw-product-slots" title="자동완성이 인정한 검색어 중 검색량이 문서수보다 많은 것 — 이 말로 쓰면 뚫립니다">
-                                                    ✅ 쓸 자리
+                                                <span className="lw-product-slots" title="검색량·문서수 비율이 높은 확장어입니다. 구매 의도와 본문 경쟁은 별도 확인해야 합니다.">
+                                                    확장어 관측
                                                     {item.slots.slice(0, 3).map((slot) => (
                                                         <a
                                                             key={slot.keyword}
@@ -336,11 +337,11 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             {typeof item.perSaleWon === 'number' && item.perSaleWon > 0 && (
                                                 <span className="lw-product-persale" title="판매가 × 수수료율 단순 계산">건당 <strong>{item.perSaleWon.toLocaleString('ko-KR')}원</strong></span>
                                             )}
-                                            <span>검색어 <strong>{query}</strong></span>
-                                            <span>월 검색량 <strong>{item.searchVolume == null ? '—' : item.searchVolume.toLocaleString('ko-KR')}</strong></span>
-                                            <span>문서수 <strong>{item.documentCount == null ? '—' : item.documentCount.toLocaleString('ko-KR')}</strong></span>
+                                            <span>상품명 검색어 <strong>{item.keyword || '—'}</strong></span>
+                                            <span>상품명 월 검색량 <strong>{item.searchVolume == null ? '—' : item.searchVolume.toLocaleString('ko-KR')}</strong></span>
+                                            <span>상품명 문서수 <strong>{item.documentCount == null ? '—' : item.documentCount.toLocaleString('ko-KR')}</strong></span>
                                             {item.serpTop && item.serpTop.sampled > 0 && (
-                                                <span title={`블로그 검색 상위 ${item.serpTop.sampled}개 제목 중 '${query}'를 그대로 다룬 글 ${item.serpTop.exact}개`}>
+                                                <span title={`블로그 검색 상위 ${item.serpTop.sampled}개 제목 중 '${item.keyword}'를 그대로 다룬 글 ${item.serpTop.exact}개`}>
                                                     상위{item.serpTop.sampled} 정면 <strong>{item.serpTop.exact}개</strong>
                                                 </span>
                                             )}
@@ -405,7 +406,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             </a>
                                         )}
                                     </div>
-                                    <AffiliateTitles keyword={query} product={item.name} onAnalyze={onAnalyze} />
+                                    <AffiliateTitles keyword={query} product={item.name} item={item} assessment={recommendation} onAnalyze={onAnalyze} />
                                 </li>
                             );
                         })}
@@ -417,14 +418,13 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 <div className="lw-note lw-note-limit">
                     <strong>{active.status}</strong>
                     <p>
-                        캠페인 목록을 아직 못 받아왔습니다. 그동안은 실시간 인기 상품 풀을 같은 판정으로 보여줍니다 —
-                        콘솔에서 같은 상품·브랜드를 찾아 캠페인을 거세요.
+                        이 플랫폼의 캠페인 목록을 아직 확인하지 못했습니다. 다른 플랫폼의 상품을 이곳의 제휴 상품처럼 대신 추천하지 않습니다.
                         <a href={active.consoleUrl} target="_blank" rel="noreferrer" style={{ marginLeft: 6 }}>콘솔 열기 →</a>
                     </p>
                 </div>
             )}
 
-            {(lane === 'coupang' || !(campaigns && campaigns.items.length > 0)) && (
+            {lane === 'coupang' && (
                 <CoupangBoard onAnalyze={onAnalyze} lane={lane} />
             )}
         </>

@@ -52,7 +52,7 @@ export type CardHeadRow = {
  * '지금이 선점 적기'·경고 배지도 뺐다 — 셋만 두라는 지시가 명시적이었다.
  * 경고에 해당하는 사실은 아래 근거 줄에 그대로 남아 있다.
  */
-function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
+function BoardCardHead({ row, rank, onCopy, copied, extraTags, observation = false }: {
     row: CardHeadRow;
     rank?: number;
     /** 배지 줄 맨 앞에 끼울 태그 — 실검 틈새 탭이 이슈명·실측 수요·급상승을 넣는다. */
@@ -60,8 +60,9 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
     /** 키워드 복사 — 액션 줄에서 홀로 밀려나던 버튼을 주인공(키워드) 옆으로 옮겼다. */
     onCopy?: () => void;
     copied?: boolean;
+    observation?: boolean;
 }) {
-    const index = preemptionIndex({
+    const index = observation ? null : preemptionIndex({
         searchVolume: row.searchVolume,
         documentCount: row.documentCount,
     });
@@ -75,12 +76,13 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
         <div className="lw-card-head">
             <div className="lw-card-tags">
                 {extraTags}
-                {row.layoutBestFor && SURFACE_TAG[row.layoutBestFor] && (
+                {observation && <span className="lw-warn-tag">관찰 전용 · 수요 미확인</span>}
+                {!observation && row.layoutBestFor && SURFACE_TAG[row.layoutBestFor] && (
                     <span className={`lw-surface-tag surface-${row.layoutBestFor}`}>
                         {SURFACE_TAG[row.layoutBestFor]}
                     </span>
                 )}
-                {row.tier && TIER_BADGE[row.tier] && (
+                {!observation && row.tier && TIER_BADGE[row.tier] && (
                     <span className={`lw-tier-tag ${TIER_BADGE[row.tier].cls}`}>{TIER_BADGE[row.tier].text}</span>
                 )}
                 {/*
@@ -88,12 +90,12 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
                   * 트렌드 배지를 **대체**한다 — 같은 실측의 더 행동적인 표현이라
                   * 배지 수를 늘리지 않는다. 없으면 기존 트렌드 배지 그대로.
                   */}
-                {row.timingGroup && TIMING_BADGE[row.timingGroup] ? (
+                {!observation && (row.timingGroup && TIMING_BADGE[row.timingGroup] ? (
                     <span className={`lw-timing-tag ${TIMING_BADGE[row.timingGroup].cls}`}>{row.timingGroup}</span>
                 ) : (row.trendLabel && row.trendLabel !== '판정불가' && (
                     <span className="lw-trend-tag">{row.trendLabel}</span>
-                ))}
-                {row.adsenseFit === true && (
+                )))}
+                {!observation && row.adsenseFit === true && (
                     <span className="lw-adsense-tag" title={row.adsenseReason || ''}>AdSense</span>
                 )}
             </div>
@@ -112,9 +114,9 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
               */}
             <h3 className="lw-card-keyword">
                 {rank !== undefined && <span className="lw-rank">{rank}</span>}
-                <span className={`lw-index lw-index-${index.tier}`} title={index.reason}>
+                {index && <span className={`lw-index lw-index-${index.tier}`} title={index.reason}>
                     {index.label}
-                </span>
+                </span>}
                 {row.keyword}
                 {onCopy && (
                     <button
@@ -135,7 +137,7 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
                   * 주민세 납부기간이 "지금 27,110" 으로만 보이면 지금 쓸 키워드로 읽히는데,
                   * 실은 8월에 30배가 되는 키워드다 — 이 줄이 그걸 말한다.
                   */}
-                {typeof row.peakMultiplier === 'number' && row.peakMultiplier >= 2 && row.peakMonth && (
+                {!observation && typeof row.peakMultiplier === 'number' && row.peakMultiplier >= 2 && row.peakMonth && (
                     <li className="lw-evidence-early">
                         <span aria-hidden="true">◔</span>
                         {row.peakRecurring === true
@@ -150,10 +152,10 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags }: {
                         )}
                     </li>
                 )}
-                {(row.earlyMoverReasons || []).map((text) => (
+                {(!observation ? row.earlyMoverReasons || [] : []).map((text) => (
                     <li key={text} className="lw-evidence-early"><span aria-hidden="true">↗</span>{text}</li>
                 ))}
-                {row.evidence.map((item) => (
+                {row.evidence.filter(item => !observation || !['demand', 'slot', 'early'].includes(item.code)).map((item) => (
                     <li key={item.code}>
                         <span aria-hidden="true">{EVIDENCE_ICON[item.code] || '·'}</span>{item.text}
                     </li>

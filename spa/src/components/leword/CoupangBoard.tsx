@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useEvidenceClock } from './useEvidenceClock';
 import { createCoupangDeeplink, fetchAffiliateBoard, type AffiliateProduct } from '../../lib/keywordApi';
 import { type LaneId } from './affiliateLanes';
-import { forgeShoppingTitle } from './shoppingTitle';
-import { goldenIndex } from '../../lib/goldenIndex';
+import { affiliateTitle, recommendationReason } from '../../lib/recommendationView.mjs';
+import { assessAffiliateRecommendation, compareAffiliateRecommendations } from '../../lib/affiliateRecommendation.mjs';
+import RecommendationFilter, { type RecommendationStatus } from './RecommendationFilter';
 import AffiliateTitles from './AffiliateTitles';
 
 /**
@@ -21,8 +23,10 @@ import AffiliateTitles from './AffiliateTitles';
  */
 function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: string) => void; lane?: LaneId }) {
     const [rows, setRows] = useState<AffiliateProduct[] | null>(null);
+    const nowMs = useEvidenceClock();
     const [state, setState] = useState<'idle' | 'loading' | 'ready' | 'needs-keys' | 'error'>('idle');
     const [message, setMessage] = useState('');
+    const [recommendationView, setRecommendationView] = useState<RecommendationStatus>('ready');
     // 제휴링크 버튼의 행별 상태. 링크는 방문자 본인 키로 만들어지는 본인 수익 링크다.
     const [linkState, setLinkState] = useState<{ key: string; label: string } | null>(null);
     // 토스·브랜드커넥트 레인의 복사 버튼 — 콘솔 검색창에 붙여넣을 재료.
@@ -88,27 +92,36 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
      * 써볼 만한 것은 매일 몇 개뿐이다. 그래서 한 줄로 섞지 않고 두 덩이로 가른다.
      * 기준은 황금지수(등급 SSoT의 사본) 그대로다 — 여기서 새 임계값을 만들지 않는다.
      */
-    const all = rows || [];
+    // v1 endpoint contract: keyword (not needKeyword) is the exact query for all three measurements.
+    // Preserve the server's measuredAt. Never stamp a cached result with the current time.
+    const all = (rows || []).map(row => {
+        const item = { ...row, collectedAt: row.measuredAt, keywordEvidence: [{
+            query: row.keyword, serpQuery: row.keyword, monthlySearches: row.searchVolume,
+            documentCount: row.documentCount, serpTop: row.serpTop,
+            measuredAt: row.measuredAt, source: 'naver-searchad+blog-search',
+        }] };
+        return { row: item, recommendation: assessAffiliateRecommendation(item, { now: nowMs, collectedAt: row.measuredAt }) };
+    }).sort(compareAffiliateRecommendations);
+    const counts = { ready: 0, research: 0, excluded: 0 };
+    for (const entry of all) counts[entry.recommendation.status] += 1;
 
     const renderRow = (row: AffiliateProduct, rank: number) => {
-                const index2 = goldenIndex(row.searchVolume, row.documentCount);
+                const assessment = all.find(entry => entry.row.url === row.url)?.recommendation;
                 // 홈판처럼 글 제목을 조립한다 — 제품명 + 서브 키워드 + 후킹(사장님 지시 2026-08-20).
-                const forged = forgeShoppingTitle({
-                    name: row.name, keyword: row.keyword, needKeyword: row.needKeyword,
-                });
+                const forged = affiliateTitle(row);
                 return (
                     <li key={row.url} className="lw-product">
-                        <span className="lw-product-rank">{rank}</span>
+                        <span className="lw-product-rank">{recommendationView === 'ready' ? rank : '·'}</span>
                         {row.image && <img src={row.image} alt="" loading="lazy" />}
                         <div className="lw-product-body">
                             <div className="lw-product-tags">
                                 {row.serpTop && row.serpTop.sampled > 0 && (() => {
                                     const exact = row.serpTop!.exact;
                                     const verdict = exact <= 2
-                                        ? { label: `자리 있음 · 정면 ${exact}개 — 고르세요`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' }
+                                        ? { label: `상위 제목 정면 ${exact}개 · 본문 경쟁 별도 확인`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' }
                                         : exact <= 5
                                             ? { label: `경합 · 정면 ${exact}개`, color: '#f5a623', bg: 'rgba(245,166,35,.14)' }
-                                            : { label: `포화 · 정면 ${exact}개 — 피하세요`, color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
+                                            : { label: `정면 제목 다수 · ${exact}개`, color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
                                     return (
                                         <span style={{
                                             color: verdict.color, background: verdict.bg,
@@ -117,11 +130,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                                         }}>{verdict.label}</span>
                                     );
                                 })()}
-                                {index2 && (
-                                    <span className={`lw-gold-mini lw-gold-${index2.tier}`}>
-                                        {index2.label} {index2.ratio!.toFixed(1)}
-                                    </span>
-                                )}
+                                <span className="lw-goldbox">{assessment?.status === 'ready' ? '근거 통과 · 성과 보장 아님' : '추가 검토 필요'}</span>
                                 {row.discountPercent !== null && <span className="lw-discount">{row.discountPercent}% 할인</span>}
                                 {row.rocket && <span className="lw-rocket">로켓배송</span>}
                                 <span className="lw-goldbox">
@@ -133,7 +142,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                             <a className="lw-product-name" href={row.url} target="_blank" rel="noreferrer">{row.name}</a>
                             {forged && (
                                 <div title={forged.basis} style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '4px 0 2px', minWidth: 0 }}>
-                                    <span style={{ flexShrink: 0, padding: '1px 7px', borderRadius: 6, background: 'rgba(251,191,36,.14)', color: '#fbbf24', fontSize: 10, fontWeight: 800 }}>✍ 글 제목</span>
+                                    <span style={{ flexShrink: 0, padding: '1px 7px', borderRadius: 6, background: 'rgba(251,191,36,.14)', color: '#fbbf24', fontSize: 10, fontWeight: 800 }}>{forged.label}</span>
                                     <em style={{ fontStyle: 'normal', fontWeight: 700, fontSize: 13, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{forged.text}</em>
                                     <button
                                         type="button"
@@ -142,13 +151,14 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                                     >{copiedKey === `title:${row.url}` ? '복사됨!' : '복사'}</button>
                                 </div>
                             )}
+                            <p style={{ fontSize: 12, color: '#f5a623' }}>{assessment?.reasons.map(recommendationReason).join(' ')}</p>
                             <div className="lw-product-metrics">
                                 {typeof row.price === 'number' && row.price > 0 && (
                                     <span className="lw-product-price"><strong>{row.price.toLocaleString('ko-KR')}원</strong></span>
                                 )}
                                 {row.needKeyword && row.needVolume ? (
-                                    <span className="lw-product-need" title="사람들이 실제로 치는 검색어와 월 검색량(실측). 이 검색어로 글을 써서 상품을 답으로 소개하는 것이 성과의 입구입니다.">
-                                        니즈 <strong>{row.needKeyword}</strong> 월 <strong>{row.needVolume.toLocaleString('ko-KR')}</strong>
+                                    <span className="lw-product-need" title="관련 검색어의 관측값이며 이 상품 자체의 수요로 확정하지 않습니다.">
+                                        관련어 관측 <strong>{row.needKeyword}</strong> 월 <strong>{row.needVolume.toLocaleString('ko-KR')}</strong>
                                     </span>
                                 ) : null}
                                 <span>검색어 <strong>{row.keyword}</strong></span>
@@ -163,7 +173,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                         </div>
                         <div className="lw-product-actions">
                             {/* 분석·검색은 니즈 검색어 우선 — 상품명 검색어는 수요가 없다(실측 0~140). */}
-                            <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(row.needKeyword || row.keyword)}>LEWORD 키워드분석</button>
+                            <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(row.keyword)}>LEWORD 키워드분석</button>
                             {lane === 'coupang' && (
                                 <a
                                     className="lw-act lw-act-orange"
@@ -184,7 +194,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                             {/* 정면 수치를 못 믿겠으면 직접 세어 보라 — 실측을 파는 보드는 검증 동선까지 줘야 한다. */}
                             <a
                                 className="lw-act lw-act-green"
-                                href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(row.needKeyword || row.keyword)}`}
+                                href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(row.keyword)}`}
                                 target="_blank"
                                 rel="noreferrer"
                             >네이버 검색분석</a>
@@ -218,8 +228,10 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                         </div>
                         {/* 세 레인이 같은 부품을 쓴다 — 제목 교리를 갈라 놓지 않는다. */}
                         <AffiliateTitles
-                            keyword={row.needKeyword || row.keyword}
+                            keyword={row.keyword}
                             product={row.name}
+                            item={row}
+                            assessment={assessment}
                             onAnalyze={onAnalyze}
                         />
                     </li>
@@ -231,13 +243,12 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
             <p className="lw-write-hint">
                 <strong>상위10 정면이란?</strong> 이 검색어로 검색했을 때 첫 화면에 나오는 글 10개 중,
                 제목이 이 검색어를 그대로 다룬 글이 몇 개인지 실제로 센 숫자입니다.
-                {' '}<strong>정면 0~2개(초록)를 고르면 됩니다</strong> — 첫 화면에 경쟁 글이 거의 없어
-                내 글이 그 자리를 차지합니다. 3~5개(경합)는 더 잘 쓰면 노려볼 수 있는 자리라 남겨 뒀고,
-                6개 이상(포화)은 애초에 보드에서 뺐습니다. 문서수가 커도 정면이 적으면 쓸 자리가 있습니다.
+                {' '}다른 표현으로 같은 질문에 답한 글이 있을 수 있으므로, 이 숫자만으로 노출 가능성을 확정하지 않습니다.
             </p>
+            <RecommendationFilter value={recommendationView} onChange={setRecommendationView} counts={counts} />
             {/* 그룹 헤더는 뺐다(사장님: 정면 설명 빼고 다 없애). 판정은 카드 배지가 이미 말한다. */}
             <ol className="lw-product-list">
-                {all.map((row, index) => renderRow(row, index + 1))}
+                {all.filter(entry => entry.recommendation.status === recommendationView).map((entry, index) => renderRow(entry.row, index + 1))}
             </ol>
         </>
     );

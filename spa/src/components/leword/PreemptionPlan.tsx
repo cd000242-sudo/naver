@@ -121,19 +121,19 @@ function PreemptionPlan({ row, onClose, onAnalyze, searchUrl, live }: Props) {
     if (row.hasLiveDemand) demandBits.push('데이터랩 최근 7일 수요 확인');
     if (demandBits.length > 0) {
         trafficSteps.push({
-            head: '① 수요가 있다 — 그래서 트래픽이 된다',
-            body: `${demandBits.join(' · ')}. 아무도 안 찾는 말은 상위에 올라도 트래픽이 없습니다. 이 키워드는 지금 검색되고 있는 게 실측으로 확인됐습니다.`,
+            head: '① 수요 근거와 측정 시점을 확인',
+            body: `${demandBits.join(' · ')}. 월 검색량과 최근 상대 추세는 서로 다른 지표입니다. 지금의 관심과 같은 사건인지 확인한 뒤 작성 여부를 판단하세요.`,
         });
     }
     if (row.serp?.verdict === 'WINNABLE' && typeof row.serp.sampledTitles === 'number') {
         trafficSteps.push({
-            head: '② 자리가 있다 — 그래서 내 글이 올라간다',
-            body: `블로그탭 상위 ${row.serp.sampledTitles}개 중 이 검색어를 제목에 정면으로 담은 글이 ${row.serp.exactTitleHits ?? 0}건입니다. 정면으로 쓴 글이 없으니, 제목만 맞추면 그 빈자리를 받습니다 — 글을 잘 써서가 아니라 자리가 비어서입니다.`,
+            head: '② 제목 일치와 본문 경쟁을 구분',
+            body: `블로그탭 상위 ${row.serp.sampledTitles}개 중 이 검색어를 제목에 정면으로 담은 글이 ${row.serp.exactTitleHits ?? 0}건입니다. 다른 표현으로 같은 질문에 답하는 글이 있을 수 있습니다. 상위 본문이 놓친 질문과 제공할 추가 근거를 먼저 확인하세요.`,
         });
     }
     trafficSteps.push({
         head: '③ 그래서 이렇게 — 제목 선점 + 빠른 발행',
-        body: `${(row.titles?.seo || row.titles?.home) ? '아래 제목을 그대로 복사해 쓰고, ' : '검색어를 제목 앞자리에 넣고, '}본문은 아래 지식인 질문에 답하며 서브키워드로 넓히세요. 실시간 이슈는 시간이 관건입니다 — 남들이 쓰기 전에 지금 올리는 게 트래픽을 가장 많이 받습니다.`,
+        body: `${(row.titles?.seo || row.titles?.home) ? '아래 제목은 작성 초안입니다. 출처가 뒷받침하는 주장만 남기고, ' : '정확한 사건과 검색 의도를 제목에 담고, '}본문은 확인된 자료로 독자의 질문에 답하세요. 발행 후 검색 유입을 확인해 보완하며, 빠른 발행만으로 성과를 보장하지 않습니다.`,
     });
 
     return (

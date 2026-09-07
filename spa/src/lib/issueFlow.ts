@@ -9,6 +9,7 @@
  * 둔다 — 비슷한 이슈를 억지로 붙이면 남의 사실이 된다.
  */
 
+import { classifyIssuePublication, inspectIssueRelation } from './issueRecommendationGate.mjs';
 export type IssueLane = 'realtime' | 'tech' | 'policy';
 export type IssueVerdict = 'niche' | 'preemption';
 export type IssueOrigin = 'head' | 'next-wave' | 'autocomplete' | 'derived' | 'related';
@@ -109,6 +110,8 @@ export type IssueBrief = {
 };
 
 export type IssueBoard = {
+    observations?: IssueBoardRow[];
+    rejectedCount?: number;
     publishedAt?: string;
     generator?: string;
     schedule?: string;
@@ -148,10 +151,33 @@ export async function fetchIssueBoard(): Promise<IssueBoard | null> {
         const response = await fetch(ISSUE_BOARD_URL, { cache: 'no-store' });
         if (!response.ok) return null;
         const data = await response.json();
+        const issues: IssueBrief[] = Array.isArray(data?.issues) ? data.issues : [];
+        const rows: IssueBoardRow[] = [];
+        const observations: IssueBoardRow[] = [];
+        const seen = new Set<string>();
+        let rejectedCount = Number(data?.rejectedCount || 0);
+        for (const raw of [...(Array.isArray(data?.rows) ? data.rows : []), ...(Array.isArray(data?.observations) ? data.observations : [])]) {
+            if (!raw || typeof raw.keyword !== 'string' || typeof raw.issue !== 'string') continue;
+            const key = compactKey(raw.keyword);
+            if (!key || seen.has(key)) continue;
+            seen.add(key);
+            const at = Date.parse(raw.measuredAt || '');
+            if (!Number.isFinite(at) || Date.now() - at > 48 * 3600000 || at - Date.now() > 300000) continue;
+            const brief = issues.find(issue => compactKey(issue.issue) === compactKey(raw.issue));
+            const decision = classifyIssuePublication(raw, brief?.headlines);
+            if (decision.status === 'reject') { rejectedCount += 1; continue; }
+            (decision.status === 'observe' ? observations : rows).push(normalizeRow(raw));
+        }
         return {
             ...data,
-            rows: Array.isArray(data?.rows) ? data.rows.map(normalizeRow) : [],
-            issues: Array.isArray(data?.issues) ? data.issues : [],
+            rows, observations, rejectedCount,
+            freeSample: data?.freeSample ? { ...data.freeSample, keywords: (data.freeSample.keywords || []).filter((keyword: string) => rows.some(row => compactKey(row.keyword) === compactKey(keyword))) } : undefined,
+            issues: issues.map(issue => ({ ...issue,
+                concentrated: (issue.concentrated || []).filter(item => inspectIssueRelation(issue.issue, item.keyword, issue.headlines).related),
+                nextWave: (issue.nextWave || []).filter(item => inspectIssueRelation(issue.issue, item.keyword, issue.headlines).related)
+                    .map(item => ({ ...item, onBoard: rows.some(row => compactKey(row.keyword) === compactKey(item.keyword)) })),
+                rowCount: rows.filter(row => compactKey(row.issue) === compactKey(issue.issue)).length,
+            })),
         };
     } catch {
         return null;
