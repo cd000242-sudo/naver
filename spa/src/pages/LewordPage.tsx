@@ -122,6 +122,14 @@ function LewordPage() {
         try { localStorage.setItem('lw-picks-topic', topic); } catch { /* 저장 못 해도 화면은 된다 */ }
     };
     const currentPicksTopic = picksTopics.some((t) => t.topic === picksTopic) ? picksTopic : (picksTopics[0]?.topic ?? null);
+    // 주제 목록 접기/펴기(사장님 2026-09-08 "접었다 폈다") — 기본 펼침, 상태는 기억한다.
+    const [picksFolded, setPicksFolded] = useState<boolean>(() => { try { return localStorage.getItem('lw-picks-fold') === '1'; } catch { return false; } });
+    const togglePicksFold = () => {
+        setPicksFolded((folded) => {
+            try { localStorage.setItem('lw-picks-fold', folded ? '0' : '1'); } catch { /* 기억 못 해도 된다 */ }
+            return !folded;
+        });
+    };
     /*
      * RPM 을 보고 "이 글에 사람을 데려올까"를 정한 다음 레이더로 넘어간다
      * (사장님 지시 2026-08-28). 주소를 다시 붙여넣게 두지 않는다.
@@ -184,6 +192,7 @@ function LewordPage() {
                 <nav className="lw-nav">
                     {TABS.map((tab) => (
                         <Fragment key={tab.id}>
+                        <div className={tab.id === 'picks' ? 'lw-navi-wrap' : undefined}>
                         <button
                             type="button"
                             // 탭별 고유색(사장님 지정 2026-08-20: 금·파랑·초록·주황·빨강·분홍·은색).
@@ -191,6 +200,7 @@ function LewordPage() {
                             aria-current={activeTab === tab.id ? 'page' : undefined}
                             onClick={() => {
                                 if (!session && !GUEST_TABS.has(tab.id)) { setAuthOpen(true); return; }
+                                if (tab.id === 'picks' && activeTab === 'picks') { togglePicksFold(); return; }
                                 selectTab(tab.id);
                             }}
                         >
@@ -205,7 +215,19 @@ function LewordPage() {
                             <em className="lw-navi-short">{tab.short}</em>
                             {!session && !GUEST_TABS.has(tab.id) && <b className="lw-navi-lock" aria-label="로그인 필요">🔒</b>}
                         </button>
-                        {tab.id === 'picks' && activeTab === 'picks' && picksTopics.map((topic) => (
+                        {tab.id === 'picks' && activeTab === 'picks' && picksTopics.length > 0 && (
+                            <button
+                                type="button"
+                                className="lw-navi-fold"
+                                aria-expanded={!picksFolded}
+                                aria-label={picksFolded ? '주제 펼치기' : '주제 접기'}
+                                onClick={togglePicksFold}
+                            >
+                                {picksFolded ? '▸' : '▾'}
+                            </button>
+                        )}
+                        </div>
+                        {tab.id === 'picks' && activeTab === 'picks' && !picksFolded && picksTopics.map((topic) => (
                             <button
                                 key={topic.topic}
                                 type="button"
