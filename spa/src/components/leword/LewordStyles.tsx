@@ -2179,6 +2179,19 @@ function LewordStyles() {
             .lw-picks-head h2 { font-size: 18px; margin: 0 0 4px; letter-spacing: -0.01em; }
             .lw-picks-head p { margin: 0 0 10px; opacity: 0.72; font-size: 13px; }
             .lw-picks-tab { margin-top: 0; padding-top: 0; border-top: 0; }
+            .lw-navi-naver { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 4px; background: #03c75a; color: #fff; font-weight: 800; font-size: 11px; line-height: 1; font-family: Arial, Helvetica, sans-serif; vertical-align: -3px; }
+            .lw-picks-topics { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
+            .lw-picks-topic-btn { font: inherit; font-size: 12.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); background: transparent; color: inherit; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+            .lw-picks-topic-btn b { font-weight: 600; font-size: 11px; opacity: 0.6; }
+            .lw-picks-topic-btn:hover { background: color-mix(in srgb, currentColor 7%, transparent); }
+            .lw-picks-topic-btn.is-active { background: #03c75a; border-color: #03c75a; color: #fff; }
+            .lw-picks-topic-btn.is-active b { opacity: 0.85; }
+            .lw-picks-topic-btn:focus-visible { outline: 2px solid #03c75a; outline-offset: 2px; }
+            .lw-picks-panel { border: 1px solid color-mix(in srgb, currentColor 12%, transparent); border-radius: 10px; background: color-mix(in srgb, currentColor 3%, transparent); }
+            .lw-picks-panel-head { display: flex; gap: 10px; align-items: baseline; padding: 10px 14px 4px; }
+            .lw-picks-panel-head strong { font-size: 15px; }
+            .lw-picks-panel-head span { font-size: 12px; opacity: 0.65; }
+            .lw-picks-season { background: color-mix(in srgb, #7dd3fc 16%, transparent); color: #7dd3fc; }
             .lw-picks-grid { display: grid; gap: 8px; margin-top: 10px; }
             .lw-picks-topic { border: 1px solid color-mix(in srgb, currentColor 12%, transparent); border-radius: 10px; background: color-mix(in srgb, currentColor 3%, transparent); }
             .lw-picks-topic summary { cursor: pointer; padding: 10px 14px; display: flex; gap: 10px; align-items: baseline; list-style: none; }

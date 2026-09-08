@@ -29,7 +29,7 @@ import YoutubeTab from '../components/leword/YoutubeTab';
 const TABS = [
     { id: 'golden', label: '리더남 전용 황금키워드', short: '황금키워드', icon: '◆' },
     { id: 'issue', label: '실검 틈새키워드', short: '실검 틈새', icon: '⚡' },
-    { id: 'picks', label: '오늘의 네이버 추천키워드', short: '추천키워드', icon: '☀' },
+    { id: 'picks', label: '오늘의 네이버 추천키워드', short: '추천키워드', icon: 'N' },
     { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },
     { id: 'kin', label: '지식인 황금질문', short: '황금질문', icon: '✦' },
     { id: 'affiliate', label: '제휴 황금키워드', short: '제휴', icon: '◇' },
@@ -147,7 +147,7 @@ function LewordPage() {
                     onClick={() => setMobileNavOpen((open) => !open)}
                 >
                     <span className="lw-mobile-current">
-                        <span aria-hidden="true">{activeMeta.icon}</span> {activeMeta.short}
+                        {activeMeta.id === 'picks' ? <span className="lw-navi-naver" aria-hidden="true">N</span> : <span aria-hidden="true">{activeMeta.icon}</span>} {activeMeta.short}
                     </span>
                     <span className="lw-burger" aria-hidden="true">{mobileNavOpen ? '✕' : '☰'}</span>
                 </button>
@@ -161,7 +161,7 @@ function LewordPage() {
                                 className={`lw-mobile-item lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}`}
                                 onClick={() => { selectTab(tab.id); setMobileNavOpen(false); }}
                             >
-                                <span aria-hidden="true">{tab.icon}</span>
+                                {tab.id === 'picks' ? <span className="lw-navi-naver" aria-hidden="true">N</span> : <span aria-hidden="true">{tab.icon}</span>}
                                 <em>{tab.label}</em>
                                 {activeTab === tab.id && <b aria-hidden="true">●</b>}
                             </button>
@@ -182,7 +182,7 @@ function LewordPage() {
                                 selectTab(tab.id);
                             }}
                         >
-                            <span aria-hidden="true">{tab.icon}</span>
+                            {tab.id === 'picks' ? <span className="lw-navi-naver" aria-hidden="true">N</span> : <span aria-hidden="true">{tab.icon}</span>}
                             {/*
                               * 모바일 실측(2026-08-17, iPhone 뷰포트): 긴 라벨 하나가 가로줄
                               * 폭을 다 먹고 나머지 탭은 화면 밖 + 스크롤바 숨김이라
