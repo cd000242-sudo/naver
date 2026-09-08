@@ -4,7 +4,7 @@
   "facts": "네이버 뉴스 API 실측 기사(분야별 질의, 최신순). 카드에 없는 날짜·숫자는 검증기가 떨어뜨린다",
   "timing": "NOW=최근 5일 안 기사 · NEXT=기사에 미래 날짜 · ALWAYS=철 안 타는 제도(카드 근거 필수)",
   "searchVolume": "검색광고 키워드도구 월간 검색량 실측(핵심 검색어) · 없으면 null",
-  "serpFit": "정면 글 수 실측(none) — 높음 ≤2(또는 빈자리 ≤3) · 보통 ≤5 · 낮음 · 안 쟀으면 미측정. 높음은 상위노출 보장이 아니다",
+  "serpFit": "정면 글 수 실측(local) — 높음 ≤2(또는 빈자리 ≤3) · 보통 ≤5 · 낮음 · 안 쟀으면 미측정. 높음은 상위노출 보장이 아니다",
   "star": "적합성 높음 + (검색량 500+ 또는 날짜 박힌 NOW/NEXT)"
  },
  "counts": {
@@ -12,139 +12,12 @@
   "now": 19,
   "next": 12,
   "always": 4,
-  "star": 0,
+  "star": 9,
   "dropped": 4,
   "newsCalls": 32,
   "agentCalls": 13
  },
  "briefs": [
-  {
-   "title": "메이드 인 코리아 시즌2 9월 9일 공개, 뭘 봐야 하나",
-   "timing": "NOW",
-   "types": [
-    "해설형",
-    "정보형"
-   ],
-   "primaryIntent": "오늘 공개되는 메인코2의 공개일·제작진·관전 포인트를 한 번에 확인",
-   "value": "디즈니+ '메이드 인 코리아 시즌2'가 9월 9일 공개되며, 각본 박은교·연출 우민호가 참여하고 현빈·정우성 사이 우도환이 변수로 등장한다. 시즌1은 디즈니+ 한국 오리지널 중 전 세계 최다 시청 1위에 올랐던 작품이다.",
-   "experience": "아직 공개 전이라 시청 후기·평점은 쓰지 말 것. 시즌1 시청 경험이 있으면 그 감상만 근거로 언급.",
-   "differentiation": "공개일·제작진·주연 관계도(현빈·정우성·우도환)만 팩트로 정리하고 시즌1 성적을 배경으로 붙이는 구조",
-   "coreKeyword": "메이드 인 코리아 시즌2",
-   "keywords": [
-    "메이드 인 코리아 시즌2",
-    "메인코2",
-    "메이드 인 코리아 우도환"
-   ],
-   "factIds": [
-    "f2",
-    "f6",
-    "f7"
-   ],
-   "field": "연예·OTT·영화·문화",
-   "facts": [
-    {
-     "id": "f2",
-     "title": "‘메이드 인 코리아2’ 우도환, 현빈·정우성 사이 변수",
-     "press": "bntnews.co.kr",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202609090079",
-     "publishedAt": "2026-09-08T23:26:00.000Z"
-    },
-    {
-     "id": "f6",
-     "title": "넷플릭스 19금 제쳤다...오늘 공개인데 벌써 '기대작 1위' 휩쓴 한국 드...",
-     "press": "wikitree.co.kr",
-     "link": "https://www.wikitree.co.kr/articles/1157854",
-     "publishedAt": "2026-09-08T21:00:00.000Z"
-    },
-    {
-     "id": "f7",
-     "title": "[TF초점] 9월 OTT 점령한 부부…현빈·손예진, 동시 출격",
-     "press": "news.tf.co.kr",
-     "link": "https://news.tf.co.kr/read/entertain/2363558.htm",
-     "publishedAt": "2026-09-08T15:01:00.000Z"
-    }
-   ],
-   "searchVolume": 189400,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
-   "star": false,
-   "searchVolumeUnder10": false
-  },
-  {
-   "title": "스마일게이트 이클립스 9월 10일 정오 정식 출시",
-   "timing": "NOW",
-   "types": [
-    "정보형",
-    "가이드형"
-   ],
-   "primaryIntent": "이클립스 정식 출시 시각과 사전 다운로드 시작 시점을 확인",
-   "value": "스마일게이트는 9월 10일 낮 12시 이클립스를 정식 출시하며, 이날 정오 PC 사전 다운로드를 시작했다. 이클립스는 사전등록 참여자 100만 명을 확보했다.",
-   "experience": "사전 다운로드·접속 과정을 직접 캡처해 안내하고, 출시 전 시점에 인게임 콘텐츠 평가는 쓰지 않는다.",
-   "differentiation": "정오 오픈이라는 시각과 PC 사전 다운로드 시작을 기준으로 출시 당일 체크리스트로 정리",
-   "coreKeyword": "이클립스",
-   "keywords": [
-    "이클립스",
-    "이클립스 출시",
-    "스마일게이트 이클립스"
-   ],
-   "factIds": [
-    "f55"
-   ],
-   "field": "게임",
-   "facts": [
-    {
-     "id": "f55",
-     "title": "넷마블 '아스달 연대기' 뉴월드 시즌2..MMORPG 신·구작 경쟁 격화",
-     "press": "4th.kr",
-     "link": "http://www.4th.kr/news/articleView.html?idxno=2117664",
-     "publishedAt": "2026-09-08T07:48:00.000Z"
-    }
-   ],
-   "searchVolume": 152300,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
-   "star": false,
-   "searchVolumeUnder10": false
-  },
-  {
-   "title": "추석 호남·전라선 KTX 예매 9월 9일 오전 7시 시작",
-   "timing": "NOW",
-   "types": [
-    "가이드형",
-    "정보형"
-   ],
-   "primaryIntent": "추석 귀성 KTX 예매가 언제 어떤 열차를 대상으로 시작되는지 바로 확인",
-   "value": "추석 연휴 호남선·전라선 KTX 승차권 예매가 9월 9일 오전 7시부터 시작된다. 예매 대상은 9월 23일부터 27일까지 운행하는 추석 명절 열차다.",
-   "experience": "코레일 앱·홈페이지 예매를 직접 해봤다면 대기 화면·좌석 선택 흐름을 캡처해 쓴다. 경험이 없으면 '몇 초 만에 매진' 같은 체감 후기를 지어내지 않는다.",
-   "differentiation": "예매 시작 시각(9월 9일 7시)과 대상 운행일(9월 23~27일)을 기준으로 준비 체크리스트를 시간순으로 정리한다.",
-   "coreKeyword": "추석 기차표 예매",
-   "keywords": [
-    "추석 기차표 예매",
-    "추석 KTX 예매",
-    "코레일 추석 예매"
-   ],
-   "factIds": [
-    "f51"
-   ],
-   "field": "국내여행·로컬·시즌",
-   "facts": [
-    {
-     "id": "f51",
-     "title": "코레일 기차표…추석 승차권 예매",
-     "press": "bntnews.co.kr",
-     "link": "https://www.bntnews.co.kr/article/view/bnt202609080179",
-     "publishedAt": "2026-09-08T15:02:00.000Z"
-    }
-   ],
-   "searchVolume": 147500,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
-   "star": false,
-   "searchVolumeUnder10": false
-  },
   {
    "title": "독감 이례적 조기유행, 이번 주 유행주의보 예상",
    "timing": "NOW",
@@ -192,9 +65,300 @@
     }
    ],
    "searchVolume": 25480,
-   "serpFacing": null,
+   "serpFacing": 9,
+   "serpVacancy": 1,
+   "serpFit": "높음",
+   "star": true,
+   "searchVolumeUnder10": false
+  },
+  {
+   "title": "9월 아파트 분양전망지수 86.3, 왜 급락했나",
+   "timing": "NOW",
+   "types": [
+    "해설형",
+    "정보형"
+   ],
+   "primaryIntent": "지금 분양시장 심리가 왜 꺾였는지 배경을 알고 싶다",
+   "value": "주택산업연구원이 8일 발표한 설문에서 9월 전국 아파트 분양전망지수는 86.3으로 전월보다 6.9포인트 하락했다. 수도권을 중심으로 대출규제와 금리 이중 부담이 배경으로 지목됐다.",
+   "experience": "직접 청약·분양 상담 경험이 있으면 현장 분위기로 보탤 수 있고, 없으면 전망·수익 예측을 지어내지 말고 지수 86.3과 하락폭 6.9포인트만 근거로 쓴다.",
+   "differentiation": "지수 숫자 나열 대신 '대출규제+금리'라는 두 부담을 분리해 지역별 체감으로 풀어낸다.",
+   "coreKeyword": "아파트 분양",
+   "keywords": [
+    "분양전망지수",
+    "아파트 분양",
+    "분양시장 전망"
+   ],
+   "factIds": [
+    "f53"
+   ],
+   "field": "생활경제·금융·부동산·명절",
+   "facts": [
+    {
+     "id": "f53",
+     "title": "[KFT 모닝 브리프] 2026.09.09 — 오늘 꼭 알아야 할 국내외 경제·시장 ...",
+     "press": "fntimes.com",
+     "link": "https://www.fntimes.com/html/view.php?ud=202609090705006156141825007d_18",
+     "publishedAt": "2026-09-08T22:20:00.000Z"
+    }
+   ],
+   "searchVolume": 8660,
+   "serpFacing": 7,
+   "serpVacancy": 2,
+   "serpFit": "높음",
+   "star": true,
+   "searchVolumeUnder10": false
+  },
+  {
+   "title": "환절기 가습기, 가열식·초음파 뭘 고를까",
+   "timing": "NOW",
+   "types": [
+    "비교형",
+    "가이드형"
+   ],
+   "primaryIntent": "환절기에 가열식과 초음파 가습기 중 무엇을 사야 할지 결정한다",
+   "value": "쿠첸이 건조한 환절기를 앞두고 가열식·초음파 방식 가습기 2종을 출시했다(9월 4일). 가열식은 물을 100도 이상 끓여 99% 살균한다는 점이 카드에 나와 방식별 차이를 정리할 근거가 된다.",
+   "experience": "두 방식을 직접 써봤다면 세척 주기·소음·가습 체감을 비교해 쓴다. 안 써봤다면 특정 제품의 성능 수치나 사용 후기를 지어내지 않는다.",
+   "differentiation": "뉴스 나열 대신 가습 방식·사용 환경별 선택 기준을 표로 정리한다.",
+   "coreKeyword": "가열식 가습기",
+   "keywords": [
+    "가열식 가습기",
+    "초음파 가습기",
+    "가습기 종류"
+   ],
+   "factIds": [
+    "f66",
+    "f51"
+   ],
+   "field": "쇼핑·뷰티·환절기",
+   "facts": [
+    {
+     "id": "f66",
+     "title": "[가전 트렌드] 다나와, 냉장고 세트 거래액 14% 증가…'키친핏' 인기 外",
+     "press": "ibabynews.com",
+     "link": "https://www.ibabynews.com/news/articleView.html?idxno=154276",
+     "publishedAt": "2026-09-04T10:38:00.000Z"
+    },
+    {
+     "id": "f51",
+     "title": "\"밥만 지어선 미래 없다\"…쿠쿠·쿠첸, '포스트 밥솥' 신성장동력 사활",
+     "press": "daily.hankooki.com",
+     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1402946",
+     "publishedAt": "2026-09-08T07:36:00.000Z"
+    }
+   ],
+   "searchVolume": 8020,
+   "serpFacing": 7,
+   "serpVacancy": 1,
+   "serpFit": "높음",
+   "star": true,
+   "searchVolumeUnder10": false
+  },
+  {
+   "title": "중증장애인 의료급여 부양의무자 기준 폐지",
+   "timing": "NOW",
+   "types": [
+    "해설형",
+    "문제해결형"
+   ],
+   "primaryIntent": "부양의무자 기준 때문에 못 받던 의료급여를 이제 받을 수 있는지 확인하고 싶다",
+   "value": "복지부는 중증장애인 가구부터 의료급여 부양의무자 기준을 폐지하는 방안을 추진한다. 현수엽 복지부 제1차관은 '의료급여 혁신의 핵심은 취약계층의 건강한 삶을 실질적으로 보장하는 적극적 건강보장체계로의 전환'이라며 부양의무자 기준개선과 간병비 지원을 함께 밝혔다.",
+   "experience": "가족 부양의무자 기준으로 수급 탈락을 겪은 경험이 있다면 그 절차를 쓸 수 있으나, 카드에 없는 소득·재산 기준선이나 시행일을 임의로 적으면 안 된다.",
+   "differentiation": "'부양의무자 기준이 뭔지→왜 폐지하는지→중증장애인 가구부터 시작' 순으로 제도 배경을 풀어 실제 대상자 판단을 돕는 구조",
+   "coreKeyword": "의료급여 부양의무자",
+   "keywords": [
+    "부양의무자 기준 폐지",
+    "중증장애인 의료급여",
+    "의료급여 부양의무자"
+   ],
+   "factIds": [
+    "f109",
+    "f113"
+   ],
+   "field": "정책·사회·법률·복지",
+   "facts": [
+    {
+     "id": "f109",
+     "title": "중증장애인 가구부터 의료급여 부양의무자 기준 폐지 추진",
+     "press": "hemophilia.co.kr",
+     "link": "https://www.hemophilia.co.kr/news/articleView.html?idxno=44343",
+     "publishedAt": "2026-09-08T08:10:00.000Z"
+    },
+    {
+     "id": "f113",
+     "title": "복지부, 중증장애인 가구 부양의무자 기준 폐지…간병비 '지원'",
+     "press": "newspim.com",
+     "link": "https://www.newspim.com/news/view/20260908001050",
+     "publishedAt": "2026-09-08T07:21:00.000Z"
+    }
+   ],
+   "searchVolume": 1350,
+   "serpFacing": 6,
+   "serpVacancy": 3,
+   "serpFit": "높음",
+   "star": true,
+   "searchVolumeUnder10": false
+  },
+  {
+   "title": "한국 GDP 대비 R&D 5.13%, 세계 2위",
+   "timing": "NOW",
+   "types": [
+    "팩트체크형",
+    "해설형"
+   ],
+   "primaryIntent": "한국의 GDP 대비 연구개발비 순위와 실제 투입액이 얼마인지 확인",
+   "value": "올해 조사에서 한국의 GDP 대비 연구개발비는 5.13%로 이스라엘(6.76%)에 이어 세계 2위였다. R&D 총액으로는 131조원을 투입한 것으로 집계됐다.",
+   "experience": "직접 경험 요소는 없으므로 개인 체감·현장 후기를 지어내지 말고, 카드에 나온 순위·비율·금액 수치만 그대로 인용한다.",
+   "differentiation": "'비율 2위'와 '투입액'을 분리해 오해하기 쉬운 지표를 나눠 설명하는 구조.",
+   "coreKeyword": "한국 R&D 투자",
+   "keywords": [
+    "한국 R&D 투자",
+    "GDP 대비 연구개발비",
+    "R&D 순위"
+   ],
+   "factIds": [
+    "f52"
+   ],
+   "field": "과학·우주",
+   "facts": [
+    {
+     "id": "f52",
+     "title": "\"GDP 대비 R&D 투입 2위\"…한국 '131조원' 쏟아부었다",
+     "press": "jnilbo.com",
+     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000063701",
+     "publishedAt": "2026-09-08T23:19:00.000Z"
+    }
+   ],
+   "searchVolume": null,
+   "serpFacing": 1,
+   "serpVacancy": 10,
+   "serpFit": "높음",
+   "star": true,
+   "searchVolumeUnder10": true
+  },
+  {
+   "title": "메이드 인 코리아 시즌2 9월 9일 공개, 뭘 봐야 하나",
+   "timing": "NOW",
+   "types": [
+    "해설형",
+    "정보형"
+   ],
+   "primaryIntent": "오늘 공개되는 메인코2의 공개일·제작진·관전 포인트를 한 번에 확인",
+   "value": "디즈니+ '메이드 인 코리아 시즌2'가 9월 9일 공개되며, 각본 박은교·연출 우민호가 참여하고 현빈·정우성 사이 우도환이 변수로 등장한다. 시즌1은 디즈니+ 한국 오리지널 중 전 세계 최다 시청 1위에 올랐던 작품이다.",
+   "experience": "아직 공개 전이라 시청 후기·평점은 쓰지 말 것. 시즌1 시청 경험이 있으면 그 감상만 근거로 언급.",
+   "differentiation": "공개일·제작진·주연 관계도(현빈·정우성·우도환)만 팩트로 정리하고 시즌1 성적을 배경으로 붙이는 구조",
+   "coreKeyword": "메이드 인 코리아 시즌2",
+   "keywords": [
+    "메이드 인 코리아 시즌2",
+    "메인코2",
+    "메이드 인 코리아 우도환"
+   ],
+   "factIds": [
+    "f2",
+    "f6",
+    "f7"
+   ],
+   "field": "연예·OTT·영화·문화",
+   "facts": [
+    {
+     "id": "f2",
+     "title": "‘메이드 인 코리아2’ 우도환, 현빈·정우성 사이 변수",
+     "press": "bntnews.co.kr",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202609090079",
+     "publishedAt": "2026-09-08T23:26:00.000Z"
+    },
+    {
+     "id": "f6",
+     "title": "넷플릭스 19금 제쳤다...오늘 공개인데 벌써 '기대작 1위' 휩쓴 한국 드...",
+     "press": "wikitree.co.kr",
+     "link": "https://www.wikitree.co.kr/articles/1157854",
+     "publishedAt": "2026-09-08T21:00:00.000Z"
+    },
+    {
+     "id": "f7",
+     "title": "[TF초점] 9월 OTT 점령한 부부…현빈·손예진, 동시 출격",
+     "press": "news.tf.co.kr",
+     "link": "https://news.tf.co.kr/read/entertain/2363558.htm",
+     "publishedAt": "2026-09-08T15:01:00.000Z"
+    }
+   ],
+   "searchVolume": 189400,
+   "serpFacing": 7,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
+   "star": false,
+   "searchVolumeUnder10": false
+  },
+  {
+   "title": "스마일게이트 이클립스 9월 10일 정오 정식 출시",
+   "timing": "NOW",
+   "types": [
+    "정보형",
+    "가이드형"
+   ],
+   "primaryIntent": "이클립스 정식 출시 시각과 사전 다운로드 시작 시점을 확인",
+   "value": "스마일게이트는 9월 10일 낮 12시 이클립스를 정식 출시하며, 이날 정오 PC 사전 다운로드를 시작했다. 이클립스는 사전등록 참여자 100만 명을 확보했다.",
+   "experience": "사전 다운로드·접속 과정을 직접 캡처해 안내하고, 출시 전 시점에 인게임 콘텐츠 평가는 쓰지 않는다.",
+   "differentiation": "정오 오픈이라는 시각과 PC 사전 다운로드 시작을 기준으로 출시 당일 체크리스트로 정리",
+   "coreKeyword": "이클립스",
+   "keywords": [
+    "이클립스",
+    "이클립스 출시",
+    "스마일게이트 이클립스"
+   ],
+   "factIds": [
+    "f55"
+   ],
+   "field": "게임",
+   "facts": [
+    {
+     "id": "f55",
+     "title": "넷마블 '아스달 연대기' 뉴월드 시즌2..MMORPG 신·구작 경쟁 격화",
+     "press": "4th.kr",
+     "link": "http://www.4th.kr/news/articleView.html?idxno=2117664",
+     "publishedAt": "2026-09-08T07:48:00.000Z"
+    }
+   ],
+   "searchVolume": 152300,
+   "serpFacing": 10,
+   "serpVacancy": null,
+   "serpFit": "낮음",
+   "star": false,
+   "searchVolumeUnder10": false
+  },
+  {
+   "title": "추석 호남·전라선 KTX 예매 9월 9일 오전 7시 시작",
+   "timing": "NOW",
+   "types": [
+    "가이드형",
+    "정보형"
+   ],
+   "primaryIntent": "추석 귀성 KTX 예매가 언제 어떤 열차를 대상으로 시작되는지 바로 확인",
+   "value": "추석 연휴 호남선·전라선 KTX 승차권 예매가 9월 9일 오전 7시부터 시작된다. 예매 대상은 9월 23일부터 27일까지 운행하는 추석 명절 열차다.",
+   "experience": "코레일 앱·홈페이지 예매를 직접 해봤다면 대기 화면·좌석 선택 흐름을 캡처해 쓴다. 경험이 없으면 '몇 초 만에 매진' 같은 체감 후기를 지어내지 않는다.",
+   "differentiation": "예매 시작 시각(9월 9일 7시)과 대상 운행일(9월 23~27일)을 기준으로 준비 체크리스트를 시간순으로 정리한다.",
+   "coreKeyword": "추석 기차표 예매",
+   "keywords": [
+    "추석 기차표 예매",
+    "추석 KTX 예매",
+    "코레일 추석 예매"
+   ],
+   "factIds": [
+    "f51"
+   ],
+   "field": "국내여행·로컬·시즌",
+   "facts": [
+    {
+     "id": "f51",
+     "title": "코레일 기차표…추석 승차권 예매",
+     "press": "bntnews.co.kr",
+     "link": "https://www.bntnews.co.kr/article/view/bnt202609080179",
+     "publishedAt": "2026-09-08T15:02:00.000Z"
+    }
+   ],
+   "searchVolume": 147500,
+   "serpFacing": 10,
+   "serpVacancy": null,
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -245,9 +409,9 @@
     }
    ],
    "searchVolume": 21550,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -282,91 +446,9 @@
     }
    ],
    "searchVolume": 21070,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
-   "star": false,
-   "searchVolumeUnder10": false
-  },
-  {
-   "title": "9월 아파트 분양전망지수 86.3, 왜 급락했나",
-   "timing": "NOW",
-   "types": [
-    "해설형",
-    "정보형"
-   ],
-   "primaryIntent": "지금 분양시장 심리가 왜 꺾였는지 배경을 알고 싶다",
-   "value": "주택산업연구원이 8일 발표한 설문에서 9월 전국 아파트 분양전망지수는 86.3으로 전월보다 6.9포인트 하락했다. 수도권을 중심으로 대출규제와 금리 이중 부담이 배경으로 지목됐다.",
-   "experience": "직접 청약·분양 상담 경험이 있으면 현장 분위기로 보탤 수 있고, 없으면 전망·수익 예측을 지어내지 말고 지수 86.3과 하락폭 6.9포인트만 근거로 쓴다.",
-   "differentiation": "지수 숫자 나열 대신 '대출규제+금리'라는 두 부담을 분리해 지역별 체감으로 풀어낸다.",
-   "coreKeyword": "아파트 분양",
-   "keywords": [
-    "분양전망지수",
-    "아파트 분양",
-    "분양시장 전망"
-   ],
-   "factIds": [
-    "f53"
-   ],
-   "field": "생활경제·금융·부동산·명절",
-   "facts": [
-    {
-     "id": "f53",
-     "title": "[KFT 모닝 브리프] 2026.09.09 — 오늘 꼭 알아야 할 국내외 경제·시장 ...",
-     "press": "fntimes.com",
-     "link": "https://www.fntimes.com/html/view.php?ud=202609090705006156141825007d_18",
-     "publishedAt": "2026-09-08T22:20:00.000Z"
-    }
-   ],
-   "searchVolume": 8660,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
-   "star": false,
-   "searchVolumeUnder10": false
-  },
-  {
-   "title": "환절기 가습기, 가열식·초음파 뭘 고를까",
-   "timing": "NOW",
-   "types": [
-    "비교형",
-    "가이드형"
-   ],
-   "primaryIntent": "환절기에 가열식과 초음파 가습기 중 무엇을 사야 할지 결정한다",
-   "value": "쿠첸이 건조한 환절기를 앞두고 가열식·초음파 방식 가습기 2종을 출시했다(9월 4일). 가열식은 물을 100도 이상 끓여 99% 살균한다는 점이 카드에 나와 방식별 차이를 정리할 근거가 된다.",
-   "experience": "두 방식을 직접 써봤다면 세척 주기·소음·가습 체감을 비교해 쓴다. 안 써봤다면 특정 제품의 성능 수치나 사용 후기를 지어내지 않는다.",
-   "differentiation": "뉴스 나열 대신 가습 방식·사용 환경별 선택 기준을 표로 정리한다.",
-   "coreKeyword": "가열식 가습기",
-   "keywords": [
-    "가열식 가습기",
-    "초음파 가습기",
-    "가습기 종류"
-   ],
-   "factIds": [
-    "f66",
-    "f51"
-   ],
-   "field": "쇼핑·뷰티·환절기",
-   "facts": [
-    {
-     "id": "f66",
-     "title": "[가전 트렌드] 다나와, 냉장고 세트 거래액 14% 증가…'키친핏' 인기 外",
-     "press": "ibabynews.com",
-     "link": "https://www.ibabynews.com/news/articleView.html?idxno=154276",
-     "publishedAt": "2026-09-04T10:38:00.000Z"
-    },
-    {
-     "id": "f51",
-     "title": "\"밥만 지어선 미래 없다\"…쿠쿠·쿠첸, '포스트 밥솥' 신성장동력 사활",
-     "press": "daily.hankooki.com",
-     "link": "https://daily.hankooki.com/news/articleView.html?idxno=1402946",
-     "publishedAt": "2026-09-08T07:36:00.000Z"
-    }
-   ],
-   "searchVolume": 8020,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -425,54 +507,9 @@
     }
    ],
    "searchVolume": 2020,
-   "serpFacing": null,
+   "serpFacing": 7,
    "serpVacancy": null,
-   "serpFit": "미측정",
-   "star": false,
-   "searchVolumeUnder10": false
-  },
-  {
-   "title": "중증장애인 의료급여 부양의무자 기준 폐지",
-   "timing": "NOW",
-   "types": [
-    "해설형",
-    "문제해결형"
-   ],
-   "primaryIntent": "부양의무자 기준 때문에 못 받던 의료급여를 이제 받을 수 있는지 확인하고 싶다",
-   "value": "복지부는 중증장애인 가구부터 의료급여 부양의무자 기준을 폐지하는 방안을 추진한다. 현수엽 복지부 제1차관은 '의료급여 혁신의 핵심은 취약계층의 건강한 삶을 실질적으로 보장하는 적극적 건강보장체계로의 전환'이라며 부양의무자 기준개선과 간병비 지원을 함께 밝혔다.",
-   "experience": "가족 부양의무자 기준으로 수급 탈락을 겪은 경험이 있다면 그 절차를 쓸 수 있으나, 카드에 없는 소득·재산 기준선이나 시행일을 임의로 적으면 안 된다.",
-   "differentiation": "'부양의무자 기준이 뭔지→왜 폐지하는지→중증장애인 가구부터 시작' 순으로 제도 배경을 풀어 실제 대상자 판단을 돕는 구조",
-   "coreKeyword": "의료급여 부양의무자",
-   "keywords": [
-    "부양의무자 기준 폐지",
-    "중증장애인 의료급여",
-    "의료급여 부양의무자"
-   ],
-   "factIds": [
-    "f109",
-    "f113"
-   ],
-   "field": "정책·사회·법률·복지",
-   "facts": [
-    {
-     "id": "f109",
-     "title": "중증장애인 가구부터 의료급여 부양의무자 기준 폐지 추진",
-     "press": "hemophilia.co.kr",
-     "link": "https://www.hemophilia.co.kr/news/articleView.html?idxno=44343",
-     "publishedAt": "2026-09-08T08:10:00.000Z"
-    },
-    {
-     "id": "f113",
-     "title": "복지부, 중증장애인 가구 부양의무자 기준 폐지…간병비 '지원'",
-     "press": "newspim.com",
-     "link": "https://www.newspim.com/news/view/20260908001050",
-     "publishedAt": "2026-09-08T07:21:00.000Z"
-    }
-   ],
-   "searchVolume": 1350,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -523,9 +560,9 @@
     }
    ],
    "searchVolume": 560,
-   "serpFacing": null,
+   "serpFacing": 8,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -560,9 +597,9 @@
     }
    ],
    "searchVolume": 530,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -605,9 +642,9 @@
     }
    ],
    "searchVolume": 390,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -642,9 +679,9 @@
     }
    ],
    "searchVolume": 380,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFacing": 8,
+   "serpVacancy": 4,
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -679,9 +716,9 @@
     }
    ],
    "searchVolume": 180,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -732,9 +769,9 @@
     }
    ],
    "searchVolume": 140,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -801,48 +838,11 @@
     }
    ],
    "searchVolume": 30,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFacing": 5,
+   "serpVacancy": 5,
+   "serpFit": "보통",
    "star": false,
    "searchVolumeUnder10": false
-  },
-  {
-   "title": "한국 GDP 대비 R&D 5.13%, 세계 2위",
-   "timing": "NOW",
-   "types": [
-    "팩트체크형",
-    "해설형"
-   ],
-   "primaryIntent": "한국의 GDP 대비 연구개발비 순위와 실제 투입액이 얼마인지 확인",
-   "value": "올해 조사에서 한국의 GDP 대비 연구개발비는 5.13%로 이스라엘(6.76%)에 이어 세계 2위였다. R&D 총액으로는 131조원을 투입한 것으로 집계됐다.",
-   "experience": "직접 경험 요소는 없으므로 개인 체감·현장 후기를 지어내지 말고, 카드에 나온 순위·비율·금액 수치만 그대로 인용한다.",
-   "differentiation": "'비율 2위'와 '투입액'을 분리해 오해하기 쉬운 지표를 나눠 설명하는 구조.",
-   "coreKeyword": "한국 R&D 투자",
-   "keywords": [
-    "한국 R&D 투자",
-    "GDP 대비 연구개발비",
-    "R&D 순위"
-   ],
-   "factIds": [
-    "f52"
-   ],
-   "field": "과학·우주",
-   "facts": [
-    {
-     "id": "f52",
-     "title": "\"GDP 대비 R&D 투입 2위\"…한국 '131조원' 쏟아부었다",
-     "press": "jnilbo.com",
-     "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000063701",
-     "publishedAt": "2026-09-08T23:19:00.000Z"
-    }
-   ],
-   "searchVolume": null,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
-   "star": false,
-   "searchVolumeUnder10": true
   },
   {
    "title": "환절기 보습·진정 신제품 정리 (9월 출시)",
@@ -891,11 +891,167 @@
     }
    ],
    "searchVolume": null,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": true
+  },
+  {
+   "title": "경북과학축전 9월 19~20일 경주 HICO 개최",
+   "timing": "NEXT",
+   "types": [
+    "정보형",
+    "가이드형"
+   ],
+   "primaryIntent": "경북과학축전 날짜·장소를 확인하고 주말 가족 나들이로 갈지 판단",
+   "value": "경주시가 9월 19일부터 20일까지 경주화백컨벤션센터(HICO)에서 제24회 경북과학축전을 개최한다. 'AI 과학'을 내세운 체험형 축제의 장으로 마련된다.",
+   "experience": "HICO나 경주 방문 경험이 있으면 주변 동선을 쓴다. 프로그램 상세는 카드에 없으므로 부스·체험 내용을 임의로 지어내지 않는다.",
+   "differentiation": "주말 이틀(9월 19~20일) 경주 여행에 과학축전을 끼워넣는 반나절 코스 관점으로 접근한다.",
+   "coreKeyword": "경주 HICO",
+   "keywords": [
+    "경북과학축전",
+    "경주 과학축전",
+    "경주 HICO"
+   ],
+   "factIds": [
+    "f8"
+   ],
+   "field": "국내여행·로컬·시즌",
+   "facts": [
+    {
+     "id": "f8",
+     "title": "'천년의 지혜, AI 과학으로'…경북과학축전 19~20일 경주서 개최",
+     "press": "gukjenews.com",
+     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3688292",
+     "publishedAt": "2026-09-08T12:44:00.000Z"
+    }
+   ],
+   "searchVolume": 830,
+   "serpFacing": 1,
+   "serpVacancy": 1,
+   "serpFit": "높음",
+   "star": true,
+   "searchVolumeUnder10": false
+  },
+  {
+   "title": "2027 로스쿨 원서접수 9월 28일 시작, 일정 정리",
+   "timing": "NEXT",
+   "types": [
+    "가이드형",
+    "정보형"
+   ],
+   "primaryIntent": "로스쿨 원서접수가 언제 시작하고 언제 마감되는지 날짜를 정확히 확인하고 싶다",
+   "value": "2027학년도 법학전문대학원 원서 접수는 9월 28일부터 10월 2일 18시까지 각 로스쿨에서 진행된다. 지금은 교내 입학설명회가 마무리 단계이고 이제 면접 준비 국면으로 넘어간다.",
+   "experience": "본인이 로스쿨 준비 경험이 있으면 접수 체크리스트에 활용하고, 없으면 면접 합격 후기·배점 같은 미확인 정보는 쓰지 말 것",
+   "differentiation": "여러 로스쿨 공지를 흩어 보지 않고 '접수 마감 10월 2일 18시'를 기준으로 남은 일정 카운트다운으로 묶는 구조",
+   "coreKeyword": "로스쿨 원서접수",
+   "keywords": [
+    "2027 로스쿨",
+    "로스쿨 원서접수",
+    "로스쿨 접수 일정"
+   ],
+   "factIds": [
+    "f14"
+   ],
+   "field": "취업·교육",
+   "facts": [
+    {
+     "id": "f14",
+     "title": "2027 로스쿨 입시! 교내 입학설명회도 마무리 단계...이젠 면접",
+     "press": "lec.co.kr",
+     "link": "http://www.lec.co.kr/news/articleView.html?idxno=752665",
+     "publishedAt": "2026-09-08T03:50:00.000Z"
+    }
+   ],
+   "searchVolume": 270,
+   "serpFacing": 3,
+   "serpVacancy": 2,
+   "serpFit": "높음",
+   "star": true,
+   "searchVolumeUnder10": false
+  },
+  {
+   "title": "드래곤 레이드 9월 16일 사전예약, PvP·광고 없는 GPS RPG",
+   "timing": "NEXT",
+   "types": [
+    "정보형",
+    "해설형"
+   ],
+   "primaryIntent": "드래곤 레이드 어나더 월드가 어떤 게임이고 언제 사전예약을 여는지 확인",
+   "value": "드래곤 레이드: 어나더 월드는 9월 16일 사전예약을 시작하는 위치 기반 RPG로, 160종 이상의 드래곤을 얻을 수 있다. 현실의 위치와 날씨가 모험을 바꾸며 PvP와 광고가 없는 것을 내세운다.",
+   "experience": "GPS 위치 기반 플레이는 사전예약 단계라 실제 플레이 후기를 지어내지 말고 공개된 특징만 정리한다.",
+   "differentiation": "'가챠·PvP·광고 없음'과 위치·날씨 연동이라는 차별점을 다른 GPS RPG와 대비해 소개하는 구조",
+   "coreKeyword": "드래곤 레이드",
+   "keywords": [
+    "드래곤 레이드",
+    "드래곤 레이드 사전예약",
+    "위치기반 게임"
+   ],
+   "factIds": [
+    "f53"
+   ],
+   "field": "게임",
+   "facts": [
+    {
+     "id": "f53",
+     "title": "가챠·PvP·광고 없는 GPS RPG가 온다…'드래곤 레이드' 9월 16일 사전예...",
+     "press": "game.dailyesports.com",
+     "link": "http://game.dailyesports.com/view.php?ud=202609081746435032eb81adcc4e_26",
+     "publishedAt": "2026-09-08T08:48:00.000Z"
+    }
+   ],
+   "searchVolume": 70,
+   "serpFacing": 3,
+   "serpVacancy": 1,
+   "serpFit": "높음",
+   "star": true,
+   "searchVolumeUnder10": false
+  },
+  {
+   "title": "EBS 위대한 수업 시즌6 언제? 10월 12일 첫 방송",
+   "timing": "NEXT",
+   "types": [
+    "정보형",
+    "해설형"
+   ],
+   "primaryIntent": "위대한 수업 그레이트 마인즈 시즌6 첫 방송일과 편성 시간을 정확히 확인",
+   "value": "시즌6는 10월 12일 밤 11시 45분 EBS 1TV에서 첫 방송된다. 제작발표회에는 현택환·김영기 석좌교수가 참석해 시즌6 주제를 소개했다.",
+   "experience": "이전 시즌을 실제로 시청한 감상이 있으면 편성 시간대 시청 팁으로 쓴다. 시즌6 방송 내용은 아직 방영 전이므로 후기·강연평을 지어내면 안 된다.",
+   "differentiation": "방송일·시간·EBS 1TV 편성과 확인된 참석 학자만 한눈에 정리해 검색 즉시 답을 준다.",
+   "coreKeyword": "위대한 수업 그레이트 마인즈",
+   "keywords": [
+    "위대한 수업 시즌6",
+    "위대한 수업 그레이트 마인즈",
+    "EBS 위대한 수업 방송"
+   ],
+   "factIds": [
+    "f51",
+    "f60"
+   ],
+   "field": "과학·우주",
+   "facts": [
+    {
+     "id": "f51",
+     "title": "EBS '위대한 수업, 그레이트 마인즈' 시즌6 제작발표회",
+     "press": "kstar.kbs.co.kr",
+     "link": "https://kstar.kbs.co.kr/list_view.html?idx=409563",
+     "publishedAt": "2026-09-08T23:21:00.000Z"
+    },
+    {
+     "id": "f60",
+     "title": "EBS '위대한 수업, 그레이트 마인즈' 시즌6 제작발표회 성료…현택환·김...",
+     "press": "lecturernews.com",
+     "link": "https://www.lecturernews.com/news/articleView.html?idxno=210283",
+     "publishedAt": "2026-09-08T22:06:00.000Z"
+    }
+   ],
+   "searchVolume": 40,
+   "serpFacing": 3,
+   "serpVacancy": 1,
+   "serpFit": "높음",
+   "star": true,
+   "searchVolumeUnder10": false
   },
   {
    "title": "도깨비의세계 출시일·필드PK·캐릭터명 선점 정리",
@@ -928,9 +1084,9 @@
     }
    ],
    "searchVolume": 68100,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -981,9 +1137,9 @@
     }
    ],
    "searchVolume": 30970,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -1026,9 +1182,9 @@
     }
    ],
    "searchVolume": 23460,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -1071,9 +1227,9 @@
     }
    ],
    "searchVolume": 6570,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -1107,9 +1263,9 @@
     }
    ],
    "searchVolume": 6410,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -1144,9 +1300,9 @@
     }
    ],
    "searchVolume": 3250,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -1181,9 +1337,9 @@
     }
    ],
    "searchVolume": 1480,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -1234,165 +1390,9 @@
     }
    ],
    "searchVolume": 1230,
-   "serpFacing": null,
+   "serpFacing": 9,
    "serpVacancy": null,
-   "serpFit": "미측정",
-   "star": false,
-   "searchVolumeUnder10": false
-  },
-  {
-   "title": "경북과학축전 9월 19~20일 경주 HICO 개최",
-   "timing": "NEXT",
-   "types": [
-    "정보형",
-    "가이드형"
-   ],
-   "primaryIntent": "경북과학축전 날짜·장소를 확인하고 주말 가족 나들이로 갈지 판단",
-   "value": "경주시가 9월 19일부터 20일까지 경주화백컨벤션센터(HICO)에서 제24회 경북과학축전을 개최한다. 'AI 과학'을 내세운 체험형 축제의 장으로 마련된다.",
-   "experience": "HICO나 경주 방문 경험이 있으면 주변 동선을 쓴다. 프로그램 상세는 카드에 없으므로 부스·체험 내용을 임의로 지어내지 않는다.",
-   "differentiation": "주말 이틀(9월 19~20일) 경주 여행에 과학축전을 끼워넣는 반나절 코스 관점으로 접근한다.",
-   "coreKeyword": "경주 HICO",
-   "keywords": [
-    "경북과학축전",
-    "경주 과학축전",
-    "경주 HICO"
-   ],
-   "factIds": [
-    "f8"
-   ],
-   "field": "국내여행·로컬·시즌",
-   "facts": [
-    {
-     "id": "f8",
-     "title": "'천년의 지혜, AI 과학으로'…경북과학축전 19~20일 경주서 개최",
-     "press": "gukjenews.com",
-     "link": "https://www.gukjenews.com/news/articleView.html?idxno=3688292",
-     "publishedAt": "2026-09-08T12:44:00.000Z"
-    }
-   ],
-   "searchVolume": 830,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
-   "star": false,
-   "searchVolumeUnder10": false
-  },
-  {
-   "title": "2027 로스쿨 원서접수 9월 28일 시작, 일정 정리",
-   "timing": "NEXT",
-   "types": [
-    "가이드형",
-    "정보형"
-   ],
-   "primaryIntent": "로스쿨 원서접수가 언제 시작하고 언제 마감되는지 날짜를 정확히 확인하고 싶다",
-   "value": "2027학년도 법학전문대학원 원서 접수는 9월 28일부터 10월 2일 18시까지 각 로스쿨에서 진행된다. 지금은 교내 입학설명회가 마무리 단계이고 이제 면접 준비 국면으로 넘어간다.",
-   "experience": "본인이 로스쿨 준비 경험이 있으면 접수 체크리스트에 활용하고, 없으면 면접 합격 후기·배점 같은 미확인 정보는 쓰지 말 것",
-   "differentiation": "여러 로스쿨 공지를 흩어 보지 않고 '접수 마감 10월 2일 18시'를 기준으로 남은 일정 카운트다운으로 묶는 구조",
-   "coreKeyword": "로스쿨 원서접수",
-   "keywords": [
-    "2027 로스쿨",
-    "로스쿨 원서접수",
-    "로스쿨 접수 일정"
-   ],
-   "factIds": [
-    "f14"
-   ],
-   "field": "취업·교육",
-   "facts": [
-    {
-     "id": "f14",
-     "title": "2027 로스쿨 입시! 교내 입학설명회도 마무리 단계...이젠 면접",
-     "press": "lec.co.kr",
-     "link": "http://www.lec.co.kr/news/articleView.html?idxno=752665",
-     "publishedAt": "2026-09-08T03:50:00.000Z"
-    }
-   ],
-   "searchVolume": 270,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
-   "star": false,
-   "searchVolumeUnder10": false
-  },
-  {
-   "title": "드래곤 레이드 9월 16일 사전예약, PvP·광고 없는 GPS RPG",
-   "timing": "NEXT",
-   "types": [
-    "정보형",
-    "해설형"
-   ],
-   "primaryIntent": "드래곤 레이드 어나더 월드가 어떤 게임이고 언제 사전예약을 여는지 확인",
-   "value": "드래곤 레이드: 어나더 월드는 9월 16일 사전예약을 시작하는 위치 기반 RPG로, 160종 이상의 드래곤을 얻을 수 있다. 현실의 위치와 날씨가 모험을 바꾸며 PvP와 광고가 없는 것을 내세운다.",
-   "experience": "GPS 위치 기반 플레이는 사전예약 단계라 실제 플레이 후기를 지어내지 말고 공개된 특징만 정리한다.",
-   "differentiation": "'가챠·PvP·광고 없음'과 위치·날씨 연동이라는 차별점을 다른 GPS RPG와 대비해 소개하는 구조",
-   "coreKeyword": "드래곤 레이드",
-   "keywords": [
-    "드래곤 레이드",
-    "드래곤 레이드 사전예약",
-    "위치기반 게임"
-   ],
-   "factIds": [
-    "f53"
-   ],
-   "field": "게임",
-   "facts": [
-    {
-     "id": "f53",
-     "title": "가챠·PvP·광고 없는 GPS RPG가 온다…'드래곤 레이드' 9월 16일 사전예...",
-     "press": "game.dailyesports.com",
-     "link": "http://game.dailyesports.com/view.php?ud=202609081746435032eb81adcc4e_26",
-     "publishedAt": "2026-09-08T08:48:00.000Z"
-    }
-   ],
-   "searchVolume": 70,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
-   "star": false,
-   "searchVolumeUnder10": false
-  },
-  {
-   "title": "EBS 위대한 수업 시즌6 언제? 10월 12일 첫 방송",
-   "timing": "NEXT",
-   "types": [
-    "정보형",
-    "해설형"
-   ],
-   "primaryIntent": "위대한 수업 그레이트 마인즈 시즌6 첫 방송일과 편성 시간을 정확히 확인",
-   "value": "시즌6는 10월 12일 밤 11시 45분 EBS 1TV에서 첫 방송된다. 제작발표회에는 현택환·김영기 석좌교수가 참석해 시즌6 주제를 소개했다.",
-   "experience": "이전 시즌을 실제로 시청한 감상이 있으면 편성 시간대 시청 팁으로 쓴다. 시즌6 방송 내용은 아직 방영 전이므로 후기·강연평을 지어내면 안 된다.",
-   "differentiation": "방송일·시간·EBS 1TV 편성과 확인된 참석 학자만 한눈에 정리해 검색 즉시 답을 준다.",
-   "coreKeyword": "위대한 수업 그레이트 마인즈",
-   "keywords": [
-    "위대한 수업 시즌6",
-    "위대한 수업 그레이트 마인즈",
-    "EBS 위대한 수업 방송"
-   ],
-   "factIds": [
-    "f51",
-    "f60"
-   ],
-   "field": "과학·우주",
-   "facts": [
-    {
-     "id": "f51",
-     "title": "EBS '위대한 수업, 그레이트 마인즈' 시즌6 제작발표회",
-     "press": "kstar.kbs.co.kr",
-     "link": "https://kstar.kbs.co.kr/list_view.html?idx=409563",
-     "publishedAt": "2026-09-08T23:21:00.000Z"
-    },
-    {
-     "id": "f60",
-     "title": "EBS '위대한 수업, 그레이트 마인즈' 시즌6 제작발표회 성료…현택환·김...",
-     "press": "lecturernews.com",
-     "link": "https://www.lecturernews.com/news/articleView.html?idxno=210283",
-     "publishedAt": "2026-09-08T22:06:00.000Z"
-    }
-   ],
-   "searchVolume": 40,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -1443,9 +1443,9 @@
     }
    ],
    "searchVolume": 18960,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -1480,9 +1480,9 @@
     }
    ],
    "searchVolume": 5370,
-   "serpFacing": null,
+   "serpFacing": 10,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -1517,9 +1517,9 @@
     }
    ],
    "searchVolume": 730,
-   "serpFacing": null,
+   "serpFacing": 8,
    "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFit": "낮음",
    "star": false,
    "searchVolumeUnder10": false
   },
@@ -1570,9 +1570,9 @@
     }
    ],
    "searchVolume": null,
-   "serpFacing": null,
-   "serpVacancy": null,
-   "serpFit": "미측정",
+   "serpFacing": 3,
+   "serpVacancy": 2,
+   "serpFit": "높음",
    "star": false,
    "searchVolumeUnder10": true
   }
