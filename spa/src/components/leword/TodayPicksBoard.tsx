@@ -45,7 +45,6 @@ interface TodayPicks {
 }
 
 const FREE_PICK_ROWS = 3;
-const TOPIC_KEY = 'lw-picks-topic';
 
 const num = (value: number) => value.toLocaleString('ko-KR');
 const ratioText = (ratio: number) => (ratio >= 100 ? Math.round(ratio).toLocaleString('ko-KR') : ratio >= 10 ? ratio.toFixed(1) : ratio.toFixed(2));
@@ -54,15 +53,18 @@ const kst = (iso: string) => new Date(iso).toLocaleString('ko-KR', {
     timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit',
 });
 
-function readSavedTopic(): string | null {
-    try { return localStorage.getItem(TOPIC_KEY); } catch { return null; }
-}
+export interface PicksTopicMeta { topic: string; golden: number }
 
-export default function TodayPicksBoard({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
+export default function TodayPicksBoard({ onAnalyze, topic, onTopics }: {
+    onAnalyze?: (keyword: string) => void;
+    /** 사이드 메뉴 하위 항목이 고른 주제 — 없으면 첫 주제 */
+    topic?: string | null;
+    /** 읽어 온 주제 목록(황금 수 포함)을 사이드 메뉴로 올려보낸다 */
+    onTopics?: (topics: PicksTopicMeta[]) => void;
+}) {
     const [data, setData] = useState<TodayPicks | null>(null);
     const [error, setError] = useState('');
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
-    const [picked, setPicked] = useState<string | null>(() => readSavedTopic());
 
     useEffect(() => {
         let alive = true;
@@ -78,14 +80,14 @@ export default function TodayPicksBoard({ onAnalyze }: { onAnalyze?: (keyword: s
     const goldenOf = (topic: PickTopic) => topic.golden ?? topic.rows.filter((row) => row.ratio >= minRatio).length;
     const total = topics.reduce((sum, topic) => sum + topic.rows.length, 0);
     const golden = topics.reduce((sum, topic) => sum + goldenOf(topic), 0);
-    const active = topics.find((topic) => topic.topic === picked) ?? topics[0] ?? null;
+    const active = topics.find((item) => item.topic === topic) ?? topics[0] ?? null;
     const rows = active ? (unlocked ? active.rows : active.rows.slice(0, FREE_PICK_ROWS)) : [];
     const shown = unlocked ? total : topics.reduce((sum, topic) => sum + Math.min(topic.rows.length, FREE_PICK_ROWS), 0);
 
-    const choose = (topic: string) => {
-        setPicked(topic);
-        try { localStorage.setItem(TOPIC_KEY, topic); } catch { /* 저장 못 해도 화면은 된다 */ }
-    };
+    useEffect(() => {
+        if (onTopics && topics.length > 0) onTopics(topics.map((item) => ({ topic: item.topic, golden: goldenOf(item) })));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [topics]);
 
     return (
         <section className="lw-picks lw-picks-tab" aria-labelledby="lw-picks-title">
@@ -98,26 +100,6 @@ export default function TodayPicksBoard({ onAnalyze }: { onAnalyze?: (keyword: s
 
             {error && <p className="lw-note lw-note-error">추천키워드를 못 읽었습니다 — {error}</p>}
             {!error && !data && <p className="lw-note">불러오는 중…</p>}
-
-            {topics.length > 0 && (
-                <div className="lw-picks-topics" role="tablist" aria-label="주제">
-                    {topics.map((topic) => {
-                        const isActive = active?.topic === topic.topic;
-                        return (
-                            <button
-                                key={topic.topic}
-                                type="button"
-                                role="tab"
-                                aria-selected={isActive}
-                                className={`lw-picks-topic-btn${isActive ? ' is-active' : ''}`}
-                                onClick={() => choose(topic.topic)}
-                            >
-                                {topic.topic}<b>{goldenOf(topic)}</b>
-                            </button>
-                        );
-                    })}
-                </div>
-            )}
 
             {active && (
                 <div className="lw-picks-panel" role="tabpanel" aria-label={active.topic}>

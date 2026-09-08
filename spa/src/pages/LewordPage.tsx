@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import ClaudeReconnect from '../components/leword/ClaudeReconnect';
 import LewordAuth from '../components/leword/LewordAuth';
 import { clearSession, daysLeft, loadSession, type LewordSession } from '../lib/lewordAuth';
@@ -29,7 +29,7 @@ import YoutubeTab from '../components/leword/YoutubeTab';
 const TABS = [
     { id: 'golden', label: '리더남 전용 황금키워드', short: '황금키워드', icon: '◆' },
     { id: 'issue', label: '실검 틈새키워드', short: '실검 틈새', icon: '⚡' },
-    { id: 'picks', label: '오늘의 네이버 추천키워드', short: '추천키워드', icon: 'N', parent: 'issue' },
+    { id: 'picks', label: '오늘의 네이버 추천키워드', short: '추천키워드', icon: 'N' },
     { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },
     { id: 'kin', label: '지식인 황금질문', short: '황금질문', icon: '✦' },
     { id: 'affiliate', label: '제휴 황금키워드', short: '제휴', icon: '◇' },
@@ -111,6 +111,18 @@ function LewordPage() {
 
     const sendToAnalyze = (keyword: string) => selectTab('analyze', keyword);
     /*
+     * 오늘의 네이버 추천키워드의 주제는 본문 칩이 아니라 사이드 메뉴의 하위 항목이다
+     * (사장님 2026-09-08 "오늘의 네이버 추천키워드의 서브탭으로 만들어달라"). 표가 읽어 온 주제 목록을
+     * 여기로 올려 받고, 고른 주제를 표로 내려보낸다.
+     */
+    const [picksTopics, setPicksTopics] = useState<{ topic: string; golden: number }[]>([]);
+    const [picksTopic, setPicksTopic] = useState<string | null>(() => { try { return localStorage.getItem('lw-picks-topic'); } catch { return null; } });
+    const choosePicksTopic = (topic: string) => {
+        setPicksTopic(topic);
+        try { localStorage.setItem('lw-picks-topic', topic); } catch { /* 저장 못 해도 화면은 된다 */ }
+    };
+    const currentPicksTopic = picksTopics.some((t) => t.topic === picksTopic) ? picksTopic : (picksTopics[0]?.topic ?? null);
+    /*
      * RPM 을 보고 "이 글에 사람을 데려올까"를 정한 다음 레이더로 넘어간다
      * (사장님 지시 2026-08-28). 주소를 다시 붙여넣게 두지 않는다.
      */
@@ -171,11 +183,11 @@ function LewordPage() {
 
                 <nav className="lw-nav">
                     {TABS.map((tab) => (
+                        <Fragment key={tab.id}>
                         <button
-                            key={tab.id}
                             type="button"
                             // 탭별 고유색(사장님 지정 2026-08-20: 금·파랑·초록·주황·빨강·분홍·은색).
-                            className={`lw-navi lw-navi-${tab.id}${'parent' in tab ? ' lw-navi-sub' : ''}${activeTab === tab.id ? ' on' : ''}${!session && !GUEST_TABS.has(tab.id) ? ' locked' : ''}`}
+                            className={`lw-navi lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}${!session && !GUEST_TABS.has(tab.id) ? ' locked' : ''}`}
                             aria-current={activeTab === tab.id ? 'page' : undefined}
                             onClick={() => {
                                 if (!session && !GUEST_TABS.has(tab.id)) { setAuthOpen(true); return; }
@@ -193,6 +205,20 @@ function LewordPage() {
                             <em className="lw-navi-short">{tab.short}</em>
                             {!session && !GUEST_TABS.has(tab.id) && <b className="lw-navi-lock" aria-label="로그인 필요">🔒</b>}
                         </button>
+                        {tab.id === 'picks' && activeTab === 'picks' && picksTopics.map((topic) => (
+                            <button
+                                key={topic.topic}
+                                type="button"
+                                className={`lw-navi lw-navi-sub lw-navi-topic${currentPicksTopic === topic.topic ? ' on' : ''}`}
+                                aria-current={currentPicksTopic === topic.topic ? 'true' : undefined}
+                                onClick={() => choosePicksTopic(topic.topic)}
+                            >
+                                <em className="lw-navi-full">{topic.topic}</em>
+                                <em className="lw-navi-short">{topic.topic}</em>
+                                <b className="lw-navi-count">{topic.golden}</b>
+                            </button>
+                        ))}
+                        </Fragment>
                     ))}
                 </nav>
 
@@ -263,7 +289,7 @@ function LewordPage() {
                 {activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {/* 실검 틈새키워드와 키워드 분석 사이의 서브탭 — 오늘의 네이버 추천키워드(사장님 2026-09-08). */}
-                {activeTab === 'picks' && <TodayPicksBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
+                {activeTab === 'picks' && <TodayPicksBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} topic={currentPicksTopic} onTopics={setPicksTopics} />}
                 {activeTab === 'kin' && <KinGoldenTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
                 {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}

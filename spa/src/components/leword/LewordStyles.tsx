@@ -2183,6 +2183,9 @@ function LewordStyles() {
             .lw-navi.lw-navi-sub { margin-left: 22px; width: calc(100% - 22px); padding: 8px 10px; font-size: 13px; position: relative; }
             .lw-navi.lw-navi-sub::before { content: ''; position: absolute; left: -12px; top: -6px; bottom: 50%; width: 10px; border-left: 1px solid color-mix(in srgb, currentColor 28%, transparent); border-bottom: 1px solid color-mix(in srgb, currentColor 28%, transparent); border-bottom-left-radius: 6px; }
             .lw-navi.lw-navi-sub .lw-navi-naver { width: 16px; height: 16px; font-size: 10px; }
+            .lw-navi.lw-navi-topic { padding: 6px 10px; font-size: 12.5px; gap: 8px; }
+            .lw-navi.lw-navi-topic .lw-navi-count { margin-left: auto; font-size: 11px; font-weight: 600; opacity: 0.55; font-variant-numeric: tabular-nums; }
+            .lw-navi.lw-navi-topic.on .lw-navi-count { opacity: 0.95; }
             .lw-navi-naver { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 4px; background: #03c75a; color: #fff; font-weight: 800; font-size: 11px; line-height: 1; font-family: Arial, Helvetica, sans-serif; vertical-align: -3px; }
             .lw-picks-topics { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
             .lw-picks-topic-btn { font: inherit; font-size: 12.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); background: transparent; color: inherit; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
