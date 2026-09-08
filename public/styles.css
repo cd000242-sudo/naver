@@ -3928,6 +3928,12 @@ select option {
   resize: vertical;
   min-height: 72px;
 }
+/* [2026-09-09] "상황 · 글에 꼭 나왔으면 하는 내용" 은 사진 묶음 설명을 적는 칸이라
+   세 줄로는 좁다. 이 칸만 크게 키운다(다른 컨텍스트 입력칸은 그대로). */
+.image-narrative-context-field--full textarea {
+  min-height: 200px;
+  line-height: 1.6;
+}
 .image-narrative-context-field input::placeholder,
 .image-narrative-context-field textarea::placeholder {
   color: var(--text-muted);
