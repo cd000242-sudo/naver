@@ -29,6 +29,7 @@ import YoutubeTab from '../components/leword/YoutubeTab';
 const TABS = [
     { id: 'golden', label: '리더남 전용 황금키워드', short: '황금키워드', icon: '◆' },
     { id: 'issue', label: '실검 틈새키워드', short: '실검 틈새', icon: '⚡' },
+    { id: 'picks', label: '오늘의 네이버 추천키워드', short: '추천키워드', icon: '☀' },
     { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },
     { id: 'kin', label: '지식인 황금질문', short: '황금질문', icon: '✦' },
     { id: 'affiliate', label: '제휴 황금키워드', short: '제휴', icon: '◇' },
@@ -46,7 +47,7 @@ type TabId = (typeof TABS)[number]['id'];
  * 맛보기로 보이고 나머지는 카드 잠금이 막는다(사장님 사양 2026-09-02:
  * "황금키워드보드처럼 사람들에게 보여주기만").
  */
-const GUEST_TABS: ReadonlySet<string> = new Set(['golden', 'issue']);
+const GUEST_TABS: ReadonlySet<string> = new Set(['golden', 'issue', 'picks']);
 
 function isTabId(value: string): value is TabId {
     return TABS.some((tab) => tab.id === value);
@@ -260,13 +261,9 @@ function LewordPage() {
                 )}
 
                 {activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
-                {activeTab === 'issue' && (
-                    <>
-                        <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />
-                        {/* 실검 틈새키워드 아래 — 오늘의 네이버 추천키워드(사장님 2026-09-08). */}
-                        <TodayPicksBoard onAnalyze={sendToAnalyze} />
-                    </>
-                )}
+                {activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
+                {/* 실검 틈새키워드와 키워드 분석 사이의 서브탭 — 오늘의 네이버 추천키워드(사장님 2026-09-08). */}
+                {activeTab === 'picks' && <TodayPicksBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {activeTab === 'kin' && <KinGoldenTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
                 {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}

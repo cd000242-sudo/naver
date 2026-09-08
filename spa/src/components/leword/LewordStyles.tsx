@@ -2178,6 +2178,7 @@ function LewordStyles() {
             .lw-picks { margin-top: 30px; padding-top: 18px; border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent); }
             .lw-picks-head h2 { font-size: 18px; margin: 0 0 4px; letter-spacing: -0.01em; }
             .lw-picks-head p { margin: 0 0 10px; opacity: 0.72; font-size: 13px; }
+            .lw-picks-tab { margin-top: 0; padding-top: 0; border-top: 0; }
             .lw-picks-grid { display: grid; gap: 8px; margin-top: 10px; }
             .lw-picks-topic { border: 1px solid color-mix(in srgb, currentColor 12%, transparent); border-radius: 10px; background: color-mix(in srgb, currentColor 3%, transparent); }
             .lw-picks-topic summary { cursor: pointer; padding: 10px 14px; display: flex; gap: 10px; align-items: baseline; list-style: none; }

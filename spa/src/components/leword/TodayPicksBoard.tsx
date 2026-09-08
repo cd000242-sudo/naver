@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import LicenseGate, { isUnlocked } from './LicenseGate';
 import { naverSearchUrl } from './preemptionMeta';
+import { TabIntro } from './LewordShared';
 
 /**
- * 오늘의 네이버 추천키워드 — 실검 틈새키워드 **아래**에 붙는 표(사장님 2026-09-08
- * "네이버 추천키워드를 실검 틈새키워드 아래에 배치해줘").
+ * 오늘의 네이버 추천키워드 — 사이드 메뉴에서 실검 틈새키워드와 키워드 분석 **사이의 서브탭**
+ * (사장님 2026-09-08. 처음엔 실검 틈새 탭 안 아래쪽에 넣었다가 "서브탭을 만들라고 했다"로 바로잡음).
  *
  * 황금키워드보드·실검 틈새와 같은 방식이다: leword-app CI(today-picks.yml, 매일 06:30 KST)가
  * 씨앗 창고에서 주제별 후보를 뽑아 블로그 문서수를 오픈 API로 실측하고 황금비(검색량 ÷ 문서수)
@@ -73,14 +74,13 @@ export default function TodayPicksBoard({ onAnalyze }: { onAnalyze?: (keyword: s
     const golden = topics.reduce((sum, topic) => sum + topic.rows.filter((row) => row.ratio >= 1).length, 0);
 
     return (
-        <section className="lw-picks" aria-labelledby="lw-picks-title">
-            <header className="lw-picks-head">
-                <h2 id="lw-picks-title">오늘의 네이버 추천키워드</h2>
-                <p>
-                    주제별 {data?.keep ?? 10}개 · 검색량 ÷ 문서수 순 · 네이버 블로그 홈판·SEO 전용
-                    {data ? ` · ${kst(data.builtAt)} 실측 · ${num(total)}건 중 황금 비율 ${num(golden)}건` : ''}
-                </p>
-            </header>
+        <section className="lw-picks lw-picks-tab" aria-labelledby="lw-picks-title">
+            <h2 id="lw-picks-title" hidden>오늘의 네이버 추천키워드</h2>
+            <TabIntro
+                title="오늘의 네이버 추천키워드"
+                desc={`주제별 ${data?.keep ?? 10}개 · 검색량 ÷ 문서수 순 · 네이버 블로그 홈판·SEO 전용${data ? ` · ${kst(data.builtAt)} 실측 · ${num(total)}건 중 황금 비율 ${num(golden)}건` : ''}`}
+                source="씨앗 창고 → 블로그 문서수 실측(오픈 API) → 황금비 · 매일 06:30 KST 갱신 · 자리(SERP)는 안 잼"
+            />
 
             {error && <p className="lw-note lw-note-error">추천키워드를 못 읽었습니다 — {error}</p>}
             {!error && !data && <p className="lw-note">불러오는 중…</p>}
