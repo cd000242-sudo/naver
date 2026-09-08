@@ -187,7 +187,13 @@ async function runSearch(): Promise<void> {
   if (results) results.innerHTML = '<div style="font-size: 0.82rem; color: var(--text-muted);">검색 중...</div>';
 
   try {
-    const api = (window as any).electronAPI;
+    // [2026-09-08] searchPlaces 는 preload 의 exposeInMainWorld('api', ...) 에만 있다.
+    //   electronAPI 는 "동일 API"라는 주석과 달리 손으로 다시 나열한 별도 객체라
+    //   searchPlaces 가 없었고, global.d.ts 의 electronAPI?: Partial<AutomationAPI> 탓에
+    //   타입 검사도 이를 잡지 못했다. 결과: v2.11.206 도입 이후 지역검색이 한 번도
+    //   동작하지 않고 아래 "이 버전에 없습니다" 문구만 떴다(사용자 실측).
+    //   형제 API(searchNaverImages · analyzeExposedStructure)와 같이 window.api 를 쓴다.
+    const api = (window as any).api ?? (window as any).electronAPI;
     // [2026-08-25] "알 수 없는 오류"의 정체를 가르는 세 갈래.
     //   기존에는 셋을 한 문구로 뭉개서, 화면만 보고는 키 문제인지 배선 문제인지
     //   구분할 수 없었다(사용자 실측 스크린샷).
