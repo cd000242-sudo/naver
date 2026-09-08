@@ -23,9 +23,19 @@ export interface HeadingLike {
   readonly content?: unknown;
 }
 
+/**
+ * [2026-09-09] 사진 모드(image-narrative)도 제외한다.
+ *
+ * 9/3 에 문장형 소제목을 걷어낸 것은 검색형 글(seo·custom·mate·business) 이야기였다.
+ * 사진 글은 사장님이 정반대를 요청했다 — "소제목도 내 경험과 어우러져 문장형으로,
+ * 끝맺음은 정확하거나 여운이 남게". 명사 라벨("근포땅굴 도착")이 성의 없어 보인다는 지적이다.
+ * 지금은 사진 글이 buildNarrativeContent 를 타서 이 보정기를 지나지 않지만,
+ * 나중에 경로가 합쳐져도 사진 글 소제목을 되돌리지 않도록 여기서 못박는다.
+ */
 export function isHeadingRepairEligibleMode(mode: unknown): boolean {
   const value = String(mode || '').trim();
-  return value !== 'affiliate' && value.length > 0;
+  if (value === 'affiliate' || value === 'image-narrative') return false;
+  return value.length > 0;
 }
 
 /** Sentence-style headings a mode may keep. Homefeed keeps a minority; search modes keep none. */
