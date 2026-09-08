@@ -9,7 +9,7 @@ describe('structured editor publishing order', () => {
 
   it('keeps the section order as heading image before section body', () => {
     const imageInsertIndex = editorHelpersSource.indexOf(
-      'await self.insertImagesAtCurrentCursor(allSectionImages, page, imageFrame, resolved.affiliateLink);',
+      'await self.insertImagesAtCurrentCursor(firstStepImages, page, imageFrame, resolved.affiliateLink);',
     );
     const bodyPasteIndex = editorHelpersSource.indexOf(
       'await self.typeBodyWithRetry(bodyFrame, page, cleanBody, 19);',
@@ -22,7 +22,7 @@ describe('structured editor publishing order', () => {
 
   it('recovers the editor cursor after image insertion before pasting body content', () => {
     const imageInsertIndex = editorHelpersSource.indexOf(
-      'await self.insertImagesAtCurrentCursor(allSectionImages, page, imageFrame, resolved.affiliateLink);',
+      'await self.insertImagesAtCurrentCursor(firstStepImages, page, imageFrame, resolved.affiliateLink);',
     );
     const bodyFrameIndex = editorHelpersSource.indexOf('bodyFrame = (await self.getAttachedFrame());');
     const bodyReadyIndex = editorHelpersSource.indexOf('let bodyReady = await ensureTailTypingReady(page, bodyFrame');
