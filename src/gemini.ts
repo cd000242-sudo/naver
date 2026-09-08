@@ -584,10 +584,18 @@ export { getClient };
  * 제목과 소제목을 분석하여 최적의 이미지 검색어를 생성합니다.
  * 동명이인, 문맥 구분, 관계어 분석을 수행합니다.
  */
+/**
+ * [2026-09-09] callText 를 주면 그 엔진으로 부른다.
+ *
+ * 이 보조 추론은 엔진 선택과 무관하게 Gemini 로 직행했다 — GPT 를 골라 둔 사용자도
+ * 소제목마다 Gemini 를 때려 분당 한도(429)를 맞았다(사용자 실측). 프롬프트는 여기 그대로
+ * 두고 호출기만 바꾼다. 안 주면 기존 Gemini 경로 그대로다.
+ */
 export async function optimizeImageSearchQuery(
   title: string,
   heading: string,
-  providedApiKey?: string
+  providedApiKey?: string,
+  callText?: (prompt: string, maxTokens?: number) => Promise<string>
 ): Promise<{
   optimizedQuery: string;
   coreSubject: string;
@@ -595,7 +603,7 @@ export async function optimizeImageSearchQuery(
   category: string;
 }> {
   const apiKey = providedApiKey || process.env.GEMINI_API_KEY;
-  if (!apiKey) {
+  if (!apiKey && !callText) {
     // API 키 없으면 단순 키워드 추출로 폴백
     console.log('[Gemini] API 키 없음, 단순 키워드 추출로 폴백');
     const fallbackQuery = extractSimpleKeywords(title, heading);
@@ -608,15 +616,6 @@ export async function optimizeImageSearchQuery(
   }
 
   try {
-    const client = getClient(apiKey);
-    const model = client.getGenerativeModel({
-      model: GEMINI_TEXT_MODELS.FLASH,  // ✅ [v2.7.52] modelRegistry SSOT
-      generationConfig: {
-        temperature: 0.3,  // 정확성 우선
-        maxOutputTokens: 200,
-      },
-    });
-
     const prompt = `
 당신은 네이버 이미지 검색 전문가입니다. 문맥을 분석하여 최적의 검색어를 생성합니다.
 
@@ -644,16 +643,29 @@ ${heading}
 
 JSON만 출력하세요. 설명 없이.`;
 
-    const result = await model.generateContent(prompt);
-    const text = result.response.text().trim();
+    let text: string;
+    if (callText) {
+      text = (await callText(prompt, 200)).trim();
+    } else {
+      const client = getClient(apiKey!);
+      const model = client.getGenerativeModel({
+        model: GEMINI_TEXT_MODELS.FLASH,  // ✅ [v2.7.52] modelRegistry SSOT
+        generationConfig: {
+          temperature: 0.3,  // 정확성 우선
+          maxOutputTokens: 200,
+        },
+      });
+      const result = await model.generateContent(prompt);
+      text = result.response.text().trim();
 
-    // ✅ [2026-03-19] 사용량 추적
-    const _u = (result.response as any).usageMetadata;
-    if (_u) {
-      const _p = _u.promptTokenCount || 0;
-      const _t = _u.totalTokenCount || 0;
-      const _o = _t > _p ? _t - _p : (_u.candidatesTokenCount || 0);
-      trackGeminiUsage(GEMINI_TEXT_MODELS.FLASH, _p, _o);
+      // ✅ [2026-03-19] 사용량 추적
+      const _u = (result.response as any).usageMetadata;
+      if (_u) {
+        const _p = _u.promptTokenCount || 0;
+        const _t = _u.totalTokenCount || 0;
+        const _o = _t > _p ? _t - _p : (_u.candidatesTokenCount || 0);
+        trackGeminiUsage(GEMINI_TEXT_MODELS.FLASH, _p, _o);
+      }
     }
 
     // JSON 파싱
@@ -703,27 +715,22 @@ function extractSimpleKeywords(title: string, heading: string): string {
 /**
  * 제목에서 핵심 주제(인물/브랜드)를 추출합니다.
  */
+/**
+ * [2026-09-09] callText 주입 경로는 optimizeImageSearchQuery 와 같다 — 선택 엔진으로 부른다.
+ */
 export async function extractCoreSubject(
   title: string,
-  providedApiKey?: string
+  providedApiKey?: string,
+  callText?: (prompt: string, maxTokens?: number) => Promise<string>
 ): Promise<string> {
   const apiKey = providedApiKey || process.env.GEMINI_API_KEY;
-  if (!apiKey) {
+  if (!apiKey && !callText) {
     // 폴백: 첫 번째 단어 반환
     const words = title.split(/[\s,.!?:;'"()\[\]{}]+/).filter(w => w.length >= 2);
     return words[0] || title;
   }
 
   try {
-    const client = getClient(apiKey);
-    const model = client.getGenerativeModel({
-      model: GEMINI_TEXT_MODELS.FLASH,
-      generationConfig: {
-        temperature: 0.2,
-        maxOutputTokens: 50,
-      },
-    });
-
     const prompt = `
 제목: "${title}"
 
@@ -734,16 +741,29 @@ export async function extractCoreSubject(
 
 한 단어만 출력하세요. 설명 없이.`;
 
-    const result = await model.generateContent(prompt);
-    const text = result.response.text().trim();
+    let text: string;
+    if (callText) {
+      text = (await callText(prompt, 50)).trim();
+    } else {
+      const client = getClient(apiKey!);
+      const model = client.getGenerativeModel({
+        model: GEMINI_TEXT_MODELS.FLASH,
+        generationConfig: {
+          temperature: 0.2,
+          maxOutputTokens: 50,
+        },
+      });
+      const result = await model.generateContent(prompt);
+      text = result.response.text().trim();
 
-    // ✅ [2026-03-19] 사용량 추적
-    const _u2 = (result.response as any).usageMetadata;
-    if (_u2) {
-      const _p = _u2.promptTokenCount || 0;
-      const _t = _u2.totalTokenCount || 0;
-      const _o = _t > _p ? _t - _p : (_u2.candidatesTokenCount || 0);
-      trackGeminiUsage(GEMINI_TEXT_MODELS.FLASH, _p, _o);
+      // ✅ [2026-03-19] 사용량 추적
+      const _u2 = (result.response as any).usageMetadata;
+      if (_u2) {
+        const _p = _u2.promptTokenCount || 0;
+        const _t = _u2.totalTokenCount || 0;
+        const _o = _t > _p ? _t - _p : (_u2.candidatesTokenCount || 0);
+        trackGeminiUsage(GEMINI_TEXT_MODELS.FLASH, _p, _o);
+      }
     }
 
     console.log(`[Gemini] 핵심 주제 추출: "${title}" → "${text}"`);
@@ -759,10 +779,14 @@ export async function extractCoreSubject(
  * [100점 개선] 배치 검색어 최적화 - 모든 소제목을 한 번에 처리
  * API 호출 횟수: N회 → 1회로 감소
  */
+/**
+ * [2026-09-09] callText 주입 경로는 optimizeImageSearchQuery 와 같다 — 선택 엔진으로 부른다.
+ */
 export async function batchOptimizeImageSearchQueries(
   title: string,
   headings: string[],
-  providedApiKey?: string
+  providedApiKey?: string,
+  callText?: (prompt: string, maxTokens?: number) => Promise<string>
 ): Promise<Array<{
   heading: string;
   optimizedQuery: string;
@@ -777,21 +801,12 @@ export async function batchOptimizeImageSearchQueries(
     broaderQuery: title.split(' ')[0] || heading
   }));
 
-  if (!apiKey) {
+  if (!apiKey && !callText) {
     console.log('[Gemini] API 키 없음, 단순 키워드 추출로 폴백');
     return createFallbackResults();
   }
 
   try {
-    const client = getClient(apiKey);
-    const model = client.getGenerativeModel({
-      model: GEMINI_TEXT_MODELS.FLASH,
-      generationConfig: {
-        temperature: 0.3,
-        maxOutputTokens: 500,
-      },
-    });
-
     const headingsText = headings.map((h, i) => `${i + 1}. ${h}`).join('\n');
 
     const prompt = `
@@ -817,16 +832,29 @@ ${headingsText}
 
 JSON만 출력하세요. 설명 없이.`;
 
-    const result = await model.generateContent(prompt);
-    const text = result.response.text().trim();
+    let text: string;
+    if (callText) {
+      text = (await callText(prompt, 500)).trim();
+    } else {
+      const client = getClient(apiKey!);
+      const model = client.getGenerativeModel({
+        model: GEMINI_TEXT_MODELS.FLASH,
+        generationConfig: {
+          temperature: 0.3,
+          maxOutputTokens: 500,
+        },
+      });
+      const result = await model.generateContent(prompt);
+      text = result.response.text().trim();
 
-    // ✅ [2026-03-19] 사용량 추적
-    const _u3 = (result.response as any).usageMetadata;
-    if (_u3) {
-      const _p = _u3.promptTokenCount || 0;
-      const _t = _u3.totalTokenCount || 0;
-      const _o = _t > _p ? _t - _p : (_u3.candidatesTokenCount || 0);
-      trackGeminiUsage(GEMINI_TEXT_MODELS.FLASH, _p, _o);
+      // ✅ [2026-03-19] 사용량 추적
+      const _u3 = (result.response as any).usageMetadata;
+      if (_u3) {
+        const _p = _u3.promptTokenCount || 0;
+        const _t = _u3.totalTokenCount || 0;
+        const _o = _t > _p ? _t - _p : (_u3.candidatesTokenCount || 0);
+        trackGeminiUsage(GEMINI_TEXT_MODELS.FLASH, _p, _o);
+      }
     }
 
     // JSON 배열 파싱

@@ -11,6 +11,13 @@ export type MatcherConfig = {
     perplexityApiKey?: string;
     geminiModel?: string;
     perplexityModel?: string;
+    /**
+     * [2026-09-09] 사용자가 고른 엔진의 텍스트 호출기. 주어지면 이걸 먼저 쓴다.
+     *
+     * 이 매칭은 openai/claude 미지원이라 Gemini 로 폴백했고, 그 탓에 GPT 를 골라 둔
+     * 사용자도 Gemini 분당 한도(429)를 맞았다. 프롬프트는 그대로 두고 호출기만 바꾼다.
+     */
+    callText?: (prompt: string, maxTokens?: number) => Promise<string>;
 };
 
 /**
@@ -35,6 +42,13 @@ export async function matchImagesToHeadings(
     const prompt = buildMatchingPrompt(images, headings);
 
     try {
+        // ✅ [2026-09-09] 사용자가 고른 엔진이 있으면 그걸 먼저 쓴다.
+        if (config.callText) {
+            console.log('[ImageMatcher] 선택 엔진으로 이미지 매칭 중...');
+            const responseText = await config.callText(prompt, 500);
+            return parseAndValidateMatches(responseText, headings.length, images.length);
+        }
+
         // ✅ Perplexity 우선 체크 (사용자 설정 존중)
         if (config.provider === 'perplexity' && config.perplexityApiKey) {
             console.log('[ImageMatcher] 🔍 Perplexity로 이미지 매칭 중...');

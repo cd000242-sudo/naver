@@ -3,14 +3,19 @@
 // [v2.10.243] main.ts에서 분리 — main.ts god-file 압축 2단계 (file:* 다음).
 //
 // 분리 4개 핸들러:
-//   - image:optimizeSearchQuery   (gemini로 검색어 최적화)
-//   - image:extractCoreSubject    (gemini로 핵심 주제 추출)
-//   - image:batchOptimizeSearchQueries  (gemini 배치 최적화 — API 1회로 처리)
+//   - image:optimizeSearchQuery   (검색어 최적화)
+//   - image:extractCoreSubject    (핵심 주제 추출)
+//   - image:batchOptimizeSearchQueries  (배치 최적화 — 호출 1회로 처리)
+//
+// [2026-09-09] 위 세 핸들러는 엔진 선택과 무관하게 Gemini 로 직행했다. GPT 를 골라 둔
+//   사용자도 소제목마다 Gemini 를 때려 분당 한도(429)를 맞았다(사용자 실측).
+//   이젠 선택 엔진으로 부른다 — Gemini 선택이거나 키가 없으면 기존 경로 그대로다.
 //   - image:crawlFromUrl          (URL에서 이미지 크롤링 — googleImageSearch)
 //
 // 의존성: ./gemini, ./crawler/googleImageSearch (dynamic import 그대로 보존)
 
 import { ipcMain } from 'electron';
+import { resolveSelectedEngineTextCaller } from './selectedEngineTextCaller.js';
 
 /**
  * 이미지 검색어 최적화 + 크롤링 IPC 일괄 등록.
@@ -27,7 +32,9 @@ export function registerImageOptimizeHandlers(): void {
     }> => {
         try {
             const { optimizeImageSearchQuery } = await import('../../gemini.js');
-            const result = await optimizeImageSearchQuery(title, heading);
+            const route = await resolveSelectedEngineTextCaller();
+            if (route) console.log(`[Main] 검색어 최적화 엔진: ${route.engine}`);
+            const result = await optimizeImageSearchQuery(title, heading, undefined, route?.callText);
             console.log(`[Main] 검색어 최적화: "${heading}" → "${result.optimizedQuery}"`);
             return {
                 success: true,
@@ -50,7 +57,8 @@ export function registerImageOptimizeHandlers(): void {
     }> => {
         try {
             const { extractCoreSubject } = await import('../../gemini.js');
-            const subject = await extractCoreSubject(title);
+            const route = await resolveSelectedEngineTextCaller();
+            const subject = await extractCoreSubject(title, undefined, route?.callText);
             console.log(`[Main] 핵심 주제 추출: "${title}" → "${subject}"`);
             return { success: true, subject };
         } catch (error) {
@@ -67,7 +75,9 @@ export function registerImageOptimizeHandlers(): void {
     }> => {
         try {
             const { batchOptimizeImageSearchQueries } = await import('../../gemini.js');
-            const results = await batchOptimizeImageSearchQueries(title, headings);
+            const route = await resolveSelectedEngineTextCaller();
+            if (route) console.log(`[Main] 배치 검색어 최적화 엔진: ${route.engine}`);
+            const results = await batchOptimizeImageSearchQueries(title, headings, undefined, route?.callText);
             console.log(`[Main] 배치 검색어 최적화: ${results.length}개 소제목 완료`);
             return { success: true, results };
         } catch (error) {
