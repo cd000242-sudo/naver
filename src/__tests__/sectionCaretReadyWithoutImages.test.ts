@@ -23,7 +23,7 @@ const source = readFileSync(
 
 describe('섹션 본문 입력 전 캐럿 확보', () => {
   it('캐럿 복구 사다리가 이미지 분기 밖에 있다', () => {
-    const imageBranchAt = source.indexOf('if (allSectionImages.length > 0) {');
+    const imageBranchAt = source.indexOf('if (firstStepImages.length > 0) {');
     const ladderAt = source.indexOf('let bodyReady = await ensureTailTypingReady');
     const bodyTypingAt = source.indexOf('// B. 본문 타이핑');
 

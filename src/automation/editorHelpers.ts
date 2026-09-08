@@ -23,6 +23,7 @@ import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, buildTypingStyleResetHtml, pickRichArticleThemes, ensureTailTypingReady, focusLastEditableLine } from './richTextPaste.js';
+import { planImageTextInterleave } from './imageTextInterleavePlan.js';
 import { planTypingFallback, splitFallbackParagraphs, sliceParagraphFromNormalizedOffset } from './typingFallbackPlan.js';
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 import {
@@ -1769,6 +1770,26 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             self.log(`   ✅[우선순위] ImageManager에서 ${headingImages.length}개 이미지 발견 → 사용자 지정 이미지 우선`);
           }
 
+          /*
+           * [2026-09-09 사장님 실측] 썸네일과 1번 소제목 첫 이미지가 같은 사진으로 두 번 나왔다.
+           *
+           * 뿌리: resolved.images 폴백 경로(1566줄)에는 usedImagePaths 필터가 있는데
+           * ImageManager 경로에는 **등록만 있고 검사가 없었다**. 그래서 서론에서 이미 넣은
+           * 썸네일이 ImageManager 의 1번 소제목 목록에도 들어 있으면 그대로 또 삽입됐다.
+           * 앞 소제목에서 쓴 사진이 뒤 소제목에 또 들어가는 경우도 같은 구멍이었다.
+           */
+          if (headingImages.length > 0) {
+            const beforeDedup = headingImages.length;
+            headingImages = headingImages.filter((img: any) => {
+              const imgPath = img?.filePath || img?.url;
+              return !(imgPath && usedImagePaths.has(imgPath));
+            });
+            const dropped = beforeDedup - headingImages.length;
+            if (dropped > 0) {
+              self.log(`   🔁[중복제거] 이미 삽입된 이미지 ${dropped}개 제외 (썸네일/앞 소제목과 중복)`);
+            }
+          }
+
           // ✅ [2026-02-24 FIX] 이 소제목에서 사용하기로 한 이미지를 usedImagePaths에 등록
           if (headingImages.length > 0) {
             headingImages.forEach((img: any) => {
@@ -1854,16 +1875,27 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           ];
           let bodyFrame = currentFrame;
 
-          // A. 이미지 업로드
-          if (allSectionImages.length > 0) {
-            self.log(`   📸[이미지] 총 ${allSectionImages.length}개 이미지 삽입 중...`);
-            allSectionImages.forEach((img: any, idx: number) => {
+          /*
+           * [2026-09-09] 이미지와 본문을 번갈아 넣기 위한 계획.
+           * 사진 2장 이상 + 문단 2개 이상일 때만 여러 단계로 쪼개진다.
+           * 그 외에는 단계가 1개라 아래 A 블록이 예전처럼 전부 넣고 본문을 한 번에 친다.
+           */
+          const interleaveSteps = planImageTextInterleave<any>(allSectionImages, cleanBody);
+          const firstStepImages = interleaveSteps[0]?.images ?? allSectionImages;
+          if (interleaveSteps.length > 1) {
+            self.log(`   🔀[배치] 이미지 ${allSectionImages.length}장을 본문 사이에 ${interleaveSteps.length}단계로 나눠 넣습니다.`);
+          }
+
+          // A. 이미지 업로드 (교차 배치면 첫 묶음만 — 나머지는 본문 사이에서 넣는다)
+          if (firstStepImages.length > 0) {
+            self.log(`   📸[이미지] ${firstStepImages.length}개 이미지 삽입 중...`);
+            firstStepImages.forEach((img: any, idx: number) => {
               const p = (img?.filePath || img?.url || '').replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~');
               self.log(`      [${idx}] heading="${img?.heading}", provider="${img?.provider}", path=${p.substring(0, 80)}`);
             });
             const imageFrame = (await self.getAttachedFrame());
             await ensureTailTypingReady(page, imageFrame, (m: string) => self.log(m)).catch(() => false);
-            await self.insertImagesAtCurrentCursor(allSectionImages, page, imageFrame, resolved.affiliateLink);
+            await self.insertImagesAtCurrentCursor(firstStepImages, page, imageFrame, resolved.affiliateLink);
             bodyFrame = (await self.getAttachedFrame());
           }
 
@@ -1910,8 +1942,44 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           }
           let appliedHeadingBody = '';
           if (cleanBody.trim()) {
-            self.log(`   🧩[본문] 이미지 뒤에 리치 입력 처리 (${cleanBody.length}자)...`);
-            appliedHeadingBody = await self.typeBodyWithRetry(bodyFrame, page, cleanBody, 19);
+            /*
+             * [2026-09-09 사장님 요청] "이미지 4장 → 글 3덩이" 대신
+             * "이미지 → 글 → 이미지 → 글" 로 번갈아 넣는다. 사진과 그 사진을 설명하는
+             * 문장이 붙어 있어야 읽힌다.
+             *
+             * 위에서 이미 전부 넣은 경우(interleaveSteps 길이 1)에는 여기서 이미지를
+             * 다시 넣지 않는다 — 이 블록은 남은 단계만 처리한다.
+             */
+            if (interleaveSteps.length > 1) {
+              const appliedParts: string[] = [];
+              for (let s = 0; s < interleaveSteps.length; s += 1) {
+                const step = interleaveSteps[s];
+                // 0번 단계의 이미지는 위 A 블록에서 이미 삽입됐다.
+                if (s > 0 && step.images.length > 0) {
+                  self.log(`   📸[이미지] ${s + 1}번째 묶음 ${step.images.length}개 삽입 (글 사이 배치)`);
+                  const stepFrame = (await self.getAttachedFrame());
+                  await ensureTailTypingReady(page, stepFrame, (m: string) => self.log(m)).catch(() => false);
+                  await self.insertImagesAtCurrentCursor(step.images, page, stepFrame, resolved.affiliateLink);
+                  bodyFrame = (await self.getAttachedFrame());
+                  // 이미지 뒤 캐럿은 매번 다시 잡는다 — 본문 누락의 단골 원인이다.
+                  let stepReady = await ensureTailTypingReady(page, bodyFrame, (m: string) => self.log(m)).catch(() => false);
+                  for (let r = 0; r < 3 && !stepReady; r++) {
+                    await self.delay(800);
+                    bodyFrame = (await self.getAttachedFrame());
+                    await focusLastEditableLine(page, bodyFrame).catch(() => undefined);
+                    stepReady = await ensureTailTypingReady(page, bodyFrame, (m: string) => self.log(m)).catch(() => false);
+                  }
+                }
+                if (!step.text.trim()) continue;
+                self.log(`   🧩[본문] ${s + 1}/${interleaveSteps.length}번째 조각 입력 (${step.text.length}자)...`);
+                const applied = await self.typeBodyWithRetry(bodyFrame, page, step.text, 19);
+                if (applied) appliedParts.push(applied);
+              }
+              appliedHeadingBody = appliedParts.join('\n\n');
+            } else {
+              self.log(`   🧩[본문] 이미지 뒤에 리치 입력 처리 (${cleanBody.length}자)...`);
+              appliedHeadingBody = await self.typeBodyWithRetry(bodyFrame, page, cleanBody, 19);
+            }
           } else {
             self.log(`   ⚠️ 본문 내용이 비어있어 타이핑 건너뜀 (소제목: "${heading.title}")`);
           }
