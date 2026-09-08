@@ -2179,6 +2179,10 @@ function LewordStyles() {
             .lw-picks-head h2 { font-size: 18px; margin: 0 0 4px; letter-spacing: -0.01em; }
             .lw-picks-head p { margin: 0 0 10px; opacity: 0.72; font-size: 13px; }
             .lw-picks-tab { margin-top: 0; padding-top: 0; border-top: 0; }
+            /* 실검 틈새 밑에 딸린 하위 항목(사장님 2026-09-08 "사이에 서브탭") — 들여쓰기 + 연결선, 글자 한 단계 작게 */
+            .lw-navi.lw-navi-sub { margin-left: 22px; width: calc(100% - 22px); padding: 8px 10px; font-size: 13px; position: relative; }
+            .lw-navi.lw-navi-sub::before { content: ''; position: absolute; left: -12px; top: -6px; bottom: 50%; width: 10px; border-left: 1px solid color-mix(in srgb, currentColor 28%, transparent); border-bottom: 1px solid color-mix(in srgb, currentColor 28%, transparent); border-bottom-left-radius: 6px; }
+            .lw-navi.lw-navi-sub .lw-navi-naver { width: 16px; height: 16px; font-size: 10px; }
             .lw-navi-naver { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 4px; background: #03c75a; color: #fff; font-weight: 800; font-size: 11px; line-height: 1; font-family: Arial, Helvetica, sans-serif; vertical-align: -3px; }
             .lw-picks-topics { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
             .lw-picks-topic-btn { font: inherit; font-size: 12.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); background: transparent; color: inherit; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }

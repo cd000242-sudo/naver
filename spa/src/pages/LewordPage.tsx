@@ -29,7 +29,7 @@ import YoutubeTab from '../components/leword/YoutubeTab';
 const TABS = [
     { id: 'golden', label: '리더남 전용 황금키워드', short: '황금키워드', icon: '◆' },
     { id: 'issue', label: '실검 틈새키워드', short: '실검 틈새', icon: '⚡' },
-    { id: 'picks', label: '오늘의 네이버 추천키워드', short: '추천키워드', icon: 'N' },
+    { id: 'picks', label: '오늘의 네이버 추천키워드', short: '추천키워드', icon: 'N', parent: 'issue' },
     { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },
     { id: 'kin', label: '지식인 황금질문', short: '황금질문', icon: '✦' },
     { id: 'affiliate', label: '제휴 황금키워드', short: '제휴', icon: '◇' },
@@ -175,7 +175,7 @@ function LewordPage() {
                             key={tab.id}
                             type="button"
                             // 탭별 고유색(사장님 지정 2026-08-20: 금·파랑·초록·주황·빨강·분홍·은색).
-                            className={`lw-navi lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}${!session && !GUEST_TABS.has(tab.id) ? ' locked' : ''}`}
+                            className={`lw-navi lw-navi-${tab.id}${'parent' in tab ? ' lw-navi-sub' : ''}${activeTab === tab.id ? ' on' : ''}${!session && !GUEST_TABS.has(tab.id) ? ' locked' : ''}`}
                             aria-current={activeTab === tab.id ? 'page' : undefined}
                             onClick={() => {
                                 if (!session && !GUEST_TABS.has(tab.id)) { setAuthOpen(true); return; }
