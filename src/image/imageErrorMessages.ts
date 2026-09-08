@@ -91,3 +91,24 @@ export function createImageError(error: any, providerName?: string): Error {
     const prefix = providerName ? `[${providerName}] ` : '';
     return new Error(`${prefix}${userMessage}`);
 }
+
+/**
+ * [2026-09-08] 이 에러를 한국어 안내로 바꿔도 되는가.
+ *
+ * getImageErrorMessage 는 매칭에 실패하면 "❌ 이미지 생성 중 오류가 발생했습니다: {100자}" 로
+ * 잘라 감싼다. 그래서 무조건 통과시키면 이미 사람이 쓴 안내문(쇼핑 상품 이미지 안내 등)이
+ * 잘리고 의미가 나빠진다. 전송 계층 에러라는 신호가 분명할 때만 true.
+ *
+ * extractStatusCode 는 메시지 안의 아무 3자리 숫자나 상태코드로 읽으므로 여기서는 쓰지 않는다
+ * ("500장 생성" 같은 한국어 문장이 502/500 으로 오인된다).
+ */
+export function isMappableImageTransportError(error: any, rawMessage?: string): boolean {
+    if (typeof error?.response?.status === 'number') return true;
+
+    const msg = String(rawMessage ?? error?.message ?? error ?? '');
+    if (/status code\s+\d{3}/i.test(msg)) return true;
+    if (/\b(RESOURCE_EXHAUSTED|UNAUTHENTICATED|PERMISSION_DENIED)\b/.test(msg)) return true;
+    if (/\bquota\b/i.test(msg)) return true;
+    if (/\b(ETIMEDOUT|ECONNRESET|ECONNABORTED|ENOTFOUND)\b/.test(msg)) return true;
+    return false;
+}

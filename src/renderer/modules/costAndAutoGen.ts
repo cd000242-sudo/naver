@@ -54,6 +54,24 @@ const DEFAULT_IMAGE_GENERATION_TIMEOUT_MS = 6 * 60 * 1000;
 const LONG_RUN_IMAGE_MAX_TIMEOUT_MS = 45 * 60 * 1000;
 const FLOW_IMAGE_GENERATION_MAX_TIMEOUT_MS = 18 * 60 * 1000;
 const MIN_IMAGE_GENERATION_TIMEOUT_MS = 30_000;
+/**
+ * [2026-09-08] 429 재시도 예산과 렌더러 타임아웃의 충돌 해소.
+ *
+ * main 의 nanoBananaProGenerator 는 429 를 만나면 maxRetries=5 로 재시도하고 매번
+ * 15~25초를 쉰다(약 180초, 코드 주석도 "5 gives ~3 minutes"). 그런데 렌더러의
+ * 추정 타임아웃은 SLOW 엔진 1장 기준 90초(startup) + 90초(1장) = 정확히 180,000ms 였다.
+ * 두 예산이 같아서, 재시도가 성공할 시간이 구조적으로 존재하지 않았다 —
+ * 실측 콘솔: 429 발생 후 "이미지 생성 타임아웃 (180초)" 로 화면이 먼저 포기.
+ * 재시도 예산에 여유를 더한 값을 하한으로 깔아, 늦게 성공한 재시도를 받을 수 있게 한다.
+ */
+const QUOTA_RETRY_BUDGET_MS = 180_000;
+const QUOTA_RETRY_TIMEOUT_FLOOR_MS = QUOTA_RETRY_BUDGET_MS + 120_000;
+/** 429 재시도 루프를 가진 엔진 — main 의 Gemini 이미지 경로를 타는 것들. */
+const QUOTA_RETRY_IMAGE_PROVIDERS = new Set([
+  'nano-banana-pro',
+  'nano-banana-2',
+  'nano-banana',
+]);
 const DEFAULT_IMAGE_STABILIZE_MS = 3_000;
 const LONG_RUN_IMAGE_STABILIZE_MS = 8_000;
 const UI_AUTOMATION_IMAGE_STABILIZE_MS = 15_000;
@@ -254,7 +272,11 @@ function estimateImageGenerationTimeoutMs(options: any): number {
       : SLOW_IMAGE_PROVIDERS.has(provider)
         ? 90_000
         : 60_000;
-  return startupMs + (count * perItemMs);
+  const estimated = startupMs + (count * perItemMs);
+  // 429 재시도 루프를 가진 엔진은 main 의 재시도 예산보다 반드시 넉넉해야 한다.
+  return QUOTA_RETRY_IMAGE_PROVIDERS.has(provider)
+    ? Math.max(estimated, QUOTA_RETRY_TIMEOUT_FLOOR_MS)
+    : estimated;
 }
 
 function getImageStabilizeDelayMs(options: any): number {

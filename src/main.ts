@@ -68,6 +68,7 @@ import cron from 'node-cron';
 import { NaverBlogAutomation, RunOptions, type PublishMode, type AutomationImage } from './naverBlogAutomation.js';
 import { generateImages, resetAllImageState, abortImageGeneration } from './imageGenerator.js';
 import { deduplicateSourceImagesByContent } from './image/sourceImageDeduplicator.js';
+import { getImageErrorMessage, isMappableImageTransportError } from './image/imageErrorMessages.js';
 import {
   applyShoppingRepresentativeReference,
   resolveShoppingRepresentativeReference,
@@ -4098,7 +4099,13 @@ ipcMain.handle(
       }
       return { success: true, images };
     } catch (error) {
-      const message = (error as Error).message ?? '이미지 생성 중 오류가 발생했습니다.';
+      const raw = (error as Error).message ?? '이미지 생성 중 오류가 발생했습니다.';
+      // [2026-09-08] axios 원문("Request failed with status code 429")이 그대로 화면에 나가
+      //   사용자가 할당량 문제인 줄 몰랐다(실측 콘솔 로그). HTTP 상태·쿼터 신호가 분명할 때만
+      //   한국어 안내로 바꾸고, 이미 사람이 쓴 메시지는 손대지 않는다. 원문은 뒤에 붙여 진단을 남긴다.
+      const message = isMappableImageTransportError(error, raw)
+        ? `${getImageErrorMessage(error)} (원인: ${raw.slice(0, 120)})`
+        : raw;
       return { success: false, message };
     }
   },

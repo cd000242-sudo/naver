@@ -15,6 +15,11 @@ import {
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { getImageErrorMessage } from './imageErrorMessages.js';
 import {
+  classifyGeminiQuotaError,
+  resolveQuotaWaitMs,
+  shouldStopRetryingQuota,
+} from './geminiQuotaClassifier.js';
+import {
   assertCurrentGeminiImageModelConfiguration,
   assertCurrentGeminiImageModelSelection,
   isImageModelSelectionRequiredError,
@@ -1822,6 +1827,24 @@ async function generateSingleImageWithGemini(
       // ✅ [2026-01-24 FIX] 재시도 대기 시간 강화 - 429 에러 시 더 긴 대기
       let waitTime = 3000 * attempt;
       if (isQuotaError) {
+        // [2026-09-08] 429 의 성격을 가른다. 일일 할당량이 소진됐고 넘어갈 다른 키도
+        //   없으면 오늘 안에는 풀리지 않는다 — 15~25초씩 5회를 기다려봐야 실패가 확정이고,
+        //   그 3분 동안 렌더러 타임아웃이 먼저 끊겨 사용자에게는 앱이 멈춘 것으로 보였다.
+        const quotaClass = classifyGeminiQuotaError(
+          `${errorMessage}\n${responseBody}`,
+          (error as any)?.response?.headers?.['retry-after'],
+        );
+        const availableKeyCount = keyPool ? keyPool.getAvailableCount() : 1;
+        if (shouldStopRetryingQuota(quotaClass, availableKeyCount)) {
+          console.error('[NanoBananaPro] 🚫 일일 할당량 소진 + 여분 키 없음 — 재시도 중단');
+          sendImageLog(
+            '🚫 오늘 사용할 수 있는 나노바나나 이미지 할당량을 모두 썼습니다. '
+            + '내일 다시 시도하거나, API 키를 추가 등록하거나, 다른 이미지 엔진으로 변경해주세요.',
+          );
+          recordNanoFailure('QUOTA_DAILY_EXHAUSTED', errorMessage);
+          break; // 재시도 무의미 — 폴백 안전망으로 넘긴다
+        }
+
         // ✅ [2026-02-13] 키 풀 로테이션: 새 키가 있으면 즉시 전환, 없으면 긴 대기
         if (keyPool && keyPool.getTotalCount() > 1) {
           const nextKey = keyPool.markExhaustedAndRotate();
@@ -1832,15 +1855,15 @@ async function generateSingleImageWithGemini(
             console.log(`[NanoBananaPro] 🔄 429 감지 → 새 API 키로 전환 완료, 8초 후 재시도`);
             sendImageLog(`🔄 할당량 초과 → 다른 API 키로 전환하여 재시도합니다...`);
           } else {
-            // 모든 키 소진 → 긴 대기
-            waitTime = 15000 + (Math.random() * 10000);
+            // 모든 키 소진 → 긴 대기 (서버가 retryDelay 를 줬으면 그 값을 쓴다)
+            waitTime = resolveQuotaWaitMs(quotaClass, 15000 + (Math.random() * 10000));
             console.log(`[NanoBananaPro] ⚠️ 모든 API 키 소진 → ${Math.round(waitTime / 1000)}초 대기`);
             sendImageLog(`⚠️ 모든 API 키 소진 — ${Math.round(waitTime / 1000)}초 대기 중...`);
           }
         } else {
-          // 키 풀 없음 → 기존 로직 (긴 대기)
-          waitTime = 15000 + (Math.random() * 10000);
-          console.log(`[NanoBananaPro] ⚠️ 할당량 오류(429) 감지 - 더 긴 대기 시간 적용`);
+          // 키 풀 없음 → 기존 로직 (긴 대기, 서버가 retryDelay 를 줬으면 그 값을 쓴다)
+          waitTime = resolveQuotaWaitMs(quotaClass, 15000 + (Math.random() * 10000));
+          console.log(`[NanoBananaPro] ⚠️ 할당량 오류(429) 감지 - ${Math.round(waitTime / 1000)}초 대기 (${quotaClass.scope})`);
         }
         consecutive503Count = 0;  // 다른 에러는 503 카운트 리셋
       } else if (isServerError) {

@@ -1776,6 +1776,27 @@ export function initHeadingImageGeneration(): void {
       }
     });
   }
+  /**
+   * [2026-09-08] 소제목에 실제로 쓸 수 있는 이미지가 붙어 있는가.
+   *
+   * "비어있는 소제목만 생성" 의 대상 선별과 완료 판정이 같은 기준을 봐야 한다.
+   * 예전에는 선별에만 쓰이고 완료는 결과를 보지 않아, 0장이 나와도 "완료" 가 떴다.
+   */
+  const headingHasUsableImage = (headingTitle: string): boolean => {
+    const title = String(headingTitle || '').trim();
+    if (!title) return false;
+    try {
+      const resolvedKey = ImageManager.resolveHeadingKey(title);
+      const primary = ImageManager.getImage(resolvedKey);
+      const key = String(getStableImageKey(primary) || '').trim();
+      if (!primary || !key) return false;
+      const list = ImageManager.getImages(resolvedKey) || [];
+      return Array.isArray(list) && list.length > 0;
+    } catch {
+      return false;
+    }
+  };
+
   // ✅ 비어있는 소제목만 이미지 생성 버튼
   const generateRemainingImagesBtn = document.getElementById('generate-remaining-images-btn') as HTMLButtonElement;
   if (generateRemainingImagesBtn) {
@@ -1793,20 +1814,7 @@ export function initHeadingImageGeneration(): void {
       const emptyHeadings = headings.filter((h: any) => {
         const headingTitle = String(h?.title || h?.heading || '').trim();
         if (!headingTitle) return false;
-
-        try {
-          const resolvedKey = ImageManager.resolveHeadingKey(headingTitle);
-          const primary = ImageManager.getImage(resolvedKey);
-          const key = String(getStableImageKey(primary) || '').trim();
-          if (!primary || !key) return true;
-
-          const list = ImageManager.getImages(resolvedKey) || [];
-          if (!Array.isArray(list) || list.length === 0) return true;
-
-          return false;
-        } catch {
-          return true;
-        }
+        return !headingHasUsableImage(headingTitle);
       });
 
       if (emptyHeadings.length === 0) {
@@ -1886,14 +1894,48 @@ export function initHeadingImageGeneration(): void {
         const allImages = (window as any).imageManagementGeneratedImages || [];
         updatePromptItemsWithImages(allImages);
 
-        appendLog(`✅ ${emptyHeadings.length}개 이미지 생성 완료!`, 'images-log-output');
+        /*
+         * [2026-09-08 사용자 실측] "생성 완료" 가 떴는데 이미지가 없었다.
+         *
+         * regenerateSingleImageForHeading 은 실패를 자기 catch 에서 삼키고 rethrow 하지 않는다
+         * (429·타임아웃도 그렇게 지나간다). 그래서 루프는 언제나 정상 종료했고, 완료 문구는
+         * 결과를 보지 않고 대상 개수(emptyHeadings.length)를 그대로 찍었다 — 0장이어도 "완료".
+         * 성공 판정을 대상 개수가 아니라 실제로 채워진 증가분으로 바꾼다.
+         */
+        const filledCount = emptyHeadings.filter(
+          (h: any) => headingHasUsableImage(String(h?.title || h?.heading || '')),
+        ).length;
+        const failedCount = emptyHeadings.length - filledCount;
 
-        showImagesProgress(100, '✅ 이미지 생성 완료!', `${emptyHeadings.length}개 완료`);
-        aiProgressModal.complete(true, {
-          successTitle: '이미지 생성 완료!',
-          successIcon: '✅',
-          successLog: `✅ ${emptyHeadings.length}개 이미지 생성 완료!`,
-        });
+        if (filledCount === 0) {
+          const message = `이미지가 한 장도 생성되지 않았습니다 (대상 ${emptyHeadings.length}개). `
+            + '위 로그의 실패 사유(할당량 초과·타임아웃 등)를 확인해주세요.';
+          appendLog(`❌ ${message}`, 'images-log-output');
+          showImagesProgress(100, '❌ 이미지 생성 실패', `0/${emptyHeadings.length}`);
+          aiProgressModal.complete(false, {
+            failureTitle: '이미지 생성 실패',
+            failureIcon: '❌',
+            failureLog: `❌ ${message}`,
+          });
+        } else if (failedCount > 0) {
+          const message = `${filledCount}/${emptyHeadings.length}개만 생성되었습니다 (${failedCount}개 실패). `
+            + '비어있는 소제목이 남아 있습니다 — 다시 시도하거나 다른 엔진을 선택해주세요.';
+          appendLog(`⚠️ ${message}`, 'images-log-output');
+          showImagesProgress(100, '⚠️ 일부만 생성됨', `${filledCount}/${emptyHeadings.length}`);
+          aiProgressModal.complete(false, {
+            failureTitle: '일부만 생성됨',
+            failureIcon: '⚠️',
+            failureLog: `⚠️ ${message}`,
+          });
+        } else {
+          appendLog(`✅ ${filledCount}개 이미지 생성 완료!`, 'images-log-output');
+          showImagesProgress(100, '✅ 이미지 생성 완료!', `${filledCount}개 완료`);
+          aiProgressModal.complete(true, {
+            successTitle: '이미지 생성 완료!',
+            successIcon: '✅',
+            successLog: `✅ ${filledCount}개 이미지 생성 완료!`,
+          });
+        }
 
       } catch (error) {
         appendLog(`❌ 이미지 생성 실패: ${(error as Error).message}`, 'images-log-output');
@@ -1927,20 +1969,7 @@ export function initHeadingImageGeneration(): void {
       const emptyHeadings = headings.filter((h: any) => {
         const headingTitle = String(h?.title || h?.heading || '').trim();
         if (!headingTitle) return false;
-
-        try {
-          const resolvedKey = ImageManager.resolveHeadingKey(headingTitle);
-          const primary = ImageManager.getImage(resolvedKey);
-          const key = String(getStableImageKey(primary) || '').trim();
-          if (!primary || !key) return true;
-
-          const list = ImageManager.getImages(resolvedKey) || [];
-          if (!Array.isArray(list) || list.length === 0) return true;
-
-          return false;
-        } catch {
-          return true;
-        }
+        return !headingHasUsableImage(headingTitle);
       });
 
       if (emptyHeadings.length === 0) {
