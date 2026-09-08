@@ -82,3 +82,34 @@ export function resolveQuotaWaitMs(
   if (suggested === undefined) return fallbackMs;
   return Math.min(Math.max(suggested, 3_000), 30_000);
 }
+
+/**
+ * [2026-09-09] 429 원인을 사용자 화면 문구로 바꾼다.
+ *
+ * 지금까지 분류 결과는 재시도 여부를 정하는 데만 쓰이고 사용자에게는 보이지 않았다.
+ * 그래서 사장님이 "금액이 있는데 왜 429가 뜨냐" 고 물었을 때 답이 로그 파일 안에만
+ * 있었다. 원인과 다음 행동을 화면에서 바로 읽히게 한다.
+ */
+export function describeGeminiQuotaCause(
+  classification: GeminiQuotaClassification,
+  availableKeyCount: number,
+): string {
+  const keyHint = availableKeyCount > 1
+    ? ''
+    : ' API 키를 2개 이상 등록하면 한도에 걸릴 때 자동으로 다른 키로 넘어갑니다.';
+
+  if (classification.scope === 'per-day') {
+    return '오늘 쓸 수 있는 이미지 할당량을 다 썼습니다(일일 한도). '
+      + '내일 다시 시도하거나 다른 이미지 엔진으로 바꿔주세요.' + keyHint;
+  }
+  if (classification.scope === 'per-minute') {
+    const wait = classification.retryDelayMs
+      ? ` 약 ${Math.ceil(classification.retryDelayMs / 1000)}초 뒤에 풀립니다.`
+      : ' 잠시 뒤에 풀립니다.';
+    return '분당 요청 한도를 넘었습니다(잔액 문제가 아닙니다).' + wait
+      + ' 결제를 했더라도 Tier 1 은 분당 10장이 상한입니다 — '
+      + '환경설정에서 "Gemini 이미지 분당 상한"을 올리거나 잠시 쉬었다 진행하세요.' + keyHint;
+  }
+  return '요청 한도(429)에 걸렸습니다. 잔액이 아니라 속도·횟수 제한입니다. '
+    + '잠시 뒤 다시 시도하거나 다른 이미지 엔진으로 바꿔주세요.' + keyHint;
+}

@@ -848,6 +848,7 @@ export async function initPriceInfoModal(): Promise<void> {
   const externalApiCostConsent = document.getElementById('external-api-cost-consent') as HTMLInputElement;
   const externalApiPerRunImageLimit = document.getElementById('external-api-per-run-image-limit') as HTMLInputElement;
   const externalApiDailyImageLimit = document.getElementById('external-api-daily-image-limit') as HTMLInputElement;
+  const geminiRpmCeiling = document.getElementById('gemini-rpm-ceiling') as HTMLInputElement;
   const externalApiUsageText = document.getElementById('external-api-usage-text') as HTMLParagraphElement;
   const saveSettingsBtn = document.getElementById('save-settings-btn') as HTMLButtonElement;
   const settingsApi = (window as any).api;
@@ -1271,6 +1272,11 @@ export async function initPriceInfoModal(): Promise<void> {
       if (externalApiCostConsent) externalApiCostConsent.checked = config.externalApiCostConsent === true;
       if (externalApiPerRunImageLimit) externalApiPerRunImageLimit.value = String((config as any).externalApiPerRunImageLimit ?? 10);
       if (externalApiDailyImageLimit) externalApiDailyImageLimit.value = String((config as any).externalApiDailyImageLimit ?? 30);
+      // [2026-09-09] 비워두면 앱 기본값(10)을 쓴다 — 0 이나 빈칸을 강제로 채우지 않는다.
+      if (geminiRpmCeiling) {
+        const saved = Number((config as any).geminiRpmCeiling);
+        geminiRpmCeiling.value = Number.isFinite(saved) && saved > 0 ? String(Math.floor(saved)) : '';
+      }
 
       if (externalApiUsageText) {
         const today = (() => {
@@ -1558,6 +1564,21 @@ export async function initPriceInfoModal(): Promise<void> {
           if (externalApiDailyImageLimit) {
             const v = Math.max(1, Math.floor(Number(externalApiDailyImageLimit.value || 30)));
             config.externalApiDailyImageLimit = v;
+          }
+          if (geminiRpmCeiling) {
+            /*
+             * [2026-09-09] 빈칸 = 기본값(10) 사용. 값을 지우면 설정도 지운다.
+             * 1~1000 밖은 오타로 보고 저장하지 않는다 — Tier 2 상한이 1,000 RPM 이다.
+             */
+            const raw = String(geminiRpmCeiling.value || '').trim();
+            if (!raw) {
+              delete (config as any).geminiRpmCeiling;
+            } else {
+              const v = Math.floor(Number(raw));
+              if (Number.isFinite(v) && v >= 1 && v <= 1000) {
+                (config as any).geminiRpmCeiling = v;
+              }
+            }
           }
         } catch (e) {
           console.warn('[priceInfoModal] catch ignored:', e);

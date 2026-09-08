@@ -221,6 +221,16 @@ export interface AppConfig {
   };
   geminiCreditBudget?: number; // 사용자 설정 예산 (USD, 기본 $300). 직접 결제한 금액 추적용
 
+  /**
+   * [2026-09-09] Gemini 이미지 분당 요청 상한(RPM).
+   *
+   * 앱은 지금까지 10 으로 하드코딩돼 있었다(Tier 1 = 10 RPM 기준). 문제는 누적 결제
+   * $100 을 넘겨 Tier 2(1,000 RPM)가 된 사용자도 앱이 스스로 8 RPM 으로 묶고,
+   * 429 를 한 번 만나면 6 까지 줄여버린다는 점이다 — 결제를 많이 할수록 손해였다.
+   * 비우면 기존 기본값(10)을 그대로 쓴다.
+   */
+  geminiRpmCeiling?: number;
+
   // ✅ [2026-03-19] 통합 API 사용량 추적 (모든 제공자)
   apiUsageTrackers?: {
     [provider: string]: {
@@ -1126,6 +1136,17 @@ export function applyConfigToEnv(config: AppConfig): void {
   } else if (rawModel) {
     // 비-Gemini 모델은 GEMINI_MODEL에 넣지 않음 (defaultAiProvider로 관리)
     console.log(`[Config] ⚠️ primaryGeminiTextModel(${rawModel})은 비-Gemini 모델 → GEMINI_MODEL 미설정 (provider 경로로 처리)`);
+  }
+
+  /*
+   * [2026-09-09] Gemini 이미지 RPM 상한 — 환경변수 경로는 이미 뚫려 있었는데
+   * 사용자가 만질 창구가 없어 하드코딩 10 에 묶여 있었다. 설정값을 여기서 올려준다.
+   * 1~1000 밖의 값은 오타로 보고 무시한다(Tier 2 상한이 1,000 RPM).
+   */
+  const rpmCeiling = Number((config as any).geminiRpmCeiling);
+  if (Number.isFinite(rpmCeiling) && rpmCeiling >= 1 && rpmCeiling <= 1000) {
+    process.env.GEMINI_RPM_CEILING = String(Math.floor(rpmCeiling));
+    console.log('[Config] GEMINI_RPM_CEILING 설정됨:', process.env.GEMINI_RPM_CEILING);
   }
 
   // ✅ [2026-03-23 FIX] delete 패턴 제거 — GEMINI_API_KEY와 동일한 안전 패턴

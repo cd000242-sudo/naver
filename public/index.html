@@ -5497,6 +5497,18 @@
                                             </div>
                                         </div>
 
+                                        <!-- [2026-09-09] Gemini 이미지 분당 상한 — 결제해도 앱이 10으로 묶던 병목 해제 -->
+                                        <div style="background: rgba(255,255,255,0.82); border: 1px solid rgba(99,102,241,0.35); border-radius: 8px; padding: 0.85rem; color: #1e1b4b;">
+                                            <label for="gemini-rpm-ceiling" style="display: block; font-weight: 800; font-size: 0.86rem; margin-bottom: 0.4rem;">Gemini 이미지 분당 상한 (RPM)</label>
+                                            <input type="number" id="gemini-rpm-ceiling" min="1" max="1000" step="1" placeholder="10"
+                                                style="width: 100%; box-sizing: border-box; background: #ffffff; border: 1px solid rgba(99,102,241,0.45); color: #111827; padding: 0.7rem; border-radius: 8px; font-size: 0.9rem; font-weight: 700;">
+                                            <div style="font-size: 0.74rem; color: #3730a3; margin-top: 0.45rem; line-height: 1.5;">
+                                                429는 잔액이 아니라 <strong>속도 제한</strong>입니다. 결제를 했어도 <strong>Tier 1은 분당 10장</strong>이 상한이고,
+                                                누적 결제 $100을 넘겨 <strong>Tier 2</strong>가 되면 1,000까지 올릴 수 있습니다.
+                                                비워두면 10을 씁니다. 값을 모르면 그대로 두세요 — 너무 높이면 오히려 429가 늘어납니다.
+                                            </div>
+                                        </div>
+
                                         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                                             <button type="button" id="gemini-api-guide-btn" class="api-guide-btn"
                                                 data-api="gemini"

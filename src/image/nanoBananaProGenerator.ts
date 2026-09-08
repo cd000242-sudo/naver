@@ -16,6 +16,7 @@ import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { getImageErrorMessage } from './imageErrorMessages.js';
 import {
   classifyGeminiQuotaError,
+  describeGeminiQuotaCause,
   resolveQuotaWaitMs,
   shouldStopRetryingQuota,
 } from './geminiQuotaClassifier.js';
@@ -461,7 +462,35 @@ const getCeilingRpm = (): number => {
   } catch {}
   return 10; // gemini-2.5-flash-image Tier 1 = 10 RPM (실제 호출 모델)
 };
-const geminiRpmThrottler = new GeminiRpmThrottler(getCeilingRpm(), 6, 2);
+/*
+ * [2026-09-09] 지연 생성 + 상한 변경 감지.
+ *
+ * 예전에는 모듈 로드 시점에 한 번 만들어서, 환경설정에서 상한을 바꿔도 앱을 껐다 켜야
+ * 반영됐다. 이제 처음 쓸 때 만들고, 상한이 달라지면 새로 만든다 — 설정 즉시 반영.
+ * 상한이 그대로면 같은 인스턴스를 계속 써서 분당 호출 기록(callTimestamps)을 잃지 않는다.
+ */
+let geminiRpmThrottlerInstance: GeminiRpmThrottler | null = null;
+let geminiRpmThrottlerCeiling = 0;
+
+function getGeminiRpmThrottler(): GeminiRpmThrottler {
+  const ceiling = getCeilingRpm();
+  if (!geminiRpmThrottlerInstance || geminiRpmThrottlerCeiling !== ceiling) {
+    if (geminiRpmThrottlerInstance) {
+      console.log(`[RPM Throttler] ⚙️ 상한 변경 감지 ${geminiRpmThrottlerCeiling} → ${ceiling} — 쓰로틀러 재생성`);
+    }
+    geminiRpmThrottlerInstance = new GeminiRpmThrottler(ceiling, 6, 2);
+    geminiRpmThrottlerCeiling = ceiling;
+  }
+  return geminiRpmThrottlerInstance;
+}
+
+/** 기존 호출부를 그대로 두기 위한 얇은 창구 — 매 접근마다 최신 상한을 확인한다. */
+const geminiRpmThrottler = {
+  throttle: () => getGeminiRpmThrottler().throttle(),
+  recordCall: () => getGeminiRpmThrottler().recordCall(),
+  record429: () => getGeminiRpmThrottler().record429(),
+  getStatus: () => getGeminiRpmThrottler().getStatus(),
+};
 
 // 전역 키 풀 인스턴스 (세션 간 소진 상태 공유)
 let globalKeyPool: GeminiKeyPool | null = null;
@@ -1776,6 +1805,17 @@ async function generateSingleImageWithGemini(
         '에러메시지': errorMessage,
       });
 
+      /*
+       * [2026-09-09] 429 의 성격을 여기서 한 번만 가른다.
+       * 예전에는 재시도 대기 계산 직전에만 구해서 사용자에게 보이는 문구에는 쓰이지 않았다.
+       * 원인을 화면에서 바로 읽히게 하려면 메시지보다 앞에서 알아야 한다.
+       */
+      const quotaClass = classifyGeminiQuotaError(
+        `${errorMessage}\n${responseBody}`,
+        (error as any)?.response?.headers?.['retry-after'],
+      );
+      const availableKeyCount = keyPool ? keyPool.getAvailableCount() : 1;
+
       // ✅ [v1.4.44] limit:0 또는 paid plans only → 재시도 무의미, 즉시 안내
       if (isGeminiImageBillingRequiredMessage(`${errorMessage}\n${responseBody}`)) {
         console.error('[NanoBananaPro] Gemini prepaid image credits are depleted; stopping retries.');
@@ -1797,8 +1837,9 @@ async function generateSingleImageWithGemini(
         const userFriendlyMsg = getImageErrorMessage(error);
         if (isQuotaError) {
           const poolInfo = keyPool ? ` (${keyPool.getAvailableCount()}/${keyPool.getTotalCount()}개 키 사용 가능)` : '';
-          console.error(`[NanoBananaPro] ❌ 할당량 초과 (${maxRetries}회 재시도 실패)${poolInfo} → Imagen 4 안전망 시도`);
-          sendImageLog(`⚠️ API 할당량이 초과되었습니다! 할당량을 확인하거나 다른 생성 엔진으로 변경해주세요. Imagen 4로 전환 시도 중...`);
+          console.error(`[NanoBananaPro] ❌ 할당량 초과 (${maxRetries}회 재시도 실패, ${quotaClass.scope})${poolInfo} → Imagen 4 안전망 시도`);
+          // [2026-09-09] 원인을 화면에 그대로 보여준다 — 로그 파일을 뒤지게 하지 않는다.
+          sendImageLog(`⚠️ ${describeGeminiQuotaCause(quotaClass, availableKeyCount)} (Imagen 4로 전환 시도 중)`);
         } else if (isServerError) {
           console.error(`[NanoBananaPro] ❌ 서버 오류 (${maxRetries}회 재시도 실패) → Imagen 4 안전망 시도`);
           sendImageLog(`🔥 이미지 생성 서버가 과부하 상태입니다! 다른 생성 엔진으로 변경하거나 잠시 기다려주세요. Imagen 4로 전환 시도 중...`);
@@ -1830,11 +1871,6 @@ async function generateSingleImageWithGemini(
         // [2026-09-08] 429 의 성격을 가른다. 일일 할당량이 소진됐고 넘어갈 다른 키도
         //   없으면 오늘 안에는 풀리지 않는다 — 15~25초씩 5회를 기다려봐야 실패가 확정이고,
         //   그 3분 동안 렌더러 타임아웃이 먼저 끊겨 사용자에게는 앱이 멈춘 것으로 보였다.
-        const quotaClass = classifyGeminiQuotaError(
-          `${errorMessage}\n${responseBody}`,
-          (error as any)?.response?.headers?.['retry-after'],
-        );
-        const availableKeyCount = keyPool ? keyPool.getAvailableCount() : 1;
         if (shouldStopRetryingQuota(quotaClass, availableKeyCount)) {
           console.error('[NanoBananaPro] 🚫 일일 할당량 소진 + 여분 키 없음 — 재시도 중단');
           sendImageLog(
