@@ -2173,6 +2173,31 @@ function LewordStyles() {
                 .lw-side-foot { display: none; }
                 .lw-card-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             }
+
+            /* 오늘의 네이버 추천키워드 — 실검 틈새 아래 표(2026-09-08). 테마 무관하게 currentColor 로 선을 긋는다. */
+            .lw-picks { margin-top: 30px; padding-top: 18px; border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent); }
+            .lw-picks-head h2 { font-size: 18px; margin: 0 0 4px; letter-spacing: -0.01em; }
+            .lw-picks-head p { margin: 0 0 10px; opacity: 0.72; font-size: 13px; }
+            .lw-picks-grid { display: grid; gap: 8px; margin-top: 10px; }
+            .lw-picks-topic { border: 1px solid color-mix(in srgb, currentColor 12%, transparent); border-radius: 10px; background: color-mix(in srgb, currentColor 3%, transparent); }
+            .lw-picks-topic summary { cursor: pointer; padding: 10px 14px; display: flex; gap: 10px; align-items: baseline; list-style: none; }
+            .lw-picks-topic summary::-webkit-details-marker { display: none; }
+            .lw-picks-topic summary:focus-visible { outline: 2px solid #c084fc; outline-offset: 2px; border-radius: 10px; }
+            .lw-picks-topic-name { font-weight: 600; }
+            .lw-picks-topic summary b { font-weight: 500; opacity: 0.6; font-size: 12px; }
+            .lw-picks-tease { margin-left: auto; font-size: 12px; opacity: 0.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%; }
+            .lw-picks-scroll { overflow-x: auto; padding: 0 8px 10px; }
+            .lw-picks-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 13px; }
+            .lw-picks-table th, .lw-picks-table td { padding: 7px 8px; border-top: 1px solid color-mix(in srgb, currentColor 10%, transparent); text-align: left; white-space: nowrap; }
+            .lw-picks-table th { font-size: 11.5px; opacity: 0.65; font-weight: 500; letter-spacing: 0.02em; }
+            .lw-picks-table .n { text-align: right; }
+            .lw-picks-table a { color: inherit; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, currentColor 40%, transparent); }
+            .lw-picks-src { opacity: 0.65; font-size: 12px; }
+            .lw-picks-gold { color: #ffa500; font-weight: 700; }
+            .lw-picks-chip { display: inline-block; margin-left: 6px; font-size: 11px; padding: 1px 7px; border-radius: 999px; background: color-mix(in srgb, #ffa500 16%, transparent); color: #ffa500; font-weight: 500; }
+            .lw-picks-btn { font: inherit; font-size: 12px; padding: 3px 9px; border-radius: 6px; border: 1px solid color-mix(in srgb, currentColor 22%, transparent); background: transparent; color: inherit; cursor: pointer; }
+            .lw-picks-btn:hover { background: color-mix(in srgb, currentColor 8%, transparent); }
+            .lw-picks-more { margin: 6px 8px 0; font-size: 12px; opacity: 0.65; }
         `}</style>
     );
 }

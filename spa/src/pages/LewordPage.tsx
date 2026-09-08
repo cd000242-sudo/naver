@@ -13,6 +13,7 @@ import LewordStyles from '../components/leword/LewordStyles';
 import RadarTab from '../components/leword/RadarTab';
 import RankTab from '../components/leword/RankTab';
 import RpmTab from '../components/leword/RpmTab';
+import TodayPicksBoard from '../components/leword/TodayPicksBoard';
 import YoutubeTab from '../components/leword/YoutubeTab';
 
 /**
@@ -259,7 +260,13 @@ function LewordPage() {
                 )}
 
                 {activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
-                {activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
+                {activeTab === 'issue' && (
+                    <>
+                        <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />
+                        {/* 실검 틈새키워드 아래 — 오늘의 네이버 추천키워드(사장님 2026-09-08). */}
+                        <TodayPicksBoard onAnalyze={sendToAnalyze} />
+                    </>
+                )}
                 {activeTab === 'kin' && <KinGoldenTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
                 {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
