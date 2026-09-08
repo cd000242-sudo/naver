@@ -4591,18 +4591,22 @@ async function startContinuousPublishingV2(): Promise<void> {
         if (continuousContentModeEl) continuousContentModeEl.value = item.contentMode || 'seo';
       } catch (e) { /* DOM sync 실패 무시 */ }
 
-      // ✅ [v1.4.56] custom 모드 customPrompt DOM 동기화
-      // contentGeneration.ts가 #unified-custom-prompt에서 읽으므로 항목별 값 주입 필수
+      // ✅ [v1.4.56] 항목별 customPrompt DOM 동기화
+      // [2026-09-08] 두 가지를 고친다.
+      //   1) 주입 대상: 파이프라인이 실제로 먼저 읽는 것은 hidden #custom-prompt-input 이다
+      //      (#unified-custom-prompt 는 화면에 뜨지 않는 죽은 폴백). 둘 다 맞춰 둔다.
+      //   2) custom 모드 조건 제거: 개인 프롬프트는 전 모드에서 수집되는데(2970줄) 주입만
+      //      custom 으로 잠겨 있어, 다른 모드 항목은 큐의 값이 아니라 메인 폼에 남은 값으로
+      //      발행되고 있었다 — 항목별 값이 조용히 무시되던 자리다.
       try {
-        const mainPromptEl = document.getElementById('unified-custom-prompt') as HTMLTextAreaElement | null;
-        if (mainPromptEl) {
-          if (item.contentMode === 'custom' && item.customPrompt) {
-            mainPromptEl.value = item.customPrompt;
-            console.log(`[Continuous] ✏️ customPrompt 동기화 (${item.customPrompt.length}자)`);
-          } else if (item.contentMode !== 'custom') {
-            // 다른 모드면 main form 영향 없게 빈값 (원래 값 복구는 발행 완료 후)
-            mainPromptEl.value = '';
-          }
+        const promptEls = [
+          document.getElementById('custom-prompt-input') as HTMLTextAreaElement | null,
+          document.getElementById('unified-custom-prompt') as HTMLTextAreaElement | null,
+        ].filter(Boolean) as HTMLTextAreaElement[];
+        const itemPrompt = String(item.customPrompt || '').trim();
+        promptEls.forEach((el) => { el.value = itemPrompt; });
+        if (itemPrompt) {
+          console.log(`[Continuous] ✏️ customPrompt 동기화 (${item.contentMode || 'seo'} 모드, ${itemPrompt.length}자)`);
         }
       } catch (e) { /* customPrompt sync 실패 무시 */ }
 

@@ -3225,9 +3225,12 @@ async function initMultiAccountPublishModal() {
                     catch (e) {
                         console.warn('[multiAccountManager] catch ignored:', e);
                     }
-                    if (queueItem.contentMode === 'custom' && queueItem.customPrompt) {
+                    // [2026-09-08] 수집(1873줄)은 전 모드에서 하는데 전달만 custom 모드로 잠겨 있었다.
+                    //   SEO·홈판·쇼핑·업체에서 넣은 개인 프롬프트가 큐에만 남고 버려졌다(사용자 실측).
+                    //   백엔드는 모드 무관으로 받는다(contentGenerator: customPrompt 있으면 분기) — 게이트를 푼다.
+                    if (queueItem.customPrompt) {
                         contentPayload.assembly.customPrompt = queueItem.customPrompt;
-                        console.log(`[multiAccountManager] ✏️ customPrompt 전달 (${queueItem.customPrompt.length}자)`);
+                        console.log(`[multiAccountManager] ✏️ customPrompt 전달 (${queueItem.contentMode || 'seo'} 모드, ${queueItem.customPrompt.length}자)`);
                     }
                     if (queueItem.contentMode === 'business' && queueItem.businessInfo) {
                         contentPayload.assembly.businessInfo = queueItem.businessInfo;

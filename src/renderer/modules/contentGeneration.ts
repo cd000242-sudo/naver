@@ -196,6 +196,20 @@ function applyManualTitleOverrideToContent(structuredContent: any, manualTitle?:
 // 3. 개별 단어 순서 앞부분 제거
 // 4. 겹치는 접미사/접두사 감지 (키워드 뒤쪽 단어 = 제목 앞쪽 단어)
 // 5. 잔여 구두점/공백 정리
+/**
+ * [2026-09-08] 개인 프롬프트를 UI 에서 읽는 단일 창구.
+ *
+ * #custom-prompt-input 은 모달이 모드별 localStorage 값을 실어 두는 hidden textarea 다
+ * (체크 OFF 면 빈 값). #unified-custom-prompt 는 구버전 호환 폴백이다.
+ * 경로마다 따로 읽다가 URL 경로에서는 아예 빠져 있었다 — 한 곳에서 읽는다.
+ */
+function readCustomPromptFromUi(): string | undefined {
+  const unified = (document.getElementById('custom-prompt-input') as HTMLTextAreaElement | null)?.value?.trim();
+  if (unified) return unified;
+  const legacy = (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
+  return legacy || undefined;
+}
+
 function cleanKeywordFromTitle(keyword: string, title: string): string {
   let cleaned = title.trim();
 
@@ -648,6 +662,9 @@ export async function generateContentFromUrl(
       manualTitleOverride,
       personalExperience,
       aiExperienceGeneration,
+      // [2026-09-08] URL 경로에는 customPrompt 필드 자체가 없어서, 개인 프롬프트를 켜고
+      //   써도 통째로 무시됐다(키워드 경로에만 있었다 — 사용자 실측 "적용이 안 된다").
+      customPrompt: readCustomPromptFromUi(),
     }
   };
 
@@ -1256,10 +1273,7 @@ export async function generateContentFromKeywords(
       // [2026-05-27] 통합 #custom-prompt-input — 모든 모드 공통, 모드별 localStorage 분리 저장.
       //   백엔드 contentGenerator.ts L2164: customPrompt 있으면 모드 무관 사용자 프롬프트 분기 진입.
       //   기존 #unified-custom-prompt도 fallback으로 유지 (호환성).
-      customPrompt: (
-        (document.getElementById('custom-prompt-input') as HTMLTextAreaElement)?.value?.trim()
-        || (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim()
-      ) || undefined,
+      customPrompt: readCustomPromptFromUi(),
       // ✅ [2026-02-09 v2] 연속발행 시 이전 제목 히스토리 전달 (제목 다양성 확보)
       previousTitles: ((window as any)._previousTitles as string[]) || undefined,
       // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 옵션 전달 (메인 프로세스에서 제목 조작 건너뛰기)

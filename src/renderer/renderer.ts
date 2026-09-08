@@ -2376,7 +2376,12 @@ async function autoGenerateFromUrl(urls: string): Promise<void> {
       const targetAgeSelect = document.getElementById('target-age') as HTMLSelectElement;
       const targetAge = (targetAgeSelect?.value as '20s' | '30s' | '40s' | '50s' | 'all') || 'all';
 
-      const customPrompt = (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim();
+      // [2026-09-08] 여기서 읽던 #unified-custom-prompt 는 죽은 입력이다 —
+      //   그 textarea 를 감싼 #custom-prompt-section 은 항상 display:none 이고,
+      //   보이게 하거나 값을 쓰는 코드가 저장소에 없다(grep 결과 HTML 1줄뿐).
+      //   새 모달 UI 는 hidden #custom-prompt-input 에만 값을 넣으므로 그쪽을 먼저 읽는다.
+      const customPrompt = (document.getElementById('custom-prompt-input') as HTMLTextAreaElement)?.value?.trim()
+        || (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement)?.value?.trim();
 
 
       const apiClient = EnhancedApiClient.getInstance();
