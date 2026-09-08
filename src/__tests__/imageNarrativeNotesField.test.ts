@@ -19,8 +19,8 @@ describe('사진 모드 — 상황 메모 입력칸', () => {
   const css = readRoot('public/styles.css');
 
   it('입력칸이 눈에 띄게 커졌다', () => {
-    expect(html).toMatch(/id="image-narrative-context-notes"[^>]*rows="9"/);
-    expect(css).toMatch(/\.image-narrative-context-field--full textarea \{[\s\S]*?min-height: 200px;/);
+    expect(html).toMatch(/id="image-narrative-context-notes"[^>]*rows="14"/);
+    expect(css).toMatch(/\.image-narrative-context-field--full textarea \{[\s\S]*?min-height: 320px;/);
   });
 
   it('이 칸만 커지고 다른 컨텍스트 입력칸은 그대로다', () => {
@@ -35,18 +35,18 @@ describe('사진 모드 — 상황 메모 입력칸', () => {
     const backendMax = Number(
       readRoot('src/imageNarrative/context.ts').match(/notes: (\d+),/)?.[1],
     );
-    expect(htmlMax).toBe(2000);
+    expect(htmlMax).toBe(5000);
     expect(backendMax).toBe(htmlMax);
   });
 
   it('한도까지 적은 메모는 잘리지 않는다', () => {
-    const notes = '가'.repeat(2000);
+    const notes = '가'.repeat(5000);
     const context = normalizeImageNarrativeContext({ notes });
-    expect(context?.notes).toHaveLength(2000);
+    expect(context?.notes).toHaveLength(5000);
   });
 
   it('한도를 넘으면 잘라서 받는다 (터지지 않는다)', () => {
-    const context = normalizeImageNarrativeContext({ notes: '나'.repeat(2600) });
-    expect(context?.notes).toHaveLength(2000);
+    const context = normalizeImageNarrativeContext({ notes: '나'.repeat(6200) });
+    expect(context?.notes).toHaveLength(5000);
   });
 });

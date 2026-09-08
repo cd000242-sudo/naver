@@ -54,17 +54,17 @@ describe('normalizeInferAndWritePayload', () => {
     });
   });
 
-  // [2026-09-09] 한도 1000 -> 2000 (사장님 요청으로 입력칸을 키우면서 함께 올림).
+  // [2026-09-09] 한도 1000 -> 2000 -> 5000 (자세한 메모일수록 글이 사장님 것이 된다는 판단).
   //   화면 maxlength 와 같은 값이어야 한다 — imageNarrativeNotesField.test 가 둘을 대조한다.
   it('limits long photo context memo text', () => {
     const normalized = normalizeInferAndWritePayload({
       images: [image('a'), image('b'), image('c')],
       context: {
-        notes: 'a'.repeat(2400),
+        notes: 'a'.repeat(6000),
       },
     });
 
-    expect(normalized.context?.notes).toHaveLength(2000);
+    expect(normalized.context?.notes).toHaveLength(5000);
   });
 
   it('rejects fewer than 3 images', () => {
