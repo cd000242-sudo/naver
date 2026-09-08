@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-08T00:22:47.514Z",
+  "publishedAt": "2026-09-08T08:57:36.727Z",
   "generator": "issue-niche-board",
   "schedule": "매일 07·13·19시(KST) 갱신",
   "measured": {
-    "issues": 18,
+    "issues": 17,
     "candidates": 240,
-    "niche": 2,
-    "preemption": 18,
+    "niche": 0,
+    "preemption": 27,
     "pending": 0
   },
   "freeSample": {
@@ -181,14 +181,16 @@
           48,
           36,
           36
-        ]
+        ],
+        "measuredAt": "2026-09-08T08:57:37.420Z"
       },
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "recommend",
-      "exclusionReason": null
+      "exclusionReason": null,
+      "carried": true
     },
     {
       "keyword": "황정민 기부",
@@ -340,7 +342,8 @@
           0,
           0,
           0
-        ]
+        ],
+        "measuredAt": "2026-09-08T08:57:37.420Z"
       },
       "kinCount": 347,
       "kinTop": [
@@ -360,10 +363,2333 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "carried": true
+    },
+    {
+      "keyword": "(주)피씨엔",
+      "issue": "피씨엔",
+      "topic": "피씨엔",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "demand-no-volume",
+      "serp": null,
+      "documentCount": 55,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 55",
+        "데이터랩 실측 수요",
+        "선점 후보 — 경쟁 문서 55건, 수요 잡힘·검색량 미확인"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "피씨엔이 서울 논현동에 AI센터를 개소하고 사업을 확대했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "(주)피씨엔 논현동 PCN AI센터 개소, 공공·법률·재정 확대",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "(주)피씨엔 AI센터 살펴보다 공공 말고 엉뚱한 데서 눈이 멈췄어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "📉 단발성",
+        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음"
+      },
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "recommend",
       "exclusionReason": null
     }
   ],
   "observations": [
+    {
+      "keyword": "베스핀글로벌 채티",
+      "issue": "베스핀글로벌",
+      "topic": "베스핀글로벌",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 2,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 2",
+        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "베스핀글로벌이 aT AI챗봇 '채티' 고도화 사업을 수주했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "베스핀글로벌 채티 aT 수출정보 챗봇 고도화 사업 수주",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "베스핀글로벌 채티 고도화 수주 소식에 연봉이랑 상장은 지금 어떤가 싶어 다시 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "frame": "generic"
+        },
+        {
+          "keyword": "베스핀글로벌 상장",
+          "searchVolume": 50,
+          "frame": "generic"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 50,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "documentCount": 673,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 상장",
+          "searchVolume": 50,
+          "documentCount": 768,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 50,
+          "documentCount": 161,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿤텍 상장",
+      "issue": "쿤텍",
+      "topic": "쿤텍",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 64,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 64",
+        "선점 후보 — 경쟁 문서 64건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿤텍 상장 전 짚어볼 ETRI 온디바이스 AI 보안 기술",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿤텍 상장 소식에 기업정보부터 찾아봤는데 예상과 좀 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "documentCount": 718,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "경기일보 박귀빈",
+      "issue": "경기일보",
+      "topic": "경기일보",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 57,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 57",
+        "선점 후보 — 경쟁 문서 57건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "경기일보 박귀빈 기자와 그가 쓴 경기도 인사·현안 기사를 확인하려는 검색",
+        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 2개"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "경기일보 박귀빈 기자 경기도 인사 논란 기사 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "경기일보 박귀빈 기자 글 찾다가 인사 논란 흐름이 보이더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "박귀빈 기자",
+          "searchVolume": 90,
+          "frame": "generic"
+        },
+        {
+          "keyword": "경기일보 기자",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "박귀빈 기자",
+          "searchVolume": 90,
+          "documentCount": 113,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "경기일보 기자",
+          "searchVolume": 40,
+          "documentCount": 519446,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿤텍 블라인드",
+      "issue": "쿤텍",
+      "topic": "쿤텍",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 3,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 3",
+        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿤텍 블라인드 연봉·채용 평판과 ETRI 협력 근황",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿤텍 블라인드 보다 말고 연봉 얘기에 스크롤을 멈췄네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "쿤텍 연봉",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "documentCount": 718,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿤텍 매출",
+      "issue": "쿤텍",
+      "topic": "쿤텍",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 122,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 122",
+        "선점 후보 — 경쟁 문서 122건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿤텍 매출과 ETRI 온디바이스 AI 난독화 기술 개발",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿤텍 매출만 보려다가 연봉이랑 기업정보까지 한참을 뒤적이고 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "쿤텍 연봉",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "documentCount": 718,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "미스트랄 수영복",
+      "issue": "미스트랄",
+      "topic": "미스트랄",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 146,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 146",
+        "선점 후보 — 경쟁 문서 146건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "삼성 주도 펀딩으로 미스트랄이 4.6조 유치, 몸값 33조 돌파",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "미스트랄 수영복 래쉬가드 남녀 사이즈 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "미스트랄 수영복이랑 래쉬가드 같이 사려다 매장에서 한참 고민했네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "미스트랄 래쉬가드",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "미스트랄 래쉬가드",
+          "searchVolume": 30,
+          "documentCount": 217,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": [
+        {
+          "title": "오션 퍼시픽?미스트랄?에거 산 수영복",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50401&docId=281406247&answerNo=0",
+          "views": 25,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿤텍 연봉",
+      "issue": "쿤텍",
+      "topic": "쿤텍",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 16,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 16",
+        "선점 후보 — 경쟁 문서 16건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿤텍 연봉 신입 초봉과 복지, 채용 조건까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿤텍 연봉 궁금해서 기업정보 들여다보다가 매출에서 눈이 멈췄어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "쿤텍 매출",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "documentCount": 718,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "쿤텍 매출",
+          "searchVolume": 10,
+          "documentCount": 122,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "베스핀글로벌 블라인드",
+      "issue": "베스핀글로벌",
+      "topic": "베스핀글로벌",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 40,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 40",
+        "선점 후보 — 경쟁 문서 40건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "베스핀글로벌이 aT AI챗봇 '채티' 고도화 사업을 수주했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "베스핀글로벌 블라인드 신입 초봉과 평판 후기 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "베스핀글로벌 블라인드에서 연봉보다 평판을 먼저 봐야 하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "frame": "generic"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 50,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "documentCount": 673,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 50,
+          "documentCount": 161,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿤텍 온디바이스 AI",
+      "issue": "쿤텍",
+      "topic": "쿤텍",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 33,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 33",
+        "선점 후보 — 경쟁 문서 33건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿤텍 온디바이스 AI, ETRI와 모델 난독화로 정보 유출 막기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿤텍 온디바이스 AI 이게 뭔지 몰라서 찾아봤습니다",
+          "frame": "generic",
+          "basis": "파생 키워드 실측 '온디바이스 AI 뜻' (검색량 480) — 1페이지 0개 제목에 없는 프레임"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "온디바이스 AI 뜻",
+          "searchVolume": 480,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "온디바이스 AI 뜻",
+          "searchVolume": 480,
+          "documentCount": 21206,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김민석 헌정회 방문",
+      "issue": "김민석 헌정회 방문",
+      "topic": "김민석 헌정회 방문",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 48,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 48",
+        "선점 후보 — 경쟁 문서 48건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "김민석이 헌정회를 방문해 열린 자세로 개헌 추진 뜻을 밝혔다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김민석 헌정회 방문, 개헌 추진 발언 요지 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김민석 헌정회 방문하고 개헌 밀어붙인 날, 야당 반응이 의외로 갈리네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김민석 대표",
+          "searchVolume": 930,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김민석 개헌",
+          "searchVolume": 700,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김민석 개헌 추진",
+          "searchVolume": 50,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김민석 대표",
+          "searchVolume": 930,
+          "documentCount": 102112,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김민석 개헌",
+          "searchVolume": 700,
+          "documentCount": 3827,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김민석 개헌 추진",
+          "searchVolume": 50,
+          "documentCount": 2358,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿤텍 매출액",
+      "issue": "쿤텍",
+      "topic": "쿤텍",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 48,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 48",
+        "선점 후보 — 경쟁 문서 48건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿤텍 매출액 규모와 ETRI 온디바이스 AI 사업",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿤텍 매출액 찾다가 상장은 아직인가 싶어 기업정보까지 뒤져봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "쿤텍 상장",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "쿤텍 연봉",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "documentCount": 718,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "쿤텍 상장",
+          "searchVolume": 10,
+          "documentCount": 64,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿤텍 채용",
+      "issue": "쿤텍",
+      "topic": "쿤텍",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 49,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 49",
+        "선점 후보 — 경쟁 문서 49건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿤텍 채용 지원 전 연봉·기업정보 확인 순서",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿤텍 채용 준비하다 연봉이랑 기업정보 보고 잠깐 멈칫했네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "쿤텍 연봉",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "documentCount": 718,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿤텍 ETRI",
+      "issue": "쿤텍",
+      "topic": "쿤텍",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 42,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 42",
+        "선점 후보 — 경쟁 문서 42건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿤텍 ETRI 온디바이스 AI 모델 난독화로 정보유출 차단",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿤텍 ETRI 손잡았다는 소식 보고 기업정보부터 다시 들여다봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "documentCount": 718,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "aT 채티",
+      "issue": "베스핀글로벌",
+      "topic": "베스핀글로벌",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "고도화 대상 서비스 궁금",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 53,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 53",
+        "선점 후보 — 경쟁 문서 53건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 고도화 대상 서비스 궁금"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "베스핀글로벌이 aT AI챗봇 '채티' 고도화 사업을 수주했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "aT 채티 AI 챗봇 고도화 사업자로 뽑힌 베스핀글로벌",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "aT 채티가 우리가 아는 그 채티 앱이랑 전혀 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "베스핀글로벌 로고",
+      "issue": "베스핀글로벌",
+      "topic": "베스핀글로벌",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 78,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 78",
+        "선점 후보 — 경쟁 문서 78건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "베스핀글로벌이 aT AI챗봇 '채티' 고도화 사업을 수주했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "베스핀글로벌 로고 CI, aT 채티 고도화 수주로 다시 보는 회사",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "베스핀글로벌 로고만 알다가 연봉 얘기 나오니까 다들 이직 서두르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "frame": "generic"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 50,
+          "frame": "generic"
+        },
+        {
+          "keyword": "베스핀글로벌 기업정보",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "documentCount": 673,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 50,
+          "documentCount": 161,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 기업정보",
+          "searchVolume": 30,
+          "documentCount": 2728,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김민석 헌정회",
+      "issue": "김민석 헌정회 방문",
+      "topic": "김민석 헌정회 방문",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 108,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 108",
+        "선점 후보 — 경쟁 문서 108건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "김민석이 헌정회를 방문해 열린 자세로 개헌 추진 뜻을 밝혔다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김민석 헌정회 방문 개헌 추진 발언과 야당 거부 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김민석 헌정회 다녀오고 개헌 왜 밀어붙이나 했더니 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김민석 개헌",
+          "searchVolume": 700,
+          "frame": "generic"
+        },
+        {
+          "keyword": "대한민국 헌정회",
+          "searchVolume": 580,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김민석 개헌 추진",
+          "searchVolume": 50,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김민석 개헌",
+          "searchVolume": 700,
+          "documentCount": 3827,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "대한민국 헌정회",
+          "searchVolume": 580,
+          "documentCount": 4464,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김민석 개헌 추진",
+          "searchVolume": 50,
+          "documentCount": 2358,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "미스트랄 ocr",
+      "issue": "미스트랄",
+      "topic": "미스트랄",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 101,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 101",
+        "선점 후보 — 경쟁 문서 101건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "삼성 주도 펀딩으로 미스트랄이 4.6조 유치, 몸값 33조 돌파",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "미스트랄 ocr api 가격과 한글 인식 정확도 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "미스트랄 ocr 한글 문서 넣기 전에 미스트랄 ai부터 봐야 하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "미스트랄 ai",
+          "searchVolume": 290,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "미스트랄 ai",
+          "searchVolume": 290,
+          "documentCount": 5582,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "베스핀글로벌 aT",
+      "issue": "베스핀글로벌",
+      "topic": "베스핀글로벌",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 94,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 94",
+        "선점 후보 — 경쟁 문서 94건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "베스핀글로벌이 aT AI챗봇 '채티' 고도화 사업을 수주했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "베스핀글로벌 aT 채티 고도화 사업 수주 내용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "베스핀글로벌이 aT 채티 고도화 맡는다는데 공공 AI가 여기까지 왔네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿤텍 사람인",
+      "issue": "쿤텍",
+      "topic": "쿤텍",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 129,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 129",
+        "선점 후보 — 경쟁 문서 129건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿤텍 사람인 채용공고 연봉 기업정보 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿤텍 사람인 연봉만 보고 넘기다 정작 중요한 걸 놓쳤더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "쿤텍 연봉",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "documentCount": 718,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "베스핀글로벌 부트캠프",
+      "issue": "베스핀글로벌",
+      "topic": "베스핀글로벌",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 120,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 120",
+        "선점 후보 — 경쟁 문서 120건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "베스핀글로벌이 aT AI챗봇 '채티' 고도화 사업을 수주했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 6,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "홍서범 자숙",
+      "issue": "홍서범",
+      "topic": "홍서범",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 122,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 122",
+        "선점 후보 — 경쟁 문서 122건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "아들 불륜으로 자숙했던 홍서범이 8개월 만에 콘서트로 복귀 예고",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "홍서범 자숙 8개월 만에 박정희 콘서트로 복귀한 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "홍서범 자숙 끝내고 복귀하는데 아들 불륜 문제는 정리된 건가요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "홍서범 조갑경",
+          "searchVolume": 590,
+          "frame": "generic"
+        },
+        {
+          "keyword": "홍서범 근황",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "홍서범 아들 불륜",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "홍서범 조갑경",
+          "searchVolume": 590,
+          "documentCount": 7120,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "홍서범 근황",
+          "searchVolume": 20,
+          "documentCount": 1826,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "홍서범 아들 불륜",
+          "searchVolume": 10,
+          "documentCount": 1731,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿤텍(주)",
+      "issue": "쿤텍",
+      "topic": "쿤텍",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 206,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 206",
+        "선점 후보 — 경쟁 문서 206건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿤텍(주) ETRI 온디바이스 AI 모델 난독화 기술 개발",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿤텍(주)가 ETRI랑 온디바이스 AI 손잡은 이유 듣고 다시 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "삼성sds 릴스",
+      "issue": "삼성SDS",
+      "topic": "삼성SDS",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 202,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 202",
+        "선점 후보 — 경쟁 문서 202건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "삼성SDS가 10조 투자로 로봇 사업에 진출, 관제 플랫폼을 출시한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "삼성sds 릴스로 본 10조 로봇 투자 승부수",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "삼성sds 릴스 보다가 로봇 관제 플랫폼 얘기에 멈췄네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "피씨엔 잡플래닛",
+      "issue": "피씨엔",
+      "topic": "피씨엔",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 274,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 274",
+        "선점 후보 — 경쟁 문서 274건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "피씨엔이 서울 논현동에 AI센터를 개소하고 사업을 확대했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "피씨엔 잡플래닛 평점과 실제 연봉·면접 후기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "피씨엔 잡플래닛 평점만 보고 채용 접으려다 연봉 듣고 멈칫했네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "피씨엔 연봉",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "피씨엔 채용",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "피씨엔 연봉",
+          "searchVolume": 10,
+          "documentCount": 10942,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "피씨엔 채용",
+          "searchVolume": 10,
+          "documentCount": 35165,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": [
+        {
+          "title": "잡플래닛 pc환경으로 접속해주세요??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=50202&docId=409086699&answerNo=0",
+          "views": 18,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "홍서범 조갑경 재산",
+      "issue": "홍서범",
+      "topic": "홍서범",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 265,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 265",
+        "선점 후보 — 경쟁 문서 265건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "아들 불륜으로 자숙했던 홍서범이 8개월 만에 콘서트로 복귀 예고",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "홍서범 조갑경 재산과 아들 불륜, 8개월 만 복귀 근황",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "홍서범 조갑경 재산 얼마인지 찾다가 자녀 나이까지 뒤져보게 됐네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "조갑경 나이",
+          "searchVolume": 470,
+          "frame": "generic"
+        },
+        {
+          "keyword": "홍서범 나이",
+          "searchVolume": 310,
+          "frame": "generic"
+        },
+        {
+          "keyword": "홍서범 조갑경 자녀",
+          "searchVolume": 150,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "조갑경 나이",
+          "searchVolume": 470,
+          "documentCount": 2341,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "홍서범 나이",
+          "searchVolume": 310,
+          "documentCount": 2427,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "홍서범 조갑경 자녀",
+          "searchVolume": 150,
+          "documentCount": 1633,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "홍서범 근황",
+          "searchVolume": 20,
+          "documentCount": 1826,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "홍서범 아들 불륜",
+          "searchVolume": 10,
+          "documentCount": 1731,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "쿤텍 주식회사",
+      "issue": "쿤텍",
+      "topic": "쿤텍",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 265,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 265",
+        "선점 후보 — 경쟁 문서 265건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "쿤텍 주식회사 ETRI 온디바이스 AI 난독화 기술 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "쿤텍 주식회사 연봉 궁금해서 기업정보 찾다 이 부분에서 멈췄어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "쿤텍 연봉",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": 10,
+          "documentCount": 718,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-08T08:50:34.580Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "코파일럿 하이드라퓨전",
       "issue": "하이드라퓨전",
@@ -424,7 +2750,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "깃허브 하이드라퓨전",
@@ -521,7 +2848,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 연봉",
@@ -612,7 +2940,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 김세엽",
@@ -703,7 +3032,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "용인FC 프렌들리 구단상",
@@ -822,7 +3152,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 잡플래닛",
@@ -912,7 +3243,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "하이드라퓨전 지원모델",
@@ -978,7 +3310,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "씽크포비엘 자격증",
@@ -1044,7 +3377,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 장외주식",
@@ -1123,7 +3457,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "하이드라퓨전 비용",
@@ -1185,7 +3520,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "지동원 은퇴 여정",
@@ -1286,7 +3622,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 세미나 신청",
@@ -1376,7 +3713,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "씽크포비엘 매출",
@@ -1442,7 +3780,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "그록 이매진 비디오",
@@ -1517,7 +3856,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "하이드라퓨전 사용법",
@@ -1590,7 +3930,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "씽크포비엘 채용",
@@ -1669,7 +4010,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 블라인드",
@@ -1759,7 +4101,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "셀렉트스타 세미나",
@@ -1845,7 +4188,8 @@
       "monetize": null,
       "measuredAt": "2026-09-08T00:15:09.800Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "씽크포비엘 CERTX",
@@ -4490,285 +6834,40 @@
       "searchVolumeMeasuredAt": "2026-09-06T23:43:48.685Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "서울런 5주년 성과공유회",
-      "issue": "서울런 5주년 성과공유회",
-      "topic": "서울런 5주년 성과공유회",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 53,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 53",
-        "선점 후보 — 경쟁 문서 53건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오세훈표 서울런이 5년 만에 가입자 4.4만명으로 늘어난 성과와 홍보대사 소식을 확인하려는 검색",
-        "basis": "AI 추론 — 뉴스 헤드라인 5건 + 실측 확인된 확장어 7개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "서울런 5주년 성과공유회 가입자 9000명서 4.4만명",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "서울런 5주년 성과공유회 다녀왔더니 서울런 대상이 이렇게까지 넓어진 줄 몰랐네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "서울런 멘토링",
-          "searchVolume": 800,
-          "frame": "generic"
-        },
-        {
-          "keyword": "서울런 대상",
-          "searchVolume": 70,
-          "frame": "generic"
-        },
-        {
-          "keyword": "서울런 홈페이지",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "서울런 멘토링",
-          "searchVolume": 800,
-          "documentCount": 3363,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "서울런 대상",
-          "searchVolume": 70,
-          "documentCount": 5169,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "서울런 홈페이지",
-          "searchVolume": 30,
-          "documentCount": 2415,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "서울런 자격",
-          "searchVolume": 20,
-          "documentCount": 2941,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "서울런 후기",
-          "searchVolume": 20,
-          "documentCount": 1509,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "서울런 소득기준",
-          "searchVolume": 10,
-          "documentCount": 1645,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-06T08:38:35.631Z",
-      "kinMode": "date-views-v2",
-      "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T23:43:48.685Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "김동아 가수 나이",
-      "issue": "김동아",
-      "topic": "김동아",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 123,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 123",
-        "선점 후보 — 경쟁 문서 123건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "가수로 착각해 검색하지만 실제론 한동훈을 공수처에 고발한 민주당 김동아 의원의 나이·프로필을 확인하려는 검색",
-        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 4개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김동아 가수 나이, 한동훈 공수처 고발한 민주당 의원 프로필",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김동아 가수 나이 검색했다가 한동훈 고발한 그 의원인 걸 알았네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "김동아 프로필",
-          "searchVolume": 1340,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김동아 의원",
-          "searchVolume": 920,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김동아 의원 프로필",
-          "searchVolume": 250,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "김동아 프로필",
-          "searchVolume": 1340,
-          "documentCount": 168,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김동아 의원",
-          "searchVolume": 920,
-          "documentCount": 3670,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김동아 의원 프로필",
-          "searchVolume": 250,
-          "documentCount": 96,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김동아 나이",
-          "searchVolume": 10,
-          "documentCount": 419,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": [
-        {
-          "title": "가수 김동아 나이",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3021401&docId=183327533&answerNo=0",
-          "views": 23,
-          "answers": null
-        },
-        {
-          "title": "가수김동아나이",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20409&docId=314887218&answerNo=0",
-          "views": 10,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-06T08:38:35.631Z",
-      "kinMode": "date-views-v2",
-      "carried": true,
-      "searchVolumeMeasuredAt": "2026-09-06T23:43:48.685Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "2분기 GDP 0.6%",
+      "issue": "코스피 하락 마감",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "2분기 실질 GDP가 ICT 기여로 0.6% 성장하고 국민총소득은 3.1% 늘었다",
+      "why": "AI 훈풍에 7170선까지 올랐다 중동 리스크로 하락 전환",
       "headlines": [
         {
-          "title": "2분기 GDP 0.6% 성장…ICT가 0.5%p 기여",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-09-07T23:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012252831?sid=101"
-        },
-        {
-          "title": "2분기 GDP 성장률 0.6%…속보치와 동일",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-07T23:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014175329?sid=101"
-        },
-        {
-          "title": "2분기 명목 GDP 성장률 47년 만에 최고…실질 GDP는 0.6%↑",
+          "title": "잘나가다 미끄러진 코스피…0.58% 하락 마감",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-07T23:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016295839?sid=101"
+          "publishedAt": "2026-09-08T06:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016297631?sid=101"
+        },
+        {
+          "title": "'칠천피' 회복했다가 반납…코스피 하락 마감",
+          "press": "yonhapnewstv.co.kr",
+          "publishedAt": "2026-09-08T08:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/422/0000904067?sid=101"
+        },
+        {
+          "title": "코스피, 개인 순매도에 하락…6950선 마감",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-09-08T06:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005813551?sid=101"
         }
       ],
       "concentrated": [
         {
-          "keyword": "2분기",
+          "keyword": "코스피",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -4777,18 +6876,18 @@
       "rowCount": 0
     },
     {
-      "issue": "윤종훈과 한은서 결혼",
+      "issue": "한은서와 윤종훈 결혼",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "펜트하우스 배우 윤종훈이 10살 연하 배우 한은서와 11월 결혼한다",
+      "why": "펜트하우스 배우 윤종훈이 10살 연하 한은서와 11월 결혼 발표",
       "headlines": [
         {
-          "title": "[단독] 윤종훈의 그녀, ‘10살 연하’ ♥한은서 누구?..8년 전 ’리턴’...",
-          "press": "osen.co.kr",
-          "publishedAt": "2026-09-07T23:57:00.000Z",
-          "link": "https://m.entertain.naver.com/article/109/0005602753"
+          "title": "[단독] 윤종훈, ♥한은서와 깜짝 결혼 발표→미담도 나왔다… “끝까지...",
+          "press": "isplus.com",
+          "publishedAt": "2026-09-08T05:06:00.000Z",
+          "link": "https://m.entertain.naver.com/article/241/0003529646"
         },
         {
           "title": "'펜트하우스' 배우 윤종훈, 10살 연하 한은서와 결혼",
@@ -4797,10 +6896,10 @@
           "link": "https://n.news.naver.com/mnews/article/015/0005329762?sid=103"
         },
         {
-          "title": "윤종훈, 10세 연하 한은서와 11월 결혼…\"잘 살길 바라\" 축하 물결(종합...",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-07T23:14:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009156484"
+          "title": "윤종훈, 10살 연하 배우 한은서와 11월 결혼",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-07T23:54:00.000Z",
+          "link": "https://m.entertain.naver.com/article/018/0006365351"
         }
       ],
       "concentrated": [],
@@ -4808,75 +6907,1106 @@
       "rowCount": 0
     },
     {
-      "issue": "국제선",
+      "issue": "LH 서울 매입임대",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "stable",
+      "issueStatus": "unknown",
       "isHot": true,
-      "why": "국제선 승객 4명이 국내선 청사로 내려 입국심사 없이 공항을 나갔다",
+      "why": "LH가 서울 도심에 3년간 매입임대 2만가구를 공급한다",
       "headlines": [
         {
-          "title": "[단독]국제선 승객을 국내선 청사에 내려줘… 수십 명이 심사 없이 입국...",
-          "press": "donga.com",
-          "publishedAt": "2026-09-07T19:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003746446?sid=101"
+          "title": "이성훈 LH 사장 “3년간 서울 매입임대 2만가구 공급… 부천대장지구급...",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-08T07:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001191107?sid=101"
         },
         {
-          "title": "국제선 승객을 국내선에…4명 공항 나갔다 뒤늦게 입국심사",
+          "title": "LH, 서울 도심에 3년간 매입임대 2만가구 공급",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-07T23:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016295847?sid=101"
+          "publishedAt": "2026-09-08T07:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016297832?sid=101"
         },
         {
-          "title": "\"국제선인데 왜 여기로?\"…4명은 입국심사 없이 공항 나가",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-09-07T23:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001967830?sid=102"
+          "title": "이성훈 LH 사장 \"서울 도심에 3년간 매입임대 2만호 공급\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-08T07:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014177494?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김민석 헌정회 방문",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "김민석이 헌정회를 방문해 열린 자세로 개헌 추진 뜻을 밝혔다",
+      "headlines": [
+        {
+          "title": "김민석, 헌정회 방문 “열린 자세로 개헌 추진”",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-08T08:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003997304?sid=100"
+        },
+        {
+          "title": "김민석, 野 개헌 거부에도 \"계속 추진…조건 걸림돌 아냐\"",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-08T07:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005330066?sid=100"
+        },
+        {
+          "title": "김민석 대표, 헌정회 방문",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-08T07:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016297792?sid=100"
         }
       ],
       "concentrated": [
         {
-          "keyword": "국제선 항공권",
-          "searchVolume": 12580,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "국제선 체크인 마감",
+          "keyword": "김민석",
           "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "국제선 몇시간전",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "국제선 액체류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "국제선 기내 액체류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "광주공항 국제선",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "청주공항 국제선",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김해공항 국제선",
-          "searchVolume": 14430,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "홍서범",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "아들 불륜으로 자숙했던 홍서범이 8개월 만에 콘서트로 복귀 예고",
+      "headlines": [
+        {
+          "title": "\"집 나간 '외도 아들' 양육비 소송 중인데\"…홍서범, 박정희 기념음악회...",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-08T06:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009158035?sid=103"
+        },
+        {
+          "title": "홍서범, 子 불륜 사과 이후…박정희 대통령 콘서트로 복귀 예고[셀럽이...",
+          "press": "celuvmedia.com",
+          "publishedAt": "2026-09-08T07:40:00.000Z",
+          "link": "http://www.celuvmedia.com/article.php?aid=1788850039527216006"
+        },
+        {
+          "title": "[뮤즈이슈]‘子 외도’ 홍서범, 박정희 대통령 콘서트 무대로 8개월만 ...",
+          "press": "heraldmuse.com",
+          "publishedAt": "2026-09-08T05:36:00.000Z",
+          "link": "https://m.entertain.naver.com/article/112/0003806754"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "홍서범 조갑경 자식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "홍서범 조갑경",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "홍서범 노래",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "조갑경 홍서범",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "홍서범 아들",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "홍서범 며느리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "홍서범 아들 이혼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "홍서범 조갑경 아들",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "홍서범 콘서트 일정",
+          "reason": "복귀 무대 날짜 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "홍서범 아들 소송",
+          "reason": "양육비 소송 결과 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "홍서범 사과",
+          "reason": "복귀 명분과 입장",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "홍서범 아들 이혼",
+          "reason": "불륜 이후 결말 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "김지용 출근",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "김지용 초대 중수청장 후보자가 첫 출근해 공정·중립을 강조했다",
+      "headlines": [
+        {
+          "title": "김지용 중수청장 후보자 \"수사과정서 억울한 국민 없도록 최선\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-08T05:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016297237?sid=102"
+        },
+        {
+          "title": "'첫 출근' 김지용 중수청장 후보자…\"공정·중립 중요\"",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-08T05:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005329997?sid=102"
+        },
+        {
+          "title": "\"억울한 국민 없도록\"…초대 중수청장 후보 김지용 첫 출근",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-08T05:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001967914?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "운악산",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "declining",
+      "isHot": true,
+      "why": "포천 운악산에 해발 800m 절벽길 '구름길'이 개통됐다",
+      "headlines": [
+        {
+          "title": "한북정맥 비경 만끽…포천시 '운악산 구름길' 조성",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-07T01:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016293853?sid=102"
+        },
+        {
+          "title": "포천 운악산에 '구름 위 산책로' 열렸다…신규 명소 개방",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-08T06:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005410974?sid=102"
+        },
+        {
+          "title": "포천 운악산 절경에 구름길 선봬",
+          "press": "kgnews.co.kr",
+          "publishedAt": "2026-09-08T05:38:00.000Z",
+          "link": "https://www.kgnews.co.kr/news/article.html?no=910686"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "운악산 포도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "운악산 등산코스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "가평 운악산",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "포천 운악산",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "운악산 글램핑",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "운악산 맛집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "운악산 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "가평 운악산 포도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "운악산 구름길 입장료",
+          "reason": "개통 뒤 이용료 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "운악산 구름길 코스",
+          "reason": "새 산책로 경로 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "운악산 단풍시기",
+          "reason": "가을 방문 시점 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "운악산 주차장",
+          "reason": "방문객 주차 정보",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "운악산 구름길 예약",
+          "reason": "개방 초기 예약 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "HD현대 정기선 필리핀",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "정기선이 필리핀 국방장관과 조선·방산 협력 확대를 논의했다",
+      "headlines": [
+        {
+          "title": "정기선, 필리핀 국방장관 만나 '해군 현대화' 등 장기적 협력 도모",
+          "press": "economist.co.kr",
+          "publishedAt": "2026-09-08T04:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/243/0000102791?sid=101"
+        },
+        {
+          "title": "필리핀 국방장관 만난 HD현대 정기선, 조선·방산협력 확대 논의",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-08T02:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016296717?sid=101"
+        },
+        {
+          "title": "정기선 HD현대 회장, 필리핀 국방장관과 만나 '해군 현대화' 협력 논의",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-08T02:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014176208?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "hd현대",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "베스핀글로벌",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "베스핀글로벌이 aT AI챗봇 '채티' 고도화 사업을 수주했다",
+      "headlines": [
+        {
+          "title": "베스핀글로벌, aT AI챗봇 고도화 사업 수주",
+          "press": "dt.co.kr",
+          "publishedAt": "2026-09-08T01:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/029/0003046739?sid=105"
+        },
+        {
+          "title": "베스핀글로벌, aT 수출정보 서비스 '채티' 고도화 맡는다",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-08T01:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005410765?sid=105"
+        },
+        {
+          "title": "베스핀글로벌, aT AI 챗봇 '채티' 고도화 사업자 선정…공공부문 AI 사업...",
+          "press": "etnews.com",
+          "publishedAt": "2026-09-08T06:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003464826?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 본사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 로고",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 기업정보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "베스핀글로벌 상장",
+          "reason": "수주 실적에 상장 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "aT 채티",
+          "reason": "고도화 대상 서비스 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "베스핀글로벌 실적",
+          "reason": "수주 확대 매출 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "베스핀글로벌 기업정보",
+          "reason": "수주사 정보 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "트럼프",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "트럼프가 연휴에 SNS 80여건을 쏟아내고 러·우 3자회담을 조율했다",
+      "headlines": [
+        {
+          "title": "트럼프, 이틀간 SNS 80여건 '폭주'…밈·정치공세·자화자찬 쏟아",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-08T05:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014176754?sid=104"
+        },
+        {
+          "title": "젤렌스키 \"푸틴, 11월 美선거 전 트럼프에 외교성과 안길수도\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-07T19:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016295737?sid=104"
+        },
+        {
+          "title": "트럼프, 연휴 기간 폭풍 소셜미디어… 자랑·조롱 AI 밈으로 도배",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-08T03:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003997263?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "트럼프 임기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "트럼프 이란",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "트럼프 김정은",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "트럼프 지지율",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "트럼프 탄핵",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "트럼프 북한",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "트럼프 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "트럼프 코인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "푸틴 트럼프 회담",
+          "reason": "11월 외교성과 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "트럼프 특사 성과",
+          "reason": "방문 실질 진전 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "말레이시아",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "보로노이 표적치료제 VRN11이 말레이시아 1b/2상 IND 승인을 받았다",
+      "headlines": [
+        {
+          "title": "보로노이 \"표적 치료제, 말레이시아서 IND 승인\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-08T05:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014176950?sid=102"
+        },
+        {
+          "title": "보로노이, VRN11 글로벌 임상 말레이시아로 확대",
+          "press": "fnnews.com",
+          "publishedAt": "2026-09-08T05:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005572680?sid=103"
+        },
+        {
+          "title": "보로노이, VRN11 말레이시아 임상 승인…글로벌 임상 확대",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-08T05:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006365612?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "말레이시아 환율",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "말레이시아 시간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "말레이시아 여행",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "말레이시아 항공",
+          "searchVolume": 14960,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "말레이시아 수도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "말레이시아 입국신고서",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "말레이시아 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "말레이시아 국제학교",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "말레이시아 AI 반도체",
+          "reason": "화웨이칩 도입 추이",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "미스트랄",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "삼성 주도 펀딩으로 미스트랄이 4.6조 유치, 몸값 33조 돌파",
+      "headlines": [
+        {
+          "title": "'유럽 대표 AI기업' 佛미스트랄 \"삼성전자 주도로 4.6조원 투자 유치\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-08T06:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014177185?sid=101"
+        },
+        {
+          "title": "삼성전자, 유럽 AI기업에 대규모 투자...‘미스트랄’ 30억유로 유치",
+          "press": "sedaily.com",
+          "publishedAt": "2026-09-08T06:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004659714?sid=101"
+        },
+        {
+          "title": "삼성, ‘유럽의 오픈AI’에 베팅…미스트랄 4.7조 투자판 주도",
+          "press": "inews24.com",
+          "publishedAt": "2026-09-08T06:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/031/0001056471?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "미스트랄 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "부가티 미스트랄",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "미스트랄 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "미스트랄 선글라스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "미스트랄 티셔츠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "미스트랄 ai 한국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "미스트랄 수영복",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "미스트랄 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "미스트랄 한국 진출",
+          "reason": "투자 뒤 국내 진출 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "미스트랄 AI 사용법",
+          "reason": "유럽 AI 관심 확대",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼성 미스트랄 협력",
+          "reason": "투자 목적 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "미스트랄 vs 챗gpt",
+          "reason": "성능 비교 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "삼성SDS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "삼성SDS가 10조 투자로 로봇 사업에 진출, 관제 플랫폼을 출시한다",
+      "headlines": [
+        {
+          "title": "삼성SDS, 10조 투자 승부수…이준희 대표 \"로봇·물류 투자도 속도\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-08T05:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014176686?sid=105"
+        },
+        {
+          "title": "삼성SDS, RX 사업 자신감 근거 '25년 제조 현장 노하우' [현장+]",
+          "press": "bloter.net",
+          "publishedAt": "2026-09-08T06:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/293/0000090170?sid=105"
+        },
+        {
+          "title": "이준희 삼성SDS 대표의 기조연설",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-08T02:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016296644?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "삼성sds 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 본사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 도어락",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성 sds 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 판교",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 주가전망",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "삼성SDS 주가전망",
+          "reason": "10조 투자 발표 반응",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼성SDS 로봇 플랫폼",
+          "reason": "내년 출시 제품 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "이준희 대표",
+          "reason": "신사업 이끄는 대표 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼성SDS RX 사업",
+          "reason": "신규 사업 내용 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "피씨엔",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "피씨엔이 서울 논현동에 AI센터를 개소하고 사업을 확대했다",
+      "headlines": [
+        {
+          "title": "피씨엔, 서울 논현동에 AI센터 개소…공공·법률·재정 사업 확대",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-08T01:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005410758?sid=105"
+        },
+        {
+          "title": "피씨엔, 강남 'PCN AI센터' 개소…기술개발·사업 확대 강화",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-08T05:48:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=214993"
+        },
+        {
+          "title": "피씨엔 ‘AI센터’ 가동...AI 전담 조직 강화",
+          "press": "ddaily.co.kr",
+          "publishedAt": "2026-09-08T00:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/138/0002240544?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "피씨엔 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "피씨엔 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "피씨엔 블라인드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "피씨엔 잡플래닛",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "(주)피씨엔",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "피씨엔 상장",
+          "reason": "사업 확대에 상장 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "피씨엔 AI 사업",
+          "reason": "공공·법률 확장 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "피씨엔 실적",
+          "reason": "센터 개소 뒤 성장 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "피씨엔 반도체 테스트",
+          "reason": "신규 AI 개발 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "PCN AI센터",
+          "reason": "강남 신설 조직 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "KT",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "KT가 KAIST·다임리서치와 피지컬 AI 자동화 공장 사업화에 협력한다",
+      "headlines": [
+        {
+          "title": "KT·KAIST, 피지컬 AI로 자동화 공장 만든다",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-08T01:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003997251?sid=105"
+        },
+        {
+          "title": "지구 24바퀴 길이 광케이블…\"인터넷 끊겼어요\" 신고 한 통에 KT 계열사...",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-08T07:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005330052?sid=105"
+        },
+        {
+          "title": "KT, KAIST·다임리서치와 '피지컬 AI' 사업화 '맞손'",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-08T00:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009156689?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "kt 고객센터",
+          "searchVolume": 236000,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt&g",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 인터넷",
+          "searchVolume": 72500,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt m모바일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 키즈폰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 경기일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 알뜰폰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 요금제",
+          "searchVolume": 36200,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "KT 인터넷 장애",
+          "reason": "광케이블 신고 후속 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KT 주가",
+          "reason": "AI 협력 호재 반응",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KT 무중단 네트워크",
+          "reason": "그룹사 가동 내용 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "쿤텍",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "쿤텍이 ETRI와 온디바이스 AI 모델 난독화 보안 기술을 개발한다",
+      "headlines": [
+        {
+          "title": "쿤텍-ETRI, 온디바이스 AI 정보 유출 방지 기술 개발 추진",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-07T11:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002436536?sid=105"
+        },
+        {
+          "title": "기기 안에 들어간 AI, 모델 구조도 함께 노출된다…쿤텍·ETRI ‘선택적 ...",
+          "press": "venturesquare.net",
+          "publishedAt": "2026-09-07T12:00:00.000Z",
+          "link": "https://www.venturesquare.net/1111446/"
+        },
+        {
+          "title": "쿤텍, AI 모델 난독화 기술 개발",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-09-07T07:44:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=862780"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "쿤텍 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿤텍 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿤텍 기업정보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿤텍 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿤텍(주)",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿤텍 매출액",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿤텍 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "쿤텍 사람인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "쿤텍 상장",
+          "reason": "기술개발에 상장 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "온디바이스 AI 보안",
+          "reason": "신기술 개념 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "모델 난독화",
+          "reason": "핵심 기술 검색 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "쿤텍 실적",
+          "reason": "사업 확대 성장 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -4908,7 +8038,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "용인FC 프렌들리 구단상",
@@ -4939,205 +8070,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "김승원",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "김승원이 신약 로비 의혹을 반박하며 전화 한 번·당일 문자가 다라고 했다",
-      "headlines": [
-        {
-          "title": "김승원 '식약처 로비' 정면반박…\"처장에 전화 한번·당일문자가 다\"(종...",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-07T12:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016295616?sid=102"
-        },
-        {
-          "title": "野, '김승원 신약 로비 의혹'에 \"민주당 오빠들 게이트…진상 밝혀야\"(종...",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-07T10:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014174989?sid=100"
-        },
-        {
-          "title": "[단독]제넨셀 창업주 “양씨가 김승원과 셋이 보자 해, 여야 의원 다수...",
-          "press": "donga.com",
-          "publishedAt": "2026-09-07T19:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003746420?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김승원 법무부장관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김승원 국회의원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김승원 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김승원 양모씨",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김승원 양수진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김승원 프로필",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김승원 식약처",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김승원 청문회 일정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "김승원 청문회",
-          "reason": "개최 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김승원 임명",
-          "reason": "장관 임명 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "세종문화회관",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "세종문화회관이 박재홍·국립심포니와 '누구나 클래식' 공연을 연다",
-      "headlines": [
-        {
-          "title": "[단독]‘차량진입금지’ 팻말 세워놓고 “기관장 차는 주차도 된다”는...",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-09-07T21:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003469030?sid=102"
-        },
-        {
-          "title": "박재홍 피아노 연주를 1000원에?...세종문화회관 '누구나 클래식'",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-07T02:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005329435?sid=103"
-        },
-        {
-          "title": "[공연소식] 세종문화회관, 국립심포니와 '누구나 클래식' 공연",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-07T01:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016293851?sid=103"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "세종문화회관 대극장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "세종문화회관 전시",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "세종문화회관 맛집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "세종문화회관 대극장 좌석",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "세종문화회관 주차",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "세종문화회관 공연",
-          "searchVolume": 3800,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "세종문화회관 시야",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "세종문화회관 미술관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "세종문화회관 좌석",
-          "reason": "시야 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "한국 핵잠 도입",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "IAEA가 한국이 핵추진잠수함 도입 협의 의향을 통보하고 신고자료를 제출했다고 밝혔다",
-      "headlines": [
-        {
-          "title": "IAEA \"한국 정부, 핵잠 도입 위한 협의 의향 통보\"",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-09-07T22:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001967808?sid=100"
-        },
-        {
-          "title": "IAEA \"韓, 핵잠 도입위한 협의 의향 통보…관련 신고자료 제출\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-07T21:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016295796?sid=100"
-        },
-        {
-          "title": "韓, IAEA에 핵잠 협의 의향 통보했다…”신고자료 제출”",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-09-07T23:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001871574?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "황정민 오늘",
@@ -5231,202 +8165,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 2
-    },
-    {
-      "issue": "용준형",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "현아와 결혼한 용준형이 4개월 만에 LA에서 수수해진 근황을 공개했다",
-      "headlines": [
-        {
-          "title": "용준형, 무표정에 무채색 근황…4개월만 근황 공개",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-07T05:21:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014174040"
-        },
-        {
-          "title": "'현아와 결혼' 용준형, 달라진 비주얼…\"하얘지고 살 빠졌다\"",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-07T13:05:00.000Z",
-          "link": "https://m.entertain.naver.com/article/008/0005410579"
-        },
-        {
-          "title": "'현아♥' 용준형, 4개월 만 근황…결혼 후 수수해진 패션[셀럽샷]",
-          "press": "celuvmedia.com",
-          "publishedAt": "2026-09-07T14:50:00.000Z",
-          "link": "http://www.celuvmedia.com/article.php?aid=1788792550527171005"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "용준형 현아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "용준형 버닝썬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "용준형 던",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "용준형 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "현아 용준형",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "비스트 용준형",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "용준형 비스트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "용준형 본명",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "용준형 신혼집",
-          "reason": "LA 거주 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "용준형 컴백",
-          "reason": "활동 재개 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "용준형 현아 2세",
-          "reason": "결혼 후속",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "앤트로픽",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "상장을 앞둔 앤트로픽이 11개월간 700조원 컴퓨팅 계약과 14.8GW를 확보했다",
-      "headlines": [
-        {
-          "title": "삼성SDS, 오픈AI·앤트로픽 손잡고 로봇까지…AX 영토 넓힌다",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-08T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016295963?sid=105"
-        },
-        {
-          "title": "올트먼 \"韓기업 AI 선도 지원\"…삼성SDS, 오픈AI·앤트로픽 협력",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-08T00:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014175459?sid=105"
-        },
-        {
-          "title": "\"앤트로픽, 11개월간 체결한 컴퓨팅 계약 700조원 달해\"",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-07T00:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005329360?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "앤트로픽 상장 날짜",
-          "reason": "IPO 시점 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 공모가",
-          "reason": "가격 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 수혜주",
-          "reason": "국내 관련주",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 지분구조",
-          "reason": "투자자 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 2,
+      "carried": true
     },
     {
       "issue": "하이드라퓨전",
@@ -5479,79 +8219,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "깃허브",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "엔비디아가 'AI 깃허브' 허깅페이스를 17조원에 인수했다",
-      "headlines": [
-        {
-          "title": "엔비디아, ‘AI 깃허브’ 허깅페이스 17조원에 인수",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-04T01:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0003996663?sid=105"
-        },
-        {
-          "title": "마이크로소프트 파울러 “타이핑 코드는 끝났다”…깃허브 코파일럿, P...",
-          "press": "wikitree.co.kr",
-          "publishedAt": "2026-09-07T17:12:00.000Z",
-          "link": "https://www.wikitree.co.kr/articles/1157908"
-        },
-        {
-          "title": "[AI프리즘] 북한 김수키, AI 코딩 에이전트까지 썼다…해킹 자동화",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-06T23:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016293283?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "깃허브 사용법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "깃허브 타임라인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "깃허브 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "깃허브 학생인증",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "깃허브 코파일럿",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "깃허브 사이트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "깃허브 회원가입",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "깃허브 계정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "씽크포비엘",
@@ -5633,7 +8302,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "셀렉트스타",
@@ -5720,7 +8390,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "스페이스XAI",
@@ -5767,38 +8438,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "과기정통부-중기부",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "과기정통부와 중기부가 중소 제조현장에 피지컬 AI '공장장' 확산 지원체계를 구축한다",
-      "headlines": [
-        {
-          "title": "\"로봇 몇 대, 어디로 움직일까\"…중소 제조현장에 'AI 공장장' 뜬다",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-07T08:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014174811?sid=105"
-        },
-        {
-          "title": "중소 제조공장에 피지컬 AI 확산…과기정통부·중기부 지원체계 구축",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-07T07:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009155680?sid=105"
-        },
-        {
-          "title": "중기부, 과기정통부 “피지컬 AI로 중소제조 현장 미래 연다”",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-09-07T07:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001190840?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "쿼링에이아이",
@@ -5844,7 +8485,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "윤종훈",
@@ -6516,112 +9158,6 @@
       "concentrated": [
         {
           "keyword": "김현정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "서울런 5주년 성과공유회",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": null,
-      "headlines": [
-        {
-          "title": "서울런 5주년 성과공유회…윤혜정·서문민경 홍보대사 위촉",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-06T05:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014172019?sid=102"
-        },
-        {
-          "title": "서울런 5주년 성과공유회",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-06T06:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009153597?sid=102"
-        },
-        {
-          "title": "‘오세훈표’ 서울런 출범 5년…가입자 9000명서 4.4만명으로",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-06T05:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006364441?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "서울런",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "김동아",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "한동훈 의원 고발하는 김동아 의원",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-06T05:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009153443?sid=100"
-        },
-        {
-          "title": "김동아, 한동훈 향해 \"수사기록 불법 유출‥공수처 고발\"",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-09-06T06:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001522294?sid=100"
-        },
-        {
-          "title": "김동아 민주당 의원, 수사기록 불법 유출 한동훈 고발 기자회견",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-06T05:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014172037?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김동아 가수 나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김동아 가수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김동아 의원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김동아 배우자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김동아 의원실",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김동아 국회의원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김동아 의원 프로필",
           "searchVolume": null,
           "origin": "autocomplete"
         }
