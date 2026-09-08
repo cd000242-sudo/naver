@@ -23,6 +23,15 @@ export interface ContextualImagePromptInput {
    * single owner of viewpoint; undefined (or a thumbnail) keeps the generic composition.
    */
   viewpointIndex?: number;
+  /**
+   * [2026-09-08] 엔진이 프롬프트 앞머리에 자기 카메라 각도를 붙이는가.
+   *
+   * 실측: openai 경로는 생성기가 "bird-eye view..." 를 앞에 박는데, 브리프는
+   * 그것을 모른 채 "가장 알맞은 시점을 골라라"(GENERIC_COMPOSITION_LINE)를 뒤에
+   * 남겼다. 한 프롬프트 안에 상반된 두 지시가 들어가 각도 지시의 힘이 깎였다.
+   * 이 값이 true 면 브리프는 카메라 줄을 아예 쓰지 않는다 — 소유자는 하나다.
+   */
+  engineOwnsCamera?: boolean;
 }
 
 const GENERIC_COMPOSITION_LINE = '- Choose the clearest viewpoint for the section action: close detail for inspection, medium shot for hands-on action, or wide shot only when spatial layout is the subject.';
@@ -30,6 +39,7 @@ const GENERIC_COMPOSITION_LINE = '- Choose the clearest viewpoint for the sectio
 /** Camera line for the section, or null when the generic composition should stay. */
 function resolveViewpointLine(input: ContextualImagePromptInput): string | null {
   if (input.isThumbnail) return null;
+  if (input.engineOwnsCamera) return null;
   const index = input.viewpointIndex;
   if (typeof index !== 'number' || !Number.isFinite(index)) return null;
   const safe = Math.abs(Math.trunc(index)) % IMAGE_VIEWPOINT_HINTS.length;
@@ -512,7 +522,8 @@ export function buildContextualImagePrompt(input: ContextualImagePromptInput): s
     '- The section action or diagnostic detail is the dominant visual event; supporting surroundings stay minimal and relevant.',
     '',
     'COMPOSITION:',
-    resolveViewpointLine(input) || GENERIC_COMPOSITION_LINE,
+    // 엔진이 각도를 앞머리에 박는 경우 여기서는 카메라를 말하지 않는다(지시 충돌 방지).
+    input.engineOwnsCamera ? '' : (resolveViewpointLine(input) || GENERIC_COMPOSITION_LINE),
     '- Keep the required subject sharp, unobstructed, and visually dominant with natural depth and realistic scale.',
     '',
     referencePolicy,

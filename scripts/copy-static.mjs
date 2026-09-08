@@ -504,6 +504,7 @@ try {
     'issueCollectMode.js',
     // ✅ [공식문서 캡처] 경제·지원금 글 공식 페이지 캡처 모드
     'docCaptureMode.js',
+    'headingImageContext.js',
     'headingImageGen.js',
     'imageDisplayGrid.js',
     'accountSettingsManager.js',  // ✅ [2026-03-24] 계정별 설정 관리 (licenseUI보다 먼저 로드 필수 - onAccountLogin/onAccountLogout 의존)

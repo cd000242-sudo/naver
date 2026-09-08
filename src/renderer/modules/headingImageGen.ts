@@ -3,6 +3,7 @@
 // modules/headingImageGen.ts
 // ============================================
 import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
+import { buildHeadingImageContext, looksLikeUntranslatedPrompt } from './headingImageContext.js';
 import { createShoppingCollectedPublishImages } from '../../image/shoppingReferenceGeneration.js';
 import { getSubImageMode } from '../utils/subImageMode.js';
 import { beginImagePreviewBatch, endImagePreviewBatch, setImagePreviewBatchSlot } from './imagePreviewBatch.js';
@@ -1839,7 +1840,9 @@ export function initHeadingImageGeneration(): void {
         try {
         for (let i = 0; i < emptyHeadings.length; i++) {
           const heading = emptyHeadings[i];
-          const originalIndex = headings.findIndex((h: any) => h.title === heading.title);
+          // [2026-09-08] 못 찾으면 -1 이 그대로 다양성 시드로 흘러 각도가 엉킨다. 루프 순번으로 받는다.
+          const foundIndex = headings.findIndex((h: any) => h.title === heading.title);
+          const originalIndex = foundIndex >= 0 ? foundIndex : i;
           setImagePreviewBatchSlot(i);
 
           appendLog(`📸 [${i + 1}/${emptyHeadings.length}] "${heading.title}" 이미지 생성 중...`, 'images-log-output');
@@ -5011,8 +5014,52 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       (document.getElementById('unified-title') as HTMLInputElement)?.value?.trim() ||
       (document.getElementById('image-title') as HTMLInputElement)?.value?.trim() || '';
 
-    // ✅ 인덱스 기반 프롬프트 생성 (1번=썸네일, 2번부터=NEVER TEXT)
-    const finalPrompt = generateImagePromptByIndex(resolvedHeadingTitle, headingIndex, blogTitle);
+    /*
+     * [2026-09-08] 프롬프트와 본문 근거를 일괄 생성 경로와 같은 수준으로 올린다.
+     *
+     * 종전: generateImagePromptByIndex → generateEnglishPromptForHeadingSync(사전 치환)
+     *   결과가 한영 혼종이라("대상 check confirm과 application apply은 어디서 하나")
+     *   모델이 읽는 건 모든 소제목에 동일한 꼬리뿐이었고, 그래서 무슨 소제목이든
+     *   같은 스톡 장면이 나왔다(사장님 실측 6장 전부 책상·노트북).
+     * 지금: 소제목 본문을 근거로 LLM 프롬프트를 받고, 실패하면 종전 값으로 되돌린다.
+     */
+    const headingContext = buildHeadingImageContext(
+      (window as any).currentStructuredContent,
+      resolvedHeadingTitle,
+      blogTitle,
+    );
+    const syncPrompt = generateImagePromptByIndex(resolvedHeadingTitle, headingIndex, blogTitle);
+    let finalPrompt = syncPrompt;
+    // 나노바나나 썸네일은 한글 제목을 그림 안에 렌더링하는 전용 프롬프트라 그대로 둔다.
+    const isNanoBananaThumbnail = headingIndex === 0 && Boolean(blogTitle)
+      && ((document.getElementById('image-source-select') as HTMLSelectElement)?.value === 'nano-banana-pro');
+    if (!isNanoBananaThumbnail) {
+      try {
+        const aiPrompt = String(await generateEnglishPromptForHeading(
+          resolvedHeadingTitle,
+          headingContext.globalSubject || undefined,
+          undefined,
+          headingContext.sectionContent || undefined,
+        ) || '').trim();
+        if (aiPrompt && !looksLikeUntranslatedPrompt(aiPrompt)) {
+          finalPrompt = `${aiPrompt}, NEVER include any text, letters, words, numbers, watermarks, or typography in the image, pure visual content only, clean image without any written elements`;
+          appendLog(`  🧠 본문 근거로 프롬프트 생성 (${headingContext.sectionContent.length}자 근거)`, 'images-log-output');
+        } else {
+          appendLog(`  ⚠️ AI 프롬프트가 비었거나 한글이 남아 기존 방식으로 진행합니다.`, 'images-log-output');
+        }
+      } catch (promptError) {
+        appendLog(`  ⚠️ AI 프롬프트 생성 실패, 기존 방식으로 진행: ${(promptError as Error).message}`, 'images-log-output');
+      }
+    }
+
+    /** 모든 엔진 요청이 같은 재료를 싣는다 — 순번·제목·본문 근거. */
+    const imageContextFields = {
+      diversityIndex: headingIndex,
+      articleTitle: headingContext.articleTitle || undefined,
+      globalSubject: headingContext.globalSubject || undefined,
+      articleContext: headingContext.articleContext || undefined,
+      sectionContent: headingContext.sectionContent || undefined,
+    };
 
     appendLog(`🎨 "${resolvedHeadingTitle}" 이미지 생성 시작 (${imageSource}, ${headingIndex === 0 ? '썸네일' : 'NEVER TEXT'})...`, 'images-log-output');
 
@@ -5053,6 +5100,8 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
         provider: imageSource,
         imageModel: imageSource === 'openai-image' ? 'gpt-image-2' : undefined,
         items: [{
+          // [2026-09-08] 소제목 순번을 실어야 각도·조명·색이 돈다 — 없으면 생성기가 늘 0번(부감)을 쓴다.
+          ...imageContextFields,
           heading: resolvedHeadingTitle,
           prompt: finalPrompt,
           isThumbnail: headingIndex === 0,
@@ -5075,7 +5124,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
     } else if (imageSource === 'prodia') {
       const imageResult = await generateImagesWithCostSafety({
         provider: 'prodia',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt }],
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, ...imageContextFields }],
         postTitle: blogTitle,
         isFullAuto: true,
       });
@@ -5088,7 +5137,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       const stabilityModel = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
       const imageResult = await generateImagesWithCostSafety({
         provider: 'stability',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt }],
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, ...imageContextFields }],
         postTitle: blogTitle,
         isFullAuto: true,
         model: stabilityModel
@@ -5102,7 +5151,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       // ✅ Fal.ai: 전용 파라미터와 함께 호출
       const imageResult = await generateImagesWithCostSafety({
         provider: 'falai',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt }],
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, ...imageContextFields }],
         postTitle: blogTitle,
         isFullAuto: true,
       });
@@ -5115,7 +5164,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       // ✅ [2026-02-23] Leonardo AI: 개별 재생성 핸들러 추가
       const imageResult = await generateImagesWithCostSafety({
         provider: 'leonardoai',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen }],
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen, ...imageContextFields }],
         postTitle: blogTitle,
         isFullAuto: true,
       });
@@ -5128,7 +5177,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       // ✅ [2026-02-23] OpenAI DALL-E: 개별 재생성 핸들러 추가
       const imageResult = await generateImagesWithCostSafety({
         provider: 'openai-image',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen }],
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen, ...imageContextFields }],
         postTitle: blogTitle,
         isFullAuto: true,
       });
@@ -5142,7 +5191,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       console.log(`[ImageGen] ✨ ImageFX (Google Labs, 제한 가능) 개별 재생성`);
       const imageResult = await generateImagesWithCostSafety({
         provider: 'imagefx',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen }],
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen, ...imageContextFields }],
         postTitle: blogTitle,
         isFullAuto: true,
       });
@@ -5156,7 +5205,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       console.log(`[ImageGen] 🍌 Flow (Nano Banana Pro, AI Pro 무료) 개별 재생성`);
       const imageResult = await generateImagesWithCostSafety({
         provider: 'flow',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen }],
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen, ...imageContextFields }],
         postTitle: blogTitle,
         isFullAuto: true,
       });
@@ -5170,7 +5219,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       console.log(`[ImageGen] ⚡ DeepInfra FLUX 개별 재생성`);
       const imageResult = await generateImagesWithCostSafety({
         provider: 'deepinfra',
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen }],
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen, ...imageContextFields }],
         postTitle: blogTitle,
         isFullAuto: true,
       });
@@ -5185,7 +5234,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       console.log(`[ImageGen] 선택 엔진으로 개별 재생성: ${imageSource}`);
       const imageResult = await generateImagesWithCostSafety({
         provider: imageSource,
-        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen }],
+        items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen, ...imageContextFields }],
         postTitle: blogTitle,
         isFullAuto: true,
       });

@@ -157,6 +157,8 @@ export async function generateWithOpenAIImage(
                 // Promise identity preservation only when the reference was
                 // actually loaded into this OpenAI request.
                 hasReferenceImage: Boolean(cachedReferenceImage),
+                // 이 생성기는 아래에서 dh.angle 을 프롬프트 앞머리에 붙인다 — 카메라 소유자는 여기다.
+                engineOwnsCamera: true,
             });
 
             // ✅ [v1.5.5] gpt-image-2는 한글 네이티브 지원 — 한글 제거 제거
@@ -175,7 +177,7 @@ export async function generateWithOpenAIImage(
                 ? Math.abs(Math.trunc(item.diversityIndex as number))
                 : i;
             const dh = getImageDiversityHints(diversitySeed);
-            console.log(`[OpenAI-Image] 🎲 다양성[${diversitySeed}]: 📐${dh.angle.split(',')[0]} | 💡${dh.lighting.split(',')[0]} | 🎨${dh.color.split(',')[0]}`);
+            console.log(`[OpenAI-Image] 🎲 다양성[${diversitySeed}]: 📐${dh.angle.split(',')[0]} | 🖼️${dh.framing.split(',')[0]} | 💡${dh.lighting.split(',')[0]} | 🔍${dh.focus.split(',')[0]} | 🎨${dh.color.split(',')[0]}`);
 
             // ✅ 스타일 프롬프트 적용 (stickman/roundy/2d/disney 등)
             const stylePromptText = STYLE_PROMPT_MAP[imageStyle] || STYLE_PROMPT_MAP['realistic'];
@@ -202,10 +204,14 @@ export async function generateWithOpenAIImage(
             if (isShoppingConnect) {
                 prompt = `${textDirective} Based on the provided product reference image, create a realistic premium product photograph that specifically visualizes the current article section. ${dh.angle}, ${dh.framing}, ${prompt}, ${dh.lighting}, ${dh.focus}. Include a Korean person only when the section topic naturally requires a person using, wearing, holding, or interacting with the product; otherwise use a product-only detail, installation, comparison, component, or environment scene. Maintain the product's exact appearance and design from the reference.`;
             } else if (!isRealistic) {
-                prompt = `${textDirective} ${stylePromptText}, ${prompt}.`;
+                // [2026-09-08] 스타일 분기에도 각도를 싣는다 — 종전에는 스틱맨/라운디/2D/빈티지가
+                //   각도 지시를 아예 못 받아 순번을 실어도 구도가 고정됐다(실측).
+                prompt = `${textDirective} ${stylePromptText}, ${dh.angle}, ${prompt}, ${dh.framing}.`;
             } else {
                 const koreanPersonDirective = 'If any person appears in this image, they must be Korean with East Asian features. ';
-                prompt = `${textDirective} ${dh.angle}, ${koreanPersonDirective}${prompt}, ${dh.color}.`;
+                // [2026-09-08] 종전에는 angle+color 2축만 실렸다. 로그는 조명까지 찍어
+                //   도는 것처럼 보였지만 프롬프트에는 없었다(실측). 6축 중 5축을 싣는다.
+                prompt = `${textDirective} ${dh.angle}, ${dh.framing}, ${koreanPersonDirective}${prompt}, ${dh.lighting}, ${dh.focus}, ${dh.color}.`;
             }
 
             // 이미지 비율 설정
@@ -249,6 +255,19 @@ export async function generateWithOpenAIImage(
                     };
                     if (isDallE3) {
                         requestBody.response_format = 'b64_json'; // dall-e-3는 명시 필요
+                    }
+
+                    /*
+                     * [2026-09-08] 실제로 나가는 프롬프트를 남긴다.
+                     * 종전에는 어떤 로그에도 최종 프롬프트가 없어 "왜 다 비슷하냐" 를
+                     * 진단하려면 코드를 읽고 재현 테스트를 짜야 했다. 카메라/스타일 지시가
+                     * 실렸는지는 이 한 줄로 끝난다. 브리프 본문은 길어 앞뒤만 남긴다.
+                     */
+                    {
+                        const flat = String(prompt).replace(/\s+/gu, ' ').trim();
+                        const head = flat.slice(0, 220);
+                        const tail = flat.length > 400 ? ` … ${flat.slice(-160)}` : '';
+                        console.log(`[OpenAI-Image] 📝 최종 프롬프트(${flat.length}자): ${head}${tail}`);
                     }
 
                     /*

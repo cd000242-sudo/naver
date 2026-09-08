@@ -518,6 +518,10 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         isShoppingConnect: options.isShoppingConnect === true,
         hasReferenceImage: options.isShoppingConnect === true && Boolean(representativeReferenceUrl),
         viewpointIndex,
+        // [2026-09-08] 각도를 스스로 돌리는 엔진에는 브리프가 카메라 줄을 넣지 않는다.
+        //   종전에는 생성기가 앞머리에 각도를 박고 브리프가 뒤에서 "알맞은 시점을 골라라"
+        //   라고 해 지시가 충돌했다(실측).
+        engineOwnsCamera: engineRotatesViewpoint(normalizedProvider),
       });
 
       return {
