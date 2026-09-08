@@ -2223,6 +2223,34 @@ function LewordStyles() {
             .lw-picks-btn { font: inherit; font-size: 12px; padding: 3px 9px; border-radius: 6px; border: 1px solid color-mix(in srgb, currentColor 22%, transparent); background: transparent; color: inherit; cursor: pointer; }
             .lw-picks-btn:hover { background: color-mix(in srgb, currentColor 8%, transparent); }
             .lw-picks-more { margin: 6px 8px 0; font-size: 12px; opacity: 0.65; }
+            /* 오늘의 글감 — NOW/NEXT/ALWAYS 브리프 카드 */
+            .lw-briefs-group { margin-top: 18px; }
+            .lw-briefs-group-head { display: flex; gap: 10px; align-items: baseline; margin: 0 0 8px; }
+            .lw-briefs-group-head span { font-size: 12.5px; opacity: 0.68; }
+            .lw-briefs-timing { font-size: 12px; letter-spacing: 0.08em; padding: 2px 9px; border-radius: 4px; font-weight: 700; }
+            .lw-briefs-timing.is-now { background: color-mix(in srgb, #f87171 18%, transparent); color: #f87171; }
+            .lw-briefs-timing.is-next { background: color-mix(in srgb, #7dd3fc 18%, transparent); color: #7dd3fc; }
+            .lw-briefs-timing.is-always { background: color-mix(in srgb, #a3e635 16%, transparent); color: #a3e635; }
+            .lw-briefs-card { border: 1px solid color-mix(in srgb, currentColor 12%, transparent); border-radius: 10px; background: color-mix(in srgb, currentColor 3%, transparent); padding: 12px 14px; margin-bottom: 8px; }
+            .lw-briefs-card-head { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; justify-content: space-between; }
+            .lw-briefs-card-head h3 { margin: 0; font-size: 15.5px; letter-spacing: -0.01em; text-wrap: balance; }
+            .lw-briefs-star { color: #ffa500; margin-right: 6px; }
+            .lw-briefs-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+            .lw-briefs-chips .lw-picks-chip { margin-left: 0; }
+            .lw-briefs-field { background: color-mix(in srgb, currentColor 8%, transparent); color: inherit; opacity: 0.8; }
+            .lw-briefs-type { background: color-mix(in srgb, #c084fc 16%, transparent); color: #c084fc; }
+            .lw-briefs-fit.is-높음 { background: color-mix(in srgb, #03c75a 16%, transparent); color: #03c75a; }
+            .lw-briefs-fit.is-보통 { background: color-mix(in srgb, #ffa500 16%, transparent); color: #ffa500; }
+            .lw-briefs-fit.is-낮음 { background: color-mix(in srgb, #f87171 16%, transparent); color: #f87171; }
+            .lw-briefs-fit.is-미측정 { background: color-mix(in srgb, currentColor 8%, transparent); color: inherit; opacity: 0.7; }
+            .lw-briefs-dl { display: grid; grid-template-columns: 96px 1fr; gap: 4px 10px; margin: 10px 0 0; font-size: 13px; line-height: 1.5; }
+            .lw-briefs-dl dt { font-size: 11.5px; opacity: 0.6; letter-spacing: 0.02em; padding-top: 2px; }
+            .lw-briefs-dl dd { margin: 0; }
+            .lw-briefs-foot { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin-top: 10px; font-size: 12.5px; opacity: 0.85; }
+            .lw-briefs-foot a { color: inherit; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, currentColor 40%, transparent); }
+            .lw-briefs-facts a { margin-left: 6px; }
+            .lw-briefs-foot .lw-picks-btn { margin-left: auto; }
+            @media (max-width: 640px) { .lw-briefs-dl { grid-template-columns: 1fr; gap: 2px; } .lw-briefs-dl dt { margin-top: 6px; } }
         `}</style>
     );
 }
