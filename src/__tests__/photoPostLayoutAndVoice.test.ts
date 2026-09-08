@@ -81,3 +81,56 @@ describe('3) 감정이 담긴 문장 요구', () => {
     expect(builder).toMatch(/감정을 위해 없는 사실을 만들지 말 것/);
   });
 });
+
+/**
+ * [2026-09-09 사장님] "소제목도 내 경험과 어우러져 문장형으로 깔끔하게 나오면 좋겠어",
+ * "문장형으로 하되 어색하면 안 된다고 끝맺음은 정확하거나 여운이 남게".
+ *
+ * 실측 발행글 소제목: "근포땅굴 도착 / 역광 속 땅굴 / 점심 꼬막 한상 / 오후 매미성 풍경"
+ * — 전부 명사 라벨이었다. 뿌리는 프롬프트의 "소제목(##)은 2~4어절로 명확하게".
+ */
+describe('4) 사진 글 소제목 — 문장형 + 자연스러운 끝맺음', () => {
+  const basePrompt = readFileSync(
+    new URL('../prompts/imageNarrative/base.prompt', import.meta.url),
+    'utf8',
+  );
+  const builder = read('imageNarrative/narrativeBuilder/builder.ts');
+  const repair = read('content/headingStyleRepair.ts');
+
+  it('2~4어절 명사 라벨 규칙이 사라졌다 (회귀 잠금)', () => {
+    expect(basePrompt).not.toMatch(/소제목\(##\)은 2~4어절로 명확하게\./);
+    expect(basePrompt).not.toMatch(/"heading": "소제목 \(2~4어절\)"/);
+  });
+
+  it('문장형 + 글자수 기준을 준다', () => {
+    expect(basePrompt).toMatch(/문장형\*\*으로 쓴다 \(12~30자\)/);
+    expect(builder).toMatch(/\[소제목\][\s\S]*?문장형\(12~30자\)/);
+  });
+
+  it('끝맺음 두 갈래(정확한 종결 / 여운 있는 체언 종결)를 명시한다', () => {
+    for (const source of [basePrompt, builder]) {
+      expect(source).toMatch(/정확한 종결/);
+      expect(source).toMatch(/여운 있는 체언 종결|여운 있는 체언/);
+    }
+  });
+
+  it('모든 소제목을 같은 종결로 통일하지 못하게 막는다', () => {
+    expect(basePrompt).toMatch(/같은 종결로 통일하지 않는다/);
+    expect(builder).toMatch(/같은 종결로 통일하지 말고/);
+  });
+
+  it('어색함을 구체적으로 금지한다 (번역투·광고·상투구)', () => {
+    expect(basePrompt).toMatch(/번역투/);
+    expect(basePrompt).toMatch(/광고 문구/);
+    expect(basePrompt).toMatch(/정보성 상투구/);
+  });
+
+  it('소제목에도 사진에 없는 사실을 넣지 못하게 한다', () => {
+    expect(basePrompt).toMatch(/소제목에도 사진에 없는 사실을 넣지 않는다/);
+  });
+
+  it('명사구 보정기가 사진 글 소제목을 되돌리지 않는다', () => {
+    // 9/3 에 검색형 글에서 문장형을 걷어낸 보정기다. 사진 글은 정반대 요청이라 제외해야 한다.
+    expect(repair).toMatch(/value === 'image-narrative'\) return false;/);
+  });
+});
