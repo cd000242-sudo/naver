@@ -81,10 +81,12 @@ const HOME_LIVE_CACHE_KEY = 'leaderspro.home.sourceSignals.v1';
 const SOURCE_LANE_CONFIGS: SourceLaneConfig[] = [
     // 사장님 2026-09-06: "인기 서브탭 따로, 네이버는 바꿔주고, 구글 서브탭 그대로."
     // 인기 = 네이트 실시간 이슈(분 단위 원본), 구글 = 트렌드 급상승 RSS. 둘 다 받은 그대로.
-    { id: 'popular', label: '인기', accent: '#ff8a3d', description: '실시간 이슈 키워드 원본 그대로' },
-    { id: 'naver', label: '네이버', accent: '#2ed36f', description: '실시간 검색과 블로그 수요' },
+    { id: 'popular', label: '인기', accent: '#ff8a3d', description: '네이트 실시간 이슈 원본 그대로' },
+    // 네이버는 2021년 실검 폐지 뒤 공식 원천이 없다 — signal.bz(뉴스 기반 20~30분 배치)가 대용이다. 출처를 숨기지 않는다.
+    { id: 'naver', label: '네이버', accent: '#2ed36f', description: 'signal.bz 뉴스 기반 실시간(네이버 실검 대용)' },
     { id: 'google', label: '구글', accent: '#8ab4ff', description: '구글 트렌드 급상승 그대로' },
-    { id: 'daum', label: '다음', accent: '#4d93ff', description: '생활/뉴스 검색 신호' },
+    // 2026-09-09 실측: 판다랭크 '실시간' 탭 = 다음 실시간 트렌드(2026-03 부활, 10분 갱신). 원본 그대로.
+    { id: 'daum', label: '다음', accent: '#4d93ff', description: '다음 실시간 트렌드 원본 그대로(10분 갱신)' },
     { id: 'nate', label: '네이트', accent: '#ff6b6b', description: '이슈와 방송 검색 흐름' },
     { id: 'zum', label: '줌', accent: '#f4c95d', description: '포털 이슈 보조 신호' },
     { id: 'sports', label: '스포츠', accent: '#5aa9ff', description: '스포츠 이슈와 선수 검색 흐름' },
@@ -304,6 +306,14 @@ async function overlayHotLanes(lanes: SourceLane[]): Promise<SourceLane[]> {
                     ...lane,
                     items: toItems('google', hot.google.items, 'Google 트렌드'),
                     updatedAt: hot.google.updatedAt ? new Date(hot.google.updatedAt).toISOString() : lane.updatedAt,
+                };
+            }
+            if (lane.id === 'daum' && hot.daum) {
+                return {
+                    ...lane,
+                    items: toItems('daum', hot.daum.items, '다음 실시간 트렌드'),
+                    // 다음이 목록에 찍어 준 갱신 시각을 우선한다 — 우리가 받은 시각이 아니다.
+                    updatedAt: hot.daum.sourceUpdatedAt ? new Date(hot.daum.sourceUpdatedAt).toISOString() : (hot.daum.updatedAt ? new Date(hot.daum.updatedAt).toISOString() : lane.updatedAt),
                 };
             }
             return lane;

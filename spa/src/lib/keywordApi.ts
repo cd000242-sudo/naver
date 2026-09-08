@@ -405,6 +405,8 @@ export const fetchHotKeywords = () =>
         lanes: {
             popular?: { updatedAt: number | null; items: HotLaneItem[] };
             google?: { updatedAt: number | null; items: HotLaneItem[] };
+            /** 다음 실시간 트렌드(2026-03 부활, 10분 갱신) — 판다랭크 '실시간' 탭이 쓰는 바로 그 원천(2026-09-09 실측) */
+            daum?: { updatedAt: number | null; sourceUpdatedAt?: number | null; items: HotLaneItem[] };
         } | null;
         note?: string;
     }>('hot-keywords', {});

@@ -90,7 +90,7 @@ export default function RealtimeStrip({ measuredKeys, onPick, data: injected }: 
             <div className="lw-realtime-head">
                 <strong>지금 실시간</strong>
                 <span className="lw-realtime-meta">
-                    소스 기준 {agoText(sourceAge)} · 5분마다 다시 받음
+                    signal.bz(뉴스 기반) 소스 기준 {agoText(sourceAge)} · 5분마다 다시 받음
                 </span>
             </div>
             <div className="lw-realtime-items">

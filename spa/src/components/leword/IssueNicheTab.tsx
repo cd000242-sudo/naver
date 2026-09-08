@@ -146,7 +146,7 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                 const pool: Array<{ keyword: string; rank: number; ageMs: number | null }> = [];
                 for (const it of (rt?.ok && rt.data?.items) || []) pool.push({ keyword: it.keyword, rank: it.rank, ageMs: it.seenAgeMs });
                 const lanes = hot?.ok ? hot.data?.lanes : null;
-                for (const laneId of ['popular', 'google'] as const) {
+                for (const laneId of ['popular', 'google', 'daum'] as const) {
                     for (const it of (lanes?.[laneId]?.items) || []) pool.push({ keyword: it.keyword, rank: it.rank, ageMs: it.seenAgeMs });
                 }
                 setLivePool(pool);
