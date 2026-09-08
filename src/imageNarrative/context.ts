@@ -5,7 +5,10 @@ const CONTEXT_LIMITS = {
   mainPeople: 180,
   place: 180,
   occasion: 180,
-  notes: 1000,
+  // [2026-09-09] 사장님 요청으로 입력칸을 키우면서 함께 올렸다.
+  //   화면 maxlength(2000) 와 반드시 같아야 한다 — 어긋나면 여기서 조용히 잘린다.
+  //   주의: notes 는 Vision 호출마다 붙는다(사진 수만큼 곱해진다). 무한정 키우지 말 것.
+  notes: 2000,
 } as const;
 
 const CONTEXT_LABELS: Array<readonly [keyof ImageNarrativeContext, string]> = [

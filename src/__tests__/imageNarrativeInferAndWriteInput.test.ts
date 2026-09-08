@@ -54,15 +54,17 @@ describe('normalizeInferAndWritePayload', () => {
     });
   });
 
+  // [2026-09-09] 한도 1000 -> 2000 (사장님 요청으로 입력칸을 키우면서 함께 올림).
+  //   화면 maxlength 와 같은 값이어야 한다 — imageNarrativeNotesField.test 가 둘을 대조한다.
   it('limits long photo context memo text', () => {
     const normalized = normalizeInferAndWritePayload({
       images: [image('a'), image('b'), image('c')],
       context: {
-        notes: 'a'.repeat(1200),
+        notes: 'a'.repeat(2400),
       },
     });
 
-    expect(normalized.context?.notes).toHaveLength(1000);
+    expect(normalized.context?.notes).toHaveLength(2000);
   });
 
   it('rejects fewer than 3 images', () => {
