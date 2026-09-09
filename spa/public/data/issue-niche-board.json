@@ -1,10 +1,10 @@
 {
-  "publishedAt": "2026-09-09T08:54:21.002Z",
+  "publishedAt": "2026-09-09T14:21:41.025Z",
   "generator": "issue-niche-board",
   "schedule": "매일 07·13·19시(KST) 갱신",
   "measured": {
-    "issues": 18,
-    "candidates": 240,
+    "issues": 17,
+    "candidates": 213,
     "niche": 0,
     "preemption": 5,
     "pending": 0
@@ -475,11 +475,427 @@
       "measuredAt": "2026-09-08T08:50:34.580Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "searchVolumeMeasuredAt": "2026-09-09T08:54:21.596Z",
+      "searchVolumeMeasuredAt": "2026-09-09T14:21:41.568Z",
       "carried": true
     }
   ],
   "observations": [
+    {
+      "keyword": "CUDA 러스트 사용법",
+      "issue": "CUDA 러스트",
+      "topic": "CUDA 러스트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "개발자 적용 방법 관심",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 20,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 20",
+        "선점 후보 — 경쟁 문서 20건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 개발자 적용 방법 관심"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "엔비디아가 GPU 커널을 러스트로 개발하는 CUDA 러스트를 공개해서.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "CUDA 러스트 사용법 엔비디아 GPU 커널 개발 첫걸음",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "CUDA 러스트 사용법 파이썬 습관 버리고 러스트 언어로 다시 앉았어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "러스트 언어",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "러스트 언어",
+          "searchVolume": 30,
+          "documentCount": 6204,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-09T14:19:41.464Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "퀄컴 신용산",
+      "issue": "퀄컴",
+      "topic": "퀄컴",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 37,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 37",
+        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "퀄컴이 아마존과 최대 80조원 규모 AI 데이터센터 칩 동맹을 맺어서.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "퀄컴 신용산 아마존과 10년 80조 AI칩 공급 계약 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "퀄컴 신용산 아마존과 80조 계약 맺은 뒤 주가 흐름이 의외로 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "퀄컴 주가",
+          "searchVolume": 12480,
+          "frame": "generic"
+        },
+        {
+          "keyword": "퀄컴 아마존",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "퀄컴 데이터센터",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "퀄컴 주가",
+          "searchVolume": 12480,
+          "documentCount": 69969,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "퀄컴 아마존",
+          "searchVolume": 20,
+          "documentCount": 40410,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "퀄컴 데이터센터",
+          "searchVolume": 10,
+          "documentCount": 37933,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-09T14:19:41.464Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "알파게놈 아틀라스",
+      "issue": "알파게놈 아틀라스",
+      "topic": "알파게놈 아틀라스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 49,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 49",
+        "선점 후보 — 경쟁 문서 49건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "딥마인드가 인간 유전자 변이 90억 개를 분석한 알파게놈 아틀라스를 공개해서.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "알파게놈 아틀라스, 구글 딥마인드 DNA 변이 90억개 분석",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "알파게놈 아틀라스로 DNA 한 글자 바뀐 결과 보니 생각보다 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "알파게놈",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "알파게놈",
+          "searchVolume": 10,
+          "documentCount": 2617,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-09T14:19:41.464Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "CUDA 러스트",
+      "issue": "CUDA 러스트",
+      "topic": "CUDA 러스트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 43,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 43",
+        "선점 후보 — 경쟁 문서 43건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "엔비디아가 GPU 커널을 러스트로 개발하는 CUDA 러스트를 공개해서.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "CUDA 러스트 vs 파이썬 엔비디아 GPU 개발 차이",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "CUDA 러스트 써보니 파이썬 말고 러스트 언어로도 이게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "러스트 언어",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "러스트 언어",
+          "searchVolume": 30,
+          "documentCount": 6204,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": [
+        {
+          "title": "이사양이면러스트렉안걸리나요??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=13020101&docId=261723389&answerNo=1",
+          "views": 102,
+          "answers": 1
+        },
+        {
+          "title": "이사양이면러스트렉안걸리나요??내공",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=13020101&docId=261729654&answerNo=1",
+          "views": 51,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-09T14:19:41.464Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "딥마인드 알파게놈",
+      "issue": "알파게놈 아틀라스",
+      "topic": "알파게놈 아틀라스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 161,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 161",
+        "선점 후보 — 경쟁 문서 161건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "딥마인드가 인간 유전자 변이 90억 개를 분석한 알파게놈 아틀라스를 공개해서.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "딥마인드 알파게놈, DNA 변이 90억개 지도 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "딥마인드 알파게놈이 질병 원인 어디서 갈리는지 짚어주더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "알파게놈 공개 후 연구자들 반응은 어떤가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=111605&docId=491669959&answerNo=2",
+          "views": 42,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-09T14:19:41.464Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "CUDA 러스트 예제",
       "issue": "CUDA 러스트",
@@ -544,7 +960,8 @@
       "monetize": null,
       "measuredAt": "2026-09-09T08:52:34.876Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "LG CNS 차움",
@@ -659,82 +1076,8 @@
       "monetize": null,
       "measuredAt": "2026-09-09T08:52:34.876Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "CUDA 러스트",
-      "issue": "CUDA 러스트",
-      "topic": "CUDA 러스트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 42,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 42",
-        "선점 후보 — 경쟁 문서 42건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "엔비디아가 GPU 커널을 러스트로 개발하는 'CUDA 러스트'를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "CUDA 러스트, 엔비디아가 GPU 커널까지 러스트로 만든 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "CUDA 러스트 보고 이제 GPU도 러스트로 짜는 시대인가 싶더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": [
-        {
-          "title": "이사양이면러스트렉안걸리나요??",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=13020101&docId=261723389&answerNo=1",
-          "views": 101,
-          "answers": 1
-        },
-        {
-          "title": "이사양이면러스트렉안걸리나요??내공",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=13020101&docId=261729654&answerNo=1",
-          "views": 50,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-09T08:52:34.876Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "kaist 박지민",
@@ -813,7 +1156,8 @@
       "monetize": null,
       "measuredAt": "2026-09-09T08:52:34.876Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "축사하는 장동혁 대표",
@@ -926,7 +1270,8 @@
       "monetize": null,
       "measuredAt": "2026-09-09T08:52:34.876Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "베스핀글로벌 블라인드",
@@ -5525,976 +5870,35 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "애니모프 GEO",
-      "issue": "쿼링에이아이",
-      "topic": "쿼링에이아이",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "애니모프가 AI 검색 분석 GEO API '쿼링에이아이'를 공개",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T09:03:41.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "한전kdn s러닝",
-      "issue": "한전KDN",
-      "topic": "한전KDN",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 83,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 20",
-        "문서수 83",
-        "선점 후보 — 경쟁 문서 83건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "한전KDN이 전사 AI 리더워크숍 열고 에너지 특화 AI 사업 강화",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한전kdn s러닝 로그인부터 사이버연수원 과정신청까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한전kdn s러닝 로그인 자꾸 막힐 때 여기서 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T09:03:41.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "한전KDN 연봉 직급별",
-      "issue": "한전KDN",
-      "topic": "한전KDN",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 123,
-      "documentCountMeasured": true,
-      "searchVolume": 30,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 30",
-        "문서수 123",
-        "선점 후보 — 경쟁 문서 123건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "한전KDN이 전사 AI 리더워크숍 열고 에너지 특화 AI 사업 강화",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한전KDN 연봉 직급별, 초봉부터 실수령액까지 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한전KDN 연봉 직급별로 따져보니 초봉에서 생각보다 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "한전KDN 채용공고",
-          "searchVolume": 110,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한전KDN 초봉",
-          "searchVolume": 100,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한전KDN 복지",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "한전KDN 채용공고",
-          "searchVolume": 110,
-          "documentCount": 2203,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한전KDN 초봉",
-          "searchVolume": 100,
-          "documentCount": 228,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한전KDN 복지",
-          "searchVolume": 20,
-          "documentCount": 3800,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한전KDN 신입 연봉",
-          "searchVolume": 10,
-          "documentCount": 567,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 6,
-      "kinTop": [
-        {
-          "title": "전기기술사 자격증이 있으면 취업및연봉은?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=188532842&answerNo=3",
-          "views": 18432,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-07T09:03:41.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "한전kdn 채용공고 2026",
-      "issue": "한전KDN",
-      "topic": "한전KDN",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 284,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 284",
-        "선점 후보 — 경쟁 문서 284건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "한전KDN이 전사 AI 리더워크숍 열고 에너지 특화 AI 사업 강화",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한전kdn 채용공고 2026 신입 연봉과 필기·면접 일정",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한전kdn 채용공고 2026 인턴 일정 보다가 뭘 놓친 것 같더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "한전kdn 채용 일정",
-          "searchVolume": 20,
-          "frame": "schedule"
-        },
-        {
-          "keyword": "한전kdn 인턴 채용",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "한전kdn 채용 일정",
-          "searchVolume": 20,
-          "documentCount": 1696,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한전kdn 인턴 채용",
-          "searchVolume": 10,
-          "documentCount": 1392,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T09:03:41.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "하이드라퓨전 뜻",
-      "issue": "하이드라퓨전",
-      "topic": "하이드라퓨전",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 38,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 38",
-        "선점 후보 — 경쟁 문서 38건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "깃허브가 AI 코딩 라우팅 시스템 '하이드라퓨전'을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": {
-        "seo": {
-          "text": "하이드라퓨전 뜻 깃허브 AI 코딩 비용 줄이는 원리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "하이드라퓨전 뜻 깃허브가 왜 만들었나 봤더니 코딩 비용에서 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": null,
-      "monetize": {
-        "verdict": "mixed",
-        "points": [
-          {
-            "text": "'하이드라퓨전 뜻'은 검색자가 '이게 무슨 시술/제품이냐' 한 문장 정의만 손에 넣으면 끝나는 정보성 검색이다. '뜻'을 붙였다는 건 아직 시술명을 처음 접해 개념 확인 단계라는 뜻이지, 예약·구매 절차를 찾는 게 아니다."
-          },
-          {
-            "text": "'뜻'만 검색하는 사람은 광고 클릭 상태가 아니다. 다만 '하이드라퓨전'이 미용/피부 시술 계열 용어라 뜨는 광고는 피부과·에스테틱·화장품처럼 단가가 높은 축이다. 광고 지면 자체는 비싸지만, 정작 이 검색자는 그 광고를 누를 결심 단계가 아니라는 불일치가 핵심이다."
-          },
-          {
-            "text": "체류 시간이 짧다. '하이드라퓨전 뜻'은 정의 한 줄 읽고 나가는 검색이라, 정의만 상단에 박아두면 스크롤 없이 이탈한다. 읽어야 풀리는 검색이 아니다."
-          },
-          {
-            "text": "'같이 검색되는 확인된 검색어: (없음)'이 결정적 감점이다. '가격', '후기', '효과', '부작용'처럼 하류(구매 직전) 검색이 확인되지 않아, '뜻' 트래픽을 돈 되는 각도로 끌어내릴 근거가 실측상 없다. 추정으로 채우면 도박이다."
-          }
-        ],
-        "angle": "'뜻' 한 줄로 끝내지 말고, 정의는 첫 문단에 즉답으로 주되 그 아래를 '어떤 사람에게 맞는 시술인가 / 다른 하이드라 계열 시술과 뭐가 다른가'로 비교·판단형 콘텐츠로 확장해 체류를 만든다. 단 이건 확인된 검색어가 없어 검증 안 된 각도이므로, '뜻' 검색량이 실제로 잡히는지 먼저 확인하고 진입할 것 — 확인 안 되면 쓰지 마라."
-      },
-      "measuredAt": "2026-09-07T09:03:41.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "씽크포비엘 상장",
-      "issue": "씽크포비엘",
-      "topic": "씽크포비엘",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "기업 향방 관심",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 42,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 42",
-        "선점 후보 — 경쟁 문서 42건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 기업 향방 관심"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "씽크포비엘이 스위스 CERTX와 AI 신뢰성 인증 사업 MOU 체결",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "씽크포비엘 상장 여부와 스위스 CERTX AI 신뢰성 협력 근황",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "씽크포비엘 상장 소식인 줄 알았는데 유럽 인증시장부터 노크하네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T09:03:41.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김용현 군기누설",
-      "issue": "김용현",
-      "topic": "김용현",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 130,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 130",
-        "선점 후보 — 경쟁 문서 130건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "군기누설 의혹 김용현 항소심서 혐의 부인, 특검 징역 5년 요청",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김용현 군기누설 1심 징역 3년, 2심 특검은 5년 구형",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김용현 군기누설 노상원한테 흘렸다는데 항소심 가니 말이 또 달라지네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T09:03:41.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "한전kdn 서류 컷",
-      "issue": "한전KDN",
-      "topic": "한전KDN",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 155,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 155",
-        "선점 후보 — 경쟁 문서 155건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "한전KDN이 전사 AI 리더워크숍 열고 에너지 특화 AI 사업 강화",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한전kdn 서류 컷 합격 자소서와 스펙 커트라인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한전kdn 서류 컷 채용공고 뜨기 전에 이건 챙겨두세요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "한전kdn 채용",
-          "searchVolume": 1030,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한전kdn 연봉",
-          "searchVolume": 770,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한전kdn 채용공고",
-          "searchVolume": 110,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "한전kdn 채용",
-          "searchVolume": 1030,
-          "documentCount": 5273,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한전kdn 연봉",
-          "searchVolume": 770,
-          "documentCount": 1210,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한전kdn 채용공고",
-          "searchVolume": 110,
-          "documentCount": 2203,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 7,
-      "kinTop": [
-        {
-          "title": "한전, 한전kdn, 한전kps 직무, 지원자격 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=419572980&answerNo=1",
-          "views": 158,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-07T09:03:41.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "한전KDN 복리후생",
-      "issue": "한전KDN",
-      "topic": "한전KDN",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 181,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 181",
-        "선점 후보 — 경쟁 문서 181건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "한전KDN이 전사 AI 리더워크숍 열고 에너지 특화 AI 사업 강화",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한전KDN 복리후생 연봉·복지 지원 전 확인할 것",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한전KDN 복리후생 채용공고엔 없는데 의외로 챙기는 것들",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "한전KDN 연봉",
-          "searchVolume": 770,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한전KDN 채용공고",
-          "searchVolume": 110,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한전KDN 초봉",
-          "searchVolume": 100,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "한전KDN 연봉",
-          "searchVolume": 770,
-          "documentCount": 1210,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한전KDN 채용공고",
-          "searchVolume": 110,
-          "documentCount": 2203,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한전KDN 초봉",
-          "searchVolume": 100,
-          "documentCount": 228,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한전KDN 복지",
-          "searchVolume": 20,
-          "documentCount": 3800,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한전KDN 신입 연봉",
-          "searchVolume": 10,
-          "documentCount": 567,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T09:03:41.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "한전kdn 창립기념일",
-      "issue": "한전KDN",
-      "topic": "한전KDN",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 174,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 174",
-        "선점 후보 — 경쟁 문서 174건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "한전KDN이 전사 AI 리더워크숍 열고 에너지 특화 AI 사업 강화",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한전kdn 창립기념일 날짜와 나주 본사 휴무 여부",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한전kdn 창립기념일 언제인지 헷갈려서 직접 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T09:03:41.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이현중 포틀랜드 계약",
-      "issue": "이현중 포틀랜드 계약",
-      "topic": "이현중 포틀랜드 계약",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 196,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 196",
-        "선점 후보 — 경쟁 문서 196건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이현중이 포틀랜드와 1년 비보장 이그지빗10 계약을 맺었다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이현중 포틀랜드 계약 이그지빗10 1년 비보장 연봉",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이현중 포틀랜드 계약 뜯어보다가 이현중 연봉에서 눈이 오래 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "이현중 NBA",
-          "searchVolume": 6930,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이현중 연봉",
-          "searchVolume": 280,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이현중 포틀랜드",
-          "searchVolume": 70,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "이현중 NBA",
-          "searchVolume": 6930,
-          "documentCount": 3163,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이현중 연봉",
-          "searchVolume": 280,
-          "documentCount": 592,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이현중 포틀랜드",
-          "searchVolume": 70,
-          "documentCount": 292,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "이현중 선수의 NBA 도전, 현재 상황과 계획은?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001030202&docId=486721270&answerNo=1",
-          "views": 164,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-07T09:03:41.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
-  "rejectedCount": 1,
+  "rejectedCount": 0,
   "issues": [
     {
-      "issue": "대정부 질문 나경원",
+      "issue": "네팔 2진 파견",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "나경원이 한성숙 총리 상대로 대정부질문에 나섰다.",
+      "why": "네팔 파견 한국 구호대 1진이 11일 귀국하고 2진 파견을 추진해서.",
       "headlines": [
         {
-          "title": "대정부질문 시작",
+          "title": "네팔 파견 韓구호대 11일 귀국 예정…\"2진 파견 준비 중\"",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-09T06:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016300402?sid=100"
+          "publishedAt": "2026-09-09T11:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016301088?sid=104"
         },
         {
-          "title": "대정부 질문 마친 나경원",
+          "title": "韓구호대 네팔 수색 종료 수순…2진 파견 준비(종합)",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-09-09T10:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004187759?sid=100"
+        },
+        {
+          "title": "네팔 KDRT 1진 귀국 준비…정부, 2진 파견 추진",
           "press": "news1.kr",
-          "publishedAt": "2026-09-09T06:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009160768?sid=100"
-        },
-        {
-          "title": "국회 '대정부질문' 오늘부터 시작…개각·보완수사권 등 격돌 전망",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-09-08T23:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001968038?sid=100"
+          "publishedAt": "2026-09-09T08:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009161087?sid=100"
         }
       ],
       "concentrated": [],
@@ -6502,423 +5906,34 @@
       "rowCount": 0
     },
     {
-      "issue": "코스피 7000선 복귀",
-      "issueType": "entertainment",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "코스피가 33거래일 만에 7051로 종가 7000선을 회복했다.",
-      "headlines": [
-        {
-          "title": "코스피, 33거래일 만에 7000선 복귀",
-          "press": "newscj.com",
-          "publishedAt": "2026-09-09T07:02:00.000Z",
-          "link": "https://www.newscj.com/news/articleView.html?idxno=3431327"
-        },
-        {
-          "title": "코스피, 7051.64 마감…33거래일 만에 종가 기준 7000선 복귀(2보)",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-09T06:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009160826?sid=101"
-        },
-        {
-          "title": "코스피 7000선 복귀 SK하이닉스 3%대 상승",
-          "press": "newsclaim.co.kr",
-          "publishedAt": "2026-09-09T07:10:00.000Z",
-          "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3074817"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "코스피",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "변요한 베드신 위해",
+      "issue": "이재명 대통령 임기",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "unknown",
+      "issueStatus": "stable",
       "isHot": true,
-      "why": "변요한이 타짜4 베드신 위해 10kg 감량하고 금주·식단을 했다.",
+      "why": "이재명 대통령이 자신의 임기는 헌법상 명확히 제한돼 있다고 말해서.",
       "headlines": [
         {
-          "title": "'타짜4' 변요한, 파격 베드신 \"몇 초 노출 위해 10kg 이상 감량\"",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-09-09T07:47:00.000Z",
-          "link": "https://m.entertain.naver.com/article/108/0003469141"
+          "title": "이 대통령 \"제 임기는 헌법상 명확히 제한돼 있어\"",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-09T12:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001387114?sid=100"
         },
         {
-          "title": "'타짜4' 변요한 \"노출신·베드신 위해 다이어트…금주에 식단까지\" [N현...",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-09T07:50:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009161023"
+          "title": "李대통령 “제 임기는 헌법상 명확하게 제한돼 있어”",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-09-09T10:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003550261?sid=100"
         },
         {
-          "title": "'타짜4' 변요한 \"베드신 위해 촬영 끝까지 금주와 식단 조절\"",
-          "press": "ent.sbs.co.kr",
-          "publishedAt": "2026-09-09T07:53:00.000Z",
-          "link": "https://m.entertain.naver.com/article/416/0000326530"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "변요한",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "부산 학교폭력 실태조사",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "부산 학폭 피해응답률 2.9%, 초등생은 6.2%로 전국평균을 웃돌았다.",
-      "headlines": [
-        {
-          "title": "부산 지역 학생 100명 중 3명 “학교 폭력 당한 적 있다”",
-          "press": "busan.com",
-          "publishedAt": "2026-09-09T06:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/082/0001397575?sid=102"
-        },
-        {
-          "title": "부산 학교폭력 피해응답률 2.9%… 초등학교는 전국 평균 웃돌아",
-          "press": "segye.com",
-          "publishedAt": "2026-09-09T04:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004157658?sid=102"
-        },
-        {
-          "title": "부산 학교폭력 피해응답률 2.9%…초등생은 전국보다 높아",
-          "press": "sedaily.com",
-          "publishedAt": "2026-09-09T04:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004660091?sid=102"
+          "title": "[속보]李 대통령 “제 임기, 헌법상 명확하게 제한”",
+          "press": "munhwa.com",
+          "publishedAt": "2026-09-09T11:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/021/0002817613?sid=100"
         }
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "레버리지",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "단일종목 레버리지 ETF 관련 김용범·이억원 수사가 착수됐다.",
-      "headlines": [
-        {
-          "title": "[단독] '삼전닉스 레버리지'로 '외국인 초단타 세력' 활개…증권사는 최...",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-09-09T05:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000638342?sid=101"
-        },
-        {
-          "title": "[단독] 개미만 울린 삼전닉스 레버리지 규제",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-09T08:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005330527?sid=101"
-        },
-        {
-          "title": "정점식 \"이번 정부에서 개헌 없다…레버리지 ETF 특검으로 윗선 밝혀야...",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-08T02:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014176352?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "레버리지 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "레버리지 etf",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "레버리지 etf 교육",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "주식 레버리지 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "레버리지 규제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "레버리지 예탁금",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kodex 레버리지",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "레버리지 책",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "레버리지 규제안",
-          "reason": "규제 내용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "레버리지 병합",
-          "reason": "규제 후 종목 변화",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "레버리지 대안",
-          "reason": "규제 후 투자처",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "거래소 애프터마켓 개장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "한국거래소가 14일 오후 4~8시 실시간 애프터마켓을 개장한다.",
-      "headlines": [
-        {
-          "title": "거래소, 14일 애프터마켓 개장…오후 4∼8시 실시간 거래",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-09T06:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016300479?sid=101"
-        },
-        {
-          "title": "한국거래소, 14일 애프터마켓 개장…오후 8시까지 실시간 주식 거래",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-09T07:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009160985?sid=101"
-        },
-        {
-          "title": "“오후 8시까지 주식 사고판다”…거래소, 14일 애프터마켓 개장",
-          "press": "mydaily.co.kr",
-          "publishedAt": "2026-09-09T06:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/117/0004103612?sid=103"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "축사하는 장동혁 대표",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "장동혁 대표가 공인중개사협회 법정단체 출범식에서 축사했다.",
-      "headlines": [
-        {
-          "title": "축사하는 장동혁 대표",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-09T06:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016300390?sid=100"
-        },
-        {
-          "title": "한국공인중개사협회 법정단체 출범, 축사하는 장동혁 대표",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-09T06:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014180180?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "장동혁",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "노동조합",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "포스코 노조가 창사 58년 만에 첫 48시간 부분파업에 돌입했다.",
-      "headlines": [
-        {
-          "title": "포스코노조 48시간 부분파업 돌입…창사 58년 만에 처음",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-08T22:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016298572?sid=102"
-        },
-        {
-          "title": "삼전 '집회 조끼', 노조위원장 장인 회사와 계약…최승호 \"가장 싸서\"",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-09T06:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005330478?sid=101"
-        },
-        {
-          "title": "포스코 창사 58년만에 첫 파업…사측 “연간 영업익 80% 내놓으라니”",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-09T01:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005732517?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "현대중공업 노동조합",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국지엠 노동조합",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한화오션 노동조합",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노동조합 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노동조합 영어로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노동조합 공식조직",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노동조합 관련 통계",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노동조합 비공식조직",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "중앙그룹",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "중앙그룹 채권 피해자들이 홍석현·홍정도 등 총수 일가를 고발했다.",
-      "headlines": [
-        {
-          "title": "중앙그룹 채권투자자들, 홍석현·홍정도 등 총수 일가 고발",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-09T03:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016299732?sid=102"
-        },
-        {
-          "title": "중앙그룹 채권 투자 피해자들, 총수 일가 검찰에 고소",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-09-09T05:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001191306?sid=102"
-        },
-        {
-          "title": "중앙그룹 채권투자자 '325억'피해, 홍석현 등 총수 일가 고발",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-09T04:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005330404?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "중앙그룹 부도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중앙그룹 회생",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중앙그룹 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중앙그룹 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중앙그룹 매각",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중앙그룹 계열사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중앙그룹 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중앙그룹 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "중앙그룹 회생",
-          "reason": "자금난 후속 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "중앙그룹 계열사",
-          "reason": "매각 향방 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
       "rowCount": 0
     },
     {
@@ -6927,25 +5942,25 @@
       "lane": "realtime",
       "issueStatus": "declining",
       "isHot": true,
-      "why": "최태원이 노소영 재산분할 7000억을 수용하고 2440억만 다투기로 했다.",
+      "why": "최태원이 노소영 재산분할 7천억을 수용하고 2440억만 다투기로 해서.",
       "headlines": [
         {
-          "title": "[단독] 최태원, 재산분할 2,440억만 다툰다…7천억은 인정",
-          "press": "yonhapnewstv.co.kr",
-          "publishedAt": "2026-09-09T02:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/422/0000904342?sid=102"
+          "title": "최태원, 노소영과 재산분할 2440억만 다투기로…7000억 수용",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-09T07:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005330487?sid=102"
+        },
+        {
+          "title": "최태원, 노소영 재산분할 7천억원 수용…2,440억만 다투기로",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-09T08:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001968145?sid=102"
         },
         {
           "title": "최태원, 노소영 재산분할 7천억원 수용…2천440억원만 다투기로",
           "press": "yna.co.kr",
           "publishedAt": "2026-09-09T07:01:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/001/0016300569?sid=102"
-        },
-        {
-          "title": "최태원, 노소영과 재산분할 2440억만 다투기로…7000억 수용",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-09T07:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005330487?sid=102"
         }
       ],
       "concentrated": [
@@ -6964,12 +5979,655 @@
       "rowCount": 0
     },
     {
+      "issue": "김도영 빠진 KIA",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "김도영이 코뼈 골절 부상으로 빠진 KIA가 NC에 4-5로 석패해서.",
+      "headlines": [
+        {
+          "title": "하필 3번 타순에서 끝…김도영 빠진 KIA, 기운도 잃고 집중도 못했다 ‘...",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-09-09T13:26:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/144/0001137191"
+        },
+        {
+          "title": "'블레인 2홈런' NC, KIA 추격 뿌리치고 연패 탈출…KIA, 김도영 부상 '비...",
+          "press": "stoo.com",
+          "publishedAt": "2026-09-09T12:48:00.000Z",
+          "link": "http://www.stoo.com/article.php?aid=108801658841"
+        },
+        {
+          "title": "KT, 1위 삼성 꺾고 반 경기 차 추격…KIA 김도영 코뼈 골절 '날벼락'(종합...",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-09T13:14:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/421/0009161458"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김도영",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "서정진",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "서정진 회장이 셀트리온 1000억 자사주 매입 등 주주환원에 힘써서.",
+      "headlines": [
+        {
+          "title": "[Who Is ?] 서정진 셀트리온그룹 회장",
+          "press": "businesspost.co.kr",
+          "publishedAt": "2026-09-08T22:02:00.000Z",
+          "link": "https://www.businesspost.co.kr/BP?command=article_view&num=446427"
+        },
+        {
+          "title": "상반기 보수 1위 '76억' 윤상현 부회장…서정진 회장 '22억' 육박",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-08-31T07:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005407238?sid=101"
+        },
+        {
+          "title": "주주환원 힘쓰는 서정진 회장…셀트리온, 1000억원 규모 자사주 매입",
+          "press": "newsway.co.kr",
+          "publishedAt": "2026-08-31T05:00:00.000Z",
+          "link": "https://www.newsway.co.kr/news/view?ud=2026083113405228650"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "서정진 회장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "셀트리온 서정진",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "서정진 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "서정진 부인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "서정진 사주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "서정진 아들",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "서정진 재산",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "서정진 축구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "서정진 승계",
+          "reason": "아들 경영 참여 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "CPTPP 가입 반대",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "농민단체가 CPTPP 가입 추진 중단을 요구하며 시위해서.",
+      "headlines": [
+        {
+          "title": "“CPTPP 가입 추진 중단하라”…농민단체, 농식품부 방문 시위",
+          "press": "nongmin.com",
+          "publishedAt": "2026-09-08T05:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/662/0000103770?sid=100"
+        },
+        {
+          "title": "충청 농민들 \"CPTPP 가입? 우리 농민 다 죽어\"",
+          "press": "ikpnews.net",
+          "publishedAt": "2026-09-08T12:32:00.000Z",
+          "link": "http://www.ikpnews.net/news/articleView.html?idxno=71396"
+        },
+        {
+          "title": "정부, CPTPP 의견 수렴 속도···농업계도 대응 수위 높인다",
+          "press": "agrinet.co.kr",
+          "publishedAt": "2026-09-08T10:52:00.000Z",
+          "link": "https://www.agrinet.co.kr/news/articleView.html?idxno=407060"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "티파니",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "변요한이 예능에서 아내 티파니의 장점을 자랑해 화제가 돼서.",
+      "headlines": [
+        {
+          "title": "'레벨업' 변요한 \"티파니 장점 너무 많아\"…아내 자랑에 진심",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-09T09:52:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009161256"
+        },
+        {
+          "title": "효연, 변요한 호칭 고민에...티파니 등판 “벌써 웃겨”",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-09T06:09:00.000Z",
+          "link": "https://m.entertain.naver.com/article/009/0005732683"
+        },
+        {
+          "title": "변요한 \"♥티파니에 용돈 받아 써\"…장점 질문에 대답 못하고 '진땀'",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-09-09T09:17:00.000Z",
+          "link": "https://m.entertain.naver.com/article/076/0004444484"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "티파니 변요한",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "티파니 목걸이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "티파니 팔찌",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "티파니 반지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "티파니 영",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "티파니 소녀시대",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "티파니 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "변요한 티파니",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "변요한 티파니 나이차",
+          "reason": "부부 관계 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "티파니 근황",
+          "reason": "방송 출연 후 활동 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "티파니 컴백",
+          "reason": "가수 활동 여부 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "정치인",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "추석을 앞두고 선관위가 정치인 금품 제공을 단속해서.",
+      "headlines": [
+        {
+          "title": "대구선관위, 추석 앞두고 정치인 금품 제공 단속",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-09T04:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014179501?sid=102"
+        },
+        {
+          "title": "정치인의 '혐오장사' 법으로 막을 수 있을까",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-09-09T09:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004187747?sid=102"
+        },
+        {
+          "title": "대전·세종·충남선관위, 추석 앞두고 정치인 불법행위 예방·단속 강화",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-09T06:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009160797?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "축구선수 정치인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지현 정치인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "여자 정치인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "정치인 영어로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "일본 정치인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "정치인 꿈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "젊은 정치인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "여성 정치인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "정치인 선물 기준",
+          "reason": "추석 명절 규정 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "코스피 7000선 탈환",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "반도체 훈풍으로 코스피가 33거래일 만에 7000선을 탈환해서.",
+      "headlines": [
+        {
+          "title": "[속보]‘드디어’ 코스피 종가 7000선 탈환…33거래일 만",
+          "press": "munhwa.com",
+          "publishedAt": "2026-09-09T06:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/021/0002817577?sid=101"
+        },
+        {
+          "title": "원·달러 환율 9.5원 급락 1336.1원…코스피 7000선 탈환",
+          "press": "daejonilbo.com",
+          "publishedAt": "2026-09-09T07:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/656/0000186334?sid=101"
+        },
+        {
+          "title": "[속보] 코스피 33거래일 만에 7000선 탈환…1.4% 오른 7051.64 마감",
+          "press": "kado.net",
+          "publishedAt": "2026-09-09T06:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/654/0000199662?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "코스피",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "환율",
+          "searchVolume": 19607700,
+          "origin": "related"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "오픈AI 코리아 1년간 기업용 챗GPT 이용자가 28배 늘어서.",
+      "headlines": [
+        {
+          "title": "오픈AI 코리아 1년…기업용 챗GPT 이용자 28배 늘었다",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-09T03:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014179329?sid=105"
+        },
+        {
+          "title": "대화 상대 넘어 ‘일하는 AI’로… 기업용 챗GPT 이용 28배 폭증 [뉴스 ...",
+          "press": "segye.com",
+          "publishedAt": "2026-09-09T09:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004157739?sid=101"
+        },
+        {
+          "title": "AI, 48단계 '인간 증명' 테스트 통과…로봇 구별도구 무력화",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-08T19:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016298488?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 아스트라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 상장 시기",
+          "reason": "IPO 여부 지속 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 관련주",
+          "reason": "투자 종목 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글 크롬",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "구글 크롬이 보안 강화로 업데이트 주기를 2주로 단축해서.",
+      "headlines": [
+        {
+          "title": "구글 크롬, 이제 2주마다 업데이트…AI가 바꾼 보안 환경",
+          "press": "digitaltoday.co.kr",
+          "publishedAt": "2026-09-09T05:12:00.000Z",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=699297"
+        },
+        {
+          "title": "구글 크롬 업데이트 주기 4주→2주 단축, 153버전으로 9월 8일 본격 가동",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-09-08T18:28:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1158206"
+        },
+        {
+          "title": "구글 크롬, 보안 환경 변화에 따라 업데이트 주기 2주로 단축",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-09T09:34:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215051"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 크롬 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 크롬 다운로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "딥시크",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "딥시크가 씨틱증권을 주관사로 선정하며 상하이 증시 IPO에 속도를 내서.",
+      "headlines": [
+        {
+          "title": "딥시크, 상하이 증시 IPO 속도…씨틱증권 주관사 선정",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-09T12:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001191401?sid=104"
+        },
+        {
+          "title": "“기업가치만 약 100조원 수준”…딥시크, 상하이 증시 IPO 속도",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-09T12:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005732994?sid=101"
+        },
+        {
+          "title": "딥시크, 상하이 증시 IPO 속도…\"주관사 선정\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-09T11:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016301079?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "딥시크 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "딥시크 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "딥시크 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "딥시크 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "딥시크 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "딥시크 구독",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "딥시크 보안",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "딥시크 사태 요약",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "딥시크 상장일",
+          "reason": "IPO 시기 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "딥시크 관련주",
+          "reason": "수혜 종목 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "딥시크 v4 출시",
+          "reason": "신버전 성능 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "딥시크 기업가치",
+          "reason": "100조 평가 근거 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "딥시크 증류 논란",
+          "reason": "기술 복제 의혹 후속",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "알파게놈 아틀라스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "딥마인드가 인간 유전자 변이 90억 개를 분석한 알파게놈 아틀라스를 공개해서.",
+      "headlines": [
+        {
+          "title": "인간 유전자 변이 90억 개 영향 확인…딥마인드 '알파게놈 아틀라스' 공...",
+          "press": "dongascience.com",
+          "publishedAt": "2026-09-09T08:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/584/0000039268?sid=105"
+        },
+        {
+          "title": "DNA 한 글자 바뀌면 무슨 일이…구글, 90억개 변이 ‘지도’ 만들었다",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-09T05:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005732643?sid=105"
+        },
+        {
+          "title": "\"모든 DNA 변이 AI로 본다\"...구글 딥마인드, '알파게놈 아틀라스' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-09T08:50:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215033"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "딥마인드 알파게놈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
       "issue": "퀄컴",
       "issueType": "fresh",
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "퀄컴이 아마존과 최대 600억달러 규모 AI 데이터센터 칩 동맹을 맺었다.",
+      "why": "퀄컴이 아마존과 최대 80조원 규모 AI 데이터센터 칩 동맹을 맺어서.",
       "headlines": [
         {
           "title": "퀄컴, 아마존과 AI 칩 동맹…데이터센터 시장 본격 공략",
@@ -7034,22 +6692,22 @@
       ],
       "nextWave": [
         {
-          "keyword": "퀄컴 목표주가",
-          "reason": "동맹 후 전망",
+          "keyword": "퀄컴 주가 전망",
+          "reason": "동맹 후 상승 기대",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "퀄컴 관련주",
-          "reason": "국내 수혜주 탐색",
+          "keyword": "퀄컴 AI칩 성능",
+          "reason": "엔비디아 대항 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "퀄컴 실적발표",
-          "reason": "계약 실적 반영",
+          "keyword": "퀄컴 삼성",
+          "reason": "파운드리 협력 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -7058,12 +6716,43 @@
       "rowCount": 0
     },
     {
+      "issue": "파인더스AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "파인더스에이아이가 천안 뚜쥬루에 AI 베이커리 스캐너를 구축해서.",
+      "headlines": [
+        {
+          "title": "파인더스에이아이, 뚜쥬루에 AI 계산대 구축…\"빵 올리면 1~2초 만에 인...",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-09T09:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002436855?sid=105"
+        },
+        {
+          "title": "파인더스에이아이, 천안 '뚜쥬루'에 AI 빵 계산대 구축",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-09T04:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005411404?sid=101"
+        },
+        {
+          "title": "파인더스에이아이, 뚜쥬루에 AI 베이커리 스캐너 도입",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-09-09T01:42:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=863471"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
       "issue": "인텔",
       "issueType": "fresh",
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "인텔이 CPU 가격 인상 추진과 하이NA EUV 양산 소식에 9% 급등했다.",
+      "why": "인텔이 반도체 약진과 CPU 가격 인상 보도로 주가가 9% 급등해서.",
       "headlines": [
         {
           "title": "100달러 위협 '유가 공포' 덮쳤다…반도체 '약진' 인텔 9%↑",
@@ -7121,15 +6810,22 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "인텔 전망",
+          "keyword": "인텔 토스",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "인텔 목표주가",
-          "reason": "급등 후 전망",
+          "keyword": "인텔 주가 전망",
+          "reason": "급등 후 방향 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "인텔 CPU 인상률",
+          "reason": "10% 인상 시기 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -7142,15 +6838,15 @@
           "onBoard": false
         },
         {
-          "keyword": "인텔 관련주",
-          "reason": "국내 수혜주 탐색",
+          "keyword": "인텔 파운드리 고객",
+          "reason": "수주 확대 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "인텔 실적",
-          "reason": "실적 반영 여부",
+          "keyword": "인텔 관련주",
+          "reason": "국내 수혜주 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -7164,7 +6860,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "엔비디아가 GPU 커널을 러스트로 개발하는 'CUDA 러스트'를 공개했다.",
+      "why": "엔비디아가 GPU 커널을 러스트로 개발하는 CUDA 러스트를 공개해서.",
       "headlines": [
         {
           "title": "엔비디아, GPU 커널까지 러스트로 개발하는 'CUDA 러스트' 공개...안전한...",
@@ -7194,8 +6890,8 @@
       ],
       "nextWave": [
         {
-          "keyword": "CUDA 러스트 예제",
-          "reason": "실사용 코드 관심",
+          "keyword": "CUDA 러스트 사용법",
+          "reason": "개발자 적용 방법 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -7204,128 +6900,36 @@
       "rowCount": 0
     },
     {
-      "issue": "엔비디아",
+      "issue": "축사하는 장동혁 대표",
       "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "엔비디아가 허깅페이스 인수로 로봇사업까지 확보했다.",
-      "headlines": [
-        {
-          "title": "엔비디아, 허깅페이스 인수로 로봇사업까지 확보",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-09T02:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016299360?sid=101"
-        },
-        {
-          "title": "엔비디아, 자율주행 오픈소스 공개",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-08T15:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0003997347?sid=105"
-        },
-        {
-          "title": "출시 4년 된 엔비디아 H100 몸값 역주행…한달새 대여료 22% 급등",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-09-08T06:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001191083?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "엔비디아 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 마곡",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 실적발표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 실적발표일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 실적",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "엔비디아 관련주",
-          "reason": "국내 수혜주 탐색",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엔비디아 실적발표",
-          "reason": "실적 일정 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글 클라우드-액센츄어",
-      "issueType": "fresh",
-      "lane": "tech",
+      "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": false,
-      "why": "구글 클라우드와 액센츄어가 현장 파견 AI 엔지니어 전담 조직을 신설했다.",
+      "isHot": true,
+      "why": "장동혁 대표가 공인중개사협회 법정단체 출범식에서 축사했다.",
       "headlines": [
         {
-          "title": "구글 클라우드-액센츄어, 현장 파견 AI 엔지니어 전담 조직 신설",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-09T06:48:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215040"
+          "title": "축사하는 장동혁 대표",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-09T06:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016300390?sid=100"
         },
         {
-          "title": "[클라우드 월드] 삼성SDS '다차원 AI 풀스택 전략' 제시·베스핀 'aT 채티...",
-          "press": "newsworks.co.kr",
-          "publishedAt": "2026-09-08T07:38:00.000Z",
-          "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=853047"
-        },
-        {
-          "title": "구글 클라우드, ‘제미나이 엔터프라이즈’ 금융·법률 맞춤형 솔루션 ...",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-08-26T01:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006358158?sid=105"
+          "title": "한국공인중개사협회 법정단체 출범, 축사하는 장동혁 대표",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-09T06:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014180180?sid=100"
         }
       ],
       "concentrated": [
         {
-          "keyword": "구글",
+          "keyword": "장동혁",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "KAIST",
@@ -7405,13 +7009,6 @@
           "onBoard": false
         },
         {
-          "keyword": "무인공장 사업화",
-          "reason": "KT 협력 후속",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
           "keyword": "KAIST 협력",
           "reason": "파트너십 확대",
           "searchVolume": null,
@@ -7419,87 +7016,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "KT",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "KT컨소시엄 보디캠 중국산 의혹 수사와 지니TV A2 출시 소식이 나왔다.",
-      "headlines": [
-        {
-          "title": "경찰 보디캠이 중국산?…KT컨소시엄 수사",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-09-09T01:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001871837?sid=102"
-        },
-        {
-          "title": "KT, '지니TV 셋톱박스 A2' 출시...\"AI로 검색하고 화질 개선\"",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-09T02:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002436782?sid=105"
-        },
-        {
-          "title": "경찰 보디캠 '중국산' 의혹 불거져…KT컨소시엄 수사",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-09T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014178416?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "kt 고객센터",
-          "searchVolume": 242000,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt 인터넷",
-          "searchVolume": 74000,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt&g",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt m모바일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt 키즈폰",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt 경기일정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt 알뜰폰",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kt.com",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "KT 입장",
-          "reason": "의혹 해명 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "LG CNS",
@@ -7586,7 +7104,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "베스핀글로벌",
@@ -8635,53 +8154,6 @@
       "carried": true
     },
     {
-      "issue": "쿼링에이아이",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "애니모프가 AI 검색 답변·출처를 분석하는 GEO API '쿼링에이아이'를 공개했다",
-      "headlines": [
-        {
-          "title": "애니모프, GEO API 쿼링에이아이 공개...AI 검색 화면 실제 답변·출처 제...",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-09-07T04:52:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=698690"
-        },
-        {
-          "title": "\"AI 검색 답변 그대로 분석\"... 애니모프, GEO 분석 도구 '쿼링에이아이...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-07T07:18:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=214951"
-        },
-        {
-          "title": "애니모프, AI 검색 모니터링 API 공개",
-          "press": "hansbiz.co.kr",
-          "publishedAt": "2026-09-07T07:10:00.000Z",
-          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=862762"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "쿼링에이아이 사용법",
-          "reason": "적용 방법 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "쿼링에이아이 요금",
-          "reason": "이용료 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
       "issue": "윤종훈",
       "issueType": "fresh",
       "lane": "realtime",
@@ -8869,214 +8341,6 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "이현중 포틀랜드 계약",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "이현중이 포틀랜드와 1년 비보장 이그지빗10 계약을 맺었다",
-      "headlines": [
-        {
-          "title": "이현중, 포틀랜드와 이그지빗10 계약…NBA 도전 이어간다",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-07T03:01:00.000Z",
-          "link": "https://m.sports.naver.com/basketball/article/001/0016294198"
-        },
-        {
-          "title": "'한국 농구 핵심' 이현중, NBA 포틀랜드와 1년 비보장 계약",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-07T05:33:00.000Z",
-          "link": "https://m.sports.naver.com/basketball/article/003/0014174089"
-        },
-        {
-          "title": "농구 간판 이현중, NBA 포틀랜드와 ‘1년 비보장 계약’",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-07T04:22:00.000Z",
-          "link": "https://m.sports.naver.com/basketball/article/023/0003997071"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "김용현",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "군기누설 의혹 김용현 항소심서 혐의 부인, 특검 징역 5년 요청",
-      "headlines": [
-        {
-          "title": "김용현 “중국·러시아·북한, 하이브리드 전쟁 핵심 국가” [현장영상...",
-          "press": "ichannela.com",
-          "publishedAt": "2026-09-07T07:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/449/0000359702?sid=102"
-        },
-        {
-          "title": "[단독]'김용현 사단' 의혹 정재관 군인공제회장 사의 표명",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-08-31T01:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004184063?sid=100"
-        },
-        {
-          "title": "'노상원에 군기 누설' 김용현 항소심 첫 공판…1심은 징역 3년",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-08-31T15:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000529219?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김용현 국방부장관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김용현 장관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김용현 변호사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김용현 근황",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김용현 부인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김용현 선고",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김용현 아들",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김용현 판결",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "김용현 2심 선고",
-          "reason": "형량 결과 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김용현 진술",
-          "reason": "법정 발언 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "한전KDN",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "한전KDN이 전사 AI 리더워크숍 열고 에너지 특화 AI 사업 강화",
-      "headlines": [
-        {
-          "title": "한전KDN, 전사 리더워크숍…에너지 특화 AI 사업 강화",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-07T06:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014174486?sid=101"
-        },
-        {
-          "title": "한전KDN, 에너지 특화 AI 사업 경쟁력 높인다",
-          "press": "ikld.kr",
-          "publishedAt": "2026-09-07T08:20:00.000Z",
-          "link": "http://www.ikld.kr/news/articleView.html?idxno=340210"
-        },
-        {
-          "title": "한전KDN, AI 리더워크숍서 에너지 AX 전략 논의",
-          "press": "daily.hankooki.com",
-          "publishedAt": "2026-09-07T06:52:00.000Z",
-          "link": "https://daily.hankooki.com/news/articleView.html?idxno=1403428"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "한전kdn 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한전kdn 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한전kdn 본사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한전kdn 채용공고",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한전kdn 서울",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한전kdn 부산",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한전kdn 초봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한전kdn 인턴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "한전KDN 채용 2026",
-          "reason": "하반기 공고 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "한전KDN 주가",
-          "reason": "상장 여부 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
       "rowCount": 0,
       "carried": true
     }
