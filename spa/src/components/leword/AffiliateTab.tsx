@@ -84,6 +84,8 @@ type CampaignItem = {
 
 type CampaignSnapshot = {
     collectedAt: string;
+    /** 자리·검색량·브리프 실측 시각(affiliate-enrich.js) — 수집 시각과 별개 */
+    enrichedAt?: string;
     sites: Record<string, { label: string; items: CampaignItem[]; collectedAt?: string | null; checkedAt?: string; status?: string }>;
 };
 
@@ -240,6 +242,9 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     <p className="lw-write-hint">
                         <strong>{active.label} 캠페인</strong> — 콘솔에서 받아온 실제 목록입니다.
                         {collectedLabel && <span style={{ opacity: .7 }}> · {collectedLabel} 수집</span>}
+                        {snapshot?.enrichedAt && Number.isFinite(Date.parse(snapshot.enrichedAt)) && (
+                            <span style={{ opacity: .7 }}> · 자리·검색량·글감 실측 {new Date(snapshot.enrichedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+                        )}
                     </p>
                     {(freshness.stale || freshness.failed) && (
                         <p role="status" style={{ color: '#f5a623', margin: '0 0 16px', fontSize: 14 }}>
