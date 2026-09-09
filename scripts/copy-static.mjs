@@ -245,6 +245,7 @@ try {
     'dialogFocusGuard.js',  // ✅ [2026-08-17] alert/confirm 포커스 가드 (조기 로드)
     'semiAutoImageSearch.js',
     'semiAutoHeadingExtractor.js',
+    'headingMarkup.js',
     'articleTableUtils.js',
     'articleTableClipboard.js',
     // UI/이벤트 관련 (마지막에 로드)
@@ -459,6 +460,7 @@ try {
   const modulesFiles = [
     // [2026-09-02] 수집 이미지 → 모달 미리보기 형태 변환 · 프롬프트대로 루프의 자리 추적 (function 선언만이라 순서 무관)
     'collectedImagePreview.js',
+    'headingControlPanel.js',
     'imagePreviewBatch.js',
     // ✅ [Phase 5B] renderer.ts에서 추출된 모듈 (의존성 순서: 유틸→DOM캐시→이미지→포스트→기능)
     'rendererUtils.js',            // 5B-1: 이벤트리스너, DOM캐시, 디바운스, 버튼, 로깅

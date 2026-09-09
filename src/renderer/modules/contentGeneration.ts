@@ -364,6 +364,16 @@ function sanitizeScrapedContent(content: any): void {
 //   - postListUI 글 불러오기 (✓ v2.11.0에서 통합)
 export function rebuildHeadingsFromPreferredBody(structuredContent: any): void {
   if (!structuredContent || typeof structuredContent !== 'object') return;
+
+  /*
+   * [2026-09-09 사장님] "붙여넣기하면 소제목을 알아서 분석하지만 내 의도와 다른 내용을
+   * 소제목으로 지정해놨더라고." — 사용자가 직접 정한 소제목은 휴리스틱이 덮으면 안 된다.
+   * 손을 댄 순간부터 본문의 "## " 표기가 진실이고, 추측은 물러난다.
+   */
+  if (structuredContent.headingsLockedByUser === true) {
+    console.log('[Headings] 사용자가 지정한 소제목 — 자동 재추출 건너뜀');
+    return;
+  }
   const body = String(structuredContent.bodyPlain || structuredContent.content || '').trim();
   if (!body) return;
 
@@ -1572,6 +1582,17 @@ export function autoFillCTAFromContent(): void {
 }
 
 // 반자동 모드 필드에 콘텐츠 채우기 (통합 및 강화됨)
+/**
+ * [2026-09-09] 본문을 채운 뒤 소제목 패널도 다시 그린다.
+ *   패널은 본문의 "## " 표기를 읽어 그리므로, 본문이 바뀌면 같이 갱신돼야 한다.
+ *   import 순환을 피하려고 전역 창구로 부른다(패널이 스스로 등록해 둔다).
+ */
+function refreshHeadingPanel(): void {
+  try {
+    (window as any).renderHeadingList?.();
+  } catch { /* 패널이 아직 없으면 무시 */ }
+}
+
 export function fillSemiAutoFields(
   structuredContent: any,
   options: FillSemiAutoFieldsOptions = {},
@@ -1758,6 +1779,8 @@ export function fillSemiAutoFields(
 
   // ✅ [New] 미리보기 즉시 동기화
   syncIntegratedPreviewFromInputs();
+  // [2026-09-09] 본문이 바뀌었으니 소제목 패널도 다시 그린다.
+  refreshHeadingPanel();
 }
 
 // ✅ [2026-03-29] 페러프레이징 모드 100점 개선

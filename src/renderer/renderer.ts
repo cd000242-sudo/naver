@@ -348,6 +348,7 @@ initModalBackdropClickGuard();
 import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 // [v2.11.206] 장소(지도) 미리 확정 UI
 import { initPlacePicker, readPickedPlace, readPickedPlaces } from './modules/placePicker.js';
+import { initHeadingControlPanel, renderHeadingList } from './modules/headingControlPanel.js';
 // ✅ [SPEC-DROPSHOT-2026] 이미지 관리 → 🎨 이미지 생성 서브탭 (멀티엔진 대량 생성 스튜디오)
 import { initImageGenStudio } from './modules/imageGenStudio.js';
 // ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 로그인/확인 UI (엔진 선택 시 노출)
@@ -778,6 +779,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCategorySelectionListener(); // ✅ 카테고리 모달 이벤트 리스너
   initHeadingImageButton();
   initSettingsModalFunc(); // ✅ [2026-01-25] 환경설정 모달 초기화
+  // [2026-09-09] 소제목 직접 지정 패널 — 모든 모드 공용(반자동 편집 영역)
+  initHeadingControlPanel();
 
   // [2026-08-19] 저장된 텍스트 모델 선택을 시작 시점에 되살린다.
   //   설정 모달을 열 때만 복원하면, 모달을 안 열고 바로 생성할 때 화면이 "선택 없음"이라
