@@ -2231,6 +2231,9 @@ function LewordStyles() {
             /* 황금키워드 카드 안 글감 브리프(사장님 2026-09-09) — 오늘의 글감과 같은 dl 스타일을 쓴다 */
             .lw-card-brief { margin-top: 10px; padding: 10px 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, #ffa500 28%, transparent); background: color-mix(in srgb, #ffa500 6%, transparent); }
             .lw-card-brief-head { display: flex; gap: 8px; align-items: baseline; }
+            /* 세로 목록에서는 상단 행(근거|스파크|지표) 아래 풀폭 — 좁은 스파크 열에 있으면 글이 세로로 길게 늘어진다(사장님 2026-09-09). */
+            .lw-board-list .lw-card-brief { grid-column: 1 / -1; margin-top: 0; }
+            .lw-board-list .lw-card-brief .lw-briefs-dl { grid-template-columns: 110px 1fr; font-size: 13px; }
             .lw-card-brief-head span { font-size: 11.5px; opacity: 0.65; }
             .lw-card-brief .lw-briefs-dl { margin-top: 8px; font-size: 12.5px; }
             .lw-card-brief-facts { margin: 8px 0 0; font-size: 12px; opacity: 0.85; }

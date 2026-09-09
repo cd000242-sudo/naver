@@ -231,30 +231,6 @@ function PreemptionCard({
                                 <small>{row.whySearch.basis || 'AI 추론'}</small>
                             </p>
                         )}
-                        {row.brief && (
-                            <div className="lw-card-brief" title={row.brief.basis}>
-                                <div className="lw-card-brief-head">
-                                    <strong className={`lw-briefs-timing is-${row.brief.timing.toLowerCase()}`}>{row.brief.timing}</strong>
-                                    <span>글감 브리프 · {row.brief.basis}</span>
-                                </div>
-                                <dl className="lw-briefs-dl">
-                                    <dt>Primary Intent</dt><dd>{row.brief.primaryIntent}</dd>
-                                    <dt>작성가치</dt><dd>{row.brief.value}</dd>
-                                    {row.brief.experience && <><dt>경험활용</dt><dd>{row.brief.experience}</dd></>}
-                                    {row.brief.differentiation && <><dt>차별화</dt><dd>{row.brief.differentiation}</dd></>}
-                                    <dt>추천 각도</dt><dd>{row.brief.angle}</dd>
-                                </dl>
-                                {row.brief.facts.length > 0 && (
-                                    <p className="lw-card-brief-facts">
-                                        근거 {row.brief.facts.slice(0, 3).map((f) => (
-                                            <a key={f.id} href={f.link} target="_blank" rel="noreferrer" title={f.title}>
-                                                {f.press || '기사'} {new Date(f.publishedAt).toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul', month: 'numeric', day: 'numeric' })}
-                                            </a>
-                                        ))}
-                                    </p>
-                                )}
-                            </div>
-                        )}
                     </div>
 
                     {/*
@@ -358,6 +334,31 @@ function PreemptionCard({
                             <strong>{typeof row.kinCount === 'number' ? formatCount(row.kinCount) : '—'}</strong>
                         </div>
                     </div>
+
+                    {row.brief && (
+                        <div className="lw-card-brief" title={row.brief.basis}>
+                            <div className="lw-card-brief-head">
+                                <strong className={`lw-briefs-timing is-${row.brief.timing.toLowerCase()}`}>{row.brief.timing}</strong>
+                                <span>글감 브리프 · {row.brief.basis}</span>
+                            </div>
+                            <dl className="lw-briefs-dl">
+                                <dt>Primary Intent</dt><dd>{row.brief.primaryIntent}</dd>
+                                <dt>작성가치</dt><dd>{row.brief.value}</dd>
+                                {row.brief.experience && <><dt>경험활용</dt><dd>{row.brief.experience}</dd></>}
+                                {row.brief.differentiation && <><dt>차별화</dt><dd>{row.brief.differentiation}</dd></>}
+                                <dt>추천 각도</dt><dd>{row.brief.angle}</dd>
+                            </dl>
+                            {row.brief.facts.length > 0 && (
+                                <p className="lw-card-brief-facts">
+                                    근거 {row.brief.facts.slice(0, 3).map((f) => (
+                                        <a key={f.id} href={f.link} target="_blank" rel="noreferrer" title={f.title}>
+                                            {f.press || '기사'} {new Date(f.publishedAt).toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul', month: 'numeric', day: 'numeric' })}
+                                        </a>
+                                    ))}
+                                </p>
+                            )}
+                        </div>
+                    )}
 
                     {(row.serp?.slots || []).length > 0 && (
                         <details className="lw-slots">
