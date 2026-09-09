@@ -686,6 +686,14 @@ export async function handleFullAutoPublish(): Promise<void> {
     const pickedPlacesForPublish: Array<{ name: string; address?: string; position?: string }> =
     (window as any).readPickedPlaces?.() || [];
   const pickedPlaceForPublish = pickedPlacesForPublish[0] || null;
+  /*
+   * [2026-09-09] 장소가 몇 곳 실려 나가는지 로그 파일에 남긴다.
+   *
+   * 사장님 실측 "2번째 3번째 장소가 본문에 삽입이 안 됩니다" 를 볼 때, 발행 로그에는
+   * 계획 결과("1곳 배치 계획")만 있고 picker 가 몇 곳을 넘겼는지는 흔적이 없었다.
+   * picker 에서 사라진 것인지 애초에 한 곳만 담긴 것인지 구분할 방법이 없어 추측만 남는다.
+   */
+  appendLog(`🗺️ [장소 확인] 선택된 장소 ${pickedPlacesForPublish.length}곳${pickedPlacesForPublish.length > 0 ? `: ${pickedPlacesForPublish.map((p) => p.name).join(', ')}` : ''}`);
     const selectedPreviousPost = readSelectedPreviousPostForPublish(
       resolvedContentModeForPublish,
       UnifiedDOMCache.getRealCategoryName?.() || UnifiedDOMCache.getRealCategory?.()
@@ -2541,6 +2549,14 @@ export async function handleSemiAutoPublish(): Promise<any> {
   const pickedPlacesForPublish: Array<{ name: string; address?: string; position?: string }> =
     (window as any).readPickedPlaces?.() || [];
   const pickedPlaceForPublish = pickedPlacesForPublish[0] || null;
+  /*
+   * [2026-09-09] 장소가 몇 곳 실려 나가는지 로그 파일에 남긴다.
+   *
+   * 사장님 실측 "2번째 3번째 장소가 본문에 삽입이 안 됩니다" 를 볼 때, 발행 로그에는
+   * 계획 결과("1곳 배치 계획")만 있고 picker 가 몇 곳을 넘겼는지는 흔적이 없었다.
+   * picker 에서 사라진 것인지 애초에 한 곳만 담긴 것인지 구분할 방법이 없어 추측만 남는다.
+   */
+  appendLog(`🗺️ [장소 확인] 선택된 장소 ${pickedPlacesForPublish.length}곳${pickedPlacesForPublish.length > 0 ? `: ${pickedPlacesForPublish.map((p) => p.name).join(', ')}` : ''}`);
   const semiAutoAffiliateLink = resolveAffiliateLink(
     (document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement)?.value?.trim() || undefined,
     (document.querySelector('.unified-url-input') as HTMLInputElement)?.value?.trim()

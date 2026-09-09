@@ -928,6 +928,39 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       `🧾 [구조 진단] 소제목 ${headings.length}개 · 전달 이미지 ${(resolved.images || []).length}개 · `
       + `strategy=${structured._manualStructureStrategy || '미지정'} · manualEdited=${!!structured._bodyManuallyEdited}`,
     );
+    /*
+     * [2026-09-09 사장님 실측] "제목 아래 썸네일이랑 1번 소제목 첫 번째 이미지가 여전히 중복",
+     * "2번째 3번째 장소는 본문에 삽입이 안 됩니다."
+     *
+     * 둘 다 코드만 읽어서는 갈라지는 지점을 확정할 수 없었다. 대표사진은 1번 소제목 이름으로
+     * 저장된 원본 파일인데 본문 사진들은 임시 복사본(naver-blog-img-*)이라 경로가 달라,
+     * 같은 사진인데도 중복 제거(경로 키 비교)를 통과한다 — 어느 단계에서 두 파일로 갈리는지가
+     * 로그에 없다. 장소도 마찬가지로 payload 에 몇 곳이 실려 왔는지 흔적이 없었다.
+     *
+     * 추측으로 고치면 god file 영역이라 회귀가 번진다. 먼저 눈에 보이게 만든다.
+     */
+    const imagesForDiag = (resolved.images || []) as any[];
+    const shortName = (value: unknown): string => {
+      const raw = String(value || '');
+      if (!raw) return '(없음)';
+      if (/^data:/i.test(raw)) return `data:(${raw.length}자)`;
+      return raw.split(/[\\/]/).pop() || raw;
+    };
+    self.log(
+      `   🔎 [대표사진 추적] thumbnailPath=${shortName((resolved as any).thumbnailPath)} · `
+      + `images 중 isThumbnail=${imagesForDiag.filter((img) => img?.isThumbnail === true).length}개`,
+    );
+    imagesForDiag.slice(0, 4).forEach((img, index) => {
+      self.log(
+        `      [${index + 1}] heading="${String(img?.heading || '').slice(0, 24)}" `
+        + `file=${shortName(img?.filePath)} saved=${shortName(img?.savedToLocal)} url=${shortName(img?.url)}`,
+      );
+    });
+    self.log(
+      `   🔎 [장소 추적] payload places=${Array.isArray((resolved as any).places) ? (resolved as any).places.length : 0}곳 · `
+      + `placeName=${(resolved as any).placeName || '(없음)'}`,
+    );
+
     if (headings.length === 0 && (resolved.images || []).length > 0) {
       self.log('   ⚠️ 소제목이 0개라 본문에 이미지를 넣을 자리가 없습니다 — 이미지 없이 진행됩니다.');
     }
