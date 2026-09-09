@@ -2353,14 +2353,42 @@ export function initHeadingImageGeneration(): void {
           throw new Error('ImageManager 미초기화 — 앱 재시작 필요');
         }
         const headings = getCurrentImageHeadings();
-        const headingTitles = headings.length > 0
-          ? headings.map(h => String(h?.title || h?.heading || h).trim()).filter(Boolean)
-          : allImages.map((_, i) => `🔗 URL 이미지 ${i + 1}`); // 이미지 개수만큼 가상 헤딩 생성
+        const realHeadingTitles = headings
+          .map((h: any) => String(h?.title || h?.heading || h).trim())
+          .filter(Boolean);
+        /*
+         * [2026-09-09 사장님] "예비 이미지로 폴더만 저장해야 되는데 생성된 이미지에 같이
+         * 배치가 되어 있어요. 소제목 분석을 했으니까 그 소제목에 맞게 넣어주고 나머지는
+         * 같이 두지 마세요."
+         *
+         * 예전에는 소제목 수를 넘는 이미지에 "🔗 URL 이미지 N" 가상 헤딩을 붙여 전부
+         * ImageManager 에 넣었다. 그래서 예비로만 두려던 사진이 생성된 이미지 목록에 끼고
+         * 발행 후보로도 올라왔다.
+         *
+         * 이제 소제목이 있으면 그 수만큼만 배치하고, 넘치는 것은 폴더에만 저장한다.
+         * 소제목이 아예 없을 때는 배치할 자리가 없어 목록이 유일한 접근 경로이므로
+         * 예전처럼 가상 헤딩을 쓴다(그 경우까지 감추면 사진을 꺼낼 방법이 사라진다).
+         */
+        const hasRealHeadings = realHeadingTitles.length > 0;
+        const headingTitles = hasRealHeadings
+          ? realHeadingTitles
+          : allImages.map((_, i) => `🔗 URL 이미지 ${i + 1}`);
+        const placeableCount = hasRealHeadings
+          ? Math.min(allImages.length, realHeadingTitles.length)
+          : allImages.length;
+        if (hasRealHeadings && allImages.length > placeableCount) {
+          appendLog(
+            `📎 소제목 ${realHeadingTitles.length}개에 ${placeableCount}장 배치 · `
+            + `나머지 ${allImages.length - placeableCount}장은 예비로 폴더에만 저장합니다`,
+            'images-log-output',
+          );
+        }
 
         // ✅ 각 URL을 다운로드 + 폴더 저장 + ImageManager 추가
         let savedCount = 0;
         for (let i = 0; i < allImages.length; i++) {
           const imgUrl = allImages[i];
+          const isSpareCollectedImage = i >= placeableCount; // 소제목보다 많은 사진 — 폴더에만 둔다
           const heading = headingTitles[i] || `🔗 URL 이미지 ${i + 1}`;
           let filePath: string | undefined;
           let previewDataUrl: string | undefined;
@@ -2377,6 +2405,10 @@ export function initHeadingImageGeneration(): void {
           } catch (e: any) {
             appendLog(`⚠️ ${i + 1}/${allImages.length} 다운로드 오류: ${e?.message?.slice(0, 50)}`, 'images-log-output');
           }
+
+          // [2026-09-09] 예비 사진은 ImageManager 에 넣지 않는다 — 폴더 저장은 위에서 끝났다.
+          //   넣으면 "생성된 이미지" 목록에 끼고 발행 후보로도 올라온다.
+          if (isSpareCollectedImage) continue;
 
           // ImageManager 추가 (헤딩이 실제 헤딩이면 매칭, 아니면 가상 슬롯)
           try {
