@@ -58,7 +58,8 @@ interface TopicBriefs {
     briefs: Brief[];
 }
 
-const SLOT_TIME: Record<RoundSlot, string> = { 아침: '07:00', 오후: '13:00', 저녁: '19:00' };
+// 크론이 정각을 피해 06:23·12:23·18:23 KST 로 돈다(정각은 GitHub 가 미룸). 표기도 그 시각.
+const SLOT_TIME: Record<RoundSlot, string> = { 아침: '06:23', 오후: '12:23', 저녁: '18:23' };
 
 const FREE_BRIEFS = 3;
 const TIMING_LABEL: Record<Timing, { name: string; desc: string }> = {
@@ -107,7 +108,7 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
             <TabIntro
                 title="오늘의 글감"
                 desc={`날짜가 박힌 공식 사실에서 뽑은 글감 — NOW(지금) · NEXT(예정) · ALWAYS(지속)${data ? ` · 오늘 ${rounds.length}회차 ${num(todayTotal)}건 · ★ ${num(todayStar)}` : ''}`}
-                source="네이버 뉴스 API 기사 실측 · 검색광고 검색량 실측 · 정면 글 수 실측(안 쟀으면 미측정) · 아침 07:00 · 오후 13:00 · 저녁 19:00 갱신"
+                source="네이버 뉴스 API 기사 실측 · 검색광고 검색량 실측 · 정면 글 수 실측(안 쟀으면 미측정) · 아침 06:23 · 오후 12:23 · 저녁 18:23 갱신"
             />
 
             {error && <p className="lw-note lw-note-error">글감을 못 읽었습니다 — {error}</p>}
