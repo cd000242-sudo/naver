@@ -388,7 +388,7 @@ function KeysTab() {
             <section className="lw-panel" aria-label="계정 동기화">
                 <div className="lw-panel-head">
                     <h2>계정 동기화 · 앱 키 가져오기</h2>
-                    <span>{syncInfo.enabled ? `켜짐 — ${syncInfo.userId} 계정, 저장할 때마다 자동으로 올라갑니다` : '꺼짐 — 로그인 비밀번호를 한 번 확인하면 이 계정의 키가 다른 기기와 맞춰집니다'}</span>
+                    <span>{syncInfo.enabled ? `켜짐 — ${syncInfo.userId} 계정 · 저장할 때마다 자동으로 올라가고, 다른 기기는 로그인만 하면 받습니다` : '꺼짐 — 키를 넣은 기기(보통 PC)에서 먼저 켜세요. 그다음 다른 기기는 로그인만 하면 자동으로 받습니다'}</span>
                 </div>
                 <div className="lw-keys-sync">
                     {!syncInfo.enabled && (
@@ -406,7 +406,8 @@ function KeysTab() {
                     <div className="lw-keys-sync-actions">
                         {syncInfo.enabled && <button type="button" className="lw-mini" disabled={syncBusy} onClick={() => void pullNow()}>다른 기기 키 가져오기</button>}
                         {syncInfo.enabled && <button type="button" className="lw-mini" disabled={syncBusy} onClick={() => void pushNow()}>지금 올리기</button>}
-                        <button type="button" className="lw-mini" disabled={syncBusy} onClick={() => void importFromApp()}>앱에서 키 가져오기</button>
+                        {/* 앱 브리지는 같은 PC 에서만 된다 — 폰에는 이 버튼이 없어야 한다(사장님 2026-09-09 "폰에 앱이 깔려야 된다는 말을 하는데"). */}
+                        {bridgeReady && <button type="button" className="lw-mini" disabled={syncBusy} onClick={() => void importFromApp()}>이 PC 의 LEWORD 앱에서 키 가져오기</button>}
                     </div>
                     {syncNote && <p className="lw-note lw-note-plain" role="status">{syncNote}</p>}
                 </div>
