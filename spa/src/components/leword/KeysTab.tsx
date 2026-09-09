@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { checkClaudeToken, exchangeClaudeOauth, fetchClaudeUsage, type ClaudeUsage } from '../../lib/keywordApi';
 import { bridgeAgentLogin, bridgeApiKeys, bridgeClaudeCredentials, probeBridge, type BridgeStatus } from '../../lib/bridge';
 import { enableKeySync, keySyncInfo, pullUserKeys, pushUserKeysDetailed } from '../../lib/keySync';
-import { loadSession } from '../../lib/lewordAuth';
+import { loadSession, login } from '../../lib/lewordAuth';
 import {
     KEY_GROUPS,
     checkKeyShape,
@@ -208,6 +208,12 @@ function KeysTab() {
         if (!session) { setSyncNote('먼저 로그인해 주세요.'); return; }
         setSyncBusy(true);
         try {
+            /*
+             * 임의 문자열은 받지 않는다(사장님 2026-09-10 "비밀번호도 그대로 써야 맞지 않겠니, 악용하면 어쩌려고").
+             * 서버 로그인으로 비밀번호가 맞는지 먼저 확인하고, 맞을 때만 그 비밀번호로 동기화 키를 만든다.
+             */
+            const verified = await login(session.userId, syncPassword);
+            if (!verified.ok) { setSyncNote('로그인 비밀번호가 아닙니다 — 이 계정의 로그인 비밀번호를 넣어 주세요.'); return; }
             const outcome = await enableKeySync(session.userId, syncPassword);
             setSyncPassword('');
             setSyncRekey(false);
@@ -402,7 +408,7 @@ function KeysTab() {
             <section className="lw-panel" aria-label="계정 동기화">
                 <div className="lw-panel-head">
                     <h2>계정 동기화 · 앱 키 가져오기</h2>
-                    <span>{syncInfo.enabled ? `켜짐 — ${syncInfo.userId} 계정 · 동기화 ID ${syncInfo.slotId} · 두 기기의 ID 가 같아야 서로 받습니다` : '꺼짐 — 동기화 암호(두 기기에 같은 것)를 넣어 켜세요. 키를 넣은 기기(보통 PC)에서 먼저, 그다음 다른 기기'}</span>
+                    <span>{syncInfo.enabled ? `켜짐 — ${syncInfo.userId} 계정 · 동기화 ID ${syncInfo.slotId} · 두 기기의 ID 가 같아야 서로 받습니다` : '꺼짐 — 로그인 비밀번호를 넣어 켜세요(로그인할 때는 자동으로 켜집니다). 키를 넣은 기기(보통 PC)에서 먼저'}</span>
                 </div>
                 <div className="lw-keys-sync">
                     {(!syncInfo.enabled || syncRekey) && (
@@ -410,7 +416,7 @@ function KeysTab() {
                             <input
                                 type="password"
                                 autoComplete="current-password"
-                                placeholder="동기화 암호 — 두 기기에 같은 것을 넣으세요 (로그인 비밀번호와 같게 하면 기억하기 쉽습니다)"
+                                placeholder="이 계정의 로그인 비밀번호 (서버에서 확인한 뒤 동기화 키를 만듭니다 · 저장하지 않습니다)"
                                 value={syncPassword}
                                 onChange={(e) => setSyncPassword(e.target.value)}
                             />
