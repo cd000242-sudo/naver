@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-frontal', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues', 'issue-brief', 'hot-keywords']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-frontal', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues', 'issue-brief', 'hot-keywords', 'user-keys-get', 'user-keys-put']);
 /**
  * 장부(쿼터)가 필요해 GAS 에 남은 키워드 액션들은 엣지 방패(leaderspro-edge)를
  * 거친다 — 같은 질문은 15분 캐시로 즉답(0.5초), 처음 질문만 GAS 로 간다(장부도
@@ -190,6 +190,22 @@ export function setStoredLicense(code: string): void {
     } catch {
         // 저장이 안 돼도 이번 조회는 되어야 한다.
     }
+}
+
+/**
+ * 워커에 액션만 보낸다 — 개인 키·라이선스를 **싣지 않는다**. 계정 키 동기화(keySync)처럼 암호문만 오갈 때 쓴다.
+ */
+export async function callWorkerRaw(action: string, params: Record<string, string>): Promise<Record<string, unknown> | null> {
+    try {
+        const response = await fetch(WORKER_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action, ...params }),
+            cache: 'no-store',
+        });
+        if (!response.ok) return null;
+        return await response.json() as Record<string, unknown>;
+    } catch { return null; }
 }
 
 async function call<T>(action: string, params: Record<string, string>): Promise<KeywordApiResult<T>> {

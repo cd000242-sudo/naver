@@ -55,12 +55,14 @@ const kst = (iso: string) => new Date(iso).toLocaleString('ko-KR', {
 
 export interface PicksTopicMeta { topic: string; golden: number }
 
-export default function TodayPicksBoard({ onAnalyze, topic, onTopics }: {
+export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicChange }: {
     onAnalyze?: (keyword: string) => void;
     /** 사이드 메뉴 하위 항목이 고른 주제 — 없으면 첫 주제 */
     topic?: string | null;
     /** 읽어 온 주제 목록(황금 수 포함)을 사이드 메뉴로 올려보낸다 */
     onTopics?: (topics: PicksTopicMeta[]) => void;
+    /** 모바일에는 사이드 메뉴 하위 항목이 없다(햄버거 메뉴는 탭만) — 표 위 주제 칩이 이걸로 고른다(사장님 2026-09-09). */
+    onTopicChange?: (topic: string) => void;
 }) {
     const [data, setData] = useState<TodayPicks | null>(null);
     const [error, setError] = useState('');
@@ -100,6 +102,24 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics }: {
 
             {error && <p className="lw-note lw-note-error">추천키워드를 못 읽었습니다 — {error}</p>}
             {!error && !data && <p className="lw-note">불러오는 중…</p>}
+
+            {/* 모바일 전용 주제 칩 — PC 에서는 사이드 메뉴 하위 항목이 같은 역할이라 CSS 로 숨긴다. */}
+            {onTopicChange && topics.length > 0 && (
+                <div className="lw-picks-topics lw-picks-topics-mobile" role="tablist" aria-label="주제">
+                    {topics.map((item) => (
+                        <button
+                            key={item.topic}
+                            type="button"
+                            role="tab"
+                            aria-selected={active?.topic === item.topic}
+                            className={`lw-picks-topic-btn${active?.topic === item.topic ? ' is-active' : ''}`}
+                            onClick={() => onTopicChange(item.topic)}
+                        >
+                            {item.topic}<b>{goldenOf(item)}</b>
+                        </button>
+                    ))}
+                </div>
+            )}
 
             {active && (
                 <div className="lw-picks-panel" role="tabpanel" aria-label={active.topic}>

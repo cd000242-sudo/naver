@@ -2192,6 +2192,9 @@ function LewordStyles() {
             .lw-navi-fold:focus-visible { outline: 2px solid #03c75a; outline-offset: 1px; }
             .lw-navi-naver { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 4px; background: #03c75a; color: #fff; font-weight: 800; font-size: 11px; line-height: 1; font-family: Arial, Helvetica, sans-serif; vertical-align: -3px; }
             .lw-picks-topics { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
+            /* 모바일 전용 주제 칩 — PC(사이드 메뉴 하위 항목 있음)에서는 숨긴다 */
+            .lw-picks-topics-mobile { display: none; }
+            @media (max-width: 860px) { .lw-picks-topics-mobile { display: flex; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 6px; -webkit-overflow-scrolling: touch; } .lw-picks-topics-mobile .lw-picks-topic-btn { white-space: nowrap; flex: none; } }
             .lw-picks-topic-btn { font: inherit; font-size: 12.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); background: transparent; color: inherit; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
             .lw-picks-topic-btn b { font-weight: 600; font-size: 11px; opacity: 0.6; }
             .lw-picks-topic-btn:hover { background: color-mix(in srgb, currentColor 7%, transparent); }

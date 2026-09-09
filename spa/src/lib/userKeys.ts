@@ -164,6 +164,8 @@ export function saveUserKeys(keys: UserKeys): void {
             if (trimmed) cleaned[field as UserKeyField] = trimmed;
         }
         localStorage.setItem(STORE_KEY, JSON.stringify(cleaned));
+        // 계정 동기화(keySync)가 이 이벤트를 받아 암호문을 올린다 — 저장 지점이 여럿이라 여기서 한 번.
+        try { window.dispatchEvent(new CustomEvent('leword:keys-saved')); } catch { /* 이벤트가 없어도 저장은 됐다 */ }
     } catch {
         // 저장이 안 되더라도 이번 세션 조회는 되게 둔다.
     }

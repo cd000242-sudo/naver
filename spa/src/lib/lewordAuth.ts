@@ -76,6 +76,8 @@ function saveSession(session: LewordSession): void {
 export function clearSession(): void {
     try {
         localStorage.removeItem(SESSION_KEY);
+        // 계정 키 동기화의 유도 키도 지운다(비밀번호 파생값) — 키 자체(localStorage)는 남는다.
+        localStorage.removeItem('leaderspro.keysync.v1');
     } catch {
         // 계속
     }

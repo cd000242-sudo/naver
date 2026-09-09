@@ -15,6 +15,7 @@ import RankTab from '../components/leword/RankTab';
 import RpmTab from '../components/leword/RpmTab';
 import TodayPicksBoard from '../components/leword/TodayPicksBoard';
 import TopicBriefsBoard from '../components/leword/TopicBriefsBoard';
+import { installKeySyncListener } from '../lib/keySync';
 import YoutubeTab from '../components/leword/YoutubeTab';
 
 /**
@@ -78,6 +79,8 @@ function LewordPage() {
     const lockedTab = !session && !GUEST_TABS.has(activeTab);
 
     // 보드 안쪽 잠금 안내가 로그인을 부를 때 — 소품을 길게 넘기지 않는다.
+    // 계정 키 동기화 — '내 API 키'에서 저장할 때마다 암호문을 올린다(한 번만 설치).
+    useEffect(() => { installKeySyncListener(); }, []);
     useEffect(() => {
         const open = () => setAuthOpen(true);
         window.addEventListener('leword:login', open);
@@ -324,7 +327,7 @@ function LewordPage() {
                 {!lockedTab && activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {/* 실검 틈새키워드와 키워드 분석 사이의 서브탭 — 오늘의 네이버 추천키워드(사장님 2026-09-08). */}
-                {!lockedTab && activeTab === 'picks' && <TodayPicksBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} topic={currentPicksTopic} onTopics={setPicksTopics} />}
+                {!lockedTab && activeTab === 'picks' && <TodayPicksBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} topic={currentPicksTopic} onTopics={setPicksTopics} onTopicChange={choosePicksTopic} />}
                 {/* 오늘의 글감 — NOW/NEXT/ALWAYS 브리프(사장님 예시 형식 2026-09-09). */}
                 {!lockedTab && activeTab === 'briefs' && <TopicBriefsBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'kin' && <KinGoldenTab onAnalyze={sendToAnalyze} />}

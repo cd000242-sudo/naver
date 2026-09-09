@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { enableKeySync } from '../../lib/keySync';
 import {
     confirmPasswordReset, confirmPhoneVerify,
     login, registerWithLicense,
@@ -69,6 +70,11 @@ function LewordAuth({ onDone, onCancel }: { onDone: (session: LewordSession) => 
         setBusy(false);
 
         if (result.ok) {
+            /*
+             * 계정 키 동기화(사장님 2026-09-09 "모바일은 또 따로 입력해야 되나요?") — 비밀번호로 유도 키를 만들어
+             * 이 브라우저에 기억하고, 다른 기기에서 올린 암호문이 있으면 풀어서 채운다. 실패해도 로그인은 그대로.
+             */
+            try { await enableKeySync(id, password); } catch { /* 동기화 실패는 로그인을 막지 않는다 */ }
             onDone(result.session);
             return;
         }
