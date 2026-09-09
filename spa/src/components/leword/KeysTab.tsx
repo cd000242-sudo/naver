@@ -222,7 +222,9 @@ function KeysTab() {
     const pullNow = async () => {
         setSyncBusy(true);
         try {
-            const r = await pullUserKeys();
+            // 최대 1분까지 3초마다 다시 본다 — 화면에 경과를 보여 주고, 오면 바로 끝난다.
+            setSyncNote('다른 기기가 올린 키를 받는 중…');
+            const r = await pullUserKeys({ waitMs: 60_000, onWait: (ms) => setSyncNote(`다른 기기가 올린 키를 받는 중… ${Math.round(ms / 1000)}초 (서버 반영을 기다리는 중, 최대 1분)`) });
             setKeys(loadUserKeys());
             const when = r.savedAt ? new Date(r.savedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
             setSyncNote(r.status === 'merged' ? `✅ 가져왔습니다 — 빈 칸 ${r.filled}개를 채웠습니다${when ? ` (다른 기기 업로드 ${when})` : ''}.`

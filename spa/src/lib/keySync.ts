@@ -126,14 +126,21 @@ export interface PullResult {
  * 원격을 끌어와 로컬과 합친다 — 로컬에 있는 칸은 로컬이 이기고, 빈 칸만 원격으로 채운다.
  * KV 는 엣지끼리 늦게 퍼진다(최대 1분) — 폰이 PC 직후에 부르면 비어 보일 수 있어 3번(약 8초) 다시 본다.
  */
-export async function pullUserKeys(): Promise<PullResult> {
+export async function pullUserKeys(options: { waitMs?: number; onWait?: (elapsedMs: number) => void } = {}): Promise<PullResult> {
     const record = loadRecord();
     if (!record || !cryptoOk()) return { status: 'unavailable', filled: 0, savedAt: null };
     try {
         let blob = '';
         let savedAt: number | null = null;
-        for (let attempt = 0; attempt < 3 && !blob; attempt += 1) {
-            if (attempt > 0) await new Promise((r) => setTimeout(r, 4000));
+        // KV 전파 상한(1분)까지 몇 초마다 다시 본다 — 사람이 시계 보며 기다리지 않게(사장님 2026-09-10 "1분이나 있어야 돼?").
+        const waitMs = options.waitMs ?? 8_000;
+        const started = Date.now();
+        for (let attempt = 0; !blob; attempt += 1) {
+            if (attempt > 0) {
+                if (Date.now() - started >= waitMs) break;
+                await new Promise((r) => setTimeout(r, 3000));
+                options.onWait?.(Date.now() - started);
+            }
             const res = await callWorkerRaw('user-keys-get', { slot: record.slot });
             blob = res && res.ok && typeof res.blob === 'string' ? res.blob : '';
             savedAt = res && typeof res.savedAt === 'number' ? res.savedAt : null;
