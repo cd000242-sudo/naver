@@ -171,8 +171,27 @@ function renderResults(items: readonly PlaceSearchItem[]): void {
 
       pickedList.push({ name: item.name, address, position: 'auto' });
       renderSelected();
+      resetSearchField();
     });
   });
+}
+
+/**
+ * [2026-09-09] 한 곳을 고르고 나면 검색창을 비우고 결과를 치운다.
+ *
+ * 사장님 요청: "검색하고 아래에 뜬 장소 클릭 선택하면 검색 필드는 초기화되고
+ * 다시 새롭게 검색할 수 있게." 여행 글은 장소를 여러 곳 넣는 게 기본이라, 고른 뒤
+ * 이전 검색어를 손으로 지우는 동작이 매번 끼어들었다. 커서까지 돌려놔 바로 다음
+ * 장소를 칠 수 있게 한다.
+ */
+function resetSearchField(): void {
+  const input = byId<HTMLInputElement>(IDS.query);
+  if (input) {
+    input.value = '';
+    try { input.focus(); } catch { /* 포커스 실패는 무시 - 입력 자체는 가능하다 */ }
+  }
+  const results = byId(IDS.results);
+  if (results) results.innerHTML = '';
 }
 
 async function runSearch(): Promise<void> {
