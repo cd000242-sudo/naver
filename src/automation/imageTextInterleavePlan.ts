@@ -96,7 +96,24 @@ export function planImageTextInterleave<TImage>(
     return [{ images: imageList, text }];
   }
 
-  const paragraphs = mergeTinyChunks(splitBodyIntoParagraphs(text));
+  const rawParagraphs = splitBodyIntoParagraphs(text);
+
+  /*
+   * [2026-09-09] 문단 수와 사진 수가 정확히 같으면 순서대로 1:1 로 붙인다.
+   *
+   * 글 생성 단계에서 사진별 문단(paragraphs)을 받아 사진 순서대로 이어 붙이므로,
+   * 개수가 같다는 것은 "이 문단이 이 사진 이야기" 라는 뜻이다. 이때는 짧은 문단을
+   * 합치거나 묶어서는 안 된다 — 합치는 순간 짝이 어긋난다.
+   * ("근포땅굴 사진 아래 꼬막집 주차장 글" 사고가 정확히 이 지점이었다.)
+   */
+  if (imageList.length >= 2 && rawParagraphs.length === imageList.length) {
+    return rawParagraphs.map((paragraph, index) => ({
+      images: [imageList[index]!],
+      text: paragraph,
+    }));
+  }
+
+  const paragraphs = mergeTinyChunks(rawParagraphs);
   if (imageList.length < 2 || paragraphs.length < 2) {
     return [{ images: imageList, text }];
   }

@@ -210,7 +210,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-09-04 3차] 사건/의혹 글 주장·사실 규율(issue-claim-discipline) promptLoader 배선으로 재계산
         // [2026-09-06 R2] finalVerdict 스키마 필드 + 모드별 결론 계약 교체(contentJsonPromptFormat · mate/base.prompt)로 재계산
         // [2026-09-09] 사진 글 소제목을 문장형으로(imageNarrative/base.prompt M3 · 출력 스키마)로 재계산
-        '66a5271f97d07bb891ed0dcfdc8314ee5234ea1c5b29dc066e1eea990cf90aac',
+        // [2026-09-09] 사진별 문단 계약(imageNarrative/base.prompt paragraphs)으로 재계산
+        'f1982a6cba7d884019be760f6b86f579328a993e0884d795c859d17fc400e4d1',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

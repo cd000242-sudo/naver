@@ -23,6 +23,7 @@ import type {
 import type { StructuredContent } from '../../contentGenerator.js';
 import type { AgentProductPolicyContext } from '../../agentCli/productPolicy.js';
 import { buildVoiceProfileBlock, sampleVoiceProfile } from '../../contentVoiceProfile.js';
+import { describeParagraphPairing, orderParagraphsByImageRefs } from './paragraphOrdering.js';
 
 // Resolved at runtime relative to this file: ../../prompts/imageNarrative/
 const PROMPT_DIR = join(__dirname, '..', '..', '..', 'src', 'prompts', 'imageNarrative');
@@ -131,11 +132,20 @@ function buildUserPrompt(plan: NarrativePlan, options: BuilderOptions): string {
 
   const sectionsText = plan.sections
     .map((section, i) => {
-      const beatsText = section.beats.map((b) => `  - ${b}`).join('\n');
+      /*
+       * [2026-09-09] 비트를 사진과 짝지어 보여준다.
+       *
+       * beats 는 sectionBuilder 에서 imageRefs 와 같은 순서로 만들어진다
+       * (items.map((it) => it.result.description_ko)). 그런데 예전에는 이미지 목록과
+       * 비트 목록을 따로 나열해, 모델이 어느 설명이 어느 사진 것인지 알 수 없었다.
+       * 짝을 눈에 보이게 적어 준다.
+       */
+      const pairedText = section.imageRefs
+        .map((ref, k) => `  - [${ref}] ${section.beats[k] ?? '(설명 없음)'}`)
+        .join('\n');
       return (
         `## 섹션 ${i + 1}: ${section.heading}\n` +
-        `이미지: ${section.imageRefs.join(', ')}\n` +
-        `스토리 비트:\n${beatsText}`
+        `이 섹션의 사진과 그 사진의 분석 (이 순서 그대로 paragraphs 를 만든다):\n${pairedText}`
       );
     })
     .join('\n\n');
@@ -485,11 +495,30 @@ function normalizeSections(
   plan: NarrativePlan,
 ): Array<{ heading: string; content: string; imageRef?: string }> {
   const parsedSections = (parsed.sections ?? [])
-    .map((section) => ({
-      heading: sanitizePlainText(section.heading),
-      content: sanitizePlainText(section.content),
-      imageRef: sanitizePlainText(section.imageRef),
-    }))
+    .map((section, index) => {
+      /*
+       * [2026-09-09] 사진별 문단이 오면 사진 순서대로 세워 본문을 만든다.
+       *
+       * 사고: "근포땅굴 이미지인데 왜 꼬막집 주차장 내용이 나오냐" — 이미지와 글을
+       * 번갈아 넣으면서 짝을 안 맞춘 탓이다. plan.sections[i].imageRefs 순서가
+       * 발행 때 이미지가 들어가는 순서이므로, 그 순서로 문단을 세우면 짝이 맞는다.
+       * 하나라도 짝이 비면 통째로 포기하고 기존 content 를 쓴다 — 반쯤 맞은 짝이 더 나쁘다.
+       */
+      const raw = section as { paragraphs?: Array<{ imageRef?: unknown; text?: unknown }> };
+      const planSection = plan.sections[index];
+      const paired = orderParagraphsByImageRefs(raw.paragraphs, planSection?.imageRefs);
+      if (!paired && raw.paragraphs) {
+        console.warn(
+          `[NarrativeBuilder] 섹션 ${index + 1} 사진별 문단 짝을 못 세워 기존 본문을 씁니다 — `
+          + describeParagraphPairing(raw.paragraphs, planSection?.imageRefs),
+        );
+      }
+      return {
+        heading: sanitizePlainText(section.heading),
+        content: sanitizePlainText(paired ?? section.content),
+        imageRef: sanitizePlainText(section.imageRef),
+      };
+    })
     .filter((section) => section.heading || section.content);
 
   if (parsedSections.length > 0) return parsedSections;
