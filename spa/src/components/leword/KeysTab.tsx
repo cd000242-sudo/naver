@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { checkClaudeToken, exchangeClaudeOauth, fetchClaudeUsage, type ClaudeUsage } from '../../lib/keywordApi';
-import { bridgeAgentLogin, bridgeClaudeCredentials, probeBridge, type BridgeStatus } from '../../lib/bridge';
+import { bridgeAgentLogin, bridgeApiKeys, bridgeClaudeCredentials, probeBridge, type BridgeStatus } from '../../lib/bridge';
+import { enableKeySync, keySyncInfo, pullUserKeys, pushUserKeys } from '../../lib/keySync';
+import { loadSession } from '../../lib/lewordAuth';
 import {
     KEY_GROUPS,
     checkKeyShape,
@@ -195,6 +197,55 @@ function KeysTab() {
      */
     const [bridge, setBridge] = useState<BridgeStatus | 'probing' | null>(null);
     useEffect(() => { probeBridge().then(setBridge); }, []);
+
+    /* 계정 동기화 · 앱 키 가져오기 */
+    const [syncInfo, setSyncInfo] = useState(() => keySyncInfo());
+    const [syncPassword, setSyncPassword] = useState('');
+    const [syncBusy, setSyncBusy] = useState(false);
+    const [syncNote, setSyncNote] = useState('');
+    const enableSync = async () => {
+        const session = loadSession();
+        if (!session) { setSyncNote('먼저 로그인해 주세요.'); return; }
+        setSyncBusy(true);
+        try {
+            const outcome = await enableKeySync(session.userId, syncPassword);
+            setSyncPassword('');
+            setSyncInfo(keySyncInfo());
+            setKeys(loadUserKeys());
+            setSyncNote(outcome === 'pulled' ? '✅ 동기화 켜짐 — 다른 기기의 키를 가져와 채웠습니다.'
+                : outcome === 'pushed' ? '✅ 동기화 켜짐 — 이 브라우저의 키를 올렸습니다. 다른 기기에서 같은 비밀번호로 켜면 내려옵니다.'
+                    : outcome === 'nothing' ? '✅ 동기화 켜짐 — 아직 올릴 키도, 가져올 키도 없습니다.'
+                        : '이 브라우저는 동기화를 지원하지 않습니다(WebCrypto 없음).');
+        } finally { setSyncBusy(false); }
+    };
+    const pullNow = async () => {
+        setSyncBusy(true);
+        try {
+            const r = await pullUserKeys();
+            setKeys(loadUserKeys());
+            setSyncNote(r.status === 'merged' ? `✅ 가져왔습니다 — 빈 칸 ${r.filled}개를 채웠습니다.` : r.status === 'none' ? '다른 기기에서 올린 키가 아직 없습니다. 그 기기에서 [지금 올리기]를 누르세요.' : '가져오지 못했습니다. 잠시 뒤 다시 시도해 주세요.');
+        } finally { setSyncBusy(false); }
+    };
+    const pushNow = async () => {
+        setSyncBusy(true);
+        try { setSyncNote((await pushUserKeys()) ? '✅ 올렸습니다 — 다른 기기에서 [다른 기기 키 가져오기]를 누르면 내려옵니다.' : '올리지 못했습니다. 잠시 뒤 다시 시도해 주세요.'); }
+        finally { setSyncBusy(false); }
+    };
+    const importFromApp = async () => {
+        setSyncBusy(true);
+        try {
+            const r = await bridgeApiKeys();
+            if (r.status !== 'ok') { setSyncNote(r.status === 'outdated' ? '앱이 구버전입니다 — 앱을 최신으로 업데이트한 뒤 다시 누르세요.' : '이 PC 에서 LEWORD 앱이 켜져 있어야 합니다.'); return; }
+            const next: UserKeys = { ...keys };
+            let added = 0;
+            for (const [field, value] of Object.entries(r.keys)) {
+                if (!next[field as keyof UserKeys] && value) { next[field as keyof UserKeys] = value; added += 1; }
+            }
+            setKeys(next);
+            saveUserKeys(next); // 저장 이벤트 → 동기화가 켜져 있으면 다른 기기로도 간다
+            setSyncNote(added > 0 ? `✅ 앱에서 키 ${added}개를 가져와 저장했습니다${syncInfo.enabled ? ' — 다른 기기로도 올라갑니다' : ''}.` : '앱의 키가 이미 전부 들어 있습니다.');
+        } finally { setSyncBusy(false); }
+    };
     const refreshAgents = async () => {
         setBridge('probing');
         let status: BridgeStatus | null = null;
@@ -327,8 +378,39 @@ function KeysTab() {
                 <strong>키가 어디로 가는지</strong>
                 입력한 키는 <strong>이 브라우저의 저장소</strong>에만 남습니다. 조회를 누를 때만 요청 본문에 담겨
                 서버로 가고(주소창·기록에 남지 않도록 POST로 보냅니다), 서버는 조회가 끝나면 버립니다.
-                시트·로그·설정 어디에도 저장하지 않습니다. 브라우저를 바꾸면 다시 입력해야 합니다.
+                시트·로그·설정 어디에도 저장하지 않습니다. 다른 기기에는 아래 <strong>계정 동기화</strong>로 옮깁니다.
             </div>
+
+            {/*
+              * 계정 동기화 + 앱 키 가져오기 (사장님 2026-09-09 "모바일로 들어가면 PC 에서 넣은 키를 못 불러오네",
+              * "앱에서든 사이트에서든 하나처럼"). 로그인 비밀번호로 잠근 암호문만 서버에 두고, 앱 키는 같은 기기 앱에서 받는다.
+              */}
+            <section className="lw-panel" aria-label="계정 동기화">
+                <div className="lw-panel-head">
+                    <h2>계정 동기화 · 앱 키 가져오기</h2>
+                    <span>{syncInfo.enabled ? `켜짐 — ${syncInfo.userId} 계정, 저장할 때마다 자동으로 올라갑니다` : '꺼짐 — 로그인 비밀번호를 한 번 확인하면 이 계정의 키가 다른 기기와 맞춰집니다'}</span>
+                </div>
+                <div className="lw-keys-sync">
+                    {!syncInfo.enabled && (
+                        <form className="lw-keys-sync-form" onSubmit={(e) => { e.preventDefault(); void enableSync(); }}>
+                            <input
+                                type="password"
+                                autoComplete="current-password"
+                                placeholder="로그인 비밀번호 (동기화 키를 만드는 데만 쓰고 저장하지 않습니다)"
+                                value={syncPassword}
+                                onChange={(e) => setSyncPassword(e.target.value)}
+                            />
+                            <button type="submit" className="lw-mini" disabled={syncBusy || !syncPassword}>동기화 켜기</button>
+                        </form>
+                    )}
+                    <div className="lw-keys-sync-actions">
+                        {syncInfo.enabled && <button type="button" className="lw-mini" disabled={syncBusy} onClick={() => void pullNow()}>다른 기기 키 가져오기</button>}
+                        {syncInfo.enabled && <button type="button" className="lw-mini" disabled={syncBusy} onClick={() => void pushNow()}>지금 올리기</button>}
+                        <button type="button" className="lw-mini" disabled={syncBusy} onClick={() => void importFromApp()}>앱에서 키 가져오기</button>
+                    </div>
+                    {syncNote && <p className="lw-note lw-note-plain" role="status">{syncNote}</p>}
+                </div>
+            </section>
 
             {/*
               * AI 연동 — 하나다(사장님 확정 2026-08-20). 구독 연결 버튼이 전부고,

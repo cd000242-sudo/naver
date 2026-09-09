@@ -95,19 +95,42 @@ export async function enableKeySync(userId: string, password: string): Promise<K
     if (!cryptoOk() || !userId.trim() || !password) return 'unavailable';
     const record = await deriveRecord(userId, password);
     try { localStorage.setItem(SYNC_KEY, JSON.stringify(record)); } catch { /* 기억 못 해도 이번 동기화는 한다 */ }
+    // 로컬과 원격을 합친다(로컬 칸 우선, 빈 칸만 원격으로) → 합친 결과를 올린다. 어느 기기가 먼저였든 잃는 칸이 없다.
+    const pulled = await pullUserKeys();
+    if (pulled.status === 'merged') return pulled.filled > 0 ? 'pulled' : 'pushed';
     const local = loadUserKeys();
-    if (hasAnyUserKey(local)) {
-        return (await pushUserKeys(local)) ? 'pushed' : 'nothing';
-    }
+    if (hasAnyUserKey(local)) return (await pushUserKeys(local)) ? 'pushed' : 'nothing';
+    return 'nothing';
+}
+
+/** 동기화 상태 — 화면(내 API 키)의 안내용. */
+export function keySyncInfo(): { enabled: boolean; userId: string | null } {
+    const record = loadRecord();
+    return { enabled: record !== null, userId: record ? record.userId : null };
+}
+
+/**
+ * 원격을 끌어와 로컬과 합친다 — 로컬에 있는 칸은 로컬이 이기고, 빈 칸만 원격으로 채운다.
+ * 로그인 없이도 '내 API 키'의 [다른 기기 키 가져오기]가 부른다. 합친 결과는 다시 올린다.
+ */
+export async function pullUserKeys(): Promise<{ status: 'merged' | 'none' | 'unavailable'; filled: number }> {
+    const record = loadRecord();
+    if (!record || !cryptoOk()) return { status: 'unavailable', filled: 0 };
     try {
         const res = await callWorkerRaw('user-keys-get', { slot: record.slot });
         const blob = res && res.ok && typeof res.blob === 'string' ? res.blob : '';
-        if (!blob) return 'nothing';
+        if (!blob) return { status: 'none', filled: 0 };
         const remote = await decryptKeys(record, blob);
-        if (!remote || !hasAnyUserKey(remote)) return 'nothing';
-        saveUserKeys(remote);
-        return 'pulled';
-    } catch { return 'nothing'; }
+        if (!remote || !hasAnyUserKey(remote)) return { status: 'none', filled: 0 };
+        const local = loadUserKeys();
+        let filled = 0;
+        const merged: UserKeys = { ...remote, ...local };
+        for (const [field, value] of Object.entries(remote)) {
+            if (!local[field as keyof UserKeys] && value) filled += 1;
+        }
+        saveUserKeys(merged); // 저장 이벤트 → 합친 결과가 다시 올라간다
+        return { status: 'merged', filled };
+    } catch { return { status: 'unavailable', filled: 0 }; }
 }
 
 /** userKeys.saveUserKeys 가 쏘는 이벤트를 받아 올린다 — 앱 어디서 저장하든 한 곳에서. */

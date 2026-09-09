@@ -206,6 +206,32 @@ export type BridgeClaudeCredentials =
     /** 앱은 떠 있는데 이 경로가 없음(404) — 구버전. */
     | { status: 'outdated' };
 
+/**
+ * 앱 설정에 저장된 API 키 묶음(네이버 오픈·API HUB·검색광고·유튜브)을 같은 기기 앱에서 받는다.
+ * 사장님 2026-09-09 "앱에서든 사이트에서든 하나처럼". 구버전 앱(경로 없음)은 outdated.
+ */
+export type BridgeApiKeys =
+    | { status: 'ok'; keys: Record<string, string>; count: number }
+    | { status: 'offline' }
+    | { status: 'outdated' };
+
+export async function bridgeApiKeys(): Promise<BridgeApiKeys> {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 8_000);
+    try {
+        const response = await fetch(`${BRIDGE_BASE}/v1/bridge/api-keys`, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: controller.signal });
+        if (response.status === 404) return { status: 'outdated' };
+        const body = await response.json().catch(() => null) as { ok?: boolean; result?: { ok?: boolean; keys?: Record<string, string>; count?: number } } | null;
+        const result = body?.result;
+        if (response.ok && body?.ok && result?.ok && result.keys) return { status: 'ok', keys: result.keys, count: Number(result.count) || Object.keys(result.keys).length };
+        return { status: 'offline' };
+    } catch {
+        return { status: 'offline' };
+    } finally {
+        window.clearTimeout(timer);
+    }
+}
+
 export async function bridgeClaudeCredentials(): Promise<BridgeClaudeCredentials> {
     const controller = new AbortController();
     const timer = window.setTimeout(() => controller.abort(), 12_000);

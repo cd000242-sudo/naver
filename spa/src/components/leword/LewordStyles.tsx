@@ -2230,6 +2230,11 @@ function LewordStyles() {
             .lw-locked { padding: 28px 22px; border: 1px dashed color-mix(in srgb, currentColor 22%, transparent); border-radius: 12px; text-align: center; max-width: 560px; margin: 24px auto; }
             .lw-locked h1 { font-size: 20px; margin: 0 0 8px; }
             .lw-locked p { margin: 0 0 16px; opacity: 0.75; font-size: 14px; line-height: 1.5; }
+            /* 내 API 키 — 계정 동기화 패널 */
+            .lw-keys-sync { display: flex; flex-direction: column; gap: 10px; padding: 4px 0 2px; }
+            .lw-keys-sync-form { display: flex; gap: 8px; flex-wrap: wrap; }
+            .lw-keys-sync-form input { flex: 1 1 280px; font: inherit; font-size: 13px; padding: 8px 10px; border-radius: 8px; border: 1px solid color-mix(in srgb, currentColor 22%, transparent); background: color-mix(in srgb, currentColor 4%, transparent); color: inherit; }
+            .lw-keys-sync-actions { display: flex; gap: 8px; flex-wrap: wrap; }
             /* 오늘의 글감 — NOW/NEXT/ALWAYS 브리프 카드 */
             /* 제휴 상품 카드 안 브리프 — 상품 그리드에서 풀폭 */
             .lw-product-brief { grid-column: 1 / -1; margin-top: 4px; }
