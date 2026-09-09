@@ -72,6 +72,8 @@ const kst = (iso: string) => new Date(iso).toLocaleString('ko-KR', {
     timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit',
 });
 const day = (iso: string) => new Date(iso).toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul', month: 'numeric', day: 'numeric' });
+// 한국 날짜만(YYYY-MM-DD) — 회차가 오늘 것인지 대조하는 데만 쓴다.
+const kstDay = (iso: string) => new Date(iso).toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
 
 export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
     const [data, setData] = useState<TopicBriefs | null>(null);
@@ -95,6 +97,10 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
     ), [data]);
     const activeRound = rounds.find((r) => r.slot === slot) ?? rounds[rounds.length - 1] ?? null;
     const all = activeRound?.briefs ?? [];
+    // 실린 회차가 오늘(KST) 것인가. 깃허브 예약이 늦으면 어제 회차가 그대로 남는데,
+    // 그걸 '오늘'이라고 부르면 사용자는 갱신된 줄 안다. 날짜를 실제로 대조한다.
+    const latestBuiltAt = rounds.length > 0 ? rounds[rounds.length - 1].builtAt : null;
+    const isStale = latestBuiltAt != null && kstDay(latestBuiltAt) !== kstDay(new Date().toISOString());
     const todayTotal = rounds.reduce((sum, r) => sum + r.briefs.length, 0);
     const todayStar = rounds.reduce((sum, r) => sum + r.briefs.filter((b) => b.star).length, 0);
     const fields = useMemo(() => ['전체', ...Array.from(new Set(all.map((b) => b.field)))], [all]);
@@ -107,12 +113,16 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
             <h2 id="lw-briefs-title" hidden>오늘의 글감</h2>
             <TabIntro
                 title="오늘의 글감"
-                desc={`날짜가 박힌 공식 사실에서 뽑은 글감 — NOW(지금) · NEXT(예정) · ALWAYS(지속)${data ? ` · 오늘 ${rounds.length}회차 ${num(todayTotal)}건 · ★ ${num(todayStar)}` : ''}`}
+                desc={`날짜가 박힌 공식 사실에서 뽑은 글감 — NOW(지금) · NEXT(예정) · ALWAYS(지속)${data ? ` · ${isStale && latestBuiltAt ? `${day(latestBuiltAt)} 회차` : '오늘'} ${rounds.length}회차 ${num(todayTotal)}건 · ★ ${num(todayStar)}` : ''}`}
                 source="네이버 뉴스 API 기사 실측 · 검색광고 검색량 실측 · 정면 글 수 실측(안 쟀으면 미측정) · 아침 06:23 · 오후 12:23 · 저녁 18:23 갱신"
             />
 
             {error && <p className="lw-note lw-note-error">글감을 못 읽었습니다 — {error}</p>}
             {!error && !data && <p className="lw-note">불러오는 중…</p>}
+
+            {isStale && latestBuiltAt && (
+                <p className="lw-note">오늘 회차가 아직 안 올라왔습니다 — 지금 보이는 것은 {day(latestBuiltAt)} 회차입니다. 아침 회차는 06:23 에 돌지만 깃허브 예약이 밀리면 늦어집니다.</p>
+            )}
 
             {rounds.length > 0 && (
                 <div className="lw-briefs-rounds" role="tablist" aria-label="회차">
