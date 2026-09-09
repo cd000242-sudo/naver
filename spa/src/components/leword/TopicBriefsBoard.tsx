@@ -36,6 +36,8 @@ interface Brief {
     serpVacancy: number | null;
     serpFit: '높음' | '보통' | '낮음' | '미측정';
     star: boolean;
+    /** 핵심 검색어가 낮음/보통일 때 자리를 재 본 좁은 검색어 — null = 재 봤는데 없음, 없음(undefined) = 안 잼 */
+    alternative?: { keyword: string; searchVolume: number | null; serpFacing: number | null; serpVacancy: number | null; serpFit: '높음' | '보통' | '낮음' | '미측정' } | null;
 }
 
 type RoundSlot = '아침' | '오후' | '저녁';
@@ -175,6 +177,19 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
                                 <dt>경험활용</dt><dd>{b.experience}</dd>
                                 <dt>차별화</dt><dd>{b.differentiation}</dd>
                             </dl>
+                            {(b.serpFit === '낮음' || b.serpFit === '보통') && b.alternative !== undefined && (
+                                <p className={`lw-briefs-alt${b.alternative?.serpFit === '높음' ? ' is-open' : ''}`}>
+                                    {b.alternative
+                                        ? <>
+                                            <em>{b.alternative.serpFit === '높음' ? '이 검색어로 쓰면 들어갑니다' : '가장 덜 막힌 대안'}</em>
+                                            {' '}<a href={naverSearchUrl(b.alternative.keyword)} target="_blank" rel="noreferrer">{b.alternative.keyword}</a>
+                                            {' · '}월 검색량 {b.alternative.searchVolume == null ? '10 미만' : num(b.alternative.searchVolume)}
+                                            {' · '}정면 {b.alternative.serpFacing ?? '—'}{b.alternative.serpVacancy != null ? ` · 빈자리 ${b.alternative.serpVacancy}위` : ''}
+                                            {' · '}적합성 {b.alternative.serpFit}
+                                        </>
+                                        : <><em>대안 검색어 없음</em> — 같은 주제의 좁은 검색어를 재 봤지만 열린 자리가 없습니다. 이 글감은 정면 승부가 어렵습니다.</>}
+                                </p>
+                            )}
                             <footer className="lw-briefs-foot">
                                 <span>
                                     핵심 검색어 <a href={naverSearchUrl(b.coreKeyword)} target="_blank" rel="noreferrer">{b.coreKeyword}</a>

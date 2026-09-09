@@ -2271,6 +2271,12 @@ function LewordStyles() {
             .lw-briefs-dl { display: grid; grid-template-columns: 96px 1fr; gap: 4px 10px; margin: 10px 0 0; font-size: 13px; line-height: 1.5; }
             .lw-briefs-dl dt { font-size: 11.5px; opacity: 0.6; letter-spacing: 0.02em; padding-top: 2px; }
             .lw-briefs-dl dd { margin: 0; }
+            /* 대안 검색어 — 핵심이 낮음/보통일 때 좁은 검색어 자리 실측 결과 */
+            .lw-briefs-alt { margin: 10px 0 0; padding: 8px 10px; border-radius: 8px; font-size: 12.5px; line-height: 1.5; background: color-mix(in srgb, currentColor 5%, transparent); border: 1px dashed color-mix(in srgb, currentColor 20%, transparent); }
+            .lw-briefs-alt.is-open { background: color-mix(in srgb, #03c75a 10%, transparent); border-color: color-mix(in srgb, #03c75a 45%, transparent); }
+            .lw-briefs-alt em { font-style: normal; font-weight: 700; }
+            .lw-briefs-alt.is-open em { color: #03c75a; }
+            .lw-briefs-alt a { color: inherit; font-weight: 700; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, currentColor 40%, transparent); }
             .lw-briefs-foot { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin-top: 10px; font-size: 12.5px; opacity: 0.85; }
             .lw-briefs-foot a { color: inherit; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, currentColor 40%, transparent); }
             .lw-briefs-facts a { margin-left: 6px; }
