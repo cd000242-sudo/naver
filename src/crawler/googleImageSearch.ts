@@ -641,7 +641,40 @@ export async function crawlImagesFromUrl(url: string): Promise<string[]> {
                     'data-thumb', 'data-srcset', 'data-image', 'data-img-src',
                     'data-hires', 'data-zoom', 'data-bg',
                 ];
-                document.querySelectorAll('img').forEach(el => {
+                /*
+                 * [2026-09-09 사장님] "잘 되는데 맨 아래 추천 다른 글 이미지까지 가져오네요."
+                 *
+                 * 지금까지 document 전체에서 img 를 긁어, 본문이 끝난 뒤의 추천글·사이드바·
+                 * 푸터 썸네일까지 함께 들어왔다. 본문 영역을 먼저 찾고 그 안에서만 모은다.
+                 * 본문 영역을 못 찾으면 예전처럼 document 전체를 쓴다 — 사이트 구조가
+                 * 제각각이라, 못 찾았다고 한 장도 못 가져오면 더 나쁘다.
+                 */
+                const CONTENT_ROOTS = [
+                    '.se-main-container',            // 네이버 블로그 스마트에디터
+                    '#postViewArea',                 // 네이버 구버전
+                    '[itemprop="articleBody"]',
+                    'article',
+                    'main',
+                    '.entry-content', '.post-content', '.article-body', '#articleBody',
+                ];
+                // 본문 안에 있더라도 이런 묶음은 "다른 글" 이다.
+                const EXCLUDE_CONTAINERS =
+                    'aside, nav, footer, [class*="related"], [class*="recommend"], [class*="popular"],'
+                    + ' [class*="ranking"], [id*="related"], [id*="recommend"], [class*="comment"]';
+
+                let scope: ParentNode = document;
+                for (const selector of CONTENT_ROOTS) {
+                    const found = document.querySelector(selector);
+                    if (found && found.querySelectorAll('img').length > 0) { scope = found; break; }
+                }
+
+                const excluded = new Set<Element>();
+                scope.querySelectorAll(EXCLUDE_CONTAINERS).forEach((container) => {
+                    container.querySelectorAll('img').forEach((img) => excluded.add(img));
+                });
+
+                scope.querySelectorAll('img').forEach(el => {
+                    if (excluded.has(el)) return;
                     const img = el as HTMLImageElement;
                     const w = img.naturalWidth || img.width || 0;
                     const h = img.naturalHeight || img.height || 0;
