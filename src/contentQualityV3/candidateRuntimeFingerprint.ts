@@ -406,6 +406,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/errorRecovery.ts',
   'src/errors/AutomationError.ts',
   'src/errors/errorCodes.ts',
+  'src/errors/providerFailureReason.ts',
   'src/factCheckRouter.ts',
   'src/freeTrialPolicy.ts',
   'src/gemini.ts',

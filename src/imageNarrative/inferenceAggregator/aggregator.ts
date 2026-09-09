@@ -16,6 +16,7 @@ import { guardInferenceResults } from './hallucinationGuard.js';
 import { buildNarrativeSections } from './sectionBuilder.js';
 import { inferImage } from '../visionInference/visionRouter.js';
 import { withPhotoOrdinal } from '../context.js';
+import { summarizeProviderFailures } from '../../errors/providerFailureReason.js';
 import type {
   EnrichedInferenceResponse,
   ImageExif,
@@ -219,6 +220,8 @@ export async function aggregateInferences(
   // killed a large share of runs. Failures are now skipped and the post
   // continues as long as enough images survived; only a majority failure
   // aborts (that is a provider/config outage, not a flaky image).
+  // 벤더가 알려준 실패 사유. 마지막 안내 문구를 짓는 유일한 근거다.
+  const failureReasons: string[] = [];
   const inferTasks = images.map((img, i) => async (): Promise<EnrichedInferenceResponse | null> => {
     // A cancelled run must not keep paying for the remaining queued photos.
     if (options.signal?.aborted) throw new Error('VISION_INFER_ABORTED');
@@ -246,8 +249,17 @@ export async function aggregateInferences(
     } catch (error) {
       // Operator cancel is not a flaky image — surface it instead of skipping.
       if (options.signal?.aborted) throw error;
+      /*
+       * [2026-09-10 사장님] "크레딧 없으면 크레딧 충전하라고 띄우라고. 앱이 문제 있는 줄 알았잖아."
+       *
+       * 예전에는 벤더가 알려준 이유를 console.warn 으로 흘려보내고 버렸다. 그래서 11장이
+       * 모두 `429 You have no credits remaining.` 으로 죽었는데도 화면에는 "비전 엔진/키
+       * 상태를 확인해주세요" 만 떴다. 사유를 모아 뒀다가 마지막 안내를 짓는 데 쓴다.
+       */
+      const reason = (error as Error).message ?? '';
+      failureReasons.push(reason);
       console.warn(
-        `[Aggregator] ⚠️ 사진 추론 실패 — 이 사진은 건너뛰고 계속: "${img.imageId}" (${(error as Error).message?.substring(0, 160)})`,
+        `[Aggregator] ⚠️ 사진 추론 실패 — 이 사진은 건너뛰고 계속: "${img.imageId}" (${reason.substring(0, 160)})`,
       );
       return null;
     }
@@ -260,9 +272,13 @@ export async function aggregateInferences(
   // Empty input keeps the legacy contract (returns an empty plan; the
   // upstream input validator owns that error message).
   if (images.length > 0 && enriched.length < requiredSuccesses) {
+    // 원인을 아는데 안 알려주면 앱 버그로 읽힌다 — 벤더가 준 사유를 행동 안내로 옮긴다.
+    const summary = summarizeProviderFailures(failureReasons, provider);
     throw new Error(
       `사진 추론이 ${settled.length}장 중 ${failedCount}장 실패해 글을 구성할 수 없습니다 `
-      + `(최소 ${requiredSuccesses}장 필요). 비전 엔진/키 상태를 확인해주세요.`,
+      + `(최소 ${requiredSuccesses}장 필요).
+
+${summary.message}`,
     );
   }
   if (failedCount > 0) {
