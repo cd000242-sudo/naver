@@ -1,16 +1,16 @@
 {
-  "publishedAt": "2026-09-09T14:21:41.025Z",
+  "publishedAt": "2026-09-09T22:46:39.972Z",
   "generator": "issue-niche-board",
   "schedule": "매일 07·13·19시(KST) 갱신",
   "measured": {
-    "issues": 17,
-    "candidates": 213,
+    "issues": 18,
+    "candidates": 240,
     "niche": 0,
     "preemption": 5,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-09-09",
+    "day": "2026-09-10",
     "keywords": [
       "황정민 술짤",
       "황정민 기부",
@@ -186,7 +186,7 @@
           36,
           30
         ],
-        "measuredAt": "2026-09-09T08:54:21.596Z"
+        "measuredAt": "2026-09-09T22:46:40.532Z"
       },
       "kinCount": 0,
       "kinTop": null,
@@ -347,7 +347,7 @@
           0,
           8
         ],
-        "measuredAt": "2026-09-09T08:54:21.596Z"
+        "measuredAt": "2026-09-09T22:46:40.532Z"
       },
       "kinCount": 347,
       "kinTop": [
@@ -467,7 +467,7 @@
         ],
         "label": "📉 단발성",
         "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-09-09T08:54:21.596Z"
+        "measuredAt": "2026-09-09T22:46:40.532Z"
       },
       "kinCount": 0,
       "kinTop": null,
@@ -475,11 +475,485 @@
       "measuredAt": "2026-09-08T08:50:34.580Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "searchVolumeMeasuredAt": "2026-09-09T14:21:41.568Z",
+      "searchVolumeMeasuredAt": "2026-09-09T22:46:40.532Z",
       "carried": true
     }
   ],
   "observations": [
+    {
+      "keyword": "알테오젠 키투르다 뜻",
+      "issue": "알테오젠",
+      "topic": "알테오젠",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 6,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 6",
+        "선점 후보 — 경쟁 문서 6건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "노바티스 신약 3상 실패로 신한증권이 알테오젠 목표가를 하향했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": {
+        "seo": {
+          "text": "알테오젠 키투르다 뜻 머크 키트루다 SC 제형 무슨 관계",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "알테오젠 키투르다 뜻 찾다가 노바티스에 목표가 왜 내렸나 알겠더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "알테오젠 주가",
+          "searchVolume": 580700,
+          "frame": "generic"
+        },
+        {
+          "keyword": "알테오젠 목표주가",
+          "searchVolume": 910,
+          "frame": "generic"
+        },
+        {
+          "keyword": "알테오젠 노바티스",
+          "searchVolume": 690,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "알테오젠 주가",
+          "searchVolume": 580700,
+          "documentCount": 119167,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "알테오젠 목표주가",
+          "searchVolume": 910,
+          "documentCount": 38982,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "알테오젠 노바티스",
+          "searchVolume": 690,
+          "documentCount": 3044,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "알테오젠 키트루다",
+          "searchVolume": 600,
+          "documentCount": 20891,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "알테오젠 SC제형",
+          "searchVolume": 30,
+          "documentCount": 17884,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "알테오젠 테르가제",
+          "searchVolume": 20,
+          "documentCount": 2252,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": {
+        "verdict": "mixed",
+        "points": [
+          {
+            "text": "1) '뜻' 검색자가 원하는 건 정보다 — '알테오젠과 키트루다가 무슨 관계냐'의 한 줄 답. 그런데 붙어 오는 검색어가 '알테오젠 SC제형(월 30)', '알테오젠 머크'인 걸 보면, 이들이 실제로 알고 싶은 건 단순 정의가 아니라 '알테오젠 ALT-B4가 키트루다 피하주사(SC) 특허 파트너'라는 인과관계다. 도구도 구매처도 아니고, 순수 정보 충족 검색이다."
+          },
+          {
+            "text": "2) 광고 클릭 상태는 나쁘지 않다. 동반 검색어가 '알테오젠 주가(월 580700)', '알테오젠 목표주가(월 910)', '알테오젠 노바티스(월 690)'로 압도적으로 투자 의도다. 즉 '뜻'을 찾는 사람도 사실상 주가 촉매를 이해하려는 투자자다. 이 트래픽엔 증권사·주식앱·투자정보 계열 고단가 광고가 붙을 여지가 크다."
+          },
+          {
+            "text": "3) 체류 시간은 각도가 가른다. '알테오젠 키투르다 뜻'을 사전식 한 줄로 답하면 '머크에 SC기술 라이선스한 회사' 읽고 즉시 이탈한다. 반대로 '알테오젠 테르가제(월 20)', 'SC제형(월 30)' 같은 낮은 볼륨 검색어가 보여주듯 세부 파이프라인은 아직 사람들이 잘 모르는 영역이라, '왜 이 딜이 주가를 움직이나'까지 풀어주면 읽어야 풀리는 검색으로 전환된다."
+          },
+          {
+            "text": "4) 결론이 mixed인 이유: 키워드 자체('뜻')는 정의 이탈형이라 그대로 쓰면 광고 수익이 안 난다. 하지만 '주가(580700)·목표주가(910)·노바티스(690)'라는 투자자 클러스터에 얹으면 고단가 금융 광고 + 체류시간을 동시에 잡을 수 있다. 순수 용어 풀이로 쓰면 bad, 투자 촉매 해설로 쓰면 good 쪽으로 기운다."
+          }
+        ],
+        "angle": "'뜻' 한 줄(알테오젠=머크 키트루다 SC제형 특허 파트너)로 문을 열되, 곧바로 '노바티스·머크 계약이 왜 목표주가(910) 리레이팅 재료인가'로 넘어가는 투자 촉매 해설. SC제형(월30)·테르가제(월20)처럼 아직 덜 알려진 파이프라인을 근거 문단으로 채워 정의 검색자를 주가 검색자로 붙잡는 구조."
+      },
+      "measuredAt": "2026-09-09T22:43:13.186Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "알파게놈 아틀라스",
+      "issue": "알파게놈 아틀라스",
+      "topic": "알파게놈 아틀라스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 53,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 53",
+        "선점 후보 — 경쟁 문서 53건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "구글 딥마인드가 DNA 변이 90억개를 분석한 '알파게놈 아틀라스'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "알파게놈 아틀라스 DNA 변이 90억개 AI 분석 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "알파게놈 아틀라스가 DNA 변이 90억개를 먼저 읽었다는데 진짜였어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "알파게놈",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "알파게놈",
+          "searchVolume": 20,
+          "documentCount": 2622,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-09T22:43:13.186Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "딥마인드 알파게놈",
+      "issue": "알파게놈 아틀라스",
+      "topic": "알파게놈 아틀라스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 166,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 166",
+        "선점 후보 — 경쟁 문서 166건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "구글 딥마인드가 DNA 변이 90억개를 분석한 '알파게놈 아틀라스'를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "알파게놈 공개 후 연구자들 반응은 어떤가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=111605&docId=491669959&answerNo=2",
+          "views": 44,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-09T22:43:13.186Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "과기부 공무직",
+      "issue": "과기부",
+      "topic": "과기부",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 248,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 248",
+        "선점 후보 — 경쟁 문서 248건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "과기부가 프랑스와 AI·양자기술 협력을 강화하기로 했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "과기부 공무직 채용공고 급여와 지원자격 조건 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "과기부 공무직 채용 급여 확인하고 지원 망설이는 분들 많더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "과기부 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "과학기술정보통신부 공무직",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "과기부 채용",
+          "searchVolume": 40,
+          "documentCount": 13749,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "과학기술정보통신부 공무직",
+          "searchVolume": 10,
+          "documentCount": 1852,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-09T22:43:13.186Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "과기부 워라밸",
+      "issue": "과기부",
+      "topic": "과기부",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 285,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 285",
+        "선점 후보 — 경쟁 문서 285건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "과기부가 프랑스와 AI·양자기술 협력을 강화하기로 했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "과기부 워라밸 공무원 실제 근무환경과 연봉",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "과기부 워라밸 좋다길래 조직도부터 채용 공고까지 뜯어봤더니 좀 그렇네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "과기부 조직도",
+          "searchVolume": 90,
+          "frame": "generic"
+        },
+        {
+          "keyword": "과기부 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "과기부 공무원",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "과기부 조직도",
+          "searchVolume": 90,
+          "documentCount": 8799,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "과기부 채용",
+          "searchVolume": 40,
+          "documentCount": 13749,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "과기부 공무원",
+          "searchVolume": 10,
+          "documentCount": 8613,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "공무원 워라밸",
+          "searchVolume": 10,
+          "documentCount": 20480,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-09T22:43:13.186Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "CUDA 러스트 사용법",
       "issue": "CUDA 러스트",
@@ -557,7 +1031,8 @@
       "monetize": null,
       "measuredAt": "2026-09-09T14:19:41.464Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "퀄컴 신용산",
@@ -658,82 +1133,8 @@
       "monetize": null,
       "measuredAt": "2026-09-09T14:19:41.464Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "알파게놈 아틀라스",
-      "issue": "알파게놈 아틀라스",
-      "topic": "알파게놈 아틀라스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 49,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 49",
-        "선점 후보 — 경쟁 문서 49건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "딥마인드가 인간 유전자 변이 90억 개를 분석한 알파게놈 아틀라스를 공개해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "알파게놈 아틀라스, 구글 딥마인드 DNA 변이 90억개 분석",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "알파게놈 아틀라스로 DNA 한 글자 바뀐 결과 보니 생각보다 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "알파게놈",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "알파게놈",
-          "searchVolume": 10,
-          "documentCount": 2617,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-09T14:19:41.464Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "CUDA 러스트",
@@ -821,80 +1222,8 @@
       "monetize": null,
       "measuredAt": "2026-09-09T14:19:41.464Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "딥마인드 알파게놈",
-      "issue": "알파게놈 아틀라스",
-      "topic": "알파게놈 아틀라스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 161,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 161",
-        "선점 후보 — 경쟁 문서 161건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "딥마인드가 인간 유전자 변이 90억 개를 분석한 알파게놈 아틀라스를 공개해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "딥마인드 알파게놈, DNA 변이 90억개 지도 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "딥마인드 알파게놈이 질병 원인 어디서 갈리는지 짚어주더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "알파게놈 공개 후 연구자들 반응은 어떤가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=111605&docId=491669959&answerNo=2",
-          "views": 42,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-09T14:19:41.464Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "CUDA 러스트 예제",
@@ -5002,937 +5331,91 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "씽크포비엘 CERTX",
-      "issue": "씽크포비엘",
-      "topic": "씽크포비엘",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 6,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 6",
-        "선점 후보 — 경쟁 문서 6건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "씽크포비엘이 스위스 CERTX와 AI 신뢰성 사업 협력 MOU를 체결했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "씽크포비엘 CERTX MOU 체결, 유럽 AI 신뢰성 인증 협력",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "씽크포비엘이 스위스 CERTX랑 손잡은 게 유럽 AI 인증 노리는 신호더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "씽크포비엘",
-          "searchVolume": 180,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "씽크포비엘",
-          "searchVolume": 180,
-          "documentCount": 2425,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T15:40:21.478Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "윤종훈 김숙",
-      "issue": "윤종훈",
-      "topic": "윤종훈",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 229,
-      "documentCountMeasured": true,
-      "searchVolume": 30,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 30",
-        "문서수 229",
-        "선점 후보 — 경쟁 문서 229건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "'펜트하우스' 윤종훈이 10살 연하 배우 한은서와 11월 결혼한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "윤종훈 김숙 11월 결혼 한은서 나이차 10살",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "윤종훈 김숙 검색했다가 본 11월 결혼, 신부 나이 보고 화면 다시 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "윤종훈 결혼",
-          "searchVolume": 90,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤종훈 펜트하우스",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤종훈 아내",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "윤종훈 결혼",
-          "searchVolume": 90,
-          "documentCount": 3317,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤종훈 펜트하우스",
-          "searchVolume": 20,
-          "documentCount": 5939,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤종훈 아내",
-          "searchVolume": 10,
-          "documentCount": 1939,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": [
-        {
-          "title": "옥탑방의문제아들 윤종훈,하도권편에 김숙이 입은 후드티어....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=50401&docId=378865003&answerNo=1",
-          "views": 403,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-07T15:40:21.478Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "CERTX",
-      "issue": "씽크포비엘",
-      "topic": "씽크포비엘",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "협력사 정체 궁금",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 20,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 20",
-        "선점 후보 — 경쟁 문서 20건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 협력사 정체 궁금"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "씽크포비엘이 스위스 CERTX와 AI 신뢰성 사업 협력 MOU를 체결했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "CERTX 씽크포비엘 AI 신뢰성 인증 협력 내용",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "CERTX 스위스 인증기관인지 찾다 보니 SGS 계열이더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T15:40:21.478Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "주건협 PF 플랫폼",
-      "issue": "주건협 PF 플랫폼",
-      "topic": "주건협 PF 플랫폼",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 46,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 46",
-        "선점 후보 — 경쟁 문서 46건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "주건협이 주택사업자와 금융기관을 잇는 PF 정보 플랫폼을 개시했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "주건협 PF 플랫폼 8일 개시, 사업자·금융사 연결 조건",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "주건협 PF 플랫폼 열렸는데 금융기관 연결이 생각보다 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T15:40:21.478Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "하이드라퓨전 원리",
-      "issue": "하이드라퓨전",
-      "topic": "하이드라퓨전",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 46,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 46",
-        "선점 후보 — 경쟁 문서 46건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "깃허브가 AI 코딩 라우팅 시스템 '하이드라퓨전'을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "하이드라퓨전 원리 AI 코딩 라우팅으로 비용 줄이는 구조",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "깃허브 하이드라퓨전 원리 뜯어보니 비용 줄었다는 말이 이해되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T15:40:21.478Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "하이드라퓨전 무료",
-      "issue": "하이드라퓨전",
-      "topic": "하이드라퓨전",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "이용 조건 확인",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 121,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 121",
-        "선점 후보 — 경쟁 문서 121건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 이용 조건 확인"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "깃허브가 AI 코딩 라우팅 시스템 '하이드라퓨전'을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "하이드라퓨전 무료 사용법, 깃허브 AI 코딩 라우팅 어디까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "하이드라퓨전 무료로 쓸 수 있나 깃허브 뒤져보니 의외로 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T15:40:21.478Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이재명 대화 뤼미에르",
-      "issue": "이재명 대화 뤼미에르",
-      "topic": "이재명 대화 뤼미에르",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 170,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 170",
-        "선점 후보 — 경쟁 문서 170건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이재명 대통령이 뤼미에르 서밋에서 한불 영화 파트너십을 출범했다.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이재명 대화 뤼미에르 한불 파트너십 5년간 영화 지원 내용",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이재명 대화 뤼미에르 서밋 갔다가 전도연 설경구랑 사진 찍은 사연 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "뤼미에르 서밋",
-          "searchVolume": 930,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이재명 마크롱",
-          "searchVolume": 130,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이재명 프랑스 순방",
-          "searchVolume": 110,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "뤼미에르 서밋",
-          "searchVolume": 930,
-          "documentCount": 500,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이재명 마크롱",
-          "searchVolume": 130,
-          "documentCount": 7169,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이재명 프랑스 순방",
-          "searchVolume": 110,
-          "documentCount": 3106,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T15:40:21.478Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "초대 중수청장 김지용",
-      "issue": "초대 중수청장 김지용",
-      "topic": "초대 중수청장 김지용",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 198,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 198",
-        "선점 후보 — 경쟁 문서 198건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 1건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "초대 중수청장 후보에 검사 출신 김지용 변호사가 올랐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "초대 중수청장 김지용 검사 출신 변호사 이력",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "초대 중수청장 김지용이 왜 최종 후보까지 올랐는지 검사 시절부터 봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "김지용 변호사",
-          "searchVolume": 920,
-          "frame": "generic"
-        },
-        {
-          "keyword": "초대 중수청장 후보",
-          "searchVolume": 350,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김지용 검사장",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "김지용 변호사",
-          "searchVolume": 920,
-          "documentCount": 672,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "초대 중수청장 후보",
-          "searchVolume": 350,
-          "documentCount": 636,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김지용 검사장",
-          "searchVolume": 10,
-          "documentCount": 819,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T15:40:21.478Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "윤종훈 한은서",
-      "issue": "윤종훈",
-      "topic": "윤종훈",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 231,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 231",
-        "선점 후보 — 경쟁 문서 231건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "'펜트하우스' 윤종훈이 10살 연하 배우 한은서와 11월 결혼한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "윤종훈 한은서 11월 결혼, 10살 연하 예비신부 프로필",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "윤종훈 한은서 10살 연하 결혼이라는데 신부가 누군지 다들 찾더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "윤종훈 나이",
-          "searchVolume": 410,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤종훈 결혼",
-          "searchVolume": 90,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한은서 프로필",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "윤종훈 나이",
-          "searchVolume": 410,
-          "documentCount": 2010,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤종훈 결혼",
-          "searchVolume": 90,
-          "documentCount": 3317,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한은서 프로필",
-          "searchVolume": 30,
-          "documentCount": 113,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤종훈 펜트하우스",
-          "searchVolume": 20,
-          "documentCount": 5939,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 10,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T15:40:21.478Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "윤종훈 예비신부",
-      "issue": "윤종훈",
-      "topic": "윤종훈",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 238,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 238",
-        "선점 후보 — 경쟁 문서 238건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "'펜트하우스' 윤종훈이 10살 연하 배우 한은서와 11월 결혼한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "윤종훈 예비신부 한은서, 10살 연하 배우 11월 결혼",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "윤종훈 예비신부 소식 나오니까 결혼은 언제 하는지부터 궁금해지네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "윤종훈 결혼",
-          "searchVolume": 90,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤종훈 펜트하우스",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤종훈 아내",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "윤종훈 결혼",
-          "searchVolume": 90,
-          "documentCount": 3317,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤종훈 펜트하우스",
-          "searchVolume": 20,
-          "documentCount": 5939,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤종훈 아내",
-          "searchVolume": 10,
-          "documentCount": 1939,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-07T15:40:21.478Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "네팔 2진 파견",
+      "issue": "아이폰 듀오 공개",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "네팔 파견 한국 구호대 1진이 11일 귀국하고 2진 파견을 추진해서.",
+      "why": "애플이 접이식 폴더블폰 '아이폰 듀오'를 329만원부터 공개했다.",
       "headlines": [
         {
-          "title": "네팔 파견 韓구호대 11일 귀국 예정…\"2진 파견 준비 중\"",
+          "title": "애플, 접이식 '아이폰 듀오' 공개…폴더블 시장서 삼성과 격돌(종합)",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-09T11:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016301088?sid=104"
+          "publishedAt": "2026-09-09T21:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016301245?sid=105"
         },
         {
-          "title": "韓구호대 네팔 수색 종료 수순…2진 파견 준비(종합)",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-09-09T10:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004187759?sid=100"
+          "title": "애플, 접는 '아이폰 듀오' 공개…폴더블 시장 진출 본격화(종합)",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-09T20:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014180891?sid=104"
         },
         {
-          "title": "네팔 KDRT 1진 귀국 준비…정부, 2진 파견 추진",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-09T08:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009161087?sid=100"
+          "title": "애플, 접이식 '아이폰 듀오' 공개…한국 판매가 329만 원부터",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-09T20:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001387157?sid=104"
         }
       ],
-      "concentrated": [],
+      "concentrated": [
+        {
+          "keyword": "아이폰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아이폰 듀오",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
       "nextWave": [],
       "rowCount": 0
     },
     {
-      "issue": "이재명 대통령 임기",
+      "issue": "중간선거 직후 이란전",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "stable",
+      "issueStatus": "unknown",
       "isHot": true,
-      "why": "이재명 대통령이 자신의 임기는 헌법상 명확히 제한돼 있다고 말해서.",
+      "why": "트럼프가 이란전이 중간선거 직후 끝나고 유가도 급락한다고 말했다.",
       "headlines": [
         {
-          "title": "이 대통령 \"제 임기는 헌법상 명확히 제한돼 있어\"",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-09T12:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001387114?sid=100"
+          "title": "트럼프 \"중간선거 직후 이란전 끝나고 휘발윳값도 급락할 것\"(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-09T20:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016301212?sid=104"
         },
         {
-          "title": "李대통령 “제 임기는 헌법상 명확하게 제한돼 있어”",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-09-09T10:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/025/0003550261?sid=100"
+          "title": "트럼프 “이란전, 중간 선거 직후 끝날 것…이란, 더 못 버텨”",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-09-09T21:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012254507?sid=104"
         },
         {
-          "title": "[속보]李 대통령 “제 임기, 헌법상 명확하게 제한”",
-          "press": "munhwa.com",
-          "publishedAt": "2026-09-09T11:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/021/0002817613?sid=100"
+          "title": "트럼프 \"이란전, 중간선거 직후 끝날 것…그때 유가도 급락\"",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-09-09T21:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/437/0000510401?sid=104"
         }
       ],
-      "concentrated": [],
+      "concentrated": [
+        {
+          "keyword": "중간선거",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "트럼프 중간선거",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
       "nextWave": [],
       "rowCount": 0
     },
@@ -5942,8 +5425,14 @@
       "lane": "realtime",
       "issueStatus": "declining",
       "isHot": true,
-      "why": "최태원이 노소영 재산분할 7천억을 수용하고 2440억만 다투기로 해서.",
+      "why": "최태원이 재산분할 7000억을 수용하고 2440억만 재상고했다.",
       "headlines": [
+        {
+          "title": "최태원, 노소영과 재산분할 2440억만 재상고",
+          "press": "segye.com",
+          "publishedAt": "2026-09-09T10:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004157761?sid=102"
+        },
         {
           "title": "최태원, 노소영과 재산분할 2440억만 다투기로…7000억 수용",
           "press": "hankyung.com",
@@ -5955,12 +5444,6 @@
           "press": "mbn.mk.co.kr",
           "publishedAt": "2026-09-09T08:22:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/057/0001968145?sid=102"
-        },
-        {
-          "title": "최태원, 노소영 재산분할 7천억원 수용…2천440억원만 다투기로",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-09T07:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016300569?sid=102"
         }
       ],
       "concentrated": [
@@ -5979,35 +5462,35 @@
       "rowCount": 0
     },
     {
-      "issue": "김도영 빠진 KIA",
+      "issue": "라스 스윙스",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "김도영이 코뼈 골절 부상으로 빠진 KIA가 NC에 4-5로 석패해서.",
+      "why": "스윙스가 라디오스타에서 다이어트 요요와 레이블 위기를 고백했다.",
       "headlines": [
         {
-          "title": "하필 3번 타순에서 끝…김도영 빠진 KIA, 기운도 잃고 집중도 못했다 ‘...",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-09-09T13:26:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/144/0001137191"
-        },
-        {
-          "title": "'블레인 2홈런' NC, KIA 추격 뿌리치고 연패 탈출…KIA, 김도영 부상 '비...",
-          "press": "stoo.com",
-          "publishedAt": "2026-09-09T12:48:00.000Z",
-          "link": "http://www.stoo.com/article.php?aid=108801658841"
-        },
-        {
-          "title": "KT, 1위 삼성 꺾고 반 경기 차 추격…KIA 김도영 코뼈 골절 '날벼락'(종합...",
+          "title": "'라스' 스윙스, 비만치료제 솔직 고백…\"요요 진행\" [RE:TV]",
           "press": "news1.kr",
-          "publishedAt": "2026-09-09T13:14:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/421/0009161458"
+          "publishedAt": "2026-09-09T20:30:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009161584"
+        },
+        {
+          "title": "'라스' 스윙스, 힙합 레이블 위기 고백 \"120억 선급금·30억 대출로 정산...",
+          "press": "tvdaily.co.kr",
+          "publishedAt": "2026-09-09T05:29:00.000Z",
+          "link": "https://m.entertain.naver.com/article/440/0000044768"
+        },
+        {
+          "title": "스윙스 \"마운자X 10레벨, 총 6kg 뺐는데 3kg 요요 와\"[라스]",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-09-09T13:54:00.000Z",
+          "link": "https://m.entertain.naver.com/article/108/0003469246"
         }
       ],
       "concentrated": [
         {
-          "keyword": "김도영",
+          "keyword": "라스",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -6016,110 +5499,102 @@
       "rowCount": 0
     },
     {
-      "issue": "서정진",
+      "issue": "종합격투기",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "서정진 회장이 셀트리온 1000억 자사주 매입 등 주주환원에 힘써서.",
+      "why": "일반인을 기절시킨 격투기 선수 김중우가 정찬성 단체에서 퇴출됐다.",
       "headlines": [
         {
-          "title": "[Who Is ?] 서정진 셀트리온그룹 회장",
-          "press": "businesspost.co.kr",
-          "publishedAt": "2026-09-08T22:02:00.000Z",
-          "link": "https://www.businesspost.co.kr/BP?command=article_view&num=446427"
+          "title": "“한숨 재워라” 일반인 기절시킨 격투기 선수…정찬성 단체서 퇴출",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-09-09T04:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003550162?sid=102"
         },
         {
-          "title": "상반기 보수 1위 '76억' 윤상현 부회장…서정진 회장 '22억' 육박",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-08-31T07:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005407238?sid=101"
+          "title": "UFC 출신 남의철 아시안게임 종합격투기 해설",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-09T16:42:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/410/0001139468"
         },
         {
-          "title": "주주환원 힘쓰는 서정진 회장…셀트리온, 1000억원 규모 자사주 매입",
-          "press": "newsway.co.kr",
-          "publishedAt": "2026-08-31T05:00:00.000Z",
-          "link": "https://www.newsway.co.kr/news/view?ud=2026083113405228650"
+          "title": "일반인 기절시키고 뺨 '툭툭'…'조폭 출신' 격투기 선수, 소속 단체서 퇴...",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-09-08T06:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/437/0000510090?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "서정진 회장",
+          "keyword": "종합격투기 체육관",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "셀트리온 서정진",
+          "keyword": "아시안게임 종합격투기",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "서정진 나이",
+          "keyword": "종합격투기 선수",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "서정진 부인",
+          "keyword": "종합격투기 mma",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "서정진 사주",
+          "keyword": "종합격투기 학원",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "서정진 아들",
+          "keyword": "종합격투기 체급",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "서정진 재산",
+          "keyword": "종합격투기 단체 순위",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "서정진 축구",
+          "keyword": "종합격투기 복싱 차이",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [
-        {
-          "keyword": "서정진 승계",
-          "reason": "아들 경영 참여 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
+      "nextWave": [],
       "rowCount": 0
     },
     {
-      "issue": "CPTPP 가입 반대",
+      "issue": "이재용 홍라희 주식",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "농민단체가 CPTPP 가입 추진 중단을 요구하며 시위해서.",
+      "why": "이재용이 모친 홍라희 삼성전자 주식 718만주를 1.9조에 매수했다.",
       "headlines": [
         {
-          "title": "“CPTPP 가입 추진 중단하라”…농민단체, 농식품부 방문 시위",
-          "press": "nongmin.com",
-          "publishedAt": "2026-09-08T05:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/662/0000103770?sid=100"
+          "title": "홍라희, 삼전 주식 1.9조 이재용에 매도…상속대출 상환 추정",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-09T08:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016300901?sid=101"
         },
         {
-          "title": "충청 농민들 \"CPTPP 가입? 우리 농민 다 죽어\"",
-          "press": "ikpnews.net",
-          "publishedAt": "2026-09-08T12:32:00.000Z",
-          "link": "http://www.ikpnews.net/news/articleView.html?idxno=71396"
+          "title": "이재용, 어머니 홍라희 주식 1조9374억원어치 산다…왜?",
+          "press": "weekly.chosun.com",
+          "publishedAt": "2026-09-09T13:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/053/0000061368?sid=101"
         },
         {
-          "title": "정부, CPTPP 의견 수렴 속도···농업계도 대응 수위 높인다",
-          "press": "agrinet.co.kr",
-          "publishedAt": "2026-09-08T10:52:00.000Z",
-          "link": "https://www.agrinet.co.kr/news/articleView.html?idxno=407060"
+          "title": "이재용 회장, 母 홍라희 보유 삼성전자 주식 718만주 1.9조에 매수",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-09T09:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009161187?sid=101"
         }
       ],
       "concentrated": [],
@@ -6127,92 +5602,92 @@
       "rowCount": 0
     },
     {
-      "issue": "티파니",
+      "issue": "이재명",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "변요한이 예능에서 아내 티파니의 장점을 자랑해 화제가 돼서.",
+      "why": "이재명 대통령이 임기가 헌법상 명확히 제한돼 있다고 말했다.",
       "headlines": [
         {
-          "title": "'레벨업' 변요한 \"티파니 장점 너무 많아\"…아내 자랑에 진심",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-09T09:52:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009161256"
+          "title": "[단독] 용혜인만이 아니었다…이재명 기본소득위에 포진한 ‘김길오 네...",
+          "press": "hankookilbo.com",
+          "publishedAt": "2026-09-09T19:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/469/0000953223?sid=100"
         },
         {
-          "title": "효연, 변요한 호칭 고민에...티파니 등판 “벌써 웃겨”",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-09T06:09:00.000Z",
-          "link": "https://m.entertain.naver.com/article/009/0005732683"
+          "title": "이재명 대통령 \"제 임기는 헌법상 명확하게 제한돼\"",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-09-09T11:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005814214?sid=100"
         },
         {
-          "title": "변요한 \"♥티파니에 용돈 받아 써\"…장점 질문에 대답 못하고 '진땀'",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-09-09T09:17:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004444484"
+          "title": "이재명 대통령 “제 임기, 헌법상 명확하게 제한돼 있어”",
+          "press": "kyeonggi.com",
+          "publishedAt": "2026-09-09T10:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/666/0000122726?sid=100"
         }
       ],
       "concentrated": [
         {
-          "keyword": "티파니 변요한",
+          "keyword": "이재명 지지율",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "티파니 목걸이",
+          "keyword": "이재명 탄핵",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "티파니 팔찌",
+          "keyword": "이재명 임기",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "티파니 반지",
+          "keyword": "이재명 대통령",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "티파니 영",
+          "keyword": "이재명 연임",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "티파니 소녀시대",
+          "keyword": "이재명 탄핵 청원",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "티파니 나무위키",
+          "keyword": "이재명 재판",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "변요한 티파니",
+          "keyword": "이재명 프랑스",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "변요한 티파니 나이차",
-          "reason": "부부 관계 관심",
+          "keyword": "이재명 파병 결정",
+          "reason": "파병 논의 첫 언급",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "티파니 근황",
-          "reason": "방송 출연 후 활동 관심",
+          "keyword": "이재명 지지율",
+          "reason": "국정 평가 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "티파니 컴백",
-          "reason": "가수 활동 여부 관심",
+          "keyword": "이재명 연임",
+          "reason": "임기 관련 화제",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -6221,78 +5696,210 @@
       "rowCount": 0
     },
     {
-      "issue": "정치인",
+      "issue": "알테오젠",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "추석을 앞두고 선관위가 정치인 금품 제공을 단속해서.",
+      "why": "노바티스 신약 3상 실패로 신한증권이 알테오젠 목표가를 하향했다.",
       "headlines": [
         {
-          "title": "대구선관위, 추석 앞두고 정치인 금품 제공 단속",
+          "title": "노바티스 AOC 임상 실패에 알테오젠 목표가↓[Why 바이오]",
+          "press": "sedaily.com",
+          "publishedAt": "2026-09-09T00:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004659966?sid=101"
+        },
+        {
+          "title": "신한증권, 알테오젠 목표가↓…\"노바티스 신약 1개 3상 실패\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-08T23:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016298677?sid=101"
+        },
+        {
+          "title": "신한證 “알테오젠, 노바티스 SC 전환 품목 3개→2개로 축소…목표가 ↓...",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-08T22:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001191178?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "알테오젠 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알테오젠 무상증자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알테오젠 주가전망",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알테오젠 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알테오젠 검색왕",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알테오젠 공매도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알테오젠 목표주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알테오젠 단주대금",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "알테오젠 주가 반등",
+          "reason": "급락 후 회복 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "알테오젠 실적",
+          "reason": "계약 매출 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "알테오젠 머크",
+          "reason": "핵심 파트너 계약",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "알테오젠 공매도",
+          "reason": "하락시 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "KIA 김도영 부상",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "김도영이 번트 타구에 얼굴 맞아 코뼈 골절, 아시안게임 출전이 불투명하다.",
+      "headlines": [
+        {
+          "title": "KIA 김도영, 기습 번트에 얼굴 강타…\"출혈은 멈춰…병원 검진 예정\"",
           "press": "newsis.com",
-          "publishedAt": "2026-09-09T04:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014179501?sid=102"
+          "publishedAt": "2026-09-09T10:57:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/003/0014180680"
         },
         {
-          "title": "정치인의 '혐오장사' 법으로 막을 수 있을까",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-09-09T09:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004187747?sid=102"
+          "title": "번트 타구에 코뼈 골절…김도영 부상에 KIA-야구대표팀 비상",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-09T13:12:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/018/0006366480"
         },
         {
-          "title": "대전·세종·충남선관위, 추석 앞두고 정치인 불법행위 예방·단속 강화",
+          "title": "KIA 김도영, 번트 타구 맞고 코뼈 부러져 ... 아시안게임 출전 여부 촉각",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-09T12:09:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/023/0003997538"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "나는 솔로",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "나는솔로 33기에서 광수가 두 모솔녀에게 연이어 호감을 보였다.",
+      "headlines": [
+        {
+          "title": "'나는솔로' 33기 광수, 두 모솔녀에 연이어 호감…데프콘 \"카사노바야\"",
           "press": "news1.kr",
-          "publishedAt": "2026-09-09T06:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009160797?sid=102"
+          "publishedAt": "2026-09-09T01:29:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009159654"
+        },
+        {
+          "title": "안정환·효연, '나는 솔로' 남규홍 PD 신작 '계약결혼' MC 합류",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-09T06:38:00.000Z",
+          "link": "https://m.entertain.naver.com/article/018/0006366269"
+        },
+        {
+          "title": "‘나는 솔로’ 33기 정숙 “나한테 관심 있는 사람 아무도 없을 것” 자...",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-09-09T08:40:00.000Z",
+          "link": "https://m.entertain.naver.com/article/382/0001293063"
         }
       ],
       "concentrated": [
         {
-          "keyword": "축구선수 정치인",
+          "keyword": "나는 솔로 33기",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "박지현 정치인",
+          "keyword": "나는 솔로 갤러리",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "여자 정치인",
+          "keyword": "나는 솔로 그후",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "정치인 영어로",
+          "keyword": "나는 솔로 31기",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "일본 정치인",
+          "keyword": "나는 솔로 16기",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "정치인 꿈",
+          "keyword": "나는 솔로 모솔",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "젊은 정치인",
+          "keyword": "나는솔로 갤",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "여성 정치인",
+          "keyword": "나는솔로 32기",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "정치인 선물 기준",
-          "reason": "추석 명절 규정 관심",
+          "keyword": "나는솔로 그후",
+          "reason": "후속 방송",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -6301,45 +5908,90 @@
       "rowCount": 0
     },
     {
-      "issue": "코스피 7000선 탈환",
+      "issue": "과기부",
       "issueType": "fresh",
-      "lane": "realtime",
+      "lane": "tech",
       "issueStatus": "stable",
-      "isHot": true,
-      "why": "반도체 훈풍으로 코스피가 33거래일 만에 7000선을 탈환해서.",
+      "isHot": false,
+      "why": "과기부가 프랑스와 AI·양자기술 협력을 강화하기로 했다.",
       "headlines": [
         {
-          "title": "[속보]‘드디어’ 코스피 종가 7000선 탈환…33거래일 만",
-          "press": "munhwa.com",
-          "publishedAt": "2026-09-09T06:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/021/0002817577?sid=101"
+          "title": "과기부, 프랑스와 AI·양자기술 협력 강화",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-09T13:00:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215061"
         },
         {
-          "title": "원·달러 환율 9.5원 급락 1336.1원…코스피 7000선 탈환",
-          "press": "daejonilbo.com",
-          "publishedAt": "2026-09-09T07:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/656/0000186334?sid=101"
+          "title": "요금 못 내 휴대폰 정지돼도…자살예방전화 109 연결된다",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-09-08T00:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004186870?sid=103"
         },
         {
-          "title": "[속보] 코스피 33거래일 만에 7000선 탈환…1.4% 오른 7051.64 마감",
-          "press": "kado.net",
-          "publishedAt": "2026-09-09T06:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/654/0000199662?sid=101"
+          "title": "중기부-과기부, 피지컬 AI 중소 제조현장 도입 협력",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-09-07T09:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005813039?sid=101"
         }
       ],
       "concentrated": [
         {
-          "keyword": "코스피",
+          "keyword": "과기부 차관",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "환율",
-          "searchVolume": 19607700,
-          "origin": "related"
+          "keyword": "과기부 인사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 예산",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 조직도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 위치",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 장관상 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
+      "nextWave": [
+        {
+          "keyword": "과기부 예산",
+          "reason": "사업 예산 규모",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "피지컬 AI",
+          "reason": "제조현장 도입",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -6348,8 +6000,14 @@
       "lane": "tech",
       "issueStatus": "rising",
       "isHot": true,
-      "why": "오픈AI 코리아 1년간 기업용 챗GPT 이용자가 28배 늘어서.",
+      "why": "오픈AI 코리아 1년 만에 기업용 챗GPT 이용자가 28배 늘었다.",
       "headlines": [
+        {
+          "title": "앤트로픽 연구원 사표내며 경고…\"10년내 인류 멸망시킬수도\"(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-09T15:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016301163?sid=104"
+        },
         {
           "title": "오픈AI 코리아 1년…기업용 챗GPT 이용자 28배 늘었다",
           "press": "newsis.com",
@@ -6361,12 +6019,6 @@
           "press": "segye.com",
           "publishedAt": "2026-09-09T09:09:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/022/0004157739?sid=101"
-        },
-        {
-          "title": "AI, 48단계 '인간 증명' 테스트 통과…로봇 구별도구 무력화",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-08T19:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016298488?sid=104"
         }
       ],
       "concentrated": [
@@ -6376,12 +6028,12 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "오픈ai 주가",
+          "keyword": "오픈ai 아스트라",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "오픈ai 아스트라",
+          "keyword": "오픈ai 주가",
           "searchVolume": null,
           "origin": "autocomplete"
         },
@@ -6413,15 +6065,15 @@
       ],
       "nextWave": [
         {
-          "keyword": "오픈AI 상장 시기",
-          "reason": "IPO 여부 지속 관심",
+          "keyword": "오픈AI 아스트라",
+          "reason": "캡차 통과 신모델",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "오픈AI 관련주",
-          "reason": "투자 종목 관심",
+          "keyword": "오픈AI 상장",
+          "reason": "IPO 기대",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -6435,7 +6087,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "구글 크롬이 보안 강화로 업데이트 주기를 2주로 단축해서.",
+      "why": "구글 크롬이 업데이트 주기를 4주에서 2주로 단축했다.",
       "headlines": [
         {
           "title": "구글 크롬, 이제 2주마다 업데이트…AI가 바꾼 보안 환경",
@@ -6468,6 +6120,11 @@
           "origin": "autocomplete"
         },
         {
+          "keyword": "구글 크롬 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
           "keyword": "구글",
           "searchVolume": null,
           "origin": "autocomplete"
@@ -6482,7 +6139,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "딥시크가 씨틱증권을 주관사로 선정하며 상하이 증시 IPO에 속도를 내서.",
+      "why": "딥시크가 상하이 증시 IPO 주관사로 씨틱증권을 선정하며 상장에 속도를 냈다.",
       "headlines": [
         {
           "title": "딥시크, 상하이 증시 IPO 속도…씨틱증권 주관사 선정",
@@ -6497,10 +6154,10 @@
           "link": "https://n.news.naver.com/mnews/article/009/0005732994?sid=101"
         },
         {
-          "title": "딥시크, 상하이 증시 IPO 속도…\"주관사 선정\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-09T11:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016301079?sid=104"
+          "title": "딥시크, 상하이 증시 상장 본격화…IPO 주관사 선정",
+          "press": "biz.heraldcorp.com",
+          "publishedAt": "2026-09-09T12:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/016/0002695112?sid=105"
         }
       ],
       "concentrated": [
@@ -6515,12 +6172,7 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "딥시크 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "딥시크 나무위키",
+          "keyword": "중국 딥시크",
           "searchVolume": null,
           "origin": "autocomplete"
         },
@@ -6530,12 +6182,17 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "딥시크 구독",
+          "keyword": "딥시크 나무위키",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "딥시크 보안",
+          "keyword": "딥시크 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "딥시크 상장",
           "searchVolume": null,
           "origin": "autocomplete"
         },
@@ -6548,35 +6205,35 @@
       "nextWave": [
         {
           "keyword": "딥시크 상장일",
-          "reason": "IPO 시기 관심",
+          "reason": "IPO 시점 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "딥시크 관련주",
-          "reason": "수혜 종목 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "딥시크 v4 출시",
-          "reason": "신버전 성능 관심",
+          "reason": "국내 수혜주",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "딥시크 기업가치",
-          "reason": "100조 평가 근거 궁금",
+          "reason": "100조 평가",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "딥시크 v4",
+          "reason": "신버전 기대",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "딥시크 증류 논란",
-          "reason": "기술 복제 의혹 후속",
+          "reason": "기술 복제 지적",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -6590,7 +6247,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "딥마인드가 인간 유전자 변이 90억 개를 분석한 알파게놈 아틀라스를 공개해서.",
+      "why": "구글 딥마인드가 DNA 변이 90억개를 분석한 '알파게놈 아틀라스'를 공개했다.",
       "headlines": [
         {
           "title": "인간 유전자 변이 90억 개 영향 확인…딥마인드 '알파게놈 아틀라스' 공...",
@@ -6627,7 +6284,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "퀄컴이 아마존과 최대 80조원 규모 AI 데이터센터 칩 동맹을 맺어서.",
+      "why": "퀄컴이 아마존과 최대 80조원 규모 차세대 AI칩 공급 동맹을 맺었다.",
       "headlines": [
         {
           "title": "퀄컴, 아마존과 AI 칩 동맹…데이터센터 시장 본격 공략",
@@ -6665,6 +6322,16 @@
           "origin": "autocomplete"
         },
         {
+          "keyword": "퀄컴 아마존",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퀄컴 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
           "keyword": "퀄컴 코리아 채용",
           "searchVolume": null,
           "origin": "autocomplete"
@@ -6675,17 +6342,7 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "퀄컴 마곡",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퀄컴 나라",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퀄컴 실적",
+          "keyword": "퀄컴 칩",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -6693,21 +6350,21 @@
       "nextWave": [
         {
           "keyword": "퀄컴 주가 전망",
-          "reason": "동맹 후 상승 기대",
+          "reason": "계약 후 급등",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "퀄컴 AI칩 성능",
-          "reason": "엔비디아 대항 관심",
+          "keyword": "퀄컴 관련주",
+          "reason": "국내 수혜주",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "퀄컴 삼성",
-          "reason": "파운드리 협력 관심",
+          "keyword": "퀄컴 삼성전자",
+          "reason": "파운드리 수혜 기대",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -6721,7 +6378,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "파인더스에이아이가 천안 뚜쥬루에 AI 베이커리 스캐너를 구축해서.",
+      "why": "파인더스에이아이가 뚜쥬루에 AI 베이커리 스캐너 빵 계산대를 구축했다.",
       "headlines": [
         {
           "title": "파인더스에이아이, 뚜쥬루에 AI 계산대 구축…\"빵 올리면 1~2초 만에 인...",
@@ -6752,7 +6409,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "인텔이 반도체 약진과 CPU 가격 인상 보도로 주가가 9% 급등해서.",
+      "why": "인텔이 CPU 가격 인상과 하이NA EUV 양산 기대로 9% 급등했다.",
       "headlines": [
         {
           "title": "100달러 위협 '유가 공포' 덮쳤다…반도체 '약진' 인텔 9%↑",
@@ -6810,7 +6467,7 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "인텔 토스",
+          "keyword": "인텔 전망",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -6818,35 +6475,28 @@
       "nextWave": [
         {
           "keyword": "인텔 주가 전망",
-          "reason": "급등 후 방향 관심",
+          "reason": "급등 후 흐름",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "인텔 CPU 인상률",
-          "reason": "10% 인상 시기 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "인텔 18A 양산",
-          "reason": "공정 상용화 관심",
+          "keyword": "인텔 18A",
+          "reason": "양산 적용 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "인텔 파운드리 고객",
-          "reason": "수주 확대 관심",
+          "reason": "테라팹 수혜",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "인텔 관련주",
-          "reason": "국내 수혜주 관심",
+          "reason": "국내 수혜주",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -6897,7 +6547,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "축사하는 장동혁 대표",
@@ -8149,197 +7800,6 @@
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "윤종훈",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "'펜트하우스' 윤종훈이 10살 연하 배우 한은서와 11월 결혼한다.",
-      "headlines": [
-        {
-          "title": "[단독] '펜트하우스' 윤종훈, 11월 결혼… 오랜 사랑 결실",
-          "press": "hankookilbo.com",
-          "publishedAt": "2026-09-07T12:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/469/0000952653?sid=102"
-        },
-        {
-          "title": "'펜트하우스' 배우 윤종훈, 10살 연하 한은서와 결혼",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-07T12:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005329762?sid=103"
-        },
-        {
-          "title": "‘펜트하우스’ 윤종훈, 11월 결혼… 예비 신부는 배우 한은서",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-07T13:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005731750?sid=103"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "배우 윤종훈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤종훈 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤종훈 드라마",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤종훈 논란",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤종훈 키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤종훈 김숙",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤종훈 나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤종훈 배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "윤종훈 결혼식장",
-          "reason": "11월 예식 장소",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "윤종훈 나이차",
-          "reason": "10살 연하 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "윤종훈 신혼집",
-          "reason": "결혼 후속 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "이재명 대화 뤼미에르",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "이재명 대통령이 뤼미에르 서밋에서 한불 영화 파트너십을 출범했다.",
-      "headlines": [
-        {
-          "title": "이 대통령 \"한·불 뤼미에르 파트너십 출범…영화·영상산업 5년간 각 8...",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-07T11:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014175005?sid=100"
-        },
-        {
-          "title": "[포토] 영화인과 대화하는 이재명 대통령",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-07T13:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005329767?sid=100"
-        },
-        {
-          "title": "\"아내가 찍어오라고\"...李대통령, 전도연·설경구와 '찰칵'",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-07T14:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006365235?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "초대 중수청장 김지용",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "초대 중수청장 후보에 검사 출신 김지용 변호사가 올랐다.",
-      "headlines": [
-        {
-          "title": "초대 중수청장에 검사 출신 김지용",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-07T09:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005329682?sid=102"
-        },
-        {
-          "title": "초대 중수청장 후보에 김지용 변호사",
-          "press": "segye.com",
-          "publishedAt": "2026-09-07T08:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004157044?sid=100"
-        },
-        {
-          "title": "초대 중수청장 최종 후보 오른 김지용 변호사는 누구?",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-09-07T07:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001967728?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "주건협 PF 플랫폼",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "주건협이 주택사업자와 금융기관을 잇는 PF 정보 플랫폼을 개시했다.",
-      "headlines": [
-        {
-          "title": "주건협 'PF 정보 플랫폼' 가동…주택사업자·금융기관 직접 연결",
-          "press": "newspim.com",
-          "publishedAt": "2026-09-07T15:00:00.000Z",
-          "link": "https://www.newspim.com/news/view/20260907001183"
-        },
-        {
-          "title": "주택사업자 PF 금융사 찾기 돕는다…주건협, 8일 정보 플랫폼 개시",
-          "press": "kbmaeil.com",
-          "publishedAt": "2026-09-07T15:08:00.000Z",
-          "link": "https://www.kbmaeil.com/article/20260907500699"
-        },
-        {
-          "title": "주택사업자 PF 자금조달 지원 'PF 정보 플랫폼' 서비스 개시",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-07T15:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014175121?sid=101"
-        }
-      ],
-      "concentrated": [],
       "nextWave": [],
       "rowCount": 0,
       "carried": true
