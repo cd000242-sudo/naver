@@ -67,3 +67,59 @@ describe('photo-mode (imageNarrative) title contract', () => {
     expect(prompt).toContain('사진·입력 정보에 없는 사실');
   });
 });
+
+/*
+ * [2026-09-10 사장님] "여행글도 홈판 노출이 가능하니? SEO 노출에 부합하는 제목인지
+ * 확인해볼래? 자동생성인데 제목이 밋밋한 것 같아."
+ *
+ * 위 base.prompt 계약은 멀쩡한데 실제 발행 제목은 "거제 근포땅굴 여행, 초록 역광" 같은
+ * 라벨형만 나왔다. 원인은 로드 순서다 — loadSystemPrompt 는 `base + "\n\n" + <mode>.prompt`
+ * 로 이어 붙이는데, 5개 모드 프롬프트가 저마다 **JSON 스키마를 통째로 다시 선언**하면서
+ * titleReason 을 빠뜨렸다. 모델이 마지막에 읽는 스키마에 추론 필드가 없으니 제목 계약이
+ * 조용히 사라진다. paragraphs(사진-문단 짝맞춤)도 같은 이유로 빠져 있었다.
+ *
+ * 계약: 모드 프롬프트는 base 를 **덧붙이기만** 한다. 스키마는 base 하나가 정본이다.
+ */
+describe('imageNarrative 모드 프롬프트는 base 스키마를 덮지 않는다', () => {
+  const MODES = ['travel', 'food', 'lodging', 'daily', 'review'] as const;
+  const read = (name: string) =>
+    readFileSync(resolve(ROOT, 'prompts', 'imageNarrative', `${name}.prompt`), 'utf-8');
+
+  for (const mode of MODES) {
+    describe(`${mode}.prompt`, () => {
+      it('title/sections/introduction/conclusion 스키마를 다시 선언하지 않는다', () => {
+        const prompt = read(mode);
+        for (const field of ['"title"', '"sections"', '"introduction"', '"conclusion"']) {
+          expect(prompt, `${mode}.prompt 가 ${field} 를 재선언한다`).not.toContain(field);
+        }
+      });
+
+      it('base 스키마를 따른다고 명시한다', () => {
+        expect(read(mode)).toMatch(/base\.prompt/);
+      });
+    });
+  }
+});
+
+describe('제목 계약 — 검색되는 말과 장면을 함께 문다', () => {
+  const prompt = readFileSync(resolve(ROOT, 'prompts', 'imageNarrative', 'base.prompt'), 'utf-8');
+
+  it('검색 수요가 있는 말을 제목에 넣도록 요구한다', () => {
+    expect(prompt).toContain('TT6');
+    expect(prompt).toMatch(/검색되는 말/);
+  });
+
+  /*
+   * travel.prompt 는 자기 규칙에 T1~T6 을 쓴다. 제목 계약도 T 로 번호를 매기면 한 프롬프트
+   * 안에 같은 이름표가 두 벌 생겨 모델이 어느 T6 인지 알 수 없다. 제목 계약은 TT 로 가른다.
+   */
+  it('제목 계약 번호가 모드 규칙 번호와 겹치지 않는다', () => {
+    const block = prompt.slice(prompt.indexOf('[제목 계약'), prompt.indexOf('[JSON 출력 스키마]'));
+    expect(block).not.toMatch(/^T\d\./m);
+    expect(block).toMatch(/^TT1\./m);
+  });
+
+  it('paragraphs 계약은 base 에 그대로 남아 있다', () => {
+    expect(prompt).toContain('"paragraphs"');
+  });
+});

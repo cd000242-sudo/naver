@@ -215,7 +215,12 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-09-09] 소제목 계약 강화(장소의 의미 함축·숫자 표기)로 재계산
         // [2026-09-09] 같은 장소가 두 섹션으로 나뉠 때 장면으로 가르는 계약 추가로 재계산
         // [2026-09-10] gpt-image-2.5 flare/sunburst 레지스트리 등록(modelRegistry)으로 재계산
-        '0eb93bff4843a9518c0d104601b2968d9315c817c1ff8e5e00288fa0314bb6f2',
+        // [2026-09-10 2차] 사진 글 제목 계약 복구로 재계산 — imageNarrative 모드 프롬프트 5개가
+        //   JSON 스키마를 다시 선언하며 titleReason·paragraphs 를 빠뜨려 base 제목 계약이
+        //   조용히 사라지고 있었다(실측: 여행 글 5편이 전부 라벨형 제목). 스키마 재선언을
+        //   제거하고, base 에 검색 수요 규칙(TT6)을 추가 + 제목 계약 번호를 TT 로 분리
+        //   (travel.prompt 의 T1~T6 과 이름표가 겹쳤다).
+        'dd6efb24cf01bcdba5e2c0055beeec0ae9a16b9f14f050e7c01ef38e57700b30',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
