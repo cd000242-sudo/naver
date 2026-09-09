@@ -48,7 +48,24 @@ export interface PublishedPost {
     readonly position: number | null;       // 통합탭 노출 위치 (null = 미노출, 1~10 = top10, >10 = 그 외)
     readonly hasSmartblock: boolean;
     readonly notes?: string;
+    // [2026-09-10] true = probe could not judge (fetch error / 0 cards parsed). Not a miss.
+    readonly probeFailed?: boolean;
   }>;
+}
+
+type ExposureCheck = NonNullable<PublishedPost['exposureChecks']>[number];
+
+// Legacy rows (before probeFailed existed) encoded probe failure only in notes.
+const LEGACY_PROBE_FAILURE_NOTE = /상위 0개 중 미발견|^fetch 실패|^오류:/;
+
+/**
+ * A check that could not judge exposure — fetch failed or the parser found 0 cards.
+ * Such rows must never count as "not exposed" (124/208 stored rows were this on 2026-09-10).
+ */
+export function isProbeFailedCheck(check: ExposureCheck): boolean {
+  if (check.probeFailed === true) return true;
+  if (check.position !== null) return false;
+  return LEGACY_PROBE_FAILURE_NOTE.test(String(check.notes || ''));
 }
 
 const DEFAULT_MAX_POSTS = 500;
@@ -151,8 +168,10 @@ export function getPostsNeedingExposureCheck(
     const elapsed = now - publishedMs;
     if (elapsed < targetMs - toleranceMs) return false; // 아직 시점 도달 안 함
     if (elapsed > targetMs + toleranceMs) return false; // 너무 늦음 (다른 시점에서 확인)
-    // 이미 같은 시점 체크했으면 skip
-    const alreadyChecked = (p.exposureChecks ?? []).some(c => Math.abs(c.hoursAfter - hoursAfter) <= 1);
+    // 이미 같은 시점 체크했으면 skip — 판정 불가 기록은 체크로 치지 않는다(윈도우 안에서 재시도)
+    const alreadyChecked = (p.exposureChecks ?? []).some(
+      c => Math.abs(c.hoursAfter - hoursAfter) <= 1 && !isProbeFailedCheck(c),
+    );
     return !alreadyChecked;
   });
 }
@@ -194,12 +213,13 @@ export function splitExposureGroups(posts: PublishedPost[]): {
   const unknownCheck: PublishedPost[] = [];
 
   for (const p of posts) {
-    const checks = p.exposureChecks ?? [];
+    // 판정 불가 기록은 버린다 — 유효 체크가 하나도 없으면 unknown
+    const checks = (p.exposureChecks ?? []).filter(c => !isProbeFailedCheck(c));
     if (checks.length === 0) {
       unknownCheck.push(p);
       continue;
     }
-    // 가장 늦은 체크 결과 사용
+    // 가장 늦은 유효 체크 결과 사용
     const latest = [...checks].sort((a, b) => b.hoursAfter - a.hoursAfter)[0];
     if (latest.position !== null && latest.position <= 10) {
       exposed.push(p);

@@ -72,6 +72,19 @@ export async function checkPostExposure(
       };
     }
 
+    // [2026-09-10] 0 parsed cards means the markup/blocking defeated the parser, not that
+    // the post is absent. Report as a failed probe so callers retry and stats skip it.
+    if (dynamicReport.totalCards === 0) {
+      return {
+        checkedAt,
+        searchedKeyword: keyword,
+        position: null,
+        hasSmartblock: dynamicReport.hasSmartblock,
+        notes: '프로브 카드 0개 — 파싱 실패/차단, 판정 불가',
+        fetchSuccess: false,
+      };
+    }
+
     const position = matchPostInCards(dynamicReport.cards, blogId, logNo);
 
     return {

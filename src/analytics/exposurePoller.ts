@@ -88,6 +88,7 @@ export async function runExposurePollOnce(userDataPath: string): Promise<{
             position: r.result.position,
             hasSmartblock: r.result.hasSmartblock,
             notes: r.result.notes,
+            probeFailed: !r.result.fetchSuccess,
           } as PublishedPost['exposureChecks'] extends Array<infer C> | undefined ? C : never);
           if (!ok) throw new Error('LEGACY_EXPOSURE_RECORD_FAILED');
 
