@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { checkClaudeToken, exchangeClaudeOauth, fetchClaudeUsage, type ClaudeUsage } from '../../lib/keywordApi';
 import { bridgeAgentLogin, bridgeApiKeys, bridgeClaudeCredentials, probeBridge, type BridgeStatus } from '../../lib/bridge';
-import { enableKeySync, keySyncInfo, pullUserKeys, pushUserKeys } from '../../lib/keySync';
+import { enableKeySync, keySyncInfo, pullUserKeys, pushUserKeysDetailed } from '../../lib/keySync';
 import { loadSession } from '../../lib/lewordAuth';
 import {
     KEY_GROUPS,
@@ -210,6 +210,7 @@ function KeysTab() {
         try {
             const outcome = await enableKeySync(session.userId, syncPassword);
             setSyncPassword('');
+            setSyncRekey(false);
             setSyncInfo(keySyncInfo());
             setKeys(loadUserKeys());
             setSyncNote(outcome === 'pulled' ? '✅ 동기화 켜짐 — 다른 기기의 키를 가져와 채웠습니다.'
@@ -235,9 +236,15 @@ function KeysTab() {
     };
     const pushNow = async () => {
         setSyncBusy(true);
-        try { setSyncNote((await pushUserKeys()) ? '✅ 올렸습니다 — 다른 기기에서 [다른 기기 키 가져오기]를 누르면 내려옵니다.' : '올리지 못했습니다. 잠시 뒤 다시 시도해 주세요.'); }
-        finally { setSyncBusy(false); }
+        try {
+            const r = await pushUserKeysDetailed();
+            setSyncNote(!r.ok ? '올리지 못했습니다. 잠시 뒤 다시 시도해 주세요.'
+                : r.count === 0 ? '이 브라우저에 저장된 키가 없어 올릴 게 없습니다 — 아래 칸에 키를 넣고 저장부터 해 주세요.'
+                    : `✅ 키 ${r.count}개를 올렸습니다 (동기화 ID ${r.slotId}) — 다른 기기의 동기화 ID 가 같아야 내려옵니다.`);
+        } finally { setSyncBusy(false); }
     };
+    /* 켜져 있어도 비밀번호를 다시 넣어 주소를 다시 맞춘다 — 두 기기의 동기화 ID 가 다를 때의 해법. */
+    const [syncRekey, setSyncRekey] = useState(false);
     const importFromApp = async () => {
         setSyncBusy(true);
         try {
@@ -395,10 +402,10 @@ function KeysTab() {
             <section className="lw-panel" aria-label="계정 동기화">
                 <div className="lw-panel-head">
                     <h2>계정 동기화 · 앱 키 가져오기</h2>
-                    <span>{syncInfo.enabled ? `켜짐 — ${syncInfo.userId} 계정 · 저장할 때마다 자동으로 올라가고, 다른 기기는 로그인만 하면 받습니다` : '꺼짐 — 키를 넣은 기기(보통 PC)에서 먼저 켜세요. 그다음 다른 기기는 로그인만 하면 자동으로 받습니다'}</span>
+                    <span>{syncInfo.enabled ? `켜짐 — ${syncInfo.userId} 계정 · 동기화 ID ${syncInfo.slotId} · 두 기기의 ID 가 같아야 서로 받습니다` : '꺼짐 — 키를 넣은 기기(보통 PC)에서 먼저 켜세요. 그다음 다른 기기는 로그인만 하면 자동으로 받습니다'}</span>
                 </div>
                 <div className="lw-keys-sync">
-                    {!syncInfo.enabled && (
+                    {(!syncInfo.enabled || syncRekey) && (
                         <form className="lw-keys-sync-form" onSubmit={(e) => { e.preventDefault(); void enableSync(); }}>
                             <input
                                 type="password"
@@ -407,12 +414,13 @@ function KeysTab() {
                                 value={syncPassword}
                                 onChange={(e) => setSyncPassword(e.target.value)}
                             />
-                            <button type="submit" className="lw-mini" disabled={syncBusy || !syncPassword}>동기화 켜기</button>
+                            <button type="submit" className="lw-mini" disabled={syncBusy || !syncPassword}>{syncInfo.enabled ? '이 비밀번호로 다시 맞추기' : '동기화 켜기'}</button>
                         </form>
                     )}
                     <div className="lw-keys-sync-actions">
                         {syncInfo.enabled && <button type="button" className="lw-mini" disabled={syncBusy} onClick={() => void pullNow()}>다른 기기 키 가져오기</button>}
                         {syncInfo.enabled && <button type="button" className="lw-mini" disabled={syncBusy} onClick={() => void pushNow()}>지금 올리기</button>}
+                        {syncInfo.enabled && !syncRekey && <button type="button" className="lw-mini" disabled={syncBusy} onClick={() => setSyncRekey(true)}>비밀번호 다시 넣기</button>}
                         {/* 앱 브리지는 같은 PC 에서만 된다 — 폰에는 이 버튼이 없어야 한다(사장님 2026-09-09 "폰에 앱이 깔려야 된다는 말을 하는데"). */}
                         {bridgeReady && <button type="button" className="lw-mini" disabled={syncBusy} onClick={() => void importFromApp()}>이 PC 의 LEWORD 앱에서 키 가져오기</button>}
                     </div>

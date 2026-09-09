@@ -76,13 +76,19 @@ async function decryptKeys(record: SyncRecord, blob: string): Promise<UserKeys |
 
 /** 지금 저장된 키를 올린다. 동기화가 켜져 있지 않으면 아무것도 안 한다. 실패는 조용히(다음 저장 때 다시). */
 export async function pushUserKeys(keys: UserKeys = loadUserKeys()): Promise<boolean> {
+    return (await pushUserKeysDetailed(keys)).ok;
+}
+
+/** 올린 키 개수까지 돌려준다 — "올렸습니다"인데 0개였던 경우를 화면이 구분해야 한다. */
+export async function pushUserKeysDetailed(keys: UserKeys = loadUserKeys()): Promise<{ ok: boolean; count: number; slotId: string | null }> {
     const record = loadRecord();
-    if (!record || !cryptoOk()) return false;
+    if (!record || !cryptoOk()) return { ok: false, count: 0, slotId: null };
     try {
-        const blob = hasAnyUserKey(keys) ? await encryptKeys(record, keys) : '';
+        const count = Object.values(keys).filter((v) => typeof v === 'string' && v.trim()).length;
+        const blob = count > 0 ? await encryptKeys(record, keys) : '';
         const res = await callWorkerRaw('user-keys-put', { slot: record.slot, blob });
-        return Boolean(res && res.ok);
-    } catch { return false; }
+        return { ok: Boolean(res && res.ok), count, slotId: record.slot.slice(0, 6) };
+    } catch { return { ok: false, count: 0, slotId: record.slot.slice(0, 6) }; }
 }
 
 export type KeySyncOutcome = 'pulled' | 'pushed' | 'nothing' | 'wrong-password' | 'unavailable';
@@ -105,9 +111,10 @@ export async function enableKeySync(userId: string, password: string): Promise<K
 }
 
 /** 동기화 상태 — 화면(내 API 키)의 안내용. */
-export function keySyncInfo(): { enabled: boolean; userId: string | null } {
+export function keySyncInfo(): { enabled: boolean; userId: string | null; slotId: string | null } {
     const record = loadRecord();
-    return { enabled: record !== null, userId: record ? record.userId : null };
+    // slotId = 저장 주소 앞 6자리 — 두 기기에서 다르면 계정 아이디나 비밀번호가 다르게 들어간 것(2026-09-10 실사고 진단용).
+    return { enabled: record !== null, userId: record ? record.userId : null, slotId: record ? record.slot.slice(0, 6) : null };
 }
 
 /**
