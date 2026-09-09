@@ -85,7 +85,7 @@ export async function pushUserKeys(keys: UserKeys = loadUserKeys()): Promise<boo
     } catch { return false; }
 }
 
-export type KeySyncOutcome = 'pulled' | 'pushed' | 'nothing' | 'unavailable';
+export type KeySyncOutcome = 'pulled' | 'pushed' | 'nothing' | 'wrong-password' | 'unavailable';
 
 /**
  * 로그인 직후 — 비밀번호로 유도 키를 만들고 기억한 뒤, 원격과 로컬을 맞춘다.
@@ -98,6 +98,7 @@ export async function enableKeySync(userId: string, password: string): Promise<K
     // 로컬과 원격을 합친다(로컬 칸 우선, 빈 칸만 원격으로) → 합친 결과를 올린다. 어느 기기가 먼저였든 잃는 칸이 없다.
     const pulled = await pullUserKeys();
     if (pulled.status === 'merged') return pulled.filled > 0 ? 'pulled' : 'pushed';
+    if (pulled.status === 'wrong-password') return 'wrong-password';
     const local = loadUserKeys();
     if (hasAnyUserKey(local)) return (await pushUserKeys(local)) ? 'pushed' : 'nothing';
     return 'nothing';
@@ -113,15 +114,34 @@ export function keySyncInfo(): { enabled: boolean; userId: string | null } {
  * 원격을 끌어와 로컬과 합친다 — 로컬에 있는 칸은 로컬이 이기고, 빈 칸만 원격으로 채운다.
  * 로그인 없이도 '내 API 키'의 [다른 기기 키 가져오기]가 부른다. 합친 결과는 다시 올린다.
  */
-export async function pullUserKeys(): Promise<{ status: 'merged' | 'none' | 'unavailable'; filled: number }> {
+export interface PullResult {
+    /** merged=합침 · none=원격에 없음 · wrong-password=원격은 있는데 이 비밀번호로 못 풂 · unavailable=동기화 꺼짐/오류 */
+    status: 'merged' | 'none' | 'wrong-password' | 'unavailable';
+    filled: number;
+    /** 원격이 올라간 시각(서버 기준). 없으면 null. */
+    savedAt: number | null;
+}
+
+/**
+ * 원격을 끌어와 로컬과 합친다 — 로컬에 있는 칸은 로컬이 이기고, 빈 칸만 원격으로 채운다.
+ * KV 는 엣지끼리 늦게 퍼진다(최대 1분) — 폰이 PC 직후에 부르면 비어 보일 수 있어 3번(약 8초) 다시 본다.
+ */
+export async function pullUserKeys(): Promise<PullResult> {
     const record = loadRecord();
-    if (!record || !cryptoOk()) return { status: 'unavailable', filled: 0 };
+    if (!record || !cryptoOk()) return { status: 'unavailable', filled: 0, savedAt: null };
     try {
-        const res = await callWorkerRaw('user-keys-get', { slot: record.slot });
-        const blob = res && res.ok && typeof res.blob === 'string' ? res.blob : '';
-        if (!blob) return { status: 'none', filled: 0 };
+        let blob = '';
+        let savedAt: number | null = null;
+        for (let attempt = 0; attempt < 3 && !blob; attempt += 1) {
+            if (attempt > 0) await new Promise((r) => setTimeout(r, 4000));
+            const res = await callWorkerRaw('user-keys-get', { slot: record.slot });
+            blob = res && res.ok && typeof res.blob === 'string' ? res.blob : '';
+            savedAt = res && typeof res.savedAt === 'number' ? res.savedAt : null;
+        }
+        if (!blob) return { status: 'none', filled: 0, savedAt: null };
         const remote = await decryptKeys(record, blob);
-        if (!remote || !hasAnyUserKey(remote)) return { status: 'none', filled: 0 };
+        if (!remote) return { status: 'wrong-password', filled: 0, savedAt };
+        if (!hasAnyUserKey(remote)) return { status: 'none', filled: 0, savedAt };
         const local = loadUserKeys();
         let filled = 0;
         const merged: UserKeys = { ...remote, ...local };
@@ -129,8 +149,8 @@ export async function pullUserKeys(): Promise<{ status: 'merged' | 'none' | 'una
             if (!local[field as keyof UserKeys] && value) filled += 1;
         }
         saveUserKeys(merged); // 저장 이벤트 → 합친 결과가 다시 올라간다
-        return { status: 'merged', filled };
-    } catch { return { status: 'unavailable', filled: 0 }; }
+        return { status: 'merged', filled, savedAt };
+    } catch { return { status: 'unavailable', filled: 0, savedAt: null }; }
 }
 
 /** userKeys.saveUserKeys 가 쏘는 이벤트를 받아 올린다 — 앱 어디서 저장하든 한 곳에서. */

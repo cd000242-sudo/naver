@@ -213,9 +213,10 @@ function KeysTab() {
             setSyncInfo(keySyncInfo());
             setKeys(loadUserKeys());
             setSyncNote(outcome === 'pulled' ? '✅ 동기화 켜짐 — 다른 기기의 키를 가져와 채웠습니다.'
-                : outcome === 'pushed' ? '✅ 동기화 켜짐 — 이 브라우저의 키를 올렸습니다. 다른 기기에서 같은 비밀번호로 켜면 내려옵니다.'
-                    : outcome === 'nothing' ? '✅ 동기화 켜짐 — 아직 올릴 키도, 가져올 키도 없습니다.'
-                        : '이 브라우저는 동기화를 지원하지 않습니다(WebCrypto 없음).');
+                : outcome === 'pushed' ? '✅ 동기화 켜짐 — 이 브라우저의 키를 올렸습니다. 다른 기기는 로그인하면(또는 [다른 기기 키 가져오기]) 내려옵니다.'
+                    : outcome === 'wrong-password' ? '동기화는 켰지만 다른 기기가 올린 키를 이 비밀번호로 풀지 못했습니다 — 두 기기에서 같은 비밀번호로 켜야 합니다.'
+                        : outcome === 'nothing' ? '✅ 동기화 켜짐 — 아직 다른 기기에서 올린 키가 없고 이 기기에도 키가 없습니다. 키가 있는 기기에서 먼저 켜 주세요.'
+                            : '이 브라우저는 동기화를 지원하지 않습니다(WebCrypto 없음).');
         } finally { setSyncBusy(false); }
     };
     const pullNow = async () => {
@@ -223,7 +224,11 @@ function KeysTab() {
         try {
             const r = await pullUserKeys();
             setKeys(loadUserKeys());
-            setSyncNote(r.status === 'merged' ? `✅ 가져왔습니다 — 빈 칸 ${r.filled}개를 채웠습니다.` : r.status === 'none' ? '다른 기기에서 올린 키가 아직 없습니다. 그 기기에서 [지금 올리기]를 누르세요.' : '가져오지 못했습니다. 잠시 뒤 다시 시도해 주세요.');
+            const when = r.savedAt ? new Date(r.savedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
+            setSyncNote(r.status === 'merged' ? `✅ 가져왔습니다 — 빈 칸 ${r.filled}개를 채웠습니다${when ? ` (다른 기기 업로드 ${when})` : ''}.`
+                : r.status === 'wrong-password' ? `다른 기기가 올린 키는 있는데(${when}) 이 기기의 동기화 비밀번호가 달라 풀지 못했습니다. 로그아웃 후 다시 로그인하거나, 두 기기에서 같은 비밀번호로 [동기화 켜기]를 다시 하세요.`
+                    : r.status === 'none' ? '다른 기기에서 올린 키가 아직 없습니다. 키가 들어 있는 기기(PC)의 내 API 키에서 [동기화 켜기] 또는 [지금 올리기]를 누른 뒤, 1분쯤 지나 다시 눌러 주세요.'
+                        : '가져오지 못했습니다. 잠시 뒤 다시 시도해 주세요.');
         } finally { setSyncBusy(false); }
     };
     const pushNow = async () => {
