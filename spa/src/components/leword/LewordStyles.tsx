@@ -2223,6 +2223,10 @@ function LewordStyles() {
             .lw-picks-btn { font: inherit; font-size: 12px; padding: 3px 9px; border-radius: 6px; border: 1px solid color-mix(in srgb, currentColor 22%, transparent); background: transparent; color: inherit; cursor: pointer; }
             .lw-picks-btn:hover { background: color-mix(in srgb, currentColor 8%, transparent); }
             .lw-picks-more { margin: 6px 8px 0; font-size: 12px; opacity: 0.65; }
+            /* 이용권 없이 주소로 들어온 유료 탭 */
+            .lw-locked { padding: 28px 22px; border: 1px dashed color-mix(in srgb, currentColor 22%, transparent); border-radius: 12px; text-align: center; max-width: 560px; margin: 24px auto; }
+            .lw-locked h1 { font-size: 20px; margin: 0 0 8px; }
+            .lw-locked p { margin: 0 0 16px; opacity: 0.75; font-size: 14px; line-height: 1.5; }
             /* 오늘의 글감 — NOW/NEXT/ALWAYS 브리프 카드 */
             .lw-briefs-rounds { display: flex; gap: 8px; margin: 2px 0 12px; flex-wrap: wrap; }
             .lw-briefs-round { font: inherit; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 120px; padding: 8px 14px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); background: transparent; color: inherit; cursor: pointer; text-align: left; }

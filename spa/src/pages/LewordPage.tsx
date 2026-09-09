@@ -45,11 +45,13 @@ const TABS = [
 type TabId = (typeof TABS)[number]['id'];
 
 /**
- * 비로그인도 열리는 탭 — 황금키워드와 실검 틈새. 둘 다 정적 보드라 상위 5건은
- * 맛보기로 보이고 나머지는 카드 잠금이 막는다(사장님 사양 2026-09-02:
- * "황금키워드보드처럼 사람들에게 보여주기만").
+ * 비로그인도 열리는 탭 — 황금키워드와 실검 틈새 **둘뿐**. 상위 몇 건만 맛보기로 보이고
+ * 나머지는 카드 잠금이 막는다(사장님 사양 2026-09-02 "보여주기만"). 추천키워드·오늘의 글감을
+ * 포함한 나머지 탭은 전부 이용권(로그인)이 있어야 열린다 — 사장님 2026-09-09
+ * "황금키워드랑 틈새키워드만 맛보기고 나머지는 유료로". 사이드 메뉴 클릭뿐 아니라 주소로
+ * 바로 들어와도(?tab=briefs) 아래 lockedTab 이 본문 대신 잠금 안내를 그린다.
  */
-const GUEST_TABS: ReadonlySet<string> = new Set(['golden', 'issue', 'picks', 'briefs']);
+const GUEST_TABS: ReadonlySet<string> = new Set(['golden', 'issue']);
 
 function isTabId(value: string): value is TabId {
     return TABS.some((tab) => tab.id === value);
@@ -72,6 +74,8 @@ function LewordPage() {
     const [authOpen, setAuthOpen] = useState(false);
     const left = session ? daysLeft(session) : null;
     const activeMeta = TABS.find((tab) => tab.id === activeTab) ?? TABS[0];
+    /** 이용권 없이 주소로 들어온 유료 탭 — 본문 대신 잠금 안내. */
+    const lockedTab = !session && !GUEST_TABS.has(activeTab);
 
     // 보드 안쪽 잠금 안내가 로그인을 부를 때 — 소품을 길게 넘기지 않는다.
     useEffect(() => {
@@ -282,7 +286,7 @@ function LewordPage() {
                         </>
                     ) : (
                         <>
-                            <span className="lw-acct-meta">로그인하면 모든 기능이 열립니다 — 지금은 황금키워드 상위 5건만 보입니다.</span>
+                            <span className="lw-acct-meta">로그인하면 모든 기능이 열립니다 — 지금은 황금키워드·실검 틈새 맛보기만 보입니다.</span>
                             <button type="button" className="lw-acct-btn on" onClick={() => setAuthOpen(true)}>
                                 로그인 · 계정 만들기
                             </button>
@@ -310,20 +314,27 @@ function LewordPage() {
                     </div>
                 )}
 
-                {activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
-                {activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
+                {lockedTab && (
+                    <section className="lw-locked" aria-labelledby="lw-locked-title">
+                        <h1 id="lw-locked-title">{activeMeta.label}</h1>
+                        <p>이용권이 있는 계정으로 로그인하면 열립니다. 비로그인은 황금키워드·실검 틈새 맛보기만 볼 수 있습니다.</p>
+                        <button type="button" className="lw-acct-btn on" onClick={() => setAuthOpen(true)}>로그인 · 계정 만들기</button>
+                    </section>
+                )}
+                {!lockedTab && activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
+                {!lockedTab && activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {/* 실검 틈새키워드와 키워드 분석 사이의 서브탭 — 오늘의 네이버 추천키워드(사장님 2026-09-08). */}
-                {activeTab === 'picks' && <TodayPicksBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} topic={currentPicksTopic} onTopics={setPicksTopics} />}
+                {!lockedTab && activeTab === 'picks' && <TodayPicksBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} topic={currentPicksTopic} onTopics={setPicksTopics} />}
                 {/* 오늘의 글감 — NOW/NEXT/ALWAYS 브리프(사장님 예시 형식 2026-09-09). */}
-                {activeTab === 'briefs' && <TopicBriefsBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
-                {activeTab === 'kin' && <KinGoldenTab onAnalyze={sendToAnalyze} />}
-                {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
-                {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
-                {activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
-                {activeTab === 'radar' && <RadarTab initialUrl={handoffPostUrl} />}
-                {activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} onAnalyze={sendToAnalyze} />}
-                {activeTab === 'rpm' && <RpmTab onRadar={sendToRadar} />}
-                {activeTab === 'keys' && <KeysTab />}
+                {!lockedTab && activeTab === 'briefs' && <TopicBriefsBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
+                {!lockedTab && activeTab === 'kin' && <KinGoldenTab onAnalyze={sendToAnalyze} />}
+                {!lockedTab && activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
+                {!lockedTab && activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
+                {!lockedTab && activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
+                {!lockedTab && activeTab === 'radar' && <RadarTab initialUrl={handoffPostUrl} />}
+                {!lockedTab && activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} onAnalyze={sendToAnalyze} />}
+                {!lockedTab && activeTab === 'rpm' && <RpmTab onRadar={sendToRadar} />}
+                {!lockedTab && activeTab === 'keys' && <KeysTab />}
             </section>
         </div>
     );
