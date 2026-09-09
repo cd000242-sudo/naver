@@ -102,21 +102,34 @@ describe('4) 사진 글 소제목 — 문장형 + 자연스러운 끝맺음', ()
     expect(basePrompt).not.toMatch(/"heading": "소제목 \(2~4어절\)"/);
   });
 
-  it('문장형 + 글자수 기준을 준다', () => {
-    expect(basePrompt).toMatch(/함축된\*\* 문장형으로 쓴다 \(12~30자\)/);
-    expect(builder).toMatch(/\[소제목\][\s\S]*?문장형\(12~30자\)/);
+  it('글자수 기준을 준다', () => {
+    expect(basePrompt).toMatch(/함축된\*\* 한 마디로 쓴다 \(12~30자\)/);
+    expect(builder).toMatch(/\[소제목\][\s\S]*?한 마디\(12~30자\)/);
   });
 
-  it('끝맺음 두 갈래(정확한 종결 / 여운 있는 체언 종결)를 명시한다', () => {
+  /*
+   * [2026-09-09 사장님] "'…근포마을을 마주했어요' 보다 '…마주한 근포마을' 이런 소제목이
+   * 낫지 않니?" 읽는 맛 말고도 이유가 있다 — isSemiAutoHeadingCandidate 의
+   * clearSentenceEnding 이 습니다/해요/했어요 종결을 소제목이 아니라고 배제하므로,
+   * 종결어미로 끝난 소제목은 붙여넣기 동기화에 아예 보이지 않고 섹션이 통째로 사라진다.
+   */
+  it('끝맺음을 명사(체언)로 못 박는다', () => {
     for (const source of [basePrompt, builder]) {
-      expect(source).toMatch(/정확한 종결/);
-      expect(source).toMatch(/여운 있는 체언 종결|여운 있는 체언/);
+      expect(source).toMatch(/끝맺음[^\n]*명사\(체언\)로/);
+      expect(source).toMatch(/마주한 근포마을/);
     }
   });
 
-  it('모든 소제목을 같은 종결로 통일하지 못하게 막는다', () => {
-    expect(basePrompt).toMatch(/같은 종결로 통일하지 않는다/);
-    expect(builder).toMatch(/같은 종결로 통일하지 말고/);
+  it('옛 "두 갈래 종결" 지시가 되살아나지 못하게 막는다 (회귀 잠금)', () => {
+    for (const source of [basePrompt, builder]) {
+      expect(source).not.toMatch(/정확한 종결/);
+      expect(source).not.toMatch(/같은 종결로 통일하지/);
+    }
+  });
+
+  it('명사 종결을 두 낱말 라벨로 오해하지 않게 막아 둔다', () => {
+    expect(basePrompt).toMatch(/두 낱말 라벨/);
+    expect(builder).toMatch(/명사 라벨\("근포땅굴 도착"\)/);
   });
 
   it('어색함을 구체적으로 금지한다 (번역투·광고·상투구)', () => {
