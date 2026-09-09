@@ -68,3 +68,28 @@ describe('아이디·비밀번호 기억하기 — 업데이트 후에도 유지
     expect(preserveBlock).not.toMatch(/credentialsOptOut/);
   });
 });
+
+/**
+ * [2026-09-09 2차] v2.11.242 로 loadConfig 병합을 고쳤는데도 업데이트 후 체크가 풀렸다.
+ *
+ * 같은 병을 두 곳에서 앓고 있었다. 업데이트 시 자격증명을 이어받는
+ * backupCredentialsFromAllSettings 는 파일을 mtime 오름차순으로 훑어 나중 파일이 이긴다.
+ * 빈 문자열은 걸러지는데 false 는 안 걸러져서, 계정 파일의 기본값 false 가 마스터의
+ * true 를 덮었다. 실제로 마스터 파일의 remember 가 true → false 로 바뀌어 있었다.
+ */
+describe('업데이트 복원 경로도 같은 기준을 쓴다', () => {
+  const main = readFileSync(new URL('../main.ts', import.meta.url), 'utf8');
+
+  it('명시적 의도 없이는 false 를 받아들이지 않는다', () => {
+    expect(main).toMatch(/field === 'rememberCredentials' \|\| field === 'rememberLicenseCredentials'/);
+    expect(main).toMatch(/parsed\.credentialsOptOut !== true/);
+  });
+
+  it('아이디·비번이 살아남았는데 remember 가 비면 켜 준다', () => {
+    expect(main).toMatch(/merged\.savedNaverId && merged\.savedNaverPassword && merged\.rememberCredentials === undefined/);
+  });
+
+  it('빈 문자열 제외는 그대로 유지한다 (자격증명이 실수로 지워지지 않게)', () => {
+    expect(main).toMatch(/if \(v === undefined \|\| v === null \|\| v === ''\) continue;/);
+  });
+});

@@ -8772,13 +8772,42 @@ async function backupCredentialsFromAllSettings(userDataPath: string): Promise<R
         const parsed = JSON.parse(raw);
         for (const field of PRESERVE_FIELDS) {
           const v = parsed[field];
-          if (v !== undefined && v !== null && v !== '') {
-            merged[field] = v;
-          }
+          if (v === undefined || v === null || v === '') continue;
+          /*
+           * [2026-09-09 사장님 실측] 업데이트 후에도 "아이디 비밀번호 기억하기" 가 풀렸다.
+           *
+           * 파일을 mtime 오름차순으로 훑어 나중 파일이 이긴다. 그런데 계정 파일
+           * (settings_acct1.json)의 기본값 rememberCredentials=false 가 마스터의 true 를
+           * 덮어써, 업데이트마다 체크가 꺼진 채로 복원됐다. 실제로 마스터 파일의
+           * remember 가 true → false 로 바뀌어 있었다.
+           *
+           * false 하나로는 "사용자가 직접 껐다" 와 "파일 기본값" 을 구분할 수 없다.
+           * loadConfig 의 병합과 같은 원칙으로, 명시적 의도(credentialsOptOut)가 있을 때만
+           * false 를 받아들인다. 아이디·비밀번호는 빈 문자열이 위에서 걸러지므로
+           * 실수로 지워질 일이 없다.
+           */
+          if (
+            (field === 'rememberCredentials' || field === 'rememberLicenseCredentials')
+            && v === false
+            && parsed.credentialsOptOut !== true
+          ) continue;
+          merged[field] = v;
         }
       } catch (e) {
         console.warn(`[Wipe] ⚠️ ${name} 파싱 실패 (스킵):`, (e as Error).message);
       }
+    }
+
+    /*
+     * [2026-09-09] 자격증명이 살아남았는데 remember 만 비어 있으면 켜 준다.
+     *   위에서 기본값 false 를 걸렀기 때문에 undefined 로 남을 수 있다. 이 상태로 두면
+     *   복원된 아이디·비밀번호가 있는데도 자동 입력이 꺼진 채로 시작한다.
+     */
+    if (merged.savedNaverId && merged.savedNaverPassword && merged.rememberCredentials === undefined) {
+      merged.rememberCredentials = true;
+    }
+    if (merged.savedLicenseUserId && merged.savedLicensePassword && merged.rememberLicenseCredentials === undefined) {
+      merged.rememberLicenseCredentials = true;
     }
     console.log(`[Wipe] ✅ 자격증명 백업: ${Object.keys(merged).length}개 필드 / ${withMtime.length}개 파일 스캔`);
   } catch (e) {
