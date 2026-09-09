@@ -17,7 +17,8 @@ describe('1) 이미지 중복 삽입 방지', () => {
 
   it('ImageManager 경로에도 usedImagePaths 필터가 있다', () => {
     // 폴백 경로에만 있고 ImageManager 경로에는 등록만 있던 것이 중복의 뿌리였다.
-    expect(editor).toMatch(/headingImages = headingImages\.filter\(\(img: any\) => \{[\s\S]*?usedImagePaths\.has\(imgPath\)/);
+    // [2026-09-10] 한 개 키(filePath||url) 비교로는 data URL 사본을 못 잡아 신원 전체 비교로 바꿨다.
+    expect(editor).toMatch(/headingImages = headingImages\.filter\(\(img: any\) => !isImageAlreadyUsed\(usedImagePaths, img\)\)/);
   });
 
   it('필터가 등록보다 먼저 온다 (등록 후 걸러내면 아무 효과가 없다)', () => {

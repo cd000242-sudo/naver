@@ -41,6 +41,7 @@ import {
 } from './editorTailPlan.js';
 // [v2.11.206] 장소(지도) 블록 삽입 — 앱에서 확정한 업체명/주소로만 동작한다.
 import { insertPlaceBlock } from './placeHelpers.js';
+import { isImageAlreadyUsed, registerUsedImage, seedThumbnailIdentity } from './imageIdentity.js';
 // [2026-08-25] 여러 장소를 어느 소제목 아래 넣을지 정하는 계획기(순수 함수).
 import {
   placementsForHeading,
@@ -1082,6 +1083,14 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     let thumbnailInsertedInIntro = false;
     // ✅ [2026-02-24 FIX] 이미 삽입된 이미지 파일 경로를 추적하여 중복 삽입 방지
     const usedImagePaths = new Set<string>();
+    /*
+     * [2026-09-10 사장님 실측] "썸네일로 썼던 이미지를 1번 소제목의 첫 번째 이미지로 또 쓴다."
+     *
+     * 대표사진은 data: URL 로, 본문 사진은 파일 경로로 넘어와 문자열 공간이 갈린다. 서론이
+     * 넣기 전에 대표사진의 양쪽 신원을 미리 등록해 둬야 1번 소제목에서 같은 사진이 또 잡히지
+     * 않는다. 서론 삽입 자체는 usedImagePaths 를 보지 않으므로 대표사진이 사라질 일은 없다.
+     */
+    seedThumbnailIdentity(usedImagePaths, resolved);
 
     // ✅ [2026-03-26 FIX] 서론이 존재하면 무조건 작성 (10자 제한 제거 — 서론 스킵 완전 방지)
     if (structured.introduction && structured.introduction.trim().length > 0) {
@@ -1813,10 +1822,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
            */
           if (headingImages.length > 0) {
             const beforeDedup = headingImages.length;
-            headingImages = headingImages.filter((img: any) => {
-              const imgPath = img?.filePath || img?.url;
-              return !(imgPath && usedImagePaths.has(imgPath));
-            });
+            headingImages = headingImages.filter((img: any) => !isImageAlreadyUsed(usedImagePaths, img));
             const dropped = beforeDedup - headingImages.length;
             if (dropped > 0) {
               self.log(`   🔁[중복제거] 이미 삽입된 이미지 ${dropped}개 제외 (썸네일/앞 소제목과 중복)`);
@@ -1825,10 +1831,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
           // ✅ [2026-02-24 FIX] 이 소제목에서 사용하기로 한 이미지를 usedImagePaths에 등록
           if (headingImages.length > 0) {
-            headingImages.forEach((img: any) => {
-              const imgPath = img?.filePath || img?.url;
-              if (imgPath) usedImagePaths.add(imgPath);
-            });
+            headingImages.forEach((img: any) => registerUsedImage(usedImagePaths, img));
           }
 
           // ✅ [1단계] 본문 및 이미지 데이터 준비
