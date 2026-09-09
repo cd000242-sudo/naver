@@ -350,6 +350,7 @@ import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 import { initPlacePicker, readPickedPlace, readPickedPlaces } from './modules/placePicker.js';
 import { initHeadingControlPanel, renderHeadingList } from './modules/headingControlPanel.js';
 import { resetPhotoModeForNextPost } from './modules/photoModeReset.js';
+import { initStartupEngineGate } from './modules/startupEngineGate.js';
 // ✅ [SPEC-DROPSHOT-2026] 이미지 관리 → 🎨 이미지 생성 서브탭 (멀티엔진 대량 생성 스튜디오)
 import { initImageGenStudio } from './modules/imageGenStudio.js';
 // ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 로그인/확인 UI (엔진 선택 시 노출)
@@ -801,6 +802,14 @@ document.addEventListener('DOMContentLoaded', () => {
       await refreshAgentQuotaBadge();
     } catch (error) {
       console.warn("[Startup] 텍스트 모델 복원 실패:", error);
+    }
+    // [2026-09-10] 매 실행마다 글생성 엔진을 먼저 고르게 한다(차단 모달). 저장값이 없을 때
+    //   모든 폴백이 3.1 Flash-Lite 로 떨어져 사용자가 고른 적 없는 엔진으로 발행되던 문제.
+    try {
+      const chosen = await initStartupEngineGate();
+      if (chosen) await refreshAgentQuotaBadge();
+    } catch (error) {
+      console.warn("[Startup] 엔진 선택 게이트 실패:", error);
     }
   })();
   initExposedStructureRef(); // [2026-08-19] 노출 글 구조 참고 입력칸

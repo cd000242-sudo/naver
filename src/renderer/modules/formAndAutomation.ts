@@ -4,6 +4,7 @@
 
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import { normalizePublishImageSequence } from '../../image/publishImageSequence.js';
+import { cancelActiveVisionInfer } from './visionInferCancel.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -519,6 +520,8 @@ const aiProgressModal = {
           } else if (automationRunning) {
             cancelAutomation();
           }
+          // Photo mode: the modal wraps a blocking vision inference IPC — abort it too.
+          void cancelActiveVisionInfer('AI progress modal cancel button');
           try { appendLog?.('⏹️ 글 생성 취소 요청 — 해당 생성 작업만 중단합니다.'); } catch { /* ignore */ }
         }
       } else {
@@ -547,6 +550,7 @@ const aiProgressModal = {
               reason: 'AI progress modal close button',
             });
           }
+          void cancelActiveVisionInfer('AI progress modal close button');
           try { appendLog?.('⏹️ 글 생성 취소 요청 — 해당 생성 작업만 중단합니다.'); } catch { /* ignore */ }
         }
       } else {

@@ -5998,6 +5998,11 @@ ipcMain.handle('multiAccount:cancel', async () => {
 // IPC 레벨에서 전체 글생성 파이프라인을 다시 돌리지 않는다.
 const GENERATE_STRUCTURED_CONTENT_RETRIES = 0;
 const contentGenerationAbortRegistry = new ScopedAbortRegistry('content-generation');
+const visionInferAbortRegistry = new ScopedAbortRegistry('vision-infer');
+
+function throwIfVisionInferAborted(signal: AbortSignal): void {
+  if (signal.aborted) throw new Error('VISION_INFER_ABORTED');
+}
 
 ipcMain.handle(
   'automation:cancelContentGeneration',
@@ -10205,7 +10210,14 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
   plan?: unknown;
   reviewEdits?: unknown;
   manualTitle?: string;
+  requestId?: string;
 }) => {
+  // Photo-mode inference can take minutes; the renderer's stop button aborts it via
+  // 'vision:cancel-infer-and-write' with the same requestId.
+  const inferOperation = visionInferAbortRegistry.begin(
+    typeof payload?.requestId === 'string' ? payload.requestId : undefined,
+  );
+  const inferSignal = inferOperation.controller.signal;
   try {
     const { normalizeInferAndWritePayload } = await import('./imageNarrative/inferAndWriteInput.js');
     const { aggregateInferences } = await import('./imageNarrative/inferenceAggregator/aggregator.js');
@@ -10260,6 +10272,7 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
         provider: narrativeTextProvider,
         mode: normalized.mode,
         context: normalized.context,
+        signal: inferSignal,
       });
     } else if (narrativeTextProvider === 'agent-gemini') {
       throw new Error(
@@ -10271,8 +10284,10 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
         provider: effectiveProvider,
         mode: normalized.mode,
         context: normalized.context,
+        signal: inferSignal,
       });
     }
+    throwIfVisionInferAborted(inferSignal);
     const plan = applyReviewEditsToPlan(inferredPlan, normalized.reviewEdits);
 
     const content = await buildNarrativeContent(plan, {
@@ -10281,7 +10296,9 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
       toneStyle: normalized.toneStyle,
       context: normalized.context,
       agentProductPolicyContext: productPolicyContext,
+      signal: inferSignal,
     });
+    throwIfVisionInferAborted(inferSignal);
     const manualTitle = normalizeManualTitleOverride(payload?.manualTitle);
     if (manualTitle) {
       applyManualTitleOverrideInPlace(content as any, manualTitle);
@@ -10311,9 +10328,27 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
     // plan은 모두 plain JSON serialisable — Map/Buffer 없음 (orderedResults는 exif/result/imageId).
     return { success: true, plan, content, imageMap: imageMapObj };
   } catch (error) {
+    if (inferSignal.aborted) {
+      console.warn(`[Main] vision:infer-and-write — 사용자 중지 (requestId=${inferOperation.id})`);
+      return { success: false, cancelled: true, message: '사진 추론을 중지했습니다.' };
+    }
     console.error('[Main] vision:infer-and-write 오류:', error);
     return { success: false, message: (error as Error).message };
+  } finally {
+    visionInferAbortRegistry.release(inferOperation.id, inferOperation.controller);
   }
+});
+
+// Stop button for photo-mode inference. Without a requestId every in-flight inference is
+// aborted (the renderer only ever runs one at a time).
+ipcMain.handle('vision:cancel-infer-and-write', async (_event, payload?: { requestId?: string; reason?: string }) => {
+  const requestId = typeof payload?.requestId === 'string' ? payload.requestId.trim() : '';
+  const reason = typeof payload?.reason === 'string' ? payload.reason.slice(0, 300) : 'operator cancel';
+  const aborted = requestId
+    ? Number(visionInferAbortRegistry.abort(requestId, reason))
+    : visionInferAbortRegistry.abortAll(reason);
+  console.warn(`[CancelTrace] scope=vision-infer requestId=${requestId || '(all)'} aborts=${aborted} reason=${reason}`);
+  return { success: true, aborted };
 });
 
 // ✅ Puppeteer/자동화 오류 메시지 한글화 함수 (Main Process용)

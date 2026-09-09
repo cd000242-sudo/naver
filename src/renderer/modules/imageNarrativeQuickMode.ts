@@ -18,6 +18,12 @@ import { showReviewPanel, hideReviewPanel, isReviewComplete, getReviewEdits } fr
 import { executeFullAutoFlow } from './fullAutoFlow.js';
 import type { NarrativePlan, VisionProvider } from '../../imageNarrative/types.js';
 import { GEMINI_TEXT_MODELS } from '../../runtime/modelRegistry.js';
+import {
+  beginVisionInferRequest,
+  endVisionInferRequest,
+  isVisionInferStale,
+  cancelActiveVisionInfer,
+} from './visionInferCancel.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -154,6 +160,7 @@ async function _runQuickInference(): Promise<void> {
 
   setState({ isInferring: true });
   _setNextBtnLoading(true);
+  const requestId = beginVisionInferRequest();
 
   try {
     // [v2.11.5 FIX] Quick Mode 가 호출하던 electronAPI.inferImages 는 preload에 노출 안 됨 →
@@ -181,7 +188,15 @@ async function _runQuickInference(): Promise<void> {
       })),
       provider,
       mode: 'auto',
+      requestId,
     });
+
+    // Stopped by the user while in flight — never open the review panel on a late result.
+    if (isVisionInferStale(requestId) || result?.cancelled) {
+      console.log('[QuickMode] 중지된 추론의 늦은 응답 무시');
+      if (!isVisionInferStale(requestId)) setState({ isInferring: false });
+      return;
+    }
 
     if (!result || !result.success) {
       throw new Error(result?.message ?? 'Vision 추론 실패');
@@ -201,12 +216,22 @@ async function _runQuickInference(): Promise<void> {
     showReviewPanel(plan, images);
     _goToPanel(2);
   } catch (err) {
+    if (isVisionInferStale(requestId)) return; // stopped by the user — already reported
     console.error('[QuickMode] Inference failed:', err);
     _showToast(`추론 실패: ${(err as Error).message}`, 'error');
     setState({ isInferring: false });
   } finally {
-    _setNextBtnLoading(false);
+    endVisionInferRequest(requestId);
+    if (!_quickState.isInferring) _setNextBtnLoading(false);
   }
+}
+
+async function _stopQuickInference(): Promise<void> {
+  const aborted = await cancelActiveVisionInfer('quick mode stop button');
+  console.log(`[QuickMode] 추론 중지 요청 — aborted=${aborted}`);
+  setState({ isInferring: false });
+  _setNextBtnLoading(false);
+  _showToast('사진 추론을 중지했습니다.', 'info');
 }
 
 // ---------------------------------------------------------------------------
@@ -412,6 +437,11 @@ function _syncQuickUploadStatus(): void {
 
 async function _onNextClick(): Promise<void> {
   if (_quickState.currentPanel === 1) {
+    // While inferring the same button is the stop button.
+    if (_quickState.isInferring) {
+      await _stopQuickInference();
+      return;
+    }
     await _runQuickInference();
   } else if (_quickState.currentPanel === 2) {
     if (!isReviewComplete()) {
@@ -431,11 +461,12 @@ function _onPrevClick(): void {
   }
 }
 
+// The button stays enabled while inferring so it can act as the stop button.
 function _setNextBtnLoading(loading: boolean): void {
   const btn = document.getElementById('quick-mode-next-btn') as HTMLButtonElement | null;
   if (!btn) return;
-  btn.disabled = loading;
-  btn.textContent = loading ? '⏳ 추론 중...' : '추론 시작 →';
+  btn.disabled = false;
+  btn.textContent = loading ? '⏹ 추론 중지' : '추론 시작 →';
 }
 
 function _getModal(): HTMLElement | null {

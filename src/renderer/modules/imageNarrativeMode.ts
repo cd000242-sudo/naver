@@ -24,6 +24,12 @@ import {
 import { executeFullAutoFlow } from './fullAutoFlow.js';
 import { autoAnalyzeHeadings } from './headingImageGen.js';
 import { fillSemiAutoFields, enableSemiAutoPublishButton } from './contentGeneration.js';
+import {
+  beginVisionInferRequest,
+  endVisionInferRequest,
+  isVisionInferStale,
+  cancelActiveVisionInfer,
+} from './visionInferCancel.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -143,8 +149,26 @@ function _bindInferButton(): void {
   if (!btn) return;
 
   btn.addEventListener('click', async () => {
+    // While inferring the same button is the stop button.
+    if (_modeState.isInferring) {
+      await _stopInference('infer button');
+      return;
+    }
     await _startInference();
   });
+}
+
+async function _stopInference(source: string): Promise<void> {
+  const aborted = await cancelActiveVisionInfer(`photo mode stop (${source})`);
+  console.log(`[ImageNarrativeMode] 추론 중지 요청 — aborted=${aborted} source=${source}`);
+  _getProgressModal()?.complete?.(false, {
+    failureTitle: '사진 추론 중지',
+    failureIcon: '⏹',
+    failureLog: '사용자가 추론을 중지했습니다.',
+  });
+  setState({ isInferring: false });
+  _setInferButtonState(false);
+  _showToast('사진 추론을 중지했습니다.', 'info');
 }
 
 async function _startInference(): Promise<void> {
@@ -161,6 +185,7 @@ async function _startInference(): Promise<void> {
   _setInferButtonState(true);
   const manualTitle = _readManualTitle();
   const progress = _getProgressModal();
+  const requestId = beginVisionInferRequest();
 
   try {
     // Modal에 실시간 단계 애니메이션을 위임한다. 추론은 단일 IPC 호출(블로킹)이라
@@ -194,7 +219,16 @@ async function _startInference(): Promise<void> {
       mode: _modeState.mode,
       context,
       manualTitle,
+      requestId,
     });
+
+    // User pressed stop (or started a new run) while this IPC was in flight — the stop
+    // handler already reset the UI; a late result must not reopen the review panel.
+    if (isVisionInferStale(requestId) || result?.cancelled) {
+      console.log('[ImageNarrativeMode] 중지된 추론의 늦은 응답 무시');
+      if (!isVisionInferStale(requestId)) setState({ isInferring: false });
+      return;
+    }
 
     if (!result || !result.success) {
       throw new Error(result?.message ?? 'Vision 추론 실패');
@@ -209,6 +243,7 @@ async function _startInference(): Promise<void> {
       successLog: '리뷰 패널에 사진별 추론 결과를 표시했습니다.',
     });
   } catch (err) {
+    if (isVisionInferStale(requestId)) return; // stopped by the user — already reported
     console.error('[ImageNarrativeMode] Inference failed:', err);
     progress?.complete?.(false, {
       failureTitle: '사진 추론 실패',
@@ -218,15 +253,18 @@ async function _startInference(): Promise<void> {
     _showToast(`추론 실패: ${(err as Error).message}`, 'error');
     setState({ isInferring: false });
   } finally {
-    _setInferButtonState(false);
+    endVisionInferRequest(requestId);
+    if (!_modeState.isInferring) _setInferButtonState(false);
   }
 }
 
+// The button stays enabled while inferring so it can act as the stop button.
 function _setInferButtonState(loading: boolean): void {
   const btn = document.getElementById('image-narrative-infer-btn');
   if (!btn) return;
-  (btn as HTMLButtonElement).disabled = loading;
-  btn.textContent = loading ? '⏳ 추론 중...' : '🔍 추론 시작';
+  (btn as HTMLButtonElement).disabled = false;
+  btn.textContent = loading ? '⏹ 추론 중지' : '🔍 추론 시작';
+  btn.title = loading ? '진행 중인 사진 추론을 중지합니다' : '';
 }
 
 // ---------------------------------------------------------------------------

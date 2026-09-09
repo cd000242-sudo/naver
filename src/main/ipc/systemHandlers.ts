@@ -321,7 +321,8 @@ export function registerSystemHandlers(ctx: IpcContext): void {
 
     // 앱 정보 가져오기
     ipcMain.handle('app:getInfo', async () => {
-        return { isPackaged: app.isPackaged };
+        // e2eTest lets the renderer skip blocking startup UI (engine gate) under Playwright.
+        return { isPackaged: app.isPackaged, e2eTest: process.env.E2E_TEST === '1' };
     });
 
     // 앱 패키징 여부 확인

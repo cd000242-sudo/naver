@@ -1056,19 +1056,8 @@ export async function initPriceInfoModal(): Promise<void> {
       // ✅ 에이전트 모드 설치/로그인 상태 뱃지 갱신 (비동기 — 로드 차단 안 함)
       void refreshAgentStatusBadges();
 
-      // [2026-08-06] 최초 실행(엔진 미선택)이면 환경설정의 텍스트 엔진 섹션을 먼저
-      // 띄워 선택을 유도한다 — 엔진을 고르지 않고 발행부터 시작하는 사용자 대응.
-      if (!config.primaryGeminiTextModel) {
-        setTimeout(() => {
-          try {
-            const openBtn = document.querySelector('[data-open-settings]') as HTMLElement | null;
-            openBtn?.click();
-            setTimeout(() => {
-              (document.getElementById('nav-text-engine-btn') as HTMLElement | null)?.click();
-            }, 250);
-          } catch { /* UI 미준비 — 다음 진입 시 다시 시도됨 */ }
-        }, 800);
-      }
+      // [2026-09-10] 최초 실행 자동 환경설정 열기는 제거 — 매 실행 차단형 엔진 게이트
+      // (startupEngineGate.ts)가 대신한다. 둘이 같이 뜨면 설정 모달이 게이트 뒤에 열린다.
     }
 
     // ✅ [2026-06-05] Gemini 플랜 로드 (텍스트+이미지 공통)

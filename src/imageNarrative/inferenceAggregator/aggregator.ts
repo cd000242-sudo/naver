@@ -56,6 +56,8 @@ export interface AggregatorOptions {
   readonly allowProviderFallback?: InferenceOptions['allowProviderFallback'];
   /** Forwarded to visionRouter for modal display on fallback. */
   readonly onFallback?: InferenceOptions['onFallback'];
+  /** Operator stop button — aborts in-flight Vision calls and skips queued ones. */
+  readonly signal?: AbortSignal;
 }
 
 // ---------------------------------------------------------------------------
@@ -218,6 +220,8 @@ export async function aggregateInferences(
   // continues as long as enough images survived; only a majority failure
   // aborts (that is a provider/config outage, not a flaky image).
   const inferTasks = images.map((img, i) => async (): Promise<EnrichedInferenceResponse | null> => {
+    // A cancelled run must not keep paying for the remaining queued photos.
+    if (options.signal?.aborted) throw new Error('VISION_INFER_ABORTED');
     const imageBase64 = img.buffer.toString('base64');
     try {
       const response = await inferImage(
@@ -235,10 +239,13 @@ export async function aggregateInferences(
           context: withPhotoOrdinal(options.context, i + 1, images.length),
           allowProviderFallback: options.allowProviderFallback,
           onFallback: options.onFallback,
+          signal: options.signal,
         },
       );
       return { ...response, exif: exifResults[i] ?? {} };
     } catch (error) {
+      // Operator cancel is not a flaky image — surface it instead of skipping.
+      if (options.signal?.aborted) throw error;
       console.warn(
         `[Aggregator] ⚠️ 사진 추론 실패 — 이 사진은 건너뛰고 계속: "${img.imageId}" (${(error as Error).message?.substring(0, 160)})`,
       );

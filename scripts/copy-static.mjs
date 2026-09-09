@@ -528,8 +528,12 @@ try {
     // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode modules
     'imageNarrativeUpload.js',
     'imageNarrativeReview.js',
+    // [2026-09-10] 사진 추론 중지(requestId 슬롯) — imageNarrativeMode/QuickMode/formAndAutomation 이 import
+    'visionInferCancel.js',
     'imageNarrativeMode.js',
     'imageNarrativeQuickMode.js',
+    // [2026-09-10] 매 실행 글생성 엔진 선택 게이트 (renderer.ts 시작 시 호출)
+    'startupEngineGate.js',
     // ✅ [v2.11.206] 장소(지도) 미리 확정 UI — 사진 모드 장소 블록
     'placePicker.js',
     // ✅ [SPEC-DROPSHOT-2026] 이미지 생성 스튜디오 (멀티엔진 대량 생성 서브탭)

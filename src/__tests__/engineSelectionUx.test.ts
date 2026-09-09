@@ -27,9 +27,12 @@ describe('engine selection UX', () => {
     expect(source).toMatch(/목록에서 다시 선택/);
   });
 
-  it('최초 실행(엔진 미선택)이면 텍스트 엔진 섹션을 자동으로 연다', () => {
-    expect(source).toMatch(/최초 실행[\s\S]{0,200}텍스트 엔진/);
-    expect(source).toMatch(/data-open-settings|settings-button-fixed/);
-    expect(source).toMatch(/nav-text-engine-btn'\)[\s\S]{0,80}\.click\(\)/);
+  // [2026-09-10] 3번 항목은 startupEngineGate(매 기동 차단형 게이트)로 승격.
+  // priceInfoModal 이 설정창을 자동으로 열면 게이트 뒤에 모달이 열려 둘이 겹친다.
+  it('최초 실행 자동 설정창 열기는 priceInfoModal 에서 제거되고 startupEngineGate 가 담당한다', () => {
+    expect(source).not.toMatch(/if \(!config\.primaryGeminiTextModel\)\s*\{[\s\S]{0,400}nav-text-engine-btn/);
+    expect(source).toMatch(/startupEngineGate/);
+    const gate = readFileSync(new URL('../renderer/modules/startupEngineGate.ts', import.meta.url), 'utf8');
+    expect(gate).toMatch(/export async function initStartupEngineGate/);
   });
 });

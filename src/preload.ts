@@ -758,7 +758,7 @@ contextBridge.exposeInMainWorld('api', {
     }
   },
   // 앱 환경
-  getAppInfo: async (): Promise<{ isPackaged: boolean }> => {
+  getAppInfo: async (): Promise<{ isPackaged: boolean; e2eTest?: boolean }> => {
     try {
       return await ipcRenderer.invoke('app:getInfo');
     } catch (error) {
@@ -1296,8 +1296,12 @@ contextBridge.exposeInMainWorld('api', {
     plan?: unknown;
     reviewEdits?: unknown;
     manualTitle?: string;
-  }): Promise<{ success: boolean; plan?: any; content?: any; imageMap?: Record<string, any[]>; message?: string }> =>
+    requestId?: string;
+  }): Promise<{ success: boolean; cancelled?: boolean; plan?: any; content?: any; imageMap?: Record<string, any[]>; message?: string }> =>
     ipcRenderer.invoke('vision:infer-and-write', payload),
+  // Stop button for photo-mode inference — aborts the matching infer-and-write run.
+  cancelInferAndWrite: (payload?: { requestId?: string; reason?: string }): Promise<{ success: boolean; aborted: number }> =>
+    ipcRenderer.invoke('vision:cancel-infer-and-write', payload),
 
 });
 
