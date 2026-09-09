@@ -84,15 +84,15 @@ export const NANO_BANANA: ImageEngineSpec = {
 export const DUCK_TAPE: ImageEngineSpec = {
   value: 'openai-image',
   label: '덕테이프',
-  tagline: 'OpenAI gpt-image-2 · 한글 텍스트 가능 · Org 인증 필요',
+  tagline: 'OpenAI gpt-image-2 / 2.5 · 한글 텍스트 가능 · Org 인증 필요',
   model: OPENAI_IMAGE_MODELS.GPT_IMAGE_2,
   forceModelKey: null,
   costKrw: 280,
   koreanText: true,
   icon: '🦆',
   freeTierNote:
-    'OpenAI gpt-image-2는 무료 플랜이 없습니다. 사용량만큼 과금되며(품질 옵션에 따라 장당 ' +
-    '약 ₩25~₩280), Organization 인증이 필요합니다.',
+    'OpenAI gpt-image 시리즈는 무료 플랜이 없습니다. 사용량만큼 과금되며(모델·품질 옵션에 따라 장당 ' +
+    '약 ₩8~₩295), Organization 인증이 필요합니다.',
 };
 
 /**

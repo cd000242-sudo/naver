@@ -82,6 +82,8 @@ export const IMAGEN_MODELS = {
  * OpenAI Image
  *   gpt-image-1.5: 균형형 (저비용). 사용자 메뉴 기본값.
  *   gpt-image-2: 고품질 (덕트테이프).
+ *   gpt-image-2.5-flare / -sunburst (2026-09-08 출시): 2.5 세대. Flare = 경량·속도,
+ *     Sunburst = 본체·품질. 토큰 단가는 gpt-image-2 와 동일, quality 에 xhigh/max 추가.
  *   dall-e-3: 2026-05-12 deprecation 예정 — 폴백 또는 비상용으로만.
  *   gpt-image-1: 호환용
  */
@@ -90,6 +92,10 @@ export const OPENAI_IMAGE_MODELS = {
   GPT_IMAGE_1_5: 'gpt-image-1.5',
   /** gpt-image-2 (덕트테이프, 고품질) */
   GPT_IMAGE_2: 'gpt-image-2',
+  /** gpt-image-2.5-flare (2.5 경량 — 속도 우선, 품질은 gpt-image-2 급) */
+  GPT_IMAGE_2_5_FLARE: 'gpt-image-2.5-flare',
+  /** gpt-image-2.5-sunburst (2.5 본체 — 품질 우선, 편집·피사체 보존 강함) */
+  GPT_IMAGE_2_5_SUNBURST: 'gpt-image-2.5-sunburst',
   /** gpt-image-1 (호환) */
   GPT_IMAGE_1: 'gpt-image-1',
   /** DALL-E 3 (2026-05-12 sunset 예정 — 폴백 전용) */
@@ -362,6 +368,8 @@ export const VERIFIED_IMAGE_MODELS = [
   'imagen-4.0-generate-001',
   'gpt-image-1.5',
   'gpt-image-2',
+  'gpt-image-2.5-flare',
+  'gpt-image-2.5-sunburst',
 ] as const;
 
 /**

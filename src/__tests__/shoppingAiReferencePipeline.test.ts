@@ -79,10 +79,11 @@ describe('shopping AI reference pipeline', () => {
     expect(renderer).toContain("const useCollectedShoppingOriginals = isShoppingConnectContent && getSubImageMode() === 'collected';");
     expect(renderer).toContain('const isShoppingConnectContent = isShoppingConnectForCurrentPost();');
     expect(renderer).toContain('createShoppingCollectedPublishImages({');
-    expect(renderer).toContain("imageModel: isShoppingConnectContent && provider === 'openai-image' ? 'gpt-image-2' : undefined");
+    // [2026-09-10] gpt-image-2 고정 제거 — 모델은 config(SSOT) 가 정한다. 고정값이 되살아나면 2.5 선택을 덮는다.
+    expect(renderer).not.toContain("? 'gpt-image-2' : undefined");
     expect(headingImageGen).toContain("const useCollectedOriginal = getSubImageMode() === 'collected';");
     expect(headingImageGen).toContain('createShoppingCollectedPublishImages({');
-    expect(headingImageGen).toContain("imageModel: imageSource === 'openai-image' ? 'gpt-image-2' : undefined");
+    expect(headingImageGen).not.toContain("? 'gpt-image-2' : undefined");
     expect(shoppingUtils).toContain('Array.isArray(sc?.collectedImages)');
     expect(shoppingUtils).toContain("sc?.contentMode === 'affiliate'");
     expect(shoppingUtils).not.toContain('if ((window as any).crawledProductInfo) return true;');

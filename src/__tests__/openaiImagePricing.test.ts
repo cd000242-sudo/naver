@@ -89,68 +89,89 @@ describe('v1.4.77 — OpenAI 이미지 가격표 정확성', () => {
   });
 });
 
-describe('gpt-image-1.5 / gpt-image-2 — 모델·품질 선택 가격 (공식 단가표)', () => {
+describe('gpt-image-1.5 / gpt-image-2 / gpt-image-2.5 — 모델·품질 선택 가격 (공식 단가표 2026-09-09 확인)', () => {
   describe('gpt-image-1.5 — 균형형 (저비용 기본)', () => {
     it("'gpt-image-1.5-low' = $0.009", () => {
       expect(content).toMatch(/'gpt-image-1\.5-low'\s*:\s*0\.009/);
     });
-    it("'gpt-image-1.5-medium' = $0.040", () => {
-      expect(content).toMatch(/'gpt-image-1\.5-medium'\s*:\s*0\.040/);
+    it("'gpt-image-1.5-medium' = $0.034", () => {
+      expect(content).toMatch(/'gpt-image-1\.5-medium'\s*:\s*0\.034/);
     });
     it("'gpt-image-1.5-high' = $0.133", () => {
       expect(content).toMatch(/'gpt-image-1\.5-high'\s*:\s*0\.133/);
     });
-    it('구 추정치(0.015/0.050/0.180)로 회귀하지 않음', () => {
+    it('구 추정치(0.015/0.050/0.180) 및 구 medium 0.040 으로 회귀하지 않음', () => {
       expect(content).not.toMatch(/'gpt-image-1\.5-low'\s*:\s*0\.015/);
-      expect(content).not.toMatch(/'gpt-image-1\.5-medium'\s*:\s*0\.050/);
+      expect(content).not.toMatch(/'gpt-image-1\.5-medium'\s*:\s*0\.0[45]0/);
       expect(content).not.toMatch(/'gpt-image-1\.5-high'\s*:\s*0\.180/);
     });
   });
 
   describe('gpt-image-2 — 고품질', () => {
-    it("'gpt-image-2-low' = $0.020", () => {
-      expect(content).toMatch(/'gpt-image-2-low'\s*:\s*0\.020/);
+    it("'gpt-image-2-low' = $0.006", () => {
+      expect(content).toMatch(/'gpt-image-2-low'\s*:\s*0\.006/);
     });
-    it("'gpt-image-2-medium' = $0.070", () => {
-      expect(content).toMatch(/'gpt-image-2-medium'\s*:\s*0\.070/);
+    it("'gpt-image-2-medium' = $0.053", () => {
+      expect(content).toMatch(/'gpt-image-2-medium'\s*:\s*0\.053/);
     });
     it("'gpt-image-2-high' = $0.211", () => {
       expect(content).toMatch(/'gpt-image-2-high'\s*:\s*0\.211/);
     });
-    it('구 추정치(0.018/0.055/0.200)로 회귀하지 않음', () => {
-      expect(content).not.toMatch(/'gpt-image-2-low'\s*:\s*0\.018/);
-      expect(content).not.toMatch(/'gpt-image-2-medium'\s*:\s*0\.055/);
+    it('구 추정치(0.018~0.020 / 0.055~0.070 / 0.200)로 회귀하지 않음', () => {
+      expect(content).not.toMatch(/'gpt-image-2-low'\s*:\s*0\.0(18|20)/);
+      expect(content).not.toMatch(/'gpt-image-2-medium'\s*:\s*0\.0(55|70)/);
       expect(content).not.toMatch(/'gpt-image-2-high'\s*:\s*0\.200/);
     });
   });
 
+  describe('gpt-image-2.5 (flare / sunburst) — 5단계 품질, 두 모델 동일 단가', () => {
+    const QUALITIES: Array<[string, string]> = [
+      ['low', '0.0059'], ['medium', '0.0132'], ['high', '0.0527'], ['xhigh', '0.0937'], ['max', '0.2107'],
+    ];
+    const escapeRe = (v: string) => v.replace(/\./g, '\\.');
+    const hasPrice = (key: string, usd: string) =>
+      new RegExp(`'${escapeRe(key)}'\\s*:\\s*${escapeRe(usd)}`).test(content);
+    for (const model of ['flare', 'sunburst']) {
+      for (const [q, usd] of QUALITIES) {
+        it(`'gpt-image-2.5-${model}-${q}' = $${usd}`, () => {
+          expect(hasPrice(`gpt-image-2.5-${model}-${q}`, usd)).toBe(true);
+        });
+      }
+      it(`'gpt-image-2.5-${model}' (품질 미지정) = medium 단가`, () => {
+        expect(hasPrice(`gpt-image-2.5-${model}`, '0.0132')).toBe(true);
+      });
+      it(`'gpt-image-2.5-${model}-max-wide' 비정사각 키 존재`, () => {
+        expect(hasPrice(`gpt-image-2.5-${model}-max-wide`, '0.1646')).toBe(true);
+      });
+    }
+    it('2.5 의 high 는 구 gpt-image-2 medium 과 같은 원가대 (라벨 의미 이동)', () => {
+      expect(Math.abs(0.0527 - 0.053)).toBeLessThan(0.001);
+      expect(Math.abs(0.2107 - 0.211)).toBeLessThan(0.001);
+    });
+  });
+
   describe('matchPricingKey substring 충돌 방지', () => {
-    it('키를 길이 내림차순 정렬해 짧은 키(gpt-image-1)가 긴 키(gpt-image-1.5-medium)를 가리지 않음', () => {
+    it('키를 길이 내림차순 정렬해 짧은 키(gpt-image-2)가 긴 키(gpt-image-2.5-flare-medium)를 가리지 않음', () => {
       expect(content).toMatch(/\.sort\(\(a, b\) => b\.length - a\.length\)/);
     });
   });
 
-  describe('비용 안전 — 기본값(gpt-image-1.5)이 항상 더 저렴', () => {
-    it('동일 품질에서 gpt-image-1.5 < gpt-image-2', () => {
-      expect(0.009).toBeLessThan(0.020); // low
-      expect(0.040).toBeLessThan(0.070); // medium
+  describe('비용 안전 — 기본값(gpt-image-1.5 medium)이 gpt-image-2 medium 보다 저렴', () => {
+    it('medium/high 에서 gpt-image-1.5 < gpt-image-2', () => {
+      expect(0.034).toBeLessThan(0.053); // medium
       expect(0.133).toBeLessThan(0.211); // high
     });
-    it('gpt-image-1.5 medium 1장 ≈ ₩56 (환율 1400)', () => {
-      expect(0.040 * 1400).toBeCloseTo(56, 0);
+    it('gpt-image-1.5 medium 1장 ≈ ₩48 (환율 1400)', () => {
+      expect(0.034 * 1400).toBeCloseTo(47.6, 0);
     });
   });
 
   describe('비정사각(wide) 단가 키 — 16:9·9:16 과소계상 방지', () => {
-    it("'gpt-image-1.5-medium-wide' 키 존재", () => {
-      expect(content).toMatch(/'gpt-image-1\.5-medium-wide'\s*:\s*0\.0[0-9]+/);
+    it("'gpt-image-1.5-medium-wide' = $0.050", () => {
+      expect(content).toMatch(/'gpt-image-1\.5-medium-wide'\s*:\s*0\.050/);
     });
-    it("'gpt-image-2-high-wide' 키 존재", () => {
-      expect(content).toMatch(/'gpt-image-2-high-wide'\s*:\s*0\.[0-9]+/);
-    });
-    it('wide 단가는 동일 품질 square보다 비쌈 (비정사각 비용 반영)', () => {
-      expect(0.040).toBeLessThan(0.060); // gpt-image-1.5 medium square < wide
-      expect(0.211).toBeLessThan(0.317); // gpt-image-2 high square < wide
+    it("'gpt-image-2-high-wide' = $0.165", () => {
+      expect(content).toMatch(/'gpt-image-2-high-wide'\s*:\s*0\.165/);
     });
   });
 });

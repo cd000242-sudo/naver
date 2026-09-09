@@ -5159,7 +5159,9 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       const thumbnailTextInclude = readRawPipelineSettings().thumbnailTextInclude === 'true';
       const imageResult = await generateImagesWithCostSafety({
         provider: imageSource,
-        imageModel: imageSource === 'openai-image' ? 'gpt-image-2' : undefined,
+        // [2026-09-10] 'gpt-image-2' 하드코딩 제거 — 모델은 costAndAutoGen 이 config(SSOT)로 맞춘다.
+        //   고정값은 2.5 를 고른 사용자에게 낡은 모델로 검사를 받게 했다.
+        imageModel: undefined,
         items: [{
           // [2026-09-08] 소제목 순번을 실어야 각도·조명·색이 돈다 — 없으면 생성기가 늘 0번(부감)을 쓴다.
           ...imageContextFields,

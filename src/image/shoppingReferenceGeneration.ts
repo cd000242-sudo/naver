@@ -290,8 +290,17 @@ export function isShoppingReferenceGenerationSelectionSupported(
     : String(model || '').trim();
 
   if (!isShoppingReferenceImageEngine(normalizedProvider)) return false;
-  if (normalizedProvider === 'openai-image') return normalizedModel === 'gpt-image-2';
+  if (normalizedProvider === 'openai-image') return isShoppingReferenceCapableOpenaiModel(normalizedModel);
   return true;
+}
+
+/**
+ * 대표이미지 참조(img2img) 편집을 믿고 쓸 수 있는 OpenAI 모델.
+ * gpt-image-2 와 2026-09 의 gpt-image-2.5(flare/sunburst). 1/1.5 는 참조 보존력이 약해 제외.
+ */
+export function isShoppingReferenceCapableOpenaiModel(model: unknown): boolean {
+  const m = String(model || '').trim();
+  return m === 'gpt-image-2' || m.startsWith('gpt-image-2.5');
 }
 
 export function assertShoppingReferenceGenerationSelectionSupported(
@@ -304,14 +313,14 @@ export function assertShoppingReferenceGenerationSelectionSupported(
   const normalizedModel = String(model || '').trim();
   if (normalizedProvider === 'openai-image' || normalizedProvider === 'gpt-image-2') {
     throw new Error(
-      `SHOPPING_REFERENCE_MODEL_UNSUPPORTED: 쇼핑커넥트 대표이미지 기반 AI 생성은 덕테이프 gpt-image-2만 지원합니다. `
-      + `현재 OpenAI 이미지 모델: ${normalizedModel || '선택되지 않음'}. gpt-image-2를 선택해주세요.`,
+      `SHOPPING_REFERENCE_MODEL_UNSUPPORTED: 쇼핑커넥트 대표이미지 기반 AI 생성은 덕테이프 gpt-image-2 / gpt-image-2.5 만 지원합니다. `
+      + `현재 OpenAI 이미지 모델: ${normalizedModel || '선택되지 않음'}. gpt-image-2 또는 gpt-image-2.5 를 선택해주세요.`,
     );
   }
 
   throw new Error(
     `SHOPPING_REFERENCE_PROVIDER_UNSUPPORTED: "${normalizedProvider}"는 쇼핑 대표이미지 기반 AI 생성을 지원하지 않습니다. `
-    + '나노바나나2, 나노바나나 프로, 덕테이프(gpt-image-2), 리더스 나노바나나프로 무제한 중 하나를 선택해주세요.',
+    + '나노바나나2, 나노바나나 프로, 덕테이프(gpt-image-2 / 2.5), 리더스 나노바나나프로 무제한 중 하나를 선택해주세요.',
   );
 }
 

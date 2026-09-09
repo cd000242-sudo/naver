@@ -3334,7 +3334,8 @@ function initContentHeadingImageGeneration(): void {
             forceImageGeneration: true,
             postId: currentPostId || undefined,
             isShoppingConnect: isShoppingConnectContent,
-            imageModel: isShoppingConnectContent && provider === 'openai-image' ? 'gpt-image-2' : undefined,
+            // [2026-09-10] 'gpt-image-2' 고정 제거 — 모델은 costAndAutoGen 이 config(SSOT)로 맞춘다 (2.5 선택 존중).
+            imageModel: undefined,
             collectedImages: isShoppingConnectContent ? getShoppingConnectImagePool() : [],
           } as any);
         }

@@ -2336,18 +2336,22 @@ export function createHeadingImageModal(): void {
             <p style="margin: 6px 0 0; font-size: 11px; color: #9ca3af;">ℹ️ DeepInfra 계정 필요</p>
           </div>
 
-          <!-- 🦆 OpenAI Image (gpt-image-1 / 1.5 / 2) -->
+          <!-- 🦆 OpenAI Image (gpt-image-1 / 1.5 / 2 / 2.5) -->
           <div style="background: rgba(124, 58, 237, 0.1); padding: 14px; border-radius: 12px; border: 1px solid rgba(124, 58, 237, 0.3);">
             <label style="display: block; font-weight: 600; color: #a78bfa; margin-bottom: 8px; font-size: 13px;">🦆 OpenAI Image</label>
             <select id="submodal-openai-image-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
               <option value="gpt-image-1">🎨 gpt-image-1 (GPT 이미지 시리즈)</option>
               <option value="gpt-image-1.5">⚡ gpt-image-1.5 (저비용 기본, 추천)</option>
               <option value="gpt-image-2">👑 gpt-image-2 (고품질)</option>
+              <option value="gpt-image-2.5-flare">🔥 gpt-image-2.5 Flare (신모델 · 속도형 · 5단계 품질)</option>
+              <option value="gpt-image-2.5-sunburst">☀️ gpt-image-2.5 Sunburst (신모델 · 품질형 · 5단계 품질)</option>
             </select>
             <select id="submodal-openai-image-quality" style="width: 100%; padding: 10px; margin-top: 8px; background: #1a1a2e; border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
               <option value="low">low (저비용)</option>
               <option value="medium" selected>medium (기본)</option>
               <option value="high">high (고품질)</option>
+              <option value="xhigh" data-v25-only="1">xhigh (gpt-image-2.5 전용)</option>
+              <option value="max" data-v25-only="1">max (gpt-image-2.5 전용 · 최고가)</option>
             </select>
             <p style="margin: 6px 0 0; font-size: 11px; color: #9ca3af;">ℹ️ OpenAI Organization 인증 필요 (403 발생 시 platform.openai.com 인증 확인)</p>
           </div>
@@ -2423,11 +2427,28 @@ export function createHeadingImageModal(): void {
     if (openaiImageModelSelect) {
       const cfg = await safeIpcInvoke<any>('config:get');
       const savedModel = (cfg?.openaiImageModel as string) || localStorage.getItem('openaiImageModel') || 'gpt-image-1.5';
-      const validModels = ['gpt-image-1', 'gpt-image-1.5', 'gpt-image-2'];
+      const validModels = ['gpt-image-1', 'gpt-image-1.5', 'gpt-image-2', 'gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'];
       openaiImageModelSelect.value = validModels.includes(savedModel) ? savedModel : 'gpt-image-1.5';
       const savedQuality = (cfg?.openaiImageQuality as string) || localStorage.getItem('openaiImageQuality') || 'medium';
       if (openaiImageQualitySelect) {
-        openaiImageQualitySelect.value = ['low', 'medium', 'high'].includes(savedQuality) ? savedQuality : 'medium';
+        openaiImageQualitySelect.value = ['low', 'medium', 'high', 'xhigh', 'max'].includes(savedQuality) ? savedQuality : 'medium';
+        // xhigh/max 는 gpt-image-2.5 계열 전용 — 구 모델이면 비활성 + 장당 원가 표기 갱신
+        const syncOpenAIQualityOptions = () => {
+          const model = openaiImageModelSelect.value;
+          const isV25 = model.startsWith('gpt-image-2.5');
+          const perImage = (window as any).getOpenAIImageCostKRW;
+          Array.from(openaiImageQualitySelect.options).forEach((opt) => {
+            const enabled = isV25 || opt.dataset.v25Only !== '1';
+            opt.disabled = !enabled;
+            const baseLabel = opt.textContent?.replace(/\s*·\s*₩[\d,]+\/장$/, '') || opt.value;
+            opt.textContent = (enabled && typeof perImage === 'function' && model !== 'gpt-image-1')
+              ? `${baseLabel} · ₩${Number(perImage(model, opt.value)).toLocaleString('ko-KR')}/장`
+              : baseLabel;
+          });
+          if (openaiImageQualitySelect.selectedOptions[0]?.disabled) openaiImageQualitySelect.value = 'high';
+        };
+        openaiImageModelSelect.addEventListener('change', syncOpenAIQualityOptions);
+        syncOpenAIQualityOptions();
       }
     }
 

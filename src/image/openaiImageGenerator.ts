@@ -19,6 +19,7 @@ import {
     type LoadedReferenceImageData,
 } from './referenceImageLoader.js';
 import { buildOpenaiImageEditsRequest } from './openaiImageEditsRequest.js';
+import { resolveOpenAIImageQuality } from './openaiImageQuality.js';
 // [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — gpt-image-2 b64_json 1.18MB+
 import { decodeBase64Async } from '../main/utils/base64Async.js';
 import { buildContextualImagePrompt } from './contextualImagePrompt.js';
@@ -28,6 +29,7 @@ const OPENAI_IMAGES_API_URL = 'https://api.openai.com/v1/images/generations';
 //    gpt-image-2 = 고품질. config 누락 시 저비용 기본으로 폴백해 비용이 조용히
 //    상승하는 일을 차단한다. 두 모델 모두 Organization 인증 필요(403) 가능 —
 //    미인증 시 OPENAI_ORG_VERIFY_REQUIRED: 태그 에러로 렌더러가 안내 모달 표시.
+//    gpt-image-2.5-flare / -sunburst (2026-09) 는 5단계 품질 — resolveOpenAIImageQuality 가 모델별로 정규화.
 const DEFAULT_OPENAI_IMAGE_MODEL = 'gpt-image-1.5';
 const MIN_VALID_IMAGE_BYTES = 1024;
 
@@ -243,9 +245,8 @@ export async function generateWithOpenAIImage(
                     //   원인: 'auto'가 신규 키/복잡 프롬프트/img2img 시 high를 자동 선택.
                     //   수정: 'medium' 명시 강제 → 장당 ~$0.042 (4배 절감)
                     //   사용자가 (config as any).openaiImageQuality로 'low'/'high' 선택 가능.
-                    const userQuality = (config as any).openaiImageQuality;
-                    const validQualities = ['low', 'medium', 'high', 'auto'];
-                    const finalQuality = validQualities.includes(userQuality) ? userQuality : 'medium';
+                    //   gpt-image-2.5 계열은 xhigh/max 추가 — 구 모델에는 high 로 강등 (openaiImageQuality.ts).
+                    const finalQuality = resolveOpenAIImageQuality(currentModel, (config as any).openaiImageQuality);
                     const requestBody: any = {
                         model: currentModel,
                         prompt: prompt,
@@ -494,13 +495,12 @@ export async function generateSingleOpenAIImage(
     try {
         // ✅ 테스트 이미지도 사용자 환경설정(모델·품질)을 반영 — config 직접 로드 (호출자 시그니처 변경 불필요)
         const config = await loadConfig();
-        const userQuality = config.openaiImageQuality;
-        const validQualities = ['low', 'medium', 'high', 'auto'];
-        const singleQuality = validQualities.includes(userQuality as string) ? userQuality : 'medium';
+        const singleModel = options.model || config.openaiImageModel || DEFAULT_OPENAI_IMAGE_MODEL;
+        const singleQuality = resolveOpenAIImageQuality(singleModel, config.openaiImageQuality);
         const response = await axios.post(
             OPENAI_IMAGES_API_URL,
             {
-                model: options.model || config.openaiImageModel || DEFAULT_OPENAI_IMAGE_MODEL,
+                model: singleModel,
                 prompt: options.prompt,
                 n: 1,
                 size: options.size || '1024x1024',

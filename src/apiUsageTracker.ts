@@ -82,25 +82,53 @@ const OPENAI_IMAGE_PRICING: Record<string, number> = {
   'gpt-image-1':     0.042,  // quality: 'auto' 평균 추정치 (medium 수준)
   'gpt-image-1-hd':  0.167,  // high quality (이전 -hd suffix 호환)
   // gpt-image-1.5 — 균형형 (저비용 기본). 공식 단가표 1024x1024 기준 ($/장)
+  //   source: developers.openai.com/api/docs/guides/image-generation (2026-09-09 확인)
   'gpt-image-1.5-low':    0.009,  // low quality
-  'gpt-image-1.5-medium': 0.040,  // medium (기본 권장)
+  'gpt-image-1.5-medium': 0.034,  // medium (기본 권장)
   'gpt-image-1.5-high':   0.133,  // high (고품질)
-  'gpt-image-1.5':        0.040,  // quality 미지정 시 medium
+  'gpt-image-1.5':        0.034,  // quality 미지정 시 medium
   'gpt-image-1.5-hd':     0.133,  // -hd 접미사 호환
-  // gpt-image-1.5 비정사각(1536, 16:9·9:16) — 추정값: gpt-image-1 wide 배수(~1.5x) 적용. OpenAI 공식 1536 단가 공개 시 교체할 것
-  'gpt-image-1.5-low-wide':    0.014,
-  'gpt-image-1.5-medium-wide': 0.060,
+  // gpt-image-1.5 비정사각(1536x1024 / 1024x1536) — 공식 단가표
+  'gpt-image-1.5-low-wide':    0.013,
+  'gpt-image-1.5-medium-wide': 0.050,
   'gpt-image-1.5-high-wide':   0.200,
   // gpt-image-2 — 고품질 (덕트테이프). 공식 단가표 1024x1024 기준 ($/장)
-  'gpt-image-2-low':      0.020,  // low quality
-  'gpt-image-2-medium':   0.070,  // medium (기본 권장)
+  //   source: developers.openai.com/api/docs/guides/image-generation (2026-09-09 확인)
+  'gpt-image-2-low':      0.006,  // low quality
+  'gpt-image-2-medium':   0.053,  // medium (기본 권장)
   'gpt-image-2-high':     0.211,  // high (고품질 썸네일)
-  'gpt-image-2':          0.070,  // quality 미지정 시 medium
+  'gpt-image-2':          0.053,  // quality 미지정 시 medium
   'gpt-image-2-hd':       0.211,  // -hd 접미사 호환
-  // gpt-image-2 비정사각(1536, 16:9·9:16) — 추정값: gpt-image-1 wide 배수(~1.5x) 적용. OpenAI 공식 1536 단가 공개 시 교체할 것
-  'gpt-image-2-low-wide':    0.030,
-  'gpt-image-2-medium-wide': 0.105,
-  'gpt-image-2-high-wide':   0.317,
+  // gpt-image-2 비정사각(1536x1024 / 1024x1536) — 공식 단가표 (정사각보다 싸다)
+  'gpt-image-2-low-wide':    0.005,
+  'gpt-image-2-medium-wide': 0.041,
+  'gpt-image-2-high-wide':   0.165,
+  // gpt-image-2.5 (flare / sunburst, 2026-09-08 출시) — 두 모델 토큰 단가 동일($30/1M 출력),
+  //   OpenAI 공식 계산기 토큰량 × 단가 (1024x1024: low 196 · medium 439 · high 1,756 · xhigh 3,122 · max 7,024 토큰).
+  //   ⚠️ 라벨 의미가 바뀌었다: 2.5 의 high ≈ 구 gpt-image-2 medium, 2.5 의 max ≈ 구 high.
+  'gpt-image-2.5-flare-low':       0.0059,
+  'gpt-image-2.5-flare-medium':    0.0132,
+  'gpt-image-2.5-flare-high':      0.0527,
+  'gpt-image-2.5-flare-xhigh':     0.0937,
+  'gpt-image-2.5-flare-max':       0.2107,
+  'gpt-image-2.5-flare':           0.0132,  // quality 미지정 시 medium
+  'gpt-image-2.5-sunburst-low':    0.0059,
+  'gpt-image-2.5-sunburst-medium': 0.0132,
+  'gpt-image-2.5-sunburst-high':   0.0527,
+  'gpt-image-2.5-sunburst-xhigh':  0.0937,
+  'gpt-image-2.5-sunburst-max':    0.2107,
+  'gpt-image-2.5-sunburst':        0.0132,  // quality 미지정 시 medium
+  // gpt-image-2.5 비정사각(1536x1024 / 1024x1536) — 계산기 토큰량 (low 158 · medium 343 · high 1,372 · xhigh 2,459 · max 5,488)
+  'gpt-image-2.5-flare-low-wide':       0.0047,
+  'gpt-image-2.5-flare-medium-wide':    0.0103,
+  'gpt-image-2.5-flare-high-wide':      0.0412,
+  'gpt-image-2.5-flare-xhigh-wide':     0.0738,
+  'gpt-image-2.5-flare-max-wide':       0.1646,
+  'gpt-image-2.5-sunburst-low-wide':    0.0047,
+  'gpt-image-2.5-sunburst-medium-wide': 0.0103,
+  'gpt-image-2.5-sunburst-high-wide':   0.0412,
+  'gpt-image-2.5-sunburst-xhigh-wide':  0.0738,
+  'gpt-image-2.5-sunburst-max-wide':    0.1646,
   // ✅ [v1.4.80] Flow (Nano Banana Pro) — labs.google/flow 경유 무료 쿼터
   'flow-nano-banana-pro': 0,
   'flow-nano-banana-2':   0,  // ✅ [v1.5.4] 표기 업데이트

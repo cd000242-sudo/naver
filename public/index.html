@@ -4053,29 +4053,48 @@
                                 <input type="radio" name="openai-image-model" value="gpt-image-2" style="accent-color: #8b5cf6;">
                                 gpt-image-2 (고품질)
                             </label>
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
+                                <input type="radio" name="openai-image-model" value="gpt-image-2.5-flare" style="accent-color: #8b5cf6;">
+                                gpt-image-2.5 Flare (신모델 · 속도형 · 5단계 품질)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
+                                <input type="radio" name="openai-image-model" value="gpt-image-2.5-sunburst" style="accent-color: #8b5cf6;">
+                                gpt-image-2.5 Sunburst (신모델 · 품질형 · 5단계 품질)
+                            </label>
                         </div>
                         <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">🎚️ 이미지 품질</label>
-                        <div style="display: flex; gap: 1.2rem; margin-bottom: 0.75rem;">
+                        <div id="openai-image-quality-options" style="display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; margin-bottom: 0.75rem;">
                             <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
-                                <input type="radio" name="openai-image-quality" value="low" style="accent-color: #8b5cf6;"> Low (저비용)
+                                <input type="radio" name="openai-image-quality" value="low" style="accent-color: #8b5cf6;"> Low
+                                <span class="openai-q-cost" data-q="low" style="font-size: 0.72rem; color: #7c3aed; font-weight: 600;"></span>
                             </label>
                             <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
-                                <input type="radio" name="openai-image-quality" value="medium" checked style="accent-color: #8b5cf6;"> Medium (추천)
+                                <input type="radio" name="openai-image-quality" value="medium" checked style="accent-color: #8b5cf6;"> Medium
+                                <span class="openai-q-cost" data-q="medium" style="font-size: 0.72rem; color: #7c3aed; font-weight: 600;"></span>
                             </label>
                             <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
-                                <input type="radio" name="openai-image-quality" value="high" style="accent-color: #8b5cf6;"> High (고품질)
+                                <input type="radio" name="openai-image-quality" value="high" style="accent-color: #8b5cf6;"> High
+                                <span class="openai-q-cost" data-q="high" style="font-size: 0.72rem; color: #7c3aed; font-weight: 600;"></span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);" data-v25-only="1">
+                                <input type="radio" name="openai-image-quality" value="xhigh" style="accent-color: #8b5cf6;"> XHigh
+                                <span class="openai-q-cost" data-q="xhigh" style="font-size: 0.72rem; color: #7c3aed; font-weight: 600;"></span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);" data-v25-only="1">
+                                <input type="radio" name="openai-image-quality" value="max" style="accent-color: #8b5cf6;"> Max
+                                <span class="openai-q-cost" data-q="max" style="font-size: 0.72rem; color: #7c3aed; font-weight: 600;"></span>
                             </label>
                         </div>
                         <div id="openai-image-cost-display"
                             style="font-size: 0.8rem; font-weight: 700; color: #7c3aed; padding: 0.5rem 0.7rem; background: rgba(139, 92, 246, 0.1); border-radius: 6px;">
                             한 장당 약 ₩56원 (gpt-image-1.5 / Medium)
                         </div>
-                        <p style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem;">💡 gpt-image-1.5 + Medium이 가성비 기본값입니다. High 품질은 약 3배 비쌉니다.</p>
+                        <p id="openai-image-quality-hint" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem;">💡 gpt-image-1.5 + Medium이 가성비 기본값입니다. XHigh/Max는 gpt-image-2.5 계열에서만 선택할 수 있습니다.</p>
                     </div>
 
                     <!-- 안내 문구 -->
                     <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">
-                        💡 Leonardo AI 키 하나로 SeeDream, Phoenix, Ideogram, Nano Banana Pro 모든 모델 사용 가능 | OpenAI 덕트테이프(gpt-image-2)는
+                        💡 Leonardo AI 키 하나로 SeeDream, Phoenix, Ideogram, Nano Banana Pro 모든 모델 사용 가능 | OpenAI 덕트테이프(gpt-image-2 / 2.5)는
                         OpenAI API 키가
                         필요합니다.
                     </p>

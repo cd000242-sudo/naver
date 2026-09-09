@@ -198,9 +198,10 @@ export interface AppConfig {
 
   // ✅ [2026-02-08] 이미지 엔진 모델 설정 (DeepInfra만 유지)
   deepinfraModel?: string;
-  // ✅ OpenAI 이미지 모델·품질 선택 (gpt-image-1.5 = 저비용 기본, gpt-image-2 = 고품질)
-  openaiImageModel?: 'gpt-image-1.5' | 'gpt-image-2';
-  openaiImageQuality?: 'low' | 'medium' | 'high' | 'auto';
+  // ✅ OpenAI 이미지 모델·품질 선택 (gpt-image-1.5 = 저비용 기본, gpt-image-2 = 고품질,
+  //    gpt-image-2.5-flare/sunburst = 2026-09 신모델 — xhigh/max 는 2.5 계열에서만 유효)
+  openaiImageModel?: 'gpt-image-1.5' | 'gpt-image-2' | 'gpt-image-2.5-flare' | 'gpt-image-2.5-sunburst';
+  openaiImageQuality?: 'low' | 'medium' | 'high' | 'xhigh' | 'max' | 'auto';
   // ✅ USD→KRW 환율 (이미지 비용 원화 표시용, 기본 1400)
   usdToKrwRate?: number;
   // 이미지 설정 프리셋
@@ -618,8 +619,10 @@ export async function loadConfig(): Promise<AppConfig> {
       // ✅ OpenAI 이미지 모델·품질·환율 — 기본값 보장 (저비용 기본: gpt-image-1.5 + medium).
       //    Anything other than the explicit high-cost model falls back to the cheap default,
       //    so a missing/corrupt config can never silently select the expensive option.
-      openaiImageModel: parsed.openaiImageModel === 'gpt-image-2' ? 'gpt-image-2' : 'gpt-image-1.5',
-      openaiImageQuality: ['low', 'medium', 'high', 'auto'].includes(parsed.openaiImageQuality)
+      openaiImageModel: ['gpt-image-2', 'gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'].includes(parsed.openaiImageModel)
+        ? parsed.openaiImageModel
+        : 'gpt-image-1.5',
+      openaiImageQuality: ['low', 'medium', 'high', 'xhigh', 'max', 'auto'].includes(parsed.openaiImageQuality)
         ? parsed.openaiImageQuality
         : 'medium',
       usdToKrwRate: (typeof parsed.usdToKrwRate === 'number' && parsed.usdToKrwRate > 0)
