@@ -3,7 +3,12 @@
  * 초기화가 되어야 합니다. 다음 글 작성할 수 있는 준비가 되어야 되는데 그게 빠졌어요."
  *
  * resetAllFields() 는 SEO/반자동 시절 입력칸만 비웠고, 뒤에 붙은 사진 모드 패널은
- * 아무도 건드리지 않았다. 지난 글의 사진·상황 메모·장소가 남아 다음 글에 섞여 들었다.
+ * 아무도 건드리지 않았다. 지난 글의 사진·상황 메모가 남아 다음 글에 섞여 들었다.
+ *
+ * [2026-09-10 정정] 장소는 여기서 지우지 않는다. 사장님 실측 "장소가 하나도 삽입이
+ * 안 됐어" 의 원인 중 하나가 이 초기화였다 — 앱 예약 발행 스케줄러가 임의 시점에
+ * automation:reset-fields 를 쏘면 사용자가 고른 장소가 모르는 사이 사라진다. 사진은
+ * 글마다 새로 올리지만 장소는 여러 글에 걸쳐 같은 가게를 쓴다.
  *
  * jsdom 을 띄우지 않고 최소 DOM 스텁만 쓴다 — 이 모듈이 document 에서 쓰는 것은
  * getElementById 하나뿐이라, 스텁이 오히려 그 가정을 드러낸다.
@@ -44,11 +49,16 @@ afterEach(() => {
 });
 
 describe('발행 후 사진 모드 초기화', () => {
-  it('업로드 사진과 장소 목록을 함께 비운다', async () => {
+  it('업로드 사진은 비운다', async () => {
     const { resetPhotoModeForNextPost } = await import('../renderer/modules/photoModeReset.js');
     resetPhotoModeForNextPost();
     expect(clearUploadedImages).toHaveBeenCalledTimes(1);
-    expect(clearPickedPlaces).toHaveBeenCalledTimes(1);
+  });
+
+  it('장소 목록은 건드리지 않는다 — 예약 발행이 임의 시점에 지워 버린다', async () => {
+    const { resetPhotoModeForNextPost } = await import('../renderer/modules/photoModeReset.js');
+    resetPhotoModeForNextPost();
+    expect(clearPickedPlaces).not.toHaveBeenCalled();
   });
 
   it('상황·경험 입력칸을 모두 비운다', async () => {
@@ -63,7 +73,6 @@ describe('발행 후 사진 모드 초기화', () => {
     clearUploadedImages.mockImplementation(() => { throw new Error('사진 정리 실패'); });
     const { resetPhotoModeForNextPost } = await import('../renderer/modules/photoModeReset.js');
     expect(() => resetPhotoModeForNextPost()).not.toThrow();
-    expect(clearPickedPlaces).toHaveBeenCalledTimes(1);
     expect(fields.get('image-narrative-context-notes')!.value).toBe('');
   });
 });

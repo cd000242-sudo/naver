@@ -173,6 +173,9 @@ export function resolveNaverRunOptions(input: ResolveNaverRunOptionsInput): Reco
     ctas,
     ctaPosition: runOptions.ctaPosition || 'bottom',
     // [v2.11.206] 장소는 앱에서 확정된 값만 통과시킨다 — 이름이 없으면 삽입 자체가 없다.
+    // [2026-09-10] 다중 장소도 같은 계약으로 통과시킨다. 이 줄이 없어서 2번째·3번째 장소가
+    //   삽입되지 않았다(화이트리스트가 places 를 통째로 버렸다).
+    places: normalizePlaceList((runOptions as any).places),
     placeName: runOptions.placeName?.trim() || '',
     placeAddress: runOptions.placeAddress?.trim() || '',
     placePosition: runOptions.placePosition || 'bottom',
@@ -205,3 +208,29 @@ export function resolveNaverRunOptions(input: ResolveNaverRunOptionsInput): Reco
     thumbnailPath: runOptions.thumbnailPath,
   };
 }
+
+/**
+ * 앱이 확정해 준 장소 목록을 발행에 실을 형태로 다듬는다.
+ *
+ * 이름이 없는 항목은 버린다 — 빈 이름으로 에디터 장소 팝업을 열면 검색 결과 중
+ * 아무 가게나 걸릴 수 있고, 그러면 남의 가게가 글에 박힌다.
+ */
+function normalizePlaceList(
+  places: unknown,
+): Array<{ name: string; address?: string; position?: string }> {
+  if (!Array.isArray(places)) return [];
+  return places
+    .map((place) => {
+      const record = (place && typeof place === 'object' ? place : {}) as Record<string, unknown>;
+      return {
+        name: String(record.name ?? '').trim(),
+        address: String(record.address ?? '').trim() || undefined,
+        position: String(record.position ?? '').trim() || 'auto',
+      };
+    })
+    .filter((place) => place.name.length > 0)
+    .slice(0, MAX_PLACES_IN_RUN_OPTIONS);
+}
+
+/** 한 글에 넣을 수 있는 장소 상한. placePlacementPlan.MAX_PLACES_PER_POST 와 같은 값. */
+const MAX_PLACES_IN_RUN_OPTIONS = 5;

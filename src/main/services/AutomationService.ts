@@ -474,6 +474,15 @@ export interface PostCyclePayload {
     ctas?: any[];
     ctaPosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'
     // [v2.11.206] 앱에서 미리 확정한 장소 — 발행 시 그대로 에디터에 꽂는다.
+    /**
+     * [2026-09-10] 앱에서 확정한 장소 목록(최대 5곳).
+     *
+     * 2026-08-25 에 다중 장소를 넣었지만 메인 프로세스 화이트리스트 6곳이 이 필드를
+     * 나열하지 않아 **한 번도 관통한 적이 없다**(실측: editorHelpers 의 places 는 항상
+     * undefined → placeName 한 곳짜리 폴백). 아래 placeName/Address/Position 은 구버전
+     * 호환용 첫 장소다.
+     */
+    places?: Array<{ name: string; address?: string; position?: string }>;
     placeName?: string;
     placeAddress?: string;
     placePosition?: 'bottom' | string; // 'bottom' | 'heading-1' ~ 'heading-10'

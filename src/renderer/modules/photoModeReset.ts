@@ -10,7 +10,6 @@
 // 새 글에 섞여 든다 — 빈 화면으로 시작하는 것보다 나쁘다.
 
 import { clearUploadedImages } from './imageNarrativeUpload.js';
-import { clearPickedPlaces } from './placePicker.js';
 
 /** 사진 모드 상황 입력칸들. 화면(index.html)과 _readPhotoContext 가 쓰는 id 그대로. */
 const PHOTO_CONTEXT_FIELD_IDS = [
@@ -39,11 +38,14 @@ export function resetPhotoModeForNextPost(): void {
     console.warn('[PhotoModeReset] 업로드 사진 정리 실패:', (error as Error)?.message);
   }
 
-  try {
-    clearPickedPlaces();
-  } catch (error) {
-    console.warn('[PhotoModeReset] 장소 목록 정리 실패:', (error as Error)?.message);
-  }
+  /*
+   * [2026-09-10 사장님 실측] "장소가 이제는 하나도 삽입이 안 됐어."
+   *
+   * 여기서 장소를 지우던 것을 뺀다. 사진은 글마다 새로 올리지만 장소는 사장님이 여러 글에
+   * 걸쳐 같은 가게를 쓴다. 게다가 이 초기화는 앱 예약 발행 스케줄러가 임의 시점에도
+   * 부르므로(automation:reset-fields), 고른 장소가 사용자 모르게 사라졌다. 목록은 화면에
+   * 그대로 보이니 지우고 싶으면 사용자가 직접 뺄 수 있다.
+   */
 
   for (const id of PHOTO_CONTEXT_FIELD_IDS) {
     try {

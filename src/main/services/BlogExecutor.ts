@@ -608,6 +608,7 @@ export async function executePublishing(
             ctas: payload.ctas,
             ctaPosition: payload.ctaPosition,
             // [v2.11.206] 앱에서 미리 확정한 장소
+            places: (payload as any).places,
             placeName: payload.placeName,
             placeAddress: payload.placeAddress,
             placePosition: payload.placePosition,
