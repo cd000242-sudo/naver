@@ -13,10 +13,17 @@ import {
   applyDetectedHeadings,
   lineIndexAtOffset,
   listHeadingLines,
+  markSelectionAsHeading,
   renameHeadingLine,
   toggleHeadingLine,
 } from '../utils/headingMarkup.js';
-import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
+import {
+  extractSemiAutoDocumentFromBody,
+  extractSemiAutoHeadingsFromBody,
+} from '../utils/semiAutoHeadingExtractor.js';
+
+// 인라인 번들 단일 스코프에서 렌더러 전역으로 해결된다(contentGeneration.ts 와 같은 방식).
+declare function syncIntegratedPreviewFromInputs(): void;
 
 const HEADING_PANEL_IDS = {
   body: 'unified-generated-content',
@@ -24,6 +31,7 @@ const HEADING_PANEL_IDS = {
   list: 'heading-list',
   markBtn: 'heading-mark-current-line',
   applyBtn: 'heading-apply-detected',
+  applyPreviewBtn: 'heading-apply-to-preview',
   lockBadge: 'heading-lock-badge',
 } as const;
 
@@ -119,17 +127,99 @@ export function renderHeadingList(): void {
   });
 }
 
+/**
+ * 편집한 본문을 미리보기·발행이 쓰는 상태(currentStructuredContent)에 그대로 굳힌다.
+ *
+ * 사장님 요청: "자동 감지 결과 불러오기로 불러와서 수정하고 적용하기 버튼이 누락됐다.
+ * 적용되면 위에 반자동 편집과 미리보기에도 정확하게 적용되어야 한다. 수정하고 적용했으면
+ * 그대로 적용한 상태로 발행까지 완벽히 되어야 한다."
+ *
+ * 왜 버튼이 필요한가: 패널은 본문의 "## " 표기만 고쳤고, 미리보기와 발행이 읽는
+ * structuredContent.headings 는 자동 감지 시절 값 그대로였다. 표기를 손대면 자동 재추출을
+ * 막으므로(headingsLockedByUser), 아무도 headings 를 다시 세우지 않는 구멍이 생긴다.
+ * 이 함수가 그 구멍을 메운다 — 본문 표기가 유일한 원천이고, 나머지는 거기서 파생된다.
+ */
+export function applyEditedHeadingsToPreview(): boolean {
+  const textarea = getBodyTextarea();
+  if (!textarea) return false;
+
+  const body = textarea.value || '';
+  const document_ = extractSemiAutoDocumentFromBody(body);
+  if (document_.headings.length === 0) {
+    try { (window as any).toastManager?.warning?.('본문에 "## " 로 표기된 소제목이 없습니다.'); } catch { /* ignore */ }
+    return false;
+  }
+
+  const content = (window as any).currentStructuredContent;
+  if (!content || typeof content !== 'object') {
+    try { (window as any).toastManager?.warning?.('적용할 글이 없습니다. 먼저 글을 생성하거나 불러오세요.'); } catch { /* ignore */ }
+    return false;
+  }
+
+  const titleInput = headingPanelById<HTMLInputElement>('unified-generated-title');
+  if (titleInput && titleInput.value.trim()) content.selectedTitle = titleInput.value.trim();
+
+  content.bodyPlain = body;
+  content.content = body;
+  content.introduction = document_.introduction;
+  content.conclusion = '';
+  content.headings = document_.headings.map((heading) => ({
+    title: heading.title,
+    content: heading.content,
+    prompt: heading.prompt || heading.title,
+    source: 'user:heading-panel',
+  }));
+  /*
+   * 발행 경로(resolveSemiAutoPublishStructure)는 "기존 소제목이 더 많으면 그쪽으로 복구"하는
+   * 사다리를 갖고 있다. 위에서 headings 를 본문 표기와 같게 맞췄으므로 그 사다리가 사용자의
+   * 지정을 되돌릴 근거가 사라진다. 잠금은 유지해 휴리스틱 재추출도 막는다.
+   */
+  content.headingsLockedByUser = true;
+  content._bodyManuallyEdited = true;
+
+  try {
+    const updatePreview = (window as any).updateUnifiedPreview;
+    if (typeof updatePreview === 'function') updatePreview(content);
+  } catch (error) {
+    console.warn('[HeadingPanel] 통합 미리보기 갱신 실패:', (error as Error)?.message);
+  }
+  try {
+    const updateImagePreview = (window as any).updateUnifiedImagePreview;
+    if (typeof updateImagePreview === 'function') updateImagePreview(content.headings, []);
+  } catch (error) {
+    console.warn('[HeadingPanel] 이미지 미리보기 갱신 실패:', (error as Error)?.message);
+  }
+  try {
+    syncIntegratedPreviewFromInputs();
+  } catch (error) {
+    console.warn('[HeadingPanel] 편집 미리보기 동기화 실패:', (error as Error)?.message);
+  }
+
+  renderHeadingList();
+  try {
+    (window as any).toastManager?.success?.(`✅ 소제목 ${content.headings.length}개를 적용했습니다.`);
+  } catch { /* ignore */ }
+  return true;
+}
+
 export function initHeadingControlPanel(): void {
   const panel = headingPanelById(HEADING_PANEL_IDS.panel);
   if (!panel || (panel as any).__bound) return;
   (panel as any).__bound = true;
 
-  // 2번 — 본문에서 커서가 있는 줄을 소제목으로 지정/해제
+  // 2번 — 드래그로 고른 만큼(없으면 커서가 있는 줄 전체)을 소제목으로 지정/해제
   headingPanelById<HTMLButtonElement>(HEADING_PANEL_IDS.markBtn)?.addEventListener('click', () => {
     const textarea = getBodyTextarea();
     if (!textarea) return;
-    const lineIndex = lineIndexAtOffset(textarea.value, textarea.selectionStart ?? 0);
-    const next = toggleHeadingLine(textarea.value, lineIndex);
+    /*
+     * [2026-09-10 사장님] "커서로 원하는 만큼 드래그하면 그만큼만 소제목이 되어야 합니다."
+     * 드래그가 있으면 그 글자만 떼어내고, 없을 때만 예전처럼 줄 전체를 토글한다.
+     */
+    const selectionStart = textarea.selectionStart ?? 0;
+    const selectionEnd = textarea.selectionEnd ?? selectionStart;
+    const fromSelection = markSelectionAsHeading(textarea.value, selectionStart, selectionEnd);
+    const next = fromSelection
+      ?? toggleHeadingLine(textarea.value, lineIndexAtOffset(textarea.value, selectionStart));
     if (next === textarea.value) {
       try { (window as any).toastManager?.warning?.('빈 줄은 소제목으로 지정할 수 없습니다.'); } catch { /* ignore */ }
       return;
@@ -157,6 +247,10 @@ export function initHeadingControlPanel(): void {
     }
     writeBody(next);
   });
+
+  // 편집한 결과를 미리보기·발행 상태에 굳힌다
+  headingPanelById<HTMLButtonElement>(HEADING_PANEL_IDS.applyPreviewBtn)
+    ?.addEventListener('click', () => { applyEditedHeadingsToPreview(); });
 
   // 사용자가 본문을 직접 고칠 때도 목록을 따라가게 한다(표기를 손으로 붙이는 경우).
   getBodyTextarea()?.addEventListener('input', () => renderHeadingList());

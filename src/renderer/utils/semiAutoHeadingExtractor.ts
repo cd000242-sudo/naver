@@ -21,6 +21,15 @@ export interface SemiAutoPublishStructureOptions {
    * 되살린다 — 실패하면 이미지가 통째로 빠진 채 발행된다(실측 사고).
    */
   imageHeadingTitles?: readonly string[];
+  /**
+   * [2026-09-10] 사용자가 소제목 패널에서 직접 지정했다는 표시.
+   *
+   * 아래 복구 사다리는 "본문에 남아 있는 옛 제목이 더 많으면 그쪽이 증거"라고 본다. 그런데
+   * 사용자가 소제목을 다시 정하면 옛 제목은 본문에 평범한 줄로 남아 있으므로, 그 사다리가
+   * 사용자의 지정을 조용히 되돌린다(실측: 지정한 1개 대신 옛 2개로 발행). 사용자가 직접
+   * 지정한 순간부터 본문의 "## " 표기가 유일한 증거다.
+   */
+  bodyMarkupIsAuthoritative?: boolean;
 }
 
 export interface SemiAutoPublishStructure extends SemiAutoExtractedDocument {
@@ -341,6 +350,15 @@ export function resolveSemiAutoPublishStructure(
      * 추출은 추측이고 기존/이미지 소제목은 증거다. 증거가 더 많고 본문에서 순서대로 전부
      * 확인되면 증거를 쓴다. 확인되지 않으면 추측을 그대로 둔다(기존 동작 유지).
      */
+    if (options.bodyMarkupIsAuthoritative === true) {
+      return {
+        introduction: extracted.introduction,
+        headings: extracted.headings.map((heading) => ({ ...heading })),
+        strategy: 'body-sections',
+        orderLocked: true,
+      };
+    }
+
     const recovered = recoverStructureFromKnownTitles(
       normalizedBody,
       extracted.headings.length,

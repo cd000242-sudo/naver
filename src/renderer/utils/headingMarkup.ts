@@ -115,3 +115,55 @@ export function applyDetectedHeadings(body: string, titles: readonly string[]): 
 
   return lines.join('\n');
 }
+
+/**
+ * 드래그로 고른 글자만 소제목으로 떼어낸다.
+ *
+ * 사장님 요청: "커서로 원하는 만큼 드래그하면 그만큼만 소제목이 되어야 합니다."
+ * 줄 전체를 먹던 toggleHeadingLine 과 달리, 고른 앞뒤 글자는 본문 줄로 남긴다 —
+ * 소제목을 지정했다고 해서 쓰던 문장이 사라지면 안 된다.
+ *
+ * 여러 줄에 걸쳐 골랐으면 한 줄짜리 소제목으로 합친다. 소제목은 한 줄이라는 것이
+ * 발행 경로(## 표기)의 전제라, 줄바꿈을 남기면 뒷 줄이 본문으로 새어 나간다.
+ *
+ * 선택이 없거나 공백뿐이면 null — 호출자가 기존 "줄 전체" 동작으로 넘어간다.
+ */
+export function markSelectionAsHeading(
+  body: string,
+  selectionStart: number,
+  selectionEnd: number,
+): string | null {
+  const text = String(body || '').replace(/\r\n/g, '\n');
+  const from = Math.max(0, Math.min(selectionStart, selectionEnd, text.length));
+  const to = Math.max(0, Math.min(Math.max(selectionStart, selectionEnd), text.length));
+  if (from >= to) return null;
+
+  // 고른 양 끝의 공백은 소제목에 넣지 않는다 — 드래그는 보통 한 칸씩 넘친다.
+  let start = from;
+  let end = to;
+  while (start < end && /\s/.test(text[start]!)) start += 1;
+  while (end > start && /\s/.test(text[end - 1]!)) end -= 1;
+  if (start >= end) return null;
+
+  const lineStart = text.lastIndexOf('\n', start - 1) + 1;
+  const lineEndRaw = text.indexOf('\n', end);
+  const lineEnd = lineEndRaw < 0 ? text.length : lineEndRaw;
+
+  const segment = text.slice(lineStart, lineEnd);
+  const head = segment.slice(0, start - lineStart);
+  const selected = segment.slice(start - lineStart, end - lineStart);
+  const tail = segment.slice(end - lineStart);
+
+  // 이미 소제목인 줄에서 일부만 골랐으면 옛 표기는 버린다 — 고른 쪽이 새 소제목이다.
+  const headText = head.replace(HEADING_LINE, '$1').trim();
+  const title = selected.replace(/\s+/g, ' ').trim();
+  if (!title) return null;
+
+  const rebuilt: string[] = [];
+  if (headText) rebuilt.push(headText);
+  rebuilt.push(`${HEADING_PREFIX}${title}`);
+  const tailText = tail.trim();
+  if (tailText) rebuilt.push(tailText);
+
+  return text.slice(0, lineStart) + rebuilt.join('\n') + text.slice(lineEnd);
+}

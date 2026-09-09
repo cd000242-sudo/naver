@@ -1770,12 +1770,18 @@
                                 style="padding: 0.4rem 0.8rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-medium); border-radius: 6px; cursor: pointer; font-size: 0.8rem;">
                                 자동 감지 결과 불러오기
                             </button>
+                            <button type="button" id="heading-apply-to-preview"
+                                style="padding: 0.4rem 0.8rem; background: #10b981; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 700;">
+                                ✅ 적용 (미리보기·발행 반영)
+                            </button>
                             <span id="heading-lock-badge" style="display: none; font-size: 0.72rem; color: #10b981; font-weight: 700;">🔒 내가 정한 소제목 (자동 분석 안 함)</span>
                         </div>
                         <div id="heading-list" style="display: flex; flex-direction: column; gap: 0.35rem;"></div>
                         <p class="field-hint" style="margin-top: 0.55rem; font-size: 0.75rem; line-height: 1.5;">
-                            본문에서 소제목으로 만들 줄에 커서를 두고 <strong>커서 줄을 소제목으로</strong>를 누르세요.
+                            본문에서 <strong>소제목으로 만들 글자를 드래그</strong>한 뒤 <strong>커서 줄을 소제목으로</strong>를 누르면
+                            고른 만큼만 소제목이 됩니다(드래그하지 않으면 커서가 있는 줄 전체). 남은 글자는 본문으로 남습니다.
                             본문 줄 앞에 <code>## </code>를 직접 붙여도 같습니다.
+                            고친 뒤 <strong>✅ 적용</strong>을 눌러야 위 미리보기와 발행에 반영됩니다.
                             한 번이라도 손대면 자동 분석이 덮어쓰지 않습니다.
                         </p>
                     </div>
