@@ -103,7 +103,7 @@ describe('4) 사진 글 소제목 — 문장형 + 자연스러운 끝맺음', ()
   });
 
   it('문장형 + 글자수 기준을 준다', () => {
-    expect(basePrompt).toMatch(/문장형\*\*으로 쓴다 \(12~30자\)/);
+    expect(basePrompt).toMatch(/함축된\*\* 문장형으로 쓴다 \(12~30자\)/);
     expect(builder).toMatch(/\[소제목\][\s\S]*?문장형\(12~30자\)/);
   });
 
@@ -127,6 +127,31 @@ describe('4) 사진 글 소제목 — 문장형 + 자연스러운 끝맺음', ()
 
   it('소제목에도 사진에 없는 사실을 넣지 못하게 한다', () => {
     expect(basePrompt).toMatch(/소제목에도 사진에 없는 사실을 넣지 않는다/);
+  });
+
+  /**
+   * [2026-09-09 사장님] "소제목은 대충 짓는 게 아니라 함축적으로 그 장소에 대한
+   * 의미가 담겨 있어야 돼."
+   * 실측: "초록빛 동굴을 뒤로한 점심 한 상" — 꼬막집 섹션인데 앞 장소를 끌어왔다.
+   */
+  it('그 장소가 어떤 곳인지 함축하라고 요구한다', () => {
+    for (const source of [basePrompt, builder]) {
+      expect(source).toMatch(/그 장소가 어떤 곳이었는지가 함축된/);
+      expect(source).toMatch(/앞 섹션/);
+      expect(source).toMatch(/끌어오지/);
+    }
+  });
+
+  it('어디에 붙여도 되는 분위기 낱말 나열을 막는다', () => {
+    expect(basePrompt).toMatch(/어디에 붙여도 말이 되는 소제목은 실패/);
+    expect(builder).toMatch(/분위기 낱말 나열은 실패/);
+  });
+
+  it('숫자를 한글로 쓰지 못하게 한다 ("열 분 기다려" 실측)', () => {
+    for (const source of [basePrompt, builder]) {
+      expect(source).toMatch(/열 분 기다려/);
+      expect(source).toMatch(/10분 기다려/);
+    }
   });
 
   it('명사구 보정기가 사진 글 소제목을 되돌리지 않는다', () => {

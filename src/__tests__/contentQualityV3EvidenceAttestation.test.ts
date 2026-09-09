@@ -212,7 +212,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-09-09] 사진 글 소제목을 문장형으로(imageNarrative/base.prompt M3 · 출력 스키마)로 재계산
         // [2026-09-09] 사진별 문단 계약(imageNarrative/base.prompt paragraphs)으로 재계산
         // [2026-09-09] 장소 단위 섹션 계약(섹션을 임의로 합치거나 쪼개지 않는다)으로 재계산
-        '93553ce28176291dadf6ff645536517f5636975bbe03d5225bdbfe75a5ebdabf',
+        // [2026-09-09] 소제목 계약 강화(장소의 의미 함축·숫자 표기)로 재계산
+        '7465ffe304238e456b8227561d676b389642b5abe359a9b03f1e54f3ea43c504',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
