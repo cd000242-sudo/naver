@@ -231,6 +231,19 @@ export interface AppConfig {
    */
   geminiRpmCeiling?: number;
 
+  /**
+   * [2026-09-09] "사용자가 아이디·비밀번호 기억하기를 **직접 껐다**" 는 표시.
+   *
+   * rememberCredentials 는 false 가 두 가지를 뜻해서 구분이 안 됐다 —
+   * (가) 사용자가 체크를 해제했다, (나) 계정별 설정 파일이 갓 만들어져 기본값이다.
+   * 계정 파일 병합이 (나)까지 "껐다" 로 읽어, 마스터에 저장된 계정 정보를 영영
+   * 복구하지 못했다(사장님 실측: settings.json 은 true+아이디/비번, settings_acct1.json 은
+   * false+빈문자열 → 업데이트마다 체크가 풀린 것처럼 보임).
+   * 의도는 값이 아니라 별도 필드로 싣는다 — credentialClearIntent 와 같은 원칙이다.
+   * 계정마다 다른 선택이므로 마스터에서 병합해 오지 않는다(PRESERVE 목록에 넣지 말 것).
+   */
+  credentialsOptOut?: boolean;
+
   // ✅ [2026-03-19] 통합 API 사용량 추적 (모든 제공자)
   apiUsageTrackers?: {
     [provider: string]: {
@@ -463,6 +476,24 @@ export async function loadConfig(): Promise<AppConfig> {
           'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
         ];
         let mergedCount = 0;
+        /*
+         * [2026-09-09] "사용자가 직접 껐다" 와 "계정 파일 기본값" 을 가른다.
+         *
+         * 사장님 실측: settings.json 은 remember=true + 아이디/비번, 계정 파일은
+         * remember=false + **빈 문자열**. 체크를 직접 해제하면 저장 코드가 값을
+         * undefined 로 지우므로 키가 아예 없다. 빈 문자열이 남아 있다는 것은
+         * 사람이 끈 게 아니라 파일이 기본값으로 만들어졌다는 뜻이다.
+         *
+         * 새로 끄는 경우는 credentialsOptOut 마커로 명시된다(값이 아니라 의도).
+         * 마커가 없는 예전 사용자는 위 모양으로 가른다 — 명시적으로 끈 사람의
+         * 자동로그인을 되살리지 않으면서, 고착된 계정 파일만 복구한다.
+         */
+        const hasEmptyNaverSlots =
+          typeof parsed.savedNaverId === 'string' && parsed.savedNaverId.trim() === ''
+          && typeof parsed.savedNaverPassword === 'string' && parsed.savedNaverPassword.trim() === '';
+        const naverCredentialsTurnedOff = parsed.credentialsOptOut === true
+          || (parsed.rememberCredentials === false && !hasEmptyNaverSlots);
+
         for (const k of PRESERVE) {
           const mv = master[k];
           const av = parsed[k];
@@ -480,7 +511,7 @@ export async function loadConfig(): Promise<AppConfig> {
           ) continue;
           if (
             (k === 'savedNaverId' || k === 'savedNaverPassword')
-            && parsed.rememberCredentials === false
+            && naverCredentialsTurnedOff
           ) continue;
           if (mHas && !aHas) {
             parsed[k] = mv;
@@ -490,7 +521,13 @@ export async function loadConfig(): Promise<AppConfig> {
         // 자격증명이 있고 **사용자가 꺼 둔 적이 없을 때만** remember 를 켜 준다.
         // [2026-08-29] 이전엔 false 여도 무조건 true 로 덮어, 자동로그인을 끔 수 없었다.
         //   명시적 false 는 사용자 선택이다 — undefined(미설정)만 보정한다.
-        if (parsed.savedNaverId && parsed.savedNaverPassword && parsed.rememberCredentials === undefined) {
+        // [2026-09-09] 사용자가 끄지 않았는데 false 인 계정 파일도 되살린다.
+        //   boolean 은 위 병합 루프의 aHas 판정에서 항상 "있음" 이라 마스터 값이 못 덮는다.
+        if (
+          parsed.savedNaverId && parsed.savedNaverPassword
+          && !naverCredentialsTurnedOff
+          && parsed.rememberCredentials !== true
+        ) {
           parsed.rememberCredentials = true;
           mergedCount++;
         }

@@ -3,6 +3,7 @@
 "use strict";
 import { buildPastePreviewHtml } from '../../automation/richTextPaste.js';
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
+import { fillSemiAutoFields } from './contentGeneration.js';
 import { isAgentEngine } from '../utils/agentModeGuard.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import {
@@ -2662,6 +2663,20 @@ async function generateFullAutoContent(formData) {
 }
 async function displayContentInAllTabs(structuredContent) {
     appendLog('📋 생성된 콘텐츠를 통합 탭에 표시합니다.');
+    /*
+     * [2026-09-09 사장님 실측] "반자동 편집에 제목은 보이는데 본문이랑 해시태그가
+     * 하나도 안 나오네." — updateUnifiedPreview 는 섹션을 펼치고 스크롤·애니메이션만 한다.
+     * 본문·해시태그·소제목을 실제로 채우는 것은 fillSemiAutoFields 인데,
+     * 이 경로(풀오토·사진 모드)에서는 한 번도 부르지 않았다. 제목만 따로 채우는
+     * 코드가 있어 "제목만 보이는" 모양이 됐다.
+     */
+    try {
+        fillSemiAutoFields(structuredContent);
+    }
+    catch (fillError) {
+        console.warn('[Unified] 반자동 편집 필드 채우기 실패 (계속 진행):', fillError);
+        appendLog('⚠️ 반자동 편집 필드를 채우지 못했습니다 — 발행은 계속합니다.');
+    }
     updateUnifiedPreview(structuredContent);
     if (structuredContent.headings && structuredContent.headings.length > 0) {
         updateUnifiedImagePreview(structuredContent.headings);

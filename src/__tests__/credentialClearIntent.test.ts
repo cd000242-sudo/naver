@@ -56,9 +56,16 @@ describe('configManager 배선 잠금', () => {
   it('does not force remember back on when the user explicitly turned it off', () => {
     // 이전: rememberLicenseCredentials !== true  → false 여도 true 로 덮었다
     expect(src).not.toMatch(/rememberLicenseCredentials !== true/);
-    expect(src).not.toMatch(/rememberCredentials !== true/);
     expect(src).toMatch(/parsed\.rememberLicenseCredentials === undefined/);
-    expect(src).toMatch(/parsed\.rememberCredentials === undefined/);
+    /*
+     * [2026-09-09] 네이버 쪽 판정 기준이 "false 인가" 에서 "직접 껐는가" 로 바뀌었다.
+     *   업데이트마다 체크가 풀리던 사고 — 계정 파일의 기본값 false 까지 "껐다" 로 읽어
+     *   마스터의 아이디/비번을 영영 복구하지 못했다(사장님 실측).
+     * 지키려는 계약은 그대로다: 직접 끈 사람의 자동로그인을 되살리지 않는다.
+     * 그 판정을 naverCredentialsTurnedOff 가 맡는다.
+     */
+    expect(src).toMatch(/const naverCredentialsTurnedOff = parsed\.credentialsOptOut === true/);
+    expect(src).toMatch(/parsed\.rememberCredentials === false && !hasEmptyNaverSlots/);
   });
 
   it('skips the save-time preserve guard for intentionally cleared fields', () => {
@@ -67,6 +74,14 @@ describe('configManager 배선 잠금', () => {
 
   it('does not refill credentials from master once remember is off', () => {
     expect(src).toMatch(/rememberLicenseCredentials === false\s*\)\s*continue;/);
-    expect(src).toMatch(/rememberCredentials === false\s*\)\s*continue;/);
+    // [2026-09-09] 네이버는 같은 계약을 naverCredentialsTurnedOff 로 판정한다.
+    expect(src).toMatch(/&& naverCredentialsTurnedOff\s*\)\s*continue;/);
+  });
+
+  it('직접 끈 사람(키가 아예 없음)은 여전히 복구하지 않는다', () => {
+    // 체크 해제 저장은 값을 undefined 로 지운다 → 키가 사라진다.
+    // 그 모양이면 마커가 없어도 "직접 껐다" 로 본다.
+    expect(src).toMatch(/hasEmptyNaverSlots/);
+    expect(src).toMatch(/savedNaverId === 'string' && parsed\.savedNaverId\.trim\(\) === ''/);
   });
 });

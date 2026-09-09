@@ -63,6 +63,8 @@ export async function initCredentialsSave(): Promise<void> {
           const updatedConfig: any = {
             ...config,
             rememberCredentials: true,
+            // [2026-09-09] 다시 켰으면 "직접 껐다" 표시를 지운다.
+            credentialsOptOut: false,
             savedNaverId: naverIdInput?.value.trim() || config.savedNaverId,
             savedNaverPassword: naverPasswordInput?.value.trim() || config.savedNaverPassword,
           };
@@ -73,6 +75,9 @@ export async function initCredentialsSave(): Promise<void> {
           const updatedConfig: any = {
             ...config,
             rememberCredentials: false,
+            // [2026-09-09] 값이 아니라 의도를 남긴다. 이 표시가 있어야만
+            //   계정 파일 병합이 마스터의 계정 정보를 되살리지 않는다.
+            credentialsOptOut: true,
             savedNaverId: undefined,
             savedNaverPassword: undefined,
           };
