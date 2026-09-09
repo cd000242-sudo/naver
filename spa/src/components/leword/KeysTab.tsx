@@ -402,7 +402,7 @@ function KeysTab() {
             <section className="lw-panel" aria-label="계정 동기화">
                 <div className="lw-panel-head">
                     <h2>계정 동기화 · 앱 키 가져오기</h2>
-                    <span>{syncInfo.enabled ? `켜짐 — ${syncInfo.userId} 계정 · 동기화 ID ${syncInfo.slotId} · 두 기기의 ID 가 같아야 서로 받습니다` : '꺼짐 — 키를 넣은 기기(보통 PC)에서 먼저 켜세요. 그다음 다른 기기는 로그인만 하면 자동으로 받습니다'}</span>
+                    <span>{syncInfo.enabled ? `켜짐 — ${syncInfo.userId} 계정 · 동기화 ID ${syncInfo.slotId} · 두 기기의 ID 가 같아야 서로 받습니다` : '꺼짐 — 동기화 암호(두 기기에 같은 것)를 넣어 켜세요. 키를 넣은 기기(보통 PC)에서 먼저, 그다음 다른 기기'}</span>
                 </div>
                 <div className="lw-keys-sync">
                     {(!syncInfo.enabled || syncRekey) && (
@@ -410,7 +410,7 @@ function KeysTab() {
                             <input
                                 type="password"
                                 autoComplete="current-password"
-                                placeholder="로그인 비밀번호 (동기화 키를 만드는 데만 쓰고 저장하지 않습니다)"
+                                placeholder="동기화 암호 — 두 기기에 같은 것을 넣으세요 (로그인 비밀번호와 같게 하면 기억하기 쉽습니다)"
                                 value={syncPassword}
                                 onChange={(e) => setSyncPassword(e.target.value)}
                             />
