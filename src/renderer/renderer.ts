@@ -349,6 +349,7 @@ import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 // [v2.11.206] 장소(지도) 미리 확정 UI
 import { initPlacePicker, readPickedPlace, readPickedPlaces } from './modules/placePicker.js';
 import { initHeadingControlPanel, renderHeadingList } from './modules/headingControlPanel.js';
+import { resetPhotoModeForNextPost } from './modules/photoModeReset.js';
 // ✅ [SPEC-DROPSHOT-2026] 이미지 관리 → 🎨 이미지 생성 서브탭 (멀티엔진 대량 생성 스튜디오)
 import { initImageGenStudio } from './modules/imageGenStudio.js';
 // ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 로그인/확인 UI (엔진 선택 시 노출)
@@ -8055,6 +8056,16 @@ function resetAllFields(): void {
       (window as any).updatePublishButtonVisibility();
     }
 
+    /*
+     * [2026-09-09 사장님] "어떤 모드든지 글 발행이 완료되면 다음 글을 발행할 수 있도록
+     * 초기화가 되어야 합니다. 그게 빠졌어요."
+     *
+     * 이 함수는 SEO/반자동 시절에 만들어져 그때 있던 입력칸만 비운다. 뒤에 붙은 사진 모드
+     * 패널(사진·상황 메모·장소 목록)은 아무도 건드리지 않아 지난 글의 재료가 그대로 남았다.
+     * 초기화는 모드별로 흩어 두면 반드시 한 곳이 빠지므로, 여기 한 자리에서 함께 부른다.
+     */
+    resetPhotoModeForNextPost();
+
     appendLog('🔄 모든 필드가 초기화되었습니다. 새로운 글을 작성할 수 있습니다.');
     console.log('[Reset] 모든 필드 초기화 완료');
   } catch (error) {
@@ -10860,6 +10871,8 @@ initImageNarrativeMode();
 initPlacePicker();
 (window as any).readPickedPlace = readPickedPlace;
 (window as any).readPickedPlaces = readPickedPlaces;
+// [2026-09-09] publishingHandlers 의 풀오토 발행 경로에서도 발행 후 초기화를 부를 수 있게 연다.
+(window as any).resetAllFields = resetAllFields;
 // ✅ [SPEC-DROPSHOT-2026] 이미지 생성 스튜디오 서브탭 초기화
 initImageGenStudio();
 // ✅ [SPEC-DROPSHOT-2026 2단계] 이미지 관리 탭 엔진 셀렉터 — dropshot 선택 시 로그인/확인 노출

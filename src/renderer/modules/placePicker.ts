@@ -273,6 +273,18 @@ export function readPickedPlace(): PickedPlace | null {
   return readPickedPlaces()[0] || null;
 }
 
+/**
+ * [2026-09-09] 고른 장소를 모두 비운다. 발행이 끝난 뒤 다음 글을 위해 부른다.
+ *
+ * 지난 글의 가게가 남아 있으면 다음 글에 엉뚱한 지도가 박힌다. 화면도 함께 갱신해
+ * 목록이 비었다는 것이 눈에 보이게 한다.
+ */
+export function clearPickedPlaces(): void {
+  pickedList.splice(0, pickedList.length);
+  renderSelected();
+  resetSearchField();
+}
+
 export function initPlacePicker(): void {
   const enabled = byId<HTMLInputElement>(IDS.enabled);
   const body = byId(IDS.body);

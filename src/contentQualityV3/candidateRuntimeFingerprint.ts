@@ -657,6 +657,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/noticeAdmin.ts',
   'src/renderer/modules/openaiImageGuard.ts',
   'src/renderer/modules/paywallSystem.ts',
+  'src/renderer/modules/photoModeReset.ts',
   'src/renderer/modules/pipelineConfig.ts',
   'src/renderer/modules/placePicker.ts',
   'src/renderer/modules/postListUI.ts',

@@ -461,6 +461,7 @@ try {
     // [2026-09-02] 수집 이미지 → 모달 미리보기 형태 변환 · 프롬프트대로 루프의 자리 추적 (function 선언만이라 순서 무관)
     'collectedImagePreview.js',
     'headingControlPanel.js',
+    'photoModeReset.js',
     'imagePreviewBatch.js',
     // ✅ [Phase 5B] renderer.ts에서 추출된 모듈 (의존성 순서: 유틸→DOM캐시→이미지→포스트→기능)
     'rendererUtils.js',            // 5B-1: 이벤트리스너, DOM캐시, 디바운스, 버튼, 로깅

@@ -1615,6 +1615,21 @@ export async function handleFullAutoPublish(): Promise<void> {
     (window as any).clearFullAutoContentRetryCache?.();
     clearPublishContentRetryCache();
 
+    /*
+     * [2026-09-09 사장님] "어떤 모드든지 글 발행이 완료되면 다음 글을 발행할 수 있도록
+     * 초기화가 되어야 합니다."
+     *
+     * 풀오토·반자동 흐름은 발행 뒤 resetAllFields 를 부르는데 이 경로만 빠져 있었다.
+     * 성공 모달을 볼 시간을 준 뒤(3초, 다른 경로와 같은 간격) 같은 초기화를 태운다.
+     */
+    setTimeout(() => {
+      try {
+        (window as any).resetAllFields?.();
+      } catch (resetError) {
+        console.warn('[handleFullAutoPublish] 필드 초기화 오류:', (resetError as Error)?.message);
+      }
+    }, 3000);
+
   } catch (error) {
     appendLog(`❌ 풀오토 발행 실패: ${(error as Error).message}`);
     // ✅ 진행상황 모달 에러 표시 (8초 후 자동 닫기 + 확인 버튼)
