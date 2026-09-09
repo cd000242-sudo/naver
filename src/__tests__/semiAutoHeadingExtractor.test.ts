@@ -367,3 +367,25 @@ describe('sentence-style headings survive extraction failure', () => {
     resolved.headings.forEach((heading) => expect(heading.content.trim().length).toBeGreaterThan(0));
   });
 });
+
+/*
+ * [2026-09-09] Photo-mode headings end in a noun, by prompt rule (imageNarrative M3).
+ *
+ * The owner compared the two forms and picked the noun ending. It also happens to be the
+ * only form this extractor can see: clearSentenceEnding rejects 했어요/해요/입니다 outright,
+ * so a sentence-ending heading is invisible to paste sync and the section is lost.
+ * This test pins the reason the prompt rule exists.
+ */
+describe('noun-ending headings stay recognisable', () => {
+  const bodyWith = (heading: string) => `여행을 시작합니다.\n\n${heading}\n\n그 아래 본문 문장입니다.`;
+
+  it('accepts the 관형형 + 명사 form the prompt now requires', () => {
+    const headings = extractSemiAutoDocumentFromBody(bodyWith('부둣가 주차장에서 마주한 근포마을')).headings;
+    expect(headings.map((h) => h.title)).toContain('부둣가 주차장에서 마주한 근포마을');
+  });
+
+  it('still cannot see the 종결어미 form the prompt now forbids', () => {
+    const headings = extractSemiAutoDocumentFromBody(bodyWith('부둣가 주차장에서 근포마을을 마주했어요')).headings;
+    expect(headings).toHaveLength(0);
+  });
+});
