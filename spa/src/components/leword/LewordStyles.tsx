@@ -2228,6 +2228,8 @@ function LewordStyles() {
             .lw-locked h1 { font-size: 20px; margin: 0 0 8px; }
             .lw-locked p { margin: 0 0 16px; opacity: 0.75; font-size: 14px; line-height: 1.5; }
             /* 오늘의 글감 — NOW/NEXT/ALWAYS 브리프 카드 */
+            /* 제휴 상품 카드 안 브리프 — 상품 그리드에서 풀폭 */
+            .lw-product-brief { grid-column: 1 / -1; margin-top: 4px; }
             /* 황금키워드 카드 안 글감 브리프(사장님 2026-09-09) — 오늘의 글감과 같은 dl 스타일을 쓴다 */
             .lw-card-brief { margin-top: 10px; padding: 10px 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, #ffa500 28%, transparent); background: color-mix(in srgb, #ffa500 6%, transparent); }
             .lw-card-brief-head { display: flex; gap: 8px; align-items: baseline; }

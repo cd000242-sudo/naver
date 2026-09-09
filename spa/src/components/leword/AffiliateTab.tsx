@@ -63,6 +63,18 @@ type CampaignItem = {
     /** 블로그 검색 상위 10 정면 대응 실측. 쿠팡 레인과 같은 판정. */
     serpTop?: { sampled: number; exact: number; partial: number } | null;
     /**
+     * 진짜 자리 실측(affiliate-enrich.js, 사장님 2026-09-09 "작성하면 노출될 확률이 높아야") — 블로그탭 HTML 을
+     * 실제로 받아 빈자리 순위·정면 글 수를 센 값. 위 serpTop(API 제목 대조)보다 강한 근거다. 없으면 안 잰 것.
+     */
+    seat?: { keyword: string; openSlot: number | null; facing: number; verdict: '열림' | '반열림' | '잠김' | '카드답' | '자료없음'; sampled: number; measuredAt: string } | null;
+    /** 글감 브리프 — 자리가 열린 상품에만 붙는다(실측 수치 + 뉴스 카드 안에서만, 검증 통과분). */
+    brief?: {
+        timing: 'NOW' | 'NEXT' | 'ALWAYS';
+        primaryIntent: string; value: string; experience: string; differentiation: string; angle: string;
+        facts: Array<{ id: string; title: string; press: string; link: string; publishedAt: string }>;
+        basis: string; builtAt: string;
+    } | null;
+    /**
      * 구독 CLI 가 제품을 읽고 추론해 지은 글 제목(affiliate-ai-titles.js, 스냅샷에 미리 구움).
      * axis = 추론한 "구매 판단이 갈리는 축". 없으면 규칙 조립(shoppingTitle)이 폴백.
      * 온디맨드 버튼(AffiliateTitles)과 역할이 다르다 — 이건 클릭 없이 바로 보이는 1줄이다.
@@ -87,6 +99,24 @@ type CampaignSnapshot = {
 function exposureVerdict(ratio: number | null | undefined) {
     if (typeof ratio !== 'number') return null;
     return { label: `검색량÷문서수 ${ratio.toFixed(2)} · 참고값`, color: '#aebccc', bg: 'rgba(174,188,204,.12)' };
+}
+
+/** 진짜 자리 실측 → 배지. 열림/반열림만 초록·주황, 나머지는 회색으로 사실만 적는다. */
+function seatBadge(item: CampaignItem) {
+    const seat = item.seat;
+    if (!seat) return null;
+    const where = seat.openSlot != null ? `${seat.openSlot}위 비어 있음` : '빈자리 없음';
+    if (seat.verdict === '열림') return { label: `1페이지 자리 ${where} · 정면 ${seat.facing}`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' };
+    if (seat.verdict === '반열림') return { label: `1페이지 ${where} · 정면 ${seat.facing} · 경합`, color: '#f5a623', bg: 'rgba(245,166,35,.14)' };
+    if (seat.verdict === '카드답') return { label: '카드가 답하는 검색어 — 블로그 클릭 없음', color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
+    if (seat.verdict === '잠김') return { label: `1페이지 잠김 · 정면 ${seat.facing}`, color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
+    return { label: '자리 자료 부족', color: '#aebccc', bg: 'rgba(174,188,204,.12)' };
+}
+
+/** 자리 실측 순 — 열림 → 반열림 → 나머지. 같은 판정이면 정면 글 적은 순. 안 잰 상품은 뒤. */
+function compareSeat(a: CampaignItem, b: CampaignItem) {
+    const rank = (s: CampaignItem['seat']) => (!s ? 9 : s.verdict === '열림' ? 0 : s.verdict === '반열림' ? 1 : s.verdict === '자료없음' ? 2 : 3);
+    return rank(a.seat) - rank(b.seat) || ((a.seat?.facing ?? 99) - (b.seat?.facing ?? 99));
 }
 
 /** 정면 실측 → 카드 배지. 쿠팡 레인과 같은 기준이라야 같은 뜻으로 읽힌다. */
@@ -176,7 +206,8 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     }).sort(compareAffiliateRecommendations);
     const counts = { ready: 0, research: 0, excluded: 0 };
     for (const entry of assessed) counts[entry.recommendation.status] += 1;
-    const displayed = assessed.filter(entry => entry.recommendation.status === recommendationView);
+    // 같은 추천 상태 안에서는 진짜 자리 실측(열림 → 반열림 → 나머지)이 순서를 정한다 — "작성하면 노출될 확률"이 먼저다.
+    const displayed = assessed.filter(entry => entry.recommendation.status === recommendationView).sort((a, b) => compareSeat(a.item, b.item));
     const collectedLabel = freshness.collectedAt && Number.isFinite(Date.parse(freshness.collectedAt))
         ? new Date(freshness.collectedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
         : '';
@@ -238,6 +269,16 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                     border: `1px solid ${badge.color}44`, borderRadius: 999,
                                                     padding: '2px 8px', fontWeight: 900, fontSize: 10.5,
                                                 }}>{badge.label}</span>
+                                            )}
+                                            {seatBadge(item) && (
+                                                <span
+                                                    title={`블로그탭 상위 ${item.seat?.sampled}개를 실제로 받아 잰 값 · 검색어 '${item.seat?.keyword}' · ${item.seat ? new Date(item.seat.measuredAt).toLocaleDateString('ko-KR') : ''}`}
+                                                    style={{
+                                                        color: seatBadge(item)?.color, background: seatBadge(item)?.bg,
+                                                        border: `1px solid ${seatBadge(item)?.color}44`, borderRadius: 999,
+                                                        padding: '2px 8px', fontWeight: 900, fontSize: 10.5,
+                                                    }}
+                                                >{seatBadge(item)?.label}</span>
                                             )}
                                             {item.reward && <span className="lw-discount">{item.reward}</span>}
                                             {item.brand && <span className="lw-goldbox">{item.brand}</span>}
@@ -347,6 +388,21 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             )}
                                         </div>
                                     </div>
+                                    {item.brief && (
+                                        <div className="lw-card-brief lw-product-brief" title={item.brief.basis}>
+                                            <div className="lw-card-brief-head">
+                                                <strong className={`lw-briefs-timing is-${item.brief.timing.toLowerCase()}`}>{item.brief.timing}</strong>
+                                                <span>글감 브리프 · {item.brief.basis} · 검색어 {item.seat?.keyword}</span>
+                                            </div>
+                                            <dl className="lw-briefs-dl">
+                                                <dt>Primary Intent</dt><dd>{item.brief.primaryIntent}</dd>
+                                                <dt>작성가치</dt><dd>{item.brief.value}</dd>
+                                                {item.brief.experience && <><dt>경험활용</dt><dd>{item.brief.experience}</dd></>}
+                                                {item.brief.differentiation && <><dt>차별화</dt><dd>{item.brief.differentiation}</dd></>}
+                                                <dt>추천 각도</dt><dd>{item.brief.angle}</dd>
+                                            </dl>
+                                        </div>
+                                    )}
                                     <div className="lw-product-actions">
                                         <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(query)}>LEWORD 키워드분석</button>
                                         <a
