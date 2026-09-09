@@ -1,4 +1,5 @@
 import type { ImageNarrativeContext } from './types.js';
+import { maskSecretToken, stripSecretLikeTokens } from '../content/secretTokenGuard.js';
 
 const CONTEXT_LIMITS = {
   timeHint: 120,
@@ -28,17 +29,38 @@ const CONTEXT_LABELS: Array<readonly [keyof ImageNarrativeContext, string]> = [
   ['notes', '상황·요청 내용'],
 ];
 
+/** 재료에서 자격증명 의심 토큰을 지우고, 지웠다면 마스킹해 로그로 알린다. */
+function scrubSecrets(value: string | undefined, field: string): string | undefined {
+  if (!value) return value;
+  const { text, removed } = stripSecretLikeTokens(value);
+  if (removed.length > 0) {
+    console.warn(
+      `[SecretGuard] 사진 참고 정보(${field})에서 자격증명처럼 보이는 값 ${removed.length}건을 제거했습니다: `
+      + removed.map(maskSecretToken).join(', ')
+      + ' — API 키는 환경설정의 키 입력칸에 넣어주세요.',
+    );
+  }
+  return text || undefined;
+}
+
 export function normalizeImageNarrativeContext(
   value: unknown,
 ): ImageNarrativeContext | undefined {
   if (!isRecord(value)) return undefined;
 
+  /*
+   * [2026-09-09] 자격증명처럼 보이는 문자열은 여기서 걷어낸다.
+   *
+   * 사고: 발행글 초반부에 40자 난수 문자열(네이버 클라우드 Secret Key 형식)이 그대로
+   * 실려 나갔다. 사용자가 키를 API 키 칸이 아닌 메모 칸에 붙여넣으면 그 텍스트가
+   * 그대로 모델 재료가 되고, 모델이 본문에 옮겨 적는다. 모델이 보지 못하면 옮길 수도 없다.
+   */
   const context: ImageNarrativeContext = {
-    timeHint: readContextString(value, 'timeHint'),
-    mainPeople: readContextString(value, 'mainPeople'),
-    place: readContextString(value, 'place'),
-    occasion: readContextString(value, 'occasion'),
-    notes: readContextString(value, 'notes'),
+    timeHint: scrubSecrets(readContextString(value, 'timeHint'), 'timeHint'),
+    mainPeople: scrubSecrets(readContextString(value, 'mainPeople'), 'mainPeople'),
+    place: scrubSecrets(readContextString(value, 'place'), 'place'),
+    occasion: scrubSecrets(readContextString(value, 'occasion'), 'occasion'),
+    notes: scrubSecrets(readContextString(value, 'notes'), 'notes'),
   };
 
   return hasImageNarrativeContext(context) ? context : undefined;

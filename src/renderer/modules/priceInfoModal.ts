@@ -1112,6 +1112,12 @@ export async function initPriceInfoModal(): Promise<void> {
     if (prodiaModelSelect) {
       prodiaModelSelect.value = (config as any).prodiaModel || (config as any)['prodia-model'] || 'sdxl';
     }
+    // [2026-09-09] HUB 키 복원 — 저장은 되는데 화면에 안 채워지면 사용자는 "또 지워졌다" 로 본다.
+    const naverHubClientIdEl = document.getElementById('naver-hub-client-id') as HTMLInputElement | null;
+    if (naverHubClientIdEl) naverHubClientIdEl.value = (config as any).naverHubClientId || '';
+    const naverHubClientSecretEl = document.getElementById('naver-hub-client-secret') as HTMLInputElement | null;
+    if (naverHubClientSecretEl) naverHubClientSecretEl.value = (config as any).naverHubClientSecret || '';
+
     if (naverClientId) {
       naverClientId.value = config.naverClientId || config.naverDatalabClientId || '';
       if (config.naverClientId || config.naverDatalabClientId) {
@@ -1450,6 +1456,22 @@ export async function initPriceInfoModal(): Promise<void> {
         const unsplashApiKeyValue = readSecretInputValue('unsplash-api-key', currentConfig?.unsplashApiKey);
         const pixabayApiKeyValue = readSecretInputValue('pixabay-api-key', currentConfig?.pixabayApiKey);
         const naverClientSecretValue = readSecretInputValue('naver-client-secret', currentConfig?.naverClientSecret || currentConfig?.naverDatalabClientSecret);
+        /*
+         * [2026-09-09 사장님 실측] "네이버 API HUB는 저장을 계속하는데도 업데이트만 하면 초기화되네."
+         *
+         * 뿌리: HUB 입력칸을 읽는 코드는 settingsModal.ts 에 있는데, 그 저장 핸들러가
+         * 존재하지 않는 버튼(settings-modal-save)에 묶여 있어 한 번도 실행되지 않았다.
+         * 실제로 동작하는 저장 루틴은 여기(saveSettingsHandler)인데 HUB 칸을 읽지 않았다.
+         * 그래서 화면에는 입력한 값이 남아 있다가, 재시작·업데이트하면 설정에 없어 빈칸이 됐다.
+         * 설정 파일 3개를 열어 확인: naverHubClientId/Secret 이 애초에 저장된 적이 없다.
+         */
+        const naverHubClientIdValue = (
+          document.getElementById('naver-hub-client-id') as HTMLInputElement | null
+        )?.value?.trim() || undefined;
+        const naverHubClientSecretValue = readSecretInputValue(
+          'naver-hub-client-secret',
+          currentConfig?.naverHubClientSecret,
+        );
         const naverAdApiKeyValue = readSecretInputValue('naver-ad-api-key', currentConfig?.naverAdApiKey);
         const naverAdSecretKeyValue = readSecretInputValue('naver-ad-secret-key', currentConfig?.naverAdSecretKey);
         const leonardoaiApiKeyValue = readSecretInputValue('leonardoai-api-key', currentConfig?.leonardoaiApiKey);
@@ -1546,6 +1568,10 @@ export async function initPriceInfoModal(): Promise<void> {
           claudeApiKey: claudeApiKeyValue, // ✅ [2026-02-22] Claude API
           perplexityApiKey: perplexityApiKeyValue, // ✅ [2026-03-30] Perplexity API 키 저장 누락 수정
           defaultAiProvider: safeTextSelection.provider,
+          // [2026-09-09] 값이 없으면 키를 아예 넣지 않는다 — saveConfig 는 병합이라
+          //   빈 값을 실어 보내면 기존에 저장된 키를 지우게 된다.
+          ...(naverHubClientIdValue ? { naverHubClientId: naverHubClientIdValue } : {}),
+          ...(naverHubClientSecretValue ? { naverHubClientSecret: naverHubClientSecretValue } : {}),
         };
 
 

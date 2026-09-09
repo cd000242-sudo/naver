@@ -7,6 +7,8 @@
  */
 import type { Frame } from 'puppeteer';
 
+import { findSecretLikeTokens, maskSecretToken } from '../content/secretTokenGuard.js';
+
 export interface PrePublishExpectations {
   minBodyChars: number;
   expectedImageMin: number;
@@ -271,6 +273,26 @@ export function evaluatePrePublishReport(
       expected: 'none',
       actual: stats.leakedMarkers.join(', ') || 'none',
     },
+    /*
+     * [2026-09-09] 자격증명 유출 차단.
+     *
+     * 사고: 발행된 글 초반부에 40자 난수 문자열(네이버 클라우드 Secret Key 형식)이
+     * 그대로 실려 나갔다(사장님 실측). 공개 블로그라 발행되는 순간 노출이 끝난다.
+     * 재료 단계에서도 걷어내지만(secretTokenGuard), 되돌릴 수 없는 사고라
+     * 발행 직전에 한 번 더 막는다. 이미지 개수처럼 너그럽게 볼 항목이 아니다.
+     * 로그에는 마스킹해서 남긴다 — 로그가 또 하나의 유출 경로가 되면 안 된다.
+     */
+    (() => {
+      const leakedSecrets = findSecretLikeTokens(stats.bodyText || '');
+      return {
+        name: 'secret-leak',
+        pass: leakedSecrets.length === 0,
+        expected: 'none',
+        actual: leakedSecrets.length === 0
+          ? 'none'
+          : `${leakedSecrets.length}건 — ${leakedSecrets.map(maskSecretToken).join(', ')} (API 키를 본문·메모 칸에 붙여넣지 않았는지 확인하세요)`,
+      };
+    })(),
   ];
 
   const expectedTableMin = Math.max(0, expectations.expectedTableMin || 0);

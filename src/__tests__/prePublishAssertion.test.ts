@@ -41,7 +41,8 @@ describe('evaluatePrePublishReport', () => {
   it('passes when every editor stat meets the plan', () => {
     const report = evaluatePrePublishReport(okStats, expectations);
     expect(report.pass).toBe(true);
-    expect(report.checks).toHaveLength(5);
+    // [2026-09-09] secret-leak 검사 추가로 5 -> 6
+    expect(report.checks).toHaveLength(6);
     expect(report.checks.every((c) => c.pass)).toBe(true);
   });
 
@@ -421,7 +422,7 @@ describe('countExpectedPublishImages', () => {
 describe('formatPrePublishReport', () => {
   it('summarizes pass count and flags suspected omissions', () => {
     const pass = formatPrePublishReport(evaluatePrePublishReport(okStats, expectations));
-    expect(pass).toContain('5/5');
+    expect(pass).toContain('6/6');
     expect(pass).not.toContain('누락 의심');
 
     const fail = formatPrePublishReport(
@@ -565,5 +566,57 @@ describe('pre-publish diagnostics', () => {
     expect(terminalBlock).toMatch(/POST_TAIL_INCOMPLETE/);
     expect(terminalBlock).not.toMatch(/HASHTAG_TAIL_NOT_READY/);
     expect(terminalBlock).not.toMatch(/HASHTAG_APPLY_VERIFY_FAILED/);
+  });
+});
+
+/**
+ * [2026-09-09] 자격증명이 본문에 실린 채 발행되면 되돌릴 수 없다(공개 블로그).
+ * 게이트가 실제로 막는지 동작으로 확인한다 — 소스 문자열이 아니라 판정 결과로.
+ */
+describe('evaluatePrePublishReport — 자격증명 유출 차단', () => {
+  const base = {
+    bodyChars: 1200,
+    imageCount: 3,
+    linkCardCount: 1,
+    dividerCount: 1,
+    tableCount: 0,
+    leakedMarkers: [],
+    bodySource: 'component' as const,
+    bodyCandidateChars: { componentText: 1200, rootText: 1200, fallbackText: 1200 },
+  };
+  const expectations = {
+    minBodyChars: 500,
+    expectedImageMin: 3,
+    expectedLinkCardMin: 1,
+    expectedDividerMin: 1,
+    expectedTableMin: 0,
+  };
+
+  it('본문에 40자 난수 토큰이 있으면 발행을 막는다', () => {
+    const report = evaluatePrePublishReport(
+      { ...base, bodyText: '안녕하세요. Ew3otgfjiBcw7XT7kmpEMc8fkf4uoDylz08eI9q8 오늘은 거제에 다녀왔어요.' } as any,
+      expectations as any,
+    );
+    const check = report.checks.find((c) => c.name === 'secret-leak');
+    expect(check?.pass).toBe(false);
+    expect(report.pass).toBe(false);
+  });
+
+  it('실패 문구에 원문을 그대로 싣지 않는다', () => {
+    const report = evaluatePrePublishReport(
+      { ...base, bodyText: 'Ew3otgfjiBcw7XT7kmpEMc8fkf4uoDylz08eI9q8' } as any,
+      expectations as any,
+    );
+    const check = report.checks.find((c) => c.name === 'secret-leak');
+    expect(check?.actual).not.toContain('Ew3otgfjiBcw7XT7kmpEMc8fkf4uoDylz08eI9q8');
+    expect(check?.actual).toContain('Ew3o');
+  });
+
+  it('평범한 한국어 본문은 통과한다 (오탐하면 멀쩡한 글이 막힌다)', () => {
+    const report = evaluatePrePublishReport(
+      { ...base, bodyText: '거제 매미성 돌담 너머로 바다가 펼쳐졌어요. 이전 글은 https://blog.naver.com/leader_248/224405387230 입니다.' } as any,
+      expectations as any,
+    );
+    expect(report.checks.find((c) => c.name === 'secret-leak')?.pass).toBe(true);
   });
 });

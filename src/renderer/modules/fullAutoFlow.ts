@@ -3767,9 +3767,24 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         ctaPosition: formData.ctaPosition || 'bottom',
         // [v2.11.206] 앱에서 미리 확정한 장소. 이 payload 는 필드를 하나씩 나열해
         //   만들기 때문에, 여기 없으면 formData 에 값이 있어도 main 까지 못 간다.
-        placeName: formData.placeName || '',
-        placeAddress: formData.placeAddress || '',
-        placePosition: formData.placePosition || 'bottom',
+        // [2026-09-09 사장님 실측] "지도가 본문에 언급됐으면 그 아래에 박혀야 되는데 안 박힌다."
+        //   뿌리: 이 경로(사진 모드·풀오토)는 formData 만 봤는데, 장소를 formData 에 채워 주는
+        //   코드가 어디에도 없었다. placePicker 를 읽는 것은 publishingHandlers(반자동) 뿐이라
+        //   사진 모드로 발행하면 장소가 100% 빠졌다. 여기서도 직접 읽는다.
+        //   다중 장소 배열(places)도 함께 보낸다 — 없으면 첫 곳만 들어가고 나머지가 버려진다.
+        ...(() => {
+          const picked = (window.readPickedPlaces?.() || []);
+          const first = picked[0] || null;
+          if (picked.length > 0) {
+            appendLog(`🗺️ 장소 ${picked.length}곳 발행에 포함: ${picked.map((p) => p.name).join(', ')}`);
+          }
+          return {
+            placeName: formData.placeName || first?.name || '',
+            placeAddress: formData.placeAddress || first?.address || '',
+            placePosition: formData.placePosition || first?.position || 'auto',
+            places: picked,
+          };
+        })(),
         skipCta: formData.skipCta || false,
         contentMode: formData.contentMode || 'seo',
         affiliateLink: formData.affiliateLink,

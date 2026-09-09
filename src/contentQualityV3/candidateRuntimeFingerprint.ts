@@ -210,6 +210,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/searchOnlyCompoundKeyword.ts',
   'src/content/searchQueryNarrowing.ts',
   'src/content/searchRedirectedHome.ts',
+  'src/content/secretTokenGuard.ts',
   'src/content/sectionDistinctnessJudge.ts',
   'src/content/sentenceParagraphs.ts',
   'src/content/shoppingEvidenceSource.ts',
