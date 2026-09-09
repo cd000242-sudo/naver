@@ -229,7 +229,14 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
      * 검색량이 큰 쪽부터 재야 판정이 쓸모 있는 자리에 붙는다.
      * 못 잰 줄도 표에는 남아 [더 파기]로 이어 갈 수 있다.
      */
-    const docsWanted = expansionRows.slice(0, 40).map((r) => r.keyword);
+    /*
+     * 연관 키워드(검색광고 목록)도 확장 표와 같은 잣대(문서수·비율·정면·자리)로 보인다
+     * (사장님 2026-09-09 "연관키워드도 확장키워드처럼 똑같이"). 그래서 연관 전부를 문서수 대상에 넣는다.
+     */
+    const docsWanted = [...new Set([
+        ...expansionRows.slice(0, 40).map((r) => r.keyword),
+        ...(result ? result.related.map((r) => r.keyword) : []),
+    ])];
     const docsKey = docsWanted.join('\n');
     useEffect(() => {
         if (!result) return;
@@ -261,7 +268,11 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
      * 문서수와 같은 방식으로 "아직 안 잰 줄만" 그때그때 — 재는 중 상태에 묶지 않는다.
      */
     const frontalAsked = useRef<Set<string>>(new Set());
-    const frontalWanted = expansionRows.filter((r) => r.tier <= 2).slice(0, 12).map((r) => r.keyword);
+    // 연관 표도 정면 글을 보인다 — 검색량 큰 순 상위 8줄(화면 한 장 400KB 라 상한을 둔다).
+    const frontalWanted = [...new Set([
+        ...expansionRows.filter((r) => r.tier <= 2).slice(0, 12).map((r) => r.keyword),
+        ...(result ? [...result.related].sort((a, b) => (b.searchVolume || 0) - (a.searchVolume || 0)).slice(0, 8).map((r) => r.keyword) : []),
+    ])];
     const frontalKey = frontalWanted.join('\n');
     useEffect(() => {
         if (!result) return;
@@ -755,48 +766,76 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                     {result.related.length > 0 && (
                         <section className="lw-panel" aria-label="연관 키워드">
                             <div className="lw-panel-head">
-                                <h2>연관 키워드 — 검색의도별</h2>
-                                <span>검색광고가 함께 돌려준 실측 목록 {result.related.length}개 · 의도는 키워드 속 단서 어휘로 분류</span>
+                                <h2>연관 키워드 — 검색의도별 · 자리까지 실측</h2>
+                                <span>
+                                    검색광고가 함께 돌려준 실측 목록 {result.related.length}개 · 의도는 키워드 속 단서 어휘로 분류
+                                    {expState === 'loading' ? ' · 문서수 재는 중…' : ''}
+                                    {' · 한 줄을 누르면 그 검색어로 이어서 파고듭니다'}
+                                </span>
                             </div>
                             <div className="lw-table-scroll">
+                                {/* 확장 표와 같은 열(사장님 2026-09-09 "연관키워드도 확장키워드처럼 똑같이") — 문서수·비율·정면·자리·더 파기. */}
                                 <table className="lw-table">
                                     <thead>
                                         <tr>
                                             <th scope="col">키워드</th>
                                             <th scope="col">월 검색량</th>
-                                            <th scope="col">PC</th>
-                                            <th scope="col">모바일</th>
-                                            <th scope="col">경쟁도</th>
-                                            <th scope="col" aria-label="조회" />
+                                            <th scope="col">문서수</th>
+                                            <th scope="col">비율</th>
+                                            <th scope="col">정면 글</th>
+                                            <th scope="col">자리</th>
+                                            <th scope="col" aria-label="더 파기" />
                                         </tr>
                                     </thead>
                                     {groupByIntent(result.related, (row) => row.keyword, keyword.trim()).map((bucket) => (
                                         <tbody key={bucket.id}>
                                             <tr className="lw-intent-row">
-                                                <th colSpan={6} scope="colgroup">
+                                                <th colSpan={7} scope="colgroup">
                                                     {bucket.label} <small>{bucket.items.length}개</small>
                                                 </th>
                                             </tr>
-                                            {bucket.items.map((row) => (
-                                                <tr key={row.keyword}>
-                                                    <th scope="row">{row.keyword}</th>
-                                                    <td>{formatCount(row.searchVolume)}</td>
-                                                    <td>{formatCount(row.searchVolumePc)}</td>
-                                                    <td>{formatCount(row.searchVolumeMobile)}</td>
-                                                    <td>{row.competition || '—'}</td>
-                                                    <td>
-                                                        <button
-                                                            type="button"
-                                                            className="lw-mini"
-                                                            onClick={() => { setKeyword(row.keyword); run(row.keyword); }}
-                                                        >분석</button>
-                                                    </td>
-                                                </tr>
-                                            ))}
+                                            {bucket.items.map((row) => {
+                                                const docs = expDocs[row.keyword];
+                                                const ratio = typeof docs === 'number' && docs > 0 && row.searchVolume ? row.searchVolume / docs : null;
+                                                const frontal = frontalCount(expTitles[row.keyword], row.keyword);
+                                                const saturated = typeof frontal === 'number' && frontal >= FRONTAL_SATURATION;
+                                                return (
+                                                    <tr key={row.keyword}>
+                                                        <th scope="row" title={`PC ${formatCount(row.searchVolumePc)} · 모바일 ${formatCount(row.searchVolumeMobile)}${row.competition ? ` · 광고 경쟁도 ${row.competition}` : ''}`}>{row.keyword}</th>
+                                                        <td>{formatCount(row.searchVolume)}</td>
+                                                        <td>{typeof docs === 'number' ? formatCount(docs) : (expState === 'loading' ? '재는 중' : '—')}</td>
+                                                        <td>{ratio === null ? '—' : ratio.toFixed(2)}</td>
+                                                        <td>
+                                                            {frontal === null
+                                                                ? <span className="lw-slot-unknown">—</span>
+                                                                : <span className={saturated ? 'lw-frontal-hot' : ''}>{frontal}/{Math.min(10, (expTitles[row.keyword] || []).length)}</span>}
+                                                        </td>
+                                                        <td>
+                                                            {ratio === null
+                                                                ? <span className="lw-slot-unknown">모름</span>
+                                                                : saturated
+                                                                    ? <span className="lw-slot-tight">정면 글 많음</span>
+                                                                    : ratio >= 1
+                                                                        ? <span className="lw-slot-open">자리 있음</span>
+                                                                        : ratio >= 0.1
+                                                                            ? <span className="lw-slot-tight">좁음</span>
+                                                                            : <span className="lw-slot-none">글이 많음</span>}
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" className="lw-dig" onClick={() => digInto(row.keyword)}>
+                                                                더 파기 →
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
                                         </tbody>
                                     ))}
                                 </table>
                             </div>
+                            <p className="lw-note lw-note-plain">
+                                PC·모바일 검색량과 광고 경쟁도는 키워드에 마우스를 올리면 보입니다. <b>정면 글</b>은 검색량 큰 순 상위 8줄만 잽니다.
+                            </p>
                         </section>
                     )}
                 </>
