@@ -38,11 +38,25 @@ interface Brief {
     star: boolean;
 }
 
-interface TopicBriefs {
+type RoundSlot = '아침' | '오후' | '저녁';
+
+interface BriefRound {
+    slot: RoundSlot;
     builtAt: string;
     counts: { briefs: number; now: number; next: number; always: number; star: number };
     briefs: Brief[];
 }
+
+interface TopicBriefs {
+    builtAt: string;
+    slot?: RoundSlot;
+    /** 오늘의 회차들(아침 07:00 · 오후 13:00 · 저녁 19:00 KST) — 사장님 2026-09-09 "오전 오후 저녁 나눠서" */
+    rounds?: BriefRound[];
+    counts: { briefs: number; now: number; next: number; always: number; star: number };
+    briefs: Brief[];
+}
+
+const SLOT_TIME: Record<RoundSlot, string> = { 아침: '07:00', 오후: '13:00', 저녁: '19:00' };
 
 const FREE_BRIEFS = 3;
 const TIMING_LABEL: Record<Timing, { name: string; desc: string }> = {
@@ -61,6 +75,7 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
     const [error, setError] = useState('');
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     const [field, setField] = useState<string>('전체');
+    const [slot, setSlot] = useState<RoundSlot | null>(null);
 
     useEffect(() => {
         let alive = true;
@@ -71,7 +86,14 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
         return () => { alive = false; };
     }, []);
 
-    const all = data?.briefs ?? [];
+    // 회차 — rounds 가 없는 옛 파일은 한 회차로 본다. 기본은 가장 최근 회차.
+    const rounds: BriefRound[] = useMemo(() => (
+        data ? (data.rounds && data.rounds.length > 0 ? data.rounds : [{ slot: data.slot ?? '아침', builtAt: data.builtAt, counts: data.counts, briefs: data.briefs }]) : []
+    ), [data]);
+    const activeRound = rounds.find((r) => r.slot === slot) ?? rounds[rounds.length - 1] ?? null;
+    const all = activeRound?.briefs ?? [];
+    const todayTotal = rounds.reduce((sum, r) => sum + r.briefs.length, 0);
+    const todayStar = rounds.reduce((sum, r) => sum + r.briefs.filter((b) => b.star).length, 0);
     const fields = useMemo(() => ['전체', ...Array.from(new Set(all.map((b) => b.field)))], [all]);
     const filtered = field === '전체' ? all : all.filter((b) => b.field === field);
     const visible = unlocked ? filtered : filtered.slice(0, FREE_BRIEFS);
@@ -82,12 +104,36 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
             <h2 id="lw-briefs-title" hidden>오늘의 글감</h2>
             <TabIntro
                 title="오늘의 글감"
-                desc={`날짜가 박힌 공식 사실에서 뽑은 글감 — NOW(지금) · NEXT(예정) · ALWAYS(지속)${data ? ` · ${kst(data.builtAt)} 실측 · ${num(data.counts.briefs)}건 · ★ ${num(data.counts.star)}` : ''}`}
-                source="네이버 뉴스 API 기사 실측 · 검색광고 검색량 실측 · 정면 글 수 실측(안 쟀으면 미측정) · 매일 아침 갱신"
+                desc={`날짜가 박힌 공식 사실에서 뽑은 글감 — NOW(지금) · NEXT(예정) · ALWAYS(지속)${data ? ` · 오늘 ${rounds.length}회차 ${num(todayTotal)}건 · ★ ${num(todayStar)}` : ''}`}
+                source="네이버 뉴스 API 기사 실측 · 검색광고 검색량 실측 · 정면 글 수 실측(안 쟀으면 미측정) · 아침 07:00 · 오후 13:00 · 저녁 19:00 갱신"
             />
 
             {error && <p className="lw-note lw-note-error">글감을 못 읽었습니다 — {error}</p>}
             {!error && !data && <p className="lw-note">불러오는 중…</p>}
+
+            {rounds.length > 0 && (
+                <div className="lw-briefs-rounds" role="tablist" aria-label="회차">
+                    {(['아침', '오후', '저녁'] as const).map((name) => {
+                        const round = rounds.find((r) => r.slot === name);
+                        const active = activeRound?.slot === name;
+                        return (
+                            <button
+                                key={name}
+                                type="button"
+                                role="tab"
+                                aria-selected={active}
+                                disabled={!round}
+                                className={`lw-briefs-round${active ? ' is-active' : ''}${round ? '' : ' is-pending'}`}
+                                onClick={() => round && setSlot(name)}
+                                title={round ? `${kst(round.builtAt)} 실측` : `${SLOT_TIME[name]} 회차 예정`}
+                            >
+                                <strong>{name}</strong>
+                                <span>{round ? `${round.briefs.length}건 · ★ ${round.briefs.filter((b) => b.star).length}` : `${SLOT_TIME[name]} 예정`}</span>
+                            </button>
+                        );
+                    })}
+                </div>
+            )}
 
             {data && (
                 <div className="lw-picks-topics" role="tablist" aria-label="분야">

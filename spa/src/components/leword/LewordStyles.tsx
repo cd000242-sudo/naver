@@ -2224,6 +2224,15 @@ function LewordStyles() {
             .lw-picks-btn:hover { background: color-mix(in srgb, currentColor 8%, transparent); }
             .lw-picks-more { margin: 6px 8px 0; font-size: 12px; opacity: 0.65; }
             /* 오늘의 글감 — NOW/NEXT/ALWAYS 브리프 카드 */
+            .lw-briefs-rounds { display: flex; gap: 8px; margin: 2px 0 12px; flex-wrap: wrap; }
+            .lw-briefs-round { font: inherit; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 120px; padding: 8px 14px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); background: transparent; color: inherit; cursor: pointer; text-align: left; }
+            .lw-briefs-round strong { font-size: 14px; }
+            .lw-briefs-round span { font-size: 11.5px; opacity: 0.65; }
+            .lw-briefs-round:hover:not(:disabled) { background: color-mix(in srgb, currentColor 7%, transparent); }
+            .lw-briefs-round.is-active { border-color: #ffa500; background: color-mix(in srgb, #ffa500 14%, transparent); }
+            .lw-briefs-round.is-active strong { color: #ffa500; }
+            .lw-briefs-round.is-pending { opacity: 0.45; cursor: default; }
+            .lw-briefs-round:focus-visible { outline: 2px solid #ffa500; outline-offset: 2px; }
             .lw-briefs-group { margin-top: 18px; }
             .lw-briefs-group-head { display: flex; gap: 10px; align-items: baseline; margin: 0 0 8px; }
             .lw-briefs-group-head span { font-size: 12.5px; opacity: 0.68; }
