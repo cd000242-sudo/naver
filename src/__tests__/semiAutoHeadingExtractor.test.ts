@@ -335,3 +335,35 @@ describe('semi-auto heading extractor — 문장 조각 차단', () => {
     expect(extractSemiAutoHeadingsFromBody(body).map((heading) => heading.title)).toContain('진짜 소제목');
   });
 });
+
+/*
+ * [2026-09-09] Live incident: photo mode recognised 23 sections, publish saw 0.
+ *
+ * Photo-mode headings are sentence-style by design, which the extraction heuristic
+ * rejects. The recovery ladder must slice the body by the known titles instead of
+ * collapsing the article into one intro blob -- that collapse is what left the post
+ * with no place to insert any image.
+ */
+describe('sentence-style headings survive extraction failure', () => {
+  const titles = [
+    '근포땅굴 안으로 들어서자 여름이 한꺼번에 식었습니다',
+    '한꼬막 두꼬막에서 늦은 점심을 마주했습니다',
+    '바람의 언덕에서 하루를 접었습니다',
+  ];
+  const existing = titles.map((title) => ({ title, content: `${title} 아래 본문입니다.` }));
+  const body = `여행 이야기를 시작합니다.\n\n${titles.map((t) => `${t}\n${t} 아래 본문입니다.`).join('\n\n')}`;
+
+  it('extraction alone finds none of them', () => {
+    expect(extractSemiAutoDocumentFromBody(body).headings).toHaveLength(0);
+  });
+
+  it('the ladder recovers all sections instead of falling back to plain-body', () => {
+    const resolved = resolveSemiAutoPublishStructure(body, existing, {
+      bodyIsAuthoritative: true,
+      existingIntroduction: '여행 이야기를 시작합니다.',
+    });
+    expect(resolved.strategy).not.toBe('plain-body');
+    expect(resolved.headings.map((h) => h.title)).toEqual(titles);
+    resolved.headings.forEach((heading) => expect(heading.content.trim().length).toBeGreaterThan(0));
+  });
+});

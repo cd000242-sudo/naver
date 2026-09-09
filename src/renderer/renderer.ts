@@ -4324,13 +4324,36 @@ async function initUnifiedTab(): Promise<void> {
     const extractedDocument = extractSemiAutoDocumentFromBody(body);
     const extracted = extractedDocument.headings;
     if (extracted.length === 0) {
-      if (sc._manualPasted === true) {
-        sc.headings = [];
-        sc.introduction = body.trim();
-        sc.conclusion = '';
+      if (sc._manualPasted !== true) return;
+      /*
+       * [2026-09-09] Extraction returning 0 does not mean the article has no sections.
+       *
+       * The heading heuristic silently drops sentence-style titles (over 34 chars, or not
+       * ending in an accepted form) -- exactly what photo mode now produces. Wiping
+       * sc.headings here destroyed the very evidence that resolveSemiAutoPublishStructure's
+       * recovery ladder needs later, so publish saw 0 sections and had nowhere to put the
+       * images (live: 23 sections recognised, 0 sections and 0 images at publish time).
+       *
+       * Run the same ladder here: if the known titles still sit in the body in order, this
+       * is a markup gap, not an edit. Only wipe when nothing can be recovered.
+       */
+      const recovered = resolveSemiAutoPublishStructure(body, sc.headings || [], {
+        bodyIsAuthoritative: true,
+        existingIntroduction: sc.introduction,
+        imageHeadingTitles: readSemiAutoImageHeadingTitles(),
+      });
+      if (recovered.strategy !== 'plain-body' && recovered.headings.length > 0) {
+        sc.headings = recovered.headings;
+        sc.introduction = recovered.introduction;
         sc._manualSectionOrderLocked = true;
-        sc._manualStructureStrategy = 'plain-body';
+        sc._manualStructureStrategy = recovered.strategy;
+        return;
       }
+      sc.headings = [];
+      sc.introduction = body.trim();
+      sc.conclusion = '';
+      sc._manualSectionOrderLocked = true;
+      sc._manualStructureStrategy = 'plain-body';
       return;
     }
     const currentSignature = Array.isArray(sc.headings)
