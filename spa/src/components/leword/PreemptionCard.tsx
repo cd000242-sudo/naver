@@ -80,6 +80,21 @@ export type PreemptionRow = {
     measuredAt?: string | null;
     /** "지금 왜 검색되는가" — 에이전트 추론 한 문장. 라벨로 실측과 구분한다. */
     whySearch?: { text: string; basis?: string } | null;
+    /**
+     * 글감 브리프 — 오늘의 글감과 같은 형식(사장님 2026-09-09 "황금키워드 TMI 가 오늘의 글감보다 약하다").
+     * 행의 실측 수치 + 그 키워드 뉴스 카드 안에서만 쓰고, 근거 밖 날짜·숫자는 검증기가 떨어뜨린 것만 온다.
+     */
+    brief?: {
+        timing: 'NOW' | 'NEXT' | 'ALWAYS';
+        primaryIntent: string;
+        value: string;
+        experience: string;
+        differentiation: string;
+        angle: string;
+        facts: Array<{ id: string; title: string; press: string; link: string; publishedAt: string }>;
+        basis: string;
+        builtAt: string;
+    } | null;
     /** 지식인 질문 수 실측 — 질문 많음 = 답을 못 찾는 중. */
     kinCount?: number | null;
     /** 최신 질문 중 조회수 높은 순(제목·링크·조회수·답변수 실측) — 클릭하면 질문으로 바로 간다. */
@@ -215,6 +230,30 @@ function PreemptionCard({
                                 <em>왜 지금?</em> {row.whySearch.text}
                                 <small>{row.whySearch.basis || 'AI 추론'}</small>
                             </p>
+                        )}
+                        {row.brief && (
+                            <div className="lw-card-brief" title={row.brief.basis}>
+                                <div className="lw-card-brief-head">
+                                    <strong className={`lw-briefs-timing is-${row.brief.timing.toLowerCase()}`}>{row.brief.timing}</strong>
+                                    <span>글감 브리프 · {row.brief.basis}</span>
+                                </div>
+                                <dl className="lw-briefs-dl">
+                                    <dt>Primary Intent</dt><dd>{row.brief.primaryIntent}</dd>
+                                    <dt>작성가치</dt><dd>{row.brief.value}</dd>
+                                    {row.brief.experience && <><dt>경험활용</dt><dd>{row.brief.experience}</dd></>}
+                                    {row.brief.differentiation && <><dt>차별화</dt><dd>{row.brief.differentiation}</dd></>}
+                                    <dt>추천 각도</dt><dd>{row.brief.angle}</dd>
+                                </dl>
+                                {row.brief.facts.length > 0 && (
+                                    <p className="lw-card-brief-facts">
+                                        근거 {row.brief.facts.slice(0, 3).map((f) => (
+                                            <a key={f.id} href={f.link} target="_blank" rel="noreferrer" title={f.title}>
+                                                {f.press || '기사'} {new Date(f.publishedAt).toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul', month: 'numeric', day: 'numeric' })}
+                                            </a>
+                                        ))}
+                                    </p>
+                                )}
+                            </div>
                         )}
                     </div>
 

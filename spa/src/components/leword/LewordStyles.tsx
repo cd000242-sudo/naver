@@ -2228,6 +2228,13 @@ function LewordStyles() {
             .lw-locked h1 { font-size: 20px; margin: 0 0 8px; }
             .lw-locked p { margin: 0 0 16px; opacity: 0.75; font-size: 14px; line-height: 1.5; }
             /* 오늘의 글감 — NOW/NEXT/ALWAYS 브리프 카드 */
+            /* 황금키워드 카드 안 글감 브리프(사장님 2026-09-09) — 오늘의 글감과 같은 dl 스타일을 쓴다 */
+            .lw-card-brief { margin-top: 10px; padding: 10px 12px; border-radius: 10px; border: 1px solid color-mix(in srgb, #ffa500 28%, transparent); background: color-mix(in srgb, #ffa500 6%, transparent); }
+            .lw-card-brief-head { display: flex; gap: 8px; align-items: baseline; }
+            .lw-card-brief-head span { font-size: 11.5px; opacity: 0.65; }
+            .lw-card-brief .lw-briefs-dl { margin-top: 8px; font-size: 12.5px; }
+            .lw-card-brief-facts { margin: 8px 0 0; font-size: 12px; opacity: 0.85; }
+            .lw-card-brief-facts a { color: inherit; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, currentColor 40%, transparent); margin-left: 6px; }
             .lw-briefs-rounds { display: flex; gap: 8px; margin: 2px 0 12px; flex-wrap: wrap; }
             .lw-briefs-round { font: inherit; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 120px; padding: 8px 14px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); background: transparent; color: inherit; cursor: pointer; text-align: left; }
             .lw-briefs-round strong { font-size: 14px; }
