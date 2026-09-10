@@ -880,6 +880,10 @@ contextBridge.exposeInMainWorld('api', {
   // ✅ [v2.11.206] 네이버 지역검색 — 장소(지도) 블록을 발행 전에 확정하기 위한 창구
   searchPlaces: (query: string): Promise<{ success: boolean; items?: any[]; message?: string }> =>
     ipcRenderer.invoke('place:search', query),
+  // ✅ [2026-09-10] leword 오늘의 글감(실검 틈새 보드) — 앱이 랜덤 시드로 키워드를 뽑던 것을 대체한다.
+  //   preload 등록이 빠지면 조용히 죽는다(과거 실사고) — 화면에서 반드시 눌러 확인할 것.
+  getLewordBoard: (): Promise<{ success: boolean; board?: any; message?: string }> =>
+    ipcRenderer.invoke('leword:board'),
   // ✅ [100점 개선] AI 이미지 검색어 최적화 API
   optimizeImageSearchQuery: (title: string, heading: string): Promise<{
     success: boolean;

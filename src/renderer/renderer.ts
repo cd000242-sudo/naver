@@ -348,6 +348,7 @@ initModalBackdropClickGuard();
 import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 // [v2.11.206] 장소(지도) 미리 확정 UI
 import { initPlacePicker, readPickedPlace, readPickedPlaces } from './modules/placePicker.js';
+import { initLewordBoardPicker } from './modules/lewordBoardPicker.js';
 import { initHeadingControlPanel, renderHeadingList } from './modules/headingControlPanel.js';
 import { resetPhotoModeForNextPost } from './modules/photoModeReset.js';
 import { initStartupEngineGate } from './modules/startupEngineGate.js';
@@ -10879,6 +10880,8 @@ initArticleTableComposer();
 initImageNarrativeMode();
 // [v2.11.206] 장소(지도) 미리 확정 — 발행 payload 빌더가 window에서 읽어간다.
 initPlacePicker();
+// [2026-09-10] leword 오늘의 글감 — 앱이 랜덤 시드로 키워드를 뽑던 것을 대체한다.
+initLewordBoardPicker();
 (window as any).readPickedPlace = readPickedPlace;
 (window as any).readPickedPlaces = readPickedPlaces;
 // [2026-09-09] publishingHandlers 의 풀오토 발행 경로에서도 발행 후 초기화를 부를 수 있게 연다.

@@ -536,6 +536,7 @@ try {
     'startupEngineGate.js',
     // ✅ [v2.11.206] 장소(지도) 미리 확정 UI — 사진 모드 장소 블록
     'placePicker.js',
+    'lewordBoardPicker.js',
     // ✅ [SPEC-DROPSHOT-2026] 이미지 생성 스튜디오 (멀티엔진 대량 생성 서브탭)
     'imageGenStudio.js',
     'imageGenStudioCore.js',

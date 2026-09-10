@@ -4805,6 +4805,9 @@ registerTitleQualityHandlers();
 //   index.ts 등록만으로는 죽은 핸들러가 된다. 반드시 여기서도 등록한다.
 import { registerPlaceSearchHandlers } from './main/ipc/placeSearchHandlers.js';
 registerPlaceSearchHandlers();
+// [2026-09-10] leword 오늘의 글감 — 앱이 자체 랜덤 시드로 키워드를 뽑던 것을 대체할 창구.
+import { registerLewordBoardHandlers } from './main/ipc/lewordBoardHandlers.js';
+registerLewordBoardHandlers();
 // [v2.10.242] file:* 8개 IPC 핸들러 — main.ts에서 main/ipc/fileHandlers.ts 로 분리
 import { registerFileHandlers } from './main/ipc/fileHandlers.js';
 registerFileHandlers();
