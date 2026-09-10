@@ -2295,6 +2295,13 @@ function LewordStyles() {
                 font-size: 11px; font-weight: 700; opacity: .75;
                 background: color-mix(in srgb, currentColor 8%, transparent);
             }
+            .lw-briefs-ttarget {
+                flex: none; padding: 1px 7px; border-radius: 999px;
+                font-size: 10.5px; font-weight: 800; letter-spacing: .01em;
+            }
+            .lw-briefs-ttarget.is-seo { background: color-mix(in srgb, #22c55e 18%, transparent); color: #16a34a; }
+            .lw-briefs-ttarget.is-aeo { background: color-mix(in srgb, #3b82f6 18%, transparent); color: #2563eb; }
+            .lw-briefs-ttarget.is-geo { background: color-mix(in srgb, #a855f7 18%, transparent); color: #7c3aed; }
             .lw-briefs-ttext { flex: 1; }
             .lw-briefs-tcopy {
                 flex: none; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; cursor: pointer;

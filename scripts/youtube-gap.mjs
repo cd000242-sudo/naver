@@ -15,7 +15,7 @@
  * 지금 터지는 중인데 네이버에 아직 글이 없는 자리 — 그게 선점이다.
  * 모든 숫자는 실측이다. 못 재면 그 행을 버린다.
  */
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, readFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isUsefulYoutubeTopic, isUsefulYoutubeLead, isRelevantYoutubeTopic } from '../spa/src/lib/youtubeTopicQuality.mjs';
@@ -62,7 +62,14 @@ async function isShortForm(videoId) {
 }
 
 /** 빈자리 판정. 찾는 사람이 있고(검색량), 글이 적어야(문서수) 자리다. */
-const MIN_VOLUME = Number(process.env.YTGAP_MIN_VOLUME || 200);
+/*
+ * 검색량 하한 200 → 100 (2026-09-10, 사장님 "며칠째 하나도 안 바뀌고 있어").
+ * 실측: 후보 590개 중 게이트를 넘은 것이 15개뿐이라 회차가 바뀌어도 같은 15개가 남았다
+ * (9/10 10:23 → 15:12 회차가 15/15 완전 동일). 자르는 것은 문서수 상한이 아니라 비율 1 이고,
+ * 비율 1(검색량 > 문서수)은 '빈자리'의 뜻 자체라 못 건드린다. 그래서 문턱을 낮춰 공급을 넓힌다 —
+ * 월 100번 찾는 말도 글이 몇 편 없으면 초보자에게는 쓸 자리다.
+ */
+const MIN_VOLUME = Number(process.env.YTGAP_MIN_VOLUME || 100);
 const MAX_DOCS = Number(process.env.YTGAP_MAX_DOCS || 5000);
 const MIN_RATIO = Number(process.env.YTGAP_MIN_RATIO || 1);
 const MAX_ROWS = Number(process.env.YTGAP_MAX_ROWS || 150);
@@ -87,6 +94,16 @@ const MAX_PER_VIDEO = Number(process.env.YTGAP_MAX_PER_VIDEO || 3);
 const BUDGET_MS = Number(process.env.YTGAP_BUDGET_MS || 8 * 60_000);
 const STARTED_AT = Date.now();
 const overBudget = () => Date.now() - STARTED_AT > BUDGET_MS;
+
+/** 직전 회차에 실린 검색어 — 공백을 걷어 담는다. 파일이 없거나 깨졌으면 빈 집합(처음 도는 것과 같다). */
+function readPreviousKeywords() {
+    try {
+        const raw = JSON.parse(readFileSync(OUT, 'utf8'));
+        return new Set((raw.rows || []).map((row) => String(row.keyword || '').replace(/\s+/g, '')).filter(Boolean));
+    } catch {
+        return new Set();
+    }
+}
 
 /*
  * 제목 맨 앞이 흔한 부사면 자동완성이 엉뚱한 데로 샌다 — "과연" 을 물으면
@@ -333,11 +350,19 @@ async function main() {
      * **검색량이 큰 것부터** 잰다. 원래 순서대로 돌면 예산이 끊길 때
      * 뒤쪽의 큰 자리들이 통째로 날아간다.
      */
-    const measurable = keywords
+    /*
+     * 직전 회차에 실린 말은 **뒤로 미룬다**(2026-09-10). 버리지는 않는다 —
+     * 새것이 모자라면 뒤에서 도로 올라와 표가 비지 않는다.
+     * 이게 없으면 검색량 순으로 훑는 순서가 매번 같아 같은 답이 나온다.
+     */
+    const previous = readPreviousKeywords();
+    const graded = keywords
         .map((keyword) => ({ keyword, detail: volumes.get(keyword.replace(/\s+/g, '')) }))
         .filter(({ detail }) => detail && Number.isFinite(detail.volume) && detail.volume >= MIN_VOLUME)
         .sort((left, right) => right.detail.volume - left.detail.volume);
-    log(`검색량 ${MIN_VOLUME}+ ${measurable.length}개 → 문서수 조회`);
+    const isRepeat = (k) => previous.has(k.replace(/\s+/g, ''));
+    const measurable = graded.filter((x) => !isRepeat(x.keyword)).concat(graded.filter((x) => isRepeat(x.keyword)));
+    log(`검색량 ${MIN_VOLUME}+ ${measurable.length}개 → 문서수 조회 (직전 회차와 겹치는 ${graded.filter((x) => isRepeat(x.keyword)).length}개는 뒤로)`);
 
     /*
      * 문서수는 **여러 줄로 나눠** 잰다(사장님 지시 2026-08-22 "대량으로 가져와야

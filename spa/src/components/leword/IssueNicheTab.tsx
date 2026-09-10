@@ -120,6 +120,8 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
     const [chartKeyword, setChartKeyword] = useState('');
     const [jumpTo, setJumpTo] = useState('');
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
+    /* 서브탭 — 실시간 검색어가 먼저, 실검 틈새는 그다음(사장님 2026-09-10). */
+    const [sub, setSub] = useState<'live' | 'niche'>('live');
     const nowMs = useEvidenceClock();
     const board = useMemo(() => snapshot ? expireIssueBoard(snapshot, nowMs) : null, [snapshot, nowMs]);
     const { mindmap, openMindmap } = useMindmap();
@@ -312,22 +314,39 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
     return (
         <>
             <TabIntro
-                title="실검 틈새키워드"
-                desc="실제 이슈와 같은 사건·인물을 다루는 세부 검색어인지 먼저 확인합니다. 최근 수요와 검색량이 확인된 틈새, 절대 검색량 미확인 선점 후보, 수요 미확인 관찰을 구분합니다. '지금 실검' 배지는 정확히 같은 검색어가 현재 목록에 있을 때만 표시하며, 노출과 트래픽을 보장하지 않습니다."
-                source={`실시간 이슈 실측 회차${publishedLabel ? ` · ${publishedLabel} 발행` : ''} · ${board?.schedule || '매일 07·13·19시(KST) 갱신'}`}
+                title={sub === 'live' ? '실시간 검색어' : '실검 틈새키워드'}
+                desc={sub === 'live'
+                    ? '지금 이 순간 사람들이 찾고 있는 말입니다. 5분마다 다시 받아 그대로 보여 주고, 고른 말은 그 자리에서 검색량·문서수·자리를 잽니다.'
+                    : "실제 이슈와 같은 사건·인물을 다루는 세부 검색어인지 먼저 확인합니다. 최근 수요와 검색량이 확인된 틈새, 절대 검색량 미확인 선점 후보, 수요 미확인 관찰을 구분합니다. '지금 실검' 배지는 정확히 같은 검색어가 현재 목록에 있을 때만 표시하며, 노출과 트래픽을 보장하지 않습니다."}
+                source={sub === 'live'
+                    ? '네이트·구글·다음 실시간 신호 — 5분마다 갱신'
+                    : `실시간 이슈 실측 회차${publishedLabel ? ` · ${publishedLabel} 발행` : ''} · ${board?.schedule || '매일 07·13·19시(KST) 갱신'}`}
             />
 
-            {/*
-              * 살아 있는 줄 — 아래 카드는 하루 3회 실측 판정이라 최대 8시간 낡는다.
-              * 목록만 5분마다 따로 받아 "지금 뭐가 뜨는지"를 먼저 보여 준다.
-              */}
-            <RealtimeStrip measuredKeys={measuredKeySet} data={realtime} />
-
-            {/* 지금 목록을 그 자리에서 재는 판(사장님 2026-09-10 "이것도 수정해줘야지 실시간이라고").
-                아래 카드는 하루 3회 회차라 최대 8시간 낡는다 — 화면 이름이 '실시간'인데 판정은 아니었다. */}
-            <LiveNichePanel items={(realtime?.items || []).map((item) => ({ rank: item.rank, keyword: item.keyword }))} />
+            {/* 서브탭(2026-09-10) — 실시간이 먼저, 틈새 판정은 그다음.
+                화면 이름이 '실시간'인데 첫 화면이 하루 3회 회차 보드였던 것이 어긋나 있었다. */}
+            <div className="lw-segment lw-segment-wrap" role="tablist" aria-label="실시간 보기">
+                <button type="button" role="tab" aria-selected={sub === 'live'} className={sub === 'live' ? 'on' : ''} onClick={() => setSub('live')}>
+                    실시간 검색어 <em>{realtime?.items?.length || 0}</em>
+                </button>
+                <button type="button" role="tab" aria-selected={sub === 'niche'} className={sub === 'niche' ? 'on' : ''} onClick={() => setSub('niche')}>
+                    실검 틈새키워드 <em>{(board?.rows || []).length}</em>
+                </button>
+            </div>
 
-            <div className="lw-segment lw-segment-wrap" role="group" aria-label="판정">
+            {sub === 'live' && (
+                <>
+                    {/* 살아 있는 줄 — 목록만 5분마다 따로 받아 "지금 뭐가 뜨는지"를 그대로 보여 준다. */}
+                    <RealtimeStrip measuredKeys={measuredKeySet} data={realtime} />
+                    {/* 지금 목록을 그 자리에서 재는 판(사장님 2026-09-10 "이것도 수정해줘야지 실시간이라고"). */}
+                    <LiveNichePanel items={(realtime?.items || []).map((item) => ({ rank: item.rank, keyword: item.keyword }))} />
+                </>
+            )}
+
+            {sub === 'niche' && (
+            <>
+            <div className="lw-segment lw-segment-wrap" 
+role="group" aria-label="판정">
                 {VIEWS.map((item) => (
                     <button
                         key={item.id}
@@ -474,6 +493,8 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                         </>
                     )}
                 </>
+            )}
+            </>
             )}
         </>
     );

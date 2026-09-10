@@ -41,7 +41,12 @@ interface Brief {
     /** 같이 넣을 말 — 본문에 함께 담을 좁은 검색어. 전부 검색광고 실측이고 검색량도 실측이다. */
     related?: Array<{ keyword: string; searchVolume: number; serpFacing?: number | null; serpVacancy?: number | null; serpFit?: '높음' | '보통' | '낮음' | '미측정' }>;
     /** 제목 후보 — 유형이 서로 다른 3~4개. 교리에 걸리는 것은 회차가 이미 떨어뜨렸다. */
-    titles?: Array<{ type: string; text: string }>;
+    /**
+     * 제목 후보 — 셋 다 검색어로 문장이 시작하고, 끝이 다르다(2026-09-10).
+     *   검색 = 서술로 끝 · AI답변 = 물음으로 끝 · 인용 = 기사의 숫자·날짜가 박힘.
+     * target 은 생성기가 글자로 확인해 붙인 값이다. 옛 회차 파일에는 없어서 optional 이다.
+     */
+    titles?: Array<{ target?: '검색' | 'AI답변' | '인용' | null; type: string; text: string }>;
 }
 
 type RoundSlot = '아침' | '오후' | '저녁';
@@ -78,6 +83,17 @@ const kst = (iso: string) => new Date(iso).toLocaleString('ko-KR', {
 const day = (iso: string) => new Date(iso).toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul', month: 'numeric', day: 'numeric' });
 // 한국 날짜만(YYYY-MM-DD) — 회차가 오늘 것인지 대조하는 데만 쓴다.
 const kstDay = (iso: string) => new Date(iso).toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
+
+/*
+ * 제목 갈래(2026-09-10) — 사장님 "제목후보는 네이버에 최적화해서 SEO·AEO·GEO 에 최적화된 제목을".
+ * 앱과 같은 말·같은 뜻을 쓴다. 배지 색만 사이트 팔레트에 맞춘다.
+ */
+const TARGET_KEY: Record<string, string> = { '검색': 'seo', 'AI답변': 'aeo', '인용': 'geo' };
+const TARGET_HINT: Record<string, string> = {
+    '검색': '네이버 검색 결과에 걸리는 꼴 — 검색어로 시작하고 서술로 끝납니다',
+    'AI답변': '네이버 AI 브리핑·스마트블록이 답으로 물어 가는 꼴 — 검색어로 시작하고 물음으로 끝납니다',
+    '인용': '생성형 AI 가 근거로 인용하기 좋은 꼴 — 기사에 있던 숫자·날짜가 제목에 박혀 있습니다',
+};
 
 export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
     const [data, setData] = useState<TopicBriefs | null>(null);
@@ -211,6 +227,9 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
                                     <ul>
                                         {b.titles.map((t) => (
                                             <li key={t.text}>
+                                                {t.target ? (
+                                                    <span className={`lw-briefs-ttarget is-${TARGET_KEY[t.target]}`} title={TARGET_HINT[t.target]}>{t.target}</span>
+                                                ) : null}
                                                 <span className="lw-briefs-ttype">{t.type}</span>
                                                 <span className="lw-briefs-ttext">{t.text}</span>
                                                 <button

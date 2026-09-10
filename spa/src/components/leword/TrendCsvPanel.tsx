@@ -46,6 +46,7 @@ export default function TrendCsvPanel() {
     const [openOnly, setOpenOnly] = useState(true);
     const [category, setCategory] = useState('');
     const [fileName, setFileName] = useState('');
+    const [dragOver, setDragOver] = useState(false);
 
     const categories = useMemo(
         () => Array.from(new Set(rows.map((row) => row.category).filter(Boolean))).sort(),
@@ -157,126 +158,164 @@ export default function TrendCsvPanel() {
         }
     };
 
+    /* 요약 타일 — 들인 것 중 몇 개를 쟀고 몇 개가 열렸는지. 안 잰 것은 '아직'이라고 적는다. */
+    const measuredVolume = rows.filter((row) => row.searchVolume !== null).length;
+    const measuredSeat = rows.filter((row) => row.facing !== null).length;
+    const openSeats = rows.filter((row) => row.facing !== null && seatFromFacing(row.facing) === '열림').length;
+    const pending = rows.filter((row) => row.documentCount !== null && row.facing === null).length;
+
     return (
-        <section className="lw-trendcsv" aria-labelledby="lw-trendcsv-title">
+        <section className="lw-csv" aria-labelledby="lw-csv-title">
             <style>{`
-                .lw-trendcsv { margin: 18px 0 0; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 14px 16px; background: rgba(255,255,255,.03); }
-                .lw-trendcsv-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-                .lw-trendcsv-head h3 { margin: 0; font-size: 16px; }
-                .lw-trendcsv-head .hint { font-size: 11.5px; opacity: .6; }
-                .lw-trendcsv-note { margin: 6px 0 10px; font-size: 12px; opacity: .62; line-height: 1.6; }
-                .lw-trendcsv-tools { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; font-size: 12.5px; }
-                .lw-trendcsv-tools select, .lw-trendcsv button { font: inherit; }
-                .lw-trendcsv-btn { padding: 8px 14px; border: 0; border-radius: 8px; background: #2fd39a; color: #05221a; font-weight: 700; cursor: pointer; }
-                .lw-trendcsv-btn[disabled] { opacity: .55; cursor: default; }
-                .lw-trendcsv-toggle { padding: 6px 11px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: transparent; color: inherit; cursor: pointer; }
-                .lw-trendcsv-toggle.on { background: #2fd39a; color: #05221a; border-color: #2fd39a; font-weight: 700; }
-                .lw-trendcsv-status { opacity: .75; font-variant-numeric: tabular-nums; }
-                .lw-trendcsv-wrap { overflow-x: auto; max-height: 480px; overflow-y: auto; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; }
-                .lw-trendcsv table { width: 100%; border-collapse: collapse; font-size: 13px; }
-                .lw-trendcsv th { position: sticky; top: 0; background: #16202e; text-align: left; font-size: 11.5px; font-weight: 500; opacity: .8; padding: 9px 10px; }
-                .lw-trendcsv td { padding: 9px 10px; border-top: 1px solid rgba(255,255,255,.06); }
-                .lw-trendcsv td.r, .lw-trendcsv th.r { text-align: right; font-variant-numeric: tabular-nums; }
-                .lw-trendcsv .seat { font-weight: 700; }
-                .lw-trendcsv .seat.open { color: #2fd39a; }
-                .lw-trendcsv .seat.semi { color: #d9b23c; }
-                .lw-trendcsv .seat.locked { color: #e0706f; }
-                .lw-trendcsv .seat.none { opacity: .45; font-weight: 400; }
-                .lw-trendcsv .up { color: #2fd39a; }
-                .lw-trendcsv .empty { padding: 14px; opacity: .55; font-size: 13px; }
+                .lw-csv { margin: 4px 0 0; }
+                .lw-csv button, .lw-csv select { font: inherit; }
+                .lw-csv-drop {
+                    display: grid; place-items: center; gap: 10px; text-align: center;
+                    padding: 40px 20px; border: 1.5px dashed rgba(255,255,255,.18); border-radius: 14px;
+                    background: rgba(255,255,255,.02); transition: border-color .12s, background .12s;
+                }
+                .lw-csv-drop.over { border-color: #2fd39a; background: rgba(47,211,154,.06); }
+                .lw-csv-drop .big { font-size: 15px; font-weight: 700; }
+                .lw-csv-drop ol { margin: 0; padding: 0; list-style: none; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; font-size: 12px; opacity: .62; }
+                .lw-csv-btn { padding: 9px 18px; border: 0; border-radius: 9px; background: #2fd39a; color: #05221a; font-weight: 700; cursor: pointer; }
+                .lw-csv-btn[disabled] { opacity: .55; cursor: default; }
+                .lw-csv-ghost { padding: 6px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: transparent; color: inherit; cursor: pointer; font-size: 12.5px; }
+                .lw-csv-ghost.on { background: #2fd39a; color: #05221a; border-color: #2fd39a; font-weight: 700; }
+                .lw-csv-ghost[disabled] { opacity: .5; cursor: default; }
+                .lw-csv-tiles { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 10px; }
+                .lw-csv-tile { flex: 1 1 130px; padding: 10px 13px; border: 1px solid rgba(255,255,255,.1); border-radius: 11px; background: rgba(255,255,255,.03); }
+                .lw-csv-tile em { display: block; font-style: normal; font-size: 11px; opacity: .55; margin-bottom: 3px; }
+                .lw-csv-tile b { font-size: 19px; font-variant-numeric: tabular-nums; }
+                .lw-csv-tile.good b { color: #2fd39a; }
+                .lw-csv-bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 0 0 10px; font-size: 12.5px; }
+                .lw-csv-bar .grow { flex: 1; }
+                .lw-csv-status { opacity: .72; font-variant-numeric: tabular-nums; }
+                .lw-csv-wrap { overflow-x: auto; max-height: 560px; overflow-y: auto; border: 1px solid rgba(255,255,255,.1); border-radius: 11px; }
+                .lw-csv table { width: 100%; border-collapse: collapse; font-size: 13px; }
+                .lw-csv th { position: sticky; top: 0; background: #16202e; text-align: left; font-size: 11.5px; font-weight: 500; opacity: .8; padding: 9px 10px; }
+                .lw-csv td { padding: 9px 10px; border-top: 1px solid rgba(255,255,255,.06); }
+                .lw-csv td.r, .lw-csv th.r { text-align: right; font-variant-numeric: tabular-nums; }
+                .lw-csv .seat { font-weight: 700; }
+                .lw-csv .seat.open { color: #2fd39a; }
+                .lw-csv .seat.semi { color: #d9b23c; }
+                .lw-csv .seat.locked { color: #e0706f; }
+                .lw-csv .seat.none { opacity: .45; font-weight: 400; }
+                .lw-csv .up { color: #2fd39a; }
+                .lw-csv .empty { padding: 18px; opacity: .55; font-size: 13px; text-align: center; }
             `}</style>
 
-            <div className="lw-trendcsv-head">
-                <h3 id="lw-trendcsv-title">📥 트렌드 CSV 들이기</h3>
-                <span className="hint">네이버 크리에이터 어드바이저 → 트렌드 → CSV 저장</span>
-                <span style={{ flex: 1 }} />
-                <input
-                    ref={fileRef}
-                    type="file"
-                    accept=".csv,text/csv"
-                    hidden
-                    onChange={(event) => {
-                        const file = event.target.files?.[0];
+            <input
+                ref={fileRef}
+                type="file"
+                accept=".csv,text/csv"
+                hidden
+                onChange={(event) => {
+                    const file = event.target.files?.[0];
+                    if (file) void onPick(file);
+                    event.target.value = '';
+                }}
+            />
+
+            {rows.length === 0 ? (
+                <div
+                    className={`lw-csv-drop${dragOver ? ' over' : ''}`}
+                    onDragOver={(event) => { event.preventDefault(); setDragOver(true); }}
+                    onDragLeave={() => setDragOver(false)}
+                    onDrop={(event) => {
+                        event.preventDefault();
+                        setDragOver(false);
+                        const file = event.dataTransfer.files?.[0];
                         if (file) void onPick(file);
-                        event.target.value = '';
                     }}
-                />
-                <button type="button" className="lw-trendcsv-btn" disabled={busy} onClick={() => fileRef.current?.click()}>
-                    {busy ? '재는 중…' : 'CSV 고르기'}
-                </button>
-            </div>
-
-            <p className="lw-trendcsv-note">
-                네이버가 주제별로 알려주는 <b>실제 유입 검색어</b>입니다. 넣으면 검색량·문서수를 재고,
-                문서가 적은 것부터 블로그 탭 자리를 {SEAT_CAP}개까지 잽니다.
-                더 많이 재려면 앱에서 하세요 — 앱은 내 PC 브라우저로 재기 때문에 상한이 없습니다.
-            </p>
-
-            <div className="lw-trendcsv-tools">
-                <button
-                    type="button"
-                    className={`lw-trendcsv-toggle${openOnly ? ' on' : ''}`}
-                    onClick={() => setOpenOnly(true)}
-                >빈자리만</button>
-                <button
-                    type="button"
-                    className={`lw-trendcsv-toggle${openOnly ? '' : ' on'}`}
-                    onClick={() => setOpenOnly(false)}
-                >전체</button>
-                {categories.length > 0 && (
-                    <select value={category} onChange={(event) => setCategory(event.target.value)} aria-label="주제 고르기">
-                        <option value="">주제 전체</option>
-                        {categories.map((name) => <option key={name} value={name}>{name}</option>)}
-                    </select>
-                )}
-                {rows.some((row) => row.documentCount !== null && row.facing === null) && (
-                    <button type="button" className="lw-trendcsv-toggle" disabled={busy} onClick={() => void measureMore()}>
-                        이어 재기 (+{SEAT_CAP})
+                >
+                    <div className="big" id="lw-csv-title">CSV 파일을 여기에 끌어다 놓으세요</div>
+                    <ol>
+                        <li><b>1</b> 네이버 크리에이터 어드바이저</li>
+                        <li><b>2</b> 트렌드 → CSV 저장</li>
+                        <li><b>3</b> 그 파일을 여기에</li>
+                    </ol>
+                    <button type="button" className="lw-csv-btn" disabled={busy} onClick={() => fileRef.current?.click()}>
+                        {busy ? '재는 중…' : 'CSV 고르기'}
                     </button>
-                )}
-                <span className="lw-trendcsv-status">
-                    {fileName ? `${fileName} · ` : ''}{status || '아직 안 들였습니다.'}
-                </span>
-            </div>
-
-            {shown.length === 0 ? (
-                <div className="empty">{rows.length === 0 ? 'CSV 를 고르면 여기에 채워집니다.' : '이 조건에 맞는 키워드가 없습니다.'}</div>
-            ) : (
-                <div className="lw-trendcsv-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>키워드</th>
-                                <th>주제</th>
-                                <th className="r">주제 순위</th>
-                                <th className="r">검색량</th>
-                                <th className="r">문서수</th>
-                                <th>자리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {shown.map((row) => {
-                                const seat = seatFromFacing(row.facing);
-                                return (
-                                    <tr key={`${row.category}-${row.keyword}`}>
-                                        <td><b>{row.keyword}</b></td>
-                                        <td style={{ opacity: .7 }}>{row.category}</td>
-                                        <td className="r" style={{ opacity: .7 }}>
-                                            {row.rank || '—'}
-                                            {row.change !== null && row.change > 0 ? <span className="up"> ▲{row.change}</span> : null}
-                                        </td>
-                                        <td className="r">{num(row.searchVolume)}</td>
-                                        <td className="r">{num(row.documentCount)}</td>
-                                        <td>
-                                            <span className={`seat ${SEAT_CLASS[seat]}`}>{seat}</span>
-                                            {row.facing !== null && <span style={{ opacity: .5, fontSize: 11.5 }}> · 정면 {row.facing}</span>}
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
+                    <div style={{ fontSize: 12, opacity: .55, maxWidth: '52ch', lineHeight: 1.6 }}>
+                        네이버가 주제별로 알려 준 <b>내 유입 검색어</b>입니다. 넣으면 검색량·문서수를 재고,
+                        글이 적은 것부터 블로그 탭 자리를 {SEAT_CAP}개까지 잽니다.
+                        더 많이 재려면 앱에서 하세요 — 앱은 내 PC 브라우저로 재기 때문에 상한이 없습니다.
+                    </div>
+                    {status && <div className="lw-csv-status">{status}</div>}
                 </div>
+            ) : (
+                <>
+                    <div className="lw-csv-tiles">
+                        <div className="lw-csv-tile"><em>들인 검색어</em><b>{rows.length}</b></div>
+                        <div className="lw-csv-tile"><em>검색량 잰 것</em><b>{measuredVolume}</b></div>
+                        <div className="lw-csv-tile">
+                            <em>자리 잰 것</em>
+                            <b>{measuredSeat}</b>
+                            {pending > 0 && <span style={{ fontSize: 11, opacity: .5 }}> · {pending}개 남음</span>}
+                        </div>
+                        <div className="lw-csv-tile good"><em>지금 빈자리</em><b>{openSeats}</b></div>
+                    </div>
+
+                    <div className="lw-csv-bar">
+                        <button type="button" className={`lw-csv-ghost${openOnly ? ' on' : ''}`} onClick={() => setOpenOnly(true)}>빈자리만</button>
+                        <button type="button" className={`lw-csv-ghost${openOnly ? '' : ' on'}`} onClick={() => setOpenOnly(false)}>전체</button>
+                        {categories.length > 0 && (
+                            <select value={category} onChange={(event) => setCategory(event.target.value)} aria-label="주제 고르기">
+                                <option value="">주제 전체</option>
+                                {categories.map((name) => <option key={name} value={name}>{name}</option>)}
+                            </select>
+                        )}
+                        {pending > 0 && (
+                            <button type="button" className="lw-csv-ghost" disabled={busy} onClick={() => void measureMore()}>
+                                이어 재기 (+{SEAT_CAP})
+                            </button>
+                        )}
+                        <span className="grow" />
+                        <span className="lw-csv-status">{fileName ? `${fileName} · ` : ''}{status}</span>
+                        <button type="button" className="lw-csv-ghost" disabled={busy} onClick={() => fileRef.current?.click()}>다른 CSV</button>
+                    </div>
+
+                    {shown.length === 0 ? (
+                        <div className="empty">이 조건에 맞는 키워드가 없습니다. [전체] 로 바꿔 보세요.</div>
+                    ) : (
+                        <div className="lw-csv-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>키워드</th>
+                                        <th>주제</th>
+                                        <th className="r">주제 순위</th>
+                                        <th className="r">검색량</th>
+                                        <th className="r">문서수</th>
+                                        <th>자리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {shown.map((row) => {
+                                        const seat = seatFromFacing(row.facing);
+                                        return (
+                                            <tr key={`${row.category}-${row.keyword}`}>
+                                                <td><b>{row.keyword}</b></td>
+                                                <td style={{ opacity: .7 }}>{row.category}</td>
+                                                <td className="r" style={{ opacity: .7 }}>
+                                                    {row.rank || '—'}
+                                                    {row.change !== null && row.change > 0 ? <span className="up"> ▲{row.change}</span> : null}
+                                                </td>
+                                                <td className="r">{num(row.searchVolume)}</td>
+                                                <td className="r">{num(row.documentCount)}</td>
+                                                <td>
+                                                    <span className={`seat ${SEAT_CLASS[seat]}`}>{seat}</span>
+                                                    {row.facing !== null && <span style={{ opacity: .5, fontSize: 11.5 }}> · 정면 {row.facing}</span>}
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+                </>
             )}
         </section>
     );

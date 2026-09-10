@@ -48,6 +48,8 @@ type BoardJoinRow = {
 
 function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
     const [keyword, setKeyword] = useState(initialKeyword);
+    /* 서브탭 — 키워드 하나 / 트렌드 CSV 여러 개(사장님 2026-09-10). */
+    const [mode, setMode] = useState<'one' | 'csv'>('one');
     /** 방금 복사한 키워드 — 결과 헤더의 복사 버튼이 잠깐 "복사됨"으로 바뀐다. */
     const [copied, setCopied] = useState('');
     const [result, setResult] = useState<KeywordAnalysis | null>(null);
@@ -406,10 +408,25 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
         <>
             <TabIntro
                 title="키워드 분석"
-                desc="검색량과 문서수를 실제로 조회해 보여 줍니다. 점수나 예상 유입 같은 추정값은 표시하지 않습니다."
+                desc={mode === 'one'
+                    ? '검색량과 문서수를 실제로 조회해 보여 줍니다. 점수나 예상 유입 같은 추정값은 표시하지 않습니다.'
+                    : '네이버가 알려 준 내 유입 검색어를 한 번에 재서, 지금 1페이지에 자리가 남은 것만 골라 냅니다.'}
                 source="네이버 검색광고 · 네이버 블로그/쇼핑 검색 API"
             />
 
+            {/* 서브탭(2026-09-10, 사장님 "트렌드 CSV 들이기는 서브탭을 따로 만들고").
+                한 개를 파고드는 일과 수백 개를 한 번에 거르는 일은 손이 다르다 — 화면을 나눈다. */}
+            <div className="lw-segment lw-segment-wrap" role="tablist" aria-label="분석 방식">
+                <button type="button" role="tab" aria-selected={mode === 'one'} className={mode === 'one' ? 'on' : ''} onClick={() => setMode('one')}>
+                    키워드 하나
+                </button>
+                <button type="button" role="tab" aria-selected={mode === 'csv'} className={mode === 'csv' ? 'on' : ''} onClick={() => setMode('csv')}>
+                    트렌드 CSV 여러 개
+                </button>
+            </div>
+
+            {mode === 'csv' ? <TrendCsvPanel /> : (
+            <>
             <form
                 className="lw-search"
                 onSubmit={(event) => { event.preventDefault(); run(keyword); }}
@@ -846,9 +863,8 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                 <div className="lw-note">키워드를 입력하면 검색량·문서수를 실제로 조회합니다.</div>
             )}
 
-            {/* 트렌드 CSV 들이기 — 한 개가 아니라 여러 개를 한 번에 재는 입구.
-                분석기가 이미 "검색량·문서수·정면 글을 재라"는 판이라 여기에 둔다(사장님 2026-09-10). */}
-            <TrendCsvPanel />
+            </>
+            )}
         </>
     );
 }
