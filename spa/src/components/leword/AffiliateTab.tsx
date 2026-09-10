@@ -213,14 +213,37 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const collectedLabel = freshness.collectedAt && Number.isFinite(Date.parse(freshness.collectedAt))
         ? new Date(freshness.collectedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
         : '';
+    /*
+     * 얼마나 묵었는지 밝힌다(2026-09-10, 사장님 "제휴 황금키워드도 마찬가지인데 …
+     * 전혀 성과날 것 같은 느낌이 안 드네요").
+     * 이 판은 로그인 세션이 필요해 깃허브에서 못 돈다 — 사장님 PC 에서
+     * `node scripts/affiliate-refresh.js --publish` 를 돌려야 갱신된다.
+     * 그러니 화면이 며칠 된 것인지 말해 주지 않으면, 낡은 표를 새것으로 알고 쓰게 된다.
+     */
+    const collectedAgeDays = freshness.collectedAt && Number.isFinite(Date.parse(freshness.collectedAt))
+        ? Math.floor((Date.now() - Date.parse(freshness.collectedAt)) / 86_400_000)
+        : null;
+    const staleNote = collectedAgeDays === null
+        ? '수집 시각 미상'
+        : collectedAgeDays <= 0
+            ? `${collectedLabel} 수집 · 오늘 것`
+            : `${collectedLabel} 수집 · ${collectedAgeDays}일 지남`;
 
     return (
         <>
             <TabIntro
                 title="제휴 황금키워드"
                 desc="쿠팡은 실용 기능·사용 장면에서 출발하는 상품 발견과 검색 유입 공략을 구분합니다. 검색량이 적다고 상품 자체를 제외하지 않습니다. 다른 제휴 플랫폼은 동일 검색어의 수요·경쟁 근거를 연결합니다. 미확인 성능이나 수익을 보장하지 않습니다."
-                source="쿠팡 파트너스 베스트셀러·골드박스 · 네이버 검색광고 · 블로그 검색 API"
+                source={`쿠팡 파트너스 베스트셀러·골드박스 · 네이버 검색광고 · 블로그 검색 API · ${staleNote}`}
             />
+
+            {collectedAgeDays !== null && collectedAgeDays >= 2 && (
+                <div className="lw-note">
+                    <strong>이 표는 {collectedAgeDays}일 전에 모은 것입니다.</strong>{' '}
+                    제휴 채집은 로그인이 필요해 자동으로 돌지 않습니다 — 상품·가격·기획전이 이미 바뀌었을 수 있으니
+                    쓰기 전에 해당 플랫폼에서 한 번 확인하세요.
+                </div>
+            )}
 
             <div className="lw-segment lw-segment-wrap" role="tablist" aria-label="제휴 플랫폼">
                 {AFFILIATE_LANES.map((item) => (
