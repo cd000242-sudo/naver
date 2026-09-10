@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-10T09:32:00.446Z",
+  "publishedAt": "2026-09-10T14:58:45.810Z",
   "generator": "issue-niche-board",
   "schedule": "매일 07·13·19시(KST) 갱신",
   "measured": {
-    "issues": 17,
+    "issues": 18,
     "candidates": 240,
-    "niche": 0,
-    "preemption": 12,
+    "niche": 1,
+    "preemption": 18,
     "pending": 0
   },
   "freeSample": {
@@ -14,6 +14,139 @@
     "keywords": []
   },
   "rows": [
+    {
+      "keyword": "KAIST 문지캠퍼스",
+      "issue": "KAIST",
+      "topic": "KAIST",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "생태안보미래포럼 보고 온 후기",
+          "카이스트 재학생 사이트 모음 (Useful Websites for KAISTian)",
+          "KRISO, 미래 해양 무인체계 발전 힘 모은다... 해군·ADD와 업무협약 체결",
+          "카이스트",
+          "세계 무대에서 경쟁하는 학생들은 다릅니다… 글로벌 대학 TOP 50",
+          "서울, 경기 및 6대광역시 대학교 목록,바로가기",
+          "[코리아이글뉴스 제휴]해군, AI 무인전력 ‘Navy Sea GHOST’ 속도낸다…ADD·KRISO와 공동개발",
+          "2027 KAIST IP영재기업인교육원 신입생 모집 선발 설명회 신청 방법 선발 전형일정 총정리",
+          "2026 과학기술전문사관 선발",
+          "IP영재기업인교육원 신입생 선발(18기)"
+        ],
+        "measuredAt": "2026-09-10T14:52:38.576Z"
+      },
+      "documentCount": 1277,
+      "documentCountMeasured": true,
+      "searchVolume": 800,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.1450806199618044,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 800",
+        "문서수 1,277",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 800 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "KAIST가 뇌파로 AI 오류를 수정하는 기술과 하나의 칩처럼 움직이는 데이터센터 구조를 개발했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "KAIST 문지캠퍼스 위치·주소와 본원 오가는 셔틀 안내",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "KAIST 문지캠퍼스 처음 찾아가면 다들 여기서 길 헷갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": {
+        "series": [
+          56,
+          69,
+          29,
+          42,
+          40,
+          60,
+          49,
+          60,
+          58,
+          51,
+          44,
+          42,
+          58,
+          62,
+          49,
+          49,
+          64,
+          62,
+          51,
+          51,
+          67,
+          76,
+          49,
+          62,
+          56,
+          71,
+          76,
+          100,
+          44
+        ],
+        "label": "🐢 연금형",
+        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드"
+      },
+      "kinCount": 26,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    },
     {
       "keyword": "에코프로 방문신청",
       "issue": "에코프로",
@@ -205,7 +338,7 @@
         }
       ],
       "whySearch": {
-        "text": "수노, 워너뮤직·BMG와 라이선스 기반 AI 음악모델 v6 출시",
+        "text": "수노가 워너뮤직·BMG와 손잡고 라이선스 기반 AI 음악모델 v6를 출시했다",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "거래",
@@ -213,23 +346,18 @@
       "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
       "titles": {
         "seo": {
-          "text": "수노 무료 갯수 하루 크레딧 제한과 유료 요금제 차이",
+          "text": "수노 무료 갯수 요금제별 크레딧과 상업적 이용 조건",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "수노 무료 갯수 다 떨어지고 나서야 요금제를 다시 들여다보게 되더라고요",
+          "text": "수노 무료 갯수만 보고 시작했다가 유료 요금제 앞에서 멈칫했어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "subKeywords": [
         {
-          "keyword": "수노 사용법",
-          "searchVolume": 980,
-          "frame": "howto"
-        },
-        {
           "keyword": "수노 저작권",
           "searchVolume": 690,
           "frame": "generic"
@@ -238,49 +366,42 @@
           "keyword": "수노 요금제",
           "searchVolume": 630,
           "frame": "generic"
+        },
+        {
+          "keyword": "수노 노래 만들기",
+          "searchVolume": 60,
+          "frame": "howto"
         }
       ],
       "keywordPool": [
         {
-          "keyword": "수노 사용법",
-          "searchVolume": 980,
-          "documentCount": 5384,
-          "source": "ai-verified"
-        },
-        {
           "keyword": "수노 저작권",
           "searchVolume": 690,
-          "documentCount": 3071,
+          "documentCount": 3074,
           "source": "ai-verified"
         },
         {
           "keyword": "수노 요금제",
           "searchVolume": 630,
-          "documentCount": 1385,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "수노 다운로드",
-          "searchVolume": 280,
-          "documentCount": 2019,
+          "documentCount": 1387,
           "source": "ai-verified"
         },
         {
           "keyword": "수노 노래 만들기",
           "searchVolume": 60,
-          "documentCount": 9173,
+          "documentCount": 9179,
           "source": "ai-verified"
         },
         {
-          "keyword": "수노 v6",
-          "searchVolume": 30,
-          "documentCount": 43,
+          "keyword": "수노 한국어",
+          "searchVolume": 40,
+          "documentCount": 2287,
           "source": "ai-verified"
         },
         {
           "keyword": "수노 무료 크레딧",
           "searchVolume": 10,
-          "documentCount": 1093,
+          "documentCount": 1095,
           "source": "ai-verified"
         }
       ],
@@ -288,7 +409,184 @@
       "kinCount": 1,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "텔레픽스 연봉",
+      "issue": "텔레픽스",
+      "topic": "텔레픽스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 61,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 61",
+        "선점 후보 — 경쟁 문서 61건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텔레픽스가 구글 딥마인드 '지구를 위한 AI' 프로그램에 국내 유일로 선정됐다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "텔레픽스 연봉 초봉부터 복지·채용조건까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "텔레픽스 연봉 보려다 채용 공고 조건까지 하나하나 뜯어보게 됐네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "텔레픽스 채용",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "텔레픽스 채용",
+          "searchVolume": 30,
+          "documentCount": 178,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "텔레픽스 맹그로브",
+      "issue": "텔레픽스",
+      "topic": "텔레픽스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 4,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 4",
+        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텔레픽스가 구글 딥마인드 '지구를 위한 AI' 프로그램에 국내 유일로 선정됐다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "텔레픽스 맹그로브, 구글 딥마인드가 국내 유일로 뽑은 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "텔레픽스 맹그로브 잡는다길래 상장 앞둔 회사인가 싶어 들여다봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "텔레픽스 상장",
+          "searchVolume": 260,
+          "frame": "generic"
+        },
+        {
+          "keyword": "텔레픽스 주가",
+          "searchVolume": 30,
+          "frame": "generic"
+        },
+        {
+          "keyword": "텔레픽스 채용",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "텔레픽스 상장",
+          "searchVolume": 260,
+          "documentCount": 1195,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "텔레픽스 주가",
+          "searchVolume": 30,
+          "documentCount": 940,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "텔레픽스 채용",
+          "searchVolume": 30,
+          "documentCount": 178,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -331,7 +629,7 @@
         }
       ],
       "whySearch": {
-        "text": "롯데이노베이트 칼리버스, 롯데자이언츠 가상 스타일링샵 출시",
+        "text": "롯데이노베이트 칼리버스가 롯데자이언츠 가상 스타일링샵을 AI·3D로 출시했다",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -339,12 +637,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "칼리버스 김동규 대표, AI 3D로 만든 롯데자이언츠 가상매장",
+          "text": "칼리버스 김동규, 롯데자이언츠 가상 스타일링샵 3D 구현 정체",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "칼리버스 김동규 대표가 롯데자이언츠 유니폼을 아바타에 입혀봤더니",
+          "text": "칼리버스 김동규 검색하다 롯데자이언츠 아바타에 유니폼 입혀봤어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -353,6 +651,543 @@
         {
           "keyword": "칼리버스 대표",
           "searchVolume": 50,
+          "frame": "generic"
+        },
+        {
+          "keyword": "롯데 칼리버스",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "칼리버스 대표",
+          "searchVolume": 50,
+          "documentCount": 3331,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "롯데 칼리버스",
+          "searchVolume": 20,
+          "documentCount": 2325,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "텔레픽스 채용",
+      "issue": "텔레픽스",
+      "topic": "텔레픽스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 178,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 178",
+        "선점 후보 — 경쟁 문서 178건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텔레픽스가 구글 딥마인드 '지구를 위한 AI' 프로그램에 국내 유일로 선정됐다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "텔레픽스 채용 연봉·자격요건과 구글 딥마인드 선정 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "텔레픽스 채용 보다가 연봉 얘기에 스크롤을 멈췄어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "텔레픽스 연봉",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "텔레픽스 연봉",
+          "searchVolume": 20,
+          "documentCount": 61,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "텔레픽스 잡플래닛",
+      "issue": "텔레픽스",
+      "topic": "텔레픽스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 14,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 14",
+        "선점 후보 — 경쟁 문서 14건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텔레픽스가 구글 딥마인드 '지구를 위한 AI' 프로그램에 국내 유일로 선정됐다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "텔레픽스 잡플래닛 연봉·복지 리뷰와 구글 딥마인드 선정 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "텔레픽스 잡플래닛 연봉 보러 갔다 구글 딥마인드 선정 소식에 다시 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "텔레픽스 채용",
+          "searchVolume": 30,
+          "frame": "generic"
+        },
+        {
+          "keyword": "텔레픽스 연봉",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "텔레픽스 채용",
+          "searchVolume": 30,
+          "documentCount": 178,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "텔레픽스 연봉",
+          "searchVolume": 20,
+          "documentCount": 61,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "칼리버스 잡플래닛",
+      "issue": "칼리버스",
+      "topic": "칼리버스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 16,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 16",
+        "선점 후보 — 경쟁 문서 16건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "롯데이노베이트 칼리버스가 롯데자이언츠 가상 스타일링샵을 AI·3D로 출시했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "칼리버스 잡플래닛 연봉과 면접후기 실제 평점 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "칼리버스 잡플래닛 연봉 보러 갔다가 롯데이노베이트 칼리버스 후기에서 멈췄어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "롯데이노베이트 칼리버스",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "롯데이노베이트 칼리버스",
+          "searchVolume": 10,
+          "documentCount": 504,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "칼리버스 롯데자이언츠",
+      "issue": "칼리버스",
+      "topic": "칼리버스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 23,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 23",
+        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "롯데이노베이트 칼리버스가 롯데자이언츠 가상 스타일링샵을 AI·3D로 출시했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "칼리버스 롯데자이언츠 가상 스타일링샵 오픈, 굿즈 입혀보기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "칼리버스 롯데자이언츠 굿즈 사러 갔다가 유니폼 앞에서 한참 서 있었네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "롯데자이언츠 굿즈",
+          "searchVolume": 1200,
+          "frame": "generic"
+        },
+        {
+          "keyword": "칼리버스",
+          "searchVolume": 780,
+          "frame": "generic"
+        },
+        {
+          "keyword": "롯데이노베이트 칼리버스",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "롯데자이언츠 굿즈",
+          "searchVolume": 1200,
+          "documentCount": 12829,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "칼리버스",
+          "searchVolume": 780,
+          "documentCount": 15664,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "롯데이노베이트 칼리버스",
+          "searchVolume": 10,
+          "documentCount": 504,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "텔레픽스 블라인드",
+      "issue": "텔레픽스",
+      "topic": "텔레픽스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 30,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 30",
+        "선점 후보 — 경쟁 문서 30건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텔레픽스가 구글 딥마인드 '지구를 위한 AI' 프로그램에 국내 유일로 선정됐다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "텔레픽스 블라인드 평판, 구글 딥마인드 선정 회사 연봉·채용 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "텔레픽스 블라인드 구경하다 텔레픽스 연봉 얘기에 스크롤을 멈췄어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "텔레픽스 상장",
+          "searchVolume": 260,
+          "frame": "generic"
+        },
+        {
+          "keyword": "텔레픽스 채용",
+          "searchVolume": 30,
+          "frame": "generic"
+        },
+        {
+          "keyword": "텔레픽스 연봉",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "텔레픽스 상장",
+          "searchVolume": 260,
+          "documentCount": 1195,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "텔레픽스 채용",
+          "searchVolume": 30,
+          "documentCount": 178,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "텔레픽스 연봉",
+          "searchVolume": 20,
+          "documentCount": 61,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "칼리버스 블라인드",
+      "issue": "칼리버스",
+      "topic": "칼리버스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 111,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 111",
+        "선점 후보 — 경쟁 문서 111건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "롯데이노베이트 칼리버스가 롯데자이언츠 가상 스타일링샵을 AI·3D로 출시했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "칼리버스 블라인드 연봉·채용 평판, 롯데이노베이트 후기까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "칼리버스 블라인드 글 보다가 롯데 칼리버스 앱 켜보니 이게 좀 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "롯데 칼리버스",
+          "searchVolume": 20,
           "frame": "generic"
         },
         {
@@ -368,9 +1203,9 @@
       ],
       "keywordPool": [
         {
-          "keyword": "칼리버스 대표",
-          "searchVolume": 50,
-          "documentCount": 3331,
+          "keyword": "롯데 칼리버스",
+          "searchVolume": 20,
+          "documentCount": 2325,
           "source": "ai-verified"
         },
         {
@@ -381,10 +1216,698 @@
         }
       ],
       "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "텔레픽스 구글 딥마인드",
+      "issue": "텔레픽스",
+      "topic": "텔레픽스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 104,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 104",
+        "선점 후보 — 경쟁 문서 104건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텔레픽스가 구글 딥마인드 '지구를 위한 AI' 프로그램에 국내 유일로 선정됐다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이강철 감독 600승",
+      "issue": "이강철 감독 600승",
+      "topic": "이강철 감독 600승",
+      "lane": "realtime",
+      "issueType": "entertainment",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 147,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 147",
+        "선점 후보 — 경쟁 문서 147건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "KT가 롯데를 완파하며 이강철 감독이 통산 600승을 달성했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이강철 감독 600승 KBO 통산 13번째, 오직 KT에서만 채운 기록",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이강철 감독 600승 찾다가 나이랑 연봉까지 뒤져봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이강철 감독 프로필",
+          "searchVolume": 890,
+          "frame": "generic"
+        },
+        {
+          "keyword": "이강철 감독 나이",
+          "searchVolume": 50,
+          "frame": "generic"
+        },
+        {
+          "keyword": "이강철 감독 연봉",
+          "searchVolume": 50,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이강철 감독 프로필",
+          "searchVolume": 890,
+          "documentCount": 406,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이강철 감독 나이",
+          "searchVolume": 50,
+          "documentCount": 2099,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이강철 감독 연봉",
+          "searchVolume": 50,
+          "documentCount": 2037,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "이강철 감독 계약",
+          "searchVolume": 20,
+          "documentCount": 3889,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "kaist logo",
+      "issue": "KAIST",
+      "topic": "KAIST",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 217,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 217",
+        "선점 후보 — 경쟁 문서 217건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "KAIST가 뇌파로 AI 오류를 수정하는 기술과 하나의 칩처럼 움직이는 데이터센터 구조를 개발했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "kaist logo PNG 벡터 다운로드와 CI 규격 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "kaist logo png로 받았는데 발표자료에 넣으니 화질이 영 아니더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 5,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "칼리버스 가상매장",
+      "issue": "칼리버스",
+      "topic": "칼리버스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 234,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 234",
+        "선점 후보 — 경쟁 문서 234건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "롯데이노베이트 칼리버스가 롯데자이언츠 가상 스타일링샵을 AI·3D로 출시했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "칼리버스 가상매장 롯데자이언츠 스타일링샵 이용법",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "칼리버스 가상매장 들어가봤더니 아바타에 롯데자이언츠 유니폼까지 입혀지네요",
+          "frame": "ai",
+          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "롯데이노베이트 칼리버스",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "칼리버스 앱",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "롯데이노베이트 칼리버스",
+          "searchVolume": 10,
+          "documentCount": 504,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "텔레픽스 뜻",
+      "issue": "텔레픽스",
+      "topic": "텔레픽스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 285,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 285",
+        "선점 후보 — 경쟁 문서 285건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텔레픽스가 구글 딥마인드 '지구를 위한 AI' 프로그램에 국내 유일로 선정됐다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": {
+        "seo": {
+          "text": "텔레픽스 뜻, 구글 딥마인드 선정 위성 AI 기업 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "텔레픽스 뜻 찾다가 상장 얘기가 나오길래 주가 창을 계속 새로고침했네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "텔레픽스 상장",
+          "searchVolume": 260,
+          "frame": "generic"
+        },
+        {
+          "keyword": "텔레픽스 주가",
+          "searchVolume": 30,
+          "frame": "generic"
+        },
+        {
+          "keyword": "텔레픽스 채용",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "텔레픽스 상장",
+          "searchVolume": 260,
+          "documentCount": 1195,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "텔레픽스 주가",
+          "searchVolume": 30,
+          "documentCount": 940,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "텔레픽스 채용",
+          "searchVolume": 30,
+          "documentCount": 178,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "텔레픽스 연봉",
+          "searchVolume": 20,
+          "documentCount": 61,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": {
+        "verdict": "mixed",
+        "points": [
+          {
+            "text": "'텔레픽스 뜻'만 그대로 받으면 '위성영상 기업 이름'이라는 한 줄로 끝난다 — 검색자는 그 한 줄 얻고 바로 나간다. 정의형 검색 단독으로는 체류도 클릭도 안 나온다."
+          },
+          {
+            "text": "그런데 같이 뜨는 검색어가 '텔레픽스 상장'(월 260)으로 압도적이다. '뜻'을 친 사람 상당수는 상장 뉴스를 접하고 '이 회사 뭐야'를 확인하러 온 예비 투자자다 — 순수 단어 궁금증이 아니라 투자 판단의 앞단계다."
+          },
+          {
+            "text": "'텔레픽스 주가'(월 30), '텔레픽스 상장'(월 260)이 붙어 있어 페이지 문맥이 금융/공모주로 잡힌다. 증권계좌·공모주 청약·주식앱류 광고가 뜰 자리다. 이런 광고는 클릭 단가가 낮지 않고, 상장 직전 구간이면 클릭 상태의 사용자가 온다."
+          },
+          {
+            "text": "반대로 '텔레픽스 채용'(월 30), '텔레픽스 연봉'(월 20)은 구직 문맥이라 광고 궁합이 다르고 볼륨도 작다 — 이쪽으로 각을 틀면 단어 정의 + 취업 정보라 클릭 상태가 아니다."
+          }
+        ],
+        "angle": "'텔레픽스 뜻'을 미끼로 열되, 곧장 '텔레픽스 상장'(월 260) 문맥으로 흡수: 회사가 뭐 하는 곳인지(위성영상) → 왜 지금 검색되는지(상장 이슈) → 주가·공모 일정·사업 근거를 읽어야 풀리게 구성. 채용/연봉은 하단 보조 문단으로만."
+      },
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "텔레픽스 주관사",
+      "issue": "텔레픽스",
+      "topic": "텔레픽스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 277,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 277",
+        "선점 후보 — 경쟁 문서 277건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텔레픽스가 구글 딥마인드 '지구를 위한 AI' 프로그램에 국내 유일로 선정됐다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "텔레픽스 주관사 확인, 상장 일정과 공모주 청약 조건",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "텔레픽스 주관사 찾다가 상장 청약에서 생각보다 많이 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "텔레픽스 상장",
+          "searchVolume": 260,
+          "frame": "generic"
+        },
+        {
+          "keyword": "텔레픽스 주가",
+          "searchVolume": 30,
+          "frame": "generic"
+        },
+        {
+          "keyword": "텔레픽스 IPO",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "텔레픽스 상장",
+          "searchVolume": 260,
+          "documentCount": 1195,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "텔레픽스 주가",
+          "searchVolume": 30,
+          "documentCount": 940,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "텔레픽스 IPO",
+          "searchVolume": 20,
+          "documentCount": 396,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
       "kinCount": 1,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "칼리버스 앱 출시",
+      "issue": "칼리버스",
+      "topic": "칼리버스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "이용 앱 다운 관심",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 299,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 299",
+        "선점 후보 — 경쟁 문서 299건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 이용 앱 다운 관심"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "롯데이노베이트 칼리버스가 롯데자이언츠 가상 스타일링샵을 AI·3D로 출시했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "칼리버스 앱 출시, 롯데자이언츠 가상 스타일링샵 이용법",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "칼리버스 앱 출시 소식에 롯데자이언츠 굿즈 아바타에 입혀봤더니 생각보다 다르네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "칼리버스 앱",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "칼리버스 굿즈",
+      "issue": "칼리버스",
+      "topic": "칼리버스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 298,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 298",
+        "선점 후보 — 경쟁 문서 298건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "롯데이노베이트 칼리버스가 롯데자이언츠 가상 스타일링샵을 AI·3D로 출시했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "칼리버스 굿즈 롯데자이언츠 유니폼 아바타에 입혀보기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "칼리버스 굿즈 롯데자이언츠 유니폼 아바타에 직접 입혀봤더니 의외로",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "롯데자이언츠 굿즈",
+          "searchVolume": 1200,
+          "frame": "generic"
+        },
+        {
+          "keyword": "롯데이노베이트 칼리버스",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "칼리버스 앱",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "롯데자이언츠 굿즈",
+          "searchVolume": 1200,
+          "documentCount": 12829,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "롯데이노베이트 칼리버스",
+          "searchVolume": 10,
+          "documentCount": 504,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-10T14:51:39.119Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -483,189 +2006,8 @@
       "monetize": null,
       "measuredAt": "2026-09-10T09:25:49.561Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "칼리버스 잡플래닛",
-      "issue": "칼리버스",
-      "topic": "칼리버스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 16,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 16",
-        "선점 후보 — 경쟁 문서 16건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "롯데이노베이트 칼리버스, 롯데자이언츠 가상 스타일링샵 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "칼리버스 잡플래닛 연봉과 면접 후기, 평점까지 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "칼리버스 잡플래닛 평점 보다가 롯데이노베이트로 검색해봤더니 좀 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "documentCount": 504,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "칼리버스 롯데자이언츠",
-      "issue": "칼리버스",
-      "topic": "칼리버스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 23,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 23",
-        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "롯데이노베이트 칼리버스, 롯데자이언츠 가상 스타일링샵 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "칼리버스 롯데자이언츠 가상 스타일링샵 아바타 유니폼 입혀보기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "칼리버스 롯데자이언츠 가상 스타일링샵에서 아바타에 굿즈 입혀보니 의외네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "롯데자이언츠 유니폼",
-          "searchVolume": 8250,
-          "frame": "generic"
-        },
-        {
-          "keyword": "롯데자이언츠 굿즈",
-          "searchVolume": 1200,
-          "frame": "generic"
-        },
-        {
-          "keyword": "칼리버스",
-          "searchVolume": 780,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "롯데자이언츠 유니폼",
-          "searchVolume": 8250,
-          "documentCount": 51928,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "롯데자이언츠 굿즈",
-          "searchVolume": 1200,
-          "documentCount": 12824,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "칼리버스",
-          "searchVolume": 780,
-          "documentCount": 15659,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "documentCount": 504,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "김성경 교수 서강대",
@@ -748,7 +2090,8 @@
       "monetize": null,
       "measuredAt": "2026-09-10T09:25:49.561Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "kaist 박지민",
@@ -814,86 +2157,8 @@
       "monetize": null,
       "measuredAt": "2026-09-10T09:25:49.561Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "칼리버스 블라인드",
-      "issue": "칼리버스",
-      "topic": "칼리버스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 111,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 111",
-        "선점 후보 — 경쟁 문서 111건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "롯데이노베이트 칼리버스, 롯데자이언츠 가상 스타일링샵 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "칼리버스 블라인드 연봉과 채용 후기 롯데이노베이트 실제 평판",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "칼리버스 블라인드 뒤져보다 롯데이노베이트 얘기까지 나와서 계속 읽었어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "롯데이노베이트 블라인드",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "롯데이노베이트 블라인드",
-          "searchVolume": 20,
-          "documentCount": 53,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "칼리버스 3D 매장",
@@ -984,195 +2249,8 @@
       "monetize": null,
       "measuredAt": "2026-09-10T09:25:49.561Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "칼리버스 가상매장",
-      "issue": "칼리버스",
-      "topic": "칼리버스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 234,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 234",
-        "선점 후보 — 경쟁 문서 234건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "롯데이노베이트 칼리버스, 롯데자이언츠 가상 스타일링샵 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "칼리버스 가상매장 롯데자이언츠 스타일링샵 AI 3D 이용법",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "칼리버스 가상매장에서 롯데자이언츠 유니폼 아바타에 입혀보니 생각보다",
-          "frame": "ai",
-          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "칼리버스",
-          "searchVolume": 780,
-          "frame": "generic"
-        },
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "frame": "generic"
-        },
-        {
-          "keyword": "칼리버스 앱",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "칼리버스",
-          "searchVolume": 780,
-          "documentCount": 15659,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "documentCount": 504,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "칼리버스 굿즈",
-      "issue": "칼리버스",
-      "topic": "칼리버스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 298,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 298",
-        "선점 후보 — 경쟁 문서 298건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "롯데이노베이트 칼리버스, 롯데자이언츠 가상 스타일링샵 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "칼리버스 굿즈 롯데자이언츠 가상 스타일링샵 이용법",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "칼리버스 굿즈 롯데자이언츠 유니폼 아바타에 입혀봤더니 이렇더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "칼리버스",
-          "searchVolume": 780,
-          "frame": "generic"
-        },
-        {
-          "keyword": "롯데 칼리버스",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "칼리버스",
-          "searchVolume": 780,
-          "documentCount": 15659,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "롯데 칼리버스",
-          "searchVolume": 20,
-          "documentCount": 2325,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "documentCount": 504,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "칼리버스 AI 매장",
@@ -1252,7 +2330,8 @@
       "monetize": null,
       "measuredAt": "2026-09-10T09:25:49.561Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "파인더스AI 뚜쥬루",
@@ -2667,186 +3746,109 @@
       "carried": true
     }
   ],
-  "rejectedCount": 1,
+  "rejectedCount": 0,
   "issues": [
     {
-      "issue": "장윤정 모친 사기",
+      "issue": "승리",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
-      "isHot": false,
-      "why": "딸 장윤정 이름 앞세워 투자사기, 1심 징역 10개월 선고",
-      "headlines": [
-        {
-          "title": "'가수 딸 언급하며 사기' 장윤정 모친, 1심서 징역 10개월 선고",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-10T05:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016302740?sid=102"
-        },
-        {
-          "title": "‘딸 이름 앞세워 투자사기’ 장윤정 모친, 1심서 징역 10개월",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-10T05:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005733300?sid=102"
-        },
-        {
-          "title": "'3000만원 투자 사기' 장윤정 모친 1심 징역 10개월",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-09-10T06:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000532659?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "기자회견 마친 용혜인",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
       "isHot": true,
-      "why": "성평등가족부 장관 후보 용혜인, 의원 겸직 논란에 34분 반박 회견",
+      "why": "빅뱅 출신 승리가 특수폭행 혐의로 강남서에 피소됐다",
       "headlines": [
         {
-          "title": "용혜인 \"장관됐을 때 역할 못한다고 단정말라\"…34분 반박 회견",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-10T08:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016303366?sid=100"
-        },
-        {
-          "title": "정면돌파 나선 용혜인 “국회의원·국무위원 겸직은 법률이 허용” [전...",
-          "press": "womennews.co.kr",
-          "publishedAt": "2026-09-10T07:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/310/0000139917?sid=102"
-        },
-        {
-          "title": "[전문] 용혜인, 논란 정면돌파...\"억측·악선동 난무, 이성 찾아달라\"",
-          "press": "joseilbo.com",
-          "publishedAt": "2026-09-10T07:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/123/0002389964?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "기자회견",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "허장 재정경제부 차관",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "재정경제부 차관 허장, 휴머노이드산업 간담회서 지원 약속",
-      "headlines": [
-        {
-          "title": "재경차관, 휴머노이드산업 간담회…\"현장 목소리 바탕으로 지원\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-10T06:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016302935?sid=101"
-        },
-        {
-          "title": "기재차관 \"로봇 핵심부품은 미래 성장동력…예산으로 뒷받침\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-10T06:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014182732?sid=101"
-        },
-        {
-          "title": "재경차관 \"미래 핵심부품, 새 성장동력으로\"…로봇기업 현장 간담회",
+          "title": "[단독] 빅뱅 출신 승리, 30대 남성 특수폭행 혐의로 피소",
           "press": "news1.kr",
-          "publishedAt": "2026-09-10T06:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009163458?sid=101"
+          "publishedAt": "2026-09-10T09:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009163859?sid=102"
+        },
+        {
+          "title": "그룹 빅뱅 출신 승리, 특수폭행 혐의로 고소당해…강남서 접수",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-10T09:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016303551?sid=102"
+        },
+        {
+          "title": "그룹 빅뱅 출신 승리, 특수폭행 혐의로 고소당해",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-10T10:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001387391?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "허장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "설경구",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "설경구 주연 '들쥐' 글로벌 1위, 가압류 트리마제 59억 낙찰",
-      "headlines": [
-        {
-          "title": "설경구가 가압류한 트리마제…두 번 유찰 끝에 59억 낙찰",
-          "press": "ichannela.com",
-          "publishedAt": "2026-09-10T04:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/449/0000360161?sid=102"
-        },
-        {
-          "title": "류준열·설경구 '들쥐', 공개 2주 차에 글로벌 1위",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-09T02:01:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014179048"
-        },
-        {
-          "title": "설경구·김재중이 가압류한 트리마제…두 번 유찰 끝 59억 낙찰",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-10T03:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009162748?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "설경구 송윤아",
+          "keyword": "승리 근황",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "설경구 나무위키",
+          "keyword": "빅뱅 승리",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "설경구 와이프",
+          "keyword": "승리 나무위키",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "설경구 영화",
+          "keyword": "승리 버닝썬",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "설경구 류준열",
+          "keyword": "승리 라멘집",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "들쥐 설경구",
+          "keyword": "승리 빅뱅",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "설경구 들쥐",
+          "keyword": "승리 승",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "송윤아 설경구",
+          "keyword": "승리 감옥",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "설경구 차기작",
-          "reason": "다음 행보 관심",
+          "keyword": "승리 조사결과",
+          "reason": "피소 후 수사 진행 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "승리 구속여부",
+          "reason": "혐의 인정시 구속 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "승리 피해자",
+          "reason": "고소인 신원 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "승리 CCTV",
+          "reason": "폭행 정황 증거 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "승리 입장",
+          "reason": "본인 해명 여부",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -2855,30 +3857,72 @@
       "rowCount": 0
     },
     {
-      "issue": "한국 대미투자 합의",
+      "issue": "KB금융 챔피언십 1R",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "한국 대미투자 첫 사업, 에너지 분야 1천억달러 합의 임박",
+      "why": "서교림이 1R 공동 2위, 김민솔은 공동 67위로 부진했다",
       "headlines": [
         {
-          "title": "WSJ \"韓, 대미투자 첫사업 합의 임박…에너지 분야에 1천억달러\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-10T08:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016303313?sid=104"
-        },
-        {
-          "title": "[단독]대미투자 ‘45일 안전판’은 없었다…美 요구대로 조기 송금",
+          "title": "[골프IN화보] 전예성, KB금융 챔피언십 1R 경기 장면",
           "press": "edaily.co.kr",
-          "publishedAt": "2026-09-10T05:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006366865?sid=100"
+          "publishedAt": "2026-09-10T13:49:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/018/0006367285"
         },
         {
-          "title": "외신 \"미국은 불만, 한국은 불안\"…대미투자 1년 가까이 제자리",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-10T06:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014182714?sid=104"
+          "title": "서교림, KB금융 챔피언십 1R 공동 2위…김민솔은 공동 67위",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-10T09:50:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/001/0016303541"
+        },
+        {
+          "title": "서교림, KB금융 챔피언십 1R 공동 2위…김민솔은 공동 67위 부진",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-10T10:44:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/421/0009163914"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "kb금융",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kb금융 챔피언십",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "국제유가 100달러 돌파",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "이란전 격화로 WTI가 100달러, 브렌트유가 105달러를 돌파했다",
+      "headlines": [
+        {
+          "title": "국제유가 또 급등, WTI 100달러 돌파…브렌트유 105달러",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-10T13:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005412270?sid=101"
+        },
+        {
+          "title": "뉴욕증시, 유가 100달러·美국채금리 상승에 3일째 하락(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-09T21:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016301253?sid=104"
+        },
+        {
+          "title": "WTI도 배럴당 100달러 돌파…이란전 격화에 국제유가 '고공행진'",
+          "press": "wowtv.co.kr",
+          "publishedAt": "2026-09-10T12:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/215/0001265591?sid=104"
         }
       ],
       "concentrated": [],
@@ -2886,34 +3930,1102 @@
       "rowCount": 0
     },
     {
-      "issue": "백진희 헨리 결혼",
+      "issue": "인플루엔자 무료 예방접종",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "안산·화성·시흥시가 21일부터 독감 무료접종을 순차 실시한다",
+      "headlines": [
+        {
+          "title": "화성시 인플루엔자 무료 예방접종 21일부터 순차적 실시",
+          "press": "newspim.com",
+          "publishedAt": "2026-09-10T05:08:00.000Z",
+          "link": "https://www.newspim.com/news/view/20260910000736"
+        },
+        {
+          "title": "안산시, 21일부터 독감 무료 예방접종…대상별 순차 시행",
+          "press": "kyeonggi.com",
+          "publishedAt": "2026-09-10T00:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/666/0000122754?sid=102"
+        },
+        {
+          "title": "시흥시,인플루엔자 무료 예방접종 시작",
+          "press": "tournews21.com",
+          "publishedAt": "2026-09-09T23:32:00.000Z",
+          "link": "https://www.tournews21.com/news/articleView.html?idxno=143112"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "인플루엔자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "이강철 감독 600승",
+      "issueType": "entertainment",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "KT가 롯데를 완파하며 이강철 감독이 통산 600승을 달성했다",
+      "headlines": [
+        {
+          "title": "프로야구 kt, 이강철 감독 600승과 함께 다시 선두로(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-10T13:00:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/001/0016303665"
+        },
+        {
+          "title": "'19안타' KT, 롯데 16-3 완파하고 선두 탈환…이강철 감독 600승",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-10T13:01:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/003/0014183438"
+        },
+        {
+          "title": "KT에서만 599승… 이강철 감독, ‘한 팀 600승’까지 한 걸음",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-10T08:56:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/018/0006367168"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "이강철",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이강철 감독",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "서울 지하철 2호선",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "백진희, 예비신랑 헨리와 1월 결혼 발표…장거리 연애 끝",
+      "why": "2호선 열차에 승객 없이 피자만 실려간 사연과 5호선 화재 대응훈련이 화제다",
       "headlines": [
         {
-          "title": "‘1월 결혼’ 백진희 “♥헨리 아냐, 지인일 뿐”…예비 신랑 정체 억측...",
-          "press": "isplus.com",
-          "publishedAt": "2026-09-09T22:58:00.000Z",
-          "link": "https://m.entertain.naver.com/article/241/0003530014"
+          "title": "“2호선이 피자 뺏고 도망갔다”…지하철 승객 ‘빵’ 터진 사연",
+          "press": "donga.com",
+          "publishedAt": "2026-09-10T13:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003747266?sid=102"
         },
         {
-          "title": "백진희, 남편 이름은 헨리…장거리 연애 끝 결혼",
-          "press": "sportsseoul.com",
-          "publishedAt": "2026-09-09T00:31:00.000Z",
-          "link": "https://m.entertain.naver.com/article/468/0001265067"
+          "title": "“사람 못 탔는데 피자는 탔네?”...2호선 지하철서 벌어진 황당한 일",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-10T13:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005733643?sid=103"
         },
         {
-          "title": "백진희, ♥헨리와 1월 결혼 발표 후 연애 소신 파묘..\"장거리는 해결 가...",
-          "press": "osen.co.kr",
-          "publishedAt": "2026-09-10T06:38:00.000Z",
-          "link": "https://m.entertain.naver.com/article/109/0005604114"
+          "title": "\"2호선이 피자 뺏고 도망갔다\"…열차 안에 피자만 덩그러니",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-10T12:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014183421?sid=102"
         }
       ],
       "concentrated": [],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "미중 관세인하 협상",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "미중이 300억달러 규모 상호 관세인하를 협상하며 정상회담을 앞뒀다",
+      "headlines": [
+        {
+          "title": "中 \"美와 300억달러 상호 관세인하 협상\"",
+          "press": "fnnews.com",
+          "publishedAt": "2026-09-10T08:46:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005574121?sid=101"
+        },
+        {
+          "title": "정상회담 앞둔 미중, 300억불 관세인하 협의",
+          "press": "ajunews.com",
+          "publishedAt": "2026-09-10T09:16:00.000Z",
+          "link": "https://www.ajunews.com/view/20260910180514954"
+        },
+        {
+          "title": "300억달러씩 상호 관세 인하 논의…미중 정상회담 예정",
+          "press": "tokenpost.kr",
+          "publishedAt": "2026-09-10T13:18:00.000Z",
+          "link": "https://www.tokenpost.kr/news/international/405875"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "ECB 금리 인상",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "ECB가 중동발 물가압박에 올해 두번째로 금리를 올려 기준금리 2.65%가 됐다",
+      "headlines": [
+        {
+          "title": "ECB 올해 두번째 금리 인상…\"중동전쟁 물가 압박 계속\"(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-10T13:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016303674?sid=104"
+        },
+        {
+          "title": "중동發 인플레…ECB, 올해 두 번째 금리 인상",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-10T13:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005331144?sid=104"
+        },
+        {
+          "title": "ECB 올해 두번째 금리 인상…기준금리 연 2.65%",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-10T12:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001968418?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "대우건설",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "대우건설 정원주 회장이 호남 반도체에 100억을 기부하고 스타트업과 스마트건설에 협업한다",
+      "headlines": [
+        {
+          "title": "대우건설 정원주 회장, 호남 반도체에 100억 기부",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-10T08:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016303362?sid=105"
+        },
+        {
+          "title": "대우건설, 스타트업과 AI 스마트건설 협업",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-09-10T04:46:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000532605?sid=101"
+        },
+        {
+          "title": "대우건설, 스타트업과 스마트건설 기술 발굴…9개 혁신기술 선정",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-10T01:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009162189?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "대우건설 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 아파트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 목표주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 이강석",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 회장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 사장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "대우건설 주가",
+          "reason": "협업 호재 주가 반영",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "대우건설 수주",
+          "reason": "신규 수주 소식 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "대우건설 실적",
+          "reason": "분기 실적 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "대우건설 분양",
+          "reason": "아파트 분양 일정",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "송미령",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "송미령 장관이 CPTPP 가입과 농지 전수조사가 농민 땅을 뺏는 게 아니라고 밝혔다",
+      "headlines": [
+        {
+          "title": "송미령 “CPTPP 두려워할 일 아냐…업계 의견 충분히 들을 것”",
+          "press": "segye.com",
+          "publishedAt": "2026-09-10T10:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004158065?sid=101"
+        },
+        {
+          "title": "송미령 \"농지 전수조사 연내 마무리…농지 뺏는 것 아냐\"",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-10T09:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006367170?sid=101"
+        },
+        {
+          "title": "송미령, CPTPP 가입 “새로운 기회요인 있을 수도”",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-09-10T10:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012255018?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "송미령 장관 프로필",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송미령 남편",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송미령 아들",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송미령 장관",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송미령 재산",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송미령 장개석",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송미령 장관 고향",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송미령 장관 남편",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "송미령 논란",
+          "reason": "장동혁 반박 후속",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤트로픽",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "앤트로픽 연구원이 사표를 내며 AI가 10년내 인류를 멸망시킬 수 있다고 경고했다",
+      "headlines": [
+        {
+          "title": "“AI가 10년 내 우리 모두를 죽일 수 있다”… 앤트로픽 연구원의 섬뜩...",
+          "press": "kmib.co.kr",
+          "publishedAt": "2026-09-10T09:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/005/0001872184?sid=101"
+        },
+        {
+          "title": "앤트로픽 연구원 사퇴…초지능 경쟁에 '인류 멸종' 경고",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-09T23:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005330747?sid=101"
+        },
+        {
+          "title": "앤트로픽 연구원 사표내며 경고…\"10년내 인류 멸망시킬수도\"(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-09T15:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016301163?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "앤트로픽 상장일",
+          "reason": "IPO 시점 초관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 관련주",
+          "reason": "국내 수혜주 탐색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 오픈AI 차이",
+          "reason": "경쟁사 비교 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "에너자이",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "에너자이가 IBC 2026에서 셋톱박스 온디바이스 AI로 해외시장을 공략한다",
+      "headlines": [
+        {
+          "title": "에너자이, 'IBC 2026' 참가…셋톱박스 온디바이스 AI 시장 공략",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-10T05:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005412014?sid=101"
+        },
+        {
+          "title": "에너자이, 유럽 최대 방송박람회서 클라우드 없는 셋톱박스용 AI 공개",
+          "press": "economist.co.kr",
+          "publishedAt": "2026-09-09T23:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/243/0000102853?sid=105"
+        },
+        {
+          "title": "에너자이, 셋톱박스 온디바이스 AI로 해외 공략…IBC 2026 참가",
+          "press": "news.mtn.co.kr",
+          "publishedAt": "2026-09-10T04:56:00.000Z",
+          "link": "https://news.mtn.co.kr/news-detail/2026091013004810128"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "에너자이 상장",
+          "reason": "IPO 여부 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "에너자이 관련주",
+          "reason": "협력사 수혜 탐색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "에너자이 실적",
+          "reason": "매출 성장 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "에너자이 채용",
+          "reason": "성장기업 취업 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "수노",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "수노가 워너뮤직·BMG와 손잡고 라이선스 기반 AI 음악모델 v6를 출시했다",
+      "headlines": [
+        {
+          "title": "수노, 워너뮤직·BMG 손잡고 정식 라이선스 'v6' AI 음악 모델 출시",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-10T07:48:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215106"
+        },
+        {
+          "title": "무단 학습 논란 끝내나…수노, 라이선스 기반 AI 음악모델 v6 공개",
+          "press": "digitaltoday.co.kr",
+          "publishedAt": "2026-09-10T05:54:00.000Z",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=699645"
+        },
+        {
+          "title": "구글 리리아 3.5 제미나이 전면 탑재, 수노 패소 직후 저작권 가드레일...",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-09-04T17:14:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1157362"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "수노 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "수노 사용법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "수노 요금제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "수노 저작권",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "수노 버전 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "수노 앱",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "수노 어플",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "수노 정책",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "수노 v6 사용법",
+          "reason": "신모델 이용 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "수노 저작권 판결",
+          "reason": "패소 이후 대응 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "수노 요금제 변경",
+          "reason": "v6 구독 조건 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "구글 지도가 한국 군사시설·DMZ 위성이미지를 가리기 시작하고 성범죄 피해자 정보 노출을 사과했다",
+      "headlines": [
+        {
+          "title": "구글 지도, 韓군사시설 및 DMZ 위성이미지 가리기 시작",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-10T02:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016302127?sid=104"
+        },
+        {
+          "title": "구글 지도서 가리기 시작…\"민감지역 노출되나\" 우려도",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-10T04:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001387299?sid=104"
+        },
+        {
+          "title": "구글지도 켰더니 '뿌옇게'…DMZ·군사기지 모자이크 처리",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-10T02:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001968318?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 타임라인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글지도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "구글 노출 대응",
+          "reason": "피해자 정보 삭제 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "KAIST",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "KAIST가 뇌파로 AI 오류를 수정하는 기술과 하나의 칩처럼 움직이는 데이터센터 구조를 개발했다",
+      "headlines": [
+        {
+          "title": "경북도·KAIST·안동시 \"정밀발효 바이오·푸드테크 적극 육성\"",
+          "press": "segye.com",
+          "publishedAt": "2026-09-10T11:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004158099?sid=102"
+        },
+        {
+          "title": "경북도·KAIST·안동시 \"정밀발효 바이오·푸드테크 육성\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-10T06:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014182727?sid=102"
+        },
+        {
+          "title": "KAIST, 뇌파로 AI 오류 수정…신경 가치 정렬 기술 개발",
+          "press": "newspim.com",
+          "publishedAt": "2026-09-10T01:25:00.000Z",
+          "link": "https://www.newspim.com/news/view/20260910000439"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "kaist 약자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist 대학원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist portal",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "KAIST 경영대학",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist 입학처",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "KAIST 학과",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist mba",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "KAIST 문지캠퍼스",
+          "searchVolume": 800,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "KAIST 뇌파 상용화",
+          "reason": "기술 실용화 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KAIST 논문",
+          "reason": "연구 원문 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KAIST 기술이전",
+          "reason": "기업 적용 가능성",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KAIST 데이터센터 성능",
+          "reason": "칩 구조 효과 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "순천",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "순천에서 통학버스가 화물차를 들이받아 20명이 이송됐고 통합교육청 유치와 방산 투자협약도 추진된다",
+      "headlines": [
+        {
+          "title": "순천시, '통합교육청 동부청사' 유치 추진",
+          "press": "ysmbc.co.kr",
+          "publishedAt": "2026-09-10T12:04:00.000Z",
+          "link": "https://ysmbc.co.kr/NewsArticle/1536451"
+        },
+        {
+          "title": "순천서 통학버스가 1t 화물차 들이받아…20명 병원 이송",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-09T01:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016299297?sid=102"
+        },
+        {
+          "title": "순천시, ㈜위드피에스와 방산생태계 조성 투자협약",
+          "press": "daily.hankooki.com",
+          "publishedAt": "2026-09-10T07:08:00.000Z",
+          "link": "https://daily.hankooki.com/news/articleView.html?idxno=1404936"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "순천 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "순천 가볼만한곳",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "순천 맛집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "순천 cgv",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "순천 찹쌀떡",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "순천 kfc",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "순천 절",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "순천 힉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "순천 사고 원인",
+          "reason": "버스 추돌 경위 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "순천 부상자 상태",
+          "reason": "이송 20명 상태 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "순천 교육청 결정",
+          "reason": "유치 성사 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "순천 방산단지",
+          "reason": "투자협약 후속 사업",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "순천 통학버스 학교",
+          "reason": "사고 대상 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "칼리버스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "롯데이노베이트 칼리버스가 롯데자이언츠 가상 스타일링샵을 AI·3D로 출시했다",
+      "headlines": [
+        {
+          "title": "[ZD SW 투데이] 칼리버스, 롯데자이언츠 가상 스타일링샵 오픈 外",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-10T06:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002437005?sid=105"
+        },
+        {
+          "title": "롯데이노베이트 칼리버스, ‘롯데자이언츠 가상 스타일링샵’ 출시",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-10T01:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001191491?sid=105"
+        },
+        {
+          "title": "롯데이노 칼리버스, 롯데자이언츠 가상 스타일링샵 선봬",
+          "press": "weekly.hankooki.com",
+          "publishedAt": "2026-09-10T09:00:00.000Z",
+          "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7183596"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "칼리버스 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칼리버스 앱",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칼리버스 게임",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칼리버스 적자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칼리버스 vr",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칼리버스 디시",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칼리버스 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "칼리버스 김동규",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "칼리버스 앱 출시",
+          "reason": "이용 앱 다운 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "칼리버스 이용방법",
+          "reason": "가상샵 사용법 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "칼리버스 확대 종목",
+          "reason": "타 구단 적용 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "칼리버스 적자",
+          "reason": "수익성 개선 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "텔레픽스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "텔레픽스가 구글 딥마인드 '지구를 위한 AI' 프로그램에 국내 유일로 선정됐다",
+      "headlines": [
+        {
+          "title": "구글 딥마인드가 주목한 한국 위성AI…텔레픽스 유일 선정",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-10T02:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016302178?sid=105"
+        },
+        {
+          "title": "\"위성으로 맹그로브 모니터링\"…구글 딥마인드, '텔레픽스' 지원",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-10T06:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005412089?sid=101"
+        },
+        {
+          "title": "텔레픽스, 구글 딥마인드 ‘지구를 위한 AI’ 프로그램 국내 유일 선정",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-10T00:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001191470?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "텔레픽스 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텔레픽스 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텔레픽스 대전",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텔레픽스 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텔레픽스 상장 철회",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텔레픽스 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텔레픽스 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "텔레픽스 주관사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "텔레픽스 상장일",
+          "reason": "IPO 재개 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "텔레픽스 주관사",
+          "reason": "공모 주관사 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "텔레픽스 위성",
+          "reason": "보유 위성 사업 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "텔레픽스 투자",
+          "reason": "선정 후 투자 유치",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "텔레픽스 채용",
+          "reason": "성장기업 취업 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -2986,727 +5098,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "추석",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "농협 877억 투입 추석 한우 최대 52% 할인",
-      "headlines": [
-        {
-          "title": "추석 한우 최대 52% 할인…등심 100g에 7590원",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-10T02:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014181689?sid=101"
-        },
-        {
-          "title": "“추석 장보기 부담 덜겠네”…농협 877억 투입해 차례상 품목 ‘반값’...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-10T06:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005733366?sid=101"
-        },
-        {
-          "title": "\"한우 반값에 풀린다\" 파격 세일…정부·농협 877억 쏟는다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-10T04:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005330878?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "추석 2026",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추석 기차표 예매",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추석 민생지원금",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추석 대체공휴일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "2026 추석 기차표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추석 ktx",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "2026 추석 지원금",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추석 배송마감",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "추석 연휴 날씨",
-          "reason": "이동 전 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "홈플러스 김병주 회장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "검찰, 홈플러스 사태 MBK 김병주 회장 피의자 소환조사",
-      "headlines": [
-        {
-          "title": "[단독] 검찰, '홈플러스 사태' 김병주 오늘 피의자 소환조사...재배당 뒤...",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-09-10T07:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002405347?sid=102"
-        },
-        {
-          "title": "검찰, '홈플러스 사태' 김병주 MBK 회장 피의자 조사",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-10T08:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005330996?sid=102"
-        },
-        {
-          "title": "검찰, '홈플러스 사태' MBK 김병주 회장 소환조사 중…조만간 결론",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-10T08:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016303338?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "앤트로픽",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "앤트로픽 연구원 사퇴하며 'AI, 10년내 인류 멸망' 경고",
-      "headlines": [
-        {
-          "title": "앤트로픽 연구원 사퇴…초지능 경쟁에 '인류 멸종' 경고",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-09T23:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005330747?sid=101"
-        },
-        {
-          "title": "앤트로픽 연구원 사표내며 경고…\"10년내 인류 멸망시킬수도\"(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-09T15:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016301163?sid=104"
-        },
-        {
-          "title": "앤트로픽 연구원의 경고 \"AI, 10년 안에 인류 멸망시킬 수도\"",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-09-09T20:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004187781?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "앤트로픽 반박",
-          "reason": "회사측 입장 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "에너자이",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "에너자이, IBC 2026서 클라우드 없는 셋톱박스용 온디바이스 AI 공개",
-      "headlines": [
-        {
-          "title": "에너자이, 'IBC 2026' 참가…셋톱박스 온디바이스 AI 시장 공략",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-10T05:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005412014?sid=101"
-        },
-        {
-          "title": "에너자이, 유럽 최대 방송박람회서 클라우드 없는 셋톱박스용 AI 공개",
-          "press": "economist.co.kr",
-          "publishedAt": "2026-09-09T23:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/243/0000102853?sid=105"
-        },
-        {
-          "title": "에너자이, 셋톱박스 온디바이스 AI로 해외 공략…IBC 2026 참가",
-          "press": "news.mtn.co.kr",
-          "publishedAt": "2026-09-10T04:56:00.000Z",
-          "link": "https://news.mtn.co.kr/news-detail/2026091013004810128"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "에너자이 상장",
-          "reason": "IPO 여부 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "에너자이 수주",
-          "reason": "해외 계약 성사",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "에너자이 관련주",
-          "reason": "협력사 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "에너자이 실적",
-          "reason": "기업 성장성 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "수노",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "수노, 워너뮤직·BMG와 라이선스 기반 AI 음악모델 v6 출시",
-      "headlines": [
-        {
-          "title": "수노, 워너뮤직·BMG 손잡고 정식 라이선스 'v6' AI 음악 모델 출시",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-10T07:48:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215106"
-        },
-        {
-          "title": "무단 학습 논란 끝내나…수노, 라이선스 기반 AI 음악모델 v6 공개",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-09-10T05:54:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=699645"
-        },
-        {
-          "title": "튠코어, 수노를 ‘해적 플랫폼’ 낙인찍은 지 넉 달 만에 파트너십 맺고...",
-          "press": "wikitree.co.kr",
-          "publishedAt": "2026-09-09T04:12:00.000Z",
-          "link": "https://www.wikitree.co.kr/articles/1158339"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "수노 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "수노 사용법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "수노 요금제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "수노 저작권",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "수노 버전 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "수노 앱",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "수노 어플",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "수노 정책",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "수노 v6 사용법",
-          "reason": "신모델 이용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "수노 v5 비교",
-          "reason": "버전 차이 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "구글 지도, 한국 군사시설·DMZ 위성이미지 가리기 시작",
-      "headlines": [
-        {
-          "title": "구글 지도, 韓군사시설 및 DMZ 위성이미지 가리기 시작",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-10T02:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016302127?sid=104"
-        },
-        {
-          "title": "구글 지도서 가리기 시작…\"민감지역 노출되나\" 우려도",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-10T04:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001387299?sid=104"
-        },
-        {
-          "title": "구글지도 켰더니 '뿌옇게'…DMZ·군사기지 모자이크 처리",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-09-10T02:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001968318?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 번역기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 영국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 타임라인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글지도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 클래스룸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 재팬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "KAIST",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "KAIST, 뇌파로 AI 오류 수정하는 신경 가치 정렬 기술 개발",
-      "headlines": [
-        {
-          "title": "경북도·KAIST·안동시 \"정밀발효 바이오·푸드테크 육성\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-10T06:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014182727?sid=102"
-        },
-        {
-          "title": "KAIST, 뇌파로 AI 오류 수정…신경 가치 정렬 기술 개발",
-          "press": "newspim.com",
-          "publishedAt": "2026-09-10T01:25:00.000Z",
-          "link": "https://www.newspim.com/news/view/20260910000439"
-        },
-        {
-          "title": "KAIST, 하나의 칩처럼 움직이는 AI 데이터센터 구조 제시",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-08T23:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016298710?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "kaist 약자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 대학원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist portal",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 경영대학",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 입학처",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 학과",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist mba",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 문지캠퍼스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "순천",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "순천서 통학버스가 1t 화물차 들이받아 20명 병원 이송",
-      "headlines": [
-        {
-          "title": "순천서 통학버스가 1t 화물차 들이받아…20명 병원 이송",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-09T01:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016299297?sid=102"
-        },
-        {
-          "title": "순천시, ㈜위드피에스와 방산생태계 조성 투자협약",
-          "press": "daily.hankooki.com",
-          "publishedAt": "2026-09-10T07:08:00.000Z",
-          "link": "https://daily.hankooki.com/news/articleView.html?idxno=1404936"
-        },
-        {
-          "title": "순천시-위드피에스와 투자협약…방산 생태계 조성 행보",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-09-10T05:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005814636?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "순천 날씨",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "순천 가볼만한곳",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "순천 맛집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "순천 cgv",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "순천 찹쌀떡",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "순천 kfc",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "순천 절",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "순천 힉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "AI는 훌륭한 산문 못 써내고 문학의 고유 역할은 지속",
-      "headlines": [
-        {
-          "title": "\"AI는 훌륭한 산문 못 써내…문학, 고유 역할 지속\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-10T05:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014182505?sid=103"
-        },
-        {
-          "title": "중국은 미국의 AI를 훔쳤을까?…‘증류’ 논쟁",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-09-10T02:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012254776?sid=104"
-        },
-        {
-          "title": "앤트로픽 연구원 사퇴…초지능 경쟁에 '인류 멸종' 경고",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-09T23:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005330747?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 아스트라",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "칼리버스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "롯데이노베이트 칼리버스, 롯데자이언츠 가상 스타일링샵 출시",
-      "headlines": [
-        {
-          "title": "[ZD SW 투데이] 칼리버스, 롯데자이언츠 가상 스타일링샵 오픈 外",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-10T06:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002437005?sid=105"
-        },
-        {
-          "title": "롯데이노베이트 칼리버스, ‘롯데자이언츠 가상 스타일링샵’ 출시",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-09-10T01:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001191491?sid=105"
-        },
-        {
-          "title": "롯데이노 칼리버스, 롯데자이언츠 가상 스타일링샵 선봬",
-          "press": "weekly.hankooki.com",
-          "publishedAt": "2026-09-10T09:00:00.000Z",
-          "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7183596"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "칼리버스 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칼리버스 앱",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칼리버스 게임",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칼리버스 적자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칼리버스 vr",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칼리버스 디시",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칼리버스 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "칼리버스 김동규",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "칼리버스 이용법",
-          "reason": "가상샵 접속 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "칼리버스 앱",
-          "reason": "플랫폼 출시 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "칼리버스 실적",
-          "reason": "적자 개선 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "에코프로",
