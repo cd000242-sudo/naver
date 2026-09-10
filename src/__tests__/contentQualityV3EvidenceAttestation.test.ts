@@ -220,7 +220,10 @@ describe('Content Quality V3 evidence attestation', () => {
         //   조용히 사라지고 있었다(실측: 여행 글 5편이 전부 라벨형 제목). 스키마 재선언을
         //   제거하고, base 에 검색 수요 규칙(TT6)을 추가 + 제목 계약 번호를 TT 로 분리
         //   (travel.prompt 의 T1~T6 과 이름표가 겹쳤다).
-        'dd6efb24cf01bcdba5e2c0055beeec0ae9a16b9f14f050e7c01ef38e57700b30',
+        // [2026-09-10 3차] OpenAI 추론 계열 판정을 버전 하드코딩에서 함수로 옮겨 재계산 —
+        //   startsWith('gpt-5.6-') 가 gpt-6-astra 를 놓쳐 temperature 를 실어 보내던 것
+        //   (modelRegistry.ts 만 바뀌었음을 재계산으로 확인).
+        '3d1c4375d77ac230b72c6a8abda5b0459bf93bb76c8c6b81fd63ee08b18c7cbd',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

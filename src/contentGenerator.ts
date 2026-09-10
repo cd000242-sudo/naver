@@ -425,6 +425,7 @@ import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
 import { safeParseJson, cleanJsonOutput, tryFixJson, fixJsonAtPosition } from './jsonParser';
 import { recoverLooseStructuredContentFields } from './contentStructuredRecovery';
 import { validateStructuredContent } from './contentStructuredValidator';
+import { isOpenAiReasoningModel } from './runtime/openaiReasoningFamily.js';
 import {
   buildGeminiEmptyResponseUserMessage,
 } from './contentGenerationUserGuidance';
@@ -4525,7 +4526,7 @@ async function callOpenAI(
           };
         if (!isSearchModel) {
           const activeProfile = resolveTextModelProfile(modelName);
-          if (modelName.startsWith('gpt-5.6-')) {
+          if (isOpenAiReasoningModel(modelName)) {
             baseParams.reasoning_effort = activeProfile.reasoningEffort || selectedOpenAiProfile.reasoningEffort || 'high';
           } else {
             baseParams.temperature = temperature;

@@ -1,3 +1,4 @@
+import { isOpenAiReasoningModel } from './openaiReasoningFamily.js';
 // v2.7.45 — Model Registry SSOT (Single Source of Truth)
 //
 // debugger 진단(docs/diagnosis-2026-04-29/regression-summary.md):
@@ -187,7 +188,7 @@ export function resolveTextModelProfile(value: unknown): TextModelProfile {
   if (selector.startsWith('gpt-')) {
     const explicitModel = selector;
     const tier: TextModelTier = /(?:mini|nano|luna)/i.test(explicitModel) ? 'value' : 'balanced';
-    return profile(selector, 'openai', tier, explicitModel, explicitModel, explicitModel.startsWith('gpt-5.6-') ? 'medium' : undefined);
+    return profile(selector, 'openai', tier, explicitModel, explicitModel, isOpenAiReasoningModel(explicitModel) ? 'medium' : undefined);
   }
   if (selector.startsWith('openai-')) {
     throw new Error(`UNSUPPORTED_TEXT_MODEL_SELECTOR: ${selector}`);

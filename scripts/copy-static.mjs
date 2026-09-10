@@ -400,6 +400,11 @@ try {
     {
       // [2026-09-03 가드] 렌더러 3곳(contentGeneration·priceInfoModal·imageNarrativeQuickMode)이 import 하는데 번들에 정의가 없었다.
       //   textModelConstants·geminiTextModelNormalization 뒤에 온다 — 상위 const 가 그 값을 참조한다.
+      // [2026-09-10] modelRegistry 가 값으로 가져온다 — 반드시 그 **앞에** 인라인돼야 한다.
+      label: 'runtime/openaiReasoningFamily.js',
+      filePath: path.join(projectRoot, 'dist', 'runtime', 'openaiReasoningFamily.js'),
+    },
+    {
       label: 'runtime/modelRegistry.js',
       filePath: path.join(projectRoot, 'dist', 'runtime', 'modelRegistry.js'),
     },
