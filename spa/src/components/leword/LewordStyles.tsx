@@ -2285,6 +2285,24 @@ function LewordStyles() {
             .lw-briefs-alt em { font-style: normal; font-weight: 700; }
             .lw-briefs-alt.is-open em { color: #03c75a; }
             .lw-briefs-alt a { color: inherit; font-weight: 700; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, currentColor 40%, transparent); }
+            /* 제목 후보 — 유형이 다른 여러 개. 글을 고르는 자리라 알약이 아니라 목록으로 읽힌다. */
+            .lw-briefs-titles { margin: 10px 0 0; }
+            .lw-briefs-titles em { font-style: normal; font-weight: 700; opacity: .7; font-size: 12.5px; }
+            .lw-briefs-titles ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; }
+            .lw-briefs-titles li { display: flex; align-items: center; gap: 8px; font-size: 13px; line-height: 1.5; }
+            .lw-briefs-ttype {
+                flex: none; min-width: 44px; text-align: center; padding: 1px 7px; border-radius: 999px;
+                font-size: 11px; font-weight: 700; opacity: .75;
+                background: color-mix(in srgb, currentColor 8%, transparent);
+            }
+            .lw-briefs-ttext { flex: 1; }
+            .lw-briefs-tcopy {
+                flex: none; padding: 2px 9px; border-radius: 999px; font-size: 11.5px; cursor: pointer;
+                color: inherit; background: transparent; border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+                opacity: 0; transition: opacity .12s;
+            }
+            .lw-briefs-titles li:hover .lw-briefs-tcopy, .lw-briefs-tcopy:focus-visible { opacity: 1; }
+            @media (hover: none) { .lw-briefs-tcopy { opacity: 1; } }
             /* 같이 넣을 말 — 본문에 함께 담을 좁은 검색어. 말과 검색량을 붙여 한 알로 읽는다. */
             .lw-briefs-related { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 10px 0 0; font-size: 12.5px; }
             .lw-briefs-related em { font-style: normal; font-weight: 700; opacity: .7; margin-right: 2px; }

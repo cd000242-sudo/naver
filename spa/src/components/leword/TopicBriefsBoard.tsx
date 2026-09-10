@@ -40,6 +40,8 @@ interface Brief {
     alternative?: { keyword: string; searchVolume: number | null; serpFacing: number | null; serpVacancy: number | null; serpFit: '높음' | '보통' | '낮음' | '미측정' } | null;
     /** 같이 넣을 말 — 본문에 함께 담을 좁은 검색어. 전부 검색광고 실측이고 검색량도 실측이다. */
     related?: Array<{ keyword: string; searchVolume: number; serpFacing?: number | null; serpVacancy?: number | null; serpFit?: '높음' | '보통' | '낮음' | '미측정' }>;
+    /** 제목 후보 — 유형이 서로 다른 3~4개. 교리에 걸리는 것은 회차가 이미 떨어뜨렸다. */
+    titles?: Array<{ type: string; text: string }>;
 }
 
 type RoundSlot = '아침' | '오후' | '저녁';
@@ -202,6 +204,25 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
                                         </>
                                         : <><em>대안 검색어 없음</em> — 같은 주제의 좁은 검색어를 재 봤지만 열린 자리가 없습니다. 이 글감은 정면 승부가 어렵습니다.</>}
                                 </p>
+                            )}
+                            {b.titles && b.titles.length > 0 && (
+                                <div className="lw-briefs-titles">
+                                    <em>제목 후보</em>
+                                    <ul>
+                                        {b.titles.map((t) => (
+                                            <li key={t.text}>
+                                                <span className="lw-briefs-ttype">{t.type}</span>
+                                                <span className="lw-briefs-ttext">{t.text}</span>
+                                                <button
+                                                    type="button"
+                                                    className="lw-briefs-tcopy"
+                                                    onClick={() => { void navigator.clipboard?.writeText(t.text); }}
+                                                    aria-label={`${t.text} 복사`}
+                                                >복사</button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             )}
                             {b.related && b.related.length > 0 && (
                                 <p className="lw-briefs-related">
