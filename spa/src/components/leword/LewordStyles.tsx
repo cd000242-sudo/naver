@@ -2285,6 +2285,17 @@ function LewordStyles() {
             .lw-briefs-alt em { font-style: normal; font-weight: 700; }
             .lw-briefs-alt.is-open em { color: #03c75a; }
             .lw-briefs-alt a { color: inherit; font-weight: 700; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, currentColor 40%, transparent); }
+            /* 같이 넣을 말 — 본문에 함께 담을 좁은 검색어. 말과 검색량을 붙여 한 알로 읽는다. */
+            .lw-briefs-related { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 10px 0 0; font-size: 12.5px; }
+            .lw-briefs-related em { font-style: normal; font-weight: 700; opacity: .7; margin-right: 2px; }
+            .lw-briefs-related a {
+                display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px;
+                color: inherit; text-decoration: none; font-weight: 600;
+                background: color-mix(in srgb, currentColor 6%, transparent);
+                border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+            }
+            .lw-briefs-related a:hover { border-color: color-mix(in srgb, #03c75a 55%, transparent); }
+            .lw-briefs-related a b { font-weight: 500; font-variant-numeric: tabular-nums; opacity: .6; font-size: 11.5px; }
             .lw-briefs-foot { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin-top: 10px; font-size: 12.5px; opacity: 0.85; }
             .lw-briefs-foot a { color: inherit; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, currentColor 40%, transparent); }
             .lw-briefs-facts a { margin-left: 6px; }
