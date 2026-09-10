@@ -219,3 +219,43 @@ describe('snapToMaterial — 문장 끝을 고쳐 옮긴 발췌', () => {
     expect(snapToMaterial(composed, MATERIAL)).toBeNull();
   });
 });
+
+/**
+ * [2026-09-11] 설계도 소제목 축이 5개 모드에 똑같이 걸리던 것.
+ *
+ * 설계도는 본문 호출보다 먼저 돌아 소제목 후보를 확정한다. 그래서 축 한 세트가
+ * 모드별 본문 계약을 덮어썼다. 홈판 본문 계약(prompts/homefeed/base.prompt)의 역할
+ * 6개 중 설계도 축 7개와 겹치는 것은 조건·예외·비교 셋뿐이었고, 홈판의 핵심 역할
+ * (상황과 핵심 답·선택이 갈리는 기준·실수하기 쉬운 지점·안전한 다음 행동)은
+ * 후보로 제시되지도 않았다.
+ */
+describe('설계도 소제목 축은 모드별로 갈린다', () => {
+  const base = { keyword: '재산세 납부', material: 'x'.repeat(500) };
+
+  it('홈판은 본문 계약의 역할 목록을 쓴다', () => {
+    const p = buildBlueprintPrompt({ ...base, mode: 'homefeed' });
+    expect(p).toMatch(/상황과 핵심 답/);
+    expect(p).toMatch(/선택이 갈리는 기준/);
+    expect(p).toMatch(/실수하기 쉬운 지점/);
+    expect(p).toMatch(/안전한 다음 행동/);
+    expect(p).toMatch(/정의나 용어 설명으로 한 칸을 쓰지 않는다/);
+  });
+
+  it('홈판에는 SEO 전용 축(절차·비용·확인처)을 주지 않는다', () => {
+    const p = buildBlueprintPrompt({ ...base, mode: 'homefeed' });
+    expect(p).not.toMatch(/질의 축\(정의·조건·절차·비용·비교·예외·확인처\)/);
+  });
+
+  it('seo 는 기존 질의 축을 유지한다 — 회귀 방지', () => {
+    const p = buildBlueprintPrompt({ ...base, mode: 'seo' });
+    expect(p).toMatch(/질의 축\(정의·조건·절차·비용·비교·예외·확인처\)/);
+    expect(p).not.toMatch(/상황과 핵심 답/);
+  });
+
+  it('증거 없는 모드(business·mate·custom)는 blind 변경하지 않고 기본값을 유지한다', () => {
+    for (const mode of ['business', 'mate', 'custom']) {
+      const p = buildBlueprintPrompt({ ...base, mode });
+      expect(p).toMatch(/질의 축\(정의·조건·절차·비용·비교·예외·확인처\)/);
+    }
+  });
+});

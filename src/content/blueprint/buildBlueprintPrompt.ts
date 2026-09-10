@@ -30,6 +30,27 @@ function modeFraming(mode: string): string {
   return '독자는 이 키워드를 검색해서 들어온다. readerSituation 은 그 검색을 하게 만든 상황(무엇을 몰라서, 무엇을 정하려고)이어야 한다.';
 }
 
+/**
+ * Per-mode skeleton axes.
+ *
+ * One axis set used to reach all five modes: 정의·조건·절차·비용·비교·예외·확인처. Those are
+ * information-lookup axes, and the 설계도 runs BEFORE the body call, so its skeleton wins on
+ * ordering. Homefeed carries its own role list in prompts/homefeed/base.prompt and only three of
+ * the seven overlapped (조건·예외·비교). The four that did not (정의·절차·비용·확인처) pull a feed
+ * article toward a lookup article, while the four homefeed roles that matter
+ * (상황과 핵심 답·선택이 갈리는 기준·실수하기 쉬운 지점·안전한 다음 행동) were never offered.
+ *
+ * Only homefeed branches here. business (PASTOR-5) and mate (정의/판단기준/단계/비교표) carry their
+ * own body contracts and have the same mismatch, but that is unmeasured — they keep the default
+ * until there is evidence rather than being changed blind.
+ */
+function skeletonAxes(mode: string): string {
+  if (mode === 'homefeed') {
+    return '역할(상황과 핵심 답 · 선택이 갈리는 기준 · 조건과 예외 · 비교 또는 순서 · 실수하기 쉬운 지점 · 안전한 다음 행동)을 하나씩 맡는다. 정의나 용어 설명으로 한 칸을 쓰지 않는다.';
+  }
+  return '질의 축(정의·조건·절차·비용·비교·예외·확인처)을 하나씩 맡는다.';
+}
+
 export function buildBlueprintPrompt(input: BlueprintPromptInput): string {
   const keyword = String(input.keyword || '').trim();
   const confirmedTitle = String(input.confirmedTitle || '').trim();
@@ -53,7 +74,7 @@ export function buildBlueprintPrompt(input: BlueprintPromptInput): string {
     `- readerSituation: 독자의 구체 상황 1문장(${L.readerSituationMaxChars}자 이내). ${modeFraming(input.mode)}`,
     `- quotes: 자료 안에 있는 당사자 발언을 최대 ${L.quotesMax}개. text 는 자료 원문을 한 글자도 바꾸지 않고 그대로 옮긴다(따옴표는 뺀다). speaker 는 자료가 밝힌 발언자, 없으면 빈 문자열. 발언이 없으면 빈 배열.`,
     `- facts: 이 글에 쓸 핵심 사실 최대 ${L.factsMax}개. claim 은 짧게 정리한 사실, snippet 은 그 사실이 적힌 자료 원문 발췌(${L.snippetMinChars}~${L.snippetMaxChars}자, 그대로 복사). 수치·날짜·금액은 snippet 에 있는 것만.`,
-    `- skeleton: 소제목 후보 ${L.skeletonMin}~${L.skeletonMax}개(각 ${L.headingMaxChars}자 이내, 명사구 또는 짧은 질문형). 서로 다른 질의 축(정의·조건·절차·비용·비교·예외·확인처)을 하나씩 맡는다.`,
+    `- skeleton: 소제목 후보 ${L.skeletonMin}~${L.skeletonMax}개(각 ${L.headingMaxChars}자 이내, 명사구 또는 짧은 질문형). 서로 다른 ${skeletonAxes(input.mode)}`,
     offTopicRule,
     // [SPEC-EVENT-RETRIEVAL-2026] 자료가 여러 사건을 담고 있을 때 어느 것이 중심인지 모델만 안다.
     //   판정은 코드가 하되(eventCohesion), 누가·언제인지는 여기서 받는다.
