@@ -10,6 +10,7 @@ import PreemptionCard from './PreemptionCard';
 import PreemptionPlan from './PreemptionPlan';
 import IssueFlowBrief from './IssueFlowBrief';
 import RealtimeStrip from './RealtimeStrip';
+import LiveNichePanel from './LiveNichePanel';
 import { useMindmap } from './useMindmap';
 import { fetchHotKeywords, fetchRealtimeIssues } from '../../lib/keywordApi';
 import {
@@ -320,7 +321,11 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
               * 살아 있는 줄 — 아래 카드는 하루 3회 실측 판정이라 최대 8시간 낡는다.
               * 목록만 5분마다 따로 받아 "지금 뭐가 뜨는지"를 먼저 보여 준다.
               */}
-            <RealtimeStrip measuredKeys={measuredKeySet} data={realtime} />
+            <RealtimeStrip measuredKeys={measuredKeySet} data={realtime} />
+
+            {/* 지금 목록을 그 자리에서 재는 판(사장님 2026-09-10 "이것도 수정해줘야지 실시간이라고").
+                아래 카드는 하루 3회 회차라 최대 8시간 낡는다 — 화면 이름이 '실시간'인데 판정은 아니었다. */}
+            <LiveNichePanel items={(realtime?.items || []).map((item) => ({ rank: item.rank, keyword: item.keyword }))} />
 
             <div className="lw-segment lw-segment-wrap" role="group" aria-label="판정">
                 {VIEWS.map((item) => (
