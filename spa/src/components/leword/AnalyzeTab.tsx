@@ -22,6 +22,7 @@ import { groupByIntent } from '../../lib/intentGroups';
 import TrendSparkline from './TrendSparkline';
 import DemandChartModal, { pickChartSeries } from './DemandChartModal';
 import { naverSearchUrl } from './preemptionMeta';
+import TrendCsvPanel from './TrendCsvPanel';
 
 /**
  * 키워드 분석 — 검색량·문서수·상품수·연관 키워드.
@@ -844,6 +845,10 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
             {!measured && !error.code && !loading && (
                 <div className="lw-note">키워드를 입력하면 검색량·문서수를 실제로 조회합니다.</div>
             )}
+
+            {/* 트렌드 CSV 들이기 — 한 개가 아니라 여러 개를 한 번에 재는 입구.
+                분석기가 이미 "검색량·문서수·정면 글을 재라"는 판이라 여기에 둔다(사장님 2026-09-10). */}
+            <TrendCsvPanel />
         </>
     );
 }
