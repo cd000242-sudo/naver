@@ -426,6 +426,7 @@ import { safeParseJson, cleanJsonOutput, tryFixJson, fixJsonAtPosition } from '.
 import { recoverLooseStructuredContentFields } from './contentStructuredRecovery';
 import { validateStructuredContent } from './contentStructuredValidator';
 import { isOpenAiReasoningModel } from './runtime/openaiReasoningFamily.js';
+import { auditAffiliateTitleShape } from './content/affiliateTitleShape.js';
 import {
   buildGeminiEmptyResponseUserMessage,
 } from './contentGenerationUserGuidance';
@@ -8285,6 +8286,22 @@ async function generateStructuredContentInternal(
               bodyHtml: recoverContentQualityV3BodyHtml(disclosureRepair.content.bodyPlain),
             };
             console.warn('[Shopping Connect] 모델이 생성한 공정위/제휴 고지 문구를 제거하고 사용자 설정 원문 경로를 유지합니다.');
+          }
+          /*
+           * [2026-09-10 실측] 이 모드의 노출률이 45% 로 가장 낮았다(홈판·SEO 83%).
+           * 저장본 11편을 갈라 보니 제목 모양이 갈랐다 — 모델명·판촉 브래킷이
+           * 미노출군 5/6, 상황어가 노출군 4/5. 상품명으로 검색하면 상위가
+           * 스마트스토어·공식몰이라 블로그가 낄 자리가 없다.
+           *
+           * 막지 않는다. 근거를 로그에 남겨 사람이 판단하게 한다 — 표본 11편으로
+           * 발행을 막을 근거는 못 된다(게이트는 경고까지라는 원칙과도 같다).
+           */
+          const titleShape = auditAffiliateTitleShape(finalStructuredContent.selectedTitle);
+          if (titleShape.issues.length > 0) {
+            console.warn(
+              `[ShoppingTitle] ⚠️ 검색에서 불리한 제목 모양 ${titleShape.issues.length}건 — "${String(finalStructuredContent.selectedTitle).slice(0, 50)}"`,
+            );
+            for (const issue of titleShape.issues) console.warn(`[ShoppingTitle]    · ${issue.message}`);
           }
           const evidenceMode = classifyAffiliateEvidence(source).mode;
           const authenticity = auditAffiliateAuthenticity({

@@ -223,7 +223,11 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-09-10 3차] OpenAI 추론 계열 판정을 버전 하드코딩에서 함수로 옮겨 재계산 —
         //   startsWith('gpt-5.6-') 가 gpt-6-astra 를 놓쳐 temperature 를 실어 보내던 것
         //   (modelRegistry.ts 만 바뀌었음을 재계산으로 확인).
-        '3d1c4375d77ac230b72c6a8abda5b0459bf93bb76c8c6b81fd63ee08b18c7cbd',
+        // [2026-09-10 4차] 쇼핑 제목 계약으로 재계산 — 노출률 45%(홈판·SEO 83%)의 원인이
+        //   제목 모양이었다(모델명·판촉 브래킷 미노출군 5/6 vs 상황어 노출군 4/5).
+        //   상품명으로 검색하면 상위가 스마트스토어·공식몰이라 블로그가 낄 자리가 없다.
+        //   (shopping_review.prompt 1개만 바뀌었음을 재계산으로 확인)
+        '19059be3c5d7946b6026b1788d56710a5396e01685fc0780490ce7d03836db29',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

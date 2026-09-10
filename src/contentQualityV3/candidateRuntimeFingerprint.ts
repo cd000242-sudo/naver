@@ -134,6 +134,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/affiliateAuthenticity.ts',
   'src/content/affiliateConversionStructure.ts',
   'src/content/affiliateReviewDepth.ts',
+  'src/content/affiliateTitleShape.ts',
   'src/content/aiConclusionOpener.ts',
   'src/content/blueprint/blueprintSchema.ts',
   'src/content/blueprint/buildBlueprintPrompt.ts',
