@@ -91,3 +91,34 @@ export const AGENT_MODEL_PRESETS: Readonly<Record<string, ReadonlyArray<{ value:
 
 /** 화면에서 "직접 입력" 을 고른 상태를 나타내는 값. 설정에는 저장되지 않는다. */
 export const AGENT_MODEL_CUSTOM = '__custom__';
+
+/*
+ * CLI 가 "이 모델 모른다" 고 말하는 문구들. 벤더마다 표현이 다르므로 실측 문구를 담는다.
+ * 확신할 수 있을 때만 단정한다 — 애매하면 원문을 그대로 보여 주는 편이 낫다.
+ */
+const UNKNOWN_MODEL_HINT = /unknown model|invalid model|model not found|unsupported model|no such model|모델.*(없|찾을 수 없|지원하지 않)|지원하지 않는 모델/i;
+
+/**
+ * 에이전트 실패 메시지에 "어느 모델로 시도했는지" 를 붙인다.
+ *
+ * [2026-09-10 심층 점검] 모델 선택을 붙이면서 새 실패 유형이 생겼다. CLI 는 모르는 모델
+ * 이름을 거부하는데, classifyExit(parse.ts:109)에는 모델 분류가 없어 nonzero_exit 로
+ * 떨어진다 — 사용자는 "codex가 오류를 반환했습니다" 만 보고 자기가 고른 모델 때문인지
+ * 알 수 없다. 원인을 아는데 안 알려주면 앱 버그로 읽힌다.
+ *
+ * 모델을 안 골랐으면 원문 그대로 돌려준다 — 없는 원인을 지어내지 않는다.
+ */
+export function describeAgentModelFailure(model: string | undefined, rawMessage: string): string {
+  const raw = String(rawMessage ?? '');
+  const name = String(model ?? '').trim();
+  if (!name) return raw;
+
+  if (UNKNOWN_MODEL_HINT.test(raw)) {
+    return `${raw}
+
+🧠 모델 이름 "${name}" 을 CLI 가 알지 못합니다. 환경설정 > AI 텍스트 엔진에서 다른 모델을 고르거나 비워 두세요(비우면 CLI 기본 모델).`;
+  }
+  return `${raw}
+
+(에이전트 모델 "${name}" 로 시도했습니다. 이 모델을 처음 쓰신 거라면 이름이 맞는지 확인해 주세요.)`;
+}

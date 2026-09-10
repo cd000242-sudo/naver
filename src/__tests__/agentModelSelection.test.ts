@@ -144,3 +144,53 @@ describe('AGENT_MODEL_PRESETS — CLI 실측 목록', () => {
     expect(mod).toMatch(/input\.value = select\.value/);
   });
 });
+
+/*
+ * [2026-09-10 심층 점검] 모델 선택을 붙이면서 **새 실패 유형**이 생겼다.
+ *
+ * CLI 는 모르는 모델 이름을 받으면 거부한다. 그런데 classifyExit(parse.ts:109)에는
+ * 모델 관련 분류가 없어 nonzero_exit(일반 오류)로 떨어진다 — 사용자는
+ * "codex가 오류를 반환했습니다" 만 보고 자기가 고른 모델 때문인지 알 수 없다.
+ *
+ * 원인을 아는데 안 알려주면 앱 버그로 읽힌다(크레딧 안내 때와 같은 원칙).
+ */
+describe('모델 때문에 실패하면 그렇다고 말한다', () => {
+  it('모델을 지정한 상태의 실패 메시지에 모델 이름이 들어간다', async () => {
+    const { describeAgentModelFailure } = await import('../runtime/agentModelPolicy');
+    const msg = describeAgentModelFailure('gpt-6-astra', 'codex가 오류를 반환했습니다.');
+    expect(msg).toContain('gpt-6-astra');
+    expect(msg).toContain('codex가 오류를 반환했습니다.');
+  });
+
+  it('CLI 가 모델을 모른다고 하면 그 사실을 짚어 준다', async () => {
+    const { describeAgentModelFailure } = await import('../runtime/agentModelPolicy');
+    for (const raw of [
+      'error: unknown model: gpt-9-zzz',
+      'Invalid model name provided',
+      'model not found',
+      'unsupported model',
+      '지원하지 않는 모델입니다',
+    ]) {
+      expect(describeAgentModelFailure('gpt-9-zzz', raw)).toMatch(/모델 이름/);
+    }
+  });
+
+  it('모델을 안 골랐으면 원문 그대로 — 없는 원인을 지어내지 않는다', async () => {
+    const { describeAgentModelFailure } = await import('../runtime/agentModelPolicy');
+    expect(describeAgentModelFailure(undefined, '로그인이 필요합니다')).toBe('로그인이 필요합니다');
+  });
+
+  it('모델과 무관해 보이는 실패는 단정하지 않는다', async () => {
+    const { describeAgentModelFailure } = await import('../runtime/agentModelPolicy');
+    const msg = describeAgentModelFailure('fable', '사용량 한도에 걸렸습니다');
+    expect(msg).toContain('사용량 한도에 걸렸습니다');
+    expect(msg).not.toMatch(/모델 이름이 틀렸/);
+  });
+
+  it('callAgent 가 이 안내를 쓴다', () => {
+    const code = readFileSync(new URL('../contentGenerator.ts', import.meta.url), 'utf8')
+      .split(String.fromCharCode(10))
+      .filter((l) => !l.trim().startsWith('//') && !l.trim().startsWith('*'));
+    expect(code.filter((l) => l.includes('describeAgentModelFailure')).length).toBeGreaterThan(0);
+  });
+});

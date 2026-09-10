@@ -4830,7 +4830,7 @@ async function callAgent(
    * 채우지 않아 늘 CLI 기본 모델로 돌았다. 설정에 적어 둔 이름을 그대로 넘긴다 —
    * 비어 있으면 undefined 라 종전과 같다.
    */
-  const { resolveAgentModel } = await import('./runtime/agentModelPolicy.js');
+  const { resolveAgentModel, describeAgentModelFailure } = await import('./runtime/agentModelPolicy.js');
   let agentModel: string | undefined;
   try {
     agentModel = resolveAgentModel(provider, (await loadConfig()) as unknown as Record<string, unknown>);
@@ -4844,17 +4844,29 @@ async function callAgent(
   const agenticPrompt = shouldWrapAgenticEnvelope ? wrapAsAgenticTask(prompt, mode) : prompt;
   const modeTag = raw ? 'raw' : (mode || 'generic');
   console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (자율 반복 모드: ${modeTag}, 프롬프트 ${agenticPrompt.length}자, 제한 ${Math.round(AGENTIC_TIMEOUT_MS / 1000)}초, 별도 API 키 불필요 · 플랜 한도 적용)`);
-  const result = await generateWithAgent(
-    {
-      provider: cliProvider,
-      prompt: agenticPrompt,
-      schema,
-      model: agentModel,
-      timeoutMs: AGENTIC_TIMEOUT_MS,
-      signal,
-    },
-    agentProductPolicyContext,
-  );
+  let result;
+  try {
+    result = await generateWithAgent(
+      {
+        provider: cliProvider,
+        prompt: agenticPrompt,
+        schema,
+        model: agentModel,
+        timeoutMs: AGENTIC_TIMEOUT_MS,
+        signal,
+      },
+      agentProductPolicyContext,
+    );
+  } catch (error) {
+    /*
+     * [2026-09-10] 고른 모델 때문에 실패했을 수 있다는 것을 사용자가 알아야 한다.
+     * CLI 는 모르는 모델을 거부하는데 그 실패가 일반 오류로 떨어져, 자기가 고른 모델
+     * 때문인지 알 방법이 없었다. 모델을 안 골랐으면 원문 그대로 나간다.
+     */
+    const err = error as Error;
+    err.message = describeAgentModelFailure(agentModel, err.message ?? '');
+    throw err;
+  }
   console.log(`[Agent] ✅ ${cliProvider} 응답 수신 (${result.durationMs}ms, ${result.text.length}자, 모델 ${agentModel || 'CLI 기본'})`);
   return result.text;
 }
