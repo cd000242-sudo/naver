@@ -5,6 +5,8 @@ import { ipcMain, app } from 'electron';
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { loadConfig } from '../../configManager.js';
+import { planExpandedRetrieval } from '../../content/thinMaterialExpansion.js';
+import { MATERIAL_DOCUMENT_SEPARATOR } from '../../content/eventCohesion.js';
 
 /**
  * 기타 핸들러 등록
@@ -64,7 +66,7 @@ export function registerMiscHandlers(): void {
             // [2026-07-30] 그라운딩은 사용자가 팩트체크 엔진에서 직접 고른 경우에만.
             // UI 문구("자동 폴백에서 제외")와 실제 동작을 일치시킨다.
             const allowGroundingFallback = String((config as any)?.factCheckEngine || '').trim() === 'gemini-grounding';
-            const result = await collectContentFromPlatforms(keyword, {
+            const collectOnce = (query: string) => collectContentFromPlatforms(query, {
                 maxPerSource: options?.maxPerSource || 5,
                 clientId: crawlClientId,
                 clientSecret: crawlClientSecret,
@@ -72,7 +74,51 @@ export function registerMiscHandlers(): void {
                 targetDate: options?.targetDate,
                 allowGroundingFallback,
             });
-            return result;
+            const result = await collectOnce(keyword);
+
+            /*
+             * [SPEC-EVENT-RETRIEVAL-2026 Phase 2] 자료가 마른 키워드면 키워드를 분해해
+             * 한 번 더 찾는다.
+             *
+             * 사장님 지적: "황금키워드는 검색량은 올라오는데 그 키워드를 제목으로 다룬 문서가
+             * 아직 적다. 그때 그대로 긁으면 모델이 서로 다른 기사를 억지로 조립한다."
+             *
+             * 기본은 **끔**이다 — 켜지 않으면 호출이 한 번도 늘지 않는다. 켜져 있어도
+             * 자료가 충분하면 확장하지 않고, 추가 질의는 3회를 넘지 않는다.
+             * 확장해도 못 찾으면 있는 자료로 그대로 간다 — 글을 막지 않는다.
+             */
+            const expandedRetrieval = (config as any)?.expandedRetrieval === true;
+            const plan = planExpandedRetrieval(String(result?.collectedText ?? ''), keyword, {
+                enabled: expandedRetrieval,
+            });
+            console.log(`[ExpandedRetrieval] ${plan.reason}`);
+            if (!plan.shouldExpand) return result;
+
+            const extraTexts: string[] = [];
+            for (const query of plan.queries) {
+                try {
+                    const extra = await collectOnce(query);
+                    if (extra?.success && extra.collectedText) {
+                        extraTexts.push(extra.collectedText);
+                        console.log(`[ExpandedRetrieval] ✅ "${query}" — ${extra.collectedText.length}자 추가`);
+                    } else {
+                        console.log(`[ExpandedRetrieval] ⚪ "${query}" — 추가 자료 없음`);
+                    }
+                } catch (expandError) {
+                    // 확장은 보너스다. 실패해도 원래 자료로 진행한다.
+                    console.warn(`[ExpandedRetrieval] "${query}" 실패:`, (expandError as Error)?.message);
+                }
+            }
+            if (extraTexts.length === 0) return result;
+
+            return {
+                ...result,
+                collectedText: [String(result?.collectedText ?? ''), ...extraTexts]
+                    .filter((text) => text.trim().length > 0)
+                    // 문서 구분자는 sourceAssembler 의 join 과 같아야 한다(eventCohesion 이 이 값으로 자른다).
+                    .join(MATERIAL_DOCUMENT_SEPARATOR),
+                sourceCount: (result?.sourceCount ?? 0) + extraTexts.length,
+            };
         } catch (error) {
             console.error('[miscHandlers] 플랫폼 콘텐츠 수집 실패:', error);
             return { success: false, message: (error as Error).message };

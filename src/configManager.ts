@@ -186,6 +186,13 @@ export interface AppConfig {
   agentClaudeModel?: string;
   agentGeminiModel?: string;
 
+  /**
+   * [SPEC-EVENT-RETRIEVAL-2026 Phase 2] 자료가 마른 키워드에서 키워드를 분해해
+   * 한 번 더 찾는다. **기본 OFF** — 켜지 않으면 검색 호출이 한 번도 늘지 않는다.
+   * 켜져도 자료가 충분하면 확장하지 않고, 추가 질의는 3회를 넘지 않는다.
+   */
+  expandedRetrieval?: boolean;
+
   // ✅ Gemini 텍스트 생성 주 모델 선택
   primaryGeminiTextModel?: 'gemini-3.6-flash' | 'gemini-3.5-flash' | 'gemini-3.1-flash-lite' | string;
 
@@ -483,6 +490,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'userDisplayName', 'userEmail',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
+          'expandedRetrieval',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
           'customImageSavePath',
           'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
@@ -1105,6 +1113,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
+          'expandedRetrieval',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
         ];
         let changed = false;

@@ -150,3 +150,52 @@ export function findBridgeCandidates(
     .slice(0, MAX_BRIDGES)
     .map(([token]) => token);
 }
+
+/** 확장 검색으로 추가할 수 있는 질의 수 상한. 편당 검색 호출이 그만큼 늘어난다. */
+const MAX_EXPANDED_QUERIES = 3;
+
+export interface ExpandedRetrievalPlan {
+  readonly shouldExpand: boolean;
+  /** 추가로 던질 질의. 전부 키워드 안의 낱말 조합이다. */
+  readonly queries: readonly string[];
+  /** 왜 이렇게 정했는지 — 숫자를 담는다. 로그로 실측해야 임계를 조정할 수 있다. */
+  readonly reason: string;
+}
+
+/**
+ * 확장 검색을 할지, 무엇을 더 검색할지 정한다.
+ *
+ * 기본은 **끔**이다. 켜지 않으면 호출이 한 번도 늘지 않는다(회귀 없음).
+ * 켜져 있어도 자료가 충분하면 확장하지 않는다 — 이길 수 있는 싸움에 돈을 더 쓰지 않는다.
+ *
+ * 확장해도 못 찾으면 호출자가 있는 자료로 진행한다(SPEC F12). 글을 막는 것은 이 함수의
+ * 권한이 아니다 — "왜 글이 안 나오냐" 가 되면 도구를 안 쓰게 된다.
+ */
+export function planExpandedRetrieval(
+  material: string,
+  keyword: string,
+  options: { enabled?: boolean; requiredDocs?: number } = {},
+): ExpandedRetrievalPlan {
+  if (options.enabled !== true) {
+    return { shouldExpand: false, queries: [], reason: '확장 검색 꺼짐(기본값)' };
+  }
+
+  const verdict = detectThinMaterial(material, keyword, options.requiredDocs ?? 3);
+  if (verdict.entities.length < 2) {
+    return { shouldExpand: false, queries: [], reason: `키워드 엔티티 ${verdict.entities.length}개 — 분해할 것이 없음` };
+  }
+  if (!verdict.thin) {
+    return {
+      shouldExpand: false,
+      queries: [],
+      reason: `자료 충분 — 문서 ${verdict.totalDocs}개 중 ${verdict.matchedDocs}개가 엔티티 2개 이상 포함(기준 ${verdict.requiredDocs})`,
+    };
+  }
+
+  const queries = decomposeKeyword(keyword).slice(0, MAX_EXPANDED_QUERIES);
+  return {
+    shouldExpand: queries.length > 0,
+    queries,
+    reason: `자료 부족 — 문서 ${verdict.totalDocs}개 중 ${verdict.matchedDocs}개만 엔티티 2개 이상 포함(기준 ${verdict.requiredDocs}) → 추가 질의 ${queries.length}개`,
+  };
+}

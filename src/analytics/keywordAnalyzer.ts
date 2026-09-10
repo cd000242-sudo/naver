@@ -4,6 +4,7 @@ import * as cheerio from 'cheerio';
 import crypto from 'crypto';
 import { getProxyUrl, isProxyEnabled } from '../crawler/utils/proxyManager.js';
 import { BestProductCollector } from '../services/bestProductCollector.js';
+import { rotateDailySlice } from './seedRotation.js';
 
 // ✅ 키워드 경쟁도 분석 결과 타입
 export type KeywordCompetition = {
@@ -898,7 +899,8 @@ export class KeywordAnalyzer {
       
       // ✅ 소스 A: BestProductCollector 인기상품 (식품 제외, 라이프스타일만)
       const lifestyleCategories = ['digital', 'living', 'beauty', 'fashion', 'sports'];
-      const selectedCats = lifestyleCategories.sort(() => Math.random() - 0.5).slice(0, 2);
+      // [2026-09-10] 날짜 순환 — 편향 셔플이면 어떤 카테고리는 영영 안 돈다.
+      const selectedCats = rotateDailySlice(lifestyleCategories, 2);
       
       for (const catId of selectedCats) {
         try {
@@ -925,7 +927,12 @@ export class KeywordAnalyzer {
       
       // ✅ 소스 B: 네이버 쇼핑 인기 상품 검색 (나혼산/SNS 바이럴 상품류)
       const trendingProductQueries = this.getLifestyleProductQueries();
-      const selectedQueries = trendingProductQueries.sort(() => Math.random() - 0.5).slice(0, 3);
+      /*
+       * [2026-09-10] 예전에는 sort(() => Math.random() - 0.5).slice(0, 3) 이었다.
+       * 편향된 셔플이라 어떤 질의는 거의 안 돌았고, sort 가 원본 상수 배열을 제자리에서
+       * 뒤집었으며, 랜덤이라 재현도 안 됐다. 날짜로 도는 순환이 셋을 한꺼번에 푼다.
+       */
+      const selectedQueries = rotateDailySlice(trendingProductQueries, 3);
       
       for (const query of selectedQueries) {
         try {
@@ -936,8 +943,13 @@ export class KeywordAnalyzer {
         await sleep(300);
       }
       
-      // 중복 제거 + 셔플
-      const uniqueProducts = [...new Set(productKeywords)].sort(() => Math.random() - 0.5);
+      /*
+       * [2026-09-10] 중복 제거 + 날짜 순환.
+       * 여기 sort 는 이미 사본([...new Set()])이라 원본 변형은 없었지만, 편향 셔플이라
+       * 앞쪽 후보가 계속 앞에 남았다. 순환은 날마다 시작점을 옮겨 고르게 돌린다.
+       */
+      const dedupedProducts = [...new Set(productKeywords)];
+      const uniqueProducts = rotateDailySlice(dedupedProducts, dedupedProducts.length);
       console.log(`[KeywordAnalyzer] 📦 총 상품 키워드 후보: ${uniqueProducts.length}개`);
       
       if (uniqueProducts.length === 0) {
@@ -1115,7 +1127,9 @@ export class KeywordAnalyzer {
       '골프웨어', '운동화 추천', '크로스백', '지갑 추천', '선글라스',
     ];
     
-    return [...seasonalQueries[season], ...evergreen.sort(() => Math.random() - 0.5).slice(0, 10)];
+    // [2026-09-10] 상시 질의도 날짜 순환 — evergreen 은 상수 배열이라 sort 가 그 상수를
+    //   제자리에서 뒤집고 있었다(호출할 때마다 순서가 달라지는 숨은 부작용).
+    return [...seasonalQueries[season], ...rotateDailySlice(evergreen, 10)];
   }
 
   // ✅ 네이버 쇼핑 검색으로 상품명 키워드 추출
@@ -1339,8 +1353,9 @@ export class KeywordAnalyzer {
       const seeds = this.getAutocompletSeeds();
       const keywords: string[] = [];
       
-      // 3개 시드 랜덤 선택하여 연관검색어 크롤링
-      const shuffled = seeds.sort(() => Math.random() - 0.5).slice(0, 3);
+      // [2026-09-10] 3개 시드를 날짜로 돌려 고른다 — 며칠이면 모든 씨앗이 고르게 한 번씩
+      //   돈다. 예전 랜덤 셔플은 편향돼 어떤 씨앗은 영영 안 뽑혔다.
+      const shuffled = rotateDailySlice(seeds, 3);
       
       for (const seed of shuffled) {
         try {
