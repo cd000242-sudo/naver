@@ -17,6 +17,15 @@
 /** 공개 보드 주소. 로그인 없이 읽히는 무료 데이터다. */
 export const LEWORD_BOARD_URL = 'https://leaderspro.kr/data/issue-niche-board.json';
 
+/**
+ * 선점 보드 — 키워드마다 **어느 채널이 이기는 화면인지**를 재 둔 자료.
+ *
+ * [2026-09-10 심층분석] 실측 43건에서 naver-blog 25 · wordpress 14 · kin 2 였다.
+ * 33% 는 워드프레스가 이기는 자리라, 네이버 블로그로 쓰면 애초에 못 이긴다.
+ * 검색량·문서수만 보고 고르면 그 3분의 1을 헛되이 쓴다.
+ */
+export const LEWORD_PREEMPTION_URL = 'https://leaderspro.kr/data/preemption-board.json';
+
 export interface LewordPick {
   readonly keyword: string;
   /** 월 검색량. 모르면 null — 0 으로 적으면 "검색량 없음" 과 구분이 안 된다. */
@@ -29,6 +38,16 @@ export interface LewordPick {
   readonly lane: string;
   /** 보드가 확정 추천(rows)한 것인가. 관측(observations)보다 근거가 강하다. */
   readonly recommended: boolean;
+  /** 주제(선점 보드에만 있다). */
+  readonly topic?: string;
+  /** 상위 10칸 중 비어 있는 자리 수. 클수록 비집고 들어갈 여지가 크다. */
+  readonly openSlot?: number | null;
+  /** 광고 클릭 추정치 — 이 말에 돈이 도는지의 신호. 0 이면 광고주가 없다. */
+  readonly adClicks?: number | null;
+  /** 앞자리가 이미 꽉 찼는가. 같은 조건이면 비어 있는 쪽을 먼저 쓴다. */
+  readonly saturated?: boolean;
+  /** 사람이 읽는 한 줄 설명(보드가 만든 문장 그대로). */
+  readonly layoutHeadline?: string;
 }
 
 export interface LewordBoard {
@@ -88,6 +107,61 @@ export function parseLewordBoard(raw: unknown): LewordBoard {
       picks.push(pick);
     }
   }
+
+  const measuredRaw = board.measured && typeof board.measured === 'object'
+    ? board.measured as Record<string, unknown>
+    : {};
+  const measured: Record<string, number> = {};
+  for (const [key, value] of Object.entries(measuredRaw)) {
+    const parsed = num(value);
+    if (parsed !== null) measured[key] = parsed;
+  }
+
+  return { picks, publishedAt: str(board.publishedAt), schedule: str(board.schedule), measured };
+}
+
+/**
+ * 선점 보드에서 **네이버 블로그가 이기는 자리만** 꺼낸다.
+ *
+ * 워드프레스·지식iN 이 위에 뜨는 화면은 블로그 글로는 못 이긴다 — 검색량과 문서수가
+ * 아무리 좋아도 자리가 없다. 그런 키워드를 걸러 주는 것이 이 함수의 존재 이유다.
+ *
+ * 정렬: 앞자리가 빈 것 먼저, 그 다음 광고 클릭이 큰 것. 이길 수 있는가를 먼저 보고
+ * 돈이 되는가를 나중에 본다 — 순서가 반대면 못 이길 자리에 힘을 쓴다.
+ */
+export function parsePreemptionBoard(raw: unknown): LewordBoard {
+  if (!raw || typeof raw !== 'object') return EMPTY;
+  const board = raw as Record<string, unknown>;
+  const rows = Array.isArray(board.rows) ? board.rows : [];
+
+  const picks: LewordPick[] = [];
+  const seen = new Set<string>();
+  for (const entry of rows) {
+    if (!entry || typeof entry !== 'object') continue;
+    const row = entry as Record<string, unknown>;
+    if (str(row.layoutBestFor) !== 'naver-blog') continue;
+    const keyword = str(row.keyword);
+    if (!keyword || seen.has(keyword)) continue;
+    seen.add(keyword);
+    picks.push({
+      keyword,
+      searchVolume: num(row.searchVolume),
+      documentCount: num(row.documentCount),
+      verdict: str(row.tier),
+      lane: str(row.topic),
+      recommended: true,
+      topic: str(row.topic),
+      openSlot: num(row.openSlot),
+      adClicks: num(row.adClicks),
+      saturated: row.frontalSaturated === true,
+      layoutHeadline: str(row.layoutHeadline),
+    });
+  }
+
+  picks.sort((a, b) => {
+    if (a.saturated !== b.saturated) return a.saturated ? 1 : -1;
+    return (b.adClicks ?? 0) - (a.adClicks ?? 0);
+  });
 
   const measuredRaw = board.measured && typeof board.measured === 'object'
     ? board.measured as Record<string, unknown>

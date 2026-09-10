@@ -77,3 +77,63 @@ describe('parseLewordBoard — 보드에서 쓸 수 있는 키워드만 꺼낸�
     expect(LEWORD_BOARD_URL).toMatch(/^https:\/\/.*issue-niche-board\.json$/);
   });
 });
+
+/**
+ * [2026-09-10 심층분석] leword 는 키워드마다 **블로그가 이길 자리인지**를 이미 재고 있다.
+ * 앱은 실검 틈새 보드만 읽고 그 데이터를 통째로 놓치고 있었다.
+ *
+ * 실측(preemption-board.json, 43건):
+ *   layoutBestFor  naver-blog 25건(58%) · wordpress 14 · kin 2
+ *   → 33% 는 워드프레스가 이기는 자리다. 네이버 블로그로 쓰면 애초에 못 이긴다.
+ *   frontalSaturated  앞자리 포화 여부
+ *   adClicks          광고 클릭 추정 = 실제 수익 신호
+ *     기아 ev5 375.9(포화) · 쳇지티피무료 214.8(여유) · patchit 103.7(여유)
+ *
+ * 이 셋의 교집합 — "블로그가 이기고 · 앞자리가 비었고 · 광고 클릭이 있는" 자리가
+ * 예약 발행으로 꾸준히 노릴 곳이다.
+ */
+describe('parsePreemptionBoard — 블로그가 이길 자리를 가려낸다', () => {
+  const board = {
+    publishedAt: '2026-09-09T01:24:19.386Z',
+    rows: [
+      { keyword: '쳇지티피무료', topic: 'IT·컴퓨터', searchVolume: 3530, documentCount: 246, openSlot: 4, adClicks: 214.8, adDepth: 1, layoutBestFor: 'naver-blog', layoutHeadline: '블로그 글이 맨 위에 뜨는 화면', frontalSaturated: false },
+      { keyword: '기아 ev5', topic: '자동차', searchVolume: 60710, documentCount: 30794, openSlot: 1, adClicks: 375.9, adDepth: 7, layoutBestFor: 'naver-blog', frontalSaturated: true },
+      { keyword: '무료게임 crazy', topic: '게임', searchVolume: 1000, documentCount: 10, adClicks: 57.6, layoutBestFor: 'wordpress', frontalSaturated: false },
+      { keyword: '   ', layoutBestFor: 'naver-blog' },
+    ],
+  };
+
+  it('블로그가 이기는 자리만 남긴다 — 워드프레스 자리는 애초에 못 이긴다', async () => {
+    const { parsePreemptionBoard } = await import('../analytics/lewordBoard');
+    const picks = parsePreemptionBoard(board).picks;
+    expect(picks.map((p) => p.keyword)).toEqual(['쳇지티피무료', '기아 ev5']);
+  });
+
+  it('앞자리가 빈 것을 먼저 보여준다 — 포화된 자리는 뒤로', async () => {
+    const { parsePreemptionBoard } = await import('../analytics/lewordBoard');
+    const picks = parsePreemptionBoard(board).picks;
+    expect(picks[0].keyword).toBe('쳇지티피무료');
+    expect(picks[0].saturated).toBe(false);
+    expect(picks[1].saturated).toBe(true);
+  });
+
+  it('수익 신호(광고 클릭)를 그대로 싣는다 — 이게 없으면 고를 근거가 없다', async () => {
+    const { parsePreemptionBoard } = await import('../analytics/lewordBoard');
+    const p = parsePreemptionBoard(board).picks[0];
+    expect(p.adClicks).toBeCloseTo(214.8);
+    expect(p.openSlot).toBe(4);
+    expect(p.topic).toBe('IT·컴퓨터');
+  });
+
+  it('빈 키워드는 버리고, 형태가 다르면 빈 결과', async () => {
+    const { parsePreemptionBoard } = await import('../analytics/lewordBoard');
+    expect(parsePreemptionBoard(board).picks.some((p) => !p.keyword.trim())).toBe(false);
+    expect(parsePreemptionBoard(null).picks).toEqual([]);
+    expect(parsePreemptionBoard({ rows: 'nope' }).picks).toEqual([]);
+  });
+
+  it('보드 주소가 정의돼 있다', async () => {
+    const { LEWORD_PREEMPTION_URL } = await import('../analytics/lewordBoard');
+    expect(LEWORD_PREEMPTION_URL).toMatch(/^https:\/\/.*preemption-board\.json$/);
+  });
+});

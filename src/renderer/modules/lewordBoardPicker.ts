@@ -14,6 +14,12 @@ interface LewordBoardPick {
   verdict: string;
   lane: string;
   recommended: boolean;
+  /* [2026-09-10] 선점 보드에서만 오는 신호 — 이길 자리인가 · 돈이 도는가. */
+  topic?: string;
+  openSlot?: number | null;
+  adClicks?: number | null;
+  saturated?: boolean;
+  layoutHeadline?: string;
 }
 
 /*
@@ -49,11 +55,32 @@ function lewordDocLabel(pick: LewordBoardPick): string {
   return `문서 ${pick.documentCount.toLocaleString()}건`;
 }
 
+/**
+ * 선점 보드에서 온 항목에는 "블로그가 이기는 자리" 라는 근거가 붙어 온다.
+ * 그 근거를 화면에 그대로 보여 준다 — 왜 이 키워드인지 눈으로 판단하게.
+ *
+ * [2026-09-10 실측] 43건 중 25건만 블로그가 이기는 자리였다. 검색량·문서수만 보고
+ * 고르면 나머지 33%(워드프레스가 이기는 화면)에 헛힘을 쓴다.
+ */
+function lewordSignals(pick: LewordBoardPick): string {
+  const parts: string[] = [];
+  if (typeof pick.adClicks === 'number' && pick.adClicks > 0) {
+    parts.push(`광고클릭 ${Math.round(pick.adClicks).toLocaleString()}`);
+  }
+  if (typeof pick.openSlot === 'number') parts.push(`빈자리 ${pick.openSlot}`);
+  if (pick.saturated === true) parts.push('앞자리 포화');
+  else if (pick.saturated === false) parts.push('앞자리 여유');
+  return parts.join(' · ');
+}
+
 function lewordRenderPicks(picks: LewordBoardPick[]): string {
   return picks.map((pick) => {
-    const badge = pick.recommended
-      ? '<span style="background:#0ea5e9;color:#fff;font-size:0.65rem;padding:1px 6px;border-radius:999px;font-weight:700;">추천</span>'
-      : '<span style="background:var(--bg-tertiary);color:var(--text-muted);font-size:0.65rem;padding:1px 6px;border-radius:999px;">관측</span>';
+    const isBlogSlot = pick.openSlot !== undefined || pick.adClicks !== undefined;
+    const badge = isBlogSlot
+      ? '<span style="background:#22c55e;color:#052e16;font-size:0.65rem;padding:1px 6px;border-radius:999px;font-weight:800;">블로그 자리</span>'
+      : pick.recommended
+        ? '<span style="background:#0ea5e9;color:#fff;font-size:0.65rem;padding:1px 6px;border-radius:999px;font-weight:700;">추천</span>'
+        : '<span style="background:var(--bg-tertiary);color:var(--text-muted);font-size:0.65rem;padding:1px 6px;border-radius:999px;">관측</span>';
     return (
       `<button type="button" class="leword-pick" data-keyword="${lewordEscapeHtml(pick.keyword)}" `
       + 'style="display:block;width:100%;text-align:left;padding:0.55rem 0.7rem;background:transparent;'
@@ -63,7 +90,11 @@ function lewordRenderPicks(picks: LewordBoardPick[]): string {
       + `${lewordEscapeHtml(lewordVolumeLabel(pick))} · ${lewordEscapeHtml(lewordDocLabel(pick))}`
       + (pick.verdict ? ` · ${lewordEscapeHtml(pick.verdict)}` : '')
       + (pick.lane ? ` · ${lewordEscapeHtml(pick.lane)}` : '')
-      + '</div></button>'
+      + '</div>'
+      + (lewordSignals(pick)
+        ? `<div style="font-size: 0.72rem; color: #4ade80; margin-top: 0.15rem;">${lewordEscapeHtml(lewordSignals(pick))}</div>`
+        : '')
+      + '</button>'
     );
   }).join('');
 }
@@ -91,7 +122,7 @@ async function loadLewordBoard(): Promise<void> {
     const m = res.board.measured || {};
     meta.style.display = 'block';
     meta.textContent = picks.length > 0
-      ? `${when} 갱신 · ${picks.length}건 · 후보 ${m.candidates ?? '?'}개 중 틈새 ${m.niche ?? 0} · 선점 ${m.preemption ?? 0}`
+      ? `${when} 갱신 · ${picks.length}건 (블로그가 이기는 자리 ${typeof m.blogWinnable === 'number' ? m.blogWinnable : 0}건 먼저) · 후보 ${m.candidates ?? '?'}개 중 틈새 ${m.niche ?? 0} · 선점 ${m.preemption ?? 0}`
       : `${when} 갱신 · 오늘은 고를 만한 글감이 없습니다 (후보 ${m.candidates ?? '?'}개 전부 탈락). 다음 갱신을 기다리세요.`;
 
     if (picks.length === 0) {
