@@ -233,6 +233,43 @@ function IncomeProofCard({ proof, eager = false }: { proof: CommunityIncomeProof
     );
 }
 
+/**
+ * 자리 — 경쟁 글 수로만 나눈다. 상위노출을 약속하는 값이 아니라 "지금 몇 명이 이미 썼나"다.
+ * 실측 분포(2026-09-10 192행): 10 이하 7건 · 200 이하 5건 · 1천 이하 74건 · 그 위 106건.
+ */
+const SEAT_STEPS = [
+    { max: 10, label: '거의 빔', tone: 'open' },
+    { max: 200, label: '여유', tone: 'easy' },
+    { max: 5000, label: '붐빔', tone: 'busy' },
+    { max: Infinity, label: '포화', tone: 'full' },
+] as const;
+
+function seatOf(documentCount: number) {
+    return SEAT_STEPS.find((step) => documentCount <= step.max) || SEAT_STEPS[SEAT_STEPS.length - 1];
+}
+
+/** 한 글자리당 찾는 사람 = 검색량 ÷ (경쟁 글 + 1). '기회지수'를 초보자 말로 부른 것이다. */
+function sharePerPost(row: HomeKeywordRow): number {
+    return Math.round(row.searchVolume / (row.documentCount + 1));
+}
+
+/**
+ * 오늘 고른 셋 — 가장 비어 있는 자리 · 아직 한 자릿수 · 사람이 가장 몰리는 말.
+ * 같은 키워드가 두 자리에 겹치지 않게 앞에서 고른 것을 빼고 고른다.
+ */
+function pickThree(rows: readonly HomeKeywordRow[]) {
+    const used = new Set<string>();
+    const take = (list: HomeKeywordRow[]) => {
+        const found = list.find((row) => !used.has(row.keyword));
+        if (found) used.add(found.keyword);
+        return found || null;
+    };
+    const lead = take([...rows].sort((a, b) => sharePerPost(b) - sharePerPost(a)));
+    const small = take([...rows].filter((row) => row.documentCount <= 10).sort((a, b) => b.searchVolume - a.searchVolume));
+    const big = take([...rows].sort((a, b) => b.searchVolume - a.searchVolume));
+    return { lead, small, big };
+}
+
 function KeywordChart({ rows }: { rows: HomeKeywordRow[] }) {
     const maxOpportunity = Math.max(1, ...rows.map((row) => row.opportunity));
     return (
@@ -328,6 +365,7 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
                         <th scope="col">키워드</th>
                         <th scope="col">검색량</th>
                         <th scope="col">블로그 문서수</th>
+                        <th scope="col">자리</th>
                         <th scope="col">기회지수</th>
                         <th scope="col">바로가기</th>
                     </tr>
@@ -352,6 +390,11 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
                             </th>
                             <td>{numberFormatter.format(row.searchVolume)}</td>
                             <td>{numberFormatter.format(row.documentCount)}</td>
+                            <td>
+                                <span className={`home-ops-seat tone-${seatOf(row.documentCount).tone}`}>
+                                    <i />{seatOf(row.documentCount).label}
+                                </span>
+                            </td>
                             <td className="home-ops-opportunity-cell">
                                 <KeywordSearchLink row={row} provider="daum" className="home-ops-opportunity-link">
                                     {decimalFormatter.format(row.opportunity)}
@@ -474,7 +517,8 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
     const displayIncomeProofs = incomeProofs.length > 0 ? incomeProofs : managedIncomeProofs;
     const usingManagedProofs = incomeProofs.length === 0 && managedIncomeProofs.length > 0;
     const chartRows = useMemo(() => briefing ? selectKeywordChartRows(briefing, 10) : [], [briefing]);
-    const uniqueCount = useMemo(() => briefing ? uniqueKeywordCount(briefing.rows) : 0, [briefing]);
+    // 고른 셋 — 숫자 넉 장을 대신한다. 초보자는 개수보다 "무엇을 쓰면 되나"가 먼저다.
+    const picks = useMemo(() => briefing ? pickThree(briefing.rows) : { lead: null, small: null, big: null }, [briefing]);
     const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, currentTab: HomeOperationsTab) => {
         const tabs = HOME_OPS_TAB_ORDER;
         const currentIndex = tabs.indexOf(currentTab);
@@ -834,6 +878,52 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                 }
                 .home-ops-fixed-badge strong { color: #f4c95d; font-size: 14px; }
                 .home-ops-fixed-badge span { color: rgba(235,242,250,0.64); font-size: 13px; }
+                /* 자리 — 경쟁 글 수 하나로만 나눈다. 색은 신호이지 장식이 아니다. */
+                .home-ops-seat { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; font-size: 12.5px; }
+                .home-ops-seat i { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+                .home-ops-seat.tone-open { color: #2fd39a; } .home-ops-seat.tone-open i { background: #2fd39a; }
+                .home-ops-seat.tone-easy { color: rgba(235,242,250,.85); } .home-ops-seat.tone-easy i { background: #2fd39a; opacity: .6; }
+                .home-ops-seat.tone-busy { color: #d9b23c; } .home-ops-seat.tone-busy i { background: #c9a227; }
+                .home-ops-seat.tone-full { color: rgba(235,242,250,.5); } .home-ops-seat.tone-full i { background: rgba(235,242,250,.45); }
+                .home-ops-brief-lead {
+                    margin: 0 0 10px !important; color: #eaf1fa !important;
+                    font-size: 17px !important; line-height: 1.6 !important; max-width: 56ch; text-wrap: balance;
+                }
+                /* 오늘 고른 셋 — 균등 3칸이 아니다. 셋의 무게가 다르므로 하나를 앞세운다. */
+                .home-ops-picks {
+                    display: grid; grid-template-columns: 1.45fr 1fr; gap: 1px;
+                    background: rgba(255,255,255,.08); border-top: 1px solid rgba(255,255,255,.08);
+                    border-bottom: 1px solid rgba(255,255,255,.08);
+                }
+                .home-ops-pick-side { display: grid; grid-template-rows: 1fr 1fr; gap: 1px; background: rgba(255,255,255,.08); }
+                .home-ops-pick { background: rgba(10,16,24,.55); padding: 20px 22px; display: flex; flex-direction: column; }
+                .home-ops-pick-lead { padding: 26px 28px; }
+                .home-ops-pick-tag {
+                    display: inline-flex; align-items: center; gap: 7px; margin-bottom: 12px;
+                    font-size: 11.5px; letter-spacing: .04em; color: rgba(235,242,250,.62);
+                }
+                .home-ops-pick-tag i { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+                .home-ops-pick-tag i.tone-open { background: #2fd39a; }
+                .home-ops-pick-tag i.tone-busy { background: #c9a227; }
+                .home-ops-pick-kw {
+                    margin: 0 0 10px; color: #fff; font-size: 17px; font-weight: 600;
+                    letter-spacing: -.015em; line-height: 1.35; text-wrap: balance;
+                }
+                .home-ops-pick-lead .home-ops-pick-kw { font-size: 23px; margin-bottom: 14px; }
+                .home-ops-pick-say { margin: 0; color: rgba(235,242,250,.78); font-size: 13.5px; line-height: 1.6; }
+                .home-ops-pick-say b { color: #2fd39a; font-weight: 600; }
+                .home-ops-pick-figs {
+                    display: flex; gap: 22px; margin-top: auto; padding-top: 14px;
+                    border-top: 1px solid rgba(255,255,255,.07);
+                }
+                .home-ops-pick-lead .home-ops-pick-figs { gap: 26px; padding-top: 16px; }
+                .home-ops-pick-figs span { display: block; margin-bottom: 3px; font-size: 11px; color: rgba(235,242,250,.55); letter-spacing: .03em; }
+                .home-ops-pick-figs b {
+                    display: block; color: #fff; font-size: 15px; font-weight: 500;
+                    font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+                }
+                .home-ops-pick-lead .home-ops-pick-figs b { font-size: 20px; }
+                .home-ops-pick-figs b.tone-open-text { color: #2fd39a; }
                 .home-ops-metrics {
                     display: grid;
                     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1116,6 +1206,10 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     .home-ops-brief-head { align-items: flex-start; flex-direction: column; padding: 20px 16px; }
                     .home-ops-fixed-badge { width: 100%; box-sizing: border-box; text-align: left; }
                     .home-ops-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 14px 12px 0; }
+                    .home-ops-picks { grid-template-columns: 1fr; }
+                    .home-ops-pick-lead { padding: 20px 16px; }
+                    .home-ops-pick { padding: 18px 16px; }
+                    .home-ops-pick-lead .home-ops-pick-kw { font-size: 20px; }
                     .home-ops-chart-wrap { padding: 20px 14px; }
                     .home-ops-subhead { align-items: flex-start; flex-direction: column; }
                     .home-ops-chart-row { grid-template-columns: minmax(0, 1fr); }
@@ -1252,23 +1346,56 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                                     <div>
                                         <span className="home-ops-kicker">DEPUTY GOLDEN KEYWORDS</span>
                                         <h3>{briefing.title}</h3>
-                                        <p>{briefing.author} 제공 · {formatDate(briefing.publishedAt)} · 원본 이미지 {briefing.sourceImages.length}장 추적 정보 기록</p>
+                                        <p className="home-ops-brief-lead">사람은 많이 찾는데 글은 적은 말을 골라 뒀습니다. 경쟁 글이 몇 개인지 먼저 보세요 — 그 숫자가 작을수록 지금 들어갈 자리가 있습니다.</p>
+                                        <p>{briefing.author} 제공 · {formatDate(briefing.publishedAt)} 검토본 · 키워드 {briefing.rows.length}개 · 원본 이미지 {briefing.sourceImages.length}장 추적 정보 기록</p>
                                     </div>
                                     <div className="home-ops-fixed-badge">
                                         <strong>{briefingResult?.source === 'saved' ? '관리자 저장본' : '초기 고정본'}</strong>
                                         <span>관리자가 수정·발행하기 전까지 유지</span>
                                     </div>
                                 </div>
-                                <div className="home-ops-metrics">
-                                    <div className="home-ops-metric"><strong>{briefing.rows.length}</strong><span>원본 전체 행</span></div>
-                                    <div className="home-ops-metric"><strong>{uniqueCount}</strong><span>차트용 고유 키워드</span></div>
-                                    <div className="home-ops-metric"><strong>{numberFormatter.format(Math.max(...briefing.rows.map((row) => row.searchVolume)))}</strong><span>최대 검색량</span></div>
-                                    <div className="home-ops-metric"><strong>{decimalFormatter.format(Math.max(...briefing.rows.map((row) => row.opportunity)))}</strong><span>최대 기회지수</span></div>
+                                <div className="home-ops-picks">
+                                    {picks.lead && (
+                                        <div className="home-ops-pick home-ops-pick-lead">
+                                            <span className="home-ops-pick-tag"><i className="tone-open" />경쟁 글이 가장 적은 말</span>
+                                            <p className="home-ops-pick-kw">{picks.lead.keyword}</p>
+                                            <p className="home-ops-pick-say">
+                                                {numberFormatter.format(picks.lead.searchVolume)}명이 찾는 말인데 지금 올라온 글은 <b>{numberFormatter.format(picks.lead.documentCount)}개</b>입니다.
+                                            </p>
+                                            <div className="home-ops-pick-figs">
+                                                <div><span>한 달 검색</span><b>{numberFormatter.format(picks.lead.searchVolume)}</b></div>
+                                                <div><span>경쟁 글</span><b className="tone-open-text">{numberFormatter.format(picks.lead.documentCount)}</b></div>
+                                                <div><span>한 글자리당 사람</span><b>{numberFormatter.format(sharePerPost(picks.lead))}</b></div>
+                                            </div>
+                                        </div>
+                                    )}
+                                    <div className="home-ops-pick-side">
+                                        {picks.small && (
+                                            <div className="home-ops-pick">
+                                                <span className="home-ops-pick-tag"><i className="tone-open" />글이 아직 한 자릿수</span>
+                                                <p className="home-ops-pick-kw">{picks.small.keyword}</p>
+                                                <div className="home-ops-pick-figs">
+                                                    <div><span>한 달 검색</span><b>{numberFormatter.format(picks.small.searchVolume)}</b></div>
+                                                    <div><span>경쟁 글</span><b className="tone-open-text">{numberFormatter.format(picks.small.documentCount)}</b></div>
+                                                </div>
+                                            </div>
+                                        )}
+                                        {picks.big && (
+                                            <div className="home-ops-pick">
+                                                <span className="home-ops-pick-tag"><i className="tone-busy" />사람이 가장 몰리는 말</span>
+                                                <p className="home-ops-pick-kw">{picks.big.keyword}</p>
+                                                <div className="home-ops-pick-figs">
+                                                    <div><span>한 달 검색</span><b>{numberFormatter.format(picks.big.searchVolume)}</b></div>
+                                                    <div><span>경쟁 글</span><b>{numberFormatter.format(picks.big.documentCount)}</b></div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                                 <div className="home-ops-chart-wrap">
                                     <div className="home-ops-subhead">
-                                        <strong>기회지수 TOP 10</strong>
-                                        <span>차트만 띄어쓰기·완전 중복을 정리합니다.</span>
+                                        <strong>한 글자리당 찾는 사람이 많은 10개</strong>
+                                        <span>검색량 ÷ (경쟁 글 + 1) 순 · 차트만 띄어쓰기·완전 중복을 정리합니다.</span>
                                     </div>
                                     <KeywordChart rows={chartRows} />
                                 </div>
