@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { EVIDENCE_ICON, SURFACE_TAG, TIER_BADGE, TIMING_BADGE } from './preemptionMeta';
+import { EVIDENCE_ICON, SURFACE_TAG, TIER_BADGE, TIMING_BADGE, isAdsenseLane } from './preemptionMeta';
 import { preemptionIndex } from '../../lib/preemptionIndex';
 
 /**
@@ -30,6 +30,11 @@ export type CardHeadRow = {
     /** 애드센스 적합 — 의도·CPC 실측 판정. null 은 재료 부족(미판정)이지 부적합이 아니다. */
     adsenseFit?: boolean | null;
     adsenseReason?: string;
+    /**
+     * 수익 판정 — 'bad' 면 애드센스 레인에서 빠진다(도구·즉답 검색은 광고 클릭이 안 나온다).
+     * 배지도 이걸 같이 봐야 한다. 안 보면 배지가 붙은 카드가 레인에서 사라져 화면이 모순된다.
+     */
+    monetize?: { verdict?: string } | null;
     earlyMover?: boolean;
     earlyMoverReasons?: string[];
     evidence: Evidence[];
@@ -95,7 +100,8 @@ function BoardCardHead({ row, rank, onCopy, copied, extraTags, observation = fal
                 ) : (row.trendLabel && row.trendLabel !== '판정불가' && (
                     <span className="lw-trend-tag">{row.trendLabel}</span>
                 )))}
-                {!observation && row.adsenseFit === true && (
+                {/* 배지와 레인 필터가 같은 함수를 쓴다(2026-09-10) — 배지가 붙었는데 레인에서 빠지는 일이 없다. */}
+                {!observation && isAdsenseLane(row) && (
                     <span className="lw-adsense-tag" title={row.adsenseReason || ''}>AdSense</span>
                 )}
             </div>

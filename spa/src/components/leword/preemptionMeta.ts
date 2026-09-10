@@ -101,8 +101,22 @@ export function rowMatchesWriteLane(
      * 검색자가 도구/즉답만 받고 나가면 광고 수익이 안 나온다 — 판정 이유는
      * '전체' 레인의 행 카드에 그대로 남아 왜 빠졌는지 보인다.
      */
-    if (laneId === 'adsense') return row.adsenseFit === true && row.monetize?.verdict !== 'bad';
+    if (laneId === 'adsense') return isAdsenseLane(row);
     return row.layoutBestFor === laneId;
+}
+
+/**
+ * 애드센스 레인 판정 — **배지와 필터가 같은 답을 쓰게 하는 한 곳**(2026-09-10).
+ *
+ * 전에는 카드가 `adsenseFit === true` 만 보고 AdSense 배지를 찍고, 레인 필터는 거기에
+ * `monetize.verdict !== 'bad'` 를 더 요구했다. 그래서 배지가 붙은 카드가 애드센스 레인에서는
+ * 빠졌다 — 같은 화면이 스스로 모순됐다. 판정을 여기 하나로 모은다.
+ */
+export function isAdsenseLane(row: {
+    adsenseFit?: boolean | null;
+    monetize?: { verdict?: string } | null;
+}): boolean {
+    return row.adsenseFit === true && row.monetize?.verdict !== 'bad';
 }
 
 /**
