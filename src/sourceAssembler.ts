@@ -1656,7 +1656,18 @@ async function collectNaverSearchContent(
 // search-API item is an 80-160 char preview with no numbers/conditions/steps.
 // This fetches the FULL TEXT of top-ranked posts so the model has concrete
 // facts to cite. Failures are non-fatal — callers fall back to snippets alone.
-const FULLTEXT_TOTAL_BUDGET_CHARS = 8000;
+/*
+ * [2026-09-11 실측] 8,000 → 18,000.
+ *
+ * 로그가 보여 준 것: "네이버 API 성공 1,781자(문서 20개)" — 문서당 90자, 스니펫이다.
+ * 본문은 4건만 붙었고 설계도 인용이 0개로 나왔다. 설계도는 인용을 자료에 글자 그대로
+ * 있을 때만 싣는데(환각 차단), 스니펫에는 당사자 발언이 거의 없다.
+ *
+ * 설계도는 30,000자를 받을 수 있는데 여기서 8,000에 멈춰 3배 여유를 안 쓰고 있었다.
+ * 본문 프롬프트는 안 키운다 — 늘어난 재료는 설계도 전용으로만 간다(materialBudget).
+ * 시간: 본문 4건에 2.0초였으므로 7건이면 3.5초, 수집 예산 20초 안이다.
+ */
+const FULLTEXT_TOTAL_BUDGET_CHARS = 18000;
 /*
  * [2026-09-02 실측] 곁가지 자료의 몫 상한.
  *
@@ -1670,7 +1681,8 @@ const FULLTEXT_TOTAL_BUDGET_CHARS = 8000;
  */
 const FULLTEXT_SECONDARY_RATIO = 0.3;
 const FULLTEXT_PER_ARTICLE_CHARS = 2500;
-const FULLTEXT_MAX_SUCCESS = 5;
+// [2026-09-11] 5 → 8. 예산만 늘리면 건수 상한에 먼저 걸린다.
+const FULLTEXT_MAX_SUCCESS = 8;
 
 /**
  * [2026-08-11] 한 편이 오래 걸려도 **확보한 만큼은 건진다.**
@@ -7850,6 +7862,14 @@ ${naverResult.content}`;
       productPrice: assembledProductPrice,
     }),
     previousTitles: input.previousTitles, // ✅ [2026-02-09 v2] 이전 생성 제목 전달 (연속발행 중복 방지)
+    /*
+     * [2026-09-11] 설계도 전용 재료 — 자르기 전 원본.
+     *
+     * rawText 는 본문 프롬프트에 실리므로 10,000자로 잘려 온다(렌더러). 그런데 설계도는
+     * 30,000자를 받을 수 있고, 재료가 얇으면 인용이 0개로 나온다(실측: 스니펫에는 당사자
+     * 발언이 거의 없다). 본문 호출을 키우지 않으면서 설계도에만 긴 재료를 주려고 따로 싣는다.
+     */
+    blueprintMaterial: input.baseText?.trim() || undefined,
   };
 
   return { source, warnings };

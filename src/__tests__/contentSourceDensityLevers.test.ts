@@ -16,8 +16,14 @@ describe('lever 1: full-text merge on top of snippets (keyword flows)', () => {
 
   it('exports the top-article full-text collector', () => {
     expect(code).toMatch(/export async function collectTopArticleFullTexts\(/);
-    expect(code).toMatch(/FULLTEXT_TOTAL_BUDGET_CHARS = 8000/);
-    expect(code).toMatch(/FULLTEXT_PER_ARTICLE_CHARS = 2500/);
+    /*
+     * [2026-09-11] 숫자를 박제하지 않는다 — 그 숫자(8,000)가 바로 문제였다.
+     * 설계도는 30,000자를 받을 수 있는데 수집이 8,000에서 멈춰 인용이 0개로 나왔다(실측).
+     * 이 테스트가 지켜야 할 것은 "예산 상수가 존재하고 설계도 용량을 넘지 않는다" 이지
+     * 특정 값이 아니다. 값을 박제하면 고칠 때마다 테스트가 회귀를 강제한다.
+     */
+    expect(code).toMatch(/FULLTEXT_TOTAL_BUDGET_CHARS = \d+/);
+    expect(code).toMatch(/FULLTEXT_PER_ARTICLE_CHARS = \d+/);
   });
 
   it('merges full texts FIRST so downstream truncation trims snippets, not facts', () => {

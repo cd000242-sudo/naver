@@ -186,6 +186,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/keywordTitlePrefixPolicy.ts',
   'src/content/kinExperienceMaterial.ts',
   'src/content/koreanFactTokens.ts',
+  'src/content/materialBudget.ts',
   'src/content/materialLabelLeak.ts',
   'src/content/materialNarrationStrip.ts',
   'src/content/materialTierNotice.ts',

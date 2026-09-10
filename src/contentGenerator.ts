@@ -427,6 +427,7 @@ import { recoverLooseStructuredContentFields } from './contentStructuredRecovery
 import { validateStructuredContent } from './contentStructuredValidator';
 import { isOpenAiReasoningModel } from './runtime/openaiReasoningFamily.js';
 import { auditAffiliateTitleShape } from './content/affiliateTitleShape.js';
+import { resolveBlueprintMaterial } from './content/materialBudget.js';
 import {
   buildGeminiEmptyResponseUserMessage,
 } from './contentGenerationUserGuidance';
@@ -2240,6 +2241,12 @@ export interface ContentSource {
   url?: string;
   title?: string;
   rawText: string;
+  /**
+   * [2026-09-11] 설계도(Blueprint) 전용 재료 — 자르기 전 원본.
+   * rawText 는 본문 프롬프트에 실려 10,000자로 잘리지만, 설계도는 30,000자를 받는다.
+   * 없으면 rawText 로 되돌아간다(materialBudget.resolveBlueprintMaterial).
+   */
+  blueprintMaterial?: string;
   crawledTime?: string;
   categoryHint?: SourceCategoryHint | string;
   metadata?: Record<string, unknown>;
@@ -6230,7 +6237,8 @@ async function generateStructuredContentInternal(
         {
           keyword: getPrimaryKeywordFromSource(source) || String(source.title || '').trim(),
           mode: blueprintMode,
-          material: String((source as any).rawText || ''),
+          // [2026-09-11] 설계도에는 자르기 전 원본을 준다 — 본문 호출은 그대로 둔다.
+          material: resolveBlueprintMaterial(source as any),
           confirmedTitle: confirmedTitleForBody || undefined,
         },
         {
