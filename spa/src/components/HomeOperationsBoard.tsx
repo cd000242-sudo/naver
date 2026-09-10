@@ -650,6 +650,31 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     border-bottom: 1px solid rgba(255,255,255,0.10);
                 }
                 .home-ops-panel-head strong { color: #fff; font-size: 20px; font-weight: 900; }
+                /* 제목을 뺀 얇은 머리 — 출처 한 줄과 링크만 담는다(2026-09-10). */
+                .home-ops-panel-head-slim { padding-top: 10px; padding-bottom: 10px; align-items: center; }
+                .home-ops-panel-hint { margin: 0 0 4px; padding: 0 20px; color: rgba(235,242,250,0.6); font-size: 14px; }
+                /* 안 읽은 공지 한 줄 — 다 읽으면 사라진다. */
+                .home-ops-notice-flash {
+                    display: flex; align-items: center; gap: 10px; width: 100%; margin: 0 0 14px;
+                    padding: 12px 16px; border-radius: 14px; cursor: pointer; text-align: left;
+                    background: rgba(68,215,182,0.1); border: 1px solid rgba(68,215,182,0.32); color: #eaf4ff;
+                    font: inherit;
+                }
+                .home-ops-notice-flash:hover { background: rgba(68,215,182,0.16); }
+                .home-ops-notice-flash .flash-tag {
+                    flex: none; padding: 3px 9px; border-radius: 999px; font-size: 12px; font-weight: 900;
+                    background: #44d7b6; color: #04241d;
+                }
+                .home-ops-notice-flash .flash-title {
+                    flex: 1 1 auto; min-width: 0; font-size: 15px; font-weight: 700;
+                    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+                }
+                .home-ops-notice-flash .flash-more { flex: none; font-size: 13px; color: rgba(235,242,250,0.66); }
+                .home-ops-notice-flash .flash-go { flex: none; font-size: 13px; font-weight: 700; color: #44d7b6; }
+                @media (max-width: 720px) {
+                    .home-ops-notice-flash { flex-wrap: wrap; }
+                    .home-ops-notice-flash .flash-title { white-space: normal; flex-basis: 100%; }
+                }
                 .home-ops-panel-head small { color: rgba(235,242,250,0.72); font-size: 16px; line-height: 1.55; }
                 .home-ops-panel-head a {
                     flex: 0 0 auto;
@@ -1263,6 +1288,28 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                 </header>
             )}
 
+            {/*
+              * 안 읽은 공지 한 줄(2026-09-10, 사장님 "공지사항은 중요한데 여기 놔둬도 되나 싶은데").
+              * 공지 전체는 탭에 두는 게 맞다 — 목록이 길고 접었다 펴야 한다.
+              * 다만 **안 읽은 것이 있을 때만** 맨 위에 한 줄로 띄운다. 눌러야 보이는 자리에만 두면
+              * 중요한 공지가 안 읽힌 채로 지나간다. 다 읽었으면 이 줄은 아예 없다 — 늘 붙어 있는 띠가 아니다.
+              */}
+            {!briefingOnly && unseenNoticeCount > 0 && unseenNotices[0] && (
+                <button
+                    type="button"
+                    className="home-ops-notice-flash"
+                    onClick={() => {
+                        setActiveTab('notice');
+                        setOpenNoticeId(unseenNotices[0].id || null);
+                    }}
+                >
+                    <span className="flash-tag">새 공지</span>
+                    <span className="flash-title">{unseenNotices[0].title}</span>
+                    {unseenNoticeCount > 1 && <span className="flash-more">외 {unseenNoticeCount - 1}건</span>}
+                    <span className="flash-go">보기 →</span>
+                </button>
+            )}
+
             <div className={`home-ops-layout${briefingOnly ? ' briefing-only' : ''}`}>
                 {!briefingOnly && (
                 <div ref={sidenavRef} className="home-ops-sidenav" role="tablist" aria-label="홈 보기 선택" aria-orientation="vertical">
@@ -1312,12 +1359,12 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                         aria-labelledby="home-ops-tab-notice"
                         hidden={briefingOnly || activeTab !== 'notice'}
                     >
-                        <div className="home-ops-panel-head">
-                            <div>
-                                <strong>공지사항</strong><br />
-                                <small>제목을 누르면 내용을 접거나 펼칠 수 있습니다.</small>
-                            </div>
-                        </div>
+                        {/*
+                          * 제목을 다시 찍지 않는다(2026-09-10, 사장님 "홈탭에 수익인증이 중복으로 있네요").
+                          * 바로 위 탭 버튼이 이미 '공지사항' 과 그 설명을 보여 준다 — 패널이 같은 말을 또 하면
+                          * 화면 한 뼘이 같은 글자 두 줄로 채워진다. 쓰는 법만 한 줄 남긴다.
+                          */}
+                        <p className="home-ops-panel-hint">제목을 누르면 내용을 접거나 펼칠 수 있습니다.</p>
                         {notices.length > 0 ? (
                             <div className="home-ops-notices">
                                 {notices.map((notice, index) => (
@@ -1428,11 +1475,9 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                         aria-labelledby="home-ops-tab-income"
                         hidden={briefingOnly || activeTab !== 'income'}
                     >
-                        <div className="home-ops-panel-head">
-                            <div>
-                                <strong>수익 인증</strong><br />
-                                <small>{usingManagedProofs ? '관리자가 등록한 실제 인증 자료입니다.' : incomeResult?.source === 'cache' ? '최근 확인한 승인 자료입니다.' : incomeResult?.source === 'unavailable' ? '서버 연결 상태를 확인 중입니다.' : '승인된 실제 자료만 보여드립니다.'}</small>
-                            </div>
+                        {/* 제목은 탭 버튼이 이미 말한다 — 여기서는 이 자료가 어디서 온 것인지와 전체 보기만. */}
+                        <div className="home-ops-panel-head home-ops-panel-head-slim">
+                            <small>{usingManagedProofs ? '관리자가 등록한 실제 인증 자료입니다.' : incomeResult?.source === 'cache' ? '최근 확인한 승인 자료입니다.' : incomeResult?.source === 'unavailable' ? '서버 연결 상태를 확인 중입니다.' : '승인된 실제 자료만 보여드립니다.'}</small>
                             <Link to="/community">전체 보기·작성 →</Link>
                         </div>
                         {displayIncomeProofs.length > 0 ? (
