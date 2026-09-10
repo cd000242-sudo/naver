@@ -495,7 +495,16 @@ function normalizeInlineNumberedLists(value: string): string {
       if (isMarkdownTableLine(line)) return line;
       const markers = line.match(/\b\d{1,2}[.)]\s+/g) || [];
       if (markers.length === 0) return line;
-      if (markers.length === 1 && /^\s*\d{1,2}[.)]\s+/.test(line)) return line;
+      /*
+       * [2026-09-10 사장님 실측] "…발매가의 1. 5배에서 2배 수준으로…" 한 문장이
+       * "…발매가의" + 빈 문단 + "1. 5배에서…" 로 갈렸다. 소수점 "1.5" 가 앞단 어딘가에서
+       * "1. 5" 로 벌어져 들어왔고, 여기가 그 하나를 번호 목록으로 보고 앞에 빈 줄을 넣었다.
+       *
+       * 줄 가운데 홀로 있는 번호 하나는 목록이 아니다 — 진짜 인라인 목록은 마커가 둘 이상이다
+       * ("순서는 1. 예열 2. 굽기 3. 식히기"). 하나뿐이면 벌어진 소수점이거나 그냥 문장 속
+       * 숫자일 가능성이 훨씬 크다. 잘못 펴면 한 문장이 두 문단으로 찢어진다.
+       */
+      if (markers.length < 2) return line;
       // [2026-08-26] 화살표로 이어진 순서는 목록이 아니라 한 흐름이다.
       //   "1. 탑승 → 2. 딸의 울음 지속 → 3. …" 을 번호마다 문단으로 쪼개면
       //   각 단계가 따로 떨어지고 사이에 빈 문단까지 끼어 읽히지 않는다(사장님 실측).
