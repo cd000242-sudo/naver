@@ -2296,6 +2296,10 @@ function LewordStyles() {
             }
             .lw-briefs-related a:hover { border-color: color-mix(in srgb, #03c75a 55%, transparent); }
             .lw-briefs-related a b { font-weight: 500; font-variant-numeric: tabular-nums; opacity: .6; font-size: 11.5px; }
+            /* 지금 들어갈 만한 말 — 자리를 실제로 재서 정면 글이 거의 없던 것. 초록 점 하나로만 구분한다. */
+            .lw-briefs-related a.is-open { background: color-mix(in srgb, #03c75a 12%, transparent); border-color: color-mix(in srgb, #03c75a 50%, transparent); }
+            .lw-briefs-related a i { font-style: normal; color: #03c75a; font-size: 9px; line-height: 1; }
+            .lw-briefs-related small { opacity: .55; font-size: 11.5px; }
             .lw-briefs-foot { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; margin-top: 10px; font-size: 12.5px; opacity: 0.85; }
             .lw-briefs-foot a { color: inherit; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, currentColor 40%, transparent); }
             .lw-briefs-facts a { margin-left: 6px; }

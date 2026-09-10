@@ -39,7 +39,7 @@ interface Brief {
     /** 핵심 검색어가 낮음/보통일 때 자리를 재 본 좁은 검색어 — null = 재 봤는데 없음, 없음(undefined) = 안 잼 */
     alternative?: { keyword: string; searchVolume: number | null; serpFacing: number | null; serpVacancy: number | null; serpFit: '높음' | '보통' | '낮음' | '미측정' } | null;
     /** 같이 넣을 말 — 본문에 함께 담을 좁은 검색어. 전부 검색광고 실측이고 검색량도 실측이다. */
-    related?: Array<{ keyword: string; searchVolume: number }>;
+    related?: Array<{ keyword: string; searchVolume: number; serpFacing?: number | null; serpVacancy?: number | null; serpFit?: '높음' | '보통' | '낮음' | '미측정' }>;
 }
 
 type RoundSlot = '아침' | '오후' | '저녁';
@@ -207,10 +207,23 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
                                 <p className="lw-briefs-related">
                                     <em>같이 넣을 말</em>
                                     {b.related.map((r) => (
-                                        <a key={r.keyword} href={naverSearchUrl(r.keyword)} target="_blank" rel="noreferrer" title={`월 검색량 ${num(r.searchVolume)} 실측`}>
+                                        <a
+                                            key={r.keyword}
+                                            className={r.serpFit === '높음' ? 'is-open' : ''}
+                                            href={naverSearchUrl(r.keyword)}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            title={r.serpFit
+                                                ? `월 검색량 ${num(r.searchVolume)} 실측 · 상위 10 정면 글 ${r.serpFacing ?? '—'}건${r.serpVacancy != null ? ` · 빈자리 ${r.serpVacancy}위` : ''} · 적합성 ${r.serpFit}`
+                                                : `월 검색량 ${num(r.searchVolume)} 실측 · 자리는 안 쟀습니다`}
+                                        >
+                                            {r.serpFit === '높음' && <i aria-hidden="true">●</i>}
                                             {r.keyword}<b>{num(r.searchVolume)}</b>
                                         </a>
                                     ))}
+                                    {b.related.some((r) => r.serpFit === '높음') && (
+                                        <small>● 표는 지금 상위 10에 정면 글이 거의 없는 말입니다</small>
+                                    )}
                                 </p>
                             )}
                             <footer className="lw-briefs-foot">
