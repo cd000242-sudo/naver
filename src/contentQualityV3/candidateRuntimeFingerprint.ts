@@ -609,6 +609,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/components/RecoveryFollowupActions.ts',
   'src/renderer/components/VeoProgressOverlay.ts',
   'src/renderer/modules/accountSettingsManager.ts',
+  'src/renderer/modules/agentModelSelect.ts',
   'src/renderer/modules/agentQuotaBadge.ts',
   'src/renderer/modules/aiAssistant.ts',
   'src/renderer/modules/aiExperienceToggleGate.ts',

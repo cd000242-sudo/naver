@@ -13,6 +13,7 @@ import {
   type AgentStatusProvider,
 } from '../utils/agentStatusRefreshCoordinator.js';
 import { runAgentLoginWithCodeFallback } from '../utils/agentLoginCodePrompt.js';
+import { initAgentModelSelects, syncAgentModelSelects } from './agentModelSelect.js';
 import {
   formatAgentVersionLabel,
   resolvePersistedTextModelConfig,
@@ -1119,6 +1120,12 @@ export async function initPriceInfoModal(): Promise<void> {
       const el = document.getElementById(elId) as HTMLInputElement | null;
       if (el) el.value = String((config as any)[cfgKey] || '');
     }
+    // 값을 채운 **뒤에** 드롭다운을 비춘다 — 순서가 바뀌면 저장된 모델이 목록에 안 잡힌다.
+    try {
+      syncAgentModelSelects();
+    } catch (error) {
+      console.warn('[Settings] 에이전트 모델 드롭다운 동기화 실패:', (error as Error)?.message);
+    }
 
     if (naverClientId) {
       naverClientId.value = config.naverClientId || config.naverDatalabClientId || '';
@@ -1718,6 +1725,13 @@ export async function initPriceInfoModal(): Promise<void> {
   }
 
   // ✅ [2026-01-27] AI 텍스트 엔진 저장 버튼
+  // [2026-09-10] 에이전트 모델 드롭다운 — 목록은 CLI 실측값, 없는 모델은 "직접 입력".
+  try {
+    initAgentModelSelects();
+  } catch (error) {
+    console.warn('[Settings] 에이전트 모델 드롭다운 초기화 실패:', (error as Error)?.message);
+  }
+
   const textEngineSaveBtn = document.getElementById('text-engine-save-btn');
   if (textEngineSaveBtn) {
     textEngineSaveBtn.addEventListener('click', () => {

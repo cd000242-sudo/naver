@@ -90,3 +90,57 @@ describe('배선 핀 — 설정에서 CLI 까지 관통한다', () => {
     expect(read('../renderer/modules/agentQuotaBadge.ts')).toMatch(/모델 CLI 기본/);
   });
 });
+
+/*
+ * [2026-09-10 사장님] "코덱스는 5.6 sol 아스트라 등등 있고 클로드코드도 페이블 오푸스5
+ * 소넷이 있고 안티그래비티도 3.8플래쉬 이런 식으로 모델이 있잖아. 얘네들도 환경설정에서
+ * 선택이 가능하게 해줘야지."
+ *
+ * 목록은 **전부 CLI 에서 실측했다**(2026-09-10). 지어낸 이름을 넣으면 CLI 가 거부한다.
+ *   claude --help  → "an alias for the latest model (e.g. 'fable', 'opus', or 'sonnet')"
+ *   agy models     → gemini-3.8-flash-high … 그대로
+ *   codex          → ~/.codex/config.toml 의 model = "gpt-6-astra"
+ */
+describe('AGENT_MODEL_PRESETS — CLI 실측 목록', () => {
+  it('코덱스에 아스트라와 5.6 계열이 있다', async () => {
+    const { AGENT_MODEL_PRESETS } = await import('../runtime/agentModelPolicy');
+    const values = AGENT_MODEL_PRESETS['agent-codex'].map((m) => m.value);
+    expect(values).toContain('gpt-6-astra');
+    expect(values).toContain('gpt-5.6-sol');
+  });
+
+  it('클로드에 페이블·오푸스·소넷 별칭이 있다', async () => {
+    const { AGENT_MODEL_PRESETS } = await import('../runtime/agentModelPolicy');
+    const values = AGENT_MODEL_PRESETS['agent-claude'].map((m) => m.value);
+    expect(values).toEqual(expect.arrayContaining(['fable', 'opus', 'sonnet']));
+  });
+
+  it('안티그래비티에 3.8 플래시가 있다', async () => {
+    const { AGENT_MODEL_PRESETS } = await import('../runtime/agentModelPolicy');
+    const values = AGENT_MODEL_PRESETS['agent-gemini'].map((m) => m.value);
+    expect(values).toContain('gemini-3.8-flash-high');
+  });
+
+  it('모든 후보가 안전 형식을 통과한다 — 목록에 있는 값이 거부되면 안 된다', async () => {
+    const { AGENT_MODEL_PRESETS, resolveAgentModel } = await import('../runtime/agentModelPolicy');
+    for (const [provider, models] of Object.entries(AGENT_MODEL_PRESETS)) {
+      for (const m of models) {
+        const key = provider === 'agent-codex' ? 'agentCodexModel'
+          : provider === 'agent-claude' ? 'agentClaudeModel' : 'agentGeminiModel';
+        expect(resolveAgentModel(provider, { [key]: m.value }), `${provider} ${m.value}`).toBe(m.value);
+      }
+    }
+  });
+
+  it('드롭다운·직접입력 UI 가 화면에 있다', () => {
+    const html = readFileSync(new URL('../../public/index.html', import.meta.url), 'utf8');
+    for (const id of ['agent-codex-model-select', 'agent-claude-model-select', 'agent-gemini-model-select']) {
+      expect(html).toContain(`id="${id}"`);
+    }
+  });
+
+  it('저장 정본은 여전히 입력칸 하나다 — 저장 경로를 두 갈래로 만들지 않는다', () => {
+    const mod = readFileSync(new URL('../renderer/modules/agentModelSelect.ts', import.meta.url), 'utf8');
+    expect(mod).toMatch(/input\.value = select\.value/);
+  });
+});

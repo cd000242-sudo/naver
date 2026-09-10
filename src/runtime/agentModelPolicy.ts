@@ -49,3 +49,45 @@ export function resolveAgentModel(
   if (!model || !SAFE_MODEL_ID.test(model)) return undefined;
   return model;
 }
+
+/**
+ * 에이전트별 모델 후보. **전부 CLI 에서 실측한 값이다**(2026-09-10).
+ *   claude --help  → "an alias for the latest model (e.g. 'fable', 'opus', or 'sonnet')
+ *                     or a model's full name (e.g. 'claude-fable-5')"
+ *   agy models     → gemini-3.8-flash-high … 목록 그대로
+ *   codex          → ~/.codex/config.toml 의 model 값(gpt-6-astra) + textModelConstants 의 5.6 계열
+ *
+ * 목록에 없는 모델은 화면의 "직접 입력" 으로 넣는다 — 벤더가 새 모델을 내면 앱 업데이트를
+ * 기다리지 않아도 되게 한다. 이 목록은 편의이지 울타리가 아니다.
+ */
+export const AGENT_MODEL_PRESETS: Readonly<Record<string, ReadonlyArray<{ value: string; label: string }>>> = Object.freeze({
+  'agent-codex': [
+    { value: 'gpt-6-astra', label: 'GPT-6 아스트라 (최신)' },
+    { value: 'gpt-5.6-sol', label: 'GPT-5.6 솔 (고품질)' },
+    { value: 'gpt-5.6-terra', label: 'GPT-5.6 테라 (균형)' },
+    { value: 'gpt-5.6-luna', label: 'GPT-5.6 루나 (경량·저비용)' },
+  ],
+  'agent-claude': [
+    { value: 'fable', label: '페이블 (최신 별칭)' },
+    { value: 'opus', label: '오푸스 (최신 별칭)' },
+    { value: 'sonnet', label: '소넷 (최신 별칭)' },
+    { value: 'claude-fable-5', label: 'claude-fable-5 (버전 고정)' },
+    { value: 'claude-opus-5', label: 'claude-opus-5 (버전 고정)' },
+    { value: 'claude-sonnet-5', label: 'claude-sonnet-5 (버전 고정)' },
+    { value: 'claude-haiku-4-5-20251001', label: 'claude-haiku-4.5 (가장 빠름)' },
+  ],
+  'agent-gemini': [
+    { value: 'gemini-3.8-flash-high', label: 'Gemini 3.8 Flash (High · 최신)' },
+    { value: 'gemini-3.8-flash-medium', label: 'Gemini 3.8 Flash (Medium)' },
+    { value: 'gemini-3.8-flash-low', label: 'Gemini 3.8 Flash (Low)' },
+    { value: 'gemini-3.7-flash-high', label: 'Gemini 3.7 Flash (High)' },
+    { value: 'gemini-3.6-flash-high', label: 'Gemini 3.6 Flash (High)' },
+    { value: 'gemini-3.1-pro-high', label: 'Gemini 3.1 Pro (High)' },
+    { value: 'claude-opus-4-6-thinking', label: 'Claude Opus 4.6 (Thinking)' },
+    { value: 'claude-sonnet-4-6', label: 'Claude Sonnet 4.6 (Thinking)' },
+    { value: 'gpt-oss-120b-medium', label: 'GPT-OSS 120B (Medium)' },
+  ],
+});
+
+/** 화면에서 "직접 입력" 을 고른 상태를 나타내는 값. 설정에는 저장되지 않는다. */
+export const AGENT_MODEL_CUSTOM = '__custom__';

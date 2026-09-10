@@ -357,6 +357,12 @@ try {
   // implementations must be inlined before every renderer consumer.
   const rendererRuntimeDependencyFiles = [
     {
+      // [2026-09-10] 에이전트 모델 후보 목록 — agentModelSelect 가 값으로 가져온다.
+      //   렌더러 밖(runtime/) 모듈이라 등록하지 않으면 tsc/빌드는 통과하고 화면에서만 터진다.
+      label: 'runtime/agentModelPolicy.js',
+      filePath: path.join(projectRoot, 'dist', 'runtime', 'agentModelPolicy.js'),
+    },
+    {
       label: 'automation/ftcDisclosurePresets.js',
       filePath: path.join(projectRoot, 'dist', 'automation', 'ftcDisclosurePresets.js'),
     },
@@ -537,6 +543,7 @@ try {
     // ✅ [v2.11.206] 장소(지도) 미리 확정 UI — 사진 모드 장소 블록
     'placePicker.js',
     'lewordBoardPicker.js',
+    'agentModelSelect.js',
     // ✅ [SPEC-DROPSHOT-2026] 이미지 생성 스튜디오 (멀티엔진 대량 생성 서브탭)
     'imageGenStudio.js',
     'imageGenStudioCore.js',
