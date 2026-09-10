@@ -6177,6 +6177,14 @@
                                             style="display: none; padding: 0.5rem 0.9rem; background: #4b5563; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">🔄 계정 전환</button>
                                     </div>
 
+                                    <!-- [2026-09-10] 에이전트 안에서 쓸 모델 — 앱이 목록을 갖지 않는다(벤더가 바꿔도 앱을 안 고친다). 비우면 CLI 기본 모델. -->
+                                    <div style="margin: -0.1rem 0 0.6rem 0; padding: 0.55rem 0.7rem; background: rgba(0,0,0,0.03); border: 1px dashed #047857; border-radius: 8px;">
+                                        <label for="agent-codex-model" style="display:block; font-size: 0.76rem; font-weight: 700; color: #047857; margin-bottom: 0.3rem;">🧠 Codex 모델 (선택)</label>
+                                        <input type="text" id="agent-codex-model" placeholder="예: gpt-5.6  (비우면 CLI 기본)" autocomplete="off"
+                                            style="width: 100%; background: var(--bg-secondary); border: 1px solid #047857; color: var(--text-strong); padding: 0.45rem 0.55rem; border-radius: 6px; font-size: 0.82rem;">
+                                        <p style="margin: 0.3rem 0 0 0; font-size: 0.7rem; color: var(--text-muted); line-height: 1.45;">CLI 에서 쓰는 모델 이름을 그대로 적으세요. <strong>비워 두면 Codex CLI 기본 모델</strong>로 돕니다. 이름이 틀리면 CLI 가 거부하니 오타에 주의하세요.</p>
+                                    </div>
+
                                     <!-- 🤖 에이전트 모드 (Claude Code 구독) -->
                                     <label id="agent-claude-card" class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #a78bfa; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f5f3ff, #ede9fe); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(167, 139, 250, 0.15);">
@@ -6209,6 +6217,14 @@
                                             style="display: none; padding: 0.5rem 0.9rem; background: #4b5563; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">🔄 계정 전환</button>
                                     </div>
 
+                                    <!-- [2026-09-10] 에이전트 안에서 쓸 모델 — 앱이 목록을 갖지 않는다(벤더가 바꿔도 앱을 안 고친다). 비우면 CLI 기본 모델. -->
+                                    <div style="margin: -0.1rem 0 0.6rem 0; padding: 0.55rem 0.7rem; background: rgba(0,0,0,0.03); border: 1px dashed #6d28d9; border-radius: 8px;">
+                                        <label for="agent-claude-model" style="display:block; font-size: 0.76rem; font-weight: 700; color: #6d28d9; margin-bottom: 0.3rem;">🧠 Claude 모델 (선택)</label>
+                                        <input type="text" id="agent-claude-model" placeholder="예: claude-fable-5  (비우면 CLI 기본)" autocomplete="off"
+                                            style="width: 100%; background: var(--bg-secondary); border: 1px solid #6d28d9; color: var(--text-strong); padding: 0.45rem 0.55rem; border-radius: 6px; font-size: 0.82rem;">
+                                        <p style="margin: 0.3rem 0 0 0; font-size: 0.7rem; color: var(--text-muted); line-height: 1.45;"><code>claude --model</code> 에 그대로 넘어갑니다. <strong>비워 두면 Claude Code 기본 모델</strong>. 모델마다 글 품질과 속도가 크게 다릅니다.</p>
+                                    </div>
+
                                     <!-- 🚀 에이전트 모드 (Gemini CLI · Antigravity 구독) -->
                                     <label id="agent-gemini-card" class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #60a5fa; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #eff6ff, #dbeafe); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(96, 165, 250, 0.15);">
@@ -6239,6 +6255,14 @@
                                         <button type="button" id="agent-gemini-switch-btn"
                                             title="로그아웃 후 다른 계정으로 다시 로그인합니다"
                                             style="display: none; padding: 0.5rem 0.9rem; background: #4b5563; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">🔄 계정 전환</button>
+                                    </div>
+
+                                    <!-- [2026-09-10] 에이전트 안에서 쓸 모델 — 앱이 목록을 갖지 않는다(벤더가 바꿔도 앱을 안 고친다). 비우면 CLI 기본 모델. -->
+                                    <div style="margin: -0.1rem 0 0.6rem 0; padding: 0.55rem 0.7rem; background: rgba(0,0,0,0.03); border: 1px dashed #b45309; border-radius: 8px;">
+                                        <label for="agent-gemini-model" style="display:block; font-size: 0.76rem; font-weight: 700; color: #b45309; margin-bottom: 0.3rem;">🧠 Gemini 모델 (선택)</label>
+                                        <input type="text" id="agent-gemini-model" placeholder="예: gemini-3.6-pro  (비우면 CLI 기본)" autocomplete="off"
+                                            style="width: 100%; background: var(--bg-secondary); border: 1px solid #b45309; color: var(--text-strong); padding: 0.45rem 0.55rem; border-radius: 6px; font-size: 0.82rem;">
+                                        <p style="margin: 0.3rem 0 0 0; font-size: 0.7rem; color: var(--text-muted); line-height: 1.45;"><code>agy --model</code> 에 그대로 넘어갑니다. <strong>비워 두면 Antigravity 기본 모델</strong>.</p>
                                     </div>
 
                                     <!-- 에이전트 모드 고지 (ToS·한도·사진모드 vision키) -->

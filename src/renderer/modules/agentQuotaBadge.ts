@@ -63,7 +63,21 @@ export async function refreshAgentQuotaBadge(): Promise<void> {
       value.textContent = badge.headline;
       value.style.color = TONE_COLORS[badge.tone];
     }
-    if (detail) detail.textContent = badge.detail;
+    /*
+     * [2026-09-10 사장님] "에이전트 고르고 나서 에이전트 속 모델은 왜 안 뜨니."
+     * 어떤 모델로 도는지 화면에 없으면 사용자는 확인할 방법이 없다. 설정에 적어 둔 이름을
+     * 배찌에 붙인다. 비어 있으면 CLI 기본 모델이라는 사실 자체를 알려 준다.
+     */
+    let modelSuffix = '';
+    try {
+      const cfg = await (window as any).api?.getConfig?.();
+      const key = provider === 'codex' ? 'agentCodexModel' : provider === 'claude' ? 'agentClaudeModel' : 'agentGeminiModel';
+      const model = String(cfg?.[key] ?? '').trim();
+      modelSuffix = model ? ` · 모델 ${model}` : ' · 모델 CLI 기본';
+    } catch {
+      // 모델 표시는 부가 정보다 — 못 읽어도 사용량 배찌는 그대로 뜬다.
+    }
+    if (detail) detail.textContent = `${badge.detail}${modelSuffix}`;
     card.style.display = '';
   } catch (err) {
     // 사용량 표시는 부가 정보다 — 조회가 실패해도 생성 흐름과 무관하다.

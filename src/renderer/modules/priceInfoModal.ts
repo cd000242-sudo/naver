@@ -1107,6 +1107,19 @@ export async function initPriceInfoModal(): Promise<void> {
     const naverHubClientSecretEl = document.getElementById('naver-hub-client-secret') as HTMLInputElement | null;
     if (naverHubClientSecretEl) naverHubClientSecretEl.value = (config as any).naverHubClientSecret || '';
 
+    /*
+     * [2026-09-10] 에이전트 안에서 쓸 모델 복원.
+     * 저장은 되는데 화면에 안 채워지면 사용자는 "또 지워졌다" 로 본다(HUB 키 때와 같은 자국).
+     */
+    for (const [elId, cfgKey] of [
+      ['agent-codex-model', 'agentCodexModel'],
+      ['agent-claude-model', 'agentClaudeModel'],
+      ['agent-gemini-model', 'agentGeminiModel'],
+    ] as const) {
+      const el = document.getElementById(elId) as HTMLInputElement | null;
+      if (el) el.value = String((config as any)[cfgKey] || '');
+    }
+
     if (naverClientId) {
       naverClientId.value = config.naverClientId || config.naverDatalabClientId || '';
       if (config.naverClientId || config.naverDatalabClientId) {
@@ -1461,6 +1474,15 @@ export async function initPriceInfoModal(): Promise<void> {
           'naver-hub-client-secret',
           currentConfig?.naverHubClientSecret,
         );
+        /*
+         * [2026-09-10 사장님] "에이전트 속 에이전트 모델은 왜 안 뜨니."
+         * 러너는 모델 플래그를 받을 준비가 돼 있었는데 UI 도 저장도 없었다. 비우면 CLI 기본 모델.
+         */
+        const agentModelValue = (elId: string): string | undefined =>
+          (document.getElementById(elId) as HTMLInputElement | null)?.value?.trim() || undefined;
+        const agentCodexModelValue = agentModelValue('agent-codex-model');
+        const agentClaudeModelValue = agentModelValue('agent-claude-model');
+        const agentGeminiModelValue = agentModelValue('agent-gemini-model');
         const naverAdApiKeyValue = readSecretInputValue('naver-ad-api-key', currentConfig?.naverAdApiKey);
         const naverAdSecretKeyValue = readSecretInputValue('naver-ad-secret-key', currentConfig?.naverAdSecretKey);
         const leonardoaiApiKeyValue = readSecretInputValue('leonardoai-api-key', currentConfig?.leonardoaiApiKey);
@@ -1560,6 +1582,10 @@ export async function initPriceInfoModal(): Promise<void> {
           // [2026-09-09] 값이 없으면 키를 아예 넣지 않는다 — saveConfig 는 병합이라
           //   빈 값을 실어 보내면 기존에 저장된 키를 지우게 된다.
           ...(naverHubClientIdValue ? { naverHubClientId: naverHubClientIdValue } : {}),
+          // [2026-09-10] 에이전트 안에서 쓸 모델. 비우면 키를 아예 싣지 않아 CLI 기본 모델로 간다.
+          ...(agentCodexModelValue ? { agentCodexModel: agentCodexModelValue } : {}),
+          ...(agentClaudeModelValue ? { agentClaudeModel: agentClaudeModelValue } : {}),
+          ...(agentGeminiModelValue ? { agentGeminiModel: agentGeminiModelValue } : {}),
           ...(naverHubClientSecretValue ? { naverHubClientSecret: naverHubClientSecretValue } : {}),
         };
 

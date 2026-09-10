@@ -744,6 +744,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/utils/videoProviderUtils.ts',
   'src/rssSearcher.ts',
   'src/runtime/adaptiveLimiter.ts',
+  'src/runtime/agentModelPolicy.ts',
   'src/runtime/cleanupTimeout.ts',
   'src/runtime/geminiTextModelNormalization.ts',
   'src/runtime/geminiVisionQuotaGuard.ts',

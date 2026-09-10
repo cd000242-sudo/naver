@@ -176,6 +176,16 @@ export interface AppConfig {
   // ✅ DeepInfra API (FLUX-2-dev 고품질 저가)
   deepinfraApiKey?: string;
 
+  /**
+   * [2026-09-10] 에이전트(구독 CLI) 안에서 쓸 모델 이름.
+   * 앱이 모델 목록을 가지지 않는다 — 사용자가 CLI 에서 쓰는 이름을 그대로 적는다.
+   * 벤더가 모델을 갈아치울 때마다 앱을 고치는 구조를 만들지 않기 위함이다.
+   * 비우면 CLI 기본 모델(종전 동작).
+   */
+  agentCodexModel?: string;
+  agentClaudeModel?: string;
+  agentGeminiModel?: string;
+
   // ✅ Gemini 텍스트 생성 주 모델 선택
   primaryGeminiTextModel?: 'gemini-3.6-flash' | 'gemini-3.5-flash' | 'gemini-3.1-flash-lite' | string;
 
@@ -472,6 +482,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'rememberLicenseCredentials', 'savedLicenseUserId', 'savedLicensePassword',
           'userDisplayName', 'userEmail',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
+          'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
           'customImageSavePath',
           'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
@@ -1093,6 +1104,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'minPublishIntervalMinutes',
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
+          'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
         ];
         let changed = false;

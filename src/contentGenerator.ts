@@ -4824,6 +4824,19 @@ async function callAgent(
   const { wrapAsAgenticTask, AGENTIC_TIMEOUT_MS } = await import('./agentCli/agenticEnvelope.js');
   const { agentTextProviderToCli } = await import('./runtime/modelRegistry.js');
   const cliProvider = agentTextProviderToCli(provider);
+  /*
+   * [2026-09-10 사장님] "에이전트 속 에이전트 모델은 왜 안 뜨니."
+   * 러너는 모델 플래그를 받을 준비가 돼 있었는데(codex -m, claude/agy --model) 아무도
+   * 채우지 않아 늘 CLI 기본 모델로 돌았다. 설정에 적어 둔 이름을 그대로 넘긴다 —
+   * 비어 있으면 undefined 라 종전과 같다.
+   */
+  const { resolveAgentModel } = await import('./runtime/agentModelPolicy.js');
+  let agentModel: string | undefined;
+  try {
+    agentModel = resolveAgentModel(provider, (await loadConfig()) as unknown as Record<string, unknown>);
+  } catch (error) {
+    console.warn('[Agent] 모델 설정 로드 실패 — CLI 기본 모델로 진행:', (error as Error)?.message);
+  }
   // Activate the CLI's own reasoning loop (analyze -> draft -> self-critique -> revise -> JSON)
   // instead of a one-shot pass. Iteration runs inside one subscription call (plan usage applies).
   // Judge/eval calls (raw) skip the writing envelope — they are not content generation.
@@ -4836,12 +4849,13 @@ async function callAgent(
       provider: cliProvider,
       prompt: agenticPrompt,
       schema,
+      model: agentModel,
       timeoutMs: AGENTIC_TIMEOUT_MS,
       signal,
     },
     agentProductPolicyContext,
   );
-  console.log(`[Agent] ✅ ${cliProvider} 응답 수신 (${result.durationMs}ms, ${result.text.length}자)`);
+  console.log(`[Agent] ✅ ${cliProvider} 응답 수신 (${result.durationMs}ms, ${result.text.length}자, 모델 ${agentModel || 'CLI 기본'})`);
   return result.text;
 }
 
