@@ -443,7 +443,19 @@ export async function recordContentPolicyPublication(input: {
   if (identity) {
     const tracked = ensureTrackedPublishedPost(input.userDataPath, {
       publishedAt: publishedAt.toISOString(),
-      keyword: input.payload.contentPolicyContext?.input.primary_keyword || draft.title,
+      /*
+       * [2026-09-10] 키워드가 없다고 **제목을 키워드 자리에 넣지 않는다.**
+       *
+       * 예전에는 `|| draft.title` 로 제목을 넣었다. 그러면 노출 체크가 그 제목으로 검색해
+       * 경쟁 문서 0개인 자리에서 자기 글을 1위로 찾고 "노출 성공" 으로 적는다.
+       * 실측: 저장된 100편 중 64편이 keyword === title, 그 키워드 평균 36자였고
+       * 네이버 데이터랩에 넣으면 검색량이 측정 하한 미만이었다(data: []).
+       * 노출률 83% 라는 숫자가 여기서 나왔다.
+       *
+       * 잴 수 없으면 재지 않는다. 측정 불가를 성공으로 적으면 데이터가 아니라 잡음이 되고,
+       * 잡음이 쌓이면 없는 것만 못하다.
+       */
+      keyword: input.payload.contentPolicyContext?.input.primary_keyword || '',
       mode: stringValue(input.payload.contentMode) || 'seo',
       blogId: identity.blogId,
       logNo: identity.logNo,

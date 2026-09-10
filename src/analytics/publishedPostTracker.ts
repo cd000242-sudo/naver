@@ -160,9 +160,15 @@ export function getPostsNeedingExposureCheck(
   hoursAfter: 24 | 48 | 72,
   now: number = Date.now(),
 ): PublishedPost[] {
+  /*
+   * [2026-09-10] 키워드 없는 글은 잴 수 없다. 예전에는 제목이 키워드 자리에 들어와
+   * 자기 제목으로 검색해 1위를 찾았다(노출률 83% 허수의 뿌리). 이제 키워드가 비면
+   * 측정하지 않고 미확인으로 남긴다 — 모르는 것을 모른다고 적는 편이 낫다.
+   */
   const targetMs = hoursAfter * 60 * 60 * 1000;
   const toleranceMs = 6 * 60 * 60 * 1000; // ±6시간 윈도우
   return posts.filter(p => {
+    if (!String(p.keyword ?? '').trim()) return false;
     const publishedMs = new Date(p.publishedAt).getTime();
     if (isNaN(publishedMs)) return false;
     const elapsed = now - publishedMs;
