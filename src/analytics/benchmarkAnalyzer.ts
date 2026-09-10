@@ -143,16 +143,16 @@ export function analyzeBenchmark(
     message: gapMessage('사람다움', ourEvaluation.humanlikeScore.score, baseline.avgHumanlikeScore, classifyGap(humanGap, true), true),
   });
 
-  // 4. safetyScore
-  const safetyGap = ourEvaluation.safetyScore.score - baseline.avgSafetyScore;
-  gaps.push({
-    signal: '안전성',
-    ourValue: ourEvaluation.safetyScore.score,
-    serpAverage: baseline.avgSafetyScore,
-    gap: safetyGap,
-    recommendation: classifyGap(safetyGap, true),
-    message: gapMessage('안전성', ourEvaluation.safetyScore.score, baseline.avgSafetyScore, classifyGap(safetyGap, true), true),
-  });
+  /*
+   * 4. safetyScore — [2026-09-10] **비교 불가 축이라 뺀다.**
+   *
+   * safetyEval 의 Fidelity(60점 슬롯)는 rawText(우리가 모은 자료)가 있어야 매겨진다.
+   * 남의 글에 우리 자료가 있을 리 없으므로 상위 문서는 이 축에서 항상 불리하다.
+   * 실측: "표현 안전 우리 100점 vs 상위 48점 → 상위 글보다 좋습니다" 가 리포트에 떴는데,
+   * 그 48점짜리 글이 1위였다. 상위 글이 위험한 게 아니라 채점표를 못 채운 것이다.
+   *
+   * 못 채우는 항목으로 남을 깎으면 그건 측정이 아니라 자기 확인이다. 빼는 것이 맞다.
+   */
 
   // 5. 본문 길이
   const lenGap = ourBodyLength - baseline.avgBodyLength;

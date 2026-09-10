@@ -21,6 +21,7 @@
 import axios from 'axios';
 import { callNaverSearch, resolveAllNaverCredentials } from '../naver/index.js';
 import { evaluate, type EvaluationInput, type EvaluationResult, type Mode } from '../content/qualityEvaluator';
+import { extractSemiAutoHeadingsFromBody } from '../renderer/utils/semiAutoHeadingExtractor.js';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // 타입
@@ -215,10 +216,24 @@ export async function probeSerp(
       const bodyLength = body.length;
       let evaluation: EvaluationResult | null = null;
       if (bodyLength >= 100) {
+        /*
+         * [2026-09-10 사장님] "이미 상위노출된 걸 보지 않니?"
+         *
+         * 봤지만 **채점표를 반만 채우고** 봤다. headings 를 빈 배열로 넣어 왔는데,
+         * 상위 문서에 소제목이 없는 게 아니라 우리가 **안 뽑은** 것이다.
+         * seoEval 소제목 배점 15점에서 빈 배열은 6점, 소제목 3~7개는 15점 —
+         * 시작부터 9점이 벌어진 채로 "우리가 이겼다" 는 결론이 나왔다(179건 중 173건).
+         *
+         * rawText 는 구조적으로 채울 수 없다(남의 글에 우리 자료가 있을 리 없다).
+         * 그래서 그 축은 benchmarkAnalyzer 에서 비교 대상에서 뺀다 — 여기서는
+         * 채울 수 있는 것만 채운다.
+         */
+        const probedHeadings = extractSemiAutoHeadingsFromBody(body)
+          .map((heading) => ({ title: heading.title, content: heading.content }));
         const evalInput: EvaluationInput = {
           body,
           title: item.title,
-          headings: [],
+          headings: probedHeadings,
           rawText: '',
           primaryKeyword: keyword,
           mode,
