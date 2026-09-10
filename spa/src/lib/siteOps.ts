@@ -254,7 +254,21 @@ export async function fetchSiteContent(): Promise<SiteContent | null> {
     const staleCache = readCachedSiteContent(0);
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), SITE_CONTENT_FETCH_TIMEOUT_MS);
-    siteContentPromise = fetch(`${EDGE_URL}?action=site-content`, { cache: 'default', signal: controller.signal })
+    /*
+     * 주소에 '분' 도장을 찍는다(2026-09-10).
+     *
+     * 왜: 관리자가 브리핑을 저장해도 홈이 안 바뀐다는 제보. 저장은 되어 있었다 —
+     * 실측에서 서버엔 192행이 있는데 화면은 178행이었다. 범인은 캐시 두 겹이다.
+     *   엣지  Cache-Control: public, max-age=300  (CF-Cache-Status: HIT · Age 215 실측)
+     *   화면  cache:'default' 라 브라우저도 그 300초를 그대로 지킨다 → 새로고침해도 옛것
+     * 그래서 최대 5분 동안 옛 화면을 본다.
+     *
+     * 분 단위 도장을 찍으면 주소가 1분마다 바뀌어 두 겹을 같이 지나간다. 그러면서도
+     * 같은 1분 안의 방문자는 **같은 주소**를 보므로 엣지가 그대로 묶어 준다 —
+     * 원본(GAS) 호출은 여전히 분당 1회다. 캐시를 끄는 게 아니라 잘게 써는 것이다.
+     */
+    const minuteStamp = Math.floor(Date.now() / 60_000);
+    siteContentPromise = fetch(`${EDGE_URL}?action=site-content&m=${minuteStamp}`, { cache: 'default', signal: controller.signal })
         .then((res) => res.json())
         .then((data) => {
             if (data && (data.ok || data.success) && data.content) {

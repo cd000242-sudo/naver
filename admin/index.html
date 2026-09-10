@@ -6045,9 +6045,21 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 return undefined;
             }
             if (!prepared.rows.length) return undefined;
+            /*
+             * publishedAt·revision 을 여기서 찍는다(2026-09-10).
+             *
+             * 빠져 있었다. 그래서 홈 화면이 "1970. 01. 01."을 띄웠다 — 화면의 날짜 정규화기
+             * (isoOrEpoch)는 못 읽는 날짜를 에포크 0 으로 떨어뜨리는데, 저장본에 날짜 자체가
+             * 없었으니 늘 1970 이었다. 실측(2026-09-10 서버 저장본):
+             *   keywordBriefing 키 = title,author,formulaVersion,source,sourceImages,rows
+             *   publishedAt: undefined · revision: undefined
+             * 판번호도 같이 올린다 — 저장할 때마다 1씩 올라가야 "몇 번째 검수본인지"가 남는다.
+             */
             return {
                 title: getValue('keyword-briefing-title') || '부방장 황금키워드 브리핑',
                 author: getValue('keyword-briefing-author') || '부방장',
+                publishedAt: new Date().toISOString(),
+                revision: Math.max(0, Number(keywordBriefingEditorState.revision) || 0) + 1,
                 formulaVersion: 'search-volume-divided-by-documents-plus-one-v1',
                 source: 'admin-image-ocr-reviewed',
                 sourceImages: keywordBriefingEditorState.sourceImages.slice(0, 12),
