@@ -180,6 +180,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/headingSkeletonVariety.ts',
   'src/content/headingStyleRepair.ts',
   'src/content/homefeedExposurePattern.ts',
+  'src/content/homefeedTitleHookFloor.ts',
   'src/content/internalLinkManager.ts',
   'src/content/issueDisciplineAudit.ts',
   'src/content/issueDisciplineRules.ts',

@@ -227,7 +227,12 @@ describe('Content Quality V3 evidence attestation', () => {
         //   제목 모양이었다(모델명·판촉 브래킷 미노출군 5/6 vs 상황어 노출군 4/5).
         //   상품명으로 검색하면 상위가 스마트스토어·공식몰이라 블로그가 낄 자리가 없다.
         //   (shopping_review.prompt 1개만 바뀌었음을 재계산으로 확인)
-        '19059be3c5d7946b6026b1788d56710a5396e01685fc0780490ce7d03836db29',
+        // [2026-09-11] 홈판 제목 후킹 하한을 프롬프트에 신설해 재계산 — homefeed/base.prompt 의
+        //   금지 표현 15개 대 장려 1개가 밋밋한 제목의 뿌리였다. 후킹을 쓰라는 지시가 없어
+        //   모델의 최적해가 "아무 약속도 하지 않는 제목"이 됐다. TITLE 절에 구조 하한
+        //   (대조·인용·결론차단 중 최소 1개 + 요약형 종결 금지)을 추가했다.
+        //   (homefeed/base.prompt 1개만 바뀌었음을 재계산으로 확인)
+        'be8b8687b1be2ad39b6ccc90514835594490da380c080e433f49acbf65ceda40',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

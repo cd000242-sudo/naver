@@ -268,3 +268,5 @@ export function computeHomefeedIntroCriticalIssues(intro: string | undefined): s
   if (!VALUE_CUES.test(head)) issues.push('도입부에 이 글에서 얻을 판단 기준·차이·확인 항목이 없음');
   return issues;
 }
+
+export { computeHomefeedTitleHookFloorIssues } from './content/homefeedTitleHookFloor';

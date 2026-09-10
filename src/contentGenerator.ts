@@ -346,6 +346,7 @@ export { buildGeminiModelChain } from './contentGeminiModelPolicy.js';
 import {
   computeSeoTitleCriticalIssues,
   computeHomefeedTitleCriticalIssues,
+  computeHomefeedTitleHookFloorIssues,
   computeAffiliateTitleCriticalIssues,
   computeHomefeedIntroCriticalIssues,
 } from './contentTitleValidators';
@@ -7106,7 +7107,13 @@ async function generateStructuredContentInternal(
       let blueprintIntroPatched = 0;
       if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && mode === 'homefeed') {
         const hfKeyword = getPrimaryKeywordFromSource(source);
-        const titleIssues = computeHomefeedTitleCriticalIssues(parsed.selectedTitle, hfKeyword);
+        // [2026-09-11] 결함 검사만으로는 밋밋한 제목이 무결점으로 통과해 후킹 패치가
+        //   한 번도 안 돌았다(실측 37편 중 13편 35%). 후킹 하한을 합류시켜, 결함이
+        //   없어도 대조·인용·결론차단이 전부 없으면 패치 경로로 보낸다.
+        const titleIssues = [
+          ...computeHomefeedTitleCriticalIssues(parsed.selectedTitle, hfKeyword),
+          ...computeHomefeedTitleHookFloorIssues(parsed.selectedTitle),
+        ];
         if (titleIssues.length > 0 && attempt < QUALITY_ATTEMPT_LIMIT) {
           if (costPolicy.allowLlmTitlePatch) {
             try {
