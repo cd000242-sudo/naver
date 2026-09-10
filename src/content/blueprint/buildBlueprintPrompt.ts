@@ -55,10 +55,13 @@ export function buildBlueprintPrompt(input: BlueprintPromptInput): string {
     `- facts: 이 글에 쓸 핵심 사실 최대 ${L.factsMax}개. claim 은 짧게 정리한 사실, snippet 은 그 사실이 적힌 자료 원문 발췌(${L.snippetMinChars}~${L.snippetMaxChars}자, 그대로 복사). 수치·날짜·금액은 snippet 에 있는 것만.`,
     `- skeleton: 소제목 후보 ${L.skeletonMin}~${L.skeletonMax}개(각 ${L.headingMaxChars}자 이내, 명사구 또는 짧은 질문형). 서로 다른 질의 축(정의·조건·절차·비용·비교·예외·확인처)을 하나씩 맡는다.`,
     offTopicRule,
+    // [SPEC-EVENT-RETRIEVAL-2026] 자료가 여러 사건을 담고 있을 때 어느 것이 중심인지 모델만 안다.
+    //   판정은 코드가 하되(eventCohesion), 누가·언제인지는 여기서 받는다.
+    `- centralEvent: 이 자료들이 말하는 **중심 사건 하나**의 서명. people 은 그 사건의 등장 인물 최대 ${L.centralPeopleMax}명, dates 는 사건 날짜 최대 ${L.centralDatesMax}개, eventType 은 무슨 일이었는지 한 마디(${L.centralEventTypeMaxChars}자 이내). 자료에 여러 사건이 섞여 있으면 **키워드의 질문에 답하는 사건**을 고른다. 자료에 있는 이름·날짜만 적는다.`,
     '- 자료에 없는 사실·수치·발언을 만들지 않는다. 모르면 비운다.',
     '',
     '[출력 형식]',
-    '{"angle":"…","readerSituation":"…","quotes":[{"text":"…","speaker":"…"}],"facts":[{"claim":"…","snippet":"…"}],"skeleton":["…"],"offTopic":["…"]}',
+    '{"angle":"…","readerSituation":"…","quotes":[{"text":"…","speaker":"…"}],"facts":[{"claim":"…","snippet":"…"}],"skeleton":["…"],"offTopic":["…"],"centralEvent":{"people":["…"],"dates":["…"],"eventType":"…"}}',
     '',
     '[자료]',
     material,

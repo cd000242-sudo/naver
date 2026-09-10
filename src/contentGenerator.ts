@@ -3,6 +3,7 @@ import { stripAiConclusionOpenersFromContent } from './content/aiConclusionOpene
 // [SPEC-BLUEPRINT-2026 Phase 2] 본문 호출 전 설계도 — 인용·사실·상황·소제목을 재료로 넘긴다.
 import { generateBlueprint } from './content/blueprint/generateBlueprint';
 import { renderBlueprintMaterial } from './content/blueprint/renderBlueprintMaterial';
+import { splitByCentralMention } from './content/eventCohesion.js';
 import { insertBlueprintIntoPrompt } from './content/blueprint/insertBlueprintIntoPrompt';
 import { stripMaterialNarrationFromContent } from './content/materialNarrationStrip.js';
 import { stripResearchNoteChatter } from './content/researchNoteHygiene.js';
@@ -6224,6 +6225,31 @@ async function generateStructuredContentInternal(
         blueprintAngle = blueprintRun.result.blueprint.angle;
         blueprintOffTopic = blueprintRun.result.blueprint.offTopic.slice();
         console.log(`[Blueprint] 📐 엔진 ${route.engine} · 재료 ${blueprintBlock.length}자 · ${blueprintRun.elapsedMs}ms`);
+        /*
+         * [SPEC-EVENT-RETRIEVAL-2026 Phase 1] 중심 사건과 이어지지 않는 자료를 강등한다.
+         *
+         * 사장님 실측: "김서현 류현진 평행이론" 글에 송영진 151km 기사가 섞여 들어왔다.
+         * 주제 게이트 4곳은 전부 어휘 겹침이라 같은 낱말을 쓰는 다른 사건을 통과시킨다.
+         * 여기서는 축이 다르다 — 설계도가 알려준 중심 인물·날짜가 그 문서에 **언급조차
+         * 되지 않으면** 다른 사건이다. 버리지 않고 offTopic 으로 넘겨 본문에서 빼게 한다.
+         */
+        const centralEvent = blueprintRun.result.blueprint.centralEvent;
+        if (centralEvent) {
+          const split = splitByCentralMention(String((source as any).rawText || ''), centralEvent);
+          if (split.demoted.length > 0) {
+            console.log(
+              `[EventCohesion] 🎯 중심 사건: 인물 ${centralEvent.people.join('·') || '없음'}`
+              + ` · 날짜 ${centralEvent.dates.join('·') || '없음'}`
+              + ` · ${centralEvent.eventType || '유형 미상'}`,
+            );
+            for (const reason of split.reasons) console.log(`[EventCohesion] ⬇️ 강등 — ${reason}`);
+            const demotedSubjects = split.demoted
+              .map((doc) => doc.trim().split(String.fromCharCode(10)).find((line) => line.trim().length > 0) || '')
+              .map((line) => line.replace(/^[【\[]|[】\]]$/gu, '').trim().slice(0, 60))
+              .filter(Boolean);
+            blueprintOffTopic = [...new Set([...blueprintOffTopic, ...demotedSubjects])];
+          }
+        }
       }
     }
   }

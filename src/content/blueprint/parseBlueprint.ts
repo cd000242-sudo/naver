@@ -232,6 +232,29 @@ export function parseBlueprint(raw: string, material: string): ParsedBlueprint |
     .filter(Boolean)
     .slice(0, L.offTopicMax);
 
+  /*
+   * [SPEC-EVENT-RETRIEVAL-2026] 중심 사건 서명.
+   * 없으면 undefined 로 둔다 — 빈 객체를 만들면 판정기가 "인물 0명" 을 근거로 착각한다.
+   */
+  const centralRaw = (parsed.centralEvent && typeof parsed.centralEvent === 'object')
+    ? parsed.centralEvent as Record<string, unknown>
+    : null;
+  const centralList = (value: unknown, max: number): string[] =>
+    (Array.isArray(value) ? value : [])
+      .map((entry) => (typeof entry === 'string' ? entry.trim() : ''))
+      .filter((entry, index, all) => entry.length > 0 && all.indexOf(entry) === index)
+      .slice(0, max);
+  const centralEvent = centralRaw
+    ? {
+      people: centralList(centralRaw.people, L.centralPeopleMax),
+      dates: centralList(centralRaw.dates, L.centralDatesMax),
+      // clip 은 숫자도 문자열로 바꾼다 — 모델이 엉뚱한 타입을 주면 비운다.
+      eventType: typeof centralRaw.eventType === 'string'
+        ? clip(centralRaw.eventType, L.centralEventTypeMaxChars)
+        : '',
+    }
+    : undefined;
+
   const readerSituation = clip(parsed.readerSituation, L.readerSituationMaxChars);
   const angle = clip(parsed.angle, L.angleMaxChars);
 
@@ -239,7 +262,7 @@ export function parseBlueprint(raw: string, material: string): ParsedBlueprint |
   if (!readerSituation && facts.length === 0 && quotes.length === 0 && skeleton.length < L.skeletonMin) return null;
 
   return {
-    blueprint: { angle, readerSituation, quotes, facts, skeleton, offTopic },
+    blueprint: { angle, readerSituation, quotes, facts, skeleton, offTopic, centralEvent },
     dropped: {
       quotes: quotesRaw.length - quotes.length,
       facts: factsRaw.length - facts.length,

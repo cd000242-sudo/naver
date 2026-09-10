@@ -156,6 +156,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/evaluators/humanlikeEval.ts',
   'src/content/evaluators/safetyEval.ts',
   'src/content/evaluators/seoEval.ts',
+  'src/content/eventCohesion.ts',
   'src/content/evidenceIntegrity.ts',
   'src/content/experienceSentenceContract.ts',
   'src/content/exposureWinnersBlock.ts',
