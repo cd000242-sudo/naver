@@ -118,3 +118,12 @@ export function countFacing(titles: string[] | undefined, keyword: string): numb
         return words.every((word) => flat.includes(norm(word)));
     }).length;
 }
+
+/**
+ * 검색량 응답의 키 — 워커가 띄어쓰기를 없앤 채로 돌려준다(searchAdVolumes 의 relKeyword 정규화).
+ * 문서수·정면 글은 원래 키워드 그대로 온다. 이 차이를 모르고 원래 키워드로 찾으면
+ * 띄어쓰기가 있는 키워드는 **전부** 빈 값이 된다(2026-09-10 실사고 — 553개 전량 '—').
+ */
+export function volumeKey(keyword: string): string {
+    return String(keyword).replace(/\s+/g, '');
+}

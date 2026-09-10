@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { fetchKeywordDocs, fetchKeywordFrontal, fetchKeywordVolumes } from '../../lib/keywordApi';
-import { countFacing, seatFromFacing, type TrendSeat } from '../../lib/trendCsv';
+import { countFacing, seatFromFacing, volumeKey, type TrendSeat } from '../../lib/trendCsv';
 
 /**
  * 지금 실시간 바로 재기 — 실검 틈새 탭.
@@ -70,9 +70,11 @@ export default function LiveNichePanel({ items }: { items: Array<{ rank: number;
 
             setStatus('검색량 재는 중…');
             const volumeRes = await fetchKeywordVolumes(keywords).catch(() => null);
+            // 워커는 띄어쓰기를 없앤 키로 돌려준다 — 원래 키워드로 찾으면 전부 빈 값이 된다.
             const volumes = volumeRes?.ok ? volumeRes.data?.volumes || {} : {};
-            working = working.map((row) => (volumes[row.keyword] === undefined
-                ? row : { ...row, searchVolume: Number(volumes[row.keyword]) }));
+            if (volumeRes && !volumeRes.ok) setStatus('검색량을 못 잽니다 — 내 API 키 탭에서 검색광고 키를 넣어 주세요.');
+            working = working.map((row) => (volumes[volumeKey(row.keyword)] === undefined
+                ? row : { ...row, searchVolume: Number(volumes[volumeKey(row.keyword)]) }));
             setRows(working);
 
             setStatus('문서수 재는 중…');

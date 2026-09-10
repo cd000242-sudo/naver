@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { fetchKeywordDocs, fetchKeywordFrontal, fetchKeywordVolumes } from '../../lib/keywordApi';
-import { countFacing, parseTrendCsv, seatFromFacing, type TrendCsvRow, type TrendSeat } from '../../lib/trendCsv';
+import { countFacing, parseTrendCsv, seatFromFacing, volumeKey, type TrendCsvRow, type TrendSeat } from '../../lib/trendCsv';
 
 /**
  * 트렌드 CSV 들이기 — 분석기 탭 안.
@@ -20,6 +20,8 @@ import { countFacing, parseTrendCsv, seatFromFacing, type TrendCsvRow, type Tren
 const SEAT_ORDER: Record<TrendSeat, number> = { '열림': 0, '반열림': 1, '잠김': 2, '안 잼': 3 };
 const SEAT_CLASS: Record<TrendSeat, string> = { '열림': 'open', '반열림': 'semi', '잠김': 'locked', '안 잼': 'none' };
 const DOC_CHUNK = 120;
+/** 검색광고 묶음 — 워커가 한 번에 100개까지만 받는다(searchAdVolumes 의 slice(0,100)). */
+const VOLUME_CHUNK = 100;
 const FRONTAL_CHUNK = 12;
 const SEAT_CAP = 60;
 
@@ -63,7 +65,44 @@ export default function TrendCsvPanel() {
         });
     }, [rows, category, openOnly]);
 
-    const openCount = rows.filter((row) => seatFromFacing(row.facing) === '열림').length;
+    /**
+     * 자리 재기 — 아직 안 잰 것 중 **문서가 적은 것부터** 상한만큼. 빈자리는 그쪽에 있을 확률이
+     * 높고 워커도 아낀다. 상한에서 끊고 '이어 재기'로 다음 묶음을 잇는다 — 553개를 한 번에
+     * 몰아치면 워커 주소가 네이버에 막혀 모든 방문자가 못 쓴다.
+     */
+    const measureSeats = async (base: Row[]) => {
+        let working = base;
+        const targets = working
+            .filter((row) => row.documentCount !== null && row.facing === null)
+            .sort((a, b) => (a.documentCount as number) - (b.documentCount as number))
+            .slice(0, SEAT_CAP)
+            .map((row) => row.keyword);
+        if (targets.length === 0) {
+            setStatus('더 잴 것이 없습니다.');
+            return;
+        }
+        let done = 0;
+        for (const part of chunk(targets, FRONTAL_CHUNK)) {
+            const res = await fetchKeywordFrontal(part).catch(() => null);
+            const titles = res?.ok ? res.data?.titles || {} : {};
+            working = working.map((row) => (part.includes(row.keyword)
+                ? { ...row, facing: countFacing(titles[row.keyword], row.keyword) } : row));
+            done += part.length;
+            setRows(working);
+            setStatus(`자리 재는 중… ${done}/${targets.length}`);
+        }
+        const measured = working.filter((row) => row.facing !== null).length;
+        const opened = working.filter((row) => seatFromFacing(row.facing) === '열림').length;
+        const left = working.filter((row) => row.documentCount !== null && row.facing === null).length;
+        setStatus(`고유 ${working.length}개 · 자리 잰 것 ${measured} · 빈자리 ${opened}`
+            + (left > 0 ? ` · 아직 안 잰 것 ${left} — [이어 재기]` : ''));
+    };
+
+    /** 상한에서 끊긴 다음 묶음을 잇는다. */
+    const measureMore = async () => {
+        setBusy(true);
+        try { await measureSeats(rows); } finally { setBusy(false); }
+    };
 
     /**
      * 파일 하나를 읽어 재기 — 검색량 → 문서수 → 자리 순.
@@ -86,15 +125,19 @@ export default function TrendCsvPanel() {
 
             const keywords = working.map((row) => row.keyword);
 
-            // 검색량
-            for (const [index, part] of chunk(keywords, DOC_CHUNK).entries()) {
-                setStatus(`검색량 재는 중… ${index * DOC_CHUNK + part.length}/${keywords.length}`);
+            // 검색량 — 워커가 한 번에 100개까지만 받고(searchAdVolumes), 응답 키는 띄어쓰기를 없앤 것이다.
+            // 원래 키워드로 찾으면 띄어쓰기 있는 것이 전부 빈 값이 된다(2026-09-10 실사고: 553개 전량 '—').
+            let volumeDenied = false;
+            for (const [index, part] of chunk(keywords, VOLUME_CHUNK).entries()) {
+                setStatus(`검색량 재는 중… ${index * VOLUME_CHUNK + part.length}/${keywords.length}`);
                 const res = await fetchKeywordVolumes(part).catch(() => null);
+                if (res && !res.ok) { volumeDenied = true; break; }
                 const volumes = res?.ok ? res.data?.volumes || {} : {};
-                working = working.map((row) => (volumes[row.keyword] === undefined
-                    ? row : { ...row, searchVolume: Number(volumes[row.keyword]) }));
+                working = working.map((row) => (volumes[volumeKey(row.keyword)] === undefined
+                    ? row : { ...row, searchVolume: Number(volumes[volumeKey(row.keyword)]) }));
                 setRows(working);
             }
+            if (volumeDenied) setStatus('검색량을 못 잽니다 — 내 API 키 탭에서 검색광고 키를 넣어 주세요. 문서수·자리는 계속 잽니다.');
 
             // 문서수
             for (const [index, part] of chunk(keywords, DOC_CHUNK).entries()) {
@@ -106,24 +149,7 @@ export default function TrendCsvPanel() {
                 setRows(working);
             }
 
-            // 자리 — 문서가 적은 것부터, 상한까지만. 빈자리는 그쪽에 있을 확률이 높고 워커도 아낀다.
-            const targets = working
-                .filter((row) => row.documentCount !== null)
-                .sort((a, b) => (a.documentCount as number) - (b.documentCount as number))
-                .slice(0, SEAT_CAP)
-                .map((row) => row.keyword);
-            let done = 0;
-            for (const part of chunk(targets, FRONTAL_CHUNK)) {
-                const res = await fetchKeywordFrontal(part).catch(() => null);
-                const titles = res?.ok ? res.data?.titles || {} : {};
-                working = working.map((row) => (part.includes(row.keyword)
-                    ? { ...row, facing: countFacing(titles[row.keyword], row.keyword) } : row));
-                done += part.length;
-                setRows(working);
-                setStatus(`자리 재는 중… ${done}/${targets.length}`);
-            }
-            const opened = working.filter((row) => seatFromFacing(row.facing) === '열림').length;
-            setStatus(`끝 — 고유 ${working.length}개 · 자리 잰 것 ${targets.length} · 빈자리 ${opened}`);
+            await measureSeats(working);
         } catch (cause: unknown) {
             setStatus(cause instanceof Error ? cause.message : String(cause));
         } finally {
@@ -203,9 +229,13 @@ export default function TrendCsvPanel() {
                         {categories.map((name) => <option key={name} value={name}>{name}</option>)}
                     </select>
                 )}
+                {rows.some((row) => row.documentCount !== null && row.facing === null) && (
+                    <button type="button" className="lw-trendcsv-toggle" disabled={busy} onClick={() => void measureMore()}>
+                        이어 재기 (+{SEAT_CAP})
+                    </button>
+                )}
                 <span className="lw-trendcsv-status">
                     {fileName ? `${fileName} · ` : ''}{status || '아직 안 들였습니다.'}
-                    {rows.length > 0 ? ` · 빈자리 ${openCount}` : ''}
                 </span>
             </div>
 
