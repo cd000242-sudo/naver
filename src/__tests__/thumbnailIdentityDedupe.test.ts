@@ -29,7 +29,12 @@ describe('imageIdentityKeys — 한 사진이 가진 모든 신원', () => {
   });
 
   it('빈 값과 중복은 버린다', () => {
-    expect(imageIdentityKeys({ filePath: 'same', url: 'same', savedToLocal: '' })).toEqual(['same']);
+    expect(imageIdentityKeys({ filePath: 'C:/a/s.jpg', url: 'C:/a/s.jpg', savedToLocal: '' }))
+      .toEqual(['C:/a/s.jpg']);
+  });
+
+  it('위치처럼 생기지 않은 값은 신원이 아니다', () => {
+    expect(imageIdentityKeys({ filePath: 'same', url: 'local' })).toEqual([]);
   });
 
   it('이미지가 아니면 빈 배열', () => {
@@ -111,5 +116,69 @@ describe('editorHelpers 배선 핀', () => {
 
   it('사용 등록도 신원 전체로 한다', () => {
     expect(liveCalls('registerUsedImage(usedImagePaths, img)')).toBeGreaterThan(0);
+  });
+});
+
+/*
+ * [2026-09-10 사장님 실측 회귀] "3번 소제목부터 이미지가 삽입이 안 되는데?"
+ *
+ * 위 신원 비교가 과잉 차단했다. ImageManager 항목의 `savedToLocal` 은 경로가 아니라
+ * **불리언 true** 다(headingImageGen.ts: `savedToLocal: true`). String(true) = "true" 가
+ * 모든 이미지의 공통 신원 키가 되어, 먼저 등록된 소제목 이후로는 전부 "이미 삽입됨"으로
+ * 걸렸다. 실측: 2번 소제목 2장 삽입 → 3번 3장 전부 제외 → 4번 2장 전부 제외.
+ *
+ * 계약: 신원 키는 **그 이미지 한 장을 가리키는 위치**여야 한다. 플래그·불리언·빈 값은
+ * 신원이 아니다. 가릴 수 없으면 키를 버린다 — 신원이 없으면 막지 않으므로,
+ * 최악이라도 중복이 생길 뿐 사진이 사라지지는 않는다.
+ */
+describe('신원 키는 이미지 한 장을 가리키는 위치여야 한다', () => {
+  it('savedToLocal 이 불리언이면 신원이 아니다 (실측 회귀)', () => {
+    expect(imageIdentityKeys({ filePath: 'C:/a/1.jpg', savedToLocal: true })).toEqual(['C:/a/1.jpg']);
+  });
+
+  it('불리언 플래그를 공유하는 서로 다른 사진은 중복이 아니다', () => {
+    const used = new Set<string>();
+    registerUsedImage(used, { filePath: 'C:/dl/IMG_5076.jpg', savedToLocal: true, url: 'file:///C:/dl/IMG_5076.jpg' });
+    expect(isImageAlreadyUsed(used, { filePath: 'C:/dl/38F77.png', savedToLocal: true })).toBe(false);
+    expect(isImageAlreadyUsed(used, { filePath: 'C:/dl/1F87E.png', savedToLocal: true })).toBe(false);
+  });
+
+  it('여러 사진이 같은 출처 페이지 url 을 물고 있어도 중복이 아니다', () => {
+    const used = new Set<string>();
+    const source = 'https://blog.naver.com/someone/223456789';
+    registerUsedImage(used, { filePath: 'C:/dl/a.jpg', url: source });
+    expect(isImageAlreadyUsed(used, { filePath: 'C:/dl/b.jpg', url: source })).toBe(false);
+  });
+
+  it('같은 사진은 여전히 잡는다 — file:/// url 과 파일 경로', () => {
+    const used = new Set<string>();
+    registerUsedImage(used, { filePath: 'C:/dl/IMG_5076.jpg', url: 'file:///C:/dl/IMG_5076.jpg' });
+    expect(isImageAlreadyUsed(used, { url: 'file:///C:/dl/IMG_5076.jpg' })).toBe(true);
+  });
+
+  it('대표사진 data URL 은 여전히 신원이다 (원래 고치려던 것)', () => {
+    const used = new Set<string>();
+    seedThumbnailIdentity(used, { thumbnailPath: 'data:image/jpeg;base64,TTT', images: [] });
+    expect(isImageAlreadyUsed(used, { url: 'data:image/jpeg;base64,TTT' })).toBe(true);
+  });
+
+  it('실측 시나리오: 2번 소제목 뒤에도 3번·4번 사진이 살아남는다', () => {
+    const used = new Set<string>();
+    seedThumbnailIdentity(used, {
+      thumbnailPath: 'C:/posts/논란의 핵심-1788998278923.png',
+      images: [{ isThumbnail: true, filePath: 'C:/posts/논란의 핵심-1788998278923.png' }],
+    });
+    const h2 = [
+      { filePath: 'C:/dl/IMG_5076.jpg', savedToLocal: true, url: 'file:///C:/dl/IMG_5076.jpg' },
+      { filePath: 'C:/dl/IMG_5060.jpg', savedToLocal: true, url: 'file:///C:/dl/IMG_5060.jpg' },
+    ];
+    h2.forEach((img) => registerUsedImage(used, img));
+
+    const h3 = [
+      { filePath: 'C:/dl/27만4천.jpg', savedToLocal: true },
+      { filePath: 'C:/dl/38F77.png', savedToLocal: true },
+      { filePath: 'C:/dl/1F87E.png', savedToLocal: true },
+    ];
+    expect(h3.filter((img) => !isImageAlreadyUsed(used, img))).toHaveLength(3);
   });
 });

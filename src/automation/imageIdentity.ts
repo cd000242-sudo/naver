@@ -15,14 +15,40 @@
 /** 한 이미지의 신원이 될 수 있는 필드들. 순서는 구체적인 것부터. */
 const IDENTITY_FIELDS = ['filePath', 'url', 'savedToLocal', 'previewDataUrl'] as const;
 
-/** 이 이미지가 가진 신원 키들(빈 값·중복 제거). */
+/** 이미지 파일 확장자로 끝나는가(쿼리·앵커는 허용). */
+const IMAGE_EXTENSION = /\.(?:jpe?g|png|gif|webp|bmp|avif|heic|heif|svg)(?:[?#]|$)/i;
+
+/**
+ * 이 값이 "이미지 한 장을 가리키는 위치"인가.
+ *
+ * [2026-09-10 실측 회귀] 같은 필드 이름이 곳에 따라 다른 것을 담는다 —
+ * fullAutoFlow 는 savedToLocal 에 **경로**를 넣지만 headingImageGen 은 **불리언 true**
+ * 를 넣는다. 문자열로 바꾸면 "true" 가 모든 이미지의 공통 키가 되어, 먼저 등록된
+ * 소제목 뒤로는 전부 "이미 삽입됨" 이 됐다(3번 소제목부터 사진이 통째로 사라졌다).
+ *
+ * 그래서 값의 이름이 아니라 **모양**을 본다. 위치처럼 생기지 않은 값은 신원이 아니다.
+ * 가릴 수 없으면 버린다 — 신원이 없으면 막지 않으므로 최악이라도 중복이 생길 뿐
+ * 사진이 사라지지는 않는다. 사라지는 쪽이 훨씬 나쁘다.
+ */
+function isLocatorLike(value: string): boolean {
+  if (value.length < 5) return false;
+  if (/^(?:true|false|null|undefined|\[object)/i.test(value)) return false;
+  if (/^data:/i.test(value)) return true;
+  if (IMAGE_EXTENSION.test(value)) return true;
+  return false;
+}
+
+/** 이 이미지가 가진 신원 키들(빈 값·플래그·중복 제거). */
 export function imageIdentityKeys(image: unknown): string[] {
   if (!image || typeof image !== 'object') return [];
   const record = image as Record<string, unknown>;
   const keys: string[] = [];
   for (const field of IDENTITY_FIELDS) {
-    const value = String(record[field] ?? '').trim();
-    if (value && !keys.includes(value)) keys.push(value);
+    const raw = record[field];
+    if (typeof raw !== 'string') continue; // 불리언 플래그는 신원이 아니다
+    const value = raw.trim();
+    if (!value || !isLocatorLike(value)) continue;
+    if (!keys.includes(value)) keys.push(value);
   }
   return keys;
 }
@@ -48,8 +74,8 @@ export function seedThumbnailIdentity(used: Set<string>, resolved: unknown): voi
   if (!resolved || typeof resolved !== 'object') return;
   const record = resolved as Record<string, unknown>;
 
-  const thumbnailPath = String(record.thumbnailPath ?? '').trim();
-  if (thumbnailPath) used.add(thumbnailPath);
+  const thumbnailPath = typeof record.thumbnailPath === 'string' ? record.thumbnailPath.trim() : '';
+  if (thumbnailPath && isLocatorLike(thumbnailPath)) used.add(thumbnailPath);
 
   const images = Array.isArray(record.images) ? record.images : [];
   for (const image of images) {
