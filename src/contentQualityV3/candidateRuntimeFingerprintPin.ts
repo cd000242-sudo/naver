@@ -4,4 +4,4 @@
  * source closure is stable and before recording provider or human evidence.
  */
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '75c7c88c967e22eae300677eee21be519d8ac5650eaa125783a765f47b181b8d' as const;
+  '137e633eae4ff8f70e592d5151fbdca4c6d7eb3cd7896477f742dd22d80ccf49' as const;
