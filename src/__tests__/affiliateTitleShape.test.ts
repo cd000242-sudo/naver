@@ -20,7 +20,7 @@
  * 이 파일은 그 모양을 코드로 잡는다. 막지는 않는다 — 경고와 근거만 낸다.
  */
 import { describe, it, expect } from 'vitest';
-import { auditAffiliateTitleShape } from '../content/affiliateTitleShape';
+import { auditAffiliateTitleShape, isStoreProductShapedKeyword } from '../content/affiliateTitleShape';
 
 describe('auditAffiliateTitleShape — 실측 실패 제목을 잡는다', () => {
   it('규격 코드가 제목에 있으면 짚는다', () => {
@@ -113,5 +113,32 @@ describe('배선 핀', () => {
     const prompt = fs.readFileSync(new URL('../prompts/affiliate/shopping_review.prompt', import.meta.url), 'utf8');
     expect(prompt).toMatch(/제목 앞머리는 사람의 상황/);
     expect(prompt).toMatch(/규격 코드/);
+  });
+});
+
+describe('isStoreProductShapedKeyword — 제목 앞에 세울 말인지 가른다', () => {
+  // 정답표 제휴 11편. 미노출 8편의 키워드는 전부 상품명 꼴, 노출 3편은 전부 상황어였다.
+  const 상품명꼴 = [
+    '[1위 달성] X60 Ultra X60 Ultra 드리미 X60 Ultra',
+    '클린이워터b uv 잇몸 strong',
+    '[N단독구성] 종아리 마사지기 [N] 임신',
+    '쿠쿠 건조분쇄형 에코웨일 2L 음식물처리기 CFD-FNL201DCGW/-G 선택 전',
+    '헬스헬퍼 맥스컷 프로 크롬 [슈퍼적립+사은품 증정]',
+    '다리 공기압 마사지기 닥터웰 종아리 DR-5180',
+  ];
+  const 상황어 = [
+    '나연이 치과 진료 후 써본 혀클리너, 이게 뭐길래 하나요',
+    '오아 메가에어라이트 써큘레이터 저소음 BLDC, 침실 무드등과 세척 편의성에서 갈리는 이유',
+    '정수리 탈모 볼륨 성분 고르는 기준',
+  ];
+  for (const k of 상품명꼴) {
+    it(`상품명 꼴: ${k.slice(0, 22)}`, () => expect(isStoreProductShapedKeyword(k)).toBe(true));
+  }
+  for (const k of 상황어) {
+    it(`상황어라 앞에 세워도 된다: ${k.slice(0, 22)}`, () => expect(isStoreProductShapedKeyword(k)).toBe(false));
+  }
+  it('빈 키워드는 판정하지 않는다 — 접두 단계가 이미 걸러낸다', () => {
+    expect(isStoreProductShapedKeyword('')).toBe(false);
+    expect(isStoreProductShapedKeyword('   ')).toBe(false);
   });
 });

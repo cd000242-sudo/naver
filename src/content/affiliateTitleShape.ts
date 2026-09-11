@@ -111,3 +111,21 @@ export function auditAffiliateTitleShape(title: string): AffiliateTitleAudit {
 
   return { issues };
 }
+
+/**
+ * 이 키워드가 "스토어 상품명"인가 — 사람이 검색하는 말이 아니라 매대에 붙은 이름인가.
+ *
+ * 쓰는 곳: 제휴 제목의 키워드 접두 단계. 검색어를 앞에 세우려고 만든 단계인데, 제휴의
+ * 메인 키워드는 스토어 상품명 그대로 들어온다("헬스헬퍼 맥스컷 프로 크롬 [슈퍼적립+사은품
+ * 증정]"). 그래서 상황을 앞에 세우라는 계약을 지킨 제목 앞에 상품명이 통째로 다시 붙었다.
+ *
+ * 실측(정답표 11편): 키워드에 상황어가 있으면 노출 3/3, 없으면 0/6. 상품명으로 검색하면
+ * 상위가 스마트스토어·공식몰이라 블로그가 낄 자리가 없다. 그 말을 제목 앞에 놓을 이유가 없다.
+ */
+export function isStoreProductShapedKeyword(keyword: string): boolean {
+  const text = String(keyword ?? '').trim();
+  if (!text) return false;
+  if (PROMO_BRACKET.test(text)) return true;
+  if (MODEL_CODE.test(text)) return true;
+  return !SITUATION.test(text);
+}

@@ -427,7 +427,7 @@ import { safeParseJson, cleanJsonOutput, tryFixJson, fixJsonAtPosition } from '.
 import { recoverLooseStructuredContentFields } from './contentStructuredRecovery';
 import { validateStructuredContent } from './contentStructuredValidator';
 import { isOpenAiReasoningModel } from './runtime/openaiReasoningFamily.js';
-import { auditAffiliateTitleShape } from './content/affiliateTitleShape.js';
+import { auditAffiliateTitleShape, isStoreProductShapedKeyword } from './content/affiliateTitleShape.js';
 import { resolveBlueprintMaterial } from './content/materialBudget.js';
 import {
   buildGeminiEmptyResponseUserMessage,
@@ -1871,6 +1871,20 @@ export function finalizeStructuredContent(
     // [2026-08-27] 상한을 모드 계약에서 가져온다. 예전에는 이 정책이 자체 상한 70자를
     //   들고 있어, 스키마와 후보 선별기에 넣은 길이 계약(홈판 28~42)이 마지막 단계에서
     //   깨졌다 — 장동윤 글의 제목 후보가 전부 52~54자로 나온 이유다.
+    /*
+     * [2026-09-11] 쇼핑 제목이 잘리거나 이상하게 나온다는 보고의 뿌리. 이 단계는 "검색어를
+     * 앞에 세운다"는 뜻으로 만들었는데, 제휴의 메인 키워드는 스토어 상품명 그대로 들어온다
+     * ("헬스헬퍼 맥스컷 프로 크롬 [슈퍼적립+사은품 증정]"). 그래서 상황을 앞에 세우라는
+     * 프롬프트 계약을 모델이 지킬수록, 그 앞에 상품명이 판촉 딱지째 다시 붙었다.
+     *
+     * 실측(정답표 제휴 11편): 키워드에 상황어가 있으면 노출 3/3, 없으면 0/6. 상품명으로
+     * 검색하면 상위가 스마트스토어·공식몰이라 블로그가 낄 자리가 없다. 앞에 놓을 이유가 없다.
+     * 앞3자 검사는 경고 전용이라(contentValidationPipeline) 건너뛰어도 막히지 않는다.
+     */
+    if (!skipKeywordPrefix && source.contentMode === 'affiliate' && isStoreProductShapedKeyword(primaryKeyword)) {
+      skipKeywordPrefix = true;
+      console.log(`[finalize] 쇼핑: 메인 키워드가 스토어 상품명 꼴이라 제목 접두를 걸지 않는다 — "${primaryKeyword.slice(0, 40)}"`);
+    }
     if (!skipKeywordPrefix) {
       applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword, {
         // [2026-09-02 사장님 승인] SPEC-KEYWORD-ENDGAME Phase 1 의 앞 3자 강제(ensureFront3)가 코드·단위 테스트만 있고
