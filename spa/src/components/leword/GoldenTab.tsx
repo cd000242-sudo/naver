@@ -8,6 +8,7 @@ import PreemptionCard, { type PreemptionRow } from './PreemptionCard';
 import { useMindmap } from './useMindmap';
 
 import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
+import { repairFreeSample } from '../../lib/freeSample.mjs';
 import { TabIntro } from './LewordShared';
 import ExternalTrafficBoard, { type ReferenceRow } from './ExternalTrafficBoard';
 import { preemptionIndex, TIER_ORDER } from '../../lib/preemptionIndex';
@@ -122,6 +123,22 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         return [...counts.entries()].sort((a, b) => b[1] - a[1]);
     }, [board]);
 
+    /*
+     * 실제로 열어 줄 다섯 이름.
+     *
+     * 발행본이 하루 동안 박아 둔 이름을 그대로 쓰되, **보드에서 사라진 자리는 메운다**.
+     * 실측(2026-09-11): 발행본의 다섯 중 보드에 남은 것이 하나뿐이라 방문자가 카드 한 장만 봤다
+     * (사장님 "황금키워드는 1개만 보인다고 문의왔어요"). 발행기도 같은 함수를 쓴다 —
+     * 둘이 다른 다섯을 고르면 잠금과 정렬이 어긋난다.
+     *
+     * 메울 때는 board.rows(발행 순서) 에서만 가져온다. 화면이 주제·레인으로 거른 목록에서
+     * 채우면 필터를 돌려 가며 새 키워드를 여는 구멍이 생긴다.
+     */
+    const freeNames = useMemo(
+        () => repairFreeSample(board, board?.freeSample?.keywords),
+        [board],
+    );
+
     const rows = useMemo(() => {
         const all = board?.rows || [];
         const filtered = all.filter((row) => {
@@ -206,8 +223,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
          */
         const hoistFree = (list: PreemptionRow[]) => {
             if (unlocked) return list;
-            const freeNames = board?.freeSample?.keywords;
-            if (!freeNames || freeNames.length === 0) return list;
+            if (freeNames.length === 0) return list;
             const open: PreemptionRow[] = [];
             const rest: PreemptionRow[] = [];
             for (const row of list) (freeNames.includes(row.keyword) ? open : rest).push(row);
@@ -247,7 +263,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             depth += 1;
         }
         return hoistFree(interleaved);
-    }, [board, topic, writeLane, shuffleSeed, unlocked]);
+    }, [board, topic, writeLane, shuffleSeed, unlocked, freeNames]);
 
     /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
@@ -331,10 +347,9 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                              * (사장님 지적 2026-08-20 "새로고침하면 새 키워드"와 같은 구멍).
                              * 발행본이 하루 동안 고정한 다섯 이름만 열린다.
                              */
-                            const freeNames = board.freeSample?.keywords;
                             const locked = unlocked
                                 ? false
-                                : (freeNames && freeNames.length > 0
+                                : (freeNames.length > 0
                                     ? !freeNames.includes(row.keyword)
                                     : index >= FREE_BOARD_ROWS);
                             return (
