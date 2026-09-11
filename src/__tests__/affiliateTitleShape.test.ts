@@ -39,6 +39,23 @@ describe('auditAffiliateTitleShape — 실측 실패 제목을 잡는다', () =>
     expect(r.issues.some((i) => i.kind === 'repeat')).toBe(true);
   });
 
+  // [2026-09-11] 실측 — 노출 20/미노출 19 정답표에서 affiliate 미노출 8편 중 이 한 편만
+  // 기존 네 규칙을 전부 빠져나갔다(상황어가 있어 no-situation 도 안 걸렸다).
+  it('상품명이 중간에 잘린 제목을 짚는다', () => {
+    const a = auditAffiliateTitleShape('오아 클린이워터B-UV 휴대용 무선B-, 잇몸 예민하면 Strong에서 갈려요');
+    expect(a.issues.map(i => i.kind)).toContain('truncated');
+  });
+
+  it('정상 하이픈 표기는 잘린 것으로 보지 않는다 — 오탐 0', () => {
+    for (const t of [
+      '오아 클린이워터B-UV 휴대용 무선, 잇몸 예민하면 Strong에서 갈려요',
+      '50대 여성 정수리 탈모 고민: 푹 꺼진 뿌리 볼륨 살리는 성분 고르는 기준',
+      '나연이 치과 진료 후 써본 혀클리너, 이게 뭐길래 하나요',
+    ]) {
+      expect(auditAffiliateTitleShape(t).issues.map(i => i.kind)).not.toContain('truncated');
+    }
+  });
+
   it('상황어가 없으면 짚는다 — 상품명만으로는 스마트스토어를 못 이긴다', () => {
     expect(auditAffiliateTitleShape('닥터웰 종아리 공기압 마사지기 DR-5180 그레이').issues.some((i) => i.kind === 'no-situation')).toBe(true);
   });

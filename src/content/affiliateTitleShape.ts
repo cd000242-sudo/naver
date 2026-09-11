@@ -17,6 +17,7 @@ export type AffiliateTitleIssueKind =
   | 'model-code'     // CFD-FNL201DCGW/-G 같은 규격 코드
   | 'promo-bracket'  // [슈퍼적립+사은품 증정] 같은 쇼핑몰 판촉 문구
   | 'repeat'         // 같은 말이 세 번 (생성 사고)
+  | 'truncated'      // "휴대용 무선B-," 처럼 상품명이 중간에 잘려 박힌 것
   | 'no-situation';  // 상품명만 있고 사람의 상황·판단 기준이 없다
 
 export interface AffiliateTitleIssue {
@@ -37,6 +38,14 @@ const MODEL_CODE = /\b[A-Z]{2,}[A-Z0-9]*-?\d{3,}[A-Z0-9/-]*\b/;
 
 /** 쇼핑몰이 붙이는 판촉 딱지. 검색어가 아니라 매대 문구다. */
 const PROMO_BRACKET = /\[[^\]]*(?:단독|적립|사은품|증정|할인|쿠폰|특가|무료배송|\d+위\s*달성|N)[^\]]*\]/;
+
+/*
+ * 잘린 상품명 — 낱말이 하이픈으로 끝나고 곧바로 공백·구두점·끝이 온다.
+ * 실측: 저장본 102편 중 1편만 걸린다("오아 클린이워터B-UV 휴대용 무선B-, ...") — 오탐 0.
+ * 이 한 편은 다른 네 규칙을 전부 빠져나갔다(상황어가 있어서 no-situation 도 안 걸렸다).
+ * 사람도 검색엔진도 이 조각으로는 이 글을 찾지 못한다.
+ */
+const DANGLING_FRAGMENT = /[A-Za-z가-힣0-9]-(?=[\s,.、·]|$)/;
 
 /**
  * 사람이 그 상황에 있을 때 검색하는 말. 실제로 노출된 제목에 있던 것들이다.
@@ -83,6 +92,13 @@ export function auditAffiliateTitleShape(title: string): AffiliateTitleAudit {
     issues.push({
       kind: 'repeat',
       message: `"${repeated}" 가 제목에 세 번 이상 나옵니다 — 생성 사고입니다. 한 번만 남기세요.`,
+    });
+  }
+
+  if (DANGLING_FRAGMENT.test(text)) {
+    issues.push({
+      kind: 'truncated',
+      message: '상품명이 중간에 잘린 채 제목에 들어갔습니다 — 하이픈으로 끝나는 조각이 있습니다. 잘린 조각을 지우거나 완전한 이름으로 바꾸세요.',
     });
   }
 
