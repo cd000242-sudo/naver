@@ -2,7 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { stripAiConclusionOpenersFromContent } from './content/aiConclusionOpener.js';
 // [SPEC-BLUEPRINT-2026 Phase 2] 본문 호출 전 설계도 — 인용·사실·상황·소제목을 재료로 넘긴다.
 import { generateBlueprint } from './content/blueprint/generateBlueprint';
-import { renderBlueprintMaterial } from './content/blueprint/renderBlueprintMaterial';
+import { renderBlueprintMaterial, missingQuoteSignalWarning } from './content/blueprint/renderBlueprintMaterial';
 import { splitByCentralMention } from './content/eventCohesion.js';
 import { insertBlueprintIntoPrompt } from './content/blueprint/insertBlueprintIntoPrompt';
 import { stripMaterialNarrationFromContent } from './content/materialNarrationStrip.js';
@@ -6276,6 +6276,8 @@ async function generateStructuredContentInternal(
         blueprintAngle = blueprintRun.result.blueprint.angle;
         blueprintOffTopic = blueprintRun.result.blueprint.offTopic.slice();
         console.log(`[Blueprint] 📐 엔진 ${route.engine} · 재료 ${blueprintBlock.length}자 · ${blueprintRun.elapsedMs}ms`);
+        const quoteWarning = missingQuoteSignalWarning(String(blueprintMode || ''), blueprintQuotes.length);
+        if (quoteWarning) console.warn(quoteWarning);
         /*
          * [SPEC-EVENT-RETRIEVAL-2026 Phase 1] 중심 사건과 이어지지 않는 자료를 강등한다.
          *

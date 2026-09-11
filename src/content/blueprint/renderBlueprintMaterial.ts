@@ -61,3 +61,25 @@ export function renderBlueprintMaterial(blueprint: Blueprint, options: RenderBlu
   const facts = renderFacts(blueprint);
   return [lines.join('\n'), quotes.join('\n'), facts.join('\n')].filter(Boolean).join('\n\n');
 }
+
+/**
+ * 인용 하한이 조용히 꺼졌는지 알린다.
+ *
+ * renderQuotes 는 설계도가 발언을 하나도 못 찾으면 요구 자체를 내보내지 않는다. 그게 옳다 —
+ * 없는 발언을 요구하면 지어낸다. 문제는 **아무도 모른다**는 것이다.
+ *
+ * 정답표 실측(2026-09-11): 직접 인용 수가 노출을 가른다. seo 노출 3.6개 vs 미노출 0.6개
+ * (AUC 0.80), homefeed 3.0 vs 1.0 (AUC 0.81). 미노출군의 67%가 인용 0개였다.
+ * 제휴는 역방향(0.25)이고 여행 사진 글은 인용이 구조적으로 없으므로 두 모드만 본다.
+ *
+ * 고칠 곳은 프롬프트가 아니라 재료다 — 발언이 없는 자료를 받아 왔다는 뜻이기 때문이다.
+ */
+const QUOTE_SIGNAL_MODES = new Set(['seo', 'homefeed']);
+
+export function missingQuoteSignalWarning(mode: string, quoteCount: number): string | null {
+  if (!QUOTE_SIGNAL_MODES.has(String(mode || '').trim())) return null;
+  if (quoteCount > 0) return null;
+  return '[Blueprint] ⚠️ 당사자 발언 0개 — 인용 하한이 요구 없이 꺼진 채 나간다.'
+    + ' 실측상 인용은 이 모드에서 노출을 가르는 축이다(노출 평균 3.6개 vs 미노출 0.6개).'
+    + ' 프롬프트가 아니라 자료 수집을 의심할 것.';
+}

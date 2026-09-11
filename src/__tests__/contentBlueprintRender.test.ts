@@ -1,6 +1,6 @@
 /** SPEC-BLUEPRINT-2026 Phase 1 — 설계도 → 재료 블록 렌더 계약. */
 import { describe, expect, it } from 'vitest';
-import { renderBlueprintMaterial } from '../content/blueprint/renderBlueprintMaterial';
+import { renderBlueprintMaterial, missingQuoteSignalWarning } from '../content/blueprint/renderBlueprintMaterial';
 import type { Blueprint } from '../content/blueprint/blueprintSchema';
 
 const BP: Blueprint = {
@@ -61,5 +61,29 @@ describe('소제목 배정 계약', () => {
   it('소제목이 없으면 배정 줄도 내보내지 않는다 — 맡을 칸이 없는데 계약만 남으면 혼선이다', () => {
     const none = renderBlueprintMaterial({ ...BP, skeleton: [] });
     expect(none).not.toContain('소제목 배정');
+  });
+});
+
+describe('인용 하한이 꺼졌을 때 알린다', () => {
+  // 정답표 실측: 인용은 seo·homefeed 에서 노출을 가르는 축(AUC 0.80/0.81)이고,
+  // 제휴는 역방향(0.25), 여행 사진 글은 구조적으로 인용이 없다.
+  it('seo·homefeed 에서 인용 0개면 경고를 낸다', () => {
+    for (const mode of ['seo', 'homefeed']) {
+      const w = missingQuoteSignalWarning(mode, 0);
+      expect(w).toBeTruthy();
+      expect(String(w)).toContain('당사자 발언 0개');
+      expect(String(w)).toContain('자료 수집을 의심');
+    }
+  });
+
+  it('인용이 하나라도 있으면 조용하다', () => {
+    expect(missingQuoteSignalWarning('seo', 1)).toBeNull();
+    expect(missingQuoteSignalWarning('homefeed', 3)).toBeNull();
+  });
+
+  it('제휴·여행 사진 글은 경고하지 않는다 — 인용이 없는 게 정상이거나 역방향이다', () => {
+    expect(missingQuoteSignalWarning('affiliate', 0)).toBeNull();
+    expect(missingQuoteSignalWarning('image-narrative', 0)).toBeNull();
+    expect(missingQuoteSignalWarning('', 0)).toBeNull();
   });
 });
