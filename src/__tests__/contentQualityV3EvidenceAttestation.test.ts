@@ -239,7 +239,7 @@ describe('Content Quality V3 evidence attestation', () => {
         //   하한 2개는 6월 88% 통과 / 9월 17% 통과로 분별된다(점수 항목은 만들지 않았다 —
         //   9월 83%가 미달이라 감점을 넣으면 전수 재생성이 걸린다).
         //   (homefeed/base.prompt 1개만 바뀌었음을 재계산으로 확인)
-        '73f3554fb065e35a1326042b49531f16d48fe3c29784fa5f583355bd4d4eca82',
+        '30edd3d9de702ca4838956e70fc96b22c2a31f65513501364f84132de4c47424',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

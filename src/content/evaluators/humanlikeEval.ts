@@ -69,13 +69,21 @@ const INFORMAL_SIGNALS = [
   '그렇더라고요', '하더라고요', '잖아요', '거든요', '느껴졌어요',
 ];
 
+// 말투 자체(말끝·강조어)는 감점 대상이 아니다. 저장본 실측 — 사람 같다고 평가된 표본
+// 17편 중 10편(59%)이 이 목록 때문에 평균 7.1점 감점을 맞았고, 밋밋하다고 평가된 표본은
+// 4%만 맞았다. 감점이 정확히 좋은 글을 벌주고 있었다. 도배만 TONE_MARKERS 로 따로 잡는다.
 const CONVERSATIONAL_CRUTCHES = [
-  '거든요', '잖아요', '더라고요', '진짜', '완전', '찐으로', 'ㄹㅇ',
+  '완전', '찐으로', 'ㄹㅇ',
   '다들 그러잖아요', '이거 아는 사람', '솔직히 말해서', '와,', '헉',
   '왜 아무도 말 안 해줬죠', '이거 좀', '여기서 봐야 할 건',
   // 헤징 버릇 — 감탄사 남발의 반대편 AI 티. 근거 표현을 매 문장 붙이는 것도 감점.
   '자료를 보면', '자료를 놓고 보면', '확인해보면', '보도 흐름을 보면', '제가 확인한 바로는',
 ];
+
+// 말투 도배 방어 — 제거가 아니라 임계 상향. 실측 상한은 사람 같은 표본 14.6/1k,
+// 밋밋한 표본 4.8/1k 였다. 18/1k 초과는 어느 표본에도 없는 흉내 구간이다.
+const TONE_MARKERS = ['거든요', '잖아요', '더라고요', '진짜'] as const;
+const TONE_MARKER_FLOOD_PER_1000 = 18;
 
 const DIRECT_EXPERIENCE_SIGNALS = [
   ...DIRECT_EXPERIENCE,
@@ -214,13 +222,16 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
   const crutchCount = countMatches(body, CONVERSATIONAL_CRUTCHES);
   const repeatedCrutches = countRepeatedCrutches(body);
   const crutchPer1000 = (crutchCount / Math.max(1, body.length)) * 1000;
+  const tonePer1000 = (countMatches(body, TONE_MARKERS) / Math.max(1, body.length)) * 1000;
+  const toneFlood = tonePer1000 > TONE_MARKER_FLOOD_PER_1000;
   let crutchPenalty = 0;
-  if (repeatedCrutches >= 4 || (crutchCount >= 8 && crutchPer1000 >= 8)) {
-    crutchPenalty = Math.min(12, 4 + repeatedCrutches * 2);
+  if (toneFlood || repeatedCrutches >= 4 || (crutchCount >= 8 && crutchPer1000 >= 8)) {
+    crutchPenalty = Math.min(12, 4 + repeatedCrutches * 2 + (toneFlood ? 4 : 0));
     issues.push(`입말 장식 반복 ${crutchCount}회 — 사람 말투가 아니라 AI식 구어체 흉내로 보일 수 있음`);
     suggestions.push('거든요/잖아요/더라고요/진짜/찐으로 같은 표현은 줄이고, 관찰·근거·판단 문장으로 대체');
   }
   details.conversationalCrutches = crutchCount;
+  details.toneMarkerPer1000 = Math.round(tonePer1000 * 10) / 10;
   details.conversationalCrutchPenalty = -crutchPenalty;
   total -= crutchPenalty;
 
