@@ -24,6 +24,14 @@ import {
 
 // 인라인 번들 단일 스코프에서 렌더러 전역으로 해결된다(contentGeneration.ts 와 같은 방식).
 declare function syncIntegratedPreviewFromInputs(): void;
+/*
+ * [2026-09-11] 이 둘은 fullAutoFlow.ts 의 최상위 함수라 인라인 번들의 같은 스코프에서 풀린다.
+ * window 에는 올라가지 않는다. 예전에 (window as any).updateUnifiedPreview 로 찾다가 항상
+ * undefined 였고, typeof 검사에 걸려 **미리보기 갱신이 조용히 건너뛰어졌다** — 적용 버튼을
+ * 눌러도 아무 일도 일어나지 않던 이유다. 다른 모듈들과 같은 방식으로 직접 부른다.
+ */
+declare function updateUnifiedPreview(content: any): void;
+declare function updateUnifiedImagePreview(headings: any[], images: any[]): void;
 
 const HEADING_PANEL_IDS = {
   body: 'unified-generated-content',
@@ -178,14 +186,12 @@ export function applyEditedHeadingsToPreview(): boolean {
   content._bodyManuallyEdited = true;
 
   try {
-    const updatePreview = (window as any).updateUnifiedPreview;
-    if (typeof updatePreview === 'function') updatePreview(content);
+    if (typeof updateUnifiedPreview === 'function') updateUnifiedPreview(content);
   } catch (error) {
     console.warn('[HeadingPanel] 통합 미리보기 갱신 실패:', (error as Error)?.message);
   }
   try {
-    const updateImagePreview = (window as any).updateUnifiedImagePreview;
-    if (typeof updateImagePreview === 'function') updateImagePreview(content.headings, []);
+    if (typeof updateUnifiedImagePreview === 'function') updateUnifiedImagePreview(content.headings, []);
   } catch (error) {
     console.warn('[HeadingPanel] 이미지 미리보기 갱신 실패:', (error as Error)?.message);
   }

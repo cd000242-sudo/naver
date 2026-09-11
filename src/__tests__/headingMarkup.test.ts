@@ -171,6 +171,27 @@ describe('소제목 지정 패널 배선', () => {
     expect(copyStatic).toMatch(/'headingMarkup\.js',/);
   });
 
+  /*
+   * [2026-09-11 라이브] "적용 버튼을 눌러도 미리보기가 안 바뀐다."
+   * updateUnifiedPreview / updateUnifiedImagePreview 는 fullAutoFlow.ts 의 최상위 함수라
+   * 인라인 번들의 같은 스코프에서 풀린다 — window 에는 없다. window 로 찾으면 항상
+   * undefined 이고, typeof 검사에 걸려 갱신이 조용히 건너뛰어진다. 빌드도 린트도 못 잡는다.
+   */
+  it('미리보기 갱신을 window 에서 찾지 않는다 — 번들 스코프 함수다', () => {
+    for (const file of ['../renderer/modules/headingControlPanel.ts', '../renderer/modules/contentGeneration.ts']) {
+      const src = read(file);
+      const calls = src.replace(/^\s*(?:\*|\/\/).*$/gm, '');   // 주석 줄은 뺀다
+      expect(calls).not.toMatch(/\(window as any\)\.updateUnifiedPreview/);
+      expect(calls).not.toMatch(/\(window as any\)\.updateUnifiedImagePreview/);
+    }
+  });
+
+  it('패널이 두 갱신 함수를 번들 전역으로 선언한다', () => {
+    const panel = read('../renderer/modules/headingControlPanel.ts');
+    expect(panel).toMatch(/declare function updateUnifiedPreview\(/);
+    expect(panel).toMatch(/declare function updateUnifiedImagePreview\(/);
+  });
+
   it('사용자가 정한 소제목을 자동 재추출이 덮지 않는다', () => {
     const gen = read('../renderer/modules/contentGeneration.ts');
     expect(gen).toMatch(/headingsLockedByUser === true/);

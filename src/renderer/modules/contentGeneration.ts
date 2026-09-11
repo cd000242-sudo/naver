@@ -26,6 +26,7 @@ declare const UnifiedDOMCache: any;
 declare function appendLog(msg: string, ...args: any[]): void;
 declare function escapeHtml(str: string): string;
 declare function updateUnifiedPreview(content: any): void;
+declare function updateUnifiedImagePreview(headings: any[], images: any[]): void;
 // [v2.10.119] 페러프레이징 후 소제목 분석 + 이미지 관리 동기화용 — headingImageGen.ts:3132 정의됨.
 //   같은 renderer.js 번들 내라 런타임에 접근 가능. 일반 글 생성 흐름은 직접 호출 중.
 declare function autoAnalyzeHeadings(structuredContent: any): Promise<void>;
@@ -431,8 +432,9 @@ export async function applyContentPostProcessing(
   try {
     const headings = Array.isArray(structuredContent.headings) ? structuredContent.headings : [];
     if (headings.length > 0) {
-      const fn = (window as any).updateUnifiedImagePreview;
-      if (typeof fn === 'function') fn(headings, []);
+      // [2026-09-11] 번들 스코프 함수다 — window 에는 없다. window 로 찾던 동안 이 경로의
+      //   이미지 미리보기가 조용히 건너뛰어졌다.
+      if (typeof updateUnifiedImagePreview === 'function') updateUnifiedImagePreview(headings, []);
     } else {
       // headings 없으면 (페러프레이징 plain body) bodyPlain 직접 표시
       const integratedPreview = document.getElementById('unified-integrated-preview');
