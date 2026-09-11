@@ -1319,6 +1319,23 @@
                                 placeholder="직접 겪은 것만 적어주세요. 언제·무엇을·어떤 조건에서 했고 결과가 어땠는지 구체적일수록 좋습니다.&#10;예: 3월에 신청했는데 소득 기준 서류를 빠뜨려서 반려됐고, 재신청은 다음 달에야 가능했습니다."
                                 style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-medium); border-radius: 8px; background: var(--bg-primary); color: var(--text-strong); font-size: 0.95rem; margin-bottom: 1rem; resize: vertical; font-family: inherit;"></textarea>
 
+                            <!-- [2026-09-12] 추가 요청사항 (선택) — 경험 메모와 같은 통로로 프롬프트에 실린다.
+                                 배선은 이미 있었다(contentGenerator 제목 · contentJsonPromptFormat 본문). SEO·홈판·
+                                 쇼핑·업체는 기본 프롬프트를 유지한 채 여기 적은 것이 더해지고, 사용자정의 모드만
+                                 기본을 완전히 대체한다. 비워두면 예전과 똑같이 동작한다. -->
+                            <label for="unified-extra-request"
+                                style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; font-size: 0.88rem; color: var(--text-strong);">
+                                <span style="font-size: 1rem;">✍️</span>
+                                <strong>추가 요청사항 (선택)</strong>
+                                <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">이번 글에만 적용됩니다 · 생성하면 비워집니다</span>
+                            </label>
+                            <textarea id="unified-extra-request" rows="3" maxlength="2000"
+                                placeholder="이 글에 바라는 것을 적어주세요. 예: 신청 절차는 표로 정리하고, 마지막에 준비물 체크리스트를 넣어주세요.&#10;예: 가격 비교는 빼고 사용 환경 위주로 써주세요."
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-medium); border-radius: 8px; background: var(--bg-primary); color: var(--text-strong); font-size: 0.95rem; margin-bottom: 0.4rem; resize: vertical; font-family: inherit;"></textarea>
+                            <p style="margin: 0 0 1rem; font-size: 0.75rem; color: var(--text-muted); line-height: 1.5;">
+                                ⚠️ 여기 적은 내용은 다른 규칙보다 우선합니다 — 품질 가드(금지·하한)와 부딪히는 요청은 가드를 이깁니다. 사실이 아닌 것을 쓰라고 적지 마세요.
+                            </p>
+
                             <!-- [2026-09-01] AI 경험 생성 (선택, 기본 OFF) — 위 메모가 비었을 때의 대안이다.
                                  메모를 적었으면 그 범위로 쓰고, 비었고 이걸 켜면 AI가 만든다.
                                  날조 티를 막으려고 제약 · 유보 · 비교 세 요소를 갖춘 문장만 허용한다. -->

@@ -207,8 +207,26 @@ function applyManualTitleOverrideToContent(structuredContent: any, manualTitle?:
 function readCustomPromptFromUi(): string | undefined {
   const unified = (document.getElementById('custom-prompt-input') as HTMLTextAreaElement | null)?.value?.trim();
   if (unified) return unified;
+  /*
+   * [2026-09-12] 단일 생성 화면의 "추가 요청사항". 배선은 이미 있었는데 입력창이 없었다 —
+   * 연속발행 모달에만 있었고, 통합 화면의 입력창은 사용자정의 모드에서만 보였다.
+   *
+   * 순서: 항목별(연속발행이 hidden 으로 실어 둔 값) → 이 화면의 요청사항 → 구버전 폴백.
+   * 연속발행 중에는 위 hidden 이 항목 값을 들고 있으므로 큐가 지정한 것이 그대로 이긴다.
+   */
+  const extra = (document.getElementById('unified-extra-request') as HTMLTextAreaElement | null)?.value?.trim();
+  if (extra) return extra;
   const legacy = (document.getElementById('unified-custom-prompt') as HTMLTextAreaElement | null)?.value?.trim();
   return legacy || undefined;
+}
+
+/**
+ * 요청사항은 이번 글에만 적용한다 — 저장하지 않고 생성이 끝나면 비운다.
+ * 지난 요청이 다음 글에 조용히 따라붙는 사고를 막는다(사장님 결정 2026-09-12).
+ */
+export function clearExtraRequestAfterGeneration(): void {
+  const el = document.getElementById('unified-extra-request') as HTMLTextAreaElement | null;
+  if (el && el.value) el.value = '';
 }
 
 function cleanKeywordFromTitle(keyword: string, title: string): string {
@@ -410,6 +428,10 @@ export async function applyContentPostProcessing(
 ): Promise<void> {
   const source = opts?.source || 'generate';
   const log = (msg: string) => console.log(`[postProcess:${source}] ${msg}`);
+
+  // [2026-09-12] 글이 실제로 나온 뒤에만 요청사항을 비운다 — 실패하면 적은 글이 남아 있어야 한다.
+  //   불러오기(load)는 생성이 아니므로 건드리지 않는다.
+  if (source !== 'load') clearExtraRequestAfterGeneration();
 
   // 1. 글로벌 상태
   try {
