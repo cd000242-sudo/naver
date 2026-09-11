@@ -162,6 +162,48 @@ function getServerErrorMessage(result: any, fallback: string): string {
 // ✅ [v2.10.274] TTL + write-guard state for revalidateLicense
 let _lastSyncAt = 0;
 const SYNC_CACHE_TTL_MS = 60_000; // 1-minute TTL
+
+/*
+ * [2026-09-12] 60초였다. 실측 응답은 정상일 때 3.6~4.5초인데, 늦어질 때 60초를 꽉 채우고
+ * 중단됐다 — 재시도까지 더해 로그인 창이 2분 넘게 멈췄다(실제 로그: SEVERE 60007ms 두 번).
+ * 정상 대비 5배 여유를 두고 20초로 줄인다. 서버가 느린 것은 따로 볼 문제고, 사용자를
+ * 1분씩 붙잡아 둘 이유는 없다.
+ */
+const LICENSE_REQUEST_TIMEOUT_MS = 20000;
+
+/*
+ * [2026-09-12] 인증 판정을 "실패가 아니면 성공" 에서 "성공 신호가 있어야 성공" 으로 바꾼다.
+ *
+ * 사고 경로: GAS /exec 는 302 로 리다이렉트되고, 그 왕복이 늦어지면 앱이 doPost 결과가 아니라
+ * 기본 응답 {"ok":true,"message":"License Management System API is running"} 을 받는다.
+ * 예전 판정은 (ok === false || valid === false) 만 실패로 봤다 — 이 응답은 둘 다 false 가
+ * 아니어서 **성공으로 통과**했고, 없는 계정·틀린 비밀번호로도 프리미엄 라이선스가 저장됐다.
+ * 실측(2026-09-12): 존재하지 않는 ID 로 3회 호출 중 1회가 이 응답을 받았다(36초 소요).
+ *
+ * 서버 계약상 진짜 성공은 valid:true 를 반드시 담는다(handleVerifyCredentials·handleActivate).
+ */
+export function isServerPlaceholderResponse(result: unknown): boolean {
+  if (!result || typeof result !== 'object') return true;
+  const r = result as Record<string, unknown>;
+  const message = String(r.message ?? '');
+  if (/API is running/i.test(message)) return true;
+  // 성공·실패 어느 쪽 신호도 없는 응답은 판정할 수 없다 — 성공으로 세지 않는다.
+  return r.valid === undefined && r.ok === undefined && r.error === undefined && r.code === undefined;
+}
+
+/** 서버가 명시적으로 성공이라고 말했는가. 침묵은 성공이 아니다. */
+export function hasPositiveAuthSignal(result: unknown): boolean {
+  if (!result || typeof result !== 'object') return false;
+  const r = result as Record<string, unknown>;
+  if (r.valid === true) return true;
+  // 구버전 응답 호환: valid 를 안 주더라도 이 계정에만 발급되는 값이 있으면 성공으로 본다.
+  const hasIdentity = typeof r.sessionToken === 'string' && r.sessionToken.trim().length > 0;
+  const hasLicenseShape = Boolean(r.expiresAt || r.expires || r.licenseType || r.type || r.licenseCode);
+  return r.ok === true && (hasIdentity || hasLicenseShape);
+}
+
+/** 판정 불가일 때 쓸 응답 — 자격 실패("비밀번호 틀림")로 말하지 않는다. 일시 장애다. */
+const TRANSIENT_AUTH_MESSAGE = '서버가 응답을 제대로 주지 않았습니다. 잠시 후 다시 시도해 주세요. (계정 정보 문제가 아닙니다)';
 let _revalidateSyncSequence = 0;
 let _lastAppliedRevalidateSyncSequence = 0;
 
@@ -523,7 +565,7 @@ export async function registerLicense(
           await new Promise(r => setTimeout(r, RETRY_BACKOFF_MS[attempt]));
         }
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 60000);
+        const timeoutId = setTimeout(() => controller.abort(), LICENSE_REQUEST_TIMEOUT_MS);
         try {
           response = await fetch(serverUrl, {
             method: 'POST',
@@ -665,6 +707,12 @@ export async function registerLicense(
         rawErrorMsg.toLowerCase().includes('expires') && (rawErrorMsg.toLowerCase().includes('missing') || rawErrorMsg.toLowerCase().includes('no'))
       );
 
+      // [2026-09-12] 등록 경로도 기본 응답이면 성공으로 세지 않는다.
+      if (isServerPlaceholderResponse(result)) {
+        console.error('[LicenseManager] 🚨 판정 불가 응답(등록) — 성공으로 세지 않는다:', JSON.stringify(result).slice(0, 200));
+        return { valid: false, message: TRANSIENT_AUTH_MESSAGE };
+      }
+
       // 만료일 정보가 없다는 메시지만 있고, 실제로 등록은 성공한 경우 (초기 등록 시나리오)
       if ((result.ok === false || result.valid === false) && !isExpiresAtMissing) {
         const errorMsg = resolveAuthenticationFailureMessage(result, '라이선스 등록에 실패했습니다. 입력 정보를 확인해주세요.');
@@ -782,7 +830,7 @@ export async function verifyLicenseWithCredentials(
 
       // 타임아웃 추가 (60초) - GAS 배치 쓰기 기반
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 60000);
+      const timeoutId = setTimeout(() => controller.abort(), LICENSE_REQUEST_TIMEOUT_MS);
 
       const response = await fetch(serverUrl, {
         method: 'POST',
@@ -819,6 +867,13 @@ export async function verifyLicenseWithCredentials(
           valid: false,
           message: translateErrorMessage(`서버 응답 형식 오류: ${responseText.substring(0, 100)}`),
         };
+      }
+
+      // [2026-09-12] 성공 신호가 없으면 성공이 아니다. 리다이렉트 사고로 온 기본 응답이
+      //   프리미엄 라이선스로 저장되던 구멍을 막는다.
+      if (isServerPlaceholderResponse(result) || (result.ok !== false && result.valid !== false && !hasPositiveAuthSignal(result))) {
+        console.error('[LicenseManager] 🚨 판정 불가 응답 — 성공으로 세지 않는다:', JSON.stringify(result).slice(0, 200));
+        return { valid: false, message: TRANSIENT_AUTH_MESSAGE };
       }
 
       if (result.ok === false || result.valid === false) {
@@ -1116,6 +1171,12 @@ export async function verifyLicense(
       console.log('🔍 [licenseManager] - action:', 'verify');
       console.log('🔍 [licenseManager] - code:', normalizedCode);
       console.log('🔍 [licenseManager] ========================================');
+
+      // [2026-09-12] 같은 구멍이 코드 인증 경로에도 있었다.
+      if (isServerPlaceholderResponse(result) || (result.ok !== false && result.valid !== false && !hasPositiveAuthSignal(result))) {
+        console.error('[LicenseManager] 🚨 판정 불가 응답(코드 인증) — 성공으로 세지 않는다:', JSON.stringify(result).slice(0, 200));
+        return { valid: false, message: TRANSIENT_AUTH_MESSAGE };
+      }
 
       // Apps Script 응답 형식에 맞게 처리
       if (result.ok === false || result.valid === false) {
