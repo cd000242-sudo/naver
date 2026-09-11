@@ -23,6 +23,11 @@ describe('renderBlueprintMaterial', () => {
     expect(out).toContain('독자 상황(도입부 첫 문장은 이 장면에서 시작한다): 복지로에');
     expect(out).toContain('소제목 후보(각각 다른 질문 축, 순서·표현은 다듬어도 된다): 지원 대상 조건 / 신청 방법과 접수처');
     expect(out).toContain('본문에서 뺄 주제(자료에 있어도 이 글의 질문이 아니다): 도심 공공주택 후보지 발표');
+    // [2026-09-11] 소제목↔재료 배정 계약 — 재료를 못 받은 칸이 감상 반복으로 채워지던 것을 막는다.
+    expect(out).toContain('서로 다른 것을 최소 하나씩');
+    expect(out).toContain('앞 소제목이 이미 쓴 사실을 다른 말로 다시 설명하지 않는다');
+    // 하한이 환각을 부르지 않도록 빠져나갈 문을 같이 준다.
+    expect(out).toContain('맡을 재료가 없는 소제목은 감상으로 채우지 말고 지운다');
     expect(out).toContain('최소 2개를 본문에 큰따옴표로 그대로 싣고');
     expect(out).toContain('1. "접수 첫 주에는 접속이 몰리니 오후 시간대를 권한다" — 담당자');
     expect(out).toContain('2. "서류는 온라인으로 다 낼 수 있다"\n');
@@ -49,5 +54,12 @@ describe('renderBlueprintMaterial — 최소선 문구', () => {
     const lines = out.split('\n');
     expect(lines[1]).toContain('이 설계도는 최소선이다');
     expect(lines[1]).toContain('요청 분량을 채운다');
+  });
+});
+
+describe('소제목 배정 계약', () => {
+  it('소제목이 없으면 배정 줄도 내보내지 않는다 — 맡을 칸이 없는데 계약만 남으면 혼선이다', () => {
+    const none = renderBlueprintMaterial({ ...BP, skeleton: [] });
+    expect(none).not.toContain('소제목 배정');
   });
 });

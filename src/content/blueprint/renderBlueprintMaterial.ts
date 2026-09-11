@@ -44,6 +44,15 @@ export function renderBlueprintMaterial(blueprint: Blueprint, options: RenderBlu
   }
   if (blueprint.skeleton.length > 0) {
     lines.push(`- 소제목 후보(각각 다른 질문 축, 순서·표현은 다듬어도 된다): ${blueprint.skeleton.join(' / ')}`);
+    /*
+     * [2026-09-11] 소제목과 재료를 따로 넘기면 어느 칸이 어느 재료를 맡는지 아무도 정하지
+     * 않는다. 재료를 못 받은 칸은 앞에서 한 말을 바꿔 말하는 감상으로 채워진다 — 발행글을
+     * 읽어 보니 여섯 칸 중 가운데 두 칸이 그랬다. 중반에서 독자가 나가는 자리다.
+     *
+     * 그래서 배정을 계약으로 만든다. 그리고 빠져나갈 문을 같이 연다 — 재료가 모자라면
+     * 지어내는 게 아니라 칸을 줄이는 것이 옳다. 문을 안 열면 하한이 환각을 부른다.
+     */
+    lines.push('- 소제목 배정: 각 소제목은 아래 사실·인용 중 **서로 다른 것을 최소 하나씩** 맡는다. 앞 소제목이 이미 쓴 사실을 다른 말로 다시 설명하지 않는다. 맡을 재료가 없는 소제목은 감상으로 채우지 말고 지운다 — 칸이 줄어도 된다.');
   }
   if (blueprint.offTopic.length > 0) {
     lines.push(`- 본문에서 뺄 주제(자료에 있어도 이 글의 질문이 아니다): ${blueprint.offTopic.join(' / ')}`);
