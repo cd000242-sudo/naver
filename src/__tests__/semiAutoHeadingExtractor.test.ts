@@ -389,3 +389,55 @@ describe('noun-ending headings stay recognisable', () => {
     expect(headings).toHaveLength(0);
   });
 });
+
+/*
+ * [2026-09-12 사장님 라이브 보고] "## 로 지정한 소제목이 미리보기에서 빠지고 번호가 밀린다."
+ * 뿌리: 물음표로 끝난다는 이유로 명시 마커가 무시됐다. 패널 목록은 마커만 보고 6개를
+ * 보여주는데 추출기는 5개만 잡아 두 규칙이 어긋났고, 첫 칸이 도입부에 흡수되면서 이미지
+ * 미리보기 번호가 하나씩 밀렸다.
+ */
+describe('## 로 직접 지정한 소제목은 문장부호와 무관하게 인정한다', () => {
+  const BODY = [
+    '아직 국내 극장에서 개봉하지 않은 영화인데 자꾸 눈이 가는 작품이 하나 있습니다.',
+    '',
+    '## 김도연 보고 시나리오까지 바꿨다고?',
+    '',
+    '특히 김도연을 캐스팅한 과정이 꽤 흥미로웠습니다.',
+    '',
+    '## 세 번째 장편까지 칸으로 향했습니다',
+    '',
+    '정주리 감독의 장편 필모그래피를 보면 도희야, 다음 소희로 이어집니다.',
+    '',
+    '## 그런데 도라는 대체 어떤 영화일까',
+    '',
+    '본문입니다.',
+  ].join('\n');
+
+  it('물음표로 끝나는 첫 소제목을 빠뜨리지 않는다', () => {
+    const doc = extractSemiAutoDocumentFromBody(BODY);
+    expect(doc.headings.map((h) => h.title)).toEqual([
+      '김도연 보고 시나리오까지 바꿨다고?',
+      '세 번째 장편까지 칸으로 향했습니다',
+      '그런데 도라는 대체 어떤 영화일까',
+    ]);
+  });
+
+  it('첫 소제목이 도입부로 흡수되지 않는다 — 번호 밀림의 원인이었다', () => {
+    const doc = extractSemiAutoDocumentFromBody(BODY);
+    expect(doc.introduction).not.toContain('김도연 보고 시나리오까지');
+    expect(doc.headings[0]?.title).toBe('김도연 보고 시나리오까지 바꿨다고?');
+  });
+
+  it('마침표·느낌표로 끝나도 마커가 있으면 소제목이다', () => {
+    for (const mark of ['!', '.']) {
+      const body = ['도입부 문장입니다.', '', '## 이건 소제목입니다' + mark, '', '본문 한 줄.'].join('\n');
+      expect(extractSemiAutoHeadingsFromBody(body).map((h) => h.title)).toEqual(['이건 소제목입니다' + mark]);
+    }
+  });
+
+  /*
+   * 별도 확인 필요(이 커밋 범위 아님): "1. 신분증" 같은 숫자 목록도 지금은 소제목으로 승격된다.
+   * 이 커밋 이전부터 그랬고(hasExplicitHeadingMarker 의 숫자 규칙), 체크리스트가 소제목으로
+   * 쪼개진다. 사장님 확인 후 별도로 고친다 — 버그 동작을 테스트로 박제하지 않으려고 단언은 빼 둔다.
+   */
+});

@@ -100,6 +100,22 @@ export function isSemiAutoHeadingCandidate(lines: readonly string[], index: numb
   if (title.length < (hasExplicitHeadingMarker ? 2 : 3) || title.length > 80) return false;
   if (/^(?:본문|해시태그|태그|요약|마무리)$/u.test(title)) return false;
 
+  /*
+   * [2026-09-12 사장님 보고] "## 를 붙여 지정한 소제목이 미리보기에서 빠지고 번호가 밀린다."
+   *
+   * 재현: "## 김도연 보고 시나리오까지 바꿨다고?" — 물음표로 끝난다는 이유로 아래 문장 판정에
+   * 걸려 버려졌다. 소제목 3개 본문에서 2개만 추출됐고, 첫 칸이 도입부에 흡수되면서 이미지
+   * 미리보기의 번호가 하나씩 밀렸다.
+   *
+   * 패널 목록(headingMarkup)은 마커만 보고 6개를 보여주는데 이 추출기는 5개만 잡아 **두 규칙이
+   * 서로 달랐다.** 사용자가 ## 를 직접 붙인 줄은 의도가 명확하다 — 문장부호와 무관하게 소제목이다.
+   * 질문형 소제목은 설계도가 권장하는 형태이기도 하다.
+   *
+   * 숫자 목록("1. 신분증")까지 무조건 승격하면 체크리스트가 소제목으로 쪼개지므로, 무조건
+   * 승격은 # 마커에만 준다.
+   */
+  const hasHashMarker = /^\s{0,3}#{1,4}\s+/.test(raw);
+  if (hasHashMarker) return true;
   if (hasExplicitHeadingMarker && !/[.!?。？！]\s*$/.test(title)) return true;
 
   const prevBlank = index === 0 || String(lines[index - 1] || '').trim().length === 0;
