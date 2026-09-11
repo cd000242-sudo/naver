@@ -87,3 +87,22 @@ for (const m of modes) {
   if (!a.length || !b.length) { console.log('  ' + m.padEnd(16) + '노출 ' + a.length + ' / 미노출 ' + b.length + ' — 한쪽이 비어 비교 불가'); continue; }
   console.log('  ' + m.padEnd(16) + '노출 ' + mean(a).toFixed(1) + '개(n=' + a.length + ') vs 미노출 ' + mean(b).toFixed(1) + '개(n=' + b.length + ')  AUC ' + auc(a, b).toFixed(2));
 }
+
+// ── 키워드 모양 vs 노출 ────────────────────────────────────────────────
+// 2026-09-11 실측(affiliate 11편): 키워드에 상황어가 있으면 3/3 노출, 없으면 0/6.
+// 상품명으로 검색하면 상위가 스마트스토어·공식몰이라 블로그가 낄 자리가 없다.
+const KW_SITUATION = /고민|기준|고르는|후기|써본|예민|비교|차이|이유|어떤|방법|추천|증상|관리|볼륨|탈모|소음|세척|저녁|아침|처음|언제/;
+console.log('');
+console.log('키워드 모양 vs 노출 (모드별)');
+const modesAll = [...new Set([...exposed, ...notExposed].map(p => String((p as any).mode || '?')))];
+for (const m of modesAll) {
+  const rows = [
+    ...exposed.filter(p => String((p as any).mode) === m).map(p => ({ ok: true, kw: String((p as any).keyword || '') })),
+    ...notExposed.filter(p => String((p as any).mode) === m).map(p => ({ ok: false, kw: String((p as any).keyword || '') })),
+  ];
+  const grp = (has: boolean) => {
+    const g = rows.filter(r => KW_SITUATION.test(r.kw) === has);
+    return g.length ? g.filter(r => r.ok).length + '/' + g.length : '-';
+  };
+  console.log('  ' + m.padEnd(16) + '상황어 있음 ' + grp(true).padStart(6) + '   없음 ' + grp(false).padStart(6));
+}
