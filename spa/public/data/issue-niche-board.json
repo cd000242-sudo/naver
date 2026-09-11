@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-11T09:16:33.599Z",
+  "publishedAt": "2026-09-11T14:47:26.967Z",
   "generator": "issue-niche-board",
   "schedule": "매일 07·13·19시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 205,
-    "niche": 2,
-    "preemption": 4,
+    "candidates": 199,
+    "niche": 1,
+    "preemption": 6,
     "pending": 0
   },
   "freeSample": {
@@ -49,7 +49,7 @@
         ],
         "measuredAt": "2026-09-11T09:14:23.242Z"
       },
-      "documentCount": 888,
+      "documentCount": 905,
       "documentCountMeasured": true,
       "searchVolume": 430,
       "searchVolumeLt10": false,
@@ -62,7 +62,7 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 430",
-        "문서수 888",
+        "문서수 905",
         "데이터랩 실측 수요",
         "블로그탭 상위 10 정면글 0건 — 자리 있음"
       ],
@@ -89,7 +89,7 @@
         }
       ],
       "whySearch": {
-        "text": "에이딘로보틱스가 HD현대 등으로부터 160억 원 투자를 유치했다",
+        "text": "에이딘로보틱스 160억 투자 유치, HD현대 130억 참여",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -97,12 +97,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "에이딘로보틱스 주가 상장 여부와 HD현대 130억 투자",
+          "text": "에이딘로보틱스 주가, HD현대 130억 투자와 상장 여부 확인",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "에이딘로보틱스 주가보다 HD현대 130억 투자를 먼저 봐야 하더라고요",
+          "text": "에이딘로보틱스 주가 보러 갔다가 상장이 아직이란 걸 알았네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -119,8 +119,8 @@
           "frame": "generic"
         },
         {
-          "keyword": "에이딘로보틱스 투자",
-          "searchVolume": 60,
+          "keyword": "에이딘로보틱스 주식",
+          "searchVolume": null,
           "frame": "generic"
         }
       ],
@@ -128,19 +128,13 @@
         {
           "keyword": "에이딘로보틱스 상장",
           "searchVolume": 80,
-          "documentCount": 922,
+          "documentCount": 940,
           "source": "ai-verified"
         },
         {
           "keyword": "에이딘로보틱스 관련주",
           "searchVolume": 70,
-          "documentCount": 1074,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "에이딘로보틱스 투자",
-          "searchVolume": 60,
-          "documentCount": 1529,
+          "documentCount": 1097,
           "source": "ai-verified"
         }
       ],
@@ -180,7 +174,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-11T09:12:36.173Z",
+      "measuredAt": "2026-09-11T14:44:44.496Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null
     },
@@ -372,7 +366,8 @@
       "monetize": null,
       "measuredAt": "2026-09-11T09:12:36.173Z",
       "recommendationStatus": "recommend",
-      "exclusionReason": null
+      "exclusionReason": null,
+      "carried": true
     },
     {
       "keyword": "용혜인 지역구",
@@ -901,6 +896,535 @@
   ],
   "observations": [
     {
+      "keyword": "김원호 개그맨",
+      "issue": "김원호",
+      "topic": "김원호",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 80,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 80",
+        "선점 후보 — 경쟁 문서 80건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "세계 1위 김원호-서승재 6개 대회 연속 무관 절치부심",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김원호 개그맨 아닌 배드민턴 서승재 복식 세계1위",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김원호 개그맨인 줄 알았는데 서승재랑 세계 1위 먹은 그 선수네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김원호 서승재",
+          "searchVolume": 11400,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김원호 프로필",
+          "searchVolume": 140,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김원호 나이",
+          "searchVolume": 60,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김원호 서승재",
+          "searchVolume": 11400,
+          "documentCount": 9076,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김원호 프로필",
+          "searchVolume": 140,
+          "documentCount": 338,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김원호 나이",
+          "searchVolume": 60,
+          "documentCount": 1236,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김원호 배드민턴",
+          "searchVolume": 30,
+          "documentCount": 9925,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": [
+        {
+          "title": "이 남자개그맨 이름좀 알려주세요ㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31506&docId=273512798&answerNo=1",
+          "views": 32,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-11T14:44:44.496Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김원호 라경민",
+      "issue": "김원호",
+      "topic": "김원호",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 52,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 52",
+        "선점 후보 — 경쟁 문서 52건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "세계 1위 김원호-서승재 6개 대회 연속 무관 절치부심",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 7,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-11T14:44:44.496Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에이딘로보틱스 로고",
+      "issue": "에이딘로보틱스",
+      "topic": "에이딘로보틱스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 45,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 45",
+        "선점 후보 — 경쟁 문서 45건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에이딘로보틱스 160억 투자 유치, HD현대 130억 참여",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에이딘로보틱스 로고와 HD현대 130억 투자 기업정보",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에이딘로보틱스 로고 보러 갔다가 투자 소식 보고 스크롤을 한참 멈췄어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "에이딘로보틱스 주가",
+          "searchVolume": 430,
+          "frame": "generic"
+        },
+        {
+          "keyword": "에이딘로보틱스 상장",
+          "searchVolume": 80,
+          "frame": "generic"
+        },
+        {
+          "keyword": "에이딘로보틱스 투자",
+          "searchVolume": 60,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "에이딘로보틱스 주가",
+          "searchVolume": 430,
+          "documentCount": 905,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "에이딘로보틱스 상장",
+          "searchVolume": 80,
+          "documentCount": 940,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "에이딘로보틱스 투자",
+          "searchVolume": 60,
+          "documentCount": 1552,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-11T14:44:44.496Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에이딘로보틱스 연봉",
+      "issue": "에이딘로보틱스",
+      "topic": "에이딘로보틱스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 115,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 115",
+        "선점 후보 — 경쟁 문서 115건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에이딘로보틱스 160억 투자 유치, HD현대 130억 참여",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에이딘로보틱스 연봉 초봉과 복지 채용 조건까지 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에이딘로보틱스 연봉 궁금해서 채용공고 열어봤다가 한참 들여다봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "에이딘로보틱스 채용",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-11T14:44:44.496Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에이딘로보틱스 이윤행",
+      "issue": "에이딘로보틱스",
+      "topic": "에이딘로보틱스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 116,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 116",
+        "선점 후보 — 경쟁 문서 116건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에이딘로보틱스 160억 투자 유치, HD현대 130억 참여",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에이딘로보틱스 이윤행, HD현대 130억 투자 유치 배경",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에이딘로보틱스 이윤행 대표 상장 얘기 나오니까 투자한 곳들 다시 보게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "에이딘로보틱스 상장",
+          "searchVolume": 80,
+          "frame": "generic"
+        },
+        {
+          "keyword": "에이딘로보틱스 투자",
+          "searchVolume": 60,
+          "frame": "generic"
+        },
+        {
+          "keyword": "에이딘로보틱스 채용",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "에이딘로보틱스 상장",
+          "searchVolume": 80,
+          "documentCount": 940,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "에이딘로보틱스 투자",
+          "searchVolume": 60,
+          "documentCount": 1552,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-11T14:44:44.496Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "MS 송장 사기",
+      "issue": "MS",
+      "topic": "MS",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 194,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 194",
+        "선점 후보 — 경쟁 문서 194건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS 2032년까지 데이터센터 용량 3배 확대 추진",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "MS 송장 사기 메일 100만 건, AI 악용 실제 수법",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "MS가 걸러낸 송장 사기 메일이 100만 건 넘는다는데 다들 놓치더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 17,
+      "kinTop": [
+        {
+          "title": "usps 배송 사기인가요??ㅠㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81302&docId=281974065&answerNo=1",
+          "views": 1287,
+          "answers": 1
+        },
+        {
+          "title": "노트북 거래하려는데 택배 먼저 보내준다고 합니다…사기?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10102&docId=487389139&answerNo=2",
+          "views": 276,
+          "answers": 3
+        },
+        {
+          "title": "EMS 택배가 소식이없어요 CNBJSD에서 멈춰있는데 사기인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81302&docId=362653474&answerNo=1",
+          "views": 241,
+          "answers": 2
+        },
+        {
+          "title": "ems택배 송장을 받았는데요 사기인지좀 봐주실수있나요ㅠ냐....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=81302&docId=356800288&answerNo=1",
+          "views": 61,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-11T14:44:44.496Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
       "keyword": "추연성 결혼",
       "issue": "추연성 결혼",
       "topic": "추연성 결혼",
@@ -977,286 +1501,8 @@
       "monetize": null,
       "measuredAt": "2026-09-11T09:12:36.173Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "에이딘로보틱스 로고",
-      "issue": "에이딘로보틱스",
-      "topic": "에이딘로보틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 45,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 45",
-        "선점 후보 — 경쟁 문서 45건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "에이딘로보틱스가 HD현대 등으로부터 160억 원 투자를 유치했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "에이딘로보틱스 로고부터 HD현대 130억 투자까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "에이딘로보틱스 로고 찾다가 HD현대 130억 투자 소식까지 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "에이딘로보틱스 상장",
-          "searchVolume": 80,
-          "frame": "generic"
-        },
-        {
-          "keyword": "에이딘로보틱스 투자",
-          "searchVolume": 60,
-          "frame": "generic"
-        },
-        {
-          "keyword": "에이딘로보틱스 채용",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "에이딘로보틱스 상장",
-          "searchVolume": 80,
-          "documentCount": 922,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "에이딘로보틱스 투자",
-          "searchVolume": 60,
-          "documentCount": 1529,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-11T09:12:36.173Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "에이딘로보틱스 연봉",
-      "issue": "에이딘로보틱스",
-      "topic": "에이딘로보틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 115,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 115",
-        "선점 후보 — 경쟁 문서 115건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "에이딘로보틱스가 HD현대 등으로부터 160억 원 투자를 유치했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "에이딘로보틱스 연봉 초봉과 복지, 채용까지 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "에이딘로보틱스 연봉 찾다가 160억 투자 소식에 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "에이딘로보틱스 상장",
-          "searchVolume": 80,
-          "frame": "generic"
-        },
-        {
-          "keyword": "에이딘로보틱스 투자",
-          "searchVolume": 60,
-          "frame": "generic"
-        },
-        {
-          "keyword": "에이딘로보틱스 채용",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "에이딘로보틱스 상장",
-          "searchVolume": 80,
-          "documentCount": 922,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "에이딘로보틱스 투자",
-          "searchVolume": 60,
-          "documentCount": 1529,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-11T09:12:36.173Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "에이딘로보틱스 이윤행",
-      "issue": "에이딘로보틱스",
-      "topic": "에이딘로보틱스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 116,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 116",
-        "선점 후보 — 경쟁 문서 116건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "에이딘로보틱스가 HD현대 등으로부터 160억 원 투자를 유치했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "에이딘로보틱스 이윤행, HD현대 130억 투자 유치 배경",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "에이딘로보틱스 이윤행 채용 공고 보다가 연봉란에서 멈칫했어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "에이딘로보틱스 투자",
-          "searchVolume": 60,
-          "frame": "generic"
-        },
-        {
-          "keyword": "에이딘로보틱스 채용",
-          "searchVolume": null,
-          "frame": "generic"
-        },
-        {
-          "keyword": "에이딘로보틱스 연봉",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "에이딘로보틱스 투자",
-          "searchVolume": 60,
-          "documentCount": 1529,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-11T09:12:36.173Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "텔레픽스 연봉",
@@ -4414,235 +4660,72 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "CUDA 러스트 사용법",
-      "issue": "CUDA 러스트",
-      "topic": "CUDA 러스트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "개발자 적용 방법 관심",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 20,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 20",
-        "선점 후보 — 경쟁 문서 20건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 개발자 적용 방법 관심"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "엔비디아가 GPU 커널을 러스트로 개발하는 CUDA 러스트를 공개해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "CUDA 러스트 사용법 엔비디아 GPU 커널 개발 첫걸음",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "CUDA 러스트 사용법 파이썬 습관 버리고 러스트 언어로 다시 앉았어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "러스트 언어",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "러스트 언어",
-          "searchVolume": 30,
-          "documentCount": 6204,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-09T14:19:41.464Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "CUDA 러스트",
-      "issue": "CUDA 러스트",
-      "topic": "CUDA 러스트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 43,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 43",
-        "선점 후보 — 경쟁 문서 43건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "엔비디아가 GPU 커널을 러스트로 개발하는 CUDA 러스트를 공개해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "CUDA 러스트 vs 파이썬 엔비디아 GPU 개발 차이",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "CUDA 러스트 써보니 파이썬 말고 러스트 언어로도 이게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "러스트 언어",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "러스트 언어",
-          "searchVolume": 30,
-          "documentCount": 6204,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": [
-        {
-          "title": "이사양이면러스트렉안걸리나요??",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=13020101&docId=261723389&answerNo=1",
-          "views": 102,
-          "answers": 1
-        },
-        {
-          "title": "이사양이면러스트렉안걸리나요??내공",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=13020101&docId=261729654&answerNo=1",
-          "views": 51,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-09T14:19:41.464Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "이종섭 1심 무죄",
+      "issue": "서울대 10개 만들기",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "unknown",
+      "issueStatus": "stable",
       "isHot": false,
-      "why": "윤석열이 이종섭 호주도피 혐의 1심에서 무죄를 선고받았다",
+      "why": "선정 3개 대학 수시지원 11.6% 늘고 서울대는 감소",
       "headlines": [
         {
-          "title": "尹 '이종섭 호주도피' 1심 무죄…\"수사방해 의도 단정 못해\"(종합)",
+          "title": "'서울대 10개 만들기' 선정 3개大 수시지원 11.6% 증가",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-11T07:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016305281?sid=102"
+          "publishedAt": "2026-09-11T13:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016305627?sid=102"
         },
         {
-          "title": "윤석열 ‘이종섭 호주 도피’ 혐의 1심 무죄",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-09-11T06:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002822699?sid=102"
+          "title": "'서울대 10개 만들기' 지정 3개대 수시지원 11.6%↑…서울대는↓",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-11T13:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014185526?sid=102"
         },
         {
-          "title": "尹, ‘이종섭 호주도피’ 1심서 무죄",
-          "press": "munhwa.com",
-          "publishedAt": "2026-09-11T06:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/021/0002818155?sid=100"
+          "title": "‘서울대 10개 만들기’ 선정 3개 대학, 수시 지원자 늘었다",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-11T13:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003997957?sid=102"
         }
       ],
-      "concentrated": [],
+      "concentrated": [
+        {
+          "keyword": "서울대",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
       "nextWave": [],
       "rowCount": 0
     },
     {
-      "issue": "LG 국민연금 AI",
+      "issue": "직원의 한동훈 총리",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "국민연금이 LG AI연구원과 AI 기반 환율 분석 서비스 개발을 추진한다",
+      "why": "총리실 직원 한동훈 질문 논란에 한 총리 송구 표명",
       "headlines": [
         {
-          "title": "국민연금 'AI 기반 환율 분석서비스' 개발 추진…LG AI연구원 협업",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-11T08:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014185331?sid=101"
+          "title": "한 총리 \"직원 부적절한 처신, 한동훈과 국민께 송구…사찰은 아냐\"(종...",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-11T06:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009165531?sid=100"
         },
         {
-          "title": "국민연금, AI 기반 환율 분석 서비스 개발 착수",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-11T08:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016305364?sid=102"
+          "title": "총리실 '한동훈 기자회견 개입' 논란...\"송구\"·\"파면해야\"",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-09-11T10:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002405920?sid=100"
         },
         {
-          "title": "국민연금, AI로 환율 분석한다…LG AI연구원과 MOU",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-11T08:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005733980?sid=101"
+          "title": "한성숙 “한동훈에 질문한 총리실 직원, 부적절한 처신”",
+          "press": "donga.com",
+          "publishedAt": "2026-09-11T06:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003747468?sid=100"
         }
       ],
       "concentrated": [],
@@ -4650,35 +4733,812 @@
       "rowCount": 0
     },
     {
-      "issue": "나라살림 적자 5년",
+      "issue": "美 물가 3.4%",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": false,
-      "why": "세수 호조로 7월까지 나라살림 적자가 5년 만에 최소를 기록했다",
+      "isHot": true,
+      "why": "8월 CPI 3.4% 상승 근원물가 예상 웃돌아",
       "headlines": [
         {
-          "title": "세수 호조에 7월까지 나라살림 적자 22조 개선…5년 만에 최소",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-11T00:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014183994?sid=101"
+          "title": "美 8월 소비자물가 3.4% 상승…근원물가 전월 대비 예상 웃돌아",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-11T12:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003997953?sid=101"
         },
         {
-          "title": "7월까지 나라살림 적자 64.8조원…5년 만에 최저",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-09-11T00:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005814933?sid=101"
+          "title": "美 8월 소비자물가 전년 대비 3.4% 상승…예상치 부합",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-11T12:46:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001191882?sid=104"
         },
         {
-          "title": "세수 호조에 7월까지 나라살림 적자 22조 개선‥5년 만에 최소",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-09-11T01:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001523371?sid=101"
+          "title": "美 8월 소비자물가 전년비 3.4% 상승…예상치 부합",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-11T13:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005412700?sid=101"
         }
       ],
       "concentrated": [],
       "nextWave": [],
       "rowCount": 0
+    },
+    {
+      "issue": "유부녀 킬러 드라마",
+      "issueType": "entertainment",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "공효진 러시아 킬러 과거 공개 2회 남기고 확대편성",
+      "headlines": [
+        {
+          "title": "‘유부녀 킬러’ 공효진-신현수, 베일 벗는다",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-09-10T23:54:00.000Z",
+          "link": "https://m.entertain.naver.com/article/144/0001137534"
+        },
+        {
+          "title": "‘유부녀 킬러’ 킹피셔 카피캣 등장…공효진 추적",
+          "press": "enter.etoday.co.kr",
+          "publishedAt": "2026-09-11T12:46:00.000Z",
+          "link": "https://enter.etoday.co.kr/news/view/302272"
+        },
+        {
+          "title": "‘유부녀킬러’ 공효진·신현수 과거 공개",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-09-10T23:10:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202609110060"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "유부녀킬러 드라마 시청률",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "유부녀킬러 드라마 캐스팅",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "유부녀킬러 드라마 넷플릭스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김원호",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "세계 1위 김원호-서승재 6개 대회 연속 무관 절치부심",
+      "headlines": [
+        {
+          "title": "'세계 복식 1위인데 6개 대회 연속 무관' 절치부심한 김원호-서승재 \"아...",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-09-11T04:07:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/109/0005604900"
+        },
+        {
+          "title": "\"세계 1위 한국 이겼잖아! 왜 해체하나?\"…韓 서승재·김원호 이겼다고...",
+          "press": "xportsnews.com",
+          "publishedAt": "2026-09-11T07:21:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/311/0002056119"
+        },
+        {
+          "title": "배드민턴 김원호-서승재, 백하나-이소희 \"목표는 아시안게임 첫 우승\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-08T07:40:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/003/0014177503"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "배드민턴 김원호",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김원호서승재",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "서승재 김원호",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김원호 소설",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김원호 작가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김원호 개그맨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김원호 변호사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "김원호 부상",
+          "reason": "컨디션 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "주말 아침 쌀쌀",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "주말 아침 최저 12도 낮 31도 일교차 최대 15도",
+      "headlines": [
+        {
+          "title": "주말 아침 최저 12도 '쌀쌀'…낮엔 31도, 일교차 최대 15도",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-11T09:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009165776?sid=101"
+        },
+        {
+          "title": "내일 아침 예년보다 쌀쌀... 주말 일교차 크다",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-11T09:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003997939?sid=102"
+        },
+        {
+          "title": "아침엔 쌀쌀, 낮엔 30도…주말 일교차 최대 15도 '주의'",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-11T08:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001968565?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "주말",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "공인중개사",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "국토부 임장비 불법 규정, 공인중개사 2명 숨진 채 발견",
+      "headlines": [
+        {
+          "title": "공인중개사 '임장비' 논란일자…국토부 \"임장비는 불법\"",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-09-11T06:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000638814?sid=101"
+        },
+        {
+          "title": "공인중개사 '임장비' 논란에…국토부 \"임장비 받으면 불법\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-11T06:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014184939?sid=101"
+        },
+        {
+          "title": "공인중개사 2명 숨진 채 발견…경찰 수사",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-09-11T12:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012255925?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "공인중개사 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공인중개사 일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공인중개사 시험",
+          "searchVolume": 35650,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공인중개사 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공인중개사 수수료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공인중개사 자격증",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공인중개사 합격률",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공인중개사 시험정보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "황정민 스토킹 항소",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "황정민 스토킹 40대 여성 벌금 600만원 불복 항소",
+      "headlines": [
+        {
+          "title": "황정민 스토킹 혐의 여성, 벌금 600만원 불복해 항소",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-11T07:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016305277?sid=102"
+        },
+        {
+          "title": "'황정민 스토킹 혐의' 여성, 벌금 600만원 불복해 항소",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-09-11T07:46:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000638818?sid=102"
+        },
+        {
+          "title": "황정민 스토킹 혐의 40대 女, 벌금 600만원 불복 항소",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-11T07:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005733961?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "재혼한다 웨딩 촬영",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "유튜버 최고기 이주은 PD와 재혼 다음주 웨딩촬영",
+      "headlines": [
+        {
+          "title": "[단독] 최고기, ♥이주은과 내년 재혼 \"미리 웨딩촬영, 결혼식은 천천히...",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-09-11T09:23:00.000Z",
+          "link": "https://m.entertain.naver.com/article/109/0005604975"
+        },
+        {
+          "title": "최고기, 이주은 PD와 곧 재혼…“다음주 웨딩 촬영”",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-11T09:10:00.000Z",
+          "link": "https://m.entertain.naver.com/article/009/0005734094"
+        },
+        {
+          "title": "유튜버 최고기, 이주은 PD와 재혼 임박 “웨딩 촬영 준비 중”",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-09-11T08:20:00.000Z",
+          "link": "https://m.entertain.naver.com/article/144/0001137631"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "대한민국의 대법관",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "조희대 부당간섭 경고 직후 청와대 대법관 재제청 촉구",
+      "headlines": [
+        {
+          "title": "靑 \"대법관 재제청, 추천委 존중해 신속히 이뤄져야\"",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-09-11T09:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000638849?sid=100"
+        },
+        {
+          "title": "靑 \"대법관 재제청, 신속히 해주길…추천위 내용 존중해달라\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-11T08:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009165732?sid=100"
+        },
+        {
+          "title": "조희대 “부당간섭 안된다” 직후…靑 “대법관 재제청 신속히 하라”",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-09-11T06:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003550767?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "GPT-라이브-1",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "오픈AI 전이중 음성 모델 GPT-라이브-1 API 출시",
+      "headlines": [
+        {
+          "title": "언제든 끼어들기 OK…오픈AI, 동시 청취·발화 가능한 음성 AI 'GPT-라이브...",
+          "press": "digitaltoday.co.kr",
+          "publishedAt": "2026-09-11T04:50:00.000Z",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=699966"
+        },
+        {
+          "title": "오픈AI, 전이중 음성 모델 'GPT-라이브-1' API 출시...\"실시간 대화 에이...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-11T08:40:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215145"
+        },
+        {
+          "title": "챗GPT 엔터프라이즈의 성장과 광고 사업 확대 계획, 오픈AI 한국 진출 1년...",
+          "press": "it.donga.com",
+          "publishedAt": "2026-09-09T08:38:00.000Z",
+          "link": "https://it.donga.com/109498/"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "오픈AI 아스트라 수요 폭증에 월 200달러 프로 가입 중단",
+      "headlines": [
+        {
+          "title": "오픈AI, ‘아스트라’ 수요 폭증에 월 200달러 프로 신규 가입 중단",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-11T01:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003997870?sid=105"
+        },
+        {
+          "title": "오픈AI, 美정부 AI요금 '반값 할인' 전환…연1달러 계약은 종료",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-10T18:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016303709?sid=104"
+        },
+        {
+          "title": "젠슨 황 \"사이버 보안, AI의 다음 주요 적용 분야될 가능성 높아\"",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-10T23:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005331193?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 아스트라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "MS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MS 2032년까지 데이터센터 용량 3배 확대 추진",
+      "headlines": [
+        {
+          "title": "\"서버 없어서 고객 놓쳤다\"…MS, 데이터센터 용량 3배 확대",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-09-11T02:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005815093?sid=104"
+        },
+        {
+          "title": "MS, 데이터센터 용량 3배 확대 추진…AI·클라우드 공급난 해소",
+          "press": "etnews.com",
+          "publishedAt": "2026-09-10T23:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003465795?sid=105"
+        },
+        {
+          "title": "\"MS, 2032년까지 데이터센터 용량 3배로 확대…수요 충족 목적\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-11T00:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016304140?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ms 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스",
+          "searchVolume": 24780,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MS 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 365",
+          "searchVolume": 12120,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 해지 방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 한컴 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "미국 정치권",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "AI 인류 멸망 경고에 미국 정치권 규제 논쟁 격화",
+      "headlines": [
+        {
+          "title": "\"선거 끝나도 트럼프 힘 확 안 빠질 것…한국 목소리 적극 내야\"",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-11T02:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005331280?sid=104"
+        },
+        {
+          "title": "\"AI 인류 멸망\" 경고에…미국 의회는 \"규제\"·국방부는 \"괜한 공포\"",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-10T20:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001387471?sid=104"
+        },
+        {
+          "title": "셰인바움 대통령 \"멕시코 카르텔 문제, 美선거에 악용 말라\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-10T19:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016303714?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "퓨리오사AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "퓨리오사AI 싱가포르 법인 설립 아태 추론칩 공략",
+      "headlines": [
+        {
+          "title": "[AI픽] 퓨리오사AI, 싱가포르 법인 설립…아태 시장 공략",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-11T00:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016304016?sid=105"
+        },
+        {
+          "title": "퓨리오사AI, 싱가포르에 거점 구축…아태 AI칩 시장 공략",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-10T23:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014183767?sid=105"
+        },
+        {
+          "title": "퓨리오사AI, 싱가포르에 법인 설립",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-11T09:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005331493?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "퓨리오사ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퓨리오사ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퓨리오사ai 상장일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퓨리오사ai 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퓨리오사ai ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퓨리오사ai 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퓨리오사ai 관련 대장주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퓨리오사ai 지분",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "데이터 에이전트",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "KB손보 AI 에이전트에 사원번호 부여해 관리",
+      "headlines": [
+        {
+          "title": "[AI픽] AI 에이전트가 금융상품 고른다…'앱 락인' 경쟁 흔들",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-11T00:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016303986?sid=105"
+        },
+        {
+          "title": "KB손보, AI 에이전트에 사원번호 부여…업무·성과 관리",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-11T07:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014185231?sid=101"
+        },
+        {
+          "title": "\"AI, 자네도 사원이야\"…KB손보, AI 에이전트에 사원번호 부여·관리",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-09-11T06:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000533041?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "캘리포니아",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "캘리포니아 16세 미만 SNS 중독 기능 금지 법안 제정",
+      "headlines": [
+        {
+          "title": "[컬처&레저] 한강 위의 캘리포니아 와인 데이",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-10T02:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016302050?sid=100"
+        },
+        {
+          "title": "[오늘과 내일/박희창]캘리포니아의 ‘레이니 데이 펀드’",
+          "press": "donga.com",
+          "publishedAt": "2026-09-11T14:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003747542?sid=110"
+        },
+        {
+          "title": "美 캘리포니아, 16세 미만 SNS '중독성 기능' 금지…AI 챗봇도 규제",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-11T00:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014183982?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "캘리포니아 시간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "미국 캘리포니아 시간",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "미국 캘리포니아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "호텔 캘리포니아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아 대학교",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아 주지사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "캘리포니아 순두부",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "에이딘로보틱스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "에이딘로보틱스 160억 투자 유치, HD현대 130억 참여",
+      "headlines": [
+        {
+          "title": "로봇기술 개발업체 에이딘로보틱스, 160억 원 투자 유치",
+          "press": "hankookilbo.com",
+          "publishedAt": "2026-09-11T00:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/469/0000953474?sid=105"
+        },
+        {
+          "title": "HD현대, 스타트업 '에이딘로보틱스'에 130억 투자",
+          "press": "globalepic.co.kr",
+          "publishedAt": "2026-09-11T04:30:00.000Z",
+          "link": "http://www.globalepic.co.kr/view.php?ud=20260911132716674848439a4874_29"
+        },
+        {
+          "title": "HD현대로보틱스, 에이딘로보틱스에 130억 투자…조선·중공업 로봇손 개...",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-11T00:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001191717?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "에이딘로보틱스 주가",
+          "searchVolume": 430,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이딘로보틱스 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이딘로보틱스 투자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이딘로보틱스 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이딘로보틱스 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이딘로보틱스 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이딘로보틱스 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "에이딘로보틱스 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
     },
     {
       "issue": "추연성 결혼",
@@ -4709,228 +5569,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "김도영 선수단 합류",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "코뼈 수술한 KIA 김도영이 퇴원 후 선수단에 합류했다",
-      "headlines": [
-        {
-          "title": "'코뼈 수술' KIA 김도영, 퇴원 후 선수단 합류…AG 출전 청신호",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-11T07:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014185275?sid=104"
-        },
-        {
-          "title": "KIA 김도영, 수술 후 오늘 선수단 합류‥빠르면 13일 한화전 출전",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-09-11T08:24:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/214/0001523454"
-        },
-        {
-          "title": "코뼈 수술한 김도영, 아시안게임 나가나 ... 오늘 KIA 선수단 조기 합류",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-11T08:41:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/023/0003997933"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김도영",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "조용형",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "조용형·이재홍 코치가 모레노호 축구대표팀 코치진에 합류했다",
-      "headlines": [
-        {
-          "title": "'모레노호' 축구대표팀 코치진에 조용형·이재홍 코치 합류",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-10T07:56:00.000Z",
-          "link": "https://m.sports.naver.com/kfootball/article/001/0016303283"
-        },
-        {
-          "title": "조용형 코치, '모레노호' 축구대표팀 코치진 합류",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-10T08:24:00.000Z",
-          "link": "https://m.sports.naver.com/kfootball/article/055/0001387370"
-        },
-        {
-          "title": "'모레노호' 축구대표팀에 조용형·이재홍 한국인 코치 2명 합류",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-10T08:36:00.000Z",
-          "link": "https://m.sports.naver.com/kfootball/article/003/0014183249"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "초 수출 역대",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "9월 1~10일 수출이 350억 달러로 역대 최대이며 반도체가 270% 급증했다",
-      "headlines": [
-        {
-          "title": "9월 초 수출 83% 폭증 '역대 최대'…절반이 반도체",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-09-11T00:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001968463?sid=102"
-        },
-        {
-          "title": "9월초 수출 350억 달러 ‘역대 최대’…반도체 270.1% 급증",
-          "press": "sedaily.com",
-          "publishedAt": "2026-09-11T00:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004660806?sid=101"
-        },
-        {
-          "title": "9월 초 수출 350억달러 ‘역대 최대’…반도체 270% 폭증",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-09-11T01:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003679288?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "유현조",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "유현조가 KLPGA 메이저 대회에서 최예림 등과 우승 경쟁 중이다",
-      "headlines": [
-        {
-          "title": "[mhn포토] 유현조, 손 인사로 출발",
-          "press": "mhnse.com",
-          "publishedAt": "2026-09-11T08:42:00.000Z",
-          "link": "https://m.sports.naver.com/golf/article/445/0000463218"
-        },
-        {
-          "title": "[포토]유현조,최선을 다할게요",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-09T07:43:00.000Z",
-          "link": "https://m.sports.naver.com/golf/article/018/0006366320"
-        },
-        {
-          "title": "'김민솔·유현조 압도한' 최예림, 2주 연승 향해 순항 [KLPGA 메이저]",
-          "press": "golfhankook.hankooki.com",
-          "publishedAt": "2026-09-11T00:10:00.000Z",
-          "link": "https://golfhankook.hankooki.com/news/articleView.html?idxno=20021824"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "유현조 나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "유현조 골프",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "유현조 lpga",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "유현조 프로 키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "유현조 us 오픈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "유현조 프로 나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "유현조 최종순위",
-          "reason": "대회 결과 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "유현조 다음 대회",
-          "reason": "차기 출전 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "SMR 특별법 시행",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "SMR 특별법과 시행령이 오늘부터 시행돼 개발·상용화를 지원한다",
-      "headlines": [
-        {
-          "title": "SMR 개발부터 상용화까지 속도낸다…특별법 오늘 시행",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-11T01:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016304219?sid=101"
-        },
-        {
-          "title": "SMR 개발·상용화 속도 낸다…‘SMR 특별법·시행령’ 오늘 시행",
-          "press": "busan.com",
-          "publishedAt": "2026-09-11T02:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/082/0001397893?sid=101"
-        },
-        {
-          "title": "AI·데이터센터 전기 먹는 하마 잡는다…'소형 원전' SMR 육성법 첫 실효",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-11T00:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014183998?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "smr",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "SMR 촉진위원회",
-          "reason": "연내 출범 예정",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "근로복지공단",
@@ -5003,13 +5643,6 @@
       ],
       "nextWave": [
         {
-          "keyword": "산재 질병심사",
-          "reason": "심사 지연 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
           "keyword": "근로복지공단 병원",
           "reason": "재활 기관 궁금",
           "searchVolume": null,
@@ -5017,528 +5650,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 1
-    },
-    {
-      "issue": "GPT-라이브-1",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "오픈AI가 실시간 대화가 가능한 전이중 음성 모델 GPT-라이브-1 API를 출시했다",
-      "headlines": [
-        {
-          "title": "언제든 끼어들기 OK…오픈AI, 동시 청취·발화 가능한 음성 AI 'GPT-라이브...",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-09-11T04:50:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=699966"
-        },
-        {
-          "title": "오픈AI, 전이중 음성 모델 'GPT-라이브-1' API 출시...\"실시간 대화 에이...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-11T08:40:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215145"
-        },
-        {
-          "title": "챗GPT 엔터프라이즈의 성장과 광고 사업 확대 계획, 오픈AI 한국 진출 1년...",
-          "press": "it.donga.com",
-          "publishedAt": "2026-09-09T08:38:00.000Z",
-          "link": "https://it.donga.com/109498/"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "오픈AI가 아스트라 수요 폭증으로 월 200달러 프로 신규 가입을 중단했다",
-      "headlines": [
-        {
-          "title": "오픈AI, ‘아스트라’ 수요 폭증에 월 200달러 프로 신규 가입 중단",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-11T01:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0003997870?sid=105"
-        },
-        {
-          "title": "오픈AI, 美정부 AI요금 '반값 할인' 전환…연1달러 계약은 종료",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-10T18:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016303709?sid=104"
-        },
-        {
-          "title": "젠슨 황 \"사이버 보안, AI의 다음 주요 적용 분야될 가능성 높아\"",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-10T23:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005331193?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 아스트라",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI 상장 일정",
-          "reason": "IPO 관심 지속",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "MS",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "MS가 2032년까지 데이터센터 용량을 3배로 확대한다",
-      "headlines": [
-        {
-          "title": "\"서버 없어서 고객 놓쳤다\"…MS, 데이터센터 용량 3배 확대",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-09-11T02:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005815093?sid=104"
-        },
-        {
-          "title": "MS, 데이터센터 용량 3배 확대 추진…AI·클라우드 공급난 해소",
-          "press": "etnews.com",
-          "publishedAt": "2026-09-10T23:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003465795?sid=105"
-        },
-        {
-          "title": "\"MS, 2032년까지 데이터센터 용량 3배로 확대…수요 충족 목적\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-11T00:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016304140?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "ms 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스",
-          "searchVolume": 24780,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "MS 영구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 365",
-          "searchVolume": 12120,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 영구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 해지 방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 한컴 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "MS 코파일럿",
-          "reason": "주력 AI 서비스",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "MS 송장 사기",
-          "reason": "보안 위협 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "미국 정치권",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "미국 의회가 AI 규제를 논의하고 국방부와 이견을 보였다",
-      "headlines": [
-        {
-          "title": "\"선거 끝나도 트럼프 힘 확 안 빠질 것…한국 목소리 적극 내야\"",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-11T02:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005331280?sid=104"
-        },
-        {
-          "title": "\"AI 인류 멸망\" 경고에…미국 의회는 \"규제\"·국방부는 \"괜한 공포\"",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-10T20:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001387471?sid=104"
-        },
-        {
-          "title": "[단독] 장동혁, 15일 ‘트럼프 2기 첫 주한 美 대사’ 스틸 만난다",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-11T05:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005733907?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "퓨리오사AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "퓨리오사AI가 싱가포르 법인을 설립해 아태 AI 추론칩 시장을 공략한다",
-      "headlines": [
-        {
-          "title": "[AI픽] 퓨리오사AI, 싱가포르 법인 설립…아태 시장 공략",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-11T00:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016304016?sid=105"
-        },
-        {
-          "title": "퓨리오사AI, 싱가포르에 거점 구축…아태 AI칩 시장 공략",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-10T23:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014183767?sid=105"
-        },
-        {
-          "title": "퓨리오사AI, 싱가포르 법인 설립…아시아·태평양 AI 추론칩 거점으로",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-11T02:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0003997881?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "퓨리오사ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퓨리오사ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퓨리오사ai 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퓨리오사ai 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퓨리오사ai ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퓨리오사ai 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퓨리오사ai 관련 대장주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퓨리오사ai 지분",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "퓨리오사AI 상장 일정",
-          "reason": "IPO 시점 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "퓨리오사AI 관련주",
-          "reason": "수혜주 검색",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "퓨리오사AI 투자사",
-          "reason": "주주 구성 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "데이터 에이전트",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "KB손보가 AI 에이전트에 사원번호를 부여해 업무·성과를 관리한다",
-      "headlines": [
-        {
-          "title": "[AI픽] AI 에이전트가 금융상품 고른다…'앱 락인' 경쟁 흔들",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-11T00:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016303986?sid=105"
-        },
-        {
-          "title": "KB손보, AI 에이전트에 사원번호 부여…업무·성과 관리",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-11T07:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014185231?sid=101"
-        },
-        {
-          "title": "\"AI, 자네도 사원이야\"…KB손보, AI 에이전트에 사원번호 부여·관리",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-09-11T06:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000533041?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "캘리포니아",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "캘리포니아가 16세 미만 SNS 중독 기능을 규제하는 아동보호법을 제정했다",
-      "headlines": [
-        {
-          "title": "[컬처&레저] 한강 위의 캘리포니아 와인 데이",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-10T02:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016302050?sid=100"
-        },
-        {
-          "title": "美 캘리포니아, 16세 미만 SNS '중독성 기능' 금지…AI 챗봇도 규제",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-11T00:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014183982?sid=104"
-        },
-        {
-          "title": "미국 캘리포니아, SNS 중독 기능 규제 등 아동 보호법안 제정",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-09-11T02:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001523392?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "캘리포니아 시간",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "미국 캘리포니아 시간",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "캘리포니아 날씨",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "미국 캘리포니아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "호텔 캘리포니아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "캘리포니아 여행",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "캘리포니아 지도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "캘리포니아 지진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "캘리포니아 와인 여행",
-          "reason": "와인데이 후 여행 검색",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "에이딘로보틱스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "에이딘로보틱스가 HD현대 등으로부터 160억 원 투자를 유치했다",
-      "headlines": [
-        {
-          "title": "로봇기술 개발업체 에이딘로보틱스, 160억 원 투자 유치",
-          "press": "hankookilbo.com",
-          "publishedAt": "2026-09-11T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/469/0000953474?sid=105"
-        },
-        {
-          "title": "HD현대, 스타트업 '에이딘로보틱스'에 130억 투자",
-          "press": "globalepic.co.kr",
-          "publishedAt": "2026-09-11T04:30:00.000Z",
-          "link": "http://www.globalepic.co.kr/view.php?ud=20260911132716674848439a4874_29"
-        },
-        {
-          "title": "HD현대로보틱스, 에이딘로보틱스 지분투자..\"유망기업 협력 확대\"",
-          "press": "fnnews.com",
-          "publishedAt": "2026-09-11T01:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005574392?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "에이딘로보틱스 주가",
-          "searchVolume": 430,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "에이딘로보틱스 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "에이딘로보틱스 투자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "에이딘로보틱스 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "에이딘로보틱스 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "에이딘로보틱스 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "에이딘로보틱스 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "에이딘로보틱스 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "에이딘로보틱스 상장",
-          "reason": "IPO 시점 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "에이딘로보틱스 관련주",
-          "reason": "수혜주 검색",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "용혜인",
@@ -6606,52 +6719,6 @@
         {
           "keyword": "알테오젠 공매도",
           "reason": "하락시 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "CUDA 러스트",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "엔비디아가 GPU 커널을 러스트로 개발하는 CUDA 러스트를 공개해서.",
-      "headlines": [
-        {
-          "title": "엔비디아, GPU 커널까지 러스트로 개발하는 'CUDA 러스트' 공개...안전한...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-09T08:30:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215062"
-        },
-        {
-          "title": "리누스 토발즈가 보는 ‘리눅스커널과 러스트, AI, 개발자’",
-          "press": "byline.network",
-          "publishedAt": "2025-11-05T05:50:00.000Z",
-          "link": "https://byline.network/?p=9004111222582669"
-        },
-        {
-          "title": "AI, 더 멀리 더 오래 더 가까이 [정원훈의 AI 트렌드]",
-          "press": "it.chosun.com",
-          "publishedAt": "2026-05-07T21:02:00.000Z",
-          "link": "https://it.chosun.com/news/articleView.html?idxno=2023092161693"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "cuda",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "CUDA 러스트 사용법",
-          "reason": "개발자 적용 방법 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
