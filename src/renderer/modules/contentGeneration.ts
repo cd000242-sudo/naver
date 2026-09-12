@@ -418,6 +418,37 @@ export function rebuildHeadingsFromPreferredBody(structuredContent: any): void {
   }));
 }
 
+/*
+ * [2026-09-12 사장님 요청] "반자동 편집에 붙여넣기가 되면 이미지관리탭 콘텐츠 입력 제목
+ * 필드에 자동으로 제목이 들어가도록."
+ *
+ * 자동 입력 자체는 있었다(생성 후처리 6단계). 붙여넣기에서 안 채워진 이유는 그 시점의
+ * structuredContent.selectedTitle 이 비어 있기 때문이다 — 붙여넣기는 본문만 들어오고 제목은
+ * 편집 화면의 입력칸에 있다. 그래서 화면 제목칸을 폴백으로 두고, 제목이 바뀌면 따라가게 한다.
+ */
+export function syncImageTabTitle(preferredTitle?: string): void {
+  try {
+    const target = document.getElementById('image-title') as HTMLInputElement | null;
+    if (!target) return;
+    const fromEditor = (document.getElementById('unified-generated-title') as HTMLInputElement | null)?.value?.trim() || '';
+    const fromState = String((window as any).currentStructuredContent?.selectedTitle || '').trim();
+    const title = String(preferredTitle || '').trim() || fromEditor || fromState;
+    if (!title || target.value === title) return;
+    target.value = title;
+    // 다른 모듈이 input 을 듣고 있을 수 있다.
+    try { target.dispatchEvent(new Event('input', { bubbles: true })); } catch { /* 무시 */ }
+  } catch { /* 화면 갱신 실패는 생성을 막지 않는다 */ }
+}
+
+/** 편집 화면 제목칸이 바뀌면 이미지 탭 제목을 따라가게 한다. 한 번만 배선한다. */
+export function initImageTabTitleMirror(): void {
+  const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement | null;
+  if (!titleInput || titleInput.dataset.imageTitleMirror === 'on') return;
+  titleInput.dataset.imageTitleMirror = 'on';
+  titleInput.addEventListener('input', () => syncImageTabTitle());
+  syncImageTabTitle();
+}
+
 export async function applyContentPostProcessing(
   structuredContent: any,
   opts?: {
@@ -478,12 +509,7 @@ export async function applyContentPostProcessing(
   }
 
   // 6. 이미지 관리 탭 제목 자동 입력
-  try {
-    const imageTitleInput = document.getElementById('image-title') as HTMLInputElement | null;
-    if (imageTitleInput && structuredContent.selectedTitle) {
-      imageTitleInput.value = structuredContent.selectedTitle;
-    }
-  } catch { /* ignore */ }
+  syncImageTabTitle(structuredContent?.selectedTitle);
 
   // 7. 글 목록 펼치기
   try {

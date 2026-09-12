@@ -350,6 +350,7 @@ import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 import { initPlacePicker, readPickedPlace, readPickedPlaces } from './modules/placePicker.js';
 import { initLewordBoardPicker } from './modules/lewordBoardPicker.js';
 import { initHeadingControlPanel, renderHeadingList } from './modules/headingControlPanel.js';
+import { initImageTabTitleMirror } from './modules/contentGeneration.js';
 import { resetPhotoModeForNextPost } from './modules/photoModeReset.js';
 import { initStartupEngineGate } from './modules/startupEngineGate.js';
 // ✅ [SPEC-DROPSHOT-2026] 이미지 관리 → 🎨 이미지 생성 서브탭 (멀티엔진 대량 생성 스튜디오)
@@ -784,6 +785,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSettingsModalFunc(); // ✅ [2026-01-25] 환경설정 모달 초기화
   // [2026-09-09] 소제목 직접 지정 패널 — 모든 모드 공용(반자동 편집 영역)
   initHeadingControlPanel();
+  // [2026-09-12] 편집 화면 제목 → 이미지 관리 탭 제목 미러링(붙여넣기 포함).
+  try { initImageTabTitleMirror(); } catch { /* 미러링 실패는 화면을 막지 않는다 */ }
 
   // [2026-08-19] 저장된 텍스트 모델 선택을 시작 시점에 되살린다.
   //   설정 모달을 열 때만 복원하면, 모달을 안 열고 바로 생성할 때 화면이 "선택 없음"이라
