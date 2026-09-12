@@ -24,6 +24,7 @@ import { NAVER_TIMEOUTS } from './timeouts.js';
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, buildTypingStyleResetHtml, pickRichArticleThemes, ensureTailTypingReady, focusLastEditableLine } from './richTextPaste.js';
 import { planImageTextInterleave } from './imageTextInterleavePlan.js';
+import { stripBoundaryHeading } from './structuredHeadingCleanup.js';
 import { planTypingFallback, splitFallbackParagraphs, sliceParagraphFromNormalizedOffset } from './typingFallbackPlan.js';
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 import {
@@ -1068,6 +1069,11 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       }
     }
 
+    // 서론 끝의 첫 소제목은 리치 입력에서 01번 제목으로 렌더되어 아래 인용구와 중복된다.
+    const cleanIntroduction = stripBoundaryHeading(structured.introduction || '', headings[0]?.title || '', 'end');
+    structured = { ...structured, introduction: cleanIntroduction };
+    resolved.structuredContent = structured;
+
     // ✅ 쇼핑커넥트 모드 감지 (for 루프 밖에서 미리 체크)
     const isShoppingConnectModeGlobal = resolved.contentMode === 'affiliate' || !!resolved.affiliateLink;
     self.__affiliateProductImageLinkAttached = false;
@@ -1893,6 +1899,17 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             }
           }
 
+          // 본문 복구를 먼저 끝내야 교차 배치 계획에도 최종 본문이 반영된다.
+          if (!cleanBody.trim() && bodyText.trim()) {
+            if (heading.content && heading.content.trim().length > 0) {
+              cleanBody = heading.content.trim();
+            } else {
+              const allLines = bodyText.split('\n').filter((l: string) => l.trim().length > 0);
+              cleanBody = sliceBalancedUnits(allLines, i, headings.length).join('\n').trim();
+            }
+          }
+          cleanBody = stripBoundaryHeading(cleanBody, heading.title, 'start');
+
           // 1-2. 이미지 분류
           const topImages = headingImages.filter((img: any) => (img.position || 'top') === 'top');
           const middleImages = headingImages.filter((img: any) => img.position === 'middle');
@@ -1963,19 +1980,6 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           }
 
           // B. 본문 타이핑
-          // ✅ [2026-02-28 FIX] cleanBody가 비어있으면 bodyText에서 강제 추출 (최종 안전장치)
-          if (!cleanBody.trim() && bodyText.trim()) {
-            self.log(`   ⚠️ cleanBody가 비어있음 → bodyText에서 강제 추출 시도`);
-            // heading.content가 이미 있으면 사용, 없으면 heading 인덱스 기반 균등 할당
-            if (heading.content && heading.content.trim().length > 0) {
-              cleanBody = heading.content.trim();
-              self.log(`   ✅ heading.content 복구: ${cleanBody.length}자`);
-            } else {
-              const allLines = bodyText.split('\n').filter((l: string) => l.trim().length > 0);
-              cleanBody = sliceBalancedUnits(allLines, i, headings.length).join('\n').trim();
-              self.log(`   ✅ bodyText 균등 분할 복구: ${cleanBody.length}자`);
-            }
-          }
           let appliedHeadingBody = '';
           if (cleanBody.trim()) {
             /*
@@ -2381,6 +2385,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           }
 
           let appliedHeadingBody = '';
+          cBody = stripBoundaryHeading(cBody, heading.title, 'start');
           if (cBody.trim()) {
             self.log(`   🧩 본문 리치 입력 우선 처리(이미지 없음)...`);
             appliedHeadingBody = await self.typeBodyWithRetry(cFrame, page, cBody, 19);

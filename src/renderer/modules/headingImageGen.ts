@@ -3471,14 +3471,53 @@ export function generateImagePromptByIndex(heading: string, index: number, blogT
 export interface AutoAnalyzeHeadingsOptions {
   /** Reports completed/total sections so a caller can drive a progress UI. */
   onProgress?: (done: number, total: number) => void;
+  /** Manual typing only needs local heading detection; avoid an AI call per edit. */
+  localOnly?: boolean;
+}
+
+let headingAnalysisRevision = 0;
+
+function headingAnalysisSnapshot(content: any): string {
+  return JSON.stringify([
+    content?.selectedTitle, content?.bodyPlain, content?.introduction, content?.conclusion,
+    content?.keywords,
+    (content?.headings || []).map((heading: any) => [heading?.title || heading, heading?.content, heading?.summary]),
+  ]);
+}
+
+function renderAnalyzedImageHeadings(structuredContent: any, headings: any[]): void {
+  displayImageHeadingsWithPrompts(headings);
+  let imagesForUi = Array.isArray(generatedImages) ? generatedImages : [];
+  try {
+    const all = ImageManager.getAllImages();
+    if (Array.isArray(all) && all.length > 0) imagesForUi = all;
+  } catch (error) {
+    console.warn('[headingImageGen] 이미지 목록 읽기 실패:', error);
+  }
+  updateUnifiedImagePreview(structuredContent?.headings || [], imagesForUi);
+  displayGeneratedImages(imagesForUi);
+  if (headings.length > 0 && imagesForUi.length > 0) {
+    (window as any).generatedImages = imagesForUi;
+    (window as any).imageManagementGeneratedImages = imagesForUi;
+    updatePromptItemsWithImages(imagesForUi);
+  }
 }
 
 export async function autoAnalyzeHeadings(
   structuredContent: any,
   options: AutoAnalyzeHeadingsOptions = {},
 ): Promise<void> {
+  const revision = ++headingAnalysisRevision;
+  const snapshot = headingAnalysisSnapshot(structuredContent);
+  const pasteRevision = Number((window as any).__semiAutoPasteRevision || 0);
+  const activeContent = (window as any).currentStructuredContent;
+  const isCurrent = () => revision === headingAnalysisRevision
+    && snapshot === headingAnalysisSnapshot(structuredContent)
+    && pasteRevision === Number((window as any).__semiAutoPasteRevision || 0)
+    && (activeContent !== structuredContent || (window as any).currentStructuredContent === structuredContent);
   try {
     if (!structuredContent || !structuredContent.headings || structuredContent.headings.length === 0) {
+      renderAnalyzedImageHeadings(structuredContent, []);
       appendLog('⚠️ 소제목이 없어 분석을 건너뜁니다.');
       return;
     }
@@ -3502,6 +3541,7 @@ export async function autoAnalyzeHeadings(
       allSections.push({
         title: heading.title || heading,
         content: heading.content || heading.summary || '',
+        prompt: heading.prompt,
         isHeading: true
       });
     });
@@ -3520,11 +3560,22 @@ export async function autoAnalyzeHeadings(
       options.onProgress?.(0, allSections.length);
     } catch { /* progress reporting must never break the analysis */ }
 
+    // Show detected sections immediately, including their existing images.
+    const localHeadings = allSections.map((section: any) => ({
+      ...section,
+      prompt: getManualEnglishPromptOverrideForHeading(section.title)
+        || (section.prompt !== section.title ? section.prompt : '')
+        || generateEnglishPromptForHeadingSync(section.title),
+    }));
+    renderAnalyzedImageHeadings(structuredContent, localHeadings);
+    if (options.localOnly) return;
+
     // 소제목을 이미지 관리 탭 형식으로 변환
     // ✅ [2026-03-22] 동시성 제한 (2개씩) — Promise.all 전체 동시 발사 → Rate limit 방지
     const CONCURRENCY = 2;
     const headings: Array<{ title: string; content: string; prompt: string; isIntro?: boolean; isConclusion?: boolean }> = [];
     for (let i = 0; i < allSections.length; i += CONCURRENCY) {
+      if (!isCurrent()) return;
       const batch = allSections.slice(i, i + CONCURRENCY);
       const batchResults = await Promise.all(batch.map(async (section: any) => {
         const title = section.title;
@@ -3543,6 +3594,7 @@ export async function autoAnalyzeHeadings(
           isConclusion: section.isConclusion
         };
       }));
+      if (!isCurrent()) return;
       headings.push(...batchResults);
       try {
         options.onProgress?.(Math.min(headings.length, allSections.length), allSections.length);
@@ -3558,51 +3610,19 @@ export async function autoAnalyzeHeadings(
       const headingPrompts = headings.filter((h: any) => !h.isIntro && !h.isConclusion);
       for (let i = 0; i < Math.min(structuredContent.headings.length, headingPrompts.length); i++) {
         if (headingPrompts[i]?.prompt) {
-          structuredContent.headings[i].prompt = headingPrompts[i].prompt;
+          structuredContent.headings = structuredContent.headings.map((heading: any, index: number) =>
+            index === i ? { ...heading, prompt: headingPrompts[i].prompt } : heading);
           console.log(`[autoAnalyzeHeadings] ✅ Write-back prompt[${i}]: "${String(structuredContent.headings[i].title || '').substring(0, 20)}" → "${String(headingPrompts[i].prompt).substring(0, 50)}..."`);
         }
       }
       appendLog(`📝 ${headingPrompts.length}개 소제목에 AI 영어 프롬프트 저장 완료`);
     }
 
-    // 이미지 관리 탭에 소제목 표시
-    displayImageHeadingsWithPrompts(headings);
-
-    const imagesForUi = (() => {
-      try {
-        const all = ImageManager.getAllImages();
-        if (Array.isArray(all) && all.length > 0) return all;
-      } catch (e) {
-        console.warn('[headingImageGen] catch ignored:', e);
-      }
-      return Array.isArray(generatedImages) ? generatedImages : [];
-    })();
-
-    // 통합 탭의 이미지 미리보기도 업데이트
-    if (structuredContent.headings) {
-      updateUnifiedImagePreview(structuredContent.headings, imagesForUi);
-    }
-
-    // ✅ 생성된 이미지 그리드에도 표시
-    displayGeneratedImages(imagesForUi);
-
-    // [2026-08-16] 사진 글생성처럼 "이미지 배치 → 카드 재구축" 순서인 플로우 복구:
-    // displayImageHeadingsWithPrompts가 카드를 빈 .images-grid로 새로 만들기 때문에,
-    // 여기서 updatePromptItemsWithImages를 다시 불러야 카드별 소형 그리드와
-    // 소제목 매칭 미리보기가 채워진다 (호출 누락 시 카드당 위치기반 1장만 표시되는 버그).
-    // displayGeneratedImages 뒤에 불러야 소제목별 올바른 렌더가 위치기반 렌더를 덮는다.
-    if (imagesForUi.length > 0) {
-      try {
-        (window as any).generatedImages = imagesForUi;
-        (window as any).imageManagementGeneratedImages = imagesForUi;
-        updatePromptItemsWithImages(imagesForUi);
-      } catch (e) {
-        console.warn('[headingImageGen] 프롬프트 카드 이미지 동기화 실패(무시):', e);
-      }
-    }
+    renderAnalyzedImageHeadings(structuredContent, headings);
 
     appendLog(`✅ ${headings.length}개 소제목 분석 완료!`);
   } catch (error) {
+    if (!isCurrent()) return;
     appendLog(`❌ 소제목 자동 분석 실패: ${(error as Error).message}`);
     throw error;
   }
@@ -3626,6 +3646,9 @@ export function displayImageHeadingsWithPrompts(headings: any[]): void {
   if (!promptsContainer || !promptsPlaceholder) return;
 
   if (headings.length === 0) {
+    promptsContainer.innerHTML = '';
+    (window as any)._headingTitles = [];
+    (window as any)._headingPrompts = [];
     promptsContainer.style.display = 'none';
     promptsPlaceholder.style.display = 'block';
     promptsPlaceholder.innerHTML = '<div style="color: var(--text-muted); font-style: italic;">소제목이 발견되지 않았습니다.</div>';

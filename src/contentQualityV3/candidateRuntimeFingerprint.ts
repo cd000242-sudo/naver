@@ -124,6 +124,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/selectors/shoppingCompetitorSelectors.ts',
   'src/automation/selectors/topBloggerSelectors.ts',
   'src/automation/silentFailureCounter.ts',
+  'src/automation/structuredHeadingCleanup.ts',
   'src/automation/timeouts.ts',
   'src/automation/typingFallbackPlan.ts',
   'src/automation/typingUtils.ts',

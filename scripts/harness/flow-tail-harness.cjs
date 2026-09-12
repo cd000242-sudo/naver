@@ -4,7 +4,7 @@
 // block (oglink card) / hashtags. It NEVER publishes — the draft stays open
 // for human inspection, then the window closes itself.
 //
-// Run: npm run build && node scripts/harness/flow-tail-harness.cjs [mode]
+// Run: npm run build && node scripts/harness/flow-tail-harness.cjs [mode] [--no-preview]
 //   mode = fullauto(기본) | continuous | multi
 const puppeteer = require('puppeteer');
 const fs = require('node:fs');
@@ -14,6 +14,7 @@ const {
   buildMobileRichHtml,
   pasteRichHtmlAtCursor,
   ensureTailTypingReady,
+  focusLastEditableLine,
 } = require('../../dist/automation/richTextPaste.js');
 const { safeKeyboardType } = require('../../dist/automation/typingUtils.js');
 const {
@@ -30,7 +31,8 @@ const PROFILE_DIR = path.join(OUT_DIR, 'profile'); // persists login across runs
 // 풀오토: 설정 이전글 + CTA + 해시태그 (전체 꼬리)
 // 연속:   체이닝 이전글(후킹+카드) + 해시태그 — 동일URL CTA는 S16에서 스킵됨
 // 다중:   일반 CTA만 + 해시태그 (previousPostUrl 없는 플로우)
-const MODE = (process.argv[2] || 'fullauto').toLowerCase();
+const MODE = (process.argv.slice(2).find((arg) => !arg.startsWith('--')) || 'fullauto').toLowerCase();
+const NO_PREVIEW = process.argv.includes('--no-preview');
 const PRESETS = {
   fullauto:   { useCta: true,  usePrev: true,  label: '풀오토' },
   continuous: { useCta: false, usePrev: true,  label: '연속발행' },
@@ -65,6 +67,40 @@ const CONCLUSION_TEXT = [
   '꿀팁이 있다면 댓글로 알려주세요!',
 ].join('\n');
 
+// The app reanchors after a failed safe rich paste. The harness must do the
+// same before abandoning a section, but must never duplicate partial input.
+async function pasteHarnessSection(page, frame, rich, label) {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const result = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText, rich.tableCount || 0);
+    log(`📋 리치 붙여넣기(${label}): ok=${result.ok} (${result.beforeChars}→${result.afterChars}자, 사유=${result.reason || '-'})`);
+    if (result.ok) return result;
+    const unchanged = result.beforeChars === result.afterChars && result.beforeTables === result.afterTables;
+    if (attempt > 0 || result.safeToFallback !== true || !unchanged) {
+      throw new Error(`${label} 리치 입력 실패: ${result.reason || '삽입 미확인'}`);
+    }
+    log(`⛑️ ${label} 삽입 전 캐럿 복구 후 1회 재시도`);
+    await focusLastEditableLine(page, frame);
+    if (!(await ensureTailTypingReady(page, frame, log))) {
+      // Match typeBodyWithRetry's safe keyboard fallback. An empty initial
+      // paragraph can reject the rich-paste caret probe yet accept typing.
+      await focusLastEditableLine(page, frame);
+      await safeKeyboardType(page, rich.plainText, { delay: 15 });
+      await sleep(350);
+      const verified = await frame.evaluate((expected) => {
+        const root = document.querySelector('article.se-components-wrap')
+          || document.querySelector('.se-components-wrap')
+          || document.querySelector('.se-main-container');
+        if (!root) return false;
+        const normalize = (value) => value.replace(/[\s\u200b]+/gu, '');
+        return normalize(root.innerText || root.textContent || '').includes(normalize(expected));
+      }, rich.plainText);
+      if (!verified) throw new Error(`${label} 안전 키보드 입력 검증 실패`);
+      log(`✅ ${label} 안전 키보드 입력 및 본문 전체 확인 완료`);
+      return { ...result, ok: true, method: 'keyboard' };
+    }
+  }
+}
+
 (async () => {
   log('🧭 하네스 모드: ' + PRESET.label + ' (' + MODE + ')');
   log('🚀 브라우저 실행 중... (앱과 동일한 시스템 Chrome, 로그인 유지 프로필)');
@@ -97,6 +133,7 @@ const CONCLUSION_TEXT = [
       log('🔐 열린 창에서 네이버 로그인을 해주세요 (최대 5분 대기 — 이번 1회만, 다음부터는 자동 유지)...');
       if (!(await waitForLogin(page, 5 * 60 * 1000))) {
         log('❌ 로그인 대기 시간 초과 — 종료합니다.');
+        process.exitCode = 1;
         await browser.close();
         return;
       }
@@ -111,6 +148,7 @@ const CONCLUSION_TEXT = [
     const frame = await findEditorFrame(page, 60000);
     if (!frame) {
       log('❌ 에디터 프레임을 찾지 못했습니다 — 종료합니다.');
+      process.exitCode = 1;
       await page.screenshot({ path: SHOT, fullPage: true }).catch(() => undefined);
       await browser.close();
       return;
@@ -135,8 +173,7 @@ const CONCLUSION_TEXT = [
 
     // -- body: the app's real rich paste ------------------------------------
     const rich = buildMobileRichHtml(BODY_TEXT, { fontSizePx: 19, highlight: true, maxChunkChars: 38 });
-    const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText);
-    log(`📋 리치 붙여넣기(본문): ok=${pasteResult.ok} (${pasteResult.beforeChars}→${pasteResult.afterChars}자, 사유=${pasteResult.reason || '-'})`);
+    await pasteHarnessSection(page, frame, rich, '본문');
     await page.keyboard.press('Enter');
     await sleep(300);
     await page.keyboard.press('Enter');
@@ -144,8 +181,7 @@ const CONCLUSION_TEXT = [
 
     // App-flow mirror: conclusion as a separate second paste.
     const richConclusion = buildMobileRichHtml(CONCLUSION_TEXT, { fontSizePx: 19, highlight: false, maxChunkChars: 38 });
-    const conclusionResult = await pasteRichHtmlAtCursor(page, frame, richConclusion.html, richConclusion.plainText);
-    log(`📋 리치 붙여넣기(마무리): ok=${conclusionResult.ok} (${conclusionResult.beforeChars}→${conclusionResult.afterChars}자)`);
+    await pasteHarnessSection(page, frame, richConclusion, '마무리');
     await page.keyboard.press('Enter');
     await sleep(300);
     await page.keyboard.press('Enter');
@@ -158,7 +194,8 @@ const CONCLUSION_TEXT = [
     log('🧪 [핵심 테스트] 붙여넣기 소화 대기 + 키 입력 등록 검증 사다리');
     for (const mod of ['Control', 'Shift', 'Alt']) await page.keyboard.up(mod).catch(() => undefined);
     const ready = await ensureTailTypingReady(page, frame, log);
-    log(ready ? '✅ 키보드 입력 검증 통과 (probe Enter 1회 포함)' : '⚠️ 키보드 복구 실패 — 그래도 진행');
+    if (!ready) throw new Error('꼬리 입력 캐럿 복구 실패');
+    log('✅ 키보드 입력 검증 통과 (probe Enter 1회 포함)');
     // probe Enter already consumed one — type the remaining four.
     for (let i = 0; i < 4; i += 1) {
       await page.keyboard.press('Enter');
@@ -240,18 +277,21 @@ const CONCLUSION_TEXT = [
       log(`꼬리 위치(본문 뒤): ${ev.tailAfterBody ? 'PASS' : 'FAIL — 본문 중간 삽입!'}`);
       const allPass = ev.anthem && ev.dividers >= 1 && ev.hook && ev.linkCards >= 1 && ev.hashtagFirst && ev.hashtagLast && ev.tailAfterBody;
       log(allPass ? '🎉 TAIL-TEST: ALL PASS' : '❌ TAIL-TEST: 일부 FAIL — 스크린샷 확인');
+      if (!allPass) process.exitCode = 1;
       log(`📸 스크린샷: ${SHOT}`);
     } else {
       log('❌ 검증 단계에서 에디터 상태를 읽지 못했습니다.');
+      process.exitCode = 1;
     }
 
-    log('🛑 발행하지 않습니다. 에디터에서 직접 확인하세요 — 창은 3분 뒤 자동 종료됩니다.');
-    await sleep(3 * 60 * 1000);
+    log(NO_PREVIEW ? '🛑 발행하지 않습니다. 자동 검증 완료 후 하네스 창을 종료합니다.' : '🛑 발행하지 않습니다. 에디터에서 직접 확인하세요 — 창은 3분 뒤 자동 종료됩니다.');
+    if (!NO_PREVIEW) await sleep(3 * 60 * 1000);
     await browser.close();
   } catch (error) {
+    process.exitCode = 1;
     log(`❌ 하네스 오류: ${error.message}`);
     await page.screenshot({ path: SHOT, fullPage: true }).catch(() => undefined);
-    await sleep(60 * 1000);
+    if (!NO_PREVIEW) await sleep(60 * 1000);
     await browser.close().catch(() => undefined);
   }
 })();

@@ -6,6 +6,7 @@ import { APP_VERSION } from '../runtime/version.generated.js';
 console.log(`%c🚀 Better Life Naver v${APP_VERSION} RENDERER STARTED`, 'background: gold; color: black; font-size: 18px; font-weight: bold; padding: 8px 16px; border-radius: 6px');
 
 import type { StructuredContent, ImagePlan, HeadingPlan } from '../contentGenerator.js';
+import type { AutoAnalyzeHeadingsOptions } from './modules/headingImageGen.js';
 import { FTC_DISCLOSURE_PRESETS } from '../automation/ftcDisclosurePresets.js';
 // ✅ [v2.10.335] 나노바나나 3종 분리 — provider 저장값 1회성 마이그레이션
 import { migrateImageProviderStorage } from '../runtime/imageProviderMigration.js';
@@ -882,7 +883,7 @@ declare global {
   function initUnifiedImageEventHandlers(): void;
   function displayGeneratedImages(images: any[]): void;
   function updatePromptItemsWithImages(images: any[]): void;
-  function autoAnalyzeHeadings(structuredContent: any): Promise<void>;
+  function autoAnalyzeHeadings(structuredContent: any, options?: AutoAnalyzeHeadingsOptions): Promise<void>;
   function generateImagePromptByIndex(heading: string, index: number, blogTitle?: string): string;
   function generateImagen4ImageLocal(prompt: string, isRegenerate?: boolean): Promise<string>;
   function searchNaverImage(prompt: string, isRegenerate?: boolean): Promise<string>;
@@ -4277,14 +4278,14 @@ async function initUnifiedTab(): Promise<void> {
   let semiAutoHeadingAnalyzeTimer: ReturnType<typeof setTimeout> | null = null;
 
   function _scheduleSemiAutoHeadingAnalysis(sc: any): void {
-    if (!sc || !Array.isArray(sc.headings) || sc.headings.length === 0) return;
+    if (!sc || !Array.isArray(sc.headings)) return;
     // ✅ [썸네일 배치 fix v2] 첫 소제목 앞 텍스트(없으면 제목)를 introduction으로 세팅한다.
     //   autoAnalyzeHeadings는 introduction이 있을 때만 "🖼️ 썸네일" 섹션을 만들어(headingImageGen)
     //   썸네일을 첫 소제목 위에 배치한다. 붙여넣기 입력 이벤트 경로와 LLM 분류(_applyParsed) 경로가
     //   모두 이 함수를 거치므로 여기서 한 번에 처리(이전엔 _syncSemiAutoManualHeadings에만 있어 분류
     //   경로가 빠져 썸네일이 안 생겼음). intro 텍스트가 없으면 제목으로 폴백해 항상 썸네일 카드 생성.
     try {
-      if (!sc.introduction || String(sc.introduction).trim().length === 0) {
+      if (sc.headings.length > 0 && (!sc.introduction || String(sc.introduction).trim().length === 0)) {
         const body = String(sc.bodyPlain || sc.content || '');
         const firstTitle = String(sc.headings[0]?.title || '').trim();
         let introText = '';
@@ -4300,14 +4301,19 @@ async function initUnifiedTab(): Promise<void> {
     } catch { /* intro 추출 실패는 무시 — 소제목 이미지 흐름은 그대로 */ }
     if (semiAutoHeadingAnalyzeTimer) clearTimeout(semiAutoHeadingAnalyzeTimer);
     const analysisRevision = Number((window as any).__semiAutoPasteRevision || 0);
+    const analysisBody = String(sc.bodyPlain || '');
     semiAutoHeadingAnalyzeTimer = setTimeout(() => {
       semiAutoHeadingAnalyzeTimer = null;
-      if (Number((window as any).__semiAutoPasteRevision || 0) !== analysisRevision) {
+      if (Number((window as any).__semiAutoPasteRevision || 0) !== analysisRevision
+        || (window as any).currentStructuredContent !== sc
+        || String(sc.bodyPlain || '') !== analysisBody) {
         console.log('[SemiAuto] 오래된 소제목 분석 작업 폐기 (본문 변경 또는 발행 시작)');
         return;
       }
       try {
-        void autoAnalyzeHeadings(sc);
+        void autoAnalyzeHeadings(sc, { localOnly: true }).catch((error) => {
+          console.warn('[SemiAuto] heading auto-analysis failed:', error);
+        });
       } catch (error) {
         console.warn('[SemiAuto] heading auto-analysis failed:', error);
       }
@@ -4335,11 +4341,16 @@ async function initUnifiedTab(): Promise<void> {
   }
 
   function _syncSemiAutoManualHeadings(sc: any, body: string): void {
-    if (!sc || !body || body.trim().length < 20) return;
+    if (!sc) return;
     const extractedDocument = extractSemiAutoDocumentFromBody(body);
     const extracted = extractedDocument.headings;
     if (extracted.length === 0) {
-      if (sc._manualPasted !== true) return;
+      // Generated drafts can display bodyPlain without heading lines. Keep their
+      // existing image slots during ordinary edits; a cleared/pasted body is authoritative.
+      if (sc._manualPasted !== true && body.trim().length > 0) {
+        _scheduleSemiAutoHeadingAnalysis(sc);
+        return;
+      }
       /*
        * [2026-09-09] Extraction returning 0 does not mean the article has no sections.
        *
@@ -4362,6 +4373,7 @@ async function initUnifiedTab(): Promise<void> {
         sc.introduction = recovered.introduction;
         sc._manualSectionOrderLocked = true;
         sc._manualStructureStrategy = recovered.strategy;
+        _scheduleSemiAutoHeadingAnalysis(sc);
         return;
       }
       sc.headings = [];
@@ -4369,6 +4381,7 @@ async function initUnifiedTab(): Promise<void> {
       sc.conclusion = '';
       sc._manualSectionOrderLocked = true;
       sc._manualStructureStrategy = 'plain-body';
+      _scheduleSemiAutoHeadingAnalysis(sc);
       return;
     }
     const currentSignature = Array.isArray(sc.headings)
@@ -4382,9 +4395,11 @@ async function initUnifiedTab(): Promise<void> {
     const currentHasContent = Array.isArray(sc.headings)
       && sc.headings.some((h: any) => String(h?.content || '').trim().length > 0);
     if (currentSignature === nextSignature && currentHasContent) {
+      sc.headings = extracted.map((heading, index) => ({ ...sc.headings[index], content: heading.content }));
       sc.introduction = extractedDocument.introduction;
       sc._manualSectionOrderLocked = true;
       sc._manualStructureStrategy = 'body-sections';
+      _scheduleSemiAutoHeadingAnalysis(sc);
       return;
     }
     /*
@@ -4401,7 +4416,11 @@ async function initUnifiedTab(): Promise<void> {
       existingIntroduction: sc.introduction || '',
       imageHeadingTitles: readSemiAutoImageHeadingTitles(),
     });
-    sc.headings = resolved.headings.length > 0 ? resolved.headings : extracted;
+    const previousHeadings = Array.isArray(sc.headings) ? sc.headings : [];
+    sc.headings = (resolved.headings.length > 0 ? resolved.headings : extracted).map((heading: any) => {
+      const previous = previousHeadings.find((entry: any) => entry.title === heading.title);
+      return previous ? { ...previous, ...heading, prompt: previous.prompt || heading.prompt } : { ...heading };
+    });
     sc.introduction = resolved.headings.length > 0 ? resolved.introduction : extractedDocument.introduction;
     sc._manualSectionOrderLocked = true;
     sc._manualStructureStrategy = 'body-sections';
@@ -4427,13 +4446,13 @@ async function initUnifiedTab(): Promise<void> {
       // 의미 있는 내용 있을 때만 sc 생성 (빈 입력 시 자동 생성 안 함)
       const sc = v.trim().length >= 10 ? _ensureSemiAutoStructuredContent() : (window as any).currentStructuredContent;
       // ✅ [v2.10.279] sc가 이미 있던 경우(글 불러오기 등)에도 paste 후 미리보기 동기화
-      if (sc) { _refreshSemiAutoPreview(); }
       if (sc) {
         sc.bodyPlain = v;
         sc.content = v;
         // ✅ [2026-02-28] 사용자 직접 편집 플래그 — applyStructuredContent에서 100% 원문 반영 분기 활성화
         sc._bodyManuallyEdited = true;
         _syncSemiAutoManualHeadings(sc, v);
+        _refreshSemiAutoPreview();
       }
     };
     semiAutoContent.addEventListener('input', _syncContent);
@@ -11583,4 +11602,3 @@ function initSerpBenchmarkUI(): void {
     }
   });
 }
-
