@@ -10,6 +10,7 @@ import { useMindmap } from './useMindmap';
 import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { repairFreeSample } from '../../lib/freeSample.mjs';
 import { TabIntro } from './LewordShared';
+import { BoardFreshness } from './BoardFreshness';
 import ExternalTrafficBoard, { type ReferenceRow } from './ExternalTrafficBoard';
 import { preemptionIndex, TIER_ORDER } from '../../lib/preemptionIndex';
 
@@ -285,6 +286,14 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 desc="검색결과를 직접 열어 보고 '지금 들어갈 자리가 있는' 것만 남겼습니다. 상위 자리가 비어 있는 것이 맨 앞이고, 그 아래로 자리가 확실한 순서입니다. 블로그 주제 32종을 한 번에 훑었으니 카테고리를 하나씩 뒤질 필요가 없습니다."
                 /* 어떤 도구로 재는지는 밝히지 않는다(사장님 2026-08-20) — 잰 사실만 적는다. */
                 source={`검색결과 직접 확인${publishedLabel ? ` · ${publishedLabel} 발행` : ''}${board?.verified ? ` · ${board.verified}건 검증` : ''}`}
+            />
+
+            {/* 방문자가 "왜 업데이트가 안 됐냐"고 묻지 않도록, 주기와 늦는 사정을 그대로 적는다. */}
+            <BoardFreshness
+                cadence="월요일과 금요일 아침에"
+                rounds={[{ hour: 6, minute: 23 }]}
+                days={[1, 5]}
+                lastBuiltAt={board?.publishedAt ?? null}
             />
 
             {status === 'loading' && <div className="lw-note">발굴 결과를 불러오는 중입니다…</div>}

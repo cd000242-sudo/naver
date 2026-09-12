@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import LicenseGate, { isUnlocked } from './LicenseGate';
 import { naverSearchUrl } from './preemptionMeta';
 import { TabIntro } from './LewordShared';
+import { BoardFreshness } from './BoardFreshness';
 
 /**
  * 오늘의 글감 — NOW / NEXT / ALWAYS 글감 브리프(사장님 예시 형식, 2026-09-09).
@@ -135,6 +136,16 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
                 title="오늘의 글감"
                 desc={`날짜가 박힌 공식 사실에서 뽑은 글감 — NOW(지금) · NEXT(예정) · ALWAYS(지속)${data ? ` · ${isStale && latestBuiltAt ? `${day(latestBuiltAt)} 회차` : '오늘'} ${rounds.length}회차 ${num(todayTotal)}건 · ★ ${num(todayStar)}` : ''}`}
                 source="네이버 뉴스 API 기사 실측 · 검색광고 검색량 실측 · 정면 글 수 실측(안 쟀으면 미측정) · 아침 06:23 · 오후 12:23 · 저녁 18:23 갱신"
+            />
+
+            <BoardFreshness
+                cadence="매일 아침·낮·저녁 세 번"
+                rounds={[
+                    { hour: 6, minute: 23, label: '아침' },
+                    { hour: 12, minute: 23, label: '오후' },
+                    { hour: 18, minute: 23, label: '저녁' },
+                ]}
+                lastBuiltAt={latestBuiltAt}
             />
 
             {error && <p className="lw-note lw-note-error">글감을 못 읽었습니다 — {error}</p>}

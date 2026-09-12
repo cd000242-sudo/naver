@@ -4,6 +4,7 @@ import { expireIssueBoard } from '../../lib/recommendationExpiry.mjs';
 import { TopicFilter } from './BoardFilters';
 import LicenseGate, { isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
+import { BoardFreshness } from './BoardFreshness';
 import { naverSearchUrl } from './preemptionMeta';
 import DemandChartModal, { pickChartSeries } from './DemandChartModal';
 import PreemptionCard from './PreemptionCard';
@@ -322,6 +323,19 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                     ? '네이트·구글·다음 실시간 신호 — 5분마다 갱신'
                     : `실시간 이슈 실측 회차${publishedLabel ? ` · ${publishedLabel} 발행` : ''} · ${board?.schedule || '매일 07·13·19시(KST) 갱신'}`}
             />
+
+            {/* 실시간 검색어는 5분마다 받아 오므로 회차 개념이 없다 — 틈새 판에만 붙인다. */}
+            {sub !== 'live' && (
+                <BoardFreshness
+                    cadence="매일 아침·낮·저녁 세 번"
+                    rounds={[
+                        { hour: 7, minute: 23, label: '아침' },
+                        { hour: 13, minute: 23, label: '오후' },
+                        { hour: 19, minute: 23, label: '저녁' },
+                    ]}
+                    lastBuiltAt={board?.publishedAt ?? null}
+                />
+            )}
 
             {/* 서브탭(2026-09-10) — 실시간이 먼저, 틈새 판정은 그다음.
                 화면 이름이 '실시간'인데 첫 화면이 하루 3회 회차 보드였던 것이 어긋나 있었다. */}
