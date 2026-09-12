@@ -121,7 +121,25 @@ async function readLimitedText(res: Response, limitBytes: number): Promise<strin
   return new TextDecoder('utf-8', { fatal: false }).decode(merged);
 }
 
-async function fetchArticleOgImage(articleUrl: string): Promise<string | null> {
+/*
+ * [2026-09-12] 기사 제목(og:title)을 같이 뽑는다. 우리는 이미 기사 페이지를 열고 있었다 —
+ * 제목은 그 자리에 있었는데 버렸고, "이 사진이 이 글과 맞는가" 를 Vision API 로 되샀다.
+ * og:image 를 실은 기사의 제목은 그 사진이 무엇인지 말해 주는 가장 강한 무료 근거다.
+ */
+function extractOgTitle(html: string): string {
+  const patterns = [
+    /<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i,
+    /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:title["']/i,
+    /<title[^>]*>([^<]{2,200})<[/]title>/i,
+  ];
+  for (const re of patterns) {
+    const m = html.match(re);
+    if (m && m[1]) return m[1].replace(/&[a-z]+;/gi, ' ').trim();
+  }
+  return '';
+}
+
+async function fetchArticleOgImage(articleUrl: string): Promise<{ image: string; title: string } | null> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), ARTICLE_TIMEOUT_MS);
   try {
@@ -133,7 +151,7 @@ async function fetchArticleOgImage(articleUrl: string): Promise<string | null> {
     const html = await readLimitedText(res, MAX_BODY_BYTES);
     const image = extractOgImage(html);
     if (!image || isLikelyLogo(image)) return null;
-    return image;
+    return { image, title: extractOgTitle(html) };
   } finally {
     clearTimeout(timer);
   }
@@ -164,13 +182,15 @@ export const newsOgImageSource: IssueSourceAdapter = {
       for (const articleUrl of targets) {
         if (results.length >= maxImages) break;
         try {
-          const image = await fetchArticleOgImage(articleUrl);
-          if (image) {
+          const found = await fetchArticleOgImage(articleUrl);
+          if (found) {
             results.push({
-              url: image,
-              thumbnailUrl: image,
+              url: found.image,
+              thumbnailUrl: found.image,
               sourceName: 'news-og',
               query: trimmed,
+              caption: found.title || undefined,
+              pageUrl: articleUrl,
             });
           }
         } catch (error) {
