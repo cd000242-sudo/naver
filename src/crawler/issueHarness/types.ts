@@ -50,6 +50,14 @@ export interface IssueCandidateImage {
   query: string;
   width?: number;
   height?: number;
+  /*
+   * [2026-09-12] 캡션·출처 페이지 제목. 예전에는 버렸다 — 그래놓고 "이 사진이 이 글과
+   * 맞는가" 를 Vision API 로 다시 샀다. 네이버 이미지 API 는 항목마다 title 을 주고,
+   * 그 값은 원문 캡션에 가깝다. 텍스트로 알 수 있는 것을 그림으로 되사지 않는다.
+   */
+  caption?: string;
+  /** 이미지가 실린 문서 주소(있으면). 도메인·경로도 약한 신호가 된다. */
+  pageUrl?: string;
 }
 
 /** Common interface every source adapter implements. */

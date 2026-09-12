@@ -74,6 +74,8 @@ export function rankCleanCandidates(items: FetchedCandidate[]): FetchedCandidate
   });
 }
 
+import { judgeCaptionRelevance } from './captionRelevanceGate.js';
+
 export interface FunnelOptions {
   geminiApiKey?: string;
   visionBudget: VisionGateBudget;
@@ -145,10 +147,40 @@ export async function refineHeadingCandidates(
       cleanTarget,
     );
   } else {
-    // [2026-08-17] 키 없으면 통과시키던 정책 폐기 — 관련성·워터마크 미검증 상태로
-    // 배치하면 라이브에서 고양이·화보가 연예 글에 꽂힌다(실측). 빈 슬롯이 낫다.
-    console.warn(`${LOG} ⛔ Gemini 키 없음 — 관련성/워터마크 검증 불가로 미배치 (빈 슬롯 유지)`);
-    clean = [];
+    /*
+     * [2026-09-12 사장님 지적] "굳이 API 로 비용 들여가면서 할 필요 없이 성능을 끌어낼 수
+     * 있잖아. 사이트가 아니라 일렉트론 앱인데."
+     *
+     * 맞다. 검색 소스는 이미지마다 캡션을 준다(네이버 이미지 API 의 title 은 원문 캡션에
+     * 가깝다). 사람도 사진을 보기 전에 캡션을 읽는다. 주제어가 캡션에 실제로 나오는지는
+     * 모델 없이 판정할 수 있고, 그게 관련성의 대부분이다.
+     *
+     * 2026-08-17 정책의 취지는 지킨다 — **근거 없이 배치하지 않는다.** 다만 근거를
+     * "Vision 판정" 하나로만 보던 것을 "캡션 증거" 까지 넓힌다. 캡션이 없거나 주제어가
+     * 안 나오면 예전처럼 빈 슬롯이다.
+     *
+     * 워터마크·구도는 여전히 텍스트로 못 본다. 그건 Vision 을 켜야 걸러진다.
+     */
+    const passed = validated.filter((item) => {
+      const verdict = judgeCaptionRelevance(
+        {
+          caption: item.candidate.caption,
+          pageUrl: item.candidate.pageUrl,
+          url: item.candidate.url,
+        },
+        {
+          subject: options.subjectContext?.mainSubject,
+          heading: options.subjectContext?.heading,
+          mainKeyword: options.subjectContext?.mainSubject,
+        },
+      );
+      return verdict.relevant;
+    });
+    clean = passed.slice(0, cleanTarget);
+    console.warn(
+      `${LOG} Gemini 키 없음 — 캡션 근거로만 판정: ${validated.length}장 중 ${passed.length}장 통과`
+      + ' (워터마크·구도는 검사하지 못한다)',
+    );
   }
 
   return { clean: rankCleanCandidates(clean), fetched, duplicates, visionUsed, attemptedUrls };

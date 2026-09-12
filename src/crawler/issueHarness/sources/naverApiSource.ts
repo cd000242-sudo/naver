@@ -12,6 +12,8 @@ const LOG = '[IssueSource:naver]';
 interface NaverImageItem {
   link?: string;
   thumbnail?: string;
+  /** 네이버가 주는 캡션(검색어 강조용 <b> 태그가 섞여 온다). 관련성 판정의 1차 근거다. */
+  title?: string;
   sizewidth?: string;
   sizeheight?: string;
 }
@@ -46,6 +48,7 @@ function makeNaverAdapter(name: string, sort: 'sim' | 'date'): IssueSourceAdapte
           thumbnailUrl: it.thumbnail,
           sourceName: 'naver',
           query: trimmed,
+          caption: String(it.title || '').replace(/<[^>]+>/g, '').trim() || undefined,
           width: parseInt(it.sizewidth || '0', 10) || undefined,
           height: parseInt(it.sizeheight || '0', 10) || undefined,
         }));

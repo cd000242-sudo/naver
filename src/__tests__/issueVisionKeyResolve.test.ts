@@ -48,12 +48,12 @@ describe('resolveIssueVisionKey', () => {
   });
 });
 
-describe('키가 없으면 6분을 태우기 전에 멈춘다', () => {
-  it('핸들러가 즉시 중단하고 이유를 말한다', () => {
+describe('키가 없어도 멈추지 않고, 무엇을 못 하는지 먼저 알린다', () => {
+  it('캡션 게이트가 있으므로 중단하지 않는다 — 대신 화면에 한계를 알린다', () => {
     const src = readFileSync(resolve(__dirname, '../main/ipc/issueCollectHandlers.ts'), 'utf8');
-    expect(src).toMatch(/if \(!geminiApiKey\) \{/);
-    expect(src).toMatch(/Gemini 키가 없습니다/);
-    // 중단이 수집 시작보다 앞에 있어야 의미가 있다.
-    expect(src.indexOf('if (!geminiApiKey)')).toBeLessThan(src.indexOf('collectIssueImages'));
+    expect(src).toMatch(/캡션 텍스트로만 관련성을 판정합니다/);
+    expect(src).toMatch(/워터마크·구도는 확인하지 못합니다/);
+    // 수집을 시작하기 전에 알려야 의미가 있다.
+    expect(src.indexOf('collectProgress')).toBeLessThan(src.indexOf('collectIssueImages'));
   });
 });

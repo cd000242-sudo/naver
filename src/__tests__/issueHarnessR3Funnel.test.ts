@@ -14,6 +14,7 @@ import {
   rankCleanCandidates,
 } from '../crawler/issueHarness/funnel.js';
 import { parseVerdicts } from '../crawler/issueHarness/visionGate.js';
+import { judgeCaptionRelevance } from '../crawler/issueHarness/captionRelevanceGate';
 
 function rawFromPattern(fn: (row: number, col: number) => number): Uint8Array {
   const raw = new Uint8Array(9 * 8);
@@ -162,10 +163,25 @@ describe('[2026-08-17] 주체 앵커 + 키/주체 없을 때 미배치 (source �
     expect(src).toMatch(/mainSubject\?\.trim\(\)[\s\S]{0,200}return \[\]/);
   });
 
-  it('Gemini 키가 없으면 통과시키지 않고 빈 슬롯을 유지한다', () => {
+  /*
+   * [2026-09-12 사장님 지시] "굳이 API 로 비용 들여가면서 할 필요 없다 — 일렉트론 앱인데."
+   * 계약이 바뀌었다. 취지는 그대로다: **근거 없이 배치하지 않는다.** 다만 근거를 "Vision
+   * 판정" 하나로만 보던 것을 "캡션 증거" 까지 넓혔다. 무검증 통과로 돌아간 것이 아니다.
+   */
+  it('Gemini 키가 없으면 캡션 근거로 판정한다 — 무검증 통과가 아니다', () => {
     const src = readFileSync(new URL('../crawler/issueHarness/funnel.ts', import.meta.url), 'utf8');
-    // 이전: clean = validated (무검증 통과) → 현재: clean = []
-    expect(src).toMatch(/Gemini 키 없음[\s\S]{0,200}clean = \[\]/);
+    expect(src).toMatch(/judgeCaptionRelevance/);
+    expect(src).toMatch(/Gemini 키 없음[\s\S]{0,400}캡션 근거로만 판정/);
+    // 예전 사고 경로(무검증 전량 통과)로 되돌아가지 않았는지 못박는다.
+    expect(src).not.toMatch(/clean = validated;/);
+  });
+
+  it('캡션에 주제어가 없으면 여전히 떨어진다 — 빈 슬롯이 엉뚱한 사진보다 낫다', () => {
+    const verdict = judgeCaptionRelevance(
+      { caption: '길고양이 겨울나기 급식소', url: 'https://img.example.com/x.jpg' },
+      { subject: '정주리', heading: '세 번째 장편까지 칸으로 향했습니다' },
+    );
+    expect(verdict.relevant).toBe(false);
   });
 
   it('쿼리 팬아웃이 한글/직찍/행사 쿼리에 주체를 앵커한다', () => {

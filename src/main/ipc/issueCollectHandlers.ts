@@ -48,17 +48,18 @@ export function registerIssueCollectHandlers(): void {
       }
 
       /*
-       * [2026-09-12 사장님 보고] "후보 116장 검토 → 검증 통과 0장" 이 7개 소제목 내내 반복됐다.
-       * 6분을 쓰고 한 장도 못 건졌다. 원인은 비전 키가 게이트까지 오지 않은 것이고
-       * (funnel.ts: 키 없으면 clean=[]), 그 경고는 콘솔에만 찍혀 화면에는 "0장" 만 보였다.
-       *
-       * 수집 자체는 키 없이도 되지만 **검증 통과분이 곧 배치·저장 대상**이라 결과가 언제나 0이다.
-       * 그러니 6분을 태우기 전에 멈추고 이유를 말한다. 헛돌지 않는 것이 사용자에게 이롭다.
+       * [2026-09-12] 키가 없어도 멈추지 않는다 — 캡션 근거로 판정하는 로컬 게이트가 있다
+       * (captionRelevanceGate). 다만 워터마크·구도는 텍스트로 못 보므로 그 사실을 화면에
+       * 먼저 알린다. 예전에는 경고가 콘솔에만 찍혀 6분 뒤 "0장" 만 보였다.
        */
       if (!geminiApiKey) {
-        const message = '이미지 검증에 쓸 Gemini 키가 없습니다. 수집은 되지만 관련성·워터마크를 확인할 수 없어 한 장도 배치되지 않습니다 — 환경설정에 Gemini API 키를 넣고 다시 시도해 주세요.';
-        console.warn(`[Main] ⛔ issue:collectImages 중단 — ${message}`);
-        return { success: false, message, images: {}, candidates: {} };
+        console.warn('[Main] issue:collectImages — Gemini 키 없음: 캡션 근거로만 판정한다(워터마크·구도 미검사)');
+        try {
+          _event.sender.send('issue:collectProgress', {
+            percent: 1,
+            message: '⚠️ Gemini 키가 없어 캡션 텍스트로만 관련성을 판정합니다 — 워터마크·구도는 확인하지 못합니다.',
+          });
+        } catch { /* window may be gone */ }
       }
 
       if (!(await ensureLicenseValid())) {
