@@ -12,6 +12,11 @@ const LOG = '[IssueSource:daum]';
 interface RawDaumImage {
   url: string;
   thumbnailUrl?: string;
+  /*
+   * [2026-09-12] alt 텍스트. 우리는 실제 브라우저로 DOM 을 읽고 있으면서 이 값을 버렸다.
+   * 그래놓고 "이 사진이 이 글과 맞는가" 를 Vision API 로 되샀다. 공짜로 읽히는 근거다.
+   */
+  caption?: string;
 }
 
 /**
@@ -56,7 +61,8 @@ function extractDaumImages(): RawDaumImage[] {
     if (seen.has(dedupeKey)) continue;
     seen.add(dedupeKey);
 
-    results.push({ url: candidateUrl, thumbnailUrl });
+    const caption = (img.getAttribute('alt') || img.getAttribute('title') || '').trim();
+    results.push({ url: candidateUrl, thumbnailUrl, caption: caption || undefined });
   }
 
   return results;
@@ -91,6 +97,7 @@ export const daumImageSource: IssueSourceAdapter = {
         thumbnailUrl: item.thumbnailUrl,
         sourceName: 'daum',
         query: trimmed,
+        caption: item.caption,
       }));
 
       console.log(`${LOG} "${trimmed}" → ${results.length}개`);

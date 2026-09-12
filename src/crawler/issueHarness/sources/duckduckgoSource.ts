@@ -85,6 +85,8 @@ export const duckduckgoSource: IssueSourceAdapter = {
           thumbnailUrl: r.thumbnail,
           sourceName: 'duckduckgo',
           query: trimmed,
+          // [2026-09-12] title 은 이미 받아 두고 버리던 값이다 — 캡션 판정의 근거로 쓴다.
+          caption: String(r.title || '').trim() || undefined,
           width: r.width,
           height: r.height,
         }));
