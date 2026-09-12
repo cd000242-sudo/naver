@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-12T05:32:57.691Z",
+  "publishedAt": "2026-09-12T11:27:20.662Z",
   "generator": "issue-niche-board",
   "schedule": "매일 07·13·19시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 210,
+    "candidates": 218,
     "niche": 0,
-    "preemption": 6,
+    "preemption": 3,
     "pending": 0
   },
   "freeSample": {
@@ -140,38 +140,39 @@
       ],
       "trend": {
         "series": [
+          5,
+          7,
           19,
-          24,
-          67,
-          14,
+          4,
+          5,
+          3,
+          0,
+          3,
+          4,
+          4,
+          4,
+          0,
+          0,
+          25,
+          11,
+          7,
+          13,
+          28,
+          6,
+          11,
+          12,
+          12,
+          17,
           19,
+          4,
+          8,
+          8,
           12,
-          0,
-          12,
-          14,
-          14,
-          14,
-          0,
-          0,
-          90,
-          40,
-          24,
-          48,
-          100,
-          21,
-          38,
-          43,
-          43,
-          60,
-          69,
-          14,
-          29,
-          29,
-          43
+          100
         ],
-        "label": "❄️ 시즌성",
-        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-09-12T00:42:58.517Z"
+        "label": "🚀 떡상",
+        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
+        "measuredAt": "2026-09-12T11:27:21.337Z"
       },
       "kinCount": 0,
       "kinTop": null,
@@ -358,11 +359,12 @@
           77,
           64,
           73,
+          86,
           86
         ],
         "label": "❄️ 시즌성",
         "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-09-12T00:42:58.517Z"
+        "measuredAt": "2026-09-12T11:27:21.337Z"
       },
       "kinCount": 4947,
       "kinTop": null,
@@ -567,9 +569,10 @@
           20,
           19,
           20,
-          39
+          39,
+          31
         ],
-        "measuredAt": "2026-09-12T00:42:58.517Z"
+        "measuredAt": "2026-09-12T11:27:21.337Z"
       },
       "kinCount": 23,
       "kinTop": [
@@ -730,11 +733,12 @@
           76,
           100,
           44,
-          73
+          73,
+          60
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-12T00:42:58.517Z"
+        "measuredAt": "2026-09-12T11:27:21.337Z"
       },
       "kinCount": 26,
       "kinTop": null,
@@ -746,6 +750,159 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "신지수 기장",
+      "issue": "신지수",
+      "topic": "신지수",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 200,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 200",
+        "선점 후보 — 경쟁 문서 200건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 34,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-12T11:25:48.919Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "가평읍 이장 즉석국",
+      "issue": "가평읍 이장 즉석국",
+      "topic": "가평읍 이장 즉석국",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 47,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 47",
+        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-12T11:25:48.919Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "하네스데브",
+      "issue": "하네스데브",
+      "topic": "하네스데브",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 155,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 155",
+        "선점 후보 — 경쟁 문서 155건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 7,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-12T11:25:48.919Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "윤주석 KDRT 2진",
       "issue": "윤주석 KDRT 2진",
@@ -796,7 +953,8 @@
       "monetize": null,
       "measuredAt": "2026-09-12T05:31:02.952Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "캠브리콘 티커",
@@ -852,55 +1010,8 @@
       "monetize": null,
       "measuredAt": "2026-09-12T05:31:02.952Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "가평읍 이장 즉석국",
-      "issue": "가평읍 이장 즉석국",
-      "topic": "가평읍 이장 즉석국",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 49,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 49",
-        "선점 후보 — 경쟁 문서 49건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-12T05:31:02.952Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "경주 헤리티지 AI시네마",
@@ -948,55 +1059,8 @@
       "monetize": null,
       "measuredAt": "2026-09-12T05:31:02.952Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "하네스데브",
-      "issue": "하네스데브",
-      "topic": "하네스데브",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 155,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 155",
-        "선점 후보 — 경쟁 문서 155건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 7,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-12T05:31:02.952Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "캠브리콘 주식 사는법",
@@ -1052,7 +1116,8 @@
       "monetize": null,
       "measuredAt": "2026-09-12T05:31:02.952Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "한전kdn s러닝",
@@ -4621,428 +4686,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "칼리버스 스타일링샵",
-      "issue": "칼리버스",
-      "topic": "칼리버스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 12,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 12",
-        "선점 후보 — 경쟁 문서 12건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "롯데이노베이트 칼리버스, 롯데자이언츠 가상 스타일링샵 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "칼리버스 스타일링샵 롯데자이언츠 굿즈 아바타 입혀보기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "칼리버스 스타일링샵에서 롯데자이언츠 굿즈 아바타에 입혀보니 생각보다 다르네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "칼리버스",
-          "searchVolume": 780,
-          "frame": "generic"
-        },
-        {
-          "keyword": "롯데 칼리버스",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "칼리버스",
-          "searchVolume": 780,
-          "documentCount": 15659,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "롯데 칼리버스",
-          "searchVolume": 20,
-          "documentCount": 2325,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "documentCount": 504,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김성경 교수 서강대",
-      "issue": "김성경",
-      "topic": "김성경",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 47,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 47",
-        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "김성경 유튜브에 별거 중 언니 김성령 남편 이기수 등장",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김성경 교수 서강대 맞나, 형부 유튜브 나온 배우와 동명이인 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김성경 교수 서강대 프로필 찾다가 다른 사람 얘기만 나와서 한참 헤맸어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "김성경 교수 프로필",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "김성경 교수 프로필",
-          "searchVolume": 10,
-          "documentCount": 149,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "kaist 박지민",
-      "issue": "KAIST",
-      "topic": "KAIST",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 83,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 83",
-        "선점 후보 — 경쟁 문서 83건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "KAIST, 뇌파로 AI 오류 수정하는 신경 가치 정렬 기술 개발",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "kaist 박지민 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "근거 프레임 없음 — 일반형"
-        },
-        "home": {
-          "text": "kaist 박지민 검색하다 프로필에서 눈이 멈춘 이유가 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "칼리버스 3D 매장",
-      "issue": "칼리버스",
-      "topic": "칼리버스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 131,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 131",
-        "선점 후보 — 경쟁 문서 131건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "롯데이노베이트 칼리버스, 롯데자이언츠 가상 스타일링샵 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "칼리버스 3D 매장 AI·3D로 구현된 롯데자이언츠 가상 스타일링샵",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "칼리버스 3D 매장에서 롯데자이언츠 유니폼 아바타에 입혀봤더니 생각보다",
-          "frame": "ai",
-          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "칼리버스",
-          "searchVolume": 780,
-          "frame": "generic"
-        },
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "frame": "generic"
-        },
-        {
-          "keyword": "칼리버스 앱",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "칼리버스",
-          "searchVolume": 780,
-          "documentCount": 15659,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "documentCount": 504,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "칼리버스 AI 매장",
-      "issue": "칼리버스",
-      "topic": "칼리버스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 257,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 257",
-        "선점 후보 — 경쟁 문서 257건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "롯데이노베이트 칼리버스, 롯데자이언츠 가상 스타일링샵 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "칼리버스 AI 매장 롯데자이언츠 가상 스타일링샵 3D 구현",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "칼리버스 AI 매장에서 롯데자이언츠 유니폼 입혀보니 의외로 이렇네요",
-          "frame": "ai",
-          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "frame": "generic"
-        },
-        {
-          "keyword": "칼리버스 앱",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "롯데이노베이트 칼리버스",
-          "searchVolume": 10,
-          "documentCount": 504,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-10T09:25:49.561Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -6182,79 +5825,6 @@
         },
         {
           "keyword": "이강철 감독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "김성경",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "김성경 유튜브에 별거 중 언니 김성령 남편 이기수 등장",
-      "headlines": [
-        {
-          "title": "'별거 중' 김성령 남편, 처제 김성경 유튜브 등장..\"아내가 너 제일 싫어...",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-09-10T03:26:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004444736"
-        },
-        {
-          "title": "김성경, '김성령과 별거 중' 형부와 둘이 만났다…\"언니가 우리 제일 싫...",
-          "press": "tvreport.co.kr",
-          "publishedAt": "2026-09-10T03:19:00.000Z",
-          "link": "https://m.entertain.naver.com/article/213/0001400746"
-        },
-        {
-          "title": "별거 중이라는 김성령 남편 깜짝 공개, 처제 김성령 지원사격 (절에 간...",
-          "press": "newsen.com",
-          "publishedAt": "2026-09-10T00:04:00.000Z",
-          "link": "https://m.entertain.naver.com/article/609/0001167291"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김성경 아나운서",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김성경 배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김성경 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김성경 목사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김성경 사주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김성경 교수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김성경 대학",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김성경 남편",
           "searchVolume": null,
           "origin": "autocomplete"
         }
