@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-13T21:48:38.268Z",
+  "publishedAt": "2026-09-13T23:27:07.973Z",
   "generator": "issue-niche-board",
   "schedule": "매일 07·13·19시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
-    "niche": 2,
-    "preemption": 1,
+    "niche": 3,
+    "preemption": 4,
     "pending": 0
   },
   "freeSample": {
@@ -18,6 +18,92 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "한화 김동관 정혜련",
+      "issue": "김동관",
+      "topic": "김동관",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 6개 중 제목 정면 대응 0건(부분 2건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 2,
+        "sampledTitles": 6,
+        "topTitles": [
+          "“정략결혼 아니었다” 한화 김동관, 10년 열애 끝 결혼한 배우자 누구?",
+          "한화그룹 장남이 10년 동안 매달린 여자",
+          "한화 김동관 배우자 프로필 자녀 학력 1박2일",
+          "아내 암치료법 찾아 전세계를 헤맸다.. 사별 후에도 한 여자만 사랑한 74세 재벌 회장",
+          "내가 말 놔도 되나..? 새벽 3시 뺑뺑이 돌리던 1박2일 인턴 만나 얼어버린 나영석 PD",
+          "회사 입사 동기로 만나 재벌 며느리 된 레전드 일반인 정체.jpg"
+        ],
+        "measuredAt": "2026-09-13T23:26:44.060Z"
+      },
+      "documentCount": 6,
+      "documentCountMeasured": true,
+      "searchVolume": 1230,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.2481591208797476,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 1,230",
+        "문서수 6",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 1,230 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 6 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-13T23:26:27.406Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "kaist 입학처",
       "issue": "KAIST",
@@ -100,7 +186,7 @@
       "kinCount": 507,
       "kinTop": [],
       "monetize": null,
-      "measuredAt": "2026-09-13T21:46:52.423Z",
+      "measuredAt": "2026-09-13T23:26:27.406Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "kinMode": "date-views-v2"
@@ -136,7 +222,7 @@
         ],
         "measuredAt": "2026-09-13T05:27:38.514Z"
       },
-      "documentCount": 14532,
+      "documentCount": 14534,
       "documentCountMeasured": true,
       "searchVolume": 2440,
       "searchVolumeLt10": false,
@@ -149,7 +235,7 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 2,440",
-        "문서수 14,532",
+        "문서수 14,534",
         "데이터랩 실측 수요",
         "블로그탭 상위 10 정면글 0건 — 자리 있음"
       ],
@@ -186,7 +272,7 @@
       "kinCount": 1898,
       "kinTop": [],
       "monetize": null,
-      "measuredAt": "2026-09-13T21:46:52.423Z",
+      "measuredAt": "2026-09-13T23:26:27.406Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "kinMode": "date-views-v2"
@@ -320,6 +406,118 @@
   ],
   "observations": [
     {
+      "keyword": "김동관 득남",
+      "issue": "김동관",
+      "topic": "김동관",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 10,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 10",
+        "선점 후보 — 경쟁 문서 10건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-13T23:26:27.406Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김동관 부인 집안",
+      "issue": "김동관",
+      "topic": "김동관",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 121,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 121",
+        "선점 후보 — 경쟁 문서 121건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-13T23:26:27.406Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
       "keyword": "kaist logo",
       "issue": "KAIST",
       "topic": "KAIST",
@@ -367,7 +565,59 @@
       "kinCount": 5,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-13T21:46:52.423Z",
+      "measuredAt": "2026-09-13T23:26:27.406Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김범수 무대 트라우마",
+      "issue": "김범수 무대 트라우마",
+      "topic": "김범수 무대 트라우마",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 291,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 291",
+        "선점 후보 — 경쟁 문서 291건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-13T23:26:27.406Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1705,6 +1955,78 @@
   "rejectedCount": 0,
   "issues": [
     {
+      "issue": "김동관",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "'농심 3세' 신상열 부사장 결혼…신동원 남매·김동관·서경배 총출동",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-09-13T10:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000533292?sid=101"
+        },
+        {
+          "title": "이준석 “국회의원 아니었으면 ‘이 형님 회사’ 몰빵한다”…콕 집은...",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-13T02:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005734336?sid=102"
+        },
+        {
+          "title": "'농심 3세' 신상열 결혼식에 한화 김동관 참석…롯데가는 '불참'",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-13T10:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009167357?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "한화 김동관",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동관 와이프",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한화 김동관 정혜련",
+          "searchVolume": 1230,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동관 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동관 정혜련",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한화 김동관 배우자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동관 결혼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동관 득남",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
       "issue": "KAIST",
       "issueType": "fresh",
       "lane": "tech",
@@ -2174,7 +2496,7 @@
       "carried": true
     }
   ],
-  "enrichedAt": "2026-09-13T21:48:44.409Z",
+  "enrichedAt": "2026-09-13T23:27:13.289Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
@@ -2188,7 +2510,7 @@
     "pooled": 0,
     "aiTitled": 0,
     "trended": 0,
-    "aiCalls": 3,
+    "aiCalls": 4,
     "partial": false
   }
 }
