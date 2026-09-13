@@ -1,19 +1,18 @@
 {
-  "publishedAt": "2026-09-13T05:28:42.163Z",
+  "publishedAt": "2026-09-13T11:33:41.402Z",
   "generator": "issue-niche-board",
   "schedule": "매일 07·13·19시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 240,
-    "niche": 3,
-    "preemption": 2,
+    "candidates": 231,
+    "niche": 2,
+    "preemption": 1,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-09-13",
     "keywords": [
-      "에이딘로보틱스 주가",
-      "근로복지공단 본사"
+      "에이딘로보틱스 주가"
     ]
   },
   "rows": [
@@ -48,7 +47,7 @@
         ],
         "measuredAt": "2026-09-13T05:28:12.151Z"
       },
-      "documentCount": 6174,
+      "documentCount": 6181,
       "documentCountMeasured": true,
       "searchVolume": 390,
       "searchVolumeLt10": false,
@@ -61,7 +60,7 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 390",
-        "문서수 6,174",
+        "문서수 6,181",
         "데이터랩 실측 수요",
         "블로그탭 상위 10 정면글 0건 — 자리 있음",
         "수요 상승중"
@@ -99,7 +98,93 @@
       "kinCount": 507,
       "kinTop": [],
       "monetize": null,
-      "measuredAt": "2026-09-13T05:27:02.274Z",
+      "measuredAt": "2026-09-13T11:32:06.088Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "kaist 서울캠퍼스",
+      "issue": "KAIST",
+      "topic": "KAIST",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 2건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 2,
+        "sampledTitles": 10,
+        "topTitles": [
+          "카이스트(KAIST)는 왜 서울이 아니라 대전에 있을까?",
+          "2026 수도권 공대 순위 TOP50",
+          "서울, 경기 및 6대광역시 대학교 목록,바로가기",
+          "수험생들이 뽑은 진짜 가고 싶은 대학교 TOP 20 인기 학과 총정리!",
+          "전국 대학교 캠퍼스 크기 순위 TOP 20 \"서울대가 1위, 생각보다 넓은 대학은?\"",
+          "서울대 10개 만들기 선정 대학 어디? 부산대·전남대·충남대 확정, 지원금 총정리",
+          "서울대 10개 만들기 선정 대학 3곳｜부산대·전남대·충남대 무엇이 달라질까?",
+          "2027 수시 오늘 마감 5개 대학｜고려대·연세대 오후 5시, 서울대·KAIST·포스텍 오후 6시",
+          "카카오 테크포임팩트 캠퍼스 2학기 개강, 13개 대학 355명 참여 총정리",
+          "# '서울대 10개 만들기' 확정! 2026년 지원 대학 혜택과 적용 시기 총정리"
+        ],
+        "measuredAt": "2026-09-13T05:27:38.514Z"
+      },
+      "documentCount": 14526,
+      "documentCountMeasured": true,
+      "searchVolume": 2420,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.270825948245303,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 2,420",
+        "문서수 14,526",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 2,420 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.3배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1898,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-13T11:32:06.088Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "kinMode": "date-views-v2"
@@ -185,100 +270,50 @@
       "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          29,
+          29,
+          37,
+          31,
+          17,
+          43,
+          63,
+          49,
+          31,
+          17,
+          0,
+          23,
+          40,
+          94,
+          37,
+          43,
+          86,
+          100,
+          26,
+          26,
+          0,
+          14,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "📉 단발성",
+        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
+        "measuredAt": "2026-09-13T11:33:42.136Z"
+      },
       "kinCount": 450,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-13T05:27:02.274Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
-    },
-    {
-      "keyword": "kaist 서울캠퍼스",
-      "issue": "KAIST",
-      "topic": "KAIST",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 2건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 2,
-        "sampledTitles": 10,
-        "topTitles": [
-          "카이스트(KAIST)는 왜 서울이 아니라 대전에 있을까?",
-          "2026 수도권 공대 순위 TOP50",
-          "서울, 경기 및 6대광역시 대학교 목록,바로가기",
-          "수험생들이 뽑은 진짜 가고 싶은 대학교 TOP 20 인기 학과 총정리!",
-          "전국 대학교 캠퍼스 크기 순위 TOP 20 \"서울대가 1위, 생각보다 넓은 대학은?\"",
-          "서울대 10개 만들기 선정 대학 어디? 부산대·전남대·충남대 확정, 지원금 총정리",
-          "서울대 10개 만들기 선정 대학 3곳｜부산대·전남대·충남대 무엇이 달라질까?",
-          "2027 수시 오늘 마감 5개 대학｜고려대·연세대 오후 5시, 서울대·KAIST·포스텍 오후 6시",
-          "카카오 테크포임팩트 캠퍼스 2학기 개강, 13개 대학 355명 참여 총정리",
-          "# '서울대 10개 만들기' 확정! 2026년 지원 대학 혜택과 적용 시기 총정리"
-        ],
-        "measuredAt": "2026-09-13T05:27:38.514Z"
-      },
-      "documentCount": 14519,
-      "documentCountMeasured": true,
-      "searchVolume": 2420,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.270825948245303,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 2,420",
-        "문서수 14,519",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 2,420 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.3배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1897,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-13T05:27:02.274Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "에이딘로보틱스 주가",
@@ -434,7 +469,7 @@
         ],
         "label": "🚀 떡상",
         "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-09-13T05:28:42.884Z"
+        "measuredAt": "2026-09-13T11:33:42.136Z"
       },
       "kinCount": 0,
       "kinTop": [],
@@ -444,54 +479,35 @@
       "exclusionReason": null,
       "carried": true,
       "kinMode": "date-views-v2"
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "근로복지공단 본사",
-      "issue": "근로복지공단",
-      "topic": "근로복지공단",
-      "lane": "realtime",
-      "issueType": "policy",
+      "keyword": "kaist logo",
+      "issue": "KAIST",
+      "topic": "KAIST",
+      "lane": "tech",
+      "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "근로복지공단 의정부지사 전화번호 위치 채용 정보 한눈에 보기",
-          "근로복지공단 심사직, 임상 경력 없어도 지원된다고요? (심평원과 결정적 차이 3가지)",
-          "2026년 근로복지공단 채용 보험사업 의료사업 행정직 공고",
-          "[실업급여] 본사와 계열사로 급여가 나누어 지급될 때 - 이직확인서 보수액 산정 및 계열사 분할 지급 임금 인정 가이드",
-          "건강보험공단 자료제출 요청이 왔다면? 건설업체가 먼저 확인할 사항(건강보험지도점검)",
-          "근로복지공단 채용 및 일정, 연봉과 국민건강보험공단, 한국주택금융공사 공공기관 채용 총정리",
-          "[2026 미래내일 일경험 인턴십] 국민건강보험공단·법무법인 태평양 등 우수기관에서 실무 경험 쌓고 취업 경쟁력 UP! 8회차 청년 인턴 대모집 ✨",
-          "근로복지공단 연봉, 신입부터 1급까지 승진과 급여, 복지혜택, 채용규모 모두 알아보기",
-          "[건설업] 근로복지공단 사업개시신고 요령",
-          "근로복지공단 의정부지사 전화번호 위치 채용 정보 총정리"
-        ],
-        "measuredAt": "2026-09-11T09:14:31.145Z"
-      },
-      "documentCount": 16099,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 220,
       "documentCountMeasured": true,
-      "searchVolume": 380,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.026979294983352,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "stable",
-      "isHot": true,
+      "isHot": false,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 380",
-        "문서수 16,099",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "문서수 220",
+        "선점 후보 — 경쟁 문서 220건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -499,147 +515,25 @@
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 380 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
           "code": "empty-field",
           "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "whySearch": {
-        "text": "근로복지공단이 산재환자 재활·직업복귀 연계를 강화한다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
+      "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "근로복지공단 본사 울산 위치와 산재 상담 연락처 안내",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "근로복지공단 본사 이사장 바뀌고 채용 공고 뜨는 거 보고 다시 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "근로복지공단 채용",
-          "searchVolume": 35700,
-          "frame": "generic"
-        },
-        {
-          "keyword": "근로복지공단 인천병원",
-          "searchVolume": 4430,
-          "frame": "generic"
-        },
-        {
-          "keyword": "근로복지공단 이사장",
-          "searchVolume": 1390,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "근로복지공단 채용",
-          "searchVolume": 35700,
-          "documentCount": 55913,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "근로복지공단 인천병원",
-          "searchVolume": 4430,
-          "documentCount": 21900,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "근로복지공단 이사장",
-          "searchVolume": 1390,
-          "documentCount": 31875,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "근로복지공단 산재신청",
-          "searchVolume": 900,
-          "documentCount": 148535,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "근로복지공단 조직도",
-          "searchVolume": 50,
-          "documentCount": 20507,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "근로복지공단 본사 위치",
-          "searchVolume": 30,
-          "documentCount": 3750,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": {
-        "series": [
-          32,
-          23,
-          59,
-          100,
-          59,
-          77,
-          27,
-          0,
-          0,
-          23,
-          23,
-          55,
-          86,
-          50,
-          0,
-          32,
-          68,
-          50,
-          45,
-          36,
-          32,
-          36,
-          23,
-          77,
-          64,
-          73,
-          86,
-          86,
-          36
-        ],
-        "label": "❄️ 시즌성",
-        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-09-13T05:28:42.884Z"
-      },
-      "kinCount": 4965,
-      "kinTop": [],
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 5,
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-11T09:12:36.173Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true,
-      "kinMode": "date-views-v2"
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-09-13T11:32:06.088Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "가평읍 이장 즉석국",
       "issue": "가평읍 이장 즉석국",
@@ -690,59 +584,8 @@
       "monetize": null,
       "measuredAt": "2026-09-13T05:27:02.274Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "kaist logo",
-      "issue": "KAIST",
-      "topic": "KAIST",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 220,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 220",
-        "선점 후보 — 경쟁 문서 220건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-13T05:27:02.274Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "툴그래드",
@@ -2555,90 +2398,82 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "추연성 결혼",
-      "issue": "추연성 결혼",
-      "topic": "추연성 결혼",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 38,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 38",
-        "선점 후보 — 경쟁 문서 38건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "뮤지컬 배우 추연성이 6년 열애 끝에 11월 21일 결혼을 발표했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "추연성 결혼 11월 21일, 6년 열애 상대와 인생 2막",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "추연성 결혼 소식 뜨고 프로필 다시 찾아보니 나이가 생각보다",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "추연성 프로필",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "추연성 프로필",
-          "searchVolume": 10,
-          "documentCount": 134,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-11T09:12:36.173Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "KAIST",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": null,
+      "headlines": [
+        {
+          "title": "롯데, KAIST에 100억 R&D 거점…자일리톨·칠성사이다 잇는 기술 찾는다",
+          "press": "segye.com",
+          "publishedAt": "2026-09-13T07:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004158578?sid=101"
+        },
+        {
+          "title": "롯데, KAIST와 공동 R&D센터 준공…사업화까지 연계",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-13T00:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016306408?sid=101"
+        },
+        {
+          "title": "\"100억 들여 산학협력 거점 세운다\" 롯데·KAIST, R&D센터 준공",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-13T00:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014186336?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "kaist 약자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist 대학원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist 입학처",
+          "searchVolume": 390,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist portal",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "KAIST 경영대학",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "KAIST 학과",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist 총장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist mba",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 2
+    },
     {
       "issue": "장윤정",
       "issueType": "fresh",
@@ -2709,79 +2544,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
-    },
-    {
-      "issue": "KAIST",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": null,
-      "headlines": [
-        {
-          "title": "롯데, KAIST와 공동 R&D센터 준공…사업화까지 연계",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-13T00:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016306408?sid=101"
-        },
-        {
-          "title": "\"100억 들여 산학협력 거점 세운다\" 롯데·KAIST, R&D센터 준공",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-13T00:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014186336?sid=101"
-        },
-        {
-          "title": "연구개발부터 사업화까지 함께…롯데-KAIST R&D 센터 준공",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-13T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009166566?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "kaist 약자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 대학원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 입학처",
-          "searchVolume": 390,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist portal",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 경영대학",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 학과",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 총장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist mba",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 2
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "라이머 재혼",
@@ -3255,122 +3019,9 @@
       "nextWave": [],
       "rowCount": 1,
       "carried": true
-    },
-    {
-      "issue": "추연성 결혼",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "뮤지컬 배우 추연성이 6년 열애 끝에 11월 21일 결혼을 발표했다",
-      "headlines": [
-        {
-          "title": "추연성, 11월 결혼한다 \"6년 전 만난 좋은 사람\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-11T09:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014185371"
-        },
-        {
-          "title": "추연성, 11월 21일 결혼 발표 “인생 2막 시작”",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-11T06:45:00.000Z",
-          "link": "https://m.entertain.naver.com/article/009/0005733939"
-        },
-        {
-          "title": "[전문] '드림하이' 추연성 \"저 결혼합니다!\" 발표",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-09-11T07:14:00.000Z",
-          "link": "https://m.entertain.naver.com/article/108/0003469734"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "근로복지공단",
-      "issueType": "policy",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "근로복지공단이 산재환자 재활·직업복귀 연계를 강화한다",
-      "headlines": [
-        {
-          "title": "근로복지공단, 산재환자 재활·직업복귀 연계 강화",
-          "press": "viva100.com",
-          "publishedAt": "2026-09-10T09:00:00.000Z",
-          "link": "https://www.viva100.com/article/20260910501357"
-        },
-        {
-          "title": "근로복지공단 인천병원, 상급종합병원과 진료협력 강화",
-          "press": "dnews.co.kr",
-          "publishedAt": "2026-09-10T05:40:00.000Z",
-          "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202609101433291910489"
-        },
-        {
-          "title": "근로복지공단, 급성기 치료 산재환자 전문재활 연계 강화",
-          "press": "bokuennews.com",
-          "publishedAt": "2026-09-10T09:30:00.000Z",
-          "link": "http://www.bokuennews.com/news/article.html?no=284024"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "근로복지공단 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "근로복지공단 전화번호",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "근로복지공단 토탈서비스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "근로복지공단 퇴직연금",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "근로복지공단 대출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "근로복지공단 인천병원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "근로복지공단 울산병원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "근로복지공단 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "근로복지공단 병원",
-          "reason": "재활 기관 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-09-13T05:28:50.520Z",
+  "enrichedAt": "2026-09-13T11:33:48.768Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
