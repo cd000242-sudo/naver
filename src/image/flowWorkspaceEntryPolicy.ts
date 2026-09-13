@@ -7,3 +7,15 @@ const GOOGLE_SESSION_COOKIE_RE =
 export function hasGoogleSessionCookies(cookieNames: readonly string[]): boolean {
   return cookieNames.some((name) => GOOGLE_SESSION_COOKIE_RE.test(String(name || '')));
 }
+
+export function isFlowWorkspaceUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+    if (url.protocol !== 'https:' || url.username || url.password || url.port) return false;
+    if (url.hostname === 'flow.google.com') return true;
+    return url.hostname === 'labs.google'
+      && (url.pathname === '/fx' || url.pathname.startsWith('/fx/'));
+  } catch {
+    return false;
+  }
+}

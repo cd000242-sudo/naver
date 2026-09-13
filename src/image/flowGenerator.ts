@@ -35,6 +35,7 @@ import {
 import {
     FLOW_WORKSPACE_ENTRY_LABEL_RE,
     hasGoogleSessionCookies,
+    isFlowWorkspaceUrl,
 } from './flowWorkspaceEntryPolicy.js';
 // ✅ [v2.10.298] Flow 일별 카운터 — 한도 에러 발생 시 봇감지 vs 진짜 한도 구분
 import { incrementDailySuccess, classifyQuotaError, getDailySuccess } from '../utils/imageEngineDailyCounter.js';
@@ -186,6 +187,35 @@ let cachedProjectUrl: string | null = null;
 let _enabled: boolean = false;
 let cookieBannerDismissed: boolean = false;
 let _ensurePromise: Promise<Page> | null = null;
+type FlowLoginStatus = { loggedIn: boolean; message: string; userInfo?: any };
+let _checkPromise: Promise<FlowLoginStatus> | null = null;
+let flowSessionRevision = 0;
+let ownedFlowContexts: readonly BrowserContext[] = [];
+
+function assertFlowSessionCurrent(revision: number): void {
+    if (revision !== flowSessionRevision) {
+        throw new Error('FLOW_SESSION_CANCELLED:Flow 연결 작업이 중지되었습니다. 다시 로그인해주세요.');
+    }
+}
+
+function trackFlowContext(context: BrowserContext): void {
+    ownedFlowContexts = [...ownedFlowContexts, context];
+    context.on('close', () => {
+        ownedFlowContexts = ownedFlowContexts.filter((item) => item !== context);
+    });
+}
+
+async function closeFlowContext(context: BrowserContext): Promise<void> {
+    if (!ownedFlowContexts.includes(context)) return;
+    await context.close();
+    ownedFlowContexts = ownedFlowContexts.filter((item) => item !== context);
+}
+
+async function closeUncachedFlowContexts(): Promise<void> {
+    for (const context of ownedFlowContexts) {
+        if (context !== cachedContext) await closeFlowContext(context);
+    }
+}
 
 // ─── AdsPower 토글 (사용자 설정) ───
 // _flowAdsPowerEnabled: 사용자가 AdsPower 토글을 ON 했는지 (systemHandlers.ts에서 setter 호출)
@@ -253,15 +283,24 @@ const STEALTH_ARGS = [
 ];
 const STEALTH_IGNORE_DEFAULT_ARGS = ['--enable-automation'];
 
-async function launchWithStealthFallback(profileDir: string, offScreen: boolean): Promise<BrowserContext> {
+async function launchWithStealthFallback(profileDir: string, offScreen: boolean, revision = flowSessionRevision): Promise<BrowserContext> {
+    assertFlowSessionCurrent(revision);
+    await closeUncachedFlowContexts();
     // ─── Phase 2: AdsPower 우선 시도 (토글 ON + 본 세션 차단 안 됨) ───
     // 실패 시 _flowAdsPowerSessionDisabled=true 후 fall-through로 기존 patchright 흐름.
     // 토글 OFF면 이 블록 진입 안 함 → 기존 코드 경로 동일 (회귀 0).
     if (_flowAdsPowerEnabled && !_flowAdsPowerSessionDisabled) {
+        let adsContext: BrowserContext | null = null;
         try {
             const { connectFlowViaAdsPower } = await import('./flowAdsPowerConnect.js');
-            return await connectFlowViaAdsPower(profileDir, offScreen);
+            const context = await connectFlowViaAdsPower(profileDir, offScreen);
+            adsContext = context;
+            trackFlowContext(context);
+            assertFlowSessionCurrent(revision);
+            return context;
         } catch (adsErr) {
+            if (adsContext) await closeFlowContext(adsContext);
+            assertFlowSessionCurrent(revision);
             const msg = (adsErr as Error).message || String(adsErr);
             flowWarn(`[Flow] ⚠️ AdsPower 사용 불가 (${msg.substring(0, 100)}) → patchright 폴백`);
             sendImageLog('⚠️ [Flow] AdsPower 연결 실패 — 자체 브라우저로 자동 전환');
@@ -313,11 +352,16 @@ async function launchWithStealthFallback(profileDir: string, offScreen: boolean)
 
     let lastErr: Error | null = null;
     for (const attempt of attempts) {
+        assertFlowSessionCurrent(revision);
+        let context: BrowserContext | null = null;
         try {
             flowLog(`[Flow] 🚀 브라우저 시도: ${attempt.label}`);
             const opts: any = { ...commonOptions };
             if (attempt.channel) opts.channel = attempt.channel;
             const ctx = await chromium.launchPersistentContext(profileDir, opts);
+            context = ctx;
+            trackFlowContext(ctx);
+            assertFlowSessionCurrent(revision);
 
             await ctx.addInitScript(() => {
                 Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
@@ -329,11 +373,14 @@ async function launchWithStealthFallback(profileDir: string, offScreen: boolean)
             flowLog(`[Flow] ✅ ${attempt.label} 실행 성공`);
             return ctx;
         } catch (err) {
+            if (context) await closeFlowContext(context);
+            assertFlowSessionCurrent(revision);
             flowWarn(`[Flow] ${attempt.label} 실패: ${(err as Error).message.substring(0, 120)}`);
             lastErr = err as Error;
         }
     }
-    throw new Error(`FLOW_BROWSER_LAUNCH_FAILED:모든 브라우저 실행 실패. 마지막 에러: ${lastErr?.message || 'unknown'}`);
+    flowWarn('[Flow] 모든 브라우저 실행 실패', lastErr?.message);
+    throw new Error('FLOW_BROWSER_LAUNCH_FAILED:Flow 브라우저를 열지 못했습니다. 다른 앱에서 Flow 로그인 창을 사용 중이면 닫은 뒤 다시 시도해주세요. 계속 실패하면 앱을 재시작해주세요.');
 }
 
 // ✅ [v2.11.140] Flow 크롬창 확실히 숨김 — off-screen 좌표(--window-position=-32000,-32000)가
@@ -516,16 +563,35 @@ async function ensureFlowBrowserPage(): Promise<Page> {
         flowLog('[Flow] 🔁 ensureFlowBrowserPage 동시 호출 감지 — 기존 Promise 재사용');
         return _ensurePromise;
     }
-    _ensurePromise = _ensureFlowBrowserPageInner().finally(() => {
+    const revision = flowSessionRevision;
+    _ensurePromise = (async () => {
+        if (_checkPromise) await _checkPromise;
+        assertFlowSessionCurrent(revision);
+        try {
+            const page = await _ensureFlowBrowserPageInner(revision);
+            assertFlowSessionCurrent(revision);
+            return page;
+        } catch (error) {
+            _networkListenerInstalled = false;
+            _networkImageQueue = [];
+            if (revision !== flowSessionRevision) {
+                cachedContext = null;
+                cachedPage = null;
+            }
+            await closeUncachedFlowContexts();
+            throw error;
+        }
+    })().finally(() => {
         _ensurePromise = null;
     });
     return _ensurePromise;
 }
 
-async function _ensureFlowBrowserPageInner(): Promise<Page> {
+async function _ensureFlowBrowserPageInner(revision: number): Promise<Page> {
     if (cachedPage && cachedContext) {
         try {
             const closed = cachedPage.isClosed();
+            if (closed) throw new Error('Flow cached tab was closed');
             if (!closed) {
                 await cachedPage.title();
                 const cachedLoggedIn = await isLoggedInToFlow(cachedPage).catch(() => false);
@@ -534,7 +600,7 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
                     return cachedPage;
                 }
                 flowWarn('[Flow] cached page is alive but login session is missing - reopening visible login flow');
-                try { await cachedContext?.close().catch(() => {}); } catch { /* ignore */ }
+                await closeFlowContext(cachedContext);
                 cachedContext = null;
                 cachedPage = null;
                 cachedProjectUrl = null;
@@ -543,7 +609,7 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
             }
         } catch (err) {
             flowWarn(`[Flow] 캐시 페이지 stale — 재생성: ${(err as Error).message.substring(0, 80)}`);
-            try { await cachedContext?.close().catch(() => {}); } catch { /* ignore */ }
+            if (cachedContext) await closeFlowContext(cachedContext);
             cachedContext = null;
             cachedPage = null;
             cachedProjectUrl = null;
@@ -556,7 +622,7 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
     flowLog(`[Flow] 📁 프로필 디렉터리: ${profileDir}`);
 
     sendImageLog('🌐 [Flow] 세션 확인 중...');
-    const ctx = await launchWithStealthFallback(profileDir, true);
+    const ctx = await launchWithStealthFallback(profileDir, true, revision);
     const page = ctx.pages()[0] || await ctx.newPage();
     installNetworkImageListener(page); // [v1.6.1]
     await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
@@ -592,12 +658,12 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
 
     flowLog('[Flow] ⚠️ 로그인 필요 — off-screen 닫고 on-screen 재시작');
     sendImageLog('⚠️ [Flow] Google 로그인 필요 — 브라우저 창이 표시됩니다.');
-    await ctx.close().catch(() => {});
+    await closeFlowContext(ctx);
     await new Promise(r => setTimeout(r, 1500));
     _networkListenerInstalled = false;
     _networkImageQueue = [];
 
-    const loginCtx = await launchWithStealthFallback(profileDir, false);
+    const loginCtx = await launchWithStealthFallback(profileDir, false, revision);
     const loginPage = loginCtx.pages()[0] || await loginCtx.newPage();
     await loginPage.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
     await loginPage.waitForTimeout(2000);
@@ -629,6 +695,7 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
     }
     while (!loginSuccess && Date.now() - overallStart < MAX_TOTAL_MS && Date.now() - windowStart < baseTimeoutMs) {
         await new Promise(r => setTimeout(r, 2000));
+        assertFlowSessionCurrent(revision);
         if (loginPage.isClosed()) {
             flowWarn('[Flow] ⚠️ 로그인 대기 중 사용자가 창을 닫음 — 즉시 중단');
             break;
@@ -679,16 +746,16 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
     }
 
     if (!loginSuccess) {
-        await loginCtx.close().catch(() => {});
+        await closeFlowContext(loginCtx);
         throw new Error('FLOW_LOGIN_TIMEOUT:Google 로그인 시간이 30분을 넘었습니다. 2단계 인증이 완료된 후에도 자동 감지되지 않으면 [Flow 로그인] 버튼을 다시 눌러주세요. 폰에서 푸시 승인 후 노트북 화면이 labs.google/fx/tools/flow 페이지로 자동 이동하지 않으면 주소창에 직접 입력해주세요.');
     }
 
     flowLog('[Flow] ✅ 로그인 완료 — on-screen 닫고 off-screen 재시작');
     sendImageLog('✅ [Flow] 로그인 완료! 숨김 모드로 전환 중...');
-    await loginCtx.close().catch(() => {});
+    await closeFlowContext(loginCtx);
     await new Promise(r => setTimeout(r, 1500));
 
-    const finalCtx = await launchWithStealthFallback(profileDir, true);
+    const finalCtx = await launchWithStealthFallback(profileDir, true, revision);
     const finalPage = finalCtx.pages()[0] || await finalCtx.newPage();
     installNetworkImageListener(finalPage); // [v1.6.1]
 
@@ -718,7 +785,7 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
 
     const finalCheck = await isLoggedInToFlow(finalPage).catch(() => false);
     if (!finalCheck) {
-        await finalCtx.close().catch(() => {});
+        await closeFlowContext(finalCtx);
         throw new Error('FLOW_SESSION_LOST:Google 세션이 끊겼습니다. 다시 [Flow 로그인]을 진행해주세요.');
     }
 
@@ -1135,9 +1202,9 @@ async function dismissCookieBanner(page: Page, force: boolean = false): Promise<
 // ✅ [v2.7.68] 다중 신호 감지 — 2FA redirect 도중에도 빠르게 감지
 async function isLoggedInToFlow(page: Page): Promise<boolean> {
     try {
-        // 1) URL이 labs.google/fx 도메인이 아니면 일단 false (accounts.google.com 등)
+        // Flow's current domain and the legacy Labs workspace are trusted.
         const url = page.url();
-        if (!/labs\.google\/fx/.test(url)) return false;
+        if (!isFlowWorkspaceUrl(url)) return false;
 
         // 2) /fx/api/auth/session 체크 (정식 신호)
         const sessionUser = await page.evaluate(async () => {
@@ -2604,23 +2671,34 @@ export async function generateWithFlow(
 }
 
 // ─── 연결 테스트 ────
-export async function checkFlowLogin(): Promise<{ loggedIn: boolean; message: string; userInfo?: any }> {
+export async function checkFlowLogin(): Promise<FlowLoginStatus> {
+    if (_checkPromise) return _checkPromise;
+    if (_ensurePromise) {
+        return { loggedIn: false, message: 'Flow 로그인 또는 연결이 진행 중입니다. 열린 로그인 창에서 완료한 뒤 다시 확인해주세요.' };
+    }
+    _checkPromise = checkFlowLoginInner(flowSessionRevision).finally(() => { _checkPromise = null; });
+    return _checkPromise;
+}
+
+async function checkFlowLoginInner(revision: number): Promise<FlowLoginStatus> {
     let ctx: BrowserContext | null = null;
     try {
         if (cachedPage && !cachedPage.isClosed()) {
             const cachedLoggedIn = await isLoggedInToFlow(cachedPage).catch(() => false);
             if (cachedLoggedIn) {
                 const userInfo = await readFlowSessionUser(cachedPage);
+                assertFlowSessionCurrent(revision);
                 return {
                     loggedIn: true,
                     message: `Flow 로그인 세션 확인됨${userInfo?.email ? ` (${userInfo.email})` : ''}`,
                     userInfo,
                 };
             }
+            return { loggedIn: false, message: 'Flow 로그인 상태를 확인하지 못했습니다. [Flow 로그인] 버튼으로 다시 연결해주세요.' };
         }
 
         if (cachedContext) {
-            try { await cachedContext.close(); } catch { /* ignore */ }
+            await closeFlowContext(cachedContext);
             cachedContext = null;
             cachedPage = null;
             cachedProjectUrl = null;
@@ -2629,7 +2707,7 @@ export async function checkFlowLogin(): Promise<{ loggedIn: boolean; message: st
         }
 
         const profileDir = getFlowProfileDir();
-        ctx = await launchWithStealthFallback(profileDir, true);
+        ctx = await launchWithStealthFallback(profileDir, true, revision);
         const page = ctx.pages()[0] || await ctx.newPage();
         await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
         await page.waitForLoadState('networkidle', { timeout: 2500 }).catch(() => {});
@@ -2645,6 +2723,7 @@ export async function checkFlowLogin(): Promise<{ loggedIn: boolean; message: st
         }
 
         const userInfo = await readFlowSessionUser(page);
+        assertFlowSessionCurrent(revision);
         return {
             loggedIn: true,
             message: `Flow 로그인 세션 확인됨${userInfo?.email ? ` (${userInfo.email})` : ''}`,
@@ -2654,8 +2733,8 @@ export async function checkFlowLogin(): Promise<{ loggedIn: boolean; message: st
         return { loggedIn: false, message: `Flow 로그인 확인 실패: ${(err as Error)?.message ?? err}` };
     } finally {
         try {
-            if (ctx) await ctx.close();
-        } catch { /* ignore */ }
+            if (ctx) await closeFlowContext(ctx);
+        } catch (error) { flowWarn('[Flow] 로그인 확인 브라우저 종료 실패', (error as Error).message); }
     }
 }
 
@@ -2727,6 +2806,7 @@ export async function testFlowConnection(): Promise<{ ok: boolean; message: stri
 
 // ─── 중지/정리 ────
 export async function resetFlowState(): Promise<void> {
+    flowSessionRevision += 1;
     cachedProjectUrl = null;
     cookieBannerDismissed = false;
     _networkListenerInstalled = false;
@@ -2741,8 +2821,9 @@ export async function resetFlowState(): Promise<void> {
                 zr.untrackBrowserPid(pid);
             }
         } catch { /* ignore */ }
-        try { await cachedContext.close(); } catch { /* ignore */ }
+        try { await closeFlowContext(cachedContext); } catch (error) { flowWarn('[Flow] 캐시 브라우저 종료 실패', (error as Error).message); }
     }
     cachedContext = null;
     cachedPage = null;
+    await closeUncachedFlowContexts();
 }
