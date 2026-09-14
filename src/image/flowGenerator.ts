@@ -696,13 +696,13 @@ async function _ensureFlowBrowserPageInner(revision: number): Promise<Page> {
     while (!loginSuccess && Date.now() - overallStart < MAX_TOTAL_MS && Date.now() - windowStart < baseTimeoutMs) {
         await new Promise(r => setTimeout(r, 2000));
         assertFlowSessionCurrent(revision);
-        if (loginPage.isClosed()) {
-            flowWarn('[Flow] ⚠️ 로그인 대기 중 사용자가 창을 닫음 — 즉시 중단');
+        const authenticatedPage = await findAuthenticatedFlowPage(loginCtx.pages(), revision);
+        if (authenticatedPage) {
+            loginSuccess = true;
             break;
         }
-        const ok = await isLoggedInToFlow(loginPage).catch(() => false);
-        if (ok) {
-            loginSuccess = true;
+        if (loginPage.isClosed()) {
+            flowWarn('[Flow] ⚠️ 로그인 대기 중 사용자가 창을 닫음 — 즉시 중단');
             break;
         }
         const currentUrl = loginPage.url();
@@ -2673,11 +2673,43 @@ export async function generateWithFlow(
 // ─── 연결 테스트 ────
 export async function checkFlowLogin(): Promise<FlowLoginStatus> {
     if (_checkPromise) return _checkPromise;
-    if (_ensurePromise) {
-        return { loggedIn: false, message: 'Flow 로그인 또는 연결이 진행 중입니다. 열린 로그인 창에서 완료한 뒤 다시 확인해주세요.' };
-    }
-    _checkPromise = checkFlowLoginInner(flowSessionRevision).finally(() => { _checkPromise = null; });
+    const check = _ensurePromise ? checkActiveFlowLogin : checkFlowLoginInner;
+    _checkPromise = check(flowSessionRevision).finally(() => { _checkPromise = null; });
     return _checkPromise;
+}
+
+async function findAuthenticatedFlowPage(pages: readonly Page[], revision: number): Promise<Page | null> {
+    for (const page of pages) {
+        assertFlowSessionCurrent(revision);
+        if (page.isClosed()) continue;
+        const loggedIn = await isLoggedInToFlow(page).catch(() => false);
+        assertFlowSessionCurrent(revision);
+        if (loggedIn && !page.isClosed()) return page;
+    }
+    return null;
+}
+
+/** Inspect the connection owner's pages without launching, navigating or closing them. */
+async function checkActiveFlowLogin(revision: number): Promise<FlowLoginStatus> {
+    try {
+        const pages = [...new Set([
+            ...(cachedPage ? [cachedPage] : []),
+            ...ownedFlowContexts.flatMap((context) => context.pages()),
+        ])];
+        const page = await findAuthenticatedFlowPage(pages, revision);
+        if (page) {
+            const userInfo = await readFlowSessionUser(page);
+            assertFlowSessionCurrent(revision);
+            if (!page.isClosed()) {
+                return { loggedIn: true, message: `Flow 로그인 세션 확인됨${userInfo?.email ? ` (${userInfo.email})` : ''}`, userInfo };
+            }
+        }
+        assertFlowSessionCurrent(revision);
+        return { loggedIn: false, message: 'Flow 로그인 또는 연결이 진행 중입니다. 열린 로그인 창에서 완료한 뒤 다시 확인해주세요.' };
+    } catch (error) {
+        flowWarn('[Flow] 진행 중인 로그인 상태 확인 실패', (error as Error).message);
+        return { loggedIn: false, message: 'Flow 연결 상태가 변경되었습니다. 잠시 후 다시 확인해주세요.' };
+    }
 }
 
 async function checkFlowLoginInner(revision: number): Promise<FlowLoginStatus> {

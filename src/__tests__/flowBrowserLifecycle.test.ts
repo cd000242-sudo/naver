@@ -34,6 +34,8 @@ function fixture() {
     const page = {
       isClosed: vi.fn(() => false), title: vi.fn(async () => 'Flow'),
       goto: vi.fn(async () => undefined), waitForLoadState: vi.fn(async () => undefined),
+      waitForTimeout: vi.fn(async () => undefined), bringToFront: vi.fn(async () => undefined),
+      evaluate: vi.fn(async () => undefined), url: () => 'https://flow.google.com',
       on: vi.fn(),
     };
     const context = {
@@ -55,10 +57,101 @@ function fixture() {
     setTimeout: (fn: () => void) => { queueMicrotask(fn); return 0; }, console,
   };
   const api = new Function(...Object.keys(deps), `${code}\nreturn { ensureFlowBrowserPage, checkFlowLogin, resetFlowState, launchWithStealthFallback, enableAds: () => { _flowAdsPowerEnabled = true; } };`)(...Object.values(deps));
-  return { ...api, contexts, launch, loggedIn, adsConnect, readUser };
+  return { ...api, contexts, launch, loggedIn, adsConnect, readUser, minimize: deps.minimizeFlowWindow, enterWorkspace: deps.tryEnterFlowWorkspace };
 }
 
 describe('Flow persistent profile ownership', () => {
+  it('finishes the login connection when authentication completes in a new tab and the original closes', async () => {
+    const f = fixture();
+    const initial = await fixtureContext(f);
+    const login = await fixtureContext(f);
+    const final = await fixtureContext(f);
+    const authenticated = (await fixtureContext(f)).page;
+    login.pages = () => [login.page, authenticated];
+    login.page.isClosed.mockReturnValue(true);
+    f.launch.mockResolvedValueOnce(initial).mockResolvedValueOnce(login).mockResolvedValueOnce(final);
+    f.loggedIn.mockImplementation(async (page) => page === authenticated || page === final.page);
+    expect(await f.ensureFlowBrowserPage()).toBe(final.page);
+    expect(f.launch).toHaveBeenCalledTimes(3);
+    expect(initial.close).toHaveBeenCalledTimes(1);
+    expect(login.close).toHaveBeenCalledTimes(1);
+    expect(final.close).not.toHaveBeenCalled();
+  });
+
+  it.each([false, true])('does not report login for an unauthenticated or closed active tab (closed=%s)', async (closed) => {
+    const f = fixture();
+    const gate = deferred();
+    const context = await fixtureContext(f);
+    context.page.goto.mockImplementationOnce(() => gate.promise);
+    f.launch.mockResolvedValueOnce(context);
+    f.loggedIn.mockResolvedValue(false);
+    const pending = f.ensureFlowBrowserPage().catch(() => undefined);
+    await vi.waitFor(() => expect(context.page.goto).toHaveBeenCalled());
+    context.page.isClosed.mockReturnValue(closed);
+    expect((await f.checkFlowLogin()).loggedIn).toBe(false);
+    expect(f.readUser).not.toHaveBeenCalled();
+    expect(context.close).not.toHaveBeenCalled();
+    expect(f.launch).toHaveBeenCalledTimes(1);
+    await f.resetFlowState();
+    f.loggedIn.mockResolvedValue(true);
+    gate.resolve();
+    await pending;
+  });
+
+  it('checks an authenticated active page while connection finalization is pending', async () => {
+    const f = fixture();
+    const gate = deferred();
+    f.minimize.mockImplementationOnce(() => gate.promise);
+    const pending = f.ensureFlowBrowserPage();
+    await vi.waitFor(() => expect(f.minimize).toHaveBeenCalled());
+    const checks = await Promise.all([f.checkFlowLogin(), f.checkFlowLogin()]);
+    expect(checks.every((result) => result.loggedIn)).toBe(true);
+    expect(f.readUser).toHaveBeenCalledTimes(1);
+    expect(f.launch).toHaveBeenCalledTimes(1);
+    expect(f.contexts[0].close).not.toHaveBeenCalled();
+    expect(f.contexts[0].page.goto).toHaveBeenCalledTimes(1);
+    gate.resolve();
+    await pending;
+  });
+
+  it('finds login in a new tab without navigating or closing the active browser', async () => {
+    const f = fixture();
+    const gate = deferred();
+    const context = await fixtureContext(f);
+    const signedInPage = (await fixtureContext(f)).page;
+    context.pages = () => [context.page, signedInPage];
+    context.page.goto.mockImplementationOnce(() => gate.promise);
+    f.launch.mockResolvedValueOnce(context);
+    f.loggedIn.mockImplementation(async (page) => page === signedInPage);
+    const pending = f.ensureFlowBrowserPage().catch(() => undefined);
+    await vi.waitFor(() => expect(context.page.goto).toHaveBeenCalled());
+    expect((await f.checkFlowLogin()).loggedIn).toBe(true);
+    expect(f.readUser).toHaveBeenCalledWith(signedInPage);
+    expect(signedInPage.goto).not.toHaveBeenCalled();
+    expect(context.close).not.toHaveBeenCalled();
+    await f.resetFlowState();
+    f.loggedIn.mockResolvedValue(true);
+    gate.resolve();
+    await pending;
+  });
+
+  it('invalidates a pending active-page success when the session is reset', async () => {
+    const f = fixture();
+    const connectionGate = deferred();
+    const readGate = deferred();
+    f.minimize.mockImplementationOnce(() => connectionGate.promise);
+    const pending = f.ensureFlowBrowserPage().catch(() => undefined);
+    await vi.waitFor(() => expect(f.minimize).toHaveBeenCalled());
+    f.readUser.mockImplementationOnce(async () => { await readGate.promise; return null; });
+    const check = f.checkFlowLogin();
+    await vi.waitFor(() => expect(f.readUser).toHaveBeenCalled());
+    await f.resetFlowState();
+    readGate.resolve();
+    expect((await check).loggedIn).toBe(false);
+    connectionGate.resolve();
+    await pending;
+  });
+
   it('closes an AdsPower context if reset happens before the connection completes', async () => {
     const f = fixture();
     const gate = deferred();
