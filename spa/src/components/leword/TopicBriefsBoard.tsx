@@ -62,7 +62,7 @@ interface BriefRound {
 interface TopicBriefs {
     builtAt: string;
     slot?: RoundSlot;
-    /** 오늘의 회차들(아침 07:00 · 오후 13:00 · 저녁 19:00 KST) — 사장님 2026-09-09 "오전 오후 저녁 나눠서" */
+    /** 오늘의 회차들(아침 04:23 · 오후 10:23 · 저녁 16:23 KST, 2026-09-15 2시간 앞당김) — 사장님 2026-09-09 "오전 오후 저녁 나눠서" */
     rounds?: BriefRound[];
     counts: { briefs: number; now: number; next: number; always: number; star: number };
     briefs: Brief[];
