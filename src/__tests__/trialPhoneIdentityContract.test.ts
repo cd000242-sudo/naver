@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
@@ -7,10 +7,10 @@ const readBackend = (): string => readFileSync(
   'utf8',
 );
 
-const readDeployedBackend = (): string => readFileSync(
-  resolve(process.cwd(), 'payment-page/.gas-license-backend/Code.js'),
-  'utf8',
-);
+const DEPLOYED_BACKEND = resolve(process.cwd(), 'payment-page/.gas-license-backend/Code.js');
+const readDeployedBackend = (): string => readFileSync(DEPLOYED_BACKEND, 'utf8');
+// 배포본은 .gitignore 대상(payment-page/.gas-license-backend/) — 있으면 검사, 없으면(CI·새 체크아웃) 건너뛴다
+const describeDeployed = existsSync(DEPLOYED_BACKEND) ? describe : describe.skip;
 
 const readTrialVerifyHandler = (source: string): string => {
   const start = source.indexOf('function handleTrialVerify(data)');
@@ -92,7 +92,7 @@ describe('trial verification phone-identity contract', () => {
   });
 });
 
-describe('deployed trial verification phone-identity contract', () => {
+describeDeployed('deployed trial verification phone-identity contract', () => {
   it('does not reject a normal user merely because the PC has an earlier phone record', () => {
     const source = readDeployedBackend();
     const start = source.indexOf('function findTrialConflict_(sheet, email, phone, deviceId)');

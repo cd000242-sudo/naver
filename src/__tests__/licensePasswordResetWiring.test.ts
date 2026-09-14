@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 
 /**
@@ -19,6 +19,13 @@ function read(rel: string): string {
 }
 
 const GAS = 'payment-page/.gas-license-backend/Code.js.live-2026-09-04-fixed';
+/*
+ * GAS 라이브 소스는 .gitignore 대상(payment-page/.gas-license-backend/)이라 새 체크아웃·CI 러너에는
+ * 없다. 있으면 검사하고 없으면 그 it 만 건너뛴다 — 없다고 실패시키면 CI 가 2026-09-14 부터 그랬듯
+ * 매 푸시마다 애먼 빨간불이 떠서 진짜 고장을 못 알아본다. 서버 계약은 사장님 PC 에서 잠긴다.
+ */
+const hasGas = existsSync(join(__dirname, '..', '..', GAS));
+const itWithGas = hasGas ? it : it.skip;
 
 describe('본인인증 상시 버튼', () => {
   it('로그인 화면에 버튼이 있고, 눌러서 인증창을 연다', () => {
@@ -87,7 +94,7 @@ describe('비밀번호 변경', () => {
     expect(confirm.slice(0, 2000)).toContain('savedLicensePassword: newPassword');
   });
 
-  it('서버가 번호 일치를 확인하고, 같은 아이디의 모든 행에 새 해시를 쓴다', () => {
+  itWithGas('서버가 번호 일치를 확인하고, 같은 아이디의 모든 행에 새 해시를 쓴다', () => {
     const gas = read(GAS);
 
     expect(gas).toContain("case 'license-password-reset-request':");
@@ -106,7 +113,7 @@ describe('비밀번호 변경', () => {
 });
 
 describe('올인원·다중 코드 (한 사람 = 한 번 인증)', () => {
-  it('본인인증을 같은 아이디의 모든 라이선스 행에 찍는다', () => {
+  itWithGas('본인인증을 같은 아이디의 모든 라이선스 행에 찍는다', () => {
     const gas = read(GAS);
 
     expect(gas).toContain('function licenseRowsForUserId_(');
@@ -117,7 +124,7 @@ describe('올인원·다중 코드 (한 사람 = 한 번 인증)', () => {
     expect(confirm).not.toMatch(/sheet\.getRange\(rowNum, phoneCol\)\.setValue/);
   });
 
-  it('중복 번호 판정이 아이디 단위다 — 본인의 다른 코드 행에 막히지 않는다', () => {
+  itWithGas('중복 번호 판정이 아이디 단위다 — 본인의 다른 코드 행에 막히지 않는다', () => {
     const gas = read(GAS);
     const owner = gas.slice(gas.indexOf('function licensePhoneOwner_('), gas.indexOf('function licensePhoneJson_('));
 

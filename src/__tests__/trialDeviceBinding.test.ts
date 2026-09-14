@@ -130,9 +130,16 @@ describe('안내 문구 — 번호를 그대로 노출하지 않는다', () => {
 });
 
 describeDeployed('배포본도 같은 규칙을 갖는다', () => {
-  const deployedFindOwner = extractFunction<
-    (sheet: { getDataRange(): { getValues(): Row[] } }, deviceId: string, phone: string) => { phone: string } | null
-  >(deployedSource, 'findDeviceTrialOwner_');
+  /*
+   * describe.skip 이어도 이 콜백은 수집 시점에 실행된다(vitest). 배포본이 없을 때 빈 소스에서
+   * 함수를 잘라내면 expect 가 여기서 터져 파일 전체가 실패로 찍혔다(CI 2026-09-14~). 게으르게 꺼낸다.
+   */
+  type DeployedFindOwner = (sheet: { getDataRange(): { getValues(): Row[] } }, deviceId: string, phone: string) => { phone: string } | null;
+  let cached: DeployedFindOwner | null = null;
+  const deployedFindOwner: DeployedFindOwner = (...args) => {
+    if (!cached) cached = extractFunction<DeployedFindOwner>(deployedSource, 'findDeviceTrialOwner_');
+    return cached(...args);
+  };
 
   const fakeSheet = (rows: Row[]) => ({ getDataRange: () => ({ getValues: () => rows }) });
 
@@ -231,9 +238,13 @@ describe('이름 안내 문구 — 전체 노출하지 않는다', () => {
 });
 
 describeDeployed('배포본도 이름 규칙을 갖는다', () => {
-  const deployedFindNameOwner = extractFunction<
-    (sheet: { getDataRange(): { getValues(): Row[] } }, phone: string, nickname: string) => { name: string } | null
-  >(deployedSource, 'findPhoneNameOwner_', ['normalizeTrialName_']);
+  // 위와 같은 이유로 게으르게 꺼낸다 — describe.skip 의 콜백도 수집 시점에 실행된다
+  type DeployedFindNameOwner = (sheet: { getDataRange(): { getValues(): Row[] } }, phone: string, nickname: string) => { name: string } | null;
+  let cachedName: DeployedFindNameOwner | null = null;
+  const deployedFindNameOwner: DeployedFindNameOwner = (...args) => {
+    if (!cachedName) cachedName = extractFunction<DeployedFindNameOwner>(deployedSource, 'findPhoneNameOwner_', ['normalizeTrialName_']);
+    return cachedName(...args);
+  };
 
   const fakeSheet2 = (rows: Row[]) => ({ getDataRange: () => ({ getValues: () => rows }) });
 
