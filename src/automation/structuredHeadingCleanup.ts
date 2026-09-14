@@ -1,5 +1,12 @@
 import { normalizeEditorSubtitleText } from './editorWriterTextSemantics.js';
 
+/** Include the Markdown prefix when slicing at a known heading title. */
+export function headingLineBoundary(content: string, titleIndex: number): number {
+  const lineStart = content.lastIndexOf('\n', titleIndex - 1) + 1;
+  const prefix = content.slice(lineStart, titleIndex);
+  return /^[ \t]*(?:#{1,6}[ \t]+)?(?:\*\*|__)?[ \t]*$/.test(prefix) ? lineStart : titleIndex;
+}
+
 function headingKey(line: string): string {
   return normalizeEditorSubtitleText(line.trim().replace(/^>\s*/, '').replace(/\s+#+\s*$/, ''));
 }

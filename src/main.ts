@@ -7853,7 +7853,7 @@ ipcMain.handle('network:optimize', async (): Promise<{ success: boolean; message
     try {
       const { execSync } = await import('child_process');
       if (process.platform === 'win32') {
-        execSync('ipconfig /flushdns', { encoding: 'utf-8', timeout: 10000 });
+        execSync('ipconfig /flushdns', { encoding: 'utf-8', timeout: 10000, windowsHide: true });
         results.push('✅ DNS 캐시 갱신 완료');
       } else if (process.platform === 'darwin') {
         execSync('sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder', { encoding: 'utf-8', timeout: 10000 });

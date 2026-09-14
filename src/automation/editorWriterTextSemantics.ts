@@ -34,7 +34,7 @@ export function normalizeEditorSubtitleText(raw: unknown): string {
 }
 
 export function materializeEditorBodyFallbackText(value: unknown): string {
-  const normalized = String(value ?? '').replace(/\r\n/g, '\n');
+  const normalized = stripEmptyMarkdownHeadingLines(value);
   return normalized
     .split(/\n{2,}/)
     .map(paragraph => paragraph
@@ -44,6 +44,16 @@ export function materializeEditorBodyFallbackText(value: unknown): string {
       .join('\n'))
     .filter(Boolean)
     .join('\n\n');
+}
+
+/** Empty Markdown markers are formatting debris, never body copy. */
+export function stripEmptyMarkdownHeadingLines(value: unknown): string {
+  return String(value ?? '').replace(/\r\n/g, '\n')
+    .split('\n')
+    .filter((line) => !/^#{1,6}$/.test(
+      line.replace(/[\u200b\u200c\u200d\ufeff]/g, '').replace(/\*\*/g, '').trim(),
+    ))
+    .join('\n');
 }
 
 export function materializeEditorPlainFallbackText(

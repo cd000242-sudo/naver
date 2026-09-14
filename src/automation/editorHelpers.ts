@@ -24,7 +24,7 @@ import { NAVER_TIMEOUTS } from './timeouts.js';
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, buildTypingStyleResetHtml, pickRichArticleThemes, ensureTailTypingReady, focusLastEditableLine } from './richTextPaste.js';
 import { planImageTextInterleave } from './imageTextInterleavePlan.js';
-import { stripBoundaryHeading } from './structuredHeadingCleanup.js';
+import { stripBoundaryHeading, headingLineBoundary } from './structuredHeadingCleanup.js';
 import { planTypingFallback, splitFallbackParagraphs, sliceParagraphFromNormalizedOffset } from './typingFallbackPlan.js';
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 import {
@@ -69,6 +69,7 @@ import {
 import {
   materializeEditorBodyFallbackText,
   normalizeEditorCtaText,
+  stripEmptyMarkdownHeadingLines,
 } from './editorWriterTextSemantics.js';
 
 function recordAppliedFtcDisclosure(resolved: object, text: string): void {
@@ -352,6 +353,8 @@ export async function typeBodyWithRetry(self: any,
   text: string,
   fontSize: number = 19
 ): Promise<string> {
+  const normalizedText = stripEmptyMarkdownHeadingLines(text);
+  if (!normalizedText.trim()) return '';
   // 🔍 디버그: 원본 텍스트 확인
   self.log(`   🔍 [디버그] typeBodyWithRetry 호출됨`);
   self.log(`   🔍 [디버그] 원본 텍스트 길이: ${text.length}자`);
@@ -421,9 +424,8 @@ export async function typeBodyWithRetry(self: any,
     // A full insertion grows the editor by at least ~40% of the section length
     // (innerText ≈ source; nested selectors inflate the count further, so this floor
     // is conservative). Heading-only state grows ~0 → fails → outer retry re-types.
-    const minBodyGrowth = Math.max(20, Math.floor(text.trim().length * 0.4));
+    const minBodyGrowth = Math.max(20, Math.floor(normalizedText.trim().length * 0.4));
 
-    const normalizedText = text.replace(/\r\n/g, '\n');
     const richThemes = self.__richPasteThemes || (self.__richPasteThemes = pickRichArticleThemes());
     const rich = buildMobileRichHtml(normalizedText, {
       fontSizePx: fontSize,
@@ -1001,7 +1003,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         if (!h?.title) continue;
         const idx = bodyText.indexOf(h.title, searchFrom);
         if (idx >= 0) {
-          positions.push({ title: h.title, headingIdx: hi, pos: idx, len: h.title.length });
+          const boundary = headingLineBoundary(bodyText, idx);
+          positions.push({ title: h.title, headingIdx: hi, pos: boundary, len: idx - boundary + h.title.length });
           searchFrom = idx + h.title.length;
         }
       }
@@ -3512,7 +3515,7 @@ export function extractBodyForHeading(self: any, fullBody: string, headingTitle:
         const nextPattern = new RegExp(`${nextTitleEscaped}\\s*:?\\s*`, 'i');
         const nextMatch = fullBody.substring(startIdx).match(nextPattern);
         if (nextMatch && nextMatch.index !== undefined) {
-          endIdx = startIdx + nextMatch.index;
+          endIdx = headingLineBoundary(fullBody, startIdx + nextMatch.index);
         }
       }
 

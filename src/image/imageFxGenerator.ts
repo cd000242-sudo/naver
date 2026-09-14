@@ -665,7 +665,7 @@ async function ensurePlaywrightBrowserInstalled(): Promise<void> {
       const cliPath = path.join(path.dirname(pkgPath), 'cli.js');
       if (fs.existsSync(cliPath)) {
         execSync(`"${process.execPath}" "${cliPath}" install chromium`, {
-          stdio: 'pipe', timeout: 300000, env: electronNodeEnv,
+          stdio: 'pipe', timeout: 300000, env: electronNodeEnv, windowsHide: true,
         });
         console.log('[ImageFX] ✅ Chromium 설치 완료! (process.execPath + playwright-core/cli.js)');
         sendImageLog('✅ [ImageFX] Chromium 브라우저 설치 완료!');
@@ -683,7 +683,7 @@ async function ensurePlaywrightBrowserInstalled(): Promise<void> {
       const cliPath = path.join(path.dirname(pkgPath), 'cli.js');
       if (fs.existsSync(cliPath)) {
         execSync(`"${process.execPath}" "${cliPath}" install chromium`, {
-          stdio: 'pipe', timeout: 300000, env: electronNodeEnv,
+          stdio: 'pipe', timeout: 300000, env: electronNodeEnv, windowsHide: true,
         });
         console.log('[ImageFX] ✅ Chromium 설치 완료! (process.execPath + playwright/cli.js)');
         sendImageLog('✅ [ImageFX] Chromium 브라우저 설치 완료!');
@@ -701,7 +701,7 @@ async function ensurePlaywrightBrowserInstalled(): Promise<void> {
       const cliPath = path.join(path.dirname(pkgPath), 'cli.js');
       if (fs.existsSync(cliPath)) {
         execSync(`node "${cliPath}" install chromium`, {
-          stdio: 'pipe', timeout: 300000, env: installEnv,
+          stdio: 'pipe', timeout: 300000, env: installEnv, windowsHide: true,
         });
         console.log('[ImageFX] ✅ Chromium 설치 완료! (node + cli.js)');
         sendImageLog('✅ [ImageFX] Chromium 브라우저 설치 완료!');
@@ -716,7 +716,7 @@ async function ensurePlaywrightBrowserInstalled(): Promise<void> {
   if (!installed) {
     try {
       execSync('npx playwright install chromium', {
-        stdio: 'pipe', timeout: 300000, env: installEnv,
+        stdio: 'pipe', timeout: 300000, env: installEnv, windowsHide: true,
       });
       console.log('[ImageFX] ✅ Chromium 설치 완료! (npx)');
       sendImageLog('✅ [ImageFX] Chromium 브라우저 설치 완료!');

@@ -1069,7 +1069,7 @@ export function registerMediaHandlers(ctx: IpcContext): void {
 
             return new Promise((resolve) => {
                 const args = ['-y', '-i', sourcePath, '-vf', filter, gifPath];
-                const ffmpeg = spawn(ffmpegPath as string, args);
+                const ffmpeg = spawn(ffmpegPath as string, args, { windowsHide: true });
                 const ffmpegPid = ffmpeg.pid;
                 trackChild(ffmpegPid, 'ffmpeg:ipc-mp4-to-gif');
 
@@ -1148,7 +1148,7 @@ export function registerMediaHandlers(ctx: IpcContext): void {
                     outputPath
                 ];
 
-                const ffmpeg = spawn(ffmpegPath as string, args);
+                const ffmpeg = spawn(ffmpegPath as string, args, { windowsHide: true });
                 const ffmpegPid = ffmpeg.pid;
                 trackChild(ffmpegPid, 'ffmpeg:ipc-ken-burns');
 

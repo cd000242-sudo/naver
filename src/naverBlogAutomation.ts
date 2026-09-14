@@ -1143,7 +1143,7 @@ export class NaverBlogAutomation {
         // Windows 소리 알림 (3번)
         try {
           const { exec } = await import('child_process');
-          exec('powershell -c "1..3 | ForEach-Object { (New-Object Media.SoundPlayer \\\"C:\\Windows\\Media\\notify.wav\\\").PlaySync(); Start-Sleep -Milliseconds 500 }"');
+          exec('powershell -c "1..3 | ForEach-Object { (New-Object Media.SoundPlayer \\\"C:\\Windows\\Media\\notify.wav\\\").PlaySync(); Start-Sleep -Milliseconds 500 }"', { windowsHide: true });
         } catch { /* ignore */ }
 
         // progressCallback으로 UI 알림
@@ -3208,7 +3208,7 @@ export class NaverBlogAutomation {
         const child = execFile('powershell', [
           '-NoProfile', '-NonInteractive', '-Command',
           `Add-Type -AssemblyName System.Media; 1..${count} | ForEach-Object { (New-Object Media.SoundPlayer 'C:\\Windows\\Media\\notify.wav').PlaySync(); Start-Sleep -Milliseconds 300 }`
-        ], { timeout: 10000 });
+        ], { timeout: 10000, windowsHide: true });
         child.unref();
       } catch (e) { console.debug('[Sound] 알림 사운드 재생 실패:', (e as Error).message); }
     };
@@ -4036,7 +4036,7 @@ export class NaverBlogAutomation {
             // Windows 알림음
             try {
               const { exec } = await import('child_process');
-              exec('powershell -c "1..5 | ForEach-Object { [console]::beep(1000,200); Start-Sleep -Milliseconds 100 }"');
+              exec('powershell -c "1..5 | ForEach-Object { [console]::beep(1000,200); Start-Sleep -Milliseconds 100 }"', { windowsHide: true });
             } catch (e) { console.debug('[Sound] 세션만료 알림음 실패:', (e as Error).message); }
 
             if (this.progressCallback) {
@@ -4171,7 +4171,7 @@ export class NaverBlogAutomation {
       // Windows 알림음
       try {
         const { exec } = await import('child_process');
-        exec('powershell -c "1..5 | ForEach-Object { [console]::beep(1000,200); Start-Sleep -Milliseconds 100 }"');
+        exec('powershell -c "1..5 | ForEach-Object { [console]::beep(1000,200); Start-Sleep -Milliseconds 100 }"', { windowsHide: true });
       } catch (e) { console.debug('[Sound] 로그인 알림음 실패:', (e as Error).message); }
 
       if (this.progressCallback) {
@@ -8742,7 +8742,7 @@ export class NaverBlogAutomation {
       // ✅ [2026-04-02] -EncodedCommand Base64 방식 (escaping 문제 완전 회피)
       const psScript = `Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr h, int c);' -Name WinApi -Namespace HideBrowser -EA SilentlyContinue; Get-Process -Id ${pid} -EA SilentlyContinue | Where-Object { $_.MainWindowHandle -ne [IntPtr]::Zero } | ForEach-Object { [HideBrowser.WinApi]::ShowWindow($_.MainWindowHandle, 0) }`;
       const encoded = Buffer.from(psScript, 'utf16le').toString('base64');
-      execSync(`powershell -NoProfile -NonInteractive -EncodedCommand ${encoded}`, { stdio: 'ignore', timeout: 8000 });
+      execSync(`powershell -NoProfile -NonInteractive -EncodedCommand ${encoded}`, { stdio: 'ignore', timeout: 8000, windowsHide: true });
       this.log('🙈 브라우저 창 완전 숨김 (작업표시줄 포함)');
     } catch (e) {
       // Win32 실패 시 CDP 폴백 (화면 밖 이동)
@@ -8775,7 +8775,7 @@ export class NaverBlogAutomation {
       // ✅ [2026-04-02] -EncodedCommand Base64 방식 (escaping 문제 완전 회피)
       const psScript = `Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr h, int c);' -Name WinApi -Namespace ShowBrowser -EA SilentlyContinue; Get-Process -Id ${pid} -EA SilentlyContinue | Where-Object { $_.MainWindowHandle -ne [IntPtr]::Zero } | ForEach-Object { [ShowBrowser.WinApi]::ShowWindow($_.MainWindowHandle, 5) }`;
       const encoded = Buffer.from(psScript, 'utf16le').toString('base64');
-      execSync(`powershell -NoProfile -NonInteractive -EncodedCommand ${encoded}`, { stdio: 'ignore', timeout: 8000 });
+      execSync(`powershell -NoProfile -NonInteractive -EncodedCommand ${encoded}`, { stdio: 'ignore', timeout: 8000, windowsHide: true });
 
       // 2단계: CDP로 최대화 (보이는 상태에서만 작동)
       if (this.page) {

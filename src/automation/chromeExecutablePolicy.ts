@@ -68,7 +68,7 @@ export function findChromeExecutable(input: ChromeExecutableLookupInput = {}): s
   const exists = input.exists || existsSync;
   const exec =
     input.exec ||
-    ((command: string) => execSync(command, { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'ignore'] }));
+    ((command: string) => execSync(command, { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'ignore'], windowsHide: true }));
 
   for (const chromePath of getChromeExecutableCandidates(input)) {
     try {

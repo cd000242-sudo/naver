@@ -43,7 +43,7 @@ export async function convertMp4ToGif(mp4Path: string, options: { fps?: number; 
             gifPath
         ];
 
-        const ffmpeg: any = spawn(ffmpegPath as string, args);
+        const ffmpeg: any = spawn(ffmpegPath as string, args, { windowsHide: true });
         const ffmpegPid = ffmpeg.pid;
         trackChild(ffmpegPid, 'ffmpeg:gif-converter');
 
