@@ -329,9 +329,9 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                 <BoardFreshness
                     cadence="매일 아침·낮·저녁 세 번"
                     rounds={[
-                        { hour: 7, minute: 23, label: '아침' },
-                        { hour: 13, minute: 23, label: '오후' },
-                        { hour: 19, minute: 23, label: '저녁' },
+                        { hour: 5, minute: 23, label: '아침' },
+                        { hour: 11, minute: 23, label: '오후' },
+                        { hour: 17, minute: 23, label: '저녁' },
                     ]}
                     lastBuiltAt={board?.publishedAt ?? null}
                 />

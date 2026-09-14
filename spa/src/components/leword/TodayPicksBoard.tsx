@@ -98,12 +98,12 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
             <TabIntro
                 title="오늘의 네이버 추천키워드"
                 desc={`주제별 황금 비율(검색량 ÷ 문서수 ${minRatio} 이상) 키워드 · 네이버 블로그 홈판·SEO 전용${data ? ` · ${kst(data.builtAt)} 실측 · 황금 ${num(golden)}건` : ''}`}
-                source="검색광고 검색량 실측 · 블로그 문서수 실측 · 매일 06:30 KST 갱신"
+                source="검색광고 검색량 실측 · 블로그 문서수 실측 · 매일 04:30 KST 갱신"
             />
 
             <BoardFreshness
                 cadence="매일 아침 한 번"
-                rounds={[{ hour: 6, minute: 30 }]}
+                rounds={[{ hour: 4, minute: 30 }]}
                 lastBuiltAt={data?.builtAt ?? null}
             />
 

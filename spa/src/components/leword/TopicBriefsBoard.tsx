@@ -68,8 +68,9 @@ interface TopicBriefs {
     briefs: Brief[];
 }
 
-// 크론이 정각을 피해 06:23·12:23·18:23 KST 로 돈다(정각은 GitHub 가 미룸). 표기도 그 시각.
-const SLOT_TIME: Record<RoundSlot, string> = { 아침: '06:23', 오후: '12:23', 저녁: '18:23' };
+// 크론이 정각을 피해 04:23·10:23·16:23 KST 로 돈다(정각은 GitHub 가 미룸). 표기도 그 시각.
+// 2026-09-12 에 2시간 앞당겼다 — 예약이 한결같이 2시간쯤 늦게 떠서, 늦어도 제 시간에 올라오게.
+const SLOT_TIME: Record<RoundSlot, string> = { 아침: '04:23', 오후: '10:23', 저녁: '16:23' };
 
 const FREE_BRIEFS = 3;
 const TIMING_LABEL: Record<Timing, { name: string; desc: string }> = {
@@ -135,15 +136,15 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
             <TabIntro
                 title="오늘의 글감"
                 desc={`날짜가 박힌 공식 사실에서 뽑은 글감 — NOW(지금) · NEXT(예정) · ALWAYS(지속)${data ? ` · ${isStale && latestBuiltAt ? `${day(latestBuiltAt)} 회차` : '오늘'} ${rounds.length}회차 ${num(todayTotal)}건 · ★ ${num(todayStar)}` : ''}`}
-                source="네이버 뉴스 API 기사 실측 · 검색광고 검색량 실측 · 정면 글 수 실측(안 쟀으면 미측정) · 아침 06:23 · 오후 12:23 · 저녁 18:23 갱신"
+                source="네이버 뉴스 API 기사 실측 · 검색광고 검색량 실측 · 정면 글 수 실측(안 쟀으면 미측정) · 아침 04:23 · 오후 10:23 · 저녁 16:23 갱신"
             />
 
             <BoardFreshness
                 cadence="매일 아침·낮·저녁 세 번"
                 rounds={[
-                    { hour: 6, minute: 23, label: '아침' },
-                    { hour: 12, minute: 23, label: '오후' },
-                    { hour: 18, minute: 23, label: '저녁' },
+                    { hour: 4, minute: 23, label: '아침' },
+                    { hour: 10, minute: 23, label: '오후' },
+                    { hour: 16, minute: 23, label: '저녁' },
                 ]}
                 lastBuiltAt={latestBuiltAt}
             />
@@ -152,7 +153,7 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
             {!error && !data && <p className="lw-note">불러오는 중…</p>}
 
             {isStale && latestBuiltAt && (
-                <p className="lw-note">오늘 회차가 아직 안 올라왔습니다 — 지금 보이는 것은 {day(latestBuiltAt)} 회차입니다. 아침 회차는 06:23 에 돌지만 깃허브 예약이 밀리면 늦어집니다.</p>
+                <p className="lw-note">오늘 회차가 아직 안 올라왔습니다 — 지금 보이는 것은 {day(latestBuiltAt)} 회차입니다. 아침 회차는 04:23 에 걸어 두었지만(예약이 늦는 만큼 미리) 깃허브 예약이 밀리면 늦어집니다.</p>
             )}
 
             {rounds.length > 0 && (

@@ -290,8 +290,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
             {/* 방문자가 "왜 업데이트가 안 됐냐"고 묻지 않도록, 주기와 늦는 사정을 그대로 적는다. */}
             <BoardFreshness
-                cadence="월요일과 금요일 아침에"
-                rounds={[{ hour: 6, minute: 23 }]}
+                cadence="월요일과 금요일 이른 아침에"
+                rounds={[{ hour: 4, minute: 23 }]}
                 days={[1, 5]}
                 lastBuiltAt={board?.publishedAt ?? null}
             />
