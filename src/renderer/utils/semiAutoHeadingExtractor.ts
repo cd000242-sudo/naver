@@ -1,3 +1,5 @@
+import { listHeadingLines } from './headingMarkup.js';
+
 export interface SemiAutoExtractedHeading {
   title: string;
   content: string;
@@ -164,12 +166,12 @@ function findSemiAutoHeadingMatches(lines: readonly string[]): SemiAutoHeadingMa
   return matches;
 }
 
-export function extractSemiAutoDocumentFromBody(body: string): SemiAutoExtractedDocument {
+export function extractSemiAutoDocumentFromBody(body: string, options: { markedOnly?: boolean } = {}): SemiAutoExtractedDocument {
   const lines = String(body || '').split(/\r?\n/);
-  const matches = findSemiAutoHeadingMatches(lines);
+  const matches = options.markedOnly === true ? listHeadingLines(body) : findSemiAutoHeadingMatches(lines);
 
   if (matches.length === 0) {
-    return { introduction: '', headings: [] };
+    return { introduction: options.markedOnly === true ? String(body || '').trim() : '', headings: [] };
   }
 
   const headings = matches.map((match, index) => {
@@ -344,7 +346,15 @@ export function resolveSemiAutoPublishStructure(
   options: SemiAutoPublishStructureOptions = {},
 ): SemiAutoPublishStructure {
   const normalizedBody = String(body || '').replace(/\r\n/g, '\n').trim();
-  const extracted = extractSemiAutoDocumentFromBody(normalizedBody);
+  const extracted = extractSemiAutoDocumentFromBody(normalizedBody, { markedOnly: options.bodyMarkupIsAuthoritative === true });
+  if (options.bodyMarkupIsAuthoritative === true) {
+    return {
+      introduction: extracted.introduction,
+      headings: extracted.headings.map((heading) => ({ ...heading })),
+      strategy: extracted.headings.length > 0 ? 'body-sections' : 'plain-body',
+      orderLocked: true,
+    };
+  }
 
   const knownExistingTitles = existingHeadings
     .map((heading) => String(heading?.title || '').trim())
@@ -366,15 +376,6 @@ export function resolveSemiAutoPublishStructure(
      * 추출은 추측이고 기존/이미지 소제목은 증거다. 증거가 더 많고 본문에서 순서대로 전부
      * 확인되면 증거를 쓴다. 확인되지 않으면 추측을 그대로 둔다(기존 동작 유지).
      */
-    if (options.bodyMarkupIsAuthoritative === true) {
-      return {
-        introduction: extracted.introduction,
-        headings: extracted.headings.map((heading) => ({ ...heading })),
-        strategy: 'body-sections',
-        orderLocked: true,
-      };
-    }
-
     const recovered = recoverStructureFromKnownTitles(
       normalizedBody,
       extracted.headings.length,

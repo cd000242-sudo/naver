@@ -91,6 +91,39 @@ test.afterAll(async () => {
   await closeElectronTestSession(app, testProfile);
 });
 
+test('manual heading removal updates the built preview and publish reset clears per-post inputs', async () => {
+  await mainWindow.locator('#heading-apply-to-preview').waitFor({ state: 'attached', timeout: 20_000 });
+  await mainWindow.evaluate(() => {
+    const textarea = document.getElementById('unified-generated-content') as HTMLTextAreaElement;
+    textarea.value = ['첫 번째 제목', '두 번째 제목', '세 번째 제목', '네 번째 제목']
+      .map(title => `## ${title}\n\n이 구간의 자세한 본문입니다.`).join('\n\n');
+    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    (document.querySelectorAll('[data-heading-unmark]')[3] as HTMLButtonElement).click();
+    document.getElementById('heading-apply-to-preview')!.click();
+  });
+  await expect(mainWindow.locator('#heading-list [data-heading-unmark]')).toHaveCount(3);
+  await expect(mainWindow.locator('#unified-integrated-preview')).toContainText('📝 세 번째 제목');
+  await expect(mainWindow.locator('#unified-integrated-preview')).not.toContainText('📝 네 번째 제목');
+  expect(await mainWindow.evaluate(() => (window as any).currentStructuredContent.headings.length)).toBe(3);
+  await mainWindow.evaluate(() => {
+    while (document.querySelector('[data-heading-unmark]')) {
+      (document.querySelector('[data-heading-unmark]') as HTMLButtonElement).click();
+    }
+    document.getElementById('heading-apply-to-preview')!.click();
+  });
+  await expect(mainWindow.locator('#heading-list [data-heading-unmark]')).toHaveCount(0);
+  const plainPreview = await mainWindow.locator('#unified-integrated-preview').innerText();
+  expect(plainPreview.match(/네 번째 제목/g)).toHaveLength(1);
+  expect(await mainWindow.evaluate(() => (window as any).currentStructuredContent.headings.length)).toBe(0);
+  await mainWindow.evaluate(() => {
+    (document.getElementById('unified-extra-request') as HTMLTextAreaElement).value = '이번 글만의 요청';
+    (window as any).resetAllFields();
+  });
+  await expect(mainWindow.locator('#unified-extra-request')).toHaveValue('');
+  await expect(mainWindow.locator('#unified-generated-content')).toHaveValue('');
+  await expect(mainWindow.locator('#heading-lock-badge')).toHaveCSS('display', 'none');
+});
+
 test('semi-auto UI preserves pasted article order through the main IPC handoff', async () => {
   const body = [
     '준비물 안내입니다.',

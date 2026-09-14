@@ -95,6 +95,9 @@ export function renderHeadingList(): void {
   const textarea = getBodyTextarea();
   if (!list || !textarea) return;
 
+  const badge = headingPanelById(HEADING_PANEL_IDS.lockBadge);
+  if (badge) badge.style.display = textarea.value.trim() && (window as any).currentStructuredContent?.headingsLockedByUser === true ? 'inline' : 'none';
+
   const headings = listHeadingLines(textarea.value);
   if (headings.length === 0) {
     list.innerHTML =
@@ -152,9 +155,9 @@ export function applyEditedHeadingsToPreview(): boolean {
   if (!textarea) return false;
 
   const body = textarea.value || '';
-  const document_ = extractSemiAutoDocumentFromBody(body);
-  if (document_.headings.length === 0) {
-    try { (window as any).toastManager?.warning?.('본문에 "## " 로 표기된 소제목이 없습니다.'); } catch { /* ignore */ }
+  const document_ = extractSemiAutoDocumentFromBody(body, { markedOnly: true });
+  if (!body.trim()) {
+    try { (window as any).toastManager?.warning?.('적용할 본문이 없습니다.'); } catch { /* ignore */ }
     return false;
   }
 

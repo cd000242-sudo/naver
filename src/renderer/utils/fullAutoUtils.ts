@@ -121,6 +121,20 @@ export function applyReviewHeadingPrefix(structuredContent: any, seed: string): 
 (window as any).requestStopFullAutoPublish = requestStopFullAutoPublish;
 (window as any).resolveFullAutoProgressModal = resolveFullAutoProgressModal;
 
+/** 글마다 지정한 입력값과 소제목 목록을 다음 글을 위해 비운다. */
+export function resetPostEditingControls(): void {
+    for (const id of ['unified-generated-content', 'unified-extra-request']) {
+        const field = document.getElementById(id) as HTMLTextAreaElement | null;
+        if (field) field.value = '';
+    }
+    // value 대입은 input 이벤트를 발생시키지 않으므로 목록과 잠금 배지를 직접 갱신한다.
+    try {
+        (window as any).renderHeadingList?.();
+    } catch (error) {
+        console.warn('[FullAutoUtils] 소제목 목록 초기화 실패:', error);
+    }
+}
+
 /**
  * ✅ [2026-01-29 NEW] 발행 완료 후 전체 상태 초기화
  * - 새로운 발행을 위해 모든 상태를 리셋
@@ -154,6 +168,8 @@ export function resetAfterPublish(): void {
     setWindowState('currentSourceUrl', '');
     setWindowState('collectedImages', []);
     setWindowState('crawledImages', []);
+
+    resetPostEditingControls();
 
     // 3. 이미지 상태 초기화
     setWindowState('generatedImages', []);

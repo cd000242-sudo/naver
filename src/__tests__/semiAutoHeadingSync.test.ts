@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as extractor from '../renderer/utils/semiAutoHeadingExtractor';
+import { initHeadingControlPanel, applyEditedHeadingsToPreview, renderHeadingList } from '../renderer/modules/headingControlPanel';
 
 // Execute the actual renderer listeners with their external services injected.
 // Importing renderer.ts itself starts Electron/application-wide initialization.
@@ -37,7 +38,62 @@ describe('manual editor heading synchronization', () => {
     new Function(...Object.keys(dependencies), listenerCode)(...Object.values(dependencies));
   });
 
-  afterEach(() => vi.useRealTimers());
+  afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals(); });
+
+  function setupHeadingPanel() {
+    document.body.insertAdjacentHTML('beforeend', '<div id="heading-control-panel"><div id="heading-list"></div><span id="heading-lock-badge"></span><button id="heading-apply-to-preview"></button></div>');
+    vi.stubGlobal('updateUnifiedPreview', vi.fn());
+    vi.stubGlobal('updateUnifiedImagePreview', vi.fn());
+    vi.stubGlobal('syncIntegratedPreviewFromInputs', vi.fn());
+    (window as any).toastManager = { success: vi.fn(), warning: vi.fn() };
+    initHeadingControlPanel();
+  }
+
+  const fourSections = ['첫 번째 제목', '두 번째 제목', '세 번째 제목', '네 번째 제목']
+    .map(title => `## ${title}\n\n자세한 본문 내용을 설명합니다.`).join('\n\n');
+
+  it('keeps a released heading as prose through input, apply, analysis and publish', async () => {
+    setupHeadingPanel();
+    await input(fourSections);
+    const unmark = document.querySelectorAll<HTMLButtonElement>('[data-heading-unmark]');
+    expect(unmark.length).toBe(4);
+    unmark[3].click();
+    expect(document.querySelectorAll('[data-heading-unmark]').length).toBe(3);
+    expect(applyEditedHeadingsToPreview()).toBe(true);
+    await vi.advanceTimersByTimeAsync(500);
+    const state = (window as any).currentStructuredContent;
+    expect(state.headings.map((h: any) => h.title)).toEqual(['첫 번째 제목', '두 번째 제목', '세 번째 제목']);
+    expect(state.headings[2].content).toContain('네 번째 제목');
+    expect((window as any).toastManager.success).toHaveBeenLastCalledWith('✅ 소제목 3개를 적용했습니다.');
+    expect((globalThis as any).updateUnifiedPreview).toHaveBeenCalledWith(state);
+    const published = extractor.resolveSemiAutoPublishStructure(textarea.value, state.headings, { bodyMarkupIsAuthoritative: true, imageHeadingTitles: ['네 번째 제목'] });
+    expect(published.headings).toHaveLength(3);
+  });
+
+  it('allows releasing every heading without restoring old heading/image anchors', async () => {
+    setupHeadingPanel();
+    await input(fourSections);
+    while (document.querySelector('[data-heading-unmark]')) {
+      (document.querySelector('[data-heading-unmark]') as HTMLButtonElement).click();
+    }
+    expect(applyEditedHeadingsToPreview()).toBe(true);
+    await vi.advanceTimersByTimeAsync(500);
+    expect((window as any).currentStructuredContent.headings).toEqual([]);
+    const result = extractor.resolveSemiAutoPublishStructure(textarea.value, [{ title: '첫 번째 제목', content: '옛 본문' }], { bodyMarkupIsAuthoritative: true, imageHeadingTitles: ['네 번째 제목'] });
+    expect(result).toMatchObject({ headings: [], introduction: textarea.value, strategy: 'plain-body' });
+  });
+
+  it('clears the panel and lock badge when the editor is reset', async () => {
+    setupHeadingPanel();
+    await input(fourSections);
+    (document.querySelector('[data-heading-unmark]') as HTMLButtonElement).click();
+    expect(document.getElementById('heading-lock-badge')!.style.display).toBe('inline');
+    (window as any).currentStructuredContent = null;
+    textarea.value = '';
+    renderHeadingList();
+    expect(document.querySelectorAll('[data-heading-unmark]')).toHaveLength(0);
+    expect(document.getElementById('heading-lock-badge')!.style.display).toBe('none');
+  });
 
   async function input(value: string) {
     textarea.value = value;

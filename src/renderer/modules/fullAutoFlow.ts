@@ -1826,6 +1826,7 @@ function updateUnifiedImagePreview(headings, generatedImages) {
     // from the structural preview above the semi-auto editor (user request).
     const previewTitle = String(structuredContent?.selectedTitle || structuredContent?.title || '').trim();
     const introductionText = (() => {
+        if (!headings.length && bodyPlain.trim()) return ''; // Plain-body fallback below already renders the entire article.
         const direct = String(structuredContent?.introduction || '').trim();
         if (direct)
             return direct;

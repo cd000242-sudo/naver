@@ -107,7 +107,7 @@ import { markRealBlogCategoryOption } from './utils/realBlogCategoryPolicy.js';
 // ✅ [2026-01-25 모듈화] 앱 이벤트 핸들러
 import { initAllAppEventHandlers } from './utils/appEventsHandler.js';
 // ✅ [2026-01-25 모듈화] 전체 자동 발행 유틸리티
-import { isFullAutoStopRequested, requestStopFullAutoPublish, resolveFullAutoProgressModal, normalizeReviewHeadingSeed, applyReviewHeadingPrefix } from './utils/fullAutoUtils.js';
+import { isFullAutoStopRequested, requestStopFullAutoPublish, resolveFullAutoProgressModal, normalizeReviewHeadingSeed, applyReviewHeadingPrefix, resetPostEditingControls } from './utils/fullAutoUtils.js';
 // ✅ [2026-01-25 모듈화] 소제목 키 및 파일 URL 유틸리티
 import { toFileUrlMaybe, normalizeHeadingKeyForVideoCache } from './utils/headingKeyUtils.js';
 // ✅ [2026-01-25 모듈화] Veo 진행 오버레이
@@ -4342,6 +4342,17 @@ async function initUnifiedTab(): Promise<void> {
 
   function _syncSemiAutoManualHeadings(sc: any, body: string): void {
     if (!sc) return;
+    if (sc.headingsLockedByUser === true) {
+      const marked = resolveSemiAutoPublishStructure(body, sc.headings || [], { bodyMarkupIsAuthoritative: true });
+      const previous = Array.isArray(sc.headings) ? sc.headings : [];
+      sc.headings = marked.headings.map((heading) => ({ ...previous.find((item: any) => item.title === heading.title), ...heading }));
+      sc.introduction = marked.introduction;
+      sc.conclusion = '';
+      sc._manualSectionOrderLocked = true;
+      sc._manualStructureStrategy = marked.strategy;
+      _scheduleSemiAutoHeadingAnalysis(sc);
+      return;
+    }
     const extractedDocument = extractSemiAutoDocumentFromBody(body);
     const extracted = extractedDocument.headings;
     if (extracted.length === 0) {
@@ -8069,6 +8080,7 @@ function resetAllFields(): void {
 
     // 전역 변수 초기화 (발행 후 캐시 완전 제거)
     (window as any).currentStructuredContent = null;
+    resetPostEditingControls();
     (window as any).imageManagementGeneratedImages = null;
     currentPostId = null; // ✅ 글 ID도 초기화
     // ✅ [2026-01-22] 추가 캐시 초기화 - 모든 발행 모드에서 완전 초기화
