@@ -29,13 +29,14 @@ describe('축별 단일 계약 — 같은 것을 두 번 다르게 말하지 않
     expect(P('seo/base.prompt')).toContain('고정 위치를 만들지 않는다');
   });
 
-  it('맨 앞 요약 표 금지가 본문 중간 표까지 막지 않는다', () => {
+  it('요약 표 금지가 본문 중간 표까지 막지 않는다', () => {
     /*
      * BH-1 이 "본문에 표를 직접 그리지 마라"였는데, 그러면 ES-4(비교·비용 표)와
-     * IB-4(일정·순위 표)를 정면으로 막는다. 범위를 맨 앞 요약 표로 좁혔다.
+     * IB-4(일정·순위 표)를 정면으로 막는다. 범위를 그 요약 표 하나로 좁혔다.
+     * [2026-09-16] 표를 도입부 뒤로 옮기면서 "맨 앞" → "도입부 뒤".
      */
     const header = P('shared/fact-brief-header.prompt');
-    expect(header).toContain('맨 앞 요약 표에만');
+    expect(header).toContain('도입부 뒤 요약 표에만');
     expect(header).toContain('본문 중간의 비교표·일정표는');
     expect(header).not.toMatch(/^★ 본문에 표를 직접 그리지 마라/m);
   });
@@ -71,7 +72,7 @@ describe('조립 결과 — 실제 프롬프트에 상충 지시가 함께 실�
     for (const cat of ['연예', '생활']) {
       const p = buildFullPrompt('seo', cat);
       expect(p, cat).toContain('summaryTable');
-      expect(p, cat).toContain('맨 앞 요약 표에만');
+      expect(p, cat).toContain('도입부 뒤 요약 표에만');
     }
   });
 

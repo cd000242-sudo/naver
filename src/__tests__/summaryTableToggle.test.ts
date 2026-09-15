@@ -125,10 +125,22 @@ describe('④ 배선 — 한 곳도 빠지면 조용히 무시된다', () => {
     expect(multiAccount).toContain('contentPayload.assembly.includeSummaryTable = readSummaryTableOptionFromUi();');
   });
 
-  it('⭐ 끄면 조립도 막고, 프롬프트의 "맨 앞 요약 표" 지시도 취소한다', () => {
+  it('⭐ 끄면 조립도 막고, 프롬프트의 요약 표 지시도 취소한다', () => {
     expect(generator).toContain('const summaryTableOn = source.includeSummaryTable !== false;');
     expect(generator).toContain('[표 설정 — 위 규칙보다 우선]');
     expect(generator).toContain('도입부에 마크다운 표');
+  });
+
+  /**
+   * [2026-09-16] 표를 도입부 뒤로 옮기면서 프롬프트의 규칙 제목이 바뀌었다.
+   * 취소문은 그 제목을 **따옴표로 그대로 인용**해 "이 규칙은 적용하지 않는다"고 말한다.
+   * 제목만 바뀌고 취소문이 안 따라오면 모델이 짚을 대상을 못 찾아 체크박스가 조용히 무력화된다.
+   */
+  it('⭐ 취소문이 인용하는 규칙 이름이 프롬프트에 실제로 있다', () => {
+    const prompt = readFileSync(new URL('../prompts/shared/fact-brief-header.prompt', import.meta.url), 'utf8');
+    const quoted = generator.match(/앞의 \[BRIEF-HEAD\] 중 "([^"]+)" 규칙은 적용하지 않는다/);
+    expect(quoted, '취소문을 찾지 못했다').not.toBeNull();
+    expect(prompt).toContain(quoted![1]!);
   });
 
   it('체크박스가 없어도 켠 것으로 본다 (구버전 화면 보호)', () => {

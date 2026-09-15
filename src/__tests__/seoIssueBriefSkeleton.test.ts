@@ -128,9 +128,10 @@ describe('fact-brief-header — 주제를 가리지 않는 첫 화면', () => {
      */
     expect(header).toContain('summaryTable');
     expect(header).toContain('본문에 직접 그리지 마라');
-    // [2026-08-26] 이 금지는 맨 앞 요약 표에만 해당한다 — 본문 중간 비교표(ES-4/IB-4)까지
+    // [2026-08-26] 이 금지는 그 요약 표에만 해당한다 — 본문 중간 비교표(ES-4/IB-4)까지
     //   막으면 그쪽과 정면 충돌한다. 충돌 점검에서 잡아 범위를 좁혔다.
-    expect(header).toContain('맨 앞 요약 표에만');
+    // [2026-09-16] 표를 도입부 뒤로 옮기면서 "맨 앞" → "도입부 뒤" 로 문구가 바뀌었다.
+    expect(header).toContain('도입부 뒤 요약 표에만');
     expect(header).toContain('본문 중간의 비교표·일정표는');
   });
 
