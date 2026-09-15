@@ -2,6 +2,7 @@
 // Restored from dist/renderer/modules/multiAccountManager.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
+import { readSummaryTableOptionFromUi } from './contentGeneration.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import {
     createShoppingAiBatchPlan,
@@ -3240,6 +3241,9 @@ async function initMultiAccountPublishModal() {
                         ? queueItem.sourceKeyword.split(',').map(k => k.trim()).filter(Boolean)
                         : [];
                     contentPayload.assembly.keywords = keywordList;
+                    // [2026-09-15] 맨 앞 요약표 — 단일 생성과 같은 체크박스를 다계정 발행도 따른다.
+                    //   여기가 빠지면 사장님이 꺼 둬도 다계정 글에는 표가 계속 나온다(조용한 무시).
+                    contentPayload.assembly.includeSummaryTable = readSummaryTableOptionFromUi();
                     if (queueItem.sourceUrl) {
                         contentPayload.assembly.rssUrl = [queueItem.sourceUrl];
                     }

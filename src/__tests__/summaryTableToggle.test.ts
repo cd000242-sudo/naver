@@ -104,15 +104,25 @@ describe('④ 배선 — 한 곳도 빠지면 조용히 무시된다', () => {
   const main = readFileSync(new URL('../main.ts', import.meta.url), 'utf8');
   const html = readFileSync(new URL('../../public/index.html', import.meta.url), 'utf8');
 
-  it('⭐ 체크박스 → 두 생성 경로 payload → main → ContentSource', () => {
+  const fullAuto = readFileSync(new URL('../renderer/modules/fullAutoFlow.ts', import.meta.url), 'utf8');
+  const multiAccount = readFileSync(new URL('../renderer/modules/multiAccountManager.ts', import.meta.url), 'utf8');
+
+  it('⭐ 체크박스 → 생성 경로 payload → main → ContentSource', () => {
     expect(html).toContain('id="unified-summary-table"');
     expect(html).toContain('checked');                                   // 기본 ON
     expect(renderer).toContain('export function readSummaryTableOptionFromUi()');
-    // 읽는 곳은 한 함수로 모은다 — 세 경로가 각자 읽으면 한 곳이 빠져도 모른다
+    // 읽는 곳은 한 함수로 모은다 — 경로가 여럿이라 각자 읽으면 한 곳이 빠져도 모른다
     expect(renderer.match(/includeSummaryTable: readSummaryTableOptionFromUi\(\)/g)).toHaveLength(2);
     expect(main).toContain("(payload.assembly as any).includeSummaryTable === false");
     expect(main).toContain('source.includeSummaryTable = false');
     expect(generator).toContain('includeSummaryTable?: boolean;');
+  });
+
+  it('⭐ 연속발행·다계정도 같은 체크박스를 따른다 — 한 곳이 빠지면 거기만 표가 계속 나온다', () => {
+    expect(fullAuto).toContain("import { fillSemiAutoFields, readSummaryTableOptionFromUi } from './contentGeneration.js';");
+    expect(fullAuto).toContain('includeSummaryTable: readSummaryTableOptionFromUi(),');
+    expect(multiAccount).toContain("import { readSummaryTableOptionFromUi } from './contentGeneration.js';");
+    expect(multiAccount).toContain('contentPayload.assembly.includeSummaryTable = readSummaryTableOptionFromUi();');
   });
 
   it('⭐ 끄면 조립도 막고, 프롬프트의 "맨 앞 요약 표" 지시도 취소한다', () => {

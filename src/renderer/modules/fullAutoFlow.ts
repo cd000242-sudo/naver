@@ -3,7 +3,7 @@
 "use strict";
 import { buildPastePreviewHtml } from '../../automation/richTextPaste.js';
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
-import { fillSemiAutoFields } from './contentGeneration.js';
+import { fillSemiAutoFields, readSummaryTableOptionFromUi } from './contentGeneration.js';
 import { isAgentEngine } from '../utils/agentModeGuard.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import {
@@ -2527,6 +2527,9 @@ async function generateFullAutoContent(formData) {
             useKeywordAsTitle: formData.keywordAsTitle || false,
             keywordForTitle: formData.keywordAsTitle ? (cleanedKeywords || titleStr || keywordList.join(' ')) : undefined,
             useKeywordTitlePrefix: formData.keywordTitlePrefix || false,
+            // [2026-09-15] 맨 앞 요약표 — 단일 생성과 같은 체크박스를 연속발행도 따른다.
+            //   여기가 빠지면 사장님이 꺼 둬도 연속발행 글에는 표가 계속 나온다(조용한 무시).
+            includeSummaryTable: readSummaryTableOptionFromUi(),
         }
     };
     appendLog('📝 콘텐츠 조립 정보를 준비했습니다.');
