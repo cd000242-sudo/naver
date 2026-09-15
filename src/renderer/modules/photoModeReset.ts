@@ -10,6 +10,11 @@
 // 새 글에 섞여 든다 — 빈 화면으로 시작하는 것보다 나쁘다.
 
 import { clearUploadedImages } from './imageNarrativeUpload.js';
+import { resetNarrativeState } from './imageNarrativeMode.js';
+import { resetQuickModeState } from './imageNarrativeQuickMode.js';
+
+/** 지난 글의 추론 결과가 그려져 있던 자리. 상태만 비우면 화면에 잔상이 남는다. */
+const PHOTO_RESULT_PANEL_IDS = ['image-narrative-review-panel'] as const;
 
 /** 사진 모드 상황 입력칸들. 화면(index.html)과 _readPhotoContext 가 쓰는 id 그대로. */
 const PHOTO_CONTEXT_FIELD_IDS = [
@@ -52,6 +57,36 @@ export function resetPhotoModeForNextPost(): void {
       clearFieldValue(id);
     } catch (error) {
       console.warn(`[PhotoModeReset] ${id} 정리 실패:`, (error as Error)?.message);
+    }
+  }
+
+  /*
+   * [2026-09-15 사장님 실측] "전체 초기화해도 남아 있습니다."
+   *
+   * 여기까지는 사진과 상황 메모만 비웠다. 지난 글의 **추론 결과(NarrativePlan)** 는
+   * imageNarrativeMode / QuickMode 모듈 안에 그대로 살아 있어서, 화면은 비어 보여도
+   * 다음 글이 지난 글의 플랜 위에서 시작됐다. 상태와 화면을 같이 되돌린다.
+   */
+  try {
+    resetNarrativeState();
+  } catch (error) {
+    console.warn('[PhotoModeReset] 추론 결과 정리 실패:', (error as Error)?.message);
+  }
+  try {
+    resetQuickModeState();
+  } catch (error) {
+    console.warn('[PhotoModeReset] 빠른 모드 정리 실패:', (error as Error)?.message);
+  }
+
+  for (const id of PHOTO_RESULT_PANEL_IDS) {
+    try {
+      const panel = document.getElementById(id);
+      if (panel) {
+        panel.innerHTML = '';
+        panel.style.display = 'none';
+      }
+    } catch (error) {
+      console.warn(`[PhotoModeReset] ${id} 화면 정리 실패:`, (error as Error)?.message);
     }
   }
 }

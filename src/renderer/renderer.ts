@@ -1764,6 +1764,25 @@ function updateRiskIndicators(content: StructuredContent | null): void {
   // [2026-08-26] 글을 한 편 뽑았으니 에이전트 사용량이 한 칸 줄었다 — 배찌 갱신.
   void refreshAgentQuotaBadge();
 
+/*
+ * [2026-09-15 사장님 진단] 노출 실측 109편 중 66%가 "검색어 = 제목 그대로"였다.
+ * 아무도 검색하지 않는 문장으로 1위를 찾아 놓고 노출률에 합산해 성적을 부풀렸다.
+ *
+ * 뿌리는 여기다 — primaryKeyword/keyword 가 비면 생성된 제목이 그 자리에 들어왔다.
+ * 사용자가 실제로 친 메인 키워드는 #unified-keywords 에 있다. 그걸 먼저 본다.
+ * 쉼표로 여러 개를 넣는 칸이라 첫 번째가 메인이다.
+ *
+ * 여기서도 못 구하면 제목을 지어 자르지 않는다 — 없는 채로 두면 기록 단계(searchKeyword.ts)가
+ * "색인 확인"으로 라벨을 붙인다. 모르는 것을 모른다고 적는 편이 낫다.
+ */
+function resolveTrackingKeyword(content: any): string {
+  const fromInput = String(
+    (document.getElementById('unified-keywords') as HTMLInputElement | null)?.value || '',
+  ).split(',')[0].trim();
+  if (fromInput) return fromInput;
+  return String(content?.primaryKeyword || content?.keyword || '').trim();
+}
+
   // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 활성화 + 데이터 동봉
   //   글 생성 완료 시 본문/키워드를 글로벌 변수에 저장 → 사용자가 버튼 클릭 시 사용
   try {
@@ -1772,7 +1791,7 @@ function updateRiskIndicators(content: StructuredContent | null): void {
       (window as any).__lastGeneratedContent = {
         body: content.bodyPlain,
         title: content.selectedTitle || '',
-        keyword: (content as any).primaryKeyword || (content as any).keyword || '',
+        keyword: resolveTrackingKeyword(content),
         mode: (content as any).contentMode || 'seo',
         autoSerpResult: (content.quality as any)?.serpBenchmark || null,
       };

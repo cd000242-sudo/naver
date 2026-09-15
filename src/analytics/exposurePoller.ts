@@ -64,6 +64,8 @@ export async function runExposurePollOnce(userDataPath: string): Promise<{
           blogId: p.blogId,
           logNo: p.logNo,
           hoursAfter,
+          // 제목을 넘겨야 체커가 "이건 색인 확인"이라고 라벨을 붙일 수 있다.
+          title: p.title,
         }));
 
       if (batchInput.length === 0) {
@@ -89,6 +91,7 @@ export async function runExposurePollOnce(userDataPath: string): Promise<{
             hasSmartblock: r.result.hasSmartblock,
             notes: r.result.notes,
             probeFailed: !r.result.fetchSuccess,
+            keywordKind: r.result.keywordKind,
           } as PublishedPost['exposureChecks'] extends Array<infer C> | undefined ? C : never);
           if (!ok) throw new Error('LEGACY_EXPOSURE_RECORD_FAILED');
 

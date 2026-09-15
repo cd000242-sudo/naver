@@ -295,6 +295,20 @@ export function setNarrativePlan(plan: NarrativePlan): void {
   setState({ plan });
 }
 
+/**
+ * [2026-09-15 사장님 실측] "발행 다 하고 나서 자동으로 다음 글 작성할 수 있게 초기화가
+ * 되어야 하는데 안 되네요. 전체 초기화해도 남아 있습니다."
+ *
+ * resetPhotoModeForNextPost 는 올린 사진과 상황 메모만 비웠다. 정작 지난 글의 **추론 결과**
+ * (plan)는 이 모듈 안에 그대로 남아, 사진을 새로 올려도 옛 플랜이 살아 있었다.
+ * 화면은 비어 보이는데 상태는 지난 글이라 다음 글에 지난 여행이 섞여 든다.
+ *
+ * 추론 중이었다면 그 표시도 내린다 — 발행이 끝났는데 "분석 중"이 남아 있으면 안 된다.
+ */
+export function resetNarrativeState(): void {
+  setState({ plan: null, isInferring: false });
+}
+
 // ---------------------------------------------------------------------------
 // Phase 4: publish button wire-up
 // ---------------------------------------------------------------------------
