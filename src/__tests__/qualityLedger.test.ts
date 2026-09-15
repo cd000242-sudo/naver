@@ -57,7 +57,7 @@ describe('quality ledger — entry', () => {
     expect(warningKindOf('[Fidelity] 압축 0.4')).toBe('Fidelity');
     expect(warningKindOf('TitleAnswer: 미상환')).toBe('TitleAnswer');
     expect(warningKindOf('아주 긴 경고 문장이 태그 없이 들어오면 앞 열여섯 글자만')).toBe('아주 긴 경고 문장이 태그 없이 들어오면 앞 열여섯 글자만'.slice(0, 16));
-    expect(tallyWarningKinds(['[A] x', '[A] y', 'B: z'])).toEqual({ A: 2, B: 1 });
+    expect(tallyWarningKinds(['[A] x', '[A] y', 'Fidelity: z'])).toEqual({ A: 2, Fidelity: 1 });
   });
 });
 
