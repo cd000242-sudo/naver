@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import {
   SUMMARY_TABLE_MAX_ROWS,
   normalizeSummaryRows,
-  prependSummaryTable,
+  appendSummaryTable,
   renderSummaryTable,
 } from '../content/summaryTable';
 
@@ -38,10 +38,18 @@ describe('요약 표 렌더', () => {
     );
   });
 
-  it('도입부 앞에 붙인다 (첫 화면에서 사실이 먼저 보이게)', () => {
-    const out = prependSummaryTable('결혼 13년 차 부부가 SNS에 투샷을 올렸습니다.', rows);
-    expect(out.startsWith('| 구분 | 내용 |')).toBe(true);
-    expect(out).toContain('결혼 13년 차 부부가 SNS에');
+  /**
+   * [2026-09-16 사장님] "표가 SEO 모드로 하면 썸네일 바로 아래에 나오던데 도입부 아래에 나와야 돼."
+   *   원하는 순서: 제목 → 썸네일 → 도입부 글 → 표 → 1번 소제목
+   * 도입부가 상황을 세운 다음에 표가 와야 숫자의 뜻이 읽힌다.
+   */
+  it('⭐ 도입부 뒤에 붙인다 (도입부 글 → 표 → 첫 소제목)', () => {
+    const intro = '결혼 13년 차 부부가 SNS에 투샷을 올렸습니다.';
+    const out = appendSummaryTable(intro, rows);
+    expect(out.startsWith(intro)).toBe(true);
+    expect(out.endsWith('|')).toBe(true);
+    // 표가 도입부보다 뒤에 있다 — 썸네일 바로 아래로 올라오면 안 된다
+    expect(out.indexOf('| 구분 | 내용 |')).toBeGreaterThan(out.indexOf(intro));
   });
 });
 
@@ -82,7 +90,7 @@ describe('쓸 수 없는 표는 만들지 않는다', () => {
   });
 
   it('도입부는 표가 없어도 그대로 살아남는다', () => {
-    expect(prependSummaryTable('도입부입니다.', [])).toBe('도입부입니다.');
+    expect(appendSummaryTable('도입부입니다.', [])).toBe('도입부입니다.');
   });
 });
 
@@ -97,7 +105,7 @@ describe('표 깨짐 방지', () => {
 
   it('도입부에 이미 표가 있으면 겹쳐 넣지 않는다', () => {
     const intro = '| 구분 | 내용 |\n| --- | --- |\n| 기준일 | 어제 |';
-    const out = prependSummaryTable(intro, [
+    const out = appendSummaryTable(intro, [
       { label: '기준일', value: '오늘' },
       { label: '당사자', value: '누구' },
     ]);
@@ -116,9 +124,17 @@ describe('배선 — 스키마와 생성 경로', () => {
     expect(schema).toContain('"value"');
   });
 
-  it('파싱 직후 도입부에 얹는다', () => {
-    expect(generator).toMatch(/import \{ normalizeSummaryRows, prependSummaryTable \}/);
-    expect(generator).toMatch(/prependSummaryTable\(parsed\.introduction, \(parsed as any\)\.summaryTable\)/);
+  it('파싱 직후 도입부 뒤에 얹는다', () => {
+    expect(generator).toMatch(/import \{ normalizeSummaryRows, appendSummaryTable \}/);
+    expect(generator).toMatch(/appendSummaryTable\(parsed\.introduction, \(parsed as any\)\.summaryTable\)/);
+    // 옛 이름이 돌아오면 배치도 옛날로 돌아간 것이다
+    expect(generator).not.toContain('prependSummaryTable');
+  });
+
+  it('⭐ 프롬프트도 같은 배치를 말한다 (코드와 지시가 어긋나면 모델이 도입부에 표를 그린다)', () => {
+    expect(prompt).toContain('도입부 바로 뒤');
+    expect(prompt).toContain('도입부 글** → **요약 표');
+    expect(prompt).not.toContain('[BH-1] 글 맨 앞 = 사실 요약 표');
   });
 
   it('프롬프트가 본문 대신 스키마 필드를 채우라고 말한다', () => {

@@ -103,14 +103,21 @@ function alreadyHasTable(introduction: string): boolean {
 }
 
 /**
- * 도입부 맨 앞에 요약 표를 붙인다.
+ * 도입부 **뒤에** 요약 표를 붙인다. (2026-09-16)
  *
- * 표는 본문 전에 와야 첫 화면에서 사실이 먼저 보인다. 이미 표가 있으면 건드리지 않는다.
+ * 사장님이 원하는 순서:
+ *   제목 → 썸네일 → 도입부 글 → 요약표 → 1번 소제목
+ * 예전에는 도입부 앞에 붙여서 썸네일 바로 아래에 표가 왔다:
+ *   제목 → 썸네일 → **표** → 도입부 글 → 1번 소제목
+ *
+ * 표는 도입부가 상황을 세운 **다음**에 와야 읽힌다 — 상황을 모르는 채로 표부터 보면 숫자의 뜻을 모른다.
+ * 첫 화면에서 사실이 보인다는 목적은 도입부가 짧기 때문에 그대로 유지된다.
+ * 이미 표가 있으면 건드리지 않는다.
  */
-export function prependSummaryTable(introduction: unknown, rows: unknown): string {
+export function appendSummaryTable(introduction: unknown, rows: unknown): string {
   const intro = typeof introduction === 'string' ? introduction.trim() : '';
   const table = renderSummaryTable(rows);
   if (!table) return intro;
   if (alreadyHasTable(intro)) return intro;
-  return intro ? `${table}\n\n${intro}` : table;
+  return intro ? `${intro}\n\n${table}` : table;
 }

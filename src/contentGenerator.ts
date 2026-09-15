@@ -87,7 +87,7 @@ import { describeGroundingDecision, isGroundingExplicitlyEnabled } from './conte
 import { buildSituationDepthContract } from './content/situationDepthContract.js';
 import { buildSituationTitleContract, type SituationTitleMode } from './content/situationTitleContract.js';
 import { selectBestTitleCandidate } from './content/titleCandidateSelection.js';
-import { normalizeSummaryRows, prependSummaryTable } from './content/summaryTable.js';
+import { normalizeSummaryRows, appendSummaryTable } from './content/summaryTable.js';
 import { stripSourceNoise } from './content/sourceNoiseFilter.js';
 import {
   buildEvidenceAndIntentFinalContract,
@@ -6749,14 +6749,14 @@ async function generateStructuredContentInternal(
           //   모델이 굳이 채워 보내도 여기서 막는다 — 끈 것은 끈 것이다.
           const summaryTableOn = source.includeSummaryTable !== false;
           const withTable = summaryTableOn
-            ? prependSummaryTable(parsed.introduction, (parsed as any).summaryTable)
+            ? appendSummaryTable(parsed.introduction, (parsed as any).summaryTable)
             : '';
           if (!summaryTableOn) {
             console.log('[SummaryTable] 화면 설정으로 요약표 생략');
           }
           if (withTable && withTable !== String(parsed.introduction || '').trim()) {
             const rowCount = normalizeSummaryRows((parsed as any).summaryTable).length;
-            console.log(`[SummaryTable] 요약 표 ${rowCount}행을 도입부 앞에 배치`);
+            console.log(`[SummaryTable] 요약 표 ${rowCount}행을 도입부 뒤에 배치 (도입부 → 표 → 첫 소제목)`);
             parsed.introduction = withTable;
           } else if (Array.isArray((parsed as any).summaryTable)) {
             console.log('[SummaryTable] 쓸 수 있는 행이 없어 표 생략 (라벨·값이 비었거나 2행 미만)');

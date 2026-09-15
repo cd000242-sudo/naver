@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'fs';
-import { isProcessNoiseRow, normalizeSummaryRows, prependSummaryTable, renderSummaryTable } from '../content/summaryTable.js';
+import { isProcessNoiseRow, normalizeSummaryRows, appendSummaryTable, renderSummaryTable } from '../content/summaryTable.js';
 import { buildContentJsonOutputFormat } from '../contentJsonPromptFormat.js';
 
 /**
@@ -31,7 +31,7 @@ describe('① 도구 상태를 적은 행은 표에서 버린다', () => {
     const rows = normalizeSummaryRows(사장님화면);
     expect(rows.map((r) => r.label)).toEqual([]);          // 기준일 하나만 남아 2행 미만 → 표 폐기
     expect(renderSummaryTable(사장님화면)).toBe('');
-    expect(prependSummaryTable('도입부 문장입니다.', 사장님화면)).toBe('도입부 문장입니다.');
+    expect(appendSummaryTable('도입부 문장입니다.', 사장님화면)).toBe('도입부 문장입니다.');
   });
 
   it('⭐ 무엇을 도구 상태로 보는가 — 낱말 목록이 아니라 모양', () => {
