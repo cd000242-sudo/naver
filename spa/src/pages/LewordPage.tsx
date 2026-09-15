@@ -6,6 +6,7 @@ import AffiliateTab from '../components/leword/AffiliateTab';
 import AnalyzeTab from '../components/leword/AnalyzeTab';
 import GoldenTab from '../components/leword/GoldenTab';
 import IssueNicheTab from '../components/leword/IssueNicheTab';
+import HomefeedTab from '../components/leword/homefeed/HomefeedTab';
 import KeysTab from '../components/leword/KeysTab';
 import KinGoldenTab from '../components/leword/KinGoldenTab';
 import LewordStyles from '../components/leword/LewordStyles';
@@ -30,6 +31,8 @@ import YoutubeTab from '../components/leword/YoutubeTab';
 const TABS = [
     { id: 'golden', label: '리더남 전용 황금키워드', short: '황금키워드', icon: '◆' },
     { id: 'issue', label: '실검 틈새키워드', short: '실검 틈새', icon: '⚡' },
+    // 홈판 신호(사장님 명령서 STORY RADAR v2.0, 2026-09-16) — 실검 틈새 바로 옆. 이용권 탭(맛보기 목록에 넣지 않는다).
+    { id: 'homefeed', label: '홈판 신호', short: '홈판 신호', icon: '◉' },
     { id: 'picks', label: '오늘의 네이버 추천키워드', short: '추천키워드', icon: 'N' },
     { id: 'briefs', label: '오늘의 글감', short: '글감', icon: '✎' },
     { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },
@@ -323,6 +326,7 @@ function LewordPage() {
                 )}
                 {!lockedTab && activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
+                {!lockedTab && activeTab === 'homefeed' && <HomefeedTab />}
                 {/* 실검 틈새키워드와 키워드 분석 사이의 서브탭 — 오늘의 네이버 추천키워드(사장님 2026-09-08). */}
                 {!lockedTab && activeTab === 'picks' && <TodayPicksBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} topic={currentPicksTopic} onTopics={setPicksTopics} onTopicChange={choosePicksTopic} />}
                 {/* 오늘의 글감 — NOW/NEXT/ALWAYS 브리프(사장님 예시 형식 2026-09-09). */}

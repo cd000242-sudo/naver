@@ -14,7 +14,7 @@
 
 import type { KinPostIdea, RadarAnalysis } from './keywordApi';
 
-const BRIDGE_BASE = 'http://127.0.0.1:47615';
+export const BRIDGE_BASE = 'http://127.0.0.1:47615';
 
 export interface BridgeAgentStatus {
     /** 구독 플랜(사실이 있는 엔진만 — 지금은 코덱스 id_token 뿐). 없으면 빈 값. */
@@ -56,7 +56,7 @@ async function bridgeFetch(path: string, options?: RequestInit, timeoutMs = 3500
 export type BridgeFailure = { status: 'offline' } | { status: 'outdated' } | { status: 'error'; message: string };
 export type BridgeCallResult<T> = { status: 'ok'; result: T } | BridgeFailure;
 
-async function bridgeCall<T>(path: string, options: RequestInit | undefined, timeoutMs: number): Promise<BridgeCallResult<T>> {
+export async function bridgeCall<T>(path: string, options: RequestInit | undefined, timeoutMs: number): Promise<BridgeCallResult<T>> {
     const controller = new AbortController();
     const timer = window.setTimeout(() => controller.abort(), timeoutMs);
     try {
