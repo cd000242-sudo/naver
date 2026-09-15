@@ -64,11 +64,38 @@ export function getPreferredNaverMode(endpoint?: string): NaverApiMode | null {
 
 export function resetNaverModeMemo(): void {
   preferredModeByEndpoint.clear();
+  hubMissingNoticeShown = false;
 }
 
 const NO_KEY_MESSAGE =
   '네이버 API 키가 설정되어 있지 않습니다. 설정 → API 키에서 API HUB Client ID/Secret '
   + '(네이버클라우드 콘솔 발급) 또는 기존 네이버 개발자센터 Client ID/Secret 을 입력하세요.';
+
+/**
+ * [2026-09-15 실측] HUB 키가 없으면 검색이 **전부 기존 키로만** 나간다 — 그것도 조용히.
+ * 사장님 설정에는 legacy 키만 있었고(HUB 칸 비어 있음), 그래서 이관 코드가 다 갖춰져 있는데도
+ * 실제로는 한 번도 HUB 로 나가지 않았다. 기존 방식은 2027-06-30 종료이고 한도도 그 키 하나에 몰린다.
+ *
+ * 부를 때마다 찍으면 로그가 시끄러워 아무도 안 읽는다 — **프로세스당 한 번만** 알린다.
+ */
+let hubMissingNoticeShown = false;
+
+export function describeMissingHubKey(creds: NaverCredential[]): string | null {
+  if (creds.length === 0) return null;                          // 키가 아예 없으면 NO_KEY_MESSAGE 가 말한다
+  if (creds.some((cred) => cred.mode === 'hub')) return null;   // HUB 키가 있으면 알릴 것이 없다
+  return '[네이버 검색] ⚠️ API HUB 키 미입력 — 기존 개발자센터 키로만 나갑니다. '
+    + '기존 방식은 2027-06-30 종료되고, 호출 한도(429)도 이 키 하나에 몰립니다. '
+    + '설정 → API 키 → 검색 API 의 「API HUB 키」 칸에 네이버클라우드 콘솔에서 발급한 Client ID/Secret 을 넣어 주세요. '
+    + '발급할 때 Application 의 "서비스 선택"에서 블로그·뉴스·웹문서·카페·지식iN 을 체크해야 합니다.';
+}
+
+function noticeMissingHubKey(creds: NaverCredential[]): void {
+  if (hubMissingNoticeShown) return;
+  const message = describeMissingHubKey(creds);
+  if (!message) return;
+  hubMissingNoticeShown = true;
+  console.warn(message);
+}
 
 /** Memo first, then HUB before legacy. */
 function orderCredentials(creds: NaverCredential[], endpoint: string): NaverCredential[] {
@@ -120,6 +147,7 @@ async function callWithFailover<T>(
 ): Promise<NaverApiResult<T>> {
   const creds = options.credentials ?? resolveAllNaverCredentials(options.payload);
   if (creds.length === 0) return { ok: false, status: 412, data: null, error: NO_KEY_MESSAGE, attempts: 0 };
+  noticeMissingHubKey(creds);
 
   const fetchImpl = options.fetchImpl ?? (globalThis.fetch as unknown as NaverFetch);
   const timeoutMs = options.timeoutMs ?? 15000;

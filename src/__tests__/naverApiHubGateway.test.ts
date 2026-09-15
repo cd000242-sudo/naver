@@ -136,7 +136,10 @@ describe('상태코드 → 처방', () => {
   });
   it('429 는 HUB 의 서비스 미선택 가능성까지 알려준다', () => {
     expect(describeNaverFailure(429, 'hub')).toMatch(/서비스를 선택하지 않아도/);
-    expect(describeNaverFailure(429, 'legacy')).toMatch(/일일 쿼터/);
+    // [2026-09-15] legacy 429 는 "일일 쿼터" 로 단정하지 않는다 — 순간 호출 속도로도 난다(실측).
+    //   단정 문구가 오진을 만들었다. 자세한 것은 naverHubKeyNotice.test.ts
+    expect(describeNaverFailure(429, 'legacy')).toMatch(/순간 호출/);
+    expect(describeNaverFailure(429, 'legacy')).toMatch(/하루 한도/);
   });
   it('5xx 는 재시도 안내', () => {
     expect(describeNaverFailure(503, 'hub')).toMatch(/서버 오류/);
