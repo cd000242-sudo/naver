@@ -10,6 +10,7 @@ import {
   type FetchedCandidate,
 } from './candidateFetcher.js';
 import { runVisionGate, type VisionGateBudget, type VisionSubjectContext } from './visionGate.js';
+import type { IssueVisionRoute } from './visionRoute.js';
 import type { IssueCandidateImage } from './types.js';
 
 const LOG = '[IssueFunnel]';
@@ -77,7 +78,8 @@ export function rankCleanCandidates(items: FetchedCandidate[]): FetchedCandidate
 import { judgeCaptionRelevance } from './captionRelevanceGate.js';
 
 export interface FunnelOptions {
-  geminiApiKey?: string;
+  /** 고른 글생성 엔진이 정한 비전 경로. 없으면 무료 캡션 게이트로 내려간다. */
+  visionRoute?: IssueVisionRoute | null;
   visionBudget: VisionGateBudget;
   phashRegistry: PhashRegistry;
   /** Stop once this many clean images survive (default 6). */
@@ -137,11 +139,11 @@ export async function refineHeadingCandidates(
 
   let clean: FetchedCandidate[];
   let visionUsed = false;
-  if (options.geminiApiKey) {
+  if (options.visionRoute) {
     visionUsed = true;
     clean = await runVisionGate(
       validated,
-      options.geminiApiKey,
+      options.visionRoute,
       options.visionBudget,
       options.subjectContext,
       cleanTarget,

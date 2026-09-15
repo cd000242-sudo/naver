@@ -2,13 +2,13 @@
 // Vision gate: the only stage that actually LOOKS at each image.
 // Rejects visible watermarks, text overlays (captions/subtitles), and
 // press/broadcast logos — URL heuristics cannot see any of these.
-// Batched Gemini Flash calls (up to 8 images per call) keep cost at
-// roughly 100~200 KRW per post; a hard per-run budget caps the worst case.
+// 판정 벤더는 사용자가 고른 글생성 엔진을 따라간다(visionRoute.ts) — GPT면 GPT,
+// Claude면 Claude, 에이전트면 구독 CLI(API 과금 0). 8장씩 묶어 한 번에 보내고
+// 실행당 상한(visionBudget)으로 최악의 비용을 막는다.
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { GEMINI_TEXT_MODELS } from '../../runtime/modelRegistry.js';
-import { trackGeminiUsage } from '../../gemini.js';
 import { toVisionJpegBase64, type FetchedCandidate } from './candidateFetcher.js';
+import { judgeImagesWithRoute } from './visionJudges.js';
+import type { IssueVisionRoute } from './visionRoute.js';
 
 const LOG = '[IssueVisionGate]';
 const BATCH_SIZE = 8;
@@ -129,48 +129,27 @@ export function parseVerdicts(text: string, count: number): VisionVerdict[] {
 
 async function judgeBatch(
   batch: FetchedCandidate[],
-  apiKey: string,
+  route: IssueVisionRoute,
   ctx: VisionSubjectContext,
 ): Promise<VisionVerdict[]> {
-  const client = new GoogleGenerativeAI(apiKey);
-  // Thinking-capable Gemini 3.x consumes output budget on reasoning tokens —
-  // JSON mode + a generous cap keep the verdict array from truncating
-  // (truncation previously fail-closed entire batches: live E2E 2026-08-16).
-  const model = client.getGenerativeModel({
-    model: GEMINI_TEXT_MODELS.FLASH,
-    generationConfig: {
-      temperature: 0.1,
-      maxOutputTokens: 4096,
-      responseMimeType: 'application/json',
-    },
-  });
-
-  const parts: any[] = [];
+  const images = [];
   for (const item of batch) {
-    parts.push({ inlineData: { mimeType: 'image/jpeg', data: await toVisionJpegBase64(item.buffer) } });
+    images.push({ base64: await toVisionJpegBase64(item.buffer) });
   }
-  parts.push({ text: buildVisionPrompt(ctx) });
-
-  const result = await model.generateContent(parts);
-  const usage = (result.response as any).usageMetadata;
-  if (usage) {
-    const p = usage.promptTokenCount || 0;
-    const t = usage.totalTokenCount || 0;
-    trackGeminiUsage(GEMINI_TEXT_MODELS.FLASH, p, t > p ? t - p : (usage.candidatesTokenCount || 0));
-  }
-  return parseVerdicts(result.response.text().trim(), batch.length);
+  const text = await judgeImagesWithRoute(images, buildVisionPrompt(ctx), route);
+  return parseVerdicts(text.trim(), batch.length);
 }
 
 /**
  * Run the Vision gate over fetched candidates.
  * Returns only clean survivors, in input order.
- * - No API key → gate is skipped entirely (caller decides the policy).
+ * - No usable route → the caller never gets here (free caption gate instead).
  * - Budget exhausted → remaining images are not inspected (not passed).
  * - A failed batch call rejects that batch (fail-closed, never fail-open).
  */
 export async function runVisionGate(
   items: FetchedCandidate[],
-  apiKey: string,
+  route: IssueVisionRoute,
   budget: VisionGateBudget,
   ctx: VisionSubjectContext,
   earlyExitAt?: number,
@@ -194,7 +173,7 @@ export async function runVisionGate(
     const batch = items.slice(i, i + Math.min(BATCH_SIZE, remainingBudget));
     budget.inspected += batch.length;
     try {
-      const verdicts = await judgeBatch(batch, apiKey, ctx);
+      const verdicts = await judgeBatch(batch, route, ctx);
       batch.forEach((item, idx) => {
         if (verdicts[idx]?.clean) {
           // 단독 인물 여부를 후보에 실어 보낸다 — 랭킹에서 콜라주보다 앞세운다.
