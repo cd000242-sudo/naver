@@ -6,7 +6,7 @@ import {
     fetchKeywordVolumes,
     fetchRankByTabs,
     type TabRank,
-    fetchPostAnalysis,
+    fetchPostChecklist,
     type BlogAuditPost,
     type EngineExposure,
     type KeywordUsage,
@@ -14,7 +14,7 @@ import {
     type SeoChecklist,
     type RankResult,
 } from '../../lib/keywordApi';
-import { bridgePostAnalyze } from '../../lib/bridge';
+import { bridgeFailureNote, bridgePostAnalyze } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
 import { ErrorNote, TabIntro, UsageBar } from './LewordShared';
 
@@ -249,18 +249,9 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
         message?: string;
     }>({ status: 'loading' });
 
-    /*
-     * 앱에서만 도는 엔진들(사장님 지시 2026-08-28 "제미나이를 사용할 수 있게 해 줘").
-     *
-     * 제미나이·코덱스·그록은 그 PC 의 구독 로그인이라 사이트 서버가 쓸 자격이 없다.
-     * 이걸 고른 사람의 진단은 앱으로 돌린다 — 서버가 몰래 클로드로 갈아타 주는 것은
-     * 고른 엔진으로 돌아야 한다는 요구를 어기는 것이다.
-     */
-    const APP_ONLY_ENGINES = ['gemini', 'codex', 'grok'];
-
     /**
-     * 앱(본인 구독)으로 진단한다. 성공하면 화면에 담고 true.
-     * picked 가 비어 있으면 앱이 연동된 순서대로 고른다.
+     * 앱(본인 구독)으로 진단한다. 성공하면 화면에 담고 done.
+     * picked 가 비어 있으면 앱이 연동된 순서대로 고른다. 실패하면 앱이 잰 체크리스트가 있을 때 함께 돌려준다.
      */
     const analyzeViaApp = async (row: AuditRow, picked: string, keys: Record<string, string>) => {
         const viaApp = await bridgePostAnalyze({
@@ -282,14 +273,13 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 data: viaApp.analysis as PostAnalysis,
                 checklist: (viaApp.checklist as SeoChecklist) || undefined,
             });
-            return { done: true, why: '' };
+            return { done: true, why: '', checklist: undefined };
         }
-        const why = viaApp.status === 'offline'
-            ? 'LEWORD 앱이 꺼져 있습니다 — 앱을 켠 뒤 다시 눌러 주세요.'
-            : viaApp.status === 'outdated'
-                ? 'LEWORD 앱이 이 기능이 실리기 전 버전입니다 — 앱을 최신으로 올린 뒤 다시 눌러 주세요.'
-                : `앱에서 진단하지 못했습니다: ${viaApp.status === 'error' ? viaApp.message : ''}`;
-        return { done: false, why };
+        return {
+            done: false,
+            why: bridgeFailureNote(viaApp, '앱에서 진단하지 못했습니다'),
+            checklist: viaApp.status === 'error' ? (viaApp.checklist as SeoChecklist | undefined) || undefined : undefined,
+        };
     };
 
     const openAnalysis = async (row: AuditRow) => {
@@ -298,16 +288,16 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
         const keys = loadUserKeys() as Record<string, string>;
         const picked = String(keys.aiProvider || '');
         /*
-         * 고른 엔진이 앱에서만 도는 것이면 곧장 앱으로 간다. 조용히 사이트 엔진으로
-         * 갈아타지 않는다 — 고른 것과 다른 엔진이 돌아 놓고 그 사실이 안 보인다.
+         * AI 진단은 이 PC 의 LEWORD 앱으로만 돈다(사장님 결정 2026-09-16 "브리지 전용으로 정리").
+         * 앱이 워커에서 실측·체크리스트를 받아 고른 구독으로 진단까지 해 온다 — 사이트에는 구독 토큰이 없다.
          */
-        if (APP_ONLY_ENGINES.includes(picked)) {
-            const viaApp = await analyzeViaApp(row, picked, keys);
-            if (viaApp.done) return;
-            setAnalyzeState({ status: 'error', message: `${picked}은(는) 이 PC 의 앱에서 도는 구독 엔진입니다. ${viaApp.why}` });
-            return;
-        }
-        const result = await fetchPostAnalysis({
+        const viaApp = await analyzeViaApp(row, picked, keys);
+        if (viaApp.done) return;
+        /*
+         * 앱이 못 하면 AI 진단만 멈춘다. 체크리스트는 AI 가 아니라 실측이라 그대로 보여 준다 —
+         * 앱이 잰 것이 있으면 그것을, 없으면(앱 꺼짐·구버전·앱 실패) 워커에서 AI 없이 받는다(aiVia 'app').
+         */
+        const checklist = viaApp.checklist || await fetchPostChecklist({
             title: row.title,
             link: row.link,
             platform: audit?.platform,
@@ -318,32 +308,12 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
             titleRank: row.rank,
             titleRankMeasured: row.titleRankMeasured !== false,
             engines: row.engines || null,
-        });
-        if (result.ok && result.data) {
-            /*
-             * 체크리스트만 와도 '완료'다 — AI 엔진이 없으면 수정 방향만 빠진다.
-             * 실측 점수를 못 보여 줄 이유가 없다.
-             */
-            setAnalyzeState({
-                status: 'done',
-                data: result.data.analysis,
-                checklist: result.data.checklist,
-                message: result.data.needsEngine ? result.data.message : undefined,
-            });
+        }).then((res) => (res.ok ? res.data?.checklist : undefined));
+        if (checklist) {
+            setAnalyzeState({ status: 'done', data: null, checklist, message: `AI 진단은 하지 못했습니다 — ${viaApp.why}` });
             return;
         }
-        /*
-         * 사이트가 못 하면 **앱으로 넘긴다**(사장님 실측 2026-08-28: 클로드 토큰이
-         * 취소돼 "연동된 엔진이 모두 실패했습니다"만 떴다). 앱에 연동된 구독이
-         * 멀쩡한데 사이트 토큰 하나 죽었다고 멈출 이유가 없다 — 레이더가 이미
-         * 쓰는 길이다. 앱까지 안 되면 두 사유를 함께 보여 준다.
-         */
-        const viaApp = await analyzeViaApp(row, picked, keys);
-        if (viaApp.done) return;
-        setAnalyzeState({
-            status: 'error',
-            message: `${result.message || result.error || '진단 실패'} · ${viaApp.why}`,
-        });
+        setAnalyzeState({ status: 'error', message: viaApp.why });
     };
 
     /*

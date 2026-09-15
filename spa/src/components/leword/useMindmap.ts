@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { bridgeMindmap, type BridgeMindmap } from '../../lib/bridge';
-import { fetchMindmapAI } from '../../lib/keywordApi';
-import { loadUserKeys } from '../../lib/userKeys';
 import type { MindmapEntry, PreemptionRow } from './PreemptionCard';
 
 /**
  * 카드의 '마인드맵 확장키워드' 상태 — 황금키워드 탭에서 떼어 냈다(2026-09-03).
  *
  * 실검 틈새 탭이 같은 카드(PreemptionCard)를 쓰게 되면서 이 로직도 같이 써야 했다.
- * 내용은 그대로 옮겼다: 회차가 구운 실측 풀이 1순위, 토큰이 있으면 서버 추론,
- * 없으면 LEWORD 앱 브리지. 확장어를 지어내지 않는다.
+ * 내용은 그대로 옮겼다: 회차가 구운 실측 풀이 1순위, 라이브 추론은 LEWORD 앱 브리지로만
+ * (사장님 결정 2026-09-16 "브리지 전용"). 확장어를 지어내지 않는다.
  */
 export function useMindmap() {
     /*
@@ -63,17 +61,20 @@ export function useMindmap() {
 
         try {
             /*
-             * 토큰이 있으면 앱 없이 서버 추론(사장님 확정 2026-08-20 — 연동은
-             * 하나여야 한다). 없을 때만 LEWORD 앱 브리지를 찾는다.
+             * 라이브 추론은 LEWORD 앱 브리지로만 돈다(사장님 결정 2026-09-16 "브리지 전용으로 정리").
+             * 사이트는 구독 토큰을 들고 있지 않다. 앱 꺼짐과 구버전은 가려서 안내한다.
              */
-            const viaToken = loadUserKeys().claudeToken
-                ? await fetchMindmapAI(keyword).then((res) => (res.ok ? (res.data?.result as BridgeMindmap | undefined) || null : null)).catch(() => null)
-                : null;
-            const result = viaToken || await bridgeMindmap(keyword);
-            if (!result) {
-                if (!baked) setMindmap((prev) => ({ ...prev, [keyword]: { status: 'offline' } }));
+            const live = await bridgeMindmap(keyword);
+            if (live.status !== 'ok') {
+                if (!baked) {
+                    setMindmap((prev) => ({
+                        ...prev,
+                        [keyword]: live.status === 'error' ? { status: 'error', error: live.message } : { status: live.status },
+                    }));
+                }
                 return;
             }
+            const result = live.result;
             setMindmap((prev) => ({ ...prev, [keyword]: { status: 'done', data: result } }));
 
             /*
@@ -106,7 +107,7 @@ export function useMindmap() {
                         [keyword]: {
                             ...entry,
                             related: (entry.related || []).map((r) => (r.keyword === target
-                                ? (sub ? { keyword: target, status: 'done' as const, data: sub } : { keyword: target, status: 'error' as const })
+                                ? (sub && sub.status === 'ok' ? { keyword: target, status: 'done' as const, data: sub.result } : { keyword: target, status: 'error' as const })
                                 : r)),
                         },
                     };

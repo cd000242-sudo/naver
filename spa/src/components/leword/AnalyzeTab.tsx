@@ -5,7 +5,6 @@ import {
     fetchKeywordDocs,
     fetchKeywordExpansions,
     fetchKeywordFrontal,
-    fetchKeywordPostIdeas,
     formatCount,
     getStoredLicense,
     setStoredLicense,
@@ -14,8 +13,7 @@ import {
     type KinPostIdea,
 } from '../../lib/keywordApi';
 import { expansionTier, frontalCount, tierHeading, FRONTAL_SATURATION } from '../../lib/expansionTier';
-import { claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked, siteCanGenerate } from '../../lib/claudeAuthPolicy';
-import { bridgePostIdeas } from '../../lib/bridge';
+import { bridgeFailureNote, bridgePostIdeas, usablePostIdeas } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
 import { ErrorNote, MetricCell, TabIntro, UsageBar } from './LewordShared';
 import { groupByIntent } from '../../lib/intentGroups';
@@ -344,34 +342,13 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
      *
      * 유튜브 글감과 같은 경로를 쓴다. 한 번에 키워드·왜 나오는지·누가 왜 클릭하는지·
      * SEO 제목·홈판 제목이 같이 온다 — 셋이 한 자리에서 풀린다.
-     * 서버(사이트 토큰) 먼저, 안 되면 앱(본인 구독)으로 넘어간다.
+     * 앱(본인 구독)으로만 만든다(사장님 결정 2026-09-16 "브리지 전용") — 사이트에는 구독 토큰이 없다.
      */
     const [ideas, setIdeas] = useState<{ status: 'idle' | 'loading' | 'done' | 'error'; list?: KinPostIdea[]; message?: string }>({ status: 'idle' });
     const makeIdeas = async () => {
         if (!result || ideas.status === 'loading') return;
         setIdeas({ status: 'loading' });
         const context = boardRow?.whySearch?.text || '';
-        /*
-         * 정책 차단이 확인됐으면 사이트 토큰 경로를 건너뛴다(2026-09-07) — 앤트로픽이
-         * 구독 토큰의 외부 사용을 막아서 매번 헛걸음이다. 앱 폴백은 아래에 이미 있다.
-         */
-        const viaKeys = (claudePolicyBlocked() || !siteCanGenerate(loadUserKeys()))
-            ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
-            : await fetchKeywordPostIdeas(result.keyword, context);
-        if (viaKeys.ok && viaKeys.data?.ideas?.length) {
-            setIdeas({ status: 'done', list: viaKeys.data.ideas });
-            return;
-        }
-        if (isClaudePolicyBlocked(viaKeys.message)) markClaudePolicyBlocked();
-        /*
-         * 사이트가 실패해도 **앱을 한 번 더 시도한다**(사장님 실측 2026-08-28:
-         * 클로드 토큰이 취소돼 "연동된 엔진이 모두 실패했습니다"만 떴다).
-         * 예전에는 needs-keys 가 아닌 실패면 여기서 멈춰서, 앱에 연동된 구독이
-         * 멀쩡한데도 사이트 토큰 하나 죽었다고 통째로 죽었다.
-         * 앱까지 실패하면 아래에서 두 사유를 함께 보여 준다.
-         */
-        const siteWhy = viaKeys.error && viaKeys.error !== 'needs-keys'
-            ? (viaKeys.message || viaKeys.error) : '';
         const viaApp = await bridgePostIdeas({
             kind: 'keyword',
             keyword: result.keyword,
@@ -379,27 +356,13 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
             provider: String(loadUserKeys().aiProvider || ''),
         });
         if (viaApp.status === 'ok') {
-            const usable = viaApp.ideas
-                .filter((idea) => idea.seo && idea.home)
-                .map((idea) => ({
-                    keyword: idea.keyword,
-                    why: idea.why || '',
-                    clickWhy: idea.clickWhy,
-                    seo: idea.seo as string,
-                    home: idea.home as string,
-                    sub: idea.sub,
-                }));
+            const usable = usablePostIdeas(viaApp.ideas);
             setIdeas(usable.length > 0
                 ? { status: 'done', list: usable }
                 : { status: 'error', message: `${viaApp.provider} 가 제목을 못 만들었습니다 — 다시 눌러 주세요.` });
             return;
         }
-        const appWhy = viaApp.status === 'outdated'
-            ? 'LEWORD 앱이 구버전이라 이 기능이 없습니다 — 앱을 업데이트해 주세요.'
-            : viaApp.status === 'offline'
-                ? 'LEWORD 앱을 켜면 본인 구독으로 바로 만듭니다. 앱 없이 쓰려면 내 API 키 탭에서 클로드 [연동]을 눌러 주세요.'
-                : `만들지 못했습니다: ${viaApp.message}`;
-        setIdeas({ status: 'error', message: siteWhy ? `${siteWhy} · ${appWhy}` : appWhy });
+        setIdeas({ status: 'error', message: bridgeFailureNote(viaApp, '만들지 못했습니다') });
     };
     // 보드 지식인 실측(조회수 포함)이 있으면 그것이 우선이다 — API 는 조회수를 못 준다.
     const kinList = (boardRow?.kinTop?.length ? boardRow.kinTop : result?.kinTop) || [];

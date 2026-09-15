@@ -9,6 +9,8 @@
  * 사장님 키로 돌리는 무료 이용자와 쿼터가 섞이지 않는다.
  */
 
+import { purgeLegacyClaudeStorage, stripLegacyClaudeFields } from './legacyClaudeState.mjs';
+
 const STORE_KEY = 'leaderspro.keyword.userKeys.v1';
 
 export type UserKeyField =
@@ -21,12 +23,8 @@ export type UserKeyField =
     | 'coupangAccessKey'
     | 'coupangSecretKey'
     | 'coupangSubId'
-    | 'claudeToken'
     /** 사용자가 고른 생성 엔진(claude|codex|gemini|grok). 비면 클로드 우선. */
     | 'aiProvider'
-    /** 회전식 refresh 토큰 — 만료 시 서버가 갱신하고 화면이 다시 저장한다. 손입력 UI 없음. */
-    | 'claudeRefresh'
-    | 'claudeExpiresAt'
     | 'geminiKey'
     | 'openaiKey'
     /** 그록(xAI) API 키 — 앱 없이 서버가 부른다. */
@@ -148,7 +146,8 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
 export function loadUserKeys(): UserKeys {
     try {
         const parsed = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
-        return parsed && typeof parsed === 'object' ? parsed : {};
+        // 옛 클로드 구독 토큰 칸은 읽는 순간 뺀다(사장님 결정 2026-09-16) — 어떤 호출부도 그 값을 들고 나가지 못하게.
+        return parsed && typeof parsed === 'object' ? stripLegacyClaudeFields(parsed) : {};
     } catch {
         return {};
     }
@@ -159,7 +158,8 @@ export function saveUserKeys(keys: UserKeys): void {
         // 빈 값은 저장하지 않는다. 빈 문자열이 남아 있으면 서버가 "넣었다"고
         // 착각해 사장님 키로 넘어가는 폴백을 막아 버린다.
         const cleaned: UserKeys = {};
-        for (const [field, value] of Object.entries(keys)) {
+        // 옛 클로드 구독 토큰 칸은 다시 저장하지 않는다 — 넘어온 묶음에 섞여 있어도 여기서 빠진다.
+        for (const [field, value] of Object.entries(stripLegacyClaudeFields(keys))) {
             const trimmed = String(value || '').trim();
             if (trimmed) cleaned[field as UserKeyField] = trimmed;
         }
@@ -176,6 +176,18 @@ export function clearUserKeys(): void {
         localStorage.removeItem(STORE_KEY);
     } catch {
         // noop
+    }
+}
+
+/**
+ * 새 사이트가 열릴 때 옛 클로드 구독 토큰과 그 표식을 저장소에서 지운다(사장님 결정 2026-09-16 "브리지 전용으로 정리").
+ * 키 묶음에서 토큰 칸을 실제로 지웠으면 참 — 계정 동기화가 켜져 있으면 뺀 묶음을 다시 올려 서버 암호문에서도 없애야 한다.
+ */
+export function purgeLegacyClaudeState(): boolean {
+    try {
+        return purgeLegacyClaudeStorage(localStorage, STORE_KEY);
+    } catch {
+        return false;
     }
 }
 

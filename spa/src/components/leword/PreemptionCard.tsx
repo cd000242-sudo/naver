@@ -3,7 +3,7 @@ import BoardCardHead from './BoardCardHead';
 import TrendSparkline from './TrendSparkline';
 import { naverSearchUrl } from './preemptionMeta';
 import type { DemandPoint } from './DemandChartModal';
-import type { BridgeMindmap } from '../../lib/bridge';
+import { BRIDGE_OFFLINE_NOTE, BRIDGE_OUTDATED_NOTE, type BridgeMindmap } from '../../lib/bridge';
 import { formatCount } from '../../lib/keywordApi';
 
 /**
@@ -150,7 +150,8 @@ export type PreemptionRow = {
 };
 
 export type MindmapEntry = {
-    status: 'loading' | 'done' | 'offline' | 'error';
+    /** offline = 앱 꺼짐(연결 실패) · outdated = 앱은 켜져 있는데 마인드맵 경로가 없는 구버전. */
+    status: 'loading' | 'done' | 'offline' | 'outdated' | 'error';
     data?: BridgeMindmap;
     error?: string;
     /** 자동 연쇄 — 검색량 상위 연관을 경량 분석한 결과가 순서대로 쌓인다. */
@@ -556,11 +557,12 @@ function PreemptionCard({
                     {/* 하단 트렌드 뷰는 그래프 자동화(카드 상단 스파크)로 대체 — 버튼과 함께 제거. */}
 
                     {/* 마인드맵 결과 — 중심 키워드에서 실측 확장어가 갈라져 나온다. */}
-                    {mindmap?.status === 'offline' && (
+                    {(mindmap?.status === 'offline' || mindmap?.status === 'outdated') && (
                         <div className="lw-forge lw-forge-ai">
                             <div className="lw-forge-subs">
-                                LEWORD 앱이 꺼져 있습니다 — 앱을 켜면 마인드맵이 <strong>내 클로드코드 구독</strong>으로
-                                확장됩니다. <a href="/download">⬇ 앱 받기</a>
+                                {/* 앱 꺼짐과 구버전을 가려서 말한다 — 문구는 lib/bridge.ts 한 곳에서 온다(2026-09-16). */}
+                                {mindmap?.status === 'outdated' ? BRIDGE_OUTDATED_NOTE : BRIDGE_OFFLINE_NOTE}{' '}
+                                <a href="/download">{mindmap?.status === 'outdated' ? '⬇ 최신 앱 받기' : '⬇ 앱 받기'}</a>
                             </div>
                         </div>
                     )}

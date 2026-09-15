@@ -263,12 +263,7 @@ function LewordStyles() {
             .lw-usage-head button:hover:not(:disabled) { border-color: rgba(124,92,255,.5); color: #fff; }
             .lw-usage-head button:disabled { opacity: .5; cursor: not-allowed; }
             .lw-usage-row { display: flex; align-items: center; gap: 9px; margin-top: 6px; font-size: 12.5px; }
-            .lw-usage-label { width: 38px; color: rgba(235,242,250,.66); flex: none; }
-            .lw-usage-bar { flex: 1; height: 7px; min-width: 60px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; }
-            /* 채움은 transform 으로 늘린다 — width 를 애니메이션하면 매 프레임 레이아웃을 다시 잰다.
-               둥근 끝은 트랙이 overflow:hidden 으로 깎아 주므로 채움엔 radius 를 두지 않는다. */
-            .lw-usage-bar i { display: block; width: 100%; height: 100%; transform-origin: left center; transition: transform .3s ease; }
-            .lw-usage-pct { width: 42px; text-align: right; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; flex: none; }
+            .lw-usage-label { width: 56px; color: rgba(235,242,250,.66); flex: none; }
             .lw-usage-reset { color: #646b7d; white-space: nowrap; flex: none; }
             /*
              * 유튜브 빈자리 — 영상 / 실측 / 글감 3단(사장님 지정 배치 2026-08-20).
@@ -366,19 +361,6 @@ function LewordStyles() {
                 color: #cfc2ff; border-bottom: 1px solid rgba(207,194,255,.35);
             }
             .lw-metric-verdict { padding: 3px 10px; border-radius: 8px; font-weight: 800; font-size: 12px; }
-            .lw-reconnect-back { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; padding: 4vh 4vw; background: rgba(4,6,10,.78); }
-            .lw-reconnect { width: 100%; max-width: 420px; padding: 22px; border: 1px solid rgba(255,165,0,.35); border-radius: 15px; background: #10131a; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
-            .lw-reconnect h3 { margin: 0 0 8px; font-size: 18px; color: #fff; }
-            .lw-reconnect p { margin: 0 0 14px; font-size: 13.5px; color: rgba(235,242,250,.7); line-height: 1.6; }
-            .lw-reconnect-why { display: block; margin-top: 7px; font-style: normal; font-size: 12px; color: #646b7d; font-family: ui-monospace, monospace; }
-            .lw-reconnect ol { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 11px; }
-            .lw-reconnect li span { display: block; margin-bottom: 6px; font-size: 13px; color: rgba(235,242,250,.8); }
-            .lw-reconnect input { width: 100%; padding: 11px 13px; border-radius: 9px; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.04); color: #ebf2fa; font-family: ui-monospace, monospace; font-size: 13px; }
-            .lw-reconnect-err { color: #ff6b81 !important; }
-            .lw-reconnect-row { display: flex; gap: 9px; }
-            .lw-reconnect-cta { padding: 11px 18px; border: 0; border-radius: 9px; background: linear-gradient(135deg, #ffa500, #ffc247); color: #1a1206; font-size: 13.5px; font-weight: 700; cursor: pointer; font-family: inherit; }
-            .lw-reconnect-cta:disabled { opacity: .55; cursor: not-allowed; }
-            .lw-reconnect-ghost { padding: 11px 16px; border: 1px solid rgba(255,255,255,.16); border-radius: 9px; background: transparent; color: rgba(235,242,250,.7); font-size: 13.5px; cursor: pointer; font-family: inherit; }
             .lw-linktag {
                 padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 700;
                 background: rgba(255,255,255,.07); color: rgba(235,242,250,.6);
@@ -537,9 +519,6 @@ function LewordStyles() {
                 .lw-yt-meta { margin-left: 0; flex-basis: 100%; }
             }
             .lw-usage-err { margin: 4px 0 0; color: #ff6b81; font-size: 12.5px; }
-            .lw-usage-warn { margin: 9px 0 0; padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(245,197,24,.32); background: rgba(245,197,24,.07); color: rgba(235,242,250,.82); font-size: 12.5px; line-height: 1.55; }
-            .lw-usage-warn.hard { border-color: rgba(255,107,129,.36); background: rgba(255,107,129,.08); }
-            .lw-usage-warn b { color: #fff; }
             .lw-usage-foot { margin: 9px 0 0; color: #646b7d; font-size: 11.5px; }
             .lw-usage-foot b { color: rgba(235,242,250,.75); font-weight: 700; }
             @media (max-width: 560px) {
@@ -594,8 +573,6 @@ function LewordStyles() {
                좁은 화면에서 줄바꿈되도록 nowrap 을 풀고 오른쪽 정렬로 붙인다. */
             .lw-engine-state { font-size: 12px; font-weight: 700; color: rgba(235,242,250,.55); text-align: right; max-width: 230px; line-height: 1.45; }
             .lw-engine-state.ok { color: #2ecc71; }
-            /* 앱에만 연동된 상태 — 초록이 아니라 "할 일이 남았다"는 색으로 구분한다. */
-            .lw-engine-state.half { color: #f0b53f; }
 
             /* 연동 순서 — 무엇을 먼저 해야 하는지가 화면에 없어서 생긴 혼선을 없앤다. */
             .lw-connect-steps { margin: 0 0 12px; padding: 14px 16px 14px 34px; border: 1px solid rgba(255,165,0,.28); border-radius: 12px; background: rgba(255,165,0,.05); display: grid; gap: 7px; }
@@ -633,11 +610,6 @@ function LewordStyles() {
              * 이 줄의 버튼을 플로팅보다 위로 올려 클릭을 되찾는다.
              */
             .lw-engine-actions { display: flex; gap: 6px; position: relative; z-index: 10002; }
-            .lw-engine-key { grid-column: 1 / -1; display: flex; align-items: flex-end; gap: 10px; margin-top: 4px; }
-            .lw-engine-key label { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; color: rgba(235,242,250,.6); }
-            .lw-engine-key input { width: 100%; padding: 8px 11px; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; font-family: Consolas, monospace; }
-            .lw-engine-key input:focus { outline: none; border-color: rgba(255,165,0,.5); }
-            .lw-engine-key a { flex: none; font-size: 11.5px; color: #69b7ff; text-decoration: none; padding-bottom: 9px; }
             @media (max-width: 720px) {
                 .lw-engine-row { grid-template-columns: minmax(0, 1fr); }
                 .lw-engine-actions { justify-content: flex-start; }
@@ -654,15 +626,6 @@ function LewordStyles() {
             .lw-agent-login { margin-left: 7px; padding: 2px 8px; border: 1px solid rgba(255,255,255,.2); border-radius: 6px; background: none; color: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
             .lw-agent-login:hover { border-color: rgba(255,165,0,.55); color: #fff; }
             .lw-agent-login:disabled { opacity: .5; cursor: default; }
-
-            /* 클로드 구독 연결(버튼 한 번) */
-            .lw-claude-connect { display: flex; flex-direction: column; gap: 9px; margin-bottom: 12px; }
-            .lw-claude-steps { padding: 12px 14px; border: 1px solid rgba(255,165,0,.32); border-radius: 11px; background: rgba(255,165,0,.06); }
-            .lw-claude-steps p { margin: 0 0 9px; font-size: 13px; color: #ebf2fa; line-height: 1.6; }
-            .lw-claude-steps b { color: #ffa500; }
-            .lw-claude-code { display: flex; gap: 8px; }
-            .lw-claude-code input { flex: 1; min-width: 0; padding: 9px 12px; border: 1px solid rgba(255,255,255,.14); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 13px; }
-            .lw-claude-code input:focus { outline: none; border-color: rgba(255,165,0,.5); }
 
             .lw-kg-bridge { margin: 6px 0 10px; font-size: 12.5px; color: rgba(235,242,250,.6); }
             .lw-kg-bridge.ok { color: #2ecc71; }

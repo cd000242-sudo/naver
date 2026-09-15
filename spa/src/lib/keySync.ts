@@ -12,6 +12,7 @@
  */
 import { hasAnyUserKey, loadUserKeys, saveUserKeys, type UserKeys } from './userKeys';
 import { callWorkerRaw } from './keywordApi';
+import { hasLegacyClaudeFields, stripLegacyClaudeFields } from './legacyClaudeState.mjs';
 
 const SYNC_KEY = 'leaderspro.keysync.v1';
 const PBKDF2_ITERATIONS = 150_000;
@@ -84,8 +85,10 @@ export async function pushUserKeysDetailed(keys: UserKeys = loadUserKeys()): Pro
     const record = loadRecord();
     if (!record || !cryptoOk()) return { ok: false, count: 0, slotId: null };
     try {
-        const count = Object.values(keys).filter((v) => typeof v === 'string' && v.trim()).length;
-        const blob = count > 0 ? await encryptKeys(record, keys) : '';
+        // 옛 클로드 구독 토큰 칸은 암호문에 싣지 않는다(사장님 결정 2026-09-16) — 넘어온 묶음에 섞여 있어도 여기서 뺀다.
+        const clean = stripLegacyClaudeFields(keys);
+        const count = Object.values(clean).filter((v) => typeof v === 'string' && v.trim()).length;
+        const blob = count > 0 ? await encryptKeys(record, clean) : '';
         const res = await callWorkerRaw('user-keys-put', { slot: record.slot, blob });
         return { ok: Boolean(res && res.ok), count, slotId: record.slot.slice(0, 6) };
     } catch { return { ok: false, count: 0, slotId: record.slot.slice(0, 6) }; }
@@ -153,9 +156,18 @@ export async function pullUserKeys(options: { waitMs?: number; onWait?: (elapsed
             savedAt = res && typeof res.savedAt === 'number' ? res.savedAt : null;
         }
         if (!blob) return { status: 'none', filled: 0, savedAt: null };
-        const remote = await decryptKeys(record, blob);
-        if (!remote) return { status: 'wrong-password', filled: 0, savedAt };
-        if (!hasAnyUserKey(remote)) return { status: 'none', filled: 0, savedAt };
+        const received = await decryptKeys(record, blob);
+        if (!received) return { status: 'wrong-password', filled: 0, savedAt };
+        /*
+         * 옛 사이트가 올린 암호문에는 클로드 구독 토큰이 들어 있을 수 있다(사장님 결정 2026-09-16).
+         * 받은 묶음에서 버리고, 동기화가 켜진(로그인한) 상태이므로 뺀 묶음을 곧바로 다시 올려 서버 암호문에서도 없앤다.
+         */
+        const legacy = hasLegacyClaudeFields(received);
+        const remote = stripLegacyClaudeFields(received);
+        if (!hasAnyUserKey(remote)) {
+            if (legacy) await pushUserKeys(loadUserKeys());
+            return { status: 'none', filled: 0, savedAt };
+        }
         const local = loadUserKeys();
         let filled = 0;
         const merged: UserKeys = { ...remote, ...local };
@@ -163,6 +175,7 @@ export async function pullUserKeys(options: { waitMs?: number; onWait?: (elapsed
             if (!local[field as keyof UserKeys] && value) filled += 1;
         }
         saveUserKeys(merged); // 저장 이벤트 → 합친 결과가 다시 올라간다
+        if (legacy) await pushUserKeys(loadUserKeys());
         return { status: 'merged', filled, savedAt };
     } catch { return { status: 'unavailable', filled: 0, savedAt: null }; }
 }

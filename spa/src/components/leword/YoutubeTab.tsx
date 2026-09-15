@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { fetchGapTopics, fetchKeywordPostIdeas, fetchYoutubeTrending, formatCount, type KinPostIdea, type LiveTrendingVideo } from '../../lib/keywordApi';
-import { bridgePostIdeas } from '../../lib/bridge';
+import { fetchYoutubeTrending, formatCount, type KinPostIdea, type LiveTrendingVideo } from '../../lib/keywordApi';
+import { bridgeFailureNote, bridgeGapTopics, bridgePostIdeas, usablePostIdeas } from '../../lib/bridge';
 import { loadUserKeys } from '../../lib/userKeys';
-import { claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked, siteCanGenerate } from '../../lib/claudeAuthPolicy';
 import { cleanYoutubeSnapshot } from '../../lib/youtubeTopicQuality.mjs';
 import { TabIntro } from './LewordShared';
 
@@ -181,21 +180,23 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
      * 에이전트 주제 판정(사장님 지시 2026-08-21 "API 가 아니지, 에이전트가
      * 있으니까"). 규칙·광고경쟁 실측 위에 얹는다. 같은 수집분은 다시 묻지
      * 않는다 — 캐시 열쇠가 collectedAt 이라 새 수집이 오면 새로 판정한다.
+     *
+     * 판정은 이 PC 의 LEWORD 앱이 내 구독으로 한다(사장님 결정 2026-09-16 "브리지 전용으로 정리").
+     * 앱이 꺼져 있거나 구버전이면 조용히 규칙 분류만 쓴다 — 보조 판정이라 안내를 띄우지 않는다.
      */
     useEffect(() => {
         if (!data || data.rows.length === 0) return;
-        const keys = loadUserKeys();
-        if (!keys.claudeToken && !keys.geminiKey && !keys.openaiKey) return;
         const cacheKey = `leaderspro.ytgap.aitopics.${data.collectedAt}`;
         try {
             const cached = localStorage.getItem(cacheKey);
             if (cached) { setAiTopics(JSON.parse(cached)); return; }
         } catch { /* 캐시가 깨졌으면 새로 판정 */ }
         let cancelled = false;
-        fetchGapTopics(data.rows.map((row) => row.keyword)).then((result) => {
-            if (cancelled || !result.ok || !result.data) return;
+        // 앱이 60개까지만 판정한다 — 본문 한도를 넘기지 않게 여기서도 같은 수로 자른다.
+        bridgeGapTopics(data.rows.slice(0, 60).map((row) => row.keyword), String(loadUserKeys().aiProvider || '')).then((result) => {
+            if (cancelled || result.status !== 'ok') return;
             const map: Record<string, string[]> = {};
-            for (const verdict of result.data.topics) {
+            for (const verdict of result.result.topics) {
                 const topics = [];
                 if (verdict.shopping) topics.push('shopping');
                 if (verdict.policy) topics.push('policy');
@@ -211,38 +212,16 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const topicsFor = (row: GapRow) => [...new Set([...(row.topics || []), ...(aiTopics[row.keyword] || [])])];
 
     /*
-     * 글감 추론 — 서버(사이트 토큰) 먼저, 안 되면 **앱(본인 구독)** 으로 넘긴다.
+     * 글감 추론 — **앱(본인 구독)** 으로만 만든다(사장님 결정 2026-09-16 "브리지 전용으로 정리").
      *
-     * 왜 폴백이 필요한가(사장님 지적 2026-08-22 "연동이 문제 있으면 절대 안 된다"):
-     * 코덱스·제미나이·그록은 이 PC 의 CLI 로그인이라 클라우드 워커가 못 쓴다.
-     * 앱에서 네 엔진이 전부 "연동됨"인데 이 카드만 "연동하세요"를 띄우고 있었다.
-     * 사용자가 고른 엔진을 그대로 앱에 넘긴다 — 몰래 다른 엔진으로 갈아타지 않는다.
+     * 예전엔 서버(사이트 토큰) 먼저, 안 되면 앱이었다. 코덱스·제미나이·그록은 이 PC 의 CLI
+     * 로그인이라 원래 앱만 쓸 수 있었고, 이제는 사이트가 구독 토큰을 들고 있지 않아 클로드도 같다.
+     * 사용자가 고른 엔진을 그대로 앱에 넘긴다.
      */
     const makeIdeas = async (row: GapRow) => {
         if (ideas[row.keyword]?.status === 'loading') return;
         setIdeas((previous) => ({ ...previous, [row.keyword]: { status: 'loading' } }));
         const done = (state: IdeaState) => setIdeas((previous) => ({ ...previous, [row.keyword]: state }));
-
-        /*
-         * 사이트는 **쓸 수 있는 자격이 있을 때만** 부른다(사장님 지시 2026-09-07
-         * "실패가 안 되어야지"). 앤트로픽이 구독 토큰의 외부 사용을 막았으므로,
-         * 클로드 토큰만 있는 상태로 부르면 거절이 확정이다 — 시도하지 않는다.
-         * 아래 앱 폴백이 이 PC 의 구독으로 대신 만든다.
-         */
-        const viaKeys = (claudePolicyBlocked() || !siteCanGenerate(loadUserKeys()))
-            ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
-            : await fetchKeywordPostIdeas(row.keyword, row.video.title);
-        if (viaKeys.ok && viaKeys.data?.ideas?.length) {
-            done({ status: 'done', ideas: viaKeys.data.ideas });
-            return;
-        }
-        const policyBlocked = viaKeys.error === 'claude-policy' || isClaudePolicyBlocked(viaKeys.message);
-        if (policyBlocked) markClaudePolicyBlocked();
-        // 서버가 실제로 실패한 것(자격·정책 문제가 아닌)은 그대로 알린다.
-        if (!policyBlocked && viaKeys.error && viaKeys.error !== 'needs-keys') {
-            done({ status: 'error', message: viaKeys.message || viaKeys.error });
-            return;
-        }
 
         const viaApp = await bridgePostIdeas({
             kind: 'keyword',
@@ -251,33 +230,13 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             provider: String(loadUserKeys().aiProvider || ''),
         });
         if (viaApp.status === 'ok') {
-            /*
-             * 제목이 빠진 글감은 화면이 쓸 수 없다 — 빈칸을 채워 넣지 않고 버린다.
-             * 전부 빠졌으면 실패로 알린다(빈 목록을 성공으로 보여주지 않는다).
-             */
-            const usable = viaApp.ideas
-                .filter((idea) => idea.seo && idea.home)
-                .map((idea) => ({
-                    keyword: idea.keyword,
-                    why: idea.why || '',
-                    clickWhy: idea.clickWhy,
-                    seo: idea.seo as string,
-                    home: idea.home as string,
-                    sub: idea.sub,
-                }));
+            const usable = usablePostIdeas(viaApp.ideas);
             done(usable.length > 0
                 ? { status: 'done', ideas: usable }
                 : { status: 'error', message: `${viaApp.provider} 가 제목을 못 만들었습니다 — 다시 눌러 주세요.` });
             return;
         }
-        done({
-            status: 'error',
-            message: viaApp.status === 'outdated'
-                ? 'LEWORD 앱이 구버전이라 이 기능이 없습니다 — 앱을 업데이트해 주세요.'
-                : viaApp.status === 'offline'
-                    ? 'LEWORD 앱을 켜면 이 PC 의 구독으로 바로 만듭니다. 앱 없이 쓰시려면 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요.'
-                    : `만들지 못했습니다: ${viaApp.message}`,
-        });
+        done({ status: 'error', message: bridgeFailureNote(viaApp, '만들지 못했습니다') });
     };
 
     const copyKeyword = async (keyword: string) => {

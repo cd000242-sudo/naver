@@ -1,6 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
-import { checkClaudeToken, exchangeClaudeOauth, fetchClaudeUsage, type ClaudeUsage } from '../../lib/keywordApi';
-import { bridgeAgentLogin, bridgeApiKeys, bridgeClaudeCredentials, probeBridge, type BridgeStatus } from '../../lib/bridge';
+import {
+    BRIDGE_OFFLINE_NOTE,
+    BRIDGE_OUTDATED_NOTE,
+    bridgeAgentLogin,
+    bridgeAgentUsage,
+    bridgeApiKeys,
+    probeBridge,
+    type BridgeAgentUsage,
+    type BridgeStatus,
+} from '../../lib/bridge';
 import { enableKeySync, keySyncInfo, pullUserKeys, pushUserKeysDetailed } from '../../lib/keySync';
 import { loadSession, login } from '../../lib/lewordAuth';
 import {
@@ -15,23 +23,21 @@ import {
 import { TabIntro } from './LewordShared';
 
 /*
- * 앤트로픽은 두 개의 창으로 한도를 센다 — 5시간, 그리고 7일.
- * 둘 중 하나만 차도 막히므로 둘 다 보여 준다.
+ * 사용량은 이 PC 의 LEWORD 앱이 센 호출 수다(사장님 결정 2026-09-16) — 서비스 공식 한도(%)가 아니다.
+ * 줄 이름은 엔진 목록의 긴 이름 대신 짧게 쓴다.
  */
-const USAGE_WINDOWS = [
-    { key: 'fiveHour' as const, label: '5시간' },
-    { key: 'sevenDay' as const, label: '7일' },
-];
-/** 색은 상태 신호다 — 여유 / 조심 / 곧 막힘. */
-const usageColor = (percent: number) => (percent >= 90 ? '#ff6b81' : percent >= 70 ? '#f5c518' : '#7c5cff');
-/** 리셋 시각은 사장님 시계(KST)로 적는다. 오늘이면 시각만, 아니면 날짜까지. */
-const resetText = (iso: string | null) => {
+const USAGE_LABEL: Record<string, string> = { claude: '클로드', codex: '코덱스', gemini: '제미나이', grok: '그록' };
+/** 5시간 창이 새로 시작할 때까지 — 앱이 준 시각에서 지금을 뺀 산술이다. 지났거나 없으면 적지 않는다. */
+const resetInText = (iso: string | null) => {
     if (!iso) return '';
-    const at = new Date(iso);
-    if (Number.isNaN(at.getTime())) return '';
-    const sameDay = at.toDateString() === new Date().toDateString();
-    const time = at.toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' });
-    return sameDay ? `${time} 리셋` : `${at.toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' })} ${time} 리셋`;
+    const at = new Date(iso).getTime();
+    if (Number.isNaN(at)) return '';
+    const minutes = Math.ceil((at - Date.now()) / 60000);
+    if (minutes <= 0) return '';
+    const hours = Math.floor(minutes / 60);
+    const rest = minutes % 60;
+    const left = hours > 0 ? `${hours}시간${rest > 0 ? ` ${rest}분` : ''}` : `${rest}분`;
+    return `5시간 창 새로 시작까지 ${left}`;
 };
 
 /**
@@ -42,31 +48,26 @@ const resetText = (iso: string | null) => {
  * 엔진 목록 — 전부 **구독**으로 쓴다. API 키 칸은 없앴다(사장님 확정
  * 2026-08-20 "API 는 비용이 추가된다니까").
  *
- * 클로드만 사이트에서 토큰을 뽑을 수 있다 — 앤트로픽이 `claude setup-token`
- * 이라는 이식 가능한 구독 토큰 발급 수단을 공식 제공하기 때문이다. 코덱스·
- * 제미나이·그록은 같은 수단이 없어서(로그인이 그 PC 안에서만 끝난다) 앱이
- * 다리를 놓는다 — 이 경우에도 비용은 구독 그대로, 추가 과금 0 이다.
+ * 네 엔진 모두 이 PC 의 LEWORD 앱이 로그인을 띄우고 그 구독으로 실행한다(사장님 결정
+ * 2026-09-16 "브리지 전용으로 정리"). 사이트는 구독 토큰을 받지도 발급받지도 않는다 —
+ * 비용은 구독 그대로, 추가 과금 0 이다.
  */
 const AGENT_CHAIN = [
     {
         id: 'claude', label: '클로드코드',
-        sub: '클로드 구독 · 사이트에서 버튼 한 번(앱 불필요)',
-        webConnect: true,
+        sub: '앱에서 [연동] → 클로드 로그인 → 그 구독으로 실행(추가 비용 0)',
     },
     {
         id: 'codex', label: '코덱스 · 챗지피티 구독',
         sub: '앱에서 [연동] → 챗지피티 로그인 → 그 구독으로 실행(추가 비용 0)',
-        webConnect: false,
     },
     {
         id: 'gemini', label: '제미나이 CLI · 구글 구독',
         sub: '앱에서 [연동] → 구글 로그인 → 그 구독으로 실행(추가 비용 0)',
-        webConnect: false,
     },
     {
         id: 'grok', label: '그록 · xAI 구독',
         sub: '앱에서 [연동] → xAI 로그인 → 그 구독으로 실행(추가 비용 0)',
-        webConnect: false,
     },
 ] as const;
 
@@ -90,102 +91,6 @@ function KeysTab() {
      * 구독으로 돈다 — 키도, 추가 비용도 없다. null = 아직 확인 중.
      */
 
-    /*
-     * 구독 연결(버튼 한 번) — 클로드코드와 같은 공개 OAuth(PKCE). 승인 화면이
-     * 코드를 보여 주면 그 한 줄만 붙여넣는다(우리 도메인은 리다이렉트 허용목록에
-     * 없어 이게 물리적 최소다). refresh 토큰까지 저장돼 만료는 자동 갱신된다.
-     */
-    const [oauth, setOauth] = useState<{ verifier: string } | null>(null);
-    const [oauthCode, setOauthCode] = useState('');
-    const [oauthBusy, setOauthBusy] = useState(false);
-    const [oauthNote, setOauthNote] = useState('');
-
-    const base64url = (bytes: Uint8Array) => btoa(String.fromCharCode(...bytes))
-        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-
-    /*
-     * [연동] — 앱이 켜져 있으면 **승인 창 없이 한 번에** 끝난다.
-     *
-     * 사장님 지시 2026-08-22: "앱만 켜놓고 연동시키고 나서 사이트도 같이
-     * 연동시키면 끝나는 거 아니야?" — 맞다. 클로드 CLI 는 로그인 자격을
-     * sk-ant 토큰으로 들고 있어 사이트 서버가 그대로 쓸 수 있다. 앱에서 이미
-     * 로그인해 둔 것을 건네받으면 브라우저 승인 절차가 통째로 필요 없다.
-     * 앱이 꺼져 있거나 클로드 로그인 전이면 예전처럼 승인 창으로 간다.
-     */
-    const startClaudeConnect = async () => {
-        setOauthNote('앱에 물어보는 중…');
-        const fromApp = await bridgeClaudeCredentials();
-        if (fromApp.status === 'ok') {
-            const next = {
-                ...keys,
-                claudeToken: fromApp.token,
-                claudeRefresh: fromApp.refresh,
-                claudeExpiresAt: fromApp.expiresAt ? String(fromApp.expiresAt) : '',
-                aiProvider: keys.aiProvider || 'claude',
-            };
-            setKeys(next);
-            saveUserKeys(next);
-            setOauth(null);
-            const planText = fromApp.subscriptionType ? ` (${fromApp.subscriptionType} 구독)` : '';
-            setOauthNote(`✅ 앱에서 바로 연동했습니다${planText} — 이제 앱을 꺼도 사이트에서 전부 돕니다.`);
-            /*
-             * 바로 플랜·사용량을 잰다. 안 부르면 usage 가 초기 idle 그대로 남아
-             * 화면이 "플랜 확인 중"에서 멈춘 것처럼 보인다(사장님 지적 2026-08-22).
-             * loadUsage 는 저장소를 읽으므로 saveUserKeys 뒤에 불러야 한다.
-             */
-            void loadUsage();
-            return;
-        }
-        if (fromApp.status === 'not-logged-in') {
-            setOauthNote('앱은 켜져 있는데 클로드 로그인이 없습니다 — 앱에서 클로드 로그인을 먼저 하시거나, 아래 승인 절차로 연결하세요.');
-        } else if (fromApp.status === 'outdated') {
-            setOauthNote('앱이 구버전이라 자동 연동이 안 됩니다 — 앱을 업데이트하시거나 아래 승인 절차로 연결하세요.');
-        } else {
-            setOauthNote('앱이 꺼져 있어 승인 절차로 연결합니다 (앱을 켜면 버튼 한 번으로 끝납니다).');
-        }
-
-        const raw = new Uint8Array(32);
-        crypto.getRandomValues(raw);
-        const verifier = base64url(raw);
-        const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier)));
-        const stateRaw = new Uint8Array(24);
-        crypto.getRandomValues(stateRaw);
-        setOauth({ verifier });
-        setOauthCode('');
-        setOauthNote('');
-        const url = 'https://claude.ai/oauth/authorize?code=true'
-            + '&client_id=9d1c250a-e61b-44d9-88ed-5944d1962f5e'
-            + '&response_type=code'
-            + `&redirect_uri=${encodeURIComponent('https://platform.claude.com/oauth/code/callback')}`
-            // 범위를 줄이면 토큰은 나오는데 추론이 거부된다(무한루프 실사고 2026-08-20).
-            + `&scope=${encodeURIComponent('user:profile user:inference user:sessions:claude_code user:mcp_servers')}`
-            + `&code_challenge=${base64url(digest)}`
-            + '&code_challenge_method=S256'
-            + `&state=${base64url(stateRaw)}`;
-        window.open(url, '_blank', 'noreferrer');
-    };
-
-    const finishClaudeConnect = async () => {
-        if (!oauth || !oauthCode.trim() || oauthBusy) return;
-        setOauthBusy(true);
-        setOauthNote('');
-        const result = await exchangeClaudeOauth(oauthCode.trim(), oauth.verifier);
-        setOauthBusy(false);
-        if (!result.ok || !result.data?.accessToken) {
-            setOauthNote(`연결 실패: ${result.message || result.error || '코드를 다시 확인해 주세요'}`);
-            return;
-        }
-        const next = {
-            ...keys,
-            claudeToken: result.data.accessToken,
-            claudeRefresh: result.data.refreshToken || '',
-            claudeExpiresAt: String(result.data.expiresAt || ''),
-        };
-        setKeys(next);
-        saveUserKeys(next);
-        setOauth(null);
-        setOauthNote('✅ 연결됐습니다 — 추론·답변이 전부 구독으로, 앱 없이 돕니다. 만료는 자동 갱신됩니다.');
-    };
     /*
      * 폴백 체인 상태(사장님 지시 2026-08-20 "코덱스·제미나이 CLI·그록 연동
      * 상태를 봐야 폴백에 걸릴 거 아냐") — 앱 브리지가 네 CLI 를 실제로 찔러
@@ -255,7 +160,7 @@ function KeysTab() {
         setSyncBusy(true);
         try {
             const r = await bridgeApiKeys();
-            if (r.status !== 'ok') { setSyncNote(r.status === 'outdated' ? '앱이 구버전입니다 — 앱을 최신으로 업데이트한 뒤 다시 누르세요.' : '이 PC 에서 LEWORD 앱이 켜져 있어야 합니다.'); return; }
+            if (r.status !== 'ok') { setSyncNote(r.status === 'outdated' ? BRIDGE_OUTDATED_NOTE : '이 PC 에서 LEWORD 앱을 켠 뒤 다시 눌러 주세요 — 키는 같은 PC 의 앱에서만 가져옵니다.'); return; }
             const next: UserKeys = { ...keys };
             let added = 0;
             for (const [field, value] of Object.entries(r.keys)) {
@@ -275,6 +180,8 @@ function KeysTab() {
             await new Promise((resolve) => { setTimeout(resolve, 2000); });
         }
         setBridge(status);
+        // 사용량도 같은 버튼으로 다시 센다 — 앱을 막 켰으면 이제야 셀 수 있다.
+        void loadUsage();
     };
     /*
      * "앱이 켜져 있나"는 connected 로 판단한다.
@@ -285,20 +192,18 @@ function KeysTab() {
     const bridgeReady = typeof bridge === 'object' && bridge !== null && bridge.connected === true;
     const agentOf = (provider: string) => (bridgeReady ? (bridge.agents || []).find((agent) => agent.provider === provider) : undefined);
 
-    /** 지금 쓰기로 고른 엔진. 안 골랐으면 연동된 것 중 클로드 우선으로 본다. */
-    const activeProvider = String(keys.aiProvider || '') || (keys.claudeToken ? 'claude' : '');
+    /** 지금 쓰기로 고른 엔진. 안 골랐으면 비어 있고, 앱이 연동된 순서대로 고른다. */
+    const activeProvider = String(keys.aiProvider || '');
 
     /*
-     * 순서 안내가 "지금 어디까지 했는지"를 짚으려면 세 가지 사실이 필요하다.
-     * 전부 실측이다 — 앱이 실제로 응답했는지, 그 엔진이 실제로 쓸 수 있는지,
-     * 토큰이 실제로 저장돼 있는지.
+     * 순서 안내가 "지금 어디까지 했는지"를 짚으려면 두 가지 사실이 필요하다.
+     * 전부 실측이다 — 앱이 실제로 응답했는지, 그 엔진이 실제로 쓸 수 있는지.
      */
     const readyAgentLabels = AGENT_CHAIN
         .filter((item) => agentOf(item.id)?.available)
         .map((item) => item.label);
     const anyAgentReady = readyAgentLabels.length > 0;
     const claudeAgentReady = Boolean(agentOf('claude')?.available);
-    const hasClaudeToken = Boolean(String(keys.claudeToken || '').trim());
 
     /** 제공자별 로그인 시작 — 앱이 그 PC 에서 로그인 창을 띄운다. */
     const [loginBusy, setLoginBusy] = useState('');
@@ -313,12 +218,18 @@ function KeysTab() {
         if (switchAccount && !window.confirm(`${label}의 지금 계정 연결을 끊고 다른 계정으로 로그인합니다. 계속할까요?`)) return;
         setLoginBusy(provider);
         setLoginNote(switchAccount ? `${label}: 기존 계정 연결을 끊는 중…` : '');
-        const result = await bridgeAgentLogin(provider, switchAccount);
+        const called = await bridgeAgentLogin(provider, switchAccount);
         setLoginBusy('');
-        if (!result) {
-            setLoginNote(`${label} 로그인을 시작하지 못했습니다 — LEWORD 앱을 켠 뒤 다시 눌러 주세요(이 로그인은 내 PC 에서만 됩니다).`);
+        if (called.status !== 'ok') {
+            // 이 로그인은 내 PC 의 앱만 띄울 수 있다 — 꺼짐·구버전을 가려서 말한다.
+            setLoginNote(called.status === 'offline'
+                ? `${label} 로그인을 시작하지 못했습니다 — 이 PC 에서 LEWORD 앱을 켠 뒤 다시 눌러 주세요(이 로그인은 내 PC 에서만 됩니다).`
+                : called.status === 'outdated'
+                    ? BRIDGE_OUTDATED_NOTE
+                    : `${label} 로그인을 시작하지 못했습니다: ${called.message}`);
             return;
         }
+        const result = called.result;
         if (result.state === 'installing') setLoginNote(`${label}: 설치 중입니다(1~2분) — 끝나면 로그인 창이 열립니다. [상태 확인]으로 지켜보세요.`);
         else if (result.state === 'already') setLoginNote(`${label}: 이미 로그인돼 있습니다.`);
         else if (result.state === 'done') setLoginNote(`${label}: 로그인 완료.`);
@@ -333,17 +244,22 @@ function KeysTab() {
     };
 
     /*
-     * 구독 플랜과 남은 사용량 — 토큰이 있으면 자동으로 한 번 잰다.
-     * 확인용 요청이 4토큰짜리라 부담이 없다. 값은 전부 앤트로픽이 준 것이다.
+     * 엔진 사용량 — 이 PC 의 LEWORD 앱이 센 호출 수(사장님 결정 2026-09-16 "앱이 센 사용량으로 교체").
+     * 서비스 공식 한도(%)가 아니다. 사이트는 구독 토큰이 없어 한도를 물을 수 없고, 사실로 있는 것은
+     * 앱이 엔진을 부른 횟수뿐이다. 앱이 꺼져 있으면 세지 못했다고 그대로 말한다.
      */
-    const [usage, setUsage] = useState<{ state: 'idle' | 'loading' | 'done' | 'error'; data?: ClaudeUsage; message?: string }>({ state: 'idle' });
+    const [usage, setUsage] = useState<{
+        state: 'idle' | 'loading' | 'done' | 'offline' | 'outdated' | 'error';
+        rows?: BridgeAgentUsage[];
+        at?: Date;
+        message?: string;
+    }>({ state: 'idle' });
     const loadUsage = useCallback(async () => {
-        const token = String(loadUserKeys().claudeToken || '').trim();
-        if (!token) { setUsage({ state: 'idle' }); return; }
         setUsage({ state: 'loading' });
-        const result = await fetchClaudeUsage(token);
-        if (result.ok && result.data) setUsage({ state: 'done', data: result.data });
-        else setUsage({ state: 'error', message: result.message || result.error || '사용량을 못 읽었습니다.' });
+        const called = await bridgeAgentUsage();
+        if (called.status === 'ok') setUsage({ state: 'done', rows: called.result.usage, at: new Date() });
+        else if (called.status === 'error') setUsage({ state: 'error', message: called.message });
+        else setUsage({ state: called.status });
     }, []);
     useEffect(() => { void loadUsage(); }, [loadUsage]);
 
@@ -353,27 +269,6 @@ function KeysTab() {
         // 형식이 이상하면 저장하지 않는다. 자동완성으로 들어온 로그인 정보를
         // 그대로 저장하면 다음 조회에서 그게 서버로 간다.
         if (problems.length > 0) return;
-        /*
-         * 클로드 토큰은 저장 전에 **실제로 되는지** 확인한다(사장님 실사고
-         * 2026-08-20: 안 되는 값을 저장 → 생성 실패 → 자동 삭제 → 무한루프).
-         * 승인 코드를 토큰 칸에 넣는 흔한 실수도 여기서 잡아 준다.
-         */
-        const token = String(keys.claudeToken || '').trim();
-        if (token && token !== String(loadUserKeys().claudeToken || '')) {
-            if (!/^sk-ant-/.test(token)) {
-                setOauthNote('이건 토큰이 아니라 승인 코드로 보입니다 — 위 [클로드 구독 연결] 버튼을 누른 뒤 나오는 칸에 넣어 주세요.');
-                return;
-            }
-            setOauthBusy(true);
-            const checked = await checkClaudeToken(token);
-            setOauthBusy(false);
-            if (!checked.ok) {
-                setOauthNote(`이 토큰으로는 생성이 안 됩니다: ${checked.message || checked.error} — [클로드 구독 연결] 버튼으로 새로 연결해 주세요.`);
-                return;
-            }
-            setOauthNote('✅ 토큰 확인됨 — 저장했습니다.');
-            window.setTimeout(() => { void loadUsage(); }, 0);
-        }
         saveUserKeys(keys);
         setKeys(loadUserKeys());
         setSaved(true);
@@ -435,9 +330,9 @@ function KeysTab() {
             </section>
 
             {/*
-              * AI 연동 — 하나다(사장님 확정 2026-08-20). 구독 연결 버튼이 전부고,
-              * 옛 '연동하기'(앱 브리지) 버튼은 뺐다("이제 필요 없지 않아?") —
-              * 앱 브리지는 화면 뒤 폴백으로만 남는다.
+              * AI 연동 — 앱 브리지 전용(사장님 결정 2026-09-16 "브리지 전용으로 정리").
+              * 사이트는 구독 토큰을 받지도 발급받지도 않는다. 엔진 로그인은 이 PC 의 앱이 띄우고,
+              * 사이트의 AI 는 전부 그 앱을 거쳐 내 구독으로 돈다.
               */}
             <section className="lw-panel" aria-label="AI 연동">
                 <div className="lw-panel-head">
@@ -473,7 +368,7 @@ function KeysTab() {
                                 <>
                                     앱이 CLI 설치·로그인을 대신 해 주고, 생성도 이 PC 의 구독으로 대신 돌려 줍니다.{' '}
                                     <a className="lw-step-cta" href="/download">⬇ LEWORD 받기</a>
-                                    <em>앱 없이 쓰시려면 아래에서 Gemini 무료 키를 넣으세요 — 구독 토큰은 2026-09 부터 사이트에서 못 씁니다.</em>
+                                    <em>사이트의 AI(답변·글감·마인드맵·글 진단·레이더)는 앱을 거쳐서만 돕니다 — 앱이 꺼져 있으면 AI 부분만 멈추고, 검색량·문서수 같은 실측은 그대로 됩니다.</em>
                                 </>
                             )}
                     </li>
@@ -497,42 +392,23 @@ function KeysTab() {
                     </li>
                 </ol>
                 <p className="lw-card-note" style={{ marginBottom: 12 }}>
-                    <b>구독은 앱을 통해서만 씁니다.</b> 앤트로픽이 2026년 9월부터 구독 토큰을 클로드코드 밖에서 쓰지 못하게
-                    막았습니다 — 사이트 서버가 그 토큰으로 부르면 <i>Request not allowed</i> 로 거절당합니다.
+                    <b>AI 는 앱을 통해서만 씁니다.</b> 사이트는 구독 토큰을 받지도 보관하지도 않습니다 —
                     클로드·코덱스·제미나이·그록 모두 <b>앱을 켜 두면</b> 앱이 이 PC 의 구독으로 대신 돌려 줍니다(추가 비용 없음).
-                    앱 없이 쓰시려면 아래에서 <b>Gemini 무료 키</b>를 넣으세요.
+                    앱이 꺼져 있으면 AI 부분만 멈추고 그 자리에서 알려 드립니다.
                 </p>
 
                 <div className="lw-engines-list">
                     {AGENT_CHAIN.map((item) => {
                         const agent = agentOf(item.id);
-                        const hasToken = item.id === 'claude' && Boolean(String(keys.claudeToken || '').trim());
-                        const linked = hasToken || Boolean(agent?.available);
+                        const linked = Boolean(agent?.available);
                         /*
-                         * 상태를 셋으로 가른다(사장님 지적 2026-08-22:
-                         * "연동됐다면서 왜 구독토큰 필드가 초기화되니? 연동됨이랑 모순인데").
-                         *
-                         * 모순이 아니라 표현이 뭉개져 있었다. "연동됨(구독)"과
-                         * "연동됨(앱·구독)"은 **되는 범위가 다른 상태**인데 둘 다
-                         * "✅ 연동됨"으로 시작해 같아 보였다:
-                         *   토큰 있음 → 사이트 서버가 직접 쓴다. 앱을 꺼도 된다.
-                         *              토큰 칸이 채워지고 플랜·사용량도 이 토큰으로 잰다.
-                         *   앱만 연동 → 이 PC 의 CLI 로그인이다. 서버는 못 쓴다.
-                         *              그래서 토큰 칸은 비어 있는 게 맞다. 앱을 켜 둬야 한다.
-                         * 클로드는 앱에서 사이트로 넘길 수 있으니 그렇게 하라고 말해 준다.
+                         * 상태는 앱이 실제로 확인한 값 그대로다(사장님 결정 2026-09-16 "브리지 전용").
+                         * 사이트가 들고 있는 구독 자격이 없으니 "사이트에서 된다"는 상태도 없다 — 네 엔진 모두
+                         * 앱에 로그인돼 있고 앱이 켜져 있어야 돈다.
                          */
-                        /*
-                         * 클로드 토큰으로 "앱 없이 된다"고 말하지 않는다(2026-09-07).
-                         * 앤트로픽이 구독 토큰의 외부 사용을 막아서, 사이트 서버가 그
-                         * 토큰으로 부르면 "Request not allowed" 로 거절당한다. 토큰이
-                         * 저장돼 있어도 실제로 도는 것은 앱이다 — 화면이 그대로 말한다.
-                         */
-                        const state = hasToken
-                            ? (agent?.available ? '✅ 앱으로 됩니다 — 앱을 켜 두세요' : '⚠️ 앱을 켜야 합니다')
-                            : agent?.available
-                                ? '✅ 앱에 연동 — 앱을 켜 두면 됩니다'
-                                : agent?.installed ? '앱: 로그인 필요'
-                                    : item.webConnect ? '미연동' : '앱에서 연동';
+                        const state = agent?.available
+                            ? '✅ 앱에 연동 — 앱을 켜 두면 됩니다'
+                            : agent?.installed ? '앱: 로그인 필요' : '앱에서 연동';
                         const active = activeProvider === item.id;
                         return (
                             <div key={item.id} className={`lw-engine-row${active ? ' on' : ''}`}>
@@ -540,33 +416,14 @@ function KeysTab() {
                                     <b>{item.label}</b>
                                     <small>{item.sub}</small>
                                 </div>
-                                {/* 클로드가 앱에만 연동된 상태는 초록이 아니라 노랑이다 — 할 일이 남았다. */}
-                                <span className={`lw-engine-state${linked ? (item.id === 'claude' && !hasToken ? ' half' : ' ok') : ''}`}>{state}</span>
+                                <span className={`lw-engine-state${linked ? ' ok' : ''}`}>{state}</span>
                                 <div className="lw-engine-actions">
-                                    {item.id === 'claude' ? (
-                                        keys.claudeToken ? (
-                                            <button
-                                                type="button"
-                                                className="lw-mini lw-mini-ghost"
-                                                onClick={() => {
-                                                    const next = { ...keys, claudeToken: '', claudeRefresh: '', claudeExpiresAt: '' };
-                                                    setKeys(next);
-                                                    saveUserKeys(next);
-                                                    setUsage({ state: 'idle' });
-                                                    setOauthNote('연결을 끊었습니다 — [연동]을 눌러 다른 계정으로 로그인하세요.');
-                                                }}
-                                            >계정 바꾸기</button>
-                                        ) : (
-                                            <button type="button" className="lw-mini" onClick={startClaudeConnect} disabled={oauthBusy}>연동</button>
-                                        )
-                                    ) : (
-                                        <button
-                                            type="button"
-                                            className="lw-mini"
-                                            onClick={() => startAgentLogin(item.id, item.label, linked)}
-                                            disabled={Boolean(loginBusy)}
-                                        >{loginBusy === item.id ? '여는 중…' : linked ? '계정 바꾸기' : '연동'}</button>
-                                    )}
+                                    <button
+                                        type="button"
+                                        className="lw-mini"
+                                        onClick={() => startAgentLogin(item.id, item.label, linked)}
+                                        disabled={Boolean(loginBusy)}
+                                    >{loginBusy === item.id ? '여는 중…' : linked ? '계정 바꾸기' : '연동'}</button>
                                     <button
                                         type="button"
                                         className={`lw-mini${active ? '' : ' lw-mini-ghost'}`}
@@ -579,107 +436,13 @@ function KeysTab() {
                                     >{active ? '사용 중' : '사용'}</button>
                                 </div>
                                 {/*
-                                  * 클로드만 토큰 칸이 있다 — 버튼이 자동으로 채우고, 다른 PC 에서
-                                  * 받은 토큰을 손으로 옮겨 넣을 수도 있다. 나머지 셋은 이식 가능한
-                                  * 구독 토큰이 존재하지 않아 칸 자체를 두지 않는다(빈 칸을 두면
-                                  * 넣을 게 있는 줄 알고 API 키를 넣게 된다 — 그건 과금이다).
+                                  * 플랜 줄 — 구독 등급은 사실이 있는 엔진만 적는다(지금은 코덱스뿐). 사용량은 아래
+                                  * '앱이 센 사용량' 칸이 엔진별로 모아 보여 준다(사장님 결정 2026-09-16).
                                   */}
-                                {/*
-                                  * 사용량 줄(사장님 2026-08-20 "연동된 에이전트 전부 사용량
-                                  * 보이게, 할당량 없으면 없음이라고"). 코덱스·제미나이·그록은
-                                  * 사용량을 내주는 API 가 없다(실측) — 지어내지 않고 '제공
-                                  * 안 함'이라 적는다. 코덱스는 플랜(구독 등급)만 사실로 있다.
-                                  */}
-                                {item.id !== 'claude' && linked && (
+                                {linked && (
                                     <p className="lw-engine-usage">
                                         {agent?.plan ? <b>{agent.plan.toUpperCase()} 구독</b> : '구독 확인됨'}
-                                        {' · '}사용량: 이 서비스는 제공하지 않습니다
                                     </p>
-                                )}
-                                {item.id === 'claude' && hasToken && (
-                                    <div className="lw-usage">
-                                        <div className="lw-usage-head">
-                                            {/*
-                                              * 상태를 그대로 말한다(사장님 지적 2026-08-22
-                                              * "플랜 확인 중이면 프로그레스를 띄우고, 다시 재기 눌러도 안 나온다").
-                                              * 예전엔 data 가 없으면 무조건 "플랜 확인 중"이라 **idle·error·loading
-                                              * 셋이 전부 같은 문구**였다. 아직 재지도 않았는데 "확인 중"으로 보이니
-                                              * 영원히 기다리게 된다.
-                                              */}
-                                            <span className="lw-usage-plan">
-                                                {usage.state === 'loading'
-                                                    ? <span className="lw-usage-spin" aria-label="재는 중" />
-                                                    : null}
-                                                {usage.data?.plan
-                                                    || (usage.state === 'loading' ? '재는 중…'
-                                                        : usage.state === 'error' ? '확인 실패'
-                                                            : '아직 안 쟀습니다')}
-                                            </span>
-                                            {usage.data?.email && <span className="lw-usage-who">{usage.data.email}</span>}
-                                            <button type="button" onClick={() => { void loadUsage(); }} disabled={usage.state === 'loading'}>
-                                                {usage.state === 'loading' ? '재는 중…' : '다시 재기'}
-                                            </button>
-                                        </div>
-                                        {usage.state === 'error' && <p className="lw-usage-err">{usage.message}</p>}
-                                        {usage.data && USAGE_WINDOWS.map((window) => {
-                                            const value = usage.data?.[window.key];
-                                            if (!value || value.percent === null) return null;
-                                            return (
-                                                <div className="lw-usage-row" key={window.key}>
-                                                    <span className="lw-usage-label">{window.label}</span>
-                                                    <span className="lw-usage-bar">
-                                                        <i style={{ transform: `scaleX(${Math.min(100, value.percent) / 100})`, background: usageColor(value.percent) }} />
-                                                    </span>
-                                                    <span className="lw-usage-pct">{value.percent}%</span>
-                                                    <span className="lw-usage-reset">{resetText(value.resetAt)}</span>
-                                                </div>
-                                            );
-                                        })}
-                                        {/*
-                                          * 한도 경고 — 기준은 제일 낮은 플랜이다(사장님 2026-08-20:
-                                          * "내가 Max 20x 쓰는 게 특이 케이스고 보통은 제일 낮은 플랜").
-                                          * Pro 는 5시간 창이 금방 찬다. 막히고 나서 당황하지 않게
-                                          * 미리 알리고, 그때 할 일(다른 엔진으로 전환)까지 적는다.
-                                          */}
-                                        {usage.data && (() => {
-                                            const hit = USAGE_WINDOWS
-                                                .map((window) => ({ window, value: usage.data?.[window.key] }))
-                                                .find(({ value }) => value && (value.status === 'rejected' || (value.percent !== null && value.percent >= 85)));
-                                            if (!hit || !hit.value) return null;
-                                            const blocked = hit.value.status === 'rejected';
-                                            return (
-                                                <p className={`lw-usage-warn${blocked ? ' hard' : ''}`}>
-                                                    {blocked
-                                                        ? `${hit.window.label} 한도가 찼습니다 — ${resetText(hit.value.resetAt) || '잠시 뒤'}까지 클로드로는 생성이 안 됩니다.`
-                                                        : `${hit.window.label} 한도의 ${hit.value.percent}% 를 썼습니다 — ${resetText(hit.value.resetAt) || '곧'} 까지 아껴 쓰세요.`}
-                                                    {' '}위 목록에서 다른 엔진의 <b>[사용]</b>을 누르면 그 구독으로 계속할 수 있습니다.
-                                                </p>
-                                            );
-                                        })()}
-                                        <p className="lw-usage-foot">앤트로픽이 알려 준 값입니다 — 남은 양이 아니라 <b>쓴 양</b>입니다.</p>
-                                    </div>
-                                )}
-                                {item.id === 'claude' && (
-                                    <div className="lw-engine-key">
-                                        <label>
-                                            구독 토큰 (버튼이 자동 저장 · 손입력도 가능)
-                                            <input
-                                                type="password"
-                                                value={String(keys.claudeToken || '')}
-                                                onChange={(event) => update('claudeToken', event.target.value)}
-                                                /*
-                                                 * 붙여넣으면 그 자리에서 확인하고 저장한다
-                                                 * (사장님 지적 2026-08-22 "토큰 넣으면 자동 저장돼야 하지 않니?").
-                                                 * 예전엔 아래 [저장]을 따로 눌러야 했는데, 칸이 채워져 있으니
-                                                 * 저장된 줄 알고 넘어가게 된다 — 그러면 플랜도 안 재진다.
-                                                 * onChange 마다 부르면 한 글자씩 검사하게 되므로 칸을 떠날 때 한 번만 한다.
-                                                 */
-                                                onBlur={() => { void persist(); }}
-                                                placeholder="sk-ant-oat..."
-                                                autoComplete="new-password"
-                                            />
-                                        </label>
-                                    </div>
                                 )}
                             </div>
                         );
@@ -687,32 +450,45 @@ function KeysTab() {
                 </div>
 
                 {/*
-                  * 클로드 승인 코드 입력 — [연동]을 누른 뒤에만 나타난다.
-                  * 코드 칸과 토큰 칸을 헷갈려 무한루프가 났던 실사고(2026-08-20)
-                  * 재발 방지로 단계를 번호로 적는다.
+                  * 앱이 센 사용량(사장님 결정 2026-09-16 "클로드 사용량 칸을 앱이 센 사용량으로 교체").
+                  * 예전 칸은 사이트가 들고 있던 클로드 토큰으로 서비스 한도(5시간·7일 %)를 물었다.
+                  * 이제 사이트에는 토큰이 없다 — 사실로 있는 것은 이 PC 의 앱이 엔진을 부른 횟수뿐이라
+                  * 그것만 적는다. 한도 대비 %·남은 양 같은 추정은 만들지 않는다.
                   */}
-                {oauth && !keys.claudeToken && (
-                    <div className="lw-claude-steps">
-                        <p><b>① 새 탭</b>에서 승인을 누르세요. <b>② 그 화면에 뜬 코드</b>를 아래 칸에 붙여넣고 [연결 완료].</p>
-                        <div className="lw-claude-code">
-                            <input
-                                type="text"
-                                value={oauthCode}
-                                onChange={(event) => setOauthCode(event.target.value)}
-                                placeholder="여기에 승인 코드 붙여넣기"
-                                aria-label="클로드 승인 코드"
-                                autoFocus
-                            />
-                            <button type="button" className="lw-mini" onClick={finishClaudeConnect} disabled={oauthBusy || !oauthCode.trim()}>
-                                {oauthBusy ? '연결 중…' : '연결 완료'}
-                            </button>
-                        </div>
+                <div className="lw-usage">
+                    <div className="lw-usage-head">
+                        <span className="lw-usage-plan">
+                            {usage.state === 'loading' ? <span className="lw-usage-spin" aria-label="세는 중" /> : null}
+                            앱이 센 사용량
+                        </span>
+                        {usage.state === 'done' && usage.at && (
+                            <span className="lw-usage-who">
+                                {usage.at.toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' })} 기준
+                            </span>
+                        )}
+                        <button type="button" onClick={() => { void loadUsage(); }} disabled={usage.state === 'loading'}>
+                            {usage.state === 'loading' ? '세는 중…' : '다시 세기'}
+                        </button>
                     </div>
-                )}
-                {oauthNote && <p className="lw-card-note" style={{ marginTop: 10, marginBottom: 0 }}>{oauthNote}</p>}
+                    {usage.state === 'offline' && <p className="lw-usage-err">{BRIDGE_OFFLINE_NOTE}</p>}
+                    {usage.state === 'outdated' && <p className="lw-usage-err">{BRIDGE_OUTDATED_NOTE}</p>}
+                    {usage.state === 'error' && <p className="lw-usage-err">사용량을 세지 못했습니다: {usage.message}</p>}
+                    {usage.state === 'done' && (usage.rows || []).map((row) => (
+                        <div className="lw-usage-row" key={row.provider}>
+                            <span className="lw-usage-label">{USAGE_LABEL[row.provider] || row.provider}</span>
+                            <span style={{ flex: 1, minWidth: 0, color: 'rgba(235,242,250,.82)' }}>
+                                최근 5시간 <b>{row.window5h}회</b> · 24시간 <b>{row.day}회</b> (5시간 중 실패 {row.failed5h}회)
+                            </span>
+                            <span className="lw-usage-reset">{resetInText(row.resetAt)}</span>
+                        </div>
+                    ))}
+                    <p className="lw-usage-foot">
+                        서비스 공식 한도가 아니라 <b>이 PC 의 LEWORD 앱이 센 호출 수</b>입니다 — 다른 기기나 앱 밖에서 쓴 양은 들어 있지 않습니다.
+                    </p>
+                </div>
 
                 <div className="lw-agents-head" style={{ marginTop: 12 }}>
-                    <b>코덱스·제미나이·그록 상태는 앱이 실제로 확인한 값입니다</b>
+                    <b>엔진 상태와 사용량은 앱이 실제로 확인하고 센 값입니다</b>
                     <button type="button" className="lw-mini lw-mini-ghost" onClick={refreshAgents} disabled={bridge === 'probing'}>
                         {bridge === 'probing' ? '확인 중…' : '상태 확인'}
                     </button>

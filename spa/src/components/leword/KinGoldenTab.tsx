@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { fetchKinAnswer, fetchKinPostIdeas, fetchKinQuestion, formatCount, searchKinQuestions, type KinPostIdea } from '../../lib/keywordApi';
-import { bridgeKinAnswer, probeBridge, type BridgeStatus } from '../../lib/bridge';
-import { loadUserKeys, saveUserKeys } from '../../lib/userKeys';
-import { CLAUDE_POLICY_NOTE, claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked, siteCanGenerate } from '../../lib/claudeAuthPolicy';
+import { fetchKinQuestion, formatCount, searchKinQuestions, type KinPostIdea } from '../../lib/keywordApi';
+import { BRIDGE_OFFLINE_NOTE, bridgeFailureNote, bridgeKinAnswer, bridgePostIdeas, probeBridge, usablePostIdeas, type BridgeStatus } from '../../lib/bridge';
+import { loadUserKeys } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -170,31 +169,21 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
     };
     const agentReady = typeof bridgeState === 'object' && bridgeState !== null
         && bridgeState.connected && (bridgeState.agents || []).some((agent) => agent.available);
-    /** 클로드 구독 토큰 — 있으면 앱과 무관하게 서버가 생성한다(1순위 경로). */
-    const storedKeys = loadUserKeys();
-    const tokenReady = Boolean(storedKeys.claudeToken);
-    // 기존에 저장돼 있던 Gemini/OpenAI 키가 있으면 서버 폴백으로 여전히 쓰인다.
-    const anyKeyReady = tokenReady || Boolean(storedKeys.geminiKey || storedKeys.openaiKey);
     /*
-     * 지금 누르면 **무엇으로 생성되는가**. generate() 의 분기와 같은 값을 본다 —
-     * 화면과 실행이 다른 말을 하지 않게 한 곳에서 판정한다.
+     * 지금 누르면 **무엇으로 생성되는가**. generate() 와 같은 값을 본다 —
+     * 화면과 실행이 다른 말을 하지 않게 한 곳에서 판정한다. 생성은 전부 이 PC 의
+     * LEWORD 앱으로만 돈다(사장님 결정 2026-09-16 "브리지 전용") — 사이트에는 구독 토큰이 없다.
      */
     const ENGINE_LABEL: Record<string, string> = {
         claude: '클로드', codex: '코덱스', gemini: '제미나이', grok: '그록',
     };
     const engineNote = (() => {
-        const picked = String(storedKeys.aiProvider || '');
-        if (picked && picked !== 'claude') {
-            const label = ENGINE_LABEL[picked] || picked;
-            if (agentReady) return { ok: true, text: `✅ ${label}(으)로 생성합니다 — 내 PC 의 앱 구독이라 추가 비용 없습니다.` };
-            if (bridgeState === 'probing' || bridgeState === null) return { ok: false, text: `${label}(으)로 생성합니다 — 앱 연동 확인 중…` };
-            return { ok: false, text: `${label}(으)로 생성합니다 — 이 엔진은 LEWORD 앱에서 돌아갑니다. 앱을 켜 주세요(내 API 키 탭에서 다른 엔진으로 바꿔도 됩니다).` };
-        }
-        if (tokenReady) return { ok: true, text: '✅ 클로드로 생성합니다 — 앱 없이, 구독이라 추가 비용 없습니다.' };
-        if (anyKeyReady) return { ok: true, text: '✅ 저장된 AI 키로 생성합니다 — 앱 없이 됩니다.' };
-        if (bridgeState === 'probing' || bridgeState === null) return { ok: false, text: '연동 상태 확인 중…' };
-        if (agentReady) return { ok: true, text: '✅ 내 PC 의 LEWORD 앱으로 생성합니다 — 구독이라 추가 비용 없습니다.' };
-        return { ok: false, text: '연동 전 — 내 API 키 탭에 클로드코드 토큰(claude setup-token, 구독 무료)을 넣으면 앱 없이 됩니다.' };
+        const picked = String(loadUserKeys().aiProvider || '');
+        const via = ENGINE_LABEL[picked] ? `${ENGINE_LABEL[picked]}(으)로` : '내 PC 의 LEWORD 앱으로';
+        if (bridgeState === 'probing' || bridgeState === null) return { ok: false, text: `${via} 생성합니다 — 앱 연동 확인 중…` };
+        if (agentReady) return { ok: true, text: `✅ ${via} 생성합니다 — 내 PC 의 앱 구독이라 추가 비용 없습니다.` };
+        if (bridgeState.connected) return { ok: false, text: '앱은 켜져 있는데 로그인된 엔진이 없습니다 — 내 API 키 탭에서 쓸 엔진을 [연동]해 주세요.' };
+        return { ok: false, text: BRIDGE_OFFLINE_NOTE };
     })();
 
     /*
@@ -208,13 +197,24 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
     const loadIdeas = async () => {
         if (!work || ideas.status === 'loading') return;
         setIdeas({ status: 'loading', list: [] });
-        const result = await fetchKinPostIdeas({ title: work.title, body: workBody.text });
-        if (result.ok && result.data?.ideas?.length) {
-            setIdeas({ status: 'done', list: result.data.ideas });
-            setOpenIdea(result.data.ideas[0].keyword);
+        // 글감도 앱 브리지로만 만든다(사장님 결정 2026-09-16) — 지식인 글감은 post-ideas 의 kind 'kin'.
+        const viaApp = await bridgePostIdeas({
+            kind: 'kin',
+            title: work.title,
+            body: workBody.text,
+            provider: String(loadUserKeys().aiProvider || ''),
+        });
+        if (viaApp.status === 'ok') {
+            const usable = usablePostIdeas(viaApp.ideas);
+            if (usable.length > 0) {
+                setIdeas({ status: 'done', list: usable });
+                setOpenIdea(usable[0].keyword);
+                return;
+            }
+            setIdeas({ status: 'error', list: [], message: `${viaApp.provider} 가 제목을 못 만들었습니다 — 다시 눌러 주세요.` });
             return;
         }
-        setIdeas({ status: 'error', list: [], message: result.message || result.error || '글감을 만들지 못했습니다.' });
+        setIdeas({ status: 'error', list: [], message: bridgeFailureNote(viaApp, '글감을 만들지 못했습니다') });
     };
 
     const copyTitle = (text: string) => {
@@ -259,89 +259,19 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
             blogUrl: blogUrl.trim(),
         };
         /*
-         * 사용자가 고른 엔진을 따른다(사장님 확정 2026-08-20 "선택해서 연동하고
-         * 쓰는 것"). 클로드는 사이트가 직접(앱 불필요), 나머지는 앱이 그 엔진
-         * 하나로 실행한다 — 몰래 다른 엔진으로 갈아타지 않는다.
+         * 답변은 이 PC 의 LEWORD 앱이 내 구독으로 만든다(사장님 결정 2026-09-16 "브리지 전용으로 정리").
+         * 사이트는 구독 토큰을 들고 있지 않아 다른 길이 없다. 고른 엔진을 앱에 넘기고, 안 골랐으면
+         * 앱이 연동된 순서대로 고른다. 앱이 꺼져 있거나 구버전이면 그 사실을 그대로 알린다.
          */
         const picked = String(loadUserKeys().aiProvider || '');
-        if (picked && picked !== 'claude') {
-            const viaApp = await bridgeKinAnswer({ ...input, provider: picked });
-            setGenerating(false);
-            if (viaApp.status === 'ok') { setDraft(viaApp.answer); rememberWorked(work, viaApp.answer); return; }
-            setGenNote(viaApp.status === 'error'
-                ? `생성 실패(${picked}): ${viaApp.message}`
-                : `${picked} 는 LEWORD 앱을 통해 돕니다 — 앱을 켜고 다시 눌러 주세요(내 API 키 탭에서 다른 엔진으로 바꿀 수도 있습니다).`);
-            return;
-        }
-
-        /*
-         * **앱이 켜져 있으면 앱을 먼저 쓴다**(사장님 지시 2026-09-07 "실패가 안 되어야지").
-         *
-         * 앤트로픽이 구독 토큰의 외부 사용을 막은 뒤로 사이트 경로는 클로드로 못 간다.
-         * 그런데 사이트를 먼저 던지면 한 번은 반드시 실패하고, 그 실패가 화면에 뜬다.
-         * 앱은 이 PC 의 클로드코드라 정책상 정상이고 구독 그대로다 — 그러니 앱이
-         * 잡히면 그리로 곧장 간다. 실패할 수 있는 길을 애초에 밟지 않는다.
-         */
-        const appKnownOffline = typeof bridgeState === 'object' && bridgeState !== null && !bridgeState.connected;
-        if (!appKnownOffline) {
-            const first = await bridgeKinAnswer(input);
-            if (first.status === 'ok') {
-                setGenerating(false);
-                setDraft(first.answer);
-                rememberWorked(work, first.answer);
-                return;
-            }
-            // 앱이 못 하면 아래 사이트 경로로 이어 간다 — 여기서 멈추지 않는다.
-        }
-        /*
-         * 사이트는 **쓸 수 있는 자격이 있을 때만** 부른다. 클로드 토큰만 있는 상태로
-         * 부르면 거절당하는 것이 확정이라 시도하지 않는다(siteCanGenerate).
-         */
-        const viaKeys = (claudePolicyBlocked() || !siteCanGenerate(loadUserKeys()))
-            ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
-            : await fetchKinAnswer(input);
-        if (viaKeys.ok && viaKeys.data?.answer) {
-            setGenerating(false);
-            setDraft(viaKeys.data.answer);
-            rememberWorked(work, viaKeys.data.answer);
-            return;
-        }
-        /*
-         * 정책 차단이면 **멈추지 않고 앱으로 넘어간다.** 토큰이 죽은 게 아니라
-         * 이 경로 자체가 막힌 것이라, 재연결을 권하면 무한루프가 된다.
-         */
-        const policyBlocked = viaKeys.error === 'claude-policy' || isClaudePolicyBlocked(viaKeys.message);
-        if (policyBlocked) markClaudePolicyBlocked();
-        if (!policyBlocked && viaKeys.error && viaKeys.error !== 'needs-keys') {
-            setGenerating(false);
-            /*
-             * 폐기된 수동 토큰(갱신 토큰 없음)이 남아 있으면 이 오류가 반복된다 —
-             * 죽은 토큰은 지워 주고 버튼 재연결로 안내한다(사장님 실사고 2026-08-20).
-             */
-            const stored = loadUserKeys();
-            if (/invalid bearer|revoked|expired/i.test(viaKeys.message || '') && stored.claudeToken && !stored.claudeRefresh) {
-                saveUserKeys({ ...stored, claudeToken: '' });
-                setGenNote('저장돼 있던 토큰이 폐기된 것이라 지웠습니다 — 내 API 키 탭의 [구독 연결] 버튼으로 다시 연결하면 자동 갱신되는 토큰이 저장됩니다.');
-                return;
-            }
-            setGenNote(`생성 실패: ${viaKeys.message || viaKeys.error}`);
-            return;
-        }
-        const viaApp = await bridgeKinAnswer(input);
+        const viaApp = await bridgeKinAnswer({ ...input, provider: picked });
         setGenerating(false);
         if (viaApp.status === 'ok') {
             setDraft(viaApp.answer);
             rememberWorked(work, viaApp.answer);
             return;
         }
-        if (viaApp.status === 'error') {
-            setGenNote(`생성 실패: ${viaApp.message}`);
-            return;
-        }
-        // 앱도 못 잡혔다. 정책 차단이 원인이면 그 사실부터 말한다 — 토큰을 다시 넣게 두지 않는다.
-        setGenNote(policyBlocked
-            ? CLAUDE_POLICY_NOTE
-            : 'LEWORD 앱을 켜면 앱이 이 PC 의 클로드코드로 대신 돌려 줍니다. 앱 없이 쓰시려면 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요.');
+        setGenNote(bridgeFailureNote(viaApp, picked ? `생성 실패(${ENGINE_LABEL[picked] || picked})` : '생성 실패'));
     };
 
     const copyDraft = () => {

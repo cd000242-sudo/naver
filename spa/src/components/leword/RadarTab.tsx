@@ -1,12 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
-    fetchKinAnswer,
-    fetchRadarAnalyze, fetchRadarEvaluate, fetchRadarSearch, formatCount,
+    fetchRadarSearch, formatCount,
     type RadarAnalysis, type RadarEvaluated, type RadarGatedSite,
 } from '../../lib/keywordApi';
 import { loadUserKeys } from '../../lib/userKeys';
-import { bridgeKinAnswer, bridgeRadarEvaluate } from '../../lib/bridge';
-import { CLAUDE_POLICY_NOTE, claudePolicyBlocked, isClaudePolicyBlocked, markClaudePolicyBlocked, siteCanGenerate } from '../../lib/claudeAuthPolicy';
+import { BRIDGE_OFFLINE_NOTE, BRIDGE_OUTDATED_NOTE, bridgeFailureNote, bridgeKinAnswer, bridgeRadarAnalyze, bridgeRadarEvaluate } from '../../lib/bridge';
 import { TabIntro } from './LewordShared';
 
 /*
@@ -131,35 +129,13 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
             blogUrl: url.trim(),
         };
         /*
-         * 사이트는 **쓸 수 있는 자격이 있을 때만** 부른다(사장님 지시 2026-09-07
-         * "실패가 안 되어야지"). 앤트로픽이 구독 토큰의 외부 사용을 막았으므로
-         * 클로드 토큰만 있는 상태로 부르면 거절이 확정이다 — 아래 앱 폴백으로 간다.
+         * 답변은 이 PC 의 LEWORD 앱이 내 구독으로 만든다(사장님 결정 2026-09-16 "브리지 전용으로 정리").
+         * 사이트는 구독 토큰을 들고 있지 않다. 앱이 꺼져 있거나 구버전이면 그 사실을 그대로 알린다.
          */
-        const res = (claudePolicyBlocked() || !siteCanGenerate(loadUserKeys()))
-            ? { ok: false as const, data: null, error: 'claude-policy', message: '' }
-            : await fetchKinAnswer(input);
-        if (res.ok && res.data) {
-            setGenBusy(false);
-            setDraft(res.data.answer);
-            setCopied(false);
-            return;
-        }
-        const policyBlocked = res.error === 'claude-policy' || isClaudePolicyBlocked(res.message);
-        if (policyBlocked) markClaudePolicyBlocked();
-        // 앱(이 PC 의 클로드코드)으로 넘긴다 — 정책상 정상인 길이다.
-        if (policyBlocked || res.error === 'needs-keys') {
-            const viaApp = await bridgeKinAnswer({ ...input, provider: String(loadUserKeys().aiProvider || '') });
-            setGenBusy(false);
-            if (viaApp.status === 'ok') { setDraft(viaApp.answer); setCopied(false); return; }
-            setGenNote(viaApp.status === 'error'
-                ? `생성 실패: ${viaApp.message}`
-                : (policyBlocked
-                    ? CLAUDE_POLICY_NOTE
-                    : '답변 생성은 엔진이 필요합니다 — LEWORD 앱을 켜거나 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요.'));
-            return;
-        }
+        const viaApp = await bridgeKinAnswer({ ...input, provider: String(loadUserKeys().aiProvider || '') });
         setGenBusy(false);
-        setGenNote(res.message || 'AI 답변 생성에 실패했습니다. 잠시 후 다시 시도하세요.');
+        if (viaApp.status === 'ok') { setDraft(viaApp.answer); setCopied(false); return; }
+        setGenNote(bridgeFailureNote(viaApp, '생성 실패'));
     };
     const copyAnswer = () => {
         navigator.clipboard?.writeText(draft)
@@ -191,24 +167,24 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
 
         // ① 글 분석 — 핵심키워드(검색량 실측)·의도·돈각도·확장 질의
         setPhase('analyzing');
-        const analyzed = await fetchRadarAnalyze(target);
-        if (!analyzed.ok || !analyzed.data) {
+        /*
+         * 분석은 AI 라 이 PC 의 LEWORD 앱으로만 돈다(사장님 결정 2026-09-16 "브리지 전용으로 정리").
+         * 앱이 워커에서 글 근거·프롬프트를 받아 내 구독으로 분석하고, 검색량은 내 실측 키로 잰다.
+         * 앱이 꺼져 있으면 여기서 멈춘다 — 다음 걸음의 검색어가 이 분석에서 나오기 때문이다.
+         */
+        const analyzed = await bridgeRadarAnalyze({
+            url: target,
+            keys: loadUserKeys() as Record<string, string>,
+            provider: String(loadUserKeys().aiProvider || ''),
+        });
+        if (analyzed.status !== 'ok') {
             setPhase('idle');
-            /*
-             * 자격이 없어서 막힌 것은 "실패"가 아니라 "아직 준비가 안 된 것"이다.
-             * 앱에서 엔진이 다 연동돼 있어도 이 화면은 안 도는데, 그 이유가
-             * 화면에 없으면 사용자는 무엇을 더 해야 하는지 알 수가 없다
-             * (사장님 지적 2026-08-22 "연동이 문제 있으면 절대 안 된다").
-             * 레이더는 다른 화면과 달리 **자기 PC 의 앱으로 대신 돌 수 없다** —
-             * 남의 사이트를 대신 읽어 오는 브라이트데이터 몫이 서버에 있기 때문이다.
-             */
-            setError(analyzed.error === 'needs-keys'
-                ? '레이더는 [내 API 키] 탭에 ① 브라이트데이터 키와 ② 엔진 토큰(클로드 [연동] 버튼 한 번)이 둘 다 있어야 돕니다.'
-                  + ' 앱 연동만으로는 안 됩니다 — 이 화면은 남의 사이트를 대신 읽어 오는 부분이 서버에 있어서입니다.'
-                : (analyzed.message || '글을 분석하지 못했습니다.'));
+            setError(analyzed.status === 'error'
+                ? `글을 분석하지 못했습니다: ${analyzed.message}`
+                : `글 분석은 AI 라 앱이 있어야 돕니다 — ${bridgeFailureNote(analyzed)}`);
             return;
         }
-        const meta = analyzed.data.analysis;
+        const meta = analyzed.result.analysis;
         setAnalysis(meta);
 
         // ② 검색 — 프로바이더 일부가 죽어도 나머지로 계속한다(§26)
@@ -231,62 +207,45 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
             return;
         }
 
-        // ③ AI 평가 — 룰 점수 상위만 LLM 에 보낸다(§19 비용 원칙, 서버가 상한을 쥔다)
+        // ③ AI 평가 — 이 PC 의 LEWORD 앱이 내 구독으로 판을 평가한다(사장님 결정 2026-09-16 "브리지 전용으로 정리")
         setPhase('evaluating');
-        let evaluated = await fetchRadarEvaluate(searched.data.items, meta.title, meta.moneyAngle);
-        /*
-         * 사이트가 못 하면 **앱(본인 구독)** 으로 넘긴다
-         * (사장님 지시 2026-08-23: "레이더도 앱으로 넘어가게 붙여 줘").
-         * 다른 탭은 이미 이 길이 있는데 레이더만 없어서, 사이트 토큰 하나가
-         * 죽으면 통째로 멈췄다. 앱만 켜 두면 계속 돈다.
-         */
-        if (!evaluated.ok || !evaluated.data) {
-            const viaApp = await bridgeRadarEvaluate({
-                items: searched.data.items.map((item) => ({
-                    title: String(item.title || ''),
-                    source: String(item.source || ''),
-                    link: String(item.link || ''),
-                })),
-                myTitle: meta.title,
-                mySummary: meta.moneyAngle,
-                provider: String(loadUserKeys().aiProvider || ''),
+        const viaApp = await bridgeRadarEvaluate({
+            items: searched.data.items.map((item) => ({
+                title: String(item.title || ''),
+                source: String(item.source || ''),
+                link: String(item.link || ''),
+            })),
+            myTitle: meta.title,
+            mySummary: meta.moneyAngle,
+            provider: String(loadUserKeys().aiProvider || ''),
+        });
+        if (viaApp.ok) {
+            const merged: RadarEvaluated[] = searched.data.items.map((item, index) => {
+                const row = viaApp.evaluations.find((e) => Number(e.index) === index + 1);
+                if (!row) return { ...item, evaluated: false };
+                const axes = row as unknown as Record<string, number>;
+                const { score, action } = scoreFromAxes(axes);
+                return {
+                    ...item,
+                    evaluated: true,
+                    relevance: axes.relevance, urgency: axes.urgency,
+                    commercialValue: axes.commercialValue, trafficPotential: axes.trafficPotential,
+                    contentMatch: axes.contentMatch, spamRisk: axes.spamRisk,
+                    score, recommendedAction: action,
+                    reason: String(row.why || ''),
+                };
             });
-            if (viaApp.ok) {
-                const merged: RadarEvaluated[] = searched.data.items.map((item, index) => {
-                    const row = viaApp.evaluations.find((e) => Number(e.index) === index + 1);
-                    if (!row) return { ...item, evaluated: false };
-                    const axes = row as unknown as Record<string, number>;
-                    const { score, action } = scoreFromAxes(axes);
-                    return {
-                        ...item,
-                        evaluated: true,
-                        relevance: axes.relevance, urgency: axes.urgency,
-                        commercialValue: axes.commercialValue, trafficPotential: axes.trafficPotential,
-                        contentMatch: axes.contentMatch, spamRisk: axes.spamRisk,
-                        score, recommendedAction: action,
-                        reason: String(row.why || ''),
-                    };
-                });
-                setItems(merged);
-                setPhase('done');
-                setError('');
-                return;
-            }
-        }
-        if (!evaluated.ok || !evaluated.data) {
-            // 평가가 죽어도 검색 결과는 보여준다 — 빈 화면이 최악이다(§27)
-            setItems(searched.data.items.map((item) => ({ ...item, evaluated: false })));
+            setItems(merged);
             setPhase('done');
-            if (isClaudePolicyBlocked(evaluated.message)) markClaudePolicyBlocked();
-            setError(isClaudePolicyBlocked(evaluated.message)
-                ? `판 평가를 못 했습니다 — ${CLAUDE_POLICY_NOTE} 검색 결과는 그대로 보여드립니다.`
-                : evaluated.error === 'needs-keys'
-                    ? '판 평가는 엔진이 필요합니다 — LEWORD 앱을 켜거나 [내 API 키] 탭에서 Gemini 무료 키를 넣으세요. 검색 결과는 그대로 보여드립니다.'
-                    : (evaluated.message || 'AI 평가에 실패해 검색 결과만 보여드립니다.'));
+            setError('');
             return;
         }
-        setItems(evaluated.data.items);
+        // 평가가 죽어도 검색 결과는 보여준다 — 빈 화면이 최악이다(§27)
+        setItems(searched.data.items.map((item) => ({ ...item, evaluated: false })));
         setPhase('done');
+        setError(viaApp.reason === 'failed'
+            ? `판 평가를 못 했습니다: ${viaApp.message || '앱이 평가를 돌려주지 못했습니다.'} — 검색 결과는 그대로 보여드립니다.`
+            : `판 평가는 AI 라 앱이 있어야 돕니다 — ${viaApp.reason === 'outdated' ? BRIDGE_OUTDATED_NOTE : BRIDGE_OFFLINE_NOTE} 검색 결과는 그대로 보여드립니다.`);
     };
 
     const grouped = useMemo(() => {

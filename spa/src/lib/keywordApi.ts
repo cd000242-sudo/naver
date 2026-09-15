@@ -7,7 +7,8 @@
  * 화면에 나가는 값은 전부 실측이다. 여기서 점수·확률·예상치를 만들지 않는다.
  */
 import { GAS_URL } from './siteOps';
-import { loadUserKeys, saveUserKeys } from './userKeys';
+import { loadUserKeys } from './userKeys';
+import { stripLegacyClaudeFields } from './legacyClaudeState.mjs';
 
 const ENDPOINT = GAS_URL;
 
@@ -20,7 +21,12 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics', 'keyword-volumes', 'keyword-docs', 'keyword-frontal', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues', 'issue-brief', 'hot-keywords', 'user-keys-get', 'user-keys-put']);
+/*
+ * AI 액션(답변·글감·주제 판정·마인드맵·레이더 분석/평가)은 이 목록에 없다 — 사이트의 AI 는 전부
+ * 이 PC 의 LEWORD 앱 브리지(lib/bridge.ts)로만 돈다(사장님 결정 2026-09-16 "브리지 전용으로 정리").
+ * post-audit-analyze 는 실측 체크리스트만 받는다(aiVia 'app' — 워커가 AI 를 돌리지 않는다).
+ */
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'post-audit-analyze', 'kin-search', 'radar-search', 'keyword-volumes', 'keyword-docs', 'keyword-frontal', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues', 'issue-brief', 'hot-keywords', 'user-keys-get', 'user-keys-put']);
 /**
  * 장부(쿼터)가 필요해 GAS 에 남은 키워드 액션들은 엣지 방패(leaderspro-edge)를
  * 거친다 — 같은 질문은 15분 캐시로 즉답(0.5초), 처음 질문만 GAS 로 간다(장부도
@@ -38,8 +44,8 @@ const TIMEOUT_MS = 25000;
  * 25초는 대부분에 맞지만, 실제로 여러 번 재는 것들은 그 안에 못 끝낸다 —
  * 그래서 화면에 "응답이 너무 오래 걸립니다"만 뜨고 결과를 통째로 잃었다.
  *   rank-by-tabs      후보 14개 × 3탭 = 42회 실측 (실측 22초, 느리면 그 이상)
- *   post-audit-analyze 내 글 + 상위 5개를 열어 재고 AI 까지 (실측 6초 + AI)
- *   radar-*           여러 판을 훑고 AI 로 고른다
+ *   post-audit-analyze 내 글 + 상위 5개를 열어 잰다 (실측 6초 — AI 진단은 앱 브리지 몫)
+ *   radar-search      여러 판을 훑는다 (판 평가 AI 는 앱 브리지 몫)
  * 속도보다 정확도가 먼저라는 사장님 기준에 맞춰 넉넉히 준다.
  */
 const SLOW_ACTIONS: Record<string, number> = {
@@ -48,9 +54,7 @@ const SLOW_ACTIONS: Record<string, number> = {
     'keyword-expansions': 90000,
     'keyword-docs': 90000,
     'keyword-frontal': 90000,
-    'radar-analyze': 120000,
     'radar-search': 240000,
-    'radar-evaluate': 240000,
 };
 const timeoutFor = (action: string) => SLOW_ACTIONS[action] || TIMEOUT_MS;
 
@@ -222,7 +226,8 @@ async function call<T>(action: string, params: Record<string, string>): Promise<
                 action,
                 visitorId: visitorId(),
                 licenseCode: getStoredLicense(),
-                keys: loadUserKeys(),
+                // 옛 클로드 구독 토큰 칸은 워커·GAS 로 절대 싣지 않는다 — 읽을 때 이미 빠지지만 요청을 만드는 여기서 한 번 더 뺀다(사장님 결정 2026-09-16).
+                keys: stripLegacyClaudeFields(loadUserKeys()),
                 ...params,
             }),
             cache: 'no-store',
@@ -241,32 +246,6 @@ async function call<T>(action: string, params: Record<string, string>): Promise<
             payload = JSON.parse(raw);
         } catch {
             return { ok: false, data: null, error: 'server-busy', message: '서버가 잠시 붐빕니다. 몇 초 뒤 다시 시도해 주세요.' };
-        }
-        /*
-         * 회전된 토큰은 **여기서, 성공이든 실패든** 저장한다.
-         *
-         * 실사고(2026-08-20): 서버가 refresh 회전에 성공한 뒤 파싱 실패로
-         * ok:false 를 돌려줬는데, 아래 실패 분기가 data:null 을 반환해 실려온
-         * 새 토큰이 버려졌다. 재시도가 이미 소모된 옛 refresh 를 다시 쓰자
-         * Anthropic 이 재사용 감지로 토큰 가족 전체를 취소했다
-         * ("OAuth access token has been revoked"). 저장을 각 호출부 .then 에
-         * 매달면 실패 경로가 구멍이 된다 — 응답을 읽는 단 하나의 길목인
-         * 여기서 무조건 저장한다.
-         */
-        const renewed = (payload as { renewed?: Record<string, string> } | null)?.renewed;
-        if (renewed?.claudeToken) {
-            try { saveUserKeys({ ...loadUserKeys(), ...renewed }); } catch { /* 저장 실패해도 응답은 돌려준다 */ }
-        }
-        /*
-         * 토큰 사망(갱신까지 실패) — 죽은 토큰을 비우고 재연동 창을 그 자리에서
-         * 띄운다(사장님 요구: "만료되면 알아서 로그인창"). 죽은 토큰을 두면
-         * 누를 때마다 같은 오류만 반복된다.
-         */
-        if ((payload as { claudeTokenDead?: boolean } | null)?.claudeTokenDead) {
-            try {
-                saveUserKeys({ ...loadUserKeys(), claudeToken: '', claudeRefresh: '', claudeExpiresAt: '' });
-            } catch { /* 계속 */ }
-            window.dispatchEvent(new CustomEvent('leword:claude-dead', { detail: { message: String(payload?.message || '') } }));
         }
         if (!payload?.ok) {
             return {
@@ -490,25 +469,6 @@ export const auditBlogCheck = (title: string, link: string) =>
     call<{ rank: number | null; sampled: number; sympathy: number | null }>('blog-audit-check', { title, link });
 
 /**
- * 마인드맵 추론 — 클로드코드 토큰으로 앱 없이(사장님 지시 2026-08-20 "추론은
- * 따로 연동해야 되냐"). 검색광고 실측 연관을 AI 가 선별+왜검색 한 문장.
- * result 는 브리지 마인드맵과 같은 모양이라 화면 소비부가 갈라지지 않는다.
- */
-/*
- * refresh 토큰은 회전식이다 — 서버가 갱신하면(renewed) 즉시 저장해야
- * 다음 호출이 산다. 안 저장하면 옛 refresh 가 무효라 연동이 조용히 죽는다.
- */
-function persistRenewed(data: unknown) {
-    const renewed = (data as { renewed?: Record<string, string> } | null)?.renewed;
-    if (renewed && renewed.claudeToken) {
-        saveUserKeys({ ...loadUserKeys(), ...renewed });
-    }
-}
-
-export const fetchMindmapAI = (keyword: string) =>
-    call<{ result: unknown }>('mindmap-ai', { keyword }).then((res) => { persistRenewed(res.data); return res; });
-
-/**
  * 발행 글 진단(사장님 확정 2026-08-20 "글을 분석해야") — 실측 순위 3종 + 글
  * 전문을 구독 AI 가 읽고 원인·수정안을 사실 기반으로만 짚는다.
  */
@@ -554,7 +514,12 @@ export type SeoChecklist = {
 
 export type PostShape = { charCount: number; images: number; headings: number; videos: number; imagesExact?: boolean };
 
-export const fetchPostAnalysis = (input: {
+/**
+ * 상위노출 체크리스트만 받는다 — **AI 없이** 워커가 잰 실측이다(사장님 결정 2026-09-16 "AI 는 앱 브리지 전용").
+ * aiVia 'app' 으로 부르면 워커는 AI 를 돌리지 않고 실측·체크리스트만 돌려준다(앱이 진단 전에 부르는 1차 호출과 같다).
+ * 앱이 꺼져 있거나 앱 진단이 실패했을 때 AI 진단만 멈추고 실측 점수는 그대로 보여 주려고 쓴다.
+ */
+export const fetchPostChecklist = (input: {
     title: string; link: string; platform?: string;
     kwQuery?: string; kwRank?: number | null;
     extQuery?: string; extRank?: number | null;
@@ -566,12 +531,10 @@ export const fetchPostAnalysis = (input: {
     titleRankMeasured?: boolean;
     engines?: EngineExposure | null;
 }) => call<{
-    analysis: PostAnalysis | null;
     checklist?: SeoChecklist;
     measured?: { mine: PostShape | null; rivals: PostShape[] };
-    needsEngine?: boolean;
-    message?: string;
 }>('post-audit-analyze', {
+    aiVia: 'app',
     title: input.title,
     link: input.link,
     platform: input.platform || '',
@@ -582,19 +545,11 @@ export const fetchPostAnalysis = (input: {
     titleRank: input.titleRank == null ? '' : String(input.titleRank),
     titleRankMeasured: input.titleRankMeasured === false ? '0' : '',
     engines: input.engines ? JSON.stringify(input.engines) : '',
-}).then((res) => { persistRenewed(res.data); return res; });
-
-/** 승인 코드+검증값 → 구독 토큰 교환. 코드는 승인 화면의 "code#state" 그대로. */
-export const exchangeClaudeOauth = (code: string, verifier: string) =>
-    call<{ accessToken: string; refreshToken: string; expiresAt: number }>('claude-oauth-exchange', { code, verifier });
-
-/** 저장 전에 그 토큰으로 실제 생성이 되는지 확인 — 죽은 값 저장 방지. */
-export const checkClaudeToken = (token: string) =>
-    call<Record<string, never>>('claude-token-check', { token });
+});
 
 /**
  * 이 질문으로 쓸 수 있는 글감 — 키워드마다 SEO 제목과 홈판(디스커버) 제목.
- * 홈판 제목은 제목 교리(구어체·답 숨김·AI 티 0)를 서버 프롬프트가 강제한다.
+ * 글감은 이 PC 의 LEWORD 앱이 만든다(lib/bridge.ts 의 bridgePostIdeas) — 이 타입은 화면에 그리는 모양이다.
  */
 export type KinPostIdea = {
     keyword: string; why: string; clickWhy?: string; seo: string; home: string;
@@ -605,32 +560,6 @@ export type KinPostIdea = {
     /** 공식을 다 갖춘 것 중 하나에만 붙는다. 없으면 아무것도 안 붙는다. */
     recommended?: boolean;
 };
-export const fetchKinPostIdeas = (input: { title: string; body: string }) =>
-    call<{ ideas: KinPostIdea[] }>('kin-post-ideas', { title: input.title, body: input.body })
-        .then((res) => { persistRenewed(res.data); return res; });
-
-/**
- * 화제 검색어에서 글감 — 키워드마다 SEO·홈판 제목.
- *
- * 지식인 글감(fetchKinPostIdeas)과 같은 제목 교리를 쓴다. 씨앗만 다르다.
- * context 는 화제가 된 영상 제목 — 없는 사실을 지어내지 않게 붙잡아 준다.
- */
-export const fetchKeywordPostIdeas = (keyword: string, context: string) =>
-    call<{ ideas: KinPostIdea[] }>('keyword-post-ideas', { keyword, context })
-        .then((res) => { persistRenewed(res.data); return res; });
-
-/**
- * 클로드 구독 플랜과 남은 사용량.
- *
- * 전부 앤트로픽이 준 값이다 — 플랜은 프로필, 사용률·리셋시각은 응답 헤더.
- * 우리가 추정하는 값은 하나도 없다. 못 읽으면 null 로 와서 화면에서 빠진다.
- */
-export type ClaudeUsageWindow = { percent: number | null; resetAt: string | null; status: string };
-export type ClaudeUsage = {
-    plan: string; email: string;
-    fiveHour: ClaudeUsageWindow; sevenDay: ClaudeUsageWindow;
-};
-export const fetchClaudeUsage = (token: string) => call<ClaudeUsage>('claude-usage', { token });
 
 /**
  * 지식인 질문 검색 — 키워드로 실제 질문을 찾고 조회수·답변수를 실측해 돌려준다.
@@ -650,18 +579,6 @@ export const searchKinQuestions = (query: string, recentOnly: boolean) =>
 /** 지식인 질문 전문 — 답변 작업대는 질문이 안 잘리고 끝까지 보여야 한다. */
 export const fetchKinQuestion = (link: string) =>
     call<{ body: string }>('kin-question', { link });
-
-/**
- * 지식인 답변 초안 — '내 API 키' 탭의 Gemini/OpenAI 키로 앱 없이 생성한다
- * (키는 call() 이 자동으로 싣는다). 키가 없으면 needs-keys 가 온다.
- */
-export const fetchKinAnswer = (input: { title: string; body: string; withLink: boolean; blogUrl: string }) =>
-    call<{ answer: string; provider: string }>('kin-answer', {
-        title: input.title,
-        body: input.body,
-        withLink: input.withLink ? '1' : '',
-        blogUrl: input.blogUrl,
-    }).then((res) => { persistRenewed(res.data); return res; });
 
 export const fetchShoppingSignal = (keyword: string) =>
     call<ShoppingSignal>('keyword-shopping', { keyword });
@@ -735,6 +652,7 @@ export async function fetchAffiliateBoard() {
  *   ② 네이버 4판(지식인·카페·블로그·웹) 검색 + 중복 제거
  *   ③ AI 평가 → NOW/WATCH/SKIP
  * 세 걸음을 각각 부른다 — 한 번에 묶으면 25초 타임아웃을 넘는다.
+ * ①·③은 AI 라 이 PC 의 LEWORD 앱 브리지로만 부르고, ②(검색)만 워커로 부른다(사장님 결정 2026-09-16).
  * 자동 게시는 없다. 기회를 보여주고, 게시는 사람이 한다.
  */
 export type RadarAnalysis = {
@@ -780,8 +698,6 @@ export type RadarEvaluated = RadarCandidate & {
     relevance?: number; urgency?: number; commercialValue?: number;
     trafficPotential?: number; contentMatch?: number; spamRisk?: number;
 };
-export const fetchRadarAnalyze = (url: string) =>
-    call<{ analysis: RadarAnalysis }>('radar-analyze', { url });
 /** 훑지 않은 판과 그 이유 — 미리 가입해 두면 열리는 곳을 알 수 있게. */
 export type RadarGatedSite = { name: string; domain: string; gate: 'delayed' | 'closed'; why: string };
 
@@ -797,18 +713,3 @@ export const fetchRadarSearch = (queries: string[], coreKeywords: string[], shor
         coreKeywords: JSON.stringify(coreKeywords),
         shortQueries: JSON.stringify(shortQueries),
     });
-export const fetchRadarEvaluate = (items: RadarCandidate[], articleTitle: string, moneyAngle: string) =>
-    call<{ items: RadarEvaluated[] }>('radar-evaluate', {
-        items: JSON.stringify(items),
-        articleTitle,
-        moneyAngle,
-    });
-
-/**
- * 글감 주제 판정 — 연동된 AI 에이전트가 한다(사장님 지시 2026-08-21).
- * 쇼핑 검색 API 종료(2026-07-31) 뒤 "살 수 있는 물건인가"를 아는 건
- * 사전이 아니라 모델이다. 셋 다 예/아니오 분류 — 점수를 만들지 않는다.
- */
-export type GapTopicVerdict = { keyword: string; shopping: boolean; policy: boolean; ai: boolean };
-export const fetchGapTopics = (keywords: string[]) =>
-    call<{ topics: GapTopicVerdict[] }>('gap-topics', { keywords: JSON.stringify(keywords) });
