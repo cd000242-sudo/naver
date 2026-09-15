@@ -36,6 +36,7 @@ import {
     FLOW_WORKSPACE_ENTRY_LABEL_RE,
     hasGoogleSessionCookies,
     isFlowWorkspaceUrl,
+    isFlowProjectUrl,
 } from './flowWorkspaceEntryPolicy.js';
 // ✅ [v2.10.298] Flow 일별 카운터 — 한도 에러 발생 시 봇감지 vs 진짜 한도 구분
 import { incrementDailySuccess, classifyQuotaError, getDailySuccess } from '../utils/imageEngineDailyCounter.js';
@@ -402,6 +403,28 @@ async function minimizeFlowWindow(page: Page): Promise<boolean> {
                 await cdpSession.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'normal' } });
                 await cdpSession.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'minimized' } });
             }
+
+            /*
+             * [2026-09-15 사장님] "flow 창이 화면 밖에 거의 숨겨져 있어. 보이긴 하는데."
+             *
+             * --window-position=-32000,-32000 으로 밀어내지만 Windows 가 그 좌표를 무시하고
+             * 창을 화면 안으로 끌어당기는 일이 있다(코드에도 "off-screen 무시 대비"로 적혀 있다).
+             * 최소화가 통하면 안 보이지만, 최소화가 거부되면 창이 그대로 남는다.
+             *
+             * 그래서 최소화 뒤 실제 좌표를 읽어 보고, 화면 안에 들어와 있으면 CDP 로 다시
+             * 밀어낸다. headless 로 바꾸는 선택지는 없다 — 구글 BotGuard 에 즉시 걸린다.
+             */
+            const { bounds } = await cdpSession.send('Browser.getWindowBounds', { windowId });
+            const pulledOnScreen = bounds
+                && bounds.windowState !== 'minimized'
+                && Number(bounds.left ?? 0) > -10000;
+            if (pulledOnScreen) {
+                flowWarn(`[Flow] 창이 화면 안으로 끌려옴(left=${bounds.left}) — 다시 밀어냅니다`);
+                await cdpSession.send('Browser.setWindowBounds', {
+                    windowId,
+                    bounds: { left: -32000, top: -32000, width: 1280, height: 800 },
+                });
+            }
         } finally {
             try { await cdpSession?.detach?.(); } catch { /* popup이 detach 중 닫힐 수 있음 */ }
         }
@@ -524,18 +547,22 @@ export async function purgeFlowSessionStorage(): Promise<void> {
                 timeout: 30000,
             });
         }
+        /*
+         * [2026-09-15 사장님] "Flow 자꾸 세션 유지가 오래 안 간다."
+         *
+         * 여기서 localStorage 와 IndexedDB 를 통째로 지우고 있었다. 주석은 "cookies 유지"라
+         * 안심시키지만, 구글 로그인 상태가 쿠키에만 있다는 보장이 없다 — SPA 가 로그인 뒤
+         * 상태를 그 두 곳에 두면 지우는 순간 다시 로그인 화면으로 간다.
+         *
+         * 이 purge 의 목적은 마라톤 콜드 스타트 잔재 정리이지 로그아웃이 아니다. 그래서
+         * 인증이 살 수 있는 저장소(localStorage · IndexedDB)는 건드리지 않고, 목적에 필요한
+         * 것만 지운다: 세션 스토리지 · 서비스워커 · 캐시.
+         *
+         * 잔재 정리가 부족해 마라톤이 흔들린다면 그때 되돌리는 게 맞다 — 지금은 로그인이
+         * 풀리는 쪽이 더 크다.
+         */
         await page.evaluate(async () => {
-            try { localStorage.clear(); } catch {}
             try { sessionStorage.clear(); } catch {}
-            try {
-                const dbs = await ((indexedDB as any).databases?.() || Promise.resolve([]));
-                await Promise.all((dbs as any[]).map((db: any) =>
-                    db?.name ? new Promise<void>((res) => {
-                        const req = indexedDB.deleteDatabase(db.name);
-                        req.onsuccess = req.onerror = req.onblocked = () => res();
-                    }) : Promise.resolve()
-                ));
-            } catch {}
             try {
                 const regs = await navigator.serviceWorker?.getRegistrations?.() || [];
                 await Promise.all(regs.map((r) => r.unregister().catch(() => false)));
@@ -545,7 +572,7 @@ export async function purgeFlowSessionStorage(): Promise<void> {
                 await Promise.all(keys.map((k) => caches.delete(k).catch(() => false)));
             } catch {}
         });
-        flowLog('[Flow] ✅ storage purge 완료 (cookies 유지)');
+        flowLog('[Flow] ✅ storage purge 완료 (쿠키·localStorage·IndexedDB 는 보존 — 로그인 유지)');
         // SW unregister 적용 + redirect 로직 재시작
         await page.goto('https://labs.google/fx/tools/flow', {
             waitUntil: 'domcontentloaded',
@@ -1218,23 +1245,45 @@ async function isLoggedInToFlow(page: Page): Promise<boolean> {
         }).catch(() => null);
         if (sessionUser) return true;
 
-        // 3) DOM 신호: 사용자 아바타 또는 "프로젝트" 버튼이 보이면 로그인 완료
+        /* 3) DOM 신호: 사용자 아바타 또는 "프로젝트" 버튼이 보이면 로그인 완료
+         *
+         * [2026-09-15 사장님 실측] "세션이 로그인되어 있는데 자꾸 로그인하라고 뜬다."
+         * 로그가 원인을 그대로 보여줬다 — 창은 이미 flow.google.com 에 있고
+         * 구글 아바타(lh3.googleusercontent.com/ogw/…=s32-c-mo)와 Flow UI 자산까지 받아왔는데
+         * 판정은 "로그인 필요"였다.
+         *
+         * 두 신호가 모두 labs.google 시절 것이기 때문이다.
+         *   · /fx/api/auth/session 은 flow.google.com 에 없는 경로다(404 → null)
+         *   · 아래 셀렉터들은 옛 Labs UI 기준이라 새 UI 에서 하나도 안 걸린다
+         *
+         * 그래서 **실제로 존재하는 것이 로그에서 확인된** 신호를 더한다.
+         * 구글 계정 아바타는 로그인 상태에서만 붙는다 — 로그아웃 화면에는 없다.
+         */
         const domSignal = await page.evaluate(() => {
+            /* offsetParent 는 position:fixed 요소에서 null 이다. 구글 아바타는 보통 고정 헤더
+             * 안에 있어서 그 검사만으로는 "안 보인다"로 잘못 읽힌다. 실제 그려진 상자가 있는지 본다. */
+            const isVisible = (el: Element | null): boolean => {
+                if (!el) return false;
+                const rects = (el as HTMLElement).getClientRects();
+                return rects.length > 0 && rects[0].width > 0 && rects[0].height > 0;
+            };
             const selectors = [
                 'button[aria-label*="account" i]',
                 'img[alt*="profile" i]',
                 'button[aria-label*="프로필" i]',
                 '[data-testid*="user-menu"]',
+                // flow.google.com — 구글 계정 아바타(로그인 상태에서만 렌더된다)
+                'img[src*="googleusercontent.com"]',
+                '[aria-label*="Google 계정"]',
+                '[aria-label*="Google Account" i]',
             ];
             for (const sel of selectors) {
                 try {
-                    const el = document.querySelector(sel);
-                    if (el && (el as HTMLElement).offsetParent !== null) return true;
+                    if (isVisible(document.querySelector(sel))) return true;
                 } catch { /* invalid selector ignore */ }
             }
             const hasProjectButton = Array.from(document.querySelectorAll('button')).some((button) =>
-                /새\s*프로젝트|New\s*project|add_2/i.test(button.textContent || '')
-                && (button as HTMLElement).offsetParent !== null,
+                /새\s*프로젝트|New\s*project|add_2/i.test(button.textContent || '') && isVisible(button),
             );
             if (hasProjectButton) return true;
             return false;
@@ -1338,7 +1387,7 @@ async function ensureFlowProject(page: Page, forceNew: boolean = false): Promise
         // (이전 버그: forceNew=true여도 currentUrl이 project URL이면 아래 "이미
         // 프로젝트 페이지" 분기를 안 타지만, cachedProjectUrl 분기로 빠지는 등
         // 의도치 않게 누적 프로젝트로 흘러갈 위험 차단)
-    } else if (currentUrl.includes('/tools/flow/project/')) {
+    } else if (isFlowProjectUrl(currentUrl)) {
         cachedProjectUrl = currentUrl;
         flowLog('[Flow][1/3] ✅ 이미 프로젝트 페이지 — 재사용');
         return;
@@ -1346,7 +1395,7 @@ async function ensureFlowProject(page: Page, forceNew: boolean = false): Promise
         flowLog(`[Flow][1/3] 🔗 캐시된 프로젝트 이동 시도: ${cachedProjectUrl}`);
         await page.goto(cachedProjectUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
         await page.waitForTimeout(1500);
-        if (page.url().includes('/tools/flow/project/')) {
+        if (isFlowProjectUrl(page.url())) {
             flowLog('[Flow][1/3] ✅ 캐시 프로젝트 도착');
             return;
         }
@@ -1414,7 +1463,7 @@ async function ensureFlowProject(page: Page, forceNew: boolean = false): Promise
     flowLog('[Flow][1/3] "새 프로젝트" 클릭됨 — URL 리다이렉트 대기');
 
     try {
-        await page.waitForURL(/\/tools\/flow\/project\//, { timeout: 30000 });
+        await page.waitForURL((url) => isFlowProjectUrl(url.toString()), { timeout: 30000 });
     } catch (err) {
         await saveDebugScreenshot(page, 'no-project-redirect');
         throw new Error(`FLOW_PROJECT_REDIRECT_TIMEOUT:"새 프로젝트" 클릭 후 프로젝트 URL 리다이렉트 30초 초과. 현재 URL: ${page.url()}`);
@@ -1438,22 +1487,39 @@ function submitButtonLocator(page: Page): Locator {
     return page.locator('button').filter({ hasText: /arrow_forward/ }).first();
 }
 
-// R4 Phase 6: promptInput/submitButton 다중 셀렉터 우선순위 탐색
+/**
+ * [2026-09-15 사장님 실측] "이미지 생성이 엄청 느리다."
+ *
+ * 디버그 로그 타임스탬프로 잰 결과, 1장 182초 중 **Flow 가 그림을 그리는 시간은 42초**뿐이고
+ * 나머지는 앱이 화면 요소를 찾는 데 쓴다. 두 사이클 모두 같은 자리에서 먹혔다.
+ *   1회차: 입력창 탐색 92초 · 전송 버튼 28초
+ *   2회차: 입력창 탐색 66초 · 전송 버튼 38초
+ *
+ * 그런데 셀렉터 실패 1건(5초)으로는 그 시간이 설명되지 않는다. 로그가 "매칭됨" 한 줄뿐이라
+ * 어디서 먹히는지 알 수가 없다. 숫자를 모르는 채로 타임아웃을 줄이면 봇 감지 회피가 걸린
+ * 이 경로에서 차단을 부른다 — 그래서 먼저 **잰다**.
+ *
+ * 셀렉터마다 걸린 시간과 성공/실패를 남긴다. 다음 생성 한 번이면 정체가 드러난다.
+ */
 async function findFirstMatchingFlowSelector(page: Page, key: 'promptInput' | 'submitButton'): Promise<Locator | null> {
     const { iterateFlowSelectors } = await import('../automation/selectors/index.js');
     const { getRecoveryCoordinator } = await import('./recovery/index.js');
     const coord = getRecoveryCoordinator();
     const excluded = coord.getAttempts().r4SelectorFailed;
+    const searchStarted = Date.now();
     for (const { id, selector } of iterateFlowSelectors(key, excluded)) {
+        const tryStarted = Date.now();
         try {
             const loc = page.locator(selector).first();
             await loc.waitFor({ state: 'visible', timeout: 5000 });
-            flowLog(`[Flow] R4 ✅ ${key} 셀렉터 ${id} 매칭`);
+            flowLog(`[Flow][타이밍] ${key} 셀렉터 ${id} 매칭 — 이 셀렉터 ${Date.now() - tryStarted}ms / 탐색 누적 ${Date.now() - searchStarted}ms`);
             return loc;
         } catch {
+            flowLog(`[Flow][타이밍] ${key} 셀렉터 ${id} 실패 — ${Date.now() - tryStarted}ms (${selector.substring(0, 50)})`);
             coord.recordSelectorFailure(id);
         }
     }
+    flowLog(`[Flow][타이밍] ${key} 전체 탐색 실패 — ${Date.now() - searchStarted}ms`);
     return null;
 }
 
@@ -1462,18 +1528,46 @@ async function findFirstMatchingFlowSelector(page: Page, key: 'promptInput' | 's
 async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
     flowLog(`[Flow][2/3] 프롬프트 입력 시작 (길이: ${prompt.length})`);
 
+    /* [2026-09-15] 구간별 시간을 남긴다 — 실측 182초 중 120초가 이 함수 안에서 사라지는데
+     * 로그가 "매칭됨" 한 줄뿐이라 어디인지 알 수 없었다. 숫자 없이 타임아웃을 건드리면
+     * 봇 감지 회피가 걸린 경로에서 차단을 부른다. */
+    const phaseStart = Date.now();
+    let lap = phaseStart;
+    const mark = (label: string): void => {
+        const now = Date.now();
+        flowLog(`[Flow][타이밍] ${label} ${now - lap}ms (입력단계 누적 ${now - phaseStart}ms)`);
+        lap = now;
+    };
+
     // 2026-04-28 changelog iframe이 매 시도마다 다시 뜰 수 있어 입력 직전 재dismiss
     await dismissChangelogModal(page);
+    mark('changelog 닫기');
 
     // ✅ [Phase 1 anti-BotGuard] 입력 전 인간형 워밍업 — 마우스 무행동 상태에서 액션 시작 방지.
     //   BotGuard는 "마우스무브 0으로 의미있는 액션 = 봇"으로 본다. 행동 이력을 먼저 쌓는다.
+    // [2026-09-15 사장님 실측] 단, 창이 화면 밖이면 궤적을 끈다.
+    //   humanWarmup 81,395ms · 두 번째 사이클 154,777ms · 전송 버튼 humanClick 80,824ms.
+    //   1장 180초 중 Flow 가 그림을 그리는 건 42~58초뿐이고 나머지를 여기서 썼다.
+    //   창을 -32000,-32000 으로 밀어놨기 때문에 mouse.move 한 점이 정상 속도로 처리되지 않는다.
+    //   (같은 뿌리로 아래 1578행에서 page.keyboard 입력도 이미 fill 로 롤백된 적이 있다.)
+    //   화면 밖 창에는 볼 사람도 흉내 낼 커서도 없으니 궤적은 비용만 낸다.
+    //   headful·실제 Chrome·실 UA 등 나머지 봇 회피 장치는 그대로 유지된다.
+    //   좌표를 직접 읽는다 — 실행 중 창이 화면 안으로 끌려오면 그때는 다시 궤적을 쓴다.
     try {
-        const { humanWarmup } = await import('./humanInteraction.js');
+        const { humanWarmup, setHumanMotionEnabled } = await import('./humanInteraction.js');
+        let offScreen = false;
+        try {
+            offScreen = await page.evaluate(() => window.screenX < -10000 || window.screenY < -10000);
+        } catch { /* 좌표를 못 읽으면 예전 동작(궤적 사용)을 유지한다 */ }
+        setHumanMotionEnabled(!offScreen);
+        if (offScreen) flowLog('[Flow][타이밍] 화면 밖 창 — 사람흉내 마우스 궤적 생략');
         await humanWarmup(page);
     } catch { /* best-effort */ }
+    mark('humanWarmup');
 
     // R4 Phase 6: 단일 셀렉터 → 다중 폴백
     let promptInput = await findFirstMatchingFlowSelector(page, 'promptInput');
+    mark('promptInput 탐색');
     if (!promptInput) {
         promptInput = promptInputLocator(page);
         try {
@@ -1485,6 +1579,7 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
     }
     // changelog/overlay가 가리는 케이스 4단계 폴백 (일반 → elementFromPoint hide → force → JS dispatch)
     await safeClickWithOverlayGuard(page, promptInput, 'promptInput');
+    mark('promptInput 클릭');
     // [v1.6.1] 포커스 안정화 150→50ms
     await page.waitForTimeout(50);
 
@@ -1515,6 +1610,7 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
         await saveDebugScreenshot(page, 'input-all-methods-failed');
         throw new Error('FLOW_PROMPT_INPUT_ALL_FAILED:3가지 입력 방식(fill/pressSequentially/keyboard) 모두 실패');
     }
+    mark('텍스트 입력');
 
     // [2026-05-27 작업 25 — 2순위 fix] 입력값 검증 복구 (v1.6.1에서 성능상 제거됐던 부분)
     //   사용자 보고: prompt 전송 후 165초 무응답, [Flow][Net][DIAG] image 응답 0건.
@@ -1550,10 +1646,13 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
         flowWarn(`[Flow][2/3] 입력 검증 중 예외 (계속 진행): ${msg.substring(0, 100)}`);
     }
 
+    mark('입력값 검증');
+
     // 전송 버튼
     const submitBtn = submitButtonLocator(page);
     try {
         await submitBtn.waitFor({ state: 'visible', timeout: 10000 });
+        mark('전송 버튼 탐색');
     } catch (err) {
         await saveDebugScreenshot(page, 'no-submit-btn');
         throw new Error('FLOW_SUBMIT_BUTTON_NOT_FOUND:전송 버튼(arrow_forward)을 10초 내 찾지 못함.');
@@ -1580,7 +1679,8 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
             });
         }
     }
-    flowLog('[Flow][2/3] ✅ 전송 버튼 클릭됨');
+    mark('전송 버튼 클릭');
+    flowLog('[Flow][2/3] ✅ 전송 버튼 클릭됨 — 입력단계 총 ' + (Date.now() - phaseStart) + 'ms');
 }
 
 // [v1.6.1] 입력창이 재활성화될 때까지 대기 (파이프라인용)

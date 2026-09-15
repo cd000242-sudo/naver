@@ -36,9 +36,12 @@ export const FLOW_SELECTORS: SelectorMap<FlowSelectorKey> = {
     'Flow 새 프로젝트 버튼',
   ),
   promptInput: entry(
-    '[role="textbox"][contenteditable="true"]',
+    // [2026-09-15] 순서를 바꿨다. 실측에서 role=textbox 는 매번 5,001ms 를 쓰고 실패했고
+    // 바로 다음 div[contenteditable] 이 45ms 에 맞았다. Flow 가 role 속성을 뺀 것으로 보인다.
+    // 예전 셀렉터는 지우지 않고 뒤로 미룬다 — 되돌아오면 그대로 잡힌다.
+    'div[contenteditable="true"]',
     [
-      'div[contenteditable="true"]',
+      '[role="textbox"][contenteditable="true"]',
       'textarea[aria-label*="prompt" i]',
       'textarea[placeholder*="prompt" i]',
       'input[type="text"][aria-label*="prompt" i]',

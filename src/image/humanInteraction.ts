@@ -12,6 +12,35 @@
 
 import type { Page, Locator } from 'playwright';
 
+/*
+ * [2026-09-15 사장님 실측] "이미지 생성이 엄청 느리다."
+ *
+ * 구간별로 재보니 1장 180초 중 Flow 가 그림을 그리는 건 42~58초뿐이고, 나머지를 여기서 쓴다.
+ *   humanWarmup      81,395ms · 두 번째 사이클은 154,777ms
+ *   humanClick(전송) 80,824ms
+ *   셀렉터·입력·검증  합쳐서 7초 (정상)
+ *
+ * 원인은 화면 밖 창이다. Flow 창은 봇 감지를 피하려고 headless 대신 headful 로 띄우고
+ * --window-position=-32000,-32000 으로 밀어낸다. 그 창에 mouse.move 를 한 점씩 보내면
+ * 호출 하나하나가 정상 속도로 처리되지 않아, 코드상 2~3초짜리 워밍업이 1~2분이 된다.
+ *
+ * 화면 밖 창에서 마우스 궤적은 사람 행동을 흉내 내는 값이 거의 없고 비용만 낸다.
+ * 그래서 화면 밖일 때는 궤적을 건너뛰고 바로 누른다. headful·실제 Chrome·실 UA 라는
+ * 나머지 봇 회피 장치는 그대로 유지된다.
+ *
+ * 되돌릴 수 있게 플래그로 둔다 — 차단이 늘면 setHumanMotionEnabled(true) 로 복구한다.
+ */
+let _motionEnabled = true;
+
+/** 화면 밖(off-screen) 창이면 false 로 둔다. 기본값은 예전 동작(궤적 사용). */
+export function setHumanMotionEnabled(enabled: boolean): void {
+  _motionEnabled = enabled;
+}
+
+export function isHumanMotionEnabled(): boolean {
+  return _motionEnabled;
+}
+
 /** Box-Muller Gaussian sample → rounded delay (ms), clamped to >= min. */
 export function gaussianDelay(mean: number, std: number, min = 0): number {
   let u = 0;
@@ -72,6 +101,12 @@ function lastMouse(page: Page): Pt {
 
 /** Move the mouse to (x,y) along a human path with variable per-step timing (~10–50 events/s). */
 export async function humanMouseMoveTo(page: Page, x: number, y: number): Promise<void> {
+  if (!_motionEnabled) {
+    // 화면 밖 창 — 궤적 없이 한 번에 옮긴다. 마지막 좌표는 그대로 기록한다.
+    await page.mouse.move(x, y);
+    (page as any).__hmLast = { x, y };
+    return;
+  }
   const path = buildMousePath(lastMouse(page), { x, y });
   for (const p of path) {
     await page.mouse.move(p.x, p.y);
@@ -82,6 +117,11 @@ export async function humanMouseMoveTo(page: Page, x: number, y: number): Promis
 
 /** Move to a locator's center via a human path, hover briefly, then press with realistic duration. */
 export async function humanClick(page: Page, locator: Locator): Promise<void> {
+  if (!_motionEnabled) {
+    // 화면 밖 창 — 궤적·호버 없이 바로 누른다. 여기서 80초가 샜다.
+    await locator.click();
+    return;
+  }
   let box: { x: number; y: number; width: number; height: number } | null = null;
   try { box = await locator.boundingBox(); } catch { /* fall through */ }
   if (!box) {
@@ -124,6 +164,8 @@ export async function humanWarmup(
   page: Page,
   viewport: { width: number; height: number } = { width: 1280, height: 800 },
 ): Promise<void> {
+  // 화면 밖 창에는 볼 사람도, 흉내 낼 커서도 없다. 81~155초를 여기서 돌려받는다.
+  if (!_motionEnabled) return;
   try {
     for (const t of buildWarmupTargets(viewport.width, viewport.height)) {
       await humanMouseMoveTo(page, t.x, t.y);
