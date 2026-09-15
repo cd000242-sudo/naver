@@ -32,6 +32,12 @@ declare function syncIntegratedPreviewFromInputs(): void;
  */
 declare function updateUnifiedPreview(content: any): void;
 declare function updateUnifiedImagePreview(headings: any[], images: any[]): void;
+/*
+ * 이미지 관리 탭의 소제목 카드는 이 함수만 다시 그린다(headingImageGen.ts, 같은 번들 스코프).
+ * 적용은 본문을 바꾸지 않으므로 input 이벤트가 나지 않고, 그래서 이미지 탭은 적용 이전의
+ * 분석 결과를 그대로 들고 있었다 — 소제목 패널 6개, 이미지 탭 9개가 갈리던 이유다.
+ */
+declare function autoAnalyzeHeadings(content: any, options?: { localOnly?: boolean }): Promise<void>;
 
 const HEADING_PANEL_IDS = {
   body: 'unified-generated-content',
@@ -87,6 +93,15 @@ function writeBody(next: string, options: { userEdit?: boolean } = {}): void {
   } catch { /* 이벤트 생성 실패는 무시 — 화면 갱신은 아래에서 한다 */ }
 
   renderHeadingList();
+
+  /*
+   * [2026-09-15 사장님] "반자동 편집이랑 소제목 미리보기는 한 몸이어야 돼.
+   * 수정하면 똑같이 수정돼서 바로바로 보여줘야 돼."
+   *
+   * 지정·해제·이름 수정을 누르는 즉시 미리보기와 이미지 탭까지 같은 소제목이 된다.
+   * 적용 버튼은 이제 확인용이다 — 누르지 않아도 어긋나지 않는다.
+   */
+  if (options.userEdit !== false) applyEditedHeadingsToPreview({ silent: true });
 }
 
 /** 본문의 표기된 소제목을 목록으로 그린다. */
@@ -150,12 +165,11 @@ export function renderHeadingList(): void {
  * 막으므로(headingsLockedByUser), 아무도 headings 를 다시 세우지 않는 구멍이 생긴다.
  * 이 함수가 그 구멍을 메운다 — 본문 표기가 유일한 원천이고, 나머지는 거기서 파생된다.
  */
-export function applyEditedHeadingsToPreview(): boolean {
+export function applyEditedHeadingsToPreview(options: { silent?: boolean } = {}): boolean {
   const textarea = getBodyTextarea();
   if (!textarea) return false;
 
-  const body = textarea.value || '';
-  const document_ = extractSemiAutoDocumentFromBody(body, { markedOnly: true });
+  let body = textarea.value || '';
   if (!body.trim()) {
     try { (window as any).toastManager?.warning?.('적용할 본문이 없습니다.'); } catch { /* ignore */ }
     return false;
@@ -166,6 +180,35 @@ export function applyEditedHeadingsToPreview(): boolean {
     try { (window as any).toastManager?.warning?.('적용할 글이 없습니다. 먼저 글을 생성하거나 불러오세요.'); } catch { /* ignore */ }
     return false;
   }
+
+  /*
+   * [2026-09-15 사장님 실측] 붙여넣은 직후에는 본문에 "## " 표기가 하나도 없다. 소제목은
+   * 휴리스틱이 잡아 미리보기에만 떠 있는 상태다. 여기서 적용을 누르면 표기 기준 추출이
+   * 0개를 돌려줘 **소제목이 통째로 지워졌다** — 미리보기 카드가 사라지고 본문이 한 덩어리가
+   * 되며, 그대로 발행하면 이미지 삽입 지점도 0개가 된다.
+   *
+   * 적용은 "화면에 보이는 것을 굳히는" 버튼이지 지우는 버튼이 아니다. 아직 패널을 한 번도
+   * 건드리지 않은 글이면(잠금 없음) 감지된 소제목을 표기로 먼저 굳힌 뒤 적용한다.
+   * 사용자가 직접 전부 해제한 경우(잠금 있음)는 의도이므로 0개 그대로 둔다.
+   */
+  if (listHeadingLines(body).length === 0 && content.headingsLockedByUser !== true) {
+    const detected = extractSemiAutoHeadingsFromBody(body)
+      .map((heading) => String(heading.title || '').trim())
+      .filter(Boolean);
+    if (detected.length > 0) {
+      const marked = applyDetectedHeadings(body, detected);
+      if (marked !== body) {
+        // writeBody 는 다시 이 함수를 부르므로 여기서는 본문만 직접 갱신한다.
+        textarea.value = marked;
+        body = marked;
+        try {
+          textarea.dispatchEvent(new Event('input', { bubbles: true }));
+        } catch { /* 이벤트 실패는 무시 — 아래에서 상태를 직접 세운다 */ }
+      }
+    }
+  }
+
+  const document_ = extractSemiAutoDocumentFromBody(body, { markedOnly: true });
 
   const titleInput = headingPanelById<HTMLInputElement>('unified-generated-title');
   if (titleInput && titleInput.value.trim()) content.selectedTitle = titleInput.value.trim();
@@ -188,15 +231,41 @@ export function applyEditedHeadingsToPreview(): boolean {
   content.headingsLockedByUser = true;
   content._bodyManuallyEdited = true;
 
-  try {
-    if (typeof updateUnifiedPreview === 'function') updateUnifiedPreview(content);
-  } catch (error) {
-    console.warn('[HeadingPanel] 통합 미리보기 갱신 실패:', (error as Error)?.message);
+  /*
+   * updateUnifiedPreview 는 미리보기 영역을 펼치면서 테두리를 깜빡이고 그 자리로 스크롤한다.
+   * 버튼을 누를 때마다 화면이 튀면 편집을 못 하므로, 자동 반영에서는 부르지 않는다.
+   * 내용 자체는 아래 재분석과 편집 미리보기 동기화가 그린다.
+   */
+  if (options.silent !== true) {
+    try {
+      if (typeof updateUnifiedPreview === 'function') updateUnifiedPreview(content);
+    } catch (error) {
+      console.warn('[HeadingPanel] 통합 미리보기 갱신 실패:', (error as Error)?.message);
+    }
   }
+  /*
+   * 이미지 관리 탭과 미리보기를 같은 원천(방금 굳힌 content.headings)으로 다시 그린다.
+   * localOnly 라서 LLM 프롬프트 호출 없이 화면만 즉시 맞춘다. 예전처럼 빈 배열로
+   * updateUnifiedImagePreview 만 부르면 이미 만들어 둔 이미지가 미리보기에서 사라졌다.
+   */
+  let refreshedByAnalysis = false;
   try {
-    if (typeof updateUnifiedImagePreview === 'function') updateUnifiedImagePreview(content.headings, []);
+    if (typeof autoAnalyzeHeadings === 'function') {
+      refreshedByAnalysis = true;
+      void Promise.resolve(autoAnalyzeHeadings(content, { localOnly: true })).catch((error) => {
+        console.warn('[HeadingPanel] 소제목 재분석 실패:', (error as Error)?.message);
+      });
+    }
   } catch (error) {
-    console.warn('[HeadingPanel] 이미지 미리보기 갱신 실패:', (error as Error)?.message);
+    refreshedByAnalysis = false;
+    console.warn('[HeadingPanel] 소제목 재분석 호출 실패:', (error as Error)?.message);
+  }
+  if (!refreshedByAnalysis) {
+    try {
+      if (typeof updateUnifiedImagePreview === 'function') updateUnifiedImagePreview(content.headings, []);
+    } catch (error) {
+      console.warn('[HeadingPanel] 이미지 미리보기 갱신 실패:', (error as Error)?.message);
+    }
   }
   try {
     syncIntegratedPreviewFromInputs();
@@ -205,9 +274,12 @@ export function applyEditedHeadingsToPreview(): boolean {
   }
 
   renderHeadingList();
-  try {
-    (window as any).toastManager?.success?.(`✅ 소제목 ${content.headings.length}개를 적용했습니다.`);
-  } catch { /* ignore */ }
+  // 자동 반영까지 토스트를 띄우면 클릭마다 알림이 쌓인다 — 버튼을 누른 때만 알린다.
+  if (options.silent !== true) {
+    try {
+      (window as any).toastManager?.success?.(`✅ 소제목 ${content.headings.length}개를 적용했습니다.`);
+    } catch { /* ignore */ }
+  }
   return true;
 }
 
