@@ -1,23 +1,220 @@
 {
-  "publishedAt": "2026-09-15T09:15:28.873Z",
+  "publishedAt": "2026-09-15T21:42:20.195Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 224,
-    "niche": 2,
-    "preemption": 16,
+    "candidates": 232,
+    "niche": 1,
+    "preemption": 15,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-09-15",
+    "day": "2026-09-16",
     "keywords": [
-      "봉누도 월드컵",
-      "kaist 입학처",
-      "kaist 서울캠퍼스"
+      "송지은 대학",
+      "찰스 3세 퇴위",
+      "김동현 무릎"
     ]
   },
   "rows": [
+    {
+      "keyword": "송지은 대학",
+      "issue": "송지은",
+      "topic": "송지은",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "송지은 프로필 나이 학력 남편 박위 시크릿, \"서울시 홍보대사도 함께 내려놨네요!\"",
+          "송지은 프로필 나이 키 학력!남편 박위 결혼 자녀 시크릿 가수 데뷔 고향 MBTI 배우 동상이몽 근황까지",
+          "송지은 박위 결혼 시크릿 나이 학력 직업 프로필 예능 드라마 동상이몽2 인스타 프로필",
+          "[송지은 프로필] 출연작, 결혼, 시험관 시술 및 최근 박위 논란 총정리",
+          "송지은 프로필 인스타 나이 고향 학력 시크릿 남편 박위 결혼 KTX CCTV논란 동상이몽 근황",
+          "\"박위와 어떻게 만났을까?\" 송지은 프로필ㅣ 나이, 남편, 박위 결혼 논란부터 데뷔 근황까지 총정리",
+          "박위 동생 박지우는 누구? 직업·나이, 형 위해 대학까지 휴학했던 사연",
+          "박위 송지은 부부 프로필, 나이 학력 직업부터 러브 스토리까지",
+          "송지은 프로필 남편 박위 학력 시크릿 가수 데뷔 MBTI 동상이몽",
+          "\"송지은 박위 논란 이후 첫 기독교 방송\" 프로필 키 나이 학력 재산 신혼집 결혼 위라클 사고이유"
+        ],
+        "measuredAt": "2026-09-15T21:38:00.313Z"
+      },
+      "documentCount": 3234,
+      "documentCountMeasured": true,
+      "searchVolume": 330,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.8009814527402244,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 330",
+        "문서수 3,234",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 330 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.8배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "박위 CCTV 논란 속 송지은이 기독교 방송에 출연해 눈물을 보였다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "송지은 대학 학력부터 박위 결혼 프로필까지 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "송지은 대학보다 요즘 더 궁금한 건 박위 침묵 속 그 방송이더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "송지은 박위",
+          "searchVolume": 34230,
+          "frame": "generic"
+        },
+        {
+          "keyword": "송지은 프로필",
+          "searchVolume": 12880,
+          "frame": "generic"
+        },
+        {
+          "keyword": "송지은 나이",
+          "searchVolume": 6880,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "송지은 박위",
+          "searchVolume": 34230,
+          "documentCount": 17811,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "송지은 프로필",
+          "searchVolume": 12880,
+          "documentCount": 2664,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "송지은 나이",
+          "searchVolume": 6880,
+          "documentCount": 5622,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "송지은 인스타",
+          "searchVolume": 3420,
+          "documentCount": 4769,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "송지은 남편",
+          "searchVolume": 910,
+          "documentCount": 5477,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "송지은 학력",
+          "searchVolume": 390,
+          "documentCount": 1054,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          26,
+          46,
+          59,
+          72,
+          79,
+          100,
+          74,
+          72,
+          46,
+          21,
+          28,
+          28,
+          0,
+          21,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "kinCount": 224,
+      "kinTop": [
+        {
+          "title": "서원대학교 패션의류학과",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11050405&docId=487008397&answerNo=3",
+          "views": 1122,
+          "answers": 3
+        },
+        {
+          "title": "위라클 박위(유튜버,송지은 남편)가 숭실대 경영 출신",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=483662126&answerNo=1",
+          "views": 129,
+          "answers": 3
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    },
     {
       "keyword": "찰스 3세 퇴위",
       "issue": "찰스 3세",
@@ -181,7 +378,8 @@
           15,
           22,
           28
-        ]
+        ],
+        "measuredAt": "2026-09-15T21:42:20.929Z"
       },
       "kinCount": 177,
       "kinTop": [
@@ -196,7 +394,8 @@
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "김동현 무릎",
@@ -376,7 +575,8 @@
           76
         ],
         "label": "❄️ 시즌성",
-        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보"
+        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
+        "measuredAt": "2026-09-15T21:42:20.929Z"
       },
       "kinCount": 359,
       "kinTop": [
@@ -402,7 +602,8 @@
         "provider": "claude",
         "proposed": 8,
         "verified": 5
-      }
+      },
+      "carried": true
     },
     {
       "keyword": "봉누도 월드컵",
@@ -528,7 +729,7 @@
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-15T05:41:05.001Z"
+        "measuredAt": "2026-09-15T21:42:20.929Z"
       },
       "kinCount": 1,
       "kinTop": [],
@@ -706,7 +907,7 @@
           13,
           26
         ],
-        "measuredAt": "2026-09-15T05:41:05.001Z"
+        "measuredAt": "2026-09-15T21:42:20.929Z"
       },
       "kinCount": 507,
       "kinTop": [],
@@ -885,7 +1086,7 @@
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-15T05:41:05.001Z"
+        "measuredAt": "2026-09-15T21:42:20.929Z"
       },
       "kinCount": 1898,
       "kinTop": [],
@@ -1062,7 +1263,7 @@
           52,
           32
         ],
-        "measuredAt": "2026-09-15T05:41:05.001Z"
+        "measuredAt": "2026-09-15T21:42:20.929Z"
       },
       "kinCount": 0,
       "kinTop": [],
@@ -1080,6 +1281,1222 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "뉴로퓨전 최한철",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 46,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 46",
+        "선점 후보 — 경쟁 문서 46건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴로퓨전이 투자 분석 플랫폼 '밸리 AI'에 투자 리서치 AI 에이전트를 탑재했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴로퓨전 최한철 밸리 AI 투자 리서치 에이전트 탑재 살펴보기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴로퓨전 최한철이 밸리 AI에 넣은 에이전트, 투자 리서치가 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 잡플래닛",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 6,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 6",
+        "선점 후보 — 경쟁 문서 6건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴로퓨전이 투자 분석 플랫폼 '밸리 AI'에 투자 리서치 AI 에이전트를 탑재했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴로퓨전 잡플래닛 연봉·면접후기·채용 실제 평가",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴로퓨전 잡플래닛 별점만 믿고 채용 지원했다가 면접에서 말문이 막혔네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": 40,
+          "documentCount": 44,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 블라인드",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 17,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 17",
+        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴로퓨전이 투자 분석 플랫폼 '밸리 AI'에 투자 리서치 AI 에이전트를 탑재했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴로퓨전 블라인드 연봉·후기와 밸리 AI 채용 정보",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴로퓨전 블라인드 채용 후기 보러 갔다가 연봉 얘기에 한참 발이 묶였네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": 40,
+          "documentCount": 44,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 연봉",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 22,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 22",
+        "선점 후보 — 경쟁 문서 22건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴로퓨전이 투자 분석 플랫폼 '밸리 AI'에 투자 리서치 AI 에이전트를 탑재했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴로퓨전 연봉 밸리 AI 만든 회사 채용조건 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴로퓨전 연봉 보러 갔다가 채용 공고에 눈이 더 오래 머물렀네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": 40,
+          "documentCount": 44,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "송지은 어머니 통곡",
+      "issue": "송지은",
+      "topic": "송지은",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 24,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 24",
+        "선점 후보 — 경쟁 문서 24건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "박위 CCTV 논란 속 송지은이 기독교 방송에 출연해 눈물을 보였다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "송지은 어머니 통곡 새롭게하소서 방송서 눈물 흘린 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "송지은 어머니 통곡한 사연 박위 논란 속 방송 보다가 멈췄네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "송지은 박위",
+          "searchVolume": 34230,
+          "frame": "generic"
+        },
+        {
+          "keyword": "송지은 새롭게하소서",
+          "searchVolume": 240,
+          "frame": "generic"
+        },
+        {
+          "keyword": "송지은 남편 박위",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "송지은 박위",
+          "searchVolume": 34230,
+          "documentCount": 17811,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "송지은 새롭게하소서",
+          "searchVolume": 240,
+          "documentCount": 7932,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "송지은 남편 박위",
+          "searchVolume": 40,
+          "documentCount": 4537,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "송지은 눈물",
+          "searchVolume": 10,
+          "documentCount": 4358,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "PC-ALM 원리",
+      "issue": "PC-ALM",
+      "topic": "PC-ALM",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 33,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 33",
+        "선점 후보 — 경쟁 문서 33건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "사카나 AI가 뇌처럼 학습하는 역전파 대체 기술 'PC-ALM'을 발표했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "PC-ALM 원리, 역전파와 다른 학습 방식 3가지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "PC-ALM 원리 뇌처럼 학습한다더니 여기서 의견이 갈리네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 투자유치",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 43,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 43",
+        "선점 후보 — 경쟁 문서 43건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴로퓨전이 투자 분석 플랫폼 '밸리 AI'에 투자 리서치 AI 에이전트를 탑재했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴로퓨전 투자유치, 밸리 AI 투자 리서치 AI 에이전트 실체",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴로퓨전 투자유치 찾아봤는데 밸리 AI 에이전트 얘기가 더 많더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "PC-ALM 뜻",
+      "issue": "PC-ALM",
+      "topic": "PC-ALM",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 66,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 66",
+        "선점 후보 — 경쟁 문서 66건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "사카나 AI가 뇌처럼 학습하는 역전파 대체 기술 'PC-ALM'을 발표했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": {
+        "seo": {
+          "text": "PC-ALM 뜻과 사카나 AI 역전파 대체 기술 차이",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "PC-ALM 뜻 찾다가 역전파 대체라는 말에 생각보다 오래 멈췄네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": {
+        "verdict": "bad",
+        "points": [
+          {
+            "text": "'PC-ALM 뜻'의 '뜻'은 정의 한 줄을 원하는 신호다. 검색자는 PC-ALM이 무엇의 약자인지(정보) 확인하면 즉시 만족하고 나간다. 도구 URL·구매처·절차를 찾는 검색이 아니다."
+          },
+          {
+            "text": "'같이 검색되는 확인된 검색어: (없음)'은 이 키워드가 확장·후속 행동으로 이어지지 않는 막다른 질의라는 뜻이다. 비교·가격·다운로드·설정 같은 상업/행동 의도 검색어가 하나도 붙지 않았다."
+          },
+          {
+            "text": "약자 뜻 검색자는 구매 상태가 아니다. ALM 계열은 B2B 엔터프라이즈 SW라 광고 CPC 자체는 높을 수 있으나, '뜻'만 찾는 사람은 그 SaaS 광고를 클릭할 이유가 없다 — 노출은 되어도 클릭 의도가 없다."
+          },
+          {
+            "text": "'뜻' 검색은 한 줄 얻고 나가는 전형적 이탈형 질의다. 읽어야 풀리는 절차·트러블슈팅이 아니라서 체류 시간이 짧고, 스크롤 전에 답을 얻으면 광고 노출 기회 자체가 줄어든다."
+          }
+        ],
+        "angle": "정의만으로는 수익이 안 난다. 쓴다면 'PC-ALM 뜻'을 도입부 한 줄로 처리하고, 실제 도입 검토자가 머무를 각도 — 즉 'PC-ALM 도입 비용/대안 비교/설정 절차' 같은 행동·상업 의도로 본문을 끌고 가야 광고가 붙을 여지가 생긴다. 다만 확인된 후속 검색어가 (없음)인 이상 이 키워드 단독으로는 진입하지 말고, 상업 의도 키워드가 실측될 때 그쪽"
+      },
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "PC-ALM 상용화",
+      "issue": "PC-ALM",
+      "topic": "PC-ALM",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "실제 적용 시점",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 69,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 69",
+        "선점 후보 — 경쟁 문서 69건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 실제 적용 시점"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "사카나 AI가 뇌처럼 학습하는 역전파 대체 기술 'PC-ALM'을 발표했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "PC-ALM 상용화 시점, 사카나 AI 역전파 대체 기술",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "PC-ALM 상용화 나왔다는데 역전파를 왜 버렸는지 많이들 모르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "유승호 결혼식 동행",
+      "issue": "유승호 결혼식 동행",
+      "topic": "유승호 결혼식 동행",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 109,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 109",
+        "선점 후보 — 경쟁 문서 109건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "유승호가 틈만나면서 여친 전 남친 결혼식 동행 가정에 단호하게 반응했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "유승호 결혼식 동행 발언 틈만나면 영케이 반응",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "유승호 결혼식 동행 근황 보고 다들 한마디씩 하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "유승호 근황",
+          "searchVolume": 1300,
+          "frame": "generic"
+        },
+        {
+          "keyword": "틈만나면 유승호",
+          "searchVolume": 860,
+          "frame": "generic"
+        },
+        {
+          "keyword": "유승호 결혼",
+          "searchVolume": 500,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "유승호 근황",
+          "searchVolume": 1300,
+          "documentCount": 2082,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "틈만나면 유승호",
+          "searchVolume": 860,
+          "documentCount": 1277,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "유승호 결혼",
+          "searchVolume": 500,
+          "documentCount": 6736,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "유승호 틈만나면",
+          "searchVolume": 100,
+          "documentCount": 1277,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "유승호 여친",
+          "searchVolume": 40,
+          "documentCount": 728,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "유승호 열애",
+          "searchVolume": 30,
+          "documentCount": 1015,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 11,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 매출",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 135,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 135",
+        "선점 후보 — 경쟁 문서 135건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴로퓨전이 투자 분석 플랫폼 '밸리 AI'에 투자 리서치 AI 에이전트를 탑재했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴로퓨전 매출과 밸리 AI 투자 리서치 에이전트 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴로퓨전 매출 얼마나 나오나 보다가 채용 공고에서 눈을 못 떼겠더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "뉴로퓨전 투자",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": 40,
+          "documentCount": 44,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "PC-ALM 성능",
+      "issue": "PC-ALM",
+      "topic": "PC-ALM",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "역전파 대비",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 154,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 154",
+        "선점 후보 — 경쟁 문서 154건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 역전파 대비"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "사카나 AI가 뇌처럼 학습하는 역전파 대체 기술 'PC-ALM'을 발표했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "PC-ALM 성능 역전파 대체 기술 사카나 AI 발표",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "PC-ALM 성능 역전파 없이 학습한다길래 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 밸리",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 165,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 165",
+        "선점 후보 — 경쟁 문서 165건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴로퓨전이 투자 분석 플랫폼 '밸리 AI'에 투자 리서치 AI 에이전트를 탑재했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴로퓨전 밸리 AI에 새로 탑재된 투자 리서치 에이전트",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴로퓨전 밸리 AI가 투자 답변 넘어 시장까지 추적한다길래 봤더니",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "엄지성 해트트릭 카타르",
+      "issue": "엄지성 해트트릭 카타르",
+      "topic": "엄지성 해트트릭 카타르",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 298,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 298",
+        "선점 후보 — 경쟁 문서 298건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "엄지성 해트트릭으로 남자축구가 카타르를 4-1 완파하며 대회 첫 승을 거뒀다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "엄지성 해트트릭 카타르 4-1 완파 나고야AG 첫 승 하이라이트",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "엄지성 해트트릭 카타르전 프로필 찾아보다 전반 기록에서 멈췄네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "한국 카타르 축구",
+          "searchVolume": 8910,
+          "frame": "generic"
+        },
+        {
+          "keyword": "엄지성 프로필",
+          "searchVolume": 5940,
+          "frame": "generic"
+        },
+        {
+          "keyword": "엄지성 해트트릭",
+          "searchVolume": 4880,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "한국 카타르 축구",
+          "searchVolume": 8910,
+          "documentCount": 123649,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엄지성 프로필",
+          "searchVolume": 5940,
+          "documentCount": 356,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엄지성 해트트릭",
+          "searchVolume": 4880,
+          "documentCount": 444,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엄지성 소속팀",
+          "searchVolume": 400,
+          "documentCount": 3281,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "엄지성 골",
+          "searchVolume": 130,
+          "documentCount": 7423,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": [
+        {
+          "title": "아시안게임 카타르전",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100602&docId=495181234&answerNo=5",
+          "views": 33,
+          "answers": 5
+        },
+        {
+          "title": "지금 카타르vs대한민국 축구",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010101&docId=495179835&answerNo=2",
+          "views": 25,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴로퓨전 서비스",
+      "issue": "뉴로퓨전",
+      "topic": "뉴로퓨전",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 289,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 289",
+        "선점 후보 — 경쟁 문서 289건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴로퓨전이 투자 분석 플랫폼 '밸리 AI'에 투자 리서치 AI 에이전트를 탑재했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴로퓨전 서비스 밸리 AI 투자 리서치 에이전트 살펴봤어요",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴로퓨전 서비스 한참 쓰다 보니까 채용 공고까지 눈이 가더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": 40,
+          "documentCount": 44,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T21:35:40.108Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "인포시즈 탁정수",
       "issue": "인포시즈",
@@ -1158,7 +2575,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 매출",
@@ -1238,7 +2656,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 박준",
@@ -1313,7 +2732,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 연봉",
@@ -1392,7 +2812,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 잡플래닛",
@@ -1471,7 +2892,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 온톨로지",
@@ -1578,7 +3000,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 블라인드",
@@ -1657,7 +3080,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "베스핀글로벌 블라인드",
@@ -1758,7 +3182,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 주가",
@@ -1837,7 +3262,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 투자유치",
@@ -1916,7 +3342,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "베스핀글로벌 로고",
@@ -2023,7 +3450,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 사업확대",
@@ -2102,7 +3530,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 뜻",
@@ -2198,7 +3627,8 @@
       },
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "베스핀글로벌 부트캠프",
@@ -2299,7 +3729,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 대표",
@@ -2389,7 +3820,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인포시즈 투자",
@@ -2473,7 +3905,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T09:08:16.818Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "auk 알약",
@@ -7270,100 +8703,43 @@
       "carried": true
     }
   ],
-  "rejectedCount": 1,
+  "rejectedCount": 0,
   "issues": [
     {
-      "issue": "李대통령 기자회견 예정",
+      "issue": "조지아 구금 한국인",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "李대통령이 18일 지지율 하락 속 대국민 기자회견을 연다",
+      "why": "조지아서 구금됐던 한국인 300여명이 미 정부에 소송·배상 청구를 시작했다.",
       "headlines": [
         {
-          "title": "李대통령, 18일 기자회견…\"주요 현안에 분명한 입장 밝힐 것\"",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-15T07:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005414083?sid=100"
+          "title": "'조지아 구금' 한국인 300여명, 트럼프 행정부에 법적대응",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T12:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016313129?sid=104"
         },
         {
-          "title": "李대통령, 18일 대국민 기자회견...“주요 현안 직접 설명”",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-15T07:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/024/0000108231?sid=102"
-        },
-        {
-          "title": "李대통령, 18일 90분 기자회견…지지율 하락 정면 돌파",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-09-15T07:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003680463?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "류지현 감독 공개훈련",
-      "issueType": "entertainment",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "류지현 감독이 아시안게임 야구 대표팀 공개훈련을 지도했다",
-      "headlines": [
-        {
-          "title": "공개훈련 지켜보는 류지현 아시안게임 야구 대표팀 감독",
+          "title": "\"美조지아주서 구금됐던 한국인 300여명, 트럼프 정부 법적 대응\"",
           "press": "newsis.com",
-          "publishedAt": "2026-09-15T06:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014191819?sid=104"
+          "publishedAt": "2026-09-15T13:46:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014192769?sid=104"
         },
         {
-          "title": "韓 국대 2루수 괜찮나? “정신 차려” 감독 공개 비난→3할 타율 끝내 붕...",
-          "press": "osen.co.kr",
-          "publishedAt": "2026-09-15T01:43:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/109/0005606692"
-        },
-        {
-          "title": "공개훈련 타격 지도하는 류지현 아시안게임 야구 대표팀 감독",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-15T06:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014191825?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "신약 급여 등재기간",
-      "issueType": "policy",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "신약 급여 등재에 평균 23개월 걸려 국민 68%가 길다고 답했다",
-      "headlines": [
-        {
-          "title": "국민 10명 중 6명 이상 “신약 급여 등재 소요 기간 길다”",
-          "press": "newstomato.com",
-          "publishedAt": "2026-09-15T08:02:00.000Z",
-          "link": "http://www.newstomato.com/ReadNews.aspx?no=1313783&inflow=N"
-        },
-        {
-          "title": "국민 67.6% \"신약 급여 등재기간 23개월 길어\"... 적정 기간 평균 8.5개월...",
-          "press": "pharmnews.com",
-          "publishedAt": "2026-09-15T07:48:00.000Z",
-          "link": "https://www.pharmnews.com/news/articleView.html?idxno=306314"
-        },
-        {
-          "title": "신약 허가받고도 건강보험 23개월 기다려…국민이 꼽은 적정기간은",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-15T08:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009172025?sid=105"
+          "title": "‘조지아주 구금’ 한국인 300명…美정부 상대 법적 대응",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-15T13:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001192593?sid=104"
         }
       ],
       "concentrated": [
         {
-          "keyword": "신약",
+          "keyword": "조지아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "조지아 구금",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -7372,212 +8748,257 @@
       "rowCount": 0
     },
     {
-      "issue": "김민석 대표 예방",
+      "issue": "서울 시내버스 파업",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "unknown",
+      "issueStatus": "rising",
       "isHot": true,
-      "why": "김민석 대표가 미국 대사와 조계종 총무원장을 예방하며 자주·동맹을 언급했다",
+      "why": "서울 버스 노사가 임금 3.2% 인상에 합의해 파업 철회, 첫차부터 정상 운행한다.",
       "headlines": [
         {
-          "title": "김민석 \"자주역량, 동맹과 양립\"…장동혁 \"동맹 강화\"",
-          "press": "sidae.com",
-          "publishedAt": "2026-09-15T07:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/417/0001158395?sid=100"
-        },
-        {
-          "title": "조계종 총무원장 예방하는 김민석 대표",
+          "title": "서울 버스노사 임금 3.2% 인상 합의…파업 예고 철회(종합)",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-15T06:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016312293?sid=100"
+          "publishedAt": "2026-09-15T17:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016313300?sid=101"
         },
         {
-          "title": "與 수시 접수 '먹통' 사태에 \"유감 표명…경쟁률 발표시기 조정 점검할...",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-15T06:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014191963?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "강원도민일보",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "강원도민일보가 지령 1만호 기념식을 열고 34년 역사를 돌아봤다",
-      "headlines": [
-        {
-          "title": "강원사진기자협회, '2025∼2026 보도사진전' 도청서 개최",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-15T01:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016310863?sid=103"
+          "title": "서울 시내버스 노사협상 타결…버스 정상 운행",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-09-15T21:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012258096?sid=102"
         },
         {
-          "title": "\"강원 지질유산 가치 밝히고 유네스코 등재 길 찾아야\"",
-          "press": "kado.net",
-          "publishedAt": "2026-09-14T15:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/654/0000200509?sid=100"
-        },
-        {
-          "title": "[강원리포트] 동해·강릉·춘천·원주 대기업 AIDC 러브콜⋯도민 기대 부...",
-          "press": "kwnews.co.kr",
-          "publishedAt": "2026-09-13T15:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/087/0001217560?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "강원도민일보 구독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "강원도민일보 뉴스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "강원도민일보 인사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "강원도민일보 홈페이지",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "강원도민일보 춘천",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "강원도민일보 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "강원도민일보 마라톤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "강원도민일보 지면",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "누리호 발사 설명회",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "누리호 5차 발사에 위성 5기를 실어 군집위성을 띄운다",
-      "headlines": [
-        {
-          "title": "누리호 5차 발사 탑재위성 설명회",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-15T06:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014191761?sid=101"
-        },
-        {
-          "title": "[누리호5차발사]누리호에 '위성 편대' 싣는다…5기 띄워 2~3개월 뒤 군집...",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-09-15T06:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005816634?sid=105"
-        },
-        {
-          "title": "미사일·누리호 '길잡이' 만든 덕산넵코어스…항재밍 앞세워 코스닥 간...",
-          "press": "thepublic.kr",
-          "publishedAt": "2026-09-14T08:32:00.000Z",
-          "link": "https://www.thepublic.kr/news/articleView.html?idxno=318673"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "소방관",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "청렴 워크숍에서 돈 걸고 화투 친 전남·광주 소방관 5명이 대기발령됐다",
-      "headlines": [
-        {
-          "title": "“청렴도 높이자” 워크숍서 화투판… 광주소방관 5명 대기발령",
+          "title": "서울 시내버스 파업... 오늘 아침 출근 비상",
           "press": "chosun.com",
-          "publishedAt": "2026-09-15T06:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0003998548?sid=102"
+          "publishedAt": "2026-09-15T13:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003998595?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "엄지성 해트트릭 카타르",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "엄지성 해트트릭으로 남자축구가 카타르를 4-1 완파하며 대회 첫 승을 거뒀다.",
+      "headlines": [
+        {
+          "title": "엄지성 전반 해트트릭…한국, 카타르 4-1 완파",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-15T12:39:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005332729?sid=104"
         },
         {
-          "title": "‘청렴 워크숍’서 돈 걸고 화투 쳤다… 전남광주 소방관 5명 대기발령",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-09-15T06:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003680422?sid=102"
+          "title": "'엄지성 해트트릭' 남자 축구, 카타르 4-1 제압…대회 첫 승[나고야AG]",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T12:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014192729?sid=104"
         },
         {
-          "title": "청렴도 워크숍서 돈 걸고 화투판…소방관 5명 대기발령",
-          "press": "kado.net",
-          "publishedAt": "2026-09-15T07:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/654/0000200726?sid=102"
+          "title": "‘엄지성 해트트릭’ AG 태극전사 카타르에 4-1 완승",
+          "press": "donga.com",
+          "publishedAt": "2026-09-15T12:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003748350?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "유승호 결혼식 동행",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "유승호가 틈만나면서 여친 전 남친 결혼식 동행 가정에 단호하게 반응했다.",
+      "headlines": [
+        {
+          "title": "유승호, 여친 '전 남친 결혼식' 동행?…\"나랑 사귀는 게 복수\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T20:00:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014192843"
+        },
+        {
+          "title": "'틈만나면' 영케이 \"애인 전남친 결혼식? 쫙 빼입고 가\" [RE:TV]",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-15T20:30:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009172573"
+        },
+        {
+          "title": "유승호, 여친 ‘전 남친 결혼식’ 동행? “날 만났으니 이긴 것” [TVis]...",
+          "press": "isplus.com",
+          "publishedAt": "2026-09-15T13:44:00.000Z",
+          "link": "https://m.entertain.naver.com/article/241/0003530843"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "ACLE 한국팀",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "ACLE서 한국팀이 J리그와 피지컬·레벨 격차를 절감하며 16강에 올랐다.",
+      "headlines": [
+        {
+          "title": "[현장목소리] 中 청두 서정원 감독 \"오랜만에 ACLE, 한국팀 만나 더욱 설...",
+          "press": "sportalkorea.com",
+          "publishedAt": "2025-09-17T12:46:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/139/0002233011"
+        },
+        {
+          "title": "“한국팀이 일본팀 이기는 것은 기적…레벨 차이 크다” ACLE서 격차 느...",
+          "press": "isplus.com",
+          "publishedAt": "2026-03-11T00:47:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/241/0003498639"
+        },
+        {
+          "title": "\"J리그의 피지컬은 이미 K리그를 크게 앞선다\" 또다시 꽁무니 쫓아가는...",
+          "press": "footballist.co.kr",
+          "publishedAt": "2026-03-19T22:00:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/436/0000107996"
         }
       ],
       "concentrated": [
         {
-          "keyword": "소방관 영화",
+          "keyword": "acle",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김승원 청문회 14시간",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "김승원 법무장관 후보 청문회가 14시간 만에 종료, 식약처 청탁 부인·한동훈 역공했다.",
+      "headlines": [
+        {
+          "title": "김승원 청문회 14시간 만에 종료…식약처 청탁 부인, 韓겨냥 역공(종합...",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T16:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014192811?sid=102"
+        },
+        {
+          "title": "김승원 청문회 14시간 만에 끝…신약로비·한동훈·공소취소 두고 격돌...",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-15T15:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009172502?sid=100"
+        },
+        {
+          "title": "김승원 법무장관 후보 청문회, 14시간 만에 종료",
+          "press": "yonhapnewstv.co.kr",
+          "publishedAt": "2026-09-15T20:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/422/0000906535?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김승원",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "소방관 월급",
+          "keyword": "김승원 청문회",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "신정환",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "신정환이 월 매출 1억 가게 6개월째 정산 못 받는 사연에 탁재훈이 지원사격했다.",
+      "headlines": [
+        {
+          "title": "도박 논란 후 16년…신정환, 탁재훈에 울컥한 진심 \"30년 지기 형, 틈틈...",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-09-15T13:49:00.000Z",
+          "link": "https://m.entertain.naver.com/article/076/0004446470"
+        },
+        {
+          "title": "'월 매출 1억' 신정환, 가게 연 지 6개월도 넘었는데..\"10원도 정산 못 ...",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-09-15T14:54:00.000Z",
+          "link": "https://m.entertain.naver.com/article/109/0005607222"
+        },
+        {
+          "title": "탁재훈, 큰 마음 먹고 신정환 지원사격…\"돕는 것도 한계가 있다\" [마데...",
+          "press": "mydaily.co.kr",
+          "publishedAt": "2026-09-15T13:30:00.000Z",
+          "link": "https://m.entertain.naver.com/article/117/0004105723"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "신정환 닭갈비",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "소방관 계급",
-          "searchVolume": 5400,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "소방관 되는법",
+          "keyword": "신정환 나무위키",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "소방관 시험",
+          "keyword": "신정환 엑셀",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "소방관 연봉",
+          "keyword": "신정환 뎅기열",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "소방관 옷",
+          "keyword": "신정환 근황",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "소방관 키",
+          "keyword": "신정환 가게",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신정환 룰라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "룰라 신정환",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "소방관 징계 수위",
-          "reason": "처분 결과 궁금",
+          "keyword": "신정환 방송 복귀",
+          "reason": "정식 컴백 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "신정환 가게 위치",
+          "reason": "방문 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -7586,40 +9007,719 @@
       "rowCount": 0
     },
     {
-      "issue": "홈플러스 임금체불",
+      "issue": "코픽스 금리",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "홈플러스 임금체불이 3871억 역대 최대로 664억이 미청산됐다",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "8월 코픽스가 연 3.18%로 보합, 주담대 변동금리 상승세가 5개월 만에 멈췄다.",
       "headlines": [
         {
-          "title": "홈플러스 임금체불 3871억 '역대 최대'…664억 아직 미청산",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-15T02:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005332426?sid=101"
+          "title": "주담대 변동금리 5개월 만에 상승세 멈춰…8월 코픽스 연 3.18%(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T07:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016312368?sid=101"
         },
         {
-          "title": "홈플러스 임금체불 3871억 ‘역대 최대’",
-          "press": "busan.com",
-          "publishedAt": "2026-09-15T00:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/082/0001398315?sid=101"
+          "title": "'연 6%' 뚫은 주담대 변동금리 주춤하나…8월 코픽스 보합(종합)",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T06:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014192084?sid=101"
         },
         {
-          "title": "홈플러스 '임금체불 3871억'…664억 여전히 미청산",
-          "press": "magazine.hankyung.com",
-          "publishedAt": "2026-09-14T23:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/050/0000110943?sid=101"
+          "title": "주담대 변동금리 숨고르기…신잔액 코픽스는 또 올랐다",
+          "press": "economist.co.kr",
+          "publishedAt": "2026-09-15T09:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/243/0000103121?sid=101"
         }
       ],
       "concentrated": [
         {
-          "keyword": "홈플러스 임금체불 신고",
+          "keyword": "코픽스 금리 발표일",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "홈플러스",
+          "keyword": "코픽스 금리 6개월",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "코픽스 금리 발표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신잔액 코픽스 금리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "코픽스 금리 잔액",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "코픽스 금리 전망",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "코픽스 금리 9월",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "코픽스 금리 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "선두 KT 7연승",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "힐리어드 2홈런 폭발로 단독 선두 KT가 한화를 완파하며 7연승을 질주했다.",
+      "headlines": [
+        {
+          "title": "힐리어드 35·36호 홈런 '쾅쾅'…단독 선두 kt, 7연승 질주(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T13:29:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/001/0016313226"
+        },
+        {
+          "title": "힐리어드 35·36호 홈런 '쾅쾅'…단독 선두 KT 7연승",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-15T14:04:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/055/0001388531"
+        },
+        {
+          "title": "'AG 대만대표팀 합류' 왕옌청, 마지막 등판서 패전…선두 KT 7연승",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-15T13:20:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/421/0009172449"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "선두",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "송지은",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "declining",
+      "isHot": false,
+      "why": "박위 CCTV 논란 속 송지은이 기독교 방송에 출연해 눈물을 보였다.",
+      "headlines": [
+        {
+          "title": "박위 CCTV 논란 속…아내 송지은, 방송 중 눈물",
+          "press": "celuvmedia.com",
+          "publishedAt": "2026-09-15T11:22:00.000Z",
+          "link": "http://www.celuvmedia.com/article.php?aid=1789470219527644006"
+        },
+        {
+          "title": "박위 논란 속 송지은, 기독교 방송 활동 눈길…눈물로 공감",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-15T08:06:00.000Z",
+          "link": "https://m.entertain.naver.com/article/009/0005735609"
+        },
+        {
+          "title": "송지은, ♥박위 침묵 속 방송 출연…17세 子 잃은 사연에 눈물",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-09-15T08:48:00.000Z",
+          "link": "https://m.entertain.naver.com/article/382/0001294192"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "송지은 박위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송지은 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "시크릿 송지은",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송지은 엄마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송지은 시크릿",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박위 송지은",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송지은 사주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "송지은 결혼식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "송지은 이혼",
+          "reason": "결혼 유지 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "송지은 복귀",
+          "reason": "활동 재개",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "MS가 AI 통제 행동강령을 공개하고 AI주가 급락하는 등 AI 논쟁이 확산됐다.",
+      "headlines": [
+        {
+          "title": "카카오, AI앱 '카나나' 내달 종료…카카오톡 메인 AI로 역량 결집",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T06:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014191790?sid=105"
+        },
+        {
+          "title": "MS \"인간이 중요, AI는 권리 없다\"…'AI통제' 행동강령 공개",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-14T18:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016310290?sid=104"
+        },
+        {
+          "title": "젠슨 황, 'AI 위험성은 사기' 트럼프에 공개 동의",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-15T00:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001388333?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 아스트라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 상장",
+          "reason": "IPO 일정 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "중국 연구진",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "중국 연구진이 스스로 진화하는 AI의 자기개선 5단계 구분법을 공개했다.",
+      "headlines": [
+        {
+          "title": "트럼프 \"AI 속도조절론은 역겨운 음모…중국만 기뻐할 것\"",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-14T20:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005413654?sid=104"
+        },
+        {
+          "title": "“AI 개발 늦추자”…연구진 경고에 올트먼·머스크도 동조",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-13T09:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006368675?sid=101"
+        },
+        {
+          "title": "\"인간이 만든 마지막 AI를 향해\"… 中 연구진, '재귀적 자기개선' 5단계...",
+          "press": "g-enews.com",
+          "publishedAt": "2026-09-15T20:56:00.000Z",
+          "link": "https://www.g-enews.com/view.php?ud=2026091517465278050c8c1c064d_1"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "중국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "PC-ALM",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "사카나 AI가 뇌처럼 학습하는 역전파 대체 기술 'PC-ALM'을 발표했다.",
+      "headlines": [
+        {
+          "title": "\"뇌처럼 학습한다\"…사카나 AI, 역전파 대체 기술 'PC-ALM' 발표",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-15T09:08:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215305"
+        },
+        {
+          "title": "\"개인정보 다루는 기업…사고대응 매뉴얼 만들고 모의훈련 해야\"[최석진...",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-09-14T23:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005816232?sid=102"
+        },
+        {
+          "title": "금호생명, 자산부채종합관리시스템(ALM) 개발",
+          "press": "itdaily.kr",
+          "publishedAt": "2008-06-03T10:35:00.000Z",
+          "link": "http://www.itdaily.kr/news/articleView.html?idxno=13802"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "PC-ALM 상용화",
+          "reason": "실제 적용 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "PC-ALM 성능",
+          "reason": "역전파 대비",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "애플",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "애플이 강화된 시리 AI 베타와 iOS 27을 배포, 10월 한국어를 지원한다.",
+      "headlines": [
+        {
+          "title": "애플 '시리 AI' 마침내 출격⋯10월 한국어 지원",
+          "press": "inews24.com",
+          "publishedAt": "2026-09-15T09:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/031/0001058700?sid=105"
+        },
+        {
+          "title": "사진 구도 바꾸고 웹페이지 가격 추적…애플, AI 기능 확대",
+          "press": "etnews.com",
+          "publishedAt": "2026-09-15T01:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003466812?sid=105"
+        },
+        {
+          "title": "젠슨 황 손에 들린 폴더블폰, 애플 or 삼성? 뜻밖의 발신인",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-15T10:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006369945?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "애플 폴더블",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 서비스센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 고객센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 정품 확인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 사전예약 단독혜택",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "애플 폴더블폰",
+          "reason": "출시 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤트로픽",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "삼성SDS가 국내 첫 앤트로픽 셀렉트 티어 파트너를 획득해 클로드 AX 사업을 확대한다.",
+      "headlines": [
+        {
+          "title": "삼성SDS, 앤트로픽 '클로드 파트너' 국내 첫 셀렉트 티어 획득",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-14T23:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014190006?sid=105"
+        },
+        {
+          "title": "삼성SDS, 국내 첫 앤트로픽 파트너",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-09-15T11:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003470614?sid=105"
+        },
+        {
+          "title": "트럼프 \"역겨운 AI음모, 中만 기뻐할 것\"…앤트로픽 CEO 비난(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-14T16:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016310281?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 퇴사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "앤트로픽 상장",
+          "reason": "IPO 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "MS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "엔씨가 아이온2 글로벌 출시 앞두고 MS 애저와 협력, MS는 AI 통제 강령을 공개했다.",
+      "headlines": [
+        {
+          "title": "엔씨, MS와 손잡고 '아이온2' 글로벌 출시 준비",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T00:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014190093?sid=105"
+        },
+        {
+          "title": "엔씨, 아이온2 글로벌 출시 앞두고 MS와 협력 강화",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-15T05:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005735451?sid=105"
+        },
+        {
+          "title": "MS “AI, 인간의 통제 필수… 권리 줘선 안 돼”",
+          "press": "segye.com",
+          "publishedAt": "2026-09-15T10:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004159271?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ms 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스",
+          "searchVolume": 25030,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 365",
+          "searchVolume": 12210,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MS 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 해지 방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 한컴 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "MS 주가",
+          "reason": "AI 실적 영향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "뉴로퓨전",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "뉴로퓨전이 투자 분석 플랫폼 '밸리 AI'에 투자 리서치 AI 에이전트를 탑재했다.",
+      "headlines": [
+        {
+          "title": "뉴로퓨전, 투자 분석 플랫폼 '밸리 AI'에 전용 AI 에이전트 탑재",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-15T04:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005413920?sid=101"
+        },
+        {
+          "title": "뉴로퓨전, 'Valley AI'에 투자 리서치 AI 에이전트 탑재",
+          "press": "nbntv.co.kr",
+          "publishedAt": "2026-09-15T06:20:00.000Z",
+          "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4024929"
+        },
+        {
+          "title": "뉴로퓨전 밸리 AI, 금융 리서치 에이전트로 데이터-판단 간극 낮춘다",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-14T23:39:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002437417?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "뉴로퓨전 주식회사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 투자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전(주)",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 최한철",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "뉴로퓨전 투자유치",
+          "reason": "기업 성장",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "AI 안전성",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "젠슨 황이 트럼프와 통화로 'AI 위험론은 사기'에 동의, 딥마인드 퇴사자는 경고했다.",
+      "headlines": [
+        {
+          "title": "'AI 깐부' 젠슨 황 손에 또 갤럭시…폴드7 이어 폴드8까지",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T06:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014192017?sid=105"
+        },
+        {
+          "title": "젠슨 황, 'AI 위험성은 사기' 트럼프에 공개 동의",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-15T00:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001388333?sid=104"
+        },
+        {
+          "title": "트럼프 \"AI 속도조절? 역겨운 음모\"… AI기업 CEO에 맹비난",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-15T08:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005735694?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "AI 안전성 경고",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "AI 안전성 논쟁",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -7726,406 +9826,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 1
-    },
-    {
-      "issue": "윤호중 장관 면담",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "윤호중 행정안전부 장관이 일본 참의원 대표단과 면담했다",
-      "headlines": [
-        {
-          "title": "면담하는 윤호중 행정안전부 장관",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-15T06:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014191987?sid=100"
-        },
-        {
-          "title": "윤호중 행정안전부 장관, 일본 참의원 대표단 면담",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-15T06:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016312335?sid=100"
-        },
-        {
-          "title": "윤호중 장관, 일본 참의원 대표단 면담",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-15T06:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009171731?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "애플",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "애플이 iOS 27과 강화된 시리 AI를 배포하고 10월 한국어를 지원한다",
-      "headlines": [
-        {
-          "title": "사진 구도 바꾸고 웹페이지 가격 추적…애플, AI 기능 확대",
-          "press": "etnews.com",
-          "publishedAt": "2026-09-15T01:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003466812?sid=105"
-        },
-        {
-          "title": "2년3개월 만에 '진짜 AI 시리' 나왔다…애플, iOS 27 배포 시작",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-15T00:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014190281?sid=105"
-        },
-        {
-          "title": "애플, 강화된 '시리 AI' 베타버전 공개…10월 한국어 지원",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-15T00:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009170247?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "애플 폴더블",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 서비스센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 고객센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 정품 확인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 본사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "애플 폴더블 출시",
-          "reason": "패널 증가 기대",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "앤트로픽",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "삼성SDS가 앤트로픽 국내 첫 셀렉트 티어 파트너가 됐다",
-      "headlines": [
-        {
-          "title": "삼성SDS, 앤트로픽 '클로드 파트너' 국내 첫 셀렉트 티어 획득",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-14T23:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014190006?sid=105"
-        },
-        {
-          "title": "삼성SDS, 국내 첫 '앤트로픽' 공인 파트너",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-15T08:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005735620?sid=105"
-        },
-        {
-          "title": "앞에선 AI속도조절 한목소리…뒤에선 'IPO·주도권' 복잡한 셈법",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-14T23:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016310413?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 퇴사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "앤트로픽 상장일",
-          "reason": "IPO 시점 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "AI 킬스위치",
-          "reason": "규제 발언 화제",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "MS",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "엔씨가 MS와 협력해 아이온2를 애저 기반으로 글로벌 출시한다",
-      "headlines": [
-        {
-          "title": "엔씨, MS와 손잡고 '아이온2' 글로벌 출시 준비",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-15T00:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014190093?sid=105"
-        },
-        {
-          "title": "엔씨, 아이온2 글로벌 출시 앞두고 MS와 협력 강화",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-15T05:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005735451?sid=105"
-        },
-        {
-          "title": "엔씨, ‘아이온2’ 글로벌 출시 앞두고 MS와 협력… 애저 활용",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-15T05:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0003998539?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "ms 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스",
-          "searchVolume": 24660,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "MS 영구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 영구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 오피스 365",
-          "searchVolume": 12060,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 해지 방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "ms 한컴 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "뉴로퓨전",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "뉴로퓨전이 밸리 AI에 투자 리서치 AI 에이전트를 탑재했다",
-      "headlines": [
-        {
-          "title": "뉴로퓨전, 투자 분석 플랫폼 '밸리 AI'에 전용 AI 에이전트 탑재",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-15T04:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005413920?sid=101"
-        },
-        {
-          "title": "뉴로퓨전, 'Valley AI'에 투자 리서치 AI 에이전트 탑재",
-          "press": "nbntv.co.kr",
-          "publishedAt": "2026-09-15T06:20:00.000Z",
-          "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4024929"
-        },
-        {
-          "title": "뉴로퓨전 밸리 AI, 금융 리서치 에이전트로 데이터-판단 간극 낮춘다",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-14T23:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002437417?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "뉴로퓨전 주식회사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 투자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전(주)",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 최한철",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "뉴로퓨전 투자유치",
-          "reason": "자금 조달 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "뉴로퓨전 실적",
-          "reason": "성장성 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "AI 안전성",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "트럼프와 젠슨 황이 공개 통화에서 'AI 위험론은 사기'라고 말했다",
-      "headlines": [
-        {
-          "title": "'AI 깐부' 젠슨 황 손에 또 갤럭시…폴드7 이어 폴드8까지",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-15T06:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014192017?sid=105"
-        },
-        {
-          "title": "젠슨 황, 'AI 위험성은 사기' 트럼프에 공개 동의",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-15T00:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001388333?sid=104"
-        },
-        {
-          "title": "젠슨황, 트럼프와 공개 통화…\"AI 위험론은 사기\" 동의",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-09-14T23:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001969004?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "AI 안전성 경고",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "AI 안전성 논쟁",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "찰스 3세",
@@ -8192,7 +9894,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "베스핀글로벌",
@@ -8272,7 +9975,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "인포시즈",
@@ -8359,13 +10063,6 @@
           "onBoard": false
         },
         {
-          "keyword": "온톨로지 AI",
-          "reason": "기술 개념 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
           "keyword": "박준 CBO",
           "reason": "영입 인물 배경",
           "searchVolume": null,
@@ -8373,7 +10070,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "필릭스 기부 희망",
@@ -9374,24 +11072,5 @@
       "rowCount": 1,
       "carried": true
     }
-  ],
-  "enrichedAt": "2026-09-15T09:16:15.182Z",
-  "enrichStats": {
-    "enriched": 3,
-    "subsAdded": 2,
-    "titleUpgraded": 0,
-    "proposed": 18,
-    "verified": 8,
-    "judged": 0,
-    "judgedBad": 0,
-    "related": 0,
-    "picked": 0,
-    "pooled": 8,
-    "aiTitled": 3,
-    "trended": 1,
-    "homeRetried": 2,
-    "whyAdded": 2,
-    "aiCalls": 3,
-    "partial": false
-  }
+  ]
 }
