@@ -62,7 +62,12 @@ describe('CLI 설치 경로 명시 (stale PATH 대응)', () => {
   });
 });
 
-describe('withPathEntries', () => {
+/*
+ * 이 묶음의 입력은 전부 Windows 모양(C:\\ 절대경로, Path/PATH 키 대소문자)이다. 리눅스에서는
+ * isAbsolute('C:\\managed') 가 거짓이고 ':' 가 경로 구분자라 'C:\\tools' 조차 둘로 쪼개진다 —
+ * CI(우분투)가 2026-09-14 부터 이 셋으로 빨간불이었다. 뜻이 있는 OS 에서만 돈다(사장님 PC 훅).
+ */
+describe.skipIf(process.platform !== 'win32')('withPathEntries', () => {
   it('prepends directories to PATH', () => {
     const env = withPathEntries({ PATH: `C:${'\\'}Windows` }, ['C:\\managed']);
     expect(env.PATH).toBe(`C:\\managed${delimiter}C:\\Windows`);

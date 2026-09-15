@@ -21,6 +21,9 @@ function pathEntriesOf(env: NodeJS.ProcessEnv): string[] {
   return String(env[key] ?? '').split(delimiter);
 }
 
+// 관리 경로(agent-runtime)를 PATH 앞에 세우는 것은 Windows 절대경로 전제다 — 리눅스 CI 에선 'C:\\tools' 가 ':' 에서 쪼개진다.
+const itWin = process.platform === 'win32' ? it : it.skip;
+
 function expectManagedPathAhead(env: NodeJS.ProcessEnv, inherited: string): void {
   const entries = pathEntriesOf(env);
   expect(entries[0]).toContain('agent-runtime');
@@ -47,7 +50,7 @@ describe('subscription agent environment isolation', () => {
     expect(buildClaudeSubscriptionEnv(source)).not.toHaveProperty('NPM_CONFIG_PREFIX');
   });
 
-  it('allows only runtime and Claude profile paths while dropping every unrelated secret', () => {
+  itWin('allows only runtime and Claude profile paths while dropping every unrelated secret', () => {
     const env = buildClaudeSubscriptionEnv({
       PATH: 'C:\\tools',
       TEMP: 'C:\\temp',
@@ -84,7 +87,7 @@ describe('subscription agent environment isolation', () => {
     expectManagedPathAhead(env, 'C:\\tools');
   });
 
-  it('allows only runtime and Codex profile paths while dropping every unrelated secret', () => {
+  itWin('allows only runtime and Codex profile paths while dropping every unrelated secret', () => {
     const env = buildCodexSubscriptionEnv({
       PATH: 'C:\\tools',
       TEMP: 'C:\\temp',
@@ -112,7 +115,7 @@ describe('subscription agent environment isolation', () => {
     expectManagedPathAhead(env, 'C:\\tools');
   });
 
-  it('[v2.11.140] Gemini는 GCA를 강제하지 않고 API 키도 제거한다 (auth는 settings.json oauth-personal)', () => {
+  itWin('[v2.11.140] Gemini는 GCA를 강제하지 않고 API 키도 제거한다 (auth는 settings.json oauth-personal)', () => {
     const env = buildGeminiSubscriptionEnv({
       PATH: 'C:\\tools',
       TEMP: 'C:\\temp',

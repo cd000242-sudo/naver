@@ -348,7 +348,8 @@ describe('loginAgent', () => {
   //   stdout/stderr 0바이트, OAuth URL 미출력). 그래서 codex/claude 처럼
   //   startSpawnSession 으로 출력에서 URL을 긁는 계약이 성립하지 않는다.
   //   이전 단언(spawn 커맨드 = 'agy', args = [])은 없는 동작을 박제한 것이라 교체한다.
-  it('gemini → 콘솔 창에서 agy 로그인 (파이프 세션 아님)', async () => {
+  // openAgyTerminal 은 win32(cmd start)·darwin(open -a Terminal)만 안다 — 리눅스에선 설계대로 spawn_failed 를 던진다
+  it.skipIf(process.platform !== 'win32' && process.platform !== 'darwin')('gemini → 콘솔 창에서 agy 로그인 (파이프 세션 아님)', async () => {
     // 1회차: 미로그인 → 터미널을 열고 폴링. 2회차부터: 로그인 완료.
     const loggedOut = {
       provider: 'gemini', installed: true, version: '1.1.18',
