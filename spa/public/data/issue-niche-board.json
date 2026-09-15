@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-15T05:41:04.298Z",
+  "publishedAt": "2026-09-15T09:15:28.873Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 205,
-    "niche": 0,
-    "preemption": 37,
+    "candidates": 224,
+    "niche": 2,
+    "preemption": 16,
     "pending": 0
   },
   "freeSample": {
@@ -18,6 +18,392 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "찰스 3세 퇴위",
+      "issue": "찰스 3세",
+      "topic": "찰스 3세",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 1건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 1,
+        "sampledTitles": 10,
+        "topTitles": [
+          "[영국 왕 전체 계보] 정복왕 윌리엄에서 찰스 3세까지 — 왕조·생몰·재위·주요 사건 총정리",
+          "9월 8일_엘리자베스 2세 사망",
+          "영국의 왕실 가계도 : 천 년의 혈통과 권력 승계의 숨겨진 비사 총정리",
+          "(영국사) 영국 왕조 연대표",
+          "[영국] 왕조 + 국왕 계보(노르만·플랜태저넷·랭커스터·요크·튜더·스튜어트·하노버·윈저)",
+          "선비ㅣXiānbēi",
+          "유럽 민주주의 역사 총정리 (아테네 민주정, 로마 공화정 영국 의회, 프랑스 혁명, 독일 연방제) 유럽 정치사 연표",
+          "영국 외교사 연표",
+          "평생 말씀공부",
+          "폴란드 역사"
+        ],
+        "measuredAt": "2026-09-15T09:09:33.299Z"
+      },
+      "documentCount": 1570,
+      "documentCountMeasured": true,
+      "searchVolume": 690,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.6036216809023084,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 690",
+        "문서수 1,570",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 690 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.6배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "찰스 3세가 AI 위험 논란 속 AI 기업 대표들과 회동한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "찰스 3세 퇴위설, AI 기업 회의 소집 뒤 나온 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "찰스 3세 퇴위 얘기 도는데 정작 카밀라 쪽이 조용해서 다시 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "찰스 3세 암",
+          "searchVolume": 100,
+          "frame": "generic"
+        },
+        {
+          "keyword": "찰스 3세 건강",
+          "searchVolume": 90,
+          "frame": "generic"
+        },
+        {
+          "keyword": "찰스 3세 카밀라",
+          "searchVolume": 90,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "찰스 3세 암",
+          "searchVolume": 100,
+          "documentCount": 12393,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "찰스 3세 건강",
+          "searchVolume": 90,
+          "documentCount": 38249,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "찰스 3세 카밀라",
+          "searchVolume": 90,
+          "documentCount": 3617,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "찰스 3세 나이",
+          "searchVolume": 30,
+          "documentCount": 41048,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          94,
+          100,
+          69,
+          70,
+          37,
+          19,
+          56,
+          56,
+          69,
+          37,
+          24,
+          44,
+          28,
+          41,
+          39,
+          30,
+          26,
+          11,
+          24,
+          30,
+          33,
+          22,
+          41,
+          28,
+          19,
+          15,
+          15,
+          22,
+          28
+        ]
+      },
+      "kinCount": 177,
+      "kinTop": [
+        {
+          "title": "2027년 영국 찰스왕 JWS예언",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=316&docId=494469832&answerNo=1",
+          "views": 49,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "김동현 무릎",
+      "issue": "김동현",
+      "topic": "김동현",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "수완지구 무릎통증, 반복되는 이유는 연골 아닌 ‘근육’ 때문일 수 있습니다",
+          "작은딸이 사준 무릎 마사지기 바로랩 (절대 광고 아님)",
+          "광주 수완지구 통증의학과 무릎통증 근육의 긴장을 살펴보는 이유",
+          "[분당재활 / 분당재활운동센터] 직장인 워라밸을 지키는 1순위, 통증 예방과 바른 체형 만들기(1) in KT 송파빌딩",
+          "러닝 | 러닝 권태기 컴온 | 러닝 할때 무릎 무릎 ! | 뉴발란스 런유어웨이 10km D-20",
+          "[본오동PT] 스쿼트할 때 왜 무릎쪽만 힘이 들어올까?",
+          "\"카니발? NO!\" 4남매 다자녀 아빠 김동현이 패밀리카로 선택한 '이 차'",
+          "UFC 329 코너 맥그리거 복귀전 충격의 69초 TKO 패배, 무릎 부상으로 막 내린 할로웨이와의 2차전 결과 분석",
+          "\"매미킴에서 매듭킴으로\" 김동현 넷째 임신 공개 2주 만에 정관수술 깜짝 고백",
+          "[본오동피티] 다리근육의 종류와 기능(기초)"
+        ],
+        "measuredAt": "2026-09-15T09:09:28.965Z"
+      },
+      "documentCount": 6229,
+      "documentCountMeasured": true,
+      "searchVolume": 740,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.3767991407089153,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 740",
+        "문서수 6,229",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 740 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.4배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "MMA 파이터 김동현의 무릎 부상·수술과 그 이후 선수 활동 근황을 찾는 검색.",
+        "basis": "AI 추론 — 실측 확인된 확장어 5개"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김동현 무릎 부상 수술 이후 은퇴 근황 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김동현 무릎 요즘 어떤가 했더니 UFC 얘기가 다시 나오더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김동현 UFC",
+          "searchVolume": 260,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
+        {
+          "keyword": "김동현 근황",
+          "searchVolume": 90,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
+        {
+          "keyword": "김동현 격투기",
+          "searchVolume": 70,
+          "source": "ai-verified",
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김동현 UFC",
+          "searchVolume": 260,
+          "source": "ai-verified",
+          "documentCount": 19781
+        },
+        {
+          "keyword": "김동현 근황",
+          "searchVolume": 90,
+          "source": "ai-verified",
+          "documentCount": 5440
+        },
+        {
+          "keyword": "김동현 격투기",
+          "searchVolume": 70,
+          "source": "ai-verified",
+          "documentCount": 15310
+        },
+        {
+          "keyword": "김동현 은퇴",
+          "searchVolume": 60,
+          "source": "ai-verified",
+          "documentCount": 4921
+        },
+        {
+          "keyword": "김동현 이혼",
+          "searchVolume": 20,
+          "source": "ai-verified",
+          "documentCount": 5480
+        }
+      ],
+      "trend": {
+        "series": [
+          0,
+          12,
+          29,
+          39,
+          37,
+          29,
+          39,
+          51,
+          59,
+          39,
+          66,
+          73,
+          73,
+          54,
+          76,
+          56,
+          68,
+          71,
+          49,
+          61,
+          46,
+          44,
+          59,
+          54,
+          61,
+          100,
+          90,
+          100,
+          76
+        ],
+        "label": "❄️ 시즌성",
+        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보"
+      },
+      "kinCount": 359,
+      "kinTop": [
+        {
+          "title": "무릎 찰과상 치료",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70103&docId=477090394&answerNo=2",
+          "views": 1906,
+          "answers": 2
+        },
+        {
+          "title": "원시인vs전성기 타이슨,은가누,밥샙,최홍만,김동현",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100409&docId=476234782&answerNo=2",
+          "views": 910,
+          "answers": 9
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 8,
+        "verified": 5
+      }
+    },
     {
       "keyword": "봉누도 월드컵",
       "issue": "봉누도",
@@ -101,7 +487,7 @@
           "basis": "근거 프레임 없음 — 일반형"
         },
         "home": {
-          "text": "봉누도 월드컵 며칠 돌려봤는데 마지막에 이렇게 뒤집힐 줄은 몰랐네요",
+          "text": "봉누도 월드컵 처음엔 별거 아닌 줄 알았는데 자꾸 눌러보게 되더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -586,26 +972,64 @@
         }
       ],
       "whySearch": {
-        "text": "한화 김동관의 배우자 정혜련이 누구인지 나이·집안·결혼 정보를 알려는 검색",
-        "basis": "AI 추론 — 근거 부족"
+        "text": "한화 부회장 김동관의 부인 정혜련의 나이·결혼·가족 정보를 확인하려는 검색",
+        "basis": "AI 추론 — 실측 확인된 확장어 3개"
       },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "한화 김동관 정혜련 나이 집안 결혼 프로필 정리",
+          "text": "한화 김동관 정혜련 나이·결혼·가족 관계 정보",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "한화 김동관 정혜련 나이 찾다가 집안 배경에 다시 봤네요",
+          "text": "한화 김동관 정혜련 나이랑 결혼 얘기 다들 여기서 헷갈리더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
-      "subKeywords": null,
-      "keywordPool": null,
+      "subKeywords": [
+        {
+          "keyword": "김동관 와이프",
+          "searchVolume": 1190,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
+        {
+          "keyword": "김동관 결혼",
+          "searchVolume": 110,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
+        {
+          "keyword": "김동관 자녀",
+          "searchVolume": 50,
+          "source": "ai-verified",
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김동관 와이프",
+          "searchVolume": 1190,
+          "source": "ai-verified",
+          "documentCount": 107
+        },
+        {
+          "keyword": "김동관 결혼",
+          "searchVolume": 110,
+          "source": "ai-verified",
+          "documentCount": 1080
+        },
+        {
+          "keyword": "김동관 자녀",
+          "searchVolume": 50,
+          "source": "ai-verified",
+          "documentCount": 1519
+        }
+      ],
       "trend": {
         "series": [
           27,
@@ -650,12 +1074,1407 @@
       "carried": true,
       "enrichedBy": {
         "provider": "claude",
-        "proposed": 8,
-        "verified": 0
+        "proposed": 10,
+        "verified": 3
       }
     }
   ],
   "observations": [
+    {
+      "keyword": "인포시즈 탁정수",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 24,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 24",
+        "선점 후보 — 경쟁 문서 24건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 탁정수, 박준 CBO 영입한 온톨로지 AI 기업",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 탁정수가 채용 공고에 이 조건을 왜 걸었나 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 매출",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 58,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 58",
+        "선점 후보 — 경쟁 문서 58건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 매출과 온톨로지 AI 사업, SKT 출신 CBO 영입 배경",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 매출 얼마인지 보러 갔다가 채용 공고에서 발이 묶였어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 박준",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 5,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 5",
+        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 박준 CBO 영입, SKT 부사장 출신이 맡는 역할",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 박준 채용 공고 보다가 이건 좀 다르다 싶어서 다시 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 연봉",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 8,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 8",
+        "선점 후보 — 경쟁 문서 8건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 연봉 초봉과 직급별 수준 채용 조건까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 연봉 보고 채용 공고 눌렀다가 손이 멈췄어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 잡플래닛",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 7,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 7",
+        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 잡플래닛 평점·연봉 확인, SKT 출신 CBO 영입",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 잡플래닛 평점만 보고 채용 지원했는데 면접에서 좀 당황했어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 온톨로지",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 17,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 17",
+        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 온톨로지 AI, SKT 부사장 출신 박준 CBO 영입",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 온톨로지가 SKT 부사장 출신을 CBO로 데려온 걸 다시 봤어요",
+          "frame": "ai",
+          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "온톨로지 뜻",
+          "searchVolume": 2310,
+          "frame": "generic"
+        },
+        {
+          "keyword": "인포시즈",
+          "searchVolume": 1050,
+          "frame": "generic"
+        },
+        {
+          "keyword": "온톨로지 AI",
+          "searchVolume": 80,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "온톨로지 뜻",
+          "searchVolume": 2310,
+          "documentCount": 2928,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "인포시즈",
+          "searchVolume": 1050,
+          "documentCount": 872,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "온톨로지 AI",
+          "searchVolume": 80,
+          "documentCount": 15522,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 블라인드",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 21,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 21",
+        "선점 후보 — 경쟁 문서 21건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 블라인드 연봉·평판, SKT 출신 CBO 영입 후 달라진 점",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 블라인드 채용 후기 보다가 SKT 부사장 영입에 손이 멈췄어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "베스핀글로벌 블라인드",
+      "issue": "베스핀글로벌",
+      "topic": "베스핀글로벌",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 40,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 40",
+        "선점 후보 — 경쟁 문서 40건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "베스핀글로벌이 업스테이지와 울산 공교육 AI에 국산 LLM을 적용한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "베스핀글로벌 블라인드 연봉·재직자 평판 후기 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "베스핀글로벌 블라인드 평판 살펴보다 연봉에서 다들 멈추더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "frame": "generic"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "베스핀글로벌 기업정보",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "documentCount": 678,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 40,
+          "documentCount": 162,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 기업정보",
+          "searchVolume": 30,
+          "documentCount": 2745,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 주가",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 56,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 56",
+        "선점 후보 — 경쟁 문서 56건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 주가 상장 여부와 박준 CBO 영입 소식 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 주가 보러 갔다가 채용 공고에 한참 멈춰 있었네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 투자유치",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "자금 조달 주목",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 54,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 54",
+        "선점 후보 — 경쟁 문서 54건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 자금 조달 주목"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 투자유치, SKT 출신 박준 CBO 영입과 사업 방향",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 투자유치 소식 찾다가 채용 공고가 생각보다 눈에 밟혔어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 5,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "베스핀글로벌 로고",
+      "issue": "베스핀글로벌",
+      "topic": "베스핀글로벌",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 78,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 78",
+        "선점 후보 — 경쟁 문서 78건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "베스핀글로벌이 업스테이지와 울산 공교육 AI에 국산 LLM을 적용한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "베스핀글로벌 로고 CI 다운로드와 업스테이지 공교육 AI 협력",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "베스핀글로벌 로고 보고 지원했는데 연봉 얘기 나올 때 표정이 굳더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "frame": "generic"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "베스핀글로벌 상장",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "documentCount": 678,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 40,
+          "documentCount": 162,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 상장",
+          "searchVolume": 40,
+          "documentCount": 773,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 매출",
+          "searchVolume": 20,
+          "documentCount": 1261,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 사업확대",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "반도체·금융 공략",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 72,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 72",
+        "선점 후보 — 경쟁 문서 72건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 반도체·금융 공략"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 사업확대, 박준 CBO 영입과 반도체·금융 고객 확대",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 사업확대 채용 공고 보다가 이 직군에서 손이 멈췄어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 뜻",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 117,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 117",
+        "선점 후보 — 경쟁 문서 117건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 뜻 온톨로지 AI 기업, 뭐하는 회사인지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 뜻 찾다가 채용 공고에서 눈길이 멈춘 이유가 궁금해지더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 12,
+      "kinTop": null,
+      "monetize": {
+        "verdict": "bad",
+        "points": [
+          {
+            "text": "'인포시즈 뜻'은 검색자가 '인도 IT 서비스 대기업 Infosys' 한 줄만 손에 넣으면 끝나는 정의형 질의다. 도구·구매처·절차가 아니라 단어 뜻이라 만족 조건이 문장 하나로 충족된다."
+          },
+          {
+            "text": "광고 클릭 상태가 아니다. '뜻'을 찾는 사람은 지갑을 연 상태가 아니라 사전 대용으로 들어온 사람이라, 뜬다 해도 IT아웃소싱·주식 관련 단가 낮은 노출성 광고에 그친다."
+          },
+          {
+            "text": "체류 시간이 짧다. '인포시즈 뜻'은 한 줄 얻고 바로 이탈하는 검색이지, 읽어야 풀리는 검색이 아니다. 스크롤 전에 답을 보면 광고 뷰 자체가 안 쌓인다."
+          },
+          {
+            "text": "동반 검색어 '인포시즈 채용 (월 20)'이 유일한 상업 각도인데, 월 20은 이걸로 페이지 성격을 바꿀 만한 물량이 못 된다. 채용 의도도 결국 지원 절차·공고 사이트로 이탈시키지 광고를 태우지 않는다."
+          }
+        ],
+        "angle": "굳이 쓴다면 '뜻'을 미끼로 걸되 본문은 '인포시즈 채용' 실검 의도에 맞춰 회사 개요·직무·연봉·지원 경로까지 붙여 체류를 억지로 늘리는 형태. 다만 월 20 물량 기준에선 각도를 살려도 수지가 안 맞는다."
+      },
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "베스핀글로벌 부트캠프",
+      "issue": "베스핀글로벌",
+      "topic": "베스핀글로벌",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 119,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 119",
+        "선점 후보 — 경쟁 문서 119건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "베스핀글로벌이 업스테이지와 울산 공교육 AI에 국산 LLM을 적용한다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "베스핀글로벌 부트캠프 지원 자격과 커리큘럼 후기 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "베스핀글로벌 부트캠프 수료하고 나서 연봉이 어떻게 달라지는지 물어봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "클라우드 부트캠프",
+          "searchVolume": 180,
+          "frame": "generic"
+        },
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "frame": "generic"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "클라우드 부트캠프",
+          "searchVolume": 180,
+          "documentCount": 14556,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": 120,
+          "documentCount": 678,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": 40,
+          "documentCount": 162,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 6,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 대표",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 243,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 243",
+        "선점 후보 — 경쟁 문서 243건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 대표와 신임 CBO 박준, SKT 부사장 출신 경영진",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 대표가 CBO 채용에 SKT 부사장 출신을 앉힌 데는 사정이 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈",
+          "searchVolume": 1050,
+          "frame": "generic"
+        },
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈",
+          "searchVolume": 1050,
+          "documentCount": 872,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 5,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "인포시즈 투자",
+      "issue": "인포시즈",
+      "topic": "인포시즈",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 191,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 191",
+        "선점 후보 — 경쟁 문서 191건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "인포시즈 투자, 박준 CBO 영입과 기업 AI 전환 방향 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "인포시즈 투자 이게 뭔지 몰라서 찾아봤습니다",
+          "frame": "generic",
+          "basis": "파생 키워드 실측 '인포시즈 채용' (검색량 20) — 1페이지 0개 제목에 없는 프레임"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "인포시즈 주가",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": 20,
+          "documentCount": 40,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T09:08:16.818Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "auk 알약",
       "issue": "AuK",
@@ -740,7 +2559,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "auk 위챗",
@@ -806,7 +2626,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "auk 크롬하츠",
@@ -872,7 +2693,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "auk 셀러 주소",
@@ -938,7 +2760,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "auk ajj 비교",
@@ -1004,7 +2827,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "auk.edu.kw",
@@ -1070,7 +2894,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴엔AI 뉴저지 법인",
@@ -1156,7 +2981,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 주식",
@@ -1247,7 +3073,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "AuK 음성 모델",
@@ -1309,7 +3136,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "AuK 음성 편집",
@@ -1371,7 +3199,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 테라퓨틱스 전망",
@@ -1426,7 +3255,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "auk 셀러",
@@ -1492,7 +3322,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "AuK 오픈소스",
@@ -1558,7 +3389,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 테라퓨틱스 3상",
@@ -1630,7 +3462,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 테라퓨틱스 주가",
@@ -1685,7 +3518,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 SWE-2",
@@ -1747,7 +3581,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 밸류에이션",
@@ -1809,7 +3644,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "AuK 데모",
@@ -1875,7 +3711,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "swe 2 aspice",
@@ -1930,7 +3767,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴엔ai 채용",
@@ -2009,7 +3847,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "auk.direct",
@@ -2075,7 +3914,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "auk 구매방법",
@@ -2154,7 +3994,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "필릭스 기부 희망",
@@ -2227,7 +4068,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 상장",
@@ -2293,7 +4135,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴엔ai 재무제표",
@@ -2388,7 +4231,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 데빈",
@@ -2474,7 +4318,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴엔ai 보호예수 물량",
@@ -2575,7 +4420,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "AuK 성능",
@@ -2637,7 +4483,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 허브",
@@ -2703,7 +4550,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "SWE-2 페이블 비교",
@@ -2765,7 +4613,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 투자유치",
@@ -2840,7 +4689,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "뉴엔ai 뭐하는 회사",
@@ -2906,7 +4756,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "삼성sds 릴스",
@@ -3031,69 +4882,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "전학교 접근",
-      "issue": "교육부 학폭 예방",
-      "topic": "교육부 학폭 예방",
-      "lane": "realtime",
-      "issueType": "entertainment",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 249,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 249",
-        "선점 후보 — 경쟁 문서 249건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "교육부가 학폭 예방 어울림 선도학교 276곳을 운영",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "전학교 접근 학폭 선도학교 276곳과 스마트폰 없는 46곳 차이",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "전학교 접근 선도학교 276곳인데 46곳만 스마트폰 뺀 이유가 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 393,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-15T05:29:41.271Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "서동주 또도동",
@@ -3183,7 +4973,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 창업자",
@@ -3258,7 +5049,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "AuK 사용법",
@@ -3320,7 +5112,8 @@
       "monetize": null,
       "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "텐센트 AuK",
@@ -5477,33 +7270,33 @@
       "carried": true
     }
   ],
-  "rejectedCount": 0,
+  "rejectedCount": 1,
   "issues": [
     {
-      "issue": "김승원 후보자 인사",
+      "issue": "李대통령 기자회견 예정",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "인사청문회서 한동훈 수사정보 입수를 역공하며 가족 의혹에 눈물",
+      "why": "李대통령이 18일 지지율 하락 속 대국민 기자회견을 연다",
       "headlines": [
         {
-          "title": "김승원, '한동훈 수사정보 입수' 역공…가족 의혹엔 눈물(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-15T03:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016311592?sid=102"
+          "title": "李대통령, 18일 기자회견…\"주요 현안에 분명한 입장 밝힐 것\"",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-15T07:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005414083?sid=100"
         },
         {
-          "title": "김승원 “수사 정보의 정치적 이용 바로잡겠다”",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-15T01:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0003998500?sid=100"
+          "title": "李대통령, 18일 대국민 기자회견...“주요 현안 직접 설명”",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-15T07:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/024/0000108231?sid=102"
         },
         {
-          "title": "김승원 “수사 정보 정치적 이용 바로 잡을 것”",
-          "press": "donga.com",
-          "publishedAt": "2026-09-15T01:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003748198?sid=100"
+          "title": "李대통령, 18일 90분 기자회견…지지율 하락 정면 돌파",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-09-15T07:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003680463?sid=100"
         }
       ],
       "concentrated": [],
@@ -5511,35 +7304,66 @@
       "rowCount": 0
     },
     {
-      "issue": "추석 자금 방출",
-      "issueType": "fresh",
+      "issue": "류지현 감독 공개훈련",
+      "issueType": "entertainment",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "한국은행이 추석 맞이 신권 등 자금 방출 작업에 착수",
+      "why": "류지현 감독이 아시안게임 야구 대표팀 공개훈련을 지도했다",
       "headlines": [
         {
-          "title": "한국은행 추석자금 방출",
+          "title": "공개훈련 지켜보는 류지현 아시안게임 야구 대표팀 감독",
           "press": "newsis.com",
-          "publishedAt": "2026-09-15T02:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014190957?sid=004"
+          "publishedAt": "2026-09-15T06:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014191819?sid=104"
         },
         {
-          "title": "한국은행, 추석 자금 방출 작업",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-15T02:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016311242?sid=101"
+          "title": "韓 국대 2루수 괜찮나? “정신 차려” 감독 공개 비난→3할 타율 끝내 붕...",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-09-15T01:43:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/109/0005606692"
         },
         {
-          "title": "추석맞이 신권 방출하는 한국은행 [TF사진관]",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-09-15T02:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000533881?sid=101"
+          "title": "공개훈련 타격 지도하는 류지현 아시안게임 야구 대표팀 감독",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T06:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014191825?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "신약 급여 등재기간",
+      "issueType": "policy",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "신약 급여 등재에 평균 23개월 걸려 국민 68%가 길다고 답했다",
+      "headlines": [
+        {
+          "title": "국민 10명 중 6명 이상 “신약 급여 등재 소요 기간 길다”",
+          "press": "newstomato.com",
+          "publishedAt": "2026-09-15T08:02:00.000Z",
+          "link": "http://www.newstomato.com/ReadNews.aspx?no=1313783&inflow=N"
+        },
+        {
+          "title": "국민 67.6% \"신약 급여 등재기간 23개월 길어\"... 적정 기간 평균 8.5개월...",
+          "press": "pharmnews.com",
+          "publishedAt": "2026-09-15T07:48:00.000Z",
+          "link": "https://www.pharmnews.com/news/articleView.html?idxno=306314"
+        },
+        {
+          "title": "신약 허가받고도 건강보험 23개월 기다려…국민이 꼽은 적정기간은",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-15T08:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009172025?sid=105"
         }
       ],
       "concentrated": [
         {
-          "keyword": "추석",
+          "keyword": "신약",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -5548,30 +7372,133 @@
       "rowCount": 0
     },
     {
-      "issue": "시중 통화량 증가",
+      "issue": "김민석 대표 예방",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "7월 시중 통화량이 12.7조원 늘어 반도체 등 기업자금 유입",
+      "why": "김민석 대표가 미국 대사와 조계종 총무원장을 예방하며 자주·동맹을 언급했다",
       "headlines": [
         {
-          "title": "7월 시중 통화량 4225.6조원…12.7조원 증가",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-15T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014191073?sid=101"
+          "title": "김민석 \"자주역량, 동맹과 양립\"…장동혁 \"동맹 강화\"",
+          "press": "sidae.com",
+          "publishedAt": "2026-09-15T07:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/417/0001158395?sid=100"
         },
         {
-          "title": "7월 시중 통화량 12.7조 늘어…반도체 등 기업자금 유입",
+          "title": "조계종 총무원장 예방하는 김민석 대표",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T06:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016312293?sid=100"
+        },
+        {
+          "title": "與 수시 접수 '먹통' 사태에 \"유감 표명…경쟁률 발표시기 조정 점검할...",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T06:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014191963?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "강원도민일보",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "강원도민일보가 지령 1만호 기념식을 열고 34년 역사를 돌아봤다",
+      "headlines": [
+        {
+          "title": "강원사진기자협회, '2025∼2026 보도사진전' 도청서 개최",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T01:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016310863?sid=103"
+        },
+        {
+          "title": "\"강원 지질유산 가치 밝히고 유네스코 등재 길 찾아야\"",
+          "press": "kado.net",
+          "publishedAt": "2026-09-14T15:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/654/0000200509?sid=100"
+        },
+        {
+          "title": "[강원리포트] 동해·강릉·춘천·원주 대기업 AIDC 러브콜⋯도민 기대 부...",
+          "press": "kwnews.co.kr",
+          "publishedAt": "2026-09-13T15:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/087/0001217560?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "강원도민일보 구독",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강원도민일보 뉴스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강원도민일보 인사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강원도민일보 홈페이지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강원도민일보 춘천",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강원도민일보 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강원도민일보 마라톤",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "강원도민일보 지면",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "누리호 발사 설명회",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "누리호 5차 발사에 위성 5기를 실어 군집위성을 띄운다",
+      "headlines": [
+        {
+          "title": "누리호 5차 발사 탑재위성 설명회",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T06:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014191761?sid=101"
+        },
+        {
+          "title": "[누리호5차발사]누리호에 '위성 편대' 싣는다…5기 띄워 2~3개월 뒤 군집...",
           "press": "view.asiae.co.kr",
-          "publishedAt": "2026-09-15T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005816541?sid=101"
+          "publishedAt": "2026-09-15T06:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005816634?sid=105"
         },
         {
-          "title": "M2 증가율 0.7%→0.3% ‘뚝’…시중 유동성 ‘숨 고르기’",
-          "press": "joseilbo.com",
-          "publishedAt": "2026-09-15T03:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/123/0002390209?sid=101"
+          "title": "미사일·누리호 '길잡이' 만든 덕산넵코어스…항재밍 앞세워 코스닥 간...",
+          "press": "thepublic.kr",
+          "publishedAt": "2026-09-14T08:32:00.000Z",
+          "link": "https://www.thepublic.kr/news/articleView.html?idxno=318673"
         }
       ],
       "concentrated": [],
@@ -5579,40 +7506,873 @@
       "rowCount": 0
     },
     {
-      "issue": "아시안게임 기념품 매장",
+      "issue": "소방관",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "unknown",
+      "issueStatus": "stable",
       "isHot": true,
-      "why": "백화점 등에 아시안게임 기념품·캐릭터 굿즈 매장이 마련됨",
+      "why": "청렴 워크숍에서 돈 걸고 화투 친 전남·광주 소방관 5명이 대기발령됐다",
       "headlines": [
         {
-          "title": "아시안게임 기념품 매장 상황은?",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-15T04:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016311610?sid=104"
+          "title": "“청렴도 높이자” 워크숍서 화투판… 광주소방관 5명 대기발령",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-15T06:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003998548?sid=102"
         },
         {
-          "title": "아시안게임 티셔츠 진열된 기념품 매장",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-15T04:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016311609?sid=104"
+          "title": "‘청렴 워크숍’서 돈 걸고 화투 쳤다… 전남광주 소방관 5명 대기발령",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-09-15T06:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003680422?sid=102"
         },
         {
-          "title": "호노혼 전시된 아시안게임 기념품 매장",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-15T04:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016311608?sid=104"
+          "title": "청렴도 워크숍서 돈 걸고 화투판…소방관 5명 대기발령",
+          "press": "kado.net",
+          "publishedAt": "2026-09-15T07:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/654/0000200726?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "아시안게임",
+          "keyword": "소방관 영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소방관 월급",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소방관 계급",
+          "searchVolume": 5400,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소방관 되는법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소방관 시험",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소방관 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소방관 옷",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "소방관 키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "소방관 징계 수위",
+          "reason": "처분 결과 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "홈플러스 임금체불",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "홈플러스 임금체불이 3871억 역대 최대로 664억이 미청산됐다",
+      "headlines": [
+        {
+          "title": "홈플러스 임금체불 3871억 '역대 최대'…664억 아직 미청산",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-15T02:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005332426?sid=101"
+        },
+        {
+          "title": "홈플러스 임금체불 3871억 ‘역대 최대’",
+          "press": "busan.com",
+          "publishedAt": "2026-09-15T00:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/082/0001398315?sid=101"
+        },
+        {
+          "title": "홈플러스 '임금체불 3871억'…664억 여전히 미청산",
+          "press": "magazine.hankyung.com",
+          "publishedAt": "2026-09-14T23:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/050/0000110943?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "홈플러스 임금체불 신고",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "홈플러스",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김동현",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "김동현이 15일 넷째 아들을 득남해 여섯 식구가 됐다",
+      "headlines": [
+        {
+          "title": "김동현, 득남했다 \"우리 가족 네 번째 기적…아들2딸2\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T07:43:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014192367"
+        },
+        {
+          "title": "김동현, 네 아이 아빠됐다…오늘(15일) 넷째 아들 출산",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-15T06:56:00.000Z",
+          "link": "https://m.entertain.naver.com/article/009/0005735524"
+        },
+        {
+          "title": "‘강력한 유전자’ 김동현, 넷째 아들 봤다 ‘얼마나 닮았나’",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-09-15T08:05:00.000Z",
+          "link": "https://m.entertain.naver.com/article/144/0001138344"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김동현 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동현 바디워시",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동현 퍼시닌",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동현 무릎",
+          "searchVolume": 740,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동현 결혼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동현 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동현 배우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김동현 자녀",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "김동현 넷째 이름",
+          "reason": "작명 궁금증",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김동현 아내 근황",
+          "reason": "산후 소식 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김동현 가족 예능",
+          "reason": "다둥이 방송 기대",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김동현 자녀 얼굴",
+          "reason": "판박이 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "윤호중 장관 면담",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "윤호중 행정안전부 장관이 일본 참의원 대표단과 면담했다",
+      "headlines": [
+        {
+          "title": "면담하는 윤호중 행정안전부 장관",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T06:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014191987?sid=100"
+        },
+        {
+          "title": "윤호중 행정안전부 장관, 일본 참의원 대표단 면담",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T06:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016312335?sid=100"
+        },
+        {
+          "title": "윤호중 장관, 일본 참의원 대표단 면담",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-15T06:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009171731?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "애플",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "애플이 iOS 27과 강화된 시리 AI를 배포하고 10월 한국어를 지원한다",
+      "headlines": [
+        {
+          "title": "사진 구도 바꾸고 웹페이지 가격 추적…애플, AI 기능 확대",
+          "press": "etnews.com",
+          "publishedAt": "2026-09-15T01:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003466812?sid=105"
+        },
+        {
+          "title": "2년3개월 만에 '진짜 AI 시리' 나왔다…애플, iOS 27 배포 시작",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T00:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014190281?sid=105"
+        },
+        {
+          "title": "애플, 강화된 '시리 AI' 베타버전 공개…10월 한국어 지원",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-15T00:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009170247?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "애플 폴더블",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 서비스센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 고객센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 정품 확인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 본사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "애플 폴더블 출시",
+          "reason": "패널 증가 기대",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤트로픽",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "삼성SDS가 앤트로픽 국내 첫 셀렉트 티어 파트너가 됐다",
+      "headlines": [
+        {
+          "title": "삼성SDS, 앤트로픽 '클로드 파트너' 국내 첫 셀렉트 티어 획득",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-14T23:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014190006?sid=105"
+        },
+        {
+          "title": "삼성SDS, 국내 첫 '앤트로픽' 공인 파트너",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-15T08:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005735620?sid=105"
+        },
+        {
+          "title": "앞에선 AI속도조절 한목소리…뒤에선 'IPO·주도권' 복잡한 셈법",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-14T23:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016310413?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 퇴사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "앤트로픽 상장일",
+          "reason": "IPO 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "AI 킬스위치",
+          "reason": "규제 발언 화제",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "MS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "엔씨가 MS와 협력해 아이온2를 애저 기반으로 글로벌 출시한다",
+      "headlines": [
+        {
+          "title": "엔씨, MS와 손잡고 '아이온2' 글로벌 출시 준비",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T00:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014190093?sid=105"
+        },
+        {
+          "title": "엔씨, 아이온2 글로벌 출시 앞두고 MS와 협력 강화",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-15T05:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005735451?sid=105"
+        },
+        {
+          "title": "엔씨, ‘아이온2’ 글로벌 출시 앞두고 MS와 협력… 애저 활용",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-15T05:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003998539?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ms 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스",
+          "searchVolume": 24660,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MS 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 365",
+          "searchVolume": 12060,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 해지 방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 한컴 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "뉴로퓨전",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "뉴로퓨전이 밸리 AI에 투자 리서치 AI 에이전트를 탑재했다",
+      "headlines": [
+        {
+          "title": "뉴로퓨전, 투자 분석 플랫폼 '밸리 AI'에 전용 AI 에이전트 탑재",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-15T04:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005413920?sid=101"
+        },
+        {
+          "title": "뉴로퓨전, 'Valley AI'에 투자 리서치 AI 에이전트 탑재",
+          "press": "nbntv.co.kr",
+          "publishedAt": "2026-09-15T06:20:00.000Z",
+          "link": "https://www.nbntv.co.kr/news/articleView.html?idxno=4024929"
+        },
+        {
+          "title": "뉴로퓨전 밸리 AI, 금융 리서치 에이전트로 데이터-판단 간극 낮춘다",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-14T23:39:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002437417?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "뉴로퓨전 주식회사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 투자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전(주)",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴로퓨전 최한철",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "뉴로퓨전 투자유치",
+          "reason": "자금 조달 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "뉴로퓨전 실적",
+          "reason": "성장성 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "AI 안전성",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "트럼프와 젠슨 황이 공개 통화에서 'AI 위험론은 사기'라고 말했다",
+      "headlines": [
+        {
+          "title": "'AI 깐부' 젠슨 황 손에 또 갤럭시…폴드7 이어 폴드8까지",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T06:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014192017?sid=105"
+        },
+        {
+          "title": "젠슨 황, 'AI 위험성은 사기' 트럼프에 공개 동의",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-15T00:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001388333?sid=104"
+        },
+        {
+          "title": "젠슨황, 트럼프와 공개 통화…\"AI 위험론은 사기\" 동의",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-14T23:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001969004?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "AI 안전성 경고",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "AI 안전성 논쟁",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "찰스 3세",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "찰스 3세가 AI 위험 논란 속 AI 기업 대표들과 회동한다",
+      "headlines": [
+        {
+          "title": "英 찰스 국왕, AI 위험 논란 속 기업 대표들 회의 소집",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-13T21:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014187212?sid=104"
+        },
+        {
+          "title": "AI수장 만나는 찰스 3세…트럼프는 “중국과 경쟁도 바빠”",
+          "press": "sedaily.com",
+          "publishedAt": "2026-09-14T02:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004661556?sid=104"
+        },
+        {
+          "title": "찰스3세 英국왕, AI 기업 대표들 회동…\"선한 방향 개발 논의\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-14T06:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009169103?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "찰스 3세 퇴위",
+          "searchVolume": 690,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "찰스 3세 건강",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "찰스 3세 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "찰스 3세 영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "영국 찰스3세",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "찰스3세 카밀라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "찰스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
+      "issue": "베스핀글로벌",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "베스핀글로벌이 업스테이지와 울산 공교육 AI에 국산 LLM을 적용한다",
+      "headlines": [
+        {
+          "title": "베스핀글로벌·업스테이지, 울산교육청 AI 학습서비스 고도화",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-14T22:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005413696?sid=105"
+        },
+        {
+          "title": "베스핀글로벌, 업스테이지와 울산 공교육 AI에 국산 LLM 입힌다",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-15T05:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002437510?sid=105"
+        },
+        {
+          "title": "베스핀글로벌-업스테이지, 국산LLM 기반 공교육 AI서비스 협력",
+          "press": "dt.co.kr",
+          "publishedAt": "2026-09-15T01:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/029/0003048031?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "베스핀글로벌 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 본사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 로고",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "베스핀글로벌 기업정보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "베스핀글로벌 상장",
+          "reason": "IPO 여부 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "인포시즈",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "인포시즈가 SK텔레콤 부사장 출신 박준을 CBO로 영입했다",
+      "headlines": [
+        {
+          "title": "반도체·금융 고객 늘린다…인포시즈, 前 SKT 부사장 CBO로 영입",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-15T05:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005413981?sid=101"
+        },
+        {
+          "title": "[Tech & Now] 인포시즈, SK텔레콤 부사장 출신 박준 CBO 영입 등",
+          "press": "ebn.co.kr",
+          "publishedAt": "2026-09-15T06:56:00.000Z",
+          "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1724355"
+        },
+        {
+          "title": "인포시즈, 박준 전 SKT 부사장 CBO 영입",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-09-15T00:36:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=865226"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "인포시즈 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인포시즈 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인포시즈 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인포시즈 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인포시즈 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인포시즈 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인포시즈 투자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인포시즈 탁정수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "인포시즈 사업확대",
+          "reason": "반도체·금융 공략",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "인포시즈 투자유치",
+          "reason": "자금 조달 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "온톨로지 AI",
+          "reason": "기술 개념 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "박준 CBO",
+          "reason": "영입 인물 배경",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -5644,7 +8404,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "서동주",
@@ -5724,310 +8485,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "수출물가 하락",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "환율 하락에 8월 수출물가 3.7% 내려 3년8개월 만 최대폭",
-      "headlines": [
-        {
-          "title": "수입물가 3개월째↓…\"유가 올랐지만 환율 하락한 영향\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-14T21:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014189812?sid=101"
-        },
-        {
-          "title": "환율 하락에 8월 수출입물가↓…수출물가 3년반 만에 최대폭↓",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-09-14T21:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004189281?sid=101"
-        },
-        {
-          "title": "환율 하락에 8월 수출물가 3.7%↓…3년 8개월 만에 최대폭",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-14T21:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016310315?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "교육부 학폭 예방",
-      "issueType": "entertainment",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "교육부가 학폭 예방 어울림 선도학교 276곳을 운영",
-      "headlines": [
-        {
-          "title": "교육부, 학폭예방 선도학교 276곳 운영…교원·학생·학부모 동참",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-15T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016311378?sid=102"
-        },
-        {
-          "title": "교원·학생·학부모 함께 학폭 예방…교육부, 선도학교 276곳 운영",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-15T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009170841?sid=102"
-        },
-        {
-          "title": "학폭 예방 선도학교 276곳 운영…46곳은 '스마트폰 없는 학교'",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-15T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014191067?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "교육부",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "서울 버스 파업",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "서울 시내버스 노사가 통상임금 두고 파업 하루 전 막판 협상",
-      "headlines": [
-        {
-          "title": "서울 시내버스 파업 'D-1'…노사, 막판 임금협상 줄다리기",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-14T22:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016310391?sid=101"
-        },
-        {
-          "title": "서울 시내버스 파업 하루 전…노사 '막판 줄다리기'",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-15T00:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001388331?sid=101"
-        },
-        {
-          "title": "서울 시내버스 파업 D-1…통상임금 놓고 노사 '평행선'",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-09-14T23:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001969001?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "스포츠",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "노출 스포츠 광고 논란과 아시안게임 클라이밍 메달 소식이 겹침",
-      "headlines": [
-        {
-          "title": "럭비공으로 가슴 가리고…'노출' 스포츠 광고에 女 선수들 분노",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-15T00:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005332351?sid=104"
-        },
-        {
-          "title": "AG 앞둔 스포츠클라이밍 정지민, 월드 클라이밍서 동메달 2개",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-14T08:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014189532?sid=104"
-        },
-        {
-          "title": "“스포츠 광고 너무 야하다”…나체에 주요부위만, 논란 일자 여배우의...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-15T00:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005735220?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "스포츠 선글라스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스포츠 키즈카페",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스포츠 경기일정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스포츠 팬티",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스포츠 라이브 스트리밍",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스포츠 유틸리티 자동차",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스포츠 차",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스포츠 칸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "스포츠 광고 사과",
-          "reason": "논란 후속",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "라이너 모델 API",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "라이너가 질문 난도별 LLM 자동선택으로 토큰비용 50% 절감 API 출시",
-      "headlines": [
-        {
-          "title": "[테크스냅] 라이너, LLM 비용 절반 줄이는 AI 솔루션 출시",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-15T00:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016310754?sid=105"
-        },
-        {
-          "title": "\"간단 계산에 슈퍼컴을?\"…라이너, LLM 비용 50%↓ API 출시",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-15T04:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005413933?sid=101"
-        },
-        {
-          "title": "라이너, AI 질문 토큰 비용 50% 절감 '모델 API' 출시",
-          "press": "etnews.com",
-          "publishedAt": "2026-09-15T00:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003466761?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "라이너",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "삼성전자",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "라이프운용이 삼성전자에 우선주 매입·소각 주주제안 서한 발송",
-      "headlines": [
-        {
-          "title": "삼전닉스 계약학과 수시 지원 8994명…'역대 최다'",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-14T23:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014189974?sid=102"
-        },
-        {
-          "title": "\"삼성전자, 우선주 사서 소각하라\" 라이프운용 주주제안, 왜",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-14T23:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006369458?sid=101"
-        },
-        {
-          "title": "삼성전자, 美 버라이즌과 6G 핵심 기술 실증...업계 최초",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-14T23:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002437415?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "삼성전자 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성전자 서비스센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성전자 온누리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성전자 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성전자 배당금",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성전자 월세",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성전자 패밀리몰",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼성전자 고객센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "삼성전자 자사주 소각",
-          "reason": "주주환원 후속",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "삼성전자 배당",
-          "reason": "환원 정책 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "뉴엔AI",
@@ -6121,7 +8580,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "삼성SDS",
@@ -6215,38 +8675,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "국내 AI 업계",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "AI 감속·속도조절론에 한국 AI 전략과 사이버보안이 주목",
-      "headlines": [
-        {
-          "title": "'AI 감속'에 복잡해진 한국 셈법…기회냐 새 장벽이냐",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-14T04:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016308963?sid=105"
-        },
-        {
-          "title": "AI 속도 조절론이 키운 역설…울다 웃는 '사이버 보안'",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-15T02:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014190981?sid=105"
-        },
-        {
-          "title": "AI 감속론에 복잡해진 한국 전략…속도조절도 '차등 적용'",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-15T04:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002437501?sid=105"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "SWE-2",
@@ -6317,7 +8747,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "코그니션",
@@ -6411,7 +8842,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "AuK",
@@ -6505,7 +8937,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "이형택 이대훈 폭행사건",
@@ -6941,5 +9374,24 @@
       "rowCount": 1,
       "carried": true
     }
-  ]
+  ],
+  "enrichedAt": "2026-09-15T09:16:15.182Z",
+  "enrichStats": {
+    "enriched": 3,
+    "subsAdded": 2,
+    "titleUpgraded": 0,
+    "proposed": 18,
+    "verified": 8,
+    "judged": 0,
+    "judgedBad": 0,
+    "related": 0,
+    "picked": 0,
+    "pooled": 8,
+    "aiTitled": 3,
+    "trended": 1,
+    "homeRetried": 2,
+    "whyAdded": 2,
+    "aiCalls": 3,
+    "partial": false
+  }
 }
