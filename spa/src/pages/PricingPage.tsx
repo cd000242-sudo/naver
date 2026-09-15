@@ -301,6 +301,27 @@ function PricingPage() {
      * 띄우기 때문이다(사장님 지적 2026-08-21). 인자가 없으면 예전처럼
      * 아래 구역의 입력값을 쓴다 — 두 길이 같은 함수를 공유한다.
      */
+/**
+ * customerKey 를 이메일 원문으로 만들면 주소가 긴 사용자에서 키가 길어진다.
+ * 예전: 'LP_' + 이메일(특수문자 _ 치환) + '_' + Date.now()
+ *   cd000242@gmail.com                         -> 30자
+ *   verylongname.with.dots@companydomain.co.kr -> 58자  ← 토스 customerKey 길이 제한 초과
+ * 길이 검사도 잘라내기도 없어서 긴 이메일 사용자는 카드 등록 창은 뜨는데 발급에서 거부될 수 있다.
+ *
+ * ※ 2026-09-15 실측한 실패 건은 이메일이 짧았다 — 그 건의 원인은 길이가 아니다.
+ *   그래도 길이가 상황에 따라 터지는 구조 자체는 남아 있으므로 여기서 없앤다.
+ *   이메일은 successUrl 파라미터로 따로 가고 시트에도 별도 저장되니 키에 담을 이유가 없다.
+ */
+function buildCustomerKey(email: string): string {
+    let hash = 0;
+    for (let i = 0; i < email.length; i++) {
+        hash = (hash * 31 + email.charCodeAt(i)) >>> 0;
+    }
+    return ('LP' + hash.toString(36) + Date.now().toString(36))
+        .replace(/[^A-Za-z0-9_-]/g, '')
+        .slice(0, 40);
+}
+
     const requestPayment = async (emailArg?: string) => {
         if (!selected || !tossRef.current) return;
         const e = (emailArg || email).trim();
@@ -310,7 +331,7 @@ function PricingPage() {
         setPaying(true);
         try {
             const chargeAmount = getPlanCardAmount(selected);
-            const customerKey = 'LP_' + e.replace(/[^a-zA-Z0-9]/g, '_') + '_' + Date.now();
+            const customerKey = buildCustomerKey(e);
             const orderId = generateOrderId();
             const origin = window.location.origin;
             const successUrl = `${origin}/success.html?email=${encodeURIComponent(e)}&productId=${encodeURIComponent(selected.id)}&amount=${chargeAmount}&orderName=${encodeURIComponent(selected.name)}&customerKey=${encodeURIComponent(customerKey)}&orderId=${encodeURIComponent(orderId)}`;

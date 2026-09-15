@@ -518,6 +518,20 @@
             animate();
         }
 
+        // ===== Trial 성공 화면 =====
+        // 최초 호출 성공과 재진입(캐시) 둘 다 여기로 온다 — 화면이 갈리면 안 된다.
+        function renderTrialSuccess(result) {
+            const headline = document.getElementById('success-headline');
+            if (headline) headline.textContent = '올인원 라이선스 발급 완료!';
+            const sub = document.getElementById('success-subtitle');
+            if (sub) sub.textContent = '아래 코드 1개로 Leaders Pro 제품군 권한이 연결됩니다.';
+            const trialNotice = document.getElementById('trial-notice');
+            const chargeDateEl = document.getElementById('trial-charge-date');
+            if (chargeDateEl && result.trialEndDate) chargeDateEl.textContent = result.trialEndDate;
+            if (trialNotice) trialNotice.classList.remove('hidden');
+            showCode(result.code, result.product);
+        }
+
         // ===== 메인 실행 =====
         async function main() {
             const params = getParams();
@@ -525,20 +539,25 @@
 
             // ── 정기결제 trial 분기: customerKey + authKey 있으면 7일 무료 시작 흐름
             if (params.customerKey && params.authKey) {
+                /*
+                 * [2026-09-15] authKey 는 토스에서 한 번만 쓸 수 있다. 그런데 이 페이지는 열릴
+                 * 때마다 start-trial 을 불렀다 — 새로고침 한 번, 뒤로가기 한 번이면 이미 소멸된
+                 * authKey 로 다시 호출되고, 토스가 "빌링키가 존재하지 않습니다"를 돌려준다.
+                 * 첫 호출이 성공했어도 사용자는 실패 화면을 본다.
+                 * 그래서 성공 결과를 브라우저에 남겨 두고, 재진입이면 다시 부르지 않고 그대로 보여준다.
+                 */
+                const guardKey = 'lp_trial_' + params.authKey;
+                let cached = null;
+                try { cached = JSON.parse(localStorage.getItem(guardKey) || 'null'); } catch (e) { cached = null; }
+                if (cached && cached.code) {
+                    renderTrialSuccess(cached);
+                    return;
+                }
                 try {
                     const result = await callStartTrialJSONP(params);
                     if (result.ok && result.code) {
-                        // 페이지 문구를 trial 시작 형태로 교체
-                        const headline = document.getElementById('success-headline');
-                        if (headline) headline.textContent = '올인원 라이선스 발급 완료!';
-                        const sub = document.getElementById('success-subtitle');
-                        if (sub) sub.textContent = '아래 코드 1개로 Leaders Pro 제품군 권한이 연결됩니다.';
-                        // Trial 안내 박스 노출
-                        const trialNotice = document.getElementById('trial-notice');
-                        const chargeDateEl = document.getElementById('trial-charge-date');
-                        if (chargeDateEl && result.trialEndDate) chargeDateEl.textContent = result.trialEndDate;
-                        if (trialNotice) trialNotice.classList.remove('hidden');
-                        showCode(result.code, result.product);
+                        try { localStorage.setItem(guardKey, JSON.stringify(result)); } catch (e) { /* 저장 못 해도 화면은 그대로 */ }
+                        renderTrialSuccess(result);
                     } else {
                         showError(result.error || 'trial 등록 중 오류가 발생했습니다.', 'trial 시작 실패');
                     }
