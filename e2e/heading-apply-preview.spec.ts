@@ -49,6 +49,14 @@ test.afterAll(async () => {
   await closeElectronTestSession(app, testProfile);
 });
 
+/*
+ * 게이트 전체 실행 뒤에는 이 앱이 아주 느리다 — 단위 테스트 9천여 건과 커버리지·빌드를
+ * 막 끝낸 머신에서 뜬다. 미리보기는 디바운스(450ms) 뒤 비동기 분석을 거치므로 그 지연이
+ * 크게 늘어난다. 실제로 단독 실행은 늘 통과하는데 게이트에서만 두 번 떨어졌다.
+ * 기본 타임아웃(60초)으로는 모자라서 이 스펙만 넉넉히 준다.
+ */
+test.setTimeout(120_000);
+
 test('소제목 편집이 구조 미리보기까지 도달한다', async () => {
   const report = await mainWindow.evaluate(async (input: { body: string; renamed: string }) => {
     const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -56,7 +64,7 @@ test('소제목 편집이 구조 미리보기까지 도달한다', async () => {
      * 고정 대기는 게이트 전체를 돌릴 때(앞선 스위트로 머신이 바쁠 때) 흔들린다 —
      * 실제로 단독 실행은 통과하고 게이트에서만 실패했다. 조건이 참이 될 때까지 폴링한다.
      */
-    const until = async (check: () => boolean, budgetMs = 20000): Promise<void> => {
+    const until = async (check: () => boolean, budgetMs = 45000): Promise<void> => {
       const deadline = Date.now() + budgetMs;
       while (Date.now() < deadline) {
         if (check()) return;
