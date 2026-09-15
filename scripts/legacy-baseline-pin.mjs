@@ -61,3 +61,12 @@ const next = {
 };
 await writeFile(BASELINE_PATH, `${JSON.stringify(next, null, 2)}\n`, 'utf8');
 console.log(`\n💾 핀 갱신 완료 — ${files.length}개 파일`);
+/*
+ * The pin lives in three places and the gate checks all three. Re-pinning this file changes the file's own
+ * hash, which is pinned again inside the evidence-attestation test — miss it and the release gate stops at
+ * step 1 after a full test run (~2 minutes wasted). Print the next step instead of letting it be rediscovered.
+ */
+console.log('\n⚠️ 남은 두 곳도 함께 갱신해야 게이트가 통과합니다:');
+console.log('   1) npx tsx scripts/fingerprint-pin.mjs --write        (V3 런타임 지문)');
+console.log('   2) src/__tests__/contentQualityV3EvidenceAttestation.test.ts 의 legacyBaselineSha256');
+console.log(`      → 이 파일의 새 해시: ${sha256(await readFile(BASELINE_PATH))}`);

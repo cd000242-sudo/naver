@@ -239,7 +239,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   하한 2개는 6월 88% 통과 / 9월 17% 통과로 분별된다(점수 항목은 만들지 않았다 —
         //   9월 83%가 미달이라 감점을 넣으면 전수 재생성이 걸린다).
         //   (homefeed/base.prompt 1개만 바뀌었음을 재계산으로 확인)
-        '30edd3d9de702ca4838956e70fc96b22c2a31f65513501364f84132de4c47424',
+        // [2026-09-15] 요약표 스키마를 끌 수 있게 하면서 contentJsonPromptFormat.ts 가 바뀌어 재계산.
+        //   (베이스라인 110개 중 그 1개만 바뀌었음을 legacy-baseline-pin.mjs dry-run 으로 확인)
+        'baf4ae3bdab18eacb6e08cbad9ecc9f9a17dd71a93431f71b6f924e774ce87ff',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
