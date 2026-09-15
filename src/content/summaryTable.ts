@@ -35,10 +35,32 @@ function escapeCell(value: string): string {
 }
 
 /**
+ * [2026-09-15 사장님 화면] 발행글 첫 화면에 이런 표가 나갔다:
+ *   | 검색 상태 | 검색 결과를 수집하지 못했습니다. |
+ *   | 화면 표기 | Google News 주제 불일치 유사도 5% |
+ *   | 연도 표기 | 2026년·2025년 귀속·2024년·2023년 |
+ *
+ * 크롤링이 전부 실패한 글이라 모델에게 줄 사실이 없었고, 모델은 **재료의 실패 메시지와
+ * 프롬프트 규칙**을 표 칸에 옮겨 적었다. 재료 쪽은 sourceAssembler 에서 막았지만,
+ * 여기서도 막는다 — 도구의 상태·표기 규칙은 독자가 읽을 사실이 아니다.
+ *
+ * 한 낱말 목록이 아니라 **모양**으로 거른다: 수집/검색 상태, 유사도 수치, 주제 불일치,
+ * 그리고 "…표기" 처럼 글의 내용이 아니라 글의 표기를 가리키는 라벨.
+ */
+const PROCESS_VALUE = /검색\s?결과|수집(?:하지\s?못|되지\s?않|\s?실패|\s?불가)|유사도\s*\d+\s*%|주제\s?불일치|자료(?:\s?없음|\s?부족|가\s?없)|프롬프트/;
+const PROCESS_LABEL = /^(?:검색|수집|크롤링)\s?(?:상태|결과)$|표기$|프롬프트|내부\s?상태/;
+
+export function isProcessNoiseRow(label: string, value: string): boolean {
+  return PROCESS_LABEL.test(label.trim()) || PROCESS_VALUE.test(value) || PROCESS_VALUE.test(label);
+}
+
+/**
  * 쓸 수 있는 행만 남긴다.
  *
  * 라벨이 전부 같으면(예: "핵심"×4) 정보가 0이므로 표 자체를 버린다 — 그런 표는
  * 첫 화면만 차지하고 독자에게 아무것도 주지 않는다.
+ * 도구의 상태를 적은 행도 같은 이유로 버린다. 그렇게 해서 남는 행이 2개 미만이면 표가 통째로 사라진다 —
+ * 사장님 말대로 "이렇게 나올 거면 안 나오는 게 낫다".
  */
 export function normalizeSummaryRows(rows: unknown): Array<{ label: string; value: string }> {
   if (!Array.isArray(rows)) return [];
@@ -49,6 +71,7 @@ export function normalizeSummaryRows(rows: unknown): Array<{ label: string; valu
     const label = text((row as SummaryTableRow)?.label);
     const value = text((row as SummaryTableRow)?.value);
     if (!label || !value) continue;
+    if (isProcessNoiseRow(label, value)) continue;
 
     const key = label.replace(/\s+/g, '').toLowerCase();
     if (seen.has(key)) continue;

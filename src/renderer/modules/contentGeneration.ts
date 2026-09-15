@@ -204,6 +204,20 @@ function applyManualTitleOverrideToContent(structuredContent: any, manualTitle?:
  * (체크 OFF 면 빈 값). #unified-custom-prompt 는 구버전 호환 폴백이다.
  * 경로마다 따로 읽다가 URL 경로에서는 아예 빠져 있었다 — 한 곳에서 읽는다.
  */
+/**
+ * [2026-09-15 사장님 요청] 맨 앞 요약표를 넣을지 — 화면 체크박스 하나에서만 읽는다.
+ *
+ * 사장님이 본 발행글의 첫 표가 내부 진단값으로 채워져 있었다("검색 결과를 수집하지 못했습니다",
+ * "Google News 주제 불일치 유사도 5%"). 그 원인은 따로 막았지만, 표 자체를 끌 수 있어야 한다는 요청이다.
+ *
+ * 읽는 곳을 함수 하나로 모은다 — 생성 호출부가 세 곳이라 각자 읽으면 한 곳이 빠져도 조용히 무시된다
+ * (이 파일 위쪽에 같은 사고가 주석으로 남아 있다). 체크박스가 없으면 켠 것으로 본다 = 기존 동작.
+ */
+export function readSummaryTableOptionFromUi(): boolean {
+  const el = document.getElementById('unified-summary-table') as HTMLInputElement | null;
+  return el ? el.checked === true : true;
+}
+
 function readCustomPromptFromUi(): string | undefined {
   const unified = (document.getElementById('custom-prompt-input') as HTMLTextAreaElement | null)?.value?.trim();
   if (unified) return unified;
@@ -722,6 +736,7 @@ export async function generateContentFromUrl(
       manualTitleOverride,
       personalExperience,
       aiExperienceGeneration,
+      includeSummaryTable: readSummaryTableOptionFromUi(),
       // [2026-09-08] URL 경로에는 customPrompt 필드 자체가 없어서, 개인 프롬프트를 켜고
       //   써도 통째로 무시됐다(키워드 경로에만 있었다 — 사용자 실측 "적용이 안 된다").
       customPrompt: readCustomPromptFromUi(),
@@ -1350,6 +1365,7 @@ export async function generateContentFromKeywords(
       manualTitleOverride,
       personalExperience,
       aiExperienceGeneration,
+      includeSummaryTable: readSummaryTableOptionFromUi(),
     }
   };
 

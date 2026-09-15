@@ -7341,10 +7341,13 @@ ${naverResult.content}`;
 
             // 관련성 낮은 소스가 있으면 별도 섹션으로 추가
             if (irrelevantContents.length > 0) {
+              // [2026-09-15] The per-item label used to carry a diagnostic ("주제 불일치 (유사도 5%)").
+              //   The model copied it into the post's summary table as if it were a fact ("화면 표기 | Google News 주제 불일치 유사도 5%").
+              //   The section header below already tells the model these sources are less relevant; the number is ours, not the reader's.
               baseBody += '\n\n=== 관련성 낮은 추가 정보 ===\n\n';
               baseBody += irrelevantContents
                 .map((item) => {
-                  return `[${item.title} - 주제 불일치 (유사도 ${Math.round(item.relevance * 100)}%)]\n${item.content}`;
+                  return `[${item.title}]\n${item.content}`;
                 })
                 .join('\n\n---\n\n');
 
@@ -7354,7 +7357,8 @@ ${naverResult.content}`;
             // 모든 소스가 관련성 낮은 경우 그냥 통합
             baseBody = contentWithRelevance
               .map((item) => {
-                return `[${item.title} - 주제 불일치 (유사도 ${Math.round(item.relevance * 100)}%)]\n${item.content}`;
+                // [2026-09-15] 위와 같은 이유로 진단값을 라벨에 붙이지 않는다 — 모델이 표 칸에 옮겨 적었다
+                return `[${item.title}]\n${item.content}`;
               })
               .join('\n\n---\n\n');
 
@@ -8092,8 +8096,11 @@ export async function collectContentFromPlatforms(
     if (urls.length === 0) {
       // API도 실패하고 URL도 없으면 키워드만으로 반환
       logger(`[플랫폼 콘텐츠 수집] ⚠️ URL도 발견되지 않음, 키워드 기반으로 진행`);
+      // [2026-09-15] Never hand process narration to the model as material — it ends up quoted in the post.
+      //   The old text ('"…"에 대한 정보를 수집합니다.') was the only "material" when every crawl failed,
+      //   and the model rendered it as a fact row in the summary table. Empty means "no material", which is true.
       return {
-        collectedText: `[키워드: ${keyword}]\n\n"${keyword}"에 대한 정보를 수집합니다.`,
+        collectedText: '',
         sourceCount: 0,
         urls: [],
         success: true,
@@ -8189,9 +8196,17 @@ export async function collectContentFromPlatforms(
       }
 
       // ✅ [신규] 모든 수집 실패 시 키워드만으로 최소 정보 제공 (AI가 자체 지식으로 생성 가능)
-      logger(`[플랫폼 콘텐츠 수집] ⚠️ 모든 크롤링 실패 → 키워드 기반 최소 정보 반환`);
+      logger(`[플랫폼 콘텐츠 수집] ⚠️ 모든 크롤링 실패 → 재료 없이 진행 (모델 지식으로 생성)`);
+      /**
+       * [2026-09-15 사장님 실측] 이 자리가 발행글의 깨진 표를 만들었다.
+       *   표: "검색 상태 | 검색 결과를 수집하지 못했습니다." · "화면 표기 | Google News 주제 불일치 유사도 5%"
+       * 크롤링이 전부 실패하면 **이 안내문이 유일한 재료**가 되고, 모델은 쓸 사실이 없으니
+       * 재료(=실패 메시지)와 프롬프트 규칙을 요약표로 옮겨 적었다.
+       * 안내문은 주제에 대한 사실이 아니다. 재료가 없으면 없다고 하는 것이 맞다 — 빈 문자열로 돌려준다.
+       * 생성은 그대로 진행한다(success 유지) — 모델 지식으로 쓰는 기존 결정은 바꾸지 않는다.
+       */
       return {
-        collectedText: `[키워드: ${keyword}]\n\n검색 결과를 수집하지 못했습니다. "${keyword}"에 대한 일반적인 정보를 기반으로 콘텐츠를 생성합니다.`,
+        collectedText: '',
         sourceCount: 0,
         urls,
         success: true, // ✅ 성공으로 처리하여 AI 생성 진행

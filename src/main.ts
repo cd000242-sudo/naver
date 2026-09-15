@@ -6338,6 +6338,12 @@ ipcMain.handle(
         console.log('[Main] 🧭 AI 경험 생성 무시 — 작성자 경험 메모가 있어 그 범위로 씁니다');
       }
 
+      // [2026-09-15] 맨 앞 요약표 — 화면 체크박스. 값이 없으면 기존처럼 넣는다(true).
+      if ((payload.assembly as any).includeSummaryTable === false) {
+        source.includeSummaryTable = false;
+        console.log('[Main] 📊 맨 앞 요약표 OFF — 스키마에서 summaryTable 을 빼고 표를 조립하지 않습니다');
+      }
+
       // ✅ 사용자 정의 프롬프트 전달
       const customPrompt = (payload.assembly as any).customPrompt as string | undefined;
       if (customPrompt) {

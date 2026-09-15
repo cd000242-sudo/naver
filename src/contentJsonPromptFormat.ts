@@ -13,6 +13,8 @@ import { annotateSearchOnlyCompounds } from './content/searchOnlyCompoundKeyword
 type ContentJsonPromptSource = {
   previousTitles?: string[];
   customPrompt?: string;
+  /** [2026-09-15] 맨 앞 요약표를 넣을지. false 면 스키마에서 summaryTable 을 뺀다(값이 없으면 넣는다). */
+  includeSummaryTable?: boolean;
   /** issue-story 골격과 STRUCTURE OVERRIDE의 배타 판정에 사용 */
   categoryHint?: string;
   businessInfo?: {
@@ -444,6 +446,12 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
   } = options;
 
   const isHomefeed = mode === 'homefeed';
+  /**
+   * [2026-09-15 사장님 요청] 맨 앞 요약표 끄기.
+   * 표는 프롬프트 문장이 아니라 **스키마 필드**로 강제된다(summaryTable.ts 머리말) — 그래서 끄는 것도 스키마에서 뺀다.
+   * 값이 없으면 지금까지처럼 넣는다.
+   */
+  const skipSummaryTable = isHomefeed || source.includeSummaryTable === false;
   // [2026-08-27] 길이 계약은 스키마 필드에 적는다. 프롬프트 산문("28~42자 권장")만으로는
   //   지켜지지 않아 53자 제목이 발행됐다 — 평가기는 29점을 매겼는데도 그대로 나갔다.
   const titleLength = describeTitleLength(mode as never);
@@ -488,7 +496,7 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
     {"text": "제목 3 (${titleLength})", "score": 85}`}
   ],
   "finalVerdict": "제목이 던진 질문(독자 상황)에 대한 필자의 판단 1~2문장. 자료에서 확인된 근거로 말하고, 조건에 따라 갈리면 어느 조건에서 어떻게 되는지까지 적는다. 이 판단이 글의 관점이다 — headings 는 이 판단을 향해 쌓고, conclusion 은 여기로 돌아와 필자의 말로 매듭짓는다(문장 복사가 아니다). 본문·conclusion 에 '판정:' 같은 라벨은 붙이지 않는다",
-  ${buildHeadingsExample()},${isHomefeed ? '' : `
+  ${buildHeadingsExample()},${skipSummaryTable ? '' : `
   "summaryTable": [
     {"label": "기준일", "value": "자료에 있는 날짜", "condition": ""},
     {"label": "이 글 주제와 직접 상관있는 축만 (자료에 있다고 다 넣지 않는다 — 정리 글에 제품 스펙·가격은 다른 글감이다)", "value": "확인된 값. 독자가 자기 상황에 대볼 수 있는 값만 (X: \\"586L 4도어 사례 참고 가능\\" — 정보도 지시도 아니다)", "condition": "그 값이 성립하는 조건. 본문에 조건을 달았으면 표에도 반드시 적는다 (X: \\"30% 늘어난 사례\\" / O: \\"과대포장을 덜어낸 경우 30%\\") — 표가 먼저 읽히므로 조건이 빠지면 독자는 단정으로 받는다"},

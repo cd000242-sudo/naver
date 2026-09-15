@@ -2278,6 +2278,12 @@ export interface ContentSource {
   //   3요소 계약(제약 · 유보 · 비교)을 갖춘 체험 문장을 모델이 만든다.
   //   리빙 글에는 필요하고 정보 글에는 아니라서, 전역 설정이 아니라 요청마다 받는다.
   aiExperienceGeneration?: boolean;
+  /**
+   * [2026-09-15 사장님 요청] 글 맨 앞 「구분 / 내용」 요약표를 넣을지. 기본은 넣는다(undefined = true).
+   *   끄면 ① JSON 스키마에서 summaryTable 필드를 빼고 ② 표를 조립하지 않는다.
+   *   스키마에서 빼는 것이 핵심이다 — 표는 프롬프트 문장이 아니라 스키마 필드로 강제되기 때문이다(summaryTable.ts 머리말).
+   */
+  includeSummaryTable?: boolean;
   targetTraffic?: TargetTrafficStrategy;
   targetAge?: '20s' | '30s' | '40s' | '50s' | 'all';
   toneStyle?: 'friendly' | 'professional' | 'casual' | 'formal' | 'humorous' | 'community_fan' | 'mom_cafe' | 'storyteller' | 'expert_review' | 'calm_info'
@@ -3045,6 +3051,20 @@ export function buildModeBasedPrompt(
   //   동작: src/prompts/seo/ai-tab-friendly.prompt 로드해서 systemPrompt 끝에 append.
   //   효과: 6,000~8,000자 + bullet/리스트 + 정의문 + 정보 탐색형 키워드 룰 LLM에 강제.
   //   실패 시 graceful skip (기본 SEO 룰만 적용).
+  /**
+   * [2026-09-15 사장님 요청] 맨 앞 요약표를 껐으면, 앞에서 붙은 [BRIEF-HEAD] 의 "요약 표" 지시를 취소한다.
+   * 스키마에서 summaryTable 을 빼는 것만으로는 모델이 **도입부에 표를 직접 그릴** 수 있다 —
+   * 프롬프트가 여전히 "글 맨 앞 = 사실 요약 표" 라고 말하고 있기 때문이다. 둘 다 꺼야 실제로 안 나온다.
+   */
+  if (source.includeSummaryTable === false) {
+    systemPrompt = `${systemPrompt}
+
+[표 설정 — 위 규칙보다 우선]
+· 이 글에는 **맨 앞 요약표를 넣지 않는다.** 앞의 [BRIEF-HEAD] 중 "글 맨 앞 사실 요약 표" 규칙은 적용하지 않는다.
+· 도입부에 마크다운 표(| … | … |)를 직접 그리지 않는다. 기준일 같은 값은 필요하면 문장으로 적는다.
+· 본문 중간의 비교표·일정표는 지금까지와 같다 — 비교할 것이 실제로 있을 때만 쓴다.`;
+  }
+
   if (shouldApplyAiTabFriendlyPrompt(source, contentMode)) {
     try {
       const aiTabPrompt = loadAiTabFriendlyPrompt({
@@ -6725,7 +6745,15 @@ async function generateStructuredContentInternal(
            * 구조적으로 강제되기 때문이다. 그래서 표도 스키마 필드로 받고 마크다운
            * 조립은 코드가 한다 — 형식이 어긋날 여지가 없다.
            */
-          const withTable = prependSummaryTable(parsed.introduction, (parsed as any).summaryTable);
+          // [2026-09-15] 화면에서 요약표를 껐으면 조립하지 않는다. 스키마에서도 뺐으므로 보통 값 자체가 없지만,
+          //   모델이 굳이 채워 보내도 여기서 막는다 — 끈 것은 끈 것이다.
+          const summaryTableOn = source.includeSummaryTable !== false;
+          const withTable = summaryTableOn
+            ? prependSummaryTable(parsed.introduction, (parsed as any).summaryTable)
+            : '';
+          if (!summaryTableOn) {
+            console.log('[SummaryTable] 화면 설정으로 요약표 생략');
+          }
           if (withTable && withTable !== String(parsed.introduction || '').trim()) {
             const rowCount = normalizeSummaryRows((parsed as any).summaryTable).length;
             console.log(`[SummaryTable] 요약 표 ${rowCount}행을 도입부 앞에 배치`);
