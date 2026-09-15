@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-14T23:36:01.929Z",
+  "publishedAt": "2026-09-15T05:41:04.298Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 204,
+    "candidates": 205,
     "niche": 0,
-    "preemption": 29,
+    "preemption": 37,
     "pending": 0
   },
   "freeSample": {
@@ -110,7 +110,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          47,
           31,
           47,
           78,
@@ -138,11 +137,12 @@
           53,
           53,
           47,
-          52
+          52,
+          59
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-14T23:36:02.483Z"
+        "measuredAt": "2026-09-15T05:41:05.001Z"
       },
       "kinCount": 1,
       "kinTop": [],
@@ -291,7 +291,6 @@
       "trend": {
         "series": [
           0,
-          0,
           33,
           13,
           21,
@@ -318,9 +317,10 @@
           69,
           54,
           15,
-          13
+          13,
+          26
         ],
-        "measuredAt": "2026-09-14T23:36:02.483Z"
+        "measuredAt": "2026-09-15T05:41:05.001Z"
       },
       "kinCount": 507,
       "kinTop": [],
@@ -467,7 +467,6 @@
       ],
       "trend": {
         "series": [
-          40,
           61,
           48,
           70,
@@ -495,11 +494,12 @@
           66,
           83,
           77,
-          72
+          72,
+          70
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-14T23:36:02.483Z"
+        "measuredAt": "2026-09-15T05:41:05.001Z"
       },
       "kinCount": 1898,
       "kinTop": [],
@@ -608,7 +608,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          25,
           27,
           32,
           31,
@@ -636,9 +635,10 @@
           18,
           18,
           47,
-          52
+          52,
+          32
         ],
-        "measuredAt": "2026-09-14T23:36:02.483Z"
+        "measuredAt": "2026-09-15T05:41:05.001Z"
       },
       "kinCount": 0,
       "kinTop": [],
@@ -651,148 +651,6 @@
       "enrichedBy": {
         "provider": "claude",
         "proposed": 8,
-        "verified": 0
-      }
-    },
-    {
-      "keyword": "장윤정 우산",
-      "issue": "장윤정",
-      "topic": "장윤정",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "네고왕 장윤정 양산, 직접 써보니? 화이트샌즈 우양산 내돈내산 후기",
-          "네고왕 장윤정이 추천하는 화이트샌즈 우양산 혹서기 대비 필수템 내돈내산 추천",
-          "네고왕 장윤정 우양산 선바이저 네고 화이트샌즈 구매링크",
-          "화이트샌즈 우양산",
-          "[코코 청라점] 코스트코 화이트샌즈 우양산 가격 19,970원 (장윤정 우양산 눈여겨봤다면?!)",
-          "화이트샌즈 우양산☂️자동우산 너무 편하잖아?? 내돈내산 찐후기✨️",
-          "\"가족이 남긴 수십억 빚더미...\" 트로트 여왕 장윤정, 피눈물 삼키며 지켜낸 가슴 먹먹한 진짜 이유",
-          "네고왕X화이트샌즈 완전차단 양우산",
-          "장윤정의 기부가 유독 마음에 남는 이유 — \"돕겠다는 생각보다, 마땅히 해야 할 일\"",
-          "네고왕 장윤정 우양산 선바이저 네고｜화이트샌즈 가격·기간·구매링크 총정리"
-        ],
-        "measuredAt": "2026-09-13T05:28:16.336Z"
-      },
-      "documentCount": 1845,
-      "documentCountMeasured": true,
-      "searchVolume": 350,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.1485149564781703,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 350",
-        "문서수 1,845",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 350 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "장윤정 우산 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "근거 프레임 없음 — 일반형"
-        },
-        "home": {
-          "text": "장윤정 우산 챙겨야 하나 하늘 보다가 그냥 들고 나왔네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          29,
-          37,
-          31,
-          17,
-          43,
-          63,
-          49,
-          31,
-          17,
-          0,
-          23,
-          40,
-          94,
-          37,
-          43,
-          86,
-          100,
-          26,
-          26,
-          0,
-          14,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "label": "📉 단발성",
-        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-09-14T23:36:02.483Z"
-      },
-      "kinCount": 450,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-13T05:27:02.274Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true,
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 0,
         "verified": 0
       }
     }
@@ -837,7 +695,7 @@
         }
       ],
       "whySearch": {
-        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개했다.",
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -845,12 +703,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "auk 알약 텐센트 오디오 나노바나나 AuK 기능",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
+          "text": "auk 알약 어떤 정보가 있는지",
+          "frame": "generic",
+          "basis": "근거 프레임 없음 — 일반형"
         },
         "home": {
-          "text": "auk 알약이 텐센트 오디오 모델이라는데 나노바나나 소리 나오는 이유",
+          "text": "auk 알약 아침에 먹었더니 속이 왜 이러나 싶더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -863,24 +721,24 @@
         {
           "title": "auk ats알약",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=50205&docId=340101213&answerNo=1",
-          "views": 194,
+          "views": 195,
           "answers": 1
         },
         {
           "title": "처방받은 알약 명칭 효과가 궁금합니다.",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=424079295&answerNo=1",
-          "views": 128,
+          "views": 129,
           "answers": 1
         },
         {
           "title": "알약을 주웠습니다",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=70118&docId=410103277&answerNo=1",
-          "views": 91,
+          "views": 92,
           "answers": 1
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
+      "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -922,7 +780,7 @@
         }
       ],
       "whySearch": {
-        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개했다.",
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -930,12 +788,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "auk 위챗 텐센트 음성 생성 모델 나노바나나 비교",
+          "text": "auk 위챗 정체는 텐센트 오디오 AI, 나노바나나와 비교",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "auk 위챗으로 뜬 텐센트 음성 AI, 나노바나나랑 헷갈리기 딱 좋더라고요",
+          "text": "auk 위챗 뜻 찾다가 텐센트 오디오 나노바나나에서 막혔어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -946,7 +804,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
+      "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -988,7 +846,7 @@
         }
       ],
       "whySearch": {
-        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개했다.",
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -1001,7 +859,7 @@
           "basis": "근거 프레임 없음 — 일반형"
         },
         "home": {
-          "text": "auk 크롬하츠 반지 사이즈 안 맞아서 매장 다시 갔더니",
+          "text": "auk 크롬하츠 반지 실물 보러 갔다가 가격표 앞에서 한참 서 있었네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -1012,7 +870,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
+      "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1054,7 +912,7 @@
         }
       ],
       "whySearch": {
-        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개했다.",
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -1067,7 +925,7 @@
           "basis": "근거 프레임 없음 — 일반형"
         },
         "home": {
-          "text": "auk 셀러 주소 어디에 적어야 하는지 몰라서 한참 들여다봤네요",
+          "text": "auk 셀러 주소 찾으려다 엉뚱한 화면만 계속 뜨길래 다시 들여다봤어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -1078,7 +936,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
+      "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1120,7 +978,7 @@
         }
       ],
       "whySearch": {
-        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개했다.",
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "구매 검토",
@@ -1133,7 +991,7 @@
           "basis": "근거 프레임 없음 — 일반형"
         },
         "home": {
-          "text": "auk ajj 비교 한참 헤매다가 이 부분에서 마음이 갈리더라고요",
+          "text": "auk ajj 비교 실제로 며칠 써보니 손이 가는 쪽이 갈리더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -1144,7 +1002,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
+      "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1186,7 +1044,7 @@
         }
       ],
       "whySearch": {
-        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개했다.",
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -1199,7 +1057,7 @@
           "basis": "근거 프레임 없음 — 일반형"
         },
         "home": {
-          "text": "auk.edu.kw 들어가서 원서 접수하려다 막혔던 게 이거였네요",
+          "text": "auk.edu.kw 원서 넣으려다 요강에서 막혔는데 이게 답이더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -1210,7 +1068,2257 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴엔AI 뉴저지 법인",
+      "issue": "뉴엔AI",
+      "topic": "뉴엔AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 10,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 10",
+        "선점 후보 — 경쟁 문서 10건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴엔AI가 뉴저지 북미법인 세우고 뷰티 AI 뷰센스로 시장 공략",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴엔AI 뉴저지 법인 설립 뷰센스 북미 진출 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴엔AI 뉴저지 법인 소식에 주가 흐름부터 다시 들여다보게 되네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "뉴엔AI",
+          "searchVolume": 9580,
+          "frame": "generic"
+        },
+        {
+          "keyword": "뉴엔AI 주가",
+          "searchVolume": 3930,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "뉴엔AI",
+          "searchVolume": 9580,
+          "documentCount": 7343,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "뉴엔AI 주가",
+          "searchVolume": 3930,
+          "documentCount": 3656,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코그니션 주식",
+      "issue": "코그니션",
+      "topic": "코그니션",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 261,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 261",
+        "선점 후보 — 경쟁 문서 261건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 코딩 스타트업 코그니션이 20억달러 유치로 기업가치 64조원 도달",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "코그니션 주식 상장 여부와 기업가치 64조원",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "코그니션 주식 찾아보다 코그니션 주가가 안 뜨길래 계속 뒤져봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "코그니션 AI",
+          "searchVolume": 80,
+          "frame": "generic"
+        },
+        {
+          "keyword": "코그니션 주가",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "코그니션 AI",
+          "searchVolume": 80,
+          "documentCount": 814,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "코그니션 주가",
+          "searchVolume": 40,
+          "documentCount": 196,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AuK 음성 모델",
+      "issue": "AuK",
+      "topic": "AuK",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 13,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 13",
+        "선점 후보 — 경쟁 문서 13건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AuK 음성 모델 텐센트가 공개한 오디오 나노바나나 정체",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AuK 음성 모델 오디오 나노바나나라 부르는 게 의외로 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AuK 음성 편집",
+      "issue": "AuK",
+      "topic": "AuK",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 14,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 14",
+        "선점 후보 — 경쟁 문서 14건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AuK 음성 편집 텐센트 오디오 나노바나나 실제 성능",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AuK 음성 편집 오디오판 나노바나나라길래 직접 뭔지 찾아봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코그니션 테라퓨틱스 전망",
+      "issue": "코그니션",
+      "topic": "코그니션",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 22,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 22",
+        "선점 후보 — 경쟁 문서 22건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 코딩 스타트업 코그니션이 20억달러 유치로 기업가치 64조원 도달",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "auk 셀러",
+      "issue": "AuK",
+      "topic": "AuK",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 29,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 29",
+        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "auk 셀러 입점 조건과 수수료·정산 방식 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "auk 셀러 입점 전에 수수료 계산 안 하면 정산 때 많이들 놓치더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AuK 오픈소스",
+      "issue": "AuK",
+      "topic": "AuK",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "공개 여부",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 26,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 26",
+        "선점 후보 — 경쟁 문서 26건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 공개 여부"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AuK 오픈소스 텐센트 음성 생성 모델 사용법과 다운로드",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AuK 오픈소스로 나노바나나 같은 음성 만들어봤더니 의외로 다르네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코그니션 테라퓨틱스 3상",
+      "issue": "코그니션",
+      "topic": "코그니션",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 33,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 33",
+        "선점 후보 — 경쟁 문서 33건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 코딩 스타트업 코그니션이 20억달러 유치로 기업가치 64조원 도달",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "코그니션 테라퓨틱스 3상 임상 어디까지 왔나 주가 영향",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "코그니션 테라퓨틱스 3상 결과 나오기 전에 주가부터 다시 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "코그니션 테라퓨틱스 주가",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코그니션 테라퓨틱스 주가",
+      "issue": "코그니션",
+      "topic": "코그니션",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 40,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 40",
+        "선점 후보 — 경쟁 문서 40건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 코딩 스타트업 코그니션이 20억달러 유치로 기업가치 64조원 도달",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코그니션 SWE-2",
+      "issue": "SWE-2",
+      "topic": "SWE-2",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 42,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 42",
+        "선점 후보 — 경쟁 문서 42건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "코그니션이 키미 K3 기반 코딩모델 SWE-2를 페이블5.1급 저비용 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "코그니션 SWE-2 페이블5.1과 성능 1점차, 비용 64% 저렴",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "코그니션 SWE-2 페이블이랑 1점 차인데 청구서 보고 다시 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코그니션 밸류에이션",
+      "issue": "코그니션",
+      "topic": "코그니션",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 56,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 56",
+        "선점 후보 — 경쟁 문서 56건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 코딩 스타트업 코그니션이 20억달러 유치로 기업가치 64조원 도달",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "코그니션 밸류에이션 석달만에 64조 된 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "코그니션 밸류에이션 100일도 안 돼 두 배 뛰었는데 다들 놓치는 게 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AuK 데모",
+      "issue": "AuK",
+      "topic": "AuK",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "체험 방법",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 87,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 87",
+        "선점 후보 — 경쟁 문서 87건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 체험 방법"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AuK 데모 텐센트 음성 모델 오디오용 나노바나나 정체",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AuK 데모 써보니 오디오용 나노바나나라 부른 이유 알겠더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "swe 2 aspice",
+      "issue": "SWE-2",
+      "topic": "SWE-2",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 102,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 102",
+        "선점 후보 — 경쟁 문서 102건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "코그니션이 키미 K3 기반 코딩모델 SWE-2를 페이블5.1급 저비용 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴엔ai 채용",
+      "issue": "뉴엔AI",
+      "topic": "뉴엔AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 111,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 111",
+        "선점 후보 — 경쟁 문서 111건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴엔AI가 뉴저지 북미법인 세우고 뷰티 AI 뷰센스로 시장 공략",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴엔ai 채용 북미 진출 뷰티AI 뷰센스 개발사 연봉",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴엔ai 채용 검색하다 기업정보 페이지에서 생각보다 좀 오래 머물렀네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "뉴엔ai 기업정보",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "뉴엔ai 기업정보",
+          "searchVolume": 10,
+          "documentCount": 3355,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "auk.direct",
+      "issue": "AuK",
+      "topic": "AuK",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 110,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 110",
+        "선점 후보 — 경쟁 문서 110건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "auk.direct 텐센트 AuK 오디오 생성 모델 접속 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "auk.direct 텐센트 AuK 열어보니 오디오 나노바나나 소리부터 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 9,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "auk 구매방법",
+      "issue": "AuK",
+      "topic": "AuK",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 119,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 119",
+        "선점 후보 — 경쟁 문서 119건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "auk 구매방법 어떤 정보가 있는지",
+          "frame": "generic",
+          "basis": "근거 프레임 없음 — 일반형"
+        },
+        "home": {
+          "text": "auk 구매방법 남들 하는 대로 했다가 결제창 앞에서 잠깐 고민했어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 8,
+      "kinTop": [
+        {
+          "title": "노트20 울트라 구매방법,유심문의",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=107040202&docId=365300567&answerNo=1",
+          "views": 217,
+          "answers": 1
+        },
+        {
+          "title": "차량 auk 단자 두개 사용할수있나요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070402&docId=190991101&answerNo=0",
+          "views": 19,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "필릭스 기부 희망",
+      "issue": "필릭스 기부 희망",
+      "topic": "필릭스 기부 희망",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 150,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 150",
+        "선점 후보 — 경쟁 문서 150건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "스키즈 필릭스가 생일 맞아 환아·네팔 구호에 3억원 기부",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "필릭스 기부 희망 생일 맞아 낸 3억 어디에 쓰이나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "필릭스가 생일에 3억 기부하면서 아이들 희망 얘기한 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "스키즈 필릭스 닮고 싶은점!!",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=2011602&docId=452779045&answerNo=2",
+          "views": 349,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코그니션 상장",
+      "issue": "코그니션",
+      "topic": "코그니션",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "IPO 가능성",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 154,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 154",
+        "선점 후보 — 경쟁 문서 154건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — IPO 가능성"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 코딩 스타트업 코그니션이 20억달러 유치로 기업가치 64조원 도달",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "코그니션 상장 전 기업가치 64조, SWE-2 성능·비용 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "코그니션 상장 소식 기다렸는데 몸값이 석 달 만에 두 배로 뛰었더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴엔ai 재무제표",
+      "issue": "뉴엔AI",
+      "topic": "뉴엔AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 188,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 188",
+        "선점 후보 — 경쟁 문서 188건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴엔AI가 뉴저지 북미법인 세우고 뷰티 AI 뷰센스로 시장 공략",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴엔ai 재무제표 상장 전 매출·영업이익 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴엔ai 재무제표 보다가 주가가 왜 이런지 다시 들여다보게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "뉴엔ai 주가",
+          "searchVolume": 3930,
+          "frame": "generic"
+        },
+        {
+          "keyword": "뉴엔ai 기업정보",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "뉴엔ai 채용",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "뉴엔ai 주가",
+          "searchVolume": 3930,
+          "documentCount": 3656,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "뉴엔ai 기업정보",
+          "searchVolume": 10,
+          "documentCount": 3355,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코그니션 데빈",
+      "issue": "코그니션",
+      "topic": "코그니션",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 179,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 179",
+        "선점 후보 — 경쟁 문서 179건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 코딩 스타트업 코그니션이 20억달러 유치로 기업가치 64조원 도달",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "코그니션 데빈 SWE-2, 페이블5.1과 1점 차 비용 64% 저렴",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "코그니션 데빈 SWE-2로 갈아탔더니 데빈 AI가 생각보다 다르네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "코그니션 AI",
+          "searchVolume": 80,
+          "frame": "generic"
+        },
+        {
+          "keyword": "데빈 AI",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "코그니션 AI",
+          "searchVolume": 80,
+          "documentCount": 814,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "데빈 AI",
+          "searchVolume": 20,
+          "documentCount": 1353,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴엔ai 보호예수 물량",
+      "issue": "뉴엔AI",
+      "topic": "뉴엔AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 174,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 174",
+        "선점 후보 — 경쟁 문서 174건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴엔AI가 뉴저지 북미법인 세우고 뷰티 AI 뷰센스로 시장 공략",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴엔ai 보호예수 물량 언제 풀리나 유통 비중까지 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴엔ai 보호예수 물량 언제 풀리나 봤더니 주가전망이 달라지더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "뉴엔ai 주가",
+          "searchVolume": 3930,
+          "frame": "generic"
+        },
+        {
+          "keyword": "뉴엔ai 주가전망",
+          "searchVolume": 70,
+          "frame": "generic"
+        },
+        {
+          "keyword": "뉴엔ai 공모가",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "뉴엔ai 주가",
+          "searchVolume": 3930,
+          "documentCount": 3656,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "뉴엔ai 주가전망",
+          "searchVolume": 70,
+          "documentCount": 1899,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "뉴엔ai 공모가",
+          "searchVolume": 20,
+          "documentCount": 1822,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AuK 성능",
+      "issue": "AuK",
+      "topic": "AuK",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 163,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 163",
+        "선점 후보 — 경쟁 문서 163건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AuK 성능 텐센트 오디오 생성·편집 모델 나노바나나 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AuK 성능 오디오 나노바나나라던데 들어보니 좀 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 9,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코그니션 허브",
+      "issue": "코그니션",
+      "topic": "코그니션",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 223,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 223",
+        "선점 후보 — 경쟁 문서 223건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 코딩 스타트업 코그니션이 20억달러 유치로 기업가치 64조원 도달",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "코그니션 허브 SWE-2 성능과 기업가치 64조원 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "코그니션 허브 SWE-2가 페이블이랑 1점 차인데 비용에서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "SWE-2 페이블 비교",
+      "issue": "SWE-2",
+      "topic": "SWE-2",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 191,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 191",
+        "선점 후보 — 경쟁 문서 191건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "코그니션이 키미 K3 기반 코딩모델 SWE-2를 페이블5.1급 저비용 출시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "SWE-2 페이블 비교, 점수 1점 차에 비용 64% 저렴한 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "SWE-2 페이블 비교해보니 점수는 1점 차인데 비용에서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코그니션 투자유치",
+      "issue": "코그니션",
+      "topic": "코그니션",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 215,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 215",
+        "선점 후보 — 경쟁 문서 215건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 코딩 스타트업 코그니션이 20억달러 유치로 기업가치 64조원 도달",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "코그니션 투자유치 20억달러, 석달만에 기업가치 64조 돌파",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "코그니션 투자유치 소식에 AI 업계가 조용히 술렁이는 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "코그니션 AI",
+          "searchVolume": 80,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "코그니션 AI",
+          "searchVolume": 80,
+          "documentCount": 814,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴엔ai 뭐하는 회사",
+      "issue": "뉴엔AI",
+      "topic": "뉴엔AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 192,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 192",
+        "선점 후보 — 경쟁 문서 192건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴엔AI가 뉴저지 북미법인 세우고 뷰티 AI 뷰센스로 시장 공략",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴엔ai 뭐하는 회사, 뷰센스로 북미 법인 세운 배경",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴엔ai 뭐하는 회사길래 뉴저지에 법인까지 냈나 봤더니",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "삼성sds 릴스",
+      "issue": "삼성SDS",
+      "topic": "삼성SDS",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 207,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 207",
+        "선점 후보 — 경쟁 문서 207건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "삼성SDS가 국내 첫 앤트로픽 셀렉트 티어 등극해 클로드 공급",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "삼성sds 릴스 국내 첫 앤트로픽 셀렉트 티어 파트너",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "삼성sds 릴스 보다가 연봉 얘기 나와서 계속 스크롤하게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "삼성sds 주가",
+          "searchVolume": 118770,
+          "frame": "generic"
+        },
+        {
+          "keyword": "삼성sds 채용",
+          "searchVolume": 2080,
+          "frame": "generic"
+        },
+        {
+          "keyword": "삼성sds 연봉",
+          "searchVolume": 1050,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "삼성sds 주가",
+          "searchVolume": 118770,
+          "documentCount": 31031,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "삼성sds 채용",
+          "searchVolume": 2080,
+          "documentCount": 11762,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "삼성sds 연봉",
+          "searchVolume": 1050,
+          "documentCount": 5187,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "삼성sds 클라우드",
+          "searchVolume": 50,
+          "documentCount": 28781,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "삼성sds 초봉",
+          "searchVolume": 40,
+          "documentCount": 547,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "삼성sds 앤트로픽",
+          "searchVolume": 20,
+          "documentCount": 1835,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "삼성sds 배당",
+          "searchVolume": 20,
+          "documentCount": 11395,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "전학교 접근",
+      "issue": "교육부 학폭 예방",
+      "topic": "교육부 학폭 예방",
+      "lane": "realtime",
+      "issueType": "entertainment",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 249,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 249",
+        "선점 후보 — 경쟁 문서 249건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "교육부가 학폭 예방 어울림 선도학교 276곳을 운영",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "전학교 접근 학폭 선도학교 276곳과 스마트폰 없는 46곳 차이",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "전학교 접근 선도학교 276곳인데 46곳만 스마트폰 뺀 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 393,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "서동주 또도동",
+      "issue": "서동주",
+      "topic": "서동주",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 264,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 264",
+        "선점 후보 — 경쟁 문서 264건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "서동주가 母 서정희 암 투병과 父 서세원 불화를 방송서 회고",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "서동주 또도동 서정희 암투병·미국 클럽 이야기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "서동주 또도동 나온 김에 변호사 딸 근황 찾아봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "서동주 변호사",
+          "searchVolume": 2850,
+          "frame": "generic"
+        },
+        {
+          "keyword": "서동주 나이",
+          "searchVolume": 910,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "서동주 변호사",
+          "searchVolume": 2850,
+          "documentCount": 5457,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "서동주 나이",
+          "searchVolume": 910,
+          "documentCount": 4050,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코그니션 창업자",
+      "issue": "코그니션",
+      "topic": "코그니션",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 257,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 257",
+        "선점 후보 — 경쟁 문서 257건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AI 코딩 스타트업 코그니션이 20억달러 유치로 기업가치 64조원 도달",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "코그니션 창업자와 기업가치 64조원, 100일 안에 벌어진 일",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "코그니션 창업자가 스페이스X 인수 거절하고 AI에 올인한 게 이래서였네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "코그니션 AI",
+          "searchVolume": 80,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "코그니션 AI",
+          "searchVolume": 80,
+          "documentCount": 814,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AuK 사용법",
+      "issue": "AuK",
+      "topic": "AuK",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 281,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 281",
+        "선점 후보 — 경쟁 문서 281건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AuK 사용법 텐센트 오디오 생성 모델 첫 설정",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AuK 사용법 익히는데 오디오 편집 이 부분에서 많이들 막히더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 16,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-15T05:29:41.271Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1274,219 +3382,8 @@
       "monetize": null,
       "measuredAt": "2026-09-14T23:27:18.447Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "코그니션 주식",
-      "issue": "코그니션",
-      "topic": "코그니션",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 260,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 260",
-        "선점 후보 — 경쟁 문서 260건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코딩 AI 코그니션이 석 달 만에 기업가치 64조원으로 급등했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "코그니션 주식 상장 여부와 관련주, 기업가치 64조",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "코그니션 주식 사보려다 코그니션 주가는 어디서 보나 한참 헤맸네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "코그니션 AI",
-          "searchVolume": 80,
-          "frame": "generic"
-        },
-        {
-          "keyword": "코그니션 주가",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "코그니션 AI",
-          "searchVolume": 80,
-          "documentCount": 809,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "코그니션 주가",
-          "searchVolume": 40,
-          "documentCount": 194,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "코그니션 테라퓨틱스 전망",
-      "issue": "코그니션",
-      "topic": "코그니션",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 22,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 22",
-        "선점 후보 — 경쟁 문서 22건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코딩 AI 코그니션이 석 달 만에 기업가치 64조원으로 급등했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "auk 셀러",
-      "issue": "AuK",
-      "topic": "AuK",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 29,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 29",
-        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "auk 셀러 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "근거 프레임 없음 — 일반형"
-        },
-        "home": {
-          "text": "auk 셀러 처음 정산받고 통장을 몇 번이나 다시 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이형택 이대훈 폭행사건",
@@ -1587,179 +3484,8 @@
       "monetize": null,
       "measuredAt": "2026-09-14T23:27:18.447Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "코그니션 SWE-2",
-      "issue": "SWE-2",
-      "topic": "SWE-2",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 40,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 40",
-        "선점 후보 — 경쟁 문서 40건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코그니션이 키미 K3 기반 코딩모델 SWE-2를 페이블5.1급 성능으로 출시했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "코그니션 SWE-2 페이블5.1보다 64% 저렴한 코딩모델 성능비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "코그니션 SWE-2 페이블5.1이랑 1점 차인데 비용은 여기서 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "코그니션 테라퓨틱스 3상",
-      "issue": "코그니션",
-      "topic": "코그니션",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 33,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 33",
-        "선점 후보 — 경쟁 문서 33건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코딩 AI 코그니션이 석 달 만에 기업가치 64조원으로 급등했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "코그니션 테라퓨틱스 주가",
-      "issue": "코그니션",
-      "topic": "코그니션",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 40,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 40",
-        "선점 후보 — 경쟁 문서 40건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코딩 AI 코그니션이 석 달 만에 기업가치 64조원으로 급등했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 몸값",
@@ -1821,7 +3547,8 @@
       "monetize": null,
       "measuredAt": "2026-09-14T23:27:18.447Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "AuK 음성",
@@ -1883,7 +3610,8 @@
       "monetize": null,
       "measuredAt": "2026-09-14T23:27:18.447Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "코그니션 스페이스X",
@@ -1958,385 +3686,8 @@
       "monetize": null,
       "measuredAt": "2026-09-14T23:27:18.447Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "swe 2 aspice",
-      "issue": "SWE-2",
-      "topic": "SWE-2",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 102,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 102",
-        "선점 후보 — 경쟁 문서 102건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코그니션이 키미 K3 기반 코딩모델 SWE-2를 페이블5.1급 성능으로 출시했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "swe 2 aspice SWE.1 SWE.3 연계와 산출물 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "swe 2 aspice 산출물 만들다 SWE.3 연계에서 자주 헤맵니다",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "aspice 뜻",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "aspice 뜻",
-          "searchVolume": 40,
-          "documentCount": 79,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "auk.direct",
-      "issue": "AuK",
-      "topic": "AuK",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 110,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 110",
-        "선점 후보 — 경쟁 문서 110건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "auk.direct 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "근거 프레임 없음 — 일반형"
-        },
-        "home": {
-          "text": "auk.direct 별 기대 없이 눌렀다가 저녁 내내 붙잡고 있었네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 9,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "auk 구매방법",
-      "issue": "AuK",
-      "topic": "AuK",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 119,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 119",
-        "선점 후보 — 경쟁 문서 119건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "auk 구매방법 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "근거 프레임 없음 — 일반형"
-        },
-        "home": {
-          "text": "auk 구매방법 찾다 보면 다들 여기서 막히더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 8,
-      "kinTop": [
-        {
-          "title": "노트20 울트라 구매방법,유심문의",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107040202&docId=365300567&answerNo=1",
-          "views": 215,
-          "answers": 1
-        },
-        {
-          "title": "차량 auk 단자 두개 사용할수있나요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070402&docId=190991101&answerNo=0",
-          "views": 17,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "코그니션 상장",
-      "issue": "코그니션",
-      "topic": "코그니션",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "몸값 급등 뒤 IPO 관심",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 152,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 152",
-        "선점 후보 — 경쟁 문서 152건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 몸값 급등 뒤 IPO 관심"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코딩 AI 코그니션이 석 달 만에 기업가치 64조원으로 급등했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "코그니션 상장 전 몸값 64조 오른 이유와 SWE-2",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "코그니션 상장 전에 코그니션 AI 실체가 궁금해서 계속 찾아보게 되네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "코그니션 AI",
-          "searchVolume": 80,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "코그니션 AI",
-          "searchVolume": 80,
-          "documentCount": 809,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "코그니션 데빈",
-      "issue": "코그니션",
-      "topic": "코그니션",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 178,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 178",
-        "선점 후보 — 경쟁 문서 178건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코딩 AI 코그니션이 석 달 만에 기업가치 64조원으로 급등했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "코그니션 데빈 SWE-2, 페이블5.1과 1점 차이인데 64% 저렴",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "코그니션 데빈 요즘 데빈 AI 얘기 많길래 뭐 하는 회사인지 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "데빈 AI",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "데빈 AI",
-          "searchVolume": 20,
-          "documentCount": 1351,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "AuK 한국어",
@@ -2427,7 +3778,8 @@
       "monetize": null,
       "measuredAt": "2026-09-14T23:27:18.447Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "z.ai coding plan",
@@ -2482,86 +3834,8 @@
       "monetize": null,
       "measuredAt": "2026-09-14T23:27:18.447Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "코그니션 허브",
-      "issue": "코그니션",
-      "topic": "코그니션",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 223,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 223",
-        "선점 후보 — 경쟁 문서 223건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코딩 AI 코그니션이 석 달 만에 기업가치 64조원으로 급등했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "코그니션 허브 SWE-2 페이블5.1과 1점차 비용 64% 저렴",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "코그니션 허브에서 코그니션 AI 요금제 골랐다가 다음 달 청구서 보고 멈칫했네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "코그니션 AI",
-          "searchVolume": 80,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "코그니션 AI",
-          "searchVolume": 80,
-          "documentCount": 809,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "AuK 모델",
@@ -2630,7 +3904,8 @@
       "monetize": null,
       "measuredAt": "2026-09-14T23:27:18.447Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "SWE-2 페이블",
@@ -2698,7 +3973,8 @@
       "monetize": null,
       "measuredAt": "2026-09-14T23:27:18.447Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "텐센트 성광대상 2024",
@@ -2764,73 +4040,8 @@
       "monetize": null,
       "measuredAt": "2026-09-14T23:27:18.447Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "AuK 사용법",
-      "issue": "AuK",
-      "topic": "AuK",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "공개 뒤 이용법 관심",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 280,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 280",
-        "선점 후보 — 경쟁 문서 280건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 공개 뒤 이용법 관심"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "AuK 사용법 텐센트 음성 생성·편집 모델 처음 실행까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "AuK 사용법 텐센트가 오디오 나노바나나라 부르는 이유 알겠더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 16,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-14T23:27:18.447Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "봉누도 강두용",
@@ -4264,352 +5475,35 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "가평읍 이장 즉석국",
-      "issue": "가평읍 이장 즉석국",
-      "topic": "가평읍 이장 즉석국",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 50,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 50",
-        "선점 후보 — 경쟁 문서 50건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-13T05:27:02.274Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "美 국채 금리",
+      "issue": "김승원 후보자 인사",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "미 10년물 국채금리가 2023년 10월 이후 처음 5% 저항선을 돌파했다.",
+      "why": "인사청문회서 한동훈 수사정보 입수를 역공하며 가족 의혹에 눈물",
       "headlines": [
         {
-          "title": "美10년물 국채금리 '심리적 저항선' 5% 돌파…2023년 후 처음(종합)",
+          "title": "김승원, '한동훈 수사정보 입수' 역공…가족 의혹엔 눈물(종합)",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-14T15:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016310276?sid=104"
+          "publishedAt": "2026-09-15T03:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016311592?sid=102"
         },
         {
-          "title": "AI주 급락·美 국채 금리 5% 돌파… 나스닥 0.56% 하락",
+          "title": "김승원 “수사 정보의 정치적 이용 바로잡겠다”",
           "press": "chosun.com",
-          "publishedAt": "2026-09-14T20:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0003998479?sid=101"
+          "publishedAt": "2026-09-15T01:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003998500?sid=100"
         },
         {
-          "title": "美 10년물 국채금리 '심리적 저항선' 5% 돌파…2023년 10월 이후 처음",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-14T15:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014189736?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "트럼프 AI 속도조절론",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "트럼프가 AI 속도조절론을 역겨운 음모라며 중국만 반긴다고 비판했다.",
-      "headlines": [
-        {
-          "title": "트럼프 “AI 속도조절론? 역겨운 음모···중국만 반긴다”",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-09-14T22:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003470423?sid=104"
-        },
-        {
-          "title": "“역겨운 음모, 중국만 기뻐할 것”… 트럼프, AI속도조절론 비판",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-09-14T21:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001872939?sid=104"
-        },
-        {
-          "title": "트럼프, 'AI 속도조절론'에 분노…\"황금알 거위 죽이지 말라\"",
-          "press": "busan.com",
-          "publishedAt": "2026-09-14T22:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/082/0001398308?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "트럼프",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "원현준 이수진 결혼",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "'김부장' 배우 원현준이 9세 연하 배우 이수진과 10월 4일 결혼한다.",
-      "headlines": [
-        {
-          "title": "“또 배우 부부 탄생”…‘김부장’ 원현준, 이수진과 10월 결혼",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-09-14T13:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003680152?sid=103"
-        },
-        {
-          "title": "‘김부장’ 원현준, 배우 이수진과 내달 4일 결혼···“평생 함께하기...",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-09-14T12:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003470401?sid=103"
-        },
-        {
-          "title": "'김부장' 원현준, 9세 연하 이수진과 결혼한다",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-14T10:21:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014189620"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "감사원 YTN 지분매각",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "감사원이 이동관 전 방통위원장의 YTN 지분 전량매각 부당개입을 결론냈다.",
-      "headlines": [
-        {
-          "title": "감사원 \"YTN 지분 '전량매각'에 이동관 前방통위원장 개입\"(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-14T08:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016309872?sid=100"
-        },
-        {
-          "title": "감사원 \"이동관, YTN 지분 전량 매각 요구\" 결론‥공수처 자료 송부",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-09-14T10:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001523884?sid=100"
-        },
-        {
-          "title": "감사원 \"윤 정부, YTN 지분 매각 과정에 부당 개입\"",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-14T03:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001388118?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "이형택 이대훈 폭행사건",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "강남 폭행시비 A·B씨가 이형택·이대훈으로 밝혀진 2년 전 사건이다.",
-      "headlines": [
-        {
-          "title": "A·B씨, 알고 보니 이형택·이대훈..강남 폭행 사건 전말 \"치고받고 싸웠...",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-09-14T22:56:00.000Z",
-          "link": "https://m.entertain.naver.com/article/108/0003470512"
-        },
-        {
-          "title": "국가대표 폭행시비 A·B씨는 이형택 ·이대훈…김구라, \"택시 잡다 넘어...",
-          "press": "topstarnews.net",
-          "publishedAt": "2026-09-14T22:22:00.000Z",
-          "link": "https://www.topstarnews.net/news/articleView.html?idxno=16193939"
-        },
-        {
-          "title": "'폭행 시비' A·B씨=이형택·이대훈이었다…2년전 사건 전말 \"술 마시고...",
-          "press": "xportsnews.com",
-          "publishedAt": "2026-09-14T11:04:00.000Z",
-          "link": "https://m.entertain.naver.com/article/311/0002056884"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "앞머리",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "류혜영이 고경표가 앞머리를 정리해준 일화를 폭로하며 열애설이 불거졌다.",
-      "headlines": [
-        {
-          "title": "류혜영, 고경표 앞머리 정리 설렜다…\"키 크고 멋있어\" ('짠한형')",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-09-14T21:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000776117"
-        },
-        {
-          "title": "“이건 전화해!” 이민호, 고경표 식탐은 넘겼는데 류혜영 앞머리는 못...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-14T12:11:00.000Z",
-          "link": "https://m.entertain.naver.com/article/410/0001139939"
-        },
-        {
-          "title": "나나처럼 앞머리 이렇게 자르면 도파민 터집니다",
-          "press": "elle.co.kr",
-          "publishedAt": "2026-09-14T06:08:00.000Z",
-          "link": "https://www.elle.co.kr/article/1909534"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앞머리 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앞머리 자르기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "시스루뱅 앞머리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앞머리 가발",
-          "searchVolume": 8690,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앞머리 집게핀",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앞머리 탈모",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앞머리 고데기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앞머리 픽서",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "가습기살균제 피해자 추가",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "마지막 피해구제위가 43명을 추가 인정해 구제급여 대상이 6080명이 됐다.",
-      "headlines": [
-        {
-          "title": "가습기살균제 피해자 43명 추가 인정…구제급여 대상 6080명",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-09-14T07:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004189153?sid=103"
-        },
-        {
-          "title": "가습기살균제 피해 43명 추가 인정…마지막 피해구제위",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-14T09:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009169653?sid=102"
-        },
-        {
-          "title": "가습기살균제 피해자 43명 추가 인정…구제급여 총 6080명",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-09-14T07:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003470288?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "대신 출전 이유",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "시메오네가 이강인이 대신 선발 출전하는 이유를 설명했다고 전했다.",
-      "headlines": [
-        {
-          "title": "\"이강인이 대신 선발 출전하는 이유 설명해줬다\"…아틀레티코 시메오네...",
-          "press": "mydaily.co.kr",
-          "publishedAt": "2026-09-14T16:02:00.000Z",
-          "link": "https://m.sports.naver.com/wfootball/article/117/0004105286"
-        },
-        {
-          "title": "\"박재현 대신 윤동희 선발 출전\" 파격 선택…역대급 슬럼프 윤동희, 해...",
-          "press": "spotvnews.co.kr",
-          "publishedAt": "2026-09-14T16:23:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/477/0000628052"
-        },
-        {
-          "title": "세터 바꾸니 9cm 큰 호주에 역전…한국, 9년 만에 亞 선수권 3위 → 내년...",
+          "title": "김승원 “수사 정보 정치적 이용 바로 잡을 것”",
           "press": "donga.com",
-          "publishedAt": "2026-09-13T09:20:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/020/0003747710"
+          "publishedAt": "2026-09-15T01:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003748198?sid=100"
         }
       ],
       "concentrated": [],
@@ -4617,99 +5511,214 @@
       "rowCount": 0
     },
     {
-      "issue": "손연재",
+      "issue": "추석 자금 방출",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "stable",
+      "issueStatus": "unknown",
       "isHot": true,
-      "why": "32세 손연재가 올블랙 룩으로 아들맘답지 않은 동안 미모를 공개했다.",
+      "why": "한국은행이 추석 맞이 신권 등 자금 방출 작업에 착수",
       "headlines": [
         {
-          "title": "손연재, 긴 생머리에 올블랙…20대 동안 미모 깜짝",
+          "title": "한국은행 추석자금 방출",
           "press": "newsis.com",
-          "publishedAt": "2026-09-14T15:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014189718"
+          "publishedAt": "2026-09-15T02:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014190957?sid=004"
         },
         {
-          "title": "'32세' 손연재, 아들 엄마라니 안 믿겨…올블랙 입고 뽐낸 '동안 미모'",
-          "press": "mydaily.co.kr",
-          "publishedAt": "2026-09-14T20:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/117/0004105303"
+          "title": "한국은행, 추석 자금 방출 작업",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T02:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016311242?sid=101"
         },
         {
-          "title": "'48kg' 손연재, 진짜 애 엄마 맞아?…'30대' 나이 안 믿기는 청초 비주얼",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-09-14T07:01:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000776067"
+          "title": "추석맞이 신권 방출하는 한국은행 [TF사진관]",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-09-15T02:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000533881?sid=101"
         }
       ],
       "concentrated": [
         {
-          "keyword": "손연재 나무위키",
+          "keyword": "추석",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "시중 통화량 증가",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "7월 시중 통화량이 12.7조원 늘어 반도체 등 기업자금 유입",
+      "headlines": [
+        {
+          "title": "7월 시중 통화량 4225.6조원…12.7조원 증가",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T03:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014191073?sid=101"
+        },
+        {
+          "title": "7월 시중 통화량 12.7조 늘어…반도체 등 기업자금 유입",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-09-15T03:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005816541?sid=101"
+        },
+        {
+          "title": "M2 증가율 0.7%→0.3% ‘뚝’…시중 유동성 ‘숨 고르기’",
+          "press": "joseilbo.com",
+          "publishedAt": "2026-09-15T03:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/123/0002390209?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "아시안게임 기념품 매장",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "백화점 등에 아시안게임 기념품·캐릭터 굿즈 매장이 마련됨",
+      "headlines": [
+        {
+          "title": "아시안게임 기념품 매장 상황은?",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T04:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016311610?sid=104"
+        },
+        {
+          "title": "아시안게임 티셔츠 진열된 기념품 매장",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T04:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016311609?sid=104"
+        },
+        {
+          "title": "호노혼 전시된 아시안게임 기념품 매장",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T04:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016311608?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "아시안게임",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "필릭스 기부 희망",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "스키즈 필릭스가 생일 맞아 환아·네팔 구호에 3억원 기부",
+      "headlines": [
+        {
+          "title": "스키즈 필릭스, 생일 맞아 3억 기부 \"아이들에게 희망 가득하길\"",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-15T02:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005332438?sid=102"
+        },
+        {
+          "title": "스키즈 필릭스, 생일 맞아 환아·네팔 구호 등에 3억원 기부",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T02:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016311231?sid=102"
+        },
+        {
+          "title": "스키즈 멤버 필릭스, 생일 맞아 3억 원 기부",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-15T03:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001388381?sid=103"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "서동주",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "서동주가 母 서정희 암 투병과 父 서세원 불화를 방송서 회고",
+      "headlines": [
+        {
+          "title": "서동주 \"암투병 엄마 무너질 줄 알았는데 너무 긍정적\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T00:11:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014190070"
+        },
+        {
+          "title": "서동주, 母 서정희와 미국 클럽行…\"20대 남성들이 대시해\" ('또도동')",
+          "press": "tenasia.co.kr",
+          "publishedAt": "2026-09-15T01:24:00.000Z",
+          "link": "https://m.entertain.naver.com/article/312/0000776161"
+        },
+        {
+          "title": "서정희, 미국 클럽서 20대 남성에 대시 받아…서동주 \"콧대 높게 'NO!' 하...",
+          "press": "xportsnews.com",
+          "publishedAt": "2026-09-15T03:30:00.000Z",
+          "link": "https://m.entertain.naver.com/article/311/0002057043"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "서동주 변호사",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "손연재 셔츠",
+          "keyword": "서동주 나무위키",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "손연재 아기",
+          "keyword": "서동주 엄마",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "손연재 스커트",
+          "keyword": "서동주 서세원",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "손연재 가방",
+          "keyword": "서동주 의사",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "손연재 침대",
+          "keyword": "서동주 하이닉스",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "손연재 집",
+          "keyword": "서동주 결혼",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "손연재 치마",
+          "keyword": "서동주 나이",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "손연재 둘째",
-          "reason": "아들맘 이후 출산 소식 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "손연재 방송복귀",
-          "reason": "활동 재개 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "손연재 남편",
-          "reason": "가족 근황 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "손연재 일상",
-          "reason": "공개된 일상 검색 예상",
+          "keyword": "서동주 근황",
+          "reason": "현재 활동 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4718,45 +5727,494 @@
       "rowCount": 0
     },
     {
-      "issue": "금융권 생산적 금융",
+      "issue": "수출물가 하락",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": true,
-      "why": "금융위가 생산적 금융 272조 공급과 5년 1560조 확대·면책방안을 밝혔다.",
+      "isHot": false,
+      "why": "환율 하락에 8월 수출물가 3.7% 내려 3년8개월 만 최대폭",
       "headlines": [
         {
-          "title": "금융위 \"생산적 금융 공급액 272조원…면책 방안 추가 마련\"",
+          "title": "수입물가 3개월째↓…\"유가 올랐지만 환율 하락한 영향\"",
           "press": "newsis.com",
           "publishedAt": "2026-09-14T21:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014189817?sid=101"
+          "link": "https://n.news.naver.com/mnews/article/003/0014189812?sid=101"
         },
         {
-          "title": "금융권 생산적 금융 ‘백서’ 만든다… 5년 공급계획 1560조원으로 확대",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-09-14T21:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001192345?sid=101"
+          "title": "환율 하락에 8월 수출입물가↓…수출물가 3년반 만에 최대폭↓",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-09-14T21:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004189281?sid=101"
         },
         {
-          "title": "금융권 ‘생산적 금융’ 272조 공급…금융위 “무늬만 전환 안돼”",
-          "press": "joseilbo.com",
-          "publishedAt": "2026-09-14T21:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/123/0002390170?sid=101"
+          "title": "환율 하락에 8월 수출물가 3.7%↓…3년 8개월 만에 최대폭",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-14T21:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016310315?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "교육부 학폭 예방",
+      "issueType": "entertainment",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "교육부가 학폭 예방 어울림 선도학교 276곳을 운영",
+      "headlines": [
+        {
+          "title": "교육부, 학폭예방 선도학교 276곳 운영…교원·학생·학부모 동참",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T03:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016311378?sid=102"
+        },
+        {
+          "title": "교원·학생·학부모 함께 학폭 예방…교육부, 선도학교 276곳 운영",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-15T03:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009170841?sid=102"
+        },
+        {
+          "title": "학폭 예방 선도학교 276곳 운영…46곳은 '스마트폰 없는 학교'",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T03:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014191067?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "금융권",
+          "keyword": "교육부",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "서울 버스 파업",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "서울 시내버스 노사가 통상임금 두고 파업 하루 전 막판 협상",
+      "headlines": [
+        {
+          "title": "서울 시내버스 파업 'D-1'…노사, 막판 임금협상 줄다리기",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-14T22:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016310391?sid=101"
+        },
+        {
+          "title": "서울 시내버스 파업 하루 전…노사 '막판 줄다리기'",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-15T00:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001388331?sid=101"
+        },
+        {
+          "title": "서울 시내버스 파업 D-1…통상임금 놓고 노사 '평행선'",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-14T23:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001969001?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "스포츠",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "노출 스포츠 광고 논란과 아시안게임 클라이밍 메달 소식이 겹침",
+      "headlines": [
+        {
+          "title": "럭비공으로 가슴 가리고…'노출' 스포츠 광고에 女 선수들 분노",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-15T00:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005332351?sid=104"
+        },
+        {
+          "title": "AG 앞둔 스포츠클라이밍 정지민, 월드 클라이밍서 동메달 2개",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-14T08:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014189532?sid=104"
+        },
+        {
+          "title": "“스포츠 광고 너무 야하다”…나체에 주요부위만, 논란 일자 여배우의...",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-15T00:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005735220?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "스포츠 선글라스",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "금융",
-          "searchVolume": 7350,
-          "origin": "related"
+          "keyword": "스포츠 키즈카페",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스포츠 경기일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스포츠 팬티",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스포츠 라이브 스트리밍",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스포츠 유틸리티 자동차",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스포츠 차",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스포츠 칸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "스포츠 광고 사과",
+          "reason": "논란 후속",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "라이너 모델 API",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "라이너가 질문 난도별 LLM 자동선택으로 토큰비용 50% 절감 API 출시",
+      "headlines": [
+        {
+          "title": "[테크스냅] 라이너, LLM 비용 절반 줄이는 AI 솔루션 출시",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-15T00:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016310754?sid=105"
+        },
+        {
+          "title": "\"간단 계산에 슈퍼컴을?\"…라이너, LLM 비용 50%↓ API 출시",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-15T04:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005413933?sid=101"
+        },
+        {
+          "title": "라이너, AI 질문 토큰 비용 50% 절감 '모델 API' 출시",
+          "press": "etnews.com",
+          "publishedAt": "2026-09-15T00:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003466761?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "라이너",
+          "searchVolume": null,
+          "origin": "autocomplete"
         }
       ],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "삼성전자",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "라이프운용이 삼성전자에 우선주 매입·소각 주주제안 서한 발송",
+      "headlines": [
+        {
+          "title": "삼전닉스 계약학과 수시 지원 8994명…'역대 최다'",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-14T23:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014189974?sid=102"
+        },
+        {
+          "title": "\"삼성전자, 우선주 사서 소각하라\" 라이프운용 주주제안, 왜",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-14T23:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006369458?sid=101"
+        },
+        {
+          "title": "삼성전자, 美 버라이즌과 6G 핵심 기술 실증...업계 최초",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-14T23:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002437415?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "삼성전자 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성전자 서비스센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성전자 온누리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성전자 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성전자 배당금",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성전자 월세",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성전자 패밀리몰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성전자 고객센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "삼성전자 자사주 소각",
+          "reason": "주주환원 후속",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼성전자 배당",
+          "reason": "환원 정책 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "뉴엔AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "뉴엔AI가 뉴저지 북미법인 세우고 뷰티 AI 뷰센스로 시장 공략",
+      "headlines": [
+        {
+          "title": "뉴엔AI, 뉴저지 법인 설립…'뷰센스'로 북미 뷰티 시장 공략",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-15T01:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002437456?sid=105"
+        },
+        {
+          "title": "뉴엔AI, 북미 법인 설립... 해외 시장 확대",
+          "press": "ddaily.co.kr",
+          "publishedAt": "2026-09-15T00:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/138/0002241400?sid=105"
+        },
+        {
+          "title": "뉴엔AI, 뉴저지주에 북미 법인 설립…글로벌 시장 공략",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-09-15T01:28:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=865249"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "뉴엔ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴엔ai 공모가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴엔ai 주가 전망",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴엔ai 실적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴엔ai 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴엔ai 주관사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴엔ai 직원수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴엔ai 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "뉴엔AI 상장일",
+          "reason": "IPO 일정",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "뉴엔AI 공모가",
+          "reason": "청약 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "뉴엔AI 실적",
+          "reason": "진출 후 성과",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "삼성SDS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "삼성SDS가 국내 첫 앤트로픽 셀렉트 티어 등극해 클로드 공급",
+      "headlines": [
+        {
+          "title": "삼성SDS, 앤트로픽 '클로드 파트너' 국내 첫 셀렉트 티어 획득",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-14T23:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014190006?sid=105"
+        },
+        {
+          "title": "\"앤트로픽도 인정\"…국내 첫 셀렉트 티어 된 삼성SDS, 클로드 AX 사업 확...",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-15T01:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002437458?sid=105"
+        },
+        {
+          "title": "삼성SDS, 국내 첫 앤트로픽 셀렉트 티어 파트너 등극",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-14T23:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009170014?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "삼성sds 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 본사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 도어락",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성 sds 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 로봇",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성sds 리얼서밋",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "삼성SDS 클로드 도입",
+          "reason": "기업 적용 사례",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼성SDS 주가",
+          "reason": "AI 사업 기대",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "삼성SDS AI 실적",
+          "reason": "사업 성과",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -4765,7 +6223,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "미국발 AI 감속론에 한국 AI 업계가 기회냐 장벽이냐로 셈법이 복잡해졌다.",
+      "why": "AI 감속·속도조절론에 한국 AI 전략과 사이버보안이 주목",
       "headlines": [
         {
           "title": "'AI 감속'에 복잡해진 한국 셈법…기회냐 새 장벽이냐",
@@ -4774,16 +6232,16 @@
           "link": "https://n.news.naver.com/mnews/article/001/0016308963?sid=105"
         },
         {
-          "title": "학계 \"통제 안되는 초지능은 재앙…AI 브레이크 필요\"",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-14T09:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005735100?sid=105"
+          "title": "AI 속도 조절론이 키운 역설…울다 웃는 '사이버 보안'",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-15T02:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014190981?sid=105"
         },
         {
-          "title": "\"인류 멸망\" 경고에 멈춰 선 AI…흔들리는 코스피, 증권가 진단은",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-14T22:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014189863?sid=101"
+          "title": "AI 감속론에 복잡해진 한국 전략…속도조절도 '차등 적용'",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-15T04:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002437501?sid=105"
         }
       ],
       "concentrated": [],
@@ -4796,7 +6254,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "코그니션이 키미 K3 기반 코딩모델 SWE-2를 페이블5.1급 성능으로 출시했다.",
+      "why": "코그니션이 키미 K3 기반 코딩모델 SWE-2를 페이블5.1급 저비용 출시",
       "headlines": [
         {
           "title": "코그니션, 키미 K3 기반 코딩 모델 'SWE-2' 출시...\"페이블 5.1 맞먹는 성...",
@@ -4811,10 +6269,10 @@
           "link": "https://www.wikitree.co.kr/articles/1159101"
         },
         {
-          "title": "\"간단한 초음파로\"…지방간 환자, 간암 위험 파악",
-          "press": "newsis.com",
-          "publishedAt": "2026-08-24T07:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014144949?sid=102"
+          "title": "사카나AI, 日 기업시장 공략 확대…'후구' 신모델로 비용·성능 경쟁",
+          "press": "epnc.co.kr",
+          "publishedAt": "2026-09-14T23:30:00.000Z",
+          "link": "https://www.epnc.co.kr/news/articleView.html?idxno=406862"
         }
       ],
       "concentrated": [
@@ -4831,22 +6289,29 @@
       ],
       "nextWave": [
         {
-          "keyword": "SWE-2 벤치마크",
-          "reason": "성능 비교 수치 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
           "keyword": "SWE-2 사용법",
-          "reason": "실제 이용 방법 관심",
+          "reason": "도입 방법",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "SWE-2 데빈",
-          "reason": "자사 데빈과 차이 궁금",
+          "keyword": "SWE-2 vs 클로드",
+          "reason": "성능 비교",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "데빈 SWE-2",
+          "reason": "코그니션 제품 연계",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "SWE-2 요금",
+          "reason": "비용 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4860,7 +6325,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "코딩 AI 코그니션이 석 달 만에 기업가치 64조원으로 급등했다.",
+      "why": "AI 코딩 스타트업 코그니션이 20억달러 유치로 기업가치 64조원 도달",
       "headlines": [
         {
           "title": "코그니션, 키미 K3 기반 코딩 모델 'SWE-2' 출시...\"페이블 5.1 맞먹는 성...",
@@ -4926,21 +6391,21 @@
       "nextWave": [
         {
           "keyword": "코그니션 상장",
-          "reason": "몸값 급등 뒤 IPO 관심",
+          "reason": "IPO 가능성",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "코그니션 투자자",
-          "reason": "20억달러 주체 관심",
+          "reason": "누가 투자했나",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "코그니션 오픈AI",
-          "reason": "경쟁 구도 궁금",
+          "keyword": "코그니션 vs 커서",
+          "reason": "경쟁 구도",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4954,7 +6419,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개했다.",
+      "why": "텐센트가 음성 생성·편집 모델 AuK를 오디오용 나노바나나로 공개",
       "headlines": [
         {
           "title": "텐센트, 음성 생성·편집 모델 'AuK' 공개...\"오디오용 나노바나나\"",
@@ -5019,28 +6484,60 @@
       ],
       "nextWave": [
         {
-          "keyword": "AuK 사용법",
-          "reason": "공개 뒤 이용법 관심",
+          "keyword": "AuK 데모",
+          "reason": "체험 방법",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "AuK 한국어",
-          "reason": "국어 지원 여부 궁금",
+          "keyword": "AuK 오픈소스",
+          "reason": "공개 여부",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "AuK 공개일",
-          "reason": "실사용 시점 관심",
+          "keyword": "AuK vs 일레븐랩스",
+          "reason": "성능 비교",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         }
       ],
       "rowCount": 0
+    },
+    {
+      "issue": "이형택 이대훈 폭행사건",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "강남 폭행시비 A·B씨가 이형택·이대훈으로 밝혀진 2년 전 사건이다.",
+      "headlines": [
+        {
+          "title": "A·B씨, 알고 보니 이형택·이대훈..강남 폭행 사건 전말 \"치고받고 싸웠...",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-09-14T22:56:00.000Z",
+          "link": "https://m.entertain.naver.com/article/108/0003470512"
+        },
+        {
+          "title": "국가대표 폭행시비 A·B씨는 이형택 ·이대훈…김구라, \"택시 잡다 넘어...",
+          "press": "topstarnews.net",
+          "publishedAt": "2026-09-14T22:22:00.000Z",
+          "link": "https://www.topstarnews.net/news/articleView.html?idxno=16193939"
+        },
+        {
+          "title": "'폭행 시비' A·B씨=이형택·이대훈이었다…2년전 사건 전말 \"술 마시고...",
+          "press": "xportsnews.com",
+          "publishedAt": "2026-09-14T11:04:00.000Z",
+          "link": "https://m.entertain.naver.com/article/311/0002056884"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "텐센트",
@@ -5141,53 +6638,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "만물공동회",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "순천시가 19일 자연의 목소리를 듣는 '만물공동회'를 개최한다.",
-      "headlines": [
-        {
-          "title": "순천시, 이번엔 흑두루미도 발언한다 19일 '만물공동회'",
-          "press": "siminsori.com",
-          "publishedAt": "2026-09-14T07:54:00.000Z",
-          "link": "https://www.siminsori.com/news/articleView.html?idxno=401509"
-        },
-        {
-          "title": "순천, 사람 넘어 자연의 목소리 듣는다…'만물공동회' 19일 개최",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-14T07:48:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215242"
-        },
-        {
-          "title": "\"전북의 생명사상과 문화로 '글로벌 생명경제도시' 새로운 길 연다\"...전...",
-          "press": "jbsori.com",
-          "publishedAt": "2026-08-27T20:20:00.000Z",
-          "link": "http://www.jbsori.com/news/articleView.html?idxno=17796"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "만물공동회 참가",
-          "reason": "개최 앞두고 참여 방법 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "만물공동회 프로그램",
-          "reason": "행사 내용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "Z.AI",
@@ -5267,94 +6719,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "업스테이지",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "김성훈 업스테이지 대표가 엔비디아 본사서 젠슨 황과 AI 협력을 논의했다.",
-      "headlines": [
-        {
-          "title": "메디슨 황이 부른 업스테이지…엔비디아 본사서 AI 협력 논의",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-14T06:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016309444?sid=105"
-        },
-        {
-          "title": "차기 '깐부회동'은 K-스타트업과?…업스테이지, 매디슨 황과 AI 협력 논...",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-14T08:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014189432?sid=105"
-        },
-        {
-          "title": "메디슨 황 만난 김성훈 업스테이지 대표… AI 협력 논의",
-          "press": "segye.com",
-          "publishedAt": "2026-09-14T08:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004158895?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "업스테이지 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "업스테이지 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "대학로 업스테이지",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "업스테이지 손해인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "업스테이지 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "업스테이지 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "업스테이지 다음",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "업스테이지 인턴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "업스테이지 상장시기",
-          "reason": "회동 뒤 IPO 일정 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "업스테이지 관련주",
-          "reason": "협력 수혜주 검색 예상",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "봉누도",
@@ -5574,98 +6940,6 @@
       "nextWave": [],
       "rowCount": 1,
       "carried": true
-    },
-    {
-      "issue": "장윤정",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "장윤정 모친 \"딸이 전라도 섬에 가두려 했다…극적으로 탈출\" 주장",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-12T20:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009166426"
-        },
-        {
-          "title": "장윤정 모친 징역 10개월 선고…‘딸 팔아 사기’",
-          "press": "ichannela.com",
-          "publishedAt": "2026-09-10T10:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/449/0000360262?sid=102"
-        },
-        {
-          "title": "'가수 딸 언급하며 사기' 장윤정 모친, 1심서 징역 10개월 선고",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-10T05:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016302740?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "장윤정 콘서트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "장윤정 노래",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "장윤정 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "장윤정 모친",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "장윤정 초혼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "장윤정 하늘에",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "장윤정 꽃",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "장윤정 나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
     }
-  ],
-  "enrichedAt": "2026-09-14T23:36:59.240Z",
-  "enrichStats": {
-    "enriched": 5,
-    "subsAdded": 2,
-    "titleUpgraded": 0,
-    "proposed": 24,
-    "verified": 6,
-    "judged": 0,
-    "judgedBad": 0,
-    "related": 0,
-    "picked": 0,
-    "pooled": 6,
-    "aiTitled": 5,
-    "trended": 0,
-    "homeRetried": 2,
-    "whyAdded": 3,
-    "aiCalls": 5,
-    "partial": false
-  }
+  ]
 }
