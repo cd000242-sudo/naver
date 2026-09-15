@@ -179,9 +179,10 @@ export async function runIssueEndgameCollect(
     const stats = result.stats || {};
     appendLogFn(`📊 후보 ${stats.totalCandidates ?? '?'}장 → 필터 ${stats.afterFilter ?? '?'}장 → 클린 ${stats.cleanTotal ?? '?'}장 (AI플랜: ${stats.aiPlanUsed ? 'ON' : '휴리스틱'})`);
     if (stats.visionUsed) {
-        appendLogFn(`👁️ Vision 게이트: ${stats.visionInspected ?? 0}장 검사, 지각 중복 ${stats.perceptualDuplicates ?? 0}장 통합`);
+        const engine = stats.visionVendor ? ` · ${stats.visionVendor}${stats.visionFree ? ' (구독, 추가 과금 0)' : ''}` : '';
+        appendLogFn(`👁️ Vision 게이트${engine}: ${stats.visionInspected ?? 0}장 검사, 지각 중복 ${stats.perceptualDuplicates ?? 0}장 통합`);
     } else {
-        appendLogFn('⚠️ Gemini 키가 없어 Vision 워터마크/텍스트 검증이 생략되었습니다.');
+        appendLogFn('⚠️ 고른 AI 엔진으로 이미지 검사를 할 수 없어 캡션 텍스트로만 판정했습니다(무료) — 워터마크/구도는 미검사입니다.');
     }
 
     const ImageManager = (window as any).ImageManager;

@@ -177,14 +177,14 @@ export async function collectIssueImages(
   const plan = await buildIssueQueryPlan(
     payload.title,
     payload.headings,
-    options.geminiApiKey,
+    options.planCaller,
     payload.intro,
   );
   emit(
     8,
     plan.aiGenerated
       ? `🧠 사건 파악: ${plan.mainSubject}${plan.programName ? ` · ${plan.programName}` : ''}${plan.contextSummary ? ` — ${plan.contextSummary.slice(0, 60)}` : ''}`
-      : '🧠 휴리스틱 검색어 생성 완료 (Gemini 키 없음)',
+      : '🧠 휴리스틱 검색어 생성 완료 (고른 엔진으로 AI 플랜 불가 — 무료 경로)',
   );
   console.log(
     `${LOG} 🚀 수집 시작: ${plan.querySets.length}개 소제목, AI플랜=${plan.aiGenerated}, 주체="${plan.mainSubject}"`,
@@ -217,7 +217,7 @@ export async function collectIssueImages(
     // 클린이 목표에 못 미치면 다음 티어 소스로 확장한다.
     const targetForHeading = Math.min(Math.max(qs.recommendedImages ?? 1, 1), perHeadingTarget);
     const refined = await collectCleanForHeading(qs, cap, targetForHeading, {
-      geminiApiKey: options.geminiApiKey,
+      visionRoute: options.visionRoute,
       visionBudget,
       phashRegistry,
       // 관련성 판정 기준 — 사건 맥락까지 넘겨 "소제목 문구"가 아니라 "무슨 사건인지"로
@@ -277,7 +277,10 @@ export async function collectIssueImages(
       afterFilter,
       perSource,
       aiPlanUsed: plan.aiGenerated,
+      planEngine: plan.aiGenerated ? options.planEngineLabel : undefined,
       visionUsed: visionUsedAny,
+      visionVendor: options.visionRoute?.label,
+      visionFree: options.visionRoute?.free === true,
       visionInspected: visionBudget.inspected,
       cleanTotal,
       perceptualDuplicates,

@@ -93,7 +93,18 @@ export interface IssueHarnessOptions {
   perHeadingTarget?: number;
   /** Hard cap of candidates kept per heading (default 60) */
   maxCandidatesPerHeading?: number;
-  geminiApiKey?: string;
+  /**
+   * 검색어 플랜(텍스트) 호출자 — 고른 글생성 엔진으로 배선된다(textRoute.ts).
+   * 없으면 휴리스틱 플랜으로 내려간다(무료).
+   */
+  planCaller?: import('./textRoute.js').IssuePlanCaller;
+  /** 플랜을 만든 엔진 이름 — 로그·화면 표기용. */
+  planEngineLabel?: string;
+  /**
+   * Vision 게이트 경로 — 사용자가 고른 글생성 엔진을 따라간다(visionRoute.ts).
+   * null/미지정이면 Vision 을 아예 돌리지 않고 무료 캡션 게이트만 쓴다.
+   */
+  visionRoute?: import('./visionRoute.js').IssueVisionRoute | null;
   /** Called at each pipeline stage — wired to the renderer progress modal. */
   onProgress?: (info: IssueProgressInfo) => void;
 }
@@ -103,8 +114,14 @@ export interface IssueHarnessStats {
   afterFilter: number;
   perSource: Record<string, number>;
   aiPlanUsed: boolean;
+  /** 플랜을 만든 엔진 이름. 휴리스틱이면 비어 있다. */
+  planEngine?: string;
   /** R3 funnel stats */
   visionUsed?: boolean;
+  /** 실제로 판정한 벤더 라벨 — 어디로 청구됐는지 화면에 그대로 보여 준다. */
+  visionVendor?: string;
+  /** 구독 CLI라 API 과금이 0인가. */
+  visionFree?: boolean;
   visionInspected?: number;
   cleanTotal?: number;
   perceptualDuplicates?: number;

@@ -1,12 +1,11 @@
 // src/crawler/issueHarness/queryFanout.ts
 // AI body analysis → per-heading query fanout (Korean/English/fandom/event).
-// One Gemini call per post; heuristic fallback keeps the harness working
-// without an API key (English/fandom variants are simply skipped then).
+// 호출은 글당 1회. 벤더는 사용자가 고른 글생성 엔진을 따라간다(textRoute.ts) —
+// 에이전트면 구독 CLI(추가 과금 0). 호출자가 없으면 휴리스틱으로 내려가므로
+// 키가 없어도 수집은 돈다 (영문/팬덤 검색어만 빠진다).
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { GEMINI_TEXT_MODELS } from '../../runtime/modelRegistry.js';
-import { trackGeminiUsage } from '../../gemini.js';
 import type { HeadingQuerySet, IssueHeadingInput, IssueQueryPlan } from './types.js';
+import type { IssuePlanCaller } from './textRoute.js';
 
 const LOG = '[IssueQueryFanout]';
 const BODY_EXCERPT_CHARS = 280;
@@ -135,42 +134,22 @@ ${sections}
 
 /**
  * Build the per-heading query plan.
- * Gemini Flash 1-call; falls back to heuristics on any failure.
+ * 고른 엔진으로 1회 호출. 실패하면 언제나 휴리스틱으로 내려간다(수집은 멈추지 않는다).
  */
 export async function buildIssueQueryPlan(
   title: string,
   headings: IssueHeadingInput[],
-  geminiApiKey?: string,
+  planCaller?: IssuePlanCaller,
   intro?: string,
 ): Promise<IssueQueryPlan> {
   const fallback = buildFallbackQueryPlan(title, headings);
-  if (!geminiApiKey) {
-    console.log(`${LOG} Gemini 키 없음 → 휴리스틱 플랜 사용`);
+  if (!planCaller) {
+    console.log(`${LOG} 고른 엔진으로 플랜을 만들 수 없음 → 휴리스틱 플랜 사용(무료)`);
     return fallback;
   }
 
   try {
-    const client = new GoogleGenerativeAI(geminiApiKey);
-    // Thinking-capable Gemini 3.x consumes output budget on reasoning tokens —
-    // JSON mode + a generous cap keep the answer from truncating mid-array.
-    const model = client.getGenerativeModel({
-      model: GEMINI_TEXT_MODELS.FLASH,
-      generationConfig: {
-        temperature: 0.3,
-        maxOutputTokens: 4096,
-        responseMimeType: 'application/json',
-      },
-    });
-
-    const result = await model.generateContent(buildPrompt(title, headings, intro));
-    const text = result.response.text().trim();
-
-    const usage = (result.response as any).usageMetadata;
-    if (usage) {
-      const p = usage.promptTokenCount || 0;
-      const t = usage.totalTokenCount || 0;
-      trackGeminiUsage(GEMINI_TEXT_MODELS.FLASH, p, t > p ? t - p : (usage.candidatesTokenCount || 0));
-    }
+    const text = String(await planCaller(buildPrompt(title, headings, intro)) || '').trim();
 
     const cleaned = text.replace(/```(?:json)?/gi, '').trim();
     const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
