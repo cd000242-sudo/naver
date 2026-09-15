@@ -8,6 +8,7 @@ import { insertBlueprintIntoPrompt } from './content/blueprint/insertBlueprintIn
 import { stripMaterialNarrationFromContent } from './content/materialNarrationStrip.js';
 import { stripResearchNoteChatter } from './content/researchNoteHygiene.js';
 import { applyReviewMaterialHygiene } from './content/reviewMaterialHygiene.js';
+import { recordQualityLedger } from './content/qualityLedger.js';
 import OpenAI from 'openai';
 // ✅ [2026-05-25 v2.10.356] OpenAI RPM preemptive throttler + 누진 backoff
 // ✅ [2026-06-02] 호출 간 최소 간격(10s) + 30→60→90→120 누진 backoff
@@ -714,6 +715,9 @@ function runPostGenValidator(content: any, source: any): void {
   logTitleAnswer(content, source);
   logVerdictStructure(content);
   logPublicReactionClaims(content, source);
+  // [2026-09-15] Quality ledger — every finalized draft leaves one JSONL line (scores/decision/warnings).
+  //   Records only; never blocks, never calls a model. This is the single place all legacy returns pass.
+  recordQualityLedger(content, source, () => app.getPath('userData'));
   if (!isFeatureEnabled('validator')) return;
   let result: any;
   try {
@@ -7725,6 +7729,8 @@ async function generateStructuredContentInternal(
 
         const successRate = stats.total > 0 ? Math.round((stats.success / stats.total) * 100) : 0;
         console.log(`[ContentGenerator] ✅ 성공! (시도 ${attempt + 1}번째) | 전체 성공률: ${successRate}% (${stats.success}/${stats.total})`);
+        // [2026-09-15] Quality ledger reads which attempt produced the draft (1-based). A later `continue` overwrites it.
+        if (optimized.quality) (optimized.quality as any).generationAttempt = attempt + 1;
 
         // ✅ AI 탐지 회피 처리 (Humanizer) - 고속 최적화
         console.log('[ContentGenerator] 🔄 AI 탐지 회피 + 네이버 최적화 처리 시작...');
