@@ -68,8 +68,14 @@ test('표기 없는 본문에서 적용을 눌러도 소제목이 사라지지 �
     const panelRowsBefore = document.querySelectorAll('#heading-list input[data-heading-line]').length;
 
     (document.getElementById('heading-apply-to-preview') as HTMLButtonElement | null)?.click();
-    await until(() => document.querySelectorAll('#heading-list input[data-heading-line]').length >= 2);
-    await wait(1200);
+    /*
+     * 적용은 감지된 소제목을 본문 표기로 굳힌 뒤 재분석을 건다. 게이트 전체를 돌릴 때는
+     * 그 재분석이 늦어 카드가 잠깐 비는 순간이 있었다 — 고정 대기로는 그 순간을 찍는다.
+     * 그래서 판정할 조건 자체가 참이 될 때까지 기다린다.
+     */
+    await until(() => document.querySelectorAll('#heading-list input[data-heading-line]').length >= 2
+      && cards().length >= cardsBefore.length);
+    await wait(800);
 
     return {
       cardsBefore,

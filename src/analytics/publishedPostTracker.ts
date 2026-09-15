@@ -14,6 +14,7 @@
 import fs from 'fs';
 import path from 'path';
 import { recordCohortEvent, hashAccountId } from '../account/cohortStore.js';
+import { isExposureMeasurement } from './searchKeyword.js';
 
 export interface PublishedPost {
   readonly id: string;                    // unique (timestamp + blogId + logNo)
@@ -50,6 +51,11 @@ export interface PublishedPost {
     readonly notes?: string;
     // [2026-09-10] true = probe could not judge (fetch error / 0 cards parsed). Not a miss.
     readonly probeFailed?: boolean;
+    /**
+     * [2026-09-15] 무엇을 잰 체크인가. 'index' 는 제목을 그대로 검색한 색인 확인이라
+     * 노출률에 합산하면 안 된다. 없으면 옛 기록 — 검색어와 제목을 비교해 되판정한다.
+     */
+    readonly keywordKind?: 'exposure' | 'index';
   }>;
 }
 
@@ -219,8 +225,15 @@ export function splitExposureGroups(posts: PublishedPost[]): {
   const unknownCheck: PublishedPost[] = [];
 
   for (const p of posts) {
-    // 판정 불가 기록은 버린다 — 유효 체크가 하나도 없으면 unknown
-    const checks = (p.exposureChecks ?? []).filter(c => !isProbeFailedCheck(c));
+    /*
+     * [2026-09-15] 판정 불가 기록에 더해 "제목 그대로 검색"도 뺀다.
+     * 실측 109편 중 66%가 제 제목을 검색해 1위를 찾은 기록이었고, 그게 그대로 노출로
+     * 집계돼 calibration 입력을 오염시켰다(제목검색 36% vs 진짜 키워드 19%).
+     * 색인 확인은 그 자체로 값진 신호지만 노출률과는 다른 축이다.
+     */
+    const checks = (p.exposureChecks ?? [])
+      .filter(c => !isProbeFailedCheck(c))
+      .filter(c => isExposureMeasurement(c, p.title));
     if (checks.length === 0) {
       unknownCheck.push(p);
       continue;

@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 import { describe, expect, it, vi } from 'vitest';
+import { isFlowWorkspaceUrl } from '../image/flowWorkspaceEntryPolicy';
 
 const source = readFileSync('src/image/flowGenerator.ts', 'utf8');
 const section = (start: string, end: string) => source.slice(source.indexOf(start), source.indexOf(end, source.indexOf(start)));
@@ -53,6 +54,8 @@ function fixture() {
     injectAntiModalObserver: vi.fn(async () => undefined),
     minimizeFlowWindow: vi.fn(async () => undefined),
     dismissCookieBanner: vi.fn(async () => undefined), isLoggedInToFlow: loggedIn,
+    // classifyFlowPageLogin 이 쓰는 주소 판정 — 실제 구현을 그대로 넣는다(가짜로 바꾸면 의미가 없다).
+    isFlowWorkspaceUrl,
     tryEnterFlowWorkspace: vi.fn(async () => false), readFlowSessionUser: readUser,
     setTimeout: (fn: () => void) => { queueMicrotask(fn); return 0; }, console,
   };

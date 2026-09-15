@@ -1199,6 +1199,7 @@ async function dismissCookieBanner(page: Page, force: boolean = false): Promise<
 }
 
 // ─── Flow 로그인 상태 체크 ────────────
+
 // ✅ [v2.7.68] 다중 신호 감지 — 2FA redirect 도중에도 빠르게 감지
 async function isLoggedInToFlow(page: Page): Promise<boolean> {
     try {
@@ -2678,19 +2679,86 @@ export async function checkFlowLogin(): Promise<FlowLoginStatus> {
     return _checkPromise;
 }
 
+/**
+ * [2026-09-15 사장님 실측] "너가 띄운 크롬창 로그인되어 있는데도
+ * '⚠️ Flow 로그인 또는 연결이 진행 중입니다' 이렇게 떠."
+ *
+ * 뿌리는 아래 isLoggedInToFlow 의 첫 줄이다. 주소가 workspace 가 아니면 세션은 보지도
+ * 않고 false 를 돌려줬다. 그런데 로그인 직후 창은 accounts.google.com 에 서 있는 일이
+ * 흔하다 — 로그인이 멀쩡해도 "안 됨"으로 뭉개진다.
+ *
+ * 드롭샷에서 같은 모양을 이미 고쳤다(무응답을 로그아웃으로 뭉개 발행마다 로그인이 풀리던 건).
+ * 여기도 같은 계약을 쓴다: **판정 불가는 로그아웃이 아니다.**
+ */
+export type FlowLoginVerdict = 'logged-in' | 'logged-out' | 'unknown';
+
+/**
+ * 페이지 하나를 보고 세 갈래로 판정한다.
+ *   logged-in  workspace 에서 세션/DOM 신호를 확인했다
+ *   logged-out workspace 인데 아무 신호도 없다 — 이건 진짜 로그아웃이다
+ *   unknown    workspace 가 아니다(인증 도중·빈 탭·다른 페이지). 이 페이지로는 알 수 없다
+ *
+ * unknown 을 로그아웃으로 접지 않는 것이 이 함수의 유일한 계약이다.
+ */
+async function classifyFlowPageLogin(page: Page): Promise<FlowLoginVerdict> {
+    try {
+        if (page.isClosed()) return 'unknown';
+        // 로그인 판정은 기존 함수가 단일 창구다 — 여기서 주소로 가로채면 그 판정을 못 쓴다.
+        if (await isLoggedInToFlow(page)) return 'logged-in';
+        // false 는 두 가지를 뜻한다. workspace 에서 신호가 없으면 진짜 로그아웃,
+        // 아직 workspace 밖이면(인증 도중·빈 탭) 이 페이지로는 알 수 없다.
+        return isFlowWorkspaceUrl(page.url()) ? 'logged-out' : 'unknown';
+    } catch {
+        return 'unknown';
+    }
+}
+
 async function findAuthenticatedFlowPage(pages: readonly Page[], revision: number): Promise<Page | null> {
     for (const page of pages) {
         assertFlowSessionCurrent(revision);
         if (page.isClosed()) continue;
-        const loggedIn = await isLoggedInToFlow(page).catch(() => false);
+        const verdict = await classifyFlowPageLogin(page);
         assertFlowSessionCurrent(revision);
-        if (loggedIn && !page.isClosed()) return page;
+        if (verdict === 'logged-in' && !page.isClosed()) return page;
     }
     return null;
 }
 
+/**
+ * 열려 있는 창을 건드리지 않고, 같은 세션에 **임시 탭**을 하나 열어 확인한다.
+ *
+ * 사용자가 로그인 중인 탭을 이동시키면 진행 중이던 인증이 깨진다. 그래서 그 탭은 그대로 두고
+ * 새 탭에서 workspace 를 열어 본다 — 프로필이 같으니 쿠키도 같고, 확인이 끝나면 닫는다.
+ */
+async function probeFlowLoginInBackgroundTab(revision: number): Promise<Page | null> {
+    const context = cachedContext || ownedFlowContexts[0] || null;
+    if (!context) return null;
+    let probe: Page | null = null;
+    try {
+        probe = await context.newPage();
+        await probe.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 20000 });
+        assertFlowSessionCurrent(revision);
+        if (await classifyFlowPageLogin(probe) === 'logged-in') {
+            // 로그인이면 호출자가 userInfo 를 읽어야 하므로 탭을 살려서 넘긴다(호출자가 닫는다).
+            const opened = probe;
+            probe = null;
+            return opened;
+        }
+        return null;
+    } catch (error) {
+        flowWarn('[Flow] 배경 탭 로그인 확인 실패(무시)', (error as Error)?.message?.substring(0, 100) || '');
+        return null;
+    } finally {
+        // 로그인이 아니거나 실패한 탭은 여기서 반드시 닫는다 — 탭이 쌓이면 창이 지저분해진다.
+        if (probe && !probe.isClosed()) {
+            try { await probe.close(); } catch { /* 이미 닫혔으면 그만 */ }
+        }
+    }
+}
+
 /** Inspect the connection owner's pages without launching, navigating or closing them. */
 async function checkActiveFlowLogin(revision: number): Promise<FlowLoginStatus> {
+    let probeTab: Page | null = null;
     try {
         const pages = [...new Set([
             ...(cachedPage ? [cachedPage] : []),
@@ -2704,11 +2772,32 @@ async function checkActiveFlowLogin(revision: number): Promise<FlowLoginStatus> 
                 return { loggedIn: true, message: `Flow 로그인 세션 확인됨${userInfo?.email ? ` (${userInfo.email})` : ''}`, userInfo };
             }
         }
+
+        /*
+         * [2026-09-15] 여기서 바로 "로그인하세요" 로 끝내던 것이 오탐의 자리였다.
+         * 열린 탭이 전부 workspace 밖(로그인 직후 accounts.google.com 등)이면 그 탭들로는
+         * 판정이 불가능하다 — 로그아웃이 아니라 **모르는 것**이다. 임시 탭으로 한 번 확인한다.
+         */
+        const anyLoggedOut = (await Promise.all(pages.map((p) => classifyFlowPageLogin(p))))
+            .some((v) => v === 'logged-out');
+        probeTab = await probeFlowLoginInBackgroundTab(revision);
+        if (probeTab) {
+            const userInfo = await readFlowSessionUser(probeTab);
+            assertFlowSessionCurrent(revision);
+            return { loggedIn: true, message: `Flow 로그인 세션 확인됨${userInfo?.email ? ` (${userInfo.email})` : ''}`, userInfo };
+        }
+
         assertFlowSessionCurrent(revision);
-        return { loggedIn: false, message: 'Flow 로그인 또는 연결이 진행 중입니다. 열린 로그인 창에서 완료한 뒤 다시 확인해주세요.' };
+        return anyLoggedOut
+            ? { loggedIn: false, message: 'Flow 로그인이 필요합니다. [Flow 로그인] 버튼으로 Google 계정 로그인 후 다시 확인해주세요.' }
+            : { loggedIn: false, message: 'Flow 로그인 상태를 아직 확인하지 못했습니다(로그인 진행 중일 수 있음). 잠시 후 다시 확인해주세요.' };
     } catch (error) {
         flowWarn('[Flow] 진행 중인 로그인 상태 확인 실패', (error as Error).message);
         return { loggedIn: false, message: 'Flow 연결 상태가 변경되었습니다. 잠시 후 다시 확인해주세요.' };
+    } finally {
+        if (probeTab && !probeTab.isClosed()) {
+            try { await probeTab.close(); } catch { /* 이미 닫혔으면 그만 */ }
+        }
     }
 }
 

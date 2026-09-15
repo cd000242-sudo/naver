@@ -93,6 +93,16 @@ export function openQuickMode(): void {
   modal.setAttribute('aria-hidden', 'false');
 }
 
+/**
+ * [2026-09-15] 빠른 모드도 지난 글의 추론 결과를 들고 있었다.
+ * 발행 후 초기화가 이 상태를 안 건드려서, 다음 글을 열면 1단계가 아니라
+ * 지난 글이 멈춘 단계에서 옛 플랜과 함께 시작됐다.
+ */
+export function resetQuickModeState(): void {
+  setState({ currentPanel: 1, isInferring: false, plan: null });
+  try { hideReviewPanel(); } catch { /* 패널이 없으면 지울 것도 없다 */ }
+}
+
 /** Closes the Quick Mode overlay. */
 export function closeQuickMode(): void {
   const modal = _getModal();

@@ -10,6 +10,7 @@
  */
 
 import { probeDynamicSerp } from './dynamicSerpProbe';
+import { resolveSearchKeyword, type SearchKeywordKind } from './searchKeyword.js';
 
 export interface ExposureCheckResult {
   readonly checkedAt: string;             // ISO 8601
@@ -18,6 +19,12 @@ export interface ExposureCheckResult {
   readonly hasSmartblock: boolean;
   readonly notes?: string;
   readonly fetchSuccess: boolean;
+  /**
+   * [2026-09-15] 이 체크가 무엇을 잰 것인가.
+   *   exposure — 진짜 검색어로 잰 순위
+   *   index    — 제목 그대로 검색한 색인 확인. 노출률에 합산하면 성적이 부풀려진다.
+   */
+  readonly keywordKind: SearchKeywordKind;
 }
 
 /**
@@ -51,9 +58,12 @@ export async function checkPostExposure(
   keyword: string,
   blogId: string,
   logNo: string,
-  options: { maxCards?: number; timeout?: number } = {},
+  options: { maxCards?: number; timeout?: number; title?: string } = {},
 ): Promise<ExposureCheckResult> {
   const checkedAt = new Date().toISOString();
+  // 제목을 그대로 검색한 건 노출이 아니다 — 재는 순간 라벨을 붙여 둔다.
+  const verdict = resolveSearchKeyword(keyword, options.title);
+  const keywordKind = verdict.kind;
 
   try {
     const dynamicReport = await probeDynamicSerp(keyword, {
@@ -69,6 +79,7 @@ export async function checkPostExposure(
         hasSmartblock: false,
         notes: 'fetch 실패',
         fetchSuccess: false,
+        keywordKind,
       };
     }
 
@@ -82,6 +93,7 @@ export async function checkPostExposure(
         hasSmartblock: dynamicReport.hasSmartblock,
         notes: '프로브 카드 0개 — 파싱 실패/차단, 판정 불가',
         fetchSuccess: false,
+        keywordKind,
       };
     }
 
@@ -94,8 +106,9 @@ export async function checkPostExposure(
       hasSmartblock: dynamicReport.hasSmartblock,
       notes: position === null
         ? `상위 ${dynamicReport.totalCards}개 중 미발견`
-        : `통합탭 ${position}위 노출`,
+        : `${keywordKind === 'index' ? '색인 확인(제목검색)' : '통합탭'} ${position}위`,
       fetchSuccess: true,
+      keywordKind,
     };
   } catch (err) {
     return {
@@ -105,6 +118,7 @@ export async function checkPostExposure(
       hasSmartblock: false,
       notes: `오류: ${err instanceof Error ? err.message : String(err)}`,
       fetchSuccess: false,
+      keywordKind,
     };
   }
 }
@@ -114,7 +128,7 @@ export async function checkPostExposure(
  *   각 글 사이 1초 딜레이 (네이버 봇 차단 회피).
  */
 export async function checkBatchExposure(
-  posts: ReadonlyArray<{ id: string; keyword: string; blogId: string; logNo: string; hoursAfter: number }>,
+  posts: ReadonlyArray<{ id: string; keyword: string; blogId: string; logNo: string; hoursAfter: number; title?: string }>,
   options: { delayMs?: number } = {},
 ): Promise<Array<{ id: string; hoursAfter: number; result: ExposureCheckResult }>> {
   const delayMs = options.delayMs ?? 1500;
@@ -122,7 +136,7 @@ export async function checkBatchExposure(
 
   for (let i = 0; i < posts.length; i++) {
     const p = posts[i];
-    const result = await checkPostExposure(p.keyword, p.blogId, p.logNo);
+    const result = await checkPostExposure(p.keyword, p.blogId, p.logNo, { title: p.title });
     results.push({ id: p.id, hoursAfter: p.hoursAfter, result });
     if (i < posts.length - 1) {
       await new Promise(resolve => setTimeout(resolve, delayMs));
