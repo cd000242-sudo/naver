@@ -4483,8 +4483,22 @@ async function regenerateSingleImage(headingTitle: string, prompt: string): Prom
 
     toastManager.info(`🔄 "${resolvedHeadingTitle}" 이미지 재생성 중...`);
 
-    const selectedSourceBtn = document.querySelector('.image-source-btn.selected') as HTMLButtonElement | null;
-    const selectedSource = String(selectedSourceBtn?.dataset.source || '').trim();
+    // The `.image-source-btn` markup no longer exists anywhere in index.html, so
+    // reading it alone always resolved to null and silently forced
+    // 'nano-banana-pro' (Gemini API key) no matter which engine the user picked.
+    // Read `#image-source-select` first — the same precedence the batch
+    // generation paths in this file already use.
+    const dropdownSource = String(
+      (document.getElementById('image-source-select') as HTMLSelectElement | null)?.value || ''
+    ).trim();
+    const selectedSourceBtn = (
+      document.querySelector('.image-source-btn.selected')
+      || document.querySelector('.unified-img-source-btn.selected')
+    ) as HTMLElement | null;
+    const buttonSource = String(
+      selectedSourceBtn?.dataset?.source || selectedSourceBtn?.getAttribute?.('data-source') || ''
+    ).trim();
+    const selectedSource = dropdownSource || buttonSource;
     const provider = (selectedSource && selectedSource !== 'saved') ? selectedSource : 'nano-banana-pro';
 
     if (selectedSource === 'saved') {

@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as extractor from '../renderer/utils/semiAutoHeadingExtractor';
+import { listHeadingLines } from '../renderer/utils/headingMarkup';
 import { initHeadingControlPanel, applyEditedHeadingsToPreview, renderHeadingList } from '../renderer/modules/headingControlPanel';
 
 // Execute the actual renderer listeners with their external services injected.
@@ -31,6 +32,7 @@ describe('manual editor heading synchronization', () => {
     analyze = vi.fn().mockResolvedValue(undefined);
     const dependencies = {
       ...extractor,
+      listHeadingLines,
       autoAnalyzeHeadings: analyze,
       syncIntegratedPreviewFromInputs: vi.fn(),
       normalizeHashtags: (value: string) => value,
@@ -68,6 +70,56 @@ describe('manual editor heading synchronization', () => {
     expect((globalThis as any).updateUnifiedPreview).toHaveBeenCalledWith(state);
     const published = extractor.resolveSemiAutoPublishStructure(textarea.value, state.headings, { bodyMarkupIsAuthoritative: true, imageHeadingTitles: ['네 번째 제목'] });
     expect(published.headings).toHaveLength(3);
+  });
+
+  it('본문 표기가 있으면 잠금 없이도 표기가 원천이다 — 패널과 미리보기가 갈리지 않는다', async () => {
+    // 표기 1개 + 휴리스틱이 소제목으로 볼 줄 1개. 예전엔 패널 1개 / 미리보기 2개로 갈렸다.
+    const mixed = [
+      '## 신청 방법',
+      '신청에 필요한 서류와 방문 절차를 안내합니다.',
+      '',
+      '이용 기준',
+      '이용 가능한 날짜와 조건을 확인합니다.',
+    ].join('\n');
+    expect(extractor.extractSemiAutoHeadingsFromBody(mixed).length).toBeGreaterThan(1);
+    await input(mixed);
+    expect((window as any).currentStructuredContent.headings.map((h: any) => h.title)).toEqual(['신청 방법']);
+    expect(analyze.mock.calls.at(-1)?.[0].headings.map((h: any) => h.title)).toEqual(['신청 방법']);
+  });
+
+  it('패널 버튼만 눌러도 적용 없이 미리보기가 바로 다시 그려진다', async () => {
+    const liveAnalyze = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('autoAnalyzeHeadings', liveAnalyze);
+    setupHeadingPanel();
+    await input(fourSections);
+    liveAnalyze.mockClear();
+    (document.querySelectorAll<HTMLButtonElement>('[data-heading-unmark]')[3]).click();
+    // 디바운스를 기다리지 않고 그 자리에서 — "바로바로".
+    expect(liveAnalyze).toHaveBeenCalledTimes(1);
+    expect(liveAnalyze.mock.calls[0][0].headings.map((h: any) => h.title))
+      .toEqual(['첫 번째 제목', '두 번째 제목', '세 번째 제목']);
+    // 자동 반영은 조용하다 — 클릭마다 토스트가 쌓이면 안 된다.
+    expect((window as any).toastManager.success).not.toHaveBeenCalled();
+    // 화면이 튀면 편집을 못 한다 — 스크롤·깜빡임을 부르는 경로는 자동 반영에서 빠진다.
+    expect((globalThis as any).updateUnifiedPreview).not.toHaveBeenCalled();
+  });
+
+  it('re-renders the image tab from the applied headings', async () => {
+    // 적용은 본문을 바꾸지 않아 input 이벤트가 없다. 이미지 탭 카드를 다시 그릴 유일한
+    // 경로는 여기서 직접 부르는 재분석뿐이라, 이게 빠지면 패널과 이미지 탭이 갈린다.
+    const analyzeAfterApply = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('autoAnalyzeHeadings', analyzeAfterApply);
+    setupHeadingPanel();
+    await input(fourSections);
+    (document.querySelectorAll<HTMLButtonElement>('[data-heading-unmark]')[3]).click();
+    analyzeAfterApply.mockClear();
+    expect(applyEditedHeadingsToPreview()).toBe(true);
+    expect(analyzeAfterApply).toHaveBeenCalledTimes(1);
+    const [analyzed, options] = analyzeAfterApply.mock.calls[0];
+    expect(options).toEqual({ localOnly: true });
+    expect(analyzed.headings.map((h: any) => h.title)).toEqual(['첫 번째 제목', '두 번째 제목', '세 번째 제목']);
+    // 재분석이 이미지까지 함께 그리므로 빈 배열로 미리보기를 덮지 않는다.
+    expect((globalThis as any).updateUnifiedImagePreview).not.toHaveBeenCalled();
   });
 
   it('allows releasing every heading without restoring old heading/image anchors', async () => {

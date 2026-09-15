@@ -74,6 +74,7 @@ import {
   extractSemiAutoHeadingsFromBody,
   isCurrentSemiAutoPasteRevision,
 } from './utils/semiAutoHeadingExtractor.js';
+import { listHeadingLines } from './utils/headingMarkup.js';
 // ✅ [2026-01-25 모듈화] 이미지 비용 유틸리티
 import { isCostRiskImageProvider, getCostRiskProviderLabel, getTodayKey } from './utils/imageCostUtils.js';
 // ✅ [2026-01-25 모듈화] 쇼핑커넥트 유틸리티
@@ -4342,10 +4343,28 @@ async function initUnifiedTab(): Promise<void> {
 
   function _syncSemiAutoManualHeadings(sc: any, body: string): void {
     if (!sc) return;
-    if (sc.headingsLockedByUser === true) {
+    /*
+     * [2026-09-15] 반자동 편집과 소제목 미리보기는 한 몸이어야 한다.
+     *
+     * 예전에는 사용자가 패널 버튼을 눌렀을 때(headingsLockedByUser) 만 본문 표기를 원천으로
+     * 삼았다. 그래서 "## " 를 손으로 붙인 본문은 패널은 표기(6개)를, 미리보기·이미지 탭은
+     * 휴리스틱 추출(8개)을 보여 줘 두 화면이 갈렸다.
+     *
+     * 표기가 한 줄이라도 있으면 그건 사용자가 소제목을 정했다는 뜻이다. 표기가 이긴다.
+     */
+    const bodyHasHeadingMarkup = listHeadingLines(body).length > 0;
+    if (sc.headingsLockedByUser === true || bodyHasHeadingMarkup) {
       const marked = resolveSemiAutoPublishStructure(body, sc.headings || [], { bodyMarkupIsAuthoritative: true });
       const previous = Array.isArray(sc.headings) ? sc.headings : [];
-      sc.headings = marked.headings.map((heading) => ({ ...previous.find((item: any) => item.title === heading.title), ...heading }));
+      sc.headings = marked.headings.map((heading) => {
+        const previousHeading = previous.find((item: any) => item.title === heading.title);
+        return {
+          ...previousHeading,
+          ...heading,
+          // 표기 추출의 prompt 는 제목 그대로인 자리표시자다. 저장해 둔 영어 프롬프트를 덮지 않는다.
+          prompt: String(previousHeading?.prompt || '').trim() || heading.prompt,
+        };
+      });
       sc.introduction = marked.introduction;
       sc.conclusion = '';
       sc._manualSectionOrderLocked = true;

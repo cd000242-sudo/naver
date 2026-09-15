@@ -7,6 +7,13 @@
 
 import { bindDropshotLogin, refreshDropshotLoginStatus } from '../modules/dropshotLoginUi.js';
 
+/** 연동 상태 줄은 계정 이메일·서버 메시지를 그대로 넣으므로 이스케이프한다. */
+function escapeHtmlForStatus(value: string): string {
+  return String(value ?? '').replace(/[&<>"']/g, (ch) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch] as string
+  ));
+}
+
 // ✅ [v2.10.288] subImageMode import 제거 — esbuild 회귀(XXX_1 is not defined) 차단.
 //   side-effect import는 renderer.ts:57에 있어 window.getSubImageMode 자동 등록됨.
 export type SubImageMode = 'ai' | 'collected';
@@ -2120,36 +2127,91 @@ export function createHeadingImageModal(): void {
     const btn = document.getElementById('switch-google-account-btn') as HTMLButtonElement | null;
     if (btn) btn.disabled = true;
     if (dotEl) dotEl.style.background = '#3b82f6';
-    if (textEl) textEl.textContent = '⏳ Step 1/3: Google 로그인 중...';
     if (statusEl) statusEl.style.color = '#3b82f6';
 
-    // ✅ 통합 — 클릭 한 번으로 Google 로그인 + Flow 연결 테스트 + 상태 표시 (ImageFX 제거됨)
     let userName = '';
     let flowOk = false;
     let flowMsg = '';
 
-    try {
-      // ── Step 1/3: Google 계정 로그인/변경 ─────────────────
-      const loginResult = await (window as any).api.switchImageFxGoogleAccount();
-      if (!loginResult?.success) {
-        if (dotEl) dotEl.style.background = '#f59e0b';
-        if (textEl) textEl.textContent = `⚠️ Google 로그인 실패: ${loginResult?.message || '알 수 없는 오류'}`;
-        if (statusEl) statusEl.style.color = '#f59e0b';
-        if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'; iconEl.textContent = '⚠️'; }
-        return;
-      }
-      userName = loginResult.userName || 'user';
-      console.log(`[HeadingImageSettings] ✅ Step 1/3: Google 로그인 OK (${userName})`);
+    /*
+     * [2026-09-15 사장님 실측] "Flow Google 계정연동 Step 1/3 로그인중에서 계속 그대로입니다."
+     *
+     * 이 버튼은 라벨이 "Google 계정 연동 (Flow)" 인데 1단계에서 ImageFX 로그인을 돌리고 있었다.
+     * ImageFX 경로는 자기 프로필(imagefx-chrome-profile)을 지우고 labs.google/fx/tools/image-fx 에
+     * 접속해 세션이 잡힐 때까지 **최대 15분(5초 × 180회)** 을 기다린다. 그 동안 화면은
+     * "Step 1/3" 글자 그대로 멈춰 있고, 취소도 진행 표시도 없다.
+     *
+     * 게다가 Flow 는 프로필이 아예 다르다(flow-chromium-profile). 1단계 로그인이 성공해도
+     * Flow 에는 아무 도움이 안 되고 2단계에서 또 로그인해야 한다. ImageFX 는 지금 엔진
+     * 목록에서 비노출이라, Flow 를 쓰는 사용자에게 이 15분은 통째로 낭비다.
+     *
+     * → 고른 엔진이 ImageFX 일 때만 1단계를 돌린다. Flow 면 Flow 로그인만 한다.
+     */
+    const engineForConnect = String(getGlobalImageSource() || '').trim();
+    const needsImageFxLogin = engineForConnect === 'imagefx';
 
-      // ── Step 2/2: Flow 연결 테스트 (ImageFX 제거됨) ───────────
-      if (textEl) textEl.textContent = `⏳ Step 2/2: Flow 연결 확인 중...`;
+    /*
+     * 로그인은 사용자가 2단계 인증까지 끝낼 때까지 기다린다(Flow 는 최대 30분).
+     * 한 줄짜리 고정 문구만 띄우면 그 시간 내내 "멈춘 것"으로 보인다 — 실제로 사장님이
+     * 그렇게 보고하셨다. 경과 시간을 돌리고, 메인이 보내는 진행 로그를 그대로 비춘다.
+     */
+    const startedAt = Date.now();
+    let stageLabel = needsImageFxLogin
+      ? '1/2단계: ImageFX Google 로그인 중'
+      : 'Flow 로그인 중 — 열린 창에서 Google 로그인을 끝내주세요';
+    let lastProgressLine = '';
+    const paintStatus = (): void => {
+      if (!textEl) return;
+      const elapsed = Math.round((Date.now() - startedAt) / 1000);
+      const clock = `${String(Math.floor(elapsed / 60)).padStart(2, '0')}:${String(elapsed % 60).padStart(2, '0')}`;
+      textEl.textContent = `⏳ ${stageLabel} (${clock})${lastProgressLine ? ` — ${lastProgressLine}` : ''}`;
+    };
+    const setStage = (label: string): void => { stageLabel = label; lastProgressLine = ''; paintStatus(); };
+
+    let unsubscribeProgress: (() => void) | null = null;
+    try {
+      unsubscribeProgress = (window as any).api?.on?.('image-generation:log', (message: string) => {
+        const line = String(message || '').trim();
+        if (!/\[(Flow|ImageFX)\]/.test(line)) return;
+        lastProgressLine = line.replace(/^[^[]*\[(?:Flow|ImageFX)\]\s*/, '').slice(0, 70);
+        paintStatus();
+      }) || null;
+    } catch (e) {
+      console.warn('[HeadingImageSettings] 진행 로그 구독 실패:', e);
+    }
+    const progressTicker = window.setInterval(paintStatus, 1000);
+    paintStatus();
+
+    try {
+      // ── ImageFX 를 고른 경우에만: Google 계정 로그인/변경 ─────────────────
+      if (needsImageFxLogin) {
+        const loginResult = await (window as any).api.switchImageFxGoogleAccount();
+        if (!loginResult?.success) {
+          if (dotEl) dotEl.style.background = '#f59e0b';
+          if (textEl) textEl.textContent = `⚠️ Google 로그인 실패: ${loginResult?.message || '알 수 없는 오류'}`;
+          if (statusEl) statusEl.style.color = '#f59e0b';
+          if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'; iconEl.textContent = '⚠️'; }
+          return;
+        }
+        userName = loginResult.userName || 'user';
+        console.log(`[HeadingImageSettings] ✅ ImageFX Google 로그인 OK (${userName})`);
+      }
+
+      // ── Flow 로그인/연결 확인 ───────────
+      setStage(needsImageFxLogin
+        ? '2/2단계: Flow 연결 확인 중'
+        : 'Flow 로그인 확인 중 — 창에서 로그인을 끝내면 자동으로 이어집니다');
       try {
         const flowResult = (window as any).api.flowLogin
           ? await (window as any).api.flowLogin()
           : await (window as any).api.testFlowConnection();
         flowOk = Boolean(flowResult?.loggedIn ?? flowResult?.ok ?? flowResult?.success);
         flowMsg = flowResult?.message || (flowOk ? '정상' : '실패');
-        console.log(`[HeadingImageSettings] ${flowOk ? '✅' : '⚠️'} Step 2/2: Flow = ${flowMsg}`);
+        // ImageFX 단계를 건너뛴 경우 계정명이 비어 있다 — Flow 세션에서 가져온다.
+        if (!userName) {
+          userName = String(flowResult?.userInfo?.email || flowResult?.userInfo?.name || '').trim();
+        }
+        console.log(`[HeadingImageSettings] ${flowOk ? '✅' : '⚠️'} Flow = ${flowMsg}`);
       } catch (e: any) {
         flowOk = false;
         flowMsg = e?.message || '예외';
@@ -2170,8 +2232,8 @@ export function createHeadingImageModal(): void {
       if (textEl) {
         textEl.innerHTML =
           `<div style="font-size: 12px; line-height: 1.5;">` +
-          `<div>👤 ${userName}</div>` +
-          `<div>${flowIcon} Flow: ${flowOk ? '정상' : flowMsg}</div>` +
+          (userName ? `<div>👤 ${escapeHtmlForStatus(userName)}</div>` : '') +
+          `<div>${flowIcon} Flow: ${escapeHtmlForStatus(flowOk ? '정상' : flowMsg)}</div>` +
           `</div>`;
       }
       console.log('[HeadingImageSettings] 🎯 통합 시퀀스 완료:', { userName, flowOk });
@@ -2181,6 +2243,8 @@ export function createHeadingImageModal(): void {
       if (textEl) textEl.textContent = `❌ 오류: ${err?.message || '알 수 없음'}`;
       if (statusEl) statusEl.style.color = '#ef4444';
     } finally {
+      window.clearInterval(progressTicker);
+      try { unsubscribeProgress?.(); } catch { /* 이미 해제됨 */ }
       if (btn) btn.disabled = false;
     }
   });
