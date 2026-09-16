@@ -108,6 +108,14 @@ function seatBadge(item: CampaignItem) {
     const seat = item.seat;
     if (!seat) return null;
     const where = seat.openSlot != null ? `${seat.openSlot}위 비어 있음` : '빈자리 없음';
+    /*
+     * 자리가 비어 있어도 그 말을 찾는 사람이 없으면 성과가 없다. 수요를 안 잰 자리를 초록으로
+     * 칠하면 "좋은 자리"로 읽힌다 — 안 쟀다는 사실을 그대로 적고 색도 중립으로 둔다.
+     */
+    const measuredDemand = typeof item.needVolume === 'number' && item.needVolume > 0;
+    if (!measuredDemand && (seat.verdict === '열림' || seat.verdict === '반열림')) {
+        return { label: `1페이지 ${where} · 정면 ${seat.facing} · 수요 미측정`, color: '#aebccc', bg: 'rgba(174,188,204,.12)' };
+    }
     if (seat.verdict === '열림') return { label: `1페이지 자리 ${where} · 정면 ${seat.facing}`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' };
     if (seat.verdict === '반열림') return { label: `1페이지 ${where} · 정면 ${seat.facing} · 경합`, color: '#f5a623', bg: 'rgba(245,166,35,.14)' };
     if (seat.verdict === '카드답') return { label: '카드가 답하는 검색어 — 블로그 클릭 없음', color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
@@ -115,10 +123,23 @@ function seatBadge(item: CampaignItem) {
     return { label: '자리 자료 부족', color: '#aebccc', bg: 'rgba(174,188,204,.12)' };
 }
 
-/** 자리 실측 순 — 열림 → 반열림 → 나머지. 같은 판정이면 정면 글 적은 순. 안 잰 상품은 뒤. */
+/**
+ * 줄 세우기 — 수요가 먼저다.
+ *
+ * 예전에는 자리 판정만 봤다. 그래서 아무도 찾지 않는 말이 '열림'이라는 이유로 맨 위를 차지했다
+ * (사장님 2026-09-16 "제휴 황금제품키워드는 아무리봐도 이건아냐" — 실측하니 상단 12개 중 8개가
+ * 검색량 미측정이었고, 1위는 문서 12개짜리 상품명이었다).
+ * 자리는 '쓰면 보인다', 수요는 '보이면 사람이 온다'는 뜻이다. 둘 다 있어야 성과가 난다.
+ */
 function compareSeat(a: CampaignItem, b: CampaignItem) {
     const rank = (s: CampaignItem['seat']) => (!s ? 9 : s.verdict === '열림' ? 0 : s.verdict === '반열림' ? 1 : s.verdict === '자료없음' ? 2 : 3);
-    return rank(a.seat) - rank(b.seat) || ((a.seat?.facing ?? 99) - (b.seat?.facing ?? 99));
+    const demand = (item: CampaignItem) => (typeof item.needVolume === 'number' ? item.needVolume : 0);
+    /** 수요를 잰 적이 있고 월 100 이상인 것이 먼저. 안 잰 것은 자리가 좋아도 뒤로 보낸다. */
+    const demandRank = (item: CampaignItem) => (demand(item) >= 100 ? 0 : 1);
+    return demandRank(a) - demandRank(b)
+        || rank(a.seat) - rank(b.seat)
+        || ((a.seat?.facing ?? 99) - (b.seat?.facing ?? 99))
+        || demand(b) - demand(a);
 }
 
 /** 정면 실측 → 카드 배지. 쿠팡 레인과 같은 기준이라야 같은 뜻으로 읽힌다. */
