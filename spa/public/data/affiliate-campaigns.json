@@ -129,12 +129,12 @@
             }
           },
           "seat": {
-            "keyword": "호정가 찹쌀약과 세트",
-            "openSlot": null,
+            "keyword": "호정가 찹쌀약과",
+            "openSlot": 10,
             "facing": 9,
             "verdict": "잠김",
             "sampled": 10,
-            "measuredAt": "2026-09-16T08:49:21.212Z"
+            "measuredAt": "2026-09-16T17:15:52.810Z"
           }
         },
         {
@@ -4132,7 +4132,20 @@
             "verdict": "잠김",
             "sampled": 10,
             "measuredAt": "2026-09-16T08:52:22.376Z"
-          }
+          },
+          "slots": [
+            {
+              "keyword": "골전도이어폰 마이크",
+              "volume": 130,
+              "documentCount": 11238,
+              "ratio": 0.0116,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": 2,
+                "facing": 1
+              }
+            }
+          ]
         },
         {
           "name": "몽크로스 바디팬, T510, 다크그레이, 2개",
@@ -4256,7 +4269,42 @@
             "verdict": "잠김",
             "sampled": 10,
             "measuredAt": "2026-09-16T08:52:36.795Z"
-          }
+          },
+          "slots": [
+            {
+              "keyword": "유한락스 욕실청소용 900",
+              "volume": 450,
+              "documentCount": 115,
+              "ratio": 3.913,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": 2,
+                "facing": 1
+              }
+            },
+            {
+              "keyword": "욕실청소용 락스",
+              "volume": 60,
+              "documentCount": 44358,
+              "ratio": 0.0014,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": 9,
+                "facing": 1
+              }
+            },
+            {
+              "keyword": "욕실청소용 세제",
+              "volume": 50,
+              "documentCount": 190086,
+              "ratio": 0.0003,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": 1,
+                "facing": 2
+              }
+            }
+          ]
         },
         {
           "name": "웰던도니츠 팝핀 수제도넛 5가지맛, 15개입, 1세트",
@@ -4504,7 +4552,31 @@
             "verdict": "잠김",
             "sampled": 10,
             "measuredAt": "2026-09-16T08:52:55.041Z"
-          }
+          },
+          "slots": [
+            {
+              "keyword": "메추리알장조림 보관기간",
+              "volume": 210,
+              "documentCount": 2351,
+              "ratio": 0.0893,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": 2,
+                "facing": 0
+              }
+            },
+            {
+              "keyword": "메추리알장조림 냉동보관",
+              "volume": 230,
+              "documentCount": 7247,
+              "ratio": 0.0317,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": 3,
+                "facing": 0
+              }
+            }
+          ]
         },
         {
           "name": "풀무원 곡물차 하루귀리, 500ml, 24개",
@@ -5795,7 +5867,20 @@
             "verdict": "잠김",
             "sampled": 10,
             "measuredAt": "2026-09-16T08:54:52.501Z"
-          }
+          },
+          "slots": [
+            {
+              "keyword": "미니마늘다지기",
+              "volume": 530,
+              "documentCount": 99885,
+              "ratio": 0.0053,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": 4,
+                "facing": 2
+              }
+            }
+          ]
         },
         {
           "name": "청년떡방 쫀득 영양찰떡, 2kg, 1개",
@@ -5919,7 +6004,20 @@
             "verdict": "잠김",
             "sampled": 10,
             "measuredAt": "2026-09-16T08:55:03.208Z"
-          }
+          },
+          "slots": [
+            {
+              "keyword": "헛개차 효능 여자",
+              "volume": 120,
+              "documentCount": 1371,
+              "ratio": 0.0875,
+              "seat": {
+                "verdict": "열림",
+                "openSlot": 1,
+                "facing": 0
+              }
+            }
+          ]
         },
         {
           "name": "비비드키친 저당 브리또, 치폴레 125g 2개 + 바베큐 125g 2개 + 숯불매콤 125g 2개, 6개",
@@ -6302,7 +6400,20 @@
             "verdict": "잠김",
             "sampled": 10,
             "measuredAt": "2026-09-16T08:55:45.443Z"
-          }
+          },
+          "slots": [
+            {
+              "keyword": "보조배터리 버리기",
+              "volume": 720,
+              "documentCount": 365610,
+              "ratio": 0.002,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": null,
+                "facing": 0
+              }
+            }
+          ]
         },
         {
           "name": "먹거리마켓 부산 봉어묵, 2.5kg, 1개",
@@ -6364,7 +6475,20 @@
             "verdict": "잠김",
             "sampled": 10,
             "measuredAt": "2026-09-16T08:55:48.820Z"
-          }
+          },
+          "slots": [
+            {
+              "keyword": "봉어묵볶음",
+              "volume": 130,
+              "documentCount": 29550,
+              "ratio": 0.0044,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": 7,
+                "facing": 2
+              }
+            }
+          ]
         },
         {
           "name": "종근당건강 락토핏 당케어, 2g, 100포, 2개",
@@ -6426,7 +6550,31 @@
             "verdict": "잠김",
             "sampled": 10,
             "measuredAt": "2026-09-16T08:55:52.599Z"
-          }
+          },
+          "slots": [
+            {
+              "keyword": "락토핏 당케어 프로 차이",
+              "volume": 50,
+              "documentCount": 260,
+              "ratio": 0.1923,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": 2,
+                "facing": 1
+              }
+            },
+            {
+              "keyword": "락토핏 당케어 100포",
+              "volume": 240,
+              "documentCount": 1612,
+              "ratio": 0.1489,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": 3,
+                "facing": 1
+              }
+            }
+          ]
         },
         {
           "name": "부안댁 진한 참기름, 350ml, 2개",
@@ -10044,7 +10192,20 @@
             "verdict": "잠김",
             "sampled": 10,
             "measuredAt": "2026-09-16T08:52:22.376Z"
-          }
+          },
+          "slots": [
+            {
+              "keyword": "골전도이어폰 마이크",
+              "volume": 130,
+              "documentCount": 11238,
+              "ratio": 0.0116,
+              "seat": {
+                "verdict": "반열림",
+                "openSlot": 2,
+                "facing": 1
+              }
+            }
+          ]
         },
         {
           "name": "애슐리 크리스피 핫도그 4종, 80g, 8개입, 2세트",

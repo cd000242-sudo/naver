@@ -45,10 +45,15 @@ type CampaignItem = {
     /*
      * 뚫리는 자리(사장님 지적 2026-08-22 "노출 어려움으로만 도배돼 있으면
      * 노출된 걸 알려줘야 황금 제품 키워드 아니냐").
-     * 니즈 검색어가 막힌 상품에서 자동완성 롱테일을 뻗어, 검색량 >= 문서수 인
-     * 것만 싣는다. 조합해 만든 말이 아니라 자동완성이 인정한 검색어다.
+     * 니즈 검색어가 막힌 상품에서 연관어를 뻗어 **블로그탭을 실제로 받아 자리를 재고**
+     * 열림 · 반열림인 것만 싣는다(2026-09-17). 예전 기준 '검색량 ≥ 문서수' 는 실측에서 통과가
+     * 0건이었다 — 제휴 니즈는 대개 문서가 훨씬 많아 그 산술로는 아무것도 안 남는다.
+     * ratio 는 참고 수치로 남기고, 고르는 기준은 잰 자리다. seat 가 없으면 옛 방식으로 실린 줄이다.
      */
-    slots?: Array<{ keyword: string; volume: number; documentCount: number; ratio: number }> | null;
+    slots?: Array<{
+      keyword: string; volume: number; documentCount: number; ratio: number;
+      seat?: { verdict: string; openSlot: number | null; facing: number };
+    }> | null;
     /** 건당 수익(원) = 가격 × 수수료율 단순 산술. 요율이 없는 레인은 null. */
     perSaleWon?: number | null;
     /** 브랜드커넥트 상품 ID — 내 스페이스 ID와 합쳐야 링크발급 화면이 열린다. */
@@ -409,8 +414,8 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                               * 없으면 아무것도 안 적는다 — 없는 자리를 있다고 하지 않는다.
                                               */}
                                             {Array.isArray(item.slots) && item.slots.length > 0 && (
-                                                <span className="lw-product-slots" title="검색량·문서수 비율이 높은 확장어입니다. 구매 의도와 본문 경쟁은 별도 확인해야 합니다.">
-                                                    확장어 관측
+                                                <span className="lw-product-slots" title="이 말의 블로그탭을 실제로 받아 자리를 잰 결과입니다(열림 · 반열림만). 구매 의도와 본문 경쟁은 별도 확인해야 합니다.">
+                                                    자리 잰 확장어
                                                     {item.slots.slice(0, 3).map((slot) => (
                                                         <a
                                                             key={slot.keyword}
