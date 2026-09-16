@@ -40,7 +40,7 @@ const STATUS_FILTERS: ReadonlyArray<[string, string]> = [
 ];
 
 const EVIDENCE_FILTERS: ReadonlyArray<['funGap' | 'noSearch' | 'payoff2' | 'visualReady', string]> = [
-    ['funGap', '재미 근거 있음'], ['noSearch', '검색 없이 이해 통과'], ['payoff2', '정보층 2개 이상'], ['visualReady', '썸네일 준비됨'],
+    ['funGap', '눈길 끌 대목 있음'], ['noSearch', '카드만 봐도 이해되는 것'], ['payoff2', '풀 이야기 2개 이상'], ['visualReady', '썸네일 준비됨'],
 ];
 
 export default function HomefeedTab() {

@@ -5,7 +5,7 @@ import {
 } from '../../../lib/homefeedModel.mjs';
 import { CheckList, EvidenceItem, ProviderSelect, failureOf } from './HomefeedParts';
 
-/** 상세 · 스토리 — 기준어 · 새 사실 · 긴장 · 재미 근거 · 각도 · 정보층 · 검색 없이 이해 · AI 보강(근거 번호 필수). */
+/** 상세 · 스토리 — 기준어 · 새 사실 · 긴장 · 재미 근거 · 각도 · 풀 이야기 · 카드만 보고 이해되나 · AI 보강(근거 번호 필수). */
 
 const LAYER_KIND = { number: '숫자', quote: '인용', event: '사건' } as const;
 
@@ -104,9 +104,9 @@ export default function HomefeedStoryPane({ detail, onChanged }: { detail: HfSto
             </section>
 
             <section className="lw-hf-section">
-                <h4>검색 없이 이해되는가 · 한 줄로 전해지는가</h4>
+                <h4>카드만 보고 이해되나 · 한 줄로 전할 수 있나</h4>
                 <CheckList checks={story.noSearch.checks} labels={CHECK_LABEL} />
-                <p className="hint">앞의 세 항목 중 하나라도 못 넘으면 '지금 쓸 만함'이 될 수 없습니다.</p>
+                <p className="hint">홈판은 검색해서 들어오는 자리가 아니라 지나가다 보는 자리입니다. 앞의 세 가지 중 하나라도 ✕면 지금 쓰기에는 이릅니다.</p>
                 <p>한 줄 요약 {story.tellability.passed ? <b>{story.tellability.sentence}</b> : `— ${reasonLabel(story.tellability.reason)}`}</p>
             </section>
 

@@ -61,8 +61,8 @@ export default function HomefeedCard({ story, onOpen }: { story: HfStorySummary;
                 ))}
                 <span className={`lw-hf-chip${story.funGap.length > 0 ? ' good' : ''}`}>재미 근거 {story.funGap.length}</span>
                 <span className="lw-hf-chip">다른 각도 {story.alternativeAngles.length}</span>
-                <span className="lw-hf-chip">정보층 {story.payoffCount}</span>
-                <span className={`lw-hf-chip ${story.noSearchPassed ? 'good' : 'bad'}`}>검색 없이 이해 {story.noSearchPassed ? '통과' : '미통과'}</span>
+                <span className="lw-hf-chip">풀 이야기 {story.payoffCount}</span>
+                <span className={`lw-hf-chip ${story.noSearchPassed ? 'good' : 'bad'}`}>{story.noSearchPassed ? '카드만 봐도 이해됨' : '카드만으론 이해 어려움'}</span>
                 <span className="lw-hf-chip">{STRATEGY_LABEL[story.visualStrategy] ?? story.visualStrategy}</span>
                 <span className={`lw-hf-chip ${story.thumbnail.readiness === 'READY' ? 'good' : 'warn'}`}>{READINESS_LABEL[story.thumbnail.readiness] ?? story.thumbnail.readiness}</span>
                 {risks.map((risk) => <span key={risk} className="lw-hf-chip warn">{reasonLabel(risk)}</span>)}

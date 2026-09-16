@@ -81,7 +81,7 @@ const REASON_LABEL = Object.freeze({
     RUMOR_ONLY: '루머 표지뿐이다',
     FAN_ONLY: '팬만 아는 말이다',
     SINGLE_SOURCE: '매체 하나뿐이다',
-    SHALLOW_PAYOFF: '풀어 줄 정보가 얕다',
+    SHALLOW_PAYOFF: '본문에서 풀어 줄 이야기가 적다',
     NO_CARD_HOOK: '카드에 걸 말이 없다',
     WINDOW_NARROWING: '창이 좁아지는 중',
     WINDOW_CLOSED: '창이 닫혔다',
@@ -91,8 +91,8 @@ const REASON_LABEL = Object.freeze({
     NO_NEW_FACT: '30분 전과 비교해 새 사실 말이 없다',
     FEW_SAMPLES: '기사 표본이 적다',
     FEW_PRESS: '매체 수가 적다',
-    NO_FUN_GAP: '재미 근거가 없다',
-    NO_SEARCH_FAILED: '검색 없이 이해되기 어렵다',
+    NO_FUN_GAP: '눈길 끌 대목이 없다',
+    NO_SEARCH_FAILED: '카드만 보고는 무슨 얘긴지 바로 안 와닿는다',
     NOT_TELLABLE: '한 줄로 전하기 어렵다',
     CARD_NOT_READY: '첫 카드를 만들 수 없다',
     AGE_CENSORED: '기록 시작 전부터 떠 있었을 수 있다',
@@ -278,13 +278,15 @@ export function calibrationText(group) {
     return `${group.n}건 중 피드 진입 ${group.entered}건(${rate}) · ${median}${spread}`;
 }
 
-/** 검사 항목 이름 — NO-SEARCH · 첫 카드 · 썸네일 평가. */
+/** 검사 항목 이름 — 카드만 보고 이해되나 · 첫 카드 · 썸네일. 처음 쓰는 사람도 알아볼 수 있게 쉬운 말로 적는다. */
 export const CHECK_LABEL = Object.freeze({
-    situation_in_1s: '1초에 상황 이해', immediate_why: '바로 궁금한 이유', answer_wanted: '답이 궁금해짐', image_curiosity: '사진이 궁금증을 키움',
-    payoff_beyond_answer: '답 너머 풀 정보', anchor_visible: '기준어가 보임', hook_in_first_15: '첫 15자 안 걸림 말', answer_hidden: '답을 숨김',
-    image_ready: '이미지 있음', not_article_copy: '기사 제목 옮기지 않음', hero_exists: '대표 이미지', subject_in_1s: '1초에 주제 식별',
-    text_lines_ok: '문구 줄 수 · 길이', no_title_copy: '제목 복사 아님', face_object_clear: '얼굴 · 물체 안 가림', rights_noted: '권리 표기',
-    mobile_text_short: '모바일에서 읽힘',
+    situation_in_1s: '무슨 분야 이야기인지 바로 보임', immediate_why: '눈길 끄는 대목이 있음', answer_wanted: '본문에서 풀어 줄 답이 있음',
+    image_curiosity: '사진이 더 궁금하게 만듦', payoff_beyond_answer: '풀어 줄 이야기가 더 있음',
+    anchor_visible: '무엇에 대한 이야기인지 보임', hook_in_first_15: '첫 15자 안에 걸리는 말', answer_hidden: '답을 다 보여 주지 않음',
+    image_ready: '쓸 사진이 있음', not_article_copy: '기사 제목을 옮기지 않음',
+    hero_exists: '대표 사진 있음', subject_in_1s: '무엇인지 1초에 보임', text_lines_ok: '문구 줄 수 · 길이 적당',
+    no_title_copy: '제목과 같은 말 아님', face_object_clear: '얼굴 · 물건을 가리지 않음', rights_noted: '사진 권리 표시',
+    mobile_text_short: '휴대폰에서 읽힘',
 });
 
 /** 원고 검사 문제 — 앱 draft.ts 의 DRAFT_PROBLEM_LABEL 과 같은 말. */
