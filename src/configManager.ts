@@ -21,6 +21,9 @@ import {
 } from './runtime/geminiTextModelNormalization.js';
 
 export interface AppConfig {
+  // ✅ [LDB] LDB IMAGE ULTRA 확장 연결. 기본은 꺼짐 —
+  //   켠 사람만 로컬 포트(127.0.0.1)가 열린다. 쓰지 않는 사용자에게는 아무 변화가 없다.
+  ldbBridgeEnabled?: boolean;
   geminiApiKey?: string;
   geminiApiKeys?: string[]; // ✅ [2026-02-13] 다중 Gemini API 키 (429 할당량 자동 로테이션)
   geminiUseFreeQuotaBeforePaid?: boolean;

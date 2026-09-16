@@ -4883,6 +4883,8 @@ import { registerDatalabApiHandlers } from './main/ipc/datalabApiHandlers.js';
 registerDatalabApiHandlers();
 // [v2.10.259] backup:* 3개 분리 + performDataBackup export
 import { registerBackupHandlers, performDataBackup } from './main/ipc/backupHandlers.js';
+// ✅ [LDB] LDB IMAGE ULTRA 확장에서 완성 원고를 받는 로컬 브리지 (발행 없음, 목록에만 추가)
+import { startLdbBridge } from './main/ldb-bridge.js';
 registerBackupHandlers({ debugLog });
 
 // ✅ 네이버 블로그 카테고리 분석 (크롤링)
@@ -9028,6 +9030,27 @@ async function clearCacheOnVersionChange(): Promise<void> {
 
 app.whenReady().then(async () => {
   try {
+    // ✅ [LDB] 확장프로그램이 완성한 원고를 글 목록으로 받는 로컬 브리지. 발행은 하지 않는다.
+    // ✅ [LDB] 확장 연결은 선택 기능이다. 환경설정에서 켠 사용자만 로컬 포트가 열린다.
+    //   쓰지 않는 사용자의 PC에는 아무 포트도 열리지 않는다.
+    let ldbBridge: ReturnType<typeof startLdbBridge> = null;
+    const startLdbBridgeIfEnabled = async (): Promise<void> => {
+      try {
+        const config = await loadConfig();
+        if (!config.ldbBridgeEnabled || ldbBridge) return;
+        ldbBridge = startLdbBridge(app.getPath('userData'), (posts) => mainWindow?.webContents.send('ldb:import-posts', posts));
+      } catch (error) {
+        console.error('[LDB 브리지] 설정을 읽지 못해 시작하지 않았습니다:', error);
+      }
+    };
+    void startLdbBridgeIfEnabled();
+    // 환경설정에서 켜면 재시작 없이 바로 열고, 토큰을 확인할 수 있게 한다.
+    ipcMain.handle('ldb:get-bridge-token', async () => {
+      await startLdbBridgeIfEnabled();
+      if (ldbBridge) return { ok: true, token: ldbBridge.token, enabled: true };
+      const config = await loadConfig().catch(() => ({} as AppConfig));
+      return { ok: false, token: '', enabled: Boolean(config.ldbBridgeEnabled) };
+    });
     const contentQualityV3ProvenanceRegistry = new ContentQualityV3DurableProvenanceRegistry({
       userDataPath: app.getPath('userData'),
     });

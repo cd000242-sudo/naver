@@ -241,6 +241,14 @@ contextBridge.exposeInMainWorld('api', {
     // cleanup 함수 반환
     return () => { ipcRenderer.removeListener('automation:imageGenerated', handler); };
   },
+  // ✅ [LDB] 환경설정에서 확장에 넣을 연결 토큰을 읽는다.
+  getLdbBridgeToken: (): Promise<{ ok: boolean; token: string }> => ipcRenderer.invoke('ldb:get-bridge-token'),
+  // ✅ [LDB] LDB IMAGE ULTRA 확장이 보낸 완성 원고 수신 (발행 아님 — 글 목록에만 추가)
+  onLdbPosts: (callback: (posts: any[]) => void) => {
+    const handler = (_event: any, posts: any[]) => callback(posts);
+    ipcRenderer.on('ldb:import-posts', handler);
+    return () => { ipcRenderer.removeListener('ldb:import-posts', handler); };
+  },
   // ✅ [2026-02-12] 소제목별 이미지 자동 검색 (네이버 → 구글 폴백)
   searchImagesForHeadings: (payload: { headings: string[]; mainKeyword: string; sourceUrl?: string }): Promise<{ success: boolean; images: Record<string, string[]>; message?: string }> =>
     ipcRenderer.invoke('search-images-for-headings', payload),

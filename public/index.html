@@ -5835,6 +5835,31 @@
                                 </div>
                                 <!-- 병렬 레이아웃: 검색 API와 광고 API가 나란히 -->
                                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                    <!-- ✅ [LDB] 확장프로그램 연결 토큰 — 복사해서 LDB IMAGE ULTRA 연결 탭에 넣는다 -->
+                                    <div
+                                        style="flex: 1; min-width: 280px; background: rgba(99, 102, 241, 0.08); padding: 1rem; border-radius: 8px; border: 1px solid rgba(99, 102, 241, 0.3);">
+                                        <div
+                                            style="font-size: 0.85rem; font-weight: 600; color: #6366f1; margin-bottom: 0.5rem;">
+                                            🔗 LDB 확장 연결 토큰</div>
+                                        <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; cursor: pointer; font-size: 0.8rem; color: var(--text-strong);">
+                                            <input type="checkbox" id="ldb-bridge-enabled" style="width: 16px; height: 16px; cursor: pointer;">
+                                            <span>확장 연결 사용 <span style="color: var(--text-muted);">(끄면 아무 포트도 열지 않습니다)</span></span>
+                                        </label>
+                                        <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                                            <input type="text" id="ldb-bridge-token" readonly placeholder="아래 버튼을 누르면 표시됩니다"
+                                                style="width: 100%; background: var(--bg-secondary); border: 1px solid #6366f1; color: var(--text-strong); padding: 0.5rem; border-radius: 4px; font-size: 0.85rem; font-family: ui-monospace, Menlo, monospace;">
+                                            <div style="display: flex; gap: 0.4rem;">
+                                                <button type="button" id="ldb-bridge-load"
+                                                    style="flex: 1; background: #6366f1; color: #fff; border: none; padding: 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">토큰 불러오기</button>
+                                                <button type="button" id="ldb-bridge-copy"
+                                                    style="flex: 1; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid #6366f1; padding: 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; cursor: pointer;">복사</button>
+                                            </div>
+                                            <div id="ldb-bridge-status" style="font-size: 0.75rem; color: var(--text-muted);">
+                                                이 토큰을 LDB IMAGE ULTRA 확장 → 연결 탭 → 네이버 자동화 툴에 넣으면, 완성된 원고가 반자동 편집 칸으로 바로 들어옵니다.
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!-- 네이버 검색 API -->
                                     <div
                                         style="flex: 1; min-width: 280px; background: rgba(3, 199, 90, 0.08); padding: 1rem; border-radius: 8px; border: 1px solid rgba(3, 199, 90, 0.3);">

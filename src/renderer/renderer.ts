@@ -782,6 +782,93 @@ import { initClockAndCalendar, externalLinks, loadCalendarMemo, saveCalendarMemo
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  // ✅ [LDB] 확장 연결 사용 여부. 기본은 꺼짐 — 켠 사람만 로컬 포트가 열린다.
+  const ldbEnabled = document.getElementById('ldb-bridge-enabled') as HTMLInputElement | null;
+  if (ldbEnabled && !ldbEnabled.hasAttribute('data-listener-added')) {
+    ldbEnabled.setAttribute('data-listener-added', 'true');
+    const bridgeApi = () => ((window as any).electronAPI?.getConfig ? (window as any).electronAPI : (window as any).api);
+    void (async () => {
+      try { ldbEnabled.checked = Boolean((await bridgeApi()?.getConfig?.())?.ldbBridgeEnabled); } catch { /* 설정을 못 읽으면 꺼진 상태로 둔다 */ }
+    })();
+    ldbEnabled.addEventListener('change', async () => {
+      const status = document.getElementById('ldb-bridge-status');
+      try {
+        await bridgeApi()?.saveConfig?.({ ldbBridgeEnabled: ldbEnabled.checked });
+        if (status) {
+          status.textContent = ldbEnabled.checked
+            ? '켰습니다. 아래 토큰 불러오기를 누르면 연결이 시작됩니다.'
+            : '껐습니다. 앱을 다시 시작하면 포트가 완전히 닫힙니다.';
+        }
+      } catch {
+        ldbEnabled.checked = !ldbEnabled.checked;
+        if (status) status.textContent = '설정을 저장하지 못했습니다. 다시 시도해 주세요.';
+      }
+    });
+  }
+
+  // ✅ [LDB] 환경설정의 연결 토큰 — 불러오기/복사. 확장 연결 탭에 붙여넣는 값이다.
+  const ldbTokenField = document.getElementById('ldb-bridge-token') as HTMLInputElement | null;
+  const ldbTokenStatus = document.getElementById('ldb-bridge-status');
+  const ldbLoadBtn = document.getElementById('ldb-bridge-load');
+  const ldbCopyBtn = document.getElementById('ldb-bridge-copy');
+  if (ldbLoadBtn && ldbTokenField && !ldbLoadBtn.hasAttribute('data-listener-added')) {
+    ldbLoadBtn.setAttribute('data-listener-added', 'true');
+    ldbLoadBtn.addEventListener('click', async () => {
+      const bridgeApi = (window as any).electronAPI?.getLdbBridgeToken ? (window as any).electronAPI : (window as any).api;
+      try {
+        const result = await bridgeApi?.getLdbBridgeToken?.();
+        if (result?.ok && result.token) {
+          ldbTokenField.value = result.token;
+          if (ldbTokenStatus) ldbTokenStatus.textContent = '이 토큰을 확장 → 연결 탭 → 네이버 자동화 툴에 넣으세요. 앱을 껐다 켜도 같은 값입니다.';
+        } else if (ldbTokenStatus) {
+          ldbTokenStatus.textContent = result?.enabled === false
+            ? '위의 "확장 연결 사용"을 먼저 켜 주세요. 꺼져 있으면 포트를 열지 않습니다.'
+            : '연결을 시작하지 못했습니다. 앱을 다시 시작한 뒤 눌러 주세요.';
+        }
+      } catch {
+        if (ldbTokenStatus) ldbTokenStatus.textContent = '토큰을 읽지 못했습니다. 앱을 다시 시작한 뒤 눌러 주세요.';
+      }
+    });
+  }
+  if (ldbCopyBtn && ldbTokenField && !ldbCopyBtn.hasAttribute('data-listener-added')) {
+    ldbCopyBtn.setAttribute('data-listener-added', 'true');
+    ldbCopyBtn.addEventListener('click', async () => {
+      if (!ldbTokenField.value) { if (ldbTokenStatus) ldbTokenStatus.textContent = '먼저 토큰 불러오기를 눌러 주세요.'; return; }
+      try {
+        await navigator.clipboard.writeText(ldbTokenField.value);
+        if (ldbTokenStatus) ldbTokenStatus.textContent = '복사했습니다. 확장 → 연결 탭 → 네이버 자동화 툴에 붙여넣으세요.';
+      } catch {
+        ldbTokenField.select();
+        if (ldbTokenStatus) ldbTokenStatus.textContent = '자동 복사가 막혔습니다. 선택된 값을 Ctrl+C 로 복사하세요.';
+      }
+    });
+  }
+
+  // ✅ [LDB] 확장프로그램이 보낸 완성 원고를 반자동 편집의 제목·본문·해시태그 칸에 바로 채운다.
+  //    기존 fillSemiAutoFields() 를 그대로 쓴다. 발행·예약은 하지 않는다.
+  //    탭을 열지 않아도 받도록 시작 시점에 등록한다.
+  // preload 는 'api' 와 'electronAPI' 두 객체를 노출한다. 수신기가 있는 쪽을 쓴다.
+  const ldbApi = (window as any).electronAPI?.onLdbPosts ? (window as any).electronAPI : (window as any).api;
+  if (ldbApi?.onLdbPosts && !(window as any).__ldbPostsBound) {
+    (window as any).__ldbPostsBound = true;
+    ldbApi.onLdbPosts((posts: any[]) => {
+      const post = Array.isArray(posts) ? posts[0] : null;
+      if (!post) return;
+      const structured = {
+        ...(post.structuredContent || {}),
+        selectedTitle: post.title,
+        title: post.title,
+        content: post.content,
+        bodyPlain: post.content,
+        hashtags: post.hashtags || [],
+        headings: post.headings || [],
+      };
+      fillSemiAutoFields(structured);
+      appendLog(`📥 LDB 확장에서 원고를 받아 반자동 편집에 채웠습니다: "${post.title}"`);
+      // 여러 건이 오면 첫 건만 편집 칸에 올리고 나머지는 보관함으로 넘긴다.
+      if (Array.isArray(posts) && posts.length > 1) void importSelectedPosts(posts.slice(1));
+    });
+  }
   initCategorySelectionListener(); // ✅ 카테고리 모달 이벤트 리스너
   initHeadingImageButton();
   initSettingsModalFunc(); // ✅ [2026-01-25] 환경설정 모달 초기화
@@ -4685,6 +4772,7 @@ async function initUnifiedTab(): Promise<void> {
       importPosts();
     });
   }
+
 
   const statsBtn = document.getElementById('posts-stats-btn');
   if (statsBtn && !statsBtn.hasAttribute('data-listener-added')) {
