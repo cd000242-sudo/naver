@@ -89,7 +89,7 @@ export default function HomefeedStoryPane({ detail, onChanged }: { detail: HfSto
             </section>
 
             <section className="lw-hf-section">
-                <h4>풀어 줄 정보 {story.payoffLayers.length}층</h4>
+                <h4>본문에서 풀 이야기 {story.payoffLayers.length}개</h4>
                 {story.payoffLayers.length === 0 ? (
                     <p className="hint">숫자 · 인용 · 사건 말이 표본에 없습니다 — 글이 한 줄로 끝날 수 있습니다.</p>
                 ) : (

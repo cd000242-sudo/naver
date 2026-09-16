@@ -22,7 +22,7 @@ const NUMBER_FIELDS: NumberField[] = [
     { group: 'window', key: 'narrowingCloneRise', label: '좁아짐 — 30분 비율 상승폭', min: 0.01, max: 0.9, step: 0.01 },
     { group: 'window', key: 'narrowingDocVelocity', label: '좁아짐 — 분당 블로그 글 증가', min: 0.1, max: 1000, step: 0.1 },
     { group: 'window', key: 'closedCloneRatio', label: '닫힘 — 비슷한 제목 비율', min: 0.2, max: 1, step: 0.05 },
-    { group: 'story', key: 'payoffMin', label: '지금 쓸 만함 — 최소 정보층', min: 1, max: 6, step: 1 },
+    { group: 'story', key: 'payoffMin', label: '지금 쓸 만함 — 본문에서 풀 이야기 최소 개수', min: 1, max: 6, step: 1 },
     { group: 'story', key: 'minSamplesForNow', label: '지금 쓸 만함 — 최소 기사 표본', min: 1, max: 20, step: 1 },
     { group: 'story', key: 'minPressForNow', label: '지금 쓸 만함 — 최소 매체 수', min: 1, max: 10, step: 1 },
     { group: '', key: 'thumbnailTextMaxChars', label: '썸네일 문구 줄당 최대 글자', min: 7, max: 16, step: 1 },
