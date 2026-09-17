@@ -219,6 +219,10 @@ function gitPush() {
         }
         if (!pushed) {
             // 빈 릴리즈 방지 — 부분 푸시된 태그를 회수한다(latest 404 사고 재발 차단).
+            // [2026-09-17 v2.11.292 실측] 태그만 지우면 부족하다. 태그 push 가 release.yml 을 깨워 빈 릴리즈가
+            //   이미 만들어졌고, 태그를 지우자 GitHub 가 그 릴리즈를 main 끝(봇 커밋)에 다시 붙여 Latest 로
+            //   남았다 — latest.yml 404. 릴리즈 객체까지 지워야 Latest 가 이전 버전으로 돌아간다.
+            try { execFileSync('gh', ['release', 'delete', TAG, '--cleanup-tag', '--yes'], opts); } catch (cleanupErr) { /* 릴리즈 미생성이면 무시 */ }
             try { execFileSync('git', ['push', 'origin', `:refs/tags/${TAG}`], opts); } catch (cleanupErr) { /* 태그 미푸시면 무시 */ }
             throw new Error('Git push failed (3회 재시도 후)');
         }
