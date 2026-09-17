@@ -26,6 +26,7 @@ import { reconcileOpenaiImageModelSelection } from '../../image/openaiImageModel
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emitLog = emitLog;
 exports.resolveImageManagerKeys = resolveImageManagerKeys;
+exports.reparseHeadingContentsFromBody = reparseHeadingContentsFromBody;
 exports.isFatalApiError = isFatalApiError;
 exports.isRetryableImageError = isRetryableImageError;
 exports.friendlyErrorMessage = friendlyErrorMessage;
@@ -500,6 +501,61 @@ function emitLog(message, modal, type = 'info') {
     if (modal?.addLog) {
         modal.addLog(message);
     }
+}
+/**
+ * [2026-09-17 사장님 라이브 2건] 발행 직전 이 함수가 renderer 가 줄 단위로 깨끗이 잘라 둔
+ * headings[].content 를 제목 위치 정규식으로 다시 잘라 덮어썼다. 본문 줄이 "4. 제목" 이나
+ * "## 2. 제목" 이면 제목 앞의 "4. " / "## 2." 가 앞 섹션 꼬리에 남아 발행 글에 "4." 한 줄,
+ * 다음엔 "01 2." 배지가 구분선 위에 찍혔다(발행 섹션 길이가 이 슬라이스와 글자 단위로 일치).
+ *
+ * 규칙 두 가지:
+ *  1. 다음 제목 앞이 마커(#·번호·**)뿐이면 그 줄 머리에서 자른다 — 마커는 앞 섹션 것이 아니다.
+ *  2. 그 줄에 번호가 있으면 "2. 제목" 처럼 번호까지 인용구에 넣는다(publishTitle). 사장님:
+ *     "숫자도 같이 소제목 인용구에 들어가게". heading.title 은 이미지 키라 건드리지 않는다.
+ * 순수 함수 — 테스트가 직접 잡는다.
+ */
+const PUBLISH_HEADING_LINE_PREFIX_RE = /^[ \t]*(?:#{1,6}[ \t]+)?(?:(\d{1,2})[ \t]*([.)])[ \t]*)?(?:\*\*|__)?[ \t]*$/;
+function reparseHeadingContentsFromBody(headings, cleanedContent) {
+    const text = String(cleanedContent || '');
+    const found = headings.map((heading) => {
+        const title = String(heading?.title || '');
+        if (!title)
+            return null;
+        const escapedTitle = title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const match = text.match(new RegExp(`${escapedTitle}\\s*:?\\s*`, 'i'));
+        if (!match || match.index === undefined)
+            return null;
+        const lineStart = text.lastIndexOf('\n', match.index - 1) + 1;
+        const prefix = text.slice(lineStart, match.index);
+        const marker = prefix.match(PUBLISH_HEADING_LINE_PREFIX_RE);
+        return {
+            heading,
+            title,
+            start: match.index + match[0].length,
+            cut: marker ? lineStart : match.index,
+            number: marker && marker[1] ? `${marker[1]}${marker[2]}` : '',
+        };
+    });
+    for (let i = 0; i < found.length; i++) {
+        const cur = found[i];
+        if (!cur)
+            continue;
+        let endIdx = text.length;
+        for (let k = i + 1; k < found.length; k++) {
+            if (found[k]) {
+                endIdx = found[k].cut;
+                break;
+            }
+        }
+        const newContent = text.substring(cur.start, Math.max(cur.start, endIdx)).trim();
+        if (newContent.length > 10) {
+            cur.heading.content = newContent;
+        }
+        if (cur.number && !/^\d{1,2}\s*[.)]/.test(cur.title)) {
+            cur.heading.publishTitle = `${cur.number} ${cur.title}`;
+        }
+    }
+    return headings;
 }
 function resolveImageManagerKeys(imageResults, headings) {
     return imageResults.map((img, idx) => {
@@ -3661,33 +3717,8 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     structuredContent.bodyPlain = cleanedContent;
     structuredContent.content = cleanedContent;
     if (structuredContent.headings && Array.isArray(structuredContent.headings) && cleanedContent) {
-        for (let i = 0; i < structuredContent.headings.length; i++) {
-            const heading = structuredContent.headings[i];
-            if (!heading?.title)
-                continue;
-            const escapedTitle = heading.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const titlePattern = new RegExp(`${escapedTitle}\\s*:?\\s*`, 'i');
-            const titleMatch = cleanedContent.match(titlePattern);
-            if (titleMatch && titleMatch.index !== undefined) {
-                const startIdx = titleMatch.index + titleMatch[0].length;
-                let endIdx = cleanedContent.length;
-                if (i < structuredContent.headings.length - 1) {
-                    const nextTitle = structuredContent.headings[i + 1]?.title;
-                    if (nextTitle) {
-                        const nextEscaped = nextTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                        const nextPattern = new RegExp(`${nextEscaped}\\s*:?\\s*`, 'i');
-                        const nextMatch = cleanedContent.substring(startIdx).match(nextPattern);
-                        if (nextMatch && nextMatch.index !== undefined) {
-                            endIdx = startIdx + nextMatch.index;
-                        }
-                    }
-                }
-                const newContent = cleanedContent.substring(startIdx, endIdx).trim();
-                if (newContent.length > 10) {
-                    heading.content = newContent;
-                }
-            }
-        }
+        // [2026-09-17] 위치 슬라이스는 순수 함수로 — 아래 주석 참조.
+        reparseHeadingContentsFromBody(structuredContent.headings, cleanedContent);
         console.log('[executeBlogPublishing] ✅ headings[].content 재파싱 완료');
     }
     console.log('[executeBlogPublishing] rawContent 길이:', rawContent.length);
@@ -4114,4 +4145,4 @@ async function publishWithImageNarrative(formData) {
 }
 
 
-export { emitLog, resolveImageManagerKeys, isFatalApiError, isRetryableImageError, friendlyErrorMessage, executeFullAutoFlow, executeSemiAutoFlow, updateUnifiedPreview, updateUnifiedImagePreview, initFullAutoImageSourceSelection, initFullAutoExecution, collectFullAutoFormData, validateFullAutoFormData, executeFullAutoAutomation, generateFullAutoContent, displayContentInAllTabs, generateImagesForContent, generateLibraryImagesForHeadings, generateAIImagesForHeadings, executeBlogPublishing };
+export { emitLog, resolveImageManagerKeys, reparseHeadingContentsFromBody, isFatalApiError, isRetryableImageError, friendlyErrorMessage, executeFullAutoFlow, executeSemiAutoFlow, updateUnifiedPreview, updateUnifiedImagePreview, initFullAutoImageSourceSelection, initFullAutoExecution, collectFullAutoFormData, validateFullAutoFormData, executeFullAutoAutomation, generateFullAutoContent, displayContentInAllTabs, generateImagesForContent, generateLibraryImagesForHeadings, generateAIImagesForHeadings, executeBlogPublishing };

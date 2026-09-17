@@ -1386,7 +1386,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
       // ✅ 소제목은 heading.title을 그대로 사용 (bodyPlain에서 추출 로직 제거됨)
       // 이전의 "복구" 로직이 본문 내용을 소제목으로 잘못 추출하는 버그가 있었음
-      const fullHeadingTitle = heading.title;
+      // [2026-09-17] 본문 줄에 번호가 있던 소제목은 "2. 제목" 으로 친다(publishTitle, fullAutoFlow 재파싱이 채움).
+      //   heading.title 은 이미지 키라 그대로 둔다 — 사장님: "숫자도 같이 소제목 인용구에 들어가게".
+      const fullHeadingTitle = String((heading as any).publishTitle || heading.title);
 
       try {
         // 클릭 완전 제거 - 현재 커서 위치에서 바로 시작
