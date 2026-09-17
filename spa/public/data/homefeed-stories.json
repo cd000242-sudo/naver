@@ -1,0 +1,1321 @@
+{
+ "schemaVersion": "homefeed-public-v1",
+ "publishedAt": "2026-09-17T07:06:31.630Z",
+ "computedAt": "2026-09-17T07:06:31.587Z",
+ "snapshotAt": "2026-09-17T07:06:06.081Z",
+ "historySnapshots": 45,
+ "storedSnapshots": 118,
+ "sources": [
+  {
+   "name": "signal.bz",
+   "lastSuccessAt": "2026-09-17T07:06:06.081Z",
+   "lastErrorAt": null,
+   "lastError": null,
+   "consecutiveFailures": 0,
+   "lastCount": 10,
+   "skipped": false
+  },
+  {
+   "name": "nate",
+   "lastSuccessAt": "2026-09-17T07:06:06.081Z",
+   "lastErrorAt": null,
+   "lastError": null,
+   "consecutiveFailures": 0,
+   "lastCount": 10,
+   "skipped": false
+  },
+  {
+   "name": "google",
+   "lastSuccessAt": "2026-09-17T07:06:06.081Z",
+   "lastErrorAt": null,
+   "lastError": null,
+   "consecutiveFailures": 0,
+   "lastCount": 10,
+   "skipped": false
+  },
+  {
+   "name": "daum",
+   "lastSuccessAt": "2026-09-17T07:06:06.081Z",
+   "lastErrorAt": null,
+   "lastError": null,
+   "consecutiveFailures": 0,
+   "lastCount": 10,
+   "skipped": false
+  },
+  {
+   "name": "site-issue-board",
+   "lastSuccessAt": "2026-09-17T07:06:06.081Z",
+   "lastErrorAt": null,
+   "lastError": null,
+   "consecutiveFailures": 0,
+   "lastCount": 47,
+   "skipped": false
+  },
+  {
+   "name": "naver-news",
+   "lastSuccessAt": "2026-09-17T07:06:06.081Z",
+   "lastErrorAt": null,
+   "lastError": null,
+   "consecutiveFailures": 0,
+   "lastCount": 12,
+   "skipped": false
+  },
+  {
+   "name": "naver-blog",
+   "lastSuccessAt": "2026-09-17T07:06:06.081Z",
+   "lastErrorAt": null,
+   "lastError": null,
+   "consecutiveFailures": 0,
+   "lastCount": 12,
+   "skipped": false
+  },
+  {
+   "name": "og-image",
+   "lastSuccessAt": "2026-09-17T07:06:06.081Z",
+   "lastErrorAt": null,
+   "lastError": null,
+   "consecutiveFailures": 0,
+   "lastCount": 23,
+   "skipped": false
+  }
+ ],
+ "counts": {
+  "status": {
+   "WATCH": 2,
+   "NOW": 1,
+   "EARLY": 5,
+   "DROP": 4
+  },
+  "window": {
+   "OPEN": 1,
+   "OPENING": 6,
+   "NARROWING": 1,
+   "UNKNOWN": 3,
+   "CLOSED": 1
+  }
+ },
+ "stories": [
+  {
+   "id": "김승원청문보고서채택:ded9ac50",
+   "issueKey": "김승원청문보고서채택",
+   "keyword": "강신철 청문보고서 채택",
+   "category": "policy",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "OPEN",
+    "reasons": [
+     "SOURCES_OK",
+     "CLONE_LOW",
+     "ALT_ANGLE"
+    ]
+   },
+   "status": {
+    "state": "WATCH",
+    "reasons": [
+     "SHALLOW_PAYOFF",
+     "NO_SEARCH_FAILED"
+    ]
+   },
+   "anchor": {
+    "text": "강신철",
+    "category": "policy"
+   },
+   "delta": {
+    "text": "검증 실패",
+    "newTokens": [
+     "검증",
+     "실패"
+    ],
+    "evidence": {
+     "title": "김승원·강신철 청문보고서 與주도 채택…국힘 \"검증 실패\"",
+     "url": "https://www.jnilbo.com/news/articleView.html?idxno=90000066602",
+     "press": "jnilbo.com",
+     "publishedAt": "2026-09-17T06:49:00.000Z"
+    },
+    "comparedWith": "2026-09-17T06:32:55.588Z"
+   },
+   "deltaReason": null,
+   "signals": {
+    "ageMinutes": 152,
+    "firstSeenAt": "2026-09-17T04:33:58.506Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 1,
+    "sourceNames": [
+     "signal.bz"
+    ],
+    "sourceDelta30m": -1,
+    "sourceDelta60m": -2,
+    "pressCountNow": 3,
+    "rankNow": 1,
+    "rankSource": "signal.bz",
+    "rankDelta30m": 0,
+    "rankDelta60m": 0,
+    "newsTotalNow": 259,
+    "newsDelta30m": 5,
+    "blogDocNow": 219,
+    "docDelta10m": 1,
+    "docDelta30m": 3,
+    "docDelta60m": -524,
+    "docVelocity30m": 0.1,
+    "docAcceleration": 530,
+    "persistenceStreak": 19,
+    "presence60m": {
+     "seen": 7,
+     "total": 7
+    },
+    "sampleN": 3,
+    "cloneN": 1,
+    "cloneRatio": 0.333,
+    "cloneRatioPrev30m": 0.333,
+    "visualCandidateCount": 3
+   },
+   "tensions": [],
+   "funGap": [
+    {
+     "flag": "strong_quote",
+     "note": "따옴표 인용이 있다 — \"검증 실패\""
+    },
+    {
+     "flag": "socially_tellable",
+     "note": "한 줄로 남에게 전할 수 있다"
+    }
+   ],
+   "alternativeAngles": [
+    "검증 실패",
+    "김승원 여당 단독"
+   ],
+   "payoffCount": 1,
+   "noSearchPassed": false,
+   "tellable": "강신철 검증 실패",
+   "firstCard": {
+    "headline1": "강신철 검증",
+    "headline2": "실패",
+    "hook": "검증",
+    "possible": true
+   },
+   "visualStrategy": "HYBRID",
+   "thumbnail": {
+    "type": "QUOTE+SCENE",
+    "readiness": "READY",
+    "heroImageUrl": "https://cdn.jnilbo.com/news/photo/202609/90000066602_588397_4353.jpg"
+   },
+   "risks": [],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  },
+  {
+   "id": "서울시남산곤돌라패소유감:e915d295",
+   "issueKey": "서울시남산곤돌라패소유감",
+   "keyword": "남산 곤돌라 2심 패소",
+   "category": "policy",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "OPENING",
+    "reasons": [
+     "YOUNG_ISSUE",
+     "RANK_RISING"
+    ]
+   },
+   "status": {
+    "state": "NOW",
+    "reasons": [
+     "ALL_GATES_PASSED"
+    ]
+   },
+   "anchor": {
+    "text": "남산",
+    "category": "policy"
+   },
+   "delta": {
+    "text": "명동 2년 중단",
+    "newTokens": [
+     "명동",
+     "2년",
+     "중단"
+    ],
+    "evidence": {
+     "title": "‘남산·명동 곤돌라’ 소송 2심도 서울시 패소… 공사 2년 가까이 중단",
+     "url": "https://n.news.naver.com/mnews/article/022/0004159822?sid=102",
+     "press": "segye.com",
+     "publishedAt": "2026-09-17T06:12:00.000Z"
+    },
+    "comparedWith": "2026-09-17T06:32:55.588Z"
+   },
+   "deltaReason": null,
+   "signals": {
+    "ageMinutes": 33,
+    "firstSeenAt": "2026-09-17T06:32:55.588Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 3,
+    "sourceNames": [
+     "signal.bz",
+     "nate",
+     "daum"
+    ],
+    "sourceDelta30m": 0,
+    "sourceDelta60m": null,
+    "pressCountNow": 10,
+    "rankNow": 2,
+    "rankSource": "signal.bz",
+    "rankDelta30m": -2,
+    "rankDelta60m": null,
+    "newsTotalNow": 63,
+    "newsDelta30m": 52,
+    "blogDocNow": 45,
+    "docDelta10m": 39,
+    "docDelta30m": 40,
+    "docDelta60m": null,
+    "docVelocity30m": 1.33,
+    "docAcceleration": null,
+    "persistenceStreak": 5,
+    "presence60m": {
+     "seen": 5,
+     "total": 7
+    },
+    "sampleN": 10,
+    "cloneN": 2,
+    "cloneRatio": 0.2,
+    "cloneRatioPrev30m": 0.2,
+    "visualCandidateCount": 3
+   },
+   "tensions": [
+    {
+     "type": "action_reversal",
+     "matched": "취소"
+    },
+    {
+     "type": "action_reversal",
+     "matched": "중단"
+    }
+   ],
+   "funGap": [
+    {
+     "flag": "unexpected_fact",
+     "note": "예상과 다른 사실(반전 · 번복)이 제목에 있다 — \"취소\""
+    },
+    {
+     "flag": "strong_quote",
+     "note": "따옴표 인용이 있다 — \"남산 곤돌라 용도구역변경 취소해야\""
+    },
+    {
+     "flag": "socially_tellable",
+     "note": "한 줄로 남에게 전할 수 있다"
+    }
+   ],
+   "alternativeAngles": [
+    "용도구역변경 취소해야",
+    "대법원",
+    "설치 사업 제동",
+    "용도구역변경 취소",
+    "깊은 유감 대법원"
+   ],
+   "payoffCount": 8,
+   "noSearchPassed": true,
+   "tellable": "남산 명동 2년 중단",
+   "firstCard": {
+    "headline1": "남산 명동",
+    "headline2": "취소",
+    "hook": "명동",
+    "possible": true
+   },
+   "visualStrategy": "HYBRID",
+   "thumbnail": {
+    "type": "QUOTE+SCENE",
+    "readiness": "READY",
+    "heroImageUrl": "https://imgnews.pstatic.net/image/032/2026/09/17/0003471100_001_20260917160510126.jpg?type&#x3D;w800"
+   },
+   "risks": [],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  },
+  {
+   "id": "파티iea사무총장:f8f29489",
+   "issueKey": "파티iea사무총장",
+   "keyword": "파티 IEA 사무총장",
+   "category": "policy",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "OPENING",
+    "reasons": [
+     "YOUNG_ISSUE"
+    ]
+   },
+   "status": {
+    "state": "EARLY",
+    "reasons": [
+     "FEW_SAMPLES",
+     "SHALLOW_PAYOFF",
+     "NO_SEARCH_FAILED"
+    ]
+   },
+   "anchor": {
+    "text": "파티",
+    "category": "policy"
+   },
+   "delta": {
+    "text": "발표",
+    "newTokens": [
+     "발표"
+    ],
+    "evidence": {
+     "title": "글로벌 에너지 이슈 발표하는 파티 비롤 사무총장",
+     "url": "https://n.news.naver.com/mnews/article/079/0004190584?sid=102",
+     "press": "nocutnews.co.kr",
+     "publishedAt": "2026-09-17T07:02:00.000Z"
+    },
+    "comparedWith": "2026-09-17T06:46:36.075Z"
+   },
+   "deltaReason": null,
+   "signals": {
+    "ageMinutes": 19,
+    "firstSeenAt": "2026-09-17T06:46:36.075Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 2,
+    "sourceNames": [
+     "signal.bz",
+     "nate"
+    ],
+    "sourceDelta30m": null,
+    "sourceDelta60m": null,
+    "pressCountNow": 2,
+    "rankNow": 5,
+    "rankSource": "signal.bz",
+    "rankDelta30m": null,
+    "rankDelta60m": null,
+    "newsTotalNow": 4711,
+    "newsDelta30m": null,
+    "blogDocNow": 1625,
+    "docDelta10m": 0,
+    "docDelta30m": null,
+    "docDelta60m": null,
+    "docVelocity30m": null,
+    "docAcceleration": null,
+    "persistenceStreak": 3,
+    "presence60m": {
+     "seen": 3,
+     "total": 7
+    },
+    "sampleN": 2,
+    "cloneN": 1,
+    "cloneRatio": 0.5,
+    "cloneRatioPrev30m": null,
+    "visualCandidateCount": 2
+   },
+   "tensions": [],
+   "funGap": [
+    {
+     "flag": "socially_tellable",
+     "note": "한 줄로 남에게 전할 수 있다"
+    }
+   ],
+   "alternativeAngles": [
+    "공동 기자회견 김성환"
+   ],
+   "payoffCount": 1,
+   "noSearchPassed": false,
+   "tellable": "파티 발표",
+   "firstCard": {
+    "headline1": "파티 발표",
+    "headline2": null,
+    "hook": "발표",
+    "possible": true
+   },
+   "visualStrategy": "HYBRID",
+   "thumbnail": {
+    "type": "CLEAN INFO",
+    "readiness": "READY",
+    "heroImageUrl": "https://imgnews.pstatic.net/image/079/2026/09/17/0004190584_001_20260917160225570.jpg?type&#x3D;w800"
+   },
+   "risks": [],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  },
+  {
+   "id": "박은지부친중환자실입원:198408c7",
+   "issueKey": "박은지부친중환자실입원",
+   "keyword": "박은지 아버지 중환자실",
+   "category": "unknown",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "OPENING",
+    "reasons": [
+     "YOUNG_ISSUE"
+    ]
+   },
+   "status": {
+    "state": "EARLY",
+    "reasons": [
+     "NO_SEARCH_FAILED"
+    ]
+   },
+   "anchor": {
+    "text": "박은지",
+    "category": "unknown"
+   },
+   "delta": {
+    "text": "미국서 집중 치료 마쳐",
+    "newTokens": [
+     "미국서",
+     "집중",
+     "치료",
+     "마쳐"
+    ],
+    "evidence": {
+     "title": "박은지, 부친 위중해 미국서 급히 귀국…\"중환자실 집중 치료 마쳐\"",
+     "url": "https://m.entertain.naver.com/article/311/0002058027",
+     "press": "xportsnews.com",
+     "publishedAt": "2026-09-17T05:03:00.000Z"
+    },
+    "comparedWith": "2026-09-17T06:46:36.075Z"
+   },
+   "deltaReason": null,
+   "signals": {
+    "ageMinutes": 19,
+    "firstSeenAt": "2026-09-17T06:46:36.075Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 1,
+    "sourceNames": [
+     "daum"
+    ],
+    "sourceDelta30m": null,
+    "sourceDelta60m": null,
+    "pressCountNow": 9,
+    "rankNow": 2,
+    "rankSource": "daum",
+    "rankDelta30m": null,
+    "rankDelta60m": null,
+    "newsTotalNow": 12,
+    "newsDelta30m": null,
+    "blogDocNow": 15,
+    "docDelta10m": 2,
+    "docDelta30m": null,
+    "docDelta60m": null,
+    "docVelocity30m": null,
+    "docAcceleration": null,
+    "persistenceStreak": 3,
+    "presence60m": {
+     "seen": 3,
+     "total": 7
+    },
+    "sampleN": 9,
+    "cloneN": 2,
+    "cloneRatio": 0.222,
+    "cloneRatioPrev30m": null,
+    "visualCandidateCount": 3
+   },
+   "tensions": [
+    {
+     "type": "hidden_reason",
+     "matched": "이유"
+    }
+   ],
+   "funGap": [
+    {
+     "flag": "strong_quote",
+     "note": "따옴표 인용이 있다 — \"중환자실行\""
+    },
+    {
+     "flag": "socially_tellable",
+     "note": "한 줄로 남에게 전할 수 있다"
+    }
+   ],
+   "alternativeAngles": [
+    "LA댁",
+    "LA거주",
+    "집중치료 마쳐",
+    "아빠 집중치료 마치고",
+    "한국 택한 이유"
+   ],
+   "payoffCount": 8,
+   "noSearchPassed": false,
+   "tellable": "박은지 미국서 집중 치료",
+   "firstCard": {
+    "headline1": "박은지 미국서",
+    "headline2": "이유",
+    "hook": "미국서",
+    "possible": true
+   },
+   "visualStrategy": "AI-FIRST",
+   "thumbnail": {
+    "type": "QUOTE+SCENE",
+    "readiness": "READY",
+    "heroImageUrl": "https://imgnews.pstatic.net/image/213/2026/09/17/0001401550_001_20260917155309462.jpg"
+   },
+   "risks": [],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  },
+  {
+   "id": "천하람:f84c253f",
+   "issueKey": "천하람",
+   "keyword": "천하람",
+   "category": "sports",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "OPENING",
+    "reasons": [
+     "YOUNG_ISSUE"
+    ]
+   },
+   "status": {
+    "state": "EARLY",
+    "reasons": [
+     "NO_SEARCH_FAILED"
+    ]
+   },
+   "anchor": {
+    "text": "천하람",
+    "category": "sports"
+   },
+   "delta": {
+    "text": "경기남부 출마하라 반드시 순천",
+    "newTokens": [
+     "경기남부",
+     "출마하라",
+     "반드시",
+     "순천"
+    ],
+    "evidence": {
+     "title": "이기인 \"천하람, 경기남부 출마하라\"→千 \"반드시 순천에서\"",
+     "url": "https://n.news.naver.com/mnews/article/421/0009177201?sid=100",
+     "press": "news1.kr",
+     "publishedAt": "2026-09-17T06:55:00.000Z"
+    },
+    "comparedWith": "2026-09-17T06:56:06.076Z"
+   },
+   "deltaReason": null,
+   "signals": {
+    "ageMinutes": 10,
+    "firstSeenAt": "2026-09-17T06:56:06.076Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 1,
+    "sourceNames": [
+     "google"
+    ],
+    "sourceDelta30m": null,
+    "sourceDelta60m": null,
+    "pressCountNow": 4,
+    "rankNow": 4,
+    "rankSource": "google",
+    "rankDelta30m": null,
+    "rankDelta60m": null,
+    "newsTotalNow": 56008,
+    "newsDelta30m": null,
+    "blogDocNow": 14929,
+    "docDelta10m": 1,
+    "docDelta30m": null,
+    "docDelta60m": null,
+    "docVelocity30m": null,
+    "docAcceleration": null,
+    "persistenceStreak": 2,
+    "presence60m": {
+     "seen": 2,
+     "total": 7
+    },
+    "sampleN": 4,
+    "cloneN": 1,
+    "cloneRatio": 0.25,
+    "cloneRatioPrev30m": null,
+    "visualCandidateCount": 3
+   },
+   "tensions": [],
+   "funGap": [
+    {
+     "flag": "strong_quote",
+     "note": "따옴표 인용이 있다 — \"천하람, 경기남부 출마하라\""
+    },
+    {
+     "flag": "socially_tellable",
+     "note": "한 줄로 남에게 전할 수 있다"
+    }
+   ],
+   "alternativeAngles": [
+    "경기남부 출마하라 반드시",
+    "총선",
+    "개혁신당 지도부 비례"
+   ],
+   "payoffCount": 3,
+   "noSearchPassed": false,
+   "tellable": "천하람 경기남부 출마하라 반드시",
+   "firstCard": {
+    "headline1": "천하람 경기남부",
+    "headline2": "출마하라",
+    "hook": "경기남부",
+    "possible": true
+   },
+   "visualStrategy": "HYBRID",
+   "thumbnail": {
+    "type": "QUOTE+SCENE",
+    "readiness": "READY",
+    "heroImageUrl": "https://imgnews.pstatic.net/image/421/2026/09/17/0009177201_001_20260917155609642.jpg?type&#x3D;w800"
+   },
+   "risks": [],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  },
+  {
+   "id": "김성수임명동의안:71f8e797",
+   "issueKey": "김성수임명동의안",
+   "keyword": "김성수 임명동의안",
+   "category": "policy",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "OPENING",
+    "reasons": [
+     "YOUNG_ISSUE"
+    ]
+   },
+   "status": {
+    "state": "EARLY",
+    "reasons": [
+     "NO_HISTORY",
+     "NO_SEARCH_FAILED",
+     "NOT_TELLABLE",
+     "CARD_NOT_READY"
+    ]
+   },
+   "anchor": {
+    "text": "김성수",
+    "category": "policy"
+   },
+   "delta": null,
+   "deltaReason": "NO_HISTORY",
+   "signals": {
+    "ageMinutes": 0,
+    "firstSeenAt": "2026-09-17T07:06:06.081Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 1,
+    "sourceNames": [
+     "daum"
+    ],
+    "sourceDelta30m": null,
+    "sourceDelta60m": null,
+    "pressCountNow": 6,
+    "rankNow": 3,
+    "rankSource": "daum",
+    "rankDelta30m": null,
+    "rankDelta60m": null,
+    "newsTotalNow": 1308,
+    "newsDelta30m": null,
+    "blogDocNow": 951,
+    "docDelta10m": null,
+    "docDelta30m": null,
+    "docDelta60m": null,
+    "docVelocity30m": null,
+    "docAcceleration": null,
+    "persistenceStreak": 1,
+    "presence60m": {
+     "seen": 1,
+     "total": 7
+    },
+    "sampleN": 7,
+    "cloneN": 2,
+    "cloneRatio": 0.286,
+    "cloneRatioPrev30m": null,
+    "visualCandidateCount": 3
+   },
+   "tensions": [],
+   "funGap": [
+    {
+     "flag": "strong_quote",
+     "note": "따옴표 인용이 있다 — \"대법관(김성수) 임명동의안\""
+    }
+   ],
+   "alternativeAngles": [
+    "6년",
+    "후보 문턱",
+    "공석"
+   ],
+   "payoffCount": 3,
+   "noSearchPassed": false,
+   "tellable": null,
+   "firstCard": {
+    "headline1": "김성수",
+    "headline2": null,
+    "hook": null,
+    "possible": false
+   },
+   "visualStrategy": "HYBRID",
+   "thumbnail": {
+    "type": "QUOTE+SCENE",
+    "readiness": "READY",
+    "heroImageUrl": "https://imgnews.pstatic.net/image/586/2026/09/17/0000138404_001_20260917160217845.jpg?type&#x3D;w800"
+   },
+   "risks": [],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  },
+  {
+   "id": "김성수대법관임명동의안통과:71f8e797",
+   "issueKey": "김성수대법관임명동의안통과",
+   "keyword": "김성수 대법관 임명 동의안 통과",
+   "category": "policy",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "OPENING",
+    "reasons": [
+     "YOUNG_ISSUE"
+    ]
+   },
+   "status": {
+    "state": "EARLY",
+    "reasons": [
+     "NO_HISTORY",
+     "NO_FUN_GAP",
+     "NO_SEARCH_FAILED",
+     "NOT_TELLABLE",
+     "CARD_NOT_READY"
+    ]
+   },
+   "anchor": {
+    "text": "김성수",
+    "category": "policy"
+   },
+   "delta": null,
+   "deltaReason": "NO_HISTORY",
+   "signals": {
+    "ageMinutes": 0,
+    "firstSeenAt": "2026-09-17T07:06:06.081Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 1,
+    "sourceNames": [
+     "nate"
+    ],
+    "sourceDelta30m": null,
+    "sourceDelta60m": null,
+    "pressCountNow": 8,
+    "rankNow": 1,
+    "rankSource": "nate",
+    "rankDelta30m": null,
+    "rankDelta60m": null,
+    "newsTotalNow": 242,
+    "newsDelta30m": null,
+    "blogDocNow": 228,
+    "docDelta10m": null,
+    "docDelta30m": null,
+    "docDelta60m": null,
+    "docVelocity30m": null,
+    "docAcceleration": null,
+    "persistenceStreak": 1,
+    "presence60m": {
+     "seen": 1,
+     "total": 7
+    },
+    "sampleN": 9,
+    "cloneN": 5,
+    "cloneRatio": 0.556,
+    "cloneRatioPrev30m": null,
+    "visualCandidateCount": 3
+   },
+   "tensions": [],
+   "funGap": [],
+   "alternativeAngles": [
+    "후보 문턱",
+    "공석",
+    "6년"
+   ],
+   "payoffCount": 3,
+   "noSearchPassed": false,
+   "tellable": null,
+   "firstCard": {
+    "headline1": "김성수",
+    "headline2": null,
+    "hook": null,
+    "possible": false
+   },
+   "visualStrategy": "HYBRID",
+   "thumbnail": {
+    "type": "CLEAN INFO",
+    "readiness": "READY",
+    "heroImageUrl": "https://cdn.getnews.co.kr/news/photo/202609/881113_537997_429.jpg"
+   },
+   "risks": [],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  },
+  {
+   "id": "gtxa삼성역철근누락:9e457be0",
+   "issueKey": "gtxa삼성역철근누락",
+   "keyword": "GTX-A 삼성역 철근누락",
+   "category": "unknown",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "NARROWING",
+    "reasons": [
+     "CLONE_RISING"
+    ]
+   },
+   "status": {
+    "state": "WATCH",
+    "reasons": [
+     "WINDOW_NARROWING",
+     "FEW_SAMPLES",
+     "NO_SEARCH_FAILED"
+    ]
+   },
+   "anchor": {
+    "text": "GTX-A",
+    "category": "unknown"
+   },
+   "delta": {
+    "text": "반박",
+    "newTokens": [
+     "반박"
+    ],
+    "evidence": {
+     "title": "서울시 \"GTX-A 삼성역 구상권 청구, 적반하장\"…국토부에 반박",
+     "url": "https://www.pennmike.com/news/articleView.html?idxno=127988",
+     "press": "pennmike.com",
+     "publishedAt": "2026-09-17T06:46:00.000Z"
+    },
+    "comparedWith": "2026-09-17T06:32:55.588Z"
+   },
+   "deltaReason": null,
+   "signals": {
+    "ageMinutes": 63,
+    "firstSeenAt": "2026-09-17T06:02:55.570Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 1,
+    "sourceNames": [
+     "signal.bz"
+    ],
+    "sourceDelta30m": 0,
+    "sourceDelta60m": 0,
+    "pressCountNow": 2,
+    "rankNow": 3,
+    "rankSource": "signal.bz",
+    "rankDelta30m": -3,
+    "rankDelta60m": 0,
+    "newsTotalNow": 3683,
+    "newsDelta30m": 5,
+    "blogDocNow": 2024,
+    "docDelta10m": null,
+    "docDelta30m": 0,
+    "docDelta60m": 1,
+    "docVelocity30m": 0,
+    "docAcceleration": -1,
+    "persistenceStreak": 1,
+    "presence60m": {
+     "seen": 5,
+     "total": 7
+    },
+    "sampleN": 2,
+    "cloneN": 1,
+    "cloneRatio": 0.5,
+    "cloneRatioPrev30m": 0.333,
+    "visualCandidateCount": 2
+   },
+   "tensions": [],
+   "funGap": [
+    {
+     "flag": "strong_quote",
+     "note": "따옴표 인용이 있다 — \"GTX-A 삼성역 구상권 청구, 적반하장\""
+    },
+    {
+     "flag": "socially_tellable",
+     "note": "한 줄로 남에게 전할 수 있다"
+    }
+   ],
+   "alternativeAngles": [
+    "홍지선 발언"
+   ],
+   "payoffCount": 3,
+   "noSearchPassed": false,
+   "tellable": "GTX-A 반박",
+   "firstCard": {
+    "headline1": "GTX-A 반박",
+    "headline2": null,
+    "hook": "반박",
+    "possible": true
+   },
+   "visualStrategy": "AI-FIRST",
+   "thumbnail": {
+    "type": "QUOTE+SCENE",
+    "readiness": "READY",
+    "heroImageUrl": "https://cdn.pennmike.com/news/thumbnail/202609/127988_173779_3028_v150.jpg"
+   },
+   "risks": [],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  },
+  {
+   "id": "김종철경찰청장직무대행:71f8e797",
+   "issueKey": "김종철경찰청장직무대행",
+   "keyword": "김종철 직무대행 행사 참석",
+   "category": "entertainment",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "UNKNOWN",
+    "reasons": [
+     "NO_SAMPLE"
+    ]
+   },
+   "status": {
+    "state": "DROP",
+    "reasons": [
+     "NO_EVIDENCE"
+    ]
+   },
+   "anchor": {
+    "text": "김종철",
+    "category": "entertainment"
+   },
+   "delta": null,
+   "deltaReason": "NO_NEW_FACT",
+   "signals": {
+    "ageMinutes": 33,
+    "firstSeenAt": "2026-09-17T06:32:55.588Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 2,
+    "sourceNames": [
+     "signal.bz",
+     "nate"
+    ],
+    "sourceDelta30m": 0,
+    "sourceDelta60m": null,
+    "pressCountNow": 0,
+    "rankNow": 4,
+    "rankSource": "signal.bz",
+    "rankDelta30m": -3,
+    "rankDelta60m": null,
+    "newsTotalNow": 59,
+    "newsDelta30m": -1373,
+    "blogDocNow": 204,
+    "docDelta10m": null,
+    "docDelta30m": -270,
+    "docDelta60m": null,
+    "docVelocity30m": -9,
+    "docAcceleration": null,
+    "persistenceStreak": 1,
+    "presence60m": {
+     "seen": 3,
+     "total": 7
+    },
+    "sampleN": 0,
+    "cloneN": null,
+    "cloneRatio": null,
+    "cloneRatioPrev30m": 0.667,
+    "visualCandidateCount": 0
+   },
+   "tensions": [],
+   "funGap": [],
+   "alternativeAngles": [],
+   "payoffCount": 0,
+   "noSearchPassed": false,
+   "tellable": null,
+   "firstCard": {
+    "headline1": "김종철",
+    "headline2": null,
+    "hook": null,
+    "possible": false
+   },
+   "visualStrategy": "REAL-FIRST",
+   "thumbnail": {
+    "type": "NO-TEXT VISUAL",
+    "readiness": "NEEDS_REAL_IMAGE",
+    "heroImageUrl": null
+   },
+   "risks": [
+    "NO_EVIDENCE"
+   ],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  },
+  {
+   "id": "무인항공기:71f8e797",
+   "issueKey": "무인항공기",
+   "keyword": "무인 항공기",
+   "category": "travel",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "UNKNOWN",
+    "reasons": [
+     "NO_SAMPLE"
+    ]
+   },
+   "status": {
+    "state": "DROP",
+    "reasons": [
+     "NO_EVIDENCE"
+    ]
+   },
+   "anchor": {
+    "text": "무인",
+    "category": "travel"
+   },
+   "delta": null,
+   "deltaReason": "NO_HISTORY",
+   "signals": {
+    "ageMinutes": 0,
+    "firstSeenAt": "2026-09-17T07:06:06.081Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 1,
+    "sourceNames": [
+     "google"
+    ],
+    "sourceDelta30m": null,
+    "sourceDelta60m": null,
+    "pressCountNow": 0,
+    "rankNow": 5,
+    "rankSource": "google",
+    "rankDelta30m": null,
+    "rankDelta60m": null,
+    "newsTotalNow": 102122,
+    "newsDelta30m": null,
+    "blogDocNow": 599171,
+    "docDelta10m": null,
+    "docDelta30m": null,
+    "docDelta60m": null,
+    "docVelocity30m": null,
+    "docAcceleration": null,
+    "persistenceStreak": 1,
+    "presence60m": {
+     "seen": 1,
+     "total": 7
+    },
+    "sampleN": 0,
+    "cloneN": null,
+    "cloneRatio": null,
+    "cloneRatioPrev30m": null,
+    "visualCandidateCount": 0
+   },
+   "tensions": [],
+   "funGap": [],
+   "alternativeAngles": [],
+   "payoffCount": 0,
+   "noSearchPassed": false,
+   "tellable": null,
+   "firstCard": {
+    "headline1": "무인",
+    "headline2": null,
+    "hook": null,
+    "possible": false
+   },
+   "visualStrategy": "REAL-FIRST",
+   "thumbnail": {
+    "type": "NO-TEXT VISUAL",
+    "readiness": "NEEDS_REAL_IMAGE",
+    "heroImageUrl": null
+   },
+   "risks": [
+    "NO_EVIDENCE"
+   ],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  },
+  {
+   "id": "인턴:71f8e797",
+   "issueKey": "인턴",
+   "keyword": "인턴",
+   "category": "unknown",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "UNKNOWN",
+    "reasons": [
+     "NO_SAMPLE"
+    ]
+   },
+   "status": {
+    "state": "DROP",
+    "reasons": [
+     "NO_EVIDENCE"
+    ]
+   },
+   "anchor": {
+    "text": "인턴",
+    "category": "unknown"
+   },
+   "delta": null,
+   "deltaReason": "NO_HISTORY",
+   "signals": {
+    "ageMinutes": 1525,
+    "firstSeenAt": "2026-09-16T05:40:45.059Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 1,
+    "sourceNames": [
+     "daum"
+    ],
+    "sourceDelta30m": null,
+    "sourceDelta60m": null,
+    "pressCountNow": 0,
+    "rankNow": 4,
+    "rankSource": "daum",
+    "rankDelta30m": null,
+    "rankDelta60m": null,
+    "newsTotalNow": 1415802,
+    "newsDelta30m": null,
+    "blogDocNow": 2036811,
+    "docDelta10m": null,
+    "docDelta30m": null,
+    "docDelta60m": null,
+    "docVelocity30m": null,
+    "docAcceleration": null,
+    "persistenceStreak": 1,
+    "presence60m": {
+     "seen": 1,
+     "total": 7
+    },
+    "sampleN": 0,
+    "cloneN": null,
+    "cloneRatio": null,
+    "cloneRatioPrev30m": null,
+    "visualCandidateCount": 0
+   },
+   "tensions": [],
+   "funGap": [],
+   "alternativeAngles": [],
+   "payoffCount": 0,
+   "noSearchPassed": false,
+   "tellable": null,
+   "firstCard": {
+    "headline1": "인턴",
+    "headline2": null,
+    "hook": null,
+    "possible": false
+   },
+   "visualStrategy": "AI-FIRST",
+   "thumbnail": {
+    "type": "NO-TEXT VISUAL",
+    "readiness": "NEEDS_AI",
+    "heroImageUrl": null
+   },
+   "risks": [
+    "NO_EVIDENCE"
+   ],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  },
+  {
+   "id": "비행기:71f8e797",
+   "issueKey": "비행기",
+   "keyword": "비행기",
+   "category": "unknown",
+   "capturedAt": "2026-09-17T07:06:06.081Z",
+   "window": {
+    "state": "CLOSED",
+    "reasons": [
+     "CLONE_SATURATED",
+     "NO_ALT_ANGLE"
+    ]
+   },
+   "status": {
+    "state": "DROP",
+    "reasons": [
+     "SINGLE_SOURCE",
+     "SHALLOW_PAYOFF"
+    ]
+   },
+   "anchor": {
+    "text": "비행기",
+    "category": "unknown"
+   },
+   "delta": null,
+   "deltaReason": "NO_NEW_FACT",
+   "signals": {
+    "ageMinutes": 19,
+    "firstSeenAt": "2026-09-17T06:46:36.075Z",
+    "firstSeenCensored": false,
+    "sourceCountNow": 1,
+    "sourceNames": [
+     "google"
+    ],
+    "sourceDelta30m": null,
+    "sourceDelta60m": null,
+    "pressCountNow": 1,
+    "rankNow": 3,
+    "rankSource": "google",
+    "rankDelta30m": null,
+    "rankDelta60m": null,
+    "newsTotalNow": 969449,
+    "newsDelta30m": null,
+    "blogDocNow": 11730316,
+    "docDelta10m": 108,
+    "docDelta30m": null,
+    "docDelta60m": null,
+    "docVelocity30m": null,
+    "docAcceleration": null,
+    "persistenceStreak": 3,
+    "presence60m": {
+     "seen": 3,
+     "total": 7
+    },
+    "sampleN": 1,
+    "cloneN": 1,
+    "cloneRatio": 1,
+    "cloneRatioPrev30m": null,
+    "visualCandidateCount": 1
+   },
+   "tensions": [],
+   "funGap": [],
+   "alternativeAngles": [],
+   "payoffCount": 1,
+   "noSearchPassed": false,
+   "tellable": null,
+   "firstCard": {
+    "headline1": "비행기",
+    "headline2": null,
+    "hook": null,
+    "possible": false
+   },
+   "visualStrategy": "AI-FIRST",
+   "thumbnail": {
+    "type": "NO-TEXT VISUAL",
+    "readiness": "READY",
+    "heroImageUrl": "https://imgnews.pstatic.net/image/144/2026/09/17/0001138839_001_20260917152316142.jpg"
+   },
+   "risks": [
+    "SINGLE_SOURCE"
+   ],
+   "progress": {
+    "titles": false,
+    "selected": false,
+    "drafts": 0,
+    "images": 0
+   }
+  }
+ ]
+}
