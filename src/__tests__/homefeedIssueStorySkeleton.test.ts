@@ -22,7 +22,10 @@ describe('issue-story 골격 파일', () => {
     expect(prompt).toContain('정체 숨김형');
     expect(prompt).toContain('추측 질문형');
     expect(prompt).toContain('뉴스 리드형');
-    expect(prompt).toContain('타임라인 서사');
+    // [2026-09-17 실측] 같은 사건에서 시간순 정리는 18~20위, 모순 한 지점을 파고든 글이 1위였다.
+    // 타임라인은 '각도를 못 고른 경우의 기본값'으로 내려가고 [각도] 선택이 앞에 왔다.
+    expect(prompt).toContain('[각도');
+    expect(prompt).toContain('기본 전개 순서');
     expect(prompt).toContain('소제목은 0~3개');
     expect(prompt).toContain('문단은 2~3문장'); // [2026-09-02 사장님 결정] 1~2 → 2~3(모바일 2~3줄)
   });

@@ -241,7 +241,12 @@ describe('Content Quality V3 evidence attestation', () => {
         //   (homefeed/base.prompt 1개만 바뀌었음을 재계산으로 확인)
         // [2026-09-15] 요약표 스키마를 끌 수 있게 하면서 contentJsonPromptFormat.ts 가 바뀌어 재계산.
         //   (베이스라인 110개 중 그 1개만 바뀌었음을 legacy-baseline-pin.mjs dry-run 으로 확인)
-        'baf4ae3bdab18eacb6e08cbad9ecc9f9a17dd71a93431f71b6f924e774ce87ff',
+        // [2026-09-17] 홈판 실측 반영으로 homefeed/base.prompt 1개만 바뀜어 재계산.
+        //   (답 위치 분기 8~20%/10~36% · 제목 장치 5종 · [ANGLE] 카테고리 기회지수)
+        //   legacy-baseline-pin.mjs dry-run 으로 110개 중 1개만 변경됨을 확인
+        // [2026-09-17 2차] 홈판 제목 폭 기준 28~42 → 하한 33 · 상한 조건부로 재계산.
+        //   (base.prompt · title/homefeed 프롬프트 숫자가 함께 바뀜었다)
+        '308fc2790d26e197f6de0c354dc6b9dd42c230ebd1cd42e0c3be53341223a2f5',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

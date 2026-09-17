@@ -5826,6 +5826,14 @@ ${product.title}에 대한 상세 정보입니다. 이 제품은 ${product.categ
       '.article_text', // 한겨레
       '.article-content-body', // 매일경제
       '.article-body-wrapper',
+      // [2026-09-17] 스타뉴스·머니투데이 계열은 id 가 하이픈이다(#article-body).
+      //   위 목록에 .article-body(클래스)와 #articleBody(카멜)만 있어 매칭에 실패했고,
+      //   아래 범용 'article' 로 흘러 관련기사·인기뉴스·기자정보 위젯까지 본문으로 들어왔다.
+      //   실측(스타뉴스 기사 1건): #article-body 1,012자 vs article 1,835자 — 823자가 잡음.
+      //   그 잡음이 생성문에 "추천 기사 제목", "1위 리센느, 2위 방탄소년단" 같은 조각으로 남았다.
+      '#article-body',
+      '.article_body', // 스포츠조선·일부 연예매체
+      '#news-contents',
       'main article',
       'article',
       '[role="article"]',

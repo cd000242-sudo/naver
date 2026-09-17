@@ -790,6 +790,14 @@ document.addEventListener('DOMContentLoaded', () => {
     void (async () => {
       try { ldbEnabled.checked = Boolean((await bridgeApi()?.getConfig?.())?.ldbBridgeEnabled); } catch { /* 설정을 못 읽으면 꺼진 상태로 둔다 */ }
     })();
+    /*
+     * 이 화면이 뜰 때는 계정별 설정이 아직 활성화되지 않았을 수 있다. 그 순간의 getConfig()
+     * 는 기본값을 주므로 켜 둔 사람도 체크가 풀린 채로 보였다. 로그인이 끝난 뒤 본체가
+     * 알려 주는 값으로 다시 맞춘다.
+     */
+    bridgeApi()?.onLdbBridgeState?.((state: { enabled: boolean }) => {
+      ldbEnabled.checked = Boolean(state?.enabled);
+    });
     ldbEnabled.addEventListener('change', async () => {
       const status = document.getElementById('ldb-bridge-status');
       try {

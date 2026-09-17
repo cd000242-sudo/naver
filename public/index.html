@@ -1829,6 +1829,26 @@
                         <input type="text" id="unified-generated-hashtags" class="full-width" placeholder="#해시태그">
                     </div>
 
+                    <!-- 🎨 이미지 옵션
+                         [2026-09-17] 배선(formAndAutomation.ts:82 · fullAutoFlow.ts:3147)은 살아 있는데
+                         입력창이 101fa541 에서 사라져 있었다. 없으면 `?? true` 로 떨어져 항상 켜진 상태였고
+                         끌 방법이 없었다. CTA(이전글 연결)와 무관한 항목이라 그 블록 밖에 둔다. -->
+                    <div class="field"
+                        style="background: rgba(59, 130, 246, 0.06); padding: 1rem; border-radius: var(--radius-md); border: 1px solid rgba(59, 130, 246, 0.2); margin-top: 1rem;">
+                        <label
+                            style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none;">
+                            <input type="checkbox" id="unified-use-ai-image" checked
+                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #3b82f6;">
+                            <div>
+                                <div id="unified-use-ai-image-label"
+                                    style="font-weight: 600; color: var(--text-strong);">🎨 AI 이미지 활용</div>
+                                <div id="unified-use-ai-image-hint"
+                                    style="font-size: 0.75rem; color: var(--text-muted);">해제하면 AI 이미지를 만들지 않고 수집한
+                                    사진만 사용합니다.</div>
+                            </div>
+                        </label>
+                    </div>
+
                     <!-- ✅ CTA 버튼 설정 (통합) -->
                     <div class="field"
                         style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.1)); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid rgba(59, 130, 246, 0.3); margin-top: 1rem;">
@@ -8168,6 +8188,24 @@
                                     설정값 존중 · 10분+ 안전(jitter만) · 7~10분 경량 보호 · 7분 미만 풀 방어 · 일일 20개 상한
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- ✅ AI 이미지 활용 체크박스
+                             [2026-09-17] continuousPublishing.ts:1983·4222 가 읽고 있는데 입력창이 없어
+                             항상 켜진 값(?? true)으로만 저장되고 있었다. -->
+                        <div
+                            style="margin-bottom: 1rem; padding: 0.75rem; background: rgba(59, 130, 246, 0.06); border-radius: 10px; border: 1px solid rgba(59, 130, 246, 0.2);">
+                            <label
+                                style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none;">
+                                <input type="checkbox" id="continuous-modal-use-ai-image" checked
+                                    style="width: 20px; height: 20px; cursor: pointer; accent-color: #3b82f6;">
+                                <div>
+                                    <div style="font-weight: 700; color: var(--text-strong); font-size: 0.9rem;">
+                                        🎨 AI 이미지 활용</div>
+                                    <div style="font-size: 0.75rem; color: var(--text-muted);">해제하면 AI 이미지를 만들지 않고
+                                        수집한 사진만 사용합니다</div>
+                                </div>
+                            </label>
                         </div>
 
                         <!-- ✅ 썸네일 텍스트 포함 체크박스 (NEW) -->

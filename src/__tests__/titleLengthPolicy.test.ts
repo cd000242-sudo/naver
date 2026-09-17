@@ -24,7 +24,9 @@ import {
  */
 describe('제목 길이 단일 출처', () => {
   it('모드별 범위가 기존 값과 같다', () => {
-    expect(resolveTitleLengthRange('homefeed')).toEqual({ min: 28, max: 42 });
+    // [2026-09-17 실측] 홈판 하한 28 → 33. 28~33 은 lift 0.97 로 이득 없는 무풍지대였고,
+    //   생성물이 하한에 붙어 계속 30 근처로 나왔다. 상한 42 는 후킹 장치 3개 미만일 때만 건다.
+    expect(resolveTitleLengthRange('homefeed')).toEqual({ min: 33, max: 42 });
     expect(resolveTitleLengthRange('seo')).toEqual({ min: 25, max: 40 });
     expect(resolveTitleLengthRange('affiliate')).toEqual({ min: 28, max: 42 });
     expect(resolveTitleLengthRange('business')).toEqual({ min: 28, max: 42 });
@@ -45,7 +47,8 @@ describe('제목 길이 단일 출처', () => {
   });
 
   it('범위 안이면 통과', () => {
-    expect(judgeTitleLength('전현무 카자흐스탄 즉흥 여행 조작설, 무편집 영상이 뒤집었다', 'homefeed').status)
+    // 폭 34.0 — 하한 상향(28→33) 뒤의 계약 안 시료.
+    expect(judgeTitleLength('전현무 카자흐스탄 즉흥 여행 조작설, 무편집 영상이 통째로 뒤집은 그날', 'homefeed').status)
       .toBe('ok');
   });
 
@@ -59,7 +62,7 @@ describe('제목 길이 단일 출처', () => {
   });
 
   it('스키마에 넣을 문구를 만든다', () => {
-    expect(describeTitleLength('homefeed')).toContain('28');
+    expect(describeTitleLength('homefeed')).toContain('33');
     expect(describeTitleLength('homefeed')).toContain('42');
   });
 });

@@ -257,6 +257,34 @@ export interface ImageDiversityHints {
     personAction: string;
 }
 
+/**
+ * 소제목 텍스트로 안정적인 다양성 시드를 만든다.
+ *
+ * [2026-09-17 실측 사고] 발행된 글의 소제목 이미지 6장이 전부 같은 구도였다 —
+ * 위에서 내려다본 부감에 같은 노란 햇빛. 로그를 보면 원인이 분명했다.
+ *
+ *   [OpenAI-Image] 🎲 다양성[0]: 📐bird-eye view | 💡warm golden hour sunlight   ← 8장 전부
+ *   (다른 생성에서는 다양성[4] [5] [6] 으로 제대로 돌고 있었다)
+ *
+ * 축 배열의 0번이 각각 'bird-eye view' 와 'warm golden hour sunlight' 인데,
+ * 호출자가 이미지를 **한 장씩** 넘기면 루프 인덱스가 언제나 0 이라 0번만 나온다.
+ * 이 실패 모드는 코드 주석에 이미 적혀 있었고 diversityIndex 라는 해결책도 있었지만,
+ * 그 값을 넘기지 않는 호출 경로가 남아 있어 같은 증상이 되살아났다.
+ *
+ * 호출자를 하나씩 고치는 대신 생성기 쪽에서 막는다 — 인덱스가 없으면 소제목 글자로
+ * 시드를 만든다. 해시라서 같은 소제목은 늘 같은 구도가 나오고(재생성해도 흔들리지 않는다),
+ * 소제목이 다르면 구도도 갈린다.
+ */
+export function resolveDiversitySeedFromText(text: string | undefined): number {
+    const source = String(text || '').trim();
+    if (!source) return 0;
+    let hash = 0;
+    for (let i = 0; i < source.length; i += 1) {
+        hash = (hash * 31 + source.charCodeAt(i)) | 0;
+    }
+    return Math.abs(hash);
+}
+
 export function getImageDiversityHints(index: number): ImageDiversityHints {
     return {
         angle: ANGLES[index % ANGLES.length],

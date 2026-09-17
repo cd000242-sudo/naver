@@ -12,7 +12,7 @@ import { trackApiUsage } from '../apiUsageTracker.js';
 import { ImageRequestItem, GeneratedImage } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
-import { STYLE_PROMPT_MAP, isNoPersonCategory, getPresetStyleMapping, getStyleNegativePrompt, getImageDiversityHints } from './imageStyles.js';
+import { STYLE_PROMPT_MAP, isNoPersonCategory, getPresetStyleMapping, getStyleNegativePrompt, getImageDiversityHints, resolveDiversitySeedFromText } from './imageStyles.js';
 import { addThumbnailTextOverlay } from './textOverlay.js';
 import { AutomationService } from '../main/services/AutomationService.js';
 import { buildSafeEnglishProviderImagePrompt, isContextualImagePrompt } from './contextualImagePrompt.js';
@@ -310,7 +310,10 @@ export async function generateWithLeonardoAI(
             // 스타일별 프롬프트 분기
             // ✅ [2026-03-03 FIX] Leonardo에도 스타일 프롬프트(STYLE_PROMPT_MAP) 적용 + 한국인 인물 지시
             // [2026-09-06 R-A] Callers send one item per call, so `i` alone is always 0.
-            const dh = getImageDiversityHints(item.diversityIndex ?? i);
+            // [2026-09-17] openai 와 같은 이유 — 한 장씩 넘어오면 i 가 늘 0 이라 0번 힌트만 나온다.
+            const dh = getImageDiversityHints(
+                item.diversityIndex ?? (i > 0 ? i : resolveDiversitySeedFromText(item.heading)),
+            );
             console.log(`[LeonardoAI] 🎲 다양성[${i}]: 📐${dh.angle.split(',')[0]} | 💡${dh.lighting.split(',')[0]} | 🎨${dh.color.split(',')[0]}`);
 
             // ✅ 스타일 프롬프트 적용 (stickman/roundy/2d/disney 등)

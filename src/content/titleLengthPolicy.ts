@@ -48,6 +48,8 @@ export interface TitleLengthVerdict {
  *
  * 상한 숫자는 그대로 둔다 — 순한글 제목은 예전과 똑같이 걸리고, 섞인 제목에만 여유가 생긴다.
  */
+import { countHomefeedTitleHookSignals, STRONG_HOOK_SIGNALS } from './homefeedTitleHookFloor.js';
+
 const NARROW_WIDTH = 0.5;
 
 /** 한글·한자·가나는 한 칸, 나머지(공백·숫자·영문·기호)는 반 칸. */
@@ -74,7 +76,22 @@ const FALLBACK: TitleLengthRange = { min: 22, max: 45 };
 
 const RANGES: Record<string, TitleLengthRange> = {
   // contentTitleEvaluator: >42 → -60 (homefeed) / 28~42 → 이상적 길이
-  homefeed: { min: 28, max: 42 },
+  /*
+   * [2026-09-17 실측 재조정] 28~42 → 33~48.
+   *
+   * 홈판 1,299편 vs 같은 블로그의 미진입 794편, 폭 구간별 등장률 비(lift):
+   *   28 미만 0.69 · 28~33 0.97 · 33~38 1.20 · 38~42 1.15 · 42~48 1.05 · 48 초과 1.57
+   * 평균 순위는 전 구간 8.9~10.4 로 평평했다 — 길어서 잘리는 것이 순위를 깎는다는
+   * 근거가 없다. 반면 28~33 은 0.97 로 이득이 없는 무풍지대였고, 하한이 28 이라
+   * 생성물이 계속 30 근처에 붙었다(실측 3회 연속 30.0~30.5).
+   * 하한을 이득이 시작되는 33 으로 올린다.
+   *
+   * 상한 42 는 그대로 둔다. 42 초과가 실측상 불리하지 않은 것은 맞지만, 사장님이 직접
+   * 지적했던 53자 제목(폭 46.5, 키워드 나열형)이 상한을 48 로 열면 되살아난다.
+   * 길이 자체보다 그 제목의 나열·중복이 문제였고, 그 판정은 다른 검사기가 한다.
+   * 근거가 갈리는 구간을 여는 대신, 이득이 확실한 33~42 로 좁힌다.
+   */
+  homefeed: { min: 33, max: 42 },
   // title/seo/base.prompt: "반드시 25~40자" (평가기의 22~40 이상적 구간을 포함한다)
   seo: { min: 25, max: 40 },
   // title/affiliate/base.prompt: "반드시 28~42자. 42자를 넘기면 0점"
@@ -106,12 +123,28 @@ export function judgeTitleLength(
   return { status: 'ok', length, width, range };
 }
 
-/** True when the title is not too long. Under-length is a weaker problem than truncation. */
+/**
+ * True when the title's length is acceptable for the mode.
+ *
+ * [2026-09-17] 홈판에서는 짧은 쪽도 탈락시킨다.
+ * 예전 주석은 "짧은 것은 잘리는 것보다 약한 문제"였는데, 실측은 반대였다 —
+ * 홈판 1,299편 vs 같은 블로그의 미진입 794편에서 폭 28 미만은 0.69배로 불리했고
+ * 42 초과는 1.26배로 오히려 유리했다. 피드에서는 장치를 담을 자리가 없는 제목이
+ * 잘리는 제목보다 나쁘다. 검색으로 싸우는 모드는 근거가 없으므로 기존대로 둔다.
+ */
 export function isWithinTitleLength(
   title: string | undefined,
   mode: TitleLengthMode | undefined,
 ): boolean {
-  return judgeTitleLength(title, mode).status !== 'over';
+  const { status } = judgeTitleLength(title, mode);
+  if (mode === 'homefeed') {
+    // 짧은 쪽은 무조건 탈락(0.69배). 긴 쪽은 후킹이 강하면 통과시킨다 —
+    // 후보 재선정이 여기서 긴 후킹 제목을 짧은 것으로 되돌리면 상한 완화가 무의미해진다.
+    if (status === 'under') return false;
+    if (status === 'over') return countHomefeedTitleHookSignals(String(title || '')) >= STRONG_HOOK_SIGNALS;
+    return true;
+  }
+  return status !== 'over';
 }
 
 /** Phrase for the JSON schema field, where the model actually reads it. */

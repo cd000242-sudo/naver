@@ -10,7 +10,7 @@ import { trackApiUsage, estimateImageCostUSD } from '../apiUsageTracker.js';
 import { logImageGeneration } from '../imageUsageLog.js';
 import { ImageRequestItem, GeneratedImage } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
-import { STYLE_PROMPT_MAP, isNoPersonCategory, getImageDiversityHints } from './imageStyles.js';
+import { STYLE_PROMPT_MAP, isNoPersonCategory, getImageDiversityHints, resolveDiversitySeedFromText } from './imageStyles.js';
 import { addThumbnailTextOverlay } from './textOverlay.js';
 import { AutomationService } from '../main/services/AutomationService.js';
 import {
@@ -175,9 +175,16 @@ export async function generateWithOpenAIImage(
              * 0번 힌트(bird-eye view)만 나온다 — 전부 부감 전신샷이 되는 원인이었다.
              * 소제목 순번이 실려 오면 그것을 쓰고, 없으면 기존대로 루프 인덱스를 쓴다.
              */
+            /*
+             * [2026-09-17] i 폴백만으로는 부족했다. 호출자가 한 장씩 넘기면 i 가 늘 0 이라
+             * 0번 힌트(bird-eye view + warm golden hour)만 나오고, 실제로 발행 글의
+             * 소제목 이미지 6장이 전부 같은 부감 구도로 나갔다.
+             * 인덱스가 없으면 소제목 글자로 시드를 만든다 — 결정적이라 재생성해도 같은
+             * 구도가 나오고, 소제목이 다르면 구도가 갈린다.
+             */
             const diversitySeed = Number.isFinite(item.diversityIndex as number)
                 ? Math.abs(Math.trunc(item.diversityIndex as number))
-                : i;
+                : (i > 0 ? i : resolveDiversitySeedFromText(item.heading));
             const dh = getImageDiversityHints(diversitySeed);
             console.log(`[OpenAI-Image] 🎲 다양성[${diversitySeed}]: 📐${dh.angle.split(',')[0]} | 🖼️${dh.framing.split(',')[0]} | 💡${dh.lighting.split(',')[0]} | 🔍${dh.focus.split(',')[0]} | 🎨${dh.color.split(',')[0]}`);
 

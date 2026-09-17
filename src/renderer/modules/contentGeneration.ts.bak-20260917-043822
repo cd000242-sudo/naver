@@ -243,24 +243,6 @@ export function clearExtraRequestAfterGeneration(): void {
   if (el && el.value) el.value = '';
 }
 
-/**
- * 새 글 생성을 시작할 때 반자동편집 필드를 비운다.
- *
- * [2026-09-17] 미리보기에는 새 글이 뜨는데 반자동편집 칸에는 이전 글이 그대로
- * 남아 있었다. 생성 시작 블록이 이미지·postId·전역 상태는 비우면서 화면 입력칸만
- * 빠뜨렸고, fillSemiAutoFields 는 생성이 끝나야 값을 덮는다. 그래서 생성 중이거나
- * 실패하면 이전 글이 계속 보이고, 그걸 새 글로 알고 발행할 위험이 있었다.
- * (풀오토 경로에는 같은 초기화가 이미 들어 있다 — fullAutoFlow 의 prevTitleInput)
- */
-export function clearSemiAutoFieldsBeforeGeneration(): void {
-  for (const id of ['unified-generated-title', 'unified-generated-content',
-                    'unified-generated-hashtags']) {
-    const el = document.getElementById(id) as
-      HTMLInputElement | HTMLTextAreaElement | null;
-    if (el) el.value = '';
-  }
-}
-
 function cleanKeywordFromTitle(keyword: string, title: string): string {
   let cleaned = title.trim();
 
@@ -615,7 +597,6 @@ export async function generateContentFromUrl(
   articleTypeOverride?: string
 ): Promise<void> {
   // ✅ 기존 콘텐츠 및 이미지 완전 초기화 (이전 글 데이터 충돌 방지)
-  clearSemiAutoFieldsBeforeGeneration(); // 화면 입력칸도 함께 비운다 (이전 글 잔존 방지)
   appendLog('🔄 기존 콘텐츠를 초기화하고 새로운 콘텐츠를 생성합니다...');
   currentStructuredContent = null;
   (window as any).currentStructuredContent = null;
@@ -1068,7 +1049,6 @@ export async function generateContentFromKeywords(
   articleTypeOverride?: string
 ): Promise<void> {
   // ✅ 기존 콘텐츠 및 이미지 완전 초기화 (이전 글 데이터 충돌 방지)
-  clearSemiAutoFieldsBeforeGeneration(); // 화면 입력칸도 함께 비운다 (이전 글 잔존 방지)
   appendLog('🔄 기존 콘텐츠를 초기화하고 새로운 콘텐츠를 생성합니다...');
   currentStructuredContent = null;
   (window as any).currentStructuredContent = null;
@@ -1683,20 +1663,7 @@ export function fillSemiAutoFields(
   structuredContent: any,
   options: FillSemiAutoFieldsOptions = {},
 ): void {
-  // [2026-09-17] 미리보기는 차는데 반자동편집 필드만 비는 사고.
-  //   updateUnifiedPreview 바로 다음이 이 함수인데, 첫 줄의 JSON.stringify 가
-  //   순환 참조를 만나면 TypeError 를 던지고 필드 채움이 통째로 날아간다.
-  //   (structuredContent 는 이미지·소제목·표가 붙으며 커지는 객체다)
-  //   로그 100자 찍자고 전체 직렬화할 이유가 없으므로 필요한 필드만 찍는다.
-  try {
-    console.log('[fillSemiAutoFields] Called with:', {
-      title: String(structuredContent?.selectedTitle || structuredContent?.title || '').slice(0, 60),
-      bodyChars: String(structuredContent?.bodyPlain || structuredContent?.content || '').length,
-      headings: Array.isArray(structuredContent?.headings) ? structuredContent.headings.length : 0,
-    });
-  } catch {
-    /* 로그는 실패해도 본 작업을 막지 않는다 */
-  }
+  console.log('[fillSemiAutoFields] Called with:', JSON.stringify(structuredContent).substring(0, 100) + '...');
 
   // 반자동 모드 섹션 표시
   const semiAutoSection = document.getElementById('unified-semi-auto-section');

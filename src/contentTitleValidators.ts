@@ -9,6 +9,8 @@
 import type { ContentSource } from './contentGenerator';
 import { classifyAffiliateEvidence } from './content/affiliateAuthenticity';
 import { SITUATION_CUES, VALUE_CUES } from './content/evaluators/homefeedEval';
+import { measureTitleWidth, resolveTitleLengthRange } from './content/titleLengthPolicy.js';
+import { countHomefeedTitleHookSignals, STRONG_HOOK_SIGNALS } from './content/homefeedTitleHookFloor.js';
 
 /**
  * SEO 모드 제목의 치명적 이슈 감지.
@@ -81,9 +83,38 @@ export function computeHomefeedTitleCriticalIssues(title: string, primaryKeyword
     return issues;
   }
   const len = t.length;
-  // 홈판 제목 단일 기준: 28~42자
-  if (len < 28) issues.push('제목 너무 짧음 (28자 미만, 서브키워드 공간 부족)');
-  if (len > 42) issues.push('제목 너무 김 (42자 초과)');
+  /*
+   * [2026-09-17] 하한을 글자 수가 아니라 폭으로 잰다.
+   *
+   * judgeTitleLength 는 "판정은 폭으로 한다 — 독자가 보는 것은 글자 수가 아니라 잘리는
+   * 자리다" 라며 폭으로 판정하는데, 여기만 t.length 로 재고 있어 단위가 섞여 있었다.
+   * 실측 사고: "사실과 다르다…전현무 계획4 식당 사전 섭외, 어디까지?" 는 31자라 통과했지만
+   * 폭은 26.0 으로 하한 미달이었다(공백·숫자·문장부호가 8개라 폭이 글자 수보다 훨씬 작다).
+   *
+   * 하한이 상한보다 중요하다 — 홈판 1,299편 vs 미진입 794편에서 폭 28 미만은 0.69배,
+   * 42 초과는 오히려 1.26배였다. 짧은 쪽이 잘리는 쪽보다 나쁘다.
+   */
+  const width = measureTitleWidth(t);
+  // 숫자는 titleLengthPolicy 한 곳에서만 정의한다 — 여기에 다시 적으면 또 어긋난다.
+  const range = resolveTitleLengthRange('homefeed');
+  if (width < range.min) {
+    issues.push(`제목 너무 짧음 (폭 ${width} < ${range.min}, 후킹 장치를 담을 자리가 없음)`);
+  }
+  /*
+   * [2026-09-17 사장님 지적] "53자라도 후킹이 강력하면 괜찮지 않나."
+   * 맞는 지적이었고 실측도 그쪽이다 — 폭 42~48 은 1.05배, 48 초과는 1.57배로
+   * 길다고 불리하지 않았다. 평균 순위도 전 구간 8.9~10.4 로 평평했다.
+   *
+   * 상한으로 막았던 그 53자 제목(폭 46.5)은 길이가 문제가 아니라 장치가 0개였다.
+   * 그것은 후킹 하한이 이미 잡는다. 그래서 길이 상한은 후킹이 약할 때만 건다.
+   */
+  const hookSignals = countHomefeedTitleHookSignals(t);
+  if (width > range.max && hookSignals < STRONG_HOOK_SIGNALS) {
+    issues.push(
+      `제목 너무 김 (폭 ${width} > ${range.max}, 후킹 장치 ${hookSignals}개)`
+      + ` — 장치 ${STRONG_HOOK_SIGNALS}개 이상이면 길이는 묻지 않는다`,
+    );
+  }
 
   // 홈판은 자연스러운 위치에 주제를 한 번 포함하면 충분하다.
   if (primaryKeyword) {

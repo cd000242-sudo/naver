@@ -243,6 +243,12 @@ contextBridge.exposeInMainWorld('api', {
   },
   // ✅ [LDB] 환경설정에서 확장에 넣을 연결 토큰을 읽는다.
   getLdbBridgeToken: (): Promise<{ ok: boolean; token: string }> => ipcRenderer.invoke('ldb:get-bridge-token'),
+  // ✅ [LDB] 로그인 뒤 계정별 설정이 살아난 시점의 실제 켜짐 상태. 화면의 체크박스를 맞춘다.
+  onLdbBridgeState: (callback: (state: { enabled: boolean }) => void) => {
+    const handler = (_event: any, state: { enabled: boolean }) => callback(state);
+    ipcRenderer.on('ldb:bridge-state', handler);
+    return () => { ipcRenderer.removeListener('ldb:bridge-state', handler); };
+  },
   // ✅ [LDB] LDB IMAGE ULTRA 확장이 보낸 완성 원고 수신 (발행 아님 — 글 목록에만 추가)
   onLdbPosts: (callback: (posts: any[]) => void) => {
     const handler = (_event: any, posts: any[]) => callback(posts);

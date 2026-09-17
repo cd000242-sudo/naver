@@ -63,6 +63,9 @@ import { analyzeContentBySemantic, isLlmRubricEnabled } from './contentSemanticS
 import { buildPersonaCard } from './authgrDefense.js';
 import { selfCritiqueAndRewrite, isSelfCritiqueEnabled } from './contentSelfCritique.js';
 import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoOverlayPrompt, resolveCategory, HOMEFEED_ISSUE_STORY_CATEGORIES, loadPromptFile, type PromptMode } from './promptLoader.js';
+import { resolveHomefeedIssueHint } from './content/homefeedIssueHint.js';
+import { computeHomefeedTitleQuoteIssues } from './content/homefeedTitleQuoteUse.js';
+import { computeHomefeedTitleGateIssues, judgeTitleReplacement } from './content/homefeedTitleGate.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
@@ -2765,7 +2768,21 @@ export function buildModeBasedPrompt(
 ): string {
   const rawText = source.rawText?.trim() || '';
   const title = source.title || '';
-  const categoryHint = source.categoryHint as string | undefined;
+  const rawCategoryHint = source.categoryHint as string | undefined;
+  // [2026-09-17] 홈판에서 글 유형을 안 고르면 categoryHint 가 비어 resolveCategory 가
+  // 'general' 을 돌려주고, 연예·시사 글이어도 issue-story 골격(제목 3공식·소제목 0~3)이
+  // 통째로 빠진다. 경고조차 없어 결과만 보고는 원인을 알 수 없었다.
+  // 미선택일 때만 자료에서 신호를 읽어 보정한다. 선택된 카테고리는 건드리지 않는다.
+  const issueHint = resolveHomefeedIssueHint(
+    mode,
+    rawCategoryHint,
+    resolveCategory(rawCategoryHint) === 'general',
+    `${title}\n${rawText}`,
+  );
+  if (issueHint.upgraded) {
+    console.log(`[PromptBuilder] 홈판 이슈 카테고리 보정: ${issueHint.reason}`);
+  }
+  const categoryHint = issueHint.hint;
   const isFullAuto = source.isFullAuto || false;
   const isReviewType = source.isReviewType || false;
 
@@ -2885,7 +2902,7 @@ export function buildModeBasedPrompt(
   } else {
     systemPromptResult = buildFullPrompt(
       contentMode,
-      source.categoryHint,
+      categoryHint,
       source.isFullAuto,
       toneStyle,
       undefined,
@@ -3147,7 +3164,7 @@ export function buildModeBasedPrompt(
   // [2026-08-04] 이슈픽 판정을 계약 조립보다 앞으로 — FINAL CONTRACT(A1)와
   // 제목 계약(situationTitle) 양쪽이 같은 판정을 공유한다.
   const usesIssueStoryTitle = contentMode === 'homefeed'
-    && HOMEFEED_ISSUE_STORY_CATEGORIES.has(resolveCategory((source as any)?.categoryHint));
+    && HOMEFEED_ISSUE_STORY_CATEGORIES.has(resolveCategory(categoryHint));
 
   if (contentMode === 'seo' || contentMode === 'homefeed' || contentMode === 'mate' || contentMode === 'business' || contentMode === 'custom') {
     finalContract = buildEvidenceAndIntentFinalContract(source, contentMode, { usesIssueStorySkeleton: usesIssueStoryTitle });
@@ -7161,10 +7178,21 @@ async function generateStructuredContentInternal(
         // [2026-09-11] 결함 검사만으로는 밋밋한 제목이 무결점으로 통과해 후킹 패치가
         //   한 번도 안 돌았다(실측 37편 중 13편 35%). 후킹 하한을 합류시켜, 결함이
         //   없어도 대조·인용·결론차단이 전부 없으면 패치 경로로 보낸다.
-        const titleIssues = [
-          ...computeHomefeedTitleCriticalIssues(parsed.selectedTitle, hfKeyword),
-          ...computeHomefeedTitleHookFloorIssues(parsed.selectedTitle),
-        ];
+        // [2026-09-17] 판정은 homefeedTitleGate 한 곳에서 한다 — 재작성 수용 판정과 같은 기준을 써야
+        //   "고치라고 보냈는데 더 나빠진 것을 받아들이는" 일이 안 생긴다.
+        const titleIssues = computeHomefeedTitleGateIssues(parsed.selectedTitle, hfKeyword);
+        /*
+         * [2026-09-17] 게이트가 무엇을 봤는지 항상 남긴다.
+         *
+         * 이 줄이 없던 동안, 세 기준을 어긴 제목이 그대로 발행됐는데도 로그에는 아무 흔적이
+         * 없어 "게이트가 안 돌았나 / 통과시켰나 / 예산에 막혔나" 를 가릴 수 없었다.
+         * 자동 발행에서는 판정이 안 보이면 없는 규칙과 같다.
+         */
+        console.warn(
+          `[TitleGate] homefeed "${String(parsed.selectedTitle || '').slice(0, 28)}" — `
+          + `${titleIssues.length === 0 ? '통과' : `미달 ${titleIssues.length}건: ${titleIssues.join(' / ')}`}`
+          + ` · attempt=${attempt}/${QUALITY_ATTEMPT_LIMIT} · llmPatch=${costPolicy.allowLlmTitlePatch}`,
+        );
         if (titleIssues.length > 0 && attempt < QUALITY_ATTEMPT_LIMIT) {
           if (costPolicy.allowLlmTitlePatch) {
             try {
@@ -7175,10 +7203,19 @@ async function generateStructuredContentInternal(
                 provider,
                 options.agentProductPolicyContext,
               );
-              if (patch.selectedTitle) parsed.selectedTitle = patch.selectedTitle;
-              if (patch.titleCandidates && patch.titleCandidates.length > 0) {
-                parsed.titleCandidates = patch.titleCandidates;
-                parsed.titleAlternatives = patch.titleAlternatives || patch.titleCandidates.map(c => c.text);
+              /*
+               * [2026-09-17] 재작성 결과가 더 나쁘면 받지 않는다.
+               * 실측: 미달 2건짜리 제목을 고치라고 보냈더니 미달 3건(장치 0개)이 돌아왔고,
+               * 비교 없이 그대로 받아들인 뒤 attempt 예산이 끝나 되돌릴 수도 없었다.
+               */
+              const verdict = judgeTitleReplacement(parsed.selectedTitle, patch.selectedTitle, hfKeyword);
+              console.warn(`[TitleGate] 재작성 ${verdict.accept ? '반영' : '거절'} — ${verdict.reason}`);
+              if (verdict.accept) {
+                parsed.selectedTitle = patch.selectedTitle!;
+                if (patch.titleCandidates && patch.titleCandidates.length > 0) {
+                  parsed.titleCandidates = patch.titleCandidates;
+                  parsed.titleAlternatives = patch.titleAlternatives || patch.titleCandidates.map(c => c.text);
+                }
               }
               if (!parsed.quality) {
                 parsed.quality = {
@@ -7192,7 +7229,7 @@ async function generateStructuredContentInternal(
               }
               parsed.quality.warnings = [
                 ...(parsed.quality.warnings || []),
-                `TitlePatch(homefeed): ${titleIssues.join(', ')}`,
+                `TitlePatch(homefeed): ${titleIssues.join(', ')} → ${verdict.reason}`,
               ];
             } catch {
             }

@@ -102,6 +102,9 @@ describe('이미지 시점 배선 — 소스 잠금', () => {
 
   it('leonardo 는 openai 처럼 item.diversityIndex 를 우선 쓴다', () => {
     const code = read('image/leonardoAIGenerator.ts');
-    expect(code).toMatch(/getImageDiversityHints\(\s*item\.diversityIndex\s*\?\?\s*i\s*\)/);
+    expect(code).toMatch(/item\.diversityIndex\s*\?\?/);
+    // [2026-09-17] i 폴백만으로는 부족했다 — 한 장씩 넘어오면 i 가 늘 0 이라
+    //   0번 힌트(bird-eye + golden hour)만 나왔다. 순번이 없으면 소제목 글자로 시드를 만든다.
+    expect(code).toMatch(/resolveDiversitySeedFromText\(item\.heading\)/);
   });
 });

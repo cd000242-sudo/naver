@@ -4695,6 +4695,11 @@ function initMainAccountSelector() {
         // "세션 초기화" button still clears everything via clearSession().
         const _preservedKeywords = document.getElementById('unified-keywords')?.value || '';
         const _preservedUrls = Array.from(document.querySelectorAll('.unified-url-input')).map(el => el.value);
+        // [2026-09-17] 반자동 편집칸도 같은 성격이다 — 계정이 아니라 글에 속한 입력이다.
+        // 사장님 실측: 초안을 붙여 넣고 발행할 계정을 고르는 순간 clearSession() 이 지워 버렸다.
+        // 발행 직전에 계정을 고르는 것은 정상 동선이라 여기서 날아가면 안 된다.
+        const _preservedDraft = ['unified-generated-title', 'unified-generated-content', 'unified-generated-hashtags']
+            .map(id => ({ id, value: document.getElementById(id)?.value || '' }));
         if (currentAccountId) {
             accountSessions.set(currentAccountId, collectCurrentSession());
         }
@@ -4748,6 +4753,12 @@ function initMainAccountSelector() {
         _preservedUrls.forEach((v, i) => {
             if (v && _urlInputs[i])
                 _urlInputs[i].value = v;
+        });
+        // 붙여 넣어 둔 초안 복원. 비어 있던 칸은 건드리지 않아 저장된 세션 복원을 막지 않는다.
+        _preservedDraft.forEach(({ id, value }) => {
+            const el = document.getElementById(id);
+            if (el && value)
+                el.value = value;
         });
     });
     addAccountBtn?.addEventListener('click', () => {

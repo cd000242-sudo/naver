@@ -19,5 +19,13 @@
 //   기본은 꺼짐 — 쓰지 않는 사용자의 PC 에는 포트가 열리지 않는다. 발행 경로는 그대로다.
 //   실측 확인: 껐을 때 포트 닫힘, 켠 뒤 열림, 잘못된 출처 403 / 잘못된 토큰 401 /
 //   발행 표시된 글 400 / 정상 전송 200 + 반자동 편집 칸 채움.
+//
+// [2026-09-17 네 번째] v2.11.291 — 확장 연결이 재시작 후에도 켜져 있도록 고쳤다.
+//   바뀐 해시 대상: src/main.ts, src/preload.ts, src/renderer/renderer.ts,
+//   src/main/ipc/configHandlers.ts, src/runtime/version.generated.ts(버전)
+//   내용: 계정별 설정은 로그인 뒤에야 활성화되는데 브리지를 로그인 전에 읽어서,
+//   켜 둔 사용자도 앱을 껐다 켜면 포트가 안 열리고 체크박스도 풀려 있었다.
+//   계정 활성화 시점(config:set __userId)에 다시 읽고 화면에도 알려 준다.
+//   실측: 재시작만으로 47630 열림 + 체크박스 true.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  'bfec6faeb785d1b8edbacf153f6d14b42e3380f342e48fda3d96b59ef8f0193f' as const;
+  '118ff97c09e96c55f8f54e1fecef7fe1286eb5f629cf3abbf71390a36312a06a' as const;

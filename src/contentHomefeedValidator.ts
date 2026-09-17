@@ -4,6 +4,8 @@ import {
   describeHeadingCount,
 } from './content/headingCountPolicy.js';
 import { HOMEFEED_ISSUE_STORY_CATEGORIES, resolveCategory } from './promptLoader.js';
+import { measureTitleWidth, resolveTitleLengthRange } from './content/titleLengthPolicy.js';
+import { countHomefeedTitleHookSignals, STRONG_HOOK_SIGNALS } from './content/homefeedTitleHookFloor.js';
 
 import { checkHomefeedCriticalViolations } from './contentQualityChecker.js';
 import {
@@ -74,14 +76,40 @@ export function validateHomefeedContent(
   let titleScore = 100;
 
   const title = content.selectedTitle || '';
-  const titleLength = title.length;
 
-  if (titleLength < 28) {
-    warnings.push(`⚠️ 제목 너무 짧음: ${titleLength}자 (권장 28~42자)`);
+  /*
+   * [2026-09-17] 길이를 글자 수가 아니라 폭으로 재고, 숫자는 titleLengthPolicy 에서 가져온다.
+   *
+   * 실측 사고: "긴 바지인데 달랐다. 조여정 베니스 영화제 패션, 비율의 차이" 가 이 검사기에서
+   * 100/100 을 받았다. 30자라 28자 기준을 넘겼기 때문인데, 폭으로는 29 로 하한(33) 미달이고
+   * 후킹 장치도 0개였다. 같은 제목을 두고 검사기끼리 정반대로 말하고 있었다.
+   *
+   * 상한은 후킹 장치가 3개 이상이면 묻지 않는다 — 실측상 긴 제목 자체는 불리하지 않았다
+   * (42~48 1.05배, 48 초과 1.57배). 걸러야 할 것은 '후킹 없이 길어진 제목'이다.
+   */
+  const titleWidth = measureTitleWidth(title);
+  const titleRange = resolveTitleLengthRange('homefeed');
+  const hookSignals = countHomefeedTitleHookSignals(title);
+
+  if (titleWidth < titleRange.min) {
+    warnings.push(`⚠️ 제목 너무 짧음: 폭 ${titleWidth} (권장 ${titleRange.min} 이상)`);
     titleScore -= 15;
-  } else if (titleLength > 42) {
-    warnings.push(`⚠️ 제목 너무 김: ${titleLength}자 (권장 28~42자)`);
+  } else if (titleWidth > titleRange.max && hookSignals < STRONG_HOOK_SIGNALS) {
+    warnings.push(`⚠️ 제목 너무 김: 폭 ${titleWidth} · 후킹 장치 ${hookSignals}개 (장치 ${STRONG_HOOK_SIGNALS}개 이상이면 길이는 묻지 않음)`);
     titleScore -= 10;
+  }
+
+  /*
+   * 후킹 장치 개수. 실측(홈판 1,299편 vs 미진입 794편)에서 장치 정확 개수별 배수는
+   *   0개 0.44 · 1개 0.84 · 2개 1.14 · 3개 이상 1.88
+   * 이다. 1개 이하는 홈판 진입에 불리한 쪽이라 점수에 반영한다.
+   */
+  if (hookSignals === 0) {
+    warnings.push('⚠️ 제목에 후킹 장치 없음 (대조·인용·결론차단·말줄임·정체범주 0개 — 실측 0.44배)');
+    titleScore -= 25;
+  } else if (hookSignals < 2) {
+    warnings.push(`⚠️ 제목 후킹 장치 ${hookSignals}개 — 실측 0.84배로 여전히 불리하다`);
+    titleScore -= 15;
   }
 
   const valueTriggers = [

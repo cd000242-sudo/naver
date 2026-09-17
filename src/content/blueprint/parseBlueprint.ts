@@ -180,9 +180,56 @@ export function snapToMaterial(fragment: string, material: string): string | nul
     if (!best || seen.size > best.count) best = { from: hits[i].pos, to: last + SHINGLE_CHARS, count: seen.size };
   }
   if (!best || best.count / shingles.length < SHINGLE_MIN_HIT_RATIO) return null;
-  const span = haystack.slice(best.from, best.to).trim();
+
+  /*
+   * 문장 경계까지 넓히는 것도 해 봤지만 되돌렸다. collapseSpaces 가 haystack 에서 따옴표를
+   * 지우기 때문에 "담당자는 "…"고 말했다" 의 인용 경계가 사라지고, 문장 끝까지 넓히면
+   * 전달절("담당자는", "고 말했다")까지 인용 안에 들어온다. 단어 경계까지만 맞춘다.
+   */
+  const { from, to } = snapToWordBoundaries(haystack, best.from, best.to);
+  const span = trimSpanEdges(haystack.slice(from, to));
   const ratio = span.length / needle.length;
   return ratio >= 0.6 && ratio <= 1.35 ? span : null;
+}
+
+/** 경계를 넓혀도 되는 최대 글자 수. 이보다 멀면 원래 자리를 지킨다. */
+const BOUNDARY_EXPAND_LIMIT = 12;
+
+/**
+ * 오프셋을 단어 경계로 옮긴다.
+ *
+ * [2026-09-17 실측 사고] best.from 은 8글자 shingle 이 맞은 자리라 단어 한가운데일 수 있다.
+ * 그대로 slice 하면 자료의 "얼굴이 작고 입체적이라" 가 "고 입체적이라" 로 잘려 나가고,
+ * 그 조각이 따옴표 안에 담겨 발행된다. 독자는 말이 중간부터 시작하는 문장을 본다.
+ *
+ * 그래서 시작은 앞 공백까지 물러나고 끝은 다음 공백까지 나아간다. 다만 한국어는 띄어쓰기가
+ * 성기므로 무한정 넓히면 엉뚱한 말이 붙는다 — 12자 안에서 경계를 못 찾으면 원래 자리를 쓴다.
+ */
+function snapToWordBoundaries(haystack: string, start: number, end: number): { from: number; to: number } {
+  let from = start;
+  let steps = 0;
+  while (from > 0 && haystack[from - 1] !== ' ' && steps < BOUNDARY_EXPAND_LIMIT) {
+    from -= 1;
+    steps += 1;
+  }
+  if (from > 0 && haystack[from - 1] !== ' ') from = start;
+
+  /*
+   * 끝은 건드리지 않는다. haystack 에는 따옴표가 지워져 있어서 자료의
+   *   …오후 시간대를 권한다"고 말했다
+   * 가 "권한다고 말했다" 로 보인다. 끝을 다음 공백까지 밀면 전달절의 '고' 가 인용에
+   * 딸려 들어온다(contentBlueprint.test.ts 가 이 회귀를 잡았다).
+   * 보고된 결함은 시작이 단어 중간이던 것이므로 시작만 맞춘다.
+   */
+  return { from, to: end };
+}
+
+/** 조각 양끝에 남은 구두점·연결 기호를 턴다 — ", 핏되는 정도에" 처럼 시작하지 않게. */
+function trimSpanEdges(span: string): string {
+  return span
+    .replace(/^[\s,.·…∙‥\-–—~:;)\]}]+/u, '')
+    .replace(/[\s,·…∙‥\-–—~:;([{]+$/u, '')
+    .trim();
 }
 
 /** Exact (normalized) match keeps the model's text; otherwise snap to the material's own span. */

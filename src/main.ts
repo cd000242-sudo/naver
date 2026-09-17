@@ -4885,6 +4885,33 @@ registerDatalabApiHandlers();
 import { registerBackupHandlers, performDataBackup } from './main/ipc/backupHandlers.js';
 // ✅ [LDB] LDB IMAGE ULTRA 확장에서 완성 원고를 받는 로컬 브리지 (발행 없음, 목록에만 추가)
 import { startLdbBridge } from './main/ldb-bridge.js';
+
+/*
+ * LDB 확장 수신 브리지. 환경설정에서 켠 사용자만 포트가 열린다.
+ *
+ * 로그인 전에는 계정별 설정이 아직 활성화되지 않아 loadConfig() 가 기본값을 준다.
+ * 그래서 앱 시작 때 한 번, 로그인 성공 뒤에 한 번 더 시도한다. 시작 때만 읽으면
+ * 켜 둔 사용자도 앱을 껐다 켤 때마다 포트가 안 열린다(2026-09-17 실측).
+ */
+let ldbBridge: ReturnType<typeof startLdbBridge> = null;
+const startLdbBridgeIfEnabled = async (): Promise<void> => {
+  if (ldbBridge) return;
+  try {
+    const config = await loadConfig();
+    if (!config.ldbBridgeEnabled) return;
+    ldbBridge = startLdbBridge(app.getPath('userData'), (posts) => mainWindow?.webContents.send('ldb:import-posts', posts));
+  } catch (error) {
+    console.error('[LDB 브리지] 설정을 읽지 못해 시작하지 않았습니다:', error);
+  }
+};
+
+/** 켜져 있는지를 화면에 알려 준다. 렌더러가 로그인 전에 읽으면 항상 꺼짐으로 보인다. */
+const broadcastLdbBridgeState = (enabled: boolean): void => {
+  const contents = mainWindow?.webContents;
+  if (!contents) return;
+  if (contents.isLoading()) contents.once('did-finish-load', () => contents.send('ldb:bridge-state', { enabled }));
+  else contents.send('ldb:bridge-state', { enabled });
+};
 registerBackupHandlers({ debugLog });
 
 // ✅ 네이버 블로그 카테고리 분석 (크롤링)
@@ -5687,6 +5714,10 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
                   // ✅ 각 소제목에 AI 프롬프트 추론 적용
                   const imageItems = [];
+                  // [2026-09-17] 소제목 순번을 실어 보낸다. 생성기는 이 값으로 카메라 각도·조명을
+                  //   돌리는데, 없으면 한 장씩 호출될 때 0번 힌트(bird-eye + golden hour)만 나와
+                  //   소제목 이미지가 전부 같은 부감 구도로 발행됐다(실측).
+                  let headingImageIndex = 0;
                   for (const h of headings) {
                     const headingTitle = h.title || h;
                     let englishPrompt: string;
@@ -5703,6 +5734,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                       prompt: englishPrompt,
                       englishPrompt: englishPrompt,
                       isThumbnail: false,
+                      diversityIndex: headingImageIndex++,
                       imageStyle: options?.imageStyle,
                       imageRatio: options?.subheadingImageRatio || options?.imageRatio || '1:1', // ✅ [2026-03-23 FIX] 소제목 비율 폴백: thumbnailImageRatio → imageRatio (기존 thumbnailImageRatio 폴백은 잘못됨)
                     });
@@ -6705,6 +6737,12 @@ registerConfigHandlers({
   getAppConfig: () => appConfig,
   setAppConfig: (config) => { appConfig = config; },
   sendLog,
+  // 계정 설정이 살아난 지금이 확장 연결 설정을 읽을 수 있는 첫 시점이다.
+  onAccountActivated: () => { void (async () => {
+    await startLdbBridgeIfEnabled();
+    const config = await loadConfig().catch(() => ({} as AppConfig));
+    broadcastLdbBridgeState(Boolean(config.ldbBridgeEnabled));
+  })(); },
 });
 
 // 이미지 라이브러리 카테고리 조회 IPC 핸들러
@@ -7644,6 +7682,13 @@ ipcMain.handle('login:success', async (): Promise<void> => {
   }
 
   debugLog('[login:success] License authentication successful');
+
+  // 계정별 설정이 이제야 활성화된다. 여기서 다시 읽어야 켜 둔 사람의 포트가 열린다.
+  void (async () => {
+    await startLdbBridgeIfEnabled();
+    const config = await loadConfig().catch(() => ({} as AppConfig));
+    broadcastLdbBridgeState(Boolean(config.ldbBridgeEnabled));
+  })();
 
   // 메인 창이 없으면 생성 (초기 인증 시)
   if (!mainWindow || mainWindow.isDestroyed()) {
@@ -9033,16 +9078,6 @@ app.whenReady().then(async () => {
     // ✅ [LDB] 확장프로그램이 완성한 원고를 글 목록으로 받는 로컬 브리지. 발행은 하지 않는다.
     // ✅ [LDB] 확장 연결은 선택 기능이다. 환경설정에서 켠 사용자만 로컬 포트가 열린다.
     //   쓰지 않는 사용자의 PC에는 아무 포트도 열리지 않는다.
-    let ldbBridge: ReturnType<typeof startLdbBridge> = null;
-    const startLdbBridgeIfEnabled = async (): Promise<void> => {
-      try {
-        const config = await loadConfig();
-        if (!config.ldbBridgeEnabled || ldbBridge) return;
-        ldbBridge = startLdbBridge(app.getPath('userData'), (posts) => mainWindow?.webContents.send('ldb:import-posts', posts));
-      } catch (error) {
-        console.error('[LDB 브리지] 설정을 읽지 못해 시작하지 않았습니다:', error);
-      }
-    };
     void startLdbBridgeIfEnabled();
     // 환경설정에서 켜면 재시작 없이 바로 열고, 토큰을 확인할 수 있게 한다.
     ipcMain.handle('ldb:get-bridge-token', async () => {

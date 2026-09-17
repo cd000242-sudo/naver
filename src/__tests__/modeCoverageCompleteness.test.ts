@@ -50,7 +50,10 @@ describe('mode coverage completeness (품질 레이어 전 모드 도달)', () =
     }
     // 홈판은 자체 문구 유지
     const hf = buildEvidenceAndIntentFinalContract({ rawText: '근거 텍스트 '.repeat(20) } as any, 'homefeed');
-    expect(hf).toContain('제목이 던진 질문·숫자·정체·방법은 도입부 첫 3~5문장 안에서 직접 답한다');
+    // [2026-09-17] 홈판은 답 위치가 제목 유형으로 갈린다 — 정체 숨김은 도입 3~5문장, 드러난 제목은 10~36%.
+    expect(hf).toContain('제목이 던진 질문·숫자·정체·방법은 본문에서 직접 답한다');
+    expect(hf).toContain('도입부 첫 3~5문장 안에서 답하고');
+    expect(hf).toContain('본문 앞 10~36% 구간 안에서 답한다');
   });
 
   it('P3: business/custom에 SEO 전용 규칙이 오배정되지 않는다', () => {

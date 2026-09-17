@@ -26,7 +26,9 @@ describe('homefeed title payoff + evidence-meta seal', () => {
     for (const contract of [ungrounded, grounded]) {
       expect(contract).toContain('자료의 존재·부족·범위를 독자에게 말하지 않는다');
       expect(contract).toContain('제공된 문구');
-      expect(contract).toContain('제목이 던진 질문·숫자·정체·방법은 도입부 첫 3~5문장 안에서 직접 답한다');
+      // [2026-09-17] 답 위치는 제목 유형에 따라 갈린다 — 정체 숨김은 도입 3~5문장, 드러난 제목은 10~36%.
+      expect(contract).toContain('제목에서 정체를 감췄으면 도입부 첫 3~5문장 안에서 답하고');
+      expect(contract).toContain('본문 앞 10~36% 구간 안에서 답한다');
     }
     // 근거 부족 시: 답 못 줄 약속형 제목 자체를 금지
     expect(ungrounded).toContain('근거 없이 답할 수 없는 약속');
@@ -35,7 +37,8 @@ describe('homefeed title payoff + evidence-meta seal', () => {
   it('홈판 base.prompt에 TITLE PAYOFF 규칙이 존재한다', () => {
     const base = read('prompts/homefeed/base.prompt');
     expect(base).toContain('[TITLE PAYOFF — 필수]');
-    expect(base).toContain('도입부 첫 3~5문장 안에서 직접 답한다');
+    expect(base).toContain('본문 앞 8~20% 구간에서 밝힌다');
+    expect(base).toContain('10~36% 구간에 둔다');
     expect(base).toContain('근거로 답할 수 있는 제목으로 바꾼다');
   });
 

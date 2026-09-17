@@ -13,6 +13,12 @@ export interface ConfigHandlerContext {
     getAppConfig: () => AppConfig;
     setAppConfig: (config: AppConfig) => void;
     sendLog: (message: string) => void;
+    /**
+     * 계정별 설정(__userId)이 활성화된 직후에 불린다.
+     * 그전까지 loadConfig() 는 기본값을 주므로, 계정 설정에 의존하는 기능은
+     * 앱 기동 시점이 아니라 이 시점에 다시 읽어야 한다.
+     */
+    onAccountActivated?: () => void;
 }
 
 /**
@@ -47,6 +53,7 @@ export function registerConfigHandlers(ctx: ConfigHandlerContext): void {
     });
 
     ipcMain.handle('config:set', async (_event, payload: AppConfig) => {
+        const activatesAccount = typeof (payload as any)?.__userId === 'string' && (payload as any).__userId;
         // API 키 형식 검증
         const validationErrors: string[] = [];
 
@@ -81,6 +88,10 @@ export function registerConfigHandlers(ctx: ConfigHandlerContext): void {
         const nextConfig = await saveConfig(payload ?? {});
         ctx.setAppConfig(nextConfig);
         applyConfigToEnv(nextConfig);
+        if (activatesAccount) {
+            try { ctx.onAccountActivated?.(); }
+            catch (error) { console.error('[Main] 계정 활성화 후처리 실패:', error); }
+        }
 
         // API 키 저장 확인 로그
         if (nextConfig.geminiApiKey && nextConfig.geminiApiKey.trim()) {

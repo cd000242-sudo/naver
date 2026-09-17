@@ -71,11 +71,28 @@ describe('전송 프롬프트의 카메라 각도는 소제목 순번을 따라 
     expect(angleOf(await capturePrompt({ diversityIndex: 0 }))).toMatch(/bird-eye/);
   });
 
-  it('순번이 없으면 전부 0번(부감)으로 무너진다 — 회귀 재현', async () => {
+  /*
+   * [2026-09-17] 여기는 예전에 "순번이 없으면 전부 0번(부감)으로 무너진다"를 회귀로 고정하던
+   * 자리다. 그 무너짐이 실제 발행 글에서 터졌다 — 소제목 이미지 6장이 전부 같은 부감 구도에
+   * 같은 노란 햇빛이었다. 이제 순번이 없으면 소제목 글자로 시드를 만든다.
+   */
+  it('순번이 없어도 부감으로 무너지지 않는다', async () => {
     const angles: (string | null)[] = [];
-    for (let i = 0; i < 3; i++) angles.push(angleOf(await capturePrompt({})));
-    expect(new Set(angles).size).toBe(1);
-    expect(angles[0]).toMatch(/bird-eye/);
+    for (const heading of [
+      '9월 18일 오후 5시, 전편이 열립니다',
+      '북촌에서 시작되는 위험한 사랑 내기',
+      '24년 만의 사극 복귀가 더 눈에 들어오는 이유',
+    ]) {
+      angles.push(angleOf(await capturePrompt({ heading })));
+    }
+    expect(angles.some((a) => a === null)).toBe(false);
+    expect(new Set(angles).size).toBeGreaterThan(1);
+  });
+
+  it('순번이 없을 때 같은 소제목은 같은 각도 — 재생성해도 흔들리지 않는다', async () => {
+    const first = angleOf(await capturePrompt({ heading: '북촌에서 시작되는 위험한 사랑 내기' }));
+    const second = angleOf(await capturePrompt({ heading: '북촌에서 시작되는 위험한 사랑 내기' }));
+    expect(first).toBe(second);
   });
 
   it('썸네일(0번)도 각도가 실린다 — 본문과 같은 규칙', async () => {
