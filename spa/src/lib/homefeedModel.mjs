@@ -12,7 +12,7 @@ export const WINDOW_LABEL = Object.freeze({
 });
 
 export const STATUS_LABEL = Object.freeze({
-    NOW: '지금 쓸 만함', EARLY: '이른 신호', WATCH: '지켜보기', LATE: '늦음', DROP: '버림',
+    NOW: '규칙상 우선 후보', EARLY: '이른 신호', WATCH: '근거 더 보기', LATE: '시점 재검토', DROP: '조건 미달',
 });
 
 export const CATEGORY_LABEL = Object.freeze({
@@ -35,10 +35,10 @@ export const FUN_GAP_LABEL = Object.freeze({
 export const STRATEGY_LABEL = Object.freeze({ 'REAL-FIRST': '실제 사진 우선', 'AI-FIRST': 'AI 이미지 우선', HYBRID: '실제 사진 + AI' });
 
 export const READINESS_LABEL = Object.freeze({
-    READY: '썸네일 준비됨', NEEDS_REAL_IMAGE: '실제 사진 필요', NEEDS_AI: 'AI 이미지 필요', WEAK: '썸네일 약함',
+    READY: '썸네일 규칙 충족', NEEDS_REAL_IMAGE: '실제 사진 필요', NEEDS_AI: 'AI 이미지 필요', WEAK: '썸네일 보완 필요',
 });
 
-export const VERDICT_LABEL = Object.freeze({ STOP: '멈추게 함', FLAT: '밋밋함', OVER: '과장' });
+export const VERDICT_LABEL = Object.freeze({ STOP: '제목 규칙 충족', FLAT: '제목 보완 후보', OVER: '과장 표현 검토' });
 
 export const TRIGGER_LABEL = Object.freeze({
     direct_quote: '직접 인용', number_conflict: '숫자 충돌', relation_shift: '관계 변화', expectation_break: '예상 밖',
@@ -92,7 +92,7 @@ const REASON_LABEL = Object.freeze({
     FEW_SAMPLES: '기사 표본이 적다',
     FEW_PRESS: '매체 수가 적다',
     NO_FUN_GAP: '눈길 끌 대목이 없다',
-    NO_SEARCH_FAILED: '카드만 보고는 무슨 얘긴지 바로 안 와닿는다',
+    NO_SEARCH_FAILED: '카드 재료 규칙 미충족',
     NOT_TELLABLE: '한 줄로 전하기 어렵다',
     CARD_NOT_READY: '첫 카드를 만들 수 없다',
     AGE_CENSORED: '기록 시작 전부터 떠 있었을 수 있다',
@@ -280,13 +280,13 @@ export function calibrationText(group) {
 
 /** 검사 항목 이름 — 카드만 보고 이해되나 · 첫 카드 · 썸네일. 처음 쓰는 사람도 알아볼 수 있게 쉬운 말로 적는다. */
 export const CHECK_LABEL = Object.freeze({
-    situation_in_1s: '무슨 분야 이야기인지 바로 보임', immediate_why: '눈길 끄는 대목이 있음', answer_wanted: '본문에서 풀어 줄 답이 있음',
-    image_curiosity: '사진이 더 궁금하게 만듦', payoff_beyond_answer: '풀어 줄 이야기가 더 있음',
-    anchor_visible: '무엇에 대한 이야기인지 보임', hook_in_first_15: '첫 15자 안에 걸리는 말', answer_hidden: '답을 다 보여 주지 않음',
+    situation_in_1s: '분야 · 대상 단서 검출', immediate_why: '긴장 표현 검출', answer_wanted: '후속 설명 재료 검출',
+    image_curiosity: '이미지 후보 검출', payoff_beyond_answer: '추가 재료 검출',
+    anchor_visible: '기준어 포함', hook_in_first_15: '첫 15자 안에 걸리는 말', answer_hidden: '답 표현 규칙 검사',
     image_ready: '쓸 사진이 있음', not_article_copy: '기사 제목을 옮기지 않음',
-    hero_exists: '대표 사진 있음', subject_in_1s: '무엇인지 1초에 보임', text_lines_ok: '문구 줄 수 · 길이 적당',
+    hero_exists: '대표 사진 있음', subject_in_1s: '이미지 대상 단서 검출', text_lines_ok: '문구 줄 수 · 길이 규칙 충족',
     no_title_copy: '제목과 같은 말 아님', face_object_clear: '얼굴 · 물건을 가리지 않음', rights_noted: '사진 권리 표시',
-    mobile_text_short: '휴대폰에서 읽힘',
+    mobile_text_short: '모바일 문구 길이 규칙 충족',
 });
 
 /** 원고 검사 문제 — 앱 draft.ts 의 DRAFT_PROBLEM_LABEL 과 같은 말. */
@@ -319,3 +319,61 @@ export const PROVIDERS = Object.freeze([
     { id: 'gemini', label: '제미나이' },
     { id: 'grok', label: '그록' },
 ]);
+
+export const EDITORIAL_STATE_LABEL = Object.freeze({
+    unprepared: '작성안 준비 전', ready: '근거 검토 통과', needs_evidence: '근거 보강 필요', stale: '새 근거로 갱신 필요', failed: '작성안 준비 실패',
+});
+
+/** 편집자의 제안과 기사 제목을 섞지 않는다. 이전 작성안은 목록의 최신 제안으로 노출하지 않는다. */
+export function editorialCardModel(view, fallback = '') {
+    const brief = view?.state === 'ready' || view?.state === 'needs_evidence' ? view.brief : null;
+    const angle = brief?.angles?.find((item) => item.id === brief.recommendedAngleId);
+    return {
+        headline: brief?.summary || view?.sourceTitle || fallback,
+        sourceOnly: !brief?.summary,
+        angle: angle?.label || null,
+        question: angle?.readerQuestion || null,
+        audience: brief?.audience || null,
+        stateLabel: EDITORIAL_STATE_LABEL[view?.state] || EDITORIAL_STATE_LABEL.unprepared,
+    };
+}
+
+export function editorialDraftBlock(view) {
+    if (view?.public) return '공개본은 근거만 읽을 수 있습니다. 작성하려면 PC의 LEWORD 앱을 연결하세요.';
+    if (!view?.brief) return '먼저 근거를 읽고 작성안을 준비하세요.';
+    if (view.state !== 'ready' || view.brief.readiness !== 'ready' || !view.brief.review?.passed) return '근거 검토를 통과한 최신 작성안이 필요합니다.';
+    if (view.brief.evidenceRevision !== view.evidenceRevision) return '새 근거가 수집되었습니다. 작성안을 갱신하세요.';
+    const selected = view.selection;
+    if (!selected) return '관점 · 제목 · 첫 카드를 선택하고 저장하세요.';
+    if (selected.briefRevision !== view.brief.revision || selected.evidenceRevision !== view.evidenceRevision) return '작성안이 바뀌었습니다. 선택을 다시 저장하세요.';
+    if (!view.brief.angles.some((angle) => angle.id === selected.angleId)) return '현재 작성안에서 관점을 다시 고르세요.';
+    return null;
+}
+
+export function editorialSelectionMatches(saved, form) {
+    return Boolean(saved && form && saved.angleId === form.angleId && saved.title === form.title
+        && saved.card?.line1 === form.card?.line1 && saved.card?.line2 === form.card?.line2
+        && (saved.imageId ?? null) === (form.imageId ?? null));
+}
+
+export function editorialDraftMatches(view, draft, form) {
+    return Boolean(draft && !editorialDraftBlock(view) && editorialSelectionMatches(view?.selection, form)
+        && draft.briefRevision === view.brief.revision && draft.selectionRevision === view.selection.revision);
+}
+
+export function editorialShareNotice(result) {
+    return result?.publishResult?.written
+        ? 'PC의 사이트 공개파일을 갱신했습니다. 실제 사이트에는 다음 배포 후 반영됩니다.'
+        : `공개 설정은 저장됐지만 공개파일 갱신을 확인하세요. ${result?.publishResult?.reason ?? ''}`;
+}
+
+/** 호출은 버튼 이벤트에서만 한다. 개인 AI 작업은 최대 3건을 한 번에 하나씩 수행한다. */
+export async function prepareEditorialCandidates(candidates, prepare, onProgress = () => {}) {
+    const results = [];
+    for (const candidate of candidates.slice(0, 3)) {
+        try { results.push({ ok: true, result: await prepare(candidate) }); }
+        catch (error) { results.push({ ok: false, error: error instanceof Error ? error.message : String(error) }); }
+        onProgress(results.length);
+    }
+    return results;
+}

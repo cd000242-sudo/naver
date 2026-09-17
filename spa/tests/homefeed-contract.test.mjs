@@ -74,3 +74,27 @@ test('AI 이미지 · 기사 사진 표기, 못 잰 값은 화면 모델을 거�
     assert.match(card, /UNMEASURED/);
     assert.doesNotMatch(card, /\?\? 0\b|\|\| 0\b/);
 });
+
+test('상세는 작성안으로 열고 브라우저에만 저장하던 카드 선택 경로는 연결하지 않는다', () => {
+    const detail = read(`${DIR}/HomefeedDetail.tsx`);
+    assert.match(detail, /useState<Pane>\('brief'\)/);
+    assert.doesNotMatch(detail, /import HomefeedFirstCard|import HomefeedTitlesDraft/);
+    assert.match(detail, /hfStory\(storyId, publicOnly\)/);
+    assert.match(detail, /disabled=\{readOnly/);
+    const editor = read(`${DIR}/HomefeedEditorialPane.tsx`);
+    assert.match(editor, /hfSelectEditorial\(/);
+    assert.match(editor, /expectedRevision: view\.selection\?\.revision \?\? 0/);
+    assert.match(editor, /hfDraft\(detail\.story\.id, provider, brief\.revision, view\.selection\.revision\)/);
+    assert.doesNotMatch(editor, /localStorage/);
+    assert.match(editor, /!readOnly && <fieldset disabled=\{busy\}/);
+    assert.match(detail, /hidden=\{pane !== 'brief'\}/);
+    assert.match(detail, /detail=\{readOnly \? \{ \.\.\.detail, readOnly: true \} : detail\}/);
+    assert.match(editor, /onClick=\{prepare\}/);
+    assert.match(editor, /<EditorialEditor key=\{brief\.revision\}/, '다른 창의 선택 변경이 미저장 편집 폼을 초기화하지 않음');
+    assert.match(editor, /setForm\(\{ angleId: stored\.angleId, title: stored\.title, card: \{ \.\.\.stored\.card \}, imageId: stored\.imageId \}\)/, '성공 후 서버가 정규화한 저장 값을 폼에 반영');
+    assert.match(editor, /editorialShareNotice\(result\.result\)/, '공개파일 쓰기 결과를 확인해서 안내');
+    assert.equal((editor.match(/maxLength=\{80\}/g) ?? []).length, 3, '제목과 카드 두 줄은 서버와 같은 80자 제한');
+    const bridge = read('lib/homefeedBridge.ts');
+    assert.match(bridge, /evidenceRevision\s*\}\), 500_000\)/, '작성안 서버 실행 상한보다 여유 있게 기다림');
+    assert.match(bridge, /selectionRevision\s*\}\), 620_000\)/, '원고 두 번 생성과 검토 시간을 모두 기다림');
+});

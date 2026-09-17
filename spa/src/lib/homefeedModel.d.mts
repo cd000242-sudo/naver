@@ -93,3 +93,14 @@ export declare const ANGLE_CONFIDENCE_LABEL: Readonly<Record<string, string>>;
 export declare function dimensionValueLabel(dimension: string, value: string): string;
 
 export declare const PROVIDERS: ReadonlyArray<{ id: string; label: string }>;
+
+import type { EditorialView, EditorialSelection, HfDraft } from './homefeedBridge';
+export declare const EDITORIAL_STATE_LABEL: Readonly<Record<string, string>>;
+export declare function editorialCardModel(view: EditorialView | null | undefined, fallback?: string): {
+    headline: string; sourceOnly: boolean; angle: string | null; question: string | null; audience: string | null; stateLabel: string;
+};
+export declare function editorialDraftBlock(view: EditorialView | null | undefined): string | null;
+export declare function editorialSelectionMatches(saved: EditorialSelection | null | undefined, form: Pick<EditorialSelection, 'angleId' | 'title' | 'card' | 'imageId'> | null): boolean;
+export declare function editorialDraftMatches(view: EditorialView, draft: HfDraft | null, form: Pick<EditorialSelection, 'angleId' | 'title' | 'card' | 'imageId'>): boolean;
+export declare function editorialShareNotice(result: { publishResult?: { written: string | null; reason: string | null } }): string;
+export declare function prepareEditorialCandidates<T, R>(candidates: readonly T[], prepare: (candidate: T) => Promise<R>, onProgress?: (count: number) => void): Promise<Array<{ ok: true; result: R } | { ok: false; error: string }>>;

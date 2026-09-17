@@ -101,7 +101,7 @@ test('보정 표 문장 — 5건 전엔 수치를 숨기고, 20건 전엔 비율
 });
 
 test('사유 코드는 사람 말로, 모르는 코드는 그대로', () => {
-    assert.equal(model.reasonLabel('NO_SEARCH_FAILED'), '카드만 보고는 무슨 얘긴지 바로 안 와닿는다');
+    assert.equal(model.reasonLabel('NO_SEARCH_FAILED'), '카드 재료 규칙 미충족');
     assert.equal(model.reasonLabel('SOMETHING_NEW'), 'SOMETHING_NEW');
 });
 

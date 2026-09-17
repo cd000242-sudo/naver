@@ -2,10 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TabIntro } from '../LewordShared';
 import { BRIDGE_OFFLINE_NOTE, BRIDGE_OUTDATED_NOTE } from '../../../lib/bridge';
-import { hfCollect, hfSettings, hfStories, type HfStoriesResult } from '../../../lib/homefeedBridge';
+import { hfBrief, hfCollect, hfSettings, hfStories, type HfStoriesResult } from '../../../lib/homefeedBridge';
 import {
     CATEGORY_LABEL, DEFAULT_FILTERS, SORT_OPTIONS, STATUS_LABEL, WINDOW_LABEL,
-    filterStories, formatTime, sortStories, sourceHealth, type HomefeedFilters,
+    filterStories, formatTime, prepareEditorialCandidates, sortStories, sourceHealth, type HomefeedFilters,
 } from '../../../lib/homefeedModel.mjs';
 import HomefeedStyles from './HomefeedStyles';
 import HomefeedCard from './HomefeedCard';
@@ -35,12 +35,12 @@ function loadFilters(): HomefeedFilters {
 }
 
 const STATUS_FILTERS: ReadonlyArray<[string, string]> = [
-    ['active', '지금 · 이른 · 지켜보기'], ['NOW', STATUS_LABEL.NOW], ['EARLY', STATUS_LABEL.EARLY], ['WATCH', STATUS_LABEL.WATCH],
+    ['active', '살펴볼 후보'], ['NOW', STATUS_LABEL.NOW], ['EARLY', STATUS_LABEL.EARLY], ['WATCH', STATUS_LABEL.WATCH],
     ['LATE', STATUS_LABEL.LATE], ['DROP', STATUS_LABEL.DROP], ['all', '전체'],
 ];
 
 const EVIDENCE_FILTERS: ReadonlyArray<['funGap' | 'noSearch' | 'payoff2' | 'visualReady', string]> = [
-    ['funGap', '눈길 끌 대목 있음'], ['noSearch', '카드만 봐도 이해되는 것'], ['payoff2', '풀 이야기 2개 이상'], ['visualReady', '썸네일 준비됨'],
+    ['funGap', '특징 표현 검출'], ['noSearch', '카드 재료 규칙 충족'], ['payoff2', '기사 재료 2개 이상'], ['visualReady', '썸네일 규칙 충족'],
 ];
 
 export default function HomefeedTab() {
@@ -52,7 +52,7 @@ export default function HomefeedTab() {
     const [sort, setSort] = useState('window');
     const [openId, setOpenId] = useState('');
     const [settingsOpen, setSettingsOpen] = useState(false);
-    const [busy, setBusy] = useState<'' | 'collect' | 'toggle'>('');
+    const [busy, setBusy] = useState<'' | 'collect' | 'toggle' | 'brief'>('');
     const [notice, setNotice] = useState('');
 
     const load = useCallback(async () => {
@@ -85,6 +85,21 @@ export default function HomefeedTab() {
     const closeDetail = useCallback(() => setOpenId(''), []);
     const closeSettings = useCallback(() => setSettingsOpen(false), []);
     const openSettings = useCallback(() => setSettingsOpen(true), []);
+
+    const prepareCandidates = async () => {
+        if (data?.fromPublicFile || busy) return;
+        const candidates = stories.filter((story) => story.editorial?.state !== 'ready').slice(0, 3);
+        setBusy('brief'); setNotice(`후보 ${candidates.length}개의 기사 근거를 차례로 읽습니다.`);
+        const results = await prepareEditorialCandidates(candidates, async (story) => {
+            const result = await hfBrief(story.id, '', Boolean(story.editorial?.brief), story.editorial?.evidenceRevision);
+            if (result.status !== 'ok') throw new Error(failureOf(result, story.keyword) ?? '작성안 준비 실패');
+            return result.result.editorial;
+        }, (count) => setNotice(`작성안 준비 ${count}/${candidates.length}건 완료 · 한 건씩 진행 중`));
+        const ready = results.filter((result) => result.ok && result.result.state === 'ready').length;
+        const failed = results.filter((result) => !result.ok);
+        setNotice(`작성안 준비 끝 · 근거 검토 통과 ${ready}건 · 추가 확인 ${results.length - ready}건${failed.length ? ` · ${failed.map((result) => result.ok ? '' : result.error).join(' · ')}` : ''}`);
+        setBusy(''); await load();
+    };
 
     const collectNow = async () => {
         setBusy('collect');
@@ -123,8 +138,8 @@ export default function HomefeedTab() {
             <HomefeedStyles />
             <TabIntro
                 title="홈판 신호"
-                desc="실시간 이슈에서 지금 새로 나온 사실, 궁금해지는 이유(긴장 · 재미 근거), 첫 카드 · 제목 · 이미지로 멈추게 할 방법을 스토리 단위로 봅니다. 수치는 내 PC 의 LEWORD 앱이 잰 실측이고, 못 잰 값은 '미측정'으로 적습니다. 홈판 노출을 보장하거나 가능성을 수치로 말하지 않습니다."
-                source="내 PC LEWORD 앱 수집 — 네이버 실시간 · 네이트 · 구글 · 다음 · 네이버 뉴스 검색 · 블로그 문서수 · 사이트 이슈 보드"
+                desc="지금 다룰 사건을 고르고, 기사 근거에서 독자의 질문과 내 글의 관점을 찾습니다. 작성안을 확인한 뒤 제목 · 첫 카드 · 이미지를 저장하면 그 선택으로 원고를 만듭니다."
+                source="공개 기사 근거 + 내 PC LEWORD 앱의 수집 기록 · 작성안 준비는 버튼을 누를 때만 실행"
             />
 
             {state === 'loading' && <div className="lw-note">앱에서 스토리를 불러오는 중입니다…</div>}
@@ -140,6 +155,8 @@ export default function HomefeedTab() {
 
             {state === 'ready' && data && (
                 <>
+                    <details className="lw-hf-collection">
+                        <summary>수집 기록 · {data.snapshotAt ? formatTime(data.snapshotAt) : '첫 수집 전'} · {data.fromPublicFile ? '공개본 읽는 중' : data.runtime.running ? '수집 중' : '내 PC 연결됨'}{health.error > 0 ? ` · 원천 오류 ${health.error}곳` : ''}</summary>
                     <div className="lw-hf-status">
                         <div className="lw-hf-status-main">
                             <div className="lw-hf-status-line">
@@ -176,7 +193,7 @@ export default function HomefeedTab() {
                         {/* 누르는 기능은 앱이 켜져 있어야 한다 — 공개본만 있을 때는 버튼 대신 그 사실을 적는다. */}
                         {data.fromPublicFile ? (
                             <div className="lw-hf-status-actions">
-                                <span className="lw-hf-count">수집 · 제목 만들기는 PC 에서 LEWORD 앱을 켜면 됩니다</span>
+                                <span className="lw-hf-count">기사 근거는 지금 읽을 수 있습니다 · 내 작성안 준비는 PC 앱 연결 후</span>
                             </div>
                         ) : (
                             <div className="lw-hf-status-actions">
@@ -190,8 +207,9 @@ export default function HomefeedTab() {
                             </div>
                         )}
                     </div>
+                    </details>
 
-                    {notice && <div className="lw-note">{notice}</div>}
+                    {notice && <div className="lw-note" role="status">{notice}</div>}
                     {!data.settings.enabled && data.stories.length === 0 && (
                         <div className="lw-note lw-note-setup">
                             <strong>수집을 켜야 판정이 시작됩니다</strong>
@@ -206,13 +224,17 @@ export default function HomefeedTab() {
                         <button type="button" role="tab" aria-selected={view === 'stories'} className={view === 'stories' ? 'on' : ''} onClick={() => setView('stories')}>
                             스토리 신호 <em>{data.stories.length}</em>
                         </button>
-                        <button type="button" role="tab" aria-selected={view === 'learning'} className={view === 'learning' ? 'on' : ''} onClick={() => setView('learning')}>
+                        <button type="button" role="tab" aria-selected={view === 'learning'} disabled={data.fromPublicFile} className={view === 'learning' ? 'on' : ''} onClick={() => setView('learning')}>
                             성과학습
                         </button>
                     </div>
 
                     {view === 'stories' && (
                         <>
+                            <div className="lw-hf-editorial-toolbar">
+                                <div><strong>오늘 어떤 이야기를 쓸까요?</strong><p>사건과 근거를 확인하고, 나만의 작성 방향을 정하세요.</p></div>
+                                <button type="button" className="lw-hf-btn primary" disabled={Boolean(busy) || data.fromPublicFile || !stories.some((story) => story.editorial?.state !== 'ready')} onClick={prepareCandidates}>{busy === 'brief' ? '후보를 차례로 준비 중…' : '위에서부터 후보 3개 작성안 준비'}</button>
+                            </div>
                             <div className="lw-hf-filters">
                                 <div className="lw-hf-filter-row" role="group" aria-label="상태 필터">
                                     {STATUS_FILTERS.map(([id, label]) => (
@@ -257,10 +279,10 @@ export default function HomefeedTab() {
                         </>
                     )}
 
-                    {view === 'learning' && <HomefeedLearning />}
+                    {view === 'learning' && (data.fromPublicFile ? <div className="lw-note">성과 기록은 내 PC의 LEWORD 앱을 연결하면 읽을 수 있습니다.</div> : <HomefeedLearning />)}
 
                     {openId && (
-                        <HomefeedDetail storyId={openId} imageProvider={data.settings.imageProvider} onClose={closeDetail} onChanged={load} onSettings={openSettings} />
+                        <HomefeedDetail storyId={openId} imageProvider={data.settings.imageProvider} publicOnly={Boolean(data.fromPublicFile)} onClose={closeDetail} onChanged={load} onSettings={openSettings} />
                     )}
                     {settingsOpen && <HomefeedSettingsPanel onClose={closeSettings} onSaved={load} />}
                 </>
