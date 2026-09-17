@@ -145,7 +145,10 @@ export default function HomefeedTab() {
                             <div className="lw-hf-status-line">
                                 <span className={`lw-hf-state${data.runtime.running ? ' run' : data.settings.enabled ? ' on' : ''}`}>
                                     <i aria-hidden="true" />
-                                    {data.runtime.running ? '지금 수집 중' : data.settings.enabled ? `수집 켜짐 · ${data.settings.snapshotIntervalMinutes}분마다` : '수집 꺼짐'}
+                                    {/* 공개본으로 그릴 때는 내 PC 수집 상태를 모른다 — '수집 꺼짐'이라고 잘못 말하지 않는다(2026-09-17). */}
+                                    {data.fromPublicFile
+                                        ? `앱 없이 보는 중${data.publishedAt ? ` · ${formatTime(data.publishedAt)} 발행분` : ''}`
+                                        : data.runtime.running ? '지금 수집 중' : data.settings.enabled ? `수집 켜짐 · ${data.settings.snapshotIntervalMinutes}분마다` : '수집 꺼짐'}
                                 </span>
                                 <span>마지막 스냅샷 <b>{data.snapshotAt ? formatTime(data.snapshotAt) : '없음'}</b></span>
                                 <span>판정에 쓴 회차 <b>{data.historySnapshots}</b> · 저장된 회차 <b>{data.storedSnapshots}</b></span>
@@ -170,15 +173,22 @@ export default function HomefeedTab() {
                                 <span className="lw-hf-count">창 {WINDOW_LABEL.OPENING}<b>{data.counts.window.OPENING ?? 0}</b></span>
                             </div>
                         </div>
-                        <div className="lw-hf-status-actions">
-                            <button type="button" className="lw-hf-btn" disabled={Boolean(busy) || data.runtime.running} onClick={collectNow}>
-                                {busy === 'collect' ? '수집 중…' : '지금 수집'}
-                            </button>
-                            <button type="button" className={`lw-hf-btn${data.settings.enabled ? '' : ' primary'}`} disabled={Boolean(busy)} onClick={toggleCollect}>
-                                {data.settings.enabled ? '수집 끄기' : '수집 켜기'}
-                            </button>
-                            <button type="button" className="lw-hf-btn" onClick={openSettings}>설정</button>
-                        </div>
+                        {/* 누르는 기능은 앱이 켜져 있어야 한다 — 공개본만 있을 때는 버튼 대신 그 사실을 적는다. */}
+                        {data.fromPublicFile ? (
+                            <div className="lw-hf-status-actions">
+                                <span className="lw-hf-count">수집 · 제목 만들기는 PC 에서 LEWORD 앱을 켜면 됩니다</span>
+                            </div>
+                        ) : (
+                            <div className="lw-hf-status-actions">
+                                <button type="button" className="lw-hf-btn" disabled={Boolean(busy) || data.runtime.running} onClick={collectNow}>
+                                    {busy === 'collect' ? '수집 중…' : '지금 수집'}
+                                </button>
+                                <button type="button" className={`lw-hf-btn${data.settings.enabled ? '' : ' primary'}`} disabled={Boolean(busy)} onClick={toggleCollect}>
+                                    {data.settings.enabled ? '수집 끄기' : '수집 켜기'}
+                                </button>
+                                <button type="button" className="lw-hf-btn" onClick={openSettings}>설정</button>
+                            </div>
+                        )}
                     </div>
 
                     {notice && <div className="lw-note">{notice}</div>}

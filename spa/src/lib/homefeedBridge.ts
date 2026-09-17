@@ -87,6 +87,10 @@ export type HfSourceStatus = {
 export type HfRuntime = { running: boolean; lastRunAt: string | null; lastError: string | null; lastDurationMs: number | null; nextRunAt: string | null };
 
 export type HfStoriesResult = {
+    /** 앱이 아니라 사이트가 가진 공개본으로 그린 판(2026-09-17) — 누르는 기능은 앱이 있어야 한다. */
+    fromPublicFile?: boolean;
+    /** 공개본이 쓰인 시각. 브리지 응답에는 없다. */
+    publishedAt?: string | null;
     settings: { enabled: boolean; snapshotIntervalMinutes: number; imageProvider: string; ai: Record<string, boolean> };
     runtime: HfRuntime;
     computedAt: string | null;
@@ -331,13 +335,62 @@ export type HfSettings = {
     updatedAt: string | null;
 };
 
+/** 앱이 수집할 때마다 써 두는 공개본 — 앱이 꺼져 있어도 이 파일로 그린다(2026-09-17). */
+export const HOMEFEED_PUBLIC_URL = '/data/homefeed-stories.json';
+
+/** 공개본에는 내 PC 상태(runtime · settings)가 없다 — 화면이 쓰는 모양으로 채운다. */
+function fromPublicFile(payload: {
+    publishedAt?: unknown; computedAt?: unknown; snapshotAt?: unknown;
+    historySnapshots?: unknown; storedSnapshots?: unknown;
+    sources?: unknown; counts?: unknown; stories?: unknown;
+}): HfStoriesResult | null {
+    if (!payload || !Array.isArray(payload.stories) || payload.stories.length === 0) return null;
+    const counts = (payload.counts && typeof payload.counts === 'object' ? payload.counts : {}) as { status?: unknown; window?: unknown };
+    return {
+        // 이 판이 공개본이라는 표시 — 화면이 '수집 꺼짐'으로 잘못 읽지 않게 한다.
+        fromPublicFile: true,
+        publishedAt: typeof payload.publishedAt === 'string' ? payload.publishedAt : null,
+        settings: { enabled: false, snapshotIntervalMinutes: 10, imageProvider: 'none', ai: {} },
+        runtime: { running: false, lastRunAt: typeof payload.publishedAt === 'string' ? payload.publishedAt : null, lastError: null, lastDurationMs: null, nextRunAt: null },
+        computedAt: typeof payload.computedAt === 'string' ? payload.computedAt : null,
+        snapshotAt: typeof payload.snapshotAt === 'string' ? payload.snapshotAt : null,
+        historySnapshots: typeof payload.historySnapshots === 'number' ? payload.historySnapshots : 0,
+        storedSnapshots: typeof payload.storedSnapshots === 'number' ? payload.storedSnapshots : 0,
+        sources: Array.isArray(payload.sources) ? payload.sources as HfSourceStatus[] : [],
+        counts: {
+            status: (counts.status && typeof counts.status === 'object' ? counts.status : {}) as Record<string, number>,
+            window: (counts.window && typeof counts.window === 'object' ? counts.window : {}) as Record<string, number>,
+        },
+        stories: payload.stories as HfStorySummary[],
+    };
+}
+
+/**
+ * 앱이 꺼져 있을 때 읽는 공개본. 없으면 null — 부르는 쪽이 원래 안내를 그대로 보여 준다.
+ * 수집 · 제목 만들기 같은 누르는 기능은 여전히 앱이 있어야 한다.
+ */
+export async function hfPublicStories(): Promise<HfStoriesResult | null> {
+    try {
+        const response = await fetch(HOMEFEED_PUBLIC_URL, { cache: 'no-store' });
+        if (!response.ok) return null;
+        return fromPublicFile(await response.json());
+    } catch {
+        return null;
+    }
+}
+
 export async function hfStories(): Promise<BridgeCallResult<HfStoriesResult>> {
     const called = await bridgeCall<HfStoriesResult>(`${ROUTE}stories`, undefined, 12_000);
-    if (called.status !== 'ok') return called;
-    // 앱 응답은 바깥 입력이다 — 목록 모양이 아니면 성공으로 넘기지 않는다.
-    if (!Array.isArray(called.result.stories) || !Array.isArray(called.result.sources)) {
-        return { status: 'error', message: '앱이 스토리 목록을 돌려주지 못했습니다.' };
+    if (called.status === 'ok') {
+        // 앱 응답은 바깥 입력이다 — 목록 모양이 아니면 성공으로 넘기지 않는다.
+        if (!Array.isArray(called.result.stories) || !Array.isArray(called.result.sources)) {
+            return { status: 'error', message: '앱이 스토리 목록을 돌려주지 못했습니다.' };
+        }
+        return called;
     }
+    // 앱이 꺼졌거나 구버전이면 사이트가 가진 공개본으로 그린다 — 앱을 켜지 않아도 보이게(2026-09-17).
+    const publicResult = await hfPublicStories();
+    if (publicResult) return { status: 'ok', result: publicResult };
     return called;
 }
 
