@@ -1,23 +1,218 @@
 {
-  "publishedAt": "2026-09-17T09:11:23.436Z",
+  "publishedAt": "2026-09-17T21:32:06.103Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 205,
-    "niche": 0,
-    "preemption": 17,
+    "candidates": 240,
+    "niche": 1,
+    "preemption": 5,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-09-17",
+    "day": "2026-09-18",
     "keywords": [
+      "민주노총 금속노조",
       "skt 확정기변 방법",
-      "김지민 병원",
-      "KAIST 서울캠퍼스"
+      "김지민 병원"
     ]
   },
   "rows": [
+    {
+      "keyword": "민주노총 금속노조",
+      "issue": "민주노총",
+      "topic": "민주노총",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "2026-09-09 일일 노동·노사관계 브리핑",
+          "노랑봉투법 : 인정은 하되, 따로는 안 된다는 중노위 — 6곳이 받은 같은 결론",
+          "★ 일은 하청이, 돈은 원청한테 받겠다? 노란봉투법이 불러온 혼란의 서막과 7.15 총파업 실태",
+          "“K-조선의 지속가능한 미래를 위해 노사정이 머리를 맞대다”",
+          "7월 15일 민주노총 총파업, 이게 왜 터졌나요?",
+          "민노총, 광화문서 1만명 총파업... \"원청 나와라\" 靑 방향 행진",
+          "현대차 노조 전면 파업 자동차, 왜 지금일까?",
+          "현대차 노조 파업 2026, 9년 만에 최대 생산 차질? 임단협 갈등 총정리",
+          "현대차 노조 전면파업 배경 정년 연장 국민연금 손실 1조 요구안 총정리",
+          "조선 분야 노사정 참여…‘조선업 노사정 협의체’ 발족"
+        ],
+        "measuredAt": "2026-09-17T21:29:32.654Z"
+      },
+      "documentCount": 19789,
+      "documentCountMeasured": true,
+      "searchVolume": 790,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.7412980432043562,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 790",
+        "문서수 19,789",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 790 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.7배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "민주노총이 6년 만에 메가특구 사회적 대화에 참여키로 했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "민주노총 금속노조 6년 만에 사회적 대화 복귀, 52시간 특례가 고비",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "민주노총 금속노조 위원장이 6년 만에 다시 앉았는데 분위기가 묘하네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "민주노총 위원장",
+          "searchVolume": 560,
+          "frame": "generic"
+        },
+        {
+          "keyword": "금속노조 위원장",
+          "searchVolume": 210,
+          "frame": "generic"
+        },
+        {
+          "keyword": "민주노총 총파업",
+          "searchVolume": 70,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "민주노총 위원장",
+          "searchVolume": 560,
+          "documentCount": 96932,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "금속노조 위원장",
+          "searchVolume": 210,
+          "documentCount": 27310,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "민주노총 총파업",
+          "searchVolume": 70,
+          "documentCount": 25693,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "금속노조 현대차지부",
+          "searchVolume": 70,
+          "documentCount": 8687,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "민주노총 조합원",
+          "searchVolume": 10,
+          "documentCount": 72855,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          100,
+          76,
+          71,
+          27,
+          8,
+          51,
+          79,
+          65,
+          49,
+          40,
+          11,
+          19,
+          38,
+          76,
+          49,
+          54,
+          33,
+          19,
+          14,
+          32,
+          37,
+          35,
+          57,
+          33,
+          16,
+          0,
+          37,
+          24,
+          22
+        ]
+      },
+      "kinCount": 362,
+      "kinTop": [
+        {
+          "title": "금속노조와 민주노총",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61402&docId=491987929&answerNo=1",
+          "views": 94,
+          "answers": 1
+        },
+        {
+          "title": "민주노총 탈퇴 문의입니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61402&docId=485277361&answerNo=0",
+          "views": 28,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-17T21:28:17.853Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    },
     {
       "keyword": "skt 확정기변 방법",
       "issue": "SKT",
@@ -177,7 +372,8 @@
           46
         ],
         "label": "🐢 연금형",
-        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드"
+        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
+        "measuredAt": "2026-09-17T21:32:06.859Z"
       },
       "kinCount": 3844,
       "kinTop": [
@@ -380,7 +576,7 @@
           0,
           0
         ],
-        "measuredAt": "2026-09-17T03:39:01.503Z"
+        "measuredAt": "2026-09-17T21:32:06.859Z"
       },
       "kinCount": 375,
       "kinTop": null,
@@ -544,7 +740,7 @@
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-17T03:39:01.503Z"
+        "measuredAt": "2026-09-17T21:32:06.859Z"
       },
       "kinCount": 1900,
       "kinTop": null,
@@ -703,7 +899,7 @@
           4,
           0
         ],
-        "measuredAt": "2026-09-17T03:39:01.503Z"
+        "measuredAt": "2026-09-17T21:32:06.859Z"
       },
       "kinCount": 42,
       "kinTop": [],
@@ -901,7 +1097,7 @@
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-17T03:39:01.503Z"
+        "measuredAt": "2026-09-17T21:32:06.859Z"
       },
       "kinCount": 275,
       "kinTop": [
@@ -1119,7 +1315,7 @@
           0,
           13
         ],
-        "measuredAt": "2026-09-17T03:39:01.503Z"
+        "measuredAt": "2026-09-17T21:32:06.859Z"
       },
       "kinCount": 224,
       "kinTop": [
@@ -1145,6 +1341,421 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "피어리오딕 랩스",
+      "issue": "피어리오딕 랩스",
+      "topic": "피어리오딕 랩스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 4,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 4",
+        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "피어리오딕 랩스가 재료과학 AI '네온'을 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "피어리오딕 랩스 네온 공개와 4200억 시드투자 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "피어리오딕 랩스가 메타 영입 제안까지 뿌리쳤다는데 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-17T21:28:17.853Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "여수 이순신도서관 대출방법",
+      "issue": "여수 이순신도서관",
+      "topic": "여수 이순신도서관",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 213,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 213",
+        "선점 후보 — 경쟁 문서 213건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "여수 이순신도서관이 기후변화 교육전문가 25명을 양성했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "여수 이순신도서관 대출방법 회원가입부터 대출기간까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "여수 이순신도서관 대출방법 몰라서 회원증부터 다시 만들었네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": [
+        {
+          "title": "여수시 도서관 이용 및 도서대여 방법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60105&docId=451326988&answerNo=1",
+          "views": 364,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-17T21:28:17.853Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "민주노총 심볼",
+      "issue": "민주노총",
+      "topic": "민주노총",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 57,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 57",
+        "선점 후보 — 경쟁 문서 57건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "민주노총이 6년 만에 메가특구 사회적 대화에 참여키로 했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "민주노총 심볼 로고·마크·깃발 이미지 어디서 받나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "민주노총 심볼 로고랑 마크가 다른 거 의외로 많이들 모르시더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "민주노총 로고",
+          "searchVolume": 20,
+          "frame": "generic"
+        },
+        {
+          "keyword": "민주노총 마크",
+          "searchVolume": 10,
+          "frame": "generic"
+        },
+        {
+          "keyword": "민주노총 깃발",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "민주노총 로고",
+          "searchVolume": 20,
+          "documentCount": 1377,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "민주노총 마크",
+          "searchVolume": 10,
+          "documentCount": 2190,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 7,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-17T21:28:17.853Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김포FC 횡령 수법",
+      "issue": "김포FC 횡령",
+      "topic": "김포FC 횡령",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 103,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 103",
+        "선점 후보 — 경쟁 문서 103건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "김포FC 회계담당 직원이 최소 58억을 횡령해 구속됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김포FC 횡령 수법 58억 회계직원 부동산·고급차로",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김포FC 횡령 수법 뜯어보니 58억이 부동산으로 흘러갔더라고요",
+          "frame": "ai",
+          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김포FC 횡령",
+          "searchVolume": 1030,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김포FC 횡령 사건",
+          "searchVolume": 110,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김포FC 횡령 직원",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김포FC 횡령",
+          "searchVolume": 1030,
+          "documentCount": 727,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김포FC 횡령 사건",
+          "searchVolume": 110,
+          "documentCount": 536,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김포FC 횡령 직원",
+          "searchVolume": 30,
+          "documentCount": 438,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-17T21:28:17.853Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "지예은과 기안84 여친",
+      "issue": "지예은과 기안84 여친",
+      "topic": "지예은과 기안84 여친",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 116,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 116",
+        "선점 후보 — 경쟁 문서 116건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "기안84가 AI 여친 '바타'를 지예은에게 소개하며 신경전을 벌였다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "지예은과 기안84 여친 바타 AI 소개 신경전 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "지예은과 기안84 여친 바타 신경전 보다가 이 부분에서 좀 멈췄어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "기안84 지예은",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "기안84 지예은",
+          "searchVolume": 20,
+          "documentCount": 2985,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-17T21:28:17.853Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "팀스파르타 잡플래닛",
       "issue": "팀스파르타",
@@ -1251,7 +1862,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "지니젠AI 비드래프트",
@@ -1313,7 +1925,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "지니젠AI 리더보드",
@@ -1375,7 +1988,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "지니젠AI GPU",
@@ -1437,7 +2051,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "술레이먼 앤트로픽",
@@ -1512,7 +2127,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오픈라우터 426종",
@@ -1597,7 +2213,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "지니젠AI",
@@ -1659,7 +2276,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "무스타파 술레이먼",
@@ -1721,7 +2339,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "게장 near me",
@@ -1791,7 +2410,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "류지현 감독 미팅",
@@ -1870,7 +2490,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "술레이먼",
@@ -1932,7 +2553,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "EU 캐나다 준회원",
@@ -2007,7 +2629,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "김여정 IAEA 핵보유국",
@@ -2093,7 +2716,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "팀스파르타 블라인드",
@@ -2200,7 +2824,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "LH 노조 분사",
@@ -2301,7 +2926,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "팀스파르타 수주",
@@ -2410,7 +3036,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "과기부 공무직",
@@ -2489,7 +3116,8 @@
       "monetize": null,
       "measuredAt": "2026-09-17T09:04:14.519Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "리벨랙 성능",
@@ -6878,12 +7506,146 @@
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "코스피 약보합 마감",
+      "issue": "민주노총",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "민주노총이 6년 만에 메가특구 사회적 대화에 참여키로 했다.",
+      "headlines": [
+        {
+          "title": "민주노총, 메가특구 사회적 대화 참여키로…코로나19 이후 6년만",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-17T11:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016319265?sid=102"
+        },
+        {
+          "title": "6년 만에 사회적 대화 복귀한 민주노총…'52시간 특례' 최대 고비",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-17T12:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009177663?sid=101"
+        },
+        {
+          "title": "민주노총, 메가특구 사회적 대화 참여…\"노동 특례 저지할 것\"",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-17T13:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005333674?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "민주노총 간첩",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민주노총 위원장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민주노총 시위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민주노총 금속노조",
+          "searchVolume": 790,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민주노총 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민주노총 집회",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민주노총 고공농성",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민주노총 부산본부",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "52시간 특례",
+          "reason": "특례 도입 여부 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "민주노총 대화 결렬",
+          "reason": "복귀 뒤 파행 우려",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "자폐 유전자",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "미국 매파적 금리인상에도 코스피가 약보합 마감했다.",
+      "why": "자폐 원인 유전자 1200개를 두 갈래 분자 지도로 분류했다.",
+      "headlines": [
+        {
+          "title": "복잡한 자폐 유전적 다양성, 두 갈래 '분자 지도'로 풀었다",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-17T18:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016319331?sid=105"
+        },
+        {
+          "title": "\"자폐 원인 유전자 1200개라더니\"…뇌에서는 두 갈래로 모였다",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-17T18:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014198369?sid=105"
+        },
+        {
+          "title": "국내 연구진, 자폐스펙트럼장애 뇌 변화 두 가지 유형 최초 규명",
+          "press": "donga.com",
+          "publishedAt": "2026-09-17T18:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003749085?sid=103"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "자폐 유전자 원인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "자폐 유전자 변이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "자폐",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "뉴욕증시 상승 마감",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "연준 불확실성 해소에 뉴욕증시가 일제히 상승 마감했다.",
       "headlines": [
         {
           "title": "코스피, 美 매파적 금리인상에도 약보합 마감…코스닥은 상승(종합)",
@@ -6892,63 +7654,846 @@
           "link": "https://n.news.naver.com/mnews/article/001/0016318703?sid=101"
         },
         {
-          "title": "미 금리 상승에 환율 13.6원 ↑...코스피 약보합 마감",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-09-17T07:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002408369?sid=101"
+          "title": "美 금리 인상 충격 제한적…亞증시 '혼조'",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-17T06:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014197709?sid=104"
         },
         {
-          "title": "美 금리 인상에도 선방…코스피, 6700선 약보합 마감 [투자360]",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-09-17T07:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002698963?sid=101"
+          "title": "필라델피아 반도체지수 3.14%↑… 뉴욕증시 일제 상승 마감",
+          "press": "kmib.co.kr",
+          "publishedAt": "2026-09-17T20:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/005/0001873773?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "남의 편 남편",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "이혼숙려캠프 남의편 남편이 아내에 폭언과 육아 보이콧을 했다.",
+      "headlines": [
+        {
+          "title": "'이숙캠' 박하선, 남의편 남편에 \"어머니랑 사셔야 할 것 같다\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-17T13:17:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009177671"
+        },
+        {
+          "title": "‘이혼숙려캠프’ 남의편 부부 폭언",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-09-16T23:48:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202609170115"
+        },
+        {
+          "title": "“감히 시어머니한테?”…‘이숙캠’ 남의 편 부부 남편 ‘꼰대 발언’...",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-09-17T13:46:00.000Z",
+          "link": "https://m.entertain.naver.com/article/144/0001138937"
         }
       ],
       "concentrated": [
         {
-          "keyword": "코스피",
+          "keyword": "남의",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "환율",
-          "searchVolume": 20233200,
-          "origin": "related"
+          "keyword": "남의편",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "남의편 남편 신상",
+          "reason": "직업 등 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "김포FC 횡령",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "declining",
+      "isHot": true,
+      "why": "김포FC 회계담당 직원이 최소 58억을 횡령해 구속됐다.",
+      "headlines": [
+        {
+          "title": "김포FC 58억 횡령 직원 구속…부동산도, 고급차도 '펑펑'",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-17T09:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014198191?sid=102"
+        },
+        {
+          "title": "김포FC 58억 횡령 혐의 직원 구속…부동산·고급차 샀다",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-17T09:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009177548?sid=102"
+        },
+        {
+          "title": "[단독] ‘83억 횡령’에 잔고 199만원인데…김포FC, 감사는 매년 ‘적정...",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-09-17T20:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003552271?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "영국 금리 동결",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "영국이 기준금리 3.75%로 6차 연속 동결했다.",
+      "headlines": [
+        {
+          "title": "[속보] 영국, 기준금리 연 3.75%로 동결",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-17T11:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005333653?sid=104"
+        },
+        {
+          "title": "영국 금리 동결했지만…BOE 총재 \"금리 인상 가능성\" 시사(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-17T12:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016319270?sid=104"
+        },
+        {
+          "title": "영국 중앙은행, 예상대로 기준금리 3.75% 유지…6차 연속동결",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-17T11:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014198285?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "챔피언십 1라운드 경기",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "하나금융그룹 챔피언십 1라운드 경기가 진행됐다.",
+      "headlines": [
+        {
+          "title": "[골프IN화보] 김가희2, 하나금융그룹 챔피언십 1라운드 경기 장면",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-17T13:04:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/018/0006371578"
+        },
+        {
+          "title": "[골프IN화보] 이지현3, 하나금융그룹 챔피언십 1라운드 경기 장면",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-17T13:00:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/018/0006371576"
+        },
+        {
+          "title": "[골프IN화보] 김재희, 하나금융그룹 챔피언십 1라운드 경기 장면",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-17T12:50:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/018/0006371573"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "챔피언십",
+          "searchVolume": null,
+          "origin": "autocomplete"
         }
       ],
       "nextWave": [],
       "rowCount": 0
     },
     {
-      "issue": "국회 본회의 통과",
+      "issue": "지예은과 기안84 여친",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "기안84가 AI 여친 '바타'를 지예은에게 소개하며 신경전을 벌였다.",
+      "headlines": [
+        {
+          "title": "기안84, AI와 연애에 자괴감 \"인간성 사라져, 자존감 떨어진다\"",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-09-17T12:48:00.000Z",
+          "link": "https://m.entertain.naver.com/article/076/0004447200"
+        },
+        {
+          "title": "지예은, 기안84 AI 여친과 신경전…\"♥바타와 나는 진짜 사랑\" 도발 [기...",
+          "press": "mydaily.co.kr",
+          "publishedAt": "2026-09-17T13:23:00.000Z",
+          "link": "https://m.entertain.naver.com/article/117/0004106588"
+        },
+        {
+          "title": "기안84, 예비 신부 지예은에 AI 여친 소개했는데...“난 ♥바타와 진짜...",
+          "press": "tenasia.co.kr",
+          "publishedAt": "2026-09-17T13:29:00.000Z",
+          "link": "https://m.entertain.naver.com/article/312/0000776575"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "볼보 ES90 전기",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "볼보 전기 플래그십 세단 ES90이 7960만원부터 출시됐다.",
+      "headlines": [
+        {
+          "title": "[시승기] \"균형의 미학, 타보니 알겠네\" 볼보 플래그십 전기차 'ES90'",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-17T15:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014198345?sid=101"
+        },
+        {
+          "title": "SUV의 공간에 세단의 주행감 담았다…볼보 전기차 ES90 타보니",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-09-17T15:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003471235?sid=101"
+        },
+        {
+          "title": "\"7천만원이 싸게 느껴지는 마법을 경험하세요\"…볼보 'ES90' [시승기]",
+          "press": "dailian.co.kr",
+          "publishedAt": "2026-09-17T15:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/119/0003134058?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "백화점",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
-      "isHot": false,
-      "why": "김성수 대법관 임명동의안이 국회 본회의를 통과했다.",
+      "isHot": true,
+      "why": "백화점 폭파 협박 허위글에 대한 손해배상 청구가 잇따라 승소했다.",
       "headlines": [
         {
-          "title": "김성수 대법관 후보자 임명동의안, 국회 본회의 통과",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-17T05:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016318277?sid=100"
-        },
-        {
-          "title": "김성수 대법관 후보자 임명동의안 국회 본회의 통과",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-09-17T06:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002823531?sid=100"
-        },
-        {
-          "title": "[속보] 김성수 대법관 후보자 임명동의안 국회 본회의 통과",
+          "title": "[단독] 갤러리아, 상품본부 축소…명품관 재건축·부동산 개발 집중",
           "press": "hankyung.com",
-          "publishedAt": "2026-09-17T05:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005333421?sid=100"
+          "publishedAt": "2026-09-17T09:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005333630?sid=101"
+        },
+        {
+          "title": "신세계百, 천안아산점에 K-브랜드 플랫폼 '하이퍼그라운드' 첫선",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-16T23:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016316384?sid=101"
+        },
+        {
+          "title": "경찰, 공항·백화점 폭파 협박범에 손해배상 청구 잇따라 승소",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-17T03:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0003998982?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "국회",
+          "keyword": "백화점 쿠션",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "백화점 영어로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "백화점 상품권",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "백화점 vip 기준",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "백화점 near me",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "백화점 립",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "백화점 냄비",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "백화점 립밤",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "미 ITC가 삼성·애플·구글의 오디오 특허 침해 조사에 착수했다.",
+      "headlines": [
+        {
+          "title": "\"美ITC, 삼성·애플·구글 대상 특정 오디오기술 탑재기기 조사\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-16T15:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016316225?sid=104"
+        },
+        {
+          "title": "삼성·애플·구글, 오디오 특허 침해로 미국 ITC 조사",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-09-17T01:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003471001?sid=104"
+        },
+        {
+          "title": "美 ITC, 삼성전자·애플·구글 특허침해 조사 착수",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-09-16T17:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005817453?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 타임라인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 폼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "전남광주",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "전남광주·서울·전북교육청이 서·논술형 평가시스템을 공유하기로 했다.",
+      "headlines": [
+        {
+          "title": "전남광주·전북·서울교육청, '서·논술형 평가시스템 공유'",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-17T06:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016318612?sid=102"
+        },
+        {
+          "title": "연간 8조 재정 관리…전남광주통합교육청 첫 금고 어디?",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-17T04:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014197030?sid=102"
+        },
+        {
+          "title": "전남광주시, 지역 주도 R&D 체계 본격 가동",
+          "press": "munhwa.com",
+          "publishedAt": "2026-09-16T23:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/021/0002819385?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "전남광주 민생지원금",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남 광주 가볼만한곳",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남 광주 맛집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 조직개편",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남 광주 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 홈페이지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 통합뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 계곡",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "전남광주 통합 효과",
+          "reason": "주민 영향 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "전남광주 민생지원금",
+          "reason": "지원금 지급 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "여수 이순신도서관",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "여수 이순신도서관이 기후변화 교육전문가 25명을 양성했다.",
+      "headlines": [
+        {
+          "title": "여수시 이순신도서관, '기후변화 교육전문가 양성 과정' 운영",
+          "press": "netongs.com",
+          "publishedAt": "2026-09-17T03:46:00.000Z",
+          "link": "http://www.netongs.com/news/articleView.html?idxno=335348"
+        },
+        {
+          "title": "여수 이순신도서관, 기후변화 교육전문가 25명 양성…AI 활용 교육도",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-17T08:56:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215377"
+        },
+        {
+          "title": "중흥·우미, 여수 소제지구 첫 분양단지 선착순 계약 돌입",
+          "press": "greenpostkorea.co.kr",
+          "publishedAt": "2026-09-15T04:20:00.000Z",
+          "link": "https://www.greenpostkorea.co.kr/news/articleView.html?idxno=307454"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "여수 이순신도서관 이용방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "여수 이순신도서관 대출방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "여수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "피어리오딕 랩스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "피어리오딕 랩스가 재료과학 AI '네온'을 공개했다.",
+      "headlines": [
+        {
+          "title": "피어리오딕 랩스, 재료과학 AI '네온' 공개...\"첨단 모델 성능 뛰어넘어...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-17T08:54:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215414"
+        },
+        {
+          "title": "[11월13일] 실리콘 밸리서 떠오르는 '네오랩스'...오픈AI·앤트로픽 따라...",
+          "press": "aitimes.com",
+          "publishedAt": "2025-11-13T22:00:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=203954"
+        },
+        {
+          "title": "강화 학습 결과 예측 가능케 하는 LLM 법칙 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2025-10-20T09:00:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=203295"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "KT",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "KT가 폰 한 대로 업무망·개인망을 나누는 앱 슬라이싱을 연내 상용화한다.",
+      "headlines": [
+        {
+          "title": "5G 업무망 단말도 임대로…KT, 무선 인프라 운영 부담 줄인다",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-17T00:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014195945?sid=105"
+        },
+        {
+          "title": "KT, 스마트폰 한 대로 업무·개인망 분리…'앱 슬라이싱' 연내 상용화",
+          "press": "bloter.net",
+          "publishedAt": "2026-09-17T12:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/293/0000090625?sid=105"
+        },
+        {
+          "title": "KT, 5G 업무망 고도화…개인폰으로도 기업망 접속한다",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-17T02:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016317222?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "kt 고객센터",
+          "searchVolume": 234600,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 인터넷",
+          "searchVolume": 73300,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt&g",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt m모바일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 키즈폰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 라인업",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kt 알뜰폰",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "NC AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "NC AI가 1.4조 규모 전북·경남 피지컬 AI 국책사업에 참여한다.",
+      "headlines": [
+        {
+          "title": "[AI픽] NC AI, 전북·경남 피지컬 AI 국책과제 동시 참여",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-17T00:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016316680?sid=105"
+        },
+        {
+          "title": "제조 현장 파고든 NC AI, 1.4조 피지컬 AI 국책사업 올라탔다",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-17T00:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002437793?sid=105"
+        },
+        {
+          "title": "NC AI, 1.4조 피지컬AI 국책사업 참여",
+          "press": "sedaily.com",
+          "publishedAt": "2026-09-17T05:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004662897?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "nc ai 교육",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "nc ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "nc ai 면접",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "nc ai 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "nc ai 로봇",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "nc ai 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "nc ai 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "nc",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "NC AI 관련주",
+          "reason": "수혜주 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "NC AI 실적",
+          "reason": "매출 기여 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "VAN",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "KT가 경기도VAN연합회와 소상공인 디지털 전환을 돕기로 했다.",
+      "headlines": [
+        {
+          "title": "KT 경기남부지사·경기도VAN연합회, 소상공인 디지털 전환·상생 ‘맞손...",
+          "press": "kyeonggi.com",
+          "publishedAt": "2026-09-17T09:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/666/0000123942?sid=102"
+        },
+        {
+          "title": "KT, 경기도VAN연합회와 소상공인 디지털 전환 돕는다",
+          "press": "suwonilbo.kr",
+          "publishedAt": "2026-09-17T06:32:00.000Z",
+          "link": "https://www.suwonilbo.kr/news/articleView.html?idxno=318282"
+        },
+        {
+          "title": "VAN, 대격변 시대 속 AI 기술주권·노동대체 논의",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-17T08:10:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215418"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "van 컨퍼런스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "van cleef",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "van cleef bracelet",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "van 결제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "van 발음",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "van 이름",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "van 차종",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "VAN 통신",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "VAN 수수료 인하",
+          "reason": "수수료 변화 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "EU",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "EU가 캐나다에 첫 준회원국 방안을 제안하자 트럼프가 고율관세를 경고했다.",
+      "headlines": [
+        {
+          "title": "EU \"캐나다, 첫 준회원 길 열고파\" vs 캐나다 \"아직 그 단계 아냐\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-17T02:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014196678?sid=104"
+        },
+        {
+          "title": "캐나다 총리 “EU 준회원국 제안 긍정적”… 유럽과 함께할 때 더 강해",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-17T14:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001193146?sid=104"
+        },
+        {
+          "title": "미국 못 믿는 중견국들의 밀착…고율관세로 찢어놓겠다는 트럼프",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-17T16:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016319315?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "eu 신발사이즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "eu 플러그",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "eu 가입국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "EU 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "eu 입국 신청",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "eu 돈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "EU 국가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "eu 규제",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -6996,7 +8541,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "류지현 감독 미팅",
@@ -7027,44 +8573,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "추석 맞이 협력사",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "삼성 등 대기업이 추석 앞두고 협력사 대금을 조기 지급한다.",
-      "headlines": [
-        {
-          "title": "中企계 추석 앞두고 협력사 대금 조기 지급…정산주기 단축",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-17T05:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009176929?sid=101"
-        },
-        {
-          "title": "[카드] '추석 맞이' HD현대, 협력사 자재대금 조기 지급한다",
-          "press": "newsprime.co.kr",
-          "publishedAt": "2026-09-17T05:22:00.000Z",
-          "link": "http://www.newsprime.co.kr/news/article.html?no=748213"
-        },
-        {
-          "title": "삼성, 추석 맞이 협력사 대금 1.3조 조기 지급…\"작년 대비 1100억 증액\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-14T05:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014188594?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "추석",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "게장",
@@ -7144,7 +8654,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "김여정 IAEA 핵보유국",
@@ -7175,427 +8686,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "수시 접수 먹통",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "수시 접수 먹통 354건이 구제되고 경쟁률 공개 후 3건이 취소됐다.",
-      "headlines": [
-        {
-          "title": "'수시 먹통' 354건 최종 접수…구제 대상 60명 미접수(종합)",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-17T08:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014198030?sid=102"
-        },
-        {
-          "title": "'부정선거' 비유까지... 수시 접수 먹통, 고3이 분노한 진짜 이유",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-09-17T05:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/047/0002529319?sid=102"
-        },
-        {
-          "title": "수시 원서접수 먹통 피해 354건 구제…경쟁률 공개 후 접수 3건 취소",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-17T07:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009177221?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "수시접수 먹통 사태",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "수시접수",
-          "searchVolume": 24510,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "수시",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "폴 s 앳킨스",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "미국 클래리티법이 상원 문턱을 넘지 못해 좌초됐다.",
-      "headlines": [
-        {
-          "title": "SEC, 주주제안 규칙 14a-8 폐지안 제시",
-          "press": "tokenpost.kr",
-          "publishedAt": "2026-09-16T14:04:00.000Z",
-          "link": "https://www.tokenpost.kr/news/policy/409081"
-        },
-        {
-          "title": "美클래리티법, 상원 문턱 못 넘었다…가상자산 입법 좌초(종합)",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-15T20:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006370033?sid=101"
-        },
-        {
-          "title": "美 '클래리티법' 입법 기대감…'가상자산 랠리' 재개될까",
-          "press": "metroseoul.co.kr",
-          "publishedAt": "2026-09-06T23:00:00.000Z",
-          "link": "http://www.metroseoul.co.kr/article/20260907500010"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "부실 PF 3조원",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "금융위가 부실 PF 정상화에 캠코펀드 3조원을 투입해 주택을 공급한다.",
-      "headlines": [
-        {
-          "title": "캠코펀드로 되살린 마포 178가구…권대영 \"부실 PF 정상화 지원\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-17T01:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009175745?sid=101"
-        },
-        {
-          "title": "금융위, 부실 PF 정상화에 3조원 투입…주택 1만8000가구 공급",
-          "press": "dailian.co.kr",
-          "publishedAt": "2026-09-17T01:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/119/0003133707?sid=101"
-        },
-        {
-          "title": "부실PF 정상화에 캠코펀드 3조원 조성··· 주택 1.8만호 공급",
-          "press": "seoulfn.com",
-          "publishedAt": "2026-09-17T06:31:00.000Z",
-          "link": "https://www.seoulfn.com/news/articleView.html?idxno=638221"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "VAN",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "KT가 경기도VAN연합회와 소상공인 디지털 전환을 돕는다.",
-      "headlines": [
-        {
-          "title": "KT, 경기도VAN연합회와 소상공인 디지털 전환 돕는다",
-          "press": "suwonilbo.kr",
-          "publishedAt": "2026-09-17T06:32:00.000Z",
-          "link": "https://www.suwonilbo.kr/news/articleView.html?idxno=318282"
-        },
-        {
-          "title": "VAN, 대격변 시대 속 AI 기술주권·노동대체 논의",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-17T08:10:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215418"
-        },
-        {
-          "title": "<인터뷰> 'VAN 보석' 이은주 대표 \"신용이 생명입니다\"",
-          "press": "fnnews.com",
-          "publishedAt": "2026-09-14T23:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005575747?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "van 컨퍼런스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "van cleef",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "van cleef bracelet",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "Dries Van Noten",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "van 결제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "van 발음",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "van 이름",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "van 차종",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "EU",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "EU가 13세 미만 SNS 금지 키즈법을 27개국서 추진한다.",
-      "headlines": [
-        {
-          "title": "EU \"캐나다, 첫 준회원 길 열고파\" vs 캐나다 \"아직 그 단계 아냐\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-17T02:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014196678?sid=104"
-        },
-        {
-          "title": "캐나다 품으려는 EU에 트럼프 발끈…“적대 행위면 고율 관세”",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-17T07:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006371322?sid=101"
-        },
-        {
-          "title": "\"13세 미만 SNS 못한다\"…EU 27개국 전역서 '키즈법' 추진",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-09-17T01:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001969463?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "eu 신발사이즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "eu 플러그",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "eu 가입국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "EU 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "eu 입국 신청",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "eu 돈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "EU 국가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "eu 규제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "EU 캐나다 관계",
-          "reason": "준회원 논의 향방",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "플로우",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "협업툴 플로우가 챗GPT·클로드 공식 앱에 동시 등록됐다.",
-      "headlines": [
-        {
-          "title": "마드라스체크 플로우, ChatGPT·Claude 앱에 동시 등록",
-          "press": "donga.com",
-          "publishedAt": "2026-09-17T02:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003748881?sid=101"
-        },
-        {
-          "title": "플로우, 챗GPT·클로드에 동시 공식 앱 등록… 국내 협업툴 최초",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-09-17T01:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/144/0001138761?sid=105"
-        },
-        {
-          "title": "협업툴 플로우, 챗GPT·클로드 공식 앱 등록",
-          "press": "it.chosun.com",
-          "publishedAt": "2026-09-17T02:14:00.000Z",
-          "link": "https://it.chosun.com/news/articleView.html?idxno=2023092170358"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "플로우 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플로우 온",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 플로우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플로우 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플로우 웹툰",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플로우 앱",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플로우 책",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "플로우 팜",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "플로우 사용법",
-          "reason": "AI 연동 활용 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "플로우 요금",
-          "reason": "도입 검토",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "노보 노디스크",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "노보 노디스크가 앤트로픽과 손잡고 AI로 신약을 개발한다.",
-      "headlines": [
-        {
-          "title": "노보, 앤트로픽 손잡고 AI로 신약 개발…\"신약 출시 속도 높인다\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-17T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014196711?sid=104"
-        },
-        {
-          "title": "'신약개발' 노보 노디스크, 앤트로픽 손 잡았다",
-          "press": "biz.sbs.co.kr",
-          "publishedAt": "2026-09-17T00:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/374/0000533409?sid=104"
-        },
-        {
-          "title": "'위고비 제약사' 노보노디스크, 사명 '노보'로 변경",
-          "press": "insight.co.kr",
-          "publishedAt": "2026-09-17T01:22:00.000Z",
-          "link": "https://www.insight.co.kr/news/573943"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "노보 노디스크 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노보 노디스크 제약회사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노보노디스크 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노보노디스크 한국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노보노디스크 위고비",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노보노디스크 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노보노디스크 코리아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "노보",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "팀스파르타",
@@ -7675,7 +8767,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "과기부",
@@ -7762,7 +8855,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "지니젠AI",
@@ -7793,7 +8887,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "술레이먼",
@@ -7824,7 +8919,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "신원식",
