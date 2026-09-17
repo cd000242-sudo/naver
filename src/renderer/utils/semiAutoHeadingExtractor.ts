@@ -199,6 +199,21 @@ export function extractSemiAutoHeadingsFromBody(body: string): SemiAutoExtracted
 }
 
 /**
+ * [2026-09-17 사장님 라이브] 소제목 제목으로 본문을 자를 때, 그 줄의 번호·마커까지 함께 자른다.
+ *
+ * 본문 줄은 "4. 사과하면서도 흉기 소지와 강도 의도는 부인했다" 인데 제목 데이터는 번호를 뗀
+ * "사과하면서도 …" 다. indexOf(제목) 자리에서 자르면 "4. " 이 앞 섹션 본문 꼬리에 남아,
+ * 발행 글에 "4." 한 줄이 구분선 위에 따로 찍힌다(실측). 제목 앞이 마커뿐이면 줄 머리에서 자른다.
+ */
+const HEADING_LINE_PREFIX_RE = /^\s*(?:#{1,4}\s+|\d{1,2}\s*[\).:：-]\s*|(?:소제목|제목|heading|section)\s*\d*\s*[:：.\-]\s*|\*\*\s*)?$/iu;
+
+function headingCutStart(body: string, at: number): number {
+  const lineStart = body.lastIndexOf('\n', at - 1) + 1;
+  const prefix = body.slice(lineStart, at);
+  return HEADING_LINE_PREFIX_RE.test(prefix) ? lineStart : at;
+}
+
+/**
  * Orderly position-slice of the body by known heading titles. Returns null when
  * any title is missing (or out of order), so callers can fall back safely.
  */
@@ -206,20 +221,20 @@ function sliceBodyByExistingHeadingTitles(
   body: string,
   titles: readonly string[],
 ): { introduction: string; sections: Array<{ title: string; content: string }> } | null {
-  const positions: Array<{ title: string; at: number }> = [];
+  const positions: Array<{ title: string; at: number; cut: number }> = [];
   let searchFrom = 0;
   for (const title of titles) {
     const at = body.indexOf(title, searchFrom);
     if (at < 0) return null;
-    positions.push({ title, at });
+    positions.push({ title, at, cut: headingCutStart(body, at) });
     searchFrom = at + title.length;
   }
   const sections = positions.map((position, index) => {
     const contentStart = position.at + position.title.length;
-    const contentEnd = index + 1 < positions.length ? positions[index + 1].at : body.length;
+    const contentEnd = index + 1 < positions.length ? positions[index + 1].cut : body.length;
     return { title: position.title, content: body.slice(contentStart, contentEnd).trim() };
   });
-  return { introduction: body.slice(0, positions[0].at).trim(), sections };
+  return { introduction: body.slice(0, positions[0].cut).trim(), sections };
 }
 
 /**
@@ -248,22 +263,22 @@ function sliceBodyByAvailableTitles(
   body: string,
   titles: readonly string[],
 ): { introduction: string; sections: Array<{ title: string; content: string }> } | null {
-  const positions: Array<{ title: string; at: number }> = [];
+  const positions: Array<{ title: string; at: number; cut: number }> = [];
   let searchFrom = 0;
   for (const title of titles) {
     const at = body.indexOf(title, searchFrom);
     if (at < 0) continue;
-    positions.push({ title, at });
+    positions.push({ title, at, cut: headingCutStart(body, at) });
     searchFrom = at + title.length;
   }
   if (positions.length === 0) return null;
 
   const sections = positions.map((position, index) => {
     const contentStart = position.at + position.title.length;
-    const contentEnd = index + 1 < positions.length ? positions[index + 1].at : body.length;
+    const contentEnd = index + 1 < positions.length ? positions[index + 1].cut : body.length;
     return { title: position.title, content: body.slice(contentStart, contentEnd).trim() };
   });
-  return { introduction: body.slice(0, positions[0].at).trim(), sections };
+  return { introduction: body.slice(0, positions[0].cut).trim(), sections };
 }
 
 /**

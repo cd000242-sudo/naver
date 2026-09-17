@@ -4,7 +4,8 @@ import { normalizeEditorSubtitleText } from './editorWriterTextSemantics.js';
 export function headingLineBoundary(content: string, titleIndex: number): number {
   const lineStart = content.lastIndexOf('\n', titleIndex - 1) + 1;
   const prefix = content.slice(lineStart, titleIndex);
-  return /^[ \t]*(?:#{1,6}[ \t]+)?(?:\*\*|__)?[ \t]*$/.test(prefix) ? lineStart : titleIndex;
+  // [2026-09-17] 번호 접두("4. ", "4) ")도 소제목 마커다 - 빼면 "4." 이 앞 섹션 꼬리로 발행된다(라이브 실측).
+  return /^[ \t]*(?:#{1,6}[ \t]+)?(?:\d{1,2}[ \t]*[).:：-][ \t]*)?(?:\*\*|__)?[ \t]*$/.test(prefix) ? lineStart : titleIndex;
 }
 
 function headingKey(line: string): string {
