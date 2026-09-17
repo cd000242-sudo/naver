@@ -1188,9 +1188,17 @@ export function initHeadingImageGeneration(): void {
               // 결과를 소제목에 매핑
               let successCount = 0;
               let failCount = 0;
-              for (let i = 0; i < imageResult.images.length; i++) {
-                const img = imageResult.images[i];
-                const heading = filteredHeadings[i];
+              // [2026-09-17 사장님 화면] 결과를 위치(i)가 아니라 소제목 이름으로 맞춘다. main 이 headingImageMode 로
+              //   항목을 걸러 결과 배열이 소제목 배열과 어긋나면, i번째 이미지가 i번째 소제목 카드에 붙어 같은
+              //   이미지가 두 칸에 보이고 엉뚱한 소제목에 저장됐다. 풀오토는 resolveImageManagerKeys 로 이미 이름 기준.
+              const normalizeResultHeading = (v: any): string => String(v || '').replace(/\s+/g, ' ').trim();
+              for (let k = 0; k < imageResult.images.length; k++) {
+                const img = imageResult.images[k];
+                const imgHeading = normalizeResultHeading(img?.heading);
+                let i = imgHeading ? filteredHeadings.findIndex((h: any) => normalizeResultHeading(h?.title) === imgHeading) : -1;
+                if (i < 0 && typeof img?.originalIndex === 'number' && img.originalIndex >= 0 && img.originalIndex < filteredHeadings.length) i = img.originalIndex;
+                if (i < 0 && !imgHeading) i = k; // 옛 결과(heading 없음)만 위치로
+                const heading = i >= 0 ? filteredHeadings[i] : undefined;
                 if (img && heading) {
                   const imageUrl = img.previewDataUrl || img.filePath;
                   if (imageUrl) {
