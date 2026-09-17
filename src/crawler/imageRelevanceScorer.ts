@@ -13,6 +13,7 @@ import * as https from 'https';
 import { VISION_MODELS, routeTextToVision, type VisionRouting } from '../runtime/modelRegistry.js';
 import { TimeoutPolicy } from '../automation/TimeoutPolicy.js';
 import { chargeAndCheck, resetVisionBudget, getVisionBudget } from './visionBudgetGuard.js';
+import { isOpenAiReasoningModel } from '../runtime/openaiReasoningFamily.js';
 
 interface RelevanceScore {
   url: string;
@@ -238,9 +239,14 @@ function openaiStrategy(model: string, apiKey: string): VisionStrategy {
     timeoutMs,
     async score(buf, mime, prompt) {
       const dataUrl = `data:${mime};base64,${buf.toString('base64')}`;
+      // [2026-09-17] max_tokens → max_completion_tokens: gpt-5.6 계열이 max_tokens 를 400 으로
+      // 거부한다(이슈 끝판왕 게이트 라이브 실측, 같은 뿌리). 추론 계열은 예산을 추론에 먼저 쓰므로
+      // 100 이면 답이 비어 온다 — effort low + 여유 예산(openaiVisionAdapter 와 같은 처방).
+      const reasoning = isOpenAiReasoningModel(model);
       const body = {
         model,
-        max_tokens: 100,
+        max_completion_tokens: reasoning ? 1024 : 100,
+        ...(reasoning ? { reasoning_effort: 'low' } : {}),
         response_format: { type: 'json_object' },
         messages: [{
           role: 'user',

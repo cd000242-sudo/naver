@@ -10,6 +10,7 @@ import { mkdtemp, rm, writeFile } from 'fs/promises';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import type { IssueVisionRoute } from './visionRoute.js';
+import { isOpenAiReasoningModel } from '../../runtime/openaiReasoningFamily.js';
 
 const LOG = '[IssueVisionJudge]';
 const REQUEST_TIMEOUT_MS = 90_000;
@@ -49,6 +50,32 @@ async function judgeWithGemini(
   return result.response.text().trim();
 }
 
+/**
+ * [2026-09-17] Request body for the OpenAI judge. Pure so a test can pin it.
+ *
+ * Live failure (사장님 log, 나나 article): every batch returned 400
+ * "'max_tokens' is not supported with this model. Use 'max_completion_tokens'" for
+ * gpt-5.6-terra, the gate is fail-closed, so 116 candidates → 0 verified images.
+ * The photo-mode adapter (openaiVisionAdapter.ts, v2.11.135) had already learned the
+ * same three lessons; this file was written separately and kept the old shape:
+ *   1. max_completion_tokens — accepted by old and new models alike.
+ *   2. reasoning-family models reject a non-default temperature the same way.
+ *   3. reasoning-family models spend the token budget on reasoning first, so a JSON
+ *      verdict can come back empty — effort low keeps the budget for the answer.
+ */
+export function buildOpenAiVisionBody(
+  model: string,
+  content: readonly unknown[],
+): Record<string, unknown> {
+  const reasoning = isOpenAiReasoningModel(model);
+  return {
+    model,
+    ...(reasoning ? { reasoning_effort: 'low' } : { temperature: 0.1 }),
+    max_completion_tokens: 4096,
+    messages: [{ role: 'user', content }],
+  };
+}
+
 async function judgeWithOpenAI(
   images: readonly VisionJudgeImage[],
   prompt: string,
@@ -64,12 +91,7 @@ async function judgeWithOpenAI(
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${route.apiKey}` },
-    body: JSON.stringify({
-      model: route.model,
-      temperature: 0.1,
-      max_tokens: 4096,
-      messages: [{ role: 'user', content }],
-    }),
+    body: JSON.stringify(buildOpenAiVisionBody(route.model, content)),
     signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
   });
   if (!response.ok) {
