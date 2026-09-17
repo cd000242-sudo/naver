@@ -4,7 +4,9 @@
 // 에이전트면 구독 CLI(추가 과금 0). 호출자가 없으면 휴리스틱으로 내려가므로
 // 키가 없어도 수집은 돈다 (영문/팬덤 검색어만 빠진다).
 
-import type { HeadingQuerySet, IssueHeadingInput, IssueQueryPlan } from './types.js';
+import type { HeadingQuerySet, IssueHeadingInput, IssueQueryPlan,
+  IssueSubjectType,
+} from './types.js';
 import type { IssuePlanCaller } from './textRoute.js';
 
 const LOG = '[IssueQueryFanout]';
@@ -106,6 +108,10 @@ ${sections}
   (예: "배우 한다감이 시험관 시술로 임신에 성공했고, 미운 우리 새끼 방송에서 남편이
   눈물을 보인 장면이 화제가 됐다")
 
+- subjectType: 주체가 누구인가. "celebrity"(연예인·아이돌·방송인·운동선수 등 얼굴이 알려진 공인),
+  "public-figure"(정치인·기업인 등 공적 인물), "private"(사건 당사자·일반인 — 얼굴이 공개적으로
+  알려지지 않음). 본문이 그 사람을 직업·소속으로 소개하지 않으면 private 로 본다.
+
 # 2단계: 소제목별 검색어 (사건 맥락 기준)
 ⚠️ 소제목 문구를 그대로 검색어로 쓰지 마세요. 소제목은 후킹용 표현이라 시각적 주체가
 없습니다 (예: "44세부터 46세 겨울까지" → 이대로 검색하면 엉뚱한 사진이 나옴).
@@ -115,7 +121,8 @@ ${sections}
 
 - koreanQuery: mainSubject + 사건/프로그램 핵심어 (예: "한다감 미운 우리 새끼 임신")
 - englishQuery: 로마자 인물명 + 영문 이슈어 (해외 소스용, 없으면 빈 문자열)
-- fandomQuery: 그 인물의 실제 모습을 찾는 검색어 (예: "한다감 직찍", "한다감 방송 캡처")
+- fandomQuery: 그 인물의 실제 모습을 찾는 검색어 (예: "한다감 직찍", "한다감 방송 캡처").
+  subjectType 이 private 면 빈 문자열 — 일반인 이름으로 직찍을 찾으면 동명이인 연예인이 나온다.
 - eventQuery: 프로그램/행사 현장 검색어 (예: "미운 우리 새끼 한다감", 없으면 빈 문자열)
 - imageCount: 이 소제목에 필요한 이미지 수 (기본 1). 본문이 여러 장면·단계·비교를
   다뤄 1장으로 부족할 때만 2~3. 확신 없으면 1.
@@ -126,6 +133,7 @@ ${sections}
   "romanizedSubject": "...",
   "programName": "...",
   "contextSummary": "...",
+  "subjectType": "celebrity|public-figure|private",
   "sets": [
     {"index": 1, "koreanQuery": "...", "englishQuery": "...", "fandomQuery": "...", "eventQuery": "...", "imageCount": 1}
   ]
@@ -159,11 +167,18 @@ export async function buildIssueQueryPlan(
       romanizedSubject?: string;
       programName?: string;
       contextSummary?: string;
+      subjectType?: string;
       sets?: Array<{ index: number; koreanQuery?: string; englishQuery?: string; fandomQuery?: string; eventQuery?: string; imageCount?: number }>;
     };
 
     const subject = String(parsed.mainSubject || '').trim() || fallback.mainSubject;
     const programName = String(parsed.programName || '').trim();
+    const subjectTypeRaw = String(parsed.subjectType || '').trim().toLowerCase();
+    const subjectType: IssueSubjectType = (['celebrity', 'public-figure', 'private'] as const).includes(subjectTypeRaw as any)
+      ? (subjectTypeRaw as IssueSubjectType)
+      : 'unknown';
+    // 일반인(private)은 직찍 검색을 끈다 — 이름만 같은 연예인·치어리더가 온다(양수진 실측).
+    const allowFandom = subjectType !== 'private';
     const querySets: HeadingQuerySet[] = headings.map((h, i) => {
       const match = (parsed.sets || []).find((s) => s.index === i + 1);
       const fb = fallback.querySets[i];
@@ -185,7 +200,7 @@ export async function buildIssueQueryPlan(
         heading: h.title,
         koreanQuery: meta ? metaKorean : anchor(String(match?.koreanQuery || '').trim() || fb.koreanQuery),
         englishQuery: String(match?.englishQuery || '').trim(),
-        fandomQuery: anchor(String(match?.fandomQuery || '').trim() || fb.fandomQuery),
+        fandomQuery: anchor(allowFandom ? (String(match?.fandomQuery || '').trim() || fb.fandomQuery) : ''),
         eventQuery: meta ? (programName || '') : anchor(String(match?.eventQuery || '').trim()),
         broaderQuery: subject,
         // 기본 1장 — AI가 명시적으로 2~3을 권한 경우만 반영 (범위 밖은 1로 클램프)
@@ -195,7 +210,7 @@ export async function buildIssueQueryPlan(
 
     const contextSummary = String(parsed.contextSummary || '').trim();
     console.log(
-      `${LOG} ✅ AI 쿼리 팬아웃 완료: ${querySets.length}개 소제목 (주체: ${subject}${programName ? `, 프로그램: ${programName}` : ''})`,
+      `${LOG} ✅ AI 쿼리 팬아웃 완료: ${querySets.length}개 소제목 (주체: ${subject}${programName ? `, 프로그램: ${programName}` : ''}, 유형: ${subjectType})`,
     );
     if (contextSummary) console.log(`${LOG} 📖 사건 맥락: ${contextSummary.slice(0, 120)}`);
     return {
@@ -203,6 +218,7 @@ export async function buildIssueQueryPlan(
       romanizedSubject: String(parsed.romanizedSubject || '').trim(),
       contextSummary,
       programName,
+      subjectType,
       querySets,
       aiGenerated: true,
     };

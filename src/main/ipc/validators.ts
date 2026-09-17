@@ -53,6 +53,8 @@ export function validateIssueCollectPayload(payload: unknown): ValidationResult<
   headings: Array<{ title: string; body?: string }>;
   mainKeyword?: string;
   intro?: string;
+  /** [2026-09-17] 유료 AI 이미지 검사를 이번 수집에서 켰는가. 기본 false = 무료 캡션 판정. */
+  paidVisionCheck?: boolean;
 }> {
   if (!payload || typeof payload !== 'object') return { ok: false, error: 'payload는 object여야 합니다' };
   const p = payload as Record<string, unknown>;
@@ -77,6 +79,9 @@ export function validateIssueCollectPayload(payload: unknown): ValidationResult<
   if (p.intro !== undefined && p.intro !== null && !isStr(p.intro, 20000)) {
     return { ok: false, error: 'intro는 20000자 이하 string이어야 합니다' };
   }
+  if (p.paidVisionCheck !== undefined && p.paidVisionCheck !== null && typeof p.paidVisionCheck !== 'boolean') {
+    return { ok: false, error: 'paidVisionCheck는 boolean이어야 합니다' };
+  }
   return {
     ok: true,
     value: {
@@ -84,6 +89,7 @@ export function validateIssueCollectPayload(payload: unknown): ValidationResult<
       headings,
       mainKeyword: (p.mainKeyword as string | undefined) ?? undefined,
       intro: (p.intro as string | undefined) ?? undefined,
+      paidVisionCheck: p.paidVisionCheck === true,
     },
   };
 }

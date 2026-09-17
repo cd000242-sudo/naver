@@ -49,6 +49,8 @@ export interface VisionSubjectContext {
   programName?: string;
   /** 이 소제목의 본문 발췌 — 어떤 장면을 원하는지 판정 기준 */
   headingBody?: string;
+  /** [2026-09-17] 주체 유형 — private 면 공인 사진은 전부 동명이인으로 본다. */
+  subjectType?: import('./types.js').IssueSubjectType;
 }
 
 /**
@@ -63,7 +65,11 @@ function buildVisionPrompt(ctx: VisionSubjectContext): string {
 
 # 이 글이 다루는 사건
 - 핵심 주체: ${ctx.mainSubject}
-${ctx.programName ? `- 사건 무대(프로그램/행사): ${ctx.programName}\n` : ''}${ctx.contextSummary ? `- 사건 요약: ${ctx.contextSummary}\n` : ''}- 이 이미지가 들어갈 소제목: ${ctx.heading}
+${ctx.subjectType === 'private' ? `- 주체 신원: 유명인이 아닌 사건 당사자(일반인)입니다. 얼굴이 공개된 인물이 아니므로
+  연예인·아이돌·치어리더·운동선수·배우 등 공인의 화보·무대·경기·방송 출연 사진은 이름이 같아도
+  동명이인입니다 → relevant=false. 사건 당사자임을 사진 맥락(사건 현장·문서·해당 보도 자막)으로
+  확인할 수 없으면 false.
+` : ''}${ctx.programName ? `- 사건 무대(프로그램/행사): ${ctx.programName}\n` : ''}${ctx.contextSummary ? `- 사건 요약: ${ctx.contextSummary}\n` : ''}- 이 이미지가 들어갈 소제목: ${ctx.heading}
 ${body ? `- 해당 소제목 본문: ${body}\n` : ''}
 각 이미지에 대해 판정:
 - relevant: 이 사진이 위 사건의 주체 본인(인물이면 그 인물)이 담겼거나, 사건 무대(해당

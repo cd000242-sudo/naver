@@ -23,7 +23,16 @@ export interface HeadingQuerySet {
 }
 
 /** Result of the AI body analysis + query fanout. */
+/**
+ * [2026-09-17 사장님 라이브] 양수진(마담 논란) 글에 치어리더·아이돌 사진이 붙었다. 주체가 얼굴이
+ * 알려진 공인이 아니면 "이름 + 직찍" 검색은 동명이인 연예인을 데려오고, 비전 판정도 그 사람을
+ * 본인으로 오인한다. 주체 유형을 플랜에서 받아 검색어와 판정 규칙을 갈아 끼운다.
+ */
+export type IssueSubjectType = 'celebrity' | 'public-figure' | 'private' | 'unknown';
+
 export interface IssueQueryPlan {
+  /** 주체 유형 — AI 플랜이 채운다. 휴리스틱 폴백은 'unknown'. */
+  subjectType?: IssueSubjectType;
   /** Core subject (person/team) extracted from title+body */
   mainSubject: string;
   /** Romanized subject for overseas searches ("손흥민" → "Son Heung-min") */

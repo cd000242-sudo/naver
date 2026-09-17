@@ -227,6 +227,7 @@ export async function collectIssueImages(
         heading: qs.heading,
         contextSummary: plan.contextSummary,
         programName: plan.programName,
+        subjectType: plan.subjectType,
         headingBody: payload.headings[hi]?.body,
       },
     });

@@ -4,7 +4,7 @@
 // flows stay untouched when the checkbox is off.
 // Inline bundle = single scope → all top-level identifiers prefixed issueCollect*.
 
-import { ensureIssueCopyrightConsent } from './issueCollectConsent.js';
+import { ensureIssueCopyrightConsent, ensureIssueVisionChoice } from './issueCollectConsent.js';
 
 // Globals provided by other inlined modules (single-scope bundle).
 declare function getCurrentImageHeadings(): any[];
@@ -84,6 +84,13 @@ export async function runIssueEndgameCollect(
         appendLogFn('⛔ 저작권 동의가 없어 이슈 수집을 중단했습니다.');
         return 0;
     }
+    // [2026-09-17] 유료 AI 검사는 기본 OFF — 매 수집마다 무료/유료를 고른다(구독 엔진이면 묻지 않음).
+    const visionChoice = await ensureIssueVisionChoice();
+    if (!visionChoice) {
+        appendLogFn('⛔ 이미지 검사 방식을 고르지 않아 수집을 중단했습니다.');
+        return 0;
+    }
+    appendLogFn(visionChoice.paid ? '💳 이미지 검사: AI 검사(유료, 최저가 모델)' : '🆓 이미지 검사: 캡션 판정(무료)');
 
     const currentHeadings = getCurrentImageHeadings();
     let headingTitles: string[] = currentHeadings.map(
@@ -146,6 +153,7 @@ export async function runIssueEndgameCollect(
             headings: headingInputs,
             mainKeyword: searchKeyword,
             intro: introText,
+            paidVisionCheck: visionChoice.paid,
         });
     } catch (ipcError: any) {
         // Thrown (not returned) failure — close the modal before rethrowing,

@@ -123,3 +123,17 @@ describe('게이트 배선 핀', () => {
     expect(fanout).toMatch(/planCaller/);
   });
 });
+
+describe('[2026-09-17] 검사 모델은 같은 벤더에서 제일 싼 비전 모델', () => {
+  it('GPT → luna, Claude → haiku, Gemini → flash-lite (벤더는 그대로)', () => {
+    expect(resolveIssueVisionRoute({ ...allKeys, primaryGeminiTextModel: 'openai-gpt41' })?.model).toBe('gpt-5.6-luna');
+    expect(resolveIssueVisionRoute({ ...allKeys, primaryGeminiTextModel: 'claude-sonnet' })?.model).toBe('claude-haiku-4-5-20251001');
+    expect(resolveIssueVisionRoute({ ...allKeys, primaryGeminiTextModel: 'gemini-3.5-flash' })?.model).toBe('gemini-3.1-flash-lite');
+  });
+
+  it('라벨도 실제 호출 모델을 보여 준다 — 화면·로그가 청구 모델과 어긋나지 않는다', () => {
+    const route = resolveIssueVisionRoute({ ...allKeys, primaryGeminiTextModel: 'openai-gpt41' });
+    expect(route?.label).toBe('openai · gpt-5.6-luna');
+    expect(route?.free).toBe(false);
+  });
+});

@@ -14,6 +14,8 @@
 //   3) 키 없음 → null → 호출 측이 무료 캡션 게이트로 내려간다 (조용한 벤더 전환 금지)
 
 import { routeTextToVision, isAgentTextProvider } from '../../runtime/modelRegistry.js';
+import { CLAUDE_MODELS, OPENAI_TEXT_MODELS } from '../../runtime/textModelConstants.js';
+import { GEMINI_TEXT_MODELS } from '../../runtime/geminiTextModelNormalization.js';
 
 export type VisionJudgeVendor = 'gemini' | 'openai' | 'claude' | 'agent-claude' | 'agent-codex';
 
@@ -71,6 +73,21 @@ function resolveVendorKey(config: Record<string, unknown>, vendor: 'gemini' | 'o
 }
 
 /**
+ * [2026-09-17 사장님] "검사비용은 제일 싼 걸로 해주고."
+ *
+ * 수집기 판정은 워터마크·자막·주체 유무·사진 여부 같은 단순 시각 판정이라 프론티어 모델이
+ * 필요 없다. 실측(나나 글, terra): 한 편 108장 검사에 $0.17~0.30 — 고화질 생성과 맞먹었다.
+ * 같은 벤더 안에서 가장 싼 비전 모델로 간다(앱 단가표 입력 $/1M: flash-lite 0.25 · luna 1.00 ·
+ * haiku 1.00, terra 는 2.50). 벤더는 바꾸지 않는다 — "지피티면 지피티" 원칙 그대로.
+ */
+export function cheapestVisionModelFor(vendor: 'gemini' | 'openai' | 'claude', fallback: string): string {
+  if (vendor === 'openai') return OPENAI_TEXT_MODELS.LUNA;
+  if (vendor === 'claude') return CLAUDE_MODELS.HAIKU;
+  if (vendor === 'gemini') return GEMINI_TEXT_MODELS.FLASH_LITE;
+  return fallback;
+}
+
+/**
  * 고른 글생성 엔진으로 수집기 Vision 경로를 정한다.
  * 쓸 수 없으면 null — 호출 측은 무료 캡션 게이트로 내려간다.
  */
@@ -102,11 +119,12 @@ export function resolveIssueVisionRoute(config: unknown): IssueVisionRoute | nul
   const apiKey = resolveVendorKey(c, vendor);
   if (!apiKey) return null;
 
+  const model = cheapestVisionModelFor(vendor, routed.model);
   return {
     vendor,
-    model: routed.model,
+    model,
     apiKey,
-    label: `${vendor} · ${routed.model}`,
+    label: `${vendor} · ${model}`,
     free: false,
     fellBack: routed.fellBack,
     reason: routed.reason,

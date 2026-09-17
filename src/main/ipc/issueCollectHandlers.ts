@@ -26,6 +26,7 @@ export function registerIssueCollectHandlers(): void {
 
       // 실행 직전 최신 설정 동기화 (Naver env 키 포함)
       let visionRoute: IssueVisionRoute | null = null;
+      let paidVisionDeclined = false;
       let planCaller: IssuePlanCaller | undefined;
       let planEngineLabel: string | undefined;
       try {
@@ -50,6 +51,15 @@ export function registerIssueCollectHandlers(): void {
          * 고른 엔진으로 비전을 못 하면 다른 벤더로 몰래 청구하지 않고 무료 게이트로 간다.
          */
         visionRoute = resolveIssueVisionRoute(config);
+        /*
+         * [2026-09-17 사장님] "수집하는데 돈이 들면 생성하고 말지 누가 쓰니."
+         * 유료(API 키) 비전 검사는 사용자가 이번 수집에서 켰을 때만 돈다. 구독(에이전트) 경로는 과금 0이라
+         * 그대로. 안 켰으면 무료 캡션 판정 — 워터마크·구도는 못 보지만 한 푼도 들지 않는다.
+         */
+        if (visionRoute && !visionRoute.free && v.value.paidVisionCheck !== true) {
+          paidVisionDeclined = true;
+          visionRoute = null;
+        }
       } catch (e) {
         console.error('[Main] issue:collectImages - 설정 동기화 실패:', e);
       }
@@ -64,7 +74,9 @@ export function registerIssueCollectHandlers(): void {
         : '🧠 검색어 플랜: 휴리스틱(무료) — 고른 엔진으로 AI 플랜을 만들 수 없습니다.';
       console.log(`[Main] issue:collectImages — ${planNotice}`);
       const notice = !visionRoute
-        ? '⚠️ 고른 AI 엔진으로 이미지 검사를 할 수 없어 캡션 텍스트로만 판정합니다(무료) — 워터마크·구도는 확인하지 못합니다.'
+        ? (paidVisionDeclined
+          ? '🆓 이미지 검사: 캡션 텍스트 판정(무료) — 유료 AI 검사는 수집 시작 창에서 켤 수 있습니다(워터마크·구도는 확인하지 못합니다).'
+          : '⚠️ 고른 AI 엔진으로 이미지 검사를 할 수 없어 캡션 텍스트로만 판정합니다(무료) — 워터마크·구도는 확인하지 못합니다.')
         : visionRoute.free
           ? `🖼️ 이미지 검사: ${visionRoute.label} — 구독으로 돌아가 API 추가 과금이 없습니다.`
           : `🖼️ 이미지 검사: ${visionRoute.label}${visionRoute.fellBack ? ' (고른 엔진이 비전 미지원이라 같은 계열로 대체)' : ''} — API 비용이 발생합니다.`;
