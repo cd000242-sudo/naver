@@ -14,7 +14,7 @@ import {
   NAVER_SINGLE_IMAGE_MAX_MB,
   resolveNaverSupportedImageExtension,
 } from './naverImagePolicy.js';
-import { aiMarkAttrValue } from './imageProvenance.js';
+import { aiMarkAttrValue, recordImageProvenance } from './imageProvenance.js';
 
 // ✅ [2026-05-26 v2.10.373 SPEC-NAVER-PROTECTION-2026 P5 행동 패턴]
 //   page.mouse.move(x, y) 텔레포트(steps:1)는 봇 시그니처. 사람은 곡선으로 천천히 이동(10~30 steps).
@@ -1067,6 +1067,8 @@ export async function insertBase64ImageAtCursor(
         const target = imgs[imgs.length - 1] as HTMLImageElement | undefined;
         if (target) target.setAttribute('data-img-ai', aiValue);
       }, aiMarkAttrValue(provenanceMeta)).catch(() => undefined);
+      // [2026-09-17] DOM 속성은 마크 시점까지 못 살아남는다 — 장부에도 적는다(위치 = 개수-1).
+      recordImageProvenance(self, imgCount - 1, provenanceMeta);
 
       // ✅ MyBox 팝업 자동 닫기
       await self.delay(500); // 팝업이 뜰 시간 대기
@@ -1102,6 +1104,8 @@ export async function insertBase64ImageAtCursor(
     try {
       await self.insertImageViaBase64(absolutePath, frame, page);
       self.log(`   ✅ Base64 변환 방식으로 이미지 삽입 성공`);
+      const fallbackCount = await frame.$$eval(IMG_SELECTOR, (imgs: any) => imgs.length).catch(() => 0);
+      recordImageProvenance(self, fallbackCount - 1, provenanceMeta);
 
       if (isTemporaryFile) {
         await fs.unlink(absolutePath).catch(() => { });
@@ -1620,7 +1624,10 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
         if (!target) return;
         if (meta.provider) target.setAttribute('data-img-provider', meta.provider);
         target.setAttribute('data-img-ai', meta.aiValue);
+        return imgs.length - 1;
       }, { provider: image.provider || '', aiValue: aiFlag }).catch(() => undefined);
+      const taggedPosition = await frame.$$eval('img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"]', (imgs: any) => imgs.length - 1).catch(() => -1);
+      recordImageProvenance(self, taggedPosition, image as any);
     }
 
     // 문서너비 맞추기 + 모든 상품 이미지에 제휴 링크 삽입.
@@ -3558,6 +3565,8 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
             }
           }, { altText: altWithSource, provider: imgProvider, aiValue: aiMarkAttrValue(image as any) })
           .catch(() => undefined);
+        const taggedPosition = await frame.$$eval('img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"]', (imgs: any) => imgs.length - 1).catch(() => -1);
+        recordImageProvenance(self, taggedPosition, image as any);
       }
 
       if (plan?.caption) {

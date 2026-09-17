@@ -24,7 +24,7 @@ import { buildNaverAutomationProfile, hashAutomationAccountId, type NaverAutomat
 import { detectChromeFullVersion } from './automation/chromeVersionDetector.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
 import { performIdleMouseShake } from './automation/humanBehavior.js';
-import { isAiGeneratedImage } from './automation/imageProvenance.js';
+import { isAiGeneratedImage, readImageProvenance, resetImageProvenanceLedger } from './automation/imageProvenance.js';
 import { disablePlatformWebAuthn } from './automation/webauthnGuard.js';
 // [v2.10.285] 봇 감지 backoff + 로그인 자연 대기 (계정별 자동 보호)
 import { recordBotBackoff, getBotBackoff, isAccountBackedOff, computePostLoginHumanDelayMs } from './utils/botBackoff.js';
@@ -5468,10 +5468,14 @@ export class NaverBlogAutomation {
                     ai: el.getAttribute('data-img-ai') || '',
                     provider: el.getAttribute('data-img-provider') || '',
                   })).catch(() => ({ ai: '', provider: '' }));
-                  const isAiTarget = attrs.ai === '1'
-                    || (attrs.ai === '' && isAiGeneratedImage({ provider: attrs.provider }));
+                  // [2026-09-17] DOM 속성은 업로드 완료 재렌더에서 사라진다(라이브: AI 6장 전부 ai=없음).
+                  //   삽입 단계가 같은 판정을 장부(위치=문서 순서)에도 적어 두므로 그것이 1차 근거다.
+                  const ledger = readImageProvenance(this, i);
+                  const isAiTarget = ledger?.ai === '1'
+                    || attrs.ai === '1'
+                    || (!ledger && attrs.ai === '' && isAiGeneratedImage({ provider: attrs.provider }));
                   if (!isAiTarget) {
-                    this.log(`   ⏭️ [AI 마크] 비AI 이미지(ai=${attrs.ai || '없음'}, provider=${attrs.provider || '없음'}) → 마크 스킵`);
+                    this.log(`   ⏭️ [AI 마크] 비AI 이미지(장부=${ledger ? ledger.ai : '없음'}, ai=${attrs.ai || '없음'}, provider=${ledger?.provider || attrs.provider || '없음'}) → 마크 스킵`);
                     continue;
                   }
 
@@ -8885,6 +8889,7 @@ export class NaverBlogAutomation {
     //   사용자 보고: "글/이미지 다 끝났는데 네이버 로그인에서 95% 멈춤"
     //   log() 함수가 [+N.Ns] 자동 추가 → main 로그·debug.log에서 hang 위치 즉시 식별 가능
     this._runStartMs = Date.now();
+    resetImageProvenanceLedger(this); // 지난 글의 이미지 출처가 이번 글에 붙지 않게
     let postContentAppliedPublishFailure = false;
     (this as any).__editorMainBodyApplied = false;
     (this as any).__editorContentApplied = false;
