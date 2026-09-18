@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-18T03:36:58.568Z",
+  "publishedAt": "2026-09-18T09:29:40.409Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 213,
+    "candidates": 145,
     "niche": 0,
-    "preemption": 3,
+    "preemption": 9,
     "pending": 0
   },
   "freeSample": {
@@ -751,54 +751,36 @@
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "carried": true
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "모레 래퍼",
-      "issue": "모레",
-      "topic": "모레",
+      "keyword": "에스트래픽 과장 연봉",
+      "issue": "에스트래픽",
+      "topic": "에스트래픽",
       "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "제네더질라 뜻? 프로필 및 모레 가사 해석",
-          "제네더질라 모레 공연? 매들리 메들리 2026 출연 정보 총정리!",
-          "제네더질라모레, 문화비축기지 무대 총정리",
-          "어머나! 제네더질라 모레 출연 소식에 난리 난 11만원대 이 무대.. 알고 보니?",
-          "제네더질라 모레 공연 일정 매들리 메들리 2026 라인업 예매 총정리",
-          "여행 Again (Feat. Cautious Clay) _빈지노",
-          "푸에르토리코 출신의 래퍼, 가수, 음반 프로듀서 Wisin - Escápate Conmigo 외 5곡",
-          "매들리메들리 2026 공연에서 다시주목! 제네더질라",
-          "제네더질라 모레 매들리 메들리 2026 라인업 문화비축기지 예매 (기본정보)",
-          "제네더질라 모레 공연 매들리 메들리 2026 라인업과 티켓 예매 총정리"
-        ],
-        "measuredAt": "2026-09-16T08:59:28.528Z"
-      },
-      "documentCount": 1030,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 20,
       "documentCountMeasured": true,
-      "searchVolume": 690,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "declining",
-      "demandRatio": 0.3458639367028733,
-      "issueStatus": "stable",
-      "isHot": false,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 690",
-        "문서수 1,030",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "검색량 10",
+        "문서수 20",
+        "선점 후보 — 경쟁 문서 20건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -806,119 +788,472 @@
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 690 실측 — 트래픽 하한 통과"
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
         },
         {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.3배"
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에스트래픽 연봉",
+      "issue": "에스트래픽",
+      "topic": "에스트래픽",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 200,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 200",
+        "선점 후보 — 경쟁 문서 200건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오픈ai 쳇got 비교",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 18,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 18",
+        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
           "code": "empty-field",
           "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
-      "whySearch": {
-        "text": "래퍼 모레의 정체와 프로필·나이·본명·활동곡 등 기본 신상 정보를 확인하려는 검색으로 보인다.",
-        "basis": "AI 추론 — 실측 확인된 확장어 2개"
-      },
+      "whySearch": null,
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": [
+        {
+          "title": "쳇got 지브리 사진변환",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=483884587&answerNo=6",
+          "views": 1512,
+          "answers": 15
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에스트래픽 로고",
+      "issue": "에스트래픽",
+      "topic": "에스트래픽",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 160,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 160",
+        "선점 후보 — 경쟁 문서 160건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "모레 래퍼 프로필 나이 본명 소속사 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "모레 래퍼 프로필 찾다가 나이랑 본명에서 많이들 헷갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "모레 나이",
-          "searchVolume": 30,
-          "source": "ai-verified",
-          "frame": "generic"
-        },
-        {
-          "keyword": "모레 인스타",
-          "searchVolume": 10,
-          "source": "ai-verified",
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "모레 나이",
-          "searchVolume": 30,
-          "source": "ai-verified",
-          "documentCount": 96646
-        },
-        {
-          "keyword": "모레 인스타",
-          "searchVolume": 10,
-          "source": "ai-verified",
-          "documentCount": 54411
-        }
-      ],
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          10,
-          100,
-          55,
-          41,
-          34,
-          16,
-          20,
-          26,
-          54,
-          10,
-          12,
-          8,
-          15,
-          6,
-          10,
-          10,
-          8,
-          8,
-          7,
-          8,
-          12,
-          3,
-          4,
-          0,
-          9
-        ],
-        "measuredAt": "2026-09-18T03:36:59.301Z"
-      },
-      "kinCount": 42,
-      "kinTop": [],
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-16T08:58:06.771Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 7,
-        "verified": 2
-      },
-      "carried": true
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에스트래픽 반대의사 신청",
+      "issue": "에스트래픽",
+      "topic": "에스트래픽",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 159,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 159",
+        "선점 후보 — 경쟁 문서 159건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "조희대 대법원장 폐회회",
+      "issue": "조희대 대법원장 폐회회",
+      "topic": "조희대 대법원장 폐회회",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 64,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 64",
+        "선점 후보 — 경쟁 문서 64건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코난테크놀로지 블라인드",
+      "issue": "코난테크놀로지",
+      "topic": "코난테크놀로지",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 74,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 74",
+        "선점 후보 — 경쟁 문서 74건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "ai스페라 매출",
+      "issue": "AI스페라",
+      "topic": "AI스페라",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 140,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 140",
+        "선점 후보 — 경쟁 문서 140건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 21,
+      "kinTop": [
+        {
+          "title": "엘앤에프 주가 매출액 1조 778억원까지 예상하던데 매도를 할....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40102&docId=395925495&answerNo=3",
+          "views": 4660,
+          "answers": 14
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "ai스페라 강병탁",
+      "issue": "AI스페라",
+      "topic": "AI스페라",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 184,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 184",
+        "선점 후보 — 경쟁 문서 184건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "피어리오딕 랩스",
       "issue": "피어리오딕 랩스",
@@ -965,7 +1300,8 @@
       "monetize": null,
       "measuredAt": "2026-09-18T03:35:12.663Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "여수 이순신도서관 대출방법",
@@ -1025,7 +1361,8 @@
       "monetize": null,
       "measuredAt": "2026-09-18T03:35:12.663Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이청아 허리 부상",
@@ -1077,7 +1414,8 @@
       "monetize": null,
       "measuredAt": "2026-09-18T03:35:12.663Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "민주노총 심볼",
@@ -4778,437 +5116,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "리벨랙 사양",
-      "issue": "리벨랙",
-      "topic": "리벨랙",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 1,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 1",
-        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리벨리온이 일본 ai&에 NPU 리벨랙 100대 이상을 공급한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리벨랙 사양 NPU 성능과 일본 데이터센터 공급 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리벨랙 사양 보다가 일본에 100대 넘게 깐다는 게 걸리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-16T08:58:06.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "버즈니 마운틴독 분양",
-      "issue": "버즈니",
-      "topic": "버즈니",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 52,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 20",
-        "문서수 52",
-        "선점 후보 — 경쟁 문서 52건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "버즈니가 숏폼 AI '비스킷AI'에 클립 만들기 기능을 추가했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "버즈니 마운틴독 분양 가격 견사별로 얼마나 다를까",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "버즈니 마운틴독 분양 보러 갔다가 버니즈 마운틴독 수명에 발길이 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "대형견 분양",
-          "searchVolume": 1060,
-          "frame": "generic"
-        },
-        {
-          "keyword": "버니즈 마운틴독 분양",
-          "searchVolume": 410,
-          "frame": "generic"
-        },
-        {
-          "keyword": "버니즈 마운틴독 수명",
-          "searchVolume": 120,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "대형견 분양",
-          "searchVolume": 1060,
-          "documentCount": 214642,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "버니즈 마운틴독 분양",
-          "searchVolume": 410,
-          "documentCount": 2972,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "버니즈 마운틴독 수명",
-          "searchVolume": 120,
-          "documentCount": 667,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "버니즈 마운틴독 분양가",
-          "searchVolume": 60,
-          "documentCount": 1637,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "버니즈 마운틴독 가격",
-          "searchVolume": 10,
-          "documentCount": 933,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "버니즈 마운틴독 새끼",
-          "searchVolume": 10,
-          "documentCount": 411,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "버니즈 마운틴독 성격",
-          "searchVolume": 10,
-          "documentCount": 2184,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": [
-        {
-          "title": "강아지버즈니마운틴독",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=80501&docId=176761420&answerNo=1",
-          "views": 1602,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-16T08:58:06.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "악샤이 모레",
-      "issue": "모레",
-      "topic": "모레",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 2,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 2",
-        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "한미 외교장관회담이 모레 미국에서 열려 파병 논의가 주목된다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "악샤이 모레 토큰 팩토리 OS 이기종 반도체 효율",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "악샤이 모레가 공개한 토큰 팩토리 OS, 반도체 섞어 쓰는 방식이 의외로 다르네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-16T08:58:06.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "BTS 암표상 구속",
-      "issue": "BTS 암표상 구속",
-      "topic": "BTS 암표상 구속",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 69,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 69",
-        "선점 후보 — 경쟁 문서 69건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "BTS 티켓을 11만원에 사서 300만원에 판 30대 암표상이 구속됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "BTS 암표상 구속, 11만원→300만원 되판 24억 사건",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "BTS 암표상 구속됐는데 암표상 처벌이 어디까지 갈지 지켜봐야겠네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "암표상 처벌",
-          "searchVolume": 60,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "암표상 처벌",
-          "searchVolume": 60,
-          "documentCount": 1721,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-16T08:58:06.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "금융위 PG사 보안점검",
-      "issue": "금융위 PG사 보안점검",
-      "topic": "금융위 PG사 보안점검",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 242,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 242",
-        "선점 후보 — 경쟁 문서 242건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "금융위가 토스 해킹 이후 PG사 보안 리스크를 긴급 점검한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "금융위 PG사 보안점검, 토스 해킹 이후 AI 대응까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "금융위 PG사 보안점검 나선 진짜 이유 토스 해킹이었더라고요",
-          "frame": "ai",
-          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "PG사 뜻",
-          "searchVolume": 1540,
-          "frame": "generic"
-        },
-        {
-          "keyword": "PG사 종류",
-          "searchVolume": 70,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "PG사 뜻",
-          "searchVolume": 1540,
-          "documentCount": 15920,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "PG사 종류",
-          "searchVolume": 70,
-          "documentCount": 18204,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-16T08:58:06.771Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -6660,196 +6567,6 @@
           "onBoard": false
         }
       ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "금융위 PG사 보안점검",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "금융위가 토스 해킹 이후 PG사 보안 리스크를 긴급 점검한다.",
-      "headlines": [
-        {
-          "title": "금융위, PG사 보안 취약점 점검…“AI 해킹 위협에도 대응 강화”",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-09-16T06:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001192781?sid=101"
-        },
-        {
-          "title": "금융위, 토스 해킹에 PG사 보안 긴급점검…\"AI 해킹 위협 철저 대비\"",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-09-16T06:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005817275?sid=101"
-        },
-        {
-          "title": "\"PG사도 AI 해킹 대비해야\"…금융위, PG업권 보안 리스크 점검",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-16T06:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009174250?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "BTS 암표상 구속",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "BTS 티켓을 11만원에 사서 300만원에 판 30대 암표상이 구속됐다.",
-      "headlines": [
-        {
-          "title": "아이돌 공연 암표상 24억 벌어 집 샀다…BTS 표 30배 뻥튀기",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-09-16T02:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002823303?sid=102"
-        },
-        {
-          "title": "\"BTS 콘서트 11만원에 사서 300만원에\"…암표 팔아 아파트 산 암표상, 결...",
-          "press": "fnnews.com",
-          "publishedAt": "2026-09-16T05:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005576689?sid=102"
-        },
-        {
-          "title": "11만원 티켓 300만원에 팔아 아파트 산 암표상 구속…판매액만 24억원",
-          "press": "weekly.chosun.com",
-          "publishedAt": "2026-09-16T05:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/053/0000061540?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "버즈니",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "버즈니가 숏폼 AI '비스킷AI'에 클립 만들기 기능을 추가했다.",
-      "headlines": [
-        {
-          "title": "버즈니, 숏폼 서비스 '비스킷AI'에 클립 만들기 기능 도입",
-          "press": "daily.hankooki.com",
-          "publishedAt": "2026-09-16T05:54:00.000Z",
-          "link": "https://daily.hankooki.com/news/articleView.html?idxno=1406818"
-        },
-        {
-          "title": "버즈니, 비스킷AI에 '클립 만들기' 추가…숏폼 제작 기능 확대",
-          "press": "wolyo.co.kr",
-          "publishedAt": "2026-09-16T02:34:00.000Z",
-          "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=317869"
-        },
-        {
-          "title": "\"사진 한 장으로 5초 광고 영상 제작\"… 버즈니, '비스킷AI' 기능 확대",
-          "press": "it.chosun.com",
-          "publishedAt": "2026-09-16T08:40:00.000Z",
-          "link": "https://it.chosun.com/news/articleView.html?idxno=2023092170292"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "버즈니 마운틴 독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "버즈니 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "버즈니 회사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "버즈니 마운틴독 분양",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "모레",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "한미 외교장관회담이 모레 미국에서 열려 파병 논의가 주목된다.",
-      "headlines": [
-        {
-          "title": "한미외교장관회담, 모레 미국서 개최…호르무즈 파병 논의 주목",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-09-16T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012258168?sid=100"
-        },
-        {
-          "title": "모레 기자회견‥\"현안에 분명한 입장 밝힐 것\"",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-09-16T03:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001524254?sid=100"
-        },
-        {
-          "title": "모레 한미 외교장관회담...파병 등 논의 주목",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-09-16T00:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002407588?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "모레 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모레 래퍼",
-          "searchVolume": 690,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모레 한살차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모레 모래",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모레 영어로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "악샤이 모레",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모레 글피",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "모레 날씨",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
       "rowCount": 1,
       "carried": true
     }
