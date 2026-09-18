@@ -1,16 +1,16 @@
 {
-  "publishedAt": "2026-09-18T09:29:40.409Z",
+  "publishedAt": "2026-09-18T21:26:43.922Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 145,
-    "niche": 0,
-    "preemption": 9,
+    "candidates": 177,
+    "niche": 1,
+    "preemption": 8,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-09-18",
+    "day": "2026-09-19",
     "keywords": [
       "민주노총 금속노조",
       "skt 확정기변 방법",
@@ -18,6 +18,105 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "첼시 공홈",
+      "issue": "첼시",
+      "topic": "첼시",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "영국 프리미어리그 티켓 구매 26/27 EPL 첼시 아스널 토트넘",
+          "프리미어리그 첼시 경기 일정 티켓 예매 방법 입장권 구매 런던축구경기",
+          "영국 프리미어리그 티켓 구매 첼시 경기 예매 방법 가격",
+          "런던 첼시 티켓 예매 대행 방법 멤버십 없이 연석 32만원대 직관 후기",
+          "26/27시즌 첼시 여름이적시장 영입 리스트 선수 명단 정리 (1) : 모건 로저스 / 막상스 라크루아 / 마르코 팔레스트라 / 지오바니 켄다",
+          "닥터마틴 2976 벡스 첼시와 매장 슈케어 후기",
+          "로맨틱무브 포시즌 첼시 레인 부츠 완벽한 형아들의 비오는날 추구미! 8만원대 츄라이 잘만들면 잘팔린다!",
+          "다시 뜨고 있는 데일리 코치 가방 첼시백 30 내돈내산 구매 후기",
+          "4. 첼시FC 직관 티켓팅 쉽다고 했던 사람 나와(EPL 첼시 스탬포드브릿지 직관 티켓팅 하는법, 후기)+취소표 줍줍 성공!!!!",
+          "[런던 신혼여행] 런던 첼시구장 투어 “스탬포드브릿지 스타디움” + 첼시구장투어예약방법"
+        ],
+        "measuredAt": "2026-09-18T21:25:26.010Z"
+      },
+      "documentCount": 9540,
+      "documentCountMeasured": true,
+      "searchVolume": 730,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.8142857142857143,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 730",
+        "문서수 9,540",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 730 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.8배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 370,
+      "kinTop": [
+        {
+          "title": "첼시 공홈 옷 사이즈",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001010202&docId=491698889&answerNo=4",
+          "views": 252,
+          "answers": 4
+        },
+        {
+          "title": "첼시 유니폼 해외직구 주소 입력 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001010202&docId=493435033&answerNo=4",
+          "views": 200,
+          "answers": 4
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-18T21:24:37.040Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "민주노총 금속노조",
       "issue": "민주노총",
@@ -192,20 +291,20 @@
           28,
           46
         ],
-        "measuredAt": "2026-09-18T03:36:59.301Z"
+        "measuredAt": "2026-09-18T21:26:44.425Z"
       },
       "kinCount": 362,
       "kinTop": [
         {
           "title": "금속노조와 민주노총",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=61402&docId=491987929&answerNo=1",
-          "views": 94,
+          "views": 96,
           "answers": 1
         },
         {
           "title": "민주노총 탈퇴 문의입니다.",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=61402&docId=485277361&answerNo=0",
-          "views": 28,
+          "views": 30,
           "answers": null
         }
       ],
@@ -213,7 +312,8 @@
       "measuredAt": "2026-09-17T21:28:17.853Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "carried": true
+      "carried": true,
+      "kinMode": "date-views-v2"
     },
     {
       "keyword": "skt 확정기변 방법",
@@ -375,40 +475,35 @@
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-18T03:36:59.301Z"
+        "measuredAt": "2026-09-18T21:26:44.425Z"
       },
-      "kinCount": 3844,
+      "kinCount": 3848,
       "kinTop": [
         {
           "title": "Kt 확정기변 정상해지",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=107020102&docId=493647668&answerNo=5",
-          "views": 991,
+          "views": 1014,
           "answers": 5
-        },
-        {
-          "title": "skt 데이터함께쓰기 없어졌나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107020101&docId=494817339&answerNo=1",
-          "views": 520,
-          "answers": 2
         },
         {
           "title": "SKT USIM 확정기변에 대한 질문",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=107020101&docId=494753040&answerNo=2",
-          "views": 516,
+          "views": 557,
           "answers": 2
         },
         {
-          "title": "휴대폰 분실하여 새로운 휴대폰 개통하는방법 ?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1070202&docId=495113882&answerNo=2",
-          "views": 101,
-          "answers": 3
+          "title": "skt 데이터함께쓰기 없어졌나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=107020101&docId=494817339&answerNo=1",
+          "views": 548,
+          "answers": 2
         }
       ],
       "monetize": null,
       "measuredAt": "2026-09-17T03:33:01.881Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "carried": true
+      "carried": true,
+      "kinMode": "date-views-v2"
     },
     {
       "keyword": "김지민 병원",
@@ -578,15 +673,16 @@
           0,
           0
         ],
-        "measuredAt": "2026-09-18T03:36:59.301Z"
+        "measuredAt": "2026-09-18T21:26:44.425Z"
       },
-      "kinCount": 375,
-      "kinTop": null,
+      "kinCount": 376,
+      "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-16T21:28:29.801Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "carried": true
+      "carried": true,
+      "kinMode": "date-views-v2"
     },
     {
       "keyword": "KAIST 서울캠퍼스",
@@ -742,15 +838,16 @@
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-18T03:36:59.301Z"
+        "measuredAt": "2026-09-18T21:26:44.425Z"
       },
-      "kinCount": 1900,
-      "kinTop": null,
+      "kinCount": 1901,
+      "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-16T21:28:29.801Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "carried": true
+      "carried": true,
+      "kinMode": "date-views-v2"
     }
   ],
   "observations": [
@@ -807,7 +904,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "measuredAt": "2026-09-18T21:24:37.040Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -864,7 +961,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "measuredAt": "2026-09-18T21:24:37.040Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -918,12 +1015,12 @@
         {
           "title": "쳇got 지브리 사진변환",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=483884587&answerNo=6",
-          "views": 1512,
+          "views": 1513,
           "answers": 15
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "measuredAt": "2026-09-18T21:24:37.040Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -979,7 +1076,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "measuredAt": "2026-09-18T21:24:37.040Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1035,7 +1132,163 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-18T09:23:20.598Z",
+      "measuredAt": "2026-09-18T21:24:37.040Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "첼시 FC Clip",
+      "issue": "첼시",
+      "topic": "첼시",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 51,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 51",
+        "선점 후보 — 경쟁 문서 51건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-18T21:24:37.040Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코난테크놀로지 블라인드",
+      "issue": "코난테크놀로지",
+      "topic": "코난테크놀로지",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 74,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 74",
+        "선점 후보 — 경쟁 문서 74건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-18T21:24:37.040Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "차은우 도청 여성",
+      "issue": "차은우 도청 여성",
+      "topic": "차은우 도청 여성",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 144,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 144",
+        "선점 후보 — 경쟁 문서 144건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-18T21:24:37.040Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1089,59 +1342,8 @@
       "monetize": null,
       "measuredAt": "2026-09-18T09:23:20.598Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "코난테크놀로지 블라인드",
-      "issue": "코난테크놀로지",
-      "topic": "코난테크놀로지",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 74,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 74",
-        "선점 후보 — 경쟁 문서 74건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-18T09:23:20.598Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "ai스페라 매출",
@@ -1200,7 +1402,8 @@
       "monetize": null,
       "measuredAt": "2026-09-18T09:23:20.598Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "ai스페라 강병탁",
@@ -1252,7 +1455,8 @@
       "monetize": null,
       "measuredAt": "2026-09-18T09:23:20.598Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "피어리오딕 랩스",
@@ -5121,6 +5325,78 @@
   "rejectedCount": 0,
   "issues": [
     {
+      "issue": "첼시",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": null,
+      "headlines": [
+        {
+          "title": "1년 만에 레이커스 매각한 마크 월터, EPL 첼시 지분 팔았다",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-17T02:39:00.000Z",
+          "link": "https://m.sports.naver.com/wfootball/article/410/0001140346"
+        },
+        {
+          "title": "[속보]\"EPL 첼시 주인 바뀐다\" 다저스 구단주 보엘리, 첼시 지분 전격 매...",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-09-16T23:50:00.000Z",
+          "link": "https://m.sports.naver.com/wfootball/article/076/0004446934"
+        },
+        {
+          "title": "‘충격 근황’ 맨유의 미래→1순위 처분 선수로 쫓겨난 FW,새로운 팀에서...",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-09-17T23:08:00.000Z",
+          "link": "https://m.sports.naver.com/wfootball/article/144/0001138971"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "첼시 유니폼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "첼시 일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "첼시 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "첼시 선수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "첼시 경기일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "첼시 스쿼드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "첼시 라인업",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "첼시 팬카페",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
       "issue": "민주노총",
       "issueType": "fresh",
       "lane": "realtime",
@@ -6570,5 +6846,22 @@
       "rowCount": 1,
       "carried": true
     }
-  ]
+  ],
+  "enrichedAt": "2026-09-18T21:27:07.489Z",
+  "enrichStats": {
+    "enriched": 0,
+    "subsAdded": 0,
+    "titleUpgraded": 0,
+    "proposed": 0,
+    "verified": 0,
+    "judged": 0,
+    "judgedBad": 0,
+    "related": 0,
+    "picked": 0,
+    "pooled": 0,
+    "aiTitled": 0,
+    "trended": 0,
+    "aiCalls": 1,
+    "partial": false
+  }
 }
