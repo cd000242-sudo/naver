@@ -1,21 +1,241 @@
 {
-  "publishedAt": "2026-09-19T09:31:10.352Z",
+  "publishedAt": "2026-09-19T21:27:10.910Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 237,
-    "niche": 1,
-    "preemption": 3,
+    "candidates": 240,
+    "niche": 2,
+    "preemption": 4,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-09-19",
+    "day": "2026-09-20",
     "keywords": [
-      "민주노총 금속노조"
+      "민주노총 금속노조",
+      "유영우 여자친구",
+      "유영우 노래"
     ]
   },
   "rows": [
+    {
+      "keyword": "유영우 여자친구",
+      "issue": "유영우",
+      "topic": "유영우",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "9월 19일 MBC [전지적 참견 시점] 416회 가창력 코미디언 유영우, 캐치캐치와 챌린지 열풍의 주역 최예나 콘서트 현장",
+          "내가 요즘 빠진 것.. ㄹㅅㄴ",
+          "첫 여름",
+          "라디오스타 개그맨 유영우 첫 출연! 나이·키·결혼·고향 및 복부대공 챌린지·서은광 고음 대결 총정리",
+          "개강 ㅇㅈㄹ",
+          "유영우 프로필 나이 리즈 과거사진 학력 리센느 원이 근황 작품활동",
+          "나를 찾아서",
+          "영원하지 않기에 소중한 것들",
+          "8월 일번",
+          "2026年 8月(방학 더 주세요)"
+        ],
+        "measuredAt": "2026-09-19T21:25:38.675Z"
+      },
+      "documentCount": 159,
+      "documentCountMeasured": true,
+      "searchVolume": 560,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.7186588961572613,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 560",
+        "문서수 159",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 560 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.7배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": [
+        {
+          "title": "유영우랑 결혼하는 법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80101&docId=473581071&answerNo=2",
+          "views": 222,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-19T21:21:56.700Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "유영우 노래",
+      "issue": "유영우",
+      "topic": "유영우",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 2건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 2,
+        "sampledTitles": 10,
+        "topTitles": [
+          "드라마OST추천 감성사랑노래모음 이상한변호사우영우 우리들의블루스 미스터션샤인",
+          "다시봐도 가슴 뭉클해지는 드라마 이상한 변호사 우영우 | 줄거리 기본정보 등장인물 후기 몇부작",
+          "박은빈, ‘우영우’ 이후 더 달라졌다｜《연모》부터 《하이퍼나이프》·《원더풀스》까지 연기 변화",
+          "박은빈(PARK EUN BIN) 'DREAMS COME TRUE'!생일날 꺼낸 30년의 꿈 - 배우가 직접 쓴 감사의 노래",
+          "데뷔 30주년 앨범에 처음 가사 쓴 박은빈 프로필｜나이·아역·학력·드라마·영화·대표작·수상·앨범·노래·작사",
+          "이상한 변호사 우영우 OST 김종완의 ‘용기’가 전한 진심",
+          "아역배우에서 믿고 보는 배우까지｜박은빈 30년 연기 인생 총정리, 우영우 이전에도 대단했다",
+          "[뮤직공방#6] 드라마 속 노래를 찾아서 - 이상한 변호사 우영우 ost 편",
+          "우영우가 맞아? 데뷔 30년 박은빈과 양세종이 〈오싹한 연애〉에서 유독 잘 맞는 이유",
+          "박은빈 출연작 정리, 우영우부터 오싹한 연애까지, 데뷔 30주년은 언제부터일까?"
+        ],
+        "measuredAt": "2026-09-19T21:22:52.268Z"
+      },
+      "documentCount": 693,
+      "documentCountMeasured": true,
+      "searchVolume": 2000,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.8515236206233546,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 2,000",
+        "문서수 693",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 2,000 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.9배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 12,
+      "kinTop": [
+        {
+          "title": "개콘 멜로가 필요해에서 개그맨 유영우씨가 부른 노래 좀 알....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010202&docId=336915101&answerNo=1",
+          "views": 179,
+          "answers": 1
+        },
+        {
+          "title": "개콘 1017회 멜로가 필요해 노래 제목",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=337131331&answerNo=1",
+          "views": 99,
+          "answers": 1
+        },
+        {
+          "title": "노래방 인기차트 기준",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=80701&docId=495171110&answerNo=1",
+          "views": 57,
+          "answers": 4
+        },
+        {
+          "title": "유영우 정도면 가수 중에서도 레전드 가수 급인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30213&docId=494652122&answerNo=1",
+          "views": 48,
+          "answers": 2
+        },
+        {
+          "title": "개그맨 유영우",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30202&docId=494602502&answerNo=0",
+          "views": 46,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-19T21:21:56.700Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "프로야구 스피리츠 갤",
       "issue": "프로야구",
@@ -97,14 +317,50 @@
       "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          89,
+          79,
+          100,
+          94,
+          79,
+          63,
+          77,
+          70,
+          57,
+          70,
+          92,
+          75,
+          66,
+          74,
+          63,
+          76,
+          86,
+          78,
+          68,
+          63,
+          59,
+          70,
+          64,
+          69,
+          69,
+          67,
+          63,
+          52,
+          74
+        ],
+        "label": "🐢 연금형",
+        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
+        "measuredAt": "2026-09-19T21:27:11.454Z"
+      },
       "kinCount": 2,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-19T09:24:02.243Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "첼시 공홈",
@@ -215,7 +471,7 @@
           40,
           34
         ],
-        "measuredAt": "2026-09-19T03:32:45.455Z"
+        "measuredAt": "2026-09-19T21:27:11.454Z"
       },
       "kinCount": 370,
       "kinTop": [
@@ -413,7 +669,7 @@
           46,
           26
         ],
-        "measuredAt": "2026-09-19T03:32:45.455Z"
+        "measuredAt": "2026-09-19T21:27:11.454Z"
       },
       "kinCount": 362,
       "kinTop": [
@@ -489,12 +745,68 @@
         {
           "title": "쳇got 지브리 사진변환",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=483884587&answerNo=6",
-          "views": 1517,
+          "views": 1518,
           "answers": 15
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-09-19T09:24:02.243Z",
+      "measuredAt": "2026-09-19T21:21:56.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아이치 바지 뜻",
+      "issue": "아이치",
+      "topic": "아이치",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 188,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 188",
+        "선점 후보 — 경쟁 문서 188건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 21,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-19T21:21:56.700Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -510,7 +822,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 95,
+      "documentCount": 100,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": true,
@@ -522,8 +834,8 @@
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "문서수 95",
-        "선점 후보 — 경쟁 문서 95건, 수요 미검출"
+        "문서수 100",
+        "선점 후보 — 경쟁 문서 100건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -542,7 +854,70 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-19T09:24:02.243Z",
+      "measuredAt": "2026-09-19T21:21:56.700Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아스날 등수",
+      "issue": "아스날",
+      "topic": "아스날",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 253,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 253",
+        "선점 후보 — 경쟁 문서 253건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 47,
+      "kinTop": [
+        {
+          "title": "아스날 등수",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001010202&docId=426768644&answerNo=2",
+          "views": 94,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-19T21:21:56.700Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -615,7 +990,8 @@
       "monetize": null,
       "measuredAt": "2026-09-19T09:24:02.243Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "정현 기치레시피",
@@ -2093,6 +2469,78 @@
   "rejectedCount": 0,
   "issues": [
     {
+      "issue": "유영우",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "'전참시' 유영우, 리센느 시상식 무대 보고 '울컥'…훈훈한 응원",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-19T00:48:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009180017"
+        },
+        {
+          "title": "유영우, ‘원이 둘째 삼촌’답네…리센느 무대에 울컥→한우 플렉스 (전...",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-09-19T04:01:00.000Z",
+          "link": "https://m.entertain.naver.com/article/382/0001294844"
+        },
+        {
+          "title": "‘전참시’ 유영우, 리센느 무대에 눈물…‘원이 둘째 삼촌’ 일상 공개",
+          "press": "enews.imbc.com",
+          "publishedAt": "2026-09-19T04:15:00.000Z",
+          "link": "https://m.entertain.naver.com/article/408/0000321928"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "유영우 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "유영우 원이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "유영우 개그맨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "유영우 노래",
+          "searchVolume": 2000,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "유영우 개콘",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전참시 유영우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "원이 유영우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "유영우 개그콘서트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 2
+    },
+    {
       "issue": "프로야구",
       "issueType": "fresh",
       "lane": "realtime",
@@ -2162,7 +2610,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "첼시",
@@ -2390,7 +2839,7 @@
       "carried": true
     }
   ],
-  "enrichedAt": "2026-09-19T09:31:28.207Z",
+  "enrichedAt": "2026-09-19T21:27:33.315Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
@@ -2404,7 +2853,7 @@
     "pooled": 0,
     "aiTitled": 0,
     "trended": 0,
-    "aiCalls": 2,
+    "aiCalls": 4,
     "partial": false
   }
 }
