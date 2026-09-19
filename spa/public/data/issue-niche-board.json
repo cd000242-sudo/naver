@@ -1,22 +1,111 @@
 {
-  "publishedAt": "2026-09-19T03:32:44.750Z",
+  "publishedAt": "2026-09-19T09:31:10.352Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 226,
-    "niche": 0,
-    "preemption": 8,
+    "candidates": 237,
+    "niche": 1,
+    "preemption": 3,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-09-19",
     "keywords": [
-      "민주노총 금속노조",
-      "skt 확정기변 방법"
+      "민주노총 금속노조"
     ]
   },
   "rows": [
+    {
+      "keyword": "프로야구 스피리츠 갤",
+      "issue": "프로야구",
+      "topic": "프로야구",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "컴투스 게임 라인업, 지금 시작하기 좋은 건 이겁니다",
+          "실황 파워풀 파워프로 2026 wbc모드 실명 확정",
+          "TysonWorld :: 월광보합 5S 999 게임 목록",
+          "㈜오섹시코리아 - 오섹시갤",
+          "중고만화 수만권 팝니다.",
+          "[판교테크노밸리]글로벌 게임산업 트렌드 (2015년 상반기 보고서,한국콘텐츠진흥원)",
+          "일본의 역사를 년도별로 정리했습니다. 그냥 알고 싶었습니다.",
+          "전세계 5가지 술 이야기 소주, 맥주, 양주, 막걸리, 사케 그들만의 리그",
+          "양을 쫓는 모험",
+          "[A.A.F] 애니 추천 200선(feat. azunyaa)"
+        ],
+        "measuredAt": "2026-09-19T09:26:59.087Z"
+      },
+      "documentCount": 20,
+      "documentCountMeasured": true,
+      "searchVolume": 3220,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.89516019675171,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 3,220",
+        "문서수 20",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 3,220 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.9배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-19T09:24:02.243Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "첼시 공홈",
       "issue": "첼시",
@@ -347,54 +436,35 @@
       "exclusionReason": null,
       "carried": true,
       "kinMode": "date-views-v2"
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "skt 확정기변 방법",
-      "issue": "SKT",
-      "topic": "SKT",
+      "keyword": "오픈ai 쳇got 비교",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
       "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 2건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 2,
-        "sampledTitles": 10,
-        "topTitles": [
-          "확정기변 뜻 모르고 유심기변만 하면 나중에 문제될까? 차이점 정리",
-          "자급제폰 샀다면 유심만 옮기면 될까? 통신사별 기기변경 체크리스트",
-          "SKT 기기변경하면 위약금이 사라진다는 말, 정말일까요?",
-          "중고폰 확정기변 방법 유심 꽂기 전에 확인하면 마음 편한 순서",
-          "번호이동 vs 기기변경, 휴대폰 살 때 지원금 유리한 조건 총정리",
-          "중고폰 확정기변 안 된 폰, 어떻게 구별할까? 유심기변 구별법부터 IMEI 조회까지 5가지 체크포인트",
-          "SKT 유심보호 해제 및 교체 방법 신청 절차",
-          "유심기변 확정기변, 이거 하나 빠지면 중고폰이 남의 것 됩니다",
-          "중고폰 개통 방법 총정리! 필요성과 장단점, 주의 사항 및 추천 대상 완벽 가이드",
-          "이야기모바일 유심보호 해제 유심 재발급 변경 교체 방법"
-        ],
-        "measuredAt": "2026-09-16T21:30:46.461Z"
-      },
-      "documentCount": 1654,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 18,
       "documentCountMeasured": true,
-      "searchVolume": 790,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.1341330425299891,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "stable",
       "isHot": false,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 790",
-        "문서수 1,654",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "문서수 18",
+        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -402,144 +472,151 @@
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 790 실측 — 트래픽 하한 통과"
-        },
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": [
         {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
+          "title": "쳇got 지브리 사진변환",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=483884587&answerNo=6",
+          "views": 1517,
+          "answers": 15
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-19T09:24:02.243Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "네오클라우드 엔스케일",
+      "issue": "네오클라우드 엔스케일",
+      "topic": "네오클라우드 엔스케일",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 95,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 95",
+        "선점 후보 — 경쟁 문서 95건, 수요 미검출"
+      ],
+      "evidence": [
         {
           "code": "empty-field",
           "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
-      "whySearch": {
-        "text": "SKT가 삼성전자와 손잡고 채팅+ PC버전 지원을 확대한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "skt 확정기변 방법 유심기변과 차이부터 온라인 신청까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "skt 확정기변 방법 유심기변 차이도 모르고 시작했다가 헤맸네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-19T09:24:02.243Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김승원 의혹 탄원서",
+      "issue": "김승원 의혹 탄원서",
+      "topic": "김승원 의혹 탄원서",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 256,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 256",
+        "선점 후보 — 경쟁 문서 256건, 수요 미검출"
+      ],
+      "evidence": [
         {
-          "keyword": "확정기변 유심기변 차이",
-          "searchVolume": 60,
-          "frame": "compare"
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
         },
         {
-          "keyword": "확정기변 뜻",
-          "searchVolume": 1120,
-          "frame": "generic"
-        },
-        {
-          "keyword": "skt 기기변경 방법",
-          "searchVolume": 190,
-          "frame": "howto"
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "keywordPool": [
-        {
-          "keyword": "확정기변 뜻",
-          "searchVolume": 1120,
-          "documentCount": 1011,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "skt 기기변경 방법",
-          "searchVolume": 190,
-          "documentCount": 61696,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "확정기변 유심기변 차이",
-          "searchVolume": 60,
-          "documentCount": 1625,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": {
-        "series": [
-          32,
-          42,
-          40,
-          32,
-          62,
-          35,
-          43,
-          60,
-          42,
-          60,
-          32,
-          51,
-          46,
-          26,
-          31,
-          34,
-          40,
-          40,
-          22,
-          28,
-          63,
-          37,
-          60,
-          34,
-          43,
-          54,
-          29,
-          51,
-          100
-        ],
-        "label": "❄️ 시즌성",
-        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-09-19T03:32:45.455Z"
-      },
-      "kinCount": 3848,
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 5,
       "kinTop": [
         {
-          "title": "Kt 확정기변 정상해지",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107020102&docId=493647668&answerNo=5",
-          "views": 1014,
-          "answers": 5
-        },
-        {
-          "title": "SKT USIM 확정기변에 대한 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107020101&docId=494753040&answerNo=2",
-          "views": 557,
+          "title": "김승원 전직 보좌관의 &lt;과거 성추행 의혹과 보좌진의 무마과....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60204&docId=495229104&answerNo=2",
+          "views": 201,
           "answers": 2
         },
         {
-          "title": "skt 데이터함께쓰기 없어졌나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107020101&docId=494817339&answerNo=1",
-          "views": 548,
+          "title": "김승원 전직 보좌관의 &lt;과거 성추행 의혹과 보좌진의 무마과....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60204&docId=495229217&answerNo=2",
+          "views": 99,
+          "answers": 2
+        },
+        {
+          "title": "김승원 전직 보좌관의 &lt;과거 성추행 의혹과 보좌진의 무마과....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60211&docId=495229178&answerNo=2",
+          "views": 54,
           "answers": 2
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-09-17T03:33:01.881Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true,
-      "kinMode": "date-views-v2"
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-09-19T09:24:02.243Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "정현 기치레시피",
       "issue": "정현",
@@ -594,7 +671,8 @@
       "monetize": null,
       "measuredAt": "2026-09-19T03:25:18.713Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "정현 첼로 250",
@@ -658,7 +736,8 @@
       "monetize": null,
       "measuredAt": "2026-09-19T03:25:18.713Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "정현 첼로 300호",
@@ -746,7 +825,8 @@
       "monetize": null,
       "measuredAt": "2026-09-19T03:25:18.713Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "정현 첼로 100호",
@@ -834,7 +914,8 @@
       "monetize": null,
       "measuredAt": "2026-09-19T03:25:18.713Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "엑스러브 우무티 중국",
@@ -891,66 +972,8 @@
       "monetize": null,
       "measuredAt": "2026-09-19T03:25:18.713Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오픈ai 쳇got 비교",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 18,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 18",
-        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": [
-        {
-          "title": "쳇got 지브리 사진변환",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=483884587&answerNo=6",
-          "views": 1515,
-          "answers": 15
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-19T03:25:18.713Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "엑스러브 루이 포카",
@@ -1006,7 +1029,8 @@
       "monetize": null,
       "measuredAt": "2026-09-19T03:25:18.713Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "엑스러브 루이 배경화면",
@@ -1062,7 +1086,8 @@
       "monetize": null,
       "measuredAt": "2026-09-19T03:25:18.713Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "에스트래픽 과장 연봉",
@@ -2063,2111 +2088,82 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "팀스파르타 잡플래닛",
-      "issue": "팀스파르타",
-      "topic": "팀스파르타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 51,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 51",
-        "선점 후보 — 경쟁 문서 51건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "팀스파르타의 기업 AI 교육 수주가 220% 급증했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "팀스파르타 잡플래닛 평점과 연봉 후기 살펴보기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "팀스파르타 잡플래닛 후기 볼 때 많이들 놓치는 게 연봉이더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "팀스파르타 채용",
-          "searchVolume": 460,
-          "frame": "generic"
-        },
-        {
-          "keyword": "팀스파르타 연봉",
-          "searchVolume": 60,
-          "frame": "generic"
-        },
-        {
-          "keyword": "팀스파르타 후기",
-          "searchVolume": 60,
-          "frame": "review"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "팀스파르타 채용",
-          "searchVolume": 460,
-          "documentCount": 2078,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "팀스파르타 연봉",
-          "searchVolume": 60,
-          "documentCount": 879,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "팀스파르타 후기",
-          "searchVolume": 60,
-          "documentCount": 5137,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "팀스파르타 면접후기",
-          "searchVolume": 20,
-          "documentCount": 693,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "지니젠AI 비드래프트",
-      "issue": "지니젠AI",
-      "topic": "지니젠AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "지니젠AI가 오픈라우터 426종의 한국어 품질 리더보드를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "지니젠AI 비드래프트 공동개발 메타인지 어댑터 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "지니젠AI 비드래프트가 같이 낸 메타인지 어댑터 이래서 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "지니젠AI 리더보드",
-      "issue": "지니젠AI",
-      "topic": "지니젠AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 4,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 4",
-        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "지니젠AI가 오픈라우터 426종의 한국어 품질 리더보드를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "지니젠AI 리더보드 오픈라우터 426종 한국어 순위",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "지니젠AI 리더보드 보고 오픈라우터 426종 중에 뭐 골라야 할지 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "지니젠AI GPU",
-      "issue": "지니젠AI",
-      "topic": "지니젠AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 5,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 5",
-        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "지니젠AI가 오픈라우터 426종의 한국어 품질 리더보드를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "지니젠AI GPU 지원사업 선정과 K-AI 리더보드 2위 성과",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "지니젠AI GPU 지원까지 받은 이유가 리더보드 2위에 다 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "술레이먼 앤트로픽",
-      "issue": "술레이먼",
-      "topic": "술레이먼",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 17,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 17",
-        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MS AI 수장 술레이먼이 AI 의식·권리 부여는 위험하다며 앤트로픽을 비판했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "술레이먼 앤트로픽 클로드 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "파생 키워드 실측 '앤트로픽 클로드' (검색량 2370) — 1페이지 0개 제목에 없는 프레임"
-        },
-        "home": {
-          "text": "술레이먼이 앤트로픽 클로드 겨냥한 이유, 많이들 착각하는 지점이 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": 2370,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": 2370,
-          "documentCount": 29182,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오픈라우터 426종",
-      "issue": "지니젠AI",
-      "topic": "지니젠AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 18,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 18",
-        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "지니젠AI가 오픈라우터 426종의 한국어 품질 리더보드를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈라우터 426종 한국어 품질 리더보드 순위",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오픈라우터 426종 가격 확인하다 상위 모델에서 손이 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "오픈라우터 api",
-          "searchVolume": 10,
-          "frame": "generic"
-        },
-        {
-          "keyword": "오픈라우터 사용법",
-          "searchVolume": null,
-          "frame": "howto"
-        },
-        {
-          "keyword": "오픈라우터 가격",
-          "searchVolume": null,
-          "frame": "price"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "오픈라우터 api",
-          "searchVolume": 10,
-          "documentCount": 2841,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "지니젠AI",
-      "issue": "지니젠AI",
-      "topic": "지니젠AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 46,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 46",
-        "선점 후보 — 경쟁 문서 46건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "지니젠AI가 오픈라우터 426종의 한국어 품질 리더보드를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "지니젠AI 오픈라우터 426종 한국어 품질 리더보드 결과",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "지니젠AI가 K-AI 리더보드 2위라는데 어떤 회사인지 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "무스타파 술레이먼",
-      "issue": "술레이먼",
-      "topic": "술레이먼",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 88,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 88",
-        "선점 후보 — 경쟁 문서 88건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MS AI 수장 술레이먼이 AI 의식·권리 부여는 위험하다며 앤트로픽을 비판했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "무스타파 술레이먼 딥마인드 창업자에서 MS AI CEO까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "무스타파 술레이먼이 AI 의식 얘기에 이렇게까지 예민한 이유가 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "게장 near me",
-      "issue": "게장",
-      "topic": "게장",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 126,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 126",
-        "선점 후보 — 경쟁 문서 126건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "여수섬박람회 1만4900원 간장게장 백반이 부실 논란에 휩싸였다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "게장 near me 여수섬박람회 게장백반 1만4900원 논란",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "1만4900원 게장백반 나온 거 보고 여수섬박람회 갔다가 게 조각을 세봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "류지현 감독 미팅",
-      "issue": "류지현 감독 미팅",
-      "topic": "류지현 감독 미팅",
-      "lane": "realtime",
-      "issueType": "entertainment",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 151,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 151",
-        "선점 후보 — 경쟁 문서 151건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "류지현 감독이 대표팀 미팅에서 맞춤 라인업과 보직을 정했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "류지현 감독 미팅 후 김도영 1번타자 확정 라인업",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "류지현 감독 미팅 끝나고 프로필 다시 봤더니 생각보다 눈에 밟히는 게 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "류지현 감독 프로필",
-          "searchVolume": 910,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "류지현 감독 프로필",
-          "searchVolume": 910,
-          "documentCount": 448,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "술레이먼",
-      "issue": "술레이먼",
-      "topic": "술레이먼",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 177,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 177",
-        "선점 후보 — 경쟁 문서 177건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MS AI 수장 술레이먼이 AI 의식·권리 부여는 위험하다며 앤트로픽을 비판했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "술레이먼이 앤트로픽 클로드를 겨냥한 발언 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "술레이먼이 AI에 의식 부여는 위험하다고 한 데는 이유가 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 8,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "EU 캐나다 준회원",
-      "issue": "EU",
-      "topic": "EU",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 166,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 166",
-        "선점 후보 — 경쟁 문서 166건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "EU가 13세 미만 SNS 금지 키즈법을 27개국서 추진한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "EU 캐나다 준회원 제안 배경과 회원국 반응",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "EU 캐나다 준회원 소식에 캐나다 EU 가입까지 다시 들여다봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "캐나다 EU 가입",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "캐나다 EU 가입",
-          "searchVolume": 10,
-          "documentCount": 18654,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김여정 IAEA 핵보유국",
-      "issue": "김여정 IAEA 핵보유국",
-      "topic": "김여정 IAEA 핵보유국",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 238,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 238",
-        "선점 후보 — 경쟁 문서 238건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "김여정이 IAEA 비핵화 촉구에 핵보유국 지위는 되돌릴 수 없다고 반발했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김여정 IAEA 핵보유국 담화 전문과 미국 담판 배경",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김여정 IAEA 핵보유국 담화가 IAEA 총회에 맞춰 나온 이유가 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "북한 핵보유국",
-          "searchVolume": 470,
-          "frame": "generic"
-        },
-        {
-          "keyword": "IAEA 총회",
-          "searchVolume": 60,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "북한 핵보유국",
-          "searchVolume": 470,
-          "documentCount": 82106,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "IAEA 총회",
-          "searchVolume": 60,
-          "documentCount": 5032,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "팀스파르타 블라인드",
-      "issue": "팀스파르타",
-      "topic": "팀스파르타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 212,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 212",
-        "선점 후보 — 경쟁 문서 212건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "팀스파르타의 기업 AI 교육 수주가 220% 급증했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "팀스파르타 블라인드 연봉·후기와 AI 교육 수주 220% 성장",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "팀스파르타 블라인드에서 연봉 후기 찾다 보면 채용 분위기가 생각보다 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "팀스파르타 채용",
-          "searchVolume": 460,
-          "frame": "generic"
-        },
-        {
-          "keyword": "팀스파르타 연봉",
-          "searchVolume": 60,
-          "frame": "generic"
-        },
-        {
-          "keyword": "팀스파르타 후기",
-          "searchVolume": 60,
-          "frame": "review"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "팀스파르타 채용",
-          "searchVolume": 460,
-          "documentCount": 2078,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "팀스파르타 연봉",
-          "searchVolume": 60,
-          "documentCount": 879,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "팀스파르타 후기",
-          "searchVolume": 60,
-          "documentCount": 5137,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "팀스파르타 면접",
-          "searchVolume": 10,
-          "documentCount": 2567,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "LH 노조 분사",
-      "issue": "LH 노조 분사",
-      "topic": "LH 노조 분사",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 249,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 249",
-        "선점 후보 — 경쟁 문서 249건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "LH 분사 강행 시 노조가 총파업을 경고하며 쟁의절차에 돌입했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "LH 노조 분사 강행 시 총파업, 8천 조합원 쟁의 돌입 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "LH 노조 분사 이대로 밀어붙이면 총파업이라는데 여기서 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "LH 총파업",
-          "searchVolume": 200,
-          "frame": "generic"
-        },
-        {
-          "keyword": "LH 조직 분리",
-          "searchVolume": 190,
-          "frame": "generic"
-        },
-        {
-          "keyword": "LH 쪼개기",
-          "searchVolume": 80,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "LH 총파업",
-          "searchVolume": 200,
-          "documentCount": 1525,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "LH 조직 분리",
-          "searchVolume": 190,
-          "documentCount": 6004,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "LH 쪼개기",
-          "searchVolume": 80,
-          "documentCount": 10234,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "팀스파르타 수주",
-      "issue": "팀스파르타",
-      "topic": "팀스파르타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 247,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 247",
-        "선점 후보 — 경쟁 문서 247건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "팀스파르타의 기업 AI 교육 수주가 220% 급증했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "팀스파르타 수주 220% 급증, 10대 그룹 9곳이 선택한 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "팀스파르타 수주 늘었다는데 요즘 올라온 채용 공고가 좀 달라졌더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "팀스파르타 채용",
-          "searchVolume": 460,
-          "frame": "generic"
-        },
-        {
-          "keyword": "팀스파르타 연봉",
-          "searchVolume": 60,
-          "frame": "generic"
-        },
-        {
-          "keyword": "팀스파르타 매출",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "팀스파르타 채용",
-          "searchVolume": 460,
-          "documentCount": 2078,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "팀스파르타 연봉",
-          "searchVolume": 60,
-          "documentCount": 879,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "팀스파르타 매출",
-          "searchVolume": 40,
-          "documentCount": 1276,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "팀스파르타 기업교육",
-          "searchVolume": 20,
-          "documentCount": 3141,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "팀스파르타 대표",
-          "searchVolume": 10,
-          "documentCount": 9387,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "과기부 공무직",
-      "issue": "과기부",
-      "topic": "과기부",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 249,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 249",
-        "선점 후보 — 경쟁 문서 249건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "KT가 과기부 다크팩토리 과제로 전북에 무인 공장을 구축한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "과기부 공무직 채용공고 급여와 지원자격 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "과기부 공무직 지원하려다 과학기술정보통신부 채용공고 지원자격에서 다들 멈추더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "과학기술정보통신부 공무직",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "과학기술정보통신부 공무직",
-          "searchVolume": 10,
-          "documentCount": 1852,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T09:04:14.519Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "리벨랙 성능",
-      "issue": "리벨랙",
-      "topic": "리벨랙",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "NPU 실력 궁금",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 13,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 13",
-        "선점 후보 — 경쟁 문서 13건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — NPU 실력 궁금"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리벨리온이 일본 ai&와 파트너십을 맺고 리벨랙 100대 이상을 공급한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리벨랙 성능 일본 100대 공급 NPU 추론 스펙",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리벨랙 성능 궁금해서 찾다가 일본 100대 공급 소식에 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T03:33:01.881Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "리벨랙 NPU",
-      "issue": "리벨랙",
-      "topic": "리벨랙",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 12,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 12",
-        "선점 후보 — 경쟁 문서 12건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리벨리온이 일본 ai&와 파트너십을 맺고 리벨랙 100대 이상을 공급한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리벨랙 NPU 일본 데이터센터 100대 공급 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리벨랙 NPU 도쿄에 깐다길래 리벨리온이 왜 일본부터 가나 했어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "리벨리온 NPU",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "리벨리온 NPU",
-          "searchVolume": 30,
-          "documentCount": 6452,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T03:33:01.881Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "리벨랙",
-      "issue": "리벨랙",
-      "topic": "리벨랙",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 18,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 18",
-        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리벨리온이 일본 ai&와 파트너십을 맺고 리벨랙 100대 이상을 공급한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리벨랙 일본 100대 공급, 리벨리온 NPU 추론 솔루션 정체",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리벨랙이 일본 데이터센터에 100대씩 깔리는 데는 이유가 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T03:33:01.881Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "리벨리온 리벨랙",
-      "issue": "리벨랙",
-      "topic": "리벨랙",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 18,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 18",
-        "선점 후보 — 경쟁 문서 18건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리벨리온이 일본 ai&와 파트너십을 맺고 리벨랙 100대 이상을 공급한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리벨리온 리벨랙 일본 도쿄 100대 이상 공급 계약",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리벨리온 리벨랙 상장 앞두고 도쿄에 무더기로 깔린다는데 다들 놓치더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "리벨리온 주가",
-          "searchVolume": 7850,
-          "frame": "generic"
-        },
-        {
-          "keyword": "리벨리온 상장",
-          "searchVolume": 5620,
-          "frame": "generic"
-        },
-        {
-          "keyword": "리벨리온 채용",
-          "searchVolume": 450,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "리벨리온 주가",
-          "searchVolume": 7850,
-          "documentCount": 7852,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "리벨리온 상장",
-          "searchVolume": 5620,
-          "documentCount": 9037,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "리벨리온 채용",
-          "searchVolume": 450,
-          "documentCount": 1352,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "리벨리온 상장일",
-          "searchVolume": 220,
-          "documentCount": 6087,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "리벨리온 npu",
-          "searchVolume": 30,
-          "documentCount": 6452,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "리벨리온 사피온",
-          "searchVolume": 30,
-          "documentCount": 3621,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "리벨리온 공모주",
-          "searchVolume": 20,
-          "documentCount": 2687,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T03:33:01.881Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "리벨랙 공급",
-      "issue": "리벨랙",
-      "topic": "리벨랙",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 17,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 17",
-        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리벨리온이 일본 ai&와 파트너십을 맺고 리벨랙 100대 이상을 공급한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리벨랙 공급 일본 100대 규모, 도쿄 데이터센터 정조준",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리벨랙 공급이 일본으로 100대 넘게 간다는데 하필 도쿄부터인 게 눈에 띄더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T03:33:01.881Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "신원식 재평가",
-      "issue": "신원식",
-      "topic": "신원식",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 133,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 133",
-        "선점 후보 — 경쟁 문서 133건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "계엄 정당화 메시지 전파 혐의로 신원식이 첫 재판에서 전면 부인했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "신원식 재평가 계엄 메시지 첫 재판 혐의 전면 부인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "신원식 재평가 앞두고 열린 첫 재판 계엄 메시지 진술이 의외로 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "신원식 프로필",
-          "searchVolume": 670,
-          "frame": "generic"
-        },
-        {
-          "keyword": "신원식 안보실장",
-          "searchVolume": 30,
-          "frame": "generic"
-        },
-        {
-          "keyword": "신원식 재판",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "신원식 프로필",
-          "searchVolume": 670,
-          "documentCount": 439,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신원식 안보실장",
-          "searchVolume": 30,
-          "documentCount": 3070,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신원식 재판",
-          "searchVolume": 10,
-          "documentCount": 2258,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T03:33:01.881Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "신원식 다음 공판",
-      "issue": "신원식",
-      "topic": "신원식",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "재판 일정 관심",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 119,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 119",
-        "선점 후보 — 경쟁 문서 119건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 재판 일정 관심"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "계엄 정당화 메시지 전파 혐의로 신원식이 첫 재판에서 전면 부인했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "신원식 다음 공판 일정과 첫 재판 혐의 부인 쟁점",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "신원식 다음 공판 앞두고 첫 재판 발언 다시 보니 의외로 놓친 게 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "신원식 프로필",
-          "searchVolume": 670,
-          "frame": "generic"
-        },
-        {
-          "keyword": "신원식 안보실장",
-          "searchVolume": 30,
-          "frame": "generic"
-        },
-        {
-          "keyword": "신원식 재판",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "신원식 프로필",
-          "searchVolume": 670,
-          "documentCount": 439,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신원식 안보실장",
-          "searchVolume": 30,
-          "documentCount": 3070,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "신원식 재판",
-          "searchVolume": 10,
-          "documentCount": 2258,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T03:33:01.881Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "신원식 내과",
-      "issue": "신원식",
-      "topic": "신원식",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 179,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 179",
-        "선점 후보 — 경쟁 문서 179건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "계엄 정당화 메시지 전파 혐의로 신원식이 첫 재판에서 전면 부인했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": [
-        {
-          "title": "웰튼병원 신원식 소화기 과장님을 찾습니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=7010102&docId=173727577&answerNo=0",
-          "views": 236,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-17T03:33:01.881Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "윤여정 아들 조얼",
-      "issue": "윤여정",
-      "topic": "윤여정",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 193,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 193",
-        "선점 후보 — 경쟁 문서 193건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "성난 사람들2가 에미상 3관왕에 올랐지만 윤여정은 본상 수상에 실패했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "윤여정 아들 조얼, 성난 사람들2 에미상 3관왕 소식",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "윤여정 아들 조얼 찾다가 성난 사람들2 에미상 3관왕에 눈이 갔어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "윤여정 에미상",
-          "searchVolume": 190,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "윤여정 에미상",
-          "searchVolume": 190,
-          "documentCount": 1238,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T03:33:01.881Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "프로야구",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "내달 장흥으로…장흥군수, 프로야구 중계서 박람회 홍보",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-18T07:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014200301?sid=102"
+        },
+        {
+          "title": "치킨에 응원도구까지…삼성증권, 프로야구 팬 대상 이벤트",
+          "press": "fnnews.com",
+          "publishedAt": "2026-09-18T02:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005577937?sid=101"
+        },
+        {
+          "title": "프로야구 LG, 선두 kt에 12대 1 대승…5연승 질주",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-18T13:55:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/055/0001389520"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "프로야구 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026 프로야구 일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "프로야구 일정",
+          "searchVolume": 610700,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "프로야구 중계",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "프로야구 결과",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "프로야구 경기수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "프로야구 예매",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026 프로야구 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
     {
       "issue": "첼시",
       "issueType": "fresh",
@@ -4392,814 +2388,9 @@
       "nextWave": [],
       "rowCount": 0,
       "carried": true
-    },
-    {
-      "issue": "EU",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "EU가 캐나다에 첫 준회원국 방안을 제안하자 트럼프가 고율관세를 경고했다.",
-      "headlines": [
-        {
-          "title": "EU \"캐나다, 첫 준회원 길 열고파\" vs 캐나다 \"아직 그 단계 아냐\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-17T02:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014196678?sid=104"
-        },
-        {
-          "title": "캐나다 총리 “EU 준회원국 제안 긍정적”… 유럽과 함께할 때 더 강해",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-09-17T14:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001193146?sid=104"
-        },
-        {
-          "title": "미국 못 믿는 중견국들의 밀착…고율관세로 찢어놓겠다는 트럼프",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-17T16:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016319315?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "eu 신발사이즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "eu 플러그",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "eu 가입국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "EU 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "eu 입국 신청",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "eu 돈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "EU 국가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "eu 규제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "LH 노조 분사",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "LH 분사 강행 시 노조가 총파업을 경고하며 쟁의절차에 돌입했다.",
-      "headlines": [
-        {
-          "title": "“LH 쪼개기 강행하면 총파업”…노조, 쟁의절차 돌입",
-          "press": "segye.com",
-          "publishedAt": "2026-09-17T04:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004159794?sid=102"
-        },
-        {
-          "title": "LH노조 \"LH 분사 강행시 총파업…8천 조합원 쟁의절차 돌입\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-17T03:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016317547?sid=101"
-        },
-        {
-          "title": "LH 노조, 분사 추진에 총파업 경고…\"주택공급 좌초시키는 자해\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-17T07:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014197906?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "lh",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "lh 노조",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "류지현 감독 미팅",
-      "issueType": "entertainment",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "류지현 감독이 대표팀 미팅에서 맞춤 라인업과 보직을 정했다.",
-      "headlines": [
-        {
-          "title": "[사진]대표팀 미팅 갖는 류지현 감독",
-          "press": "osen.co.kr",
-          "publishedAt": "2026-09-17T06:57:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/109/0005608252"
-        },
-        {
-          "title": "[ST포토] 연습경기 후 미팅 갖는 류지현 감독",
-          "press": "stoo.com",
-          "publishedAt": "2026-09-17T07:00:00.000Z",
-          "link": "http://www.stoo.com/article.php?aid=108932276919"
-        },
-        {
-          "title": "류지현 감독 \"김도영, 1번 타자 3루수…상대 좌완 에이스 맞춤 라인업\"[...",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-17T02:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014196598?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "게장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "여수섬박람회 1만4900원 간장게장 백반이 부실 논란에 휩싸였다.",
-      "headlines": [
-        {
-          "title": "여수섬박람회 1만4천원 충격 간장게장 백반",
-          "press": "munhwa.com",
-          "publishedAt": "2026-09-16T21:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/021/0002819352?sid=102"
-        },
-        {
-          "title": "\"게장 2조각\" 여수섬박람회 1만4900원짜리 충격 간장게장 백반",
-          "press": "imaeil.com",
-          "publishedAt": "2026-09-17T08:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/088/0001029172?sid=102"
-        },
-        {
-          "title": "간장게장 백반, 이게 1만4900원?…여수박람회, 또 터졌다",
-          "press": "etnews.com",
-          "publishedAt": "2026-09-17T08:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003468012?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "간장게장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "게장 무한리필",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "여수 게장",
-          "searchVolume": 10750,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "게장 철",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "게장 시",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "게장 만들기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "게장 영어로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "게장 맛집 서울",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "여수 게장 맛집",
-          "reason": "제대로된 게장 검색",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "김여정 IAEA 핵보유국",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "김여정이 IAEA 비핵화 촉구에 핵보유국 지위는 되돌릴 수 없다고 반발했다.",
-      "headlines": [
-        {
-          "title": "김여정, IAEA 비핵화 촉구에 \"핵보유국 지위 되돌릴 수 없어\"",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-09-16T22:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/047/0002529247?sid=104"
-        },
-        {
-          "title": "김여정 \"북 핵 보유국 지위 절대적\"…IAEA 비핵화 촉구 반발",
-          "press": "kado.net",
-          "publishedAt": "2026-09-17T01:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/654/0000201150?sid=100"
-        },
-        {
-          "title": "김여정 IAEA 비핵화 촉구에 “핵보유국 지위 무엇으로도 되돌릴 수 없어...",
-          "press": "weekly.khan.co.kr",
-          "publishedAt": "2026-09-16T23:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/033/0000052228?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "팀스파르타",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "팀스파르타의 기업 AI 교육 수주가 220% 급증했다.",
-      "headlines": [
-        {
-          "title": "팀스파르타, 기업 AI 교육 수주 220% 급증",
-          "press": "inews24.com",
-          "publishedAt": "2026-09-16T23:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/031/0001059154?sid=105"
-        },
-        {
-          "title": "국내 10대 그룹 중 9곳, 팀스파르타 AI 교육 받는다",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-17T05:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002437874?sid=105"
-        },
-        {
-          "title": "팀스파르타, 상반기 기업 AI 교육 수주 220%↑",
-          "press": "itdaily.kr",
-          "publishedAt": "2026-09-17T08:22:00.000Z",
-          "link": "https://www.itdaily.kr/news/articleView.html?idxno=241701"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "팀스파르타 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "팀스파르타 회사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "팀 스파르타 후기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "팀스파르타 기업교육",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "팀스파르타 데이터분석",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "팀스파르타 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "팀스파르타 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "팀스파르타 튜터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "팀스파르타 채용",
-          "reason": "성장 기업 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "과기부",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "KT가 과기부 다크팩토리 과제로 전북에 무인 공장을 구축한다.",
-      "headlines": [
-        {
-          "title": "방미통진흥원 설립 속도…과기부·방미통위 정책협력",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-17T07:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016318666?sid=105"
-        },
-        {
-          "title": "KT, 전북혁신도시 ‘다크팩토리’ 인프라 구축…과기부 과제 참여",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-09-17T00:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002698529?sid=105"
-        },
-        {
-          "title": "NC AI, 과기부 전북∙경남 피지컬 AI 대형 국책 과제 동시 선정",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-09-17T04:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004190452?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "과기부 차관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 인사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 조직도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 산하기관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 장관상 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "과기부 지원사업",
-          "reason": "과제 참여 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "전북 혁신도시",
-          "reason": "구축 지역 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "지니젠AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "지니젠AI가 오픈라우터 426종의 한국어 품질 리더보드를 공개했다.",
-      "headlines": [
-        {
-          "title": "지니젠AI, 오픈라우터 모델 426종 한국어 품질 평가 공개",
-          "press": "donga.com",
-          "publishedAt": "2026-09-17T06:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003748965?sid=101"
-        },
-        {
-          "title": "지니젠AI, 오픈라우터 426종 분석 '한국어 AI 품질 리더보드' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-17T05:34:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215396"
-        },
-        {
-          "title": "지니젠AI·비드래프트 공동개발 AGI 필수 ‘메타인지’ 리더보드 등장",
-          "press": "ddaily.co.kr",
-          "publishedAt": "2026-07-01T07:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/138/0002232807?sid=105"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "술레이먼",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "MS AI 수장 술레이먼이 AI 의식·권리 부여는 위험하다며 앤트로픽을 비판했다.",
-      "headlines": [
-        {
-          "title": "MS AI 수장 술레이먼 \"AI에 권리·의식 가르치면 위험\"…앤트로픽 클로드...",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-09-17T01:38:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=701261"
-        },
-        {
-          "title": "술레이먼, 앤트로픽에 직격탄...\"AI에 의식·권리 부여는 재앙적 위험\"",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-17T04:34:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215391"
-        },
-        {
-          "title": "마이크로소프트, AI 안전 조율 제안…행동강령 공개",
-          "press": "tokenpost.kr",
-          "publishedAt": "2026-09-14T13:42:00.000Z",
-          "link": "https://www.tokenpost.kr/news/ai/407696"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "신원식",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "계엄 정당화 메시지 전파 혐의로 신원식이 첫 재판에서 전면 부인했다.",
-      "headlines": [
-        {
-          "title": "'계엄 정당화 메시지 전파' 신원식, 첫 재판서 혐의 전면 부인",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-16T06:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014194853?sid=102"
-        },
-        {
-          "title": "신원식 \"계엄 정당화 메시지 내용 몰랐다\"…혐의 전면 부인",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-09-16T06:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000534433?sid=102"
-        },
-        {
-          "title": "'계엄 정당화 메시지' 신원식 前안보실장 측 \"尹 지시 안 받아\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-16T06:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016315293?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "신원식 근황",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신원식 계엄",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신원식 내과",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신원식 장관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신원식 김병주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신원식 김용현",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신원식 재평가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "신원식 계엄 반대",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "신원식 다음 공판",
-          "reason": "재판 일정 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "신원식 구속 여부",
-          "reason": "신병 처리 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "신원식 형량",
-          "reason": "처벌 수위 예상",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "윤여정",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "성난 사람들2가 에미상 3관왕에 올랐지만 윤여정은 본상 수상에 실패했다.",
-      "headlines": [
-        {
-          "title": "‘성난 사람들2’ 에미 본상 벽 못 넘었다…오스카 아이작→윤여정 수상...",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-09-15T03:40:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004446239"
-        },
-        {
-          "title": "‘성난 사람들 2’ 미국 에미상 3관왕···시상식 간 윤여정은 ‘여우...",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-09-15T05:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003470493?sid=103"
-        },
-        {
-          "title": "‘성난 사람들2’, 에미상 추가 수상 불발…윤여정 레드카펫 밟아",
-          "press": "munhwa.com",
-          "publishedAt": "2026-09-15T02:22:00.000Z",
-          "link": "https://m.entertain.naver.com/article/021/0002818831"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "윤여정 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤여정 조영남",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤여정 컨설턴트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤여정 리즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "조영남 윤여정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤여정 안경",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤여정 가방",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "윤여정 와인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "윤여정 레드카펫 룩",
-          "reason": "패션 화제",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "윤여정 차기작",
-          "reason": "다음 활동 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "SKT",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "SKT가 삼성전자와 손잡고 채팅+ PC버전 지원을 확대한다.",
-      "headlines": [
-        {
-          "title": "폰 문자 PC에서도 쓴다…SKT, 채팅+ PC 지원 확대",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-16T23:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014195853?sid=105"
-        },
-        {
-          "title": "SKT, F5와 기업 AI 보안 공략…통합 관리형 서비스 확대",
-          "press": "segye.com",
-          "publishedAt": "2026-09-16T05:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004159500?sid=101"
-        },
-        {
-          "title": "SKT, '채팅+ PC버전' 추천·설치 이벤트",
-          "press": "etnews.com",
-          "publishedAt": "2026-09-17T00:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003467682?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "skt 고객센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "skt 요금제",
-          "searchVolume": 36600,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "skt 대리점",
-          "searchVolume": 23350,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "skt 인터넷",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "skt 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "Skt 로밍",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "skt 알뜰폰",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "skt 착신전환 방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "SKT 채팅+ 이벤트",
-          "reason": "설치 혜택 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "SKT 요금제",
-          "reason": "부가 서비스 연계",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "리벨랙",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "리벨리온이 일본 ai&와 파트너십을 맺고 리벨랙 100대 이상을 공급한다.",
-      "headlines": [
-        {
-          "title": "[AI픽] 리벨리온, 일본 ai&와 파트너십…리벨랙 100대 이상 공급",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-16T04:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016314763?sid=105"
-        },
-        {
-          "title": "리벨리온, 日 도쿄에 ‘리벨랙’ 100대 이상…40MW AI 인프라 정조준",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-16T10:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006370654?sid=105"
-        },
-        {
-          "title": "리벨리온, 日 추론 시장 공략…'리벨랙' 100대 이상 깐다",
-          "press": "fnnews.com",
-          "publishedAt": "2026-09-16T05:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005576702?sid=105"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "리벨랙 성능",
-          "reason": "NPU 실력 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-09-19T03:33:05.818Z",
+  "enrichedAt": "2026-09-19T09:31:28.207Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
@@ -5213,7 +2404,7 @@
     "pooled": 0,
     "aiTitled": 0,
     "trended": 0,
-    "aiCalls": 1,
+    "aiCalls": 2,
     "partial": false
   }
 }
