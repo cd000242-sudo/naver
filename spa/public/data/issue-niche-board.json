@@ -1,18 +1,17 @@
 {
-  "publishedAt": "2026-09-19T21:27:10.910Z",
+  "publishedAt": "2026-09-20T03:29:31.837Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 240,
-    "niche": 2,
-    "preemption": 4,
+    "candidates": 217,
+    "niche": 0,
+    "preemption": 7,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-09-20",
     "keywords": [
-      "민주노총 금속노조",
       "유영우 여자친구",
       "유영우 노래"
     ]
@@ -99,7 +98,40 @@
       "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          89,
+          85,
+          93,
+          81,
+          59,
+          52,
+          81,
+          48,
+          85,
+          74,
+          63,
+          26,
+          59,
+          67,
+          52,
+          100,
+          67,
+          70,
+          41,
+          44,
+          89,
+          70,
+          33,
+          41,
+          33,
+          0,
+          19,
+          30,
+          33
+        ],
+        "measuredAt": "2026-09-20T03:29:32.613Z"
+      },
       "kinCount": 4,
       "kinTop": [
         {
@@ -113,7 +145,8 @@
       "measuredAt": "2026-09-19T21:21:56.700Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "유영우 노래",
@@ -196,7 +229,40 @@
       "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          75,
+          52,
+          39,
+          36,
+          58,
+          70,
+          77,
+          66,
+          59,
+          32,
+          32,
+          26,
+          44,
+          50,
+          66,
+          47,
+          28,
+          39,
+          31,
+          28,
+          37,
+          67,
+          41,
+          23,
+          35,
+          24,
+          34,
+          41,
+          100
+        ],
+        "measuredAt": "2026-09-20T03:29:32.613Z"
+      },
       "kinCount": 12,
       "kinTop": [
         {
@@ -234,7 +300,8 @@
       "measuredAt": "2026-09-19T21:21:56.700Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "프로야구 스피리츠 갤",
@@ -319,7 +386,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          89,
           79,
           100,
           94,
@@ -347,11 +413,12 @@
           67,
           63,
           52,
-          74
+          74,
+          57
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-19T21:27:11.454Z"
+        "measuredAt": "2026-09-20T03:29:32.613Z"
       },
       "kinCount": 2,
       "kinTop": [],
@@ -441,7 +508,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          24,
           50,
           26,
           34,
@@ -469,9 +535,10 @@
           50,
           14,
           40,
-          34
+          34,
+          10
         ],
-        "measuredAt": "2026-09-19T21:27:11.454Z"
+        "measuredAt": "2026-09-20T03:29:32.613Z"
       },
       "kinCount": 370,
       "kinTop": [
@@ -494,54 +561,36 @@
       "exclusionReason": null,
       "kinMode": "date-views-v2",
       "carried": true
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "민주노총 금속노조",
-      "issue": "민주노총",
-      "topic": "민주노총",
+      "keyword": "하피냐 국대 등번호",
+      "issue": "하피냐",
+      "topic": "하피냐",
       "lane": "realtime",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "2026-09-09 일일 노동·노사관계 브리핑",
-          "노랑봉투법 : 인정은 하되, 따로는 안 된다는 중노위 — 6곳이 받은 같은 결론",
-          "★ 일은 하청이, 돈은 원청한테 받겠다? 노란봉투법이 불러온 혼란의 서막과 7.15 총파업 실태",
-          "“K-조선의 지속가능한 미래를 위해 노사정이 머리를 맞대다”",
-          "7월 15일 민주노총 총파업, 이게 왜 터졌나요?",
-          "민노총, 광화문서 1만명 총파업... \"원청 나와라\" 靑 방향 행진",
-          "현대차 노조 전면 파업 자동차, 왜 지금일까?",
-          "현대차 노조 파업 2026, 9년 만에 최대 생산 차질? 임단협 갈등 총정리",
-          "현대차 노조 전면파업 배경 정년 연장 국민연금 손실 1조 요구안 총정리",
-          "조선 분야 노사정 참여…‘조선업 노사정 협의체’ 발족"
-        ],
-        "measuredAt": "2026-09-17T21:29:32.654Z"
-      },
-      "documentCount": 19789,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 58,
       "documentCountMeasured": true,
-      "searchVolume": 790,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.7412980432043562,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "stable",
-      "isHot": true,
+      "isHot": false,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 790",
-        "문서수 19,789",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "검색량 10",
+        "문서수 58",
+        "선점 후보 — 경쟁 문서 58건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -549,17 +598,85 @@
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 790 실측 — 트래픽 하한 통과"
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 10,
+      "kinTop": [
+        {
+          "title": "축구선수 등번호",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010105&docId=297378621&answerNo=1",
+          "views": 5707,
+          "answers": 2
         },
         {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.7배"
+          "title": "[내공100]피파온라인2 브라질국대 만들거에요 ㅎㅎ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20608&docId=43821087&answerNo=3",
+          "views": 5032,
+          "answers": 3
         },
         {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+          "title": "등번호 13번인 축구선수는 누가있나요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010101&docId=321237215&answerNo=2",
+          "views": 1907,
+          "answers": 2
         },
+        {
+          "title": "축구선수중 등번호13번",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010105&docId=280263894&answerNo=2",
+          "views": 911,
+          "answers": 4
+        },
+        {
+          "title": "피파온라인3 바르셀로나 올스타 등번호 질문 드립니다~",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20608&docId=299421810&answerNo=1",
+          "views": 536,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-20T03:26:04.283Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "우슈 이용현",
+      "issue": "우슈 이용현",
+      "topic": "우슈 이용현",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 98,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 98",
+        "선점 후보 — 경쟁 문서 98건, 수요 미검출"
+      ],
+      "evidence": [
         {
           "code": "empty-field",
           "text": "정면으로 다룬 글 0건 (최근 0건)"
@@ -569,132 +686,28 @@
           "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "whySearch": {
-        "text": "민주노총이 6년 만에 메가특구 사회적 대화에 참여키로 했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
+      "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "민주노총 금속노조 6년 만에 사회적 대화 복귀, 52시간 특례가 고비",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "민주노총 금속노조 위원장이 6년 만에 다시 앉았는데 분위기가 묘하네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "민주노총 위원장",
-          "searchVolume": 560,
-          "frame": "generic"
-        },
-        {
-          "keyword": "금속노조 위원장",
-          "searchVolume": 210,
-          "frame": "generic"
-        },
-        {
-          "keyword": "민주노총 총파업",
-          "searchVolume": 70,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "민주노총 위원장",
-          "searchVolume": 560,
-          "documentCount": 96932,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "금속노조 위원장",
-          "searchVolume": 210,
-          "documentCount": 27310,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "민주노총 총파업",
-          "searchVolume": 70,
-          "documentCount": 25693,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "금속노조 현대차지부",
-          "searchVolume": 70,
-          "documentCount": 8687,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "민주노총 조합원",
-          "searchVolume": 10,
-          "documentCount": 72855,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": {
-        "series": [
-          90,
-          34,
-          10,
-          64,
-          100,
-          82,
-          62,
-          50,
-          14,
-          24,
-          48,
-          96,
-          62,
-          68,
-          42,
-          24,
-          18,
-          40,
-          46,
-          44,
-          72,
-          42,
-          20,
-          0,
-          46,
-          30,
-          28,
-          46,
-          26
-        ],
-        "measuredAt": "2026-09-19T21:27:11.454Z"
-      },
-      "kinCount": 362,
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
       "kinTop": [
         {
-          "title": "금속노조와 민주노총",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61402&docId=491987929&answerNo=1",
-          "views": 96,
+          "title": "운동종목 우슈에관하여...",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100407&docId=250827283&answerNo=1",
+          "views": 146,
           "answers": 1
-        },
-        {
-          "title": "민주노총 탈퇴 문의입니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61402&docId=485277361&answerNo=0",
-          "views": 30,
-          "answers": null
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-09-17T21:28:17.853Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true,
-      "kinMode": "date-views-v2"
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-09-20T03:26:04.283Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "오픈ai 쳇got 비교",
       "issue": "오픈AI",
@@ -745,12 +758,223 @@
         {
           "title": "쳇got 지브리 사진변환",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=70404&docId=483884587&answerNo=6",
-          "views": 1518,
+          "views": 1520,
           "answers": 15
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-09-19T21:21:56.700Z",
+      "measuredAt": "2026-09-20T03:26:04.283Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "하피냐 인벤",
+      "issue": "하피냐",
+      "topic": "하피냐",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 23,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 23",
+        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": [
+        {
+          "title": "피파 4 인벤 미페 만들어줘",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20608&docId=342132323&answerNo=1",
+          "views": 126,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-20T03:26:04.283Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "재벌X형사2 11.8% 종영",
+      "issue": "재벌X형사2 11.8% 종영",
+      "topic": "재벌X형사2 11.8% 종영",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 44,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 44",
+        "선점 후보 — 경쟁 문서 44건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-20T03:26:04.283Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "신지은 아시안게임 동메달",
+      "issue": "신지은 아시안게임 동메달",
+      "topic": "신지은 아시안게임 동메달",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 57,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 57",
+        "선점 후보 — 경쟁 문서 57건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-20T03:26:04.283Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "네오클라우드 엔스케일",
+      "issue": "네오클라우드 엔스케일",
+      "topic": "네오클라우드 엔스케일",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 102,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 102",
+        "선점 후보 — 경쟁 문서 102건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-20T03:26:04.283Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -808,55 +1032,8 @@
       "monetize": null,
       "measuredAt": "2026-09-19T21:21:56.700Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "네오클라우드 엔스케일",
-      "issue": "네오클라우드 엔스케일",
-      "topic": "네오클라우드 엔스케일",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 100,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 100",
-        "선점 후보 — 경쟁 문서 100건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-19T21:21:56.700Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아스날 등수",
@@ -919,7 +1096,8 @@
       "monetize": null,
       "measuredAt": "2026-09-19T21:21:56.700Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "김승원 의혹 탄원서",
@@ -2182,288 +2360,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "민주노총 심볼",
-      "issue": "민주노총",
-      "topic": "민주노총",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 57,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 57",
-        "선점 후보 — 경쟁 문서 57건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "민주노총이 6년 만에 메가특구 사회적 대화에 참여키로 했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "민주노총 심볼 로고·마크·깃발 이미지 어디서 받나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "민주노총 심볼 로고랑 마크가 다른 거 의외로 많이들 모르시더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "민주노총 로고",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "민주노총 마크",
-          "searchVolume": 10,
-          "frame": "generic"
-        },
-        {
-          "keyword": "민주노총 깃발",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "민주노총 로고",
-          "searchVolume": 20,
-          "documentCount": 1377,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "민주노총 마크",
-          "searchVolume": 10,
-          "documentCount": 2190,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 7,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T21:28:17.853Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김포FC 횡령 수법",
-      "issue": "김포FC 횡령",
-      "topic": "김포FC 횡령",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 103,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 103",
-        "선점 후보 — 경쟁 문서 103건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "김포FC 회계담당 직원이 최소 58억을 횡령해 구속됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김포FC 횡령 수법 58억 회계직원 부동산·고급차로",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김포FC 횡령 수법 뜯어보니 58억이 부동산으로 흘러갔더라고요",
-          "frame": "ai",
-          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "김포FC 횡령",
-          "searchVolume": 1030,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김포FC 횡령 사건",
-          "searchVolume": 110,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김포FC 횡령 직원",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "김포FC 횡령",
-          "searchVolume": 1030,
-          "documentCount": 727,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김포FC 횡령 사건",
-          "searchVolume": 110,
-          "documentCount": 536,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김포FC 횡령 직원",
-          "searchVolume": 30,
-          "documentCount": 438,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T21:28:17.853Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "지예은과 기안84 여친",
-      "issue": "지예은과 기안84 여친",
-      "topic": "지예은과 기안84 여친",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 116,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 116",
-        "선점 후보 — 경쟁 문서 116건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "기안84가 AI 여친 '바타'를 지예은에게 소개하며 신경전을 벌였다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "지예은과 기안84 여친 바타 AI 소개 신경전 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "지예은과 기안84 여친 바타 신경전 보다가 이 부분에서 좀 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "기안84 지예은",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "기안84 지예은",
-          "searchVolume": 20,
-          "documentCount": 2985,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-17T21:28:17.853Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -2538,7 +2434,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 2
+      "rowCount": 2,
+      "carried": true
     },
     {
       "issue": "프로야구",
@@ -2685,161 +2582,9 @@
       "nextWave": [],
       "rowCount": 1,
       "carried": true
-    },
-    {
-      "issue": "민주노총",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "민주노총이 6년 만에 메가특구 사회적 대화에 참여키로 했다.",
-      "headlines": [
-        {
-          "title": "민주노총, 메가특구 사회적 대화 참여키로…코로나19 이후 6년만",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-17T11:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016319265?sid=102"
-        },
-        {
-          "title": "6년 만에 사회적 대화 복귀한 민주노총…'52시간 특례' 최대 고비",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-17T12:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009177663?sid=101"
-        },
-        {
-          "title": "민주노총, 메가특구 사회적 대화 참여…\"노동 특례 저지할 것\"",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-17T13:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005333674?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "민주노총 간첩",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "민주노총 위원장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "민주노총 시위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "민주노총 금속노조",
-          "searchVolume": 790,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "민주노총 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "민주노총 집회",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "민주노총 고공농성",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "민주노총 부산본부",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "52시간 특례",
-          "reason": "특례 도입 여부 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "민주노총 대화 결렬",
-          "reason": "복귀 뒤 파행 우려",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "김포FC 횡령",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "declining",
-      "isHot": true,
-      "why": "김포FC 회계담당 직원이 최소 58억을 횡령해 구속됐다.",
-      "headlines": [
-        {
-          "title": "김포FC 58억 횡령 직원 구속…부동산도, 고급차도 '펑펑'",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-17T09:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014198191?sid=102"
-        },
-        {
-          "title": "김포FC 58억 횡령 혐의 직원 구속…부동산·고급차 샀다",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-17T09:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009177548?sid=102"
-        },
-        {
-          "title": "[단독] ‘83억 횡령’에 잔고 199만원인데…김포FC, 감사는 매년 ‘적정...",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-09-17T20:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/025/0003552271?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "지예은과 기안84 여친",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "기안84가 AI 여친 '바타'를 지예은에게 소개하며 신경전을 벌였다.",
-      "headlines": [
-        {
-          "title": "기안84, AI와 연애에 자괴감 \"인간성 사라져, 자존감 떨어진다\"",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-09-17T12:48:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004447200"
-        },
-        {
-          "title": "지예은, 기안84 AI 여친과 신경전…\"♥바타와 나는 진짜 사랑\" 도발 [기...",
-          "press": "mydaily.co.kr",
-          "publishedAt": "2026-09-17T13:23:00.000Z",
-          "link": "https://m.entertain.naver.com/article/117/0004106588"
-        },
-        {
-          "title": "기안84, 예비 신부 지예은에 AI 여친 소개했는데...“난 ♥바타와 진짜...",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-09-17T13:29:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000776575"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-09-19T21:27:33.315Z",
+  "enrichedAt": "2026-09-20T03:29:54.462Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
