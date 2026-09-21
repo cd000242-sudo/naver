@@ -31,6 +31,7 @@ function humanDwell(baseMs: number): number {
 }
 // [SPEC-FREEZE-GUARD-001-P2 R5 / v2.10.264] Base64 디코딩 워커 분리 — data URL 본문
 import { decodeBase64Async } from '../main/utils/base64Async.js';
+import { downloadImageBuffer } from '../image/imageUrlDownload.js';
 import {
   SELECTORS,
   findElement,
@@ -570,47 +571,8 @@ export async function insertImageViaUploadButton(self: any, filePath: string): P
       // URL인 경우 다운로드 후 임시 파일로 저장
       self.log(`   🌐 URL 이미지 다운로드 중...`);
       const os = await import('os');
-      const https = await import('https');
-      const http = await import('http');
-      const url = await import('url');
-
-      // SSL 검증 무시 (공공 사이트의 SSL 설정 문제 대응)
-      const agent = new https.Agent({
-        rejectUnauthorized: false,
-        secureOptions: 0x4,
-      });
-
-      // URL 파싱
-      const parsedUrl = new url.URL(cleanFilePath);
-      const isHttps = parsedUrl.protocol === 'https:';
-      const client = isHttps ? https : http;
-
-      // Promise로 래핑하여 다운로드
-      const buffer = await new Promise<Buffer>((resolve, reject) => {
-        const request = client.get(cleanFilePath, {
-          agent: isHttps ? agent : undefined,
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-          },
-          timeout: 10000,
-        }, (response) => {
-          if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
-            reject(new Error(`이미지 다운로드 실패: ${response.statusCode} ${response.statusMessage || ''}`));
-            return;
-          }
-
-          const chunks: Buffer[] = [];
-          response.on('data', (chunk) => chunks.push(chunk));
-          response.on('end', () => resolve(Buffer.concat(chunks)));
-          response.on('error', reject);
-        });
-
-        request.on('error', reject);
-        request.on('timeout', () => {
-          request.destroy();
-          reject(new Error('이미지 다운로드 타임아웃'));
-        });
-      });
+      // [2026-09-21] 리다이렉트(302)·핫링크 차단·HTML 응답을 한 곳에서 처리한다 (imageUrlDownload).
+      const { buffer } = await downloadImageBuffer(cleanFilePath, { timeoutMs: 10000 });
       const tempDir = os.tmpdir();
       // URL에서 쿼리 파라미터 제거 후 확장자 추출 (안전한 방법)
       let urlWithoutQuery = cleanFilePath;
@@ -838,48 +800,8 @@ export async function insertBase64ImageAtCursor(
     self.log(`   🌐 URL 이미지 다운로드 중: ${filePath.substring(0, 80)}...`);
 
     try {
-      const https = await import('https');
-      const http = await import('http');
-      const url = await import('url');
-
-      // SSL 검증 무시 (공공 사이트의 SSL 설정 문제 대응)
-      const agent = new https.Agent({
-        rejectUnauthorized: false,
-        // Legacy SSL renegotiation 허용 (OpenSSL 3.0+ 필수)
-        secureOptions: 0x4, // SSL_OP_LEGACY_SERVER_CONNECT
-      });
-
-      // URL 파싱
-      const parsedUrl = new url.URL(filePath);
-      const isHttps = parsedUrl.protocol === 'https:';
-      const client = isHttps ? https : http;
-
-      // Promise로 래핑하여 다운로드
-      const buffer = await new Promise<Buffer>((resolve, reject) => {
-        const request = client.get(filePath, {
-          agent: isHttps ? agent : undefined,
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-          },
-          timeout: 10000, // 10초 타임아웃
-        }, (response) => {
-          if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
-            reject(new Error(`이미지 다운로드 실패: ${response.statusCode} ${response.statusMessage || ''}`));
-            return;
-          }
-
-          const chunks: Buffer[] = [];
-          response.on('data', (chunk) => chunks.push(chunk));
-          response.on('end', () => resolve(Buffer.concat(chunks)));
-          response.on('error', reject);
-        });
-
-        request.on('error', reject);
-        request.on('timeout', () => {
-          request.destroy();
-          reject(new Error('이미지 다운로드 타임아웃'));
-        });
-      });
+      // [2026-09-21] 리다이렉트(302)·핫링크 차단·HTML 응답을 한 곳에서 처리한다 (imageUrlDownload).
+      const { buffer } = await downloadImageBuffer(filePath, { timeoutMs: 10000 });
 
       // 임시 파일로 저장
       const tempDir = os.tmpdir();
@@ -887,7 +809,7 @@ export async function insertBase64ImageAtCursor(
       let urlWithoutQuery = filePath;
       try {
         // URL 모듈을 사용하여 pathname만 추출 (쿼리 파라미터와 해시 자동 제거)
-        const parsedUrl = new url.URL(filePath);
+        const parsedUrl = new URL(filePath);
         urlWithoutQuery = parsedUrl.pathname;
       } catch {
         // URL 파싱 실패 시 수동으로 제거 (?와 & 모두 처리)
@@ -2409,40 +2331,8 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
         // 외부 URL인 경우도 Base64로 변환 시도 (더 확실함)
         self.log(`   🔄 외부 URL 이미지를 Base64로 변환 중...`);
         try {
-          const https = await import('https');
-          const http = await import('http');
-          const url = await import('url');
-
-          // URL 파싱
-          const parsedUrl = new url.URL(image.filePath);
-          const isHttps = parsedUrl.protocol === 'https:';
-          const client = isHttps ? https : http;
-
-          // Promise로 래핑하여 다운로드
-          const buffer = await new Promise<Buffer>((resolve, reject) => {
-            const request = client.get(image.filePath, {
-              headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-              },
-              timeout: 10000,
-            }, (response) => {
-              if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
-                reject(new Error(`이미지 다운로드 실패: ${response.statusCode} ${response.statusMessage || ''}`));
-                return;
-              }
-
-              const chunks: Buffer[] = [];
-              response.on('data', (chunk) => chunks.push(chunk));
-              response.on('end', () => resolve(Buffer.concat(chunks)));
-              response.on('error', reject);
-            });
-
-            request.on('error', reject);
-            request.on('timeout', () => {
-              request.destroy();
-              reject(new Error('이미지 다운로드 타임아웃'));
-            });
-          });
+          // [2026-09-21] 리다이렉트(302)·핫링크 차단·HTML 응답을 한 곳에서 처리한다 (imageUrlDownload).
+          const { buffer } = await downloadImageBuffer(image.filePath, { timeoutMs: 10000, insecureTls: false });
           const base64 = buffer.toString('base64');
 
           // URL에서 확장자 추출 (쿼리 파라미터 제거)

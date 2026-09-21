@@ -3,6 +3,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { randomUUID } from 'crypto';
 import type { BlobMeta } from '../main/blobStore/index.js';
+import { downloadImageBuffer } from './imageUrlDownload.js';
 
 export async function ensureDirectory(): Promise<string> {
   // 테스트 환경에서는 환경변수를 사용
@@ -57,12 +58,44 @@ export async function getImageSaveBasePath(): Promise<string> {
 
 // Return type extended in SPEC-IMAGE-MODEL-001 Phase 2 — blob fields are optional for
 // non-fatal dual-write (legacy filePath/previewDataUrl remain for backward compatibility).
+/*
+ * [2026-09-21 사장님] "이미지 비율은 800x800 이 제일 모바일에서 보기 좋다. 생성할 때 자동으로 맞춰라."
+ * AI 생성 엔진은 전부 이 함수로 모인다. 정사각에 가까운 결과(1:1, 4:3, 3:4)는 가운데를 잘라
+ * 800x800 으로 맞추고, 16:9·9:16 처럼 사용자가 일부러 고른 넓은 비율은 비율을 지킨 채 너비 800.
+ * 수집·다운로드 이미지(뉴스 사진, 상품 사진)는 keepAspect 로 기존 동작(너비 1200, 비율 유지)을 지킨다.
+ */
+export const GENERATED_IMAGE_SQUARE_SIZE = 800;
+const NEAR_SQUARE_MAX_RATIO = 1.34;
+
+export interface WriteImageFileOptions {
+  /** true 면 자르지 않는다 — 수집/다운로드 이미지 전용. */
+  keepAspect?: boolean;
+}
+
+function resolveGeneratedImageTarget(
+  width: number,
+  height: number,
+  keepAspect: boolean,
+): { width: number; height: number; fit: 'cover' | 'inside' } {
+  if (keepAspect) {
+    const targetWidth = 1200;
+    return { width: targetWidth, height: Math.round(height * (targetWidth / width)), fit: 'inside' };
+  }
+  const ratio = Math.max(width, height) / Math.max(1, Math.min(width, height));
+  if (ratio <= NEAR_SQUARE_MAX_RATIO) {
+    return { width: GENERATED_IMAGE_SQUARE_SIZE, height: GENERATED_IMAGE_SQUARE_SIZE, fit: 'cover' };
+  }
+  const targetWidth = GENERATED_IMAGE_SQUARE_SIZE;
+  return { width: targetWidth, height: Math.round(height * (targetWidth / width)), fit: 'inside' };
+}
+
 export async function writeImageFile(
   buffer: Buffer,
   extension: string,
   heading?: string,
   postTitle?: string,
   postId?: string,
+  options: WriteImageFileOptions = {},
 ): Promise<{
   filePath: string;
   previewDataUrl: string;
@@ -125,14 +158,19 @@ export async function writeImageFile(
     imgWidth = metadata.width ?? 0;
     imgHeight = metadata.height ?? 0;
 
-    // 목표 크기: 너비 1200px, 비율 유지
-    const targetWidth = 1200;
-    const targetHeight = Math.round((metadata.height || targetWidth) * (targetWidth / (metadata.width || targetWidth)));
+    const target = resolveGeneratedImageTarget(
+      metadata.width || GENERATED_IMAGE_SQUARE_SIZE,
+      metadata.height || GENERATED_IMAGE_SQUARE_SIZE,
+      options.keepAspect === true,
+    );
+    const targetWidth = target.width;
+    const targetHeight = target.height;
 
-    // 이미지가 목표 크기보다 크거나 작으면 리사이징
-    if (metadata.width && metadata.width !== targetWidth) {
+    // 이미지가 목표 크기와 다르면 리사이징 (정사각 목표는 높이도 봐야 한다 — 800x1200 이 그냥 지나가면 안 된다)
+    if (metadata.width && (metadata.width !== targetWidth || (metadata.height || 0) !== targetHeight)) {
       const processedImage = image.resize(targetWidth, targetHeight, {
-        fit: 'inside', // 비율 유지하면서 안쪽에 맞춤
+        fit: target.fit, // cover: 가운데 잘라 정사각 / inside: 비율 유지
+        position: 'centre',
         withoutEnlargement: false, // 작은 이미지도 확대 허용
       });
 
@@ -314,48 +352,8 @@ export async function downloadAndSaveImage(
   postId?: string
 ): Promise<{ filePath: string; previewDataUrl: string; savedToLocal?: string }> {
   try {
-    // URL에서 이미지 다운로드 (Node.js 내장 모듈 사용)
-    const https = await import('https');
-    const http = await import('http');
-    const url = await import('url');
-
-    // SSL 검증 무시 (공공 사이트의 SSL 설정 문제 대응)
-    const agent = new https.Agent({
-      rejectUnauthorized: false,
-      secureOptions: 0x4, // SSL_OP_LEGACY_SERVER_CONNECT
-    });
-
-    // URL 파싱
-    const parsedUrl = new url.URL(imageUrl);
-    const isHttps = parsedUrl.protocol === 'https:';
-    const client = isHttps ? https : http;
-
-    // Promise로 래핑하여 다운로드
-    const buffer = await new Promise<Buffer>((resolve, reject) => {
-      const request = client.get(imageUrl, {
-        agent: isHttps ? agent : undefined,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        },
-        timeout: 30000, // 30초 타임아웃
-      }, (response) => {
-        if (response.statusCode && (response.statusCode < 200 || response.statusCode >= 300)) {
-          reject(new Error(`이미지 다운로드 실패: ${response.statusCode} ${response.statusMessage || ''}`));
-          return;
-        }
-
-        const chunks: Buffer[] = [];
-        response.on('data', (chunk) => chunks.push(chunk));
-        response.on('end', () => resolve(Buffer.concat(chunks)));
-        response.on('error', reject);
-      });
-
-      request.on('error', reject);
-      request.on('timeout', () => {
-        request.destroy();
-        reject(new Error('이미지 다운로드 타임아웃'));
-      });
-    });
+    // [2026-09-21] 리다이렉트(302)·핫링크 차단·HTML 응답을 한 곳에서 처리한다 (imageUrlDownload).
+    const { buffer } = await downloadImageBuffer(imageUrl, { timeoutMs: 30000 });
 
     // 파일 확장자 추출
     const urlPath = new URL(imageUrl).pathname;
@@ -373,7 +371,8 @@ export async function downloadAndSaveImage(
       validExt.slice(1), // 확장자에서 점 제거
       heading,
       postTitle,
-      postId
+      postId,
+      { keepAspect: true }, // 다운로드 이미지는 자르지 않는다
     );
 
     return { filePath, previewDataUrl, savedToLocal };

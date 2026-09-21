@@ -432,6 +432,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/image/geminiTableExtractor.ts',
   'src/image/imageErrorMessages.ts',
   'src/image/imageHashUtils.ts',
+  'src/image/imageUrlDownload.ts',
   'src/image/imageUtils.ts',
   'src/image/imageViewpointRotation.ts',
   'src/image/koreanTitleWrap.ts',

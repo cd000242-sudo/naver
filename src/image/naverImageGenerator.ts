@@ -274,7 +274,8 @@ export async function generateWithNaver(
           const { buffer, ext } = await scraper.downloadImage(imageUrl);
           // Spread result so blob fields (blobId, sha256, etc.) are forwarded to GeneratedImage.
           const writeResult = await writeImageFile(
-            buffer, ext, item.heading, postTitle, postId
+            buffer, ext, item.heading, postTitle, postId,
+            { keepAspect: true }, // Naver search photos are not generated — never crop them
           );
 
           results.push({

@@ -220,3 +220,46 @@ describe('writeImageFile — SPEC-IMAGE-MODEL-001 Phase 2', () => {
     }
   });
 });
+
+/*
+ * [2026-09-21 사장님] "이미지 비율은 800x800이 제일 모바일에서 보기 좋다. 생성할 때 자동으로 맞춰라."
+ * 모든 AI 생성 엔진이 writeImageFile 로 모인다. 여기서 한 번에 맞춘다.
+ */
+describe('writeImageFile — 생성 이미지 800x800 고정', () => {
+  async function dims(filePath: string): Promise<{ width: number; height: number }> {
+    const sharp = (await import('sharp')).default;
+    const meta = await sharp(filePath).metadata();
+    return { width: meta.width || 0, height: meta.height || 0 };
+  }
+
+  async function png(width: number, height: number): Promise<Buffer> {
+    const sharp = (await import('sharp')).default;
+    return sharp({
+      create: { width, height, channels: 4, background: { r: 30, g: 90, b: 200, alpha: 1 } },
+    }).png().toBuffer();
+  }
+
+  it('1024x1024 생성 이미지는 800x800 으로 저장한다', async () => {
+    const { writeImageFile } = await import('../image/imageUtils.js');
+    const result = await writeImageFile(await png(1024, 1024), 'png', 'square');
+    expect(await dims(result.filePath)).toEqual({ width: 800, height: 800 });
+  });
+
+  it('거의 정사각(1152x896)은 가운데를 잘라 800x800 으로 맞춘다', async () => {
+    const { writeImageFile } = await import('../image/imageUtils.js');
+    const result = await writeImageFile(await png(1152, 896), 'png', 'near-square');
+    expect(await dims(result.filePath)).toEqual({ width: 800, height: 800 });
+  });
+
+  it('16:9 처럼 확실히 넓은 생성 이미지는 비율을 지키고 너비 800 으로만 줄인다', async () => {
+    const { writeImageFile } = await import('../image/imageUtils.js');
+    const result = await writeImageFile(await png(1344, 768), 'png', 'wide');
+    expect(await dims(result.filePath)).toEqual({ width: 800, height: 457 });
+  });
+
+  it('수집·다운로드 이미지(keepAspect)는 자르지 않고 기존대로 너비 1200 비율 유지', async () => {
+    const { writeImageFile } = await import('../image/imageUtils.js');
+    const result = await writeImageFile(await png(1152, 896), 'png', 'collected', undefined, undefined, { keepAspect: true });
+    expect(await dims(result.filePath)).toEqual({ width: 1200, height: 933 });
+  });
+});

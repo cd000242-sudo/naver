@@ -1127,11 +1127,14 @@ async function generateSingleImageWithGemini(
 ): Promise<GeneratedImage | null> {
 
   // 썸네일 크롭 헬퍼
+  // [2026-09-21] 예전엔 1200x630 안쪽으로 줄였다. 정사각 결과가 630x630 이 된 뒤
+  //   writeImageFile 이 800x800 으로 다시 키워 화질만 잃는다. 최종 크기는 writeImageFile 이 정한다 —
+  //   여기서는 줄이지 않고(확대도 없이) 재인코딩만 한다.
   const cropThumbnail = async (buf: Buffer, ext: string): Promise<Buffer> => {
     try {
       const sharpModule = await import('sharp');
       const sharpFn = (sharpModule as any).default || (sharpModule as any);
-      const s = sharpFn(buf).resize(1200, 630, { fit: 'inside' });
+      const s = sharpFn(buf).resize(2048, 2048, { fit: 'inside', withoutEnlargement: true });
       if (ext === 'jpg' || ext === 'jpeg') return await s.jpeg({ quality: 88, mozjpeg: true }).toBuffer();
       if (ext === 'webp') return await s.webp({ quality: 88 }).toBuffer();
       return await s.png({ quality: 90, compressionLevel: 9 }).toBuffer();
