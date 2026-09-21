@@ -249,7 +249,20 @@ function applyResultToPayload<T extends ContentPolicyPayload>(
     structured.selectedTitle = lockedTitle || result.article.title;
     structured.introduction = result.article.introduction;
     if (result.article.headings) {
-      structured.headings = result.article.headings.map((heading) => ({ ...heading }));
+      /*
+       * [2026-09-21] 정책 결과의 소제목은 {title, content} 두 칸뿐이다. 그걸로 통째로
+       * 갈아끼우면 렌더러가 붙인 publishTitle(번호 접두)·이미지 매핑 칸이 사라진다.
+       * 같은 자리의 원본 소제목 위에 제목·본문만 덮는다.
+       */
+      const originalHeadings = Array.isArray(payload.structuredContent?.headings)
+        ? payload.structuredContent.headings as unknown[]
+        : [];
+      structured.headings = result.article.headings.map((heading, index) => {
+        const original = originalHeadings[index];
+        return original && typeof original === 'object'
+          ? { ...(original as Record<string, unknown>), ...heading }
+          : { ...heading };
+      });
     }
     structured.bodyPlain = result.article.body_markdown;
     structured.content = result.article.body_markdown;

@@ -172,17 +172,30 @@ function isSupportedClaim(claim: string, evidence: readonly string[]): boolean {
   });
 }
 
+/*
+ * [2026-09-21 사장님 라이브] 반자동 편집 원고의 근거는 사용자 자신이다.
+ *
+ * publishInputReconciler 는 반자동이면 source_materials 를 비우고 business_facts 를
+ * "사용자가 직접 확인했다" 한 문장으로 바꾼다. 그 상태로 숫자 문장을 근거와 대조하면
+ * 가격·수치가 든 문장은 전부 unsupported 가 되고, removeUnsupportedClaimSentences 가
+ * 도입부 첫 줄·"12.3인치 …" 뒤 문장·마지막 줄을 지운 뒤 빈 제목엔 "… 확인 가이드",
+ * 빈 소제목엔 "핵심 내용부터 살펴보기"를 채워 넣었다. 사용자가 쓴 글이 그대로 나가야 한다.
+ * 정책이 명시한 forbidden_claims 만 남긴다.
+ */
 function unsupportedClaims(input: ContentPolicyInput, draft: ArticleDraft): string[] {
   const article = wholeArticle(draft);
+  const forbiddenClaims = (input.forbidden_claims ?? []).filter((claim) => (
+    includesNormalized(article, claim)
+  ));
+  if (input.input_origin === 'semi_auto_manual') {
+    return [...new Set(forbiddenClaims)];
+  }
   const evidence = evidenceTexts(input);
   const riskySentences = splitNormalizedSentences(article, 6).filter((sentence) => (
     (RISKY_CLAIM.test(sentence) || FIRSTHAND_CLAIM.test(sentence))
     && !EXPLICIT_NO_GUARANTEE.test(sentence)
   ));
   const unsupportedRiskySentences = riskySentences.filter((claim) => !isSupportedClaim(claim, evidence));
-  const forbiddenClaims = (input.forbidden_claims ?? []).filter((claim) => (
-    includesNormalized(article, claim)
-  ));
   return [...new Set([...forbiddenClaims, ...unsupportedRiskySentences])];
 }
 

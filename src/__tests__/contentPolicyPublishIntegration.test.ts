@@ -306,6 +306,61 @@ describe('content policy publish integration', () => {
     expect(result.advisoryReasons).toContain('BLOCK_KEYWORD_BODY_MISMATCH');
   });
 
+  /*
+   * [2026-09-21 사장님 라이브] 반자동 편집 원고는 근거 자료가 비어 있어 숫자 든 문장이 전부
+   * unsupported 로 몰렸다. 제목이 "… 확인 가이드", 소제목이 "핵심 내용부터 살펴보기"로 바뀌고
+   * 도입부 첫 줄·"12.3인치 …" 뒤 문장·마지막 줄이 통째로 지워진 채 발행됐다.
+   * 반자동 원고의 근거는 사용자 자신이다 — 발행 경계가 원문을 고쳐 쓰면 안 된다.
+   */
+  it('publishes a semi-auto pasted article verbatim even when it is full of numeric claims', async () => {
+    const payload = payloadWithContext();
+    const title = '2026 셀토스 하이브리드 모의견적, 프레스티지에 두 옵션 넣으니 시그니처와 106만원 차이';
+    const intro = '2026 셀토스 하이브리드 가격표를 처음 보면 2,940만원부터라는 숫자가 먼저 들어옵니다.';
+    const heading1 = '2,940만원으로 시작하지만 첫 고민은 트렌디에서 생겨요';
+    const heading2 = '니처와 106만원 차이';
+    const body1 = '하이브리드 트렌디의 세제혜택 후 가격은 2,940만원입니다.\n\n출발가격만 놓고 보면 3천만원 아래에서 살 수 있는 셈이에요.';
+    const body2 = '트렌디에서 프레스티지로 올라가고, 프레스티지에 12.3인치 클러스터와 드라이브 와이즈를 넣으면 차량 가격은 3,414만원이 됩니다.\n\n차이가 106만원밖에 남지 않습니다.';
+    const lastLine = '※ 아래 가격은 기아 공식 가격표의 2026년 9월 1일 기준, 친환경차 세제혜택 후 차량가격입니다.';
+    const content = `${intro}\n\n## ${heading1}\n\n${body1}\n\n## ${heading2}\n\n${body2}\n\n${lastLine}`;
+    payload._semiAutoMode = true;
+    payload.title = title;
+    payload.content = content;
+    payload.structuredContent = {
+      selectedTitle: title,
+      introduction: intro,
+      headings: [
+        { title: heading1, content: body1, publishTitle: `1. ${heading1}` },
+        { title: heading2, content: body2, publishTitle: `2. ${heading2}` },
+      ],
+      bodyPlain: content,
+      content,
+      faq: [],
+      cta: '',
+    } as any;
+    delete (payload as any).contentPolicyContext;
+
+    const result = await prepareContentPolicyForPublish(payload, {
+      userDataPath: await tempDir(),
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(result.policyResult.quality_report.unsupported_claims).toEqual([]);
+    expect(result.payload.title).toBe(title);
+    expect(result.payload.title).not.toContain('확인 가이드');
+    expect(result.payload.content).toBe(content);
+    expect(result.payload.structuredContent.selectedTitle).toBe(title);
+    expect(result.payload.structuredContent.bodyPlain).toContain('12.3인치 클러스터와');
+    expect(result.payload.structuredContent.bodyPlain).toContain(intro);
+    expect(result.payload.structuredContent.bodyPlain).toContain(lastLine);
+    expect(result.payload.structuredContent.headings.map((heading: any) => heading.title))
+      .toEqual([heading1, heading2]);
+    expect(result.payload.structuredContent.headings[0].publishTitle).toBe(`1. ${heading1}`);
+    expect(result.payload.structuredContent.headings[0].content).toBe(body1);
+    expect(JSON.stringify(result.payload.structuredContent)).not.toContain('핵심 내용부터 살펴보기');
+  });
+
   it('warns and continues when recent-post comparison data is unavailable', async () => {
     const payload = payloadWithContext();
     payload.contentPolicyContext.input.recent_posts = undefined;

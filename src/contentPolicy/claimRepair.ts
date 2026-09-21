@@ -1,7 +1,12 @@
 import { normalizeText } from './textMetrics.js';
 import type { ArticleDraft, ContentPolicyInput, ContentPolicyResult } from './types.js';
 
-const SENTENCE_CHUNKS = /[^.!?。！？]+[.!?。！？]+|[^.!?。！？]+$/gu;
+/*
+ * [2026-09-21] 숫자 사이의 점("12.3인치", "3.5%")은 문장 끝이 아니다. 전에는 "12." 에서
+ * 조각이 갈라져 뒤 조각만 지워지고 "12." 가 매달렸고, 지우지 않는 문장도 "12. 3인치" 로
+ * 공백이 끼어 발행 단락 분할기가 그 자리에서 줄을 바꿨다.
+ */
+const SENTENCE_CHUNKS = /(?:[^.!?。！？]|\.(?=\d))+(?:[.!?。！？]+|$)/gu;
 
 function matchesUnsupportedClaim(value: string, normalizedClaims: readonly string[]): boolean {
   const normalized = normalizeText(value);
