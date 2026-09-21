@@ -4550,6 +4550,9 @@ async function startContinuousPublishingV2(): Promise<void> {
       (window as any).headingImageMap = new Map();
       (window as any).selectedThumbnail = null;
       (window as any).manualThumbnailPath = null;
+      // [2026-09-22] 위 두 이름은 아무도 쓰지 않는 유령. 발행이 실제로 읽는 건 window.thumbnailPath 다.
+      (window as any).thumbnailPath = null;
+      (window as any).selectedThumbnailImage = null;
       // 콘텐츠 전역 변수 초기화
       (window as any).currentStructuredContent = null;
       currentStructuredContent = null;

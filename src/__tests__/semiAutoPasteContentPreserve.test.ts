@@ -36,9 +36,13 @@ describe('반자동 붙여넣기 본문(content) 보존 가드', () => {
     expect(renderer).toMatch(/currentSignature === nextSignature && currentHasContent/);
   });
 
-  it('제목 자동 채움: 상한 60자 + 문장형 첫 줄 제외', () => {
+  it('제목 자동 채움: 상한 80자 + 문장형 첫 줄 제외 + "# 제목"/"**제목**"/"제목:" 표시는 벗기고 제목으로', () => {
     expect(renderer).toContain('firstLineLooksSentence');
-    expect(renderer).toMatch(/firstLine\.length <= 60/);
+    expect(renderer).toMatch(/firstLine\.length <= 80/);
+    expect(renderer).not.toMatch(/firstLine\.length <= 60/);
+    // [2026-09-21] '#'로 시작한다고 제목 후보에서 빼면 소제목 추출기가 첫 줄을 소제목 1번으로 가져간다.
+    expect(renderer).toMatch(/rawFirstLine\s*\n?\s*\.replace\(\/\^#\{1,3\}\\s\+\/, ''\)/);
+    expect(renderer).toMatch(/body\.replace\(rawFirstLine, ''\)/);
   });
 
   it('발행이 시작되면 늦게 도착한 비동기 paste 분류 결과를 폐기한다', () => {

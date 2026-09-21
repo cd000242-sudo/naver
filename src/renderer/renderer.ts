@@ -4320,22 +4320,33 @@ async function initUnifiedTab(): Promise<void> {
 
     // 2. 휴리스틱 fallback — 마커 없이 paste한 경우
     const lines = text.split('\n');
-    const firstLine = lines[0]?.trim() || '';
+    const rawFirstLine = lines[0]?.trim() || '';
+    // [2026-09-21 사장님 보고] "붙여넣으면 제목이 소제목으로 잡힌다."
+    //   "# 제목" / "**제목**" / "제목: …" 로 시작하는 첫 줄은 제목이라는 가장 강한 신호인데,
+    //   '#' 로 시작한다는 이유로 제목 후보에서 빠지고 소제목 추출기(# 마커 무조건 승격)가
+    //   소제목 1번으로 가져갔다. 표시만 벗기고 제목으로 본다.
+    const firstLine = rawFirstLine
+      .replace(/^#{1,3}\s+/, '')
+      .replace(/^(?:제목|title)\s*[:：]\s*/i, '')
+      .replace(/^\*\*(.+)\*\*$/, '$1')
+      .trim();
     const lastNonEmpty = [...lines].reverse().find(l => l.trim().length > 0) || '';
 
     // 첫 줄이 제목 후보인지 판정 → 제목 필드 자동 채움.
     // [2026-07-02 FIX] 상한 40→60자(블로그 제목은 40~60자가 흔해 40자 상한이 놓쳤다) +
     //   문장형 첫 줄(마침표/정중형 어미 종결)은 본문 첫 문장일 수 있어 제외(오탐 방지).
+    // [2026-09-21] 상한 60→80자. 문장형은 이미 제외하므로 60자를 넘는 비문장 첫 줄은 제목이다
+    //   (네이버 제목 상한 100자). 60자 초과 제목이 본문에 남아 소제목 1번이 됐다.
     const firstLineLooksSentence = /[.!?。！？]\s*$/u.test(firstLine)
       || /(?:습니다|합니다|해요|됩니다|입니다|이에요|예요|이었어요|했어요)$/u.test(firstLine);
-    const likelyTitle = (firstLine.length >= 4 && firstLine.length <= 60 && !firstLine.startsWith('#') && !firstLineLooksSentence)
+    const likelyTitle = (firstLine.length >= 4 && firstLine.length <= 80 && !firstLine.startsWith('#') && !firstLineLooksSentence)
       ? firstLine
       : null;
     // 마지막 비어있지 않은 줄이 #태그로 가득 → 해시태그
     const likelyTags = /^(#\S+\s*){3,}$/.test(lastNonEmpty) ? lastNonEmpty : null;
 
     let body = text;
-    if (likelyTitle) body = body.replace(firstLine, '').trim();
+    if (likelyTitle) body = body.replace(rawFirstLine, '').trim();
     if (likelyTags) body = body.replace(lastNonEmpty, '').trim();
 
     const headings = _extractSemiAutoManualHeadings(body).map(h => h.title);
@@ -8225,6 +8236,10 @@ function resetAllFields(): void {
     (window as any).affiliateLinkData = null; // 제휴 링크 데이터
     (window as any).crawledProductInfo = null; // 크롤링된 제품 정보
     (window as any).collectedImages = null; // 수집된 이미지
+    // [2026-09-22] 썸네일 생성기 "적용하기"가 쓰는 진짜 전역. 지우지 않아 다음 글에도 같은 썸네일이 들어갔다
+    // (fullAutoFlow.executeBlogPublishing 이 window.thumbnailPath 를 최우선으로 읽는다).
+    (window as any).thumbnailPath = null;
+    (window as any).selectedThumbnailImage = null;
 
     // ✅ [2026-03-10 CLEANUP] full-auto-enable-preview 유령 참조 제거 — 이 HTML 요소는 존재하지 않음
     // 미리보기는 기본 활성화 상태이므로 별도 초기화 불필요

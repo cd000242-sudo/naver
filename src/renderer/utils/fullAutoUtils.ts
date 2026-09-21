@@ -176,6 +176,9 @@ export function resetAfterPublish(): void {
     setWindowState('headingImageMap', new Map());
     setWindowState('selectedThumbnail', null);
     setWindowState('manualThumbnailPath', null);
+    // [2026-09-22] Publish reads window.thumbnailPath (thumbnailGenerator.applyToPost), not the two above.
+    (window as any).thumbnailPath = null;
+    (window as any).selectedThumbnailImage = null;
 
     // ✅ [2026-03-29 FIX] ImageManager 초기화 — 이전에 누락되어 imageMap 잔존
     // 이 함수는 10+ 곳에서 호출되므로 여기서 한번 초기화하면 모든 모드에서 적용됨
