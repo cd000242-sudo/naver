@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-17T20:43:20.492Z",
- "warehouseBuiltAt": "2026-09-17T20:43:19.788Z",
+ "builtAt": "2026-09-21T21:02:00.412Z",
+ "warehouseBuiltAt": "2026-09-21T21:01:59.515Z",
  "perTopic": 120,
  "keep": 10,
  "minRatio": 1,
@@ -21,66 +21,75 @@
    "topic": "문학·책",
    "candidates": 120,
    "measured": 120,
-   "golden": 3,
+   "golden": 4,
    "rows": [
     {
      "keyword": "백앤아",
-     "searchVolume": 13770,
-     "documentCount": 2009,
-     "ratio": 6.85,
+     "searchVolume": 13330,
+     "documentCount": 2012,
+     "ratio": 6.63,
      "depth": 5,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "프로젝트헤일메리",
-     "searchVolume": 97500,
-     "documentCount": 53335,
-     "ratio": 1.83,
+     "searchVolume": 95900,
+     "documentCount": 53464,
+     "ratio": 1.79,
      "depth": 7,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "맨큐의경제학",
-     "searchVolume": 3000,
-     "documentCount": 1689,
-     "ratio": 1.78,
+     "searchVolume": 3010,
+     "documentCount": 1682,
+     "ratio": 1.79,
      "depth": 6,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "쇼펜하우어인생수업",
-     "searchVolume": 13020,
-     "documentCount": 13972,
-     "ratio": 0.93,
+     "searchVolume": 14120,
+     "documentCount": 14047,
+     "ratio": 1.01,
      "depth": 6,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "E북리더기",
-     "searchVolume": 8700,
-     "documentCount": 9693,
-     "ratio": 0.9,
+     "searchVolume": 8370,
+     "documentCount": 9644,
+     "ratio": 0.87,
      "depth": 8,
      "comp": "M",
      "source": "biztp"
     },
     {
+     "keyword": "비밀요원레너드",
+     "searchVolume": 2830,
+     "documentCount": 3557,
+     "ratio": 0.8,
+     "depth": 7,
+     "comp": "H",
+     "source": "biztp"
+    },
+    {
      "keyword": "장수탕선녀님",
-     "searchVolume": 9850,
-     "documentCount": 15120,
-     "ratio": 0.65,
+     "searchVolume": 9210,
+     "documentCount": 15237,
+     "ratio": 0.6,
      "depth": 7,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "맥심잡지",
-     "searchVolume": 9370,
-     "documentCount": 15764,
+     "searchVolume": 9440,
+     "documentCount": 15958,
      "ratio": 0.59,
      "depth": 8,
      "comp": "M",
@@ -88,27 +97,18 @@
     },
     {
      "keyword": "이북리더기",
-     "searchVolume": 46400,
-     "documentCount": 88089,
-     "ratio": 0.53,
+     "searchVolume": 44900,
+     "documentCount": 88546,
+     "ratio": 0.51,
      "depth": 8,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "나의히어로아카데미아",
-     "searchVolume": 23130,
-     "documentCount": 64205,
-     "ratio": 0.36,
-     "depth": 10,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "옥스포드리딩트리",
-     "searchVolume": 4100,
-     "documentCount": 12595,
-     "ratio": 0.33,
+     "searchVolume": 22130,
+     "documentCount": 64521,
+     "ratio": 0.34,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
@@ -123,92 +123,92 @@
    "rows": [
     {
      "keyword": "영화옵세션",
-     "searchVolume": 868200,
-     "documentCount": 6510,
-     "ratio": 133.36,
+     "searchVolume": 999300,
+     "documentCount": 7408,
+     "ratio": 134.89,
      "depth": 0,
      "comp": "L",
      "source": "section"
     },
     {
      "keyword": "옵세션",
-     "searchVolume": 1284600,
-     "documentCount": 17593,
-     "ratio": 73.02,
+     "searchVolume": 1539400,
+     "documentCount": 18703,
+     "ratio": 82.31,
      "depth": 0,
      "comp": "L",
      "source": "hint"
     },
     {
-     "keyword": "경주기행",
-     "searchVolume": 1579000,
-     "documentCount": 58639,
-     "ratio": 26.93,
-     "depth": 3,
-     "comp": "H",
+     "keyword": "부활남",
+     "searchVolume": 124100,
+     "documentCount": 4198,
+     "ratio": 29.56,
+     "depth": 0,
+     "comp": "L",
      "source": "hint"
     },
     {
-     "keyword": "벨제붑",
-     "searchVolume": 13770,
-     "documentCount": 8488,
-     "ratio": 1.62,
+     "keyword": "청년조용기",
+     "searchVolume": 21060,
+     "documentCount": 4292,
+     "ratio": 4.91,
      "depth": 1,
      "comp": "M",
-     "source": "section"
+     "source": "hint"
     },
     {
      "keyword": "레지던트이블",
-     "searchVolume": 130200,
-     "documentCount": 81185,
-     "ratio": 1.6,
+     "searchVolume": 256800,
+     "documentCount": 78846,
+     "ratio": 3.26,
      "depth": 0,
      "comp": "L",
-     "source": "hint"
-    },
-    {
-     "keyword": "스파이더맨",
-     "searchVolume": 1035700,
-     "documentCount": 682595,
-     "ratio": 1.52,
-     "depth": 5,
-     "comp": "M",
-     "source": "hint"
-    },
-    {
-     "keyword": "롯데시네마",
-     "searchVolume": 1448500,
-     "documentCount": 1141773,
-     "ratio": 1.27,
-     "depth": 6,
-     "comp": "M",
      "source": "hint"
     },
     {
      "keyword": "개봉예정영화",
-     "searchVolume": 1072600,
-     "documentCount": 891480,
-     "ratio": 1.2,
+     "searchVolume": 1127900,
+     "documentCount": 903541,
+     "ratio": 1.25,
      "depth": 2,
      "comp": "M",
      "source": "hint"
     },
     {
+     "keyword": "롯데시네마",
+     "searchVolume": 1333100,
+     "documentCount": 1155189,
+     "ratio": 1.15,
+     "depth": 6,
+     "comp": "M",
+     "source": "hint"
+    },
+    {
      "keyword": "영화순위",
-     "searchVolume": 925000,
-     "documentCount": 931905,
-     "ratio": 0.99,
+     "searchVolume": 941300,
+     "documentCount": 942466,
+     "ratio": 1,
      "depth": 4,
      "comp": "M",
      "source": "hint"
     },
     {
-     "keyword": "박지훈",
-     "searchVolume": 265700,
-     "documentCount": 307181,
-     "ratio": 0.86,
-     "depth": 0,
-     "comp": "L",
+     "keyword": "넷플릭스",
+     "searchVolume": 1644400,
+     "documentCount": 4257319,
+     "ratio": 0.39,
+     "depth": 3,
+     "comp": "H",
+     "source": "hint"
+    },
+    {
+     "keyword": "넷플릭스신작",
+     "searchVolume": 59900,
+     "documentCount": 200795,
+     "ratio": 0.3,
+     "depth": 1,
+     "comp": "M",
      "source": "hint"
     }
    ]
@@ -221,53 +221,53 @@
    "rows": [
     {
      "keyword": "프리즈서울",
-     "searchVolume": 44800,
-     "documentCount": 38232,
-     "ratio": 1.17,
+     "searchVolume": 40410,
+     "documentCount": 38518,
+     "ratio": 1.05,
      "depth": 3,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "지구화학색연필",
-     "searchVolume": 2480,
-     "documentCount": 3695,
-     "ratio": 0.67,
+     "searchVolume": 2310,
+     "documentCount": 3700,
+     "ratio": 0.62,
      "depth": 8,
      "comp": "M",
      "source": "hint"
     },
     {
-     "keyword": "서울라이트DDP",
-     "searchVolume": 8520,
-     "documentCount": 17171,
-     "ratio": 0.5,
-     "depth": 2,
-     "comp": "M",
+     "keyword": "레이드그림자의전설",
+     "searchVolume": 2550,
+     "documentCount": 7341,
+     "ratio": 0.35,
+     "depth": 0,
+     "comp": "L",
      "source": "section"
     },
     {
-     "keyword": "잉글레시나트윈스케치",
-     "searchVolume": 1090,
-     "documentCount": 2226,
-     "ratio": 0.49,
-     "depth": 3,
+     "keyword": "홍익대학교미술활동보고서",
+     "searchVolume": 2030,
+     "documentCount": 10700,
+     "ratio": 0.19,
+     "depth": 7,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "DIY명화그리기",
-     "searchVolume": 4090,
-     "documentCount": 22954,
-     "ratio": 0.18,
+     "searchVolume": 3930,
+     "documentCount": 23033,
+     "ratio": 0.17,
      "depth": 8,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "파슨스디자인스쿨",
-     "searchVolume": 2130,
-     "documentCount": 13577,
+     "searchVolume": 2140,
+     "documentCount": 13725,
      "ratio": 0.16,
      "depth": 10,
      "comp": "H",
@@ -275,134 +275,134 @@
     },
     {
      "keyword": "프리즈",
-     "searchVolume": 22620,
-     "documentCount": 167657,
+     "searchVolume": 21710,
+     "documentCount": 168974,
      "ratio": 0.13,
      "depth": 0,
      "comp": "L",
      "source": "section"
     },
     {
-     "keyword": "클립스튜디오",
-     "searchVolume": 11710,
-     "documentCount": 180043,
-     "ratio": 0.07,
-     "depth": 10,
+     "keyword": "홍익대미술활동보고서",
+     "searchVolume": 1510,
+     "documentCount": 11517,
+     "ratio": 0.13,
+     "depth": 3,
      "comp": "H",
-     "source": "hint"
+     "source": "section"
+    },
+    {
+     "keyword": "DDP",
+     "searchVolume": 32950,
+     "documentCount": 411214,
+     "ratio": 0.08,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
     },
     {
      "keyword": "클립스튜디오할인",
-     "searchVolume": 1520,
-     "documentCount": 21497,
-     "ratio": 0.07,
-     "depth": 8,
-     "comp": "M",
-     "source": "hint"
-    },
-    {
-     "keyword": "작사공모전",
-     "searchVolume": 1100,
-     "documentCount": 17281,
-     "ratio": 0.06,
+     "searchVolume": 1800,
+     "documentCount": 21586,
+     "ratio": 0.08,
      "depth": 7,
      "comp": "M",
-     "source": "section"
+     "source": "hint"
     }
    ]
   },
   {
    "topic": "공연·전시",
    "candidates": 120,
-   "measured": 29,
+   "measured": 28,
    "golden": 10,
    "rows": [
     {
-     "keyword": "선혜원",
-     "searchVolume": 72500,
-     "documentCount": 2421,
-     "ratio": 29.95,
-     "depth": 0,
-     "comp": "L",
-     "source": "section"
-    },
-    {
-     "keyword": "브루노마스내한",
-     "searchVolume": 224800,
-     "documentCount": 10035,
-     "ratio": 22.4,
-     "depth": 1,
-     "comp": "M",
-     "source": "section"
-    },
-    {
      "keyword": "서도호전시",
-     "searchVolume": 256800,
-     "documentCount": 16404,
-     "ratio": 15.65,
+     "searchVolume": 271000,
+     "documentCount": 16993,
+     "ratio": 15.95,
      "depth": 1,
      "comp": "M",
      "source": "section"
     },
     {
      "keyword": "서도호",
-     "searchVolume": 131500,
-     "documentCount": 19897,
-     "ratio": 6.61,
+     "searchVolume": 138200,
+     "documentCount": 20565,
+     "ratio": 6.72,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
+     "keyword": "원주댄싱카니발",
+     "searchVolume": 34300,
+     "documentCount": 6404,
+     "ratio": 5.36,
      "depth": 0,
      "comp": "L",
      "source": "section"
     },
     {
      "keyword": "티켓베이",
-     "searchVolume": 567900,
-     "documentCount": 152379,
-     "ratio": 3.73,
+     "searchVolume": 523900,
+     "documentCount": 153048,
+     "ratio": 3.42,
      "depth": 0,
      "comp": "L",
      "source": "hint"
     },
     {
      "keyword": "악동뮤지션콘서트",
-     "searchVolume": 21170,
-     "documentCount": 8040,
-     "ratio": 2.63,
+     "searchVolume": 22390,
+     "documentCount": 8122,
+     "ratio": 2.76,
      "depth": 0,
      "comp": "L",
      "source": "hint"
     },
     {
-     "keyword": "브루노마스",
-     "searchVolume": 139400,
-     "documentCount": 75267,
-     "ratio": 1.85,
+     "keyword": "잔나비콘서트",
+     "searchVolume": 44710,
+     "documentCount": 28686,
+     "ratio": 1.56,
      "depth": 0,
      "comp": "L",
      "source": "section"
     },
     {
-     "keyword": "드라큘라뮤지컬",
-     "searchVolume": 70400,
-     "documentCount": 43073,
-     "ratio": 1.63,
-     "depth": 5,
-     "comp": "M",
-     "source": "biztp"
-    },
-    {
      "keyword": "도경수콘서트",
-     "searchVolume": 21100,
-     "documentCount": 12964,
-     "ratio": 1.63,
+     "searchVolume": 20840,
+     "documentCount": 13327,
+     "ratio": 1.56,
      "depth": 1,
      "comp": "M",
      "source": "hint"
     },
     {
+     "keyword": "드라큘라뮤지컬",
+     "searchVolume": 67100,
+     "documentCount": 43610,
+     "ratio": 1.54,
+     "depth": 5,
+     "comp": "M",
+     "source": "biztp"
+    },
+    {
+     "keyword": "국중박",
+     "searchVolume": 86400,
+     "documentCount": 62315,
+     "ratio": 1.39,
+     "depth": 2,
+     "comp": "L",
+     "source": "section"
+    },
+    {
      "keyword": "멜론티켓",
-     "searchVolume": 138700,
-     "documentCount": 118374,
-     "ratio": 1.17,
+     "searchVolume": 132900,
+     "documentCount": 119107,
+     "ratio": 1.12,
      "depth": 1,
      "comp": "L",
      "source": "hint"
@@ -413,22 +413,85 @@
    "topic": "음악",
    "candidates": 120,
    "measured": 120,
-   "golden": 1,
+   "golden": 7,
    "rows": [
     {
-     "keyword": "SUNKISS",
-     "searchVolume": 4980,
-     "documentCount": 2027,
-     "ratio": 2.46,
+     "keyword": "심수봉김다현",
+     "searchVolume": 39860,
+     "documentCount": 2556,
+     "ratio": 15.59,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
+     "keyword": "2026KGMA",
+     "searchVolume": 6030,
+     "documentCount": 958,
+     "ratio": 6.29,
      "depth": 0,
      "comp": "L",
      "source": "hint"
     },
     {
+     "keyword": "김다현",
+     "searchVolume": 128600,
+     "documentCount": 68967,
+     "ratio": 1.86,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
+     "keyword": "GRLS",
+     "searchVolume": 1660,
+     "documentCount": 1069,
+     "ratio": 1.55,
+     "depth": 0,
+     "comp": "L",
+     "source": "hint"
+    },
+    {
+     "keyword": "더팩트뮤직어워즈",
+     "searchVolume": 39260,
+     "documentCount": 28117,
+     "ratio": 1.4,
+     "depth": 1,
+     "comp": "L",
+     "source": "hint"
+    },
+    {
+     "keyword": "임영웅또또",
+     "searchVolume": 12780,
+     "documentCount": 11851,
+     "ratio": 1.08,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
+     "keyword": "김호중",
+     "searchVolume": 161880,
+     "documentCount": 151617,
+     "ratio": 1.07,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
+     "keyword": "TMA",
+     "searchVolume": 28250,
+     "documentCount": 55982,
+     "ratio": 0.5,
+     "depth": 6,
+     "comp": "M",
+     "source": "section"
+    },
+    {
      "keyword": "멜론",
-     "searchVolume": 690600,
-     "documentCount": 1977992,
-     "ratio": 0.35,
+     "searchVolume": 681000,
+     "documentCount": 2001483,
+     "ratio": 0.34,
      "depth": 9,
      "comp": "H",
      "source": "section"
@@ -436,269 +499,206 @@
     {
      "keyword": "칼림바악보",
      "searchVolume": 7200,
-     "documentCount": 24751,
+     "documentCount": 24815,
      "ratio": 0.29,
      "depth": 5,
      "comp": "M",
      "source": "hint"
-    },
-    {
-     "keyword": "스피아노",
-     "searchVolume": 1550,
-     "documentCount": 5632,
-     "ratio": 0.28,
-     "depth": 10,
-     "comp": "H",
-     "source": "section"
-    },
-    {
-     "keyword": "하울의움직이는성악보",
-     "searchVolume": 1220,
-     "documentCount": 4376,
-     "ratio": 0.28,
-     "depth": 0,
-     "comp": "L",
-     "source": "hint"
-    },
-    {
-     "keyword": "피카레스크",
-     "searchVolume": 3010,
-     "documentCount": 13618,
-     "ratio": 0.22,
-     "depth": 1,
-     "comp": "M",
-     "source": "hint"
-    },
-    {
-     "keyword": "인생의회전목마악보",
-     "searchVolume": 790,
-     "documentCount": 4196,
-     "ratio": 0.19,
-     "depth": 0,
-     "comp": "L",
-     "source": "hint"
-    },
-    {
-     "keyword": "은혜악보",
-     "searchVolume": 10000,
-     "documentCount": 56917,
-     "ratio": 0.18,
-     "depth": 5,
-     "comp": "M",
-     "source": "hint"
-    },
-    {
-     "keyword": "사명악보",
-     "searchVolume": 2240,
-     "documentCount": 12761,
-     "ratio": 0.18,
-     "depth": 2,
-     "comp": "L",
-     "source": "hint"
-    },
-    {
-     "keyword": "모이세",
-     "searchVolume": 4310,
-     "documentCount": 36223,
-     "ratio": 0.12,
-     "depth": 1,
-     "comp": "M",
-     "source": "section"
     }
    ]
   },
   {
    "topic": "드라마",
-   "candidates": 106,
-   "measured": 34,
+   "candidates": 113,
+   "measured": 108,
    "golden": 10,
    "rows": [
     {
-     "keyword": "유부녀킬러",
-     "searchVolume": 2639800,
-     "documentCount": 27664,
-     "ratio": 95.42,
-     "depth": 2,
-     "comp": "M",
-     "source": "hint"
-    },
-    {
      "keyword": "포핸즈",
-     "searchVolume": 1772500,
-     "documentCount": 46027,
-     "ratio": 38.51,
-     "depth": 3,
-     "comp": "H",
-     "source": "hint"
-    },
-    {
-     "keyword": "욕망의덫",
-     "searchVolume": 973500,
-     "documentCount": 47194,
-     "ratio": 20.63,
+     "searchVolume": 2211200,
+     "documentCount": 48576,
+     "ratio": 45.52,
      "depth": 3,
      "comp": "H",
      "source": "hint"
     },
     {
      "keyword": "재벌X형사2",
-     "searchVolume": 286300,
-     "documentCount": 17763,
-     "ratio": 16.12,
+     "searchVolume": 598600,
+     "documentCount": 19179,
+     "ratio": 31.21,
      "depth": 0,
      "comp": "L",
+     "source": "hint"
+    },
+    {
+     "keyword": "신윤하",
+     "searchVolume": 61600,
+     "documentCount": 1995,
+     "ratio": 30.88,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
+     "keyword": "로또1등도출근합니다",
+     "searchVolume": 1176700,
+     "documentCount": 47180,
+     "ratio": 24.94,
+     "depth": 3,
+     "comp": "H",
      "source": "hint"
     },
     {
      "keyword": "오디세이",
-     "searchVolume": 5877300,
-     "documentCount": 369081,
-     "ratio": 15.92,
-     "depth": 4,
-     "comp": "M",
-     "source": "hint"
-    },
-    {
-     "keyword": "손천",
-     "searchVolume": 88470,
-     "documentCount": 5924,
-     "ratio": 14.93,
-     "depth": 0,
-     "comp": "L",
-     "source": "section"
-    },
-    {
-     "keyword": "구르미다시그린달빛",
-     "searchVolume": 73990,
-     "documentCount": 14977,
-     "ratio": 4.94,
-     "depth": 1,
-     "comp": "M",
-     "source": "hint"
-    },
-    {
-     "keyword": "정백연손천",
-     "searchVolume": 11810,
-     "documentCount": 3195,
-     "ratio": 3.7,
-     "depth": 0,
-     "comp": "L",
-     "source": "section"
-    },
-    {
-     "keyword": "장릉혁",
-     "searchVolume": 93200,
-     "documentCount": 31066,
-     "ratio": 3,
-     "depth": 0,
-     "comp": "L",
-     "source": "section"
-    },
-    {
-     "keyword": "킹피셔",
-     "searchVolume": 39890,
-     "documentCount": 21842,
-     "ratio": 1.83,
+     "searchVolume": 4938300,
+     "documentCount": 373927,
+     "ratio": 13.21,
      "depth": 3,
      "comp": "H",
+     "source": "hint"
+    },
+    {
+     "keyword": "재벌X형사",
+     "searchVolume": 193000,
+     "documentCount": 23082,
+     "ratio": 8.36,
+     "depth": 0,
+     "comp": "L",
+     "source": "hint"
+    },
+    {
+     "keyword": "신병4",
+     "searchVolume": 748100,
+     "documentCount": 144314,
+     "ratio": 5.18,
+     "depth": 0,
+     "comp": "L",
+     "source": "hint"
+    },
+    {
+     "keyword": "이준영",
+     "searchVolume": 401600,
+     "documentCount": 113198,
+     "ratio": 3.55,
+     "depth": 0,
+     "comp": "L",
      "source": "section"
+    },
+    {
+     "keyword": "송강",
+     "searchVolume": 526400,
+     "documentCount": 257540,
+     "ratio": 2.04,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
+     "keyword": "스캔들",
+     "searchVolume": 789200,
+     "documentCount": 671380,
+     "ratio": 1.18,
+     "depth": 0,
+     "comp": "L",
+     "source": "hint"
     }
    ]
   },
   {
    "topic": "스타·연예인",
-   "candidates": 82,
-   "measured": 82,
-   "golden": 4,
+   "candidates": 78,
+   "measured": 78,
+   "golden": 6,
    "rows": [
     {
-     "keyword": "남벌",
-     "searchVolume": 32060,
-     "documentCount": 8269,
-     "ratio": 3.88,
+     "keyword": "리센느빵",
+     "searchVolume": 40930,
+     "documentCount": 4975,
+     "ratio": 8.23,
+     "depth": 1,
+     "comp": "L",
+     "source": "hint"
+    },
+    {
+     "keyword": "타짜4",
+     "searchVolume": 475000,
+     "documentCount": 70225,
+     "ratio": 6.76,
      "depth": 1,
      "comp": "M",
      "source": "hint"
     },
     {
+     "keyword": "심수봉",
+     "searchVolume": 173000,
+     "documentCount": 48559,
+     "ratio": 3.56,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
      "keyword": "진철원",
-     "searchVolume": 52990,
-     "documentCount": 16463,
+     "searchVolume": 53270,
+     "documentCount": 16558,
      "ratio": 3.22,
      "depth": 0,
      "comp": "L",
      "source": "section"
     },
     {
-     "keyword": "변요한",
-     "searchVolume": 190400,
-     "documentCount": 87823,
-     "ratio": 2.17,
-     "depth": 0,
-     "comp": "L",
-     "source": "hint"
-    },
-    {
-     "keyword": "변우석",
-     "searchVolume": 271800,
-     "documentCount": 196569,
-     "ratio": 1.38,
+     "keyword": "장릉혁",
+     "searchVolume": 94100,
+     "documentCount": 31434,
+     "ratio": 2.99,
      "depth": 0,
      "comp": "L",
      "source": "section"
     },
     {
-     "keyword": "손예진",
-     "searchVolume": 177700,
-     "documentCount": 277453,
-     "ratio": 0.64,
-     "depth": 0,
-     "comp": "L",
-     "source": "section"
-    },
-    {
-     "keyword": "불후의명곡",
-     "searchVolume": 166000,
-     "documentCount": 264450,
-     "ratio": 0.63,
-     "depth": 0,
-     "comp": "L",
-     "source": "hint"
-    },
-    {
-     "keyword": "이븐아워",
-     "searchVolume": 770,
-     "documentCount": 1706,
-     "ratio": 0.45,
+     "keyword": "조이올팍",
+     "searchVolume": 10670,
+     "documentCount": 6216,
+     "ratio": 1.72,
      "depth": 1,
      "comp": "M",
      "source": "hint"
     },
     {
-     "keyword": "신랑수업2",
-     "searchVolume": 24220,
-     "documentCount": 190286,
-     "ratio": 0.13,
+     "keyword": "하츠투하츠",
+     "searchVolume": 129400,
+     "documentCount": 271998,
+     "ratio": 0.48,
+     "depth": 0,
+     "comp": "L",
+     "source": "hint"
+    },
+    {
+     "keyword": "브레드이발소",
+     "searchVolume": 22680,
+     "documentCount": 54690,
+     "ratio": 0.41,
+     "depth": 0,
+     "comp": "L",
+     "source": "hint"
+    },
+    {
+     "keyword": "MMA2026",
+     "searchVolume": 3840,
+     "documentCount": 13376,
+     "ratio": 0.29,
      "depth": 1,
      "comp": "M",
      "source": "hint"
     },
     {
-     "keyword": "한남더힐매매",
-     "searchVolume": 2810,
-     "documentCount": 21331,
-     "ratio": 0.13,
-     "depth": 10,
-     "comp": "H",
-     "source": "section"
-    },
-    {
-     "keyword": "더블랙레이블오디션",
-     "searchVolume": 580,
-     "documentCount": 4399,
-     "ratio": 0.13,
-     "depth": 3,
-     "comp": "H",
+     "keyword": "핑클",
+     "searchVolume": 24820,
+     "documentCount": 98720,
+     "ratio": 0.25,
+     "depth": 0,
+     "comp": "L",
      "source": "hint"
     }
    ]
@@ -707,195 +707,195 @@
    "topic": "만화·애니",
    "candidates": 120,
    "measured": 119,
-   "golden": 9,
+   "golden": 7,
    "rows": [
     {
      "keyword": "가면라이더마이스",
-     "searchVolume": 33840,
-     "documentCount": 787,
-     "ratio": 43,
-     "depth": 4,
+     "searchVolume": 38260,
+     "documentCount": 845,
+     "ratio": 45.28,
+     "depth": 5,
      "comp": "M",
      "source": "section"
     },
     {
      "keyword": "각성헌터오메가혼",
-     "searchVolume": 8790,
-     "documentCount": 525,
-     "ratio": 16.74,
+     "searchVolume": 9970,
+     "documentCount": 559,
+     "ratio": 17.84,
      "depth": 2,
      "comp": "M",
      "source": "section"
     },
     {
-     "keyword": "영화아가미",
-     "searchVolume": 113300,
-     "documentCount": 15661,
-     "ratio": 7.23,
-     "depth": 0,
-     "comp": "L",
-     "source": "section"
+     "keyword": "여공남수웹툰",
+     "searchVolume": 850,
+     "documentCount": 344,
+     "ratio": 2.47,
+     "depth": 5,
+     "comp": "M",
+     "source": "hint"
     },
     {
-     "keyword": "블리치천년혈전",
-     "searchVolume": 31020,
-     "documentCount": 7637,
-     "ratio": 4.06,
-     "depth": 9,
+     "keyword": "명탐정프리큐어",
+     "searchVolume": 19540,
+     "documentCount": 8266,
+     "ratio": 2.36,
+     "depth": 3,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "요일별웹툰",
-     "searchVolume": 36740,
-     "documentCount": 18715,
-     "ratio": 1.96,
+     "searchVolume": 36270,
+     "documentCount": 18887,
+     "ratio": 1.92,
      "depth": 6,
      "comp": "M",
      "source": "hint"
     },
     {
-     "keyword": "굿스마일코리아",
-     "searchVolume": 14500,
-     "documentCount": 8725,
-     "ratio": 1.66,
-     "depth": 1,
-     "comp": "L",
-     "source": "section"
-    },
-    {
-     "keyword": "해리포터OTT",
-     "searchVolume": 10960,
-     "documentCount": 8408,
-     "ratio": 1.3,
-     "depth": 3,
-     "comp": "M",
-     "source": "section"
-    },
-    {
      "keyword": "월요웹툰",
-     "searchVolume": 13830,
-     "documentCount": 12219,
-     "ratio": 1.13,
+     "searchVolume": 15870,
+     "documentCount": 12392,
+     "ratio": 1.28,
      "depth": 5,
      "comp": "M",
      "source": "hint"
     },
     {
      "keyword": "치이카",
-     "searchVolume": 1470,
-     "documentCount": 1400,
-     "ratio": 1.05,
+     "searchVolume": 1640,
+     "documentCount": 1413,
+     "ratio": 1.16,
      "depth": 3,
      "comp": "H",
      "source": "section"
     },
     {
+     "keyword": "메가박스",
+     "searchVolume": 862800,
+     "documentCount": 1009280,
+     "ratio": 0.85,
+     "depth": 4,
+     "comp": "M",
+     "source": "section"
+    },
+    {
      "keyword": "굿스마일컴퍼니",
-     "searchVolume": 40720,
-     "documentCount": 46491,
-     "ratio": 0.88,
+     "searchVolume": 38490,
+     "documentCount": 46726,
+     "ratio": 0.82,
      "depth": 10,
      "comp": "H",
      "source": "hint"
+    },
+    {
+     "keyword": "디지몬어드벤처",
+     "searchVolume": 28060,
+     "documentCount": 45981,
+     "ratio": 0.61,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
     }
    ]
   },
   {
    "topic": "방송",
-   "candidates": 63,
-   "measured": 63,
-   "golden": 7,
+   "candidates": 66,
+   "measured": 66,
+   "golden": 6,
    "rows": [
     {
-     "keyword": "박위",
-     "searchVolume": 1387500,
-     "documentCount": 44549,
-     "ratio": 31.15,
-     "depth": 1,
-     "comp": "M",
-     "source": "section"
-    },
-    {
-     "keyword": "남의편부부",
-     "searchVolume": 1100,
-     "documentCount": 89,
-     "ratio": 12.36,
+     "keyword": "언니네산지직송3",
+     "searchVolume": 225700,
+     "documentCount": 16412,
+     "ratio": 13.75,
      "depth": 2,
      "comp": "M",
      "source": "hint"
     },
     {
-     "keyword": "이혼숙려캠프",
-     "searchVolume": 267000,
-     "documentCount": 61964,
-     "ratio": 4.31,
+     "keyword": "연애전쟁",
+     "searchVolume": 573700,
+     "documentCount": 228723,
+     "ratio": 2.51,
      "depth": 0,
      "comp": "L",
      "source": "hint"
     },
     {
-     "keyword": "산진라디오",
-     "searchVolume": 2680,
-     "documentCount": 728,
-     "ratio": 3.68,
-     "depth": 8,
-     "comp": "M",
-     "source": "section"
-    },
-    {
-     "keyword": "연애전쟁",
-     "searchVolume": 502100,
-     "documentCount": 225862,
-     "ratio": 2.22,
+     "keyword": "전설의사내",
+     "searchVolume": 82200,
+     "documentCount": 60944,
+     "ratio": 1.35,
      "depth": 0,
      "comp": "L",
-     "source": "section"
+     "source": "hint"
     },
     {
-     "keyword": "꼬꼬무",
-     "searchVolume": 130800,
-     "documentCount": 73754,
-     "ratio": 1.77,
+     "keyword": "지구마불세계여행4",
+     "searchVolume": 6230,
+     "documentCount": 4602,
+     "ratio": 1.35,
+     "depth": 0,
+     "comp": "L",
+     "source": "hint"
+    },
+    {
+     "keyword": "말자쇼",
+     "searchVolume": 132900,
+     "documentCount": 116442,
+     "ratio": 1.14,
      "depth": 0,
      "comp": "L",
      "source": "hint"
     },
     {
      "keyword": "나솔사계",
-     "searchVolume": 127600,
-     "documentCount": 109144,
-     "ratio": 1.17,
+     "searchVolume": 117800,
+     "documentCount": 110329,
+     "ratio": 1.07,
      "depth": 0,
      "comp": "L",
      "source": "section"
     },
     {
-     "keyword": "이숙캠",
-     "searchVolume": 17000,
-     "documentCount": 17926,
-     "ratio": 0.95,
-     "depth": 0,
-     "comp": "L",
-     "source": "hint"
-    },
-    {
-     "keyword": "데드어카운트",
-     "searchVolume": 720,
-     "documentCount": 869,
-     "ratio": 0.83,
-     "depth": 1,
+     "keyword": "샹그릴라프론티어",
+     "searchVolume": 2530,
+     "documentCount": 2683,
+     "ratio": 0.94,
+     "depth": 5,
      "comp": "M",
      "source": "hint"
     },
     {
-     "keyword": "하트시그널5",
-     "searchVolume": 45460,
-     "documentCount": 65946,
+     "keyword": "TGS2026",
+     "searchVolume": 1590,
+     "documentCount": 2318,
      "ratio": 0.69,
-     "depth": 1,
+     "depth": 3,
+     "comp": "H",
+     "source": "hint"
+    },
+    {
+     "keyword": "하트시그널5",
+     "searchVolume": 42600,
+     "documentCount": 66386,
+     "ratio": 0.64,
+     "depth": 0,
      "comp": "L",
      "source": "section"
+    },
+    {
+     "keyword": "사회적가치페스타",
+     "searchVolume": 5320,
+     "documentCount": 11870,
+     "ratio": 0.45,
+     "depth": 0,
+     "comp": "L",
+     "source": "hint"
     }
    ]
   },
@@ -906,17 +906,53 @@
    "golden": 0,
    "rows": [
     {
+     "keyword": "GS편의점택배예약",
+     "searchVolume": 11040,
+     "documentCount": 16530,
+     "ratio": 0.67,
+     "depth": 6,
+     "comp": "M",
+     "source": "section"
+    },
+    {
+     "keyword": "CU택배예약",
+     "searchVolume": 10530,
+     "documentCount": 24147,
+     "ratio": 0.44,
+     "depth": 5,
+     "comp": "M",
+     "source": "section"
+    },
+    {
+     "keyword": "우체국택배예약",
+     "searchVolume": 39950,
+     "documentCount": 96736,
+     "ratio": 0.41,
+     "depth": 9,
+     "comp": "H",
+     "source": "section"
+    },
+    {
      "keyword": "정수기렌탈가격비교",
-     "searchVolume": 29670,
-     "documentCount": 104675,
-     "ratio": 0.28,
+     "searchVolume": 28790,
+     "documentCount": 105346,
+     "ratio": 0.27,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
+     "keyword": "세븐일레븐택배예약",
+     "searchVolume": 2600,
+     "documentCount": 9796,
+     "ratio": 0.27,
+     "depth": 3,
+     "comp": "M",
+     "source": "section"
+    },
+    {
      "keyword": "1톤트럭대여",
-     "searchVolume": 6620,
+     "searchVolume": 6510,
      "documentCount": 26079,
      "ratio": 0.25,
      "depth": 10,
@@ -925,72 +961,36 @@
     },
     {
      "keyword": "도담삼봉유람선",
-     "searchVolume": 4730,
-     "documentCount": 18673,
+     "searchVolume": 4800,
+     "documentCount": 18883,
      "ratio": 0.25,
      "depth": 9,
      "comp": "H",
      "source": "biztp"
     },
     {
-     "keyword": "울산용달이사",
-     "searchVolume": 10320,
-     "documentCount": 79959,
-     "ratio": 0.13,
-     "depth": 10,
-     "comp": "H",
-     "source": "biztp"
+     "keyword": "GS택배예약",
+     "searchVolume": 4780,
+     "documentCount": 21174,
+     "ratio": 0.23,
+     "depth": 5,
+     "comp": "M",
+     "source": "section"
     },
     {
-     "keyword": "1톤트럭렌트",
-     "searchVolume": 2920,
-     "documentCount": 24141,
+     "keyword": "울산용달이사",
+     "searchVolume": 9820,
+     "documentCount": 80318,
      "ratio": 0.12,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
-     "keyword": "단양유람선",
-     "searchVolume": 4250,
-     "documentCount": 42220,
-     "ratio": 0.1,
-     "depth": 10,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "LG얼음정수기렌탈",
-     "searchVolume": 2390,
-     "documentCount": 25782,
-     "ratio": 0.09,
-     "depth": 10,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "벤츠스프린터",
-     "searchVolume": 8860,
-     "documentCount": 115219,
-     "ratio": 0.08,
-     "depth": 10,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "코웨이정수기렌탈",
-     "searchVolume": 11770,
-     "documentCount": 157597,
-     "ratio": 0.07,
-     "depth": 10,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "LG정수기렌탈",
-     "searchVolume": 10500,
-     "documentCount": 142660,
-     "ratio": 0.07,
+     "keyword": "1톤트럭렌트",
+     "searchVolume": 2810,
+     "documentCount": 24189,
+     "ratio": 0.12,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
@@ -1000,98 +1000,98 @@
   {
    "topic": "육아·결혼",
    "candidates": 120,
-   "measured": 39,
+   "measured": 22,
    "golden": 10,
    "rows": [
     {
-     "keyword": "봄빛한복",
-     "searchVolume": 31160,
-     "documentCount": 2311,
-     "ratio": 13.48,
-     "depth": 1,
-     "comp": "L",
-     "source": "shopping"
-    },
-    {
      "keyword": "슈슈앤크라",
-     "searchVolume": 134000,
-     "documentCount": 10162,
-     "ratio": 13.19,
-     "depth": 7,
+     "searchVolume": 142200,
+     "documentCount": 10233,
+     "ratio": 13.9,
+     "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
+     "keyword": "아뜰리에슈블랭킷",
+     "searchVolume": 51980,
+     "documentCount": 7862,
+     "ratio": 6.61,
+     "depth": 8,
+     "comp": "H",
+     "source": "shopping"
+    },
+    {
      "keyword": "베베드피노",
-     "searchVolume": 213400,
-     "documentCount": 38604,
-     "ratio": 5.53,
+     "searchVolume": 216200,
+     "documentCount": 38735,
+     "ratio": 5.58,
      "depth": 10,
      "comp": "H",
      "source": "shopping"
     },
     {
+     "keyword": "MBTI검사무료",
+     "searchVolume": 143900,
+     "documentCount": 42053,
+     "ratio": 3.42,
+     "depth": 6,
+     "comp": "M",
+     "source": "section"
+    },
+    {
      "keyword": "탑텐키즈",
-     "searchVolume": 78960,
-     "documentCount": 35770,
-     "ratio": 2.21,
+     "searchVolume": 87050,
+     "documentCount": 35878,
+     "ratio": 2.43,
      "depth": 9,
      "comp": "H",
      "source": "shopping"
     },
     {
      "keyword": "마이크로킥보드",
-     "searchVolume": 86980,
-     "documentCount": 41027,
-     "ratio": 2.12,
-     "depth": 10,
-     "comp": "H",
-     "source": "shopping"
-    },
-    {
-     "keyword": "블루독베이비",
-     "searchVolume": 41630,
-     "documentCount": 20415,
-     "ratio": 2.04,
-     "depth": 10,
-     "comp": "H",
-     "source": "shopping"
-    },
-    {
-     "keyword": "보보쇼즈",
-     "searchVolume": 44490,
-     "documentCount": 23849,
-     "ratio": 1.87,
+     "searchVolume": 93520,
+     "documentCount": 41187,
+     "ratio": 2.27,
      "depth": 10,
      "comp": "H",
      "source": "shopping"
     },
     {
      "keyword": "에뜨와",
-     "searchVolume": 47950,
-     "documentCount": 27009,
-     "ratio": 1.78,
+     "searchVolume": 48910,
+     "documentCount": 27254,
+     "ratio": 1.79,
      "depth": 10,
      "comp": "H",
      "source": "shopping"
+    },
+    {
+     "keyword": "아이러브제이",
+     "searchVolume": 47090,
+     "documentCount": 28312,
+     "ratio": 1.66,
+     "depth": 10,
+     "comp": "H",
+     "source": "shopping"
+    },
+    {
+     "keyword": "MBTI검사",
+     "searchVolume": 360800,
+     "documentCount": 310142,
+     "ratio": 1.16,
+     "depth": 3,
+     "comp": "H",
+     "source": "section"
     },
     {
      "keyword": "스토케트립트랩",
-     "searchVolume": 45230,
-     "documentCount": 39424,
-     "ratio": 1.15,
+     "searchVolume": 44670,
+     "documentCount": 39551,
+     "ratio": 1.13,
      "depth": 8,
      "comp": "M",
      "source": "biztp"
-    },
-    {
-     "keyword": "밍크뮤",
-     "searchVolume": 32660,
-     "documentCount": 32791,
-     "ratio": 1,
-     "depth": 10,
-     "comp": "H",
-     "source": "shopping"
     }
    ]
   },
@@ -1103,26 +1103,35 @@
    "rows": [
     {
      "keyword": "바잇미",
-     "searchVolume": 20320,
-     "documentCount": 32418,
-     "ratio": 0.63,
+     "searchVolume": 22700,
+     "documentCount": 32478,
+     "ratio": 0.7,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "진돗개분양",
-     "searchVolume": 12170,
-     "documentCount": 26191,
+     "searchVolume": 12060,
+     "documentCount": 26441,
      "ratio": 0.46,
-     "depth": 10,
+     "depth": 9,
      "comp": "H",
      "source": "biztp"
     },
     {
+     "keyword": "카사바칩",
+     "searchVolume": 10240,
+     "documentCount": 28473,
+     "ratio": 0.36,
+     "depth": 8,
+     "comp": "M",
+     "source": "section"
+    },
+    {
      "keyword": "파피용",
-     "searchVolume": 9040,
-     "documentCount": 33607,
+     "searchVolume": 9170,
+     "documentCount": 34239,
      "ratio": 0.27,
      "depth": 10,
      "comp": "H",
@@ -1130,17 +1139,35 @@
     },
     {
      "keyword": "사모예드",
-     "searchVolume": 19960,
-     "documentCount": 82611,
-     "ratio": 0.24,
+     "searchVolume": 20500,
+     "documentCount": 83334,
+     "ratio": 0.25,
+     "depth": 10,
+     "comp": "H",
+     "source": "biztp"
+    },
+    {
+     "keyword": "카사바",
+     "searchVolume": 18440,
+     "documentCount": 82376,
+     "ratio": 0.22,
+     "depth": 8,
+     "comp": "M",
+     "source": "section"
+    },
+    {
+     "keyword": "그레이하운드",
+     "searchVolume": 19980,
+     "documentCount": 100647,
+     "ratio": 0.2,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "친칠라",
-     "searchVolume": 18640,
-     "documentCount": 93452,
+     "searchVolume": 18620,
+     "documentCount": 94417,
      "ratio": 0.2,
      "depth": 10,
      "comp": "H",
@@ -1148,8 +1175,8 @@
     },
     {
      "keyword": "햄스터분양",
-     "searchVolume": 9790,
-     "documentCount": 48462,
+     "searchVolume": 9660,
+     "documentCount": 48884,
      "ratio": 0.2,
      "depth": 10,
      "comp": "H",
@@ -1157,38 +1184,11 @@
     },
     {
      "keyword": "보더콜리",
-     "searchVolume": 29280,
-     "documentCount": 153007,
+     "searchVolume": 29460,
+     "documentCount": 153908,
      "ratio": 0.19,
      "depth": 10,
      "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "코카스파니엘",
-     "searchVolume": 14240,
-     "documentCount": 73665,
-     "ratio": 0.19,
-     "depth": 10,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "강아지화식",
-     "searchVolume": 14610,
-     "documentCount": 80768,
-     "ratio": 0.18,
-     "depth": 8,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "고양이스크래처",
-     "searchVolume": 9170,
-     "documentCount": 49872,
-     "ratio": 0.18,
-     "depth": 8,
-     "comp": "M",
      "source": "biztp"
     }
    ]
@@ -1197,192 +1197,192 @@
    "topic": "좋은글·이미지",
    "candidates": 120,
    "measured": 120,
-   "golden": 2,
+   "golden": 3,
    "rows": [
     {
-     "keyword": "김승원",
-     "searchVolume": 1047400,
-     "documentCount": 38336,
-     "ratio": 27.32,
-     "depth": 0,
-     "comp": "L",
+     "keyword": "씨유편의점택배",
+     "searchVolume": 29290,
+     "documentCount": 24946,
+     "ratio": 1.17,
+     "depth": 2,
+     "comp": "M",
      "source": "section"
     },
     {
      "keyword": "네스프레소프로모션코드",
-     "searchVolume": 2320,
-     "documentCount": 1997,
-     "ratio": 1.16,
+     "searchVolume": 2340,
+     "documentCount": 2006,
+     "ratio": 1.17,
      "depth": 5,
      "comp": "M",
      "source": "section"
     },
     {
      "keyword": "특수문자이모티콘",
-     "searchVolume": 28230,
-     "documentCount": 29050,
-     "ratio": 0.97,
-     "depth": 10,
+     "searchVolume": 30580,
+     "documentCount": 29112,
+     "ratio": 1.05,
+     "depth": 9,
      "comp": "H",
      "source": "hint"
     },
     {
-     "keyword": "네스프레소",
-     "searchVolume": 167400,
-     "documentCount": 394360,
-     "ratio": 0.42,
-     "depth": 10,
-     "comp": "H",
+     "keyword": "KREAM",
+     "searchVolume": 60800,
+     "documentCount": 68515,
+     "ratio": 0.89,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
+     "keyword": "GS편의점택배",
+     "searchVolume": 40600,
+     "documentCount": 45783,
+     "ratio": 0.89,
+     "depth": 3,
+     "comp": "M",
      "source": "section"
     },
     {
      "keyword": "추석명절인사말",
-     "searchVolume": 7650,
-     "documentCount": 21834,
-     "ratio": 0.35,
+     "searchVolume": 19230,
+     "documentCount": 22746,
+     "ratio": 0.85,
      "depth": 7,
      "comp": "H",
      "source": "hint"
     },
     {
-     "keyword": "출산축하메세지",
-     "searchVolume": 6050,
-     "documentCount": 19801,
-     "ratio": 0.31,
-     "depth": 10,
-     "comp": "H",
-     "source": "hint"
-    },
-    {
-     "keyword": "명조",
-     "searchVolume": 38900,
-     "documentCount": 129523,
-     "ratio": 0.3,
-     "depth": 6,
-     "comp": "M",
-     "source": "hint"
-    },
-    {
-     "keyword": "윤고딕",
-     "searchVolume": 1010,
-     "documentCount": 3501,
-     "ratio": 0.29,
-     "depth": 2,
-     "comp": "L",
-     "source": "hint"
-    },
-    {
-     "keyword": "네스프레소캡슐",
-     "searchVolume": 61200,
-     "documentCount": 251398,
-     "ratio": 0.24,
+     "keyword": "네스프레소",
+     "searchVolume": 164100,
+     "documentCount": 396780,
+     "ratio": 0.41,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "사돈추석선물",
-     "searchVolume": 1130,
-     "documentCount": 4943,
-     "ratio": 0.23,
+     "searchVolume": 1950,
+     "documentCount": 5153,
+     "ratio": 0.38,
      "depth": 7,
      "comp": "H",
      "source": "section"
+    },
+    {
+     "keyword": "명조",
+     "searchVolume": 37000,
+     "documentCount": 130967,
+     "ratio": 0.28,
+     "depth": 5,
+     "comp": "M",
+     "source": "hint"
+    },
+    {
+     "keyword": "9월인사말",
+     "searchVolume": 14720,
+     "documentCount": 103002,
+     "ratio": 0.14,
+     "depth": 5,
+     "comp": "M",
+     "source": "hint"
     }
    ]
   },
   {
    "topic": "패션·미용",
    "candidates": 120,
-   "measured": 17,
+   "measured": 16,
    "golden": 10,
    "rows": [
     {
      "keyword": "르무통",
-     "searchVolume": 253600,
-     "documentCount": 18115,
-     "ratio": 14,
+     "searchVolume": 262100,
+     "documentCount": 18161,
+     "ratio": 14.43,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "반클리프목걸이",
-     "searchVolume": 189500,
-     "documentCount": 46858,
-     "ratio": 4.04,
+     "searchVolume": 193600,
+     "documentCount": 47082,
+     "ratio": 4.11,
      "depth": 10,
      "comp": "H",
      "source": "shopping"
     },
     {
      "keyword": "오니츠카타이거",
-     "searchVolume": 219400,
-     "documentCount": 72980,
-     "ratio": 3.01,
+     "searchVolume": 225800,
+     "documentCount": 73310,
+     "ratio": 3.08,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "에잇세컨즈",
-     "searchVolume": 289400,
-     "documentCount": 111286,
-     "ratio": 2.6,
+     "searchVolume": 296300,
+     "documentCount": 112167,
+     "ratio": 2.64,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "롱샴",
-     "searchVolume": 179800,
-     "documentCount": 80480,
-     "ratio": 2.23,
-     "depth": 8,
-     "comp": "M",
-     "source": "shopping"
-    },
-    {
-     "keyword": "셀린느",
-     "searchVolume": 442300,
-     "documentCount": 326741,
-     "ratio": 1.35,
+     "searchVolume": 172600,
+     "documentCount": 80869,
+     "ratio": 2.13,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "폴로랄프로렌",
-     "searchVolume": 273600,
-     "documentCount": 202130,
-     "ratio": 1.35,
+     "searchVolume": 285700,
+     "documentCount": 203016,
+     "ratio": 1.41,
      "depth": 10,
      "comp": "H",
      "source": "shopping"
     },
     {
      "keyword": "스케쳐스",
-     "searchVolume": 151100,
-     "documentCount": 112583,
-     "ratio": 1.34,
+     "searchVolume": 159900,
+     "documentCount": 113125,
+     "ratio": 1.41,
+     "depth": 8,
+     "comp": "M",
+     "source": "shopping"
+    },
+    {
+     "keyword": "셀린느",
+     "searchVolume": 442500,
+     "documentCount": 328839,
+     "ratio": 1.35,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "셀린느가방",
-     "searchVolume": 185800,
-     "documentCount": 140200,
-     "ratio": 1.33,
+     "searchVolume": 189300,
+     "documentCount": 141117,
+     "ratio": 1.34,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "핀터레스트",
-     "searchVolume": 626200,
-     "documentCount": 507136,
-     "ratio": 1.23,
+     "searchVolume": 623300,
+     "documentCount": 511046,
+     "ratio": 1.22,
      "depth": 2,
      "comp": "M",
      "source": "section"
@@ -1393,195 +1393,195 @@
    "topic": "인테리어·DIY",
    "candidates": 120,
    "measured": 120,
-   "golden": 3,
+   "golden": 4,
    "rows": [
     {
      "keyword": "이케아팍스",
-     "searchVolume": 11930,
-     "documentCount": 5717,
-     "ratio": 2.09,
+     "searchVolume": 11750,
+     "documentCount": 5755,
+     "ratio": 2.04,
      "depth": 8,
      "comp": "M",
      "source": "section"
     },
     {
-     "keyword": "금성침대",
-     "searchVolume": 65060,
-     "documentCount": 56145,
-     "ratio": 1.16,
+     "keyword": "샥즈오픈런프로",
+     "searchVolume": 15610,
+     "documentCount": 11650,
+     "ratio": 1.34,
      "depth": 8,
      "comp": "M",
-     "source": "shopping"
+     "source": "section"
     },
     {
      "keyword": "자코모4인쇼파",
-     "searchVolume": 21220,
-     "documentCount": 18905,
+     "searchVolume": 21180,
+     "documentCount": 18964,
      "ratio": 1.12,
      "depth": 8,
      "comp": "H",
      "source": "shopping"
     },
     {
-     "keyword": "에이스침대",
-     "searchVolume": 96100,
-     "documentCount": 160723,
-     "ratio": 0.6,
-     "depth": 10,
-     "comp": "H",
+     "keyword": "금성침대",
+     "searchVolume": 62310,
+     "documentCount": 56527,
+     "ratio": 1.1,
+     "depth": 8,
+     "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "대구이케아",
-     "searchVolume": 28520,
-     "documentCount": 47194,
-     "ratio": 0.6,
+     "searchVolume": 37810,
+     "documentCount": 47711,
+     "ratio": 0.79,
      "depth": 4,
      "comp": "M",
      "source": "section"
     },
     {
+     "keyword": "에이스침대",
+     "searchVolume": 95300,
+     "documentCount": 161414,
+     "ratio": 0.59,
+     "depth": 10,
+     "comp": "H",
+     "source": "shopping"
+    },
+    {
      "keyword": "이케아",
-     "searchVolume": 767800,
-     "documentCount": 1406852,
-     "ratio": 0.55,
+     "searchVolume": 760900,
+     "documentCount": 1417508,
+     "ratio": 0.54,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "모듈러주택",
-     "searchVolume": 40110,
-     "documentCount": 87002,
-     "ratio": 0.46,
+     "searchVolume": 35590,
+     "documentCount": 86637,
+     "ratio": 0.41,
      "depth": 10,
      "comp": "H",
      "source": "shopping"
     },
     {
      "keyword": "로만쉐이드",
-     "searchVolume": 9690,
-     "documentCount": 23921,
-     "ratio": 0.41,
+     "searchVolume": 9620,
+     "documentCount": 24053,
+     "ratio": 0.4,
      "depth": 8,
-     "comp": "M",
-     "source": "biztp"
-    },
-    {
-     "keyword": "차량용방향제",
-     "searchVolume": 95300,
-     "documentCount": 319609,
-     "ratio": 0.3,
-     "depth": 8,
-     "comp": "M",
-     "source": "biztp"
-    },
-    {
-     "keyword": "아파트실거래가조회",
-     "searchVolume": 40900,
-     "documentCount": 137482,
-     "ratio": 0.3,
-     "depth": 10,
      "comp": "H",
-     "source": "section"
+     "source": "biztp"
+    },
+    {
+     "keyword": "접이식식탁",
+     "searchVolume": 15920,
+     "documentCount": 107479,
+     "ratio": 0.15,
+     "depth": 8,
+     "comp": "M",
+     "source": "shopping"
     }
    ]
   },
   {
    "topic": "요리·레시피",
    "candidates": 120,
-   "measured": 49,
+   "measured": 18,
    "golden": 10,
    "rows": [
     {
      "keyword": "도미솔김치",
-     "searchVolume": 148800,
-     "documentCount": 3769,
-     "ratio": 39.48,
+     "searchVolume": 138490,
+     "documentCount": 3784,
+     "ratio": 36.6,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "파라다이스그레인",
-     "searchVolume": 264000,
-     "documentCount": 7403,
-     "ratio": 35.66,
+     "searchVolume": 275400,
+     "documentCount": 7698,
+     "ratio": 35.78,
      "depth": 5,
      "comp": "M",
      "source": "shopping"
     },
     {
-     "keyword": "안동학가산김치",
-     "searchVolume": 74500,
-     "documentCount": 3168,
-     "ratio": 23.52,
-     "depth": 8,
-     "comp": "M",
-     "source": "shopping"
-    },
-    {
      "keyword": "학가산김치",
-     "searchVolume": 110100,
-     "documentCount": 4829,
-     "ratio": 22.8,
+     "searchVolume": 105600,
+     "documentCount": 4854,
+     "ratio": 21.76,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "명가삼대떡집",
-     "searchVolume": 81740,
-     "documentCount": 4704,
-     "ratio": 17.38,
+     "searchVolume": 84350,
+     "documentCount": 4729,
+     "ratio": 17.84,
      "depth": 4,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "백년화편",
-     "searchVolume": 129900,
-     "documentCount": 10916,
-     "ratio": 11.9,
+     "searchVolume": 163500,
+     "documentCount": 11048,
+     "ratio": 14.8,
      "depth": 2,
      "comp": "L",
      "source": "shopping"
     },
     {
      "keyword": "창억떡",
-     "searchVolume": 466400,
-     "documentCount": 58474,
-     "ratio": 7.98,
+     "searchVolume": 462100,
+     "documentCount": 59157,
+     "ratio": 7.81,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "젖산마그네슘",
-     "searchVolume": 163800,
-     "documentCount": 32660,
-     "ratio": 5.02,
-     "depth": 6,
+     "searchVolume": 160500,
+     "documentCount": 32972,
+     "ratio": 4.87,
+     "depth": 5,
      "comp": "M",
      "source": "shopping"
     },
     {
-     "keyword": "동원참치선물세트",
-     "searchVolume": 39700,
-     "documentCount": 19335,
-     "ratio": 2.05,
-     "depth": 10,
-     "comp": "H",
+     "keyword": "베르베린",
+     "searchVolume": 78100,
+     "documentCount": 36542,
+     "ratio": 2.14,
+     "depth": 8,
+     "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "조선호텔김치",
-     "searchVolume": 126600,
-     "documentCount": 65949,
-     "ratio": 1.92,
+     "searchVolume": 125500,
+     "documentCount": 66168,
+     "ratio": 1.9,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
+    },
+    {
+     "keyword": "소갈비찜레시피",
+     "searchVolume": 94150,
+     "documentCount": 93835,
+     "ratio": 1,
+     "depth": 9,
+     "comp": "H",
+     "source": "section"
     }
    ]
   },
@@ -1593,91 +1593,91 @@
    "rows": [
     {
      "keyword": "아큐스터",
-     "searchVolume": 66570,
-     "documentCount": 631,
-     "ratio": 105.5,
-     "depth": 3,
-     "comp": "M",
-     "source": "shopping"
-    },
-    {
-     "keyword": "바이오크린콜",
-     "searchVolume": 25500,
-     "documentCount": 2753,
-     "ratio": 9.26,
-     "depth": 10,
-     "comp": "H",
+     "searchVolume": 61500,
+     "documentCount": 642,
+     "ratio": 95.79,
+     "depth": 2,
+     "comp": "L",
      "source": "shopping"
     },
     {
      "keyword": "릴하이브리드",
-     "searchVolume": 90170,
-     "documentCount": 14105,
-     "ratio": 6.39,
+     "searchVolume": 91890,
+     "documentCount": 14141,
+     "ratio": 6.5,
      "depth": 3,
      "comp": "M",
      "source": "shopping"
     },
     {
-     "keyword": "클럽디오아시스",
-     "searchVolume": 61070,
-     "documentCount": 16574,
-     "ratio": 3.68,
-     "depth": 6,
+     "keyword": "문어괄사",
+     "searchVolume": 44950,
+     "documentCount": 11521,
+     "ratio": 3.9,
+     "depth": 8,
+     "comp": "H",
+     "source": "shopping"
+    },
+    {
+     "keyword": "아이코스",
+     "searchVolume": 130500,
+     "documentCount": 46863,
+     "ratio": 2.78,
+     "depth": 2,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "스탠리텀블러",
-     "searchVolume": 136500,
-     "documentCount": 88705,
-     "ratio": 1.54,
+     "searchVolume": 130400,
+     "documentCount": 88825,
+     "ratio": 1.47,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "스텐리텀블러",
-     "searchVolume": 55600,
-     "documentCount": 36725,
-     "ratio": 1.51,
+     "searchVolume": 53180,
+     "documentCount": 36719,
+     "ratio": 1.45,
      "depth": 10,
      "comp": "H",
      "source": "shopping"
     },
     {
      "keyword": "고체탈취제",
-     "searchVolume": 56600,
-     "documentCount": 39598,
-     "ratio": 1.43,
+     "searchVolume": 54900,
+     "documentCount": 39911,
+     "ratio": 1.38,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
-     "keyword": "먼지다듬이",
-     "searchVolume": 48950,
-     "documentCount": 41677,
-     "ratio": 1.17,
-     "depth": 10,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
      "keyword": "골전도이어폰",
-     "searchVolume": 78500,
-     "documentCount": 71217,
-     "ratio": 1.1,
+     "searchVolume": 79400,
+     "documentCount": 71708,
+     "ratio": 1.11,
      "depth": 8,
      "comp": "M",
      "source": "biztp"
     },
     {
-     "keyword": "듀오링고",
-     "searchVolume": 162500,
-     "documentCount": 174467,
-     "ratio": 0.93,
-     "depth": 7,
+     "keyword": "먼지다듬이",
+     "searchVolume": 46180,
+     "documentCount": 41798,
+     "ratio": 1.1,
+     "depth": 10,
+     "comp": "H",
+     "source": "biztp"
+    },
+    {
+     "keyword": "롯데월드자유이용권",
+     "searchVolume": 82700,
+     "documentCount": 86812,
+     "ratio": 0.95,
+     "depth": 8,
      "comp": "M",
      "source": "shopping"
     }
@@ -1691,91 +1691,91 @@
    "rows": [
     {
      "keyword": "청정원선물세트",
-     "searchVolume": 18770,
-     "documentCount": 16199,
-     "ratio": 1.16,
+     "searchVolume": 23780,
+     "documentCount": 16816,
+     "ratio": 1.41,
      "depth": 8,
      "comp": "M",
      "source": "section"
     },
     {
      "keyword": "꽃씨몰",
-     "searchVolume": 4710,
-     "documentCount": 5653,
-     "ratio": 0.83,
+     "searchVolume": 4880,
+     "documentCount": 5742,
+     "ratio": 0.85,
      "depth": 8,
      "comp": "H",
      "source": "section"
     },
     {
+     "keyword": "청정원콩담백면",
+     "searchVolume": 4500,
+     "documentCount": 5462,
+     "ratio": 0.82,
+     "depth": 8,
+     "comp": "M",
+     "source": "section"
+    },
+    {
      "keyword": "녹보수",
-     "searchVolume": 13080,
-     "documentCount": 36976,
-     "ratio": 0.35,
+     "searchVolume": 12810,
+     "documentCount": 37397,
+     "ratio": 0.34,
      "depth": 10,
      "comp": "H",
      "source": "hint"
     },
     {
      "keyword": "홍콩야자",
-     "searchVolume": 19290,
-     "documentCount": 61916,
+     "searchVolume": 19100,
+     "documentCount": 62577,
      "ratio": 0.31,
      "depth": 8,
      "comp": "M",
      "source": "hint"
     },
     {
-     "keyword": "보스턴고사리",
-     "searchVolume": 9200,
-     "documentCount": 31103,
-     "ratio": 0.3,
-     "depth": 7,
-     "comp": "M",
-     "source": "hint"
-    },
-    {
-     "keyword": "배추모종가격",
-     "searchVolume": 3230,
-     "documentCount": 10836,
-     "ratio": 0.3,
-     "depth": 7,
-     "comp": "H",
-     "source": "section"
-    },
-    {
      "keyword": "여인초",
-     "searchVolume": 10410,
-     "documentCount": 36069,
-     "ratio": 0.29,
+     "searchVolume": 10120,
+     "documentCount": 36336,
+     "ratio": 0.28,
      "depth": 8,
      "comp": "M",
      "source": "hint"
     },
     {
+     "keyword": "보스턴고사리",
+     "searchVolume": 8750,
+     "documentCount": 31526,
+     "ratio": 0.28,
+     "depth": 7,
+     "comp": "M",
+     "source": "hint"
+    },
+    {
      "keyword": "안스리움",
-     "searchVolume": 22600,
-     "documentCount": 82638,
+     "searchVolume": 22530,
+     "documentCount": 83564,
      "ratio": 0.27,
      "depth": 10,
      "comp": "H",
      "source": "hint"
     },
     {
-     "keyword": "튤립코바늘",
-     "searchVolume": 3050,
-     "documentCount": 13502,
-     "ratio": 0.23,
-     "depth": 8,
-     "comp": "M",
+     "keyword": "배추모종가격",
+     "searchVolume": 2810,
+     "documentCount": 10901,
+     "ratio": 0.26,
+     "depth": 7,
+     "comp": "H",
      "source": "section"
     },
     {
-     "keyword": "꽃무릇",
-     "searchVolume": 26470,
-     "documentCount": 137821,
-     "ratio": 0.19,
-     "depth": 10,
+     "keyword": "고사리나물볶음",
+     "searchVolume": 47130,
+     "documentCount": 204183,
+     "ratio": 0.23,
+     "depth": 3,
      "comp": "H",
      "source": "section"
     }
@@ -1785,195 +1785,195 @@
    "topic": "게임",
    "candidates": 120,
    "measured": 120,
-   "golden": 7,
+   "golden": 8,
    "rows": [
     {
      "keyword": "롤전적검색OP",
      "searchVolume": 119000,
-     "documentCount": 1531,
-     "ratio": 77.73,
+     "documentCount": 1534,
+     "ratio": 77.57,
      "depth": 0,
      "comp": "L",
      "source": "hint"
     },
     {
      "keyword": "리니지M",
-     "searchVolume": 385600,
-     "documentCount": 101342,
-     "ratio": 3.8,
+     "searchVolume": 389400,
+     "documentCount": 101883,
+     "ratio": 3.82,
      "depth": 1,
      "comp": "L",
      "source": "biztp"
     },
     {
+     "keyword": "방플",
+     "searchVolume": 3010,
+     "documentCount": 1372,
+     "ratio": 2.19,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
      "keyword": "나이트크로우",
-     "searchVolume": 40700,
-     "documentCount": 21003,
-     "ratio": 1.94,
+     "searchVolume": 40500,
+     "documentCount": 21135,
+     "ratio": 1.92,
      "depth": 3,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "팰월드",
-     "searchVolume": 39500,
-     "documentCount": 22093,
-     "ratio": 1.79,
+     "searchVolume": 36300,
+     "documentCount": 22685,
+     "ratio": 1.6,
      "depth": 4,
      "comp": "M",
      "source": "hint"
     },
     {
      "keyword": "발로란트",
-     "searchVolume": 139400,
-     "documentCount": 93287,
-     "ratio": 1.49,
+     "searchVolume": 140900,
+     "documentCount": 93412,
+     "ratio": 1.51,
      "depth": 7,
      "comp": "M",
      "source": "hint"
     },
     {
      "keyword": "이터널리턴",
-     "searchVolume": 32000,
-     "documentCount": 28170,
-     "ratio": 1.14,
+     "searchVolume": 30200,
+     "documentCount": 28211,
+     "ratio": 1.07,
      "depth": 3,
-     "comp": "H",
+     "comp": "M",
      "source": "hint"
     },
     {
      "keyword": "PC게임랭킹",
-     "searchVolume": 35200,
-     "documentCount": 33488,
-     "ratio": 1.05,
+     "searchVolume": 35040,
+     "documentCount": 33691,
+     "ratio": 1.04,
      "depth": 10,
      "comp": "H",
      "source": "hint"
     },
     {
-     "keyword": "리니지W",
-     "searchVolume": 17220,
-     "documentCount": 22056,
-     "ratio": 0.78,
-     "depth": 2,
-     "comp": "L",
-     "source": "biztp"
-    },
-    {
-     "keyword": "포켓몬카드등급",
-     "searchVolume": 10790,
-     "documentCount": 14300,
+     "keyword": "디아블로2레저렉션",
+     "searchVolume": 23500,
+     "documentCount": 31156,
      "ratio": 0.75,
-     "depth": 8,
+     "depth": 4,
      "comp": "M",
      "source": "section"
     },
     {
-     "keyword": "몬스터헌터와일즈",
-     "searchVolume": 6120,
-     "documentCount": 8639,
-     "ratio": 0.71,
-     "depth": 6,
+     "keyword": "엘든링",
+     "searchVolume": 20100,
+     "documentCount": 37281,
+     "ratio": 0.54,
+     "depth": 8,
      "comp": "M",
-     "source": "hint"
+     "source": "section"
     }
    ]
   },
   {
    "topic": "스포츠",
    "candidates": 120,
-   "measured": 14,
+   "measured": 28,
    "golden": 10,
    "rows": [
     {
-     "keyword": "고우석",
-     "searchVolume": 285700,
-     "documentCount": 36240,
-     "ratio": 7.88,
-     "depth": 0,
-     "comp": "L",
-     "source": "section"
-    },
-    {
-     "keyword": "김도영",
-     "searchVolume": 957400,
-     "documentCount": 169330,
-     "ratio": 5.65,
+     "keyword": "하현승",
+     "searchVolume": 273000,
+     "documentCount": 6042,
+     "ratio": 45.18,
      "depth": 0,
      "comp": "L",
      "source": "section"
     },
     {
      "keyword": "프로야구",
-     "searchVolume": 7682100,
-     "documentCount": 1630177,
-     "ratio": 4.71,
+     "searchVolume": 7291900,
+     "documentCount": 1649404,
+     "ratio": 4.42,
      "depth": 2,
      "comp": "L",
      "source": "section"
     },
     {
+     "keyword": "KBO신인드래프트",
+     "searchVolume": 200100,
+     "documentCount": 45228,
+     "ratio": 4.42,
+     "depth": 1,
+     "comp": "M",
+     "source": "section"
+    },
+    {
+     "keyword": "이현중",
+     "searchVolume": 102300,
+     "documentCount": 23673,
+     "ratio": 4.32,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
      "keyword": "KBO",
-     "searchVolume": 4316500,
-     "documentCount": 1117891,
-     "ratio": 3.86,
+     "searchVolume": 4094400,
+     "documentCount": 1128996,
+     "ratio": 3.63,
      "depth": 3,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "KBO일정",
-     "searchVolume": 461600,
-     "documentCount": 155464,
-     "ratio": 2.97,
+     "searchVolume": 452900,
+     "documentCount": 157549,
+     "ratio": 2.87,
      "depth": 1,
      "comp": "M",
      "source": "section"
     },
     {
      "keyword": "프로야구일정",
-     "searchVolume": 599900,
-     "documentCount": 219232,
-     "ratio": 2.74,
+     "searchVolume": 622500,
+     "documentCount": 221475,
+     "ratio": 2.81,
      "depth": 1,
      "comp": "M",
      "source": "biztp"
     },
     {
-     "keyword": "이강인",
-     "searchVolume": 578100,
-     "documentCount": 235634,
-     "ratio": 2.45,
-     "depth": 0,
-     "comp": "L",
-     "source": "section"
-    },
-    {
      "keyword": "KLPGA",
-     "searchVolume": 626700,
-     "documentCount": 277491,
-     "ratio": 2.26,
+     "searchVolume": 646700,
+     "documentCount": 279817,
+     "ratio": 2.31,
      "depth": 3,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "야구일정",
-     "searchVolume": 1336700,
-     "documentCount": 720150,
-     "ratio": 1.86,
-     "depth": 2,
+     "searchVolume": 1138300,
+     "documentCount": 728292,
+     "ratio": 1.56,
+     "depth": 1,
      "comp": "L",
      "source": "biztp"
     },
     {
-     "keyword": "야구",
-     "searchVolume": 8122700,
-     "documentCount": 7660616,
-     "ratio": 1.06,
-     "depth": 3,
+     "keyword": "파타고니아",
+     "searchVolume": 274300,
+     "documentCount": 214569,
+     "ratio": 1.28,
+     "depth": 9,
      "comp": "H",
-     "source": "biztp"
+     "source": "shopping"
     }
    ]
   },
@@ -1985,8 +1985,8 @@
    "rows": [
     {
      "keyword": "핫셀블라드",
-     "searchVolume": 6700,
-     "documentCount": 17264,
+     "searchVolume": 6770,
+     "documentCount": 17359,
      "ratio": 0.39,
      "depth": 10,
      "comp": "H",
@@ -1994,26 +1994,26 @@
     },
     {
      "keyword": "캐논포토프린터",
-     "searchVolume": 8230,
-     "documentCount": 28267,
-     "ratio": 0.29,
+     "searchVolume": 8040,
+     "documentCount": 28344,
+     "ratio": 0.28,
      "depth": 8,
      "comp": "M",
      "source": "section"
     },
     {
      "keyword": "유니버셜스튜디오재팬",
-     "searchVolume": 22120,
-     "documentCount": 97582,
-     "ratio": 0.23,
+     "searchVolume": 22020,
+     "documentCount": 98140,
+     "ratio": 0.22,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "소니사이버샷",
-     "searchVolume": 3300,
-     "documentCount": 14703,
+     "searchVolume": 3290,
+     "documentCount": 14822,
      "ratio": 0.22,
      "depth": 8,
      "comp": "M",
@@ -2021,55 +2021,55 @@
     },
     {
      "keyword": "소니A6000",
-     "searchVolume": 3550,
-     "documentCount": 22711,
-     "ratio": 0.16,
+     "searchVolume": 3530,
+     "documentCount": 23162,
+     "ratio": 0.15,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "증명사진규격",
-     "searchVolume": 18050,
-     "documentCount": 121107,
-     "ratio": 0.15,
+     "searchVolume": 17310,
+     "documentCount": 122122,
+     "ratio": 0.14,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "일회용필름카메라",
-     "searchVolume": 7690,
-     "documentCount": 52709,
-     "ratio": 0.15,
+     "searchVolume": 7520,
+     "documentCount": 53153,
+     "ratio": 0.14,
      "depth": 8,
      "comp": "M",
      "source": "section"
     },
     {
      "keyword": "폴라로이드필름",
-     "searchVolume": 6750,
-     "documentCount": 78945,
-     "ratio": 0.09,
+     "searchVolume": 6340,
+     "documentCount": 79732,
+     "ratio": 0.08,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
-     "keyword": "라이카카메라",
-     "searchVolume": 7740,
-     "documentCount": 111057,
-     "ratio": 0.07,
+     "keyword": "니콘D850",
+     "searchVolume": 1640,
+     "documentCount": 21338,
+     "ratio": 0.08,
      "depth": 10,
      "comp": "H",
      "source": "hint"
     },
     {
-     "keyword": "사진고화질변환",
-     "searchVolume": 2220,
-     "documentCount": 30543,
-     "ratio": 0.07,
-     "depth": 7,
+     "keyword": "니콘FM2",
+     "searchVolume": 1550,
+     "documentCount": 20406,
+     "ratio": 0.08,
+     "depth": 10,
      "comp": "H",
      "source": "hint"
     }
@@ -2078,97 +2078,97 @@
   {
    "topic": "자동차",
    "candidates": 120,
-   "measured": 114,
+   "measured": 63,
    "golden": 10,
    "rows": [
     {
      "keyword": "GV90",
-     "searchVolume": 829700,
-     "documentCount": 47023,
-     "ratio": 17.64,
-     "depth": 4,
+     "searchVolume": 504500,
+     "documentCount": 47912,
+     "ratio": 10.53,
+     "depth": 5,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "렉서스NX350H",
-     "searchVolume": 57000,
-     "documentCount": 7147,
-     "ratio": 7.98,
+     "searchVolume": 57080,
+     "documentCount": 7343,
+     "ratio": 7.77,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
-     "keyword": "기아PV7",
-     "searchVolume": 26270,
-     "documentCount": 6603,
-     "ratio": 3.98,
-     "depth": 2,
-     "comp": "M",
-     "source": "section"
-    },
-    {
-     "keyword": "렉서스RX450H",
-     "searchVolume": 31310,
-     "documentCount": 21198,
-     "ratio": 1.48,
-     "depth": 10,
+     "keyword": "투싼풀체인지",
+     "searchVolume": 160300,
+     "documentCount": 44291,
+     "ratio": 3.62,
+     "depth": 3,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "렉서스ES300H",
-     "searchVolume": 88700,
-     "documentCount": 61600,
-     "ratio": 1.44,
+     "searchVolume": 88400,
+     "documentCount": 61950,
+     "ratio": 1.43,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "GV80하이브리드",
-     "searchVolume": 113100,
-     "documentCount": 82946,
-     "ratio": 1.36,
+     "searchVolume": 110400,
+     "documentCount": 83551,
+     "ratio": 1.32,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
+     "keyword": "테슬라모델Y",
+     "searchVolume": 346800,
+     "documentCount": 280355,
+     "ratio": 1.24,
+     "depth": 3,
+     "comp": "H",
+     "source": "section"
+    },
+    {
      "keyword": "셀토스",
-     "searchVolume": 291700,
-     "documentCount": 227176,
-     "ratio": 1.28,
+     "searchVolume": 280800,
+     "documentCount": 227892,
+     "ratio": 1.23,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "K8하이브리드",
-     "searchVolume": 69700,
-     "documentCount": 57106,
-     "ratio": 1.22,
+     "searchVolume": 67050,
+     "documentCount": 57317,
+     "ratio": 1.17,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "펠리세이드",
-     "searchVolume": 138900,
-     "documentCount": 122802,
-     "ratio": 1.13,
+     "searchVolume": 135400,
+     "documentCount": 122626,
+     "ratio": 1.1,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
-     "keyword": "셀토스하이브리드",
-     "searchVolume": 83200,
-     "documentCount": 83374,
-     "ratio": 1,
-     "depth": 10,
-     "comp": "H",
+     "keyword": "기아인증중고차",
+     "searchVolume": 101800,
+     "documentCount": 99604,
+     "ratio": 1.02,
+     "depth": 1,
+     "comp": "L",
      "source": "section"
     }
    ]
@@ -2180,196 +2180,196 @@
    "golden": 0,
    "rows": [
     {
-     "keyword": "하린이네쭈꾸미",
-     "searchVolume": 4680,
-     "documentCount": 6132,
-     "ratio": 0.76,
-     "depth": 3,
+     "keyword": "홍원항",
+     "searchVolume": 29190,
+     "documentCount": 33843,
+     "ratio": 0.86,
+     "depth": 6,
      "comp": "M",
      "source": "section"
     },
     {
      "keyword": "반건조갑오징어",
-     "searchVolume": 7600,
-     "documentCount": 10526,
-     "ratio": 0.72,
+     "searchVolume": 8300,
+     "documentCount": 10567,
+     "ratio": 0.79,
      "depth": 8,
      "comp": "M",
      "source": "section"
     },
     {
+     "keyword": "하린이네쭈꾸미",
+     "searchVolume": 4790,
+     "documentCount": 6159,
+     "ratio": 0.78,
+     "depth": 3,
+     "comp": "M",
+     "source": "section"
+    },
+    {
      "keyword": "홍익쭈꾸미",
-     "searchVolume": 3350,
-     "documentCount": 5408,
-     "ratio": 0.62,
+     "searchVolume": 3130,
+     "documentCount": 5429,
+     "ratio": 0.58,
      "depth": 5,
      "comp": "M",
      "source": "section"
     },
     {
      "keyword": "캐리어바퀴교체",
-     "searchVolume": 10810,
-     "documentCount": 27999,
-     "ratio": 0.39,
+     "searchVolume": 10680,
+     "documentCount": 28081,
+     "ratio": 0.38,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "동대문부자재상가",
-     "searchVolume": 9160,
-     "documentCount": 23497,
-     "ratio": 0.39,
+     "searchVolume": 8760,
+     "documentCount": 23650,
+     "ratio": 0.37,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "수선집",
-     "searchVolume": 34640,
-     "documentCount": 98610,
-     "ratio": 0.35,
+     "searchVolume": 35430,
+     "documentCount": 99487,
+     "ratio": 0.36,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
-     "keyword": "모루철사",
-     "searchVolume": 2120,
-     "documentCount": 13364,
-     "ratio": 0.16,
+     "keyword": "홍대반지공방",
+     "searchVolume": 6970,
+     "documentCount": 19125,
+     "ratio": 0.36,
+     "depth": 10,
+     "comp": "H",
+     "source": "section"
+    },
+    {
+     "keyword": "하남쭈꾸미",
+     "searchVolume": 11920,
+     "documentCount": 47180,
+     "ratio": 0.25,
      "depth": 8,
-     "comp": "H",
-     "source": "biztp"
+     "comp": "M",
+     "source": "section"
     },
     {
-     "keyword": "옷수선집",
-     "searchVolume": 6910,
-     "documentCount": 47709,
-     "ratio": 0.14,
-     "depth": 10,
+     "keyword": "서천홍원항",
+     "searchVolume": 5100,
+     "documentCount": 22000,
+     "ratio": 0.23,
+     "depth": 3,
      "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "비브람",
-     "searchVolume": 14610,
-     "documentCount": 111038,
-     "ratio": 0.13,
-     "depth": 8,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "키링부자재",
-     "searchVolume": 5610,
-     "documentCount": 44348,
-     "ratio": 0.13,
-     "depth": 10,
-     "comp": "H",
-     "source": "biztp"
+     "source": "section"
     }
    ]
   },
   {
    "topic": "국내여행",
    "candidates": 120,
-   "measured": 120,
-   "golden": 9,
+   "measured": 111,
+   "golden": 10,
    "rows": [
     {
      "keyword": "송산포도축제",
-     "searchVolume": 54660,
-     "documentCount": 5479,
-     "ratio": 9.98,
+     "searchVolume": 53370,
+     "documentCount": 5515,
+     "ratio": 9.68,
      "depth": 1,
      "comp": "L",
      "source": "month"
     },
     {
-     "keyword": "여의도불꽃축제",
-     "searchVolume": 977500,
-     "documentCount": 126105,
-     "ratio": 7.75,
-     "depth": 4,
-     "comp": "M",
-     "source": "section"
-    },
-    {
      "keyword": "거창감악산축제",
-     "searchVolume": 80810,
-     "documentCount": 12366,
-     "ratio": 6.53,
+     "searchVolume": 98900,
+     "documentCount": 12711,
+     "ratio": 7.78,
      "depth": 6,
      "comp": "M",
      "source": "event"
     },
     {
+     "keyword": "여의도불꽃축제",
+     "searchVolume": 973500,
+     "documentCount": 128056,
+     "ratio": 7.6,
+     "depth": 4,
+     "comp": "M",
+     "source": "section"
+    },
+    {
      "keyword": "홍성남당항대하축제",
-     "searchVolume": 95900,
-     "documentCount": 22495,
-     "ratio": 4.26,
+     "searchVolume": 109400,
+     "documentCount": 22856,
+     "ratio": 4.79,
      "depth": 7,
      "comp": "H",
      "source": "month",
      "seasonPeakMonth": 9
     },
     {
+     "keyword": "불갑사상사화축제",
+     "searchVolume": 43440,
+     "documentCount": 12962,
+     "ratio": 3.35,
+     "depth": 1,
+     "comp": "L",
+     "source": "section"
+    },
+    {
+     "keyword": "고양호수예술축제",
+     "searchVolume": 49430,
+     "documentCount": 17440,
+     "ratio": 2.83,
+     "depth": 1,
+     "comp": "M",
+     "source": "month",
+     "seasonPeakMonth": 10
+    },
+    {
      "keyword": "봉평메밀꽃축제",
-     "searchVolume": 64800,
-     "documentCount": 23931,
-     "ratio": 2.71,
+     "searchVolume": 66610,
+     "documentCount": 24366,
+     "ratio": 2.73,
      "depth": 10,
      "comp": "H",
      "source": "month",
      "seasonPeakMonth": 9
     },
     {
-     "keyword": "불갑사상사화축제",
-     "searchVolume": 31970,
-     "documentCount": 12458,
-     "ratio": 2.57,
-     "depth": 1,
-     "comp": "L",
-     "source": "section"
-    },
-    {
      "keyword": "남당항대하축제",
-     "searchVolume": 66970,
-     "documentCount": 26671,
-     "ratio": 2.51,
-     "depth": 9,
-     "comp": "H",
+     "searchVolume": 72740,
+     "documentCount": 27069,
+     "ratio": 2.69,
+     "depth": 8,
+     "comp": "M",
      "source": "month",
      "seasonPeakMonth": 9
     },
     {
      "keyword": "영동포도축제",
-     "searchVolume": 32250,
-     "documentCount": 14981,
-     "ratio": 2.15,
+     "searchVolume": 29780,
+     "documentCount": 15085,
+     "ratio": 1.97,
      "depth": 3,
      "comp": "H",
      "source": "month"
     },
     {
      "keyword": "송도맥주축제",
-     "searchVolume": 40660,
-     "documentCount": 28102,
-     "ratio": 1.45,
+     "searchVolume": 28850,
+     "documentCount": 28279,
+     "ratio": 1.02,
      "depth": 2,
-     "comp": "L",
+     "comp": "M",
      "source": "month"
-    },
-    {
-     "keyword": "대하축제",
-     "searchVolume": 59000,
-     "documentCount": 105718,
-     "ratio": 0.56,
-     "depth": 10,
-     "comp": "H",
-     "source": "month",
-     "seasonPeakMonth": 9
     }
    ]
   },
@@ -2377,94 +2377,94 @@
    "topic": "세계여행",
    "candidates": 120,
    "measured": 120,
-   "golden": 6,
+   "golden": 5,
    "rows": [
     {
      "keyword": "부산후쿠오카배편",
-     "searchVolume": 39570,
-     "documentCount": 11230,
-     "ratio": 3.52,
+     "searchVolume": 41310,
+     "documentCount": 11297,
+     "ratio": 3.66,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "후쿠오카항공권",
-     "searchVolume": 427700,
-     "documentCount": 152972,
-     "ratio": 2.8,
+     "searchVolume": 419500,
+     "documentCount": 154510,
+     "ratio": 2.72,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "나트랑항공권",
-     "searchVolume": 120100,
-     "documentCount": 87038,
-     "ratio": 1.38,
+     "searchVolume": 113400,
+     "documentCount": 87142,
+     "ratio": 1.3,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "오사카항공권",
-     "searchVolume": 264800,
-     "documentCount": 209195,
-     "ratio": 1.27,
+     "searchVolume": 257500,
+     "documentCount": 211375,
+     "ratio": 1.22,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "장가계패키지",
-     "searchVolume": 47430,
-     "documentCount": 41347,
-     "ratio": 1.15,
+     "searchVolume": 44890,
+     "documentCount": 41657,
+     "ratio": 1.08,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "울릉도배편",
-     "searchVolume": 32200,
-     "documentCount": 30802,
-     "ratio": 1.05,
-     "depth": 10,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "땡처리항공권",
-     "searchVolume": 54500,
-     "documentCount": 55000,
+     "searchVolume": 30540,
+     "documentCount": 30999,
      "ratio": 0.99,
      "depth": 10,
      "comp": "H",
-     "source": "section"
+     "source": "biztp"
     },
     {
      "keyword": "백령도여행",
-     "searchVolume": 34680,
-     "documentCount": 53416,
-     "ratio": 0.65,
-     "depth": 9,
+     "searchVolume": 28150,
+     "documentCount": 53836,
+     "ratio": 0.52,
+     "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
-     "keyword": "발리항공권",
-     "searchVolume": 43500,
-     "documentCount": 90013,
-     "ratio": 0.48,
+     "keyword": "하노이항공권",
+     "searchVolume": 31770,
+     "documentCount": 73193,
+     "ratio": 0.43,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
      "keyword": "푸꾸옥",
-     "searchVolume": 154700,
-     "documentCount": 376396,
-     "ratio": 0.41,
+     "searchVolume": 149200,
+     "documentCount": 376752,
+     "ratio": 0.4,
+     "depth": 10,
+     "comp": "H",
+     "source": "biztp"
+    },
+    {
+     "keyword": "장가계",
+     "searchVolume": 54170,
+     "documentCount": 155567,
+     "ratio": 0.35,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
@@ -2479,62 +2479,62 @@
    "rows": [
     {
      "keyword": "강남맛집체험단",
-     "searchVolume": 299500,
-     "documentCount": 116489,
-     "ratio": 2.57,
+     "searchVolume": 290800,
+     "documentCount": 117059,
+     "ratio": 2.48,
      "depth": 9,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "컴포즈커피",
-     "searchVolume": 369800,
-     "documentCount": 300907,
-     "ratio": 1.23,
+     "searchVolume": 368800,
+     "documentCount": 301947,
+     "ratio": 1.22,
      "depth": 6,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "메가커피",
-     "searchVolume": 1128400,
-     "documentCount": 986320,
-     "ratio": 1.14,
+     "searchVolume": 1163000,
+     "documentCount": 990618,
+     "ratio": 1.17,
      "depth": 8,
      "comp": "M",
-     "source": "section"
+     "source": "shopping"
     },
     {
      "keyword": "맘스터치",
-     "searchVolume": 522800,
-     "documentCount": 507241,
-     "ratio": 1.03,
+     "searchVolume": 552700,
+     "documentCount": 512405,
+     "ratio": 1.08,
      "depth": 7,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "빽다방",
-     "searchVolume": 257300,
-     "documentCount": 491710,
-     "ratio": 0.52,
+     "searchVolume": 253600,
+     "documentCount": 494936,
+     "ratio": 0.51,
      "depth": 4,
      "comp": "M",
      "source": "hint"
     },
     {
      "keyword": "추석선물세트",
-     "searchVolume": 299400,
-     "documentCount": 733016,
-     "ratio": 0.41,
-     "depth": 10,
+     "searchVolume": 358700,
+     "documentCount": 759679,
+     "ratio": 0.47,
+     "depth": 9,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "맥도날드",
-     "searchVolume": 687600,
-     "documentCount": 2078866,
+     "searchVolume": 696600,
+     "documentCount": 2104747,
      "ratio": 0.33,
      "depth": 4,
      "comp": "M",
@@ -2542,128 +2542,128 @@
     },
     {
      "keyword": "버거킹메뉴",
-     "searchVolume": 108600,
-     "documentCount": 363944,
+     "searchVolume": 110500,
+     "documentCount": 366751,
      "ratio": 0.3,
-     "depth": 2,
+     "depth": 1,
      "comp": "L",
      "source": "shopping"
     },
     {
-     "keyword": "지드래곤",
-     "searchVolume": 86700,
-     "documentCount": 575640,
-     "ratio": 0.15,
-     "depth": 0,
-     "comp": "L",
-     "source": "section"
-    },
-    {
      "keyword": "영종도맛집",
-     "searchVolume": 84200,
-     "documentCount": 569698,
+     "searchVolume": 84620,
+     "documentCount": 572103,
      "ratio": 0.15,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
+    },
+    {
+     "keyword": "지드래곤",
+     "searchVolume": 76500,
+     "documentCount": 581612,
+     "ratio": 0.13,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
     }
    ]
   },
   {
    "topic": "IT·컴퓨터",
    "candidates": 120,
-   "measured": 115,
+   "measured": 28,
    "golden": 10,
    "rows": [
     {
      "keyword": "챗지피티",
-     "searchVolume": 16366700,
-     "documentCount": 348335,
-     "ratio": 46.99,
+     "searchVolume": 16531000,
+     "documentCount": 349793,
+     "ratio": 47.26,
      "depth": 3,
      "comp": "H",
      "source": "section"
     },
     {
-     "keyword": "만자천홍",
-     "searchVolume": 20540,
-     "documentCount": 1868,
-     "ratio": 11,
-     "depth": 3,
-     "comp": "H",
-     "source": "shopping"
-    },
-    {
      "keyword": "챗GPT",
-     "searchVolume": 5051800,
-     "documentCount": 1139780,
-     "ratio": 4.43,
+     "searchVolume": 5044800,
+     "documentCount": 1142800,
+     "ratio": 4.41,
      "depth": 7,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "갤럭시폴드8",
-     "searchVolume": 823000,
-     "documentCount": 191211,
-     "ratio": 4.3,
+     "searchVolume": 777300,
+     "documentCount": 194153,
+     "ratio": 4,
      "depth": 6,
      "comp": "M",
      "source": "shopping"
     },
     {
      "keyword": "샥즈",
-     "searchVolume": 142900,
-     "documentCount": 39199,
-     "ratio": 3.65,
+     "searchVolume": 141000,
+     "documentCount": 39490,
+     "ratio": 3.57,
      "depth": 0,
      "comp": "L",
      "source": "shopping"
     },
     {
-     "keyword": "폴드8케이스",
-     "searchVolume": 124100,
-     "documentCount": 49606,
-     "ratio": 2.5,
-     "depth": 7,
-     "comp": "M",
-     "source": "shopping"
-    },
-    {
-     "keyword": "CHATGPT",
-     "searchVolume": 2314200,
-     "documentCount": 970267,
-     "ratio": 2.39,
-     "depth": 6,
-     "comp": "M",
-     "source": "biztp"
-    },
-    {
      "keyword": "아이폰18",
-     "searchVolume": 1261300,
-     "documentCount": 537199,
-     "ratio": 2.35,
+     "searchVolume": 1315500,
+     "documentCount": 550520,
+     "ratio": 2.39,
      "depth": 7,
      "comp": "M",
      "source": "section"
     },
     {
+     "keyword": "CHATGPT",
+     "searchVolume": 2323800,
+     "documentCount": 976089,
+     "ratio": 2.38,
+     "depth": 6,
+     "comp": "M",
+     "source": "biztp"
+    },
+    {
+     "keyword": "폴드8케이스",
+     "searchVolume": 111600,
+     "documentCount": 50710,
+     "ratio": 2.2,
+     "depth": 7,
+     "comp": "H",
+     "source": "shopping"
+    },
+    {
      "keyword": "갤럭시워치9",
-     "searchVolume": 233200,
-     "documentCount": 105735,
-     "ratio": 2.21,
+     "searchVolume": 222000,
+     "documentCount": 106493,
+     "ratio": 2.08,
      "depth": 7,
      "comp": "H",
      "source": "shopping"
     },
     {
      "keyword": "쿠쿠압력밥솥",
-     "searchVolume": 154900,
-     "documentCount": 83958,
-     "ratio": 1.84,
+     "searchVolume": 155500,
+     "documentCount": 84180,
+     "ratio": 1.85,
      "depth": 8,
      "comp": "M",
      "source": "shopping"
+    },
+    {
+     "keyword": "유튜브",
+     "searchVolume": 40257100,
+     "documentCount": 27714525,
+     "ratio": 1.45,
+     "depth": 2,
+     "comp": "M",
+     "source": "section"
     }
    ]
   },
@@ -2674,93 +2674,93 @@
    "golden": 7,
    "rows": [
     {
-     "keyword": "허양임",
-     "searchVolume": 73500,
-     "documentCount": 7105,
-     "ratio": 10.34,
+     "keyword": "김승원",
+     "searchVolume": 1278100,
+     "documentCount": 42160,
+     "ratio": 30.32,
      "depth": 0,
      "comp": "L",
      "source": "section"
     },
     {
-     "keyword": "고지용",
-     "searchVolume": 83700,
-     "documentCount": 17348,
-     "ratio": 4.82,
+     "keyword": "북항상어",
+     "searchVolume": 24170,
+     "documentCount": 2608,
+     "ratio": 9.27,
      "depth": 0,
      "comp": "L",
      "source": "section"
     },
     {
-     "keyword": "상한제사후환급금",
-     "searchVolume": 39550,
-     "documentCount": 10036,
-     "ratio": 3.94,
-     "depth": 2,
-     "comp": "L",
-     "source": "hint"
-    },
-    {
-     "keyword": "고지용허양임",
-     "searchVolume": 23450,
-     "documentCount": 6004,
+     "keyword": "강훈식비서실장",
+     "searchVolume": 21380,
+     "documentCount": 5469,
      "ratio": 3.91,
      "depth": 0,
      "comp": "L",
      "source": "section"
     },
     {
+     "keyword": "상한제사후환급금",
+     "searchVolume": 39880,
+     "documentCount": 10234,
+     "ratio": 3.9,
+     "depth": 2,
+     "comp": "L",
+     "source": "hint"
+    },
+    {
      "keyword": "주휴수당계산기",
-     "searchVolume": 83900,
-     "documentCount": 24476,
-     "ratio": 3.43,
+     "searchVolume": 81000,
+     "documentCount": 24567,
+     "ratio": 3.3,
      "depth": 5,
      "comp": "M",
      "source": "section"
     },
     {
      "keyword": "실업급여계산기",
-     "searchVolume": 111600,
-     "documentCount": 35776,
-     "ratio": 3.12,
+     "searchVolume": 106300,
+     "documentCount": 36057,
+     "ratio": 2.95,
      "depth": 2,
      "comp": "L",
      "source": "hint"
     },
     {
      "keyword": "청년일자리도약장려금",
-     "searchVolume": 47700,
-     "documentCount": 38541,
-     "ratio": 1.24,
+     "searchVolume": 45700,
+     "documentCount": 38748,
+     "ratio": 1.18,
      "depth": 1,
      "comp": "M",
      "source": "hint"
     },
     {
+     "keyword": "25사단",
+     "searchVolume": 127700,
+     "documentCount": 321940,
+     "ratio": 0.4,
+     "depth": 0,
+     "comp": "L",
+     "source": "section"
+    },
+    {
      "keyword": "4대보험계산기",
-     "searchVolume": 92100,
-     "documentCount": 287527,
-     "ratio": 0.32,
+     "searchVolume": 89300,
+     "documentCount": 290435,
+     "ratio": 0.31,
      "depth": 3,
      "comp": "H",
      "source": "hint"
     },
     {
      "keyword": "희망리턴패키지",
-     "searchVolume": 35600,
-     "documentCount": 119063,
-     "ratio": 0.3,
+     "searchVolume": 34400,
+     "documentCount": 119175,
+     "ratio": 0.29,
      "depth": 10,
      "comp": "H",
-     "source": "hint"
-    },
-    {
-     "keyword": "국민취업지원제도",
-     "searchVolume": 111200,
-     "documentCount": 403699,
-     "ratio": 0.28,
-     "depth": 3,
-     "comp": "M",
      "source": "hint"
     }
    ]
@@ -2768,96 +2768,96 @@
   {
    "topic": "건강·의학",
    "candidates": 120,
-   "measured": 47,
+   "measured": 49,
    "golden": 10,
    "rows": [
     {
      "keyword": "아젤리아크림",
-     "searchVolume": 120900,
-     "documentCount": 7805,
-     "ratio": 15.49,
+     "searchVolume": 121200,
+     "documentCount": 7910,
+     "ratio": 15.32,
      "depth": 5,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "도미나크림",
-     "searchVolume": 75210,
-     "documentCount": 9331,
-     "ratio": 8.06,
+     "searchVolume": 73580,
+     "documentCount": 9374,
+     "ratio": 7.85,
      "depth": 3,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "하파크리스틴",
-     "searchVolume": 91230,
-     "documentCount": 22963,
-     "ratio": 3.97,
+     "searchVolume": 94310,
+     "documentCount": 22993,
+     "ratio": 4.1,
      "depth": 3,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "톡스앤필",
-     "searchVolume": 111070,
-     "documentCount": 36659,
-     "ratio": 3.03,
-     "depth": 6,
+     "searchVolume": 113950,
+     "documentCount": 36731,
+     "ratio": 3.1,
+     "depth": 7,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "밴스의원",
-     "searchVolume": 119100,
-     "documentCount": 45386,
-     "ratio": 2.62,
+     "searchVolume": 118400,
+     "documentCount": 45490,
+     "ratio": 2.6,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "카무트효소",
-     "searchVolume": 82710,
-     "documentCount": 34870,
-     "ratio": 2.37,
+     "searchVolume": 76440,
+     "documentCount": 34936,
+     "ratio": 2.19,
      "depth": 8,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "볼뉴머",
-     "searchVolume": 72990,
-     "documentCount": 35935,
-     "ratio": 2.03,
+     "searchVolume": 67900,
+     "documentCount": 36124,
+     "ratio": 1.88,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "에이바헤어",
-     "searchVolume": 173190,
-     "documentCount": 118370,
-     "ratio": 1.46,
+     "searchVolume": 174190,
+     "documentCount": 118714,
+     "ratio": 1.47,
+     "depth": 10,
+     "comp": "H",
+     "source": "biztp"
+    },
+    {
+     "keyword": "포스파티딜세린",
+     "searchVolume": 62930,
+     "documentCount": 51439,
+     "ratio": 1.22,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "크레아틴",
-     "searchVolume": 109400,
-     "documentCount": 83446,
-     "ratio": 1.31,
+     "searchVolume": 101800,
+     "documentCount": 84184,
+     "ratio": 1.21,
      "depth": 9,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "포스파티딜세린",
-     "searchVolume": 65580,
-     "documentCount": 51181,
-     "ratio": 1.28,
-     "depth": 10,
      "comp": "H",
      "source": "biztp"
     }
@@ -2866,96 +2866,96 @@
   {
    "topic": "비즈니스·경제",
    "candidates": 120,
-   "measured": 71,
+   "measured": 53,
    "golden": 10,
    "rows": [
     {
+     "keyword": "오늘주식시장",
+     "searchVolume": 92680,
+     "documentCount": 11783,
+     "ratio": 7.87,
+     "depth": 10,
+     "comp": "H",
+     "source": "biztp"
+    },
+    {
      "keyword": "나스닥선물",
-     "searchVolume": 3201900,
-     "documentCount": 433025,
-     "ratio": 7.39,
+     "searchVolume": 2903500,
+     "documentCount": 439146,
+     "ratio": 6.61,
      "depth": 7,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "SK하이닉스",
-     "searchVolume": 10048900,
-     "documentCount": 1744616,
-     "ratio": 5.76,
+     "searchVolume": 8760400,
+     "documentCount": 1759015,
+     "ratio": 4.98,
      "depth": 2,
      "comp": "L",
      "source": "section"
     },
     {
      "keyword": "삼성전자우",
-     "searchVolume": 1181600,
-     "documentCount": 246503,
-     "ratio": 4.79,
+     "searchVolume": 1113400,
+     "documentCount": 248787,
+     "ratio": 4.48,
      "depth": 6,
      "comp": "M",
      "source": "biztp"
     },
     {
      "keyword": "코스피",
-     "searchVolume": 10708300,
-     "documentCount": 2715449,
-     "ratio": 3.94,
+     "searchVolume": 9537200,
+     "documentCount": 2750972,
+     "ratio": 3.47,
      "depth": 3,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "코스피지수",
-     "searchVolume": 3375000,
-     "documentCount": 1369841,
-     "ratio": 2.46,
+     "searchVolume": 3068100,
+     "documentCount": 1392463,
+     "ratio": 2.2,
      "depth": 3,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "삼성전자",
-     "searchVolume": 15121400,
-     "documentCount": 7140401,
-     "ratio": 2.12,
+     "searchVolume": 13529300,
+     "documentCount": 7203317,
+     "ratio": 1.88,
      "depth": 3,
      "comp": "H",
      "source": "section"
     },
     {
+     "keyword": "국제유가",
+     "searchVolume": 1730900,
+     "documentCount": 1072354,
+     "ratio": 1.61,
+     "depth": 3,
+     "comp": "H",
+     "source": "biztp"
+    },
+    {
      "keyword": "미국증시",
-     "searchVolume": 4196500,
-     "documentCount": 2412697,
-     "ratio": 1.74,
+     "searchVolume": 3763200,
+     "documentCount": 2453338,
+     "ratio": 1.53,
      "depth": 3,
      "comp": "M",
      "source": "biztp"
     },
     {
-     "keyword": "국제유가",
-     "searchVolume": 1751600,
-     "documentCount": 1050817,
-     "ratio": 1.67,
-     "depth": 3,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "교차로구인구직",
-     "searchVolume": 71230,
-     "documentCount": 54972,
-     "ratio": 1.3,
-     "depth": 3,
-     "comp": "H",
-     "source": "section"
-    },
-    {
      "keyword": "리플",
-     "searchVolume": 963700,
-     "documentCount": 769059,
-     "ratio": 1.25,
-     "depth": 4,
+     "searchVolume": 813800,
+     "documentCount": 781050,
+     "ratio": 1.04,
+     "depth": 5,
      "comp": "M",
      "source": "biztp"
     }
@@ -2965,39 +2965,57 @@
    "topic": "어학·외국어",
    "candidates": 120,
    "measured": 120,
-   "golden": 0,
+   "golden": 2,
    "rows": [
     {
+     "keyword": "국대모",
+     "searchVolume": 1700,
+     "documentCount": 207,
+     "ratio": 8.21,
+     "depth": 10,
+     "comp": "H",
+     "source": "biztp"
+    },
+    {
      "keyword": "JLPT접수",
-     "searchVolume": 35680,
-     "documentCount": 36027,
-     "ratio": 0.99,
+     "searchVolume": 42970,
+     "documentCount": 36431,
+     "ratio": 1.18,
      "depth": 9,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "JLPT시험일정",
-     "searchVolume": 39490,
-     "documentCount": 42481,
-     "ratio": 0.93,
+     "searchVolume": 40150,
+     "documentCount": 42905,
+     "ratio": 0.94,
      "depth": 10,
      "comp": "H",
      "source": "section"
     },
     {
+     "keyword": "모니모영어",
+     "searchVolume": 13850,
+     "documentCount": 17112,
+     "ratio": 0.81,
+     "depth": 1,
+     "comp": "M",
+     "source": "section"
+    },
+    {
      "keyword": "레페토플랫",
-     "searchVolume": 8180,
-     "documentCount": 10647,
+     "searchVolume": 8310,
+     "documentCount": 10752,
      "ratio": 0.77,
      "depth": 8,
-     "comp": "H",
+     "comp": "M",
      "source": "month"
     },
     {
      "keyword": "오픽유효기간",
-     "searchVolume": 5520,
-     "documentCount": 7462,
+     "searchVolume": 5540,
+     "documentCount": 7511,
      "ratio": 0.74,
      "depth": 10,
      "comp": "H",
@@ -3005,57 +3023,39 @@
     },
     {
      "keyword": "오픽등급표",
-     "searchVolume": 7940,
-     "documentCount": 12488,
+     "searchVolume": 8000,
+     "documentCount": 12594,
      "ratio": 0.64,
      "depth": 3,
      "comp": "H",
      "source": "section"
     },
     {
-     "keyword": "JLPT등급",
-     "searchVolume": 6220,
-     "documentCount": 19356,
-     "ratio": 0.32,
-     "depth": 7,
-     "comp": "H",
-     "source": "section"
-    },
-    {
-     "keyword": "다락원JLPT",
-     "searchVolume": 3020,
-     "documentCount": 12392,
-     "ratio": 0.24,
-     "depth": 5,
-     "comp": "M",
-     "source": "section"
-    },
-    {
-     "keyword": "스픽",
-     "searchVolume": 29460,
-     "documentCount": 151365,
-     "ratio": 0.19,
+     "keyword": "모니모",
+     "searchVolume": 33200,
+     "documentCount": 86816,
+     "ratio": 0.38,
      "depth": 2,
      "comp": "L",
      "source": "section"
     },
     {
-     "keyword": "오픽시험일정",
-     "searchVolume": 12450,
-     "documentCount": 77270,
-     "ratio": 0.16,
+     "keyword": "비인가국제학교",
+     "searchVolume": 2610,
+     "documentCount": 11924,
+     "ratio": 0.22,
      "depth": 10,
      "comp": "H",
-     "source": "section"
+     "source": "biztp"
     },
     {
-     "keyword": "헝가리의대",
-     "searchVolume": 2660,
-     "documentCount": 16479,
-     "ratio": 0.16,
-     "depth": 3,
-     "comp": "H",
-     "source": "biztp"
+     "keyword": "스픽",
+     "searchVolume": 30060,
+     "documentCount": 151865,
+     "ratio": 0.2,
+     "depth": 2,
+     "comp": "L",
+     "source": "section"
     }
    ]
   },
@@ -3063,48 +3063,57 @@
    "topic": "교육·학문",
    "candidates": 120,
    "measured": 120,
-   "golden": 4,
+   "golden": 3,
    "rows": [
     {
      "keyword": "수능디데이",
-     "searchVolume": 154300,
-     "documentCount": 18143,
-     "ratio": 8.5,
+     "searchVolume": 154500,
+     "documentCount": 18384,
+     "ratio": 8.4,
      "depth": 9,
      "comp": "H",
      "source": "section"
     },
     {
-     "keyword": "ADSP",
-     "searchVolume": 114000,
-     "documentCount": 81475,
-     "ratio": 1.4,
-     "depth": 8,
+     "keyword": "경동대학교",
+     "searchVolume": 73700,
+     "documentCount": 56531,
+     "ratio": 1.3,
+     "depth": 1,
      "comp": "M",
-     "source": "biztp"
-    },
-    {
-     "keyword": "SQLD",
-     "searchVolume": 65300,
-     "documentCount": 48923,
-     "ratio": 1.33,
-     "depth": 9,
-     "comp": "H",
-     "source": "biztp"
+     "source": "section"
     },
     {
      "keyword": "9월모의고사",
-     "searchVolume": 693500,
-     "documentCount": 559503,
-     "ratio": 1.24,
+     "searchVolume": 676400,
+     "documentCount": 564661,
+     "ratio": 1.2,
      "depth": 5,
      "comp": "M",
      "source": "biztp"
     },
     {
+     "keyword": "SQLD",
+     "searchVolume": 47900,
+     "documentCount": 49127,
+     "ratio": 0.98,
+     "depth": 9,
+     "comp": "H",
+     "source": "biztp"
+    },
+    {
+     "keyword": "ADSP",
+     "searchVolume": 76300,
+     "documentCount": 81818,
+     "ratio": 0.93,
+     "depth": 10,
+     "comp": "H",
+     "source": "biztp"
+    },
+    {
      "keyword": "넘버블럭스",
-     "searchVolume": 19580,
-     "documentCount": 22824,
+     "searchVolume": 19790,
+     "documentCount": 22916,
      "ratio": 0.86,
      "depth": 8,
      "comp": "M",
@@ -3112,48 +3121,39 @@
     },
     {
      "keyword": "수시원서접수기간",
-     "searchVolume": 100100,
-     "documentCount": 144640,
-     "ratio": 0.69,
+     "searchVolume": 91400,
+     "documentCount": 146143,
+     "ratio": 0.63,
      "depth": 9,
      "comp": "H",
      "source": "biztp"
     },
     {
+     "keyword": "방송통신대학교",
+     "searchVolume": 87600,
+     "documentCount": 356776,
+     "ratio": 0.25,
+     "depth": 1,
+     "comp": "M",
+     "source": "section"
+    },
+    {
      "keyword": "지게차자격증",
-     "searchVolume": 19440,
-     "documentCount": 80577,
-     "ratio": 0.24,
+     "searchVolume": 18940,
+     "documentCount": 80936,
+     "ratio": 0.23,
      "depth": 10,
      "comp": "H",
      "source": "biztp"
     },
     {
      "keyword": "강남인강",
-     "searchVolume": 30900,
-     "documentCount": 133409,
-     "ratio": 0.23,
-     "depth": 9,
-     "comp": "H",
-     "source": "section"
-    },
-    {
-     "keyword": "요양보호사월급",
-     "searchVolume": 11540,
-     "documentCount": 51065,
-     "ratio": 0.23,
-     "depth": 10,
-     "comp": "H",
-     "source": "biztp"
-    },
-    {
-     "keyword": "요양보호사시험",
-     "searchVolume": 32600,
-     "documentCount": 146866,
+     "searchVolume": 30200,
+     "documentCount": 134280,
      "ratio": 0.22,
      "depth": 10,
      "comp": "H",
-     "source": "biztp"
+     "source": "section"
     }
    ]
   }
