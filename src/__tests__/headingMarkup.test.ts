@@ -127,6 +127,19 @@ describe('자동 감지 결과를 표기로 굳히기', () => {
     expect(twice).toBe(once);
     expect(twice.split('\n')[2]).toBe('## 근포땅굴 도착');
   });
+
+  /*
+   * [2026-09-18 사장님 라이브] 감지기는 번호를 뗀 제목("근포땅굴 도착")을 주는데 본문 줄은
+   * "1. 근포땅굴 도착" 이다. 글자 그대로만 비교하니 번호 소제목 글은 한 줄도 표기되지 않았고,
+   * 발행 구조가 0개(이미지 넣을 자리 없음)가 됐다. 번호·강조를 벗긴 값으로도 맞추되
+   * 표기는 줄 원문을 살린다 — 번호는 인용구에 그대로 들어가야 한다.
+   */
+  it('번호·강조 접두가 붙은 본문 줄도 감지 제목과 맞춰 표기하고 원문을 살린다', () => {
+    const numbered = BODY.replace('근포땅굴 도착', '1. **근포땅굴 도착**');
+    const next = applyDetectedHeadings(numbered, ['근포땅굴 도착']);
+    expect(next.split('\n')[2]).toBe('## 1. **근포땅굴 도착**');
+    expect(listHeadingLines(next)).toHaveLength(1);
+  });
 });
 
 describe('발행 경로와 문법이 맞는다', () => {

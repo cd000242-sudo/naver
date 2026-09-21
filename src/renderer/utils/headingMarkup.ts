@@ -99,6 +99,16 @@ export function lineIndexAtOffset(body: string, offset: number): number {
  * 그대로 있는 줄을 찾아 "## " 를 붙인다. 못 찾은 제목은 건너뛴다 —
  * 본문에 없는 제목을 새로 끼워 넣으면 사용자가 쓰지 않은 문장이 생긴다.
  */
+/** 감지기가 제목에서 떼는 접두(번호·강조)를 본문 줄에서도 뗀다 — applyDetectedHeadings 의 비교용. */
+export function stripDetectedHeadingPrefix(line: string): string {
+  return String(line || '')
+    .trim()
+    .replace(/^\d{1,2}\s*[\).:：\-]\s*/, '')
+    .replace(/\*\*/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export function applyDetectedHeadings(body: string, titles: readonly string[]): string {
   const lines = splitLines(body);
   const used = new Set<number>();
@@ -106,11 +116,18 @@ export function applyDetectedHeadings(body: string, titles: readonly string[]): 
   for (const rawTitle of titles) {
     const title = String(rawTitle || '').trim();
     if (!title) continue;
+    /*
+     * [2026-09-18 사장님 라이브] 감지된 제목은 번호를 뗀 값("제목")인데 본문 줄은 "1. 제목" 이다.
+     * 글자 그대로만 비교하니 번호 소제목 글은 한 줄도 표기되지 않았고, 그 뒤 적용이 표기 0개로
+     * 잠가 발행 구조가 0개(이미지 넣을 자리 없음)가 됐다. 번호·강조 접두를 벗긴 값으로도 맞춘다.
+     * 표기는 줄 원문을 살린다("## 1. 제목") — 번호는 인용구에 그대로 들어가야 한다.
+     */
     const at = lines.findIndex((line, index) =>
-      !used.has(index) && !isMarkedHeadingLine(line) && line.trim() === title);
+      !used.has(index) && !isMarkedHeadingLine(line)
+      && (line.trim() === title || stripDetectedHeadingPrefix(line) === title));
     if (at < 0) continue;
     used.add(at);
-    lines[at] = `${HEADING_PREFIX}${title}`;
+    lines[at] = `${HEADING_PREFIX}${lines[at].trim()}`;
   }
 
   return lines.join('\n');
