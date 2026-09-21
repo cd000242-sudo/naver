@@ -91,6 +91,21 @@ describe('AI mark 발행 루프 — source regression', () => {
     expect(skipIdx).toBeGreaterThan(-1);
     expect(loop.indexOf('continue', skipIdx)).toBeGreaterThan(skipIdx);
   });
+
+  /*
+   * [2026-09-22 사장님] 이미지 관리 탭 "AI 활용 체크하기" — 체크하면 판정과 무관하게 전부 마크.
+   * 체크박스(index.html) → config.aiMarkAllImages(imageManagementTab) → 발행 루프 세 층이 같은 키를 써야 한다.
+   */
+  it('"AI 활용 체크하기" 옵트인은 config.aiMarkAllImages 로 발행 루프까지 배선된다', () => {
+    const loop = step4Block();
+    expect(loop).toMatch(/aiMarkAllImages === true/);
+    expect(loop).toMatch(/const isAiTarget = aiMarkAllImages\s*\|\|/);
+    expect(readSrc('configManager.ts')).toMatch(/aiMarkAllImages\?: boolean/);
+    expect(readSrc('renderer/modules/imageManagementTab.ts')).toMatch(/getElementById\('image-ai-mark-all'\)/);
+    expect(readSrc('renderer/modules/imageManagementTab.ts')).toMatch(/saveConfig\?\.\(\{ aiMarkAllImages: aiMarkAllCheckbox\.checked \}\)/);
+    const html = fs.readFileSync(path.resolve(__dirname, '..', '..', 'public', 'index.html'), 'utf8');
+    expect(html).toMatch(/id="image-ai-mark-all"/);
+  });
 });
 
 describe('삽입 태깅 — source regression', () => {

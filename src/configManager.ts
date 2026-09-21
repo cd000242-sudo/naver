@@ -159,6 +159,9 @@ export interface AppConfig {
   // ✅ [v2.7.61] AI 이미지 관련성 검증 (Gemini Vision)
   imageRelevanceCheck?: boolean; // true 시 수집 이미지마다 AI가 관련성 평가
   imageRelevanceThreshold?: number; // 0~100, 기본 60
+  // [2026-09-22] 이미지 관리 탭 "AI 활용 체크하기". true 면 발행 시 provider 판정과 무관하게
+  //   에디터의 모든 이미지에 네이버 AI 활용 마크를 켠다 (기본 OFF = AI 엔진 허용목록 판정만).
+  aiMarkAllImages?: boolean;
 
   externalApiCostConsent?: boolean;
   externalApiCostConsentAt?: string;

@@ -4065,6 +4065,17 @@
                             title="폴더를 만들고 이미지를 저장·불러옵니다">📁 폴더 생성 및 이미지 불러오기</button>
                     </div>
 
+                    <!-- [2026-09-22] AI 활용 체크하기 — 켜면 발행 시 모든 이미지에 네이버 "AI 활용" 마크를 자동으로 켠다 -->
+                    <label
+                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; cursor: pointer; padding: 0.5rem 0.75rem; background: rgba(3, 199, 90, 0.08); border-radius: var(--radius-sm); border: 1px solid rgba(3, 199, 90, 0.25);">
+                        <input type="checkbox" id="image-ai-mark-all"
+                            style="width: 16px; height: 16px; accent-color: #03c75a;">
+                        <div>
+                            <span style="font-size: 0.85rem; color: var(--text-strong); font-weight: 600;">🤖 AI 활용 체크하기</span>
+                            <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">발행 시 본문의 모든 이미지에 네이버 "AI 활용" 마크를 자동으로 켭니다 (끄면 AI 생성 엔진 이미지만 자동 판정)</span>
+                        </div>
+                    </label>
+
 
 
                     <!-- ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 선택 시 로그인/확인 -->

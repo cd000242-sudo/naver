@@ -5454,7 +5454,19 @@ export class NaverBlogAutomation {
 
               // Step 4: AI 활용 마크 일괄 활성화 (AI 생성 이미지만, 수집 이미지 제외)
               try {
-                this.log('🤖 [AI 마크] AI 생성 이미지 마크 일괄 활성화 중...');
+                // [2026-09-22 사장님] 이미지 관리 탭 "AI 활용 체크하기" — 켜져 있으면 판정을 건너뛰고
+                //   모든 이미지를 마크한다. 사용자가 직접 켠 옵트인이라 실사진 오탐 걱정은 사용자 몫이다.
+                const aiMarkAllImages = await (async (): Promise<boolean> => {
+                  try {
+                    const { loadConfig } = await import('./configManager.js');
+                    return (await loadConfig()).aiMarkAllImages === true;
+                  } catch {
+                    return false;
+                  }
+                })();
+                this.log(aiMarkAllImages
+                  ? '🤖 [AI 마크] "AI 활용 체크하기" ON — 모든 이미지 마크 활성화 중...'
+                  : '🤖 [AI 마크] AI 생성 이미지 마크 일괄 활성화 중...');
                 let aiMarkCount = 0;
                 for (let i = 0; i < imageComponents.length; i++) {
                   const compImg = await imageComponents[i].$('img');
@@ -5471,7 +5483,8 @@ export class NaverBlogAutomation {
                   // [2026-09-17] DOM 속성은 업로드 완료 재렌더에서 사라진다(라이브: AI 6장 전부 ai=없음).
                   //   삽입 단계가 같은 판정을 장부(위치=문서 순서)에도 적어 두므로 그것이 1차 근거다.
                   const ledger = readImageProvenance(this, i);
-                  const isAiTarget = ledger?.ai === '1'
+                  const isAiTarget = aiMarkAllImages
+                    || ledger?.ai === '1'
                     || attrs.ai === '1'
                     || (!ledger && attrs.ai === '' && isAiGeneratedImage({ provider: attrs.provider }));
                   if (!isAiTarget) {

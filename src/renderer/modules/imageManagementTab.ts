@@ -638,6 +638,26 @@ export async function initImageManagementTab(): Promise<void> {
     });
   }
 
+  // [2026-09-22 사장님] "AI 활용 체크하기" — 켜면 발행 루프(naverBlogAutomation Step 4)가
+  //   provider 판정과 무관하게 모든 이미지의 네이버 AI 활용 마크를 켠다. config 양방향 sync.
+  const aiMarkAllCheckbox = document.getElementById('image-ai-mark-all') as HTMLInputElement | null;
+  if (aiMarkAllCheckbox) {
+    try {
+      const cfg = await (window as any).api?.getConfig?.();
+      aiMarkAllCheckbox.checked = cfg?.aiMarkAllImages === true;
+    } catch { /* 무시 */ }
+    aiMarkAllCheckbox.addEventListener('change', async () => {
+      try {
+        await (window as any).api?.saveConfig?.({ aiMarkAllImages: aiMarkAllCheckbox.checked });
+        appendLog(aiMarkAllCheckbox.checked
+          ? '🤖 AI 활용 체크 ON — 발행 시 모든 이미지에 네이버 AI 활용 마크를 켭니다'
+          : '🔕 AI 활용 체크 OFF — AI 생성 엔진 이미지만 자동 판정합니다');
+      } catch (e: any) {
+        console.warn('[AiMarkAll] 설정 저장 실패:', e);
+      }
+    });
+  }
+
   // ✅ OpenAI 이미지 모델·품질 라디오 — config 양방향 sync + 실시간 비용 표시
   const openaiModelRadios = document.querySelectorAll('input[name="openai-image-model"]');
   const openaiQualityRadios = document.querySelectorAll('input[name="openai-image-quality"]');
