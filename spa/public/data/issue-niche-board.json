@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-21T09:21:55.460Z",
+  "publishedAt": "2026-09-21T09:32:01.527Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 167,
-    "niche": 0,
-    "preemption": 8,
+    "candidates": 80,
+    "niche": 1,
+    "preemption": 10,
     "pending": 0
   },
   "freeSample": {
@@ -18,6 +18,92 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "파이온 투자자문",
+      "issue": "파이온",
+      "topic": "파이온",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "080626 상한가 / 1000만주 주식 그리고 인사이트",
+          "어제 코스닥, 로봇이 세 종목을 동시에 들어올렸어요",
+          "[ 마감시황] 1월 이후 가장 낮은 거래대금 9월 FOMC 전까지는 개잡주 랠리",
+          "2026 09 18 주말 금요일/9월17목요일",
+          "6월25일 천기가이의 종목브리핑-비비안 20%수익,화신정공5%수익",
+          "반도체가 빠진 날, 2분기 실적이 코스닥을 달궜어요",
+          "파이온엑스 거래정지 후 투 상한가 (2026년 7월 28일)",
+          "“오후 3시30분 끝인 줄 알았는데” 한국 주식시장 14일부터 확 바뀌나",
+          "오늘 상한가 종목은? 유니켐 미국기업 인수·본느 경영권 변경·아로마티카 실적 강세",
+          "오전장 특징주 2026.06.23(화) - 국내 전선업계 사상 최대 수준 수주잔고 기록 등에 일부 전선,전력설비 테마가 상승"
+        ],
+        "measuredAt": "2026-09-21T09:31:22.198Z"
+      },
+      "documentCount": 110,
+      "documentCountMeasured": true,
+      "searchVolume": 360,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.1397321854815887,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 360",
+        "문서수 110",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 360 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-21T09:31:00.187Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "레알마드리드 코리아",
       "issue": "레알마드리드",
@@ -129,7 +215,7 @@
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-21T03:25:08.100Z"
+        "measuredAt": "2026-09-21T09:32:02.192Z"
       },
       "kinCount": 1240,
       "kinTop": [
@@ -434,132 +520,6 @@
       "exclusionReason": null,
       "kinMode": "date-views-v2",
       "carried": true
-    },
-    {
-      "keyword": "프로야구 스피리츠 갤",
-      "issue": "프로야구",
-      "topic": "프로야구",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "컴투스 게임 라인업, 지금 시작하기 좋은 건 이겁니다",
-          "실황 파워풀 파워프로 2026 wbc모드 실명 확정",
-          "TysonWorld :: 월광보합 5S 999 게임 목록",
-          "㈜오섹시코리아 - 오섹시갤",
-          "중고만화 수만권 팝니다.",
-          "[판교테크노밸리]글로벌 게임산업 트렌드 (2015년 상반기 보고서,한국콘텐츠진흥원)",
-          "일본의 역사를 년도별로 정리했습니다. 그냥 알고 싶었습니다.",
-          "전세계 5가지 술 이야기 소주, 맥주, 양주, 막걸리, 사케 그들만의 리그",
-          "양을 쫓는 모험",
-          "[A.A.F] 애니 추천 200선(feat. azunyaa)"
-        ],
-        "measuredAt": "2026-09-19T09:26:59.087Z"
-      },
-      "documentCount": 20,
-      "documentCountMeasured": true,
-      "searchVolume": 3220,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.89516019675171,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 3,220",
-        "문서수 20",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 3,220 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.9배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          100,
-          94,
-          79,
-          63,
-          77,
-          70,
-          57,
-          70,
-          92,
-          75,
-          66,
-          74,
-          63,
-          76,
-          86,
-          78,
-          68,
-          63,
-          59,
-          70,
-          64,
-          69,
-          69,
-          67,
-          63,
-          52,
-          74,
-          57,
-          50
-        ],
-        "label": "🐢 연금형",
-        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-21T09:21:55.913Z"
-      },
-      "kinCount": 2,
-      "kinTop": [],
-      "monetize": null,
-      "measuredAt": "2026-09-19T09:24:02.243Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
     }
   ],
   "observations": [
@@ -616,7 +576,7 @@
       "kinCount": 908,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-21T09:19:30.487Z",
+      "measuredAt": "2026-09-21T09:31:00.187Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -672,7 +632,7 @@
       "kinCount": 1,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-21T09:19:30.487Z",
+      "measuredAt": "2026-09-21T09:31:00.187Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -728,7 +688,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-21T09:19:30.487Z",
+      "measuredAt": "2026-09-21T09:31:00.187Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -744,7 +704,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 34,
+      "documentCount": 35,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": true,
@@ -756,8 +716,8 @@
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "문서수 34",
-        "선점 후보 — 경쟁 문서 34건, 수요 미검출"
+        "문서수 35",
+        "선점 후보 — 경쟁 문서 35건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -784,7 +744,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-21T09:19:30.487Z",
+      "measuredAt": "2026-09-21T09:31:00.187Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -832,7 +792,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-21T09:19:30.487Z",
+      "measuredAt": "2026-09-21T09:31:00.187Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -890,12 +850,60 @@
         {
           "title": "고려 광종의 과거제",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=11&docId=173192816&answerNo=1",
-          "views": 197,
+          "views": 198,
           "answers": 1
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-09-21T09:19:30.487Z",
+      "measuredAt": "2026-09-21T09:31:00.187Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "앤돈랩스",
+      "issue": "앤돈랩스",
+      "topic": "앤돈랩스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 32,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 32",
+        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-21T09:31:00.187Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -943,7 +951,59 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-21T09:19:30.487Z",
+      "measuredAt": "2026-09-21T09:31:00.187Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "파이온 폴드8",
+      "issue": "파이온",
+      "topic": "파이온",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 112,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 112",
+        "선점 후보 — 경쟁 문서 112건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-21T09:31:00.187Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -959,7 +1019,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 270,
+      "documentCount": 295,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": true,
@@ -971,8 +1031,8 @@
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "문서수 270",
-        "선점 후보 — 경쟁 문서 270건, 수요 미검출"
+        "문서수 295",
+        "선점 후보 — 경쟁 문서 295건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -991,7 +1051,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-21T09:19:30.487Z",
+      "measuredAt": "2026-09-21T09:31:00.187Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -2121,82 +2181,57 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "김승원 의혹 탄원서",
-      "issue": "김승원 의혹 탄원서",
-      "topic": "김승원 의혹 탄원서",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 256,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 256",
-        "선점 후보 — 경쟁 문서 256건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": [
-        {
-          "title": "김승원 전직 보좌관의 &lt;과거 성추행 의혹과 보좌진의 무마과....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60204&docId=495229104&answerNo=2",
-          "views": 201,
-          "answers": 2
-        },
-        {
-          "title": "김승원 전직 보좌관의 &lt;과거 성추행 의혹과 보좌진의 무마과....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60204&docId=495229217&answerNo=2",
-          "views": 99,
-          "answers": 2
-        },
-        {
-          "title": "김승원 전직 보좌관의 &lt;과거 성추행 의혹과 보좌진의 무마과....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60211&docId=495229178&answerNo=2",
-          "views": 54,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-19T09:24:02.243Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "파이온",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": null,
+      "headlines": [
+        {
+          "title": "앤돈랩스, AI가 기업 전반 자율 운영하는 플랫폼 '파이온' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-21T08:52:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215537"
+        },
+        {
+          "title": "파이온코퍼레이션, 맘스터치 일본 AI 광고 제작",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-15T08:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005414181?sid=101"
+        },
+        {
+          "title": "효성, K뷰티에 300억 직접베팅…CVC 탐색서 사업화로",
+          "press": "sateconomy.co.kr",
+          "publishedAt": "2026-09-21T05:52:00.000Z",
+          "link": "http://sateconomy.co.kr/news/view/1065592017596332"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "(주)파이온",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "파이온 폴드8",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "파이온 투자자문",
+          "searchVolume": 360,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
     {
       "issue": "레알마드리드",
       "issueType": "fresh",
@@ -2342,82 +2377,9 @@
       "nextWave": [],
       "rowCount": 2,
       "carried": true
-    },
-    {
-      "issue": "프로야구",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "내달 장흥으로…장흥군수, 프로야구 중계서 박람회 홍보",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-18T07:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014200301?sid=102"
-        },
-        {
-          "title": "치킨에 응원도구까지…삼성증권, 프로야구 팬 대상 이벤트",
-          "press": "fnnews.com",
-          "publishedAt": "2026-09-18T02:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005577937?sid=101"
-        },
-        {
-          "title": "프로야구 LG, 선두 kt에 12대 1 대승…5연승 질주",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-18T13:55:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/055/0001389520"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "프로야구 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "2026 프로야구 일정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "프로야구 일정",
-          "searchVolume": 610700,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "프로야구 중계",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "프로야구 결과",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "프로야구 경기수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "프로야구 예매",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "2026 프로야구 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-09-21T09:22:18.151Z",
+  "enrichedAt": "2026-09-21T09:32:22.340Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
