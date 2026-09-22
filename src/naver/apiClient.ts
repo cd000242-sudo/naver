@@ -15,6 +15,7 @@ import {
   type NaverApiMode, type NaverCredential, type NaverSearchParams, type NaverSearchType,
 } from './apiEndpoints.js';
 import { resolveAllNaverCredentials, type NaverCredentialPayload } from './apiCredentials.js';
+import { classifyHttpStatus, type SearchStatus } from '../content/searchStatus.js';
 
 export type NaverFetch = (url: string, init?: any) => Promise<any>;
 
@@ -42,6 +43,20 @@ export interface NaverApiResult<T> {
   mode?: NaverApiMode;
   label?: string;
   attempts: number;
+  /**
+   * Set on callNaverSearch results — distinguishes "429 rate-limited" from
+   * "200 with 0 items" from "401/403 blocked", all of which used to look
+   * identical (ok:false, no items) to callers.
+   */
+  searchStatus?: SearchStatus;
+}
+
+/** Best-effort item count for Naver search response shapes ({ items: [...] }). */
+function extractSearchItemCount(data: unknown): number {
+  if (data && typeof data === 'object' && Array.isArray((data as { items?: unknown[] }).items)) {
+    return (data as { items: unknown[] }).items.length;
+  }
+  return 0;
 }
 
 const AUTH_BLOCKED = new Set([401, 403, 404]);
@@ -196,9 +211,15 @@ export async function callNaverSearch<T>(
   options: NaverCallOptions = {},
 ): Promise<NaverApiResult<T>> {
   if (isRetiredNaverSearchType(type)) {
-    return { ok: false, status: 410, data: null, error: describeRetiredSearchType(type), attempts: 0 };
+    return {
+      ok: false, status: 410, data: null, error: describeRetiredSearchType(type), attempts: 0,
+      searchStatus: 'SEARCH_ERROR',
+    };
   }
-  return callWithFailover<T>(type, (cred) => buildNaverSearchUrl(type, params, cred), { method: 'GET' }, options);
+  const result = await callWithFailover<T>(type, (cred) => buildNaverSearchUrl(type, params, cred), { method: 'GET' }, options);
+  const itemCount = extractSearchItemCount(result.data);
+  const searchStatus = classifyHttpStatus(result.status, itemCount, result.error);
+  return { ...result, searchStatus };
 }
 
 /** Search Trend (datalab) API. */

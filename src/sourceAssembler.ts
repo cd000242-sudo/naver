@@ -17,6 +17,9 @@ import {
   parseNaverPostDate, withFreshnessLabel, isStaleSource, mergeRecentFirst, resolveSourceDate,
 } from './content/sourceFreshness.js';
 import { resolveBulkSourceMix } from './content/factSourceTierPolicy.js';
+// [2026-09-22 audit P0] structured source documents + honest search status.
+import { classifySourceTier, deriveSourceName, makeSourceId, type SourceDocument, type SourceKind } from './content/sourceDocument.js';
+import { aggregateSearchStatus, classifyHttpStatus, type SourceSearchResult } from './content/searchStatus.js';
 import { isPublicInfoTopic } from './content/publicInfoFactTable.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
 import { extractLabeledPrice, formatPriceOrEmpty, hasValidPrice, parsePrice } from './services/priceNormalizer.js';
@@ -59,7 +62,7 @@ async function naverSearchResponse(
   params: NaverSearchParams,
   clientId?: string,
   clientSecret?: string,
-): Promise<{ ok: boolean; status: number; statusText: string; json: () => Promise<any> }> {
+): Promise<{ ok: boolean; status: number; statusText: string; json: () => Promise<any>; searchStatus?: string }> {
   const credentials = resolveAllNaverCredentials(
     clientId && clientSecret ? { naverClientId: clientId, naverClientSecret: clientSecret } : undefined,
   );
@@ -72,6 +75,7 @@ async function naverSearchResponse(
     ok: result.ok,
     status: result.status,
     statusText: result.error || '',
+    searchStatus: result.searchStatus,
     json: async () => result.data ?? {},
   };
 }
@@ -776,6 +780,29 @@ async function fallbackToNaverShoppingApi(
 }
 
 
+/*
+ * [2026-09-22 audit P0-2] Per-source search status ledger. Search failures used to collapse
+ * into an empty array — 429, 403 and "0 results" were indistinguishable and the collector
+ * reported success:true. The ledger is reset at the start of collectContentFromPlatforms
+ * (text generation is serialized in this app) and aggregated into the returned searchStatus.
+ */
+let searchStatusLedger: SourceSearchResult[] = [];
+
+export function resetSearchStatusLedger(): void {
+  searchStatusLedger = [];
+}
+
+export function readSearchStatusLedger(): SourceSearchResult[] {
+  return [...searchStatusLedger];
+}
+
+function recordSearchStatus(entry: SourceSearchResult): void {
+  searchStatusLedger = [...searchStatusLedger, entry];
+  if (entry.status !== 'SEARCH_OK') {
+    console.warn(`[SearchStatus] ${entry.source}: ${entry.status}${entry.httpStatus ? ` (HTTP ${entry.httpStatus})` : ''}${entry.detail ? ` — ${entry.detail}` : ''}`);
+  }
+}
+
 async function searchNaverForContent(
   query: string,
   clientId: string,
@@ -787,6 +814,7 @@ async function searchNaverForContent(
   sort: 'date' | 'sim' = 'date'
 ): Promise<NaverSearchResult[]> {
   const results: NaverSearchResult[] = [];
+  const ledgerSource = `NAVER_${searchType.toUpperCase()}(${sort})`;
 
   try {
     console.log(`[네이버 검색 API] "${query}" 검색 중 (${searchType}, ${displayCount}개)...`);
@@ -800,10 +828,23 @@ async function searchNaverForContent(
 
     if (!response.ok) {
       console.warn(`[네이버 검색 API] HTTP ${response.status}: ${response.statusText}`);
+      recordSearchStatus({
+        source: ledgerSource,
+        status: (response.searchStatus as SourceSearchResult['status']) || classifyHttpStatus(response.status, 0, response.statusText),
+        count: 0,
+        httpStatus: response.status,
+        detail: response.statusText,
+      });
       return results;
     }
 
     const data = await response.json();
+    recordSearchStatus({
+      source: ledgerSource,
+      status: classifyHttpStatus(response.status, Array.isArray(data?.items) ? data.items.length : 0),
+      count: Array.isArray(data?.items) ? data.items.length : 0,
+      httpStatus: response.status,
+    });
 
     if (data.items && Array.isArray(data.items)) {
       for (const item of data.items) {
@@ -840,6 +881,7 @@ async function searchNaverForContent(
     }
   } catch (error) {
     console.error(`[네이버 검색 API] ❌ 실패: ${(error as Error).message}`);
+    recordSearchStatus({ source: ledgerSource, status: 'SEARCH_ERROR', count: 0, detail: (error as Error).message });
   }
 
   return results;
@@ -1712,8 +1754,9 @@ export async function collectTopArticleFullTexts(
   logger: (message: string) => void = console.log,
   /** 이 시각까지만 수집한다 (epoch ms). 없으면 지금까지처럼 끝까지 돈다. */
   deadlineAt?: number,
-): Promise<{ text: string; count: number; urls: string[] }> {
+): Promise<{ text: string; count: number; urls: string[]; documents: SourceDocument[] }> {
   const remainingMs = (): number => (deadlineAt ? deadlineAt - Date.now() : Number.POSITIVE_INFINITY);
+  const documents: SourceDocument[] = [];
   try {
     /**
      * [2026-08-11] 최신순을 함께 긁는다.
@@ -1817,21 +1860,40 @@ export async function collectTopArticleFullTexts(
           secondaryChars += excerptLength;
         }
         const excerpt = content.substring(0, FULLTEXT_PER_ARTICLE_CHARS);
+        if (content.length > FULLTEXT_PER_ARTICLE_CHARS) {
+          logger(`[플랫폼 콘텐츠 수집] ✂️ 자료 ${parts.length + 1} 본문 ${content.length}자 → ${FULLTEXT_PER_ARTICLE_CHARS}자 (편당 상한)`);
+        }
         const title = article.title || candidate.title || '';
         /**
          * [2026-08-11] 자료 시점을 본문 앞에 박는다.
          *   날짜가 없으면 모델은 그게 작년 자료인지 알 수 없고, 근거 대조도
          *   "장부에 있는 값"이라 통과시켜 작년 조건이 그대로 실린다.
          *   오래된 자료에는 "그대로 옮기지 말라"는 경고까지 붙는다.
+         * [2026-09-22 audit H7] resolveSourceDate reads BOTH blog postdate and news pubDate.
+         *   parseNaverPostDate only knew postdate, so every news article (the primary
+         *   source) went in without a date and without the stale warning.
          */
-        const dated = withFreshnessLabel(excerpt, parseNaverPostDate(candidate.postdate));
-        if (isStaleSource(parseNaverPostDate(candidate.postdate))) staleParts += 1;
+        const sourceDate = resolveSourceDate(candidate as { postdate?: unknown; pubDate?: unknown });
+        const dated = withFreshnessLabel(excerpt, sourceDate);
+        if (isStaleSource(sourceDate)) staleParts += 1;
         // [2026-09-01] "[상위글 N]" 이라는 내부 라벨을 모델이 출처 이름으로 알고
         //   본문에 옮겼다("상위 글에서 정리 주기는…"). 독자는 그게 무엇인지 모른다.
         //   번호표만 남기고 우리 용어는 뺀다.
         parts.push(`[자료 ${parts.length + 1}${title ? ` — ${title}` : ''}]\n${dated}`);
         usedUrls.push(candidate.link);
         totalChars += excerpt.length;
+        const kind = classifySourceKind(candidate.link) as SourceKind;
+        documents.push({
+          id: makeSourceId(documents.length + 1),
+          title,
+          sourceType: kind === 'news' || kind === 'blog' ? kind : 'web',
+          sourceName: deriveSourceName(candidate.link, title),
+          url: candidate.link,
+          pubDate: sourceDate || undefined,
+          dateStatus: sourceDate ? 'KNOWN' : 'UNKNOWN_DATE',
+          body: excerpt,
+          sourceTier: classifySourceTier(candidate.link),
+        });
         await new Promise((resolve) => setTimeout(resolve, 300));
       } catch {
         // Per-URL failures are expected (deleted posts, blocks) — keep going.
@@ -1841,7 +1903,7 @@ export async function collectTopArticleFullTexts(
     if (stoppedByDeadline) {
       logger(`[플랫폼 콘텐츠 수집] ⏱️ 시간 예산 소진 — 확보한 ${parts.length}건으로 진행합니다 (전부 버리지 않습니다)`);
     }
-    if (parts.length === 0) return { text: '', count: 0, urls: [] };
+    if (parts.length === 0) return { text: '', count: 0, urls: [], documents: [] };
     if (offTopicSkipped > 0) {
       logger(`[플랫폼 콘텐츠 수집] ⚠️ 주제 밖 자료 ${offTopicSkipped}건 제외 (검색어의 고유명사가 하나도 없음)`);
     }
@@ -1890,13 +1952,14 @@ export async function collectTopArticleFullTexts(
     });
     return {
       text: `${tierNotice ? `${tierNotice}\n\n` : ''}=== 사실 자료 (수치·조건·절차는 이 범위에서만 사용) ===
-※ 이 묶음의 이름과 번호표, 그리고 이 안내문 자체는 내부 표기다. 본문에 옮겨 적지 마라. 출처를 밝혀야 하면 그 자료가 실제로 어디서 왔는지 — 그 매체 이름, 그 기관 이름, 그 글의 성격 — 을 있는 그대로 쓴다. 여기 적힌 낱말을 예시로 삼아 베끼지 마라.\n※ 대괄호·【】 안의 글 제목은 **다른 사람이 쓴 글의 이름**이다. 근거로 인용하거나 본문에 옮겨 적지 마라 — 남의 제목을 끌어오면 독자에게는 뜬금없다. 쓸 것은 제목이 아니라 그 아래 본문의 수치·조건·절차다.\n${parts.join('\n\n')}`,
+※ '[자료 N]' 같은 번호표와 이 안내문은 내부 표기다 — 번호표를 본문에 옮겨 적지 마라. 그러나 실제 출처 귀속은 적극적으로 써라: 자료가 어느 매체·기관에서 왔는지 아래 각 자료의 '출처'를 보고 "OO부 발표에 따르면", "OO일보 보도에 따르면", "OO 공식 안내 기준"처럼 그 이름을 그대로 쓴다. 자료에 없는 기관·매체를 지어내지 않는다.\n※ 대괄호·【】 안의 글 제목은 **다른 사람이 쓴 글의 이름**이다. 근거로 인용하거나 본문에 옮겨 적지 마라 — 남의 제목을 끌어오면 독자에게는 뜬금없다. 쓸 것은 제목이 아니라 그 아래 본문의 수치·조건·절차다.\n${parts.join('\n\n')}`,
       count: parts.length,
       urls: usedUrls,
+      documents,
     };
   } catch (error) {
     logger(`[플랫폼 콘텐츠 수집] ⚠️ 상위글 풀텍스트 수집 실패 (스니펫만 사용): ${(error as Error).message}`);
-    return { text: '', count: 0, urls: [] };
+    return { text: '', count: 0, urls: [], documents };
   }
 }
 
@@ -2003,6 +2066,14 @@ export interface SourceAssemblyInput {
   /** ✅ [2026-02-09 v2] 이전 생성 제목 (연속발행 중복 방지) */
   previousTitles?: string[];
   contentPolicyContext?: ContentPolicyPayloadContext;
+  /** [2026-09-22] Structured full-text documents from collectContentFromPlatforms (pass-through). */
+  sourceDocuments?: SourceDocument[];
+  /** [2026-09-22] Honest search status from collectContentFromPlatforms (pass-through). */
+  searchStatus?: { overall: string; summary: string; perSource: SourceSearchResult[] };
+  /** Renderer flag: real-time material was found (legacy name). */
+  useRealTimeInfo?: boolean;
+  /** [2026-09-22] Renderer flag: a real-time crawl was REQUESTED (the article is source-based even if 0 found). */
+  realtimeCrawlRequested?: boolean;
 }
 
 export interface AssembledSource {
@@ -2065,8 +2136,11 @@ function cleanText(text: string): string {
   });
 
   return cleaned
-    // 연속된 공백을 하나로
-    .replace(/\s+/g, ' ')
+    // [2026-09-22 audit H12] Collapse spaces/tabs only — the old `\s+` also ate every newline, so an
+    //   article reached the model as one paragraph-less blob and every line-based noise rule below
+    //   (and in sourceNoiseFilter) was unreachable.
+    .replace(/[ \t\f\v\u00a0]+/g, ' ')
+    .replace(/[ \t]*\n[ \t]*/g, '\n')
     // 연속된 줄바꿈을 두 개로 제한
     .replace(/\n{3,}/g, '\n\n')
     // 앞뒤 공백 제거
@@ -2107,8 +2181,11 @@ function removeUnwantedElements($: any, $target: any): void {
     '.ads',
     '.ad-banner',
     '.ad-wrapper',
-    '[class*="ad"]',
-    '[id*="ad"]',
+    // [2026-09-22 audit H13] `[class*="ad"]` matched "head", "read", "lead", "breadcrumb",
+    //   "download" — real body containers vanished silently. Match ad-shaped tokens only.
+    '[class^="ad-"]', '[class^="ad_"]', '[class$="-ad"]', '[class$="_ad"]', '[class*="-ad-"]', '[class*="_ad_"]',
+    '[class*="advert"]', '[class*="banner"]', '[class*="sponsor"]',
+    '[id^="ad-"]', '[id^="ad_"]', '[id$="-ad"]', '[id*="advert"]',
     '.social-share',
     '.share',
     '.comment',
@@ -5818,7 +5895,9 @@ ${product.title}에 대한 상세 정보입니다. 이 제품은 ${product.categ
       '.post-content',
       '.entry-content',
       '#articleBody',
-      '.news_end_body', // 네이버 뉴스
+      '#dic_area', // 네이버 뉴스 (현행 마크업, 2026)
+      '#newsct_article', // 네이버 뉴스 (현행 컨테이너)
+      '.news_end_body', // 네이버 뉴스 (구형)
       '.article_view', // 다음 뉴스
       '.article_txt', // 조선일보
       '.article-body-content', // 중앙일보
@@ -7550,6 +7629,10 @@ ${naverResult.content}`;
   // ✅ [2026-02-08] Perplexity 엔진 선택 시: 네이버 보충 건너뛰고 바로 Perplexity 리서치
   // Perplexity는 팩트 기반 실시간 웹 검색이므로 네이버 2차/3차 보충보다 훨씬 신뢰성이 높음
   const isPerplexityEngine = (input.generator || '').toLowerCase() === 'perplexity';
+  // [2026-09-22] grounding truth for the run meta / honest UI: requested when a grounded research
+  //   step is attempted, used when it actually returned material.
+  let researchGroundingRequested = false;
+  let researchGroundingUsed = false;
   // ✅ [2026-03-29 FIX] custom 모드(페러프레이징 등)에서는 외부 보충 차단 (원문 오염 방지)
   const isCustomMode = (input as any).contentMode === 'custom';
 
@@ -7560,9 +7643,11 @@ ${naverResult.content}`;
 
     try {
       const { researchWithPerplexity } = await import('./contentGenerator.js');
+      researchGroundingRequested = true;
       const perplexityResult = await researchWithPerplexity(searchKeyword);
 
       if (perplexityResult.success && perplexityResult.content.length > 500) {
+        researchGroundingUsed = true;
         if (baseBody && baseBody.length > 100) {
           baseBody = `${baseBody}\n\n--- Perplexity 팩트 기반 리서치 ---\n\n${perplexityResult.content}`;
         } else {
@@ -7729,9 +7814,11 @@ ${naverResult.content}`;
     if (!isPerplexityEngine) {
       try {
         const { researchWithPerplexity } = await import('./contentGenerator.js');
+        researchGroundingRequested = true;
         const perplexityResult = await researchWithPerplexity(searchKeyword);
 
         if (perplexityResult.success && perplexityResult.content.length > 500) {
+          researchGroundingUsed = true;
           if (baseBody && baseBody.length > 100) {
             baseBody = `${baseBody}\n\n--- Perplexity 웹 검색 추가 자료 ---\n\n${perplexityResult.content}`;
           } else {
@@ -7755,9 +7842,11 @@ ${naverResult.content}`;
     if (!webResearchDone && (!baseBody || baseBody.length < 500)) {
       try {
         const { researchWithGeminiGrounding } = await import('./contentGenerator.js');
+        researchGroundingRequested = true;
         const groundingResult = await researchWithGeminiGrounding(searchKeyword);
 
         if (groundingResult.success && groundingResult.content.length > 500) {
+          researchGroundingUsed = true;
           if (baseBody && baseBody.length > 100) {
             baseBody = `${baseBody}\n\n--- Google 검색 기반 추가 자료 ---\n\n${groundingResult.content}`;
           } else {
@@ -7857,6 +7946,14 @@ ${naverResult.content}`;
       successfulSourceCount: urlPatterns.length - warnings.filter(w => w.includes('크롤링 실패')).length,
       warnings,
       shoppingEvidenceMode: shoppingEvidence?.evidenceMode,
+      // [2026-09-22 audit P0] structured sources, search status, grounding truth — consumed by
+      //   contentGenerator's source pipeline, the integrity gate and the run meta.
+      sourceDocuments: Array.isArray(input.sourceDocuments) ? input.sourceDocuments : undefined,
+      searchStatus: input.searchStatus,
+      useRealTimeInfo: input.useRealTimeInfo === true,
+      realtimeCrawlRequested: input.realtimeCrawlRequested === true,
+      researchGroundingRequested,
+      researchGroundingUsed,
     },
     generator: input.generator ?? 'gemini',
     articleType: input.articleType ?? inferArticleType(),
@@ -7913,9 +8010,20 @@ export async function collectContentFromPlatforms(
   urls: string[];
   success: boolean;
   message?: string;
+  /** [2026-09-22] Structured documents (full texts) for the writer — string transport stays for compatibility. */
+  sourceDocuments?: SourceDocument[];
+  /** [2026-09-22] Honest per-source search status; overall is never 'OK' when nothing was found. */
+  searchStatus?: { overall: string; summary: string; perSource: SourceSearchResult[] };
 }> {
   const { maxPerSource = 10, clientId, clientSecret, logger = console.log } = options;
   const allowGroundingFallback = options.allowGroundingFallback === true;
+  resetSearchStatusLedger();
+  const buildSearchStatus = () => {
+    const perSource = readSearchStatusLedger();
+    const agg = aggregateSearchStatus(perSource);
+    logger(`[SearchStatus] overall=${agg.overall} · ${agg.summary || '(호출 없음)'}`);
+    return { overall: agg.overall, summary: agg.summary, perSource };
+  };
 
   try {
     logger(`[플랫폼 콘텐츠 수집] 키워드 "${keyword}"로 여러 플랫폼에서 콘텐츠 수집 시작...`);
@@ -7989,6 +8097,8 @@ export async function collectContentFromPlatforms(
             urls: fullTexts.urls,
             success: true,
             message: `네이버 검색 API로 ${apiResult.totalChars}자${fullTexts.count > 0 ? ` + 상위글 본문 ${fullTexts.count}건` : ''} 수집 완료 (${apiResult.sources.join(', ')})`,
+            sourceDocuments: fullTexts.documents,
+            searchStatus: buildSearchStatus(),
           };
         } else {
           logger(`[플랫폼 콘텐츠 수집] ⚠️ 네이버 API 결과 부족 (${apiResult.content?.length || 0}자), URL 크롤링으로 보충...`);
@@ -8103,16 +8213,19 @@ export async function collectContentFromPlatforms(
 
     if (urls.length === 0) {
       // API도 실패하고 URL도 없으면 키워드만으로 반환
-      logger(`[플랫폼 콘텐츠 수집] ⚠️ URL도 발견되지 않음, 키워드 기반으로 진행`);
-      // [2026-09-15] Never hand process narration to the model as material — it ends up quoted in the post.
-      //   The old text ('"…"에 대한 정보를 수집합니다.') was the only "material" when every crawl failed,
-      //   and the model rendered it as a fact row in the summary table. Empty means "no material", which is true.
+      // [2026-09-22 audit P0-2] This is NOT success. The caller decides what to do with an empty
+      //   result; reporting success:true here hid 0-result / 429 / blocked searches behind
+      //   "키워드 기반으로 AI가 콘텐츠 생성" and the article was written from model memory.
+      const searchStatus = buildSearchStatus();
+      logger(`[플랫폼 콘텐츠 수집] ⛔ 자료 0건 (${searchStatus.overall}) — 검색 결과가 없습니다`);
       return {
         collectedText: '',
         sourceCount: 0,
         urls: [],
-        success: true,
-        message: `키워드 "${keyword}" 기반으로 AI가 콘텐츠 생성`,
+        success: false,
+        message: `검색 결과 없음 (${searchStatus.overall}): ${searchStatus.summary || '호출된 소스 없음'}`,
+        sourceDocuments: [],
+        searchStatus,
       };
     }
 
@@ -8213,12 +8326,17 @@ export async function collectContentFromPlatforms(
        * 안내문은 주제에 대한 사실이 아니다. 재료가 없으면 없다고 하는 것이 맞다 — 빈 문자열로 돌려준다.
        * 생성은 그대로 진행한다(success 유지) — 모델 지식으로 쓰는 기존 결정은 바꾸지 않는다.
        */
+      // [2026-09-22 audit P0-2] Every crawl failed: report it as a failure with the status, not as success.
+      const searchStatus = buildSearchStatus();
+      logger(`[플랫폼 콘텐츠 수집] ⛔ 크롤링 전부 실패 (${searchStatus.overall}) — 자료 없이 진행하려면 사용자가 알아야 한다`);
       return {
         collectedText: '',
         sourceCount: 0,
         urls,
-        success: true, // ✅ 성공으로 처리하여 AI 생성 진행
-        message: `크롤링 실패, 키워드 "${keyword}" 기반으로 AI가 콘텐츠 생성`,
+        success: false,
+        message: `크롤링 실패 (${searchStatus.overall}): URL ${urls.length}개 중 본문 확보 0건`,
+        sourceDocuments: [],
+        searchStatus,
       };
     }
 

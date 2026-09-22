@@ -117,7 +117,9 @@ describe('배선', () => {
   });
 
   it('발췌마다 시점 라벨을 붙인다', () => {
-    expect(assembler).toContain('withFreshnessLabel(excerpt, parseNaverPostDate(candidate.postdate))');
+    // [2026-09-22 audit H7] resolveSourceDate reads blog postdate AND news pubDate — the old call missed every news article.
+    expect(assembler).toContain('const sourceDate = resolveSourceDate(candidate as { postdate?: unknown; pubDate?: unknown });');
+    expect(assembler).toContain('withFreshnessLabel(excerpt, sourceDate)');
   });
 
   it('모델에게 라벨을 어떻게 다룰지 알려준다', () => {

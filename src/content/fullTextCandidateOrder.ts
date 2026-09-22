@@ -28,6 +28,8 @@ export interface FullTextCandidate {
   readonly title?: string;
   readonly link: string;
   readonly postdate?: string;
+  /** News items: RFC 822 pubDate from the search API. */
+  readonly pubDate?: string;
 }
 
 export interface FullTextCandidateInput {
@@ -63,6 +65,9 @@ export function orderFullTextCandidates(input: FullTextCandidateInput): FullText
         title: candidate.title,
         link: candidate.link,
         postdate: candidate.postdate,
+        // [2026-09-22 audit H7] news items carry pubDate (RFC 822); dropping it here left every
+        //   news document UNKNOWN_DATE downstream (measured: 4–6 of 8 sources per keyword).
+        pubDate: candidate.pubDate,
       });
     }
     return out;

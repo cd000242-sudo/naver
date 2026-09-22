@@ -11,6 +11,15 @@
 //
 // 원칙: 좁고 확실한 패턴만 지운다. 애매하면 남긴다 —
 // 사실을 실수로 지우는 것이 껍데기 한 줄이 남는 것보다 나쁘다.
+//
+// [2026-09-22 감사 실측] 자료 5~8건짜리 묶음(총 29,099자)이 7,992자로 잘렸다.
+// SUPPLEMENT_BOUNDARY 가 "=== 상위 노출 글 본문 발췌" 라는 옛 표제만 알아서, 실제
+// 묶음("=== 사실 자료 ===" ... "[자료 N — 제목]" ... "=== 검색 결과 스니펫 ===")을
+// 하나의 덩어리로 보고 cutTrailingChrome 이 첫 자료의 "관련 기사" 를 찾아 그 뒤
+// 자료 2~8을 통째로 날렸다. 이 파일은 이제 묶음을 알아본다 — 자료마다 따로 자르고,
+// 한 자료의 꼬리 절단이 다른 자료를 건드리지 않는다.
+
+import { parseLegacyMaterialBundle } from './sourceDocument.js';
 
 /**
  * 줄 단위 삭제는 짧은 줄에만 건다.
@@ -156,6 +165,56 @@ export interface SourceNoiseFilterResult {
   readonly removedTailChars: number;
   /** 무언가 지웠는가. 호출부는 카운터가 아니라 이걸 봐야 한다. */
   readonly changed: boolean;
+  /**
+   * [2026-09-22] 묶음(여러 자료)을 인식했을 때만 채운다. 자료별로 얼마나 잘렸는지
+   * 확인할 수 있게 — 자료 하나가 유난히 많이 잘렸으면 의심해 볼 신호다.
+   */
+  readonly documents?: { total: number; kept: number; removedCharsByDoc: number[] };
+}
+
+const EMPTY_RESULT: SourceNoiseFilterResult = {
+  text: '', removedLines: 0, removedFragments: 0, removedTailChars: 0, changed: false,
+};
+
+/** 줄·조각 단위 정리만 한다. 꼬리 절단은 호출부가 스코프를 정해서 따로 건다. */
+function cleanLines(source: string): { text: string; removedLines: number; removedFragments: number } {
+  let removedLines = 0;
+  let removedFragments = 0;
+  const kept: string[] = [];
+
+  for (const line of source.split('\n')) {
+    const trimmed = line.trim();
+    // [2026-08-26 회귀] 길이 제한 없이 줄을 지우는 규칙을 뒀다가 기사 한 편이 통째로
+    //   날아갔다. 크롤러는 textContent 로 본문을 뽑아 줄바꿈이 거의 없는 한 덩어리를
+    //   만드는데, 그 덩어리 끝의 "무단전재 및 재배포 금지"가 걸려 전체가 삭제됐다
+    //   (사용자 실측: "원본 텍스트가 비어 있습니다"). 줄 삭제는 짧은 줄에만 건다.
+    //   긴 줄의 껍데기는 아래 조각 제거가 담당한다.
+    const isNoiseLine = trimmed
+      && trimmed.length <= MAX_NOISE_LINE_LENGTH
+      && NOISE_LINE_PATTERNS.some((re) => re.test(trimmed));
+    if (isNoiseLine) {
+      removedLines++;
+      continue;
+    }
+    let next = line;
+    // 삭제보다 먼저 — 지우면 사라질 사실(발행일)을 읽을 수 있는 형태로 남긴다.
+    for (const { re, to } of NOISE_INLINE_REWRITES) {
+      next = next.replace(re, (...args) => {
+        removedFragments++;
+        return to(args as unknown as RegExpMatchArray);
+      });
+    }
+    for (const re of NOISE_INLINE_PATTERNS) {
+      next = next.replace(re, () => {
+        removedFragments++;
+        return ' ';
+      });
+    }
+    kept.push(next.replace(/[ \t]{2,}/g, ' '));
+  }
+
+  const cleaned = kept.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  return { text: cleaned, removedLines, removedFragments };
 }
 
 /*
@@ -191,20 +250,28 @@ const MIN_BODY_CHARS = 400;
 const MIN_BODY_RATIO = 0.25;
 
 /**
- * Cuts everything after the earliest end-of-body marker.
- *
- * Returns the text unchanged when no marker is found, or when cutting there would
- * take the article with it — a copyright line at the top must not truncate the piece.
+ * [2026-09-22] 한 자료 안에서 꼬리 절단이 그 자료 몸통의 대부분을 먹어치우면
+ * 안전장치를 건다 — 진짜 사이트 껍데기는 자료 하나를 통째로 차지하지 않는다.
+ * 이 표지가 자료 본문 자체의 문구("무단 전재된 사진을 다뤘다" 류)와 우연히 겹쳤을
+ * 때를 잡아낸다.
  */
-/**
+const BODY_TAIL_CUT_SAFETY_RATIO = 0.6;
+
+/*
  * Marks where the deliberately-attached supplement begins.
  *
  * [2026-08-27 뉴스픽 실측] 절단이 보강 자료를 통째로 날렸다.
  *   원본 1,072자 + 보강 2,681자 = 3,753자 → 절단 후 1,015자.
  * 원본 끝의 저작권 표시에서 자르면서 그 뒤에 붙여 둔 블로그 자료까지 사라졌다.
  * 절단은 기사 본문의 끝을 찾는 장치지, 우리가 의도적으로 붙인 자료를 지우는 장치가 아니다.
+ *
+ * [2026-09-22] 묶음 표지를 더했다 — "=== 사실 자료", "=== 검색 결과 스니펫",
+ * "[자료 N" 앞에서도 멈춘다. 이 경로(레거시/단일 블록 처리)는 parseLegacyMaterialBundle
+ * 이 자료를 하나도 못 찾았을 때만 타므로 사실상 방어용이지만, 형태가 살짝 어긋난
+ * 입력에도 안전망이 있어야 한다.
  */
-const SUPPLEMENT_BOUNDARY = /(?:^|\n)\s*(?:---\s*참고 자료|===\s*상위 노출 글 본문 발췌)/;
+const SUPPLEMENT_BOUNDARY =
+  /(?:^|\n)\s*(?:---\s*참고 자료|===\s*상위 노출 글 본문 발췌|===\s*사실 자료|===\s*검색 결과 스니펫|\[자료 \d+)/;
 
 function cutTrailingChrome(text: string): { text: string; cutChars: number } {
   // 보강 구간은 손대지 않는다. 기사 본문 쪽만 잘라 내고 그대로 다시 붙인다.
@@ -225,61 +292,136 @@ function cutTrailingChrome(text: string): { text: string; cutChars: number } {
   return { text: text.slice(0, earliest), cutChars: text.length - earliest };
 }
 
-export function stripSourceNoise(rawText: string | null | undefined): SourceNoiseFilterResult {
-  const original = String(rawText ?? '');
-  if (!original.trim()) {
-    return { text: original, removedLines: 0, removedFragments: 0, removedTailChars: 0, changed: false };
+/**
+ * 자료 하나(문서 하나)의 몸통에만 적용하는 꼬리 절단. cutTrailingChrome 과 달리
+ * 이 함수는 다른 자료로 번지지 않는다 — 호출부가 이미 그 자료의 몸통만 넘긴다.
+ */
+function cutTrailingChromeScoped(text: string): { text: string; cutChars: number } {
+  let earliest = -1;
+  for (const re of BODY_END_MARKERS) {
+    const at = text.search(re);
+    if (at >= 0 && (earliest < 0 || at < earliest)) earliest = at;
+  }
+  if (earliest < 0) return { text, cutChars: 0 };
+  if (earliest < MIN_BODY_CHARS) return { text, cutChars: 0 };
+  if (earliest < text.length * MIN_BODY_RATIO) return { text, cutChars: 0 };
+
+  const cutChars = text.length - earliest;
+  if (cutChars > text.length * BODY_TAIL_CUT_SAFETY_RATIO) {
+    console.log(
+      `[SourceNoise] 꼬리 절단 건너뜀 — ${cutChars}자는 자료 본문(${text.length}자)의 `
+      + `${BODY_TAIL_CUT_SAFETY_RATIO * 100}%를 넘는다 (진짜 껍데기는 자료 하나를 통째로 차지하지 않는다)`,
+    );
+    return { text, cutChars: 0 };
+  }
+  return { text: text.slice(0, earliest), cutChars };
+}
+
+/**
+ * 로그 한 줄로 절단 규모를 알린다. removed_ratio 가 30%를 넘으면 경고, 50%를
+ * 넘으면 품질 게이트 급 신호를 접두어로 붙인다. 지운 게 없으면 조용히 넘어간다.
+ */
+function logNoiseSummary(docsCount: number, rawChars: number, cleanChars: number): void {
+  const removedChars = rawChars - cleanChars;
+  if (removedChars <= 0) return;
+  const removedRatio = rawChars > 0 ? (removedChars / rawChars) * 100 : 0;
+  const ratioLabel = removedRatio.toFixed(1);
+  let prefix = '';
+  if (removedRatio > 50) prefix = '⛔ QUALITY_GATE_WEAK ';
+  else if (removedRatio > 30) prefix = '⚠️ WARNING ';
+  console.log(
+    `${prefix}[SourceNoise] docs=${docsCount} raw_chars=${rawChars} clean_chars=${cleanChars} `
+    + `removed_chars=${removedChars} removed_ratio=${ratioLabel}%`,
+  );
+}
+
+/**
+ * 자료 하나(하나의 SourceDocument.body)에만 적용하는 노이즈 제거.
+ * 꼬리 절단은 이 몸통 안에서만 일어나고, 안전망(전부 지워지면 원문 유지)도
+ * 이 몸통 단위로 건다 — 자료 A의 실패가 자료 B를 건드리지 않는다.
+ */
+export function stripSourceNoiseFromBody(body: string | null | undefined): SourceNoiseFilterResult {
+  const original = String(body ?? '');
+  if (!original.trim()) return { ...EMPTY_RESULT, text: original };
+
+  const tail = cutTrailingChromeScoped(original);
+  const { text: cleaned, removedLines, removedFragments } = cleanLines(tail.text);
+
+  // 안전망: 필터가 이 자료 하나를 통째로 비우면 그건 필터가 틀린 것이다. 원문을 지킨다.
+  if (!cleaned && original.trim()) {
+    console.warn('[SourceNoise] 필터가 자료 본문을 전부 지웠다 — 그 자료는 원문을 그대로 쓴다.');
+    return { ...EMPTY_RESULT, text: original };
   }
 
+  return {
+    text: cleaned,
+    removedLines,
+    removedFragments,
+    removedTailChars: tail.cutChars,
+    changed: cleaned !== original.trim(),
+  };
+}
+
+/**
+ * 묶음(여러 자료)을 알아봤을 때 경로. 자료마다 stripSourceNoiseFromBody 를 따로 걸고,
+ * 서두(등급 안내·"=== 사실 자료 ===" 표제·※ 안내문)와 스니펫 구간은 손대지 않고
+ * 그대로 되돌린다 — 노이즈 제거는 자료 본문의 일이지, 우리가 붙인 안내문의 일이 아니다.
+ */
+function stripSourceNoiseBlockAware(
+  original: string,
+  parsed: { documents: { title: string; body: string }[]; preamble: string; snippetSection: string },
+): SourceNoiseFilterResult {
+  let removedLines = 0;
+  let removedFragments = 0;
+  let removedTailChars = 0;
+  const removedCharsByDoc: number[] = [];
+  const renderedDocs: string[] = [];
+
+  for (const doc of parsed.documents) {
+    const result = stripSourceNoiseFromBody(doc.body);
+    removedLines += result.removedLines;
+    removedFragments += result.removedFragments;
+    removedTailChars += result.removedTailChars;
+    removedCharsByDoc.push(Math.max(0, doc.body.length - result.text.length));
+    const header = `[자료 ${renderedDocs.length + 1}${doc.title ? ` — ${doc.title}` : ''}]`;
+    renderedDocs.push(`${header}\n${result.text}`);
+  }
+
+  const rebuilt = [parsed.preamble, renderedDocs.join('\n\n'), parsed.snippetSection]
+    .filter((part) => part.trim().length > 0)
+    .join('\n\n')
+    .trim();
+
+  logNoiseSummary(parsed.documents.length, original.length, rebuilt.length);
+
+  return {
+    text: rebuilt,
+    removedLines,
+    removedFragments,
+    removedTailChars,
+    changed: rebuilt !== original.trim(),
+    documents: { total: parsed.documents.length, kept: parsed.documents.length, removedCharsByDoc },
+  };
+}
+
+/** 묶음 구조를 못 찾았을 때의 예전 경로 — 텍스트 전체를 한 덩어리로 다룬다. */
+function stripSourceNoiseLegacyPath(original: string): SourceNoiseFilterResult {
   const tail = cutTrailingChrome(original);
   const source = tail.text;
   if (tail.cutChars > 0) {
     console.log(`[SourceNoise] 본문 뒤 사이트 껍데기 ${tail.cutChars}자 절단`);
   }
 
-  let removedLines = 0;
-  let removedFragments = 0;
-
-  const kept: string[] = [];
-  for (const line of source.split('\n')) {
-    const trimmed = line.trim();
-    // [2026-08-26 회귀] 길이 제한 없이 줄을 지우는 규칙을 뒀다가 기사 한 편이 통째로
-    //   날아갔다. 크롤러는 textContent 로 본문을 뽑아 줄바꿈이 거의 없는 한 덩어리를
-    //   만드는데, 그 덩어리 끝의 "무단전재 및 재배포 금지"가 걸려 전체가 삭제됐다
-    //   (사용자 실측: "원본 텍스트가 비어 있습니다"). 줄 삭제는 짧은 줄에만 건다.
-    //   긴 줄의 껍데기는 아래 조각 제거가 담당한다.
-    const isNoiseLine = trimmed
-      && trimmed.length <= MAX_NOISE_LINE_LENGTH
-      && NOISE_LINE_PATTERNS.some((re) => re.test(trimmed));
-    if (isNoiseLine) {
-      removedLines++;
-      continue;
-    }
-    let next = line;
-    // 삭제보다 먼저 — 지우면 사라질 사실(발행일)을 읽을 수 있는 형태로 남긴다.
-    for (const { re, to } of NOISE_INLINE_REWRITES) {
-      next = next.replace(re, (...args) => {
-        removedFragments++;
-        return to(args as unknown as RegExpMatchArray);
-      });
-    }
-    for (const re of NOISE_INLINE_PATTERNS) {
-      next = next.replace(re, () => {
-        removedFragments++;
-        return ' ';
-      });
-    }
-    kept.push(next.replace(/[ \t]{2,}/g, ' '));
-  }
-
-  const cleaned = kept.join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  const { text: cleaned, removedLines, removedFragments } = cleanLines(source);
 
   // [2026-08-26] 마지막 안전망. 내용이 있던 원문이 통째로 비면 그건 필터가 틀린 것이다.
   //   껍데기 한 줄이 남는 것보다 기사 한 편을 잃는 쪽이 훨씬 나쁘다 — 원문을 그대로 쓴다.
   if (!cleaned && original.trim()) {
     console.warn('[SourceNoise] 필터가 원문을 전부 지웠다 — 원문을 그대로 쓴다.');
-    return { text: original, removedLines: 0, removedFragments: 0, removedTailChars: 0, changed: false };
+    return { ...EMPTY_RESULT, text: original };
   }
+
+  logNoiseSummary(1, original.length, cleaned.length);
 
   return {
     text: cleaned,
@@ -289,4 +431,15 @@ export function stripSourceNoise(rawText: string | null | undefined): SourceNois
     // 원문과 다르면 무언가 지운 것이다. 카운터 합계로 판단하면 꼬리 절단을 놓친다.
     changed: cleaned !== original.trim(),
   };
+}
+
+export function stripSourceNoise(rawText: string | null | undefined): SourceNoiseFilterResult {
+  const original = String(rawText ?? '');
+  if (!original.trim()) return { ...EMPTY_RESULT, text: original };
+
+  const parsed = parseLegacyMaterialBundle(original);
+  if (parsed && parsed.documents.length > 0) {
+    return stripSourceNoiseBlockAware(original, parsed);
+  }
+  return stripSourceNoiseLegacyPath(original);
 }

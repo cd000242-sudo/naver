@@ -935,7 +935,7 @@ contextBridge.exposeInMainWorld('api', {
   }> =>
     ipcRenderer.invoke('image:downloadAndSaveMultiple', images, title, options),
   // 여러 플랫폼에서 콘텐츠 수집 (할루시네이션 방지)
-  collectContentFromPlatforms: (keyword: string, options?: { maxPerSource?: number }): Promise<{ success: boolean; collectedText?: string; sourceCount?: number; urls?: string[]; message?: string }> =>
+  collectContentFromPlatforms: (keyword: string, options?: { maxPerSource?: number }): Promise<{ success: boolean; collectedText?: string; sourceCount?: number; urls?: string[]; message?: string; sourceDocuments?: unknown[]; searchStatus?: { overall: string; summary: string; perSource?: unknown[] } }> =>
     ipcRenderer.invoke('content:collectFromPlatforms', keyword, options),
 
   // 저장된 이미지 관리

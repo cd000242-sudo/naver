@@ -1185,18 +1185,37 @@ export async function generateContentFromKeywords(
     ]);
   };
 
+  // [2026-09-22 audit P0] structured sources + honest search status travel with the payload.
+  let collectedSourceDocuments: unknown[] | undefined;
+  let collectedSearchStatus: { overall: string; summary: string; perSource?: unknown[] } | undefined;
+  const noteCrawlResult = (result: any): void => {
+    if (Array.isArray(result?.sourceDocuments) && result.sourceDocuments.length > 0) {
+      collectedSourceDocuments = result.sourceDocuments;
+    }
+    if (result?.searchStatus && typeof result.searchStatus === 'object') {
+      collectedSearchStatus = result.searchStatus;
+      const overall = String(result.searchStatus.overall || '');
+      const summary = String(result.searchStatus.summary || '');
+      if (overall && overall !== 'SEARCH_OK') {
+        appendLog(`🔎 검색 상태: ${overall}${summary ? ` — ${summary}` : ''}`);
+      }
+    }
+  };
+
   if (useRealtimeCrawl && searchQuery) {
     try {
       showUnifiedProgress(5, '🌐 실시간 정보 수집 중...', '네이버 뉴스, 블로그, 카페, 구글 뉴스에서 최신 정보 검색');
       appendLog('🌐 실시간 정보 수집 시작 - URL 기반과 동등한 품질 보장을 위해 다양한 소스 검색 중...');
 
       // ✅ 더 많은 소스에서 수집하여 URL 기반과 동등한 품질 보장
-      // ✅ 항상 오늘 날짜 기준으로 크롤링 (최신 정보만 수집)
       const todayDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD 형식
       const targetCrawlDate = scheduleDate || todayDate; // 예약 발행 날짜가 있으면 그걸 사용, 없으면 오늘
       const crawlOptions: any = { maxPerSource: 10, targetDate: targetCrawlDate };
-      appendLog(`📅 ${scheduleDate ? '발행 날짜' : '오늘 날짜'} 기준 크롤링: ${targetCrawlDate} (최근 30일 이내 자료만 수집)`);
+      // [2026-09-22 audit H8] The old log claimed "최근 30일 이내 자료만 수집" — the Naver search API
+      //   ignores date parameters. Freshness is applied per document downstream (applyFreshnessPolicy).
+      appendLog(`📅 ${scheduleDate ? '발행 날짜' : '오늘 날짜'} 기준: ${targetCrawlDate} (자료 게시일은 수집 후 개별 표시·필터)`);
       const crawlResult = await withTimeout(window.api.collectContentFromPlatforms(searchQuery, crawlOptions), 30000, '실시간 크롤링');
+      noteCrawlResult(crawlResult);
 
       if (crawlResult.success && crawlResult.collectedText) {
         crawledText = crawlResult.collectedText;
@@ -1212,6 +1231,9 @@ export async function generateContentFromKeywords(
             try {
               const additionalResult = await withTimeout(window.api.collectContentFromPlatforms(title, { maxPerSource: 5 }), 20000, '추가 크롤링');
               if (additionalResult.success && additionalResult.collectedText) {
+                if (Array.isArray(additionalResult.sourceDocuments) && additionalResult.sourceDocuments.length > 0) {
+                  collectedSourceDocuments = [...(collectedSourceDocuments || []), ...additionalResult.sourceDocuments];
+                }
                 crawledText += '\n\n[추가 수집 정보]\n' + additionalResult.collectedText;
                 appendLog(`✅ 추가 정보 수집: ${additionalResult.sourceCount}개 소스에서 ${additionalResult.collectedText.length}자 추가`);
               }
@@ -1227,6 +1249,7 @@ export async function generateContentFromKeywords(
           appendLog('🔄 제목으로 재시도 중...');
           try {
             const fallbackResult = await withTimeout(window.api.collectContentFromPlatforms(title, { maxPerSource: 8 }), 25000, '폴백 크롤링');
+            noteCrawlResult(fallbackResult);
             if (fallbackResult.success && fallbackResult.collectedText) {
               crawledText = fallbackResult.collectedText;
               appendLog(`✅ 제목 기반 수집 성공: ${fallbackResult.sourceCount}개 소스에서 ${crawledText.length}자 수집`);
@@ -1235,6 +1258,7 @@ export async function generateContentFromKeywords(
               appendLog('🔄 [재시도] 같은 키워드로 다시 검색합니다 (소스 수 증가)...');
               try {
                 const retryResult = await withTimeout(window.api.collectContentFromPlatforms(searchQuery, { maxPerSource: 15 }), 25000, '재시도 크롤링');
+                noteCrawlResult(retryResult);
                 if (retryResult.success && retryResult.collectedText && retryResult.collectedText.length >= 300) {
                   crawledText = retryResult.collectedText;
                   appendLog(`✅ 재시도 성공: ${retryResult.sourceCount}개 소스에서 ${crawledText.length}자 수집`);
@@ -1364,6 +1388,10 @@ export async function generateContentFromKeywords(
         : `${recencyDirective}\n[주제 고정 규칙]\n- 이 글의 주제는 반드시 "${normalizedKeywords.primaryKeyword || (title || '').trim()}" 하나로만 유지하세요.\n- 키워드 입력에 다른 이슈/사건/인물/회사명이 섞여 있어도 절대 다른 주제로 넘어가지 마세요.\n`,
       // ✅ 실시간 정보가 있으면 더 정확한 글 생성 지시
       useRealTimeInfo: !!crawledText,
+      // [2026-09-22 audit P0] structured documents + honest search status + "real-time material was expected"
+      sourceDocuments: collectedSourceDocuments,
+      searchStatus: collectedSearchStatus,
+      realtimeCrawlRequested: useRealtimeCrawl === true,
       sourceInfo: crawledText ? `"${searchQuery}"에 대한 실시간 수집 정보 기반` : undefined,
       // [2026-05-27] 통합 #custom-prompt-input — 모든 모드 공통, 모드별 localStorage 분리 저장.
       //   백엔드 contentGenerator.ts L2164: customPrompt 있으면 모드 무관 사용자 프롬프트 분기 진입.

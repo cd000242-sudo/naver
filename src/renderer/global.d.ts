@@ -709,7 +709,7 @@ interface AutomationAPI {
     error?: string;
   }>; // ✅ 여러 이미지 일괄 저장
   // 여러 플랫폼에서 콘텐츠 수집 (할루시네이션 방지)
-  collectContentFromPlatforms: (keyword: string, options?: { maxPerSource?: number }) => Promise<{ success: boolean; collectedText?: string; sourceCount?: number; urls?: string[]; message?: string }>;
+  collectContentFromPlatforms: (keyword: string, options?: { maxPerSource?: number }) => Promise<{ success: boolean; collectedText?: string; sourceCount?: number; urls?: string[]; message?: string; sourceDocuments?: unknown[]; searchStatus?: { overall: string; summary: string; perSource?: unknown[] } }>;
   // 저장된 이미지 관리
   getSavedImagesPath: () => Promise<string>;
   getSavedImages: (dirPath: string) => Promise<{ success: boolean; images?: string[]; message?: string }>;
