@@ -202,6 +202,7 @@ async function generateStage(ctx, keyword, mode) {
     postDeletedChars: history.reduce((s, h) => s + (h.deletedChars || 0), 0),
     postDeletedSentences: history.reduce((s, h) => s + ((h.deletedSentences || []).length), 0),
     ...fact, title: content?.selectedTitle,
+    qualityLoop: meta?.extra?.qualityLoop || null,
     files: runDir ? fs.readdirSync(runDir) : [],
   };
   fs.writeFileSync(path.join(outDir, `${keyword.replace(/[\\/:*?"<>|]/g, '_')}-generate.json`), JSON.stringify(row, null, 2));
