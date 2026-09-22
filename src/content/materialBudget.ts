@@ -39,3 +39,25 @@ export function resolveBlueprintMaterial(source: MaterialSource | null | undefin
   const chosen = long.length > 0 ? long : short;
   return chosen.slice(0, MATERIAL_BUDGET.blueprintMaxChars);
 }
+
+/**
+ * [2026-09-23 Quality Fix 1] 설계도가 **걸러지기 전** 재료를 보던 구멍을 막는다.
+ *
+ * `blueprintMaterial` 은 수집 원문(baseText)이라 관련도 파이프라인이 **탈락시킨 문서**까지 들어 있다.
+ * 실측(20260922-194812 등 정책 3편): 인터뷰 기사 S01 이 탈락해 본문 재료([원본 텍스트]·리서치 요약)에는
+ * 없는데, 설계도가 거기서 "취업준비생 정모(26)씨" 발언을 인용으로 뽑아 프롬프트에 실었고 본문에 그대로
+ * 들어갔다. Critic·Judge 는 그 인용을 "자료에 없는 인용" 으로 잡았다 — 맞는 지적이었다.
+ *
+ * 파이프라인이 실제로 문서를 채택했을 때만 교체한다. URL 모드처럼 구조화 문서가 없으면 원래 재료를 둔다.
+ */
+export function groundBlueprintMaterial<T extends MaterialSource>(
+  source: T,
+  pipelineText: string,
+  acceptedDocuments: number,
+): T {
+  const text = String(pipelineText || '');
+  if (acceptedDocuments <= 0 || text.trim().length === 0) return source;
+  const current = typeof source.blueprintMaterial === 'string' ? source.blueprintMaterial : '';
+  if (current === text) return source;
+  return { ...source, blueprintMaterial: text };
+}

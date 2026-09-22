@@ -434,7 +434,7 @@ import { recoverLooseStructuredContentFields } from './contentStructuredRecovery
 import { validateStructuredContent } from './contentStructuredValidator';
 import { isOpenAiReasoningModel } from './runtime/openaiReasoningFamily.js';
 import { auditAffiliateTitleShape, isStoreProductShapedKeyword } from './content/affiliateTitleShape.js';
-import { resolveBlueprintMaterial } from './content/materialBudget.js';
+import { resolveBlueprintMaterial, groundBlueprintMaterial } from './content/materialBudget.js';
 import {
   buildGeminiEmptyResponseUserMessage,
 } from './contentGenerationUserGuidance';
@@ -9140,6 +9140,15 @@ export async function generateStructuredContent(
       source = { ...source, metadata: { ...(source.metadata || {}), sourceDocuments: pipeline.documents } };
     }
   }
+  // [2026-09-23 Quality Fix 1] 설계도도 채택된 자료만 본다. 이전에는 수집 원문(baseText)을 받아
+  //   관련도 파이프라인이 탈락시킨 기사에서 인용을 뽑아 본문에 실었다(정책 3편 "정모(26)씨" 인터뷰).
+  {
+    const groundedSource = groundBlueprintMaterial(source as any, pipeline.rawText, pipeline.documents.length);
+    if (groundedSource !== (source as any)) {
+      source = groundedSource as typeof source;
+      console.log(`[SourcePipeline] 설계도 재료를 채택 자료(${pipeline.metrics.acceptedSources}건)로 교체 — 탈락 자료 인용 차단`);
+    }
+  }
   const sourceBased = (source.metadata as any)?.realtimeCrawlRequested === true
     || (source.metadata as any)?.useRealTimeInfo === true
     || pipeline.metrics.rawSources > 0;
@@ -9224,6 +9233,8 @@ export async function generateStructuredContent(
       sourceBased,
       sourceDocuments: Array.isArray((source.metadata as any)?.sourceDocuments) ? (source.metadata as any).sourceDocuments : [],
       rawCorpus: String(source.rawText || ''),
+      // Blueprint material (raw collected text) — the Writer's blueprint quotes/facts came from it.
+      extraMaterial: String((source as any).blueprintMaterial || ''),
       relatedKeywords: Array.isArray((source.metadata as any)?.keywords) ? (source.metadata as any).keywords.slice(1).map((k: unknown) => String(k)) : [],
       relatedKeywordsAreLlmExpanded: ['upgrade-analysis', 'url-mode-llm'].includes(String((source.metadata as any)?.keywordOrigin || '')),
       run,

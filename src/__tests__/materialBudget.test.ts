@@ -21,7 +21,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'fs';
-import { resolveBlueprintMaterial, MATERIAL_BUDGET } from '../content/materialBudget';
+import { resolveBlueprintMaterial, groundBlueprintMaterial, MATERIAL_BUDGET } from '../content/materialBudget';
 
 describe('resolveBlueprintMaterial — 설계도에는 긴 재료를, 본문에는 짧은 재료를', () => {
   const long = 'ㄱ'.repeat(25_000);
@@ -88,5 +88,29 @@ describe('배선 핀 — 설계도만 긴 재료를 받는다', () => {
 
   it('본문 프롬프트의 원문 상한은 그대로 10,000자 — 본문 호출을 키우지 않는 것이 핵심이다', () => {
     expect(live('../renderer/modules/contentGeneration.ts', 'crawledText.substring(0, 10000)')).toBeGreaterThan(0);
+  });
+
+  it('[Quality Fix 1] 생성기가 파이프라인 통과 후 설계도 재료를 채택 자료로 교체한다', () => {
+    expect(live('../contentGenerator.ts', 'groundBlueprintMaterial(')).toBeGreaterThan(0);
+  });
+});
+
+describe('groundBlueprintMaterial — 설계도는 탈락 자료를 보지 않는다 (live 20260922-194812)', () => {
+  const rejected = '취업준비생 정모(26)씨는 "예·적금만으로 돈을 불리기 쉽지 않은 세상"이라고 말했다.';
+  const accepted = '[자료 S02] 청년미래적금 2차 신청은 10월 7일부터 16일까지다.';
+
+  it('파이프라인이 문서를 채택했으면 설계도 재료를 채택 본문으로 교체한다', () => {
+    const source = { rawText: accepted, blueprintMaterial: `${accepted} ${rejected}` };
+    const grounded = groundBlueprintMaterial(source, accepted, 6);
+    expect(grounded).not.toBe(source);
+    expect(resolveBlueprintMaterial(grounded)).toBe(accepted);
+    expect(resolveBlueprintMaterial(grounded)).not.toContain('정모');
+    expect(source.blueprintMaterial).toContain('정모');
+  });
+
+  it('채택 문서가 없거나(URL 모드) 파이프라인 본문이 비면 원래 재료를 유지한다', () => {
+    const source = { rawText: '', blueprintMaterial: rejected };
+    expect(groundBlueprintMaterial(source, accepted, 0)).toBe(source);
+    expect(groundBlueprintMaterial(source, '   ', 3)).toBe(source);
   });
 });

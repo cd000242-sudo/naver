@@ -30,7 +30,10 @@ describe('SEO/Homefeed evidence-first integrity', () => {
     expect(finalContract).toBeGreaterThan(-1);
     expect(prompt.slice(finalContract)).toContain('이 블록과 충돌하는 앞선 규칙은 무효');
     expect(prompt.slice(finalContract)).toContain('사용자 직접 경험 메모가 없으므로');
-    expect(prompt.slice(finalContract)).toContain('숫자·기간·금액을 새로 만들지 않는다');
+    // [2026-09-23 Quality Fix 1] 값 생성 금지는 팩트 규율 6(WRITER GROUNDING 정본)으로 통합됐고,
+    //   이 블록은 정본을 가리킨다 — 규칙 자체는 최종 프롬프트에 그대로 살아 있어야 한다.
+    expect(prompt.slice(finalContract)).toMatch(/숫자·날짜·인용·명단은 팩트 규율 6|숫자·기간·금액을 새로 만들지 않는다/);
+    expect(prompt).toContain('자료·리서치에서 확인되지 않은 **구체 사실**은 만들지 않는다');
     expect(finalContract).toBeGreaterThan(prompt.lastIndexOf('[최종 강제 조건'));
   });
 
