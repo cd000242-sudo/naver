@@ -255,7 +255,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   3줄 제거로 재계산
         // [2026-09-22 P1 4b-2] official-exposure-rubric.prompt(영어 2,510자) + seo-90-quality.prompt
         //   (영어 881자) → 한국어 5줄 우선순위 블록 + SEO 전용 1줄로 축소(A#8/B#6)로 재계산
-        '1a8c948f0dbae5ac48510a5fe7d837f213d64fda4d45b332b9f0ca5671e82595',
+        // [2026-09-22 P1 홈판 병합] TITLE/GAMMA-7/RETENTION 정본화, ISSUE-STORY 통계 압축, MODE VOICE·90+·상위노출 원칙·
+        //   구조 규칙·제목 조건 중복 제거, SD 오버레이 홈판 제외로 재계산
+        'eb24ef0bd5d34395c4019fca7c625fa661426f332f943336f05e08a7ae1c05d7',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

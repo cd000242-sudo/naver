@@ -5,18 +5,33 @@
 
 import { describe, expect, it } from 'vitest';
 
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { buildHomefeedExposureSkeleton } from '../content/homefeedExposurePattern';
+
+// [2026-09-22 P1 홈판 병합] 이 블록이 되풀이하던 첫 화면·주체 공개·팩트·CTA 규칙은 homefeed base 의
+//   [GAMMA-7]/[TITLE]/[SECTION -2]/[RETENTION] 정본으로 옮겼다. 단언은 "문구가 이 블록에 있다"가 아니라
+//   "규칙이 정본에 1회 존재하고 이 블록은 되풀이하지 않는다"로 바꿨다(semantic assertion).
+const homefeedBase = readFileSync(resolve(__dirname, '../prompts/homefeed/base.prompt'), 'utf8');
+const section = (name: string): string => {
+  const start = homefeedBase.indexOf(name);
+  const next = homefeedBase.indexOf('\n[', start + 1);
+  return homefeedBase.slice(start, next < 0 ? undefined : next);
+};
 
 describe('buildHomefeedExposureSkeleton', () => {
   const block = buildHomefeedExposureSkeleton();
 
-  it('keeps the opening useful without forcing a fixed viral structure', () => {
-    expect(block).toContain('구체 상황과 핵심 답');
-    expect(block).toContain('주체를 생략했다면');
+  it('keeps the opening useful without forcing a fixed viral structure (canonical rules live in base)', () => {
+    expect(section('[GAMMA-7]')).toContain('독자가 실제로 겪는 상황');
+    expect(section('[TITLE]')).toContain('도입 3~5줄 안에 주체를 공개한다');
     expect(block).toContain('2~3문장');
     expect(block).toContain('서로 다른 정보 단위');
-    expect(block).toContain('필요 없으면 넣지 않는다');
+    expect(section('[RETENTION]')).toContain('행동 유도가 필요 없는 글은');
     expect(block).not.toContain('도입 4단 구성');
+    // 정본으로 옮긴 규칙을 이 블록이 다시 말하지 않는다
+    expect(block).not.toContain('구체 상황과 핵심 답을 함께 보여준다');
+    expect(block).not.toContain('주체를 생략했다면');
   });
 
   it('keeps the selected voice without quota-driven interjections', () => {
@@ -25,9 +40,10 @@ describe('buildHomefeedExposureSkeleton', () => {
     expect(block).not.toContain('3회 이하');
   });
 
-  it('forbids unsupported facts and experience', () => {
-    expect(block).toContain('날조');
-    expect(block).toContain('입력 자료와 정확히 일치');
+  it('forbids unsupported facts and experience (canonical: base [SECTION -2] / [TITLE])', () => {
+    expect(section('[SECTION -2]')).toContain('입력 원문, 사용자 메모, 확인된 검색 자료에 없는 숫자');
+    expect(section('[TITLE]')).toContain('입력 근거가 있을 때만 제목에 쓴다');
+    expect(block).not.toContain('날조');
   });
 
   it('exposes the marker that buildFullPrompt gates on for homefeed', () => {

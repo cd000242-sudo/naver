@@ -86,8 +86,10 @@ describe('tone persona naturalness', () => {
     expect(prompt).toContain('내 얘기 같은 첫 화면');
     expect(prompt).toContain('저장할 이유');
     expect(prompt).toContain('댓글 달 거리');
-    expect(prompt).toContain('구체적인 독자 상황 또는 판단 기준');
-    expect(prompt).toContain('억지로 넣지 않는다');
+    // [2026-09-22 P1 홈판 병합] MODE VOICE 의 "우선 요소" 재진술을 뺐다 — 멈춤 요소·억지 CTA 금지 규칙의 정본은
+    //   [GAMMA-7](독자 상황·판단 기준) 과 [RETENTION](하나만, 필요 없으면 넣지 않는다) 이다.
+    expect(prompt).toMatch(/독자가 실제로 겪는 상황이나 헷갈리는 지점|이 글에서 바로 얻을 답 또는 판단 기준/);
+    expect(prompt).toMatch(/행동 유도가 필요 없는 글은|의무적으로 끼워 넣지 않는다/);
     expect(prompt).toContain('모바일 피드 리듬');
     expect(prompt.lastIndexOf('■ 근거 제한 (페르소나보다 우선)'))
       .toBeGreaterThan(prompt.lastIndexOf('■ 페르소나:'));
