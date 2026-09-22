@@ -522,6 +522,7 @@ try {
     'headingImageGen.js',
     'imageDisplayGrid.js',
     'accountSettingsManager.js',  // ✅ [2026-03-24] 계정별 설정 관리 (licenseUI보다 먼저 로드 필수 - onAccountLogin/onAccountLogout 의존)
+    'globalResetPlan.js',         // ✅ [2026-09-23] 전체 초기화 정책 (licenseUI보다 먼저 로드 필수 - collectWorkStorageKeys 의존)
     'licenseUI.js',
     'scheduleManager.js',
     'localImageModals.js',

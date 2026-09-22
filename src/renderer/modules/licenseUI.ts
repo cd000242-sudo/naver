@@ -6,6 +6,7 @@
 import { toastManager } from '../utils/uiManagers.js';
 import { initAccountSettings, onAccountLogin, onAccountLogout } from './accountSettingsManager.js';
 import { FREE_TRIAL_DAILY_PUBLISH_LIMIT } from '../../freeTrialPolicy.js';
+import { collectWorkStorageKeys } from './globalResetPlan.js';
 
 // TS 컴파일용 — 런타임에서는 renderer.ts의 동일 스코프 함수 사용
 declare function appendLog(message: string, logOutputId?: string): void;
@@ -439,7 +440,9 @@ export function initGlobalRefreshButton(): void {
         globalRefreshBtn.addEventListener('click', () => {
             const confirmed = window.confirm(
                 '⚠️ 전체 초기화\n\n' +
-                '모든 입력 필드, 생성된 콘텐츠, 로그가 초기화됩니다.\n' +
+                '모든 입력 필드, 생성된 콘텐츠, 로그가 초기화되고\n' +
+                '화면이 다시 시작됩니다 (앱을 껐다 켠 상태와 같습니다).\n' +
+                '실행 중인 생성·발행 작업이 있으면 중단됩니다.\n' +
                 '(설정, 네이버 계정, 생성된 글 목록은 유지됩니다)\n\n' +
                 '정말 초기화하시겠습니까?'
             );
@@ -565,13 +568,17 @@ export function performGlobalRefresh(): void {
             console.warn('[performGlobalRefresh] IPC 이미지 상태 초기화 실패:', ipcErr);
         }
 
-        // 9. 임시 저장 데이터 삭제
+        // 9. 임시 저장 데이터 삭제 — 리로드 전에 지워야 부팅 때 지난 원고가 되살아나지 않는다.
+        //    설정 키(imageRatio·ftcDisclosure*·모델 선택 …)는 껐다 켜도 남는 값이라 건드리지 않는다.
         try {
-            localStorage.removeItem('autosave_unified_url');
-            localStorage.removeItem('autosave_unified_keywords');
-            localStorage.removeItem('autosave_unified_title');
-            localStorage.removeItem('autosave_unified_content');
-            localStorage.removeItem('autosave_unified_hashtags');
+            const allKeys: string[] = [];
+            for (let i = 0; i < localStorage.length; i += 1) {
+                const key = localStorage.key(i);
+                if (key) allKeys.push(key);
+            }
+            for (const key of collectWorkStorageKeys(allKeys)) localStorage.removeItem(key);
+            // 세션 저장소는 껐다 켜면 통째로 사라지는 값이다 — 초기화도 같아야 한다.
+            sessionStorage.clear();
         } catch (e) {
             // localStorage 접근 실패 시 무시
         }
@@ -596,15 +603,38 @@ export function performGlobalRefresh(): void {
         appendLog('✅ 전체 초기화가 완료되었습니다! (네이버 계정 정보는 유지됨)');
         toastManager.success('✅ 전체 초기화 완료!');
 
-        // 성공 메시지 표시 후 로그도 초기화
-        setTimeout(() => {
-            logOutputs.forEach(id => {
-                const logElement = document.getElementById(id);
-                if (logElement) {
-                    logElement.innerHTML = '<div class="log-entry" style="color: var(--success);">✅ 초기화 완료! 새로운 작업을 시작하세요.</div>';
-                }
-            });
-        }, 1000);
+        /*
+         * [2026-09-23 사장님] "전체 초기화 하면 완전히 껐다 킨 상태로 돌아와야 됩니다."
+         *
+         * 위까지는 DOM 과 전역 변수만 비운다. 렌더러 모듈 31개가 각자 들고 있는 모듈 상태는
+         * 그대로 살아남아 지난 글의 추론 결과·플랜·큐가 다음 글에 섞여 들었다(2026-09-15 같은 신고).
+         * 열거로는 계속 새므로 **화면을 실제로 다시 띄운다** — 새 모듈이 생겨도 자동 포함된다.
+         *
+         * 리로드 전에 돌고 있는 자동화와 메인 프로세스 이미지 상태를 먼저 정리한다.
+         * 안 멈추면 리로드 뒤 주인 없는 브라우저 창이 남는다.
+         */
+        void (async () => {
+            const api = (window as any).api;
+            try {
+                await Promise.allSettled([
+                    typeof api?.cancelAutomation === 'function'
+                        ? api.cancelAutomation({ source: 'global-refresh', reason: '전체 초기화' })
+                        : Promise.resolve(),
+                    typeof api?.resetImageState === 'function' ? api.resetImageState() : Promise.resolve(),
+                    // 메인 프로세스에 남은 이미지 브라우저 컨텍스트(Flow·ImageFX·Dropshot)까지 닫는다.
+                    typeof api?.resetTransientState === 'function' ? api.resetTransientState() : Promise.resolve(),
+                ]);
+            } catch (cleanupError) {
+                console.warn('[performGlobalRefresh] 리로드 전 정리 실패 (계속 진행):', cleanupError);
+            }
+            appendLog('🔄 화면을 다시 시작합니다 (껐다 켠 상태로 복귀)...');
+            try {
+                window.location.reload();
+            } catch (reloadError) {
+                // 리로드가 막힌 환경(테스트 하네스 등)에서는 기존 동작만으로 끝낸다.
+                console.warn('[performGlobalRefresh] 화면 재시작 실패 — DOM 초기화 상태로 유지:', reloadError);
+            }
+        })();
 
     } catch (error) {
         console.error('전체 초기화 중 오류:', error);

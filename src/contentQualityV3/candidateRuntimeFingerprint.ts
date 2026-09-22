@@ -697,6 +697,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/formAndAutomation.ts',
   'src/renderer/modules/formUtilities.ts',
   'src/renderer/modules/fullAutoFlow.ts',
+  'src/renderer/modules/globalResetPlan.ts',
   'src/renderer/modules/guideModals.ts',
   'src/renderer/modules/headingControlPanel.ts',
   'src/renderer/modules/headingImageContext.ts',

@@ -136,6 +136,9 @@ contextBridge.exposeInMainWorld('api', {
   // ✅ [2026-02-23 FIX] 이미지 생성 전체 상태 초기화
   resetImageState: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('automation:resetImageState'),
+  // [2026-09-23] 전체 초기화 — 메인 프로세스에 남은 이미지 브라우저 컨텍스트까지 닫는다.
+  resetTransientState: (): Promise<{ success: boolean; failed: string[] }> =>
+    ipcRenderer.invoke('app:resetTransientState'),
   abortImageGeneration: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('automation:abortImageGeneration'),
   closeBrowser: (naverId?: string) => ipcRenderer.invoke('automation:closeBrowser', naverId), // ✅ 추가

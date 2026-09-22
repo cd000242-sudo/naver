@@ -3841,6 +3841,28 @@ ipcMain.handle('automation:resetImageState', async () => {
   }
 });
 
+/**
+ * [2026-09-23 사장님] "전체 초기화 하면 완전히 껐다 킨 상태로 돌아와야 됩니다."
+ *
+ * 렌더러는 리로드로 새로 뜨지만, 메인 프로세스가 들고 있는 이미지 브라우저 컨텍스트
+ * (Flow / ImageFX / Dropshot)는 그대로 살아남는다. 껐다 켰으면 없었을 것들이라 같이 닫는다.
+ * 종료 cleanup 과 같은 함수를 쓰되 _runFullCleanup 은 부르지 않는다 — 그건 한 번만 도는
+ * memoized 종료 경로라, 여기서 소비하면 진짜 종료 때 정리가 건너뛰어진다.
+ */
+ipcMain.handle('app:resetTransientState', async () => {
+  const results = await Promise.allSettled([
+    resetFlowState(),
+    cleanupImageFxBrowser(),
+    closeDropshotBrowserContexts(),
+  ]);
+  const failed = results
+    .map((r, i) => (r.status === 'rejected' ? ['Flow', 'ImageFX', 'Dropshot'][i] : ''))
+    .filter(Boolean);
+  if (failed.length > 0) console.warn(`[Main] 전체 초기화 — 컨텍스트 정리 일부 실패: ${failed.join(', ')}`);
+  else console.log('[Main] 전체 초기화 — 이미지 브라우저 컨텍스트 정리 완료');
+  return { success: failed.length === 0, failed };
+});
+
 ipcMain.handle('automation:abortImageGeneration', async () => {
   try {
     await abortImageGeneration();
