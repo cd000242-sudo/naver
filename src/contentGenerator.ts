@@ -452,6 +452,8 @@ import { prepareSourceMaterial } from './content/sourcePipeline.js';
 import { PartialResponseError } from './jsonParser.js';
 import { STRUCTURED_CONTENT_SCHEMA, assertResponseComplete, describeCompleteness } from './content/structuredResponseContract.js';
 import { describeIntegrity, evaluatePipelineIntegrity } from './content/pipelineIntegrityGate.js';
+import { maybeRunQualityLoop } from './quality/critique/generatorHook.js';
+import type { QualityLoopSummary } from './quality/critique/types.js';
 
 // ✅ [v1.4.51] Gemini 빈 응답 전용 에러 클래스 — finishReason별 대응 위해
 // SAFETY/RECITATION → 재시도 금지, MAX_TOKENS → 설정 조정 후 재시도, OTHER → 일반 재시도
@@ -2472,6 +2474,8 @@ export interface StructuredContent {
     selectedProvider: string;
     selectedModel: string;
   };
+  /** [2026-09-22 Critique Loop] Present only when the loop ran (flag ON). */
+  _qualityLoop?: Omit<QualityLoopSummary, 'issues'> & { issueCount: number };
   selectedTitle: string;
   titleAlternatives: string[];
   titleCandidates: TitleCandidate[];
@@ -9207,7 +9211,26 @@ export async function generateStructuredContent(
       ),
       validate: validatePublishableContent,
     });
-    return attachGenerationIntegrity(result, run, { sourceBased, selectedProvider, pipeline });
+    // [2026-09-22 Critique Loop] Flag-gated (default OFF). Sees the same StructuredContent the
+    //   publish path types (introduction / headings[].content / conclusion / CTA / hashtags) and
+    //   returns a revised copy plus a summary; OFF returns the draft untouched with summary null.
+    const { loadConfig: loadLoopConfig } = await import('./configManager.js');
+    const loopConfig = ((await loadLoopConfig().catch(() => null)) as Record<string, unknown> | null) ?? null;
+    const looped = await maybeRunQualityLoop({
+      result,
+      keyword: runKeyword,
+      contentMode: String(source.contentMode || 'seo'),
+      topicType: String(pipeline.metrics.topicType || 'EVERGREEN'),
+      sourceBased,
+      sourceDocuments: Array.isArray((source.metadata as any)?.sourceDocuments) ? (source.metadata as any).sourceDocuments : [],
+      rawCorpus: String(source.rawText || ''),
+      relatedKeywords: Array.isArray((source.metadata as any)?.keywords) ? (source.metadata as any).keywords.slice(1).map((k: unknown) => String(k)) : [],
+      relatedKeywordsAreLlmExpanded: ['upgrade-analysis', 'url-mode-llm'].includes(String((source.metadata as any)?.keywordOrigin || '')),
+      run,
+      config: loopConfig,
+      resolveRoute: (stage) => resolveSideTaskRoute(source, stage, 'quality'),
+    });
+    return attachGenerationIntegrity(looped.content, run, { sourceBased, selectedProvider, pipeline, qualityLoop: looped.summary });
   } catch (error) {
     run.finish({ publishDecision: 'GENERATION_FAILED', extra: { ...(run.meta.extra || {}), error: String((error as Error)?.message || error).slice(0, 500) } });
     throw error;
@@ -9230,6 +9253,12 @@ async function resolveSelectedModelLabel(provider: string): Promise<string> {
   }
 }
 
+/** [2026-09-22 Critique Loop] Compact loop summary carried on the content (issues stay in Q-ledger.json). */
+function summarizeQualityLoopForContent(loop: QualityLoopSummary): NonNullable<StructuredContent['_qualityLoop']> {
+  const { issues, ...rest } = loop;
+  return { ...rest, issueCount: issues.length };
+}
+
 /**
  * [2026-09-22 audit P0 item 28] Attach the pipeline-integrity verdict to the result and close the run.
  * The publish boundary (BlogExecutor) reads `_generationIntegrity` and sends critical failures to
@@ -9238,10 +9267,11 @@ async function resolveSelectedModelLabel(provider: string): Promise<string> {
 function attachGenerationIntegrity(
   result: StructuredContent,
   run: ReturnType<typeof createGenerationRun>,
-  ctx: { sourceBased: boolean; selectedProvider: string; pipeline: ReturnType<typeof prepareSourceMaterial> },
+  ctx: { sourceBased: boolean; selectedProvider: string; pipeline: ReturnType<typeof prepareSourceMaterial>; qualityLoop?: QualityLoopSummary | null },
 ): StructuredContent {
   const finalText = contentTextOf(result);
-  const integrity = evaluatePipelineIntegrity({
+  const loop = ctx.qualityLoop ?? null;
+  const baseIntegrity = evaluatePipelineIntegrity({
     sourceBased: ctx.sourceBased,
     searchStatus: run.meta.searchStatus,
     sourceCount: ctx.pipeline.metrics.acceptedSources,
@@ -9253,6 +9283,11 @@ function attachGenerationIntegrity(
     jsonComplete: run.meta.jsonComplete !== false,
     outputTruncated: run.meta.outputTruncated === true,
   });
+  // [2026-09-22 Critique Loop] The loop's MANUAL_REVIEW (judge BLOCK, unresolved issues, preservation
+  //   violation) joins the publish decision; QUALITY_CONVERGED / SKIPPED / flag OFF leave it untouched.
+  const integrity = loop && loop.decision === 'MANUAL_REVIEW'
+    ? { ...baseIntegrity, publishDecision: 'MANUAL_REVIEW' as const, reasons: [...baseIntegrity.reasons, ...loop.manualReviewReasons.map((r) => `QUALITY_LOOP: ${r}`)] }
+    : baseIntegrity;
   console.log(describeIntegrity(integrity));
   run.writeFinalBeforePublish(finalText);
   run.finish({
@@ -9264,6 +9299,7 @@ function attachGenerationIntegrity(
   // Assigned in place: downstream V3 publication tickets and identity-based guards key on this object.
   if (!Object.isExtensible(result)) return result;
   return Object.assign(result, {
+    ...(loop ? { _qualityLoop: summarizeQualityLoopForContent(loop) } : {}),
     _generationRunId: run.runId,
     _generationIntegrity: {
       publishDecision: integrity.publishDecision,

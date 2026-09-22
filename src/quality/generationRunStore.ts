@@ -239,6 +239,13 @@ export class GenerationRun {
     this.writeFileBestEffort(FILE_PUBLISHED_PAYLOAD, redactSecrets(this.stringifySafe(payload)));
   }
 
+  /** [2026-09-22 Critique Loop] Q0..Q5 / Q-ledger artifacts (`name` must be a plain file name). */
+  writeQualityArtifact(name: string, payload: unknown): void {
+    const safe = String(name || '').replace(/[^A-Za-z0-9._-]/g, '_');
+    if (!safe) return;
+    this.writeFileBestEffort(safe, redactSecrets(this.stringifySafe(payload)));
+  }
+
   recordModel(stage: string, provider: string, model: string): void {
     const exists = this.meta.actualModelsUsed.some(
       (m) => m.stage === stage && m.provider === provider && m.model === model,

@@ -32,13 +32,18 @@ export function planBatches(sectionIds: readonly string[]): string[][] {
   return out;
 }
 
-function growthAllowed(before: string, after: string, ops: readonly string[]): boolean {
+function growthAllowed(before: string, after: string, issues: readonly QualityIssue[]): boolean {
   const ratio = before.length === 0 ? Infinity : after.length / before.length;
   if (before.length === 0) return after.length > 0;
+  const ops = issues.map((i) => i.operation);
   const hasAdd = ops.includes('ADD');
   const hasRemove = ops.includes('REMOVE');
   if (ratio > (hasAdd ? ADD_GROWTH_LIMIT : REPLACE_GROWTH_LIMIT)) return false;
-  if (!hasRemove && ratio < SHRINK_LIMIT_WITHOUT_REMOVE) return false;
+  // A REPLACE may legitimately drop its whole span (an unsupported sentence in a short section):
+  // the floor is the section minus the flagged spans, with 15% slack — never below 0.6x otherwise.
+  const flaggedChars = issues.reduce((n, i) => n + i.exactSpan.length, 0);
+  const floor = Math.min(before.length * SHRINK_LIMIT_WITHOUT_REMOVE, before.length - flaggedChars - before.length * 0.15);
+  if (!hasRemove && after.length < floor) return false;
   return true;
 }
 
@@ -60,8 +65,7 @@ export function parseEditorOutput(
     if (!targets.has(id)) { if (id) rejected.push(id); continue; }
     const section = findSection(model, id);
     if (!section || !text || text === section.text.trim()) continue;
-    const ops = (issuesBySection.get(id) ?? []).map((i) => i.operation);
-    if (!growthAllowed(section.text, text, ops)) { rejected.push(`${id}(rewrite)`); continue; }
+    if (!growthAllowed(section.text, text, issuesBySection.get(id) ?? [])) { rejected.push(`${id}(rewrite)`); continue; }
     sections[id] = text;
   }
   const patched = (Array.isArray(parsed?.patchedIssueKeys) ? parsed!.patchedIssueKeys : [])

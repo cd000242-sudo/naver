@@ -87,3 +87,8 @@ export function evidenceHasConcreteValues(pack: EvidencePack): boolean {
 export function evidenceIdSet(pack: EvidencePack): Set<string> {
   return new Set(pack.items.map((it) => it.id));
 }
+
+/** All evidence text (excerpts + research brief) — the set of values worth preserving. */
+export function evidenceCorpus(pack: EvidencePack): string {
+  return [...pack.items.map((it) => `${it.title} ${it.excerpt}`), ...pack.keyFacts, ...pack.keyDates].join(' ');
+}

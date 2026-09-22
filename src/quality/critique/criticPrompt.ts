@@ -51,7 +51,8 @@ severity 규칙:
 - MINOR: 자연스러움·표현·다양성·조사/어미·가벼운 반복·가독성·취향. 문체는 어떤 경우에도 CRITICAL 이 아니다.
 - 일반적인 설명 문장, 배경 설명, 독자 공감 문장은 결함이 아니다. 자료와 충돌하지 않는 한 지적하지 않는다.
 - 근거 없이 "더 구체적으로/더 자연스럽게/더 풍부하게"를 요구하지 않는다. ${concrete ? '자료에 구체 값이 있으니 빠진 값이 있으면 그 값과 evidenceIds 를 적는다.' : '자료에 구체 값이 없다. 구체성을 요구하지 말고, 필요하면 NEEDS_MORE_RESEARCH 와 researchQueries 로 답한다.'}
-- 모든 문장을 자료와 글자 단위로 대조하지 않는다. 자료가 뒷받침하지 않는 "숫자·날짜·기관·조건" 만 문제 삼는다.
+- 모든 문장을 자료와 글자 단위로 대조하지 않는다. 자료가 뒷받침하지 않는 "숫자·날짜·기관·조건·인용·통계·명단" 만 문제 삼는다.
+- 자료에 없는 인용(발언자·나이 특정), 설문/통계 수치, 기관·은행 명단, 향후 일정 단정은 문체가 아니라 사실 결함이다 — MINOR 로 두지 않는다. 같은 주장이 여러 섹션에 다른 말로 반복되면 섹션마다 issue 를 낸다.
 
 issue 규칙:
 - exactSpan 은 해당 section 본문에 실제로 있는 문장/구절을 그대로 복사한다. MISSING_INFORMATION + ADD 는 exactSpan 에 삽입할 소제목(H2/H3) 제목을 적어도 된다.
@@ -65,6 +66,8 @@ ${SCHEMA}`;
 
 export interface EditorialContext extends CriticContext {
   readonly homefeed: boolean;
+  /** Values already removed as unsupported by the fact loop — the editorial critic must not ask for them back. */
+  readonly removedValues?: readonly string[];
 }
 
 export function buildEditorialPrompt(ctx: EditorialContext, model: ArticleModel): string {
@@ -77,9 +80,15 @@ export function buildEditorialPrompt(ctx: EditorialContext, model: ArticleModel)
 - "오늘은 ~에 대해 알아보겠습니다" 식 메타 시작이 있는가.
 - 섹션마다 같은 사실을 다시 쓰는가. 억지 SEO 문구가 있는가.`
     : '';
+  const removed = ctx.removedValues && ctx.removedValues.length > 0
+    ? `
+## 사실 검수에서 제거된 값 (자료에 없어 지워졌다 — 제목·구조를 맞추려고 다시 넣으라고 요구하지 않는다. 제목과 어긋나면 제목 쪽을 고치라고 한다)
+${ctx.removedValues.join(', ')}
+`
+    : '';
   return `너는 네이버 블로그 글의 편집 데스크다. 사실 검수는 끝났다. 구조·중복·제목-본문 초점만 본다. 오늘: ${ctx.today}. 키워드: ${ctx.keyword}. 모드: ${ctx.contentMode}.
 검색 의도: ${ctx.searchIntent}
-
+${removed}
 ## 글
 제목: ${model.title}
 ${describeSections(model)}

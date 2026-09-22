@@ -90,6 +90,12 @@ export function validateIssues(
     let insertionAnchor: string | undefined;
 
     if (type === 'STYLE' && severity !== 'MINOR') { severity = 'MINOR'; notes.push('style is never blocking'); }
+    // Live 20260922-193310: the Critic typed a fabricated interview quote and a bank list as
+    // UNSUPPORTED_VALUE with evidence but labelled them MINOR. A fact-typed issue that is located
+    // and evidenced is a fact defect by definition — at least MAJOR — regardless of its label.
+    if (severity === 'MINOR' && FACT_TYPES.has(type) && evidenceIds.length > 0 && section && spanExistsIn(section.text, exactSpan)) {
+      severity = 'MAJOR'; notes.push('fact-typed issue with evidence promoted from MINOR');
+    }
     if (severity === 'CRITICAL' && !CRITICAL_ALLOWED.has(type)) { severity = 'MAJOR'; notes.push(`CRITICAL reserved for fact conflicts (${type} -> MAJOR)`); }
     if (VAGUE_REQUEST_RE.test(`${problem} ${requiredChange}`) && evidenceIds.length === 0 && type !== 'MISSING_INFORMATION') {
       severity = 'MINOR'; notes.push('vague preference request');
@@ -105,6 +111,9 @@ export function validateIssues(
         if (severity !== 'MINOR' && !concreteValues && evidenceIds.length === 0) {
           severity = 'MINOR'; notes.push('source has no concrete values — cannot demand specifics');
         }
+      } else if (type === 'STRUCTURE' && !spanExistsIn(section.text, exactSpan) && normalizeSpan(exactSpan) === normalizeSpan(section.title)) {
+        // Structural defects (heading/body mismatch, empty section) are located by the heading itself.
+        insertionAnchor = section.title;
       } else if (!spanExistsIn(section.text, exactSpan)) {
         severity = 'MINOR'; notes.push('exactSpan not found in section body');
       }

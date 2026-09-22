@@ -206,6 +206,12 @@ export interface AppConfig {
    */
   humanizerIntensity?: 'light' | 'strong';
 
+  /**
+   * [2026-09-22 Critique Loop] 초안 → 비평 → 부분 수정 → 검증 → 최종 판정 루프. **기본 OFF**.
+   * true 일 때만 선택 엔진(quality tier)으로 실행. 환경변수 NAVER_QUALITY_LOOP=1/0 이 우선한다.
+   */
+  naverQualityLoop?: boolean;
+
   // ✅ Gemini 텍스트 생성 주 모델 선택
   primaryGeminiTextModel?: 'gemini-3.6-flash' | 'gemini-3.5-flash' | 'gemini-3.1-flash-lite' | string;
 
@@ -503,7 +509,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'userDisplayName', 'userEmail',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
-          'expandedRetrieval', 'humanizerIntensity',
+          'expandedRetrieval', 'humanizerIntensity', 'naverQualityLoop',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
           'customImageSavePath',
           'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
@@ -1126,7 +1132,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
-          'expandedRetrieval', 'humanizerIntensity',
+          'expandedRetrieval', 'humanizerIntensity', 'naverQualityLoop',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
         ];
         let changed = false;

@@ -28,6 +28,7 @@ export function buildPreservationReport(
   before: ArticleModel,
   after: ArticleModel,
   flaggedIssues: readonly QualityIssue[],
+  evidenceCorpus: string = '',
 ): PreservationReport {
   const b = sectionText(before);
   const a = sectionText(after);
@@ -35,9 +36,14 @@ export function buildPreservationReport(
   const changed = [...b.keys()].filter((id) => a.has(id) && a.get(id) !== b.get(id));
   const untouchedPreserved = changed.every((id) => flagged.has(id)) && [...b.keys()].every((id) => a.has(id));
 
-  // Tokens that a REMOVE issue explicitly targeted are allowed to disappear.
-  const removedSpans = flaggedIssues.filter((i) => i.operation === 'REMOVE').map((i) => normalizeSpan(i.exactSpan).replace(/\s+/g, ''));
-  const allowedLoss = (token: string): boolean => removedSpans.some((span) => span.includes(token));
+  // Only VALID values are protected. A token may disappear when it sits inside a flagged span
+  // (the Critic asked for that span to change — live run 20260922-191510: unsupported 4.5%/6.0%
+  // inside a REPLACE span were wrongly "preserved") or when the evidence never carried it
+  // (an unsupported value has nothing valid to preserve).
+  const flaggedSpans = flaggedIssues.map((i) => normalizeSpan(i.exactSpan).replace(/\s+/g, '')).filter((s) => s.length > 0);
+  const corpus = evidenceCorpus.replace(/\s+/g, '');
+  const allowedLoss = (token: string): boolean =>
+    flaggedSpans.some((span) => span.includes(token)) || (corpus.length > 0 && !corpus.includes(token));
   const beforeAll = [...b.values()].join('\n');
   const afterAll = [...a.values()].join('\n').replace(/\s+/g, '');
   const tb = extractTokens(beforeAll);
@@ -53,6 +59,27 @@ export function buildPreservationReport(
     lostOrganizations: missing(tb.orgs),
   };
 }
+
+/**
+ * Number/date tokens that a resolved fact issue removed from the article. A later edit
+ * (round-2 revision, editorial fix) must not bring them back — live 20260922-195843: the
+ * editorial critic asked for "10월 18일" to be restored to match the title after it had been
+ * removed as unsupported.
+ */
+export function removedFactTokens(issues: readonly QualityIssue[], after: ArticleModel): string[] {
+  const afterAll = after.sections.map((s) => s.text).join('\n').replace(/\s+/g, '');
+  const tokens = issues
+    .filter((i) => i.state === 'RESOLVED' && FACT_ISSUE_TYPES.has(i.type))
+    .flatMap((i) => { const t = extractTokens(i.exactSpan); return [...t.numbers, ...t.dates]; });
+  return [...new Set(tokens)].filter((t) => !afterAll.includes(t));
+}
+
+export function reintroducedTokens(removed: readonly string[], candidate: ArticleModel): string[] {
+  const all = candidate.sections.map((s) => s.text).join('\n').replace(/\s+/g, '');
+  return removed.filter((t) => all.includes(t));
+}
+
+const FACT_ISSUE_TYPES: ReadonlySet<string> = new Set(['UNSUPPORTED_VALUE', 'FACT_ERROR', 'CONTRADICTION', 'MIXED_ENTITY']);
 
 export function preservationViolations(report: PreservationReport): string[] {
   const out: string[] = [];
