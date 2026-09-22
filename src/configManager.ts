@@ -199,6 +199,13 @@ export interface AppConfig {
    */
   expandedRetrieval?: boolean;
 
+  /**
+   * [2026-09-22 P1 결정] 휴머나이저 강도. **기본 'light'** — 결정론적이며 숫자·금액·날짜·
+   * 정책명·기관명·제품명·인물명·고유명사·직접 인용은 어떤 강도에서도 바꾸지 않는다.
+   * 'strong' 은 사용자가 이 설정으로 명시했을 때만. (2026-07-30 "전 모드 strong" 지침은 폐기)
+   */
+  humanizerIntensity?: 'light' | 'strong';
+
   // ✅ Gemini 텍스트 생성 주 모델 선택
   primaryGeminiTextModel?: 'gemini-3.6-flash' | 'gemini-3.5-flash' | 'gemini-3.1-flash-lite' | string;
 
@@ -496,7 +503,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'userDisplayName', 'userEmail',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
-          'expandedRetrieval',
+          'expandedRetrieval', 'humanizerIntensity',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
           'customImageSavePath',
           'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
@@ -1119,7 +1126,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'agentCodexModel', 'agentClaudeModel', 'agentGeminiModel',
-          'expandedRetrieval',
+          'expandedRetrieval', 'humanizerIntensity',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
         ];
         let changed = false;

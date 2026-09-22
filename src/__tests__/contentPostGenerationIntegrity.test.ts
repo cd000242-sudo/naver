@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   applyHomefeedNarrativeHookBlock,
@@ -6,11 +8,10 @@ import {
 import { resolveHumanizeIntensity } from '../contentHumanizationPolicy';
 
 describe('post-generation integrity', () => {
-  // [2026-09-22 SPEC — 후처리 결정론화, supersedes 2026-07-30 지시] aiHumanizer의 'strong'은
-  // 더 이상 Math.random 기반 어미/동의어 변주를 하지 않는다(결정론적 안전 변환만). 그 전제가
-  // 바뀌었으므로 "항상 strong"이라는 기본값도 재검토 대상이다 — 기본값은 'light'로 낮추고,
-  // 강한 변환이 필요한 호출자는 `resolveHumanizeIntensity(mode, 'strong')`으로 명시하게 했다.
-  // ⚠️ src/contentGenerator.ts:7932 호출부는 아직 configured를 넘기지 않는다 — 통합 담당자 확인 필요.
+  // [2026-09-22 P1 확정 — DEFAULT = LIGHT] 사장님 결정. 2026-07-30 "전 모드 strong" 지침 폐기.
+  // 어떤 모드도 기본값을 올리지 않는다. 'strong' 은 사용자가 config.humanizerIntensity /
+  // source.humanizerIntensity / HUMANIZER_INTENSITY 로 명시한 경우에만 (contentGenerator 호출부가
+  // 이 순서로 configured 를 넘긴다). 이 테스트가 깨지면 기본값이 되돌아간 것이다.
   it('기본값은 light이고, configured로 명시하면 그 값을 따른다', () => {
     expect(resolveHumanizeIntensity('seo')).toBe('light');
     expect(resolveHumanizeIntensity('homefeed')).toBe('light');
@@ -18,6 +19,17 @@ describe('post-generation integrity', () => {
     expect(resolveHumanizeIntensity('affiliate')).toBe('light');
     expect(resolveHumanizeIntensity('seo', 'strong')).toBe('strong');
     expect(resolveHumanizeIntensity('seo', 'off')).toBe('off');
+    // 알 수 없는 값/빈 값은 strong 으로 승격되지 않는다.
+    expect(resolveHumanizeIntensity('seo', '' as any)).toBe('light');
+    expect(resolveHumanizeIntensity('seo', 'max' as any)).toBe('light');
+  });
+
+  it('contentGenerator 호출부는 config.humanizerIntensity 를 명시 선택으로만 읽는다 (기본 light 잠금)', () => {
+    const code = readFileSync(resolve(__dirname, '../contentGenerator.ts'), 'utf8');
+    expect(code).toMatch(/DEFAULT = LIGHT/);
+    expect(code).toMatch(/humanizerIntensity \|\| configuredHumanizerIntensity \|\| process\.env\.HUMANIZER_INTENSITY/);
+    // 모드에 따라 strong 을 강제하는 코드가 부활하면 안 된다.
+    expect(code).not.toMatch(/resolveHumanizeIntensity\([^)]*,\s*'strong'\)/);
   });
 
   it('does not truncate a generated homefeed introduction', () => {

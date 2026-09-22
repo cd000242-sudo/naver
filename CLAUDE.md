@@ -110,6 +110,7 @@ const btn = await waitForElement(frame, SELECTORS.publish.confirmPublishButton, 
 - Cross-platform: Windows primary, macOS secondary
 - Stealth mode: puppeteer-extra-plugin-stealth for anti-detection
 - Korean language content — maintain Korean UI strings
+- Humanizer default = **LIGHT** (2026-09-22 결정, 2026-07-30 "전 모드 strong" 지침 폐기). `strong` 은 `config.humanizerIntensity` 명시 선택만. 어떤 강도에서도 숫자·금액·날짜·정책명·기관명·제품명·인물명·고유명사·직접 인용은 변경 금지
 - 236+ unit tests via vitest (`npx vitest run`)
 
 ## Workflows
