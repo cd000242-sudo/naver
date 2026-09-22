@@ -59,13 +59,15 @@ describe('planExpandedRetrieval — 언제 · 무엇을 더 검색할지 정한�
 });
 
 describe('배선 핀', () => {
-  const live = (needle: string): number => readFileSync(new URL('../main/ipc/miscHandlers.ts', import.meta.url), 'utf8')
+  // [2026-09-22 P1] 수집 로직은 content/generationSourceBuilder.ts 로 옮겨 IPC 핸들러·SmartScheduler·
+  // 다중계정이 같은 함수를 쓴다. 핀은 빌더를 보고, 핸들러는 빌더에 위임하는지만 본다.
+  const read = (rel: string): string[] => readFileSync(new URL(rel, import.meta.url), 'utf8')
     .split(String.fromCharCode(10))
-    .filter((l) => !l.trim().startsWith('//') && !l.trim().startsWith('*'))
-    .filter((l) => l.includes(needle))
-    .length;
+    .filter((l) => !l.trim().startsWith('//') && !l.trim().startsWith('*'));
+  const live = (needle: string): number => read('../content/generationSourceBuilder.ts').filter((l) => l.includes(needle)).length;
+  const handler = (needle: string): number => read('../main/ipc/miscHandlers.ts').filter((l) => l.includes(needle)).length;
 
-  it('수집 핸들러가 확장 계획을 세운다', () => {
+  it('수집 빌더가 확장 계획을 세운다', () => {
     expect(live('planExpandedRetrieval(')).toBeGreaterThan(0);
   });
 
@@ -73,7 +75,14 @@ describe('배선 핀', () => {
     expect(live('expandedRetrieval')).toBeGreaterThan(0);
   });
 
-  it('확장 실패해도 있는 자료로 진행한다 — throw 하지 않는다', () => {
-    expect(live('throw')).toBe(0);
+  it('확장 실패해도 있는 자료로 진행한다 — collectKeywordMaterials 는 throw 하지 않는다', () => {
+    const src = readFileSync(new URL('../content/generationSourceBuilder.ts', import.meta.url), 'utf8');
+    const collectFn = src.slice(src.indexOf('export async function collectKeywordMaterials'), src.indexOf('export function resolveSourceStatus'));
+    expect(collectFn).not.toMatch(/throw/);
+  });
+
+  it('IPC 핸들러는 빌더에 위임한다 (수집 로직 복제 금지)', () => {
+    expect(handler('collectKeywordMaterials(')).toBeGreaterThan(0);
+    expect(handler('planExpandedRetrieval(')).toBe(0);
   });
 });

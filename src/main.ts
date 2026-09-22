@@ -1838,8 +1838,34 @@ async function prepareSmartScheduledContent(
   const keyword = String(post.keyword || post.title || '').trim();
   if (!keyword) throw new Error('SMART_SCHEDULER_KEYWORD_REQUIRED');
 
+  // [2026-09-22 P1] Same source pipeline as the manual path. Before: `{ type: 'keyword', value }`
+  // with no rawText → the generator threw "원본 텍스트가 비어 있습니다" on every scheduled post.
+  // Search → SourceDocument → clean → accepted sources → research input; SOURCE_EMPTY throws
+  // (SourceEmptyError) so a search-based article is never written from nothing.
+  const { buildKeywordGenerationSource } = await import('./content/generationSourceBuilder.js');
+  const provider = (config.defaultAiProvider || 'gemini') as ContentGeneratorProvider;
+  const minChars = Number((config as any).minCharCount) || 2500;
+  const built = await buildKeywordGenerationSource({
+    keyword,
+    config,
+    generator: provider,
+    contentMode: 'seo',
+    targetAge: 'all',
+    toneStyle: 'friendly',
+    minChars,
+    manualTitleOverride: String(post.title || '').trim() || undefined,
+    scheduleDate: (post as any).scheduledAt ? new Date((post as any).scheduledAt).toISOString() : undefined,
+    retryWhenEmpty: true,
+    logger: (msg) => console.log(`[SmartScheduler] ${msg}`),
+  });
+
   const { loadContentPolicy } = await import('./contentPolicy/policyLoader.js');
   const { prepareGenerationPolicyContext } = await import('./contentPolicy/generationContext.js');
+  const sourceMaterials = (built.source.metadata?.sourceDocuments as Array<{ title?: string; body?: string; url?: string }> | undefined)?.length
+    ? (built.source.metadata!.sourceDocuments as Array<{ title?: string; body?: string; url?: string }>).map((d) => ({
+        type: 'search_result', title: String(d.title || ''), content: String(d.body || ''), url: d.url,
+      }))
+    : (built.source.rawText?.trim() ? [{ type: 'search_result', title: keyword, content: built.source.rawText }] : []);
   const generationPolicy = await prepareGenerationPolicyContext({
     userDataPath: app.getPath('userData'),
     config: await loadContentPolicy(),
@@ -1849,7 +1875,7 @@ async function prepareSmartScheduledContent(
       primary_keyword: keyword,
       target_reader: '예약한 주제를 검색하는 네이버 블로그 독자',
       business_facts: ['사용자가 SmartScheduler에 발행할 주제를 직접 등록했다.'],
-      source_materials: [],
+      source_materials: sourceMaterials as any,
       account_id: naverId,
       blog_id: naverId,
     },
@@ -1858,18 +1884,10 @@ async function prepareSmartScheduledContent(
     throw new Error(`CONTENT_POLICY_BLOCKED:${generationPolicy.reasons.join(',') || 'BLOCK_SMART_SCHEDULER_GENERATION'}`);
   }
 
-  const source: any = {
-    type: 'keyword',
-    value: keyword,
-    targetAge: 'all',
-    toneStyle: 'friendly',
-    contentMode: 'seo',
-    manualTitleOverride: String(post.title || '').trim() || undefined,
-    contentPolicyPrompt: generationPolicy.prompt,
-  };
+  const source: ContentSource = { ...built.source, contentPolicyPrompt: generationPolicy.prompt };
   const generated = await generateStructuredContentWithProductPolicy(source, {
-    provider: (config.defaultAiProvider || 'gemini') as any,
-    minChars: Number((config as any).minCharCount) || 2500,
+    provider: provider as any,
+    minChars,
   } as any);
   const contentQualityV3PublicationTicket = beginContentQualityV3Publication(generated);
   const contentQualityV3PublishTicket = forkContentQualityV3PublicationTicket(
@@ -2011,7 +2029,15 @@ smartScheduler.setPublishCallback(async (post) => {
     return publishedUrl;
   } catch (error) {
     console.error(`[SmartScheduler] 발행 콜백 실패:`, error);
-    sendLog(`❌ SmartScheduler 예약 발행 실패: ${sanitizeUserVisibleError(error)}`);
+    // [2026-09-22 P1] SOURCE_EMPTY / SOURCE_PIPELINE_FAILED are not generation bugs — the search
+    // found nothing usable, so the post is held for manual review (re-search or edit) instead of
+    // being written from nothing.
+    const sourceCode = (error as { code?: string })?.code;
+    if (sourceCode === 'SOURCE_EMPTY' || sourceCode === 'SOURCE_PIPELINE_FAILED') {
+      sendLog(`🛑 SmartScheduler 발행 보류 (MANUAL_REVIEW · ${sourceCode}): ${post.keyword || post.title} — 근거 자료를 찾지 못해 글을 쓰지 않았습니다. 키워드를 바꾸거나 자료를 넣어 다시 예약하세요.`);
+    } else {
+      sendLog(`❌ SmartScheduler 예약 발행 실패: ${sanitizeUserVisibleError(error)}`);
+    }
     throw error;
   } finally {
     await smartSchedulerQuotaLease?.rollback().catch((quotaError) => {
@@ -5503,14 +5529,56 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
             const currentConfig = await loadConfig();
             const multiAccountProvider = options?.generator || currentConfig?.defaultAiProvider || 'gemini';
             console.log(`[다중계정] 🔄 AI Provider: ${multiAccountProvider} (options.generator: ${options?.generator}, config.defaultAiProvider: ${currentConfig?.defaultAiProvider})`);
+            // [2026-09-22 P1] Same source pipeline as the manual path. Before: `{ type, value }` with
+            // no rawText → "원본 텍스트가 비어 있습니다" on every multi-account generation.
+            // keyword → collect → SourceDocument → clean → accepted → research input (SOURCE_EMPTY throws);
+            // url → assembleContentSource(rssUrl) like the renderer's URL flow.
+            const multiContentMode = options?.contentMode || accountSettings?.contentMode || 'seo';
+            const multiAffiliateUrl = options?.affiliateLink || accountSettings?.affiliateLink;
+            const isKeywordSource = contentSource.type === 'keyword';
+            const { buildKeywordGenerationSource: buildMultiKeywordSource } = await import('./content/generationSourceBuilder.js');
+            const multiMinChars = accountSettings?.minCharCount || 4000;
+            let builtSource: ContentSource;
+            let multiSourceMaterials: Array<{ type: string; title: string; content: string; url?: string }> = [];
+            if (isKeywordSource) {
+              const built = await buildMultiKeywordSource({
+                keyword: String(sourceValue),
+                config: currentConfig,
+                generator: multiAccountProvider as ContentGeneratorProvider,
+                contentMode: multiContentMode,
+                targetAge: accountSettings?.targetAge || 'all',
+                toneStyle: accountSettings?.toneStyle || 'friendly',
+                minChars: multiMinChars,
+                affiliateUrl: multiAffiliateUrl,
+                retryWhenEmpty: true,
+                logger: (msg) => console.log(`[다중계정] ${msg}`),
+              });
+              builtSource = built.source;
+              const docs = (built.source.metadata?.sourceDocuments as Array<{ title?: string; body?: string; url?: string }> | undefined) || [];
+              multiSourceMaterials = docs.length > 0
+                ? docs.map((d) => ({ type: 'search_result', title: String(d.title || ''), content: String(d.body || ''), url: d.url }))
+                : (built.source.rawText?.trim() ? [{ type: 'search_result', title: String(sourceValue), content: built.source.rawText }] : []);
+            } else {
+              const { source: urlSource } = await assembleContentSource({
+                generator: multiAccountProvider as ContentGeneratorProvider,
+                rssUrl: String(sourceValue),
+                targetAge: accountSettings?.targetAge || 'all',
+                minChars: multiMinChars,
+                naverClientId: currentConfig.naverClientId || (currentConfig as any).naverDatalabClientId,
+                naverClientSecret: currentConfig.naverClientSecret || (currentConfig as any).naverDatalabClientSecret,
+              } as SourceAssemblyInput);
+              builtSource = urlSource;
+              if (urlSource.rawText?.trim()) {
+                multiSourceMaterials = [{ type: 'url', title: String(urlSource.title || sourceValue), content: urlSource.rawText, url: String(sourceValue) }];
+              }
+            }
             const source: any = {
-              type: contentSource.type === 'keyword' ? 'keyword' : 'url',
-              value: String(sourceValue),
+              ...builtSource,
               targetAge: accountSettings?.targetAge || 'all',
               toneStyle: accountSettings?.toneStyle || 'friendly',
-              contentMode: options?.contentMode || accountSettings?.contentMode || 'seo',  // ✅ [2026-02-16 FIX] renderer 전달값 우선
+              contentMode: multiContentMode,  // ✅ [2026-02-16 FIX] renderer 전달값 우선
               // 쇼핑커넥트 모드 설정
-              affiliateUrl: options?.affiliateLink || accountSettings?.affiliateLink,  // ✅ [2026-02-16 FIX] renderer 전달값 우선
+              affiliateUrl: multiAffiliateUrl,  // ✅ [2026-02-16 FIX] renderer 전달값 우선
             };
 
             const { loadContentPolicy: loadMultiPolicy } = await import('./contentPolicy/policyLoader.js');
@@ -5533,9 +5601,12 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                 business_facts: optionFacts.length > 0
                   ? optionFacts
                   : (!/^https?:\/\//i.test(sourceText) && sourceText.length >= 20 ? [sourceText] : []),
-                source_materials: !/^https?:\/\//i.test(sourceText) && sourceText.length >= 20
-                  ? [{ type: 'user_provided', title: 'multi-account-source', content: sourceText }]
-                  : [],
+                // [2026-09-22 P1] real materials from the shared pipeline (was: the keyword string itself)
+                source_materials: multiSourceMaterials.length > 0
+                  ? (multiSourceMaterials as any)
+                  : (!/^https?:\/\//i.test(sourceText) && sourceText.length >= 20
+                    ? [{ type: 'user_provided', title: 'multi-account-source', content: sourceText }]
+                    : []),
                 account_id: accountId,
                 blog_id: account.naverId,
               },
@@ -5551,7 +5622,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
             const generated = await withAbortCheck(
               generateStructuredContentWithProductPolicy(source as any, {
                 provider: multiAccountProvider,
-                minChars: accountSettings?.minCharCount || 4000,
+                minChars: multiMinChars,
               }),
               abortController.signal
             );
@@ -5593,6 +5664,13 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
               sendLog(`   ⏹️ [${account.name}] 콘텐츠 생성 중 즉시 중지됨`);
               results.push({ accountId, success: false, message: '사용자에 의해 즉시 중지됨' });
               break; // for 루프 탈출
+            }
+            const sourceCode = (genError as { code?: string })?.code;
+            if (sourceCode === 'SOURCE_EMPTY' || sourceCode === 'SOURCE_PIPELINE_FAILED') {
+              // [2026-09-22 P1] no usable material → hold for manual review, never write from nothing
+              sendLog(`   🛑 발행 보류 (MANUAL_REVIEW · ${sourceCode}): 근거 자료를 찾지 못해 글을 쓰지 않았습니다.`);
+              results.push({ accountId, success: false, message: `MANUAL_REVIEW: ${(genError as Error).message}`, manualReviewRequired: true } as any);
+              continue;
             }
             sendLog(`   ⚠️ 콘텐츠 생성 실패: ${(genError as Error).message}`);
             results.push({ accountId, success: false, message: `콘텐츠 생성 실패: ${(genError as Error).message}` });

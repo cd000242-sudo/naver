@@ -82,7 +82,7 @@ describe('grounding fallback cost gate', () => {
   });
 
   it('핸들러는 팩트체크 엔진이 그라운딩일 때만 옵트인한다', () => {
-    const handlers = read('main/ipc/miscHandlers.ts');
+    const handlers = read('content/generationSourceBuilder.ts');
     expect(handlers).toMatch(/factCheckEngine[\s\S]{0,80}=== 'gemini-grounding'/);
     expect(handlers).toContain('allowGroundingFallback,');
   });

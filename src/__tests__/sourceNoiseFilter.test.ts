@@ -360,7 +360,9 @@ describe('호출부가 결과를 쓴다', () => {
     expect(codeOnly).not.toMatch(/sourceNoise\.removedLines > 0 \|\| sourceNoise\.removedFragments > 0/);
     // [2026-09-22 audit P0-1] the entry now routes through prepareSourceMaterial (per-document cleaning)
     //   and applies the result whenever the text differs — never by counters.
-    expect(codeOnly).toMatch(/const pipeline = prepareSourceMaterial\(source as any, runKeyword\);/);
+    // [2026-09-22 P1] `let` — the ambiguous-band judge may re-run the (still synchronous) pipeline once.
+    expect(codeOnly).toMatch(/let pipeline = prepareSourceMaterial\(source as any, runKeyword\);/);
+    expect(codeOnly).toMatch(/prepareSourceMaterial\(source as any, runKeyword, \{ judgeVerdicts: verdicts \}\)/);
     expect(codeOnly).toMatch(/if \(pipeline\.rawText !== rawBefore\)/);
   });
 });

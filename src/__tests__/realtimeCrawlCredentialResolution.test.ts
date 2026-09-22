@@ -19,7 +19,7 @@ function read(rel: string): string {
  */
 describe('realtime crawl credential resolution', () => {
   it('수집 핸들러는 검색 API 키를 우선 사용하고 데이터랩을 폴백으로 쓴다', () => {
-    const handlers = read('main/ipc/miscHandlers.ts');
+    const handlers = read('content/generationSourceBuilder.ts');
     expect(handlers).toContain('config.naverClientId || config.naverDatalabClientId');
     expect(handlers).toContain('config.naverClientSecret || config.naverDatalabClientSecret');
     // 데이터랩 단독 사용 재도입 금지 (회귀 방지)
@@ -27,7 +27,7 @@ describe('realtime crawl credential resolution', () => {
   });
 
   it('자격증명이 불완전하면 원인을 로그로 알린다 (조용한 30초 낭비 금지)', () => {
-    const handlers = read('main/ipc/miscHandlers.ts');
+    const handlers = read('content/generationSourceBuilder.ts');
     expect(handlers).toMatch(/if \(!crawlClientId \|\| !crawlClientSecret\) \{/);
     expect(handlers).toContain('네이버 검색 API Client Secret을 입력하세요');
   });

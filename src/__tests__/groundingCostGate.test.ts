@@ -88,7 +88,7 @@ describe('grounding cost gate (옵트인 전용)', () => {
   it('수집 폴백 그라운딩도 옵트인 (v2.11.149에서 도입, 유지 확인)', () => {
     const assembler = read('sourceAssembler.ts');
     expect(assembler).toContain('options.allowGroundingFallback === true');
-    const handlers = read('main/ipc/miscHandlers.ts');
+    const handlers = read('content/generationSourceBuilder.ts');
     expect(handlers).toMatch(/factCheckEngine[\s\S]{0,80}=== 'gemini-grounding'/);
   });
 });

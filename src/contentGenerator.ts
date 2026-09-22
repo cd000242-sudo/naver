@@ -5994,6 +5994,54 @@ async function resolveSideTaskRoute(
   return route;
 }
 
+/**
+ * [2026-09-22 P1] One batched relevance judge for ambiguous-band sources. Returns null when the
+ * selected engine has no route (then the lexical verdict stands) or the answer cannot be parsed.
+ */
+async function judgeAmbiguousSources(
+  source: ContentSource,
+  keyword: string,
+  entries: ReadonlyArray<{ id: string; title: string; score: number }>,
+  documents: ReadonlyArray<{ id: string; title: string; body: string; cleanedBody?: string }>,
+): Promise<Record<string, { verdict: 'accept' | 'reject' | 'unknown'; model: string }> | null> {
+  const route = await resolveSideTaskRoute(source, 'source-judge', 'utility');
+  if (!route) {
+    console.log(`[SourceJudge] 선택 엔진 라우트 없음 — 애매 자료 ${entries.length}건은 어휘 판정 유지`);
+    return null;
+  }
+  const byId = new Map(documents.map((d) => [d.id, d] as const));
+  const items = entries.slice(0, 6).map((e) => {
+    const d = byId.get(e.id);
+    const body = String(d?.cleanedBody ?? d?.body ?? '').replace(/\s+/g, ' ').slice(0, 600);
+    return `- id: ${e.id}
+  제목: ${String(d?.title || e.title).slice(0, 120)}
+  본문 앞부분: ${body}`;
+  }).join('\n');
+  const prompt = `주제 "${keyword}"에 대한 블로그 글의 근거 자료로 아래 문서가 실제로 그 주제를 다루는지 판정하라.
+제목·검색 스니펫에 단어가 겹치는 것만으로는 부족하다. 본문이 주제의 핵심 대상(entity)을 실제로 다뤄야 accept 다.
+같은 단어 한두 개만 겹치는 다른 주제의 글은 reject 다. 확신이 없으면 unknown.
+
+${items}
+
+JSON 으로만 답하라: {"verdicts":[{"id":"S01","verdict":"accept|reject|unknown"}]}`;
+  try {
+    const raw = await route.callModel(prompt, { maxTokens: 400, timeoutMs: route.subscription ? 180_000 : 30_000 });
+    const parsed = safeParseJson<{ verdicts?: Array<{ id?: string; verdict?: string }> }>(raw);
+    const list = Array.isArray(parsed?.verdicts) ? parsed.verdicts : [];
+    const out: Record<string, { verdict: 'accept' | 'reject' | 'unknown'; model: string }> = {};
+    for (const v of list) {
+      const id = String(v?.id || '').trim();
+      const verdict = v?.verdict === 'accept' || v?.verdict === 'reject' ? v.verdict : 'unknown';
+      if (id && entries.some((e) => e.id === id)) out[id] = { verdict, model: route.engine };
+    }
+    console.log(`[SourceJudge] engine=${route.engine} 애매 ${entries.length}건 → ${Object.entries(out).map(([id, v]) => `${id}:${v.verdict}`).join(' ') || '(응답 없음)'}`);
+    return Object.keys(out).length > 0 ? out : null;
+  } catch (error) {
+    console.warn(`[SourceJudge] 판정 실패 — 어휘 판정 유지: ${(error as Error)?.message}`);
+    return null;
+  }
+}
+
 async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void> {
   try {
     const rawText = String((source as any).rawText || '');
@@ -6549,6 +6597,7 @@ async function generateStructuredContentInternal(
     });
   };
 
+  let jsonParseRetryUsed = false;
   for (let attempt = 0; attempt <= QUALITY_ATTEMPT_LIMIT; attempt += 1) {
     try {
       // ✅ [2026-04-03] 매 시도 전 abort 체크
@@ -7050,7 +7099,13 @@ async function generateStructuredContentInternal(
         lastFailReason = `JSON 파싱 실패: ${(parseError as Error).message?.substring(0, 100)}`;
 
         // 마지막 시도가 아니면 재시도
-        if (attempt < MAX_ATTEMPTS) {
+        // [2026-09-22 P1] 정상 schema → 안전 repair → 재시도. 파싱 실패는 응답을 이미 받은 뒤라 과금 모호성이
+        //   없으므로, 전송 재시도 예산(MAX_ATTEMPTS)이 0인 구독 에이전트 경로도 품질 예산 안에서 1회 재시도한다.
+        //   불완전 JSON 에서 제목만 건져 성공 처리하는 옛 동작은 없다(PartialResponseError).
+        const jsonRetryAllowed = attempt < MAX_ATTEMPTS
+          || (attempt < QUALITY_ATTEMPT_LIMIT && !jsonParseRetryUsed);
+        if (jsonRetryAllowed) {
+          if (!(attempt < MAX_ATTEMPTS)) jsonParseRetryUsed = true;
           console.log(`[시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}] 재시도 중... AI에게 더 엄격한 JSON 형식 요청`);
           // ✅ [v1.4.14] 30줄 → 3줄로 축약. 재시도 시 토큰 -90%
           extraInstruction = prependJsonParseRetryInstruction({ attempt, previousInstruction: extraInstruction });
@@ -8040,11 +8095,15 @@ async function generateStructuredContentInternal(
 
         // SEO/Homefeed/Mate는 개인 표현·감탄사·동의어를 새로 삽입하지 않는다.
         // 의미와 근거를 보존하는 cleanup만 적용한다.
-        // [2026-09-22 audit P0 item 14] default 'light' (deterministic, protected spans). 'strong' only when the
-        //   caller/setting asks for it — the random synonym/ending shuffle is gone at every intensity.
+        // [2026-09-22 P1 확정] DEFAULT = LIGHT (deterministic, protected spans). 'strong' only when the user
+        //   explicitly chose it — request field, then config.humanizerIntensity, then env. Never by mode.
+        let configuredHumanizerIntensity: string | undefined;
+        try {
+          configuredHumanizerIntensity = String((await loadConfig() as any)?.humanizerIntensity || '').trim() || undefined;
+        } catch { /* config unavailable → default light */ }
         const humanizeIntensity = resolveHumanizeIntensity(
           (source.contentMode || 'seo') as PromptMode,
-          ((source as any).humanizerIntensity || process.env.HUMANIZER_INTENSITY) as 'off' | 'light' | 'strong' | undefined,
+          ((source as any).humanizerIntensity || configuredHumanizerIntensity || process.env.HUMANIZER_INTENSITY) as 'off' | 'light' | 'strong' | undefined,
         );
 
         // Humanize 적용
@@ -9050,8 +9109,21 @@ export async function generateStructuredContent(
   // [2026-09-22 audit P0-1] Cleaning is now per source document (never across documents),
   //   relevance/freshness are applied, the writer gets labelled sources, and the loss is measured.
   const rawBefore = String(source.rawText || '');
-  const pipeline = prepareSourceMaterial(source as any, runKeyword);
+  let pipeline = prepareSourceMaterial(source as any, runKeyword);
   console.log(pipeline.logLine);
+  // [2026-09-22 P1] Relevance v2 second pass: only documents in the ambiguous score band go to ONE
+  //   batched judge call on the user's selected engine (utility tier — never a vendor the user did not
+  //   pick). 'reject' verdicts flip the document to REJECT_JUDGE_IRRELEVANT; the verdict and model are
+  //   recorded in A2-source-ranking.json. No ambiguous docs → no call.
+  const ambiguousEntries = pipeline.ranking.filter((e) => e.ambiguous);
+  if (ambiguousEntries.length > 0) {
+    const verdicts = await judgeAmbiguousSources(source, runKeyword, ambiguousEntries, pipeline.documents);
+    if (verdicts) {
+      pipeline = prepareSourceMaterial(source as any, runKeyword, { judgeVerdicts: verdicts });
+      console.log(`${pipeline.logLine} judge=${Object.values(verdicts).map((v) => v.verdict).join(',')}`);
+    }
+  }
+  run.writeSourceRanking(pipeline.ranking, { keyword: runKeyword, topicType: pipeline.metrics.topicType });
   if (pipeline.rawText !== rawBefore) {
     source = { ...source, rawText: pipeline.rawText };
     if (pipeline.documents.length > 0) {
@@ -9061,6 +9133,19 @@ export async function generateStructuredContent(
   const sourceBased = (source.metadata as any)?.realtimeCrawlRequested === true
     || (source.metadata as any)?.useRealTimeInfo === true
     || pipeline.metrics.rawSources > 0;
+  // [2026-09-22 P1] SOURCE_EMPTY gate — a search-based article (real-time material was requested)
+  //   with no accepted source and no material text must not reach the writer on any path
+  //   (manual / homefeed / SmartScheduler / multi-account). The status is recorded before throwing
+  //   so the run shows why nothing was written.
+  const sourceStatus: string = (source.metadata as any)?.sourceStatus
+    || (pipeline.metrics.acceptedSources === 0 && !pipeline.rawText.trim() ? 'SOURCE_EMPTY'
+      : String((source.metadata as any)?.searchStatus?.overall || '') === 'SEARCH_PARTIAL' ? 'SOURCE_PARTIAL' : 'SOURCE_OK');
+  if ((source.metadata as any)?.realtimeCrawlRequested === true && pipeline.metrics.acceptedSources === 0 && !pipeline.rawText.trim()) {
+    run.updateMeta({ extra: { ...(run.meta.extra || {}), sourceBased, sourceStatus: 'SOURCE_EMPTY' } });
+    run.finish({ publishDecision: 'MANUAL_REVIEW' as any });
+    setActiveGenerationRun(null); // the try/finally below is not reached from here
+    throw new Error(`SOURCE_EMPTY: "${runKeyword}" 근거 자료 0건 — 검색형 글은 자료 없이 쓰지 않습니다 (수동 검토 또는 재검색 필요)`);
+  }
   run.updateMeta({
     sourceChars: pipeline.rawText.length,
     sourceCounts: {
@@ -9078,7 +9163,7 @@ export async function generateStructuredContent(
       rejectedSources: pipeline.metrics.rejectedSources,
       unknownDateSources: pipeline.metrics.unknownDateSources,
     },
-    extra: { ...(run.meta.extra || {}), sourceBased, sourcePipelineLevel: pipeline.metrics.level },
+    extra: { ...(run.meta.extra || {}), sourceBased, sourceStatus, sourcePipelineLevel: pipeline.metrics.level },
   });
   run.writeResearchInput(pipeline.rawText);
   // [2026-09-03 자체 실행 비평] 쇼핑 재료 위생 — 옵션 라벨("구성: (그레이)본체+다리")이 리뷰에 붙어 오고, 1인칭 옵트인에서는
