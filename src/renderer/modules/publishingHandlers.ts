@@ -284,7 +284,8 @@ function buildPublishContentReuseKey(formData: any): string {
     //   그대로 재사용된다 — fullAutoFlow.buildFullAutoContentReuseKey와
     //   반드시 동일한 필드 구성을 유지할 것 (두 캐시를 OR로 읽음).
     accountId: normalizePublishReuseString((window as any).currentNaverId || ''),
-    dateBucket: new Date().toISOString().slice(0, 10),
+    // [2026-09-22 P1] LOCAL date (same expression as fullAutoFlow) — UTC put 00:00~09:00 KST in yesterday's bucket.
+    dateBucket: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`,
   });
 }
 

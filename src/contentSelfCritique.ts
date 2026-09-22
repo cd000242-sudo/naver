@@ -57,12 +57,13 @@ ${extraBlock}
 2. AI 특유의 균질한 표현이나 정해진 클리셰("솔직히", "직접 해보니", "체감", "개인적으로" 등 단어를 정해진 위치에서 반복)가 있는가?
 3. 사람이 실제로 쓴 글처럼 사후 정정, 미완 결론, 감정 흔들림, 자기 교정 같은 흔적이 보이는가?
 4. 같은 어미가 2번 이상 연속되거나, 같은 보기 표현이 반복되지 않는가?
-5. AI 티 나는 메타·토큰 표현이 있는가? — "[자료]/[자료N]" 토큰, "자료에 따르면/입력 자료에/관련 안내에서는/자료에 명시되어 있지 않습니다", "○월 ○일 기준" 작성일 못박기 → 발견 시 자연스러운 문장으로 고쳐라(정보는 유지, 출처·날짜 메타만 제거).
+5. 내부 토큰 누출이 있는가? — "[자료]/[자료N]" 토큰, "입력 자료에/자료에 명시되어 있지 않습니다" 같은 작업 지시문 흔적 → 자연스러운 문장으로 고쳐라. 단, 기관·매체 귀속("국토교통부 발표에 따르면", "기아 공식 가격표 기준")과 자료의 날짜("2026년 9월 1일 기준")는 근거 표현이므로 절대 지우지 않는다.
 
 [작업 규칙]
 - 문장 단위로만 수정. 전체 구조나 정보는 그대로 보존.
 - 수정 대상은 가장 어색한 문장 최대 3개. 더 많이 손대지 말 것.
 - 정보 추가·삭제 금지. 표현 자연스러움만 개선.
+- 숫자·금액·날짜·정책명·기관명·제품명·인물명·직접 인용은 한 글자도 바꾸지 않는다.
 - 수정할 게 없으면 원본을 그대로 반환.${conclusionRule}
 
 [응답 형식 — JSON only, 마크다운 펜스 금지]
@@ -118,11 +119,9 @@ export async function selfCritiqueAndRewrite(
   const composite = hasConclusion ? `${text}\n\n${CONCLUSION_DELIMITER}\n${conclusion.trim()}` : text;
 
   if (composite.length > MAX_BODY_CHARS_FOR_CRITIQUE) {
-    console.warn(
-      `[SelfCritique] 본문 ${composite.length}자 > 상한 ${MAX_BODY_CHARS_FOR_CRITIQUE} — `
-      + `부분 평가 결과는 적용하지 않음 (범위: 0~${MAX_BODY_CHARS_FOR_CRITIQUE})`,
-    );
-    return keepOriginal('skipped');
+    // [2026-09-22 P1] Long posts are critiqued in paragraph-aligned sections so the whole
+    // article is seen (option B) — never a partial read passed off as a full evaluation.
+    return critiqueInSections(text, conclusion, personaCard, geminiCall, extraDirective, keepOriginal);
   }
 
   try {
@@ -156,6 +155,52 @@ export async function selfCritiqueAndRewrite(
     console.warn(`[SelfCritique] 호출/파싱 실패, 원본 유지: ${msg.substring(0, 120)}`);
     return keepOriginal('fallback');
   }
+}
+
+const SECTION_TARGET_CHARS = 12000;
+const MAX_SECTIONS = 3;
+
+/** Split at paragraph boundaries into ≤ SECTION_TARGET_CHARS chunks (max MAX_SECTIONS; the rest joins the last). */
+export function splitIntoCritiqueSections(text: string): string[] {
+  const paragraphs = text.split(/\n{2,}/);
+  const sections: string[] = [];
+  let current = '';
+  for (const para of paragraphs) {
+    const candidate = current ? `${current}\n\n${para}` : para;
+    if (candidate.length > SECTION_TARGET_CHARS && current && sections.length < MAX_SECTIONS - 1) {
+      sections.push(current);
+      current = para;
+    } else {
+      current = candidate;
+    }
+  }
+  if (current) sections.push(current);
+  return sections;
+}
+
+async function critiqueInSections(
+  text: string,
+  conclusion: string | undefined,
+  personaCard: string,
+  geminiCall: (prompt: string) => Promise<string>,
+  extraDirective: string | undefined,
+  keepOriginal: (source: SelfCritiqueResult['source']) => SelfCritiqueResult,
+): Promise<SelfCritiqueResult> {
+  const sections = splitIntoCritiqueSections(text);
+  console.log(`[SelfCritique] 본문 ${text.length}자 > ${MAX_BODY_CHARS_FOR_CRITIQUE} — 문단 경계 ${sections.length}구간으로 나눠 전체 평가`);
+  const rewrittenSections: string[] = [];
+  let rewroteAny = false;
+  for (const section of sections) {
+    // Each section is evaluated with the same rules; the conclusion is not attached (kept as-is).
+    const result = await selfCritiqueAndRewrite(section, personaCard, geminiCall, extraDirective);
+    rewrittenSections.push(result.rewrote ? result.body : section);
+    rewroteAny = rewroteAny || result.rewrote;
+  }
+  if (!rewroteAny) return keepOriginal('critique');
+  const body = rewrittenSections.join('\n\n');
+  return typeof conclusion === 'string' && conclusion.trim()
+    ? { body, rewrote: true, source: 'critique', conclusion }
+    : { body, rewrote: true, source: 'critique' };
 }
 
 function splitConclusion(rewritten: string): { body: string; conclusion: string } | null {

@@ -346,7 +346,10 @@ function buildFullAutoContentReuseKey(formData) {
         //   그대로 재사용된다 — publishingHandlers.buildPublishContentReuseKey와
         //   반드시 동일한 필드 구성을 유지할 것 (두 캐시를 OR로 읽음).
         accountId: normalizeReuseString(resolveReuseAccountId()),
-        dateBucket: new Date().toISOString().slice(0, 10),
+        // [2026-09-22 P1] LOCAL date, not UTC — a Korean user's "next day" 00:00~09:00 KST stayed in
+        //   yesterday's UTC bucket, so a homefeed issue could reuse the previous day's search results.
+        //   publishingHandlers.buildPublishContentReuseKey must use the same expression.
+        dateBucket: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`,
     });
 }
 /** Account id for the reuse key — tolerant of environments where getCurrentNaverId is not bundled (tests). */

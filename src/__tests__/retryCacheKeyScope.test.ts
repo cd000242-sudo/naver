@@ -37,13 +37,19 @@ describe('retry-cache key scope (accountId + dateBucket)', () => {
     const body = extractFunctionBody(fullAutoFlowSrc, 'buildFullAutoContentReuseKey');
     expect(body).toMatch(/accountId\s*:/);
     expect(body).toMatch(/dateBucket\s*:/);
-    expect(body).toMatch(/new Date\(\)\.toISOString\(\)\.slice\(0,\s*10\)/);
+    // [2026-09-22 P1] local date bucket (UTC put 00:00~09:00 KST in yesterday's bucket)
+    expect(body).toMatch(/new Date\(\)\.getFullYear\(\)/);
+    expect(body).toMatch(/getDate\(\)\)\.padStart\(2, '0'\)/);
+    expect(body).not.toMatch(/toISOString\(\)\.slice\(0,\s*10\)/);
   });
 
   it('publishingHandlers.buildPublishContentReuseKey includes accountId and dateBucket', () => {
     const body = extractFunctionBody(publishingHandlersSrc, 'buildPublishContentReuseKey');
     expect(body).toMatch(/accountId\s*:/);
     expect(body).toMatch(/dateBucket\s*:/);
-    expect(body).toMatch(/new Date\(\)\.toISOString\(\)\.slice\(0,\s*10\)/);
+    // [2026-09-22 P1] local date bucket (UTC put 00:00~09:00 KST in yesterday's bucket)
+    expect(body).toMatch(/new Date\(\)\.getFullYear\(\)/);
+    expect(body).toMatch(/getDate\(\)\)\.padStart\(2, '0'\)/);
+    expect(body).not.toMatch(/toISOString\(\)\.slice\(0,\s*10\)/);
   });
 });

@@ -205,28 +205,56 @@ describe('selfCritiqueAndRewrite — 결론 편입', () => {
 });
 
 /**
- * [2026-09-22] MAX_BODY_CHARS_FOR_CRITIQUE raised 4500 → 16000. Bodies still over that
- * limit must be skipped outright (no LLM call, no partial-evaluation patch applied) —
- * evaluating only a truncated prefix but scoring the ratio guard against the full body
- * used to reject/patch based on data the model never saw.
+ * [2026-09-22 P1] Bodies over MAX_BODY_CHARS_FOR_CRITIQUE (16,000) are no longer skipped:
+ * they are critiqued in paragraph-aligned sections so the WHOLE article is evaluated (option B).
+ * A partial read is never presented as a full evaluation, and each section keeps the ≤3-sentence rule.
  */
-describe('selfCritiqueAndRewrite — 상한 초과 본문은 부분 평가로 패치하지 않는다', () => {
-  it('20,000자 본문은 LLM을 호출하지 않고 원본을 그대로 반환한다', async () => {
-    const HUGE_BODY = LONG_BODY.repeat(Math.ceil(20000 / LONG_BODY.length));
+describe('selfCritiqueAndRewrite — 상한 초과 본문은 문단 구간으로 나눠 전체를 본다', () => {
+  it('20,000자 본문은 구간별로 LLM 을 호출하고 전 구간을 이어 붙인다', async () => {
+    const paragraph = `${LONG_BODY.trim()}`;
+    const HUGE_BODY = Array.from({ length: Math.ceil(20000 / paragraph.length) + 1 }, () => paragraph).join('\n\n');
     expect(HUGE_BODY.length).toBeGreaterThan(16000);
 
-    const geminiCall = vi.fn();
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    try {
-      const result = await selfCritiqueAndRewrite(HUGE_BODY, FAKE_PERSONA, geminiCall);
-      expect(geminiCall).not.toHaveBeenCalled();
-      expect(result.rewrote).toBe(false);
-      expect(result.source).toBe('skipped');
-      expect(result.body).toBe(HUGE_BODY);
-      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('범위: 0~16000'));
-    } finally {
-      warnSpy.mockRestore();
-    }
+    const seen: string[] = [];
+    const geminiCall = vi.fn(async (prompt: string) => {
+      seen.push(prompt);
+      return JSON.stringify({ rewrote: false, body: '' });
+    });
+    const result = await selfCritiqueAndRewrite(HUGE_BODY, FAKE_PERSONA, geminiCall);
+    expect(geminiCall.mock.calls.length).toBeGreaterThanOrEqual(2);
+    expect(geminiCall.mock.calls.length).toBeLessThanOrEqual(3);
+    // every section prompt is under the single-call ceiling and together they cover the text
+    for (const prompt of seen) expect(prompt).not.toContain('[...뒷부분 평가 생략]');
+    const covered = seen.map((p) => p.slice(p.indexOf('[본문]'))).join('');
+    expect(covered).toContain(paragraph.slice(0, 40));
+    expect(covered).toContain(paragraph.slice(-40));
+    expect(result.rewrote).toBe(false);
+    expect(result.body).toBe(HUGE_BODY);
+  });
+
+  it('구간 하나만 고쳐도 나머지 구간은 원문 그대로 이어 붙이고 마무리는 보존한다', async () => {
+    const paragraph = `${LONG_BODY.trim()}`;
+    const HUGE_BODY = Array.from({ length: Math.ceil(20000 / paragraph.length) + 1 }, () => paragraph).join('\n\n');
+    let n = 0;
+    const geminiCall = vi.fn(async (prompt: string) => {
+      n += 1;
+      const body = prompt.slice(prompt.indexOf('---\n') + 4);
+      return n === 1 ? JSON.stringify({ rewrote: true, body: body.replace('오늘 새로', '오늘 막') }) : JSON.stringify({ rewrote: false, body: '' });
+    });
+    const result = await selfCritiqueAndRewrite(HUGE_BODY, FAKE_PERSONA, geminiCall, undefined, '마무리 문단입니다.');
+    expect(result.rewrote).toBe(true);
+    expect(result.body).toContain('오늘 막');
+    expect(result.body.length).toBeGreaterThan(HUGE_BODY.length * 0.95);
+    expect(result.conclusion).toBe('마무리 문단입니다.');
+  });
+
+  it('검토 기준은 기관 귀속·자료 날짜를 지우라고 시키지 않는다 (P0 귀속 보존과 충돌 금지)', async () => {
+    let captured = '';
+    const geminiCall = vi.fn(async (prompt: string) => { captured = prompt; return JSON.stringify({ rewrote: false, body: '' }); });
+    await selfCritiqueAndRewrite(LONG_BODY, FAKE_PERSONA, geminiCall);
+    expect(captured).not.toMatch(/출처·날짜 메타만 제거/);
+    expect(captured).toContain('절대 지우지 않는다');
+    expect(captured).toContain('숫자·금액·날짜·정책명·기관명·제품명·인물명·직접 인용은 한 글자도 바꾸지 않는다');
   });
 });
 
