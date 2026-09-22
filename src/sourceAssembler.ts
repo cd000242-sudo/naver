@@ -19,6 +19,8 @@ import {
 import { resolveBulkSourceMix } from './content/factSourceTierPolicy.js';
 // [2026-09-22 audit P0] structured source documents + honest search status.
 import { classifySourceTier, deriveSourceName, makeSourceId, type SourceDocument, type SourceKind } from './content/sourceDocument.js';
+// [P1 relevance v2] Generic publisher-name/domain resolution — no per-keyword rules.
+import { resolveSourceName } from './content/sourceName.js';
 import { aggregateSearchStatus, classifyHttpStatus, type SourceSearchResult } from './content/searchStatus.js';
 import { isPublicInfoTopic } from './content/publicInfoFactTable.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
@@ -1883,11 +1885,19 @@ export async function collectTopArticleFullTexts(
         usedUrls.push(candidate.link);
         totalChars += excerpt.length;
         const kind = classifySourceKind(candidate.link) as SourceKind;
+        // [P1 relevance v2] Resolve a real publisher name (never invented) + bare domain;
+        // deriveSourceName's hostname/Korean-label guess remains the fallback when unresolved.
+        const resolvedSource = resolveSourceName({
+          url: candidate.link,
+          title,
+          sourceType: kind === 'news' || kind === 'blog' ? kind : 'web',
+        });
         documents.push({
           id: makeSourceId(documents.length + 1),
           title,
           sourceType: kind === 'news' || kind === 'blog' ? kind : 'web',
-          sourceName: deriveSourceName(candidate.link, title),
+          sourceName: resolvedSource.sourceName ?? deriveSourceName(candidate.link, title),
+          domain: resolvedSource.domain,
           url: candidate.link,
           pubDate: sourceDate || undefined,
           dateStatus: sourceDate ? 'KNOWN' : 'UNKNOWN_DATE',

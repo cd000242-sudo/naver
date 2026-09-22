@@ -16,18 +16,43 @@
 export type SourceKind = 'news' | 'blog' | 'web' | 'kin' | 'official' | 'snippet' | 'url' | 'unknown';
 export type SourceTier = 'OFFICIAL' | 'NEWS' | 'BLOG' | 'COMMUNITY' | 'UNKNOWN';
 
+/** [P1 relevance v2] Per-component breakdown behind a v2 relevance score. See sourceRelevanceScoring.ts. */
+export interface SourceRelevanceComponents {
+  mainEntityMatch: number;
+  mainKeywordMatch: number;
+  intentMatch: number;
+  freshnessScore: number;
+  sourceQuality: number;
+  titleRelevance: number;
+  bodyRelevance: number;
+}
+
 export interface SourceDocument {
   id: string; // 'S01', 'S02', ...
   title: string;
   sourceType: SourceKind;
-  sourceName: string;
+  /** [P1 relevance v2] Optional/nullable — resolveSourceName() returns null rather than guessing. */
+  sourceName?: string | null;
+  /** [P1 relevance v2] Bare hostname (no "www."), from resolveSourceName(). */
+  domain?: string;
   url: string;
   pubDate?: string; // 'YYYY-MM-DD'
   dateStatus: 'KNOWN' | 'UNKNOWN_DATE';
   body: string; // as collected
   cleanedBody?: string;
   sourceTier: SourceTier;
-  relevance?: { keywordScore: number; entityScore: number; accepted: boolean; reason?: string };
+  relevance?: {
+    // Legacy v1 fields (evaluateSourceRelevance) — still set by that path.
+    keywordScore?: number;
+    entityScore?: number;
+    // v2 fields (rankSourceDocuments / computeSourceRanking) — see sourceRelevanceRanking.ts.
+    score?: number;
+    components?: SourceRelevanceComponents;
+    accepted: boolean;
+    reason?: string;
+  };
+  /** [P1 relevance v2] Kept but noticeably aged for its topic type — renderer warns readers. */
+  stale?: boolean;
   retention?: { rawChars: number; cleanChars: number; removedChars: number };
 }
 
@@ -50,7 +75,8 @@ const COMMUNITY_DOMAINS = new Set([
   'kin.naver.com', 'cafe.naver.com', 'dcinside.com', 'fmkorea.com', 'instiz.net', 'theqoo.net',
 ]);
 
-function extractHostname(url: string): string {
+/** [P1 relevance v2] Exported for reuse by sourceName.ts / sourceDocumentRender.ts. */
+export function extractHostname(url: string): string {
   const raw = String(url ?? '').trim();
   if (!raw) return '';
   try {

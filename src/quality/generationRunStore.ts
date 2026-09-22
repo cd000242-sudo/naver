@@ -22,8 +22,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import type { GenerationRunMeta, PostProcessStepRecord } from './generationRunTypes';
+import { SOURCE_RANKING_FILE, buildSourceRankingPayload, type SourceRankingWriteMeta } from './generationRunSourceRanking';
 
 export type { GenerationRunMeta, PostProcessStepRecord };
+export type { SourceRankingWriteMeta };
 
 const FILE_META = 'meta.json';
 const FILE_SEARCH_RAW = 'A-search-raw.json';
@@ -174,6 +176,11 @@ export class GenerationRun {
     this.writeFileBestEffort(FILE_SEARCH_RAW, redactSecrets(this.stringifySafe(payload)));
   }
 
+  /** [P1 relevance v2] Persists the per-document relevance ranking next to A-search-raw.json. */
+  writeSourceRanking(entries: unknown, meta: SourceRankingWriteMeta): void {
+    this.writeFileBestEffort(SOURCE_RANKING_FILE, redactSecrets(this.stringifySafe(buildSourceRankingPayload(entries, meta))));
+  }
+
   writeResearchInput(text: string | object): void {
     if (typeof text === 'string') {
       this.writeFileBestEffort(FILE_RESEARCH_INPUT_TXT, redactSecrets(text));
@@ -276,25 +283,5 @@ export function withActiveRun<T>(fn: (run: GenerationRun) => T): T | undefined {
   return fn(activeRun);
 }
 
-/** Delete the oldest run directories under `root` beyond `keep` (sorted by name). */
-export function pruneGenerationRuns(root: string, keep = 200): void {
-  try {
-    if (!fs.existsSync(root)) return;
-    const entries = fs
-      .readdirSync(root, { withFileTypes: true })
-      .filter((e) => e.isDirectory())
-      .map((e) => e.name)
-      .sort();
-    if (entries.length <= keep) return;
-    const toRemove = entries.slice(0, entries.length - keep);
-    for (const name of toRemove) {
-      try {
-        fs.rmSync(path.join(root, name), { recursive: true, force: true });
-      } catch (err) {
-        console.warn(`[GenerationRun] prune failed for ${name}:`, (err as Error)?.message ?? err);
-      }
-    }
-  } catch (err) {
-    console.warn('[GenerationRun] prune failed:', (err as Error)?.message ?? err);
-  }
-}
+// [P1 relevance v2] Split out to keep this file under the 300-line project limit.
+export { pruneGenerationRuns } from './generationRunPrune';

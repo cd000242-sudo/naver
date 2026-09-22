@@ -29,10 +29,13 @@ const ON_TOPIC = '청약통장 금리가 올해 2.5%에서 3.0%로 오른다. �
 
 describe('sourcePipeline — 자료 블록 단위 정제·라벨·손실 계측', () => {
   it('structured documents are cleaned per block and rendered with source labels', () => {
+    // [P1 relevance v2] Each doc carries enough distinct elaboration that the new duplicate-body
+    // detector (sourceRelevanceDuplicate.ts) — which correctly flags near-byte-identical articles —
+    // doesn't mistake "3 articles quoting the same official statement" for "the same article 3 times".
     const docs = [
-      doc('S01', `${ON_TOPIC}\n관련 기사\n무단 전재 및 재배포 금지\n인기 기사 1위 2위 3위`),
-      doc('S02', `${ON_TOPIC} 두 번째 기사 본문입니다.`),
-      doc('S03', `${ON_TOPIC} 세 번째 기사 본문입니다.`, { pubDate: undefined, dateStatus: 'UNKNOWN_DATE' }),
+      doc('S01', `${ON_TOPIC} 발표 직후 청약 상담 창구에는 문의가 몰렸다고 담당자는 전했다.\n관련 기사\n무단 전재 및 재배포 금지\n인기 기사 1위 2위 3위`),
+      doc('S02', `${ON_TOPIC} 두 번째 기사 본문입니다. 이 조치는 무주택 서민의 자산 형성을 돕기 위한 것으로, 국토교통부는 후속 대책도 순차적으로 발표할 계획이라고 밝혔다. 전문가들은 이번 인상이 청약 경쟁률에 영향을 줄 것으로 내다봤다.`),
+      doc('S03', `${ON_TOPIC} 세 번째 기사 본문입니다. 지역 부동산 업계에서는 이번 금리 인상이 청약 시장 전반에 미칠 파급 효과를 주목하고 있으며, 실수요자들의 자금 계획에도 변화가 예상된다는 분석이 나온다.`, { pubDate: undefined, dateStatus: 'UNKNOWN_DATE' }),
     ];
     const result = prepareSourceMaterial({ rawText: '', contentMode: 'seo', metadata: { sourceDocuments: docs } }, KEYWORD);
     expect(result.metrics.usedStructured).toBe(true);
@@ -54,7 +57,13 @@ describe('sourcePipeline — 자료 블록 단위 정제·라벨·손실 계측'
     const chromeTail = '\n관련 기사\n무단 전재 및 재배포 금지\n최신 뉴스 1위 2위 3위 4위';
     const parts: string[] = [];
     for (let i = 1; i <= 8; i += 1) {
-      const body = `${ON_TOPIC} ${'자료 본문 문장입니다. '.repeat(320)}`.slice(0, 3600);
+      // [P1 relevance v2] Each doc's filler must differ from the others' — otherwise the new
+      // duplicate-body detector (sourceRelevanceDuplicate.ts) correctly flags near-identical
+      // articles as REJECT_DUPLICATE, which isn't what this fixture is testing (loss-prevention).
+      // A single-digit-substitution filler is too periodic to actually differ shingle-wise, so
+      // vary a running index (k) through the whole filler instead of just the doc number (i).
+      const filler = Array.from({ length: 320 }, (_, k) => `자료 ${i}-${k} 세부 설명 문장입니다. `).join('');
+      const body = `${ON_TOPIC} ${filler}`.slice(0, 3600);
       parts.push(`[자료 ${i} — 청약통장 금리 기사 ${i}]\n[2026-09-20 작성 · 2일 전]\n${body}${i === 1 ? chromeTail : ''}`);
     }
     const bundle = `[자료 등급 — 이 글의 재료가 어디서 왔는지]\n기사 8건이 근거를 받칩니다.\n\n=== 사실 자료 (수치·조건·절차는 이 범위에서만 사용) ===\n※ 번호표 안내\n${parts.join('\n\n')}\n\n=== 검색 결과 스니펫 (맥락 참고용) ===\n【스니펫】\n청약통장 금리 인상 안내`;

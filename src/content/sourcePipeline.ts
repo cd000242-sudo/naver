@@ -1,13 +1,16 @@
-// [2026-09-22 audit P0-1/P0-4/H6/H7] Source pipeline: clean per document, score relevance,
-// apply freshness, and render the writer input WITH source labels. Structured documents
-// (from collectContentFromPlatforms) are preferred; the legacy "[자료 N — 제목]" bundle is
+// [2026-09-22 audit P0-1/P0-4/H6/H7 + P1 relevance v2] Source pipeline: clean per document,
+// rank relevance (entity/intent/topic-freshness aware — see sourceRelevanceRanking.ts), and
+// render the writer input WITH source labels. Structured documents (from
+// collectContentFromPlatforms) are preferred; the legacy "[자료 N — 제목]" bundle is
 // parsed into documents as a fallback so the same per-block cleaning applies to every path.
 //
-// Every stage reports counts so a 73%-loss can never again read as "사이트 껍데기 제거".
+// Every stage reports counts so a 73%-loss can never again read as "사이트 껍데기 제거",
+// and a Seoul-jeonse article can never again pass for "청약통장 금리" on shared filler words.
 
 import { parseLegacyMaterialBundle, type SourceDocument } from './sourceDocument.js';
 import { renderSourceDocumentsForWriter, summarizeSourceDocuments } from './sourceDocumentRender.js';
-import { applyFreshnessPolicy, evaluateSourceRelevance } from './sourceRelevance.js';
+import { buildResearchSummary } from './researchSummary.js';
+import { computeSourceRanking, type SourceRankingEntry, type TopicType } from './sourceRelevanceRanking.js';
 import { stripSourceNoise, stripSourceNoiseFromBody } from './sourceNoiseFilter.js';
 
 export interface SourcePipelineMetrics {
@@ -22,11 +25,13 @@ export interface SourcePipelineMetrics {
   rejectedReasons: Record<string, number>;
   usedStructured: boolean;
   level: 'ok' | 'warn' | 'weak';
+  topicType: TopicType;
 }
 
 export interface SourcePipelineResult {
   rawText: string;
   documents: SourceDocument[];
+  ranking: SourceRankingEntry[];
   metrics: SourcePipelineMetrics;
   logLine: string;
 }
@@ -39,6 +44,25 @@ interface PipelineSource {
   metadata?: Record<string, unknown>;
 }
 
+export interface PrepareSourceMaterialOptions {
+  /** Injectable clock for deterministic freshness tests. */
+  now?: Date;
+  /**
+   * Optional async LLM-judge hook for ambiguous-relevance documents. NOT invoked by
+   * prepareSourceMaterial itself — this function stays synchronous so the existing
+   * unawaited call site in contentGenerator.ts keeps working. Accepted here only so
+   * callers share the same options shape as rankSourceDocuments (sourceRelevanceRanking.ts);
+   * use rankSourceDocuments directly when the judge pass is actually needed.
+   */
+  judgeAmbiguous?: (doc: SourceDocument, keyword: string) => Promise<{ verdict: 'accept' | 'reject' | 'unknown'; model: string }>;
+  /**
+   * [P1] Verdicts already obtained for ambiguous documents (id → verdict). contentGenerator runs the
+   * one batched selected-engine judge call between two synchronous passes and feeds the result here:
+   * 'reject' flips the document to REJECT_JUDGE_IRRELEVANT and the verdict is recorded on the ranking entry.
+   */
+  judgeVerdicts?: Record<string, { verdict: 'accept' | 'reject' | 'unknown'; model: string }>;
+}
+
 const WARN_RATIO = 0.3;
 const WEAK_RATIO = 0.5;
 
@@ -48,13 +72,20 @@ function levelFor(removedRatio: number): SourcePipelineMetrics['level'] {
   return 'ok';
 }
 
+function reasonCount(reasons: Record<string, number>, key: string): number {
+  return reasons[key] || 0;
+}
+
 function formatLog(m: SourcePipelineMetrics): string {
   const prefix = m.level === 'weak' ? '⛔ QUALITY_GATE_WEAK ' : m.level === 'warn' ? '⚠️ WARNING ' : '';
   const reasons = Object.entries(m.rejectedReasons).map(([k, v]) => `${k}=${v}`).join(',');
   return `[SourcePipeline] ${prefix}raw_sources=${m.rawSources} raw_chars=${m.rawChars} clean_chars=${m.cleanChars} `
     + `removed_chars=${m.removedChars} removed_ratio=${(m.removedRatio * 100).toFixed(1)}% `
     + `accepted_sources=${m.acceptedSources} rejected_sources=${m.rejectedSources}${reasons ? `(${reasons})` : ''} `
-    + `unknown_date=${m.unknownDateSources} mode=${m.usedStructured ? 'structured' : 'legacy-bundle'}`;
+    + `unknown_date=${m.unknownDateSources} mode=${m.usedStructured ? 'structured' : 'legacy-bundle'} `
+    + `topic=${m.topicType} entity_mismatch=${reasonCount(m.rejectedReasons, 'REJECT_ENTITY_MISMATCH')} `
+    + `body_irrelevant=${reasonCount(m.rejectedReasons, 'REJECT_BODY_IRRELEVANT')} too_old=${reasonCount(m.rejectedReasons, 'REJECT_TOO_OLD')} `
+    + `duplicate=${reasonCount(m.rejectedReasons, 'REJECT_DUPLICATE')} low_quality=${reasonCount(m.rejectedReasons, 'REJECT_LOW_SOURCE_QUALITY')}`;
 }
 
 function cleanDocuments(docs: SourceDocument[]): SourceDocument[] {
@@ -78,8 +109,14 @@ function isUrlMode(source: PipelineSource): boolean {
  * Prepare writer material. Returns the (possibly re-rendered) rawText plus metrics.
  * URL mode keeps the legacy string path (the article itself is the material); keyword mode
  * uses structured documents when available, else parses the legacy bundle into documents.
+ *
+ * Stays synchronous — see PrepareSourceMaterialOptions.judgeAmbiguous doc comment.
  */
-export function prepareSourceMaterial(source: PipelineSource, keyword: string): SourcePipelineResult {
+export function prepareSourceMaterial(
+  source: PipelineSource,
+  keyword: string,
+  opts: PrepareSourceMaterialOptions = {},
+): SourcePipelineResult {
   const rawText = String(source.rawText || '');
   const mode = String(source.contentMode || 'seo');
   const structured = Array.isArray(source.metadata?.sourceDocuments)
@@ -101,9 +138,10 @@ export function prepareSourceMaterial(source: PipelineSource, keyword: string): 
       rejectedReasons: {},
       usedStructured: false,
       level: 'ok',
+      topicType: 'EVERGREEN',
     };
     metrics.level = levelFor(metrics.removedRatio);
-    return { rawText: noise.text, documents: [], metrics, logLine: formatLog(metrics) };
+    return { rawText: noise.text, documents: [], ranking: [], metrics, logLine: formatLog(metrics) };
   }
 
   let usedStructured = true;
@@ -135,7 +173,20 @@ export function prepareSourceMaterial(source: PipelineSource, keyword: string): 
 
   const rawChars = docs.reduce((sum, d) => sum + d.body.length, 0) + snippetSection.length;
   const cleaned = cleanDocuments(docs);
-  const scored = applyFreshnessPolicy(evaluateSourceRelevance(cleaned, keyword), { mode });
+  const forceTopicType: TopicType | undefined = mode === 'homefeed' ? 'NEWS_ISSUE' : undefined;
+  const base = computeSourceRanking(cleaned, keyword, {
+    mode,
+    now: opts.now,
+    forceTopicType,
+  });
+  const verdicts = opts.judgeVerdicts ?? {};
+  const scored = base.ranked.map((d) => (verdicts[d.id]?.verdict === 'reject'
+    ? { ...d, relevance: { ...(d.relevance || { score: 0 }), accepted: false, reason: 'REJECT_JUDGE_IRRELEVANT' as const } }
+    : d));
+  const ranking = base.ranking.map((e) => (verdicts[e.id]
+    ? { ...e, judge: verdicts[e.id], ...(verdicts[e.id].verdict === 'reject' ? { accepted: false, reason: 'REJECT_JUDGE_IRRELEVANT' as const } : {}) }
+    : e));
+  const topicType = base.topicType;
   const accepted = scored.filter((d) => d.relevance?.accepted !== false);
   const rejected = scored.filter((d) => d.relevance?.accepted === false);
   const rejectedReasons: Record<string, number> = {};
@@ -146,7 +197,10 @@ export function prepareSourceMaterial(source: PipelineSource, keyword: string): 
   // Never drop everything on relevance alone — if the scorer rejects all, keep the docs and warn.
   const writerDocs = accepted.length > 0 ? accepted : scored;
   const rendered = renderSourceDocumentsForWriter(writerDocs);
-  const parts = [preambleTierNotice, rendered, snippetSection.trim()].filter(Boolean);
+  // [P1] Research Summary (code-extracted) goes BEFORE the long documents so numbers, dates and
+  // official statements — with their source ids — are the first thing the writer reads.
+  const research = buildResearchSummary(writerDocs, keyword).text;
+  const parts = [preambleTierNotice, research, rendered, snippetSection.trim()].filter(Boolean);
   const finalText = parts.join('\n\n');
   // Retention measures CLEANING loss only (chrome stripped from bodies). Relevance/freshness
   // rejections are reported separately as accepted/rejected — a stale-but-clean document is not "lost".
@@ -165,7 +219,8 @@ export function prepareSourceMaterial(source: PipelineSource, keyword: string): 
     rejectedReasons: accepted.length > 0 ? rejectedReasons : { ALL_REJECTED_KEPT: rejected.length },
     usedStructured,
     level: 'ok',
+    topicType,
   };
   metrics.level = levelFor(metrics.removedRatio);
-  return { rawText: finalText, documents: scored, metrics, logLine: formatLog(metrics) };
+  return { rawText: finalText, documents: scored, ranking, metrics, logLine: formatLog(metrics) };
 }

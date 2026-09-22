@@ -6,7 +6,7 @@
 // literal "[자료 3]" tag into prose. This preamble replaces that with an
 // explicit instruction: cite the real outlet/institution name.
 
-import type { SourceDocument } from './sourceDocument.js';
+import { extractHostname, type SourceDocument } from './sourceDocument.js';
 
 const WRITER_PREAMBLE =
   "※ 아래 [자료 Sxx] 번호표는 내부 식별자다. 본문에 'S01', '[자료 3]' 같은 번호표를 옮겨 적지 마라. "
@@ -15,21 +15,32 @@ const WRITER_PREAMBLE =
   + '자료에 없는 기관·매체를 지어내지 않는다. '
   + "UNKNOWN_DATE 자료의 시점을 '오늘/최근'으로 단정하지 않는다.";
 
+/** [P1 relevance v2] Best-effort domain when doc.domain wasn't populated at collection time. */
+function domainFor(doc: SourceDocument): string {
+  if (doc.domain) return doc.domain;
+  return extractHostname(doc.url).replace(/^www\./, '');
+}
+
 function renderOneDocument(doc: SourceDocument, opts: { includeUrl: boolean; maxBodyChars?: number }): string {
   const body = doc.cleanedBody ?? doc.body ?? '';
   const trimmedBody = opts.maxBodyChars && body.length > opts.maxBodyChars
     ? body.slice(0, opts.maxBodyChars)
     : body;
 
+  // [P1 relevance v2] Never invent a publisher/organization name — show "(미확인)" instead.
+  const sourceNameDisplay = doc.sourceName && doc.sourceName.trim() ? doc.sourceName : '(미확인)';
+  const staleLabel = doc.stale ? ' (과거 자료 — 현재 정보로 취급 금지)' : '';
+
   const lines = [
     `[자료 ${doc.id}]`,
     `제목: ${doc.title}`,
     `출처: ${doc.sourceName}`,
-    `기관/매체: ${doc.sourceName}`,
+    `기관/매체: ${sourceNameDisplay}`,
+    `도메인: ${domainFor(doc)}`,
   ];
   if (opts.includeUrl) lines.push(`URL: ${doc.url}`);
   lines.push(
-    `게시일: ${doc.pubDate ?? '모름'} | ${doc.dateStatus}`,
+    `게시일: ${doc.pubDate ?? '모름'} | ${doc.dateStatus}${staleLabel}`,
     `자료 유형: ${doc.sourceType} · 신뢰 등급: ${doc.sourceTier}`,
     '본문:',
     trimmedBody,
