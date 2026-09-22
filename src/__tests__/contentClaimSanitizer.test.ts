@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   sanitizeStructuredContentClaims,
   sanitizeUnverifiedOfficialGuideClaims,
+  sanitizeUnverifiedOfficialGuideClaimsWithReport,
 } from '../contentClaimSanitizer';
 
 describe('contentClaimSanitizer', () => {
@@ -44,5 +45,20 @@ describe('contentClaimSanitizer', () => {
       body: '본문입니다.',
       summary: '요약입니다.',
     });
+  });
+
+  it('report variant strips the same phrase and records what it removed', () => {
+    const { text, removed } = sanitizeUnverifiedOfficialGuideClaimsWithReport(
+      '2026년 공식 가이드에서는 실내 환기가 필요합니다.',
+    );
+    expect(text).toBe('실내 환기가 필요합니다.');
+    expect(removed.length).toBe(1);
+    expect(removed[0]).toContain('공식 가이드');
+  });
+
+  it('report variant returns no removals for text without an official-guide claim', () => {
+    const { text, removed } = sanitizeUnverifiedOfficialGuideClaimsWithReport('평범한 문장입니다.');
+    expect(text).toBe('평범한 문장입니다.');
+    expect(removed).toEqual([]);
   });
 });

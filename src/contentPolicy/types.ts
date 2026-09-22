@@ -73,6 +73,8 @@ export interface ContentPolicyInput {
   template_id?: string;
   account_id?: string;
   blog_id?: string;
+  /** Set by reconcilePublishPolicyInput when a drift filter would have dropped every supplied source_material — originals were kept instead. */
+  materialsRetainedDespiteDrift?: boolean;
 }
 
 export interface ArticleHeading {

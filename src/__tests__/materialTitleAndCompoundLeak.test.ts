@@ -39,7 +39,8 @@ describe('자료 머리말이 남의 글 제목을 인용 대상에서 제외한
 
   it('기존 내부 라벨 규칙을 밀어내지 않는다', () => {
     // [2026-09-02] M1 — 안내문 자체도 내부 표기임을 함께 선언한다
-    expect(assembler).toContain('이 묶음의 이름과 번호표, 그리고 이 안내문 자체는 내부 표기다');
+    // [2026-09-22] wording changed to attribution-positive; the internal-label rule itself stays.
+    expect(assembler).toContain("'[자료 N]' 같은 번호표와 이 안내문은 내부 표기다");
   });
 });
 

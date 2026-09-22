@@ -1,5 +1,27 @@
 import type { ArticleDraft, ContentPolicyInput } from './types.js';
 
+/*
+ * [2026-09-22] Known provenance-placeholder sentences this module (and its
+ * sibling adapters — SmartScheduler, multi-account) substitute for
+ * business_facts when the real evidence isn't available at the publish
+ * boundary. A placeholder is not evidence — policyService uses this to flag
+ * SOURCE_MATERIALS_MISSING instead of pretending the article is source-backed.
+ */
+const KNOWN_PROVENANCE_PLACEHOLDER_FACTS = new Set([
+  '사용자가 반자동 편집 화면에서 최종 원고를 직접 확인했다.',
+  '발행 경계에서 최종 제목과 본문을 기준으로 원고를 다시 확인했다.',
+  '사용자가 SmartScheduler에 발행할 주제를 직접 등록했다.',
+]);
+
+/** Generic shape: "사용자가 … 직접 등록/확인했다." — covers adapters not yet enumerated above. */
+const PROVENANCE_PLACEHOLDER_SHAPE = /^사용자가\s.*직접\s(?:등록|확인)했다\.?$/u;
+
+export function isProvenancePlaceholderFact(text: string): boolean {
+  const trimmed = String(text || '').trim();
+  if (!trimmed) return false;
+  return KNOWN_PROVENANCE_PLACEHOLDER_FACTS.has(trimmed) || PROVENANCE_PLACEHOLDER_SHAPE.test(trimmed);
+}
+
 const GENERIC_TITLE_TOKENS = new Set([
   '가이드',
   '꿀팁',
@@ -106,9 +128,22 @@ export function reconcilePublishPolicyInput(
 
   const faqQuestions = draft.faq.map((item) => item.question.trim()).filter(Boolean);
   const relevantBusinessFacts = input.business_facts.filter((fact) => tokenCoverage(fact, body) >= 0.35);
-  const relevantSourceMaterials = (input.source_materials || []).filter((source) => (
+  const originalSourceMaterials = input.source_materials || [];
+  const coverageFilteredSourceMaterials = originalSourceMaterials.filter((source) => (
     tokenCoverage(source.content || source.title, body) >= 0.2
   ));
+  /*
+   * [2026-09-22] A drift filter that drops every source material the user
+   * actually supplied is a false negative, not evidence the materials don't
+   * apply. Losing them here is exactly how a real-material payload gets
+   * treated the same as a source_materials:[] payload downstream — keep the
+   * originals instead of silently emptying the array.
+   */
+  const materialsRetainedDespiteDrift = originalSourceMaterials.length > 0
+    && coverageFilteredSourceMaterials.length === 0;
+  const relevantSourceMaterials = materialsRetainedDespiteDrift
+    ? originalSourceMaterials
+    : coverageFilteredSourceMaterials;
   const inputOrigin = options.semiAutoMode ? 'semi_auto_manual' : 'final_draft_payload';
   const provenanceFact = options.semiAutoMode
     ? '사용자가 반자동 편집 화면에서 최종 원고를 직접 확인했다.'
@@ -127,5 +162,6 @@ export function reconcilePublishPolicyInput(
     source_materials: relevantSourceMaterials.map((source) => ({ ...source })),
     related_questions: faqQuestions,
     cta: draft.cta.trim() || undefined,
+    ...(materialsRetainedDespiteDrift ? { materialsRetainedDespiteDrift: true } : {}),
   };
 }

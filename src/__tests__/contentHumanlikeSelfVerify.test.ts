@@ -244,12 +244,15 @@ describe('자체검증: SEO 토픽 어휘밀도 — 의미장 커버리지 보�
 });
 
 describe('자체검증: detectPlatitudes — 일반론 남발 감지 / 구체 글 통과', () => {
+  // [2026-09-22 SPEC — 일반론 트리거 축소] '보통/일반적으로/흔히/대체로/다양한'은 평범한
+  // 서술 표현으로 트리거 목록에서 뺐다(오탐 위주). MAX_PLATITUDE_HITS도 3→5로 상향됐으므로
+  // 남은 트리거(빈 마무리/도망성 상투구)로 임계 초과를 재현한다.
   it('일반론 남발 → 임계 초과', () => {
     const r = detectPlatitudes({
-      introduction: '보통 일반적으로 흔히 대체로 많은 분들이 다양한 방법을 시도합니다.',
-      headings: [{ title: 'X', body: '일반적으로 중요합니다. 다양한 선택지가 있을 수 있습니다.' }],
+      introduction: '많은 분들이 궁금해하실 텐데, 참고하시기 바랍니다. 도움이 되셨길 바랍니다.',
+      headings: [{ title: 'X', body: '중요합니다. 자명한 사실입니다. 보편적으로 그렇습니다.' }],
     });
-    expect(r.platitudeHitCount).toBeGreaterThan(3);
+    expect(r.platitudeHitCount).toBeGreaterThan(5);
     expect(r.exceedsThreshold).toBe(true);
   });
 

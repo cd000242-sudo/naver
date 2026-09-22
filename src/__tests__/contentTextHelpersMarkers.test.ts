@@ -18,6 +18,13 @@ describe('contentTextHelpers marker cleanup', () => {
     expect(stripInternalMarkers('환급은 5월 25일 마감입니다.')).toBe('환급은 5월 25일 마감입니다.');
   });
 
+  // [2026-09-22 live 셀토스] 문장 중간의 자료 시점 귀속은 스탬프가 아니다 — 지우면 "가격표의 이고"가 남는다.
+  it('keeps a mid-sentence source date attribution (only sentence-opening stamps are stripped)', () => {
+    const src = '기아 공식 가격표의 2026년 9월 1일 기준으로 하이브리드는 트렌디 2,940만원에서 시작합니다.';
+    expect(stripInternalMarkers(src)).toBe(src);
+    expect(stripInternalMarkers('앞 문장입니다. 2026-09-01 기준 다음 문장입니다.')).toBe('앞 문장입니다. 다음 문장입니다.');
+  });
+
   it('removes AI-generated heading labels and formatting markers', () => {
     const cleaned = removeOrdinalHeadingLabelsFromBody('첫 번째 소제목: 이것은 **중요한** 내용입니다.');
 

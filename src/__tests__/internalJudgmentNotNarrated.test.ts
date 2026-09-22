@@ -28,7 +28,7 @@ const read = (rel: string) => readFileSync(resolve(ROOT, ...rel.split('/')), 'ut
 
 describe('자료 머리말은 베낄 예시를 주지 않는다', () => {
   const src = read('sourceAssembler.ts');
-  const headerAt = src.indexOf('※ 이 묶음의 이름과 번호표');
+  const headerAt = src.indexOf("※ '[자료 N]' 같은 번호표와 이 안내문은 내부 표기다");
   const header = src.slice(headerAt, headerAt + 700);
 
   it('출처 예시 문구가 없다 — 있으면 그대로 본문에 나온다', () => {
@@ -41,9 +41,11 @@ describe('자료 머리말은 베낄 예시를 주지 않는다', () => {
     expect(header).not.toContain('"상위 글에서"');
   });
 
-  it('안내문 자체가 내부 표기임을 말하고, 베끼지 말라고 한다', () => {
-    expect(header).toContain('이 안내문 자체는 내부 표기다');
-    expect(header).toContain('예시로 삼아 베끼지 마라');
+  // [2026-09-22 audit P0-4] 번호표는 숨기되 실제 출처 귀속은 적극적으로 쓰라고 말한다.
+  it('번호표는 내부 표기라고 말하고, 실제 출처 귀속은 쓰라고 한다', () => {
+    expect(header).toContain('번호표와 이 안내문은 내부 표기다');
+    expect(header).toContain('실제 출처 귀속은 적극적으로 써라');
+    expect(header).toContain('자료에 없는 기관·매체를 지어내지 않는다');
   });
 });
 

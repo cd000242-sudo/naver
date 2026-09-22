@@ -1,16 +1,27 @@
 /**
- * ✅ AI 글 탐지 회피 모듈 (Humanizer) - 끝판왕 버전
- * 
- * AI가 생성한 콘텐츠를 사람이 작성한 것처럼 자연스럽게 변환
- * - 한국어 맞춤법 교정
- * - 문장 구조 다양화
- * - 동의어 치환으로 다양성 극대화
- * - AI 특유 패턴 완전 제거
- * - 자연스러운 불규칙성 추가
- * - 한국어 특유의 구어체 표현 삽입
+ * ✅ AI 글 탐지 회피 모듈 (Humanizer)
+ *
+ * AI가 생성한 콘텐츠를 사람이 작성한 것처럼 자연스럽게 변환한다.
+ *
+ * [2026-09-22 SPEC — 후처리 결정론화] 이전 버전은 무작위 함수 기반 동의어 치환·어미
+ * 다양화(by chance)·감탄사/개인 표현 삽입·문장 무작위 분리를 사용했다. 이는 (1) 같은
+ * 입력이 실행마다 다른 출력을 만들어 회귀 테스트를 불안정하게 했고, (2) "제 경험상"류
+ * 삽입은 자료에 없는 1인칭 체험을 무작위로 만들어냈다("LLM이 작성한 좋은 결과를
+ * 후처리기가 임의로 망가뜨리지 않는다" 원칙 위반). 이 버전은 무작위성을 전혀 쓰지
+ * 않는다 — 같은 입력은 항상 같은 출력을 낸다.
+ *
+ * 강도(intensity):
+ * - 'off'    : 입력을 그대로 반환.
+ * - 'light'  : 안전한 결정론적 정리만 — 맞춤법 교정, 번역투 제거, 공백/중복 접속사 정리.
+ * - 'medium' | 'strong' : light 전체 + 결정론적 AI 패턴 제거·반복 제거·문장 연결 보정.
+ *   (기존 'strong'이 하던 무작위 변주는 전부 제거됐다 — 더 이상 light보다 "더 과감하게
+ *   무작위로 바꾸는" 단계가 아니라, 안전 확정 변환을 더 많이 적용하는 단계다.)
+ *
+ * 보호 구간(protected spans): 숫자+단위, 날짜, 인용문("…"/'…'/「…」), 라틴 문자
+ * 토큰(모델명 등), 그리고 옵션으로 넘긴 protectedTerms는 어떤 강도에서도 변형되지 않는다.
  */
 
-// ✅ 한국어 자주 틀리는 맞춤법 교정 사전 (끝판왕)
+// ✅ 한국어 자주 틀리는 맞춤법 교정 사전
 const SPELLING_CORRECTIONS: Record<string, string> = {
   // 띄어쓰기 오류
   '할수있': '할 수 있',
@@ -81,50 +92,31 @@ const SPELLING_CORRECTIONS: Record<string, string> = {
   '에요': '에요', // 정확함 (받침 없을 때)
 };
 
-// ✅ 동의어 치환 사전 (다양성 극대화)
-const SYNONYM_MAP: Record<string, string[]> = {
-  '매우': ['정말', '굉장히', '무척', '상당히', '엄청', '아주'],
-  '정말': ['매우', '굉장히', '꽤', '상당히', '참'],
-  // [v2.11.134] '다양한' removed from alternatives — it is a platitude trigger
-  // (contentPlatitudeDetector) and a seo prompt blacklist word; the humanizer
-  // was re-injecting the very word its own detector flags.
-  '많은': ['수많은', '여러', '풍부한', '상당한'],
-  '중요한': ['핵심적인', '필수적인', '결정적인', '주요한', '큰'],
-  '좋은': ['훌륭한', '괜찮은', '멋진', '우수한', '뛰어난'],
-  '나쁜': ['좋지 않은', '안 좋은', '불량한', '부정적인'],
-  '빠른': ['신속한', '재빠른', '급속한', '민첩한'],
-  '느린': ['더딘', '천천한', '완만한'],
-  '새로운': ['신선한', '참신한', '획기적인', '혁신적인'],
-  // '다양한' 은 base F3 금칙어이고 첫 후보 '여러 가지' 역시 F3 금칙어다 — 치환 자체를 뺀다.
-  '다양한': ['폭넓은', '각양각색의', '다채로운'],
-  '효과적인': ['유효한', '효율적인', '탁월한'],
-  '실제로': ['사실', '실상', '현실적으로', '실은'],
-  '대부분': ['거의', '대다수', '많은 경우', '주로'],
-  '가능한': ['할 수 있는', '실현 가능한'],
-  '확실히': ['분명히', '명백히', '틀림없이', '확연히'],
-  '반드시': ['꼭', '필히', '무조건'],
-  '따라서': ['그러므로', '그래서', '때문에', '결과적으로'],
-  '하지만': ['그러나', '다만', '반면', '그런데'],
-  '그리고': ['또한', '게다가', '더불어', '아울러'],
-};
-
-// ✅ AI 특유 패턴 제거 (완전 제거 대상) — 톤 공통 (모든 톤에서 제거해야 할 AI 패턴)
+// ✅ AI 특유 패턴 제거 (완전 제거 대상) — 톤 공통, light/strong 공통
 const AI_PATTERN_REMOVALS_COMMON: { pattern: RegExp; replacement: string }[] = [
   { pattern: /물론,?\s*/g, replacement: '' },
-  { pattern: /확실히,?\s*/g, replacement: '' },
-  { pattern: /당연히,?\s*/g, replacement: '' },
-  { pattern: /분명히,?\s*/g, replacement: '' },
   { pattern: /제가 알기로는,?\s*/g, replacement: '' },
   { pattern: /다음과 같습니다[.:]?\s*/g, replacement: '' },
   { pattern: /요약하자면,?\s*/g, replacement: '' },
   { pattern: /결론적으로,?\s*/g, replacement: '결국 ' },
+];
+
+/**
+ * [2026-09-22] "강조어" 삭제는 strong 전용으로 뺐다. 확실히/분명히/당연히/일반적으로/
+ * 기본적으로/중요한 점은은 문장의 어조를 바꾸는 판단(강조 제거)이라, light(안전한 정리)
+ * 범주를 벗어난다.
+ */
+const AI_PATTERN_REMOVALS_EMPHASIS_STRONG_ONLY: { pattern: RegExp; replacement: string }[] = [
+  { pattern: /확실히,?\s*/g, replacement: '' },
+  { pattern: /당연히,?\s*/g, replacement: '' },
+  { pattern: /분명히,?\s*/g, replacement: '' },
   { pattern: /중요한 점은,?\s*/g, replacement: '' },
   { pattern: /기본적으로,?\s*/g, replacement: '' },
   // [2026-08-05] '일반적으로' → '보통' 은 base F3 금칙어 → F3 금칙어라 순수 손해다. 삭제만 한다.
   { pattern: /일반적으로,?\s*/g, replacement: '' },
 ];
 
-// ✅ 구어체 전용 AI 패턴 제거 — professional/formal 톤에서는 스킵
+// ✅ 구어체 전용 AI 패턴 제거 — professional/formal 톤에서는 스킵. light/strong 공통.
 const AI_PATTERN_REMOVALS_CASUAL_ONLY: { pattern: RegExp; replacement: string }[] = [
   { pattern: /~것입니다\./g, replacement: '거예요.' },
   { pattern: /~입니다\./g, replacement: '예요.' },
@@ -135,68 +127,16 @@ const AI_PATTERN_REMOVALS_CASUAL_ONLY: { pattern: RegExp; replacement: string }[
   { pattern: /도움이 되셨으면 좋겠습니다/g, replacement: '도움이 됐으면 해요' },
 ];
 
-// ✅ 문장 끝 다양화 매핑 — 구어체 톤에서만 적용 (professional/formal 톤에서는 스킵!)
-const FORMAL_TO_CASUAL: Record<string, string[]> = {
-  // [2026-07-30] 거든요 계열 추가 — 이유·새 정보 어감이라 대부분 문장에서 안전.
-  // 잖아요(공유지식 전제)·더라구요(관찰 함의)는 기계 치환이 의미를 깨므로
-  // 프롬프트 어미 팔레트(생성 단계)가 담당한다.
-  '입니다': ['이에요', '예요', '이랍니다', '이죠', '인 편이에요', '이거든요'],
-  '습니다': ['어요', '아요', '죠', '네요', '습니다'],
-  '됩니다': ['돼요', '되죠', '되는 거예요', '되네요', '되거든요'],
-  '있습니다': ['있어요', '있죠', '있네요', '있는 편이에요', '있거든요'],
-  '없습니다': ['없어요', '없죠', '없네요', '없는 편이에요', '없거든요'],
-  '합니다': ['해요', '하죠', '한답니다', '하네요', '하거든요'],
-  '였습니다': ['였어요', '이었죠', '였네요', '였던 셈이에요'],
-  '하겠습니다': ['할게요', '할 거예요', '하려고요', '할래요'],
-  '바랍니다': ['바라요', '바랄게요', '바래요'],
-  '드립니다': ['드려요', '드릴게요', '드리죠'],
-  '같습니다': ['같아요', '같죠', '것 같아요', '같네요'],
-  '봅니다': ['봐요', '보죠', '볼게요'],
-  '줍니다': ['줘요', '주죠', '줄게요'],
-  '됐습니다': ['됐어요', '됐죠', '됐네요'],
-  '했습니다': ['했어요', '했죠', '했네요'],
-  // [v2.11.134] Plain string replace cannot restructure the verb stem:
-  // '하겠습니다' + '거예요' produced '하거예요', and 'ㄹ게요' emitted broken
-  // jamo ('하ㄹ게요'). Suffix-safe casual endings only.
-  '겠습니다': ['겠어요', '겠죠', '겠네요'],
-};
-
-// ✅ 감탄사/추임새 (자연스러운 삽입용)
-const INTERJECTIONS = [
-  '사실', '다만', '근데', '아무튼', '어쨌든', '한 가지는', '그래서',
-  '여기서', '그런데', '반대로',
-];
-
-// ✅ 개인적 표현 (AI가 잘 사용하지 않는 표현) — 탐지(analyzeAiDetectionRisk) 전용 전체 목록
+// ✅ 개인적 표현 (AI가 잘 사용하지 않는 표현) — 탐지(analyzeAiDetectionRisk) 전용.
+// [2026-09-22] 개인 표현 삽입 기능은 제거했다 — 무작위 함수 기반이었고,
+// 자료에 없는 1인칭 체험을 무작위로 만들어내는 위험이 있었다. 탐지용으로만 남긴다.
 const PERSONAL_EXPRESSIONS = [
   '제 기준으로는', '개인적으로', '결론부터 말하면', '제 경험상', '정리하면',
   '직접 해보니까', '알고 보니', '나중에 알았는데', '처음엔 몰랐는데',
   '찾아보니까', '핵심만 보면', '한 가지 분명한 건', '제가 느끼기엔',
 ];
 
-// [v2.11.134] Insertion subset — judgment/opinion phrases only. Experience
-// claims ('제 경험상', '직접 해보니까', '나중에 알았는데', '처음엔 몰랐는데')
-// fabricated first-hand testimony on posts with no such data, contradicting
-// the prompt-level guards (SPEC-REVIEW-001 / 근거 자료 부재 가드). Detection
-// keeps using the full list above so human-written experience still scores.
-const PERSONAL_EXPRESSIONS_SAFE_INSERT = [
-  '제 기준으로는', '개인적으로', '결론부터 말하면',
-  '찾아보니까', '핵심만 보면', '한 가지 분명한 건', '제가 느끼기엔',
-  '솔직히 말하면', '따져보면',
-];
-
-// [2026-07-30] 글 단위 서브셋 샘플링 — 같은 삽입 어휘가 모든 글에 반복되면
-// 그 자체가 지문이다. 글마다 후보 풀의 일부만 사용한다.
-export function samplePhraseSubset<T>(pool: readonly T[], count: number, rng: () => number = Math.random): T[] {
-  const copy = [...pool];
-  const out: T[] = [];
-  while (out.length < count && copy.length > 0) {
-    out.push(copy.splice(Math.floor(rng() * copy.length), 1)[0]);
-  }
-  return out;
-}
-
-// ✅ 문장 연결어 다양화
+// ✅ 문장 연결어 다양화 — strong 전용, 결정론적(항상 첫 번째 대안 선택)
 const CONNECTORS: Record<string, string[]> = {
   '그리고': ['또', '게다가', '덧붙여', '더불어', '아울러', '그러면서'],
   '그러나': ['하지만', '근데', '다만', '반면', '그런데', '허나'],
@@ -207,7 +147,7 @@ const CONNECTORS: Record<string, string[]> = {
   '즉': ['다시 말해', '바꿔 말하면', '풀어서 말하자면', '이는'],
 };
 
-// ✅ 불필요한 반복 패턴 (제거 대상) - 강화
+// ✅ 불필요한 반복 패턴 (제거 대상)
 const REPETITIVE_PATTERNS = [
   /(?:입니다\.\s*){2,}/g,
   /(?:합니다\.\s*){2,}/g,
@@ -221,7 +161,7 @@ const REPETITIVE_PATTERNS = [
   /(?:돼요\.\s*){2,}/g,
 ];
 
-// ✅ 번역투(Translationese) 제거 - 피동→능동 변환
+// ✅ 번역투(Translationese) 제거 - 피동→능동 변환. light/strong 공통(의미 보존형).
 const TRANSLATIONESE_FIXES: { pattern: RegExp; replacement: string }[] = [
   // "~에 의해 ~되다" 패턴 → 능동태
   { pattern: /(.+)에 의해 (.+)되었습니다/g, replacement: '$1이(가) $2했어요' },
@@ -243,7 +183,7 @@ const TRANSLATIONESE_FIXES: { pattern: RegExp; replacement: string }[] = [
   { pattern: /것으로 여겨집니다/g, replacement: '것 같아요' },
   { pattern: /것으로 생각됩니다/g, replacement: '것 같아요' },
   { pattern: /것으로 판단됩니다/g, replacement: '것 같아요' },
-  // 기타 번역투}
+  // 기타 번역투
   { pattern: /~라고 할 수 있습니다/g, replacement: '예요' },
   { pattern: /라고 할 수 있어요/g, replacement: '예요' },
   { pattern: /라고 볼 수 있습니다/g, replacement: '이에요' },
@@ -254,7 +194,7 @@ const TRANSLATIONESE_FIXES: { pattern: RegExp; replacement: string }[] = [
   { pattern: /하는 것을 추천합니다/g, replacement: '하는 게 좋아요' },
 ];
 
-// ✅ 연속 어미 다양화 (로봇 말투 방지)
+// ✅ 연속 어미 다양화 (로봇 말투 방지) — strong 전용, 결정론적(항상 첫 번째 대안)
 const ENDING_VARIATIONS: Record<string, string[]> = {
   '했어요': ['했죠', '했네요', '한 거예요', '했습니다'],
   '됐어요': ['됐죠', '됐네요', '된 거예요', '됐습니다'],
@@ -267,99 +207,184 @@ const ENDING_VARIATIONS: Record<string, string[]> = {
   '가요': ['가죠', '가네요', '가는 거예요', '갑니다'],
 };
 
+// ✅ 격식체 전용 연속 어미 다양화 매핑
+const FORMAL_ENDING_VARIATIONS: Record<string, string[]> = {
+  '합니다': ['하겠습니다', '한 바 있습니다', '하는 것입니다'],
+  '입니다': ['이겠습니다', '인 것입니다', '인 셈입니다'],
+  '됩니다': ['되겠습니다', '되는 것입니다', '된 바 있습니다'],
+  '있습니다': ['있겠습니다', '있는 것입니다', '있는 셈입니다'],
+  '없습니다': ['없겠습니다', '없는 것입니다', '없는 셈입니다'],
+  '했습니다': ['한 바 있습니다', '하였습니다', '하게 됐습니다'],
+  '됐습니다': ['된 바 있습니다', '되었습니다', '되어 있습니다'],
+};
+
 // ✅ 로그 중복 방지 플래그
 let _humanizerLogShown = false;
 
-/**
- * ✅ 메인 AI 회피 함수 (Humanize) - 끝판왕 버전
- */
-export function humanizeContent(content: string, intensity: 'light' | 'medium' | 'strong' = 'medium', silent: boolean = false, toneStyle?: string): string {
-  if (!content) return content;
+export type HumanizeIntensity = 'off' | 'light' | 'medium' | 'strong';
 
-  // 톤 분류: 격식체(professional/formal/expert_review/calm_info)인지 판별
+export interface HumanizeChange {
+  kind: string;
+  before: string;
+  after: string;
+}
+
+export interface HumanizeReport {
+  intensity: HumanizeIntensity;
+  changes: HumanizeChange[];
+}
+
+let _lastHumanizeReport: HumanizeReport = { intensity: 'off', changes: [] };
+
+/** Returns the report generated by the most recent humanizeContent/humanizeContentWithReport call. */
+export function getLastHumanizeReport(): HumanizeReport {
+  return _lastHumanizeReport;
+}
+
+// ────────────────────────────────────────────────────────────
+// Protected spans — numbers+units, dates, quotes, Latin tokens, and caller-supplied
+// terms are shielded before any transform runs and restored verbatim afterward.
+// ────────────────────────────────────────────────────────────
+
+// [Bugfix] Each of these used to be applied in its own sequential .replace() pass — by the
+// time LATIN_TOKEN_RE ran, earlier passes had already inserted placeholder tokens like
+// "⟦PROT0⟧", and LATIN_TOKEN_RE (any Latin letter run) matched "PROT0" *inside its own
+// placeholder marker* and re-shielded it, corrupting the token so restore() left a literal
+// "⟦PROT0⟧" in the output. Fixed by building ONE alternation and replacing in a single pass
+// over the original text, so no pattern ever sees a placeholder that isn't real content.
+const QUOTE_SRC = '"[^"\\n]*"|\'[^\'\\n]*\'|「[^」\\n]*」';
+const DATE_SRC = '\\d{4}\\s*년\\s*\\d{1,2}\\s*월\\s*\\d{1,2}\\s*일|\\d{1,2}\\s*월\\s*\\d{1,2}\\s*일';
+const NUMBER_UNIT_SRC =
+  '[0-9][0-9,]*(?:\\.[0-9]+)?\\s*(?:%|원|만원|억원|억|개월|주년|주|일|월|년|시간|분|초|회|배|kg|g|mg|cm|mm|km|m|평|가지|건|명|개|층|호|인치|리터|L|ml)';
+const LATIN_TOKEN_SRC = '[A-Za-z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)*';
+
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function shieldProtectedSpans(
+  text: string,
+  protectedTerms: string[] = [],
+): { shielded: string; restore: (s: string) => string } {
+  const stash: string[] = [];
+  const termSrcs = protectedTerms.filter((t) => t && t.trim()).map((t) => escapeRegExp(t.trim()));
+  // Order matters: quotes first (swallow any numbers/dates inside as one unit), then
+  // caller-supplied terms, then dates, numbers+units, and finally bare Latin tokens.
+  const combined = new RegExp(
+    [QUOTE_SRC, ...termSrcs, DATE_SRC, NUMBER_UNIT_SRC, LATIN_TOKEN_SRC].join('|'),
+    'gi',
+  );
+
+  const shielded = text.replace(combined, (m) => {
+    stash.push(m);
+    return `⟦PROT${stash.length - 1}⟧`;
+  });
+
+  const restore = (s: string): string =>
+    s.replace(/⟦PROT(\d+)⟧/g, (token, idx) => stash[Number(idx)] ?? token);
+
+  return { shielded, restore };
+}
+
+/**
+ * ✅ 메인 AI 회피 함수 (Humanize)
+ *
+ * 결정론적 함수다 — 같은 입력(content, intensity, silent, toneStyle, options)은 항상
+ * 같은 출력을 낸다. 무작위 함수를 전혀 사용하지 않는다.
+ *
+ * @param options.protectedTerms 보호할 고유명사/용어 목록 — 이 문자열은 절대 변형되지 않는다.
+ */
+export function humanizeContent(
+  content: string,
+  intensity: HumanizeIntensity = 'light',
+  silent: boolean = false,
+  toneStyle?: string,
+  options?: { protectedTerms?: string[] },
+): string {
+  const { text } = humanizeContentWithReport(content, intensity, { silent, toneStyle, protectedTerms: options?.protectedTerms });
+  return text;
+}
+
+/** Same as humanizeContent but also returns a report of what changed at each step. */
+export function humanizeContentWithReport(
+  content: string,
+  intensity: HumanizeIntensity = 'light',
+  options?: { silent?: boolean; toneStyle?: string; protectedTerms?: string[] },
+): { text: string; report: HumanizeReport } {
+  const silent = options?.silent ?? false;
+  const toneStyle = options?.toneStyle;
+  const changes: HumanizeChange[] = [];
+
+  if (!content) {
+    const report: HumanizeReport = { intensity, changes };
+    _lastHumanizeReport = report;
+    return { text: content, report };
+  }
+
+  if (intensity === 'off') {
+    const report: HumanizeReport = { intensity, changes };
+    _lastHumanizeReport = report;
+    return { text: content, report };
+  }
+
   const isFormalTone = toneStyle === 'professional' || toneStyle === 'formal' || toneStyle === 'expert_review' || toneStyle === 'calm_info';
 
-  // 로그 한 번만 출력
   if (!silent && !_humanizerLogShown) {
-    console.log(`[Humanizer] 🚀 끝판왕 AI 탐지 회피 처리 시작 (강도: ${intensity}, 톤: ${toneStyle || '미지정'}${isFormalTone ? ' → 격식체 보호 모드' : ''})`);
+    console.log(`[Humanizer] 🚀 결정론적 정리 시작 (강도: ${intensity}, 톤: ${toneStyle || '미지정'}${isFormalTone ? ' → 격식체 보호 모드' : ''})`);
     _humanizerLogShown = true;
   }
 
-  // [2026-06-12 S18-3] Markdown table rows must survive humanization —
-  // sentence joining / ending transforms shred "| a | b |" rows into prose.
-  // Shield them behind placeholder tokens, restore after all transforms.
+  const step = (kind: string, current: string, fn: (s: string) => string): string => {
+    const next = fn(current);
+    if (next !== current) changes.push({ kind, before: current, after: next });
+    return next;
+  };
+
+  // [2026-06-12 S18-3] Markdown table rows must survive humanization.
   const shieldedTables: string[] = [];
   let result = content.replace(/^[ \t]*\|.*\|[ \t]*$/gm, (line) => {
     shieldedTables.push(line);
     return `⟦TBL${shieldedTables.length - 1}⟧`;
   });
 
-  // 0. 한국어 맞춤법 교정 (모든 톤 공통)
-  result = correctSpelling(result);
+  // Protected spans (numbers+units, dates, quotes, Latin/model-name tokens, caller terms).
+  const { shielded, restore: restoreProtected } = shieldProtectedSpans(result, options?.protectedTerms);
+  result = shielded;
 
-  // 1. AI 특유 패턴 제거 (톤 인지: 격식체에서는 구어체 변환 스킵)
-  result = removeAiPatterns(result, isFormalTone);
+  // 0. 한국어 맞춤법 교정 (모든 강도 공통)
+  result = step('spelling', result, correctSpelling);
 
-  // 2. 번역투(피동→능동) 변환 (톤 인지: 격식체에서는 격식→구어 변환 스킵)
-  result = removeTranslationese(result, isFormalTone);
+  // 1. AI 특유 패턴 제거 (light: 공통+구어체 / strong: + 강조어 제거)
+  result = step('ai-patterns', result, (s) => removeAiPatterns(s, isFormalTone, intensity));
 
-  // 3. 반복 패턴 제거 (모든 톤 공통)
-  result = removeRepetitivePatterns(result);
+  // 2. 번역투(피동→능동) 변환 (의미 보존형 — 모든 강도 공통)
+  result = step('translationese', result, (s) => removeTranslationese(s, isFormalTone));
 
-  // 3.5 [끝판왕] 출처 인용 반복 패턴 제거 ("참고 자료를 보면" 류)
-  result = deduplicateSourceCitations(result);
+  // 3. 공백/중복 접속사 등 기본 정리 (모든 강도 공통)
+  result = step('whitespace-cleanup', result, lightCleanup);
 
-  // 3.6 [끝판왕] 선언형 단독 문장 보정 ("이 지점이 중요합니다" 류)
-  result = softenDeclarativeSentences(result, isFormalTone);
+  if (intensity === 'medium' || intensity === 'strong') {
+    // 4. 반복 패턴 제거
+    result = step('repetitive-patterns', result, removeRepetitivePatterns);
 
-  // 3.7 [끝판왕] 연속 독립 문장 연결 (연결어 없이 3문장 이상 나열 방지)
-  result = connectIsolatedSentences(result, isFormalTone);
+    // 5. 출처 인용 반복 패턴 제거 ("참고 자료를 보면" 류, 2번째 등장부터)
+    result = step('dedupe-citations', result, deduplicateSourceCitations);
 
-  // [2026-07-30] 글 단위 변환 지터 — 고정 확률·고정 사전을 모든 글에 똑같이
-  // 조합하면 그 조합 자체가 글 간 통계 지문이 된다(사용자 통찰). 매 글 비율을
-  // ±30% 흔들고, 삽입 후보도 글마다 서브셋만 쓴다.
-  const jitter = (base: number): number => base * (0.7 + Math.random() * 0.6);
+    // 6. 선언형 단독 문장 보정 ("이 지점이 중요합니다" 류)
+    result = step('soften-declarative', result, (s) => softenDeclarativeSentences(s, isFormalTone));
 
-  // 4. 문장 끝 다양화 — 격식체 톤에서는 완전 스킵! (STYLE OVERRIDE 보호)
-  if (intensity !== 'light' && !isFormalTone) {
-    result = diversifyEndings(result, jitter(intensity === 'strong' ? 0.28 : 0.18));
+    // 7. 연속 독립 문장 연결 (연결어 없이 3문장 이상 나열 방지) — 결정론적 연결어 선택
+    result = step('connect-isolated', result, (s) => connectIsolatedSentences(s, isFormalTone));
+
+    // 8. 연속 어미 다양화 (로봇 말투 방지) — 결정론적 첫 대안 선택
+    result = step('diversify-consecutive-endings', result, (s) => diversifyConsecutiveEndings(s, isFormalTone));
+
+    // 9. 연결어 다양화 — 결정론적 첫 대안 선택
+    result = step('diversify-connectors', result, diversifyConnectors);
   }
 
-  // 5. 연속 어미 다양화 (톤 인지: 격식체 전용 로테이션)
-  result = diversifyConsecutiveEndings(result, isFormalTone);
-
-  // 6. 연결어 다양화 (모든 톤 공통)
-  result = diversifyConnectors(result);
-
-  // 7. 동의어 치환 (모든 톤 공통)
-  if (intensity !== 'light') {
-    result = replaceSynonyms(result, jitter(intensity === 'strong' ? 0.3 : 0.15));
-  }
-
-  // 8. 개인적 표현 삽입 — 격식체에서는 스킵 ("제 생각엔" 등은 격식에 부적합)
-  if (intensity !== 'light' && !isFormalTone) {
-    result = insertPersonalExpressions(result, jitter(intensity === 'strong' ? 0.08 : 0.04));
-  }
-
-  // 9. 감탄사 삽입 — 격식체에서는 스킵 ("와", "대박" 등은 격식에 부적합)
-  if (intensity === 'strong' && !isFormalTone) {
-    result = insertInterjections(result, jitter(0.03));
-  }
-
-  // 10. 문장 길이 불규칙화 (모든 톤 공통 — 리듬감은 중요)
-  result = irregularizeSentenceLength(result);
-
-  // 11. [2026-08-05] 숫자 자연화를 파이프라인에서 분리했다.
-  //   naturalizeNumbers 는 자료에 있는 백분율을 말로 바꿨다("100%" → "거의 전부").
-  //   단순 문자열 replace 라 부분 일치까지 걸려 원문이 파괴됐다 —
-  //   "금리 4.50%" → "금리 4.절반 정도", "지원율 150%" → "지원율 1절반 정도",
-  //   "수수료 10%p" → "수수료 일부p".
-  //   자료의 수치를 임의로 바꾸는 것은 F1(자료 외 사실 금지)과 같은 축의 위반이고,
-  //   금리·환급률·합격률처럼 판단이 걸린 수치에서는 독자를 오도한다.
-  //   함수는 남긴다. 되살리려면 최소한 단어 경계를 지키고, 수치가 판단 근거인
-  //   카테고리(society·health)에서는 발동하지 않아야 한다.
-
-  // Restore shielded table rows (own line, transforms never touched them).
+  // Restore protected spans, then shielded table rows.
+  result = restoreProtected(result);
   if (shieldedTables.length > 0) {
     result = result.replace(/⟦TBL(\d+)⟧/g, (token, idx) => {
       const original = shieldedTables[Number(idx)];
@@ -367,7 +392,9 @@ export function humanizeContent(content: string, intensity: 'light' | 'medium' |
     });
   }
 
-  return result;
+  const report: HumanizeReport = { intensity, changes };
+  _lastHumanizeReport = report;
+  return { text: result, report };
 }
 
 /**
@@ -375,6 +402,17 @@ export function humanizeContent(content: string, intensity: 'light' | 'medium' |
  */
 export function resetHumanizerLog(): void {
   _humanizerLogShown = false;
+}
+
+/**
+ * ✅ light 강도 전용 안전 정리 — 의미를 바꾸지 않는 공백/중복 접속사 정돈만 한다.
+ */
+function lightCleanup(text: string): string {
+  return text
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/(그리고|그러나|하지만|그래서|또한)\s+\1\b/g, '$1')
+    .replace(/[ \t]+([,.!?])/g, '$1')
+    .replace(/\n{3,}/g, '\n\n');
 }
 
 /**
@@ -388,13 +426,12 @@ function removeTranslationese(text: string, isFormalTone: boolean = false): stri
     // ✅ 격식체 보호: professional/formal 톤에서 격식→구어 변환 스킵
     if (isFormalTone) {
       const repStr = String(replacement);
-      // 격식체 어미를 구어체로 바꾸는 규칙은 스킵
-      if (repStr.includes('것 같아요') || repStr.includes('예요') || 
+      if (repStr.includes('것 같아요') || repStr.includes('예요') ||
           repStr.includes('해요') || repStr.includes('했어요') ||
           repStr.includes('할 수 있어요') || repStr.includes('해야 해요') ||
           repStr.includes('하면 좋아요') || repStr.includes('하는 게 좋아요') ||
           repStr.includes('돼요') || repStr.includes('이뤄요')) {
-        continue; // 이 규칙 스킵
+        continue;
       }
     }
     const before = result;
@@ -409,44 +446,26 @@ function removeTranslationese(text: string, isFormalTone: boolean = false): stri
 }
 
 /**
- * ✅ 연속 어미 다양화 (로봇 말투 방지)
- * "~해요. ~해요. ~해요." → "~해요. ~하죠. ~하거든요."
+ * ✅ 연속 어미 다양화 (로봇 말투 방지) — 결정론적: 항상 목록의 첫 대안을 선택한다.
+ * "~해요. ~해요. ~해요." → "~해요. ~하죠. ~하죠."
  */
-// ✅ 격식체 전용 연속 어미 다양화 매핑
-const FORMAL_ENDING_VARIATIONS: Record<string, string[]> = {
-  '합니다': ['하겠습니다', '한 바 있습니다', '하는 것입니다'],
-  '입니다': ['이겠습니다', '인 것입니다', '인 셈입니다'],
-  '됩니다': ['되겠습니다', '되는 것입니다', '된 바 있습니다'],
-  '있습니다': ['있겠습니다', '있는 것입니다', '있는 셈입니다'],
-  '없습니다': ['없겠습니다', '없는 것입니다', '없는 셈입니다'],
-  '했습니다': ['한 바 있습니다', '하였습니다', '하게 됐습니다'],
-  '됐습니다': ['된 바 있습니다', '되었습니다', '되어 있습니다'],
-};
-
 function diversifyConsecutiveEndings(text: string, isFormalTone: boolean = false): string {
   return transformPreservingNewlines(text, (segment) => diversifyConsecutiveEndingsSegment(segment, isFormalTone));
 }
 
 function diversifyConsecutiveEndingsSegment(text: string, isFormalTone: boolean = false): string {
-  const result = text;
+  const sentences = text.split(/(?<=[.!?])\s+/);
   let changes = 0;
 
-  // 문장 단위로 분리
-  const sentences = result.split(/(?<=[.!?])\s+/);
-
-  // 톤에 따라 사용할 매핑 선택
   const variationMap = isFormalTone ? FORMAL_ENDING_VARIATIONS : ENDING_VARIATIONS;
 
-  // 연속된 같은 어미 감지 및 변환
   for (let i = 1; i < sentences.length; i++) {
     const prevSentence = sentences[i - 1];
     const currSentence = sentences[i];
 
     for (const [ending, variations] of Object.entries(variationMap)) {
-      // 이전 문장과 현재 문장이 같은 어미로 끝나면
       if (prevSentence.endsWith(ending + '.') && currSentence.endsWith(ending + '.')) {
-        // 현재 문장의 어미를 다른 것으로 변환
-        const variation = variations[Math.floor(Math.random() * variations.length)];
+        const variation = variations[0];
         sentences[i] = currSentence.slice(0, -ending.length - 1) + variation + '.';
         changes++;
         break;
@@ -462,7 +481,7 @@ function diversifyConsecutiveEndingsSegment(text: string, isFormalTone: boolean 
 }
 
 /**
- * ✅ 한국어 맞춤법 교정 (끝판왕)
+ * ✅ 한국어 맞춤법 교정
  */
 function correctSpelling(text: string): string {
   let result = text;
@@ -485,15 +504,22 @@ function correctSpelling(text: string): string {
 /**
  * ✅ AI 특유 패턴 완전 제거
  */
-function removeAiPatterns(text: string, isFormalTone: boolean = false): string {
+function removeAiPatterns(text: string, isFormalTone: boolean, intensity: HumanizeIntensity): string {
   let result = text;
   let removals = 0;
 
-  // 모든 톤에서 공통으로 제거할 AI 패턴
   for (const { pattern, replacement } of AI_PATTERN_REMOVALS_COMMON) {
     const before = result;
     result = result.replace(pattern, replacement);
     if (result !== before) removals++;
+  }
+
+  if (intensity === 'medium' || intensity === 'strong') {
+    for (const { pattern, replacement } of AI_PATTERN_REMOVALS_EMPHASIS_STRONG_ONLY) {
+      const before = result;
+      result = result.replace(pattern, replacement);
+      if (result !== before) removals++;
+    }
   }
 
   // ✅ 구어체 전용 변환 — 격식체 톤에서는 스킵 (STYLE OVERRIDE 보호)
@@ -512,29 +538,6 @@ function removeAiPatterns(text: string, isFormalTone: boolean = false): string {
 }
 
 /**
- * ✅ 동의어 치환 (다양성 극대화)
- */
-function replaceSynonyms(text: string, ratio: number): string {
-  let result = text;
-  let replacements = 0;
-
-  for (const [original, synonyms] of Object.entries(SYNONYM_MAP)) {
-    // 원본 단어가 텍스트에 있고 확률에 따라 치환
-    if (result.includes(original) && Math.random() < ratio) {
-      const synonym = synonyms[Math.floor(Math.random() * synonyms.length)];
-      // 첫 번째 등장만 치환 (과도한 변경 방지)
-      result = result.replace(original, synonym);
-      replacements++;
-    }
-  }
-
-  if (replacements > 0) {
-    console.log(`[Humanizer] 동의어 치환: ${replacements}개`);
-  }
-  return result;
-}
-
-/**
  * 반복 패턴 제거
  */
 function removeRepetitivePatterns(text: string): string {
@@ -542,7 +545,6 @@ function removeRepetitivePatterns(text: string): string {
 
   for (const pattern of REPETITIVE_PATTERNS) {
     result = result.replace(pattern, (match) => {
-      // 첫 번째 것만 남김
       const first = match.split(/\.\s*/)[0];
       return first + '. ';
     });
@@ -565,49 +567,7 @@ function transformPreservingNewlines(text: string, transform: (segment: string) 
 }
 
 /**
- * 문장 끝 다양화 (formal → casual 혼합)
- */
-function diversifyEndings(text: string, ratio: number): string {
-  return transformPreservingNewlines(text, (segment) => diversifyEndingsSegment(segment, ratio));
-}
-
-function diversifyEndingsSegment(text: string, ratio: number): string {
-  let result = text;
-  let changeCount = 0;
-
-  const sentences = result.split(/(?<=[.!?])\s+/);
-  const totalSentences = sentences.length;
-  const targetChanges = Math.floor(totalSentences * ratio);
-
-  // 변환할 문장 인덱스 랜덤 선택
-  const indicesToChange = new Set<number>();
-  while (indicesToChange.size < targetChanges) {
-    indicesToChange.add(Math.floor(Math.random() * totalSentences));
-  }
-
-  const modifiedSentences = sentences.map((sentence, index) => {
-    if (!indicesToChange.has(index)) return sentence;
-
-    let modified = sentence;
-    for (const [formal, casuals] of Object.entries(FORMAL_TO_CASUAL)) {
-      if (modified.includes(formal)) {
-        const casual = casuals[Math.floor(Math.random() * casuals.length)];
-        modified = modified.replace(formal, casual);
-        changeCount++;
-        break;
-      }
-    }
-    return modified;
-  });
-
-  result = modifiedSentences.join(' ');
-  console.log(`[Humanizer] 문장 끝 변환: ${changeCount}개`);
-
-  return result;
-}
-
-/**
- * 연결어 다양화
+ * 연결어 다양화 — 결정론적: 항상 목록의 첫 대안을 선택한다.
  */
 function diversifyConnectors(text: string): string {
   let result = text;
@@ -623,173 +583,40 @@ function diversifyConnectors(text: string): string {
         isFirst = false;
         return match;
       }
-      const alt = alternatives[Math.floor(Math.random() * alternatives.length)];
+      const alt = alternatives[0];
       changeCount++;
       return prefix + alt;
     });
   }
 
-  console.log(`[Humanizer] 연결어 변환: ${changeCount}개`);
+  if (changeCount > 0) {
+    console.log(`[Humanizer] 연결어 변환: ${changeCount}개`);
+  }
   return result;
 }
-
-/**
- * 개인적 표현 삽입
- */
-function insertPersonalExpressions(text: string, ratio: number): string {
-  return transformPreservingNewlines(text, (segment) => insertPersonalExpressionsSegment(segment, ratio));
-}
-
-function insertPersonalExpressionsSegment(text: string, ratio: number): string {
-  const sentences = text.split(/(?<=[.!?])\s+/);
-  const insertCount = Math.floor(sentences.length * ratio);
-  if (insertCount === 0) return text;
-
-  // 삽입할 위치 랜덤 선택 (문장 시작 부분)
-  const indicesToInsert = new Set<number>();
-  let attempts = 0;
-  while (indicesToInsert.size < insertCount && attempts < sentences.length * 4) {
-    attempts++;
-    const idx = Math.floor(Math.random() * sentences.length);
-    // 이미 개인적 표현이 있거나 너무 짧은 문장은 제외
-    if (!PERSONAL_EXPRESSIONS.some(exp => sentences[idx].includes(exp)) && sentences[idx].length > 20) {
-      indicesToInsert.add(idx);
-    }
-  }
-
-  const modifiedSentences = sentences.map((sentence, index) => {
-    if (!indicesToInsert.has(index)) return sentence;
-
-    // [v2.11.134] Insert from the judgment-safe subset only — never fabricate
-    // first-hand experience the post does not have.
-    // [2026-07-30] 글 단위 서브셋(4종)만 사용 — 전 풀 반복 사용은 교차 글 지문
-    const runPersonalPool = samplePhraseSubset(PERSONAL_EXPRESSIONS_SAFE_INSERT, 4);
-    const expr = runPersonalPool[Math.floor(Math.random() * runPersonalPool.length)];
-    // 문장 앞에 삽입
-    return expr + ' ' + sentence.charAt(0).toLowerCase() + sentence.slice(1);
-  });
-
-  console.log(`[Humanizer] 개인적 표현 삽입: ${indicesToInsert.size}개`);
-  return modifiedSentences.join(' ');
-}
-
-/**
- * 감탄사 삽입
- */
-function insertInterjections(text: string, ratio: number): string {
-  return transformPreservingNewlines(text, (segment) => insertInterjectionsSegment(segment, ratio));
-}
-
-function insertInterjectionsSegment(text: string, ratio: number): string {
-  const sentences = text.split(/(?<=[.!?])\s+/);
-  const insertCount = Math.floor(sentences.length * ratio);
-  if (insertCount === 0) return text;
-
-  const indicesToInsert = new Set<number>();
-  while (indicesToInsert.size < insertCount && indicesToInsert.size < sentences.length) {
-    indicesToInsert.add(Math.floor(Math.random() * sentences.length));
-  }
-
-  const modifiedSentences = sentences.map((sentence, index) => {
-    if (!indicesToInsert.has(index)) return sentence;
-
-    const runInterjectionPool = samplePhraseSubset(INTERJECTIONS, 4);
-    const interjection = runInterjectionPool[Math.floor(Math.random() * runInterjectionPool.length)];
-    return interjection + ', ' + sentence.charAt(0).toLowerCase() + sentence.slice(1);
-  });
-
-  console.log(`[Humanizer] 감탄사 삽입: ${indicesToInsert.size}개`);
-  return modifiedSentences.join(' ');
-}
-
-/**
- * 문장 길이 불규칙화
- */
-function irregularizeSentenceLength(text: string): string {
-  // 긴 문장은 가끔 분리, 짧은 문장은 가끔 합치기
-  let result = text;
-
-  // 너무 긴 문장 분리 (80자 이상, 쉼표가 있는 경우)
-  result = result.replace(/([^.!?]{80,})(,\s*)([^.!?]{20,}[.!?])/g, (match, p1, comma, p2) => {
-    // 30% 확률로 분리
-    if (Math.random() < 0.3) {
-      return p1 + '. ' + p2.charAt(0).toUpperCase() + p2.slice(1);
-    }
-    return match;
-  });
-
-  return result;
-}
-
-/**
- * 숫자/날짜 자연화
- */
-function naturalizeNumbers(text: string): string {
-  let result = text;
-
-  // "100%", "50%" 등을 가끔 "거의 전부", "절반 정도" 등으로
-  const percentReplacements: Record<string, string[]> = {
-    '100%': ['거의 전부', '대부분', '전체적으로'],
-    '90%': ['거의 대부분', '대다수'],
-    '80%': ['대부분', '많은 경우'],
-    '70%': ['상당수', '꽤 많이'],
-    '50%': ['절반 정도', '반 정도'],
-    '30%': ['일부', '꽤'],
-    '10%': ['일부', '조금'],
-  };
-
-  for (const [percent, alts] of Object.entries(percentReplacements)) {
-    if (result.includes(percent) && Math.random() < 0.3) {
-      const alt = alts[Math.floor(Math.random() * alts.length)];
-      result = result.replace(percent, alt);
-    }
-  }
-
-  return result;
-}
-
-// ════════════════════════════════════════════════════════════
-// ✅ [끝판왕] Stage 2 — 문장 흐름 보정 엔진 (3개 신규 함수)
-// ════════════════════════════════════════════════════════════
 
 /**
  * ✅ [끝판왕 3.5] 출처 인용 반복 패턴 제거
- * "참고 자료를 보면", "자료에 따르면" 등이 2회 이상 등장하면
- * 2번째부터 다른 표현으로 치환하거나 제거
+ * "참고 자료를 보면", "자료에 따르면" 등이 2회 이상 등장하면 2번째부터 제거한다.
  */
 function deduplicateSourceCitations(text: string): string {
-  const citationPatterns: { pattern: RegExp; alternatives: string[] }[] = [
-    {
-      pattern: /참고\s*자료를\s*보면/g,
-      // 반복 인용은 헤징으로 바꾸지 말고 그냥 제거(사실 바로 진술) 위주 — 빈 문자열 다수
-      alternatives: ['', '', '', '']
-    },
-    {
-      pattern: /자료에\s*따르면/g,
-      alternatives: ['', '', '', '']
-    },
-    {
-      pattern: /여러\s*(?:참고\s*)?자료(?:들)?(?:을|는|에서)/g,
-      alternatives: ['', '', '']
-    },
-    {
-      pattern: /연구\s*결과에\s*따르면/g,
-      alternatives: ['', '', '']
-    },
+  const citationPatterns: RegExp[] = [
+    /참고\s*자료를\s*보면/g,
+    /자료에\s*따르면/g,
+    /여러\s*(?:참고\s*)?자료(?:들)?(?:을|는|에서)/g,
+    /연구\s*결과에\s*따르면/g,
   ];
 
   let result = text;
   let changes = 0;
 
-  for (const { pattern, alternatives } of citationPatterns) {
+  for (const pattern of citationPatterns) {
     let matchCount = 0;
     result = result.replace(pattern, (match) => {
       matchCount++;
       if (matchCount === 1) return match; // 첫 번째는 유지
-      // 2번째부터 대체
-      const alt = alternatives[Math.floor(Math.random() * alternatives.length)];
       changes++;
-      return alt; // 빈 문자열이면 완전 제거
+      return ''; // 2번째부터 완전 제거(사실 바로 진술)
     });
   }
 
@@ -801,12 +628,10 @@ function deduplicateSourceCitations(text: string): string {
 
 /**
  * ✅ [끝판왕 3.6] 선언형 단독 문장 보정
- * "이 지점이 중요합니다.", "이 부분이 핵심입니다." 등
- * 맥락 없이 단독으로 존재하는 선언형 문장을 탐지하여
- * 앞 문장과 자연스럽게 합치거나 연결어를 삽입
+ * "이 지점이 중요합니다.", "이 부분이 핵심입니다." 등 맥락 없이 단독으로 존재하는
+ * 선언형 문장을 더 자연스럽게 바꾼다(구어체 한정 — 격식체는 원문 유지).
  */
 function softenDeclarativeSentences(text: string, isFormalTone: boolean = false): string {
-  // 선언형 패턴들
   const declarativePatterns = [
     /이\s*지점이\s*(중요|핵심|필수)[^.]*\./g,
     /이\s*부분이\s*(중요|핵심|필수|관건)[^.]*\./g,
@@ -821,52 +646,42 @@ function softenDeclarativeSentences(text: string, isFormalTone: boolean = false)
 
   for (const pattern of declarativePatterns) {
     result = result.replace(pattern, (match) => {
-      changes++;
       if (isFormalTone) {
-        // [2026-08-05] 격식체 완화어를 제거했다. 붙이던 문구
-        //   ', 이에 대해 구체적으로 살펴보겠습니다.' 가 base R0-8(AI 정리체 금지)과
-        //   B1 블랙리스트("~에 대해 살펴보겠습니다")에 정면으로 걸린다.
-        //   프롬프트가 0점 처리하는 표현을 후처리가 만들어 넣고 있었다.
-        //   완화가 필요하면 원문을 그대로 두는 편이 낫다.
-        changes--;
+        // [2026-08-05] 격식체 완화어는 base R0-8/B1 블랙리스트에 걸린 적이 있어 원문을 유지한다.
         return match;
-      } else {
-        // 구어체: 더 자연스럽게 변환
-        return match
-          .replace('이 지점이 중요합니다', '왜 중요하냐면')
-          .replace('이 부분이 핵심입니다', '핵심은 바로')
-          .replace('이 부분이 중요합니다', '중요한 건')
-          .replace('이것이 중요합니다', '중요한 건')
-          .replace('이 차이를 함께 봐야 합니다', '이 차이를 알면')
-          .replace('이 점을 꼭 기억해야 합니다', '꼭 기억할 건');
       }
+      changes++;
+      return match
+        .replace('이 지점이 중요합니다', '왜 중요하냐면')
+        .replace('이 부분이 핵심입니다', '핵심은 바로')
+        .replace('이 부분이 중요합니다', '중요한 건')
+        .replace('이것이 중요합니다', '중요한 건')
+        .replace('이 차이를 함께 봐야 합니다', '이 차이를 알면')
+        .replace('이 점을 꼭 기억해야 합니다', '꼭 기억할 건');
     });
   }
 
   if (changes > 0) {
-    console.log(`[Humanizer] 선언형 문장 보정: ${changes}개${isFormalTone ? ' (격식체)' : ''}`);
+    console.log(`[Humanizer] 선언형 문장 보정: ${changes}개`);
   }
   return result;
 }
 
 /**
- * ✅ [끝판왕 3.7] 연속 독립 문장 연결
- * 연결어 없이 3개 이상 독립적으로 나열된 문장을 탐지하여
- * 2번째/3번째 문장 앞에 자연스러운 연결어 삽입
+ * ✅ [끝판왕 3.7] 연속 독립 문장 연결 — 결정론적: 항상 목록의 첫 연결어를 사용한다.
+ * 연결어 없이 3개 이상 독립적으로 나열된 문장을 탐지하여 연결어를 삽입한다.
  */
 function connectIsolatedSentences(text: string, isFormalTone: boolean = false): string {
   return transformPreservingNewlines(text, (segment) => connectIsolatedSentencesSegment(segment, isFormalTone));
 }
 
 function connectIsolatedSentencesSegment(text: string, isFormalTone: boolean = false): string {
-  // 연결어 목록 (톤별)
   const formalConnectors = ['이에 따라 ', '이를 바탕으로 보면 ', '이러한 맥락에서 ', '한편 ', '다만 ', '아울러 '];
   // [2026-08-05] '알고 보니 ' 는 근거 없는 1인칭 발견 주장이라 뺐다.
   const casualConnectors = ['그래서 ', '근데 ', '그러니까 ', '사실 ', '그런데 '];
 
   const connectors = isFormalTone ? formalConnectors : casualConnectors;
 
-  // 연결어 존재 여부 체크용 패턴
   const hasConnector = /^(그래서|근데|그런데|하지만|그러나|따라서|한편|다만|그리고|또한|그러므로|이에|아울러|더불어|반면|그렇지만|또|게다가|이를|이러한|알고 보니|사실|왜냐하면|물론|실제로)/;
 
   const sentences = text.split(/(?<=[.!?])\s+/);
@@ -880,18 +695,16 @@ function connectIsolatedSentencesSegment(text: string, isFormalTone: boolean = f
     if (!s) continue;
 
     if (hasConnector.test(s)) {
-      isolatedCount = 0; // 연결어가 있으면 카운트 리셋
+      isolatedCount = 0;
     } else {
       isolatedCount++;
     }
 
-    // 3번째 연속 독립 문장부터 연결어 삽입
     if (isolatedCount >= 3 && !hasConnector.test(s)) {
-      const connector = connectors[Math.floor(Math.random() * connectors.length)];
-      // 한국어는 대소문자 구분 없으므로 그대로 붙임
+      const connector = connectors[0];
       sentences[i] = connector + s;
       changes++;
-      isolatedCount = 0; // 리셋
+      isolatedCount = 0;
     }
   }
 
@@ -904,7 +717,7 @@ function connectIsolatedSentencesSegment(text: string, isFormalTone: boolean = f
 /**
  * ✅ HTML 콘텐츠용 AI 회피 처리 (네이버 블로그는 위지윅 에디터라 불필요 - 바로 반환)
  */
-export function humanizeHtmlContent(html: string, intensity: 'light' | 'medium' | 'strong' = 'medium'): string {
+export function humanizeHtmlContent(html: string, _intensity: HumanizeIntensity = 'light'): string {
   // ✅ 네이버 블로그는 HTML이 아닌 위지윅 에디터를 사용하므로 불필요
   // 성능 향상을 위해 즉시 반환
   return html;
@@ -933,7 +746,6 @@ export function analyzeAiDetectionRisk(text: string): {
   // 2. 문장 끝 패턴 분석 (너무 일관적이면 AI 의심)
   const endings = text.match(/[가-힣]+니다\.|[가-힣]+요\.|[가-힣]+죠\./g) || [];
   const formalEndings = endings.filter(e => e.includes('니다')).length;
-  const casualEndings = endings.length - formalEndings;
 
   if (endings.length > 10) {
     const formalRatio = formalEndings / endings.length;
@@ -1014,4 +826,3 @@ export function analyzeAiDetectionRisk(text: string): {
     suggestions,
   };
 }
-

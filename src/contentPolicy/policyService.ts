@@ -16,7 +16,7 @@ import {
   acceptContentPolicyAdvisories,
   repairDeclaredForbiddenClaims,
 } from './claimRepair.js';
-import { reconcilePublishPolicyInput } from './publishInputReconciler.js';
+import { isProvenancePlaceholderFact, reconcilePublishPolicyInput } from './publishInputReconciler.js';
 import { RecentPostsRepository } from './recentPostsRepository.js';
 import type {
   ArticleDraft,
@@ -233,10 +233,32 @@ async function resolveRecentPosts(
   return stored;
 }
 
+/*
+ * [2026-09-22] rewrite_count alone is not proof that the article changed.
+ *
+ * With the destructive claim-scrub now off by default, the orchestrator's
+ * internal retry loop can still increment rewrite_count on every failed
+ * attempt (it keeps retrying against an unchanged draft when repair is a
+ * no-op) even though the article text never moved. Overwriting title/content
+ * on a false rewrite_count would replace structuredContent with... itself,
+ * but silently — and any future case where they genuinely diverge would be
+ * a real regression. Compare the text directly instead of trusting the counter.
+ */
+function articleDiffersFromDraft(draft: ArticleDraft, article: ContentPolicyResult['article']): boolean {
+  return draft.title !== article.title
+    || draft.summary !== article.summary
+    || (draft.introduction || '') !== (article.introduction || '')
+    || draft.body_markdown !== article.body_markdown
+    || draft.cta !== article.cta
+    || JSON.stringify(draft.headings) !== JSON.stringify(article.headings || [])
+    || JSON.stringify(draft.faq) !== JSON.stringify(article.faq);
+}
+
 function applyResultToPayload<T extends ContentPolicyPayload>(
   payload: T,
   result: ContentPolicyResult,
   effectiveInput: ContentPolicyInput,
+  draft: ArticleDraft,
 ): T {
   const structured: Record<string, any> = {
     ...(payload.structuredContent || {}),
@@ -245,7 +267,8 @@ function applyResultToPayload<T extends ContentPolicyPayload>(
   // A user-confirmed title (keyword-as-title / manual override) survives the rewrite —
   // this stage runs after the generation-side lock and used to silently undo it.
   const lockedTitle = resolveLockedTitle(payload.structuredContent as Record<string, any> | undefined);
-  if (result.rewrite_count > 0) {
+  const rewroteArticle = result.rewrite_count > 0 && articleDiffersFromDraft(draft, result.article);
+  if (rewroteArticle) {
     structured.selectedTitle = lockedTitle || result.article.title;
     structured.introduction = result.article.introduction;
     if (result.article.headings) {
@@ -272,8 +295,8 @@ function applyResultToPayload<T extends ContentPolicyPayload>(
   }
   return {
     ...payload,
-    title: result.rewrite_count > 0 ? (lockedTitle || result.article.title) : payload.title,
-    content: result.rewrite_count > 0 ? result.article.body_markdown : payload.content,
+    title: rewroteArticle ? (lockedTitle || result.article.title) : payload.title,
+    content: rewroteArticle ? result.article.body_markdown : payload.content,
     structuredContent: structured,
     contentPolicyContext: {
       ...(payload.contentPolicyContext || {}),
@@ -347,6 +370,7 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
     effectiveInput,
     declaredClaimRepair.advisoryReasons,
     declaredClaimRepair.rewriteCount,
+    declaredClaimRepair.matchedForbiddenClaims.map((claim) => `FORBIDDEN_CLAIM:${claim}`),
   );
   policyResult = advisory.policyResult;
   const policyAdvisoryReasons = [...new Set([
@@ -355,6 +379,29 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
     ...(policyResult.manual_review?.reasons || []),
   ])];
   const articleId = stringValue(payload.postId) || `policy-${policyResult.input_hash.slice(0, 20)}`;
+
+  /*
+   * [2026-09-22] SOURCE_MATERIALS_MISSING guard advisory.
+   *
+   * A source-based payload (real-time crawl / smart-scheduler / affiliate) can
+   * reach the publish boundary with `source_materials: []` and a business_facts
+   * array that is nothing but a provenance placeholder sentence ("사용자가 …
+   * 직접 등록/확인했다") — the reconciler's own fallback fact, or an upstream
+   * adapter's (SmartScheduler, multi-account) placeholder. That combination
+   * means the article claims to be source-backed but nothing here can verify
+   * it. This never blocks a draft — it only asks a human to look at it.
+   */
+  const businessFactsAreOnlyPlaceholders = effectiveInput.business_facts.length > 0
+    && effectiveInput.business_facts.every((fact) => isProvenancePlaceholderFact(fact));
+  const declaresSourceBased = Boolean(
+    Number(payload.structuredContent?._generationIntegrity?.sourceCount) > 0
+    || payload.structuredContent?.metadata?.useRealTimeInfo === true
+    || (Array.isArray(baseInput.source_materials) && baseInput.source_materials.length > 0),
+  );
+  const sourceMaterialsMissing = effectiveInput.input_origin !== 'semi_auto_manual'
+    && (effectiveInput.source_materials || []).length === 0
+    && businessFactsAreOnlyPlaceholders
+    && declaresSourceBased;
 
   let guardReasons: string[] = [];
   let guardAdvisoryReasons: string[] = [];
@@ -402,19 +449,25 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
     policyResult = blockForStorageFailure(policyResult, 'BLOCK_AUDIT_LOG_UNAVAILABLE');
   }
 
-  const preparedPayload = applyResultToPayload(payload, policyResult, effectiveInput);
+  const preparedPayload = applyResultToPayload(payload, policyResult, effectiveInput, draft);
   const finalReasons = [...new Set([...guardReasons])];
   const finalAdvisoryReasons = [...new Set([
     ...policyAdvisoryReasons,
     ...guardAdvisoryReasons,
+    ...(sourceMaterialsMissing ? ['SOURCE_MATERIALS_MISSING'] : []),
+  ])];
+  const finalManualReviewReasons = [...new Set([
+    ...recentPostManualReviewReasons(finalReasons),
+    ...(sourceMaterialsMissing ? ['SOURCE_MATERIALS_MISSING'] : []),
   ])];
   return {
     allowed: guardReasons.length === 0,
     reasons: finalReasons,
     advisoryReasons: finalAdvisoryReasons,
     manualReviewRequired: policyResult.publication.manual_review_required
-      || isOnlyRecentPostManualReviewReasons(policyAdvisoryReasons),
-    manualReviewReasons: recentPostManualReviewReasons(finalReasons),
+      || isOnlyRecentPostManualReviewReasons(policyAdvisoryReasons)
+      || sourceMaterialsMissing,
+    manualReviewReasons: finalManualReviewReasons,
     articleId,
     policyResult,
     payload: preparedPayload,

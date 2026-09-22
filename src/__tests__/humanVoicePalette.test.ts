@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'fs';
 
 import { auditAffiliateAuthenticity } from '../content/affiliateAuthenticity';
+import { humanizeContent } from '../aiHumanizer';
 
 function read(rel: string): string {
   return readFileSync(new URL(`../${rel}`, import.meta.url), 'utf8');
@@ -51,13 +52,17 @@ describe('human voice palette (구어체 개방)', () => {
     expect(issue?.hard).toBe(false); // 감점만, 문장 삭제·발행 차단 없음
   });
 
-  it('전 모드 strong 휴머나이즈 + 거든요 계열 어미 사전 확장', () => {
+  // [2026-09-22 SPEC — 후처리 결정론화, supersedes 2026-07-30 지시] "전 모드 무조건 strong"
+  // 정책은 resolveHumanizeIntensity가 항상 'light'를 기본값으로 반환하고 configured 인자로만
+  // 'strong'을 켜는 방식으로 바뀌었다. '거든요' 계열은 diversifyEndings(무작위 어미 치환,
+  // FORMAL_TO_CASUAL)에서만 등장했는데 그 함수 자체가 Math.random 기반이라 제거됐다 —
+  // 이제 aiHumanizer.ts에 남은 어미 변주(diversifyConsecutiveEndings)는 반복 방지용으로
+  // 결정론적 ENDING_VARIATIONS/FORMAL_ENDING_VARIATIONS 맵만 쓴다(거든요 계열 없음).
+  it('기본값은 light이고, 강한 강도는 configured로 명시해야 한다', () => {
     const policy = read('contentHumanizationPolicy.ts');
-    expect(policy).toContain("return 'strong'");
-    expect(policy).not.toMatch(/return 'light'/);
+    expect(policy).toContain("return 'light'");
     const humanizer = read('aiHumanizer.ts');
-    expect(humanizer).toContain("'있거든요'");
-    expect(humanizer).toContain("'하거든요'");
+    expect(humanizer).not.toContain('Math.random');
   });
 
   it('보이스 프로필: 글마다 다른 목소리를 뽑고 시드가 다르면 조합이 달라진다', async () => {
@@ -83,10 +88,21 @@ describe('human voice palette (구어체 개방)', () => {
     expect(loader).not.toContain('buildVoiceProfileBlock');
   });
 
-  it('후처리 지터+서브셋: 고정 확률·전체 풀 재사용 지문을 깬다', () => {
+  // [2026-09-22 SPEC — 후처리 결정론화] "글마다 확률을 ±30% 흔드는 지터"와 "서브셋 랜덤
+  // 샘플링"은 둘 다 Math.random 기반이라 제거 대상이었다(같은 입력 → 다른 출력이라
+  // 회귀 테스트가 불안정했고, 개인 표현/감탄사 삽입은 자료에 없는 체험을 무작위로
+  // 지어낼 위험이 있었다). 이제 humanizeContent는 결정론적이다 — 같은 입력은 항상
+  // 같은 출력을 낸다.
+  it('결정론적 후처리: 같은 입력은 항상 같은 출력을 낸다(랜덤 지터/서브셋 제거)', () => {
     const humanizer = read('aiHumanizer.ts');
-    expect(humanizer).toMatch(/jitter\(intensity === 'strong' \? 0\.28 : 0\.18\)/);
-    expect(humanizer).toContain('samplePhraseSubset(PERSONAL_EXPRESSIONS_SAFE_INSERT, 4)');
-    expect(humanizer).toContain('samplePhraseSubset(INTERJECTIONS, 4)');
+    expect(humanizer).not.toContain('Math.random');
+    expect(humanizer).not.toContain('samplePhraseSubset');
+
+    const body = '안녕하세요. 오늘은 이 제품을 소개해드리겠습니다. 물론 확실히 중요한 점은 이겁니다.';
+    const outputs = new Set<string>();
+    for (let i = 0; i < 20; i++) {
+      outputs.add(humanizeContent(body, 'strong', true, 'community_fan'));
+    }
+    expect(outputs.size).toBe(1);
   });
 });

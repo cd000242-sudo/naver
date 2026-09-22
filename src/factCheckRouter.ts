@@ -7,6 +7,14 @@
  * (crawl → naver → perplexity-if-key). Expensive engines (Gemini grounding)
  * never run unless explicitly selected. Every failure degrades to the
  * original body with a warning — fact-check must never block publishing.
+ *
+ * [2026-09-22] Inspector, not deleter. The model used to be told to return
+ * `replacement: ""` (delete the sentence) for several axes. That is a
+ * deletion instruction disguised as a "correction" — it silently strips
+ * reader-facing content. The contract now asks the model for structured
+ * issues (`claim`/`status`/`issue`/`suggestedCorrection`) and never for a
+ * deletion. Whether/how to apply a `suggestedCorrection` is the caller's
+ * decision (see postDraftFactCheck.ts — non-destructive by default).
  */
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import type { SuspiciousItem } from './perplexityFactCheck.js';
@@ -22,6 +30,35 @@ export const FACT_CHECK_ENGINE_VALUES: readonly FactCheckEngine[] = [
 export const AUTO_ESCALATE_BELOW_CHARS = 500;
 /** Below this length there is nothing meaningful to compare — skip instead. */
 export const MIN_USEFUL_EVIDENCE_CHARS = 100;
+/** Evidence longer than this is truncated before being sent to the model. */
+export const MAX_EVIDENCE_CHARS = 8000;
+
+export type FactIssueStatus =
+  'UNSUPPORTED' | 'CONTRADICTED' | 'TIME_MISMATCH' | 'OVERCLAIM' | 'UNVERIFIABLE';
+
+const FACT_ISSUE_STATUSES: readonly FactIssueStatus[] = [
+  'UNSUPPORTED', 'CONTRADICTED', 'TIME_MISMATCH', 'OVERCLAIM', 'UNVERIFIABLE',
+];
+
+/**
+ * A single inspection finding. The model never instructs deletion — at most
+ * it may offer `suggestedCorrection`, and only when it has a concrete,
+ * evidence-backed replacement. Applying it is always the caller's choice.
+ */
+export interface FactIssue {
+  claim: string;
+  status: FactIssueStatus;
+  issue: string;
+  evidenceIds?: string[];
+  suggestedCorrection?: string;
+}
+
+/** Lets the integrator route fact-check LLM calls through the user-selected engine. */
+export interface FactCheckCaller {
+  /** Log-friendly engine/model label. */
+  readonly engine: string;
+  readonly callText: (prompt: string, maxTokens?: number) => Promise<string>;
+}
 
 export interface FactCheckRouterInput {
   bodyPlain: string;
@@ -30,13 +67,23 @@ export interface FactCheckRouterInput {
   /** Already-collected source material (crawl/RAG rawText). */
   rawText?: string;
   config?: Record<string, unknown> | null;
+  /** When set, used instead of the key-order fallback chain for all non-grounding engines. */
+  caller?: FactCheckCaller;
 }
 
 export interface FactCheckRouterOutcome {
+  /**
+   * [2026-09-22] Kept only for engines this project does not own (perplexity's
+   * internal factCheckAndRewrite already applies its own replacements before
+   * this router sees the result). Callers built after this date should read
+   * `issues` instead — this router never auto-applies corrections itself.
+   */
   corrected: string;
-  suspicious: SuspiciousItem[];
+  issues: FactIssue[];
   /** Engine that actually produced the verdict (auto resolves to a concrete one). */
   engineUsed: string;
+  /** Vendor:model label actually called, when resolvable. */
+  model?: string;
   notes: string[];
 }
 
@@ -63,6 +110,11 @@ export function shouldEscalateEvidence(evidenceChars: number): boolean {
  *
  * 다섯 축 모두 **최소 편집**만 지시한다. 문장을 다시 쓰게 하면 applyCorrections가
  * 멀족한 본문을 갈아엎을 수 있다(문자열 치환으로 실제 본문이 바뀜다).
+ *
+ * [2026-09-22] 삭제 지시 제거. E-2/E/D/E-1이 "그 문장을 삭제합니다(replacement 를
+ * 빈 문자열로 두세요)"를 지시하고 있었다 — 이건 교정이 아니라 검수자 모르게
+ * 문장을 지우는 지시다. 이제는 status만 표시하고 suggestedCorrection은 비워
+ * 두게 한다. 지울지 말지는 이 프롬프트의 소관이 아니다.
  */
 export function buildAssemblyErrorAxes(): string {
   return `
@@ -70,51 +122,64 @@ export function buildAssemblyErrorAxes(): string {
 이 유형은 반드시 **최소 편집**으로 고칩니다 — 문장을 새로 쓰지 말고 문제된 부분만 손봅니다.
 
 A. 수량 한정어 승격 — 자료가 "약 70%"인데 본문이 "전국"·"모든"·"유일"·"최초"·"최대"로 올려 씀.
-   → 자료 표현 그대로 되돌립니다. (예: "전국 모든 지자체가" → "약 70%의 지자체가")
+   → suggestedCorrection에 자료 표현 그대로 되돌린 문장을 적으세요. (예: "전국 모든 지자체가" → "약 70%의 지자체가")
 B. 주체 혼합 — 한 문장에 둘 이상의 지역·기관·제품 사실이 섞임.
-   → 지역별로 문장을 나눕니다. (예: "A시와 B시는 25만원" → "A시는 25만원입니다. B시는 …")
+   → suggestedCorrection에 지역별로 문장을 나눈 형태를 적으세요. (예: "A시와 B시는 25만원" → "A시는 25만원입니다. B시는 …")
 C. 용어 치환 — 공식 명칭·기준 용어를 비슷한 다른 말로 바꿔 씀.
    ('출생연도 끝자리'와 '생년월일 끝자리'는 다른 제도입니다. '신청기간'≠'사용기간')
-   → 자료 표기 그대로 되돌립니다.
+   → suggestedCorrection에 자료 표기 그대로 되돌린 문장을 적으세요.
 D. 상대 날짜 — "이달 말", "다음 주", "올해 안에"처럼 발행 뒤 거짓이 되는 표현.
-   → 자료에 절대 날짜가 있으면 그 날짜로 바꾸고, 없으면 그 시점 표현만 지우세요.
+   → 자료에 절대 날짜가 있으면 suggestedCorrection에 그 날짜로 바꾼 문장을 적고, 없으면
+     suggestedCorrection은 비워 두고 status를 TIME_MISMATCH 로만 표시하세요(문장을 지우라는 지시가 아닙니다).
 E-1. 월 없는 날짜 — "23일 0시", "29일과 30일"처럼 월을 안 붙인 날짜.
-   → 자료에 월이 있으면 붙이고("6월 23일"), 없으면 그 날짜 표현을 지웁니다.
+   → 자료에 월이 있으면 suggestedCorrection에 붙인 문장("6월 23일")을 적고, 없으면
+     suggestedCorrection은 비워 두고 status를 TIME_MISMATCH 로만 표시하세요.
 E-2. 미검증 정보 중계 — "자료에 나오는데 공식 공지에서 확인하세요", "확인되지 않았습니다"처럼
    검증 못 한 것을 독자에게 설명하는 문장.
-   → 그 문장을 삭제합니다(replacement 를 빈 문자열 "" 로 두세요).
+   → suggestedCorrection은 비워 두고 status를 UNVERIFIABLE 로 표시하세요(문장을 지우라는 지시가 아닙니다).
 E-3. 시점 혼입 — 이번 소식과 시점이 다른 사건(몇 달 전 행사·다른 공연)의 숫자를
    시점 표기 없이 나란히 쓴 문장.
-   → "지난 5월"처럼 시점을 붙이거나, 붙일 근거가 없으면 그 문장을 삭제합니다.
+   → "지난 5월"처럼 시점을 붙인 문장을 suggestedCorrection에 적거나, 붙일 근거가 없으면
+     suggestedCorrection은 비워 두고 status를 TIME_MISMATCH 로 표시하세요.
 E. 근거 없는 이유·전망 — 자료에 설명이 없는데 "~로 보인다", "~할 전망이다",
    "~를 노린 것"처럼 이유나 앞일을 지어냄.
-   → 그 문장을 삭제합니다(replacement 를 빈 문자열 "" 로 두세요).
+   → suggestedCorrection은 비워 두고 status를 OVERCLAIM 으로 표시하세요(문장을 지우라는 지시가 아닙니다).
 
 ⚠️ A~E 는 자료에 근거가 **있는지 없는지**로 판단하지 말고, 위에 적힌 형태에 해당하는지로만
 판단하세요. 해당하지 않으면 건드리지 마세요.`;
 }
 
+function trimEvidence(evidence: string): string {
+  if (evidence.length > MAX_EVIDENCE_CHARS) {
+    console.log(`[FactCheck] evidence truncated ${evidence.length}→${MAX_EVIDENCE_CHARS} chars`);
+    return evidence.slice(0, MAX_EVIDENCE_CHARS);
+  }
+  return evidence;
+}
+
 function buildPrompt(bodyPlain: string, topic: string | undefined, evidence: string | undefined): string {
   const topicHint = topic ? `주제: "${topic}"\n\n` : '';
   const evidenceBlock = evidence
-    ? `=== 확인된 수집 자료 (이 자료만 근거로 판단) ===\n${evidence.slice(0, 8000)}\n=== 자료 끝 ===\n\n아래 글에서 위 자료와 **명백히 모순되는 문장**만 찾아 자료 기준으로 고쳐주세요. 자료에 없는 내용이라는 이유만으로는 고치지 마세요.\n${buildAssemblyErrorAxes()}\n`
-    : `다음 블로그 글에서 **명백한 사실 오류가 확실한 문장**(통계·연도·인물·제품명·법령·수치)만 보수적으로 골라주세요. 확신이 없으면 포함하지 마세요.\n${buildAssemblyErrorAxes()}\n`;
+    ? `=== 확인된 수집 자료 (이 자료만 근거로 판단) ===\n${trimEvidence(evidence)}\n=== 자료 끝 ===\n\n아래 글에서 위 자료와 **명백히 모순되는 문장**만 찾아 문제로 표시하세요. 자료에 없는 내용이라는 이유만으로는 표시하지 마세요.\n${buildAssemblyErrorAxes()}\n`
+    : `다음 블로그 글에서 **명백한 사실 오류가 확실한 문장**(통계·연도·인물·제품명·법령·수치)만 보수적으로 골라 문제로 표시해 주세요. 확신이 없으면 포함하지 마세요.\n${buildAssemblyErrorAxes()}\n`;
   return `${topicHint}${evidenceBlock}
-각 문장에 대해:
-1. original: 원문 인용 (글에 있는 그대로)
-2. replacement: 사실 기반 수정 문장 (원문과 톤·길이 비슷하게)
-3. reason: 짧은 이유
+각 문제에 대해:
+1. claim: 원문 인용 (글에 있는 그대로)
+2. status: UNSUPPORTED | CONTRADICTED | TIME_MISMATCH | OVERCLAIM | UNVERIFIABLE 중 하나
+3. issue: 짧은 이유
+4. evidenceIds: (선택) 근거로 삼은 자료 식별자 배열
+5. suggestedCorrection: (선택) 자료 기준 수정 제안. 문장을 삭제하라는 지시가 아닙니다 — 근거가 없으면 비워 두세요.
 
 응답은 반드시 JSON만 (마크다운 금지):
-{"suspicious": [{"original": "...", "replacement": "...", "reason": "..."}]}
-의심 문장이 없으면 {"suspicious": []}
+{"issues": [{"claim": "...", "status": "...", "issue": "...", "suggestedCorrection": "..."}]}
+문제 없으면 {"issues": []}
 
 === 글 본문 ===
 ${bodyPlain}
 === 끝 ===`;
 }
 
-export function parseSuspicious(rawResponse: string): SuspiciousItem[] {
+export function parseFactIssues(rawResponse: string): FactIssue[] {
   try {
     const cleaned = String(rawResponse || '')
       .replace(/^```(?:json)?\s*/i, '')
@@ -123,24 +188,26 @@ export function parseSuspicious(rawResponse: string): SuspiciousItem[] {
     const jsonStart = cleaned.indexOf('{');
     const jsonEnd = cleaned.lastIndexOf('}');
     if (jsonStart < 0 || jsonEnd <= jsonStart) return [];
-    const parsed = JSON.parse(cleaned.slice(jsonStart, jsonEnd + 1)) as { suspicious?: unknown };
-    if (!Array.isArray(parsed?.suspicious)) return [];
-    return (parsed.suspicious as SuspiciousItem[]).filter(
-      (s) => s && typeof s.original === 'string' && typeof s.replacement === 'string' && s.original.length > 5,
-    );
+    const parsed = JSON.parse(cleaned.slice(jsonStart, jsonEnd + 1)) as { issues?: unknown };
+    if (!Array.isArray(parsed?.issues)) return [];
+    return (parsed.issues as Array<Record<string, unknown>>)
+      .filter((item): item is Record<string, unknown> => (
+        Boolean(item) && typeof item.claim === 'string' && item.claim.length > 5
+      ))
+      .map((item) => ({
+        claim: String(item.claim),
+        status: FACT_ISSUE_STATUSES.includes(item.status as FactIssueStatus)
+          ? (item.status as FactIssueStatus)
+          : 'UNVERIFIABLE',
+        issue: typeof item.issue === 'string' ? item.issue : '',
+        evidenceIds: Array.isArray(item.evidenceIds) ? item.evidenceIds.map(String) : undefined,
+        suggestedCorrection: typeof item.suggestedCorrection === 'string' && item.suggestedCorrection.trim()
+          ? item.suggestedCorrection
+          : undefined,
+      }));
   } catch {
     return [];
   }
-}
-
-export function applyCorrections(bodyPlain: string, suspicious: SuspiciousItem[]): string {
-  let corrected = bodyPlain;
-  for (const item of suspicious) {
-    if (corrected.includes(item.original)) {
-      corrected = corrected.replace(item.original, item.replacement);
-    }
-  }
-  return corrected;
 }
 
 async function callOpenAiJson(prompt: string, apiKey: string): Promise<string> {
@@ -200,21 +267,53 @@ async function callGeminiJson(
   return result.response.text();
 }
 
-/** Evidence-based check with the cheapest configured LLM (openai → gemini → claude). */
+/**
+ * Resolves which LLM answers an evidence-based fact-check prompt.
+ *
+ * [2026-09-22 "보조 호출도 선택 엔진으로"] When the integrator passes a
+ * `caller` (the user's selected engine — see selectedEngineTextCaller.ts),
+ * it is used exclusively; the key-order fallback chain below never runs and
+ * no other vendor is touched. Without a caller, the legacy openai → gemini →
+ * claude key-order chain applies, same as before.
+ */
+async function callFactCheckModel(
+  input: FactCheckRouterInput,
+  prompt: string,
+  notes: string[],
+): Promise<{ raw: string; model?: string }> {
+  if (input.caller) {
+    notes.push(`[FactCheck] engine=${input.caller.engine} (selected)`);
+    return { raw: await input.caller.callText(prompt, 2048), model: input.caller.engine };
+  }
+  const config = (input.config || {}) as Record<string, string | undefined>;
+  if (config.openaiApiKey) {
+    const model = 'gpt-4.1-mini';
+    notes.push(`[FactCheck] engine=openai:${model} (fallback chain)`);
+    return { raw: await callOpenAiJson(prompt, config.openaiApiKey), model: `openai:${model}` };
+  }
+  if (config.geminiApiKey) {
+    const model = config.geminiModel || 'gemini-3.1-flash-lite';
+    notes.push(`[FactCheck] engine=gemini:${model} (fallback chain)`);
+    return { raw: await callGeminiJson(prompt, config.geminiApiKey, model, false), model: `gemini:${model}` };
+  }
+  if (config.claudeApiKey) {
+    const model = 'claude-haiku-4-5-20251001';
+    notes.push(`[FactCheck] engine=claude:${model} (fallback chain)`);
+    return { raw: await callClaudeJson(prompt, config.claudeApiKey), model: `claude:${model}` };
+  }
+  notes.push('사용 가능한 LLM 키가 없어 자료 대조를 건너뜀');
+  return { raw: '' };
+}
+
+/** Evidence-based check via the resolved caller/chain. */
 async function runEvidenceCheck(
   input: FactCheckRouterInput,
   evidence: string,
   notes: string[],
-): Promise<SuspiciousItem[]> {
-  const config = (input.config || {}) as Record<string, string | undefined>;
+): Promise<{ issues: FactIssue[]; model?: string }> {
   const prompt = buildPrompt(input.bodyPlain, input.topic, evidence);
-  if (config.openaiApiKey) return parseSuspicious(await callOpenAiJson(prompt, config.openaiApiKey));
-  if (config.geminiApiKey) {
-    return parseSuspicious(await callGeminiJson(prompt, config.geminiApiKey, config.geminiModel || 'gemini-3.1-flash-lite', false));
-  }
-  if (config.claudeApiKey) return parseSuspicious(await callClaudeJson(prompt, config.claudeApiKey));
-  notes.push('사용 가능한 LLM 키가 없어 자료 대조를 건너뜀');
-  return [];
+  const { raw, model } = await callFactCheckModel(input, prompt, notes);
+  return { issues: raw ? parseFactIssues(raw) : [], model };
 }
 
 async function collectNaverEvidence(keyword: string | undefined, notes: string[]): Promise<string> {
@@ -231,9 +330,25 @@ async function collectNaverEvidence(keyword: string | undefined, notes: string[]
   }
 }
 
+/** Converts perplexity's own SuspiciousItem output into the FactIssue contract. */
+function suspiciousToFactIssues(items: readonly SuspiciousItem[]): FactIssue[] {
+  return items.map((item) => ({
+    claim: item.original,
+    status: 'UNVERIFIABLE',
+    issue: item.reason,
+    suggestedCorrection: item.replacement || undefined,
+  }));
+}
+
 /**
  * Run the selected fact-check engine. Never throws — failures return the
  * original body with notes (fact-check must not kill publishing).
+ *
+ * [2026-09-22] This router only inspects — it never mutates the article
+ * itself. `corrected` is kept only because perplexity's own module (out of
+ * this project's ownership for this change) already applies its replacement
+ * internally; every other engine returns `corrected === input.bodyPlain`.
+ * Callers should read `issues` and decide whether/how to apply anything.
  */
 export async function runFactCheck(
   engine: FactCheckEngine,
@@ -241,7 +356,7 @@ export async function runFactCheck(
 ): Promise<FactCheckRouterOutcome> {
   const notes: string[] = [];
   const passthrough = (engineUsed: string): FactCheckRouterOutcome => ({
-    corrected: input.bodyPlain, suspicious: [], engineUsed, notes,
+    corrected: input.bodyPlain, issues: [], engineUsed, notes,
   });
 
   try {
@@ -254,7 +369,7 @@ export async function runFactCheck(
     if (engine === 'perplexity') {
       const { factCheckAndRewrite } = await import('./perplexityFactCheck.js');
       const { corrected, result } = await factCheckAndRewrite(input.bodyPlain, input.topic);
-      return { corrected, suspicious: result.suspicious, engineUsed: 'perplexity', notes };
+      return { corrected, issues: suspiciousToFactIssues(result.suspicious), engineUsed: 'perplexity', notes };
     }
 
     if (engine === 'gemini-grounding') {
@@ -262,27 +377,34 @@ export async function runFactCheck(
         notes.push('Gemini API 키 없음 — 그라운딩 팩트체크 건너뜀');
         return passthrough('gemini-grounding');
       }
-      const raw = await callGeminiJson(
-        buildPrompt(input.bodyPlain, input.topic, undefined),
-        config.geminiApiKey,
-        config.geminiModel || 'gemini-3.1-flash-lite',
-        true,
-      );
-      const suspicious = parseSuspicious(raw);
-      return { corrected: applyCorrections(input.bodyPlain, suspicious), suspicious, engineUsed: 'gemini-grounding', notes };
+      const model = config.geminiModel || 'gemini-3.1-flash-lite';
+      const raw = await callGeminiJson(buildPrompt(input.bodyPlain, input.topic, undefined), config.geminiApiKey, model, true);
+      const issues = parseFactIssues(raw);
+      return { corrected: input.bodyPlain, issues, engineUsed: 'gemini-grounding', model: `gemini:${model}`, notes };
     }
 
     if (engine === 'gpt-claude') {
       const prompt = buildPrompt(input.bodyPlain, input.topic, undefined);
       let raw = '';
-      if (config.openaiApiKey) raw = await callOpenAiJson(prompt, config.openaiApiKey);
-      else if (config.claudeApiKey) raw = await callClaudeJson(prompt, config.claudeApiKey);
-      else {
+      let model: string | undefined;
+      if (input.caller) {
+        notes.push(`[FactCheck] engine=${input.caller.engine} (selected)`);
+        raw = await input.caller.callText(prompt, 2048);
+        model = input.caller.engine;
+      } else if (config.openaiApiKey) {
+        notes.push('[FactCheck] engine=openai:gpt-4.1-mini (fallback chain)');
+        raw = await callOpenAiJson(prompt, config.openaiApiKey);
+        model = 'openai:gpt-4.1-mini';
+      } else if (config.claudeApiKey) {
+        notes.push('[FactCheck] engine=claude:claude-haiku-4-5-20251001 (fallback chain)');
+        raw = await callClaudeJson(prompt, config.claudeApiKey);
+        model = 'claude:claude-haiku-4-5-20251001';
+      } else {
         notes.push('GPT/Claude 키 없음 — 건너뜀');
         return passthrough('gpt-claude');
       }
-      const suspicious = parseSuspicious(raw);
-      return { corrected: applyCorrections(input.bodyPlain, suspicious), suspicious, engineUsed: 'gpt-claude', notes };
+      const issues = parseFactIssues(raw);
+      return { corrected: input.bodyPlain, issues, engineUsed: 'gpt-claude', model, notes };
     }
 
     if (engine === 'crawl') {
@@ -290,8 +412,8 @@ export async function runFactCheck(
         notes.push('수집 자료가 없어 크롤링 대조를 건너뜀');
         return passthrough('crawl');
       }
-      const suspicious = await runEvidenceCheck(input, rawEvidence, notes);
-      return { corrected: applyCorrections(input.bodyPlain, suspicious), suspicious, engineUsed: 'crawl', notes };
+      const { issues, model } = await runEvidenceCheck(input, rawEvidence, notes);
+      return { corrected: input.bodyPlain, issues, engineUsed: 'crawl', model, notes };
     }
 
     if (engine === 'naver') {
@@ -301,32 +423,32 @@ export async function runFactCheck(
         notes.push('네이버 자료도 빈약 — 대조 건너뜀');
         return passthrough('naver');
       }
-      const suspicious = await runEvidenceCheck(input, combined, notes);
-      return { corrected: applyCorrections(input.bodyPlain, suspicious), suspicious, engineUsed: 'naver', notes };
+      const { issues, model } = await runEvidenceCheck(input, combined, notes);
+      return { corrected: input.bodyPlain, issues, engineUsed: 'naver', model, notes };
     }
 
     // auto — cheap-first chain. Expensive engines (grounding) are NEVER auto.
     if (!shouldEscalateEvidence(rawEvidence.length)) {
-      const suspicious = await runEvidenceCheck(input, rawEvidence, notes);
-      return { corrected: applyCorrections(input.bodyPlain, suspicious), suspicious, engineUsed: 'auto→crawl', notes };
+      const { issues, model } = await runEvidenceCheck(input, rawEvidence, notes);
+      return { corrected: input.bodyPlain, issues, engineUsed: 'auto→crawl', model, notes };
     }
     notes.push(`수집 자료 ${rawEvidence.length}자 < ${AUTO_ESCALATE_BELOW_CHARS}자 — 네이버 API로 승격`);
     const naverEvidence = await collectNaverEvidence(input.keyword || input.topic, notes);
     const combined = `${rawEvidence}\n\n${naverEvidence}`.trim();
     if (!shouldEscalateEvidence(combined.length)) {
-      const suspicious = await runEvidenceCheck(input, combined, notes);
-      return { corrected: applyCorrections(input.bodyPlain, suspicious), suspicious, engineUsed: 'auto→naver', notes };
+      const { issues, model } = await runEvidenceCheck(input, combined, notes);
+      return { corrected: input.bodyPlain, issues, engineUsed: 'auto→naver', model, notes };
     }
     if (config.perplexityApiKey) {
       notes.push('자료가 여전히 빈약 — Perplexity로 승격 (₩50~150/편)');
       const { factCheckAndRewrite } = await import('./perplexityFactCheck.js');
       const { corrected, result } = await factCheckAndRewrite(input.bodyPlain, input.topic);
-      return { corrected, suspicious: result.suspicious, engineUsed: 'auto→perplexity', notes };
+      return { corrected, issues: suspiciousToFactIssues(result.suspicious), engineUsed: 'auto→perplexity', notes };
     }
     if (combined.length >= MIN_USEFUL_EVIDENCE_CHARS) {
       notes.push('빈약한 자료로 제한 대조 (Perplexity 키 없음)');
-      const suspicious = await runEvidenceCheck(input, combined, notes);
-      return { corrected: applyCorrections(input.bodyPlain, suspicious), suspicious, engineUsed: 'auto→crawl(빈약)', notes };
+      const { issues, model } = await runEvidenceCheck(input, combined, notes);
+      return { corrected: input.bodyPlain, issues, engineUsed: 'auto→crawl(빈약)', model, notes };
     }
     notes.push('대조할 자료가 없어 팩트체크 건너뜀 (그라운딩은 비용상 자동 제외 — 수동 선택 가능)');
     return passthrough('auto→skip');

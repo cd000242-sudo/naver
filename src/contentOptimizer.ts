@@ -253,7 +253,11 @@ const TONE_HUMAN_EXPRESSIONS: Record<string, string[]> = {
 
 const HUMAN_EXPRESSIONS_2025 = TONE_HUMAN_EXPRESSIONS.professional; // 폴백 하위호환용
 
-// ✅ 2025년 저품질 블로그 필터링 대상 (강화됨)
+// ✅ 2025년 저품질 블로그 필터링 대상
+// [2026-09-22 attribution/후처리 원칙] 아래 4개 패턴은 제거했다 — "LLM이 작성한 좋은
+// 결과를 후처리기가 임의로 망가뜨리지 않는다": /[A-Z]{5,}/ 는 "NVIDIA", "GEFORCE" 같은
+// 실제 모델명을 삭제했고, /\d+%\s*할인/·/무료\s*배송/·/최저가\s*보장/ 은 자료에 있는
+// 진짜 할인율·배송 정보를 스팸으로 오인해 지웠다. 반복 스팸 패턴만 남긴다.
 const LOW_QUALITY_2025: RegExp[] = [
   // 과도한 키워드 반복 (스팸 감지)
   /(\b\w{4,}\b)(\s+\1){2,}/gi,
@@ -262,8 +266,7 @@ const LOW_QUALITY_2025: RegExp[] = [
   /\.\s*\.\s*\./g,
   /…{2,}/g,
 
-  // 과도한 대문자/특수문자
-  /[A-Z]{5,}/g,
+  // 과도한 특수문자
   /[★☆●○◆◇■□]{3,}/g,
 
   // 클릭 유도 스팸
@@ -272,10 +275,7 @@ const LOW_QUALITY_2025: RegExp[] = [
   /충격\s*실화/gi,
   /대박\s*사건/gi,
 
-  // 허위/과장 광고
-  /\d+%\s*할인/gi,
-  /최저가\s*보장/gi,
-  /무료\s*배송/gi,
+  // 허위/과장 광고 (실제 수치·정보가 없는 정형 스팸 문구만)
   /오늘만\s*특가/gi,
 ];
 
@@ -572,9 +572,19 @@ function optimizeForAdpost(text: string): string {
  */
 function removeLowQuality2025(text: string): string {
   let result = text;
+  let matchCount = 0;
+  const beforeLength = text.length;
 
   for (const pattern of LOW_QUALITY_2025) {
+    const matches = result.match(pattern);
+    if (matches) matchCount += matches.length;
     result = result.replace(pattern, '');
+  }
+
+  if (matchCount > 0) {
+    console.log(
+      `[Optimizer] low-quality patterns removed: ${matchCount} (chars ${beforeLength}→${result.length})`,
+    );
   }
 
   return result;

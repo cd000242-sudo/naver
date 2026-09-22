@@ -4,17 +4,23 @@
  * 사용자 계약: 비용 저렴한 순 선택지, 자동은 크롤링→네이버→퍼플렉시티(키
  * 있을 때)만 승격하고 고비용 그라운딩은 절대 자동 실행하지 않는다.
  * 팩트체크 실패는 발행을 막지 않는다(경고-only).
+ *
+ * [2026-09-22] 검수자는 삭제자가 아니다. `parseSuspicious`/`applyCorrections`
+ * (원문/replacement 계약, 빈 문자열 replacement = 삭제 지시)를 제거하고
+ * `parseFactIssues` (claim/status/issue/suggestedCorrection 계약)로 교체했다.
+ * 이 라우터는 더 이상 스스로 본문을 고치지 않는다 — issues 만 보고한다.
  */
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 import {
   resolveFactCheckEngine,
   shouldEscalateEvidence,
-  parseSuspicious,
-  applyCorrections,
+  parseFactIssues,
   runFactCheck,
+  buildAssemblyErrorAxes,
   AUTO_ESCALATE_BELOW_CHARS,
+  MAX_EVIDENCE_CHARS,
   FACT_CHECK_ENGINE_VALUES,
 } from '../factCheckRouter';
 
@@ -47,36 +53,46 @@ describe('자동 승격 규칙 (순수 함수)', () => {
   });
 });
 
-describe('응답 파싱과 교정 적용', () => {
+describe('parseFactIssues — 새 issue 계약 파싱', () => {
   it('마크다운 펜스로 감싼 JSON도 파싱한다', () => {
-    const raw = '```json\n{"suspicious":[{"original":"2020년에 출시됐다","replacement":"2021년에 출시됐다","reason":"연도 오류"}]}\n```';
-    const items = parseSuspicious(raw);
+    const raw = '```json\n{"issues":[{"claim":"2020년에 출시됐다","status":"UNSUPPORTED","issue":"연도 오류","suggestedCorrection":"2021년에 출시됐다"}]}\n```';
+    const items = parseFactIssues(raw);
     expect(items).toHaveLength(1);
-    expect(items[0].replacement).toContain('2021');
+    expect(items[0].status).toBe('UNSUPPORTED');
+    expect(items[0].suggestedCorrection).toContain('2021');
   });
 
-  it('잡음/짧은 원문은 걸러지고, 실패 시 빈 배열(발행 무해)', () => {
-    expect(parseSuspicious('JSON 아님')).toEqual([]);
-    expect(parseSuspicious('{"suspicious":[{"original":"짧","replacement":"x"}]}')).toEqual([]);
+  it('잡음/짧은 claim은 걸러지고, 실패 시 빈 배열(발행 무해)', () => {
+    expect(parseFactIssues('JSON 아님')).toEqual([]);
+    expect(parseFactIssues('{"issues":[{"claim":"짧","status":"UNSUPPORTED"}]}')).toEqual([]);
   });
 
-  it('applyCorrections는 본문 내 일치 문장만 교체한다', () => {
-    const body = '서론. 2020년에 출시됐다. 결론.';
-    const out = applyCorrections(body, [
-      { original: '2020년에 출시됐다', replacement: '2021년에 출시됐다', reason: 'r' },
-      { original: '본문에 없는 문장', replacement: 'x', reason: 'r' },
-    ]);
-    expect(out).toContain('2021년에 출시됐다');
-    expect(out).toContain('결론.');
+  it('알 수 없는 status는 UNVERIFIABLE로 안전하게 대체한다', () => {
+    const raw = '{"issues":[{"claim":"충분히 긴 원문 인용","status":"WHATEVER","issue":"이유"}]}';
+    expect(parseFactIssues(raw)[0].status).toBe('UNVERIFIABLE');
+  });
+
+  it('suggestedCorrection이 빈 문자열이면 undefined로 정규화한다 (삭제 지시 금지)', () => {
+    const raw = '{"issues":[{"claim":"충분히 긴 원문 인용","status":"OVERCLAIM","issue":"근거 없음","suggestedCorrection":""}]}';
+    expect(parseFactIssues(raw)[0].suggestedCorrection).toBeUndefined();
+  });
+});
+
+describe('buildAssemblyErrorAxes — 삭제 지시 제거 확인', () => {
+  it('더 이상 문장을 삭제하라고 지시하지 않는다', () => {
+    const axes = buildAssemblyErrorAxes();
+    expect(axes).not.toContain('그 문장을 삭제합니다');
+    expect(axes).not.toContain('replacement 를 빈 문자열');
   });
 });
 
 describe('runFactCheck — 오프라인 안전 경로 (LLM 키 없음)', () => {
   const LONG_BODY = '검증 대상 본문입니다. '.repeat(20);
 
-  it('off는 원문 그대로 통과한다', async () => {
+  it('off는 원문 그대로 통과하고 issues가 비어 있다', async () => {
     const out = await runFactCheck('off', { bodyPlain: LONG_BODY });
     expect(out.corrected).toBe(LONG_BODY);
+    expect(out.issues).toEqual([]);
     expect(out.engineUsed).toBe('off');
   });
 
@@ -97,6 +113,39 @@ describe('runFactCheck — 오프라인 안전 경로 (LLM 키 없음)', () => {
     const out = await runFactCheck('gemini-grounding', { bodyPlain: LONG_BODY, config: {} });
     expect(out.corrected).toBe(LONG_BODY);
     expect(out.notes.join(' ')).toContain('키 없음');
+  });
+});
+
+describe('runFactCheck — caller 라우팅 (보조 호출도 선택 엔진으로)', () => {
+  const LONG_BODY = '검증 대상 본문입니다. '.repeat(30);
+
+  it('caller가 있으면 키 순서 체인을 타지 않는다', async () => {
+    const callText = vi.fn().mockResolvedValue('{"issues":[]}');
+    const out = await runFactCheck('crawl', {
+      bodyPlain: LONG_BODY,
+      rawText: '충분히 긴 수집 자료입니다. '.repeat(30),
+      // All three keys present — if the key-order chain ran, this would not
+      // matter which one is used, but callText must be the only thing called.
+      config: { openaiApiKey: 'k1', geminiApiKey: 'k2', claudeApiKey: 'k3' },
+      caller: { engine: 'selected-model', callText },
+    });
+    expect(callText).toHaveBeenCalledTimes(1);
+    expect(out.model).toBe('selected-model');
+    expect(out.notes.join(' ')).toContain('engine=selected-model (selected)');
+  });
+
+  it('evidence가 8000자를 넘으면 잘라내고 로그를 남긴다', async () => {
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    const callText = vi.fn().mockResolvedValue('{"issues":[]}');
+    const longEvidence = '자'.repeat(MAX_EVIDENCE_CHARS + 500);
+    await runFactCheck('crawl', {
+      bodyPlain: LONG_BODY,
+      rawText: longEvidence,
+      caller: { engine: 'selected-model', callText },
+    });
+    const truncationLog = logSpy.mock.calls.map((call) => call.join(' ')).find((line) => line.includes('evidence truncated'));
+    expect(truncationLog).toContain(`evidence truncated ${longEvidence.length}→${MAX_EVIDENCE_CHARS} chars`);
+    logSpy.mockRestore();
   });
 });
 

@@ -204,6 +204,32 @@ describe('selfCritiqueAndRewrite — 결론 편입', () => {
   });
 });
 
+/**
+ * [2026-09-22] MAX_BODY_CHARS_FOR_CRITIQUE raised 4500 → 16000. Bodies still over that
+ * limit must be skipped outright (no LLM call, no partial-evaluation patch applied) —
+ * evaluating only a truncated prefix but scoring the ratio guard against the full body
+ * used to reject/patch based on data the model never saw.
+ */
+describe('selfCritiqueAndRewrite — 상한 초과 본문은 부분 평가로 패치하지 않는다', () => {
+  it('20,000자 본문은 LLM을 호출하지 않고 원본을 그대로 반환한다', async () => {
+    const HUGE_BODY = LONG_BODY.repeat(Math.ceil(20000 / LONG_BODY.length));
+    expect(HUGE_BODY.length).toBeGreaterThan(16000);
+
+    const geminiCall = vi.fn();
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    try {
+      const result = await selfCritiqueAndRewrite(HUGE_BODY, FAKE_PERSONA, geminiCall);
+      expect(geminiCall).not.toHaveBeenCalled();
+      expect(result.rewrote).toBe(false);
+      expect(result.source).toBe('skipped');
+      expect(result.body).toBe(HUGE_BODY);
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('범위: 0~16000'));
+    } finally {
+      warnSpy.mockRestore();
+    }
+  });
+});
+
 describe('isSelfCritiqueEnabled', () => {
   it('respects explicit config flag', () => {
     expect(isSelfCritiqueEnabled({ enableSelfCritique: true })).toBe(true);

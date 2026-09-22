@@ -133,6 +133,7 @@ export async function guardGeneratedContent<T extends Record<string, any>>(
     options.input,
     declaredClaimRepair.advisoryReasons,
     declaredClaimRepair.rewriteCount,
+    declaredClaimRepair.matchedForbiddenClaims.map((claim) => `FORBIDDEN_CLAIM:${claim}`),
   );
   const policyResult = advisory.policyResult;
   const advisoryReasons = [...new Set([

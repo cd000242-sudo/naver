@@ -6,13 +6,18 @@ import {
 import { resolveHumanizeIntensity } from '../contentHumanizationPolicy';
 
 describe('post-generation integrity', () => {
-  it('applies strong humanization to every mode (2026-07-30 사용자 지시)', () => {
-    // "사람보다 더 사람처럼" — light 강등이 어미 다양화까지 꺼서 ~합니다 단조
-    // 어미가 AI 티의 주범이 됐다(라이브 실측). 전 모드 strong.
-    expect(resolveHumanizeIntensity('seo')).toBe('strong');
-    expect(resolveHumanizeIntensity('homefeed')).toBe('strong');
-    expect(resolveHumanizeIntensity('mate')).toBe('strong');
-    expect(resolveHumanizeIntensity('affiliate')).toBe('strong');
+  // [2026-09-22 SPEC — 후처리 결정론화, supersedes 2026-07-30 지시] aiHumanizer의 'strong'은
+  // 더 이상 Math.random 기반 어미/동의어 변주를 하지 않는다(결정론적 안전 변환만). 그 전제가
+  // 바뀌었으므로 "항상 strong"이라는 기본값도 재검토 대상이다 — 기본값은 'light'로 낮추고,
+  // 강한 변환이 필요한 호출자는 `resolveHumanizeIntensity(mode, 'strong')`으로 명시하게 했다.
+  // ⚠️ src/contentGenerator.ts:7932 호출부는 아직 configured를 넘기지 않는다 — 통합 담당자 확인 필요.
+  it('기본값은 light이고, configured로 명시하면 그 값을 따른다', () => {
+    expect(resolveHumanizeIntensity('seo')).toBe('light');
+    expect(resolveHumanizeIntensity('homefeed')).toBe('light');
+    expect(resolveHumanizeIntensity('mate')).toBe('light');
+    expect(resolveHumanizeIntensity('affiliate')).toBe('light');
+    expect(resolveHumanizeIntensity('seo', 'strong')).toBe('strong');
+    expect(resolveHumanizeIntensity('seo', 'off')).toBe('off');
   });
 
   it('does not truncate a generated homefeed introduction', () => {

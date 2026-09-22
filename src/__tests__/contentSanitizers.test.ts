@@ -64,7 +64,11 @@ describe('contentSanitizers', () => {
     expect(sanitizePublishableSourceText('문장 [출처: 기관]')).toBe('문장');
   });
 
-  it('sanitizes fake source phrases across structured content fields', () => {
+  // [2026-09-22 SPEC — attribution guard] sanitizeContentFakeSources default mode is now
+  // evidence-aware: without `evidence`, it no longer blanket-strips "~에 따르면" phrases
+  // (that used to destroy real, evidence-backed attributions along with fabricated ones).
+  // `{ mode: 'legacy' }` keeps the old blanket-stripping behavior this test originally pinned.
+  it('sanitizes fake source phrases across structured content fields (legacy mode)', () => {
     const content = {
       selectedTitle: '공식 발표에 따르면 제목',
       introduction: '자료에 따르면 도입부입니다.',
@@ -77,12 +81,54 @@ describe('contentSanitizers', () => {
       ],
     };
 
-    expect(sanitizeContentFakeSources(content)).toBeGreaterThan(0);
+    expect(sanitizeContentFakeSources(content, { mode: 'legacy' })).toBeGreaterThan(0);
     expect(content.selectedTitle).toBe('제목');
     expect(content.introduction).toBe('도입부입니다.');
     expect(content.conclusion).toBe('결론입니다.');
     expect(content.headings[0].title).toBe('소제목');
     expect(content.headings[0].body).toBe('본문입니다.');
+  });
+
+  it('default mode (no evidence) leaves named/generic attribution phrases untouched, only records them', () => {
+    const content = {
+      introduction: '보건복지부 발표에 따르면 월 30만원을 지원합니다.',
+      conclusion: '기사에 따르면 내용이 바뀌었습니다.',
+    };
+
+    sanitizeContentFakeSources(content);
+    expect(content.introduction).toBe('보건복지부 발표에 따르면 월 30만원을 지원합니다.');
+    expect(content.conclusion).toBe('기사에 따르면 내용이 바뀌었습니다.');
+    expect((content as any)._attributionReport).toEqual({ supported: 0, unsupported: [], stripped: [] });
+  });
+
+  it('with evidence, keeps a supported named attribution verbatim', () => {
+    const content = {
+      introduction: '보건복지부 발표에 따르면 월 30만원을 지원합니다.',
+    };
+
+    sanitizeContentFakeSources(content, { evidence: { sourceNames: ['보건복지부'], corpus: '' } });
+    expect(content.introduction).toBe('보건복지부 발표에 따르면 월 30만원을 지원합니다.');
+    expect((content as any)._attributionReport.supported).toBe(1);
+    expect((content as any)._attributionReport.unsupported).toEqual([]);
+  });
+
+  it('with evidence, strips only the phrase of an unsupported named attribution and keeps the claim', () => {
+    const content = {
+      introduction: '금융위원회 관계자는 내년부터 새 제도를 시행한다고 밝혔다.',
+    };
+
+    sanitizeContentFakeSources(content, { evidence: { sourceNames: ['국토교통부'], corpus: '주택 공급 자료' } });
+    expect(content.introduction).not.toContain('금융위원회 관계자는');
+    expect(content.introduction).toContain('내년부터 새 제도를 시행한다고 밝혔다');
+    const report = (content as any)._attributionReport as { unsupported: Array<{ orgName: string | null }> };
+    expect(report.unsupported.length).toBe(1);
+    expect(report.unsupported[0].orgName).toBe('금융위원회');
+  });
+
+  it('with evidence, keeps a generic attribution when a non-empty corpus exists', () => {
+    const content = { introduction: '기사에 따르면 내용이 바뀌었습니다.' };
+    sanitizeContentFakeSources(content, { evidence: { sourceNames: [], corpus: '실제 수집된 원문 일부' } });
+    expect(content.introduction).toBe('기사에 따르면 내용이 바뀌었습니다.');
   });
 
   it('removes html tags and decodes common entities before publish', () => {

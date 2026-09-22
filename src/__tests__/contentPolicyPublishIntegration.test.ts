@@ -65,7 +65,15 @@ describe('content policy publish integration', () => {
     expect(payload.structuredContent.contentPolicy).toBeUndefined();
   });
 
-  it('publishes the repaired body and heading model after removing unsupported claims', async () => {
+  /*
+   * [2026-09-22] Non-destructive default. Deleting the unsupported sentence and
+   * substituting a fallback title/heading is exactly the "확인 가이드" /
+   * "핵심 내용부터 살펴보기" regression the 2026-09-21 live incident diagnosed.
+   * The publish boundary now reports the finding as an advisory and leaves the
+   * article untouched by default (CONTENT_POLICY_DESTRUCTIVE_SCRUB=1 still
+   * exercises the legacy scrub path — covered in claimRepairDestructiveScrub.test.ts).
+   */
+  it('keeps an unsupported-claim sentence intact and reports it as an advisory', async () => {
     const payload = payloadWithContext();
     const unsupported = '국내생산 윈드포스 기술을 적용한 이 시트커버는 45,800원에 판매되고 있습니다.';
     payload.content = `${payload.content}\n\n${unsupported}`;
@@ -82,11 +90,10 @@ describe('content policy publish integration', () => {
     });
 
     expect(result.allowed).toBe(true);
-    expect(result.policyResult.rewrite_count).toBe(1);
-    expect(result.payload.content).not.toContain('45,800원');
-    expect(result.payload.structuredContent.bodyPlain).not.toContain('45,800원');
-    expect(result.payload.structuredContent.headings[0].content).not.toContain('45,800원');
-    expect(payload.content).toContain('45,800원');
+    expect(result.advisoryReasons).toContain('ADVISORY_UNSUPPORTED_CLAIM');
+    expect(result.payload.content).toContain('45,800원');
+    expect(result.payload.structuredContent.bodyPlain).toContain('45,800원');
+    expect(result.payload.structuredContent.headings[0].content).toContain('45,800원');
   });
 
   it('rebases stale generation keywords to the final pasted article in semi-auto mode', async () => {
@@ -112,7 +119,12 @@ describe('content policy publish integration', () => {
     expect(result.payload.contentPolicyContext?.input.business_facts).not.toContain(payload.title);
   });
 
-  it('removes a forbidden sentence and continues with an advisory after semi-auto context rebasing', async () => {
+  /*
+   * [2026-09-22] Non-destructive default — a declared forbidden phrase is
+   * reported (ADVISORY_FORBIDDEN_CLAIM), never silently deleted from the
+   * article. See claimRepairDestructiveScrub.test.ts for the opt-in legacy path.
+   */
+  it('keeps a forbidden sentence intact and continues with an advisory after semi-auto context rebasing', async () => {
     const payload = payloadWithContext();
     const unsupported = '이 서비스는 누구에게나 100% 해결을 보장합니다.';
     payload._semiAutoMode = true;
@@ -129,9 +141,61 @@ describe('content policy publish integration', () => {
     });
 
     expect(result.allowed).toBe(true);
-    expect(result.advisoryReasons).toContain('BLOCK_FORBIDDEN_CLAIM');
-    expect(result.payload.content).not.toContain('100% 해결을 보장');
-    expect(result.payload.structuredContent.bodyPlain).not.toContain('100% 해결을 보장');
+    expect(result.advisoryReasons).toContain('ADVISORY_FORBIDDEN_CLAIM');
+    expect(result.payload.content).toContain('100% 해결을 보장');
+    expect(result.payload.structuredContent.bodyPlain).toContain('100% 해결을 보장');
+  });
+
+  describe('SOURCE_MATERIALS_MISSING guard advisory (non-destructive — never blocks a draft)', () => {
+    function smartSchedulerShapedPayload(overrides: { sourceMaterials?: any[]; semiAuto?: boolean } = {}) {
+      const payload = payloadWithContext();
+      payload.contentPolicyContext.input = {
+        ...payload.contentPolicyContext.input,
+        business_facts: ['사용자가 SmartScheduler에 발행할 주제를 직접 등록했다.'],
+        source_materials: overrides.sourceMaterials ?? [],
+      };
+      payload.structuredContent = {
+        ...payload.structuredContent,
+        _generationIntegrity: { sourceCount: 8 },
+      };
+      if (overrides.semiAuto) (payload as any)._semiAutoMode = true;
+      return payload;
+    }
+
+    it('flags SOURCE_MATERIALS_MISSING for a source-based payload with no source materials behind a placeholder fact', async () => {
+      const result = await prepareContentPolicyForPublish(smartSchedulerShapedPayload(), {
+        userDataPath: await tempDir(),
+        env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+        now: new Date('2026-02-01T12:00:00.000Z'),
+      });
+
+      expect(result.allowed).toBe(true);
+      expect(result.manualReviewReasons).toContain('SOURCE_MATERIALS_MISSING');
+    });
+
+    it('does not flag it when real source materials are present', async () => {
+      const payload = smartSchedulerShapedPayload({
+        sourceMaterials: [{ type: 'first_party', title: '내부 자료', content: '실제 근거 자료 내용', source_id: 'real-1' }],
+      });
+      const result = await prepareContentPolicyForPublish(payload, {
+        userDataPath: await tempDir(),
+        env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+        now: new Date('2026-02-01T12:00:00.000Z'),
+      });
+
+      expect(result.manualReviewReasons).not.toContain('SOURCE_MATERIALS_MISSING');
+    });
+
+    it('exempts semi-auto payloads — the user is the source', async () => {
+      const payload = smartSchedulerShapedPayload({ semiAuto: true });
+      const result = await prepareContentPolicyForPublish(payload, {
+        userDataPath: await tempDir(),
+        env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+        now: new Date('2026-02-01T12:00:00.000Z'),
+      });
+
+      expect(result.manualReviewReasons).not.toContain('SOURCE_MATERIALS_MISSING');
+    });
   });
 
   it.each([

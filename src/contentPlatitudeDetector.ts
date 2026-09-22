@@ -20,6 +20,8 @@ export interface PlatitudeDetectionResult {
   platitudeHitCount: number;
   /** 매치된 트리거 어휘 목록 (중복 제거) */
   matchedTriggers: string[];
+  /** [2026-09-22] 섹션(소제목)별 트리거 매치 수 — 전체 재생성 대신 섹션 단위 타겟 수정을 위한 정보 */
+  sectionHits: Array<{ heading: string; hits: number }>;
   /** 단락당 평균 인용 토큰([자료N]) 수 */
   citationDensity: number;
   /** 전체 단락 수 */
@@ -28,11 +30,13 @@ export interface PlatitudeDetectionResult {
   totalCitations: number;
   /** [v2] RAG 자료와 본문 n-gram overlap (0~1) — 자료 없으면 -1 */
   rougeLOverlap: number;
+  /** [2026-09-22] ROUGE-L overlap이 임계 미만인지 — exceedsThreshold와 분리된 정보성 플래그 */
+  overlapTooLow: boolean;
   /** [v2] 사실 진술 단락 중 인용 토큰이 적절히 배치된 비율 (0~1) */
   citationPlacementRatio: number;
   /** [v2] 사실 진술 단락(숫자/날짜/금액 포함) 총 개수 */
   factualParagraphCount: number;
-  /** 임계 초과 여부 (일반론 ≥ 3회 또는 인용 밀도 < 0.3 또는 v2 추가 기준) */
+  /** 임계 초과 여부 (일반론 초과 또는 인용 밀도 부족 또는 v2 추가 기준 — overlapTooLow는 별도 플래그로 분리) */
   exceedsThreshold: boolean;
   /** 사유 (사용자/로그 표시용) */
   reason: string;
@@ -59,18 +63,14 @@ export interface DetectableContent {
  * Note: 정상 사용 가능한 단어는 단독으로만 잡지 않고 문맥에서 매칭.
  */
 const PLATITUDE_PATTERNS: Array<{ pattern: RegExp; label: string }> = [
-  { pattern: /보통(?:\s|은|이|을)/g, label: '보통' },
-  { pattern: /일반적으로/g, label: '일반적으로' },
-  { pattern: /흔히(?:\s|는)/g, label: '흔히' },
-  { pattern: /대체로/g, label: '대체로' },
+  // [2026-09-22 attribution/후처리 원칙] '보통', '일반적으로', '흔히', '대체로', '다양한',
+  //   '여러 가지', '~하는 게 좋습니다', '~할 수 있습니다' 는 평범한 한국어 서술 표현이다 —
+  //   실제 정보성 문장에서도 자연스럽게 반복되므로 도망(일반론) 신호가 아니라 오탐 위주였다.
+  //   진짜 도망 신호(자료 없이 얼버무리는 상투구)만 남긴다.
   { pattern: /많은\s*분들이/g, label: '많은 분들이' },
-  { pattern: /여러\s*가지/g, label: '여러 가지' },
-  { pattern: /다양한(?:\s|\s+\S+)/g, label: '다양한' },
   { pattern: /\S+한?\s*것\s*같아요/g, label: '~한 것 같아요' },
   { pattern: /^[\s\S]{0,30}필요합니다\./gm, label: '~필요합니다(단독)' },
   { pattern: /^[\s\S]{0,30}중요합니다\./gm, label: '중요합니다(단독)' },
-  { pattern: /\S+하는\s*게\s*좋습니다/g, label: '~하는 게 좋습니다' },
-  { pattern: /\S+할\s*수\s*있습니다/g, label: '~할 수 있습니다' },
   { pattern: /\S+인\s*경우가\s*많/g, label: '~인 경우가 많아요' },
   { pattern: /보편적으로/g, label: '보편적으로' },
   { pattern: /자명한\s*사실/g, label: '자명한 사실' },
@@ -87,6 +87,13 @@ const PLATITUDE_PATTERNS: Array<{ pattern: RegExp; label: string }> = [
   { pattern: /야말로/g, label: '~야말로' },
   { pattern: /임을\s*(?:새삼\s*)?(?:알게|깨닫게)\s*되/g, label: '~임을 알게 되는' },
   { pattern: /오직\s+\S+에만/g, label: '오직 ~에만' },
+  // [2026-09-22] 진짜 "도망성" 회피 상투구 — 질문 회피, 형식적 안내/마무리.
+  { pattern: /많은\s*분들이\s*궁금해하(?:실|시는)/g, label: '많은 분들이 궁금해하실' },
+  { pattern: /에\s*대해\s*알아보겠습니다/g, label: '~에 대해 알아보겠습니다' },
+  { pattern: /도움이\s*되셨(?:길|기를)/g, label: '도움이 되셨길' },
+  { pattern: /참고하시기\s*바랍니다/g, label: '참고하시기 바랍니다' },
+  { pattern: /이상으로\s*(?:글을|포스팅을|이번\s*글을)?\s*마치(?:겠습니다|겠어요)/g, label: '이상으로 마치겠습니다' },
+  { pattern: /여기까지\s*읽어\s*주셔서/g, label: '여기까지 읽어주셔서' },
 ];
 
 /**
@@ -99,8 +106,13 @@ const CITATION_TOKEN_REGEX = /\[자료\d*\]/g;
 // 임계 상수
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-/** 일반론 트리거 어휘 허용 최대치. 초과 시 LLM 안전모드 도망 의심. */
-const MAX_PLATITUDE_HITS = 3;
+/**
+ * 일반론 트리거 어휘 허용 최대치. 초과 시 LLM 안전모드 도망 의심.
+ * [2026-09-22] 3 → 5로 상향. 평범한 서술 표현(보통/일반적으로/다양한 등)을 트리거 목록에서
+ * 뺀 만큼, 남은 목록(회상체/빈 마무리/도망성 상투구)에 대한 여유도 함께 늘려 정상적인
+ * 과거시제 서술이 우연히 겹칠 때의 오탐 폭을 줄인다.
+ */
+const MAX_PLATITUDE_HITS = 5;
 
 /** 인용 토큰 단락당 최소 밀도. 미달 시 RAG 자료 미활용 의심. */
 const MIN_CITATION_DENSITY = 0.3;
@@ -184,11 +196,15 @@ export function detectPlatitudes(
   //   Platitude count and RAG overlap still gate on their own.
   const citationTokensExpected = options?.citationTokensExpected === true;
   const citationLow = citationTokensExpected && citationDensity < MIN_CITATION_DENSITY;
+  // [2026-09-22] overlapLow is now purely informational (`overlapTooLow`) — it no longer
+  // gates a full regeneration on its own. RAGAS-style n-gram overlap is a coarse heuristic
+  // that can be low on legitimately paraphrased, faithful writing; the platitude/citation
+  // signals above are the ones with enough precision to justify a hard trigger.
   const overlapLow = ragSource !== '' && rougeLOverlap < MIN_ROUGE_L_OVERLAP;
   const placementLow = citationTokensExpected
     && placementStats.factualParagraphCount >= 3
     && placementStats.placementRatio < MIN_CITATION_PLACEMENT_RATIO;
-  const exceedsThreshold = platitudeExceeds || citationLow || overlapLow || placementLow;
+  const exceedsThreshold = platitudeExceeds || citationLow || placementLow;
 
   const reasons: string[] = [];
   if (platitudeExceeds) {
@@ -203,7 +219,7 @@ export function detectPlatitudes(
   }
   if (overlapLow) {
     reasons.push(
-      `RAG overlap ${rougeLOverlap.toFixed(2)} < ${MIN_ROUGE_L_OVERLAP} (자료 활용도 부족, 환각 의심)`,
+      `RAG overlap ${rougeLOverlap.toFixed(2)} < ${MIN_ROUGE_L_OVERLAP} (자료 활용도 부족, 참고용 — 임계 판정에는 미반영)`,
     );
   }
   if (placementLow) {
@@ -216,15 +232,32 @@ export function detectPlatitudes(
   return {
     platitudeHitCount,
     matchedTriggers,
+    sectionHits: computeSectionHits(content),
     citationDensity,
     paragraphCount,
     totalCitations,
     rougeLOverlap,
+    overlapTooLow: overlapLow,
     citationPlacementRatio: placementStats.placementRatio,
     factualParagraphCount: placementStats.factualParagraphCount,
     exceedsThreshold,
     reason,
   };
+}
+
+/** Per-section (heading) platitude trigger counts, so callers can target-fix one section
+ *  instead of regenerating the whole post. */
+function computeSectionHits(content: DetectableContent): Array<{ heading: string; hits: number }> {
+  if (!Array.isArray(content.headings)) return [];
+  return content.headings.map((h) => {
+    const sectionText = h.body || h.content || '';
+    let hits = 0;
+    for (const { pattern } of PLATITUDE_PATTERNS) {
+      const matches = sectionText.match(pattern);
+      if (matches) hits += matches.length;
+    }
+    return { heading: h.title || '(제목 없음)', hits };
+  });
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

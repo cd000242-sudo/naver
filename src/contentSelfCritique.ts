@@ -18,7 +18,12 @@ export type SelfCritiqueResult = {
   conclusion?: string;
 };
 
-const MAX_BODY_CHARS_FOR_CRITIQUE = 4500;
+// [2026-09-22] Raised from 4500 → 16000. The old limit silently truncated the prompt to
+// ~4500 chars while still evaluating the length-ratio safety guard against the FULL body,
+// so long posts either got a patch decided from a partial read or were rejected by a ratio
+// mismatch that had nothing to do with the actual rewrite. Bodies still over this limit are
+// now skipped outright — no partial-evaluation patch is ever applied.
+const MAX_BODY_CHARS_FOR_CRITIQUE = 16000;
 const MIN_BODY_CHARS_FOR_CRITIQUE = 200;
 
 /**
@@ -111,6 +116,14 @@ export async function selfCritiqueAndRewrite(
   }
 
   const composite = hasConclusion ? `${text}\n\n${CONCLUSION_DELIMITER}\n${conclusion.trim()}` : text;
+
+  if (composite.length > MAX_BODY_CHARS_FOR_CRITIQUE) {
+    console.warn(
+      `[SelfCritique] 본문 ${composite.length}자 > 상한 ${MAX_BODY_CHARS_FOR_CRITIQUE} — `
+      + `부분 평가 결과는 적용하지 않음 (범위: 0~${MAX_BODY_CHARS_FOR_CRITIQUE})`,
+    );
+    return keepOriginal('skipped');
+  }
 
   try {
     const prompt = buildCritiquePrompt(composite, personaCard, extraDirective, hasConclusion);

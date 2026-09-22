@@ -4,6 +4,7 @@ import {
   stripMaterialNarration,
   stripMaterialNarrationFromContent,
   stripMaterialNarrationFromParagraph,
+  stripMaterialNarrationWithReport,
 } from '../content/materialNarrationStrip';
 
 /** [2026-09-03 사장님 지적 ④] "검색 결과에는 …" 자료 목록 서술이 본문에 남았다 — 프롬프트 금지만으로는 안 지켜졌다 */
@@ -36,5 +37,32 @@ describe('자료 목록 서술 제거', () => {
     expect(out.headings[0].content).toBe('개인소득 기준은 6000만원입니다.');
     expect(out.conclusion).toBe('가구소득부터 확인하세요.');
     expect(content.conclusion).toContain('자료에는');
+  });
+
+  it('추가로 자료 N 번호 참조와 내부 S01 형식 id 도 서술로 제거한다', () => {
+    expect(stripMaterialNarration('자료 3에서 언급된 내용을 보면 복잡합니다. 신청 기한은 9월 30일입니다.'))
+      .toBe('신청 기한은 9월 30일입니다.');
+    expect(stripMaterialNarration('S01 문서를 참고했습니다. 접수는 온라인으로 합니다.'))
+      .toBe('접수는 온라인으로 합니다.');
+  });
+
+  it('실존 공식 귀속("공식 가이드에 따르면")은 이 모듈의 책임이 아니라 건드리지 않는다', () => {
+    const sentence = '공식 가이드에 따르면 하루 두 번 복용합니다.';
+    expect(stripMaterialNarration(sentence)).toBe(sentence);
+  });
+
+  it('report 버전은 제거한 문장을 함께 반환한다', () => {
+    const { text, removed } = stripMaterialNarrationWithReport(
+      '검색 결과에는 2025년 9월 17일에 작성된 꽃구경 글도 남아 있습니다. 평창은 9월 4일 개막입니다.',
+    );
+    expect(text).toBe('평창은 9월 4일 개막입니다.');
+    expect(removed.length).toBe(1);
+    expect(removed[0]).toContain('검색 결과에는');
+  });
+
+  it('report 버전도 문단이 통째로 서술문이면 비우지 않고 원문을 유지하며 removed는 비운다', () => {
+    const { text, removed } = stripMaterialNarrationWithReport('검색 결과에는 관련 글이 많습니다.');
+    expect(text).toBe('검색 결과에는 관련 글이 많습니다.');
+    expect(removed).toEqual([]);
   });
 });

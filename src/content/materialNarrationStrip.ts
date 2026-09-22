@@ -6,7 +6,12 @@
  * reader's question, so it is dropped deterministically at finalize. Only whole sentences that
  * open on the material are removed; a sentence quoting a fact is untouched.
  */
-const MATERIAL_NARRATION_RE = /(?:검색\s?결과(?:에는|를 보면|에서는|만 보면)|검색하면 나오는 글|자료(?:에는|를 보면|에서는)|참고 자료에|수집한 자료|작성된 글도 남아)/u;
+// [2026-09-22 attribution guard] Only internal-marker narration (talking about the tool's own
+// inputs — search results, collected material, numbered/id'd internal source refs) is deleted
+// here. Real attributions like "공식 가이드에 따르면" are NOT this module's concern — they are
+// evaluated by attributionGuard/contentClaimSanitizer, which strip only the phrase and keep
+// the claim rather than deleting the whole sentence.
+const MATERIAL_NARRATION_RE = /(?:검색\s?결과(?:에는|를 보면|에서는|만 보면)|검색하면 나오는 글|자료(?:에는|를 보면|에서는)|참고 자료에|수집한 자료|작성된 글도 남아|자료\s*\d+|\bS\d{2}\b)/u;
 const SENTENCE_SPLIT_RE = /(?<=[.!?。])\s+/u;
 const MIN_PARAGRAPH_CHARS_AFTER_STRIP = 12;
 
@@ -28,6 +33,34 @@ export function stripMaterialNarrationFromParagraph(paragraph: string): string {
 export function stripMaterialNarration(text: string): string {
   if (!text) return text;
   return text.split('\n').map((line) => (line.trim() ? stripMaterialNarrationFromParagraph(line) : line)).join('\n');
+}
+
+/** Same behavior as `stripMaterialNarration` but also reports the removed sentences. */
+export function stripMaterialNarrationWithReport(text: string): { text: string; removed: string[] } {
+  if (!text) return { text, removed: [] };
+  const removed: string[] = [];
+  const out = text
+    .split('\n')
+    .map((line) => {
+      if (!line.trim()) return line;
+      const sentences = line.split(SENTENCE_SPLIT_RE);
+      const droppedThisLine: string[] = [];
+      const kept = sentences.filter((sentence) => {
+        if (isMaterialNarrationSentence(sentence)) {
+          droppedThisLine.push(sentence.trim());
+          return false;
+        }
+        return true;
+      });
+      if (droppedThisLine.length === 0) return line;
+      const joined = kept.join(' ').trim();
+      // Never hollow a paragraph out to a stub — keep the original if almost nothing remains.
+      if (joined.length < MIN_PARAGRAPH_CHARS_AFTER_STRIP) return line;
+      removed.push(...droppedThisLine);
+      return joined;
+    })
+    .join('\n');
+  return { text: out, removed };
 }
 
 interface ContentLike {

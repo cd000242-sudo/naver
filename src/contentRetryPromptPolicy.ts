@@ -27,16 +27,18 @@ export function prependFaithfulnessRetryInstruction(input: {
   /** [2026-09-04] 재료에서 뽑은 당사자 발언 — "인용하라" 만으로는 두 번 생성해도 0건이었다. 후보를 손에 쥐여 준다. */
   quoteCandidates?: readonly string[];
 }): string {
+  // [2026-09-22 attribution/후처리 원칙] '일반론 어휘 사용 금지' 목록과 "(자료 부족)" 표기,
+  // "[자료] 인용 토큰 추가" 지시를 뺐다. 세 가지 모두 본문 프롬프트가 이미 금지하는 토큰을
+  // 재생성 프롬프트에서 다시 만들어내라고 요구하는 셈이었고(본문 프롬프트는 [자료N] 토큰
+  // 자체를 금지 — 2026-09-04 측정 기록 참고), 후처리가 나중에 어차피 지운다. 남기는 것은
+  // 실제로 검증 가능한 두 가지뿐: 자료에 없는 수치 작성 금지, 발언 인용.
   const quotes = (input.quoteCandidates || []).filter(Boolean).slice(0, 5);
   const quoteLine = quotes.length > 0
-    ? `5. 아래 발언 중 최소 2개를 따옴표 그대로 본문에 넣고, 바로 앞에 누가 말했는지 붙인다(자료 원문을 한 글자도 바꾸지 않는다):\n` +
+    ? `2. 아래 발언 중 최소 2개를 따옴표 그대로 본문에 넣고, 바로 앞에 누가 말했는지 붙인다(자료 원문을 한 글자도 바꾸지 않는다):\n` +
       quotes.map((quote) => `   - "${quote}"`).join('\n') + '\n'
     : '';
   return `\n⚠️ Faithfulness 강화 재생성:\n` +
-    `1. 일반론 어휘 (${input.matchedTriggers}) 사용 금지.\n` +
-    `2. 모든 사실 진술 단락 끝에 [자료] 인용 토큰 추가.\n` +
-    `3. [Article Content] 또는 <source>에 없는 수치/날짜/금액 작성 금지.\n` +
-    `4. 자료에 답이 없는 섹션은 "(자료 부족)" 표기 후 다음 섹션으로.\n${quoteLine}${input.previousInstruction || ''}`;
+    `1. [Article Content] 또는 <source>에 없는 수치/날짜/금액 작성 금지.\n${quoteLine}${input.previousInstruction || ''}`;
 }
 
 export function prependSectionDistinctnessRetryInstruction(previousInstruction = ''): string {

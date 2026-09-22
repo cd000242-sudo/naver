@@ -2,6 +2,23 @@ import { normalizeText } from './textMetrics.js';
 import type { ArticleDraft, ContentPolicyInput, ContentPolicyResult } from './types.js';
 
 /*
+ * [2026-09-22] Inspector, not deleter.
+ *
+ * repairUnsupportedClaims used to delete unsupported sentences and substitute
+ * fallback titles/headings/intro/summary/FAQ text by default. That is exactly
+ * the "확인 가이드" / "핵심 내용부터 살펴보기" regression the 2026-09-21 live
+ * incident diagnosed — the publish boundary silently rewrote a user's article.
+ *
+ * The destructive scrub is now OFF by default. It only runs when explicitly
+ * requested via CONTENT_POLICY_DESTRUCTIVE_SCRUB=1 (legacy/manual recovery
+ * path). Evaluated per-call (not frozen at module load) so tests can flip it
+ * with vi.stubEnv without needing vi.resetModules().
+ */
+function isDestructiveScrubEnabled(): boolean {
+  return process.env.CONTENT_POLICY_DESTRUCTIVE_SCRUB === '1';
+}
+
+/*
  * [2026-09-21] 숫자 사이의 점("12.3인치", "3.5%")은 문장 끝이 아니다. 전에는 "12." 에서
  * 조각이 갈라져 뒤 조각만 지워지고 "12." 가 매달렸고, 지우지 않는 문장도 "12. 3인치" 로
  * 공백이 끼어 발행 단락 분할기가 그 자리에서 줄을 바꿨다.
@@ -63,18 +80,26 @@ function fallbackHeadingTitle(index: number): string {
   return titles[index] || `추가로 살펴볼 내용 ${index - titles.length + 1}`;
 }
 
+function unchangedDraft(draft: ArticleDraft): ArticleDraft {
+  return {
+    ...draft,
+    headings: draft.headings.map((heading) => ({ ...heading })),
+    faq: draft.faq.map((item) => ({ ...item })),
+    source_ids: draft.source_ids ? [...draft.source_ids] : undefined,
+  };
+}
+
 export function repairUnsupportedClaims(
   draft: ArticleDraft,
   input: ContentPolicyInput,
   unsupportedClaims: readonly string[],
 ): ArticleDraft {
-  if (unsupportedClaims.length === 0) {
-    return {
-      ...draft,
-      headings: draft.headings.map((heading) => ({ ...heading })),
-      faq: draft.faq.map((item) => ({ ...item })),
-      source_ids: draft.source_ids ? [...draft.source_ids] : undefined,
-    };
+  // Default (non-destructive) contract: a fact-checker is an inspector, not a
+  // deleter. Returning the draft unchanged here means the publish boundary
+  // never removes a sentence or substitutes a fallback title on its own —
+  // findings surface as advisories instead (see acceptContentPolicyAdvisories).
+  if (unsupportedClaims.length === 0 || !isDestructiveScrubEnabled()) {
+    return unchangedDraft(draft);
   }
 
   const fallbackIntro = fallbackIntroduction(input);
@@ -148,6 +173,8 @@ export interface DeclaredClaimRepairResult {
   draft: ArticleDraft;
   advisoryReasons: string[];
   rewriteCount: number;
+  /** forbidden_claims matched verbatim in the draft. Non-destructive by default — see advisoryReasons. */
+  matchedForbiddenClaims: string[];
 }
 
 export function repairDeclaredForbiddenClaims(
@@ -167,12 +194,20 @@ export function repairDeclaredForbiddenClaims(
   const matchingClaims = declaredClaims.filter((claim) => (
     searchableDraft.includes(normalizeText(claim))
   ));
+  if (matchingClaims.length === 0) {
+    return { draft: unchangedDraft(draft), advisoryReasons: [], rewriteCount: 0, matchedForbiddenClaims: [] };
+  }
   const repaired = repairUnsupportedClaims(draft, input, matchingClaims);
   const changed = !sameDraft(draft, repaired);
   return {
     draft: repaired,
-    advisoryReasons: changed ? ['BLOCK_FORBIDDEN_CLAIM'] : [],
+    // Destructive scrub (legacy, opt-in via CONTENT_POLICY_DESTRUCTIVE_SCRUB=1) actually
+    // removed the phrase — keep BLOCK_FORBIDDEN_CLAIM for existing advisory consumers.
+    // Non-destructive default (changed=false): the phrase is still in the article, so it
+    // is reported as ADVISORY_FORBIDDEN_CLAIM instead — never deleted silently.
+    advisoryReasons: changed ? ['BLOCK_FORBIDDEN_CLAIM'] : ['ADVISORY_FORBIDDEN_CLAIM'],
     rewriteCount: changed ? 1 : 0,
+    matchedForbiddenClaims: matchingClaims,
   };
 }
 
@@ -185,12 +220,18 @@ export interface AdvisoryContentPolicyResult {
  * Converts content-quality findings into diagnostics after deterministic repair.
  * Empty/unusable drafts remain blocked; operational publish guards run later and
  * remain fail-closed.
+ *
+ * [2026-09-22] Non-destructive by default: repairUnsupportedClaims no longer
+ * removes anything unless CONTENT_POLICY_DESTRUCTIVE_SCRUB=1 is set, so
+ * `unsupported_claims` findings are reported as ADVISORY_UNSUPPORTED_CLAIM
+ * instead of being silently scrubbed from the article.
  */
 export function acceptContentPolicyAdvisories(
   result: ContentPolicyResult,
   input: ContentPolicyInput,
   initialAdvisoryReasons: readonly string[] = [],
   initialRewriteCount = 0,
+  initialManualReviewReasons: readonly string[] = [],
 ): AdvisoryContentPolicyResult {
   const resultDraft = draftFromPolicyResult(result);
   const repairedDraft = repairUnsupportedClaims(
@@ -199,17 +240,25 @@ export function acceptContentPolicyAdvisories(
     result.quality_report.unsupported_claims,
   );
   const repairedUnsupportedClaim = !sameDraft(resultDraft, repairedDraft);
+  const hasUnsupportedClaims = result.quality_report.unsupported_claims.length > 0;
   const hardReasons = result.block_reasons.filter(isHardContentPublicationReason);
   const contentAdvisories = result.block_reasons.filter((reason) => !isHardContentPublicationReason(reason));
   const advisoryReasons = [...new Set([
     ...initialAdvisoryReasons,
     ...contentAdvisories,
+    // Legacy destructive-scrub path (opt-in only) actually changed the article.
     ...(repairedUnsupportedClaim ? ['BLOCK_UNSUPPORTED_CLAIM'] : []),
+    // Non-destructive default: report the finding, article stays untouched.
+    ...(!repairedUnsupportedClaim && hasUnsupportedClaims ? ['ADVISORY_UNSUPPORTED_CLAIM'] : []),
   ])];
   const accepted = hardReasons.length === 0;
   const rewriteCount = result.rewrite_count
     + initialRewriteCount
     + (repairedUnsupportedClaim && result.rewrite_count === 0 ? 1 : 0);
+  const manualReviewReasons = [...new Set([
+    ...(result.manual_review?.reasons || []),
+    ...initialManualReviewReasons,
+  ])];
 
   return {
     advisoryReasons,
@@ -217,8 +266,15 @@ export function acceptContentPolicyAdvisories(
       ...result,
       decision: accepted ? 'PASS' : 'BLOCK',
       block_reasons: accepted ? [] : [...hardReasons],
-      manual_review: accepted && result.manual_review
-        ? { ...result.manual_review, required: false, reasons: [] }
+      manual_review: accepted
+        ? (manualReviewReasons.length > 0
+          ? {
+            required: false,
+            reasons: manualReviewReasons,
+            approved: result.manual_review?.approved ?? false,
+            ...(result.manual_review?.approved_at ? { approved_at: result.manual_review.approved_at } : {}),
+          }
+          : (result.manual_review ? { ...result.manual_review, required: false, reasons: [] } : undefined))
         : result.manual_review
           ? { ...result.manual_review, reasons: [...result.manual_review.reasons] }
           : undefined,

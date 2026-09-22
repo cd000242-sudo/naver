@@ -23,7 +23,18 @@ describe('content policy fabricated-fact recovery', () => {
     expect(result.article.body_markdown).toContain(disclaimer);
   });
 
-  it('removes unsupported price and performance sentences during the rewrite loop', async () => {
+  /*
+   * [2026-09-22] Non-destructive by default. runContentPolicyPipeline is the raw
+   * orchestrator — it has no knowledge of the advisory-acceptance layer
+   * (acceptContentPolicyAdvisories), which only runs at the policyService /
+   * generatedContentGuard boundary. With repairUnsupportedClaims now a no-op by
+   * default, the orchestrator's internal rewrite loop can no longer resolve a
+   * fabricated_fact fatal error by deleting the sentence, so it exhausts its
+   * retries and returns BLOCK — the sentence is never silently removed. The
+   * "advisory, PASS, article untouched" outcome is covered at the
+   * guardGeneratedContent layer below and in contentPolicyPublishIntegration.test.ts.
+   */
+  it('keeps an unsupported price/performance sentence intact and blocks at the raw orchestrator level', async () => {
     const unsupported = '국내생산 윈드포스 기술을 적용한 이 시트커버는 45,800원에 판매되고 있습니다.';
     const base = makeGoodDraft();
     const draft = makeGoodDraft({
@@ -39,14 +50,21 @@ describe('content policy fabricated-fact recovery', () => {
       config: await loadContentPolicy(),
     });
 
-    expect(result.decision).toBe('PASS');
-    expect(result.rewrite_count).toBe(1);
-    expect(result.quality_report.unsupported_claims).toEqual([]);
-    expect(result.article.body_markdown).not.toContain('45,800원');
-    expect(result.article.headings?.[0].content).not.toContain('45,800원');
+    expect(result.decision).toBe('BLOCK');
+    expect(result.block_reasons).toContain('BLOCK_FABRICATED_FACT');
+    expect(result.quality_report.unsupported_claims.length).toBeGreaterThan(0);
+    expect(result.article.body_markdown).toContain('45,800원');
+    expect(result.article.headings?.[0].content).toContain('45,800원');
   });
 
-  it('repairs generated structured content before the image stage receives it', async () => {
+  /*
+   * [2026-09-22] Non-destructive by default: guardGeneratedContent runs
+   * acceptContentPolicyAdvisories, which converts the fabricated_fact block into
+   * an advisory (ADVISORY_UNSUPPORTED_CLAIM) and lets generation continue to the
+   * image stage WITHOUT touching the article — the sentence stays exactly as
+   * generated. See claimRepairDestructiveScrub.test.ts for the opt-in legacy path.
+   */
+  it('reports an unsupported price/performance sentence as an advisory and leaves the article untouched', async () => {
     const unsupported = '국내생산 윈드포스 기술을 적용한 이 시트커버는 45,800원에 판매되고 있습니다.';
     const draft = makeGoodDraft();
     const input = makePolicyInput();
@@ -69,12 +87,12 @@ describe('content policy fabricated-fact recovery', () => {
     });
 
     expect(result.allowed).toBe(true);
-    expect(result.policyResult.rewrite_count).toBe(1);
-    expect(result.content.bodyPlain).not.toContain('45,800원');
-    expect(result.content.headings[0].content).not.toContain('45,800원');
+    expect(result.advisoryReasons).toContain('ADVISORY_UNSUPPORTED_CLAIM');
+    expect(result.content.bodyPlain).toContain('45,800원');
+    expect(result.content.headings[0].content).toContain('45,800원');
   });
 
-  it('removes a declared forbidden sentence and continues to the image stage with an advisory', async () => {
+  it('keeps a declared forbidden sentence intact and continues to the image stage with an advisory', async () => {
     const unsupported = '이 서비스는 누구에게나 100% 해결을 보장합니다.';
     const draft = makeGoodDraft();
     const input = makePolicyInput({ forbidden_claims: [unsupported] });
@@ -96,7 +114,7 @@ describe('content policy fabricated-fact recovery', () => {
 
     expect(result.allowed).toBe(true);
     expect(result.manualReviewRequired).toBe(false);
-    expect(result.advisoryReasons).toContain('BLOCK_FORBIDDEN_CLAIM');
-    expect(result.content.bodyPlain).not.toContain('100% 해결을 보장');
+    expect(result.advisoryReasons).toContain('ADVISORY_FORBIDDEN_CLAIM');
+    expect(result.content.bodyPlain).toContain('100% 해결을 보장');
   });
 });

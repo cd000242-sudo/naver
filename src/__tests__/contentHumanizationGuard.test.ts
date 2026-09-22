@@ -75,17 +75,35 @@ describe('회귀방지 net: 사람다움/AI탐지 분별력', () => {
   });
 
   describe('detectPlatitudes', () => {
+    // [2026-09-22 SPEC — 일반론 트리거 축소] '보통/일반적으로/흔히/대체로/다양한/여러 가지'는
+    // 평범한 서술 표현이라 오탐 위주였고 트리거 목록에서 뺐다(MAX_PLATITUDE_HITS도 3→5로 상향).
+    // 남은 목록(회상체/빈 마무리/진짜 도망성 상투구)만으로 임계 초과를 재현하도록 픽스처를 바꾼다.
     it('일반론 남발 글을 임계 초과로 감지한다', () => {
       const result = detectPlatitudes({
         introduction:
-          '보통 이런 경우에는 일반적으로 다양한 방법이 있습니다. 흔히 대체로 많은 분들이 여러 가지 방법을 시도합니다.',
+          '많은 분들이 궁금해하실 내용을 이 글에서 알아보겠습니다. 결국 이 방법이야말로 진짜 매력임을 새삼 깨닫게 됩니다.',
         headings: [
-          { title: '방법', body: '일반적으로 중요합니다. 다양한 선택지가 있을 수 있습니다.' },
+          { title: '방법', body: '오직 이곳에만 있는 방법이라는 이야기가 들려왔다. 예전부터 그렇게 하곤 했었다.' },
         ],
+        conclusion: '참고하시기 바랍니다. 도움이 되셨길 바랍니다.',
       });
-      expect(result.platitudeHitCount).toBeGreaterThan(3); // MAX_PLATITUDE_HITS
+      expect(result.platitudeHitCount).toBeGreaterThan(5); // MAX_PLATITUDE_HITS
       expect(result.matchedTriggers.length).toBeGreaterThan(0);
       expect(result.exceedsThreshold).toBe(true);
+      expect(result.sectionHits.length).toBe(1);
+      expect(result.sectionHits[0].heading).toBe('방법');
+      expect(result.sectionHits[0].hits).toBeGreaterThan(0);
+    });
+
+    it('평범한 서술 표현("보통/일반적으로/다양한" 등)만으로는 더 이상 임계를 넘지 않는다', () => {
+      const result = detectPlatitudes({
+        introduction:
+          '보통 이런 경우에는 일반적으로 다양한 방법이 있습니다. 흔히 대체로 많은 방식을 시도합니다.',
+        headings: [
+          { title: '방법', body: '여러 가지 선택지가 있을 수 있고, 하는 게 좋습니다.' },
+        ],
+      });
+      expect(result.exceedsThreshold).toBe(false);
     });
   });
 
@@ -219,20 +237,17 @@ describe('humanizer 문단 보존 · 경험 위장 금지 (v2.11.134)', () => {
     }
   });
 
-  it('자모 파손 치환(ㄹ게요)과 블랙리스트 동의어(많은→다양한) 주입이 소스에서 제거됐다', () => {
+  // [2026-09-22 SPEC — 후처리 결정론화] SYNONYM_MAP('많은' 동의어 치환 포함)과 동의어 치환
+  // 함수 자체(replaceSynonyms, Math.random 기반)를 제거했다 — 이제 '많은'을 어떤 단어로도
+  // 치환하지 않으므로 블랙리스트 단어로 바뀔 경로가 아예 없다. 개인 표현 삽입(무작위)도
+  // 함께 제거됐으므로 samplePhraseSubset 관련 단언은 더 이상 유효하지 않다.
+  it('동의어 치환·개인 표현 삽입 기능 자체가 소스에서 제거됐다(랜덤 기반 위험 제거)', () => {
     const src = fs.readFileSync(path.resolve(__dirname, '..', 'aiHumanizer.ts'), 'utf-8');
-    // '겠습니다' 치환 후보에 어간 재구성이 필요한 어미(자모 파손 유발)가 없다.
-    const gessEntry = src.match(/'겠습니다': \[[^\]]*\]/);
-    expect(gessEntry).not.toBeNull();
-    expect(gessEntry![0]).not.toContain('ㄹ게요');
-    expect(gessEntry![0]).not.toContain('거예요');
-    const manyEntry = src.match(/'많은': \[[^\]]*\]/);
-    expect(manyEntry).not.toBeNull();
-    expect(manyEntry![0]).not.toContain('다양한');
-    // 탐지용 전체 목록은 유지하되, 삽입은 안전 목록만 사용한다.
-    // [2026-07-30] 글 단위 서브셋 경유로 바뀜 — 삽입은 여전히 safe-insert 풀에서만.
-    expect(src).toMatch(/samplePhraseSubset\(PERSONAL_EXPRESSIONS_SAFE_INSERT, 4\)/);
-    expect(src).not.toMatch(/PERSONAL_EXPRESSIONS\[Math\.floor/);
+    expect(src).not.toContain('SYNONYM_MAP');
+    expect(src).not.toContain('replaceSynonyms');
+    expect(src).not.toContain('samplePhraseSubset');
+    expect(src).not.toContain('insertPersonalExpressions');
+    expect(src).not.toContain('Math.random');
   });
 });
 

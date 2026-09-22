@@ -1,4 +1,5 @@
 import { META_CRITIQUE_PHRASES } from './content/forbiddenPhrases.js';
+import { classifyAttributions, type Attribution, type AttributionEvidence } from './content/attributionGuard.js';
 
 type SanitizableHeading = {
   title?: string;
@@ -15,6 +16,26 @@ type SanitizableContent = {
   bodyPlain?: string;
   bodyHtml?: string;
   headings?: SanitizableHeading[];
+  /** Attached by sanitizeContentFakeSources — records what attribution stripping did/found. */
+  _attributionReport?: AttributionReport;
+};
+
+export interface AttributionReport {
+  /** Count of named/generic attributions confirmed against evidence and left untouched. */
+  supported: number;
+  /** Attributions whose source could not be confirmed and had their phrase stripped. */
+  unsupported: Array<{ phrase: string; orgName: string | null }>;
+  /** Every attribution phrase actually removed from the text. */
+  stripped: string[];
+}
+
+export type SanitizeFakeSourcesOptions = {
+  /** When provided, named/generic attributions are checked against this evidence
+   *  before stripping. Without it, no attribution phrase is stripped — only recorded. */
+  evidence?: AttributionEvidence;
+  /** 'strip-unsupported' (default): evidence-aware, phrase-only stripping.
+   *  'legacy': the old blanket regex stripper, kept for callers that need parity. */
+  mode?: 'strip-unsupported' | 'legacy';
 };
 
 /**
@@ -233,7 +254,12 @@ export function sanitizeContentHtmlTags(content: SanitizableContent): number {
   return count;
 }
 
-export function sanitizeContentFakeSources(content: SanitizableContent): number {
+/**
+ * Legacy blanket stripper — removes every "~에 따르면/원문에는/관계자에 따르면" style
+ * phrase regardless of whether the claim is actually backed by real evidence. Kept for
+ * callers that opt into `{ mode: 'legacy' }` and need old-behavior parity.
+ */
+function sanitizeContentFakeSourcesLegacy(content: SanitizableContent): number {
   let count = 0;
   const tryFix = (s: string | undefined): string | undefined => {
     if (!s) return s;
@@ -258,13 +284,115 @@ export function sanitizeContentFakeSources(content: SanitizableContent): number 
   }
 
   if (count > 0) {
-    console.warn(`[Sanitizer] 🧹 출처 날조 표현 ${count}개 자동 제거`);
+    console.warn(`[Sanitizer] 🧹 출처 날조 표현 ${count}개 자동 제거 (legacy 모드)`);
   }
 
   return count;
 }
 
-export function sanitizeContentFakeSourcesCopy<T extends SanitizableContent>(content: T): T {
+/** Removes just the matched attribution phrase from `text`, collapsing the resulting gap. */
+function stripAttributionPhrase(text: string, attr: Attribution): string {
+  const before = text.slice(0, attr.index);
+  const after = text.slice(attr.index + attr.phrase.length);
+  return (before + after)
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/^[ \t]*[,，]\s*/, '')
+    .replace(/\s+([,，\.\?\!])/g, '$1')
+    .trim();
+}
+
+function sanitizeFieldEvidenceAware(
+  text: string,
+  evidence: AttributionEvidence | undefined,
+  report: AttributionReport,
+): string {
+  if (!text) return text;
+  // Machine-artifact bracket labels ("[출처: X]") are never a real attribution —
+  // always safe to strip regardless of evidence.
+  let working = stripInlineSourceMarkers(text);
+
+  if (!evidence) {
+    // No evidence supplied: record nothing to strip, only leave the text untouched.
+    return working;
+  }
+
+  const { supported, unsupported } = classifyAttributions(working, evidence);
+  report.supported += supported.length;
+  if (unsupported.length === 0) return working;
+
+  // Strip from rightmost to leftmost so earlier indices (computed once, up front) stay valid.
+  const rightToLeft = [...unsupported].sort((a, b) => b.index - a.index);
+  for (const attr of rightToLeft) {
+    working = stripAttributionPhrase(working, attr);
+    report.unsupported.push({ phrase: attr.phrase, orgName: attr.orgName });
+    report.stripped.push(attr.phrase);
+  }
+  return working;
+}
+
+function sanitizeContentFakeSourcesEvidenceAware(
+  content: SanitizableContent,
+  evidence?: AttributionEvidence,
+): number {
+  let count = 0;
+  const report: AttributionReport = { supported: 0, unsupported: [], stripped: [] };
+  const tryFix = (s: string | undefined): string | undefined => {
+    if (!s) return s;
+    const fixed = sanitizeFieldEvidenceAware(s, evidence, report);
+    if (fixed !== s) count++;
+    return fixed;
+  };
+
+  if (content.selectedTitle) content.selectedTitle = tryFix(content.selectedTitle)!;
+  if (content.title) content.title = tryFix(content.title);
+  if (content.content) content.content = tryFix(content.content);
+  if (content.introduction) content.introduction = tryFix(content.introduction)!;
+  if (content.conclusion) content.conclusion = tryFix(content.conclusion)!;
+  if (content.bodyPlain) content.bodyPlain = tryFix(content.bodyPlain);
+  if (content.bodyHtml) content.bodyHtml = tryFix(content.bodyHtml);
+  if (Array.isArray(content.headings)) {
+    for (const h of content.headings) {
+      if (h.title) h.title = tryFix(h.title);
+      if (h.body) h.body = tryFix(h.body);
+      if (h.content) h.content = tryFix(h.content);
+    }
+  }
+
+  content._attributionReport = report;
+
+  if (report.stripped.length > 0) {
+    console.warn(
+      `[Sanitizer] 🧹 출처 귀속 검증: 미확인 ${report.unsupported.length}건 제거, 확인됨 ${report.supported}건 유지`,
+    );
+  }
+
+  return count;
+}
+
+/**
+ * Removes fake/unverifiable source attribution phrases while preserving the underlying claim.
+ *
+ * Default mode ('strip-unsupported'): with no `evidence`, nothing is stripped — attributions
+ * are only detectable via the returned `content._attributionReport` in a follow-up call once
+ * evidence is available. With `evidence`, attributions confirmed against it are kept verbatim;
+ * unconfirmed ones have only their attribution phrase removed (the claim itself stays).
+ *
+ * `{ mode: 'legacy' }` restores the old blanket-stripping behavior for callers that need it.
+ */
+export function sanitizeContentFakeSources(
+  content: SanitizableContent,
+  options?: SanitizeFakeSourcesOptions,
+): number {
+  if (options?.mode === 'legacy') {
+    return sanitizeContentFakeSourcesLegacy(content);
+  }
+  return sanitizeContentFakeSourcesEvidenceAware(content, options?.evidence);
+}
+
+export function sanitizeContentFakeSourcesCopy<T extends SanitizableContent>(
+  content: T,
+  options?: SanitizeFakeSourcesOptions,
+): T {
   const copy = {
     ...content,
     ...(Array.isArray(content.headings)
@@ -272,6 +400,6 @@ export function sanitizeContentFakeSourcesCopy<T extends SanitizableContent>(con
       : {}),
   } as T;
 
-  sanitizeContentFakeSources(copy);
+  sanitizeContentFakeSources(copy, options);
   return copy;
 }
