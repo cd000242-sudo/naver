@@ -91,7 +91,9 @@ export async function generateWithAgent(
   // subscription (a retry costs no API money), and a single flake previously
   // killed the whole post (every agent error was terminal upstream).
   // Auth/quota/spawn errors stay single-shot as before.
-  const RETRY_ONCE_CODES = ['bad_json', 'empty_output', 'timeout'];
+  // [2026-09-22] server_overloaded (upstream 529) is transient too — one retry after a short wait.
+  const RETRY_ONCE_CODES = ['bad_json', 'empty_output', 'timeout', 'server_overloaded'];
+  const OVERLOADED_RETRY_DELAY_MS = 15_000;
   for (let attempt = 1; ; attempt++) {
     try {
       text = provider === 'codex'
@@ -138,6 +140,9 @@ export async function generateWithAgent(
         && signal?.aborted !== true;
       if (retryable) {
         console.warn(`[AgentCli] ${provider} ${(error as AgentCliError).code} — 구독 CLI 1회 자동 재시도 (추가 과금 없음)`);
+        if ((error as AgentCliError).code === 'server_overloaded') {
+          await new Promise<void>((resolve) => setTimeout(resolve, OVERLOADED_RETRY_DELAY_MS));
+        }
         continue;
       }
       throw error;

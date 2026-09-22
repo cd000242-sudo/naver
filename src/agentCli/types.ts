@@ -18,6 +18,7 @@ export type AgentErrorCode =
   | 'timeout'          // no response within the deadline
   | 'aborted'          // caller cancelled via AbortSignal
   | 'spawn_failed'     // process failed to start for another reason
+  | 'server_overloaded' // upstream API answered 529/overloaded — transient, retried once
   | 'nonzero_exit'     // CLI exited with an unclassified non-zero code
   | 'empty_output'     // CLI returned an empty final message
   | 'bad_json';        // schema requested but output was not valid JSON

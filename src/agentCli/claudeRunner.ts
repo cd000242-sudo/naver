@@ -23,7 +23,7 @@ import { mkdtemp, rm } from 'fs/promises';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { spawnCollect } from './spawnHelper.js';
-import { classifyExit, parseClaudeEnvelope } from './parse.js';
+import { classifyExit, extractClaudeEnvelopeError, parseClaudeEnvelope } from './parse.js';
 import {
   buildClaudeSubscriptionEnv,
   CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
@@ -81,12 +81,16 @@ export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Pr
     });
 
     if (res.code !== 0) {
-      const code = classifyExit('claude', res.stderr, res.stdout);
+      // [2026-09-22] Prefer the envelope's own error text ("API Error: 529 Overloaded…") over the
+      // raw JSON blob — the blob truncates to usage/cost fields and hid the real cause.
+      const envelopeError = extractClaudeEnvelopeError(res.stdout);
+      const detail = envelopeError || res.stderr || res.stdout || '';
+      const code = classifyExit('claude', res.stderr, envelopeError || res.stdout);
       throw new AgentCliError(
         code,
         'claude',
-        buildAgentFailureMessage('claude', code, res.stderr || res.stdout),
-        (res.stderr || res.stdout || '').slice(0, 800),
+        buildAgentFailureMessage('claude', code, detail),
+        detail.slice(0, 800),
       );
     }
 

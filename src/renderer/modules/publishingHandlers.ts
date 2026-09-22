@@ -279,6 +279,12 @@ function buildPublishContentReuseKey(formData: any): string {
     //   fullAutoFlow.buildFullAutoContentReuseKey와 구성이 동일해야 한다 —
     //   두 캐시를 OR로 읽으므로 한쪽만 바꾸면 다른 쪽이 옛 결과를 돌려준다.
     affiliateLink: normalizePublishReuseString(formData?.affiliateLink),
+    // [2026-09-22 retry-cache key scope audit] 계정/날짜 없이 키를 구성하면
+    //   다른 계정으로 전환하거나 날짜가 바뀐 뒤에도 어제(혹은 남의 계정) 콘텐츠가
+    //   그대로 재사용된다 — fullAutoFlow.buildFullAutoContentReuseKey와
+    //   반드시 동일한 필드 구성을 유지할 것 (두 캐시를 OR로 읽음).
+    accountId: normalizePublishReuseString((window as any).currentNaverId || ''),
+    dateBucket: new Date().toISOString().slice(0, 10),
   });
 }
 

@@ -10,6 +10,7 @@ const GUIDANCE: Readonly<Record<AgentErrorCode, string>> = Object.freeze({
   timeout: '제한 시간 안에 응답을 받지 못해 요청을 중단했습니다.',
   aborted: '사용자 취소 또는 상위 작업 중단으로 요청을 종료했습니다.',
   spawn_failed: 'CLI 프로세스를 시작하지 못했습니다.',
+  server_overloaded: 'AI 서버가 일시적으로 과부하 상태(529)입니다. 잠시 후 다시 시도해주세요.',
   nonzero_exit: 'CLI가 오류 상태로 종료되었습니다.',
   empty_output: 'CLI가 최종 응답을 반환하지 않았습니다.',
   bad_json: 'CLI 응답을 글 데이터 형식으로 해석하지 못했습니다.',
@@ -17,7 +18,7 @@ const GUIDANCE: Readonly<Record<AgentErrorCode, string>> = Object.freeze({
 
 // [v2.11.135] These transient output-shape failures now get one automatic
 // retry inside generateWithAgent (subscription CLI — no extra API cost).
-const RETRIED_ONCE_CODES: ReadonlySet<AgentErrorCode> = new Set(['bad_json', 'empty_output', 'timeout']);
+const RETRIED_ONCE_CODES: ReadonlySet<AgentErrorCode> = new Set(['bad_json', 'empty_output', 'timeout', 'server_overloaded']);
 
 export function buildAgentFailureMessage(
   provider: AgentProvider,

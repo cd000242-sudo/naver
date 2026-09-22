@@ -44,6 +44,23 @@ export function tryExtractJson(text: string): unknown | undefined {
  * Shape: { type, subtype, result, is_error, ... }. Returns the `result` text.
  * Throws AgentCliError when the envelope reports an error or lacks a result.
  */
+/**
+ * The `result` text of a `claude --output-format json` error envelope, when stdout is one.
+ * On a non-zero exit the envelope (e.g. "API Error: 529 Overloaded…") is the real cause;
+ * without this the user only saw a truncated usage/cost blob.
+ */
+export function extractClaudeEnvelopeError(stdout: string): string | null {
+  const raw = (stdout ?? '').trim();
+  if (!raw.startsWith('{')) return null;
+  try {
+    const env = JSON.parse(raw) as Record<string, unknown>;
+    if (env && env.is_error === true && typeof env.result === 'string' && env.result.trim()) {
+      return env.result.trim();
+    }
+  } catch { /* not an envelope */ }
+  return null;
+}
+
 export function parseClaudeEnvelope(stdout: string): string {
   const raw = (stdout ?? '').trim();
   if (!raw) {
@@ -120,6 +137,11 @@ export function classifyExit(
 
   if (isSubscriptionInactiveMessage(hay)) {
     return 'subscription_inactive';
+  }
+
+  // [2026-09-22] Upstream 529 is transient and must not read as "CLI broke" — it gets one retry.
+  if (/\b529\b|overloaded|server-side issue/.test(hay)) {
+    return 'server_overloaded';
   }
 
   if (

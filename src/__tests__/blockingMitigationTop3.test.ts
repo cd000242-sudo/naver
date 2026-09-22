@@ -40,9 +40,10 @@ describe('2) 발행 — 이미지 부분 삽입 실패 허용', () => {
 });
 
 describe('3) 에이전트 — 일시 오류 1회 재시도', () => {
-  it('generateWithAgent가 bad_json/empty_output/timeout에 한해 1회 재시도한다', () => {
+  it('generateWithAgent가 bad_json/empty_output/timeout/server_overloaded에 한해 1회 재시도한다', () => {
     const code = read('agentCli/index.ts');
-    expect(code).toMatch(/RETRY_ONCE_CODES = \['bad_json', 'empty_output', 'timeout'\]/);
+    // [2026-09-22] 상류 529(server_overloaded)도 일시 오류 — 1회 재시도 목록에 추가(인증/쿼터는 여전히 무재시도).
+    expect(code).toMatch(/RETRY_ONCE_CODES = \['bad_json', 'empty_output', 'timeout', 'server_overloaded'\]/);
     expect(code).toMatch(/attempt === 1/);
     expect(code).toMatch(/signal\?\.aborted !== true/);
   });

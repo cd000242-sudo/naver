@@ -341,7 +341,20 @@ function buildFullAutoContentReuseKey(formData) {
         //   buildPublishContentReuseKey와 반드시 동일한 구성이어야 한다.
         //   두 캐시를 OR로 읽으므로 한쪽만 바꾸면 다른 쪽이 옛 결과를 돌려준다.
         affiliateLink: normalizeReuseString(formData?.affiliateLink),
+        // [2026-09-22 retry-cache key scope audit] 계정/날짜 없이 키를 구성하면
+        //   다른 계정으로 전환하거나 날짜가 바뀐 뒤에도 어제(혹은 남의 계정) 콘텐츠가
+        //   그대로 재사용된다 — publishingHandlers.buildPublishContentReuseKey와
+        //   반드시 동일한 필드 구성을 유지할 것 (두 캐시를 OR로 읽음).
+        accountId: normalizeReuseString(resolveReuseAccountId()),
+        dateBucket: new Date().toISOString().slice(0, 10),
     });
+}
+/** Account id for the reuse key — tolerant of environments where getCurrentNaverId is not bundled (tests). */
+function resolveReuseAccountId() {
+    try {
+        if (typeof getCurrentNaverId === 'function') return getCurrentNaverId() || '';
+    } catch { /* bundle scope may not expose it */ }
+    return String(window.currentNaverId || '');
 }
 function getFullAutoContentRetryCache(formData) {
     try {

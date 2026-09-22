@@ -11,8 +11,18 @@ import {
   buildParaphraseUpgradeBrief,
   type ParaphraseAnalysisInput,
 } from '../../content/paraphraseSourceAnalysis.js';
+import { resolveTextModelProfileForVendor } from '../../runtime/modelRegistry.js';
+import { buildGeminiModelChain } from '../../contentGeminiModelPolicy.js';
 
-/** 분석 전용 저비용 모델. 프런티어로 올릴 이유가 없는 단계다. */
+/**
+ * Utility-tier models: cheap models for mechanical side work (paraphrase source
+ * analysis, image search-term tweaks). Quality-critical stages (blueprint, fact
+ * check, throughline judge, heading repair, issue discipline) must NOT use these —
+ * they call resolveSelectedEngineRoute(..., { tier: 'quality' }).
+ * [2026-09-22 audit P0] The user selects Terra/Fable but quality stages silently ran
+ * on mini/haiku/flash-lite and rewrote the body. Quality tier resolves the user's
+ * own primary model for the selected vendor.
+ */
 const OPENAI_ANALYSIS_MODEL = 'gpt-4.1-mini';
 const CLAUDE_ANALYSIS_MODEL = 'claude-haiku-4-5-20251001';
 const GEMINI_ANALYSIS_MODEL = 'gemini-3.1-flash-lite';
@@ -45,12 +55,12 @@ function requireText(value: unknown, limit: number): string {
   return typeof value === 'string' ? value.slice(0, limit) : '';
 }
 
-async function callOpenAi(prompt: string, apiKey: string, options?: AnalysisCallOptions): Promise<string> {
+async function callOpenAi(prompt: string, apiKey: string, options?: AnalysisCallOptions, model: string = OPENAI_ANALYSIS_MODEL): Promise<string> {
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
     body: JSON.stringify({
-      model: OPENAI_ANALYSIS_MODEL,
+      model,
       messages: [{ role: 'user', content: prompt }],
       // max_completion_tokens: 최신 모델은 max_tokens 를 거부한다 (2026-07 교훈).
       max_completion_tokens: resolveMaxTokens(options),
@@ -62,7 +72,7 @@ async function callOpenAi(prompt: string, apiKey: string, options?: AnalysisCall
   return data.choices?.[0]?.message?.content || '';
 }
 
-async function callClaude(prompt: string, apiKey: string, options?: AnalysisCallOptions): Promise<string> {
+async function callClaude(prompt: string, apiKey: string, options?: AnalysisCallOptions, model: string = CLAUDE_ANALYSIS_MODEL): Promise<string> {
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -71,7 +81,7 @@ async function callClaude(prompt: string, apiKey: string, options?: AnalysisCall
       'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: CLAUDE_ANALYSIS_MODEL,
+      model,
       max_tokens: resolveMaxTokens(options),
       messages: [{ role: 'user', content: prompt }],
     }),
@@ -131,7 +141,33 @@ export interface AnalysisRoute {
   engine: string;
   /** True for the subscription CLIs — callers budget minutes, not seconds. */
   subscription?: boolean;
+  /** 'quality' = the user's own primary model; 'utility' = cheap analysis model. */
+  tier?: SideCallTier;
   callModel: (prompt: string, options?: AnalysisCallOptions) => Promise<string>;
+}
+
+export type SideCallTier = 'quality' | 'utility';
+
+export interface RouteOptions {
+  readonly tier?: SideCallTier;
+}
+
+/** The model the user actually selected for the vendor (quality tier). null when unresolvable. */
+export function resolveQualityTierModel(generator: string, config: Record<string, unknown>): string | null {
+  const primary = typeof config.primaryGeminiTextModel === 'string' ? config.primaryGeminiTextModel : '';
+  try {
+    if (generator === 'openai') return resolveTextModelProfileForVendor(primary, 'openai', 'openai-gpt41').model;
+    if (generator === 'claude') return resolveTextModelProfileForVendor(primary, 'claude', 'claude-sonnet').model;
+    if (generator === 'gemini') {
+      return buildGeminiModelChain({
+        primaryGeminiTextModel: primary || undefined,
+        geminiModel: typeof config.geminiModel === 'string' ? config.geminiModel : undefined,
+      }).primaryModel;
+    }
+  } catch {
+    return null;
+  }
+  return null;
 }
 
 /**
@@ -152,30 +188,38 @@ export function resolveRoute(generator: string, config: Record<string, unknown>)
  * 호출 측은 그 단계를 건너뛴다(조용한 폴백 금지). 에이전트면 그 구독 CLI, API 키 모드면 그 벤더의
  * 키와 그 벤더의 저비용 모델. 원래 소제목 보정기가 OpenAI gpt-4.1-mini 로 박혀 있던 것을 고친 자리.
  */
-export function resolveSelectedEngineRoute(generator: string, config: Record<string, unknown>): AnalysisRoute | null {
+export function resolveSelectedEngineRoute(
+  generator: string,
+  config: Record<string, unknown>,
+  routeOptions: RouteOptions = {},
+): AnalysisRoute | null {
   const key = (name: string): string => (typeof config[name] === 'string' ? (config[name] as string).trim() : '');
-  if (generator === 'agent-codex') return { engine: 'codex(구독)', subscription: true, callModel: (p, o) => callAgentText('codex', p, o) };
-  if (generator === 'agent-claude') return { engine: 'claude(구독)', subscription: true, callModel: (p, o) => callAgentText('claude', p, o) };
-  if (generator === 'agent-gemini') return { engine: 'gemini(구독)', subscription: true, callModel: (p, o) => callAgentText('gemini', p, o) };
+  const tier: SideCallTier = routeOptions.tier === 'quality' ? 'quality' : 'utility';
+  const qualityModel = tier === 'quality' ? resolveQualityTierModel(generator, config) : null;
+  if (generator === 'agent-codex') return { engine: 'codex(구독)', subscription: true, tier, callModel: (p, o) => callAgentText('codex', p, o) };
+  if (generator === 'agent-claude') return { engine: 'claude(구독)', subscription: true, tier, callModel: (p, o) => callAgentText('claude', p, o) };
+  if (generator === 'agent-gemini') return { engine: 'gemini(구독)', subscription: true, tier, callModel: (p, o) => callAgentText('gemini', p, o) };
   if (generator === 'openai') {
     const openaiKey = key('openaiApiKey');
-    return openaiKey ? { engine: OPENAI_ANALYSIS_MODEL, callModel: (p, o) => callOpenAi(p, openaiKey, o) } : null;
+    const model = qualityModel || OPENAI_ANALYSIS_MODEL;
+    return openaiKey ? { engine: model, tier, callModel: (p, o) => callOpenAi(p, openaiKey, o, model) } : null;
   }
   if (generator === 'gemini') {
     const geminiKey = key('geminiApiKey');
     if (!geminiKey) return null;
-    const model = key('geminiModel') || GEMINI_ANALYSIS_MODEL;
-    return { engine: model, callModel: (p, o) => callGemini(p, geminiKey, model, o) };
+    const model = qualityModel || key('geminiModel') || GEMINI_ANALYSIS_MODEL;
+    return { engine: model, tier, callModel: (p, o) => callGemini(p, geminiKey, model, o) };
   }
   if (generator === 'claude') {
     const claudeKey = key('claudeApiKey');
-    return claudeKey ? { engine: CLAUDE_ANALYSIS_MODEL, callModel: (p, o) => callClaude(p, claudeKey, o) } : null;
+    const model = qualityModel || CLAUDE_ANALYSIS_MODEL;
+    return claudeKey ? { engine: model, tier, callModel: (p, o) => callClaude(p, claudeKey, o, model) } : null;
   }
   if (generator === 'perplexity') {
     const perplexityKey = key('perplexityApiKey');
     if (!perplexityKey) return null;
     const model = key('perplexityModel') || 'sonar';
-    return { engine: model, callModel: (p, o) => callPerplexity(p, perplexityKey, model, o) };
+    return { engine: model, tier, callModel: (p, o) => callPerplexity(p, perplexityKey, model, o) };
   }
   return null;
 }
