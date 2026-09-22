@@ -22,6 +22,8 @@ export interface QualityLoopHookInput {
   readonly sourceBased: boolean;
   readonly sourceDocuments: readonly SourceDocument[];
   readonly rawCorpus: string;
+  /** Blueprint / raw material the Writer saw beyond the structured documents. */
+  readonly extraMaterial?: string;
   readonly relatedKeywords: readonly string[];
   readonly relatedKeywordsAreLlmExpanded: boolean;
   readonly run: GenerationRun;
@@ -62,6 +64,7 @@ export async function maybeRunQualityLoop(input: QualityLoopHookInput): Promise<
       topicType: input.topicType,
       sourceDocuments: input.sourceDocuments,
       rawCorpus: input.rawCorpus,
+      extraMaterial: input.extraMaterial,
       sourceBased: input.sourceBased,
       jsonComplete: run.meta.jsonComplete !== false,
       outputTruncated: run.meta.outputTruncated === true,
@@ -101,6 +104,7 @@ export async function maybeRunQualityLoop(input: QualityLoopHookInput): Promise<
       summary: {
         enabled: true, decision: 'MANUAL_REVIEW', fastPath: false, revisionCycles: 0, researchRecoveries: 0,
         manualReviewReasons: [`LOOP_ERROR: ${message}`],
+        terminalAdvisory: [],
         models: { criticModel: '', revisionModel: '', verificationModel: '', editorialModel: '', judgeModel: '' },
         cost: { baseCalls: run.meta.actualModelsUsed.length, qualityCalls: 0, totalCalls: run.meta.actualModelsUsed.length, baseCostUsd: null, qualityCostUsd: 0, totalCostUsd: null, qualityPromptChars: 0, qualityResponseChars: 0, calls: [] },
         preservation: { unchangedSections: 0, revisedSections: 0, flaggedSections: [], untouchedPreserved: true, lostNumbers: [], lostDates: [], lostOrganizations: [] },

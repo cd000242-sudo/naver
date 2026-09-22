@@ -5,19 +5,25 @@
 
 import type { ArticleModel, PreservationReport, QualityIssue } from './types';
 import { normalizeSpan } from './issueValidator';
+import { normalizeDates, normalizeNumbers } from './claimNormalize';
 
-const NUMBER_TOKEN_RE = /\d[\d,.]*\s*(?:원|만원|만 원|억|억원|%|%p|명|건|개|회|배|평|㎡|kg|km|cm|시간|분|일|개월|년|세|호|만|천)/g;
-const DATE_TOKEN_RE = /(?:20\d{2}년\s*)?\d{1,2}월\s*\d{1,2}일|20\d{2}년\s*\d{1,2}월|20\d{2}[-.]\d{1,2}[-.]\d{1,2}/g;
 const ORG_TOKEN_RE = /[가-힣A-Za-z]{2,12}(?:부|청|처|위원회|공단|공사|은행|그룹|협회|재단|연구원|대학교|시청|구청|도청|센터)(?=[\s,.·)]|$)/g;
 
 const uniq = (list: readonly string[]): string[] => [...new Set(list.map((s) => s.replace(/\s+/g, '')))];
 
+/** Canonical tokens (claimNormalize): "15,000원"/"1만5000원" -> "15000원", "10월 16~22일" -> 10월16일·10월22일. */
 export function extractTokens(text: string): { numbers: string[]; dates: string[]; orgs: string[] } {
   return {
-    numbers: uniq(text.match(NUMBER_TOKEN_RE) || []),
-    dates: uniq(text.match(DATE_TOKEN_RE) || []),
+    numbers: normalizeNumbers(text),
+    dates: normalizeDates(text),
     orgs: uniq(text.match(ORG_TOKEN_RE) || []),
   };
+}
+
+/** Membership test on canonical tokens (a haystack must be tokenised the same way as the needle). */
+function tokenSet(text: string): Set<string> {
+  const t = extractTokens(text);
+  return new Set([...t.numbers, ...t.dates, ...t.orgs]);
 }
 
 function sectionText(model: ArticleModel): Map<string, string> {
@@ -40,14 +46,16 @@ export function buildPreservationReport(
   // (the Critic asked for that span to change — live run 20260922-191510: unsupported 4.5%/6.0%
   // inside a REPLACE span were wrongly "preserved") or when the evidence never carried it
   // (an unsupported value has nothing valid to preserve).
-  const flaggedSpans = flaggedIssues.map((i) => normalizeSpan(i.exactSpan).replace(/\s+/g, '')).filter((s) => s.length > 0);
-  const corpus = evidenceCorpus.replace(/\s+/g, '');
+  const flaggedTokens = new Set(flaggedIssues.flatMap((i) => [...tokenSet(normalizeSpan(i.exactSpan))]));
+  const corpusTokens = tokenSet(evidenceCorpus);
+  const corpusCompact = evidenceCorpus.replace(/\s+/g, '');
+  const supported = (token: string): boolean => corpusTokens.has(token) || corpusCompact.includes(token);
   const allowedLoss = (token: string): boolean =>
-    flaggedSpans.some((span) => span.includes(token)) || (corpus.length > 0 && !corpus.includes(token));
+    flaggedTokens.has(token) || (corpusCompact.length > 0 && !supported(token));
   const beforeAll = [...b.values()].join('\n');
-  const afterAll = [...a.values()].join('\n').replace(/\s+/g, '');
+  const afterTokens = tokenSet([...a.values()].join('\n'));
   const tb = extractTokens(beforeAll);
-  const missing = (list: readonly string[]): string[] => list.filter((t) => !afterAll.includes(t) && !allowedLoss(t));
+  const missing = (list: readonly string[]): string[] => list.filter((t) => !afterTokens.has(t) && !allowedLoss(t));
 
   return {
     unchangedSections: b.size - changed.length,
@@ -67,19 +75,19 @@ export function buildPreservationReport(
  * removed as unsupported.
  */
 export function removedFactTokens(issues: readonly QualityIssue[], after: ArticleModel): string[] {
-  const afterAll = after.sections.map((s) => s.text).join('\n').replace(/\s+/g, '');
+  const afterTokens = tokenSet(after.sections.map((s) => s.text).join('\n'));
   const tokens = issues
     .filter((i) => i.state === 'RESOLVED' && FACT_ISSUE_TYPES.has(i.type))
     .flatMap((i) => { const t = extractTokens(i.exactSpan); return [...t.numbers, ...t.dates]; });
-  return [...new Set(tokens)].filter((t) => !afterAll.includes(t));
+  return [...new Set(tokens)].filter((t) => !afterTokens.has(t));
 }
 
 export function reintroducedTokens(removed: readonly string[], candidate: ArticleModel): string[] {
-  const all = candidate.sections.map((s) => s.text).join('\n').replace(/\s+/g, '');
-  return removed.filter((t) => all.includes(t));
+  const all = tokenSet(candidate.sections.map((s) => s.text).join('\n'));
+  return removed.filter((t) => all.has(t));
 }
 
-const FACT_ISSUE_TYPES: ReadonlySet<string> = new Set(['UNSUPPORTED_VALUE', 'FACT_ERROR', 'CONTRADICTION', 'MIXED_ENTITY']);
+const FACT_ISSUE_TYPES: ReadonlySet<string> = new Set(['UNSUPPORTED_VALUE', 'UNSUPPORTED_QUOTE', 'UNSUPPORTED_ENTITY', 'FACT_ERROR', 'CONTRADICTION', 'MIXED_ENTITY']);
 
 export function preservationViolations(report: PreservationReport): string[] {
   const out: string[] = [];

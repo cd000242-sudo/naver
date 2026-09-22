@@ -57,6 +57,16 @@ export function applyVerification(
   return { entries: next };
 }
 
+/** Terminal reconciliation: non-integrity issues the Judge (shown them) did not block become advisory. */
+export function markAdvisory(ledger: IssueLedger, keys: readonly string[], note: string): IssueLedger {
+  const next = new Map(ledger.entries);
+  for (const key of keys) {
+    const e = next.get(key);
+    if (e && (e.state === 'OPEN' || e.state === 'REGRESSED')) next.set(key, { ...e, state: 'ADVISORY', note: e.note ? `${e.note}; ${note}` : note });
+  }
+  return { entries: next };
+}
+
 export function listIssues(ledger: IssueLedger): QualityIssue[] {
   return [...ledger.entries.values()];
 }

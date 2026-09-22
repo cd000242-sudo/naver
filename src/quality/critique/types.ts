@@ -15,7 +15,10 @@ export type IssueType =
   | 'REDUNDANCY'
   | 'STRUCTURE'
   | 'STYLE'
-  | 'PRECHECK';
+  | 'PRECHECK'
+  | 'UNSUPPORTED_QUOTE'
+  | 'UNSUPPORTED_ENTITY'
+  | 'WRONG_CURRENT_STATE';
 
 export type IssueOperation = 'ADD' | 'REMOVE' | 'REPLACE' | 'REORDER';
 
@@ -97,6 +100,8 @@ export interface EvidencePack {
   readonly keyDates: readonly string[];
   readonly readerQuestions: readonly string[];
   readonly sourceCount: number;
+  /** Blueprint / raw material the Writer saw beyond the structured documents (corpus only, not printed). */
+  readonly extraMaterial?: string;
 }
 
 export interface CriticResult {
@@ -186,6 +191,8 @@ export interface QualityLoopSummary {
   readonly revisionCycles: number;
   readonly researchRecoveries: number;
   readonly manualReviewReasons: readonly string[];
+  /** Editorial/intent issues left OPEN after the budget that the Judge did not block (QUALITY_CONVERGED only). */
+  readonly terminalAdvisory: readonly string[];
   readonly models: Readonly<Record<'criticModel' | 'revisionModel' | 'verificationModel' | 'editorialModel' | 'judgeModel', string>>;
   readonly cost: CostLedger;
   readonly preservation: PreservationReport;

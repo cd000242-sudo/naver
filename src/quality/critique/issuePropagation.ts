@@ -7,12 +7,16 @@
 import type { ArticleModel, QualityIssue } from './types';
 import { extractTokens } from './preservation';
 import { issueFingerprint } from './issueValidator';
+import { buildAllowedValues } from './claimNormalize';
 
 const FACT_TYPES: ReadonlySet<string> = new Set(['UNSUPPORTED_VALUE', 'FACT_ERROR']);
 const SENTENCE_SPLIT_RE = /(?<=[.!?。])\s+|\n+/;
 
 function sentenceWith(text: string, token: string): string | undefined {
-  return text.split(SENTENCE_SPLIT_RE).map((s) => s.trim()).find((s) => s.replace(/\s+/g, '').includes(token));
+  return text.split(SENTENCE_SPLIT_RE).map((s) => s.trim()).find((s) => {
+    const t = extractTokens(s);
+    return t.numbers.includes(token) || t.dates.includes(token);
+  });
 }
 
 export function propagateUnsupportedValues(
@@ -20,14 +24,15 @@ export function propagateUnsupportedValues(
   model: ArticleModel,
   evidenceCorpus: string,
 ): QualityIssue[] {
-  const corpus = evidenceCorpus.replace(/\s+/g, '');
+  // Canonical tokens: "10월 16∼22일" in the source licenses "10월 16~22일" in the article.
+  const allowed = buildAllowedValues(evidenceCorpus);
   const seeds = issues.filter((i) => FACT_TYPES.has(i.type) && i.state === 'OPEN');
   const covered = new Set(issues.map((i) => `${i.sectionId}|${i.exactSpan.replace(/\s+/g, '')}`));
   const derived: QualityIssue[] = [];
   const seen = new Set<string>();
   for (const seed of seeds) {
     const t = extractTokens(seed.exactSpan);
-    const tokens = [...t.numbers, ...t.dates].filter((tok) => tok.length >= 3 && (corpus.length === 0 || !corpus.includes(tok)));
+    const tokens = [...t.numbers, ...t.dates].filter((tok) => tok.length >= 3 && !allowed.numbers.has(tok) && !allowed.dates.has(tok));
     for (const token of tokens) {
       for (const section of model.sections) {
         if (section.id === seed.sectionId) continue;

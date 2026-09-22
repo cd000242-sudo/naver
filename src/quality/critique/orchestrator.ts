@@ -10,7 +10,7 @@ import type { QualityIssue, QualityLoopSummary } from './types';
 import { buildArticleModel, applySectionEdits } from './sectionModel';
 import { buildEvidencePack, evidenceCorpus } from './evidence';
 import { runPrecheck } from './precheck';
-import { addIssues, applyVerification, blockingIssues, createLedger, listIssues, markPending, type IssueLedger } from './issueLedger';
+import { addIssues, applyVerification, blockingIssues, createLedger, listIssues, markAdvisory, markPending, type IssueLedger } from './issueLedger';
 import { runCritic, runEditorialCritic, isUnparseable } from './critic';
 import { describeSearchIntent } from './criticPrompt';
 import { runBatchEditor, mergeRevisions } from './batchEditor';
@@ -21,6 +21,8 @@ import { buildPreservationReport, preservationViolations, removedFactTokens, rei
 import { computeQualityMetrics } from './metrics';
 import { classifyHashtags } from './hashtagProvenance';
 import { propagateUnsupportedValues } from './issuePropagation';
+import { scanHighRiskClaims, mergeSeedsWithCritic, introducedUnsupportedValues } from './claimScanner';
+import { splitByLayer } from './issueTaxonomy';
 import { finalizeCostLedger } from './costLedger';
 import { createLoopState, routeFor, todayLabel, type ArtifactWriter, type RouteResolver } from './loopContext';
 
@@ -33,6 +35,8 @@ export interface QualityLoopInput {
   readonly topicType: string;
   readonly sourceDocuments: readonly SourceDocument[];
   readonly rawCorpus: string;
+  /** Blueprint / raw material the Writer saw beyond the documents (corpus for deterministic checks). */
+  readonly extraMaterial?: string;
   readonly sourceBased: boolean;
   readonly jsonComplete: boolean;
   readonly outputTruncated: boolean;
@@ -62,11 +66,15 @@ export async function runQualityLoop(input: QualityLoopInput): Promise<QualityLo
   let model = buildArticleModel(content);
   const model0 = model;
   let documents = [...input.sourceDocuments];
-  let evidence = buildEvidencePack(documents, input.keyword, input.rawCorpus);
+  // The reviewers see the same material as the Writer: full cleaned bodies + blueprint/raw material.
+  const evidenceOptions = { extraMaterial: [input.rawCorpus, input.extraMaterial || ''].filter((t) => t.trim()).join(' ') };
+  let evidence = buildEvidencePack(documents, input.keyword, input.rawCorpus, evidenceOptions);
   let ledger: IssueLedger = createLedger();
   let cycles = 0;
   let recoveries = 0;
   let fastPath = false;
+  /** Non-integrity issues left OPEN after the budget — advisory when the Judge (shown them) still passes. */
+  let terminalAdvisory: string[] = [];
 
   const finish = (judge: QualityLoopSummary['judge'], skipped = false): QualityLoopOutput => {
     const issues = listIssues(ledger);
@@ -76,6 +84,7 @@ export async function runQualityLoop(input: QualityLoopInput): Promise<QualityLo
     const summary: QualityLoopSummary = {
       enabled: true, decision, fastPath, revisionCycles: cycles, researchRecoveries: recoveries,
       manualReviewReasons: [...manual, ...(judge?.decision === 'BLOCK' ? judge.blockingIssues.map((b) => `JUDGE_BLOCK[${b.sectionId}/${b.type}] ${b.reason}`) : [])],
+      terminalAdvisory: decision === 'QUALITY_CONVERGED' ? terminalAdvisory : [],
       models: { ...state.models }, cost: finalizeCostLedger(state.cost, state.subscription), preservation,
       metrics: computeQualityMetrics(model, evidence), issues, judge,
     };
@@ -89,6 +98,10 @@ export async function runQualityLoop(input: QualityLoopInput): Promise<QualityLo
   state.writeArtifact('Q0-precheck.json', precheck);
   if (precheck.hardStops.length > 0) { manual.push(...precheck.hardStops); return finish(null); }
   ledger = addIssues(ledger, precheck.issues);
+  // 1b. High-risk claim scanner ($0): numbers / dates / attributed quotes / entity lists the full
+  //     corpus does not carry become issue SEEDS (never deletions). Merged with Critic 1 by claim.
+  const seeds = scanHighRiskClaims(model, evidenceCorpus(evidence));
+  state.writeArtifact('Q0b-claims.json', seeds);
 
   // 2. Critic 1 (facts / intent / title promise / missing information).
   const criticRoute = await routeFor(state, input.resolveRoute, 'critic');
@@ -110,17 +123,22 @@ export async function runQualityLoop(input: QualityLoopInput): Promise<QualityLo
       state.writeArtifact('Q1b-research.json', { queries: recovery.queries, added: recovery.addedDocuments, failures: recovery.failures });
       if (recovery.addedDocuments > 0) {
         documents = [...recovery.documents];
-        evidence = recovery.evidence;
+        evidence = buildEvidencePack(recovery.documents, input.keyword, input.rawCorpus, evidenceOptions);
         critic = await runCritic(criticRoute, ctx, model, evidence, 1);
         state.writeArtifact('Q1c-critic-after-research.json', { prompt: critic.prompt, ...critic.result });
       }
     }
     if (critic.result.status === 'NEEDS_MORE_RESEARCH') manual.push(`NEEDS_MORE_RESEARCH: ${critic.result.researchQueries.join(' | ') || '추가 자료 없음'}`);
   }
-  // Deterministic: a value the Critic proved unsupported is unsupported everywhere it repeats.
-  const propagated = propagateUnsupportedValues(critic.result.issues, model, evidenceCorpus(evidence));
+  // Merge scanner seeds with Critic 1 by claim (same section, same unsupported values): the Critic's
+  // issue wins (it carries evidenceIds and a requiredChange); a seed the Critic did not see stays.
+  const merged = mergeSeedsWithCritic(seeds, critic.result.issues, evidenceCorpus(evidence));
+  state.writeArtifact('Q1-merge.json', { seeds: seeds.length, critic: critic.result.issues.length, seedsKept: merged.keptSeeds.length, seedsCoveredByCritic: merged.coveredSeeds.length });
+  // Deterministic: a value proved unsupported is unsupported everywhere it repeats — first cycle.
+  const firstCycle = [...critic.result.issues, ...merged.keptSeeds];
+  const propagated = propagateUnsupportedValues(firstCycle, model, evidenceCorpus(evidence));
   if (propagated.length > 0) state.writeArtifact('Q1d-propagated.json', propagated);
-  ledger = addIssues(ledger, [...critic.result.issues, ...propagated, ...critic.result.dropped]);
+  ledger = addIssues(ledger, [...firstCycle, ...propagated, ...critic.result.dropped]);
 
   // 4. Targeted revision + verification, at most MAX_REVISION_CYCLES.
   fastPath = blockingIssues(ledger).length === 0;
@@ -142,6 +160,8 @@ export async function runQualityLoop(input: QualityLoopInput): Promise<QualityLo
     const violations = preservationViolations(report);
     const restored = reintroducedTokens(removedFactTokens(listIssues(ledger), model), candidateModel);
     if (restored.length > 0) violations.push(`제거된 미지원 값 재유입: ${restored.slice(0, 5).join(', ')}`);
+    const invented = introducedUnsupportedValues(model, candidateModel, evidenceCorpus(evidence), changedIds);
+    if (invented.length > 0) violations.push(`편집자가 자료에 없는 값을 새로 넣음: ${invented.slice(0, 5).join(', ')}`);
     if (violations.length > 0) {
       manual.push(`PRESERVATION_VIOLATION(round ${cycles}): ${violations.join('; ')}`);
       state.writeArtifact(`Q2-preservation-r${cycles}.json`, report);
@@ -159,8 +179,11 @@ export async function runQualityLoop(input: QualityLoopInput): Promise<QualityLo
     ledger = applyVerification(ledger, verified.result.resolved, verified.result.stillOpen);
     ledger = addIssues(ledger, verified.result.newIssues);
   }
+  // Terminal reconciliation, part 1: unresolved INTEGRITY issues block regardless of the Judge;
+  //   unresolved editorial/intent issues are handed to the Judge (part 2, below).
   if (!fastPath && blockingIssues(ledger).length > 0 && manual.every((m) => !m.startsWith('REVISION_NOOP') && !m.startsWith('PRESERVATION'))) {
-    manual.push(`UNRESOLVED_AFTER_${cycles}_CYCLES: ${blockingIssues(ledger).map((i) => `${i.sectionId}/${i.type}`).join(', ')}`);
+    const { integrity } = splitByLayer(blockingIssues(ledger));
+    if (integrity.length > 0) manual.push(`UNRESOLVED_INTEGRITY_AFTER_${cycles}_CYCLES: ${integrity.map((i) => `${i.sectionId}/${i.type}`).join(', ')}`);
   }
 
   // 5. Editorial / homefeed critic (structure, redundancy, focus) + one minimal fix if budget remains.
@@ -183,7 +206,7 @@ export async function runQualityLoop(input: QualityLoopInput): Promise<QualityLo
           const candidate = applySectionEdits(content, model, merged.sections);
           const candidateModel = buildArticleModel(candidate);
           const violations = preservationViolations(buildPreservationReport(model, candidateModel, structural, evidenceCorpus(evidence)));
-          const restored = reintroducedTokens(removedValues, candidateModel);
+          const restored = [...reintroducedTokens(removedValues, candidateModel), ...introducedUnsupportedValues(model, candidateModel, evidenceCorpus(evidence), Object.keys(merged.sections))];
           if (restored.length > 0) {
             // A structural fix must not undo a verified fact fix; the pre-fix article is kept and judged.
             state.writeArtifact('Q4c-editorial-fix-rejected.json', { restored, changed: Object.keys(merged.sections) });
@@ -195,20 +218,30 @@ export async function runQualityLoop(input: QualityLoopInput): Promise<QualityLo
             manual.push(`PRESERVATION_VIOLATION(editorial): ${violations.join('; ')}`);
           }
         }
-      } else {
-        manual.push(`EDITORIAL_UNFIXED: 수정 예산 소진 — ${structural.map((i) => `${i.sectionId}/${i.type}`).join(', ')}`);
       }
+      // else: budget spent — these editorial issues stay OPEN and go to the Judge as terminal candidates.
     }
   }
 
-  // 6. Final Judge on the actual final article (body + FAQ + CTA + hashtags with provenance).
+  // 6. Final Judge on the actual final article (body + FAQ + CTA + hashtags with provenance) plus the
+  //    OPEN issues left after the budget. Terminal reconciliation, part 2:
+  //      integrityOpen > 0 -> MANUAL_REVIEW (already pushed above)
+  //      judge BLOCK       -> MANUAL_REVIEW
+  //      otherwise         -> remaining editorial OPEN issues become terminal advisory, article converges.
   const judgeRoute = await routeFor(state, input.resolveRoute, 'judge');
   if (!judgeRoute) { manual.push('NO_ROUTE: 판정 라우트 없음'); return finish(null); }
   const hashtags = classifyHashtags({
     hashtags: model.hashtags, primaryKeyword: input.keyword, relatedKeywords: input.relatedKeywords,
     relatedKeywordsAreLlmExpanded: input.relatedKeywordsAreLlmExpanded, articleText: model.sections.map((s) => s.text).join('\n'),
   });
-  const judged = await runFinalJudge(judgeRoute, { ...ctx, hashtags, precheckHardStops: precheck.hardStops }, model, evidence);
-  state.writeArtifact('Q5-judge.json', { prompt: judged.prompt, ...judged.result });
+  const openAtJudge = blockingIssues(ledger);
+  const judged = await runFinalJudge(judgeRoute, { ...ctx, hashtags, precheckHardStops: precheck.hardStops, openIssues: openAtJudge }, model, evidence);
+  state.writeArtifact('Q5-judge.json', { prompt: judged.prompt, openIssues: openAtJudge.map((i) => i.issueKey), ...judged.result });
+  const { editorial: editorialOpen } = splitByLayer(openAtJudge);
+  terminalAdvisory = editorialOpen.map((i) => `TERMINAL_ADVISORY[${i.sectionId}/${i.type}] ${i.problem.slice(0, 160)}`);
+  if (judged.result.decision === 'PASS' && editorialOpen.length > 0) {
+    ledger = markAdvisory(ledger, editorialOpen.map((i) => i.issueKey), 'terminal advisory (judge PASS)');
+    state.writeArtifact('Q5b-terminal.json', { advisory: terminalAdvisory });
+  }
   return finish({ decision: judged.result.decision, blockingIssues: judged.result.blockingIssues, advisory: judged.result.advisory });
 }

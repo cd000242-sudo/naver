@@ -1,20 +1,26 @@
 // [2026-09-22 Critique Loop] Evidence pack for the Critic / Editor / Judge prompts.
-// Short by design: accepted source documents (id, publisher, date, excerpt) plus the
-// code-extracted research brief (key numbers, dates, reader questions). The Critic must
-// never receive the Writer's full prompt or the raw 20K-char material.
+//
+// [2026-09-23 Quality Fix 1] The pack used to hold a 700-char excerpt per document. Replaying
+// the 7 live runs showed 33 of 34 fact issues the Critic/Judge raised pointed at values that
+// WERE in the material the Writer saw (e.g. "특별기획전은 10월 18일까지" sat at char 2,900 of
+// its article). The reviewers must see the same cleaned material as the Writer: full cleaned
+// bodies under the same per-article/total caps as sourceAssembler, plus the blueprint/raw
+// material in the corpus used by every deterministic check.
 
 import type { SourceDocument } from '../../content/sourceDocument';
 import { buildResearchSummary } from '../../content/researchSummary';
 import { resolveSourceName } from '../../content/sourceName';
 import type { EvidenceItem, EvidencePack } from './types';
 
-const EXCERPT_CHARS = 700;
+/** What the Writer material actually holds: news API bodies reach ~7.5K, the whole B block ~21K. */
+export const EVIDENCE_PER_DOC_CHARS = 8000;
+export const EVIDENCE_TOTAL_CHARS = 24000;
 const MAX_ITEMS = 8;
 const MAX_FACTS = 14;
 const MAX_QUESTIONS = 8;
 
-function excerptOf(doc: SourceDocument): string {
-  return String(doc.cleanedBody || doc.body || '').replace(/\s+/g, ' ').trim().slice(0, EXCERPT_CHARS);
+function bodyOf(doc: SourceDocument): string {
+  return String(doc.cleanedBody || doc.body || '').replace(/[ \t]+/g, ' ').replace(/\n{2,}/g, '\n').trim();
 }
 
 function publisherOf(doc: SourceDocument): string {
@@ -35,21 +41,32 @@ export function selectEvidenceDocuments(docs: readonly SourceDocument[] | undefi
     .slice(0, MAX_ITEMS);
 }
 
+export interface BuildEvidenceOptions {
+  /** Material the Writer saw that is not a structured document (blueprint material, raw text). */
+  readonly extraMaterial?: string;
+}
+
 export function buildEvidencePack(
   docs: readonly SourceDocument[] | undefined,
   keyword: string,
   rawTextFallback: string = '',
+  options: BuildEvidenceOptions = {},
 ): EvidencePack {
   const accepted = selectEvidenceDocuments(docs);
-  const items: EvidenceItem[] = accepted.map((d) => ({
-    id: d.id,
-    title: String(d.title || '').slice(0, 120),
-    publisher: publisherOf(d),
-    date: d.pubDate || (d.dateStatus === 'UNKNOWN_DATE' ? '날짜 미상' : ''),
-    excerpt: excerptOf(d),
-  }));
+  let budget = EVIDENCE_TOTAL_CHARS;
+  const items: EvidenceItem[] = accepted.map((d) => {
+    const body = bodyOf(d).slice(0, Math.max(0, Math.min(EVIDENCE_PER_DOC_CHARS, budget)));
+    budget -= body.length;
+    return {
+      id: d.id,
+      title: String(d.title || '').slice(0, 120),
+      publisher: publisherOf(d),
+      date: d.pubDate || (d.dateStatus === 'UNKNOWN_DATE' ? '날짜 미상' : ''),
+      excerpt: body,
+    };
+  });
   if (items.length === 0 && rawTextFallback.trim()) {
-    items.push({ id: 'S00', title: '수집 자료(문서 구조 없음)', publisher: '', date: '', excerpt: rawTextFallback.replace(/\s+/g, ' ').slice(0, EXCERPT_CHARS * 3) });
+    items.push({ id: 'S00', title: '수집 자료(문서 구조 없음)', publisher: '', date: '', excerpt: rawTextFallback.replace(/[ \t]+/g, ' ').slice(0, EVIDENCE_TOTAL_CHARS) });
   }
   let keyFacts: string[] = [];
   let keyDates: string[] = [];
@@ -60,7 +77,8 @@ export function buildEvidencePack(
     keyDates = summary.dates.slice(0, MAX_FACTS).map((f) => `[${f.sourceId}] ${f.sentence}`);
     readerQuestions = summary.readerQuestions.slice(0, MAX_QUESTIONS);
   } catch { /* research brief is optional */ }
-  return { items, keyFacts, keyDates, readerQuestions, sourceCount: accepted.length };
+  const extraMaterial = String(options.extraMaterial || '').trim();
+  return { items, keyFacts, keyDates, readerQuestions, sourceCount: accepted.length, extraMaterial };
 }
 
 /** Prompt block listing the evidence. `ids` restricts to the documents an issue cites. */
@@ -88,7 +106,16 @@ export function evidenceIdSet(pack: EvidencePack): Set<string> {
   return new Set(pack.items.map((it) => it.id));
 }
 
-/** All evidence text (excerpts + research brief) — the set of values worth preserving. */
+/**
+ * Everything the Writer could legitimately cite: full document bodies, the research brief and
+ * the blueprint/raw material. Every deterministic check (preservation, propagation, scanner)
+ * measures "supported" against this — never against a prompt excerpt.
+ */
 export function evidenceCorpus(pack: EvidencePack): string {
-  return [...pack.items.map((it) => `${it.title} ${it.excerpt}`), ...pack.keyFacts, ...pack.keyDates].join(' ');
+  return [
+    ...pack.items.map((it) => `${it.title} ${it.excerpt}`),
+    ...pack.keyFacts,
+    ...pack.keyDates,
+    pack.extraMaterial || '',
+  ].join(' ');
 }

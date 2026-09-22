@@ -4,7 +4,8 @@
 // a section and a span (or a structural location) and a reason.
 
 import { safeParseJson } from '../../jsonParser';
-import type { ArticleModel, EvidencePack, JudgeIssue, JudgeResult, QualityRoute } from './types';
+import type { ArticleModel, EvidencePack, JudgeIssue, JudgeResult, QualityIssue, QualityRoute } from './types';
+import { describeOpenIssue } from './issueTaxonomy';
 import { renderVisibleArticle, findSection } from './sectionModel';
 import { describeEvidence, describeKeyFacts } from './evidence';
 import { normalizeSpan } from './issueValidator';
@@ -21,12 +22,22 @@ export interface JudgeContext {
   readonly searchIntent: string;
   readonly hashtags: readonly HashtagProvenance[];
   readonly precheckHardStops: readonly string[];
+  /** OPEN issues left after the revision budget — the Judge decides whether THESE block, nothing new. */
+  readonly openIssues?: readonly QualityIssue[];
 }
 
 export function buildJudgePrompt(ctx: JudgeContext, model: ArticleModel, evidence: EvidencePack): string {
+  const open = ctx.openIssues ?? [];
+  const openBlock = open.length > 0
+    ? `
+## 수정 예산이 끝난 뒤 남은 OPEN issue (편집자가 못 고친 것)
+${open.map(describeOpenIssue).join('\n')}
+이 목록의 각 항목에 대해 "현재 최종 글에서 이 문제가 자동 발행을 실제로 막아야 하는가"만 판단한다. 막아야 하면 blockingIssues 에 같은 sectionId·구절로 적고, 아니면 advisory 로 적는다.
+`
+    : '';
   return `너는 발행 게이트다. 질문은 하나다: "자동 발행을 막아야 하는 명백한 문제가 있는가?" 오늘: ${ctx.today}. 키워드: ${ctx.keyword}. 모드: ${ctx.contentMode}.
 검색 의도: ${ctx.searchIntent}
-
+${openBlock}
 ## 근거 자료 요약
 ${describeKeyFacts(evidence) || '(요약 없음)'}
 
@@ -49,6 +60,7 @@ ${describeHashtagProvenance(ctx.hashtags)} — "hashtag" 는 모델이 만든 �
 
 ## BLOCK 이 아닌 것 (advisory 로만 적는다)
 "더 자연스럽게/흥미롭게/다양하게/풍부하게", SEO 개선, 문체·어미·분량, 개인 취향. 좋아질 여지는 발행을 막는 이유가 아니다.
+너는 새 비평가가 아니다. 새 개선점을 발굴하지 말고, 위 기준의 명백한 문제와 남은 OPEN issue 에 대해서만 판정한다. 자료에 있는 값을 "없다"고 하지 않도록 근거 자료 전문을 먼저 확인한다.
 
 blockingIssues 각 항목은 type, sectionId, exactSpan(본문 구절 그대로 — 구조 문제면 소제목), reason 을 모두 채운다.
 JSON 으로만 답하라:
