@@ -146,8 +146,10 @@ import {
   type ContentQualityV3PublicationIssueCode,
 } from './contentQualityV3/publicationBoundary.js';
 import {
+  GEMINI_MAX_OUTPUT_TOKENS,
   buildGeminiGenerationConfig,
   resolveGeminiEmptyResponseRetryTemperature,
+  resolveGeminiMaxOutputTokens,
 } from './contentGeminiSamplingPolicy.js';
 // [Phase 3-1/v2.10.139] god file 분해 1단계 — pure string helper 추출
 import {
@@ -436,6 +438,20 @@ import { resolveBlueprintMaterial } from './content/materialBudget.js';
 import {
   buildGeminiEmptyResponseUserMessage,
 } from './contentGenerationUserGuidance';
+// [2026-09-22 audit P0-6] runId-scoped on-disk snapshots (A search raw … G published payload).
+import {
+  createGenerationRun,
+  getActiveGenerationRun,
+  setActiveGenerationRun,
+  withActiveRun,
+} from './quality/generationRunStore.js';
+import { OutputTruncatedError, isTruncatedFinishReason, raisedOutputBudget } from './content/outputTruncation.js';
+import { contentTextOf, recordPostProcessStep } from './content/postProcessTrace.js';
+import { buildAttributionEvidence } from './content/attributionEvidence.js';
+import { prepareSourceMaterial } from './content/sourcePipeline.js';
+import { PartialResponseError } from './jsonParser.js';
+import { STRUCTURED_CONTENT_SCHEMA, assertResponseComplete, describeCompleteness } from './content/structuredResponseContract.js';
+import { describeIntegrity, evaluatePipelineIntegrity } from './content/pipelineIntegrityGate.js';
 
 // ✅ [v1.4.51] Gemini 빈 응답 전용 에러 클래스 — finishReason별 대응 위해
 // SAFETY/RECITATION → 재시도 금지, MAX_TOKENS → 설정 조정 후 재시도, OTHER → 일반 재시도
@@ -1412,7 +1428,7 @@ async function repairHeadingsBeforeFinalize(content: StructuredContent, source: 
   try {
     // [2026-09-03 사장님] 보정도 사용자가 고른 엔진으로 — OpenAI 키를 박아 쓰지 않는다. 고른 엔진의 키/구독이
     //   없으면 건너뛴다(다른 벤더로 조용히 넘어가지 않는다).
-    const route = await resolveSideTaskRoute(source);
+    const route = await resolveSideTaskRoute(source, 'heading-repair');
     if (!route) {
       console.log(`[HeadingRepair] 선택 엔진(${String(source.generator || '미지정')})의 키/구독이 없어 소제목 보정 건너뜀`);
       return;
@@ -1431,8 +1447,10 @@ async function repairHeadingsBeforeFinalize(content: StructuredContent, source: 
     // (contentQualityV3EarlyReturnWiring / GenerationIntegration), so the repaired
     // headings are written onto the same object instead of re-binding the caller's const.
     if (repaired !== content) {
+      const __ppHeadingRepair = contentTextOf(content);
       content.headings = repaired.headings;
       syncHeadingsWithBodyPlain(content as any, titlesBeforeRepair);
+      recordPostProcessStep('repairSentenceStyleHeadings', __ppHeadingRepair, contentTextOf(content), { modelUsed: route.engine });
     }
   } catch (error) {
     console.warn('[HeadingRepair] 보정 단계 예외 — 원본 유지:', (error as Error)?.message || error);
@@ -1456,15 +1474,21 @@ export function finalizeStructuredContent(
 
   const allowLegacyOrdinalHeadingMarkerFix =
     shouldRunLegacySemanticPostDraftMutation(promptVariant, 'apply-ordinal-heading-marker-fix');
+  const __ppFinalizeHead = contentTextOf(content);
   let finalContent = removeEmojisFromContent(content);
   finalContent = removeInternalStructureMarkersFromContent(finalContent);
   // [2026-08-28] 표 마지막 행에 다음 문단이 붙어 나오는 실측 결함을 떼어 놓는다.
   //   표는 리치 복붙으로 그대로 올라가므로 경계가 깨지면 발행물이 깨진다.
   finalContent = normalizeContentTableBlocks(finalContent);
+  recordPostProcessStep('removeEmojis+structureMarkers+tableBlocks', __ppFinalizeHead, contentTextOf(finalContent));
   // [2026-09-03] "정리하면 …" AI wrap-up opener — the checker flags it, the model still writes it. Dropped here.
-  finalContent = stripAiConclusionOpenersFromContent(finalContent);
-  // [2026-09-03 사장님 지적 ④] "검색 결과에는 …" 자료 목록 서술 — 프롬프트 금지만으로는 안 지켜져 여기서 뗀다.
-  finalContent = stripMaterialNarrationFromContent(finalContent);
+  {
+    const __ppStrip = contentTextOf(finalContent);
+    finalContent = stripAiConclusionOpenersFromContent(finalContent);
+    // [2026-09-03 사장님 지적 ④] "검색 결과에는 …" 자료 목록 서술 — 프롬프트 금지만으로는 안 지켜져 여기서 뗀다.
+    finalContent = stripMaterialNarrationFromContent(finalContent);
+    recordPostProcessStep('stripAiConclusionOpeners+MaterialNarration', __ppStrip, contentTextOf(finalContent));
+  }
 
   // ✅ [Phase 7] Source Fidelity 측정 — URL 입력 시 LLM 압축·정보 누락 감지
   // 사용자 진단: "url 넣어서 발행하면 내용들이 많이 압축되고 중요한 내용도 빠짐"
@@ -1927,7 +1951,11 @@ export function finalizeStructuredContent(
   if (allowLegacyOrdinalHeadingMarkerFix) {
     runTailTransform('applyOrdinalHeadingMarkerFix', () => applyOrdinalHeadingMarkerFix(finalContent));
   }
-  runTailTransform('sanitizeStructuredContentClaims', () => sanitizeStructuredContentClaims(finalContent));
+  {
+    const __ppClaims = contentTextOf(finalContent);
+    runTailTransform('sanitizeStructuredContentClaims', () => sanitizeStructuredContentClaims(finalContent));
+    recordPostProcessStep('sanitizeStructuredContentClaims', __ppClaims, contentTextOf(finalContent));
+  }
   runTailTransform('removeInternalStructureMarkers', () => {
     finalContent = removeInternalStructureMarkersFromContent(finalContent);
   });
@@ -2429,6 +2457,21 @@ export interface PostPublishActions {
 export interface StructuredContent {
   status: 'success' | 'warning' | 'error';
   generationTime: string;
+  /** [2026-09-22 audit P0-6] runId of the on-disk generation snapshot (userData/generation-runs/<runId>). */
+  _generationRunId?: string;
+  /** [2026-09-22 audit item 28] pipeline-integrity verdict consumed by the publish boundary. */
+  _generationIntegrity?: {
+    publishDecision: 'AUTO_PUBLISH_OK' | 'MANUAL_REVIEW';
+    flags: Record<string, string>;
+    criticalFailures: string[];
+    warnings: string[];
+    reasons: string[];
+    sourceCount: number;
+    sourceBased: boolean;
+    actualModelsUsed: Array<{ stage: string; provider: string; model: string }>;
+    selectedProvider: string;
+    selectedModel: string;
+  };
   selectedTitle: string;
   titleAlternatives: string[];
   titleCandidates: TitleCandidate[];
@@ -3111,15 +3154,26 @@ export function buildModeBasedPrompt(
   // 이후: [원본 텍스트] 마커 이후로 이동 → system 정적 유지
 
   const primaryKeyword = getPrimaryKeywordFromSource(source);
-  const subKeywords = Array.isArray((source.metadata as any)?.keywords)
+  const subKeywordList: string[] = Array.isArray((source.metadata as any)?.keywords)
     ? (source.metadata as any).keywords
       .slice(1)
       .filter((k: any) => String(k).length >= 2 && !/^\d+$/.test(String(k)))
       .slice(0, 5)
-      .join(', ')
+      .map((k: any) => String(k))
+    : [];
+  /*
+   * [2026-09-22 audit P0 item 22] Keyword provenance. `metadata.keywords[1..]` used to be one array where
+   * real related-search scrapes and LLM-invented keywords were indistinguishable — the prompt printed
+   * both as "🔖 서브 키워드" (실제 연관검색어 라벨). LLM-derived lists (keywordOrigin='upgrade-analysis',
+   * URL-mode picker) are now labelled as such so the writer does not treat them as search data.
+   */
+  const keywordOrigin = String((source.metadata as any)?.keywordOrigin || '');
+  const keywordsAreLlmExpanded = keywordOrigin === 'upgrade-analysis' || keywordOrigin === 'url-mode-llm';
+  const subKeywords = subKeywordList.length > 0
+    ? (keywordsAreLlmExpanded ? `${subKeywordList.join(', ')} (LLM 확장 보조어 — 실제 연관검색어 아님)` : subKeywordList.join(', '))
     : '';
 
-  console.log(`[PromptBuilder] 글톤 및 프롬프트 생성 완료: ${toneStyle}, 메인키워드=${primaryKeyword}`);
+  console.log(`[PromptBuilder] 글톤 및 프롬프트 생성 완료: ${toneStyle}, 메인키워드=${primaryKeyword}${keywordsAreLlmExpanded ? ' (서브키워드=LLM 확장)' : ''}`);
 
   // ✅ 리뷰형일 때 구매 전 제품 분석 프롬프트 추가
   if (isReviewType && contentMode !== 'affiliate') {
@@ -3604,6 +3658,9 @@ async function callGemini(
   let activeTemperature = temperature;
   let promptAugmentationCount = 0;
   const MAX_PROMPT_AUGMENTATIONS = strictSingleCall ? 0 : 2;
+  // [2026-09-22] MAX_TOKENS on a non-empty response: one retry with a raised output budget.
+  let truncationRetryUsed = false;
+  let maxOutputTokensOverride: number | undefined;
 
   // 1. API 키 로드 — 다중 키 로테이션 지원
   const configGeminiKey = config?.geminiApiKey?.trim() || '';
@@ -3804,6 +3861,7 @@ async function callGemini(
             isPro,
             schema: options.schema,
             useModelDefaultSampling: options.useModelDefaultSampling,
+            maxOutputTokensOverride,
           }) as any,
           // ✅ [v1.4.51] 3) safetySettings BLOCK_NONE — SAFETY false positive 박멸
           // 한국어 블로그(의료/금융/법률/관계) 키워드가 기본 BLOCK_MEDIUM_AND_ABOVE에 자주 걸림
@@ -3899,9 +3957,15 @@ async function callGemini(
           //    이전: promptTokenCount + candidatesTokenCount (실측 대비 ~60% 과소 집계)
           //    수정: totalTokenCount - promptTokenCount (output + thinking 모두 포함)
           //    실측: thinking 토큰이 output의 20배까지 나와서 앱 추정이 실제의 40%밖에 안 됐음
+          // [2026-09-22 audit P0] finishReason is inspected on NON-empty text too — a body cut at
+          //   MAX_TOKENS used to be returned as success and repaired into a short/partial article.
+          let nonEmptyFinishReason = '';
+          let nonEmptyOutputTokens = 0;
           try {
             const aggResponse = await waitForGeminiUsageMetadata(streamResult);
+            nonEmptyFinishReason = String((aggResponse as any)?.candidates?.[0]?.finishReason || '');
             const usageMeta = (aggResponse as any)?.usageMetadata;
+            nonEmptyOutputTokens = Number(usageMeta?.candidatesTokenCount || 0);
             if (usageMeta) {
               const promptTokens = usageMeta.promptTokenCount || 0;
               const totalTokens = usageMeta.totalTokenCount || 0;
@@ -3916,6 +3980,11 @@ async function callGemini(
               });
             }
           } catch { /* usage 추출 실패는 무시 — 생성 성공이 우선 */ }
+
+          if (isTruncatedFinishReason('gemini', nonEmptyFinishReason)) {
+            withActiveRun((run) => run.updateMeta({ outputTruncated: true }));
+            throw new OutputTruncatedError('gemini', modelName, nonEmptyFinishReason, text, nonEmptyOutputTokens);
+          }
 
           // 1. 인코딩 보정
           text = fixUtf8Encoding(text);
@@ -3932,6 +4001,10 @@ async function callGemini(
           }
 
           if (resultCacheAllowed) setCachedGeminiResult(resultCacheKey, cleaned);
+          withActiveRun((run) => {
+            run.recordModel(minChars < 1000 ? 'side(gemini)' : 'body', 'gemini', modelName);
+            if (minChars >= 1000) run.writeModelOutput(text, { stage: 'body', provider: 'gemini', model: modelName, finishReason: nonEmptyFinishReason || 'STOP' });
+          });
           return cleaned;
         }
         // ✅ [v1.4.51] 빈 응답을 GeminiEmptyResponseError로 throw — finishReason별 대응
@@ -3954,6 +4027,19 @@ async function callGemini(
       } catch (error) {
         // ✅ [v1.4.50] Safety Lock 에러는 재시도/폴백 금지 — 즉시 상위로 전파
         if (error instanceof BudgetExceededError) throw error;
+        // [2026-09-22] Truncated output: raise the budget once (paid retry gate applies), never
+        //   "repair" the half JSON into a success. Second truncation propagates as OUTPUT_TRUNCATED.
+        if (error instanceof OutputTruncatedError) {
+          if (!truncationRetryUsed && allowPaidEmptyResponseRetry) {
+            truncationRetryUsed = true;
+            const current = resolveGeminiMaxOutputTokens({ modelName, isPro, maxOutputTokensOverride });
+            maxOutputTokensOverride = raisedOutputBudget(current, GEMINI_MAX_OUTPUT_TOKENS);
+            console.warn(`[Gemini] ✂️ OUTPUT_TRUNCATED (${error.finishReason}, ${error.partialText.length}자) → maxOutputTokens ${current} → ${maxOutputTokensOverride} 로 1회 재호출`);
+            continue;
+          }
+          console.error(`[Gemini] ❌ OUTPUT_TRUNCATED — 잘린 응답을 성공으로 처리하지 않습니다 (${error.message})`);
+          throw error;
+        }
         if (singleSubmission) throw error;
 
         // ✅ [v1.4.51] 빈 응답 에러 — 프롬프트 증강으로 무조건 회복
@@ -4358,6 +4444,13 @@ async function callPerplexity(
       if (!text) {
         throw new Error('Perplexity API 빈 응답');
       }
+      // [2026-09-22 audit P0] finish_reason=length on a non-empty body is OUTPUT_TRUNCATED, not success.
+      const pplxFinishReason = String((response as any)?.choices?.[0]?.finish_reason || '');
+      if (isTruncatedFinishReason('perplexity', pplxFinishReason)) {
+        withActiveRun((run) => run.updateMeta({ outputTruncated: true }));
+        console.error(`[Perplexity] ❌ OUTPUT_TRUNCATED (finish_reason=${pplxFinishReason}, ${text.length}자) — 잘린 응답을 성공으로 처리하지 않습니다`);
+        throw new OutputTruncatedError('perplexity', modelName, pplxFinishReason, text, Number((response as any)?.usage?.completion_tokens || 0));
+      }
 
       // ✅ [2026-03-19] 사용량 추적
       const pplxUsage = (response as any).usage;
@@ -4368,10 +4461,15 @@ async function callPerplexity(
       });
 
       console.log(`[Perplexity] ✅ 생성 완료: ${modelName} (시도 ${retry + 1}), ${text.length}자`);
+      withActiveRun((run) => {
+        run.recordModel(minChars < 1000 ? 'side(perplexity)' : 'body', 'perplexity', modelName);
+        if (minChars >= 1000) run.writeModelOutput(text, { stage: 'body', provider: 'perplexity', model: modelName, finishReason: pplxFinishReason || 'stop' });
+      });
       return text;
 
     } catch (error) {
       lastError = error as Error;
+      if (error instanceof OutputTruncatedError) throw error; // never retried as a transient error
       const errorMessage = lastError.message?.toLowerCase() || '';
       const errorStr = safeStringifyError(error).toLowerCase();
       const status = (error as any)?.status || (error as any)?.response?.status;
@@ -4556,7 +4654,10 @@ async function callOpenAI(
   // [v2.11.136] gpt-5.x는 reasoning 토큰을 이 예산에서 함께 소비하므로 헤드룸을
   // 더한 예산이 필요하다. modelsToTry 중 하나라도 reasoning 계열이면 헤드룸 적용.
   const usesReasoningModel = modelsToTry.some((m) => String(m).startsWith('gpt-5'));
-  const maxCompletionTokens = getOpenAiMaxCompletionTokens(minChars, { reasoningModel: usesReasoningModel });
+  let maxCompletionTokens = getOpenAiMaxCompletionTokens(minChars, { reasoningModel: usesReasoningModel });
+  // [2026-09-22 audit P0] finish_reason=length on a non-empty body: one retry with a raised budget.
+  const OPENAI_MAX_COMPLETION_CEILING = 32000;
+  let truncationRetryUsed = false;
   const allowAutomaticRetry = shouldAllowAutomaticProviderRetry(options.submissionMode);
   const maxAttemptsPerModel = allowAutomaticRetry ? 99 : 1;
   const maxTransientRetriesPerModel = 0;
@@ -4694,12 +4795,36 @@ async function callOpenAI(
           throw emptyResponseError;
         }
 
+        const nonEmptyFinishReason = isSearchModel
+          ? String(response?.status === 'incomplete' ? (response?.incomplete_details?.reason || 'incomplete') : '')
+          : String(response?.choices?.[0]?.finish_reason || '');
+        if (isTruncatedFinishReason('openai', nonEmptyFinishReason)) {
+          withActiveRun((run) => run.updateMeta({ outputTruncated: true }));
+          throw new OutputTruncatedError('openai', modelName, nonEmptyFinishReason, text, oaiUsage.outputTokens);
+        }
+
         console.log(`[OpenAI] ✅ 성공: ${modelName}, ${text.length}자`);
         console.log(`[OpenAI] 📋 응답 미리보기: ${text.substring(0, 200)}...`);
+        withActiveRun((run) => {
+          run.recordModel(minChars < 1000 ? 'side(openai)' : 'body', 'openai', modelName);
+          if (minChars >= 1000) run.writeModelOutput(text, { stage: 'body', provider: 'openai', model: modelName, finishReason: nonEmptyFinishReason || 'stop' });
+        });
         return text;
 
       } catch (error) {
         lastError = error as Error;
+        if (error instanceof OutputTruncatedError) {
+          if (!truncationRetryUsed && !options.submissionMode?.toString().includes('strict')) {
+            truncationRetryUsed = true;
+            const raised = raisedOutputBudget(maxCompletionTokens, OPENAI_MAX_COMPLETION_CEILING);
+            console.warn(`[OpenAI] ✂️ OUTPUT_TRUNCATED (${error.finishReason}, ${error.partialText.length}자) → max_completion_tokens ${maxCompletionTokens} → ${raised} 로 1회 재호출`);
+            maxCompletionTokens = raised;
+            retry -= 1; // the budget fix gets its own slot even in single-submission mode
+            continue;
+          }
+          console.error(`[OpenAI] ❌ OUTPUT_TRUNCATED — 잘린 응답을 성공으로 처리하지 않습니다 (${error.message})`);
+          throw error;
+        }
         const errorMessage = (error as Error).message?.toLowerCase() || '';
         const failure = classifyOpenAiFailure(error);
 
@@ -4936,6 +5061,14 @@ async function callAgent(
     throw err;
   }
   console.log(`[Agent] ✅ ${cliProvider} 응답 수신 (${result.durationMs}ms, ${result.text.length}자, 모델 ${agentModel || 'CLI 기본'})`);
+  // [2026-09-22 audit P0] Subscription engines are models too — record the body stage and the
+  // D snapshot so the fact-preservation metric and the model-override gate cover this path.
+  withActiveRun((run) => {
+    const modelLabel = `${cliProvider}(구독)${agentModel ? `:${agentModel}` : ''}`;
+    const stage = raw ? `side(${provider})` : 'body';
+    run.recordModel(stage, provider, modelLabel);
+    if (!raw) run.writeModelOutput(result.text, { stage: 'body', provider, model: modelLabel, finishReason: 'agent' });
+  });
   return result.text;
 }
 
@@ -5114,6 +5247,14 @@ async function callClaude(
         if (!text.trim()) {
           throw new Error('Claude 응답이 비어 있습니다.');
         }
+        // [2026-09-22 audit P0] stop_reason=max_tokens on a non-empty body is OUTPUT_TRUNCATED, not success.
+        //   No paid auto-retry here (cost policy) — the error surfaces with the status and the integrity gate records it.
+        const claudeStopReason = String((response as any)?.stop_reason || '');
+        if (isTruncatedFinishReason('claude', claudeStopReason)) {
+          withActiveRun((run) => run.updateMeta({ outputTruncated: true }));
+          console.error(`[Claude] ❌ OUTPUT_TRUNCATED (stop_reason=${claudeStopReason}, ${text.length}자) — 잘린 응답을 성공으로 처리하지 않습니다`);
+          throw new OutputTruncatedError('claude', modelName, claudeStopReason, text, Number((response as any)?.usage?.output_tokens || 0));
+        }
 
         // ✅ [2026-03-19] 사용량 추적
         const claudeUsage = (response as any).usage;
@@ -5141,10 +5282,15 @@ async function callClaude(
 
         const elapsed = (Date.now() - startTime) / 1000;
         console.log(`✅ [Claude] 생성 완료: ${text.length}자, ${elapsed.toFixed(1)}초`);
+        withActiveRun((run) => {
+          run.recordModel(minChars < 1000 ? 'side(claude)' : 'body', 'claude', modelName);
+          if (minChars >= 1000) run.writeModelOutput(text, { stage: 'body', provider: 'claude', model: modelName, finishReason: claudeStopReason || 'end_turn' });
+        });
         return text;
 
       } catch (error) {
         lastError = error as Error;
+        if (error instanceof OutputTruncatedError) throw error; // never retried as a transient error
         const errorMessage = (error as Error).message?.toLowerCase() || '';
         const errorStr = safeStringifyError(error).toLowerCase();
         const statusText = String((error as any)?.status ?? (error as any)?.response?.status ?? '');
@@ -5825,11 +5971,27 @@ interface SideTaskRoute {
   readonly callModel: (prompt: string, options?: { maxTokens?: number; timeoutMs?: number }) => Promise<string>;
 }
 
-async function resolveSideTaskRoute(source: ContentSource): Promise<SideTaskRoute | null> {
+/**
+ * [2026-09-22 audit P0] Side calls that touch the article (blueprint, throughline judge,
+ * quote patch, heading repair, issue discipline) are quality-critical: they run on the
+ * user's own primary model ('quality' tier). Mechanical helpers (keyword picking) keep
+ * the cheap 'utility' tier. Every resolved model is recorded on the active generation run.
+ */
+async function resolveSideTaskRoute(
+  source: ContentSource,
+  stage: string = 'side-task',
+  tier: 'quality' | 'utility' = 'quality',
+): Promise<SideTaskRoute | null> {
   const { loadConfig } = await import('./configManager.js');
   const { resolveSelectedEngineRoute } = await import('./main/ipc/paraphraseAnalysisHandlers.js');
   const config = ((await loadConfig().catch(() => null)) as Record<string, unknown> | null) ?? {};
-  return resolveSelectedEngineRoute(String(source.generator || '').trim(), config);
+  const generator = String(source.generator || '').trim();
+  const route = resolveSelectedEngineRoute(generator, config, { tier });
+  if (route) {
+    withActiveRun((run) => run.recordModel(`${stage}(${tier})`, generator, route.engine));
+    console.log(`[SideTask] ${stage}: engine=${route.engine} tier=${tier} (selected=${generator})`);
+  }
+  return route;
 }
 
 async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void> {
@@ -5852,7 +6014,7 @@ async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void>
        * 더 큰 것이 있으면 그것을 메인으로, 기존은 서브로 내린다. 검색량을 못 구하면 바꾸지 않는다.
        */
       // [2026-09-03 사장님] 키워드 선정도 고른 엔진으로 — OpenAI 키를 박아 쓰지 않는다.
-      const shoppingRoute = await resolveSideTaskRoute(source);
+      const shoppingRoute = await resolveSideTaskRoute(source, 'shopping-keyword', 'utility');
       if (!shoppingRoute) return;
       const { resolveShoppingSearchKeyword, createNaverVolumeLookup } =
         await import('./content/urlModeKeywordResolve.js');
@@ -5873,7 +6035,7 @@ async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void>
     }
     if (existing) return;
 
-    const route = await resolveSideTaskRoute(source);
+    const route = await resolveSideTaskRoute(source, 'url-keyword', 'utility');
     if (!route) {
       console.log(`[UrlKeyword] 선택 엔진(${String((source as any).generator || '미지정')})의 키/구독 없음 — 키워드 미선정으로 진행`);
       return;
@@ -5897,6 +6059,8 @@ async function ensureUrlModePrimaryKeyword(source: ContentSource): Promise<void>
     }
 
     metadata.keywords = [pick.keyword, ...pick.candidates.filter((c) => c !== pick.keyword)];
+    // [2026-09-22 audit item 22] candidates are LLM-inferred (volume-checked only for the main pick).
+    (metadata as any).keywordOrigin = (metadata as any).keywordOrigin || 'url-mode-llm';
     console.log(
       `[UrlKeyword] 핵심 키워드 확정: "${pick.keyword}" (${pick.decidedBy}, ${pick.reason}) `
       + `· 후보 ${pick.candidates.join(' / ')}`,
@@ -6287,7 +6451,7 @@ async function generateStructuredContentInternal(
     && ['seo', 'homefeed', 'custom', 'mate', 'business'].includes(blueprintMode)
     && String((source as any).rawText || '').length >= 200;
   if (blueprintEligible) {
-    blueprintRoute = await resolveSideTaskRoute(source);
+    blueprintRoute = await resolveSideTaskRoute(source, 'blueprint');
     const route = blueprintRoute;
     if (!route) {
       console.log(`[Blueprint] 선택 엔진(${String(source.generator || '미지정')})의 라우트 없음 — 설계도 생략`);
@@ -6578,13 +6742,22 @@ async function generateStructuredContentInternal(
       // primary schema 호출의 grounding을 끈다. 별도 upstream 리서치/근거 수집은 유지한다.
       const rawTextLen = (source.rawText || '').length;
       const isUrlMode = !!source.url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news';
-      const smartGrounding = true;
-      const primaryDraftGrounding =
-        resolveContentQualityV3GeminiGroundingOverride(promptVariant) ?? smartGrounding;
+      /*
+       * [2026-09-22 audit P0] Honest grounding state. The body call in callGemini has
+       * `useGrounding = false` hard-coded since 2026-08-04 (cost policy: "자동으로 하는 구간은
+       * 전부 다 끊어줘"). The old log said "Grounding: ON (강제)" while the request went out
+       * without tools. UI/log/meta now say what is actually sent: OFF for body generation.
+       * Grounded research (Perplexity / Gemini googleSearch) is an explicit opt-in in
+       * sourceAssembler and is reported separately via source.metadata.researchGroundingUsed.
+       */
+      const primaryDraftGrounding = false;
+      const groundingRequested = (source as any).metadata?.researchGroundingRequested === true;
+      const groundingActuallyUsed = (source as any).metadata?.researchGroundingUsed === true;
+      withActiveRun((run) => run.updateMeta({ groundingRequested, groundingActuallyUsed }));
       if (isV3Prompt) {
         console.log('[ContentGenerator] 🧠 V3 schema generation: Grounding OFF (fixed upstream evidence; reproducible cost/quality gate)');
       } else {
-        console.log(`[ContentGenerator] 🧠 Grounding: ON (강제) | mode=${isUrlMode ? 'URL' : 'KEYWORD'}, rawText=${rawTextLen}자`);
+        console.log(`[ContentGenerator] 🧠 Grounding: OFF (본문 호출은 검색 도구 없이 나간다 — 2026-08-04 비용 정책) | research grounding requested=${groundingRequested} used=${groundingActuallyUsed} | mode=${isUrlMode ? 'URL' : 'KEYWORD'}, rawText=${rawTextLen}자`);
       }
 
       // ✅ [Phase 7.4-y] 모드별 호출 온도는 contentTemperaturePolicy 단일 소스에서 관리.
@@ -6595,6 +6768,18 @@ async function generateStructuredContentInternal(
       // ✅ 3. AI 엔진 호출 (프롬프트/온도 반영)
       let rawResponse = '';
       console.log(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: ${provider} API 호출 중...`);
+      // [2026-09-22 audit P0-6] C-final-prompt: what is actually sent (secrets redacted by the store).
+      withActiveRun((run) => {
+        const split = splitPromptByMarker(systemPrompt);
+        const sourceChars = String(source.rawText || '').length;
+        run.writeFinalPrompt({ system: split.system, user: split.user, full: systemPrompt });
+        run.updateMeta({
+          inputChars: systemPrompt.length,
+          instructionChars: Math.max(0, systemPrompt.length - sourceChars),
+          sourceChars,
+          extra: { ...(run.meta.extra || {}), attempt: attempt + 1, temperature },
+        });
+      });
       try {
         const apiStart = Date.now();
 
@@ -6742,6 +6927,22 @@ async function generateStructuredContentInternal(
       try {
         parsed = safeParseJson<StructuredContent>(raw);
         console.log(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: JSON 파싱 성공`);
+        // [2026-09-22 audit P0 item 19] Required-field contract: a title-only or heading-less object is
+        //   PARTIAL_RESPONSE, not success. It is treated like a parse failure (retry budget applies).
+        if (!isV3Prompt) {
+          const completeness = assertResponseComplete(parsed, STRUCTURED_CONTENT_SCHEMA);
+          withActiveRun((run) => run.updateMeta({ jsonComplete: completeness.complete }));
+          if (!completeness.complete) {
+            const fatal = completeness.missing.some((m) => m === 'selectedTitle' || m === 'introduction|bodyPlain');
+            const detail = describeCompleteness(parsed, STRUCTURED_CONTENT_SCHEMA);
+            if (fatal) {
+              throw new PartialResponseError(`PARTIAL_RESPONSE: ${detail}`, 'body', parsed as unknown as Record<string, unknown>);
+            }
+            // Non-fatal gaps (e.g. a heading without content) are recorded; the integrity gate turns
+            // jsonComplete=false into MANUAL_REVIEW instead of silently auto-publishing.
+            console.warn(`[ContentGenerator] ⚠️ JSON 불완전(비치명): ${detail}`);
+          }
+        }
 
         // ✅ [2026-04-11 FIX] 제목 개행 제거 — AI가 selectedTitle에 줄바꿈을 넣으면
         // 제목이 잘리거나 본문 첫 줄이 제목에 포함되는 버그 발생
@@ -6993,6 +7194,7 @@ async function generateStructuredContentInternal(
 
       // ⚠️ CRITICAL: 중복 소제목 제거 (AI가 같은 소제목을 반복하는 경우)
       if (parsed.bodyPlain && parsed.headings && parsed.headings.length > 0) {
+        const __ppDedupe = contentTextOf(parsed);
         if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'remove-duplicate-headings')) {
           parsed.bodyPlain = removeDuplicateHeadings(parsed.bodyPlain, parsed.headings);
         }
@@ -7001,6 +7203,7 @@ async function generateStructuredContentInternal(
         if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'remove-repeated-full-content')) {
           parsed.bodyPlain = removeRepeatedFullContent(parsed.bodyPlain, parsed.headings);
         }
+        recordPostProcessStep('removeDuplicateHeadings+RepeatedContent', __ppDedupe, contentTextOf(parsed));
       }
 
       // ⚠️ 소제목 순서 및 중복 검증 (첫 시도 실패 → 1회 재시도 → 통과)
@@ -7085,9 +7288,11 @@ async function generateStructuredContentInternal(
       // [2026-09-01] 바꾸기 직전 제목을 찍어 둔다. 그래야 무엇이 바뀌었는지 알고
       //   본문에 그것만 반영할 수 있다. 이 스냅샷이 없으면 동기화는 아무것도 하지 않는다.
       const headingTitlesBeforeOptimize = snapshotHeadingTitles(parsed as any);
+      const __ppHeadings = contentTextOf(parsed);
       if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'optimize-headings-for-mode')) {
         optimizeHeadingsForMode(parsed, source);
       }
+      recordPostProcessStep('headingPrefixStrip+optimizeHeadingsForMode', __ppHeadings, contentTextOf(parsed));
 
       // ✅ [소제목 본문 동기화] - 보정된 소제목을 본문에도 반영한다.
       //   발행은 headings[] 가 아니라 bodyPlain 을 타이핑하므로, 여기서 반영하지 않으면
@@ -7097,9 +7302,21 @@ async function generateStructuredContentInternal(
 
       // ✅ [v2.10.297] HTML 태그 박멸 — 모든 모드에 무조건 적용 (모드별 검증 함수 우회 시에도 보장)
       sanitizeContentHtmlTags(parsed);
-      // ✅ [v1.4.52] 출처 날조 sanitizer — 모든 모드에 무조건 적용 (SEO/홈판/비즈니스/리뷰 등)
-      // 모드별 검증 함수 우회 시에도 sanitization 보장
-      sanitizeContentFakeSources(parsed);
+      // [2026-09-22 audit P0-4] Evidence-aware attribution: named sources that exist in the
+      //   material are KEPT ("보건복지부 발표에 따르면"); only sources absent from the evidence
+      //   lose the attribution phrase, and every decision is recorded on the run.
+      {
+        const __ppAttr = contentTextOf(parsed);
+        const evidence = buildAttributionEvidence(source);
+        sanitizeContentFakeSources(parsed, { evidence });
+        const report = (parsed as any)._attributionReport;
+        recordPostProcessStep('sanitizeContentFakeSources(evidence-aware)', __ppAttr, contentTextOf(parsed), {
+          reason: report ? `supported=${report.supported} unsupported=${(report.unsupported || []).length} stripped=${(report.stripped || []).length}` : undefined,
+        });
+        if (report && Array.isArray(report.unsupported) && report.unsupported.length > 0) {
+          withActiveRun((run) => run.updateMeta({ extra: { ...(run.meta.extra || {}), unsupportedAttributions: report.unsupported } }));
+        }
+      }
 
       // ✅ 모드별 전용 검증 (제목/도입부/톤 등 추가 체크)
       validateSeoContent(parsed, source);      // SEO 모드: 키워드/숫자/트리거 검증
@@ -7511,8 +7728,16 @@ async function generateStructuredContentInternal(
       // ✅ [2026-05-31 S2] attempt===0 한정 → attempt < QUALITY_ATTEMPT_LIMIT 로 확대.
       //   2회 이상 시도에서도 일반론 도망이 감지되면 재생성(여전히 MAX_ATTEMPTS로 bounded).
       //   기존엔 첫 시도만 잡아 재시도 중 다시 일반론이 나와도 통과되던 갭(분석 팀3) 차단.
-      if (allowPaidPostGenerationRepair && platitudeReportRef && platitudeReportRef.exceedsThreshold && attempt < QUALITY_ATTEMPT_LIMIT) {
-        console.warn(`[ContentGenerator] 🔄 Faithfulness 실패 — 재시도(attempt ${attempt}): ${platitudeReportRef.reason}`);
+      // [2026-09-22 audit P0 item 15] A repeated ending or a few filler phrases are NOT a reason to pay for a
+      //   full regeneration: they are reported per section (sectionHits) as warnings. The only faithfulness
+      //   failure that still regenerates is `overlapTooLow` — the draft ignored the material (ROUGE-L < 0.15).
+      if (platitudeReportRef && platitudeReportRef.exceedsThreshold && !platitudeReportRef.overlapTooLow) {
+        const sectionNote = (platitudeReportRef.sectionHits || []).filter((h) => h.hits > 0).map((h) => `${h.heading}(${h.hits})`).join(', ');
+        console.warn(`[PlatitudeDetector] ℹ️ 섹션 단위 경고만 기록 — 전체 재생성 없음${sectionNote ? `: ${sectionNote}` : ''}`);
+        withActiveRun((run) => run.updateMeta({ extra: { ...(run.meta.extra || {}), platitudeSectionHits: platitudeReportRef.sectionHits } }));
+      }
+      if (allowPaidPostGenerationRepair && platitudeReportRef && platitudeReportRef.overlapTooLow && attempt < QUALITY_ATTEMPT_LIMIT) {
+        console.warn(`[ContentGenerator] 🔄 Faithfulness 실패(자료 무시, overlap ${platitudeReportRef.rougeLOverlap.toFixed(2)}) — 재시도(attempt ${attempt})`);
         lastFailReason = `Faithfulness 실패: ${platitudeReportRef.reason}`;
         const platitudeList = platitudeReportRef.matchedTriggers.slice(0, 5).join(', ');
         const { extractDirectQuotes } = await import('./content/quoteCoverage.js');
@@ -7663,10 +7888,13 @@ async function generateStructuredContentInternal(
         && optimized.bodyPlain
       ) {
         console.log('[ContentGenerator] 과대광고 필터링 적용 중...');
+        const __ppExag = contentTextOf(optimized);
         optimized.bodyPlain = filterExaggeratedContent(optimized.bodyPlain);
+        recordPostProcessStep('filterExaggeratedContent', __ppExag, contentTextOf(optimized));
       }
 
       // 최적화 후에도 이스케이프 문자 정리
+      const __ppMarkers = contentTextOf(optimized);
       if (optimized.bodyPlain) {
         optimized.bodyPlain = cleanEscapeSequences(optimized.bodyPlain);
       }
@@ -7699,6 +7927,8 @@ async function generateStructuredContentInternal(
           ...(typeof h.body === 'string' ? { body: stripCitationTokens(h.body) } : {}),
         }));
       }
+      // [2026-09-22 live 셀토스] 이 단계가 추적되지 않아 "2026년 9월 1일 기준으로" 삭제가 보이지 않았다.
+      recordPostProcessStep('cleanEscape+stripInternalMarkers', __ppMarkers, contentTextOf(optimized));
 
       const compactLength = characterCount(optimized.bodyPlain, minChars);
       const plainLength = visibleCharacterCount(optimized.bodyPlain);
@@ -7810,14 +8040,21 @@ async function generateStructuredContentInternal(
 
         // SEO/Homefeed/Mate는 개인 표현·감탄사·동의어를 새로 삽입하지 않는다.
         // 의미와 근거를 보존하는 cleanup만 적용한다.
-        const humanizeIntensity = resolveHumanizeIntensity((source.contentMode || 'seo') as PromptMode);
+        // [2026-09-22 audit P0 item 14] default 'light' (deterministic, protected spans). 'strong' only when the
+        //   caller/setting asks for it — the random synonym/ending shuffle is gone at every intensity.
+        const humanizeIntensity = resolveHumanizeIntensity(
+          (source.contentMode || 'seo') as PromptMode,
+          ((source as any).humanizerIntensity || process.env.HUMANIZER_INTENSITY) as 'off' | 'light' | 'strong' | undefined,
+        );
 
         // Humanize 적용
         if (
           shouldRunLegacySemanticPostDraftMutation(promptVariant, 'humanize-content')
           && optimized.bodyPlain
         ) {
+          const __ppHuman = contentTextOf(optimized);
           optimized.bodyPlain = humanizeContent(optimized.bodyPlain, humanizeIntensity, false, source.toneStyle);
+          recordPostProcessStep(`humanize:${humanizeIntensity}`, __ppHuman, contentTextOf(optimized));
         }
         if (
           shouldRunLegacySemanticPostDraftMutation(promptVariant, 'humanize-html-content')
@@ -7831,7 +8068,9 @@ async function generateStructuredContentInternal(
         //   [2026-08-28] 호출부를 content/postDraftFactCheck 로 뽑았다 — 분량 미달 분기에서도
         //   같은 검사를 돌려야 하기 때문이다(그 분기가 팩트체크를 통째로 건너뛰고 있었다).
         if (allowLegacyPostDraftLlm) {
+          const __ppFact = contentTextOf(optimized);
           await applyPostDraftFactCheck(optimized as any, source as any, () => loadConfig() as any);
+          recordPostProcessStep('applyPostDraftFactCheck', __ppFact, contentTextOf(optimized));
         }
 
         // ✅ [2026-09-04 사장님 실측 10항] 사건/의혹 글 자동 검수 — 규칙 탐지 + 저비용 LLM 1회 교정.
@@ -7840,11 +8079,13 @@ async function generateStructuredContentInternal(
         //   팩트체크와 달리 promptVariant 게이트 밖에 둔다 — 이건 legacy 후처리가 아니라
         //   변형과 무관하게 항상 받아야 하는 검수다.
         {
+          const __ppIssue = contentTextOf(optimized);
           await applyIssueDisciplineAudit(
             optimized as any,
             source as any,
-            () => resolveSideTaskRoute(source),
+            () => resolveSideTaskRoute(source, 'issue-discipline'),
           );
+          recordPostProcessStep('applyIssueDisciplineAudit', __ppIssue, contentTextOf(optimized));
         }
 
         // quality에 AI 탐지 정보 추가
@@ -7879,12 +8120,14 @@ async function generateStructuredContentInternal(
           || (source as any).skipDictInjection === true;
         if (optimized.bodyPlain) {
           if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'optimize-content-for-naver')) {
+            const __ppOpt = contentTextOf(optimized);
             optimized.bodyPlain = optimizeContentForNaver(
               optimized.bodyPlain,
               source.toneStyle,
               false,
               { skipDictInjection },
             );
+            recordPostProcessStep('optimizeContentForNaver', __ppOpt, contentTextOf(optimized));
           }
 
           // Phase 5: Self-critique 2-pass — LLM이 자기 글을 페르소나 관점에서 점검 + 부분 재작성
@@ -7901,7 +8144,9 @@ async function generateStructuredContentInternal(
             );
             if (critiqued.rewrote) {
               console.log(`[ContentGenerator] ✍️ Self-critique 재작성 적용 (${critiqued.source})`);
+              const __ppCrit = contentTextOf(optimized);
               optimized.bodyPlain = critiqued.body;
+              recordPostProcessStep('selfCritiqueAndRewrite', __ppCrit, contentTextOf(optimized), { modelUsed: 'selected-provider(quality-repair)' });
             } else {
               console.log(`[ContentGenerator] ✍️ Self-critique no-op (${critiqued.source})`);
             }
@@ -8083,7 +8328,7 @@ async function generateStructuredContentInternal(
           && isThroughlineJudgeEnabled()
         ) {
           _throughlineJudgeUsed = true;
-          _throughline = await judgeThroughline(optimized as any, () => resolveSideTaskRoute(source));
+          _throughline = await judgeThroughline(optimized as any, () => resolveSideTaskRoute(source, 'throughline-judge'));
           console.log(describeThroughline(_throughline));
           (optimized as any).__throughline = _throughline;
         }
@@ -8679,7 +8924,7 @@ async function generateStructuredContentInternal(
           await applyIssueDisciplineAudit(
             optimized as any,
             source as any,
-            () => resolveSideTaskRoute(source),
+            () => resolveSideTaskRoute(source, 'issue-discipline'),
           );
         }
 
@@ -8764,25 +9009,78 @@ export async function generateStructuredContent(
   source: ContentSource,
   options: GenerateOptions = {},
 ): Promise<StructuredContent> {
+  /*
+   * [2026-09-22 audit P0-6] One runId per generation. Everything the pipeline does is written
+   * under userData/generation-runs/<runId>/ (A search raw … G published payload, meta.json).
+   * The run is module-active for the duration of this call (text generation is serialized).
+   */
+  const runKeyword = getPrimaryKeywordFromSource(source) || String(source.title || '').trim() || '(키워드 없음)';
+  const runMode = String(source.contentMode || 'seo');
+  const selectedProvider = String(options.provider ?? source.generator ?? 'gemini');
+  const selectedModel = await resolveSelectedModelLabel(selectedProvider);
+  const run = createGenerationRun({
+    keyword: runKeyword,
+    mode: runMode,
+    selectedProvider,
+    selectedModel,
+    searchStatus: String((source.metadata as any)?.searchStatus?.overall || ''),
+    searchFailures: (((source.metadata as any)?.searchStatus?.perSource || []) as Array<{ source: string; status: string; detail?: string }>)
+      .filter((r) => r.status !== 'SEARCH_OK')
+      .map((r) => ({ source: r.source, status: r.status, detail: r.detail })),
+    sourceCounts: { sourceDocuments: Array.isArray((source.metadata as any)?.sourceDocuments) ? (source.metadata as any).sourceDocuments.length : 0 },
+  });
+  setActiveGenerationRun(run);
+  run.writeSearchRaw({
+    keyword: runKeyword,
+    mode: runMode,
+    searchStatus: (source.metadata as any)?.searchStatus ?? null,
+    sourceDocuments: ((source.metadata as any)?.sourceDocuments || []).map((d: any) => ({
+      id: d.id, title: d.title, url: d.url, sourceType: d.sourceType, sourceName: d.sourceName,
+      pubDate: d.pubDate, dateStatus: d.dateStatus, sourceTier: d.sourceTier, bodyChars: String(d.body || '').length,
+    })),
+    rawTextChars: String(source.rawText || '').length,
+    rssUrl: (source.metadata as any)?.rssUrl ?? null,
+    url: source.url ?? null,
+  });
+
   // [2026-08-26 사장님 실측] 발행된 글에 "발행 시각 07:27조회수를 기록한 관련 소식에
   //   따르면" 이 들어갔다. 원본 기사의 발행 시각·조회수가 재료로 흘러들어가 모델이
   //   사실인 양 엮었다. 크롤러 셀렉터를 언론사마다 쫓는 대신 여기서 한 번 더 거른다.
   //   생성기 입구라 URL·키워드 모드, IPC·내부 호출이 모두 이 지점을 지난다.
-  const sourceNoise = stripSourceNoise(source.rawText);
-  /*
-   * [2026-08-27 회귀] 예전에는 줄·조각 카운터가 0보다 클 때만 정리된 텍스트를 썼다.
-   * 꼬리 절단은 두 카운터를 하나도 올리지 않는다 — 네이트 기사에서 3,028자를 잘라내고도
-   * 조건이 거짓이 되어 원문이 그대로 넘어갔고, 광고 CSS·관련기사 목록·반응 수치가
-   * 본문에 실렸다. 카운터가 아니라 "무언가 달라졌는가"를 본다.
-   */
-  if (sourceNoise.changed) {
-    console.log(
-      `[SourceNoise] 기사 껍데기 제거: ${sourceNoise.removedLines}줄 · 조각 ${sourceNoise.removedFragments}개`
-      + (sourceNoise.removedTailChars > 0 ? ` · 꼬리 ${sourceNoise.removedTailChars}자` : '')
-      + ` → ${String(source.rawText || '').length}자에서 ${sourceNoise.text.length}자`,
-    );
-    source = { ...source, rawText: sourceNoise.text };
+  // [2026-09-22 audit P0-1] Cleaning is now per source document (never across documents),
+  //   relevance/freshness are applied, the writer gets labelled sources, and the loss is measured.
+  const rawBefore = String(source.rawText || '');
+  const pipeline = prepareSourceMaterial(source as any, runKeyword);
+  console.log(pipeline.logLine);
+  if (pipeline.rawText !== rawBefore) {
+    source = { ...source, rawText: pipeline.rawText };
+    if (pipeline.documents.length > 0) {
+      source = { ...source, metadata: { ...(source.metadata || {}), sourceDocuments: pipeline.documents } };
+    }
   }
+  const sourceBased = (source.metadata as any)?.realtimeCrawlRequested === true
+    || (source.metadata as any)?.useRealTimeInfo === true
+    || pipeline.metrics.rawSources > 0;
+  run.updateMeta({
+    sourceChars: pipeline.rawText.length,
+    sourceCounts: {
+      ...run.meta.sourceCounts,
+      accepted: pipeline.metrics.acceptedSources,
+      rejected: pipeline.metrics.rejectedSources,
+      unknownDate: pipeline.metrics.unknownDateSources,
+    },
+    sourceRetention: {
+      rawChars: pipeline.metrics.rawChars,
+      cleanChars: pipeline.metrics.cleanChars,
+      removedChars: pipeline.metrics.removedChars,
+      removedRatio: pipeline.metrics.removedRatio,
+      acceptedSources: pipeline.metrics.acceptedSources,
+      rejectedSources: pipeline.metrics.rejectedSources,
+      unknownDateSources: pipeline.metrics.unknownDateSources,
+    },
+    extra: { ...(run.meta.extra || {}), sourceBased, sourcePipelineLevel: pipeline.metrics.level },
+  });
+  run.writeResearchInput(pipeline.rawText);
   // [2026-09-03 자체 실행 비평] 쇼핑 재료 위생 — 옵션 라벨("구성: (그레이)본체+다리")이 리뷰에 붙어 오고, 1인칭 옵트인에서는
   //   리뷰어 신상(인대 파열·복싱·부모님·2년 전 안마의자·강아지)이 한 화자에 붙었다. 프롬프트 금지로는 안 막혀 재료에서 지운다.
   //   productReviews 와 rawText 의 후기 섹션 둘 다(모델은 두 사본을 다 읽는다). 원본 source 는 바꾸지 않는다.
@@ -8799,24 +9097,96 @@ export async function generateStructuredContent(
     source.contentMode,
     options.provider,
   );
-  return runContentPipeline<ContentSource, GenerateOptions, StructuredContent>({
-    requestedMode: activation.requestedMode,
-    contentMode: source.contentMode,
-    v3Allowlist: activation.v3Allowlist,
-    source,
-    options,
-    legacy: (legacySource, legacyOptions) => generateStructuredContentInternal(
-      legacySource,
-      legacyOptions,
-      'legacy',
-    ),
-    v3: (v3Source, v3Options) => generateStructuredContentInternal(
-      v3Source,
-      v3Options,
-      'v3',
-    ),
-    validate: validatePublishableContent,
+  try {
+    const result = await runContentPipeline<ContentSource, GenerateOptions, StructuredContent>({
+      requestedMode: activation.requestedMode,
+      contentMode: source.contentMode,
+      v3Allowlist: activation.v3Allowlist,
+      source,
+      options,
+      legacy: (legacySource, legacyOptions) => generateStructuredContentInternal(
+        legacySource,
+        legacyOptions,
+        'legacy',
+      ),
+      v3: (v3Source, v3Options) => generateStructuredContentInternal(
+        v3Source,
+        v3Options,
+        'v3',
+      ),
+      validate: validatePublishableContent,
+    });
+    return attachGenerationIntegrity(result, run, { sourceBased, selectedProvider, pipeline });
+  } catch (error) {
+    run.finish({ publishDecision: 'GENERATION_FAILED', extra: { ...(run.meta.extra || {}), error: String((error as Error)?.message || error).slice(0, 500) } });
+    throw error;
+  } finally {
+    setActiveGenerationRun(null);
+  }
+}
+
+/** Label of the model the user selected for the provider (for meta / integrity). */
+async function resolveSelectedModelLabel(provider: string): Promise<string> {
+  try {
+    const { loadConfig } = await import('./configManager.js');
+    const config = ((await loadConfig().catch(() => null)) as Record<string, unknown> | null) ?? {};
+    const { resolveQualityTierModel } = await import('./main/ipc/paraphraseAnalysisHandlers.js');
+    if (provider === 'perplexity') return String(config.perplexityModel || 'sonar');
+    if (provider.startsWith('agent-')) return `${provider}(구독)`;
+    return resolveQualityTierModel(provider, config) || String(config.primaryGeminiTextModel || '');
+  } catch {
+    return '';
+  }
+}
+
+/**
+ * [2026-09-22 audit P0 item 28] Attach the pipeline-integrity verdict to the result and close the run.
+ * The publish boundary (BlogExecutor) reads `_generationIntegrity` and sends critical failures to
+ * MANUAL_REVIEW instead of auto-publishing.
+ */
+function attachGenerationIntegrity(
+  result: StructuredContent,
+  run: ReturnType<typeof createGenerationRun>,
+  ctx: { sourceBased: boolean; selectedProvider: string; pipeline: ReturnType<typeof prepareSourceMaterial> },
+): StructuredContent {
+  const finalText = contentTextOf(result);
+  const integrity = evaluatePipelineIntegrity({
+    sourceBased: ctx.sourceBased,
+    searchStatus: run.meta.searchStatus,
+    sourceCount: ctx.pipeline.metrics.acceptedSources,
+    sourceRetentionRatio: ctx.pipeline.metrics.rawChars > 0 ? 1 - ctx.pipeline.metrics.removedRatio : undefined,
+    factPreservationRate: typeof (run.meta.extra as any)?.factPreservationRate === 'number' ? (run.meta.extra as any).factPreservationRate : undefined,
+    selectedProvider: ctx.selectedProvider,
+    actualModelsUsed: run.meta.actualModelsUsed,
+    destructiveScrubApplied: (run.meta.extra as any)?.destructiveScrubApplied === true,
+    jsonComplete: run.meta.jsonComplete !== false,
+    outputTruncated: run.meta.outputTruncated === true,
   });
+  console.log(describeIntegrity(integrity));
+  run.writeFinalBeforePublish(finalText);
+  run.finish({
+    outputChars: finalText.length,
+    publishDecision: integrity.publishDecision,
+    integrity: integrity.flags,
+    extra: { ...(run.meta.extra || {}), integrityReasons: integrity.reasons },
+  });
+  // Assigned in place: downstream V3 publication tickets and identity-based guards key on this object.
+  if (!Object.isExtensible(result)) return result;
+  return Object.assign(result, {
+    _generationRunId: run.runId,
+    _generationIntegrity: {
+      publishDecision: integrity.publishDecision,
+      flags: integrity.flags,
+      criticalFailures: integrity.criticalFailures,
+      warnings: integrity.warnings,
+      reasons: integrity.reasons,
+      sourceCount: ctx.pipeline.metrics.acceptedSources,
+      sourceBased: ctx.sourceBased,
+      actualModelsUsed: run.meta.actualModelsUsed,
+      selectedProvider: ctx.selectedProvider,
+      selectedModel: run.meta.selectedModel,
+    },
+  }) as StructuredContent;
 }
 
 /**

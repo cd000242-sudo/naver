@@ -24,7 +24,8 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
 
     it('Gemini tier token budgets stay bounded while reserving thinking output', () => {
       expect(content).toMatch(
-        /generationConfig:\s*buildGeminiGenerationConfig\(\{\s*activeTemperature,\s*modelName,\s*isPro,\s*schema:\s*options\.schema,\s*useModelDefaultSampling:\s*options\.useModelDefaultSampling,\s*\}\)/,
+        // [2026-09-22] maxOutputTokensOverride is the one-shot truncation retry budget (bounded by GEMINI_MAX_OUTPUT_TOKENS).
+        /generationConfig:\s*buildGeminiGenerationConfig\(\{\s*activeTemperature,\s*modelName,\s*isPro,\s*schema:\s*options\.schema,\s*useModelDefaultSampling:\s*options\.useModelDefaultSampling,\s*maxOutputTokensOverride,\s*\}\)/,
       );
 
       // Provider capacity is higher, but these are deliberate product cost caps.

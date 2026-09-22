@@ -16,7 +16,8 @@ describe('Content Quality V3 production wiring', () => {
   it('keeps the legacy implementation internal and routes the public API through the pure facade', () => {
     expect(generator).toMatch(/async function generateStructuredContentInternal\(/);
     expect(generator).toMatch(/export async function generateStructuredContent\(/);
-    expect(generator).toMatch(/return runContentPipeline(?:<[^>]+>)?\(\{/);
+    // [2026-09-22] generateStructuredContent awaits the pipeline to attach the run integrity verdict in place.
+    expect(generator).toMatch(/const result = await runContentPipeline(?:<[^>]+>)?\(\{/);
     expect(generator).toMatch(/legacy:\s*\(legacySource, legacyOptions\)\s*=>\s*generateStructuredContentInternal\(\s*legacySource,\s*legacyOptions,\s*'legacy'/s);
     expect(generator).toMatch(/v3:\s*\(v3Source, v3Options\)\s*=>\s*generateStructuredContentInternal\(\s*v3Source,\s*v3Options,\s*'v3'/s);
     expect(generator).toMatch(/validate:\s*validatePublishableContent/);
@@ -68,7 +69,8 @@ describe('Content Quality V3 production wiring', () => {
   });
 
   it('never combines the v3 schema with Gemini search tools while preserving legacy grounding', () => {
-    expect(generator).toMatch(/const primaryDraftGrounding =\s*resolveContentQualityV3GeminiGroundingOverride\(promptVariant\)\s*\?\? smartGrounding/);
+    // [2026-09-22 audit] body grounding is honestly OFF (callGemini hard-codes useGrounding=false since 2026-08-04).
+    expect(generator).toMatch(/const primaryDraftGrounding = false;/);
     expect(generator).toMatch(/callGemini\(systemPrompt, temperature, adjustedMinChars, \{\s*useGrounding: primaryDraftGrounding,\s*signal,\s*executionPolicy:/);
     expect(generator).toMatch(/const requestConfig:\s*any\s*=\s*strictRequestEnvelope\s*\?\s*createContentQualityV3GeminiSdkRequest\(strictRequestEnvelope\)/);
     expect(generator).toMatch(/if \(useGrounding\) \{\s*requestConfig\.tools = \[\{ googleSearch: \{\} \}\];\s*\}/);
@@ -125,7 +127,7 @@ describe('Content Quality V3 production wiring', () => {
     // [2026-08-28] 호출부를 content/postDraftFactCheck 로 뽑았고 분량 미달 분기에도 붙였다.
     //   게이트는 그대로 allowLegacyPostDraftLlm 이다 — 호출지마다 확인한다.
     const factCheckCalls = generator.match(
-      /if \(allowLegacyPostDraftLlm\) \{\s*await applyPostDraftFactCheck\(optimized as any, source as any/g,
+      /if \(allowLegacyPostDraftLlm\) \{\s*(?:const __ppFact = contentTextOf\(optimized\);\s*)?await applyPostDraftFactCheck\(optimized as any, source as any/g,
     ) || [];
     expect(factCheckCalls.length).toBeGreaterThanOrEqual(2);
     expect(generator).toMatch(/if \(\s*allowAutomaticProviderRetry\s*&& allowLegacyPostDraftLlm\s*&& isSelfCritiqueEnabled/);
@@ -146,7 +148,7 @@ describe('Content Quality V3 production wiring', () => {
     expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'apply-heading-keyword-patch'\)[\s\S]{0,2000}applyHeadingKeywordPatch\(parsed\.headings as any, primaryKw, \{\s*maxPatches: resolveHeadingKeywordPatchMax\(mode\),\s*\}\)/);
     expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'enforce-sub-keyword-coverage'\)[\s\S]{0,1200}enforceSubKeywordCoverage\(parsed, _subKws, \{ maxKeywords: 3 \}\)/);
     expect(generator).toMatch(/const optimized = shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'optimize-for-viral'\)\s*\? optimizeForViral\(parsed, source\)\s*:\s*parsed;/);
-    expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'filter-exaggerated-content'\)[\s\S]{0,180}filterExaggeratedContent\(optimized\.bodyPlain\)/);
+    expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'filter-exaggerated-content'\)[\s\S]{0,320}filterExaggeratedContent\(optimized\.bodyPlain\)/);
     expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'humanize-content'\)[\s\S]{0,180}humanizeContent\(optimized\.bodyPlain, humanizeIntensity, false, source\.toneStyle\)/);
     expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'humanize-html-content'\)[\s\S]{0,180}humanizeHtmlContent\(optimized\.bodyHtml, humanizeIntensity\)/);
     expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'optimize-content-for-naver'\)[\s\S]{0,260}optimizeContentForNaver\(\s*optimized\.bodyPlain,\s*source\.toneStyle,\s*false,\s*\{ skipDictInjection \},\s*\)/);
@@ -257,7 +259,7 @@ describe('Content Quality V3 production wiring', () => {
   it('retains nonsemantic cleanup, validators, metrics, and hard retry gates for v3', () => {
     expect(generator).toMatch(/validateStructuredContent\(parsed, source\)/);
     expect(generator).toMatch(/sanitizeContentHtmlTags\(parsed\)/);
-    expect(generator).toMatch(/sanitizeContentFakeSources\(parsed\)/);
+    expect(generator).toMatch(/sanitizeContentFakeSources\(parsed, \{ evidence \}\)/);
     expect(generator).toMatch(/optimized\.bodyPlain = cleanEscapeSequences\(optimized\.bodyPlain\)/);
     expect(generator).toMatch(/optimized\.bodyPlain = stripCitationTokens\(optimized\.bodyPlain\)/);
     expect(generator).toMatch(/const riskAnalysis = analyzeAiDetectionRisk\(optimized\.bodyPlain \|\| ''\)/);

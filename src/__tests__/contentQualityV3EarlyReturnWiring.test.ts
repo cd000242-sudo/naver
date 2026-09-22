@@ -21,7 +21,7 @@ describe('Content Quality V3 early-return wiring', () => {
       'cleanEscapeSequences(parsed.bodyPlain)',
       'validateHeadingOrder(parsed.headings',
       'sanitizeContentHtmlTags(parsed)',
-      'sanitizeContentFakeSources(parsed)',
+      'sanitizeContentFakeSources(parsed, { evidence })',
       'validateSeoContent(parsed, source)',
       'validateHomefeedContent(parsed, source)',
       'validateBusinessContent(parsed, source)',

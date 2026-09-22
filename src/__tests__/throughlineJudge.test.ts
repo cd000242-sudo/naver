@@ -186,7 +186,8 @@ describe('contentGenerator 배선 — 소비자는 기존 재생성/patch 뿐', 
   const src = read('contentGenerator.ts');
   it('생성당 1회 가드 + 선택 엔진 라우트 + __throughline 스탬프', () => {
     expect(src).toContain('let _throughlineJudgeUsed = false;');
-    expect(src).toContain('judgeThroughline(optimized as any, () => resolveSideTaskRoute(source))');
+    // [2026-09-22] the judge runs on the quality tier (user's own model) and is labelled for the run meta.
+    expect(src).toContain("judgeThroughline(optimized as any, () => resolveSideTaskRoute(source, 'throughline-judge'))");
     expect(src).toContain('(optimized as any).__throughline = _throughline;');
   });
   it('costSaver 가 selfCritique 를 막으면 판정도 돌지 않는다(판정만 하고 못 고치는 호출 금지)', () => {

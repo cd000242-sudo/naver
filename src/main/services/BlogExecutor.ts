@@ -54,6 +54,27 @@ import {
     resolveContentQualityV3ProductionPublishSafetyMode,
     stripContentQualityV3PublishMetadata,
 } from '../../contentQualityV3/productionPublishSafetyMode.js';
+import { openGenerationRun } from '../../quality/generationRunResume.js';
+
+/**
+ * [2026-09-22 audit item 28] Pipeline-integrity hard gate at the publish boundary.
+ * The generator attaches `_generationIntegrity` (source pipeline, search status, retention,
+ * silent model override, destructive scrub, JSON completeness, output truncation). A critical
+ * failure means the article is not auto-published: it is returned to the user as MANUAL_REVIEW
+ * with the reasons, text and images intact. Semi-auto (user-curated) and drafts are exempt.
+ */
+function resolveIntegrityManualReview(payload: PostCyclePayload): { blocked: boolean; reasons: string[]; runId?: string } {
+    const structured = (payload?.structuredContent || {}) as Record<string, any>;
+    const integrity = structured._generationIntegrity as {
+        publishDecision?: string; criticalFailures?: string[]; reasons?: string[];
+    } | undefined;
+    const runId = typeof structured._generationRunId === 'string' ? structured._generationRunId : undefined;
+    if (!integrity) return { blocked: false, reasons: [], runId };
+    const exempt = (payload as any)?._semiAutoMode === true || String(payload?.publishMode || 'publish') === 'draft';
+    if (exempt) return { blocked: false, reasons: integrity.reasons || [], runId };
+    const blocked = integrity.publishDecision === 'MANUAL_REVIEW' && (integrity.criticalFailures || []).length > 0;
+    return { blocked, reasons: [...(integrity.criticalFailures || []), ...(integrity.reasons || [])], runId };
+}
 
 // ✅ [Phase 4B] ExecutionDependencies는 types/automation.ts에서 정의 — 재export
 export type ExecutionDependencies = IExecutionDependencies;
@@ -627,9 +648,28 @@ export async function executePublishing(
                 requiresVisibleSnapshot: true,
             });
         }
+        // [2026-09-22 audit P0-6] G-published-payload: exactly what goes to the editor (secrets redacted).
+        {
+            const run = openGenerationRun(((payload.structuredContent || {}) as Record<string, any>)._generationRunId);
+            run?.writePublishedPayload({
+                title: runOptions.title,
+                content: runOptions.content,
+                headings: (runOptions.structuredContent as any)?.headings,
+                hashtags: runOptions.hashtags,
+                publishMode: runOptions.publishMode,
+                categoryName: runOptions.categoryName,
+                imageCount: Array.isArray(runOptions.images) ? runOptions.images.length : 0,
+                ctas: runOptions.ctas,
+            });
+            run?.updateMeta({ publishDecision: `PUBLISHING(${runOptions.publishMode || 'publish'})` });
+        }
         const result = await automation.run(runOptions);
 
         assertImmediatePublishResultUrl(result, payload);
+        {
+            const run = openGenerationRun(((payload.structuredContent || {}) as Record<string, any>)._generationRunId);
+            run?.finish({ publishDecision: result.success ? 'PUBLISHED' : 'PUBLISH_FAILED', extra: { ...(run.meta.extra || {}), publishedUrl: result.url || null } });
+        }
 
         if (result.success) {
             sendLog(`✅ 발행 완료: ${result.url || '(URL 없음)'}`);
@@ -847,6 +887,29 @@ export async function runFullPostCycle(
             sendStatus({ success: false, message, failureCode: failure.code });
             AutomationService.stopRunning();
             return { success: false, message, failureCode: failure.code };
+        }
+        // [2026-09-22 audit P0 item 11/28] SOURCE_MATERIALS_MISSING and the pipeline-integrity gate.
+        //   Both keep the manuscript and images; the user reviews instead of the app auto-publishing.
+        const integrityGate = resolveIntegrityManualReview(effectivePayload);
+        const sourceMaterialsMissing = preparedPolicy.manualReviewReasons.includes('SOURCE_MATERIALS_MISSING')
+            && (effectivePayload as any)?._semiAutoMode !== true
+            && String(effectivePayload.publishMode || 'publish') !== 'draft';
+        if (integrityGate.blocked || sourceMaterialsMissing) {
+            const reasons = [
+                ...(sourceMaterialsMissing ? ['SOURCE_MATERIALS_MISSING'] : []),
+                ...integrityGate.reasons,
+            ];
+            const message = `MANUAL_REVIEW: 자동 발행 보류 — ${reasons.join(' | ')}. 원고와 이미지는 그대로 유지됩니다.`;
+            sendLog(`🛑 파이프라인 무결성 게이트: ${reasons.join(' | ')}`);
+            const run = openGenerationRun(integrityGate.runId);
+            run?.finish({ publishDecision: 'MANUAL_REVIEW', extra: { ...(run.meta.extra || {}), publishGateReasons: reasons } });
+            AutomationService.stopRunning();
+            return {
+                success: false,
+                message,
+                manualReviewRequired: true,
+                manualReviewReasons: reasons,
+            };
         }
         if (preparedPolicy.policyResult.manual_review?.approved) {
             sendLog('✅ 최근 글 비교 수동 검수 승인 확인');

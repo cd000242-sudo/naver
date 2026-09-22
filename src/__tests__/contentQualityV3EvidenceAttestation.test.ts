@@ -246,7 +246,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   legacy-baseline-pin.mjs dry-run 으로 110개 중 1개만 변경됨을 확인
         // [2026-09-17 2차] 홈판 제목 폭 기준 28~42 → 하한 33 · 상한 조건부로 재계산.
         //   (base.prompt · title/homefeed 프롬프트 숫자가 함께 바뀜었다)
-        '308fc2790d26e197f6de0c354dc6b9dd42c230ebd1cd42e0c3be53341223a2f5',
+        // [2026-09-22 audit P0 item 16] 프롬프트 다이어트 — "숫자 없는 문장이 낫다" 4곳 제거 · HW 개수 의무 해제 ·
+        //   평가 우선순위(팩트>의도>구체성>밀도>최신성>구조>문체) 명시로 재계산
+        '5f1241f1c05b303b45b63bc0a1fffc53b9d75730629b9de3b10c26aebbb7f342',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

@@ -13,6 +13,37 @@
 import JSON5 from 'json5';
 
 /**
+ * Thrown when the AI response could not be parsed into a complete JSON
+ * document. Replaces the old "8th fallback" that used to silently return a
+ * single-field object (e.g. `{"selectedTitle": "..."}`) as if it were a
+ * full successful parse — that let body-less content slip downstream
+ * disguised as success. Callers should catch this and retry/handle
+ * explicitly instead of trusting a partial document.
+ */
+export class PartialResponseError extends Error {
+  readonly code = 'PARTIAL_RESPONSE' as const;
+  readonly stage: string;
+  readonly recovered?: Record<string, unknown>;
+
+  constructor(message: string, stage: string, recovered?: Record<string, unknown>) {
+    super(message);
+    this.name = 'PartialResponseError';
+    this.stage = stage;
+    this.recovered = recovered;
+  }
+}
+
+/**
+ * True when `obj` came from the 7th-stage regex-based reconstruction —
+ * a best-effort rebuild that may be missing fields the caller expected.
+ * Marked via non-enumerable properties so JSON.stringify / spread callers
+ * don't see it as ordinary data.
+ */
+export function isPartialRecovery(obj: unknown): boolean {
+  return !!obj && typeof obj === 'object' && (obj as Record<string, unknown>).__partial === true;
+}
+
+/**
  * AI 응답에서 JSON만 정확하게 추출
  * - 마크다운 코드 블록 제거
  * - 앞뒤 설명 텍스트 제거
@@ -34,16 +65,15 @@ export function cleanJsonOutput(text: string): string {
   cleaned = cleaned.replace(/^(?:Here'?s?|응답|결과|JSON)(?:\s+is|\s+입니다)?:?\s*\n?/i, '');
   cleaned = cleaned.trim();
 
-  // 3. JSON 객체만 정확하게 추출 (가장 큰 JSON 객체)
-  // { ... } 패턴을 찾되, 중첩 처리
-  const firstBrace = cleaned.indexOf('{');
-  if (firstBrace !== -1) {
-    let braceCount = 0;
+  // 3. JSON 리터럴만 정확하게 추출
+  // 최상위가 배열([...])이면 첫 객체로 뭉개지 않고 배열 전체를 균형있게 추출한다.
+  if (cleaned.startsWith('[')) {
+    let bracketCount = 0;
     let inString = false;
     let escapeNext = false;
     let endPos = -1;
 
-    for (let i = firstBrace; i < cleaned.length; i++) {
+    for (let i = 0; i < cleaned.length; i++) {
       const char = cleaned[i];
 
       if (escapeNext) {
@@ -62,11 +92,11 @@ export function cleanJsonOutput(text: string): string {
       }
 
       if (!inString) {
-        if (char === '{') {
-          braceCount++;
-        } else if (char === '}') {
-          braceCount--;
-          if (braceCount === 0) {
+        if (char === '[') {
+          bracketCount++;
+        } else if (char === ']') {
+          bracketCount--;
+          if (bracketCount === 0) {
             endPos = i;
             break;
           }
@@ -75,7 +105,51 @@ export function cleanJsonOutput(text: string): string {
     }
 
     if (endPos !== -1) {
-      cleaned = cleaned.substring(firstBrace, endPos + 1);
+      cleaned = cleaned.substring(0, endPos + 1);
+    }
+  } else {
+    // { ... } 패턴을 찾되, 중첩 처리 (가장 큰 JSON 객체)
+    const firstBrace = cleaned.indexOf('{');
+    if (firstBrace !== -1) {
+      let braceCount = 0;
+      let inString = false;
+      let escapeNext = false;
+      let endPos = -1;
+
+      for (let i = firstBrace; i < cleaned.length; i++) {
+        const char = cleaned[i];
+
+        if (escapeNext) {
+          escapeNext = false;
+          continue;
+        }
+
+        if (char === '\\') {
+          escapeNext = true;
+          continue;
+        }
+
+        if (char === '"') {
+          inString = !inString;
+          continue;
+        }
+
+        if (!inString) {
+          if (char === '{') {
+            braceCount++;
+          } else if (char === '}') {
+            braceCount--;
+            if (braceCount === 0) {
+              endPos = i;
+              break;
+            }
+          }
+        }
+      }
+
+      if (endPos !== -1) {
+        cleaned = cleaned.substring(firstBrace, endPos + 1);
+      }
     }
   }
 
@@ -136,20 +210,19 @@ function smartCommaRecovery(jsonString: string): string {
   return fixed;
 }
 
-export function tryFixJson(jsonString: string): string {
-  let fixed = jsonString;
-
-  // ✅ 먼저 스마트 쉼표 복구 적용
-  fixed = smartCommaRecovery(fixed);
-
-  // 0. 가장 먼저: 문자열 값 안의 따옴표 이스케이프
-  // "key": "value"text" 같은 패턴을 "key": "value\"text"로 수정
+/**
+ * [2026-09-22 live 제주] 문자열 값 안의 맨 따옴표를 이스케이프한다 — 대표는 "제주의 술은…"라며 "판로가…"고.
+ * 닫는 따옴표 뒤에 , } ] : 이 아닌 글자가 오면 문자열이 아직 안 끝난 것이므로 \" 로 바꾸고
+ * 문자열 안에 그대로 머문다. 예전 구현은 여기서 inString 을 닫아 이후 따옴표 홀짝이 뒤집혔고,
+ * 그 뒤의 공격적 쉼표 삽입이 본문을 망가뜨려 7단 전부 실패했다. 정상 JSON 은 그대로 통과한다.
+ */
+export function escapeStrayQuotesInStrings(jsonString: string): string {
   let inString = false;
   let escapeNext = false;
   let result = '';
 
-  for (let i = 0; i < fixed.length; i++) {
-    const char = fixed[i];
+  for (let i = 0; i < jsonString.length; i++) {
+    const char = jsonString[i];
 
     if (escapeNext) {
       result += char;
@@ -163,17 +236,14 @@ export function tryFixJson(jsonString: string): string {
       continue;
     }
 
-    if (char === '"' && !escapeNext) {
+    if (char === '"') {
       if (inString) {
-        // 문자열 닫기 - 다음 문자가 , 또는 } 또는 ] 또는 : 가 아니면 이스케이프 필요
-        const nextNonSpace = fixed.substring(i + 1).match(/[^\s]/)?.[0];
+        const nextNonSpace = jsonString.substring(i + 1).match(/[^\s]/)?.[0];
         if (nextNonSpace && !/[,\}\]\:]/.test(nextNonSpace)) {
-          // 문자열이 제대로 닫히지 않았음 - 이전 따옴표를 이스케이프
-          result = result.replace(/"$/, '\\"');
-          result += char;
-        } else {
-          result += char;
+          result += '\\"';
+          continue;
         }
+        result += char;
         inString = false;
       } else {
         inString = true;
@@ -183,7 +253,17 @@ export function tryFixJson(jsonString: string): string {
       result += char;
     }
   }
-  fixed = result;
+  return result;
+}
+
+export function tryFixJson(jsonString: string): string {
+  let fixed = jsonString;
+
+  // ✅ 먼저 스마트 쉼표 복구 적용
+  fixed = smartCommaRecovery(fixed);
+
+  // 0. 문자열 값 안의 따옴표 이스케이프
+  fixed = escapeStrayQuotesInStrings(fixed);
 
   // 1. 쉼표 누락 수정 (매우 공격적으로 - 모든 패턴!)
   // 속성 값 다음에 쉼표가 없고 다른 속성이 오는 경우를 모두 찾아서 수정
@@ -361,6 +441,19 @@ export function safeParseJson<T>(text: string): T {
   } catch (firstError) {
     console.warn('[JSON 파싱] JSON5 1차 시도 실패:', (firstError as Error).message);
 
+    // [2026-09-22] 1.5차: 맨 따옴표만 이스케이프하고 다시 시도. 공격적 쉼표 복구(2차~)는 압축 JSON 의
+    // ":" 경계마다 쉼표를 박아 본문을 망가뜨리므로, 따옴표 문제만 있는 응답은 여기서 끝내야 한다.
+    try {
+      const quoteFixed = escapeStrayQuotesInStrings(cleaned);
+      if (quoteFixed !== cleaned) {
+        const parsed = JSON5.parse(quoteFixed) as T;
+        console.warn('[JSON 파싱] ✅ 1.5차 성공: 문자열 안 맨 따옴표 이스케이프');
+        return parsed;
+      }
+    } catch (quoteError) {
+      console.warn('[JSON 파싱] 1.5차 시도 실패:', (quoteError as Error).message);
+    }
+
     // 두 번째 시도: 수정 후 JSON5 파싱
     try {
       const fixed = tryFixJson(cleaned);
@@ -453,81 +546,75 @@ export function safeParseJson<T>(text: string): T {
 
                   reconstructed += '}';
 
-                  return JSON.parse(reconstructed) as T;
+                  // 7차 재구성은 "최선을 다한 복구"일 뿐 완전한 응답이 아닐 수 있다.
+                  // 비열거형 마커로 표시해 호출부가 isPartialRecovery()로 구분하게 한다.
+                  const parsed = JSON.parse(reconstructed) as Record<string, unknown>;
+                  Object.defineProperty(parsed, '__partial', { value: true, enumerable: false });
+                  Object.defineProperty(parsed, '__recoveryStage', { value: 7, enumerable: false });
+                  return parsed as T;
                 }
 
                 throw sixthError;
               } catch (seventhError) {
-                // 여덟 번째 시도: 부분 JSON 추출 (최소한 일부라도 파싱)
-                try {
-                  console.warn('[JSON 파싱] 8차 시도: 부분 JSON 추출');
+                // ✅ [removed] 예전 8차 시도는 selectedTitle 하나 또는 첫 key-value 쌍만
+                // 뽑아서 "성공한 파싱"인 것처럼 반환했다 — 본문 없는 콘텐츠가 그대로
+                // 하류로 흘러가는 원인이었다. 이제는 복구 가능한 조각을 PartialResponseError
+                // 에 실어 던지고, 호출부가 명시적으로 재시도/처리하도록 한다.
+                const titlePriorityMatch = cleaned.match(/"selectedTitle"\s*:\s*"((?:\\.|[^"\\])*)"/);
+                const partialMatch = cleaned.match(/\{\s*"([^"]+)"\s*:\s*"((?:\\.|[^"\\])*)"/s);
 
-                  // ✅ [2026-04-11 FIX] selectedTitle 우선 추출 — 개행 안전 regex
-                  // 기존 [^"]*는 개행 포함 시 본문까지 캡처하는 버그 있었음
-                  const titlePriorityMatch = cleaned.match(/"selectedTitle"\s*:\s*"((?:\\.|[^"\\])*)"/);
-                  if (titlePriorityMatch) {
-                    // 개행 제거 후 복구
-                    const cleanTitle = titlePriorityMatch[1].replace(/[\r\n]+/g, ' ').trim();
-                    const titleJson = `{"selectedTitle": "${cleanTitle}"}`;
-                    console.warn(`[JSON 파싱] 부분 복구 (제목 우선): ${titleJson}`);
-                    return JSON.parse(titleJson) as T;
-                  }
-
-                  // 첫 번째 완전한 키-값 쌍이라도 추출
-                  const partialMatch = cleaned.match(/\{\s*"([^"]+)"\s*:\s*"((?:\\.|[^"\\])*)"/s);
-                  if (partialMatch) {
-                    const partialJson = `{"${partialMatch[1]}": "${partialMatch[2]}"}`;
-                    console.warn(`[JSON 파싱] 부분 복구: ${partialJson}`);
-                    return JSON.parse(partialJson) as T;
-                  }
-
-                  throw seventhError;
-                } catch (eighthError) {
-                  // 모든 시도 실패 - 상세한 오류 정보 제공
-                  const errorMessage = (eighthError as Error).message;
-                  const preview = cleaned.substring(0, Math.min(500, cleaned.length));
-
-                  // 개발 모드에서 디버그 파일 저장
-                  if (process.env.NODE_ENV === 'development') {
-                    try {
-                      const fs = require('fs');
-                      const debugPath = `./debug-json-${Date.now()}.txt`;
-                      fs.writeFileSync(debugPath, cleaned, 'utf-8');
-                      console.error(`[디버그] 파싱 실패한 JSON을 저장했습니다: ${debugPath}`);
-                    } catch (fsError) {
-                      // 파일 저장 실패는 무시
-                    }
-                  }
-
-                  // 파싱 실패 통계 수집 (프로덕션에서도)
-                  console.error('[JSON 파싱 실패 통계]', {
-                    길이: cleaned.length,
-                    시도횟수: 8,
-                    오류: errorMessage.substring(0, 100),
-                    미리보기: preview.substring(0, 100)
-                  });
-
-                  throw new Error(
-                    `JSON 파싱 실패 (8회 시도 - 최대한 시도함)\n\n` +
-                    `최종 오류: ${errorMessage}\n\n` +
-                    `JSON 미리보기 (처음 500자):\n${preview}${cleaned.length > 500 ? '...' : ''}\n\n` +
-                    `전체 길이: ${cleaned.length}자\n\n` +
-                    `📊 시도한 방법:\n` +
-                    `✅ 1. JSON5 파싱 (관대한 파서)\n` +
-                    `✅ 2. 스마트 쉼표 복구 + JSON5\n` +
-                    `✅ 3. 표준 JSON.parse\n` +
-                    `✅ 4. 오류 위치 기반 수정\n` +
-                    `✅ 5. 제어 문자 제거\n` +
-                    `✅ 6. 공격적 쉼표 추가\n` +
-                    `✅ 7. 정규식 기반 재구성\n` +
-                    `✅ 8. 부분 JSON 추출\n\n` +
-                    `💡 해결 방법:\n` +
-                    `1. AI에게 더 명확한 JSON 형식을 요청하세요\n` +
-                    `2. 생성된 응답을 확인하여 JSON 형식이 올바른지 검증하세요\n` +
-                    `3. 다른 AI 제공자(Gemini/OpenAI/Claude)를 시도해보세요\n` +
-                    `4. 더 짧은 콘텐츠로 시도해보세요 (AI 출력 길이 제한)`
-                  );
+                let recovered: Record<string, unknown> | undefined;
+                if (titlePriorityMatch) {
+                  const cleanTitle = titlePriorityMatch[1].replace(/[\r\n]+/g, ' ').trim();
+                  recovered = { selectedTitle: cleanTitle };
+                } else if (partialMatch) {
+                  recovered = { [partialMatch[1]]: partialMatch[2] };
                 }
+
+                const errorMessage = (seventhError as Error).message;
+                const preview = cleaned.substring(0, Math.min(500, cleaned.length));
+
+                // 개발 모드에서 디버그 파일 저장
+                if (process.env.NODE_ENV === 'development') {
+                  try {
+                    const fs = require('fs');
+                    const debugPath = `./debug-json-${Date.now()}.txt`;
+                    fs.writeFileSync(debugPath, cleaned, 'utf-8');
+                    console.error(`[디버그] 파싱 실패한 JSON을 저장했습니다: ${debugPath}`);
+                  } catch (fsError) {
+                    // 파일 저장 실패는 무시
+                  }
+                }
+
+                // 파싱 실패 통계 수집 (프로덕션에서도)
+                console.error('[JSON 파싱 실패 통계]', {
+                  길이: cleaned.length,
+                  시도횟수: 7,
+                  오류: errorMessage.substring(0, 100),
+                  미리보기: preview.substring(0, 100)
+                });
+
+                throw new PartialResponseError(
+                  `JSON 파싱 실패 — 응답이 불완전합니다 (7회 정규 시도 소진)\n\n` +
+                  `최종 오류: ${errorMessage}\n\n` +
+                  `JSON 미리보기 (처음 500자):\n${preview}${cleaned.length > 500 ? '...' : ''}\n\n` +
+                  `전체 길이: ${cleaned.length}자\n\n` +
+                  `📊 시도한 방법:\n` +
+                  `✅ 1. JSON5 파싱 (관대한 파서)\n` +
+                  `✅ 2. 스마트 쉼표 복구 + JSON5\n` +
+                  `✅ 3. 표준 JSON.parse\n` +
+                  `✅ 4. 오류 위치 기반 수정\n` +
+                  `✅ 5. 제어 문자 제거\n` +
+                  `✅ 6. 공격적 쉼표 추가\n` +
+                  `✅ 7. 정규식 기반 재구성\n\n` +
+                  `💡 해결 방법:\n` +
+                  `1. AI에게 더 명확한 JSON 형식을 요청하세요\n` +
+                  `2. 생성된 응답을 확인하여 JSON 형식이 올바른지 검증하세요\n` +
+                  `3. 다른 AI 제공자(Gemini/OpenAI/Claude)를 시도해보세요\n` +
+                  `4. 더 짧은 콘텐츠로 시도해보세요 (AI 출력 길이 제한)`,
+                  'safeParseJson',
+                  recovered,
+                );
               }
             }
           }

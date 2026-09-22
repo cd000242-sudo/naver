@@ -39,13 +39,13 @@
     },
     {
       "path": "src/contentJsonPromptFormat.ts",
-      "sha256": "5abc7288840a1447f58b2e273e4665aa3c58e0ede9770c07a96f32877f740dd9",
-      "bytes": 51048
+      "sha256": "82ad097355842e80063caadfcdde3e93f38a74575f71dc9e3cba4252893abd3a",
+      "bytes": 51169
     },
     {
       "path": "src/promptLoader.ts",
-      "sha256": "1c0cf6c5918a1c844d756a065dbc14b2ed799e6df6e093c9e25a1f5ff984c84a",
-      "bytes": 100418
+      "sha256": "35f18d400ada270504d9dc605447a2bdcac504876a3b186c0db150655e97b58c",
+      "bytes": 100433
     },
     {
       "path": "src/prompts/affiliate/chain/editor.prompt",
@@ -239,8 +239,8 @@
     },
     {
       "path": "src/prompts/seo/base.prompt",
-      "sha256": "8bf620b97638659421a7ca5ae2cdb608005b77d26bb69893269373b091b1392c",
-      "bytes": 35645
+      "sha256": "7ce76e56707c37a94dd4af11e3d081de938a6806adf9897f3feb0eb8a4b46319",
+      "bytes": 36111
     },
     {
       "path": "src/prompts/seo/entertainment.prompt",
@@ -259,8 +259,8 @@
     },
     {
       "path": "src/prompts/seo/geo-overlay.prompt",
-      "sha256": "604083f7e1aec9726c2aeda00a75a6b50ed53b4f89c6d28b05a4abd5b3710c25",
-      "bytes": 7075
+      "sha256": "ef6f82b2f33bb89a0311618c96f2f18a895bae927bfe8086cd969c31889add83",
+      "bytes": 7163
     },
     {
       "path": "src/prompts/seo/health.prompt",
@@ -554,7 +554,7 @@
     }
   ],
   "metadata": {
-    "repositoryHead": "c93076cbc346e0331bec1a4926a0089b7ce234a0",
+    "repositoryHead": "d9e8dd327e413d6a4cc75d0eaf74c5a7d5951bd5",
     "nodeVersion": "v20.20.2",
     "platform": "win32"
   }

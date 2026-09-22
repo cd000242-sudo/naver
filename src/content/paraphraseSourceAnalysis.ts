@@ -68,7 +68,7 @@ export function buildParaphraseAnalysisPrompt(input: ParaphraseAnalysisInput): s
 【뽑을 것】
 - clickReason: 이 제목이 클릭을 만든 단 하나의 이유 (한 문장)
 - mainKeyword: 이 글이 노리는 검색 키워드 하나 (제목의 첫 단어가 아니라 실제 주제어)
-- subKeywords: 본문에 실제로 깔린 연관 검색어 (최대 5개)
+- subKeywords: 본문이 다루는 하위 주제어 (모델 추출 — 검색 데이터가 아니다, 최대 5개)
 - skeleton: 도입부터 마무리까지 실제 전개 순서 (각 단계 한 줄, 최대 8개)
 - experienceSignals: 글쓴이가 직접 보고 겪었음을 드러낸 문장 (원문 인용, 최대 5개)
 - evidenceAnchors: 유지해야 할 숫자·날짜·기관명·고유명사 (최대 8개)
@@ -150,7 +150,7 @@ export function buildParaphraseUpgradeBrief(analysis: ParaphraseSourceAnalysis |
   if (analysis.exposureHypothesis) lines.push(`[노출 근거] ${analysis.exposureHypothesis}`);
   if (analysis.clickReason) lines.push(`[원본 clickReason] ${analysis.clickReason}`);
   if (analysis.mainKeyword) lines.push(`[메인키워드] ${analysis.mainKeyword}`);
-  if (analysis.subKeywords.length) lines.push(`[서브키워드] ${analysis.subKeywords.join(', ')}`);
+  if (analysis.subKeywords.length) lines.push(`[하위 주제어(모델 추출·검색 데이터 아님)] ${analysis.subKeywords.join(', ')}`);
   if (analysis.skeleton.length) {
     lines.push('[원본 전개 골격]');
     analysis.skeleton.forEach((step, index) => lines.push(`  ${index + 1}. ${step}`));
