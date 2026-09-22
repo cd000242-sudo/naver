@@ -21,6 +21,7 @@ import { resolveBulkSourceMix } from './content/factSourceTierPolicy.js';
 import { classifySourceTier, deriveSourceName, makeSourceId, type SourceDocument, type SourceKind } from './content/sourceDocument.js';
 // [P1 relevance v2] Generic publisher-name/domain resolution — no per-keyword rules.
 import { resolveSourceName } from './content/sourceName.js';
+import { precheckCollectedArticle } from './content/sourceRelevancePrecheck.js';
 import { aggregateSearchStatus, classifyHttpStatus, type SourceSearchResult } from './content/searchStatus.js';
 import { isPublicInfoTopic } from './content/publicInfoFactTable.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
@@ -180,6 +181,8 @@ interface NaverSearchResult {
    * 자세한 경위는 content/sourceFreshness.ts 주석 참고.
    */
   postdate?: string;
+  /** [P1] 뉴스 원문 URL(originallink) — link 는 네이버 호스팅 사본이라 매체명은 이 도메인으로 푼다. */
+  originalLink?: string;
   /** [2026-08-28] 뉴스 발행일(RFC 822). 문서 종류마다 필드명이 다르다. */
   pubDate?: string;
 }
@@ -872,6 +875,8 @@ async function searchNaverForContent(
             title,
             description,
             link: item.link || item.originallink || '',
+            // [P1] publisher's own URL — the sourceName resolver reads the outlet from its domain.
+            originalLink: typeof item.originallink === 'string' ? item.originallink : undefined,
             // [2026-08-11] 시점 라벨용 — 예전엔 버렸다
             postdate: typeof item.postdate === 'string' ? item.postdate : undefined,
             // [2026-08-28] 뉴스는 pubDate 로 온다. 이걸 안 읽어서 뉴스 재료에 시점이 없었다.
@@ -1711,7 +1716,9 @@ async function collectNaverSearchContent(
  * 본문 프롬프트는 안 키운다 — 늘어난 재료는 설계도 전용으로만 간다(materialBudget).
  * 시간: 본문 4건에 2.0초였으므로 7건이면 3.5초, 수집 예산 20초 안이다.
  */
-const FULLTEXT_TOTAL_BUDGET_CHARS = 18000;
+// [2026-09-22 P1] 18000 → 20000, 건당 2500 → 3200: 관련도 v2 가 무관 자료를 거르면 남는 자료가 절반이라
+//   지시문:자료 비율이 8:1 로 벌어졌다(라이브 청약통장 금리). 통과한 자료가 더 길게 실리게 한다.
+const FULLTEXT_TOTAL_BUDGET_CHARS = 20000;
 /*
  * [2026-09-02 실측] 곁가지 자료의 몫 상한.
  *
@@ -1724,7 +1731,7 @@ const FULLTEXT_TOTAL_BUDGET_CHARS = 18000;
  * 곁가지는 예산의 이 비율까지만 받는다. 초과분은 버리고 건수를 남긴다. 발행은 막지 않는다.
  */
 const FULLTEXT_SECONDARY_RATIO = 0.3;
-const FULLTEXT_PER_ARTICLE_CHARS = 2500;
+const FULLTEXT_PER_ARTICLE_CHARS = 3200;
 // [2026-09-11] 5 → 8. 예산만 늘리면 건수 상한에 먼저 걸린다.
 const FULLTEXT_MAX_SUCCESS = 8;
 
@@ -1800,8 +1807,9 @@ export async function collectTopArticleFullTexts(
      *
      * 기사가 1차 자료다. 결과물의 형식은 프롬프트가 정하지 재료가 정하지 않는다.
      */
-    const mergedNews = mergeRecentFirst(recentNews, newsLinks, 6, (r) => String(r.link || ''));
-    const mergedBlogs = mergeRecentFirst(recentBlogs, blogLinks, 8, (r) => String(r.link || ''));
+    // [2026-09-22 P1] 후보 풀 6+8 → 8+10: 수집 시점 관련도 사전검사가 무관 기사를 건너뛰므로 여유가 필요하다.
+    const mergedNews = mergeRecentFirst(recentNews, newsLinks, 8, (r) => String(r.link || ''));
+    const mergedBlogs = mergeRecentFirst(recentBlogs, blogLinks, 10, (r) => String(r.link || ''));
     const candidates = orderFullTextCandidates({ news: mergedNews, blogs: mergedBlogs });
 
     const parts: string[] = [];
@@ -1844,6 +1852,14 @@ export async function collectTopArticleFullTexts(
          */
         if (!isOnTopicForKeyword(`${article.title || candidate.title || ''} ${content}`, keyword)) {
           offTopicSkipped += 1;
+          continue;
+        }
+        // [2026-09-22 P1] Same scorer as the ranking pass: an article whose body only mentions the
+        //   main entity in passing must not take one of the FULLTEXT_MAX_SUCCESS slots.
+        const precheck = precheckCollectedArticle(keyword, article.title || candidate.title || '', content);
+        if (!precheck.ok) {
+          offTopicSkipped += 1;
+          logger(`[본문 수집] ⏭️ 관련도 사전검사 ${precheck.reason} (${precheck.score.toFixed(2)}) — ${String(article.title || candidate.title || '').slice(0, 40)}`);
           continue;
         }
         /*
@@ -1889,6 +1905,7 @@ export async function collectTopArticleFullTexts(
         // deriveSourceName's hostname/Korean-label guess remains the fallback when unresolved.
         const resolvedSource = resolveSourceName({
           url: candidate.link,
+          originalLink: (candidate as { originalLink?: string }).originalLink,
           title,
           sourceType: kind === 'news' || kind === 'blog' ? kind : 'web',
         });

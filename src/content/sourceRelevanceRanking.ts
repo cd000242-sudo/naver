@@ -19,6 +19,8 @@ import { resolveSourceName } from './sourceName.js';
 export type { RejectReason, RelevanceComponents, TopicType };
 
 const AMBIGUOUS_MIN = 0.35;
+const MIN_FRESH_ACCEPTED = 3;
+const STALE_KEEP_MIN_SCORE = 0.8;
 const AMBIGUOUS_MAX = 0.55;
 
 export interface SourceJudgeVerdict {
@@ -85,14 +87,31 @@ export function computeSourceRanking(
 
   // Duplicate pass: strongest documents first, only among currently-accepted ones —
   // "keep the higher-quality/fresher one" when two documents describe the same thing.
+  const final: DocumentScore[] = [...prelim];
+  // [P1] "과거 자료가 필요하면 버리지 않되 현재 정보처럼 취급하지 않는다": when fewer than
+  // MIN_FRESH_ACCEPTED fresh documents survive, the strongest too-old documents (score ≥
+  // STALE_KEEP_MIN_SCORE) are kept as stale (labelled "과거 자료") instead of rejected —
+  // a homefeed issue whose origin articles are 5 weeks old must not lose its primary facts.
+  const freshAccepted = prelim.filter((d) => d.accepted).length;
+  if (freshAccepted < MIN_FRESH_ACCEPTED) {
+    let slots = MIN_FRESH_ACCEPTED - freshAccepted;
+    docs.map((_, i) => i)
+      .filter((i) => prelim[i].reason === 'REJECT_TOO_OLD' && prelim[i].score >= STALE_KEEP_MIN_SCORE)
+      .sort((a, b) => prelim[b].score - prelim[a].score)
+      .forEach((i) => {
+        if (slots <= 0) return;
+        final[i] = { ...prelim[i], accepted: true, reason: undefined, stale: true };
+        slots -= 1;
+      });
+  }
+  // Order on the FINAL acceptance (stale-kept docs count as accepted).
   const order = docs.map((_, i) => i).sort((a, b) => {
-    if (prelim[a].accepted !== prelim[b].accepted) return prelim[a].accepted ? -1 : 1;
-    return prelim[b].score - prelim[a].score;
+    if (final[a].accepted !== final[b].accepted) return final[a].accepted ? -1 : 1;
+    return final[b].score - final[a].score;
   });
   const acceptedRefs: AcceptedDocRef[] = [];
-  const final: DocumentScore[] = [...prelim];
   for (const i of order) {
-    if (!prelim[i].accepted) continue;
+    if (!final[i].accepted) continue;
     const doc = docs[i];
     const body = doc.cleanedBody ?? doc.body ?? '';
     if (isDuplicateOfAny({ url: doc.url, title: doc.title, body }, acceptedRefs)) {
@@ -108,8 +127,9 @@ export function computeSourceRanking(
     return {
       id: doc.id,
       title: doc.title,
-      sourceName: resolved.sourceName,
-      domain: resolved.domain,
+      // Prefer what the collector resolved (it saw originallink / platform); never invent.
+      sourceName: doc.sourceName ?? resolved.sourceName,
+      domain: doc.domain || resolved.domain,
       url: doc.url,
       pubDate: doc.pubDate,
       dateStatus: doc.dateStatus,

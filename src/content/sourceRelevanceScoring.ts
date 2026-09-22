@@ -46,6 +46,41 @@ const SOURCE_QUALITY_BY_TIER: Record<SourceTier, number> = {
 
 const LONG_BODY_CHARS = 600;
 const BODY_IRRELEVANT_MAX = 0.15;
+// [P1 live 청약통장 금리] a single passing mention ("…청약통장…" once in a 2,000-char jeonse article,
+// often inside a trailing 관련기사 list) used to score bodyRelevance = 1.0. The body entity signal is
+// now density- and position-aware; an entity that is absent from the title AND only mentioned in
+// passing is REJECT_BODY_IRRELEVANT.
+const BODY_ENTITY_PASSING_MAX = 0.3;
+const BODY_LEAD_RATIO = 0.3;
+const BODY_TAIL_RATIO = 0.7;
+
+function countHits(haystack: string, needle: string): { hits: number; first: number; last: number } {
+  let hits = 0; let first = -1; let last = -1;
+  let idx = haystack.indexOf(needle);
+  while (idx !== -1) {
+    hits += 1;
+    if (first < 0) first = idx;
+    last = idx;
+    idx = haystack.indexOf(needle, idx + needle.length);
+  }
+  return { hits, first, last };
+}
+
+/**
+ * Entity presence in the body as a 0..1 signal: hits per 1,000 chars (2/1k → 1.0), +0.25 when the
+ * entity appears in the lead 30%, 0 when the only mention sits in the trailing 30% (related-links zone).
+ */
+export function bodyEntitySignal(body: string, entity: string): number {
+  const len = body.length;
+  if (len === 0 || !entity) return 0;
+  const { hits, first, last } = countHits(body, entity);
+  if (hits === 0) return fuzzyContains(body, entity) ? 0.15 : 0;
+  if (hits === 1 && first >= len * BODY_TAIL_RATIO) return 0;
+  const density = Math.min(1, hits / Math.max(1, len / 1000) / 2);
+  const leadBonus = first <= len * BODY_LEAD_RATIO ? 0.25 : 0;
+  void last;
+  return Math.min(1, density + leadBonus);
+}
 const LOW_QUALITY_TIER_MAX = 0.4;
 const LOW_QUALITY_SCORE_MAX = 0.5;
 
@@ -107,9 +142,9 @@ export function scoreDocument(
 
   // Independent of mainEntityMatch (which counts a title-only hit as a full match) — bodyRelevance
   // needs to know whether the entity is actually IN the body, not just somewhere in the document.
-  const bodyEntityPart = entities.length > 0 ? (fuzzyContains(body, entities[0]) ? 1 : 0) : 1;
+  const bodyEntityPart = entities.length > 0 ? Math.max(...entities.map((e) => bodyEntitySignal(body, e))) : 1;
   const bodyModifierPart = fuzzyCoverage(modifiers, body);
-  const bodyRelevance = entities.length > 0 ? 0.5 * bodyEntityPart + 0.5 * bodyModifierPart : bodyModifierPart;
+  const bodyRelevance = entities.length > 0 ? 0.65 * bodyEntityPart + 0.35 * bodyModifierPart : bodyModifierPart;
 
   const sourceQuality = SOURCE_QUALITY_BY_TIER[doc.sourceTier] ?? 0.4;
 
@@ -142,6 +177,10 @@ export function scoreDocument(
     accepted = false;
     reason = 'REJECT_ENTITY_MISMATCH';
   } else if (titleOrEntityMatched && bodyLen > 0 && bodyRelevance <= BODY_IRRELEVANT_MAX) {
+    accepted = false;
+    reason = 'REJECT_BODY_IRRELEVANT';
+  } else if (entities.length > 0 && titleEntityPart === 0 && bodyLen >= LONG_BODY_CHARS && bodyEntityPart < BODY_ENTITY_PASSING_MAX) {
+    // Entity not in the title and only mentioned in passing in a long body → a different subject.
     accepted = false;
     reason = 'REJECT_BODY_IRRELEVANT';
   } else if (freshness.tooOld) {

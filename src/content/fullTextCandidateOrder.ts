@@ -30,6 +30,8 @@ export interface FullTextCandidate {
   readonly postdate?: string;
   /** News items: RFC 822 pubDate from the search API. */
   readonly pubDate?: string;
+  /** News items: the publisher's own URL (link is the Naver-hosted copy). */
+  readonly originalLink?: string;
 }
 
 export interface FullTextCandidateInput {
@@ -68,6 +70,7 @@ export function orderFullTextCandidates(input: FullTextCandidateInput): FullText
         // [2026-09-22 audit H7] news items carry pubDate (RFC 822); dropping it here left every
         //   news document UNKNOWN_DATE downstream (measured: 4–6 of 8 sources per keyword).
         pubDate: candidate.pubDate,
+        originalLink: candidate.originalLink,
       });
     }
     return out;

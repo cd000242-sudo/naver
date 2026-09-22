@@ -98,6 +98,32 @@ describe('scoreDocument — 제목/개체는 맞아도 본문이 무관하면 �
   });
 });
 
+describe('scoreDocument — 본문에 한 번 스쳐 지나가는 언급은 근거가 아니다 (라이브 청약통장 금리)', () => {
+  const { entities, modifiers } = extractMainEntitiesAndModifiers('청약통장 금리');
+  const filler = '서울 아파트 전세 가격이 6억3000만원을 넘겼다. 금리 인상으로 임차 수요가 비아파트로 이동했고 전세 시장의 수급이 바뀌고 있다. '.repeat(14);
+
+  it('전세 기사에 "청약통장"이 관련기사 꼬리에 한 번만 나오면 REJECT_BODY_IRRELEVANT', () => {
+    const jeonse = doc('S02', {
+      title: '서울 아파트 전세 6억3000만원…“비아파트로 임차 수요 이동”',
+      body: `${filler}관련기사 청약통장 전환 기한 연장`,
+    });
+    const r = scoreDocument(jeonse, '청약통장 금리', entities, modifiers, freshnessScore(jeonse, 'NEWS_ISSUE', NOW));
+    expect(r.accepted).toBe(false);
+    expect(r.reason).toBe('REJECT_BODY_IRRELEVANT');
+    expect(r.components.bodyRelevance).toBeLessThan(0.4);
+  });
+
+  it('본문 초반부터 여러 번 다루면 제목에 없어도 통과한다', () => {
+    const onTopic = doc('S03', {
+      title: '전환 기한 1년 더 연장',
+      body: `청약통장 가입자라면 전환 기한을 확인해야 한다. ${'청약통장 금리는 최대 3.1%다. 청년 주택드림 청약통장은 4.5%다. '.repeat(10)}`,
+    });
+    const r = scoreDocument(onTopic, '청약통장 금리', entities, modifiers, freshnessScore(onTopic, 'NEWS_ISSUE', NOW));
+    expect(r.accepted).toBe(true);
+    expect(r.components.bodyRelevance).toBeGreaterThan(0.8);
+  });
+});
+
 describe('scoreDocument — 낮은 등급 + 낮은 점수만 기각한다', () => {
   it('REJECT_LOW_SOURCE_QUALITY', () => {
     const { entities, modifiers } = extractMainEntitiesAndModifiers('청약통장 금리');
@@ -112,6 +138,36 @@ describe('scoreDocument — 낮은 등급 + 낮은 점수만 기각한다', () =
     if (!result.accepted) {
       expect(result.reason).toBe('REJECT_LOW_SOURCE_QUALITY');
     }
+  });
+});
+
+describe('computeSourceRanking — 신선한 자료가 3건 미만이면 관련도 높은 과거 자료를 stale 로 남긴다', () => {
+  it('홈판(NEWS_ISSUE)에서 40일 지난 핵심 기사는 REJECT_TOO_OLD 대신 stale 로 유지된다', () => {
+    // distinct bodies per document — identical filler would trip the duplicate detector, not the freshness rule
+    const paragraphs = [
+      '변우석은 예능에서 190cm 키의 비결로 텐텐을 꼽았다. 어릴 때 김치와 우유를 함께 먹었다고 했고, 변우석의 어머니가 텐텐을 챙겨줬다는 일화도 전했다. 팬들은 변우석의 답변에 웃음을 터뜨렸다.',
+      '변우석은 화보 인터뷰에서 모델 시절 마른 몸이 부끄러웠다고 털어놨다. 텐텐 이야기는 뒤에 나왔는데, 변우석은 성장기 영양제로 텐텐을 오래 먹었다고 다시 언급했다. 변우석의 소속사도 이를 확인했다.',
+      '한미약품 텐텐은 발육기 비타민 제품이다. 변우석 발언 이후 텐텐 검색량이 늘었고, 변우석 팬들이 텐텐 구매 인증을 올렸다. 약사들은 텐텐이 키를 키우는 제품은 아니라고 설명했다.',
+      '아이 영양제로 텐텐을 고르는 부모가 늘었다. 변우석 효과라는 말이 나오지만, 변우석처럼 크려면 유전과 수면이 더 중요하다는 소아과 의견이 많다. 텐텐은 보조제일 뿐이다.',
+    ];
+    const bodyFor = (n: number) => `${paragraphs[n % 4]} `.repeat(6);
+    const titles = ['변우석 190cm 비결로 텐텐 언급', '변우석 화보 인터뷰서 텐텐 다시 말해', '한미약품 텐텐 검색량 급증'];
+    const old = (id: string, n: number) => doc(id, { title: titles[n % 3], body: bodyFor(n), pubDate: '2026-08-10' });
+    const fresh = doc('S09', { title: '변우석 텐텐 영양제 후기', body: bodyFor(3), pubDate: '2026-09-20', sourceType: 'blog', sourceTier: 'BLOG' });
+    const r = computeSourceRanking([old('S01', 0), old('S02', 1), old('S03', 2), fresh], '변우석 텐텐', { now: NOW, forceTopicType: 'NEWS_ISSUE' });
+    const accepted = r.ranking.filter((e) => e.accepted);
+    expect(accepted.length).toBeGreaterThanOrEqual(3);
+    const keptOld = r.ranked.filter((d) => d.relevance?.accepted && d.stale);
+    expect(keptOld.length).toBeGreaterThanOrEqual(2);
+    expect(r.ranking.filter((e) => e.reason === 'REJECT_TOO_OLD').length).toBeLessThanOrEqual(1);
+  });
+
+  it('신선한 자료가 충분하면 과거 자료는 그대로 REJECT_TOO_OLD', () => {
+    const body = '청약통장 금리가 3.1%로 올랐다. 청약통장 가입자는 전환 기한을 확인해야 한다. '.repeat(12);
+    const fresh = (id: string) => doc(id, { title: `청약통장 금리 ${id}`, body: `${body} ${id} 고유 문장입니다. `.repeat(3), pubDate: '2026-09-20' });
+    const old = doc('S05', { title: '청약통장 금리 작년', body: `${body} 작년 기준 안내였습니다. `.repeat(3), pubDate: '2026-07-01' });
+    const r = computeSourceRanking([fresh('S01'), fresh('S02'), fresh('S03'), old], '청약통장 금리', { now: NOW, forceTopicType: 'NEWS_ISSUE' });
+    expect(r.ranking.find((e) => e.id === 'S05')?.reason).toBe('REJECT_TOO_OLD');
   });
 });
 
