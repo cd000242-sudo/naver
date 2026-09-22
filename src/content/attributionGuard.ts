@@ -38,6 +38,8 @@ const GENERIC_SOURCE_NOUNS = [
   // Marker nouns used by the "발표/입장/기준/가격표" attribution pattern itself —
   // when captured alone (no org name precedes them), they are not a source name.
   '발표', '공식 발표', '입장', '기준', '가격표',
+  // [2026-09-22 P1 live] perspective nouns — "독자 입장에서", "소비자 입장" are viewpoints, not sources.
+  '독자', '소비자', '사용자', '구매자', '이용자', '본인', '고객', '시청자',
 ];
 
 const LEADING_PREFIX_RE = /^(?:본|위|해당|이|그)\s*/;
@@ -91,14 +93,14 @@ export function extractAttributions(text: string): Attribution[] {
   // Named: "<이름> 관계자(는|에 따르면)" — e.g. "금융위원회 관계자는"
   runNamed(/([가-힣A-Za-z0-9·]{2,20})\s*관계자(?:는|에\s*따르면)/g);
 
-  // Named: "<이름> (발표|공식 발표|보도|입장|가격표)(에 따르면|기준|에서는)?" — these marker nouns
-  // are attribution-shaped on their own ("기아 공식 가격표 기준", "소속사 입장").
-  runNamed(/([가-힣A-Za-z0-9·]{2,20})\s*(?:공식\s*)?(?:발표|보도|입장|가격표)(?:에\s*따르면|기준|에서는)?/g);
+  // Named: "<이름> (발표|공식 발표|보도|가격표)(에 따르면|기준|에서는)?" — these marker nouns
+  // are attribution-shaped on their own ("기아 공식 가격표 기준", "국토교통부 발표").
+  runNamed(/([가-힣A-Za-z0-9·]{2,20})\s*(?:공식\s*)?(?:발표|보도|가격표)(?:에\s*따르면|기준|에서는)?/g);
 
-  // Named: "<이름> (기준|자료)(에 따르면|에서는)" — bare "기준/자료" is ordinary prose
-  // ("소득 기준", "가입일 기준", "…겹쳐서 기준이") so it only counts with an explicit tail.
-  // [2026-09-22 live] the bare form stripped "겹쳐서 기준" out of a normal sentence.
-  runNamed(/([가-힣A-Za-z0-9·]{2,20})\s*(?:기준|자료)(?:에\s*따르면|에서는)/g);
+  // Named: "<이름> (기준|자료|입장)(에 따르면|에서는)" — bare "기준/자료/입장" is ordinary prose
+  // ("소득 기준", "가입일 기준", "독자 입장에서") so it only counts with an explicit tail.
+  // [2026-09-22 live] the bare forms stripped "겹쳐서 기준" / "독자 입장" out of normal sentences.
+  runNamed(/([가-힣A-Za-z0-9·]{2,20})\s*(?:기준|자료|입장)(?:에\s*따르면|에서는)/g);
 
   // Generic: no specific source named.
   const genericPatterns: RegExp[] = [

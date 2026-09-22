@@ -113,6 +113,9 @@ export function resolveSourceStatus(collected: Partial<CollectResult> | null | u
   const text = String(collected.collectedText || '').trim().length;
   if (overall === 'SEARCH_RATE_LIMITED' || overall === 'SEARCH_BLOCKED') return 'SOURCE_PIPELINE_FAILED';
   if (!collected.success && text === 0 && docs === 0) {
+    // A search that ran and found nothing is EMPTY (live: nonsense keyword → SEARCH_EMPTY with a
+    // summary message); only a search that could not run is PIPELINE_FAILED.
+    if (overall === 'SEARCH_EMPTY' || overall === 'SEARCH_PARTIAL') return 'SOURCE_EMPTY';
     return collected.message ? 'SOURCE_PIPELINE_FAILED' : 'SOURCE_EMPTY';
   }
   if (docs === 0 && text === 0) return 'SOURCE_EMPTY';

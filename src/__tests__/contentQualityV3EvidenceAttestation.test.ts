@@ -250,7 +250,12 @@ describe('Content Quality V3 evidence attestation', () => {
         //   평가 우선순위(팩트>의도>구체성>밀도>최신성>구조>문체) 명시로 재계산
         // [2026-09-22 P1 4a] 프롬프트 다이어트 1차 — STYLE OVERRIDE 꼬리 사본 제거·구매자 신뢰 원칙 모드 조건부·
         //   H5/H6 귀속·숫자 정본, 서식 정본(2열 표 허용), 홈판 제목 통계 17줄→규칙 3줄, 날짜 규율 정본으로 재계산
-        '01cea849962f9bbe5b66ca5bcbc695ced3854c3e47e2a0c6ce83fb46d1a5ac65',
+        // [2026-09-22 P1 4b] 프롬프트 다이어트 2차 — geo-overlay.prompt G1/G2/G4/자가점검 제거(권위 시그널·
+        //   검증가능성 수치금지만 유지), exposure-structure ES-1/ES-2를 base SECTION 4로 병합·ES-3 역사서술
+        //   3줄 제거로 재계산
+        // [2026-09-22 P1 4b-2] official-exposure-rubric.prompt(영어 2,510자) + seo-90-quality.prompt
+        //   (영어 881자) → 한국어 5줄 우선순위 블록 + SEO 전용 1줄로 축소(A#8/B#6)로 재계산
+        '1a8c948f0dbae5ac48510a5fe7d837f213d64fda4d45b332b9f0ca5671e82595',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

@@ -33,10 +33,10 @@ describe('extractAttributions', () => {
   // [2026-09-22 live] "겹쳐서 기준이 섞여" was read as org="겹쳐서" and stripped from a normal
   // sentence. Bare "<X> 기준/자료" is ordinary prose; only the explicit tail form is an attribution.
   it('does not treat bare "<X> 기준/자료" prose as an attribution', () => {
-    const prose = '이름도 비슷하고 대상 나이도 겹쳐서 기준이 섞여 보이기 쉽다. 가입일 기준 만 19~34세, 총급여 기준 7,500만 원 이하. 소득 자료 준비.';
+    const prose = '이름도 비슷하고 대상 나이도 겹쳐서 기준이 섞여 보이기 쉽다. 가입일 기준 만 19~34세, 총급여 기준 7,500만 원 이하. 소득 자료 준비. 독자 입장에서 이 수치를 볼 이유는 하나예요. 소비자 입장은 다르다.';
     expect(extractAttributions(prose)).toEqual([]);
-    const tailed = extractAttributions('금융위원회 자료에 따르면 대상이 늘었다. 기아 공식 가격표 기준 3,200만 원이다.');
-    expect(tailed.map((a) => a.orgName)).toEqual(['금융위원회', '기아']);
+    const tailed = extractAttributions('금융위원회 자료에 따르면 대상이 늘었다. 기아 공식 가격표 기준 3,200만 원이다. 소속사 입장에 따르면 사실무근이다.');
+    expect(tailed.map((a) => a.orgName)).toEqual(['금융위원회', '기아', '소속사']);
   });
 });
 

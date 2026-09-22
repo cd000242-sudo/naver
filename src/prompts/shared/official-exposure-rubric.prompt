@@ -1,51 +1,9 @@
-[OFFICIAL NAVER EXPOSURE PRIORITY OVERRIDE - 2026]
+[노출 우선순위 — 핵심 5가지]
 
-This block has higher priority than older keyword-density, title-formula, emotion-word,
-and fixed-heading-count rules in this prompt.
+이 규칙은 오래된 키워드 밀도·제목 공식·감정어·고정 소제목 개수 규칙보다 우선한다.
 
-Primary goal:
-- Do not write a post that only looks optimized.
-- Write a post that answers the user's search intent, proves its claims, and gives
-  Naver enough unique, trustworthy, readable information to classify and recommend it.
-
-Hard priority order:
-1. Intent answer fit
-   - The first screen must answer the real user question directly.
-   - Do not delay the answer just to increase dwell time.
-
-2. Evidence and experience density
-   - Prefer verifiable dates, conditions, figures, official/source context, direct use,
-     comparison, case, checklist, or observed result.
-   - Do not invent official guides, dates, prices, statistics, reviews, or experiences.
-
-3. Original angle
-   - Add what similar posts usually miss: exception, limit, misunderstanding, comparison,
-     step, risk, decision criterion, or practical next action.
-   - A repeated keyword is not originality.
-
-4. Readable structure
-   - Use meaningful sections, short mobile paragraphs, and one clear point per section.
-   - Tables, checklists, FAQ, and step blocks are good only when they help the reader.
-
-5. Freshness
-   - Add date/update context only when the source supports it.
-   - If the source does not prove a latest/official claim, write a safe confirmation note.
-
-6. Trust and safety
-   - Avoid absolute promises, keyword stuffing, clickbait that the body does not prove,
-     fake first-hand experience, unclear source mashups, and unrelated media/keywords.
-
-Mode-specific override:
-- SEO mode: optimize for search intent completion, source faithfulness, and durable answer quality.
-  Keyword density is only a spam guard. It must not be treated as a main scoring target.
-- Homefeed mode: optimize for stop-scroll curiosity plus human continuity, but never fake emotion
-  or fake first-person experience. Keyword density is not a homefeed target.
-- Mate mode: every major section must include one citeable answer atom: a short, direct,
-  source-safe sentence that AI briefing can quote. Include at least one useful table/checklist/FAQ
-  when the topic supports it.
-
-Final self-check before output:
-- Would this still be useful if all repeated keywords were removed?
-- Can a reader verify the most important claim?
-- Is there at least one point that is not a generic summary?
-- Does each section answer, prove, or help decide something?
+1. 독자가 무엇을 알고 싶은가 — 첫 화면에서 바로 답한다. 체류시간을 늘리려고 답을 미루지 않는다.
+2. 검증된 사실은 무엇인가 — 확인 가능한 날짜·조건·수치·근거를 쓰고, 자료에 없는 공식 안내·날짜·가격·통계·후기·경험은 지어내지 않는다.
+3. 제목이 무엇을 약속했는가 — 본문이 그 약속을 실제로 증명한다.
+4. 어떤 순서로 답해야 하는가 — 결론 먼저, 그다음 근거, 예외·한계, 안전한 다음 행동 순으로 쓴다.
+5. 네이버용 표현 규칙 — 키워드 반복, 확인 안 된 단정, 본문이 못 채우는 클릭유도, 가짜 체험은 피한다.

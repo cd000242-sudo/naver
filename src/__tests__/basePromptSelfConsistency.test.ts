@@ -125,6 +125,7 @@ describe('base.prompt — 절대 룰을 스스로 위배하지 않는다', () =>
  */
 describe('geo-overlay — base F1을 위배하지 않는다', () => {
   const geo = readFileSync(new URL('../prompts/seo/geo-overlay.prompt', import.meta.url), 'utf8');
+  const base = readFileSync(new URL('../prompts/seo/base.prompt', import.meta.url), 'utf8');
 
   it('하드코딩된 작성 시점을 모범 예시로 제시하지 않는다', () => {
     expect(geo).not.toMatch(/✅[^\n]*"현재\(\d{4}년/);
@@ -132,8 +133,11 @@ describe('geo-overlay — base F1을 위배하지 않는다', () => {
     expect(geo).not.toMatch(/✅[^\n]*"지금 시점/);
   });
 
-  it('시점 표현을 자료 근거 조건부로 지시한다', () => {
-    expect(geo).toMatch(/자료에 (?:날짜가 없으면|있을 때만|적혀 있으면)/);
+  // [2026-09-22 P1 4b] G1(시점 시그널) 블록은 base F1과 완전 중복이라 geo-overlay에서
+  // 제거했다(PROMPT_BUDGET_2026-09-22.md §8-A #6). 날짜 조건부 규칙의 정본은 이제
+  // base.prompt F1 하나이므로 거기서 검증한다 — 규칙 자체는 계속 유지된다.
+  it('시점 표현을 자료 근거 조건부로 지시한다 (base F1, canonical)', () => {
+    expect(base).toMatch(/자료에 (?:날짜가 없으면|있을 때만|적혀 있으면)/);
   });
 
   it('base F1을 명시적으로 인용한다', () => {

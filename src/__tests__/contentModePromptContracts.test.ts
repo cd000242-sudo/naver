@@ -135,10 +135,13 @@ describe('official exposure prompt contract', () => {
     const overlay = read('prompts/shared/official-exposure-rubric.prompt');
     const loader = read('promptLoader.ts');
 
-    expect(overlay).toContain('OFFICIAL NAVER EXPOSURE PRIORITY OVERRIDE');
-    expect(overlay).toContain('Intent answer fit');
-    expect(overlay).toContain('Evidence and experience density');
-    expect(overlay).toContain('Mate mode');
+    // [2026-09-22 P1 4b] A#8/B#6: rubric condensed from English 2,510 chars to a
+    // Korean 5-line priority block (독자→사실→제목약속→순서→표현규칙). Header and
+    // priority-order wording moved to Korean; assertions now pin the new wording.
+    expect(overlay).toContain('노출 우선순위');
+    expect(overlay).toContain('독자가 무엇을 알고 싶은가');
+    expect(overlay).toContain('검증된 사실은 무엇인가');
+    expect(overlay).toContain('제목이 무엇을 약속했는가');
     expect(loader).toContain('official-exposure-rubric.prompt');
     expect(loader).toContain("mode === 'homefeed'");
   });
@@ -149,8 +152,10 @@ describe('official exposure prompt contract', () => {
     const mateOverlay = read('prompts/shared/mate-90-quality.prompt');
     const loader = read('promptLoader.ts');
 
+    // [2026-09-22 P1 4b] A#8: seo-90-quality condensed from English 881 chars to a
+    // single Korean mode-specific line (검색의도/자료충실성/키워드밀도는 스팸가드).
     expect(seoOverlay).toContain('SEO 90+ QUALITY CONTRACT');
-    expect(seoOverlay).toContain('Search intent is answered');
+    expect(seoOverlay).toContain('검색 의도 충족');
     expect(homefeedOverlay).toContain('HOMEFEED 90+ QUALITY CONTRACT');
     expect(homefeedOverlay).toContain('내 얘기 같은 첫 화면');
     expect(homefeedOverlay).toContain('저장할 이유');
