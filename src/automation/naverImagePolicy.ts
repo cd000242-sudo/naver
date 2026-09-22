@@ -35,12 +35,16 @@ export interface NaverImagePolicyIssue {
 }
 
 const SUPPORTED_EXTENSIONS = new Set<string>(NAVER_SUPPORTED_IMAGE_EXTENSIONS);
+const JPEG_ALIASES = new Set<string>(['jfif', 'jpe', 'jif', 'jfi']);
 
 export function normalizeNaverImageExtension(fileNameOrExtension: string): string {
   const withoutQuery = fileNameOrExtension.split(/[?#&]/)[0] ?? '';
   const lastSegment = withoutQuery.split(/[\\/]/).pop() ?? withoutQuery;
   const extension = lastSegment.includes('.') ? lastSegment.split('.').pop() : lastSegment;
-  return (extension ?? '').replace(/^\./, '').trim().toLowerCase();
+  const normalized = (extension ?? '').replace(/^\./, '').trim().toLowerCase();
+  // [2026-09-22] JPEG aliases: Windows saves web images as .jfif, some cameras as .jpe. Same bytes as
+  //   .jpg — treat as jpg here; the upload step rewrites the extension from the magic bytes anyway.
+  return JPEG_ALIASES.has(normalized) ? 'jpg' : normalized;
 }
 
 export function isSupportedNaverImageExtension(fileNameOrExtension: string): boolean {

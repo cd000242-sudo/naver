@@ -23,6 +23,14 @@ describe('Naver image upload policy', () => {
     expect(resolveNaverSupportedImageExtension('image.bmp', 'jpg')).toBe('bmp');
   });
 
+  // [2026-09-22 사장님] ".jfif 는 인식을 못하네" — 윈도우가 웹 이미지를 .jfif 로 저장한다. JPEG 와 같은 바이트.
+  it('treats JPEG aliases (.jfif/.jpe) as jpg instead of rejecting them', () => {
+    expect(resolveNaverSupportedImageExtension('photo.jfif', 'png')).toBe('jpg');
+    expect(resolveNaverSupportedImageExtension('photo.JFIF', 'png')).toBe('jpg');
+    expect(resolveNaverSupportedImageExtension('photo.jpe', 'png')).toBe('jpg');
+    expect(isSupportedNaverImageExtension('C:/imgs/사진.jfif')).toBe(true);
+  });
+
   it('warns for non-ascii file names because Naver recommends English/number names', () => {
     expect(isNaverRecommendedAsciiFileName('naver-image-01.jpg')).toBe(true);
     expect(isNaverRecommendedAsciiFileName('대표사진.jpg')).toBe(false);

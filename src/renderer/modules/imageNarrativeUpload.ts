@@ -212,7 +212,7 @@ export async function addFiles(files: File[]): Promise<void> {
 export function _isAcceptedImage(file: File): boolean {
   if (ACCEPTED_MIME_TYPES.has(file.type)) return true;
   const ext = file.name.split('.').pop()?.toLowerCase() ?? '';
-  return ['jpg', 'jpeg', 'png', 'gif', 'webp', 'heic', 'heif'].includes(ext);
+  return ['jpg', 'jpeg', 'jfif', 'jpe', 'png', 'gif', 'webp', 'heic', 'heif'].includes(ext);
 }
 
 /**

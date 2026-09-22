@@ -358,7 +358,7 @@ export async function downloadAndSaveImage(
     // 파일 확장자 추출
     const urlPath = new URL(imageUrl).pathname;
     let ext = path.extname(urlPath).toLowerCase() || '.jpg';
-    const validExt = ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext) ? ext : '.jpg';
+    const validExt = ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext) ? ext : '.jpg'; // .jfif 등 JPEG 별칭은 .jpg 로
 
     // GIF는 PNG로 변환 (리사이징을 위해)
     if (ext === '.gif') {

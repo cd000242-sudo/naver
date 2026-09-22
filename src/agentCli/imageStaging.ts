@@ -6,7 +6,7 @@
 import { copyFile } from 'fs/promises';
 import { extname, join } from 'path';
 
-const SAFE_EXT = /^\.(jpe?g|png|webp|gif|bmp|heic)$/i;
+const SAFE_EXT = /^\.(jpe?g|jfif|jpe|png|webp|gif|bmp|heic)$/i; // [2026-09-22] .jfif/.jpe = JPEG 별칭
 
 /** Deterministic staged name for the i-th image (0-based): photo-01.jpg … */
 export function stagedImageName(index: number, sourcePath: string): string {

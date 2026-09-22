@@ -308,7 +308,7 @@ export function registerImageDownloadHandlers(): void {
 
                 const urlPath = url.split('?')[0];
                 const urlExt = path.extname(urlPath).toLowerCase();
-                if (['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(urlExt)) {
+                if (['.jpg', '.jpeg', '.jfif', '.jpe', '.png', '.gif', '.webp'].includes(urlExt)) {
                     return urlExt === '.jpeg' ? '.jpg' : urlExt;
                 }
 

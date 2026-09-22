@@ -1093,7 +1093,7 @@ export async function insertImageViaBase64(self: any, filePath: string, frame?: 
   // Base64로 변환
   const base64 = imageBuffer.toString('base64');
   const ext = pathModule.extname(absolutePath).toLowerCase().slice(1) || 'png';
-  const mimeType = ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' :
+  const mimeType = ext === 'jpg' || ext === 'jpeg' || ext === 'jfif' || ext === 'jpe' ? 'image/jpeg' :
     ext === 'png' ? 'image/png' :
       ext === 'gif' ? 'image/gif' :
         ext === 'webp' ? 'image/webp' : 'image/png';
@@ -2276,7 +2276,7 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
           // 파일 확장자 확인
           const path = await import('path');
           const ext = path.extname(image.filePath).toLowerCase();
-          isValidImage = isValidImage && ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
+          isValidImage = isValidImage && ['.jpg', '.jpeg', '.jfif', '.jpe', '.png', '.gif', '.webp', '.bmp'].includes(ext); // [2026-09-22] .jfif 허용 — 업로드 직전 확장자 정상화가 .jpg 로 바꾼다
 
           // 파일 크기 확인 (최소 0.5KB, 최대 50MB)
           const fileSizeKB = stats.size / 1024;

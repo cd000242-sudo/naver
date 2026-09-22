@@ -4891,7 +4891,7 @@ async function showFolderSelectionForHeading(
     if (mode === 'multi' && typeof (window.api as any)?.showOpenDialog === 'function') {
       const pick = await (window.api as any).showOpenDialog({
         properties: ['openFile', 'multiSelections'],
-        filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp'] }],
+        filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'jfif', 'jpe', 'png', 'gif', 'webp', 'bmp'] }],
       });
       const paths = Array.isArray(pick?.filePaths) ? pick.filePaths : [];
       if (!pick?.canceled && paths.length > 0) {
@@ -4917,7 +4917,7 @@ async function loadImagesFromFolderForHeading(folderPath: string): Promise<any[]
     const files = await window.api.readDirWithStats?.(folderPath);
     if (!files) return [];
 
-    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp'];
+    const imageExtensions = ['.jpg', '.jpeg', '.jfif', '.jpe', '.png', '.gif', '.webp', '.bmp']; // [2026-09-22] .jfif = JPEG 별칭
     const imageFiles = files.filter((file: any) =>
       !file.isDirectory &&
       imageExtensions.some(ext => file.name.toLowerCase().endsWith(ext))
@@ -5472,7 +5472,7 @@ async function addMultipleImagesToHeading(headingIndex: number, headingTitle: st
     if (typeof (window.api as any)?.showOpenDialog === 'function') {
       const pick = await (window.api as any).showOpenDialog({
         properties: ['openFile', 'multiSelections'],
-        filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp'] }],
+        filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'jfif', 'jpe', 'png', 'gif', 'webp', 'bmp'] }],
       });
       const paths = Array.isArray(pick?.filePaths) ? pick.filePaths : [];
       if (!pick?.canceled && paths.length > 0) {

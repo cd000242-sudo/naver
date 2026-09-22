@@ -8131,7 +8131,7 @@ ipcMain.handle('library:saveImageToLocal', async (_event, sourceFilePath: string
       title: '이미지 저장',
       defaultPath: defaultFileName,
       filters: [
-        { name: '이미지 파일', extensions: ['png', 'jpg', 'jpeg', 'gif', 'webp'] },
+        { name: '이미지 파일', extensions: ['png', 'jpg', 'jpeg', 'jfif', 'jpe', 'gif', 'webp'] },
         { name: '모든 파일', extensions: ['*'] },
       ],
     });
@@ -8181,7 +8181,7 @@ ipcMain.handle('library:selectLocalImageFile', async (): Promise<{ success: bool
     const result = await dialog.showOpenDialog(mainWindow, {
       title: '이미지 파일 선택',
       filters: [
-        { name: '이미지 파일', extensions: ['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp'] },
+        { name: '이미지 파일', extensions: ['png', 'jpg', 'jpeg', 'jfif', 'jpe', 'gif', 'webp', 'bmp'] },
         { name: '모든 파일', extensions: ['*'] },
       ],
       properties: ['openFile'],
