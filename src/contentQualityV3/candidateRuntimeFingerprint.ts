@@ -248,6 +248,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/sourceRelevance.ts',
   'src/content/sourceRelevanceDuplicate.ts',
   'src/content/sourceRelevanceEntities.ts',
+  'src/content/sourceRelevancePrecheck.ts',
   'src/content/sourceRelevanceRanking.ts',
   'src/content/sourceRelevanceScoring.ts',
   'src/content/structuredResponseContract.ts',

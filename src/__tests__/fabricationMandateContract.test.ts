@@ -88,7 +88,11 @@ describe('날짜 앵커 — 모델은 오늘 날짜를 모른다', () => {
   it('자료에 날짜가 있을 때만 쓰고, 없으면 쓰지 말라고 명시한다', () => {
     expect(brief).toMatch(/입력 자료에 시행일·개정일·기준일이 있으면/u);
     expect(brief).toMatch(/자료에 날짜가 없으면 날짜 앵커를 쓰지 말고/u);
-    expect(brief).toMatch(/너는 오늘 날짜를 모른다/u);
+    // [2026-09-22 P1] "너는 오늘 날짜를 모른다" 는 dateBasis.todayIs 로 날짜를 주는 스키마와 정면 충돌했다(§4-11).
+    //   정본: 오늘 날짜는 자료 시점 판정 기준일 뿐, 본문 작성일 못박기·시점 추정에는 쓰지 않는다.
+    expect(brief).toMatch(/오늘 날짜\(dateBasis\.todayIs\)는 자료 시점을 .*가르는 기준일 뿐/u);
+    expect(brief).toMatch(/자료에 없는 시점을 추정해 넣는 것은 날조/u);
+    expect(brief).not.toMatch(/너는 오늘 날짜를 모른다/u);
   });
 });
 

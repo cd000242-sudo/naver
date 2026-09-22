@@ -39,13 +39,13 @@
     },
     {
       "path": "src/contentJsonPromptFormat.ts",
-      "sha256": "82ad097355842e80063caadfcdde3e93f38a74575f71dc9e3cba4252893abd3a",
-      "bytes": 51169
+      "sha256": "0316dbb4a69f3fce0f09129498f3768bbcf5999af3ed2d9996badd2cb33e7bf9",
+      "bytes": 51234
     },
     {
       "path": "src/promptLoader.ts",
-      "sha256": "35f18d400ada270504d9dc605447a2bdcac504876a3b186c0db150655e97b58c",
-      "bytes": 100433
+      "sha256": "038cf69930745c10ac54e8f89a3f09b6cc107d7ec0bc91e15ce7c0d3e5dcd562",
+      "bytes": 100834
     },
     {
       "path": "src/prompts/affiliate/chain/editor.prompt",
@@ -129,8 +129,8 @@
     },
     {
       "path": "src/prompts/homefeed/base.prompt",
-      "sha256": "096c46fa8f96baa2b901e4951cb79db51bc52dfbfe6975153873f4dd5c654288",
-      "bytes": 17592
+      "sha256": "c4f06188e475d046c617a3e685217cc13f13f1e0d04ecd0e79a43f1ecb9ef7a7",
+      "bytes": 16014
     },
     {
       "path": "src/prompts/homefeed/entertainment.prompt",
@@ -239,8 +239,8 @@
     },
     {
       "path": "src/prompts/seo/base.prompt",
-      "sha256": "7ce76e56707c37a94dd4af11e3d081de938a6806adf9897f3feb0eb8a4b46319",
-      "bytes": 36111
+      "sha256": "138e8c9da28aa2906ae5cd04d095deca7aac7dd948155c050b4441a14e15f18f",
+      "bytes": 35560
     },
     {
       "path": "src/prompts/seo/entertainment.prompt",
@@ -259,8 +259,8 @@
     },
     {
       "path": "src/prompts/seo/geo-overlay.prompt",
-      "sha256": "ef6f82b2f33bb89a0311618c96f2f18a895bae927bfe8086cd969c31889add83",
-      "bytes": 7163
+      "sha256": "3386985e3e4360b442f1b6e6840784eecbf1983391aa7d670e44f1880fdc2309",
+      "bytes": 7003
     },
     {
       "path": "src/prompts/seo/health.prompt",
@@ -554,7 +554,7 @@
     }
   ],
   "metadata": {
-    "repositoryHead": "d9e8dd327e413d6a4cc75d0eaf74c5a7d5951bd5",
+    "repositoryHead": "e2ebd0bdedb82cc3404587c0f0bb10e8337eefe9",
     "nodeVersion": "v20.20.2",
     "platform": "win32"
   }

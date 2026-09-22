@@ -6829,6 +6829,12 @@ async function generateStructuredContentInternal(
           extra: { ...(run.meta.extra || {}), attempt: attempt + 1, temperature },
         });
       });
+      // [2026-09-22 P1] Dev gate: measure the composed prompt without a paid call
+      //   (scripts/prompt-budget-report.cjs reads C-final-prompt.txt). Never set in production.
+      if (process.env.PROMPT_DRY_RUN === '1') {
+        withActiveRun((run) => run.finish({ publishDecision: 'PROMPT_DRY_RUN' as any }));
+        throw new Error('PROMPT_DRY_RUN: 프롬프트 측정용 중단 — 모델 호출 없음');
+      }
       try {
         const apiStart = Date.now();
 

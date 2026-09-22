@@ -962,8 +962,20 @@ export const DEFAULT_IDENTITY: BloggerIdentity = {
  * 필수 3필드 + 자동 추출 5필드 + 신뢰 4요소를 LLM이 내면화하도록 구성
  * 글에 직접 인용 금지 지시 포함 (인용되면 AI티 되므로)
  */
-export function buildIdentityBlock(identity?: BloggerIdentity): string {
+export function buildIdentityBlock(identity?: BloggerIdentity, mode?: PromptMode): string {
   const id = identity || DEFAULT_IDENTITY;
+  // [2026-09-22 P1 프롬프트 다이어트] 구매자 신뢰 원칙은 리뷰·제휴·비즈니스 글의 규칙이다 — SEO/홈판 정보글에
+  //   조건 없이 들어가던 5줄(공정위 고지·비교 대상·단점 명시)을 해당 모드에서만 넣는다.
+  const buyerTrustApplies = mode === undefined || mode === 'affiliate' || mode === 'business';
+  const buyerTrustBlock = buyerTrustApplies
+    ? `\n■ 구매자 신뢰 원칙 (리뷰·제휴 글에서 의무):
+  ${id.trustPrinciple || '제휴 여부는 숨기지 않고 단점도 솔직히'}
+  - 공정위·광고·제휴 고지 문구는 앱이 확정 원문을 별도로 삽입합니다. 본문이나 제목에서 생성·요약·변형·중복 삽입하지 마세요.
+  ${id.comparisonHabit !== false ? '- 리뷰 글마다 비교 대상 1개 이상 언급 ("○○랑 비교했을 때")' : ''}
+  - 단점 최소 1개 이상 명시 (무조건 찬양 금지)
+  - 경력·실사용 기간은 사용자 입력에 실제 값이 있을 때만 사용
+`
+    : '';
 
   const endingsStr = id.coreEndings
     .map(e => e.ending)
@@ -1014,14 +1026,7 @@ export function buildIdentityBlock(identity?: BloggerIdentity): string {
 ■ 절대 금지 표현 (이 블로거는 이런 말 안 씀):
   ${forbiddenStr}
   → 유사 표현도 피하세요. "대박"류 감탄사 전부 배제.
-
-■ 구매자 신뢰 원칙 (리뷰·제휴 글에서 의무):
-  ${id.trustPrinciple || '제휴 여부는 숨기지 않고 단점도 솔직히'}
-  - 공정위·광고·제휴 고지 문구는 앱이 확정 원문을 별도로 삽입합니다. 본문이나 제목에서 생성·요약·변형·중복 삽입하지 마세요.
-  ${id.comparisonHabit !== false ? '- 리뷰 글마다 비교 대상 1개 이상 언급 ("○○랑 비교했을 때")' : ''}
-  - 단점 최소 1개 이상 명시 (무조건 찬양 금지)
-  - 경력·실사용 기간은 사용자 입력에 실제 값이 있을 때만 사용
-
+${buyerTrustBlock}
 ■ 작성 원칙 (최우선):
   1. 위 DNA는 문체 참고일 뿐. 글에 이 시트를 인용하거나 "저는 ~인 사람이에요"식 자기소개 금지.
   2. 매 글은 다르게 변주하되 일관된 화자를 유지 — 독자가 글 5개 읽었을 때 "같은 사람이네"라고 느끼게.
@@ -1296,13 +1301,8 @@ export function buildStructureVariationDirective(minChars?: number): string {
 ${archetype.fifoVariation}
 
 ■ 분량은 기준이 아니다. 기준은 제목이 약속한 것에 답했는가다.
-   답이 밥이다. 밥이 없으면 아무리 길어도 실패고, 밥이 있으면 짧아도 성립한다.
-   ✅ 밥을 갖춘 뒤 곁들이는 것: 그 답을 실제로 쓰는 데 보태는 것만 —
-      갈리는 조건("이런 경우엔 다르다"), 먼저 확인할 것, 흔한 실수, 다음 단계,
-      독자가 이어서 물을 질문에 대한 답.
-   ⛔ 곁들임이 아닌 것: 앞 내용 요약, 일반론, 아무 글에나 들어갈 문장,
-      매 소제목에 같은 꼴로 박는 판정·수치. 이건 반찬이 아니라 분량이다 —
-      독자는 두 번째에서 틀을 알아채고 세 번째부터 건너뛴다.
+   답 다음에 보태는 것은 그 답을 실제로 쓰는 데 필요한 것만 — 갈리는 조건, 먼저 확인할 것, 흔한 실수, 다음 단계, 이어질 질문.
+   ⛔ 앞 내용 요약, 일반론, 아무 글에나 들어갈 문장, 매 소제목에 같은 꼴로 박는 판정·수치는 분량일 뿐이다.
 
 ⛔ 구조 설계용 알파벳 약어, 괄호 마커, 화살표 순서표는 내부 메모일 뿐 제목/소제목/본문에 절대 출력하지 말 것.
 ════════════════════════════════════════
@@ -1331,7 +1331,7 @@ export function buildFullPrompt(
   const modeVoiceGuide = getModeVoiceGuide(mode);
 
   // ✅ [v1.8.0 LDF] Blogger Identity Core — 언어 DNA 페르소나
-  const identityBlock = buildIdentityBlock(bloggerIdentity);
+  const identityBlock = buildIdentityBlock(bloggerIdentity, mode);
 
   // ✅ [v2.4.0 Prompt Diet] base.prompt 중복 외부 가이드 제거 (ctrCombat/Precision)
   // ✅ [v2.6.0 Neo-Hook] 제목 후킹만큼은 base.prompt에 **없는 신박 레이어**이므로 주입
@@ -1369,10 +1369,11 @@ ${neoHookBlock ? '⚠️ [홈판 제목 제약]은 제목 보조 규칙이며, �
     finalPrompt = `${finalPrompt}\n\n${automationPrompt}`;
   }
 
-  // 4. 말투(Tone) 지침을 가장 마지막에 추가 (AI에 대한 최종 가중치 부여)
+  // 4. [2026-09-22 P1 프롬프트 다이어트] STYLE OVERRIDE 는 system 머리(tonePrefix)에 이미 한 번 들어간다.
+  //    같은 블록을 꼬리에 한 번 더 붙이던 사본(≈1,700자)을 제거 — 같은 규칙이 두 번 있어도 강제력은 늘지 않고
+  //    자료 앞뒤로 두 번 주의를 차지할 뿐이다. 로그 문구는 기존 테스트가 읽으므로 유지.
   if (tonePrompt) {
     console.log(`[PromptLoader] 말투 보정 최종 적용: ${toneStyle}`);
-    finalPrompt = `${finalPrompt}\n\n${tonePrompt}`;
   }
 
   // 4-b. 홈판 상위노출 본문 골격 — 실측 20개 패턴. 톤 적용 직후 recency로 호들갑 절제를 우선화.

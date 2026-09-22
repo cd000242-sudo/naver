@@ -248,7 +248,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   (base.prompt · title/homefeed 프롬프트 숫자가 함께 바뀜었다)
         // [2026-09-22 audit P0 item 16] 프롬프트 다이어트 — "숫자 없는 문장이 낫다" 4곳 제거 · HW 개수 의무 해제 ·
         //   평가 우선순위(팩트>의도>구체성>밀도>최신성>구조>문체) 명시로 재계산
-        '5f1241f1c05b303b45b63bc0a1fffc53b9d75730629b9de3b10c26aebbb7f342',
+        // [2026-09-22 P1 4a] 프롬프트 다이어트 1차 — STYLE OVERRIDE 꼬리 사본 제거·구매자 신뢰 원칙 모드 조건부·
+        //   H5/H6 귀속·숫자 정본, 서식 정본(2열 표 허용), 홈판 제목 통계 17줄→규칙 3줄, 날짜 규율 정본으로 재계산
+        '01cea849962f9bbe5b66ca5bcbc695ced3854c3e47e2a0c6ce83fb46d1a5ac65',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
