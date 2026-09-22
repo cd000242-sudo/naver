@@ -39,7 +39,20 @@ describe('classifyTopicType', () => {
   });
 
   it('키워드에 연도가 있으면 NEWS_ISSUE', () => {
-    expect(classifyTopicType('2026 이슈 총정리', [])).toBe('NEWS_ISSUE');
+    expect(classifyTopicType('2026 연예인 열애설', [])).toBe('NEWS_ISSUE');
+  });
+
+  // [P1 live 제주 10월 가볼만한곳] a travel search was classified NEWS_ISSUE (news-heavy results) and the
+  // October-event article was rejected as too old. Evergreen intent vocabulary wins over news share.
+  it('여행/방법/추천 류 어휘가 있으면 뉴스 비중이 높아도 EVERGREEN', () => {
+    const docs: SourceDocument[] = [
+      doc({ id: 'S01', sourceTier: 'NEWS', sourceType: 'news' }),
+      doc({ id: 'S02', sourceTier: 'NEWS', sourceType: 'news' }),
+      doc({ id: 'S03', sourceTier: 'NEWS', sourceType: 'news' }),
+    ];
+    expect(classifyTopicType('제주 10월 가볼만한곳', docs)).toBe('EVERGREEN');
+    expect(classifyTopicType('에어컨 청소 방법', docs)).toBe('EVERGREEN');
+    expect(classifyTopicType('2026 셀토스 하이브리드 모의견적', docs)).toBe('CAR');
   });
 
   it('정책·자동차 어휘도 없고 뉴스 비중도 낮으면 EVERGREEN', () => {

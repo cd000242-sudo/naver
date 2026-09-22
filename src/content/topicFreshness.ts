@@ -15,6 +15,10 @@ export type TopicType = 'NEWS_ISSUE' | 'POLICY' | 'CAR' | 'EVERGREEN';
 
 const POLICY_VOCAB = ['신청', '지원', '공고', '모집', '조건', '대상', '접수', '시행', '개정', '자격'];
 const CAR_VOCAB = ['견적', '트림', '연식', '가격표', '제원', '풀체인지', '시승', '출고'];
+// [P1 live 제주 10월 가볼만한곳] Evergreen intent classes — a travel/how-to/definition search must
+// not be treated as a news issue just because news outlets cover it; a month token ("10월") is a
+// season, not a breaking-news date. Vocabulary classes only — no place or product names.
+const EVERGREEN_VOCAB = ['가볼만한', '가볼 만한', '여행', '맛집', '코스', '추천', '방법', '뜻', '차이', '비교', '후기', '정리', '총정리', '하는법', '만드는', '레시피'];
 const YEAR_TOKEN_RE = /\b(19|20)\d{2}\b/;
 
 /** Half-life (days) for the freshness decay curve, per topic type. */
@@ -52,6 +56,7 @@ export function classifyTopicType(keyword: string, docs: SourceDocument[] = []):
   const text = String(keyword ?? '');
   if (hasVocab(text, POLICY_VOCAB)) return 'POLICY';
   if (hasVocab(text, CAR_VOCAB)) return 'CAR';
+  if (hasVocab(text, EVERGREEN_VOCAB)) return 'EVERGREEN';
 
   const newsCount = docs.filter((d) => d.sourceTier === 'NEWS' || d.sourceType === 'news').length;
   const newsShare = docs.length > 0 ? newsCount / docs.length : 0;
