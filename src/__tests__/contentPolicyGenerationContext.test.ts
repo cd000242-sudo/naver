@@ -20,7 +20,7 @@ afterEach(async () => {
 });
 
 describe('generation policy context', () => {
-  it('injects every required recent-post field before draft generation', async () => {
+  it('injects only the duplicate-avoidance fields before draft generation', async () => {
     const userDataPath = await tempDir();
     const recentPosts = makeRecentPosts(20).map((post, index) => ({
       ...post,
@@ -40,17 +40,22 @@ describe('generation policy context', () => {
 
     expect(result.allowed).toBe(true);
     expect(result.input.recent_posts).toHaveLength(20);
-    expect(result.prompt).toContain('recent-0');
+    // [2026-09-22 실사고] 이 블록이 선언한 용도는 "제목·도입·소제목·각도·구조 반복 회피" 하나다.
+    //   그 다섯 필드는 반드시 들어가고,
     expect(result.prompt).toContain(recentPosts[0].title);
     expect(result.prompt).toContain(recentPosts[0].intro);
     expect(result.prompt).toContain(recentPosts[0].headings[0]);
-    expect(result.prompt).toContain(recentPosts[0].body);
     expect(result.prompt).toContain(recentPosts[0].topic_angle);
     expect(result.prompt).toContain(recentPosts[0].structure_type);
-    expect(result.prompt).toContain(recentPosts[0].business_facts![0]);
-    expect(result.prompt).toContain(recentPosts[0].related_questions![0]);
-    expect(result.prompt).toContain(recentPosts[0].published_at!);
-    expect(result.prompt).toContain(recentPosts[0].exposure_status!);
+    //   용도에 없는 필드는 프롬프트에 실리지 않는다(50편 기준 23,176자 = 프롬프트의 24%).
+    expect(result.prompt).not.toContain(recentPosts[0].body);
+    expect(result.prompt).not.toContain('recent-0');
+    expect(result.prompt).not.toContain(recentPosts[0].url!);
+    expect(result.prompt).not.toContain('"published_at"');
+    expect(result.prompt).not.toContain('"exposure_status"');
+    expect(result.prompt).not.toContain('"template_id"');
+    // 옛 글의 사실을 새 글 옆에 두지 않는다 — 블록 스스로 "베끼거나 지어내지 마라"고 금지한 항목이다.
+    expect(result.prompt).not.toContain(recentPosts[0].business_facts![0]);
   });
 
   it('continues generation but requires publish review when fewer than the minimum posts are available', async () => {
@@ -114,7 +119,7 @@ describe('generation policy context', () => {
 
     expect(result.allowed).toBe(true);
     expect(result.reasons).toContain('BLOCK_MISSING_FACTS');
-    expect(result.prompt).toContain('recent-0');
+    expect(result.prompt).toContain('RECENT_POST_COUNT=');
   });
 
   it('keeps missing reader context as a warning instead of blocking generation', async () => {
@@ -134,7 +139,7 @@ describe('generation policy context', () => {
 
     expect(result.allowed).toBe(true);
     expect(result.reasons).toContain('BLOCK_MISSING_TARGET_READER');
-    expect(result.prompt).toContain('recent-0');
+    expect(result.prompt).toContain('RECENT_POST_COUNT=');
   });
 
   it('allows draft generation but keeps publish review required when all history is unavailable', async () => {

@@ -102,21 +102,22 @@ export function buildRecentPostsGenerationPrompt(input: ContentPolicyInput): str
   // 주입해 입력 토큰이 편당 ~105k까지 부풀었다(전 엔진 공통, 편당 입력 비용의 81%).
   // 중복 회피에는 제목·서론·소제목·주제각도·구조 타입이면 충분하고(문장 단위
   // 유사도는 발행 후 유사도 저장소가 별도 담당), 본문은 앞부분 발췌만 남긴다.
-  const BODY_EXCERPT_CHARS = 200;
+  //
+  // [2026-09-22 실사고 20260922-231111] 그 발췌마저도 남은 필드와 함께 여전히 컸다.
+  // 실측: 50편 블록 41,758자 중 이 블록이 **선언한 용도**(제목·도입·소제목·각도·구조
+  // 반복 회피)에 쓰이는 필드는 18,582자뿐이고, 23,176자(프롬프트 전체의 24%)가
+  // 용도에 없는 필드였다 — body_excerpt 10,374 / url 2,350 / article_id 1,500 /
+  // published_at 1,300 / template_id 1,108 / exposure_status 698.
+  // 그 프롬프트는 96,272자(≈56,600 토큰)가 되어 claude-sonnet-5 API 90초 창에서 잘렸다.
+  // 게다가 business_facts 는 "이 기록의 사실을 베끼거나 지어내지 마라"고 스스로 금지한
+  // 항목이라, 옛 글의 사실을 새 글 옆에 두는 환각 표면이기도 했다(팩트 규율 5).
+  // 선언한 용도에 쓰이는 다섯 필드만 남긴다.
   const payload = posts.map((post) => ({
-    article_id: post.article_id,
     title: post.title,
     introduction: post.intro,
     headings: [...post.headings],
-    body_excerpt: String(post.body || '').slice(0, BODY_EXCERPT_CHARS),
     topic_angle: post.topic_angle,
     structure_type: post.structure_type,
-    business_facts: [...(post.business_facts || [])],
-    related_questions: [...(post.related_questions || [])],
-    published_at: post.published_at || null,
-    exposure_status: post.exposure_status || null,
-    template_id: post.template_id || null,
-    url: post.url || null,
   }));
 
   return [

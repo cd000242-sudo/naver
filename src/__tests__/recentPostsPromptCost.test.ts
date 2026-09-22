@@ -40,19 +40,22 @@ function makeInput(postCount: number, bodyChars: number) {
 }
 
 describe('최근글 프롬프트 비용 방어', () => {
-  it('본문 전문 대신 발췌만 주입한다 (전 엔진 공통 입력 토큰 절감)', () => {
+  it('본문은 발췌조차 넣지 않는다 (전 엔진 공통 입력 토큰 절감)', () => {
     const prompt = buildRecentPostsGenerationPrompt(makeInput(42, 3000));
-    // 42개 × 3000자 본문 전문이면 126,000자+ 였다. 발췌(200자)면 크게 줄어든다.
-    expect(prompt).toContain('body_excerpt');
+    // 42개 × 3000자 본문 전문이면 126,000자+ 였다. 발췌(200자)로 줄였다가,
+    // [2026-09-22 실사고 20260922-231111] 50편 기준 발췌만 10,374자(블록의 24%)인 게
+    // 확인돼 아예 뺀다 — 중복 회피에는 도입부·소제목이면 충분하다.
+    expect(prompt).not.toContain('body_excerpt');
     expect(prompt).not.toMatch(/"body":/);
-    // 발췌 후 전체 길이는 옛 전문 주입(126k+)의 몇 분의 일이어야 한다.
-    expect(prompt.length).toBeLessThan(60000);
+    expect(prompt.length).toBeLessThan(20000);
   });
 
-  it('본문 발췌는 200자로 제한된다', () => {
+  it('용도에 없는 필드는 싣지 않는다 — 블록이 선언한 중복 회피 다섯 가지만', () => {
     const prompt = buildRecentPostsGenerationPrompt(makeInput(1, 5000));
     const parsed = JSON.parse(prompt.split('\n').find((l) => l.trim().startsWith('[{'))!);
-    expect(parsed[0].body_excerpt.length).toBe(200);
+    expect(Object.keys(parsed[0]).sort()).toEqual(
+      ['headings', 'introduction', 'structure_type', 'title', 'topic_angle'],
+    );
   });
 
   it('중복 회피 신호(제목·서론·소제목·주제각도·구조)는 유지된다', () => {

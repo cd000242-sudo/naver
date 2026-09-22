@@ -3447,8 +3447,8 @@ export function enforceContentQualityV3BusinessGuard(
  * - 첫 연결 지연 고려: DNS 해석, TLS 핸드쉐이크 등
  * - 사양과 무관: AI 처리는 서버에서 수행됨
  */
-function getTimeoutMs(minChars: number, retryAttempt: number = 0): number {
-  return getContentProviderTimeoutMs(minChars, retryAttempt);
+function getTimeoutMs(minChars: number, retryAttempt: number = 0, promptChars: number = 0): number {
+  return getContentProviderTimeoutMs(minChars, retryAttempt, promptChars);
 }
 
 const GEMINI_CACHE_CREATE_TIMEOUT_MS = 10_000;
@@ -3617,7 +3617,7 @@ async function callGemini(
     submissionMode?: GenerationSubmissionMode;
   } = {},
 ): Promise<string> {
-  const timeoutMs = getTimeoutMs(minChars);
+  const timeoutMs = getTimeoutMs(minChars, 0, prompt.length);
   const strictSingleCall =
     options.executionPolicy === CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY;
   const singleSubmission = strictSingleCall
@@ -4361,7 +4361,7 @@ async function callPerplexity(
   } catch {
     modelName = process.env.PERPLEXITY_MODEL || 'sonar';
   }
-  const timeoutMs = getTimeoutMs(minChars);
+  const timeoutMs = getTimeoutMs(minChars, 0, prompt.length);
   const allowAutomaticRetry = shouldAllowAutomaticProviderRetry(options.submissionMode);
   const maxAttempts = allowAutomaticRetry ? 99 : 1;
   const maxTransientRetries = allowAutomaticRetry ? 5 : 0;
@@ -5095,7 +5095,7 @@ async function callClaude(
     console.warn('[Claude] Config 로드 실패 (env 폴백 사용):', e);
   }
 
-  const timeoutMs = getTimeoutMs(minChars);
+  const timeoutMs = getTimeoutMs(minChars, 0, prompt.length);
   console.log(`[Claude] 시작: 목표 ${minChars}자, 타임아웃 ${timeoutMs / 1000}초`);
 
   // ✅ [2026-03-23 FIX] config에서 직접 API 키를 가져와 전달 (process.env 폴백)
