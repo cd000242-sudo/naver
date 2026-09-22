@@ -36,7 +36,10 @@ const APPDATA = process.env.APPDATA || path.join(process.env.USERPROFILE || '', 
 const RUNS_DIR = path.join(APPDATA, 'better-life-naver', 'generation-runs');
 const OUT_DIR = path.join(__dirname, '..', 'src', '__tests__', 'fixtures', 'critique');
 
-const BODY_TRUNCATE_CHARS = 1500;
+// [Quality Fix 1] Same per-article cap the Writer material uses (sourceAssembler FULLTEXT_PER_ARTICLE_CHARS).
+const BODY_TRUNCATE_CHARS = 3200;
+/** Blueprint block of C-final-prompt (quotes/facts the Writer also saw) — kept as extraMaterial. */
+const EXTRA_MATERIAL_CHARS = 6000;
 
 const RUNS = [
   { slug: 'policy', runId: '20260922-143533-3056zs', keyword: '2026 청년도약계좌 조건', mode: 'seo', topicType: 'POLICY' },
@@ -196,6 +199,18 @@ function buildDocuments(runDir) {
 
 // --- Main ------------------------------------------------------------------------------------
 
+/** The blueprint material block sits between "[원본 텍스트]" and the research brief in C-final-prompt. */
+function readBlueprintMaterial(runDir) {
+  const promptPath = path.join(runDir, 'C-final-prompt.txt');
+  if (!fs.existsSync(promptPath)) return '';
+  const prompt = fs.readFileSync(promptPath, 'utf-8');
+  const start = prompt.indexOf('[원본 텍스트]');
+  if (start < 0) return '';
+  const rest = prompt.slice(start);
+  const end = rest.indexOf('[리서치 요약');
+  return (end > 0 ? rest.slice(0, end) : rest).slice(0, EXTRA_MATERIAL_CHARS);
+}
+
 function buildFixture(run) {
   const runDir = path.join(RUNS_DIR, run.runId);
   const modelOutputRaw = fs.readFileSync(path.join(runDir, 'D-model-output.txt'), 'utf-8');
@@ -205,6 +220,7 @@ function buildFixture(run) {
   }
   const content = buildContent(modelOutput);
   const documents = buildDocuments(runDir);
+  const extraMaterial = readBlueprintMaterial(runDir);
 
   const fixture = {
     runId: run.runId,
@@ -213,6 +229,7 @@ function buildFixture(run) {
     topicType: run.topicType,
     content,
     documents,
+    extraMaterial,
   };
 
   fs.mkdirSync(OUT_DIR, { recursive: true });

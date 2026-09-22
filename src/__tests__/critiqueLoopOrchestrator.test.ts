@@ -84,7 +84,7 @@ describe('critique loop — special fixtures', () => {
     const out = await runQualityLoop(baseInput(routes));
     expect(out.summary.decision).toBe('MANUAL_REVIEW');
     expect(out.summary.revisionCycles).toBe(MAX_REVISION_CYCLES);
-    expect(out.summary.manualReviewReasons.join(' ')).toMatch(/UNRESOLVED_AFTER_2_CYCLES/);
+    expect(out.summary.manualReviewReasons.join(' ')).toMatch(/UNRESOLVED_INTEGRITY_AFTER_2_CYCLES/);
     expect(out.summary.issues[0].state).toBe('OPEN');
     expect(stagesOf(routes)).toEqual(['critic', 'revision', 'verification', 'revision', 'verification', 'editorial', 'judge']);
     expect(out.summary.cost.qualityCalls).toBe(7);

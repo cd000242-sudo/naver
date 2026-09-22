@@ -13,6 +13,8 @@ import { runPrecheck } from '../quality/critique/precheck';
 import { buildEvidencePack } from '../quality/critique/evidence';
 import { computeQualityMetrics } from '../quality/critique/metrics';
 import { scriptedRoutes, stagesOf, PASS_JSON } from './critiqueLoopFixtures';
+import { scanHighRiskClaims } from '../quality/critique/claimScanner';
+import { evidenceCorpus } from '../quality/critique/evidence';
 
 interface Fixture {
   readonly runId: string;
@@ -21,6 +23,7 @@ interface Fixture {
   readonly topicType: string;
   readonly content: StructuredContent;
   readonly documents: SourceDocument[];
+  readonly extraMaterial?: string;
 }
 
 function loadFixture(slug: string): Fixture {
@@ -37,7 +40,7 @@ const baseInput = (
   extra: Partial<Parameters<typeof runQualityLoop>[0]> = {},
 ) => ({
   content: fixture.content, keyword: fixture.keyword, contentMode: fixture.mode, topicType: fixture.topicType,
-  sourceDocuments: fixture.documents, rawCorpus: '', sourceBased: true, jsonComplete: true, outputTruncated: false,
+  sourceDocuments: fixture.documents, rawCorpus: '', extraMaterial: fixture.extraMaterial, sourceBased: true, jsonComplete: true, outputTruncated: false,
   relatedKeywords: [], relatedKeywordsAreLlmExpanded: false, baseCalls: 1,
   resolveRoute: routes.resolveRoute, log: () => undefined, now: new Date('2026-09-22T10:00:00+09:00'),
   ...extra,
@@ -70,14 +73,26 @@ describe.each(CASES)('critique loop — $slug fixture (real P1 run)', ({ slug, f
     console.log(`[critiqueLoopFiveTypes] ${slug}: precheck MAJOR=${majorCount} MINOR=${precheck.issues.length - majorCount}`);
   });
 
-  it('c: all-PASS scripted routes converge via the fast path, article untouched', async () => {
+  const evidence = buildEvidencePack(documents, keyword, '', { extraMaterial: fixture.extraMaterial });
+  const majorSeeds = scanHighRiskClaims(buildArticleModel(content), evidenceCorpus(evidence)).filter((s) => s.severity === 'MAJOR');
+
+  it('c: all-PASS scripted routes converge via the fast path when the scanner finds no MAJOR seed; otherwise the seeds drive a revision', async () => {
     const routes = scriptedRoutes({});
     const out = await runQualityLoop(baseInput(fixture, routes));
-    expect(out.summary.decision).toBe('QUALITY_CONVERGED');
-    expect(out.summary.fastPath).toBe(true);
-    expect(stagesOf(routes)).toEqual(['critic', 'editorial', 'judge']);
-    expect(out.content.bodyPlain).toBe(content.bodyPlain);
-    expect(out.summary.preservation.revisedSections).toBe(0);
+    if (majorSeeds.length === 0) {
+      expect(out.summary.decision).toBe('QUALITY_CONVERGED');
+      expect(out.summary.fastPath).toBe(true);
+      expect(stagesOf(routes)).toEqual(['critic', 'editorial', 'judge']);
+      expect(out.content.bodyPlain).toBe(content.bodyPlain);
+      expect(out.summary.preservation.revisedSections).toBe(0);
+    } else {
+      // finance P1 draft: "9월 30일" (청약통장 전환 기한) is nowhere in the Writer material — a real fabrication.
+      expect(out.summary.fastPath).toBe(false);
+      expect(stagesOf(routes)[1]).toBe('revision');
+      expect(out.summary.issues.filter((i) => i.note === 'DETERMINISTIC_PRECHECK').length).toBe(majorSeeds.length);
+      expect(out.summary.decision).toBe('MANUAL_REVIEW');
+      expect(out.content.bodyPlain).toBe(content.bodyPlain);
+    }
   });
 
   it('d: MISSING_INFORMATION+ADD anchored at an H2 title is revised and verified — only s2 changes', async () => {
@@ -96,6 +111,7 @@ describe.each(CASES)('critique loop — $slug fixture (real P1 run)', ({ slug, f
     });
     const out = await runQualityLoop(baseInput(fixture, routes));
 
+    if (majorSeeds.length > 0) return; // seeded fixture is exercised by test c
     expect(out.summary.decision).toBe('QUALITY_CONVERGED');
     expect(out.summary.revisionCycles).toBe(1);
     expect(stagesOf(routes)).toEqual(['critic', 'revision', 'verification', 'editorial', 'judge']);
