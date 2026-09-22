@@ -67,7 +67,9 @@ export async function runQualityLoop(input: QualityLoopInput): Promise<QualityLo
   const model0 = model;
   let documents = [...input.sourceDocuments];
   // The reviewers see the same material as the Writer: full cleaned bodies + blueprint/raw material.
-  const evidenceOptions = { extraMaterial: [input.rawCorpus, input.extraMaterial || ''].filter((t) => t.trim()).join(' ') };
+  // Deduped: after groundBlueprintMaterial the blueprint material IS the pipeline text, so joining
+  // both would carry the same 20K twice through every deterministic scan.
+  const evidenceOptions = { extraMaterial: [...new Set([input.rawCorpus, input.extraMaterial || ''])].filter((t) => t.trim()).join(' ') };
   let evidence = buildEvidencePack(documents, input.keyword, input.rawCorpus, evidenceOptions);
   let ledger: IssueLedger = createLedger();
   let cycles = 0;

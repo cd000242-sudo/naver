@@ -5,6 +5,8 @@ import { isIntegrityIssue, splitByLayer } from '../quality/critique/issueTaxonom
 import { buildArticleModel } from '../quality/critique/sectionModel';
 import { buildEvidencePack, evidenceCorpus, EVIDENCE_PER_DOC_CHARS } from '../quality/critique/evidence';
 import { runQualityLoop } from '../quality/critique/orchestrator';
+import { buildJudgePrompt } from '../quality/critique/finalJudge';
+import { buildEditorPrompt } from '../quality/critique/editorPrompts';
 import { policyArticle, policyDocuments, scriptedRoutes, stagesOf, S2_TEXT, S3_TEXT, PASS_JSON } from './critiqueLoopFixtures';
 import type { QualityIssue } from '../quality/critique/types';
 
@@ -119,6 +121,53 @@ describe('evidence scope (root cause of the live false positives)', () => {
     expect(pack.items[0].excerpt.length).toBeLessThanOrEqual(EVIDENCE_PER_DOC_CHARS);
     expect(pack.items[0].excerpt).toContain('10월 18일까지');
     expect(evidenceCorpus(pack)).toContain('블루프린트 인용');
+  });
+});
+
+describe('input bounds (freeze check) — EVIDENCE_COMPLETE + INPUT_BOUNDED', () => {
+  const manyDocs = () => Array.from({ length: 8 }, (_, i) => ({
+    ...policyDocuments()[0],
+    id: `S0${i + 1}`,
+    title: `자료 ${i + 1}`,
+    body: `${i + 1}번 자료입니다. ${'긴 본문 문장이 이어집니다. '.repeat(260)}끝 문장 ${i + 1}번.`,
+  }));
+
+  it('every accepted document keeps a readable share — a sequential budget dropped the last ones', () => {
+    const pack = buildEvidencePack(manyDocs(), '키워드');
+    expect(pack.items).toHaveLength(8);
+    for (const item of pack.items) {
+      expect(item.excerpt.length).toBeGreaterThanOrEqual(1200);
+      expect(item.excerpt.length).toBeLessThanOrEqual(EVIDENCE_PER_DOC_CHARS);
+    }
+    const total = pack.items.reduce((n, it) => n + it.excerpt.length, 0);
+    expect(total).toBeLessThanOrEqual(24000);
+    // The last document must not be starved of budget.
+    expect(pack.items[7].excerpt.length).toBe(pack.items[0].excerpt.length);
+  });
+
+  it('the Judge prompt prints every accepted document — no blunt 6,000-char cut', () => {
+    const pack = buildEvidencePack(manyDocs(), '키워드');
+    const model = buildArticleModel(policyArticle());
+    const prompt = buildJudgePrompt(
+      { today: '2026-09-23', keyword: '키워드', contentMode: 'seo', topicType: 'POLICY', searchIntent: '의도', hashtags: [], precheckHardStops: [] },
+      model,
+      pack,
+    );
+    for (const item of pack.items) expect(prompt, `${item.id} 가 Judge 입력에서 빠졌다`).toContain(`[${item.id}] `);
+    expect(prompt).toContain('8번 자료입니다.'); // the last document's body, not just its header
+    // Bounded: evidence + article + contract, not the Writer's 45K-token prompt.
+    expect(prompt.length).toBeLessThan(40000);
+  });
+
+  it('Editor and Verification stay on the cited documents only', () => {
+    const pack = buildEvidencePack(manyDocs(), '키워드');
+    const model = buildArticleModel(policyArticle());
+    const issue = issueOf({ sectionId: 's2', exactSpan: '우대형 12%가 붙습니다', evidenceIds: ['S01'] });
+    const ctx = { today: '2026-09-23', keyword: '키워드', title: model.title, searchIntent: '의도' };
+    const editor = buildEditorPrompt(ctx, model, ['s2'], [issue], pack);
+    expect(editor).toContain('[S01] ');
+    expect(editor).not.toContain('[S08] ');
+    expect(editor.length).toBeLessThan(12000);
   });
 });
 

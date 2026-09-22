@@ -93,6 +93,18 @@ describe('배선 핀 — 설계도만 긴 재료를 받는다', () => {
   it('[Quality Fix 1] 생성기가 파이프라인 통과 후 설계도 재료를 채택 자료로 교체한다', () => {
     expect(live('../contentGenerator.ts', 'groundBlueprintMaterial(')).toBeGreaterThan(0);
   });
+
+  it('[Freeze Check] 접지가 설계도 재료를 읽기 전에 일어난다 — 탈락 자료 재유입 경로 0', () => {
+    const source = readFileSync(new URL('../contentGenerator.ts', import.meta.url), 'utf8').split(String.fromCharCode(10));
+    // 접지는 진입부에서 파이프라인 호출 **전에** 일어난다(설계도는 그 파이프라인 안에서 재료를 읽는다).
+    const groundAt = source.findIndex((l) => !l.trim().startsWith('//') && l.includes('groundBlueprintMaterial('));
+    const pipelineAt = source.findIndex((l) => !l.trim().startsWith('//') && l.includes('await runContentPipeline<'));
+    expect(groundAt).toBeGreaterThan(-1);
+    expect(pipelineAt).toBeGreaterThan(-1);
+    expect(groundAt).toBeLessThan(pipelineAt);
+    // 설계도 재료를 읽는 곳은 한 군데뿐이어야 접지를 우회할 수 없다.
+    expect(live('../contentGenerator.ts', 'resolveBlueprintMaterial(')).toBe(1);
+  });
 });
 
 describe('groundBlueprintMaterial — 설계도는 탈락 자료를 보지 않는다 (live 20260922-194812)', () => {

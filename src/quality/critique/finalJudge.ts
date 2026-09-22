@@ -41,7 +41,8 @@ ${openBlock}
 ## 근거 자료 요약
 ${describeKeyFacts(evidence) || '(요약 없음)'}
 
-${describeEvidence(evidence).slice(0, 6000)}
+## 근거 자료 (수용된 자료 전문 — "자료에 없다"고 막기 전에 여기서 먼저 찾아라)
+${describeEvidence(evidence)}
 
 ## 최종 글 (FAQ·CTA·해시태그 포함, 독자가 보는 그대로)
 ${renderVisibleArticle(model)}

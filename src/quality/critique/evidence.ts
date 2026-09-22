@@ -12,9 +12,11 @@ import { buildResearchSummary } from '../../content/researchSummary';
 import { resolveSourceName } from '../../content/sourceName';
 import type { EvidenceItem, EvidencePack } from './types';
 
-/** What the Writer material actually holds: news API bodies reach ~7.5K, the whole B block ~21K. */
-export const EVIDENCE_PER_DOC_CHARS = 8000;
+/** What the Writer material actually holds: the collector caps an article at 3,200 chars. */
+export const EVIDENCE_PER_DOC_CHARS = 4000;
 export const EVIDENCE_TOTAL_CHARS = 24000;
+/** Even with the maximum 8 documents every one of them stays readable. */
+export const MIN_PER_DOC_CHARS = 1200;
 const MAX_ITEMS = 8;
 const MAX_FACTS = 14;
 const MAX_QUESTIONS = 8;
@@ -53,10 +55,14 @@ export function buildEvidencePack(
   options: BuildEvidenceOptions = {},
 ): EvidencePack {
   const accepted = selectEvidenceDocuments(docs);
-  let budget = EVIDENCE_TOTAL_CHARS;
+  // [2026-09-23 Freeze Check] Even allocation, not first-come. A sequential budget let the last
+  // documents be truncated to nothing once the total was spent (8 docs x 3.2K > 24K), which is the
+  // same blindness the 700-char excerpt caused. Every accepted document keeps a share.
+  const perDoc = accepted.length > 0
+    ? Math.max(MIN_PER_DOC_CHARS, Math.min(EVIDENCE_PER_DOC_CHARS, Math.floor(EVIDENCE_TOTAL_CHARS / accepted.length)))
+    : EVIDENCE_PER_DOC_CHARS;
   const items: EvidenceItem[] = accepted.map((d) => {
-    const body = bodyOf(d).slice(0, Math.max(0, Math.min(EVIDENCE_PER_DOC_CHARS, budget)));
-    budget -= body.length;
+    const body = bodyOf(d).slice(0, perDoc);
     return {
       id: d.id,
       title: String(d.title || '').slice(0, 120),
