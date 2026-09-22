@@ -219,6 +219,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/qualityGate.ts',
   'src/content/qualityLedger.ts',
   'src/content/quoteCoverage.ts',
+  'src/content/regenerationFallback.ts',
   'src/content/relativeDateResolution.ts',
   'src/content/researchNoteHygiene.ts',
   'src/content/researchSummary.ts',

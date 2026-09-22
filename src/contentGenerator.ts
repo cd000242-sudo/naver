@@ -265,6 +265,7 @@ import {
   prependValidationRetryInstruction,
 } from './contentRetryPromptPolicy.js';
 import {
+  getClaudeContentTimeoutMs,
   getContentProviderTimeoutMs,
   getOpenAiContentTimeoutMs,
 } from './contentProviderTimeoutPolicy.js';
@@ -453,6 +454,13 @@ import { PartialResponseError } from './jsonParser.js';
 import { STRUCTURED_CONTENT_SCHEMA, assertResponseComplete, describeCompleteness } from './content/structuredResponseContract.js';
 import { describeIntegrity, evaluatePipelineIntegrity } from './content/pipelineIntegrityGate.js';
 import { maybeRunQualityLoop } from './quality/critique/generatorHook.js';
+import {
+  buildRegenerationFallbackMetadata,
+  describeRegenerationFallback,
+  describeRegenerationStart,
+  isUserAbortFailure,
+  type RegenerationFallbackMetadata,
+} from './content/regenerationFallback.js';
 import type { QualityLoopSummary } from './quality/critique/types.js';
 
 // ✅ [v1.4.51] Gemini 빈 응답 전용 에러 클래스 — finishReason별 대응 위해
@@ -2476,6 +2484,11 @@ export interface StructuredContent {
   };
   /** [2026-09-22 Critique Loop] Present only when the loop ran (flag ON). */
   _qualityLoop?: Omit<QualityLoopSummary, 'issues'> & { issueCount: number };
+  /**
+   * [2026-09-23] 품질 개선 재생성이 실패해 **직전 성공본**을 되돌려줬을 때만 존재한다.
+   * 이 값이 있어도 quality/publishDecision 은 재생성 직전 값 그대로다(성공 승격 아님).
+   */
+  _regenerationFallback?: RegenerationFallbackMetadata;
   selectedTitle: string;
   titleAlternatives: string[];
   titleCandidates: TitleCandidate[];
@@ -5138,6 +5151,8 @@ async function callClaude(
 
   // 각 모델을 순차적으로 시도
   for (const modelName of modelsToTry) {
+    // adaptive-thinking 모델(temperature 미수용)은 창 하한을 따로 받는다 — 중앙 resolver 가 정한다.
+    const effectiveTimeoutMs = getClaudeContentTimeoutMs(minChars, modelName, 0, prompt.length);
     let rateLimitWaitedMs = 0;
     let rateLimitRetryCount = 0;
     let transientRetryCount = 0;
@@ -5148,7 +5163,7 @@ async function callClaude(
         console.log(`[Claude] 콘텐츠 생성 시작`);
         console.log(`  • 모델: ${modelName} (${retry + 1})`);
         console.log(`  • 목표 분량: ${minChars}자`);
-        console.log(`  • 타임아웃: ${timeoutMs / 1000}초`);
+        console.log(`  • 타임아웃: ${effectiveTimeoutMs / 1000}초${effectiveTimeoutMs !== timeoutMs ? ` (adaptive-thinking 하한 적용, 기본 ${timeoutMs / 1000}초)` : ''}`);
         console.log(`  • Temperature: ${temperature}`);
         console.log(`  • 한도 대기 누적: ${Math.round(rateLimitWaitedMs / 1000)}초`);
         console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
@@ -5224,8 +5239,8 @@ async function callClaude(
 
         const response = await withProviderTimeout(
           createPromise,
-          timeoutMs,
-          `Claude API 호출 시간 초과 (${timeoutMs / 1000}초)`,
+          effectiveTimeoutMs,
+          `Claude API 호출 시간 초과 (${effectiveTimeoutMs / 1000}초)`,
           signal,
         );
 
@@ -6602,6 +6617,43 @@ async function generateStructuredContentInternal(
   };
 
   let jsonParseRetryUsed = false;
+  /*
+   * [2026-09-23 실사고 20260923-000352-221hos] 품질 개선 재생성 직전의 **완성본**을 들고 간다.
+   * 재생성이 타임아웃·공급자 오류·파싱 실패 등으로 죽어도 사용자가 글을 잃지 않게 하기 위함이다.
+   * 판정을 바꾸지 않는다 — 여기 담긴 quality/publishDecision 을 그대로 되돌려준다.
+   */
+  let lastSuccessfulArtifact: { content: StructuredContent; attempt: number; trigger: string } | null = null;
+  const keepArtifactBeforeRegeneration = (content: StructuredContent, at: number, trigger: string): void => {
+    lastSuccessfulArtifact = { content, attempt: at, trigger };
+    console.log(`[Regeneration] 직전 성공본 보존 (attempt=${at}, 사유="${trigger}")`);
+  };
+  const getKeptArtifact = (): { content: StructuredContent; attempt: number; trigger: string } | null => lastSuccessfulArtifact;
+  /**
+   * 재생성이 실패했을 때 직전 성공본을 돌려준다. 돌려주지 않는 경우는 둘뿐이다 —
+   * 보존된 결과가 없거나(최초 생성부터 실패), 사용자가 직접 중지한 경우.
+   * **품질 점수·publishDecision 은 손대지 않는다.** 성공으로 둔갑시키지 않는 것이 이 함수의 계약이다.
+   */
+  const recoverLastSuccessfulArtifact = (error: unknown, at: number): StructuredContent | null => {
+    const kept = lastSuccessfulArtifact;
+    if (!kept) return null;
+    const meta = buildRegenerationFallbackMetadata({ error, attempt: at, regenerationTrigger: kept.trigger });
+    if (isUserAbortFailure(meta.fallbackReason)) return null;
+    const preservedDecision = String((kept.content as any)?.quality?.decision
+      ?? (kept.content as any)?._generationIntegrity?.publishDecision
+      ?? '');
+    for (const line of describeRegenerationFallback(meta, preservedDecision)) console.warn(line);
+    withActiveRun((run) => run.updateMeta({
+      extra: { ...(run.meta.extra || {}), regenerationFallback: meta },
+    }));
+    /*
+     * 성공 경로와 같은 최종 정리를 거쳐 돌려준다 — 편집기가 받는 상태가 같아야 한다.
+     * 단 repairHeadingsBeforeFinalize(모델 호출)는 부르지 않는다: 방금 그 엔진이 실패한 상황에서
+     * 복구 경로가 또 모델을 기다리면 같은 사고를 반복한다. 순수 정리(finalize)만 적용한다.
+     */
+    const finalized = finalizeStructuredContent(kept.content, source, promptVariant);
+    // 판정은 그대로, 상태만 덧붙인다.
+    return Object.assign(finalized, { _regenerationFallback: meta }) as StructuredContent;
+  };
   for (let attempt = 0; attempt <= QUALITY_ATTEMPT_LIMIT; attempt += 1) {
     try {
       // ✅ [2026-04-03] 매 시도 전 abort 체크
@@ -6611,6 +6663,16 @@ async function generateStructuredContentInternal(
       if (attempt > 0) {
         const delay = RETRY_DELAYS[Math.min(attempt, RETRY_DELAYS.length - 1)];
         console.log(`[ContentGenerator] 재시도 ${attempt}/${MAX_ATTEMPTS}: ${delay / 1000}초 대기 후 재개`);
+        // 재생성을 시작할 때: attempt / 직전 성공본 보유 / 사유 / 창 / 엔진을 한 줄로 남긴다.
+        const keptForLog = getKeptArtifact();
+        console.log(describeRegenerationStart({
+          attempt,
+          hasPreviousArtifact: !!keptForLog,
+          trigger: keptForLog?.trigger || '동일 엔진 복구 재시도',
+          timeoutMs: getContentProviderTimeoutMs(minChars, 0, 0),
+          provider,
+          model: String((source as any)?.modelOverride || ''),
+        }));
         await sleepWithAbort(delay, signal);
         // ✅ [2026-04-03] 대기 후에도 abort 체크
         throwIfContentGenerationAborted(signal);
@@ -8049,6 +8111,7 @@ async function generateStructuredContentInternal(
             // ✅ [v2.10.173] URL 모드 strict 임계를 재시도 지시문에도 반영
             const _fidInstruction = _fid ? buildFidelityRetryInstruction(_fid, { minCompressionRatio: 0.85, minRetentionScore: 0.92 }) : '';
             extraInstruction = `${_fidInstruction}\n${_hallRetryInstruction}\n${extraInstruction}`;
+            keepArtifactBeforeRegeneration(optimized, attempt, `Fidelity ${_fid?.reason ?? ''}${_hallucinationFail ? ' + 환각 의심' : ''}`);
             continue; // for 루프 다음 attempt — 같은 attempt 카운트 보존
           }
         } catch (_e) { /* fidelity 모듈 실패 시 정상 흐름 */ }
@@ -8382,6 +8445,7 @@ async function generateStructuredContentInternal(
               const _unpaid = _ta.promised.filter((word) => !_bodyForUnpaid.includes(word));
               console.warn(`[TitleAnswer] 🔁 제목 약속 미이행 — 재생성 1회 (응답 ${Math.round(_ta.answerRate * 100)}%, 미상환: ${_unpaid.join(', ') || _ta.echoedOnly.join(', ')})`);
               extraInstruction = `${buildTitleAnswerRetryInstruction(_taTitle, _ta, _unpaid.length > 0 ? _unpaid : _ta.echoedOnly)}\n${extraInstruction}`;
+              keepArtifactBeforeRegeneration(optimized, attempt, 'TitleAnswer 제목 약속 미이행');
               continue; // 같은 attempt 카운트 보존 — Fidelity 재시도와 같은 규칙
             }
           } catch (_e) { console.warn('[TitleAnswer] 검사 실패 (정상 흐름 유지):', (_e as Error)?.message || _e); }
@@ -8456,6 +8520,7 @@ async function generateStructuredContentInternal(
           console.warn(`[QualityGate] 🚨 ${_trigger} — 자동 재시도 트리거 (decision=${_gateResult.decision})`);
           // [R3] 관통 판정 지시는 재생성에 편승한다 — 재생성은 게이트가 소유하고, 판정은 지시만 보탠다.
           extraInstruction = `${_throughlineDirective ? `${_throughlineDirective}\n` : ''}${_gateDirective}\n${extraInstruction}`;
+          keepArtifactBeforeRegeneration(optimized, attempt, `QualityGate ${_trigger}`);
           continue; // for 루프 다음 attempt
         }
 
@@ -8582,12 +8647,14 @@ async function generateStructuredContentInternal(
           _quality90FollowupRetryUsed = true;
           console.warn(`[QualityGate90] 🔁 patch 후에도 90점 미달 — 추가 전체 재시도 (${_quality90Assessment.reasons.join(', ')})`);
           extraInstruction = `${_quality90Assessment.directive}\n${extraInstruction}`;
+          keepArtifactBeforeRegeneration(optimized, attempt, `QualityGate90 patch 후 미달 (${_quality90Assessment.reasons.join(', ')})`);
           continue;
         }
 
         if (allowPaidPostGenerationRepair && _quality90Assessment?.miss && attempt < QUALITY_ATTEMPT_LIMIT) {
           console.warn(`[QualityGate90] 🔁 90점 미달 결과를 반환하지 않고 남은 동일 엔진 시도를 사용합니다 (${attempt + 1}/${MAX_ATTEMPTS + 1})`);
           extraInstruction = `${_quality90Assessment.directive}\n${extraInstruction}`;
+          keepArtifactBeforeRegeneration(optimized, attempt, `QualityGate90 90점 미달 (${_quality90Assessment.reasons.join(', ')})`);
           continue;
         }
 
@@ -9042,9 +9109,15 @@ async function generateStructuredContentInternal(
 
         // ✅ [v1.4.41] 원본 에러 메시지를 보존하여 throw — 사용자가 진짜 원인을 알 수 있도록
         // ✅ [2026-04-11] userSelectedProvider 사용 — 폴백으로 provider가 바뀌어도 원래 엔진명 표시
+        const recovered = recoverLastSuccessfulArtifact(error, attempt);
+        if (recovered) return recovered;
         throw new Error(`콘텐츠 생성 실패 (엔진: ${userSelectedProvider}, ${attempt + 1}회 시도): ${errMsg}`);
       }
-      // 재시도 가능한 오류면 계속
+      // 재시도 가능한 오류면 계속 — 단, 남은 시도가 없으면 직전 성공본으로 되돌린다.
+      if (attempt >= QUALITY_ATTEMPT_LIMIT) {
+        const recovered = recoverLastSuccessfulArtifact(error, attempt);
+        if (recovered) return recovered;
+      }
       console.warn(`[시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}] 같은 엔진 복구 재시도:`, errMsg);
       extraInstruction = `${buildSameEngineRecoveryInstruction(provider, errMsg)}\n${extraInstruction}`;
     }
@@ -9067,6 +9140,9 @@ async function generateStructuredContentInternal(
   // ✅ [v1.4.41] 의미 있는 에러 메시지 — "알 수 없음" 대신 구체적 가이드
   // ✅ [2026-04-11] userSelectedProvider 사용 — 사용자가 선택한 엔진명 정확히 표시
   const finalReason = lastFailReason || '루프가 비정상 종료됨 (개발자 콘솔 로그 확인 필요)';
+  // [2026-09-23] 시도를 다 썼어도 직전 성공본이 있으면 그것을 돌려준다 — 개선 실패로 글을 잃지 않는다.
+  const recoveredAtEnd = recoverLastSuccessfulArtifact(new Error(finalReason), MAX_ATTEMPTS + 1);
+  if (recoveredAtEnd) return recoveredAtEnd;
   throw new Error(`콘텐츠 생성 실패 (엔진: ${userSelectedProvider}, ${MAX_ATTEMPTS + 1}회 시도 후 실패): ${finalReason}`);
   } finally {
     // ✅ [v2.7.27] Adaptive Limiter 슬롯 반환

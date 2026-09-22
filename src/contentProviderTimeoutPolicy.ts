@@ -1,3 +1,5 @@
+import { supportsClaudeTemperature } from './runtime/modelRegistry.js';
+
 /** 입력이 이 크기를 넘어가면 그 초과분만큼 시간을 더 준다. */
 const LARGE_PROMPT_BASELINE_CHARS = 20_000;
 /** 초과분 20,000자마다 더해 주는 시간. */
@@ -43,6 +45,29 @@ export function getContentProviderTimeoutMs(
  * at the former shared 90-second limit while staying below the renderer's
  * 360-second top-level budget.
  */
+/**
+ * [2026-09-23 실사고 20260923-000352-221hos] Claude adaptive-thinking 계열(temperature 를 받지 않고
+ * 자체 추론 예산을 쓰는 모델)은 같은 분량이어도 느리다. 실측: claude-sonnet-5 본문 1차가 115.1초에
+ * 성공했는데 창이 123.6초라 2차가 그대로 잘렸다. OpenAI 추론 모델이 이미 모델별 하한을 갖는 것과
+ * 같은 방식으로 하한을 둔다 — 창만 넓히는 것이고, 재시도 횟수는 그대로다.
+ *
+ * 대상: claude-opus-5 / claude-sonnet-5 / claude-fable-5(-1) 등 supportsClaudeTemperature=false 모델.
+ * 비대상(haiku 등)은 기존 창을 그대로 쓴다.
+ */
+export const CLAUDE_ADAPTIVE_MIN_TIMEOUT_MS = 240_000;
+
+export function getClaudeContentTimeoutMs(
+  minChars: number,
+  modelName: string,
+  retryAttempt = 0,
+  promptChars = 0,
+): number {
+  const configured = getContentProviderTimeoutMs(minChars, retryAttempt, promptChars);
+  return supportsClaudeTemperature(modelName)
+    ? configured
+    : Math.max(configured, CLAUDE_ADAPTIVE_MIN_TIMEOUT_MS);
+}
+
 export function getOpenAiContentTimeoutMs(
   minChars: number,
   modelName: string,
