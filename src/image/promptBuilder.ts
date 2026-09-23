@@ -20,6 +20,7 @@
 import { ImageRequestItem } from './types.js';
 import { sanitizeImagePrompt } from './imageUtils.js';
 import { isContextualImagePrompt } from './contextualImagePrompt.js';
+import { resolveThumbnailOverlayText } from './director/thumbnailText.js';
 
 export interface PromptOptions {
     isThumbnail: boolean;
@@ -128,6 +129,8 @@ export class PromptBuilder {
         stylePrompt?: string
     ): string {
         const fullTitle = String(postTitle || '').trim();
+        // [SPEC-NAVER-IMAGE-2026 V1 §9] The title stays the topic; only a short phrase is drawn.
+        const coverText = resolveThumbnailOverlayText(fullTitle);
         const isRealistic = !imageStyle || imageStyle === 'realistic';
         const styleInstruction = isRealistic
             ? 'Magazine editorial quality, high contrast, vibrant colors, dynamic composition.'
@@ -150,7 +153,7 @@ COMPOSITION:
 - Leave clean space in the lower 30% of image for text placement.
 
 KOREAN TEXT OVERLAY (⚠️ CRITICAL RULES):
-- Render EXACTLY this Korean text ONCE: "${fullTitle}"
+- Render EXACTLY this Korean text ONCE: "${coverText}" (a short hook, not the article title)
 - Place in the BOTTOM CENTER of the image.
 - Use BOLD sans-serif font, 36-48px equivalent size.
 - Split into 2 lines maximum if the title is long. Each line should be well-balanced in length.
@@ -174,7 +177,8 @@ No other text or watermark may appear.`;
         imageStyle?: string,
         stylePrompt?: string
     ): string {
-        const fullTitle = String(postTitle || '').trim();
+        // [SPEC-NAVER-IMAGE-2026 V1 §9] Same short phrase as the product thumbnail overlay.
+        const coverText = resolveThumbnailOverlayText(String(postTitle || '').trim());
         const isRealistic = !imageStyle || imageStyle === 'realistic';
         const styleInstruction = isRealistic
             ? 'Clean product photography, e-commerce ready, 1:1 square'
@@ -189,14 +193,14 @@ PRODUCT PRESERVATION (CRITICAL):
 - Product occupies 60-70% of the frame, fully visible and unobstructed.
 
 TEXT OVERLAY:
-- Add "${fullTitle}" in bold Korean typography over the lower-center area (bottom 40%).
+- Add "${coverText}" in bold Korean typography over the lower-center area (bottom 40%).
 - High contrast text (white with shadow, or dark with glow). Maximum 2 lines.
 - Text must not obscure the product.
 
 STYLE: ${categoryStyle}, ${styleInstruction}.
 CONTEXT: ${basePrompt}
 
-Only "${fullTitle}" may appear as text.`;
+Only "${coverText}" may appear as text.`;
     }
 
     /**

@@ -189,6 +189,7 @@ import {
   generateTableFromUrl
 } from '../image/tableImageGenerator.js';
 import { extractProsConsWithGemini } from '../image/geminiTableExtractor.js';
+import { resolveThumbnailOverlayText } from '../image/director/thumbnailText.js';
 
 // ── insertQuotation ──
 
@@ -1222,7 +1223,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             const imagePath = firstIntroImage?.filePath || firstIntroImage?.url || '';
 
             if (imagePath && blogTitle) {
-              const overlayPath = await generateThumbnailWithTextOverlay(imagePath, blogTitle);
+              // [SPEC-NAVER-IMAGE-2026 V1 §9] A short phrase, never the whole title.
+              const overlayPath = await generateThumbnailWithTextOverlay(imagePath, resolveThumbnailOverlayText(blogTitle));
               if (overlayPath) {
                 self.log(`   ✅ 텍스트 오버레이 썸네일 생성 완료`);
                 // [2026-08-17] AI 생성 썸네일 → provenance 전달로 AI 마크 대상에 포함

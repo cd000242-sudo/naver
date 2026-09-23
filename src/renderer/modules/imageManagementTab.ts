@@ -658,6 +658,26 @@ export async function initImageManagementTab(): Promise<void> {
     });
   }
 
+  // [SPEC-NAVER-IMAGE-2026] "고품질 썸네일" — 켜면 썸네일 후보 2~3장 + 자동 심사 1회(main: thumbnailDirectorGate).
+  //   기본은 1장·심사 없음(NAVER IMAGE PIPELINE V1 §10·§27). config 양방향 sync.
+  const thumbnailQualityCheckbox = document.getElementById('image-thumbnail-quality-high') as HTMLInputElement | null;
+  if (thumbnailQualityCheckbox) {
+    try {
+      const cfg = await (window as any).api?.getConfig?.();
+      thumbnailQualityCheckbox.checked = cfg?.thumbnailQualityMode === 'high';
+    } catch { /* 무시 */ }
+    thumbnailQualityCheckbox.addEventListener('change', async () => {
+      try {
+        await (window as any).api?.saveConfig?.({ thumbnailQualityMode: thumbnailQualityCheckbox.checked ? 'high' : 'standard' });
+        appendLog(thumbnailQualityCheckbox.checked
+          ? '🏆 고품질 썸네일 ON — 후보 2~3장 중 자동 심사로 1장을 고릅니다'
+          : '🖼️ 고품질 썸네일 OFF — 썸네일 1장, 심사 호출 없음');
+      } catch (e: any) {
+        console.warn('[ThumbnailQuality] 설정 저장 실패:', e);
+      }
+    });
+  }
+
   // ✅ OpenAI 이미지 모델·품질 라디오 — config 양방향 sync + 실시간 비용 표시
   const openaiModelRadios = document.querySelectorAll('input[name="openai-image-model"]');
   const openaiQualityRadios = document.querySelectorAll('input[name="openai-image-quality"]');

@@ -32,6 +32,39 @@ export interface ContextualImagePromptInput {
    * 이 값이 true 면 브리프는 카메라 줄을 아예 쓰지 않는다 — 소유자는 하나다.
    */
   engineOwnsCamera?: boolean;
+  /**
+   * [SPEC-NAVER-IMAGE-2026] Set-level section role (director/sectionRolePlanner). Plain strings so
+   * this module stays import-free — it is inlined into the renderer bundle.
+   */
+  visualRole?: ContextualVisualRole;
+  /** [SPEC-NAVER-IMAGE-2026] Cover-image direction lines for thumbnails (director/thumbnailStrategy). */
+  coverDirection?: readonly string[];
+  /**
+   * [SPEC-NAVER-IMAGE-2026 V1 §9] The exact short phrase to draw on a thumbnail (director/thumbnailText).
+   * Without it "render only the requested title text" named no text, and engines drew the whole title.
+   */
+  thumbnailText?: string;
+}
+
+/** Text policy naming the exact thumbnail phrase, or null when no phrase applies. */
+function resolveThumbnailTextPolicy(input: ContextualImagePromptInput): string | null {
+  const text = String(input.thumbnailText || '').replace(/["\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+  if (!input.isThumbnail || !input.allowText || !text) return null;
+  return `Render exactly this Korean text once, at most 2 lines, large and legible: "${text}". It is a short hook, not the article title; never write the article title. No other labels, captions, logos, or watermarks.`;
+}
+
+export interface ContextualVisualRole {
+  readonly name: string;
+  readonly composition: string;
+  readonly camera: string;
+  readonly constraints: readonly string[];
+}
+
+/** Camera line owned by the planned role, or null when no role was planned. */
+function resolveRoleCameraLine(input: ContextualImagePromptInput): string | null {
+  if (input.isThumbnail || !input.visualRole) return null;
+  const camera = String(input.visualRole.camera || '').trim();
+  return camera ? `- ${camera}` : null;
 }
 
 const GENERIC_COMPOSITION_LINE = '- Choose the clearest viewpoint for the section action: close detail for inspection, medium shot for hands-on action, or wide shot only when spatial layout is the subject.';
@@ -424,13 +457,19 @@ function buildCompactContextualImagePrompt(input: ContextualImagePromptInput): s
   const sectionHeading = compactText(input.sectionHeading, 220) || globalSubject;
   const sectionContent = compactText(input.sectionContent, 500) || sectionHeading;
   const existingPrompt = compactText(input.existingPrompt, 320);
-  const textPolicy = input.allowText
+  const textPolicy = resolveThumbnailTextPolicy(input) ?? (input.allowText
     ? 'Render only the explicitly requested title text and no other writing.'
-    : 'Create a text-free image with no letters, labels, logos, captions, or watermark.';
+    : 'Create a text-free image with no letters, labels, logos, captions, or watermark.');
   const referencePolicy = input.hasReferenceImage
     ? REFERENCE_IDENTITY_POLICY
     : NO_REFERENCE_IDENTITY_POLICY;
-  const viewpointLine = resolveViewpointLine(input);
+  const viewpointLine = resolveRoleCameraLine(input) || resolveViewpointLine(input);
+  const compactRoleLine = !input.isThumbnail && input.visualRole?.composition
+    ? `VISUAL ROLE: ${input.visualRole.composition}.`
+    : '';
+  const compactCoverLine = input.isThumbnail && input.coverDirection && input.coverDirection.length > 0
+    ? `COVER: ${input.coverDirection.join(' ')}`
+    : '';
 
   const compose = (visualHint: string): string => [
     CONTEXTUAL_PROMPT_MARKER,
@@ -440,6 +479,8 @@ function buildCompactContextualImagePrompt(input: ContextualImagePromptInput): s
     `ARTICLE TITLE: ${quoted(articleTitle)}`,
     visualHint ? `VISUAL HINT: ${quoted(visualHint)}` : '',
     'Create one literal, physically plausible scene in which the section evidence is visually recognizable. Keep the subject dominant and omit unrelated generic interiors or posed people.',
+    compactRoleLine,
+    compactCoverLine,
     viewpointLine ? viewpointLine.replace(/^- /, '') : '',
     referencePolicy,
     textPolicy,
@@ -488,15 +529,28 @@ export function buildContextualImagePrompt(input: ContextualImagePromptInput): s
   const intendedUse = input.isThumbnail
     ? 'Korean Naver blog cover image'
     : 'Korean Naver blog editorial image placed directly below this section heading';
-  const textPolicy = input.allowText
-    ? 'TEXT POLICY: Render only explicitly requested title text; no other labels, captions, logos, or watermarks.'
-    : 'TEXT POLICY: ZERO TEXT, ZERO LETTERS, ZERO WORDS, ZERO WRITING, no logos, no captions, no watermark.';
+  const thumbnailTextPolicy = resolveThumbnailTextPolicy(input);
+  const textPolicy = thumbnailTextPolicy
+    ? `TEXT POLICY: ${thumbnailTextPolicy}`
+    : input.allowText
+      ? 'TEXT POLICY: Render only explicitly requested title text; no other labels, captions, logos, or watermarks.'
+      : 'TEXT POLICY: ZERO TEXT, ZERO LETTERS, ZERO WORDS, ZERO WRITING, no logos, no captions, no watermark.';
   const referencePolicy = input.hasReferenceImage
     ? REFERENCE_IDENTITY_POLICY
     : NO_REFERENCE_IDENTITY_POLICY;
   const modePolicy = input.isShoppingConnect
     ? 'SHOPPING MODE: The referenced product remains the unmistakable hero subject; illustrate the section-specific use, feature, inspection, or decision without redesigning it.'
     : 'EDITORIAL MODE: Depict the real, literal situation described by the section rather than a symbolic stock-photo substitute.';
+
+  const roleLine = !input.isThumbnail && input.visualRole?.composition
+    ? `- VISUAL ROLE (${input.visualRole.name}): ${input.visualRole.composition}. Other sections of this article use different roles; keep to this one.`
+    : '';
+  const roleConstraintLines = !input.isThumbnail && input.visualRole
+    ? input.visualRole.constraints.map((line) => `- ${line}`)
+    : [];
+  const coverLines = input.isThumbnail && input.coverDirection && input.coverDirection.length > 0
+    ? ['', 'COVER DIRECTION:', ...input.coverDirection.map((line) => `- ${line}`)]
+    : [];
 
   const anchorLines = [
     CONTEXTUAL_PROMPT_MARKER,
@@ -516,14 +570,16 @@ export function buildContextualImagePrompt(input: ContextualImagePromptInput): s
     '- Show the exact global subject in the concrete condition, location, objects, and action stated by the section evidence.',
     '- The section-specific evidence must be visually recognizable without reading the heading.',
     '- Use literal, physically plausible details. Make this section visually distinct from every other section in the article.',
+    roleLine,
     '',
     'SCENE:',
     '- Create one coherent real-world moment, not a broad lifestyle mood board or abstract metaphor.',
     '- The section action or diagnostic detail is the dominant visual event; supporting surroundings stay minimal and relevant.',
+    ...coverLines,
     '',
     'COMPOSITION:',
     // 엔진이 각도를 앞머리에 박는 경우 여기서는 카메라를 말하지 않는다(지시 충돌 방지).
-    input.engineOwnsCamera ? '' : (resolveViewpointLine(input) || GENERIC_COMPOSITION_LINE),
+    input.engineOwnsCamera ? '' : (resolveRoleCameraLine(input) || resolveViewpointLine(input) || GENERIC_COMPOSITION_LINE),
     '- Keep the required subject sharp, unobstructed, and visually dominant with natural depth and realistic scale.',
     '',
     referencePolicy,
@@ -533,6 +589,7 @@ export function buildContextualImagePrompt(input: ContextualImagePromptInput): s
     '- No unrelated or generic scene. Never substitute a decorative generic living room, generic kitchen, generic sofa, dining setup, ornamental decor, or aspirational interior for the stated subject.',
     '- No posed person, smiling family, lounging person, cooking person, or decorative human figure unless the section evidence explicitly requires that exact human action.',
     '- Do not omit, generalize, beautify away, or contradict the article subject and section evidence.',
+    ...roleConstraintLines,
     `- ${textPolicy}`,
   ].filter(Boolean).join('\n');
 

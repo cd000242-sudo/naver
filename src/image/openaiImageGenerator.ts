@@ -215,12 +215,19 @@ export async function generateWithOpenAIImage(
             } else if (!isRealistic) {
                 // [2026-09-08] 스타일 분기에도 각도를 싣는다 — 종전에는 스틱맨/라운디/2D/빈티지가
                 //   각도 지시를 아예 못 받아 순번을 실어도 구도가 고정됐다(실측).
-                prompt = `${textDirective} ${stylePromptText}, ${dh.angle}, ${prompt}, ${dh.framing}.`;
+                // [SPEC-NAVER-IMAGE-2026] A planned section role owns the camera (brief); skip the rotation.
+                prompt = (item as any).visualRole
+                    ? `${textDirective} ${stylePromptText}, ${prompt}.`
+                    : `${textDirective} ${stylePromptText}, ${dh.angle}, ${prompt}, ${dh.framing}.`;
             } else {
                 const koreanPersonDirective = 'If any person appears in this image, they must be Korean with East Asian features. ';
                 // [2026-09-08] 종전에는 angle+color 2축만 실렸다. 로그는 조명까지 찍어
                 //   도는 것처럼 보였지만 프롬프트에는 없었다(실측). 6축 중 5축을 싣는다.
-                prompt = `${textDirective} ${dh.angle}, ${dh.framing}, ${koreanPersonDirective}${prompt}, ${dh.lighting}, ${dh.focus}, ${dh.color}.`;
+                // [SPEC-NAVER-IMAGE-2026] With a planned role the brief owns camera and look (natural light);
+                //   the random angle/lighting/colour rotation (dutch angle, neon, tilt-shift…) read as AI.
+                prompt = (item as any).visualRole
+                    ? `${textDirective} ${koreanPersonDirective}${prompt}`
+                    : `${textDirective} ${dh.angle}, ${dh.framing}, ${koreanPersonDirective}${prompt}, ${dh.lighting}, ${dh.focus}, ${dh.color}.`;
             }
 
             // 이미지 비율 설정

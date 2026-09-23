@@ -10,6 +10,7 @@ import { mkdtemp, rm, writeFile } from 'fs/promises';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import type { IssueVisionRoute } from './visionRoute.js';
+import { stagedImageName } from '../../agentCli/imageStaging.js';
 import { isOpenAiReasoningModel } from '../../runtime/openaiReasoningFamily.js';
 
 const LOG = '[IssueVisionJudge]';
@@ -149,7 +150,10 @@ async function judgeWithAgent(
       const filePath = join(dir, name);
       await writeFile(filePath, Buffer.from(images[i].base64, 'base64'));
       paths.push(filePath);
-      names.push(name);
+      // [2026-09-23] The runner copies these into its own cwd as photo-01.jpg … (imageStaging). Naming
+      //   the temp files here ("image-1.jpg") pointed the model at files that do not exist there — the
+      //   subscription judge answered "이미지 파일을 찾을 수 없어" and every candidate fell back (live run).
+      names.push(stagedImageName(i, filePath));
     }
     const withFiles = `${prompt}\n\n검사할 이미지 파일(순서대로): ${names.join(', ')}`;
 

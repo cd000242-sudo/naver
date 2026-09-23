@@ -44,6 +44,7 @@ declare function getSafeHeadingTitle(heading: any): string;
 declare function getHeadingSelectedImageKey(...args: any[]): string;
 declare function getStableImageKey(heading: any): string;
 declare function toFileUrlMaybe(p: string): string;
+declare function getManualEnglishPromptOverrideForHeading(heading: string): string;
 declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; openaiImageModel: string | null; imageFallbackPolicy: string | null };
 
 type ImageFallbackPolicy = 'engine-only' | 'ask' | 'guarantee';
@@ -111,6 +112,116 @@ function stringifyImageKeywords(value: unknown): string {
     : String(value || '').trim();
 }
 
+// [SPEC-NAVER-IMAGE-2026] Thumbnail director hints (main: image/director/thumbnailDirectorGate).
+//   Names carry a thumbDirector prefix — this file is concatenated into one renderer scope.
+const THUMB_DIRECTOR_SLOT = '🖼️ 썸네일';
+let thumbDirectorLastMeta: { slot: string; urls: string[]; meta: Record<string, unknown> } | null = null;
+
+// The manual thumbnail editors ask for a plain background with their own prompt; the director must
+// never rewrite those (it would swap the user's prompt for the post title).
+const THUMB_DIRECTOR_TOOL_HEADINGS = new Set(['thumbnail-bg', '썸네일 배경']);
+
+function isThumbDirectorItem(item: any, options?: any): boolean {
+  const raw = String(item?.heading || '').trim();
+  if (THUMB_DIRECTOR_TOOL_HEADINGS.has(raw) || options?.styleHint === 'background') return false;
+  const heading = raw.toLowerCase();
+  return item?.isThumbnail === true || heading.includes('썸네일') || heading.includes('thumbnail');
+}
+
+/** The user's own prompt: a regeneration, or a manual English prompt saved for this heading. */
+function thumbDirectorKeepsPrompt(options: any, heading: string): boolean {
+  if (options?.regenerate === true) return true;
+  try {
+    return typeof getManualEnglishPromptOverrideForHeading === 'function'
+      && String(getManualEnglishPromptOverrideForHeading(heading) || '').trim().length > 0;
+  } catch {
+    return false;
+  }
+}
+
+/** Photos already placed in this post, sent only while the thumbnail slot is still empty. */
+function readThumbDirectorRealImages(): any[] {
+  try {
+    if (typeof ImageManager === 'undefined') return [];
+    const current = ImageManager.getImages?.(THUMB_DIRECTOR_SLOT) || [];
+    if (Array.isArray(current) && current.length > 0) return [];
+    const all = ImageManager.getAllImages?.() || [];
+    return (Array.isArray(all) ? all : [])
+      .filter((img: any) => String(img?.heading || '') !== THUMB_DIRECTOR_SLOT && img?.isThumbnail !== true)
+      .map((img: any) => ({
+        filePath: String(img?.savedToLocal || img?.filePath || ''),
+        provider: img?.provider,
+        source: img?.source,
+        isCollected: img?.isCollected,
+        aiGenerated: img?.aiGenerated,
+        heading: img?.heading,
+      }))
+      .filter((img: any) => img.filePath && !/^(?:https?:|data:|blob:)/i.test(img.filePath))
+      .slice(0, 12);
+  } catch {
+    return [];
+  }
+}
+
+/** Image tab text mode: checked → include · explicit "false" in settings → exclude · otherwise AUTO (V1 §9). */
+function readThumbDirectorTextMode(): string {
+  try {
+    if ((document.getElementById('thumbnail-text-option') as HTMLInputElement | null)?.checked === true) return 'include';
+    const raw = readRawPipelineSettings().thumbnailTextInclude;
+    if (raw === 'true') return 'include';
+    if (raw === 'false') return 'exclude';
+  } catch { /* fall through to AUTO */ }
+  return 'auto';
+}
+
+function buildThumbDirectorRequest(options: any, structured: any, canUseStructuredContext: boolean): any {
+  const items = Array.isArray(options.items) ? options.items : [];
+  if (options.thumbnailDirector || items.length !== 1 || !isThumbDirectorItem(items[0], options)) return options.thumbnailDirector;
+  const cardPromise = canUseStructuredContext
+    ? String(structured?.preWritingAnalysis?.clickReason || structured?.cardPromise || '').trim().slice(0, 200)
+    : '';
+  // Only the image tab's thumbnail slot keeps the returned flags (takeThumbnailDirectorMeta), so only
+  // there may a number card be baked in or a real photo be composed.
+  const imageTabSlot = canUseStructuredContext && String(items[0]?.heading || '').trim() === THUMB_DIRECTOR_SLOT;
+  return {
+    cardPromise: cardPromise || undefined,
+    allowBakedText: imageTabSlot,
+    realImages: imageTabSlot ? readThumbDirectorRealImages() : [],
+    ...(imageTabSlot ? { textMode: readThumbDirectorTextMode() } : {}),
+    ...(thumbDirectorKeepsPrompt(options, String(items[0]?.heading || '').trim()) ? { keepPrompt: true } : {}),
+  };
+}
+
+function rememberThumbDirectorMeta(options: any, result: any): void {
+  try {
+    const items = Array.isArray(options?.items) ? options.items : [];
+    const image = result?.images?.[0];
+    if (items.length !== 1 || !image || !isThumbDirectorItem(items[0], options)) return;
+    if (image.directorNotice) {
+      try { appendLog(`💡 ${String(image.directorNotice)}`, 'images-log-output'); } catch { /* log is optional */ }
+    }
+    thumbDirectorLastMeta = {
+      slot: String(items[0]?.heading || '').trim(),
+      urls: [image.previewDataUrl, image.filePath, image.url].map((value: any) => String(value || '')).filter(Boolean),
+      meta: {
+        ...(image.provider ? { provider: image.provider } : {}),
+        ...(image.disableTextOverlay === true ? { disableTextOverlay: true } : {}),
+        ...(image.isCollected === true ? { isCollected: true } : {}),
+      },
+    };
+  } catch {
+    thumbDirectorLastMeta = null;
+  }
+}
+
+/** Flags the image tab must keep on its thumbnail slot: provider, no-overlay, real photo. */
+export function takeThumbnailDirectorMeta(heading: string, imageUrl: string): Record<string, unknown> {
+  const last = thumbDirectorLastMeta;
+  if (!last || last.slot !== String(heading || '').trim() || !last.urls.includes(String(imageUrl || ''))) return {};
+  thumbDirectorLastMeta = null;
+  return { ...last.meta };
+}
+
 /**
  * Last renderer boundary before IPC. It protects full-auto, manual generation,
  * and regeneration paths from silently dropping article/section context.
@@ -176,6 +287,8 @@ function enrichImageGenerationOptionsWithArticleContext(rawOptions: any): any {
     return itemWithoutDuplicateContext;
   });
 
+  const thumbnailDirector = buildThumbDirectorRequest(options, structured, canUseStructuredContext);
+
   return {
     ...options,
     postTitle: articleTitle,
@@ -188,6 +301,16 @@ function enrichImageGenerationOptionsWithArticleContext(rawOptions: any): any {
     globalSubject,
     articleContext,
     items: ipcItems,
+    // [SPEC-NAVER-IMAGE-2026] The article's full heading list, so a one-item call gets the same section
+    //   role as a batch (main: director/sectionRoleAssignment). Only when this article's context is bound.
+    ...(canUseStructuredContext && !Array.isArray(options.sectionPlanHeadings)
+      ? {
+        sectionPlanHeadings: structuredHeadings
+          .map((heading: any) => String(heading?.title || heading?.heading || heading?.text || heading || '').trim())
+          .filter(Boolean),
+      }
+      : {}),
+    ...(thumbnailDirector ? { thumbnailDirector } : {}),
   };
 }
 
@@ -516,10 +639,12 @@ async function invokeGenerateImagesIpc(options: any): Promise<any> {
 
   try {
     cleanupPreviewListener = registerImageGeneratedPreviewBridge();
-    return await Promise.race([
+    const ipcResult = await Promise.race([
       window.api.generateImages(options),
       timeoutPromise
     ]);
+    rememberThumbDirectorMeta(options, ipcResult);
+    return ipcResult;
   } catch (error) {
     const message = (error as Error)?.message || '';
     if (message.includes('타임아웃') || message.toLowerCase().includes('timeout')) {

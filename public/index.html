@@ -4076,6 +4076,17 @@
                         </div>
                     </label>
 
+                    <!-- [SPEC-NAVER-IMAGE-2026] 고품질 썸네일 — 켜면 썸네일 후보 2~3장을 만들고 자동 심사 1회로 1장을 고른다. 기본은 1장(심사 없음). -->
+                    <label
+                        style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; cursor: pointer; padding: 0.5rem 0.75rem; background: rgba(59, 130, 246, 0.08); border-radius: var(--radius-sm); border: 1px solid rgba(59, 130, 246, 0.25);">
+                        <input type="checkbox" id="image-thumbnail-quality-high"
+                            style="width: 16px; height: 16px; accent-color: var(--primary);">
+                        <div>
+                            <span style="font-size: 0.85rem; color: var(--text-strong); font-weight: 600;">🏆 고품질 썸네일</span>
+                            <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">후보 2~3장 중 자동 심사로 1장 선택 (심사 1회 · 고른 엔진의 최저가 비전 모델, 에이전트는 추가 과금 0). 끄면 썸네일 1장.</span>
+                        </div>
+                    </label>
+
 
 
                     <!-- ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 선택 시 로그인/확인 -->
@@ -4190,10 +4201,8 @@
                             <input type="checkbox" id="thumbnail-text-option"
                                 style="width: 16px; height: 16px; accent-color: var(--primary);">
                             <div>
-                                <span style="font-size: 0.8rem; color: var(--text-strong); font-weight: 600;">🖼️ 썸네일
-                                    텍스트 포함</span>
-                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.5rem;">나노바나나프로는
-                                    항상 포함</span>
+                                <span style="font-size: 0.8rem; color: var(--text-strong); font-weight: 600;">🖼️ 썸네일 문구 넣기 (짧게)</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.5rem;">제목 전체 대신 숫자·핵심 문구만 짧게 넣습니다. 꺼 두면 이미지 탭 생성은 자동 판단</span>
                             </div>
                         </label>
                     </div>

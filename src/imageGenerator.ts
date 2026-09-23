@@ -44,9 +44,18 @@ import {
   shouldApplyContextualPromptForProvider,
 } from './image/contextualImagePrompt.js';
 import { engineRotatesViewpoint } from './image/imageViewpointRotation.js';
+import { assignSectionRoles } from './image/director/sectionRoleAssignment.js';
+import { inferArticleVisualKind } from './image/director/sectionRolePlanner.js';
+import {
+  ROLE_DIRECTIVES,
+  engineHonorsVisualRole,
+  isRealisticImageStyle,
+  toBriefVisualRole,
+} from './image/director/roleDirectives.js';
 import { thumbnailService } from './thumbnailService.js';
 import { AutomationService } from './main/services/AutomationService.js'; // ✅ [2026-01-29 FIX] 중지 체크용
 import * as fs from 'fs/promises';
+import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
 
 
 // Re-export types for backward compatibility
@@ -252,7 +261,7 @@ function isKoreanTextSupportedEngine(engine: string): boolean {
  * - 쇼핑커넥트 모드: 별도 썸네일 (인덱스 0)
  * - thumbnailTextInclude 설정이 true일 때만 적용
  */
-async function applyKoreanTextOverlayIfNeeded(
+export async function applyKoreanTextOverlayIfNeeded(
   images: GeneratedImage[],
   provider: string,
   postTitle?: string,
@@ -296,7 +305,8 @@ async function applyKoreanTextOverlayIfNeeded(
 
         await thumbnailService.createProductThumbnail(
           img.filePath,
-          postTitle,
+          // [SPEC-NAVER-IMAGE-2026 V1 §9] A short phrase, never the whole title.
+          resolveThumbnailOverlayText(postTitle),
           outputPath,
           {
             position: 'bottom',
@@ -486,6 +496,24 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     ? options.items.filter(item => item.isThumbnail !== true)
     : options.items;
 
+  // [SPEC-NAVER-IMAGE-2026] One visual role per section, planned over the article's full heading list,
+  // so the set stops repeating the same subject type. Shopping keeps its product-hero logic.
+  const sectionRoles = options.isShoppingConnect
+    ? generationSourceItems.map(() => null)
+    : assignSectionRoles(generationSourceItems, {
+      sectionPlanHeadings: options.sectionPlanHeadings,
+      category: options.category,
+      postTitle: options.articleTitle || options.postTitle,
+    });
+  const articleVisualKind = inferArticleVisualKind(options.category, options.articleTitle || options.postTitle);
+  if (sectionRoles.some(Boolean)) {
+    const summary = generationSourceItems
+      .map((item, i) => (sectionRoles[i] ? `"${String(item.heading || '').slice(0, 14)}"=${ROLE_DIRECTIVES[sectionRoles[i]!].label}` : ''))
+      .filter(Boolean)
+      .join(' · ');
+    console.log(`[ImageRole] 🎭 소제목 역할: ${summary}`);
+  }
+
   const mappedItems = generationSourceItems
     .map((item, idx) => {
       const allowText = shouldAllowTextForImageItem(item, options);
@@ -504,6 +532,16 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       const viewpointIndex = engineRotatesViewpoint(normalizedProvider)
         ? undefined
         : (diversityIndex ?? (generationSourceItems.length > 1 ? idx : undefined));
+      const visualRole = sectionRoles[idx];
+      // Engines that honor the role drop their own angle/colour rotation, so the role owns the camera.
+      const engineHonorsRole = Boolean(visualRole) && engineHonorsVisualRole(normalizedProvider);
+      const briefRole = visualRole
+        ? toBriefVisualRole(visualRole, {
+          realistic: isRealisticImageStyle((item as any).imageStyle || (options as any).imageStyle),
+          kind: articleVisualKind,
+          regenerate: options.regenerate === true,
+        })
+        : undefined;
       const prompt = prepareProviderContextualImagePrompt(normalizedProvider, {
         articleTitle,
         globalSubject,
@@ -521,7 +559,14 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         // [2026-09-08] 각도를 스스로 돌리는 엔진에는 브리프가 카메라 줄을 넣지 않는다.
         //   종전에는 생성기가 앞머리에 각도를 박고 브리프가 뒤에서 "알맞은 시점을 골라라"
         //   라고 해 지시가 충돌했다(실측).
-        engineOwnsCamera: engineRotatesViewpoint(normalizedProvider),
+        engineOwnsCamera: engineRotatesViewpoint(normalizedProvider) && !engineHonorsRole,
+        visualRole: briefRole,
+        coverDirection: item.isThumbnail === true ? item.coverDirection : undefined,
+        // [SPEC-NAVER-IMAGE-2026 V1 §9] An engine that draws Korean itself gets the short phrase, never the
+        //   whole title. Other engines stay as before: the app overlays the text on them.
+        thumbnailText: item.isThumbnail === true && allowText && isKoreanTextSupportedEngine(normalizedProvider)
+          ? (item.thumbnailText || resolveThumbnailOverlayText(String(options.postTitle || articleTitle || '')))
+          : undefined,
       });
 
       return {
@@ -532,6 +577,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         articleContext,
         sectionContent: item.sectionContent,
         diversityIndex: item.diversityIndex, // openai/leonardo rotate from this; it was dropped here before
+        visualRole: engineHonorsRole ? visualRole || undefined : undefined,
 
         isThumbnail: item.isThumbnail || false, // ✅ isThumbnail 플래그 전달
         allowText, // text is thumbnail-only in auto publish contexts

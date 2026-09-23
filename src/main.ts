@@ -66,7 +66,8 @@ try {
 }
 import cron from 'node-cron';
 import { NaverBlogAutomation, RunOptions, type PublishMode, type AutomationImage } from './naverBlogAutomation.js';
-import { generateImages, resetAllImageState, abortImageGeneration } from './imageGenerator.js';
+import { generateImages, resetAllImageState, abortImageGeneration, applyKoreanTextOverlayIfNeeded } from './imageGenerator.js';
+import { generateImagesWithThumbnailDirector } from './image/director/thumbnailDirectorGate.js';
 import { deduplicateSourceImagesByContent } from './image/sourceImageDeduplicator.js';
 import { getImageErrorMessage, isMappableImageTransportError } from './image/imageErrorMessages.js';
 import {
@@ -4129,7 +4130,13 @@ ipcMain.handle(
         ...options,
         imageFallbackPolicy: options.imageFallbackPolicy || 'engine-only',
       };
-      const images = await generateImages(imageOptions, apiKeys, onImageGenerated);
+      // [SPEC-NAVER-IMAGE-2026] A lone thumbnail goes through the director (real photo first; one image by
+      //   default, candidates + one judge call only in high-quality mode); everything else passes through.
+      const images = await generateImagesWithThumbnailDirector(imageOptions, apiKeys, onImageGenerated, {
+        config,
+        generate: generateImages,
+        applyTitleOverlay: applyKoreanTextOverlayIfNeeded,
+      });
       const generatedImageCount = Array.isArray(images) ? images.length : 0;
       const providerForEmptyCheck = String(options.provider || imageOptions.provider || '');
       const requiredGeneratedImageCount = Array.isArray(options.items) ? options.items.length : 0;
@@ -4718,7 +4725,8 @@ ipcMain.handle('thumbnail:createProductThumbnail', async (
     fsSync.writeFileSync(inputPath, Buffer.from(response.data));
 
     // 2. thumbnailService를 사용하여 텍스트 오버레이
-    await thumbnailService.createProductThumbnail(inputPath, text, outputPath, {
+    // [SPEC-NAVER-IMAGE-2026 V1 §9] A short phrase, never the whole title.
+    await thumbnailService.createProductThumbnail(inputPath, resolveThumbnailOverlayText(text), outputPath, {
       position: (options?.position as 'top' | 'center' | 'bottom') || 'bottom',
       fontSize: options?.fontSize || 28,
       textColor: options?.textColor || '#ffffff',
@@ -4933,6 +4941,7 @@ registerDatalabApiHandlers();
 import { registerBackupHandlers, performDataBackup } from './main/ipc/backupHandlers.js';
 // ✅ [LDB] LDB IMAGE ULTRA 확장에서 완성 원고를 받는 로컬 브리지 (발행 없음, 목록에만 추가)
 import { startLdbBridge } from './main/ldb-bridge.js';
+import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
 
 /*
  * LDB 확장 수신 브리지. 환경설정에서 켠 사용자만 포트가 열린다.
@@ -5763,7 +5772,9 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
                 await waitForImageEngineStabilization('thumbnail');
                 const thumbResult = await withAbortCheck(
-                  generateImages({
+                  // [SPEC-NAVER-IMAGE-2026] Director: one image by default, candidates + judge only in high-quality
+                  //   mode; no baked text here (only thumbnailPath travels on).
+                  generateImagesWithThumbnailDirector({
                     provider: imageProvider,
                     items: [{
                       heading: title || '🖼️ 썸네일',
@@ -5780,7 +5791,12 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                     imageRatio: options?.thumbnailImageRatio || '1:1',
                     collectedImages: options?.collectedImages || structuredContent?.collectedImages || [],
                     imageFallbackPolicy: options?.imageFallbackPolicy || 'engine-only',
-                  } as any, imgApiKeys),
+                    thumbnailDirector: {}, // opt-in: this is the article thumbnail
+                  } as any, imgApiKeys, undefined, {
+                    config: imgConfig,
+                    generate: generateImages,
+                    applyTitleOverlay: applyKoreanTextOverlayIfNeeded,
+                  }),
                   abortController.signal
                 );
 

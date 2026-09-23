@@ -162,6 +162,9 @@ export interface AppConfig {
   // [2026-09-22] 이미지 관리 탭 "AI 활용 체크하기". true 면 발행 시 provider 판정과 무관하게
   //   에디터의 모든 이미지에 네이버 AI 활용 마크를 켠다 (기본 OFF = AI 엔진 허용목록 판정만).
   aiMarkAllImages?: boolean;
+  // [SPEC-NAVER-IMAGE-2026] 이미지 관리 탭 "고품질 썸네일" — 'high' 면 썸네일 후보 2~3장 + 자동 심사 1회.
+  //   기본(미설정·'standard')은 썸네일 1장, 심사 호출 없음 (NAVER IMAGE PIPELINE V1 §10·§27).
+  thumbnailQualityMode?: 'standard' | 'high';
 
   externalApiCostConsent?: boolean;
   externalApiCostConsentAt?: string;

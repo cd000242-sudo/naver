@@ -58,6 +58,7 @@ declare function generateEnglishPromptForHeading(title: string, subtitle?: strin
 declare function getManualEnglishPromptOverrideForHeading(heading: string): string;
 declare function clearManualEnglishPromptOverrideForHeading(heading: string): void;
 declare function generateImagesWithCostSafety(options: any): Promise<any>;
+declare function takeThumbnailDirectorMeta(heading: string, imageUrl: string): Record<string, unknown>;
 declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
 declare function generateNanoBananaProImage(prompt: string): Promise<string>;
 declare function isShoppingConnectModeActive(): boolean;
@@ -1675,6 +1676,8 @@ export function initHeadingImageGeneration(): void {
             liveImagePreview.addLog(`✅ [${completedCount}/${totalHeadings}] ${String(heading.title || '').trim()} 완료`);
 
             return {
+              // [SPEC-NAVER-IMAGE-2026] Keep the thumbnail director's flags (provider / no-overlay / real photo).
+              ...takeThumbnailDirectorMeta(headingForImage, imageUrl),
               url: imageUrl,
               prompt: promptForImage,
               heading: headingForImage,
@@ -1716,6 +1719,10 @@ export function initHeadingImageGeneration(): void {
               prompt: String(img?.prompt || heading?.prompt || '').trim(),
               headingIndex: idx,
               isThumbnail: false, // ✅ 전용 썸네일 별도 생성됨 → 소제목은 항상 false
+              // [SPEC-NAVER-IMAGE-2026] director flags survive to ImageManager → publish.
+              ...(img?.provider ? { provider: img.provider } : {}),
+              ...(img?.disableTextOverlay === true ? { disableTextOverlay: true } : {}),
+              ...(img?.isCollected === true ? { isCollected: true } : {}),
             };
           })
           .filter((v: any) => v !== null);
@@ -1739,7 +1746,8 @@ export function initHeadingImageGeneration(): void {
                 ...img,
                 heading: '🖼️ 썸네일',
                 isThumbnail: true,
-                provider: imageSource,
+                // [SPEC-NAVER-IMAGE-2026] A real-photo composite keeps its own provider (no AI mark).
+                provider: img.provider || imageSource,
                 timestamp: Date.now(),
               });
               appendLog(`🖼️ 순차 썸네일 → '🖼️ 썸네일' 키로 자동 등록`, 'images-log-output');

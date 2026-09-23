@@ -43,6 +43,40 @@ export interface ImageRequestItem {
   referenceImageUrl?: string; // 원격 참조 이미지 URL
   referenceImageList?: string[]; // URL reference list for UI-based img2img engines
   visualQueries?: string[]; // ✅ AI가 생성한 시각적 검색 키워드 (사람 같은 수집용)
+  /**
+   * [SPEC-NAVER-IMAGE-2026] Section role chosen by the set-level planner. Only set for engines that
+   * switch off their own camera/colour rotation for it (director/roleDirectives.engineHonorsVisualRole).
+   */
+  visualRole?: string;
+  /** [SPEC-NAVER-IMAGE-2026] Cover brief lines for a thumbnail item (director/thumbnailStrategy). */
+  coverDirection?: string[];
+  /** [SPEC-NAVER-IMAGE-2026 V1 §9] Exact short phrase a text-drawing engine renders on the thumbnail. */
+  thumbnailText?: string;
+}
+
+/**
+ * [SPEC-NAVER-IMAGE-2026] Renderer hints for the thumbnail director (director/thumbnailDirectorGate).
+ * Its presence is the opt-in: only article-thumbnail requests carry it. Requests without it (manual
+ * thumbnail tools, the image studio) pass through untouched.
+ */
+export interface ThumbnailDirectorRequest {
+  /** The prompt is the user's own (regeneration or a saved manual prompt) — never replace it with the title. */
+  keepPrompt?: boolean;
+  /** One sentence the title, thumbnail and intro must all say (click reason); falls back to the title. */
+  cardPromise?: string;
+  /** Photos already placed in this post, sent only while the thumbnail slot is empty. */
+  realImages?: Array<{
+    filePath?: string;
+    provider?: string;
+    source?: string;
+    isCollected?: boolean;
+    aiGenerated?: boolean;
+    heading?: string;
+  }>;
+  /** A number card may be baked in — only where the no-overlay flag survives to publish. */
+  allowBakedText?: boolean;
+  /** 'auto' | 'include' | 'exclude' (image tab only; other flows keep their own checkbox). */
+  textMode?: string;
 }
 
 export interface GenerateImagesOptions {
@@ -78,6 +112,13 @@ export interface GenerateImagesOptions {
    * - guarantee: 결과 보장 우선, 허용된 대체 경로 자동 사용
    */
   imageFallbackPolicy?: ImageFallbackPolicy;
+  /**
+   * [SPEC-NAVER-IMAGE-2026] The article's full section heading list. Lets a one-item call get the
+   * same visual role it would get inside a batch (director/sectionRoleAssignment).
+   */
+  sectionPlanHeadings?: string[];
+  /** [SPEC-NAVER-IMAGE-2026] Thumbnail candidates + judge (lone thumbnail calls only). */
+  thumbnailDirector?: ThumbnailDirectorRequest;
 }
 
 export interface GeneratedImage {
@@ -131,6 +172,12 @@ export interface GeneratedImage {
   fallbackUsed?: boolean;
   fallbackReason?: string;
   imageFallbackPolicy?: ImageFallbackPolicy;
+  /** [SPEC-NAVER-IMAGE-2026] Text is already baked in (number card) — publish must not overlay the title. */
+  disableTextOverlay?: boolean;
+  /** [SPEC-NAVER-IMAGE-2026] Composed from a real photo the user placed — never AI-marked. */
+  isCollected?: boolean;
+  /** [SPEC-NAVER-IMAGE-2026] One-line hint for the user (e.g. put real photos in first). */
+  directorNotice?: string;
 }
 
 // ✅ [v1.4.80] 'flow' 추가 — assertProvider 통과 허용 (Google Labs Flow 엔진 활성화)

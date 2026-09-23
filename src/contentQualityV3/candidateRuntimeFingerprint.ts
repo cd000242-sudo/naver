@@ -450,6 +450,8 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/generation/submissionPolicy.ts',
   'src/ghostCursorHelper.ts',
   'src/image/contextualImagePrompt.ts',
+  'src/image/director/thumbnailHook.ts',
+  'src/image/director/thumbnailText.ts',
   'src/image/geminiAutoRecovery.ts',
   'src/image/geminiQuotaClassifier.ts',
   'src/image/geminiTableExtractor.ts',
