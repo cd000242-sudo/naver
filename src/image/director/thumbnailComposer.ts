@@ -100,6 +100,29 @@ export async function composeTightCrop800(inputPath: string, outputPath: string,
   return readBackResult(outputPath, 'tight');
 }
 
+const PAIR_GAP = 8;
+
+/**
+ * Two real photos side by side (V1 §6·§7: the real person + the real counterpart). Each half is
+ * attention-cropped to the same size so both subjects read at the same scale, and a thin light gap
+ * keeps the two sources visibly separate instead of faking one photo. EXIF orientation is applied.
+ */
+export async function composePair800(leftPath: string, rightPath: string, outputPath: string): Promise<ComposeResult> {
+  const halfWidth = Math.floor((THUMBNAIL_SIZE - PAIR_GAP) / 2);
+  const half = (file: string) => sharp(fs.readFileSync(file))
+    .rotate()
+    .resize(halfWidth, THUMBNAIL_SIZE, { fit: 'cover', position: sharp.strategy.attention })
+    .toBuffer();
+  const [left, right] = await Promise.all([half(leftPath), half(rightPath)]);
+  const pipeline = sharp({ create: { width: THUMBNAIL_SIZE, height: THUMBNAIL_SIZE, channels: 3, background: '#f2f2f2' } })
+    .composite([
+      { input: left, left: 0, top: 0 },
+      { input: right, left: THUMBNAIL_SIZE - halfWidth, top: 0 },
+    ]);
+  await writeEncoded(pipeline, outputPath);
+  return readBackResult(outputPath, 'pair');
+}
+
 // ---- hook card text layout ----
 
 const MIN_FONT = 72;

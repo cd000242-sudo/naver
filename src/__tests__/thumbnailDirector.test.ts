@@ -29,6 +29,7 @@ function makeDeps(overrides: Partial<ThumbnailDirectorDeps> = {}): ThumbnailDire
     composeSquare: compose('square'),
     composeTight: compose('tight'),
     composeHook: compose('hook'),
+    composePair: vi.fn(async (_left: string, _right: string, output: string) => ({ filePath: output, width: 800, height: 800, method: 'pair' })),
     toJudgeImage: vi.fn(async () => ({ base64: 'b64' })),
     judge: vi.fn(async () => ({ pickIndex: 1, source: 'judge' as const, reason: 'ok', scores: [] })),
     isLocalFile: () => true,
@@ -135,5 +136,12 @@ describe('buildCoverItem', () => {
   it('keeps a real heading and its prompt', () => {
     const cover = buildCoverItem(makeInput({ item: { heading: '청년월세 20만원 받는 법', prompt: 'p', englishPrompt: 'hint' } as ImageRequestItem }), 'numeric');
     expect(cover.englishPrompt).toBe('hint');
+  });
+
+  it("keepPrompt: the slot's own prompt stays (regeneration / saved manual prompt)", () => {
+    const cover = buildCoverItem(makeInput({ keepPrompt: true }), 'numeric');
+    expect(cover.heading).toBe('청년월세 20만원 받는 법');
+    expect(cover.prompt).toBe('thumbnail');
+    expect(cover.englishPrompt).toBe('thumbnail emoji prompt');
   });
 });

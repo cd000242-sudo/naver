@@ -12,7 +12,7 @@ import { getImageSaveBasePath } from '../imageUtils.js';
 import { resolveIssueVisionRoute } from '../../crawler/issueHarness/visionRoute.js';
 import { judgeImagesWithRoute } from '../../crawler/issueHarness/visionJudges.js';
 import { toVisionJpegBase64 } from '../../crawler/issueHarness/candidateFetcher.js';
-import { composeHookCard800, composeSquare800, composeTightCrop800 } from './thumbnailComposer.js';
+import { composeHookCard800, composePair800, composeSquare800, composeTightCrop800 } from './thumbnailComposer.js';
 import { judgeThumbnailCandidates } from './thumbnailJudge.js';
 import { runThumbnailDirector, type ThumbnailDirectorResult } from './thumbnailDirector.js';
 import { isRealAssetPriorityTopic, resolveRealAssets, summarizeInventory, type AssetEntry } from './realAssetResolver.js';
@@ -170,6 +170,7 @@ export async function generateImagesWithThumbnailDirector(
     composeSquare: composeSquare800,
     composeTight: (input, output) => composeTightCrop800(input, output),
     composeHook: (input, output, hook) => composeHookCard800(input, output, hook),
+    composePair: (left, right, output) => composePair800(left, right, output),
     toJudgeImage: async (filePath) => ({ base64: await toVisionJpegBase64(fs.readFileSync(filePath)) }),
     judge: (images, ctx, candidates) => judgeThumbnailCandidates(
       images, ctx, candidates, route ? (imgs, prompt) => judgeImagesWithRoute(imgs, prompt, route) : null, log,

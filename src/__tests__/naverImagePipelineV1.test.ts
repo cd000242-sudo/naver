@@ -61,7 +61,7 @@ describe('NAVER IMAGE PIPELINE V1 — T1–T13', () => {
     }
   });
 
-  it('T3 two real celebrity photos → composite first, no AI person generated', async () => {
+  it('T3 two real celebrity photos → both people in one composite, no AI person generated', async () => {
     const { generate, result } = run({
       postTitle: PARK_TITLE,
       thumbnailDirector: { allowBakedText: true, textMode: 'auto', realImages: [{ filePath: parkPhoto, provider: 'local' }, { filePath: anPhoto, provider: 'local' }] },
@@ -69,6 +69,12 @@ describe('NAVER IMAGE PIPELINE V1 — T1–T13', () => {
     const [image] = await result;
     expect(generate).not.toHaveBeenCalled();
     expect(image).toMatchObject({ provider: 'collected-image-with-text', isCollected: true, disableTextOverlay: true });
+    // left half is the first photo (#aa8866), right half the second (#6688aa) — above the text band
+    const at = async (x: number) => [...(await sharp(image.filePath).extract({ left: x, top: 120, width: 1, height: 1 }).raw().toBuffer())];
+    const [lr, , lb] = await at(150);
+    const [rr, , rb] = await at(650);
+    expect(lr).toBeGreaterThan(lb);
+    expect(rb).toBeGreaterThan(rr);
   });
 
   it('T4 article URL only → REFERENCE_ONLY; honest cover (no lookalike) + upload hint', async () => {

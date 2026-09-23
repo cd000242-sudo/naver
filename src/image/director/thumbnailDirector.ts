@@ -17,7 +17,9 @@ import type { ArticleVisualKind } from './sectionRolePlanner.js';
 import { chooseThumbnailDirection, coverDirectionLines, type ThumbnailDirection } from './thumbnailStrategy.js';
 import { decideThumbnailText, type ThumbnailTextDecision, type ThumbnailTextMode } from './thumbnailText.js';
 
-export type CandidateKind = 'ai-full' | 'ai-tight' | 'ai-hook' | 'real-square' | 'real-tight' | 'real-hook';
+export type CandidateKind =
+  | 'ai-full' | 'ai-tight' | 'ai-hook'
+  | 'real-square' | 'real-tight' | 'real-hook' | 'real-pair' | 'real-pair-hook';
 
 export interface CandidateFile {
   readonly kind: CandidateKind;
@@ -52,6 +54,7 @@ export interface ThumbnailDirectorDeps {
   composeSquare(input: string, output: string): Promise<ComposeResult>;
   composeTight(input: string, output: string): Promise<ComposeResult>;
   composeHook(input: string, output: string, hook: { main: string }): Promise<ComposeResult>;
+  composePair(left: string, right: string, output: string): Promise<ComposeResult>;
   toJudgeImage(filePath: string): Promise<{ base64: string }>;
   judge(
     images: ReadonlyArray<{ base64: string }>,
@@ -132,7 +135,20 @@ async function collect(makers: readonly Maker[]): Promise<CandidateFile[]> {
   return out.slice(0, 3);
 }
 
-function realMakers(input: ThumbnailDirectorInput, bake: { main: string } | null, deps: ThumbnailDirectorDeps): Maker[] {
+/**
+ * Two photos side by side when the story is about a pair (issue/celebrity: the person + the
+ * counterpart, V1 §6) or the title compares two things. Otherwise one photo reads better small.
+ */
+function prefersPair(input: ThumbnailDirectorInput, direction: ThumbnailDirection): boolean {
+  return input.realImages.length >= 2 && (input.kind === 'issue' || direction === 'comparison');
+}
+
+function realMakers(
+  input: ThumbnailDirectorInput,
+  bake: { main: string } | null,
+  deps: ThumbnailDirectorDeps,
+  direction: ThumbnailDirection,
+): Maker[] {
   const [first, second] = input.realImages;
   const stamp = `${Date.now()}`;
   const at = (suffix: string) => `${input.realWorkDir}/real-${stamp}-${suffix}.png`;
@@ -141,10 +157,22 @@ function realMakers(input: ThumbnailDirectorInput, bake: { main: string } | null
       const filePath = await tryCompose(deps, label, run);
       return filePath ? { kind, filePath, label, bakedText, real: true } : null;
     };
+  const pairFirst = prefersPair(input, direction);
+  const pair = pairFirst ? make('real-pair', '실제 사진 2장', false, () => deps.composePair(first, second, at('pair'))) : null;
+  const pairCard = pairFirst && bake
+    ? make('real-pair-hook', '실제 사진 2장 + 짧은 문구', true, async () => {
+      const paired = await deps.composePair(first, second, at('pair'));
+      return deps.composeHook(paired.filePath, at('pair-text'), bake);
+    })
+    : null;
   const card = bake ? make('real-hook', '실제 사진 + 짧은 문구', true, () => deps.composeHook(first, at('text'), bake)) : null;
   const square = make('real-square', '실제 사진', false, () => deps.composeSquare(first, at('square')));
-  if (input.qualityMode !== 'high') return card ? [card, square] : [square];
+  if (input.qualityMode !== 'high') {
+    // Standard mode uses the first that succeeds; the single-photo makers are the fallback.
+    return [pairCard ?? pair, card, square].filter(Boolean) as Maker[];
+  }
   const tight = make('real-tight', '실제 사진(가까이)', false, () => deps.composeTight(first, at('tight')));
+  if (pairFirst) return [pairCard ?? pair, square, card ?? tight].filter(Boolean) as Maker[];
   const other = second ? make('real-square', '다른 실제 사진', false, () => deps.composeSquare(second, at('square2'))) : null;
   return [square, card ?? tight, other].filter(Boolean) as Maker[];
 }
@@ -188,10 +216,10 @@ export async function runThumbnailDirector(
   const bake = input.allowBakedText && text.include && text.text ? { main: text.text } : null;
   // Where text cannot be baked, the legacy overlays add it later (short text) — tell the brief/judge.
   const titleBandPlanned = !input.allowBakedText && text.include;
-  deps.log(`${LOG} 🧭 방향=${direction} · 모드=${input.qualityMode} · 문구=${text.include ? `"${text.text}"` : '없음'}(${text.reason}) · 실제 사진 ${input.realImages.length}장`);
+  deps.log(`${LOG} 🧭 방향=${direction} · 모드=${input.qualityMode} · 문구=${text.include ? `"${text.text}"` : '없음'}(${text.reason}) · 실제 사진 ${input.realImages.length}장${prefersPair(input, direction) ? '(두 장 나란히)' : ''}`);
 
   if (realFirst) {
-    const real = await collect(realMakers(input, bake, deps));
+    const real = await collect(realMakers(input, bake, deps, direction));
     if (real.length > 0) {
       const { winner, verdict } = await pick(real, input, titleBandPlanned, deps);
       return { base: null, winner, candidates: real, verdict, direction, text };
