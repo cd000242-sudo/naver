@@ -466,7 +466,9 @@ export async function generateWithDeepInfra(
                 console.log(`[DeepInfra] ✅ 캐릭터/아트 스타일 + englishPrompt 사용: "${englishContext.substring(0, 60)}"`);
 
                 // ✅ [2026-02-26] AI가 스타일별 완전한 프롬프트를 생성하므로, 다양성 힌트만 보강
-                const hints = getImageDiversityHints(i);
+                // [NAVER FULL AUTO] One heading per call → the loop index is always 0; the section ordinal
+                //   (diversityIndex) keeps each H2's angle/colour different.
+                const hints = getImageDiversityHints(Number.isFinite((item as any).diversityIndex) ? Number((item as any).diversityIndex) : i);
                 basePrompt = `${hints.angle}, ${englishContext}, ${hints.color}`;
             } else if (shouldUseKoreanFallback) {
                 // ✅ [2026-02-26] Gemini API로 스타일별 완전한 이미지 프롬프트 생성
@@ -475,7 +477,7 @@ export async function generateWithDeepInfra(
                 console.log(`[DeepInfra] ✅ 한글→영어 AI 변환 완료: "${koreanContext.substring(0, 20)}" → "${englishContext.substring(0, 40)}"`);
 
                 // ✅ AI가 스타일별 프롬프트를 생성하므로, 다양성 힌트만 보강
-                const hintsK = getImageDiversityHints(i);
+                const hintsK = getImageDiversityHints(Number.isFinite((item as any).diversityIndex) ? Number((item as any).diversityIndex) : i);
                 basePrompt = `${hintsK.angle}, ${englishContext}, ${hintsK.color}`;
             }
 

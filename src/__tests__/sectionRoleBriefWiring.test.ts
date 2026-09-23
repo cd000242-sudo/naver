@@ -79,7 +79,9 @@ describe('engines drop their own rotation only for a planned role (source guards
 
   it('imageGenerator plans roles and hands the camera to the role only for honoring engines', () => {
     const src = read('imageGenerator.ts');
-    expect(src).toMatch(/assignSectionRoles\(generationSourceItems/);
+    // [NAVER FULL AUTO] The same plan, now with each item's earlier roles for the previous-images note.
+    expect(src).toMatch(/assignSectionRolesWithHistory\(generationSourceItems/);
+    expect(src).toMatch(/previousRoles: sectionRoleHistory\[idx\]\?\.previousRoles/);
     expect(src).toMatch(/engineOwnsCamera: engineRotatesViewpoint\(normalizedProvider\) && !engineHonorsRole/);
     expect(src).toMatch(/visualRole: engineHonorsRole \? visualRole/);
     expect(src).toMatch(/kind: articleVisualKind,\s*regenerate: options\.regenerate === true,/);

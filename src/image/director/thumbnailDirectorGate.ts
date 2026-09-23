@@ -99,6 +99,12 @@ function toDataUrl(filePath: string): string | undefined {
 }
 
 /** Map the winner back to the image shape every flow already handles. */
+/** [NAVER FULL AUTO] Asset label of the winning candidate, for slot records and preview badges. */
+export function directorAssetKind(winner: ThumbnailDirectorResult['winner']): 'real-pair' | 'real' | 'ai' {
+  if (!winner.real) return 'ai';
+  return String(winner.kind).startsWith('real-pair') ? 'real-pair' : 'real';
+}
+
 export function toDirectorImage(
   result: ThumbnailDirectorResult,
   item: ImageRequestItem,
@@ -107,8 +113,9 @@ export function toDirectorImage(
 ): GeneratedImage {
   const { base, winner } = result;
   const flags = winner.bakedText ? { disableTextOverlay: true, textRendered: true } : {};
+  const assetKind = directorAssetKind(winner);
   if (base && winner.kind === 'ai-full') {
-    return { ...base, heading: item.heading, isThumbnail: item.isThumbnail };
+    return { ...base, heading: item.heading, isThumbnail: item.isThumbnail, assetKind };
   }
   const file = {
     filePath: winner.filePath,
@@ -121,7 +128,7 @@ export function toDirectorImage(
   };
   if (base) {
     // Variant of the AI base: same provider (AI mark stays on), new file; blob ids no longer match.
-    return { ...base, ...file, ...flags, blobId: undefined, sha256: undefined, byteSize: undefined, heading: item.heading, isThumbnail: item.isThumbnail };
+    return { ...base, ...file, ...flags, blobId: undefined, sha256: undefined, byteSize: undefined, heading: item.heading, isThumbnail: item.isThumbnail, assetKind };
   }
   return {
     ...file,
@@ -133,6 +140,7 @@ export function toDirectorImage(
     requestedProvider,
     actualProvider: 'collected-image',
     isCollected: true,
+    assetKind,
   } as GeneratedImage;
 }
 

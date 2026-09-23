@@ -15,6 +15,7 @@ import {
 import { assertShoppingReferenceGenerationSelectionSupported } from '../../image/shoppingReferenceGeneration.js';
 import { reconcileOpenaiImageModelSelection } from '../../image/openaiImageModelReconcile.js';
 import { resolveImagePreviewPosition } from './imagePreviewBatch.js';
+import { fullAutoAssetLabel } from '../../image/fullAuto/fullAutoImageAsset.js';
 
 // 전역 스코프 의존성
 declare let generatedImages: any[];
@@ -176,10 +177,17 @@ function readThumbDirectorTextMode(): string {
 
 function buildThumbDirectorRequest(options: any, structured: any, canUseStructuredContext: boolean): any {
   const items = Array.isArray(options.items) ? options.items : [];
-  if (options.thumbnailDirector || items.length !== 1 || !isThumbDirectorItem(items[0], options)) return options.thumbnailDirector;
   const cardPromise = canUseStructuredContext
     ? String(structured?.preWritingAnalysis?.clickReason || structured?.cardPromise || '').trim().slice(0, 200)
     : '';
+  if (options.thumbnailDirector && typeof options.thumbnailDirector === 'object') {
+    // [NAVER FULL AUTO] Unattended flows send their own request (AUTO text, real photos); the
+    //   CARD_PROMISE still comes from this article's bound structured content.
+    return options.thumbnailDirector.cardPromise || !cardPromise
+      ? options.thumbnailDirector
+      : { ...options.thumbnailDirector, cardPromise };
+  }
+  if (options.thumbnailDirector || items.length !== 1 || !isThumbDirectorItem(items[0], options)) return options.thumbnailDirector;
   // Only the image tab's thumbnail slot keeps the returned flags (takeThumbnailDirectorMeta), so only
   // there may a number card be baked in or a real photo be composed.
   const imageTabSlot = canUseStructuredContext && String(items[0]?.heading || '').trim() === THUMB_DIRECTOR_SLOT;
@@ -547,6 +555,8 @@ function updateGeneratedImagePreview(data: { image: any; index: number; total: n
       try { return toFileUrlMaybe(raw); } catch { return raw; }
     };
     const displaySrc = resolvePreviewSrc(image);
+    // [NAVER FULL AUTO] Result preview badge: 실제사진 2장 합성 / 실제사진 / AI 생성 / 정보형 / 네이버 이미지.
+    const previewHeading = `${image.isThumbnail === true ? '썸네일' : (image.heading || `이미지 ${index + 1}`)} · ${fullAutoAssetLabel(image)}`;
 
     if (modal && typeof modal.updateSingleImage === 'function') {
       if (displaySrc) {
@@ -555,7 +565,10 @@ function updateGeneratedImagePreview(data: { image: any; index: number; total: n
         modal.updateSingleImage(index, {
           url: displaySrc,
           filePath: '',
-          heading: image.heading || `이미지 ${index + 1}`,
+          heading: previewHeading,
+          // The badge suffix hides the heading the modal used to recognise the thumbnail tile by; carry the
+          // same decision (old heading rule) explicitly so the body grid shows exactly what it did before.
+          isThumbnail: /^🖼️?\s*썸네일$/u.test(String(image.heading || '').trim()),
         }, total);
       }
     }
@@ -574,7 +587,7 @@ function updateGeneratedImagePreview(data: { image: any; index: number; total: n
       if (cpSrc) {
         const thumb = document.createElement('img');
         thumb.src = cpSrc;
-        thumb.title = `${image.heading || `이미지 ${index + 1}`} (${index + 1}/${total}) — 클릭하면 크게 보기`;
+        thumb.title = `${previewHeading} (${index + 1}/${total}) — 클릭하면 크게 보기`;
         thumb.style.cssText = 'width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); cursor: pointer;';
         thumb.addEventListener('click', () => { cpMain.src = cpSrc; });
         thumb.onerror = () => { thumb.remove(); };
@@ -896,8 +909,10 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
   // Explicit option or headingImageMode only — the legacy 'thumbnailOnly'
   // checkbox key is full-auto-scoped and arrives here via options; reading it
   // globally let stale values force thumbnail-only in every flow.
+  // [NAVER FULL AUTO] A caller that already applied a per-job heading scope (headingScopeFromPolicy) is
+  //   not overridden by the global 'thumbnail-only' value — a queued "all headings" post keeps its images.
   const _thumbnailOnlyFlag = options?.thumbnailOnly === true
-    || rawPipeline.headingImageMode === 'thumbnail-only';
+    || (options?.headingScopeFromPolicy !== true && rawPipeline.headingImageMode === 'thumbnail-only');
   if (_thumbnailOnlyFlag && Array.isArray(options?.items)) {
     const beforeCount = options.items.length;
     const thumbOnlyItems = options.items.filter((it: any) => it?.isThumbnail === true);

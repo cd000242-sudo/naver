@@ -66,7 +66,9 @@ describe('continuous publishing stop and config invariants', () => {
       /const skipImages =[\s\S]{0,220}itemPipelineCfg\.image\.headingImageMode\s*===\s*'none'/,
     );
     const handoff = source.slice(source.indexOf('const formData = {', source.indexOf('const skipImages =')));
-    expect(handoff).toContain('headingImageMode: itemPipelineCfg.image.headingImageMode');
+    // [NAVER FULL AUTO] Runner items hand off their frozen per-item scope (itemImagePolicy is built from the
+    //   same itemPipelineCfg snapshot + the queue item's own choices); others keep the snapshot value.
+    expect(handoff).toContain('headingImageMode: itemUsesImageRunner ? itemImagePolicy.sections.headingImageMode : itemPipelineCfg.image.headingImageMode');
     expect(handoff).toContain('imageStyle: itemPipelineCfg.image.imageStyle');
     expect(handoff).toContain('imageRatio: itemPipelineCfg.image.imageRatio');
     expect(handoff).toContain('thumbnailImageRatio: itemPipelineCfg.image.thumbnailImageRatio');

@@ -12,6 +12,16 @@ import {
   resolveUsableShoppingReferenceSource,
 } from '../../image/shoppingReferenceGeneration.js';
 import { resolvePublishFloorSec, DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES } from '../../automation/publishIntervalPolicy.js';
+import {
+  describeFullAutoImagePolicy,
+  normalizeFullAutoImageStrategy,
+  normalizeFullAutoThumbnailTextMode,
+  parseFullAutoHeadingScope,
+} from '../../image/fullAuto/fullAutoImagePolicy.js';
+import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSlots.js';
+import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
+import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
+import { describeFullAutoQueueItem } from '../../image/fullAuto/fullAutoQueueStatus.js';
 // ✅ [v2.10.288] subImageMode import 제거 — line 10-12에 명시된 패턴 적용.
 //   렌더러 빌드 스크립트가 require()를 정규식 삭제 → subImageMode_1 is not defined 회귀 차단.
 type SubImageMode = 'ai' | 'collected';
@@ -92,6 +102,9 @@ declare function generateContentFromUrl(url: string, title?: string, tone?: stri
 declare function generateContentFromKeywords(title: string, keywords?: string, tone?: string, suppressModal?: boolean, contentMode?: string, category?: string): Promise<void>;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
 declare function resolveImageProviderFallback(): string;
+// [NAVER FULL AUTO] Same inline bundle scope (pipelineConfig / imageGenStudioCore).
+declare function resolveFullAutoImagePolicyFromPipeline(config: any, overrides?: any): any;
+declare function studioEngineCostKrw(value: string): number | null;
 declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageSource: string; imageModel: string; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string; fallbackPolicy: string }; shopping: { subImageMode: 'ai' | 'collected'; aiImageEngine: string; aiImageModel: string; autoThumbnail: boolean } };
 declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null; scSubImageMode: string | null; scSubImageSource: string | null; scAIImageEngine: string | null; scAutoThumbnailSetting: string | null };
 declare function executeUnifiedAutomation(formData: any): Promise<any>;
@@ -1294,6 +1307,78 @@ export function setKeywordTitleOptionsFromItem(keyword: string, keywordAsTitle?:
   }
 }
 
+/**
+ * [NAVER FULL AUTO] Image choices stored on a NEW queue item. The item keeps them, so a global
+ * setting changed later — or an old one left behind — never silently changes the images of posts
+ * already queued. New unattended jobs default to every H2 (spec §14).
+ */
+function readContinuousImageChoicesForQueue(): Pick<ContinuousQueueItem, 'imageStrategy' | 'headingImageScope' | 'thumbnailTextMode'> {
+  const globalImage = (resolvePipelineConfig('continuous').image || {}) as any;
+  const strategyValue = (document.getElementById('continuous-image-strategy-select') as HTMLSelectElement | null)?.value;
+  const scopeValue = (document.getElementById('continuous-heading-scope-select') as HTMLSelectElement | null)?.value;
+  const textValue = (document.getElementById('continuous-thumbnail-text-mode-select') as HTMLSelectElement | null)?.value;
+  return {
+    imageStrategy: normalizeFullAutoImageStrategy(strategyValue || globalImage.fullAutoImageStrategy),
+    headingImageScope: parseFullAutoHeadingScope(scopeValue) ?? 'all',
+    thumbnailTextMode: normalizeFullAutoThumbnailTextMode(textValue || globalImage.fullAutoThumbnailTextMode) ?? 'auto',
+  };
+}
+
+/**
+ * [NAVER FULL AUTO] Hold one queued article for image review: keep the article and its good images
+ * (saved to the post list), record why, leave it unpublished. Two posts in a row with NO image at all
+ * mean the engine itself is down (login / quota / key) — stop instead of paying for more articles.
+ */
+function holdContinuousItemForImageReview(
+  item: ContinuousQueueItem,
+  imageRun: any,
+  decision: any,
+  structuredContent: any,
+  meta: { category?: string; progressLabel: string },
+): void {
+  item.status = 'image-review';
+  item.imageReviewReasons = [...(decision?.reasons || [])];
+  const images = Array.isArray(imageRun?.images) ? imageRun.images : [];
+  try {
+    saveGeneratedPostFromData(structuredContent, images, {
+      category: meta.category,
+      toneStyle: item.toneStyle,
+      ctaText: item.ctaText || '',
+      ctaLink: item.ctaUrl || '',
+    });
+  } catch (saveErr) {
+    console.warn('[Continuous] 이미지 검토 글 저장 오류:', saveErr);
+  }
+  appendLog(`🖼️ ${meta.progressLabel} ${describeFullAutoImageReview(decision).replace(/\n/g, ' ')}`);
+  updateContinuousProgressModal({
+    step: '이미지 검토 필요 — 발행하지 않음',
+    log: `${meta.progressLabel} ${item.imageReviewReasons.join(' / ')}`,
+  });
+  if (Number(imageRun?.readiness?.summary?.done || 0) > 0) {
+    (window as any).__continuousImgFailStreak = 0;
+    return;
+  }
+  const streak = ((window as any).__continuousImgFailStreak || 0) + 1;
+  (window as any).__continuousImgFailStreak = streak;
+  if (streak >= 2) {
+    (window as any).stopFullAutoPublish = true;
+    (window as any).__continuousImgFailStreak = 0;
+    appendLog(`⛔ ${streak}개 글 연속으로 이미지가 한 장도 만들어지지 않아 연속발행을 멈춥니다. 이미지 엔진(로그인·쿼터·키)을 확인한 뒤 다시 시작하세요.`);
+    updateContinuousProgressModal({ log: '⛔ 이미지 엔진 연속 실패 — 연속발행 중단' });
+  }
+}
+
+/**
+ * [NAVER FULL AUTO] Keyword placement at the front of the title is an SEO rule (키워드 끝판왕 SPEC:
+ * search modes only). A homefeed / business / custom item keeps its own title unless the user ticked
+ * "키워드 앞 붙이기" for it.
+ */
+function continuousItemUsesKeywordPrefix(item: ContinuousQueueItem): boolean {
+  if (item.keywordTitlePrefix === true) return true;
+  const mode = String(item.contentMode || 'seo');
+  return mode === 'seo' || mode === 'mate' || mode === 'affiliate';
+}
+
 function applyContinuousTitleOverrides(item: ContinuousQueueItem, structuredContent: any): void {
   if (!structuredContent) return;
 
@@ -1321,8 +1406,10 @@ function applyContinuousTitleOverrides(item: ContinuousQueueItem, structuredCont
   }
 
   const keyword = (item.customKeyword || '').trim();
+  // Only search-mode items (or an explicit tick) get the keyword glued to the front of the title.
+  const prefixKeyword = continuousItemUsesKeywordPrefix(item) ? keyword : '';
   const requestedTitle = (item.customTitle || '').trim();
-  
+
   // ✅ [2026-03-10 FIX] selectedTitle이 URL이면 빈 문자열로 대체하여 URL이 제목으로 사용되는 것을 방지
   const _rawCurrentTitle = String(structuredContent.selectedTitle || structuredContent.title || '').trim();
   let currentTitle = /^https?:\/\//i.test(_rawCurrentTitle) ? '' : _rawCurrentTitle;
@@ -1367,9 +1454,11 @@ function applyContinuousTitleOverrides(item: ContinuousQueueItem, structuredCont
     finalTitle = requestedTitle;
   }
 
-  if (keyword) {
-    finalTitle = applyKeywordPrefixToTitle(finalTitle, keyword);
-    console.log('[ContinuousTitle] 키워드 접두사/중복 정규화:', { keyword, finalTitle });
+  if (prefixKeyword) {
+    finalTitle = applyKeywordPrefixToTitle(finalTitle, prefixKeyword);
+    console.log('[ContinuousTitle] 키워드 접두사/중복 정규화:', { keyword: prefixKeyword, finalTitle });
+  } else if (keyword) {
+    console.log(`[ContinuousTitle] ${item.contentMode} 모드 — 키워드 앞 붙이기 생략(검색 모드 규칙). 제목 유지: ${finalTitle}`);
   }
 
   // ✅ [2026-03-10 FIX] 최종 방어선: finalTitle이 여전히 URL이면 적용하지 않음
@@ -1388,12 +1477,12 @@ function applyContinuousTitleOverrides(item: ContinuousQueueItem, structuredCont
 
   structuredContent.selectedTitle = finalTitle;
   if (Array.isArray(structuredContent.titleAlternatives) && structuredContent.titleAlternatives.length > 0) {
-    structuredContent.titleAlternatives = structuredContent.titleAlternatives.map((t: string) => applyKeywordPrefixToTitleContinuous(String(t || ''), keyword || '')).filter(Boolean);
+    structuredContent.titleAlternatives = structuredContent.titleAlternatives.map((t: string) => applyKeywordPrefixToTitleContinuous(String(t || ''), prefixKeyword)).filter(Boolean);
   }
   if (Array.isArray(structuredContent.titleCandidates) && structuredContent.titleCandidates.length > 0) {
     structuredContent.titleCandidates = structuredContent.titleCandidates.map((c: any) => ({
       ...c,
-      text: applyKeywordPrefixToTitleContinuous(String(c?.text || ''), keyword || ''),
+      text: applyKeywordPrefixToTitleContinuous(String(c?.text || ''), prefixKeyword),
     }));
   }
 
@@ -2000,11 +2089,18 @@ export function initContinuousPublishingV2(): void {
           const realCategoryName = (realCategorySelect?.selectedIndex >= 0) ? realCategorySelect.options[realCategorySelect.selectedIndex].text : '';
 
           // 예약 날짜/시간
+          // [NAVER FULL AUTO] Store date and time the way new items do (separate fields). Before, an edit
+          //   wrote only "dateTtime" into scheduleDate and kept the OLD scheduleTime, which the run reads
+          //   first — the edited reservation time was silently ignored.
           let scheduleDate = item.scheduleDate;
+          let scheduleTime = item.scheduleTime;
           if (publishModeRadio?.value === 'schedule') {
             const dateVal = (document.getElementById('continuous-modal-schedule-date') as HTMLInputElement).value;
             const timeVal = (document.getElementById('continuous-modal-schedule-time') as HTMLInputElement).value;
-            if (dateVal && timeVal) scheduleDate = `${dateVal}T${timeVal}`;
+            if (dateVal && timeVal) {
+              scheduleDate = dateVal;
+              scheduleTime = timeVal;
+            }
           }
 
           // ✅ [2026-04-02] 다중 CTA 항목 + 위치 수집
@@ -2031,6 +2127,7 @@ export function initContinuousPublishingV2(): void {
             realCategory,
             realCategoryName,
             scheduleDate,
+            scheduleTime,
             // ✅ [2026-01-28 FIX] localStorage 설정 우선 적용
             // [Phase 7.1-e] 단일 해석처 경유 (아이템 편집 시점 스냅샷)
             includeThumbnailText: resolvePipelineConfig('continuous').image.thumbnailTextInclude || includeThumbnailTextCheck?.checked || false,
@@ -2948,6 +3045,8 @@ function addItemToQueueV2Impl(): void {
       ctaPosition: (document.getElementById('continuous-modal-cta-position') as HTMLSelectElement | null)?.value || 'bottom',
       category,       // ✅ 카테고리 추가
       contentMode,    // ✅ 콘텐츠 모드 추가
+      // [NAVER FULL AUTO] Image strategy / H2 scope / thumbnail text, frozen with the item (separate from contentMode).
+      ...readContinuousImageChoicesForQueue(),
       toneStyle: (document.getElementById('continuous-tone-style-select') as HTMLSelectElement)?.value || 'professional', // ✅ 글톤 추가
       realCategory,   // ✅ 실제 블로그 카테고리 추가
       realCategoryName, // ✅ 실제 블로그 카테고리 이름 추가
@@ -3030,6 +3129,14 @@ function addItemToQueueV2Impl(): void {
   }
 
   renderQueueListV2();
+
+  // [NAVER FULL AUTO] Never let an old "이미지 없음" silently strip the images of posts queued now (spec §14).
+  try {
+    const queueGlobalImage = resolvePipelineConfig('continuous').image;
+    if (addedCount > 0 && (queueGlobalImage.textOnlyPublish || queueGlobalImage.headingImageMode === 'none')) {
+      toastManager.warning('현재 "이미지 없음/글만 발행" 설정이 켜져 있어 방금 넣은 글은 이미지 없이 발행됩니다. 이미지 설정에서 바꿀 수 있습니다.');
+    }
+  } catch { /* the warning is best-effort */ }
 
   // 입력 필드 초기화 (제목/키워드는 유지할지 말지 고민되나, 일단 값만 초기화)
   if (tabType === 'url') {
@@ -3239,6 +3346,7 @@ const statusColors: Record<string, string> = {
   'failed': '#ef4444',
   'cancelled': '#f97316',  // 주황색 - 중지됨
   'uncertain': '#facc15',
+  'image-review': '#fb923c', // [NAVER FULL AUTO] 글은 준비됐지만 이미지 검토 필요 (발행 안 함)
 };
 
 const toneStyleNames: Record<string, string> = {
@@ -3264,6 +3372,7 @@ const contentModeNames: Record<string, string> = {
   'homefeed': '🏠 홈판',
   'mate': '🏅 메이트',
   'affiliate': '💰 제휴',
+  'business': '🏢 업체',
   'custom': '✏️ 커스텀'
 };
 
@@ -3340,8 +3449,25 @@ function renderQueueListV2(): void {
   if (nextBtn) nextBtn.disabled = currentQueuePageV2 === totalPages - 1;
   if (clearBtn) clearBtn.style.display = totalItems > 0 ? 'block' : 'none';
 
+  // [NAVER FULL AUTO] "글만 발행" / "이미지 없음" is the master off switch at run time — show it on waiting rows.
+  const queueImagesOff = (() => {
+    try {
+      const globalImage = resolvePipelineConfig('continuous').image;
+      return globalImage.textOnlyPublish === true || globalImage.headingImageMode === 'none';
+    } catch {
+      return false;
+    }
+  })();
+
   container.innerHTML = pageItems.map((item, localIdx) => {
     const globalIndex = startIdx + localIdx;
+    // [NAVER FULL AUTO] One status line per reservation: when · writing mode · image strategy · text · images · final.
+    const rowStatus = describeFullAutoQueueItem(queueImagesOff && item.status === 'pending' ? { ...item, imageSource: 'skip' } : item);
+    const rowToneColor = rowStatus.tone === 'ok' ? '#10b981'
+      : rowStatus.tone === 'warn' ? '#fb923c'
+        : rowStatus.tone === 'error' ? '#ef4444'
+          : rowStatus.tone === 'active' ? '#f59e0b'
+            : 'var(--text-muted)';
     return `
     <div class="continuous-queue-item" data-id="${item.id}" style="background: var(--bg-primary); border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem; border-left: 3px solid ${statusColors[item.status]};">
       <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
@@ -3360,19 +3486,25 @@ function renderQueueListV2(): void {
         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 4px; align-items: center;">
            <span style="color: #3b82f6; font-weight: 700; background: rgba(59, 130, 246, 0.1); padding: 1px 4px; border-radius: 4px;">📂 ${categoryNames[item.category || 'general'] || item.category || '일반'}</span>
            ${item.realCategoryName ? `<span style="color: #10b981; font-weight: 600; font-size: 0.7rem; border-left: 1px solid var(--border-light); padding-left: 4px;">🏷️ ${item.realCategoryName}</span>` : ''}
-           <span style="color: #8b5cf6;">🎯 ${contentModeNames[item.contentMode || 'homefeed'] || '홈판'}</span>
+           <span style="color: #8b5cf6;">🎯 ${contentModeNames[item.contentMode || 'seo'] || '🔍 SEO'}</span>
            <span style="color: #f59e0b;">✍️ ${toneStyleNames[item.toneStyle || 'professional'] || '전문적'}</span>
         </div>
         ${item.ctaType && item.ctaType !== 'none' ? `
           <div style="color: #60a5fa;">📢 CTA: ${item.ctaType === 'previous-post' ? '이전글' : '커스텀'}</div>
         ` : ''}
+        <div class="continuous-queue-fa-status" style="display: flex; gap: 0.35rem; flex-wrap: wrap; margin-top: 4px; font-size: 0.72rem;" title="${rowStatus.detail.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')}">
+          <span style="color: #a78bfa;">🖼️ ${rowStatus.imageStrategyLabel}</span>
+          <span>·</span><span>${rowStatus.textStatus}</span>
+          <span>·</span><span>${rowStatus.imageStatus}</span>
+          <span>·</span><span style="color: ${rowToneColor}; font-weight: 700;">${rowStatus.finalStatus}</span>
+        </div>
       </div>
       <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--text-muted);">
         <span style="${item.publishMode === 'schedule'
           ? 'color: #fbbf24; font-weight: 700; padding: 2px 8px; background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 4px;'
           : 'color: #f3f4f6; font-weight: 500;'}">
           ${publishModeNames[item.publishMode] || '🚀 즉시'}
-          ${item.publishMode === 'schedule' && (item.scheduleDate || item.scheduleTime) ? ` (${item.scheduleTime || (item.scheduleDate?.includes('T') ? item.scheduleDate.split('T')[1]?.substring(0, 5) : '')})` : ''}
+          ${item.publishMode === 'schedule' ? ` (${rowStatus.when})` : ''}
         </span>
         <span>•</span>
         <span>${imageSourceNames[item.imageSource] || item.imageSource}</span>
@@ -3386,8 +3518,8 @@ function renderQueueListV2(): void {
             <button type="button" class="queue-delete-btn" data-id="${item.id}" style="padding: 0.25rem 0.5rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 4px; color: #ef4444; cursor: pointer; font-size: 0.7rem;">🗑️</button>
           </div>
         ` : `
-          <span style="margin-left: auto; font-size: 0.7rem; color: ${statusColors[item.status]};">
-            ${item.status === 'processing' ? '⏳ 발행 중' : item.status === 'completed' ? '✅ 완료' : item.status === 'cancelled' ? '🛑 중지됨' : item.status === 'uncertain' ? '결과 확인 필요' : '❌ 실패'}
+          <span style="margin-left: auto; font-size: 0.7rem; color: ${rowToneColor};">
+            ${rowStatus.finalStatus}
           </span>
         `}
       </div>
@@ -4373,6 +4505,9 @@ async function startContinuousPublishingV2(): Promise<void> {
     console.log(`[Continuous] 🔄 ${recoverableItems.length}개 실패/중단 항목을 pending으로 리셋 (재시도)`);
     toastManager.info(`이전 실패 ${recoverableItems.length}개 항목을 다시 시도합니다`);
   }
+  // [NAVER FULL AUTO] The image-failure breaker counts each post once per RUN (a retry inside the run must
+  //   not count twice); a new run starts every item uncounted.
+  continuousQueueV2.forEach((queued) => { delete (queued as any)._imgFailCounted; });
 
   const uncertainItems = continuousQueueV2.filter(i => i.status === 'uncertain');
   if (uncertainItems.length > 0) {
@@ -4496,6 +4631,16 @@ async function startContinuousPublishingV2(): Promise<void> {
   const previousTitles: string[] = [];
   (window as any)._previousTitles = previousTitles;
 
+  // [NAVER FULL AUTO] Each item writes its own content mode into the shared hidden inputs below; put the
+  //   user's selection back after the run, or the next one-click full auto silently writes in the last
+  //   queue item's mode. The image-failure breaker counts items of THIS run only.
+  const continuousContentModeSnapshot = {
+    unified: (document.getElementById('unified-content-mode') as HTMLInputElement | null)?.value,
+    continuous: (document.getElementById('continuous-content-mode-select') as HTMLSelectElement | null)?.value,
+  };
+  (window as any).__continuousImgFailStreak = 0;
+  let heldForImageReviewCount = 0;
+
   for (let i = 0; i < continuousQueueV2.length; i++) {
     const item = continuousQueueV2[i];
     // [2026-08-05] 무료 한도 소진 시 즉시 중단.
@@ -4512,6 +4657,20 @@ async function startContinuousPublishingV2(): Promise<void> {
     // [Phase 7.1-b] Per-item snapshot — settings changed mid-run apply from
     // the NEXT post, never mid-post (design §2.2).
     const itemPipelineCfg = resolvePipelineConfig('continuous');
+    // [NAVER FULL AUTO] Image policy = this item's frozen choices over the current global settings.
+    //   The writing mode (item.contentMode) is not an input: an SEO post still gets homefeed images.
+    const itemImagePolicy = resolveFullAutoImagePolicyFromPipeline(itemPipelineCfg, {
+      strategy: item.imageStrategy,
+      headingScope: item.headingImageScope,
+      thumbnailTextMode: item.thumbnailTextMode,
+      thumbnailTextInclude: includeThumbnailText,
+    });
+    let itemImageRun: any = null;
+    // Shopping (affiliate) keeps its own reference-image pipeline; a local folder is the user's own photos.
+    const itemUsesImageRunner = item.contentMode !== 'affiliate' && item.imageSource !== 'local-folder';
+    item.fullAutoStage = 'writing';
+    item.imageProgress = undefined;
+    item.imageReviewReasons = undefined;
 
     const currentIdx = successCount + failCount + 1;
     const progress = ((currentIdx - 0.5) / totalCount) * 100;
@@ -4703,10 +4862,13 @@ async function startContinuousPublishingV2(): Promise<void> {
         throw new Error('콘텐츠 생성에 실패했습니다 (본문이 비어있음). 이 항목을 건너뛰고 다음으로 넘어갑니다.');
       }
       if (finalStructuredContent) {
+        // [NAVER FULL AUTO] This is the "final text" point (title / H2 / body fixed); images come next.
+        //   It used to say "블로그 발행 중" here, before the images, and the percentage then went backwards.
+        item.fullAutoStage = 'content-ready';
         updateContinuousProgressModal({
-          step: '블로그 발행 중...',
-          log: '네이버 블로그에 포스팅을 전송하고 있습니다.',
-          percentage: (currentIdx / totalCount) * 100 - 5
+          step: '최종 글 확정',
+          log: `[${currentIdx}/${totalCount}] 제목·소제목·본문을 확정했습니다. 이 글 기준으로 이미지를 만듭니다.`,
+          percentage: (currentIdx / totalCount) * 100 - 20
         });
 
         // ✅ 연속발행: 사용자 지정 제목/키워드가 있으면 최종 제목을 강제 세팅
@@ -4723,11 +4885,18 @@ async function startContinuousPublishingV2(): Promise<void> {
 
         // ✅ [2026-03-07 FIX] 이미지 건너뛰기 조건 확장
         // 'skip': 이미지 없이 발행, 'saved': 저장된 이미지 사용 (AI 생성 불필요)
+        // "글만 발행" / "이미지 없음" stay the master off switch (650원 과금 제보) even for an item queued with
+        //   "소제목 전체"; [NAVER FULL AUTO] the row then shows "이미지 없음(설정)" instead of a plan it will not run.
         const skipImages = item.imageSource === 'skip'
           || item.imageSource === 'saved'
           || itemPipelineCfg.image.textOnlyPublish
           || itemPipelineCfg.image.headingImageMode === 'none';
+        if (skipImages) {
+          item.imageProgress = { done: 0, planned: 0 };
+        }
         if (!skipImages) {
+          item.fullAutoStage = 'images';
+          requestAnimationFrame(() => renderQueueListV2());
           updateContinuousProgressModal({
             step: '이미지 생성 중...',
             log: `[${currentIdx}/${totalCount}] 이미지를 생성/수집하고 있습니다.`,
@@ -4765,12 +4934,16 @@ async function startContinuousPublishingV2(): Promise<void> {
               // ✅ [2026-03-12 FIX] thumbnailOnly / headingImageMode=none 체크
               // 이 모드들에서는 generateImagesForAutomation을 건너뛰고
               // fullAutoFlow의 전용 썸네일/thumbnailOnly 로직에 위임
-              const _headingImageMode = itemPipelineCfg.image.headingImageMode;
+              // [NAVER FULL AUTO] Items on the shared image runner use their own frozen H2 scope (thumbnail
+              //   included even in "썸네일만"); the legacy delegation below stays for shopping / local folder.
+              const _headingImageMode = itemUsesImageRunner
+                ? itemImagePolicy.sections.headingImageMode
+                : itemPipelineCfg.image.headingImageMode;
               // Continuous publishing follows headingImageMode only — the
               // legacy 'thumbnailOnly' checkbox key is full-auto-scoped, and a
               // stale 'true' here forced thumbnail-only publishes.
-              const _thumbnailOnly = _headingImageMode === 'thumbnail-only';
-              
+              const _thumbnailOnly = !itemUsesImageRunner && _headingImageMode === 'thumbnail-only';
+
               if (_thumbnailOnly) {
                 appendLog('📷 썸네일만 생성 모드 — 소제목 이미지 생성을 건너뜁니다.');
                 console.log('[Continuous] 📷 thumbnailOnly=true: generateImagesForAutomation 스킵 → fullAutoFlow 전용 썸네일에 위임');
@@ -4795,6 +4968,35 @@ async function startContinuousPublishingV2(): Promise<void> {
                   },
                 });
                 generatedImgs = lfResult.images;
+              } else if (itemUsesImageRunner) {
+                // [NAVER FULL AUTO] Same runner as the one-click full auto: FINAL article → thumbnail + one
+                //   image per H2 in scope, per-slot results, publish decision. A failed slot no longer
+                //   aborts the item (and its paid article) — it is held for review below.
+                appendLog(`🖼️ 이미지 전략: ${describeFullAutoImagePolicy(itemImagePolicy)} (글쓰기 모드: ${item.contentMode || 'seo'})`);
+                const imageRun = await runFullAutoImages({
+                  article: finalStructuredContent,
+                  provider: item.imageSource,
+                  policy: itemImagePolicy,
+                  costPerImageKrw: studioEngineCostKrw(item.imageSource),
+                  onStage: (stage: any) => {
+                    item.imageProgress = { done: Math.max(0, Number(stage?.index || 1) - 1), planned: Number(stage?.total || 0) };
+                    updateContinuousProgressModal({ step: describeFullAutoImageStage(stage) });
+                    requestAnimationFrame(() => renderQueueListV2());
+                  },
+                  baseOptions: {
+                    imageModel: itemPipelineCfg.image.imageModel,
+                    fallbackProvider: resolveImageProviderFallback(),
+                    stopCheck: () => !isContinuousMode,
+                    onProgress: (msg: string) => {
+                      appendLog(msg);
+                      updateContinuousProgressModal({ log: msg });
+                    },
+                  },
+                }, generateImagesForAutomation);
+                generatedImgs = imageRun.images;
+                itemImageRun = imageRun;
+                item.imageProgress = { done: imageRun.readiness.summary.done, planned: imageRun.readiness.summary.planned };
+                appendLog(`💰 ${imageRun.costLine}`);
               } else {
                 // ✅ [2026-02-20 FIX] structuredContent에서 수집 이미지 우선 참조
                 // 전역 배열은 line 6780에서 초기화되므로 비어있음 → structuredContent.collectedImages 우선
@@ -4865,14 +5067,23 @@ async function startContinuousPublishingV2(): Promise<void> {
               console.warn('[Continuous] ImageManager 동기화 실패:', e);
             }
             // Image stage succeeded — reset the consecutive-failure breaker.
-            (window as any).__continuousImgFailStreak = 0;
+            // [NAVER FULL AUTO] A runner item whose every slot failed did not succeed (counted below).
+            if (!itemImageRun || itemImageRun.readiness.summary.done > 0) {
+              (window as any).__continuousImgFailStreak = 0;
+            }
 
           } catch (imgErr) {
             console.error('[Continuous] 이미지 생성 실패:', imgErr);
             // Circuit breaker: two posts failing image generation in a row
             // means a persistent cause (provider/session/quota) — stop the run
             // loudly instead of silently grinding every queued post.
-            const imgFailStreak = (((window as any).__continuousImgFailStreak || 0) + 1);
+            // [NAVER FULL AUTO] Count POSTS, not attempts: the one retry of the same post used to be the
+            //   "second failure" and one bad post stopped every post queued after it.
+            const alreadyCountedThisItem = (item as any)._imgFailCounted === true;
+            (item as any)._imgFailCounted = true;
+            const imgFailStreak = alreadyCountedThisItem
+              ? ((window as any).__continuousImgFailStreak || 0)
+              : (((window as any).__continuousImgFailStreak || 0) + 1);
             (window as any).__continuousImgFailStreak = imgFailStreak;
             if (imgFailStreak >= 2) {
               (window as any).stopFullAutoPublish = true;
@@ -4907,6 +5118,27 @@ async function startContinuousPublishingV2(): Promise<void> {
           }
         }
 
+        // [NAVER FULL AUTO] Publish decision for this reservation: CONTENT_READY + IMAGE_READY = AUTO_PUBLISH.
+        //   Otherwise the article and its good images are saved, the item is marked "이미지 검토 필요" and
+        //   NOT published, and the queue moves on — one post never blocks the other four.
+        if (itemImageRun) {
+          const itemDecision = recheckFullAutoDecisionBeforePublish(itemImageRun, finalStructuredContent);
+          if (itemDecision.decision !== 'AUTO_PUBLISH') {
+            holdContinuousItemForImageReview(item, itemImageRun, itemDecision, finalStructuredContent, {
+              category: item.category || selectedCategory,
+              progressLabel: `[${currentIdx}/${totalCount}]`,
+            });
+            heldForImageReviewCount++;
+            requestAnimationFrame(() => renderQueueListV2());
+            if ((window as any).stopFullAutoPublish) {
+              stopContinuousMode('manual');
+              break;
+            }
+            continue;
+          }
+          item.fullAutoStage = 'images-ready';
+        }
+
         // ✅ [2026-01-23 FIX] 생성된 글 목록에 저장 (다중계정 발행과 동일한 방식으로 통일)
         // 이미지 생성 후에 저장해야 이미지도 함께 저장됨
         const generatedImgsForSave = (window as any).generatedImages || [];
@@ -4936,7 +5168,7 @@ async function startContinuousPublishingV2(): Promise<void> {
           imageSource: skipImages ? 'skip' : item.imageSource,
           skipImages,
           imageStyle: itemPipelineCfg.image.imageStyle,
-          headingImageMode: itemPipelineCfg.image.headingImageMode,
+          headingImageMode: itemUsesImageRunner ? itemImagePolicy.sections.headingImageMode : itemPipelineCfg.image.headingImageMode,
           imageRatio: itemPipelineCfg.image.imageRatio,
           thumbnailImageRatio: itemPipelineCfg.image.thumbnailImageRatio,
           subheadingImageRatio: itemPipelineCfg.image.subheadingImageRatio,
@@ -4997,7 +5229,9 @@ async function startContinuousPublishingV2(): Promise<void> {
           previousPostTitle: item.previousPostTitle || undefined,
           // Continuous publishing derives thumbnail-only from headingImageMode
           // (the legacy checkbox key is full-auto-scoped).
-          thumbnailOnly: itemPipelineCfg.image.headingImageMode === 'thumbnail-only',
+          thumbnailOnly: itemUsesImageRunner
+            ? itemImagePolicy.sections.scope === 'none'
+            : itemPipelineCfg.image.headingImageMode === 'thumbnail-only',
         };
 
         // ✅ [2026-03-11 FIX] 발행 실행 직전 최종 중지 체크 — 어떤 발행 모드든 반드시 적용
@@ -5022,6 +5256,8 @@ async function startContinuousPublishingV2(): Promise<void> {
 
         // ✅ [2026-04-03 FIX] withStopCheck 래퍼: 발행 중에도 중지 즉시 반응
         (item as any)._publishStarted = true;
+        item.fullAutoStage = 'publishing';
+        requestAnimationFrame(() => renderQueueListV2());
         await withStopCheck(executeUnifiedAutomation(formData), { kind: 'publish' });
 
         // [2026-07-02 FIX] 발행 실패를 '완료'로 오보하던 버그 차단.
@@ -5288,6 +5524,15 @@ async function startContinuousPublishingV2(): Promise<void> {
     }
   }
 
+  // [NAVER FULL AUTO] Give the one-click full auto back the writing mode the user selected.
+  try {
+    const unifiedModeEl = document.getElementById('unified-content-mode') as HTMLInputElement | null;
+    if (unifiedModeEl && typeof continuousContentModeSnapshot.unified === 'string') unifiedModeEl.value = continuousContentModeSnapshot.unified;
+    const continuousModeEl = document.getElementById('continuous-content-mode-select') as HTMLSelectElement | null;
+    if (continuousModeEl && typeof continuousContentModeSnapshot.continuous === 'string') continuousModeEl.value = continuousContentModeSnapshot.continuous;
+  } catch { /* DOM restore is best-effort */ }
+  requestAnimationFrame(() => renderQueueListV2());
+
   // 완료 처리
   if (isContinuousMode) {
     setContinuousModeState(false);
@@ -5296,14 +5541,15 @@ async function startContinuousPublishingV2(): Promise<void> {
     if (statusIndicator) statusIndicator.style.background = '#10b981';
     if (statusText) statusText.textContent = '발행 완료';
 
+    const heldSummary = heldForImageReviewCount > 0 ? `, ${heldForImageReviewCount}개 이미지 검토 필요(발행 안 함)` : '';
     updateContinuousProgressModal({
       step: '🎉 모든 작업 완료',
-      log: `총 ${totalCount}개 중 ${successCount}개 성공, ${failCount}개 실패`,
+      log: `총 ${totalCount}개 중 ${successCount}개 성공, ${failCount}개 실패${heldSummary}`,
       percentage: 100
     });
 
     appendLog('✅ 모든 연속 발행 완료!');
-    toastManager.success(`모든 발행이 완료되었습니다! (성공: ${successCount}, 실패: ${failCount})`);
+    toastManager.success(`모든 발행이 완료되었습니다! (성공: ${successCount}, 실패: ${failCount}${heldForImageReviewCount > 0 ? `, 이미지 검토 ${heldForImageReviewCount}` : ''})`);
 
     // ✅ [2026-01-29 개선] 발행 완료 후 전체 상태 초기화
     _consecutiveFailCount = 0; // ✅ [2026-04-11 FIX] 완료 후 연속 실패 카운터 리셋

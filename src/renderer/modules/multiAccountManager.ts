@@ -14,6 +14,11 @@ import {
 } from '../../image/shoppingReferenceGeneration.js';
 import { normalizePublishImageSequence } from '../../image/publishImageSequence.js';
 import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
+import { FULL_AUTO_THUMBNAIL_SLOT_KEY, describeFullAutoImageStage, fullAutoItemsForScope, fullAutoSectionSlotKey } from '../../image/fullAuto/fullAutoImageSlots.js';
+import { buildFullAutoDirectorRequest, buildFullAutoImageCallOptions } from '../../image/fullAuto/fullAutoImageRequest.js';
+import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
+import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
+import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
 import { escapeHtml } from '../utils/htmlUtils.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initMultiAccountManager = initMultiAccountManager;
@@ -474,9 +479,16 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
     if (isShoppingConnect && !usableShoppingReferenceUrl) {
         throw new Error('쇼핑커넥트 대표 상품 이미지가 없어 원본 썸네일과 소제목 AI 이미지를 만들 수 없습니다.');
     }
+    // [NAVER FULL AUTO] Unattended flows pass the resolved image policy (image/fullAuto). It owns the
+    //   heading scope, ratios, 800x800 target and thumbnail text mode for this run.
+    const imagePolicy = !isShoppingConnect && options.imagePolicy && typeof options.imagePolicy === 'object'
+        ? options.imagePolicy
+        : null;
     const includeThumbnailText = isShoppingConnect
         ? false
-        : (options.thumbnailTextInclude ?? options.allowThumbnailText ?? false);
+        : imagePolicy
+            ? imagePolicy.thumbnail.textMode === 'include'
+            : (options.thumbnailTextInclude ?? options.allowThumbnailText ?? false);
     console.log(`[generateImagesForAutomation] 🖼️ allowThumbnailText = ${includeThumbnailText}, provider = ${provider}`);
     // [SPEC-STABILITY-2026 R4 diagnostics] Tag every generation run so
     // overlapping runs for the same post are visible in user logs, and record
@@ -499,9 +511,11 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
     // [Phase 7.2 / R13] Behavior inputs must come from the caller — flow entry
     // resolves localStorage ONCE and passes it down. The fallback read below
     // exists only for un-migrated callers and warns so they get fixed.
-    let _headingImageMode = typeof options.headingImageMode === 'string' && options.headingImageMode
-        ? options.headingImageMode
-        : '';
+    let _headingImageMode = imagePolicy
+        ? String(imagePolicy.sections.headingImageMode || 'all')
+        : typeof options.headingImageMode === 'string' && options.headingImageMode
+            ? options.headingImageMode
+            : '';
     if (!_headingImageMode) {
         _headingImageMode = readRawPipelineSettings().headingImageMode || 'all';
         console.warn('[generateImagesForAutomation] ⚠️ headingImageMode 미전달 — localStorage 폴백 (R13: 호출자가 명시 전달)');
@@ -620,9 +634,32 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             postTitle,
         })
         : null;
+    // [NAVER FULL AUTO] With a policy, number sections 1-based among real sections only (an H2 that
+    //   merely contains "대표"/"서론" is not a thumbnail) and remember each item's slot key, so a failed
+    //   slot stays empty instead of the next image moving into it.
+    const scopedItems = imagePolicy && !shoppingBatchPlan
+        ? fullAutoItemsForScope(items, imagePolicy.sections.scope).filter((entry) => entry.kept)
+        : null;
     const itemsForGeneration = shoppingBatchPlan
         ? shoppingBatchPlan.bodyItems
-        : getSequentialImageItemsForMode(items, _headingImageMode);
+        : scopedItems
+            ? scopedItems.map((entry) => entry.item)
+            : getSequentialImageItemsForMode(items, _headingImageMode);
+    const slotKeysForGeneration = scopedItems
+        ? scopedItems.map((entry) => (entry.number === 0 ? FULL_AUTO_THUMBNAIL_SLOT_KEY : fullAutoSectionSlotKey(entry.number)))
+        : [];
+    const slotNumbersForGeneration = scopedItems ? scopedItems.map((entry) => entry.number) : [];
+    const continueOnImageFailure = options.continueOnImageFailure === true && Boolean(scopedItems);
+    const reportSlot = (index, result) => {
+        const key = slotKeysForGeneration[index];
+        if (!key || typeof options.onSlotResult !== 'function') return;
+        try {
+            options.onSlotResult({ key, ...result });
+        }
+        catch (reportError) {
+            console.warn('[generateImagesForAutomation] onSlotResult 콜백 오류:', reportError);
+        }
+    };
     const _displayCount = shoppingBatchPlan
         ? shoppingBatchPlan.bodyItems.length + 1
         : itemsForGeneration.length;
@@ -712,8 +749,32 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         onProgress?.(`✅ [run #${runId}] 대표 원본 1장 + AI 소제목 ${actualBodyCount}장 확인 완료`);
         return safeBatch.images;
     }
+    // Marks this and every later slot FAILED with one reason (dead engine, batch timeout) and stops.
+    const failRemainingSlots = (fromIndex, reason) => {
+        for (let rest = fromIndex; rest < itemsForGeneration.length; rest++) {
+            reportSlot(rest, { state: 'FAILED', reason });
+        }
+    };
     for (let itemIndex = 0; itemIndex < itemsForGeneration.length; itemIndex++) {
         const item = itemsForGeneration[itemIndex];
+        if (continueOnImageFailure && checkBatchTimeout()) {
+            const reason = `이미지 생성 시간 초과(${Math.round(BATCH_TIMEOUT_MS / 60000)}분)`;
+            onProgress?.(`⏰ ${reason} — 남은 ${itemsForGeneration.length - itemIndex}개 이미지는 만들지 않았습니다.`);
+            failRemainingSlots(itemIndex, reason);
+            break;
+        }
+        if (typeof options.onStage === 'function' && scopedItems) {
+            try {
+                options.onStage({
+                    kind: item.isThumbnail === true ? 'thumbnail' : 'section',
+                    number: slotNumbersForGeneration[itemIndex] || 0,
+                    index: itemIndex + 1,
+                    total: itemsForGeneration.length,
+                    heading: String(item?.heading || ''),
+                });
+            }
+            catch { /* progress UI is optional */ }
+        }
         if (isShoppingConnect && item.isThumbnail === true) {
             sequentialImages.push(createShoppingRepresentativeThumbnail(
                 usableShoppingReferenceUrl,
@@ -755,6 +816,12 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
                     imageGenerationTimeoutMs: isFlowProvider
                         ? FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS
                         : Math.min(45 * 60 * 1000, 180000 + perItemBudgetMs),
+                    // [NAVER FULL AUTO] Policy ratios + 800x800 target, and the homefeed thumbnail director
+                    //   request (AUTO text, CARD_PROMISE, real photos first) for the thumbnail item only.
+                    ...(imagePolicy ? buildFullAutoImageCallOptions(imagePolicy) : {}),
+                    ...(imagePolicy && item.isThumbnail === true
+                        ? { thumbnailDirector: buildFullAutoDirectorRequest(imagePolicy, options.directorContext || {}) }
+                        : {}),
                 });
                 if (stopCheck && stopCheck())
                     return sequentialImages;
@@ -767,6 +834,7 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
                     }));
                     sequentialImages.push(...normalizedImages);
                     itemSucceeded = true;
+                    reportSlot(itemIndex, { state: 'SUCCESS', image: normalizedImages[0] });
                     onProgress?.(`✅ [${itemIndex + 1}/${_displayCount}][run #${runId}] 이미지 생성 완료: ${headingName}...`);
                     continue;
                 }
@@ -788,6 +856,11 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
                     errMsg.includes('안전 필터'))) {
                     console.warn(`[generateImagesForAutomation] ⛔ 회복 불가능한 ImageFX 오류 → 이미지 생성 중단`);
                     onProgress?.(`⛔ ${errMsg.substring(0, 200)}`);
+                    if (continueOnImageFailure) {
+                        // Same engine, same account: every later slot would fail the same way.
+                        failRemainingSlots(itemIndex, errMsg.substring(0, 160));
+                        return sequentialImages;
+                    }
                     throw lastError;
                 }
                 if (attempt < MAX_RETRIES) {
@@ -803,6 +876,13 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         if (!itemSucceeded) {
             const headingName = String(item?.heading || `image-${itemIndex + 1}`).substring(0, 30);
             const failCause = lastError?.message || 'empty image generation result';
+            if (continueOnImageFailure) {
+                // [NAVER FULL AUTO] Keep the good images and the article; this slot stays empty and the
+                //   caller's publish decision holds the post for review instead of publishing it silently.
+                reportSlot(itemIndex, { state: 'FAILED', reason: String(failCause).substring(0, 160) });
+                onProgress?.(`❌ [${itemIndex + 1}/${_displayCount}] "${headingName}" 이미지 생성 최종 실패 — 이 칸은 비워 두고 다음 이미지로 넘어갑니다: ${String(failCause).substring(0, 160)}`);
+                continue;
+            }
             // Fail fast WITH a visible reason (the old unreachable onProgress
             // after throw meant users never saw why the run stalled).
             onProgress?.(`❌ [${itemIndex + 1}/${_displayCount}] "${headingName}" 이미지 생성 최종 실패 — 이미지 단계 중단: ${String(failCause).substring(0, 160)}`);
@@ -819,6 +899,10 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
     const errorDetail = lastError?.message || '알 수 없는 오류';
     onProgress?.(`⚠️ 이미지 생성 결과 없음: ${errorDetail} — 발행을 중단하고 이미지 단계부터 다시 시도합니다.`);
     console.warn(`[generateImagesForAutomation] 이미지 0개로 종료: ${errorDetail}`);
+    if (continueOnImageFailure) {
+        // Every slot was reported FAILED; the caller's publish decision holds the post.
+        return sequentialImages;
+    }
     throw new Error(`image generation returned no images: ${errorDetail}`);
 }
 async function initMultiAccountPublishModal() {
@@ -3393,6 +3477,16 @@ async function initMultiAccountPublishModal() {
                     const headings = structuredContent.introduction
                         ? [{ title: structuredContent.selectedTitle || '🖼️ 썸네일', content: structuredContent.introduction, isThumbnail: true, isIntro: true }, ...rawHeadingsMA]
                         : rawHeadingsMA;
+                    // [NAVER FULL AUTO] Homefeed image policy for this post (independent of its writing mode) and the
+                    //   run result, so the publish decision below and the publish options agree with the image stage.
+                    const maImagePolicy = resolveFullAutoImagePolicyFromPipeline(itemPipelineCfg, {
+                        strategy: queueItem.imageStrategy,
+                        headingScope: queueItem.headingImageScope,
+                        thumbnailTextMode: queueItem.thumbnailTextMode,
+                        thumbnailTextInclude: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText === true,
+                    });
+                    let maImageRun = null;
+                    queueItem.__maHeadingImageMode = maImagePolicy.sections.headingImageMode;
                     try {
                         const scSubImageModePre = itemPipelineCfg.shopping.subImageMode;
                         const isShoppingAiMode = queueItem.contentMode === 'affiliate' && scSubImageModePre === 'ai';
@@ -3406,6 +3500,8 @@ async function initMultiAccountPublishModal() {
                         const skipImages = queueItem.skipImages === true
                             || (window.isImageSkipEnabled?.() === true)
                             || imageSource === 'skip';
+                        // Main must not regenerate what the user switched off ("이미지 없음", text-only).
+                        queueItem.__maSkipImagesDecided = skipImages || !maImagePolicy.imagesEnabled;
                         console.log('[FullAuto] 이미지 소스:', imageSource, ', 건너뛰기:', skipImages, `(queueItem=${queueItem.skipImages === true}, SSOT=${window.isImageSkipEnabled?.() === true}, source=skip=${imageSource === 'skip'})`);
                         if (!skipImages && queueItem.contentMode === 'affiliate' && queueItem.affiliateLink) {
                             addMALog('🛒 쇼핑커넥트 모드 - 제품 이미지 수집 중...', 'info');
@@ -3552,6 +3648,31 @@ async function initMultiAccountPublishModal() {
                                 addProgressItem('⚠️ 📂 이미지 없이 진행', 'warning');
                             }
                         }
+                        else if (queueItem.contentMode !== 'affiliate' && maImagePolicy.imagesEnabled) {
+                            // [NAVER FULL AUTO] Same runner as one-click full auto and the reservation queue.
+                            addMALog(`🖼️ 이미지 전략: ${describeFullAutoImagePolicy(maImagePolicy)} (글쓰기 모드: ${queueItem.contentMode || 'seo'})`, 'info');
+                            const imageRun = await runFullAutoImages({
+                                article: structuredContent,
+                                provider: imageSource,
+                                policy: maImagePolicy,
+                                costPerImageKrw: studioEngineCostKrw(imageSource),
+                                onStage: (stage) => {
+                                    updateMAProgress(i, totalItems, queueItem.accountName, describeFullAutoImageStage(stage), 1, TOTAL_SUB_STEPS);
+                                },
+                                baseOptions: {
+                                    flightScope: queueItem.accountId || queueItem.id,
+                                    imageModel: itemPipelineCfg.image.imageModel,
+                                    fallbackProvider: resolveImageProviderFallback(),
+                                    stopCheck: () => stopRequested || window.stopFullAutoPublish,
+                                    onProgress: (msg) => {
+                                        addMALog(msg, 'info');
+                                    },
+                                },
+                            }, generateImagesForAutomation);
+                            generatedImages = imageRun.images;
+                            maImageRun = imageRun;
+                            addMALog(`💰 ${imageRun.costLine}`, 'info');
+                        }
                         else if (imageSource === 'naver') {
                             addMALog(`🔍 네이버 이미지 검색 시작 (키워드: ${structuredContent.keywords?.[0] || structuredContent.selectedTitle})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
@@ -3659,6 +3780,23 @@ async function initMultiAccountPublishModal() {
                     }
                     catch (e) {
                         console.warn('[multiAccountManager] catch ignored:', e);
+                    }
+                    // [NAVER FULL AUTO] Publish decision: a missing thumbnail / H2 image holds this post (saved
+                    //   above, not published) and the queue moves on. Before, an image error was swallowed and
+                    //   main silently regenerated title-only images with its own defaults.
+                    if (maImageRun) {
+                        const maDecision = recheckFullAutoDecisionBeforePublish(maImageRun, structuredContent);
+                        if (maDecision.decision !== 'AUTO_PUBLISH') {
+                            queueItem.pipelineStatus = 'image-review';
+                            queueItem.imageReviewReasons = [...maDecision.reasons];
+                            updateMAStep('ma-step-image', 'error');
+                            addMALog(`🖼️ ${describeFullAutoImageReview(maDecision).replace(/\n/g, ' ')}`, 'warning');
+                            addProgressItem('   🖼️ 이미지 검토 필요 — 이 글은 발행하지 않고 저장만 했습니다', 'warning');
+                            // Counted as "not published" in the run summary. Like a content failure it skips the
+                            // between-post wait: nothing was sent to Naver, so there is no publish spacing to keep.
+                            totalFail++;
+                            continue;
+                        }
                     }
                     updateMAStep('ma-step-image', 'completed');
                     addMALog(`✅ ${generatedImages.length}개 이미지 준비 완료`, 'success');
@@ -3897,7 +4035,10 @@ async function initMultiAccountPublishModal() {
                         contentMode: queueItem.contentMode,
                         affiliateLink: queueItem.affiliateLink,
                         videoOption: queueItem.videoOption,
-                        skipImages: (queueItem.imageSource === 'skip') || false,
+                        // [NAVER FULL AUTO] Text-only / "이미지 없음" is forwarded, so main never generates a full
+                        //   image set the user switched off; the scope travels too.
+                        skipImages: (queueItem.imageSource === 'skip') || queueItem.__maSkipImagesDecided === true,
+                        headingImageMode: queueItem.__maHeadingImageMode || itemPipelineCfg.image.headingImageMode,
                         useAiImage: queueItem.useAiImage ?? true,
                         createProductThumbnail: queueItem.createProductThumbnail ?? false,
                         scSubImageSource: itemPipelineCfg.shopping.subImageMode,

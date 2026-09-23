@@ -4,6 +4,7 @@ import path from 'path';
 import { randomUUID } from 'crypto';
 import type { BlobMeta } from '../main/blobStore/index.js';
 import { downloadImageBuffer } from './imageUrlDownload.js';
+import { currentSquareImageTarget } from './squareImageTarget.js';
 
 export async function ensureDirectory(): Promise<string> {
   // 테스트 환경에서는 환경변수를 사용
@@ -76,17 +77,24 @@ function resolveGeneratedImageTarget(
   width: number,
   height: number,
   keepAspect: boolean,
-): { width: number; height: number; fit: 'cover' | 'inside' } {
+  forcedSquare: number | null = null,
+): { width: number; height: number; fit: 'cover' | 'inside'; position: 'centre' | 'attention' } {
   if (keepAspect) {
     const targetWidth = 1200;
-    return { width: targetWidth, height: Math.round(height * (targetWidth / width)), fit: 'inside' };
+    return { width: targetWidth, height: Math.round(height * (targetWidth / width)), fit: 'inside', position: 'centre' };
   }
   const ratio = Math.max(width, height) / Math.max(1, Math.min(width, height));
+  // [NAVER FULL AUTO] The homefeed strategy asked for N x N on every image of this call — including
+  //   engines that ignore the requested ratio (Flow, Dropshot). A wide/tall frame keeps its subject by
+  //   cropping on the most salient region instead of the centre.
+  if (forcedSquare) {
+    return { width: forcedSquare, height: forcedSquare, fit: 'cover', position: ratio <= NEAR_SQUARE_MAX_RATIO ? 'centre' : 'attention' };
+  }
   if (ratio <= NEAR_SQUARE_MAX_RATIO) {
-    return { width: GENERATED_IMAGE_SQUARE_SIZE, height: GENERATED_IMAGE_SQUARE_SIZE, fit: 'cover' };
+    return { width: GENERATED_IMAGE_SQUARE_SIZE, height: GENERATED_IMAGE_SQUARE_SIZE, fit: 'cover', position: 'centre' };
   }
   const targetWidth = GENERATED_IMAGE_SQUARE_SIZE;
-  return { width: targetWidth, height: Math.round(height * (targetWidth / width)), fit: 'inside' };
+  return { width: targetWidth, height: Math.round(height * (targetWidth / width)), fit: 'inside', position: 'centre' };
 }
 
 export async function writeImageFile(
@@ -162,6 +170,7 @@ export async function writeImageFile(
       metadata.width || GENERATED_IMAGE_SQUARE_SIZE,
       metadata.height || GENERATED_IMAGE_SQUARE_SIZE,
       options.keepAspect === true,
+      options.keepAspect === true ? null : currentSquareImageTarget(),
     );
     const targetWidth = target.width;
     const targetHeight = target.height;
@@ -170,7 +179,7 @@ export async function writeImageFile(
     if (metadata.width && (metadata.width !== targetWidth || (metadata.height || 0) !== targetHeight)) {
       const processedImage = image.resize(targetWidth, targetHeight, {
         fit: target.fit, // cover: 가운데 잘라 정사각 / inside: 비율 유지
-        position: 'centre',
+        position: target.position === 'attention' ? sharp.strategy.attention : 'centre',
         withoutEnlargement: false, // 작은 이미지도 확대 허용
       });
 
@@ -187,6 +196,11 @@ export async function writeImageFile(
       }
 
       console.log(`[ImageGenerator] 이미지 리사이징: ${metadata.width}x${metadata.height} → ${targetWidth}x${targetHeight}`);
+      // [NAVER FULL AUTO] The blob meta (and so GeneratedImage.width/height) must describe the bytes that
+      //   are saved, not the engine's original frame — the 800x800 publish check reads it.
+      const processedMeta = await sharp(processedBuffer).metadata();
+      imgWidth = processedMeta.width ?? targetWidth;
+      imgHeight = processedMeta.height ?? targetHeight;
     }
   } catch (resizeError) {
     // 리사이징 실패 시 원본 사용

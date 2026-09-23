@@ -68,6 +68,7 @@ import cron from 'node-cron';
 import { NaverBlogAutomation, RunOptions, type PublishMode, type AutomationImage } from './naverBlogAutomation.js';
 import { generateImages, resetAllImageState, abortImageGeneration, applyKoreanTextOverlayIfNeeded } from './imageGenerator.js';
 import { generateImagesWithThumbnailDirector } from './image/director/thumbnailDirectorGate.js';
+import { runWithSquareImageTarget } from './image/squareImageTarget.js';
 import { deduplicateSourceImagesByContent } from './image/sourceImageDeduplicator.js';
 import { getImageErrorMessage, isMappableImageTransportError } from './image/imageErrorMessages.js';
 import {
@@ -4102,11 +4103,14 @@ ipcMain.handle(
       };
       // [SPEC-NAVER-IMAGE-2026] A lone thumbnail goes through the director (real photo first; one image by
       //   default, candidates + one judge call only in high-quality mode); everything else passes through.
-      const images = await generateImagesWithThumbnailDirector(imageOptions, apiKeys, onImageGenerated, {
-        config,
-        generate: generateImages,
-        applyTitleOverlay: applyKoreanTextOverlayIfNeeded,
-      });
+      // [NAVER FULL AUTO] The homefeed strategy sends targetSquareSize (800): every engine's saved file of
+      //   this call is cropped to that square, including engines that ignore the requested ratio.
+      const images = await runWithSquareImageTarget((options as any).targetSquareSize, () =>
+        generateImagesWithThumbnailDirector(imageOptions, apiKeys, onImageGenerated, {
+          config,
+          generate: generateImages,
+          applyTitleOverlay: applyKoreanTextOverlayIfNeeded,
+        }));
       const generatedImageCount = Array.isArray(images) ? images.length : 0;
       const providerForEmptyCheck = String(options.provider || imageOptions.provider || '');
       const requiredGeneratedImageCount = Array.isArray(options.items) ? options.items.length : 0;

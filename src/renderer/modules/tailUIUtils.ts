@@ -5,6 +5,31 @@
  */
 
 import { loadTutorialVideos } from './tutorialsTab.js';
+import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
+import { FULL_AUTO_CONTENT_MODE_LABELS } from '../../image/fullAuto/fullAutoQueueStatus.js';
+
+// [NAVER FULL AUTO] Same inline bundle scope (pipelineConfig).
+declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): any;
+declare function resolveFullAutoImagePolicyFromPipeline(config: any, overrides?: any): any;
+
+/**
+ * [NAVER FULL AUTO] Writing mode and image strategy side by side under the publish button, so
+ * "SEO를 골랐는데 왜 홈판 이미지가 나오지?" is answered before the run starts. Put on window explicitly
+ * because the image settings modal calls it after saving.
+ */
+export function refreshFullAutoImageSummary(): void {
+  const el = document.getElementById('unified-fullauto-image-summary');
+  if (!el) return;
+  try {
+    const mode = (document.getElementById('unified-content-mode') as HTMLInputElement | null)?.value || 'seo';
+    const policy = resolveFullAutoImagePolicyFromPipeline(resolvePipelineConfig('full-auto'));
+    el.textContent = `✍️ 글쓰기 모드: ${FULL_AUTO_CONTENT_MODE_LABELS[mode] || mode} · 🖼️ 이미지: ${describeFullAutoImagePolicy(policy)}`;
+  } catch (error) {
+    console.warn('[FullAutoImageSummary] 표시 실패:', error);
+    el.textContent = '';
+  }
+}
+(window as any).refreshFullAutoImageSummary = refreshFullAutoImageSummary;
 
 export function initToolsHubModal() {
   console.log('[ToolsHub] 초기화 시작...');
@@ -532,6 +557,14 @@ export function initContentModeHelpAndSmartPublish() {
     } else {
       // 반자동 발행 실행
       document.getElementById('semi-auto-publish-btn')?.click();
+    }
+  });
+
+  // [NAVER FULL AUTO] Keep the writing-mode / image-strategy line current.
+  refreshFullAutoImageSummary();
+  document.addEventListener('click', (event) => {
+    if ((event.target as HTMLElement | null)?.closest?.('.content-mode-btn')) {
+      setTimeout(refreshFullAutoImageSummary, 0);
     }
   });
 

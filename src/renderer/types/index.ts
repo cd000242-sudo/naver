@@ -107,7 +107,23 @@ export interface ContinuousQueueItem {
     scheduleDate?: string;
     scheduleTime?: string;
     scheduleType?: 'app-schedule' | 'naver-server';
-    status: 'pending' | 'processing' | 'completed' | 'failed' | 'cancelled' | 'uncertain';
+    /**
+     * 'image-review' — [NAVER FULL AUTO] the article is ready but a required image (thumbnail or an H2
+     * image within the scope) failed; it was saved and NOT published so only that slot needs redoing.
+     */
+    status: 'pending' | 'processing' | 'completed' | 'failed' | 'cancelled' | 'uncertain' | 'image-review';
+    /** [NAVER FULL AUTO] Image strategy snapshot taken when the item was queued ('naver-homefeed' default). */
+    imageStrategy?: 'naver-homefeed' | 'user-settings';
+    /** [NAVER FULL AUTO] H2 image scope snapshot ('all' default for new unattended jobs). */
+    headingImageScope?: 'all' | 'odd' | 'even' | 'none';
+    /** [NAVER FULL AUTO] Homefeed thumbnail text mode snapshot. */
+    thumbnailTextMode?: 'auto' | 'include' | 'none';
+    /** [NAVER FULL AUTO] Where the item is in its run (queue row status). */
+    fullAutoStage?: 'writing' | 'content-ready' | 'images' | 'images-ready' | 'publishing';
+    /** [NAVER FULL AUTO] Images done / needed for this article. */
+    imageProgress?: { done: number; planned: number };
+    /** [NAVER FULL AUTO] Why an item is held for image review. */
+    imageReviewReasons?: string[];
     ctaType?: string;
     ctaUrl?: string;
     ctaText?: string;

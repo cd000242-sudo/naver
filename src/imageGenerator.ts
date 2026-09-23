@@ -44,7 +44,7 @@ import {
   shouldApplyContextualPromptForProvider,
 } from './image/contextualImagePrompt.js';
 import { engineRotatesViewpoint } from './image/imageViewpointRotation.js';
-import { assignSectionRoles } from './image/director/sectionRoleAssignment.js';
+import { assignSectionRolesWithHistory } from './image/director/sectionRoleAssignment.js';
 import { inferArticleVisualKind } from './image/director/sectionRolePlanner.js';
 import {
   ROLE_DIRECTIVES,
@@ -168,14 +168,21 @@ function annotateEngineTrace(
   }
 ): GeneratedImage[] {
   const fallbackUsed = trace.requestedProvider !== trace.actualProvider || !!trace.fallbackReason;
-  return images.map((img) => ({
-    ...img,
-    requestedProvider: trace.requestedProvider,
-    actualProvider: trace.actualProvider,
-    fallbackUsed,
-    fallbackReason: trace.fallbackReason,
-    imageFallbackPolicy: trace.policy,
-  }));
+  return images.map((img) => {
+    // [NAVER FULL AUTO] The Nano generator's last safety net swaps to another Gemini image model and tags the
+    //   image "<model>-final-fallback"; the trace used to report the requested engine and fallbackUsed=false.
+    const finalFallbackModel = /-final-fallback$/u.test(String(img.provider || ''))
+      ? String(img.provider).replace(/-final-fallback$/u, '')
+      : '';
+    return {
+      ...img,
+      requestedProvider: trace.requestedProvider,
+      actualProvider: finalFallbackModel || trace.actualProvider,
+      fallbackUsed: fallbackUsed || Boolean(finalFallbackModel),
+      fallbackReason: finalFallbackModel ? `선택 모델 실패 → ${finalFallbackModel}로 대체 생성` : trace.fallbackReason,
+      imageFallbackPolicy: trace.policy,
+    };
+  });
 }
 
 function createFallbackPolicyError(
@@ -520,13 +527,16 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
 
   // [SPEC-NAVER-IMAGE-2026] One visual role per section, planned over the article's full heading list,
   // so the set stops repeating the same subject type. Shopping keeps its product-hero logic.
-  const sectionRoles = options.isShoppingConnect
-    ? generationSourceItems.map(() => null)
-    : assignSectionRoles(generationSourceItems, {
+  // [NAVER FULL AUTO §11/§12] The plan also knows which roles the EARLIER H2 images of this article used,
+  //   so a one-item call can be told not to repeat their subject, framing or background (no model call).
+  const sectionRoleHistory = options.isShoppingConnect
+    ? generationSourceItems.map(() => ({ role: null, previousRoles: [] as const }))
+    : assignSectionRolesWithHistory(generationSourceItems, {
       sectionPlanHeadings: options.sectionPlanHeadings,
       category: options.category,
       postTitle: options.articleTitle || options.postTitle,
     });
+  const sectionRoles = sectionRoleHistory.map((entry) => entry.role);
   const articleVisualKind = inferArticleVisualKind(options.category, options.articleTitle || options.postTitle);
   if (sectionRoles.some(Boolean)) {
     const summary = generationSourceItems
@@ -568,6 +578,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
           realistic: isRealisticImageStyle((item as any).imageStyle || (options as any).imageStyle),
           kind: articleVisualKind,
           regenerate: options.regenerate === true,
+          previousRoles: sectionRoleHistory[idx]?.previousRoles,
         })
         : undefined;
       const prompt = prepareProviderContextualImagePrompt(normalizedProvider, {

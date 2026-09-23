@@ -119,6 +119,11 @@ export interface GenerateImagesOptions {
   sectionPlanHeadings?: string[];
   /** [SPEC-NAVER-IMAGE-2026] Thumbnail candidates + judge (lone thumbnail calls only). */
   thumbnailDirector?: ThumbnailDirectorRequest;
+  /**
+   * [NAVER FULL AUTO] The homefeed image strategy wants every generated image of this call N x N
+   * (800). main runs the call inside image/squareImageTarget so every engine's saved file matches.
+   */
+  targetSquareSize?: number;
 }
 
 export interface GeneratedImage {
@@ -180,6 +185,11 @@ export interface GeneratedImage {
   isCollected?: boolean;
   /** [SPEC-NAVER-IMAGE-2026] One-line hint for the user (e.g. put real photos in first). */
   directorNotice?: string;
+  /**
+   * [NAVER FULL AUTO] What the thumbnail director built: 'real-pair' (two real photos side by side),
+   * 'real' (one real photo) or 'ai'. Labels the result preview (image/fullAuto/fullAutoImageAsset).
+   */
+  assetKind?: string;
 }
 
 // ✅ [v1.4.80] 'flow' 추가 — assertProvider 통과 허용 (Google Labs Flow 엔진 활성화)

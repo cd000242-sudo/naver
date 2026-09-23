@@ -27,6 +27,15 @@ const STUDIO_ENGINES: readonly StudioEngine[] = [
   { value: 'dropshot', label: '🍌 리더스 나노바나나 무제한', costKrw: 0, note: '구독자 무제한 · 추가비용 0원 (Pro 월 구독료 별도)' },
 ];
 
+/**
+ * [NAVER FULL AUTO] Per-image price (KRW) of an engine in this list, or null when the engine is not
+ * listed (the full-auto cost line then says "단가 미집계" instead of guessing).
+ */
+export function studioEngineCostKrw(value: string): number | null {
+  const engine = STUDIO_ENGINES.find((e) => e.value === String(value || '').trim());
+  return engine ? engine.costKrw : null;
+}
+
 /** 한 번에 생성 가능한 최대 프롬프트 수 (kit §12.9 slice 50과 동일). */
 const MAX_PROMPTS = 50;
 

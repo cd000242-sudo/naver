@@ -63,8 +63,10 @@ describe('duplicate leading year title guard', () => {
     );
     expect(contentGeneration).toContain('titleInput1.value = normalizedSeoTitle;');
     expect(contentGeneration).toContain('titleInput2.value = normalizedSeoTitle;');
+    // [NAVER FULL AUTO] Search-mode items (or an explicit tick) still go through the real normalizer;
+    //   homefeed / business / custom titles are not keyword-prefixed.
     expect(continuousPublishing).toContain(
-      'finalTitle = applyKeywordPrefixToTitle(finalTitle, keyword);',
+      'finalTitle = applyKeywordPrefixToTitle(finalTitle, prefixKeyword);',
     );
   });
 

@@ -9,7 +9,9 @@ import {
   findPlannedRole,
   inferArticleVisualKind,
   isMetaImageHeading,
+  normalizePlanHeading,
   planSectionRoles,
+  type SectionRolePlanEntry,
   type SectionVisualRole,
 } from './sectionRolePlanner.js';
 
@@ -24,31 +26,71 @@ export interface RoleAssignmentOptions {
   readonly postTitle?: string;
 }
 
+/** One item's planned role plus the roles already used by the sections before it in the article. */
+export interface RoleAssignmentWithHistory {
+  readonly role: SectionVisualRole | null;
+  /** Roles of the sections before this one in the plan, oldest first; empty when unknown or a thumbnail. */
+  readonly previousRoles: readonly SectionVisualRole[];
+}
+
 function isThumbnailItem(item: RoleAssignmentItem): boolean {
   return item.isThumbnail === true || isMetaImageHeading(String(item.heading || ''));
 }
 
 /**
- * One role per item (null = keep today's behaviour for that item).
+ * The set-level plan this call's items resolve against.
  *  - Plan from `sectionPlanHeadings` when at least one item heading is in it (guards against a
  *    stale list from another article).
  *  - Otherwise plan from this call's own section items, but only when there are two or more.
- *  - Thumbnails never get a section role.
+ */
+function resolveSectionPlan(
+  items: readonly RoleAssignmentItem[],
+  options: RoleAssignmentOptions,
+): SectionRolePlanEntry[] {
+  const kind = inferArticleVisualKind(options.category, options.postTitle);
+  const listed = (options.sectionPlanHeadings || []).map((h) => String(h || '')).filter((h) => h.trim());
+  const sectionItems = items.filter((item) => !isThumbnailItem(item));
+
+  const listPlan = listed.length > 0 ? planSectionRoles(listed, { kind }) : [];
+  const listMatches = listPlan.length > 0 && sectionItems.some((item) => findPlannedRole(listPlan, item.heading) !== null);
+  if (listMatches) return listPlan;
+
+  const ownHeadings = sectionItems.map((item) => String(item.heading || ''));
+  return ownHeadings.length >= 2 ? planSectionRoles(ownHeadings, { kind }) : [];
+}
+
+/** Index of a heading inside the plan, matched the same way `findPlannedRole` does; -1 when absent. */
+function findPlanIndex(plan: readonly SectionRolePlanEntry[], heading: string | undefined): number {
+  const key = normalizePlanHeading(String(heading || ''));
+  if (!key) return -1;
+  return plan.findIndex((entry) => entry.heading === key);
+}
+
+/**
+ * One role per item plus the roles already used earlier in the article (V1 extension).
+ *  - `previousRoles` lists the planned roles of the sections BEFORE this item's section, oldest first.
+ *  - Thumbnails and items whose section position is unknown get an empty `previousRoles`.
+ */
+export function assignSectionRolesWithHistory(
+  items: readonly RoleAssignmentItem[],
+  options: RoleAssignmentOptions = {},
+): RoleAssignmentWithHistory[] {
+  const plan = resolveSectionPlan(items, options);
+
+  return items.map((item) => {
+    if (isThumbnailItem(item)) return { role: null, previousRoles: [] };
+    const index = findPlanIndex(plan, item.heading);
+    if (index < 0) return { role: null, previousRoles: [] };
+    return { role: plan[index].role, previousRoles: plan.slice(0, index).map((entry) => entry.role) };
+  });
+}
+
+/**
+ * One role per item (null = keep today's behaviour for that item). Thumbnails never get a section role.
  */
 export function assignSectionRoles(
   items: readonly RoleAssignmentItem[],
   options: RoleAssignmentOptions = {},
 ): Array<SectionVisualRole | null> {
-  const kind = inferArticleVisualKind(options.category, options.postTitle);
-  const listed = (options.sectionPlanHeadings || []).map((h) => String(h || '')).filter((h) => h.trim());
-  const sectionItems = items.filter((item) => !isThumbnailItem(item));
-
-  let plan = listed.length > 0 ? planSectionRoles(listed, { kind }) : [];
-  const listMatches = plan.length > 0 && sectionItems.some((item) => findPlannedRole(plan, item.heading) !== null);
-  if (!listMatches) {
-    const ownHeadings = sectionItems.map((item) => String(item.heading || ''));
-    plan = ownHeadings.length >= 2 ? planSectionRoles(ownHeadings, { kind }) : [];
-  }
-
-  return items.map((item) => (isThumbnailItem(item) ? null : findPlannedRole(plan, item.heading)));
+  return assignSectionRolesWithHistory(items, options).map((entry) => entry.role);
 }

@@ -75,12 +75,36 @@ export const ROLE_ALT_CAMERA: Readonly<Record<SectionVisualRole, string>> = Obje
 /** V1 §12, §21, §22: what each article kind must not do in its section images. */
 export const KIND_CONSTRAINT: Readonly<Record<ArticleVisualKind, string>> = Object.freeze({
   issue: 'This story is about real, named people: do not depict them or any lookalike; show places, objects, documents or symbolic details, and keep any person small, from behind and unidentifiable.',
-  info: "No clichés: no coin piles, cash stacks, piggy banks, judge's gavel or a calculator on money; show the actual forms, screens, calendars or items this section is about.",
+  info: "No clichés: no coin piles, cash stacks, piggy banks, judge's gavel, or a calculator on money, and no umbrella-over-family insurance scenes, neon circuit-board or hologram IT backgrounds, or stacks of banknotes for a subsidy; show the actual forms, screens, calendars or items this section is about.",
   travel: 'Do not invent landmarks, buildings or flower fields the section does not describe; keep the real place plausible, with no tourism-poster styling.',
   product: "Keep the real product's design, colour and proportions; do not redesign it or invent variants.",
+  auto: 'Show the actual vehicle, part, dashboard, charging hardware, or price comparison this section is about; do not default to a generic car driving on a road or a car parked in front of scenery; vary exterior, interior and detail views across sections; do not invent badges, model names or specs absent from the article.',
 });
 
 export const REGENERATION_LINE = 'This is a regeneration: change the composition from the previous attempt — a different distance, angle and subject size.';
+
+/** English name for each role, used only in the previous-images note (ROLE_DIRECTIVES.label is Korean). */
+const ROLE_ENGLISH_LABEL: Readonly<Record<SectionVisualRole, string>> = Object.freeze({
+  scene: 'real scene',
+  comparison: 'comparison',
+  closeup: 'closeup',
+  procedure: 'procedure',
+  criteria: 'criteria layout',
+  place: 'place',
+  problem: 'problem scene',
+});
+
+/**
+ * V1 extension: tells the model what earlier sections in this same post already showed, so a later
+ * section does not repeat the same device/desk/car angle even when it happens to share a role with an
+ * earlier one. Pure and deterministic — `previousRoles` comes from the planner, never a model call.
+ */
+export function buildPreviousImagesLine(previousRoles: readonly SectionVisualRole[]): string | null {
+  if (!previousRoles || previousRoles.length === 0) return null;
+  // De-duplicate while keeping first-seen order so the sentence stays readable on longer articles.
+  const labels = Array.from(new Set(previousRoles.map((role) => ROLE_ENGLISH_LABEL[role])));
+  return `Earlier images in this post already used: ${labels.join(', ')}. Use a different subject, framing, distance and background from those; do not repeat the same device, desk, car angle or road shot.`;
+}
 
 /** Brief payload for one section — plain strings, so the brief module stays import-free. */
 export interface BriefVisualRole {
@@ -92,9 +116,18 @@ export interface BriefVisualRole {
 
 export function toBriefVisualRole(
   role: SectionVisualRole,
-  options: { realistic: boolean; kind?: ArticleVisualKind; regenerate?: boolean },
+  options: {
+    realistic: boolean;
+    kind?: ArticleVisualKind;
+    regenerate?: boolean;
+    /** V1 extension: roles already used earlier in this article, oldest first. */
+    previousRoles?: readonly SectionVisualRole[];
+  },
 ): BriefVisualRole {
   const directive = ROLE_DIRECTIVES[role];
+  const previousImagesLine = options.previousRoles && options.previousRoles.length > 0
+    ? buildPreviousImagesLine(options.previousRoles)
+    : null;
   return {
     name: role,
     composition: directive.composition,
@@ -104,6 +137,7 @@ export function toBriefVisualRole(
       ...(options.realistic ? [REALISM_LINE] : []),
       ...(options.kind ? [KIND_CONSTRAINT[options.kind]] : []),
       ...(options.regenerate ? [REGENERATION_LINE] : []),
+      ...(previousImagesLine ? [previousImagesLine] : []),
     ],
   };
 }

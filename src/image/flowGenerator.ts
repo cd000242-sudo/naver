@@ -2569,7 +2569,10 @@ export async function generateWithFlow(
             const basePrompt = await resolveEnglishBasePrompt(item);
             // 헤딩 인덱스 기반 강제 시점/구도 회전 + 헤딩 제목 명시 subject prepend
             // (LLM이 비슷한 헤딩에 비슷한 base prompt 만드는 상류 회귀 방어)
-            let prompt = injectHeadingVariation(basePrompt, i, item.heading);
+            // [NAVER FULL AUTO] Automation sends one heading per call, so the loop index was always 0 and every
+            //   H2 got the same variation. The producer's diversityIndex (section ordinal) keeps them apart.
+            const variationIndex = Number.isFinite((item as any).diversityIndex) ? Number((item as any).diversityIndex) : i;
+            let prompt = injectHeadingVariation(basePrompt, variationIndex, item.heading);
             const aspectRatio = (item as any).aspectRatio || '1:1';
 
             // v2.7.11: 마라톤 모드 시 한도 임계치 보수화 옵션 전달 (debugger #1)

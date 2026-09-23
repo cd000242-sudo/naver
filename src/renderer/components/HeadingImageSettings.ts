@@ -796,13 +796,34 @@ export function createHeadingImageModal(): void {
 
 
 
+          <!-- [NAVER FULL AUTO] 완전자동·예약 이미지 전략 — 글쓰기 모드(SEO/홈판 등)와 별개 -->
+          <div id="fullauto-image-strategy-section" style="margin-bottom: 16px; padding: 14px 16px; border-radius: 12px; background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.35);">
+            <div style="font-weight: 700; font-size: 13px; color: #c4b5fd; margin-bottom: 10px;">🖼️ 완전자동·예약 이미지 전략 <span style="font-weight: 400; color: #a1a1aa;">(글쓰기 모드와 별개)</span></div>
+            <select id="fullauto-image-strategy-select" title="이미지 전략" style="width: 100%; margin-bottom: 8px; padding: 8px 10px; border-radius: 8px; background: #1e1e2e; color: #e2e8f0; border: 1px solid rgba(139,92,246,0.35); font-size: 12px;">
+              <option value="naver-homefeed">홈판/피드 최적화 (기본 · 800x800 · 썸네일 1 + 소제목당 1)</option>
+              <option value="user-settings">내 이미지 설정 그대로 (아래 비율·썸네일 텍스트 체크박스)</option>
+            </select>
+            <select id="fullauto-thumbnail-text-mode-select" title="썸네일 문구" style="width: 100%; margin-bottom: 8px; padding: 8px 10px; border-radius: 8px; background: #1e1e2e; color: #e2e8f0; border: 1px solid rgba(139,92,246,0.35); font-size: 12px;">
+              <option value="auto">썸네일 문구 AUTO (숫자·기간·비교가 있을 때만 짧게)</option>
+              <option value="include">썸네일 문구 넣기 (짧은 문구)</option>
+              <option value="none">썸네일 문구 빼기</option>
+            </select>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #e2e8f0; margin-bottom: 6px; cursor: pointer;">
+              <input type="checkbox" id="fullauto-real-asset-first" checked /> 실제 이미지 우선 (내가 넣은 사진이 있으면 AI보다 먼저)
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #e2e8f0; margin-bottom: 8px; cursor: pointer;">
+              <input type="checkbox" id="fullauto-real-pair" checked /> 실제 사진 2장이면 나란히 합성
+            </label>
+            <div style="font-size: 11px; color: #a1a1aa; line-height: 1.5;">SEO로 쓴 글도 이미지는 홈판용으로 만듭니다. 소제목 이미지 범위는 '소제목 이미지 선택'을 따릅니다. 필수 이미지가 빠지면 자동 발행하지 않고 "이미지 검토 필요"로 남깁니다.</div>
+          </div>
+
           <!-- ✅ 체크박스 옵션 -->
           <div style="margin-bottom: 16px;">
             <div class="premium-checkbox">
               <input type="checkbox" id="thumbnail-text-include" />
               <div>
                 <div class="checkbox-label">🖼️ 썸네일 텍스트 포함</div>
-                <div class="checkbox-desc">썸네일에 블로그 제목을 합성합니다</div>
+                <div class="checkbox-desc">썸네일에 짧은 문구를 넣습니다 (완전자동은 위 '썸네일 문구' 선택을 따름)</div>
               </div>
             </div>
             <div class="premium-checkbox">
@@ -1373,6 +1394,17 @@ export function createHeadingImageModal(): void {
       try { (window as any).syncImageSkipUI?.(textOnlyCheck.checked); } catch { /* ignore */ }
     }
     if (lifestyleCheck) localStorage.setItem('lifestyleImageGenerate', String(lifestyleCheck.checked));
+
+    // [NAVER FULL AUTO] 완전자동·예약 이미지 전략 저장 (pipelineConfig 가 읽는다)
+    const fullAutoStrategySelect = document.getElementById('fullauto-image-strategy-select') as HTMLSelectElement | null;
+    const fullAutoTextModeSelect = document.getElementById('fullauto-thumbnail-text-mode-select') as HTMLSelectElement | null;
+    const fullAutoRealFirstCheck = document.getElementById('fullauto-real-asset-first') as HTMLInputElement | null;
+    const fullAutoRealPairCheck = document.getElementById('fullauto-real-pair') as HTMLInputElement | null;
+    if (fullAutoStrategySelect?.value) localStorage.setItem('fullAutoImageStrategy', fullAutoStrategySelect.value);
+    if (fullAutoTextModeSelect?.value) localStorage.setItem('fullAutoThumbnailTextMode', fullAutoTextModeSelect.value);
+    if (fullAutoRealFirstCheck) localStorage.setItem('fullAutoRealAssetFirst', String(fullAutoRealFirstCheck.checked));
+    if (fullAutoRealPairCheck) localStorage.setItem('fullAutoRealPair', String(fullAutoRealPairCheck.checked));
+    try { (window as any).refreshFullAutoImageSummary?.(); } catch { /* summary line is optional */ }
 
     // ✅ [2026-03-23] 내 폴더 부족 이미지 처리 옵션 저장
     const localFolderFallbackRadio = document.querySelector('input[name="local-folder-fallback"]:checked') as HTMLInputElement;
@@ -2846,6 +2878,23 @@ export function openHeadingImageModal(): void {
     if (thumbnailTextCheck) thumbnailTextCheck.checked = localStorage.getItem('thumbnailTextInclude') === 'true';
     if (textOnlyCheck) textOnlyCheck.checked = localStorage.getItem('textOnlyPublish') === 'true';
     if (lifestyleCheck) lifestyleCheck.checked = localStorage.getItem('lifestyleImageGenerate') === 'true';
+
+    // [NAVER FULL AUTO] 완전자동·예약 이미지 전략 복원 (기본: 홈판/피드 최적화 · 문구 AUTO · 실제 이미지 우선 · 2장 합성)
+    const fullAutoStrategySelect = document.getElementById('fullauto-image-strategy-select') as HTMLSelectElement | null;
+    const fullAutoTextModeSelect = document.getElementById('fullauto-thumbnail-text-mode-select') as HTMLSelectElement | null;
+    const fullAutoRealFirstCheck = document.getElementById('fullauto-real-asset-first') as HTMLInputElement | null;
+    const fullAutoRealPairCheck = document.getElementById('fullauto-real-pair') as HTMLInputElement | null;
+    if (fullAutoStrategySelect) fullAutoStrategySelect.value = localStorage.getItem('fullAutoImageStrategy') === 'user-settings' ? 'user-settings' : 'naver-homefeed';
+    if (fullAutoTextModeSelect) {
+      // Show what the policy really applies: with no saved choice, a ticked legacy "썸네일 텍스트 포함"
+      //   means 'include' (pipelineConfig → fullAutoImagePolicy), so saving the modal must not flip it to AUTO.
+      const savedTextMode = localStorage.getItem('fullAutoThumbnailTextMode');
+      fullAutoTextModeSelect.value = savedTextMode === 'include' || savedTextMode === 'none' || savedTextMode === 'auto'
+        ? savedTextMode
+        : (localStorage.getItem('thumbnailTextInclude') === 'true' ? 'include' : 'auto');
+    }
+    if (fullAutoRealFirstCheck) fullAutoRealFirstCheck.checked = localStorage.getItem('fullAutoRealAssetFirst') !== 'false';
+    if (fullAutoRealPairCheck) fullAutoRealPairCheck.checked = localStorage.getItem('fullAutoRealPair') !== 'false';
 
 
   }

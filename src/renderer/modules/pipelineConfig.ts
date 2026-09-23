@@ -4,6 +4,11 @@
 // localStorage directly (pipeline-map §5-1). Key names and defaults are
 // defined HERE and nowhere else; three flows must never interpret the same
 // key with different defaults again.
+import {
+  resolveFullAutoImagePolicy,
+  type FullAutoImagePolicy,
+  type FullAutoImageSettingsInput,
+} from '../../image/fullAuto/fullAutoImagePolicy.js';
 
 export type PipelineFlow = 'full-auto' | 'continuous' | 'multi-account';
 export type ShoppingSubImageMode = 'ai' | 'collected';
@@ -19,6 +24,12 @@ export interface ImagePipelineConfig {
   thumbnailImageRatio: string;
   subheadingImageRatio: string;
   fallbackPolicy: string;
+  /** [NAVER FULL AUTO] Image strategy, independent of the writing mode ('naver-homefeed' default). */
+  fullAutoImageStrategy: string;
+  /** [NAVER FULL AUTO] Homefeed thumbnail text: 'auto' | 'include' | 'none' ('' = not chosen yet). */
+  fullAutoThumbnailTextMode: string;
+  fullAutoRealAssetFirst: boolean;
+  fullAutoRealPair: boolean;
 }
 
 export interface ShoppingConnectPipelineConfig {
@@ -104,6 +115,10 @@ export interface RawPipelineSettings {
   ftcDisclosureText: string | null;
   adbIpChangeEnabled: string | null;
   adbIpChangeEvery: string | null;
+  fullAutoImageStrategy: string | null;
+  fullAutoThumbnailTextMode: string | null;
+  fullAutoRealAssetFirst: string | null;
+  fullAutoRealPair: string | null;
 }
 
 function pipelineReadRaw(key: string): string | null {
@@ -140,6 +155,10 @@ export function readRawPipelineSettings(): RawPipelineSettings {
     ftcDisclosureText: pipelineReadRaw('ftcDisclosureText'),
     adbIpChangeEnabled: pipelineReadRaw('adbIpChangeEnabled'),
     adbIpChangeEvery: pipelineReadRaw('adbIpChangeEvery'),
+    fullAutoImageStrategy: pipelineReadRaw('fullAutoImageStrategy'),
+    fullAutoThumbnailTextMode: pipelineReadRaw('fullAutoThumbnailTextMode'),
+    fullAutoRealAssetFirst: pipelineReadRaw('fullAutoRealAssetFirst'),
+    fullAutoRealPair: pipelineReadRaw('fullAutoRealPair'),
   };
 }
 
@@ -351,6 +370,10 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       thumbnailImageRatio: pipelineReadString('thumbnailImageRatio', '1:1'),
       subheadingImageRatio: pipelineReadString('subheadingImageRatio', '1:1'),
       fallbackPolicy: raw.imageFallbackPolicy || 'engine-only',
+      fullAutoImageStrategy: raw.fullAutoImageStrategy || 'naver-homefeed',
+      fullAutoThumbnailTextMode: raw.fullAutoThumbnailTextMode || '',
+      fullAutoRealAssetFirst: raw.fullAutoRealAssetFirst !== 'false',
+      fullAutoRealPair: raw.fullAutoRealPair !== 'false',
     },
     shopping: {
       subImageMode: normalizeShoppingSubImageMode(raw, currentShoppingSelection?.subImageMode || null),
@@ -382,6 +405,31 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
   Object.freeze(config.disclosure);
   Object.freeze(config.safety);
   return Object.freeze(config);
+}
+
+/**
+ * [NAVER FULL AUTO] Image policy for one unattended job. A per-job value (a queue item's snapshot)
+ * wins over the global setting; the writing mode is never an input (image/fullAuto).
+ */
+export function resolveFullAutoImagePolicyFromPipeline(
+  config: PipelineConfig,
+  overrides: Partial<FullAutoImageSettingsInput> = {},
+): FullAutoImagePolicy {
+  const chosen = Object.fromEntries(
+    Object.entries(overrides).filter(([, value]) => value !== undefined && value !== null && value !== ''),
+  ) as Partial<FullAutoImageSettingsInput>;
+  return resolveFullAutoImagePolicy({
+    strategy: config.image.fullAutoImageStrategy,
+    headingImageMode: config.image.headingImageMode,
+    thumbnailTextMode: config.image.fullAutoThumbnailTextMode,
+    thumbnailTextInclude: config.image.thumbnailTextInclude,
+    textOnlyPublish: config.image.textOnlyPublish,
+    realAssetFirst: config.image.fullAutoRealAssetFirst,
+    realPair: config.image.fullAutoRealPair,
+    thumbnailImageRatio: config.image.thumbnailImageRatio,
+    subheadingImageRatio: config.image.subheadingImageRatio,
+    ...chosen,
+  });
 }
 
 function nonEmptyString(value: unknown, fallback: string): string {

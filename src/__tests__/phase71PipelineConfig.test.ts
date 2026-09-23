@@ -48,6 +48,11 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
       thumbnailImageRatio: '1:1',
       subheadingImageRatio: '1:1',
       fallbackPolicy: 'engine-only',
+      // [NAVER FULL AUTO] image strategy defaults (separate from the writing mode)
+      fullAutoImageStrategy: 'naver-homefeed',
+      fullAutoThumbnailTextMode: '',
+      fullAutoRealAssetFirst: true,
+      fullAutoRealPair: true,
     });
     expect(cfg.shopping).toEqual({
       subImageMode: 'collected',

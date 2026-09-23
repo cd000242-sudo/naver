@@ -21,6 +21,10 @@ import {
   selectShoppingBodyHeadingsForMode,
 } from '../../image/shoppingReferenceGeneration.js';
 import { normalizePublishImageSequence } from '../../image/publishImageSequence.js';
+import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
+import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
+import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSlots.js';
+import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -71,6 +75,9 @@ declare function generateContentFromUrl(url: string, title?: string, tone?: stri
 declare function generateContentFromKeywords(title?: string, keywords?: string, tone?: string, suppressModal?: boolean): Promise<void>;
 declare function setKeywordTitleOptionsFromItem(keyword: string, asTitle: boolean, prefix: boolean): void;
 declare function saveCollectedShoppingImagesToLocal(images: any[], title: string, options?: any): Promise<{ images: any[]; savedCount: number; folderPath?: string }>;
+// [NAVER FULL AUTO] Same inline bundle scope (pipelineConfig / imageGenStudioCore).
+declare function resolveFullAutoImagePolicyFromPipeline(config: any, overrides?: any): any;
+declare function studioEngineCostKrw(value: string): number | null;
 
 const PUBLISH_HANDLER_FULL_AUTO_CONTENT_RETRY_CACHE_KEY = '__leaderFullAutoContentRetryCache';
 const PUBLISH_HANDLER_FULL_AUTO_CONTENT_RETRY_MAX_AGE_MS = 6 * 60 * 60 * 1000;
@@ -560,6 +567,9 @@ export async function handleFullAutoPublish(): Promise<void> {
     modal.setStep(1, 'completed', '완료');
     modal.setProgress(30, '이미지 생성 준비 중...');
     modal.addLog(`✅ 콘텐츠 생성 완료 (${headingCount}개 소제목)`);
+    // [NAVER FULL AUTO] Quality checks and repairs ran inside generation; from here the title / H2 / body are
+    //   final and the images are made from exactly this article.
+    modal.addLog(`🧾 최종 글 확정: 제목 + 소제목 ${headingCount}개 + 본문 — 이 글 기준으로 이미지를 만듭니다`);
 
     // ✅ [2026-02-08] 쇼핑커넥트 모드: 항상 100점 SEO 제목 생성
     // 핵심: 제품명 + 네이버 자동완성 키워드 최소 3개 조합 = 상위노출 보장
@@ -640,6 +650,8 @@ export async function handleFullAutoPublish(): Promise<void> {
     }
 
     let fullAutoImageRunId = 0;
+    // [NAVER FULL AUTO] Result of the homefeed image run (slots + publish decision), when it ran.
+    let fullAutoImageRun: any = null;
     if (!skipImages) {
       fullAutoImageRunId = (window as any).beginFullAutoImageRegenerationBatch?.(structuredContent, imageSource) || 0;
       appendLog('♻️ 이전 이미지 배치를 비우고 선택한 이미지 엔진으로 새로 생성합니다. 글 생성 결과는 재사용합니다.');
@@ -1259,20 +1271,35 @@ export async function handleFullAutoPublish(): Promise<void> {
               });
               generatedImgs = lfResult.images;
             } else {
-              // ✅ 기존 AI 생성 로직
-              generatedImgs = await generateImagesForAutomationSafely(
-                imageSource,
-                seoHeadings,
-                structuredContent.selectedTitle || title,
-                {
+              // [NAVER FULL AUTO] Homefeed image strategy (independent of the writing mode) over the FINAL
+              //   article: thumbnail always + one image per H2 in scope, per-slot results, and a publish
+              //   decision — a failed slot holds the post for review instead of aborting or publishing.
+              const fullAutoImagePolicy = resolveFullAutoImagePolicyFromPipeline(pipelineCfg, { skipImages });
+              modal.addLog(`🖼️ 이미지 전략: ${describeFullAutoImagePolicy(fullAutoImagePolicy)} (글쓰기 모드: ${resolvedContentModeForPublish})`);
+              modal.addLog('🔎 실제 이미지 확인: 사용자가 넣은 사진이 없으면 실제 인물 닮은꼴 없이 상황·사물로 만듭니다.');
+              const imageRun = await runFullAutoImages({
+                article: structuredContent,
+                fallbackTitle: title,
+                provider: imageSource,
+                policy: fullAutoImagePolicy,
+                costPerImageKrw: studioEngineCostKrw(imageSource),
+                onStage: (stage: any) => {
+                  const label = describeFullAutoImageStage(stage);
+                  const ratio = Number(stage?.total) > 0 ? Number(stage.index) / Number(stage.total) : 0;
+                  modal.setProgress(40 + Math.round(35 * ratio), label);
+                  modal.addLog(label);
+                },
+                baseOptions: {
                   stopCheck: () => isFullAutoStopRequested(modal),
                   onProgress: (msg: any) => modal.addLog(msg),
-                  allowThumbnailText: formData.includeThumbnailText,
-                  thumbnailTextInclude: formData.includeThumbnailText,
                   referenceImagePath,
-                  collectedImages: collectedImgs
-                }
-              );
+                  collectedImages: collectedImgs,
+                },
+              }, generateImagesForAutomationSafely);
+              generatedImgs = imageRun.images;
+              fullAutoImageRun = imageRun;
+              modal.addLog(`💰 ${imageRun.costLine}`);
+              modal.addLog(`🧩 이미지 매핑: ${imageRun.readiness.summary.label} (실패 ${imageRun.readiness.summary.failed} · 설정상 제외 ${imageRun.readiness.summary.skipped})`);
             }
           }
         } else if (isShoppingConnectCollected || collectedImgs.length > 0) {
@@ -1539,6 +1566,9 @@ export async function handleFullAutoPublish(): Promise<void> {
           saveGeneratedPost(structuredContent, true); // isUpdate=true로 업데이트
           (window as any).isGeneratingImages = false;
           modal.addLog(`💾 이미지 포함하여 글 목록에 저장 완료`);
+        } else if (fullAutoImageRun?.decision?.decision === 'IMAGE_REVIEW_REQUIRED') {
+          // [NAVER FULL AUTO] Every slot failed: the review hold below explains which and why.
+          (window as any).isGeneratingImages = false;
         } else {
           modal.addLog('⚠️ 이미지 생성 결과가 비어 있어 발행을 중단합니다.');
           modal.addLog('♻️ 글 생성 결과는 저장되어 있어, 이미지 엔진 변경 후 다시 실행하면 글 재생성 없이 이미지부터 재시도합니다.');
@@ -1579,6 +1609,33 @@ export async function handleFullAutoPublish(): Promise<void> {
       }
     } else {
       modal.addLog('⏭️ 이미지 삽입 건너뛰기 (설정)');
+    }
+
+    // [NAVER FULL AUTO] Publish decision: CONTENT_READY + IMAGE_READY = AUTO_PUBLISH. A missing thumbnail or
+    //   a missing H2 image (within the chosen scope) holds the post — article and good images stay put so
+    //   only the empty slots need redoing. Semi-auto publishing (the owner curating live) never gets here.
+    if (fullAutoImageRun) {
+      const finalDecision = recheckFullAutoDecisionBeforePublish(fullAutoImageRun, structuredContent);
+      modal.addLog(`✅ 발행 검사: ${finalDecision.decision === 'AUTO_PUBLISH' ? '자동 발행 가능' : '이미지 검토 필요'}`);
+      if (finalDecision.decision !== 'AUTO_PUBLISH') {
+        const reviewMessage = describeFullAutoImageReview(finalDecision);
+        appendLog(`🖼️ ${reviewMessage.replace(/\n/g, ' ')}`);
+        (window as any).__lastFullAutoImageReview = {
+          at: Date.now(),
+          title: structuredContent?.selectedTitle || title,
+          reasons: [...finalDecision.reasons],
+          slots: fullAutoImageRun.slots,
+        };
+        modal.showError('🖼️ 이미지 검토 필요', reviewMessage);
+        // The held article stays in the editor fields and the post list. Drop the "reuse this article"
+        //   caches so a later one-click run cannot silently republish it after the owner published it by hand.
+        (window as any).clearFullAutoContentRetryCache?.();
+        clearPublishContentRetryCache();
+        try {
+          (window as any).resetPublishing?.();
+        } catch { /* ignore */ }
+        return;
+      }
     }
 
     // ✅ [2026-03-11] 발행 직전 ADB IP 변경 (단일 풀오토)

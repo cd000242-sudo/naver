@@ -454,6 +454,37 @@ try {
       label: 'automation/publishIntervalPolicy.js',
       filePath: path.join(projectRoot, 'dist', 'automation', 'publishIntervalPolicy.js'),
     },
+    // [NAVER FULL AUTO 2026-09-24] 완전자동 이미지 코어 — pipelineConfig · publishingHandlers ·
+    //   continuousPublishing · multiAccountManager · costAndAutoGen 이 값으로 가져온다.
+    //   의존 순서: policy → slots → decision → request → runner, queueStatus · asset 은 policy 만 본다.
+    {
+      label: 'image/fullAuto/fullAutoImagePolicy.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'fullAuto', 'fullAutoImagePolicy.js'),
+    },
+    {
+      label: 'image/fullAuto/fullAutoImageSlots.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'fullAuto', 'fullAutoImageSlots.js'),
+    },
+    {
+      label: 'image/fullAuto/fullAutoPublishDecision.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'fullAuto', 'fullAutoPublishDecision.js'),
+    },
+    {
+      label: 'image/fullAuto/fullAutoImageRequest.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'fullAuto', 'fullAutoImageRequest.js'),
+    },
+    {
+      label: 'image/fullAuto/fullAutoImageRunner.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'fullAuto', 'fullAutoImageRunner.js'),
+    },
+    {
+      label: 'image/fullAuto/fullAutoQueueStatus.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'fullAuto', 'fullAutoQueueStatus.js'),
+    },
+    {
+      label: 'image/fullAuto/fullAutoImageAsset.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'fullAuto', 'fullAutoImageAsset.js'),
+    },
   ];
 
   let rendererRuntimeDependencySource = '';
