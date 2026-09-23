@@ -112,12 +112,6 @@ export interface ContinuousQueueItem {
      * image within the scope) failed; it was saved and NOT published so only that slot needs redoing.
      */
     status: 'pending' | 'processing' | 'completed' | 'failed' | 'cancelled' | 'uncertain' | 'image-review';
-    /** [NAVER FULL AUTO] Image strategy snapshot taken when the item was queued ('naver-homefeed' default). */
-    imageStrategy?: 'naver-homefeed' | 'user-settings';
-    /** [NAVER FULL AUTO] H2 image scope snapshot ('all' default for new unattended jobs). */
-    headingImageScope?: 'all' | 'odd' | 'even' | 'none';
-    /** [NAVER FULL AUTO] Homefeed thumbnail text mode snapshot. */
-    thumbnailTextMode?: 'auto' | 'include' | 'none';
     /** [NAVER FULL AUTO] Where the item is in its run (queue row status). */
     fullAutoStage?: 'writing' | 'content-ready' | 'images' | 'images-ready' | 'publishing';
     /** [NAVER FULL AUTO] Images done / needed for this article. */

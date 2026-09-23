@@ -28,7 +28,7 @@
 
 | 단계 | 위치 |
 |---|---|
-| 큐 추가 | `addItemToQueueV2Impl` — 이번에 이미지 전략·소제목 범위·썸네일 문구를 항목에 고정(`readContinuousImageChoicesForQueue`) |
+| 큐 추가 | `addItemToQueueV2Impl` — 이미지 설정은 항목에 복사하지 않는다. 실행 때 이미지 설정 창(이미지 전략·소제목 이미지 선택)과 "썸네일 텍스트 포함"을 읽는다(v2.11.299 의 항목 고정 `readContinuousImageChoicesForQueue` 는 기존 설정을 덮어써 v2.11.300 에서 제거) |
 | 항목 처리 | `startContinuousPublishingV2` 루프 — 항목별 `resolvePipelineConfig('continuous')` + **신규** `resolveFullAutoImagePolicyFromPipeline(항목 스냅샷)` |
 | 글 | `generateContentFromKeywords/Url(..., item.contentMode, item.category)` — 모드는 항목 값 그대로 |
 | 제목 | `applyContinuousTitleOverrides` — **변경**: 키워드 앞 붙이기는 SEO·메이트·제휴 또는 사용자 체크 시에만 |

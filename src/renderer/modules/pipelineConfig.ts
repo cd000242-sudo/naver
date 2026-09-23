@@ -26,8 +26,6 @@ export interface ImagePipelineConfig {
   fallbackPolicy: string;
   /** [NAVER FULL AUTO] Image strategy, independent of the writing mode ('naver-homefeed' default). */
   fullAutoImageStrategy: string;
-  /** [NAVER FULL AUTO] Homefeed thumbnail text: 'auto' | 'include' | 'none' ('' = not chosen yet). */
-  fullAutoThumbnailTextMode: string;
   fullAutoRealAssetFirst: boolean;
   fullAutoRealPair: boolean;
 }
@@ -116,7 +114,6 @@ export interface RawPipelineSettings {
   adbIpChangeEnabled: string | null;
   adbIpChangeEvery: string | null;
   fullAutoImageStrategy: string | null;
-  fullAutoThumbnailTextMode: string | null;
   fullAutoRealAssetFirst: string | null;
   fullAutoRealPair: string | null;
 }
@@ -156,7 +153,6 @@ export function readRawPipelineSettings(): RawPipelineSettings {
     adbIpChangeEnabled: pipelineReadRaw('adbIpChangeEnabled'),
     adbIpChangeEvery: pipelineReadRaw('adbIpChangeEvery'),
     fullAutoImageStrategy: pipelineReadRaw('fullAutoImageStrategy'),
-    fullAutoThumbnailTextMode: pipelineReadRaw('fullAutoThumbnailTextMode'),
     fullAutoRealAssetFirst: pipelineReadRaw('fullAutoRealAssetFirst'),
     fullAutoRealPair: pipelineReadRaw('fullAutoRealPair'),
   };
@@ -371,7 +367,6 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       subheadingImageRatio: pipelineReadString('subheadingImageRatio', '1:1'),
       fallbackPolicy: raw.imageFallbackPolicy || 'engine-only',
       fullAutoImageStrategy: raw.fullAutoImageStrategy || 'naver-homefeed',
-      fullAutoThumbnailTextMode: raw.fullAutoThumbnailTextMode || '',
       fullAutoRealAssetFirst: raw.fullAutoRealAssetFirst !== 'false',
       fullAutoRealPair: raw.fullAutoRealPair !== 'false',
     },
@@ -408,8 +403,9 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
 }
 
 /**
- * [NAVER FULL AUTO] Image policy for one unattended job. A per-job value (a queue item's snapshot)
- * wins over the global setting; the writing mode is never an input (image/fullAuto).
+ * [NAVER FULL AUTO] Image policy for one unattended job from the image settings window (이미지 전략 ·
+ * 소제목 이미지 선택 · 썸네일 텍스트 포함). An override (a run's own reading of the checkbox) wins;
+ * the writing mode is never an input (image/fullAuto).
  */
 export function resolveFullAutoImagePolicyFromPipeline(
   config: PipelineConfig,
@@ -421,7 +417,6 @@ export function resolveFullAutoImagePolicyFromPipeline(
   return resolveFullAutoImagePolicy({
     strategy: config.image.fullAutoImageStrategy,
     headingImageMode: config.image.headingImageMode,
-    thumbnailTextMode: config.image.fullAutoThumbnailTextMode,
     thumbnailTextInclude: config.image.thumbnailTextInclude,
     textOnlyPublish: config.image.textOnlyPublish,
     realAssetFirst: config.image.fullAutoRealAssetFirst,

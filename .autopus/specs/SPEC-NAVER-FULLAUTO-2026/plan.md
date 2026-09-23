@@ -29,7 +29,7 @@
 | thumbnailDirectorGate | 결과 이미지에 `assetKind` |
 | sectionRolePlanner · roleDirectives · sectionRoleAssignment | 자동차 kind·의도별 역할(자동차 글에만), 정보형 클리셰 추가, 이전 이미지 역할 문장 |
 | flowGenerator · deepinfraGenerator | 다양성 힌트를 루프 인덱스 대신 소제목 번호(diversityIndex)로 |
-| HeadingImageSettings · index.html · tailUIUtils | 완전자동 이미지 전략 설정 칸, 연속발행 이미지 전략 3선택, 발행 버튼 아래 "글쓰기 모드 · 이미지" 한 줄 |
+| HeadingImageSettings · index.html · tailUIUtils | 완전자동 이미지 전략 설정 칸, 발행 버튼 아래 "글쓰기 모드 · 이미지" 한 줄 (연속발행 이미지 전략 3선택은 v2.11.300 에서 제거 — 기존 "⚡ 이미지 세팅하기"·"썸네일 텍스트 포함"과 중복) |
 | imageGenStudioCore | 엔진 1장 단가 조회(`studioEngineCostKrw`) |
 | scripts/copy-static.mjs · candidateRuntimeFingerprint.ts | 번들 등록 7개, 지문 클로저 8개 |
 

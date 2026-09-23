@@ -12,12 +12,7 @@ import {
   resolveUsableShoppingReferenceSource,
 } from '../../image/shoppingReferenceGeneration.js';
 import { resolvePublishFloorSec, DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES } from '../../automation/publishIntervalPolicy.js';
-import {
-  describeFullAutoImagePolicy,
-  normalizeFullAutoImageStrategy,
-  normalizeFullAutoThumbnailTextMode,
-  parseFullAutoHeadingScope,
-} from '../../image/fullAuto/fullAutoImagePolicy.js';
+import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
 import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSlots.js';
 import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
 import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
@@ -1305,23 +1300,6 @@ export function setKeywordTitleOptionsFromItem(keyword: string, keywordAsTitle?:
   } else {
     (window as any)._keywordTitleOptions = null;
   }
-}
-
-/**
- * [NAVER FULL AUTO] Image choices stored on a NEW queue item. The item keeps them, so a global
- * setting changed later — or an old one left behind — never silently changes the images of posts
- * already queued. New unattended jobs default to every H2 (spec §14).
- */
-function readContinuousImageChoicesForQueue(): Pick<ContinuousQueueItem, 'imageStrategy' | 'headingImageScope' | 'thumbnailTextMode'> {
-  const globalImage = (resolvePipelineConfig('continuous').image || {}) as any;
-  const strategyValue = (document.getElementById('continuous-image-strategy-select') as HTMLSelectElement | null)?.value;
-  const scopeValue = (document.getElementById('continuous-heading-scope-select') as HTMLSelectElement | null)?.value;
-  const textValue = (document.getElementById('continuous-thumbnail-text-mode-select') as HTMLSelectElement | null)?.value;
-  return {
-    imageStrategy: normalizeFullAutoImageStrategy(strategyValue || globalImage.fullAutoImageStrategy),
-    headingImageScope: parseFullAutoHeadingScope(scopeValue) ?? 'all',
-    thumbnailTextMode: normalizeFullAutoThumbnailTextMode(textValue || globalImage.fullAutoThumbnailTextMode) ?? 'auto',
-  };
 }
 
 /**
@@ -3045,8 +3023,6 @@ function addItemToQueueV2Impl(): void {
       ctaPosition: (document.getElementById('continuous-modal-cta-position') as HTMLSelectElement | null)?.value || 'bottom',
       category,       // ✅ 카테고리 추가
       contentMode,    // ✅ 콘텐츠 모드 추가
-      // [NAVER FULL AUTO] Image strategy / H2 scope / thumbnail text, frozen with the item (separate from contentMode).
-      ...readContinuousImageChoicesForQueue(),
       toneStyle: (document.getElementById('continuous-tone-style-select') as HTMLSelectElement)?.value || 'professional', // ✅ 글톤 추가
       realCategory,   // ✅ 실제 블로그 카테고리 추가
       realCategoryName, // ✅ 실제 블로그 카테고리 이름 추가
@@ -3449,20 +3425,26 @@ function renderQueueListV2(): void {
   if (nextBtn) nextBtn.disabled = currentQueuePageV2 === totalPages - 1;
   if (clearBtn) clearBtn.style.display = totalItems > 0 ? 'block' : 'none';
 
-  // [NAVER FULL AUTO] "글만 발행" / "이미지 없음" is the master off switch at run time — show it on waiting rows.
-  const queueImagesOff = (() => {
+  // [NAVER FULL AUTO] Rows show the image settings the run reads (이미지 전략 · 소제목 이미지 선택), read now.
+  //   "글만 발행" / "이미지 없음" is the master off switch at run time — shown on waiting rows.
+  const queueImageView = (() => {
     try {
-      const globalImage = resolvePipelineConfig('continuous').image;
-      return globalImage.textOnlyPublish === true || globalImage.headingImageMode === 'none';
+      const queuePipelineCfg = resolvePipelineConfig('continuous');
+      const queueImagePolicy = resolveFullAutoImagePolicyFromPipeline(queuePipelineCfg);
+      return {
+        imagesOff: queuePipelineCfg.image.textOnlyPublish === true || queuePipelineCfg.image.headingImageMode === 'none',
+        labels: { imageStrategy: queueImagePolicy.strategy, headingImageScope: queueImagePolicy.sections.scope },
+      };
     } catch {
-      return false;
+      return { imagesOff: false, labels: {} };
     }
   })();
 
   container.innerHTML = pageItems.map((item, localIdx) => {
     const globalIndex = startIdx + localIdx;
     // [NAVER FULL AUTO] One status line per reservation: when · writing mode · image strategy · text · images · final.
-    const rowStatus = describeFullAutoQueueItem(queueImagesOff && item.status === 'pending' ? { ...item, imageSource: 'skip' } : item);
+    const rowItem = { ...item, ...queueImageView.labels };
+    const rowStatus = describeFullAutoQueueItem(queueImageView.imagesOff && item.status === 'pending' ? { ...rowItem, imageSource: 'skip' } : rowItem);
     const rowToneColor = rowStatus.tone === 'ok' ? '#10b981'
       : rowStatus.tone === 'warn' ? '#fb923c'
         : rowStatus.tone === 'error' ? '#ef4444'
@@ -4657,12 +4639,10 @@ async function startContinuousPublishingV2(): Promise<void> {
     // [Phase 7.1-b] Per-item snapshot — settings changed mid-run apply from
     // the NEXT post, never mid-post (design §2.2).
     const itemPipelineCfg = resolvePipelineConfig('continuous');
-    // [NAVER FULL AUTO] Image policy = this item's frozen choices over the current global settings.
-    //   The writing mode (item.contentMode) is not an input: an SEO post still gets homefeed images.
+    // [NAVER FULL AUTO] Image policy from the settings the queue always used: the image settings window
+    //   (이미지 전략 · 소제목 이미지 선택) and the "썸네일 텍스트 포함" checkbox. The writing mode
+    //   (item.contentMode) is not an input: an SEO post still gets homefeed images.
     const itemImagePolicy = resolveFullAutoImagePolicyFromPipeline(itemPipelineCfg, {
-      strategy: item.imageStrategy,
-      headingScope: item.headingImageScope,
-      thumbnailTextMode: item.thumbnailTextMode,
       thumbnailTextInclude: includeThumbnailText,
     });
     let itemImageRun: any = null;

@@ -63,9 +63,15 @@ describe('T23: one image core for one-click full auto, the reservation queue and
 });
 
 describe('reservation queue behaviour (spec §19-§21)', () => {
-  it('each queued item freezes its own image strategy / scope / text mode', () => {
-    expect(continuous).toContain('...readContinuousImageChoicesForQueue(),');
-    expect(continuous).toMatch(/resolveFullAutoImagePolicyFromPipeline\(itemPipelineCfg, \{\s*strategy: item\.imageStrategy,\s*headingScope: item\.headingImageScope,\s*thumbnailTextMode: item\.thumbnailTextMode,/);
+  it('the queue follows the image settings window and the "썸네일 텍스트 포함" checkbox — no per-item copies', () => {
+    expect(continuous).not.toContain('readContinuousImageChoicesForQueue');
+    expect(continuous).toMatch(/resolveFullAutoImagePolicyFromPipeline\(itemPipelineCfg, \{\s*thumbnailTextInclude: includeThumbnailText,\s*\}\)/);
+    expect(multiAccount).toMatch(/resolveFullAutoImagePolicyFromPipeline\(itemPipelineCfg, \{\s*thumbnailTextInclude: itemPipelineCfg\.image\.thumbnailTextInclude/);
+  });
+
+  it('queue rows show the image settings the run will read, not a copy made when the item was queued', () => {
+    expect(continuous).toContain('const queueImagePolicy = resolveFullAutoImagePolicyFromPipeline(queuePipelineCfg);');
+    expect(continuous).toContain('const rowItem = { ...item, ...queueImageView.labels };');
   });
 
   it('the image-failure breaker counts posts, not the retry of the same post', () => {
@@ -78,7 +84,7 @@ describe('reservation queue behaviour (spec §19-§21)', () => {
   });
 
   it('the master "이미지 없음 / 글만 발행" switch is never silent for queued posts', () => {
-    expect(continuous).toContain("queueImagesOff && item.status === 'pending' ? { ...item, imageSource: 'skip' } : item");
+    expect(continuous).toContain("queueImageView.imagesOff && item.status === 'pending' ? { ...rowItem, imageSource: 'skip' } : rowItem");
     expect(continuous).toContain('방금 넣은 글은 이미지 없이 발행됩니다');
     expect(continuous).toMatch(/if \(skipImages\) \{\s*item\.imageProgress = \{ done: 0, planned: 0 \};/);
   });
@@ -107,11 +113,12 @@ describe('reservation queue behaviour (spec §19-§21)', () => {
 });
 
 describe('T22: settings and publish UI keep writing mode and image strategy apart', () => {
-  it('the queue panel has image strategy, H2 scope and thumbnail text selects (defaults: homefeed / all / AUTO)', () => {
-    expect(html).toMatch(/id="continuous-image-strategy-select"[\s\S]{0,400}?<option value="naver-homefeed" selected>/);
-    expect(html).toMatch(/id="continuous-heading-scope-select"[\s\S]{0,400}?<option value="all" selected>/);
-    expect(html).toMatch(/id="continuous-thumbnail-text-mode-select"[\s\S]{0,400}?<option value="auto" selected>/);
-    expect(html).toContain('(글쓰기 모드와 별개)');
+  it('the queue panel has no second copy of the image settings: the existing button and checkbox stay', () => {
+    for (const id of ['continuous-image-strategy-select', 'continuous-heading-scope-select', 'continuous-thumbnail-text-mode-select']) {
+      expect(html).not.toContain(`id="${id}"`);
+    }
+    expect(html).toContain('id="continuous-open-image-settings-btn"');
+    expect(html).toContain('id="continuous-include-thumbnail-text"');
   });
 
   it('the publish panel shows both lines', () => {
@@ -121,9 +128,12 @@ describe('T22: settings and publish UI keep writing mode and image strategy apar
     expect(tail).toContain('🖼️ 이미지:');
   });
 
-  it('reopening the settings shows the text mode the policy really applies (legacy "포함" → include)', () => {
+  it('the settings window keeps one thumbnail text control — the existing "썸네일 텍스트 포함" checkbox', () => {
     const settings = read('src/renderer/components/HeadingImageSettings.ts');
-    expect(settings).toContain("(localStorage.getItem('thumbnailTextInclude') === 'true' ? 'include' : 'auto')");
+    expect(settings).not.toContain('fullauto-thumbnail-text-mode-select');
+    expect(settings).not.toContain("localStorage.setItem('fullAutoThumbnailTextMode'");
+    expect(settings).toContain('id="thumbnail-text-include"');
+    expect(read('src/renderer/modules/pipelineConfig.ts')).not.toContain('fullAutoThumbnailTextMode');
   });
 
   it('a held one-click post drops the reuse caches; the preview keeps the old thumbnail-tile rule', () => {
@@ -133,10 +143,10 @@ describe('T22: settings and publish UI keep writing mode and image strategy apar
 
   it('the image settings modal has the full-auto strategy section and saves it', () => {
     const settings = read('src/renderer/components/HeadingImageSettings.ts');
-    for (const id of ['fullauto-image-strategy-select', 'fullauto-thumbnail-text-mode-select', 'fullauto-real-asset-first', 'fullauto-real-pair']) {
+    for (const id of ['fullauto-image-strategy-select', 'fullauto-real-asset-first', 'fullauto-real-pair']) {
       expect(settings).toContain(`id="${id}"`);
     }
-    for (const key of ['fullAutoImageStrategy', 'fullAutoThumbnailTextMode', 'fullAutoRealAssetFirst', 'fullAutoRealPair']) {
+    for (const key of ['fullAutoImageStrategy', 'fullAutoRealAssetFirst', 'fullAutoRealPair']) {
       expect(settings).toContain(`localStorage.setItem('${key}'`);
     }
   });

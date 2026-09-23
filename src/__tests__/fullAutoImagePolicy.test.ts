@@ -10,7 +10,7 @@ import {
   parseFullAutoHeadingScope,
   resolveFullAutoImagePolicy,
 } from '../image/fullAuto/fullAutoImagePolicy';
-import { resolveFullAutoImagePolicyFromPipeline, type PipelineConfig } from '../renderer/modules/pipelineConfig';
+import { resolveFullAutoImagePolicyFromPipeline, resolvePipelineConfig, type PipelineConfig } from '../renderer/modules/pipelineConfig';
 
 function pipeline(image: Partial<PipelineConfig['image']> = {}): PipelineConfig {
   return {
@@ -28,7 +28,6 @@ function pipeline(image: Partial<PipelineConfig['image']> = {}): PipelineConfig 
       subheadingImageRatio: '16:9',
       fallbackPolicy: 'engine-only',
       fullAutoImageStrategy: 'naver-homefeed',
-      fullAutoThumbnailTextMode: '',
       fullAutoRealAssetFirst: true,
       fullAutoRealPair: true,
       ...image,
@@ -90,11 +89,28 @@ describe('FULL AUTO image strategy', () => {
     expect(none.sections.headingImageMode).toBe('thumbnail-only');
   });
 
-  it('a queued job keeps its own scope: an old global "odd" does not silently thin a new "all" job (§14)', () => {
-    const policy = resolveFullAutoImagePolicyFromPipeline(pipeline({ headingImageMode: 'odd-only' }), { headingScope: 'all' });
-    expect(policy.sections.scope).toBe('all');
-    // Without a per-job choice the current global setting applies (and the UI shows it).
+  it('the image settings window decides the H2 scope: a saved "홀수만" / "썸네일만" is followed, never widened', () => {
     expect(resolveFullAutoImagePolicyFromPipeline(pipeline({ headingImageMode: 'odd-only' })).sections.scope).toBe('odd');
+    expect(resolveFullAutoImagePolicyFromPipeline(pipeline({ headingImageMode: 'even-only' })).sections.scope).toBe('even');
+    expect(resolveFullAutoImagePolicyFromPipeline(pipeline({ headingImageMode: 'thumbnail-only' })).sections.scope).toBe('none');
+    expect(resolveFullAutoImagePolicyFromPipeline(pipeline({ headingImageMode: 'all' })).sections.scope).toBe('all');
+  });
+
+  it('thumbnail text follows the "썸네일 텍스트 포함" checkbox: ticked = include, off = AUTO on homefeed', () => {
+    expect(resolveFullAutoImagePolicyFromPipeline(pipeline({ thumbnailTextInclude: true })).thumbnail.textMode).toBe('include');
+    expect(resolveFullAutoImagePolicyFromPipeline(pipeline({ thumbnailTextInclude: false })).thumbnail.textMode).toBe('auto');
+    // The continuous run passes its own reading of the checkbox.
+    expect(resolveFullAutoImagePolicyFromPipeline(pipeline(), { thumbnailTextInclude: true }).thumbnail.textMode).toBe('include');
+  });
+
+  it('a thumbnail text value saved by v2.11.299 no longer overrides the checkbox (that select is gone)', () => {
+    const saved: Record<string, string> = { fullAutoThumbnailTextMode: 'none', thumbnailTextInclude: 'true' };
+    (globalThis as any).localStorage = { getItem: (key: string) => (key in saved ? saved[key] : null) };
+    try {
+      expect(resolveFullAutoImagePolicyFromPipeline(resolvePipelineConfig('continuous')).thumbnail.textMode).toBe('include');
+    } finally {
+      delete (globalThis as any).localStorage;
+    }
   });
 
   it('text-only publishing ("이미지 없음") turns images off entirely', () => {

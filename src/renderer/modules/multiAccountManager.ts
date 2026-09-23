@@ -3480,9 +3480,6 @@ async function initMultiAccountPublishModal() {
                     // [NAVER FULL AUTO] Homefeed image policy for this post (independent of its writing mode) and the
                     //   run result, so the publish decision below and the publish options agree with the image stage.
                     const maImagePolicy = resolveFullAutoImagePolicyFromPipeline(itemPipelineCfg, {
-                        strategy: queueItem.imageStrategy,
-                        headingScope: queueItem.headingImageScope,
-                        thumbnailTextMode: queueItem.thumbnailTextMode,
                         thumbnailTextInclude: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText === true,
                     });
                     let maImageRun = null;
