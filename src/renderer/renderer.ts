@@ -246,7 +246,7 @@ import { distributeByInterval, distributeByRandomRange, distributeWithProtection
 // ✅ [2026-02-25 모듈화] 소제목 이미지 생성
 import { initHeadingImageGeneration, generateEnglishPromptForHeadingSync, generateImagePromptByIndex, autoAnalyzeHeadings, updateReserveImagesThumbnails, initUnifiedImageEventHandlers, getCurrentImageHeadings, getHeadingSelectedImageKey, setHeadingSelectedImageKey, displayCollectedImages, extractHeadingsFromContent, displayImageHeadingsWithPrompts, getHeadingSelectedImageKeyStore } from './modules/headingImageGen.js';
 // ✅ [2026-02-25 모듈화] 이미지 표시/그리드/재생성
-import { displayGeneratedImages, searchNaverImage, resolveReferenceImageForHeadingAsync, generateNanoBananaProImage, resolveReferenceImageForHeading, getAutoReferenceSourceUrlCandidate } from './modules/imageDisplayGrid.js';
+import { displayGeneratedImages, resolveReferenceImageForHeadingAsync, resolveReferenceImageForHeading, getAutoReferenceSourceUrlCandidate, resolveImageRegenerateRoute, readSelectedImageSource } from './modules/imageDisplayGrid.js';
 // ✅ [Phase 5B] renderer.ts에서 추출된 모듈들
 import { registeredEventListeners, registerEventListener, unregisterEventListener, clearAllEventListeners, rendererDomCache, getElement, getElementById, clearDomCache, disableDomCache, apiCallsInProgress, preventDuplicateApiCall, buttonStates, setButtonLoading, resetButtonState, disableButton, withErrorHandling, imageDataUrls, createImageDataUrl, revokeImageDataUrl, revokeAllImageDataUrls, getAllUrls, getUrlsAsString, appendLog, _logUpdatePending, _logPendingEntries, _flushLogEntries } from './modules/rendererUtils.js';
 import { UnifiedDOMCache } from './modules/unifiedDOMCache.js';
@@ -10115,139 +10115,57 @@ async function showHeadingSelectionModalV2(image: any, currentIndex: number): Pr
   });
 }
 
-// ✅ AI 이미지 새로 생성 (폴백 체인: Nano Banana Pro → Imagen 4 → Naver)
+// ✅ AI 이미지 새로 생성
+// [SPEC-NAVER-IMAGE-2026 FINAL §2] One call with the engine the user picked — no chain. Before, a
+//   nano-banana-pro call ran even after the picked engine succeeded (a second paid image), then a removed
+//   engine, then a NAVER search reported as "AI 이미지 생성 완료 (naver)".
 async function regenerateWithNewAI(index: number, heading: string): Promise<void> {
+  const route = resolveImageRegenerateRoute(readSelectedImageSource());
+  if (route.kind === 'blocked') {
+    toastManager.error(route.message);
+    appendLog(`❌ [${index + 1}] ${route.message}`);
+    return;
+  }
   try {
-    toastManager.info('🤖 AI 이미지를 새로 생성 중...');
-    appendLog(`🤖 [${index + 1}] ${heading} - AI 이미지 새로 생성 중...`);
+    toastManager.info(`🤖 AI 이미지를 새로 생성 중... (${route.provider})`);
+    appendLog(`🤖 [${index + 1}] ${heading} - ${route.provider}로 새로 생성 중...`);
 
     // ✅ [2026-02-27 FIX] AI 기반 영어 프롬프트 생성 (Gemini→OpenAI→Claude→Perplexity 폴백 체인)
     const englishPrompt = await generateEnglishPromptForHeading(heading);
+    const res = await generateImagesWithCostSafety({
+      provider: route.provider,
+      items: [{ heading, prompt: englishPrompt }],
+      regenerate: true,
+    });
+    const image = res?.success ? res.images?.[0] : null;
+    const newImageUrl = image ? String(image.previewDataUrl || image.filePath || image.url || '') : '';
+    if (!newImageUrl) throw new Error(res?.message || `${route.provider} 이미지 생성 실패`);
 
-    let newImageUrl: string | null = null;
-    let successProvider = '';
+    const newImage = {
+      url: newImageUrl,
+      previewDataUrl: newImageUrl,
+      filePath: newImageUrl,
+      heading,
+      prompt: englishPrompt,
+      provider: image.provider || route.provider,
+      // FINAL §3: this image's own text state — never the state of the image it replaces.
+      textRendered: image.textRendered === true,
+      disableTextOverlay: image.disableTextOverlay === true,
+    };
 
-    // 0. 현재 선택된 엔진 우선 시도
-    const selectedBtn = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
-    const selectedSource = selectedBtn?.dataset.source;
-    if (selectedSource && selectedSource !== 'naver') {
-      try {
-        appendLog(`[${index + 1}] 선택된 엔진(${selectedSource})으로 우선 시도 중...`);
-        if (selectedSource === 'stability') {
-          const stabilityModel = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
-          const res = await generateImagesWithCostSafety({
-            provider: 'stability',
-            items: [{ heading, prompt: englishPrompt }],
-            regenerate: true,
-            model: stabilityModel
-          });
-          if (res.success && res.images?.[0]) {
-            newImageUrl = res.images[0].previewDataUrl || res.images[0].filePath;
-            successProvider = 'stability';
-          }
-        } else if (selectedSource === 'prodia') {
-          const res = await generateImagesWithCostSafety({
-            provider: 'prodia',
-            items: [{ heading, prompt: englishPrompt }],
-            regenerate: true
-          });
-          if (res.success && res.images?.[0]) {
-            newImageUrl = res.images[0].previewDataUrl || res.images[0].filePath;
-            successProvider = 'prodia';
-          }
-        } else if (selectedSource === 'nano-banana-2' || selectedSource === 'nano-banana-pro' || selectedSource === 'nano-banana' || selectedSource === 'pollinations') {
-          newImageUrl = await generateNanoBananaProImage(englishPrompt, true);
-          successProvider = selectedSource === 'pollinations' ? 'nano-banana-2' : selectedSource;
-        } else if (selectedSource === 'falai') {
-          const res = await generateImagesWithCostSafety({
-            provider: 'falai',
-            items: [{ heading, prompt: englishPrompt }],
-            regenerate: true
-          });
-          if (res.success && res.images?.[0]) {
-            newImageUrl = res.images[0].previewDataUrl || res.images[0].filePath;
-            successProvider = 'falai';
-          }
-        }
+    ImageManager.setImage(heading, newImage);
 
-        if (newImageUrl) {
-          appendLog(`✅ [${index + 1}] 선택된 엔진(${successProvider})으로 성공!`);
-        }
-      } catch (e) {
-        appendLog(`⚠️ [${index + 1}] 선택된 엔진 시도 실패, 폴백 체인으로 전환...`);
-      }
-    }
+    const allImages = ImageManager.getAllImages();
+    (window as any).imageManagementGeneratedImages = allImages;
+    syncGlobalImagesFromImageManager();
 
-    // 1. Nano Banana 2 (Gemini 3.1 Flash, recommended default)
-    try {
-      appendLog(`[${index + 1}] Nano Banana 2 시도 중...`);
-      newImageUrl = await generateNanoBananaProImage(englishPrompt, true);
-      if (newImageUrl) {
-        successProvider = 'nano-banana-2';
-        appendLog(`✅ [${index + 1}] Nano Banana 2 성공!`);
-      }
-    } catch (e) {
-      console.log('[Image] Nano Banana 2 실패, 다음 시도...');
-    }
-
-    // 2. Pollinations (무료 FLUX 폴백)
-    if (!newImageUrl) {
-      try {
-        appendLog(`[${index + 1}] Pollinations 시도 중...`);
-        const polRes = await generateImagesWithCostSafety({
-          provider: 'pollinations',
-          items: [{ heading, prompt: englishPrompt }],
-          regenerate: true
-        });
-        if (polRes.success && polRes.images?.[0]) {
-          newImageUrl = polRes.images[0].previewDataUrl || polRes.images[0].filePath;
-          successProvider = 'pollinations';
-          appendLog(`✅ [${index + 1}] Pollinations 성공!`);
-        }
-      } catch (e) {
-        console.log('[Image] Pollinations 실패, 다음 시도...');
-      }
-    }
-
-    // 3. Naver 이미지 검색 (폴백)
-    if (!newImageUrl) {
-      try {
-        appendLog(`[${index + 1}] Naver 이미지 검색 시도 중...`);
-        newImageUrl = await searchNaverImage(englishPrompt, true);
-        if (newImageUrl) {
-          successProvider = 'naver';
-          appendLog(`✅ [${index + 1}] Naver 이미지 검색 성공!`);
-        }
-      } catch (e) {
-        console.log('[Image] Naver 이미지 검색 실패');
-      }
-    }
-
-    if (newImageUrl) {
-      const newImage = {
-        url: newImageUrl,
-        previewDataUrl: newImageUrl,
-        filePath: newImageUrl,
-        heading,
-        prompt: englishPrompt,
-        provider: successProvider
-      };
-
-      ImageManager.setImage(heading, newImage);
-
-      const allImages = ImageManager.getAllImages();
-      (window as any).imageManagementGeneratedImages = allImages;
-      syncGlobalImagesFromImageManager();
-
-      toastManager.success(`✅ AI 이미지 생성 완료! (${successProvider})`);
-      appendLog(`✅ [${index + 1}] AI 이미지 생성 완료 (${successProvider})`);
-    } else {
-      throw new Error('모든 이미지 생성 방법 실패');
-    }
+    toastManager.success(`✅ AI 이미지 생성 완료! (${newImage.provider})`);
+    appendLog(`✅ [${index + 1}] AI 이미지 생성 완료 (${newImage.provider})`);
   } catch (error) {
     console.error('[Image] AI 이미지 생성 실패:', error);
-    toastManager.error('❌ 모든 이미지 소스에서 생성에 실패했습니다.');
-    appendLog(`❌ [${index + 1}] 이미지 생성 실패 - 모든 소스 실패`);
+    const message = (error as Error)?.message || String(error);
+    toastManager.error(`❌ 이미지 생성 실패 (${route.provider}): ${message}`);
+    appendLog(`❌ [${index + 1}] 이미지 생성 실패 (${route.provider}): ${message}`);
   }
 }
 

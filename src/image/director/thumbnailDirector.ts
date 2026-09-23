@@ -54,7 +54,8 @@ export interface ThumbnailDirectorDeps {
   composeSquare(input: string, output: string): Promise<ComposeResult>;
   composeTight(input: string, output: string): Promise<ComposeResult>;
   composeHook(input: string, output: string, hook: { main: string }): Promise<ComposeResult>;
-  composePair(left: string, right: string, output: string): Promise<ComposeResult>;
+  /** Two photos side by side; with `hook`, the copy sits in its own band below the photos. */
+  composePair(left: string, right: string, output: string, hook?: { main: string }): Promise<ComposeResult>;
   toJudgeImage(filePath: string): Promise<{ base64: string }>;
   judge(
     images: ReadonlyArray<{ base64: string }>,
@@ -160,21 +161,22 @@ function realMakers(
   const pairFirst = prefersPair(input, direction);
   const pair = pairFirst ? make('real-pair', '실제 사진 2장', false, () => deps.composePair(first, second, at('pair'))) : null;
   const pairCard = pairFirst && bake
-    ? make('real-pair-hook', '실제 사진 2장 + 짧은 문구', true, async () => {
-      const paired = await deps.composePair(first, second, at('pair'));
-      return deps.composeHook(paired.filePath, at('pair-text'), bake);
-    })
+    ? make('real-pair-hook', '실제 사진 2장 + 짧은 문구', true, () => deps.composePair(first, second, at('pair-text'), bake))
     : null;
   const card = bake ? make('real-hook', '실제 사진 + 짧은 문구', true, () => deps.composeHook(first, at('text'), bake)) : null;
   const square = make('real-square', '실제 사진', false, () => deps.composeSquare(first, at('square')));
+  // When the first photo cannot be used, the second one still makes a real-photo thumbnail.
+  const secondCard = second && bake
+    ? make('real-hook', '다른 실제 사진 + 짧은 문구', true, () => deps.composeHook(second, at('text2'), bake))
+    : null;
+  const other = second ? make('real-square', '다른 실제 사진', false, () => deps.composeSquare(second, at('square2'))) : null;
   if (input.qualityMode !== 'high') {
     // Standard mode uses the first that succeeds; the single-photo makers are the fallback.
-    return [pairCard ?? pair, card, square].filter(Boolean) as Maker[];
+    return [pairCard ?? pair, card, square, secondCard, other].filter(Boolean) as Maker[];
   }
   const tight = make('real-tight', '실제 사진(가까이)', false, () => deps.composeTight(first, at('tight')));
-  if (pairFirst) return [pairCard ?? pair, square, card ?? tight].filter(Boolean) as Maker[];
-  const other = second ? make('real-square', '다른 실제 사진', false, () => deps.composeSquare(second, at('square2'))) : null;
-  return [square, card ?? tight, other].filter(Boolean) as Maker[];
+  if (pairFirst) return [pairCard ?? pair, square, card ?? tight, other].filter(Boolean) as Maker[];
+  return [square, card ?? tight, other, secondCard].filter(Boolean) as Maker[];
 }
 
 async function pick(

@@ -674,7 +674,13 @@ function isEmptyImageSuccessAllowed(options: any, result: any): boolean {
 }
 
 function normalizeEmptyImageSuccess(options: any, result: any): any {
-  const requestedCount = Array.isArray(options?.items) ? options.items.length : 0;
+  // [SPEC-NAVER-IMAGE-2026 FINAL §1] main filters by the heading-image mode and reports how many images
+  //   it owes; comparing with the pre-filter count turned every correct odd/even result into
+  //   "일부만 생성되었습니다", and full auto retried and aborted.
+  const expected = Number(result?.expectedCount);
+  const requestedCount = Number.isInteger(expected) && expected >= 0
+    ? expected
+    : (Array.isArray(options?.items) ? options.items.length : 0);
   const imageCount = Array.isArray(result?.images) ? result.images.length : 0;
   if (result?.success !== false && requestedCount > 0 && imageCount < requestedCount && !isEmptyImageSuccessAllowed(options, result)) {
     const provider = String(options?.provider || 'unknown').trim() || 'unknown';

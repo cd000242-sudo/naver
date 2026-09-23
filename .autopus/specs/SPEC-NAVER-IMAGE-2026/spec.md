@@ -2,7 +2,7 @@
 
 | 항목 | 값 |
 |---|---|
-| Status | implemented (Phase 0 + 두 장 나란히 합성) · 커밋 e35b5a7f, 18e4c918 · 미빌드 · 미릴리스 · 판정 NEEDS_IMAGE_FIX |
+| Status | implemented (Phase 0 + 두 장 합성 + FINAL IMAGE FIX) · 로컬 커밋만 · 미빌드 · 미릴리스 · 판정 NEEDS_LIVE_IMAGE_VALIDATION |
 | Created | 2026-09-23 |
 | Domain | IMAGE |
 | Owner | 박성현 (cd000242@gmail.com) |

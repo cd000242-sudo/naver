@@ -12,13 +12,15 @@ import { getImageSaveBasePath } from '../imageUtils.js';
 import { resolveIssueVisionRoute } from '../../crawler/issueHarness/visionRoute.js';
 import { judgeImagesWithRoute } from '../../crawler/issueHarness/visionJudges.js';
 import { toVisionJpegBase64 } from '../../crawler/issueHarness/candidateFetcher.js';
-import { composeHookCard800, composePair800, composeSquare800, composeTightCrop800 } from './thumbnailComposer.js';
+import { composeHookCard800, composeSquare800, composeTightCrop800 } from './thumbnailComposer.js';
+import { MIN_REAL_PHOTO_SIDE, composePair800, readOrientedSize } from './thumbnailPairComposer.js';
 import { judgeThumbnailCandidates } from './thumbnailJudge.js';
 import { runThumbnailDirector, type ThumbnailDirectorResult } from './thumbnailDirector.js';
 import { isRealAssetPriorityTopic, resolveRealAssets, summarizeInventory, type AssetEntry } from './realAssetResolver.js';
 import { inferArticleVisualKind } from './sectionRolePlanner.js';
 import { normalizeThumbnailTextMode, resolveThumbnailOverlayText } from './thumbnailText.js';
 import { checkThumbnailPlan } from './imageQualityCheck.js';
+import { withTextNotInImage, withTextNotWanted } from './thumbnailTextState.js';
 
 type OnImage = (image: GeneratedImage, index: number, total: number) => void;
 type GenerateFn = (options: GenerateImagesOptions, apiKeys?: any, onImageGenerated?: OnImage) => Promise<GeneratedImage[]>;
@@ -67,6 +69,22 @@ export function isLocalImageFile(filePath: string | undefined): boolean {
   }
 }
 
+/** Real photos that can carry a thumbnail: readable and not so small that 800px would blur them. */
+export async function keepUsableRealPhotos(files: readonly string[], log: (message: string) => void): Promise<string[]> {
+  const usable: string[] = [];
+  for (const file of files) {
+    const size = await readOrientedSize(file);
+    if (!size) {
+      log(`${LOG} ⚠️ 실제 사진을 읽을 수 없어 합성에서 뺐습니다: ${file}`);
+    } else if (Math.min(size.width, size.height) < MIN_REAL_PHOTO_SIDE) {
+      log(`${LOG} ⚠️ 실제 사진이 너무 작아(${size.width}x${size.height}) 합성에서 뺐습니다`);
+    } else {
+      usable.push(file);
+    }
+  }
+  return usable;
+}
+
 /** 'high' only when the user turned on 고품질 썸네일 (image management tab). */
 export function resolveThumbnailQualityMode(config?: unknown): 'standard' | 'high' {
   return (config as { thumbnailQualityMode?: unknown } | undefined)?.thumbnailQualityMode === 'high' ? 'high' : 'standard';
@@ -88,7 +106,7 @@ export function toDirectorImage(
   dataUrl: (filePath: string) => string | undefined = toDataUrl,
 ): GeneratedImage {
   const { base, winner } = result;
-  const flags = winner.bakedText ? { disableTextOverlay: true } : {};
+  const flags = winner.bakedText ? { disableTextOverlay: true, textRendered: true } : {};
   if (base && winner.kind === 'ai-full') {
     return { ...base, heading: item.heading, isThumbnail: item.isThumbnail };
   }
@@ -147,6 +165,7 @@ export async function generateImagesWithThumbnailDirector(
   const realPriority = isRealAssetPriorityTopic(title, options.category);
   const route = qualityMode === 'high' ? resolveIssueVisionRoute(context.config) : null;
   const log = (message: string) => console.log(message);
+  const realImages = await keepUsableRealPhotos(inventory.composable, log);
   log(`${LOG} 🖼️ 썸네일 설계 · 자산: ${summarizeInventory(inventory)} · 실제 사진 우선 주제=${realPriority}`
     + ` · 심사: ${qualityMode === 'high' ? (route ? `${route.label}${route.free ? ' (구독, 추가 과금 0)' : ' (유료 API, 최저가 모델)'}` : '경로 없음(1번 유지)') : '없음(표준 모드)'}`);
 
@@ -160,7 +179,7 @@ export async function generateImagesWithThumbnailDirector(
     allowBakedText: request.allowBakedText === true,
     keepPrompt: request.keepPrompt === true,
     engineDrawsText: NATIVE_TEXT_ENGINES.has(provider) && item.allowText === true,
-    realImages: inventory.composable,
+    realImages,
     realWorkDir: `${await getImageSaveBasePath()}/thumbnail-candidates`,
   }, {
     generateBase: async (coverItem) => {
@@ -170,7 +189,7 @@ export async function generateImagesWithThumbnailDirector(
     composeSquare: composeSquare800,
     composeTight: (input, output) => composeTightCrop800(input, output),
     composeHook: (input, output, hook) => composeHookCard800(input, output, hook),
-    composePair: (left, right, output) => composePair800(left, right, output),
+    composePair: (left, right, output, hook) => composePair800(left, right, output, hook),
     toJudgeImage: async (filePath) => ({ base64: await toVisionJpegBase64(fs.readFileSync(filePath)) }),
     judge: (images, ctx, candidates) => judgeThumbnailCandidates(
       images, ctx, candidates, route ? (imgs, prompt) => judgeImagesWithRoute(imgs, prompt, route) : null, log,
@@ -189,7 +208,11 @@ export async function generateImagesWithThumbnailDirector(
       [image], result.winner.real ? String(image.provider) : provider, resolveThumbnailOverlayText(title), options.thumbnailTextInclude, [item],
     );
   }
-  const notice = realPriority && inventory.composable.length === 0
+  if (image.textRendered !== true) {
+    // FINAL §3: AUTO decided "no text" → none at publish either; otherwise the publish overlay may add it once.
+    image = textMode === 'auto' && !result.text.include ? withTextNotWanted(image) : withTextNotInImage(image);
+  }
+  const notice = realPriority && realImages.length === 0
     ? `실제 인물·제품·장소 글입니다. 실제 사진이 있으면 이미지 관리 탭에서 먼저 넣어 주세요 — 이번 썸네일은 닮은 인물 없이 상황·사물로 만들었습니다${inventory.counts.REFERENCE_ONLY > 0 ? ` (참고용 ${inventory.counts.REFERENCE_ONLY}장은 사용 권한 미확인이라 합성하지 않음)` : ''}.`
     : undefined;
   const check = checkThumbnailPlan({
@@ -198,7 +221,7 @@ export async function generateImagesWithThumbnailDirector(
     width: 800,
     height: 800,
     realAssetPriority: realPriority,
-    realAssetAvailable: inventory.composable.length > 0,
+    realAssetAvailable: realImages.length > 0,
     usedRealAsset: result.winner.real,
     aiDepictsRealPerson: false,
   });

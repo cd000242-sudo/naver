@@ -43,6 +43,28 @@
 - docs/NAVER_IMAGE_SYSTEM_PROMPT.md (5,170자)
 - docs/NAVER_IMAGE_SKILL.md
 
+## FINAL IMAGE FIX (2026-09-23 3차, 완료)
+
+| 파일 | 변경 |
+|---|---|
+| src/image/headingImageSelection.ts (새) | 소제목 이미지 모드 1-based 규칙 |
+| src/main.ts | IPC 필터·응답(`expectedCount`, `filteredByMode`)·메인 다중계정 소제목에 규칙 적용 |
+| src/renderer/modules/costAndAutoGen.ts | 결과 개수를 메인이 알려준 개수와 비교 |
+| src/renderer/modules/fullAutoFlow.ts | 풀오토·반자동·쇼핑 배치가 sectionIndex 전달, "설정상 없음"은 건너뜀 |
+| src/renderer/modules/multiAccountManager.ts | 사전 필터를 1부터 센 소제목 번호로 |
+| src/renderer/modules/headingImageGen.ts | 설정상 빠진 소제목은 실패 대신 건너뜀 로그, 소제목 카드 재생성 라우팅, 새 이미지의 문구 상태 |
+| src/renderer/components/HeadingImageSettings.ts | 주석만(1-based 기준) |
+| src/renderer/modules/imageDisplayGrid.ts | 재생성 라우팅 규칙(`resolveImageRegenerateRoute`, `readSelectedImageSource`, `regenerateWithSelectedEngine`), 그리드·카드 재생성 |
+| src/renderer/renderer.ts | "🤖 AI 이미지 생성" 단일 호출 |
+| src/image/director/thumbnailTextState.ts (새) | 썸네일 문구 상태와 발행 판단 |
+| src/image/contextualImagePrompt.ts | 문구 이름이 없는 썸네일은 ZERO TEXT |
+| src/imageGenerator.ts | 생성 때 오버레이·엔진이 그린 문구에 상태 표시 |
+| src/automation/editorHelpers.ts | 발행 때 오버레이를 상태 기반 판단으로 |
+| src/image/types.ts | `textRendered` |
+| src/image/director/thumbnailPairComposer.ts (새) | 두 장 합성(좌·우·하단 문구 띠), crop 규칙, 작은 사진 거절 |
+| src/image/director/thumbnailComposer.ts | 휴대폰 사진 방향 보정, 헬퍼 export |
+| src/image/director/thumbnailDirector.ts · thumbnailDirectorGate.ts | 두 장 문구 띠, 두 번째 사진 폴백, 작은·깨진 사진 제외, 문구 상태 |
+
 ## Phase 1 — 자산 파이프라인 (사장님 결정 필요)
 
 1. SOURCE_ASSET 확보: 기사·공식 이미지를 사용자 동의 하에 받아 로컬 자산으로 등록한다. 권리 확인 문구와 출처 기록을 함께 남긴다(SPEC-IMAGE-PORTRAIT-2026과 같이 설계).

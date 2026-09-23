@@ -30,10 +30,16 @@ describe('contextual brief names the exact thumbnail phrase', () => {
     expect(brief).toContain(`Render exactly this Korean text once, at most 2 lines, large and legible: "${SHORT}"`);
   });
 
-  it('no phrase, no text allowed, or a section image → the previous policies are unchanged', () => {
-    expect(policyLine(buildContextualImagePrompt(base))).toContain('Render only explicitly requested title text');
+  it('FINAL §3: a thumbnail with no named phrase is drawn with ZERO TEXT (the app overlays the copy once)', () => {
+    expect(policyLine(buildContextualImagePrompt(base))).toContain('ZERO TEXT');
+    expect(prepareProviderContextualImagePrompt('imagefx', base)).toContain('Create a text-free image');
+  });
+
+  it('no text allowed → ZERO TEXT; a section image with text allowed keeps the old infographic policy', () => {
     expect(policyLine(buildContextualImagePrompt({ ...base, allowText: false, thumbnailText: SHORT }))).toContain('ZERO TEXT');
-    expect(policyLine(buildContextualImagePrompt({ ...base, isThumbnail: false, thumbnailText: SHORT }))).not.toContain(SHORT);
+    const section = policyLine(buildContextualImagePrompt({ ...base, isThumbnail: false, thumbnailText: SHORT }));
+    expect(section).not.toContain(SHORT);
+    expect(section).toContain('Render only explicitly requested title text');
   });
 });
 

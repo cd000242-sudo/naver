@@ -58,6 +58,8 @@ declare function generateEnglishPromptForHeading(title: string, subtitle?: strin
 declare function getManualEnglishPromptOverrideForHeading(heading: string): string;
 declare function clearManualEnglishPromptOverrideForHeading(heading: string): void;
 declare function generateImagesWithCostSafety(options: any): Promise<any>;
+declare function readSelectedImageSource(): string;
+declare function resolveImageRegenerateRoute(source: unknown): { kind: 'generate'; provider: string } | { kind: 'blocked'; message: string };
 declare function takeThumbnailDirectorMeta(heading: string, imageUrl: string): Record<string, unknown>;
 declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
 declare function generateNanoBananaProImage(prompt: string): Promise<string>;
@@ -1686,6 +1688,14 @@ export function initHeadingImageGeneration(): void {
           } catch (error) {
             completedCount++;
             const currentProgress = Math.floor((completedCount / totalHeadings) * 100);
+            // [SPEC-NAVER-IMAGE-2026 FINAL §1] A heading the odd/even setting leaves out is a skip, not a failure.
+            if (/소제목 이미지 설정\(.+\)에 따라/.test(String((error as Error)?.message || ''))) {
+              appendLog(`⏭️ [${completedCount}/${totalHeadings}] "${String(heading.title || '').trim()}" — 소제목 이미지 설정(홀수/짝수)에 따라 이미지 없음`, 'images-log-output');
+              showImagesProgress(currentProgress, `이미지 생성 중... (${completedCount}/${totalHeadings})`, `"${heading.title}" 설정상 이미지 없음`);
+              liveImagePreview.updateItem(i, 'pending');
+              liveImagePreview.addLog(`⏭️ ${String(heading.title || '').trim()} — 설정상 이미지 없음`);
+              return null;
+            }
             appendLog(`❌ [${completedCount}/${totalHeadings}] 이미지 생성 실패: ${(error as Error).message}`, 'images-log-output');
             showImagesProgress(currentProgress, `이미지 생성 중... (${completedCount}/${totalHeadings})`, `"${heading.title}" 이미지 생성 실패`);
             // ✅ [2026-02-02] 실시간 미리보기 업데이트
@@ -4499,28 +4509,17 @@ async function regenerateSingleImage(headingTitle: string, prompt: string): Prom
 
     toastManager.info(`🔄 "${resolvedHeadingTitle}" 이미지 재생성 중...`);
 
-    // The `.image-source-btn` markup no longer exists anywhere in index.html, so
-    // reading it alone always resolved to null and silently forced
-    // 'nano-banana-pro' (Gemini API key) no matter which engine the user picked.
-    // Read `#image-source-select` first — the same precedence the batch
-    // generation paths in this file already use.
-    const dropdownSource = String(
-      (document.getElementById('image-source-select') as HTMLSelectElement | null)?.value || ''
-    ).trim();
-    const selectedSourceBtn = (
-      document.querySelector('.image-source-btn.selected')
-      || document.querySelector('.unified-img-source-btn.selected')
-    ) as HTMLElement | null;
-    const buttonSource = String(
-      selectedSourceBtn?.dataset?.source || selectedSourceBtn?.getAttribute?.('data-source') || ''
-    ).trim();
-    const selectedSource = dropdownSource || buttonSource;
-    const provider = (selectedSource && selectedSource !== 'saved') ? selectedSource : 'nano-banana-pro';
-
-    if (selectedSource === 'saved') {
-      toastManager.warning('저장된 이미지는 생성할 수 없습니다. 다른 이미지 소스를 선택해주세요.');
+    // [SPEC-NAVER-IMAGE-2026 FINAL §2] The same routing rule as the grid buttons: the picked engine only.
+    //   An empty choice used to fall back to 'nano-banana-pro' silently (a Gemini charge nobody chose).
+    const selectedSource = readSelectedImageSource();
+    const route = resolveImageRegenerateRoute(selectedSource);
+    if (route.kind === 'blocked') {
+      toastManager.warning(selectedSource === 'saved'
+        ? '저장된 이미지는 생성할 수 없습니다. 다른 이미지 소스를 선택해주세요.'
+        : route.message);
       return;
     }
+    const provider = route.provider;
 
     const safePrompt = String(prompt || '').trim() || resolvedHeadingTitle;
     if (!safePrompt) {
@@ -4550,6 +4549,10 @@ async function regenerateSingleImage(headingTitle: string, prompt: string): Prom
         url: newImage.url || newImage.filePath,
         prompt,
         ...(headingIndex >= 0 ? { headingIndex } : {}),
+        // [SPEC-NAVER-IMAGE-2026 FINAL §3] this image's own text state, so publish draws the copy once.
+        textRendered: newImage.textRendered === true,
+        disableTextOverlay: newImage.disableTextOverlay === true,
+        ...(newImage.isCollected === true ? { isCollected: true } : {}),
         timestamp: Date.now(),
       };
 

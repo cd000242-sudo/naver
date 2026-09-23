@@ -457,7 +457,7 @@ function buildCompactContextualImagePrompt(input: ContextualImagePromptInput): s
   const sectionHeading = compactText(input.sectionHeading, 220) || globalSubject;
   const sectionContent = compactText(input.sectionContent, 500) || sectionHeading;
   const existingPrompt = compactText(input.existingPrompt, 320);
-  const textPolicy = resolveThumbnailTextPolicy(input) ?? (input.allowText
+  const textPolicy = resolveThumbnailTextPolicy(input) ?? (input.allowText && !input.isThumbnail
     ? 'Render only the explicitly requested title text and no other writing.'
     : 'Create a text-free image with no letters, labels, logos, captions, or watermark.');
   const referencePolicy = input.hasReferenceImage
@@ -529,10 +529,13 @@ export function buildContextualImagePrompt(input: ContextualImagePromptInput): s
   const intendedUse = input.isThumbnail
     ? 'Korean Naver blog cover image'
     : 'Korean Naver blog editorial image placed directly below this section heading';
+  // FINAL §3: a thumbnail without a named phrase gets ZERO TEXT. Its copy is added once by the app
+  //   overlay; "render the requested title text" with no text named made engines draw the whole title,
+  //   and the overlay then printed the phrase on top of it (the only double text that could happen).
   const thumbnailTextPolicy = resolveThumbnailTextPolicy(input);
   const textPolicy = thumbnailTextPolicy
     ? `TEXT POLICY: ${thumbnailTextPolicy}`
-    : input.allowText
+    : input.allowText && !input.isThumbnail
       ? 'TEXT POLICY: Render only explicitly requested title text; no other labels, captions, logos, or watermarks.'
       : 'TEXT POLICY: ZERO TEXT, ZERO LETTERS, ZERO WORDS, ZERO WRITING, no logos, no captions, no watermark.';
   const referencePolicy = input.hasReferenceImage

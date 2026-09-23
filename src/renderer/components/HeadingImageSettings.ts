@@ -259,12 +259,11 @@ export function shouldGenerateImageForHeading(
     case 'thumbnail-only':
       return isThumbnail;
     case 'odd-only':
-      // ✅ [2026-03-23 FIX] main.ts:3921과 동일한 0-indexed 기준
-      // origIdx=0(썸네일)→항상포함, origIdx=1→홀수(포함), origIdx=2→짝수(제외)
+      // headingIndex is the 1-based heading number (SPEC-NAVER-IMAGE-2026 FINAL §1, the same rule as
+      // src/image/headingImageSelection.ts): 1, 3, 5 … keep; the thumbnail always stays.
       return isThumbnail || headingIndex % 2 === 1;
     case 'even-only':
-      // ✅ [2026-03-23 FIX] main.ts:3933과 동일한 0-indexed 기준
-      // origIdx=0(썸네일)→항상포함, origIdx=1→홀수(제외), origIdx=2→짝수(포함)
+      // 1-based heading number: 2, 4, 6 … keep; the thumbnail always stays.
       return isThumbnail || headingIndex % 2 === 0;
     case 'none':
       return false;

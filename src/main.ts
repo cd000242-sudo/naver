@@ -3876,7 +3876,15 @@ ipcMain.handle('automation:abortImageGeneration', async () => {
 
 ipcMain.handle(
   'automation:generateImages',
-  async (_event, options: GenerateImagesOptions): Promise<{ success: boolean; images?: GeneratedImage[]; message?: string }> => {
+  async (_event, options: GenerateImagesOptions): Promise<{
+    success: boolean;
+    images?: GeneratedImage[];
+    message?: string;
+    /** [SPEC-NAVER-IMAGE-2026 FINAL §1] Images owed after the heading-image mode filter. */
+    expectedCount?: number;
+    /** [SPEC-NAVER-IMAGE-2026 FINAL §1] The mode left some sections out on purpose. */
+    filteredByMode?: boolean;
+  }> => {
     // ✅ [리팩토링] 통합 검증 함수 사용
     const check = await validateLicenseAndQuota('media', 1);
     if (!check.valid) {
@@ -3988,67 +3996,29 @@ ipcMain.handle(
 
       if (headingImageMode !== 'all' && options.items && options.items.length > 0) {
         const originalCount = options.items.length;
-
-        options.items = options.items.filter((item, idx) => {
-          // 쇼핑커넥트 모드: item.isThumbnail 속성으로만 썸네일 판단
-          // 일반 모드: 첫 번째 항목(idx === 0)이 대표 이미지(썸네일 역할)
-          const heading = (item.heading || '').toLowerCase();
-          const origIdx = (item as any).originalIndex ?? idx;
-
-          // ✅ [2026-02-23 FIX] 모든 모드 통합 - 썸네일은 isThumbnail 플래그 또는 heading 기반
-          const isThumbnail = item.isThumbnail === true ||
-            heading.includes('썸네일') ||
-            heading.includes('thumbnail') ||
-            heading.includes('서론') ||
-            heading.includes('대표');
-
-          let shouldInclude = false;
-          switch (headingImageMode) {
-            case 'thumbnail-only':
-              // 썸네일만 포함
-              shouldInclude = isThumbnail;
-              break;
-            case 'odd-only':
-              // ✅ [2026-02-23 FIX] 썸네일 항상 포함 + 홀수 인덱스 (썸네일 포함 카운트)
-              // 썸네일(origIdx=0) = 항상 포함
-              // 소제목1(origIdx=1) = 홀수 → 포함
-              // 소제목2(origIdx=2) = 짝수 → 제외
-              // 소제목3(origIdx=3) = 홀수 → 포함
-              if (isThumbnail) {
-                shouldInclude = true;
-              } else {
-                shouldInclude = origIdx % 2 === 1; // 홀수 인덱스
-              }
-              break;
-            case 'even-only':
-              // ✅ [2026-02-23 FIX] 썸네일 항상 포함 + 짝수 인덱스 (origIdx 기준, 썸네일=0 포함 카운트)
-              // [사용자 관점: 2번째, 4번째 소제목에만 이미지]
-              // 썸네일(origIdx=0) = 항상 포함 (짝수이므로 자연스럽게 포함)
-              // 소제목1(origIdx=1) = 홀수 → ❌ 제외 (사용자 관점 1번째)
-              // 소제목2(origIdx=2) = 짝수 → ✅ 포함 (사용자 관점 2번째)
-              // 소제목3(origIdx=3) = 홀수 → ❌ 제외 (사용자 관점 3번째)
-              if (isThumbnail) {
-                shouldInclude = true;
-              } else {
-                shouldInclude = origIdx % 2 === 0;
-              }
-              break;
-            case 'none':
-              shouldInclude = false;
-              break;
-            default:
-              shouldInclude = true;
-          }
-
-          console.log(`[Main] 🖼️ 필터링 - [origIdx=${origIdx}] "${item.heading}" isThumbnail=${isThumbnail} shouldInclude=${shouldInclude}`);
-          return shouldInclude;
+        // [SPEC-NAVER-IMAGE-2026 FINAL §1] One 1-based rule (image/headingImageSelection): heading 1 = odd,
+        //   2 = even, the thumbnail is never a section, and an item whose heading number is unknown is kept.
+        //   Before: `originalIndex % 2` on the position in this request — a batch of all headings kept 2, 4
+        //   for "odd", a one-item call (always position 0) was dropped, and 'none' removed the thumbnail.
+        const selection = selectItemsForHeadingImageMode(options.items, headingImageMode, {
+          sectionPlanHeadings: (options as any).sectionPlanHeadings,
         });
-
+        options.items.forEach((item: any, i: number) => {
+          const label = selection.numbers[i] ?? (selection.kept.includes(item) ? '썸네일/미상' : '?');
+          console.log(`[Main] 🖼️ 필터링 - [소제목 ${label}] "${item?.heading}" → ${selection.kept.includes(item) ? '생성' : '제외'}`);
+        });
+        options.items = selection.kept;
         console.log(`[Main] 🖼️ headingImageMode="${headingImageMode}": ${originalCount}개 → ${options.items.length}개 이미지 생성`);
-
-        // ✅ 필터링 후 남은 items의 originalIndex 로그
-        const remainingIndices = options.items.map((item: any) => item.originalIndex);
-        console.log(`[Main] 🖼️ 생성할 이미지 원래 인덱스: [${remainingIndices.join(', ')}]`);
+        if (options.items.length === 0) {
+          // Every item was a section this mode leaves out: nothing to generate, and not a failure.
+          return {
+            success: true,
+            images: [],
+            expectedCount: 0,
+            filteredByMode: true,
+            message: `소제목 이미지 설정(${headingImageMode})에 따라 이 소제목에는 이미지를 넣지 않습니다.`,
+          };
+        }
       }
 
       // ✅ [2026-01-27] 각 아이템에 isThumbnail 기반 개별 비율 적용
@@ -4151,17 +4121,19 @@ ipcMain.handle(
         console.warn(`[Main] ${message}`);
         return { success: false, images: [], message };
       }
+      // FINAL §1: the renderer compares against this count, not against what it sent before the filter.
+      const filteredByMode = originalRequestedImageCount > requiredGeneratedImageCount;
       if (shouldRequireImages && requiredGeneratedImageCount > 0 && generatedImageCount < requiredGeneratedImageCount) {
         const providerLabel = String(options.provider || imageOptions.provider || 'unknown');
         const message = `[${providerLabel}] 이미지가 일부만 생성되었습니다 (${generatedImageCount}/${requiredGeneratedImageCount}). 누락 이미지가 있어 발행을 중단하고 이미지 단계부터 다시 시도합니다.`;
         console.warn(`[Main] ${message}`);
-        return { success: false, images, message };
+        return { success: false, images, message, expectedCount: requiredGeneratedImageCount, filteredByMode };
       }
 
       if (await isFreeTierUser()) {
         await consumeQuota('media', 1);
       }
-      return { success: true, images };
+      return { success: true, images, expectedCount: requiredGeneratedImageCount, filteredByMode };
     } catch (error) {
       const raw = (error as Error).message ?? '이미지 생성 중 오류가 발생했습니다.';
       // [2026-09-08] axios 원문("Request failed with status code 429")이 그대로 화면에 나가
@@ -4942,6 +4914,7 @@ import { registerBackupHandlers, performDataBackup } from './main/ipc/backupHand
 // ✅ [LDB] LDB IMAGE ULTRA 확장에서 완성 원고를 받는 로컬 브리지 (발행 없음, 목록에만 추가)
 import { startLdbBridge } from './main/ldb-bridge.js';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
+import { selectItemsForHeadingImageMode } from './image/headingImageSelection.js';
 
 /*
  * LDB 확장 수신 브리지. 환경설정에서 켠 사용자만 포트가 열린다.
@@ -5820,7 +5793,16 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
               // ═══ Phase 2: 소제목 이미지 생성 (thumbnailOnly면 건너뛰기) ═══
               let subheadingImages: any[] = [];
-              const headings = structuredContent?.headings || [];
+              // [SPEC-NAVER-IMAGE-2026 FINAL §1] This path calls generateImages directly (no IPC filter), so
+              //   odd/even was ignored and every heading got an image. Same 1-based rule, by article position.
+              const headings = selectItemsForHeadingImageMode(
+                (structuredContent?.headings || []).map((h: any, index: number) => ({
+                  heading: String(h?.title || h || ''),
+                  sectionIndex: index,
+                  source: h,
+                })),
+                headingImageMode,
+              ).kept.map((entry: any) => entry.source);
 
               if (isThumbnailOnly) {
                 sendLog(`   📷 썸네일만 생성 모드: 소제목 이미지 없이 전용 썸네일만 사용`);

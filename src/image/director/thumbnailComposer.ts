@@ -9,7 +9,7 @@ export const THUMBNAIL_SIZE = 800;
 
 export interface ComposeResult { readonly filePath: string; readonly width: number; readonly height: number; readonly method: string; }
 
-const FONT_FAMILY = 'Noto Sans KR, Malgun Gothic, Apple SD Gothic Neo, sans-serif';
+export const FONT_FAMILY = 'Noto Sans KR, Malgun Gothic, Apple SD Gothic Neo, sans-serif';
 
 function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
@@ -25,7 +25,7 @@ function ensureOutputDir(outputPath: string): void {
 // Write via a temp path, then copy into place — never write to the same
 // path that was read as input. Windows keeps a handle open on path-based
 // reads/writes, so an in-place overwrite fails (see thumbnailService.ts).
-async function writeEncoded(pipeline: sharp.Sharp, outputPath: string): Promise<void> {
+export async function writeEncoded(pipeline: sharp.Sharp, outputPath: string): Promise<void> {
   ensureOutputDir(outputPath);
   const ext = path.extname(outputPath).toLowerCase();
   const encoded = ext === '.jpg' || ext === '.jpeg' ? pipeline.jpeg({ quality: 90 }) : pipeline.png();
@@ -35,12 +35,17 @@ async function writeEncoded(pipeline: sharp.Sharp, outputPath: string): Promise<
   fs.unlinkSync(tempPath);
 }
 
-async function readBackResult(outputPath: string, method: string): Promise<ComposeResult> {
+export async function readBackResult(outputPath: string, method: string): Promise<ComposeResult> {
   const metadata = await sharp(fs.readFileSync(outputPath)).metadata();
   return { filePath: outputPath, width: metadata.width || 0, height: metadata.height || 0, method };
 }
 
-function escapeXml(text: string): string {
+/** Pixels as the camera meant them: phone photos store portrait shots sideways plus an EXIF tag. */
+function oriented(inputBuffer: Buffer): sharp.Sharp {
+  return sharp(inputBuffer).rotate();
+}
+
+export function escapeXml(text: string): string {
   return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 }
 
@@ -49,7 +54,7 @@ function escapeXml(text: string): string {
  * else gets a blurred/darkened background extension — no generative fill.
  */
 export async function composeSquare800(inputPath: string, outputPath: string): Promise<ComposeResult> {
-  const inputBuffer = fs.readFileSync(inputPath);
+  const inputBuffer = await oriented(fs.readFileSync(inputPath)).toBuffer();
   const metadata = await sharp(inputBuffer).metadata();
   const width = metadata.width || THUMBNAIL_SIZE;
   const height = metadata.height || THUMBNAIL_SIZE;
@@ -87,7 +92,7 @@ export async function composeSquare800(inputPath: string, outputPath: string): P
  */
 export async function composeTightCrop800(inputPath: string, outputPath: string, zoom = 1.3): Promise<ComposeResult> {
   const clampedZoom = clamp(zoom, 1.05, 1.8);
-  const inputBuffer = fs.readFileSync(inputPath);
+  const inputBuffer = await oriented(fs.readFileSync(inputPath)).toBuffer();
   const scaledSize = Math.round(THUMBNAIL_SIZE * clampedZoom);
   const offset = Math.round((scaledSize - THUMBNAIL_SIZE) / 2);
 
@@ -100,35 +105,12 @@ export async function composeTightCrop800(inputPath: string, outputPath: string,
   return readBackResult(outputPath, 'tight');
 }
 
-const PAIR_GAP = 8;
-
-/**
- * Two real photos side by side (V1 §6·§7: the real person + the real counterpart). Each half is
- * attention-cropped to the same size so both subjects read at the same scale, and a thin light gap
- * keeps the two sources visibly separate instead of faking one photo. EXIF orientation is applied.
- */
-export async function composePair800(leftPath: string, rightPath: string, outputPath: string): Promise<ComposeResult> {
-  const halfWidth = Math.floor((THUMBNAIL_SIZE - PAIR_GAP) / 2);
-  const half = (file: string) => sharp(fs.readFileSync(file))
-    .rotate()
-    .resize(halfWidth, THUMBNAIL_SIZE, { fit: 'cover', position: sharp.strategy.attention })
-    .toBuffer();
-  const [left, right] = await Promise.all([half(leftPath), half(rightPath)]);
-  const pipeline = sharp({ create: { width: THUMBNAIL_SIZE, height: THUMBNAIL_SIZE, channels: 3, background: '#f2f2f2' } })
-    .composite([
-      { input: left, left: 0, top: 0 },
-      { input: right, left: THUMBNAIL_SIZE - halfWidth, top: 0 },
-    ]);
-  await writeEncoded(pipeline, outputPath);
-  return readBackResult(outputPath, 'pair');
-}
-
 // ---- hook card text layout ----
 
 const MIN_FONT = 72;
 const MAX_FONT = 150;
 const SAFE_WIDTH_RATIO = 0.88;
-const STROKE_PAD = 12; // the outline widens every line slightly
+export const STROKE_PAD = 12; // the outline widens every line slightly
 const SUB_FONT_SIZE = 48; // within the required 40-56px range
 
 /**
@@ -142,7 +124,7 @@ function glyphEm(ch: string): number {
   return 0.5;
 }
 
-function textEm(text: string): number {
+export function textEm(text: string): number {
   return [...text].reduce((sum, ch) => sum + glyphEm(ch), 0);
 }
 
@@ -190,7 +172,7 @@ export function splitHookLines(text: string, maxCharsPerLine: number): string[] 
   return first && second ? [first, second] : [trimmed];
 }
 
-function buildMainLines(mainText: string): { lines: string[]; fontSize: number } {
+export function buildMainLines(mainText: string): { lines: string[]; fontSize: number } {
   const maxWidth = THUMBNAIL_SIZE * SAFE_WIDTH_RATIO;
   if (estimateTextWidth(mainText, MIN_FONT) > maxWidth) {
     // Too long for one line even at the minimum size: split near the middle, then fit the longer line.
@@ -254,7 +236,7 @@ export async function composeHookCard800(
     throw new Error('composeHookCard800: hook.main must not be empty');
   }
 
-  const inputBuffer = fs.readFileSync(inputPath);
+  const inputBuffer = await oriented(fs.readFileSync(inputPath)).toBuffer();
   const coverBuffer = await sharp(inputBuffer)
     .resize(THUMBNAIL_SIZE, THUMBNAIL_SIZE, { fit: 'cover', position: sharp.strategy.attention })
     .toBuffer();

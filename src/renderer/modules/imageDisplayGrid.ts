@@ -704,108 +704,70 @@ async function applyImageToHeading(image: any, headingTitle: string, headingInde
   }
 }
 
+// [SPEC-NAVER-IMAGE-2026 FINAL §2] Regenerate with exactly the engine the user picked. NAVER image search
+//   only when NAVER was picked. Anything else is refused with a visible message — never a silent switch.
+//   (Before: nano-banana-2 / nano-banana / flow / imagefx / dropshot fell through to a NAVER search.)
+const IMAGE_REGENERATE_ENGINES = new Set([
+  'nano-banana-2', 'nano-banana-pro', 'nano-banana', 'flow', 'imagefx', 'dropshot',
+  'openai-image', 'leonardoai', 'deepinfra', 'prodia', 'naver',
+]);
+
+export type ImageRegenerateRoute =
+  | { readonly kind: 'generate'; readonly provider: string }
+  | { readonly kind: 'blocked'; readonly message: string };
+
+export function resolveImageRegenerateRoute(source: unknown): ImageRegenerateRoute {
+  const provider = String(source ?? '').trim();
+  if (IMAGE_REGENERATE_ENGINES.has(provider)) return { kind: 'generate', provider };
+  return {
+    kind: 'blocked',
+    message: provider
+      ? `선택한 이미지 엔진(${provider})으로는 재생성할 수 없습니다. 다른 엔진으로 자동 대체하지 않습니다. 이미지 엔진을 다시 선택해주세요.`
+      : '이미지 엔진이 선택되지 않았습니다. 이미지 엔진을 먼저 선택해주세요.',
+  };
+}
+
+/** The engine picked in the image tab: the dropdown first, the legacy source buttons only as a fallback. */
+export function readSelectedImageSource(): string {
+  const dropdown = String((document.getElementById('image-source-select') as HTMLSelectElement | null)?.value || '').trim();
+  if (dropdown) return dropdown;
+  const button = (document.querySelector('.image-source-btn.selected')
+    || document.querySelector('.unified-img-source-btn.selected')) as HTMLElement | null;
+  return String(button?.dataset?.source || button?.getAttribute?.('data-source') || '').trim();
+}
+
+/** One call with the picked engine. The result keeps the provider that made it and its own text state. */
+export async function regenerateWithSelectedEngine(heading: string, prompt: string): Promise<{ url: string; image: any }> {
+  const route = resolveImageRegenerateRoute(readSelectedImageSource());
+  if (route.kind === 'blocked') throw new Error(route.message);
+  const result = await generateImagesWithCostSafety({
+    provider: route.provider,
+    items: [{ heading, prompt }],
+    regenerate: true,
+  });
+  const image = result?.success ? result.images?.[0] : null;
+  const url = image ? String(image.previewDataUrl || image.filePath || image.url || '') : '';
+  if (!url) throw new Error(result?.message || `${route.provider} 이미지 재생성 실패`);
+  return {
+    url,
+    image: {
+      ...image,
+      provider: image.provider || route.provider,
+      // FINAL §3: this image's own text state — never the state of the image it replaces.
+      textRendered: image.textRendered === true,
+      disableTextOverlay: image.disableTextOverlay === true,
+    },
+  };
+}
+
 // ✅ 그리드 미리보기에서 이미지 재생성
 async function regenerateImageFromGrid(imageIndex: number, prompt: string, heading: string, promptItem: HTMLDivElement | null): Promise<void> {
   const generatedImagesGrid = document.getElementById('generated-images-grid') as HTMLDivElement;
 
-  // ✅ 이미지 소스 버튼에서 선택된 소스 가져오기 (드롭다운 fallback)
-  const selectedImageSourceBtn = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
-  const imageSource = String(
-    selectedImageSourceBtn?.dataset?.source
-    || (document.getElementById('image-source-select') as HTMLSelectElement)?.value
-    || ''
-  ).trim();
-  if (!imageSource) {
-    alert('이미지 생성 소스를 선택해주세요.');
-    return;
-  }
-
   try {
-    appendLog(`🔄 "${heading}" 이미지 재생성 중... (다른 이미지 선택)`, 'images-log-output');
-
-    // 재생성 시 다른 이미지를 선택하기 위해 재생성 플래그 전달
-    let newImageUrl: string;
-
-    if (imageSource === 'pollinations' || imageSource === 'nano-banana-pro') {
-      newImageUrl = await generateNanoBananaProImage(prompt, true);
-    } else if (imageSource === 'stability') {
-      // ✅ Stability AI 직접 연동 (Imagen4 폴백 제거)
-      const stabilityModel = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'stability',
-        items: [{ heading: heading, prompt }],
-        regenerate: true,
-        model: stabilityModel,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Stability AI 이미지 생성 실패');
-      }
-    } else if (imageSource === 'prodia') {
-      // ✅ Prodia 이미지 생성 (Stability와 동일한 패턴)
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'prodia',
-        items: [{ heading: heading, prompt }],
-        regenerate: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Prodia 이미지 생성 실패');
-      }
-    } else if (imageSource === 'deepinfra') {
-      // ✅ [2026-02-19 FIX] DeepInfra 분기 추가 (기존에 else로 빠져 네이버 검색 됨)
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'deepinfra',
-        items: [{ heading: heading, prompt }],
-        regenerate: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'DeepInfra 이미지 생성 실패');
-      }
-    } else if (imageSource === 'falai') {
-      // ✅ [2026-02-19 FIX] Fal.ai 분기 추가 (기존에 else로 빠져 네이버 검색 됨)
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'falai',
-        items: [{ heading: heading, prompt }],
-        regenerate: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Fal.ai 이미지 생성 실패');
-      }
-    } else if (imageSource === 'leonardoai') {
-      // ✅ [2026-02-23] Leonardo AI 재생성 지원 추가
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'leonardoai',
-        items: [{ heading: heading, prompt }],
-        regenerate: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Leonardo AI 이미지 생성 실패');
-      }
-    } else if (imageSource === 'openai-image') {
-      // ✅ [2026-02-23] OpenAI DALL-E 재생성 지원 추가
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'openai-image',
-        items: [{ heading: heading, prompt }],
-        regenerate: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'DALL-E 이미지 생성 실패');
-      }
-    } else {
-      // 네이버 이미지 검색 (재생성 플래그 전달)
-      newImageUrl = await searchNaverImage(prompt, true); // true = 재생성 모드
-    }
+    appendLog(`🔄 "${heading}" 이미지 재생성 중... (${readSelectedImageSource() || '엔진 미선택'})`, 'images-log-output');
+    const regenerated = await regenerateWithSelectedEngine(heading, prompt);
+    const newImageUrl = regenerated.url;
 
     // 그리드 미리보기 업데이트
     if (generatedImagesGrid) {
@@ -860,7 +822,10 @@ async function regenerateImageFromGrid(imageIndex: number, prompt: string, headi
       url: newImageUrl,
       previewDataUrl: newImageUrl,
       prompt: prompt,
-      headingIndex: imageIndex
+      headingIndex: imageIndex,
+      provider: regenerated.image.provider,
+      textRendered: regenerated.image.textRendered,
+      disableTextOverlay: regenerated.image.disableTextOverlay,
     });
     try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
 
@@ -897,94 +862,9 @@ async function regenerateSingleImageWithPromptItem(imageIndex: number, prompt: s
   `;
 
   try {
-    const selectedBtn = (document.querySelector('.image-source-btn.selected') || document.querySelector('.unified-img-source-btn.selected')) as HTMLButtonElement;
-    const imageSource = (selectedBtn?.dataset?.source
-      || (document.getElementById('image-source-select') as HTMLSelectElement)?.value
-      || '') as string;
-    appendLog(`🔄 "${heading}" 이미지 재생성 중 (${imageSource || '기본'})...`, 'images-log-output');
-
-    let newImageUrl: string;
-
-    if (imageSource === 'nano-banana-pro') {
-      newImageUrl = await generateNanoBananaProImage(prompt);
-    } else if (imageSource === 'pollinations') {
-      newImageUrl = await generateNanoBananaProImage(prompt);
-    } else if (imageSource === 'prodia') {
-      // ✅ Prodia AI 재생성 지원 추가
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'prodia',
-        items: [{ heading: heading, prompt: prompt }],
-        regenerate: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Prodia AI 이미지 생성 실패');
-      }
-    } else if (imageSource === 'stability') {
-      const stabilityModel = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'stability',
-        items: [{ heading: heading, prompt }],
-        regenerate: true,
-        model: stabilityModel,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Stability AI 이미지 생성 실패');
-      }
-    } else if (imageSource === 'deepinfra') {
-      // ✅ [2026-02-19 FIX] DeepInfra 분기 추가 (기존에 else로 빠져 네이버 검색 됨)
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'deepinfra',
-        items: [{ heading: heading, prompt }],
-        regenerate: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'DeepInfra 이미지 생성 실패');
-      }
-    } else if (imageSource === 'falai') {
-      // ✅ [2026-02-19 FIX] Fal.ai 분기 추가 (기존에 else로 빠져 네이버 검색 됨)
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'falai',
-        items: [{ heading: heading, prompt }],
-        regenerate: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Fal.ai 이미지 생성 실패');
-      }
-    } else if (imageSource === 'leonardoai') {
-      // ✅ [2026-02-23] Leonardo AI 재생성 지원 추가
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'leonardoai',
-        items: [{ heading: heading, prompt }],
-        regenerate: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'Leonardo AI 이미지 생성 실패');
-      }
-    } else if (imageSource === 'openai-image') {
-      // ✅ [2026-02-23] OpenAI DALL-E 재생성 지원 추가
-      const imageResult = await generateImagesWithCostSafety({
-        provider: 'openai-image',
-        items: [{ heading: heading, prompt }],
-        regenerate: true,
-      });
-      if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
-        newImageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
-      } else {
-        throw new Error(imageResult.message || 'DALL-E 이미지 생성 실패');
-      }
-    } else {
-      newImageUrl = await searchNaverImage(prompt);
-    }
+    appendLog(`🔄 "${heading}" 이미지 재생성 중 (${readSelectedImageSource() || '엔진 미선택'})...`, 'images-log-output');
+    const regenerated = await regenerateWithSelectedEngine(heading, prompt);
+    const newImageUrl = regenerated.url;
 
     // 새 이미지로 업데이트
     const newImage = {
@@ -1031,7 +911,10 @@ async function regenerateSingleImageWithPromptItem(imageIndex: number, prompt: s
             filePath: newImageUrl,
             url: newImageUrl,
             prompt: prompt,
-            headingIndex: imageIndex
+            headingIndex: imageIndex,
+            provider: regenerated.image.provider,
+            textRendered: regenerated.image.textRendered,
+            disableTextOverlay: regenerated.image.disableTextOverlay,
           };
         }
         return img;

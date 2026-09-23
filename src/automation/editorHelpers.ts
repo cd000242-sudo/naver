@@ -190,6 +190,7 @@ import {
 } from '../image/tableImageGenerator.js';
 import { extractProsConsWithGemini } from '../image/geminiTableExtractor.js';
 import { resolveThumbnailOverlayText } from '../image/director/thumbnailText.js';
+import { publishOverlayDecision } from '../image/director/thumbnailTextState.js';
 
 // ── insertQuotation ──
 
@@ -1211,10 +1212,13 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         const imageProvider = firstIntroImage?.provider || '';
         const isNanoBanana = imageProvider === 'nano-banana-pro' || imageProvider === 'pollinations';
 
-        const preserveOriginalThumbnail = isShoppingConnectModeGlobal
-          || firstIntroImage?.preserveOriginal === true
-          || firstIntroImage?.disableTextOverlay === true;
-        if (resolved.includeThumbnailText && !isNanoBanana && !preserveOriginalThumbnail) {
+        // [SPEC-NAVER-IMAGE-2026 FINAL §3] One decision from the thumbnail's text state: draw the copy only
+        //   when the image says it has none. Unknown state is left alone (it may carry the generation overlay).
+        const overlayDecision = publishOverlayDecision(firstIntroImage, {
+          includeThumbnailText: resolved.includeThumbnailText === true,
+          shoppingConnect: isShoppingConnectModeGlobal === true,
+        });
+        if (overlayDecision.apply) {
           // ✅ 나노바나나프로 외 엔진: AI 이미지 위에 SVG 텍스트 오버레이 적용
           self.log(`   🎨 AI 생성 썸네일에 SVG 텍스트 오버레이 적용 중... (엔진: ${imageProvider})`);
           try {
@@ -1270,7 +1274,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         } else {
           // ✅ 나노바나나프로: AI가 직접 한글 텍스트 포함 → 그대로 삽입
           // 또는 includeThumbnailText가 비활성화 → 텍스트 없이 삽입
-          self.log(`   📸 서론 이미지 ${introImages.length}개 삽입 중... ${isNanoBanana ? '(나노바나나프로 한글 텍스트 포함)' : '(텍스트 없음)'}`);
+          self.log(`   📸 서론 이미지 ${introImages.length}개 삽입 중... ${isNanoBanana ? '(나노바나나프로 한글 텍스트 포함)' : '(텍스트 없음)'} · 발행 문구: ${overlayDecision.reason}`);
           await self.insertImagesAtCurrentCursor(introImages, page, frame, resolved.affiliateLink);
           thumbnailInsertedInIntro = true;
           introImages.forEach((img: any) => { const p = img?.filePath || img?.url; if (p) usedImagePaths.add(p); });

@@ -381,11 +381,15 @@ function getSequentialImageItemsForMode(items, mode) {
     if (mode !== 'odd-only' && mode !== 'even-only') {
         return items;
     }
-    return items.filter((item, idx) => {
+    // [SPEC-NAVER-IMAGE-2026 FINAL §1] The 1-based heading number counted among section items (the
+    //   thumbnail pseudo-heading is not a section). Before: `originalIndex % 2`, which matched the user's
+    //   heading numbers only when an intro thumbnail sat at index 0 — without one, odd and even swapped.
+    let sectionNumber = 0;
+    return items.filter((item) => {
         if (isAutomationThumbnailItem(item))
             return true;
-        const originalIndex = Number.isFinite(Number(item?.originalIndex)) ? Number(item.originalIndex) : idx;
-        return mode === 'odd-only' ? originalIndex % 2 === 1 : originalIndex % 2 === 0;
+        sectionNumber += 1;
+        return mode === 'odd-only' ? sectionNumber % 2 === 1 : sectionNumber % 2 === 0;
     });
 }
 // [SPEC-STABILITY-2026 R4] Single-flight: the same post must never run two

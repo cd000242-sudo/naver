@@ -56,6 +56,7 @@ import { thumbnailService } from './thumbnailService.js';
 import { AutomationService } from './main/services/AutomationService.js'; // ✅ [2026-01-29 FIX] 중지 체크용
 import * as fs from 'fs/promises';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
+import { withTextInImage } from './image/director/thumbnailTextState.js';
 
 
 // Re-export types for backward compatibility
@@ -261,6 +262,22 @@ function isKoreanTextSupportedEngine(engine: string): boolean {
  * - 쇼핑커넥트 모드: 별도 썸네일 (인덱스 0)
  * - thumbnailTextInclude 설정이 true일 때만 적용
  */
+/**
+ * [SPEC-NAVER-IMAGE-2026 FINAL §3] A text-drawing engine (nano-banana-2/pro, flow) was asked to draw the
+ * copy on a thumbnail whose item allowed text: the copy is in the pixels, so the publish overlay skips it.
+ */
+export function markEngineDrawnThumbnailText(
+  images: GeneratedImage[],
+  provider: string,
+  items?: ReadonlyArray<{ heading?: string; isThumbnail?: boolean; allowText?: boolean }>,
+): GeneratedImage[] {
+  if (!isKoreanTextSupportedEngine(provider) || !Array.isArray(items)) return images;
+  return images.map((img) => {
+    const item = items.find((candidate) => candidate?.heading === img?.heading);
+    return item?.isThumbnail === true && item?.allowText === true ? withTextInImage(img) : img;
+  });
+}
+
 export async function applyKoreanTextOverlayIfNeeded(
   images: GeneratedImage[],
   provider: string,
@@ -271,7 +288,7 @@ export async function applyKoreanTextOverlayIfNeeded(
   // 나노바나나프로는 한글 텍스트 지원 → 오버레이 불필요
   if (isKoreanTextSupportedEngine(provider)) {
     console.log(`[ImageGenerator] 📝 ${provider}는 한글 텍스트 네이티브 지원 → 오버레이 스킵`);
-    return images;
+    return markEngineDrawnThumbnailText(images, provider, items);
   }
 
   // thumbnailTextInclude가 false면 오버레이 불필요
@@ -318,8 +335,11 @@ export async function applyKoreanTextOverlayIfNeeded(
 
         // previewDataUrl 업데이트
         const overlaidBuffer = await fs.readFile(outputPath);
-        const updatedImg = { ...img };
-        updatedImg.previewDataUrl = `data:image/png;base64,${overlaidBuffer.toString('base64')}`;
+        // [SPEC-NAVER-IMAGE-2026 FINAL §3] The copy is now in the pixels — the publish overlay must skip.
+        const updatedImg = withTextInImage({
+          ...img,
+          previewDataUrl: `data:image/png;base64,${overlaidBuffer.toString('base64')}`,
+        });
 
         result.push(updatedImg);
         console.log(`[ImageGenerator] ✅ 썸네일 텍스트 오버레이 완료!`);
@@ -928,7 +948,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         shouldForceSequentialImages,
       );
       console.log(`[이미지생성] ✅ ${modelLabel} ${nanoBananaImages.length}개 이미지 생성 완료!`);
-      return finalizeImages(annotateEngineTrace(nanoBananaImages, {
+      return finalizeImages(annotateEngineTrace(markEngineDrawnThumbnailText(nanoBananaImages, normalizedProvider, items), {
         requestedProvider,
         actualProvider: normalizedProvider,
         policy: fallbackPolicy,

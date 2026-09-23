@@ -1234,6 +1234,10 @@ async function executeFullAutoFlow(formData) {
                             allowText: false,
                             originalIndex: slot.originalIndex,
                             diversityIndex: slot.originalIndex,
+                            // [SPEC-NAVER-IMAGE-2026 FINAL §1] The heading's place in the article: main's
+                            //   odd/even filter numbers it from here (heading 1 = odd), not from its position
+                            //   in this request.
+                            sectionIndex: slot.originalIndex,
                         };
                     });
                     if (fullAutoBodyItems.length === 0 && dedicatedThumbnailImage) {
@@ -1260,6 +1264,14 @@ async function executeFullAutoFlow(formData) {
                         collectedImages: isShoppingAiMode ? collectedImgs : undefined,
                         imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoBodyImageTimeoutMs(currentProvider, fullAutoBodyItems.length)),
                     });
+                    if (imageResult?.success && imageResult.filteredByMode === true
+                        && (!Array.isArray(imageResult.images) || imageResult.images.length === 0)) {
+                        // FINAL §1: the heading-image mode leaves every body heading out — not a failure.
+                        finalImages = dedicatedThumbnailImage ? [dedicatedThumbnailImage] : [];
+                        imageGenSuccess = true;
+                        appendLog('🖼️ 소제목 이미지 설정에 따라 본문 이미지 없이 진행합니다.');
+                        break;
+                    }
                     if (imageResult?.success && imageResult.images && imageResult.images.length > 0) {
                         const normalizedBodyImages = imageResult.images.map((img, index) => normalizeFullAutoImageForPipeline({
                             ...img,
@@ -3160,6 +3172,8 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
                 referenceImageUrl: representativeImageUrl,
                 referenceImageList: [representativeImageUrl],
                 originalIndex: headingSlot.originalIndex,
+                // FINAL §1: already chosen by the 1-based shopping rule; main's filter then agrees with it.
+                sectionIndex: headingSlot.originalIndex,
             });
         }
 
@@ -3242,6 +3256,14 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
             else {
                 ref = await resolveReferenceImageForHeadingAsync(String(heading.title || heading || '').trim());
             }
+            // [SPEC-NAVER-IMAGE-2026 FINAL §1] The heading's place in the article (not `i`, which counts
+            //   only the headings passed in) — main's odd/even filter numbers it from here.
+            const sectionIndex = (() => {
+                const byRef = imageContextHeadings.indexOf(heading);
+                if (byRef >= 0) return byRef;
+                const title = String(heading?.title || heading || '').trim();
+                return imageContextHeadings.findIndex((h) => String(h?.title || h || '').trim() === title);
+            })();
             const imageResult = await generateImagesWithCostSafety({
                 provider: imageSource,
                 imageModel,
@@ -3254,6 +3276,7 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
                         articleContext: imageArticleContext,
                         sectionContent,
                         diversityIndex: i,
+                        ...(sectionIndex >= 0 ? { sectionIndex } : {}),
                         isThumbnail: false,
                         allowText: false,
                         imageStyle: imageStyle,
@@ -3275,6 +3298,11 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
             const currentProgress = progressStart + ((progressEnd - progressStart) * (completedCount / headings.length));
             showUnifiedProgress(Math.round(currentProgress), `이미지 생성 중... (${completedCount}/${headings.length})`, `\"${heading.title}\" 이미지 생성 완료`);
             console.log(`[AI Images] ${i + 1}/${headings.length} - 결과:`, imageResult.success ? '성공' : '실패');
+            if (imageResult.success && imageResult.filteredByMode === true
+                && (!Array.isArray(imageResult.images) || imageResult.images.length === 0)) {
+                appendLog(`⏭️ [${i + 1}/${headings.length}] "${String(headingTitle).substring(0, 20)}" — 소제목 이미지 설정(홀수/짝수)에 따라 이미지 없음`);
+                return [];
+            }
             if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
                 appendLog(`✅ [${i + 1}/${headings.length}] "${String(headingTitle).substring(0, 20)}" 이미지 생성 완료!`);
                 return imageResult.images.map((img) => ({ ...img, isThumbnail: false }));

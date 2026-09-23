@@ -172,8 +172,10 @@ export interface GeneratedImage {
   fallbackUsed?: boolean;
   fallbackReason?: string;
   imageFallbackPolicy?: ImageFallbackPolicy;
-  /** [SPEC-NAVER-IMAGE-2026] Text is already baked in (number card) — publish must not overlay the title. */
+  /** [SPEC-NAVER-IMAGE-2026] Publish must not overlay copy: it is already in the image, or none is wanted. */
   disableTextOverlay?: boolean;
+  /** [SPEC-NAVER-IMAGE-2026 FINAL §3] true when the final copy is in the pixels (director/thumbnailTextState). */
+  textRendered?: boolean;
   /** [SPEC-NAVER-IMAGE-2026] Composed from a real photo the user placed — never AI-marked. */
   isCollected?: boolean;
   /** [SPEC-NAVER-IMAGE-2026] One-line hint for the user (e.g. put real photos in first). */
