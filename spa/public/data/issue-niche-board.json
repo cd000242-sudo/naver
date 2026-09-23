@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-22T21:33:14.463Z",
+  "publishedAt": "2026-09-23T03:38:30.125Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 17,
-    "candidates": 168,
-    "niche": 0,
-    "preemption": 12,
+    "issues": 18,
+    "candidates": 202,
+    "niche": 1,
+    "preemption": 9,
     "pending": 0
   },
   "freeSample": {
@@ -18,6 +18,175 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "e스포츠 김건우",
+      "issue": "김건우",
+      "topic": "김건우",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "2026 아시안게임 e스포츠 국가대표 선발 논란 총정리｜LoL 6인 명단과 선발 기준",
+          "2026 아시안게임 e스포츠 선수 명단 및 종목",
+          "2026 아시안게임 e스포츠 병역혜택, 출전 종목, 누가 받을 수 있을까?",
+          "한화생명 e스포츠 MSI 우승 5인 멤버 프로필, 제우스 구마유시 카나비",
+          "2026 아시안게임 롤 일정 및 대한민국 국가대표 명단 총정리! 페이커·제우스·구마유시 출전",
+          "[스포츠]9월 E스포츠 이슈 총정리 — LCK 결승 D-4, 아시안게임 D-14, 그리고 뉴욕 롤드컵(26.09.09)",
+          "2026 아시안게임 E스포츠 경기일정 총정리｜페이커 롤 일정·철권 무릎 경기일정, 배틀그라운드 경기일정, 대한민국 국가대표 36명 명단은?",
+          "아이치-나고야 아시안게임(2026) e스포츠 일정 종목 대표팀 명단 중계 정보 가이드",
+          "2026 아이치·나고야 아시안게임 e스포츠｜페이커 2연패 도전과 롤 대표팀 우승 전망",
+          "2026 아시안게임 페이커 출전 일정 이슈"
+        ],
+        "measuredAt": "2026-09-23T03:35:10.819Z"
+      },
+      "documentCount": 2280,
+      "documentCountMeasured": true,
+      "searchVolume": 350,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.3842367211258981,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 350",
+        "문서수 2,280",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 350 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.4배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쇼트트랙 출신 김건우 은퇴 3개월 만에 28세 사망",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "e스포츠 김건우 은퇴 3개월 만에 향년 28세 비보",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "e스포츠 김건우 쇼트트랙 선수랑 이름이 같아서 한참 헷갈렸네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "쇼트트랙 김건우",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "쇼트트랙 김건우",
+          "searchVolume": 30,
+          "documentCount": 1488,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          12,
+          17,
+          13,
+          20,
+          18,
+          25,
+          31,
+          52,
+          63,
+          100,
+          41,
+          27
+        ]
+      },
+      "kinCount": 18,
+      "kinTop": [
+        {
+          "title": "한화생명 e스포츠 선수들",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=51002&docId=494426383&answerNo=2",
+          "views": 165,
+          "answers": 2
+        },
+        {
+          "title": "아시안게임 e스포츠 대표, 팬들이 기대하는 선수는 누구인가....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100602&docId=493479997&answerNo=1",
+          "views": 158,
+          "answers": 1
+        },
+        {
+          "title": "아시안게임 e스포츠 후보 발표, 응원할 선수는 누구인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100602&docId=493479985&answerNo=1",
+          "views": 74,
+          "answers": 1
+        },
+        {
+          "title": "제카 김건우 선수의 성장 스토리, 다른 선수들에게도 영감을....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=210&docId=495027293&answerNo=0",
+          "views": 22,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-23T03:33:48.423Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    },
     {
       "keyword": "노타 주식",
       "issue": "노타",
@@ -153,36 +322,36 @@
       "trend": {
         "series": [
           57,
-          80,
-          65,
-          64,
-          68,
+          46,
+          46,
+          48,
+          4,
+          0,
+          61,
+          52,
+          46,
+          46,
+          53,
           6,
           0,
-          85,
-          73,
-          64,
-          64,
-          74,
-          9,
+          66,
+          61,
+          46,
+          36,
+          33,
+          6,
           0,
-          93,
-          85,
-          65,
+          61,
+          71,
+          44,
+          43,
+          43,
+          0,
+          0,
           51,
-          47,
-          9,
-          0,
-          86,
-          100,
-          62,
-          60,
-          60,
-          0,
-          0,
-          72
+          100
         ],
-        "measuredAt": "2026-09-22T21:33:15.006Z"
+        "measuredAt": "2026-09-23T03:38:30.848Z"
       },
       "kinCount": 9,
       "kinTop": [
@@ -298,7 +467,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          41,
           48,
           59,
           67,
@@ -326,11 +494,12 @@
           100,
           22,
           22,
-          26
+          26,
+          85
         ],
         "label": "❄️ 시즌성",
         "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-09-22T21:33:15.006Z"
+        "measuredAt": "2026-09-23T03:38:30.848Z"
       },
       "kinCount": 0,
       "kinTop": [],
@@ -439,7 +608,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          58,
           62,
           49,
           49,
@@ -467,11 +635,12 @@
           47,
           62,
           44,
-          58
+          58,
+          31
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-22T21:33:15.006Z"
+        "measuredAt": "2026-09-23T03:38:30.848Z"
       },
       "kinCount": 27,
       "kinTop": [],
@@ -489,6 +658,684 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "바이트플러스 드라매직",
+      "issue": "드라매직",
+      "topic": "드라매직",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 4,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 4",
+        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "바이트플러스가 대본만 넣으면 숏드라마 만드는 AI 드라매직 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "바이트플러스 드라매직, 대본만 넣으면 숏드라마 나오는 원리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "바이트플러스 드라매직 AI로 대본만 넣었더니 숏드라마가 이렇게 나오더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "바이트플러스 AI",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "바이트플러스 AI",
+          "searchVolume": 10,
+          "documentCount": 5322,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-23T03:33:48.423Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "미모 V2.6 성능",
+      "issue": "미모-V2.6",
+      "topic": "미모-V2.6",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 5,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 5",
+        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "샤오미가 오픈 모델 미모-V2.6 공개, 중국 AI 역대 최고 성적",
+        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "미모 V2.6 성능 중국 AI 역대 최고 성적 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "미모 V2.6 성능만 보다가 샤오미 훈련 생중계에서 눈을 못 뗐네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-23T03:33:48.423Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "미모-V2.6",
+      "issue": "미모-V2.6",
+      "topic": "미모-V2.6",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 6,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 6",
+        "선점 후보 — 경쟁 문서 6건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": {
+        "text": "샤오미가 오픈 모델 미모-V2.6 공개, 중국 AI 역대 최고 성적",
+        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "미모-V2.6 중국 AI 중 역대 최고 성적 벤치마크 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "미모-V2.6 훈련을 생중계로 봤는데 성적이 의외였습니다",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-23T03:33:48.423Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김민국 리센느",
+      "issue": "김민국",
+      "topic": "김민국",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 118,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 118",
+        "선점 후보 — 경쟁 문서 118건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "김성주 아들 김민국이 리센느 원이 결혼 언급에 SNS 폭주",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김민국 리센느 원이 결혼 발언에 망나니 언급까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김민국이 리센느 원이 결혼 얘기에 망나니 되겠다던 게 이런 뜻이었네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "리센느 원이",
+          "searchVolume": 190000,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "리센느 원이",
+          "searchVolume": 190000,
+          "documentCount": 23100,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-23T03:33:48.423Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "최병광 경보 동메달",
+      "issue": "최병광 경보 동메달",
+      "topic": "최병광 경보 동메달",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 116,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 116",
+        "선점 후보 — 경쟁 문서 116건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "육상 최병광 4번째 도전 만에 남자 하프마라톤경보 동메달",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "최병광 경보 동메달 4번째 도전 만에 딴 하프마라톤 결과",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "최병광 경보 동메달 딴 뒤에 프로필까지 다시 들여다보게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "최병광 프로필",
+          "searchVolume": 60,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "최병광 프로필",
+          "searchVolume": 60,
+          "documentCount": 47,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-23T03:33:48.423Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김건우 빈소",
+      "issue": "김건우",
+      "topic": "김건우",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "조문 정보",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 127,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 127",
+        "선점 후보 — 경쟁 문서 127건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 조문 정보"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "쇼트트랙 출신 김건우 은퇴 3개월 만에 28세 사망",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김건우 빈소 향년 28세 은퇴 3개월 만에 비보",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김건우 빈소 소식에 쇼트트랙 시절 기록부터 다시 찾아봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김건우 나이",
+          "searchVolume": 250,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김건우 쇼트트랙",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김건우 나이",
+          "searchVolume": 250,
+          "documentCount": 6445,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김건우 쇼트트랙",
+          "searchVolume": 30,
+          "documentCount": 1485,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-23T03:33:48.423Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "드라매직 사용법",
+      "issue": "드라매직",
+      "topic": "드라매직",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "이용 방법",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 264,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 264",
+        "선점 후보 — 경쟁 문서 264건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 이용 방법"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "바이트플러스가 대본만 넣으면 숏드라마 만드는 AI 드라매직 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "드라매직 사용법 대본 넣고 숏드라마 뽑는 순서",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "드라매직 사용법 찾다가 대본 넣는 데서 다들 한 번씩 멈추더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 110,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-23T03:33:48.423Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "에포크 AI 벤치마크",
+      "issue": "에포크 AI",
+      "topic": "에포크 AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 285,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 285",
+        "선점 후보 — 경쟁 문서 285건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "에포크 AI가 AI 벤치마크 15개 중 9개 결함 검증",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "에포크 AI 벤치마크 15개 검증, 9개서 결함 나온 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "에포크 AI 벤치마크 순위 믿고 골랐는데 다시 돌려보게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "AI 벤치마크",
+          "searchVolume": 120,
+          "frame": "generic"
+        },
+        {
+          "keyword": "에포크 AI",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "AI 벤치마크 순위",
+          "searchVolume": 20,
+          "frame": "recommend"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "AI 벤치마크",
+          "searchVolume": 120,
+          "documentCount": 93021,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "에포크 AI",
+          "searchVolume": 40,
+          "documentCount": 4166,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "AI 벤치마크 순위",
+          "searchVolume": 20,
+          "documentCount": 13257,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "LLM 벤치마크",
+          "searchVolume": 20,
+          "documentCount": 16993,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-23T03:33:48.423Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "드라매직 기능",
+      "issue": "드라매직",
+      "topic": "드라매직",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 257,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 257",
+        "선점 후보 — 경쟁 문서 257건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "바이트플러스가 대본만 넣으면 숏드라마 만드는 AI 드라매직 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "드라매직 기능 대본만 넣으면 숏드라마 어디까지 되나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "드라매직 기능 대본만 넣으면 숏드라마 어디까지 되나 직접 써봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 22,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-23T03:33:48.423Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "김우민 어깨 부상",
       "issue": "김우민 어깨 부상",
@@ -617,131 +1464,8 @@
       "monetize": null,
       "measuredAt": "2026-09-22T21:27:27.032Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "바이트플러스 드라매직",
-      "issue": "드라매직",
-      "topic": "드라매직",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "바이트플러스가 대본만 넣으면 숏드라마를 제작하는 AI 드라매직을 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "바이트플러스 드라매직 대본 하나로 숏드라마 어디까지 되나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "바이트플러스 드라매직 대본만 넣으면 숏드라마 된다는데 생각보다 손이 가더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T21:27:27.032Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "미모-V2.6",
-      "issue": "미모-V2.6",
-      "topic": "미모-V2.6",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 5,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 5",
-        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "샤오미가 오픈 모델 미모-V2.6을 공개하며 중국 AI 중 역대 최고 성적을 냈다",
-        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "미모-V2.6 중국 AI 최고 성적, 훈련 생중계 50억 투입",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "미모-V2.6 훈련 생중계에서 50억이 일주일 만에 이렇게 쓰이더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T21:27:27.032Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "미모 V2.6",
@@ -803,7 +1527,8 @@
       "monetize": null,
       "measuredAt": "2026-09-22T21:27:27.032Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이소영 임명안 승인",
@@ -916,7 +1641,8 @@
       "monetize": null,
       "measuredAt": "2026-09-22T21:27:27.032Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오픈ai 쳇got 비교",
@@ -1024,7 +1750,8 @@
       "monetize": null,
       "measuredAt": "2026-09-22T21:27:27.032Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "성영탁 역투",
@@ -1125,7 +1852,8 @@
       "monetize": null,
       "measuredAt": "2026-09-22T21:27:27.032Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "드라매직 AI",
@@ -1187,7 +1915,8 @@
       "monetize": null,
       "measuredAt": "2026-09-22T21:27:27.032Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "amd 커옵 방법",
@@ -1289,7 +2018,8 @@
       "monetize": null,
       "measuredAt": "2026-09-22T21:27:27.032Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "송세라 금빛 개인전",
@@ -1414,170 +2144,8 @@
       "monetize": null,
       "measuredAt": "2026-09-22T21:27:27.032Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "드라매직 사용법",
-      "issue": "드라매직",
-      "topic": "드라매직",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "제작 방법 궁금",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 263,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 263",
-        "선점 후보 — 경쟁 문서 263건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 제작 방법 궁금"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "바이트플러스가 대본만 넣으면 숏드라마를 제작하는 AI 드라매직을 공개했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "드라매직 사용법 대본 넣고 숏드라마 만드는 순서",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "드라매직 사용법 대본만 넣으면 숏드라마 된다는데 여기서 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 110,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T21:27:27.032Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "에포크 AI 벤치마크",
-      "issue": "에포크 AI",
-      "topic": "에포크 AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 283,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 283",
-        "선점 후보 — 경쟁 문서 283건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "에포크 AI가 AI 벤치마크 검증서 15개 중 9개의 결함을 발견했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "에포크 AI 벤치마크 검증 결과 15개 중 9개 결함",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "에포크 AI 벤치마크 순위 보다가 뭔가 이상해서 처음부터 다시 세봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "AI 벤치마크 비교",
-          "searchVolume": 100,
-          "frame": "compare"
-        },
-        {
-          "keyword": "에포크 AI",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "AI 벤치마크 순위",
-          "searchVolume": 20,
-          "frame": "recommend"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "AI 벤치마크 비교",
-          "searchVolume": 100,
-          "documentCount": 46187,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "에포크 AI",
-          "searchVolume": 40,
-          "documentCount": 4163,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "AI 벤치마크 순위",
-          "searchVolume": 20,
-          "documentCount": 13229,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T21:27:27.032Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "타자 몇타",
@@ -3831,612 +4399,269 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "오케스트로 주가",
-      "issue": "오케스트로",
-      "topic": "오케스트로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 137,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 137",
-        "선점 후보 — 경쟁 문서 137건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-21T03:24:30.229Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오케스트로 상장",
-      "issue": "오케스트로",
-      "topic": "오케스트로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 251,
-      "documentCountMeasured": true,
-      "searchVolume": 40,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 40",
-        "문서수 251",
-        "선점 후보 — 경쟁 문서 251건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-21T03:24:30.229Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오케스트로 opus",
-      "issue": "오케스트로",
-      "topic": "오케스트로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 19,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 19",
-        "선점 후보 — 경쟁 문서 19건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-21T03:24:30.229Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오케스트로 블라인드",
-      "issue": "오케스트로",
-      "topic": "오케스트로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 19,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 19",
-        "선점 후보 — 경쟁 문서 19건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-21T03:24:30.229Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오케스트로 agi",
-      "issue": "오케스트로",
-      "topic": "오케스트로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 55,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 55",
-        "선점 후보 — 경쟁 문서 55건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-21T03:24:30.229Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오케스트로 사옥",
-      "issue": "오케스트로",
-      "topic": "오케스트로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 72,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 72",
-        "선점 후보 — 경쟁 문서 72건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-21T03:24:30.229Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "카카오모빌리티 기브셔틀",
-      "issue": "카카오모빌리티",
-      "topic": "카카오모빌리티",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 77,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 77",
-        "선점 후보 — 경쟁 문서 77건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-21T03:24:30.229Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오케스트로 콘트라베이스",
-      "issue": "오케스트로",
-      "topic": "오케스트로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 192,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 192",
-        "선점 후보 — 경쟁 문서 192건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-21T03:24:30.229Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "과기부 공무직",
-      "issue": "과기부",
-      "topic": "과기부",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 250,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 250",
-        "선점 후보 — 경쟁 문서 250건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-21T03:24:30.229Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "트럼프 이란과 결정할",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "트럼프가 유엔연설서 이란에 합의냐 전멸이냐 결정을 촉구하고 선거 후 합의를 전망했다",
-      "headlines": [
-        {
-          "title": "트럼프 \"이란과 합의냐 전멸이냐 결정해야…중간선거뒤 합의할 것\"(종합...",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-22T16:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016331185?sid=104"
-        },
-        {
-          "title": "미·이란 유엔총회서 '깜짝 회담'...트럼프 \"합의냐, 전멸이냐 선택해야...",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-09-22T20:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002410420?sid=104"
-        },
-        {
-          "title": "트럼프 \"이란과 '합의 vs 전멸' 결정 남아…선거 후 합의할 것\"(종합)",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-22T15:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009187582?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "이재명 대통령 유엔",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "이재명 대통령이 유엔총회 기조연설서 한반도 평화·종전 구상을 밝혔다",
-      "headlines": [
-        {
-          "title": "이 대통령, 유엔 총회 기조연설...한반도 구상 주목",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-09-22T20:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002410416?sid=100"
-        },
-        {
-          "title": "李 대통령 “호주 협력 덕에 韓 에너지 시장 안정적”",
-          "press": "segye.com",
-          "publishedAt": "2026-09-22T20:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004161234?sid=100"
-        },
-        {
-          "title": "[전문]李대통령 유엔연설 “한반도 ‘포용·안정·책임’ 평화공존” 제...",
-          "press": "sedaily.com",
-          "publishedAt": "2026-09-22T20:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004664757?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "일본 오쿠하라",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "안세영·일본 배드민턴 준결승을 앞두고 오쿠하라가 등판해 결승을 노린다",
-      "headlines": [
-        {
-          "title": "'前 세계 1위' 日 오쿠하라, 안세영 막아세우나…\"이번이 마지막 아시안...",
-          "press": "xportsnews.com",
-          "publishedAt": "2026-09-22T19:30:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/311/0002060479"
-        },
-        {
-          "title": "안세영에 1승 주고 간다, 일본 '결승 꿈' 공개…\"단식에서 2승 노려야\" ...",
-          "press": "spotvnews.co.kr",
-          "publishedAt": "2026-09-22T15:09:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/477/0000629491"
-        },
-        {
-          "title": "안세영 앞세운 여자 배드민턴, 말레이시아 3-1 제압⋯준결승서 일본과 ...",
-          "press": "etoday.co.kr",
-          "publishedAt": "2026-09-22T08:04:00.000Z",
-          "link": "https://www.etoday.co.kr/news/view/2628735"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "이대역 운행 재개",
+      "issue": "추석 연휴 서비스",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "2호선 이대역 기계실 연기로 무정차 통과 뒤 39분 만에 운행이 재개됐다",
+      "why": "삼성 냉장고 업데이트 후 먹통으로 추석 음식 상할 우려",
       "headlines": [
         {
-          "title": "2호선 이대역 화재로 인한 무정차 통과 종료…정상 운행 재개",
-          "press": "segye.com",
-          "publishedAt": "2026-09-22T14:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004161201?sid=102"
+          "title": "\"추석음식 다 녹는다\"...삼성, 냉장고 '먹통'에 \"불편 최소화\"",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-23T01:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005417817?sid=101"
         },
         {
-          "title": "'기계실 연기 발생' 2호선 이대역 정상 운행 재개…\"인명 피해 없어\"(종...",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-22T13:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009187558?sid=102"
+          "title": "“추석 전날 이게 무슨 일” 삼성 냉장고 ‘먹통’ 사태…“다 상하게 ...",
+          "press": "biz.heraldcorp.com",
+          "publishedAt": "2026-09-23T02:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/016/0002701388?sid=101"
         },
         {
-          "title": "2호선 이대역 화재로 인한 무정차 통과 종료…정상 운행 재개(종합2보)",
+          "title": "LGU+, 추석 연휴 맞춤 혜택…로밍부터 집콕까지",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-22T13:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016331148?sid=102"
+          "publishedAt": "2026-09-23T00:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016331613?sid=103"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "아시안게임 중계 결방",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "아시안게임 중계로 예능·드라마 다수 결방",
+      "headlines": [
+        {
+          "title": "유재석, 데뷔 첫 '녹화 취소'한 날..‘틈만나면’도 결방 “아시안게임...",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-09-22T13:46:00.000Z",
+          "link": "https://m.entertain.naver.com/article/109/0005611237"
+        },
+        {
+          "title": "'너 말고 다른 연애' 이번 주 결방⋯1~4회 몰아보기 편성 언제?",
+          "press": "etoday.co.kr",
+          "publishedAt": "2026-09-23T00:16:00.000Z",
+          "link": "https://www.etoday.co.kr/news/view/2628925"
+        },
+        {
+          "title": "서강준♥안은진, 이번 주 못 본다…'너다연' 26·27일 결방, 비하인드 공...",
+          "press": "xportsnews.com",
+          "publishedAt": "2026-09-23T00:50:00.000Z",
+          "link": "https://m.entertain.naver.com/article/311/0002060546"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김건우",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "쇼트트랙 출신 김건우 은퇴 3개월 만에 28세 사망",
+      "headlines": [
+        {
+          "title": "쇼트트랙 김건우, 은퇴 3개월 만에 사망…향년 28세",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-23T00:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005335520?sid=102"
+        },
+        {
+          "title": "쇼트트랙 국대출신 김건우, 향년 28세로 사망…은퇴 3개월만",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-23T02:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001970477?sid=102"
+        },
+        {
+          "title": "쇼트트랙 국가대표 출신 김건우 사망…은퇴 3개월 만에 비보",
+          "press": "fnnews.com",
+          "publishedAt": "2026-09-23T02:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005580259?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "이대역",
+          "keyword": "ssg 김건우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김건우 보디빌더",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알디원 김건우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "e스포츠 김건우",
+          "searchVolume": 350,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김건우 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김건우 배우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김건우 알디원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김건우 논란",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "김건우 사망원인",
+          "reason": "사인 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김건우 빈소",
+          "reason": "조문 정보",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김건우 발인",
+          "reason": "장례 일정",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김건우 경력",
+          "reason": "업적 회고",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 1
+    },
+    {
+      "issue": "정부 원유 중동의존도",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "정부 중동 원유 의존도 2035년까지 50% 이하로 낮춘다",
+      "headlines": [
+        {
+          "title": "중동 원유 의존도 2035년까지 50% 이하로…비축 2천만배럴 확충",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-23T00:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016331603?sid=101"
+        },
+        {
+          "title": "원유 특정지역 의존도 50% 이하로 낮춘다…위기 대비태세 구축",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T00:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014209761?sid=101"
+        },
+        {
+          "title": "“2035년 중동산 원유 의존도 50% 이하로”…정부, 비축유 2천만배럴 확...",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-23T02:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005739441?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "열대저압부",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "괌 인근 열대저압부가 제26호 태풍 수리개로 발달 전망",
+      "headlines": [
+        {
+          "title": "추석 하루 전 태풍 '수리개' 발달 전망…한반도 영향은",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-23T00:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006374807?sid=103"
+        },
+        {
+          "title": "[태풍경로]\"또 태풍 올라온다\"…제54호 열대저압부, 28일 대만 인근서 '...",
+          "press": "namdonews.com",
+          "publishedAt": "2026-09-22T23:34:00.000Z",
+          "link": "https://www.namdonews.com/news/articleView.html?idxno=924314"
+        },
+        {
+          "title": "26호 태풍 수리개 예상경로…현재 위치는",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-09-22T21:52:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202609230011"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "태풍 열대저압부",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "53호 열대저압부",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열대 저압부 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열대저압부 예보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열대저압부 정보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열대 저압부 태풍",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열대저압부 보는법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "열대저압부 소멸",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -4445,34 +4670,770 @@
       "rowCount": 0
     },
     {
-      "issue": "KF-21 1호기 공군",
+      "issue": "ADB 한국 성장률",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": false,
-      "why": "국산 4.5세대 전투기 KF-21 양산 1호기가 공군에 인도돼 예천기지에 배치됐다",
+      "isHot": true,
+      "why": "ADB 올해 한국 성장률 전망치 2.6%에서 3.2%로 상향",
       "headlines": [
         {
-          "title": "KF-21 1호기 \"신고합니다\" 공군 첫 도입…예천기지에 새 둥지",
+          "title": "ADB, 올해 韓 성장률 3.2%로 상향…“AI 반도체 수출 호조”",
+          "press": "sedaily.com",
+          "publishedAt": "2026-09-23T00:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004664836?sid=101"
+        },
+        {
+          "title": "ADB, 올해 韓성장률 3.2%로 상향…AI 반도체 수출·내수 회복 반영",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-09-23T00:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004192341?sid=101"
+        },
+        {
+          "title": "ADB, 올해 한국 성장률 전망치 3.2%로 상향…내년 2.3%",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-22T09:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016330695?sid=100"
-        },
-        {
-          "title": "공군, KF-21 시대 열렸다…양산 1호기 예천기지 배치",
-          "press": "donga.com",
-          "publishedAt": "2026-09-22T11:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003750159?sid=100"
-        },
-        {
-          "title": "KF-21 첫 양산기 공군 인도…2030년 초반까지 100대 이상 도입",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-22T10:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014209002?sid=100"
+          "publishedAt": "2026-09-23T00:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016331481?sid=101"
         }
       ],
       "concentrated": [],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI GPT-6",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "오픈AI가 GPT-6 솔·루나 출시, 성능 높이고 가격 절반",
+      "headlines": [
+        {
+          "title": "앤트로픽·오픈AI \"속도조절\" 외치더니 가성비 AI 출시 경쟁",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T01:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014210064?sid=105"
+        },
+        {
+          "title": "오픈AI, GPT-6 솔·루나 출시…성능 높이고 가격은 절반",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-23T01:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009188326?sid=105"
+        },
+        {
+          "title": "[AI는 지금] 오픈AI, 'GPT-6 솔·루나' 출시…\"아스트라 강점 확장\"",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-23T00:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002438584?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈AI GPT-6 아스트라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "GPT",
+          "searchVolume": 352800,
+          "origin": "related"
+        },
+        {
+          "keyword": "AI",
+          "searchVolume": 151700,
+          "origin": "related"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "최병광 경보 동메달",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "육상 최병광 4번째 도전 만에 남자 하프마라톤경보 동메달",
+      "headlines": [
+        {
+          "title": "[아시안게임] 육상 최병광, 남자 하프마라톤경보 동메달",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-23T01:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016331747?sid=104"
+        },
+        {
+          "title": "최병광, 남자 하프마라톤 경보 동메달…女이세하는 5위[나고야AG]",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T00:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014209805?sid=104"
+        },
+        {
+          "title": "‘4수’ 만에 이룬 메달… 육상 첫날 男경보 최병광 동메달 수확",
+          "press": "chosun.com",
+          "publishedAt": "2026-09-23T01:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004000064?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김민국",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "김성주 아들 김민국이 리센느 원이 결혼 언급에 SNS 폭주",
+      "headlines": [
+        {
+          "title": "김성주 아들 김민국 \"아버지 덕에 국민 망나니 됐다\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T02:43:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014210376"
+        },
+        {
+          "title": "김민국, 리센느 원이 결혼 발언에 폭주 “망나니가 되겠다”",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-09-23T01:23:00.000Z",
+          "link": "https://m.entertain.naver.com/article/382/0001295497"
+        },
+        {
+          "title": "‘김성주 아들’ 김민국, 리센느 원이 ‘결혼’ 언급에…“식장 알아봐...",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-22T23:42:00.000Z",
+          "link": "https://m.entertain.naver.com/article/009/0005739308"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김성주 김민국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김민국 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김민국 근황",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김민국 군대",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김민국 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김민국 대학",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김민국 이수현",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김민국 인스타",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "리센느 원이",
+          "reason": "상대 인물",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김민국 직업",
+          "reason": "근황 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "김민국 열애",
+          "reason": "연애설 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "최고위원회의 김민석 대표",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "김민석 대표가 대미투자 녹취록 유출을 간첩행위로 규정",
+      "headlines": [
+        {
+          "title": "與 \"대미투자 정부 보고, 불법 녹취·유포…유포자 의원이면 직 내려놔...",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T01:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014209997?sid=100"
+        },
+        {
+          "title": "김민석, 대미투자 녹취록 유출에 “거의 간첩행위…국회 자해”",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-09-23T02:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003683039?sid=100"
+        },
+        {
+          "title": "최고위원회의 참석한 김민석 대표",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-23T00:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016331580?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "알리바바",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "알리바바가 신형 AI칩 젠우 V900 공개하며 엔비디아에 도전",
+      "headlines": [
+        {
+          "title": "알리바바 CEO \"지능도 대량생산 가능한 상품\"",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-09-22T07:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004192143?sid=104"
+        },
+        {
+          "title": "“엔비디아 잘난 척도 끝이다”…알리바바 신형 AI칩 어느 정도길래",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-22T11:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005739240?sid=101"
+        },
+        {
+          "title": "알리바바, 10조 파라미터 AI 개발 추진…데이터센터 20GW로 확대",
+          "press": "etnews.com",
+          "publishedAt": "2026-09-22T10:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003469557?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "알리바바 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알리바바 회장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알리바바 마윈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알리바바 구매대행",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알리바바 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알리바바 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알리바바 하는법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "알리바바 배송조회",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "알리바바 주가",
+          "reason": "증시 반응",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "알리바바 관련주",
+          "reason": "투자 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "오픈AI가 가성비 GPT-6 출시하며 AI 아동 위험 논의도 부상",
+      "headlines": [
+        {
+          "title": "앤트로픽·오픈AI \"속도조절\" 외치더니 가성비 AI 출시 경쟁",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T01:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014210064?sid=105"
+        },
+        {
+          "title": "前구글 안전담당 임원 \"AI, SNS보다 아동에 더 위험\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-22T22:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016331371?sid=104"
+        },
+        {
+          "title": "오픈AI, GPT-6 솔·루나 출시…성능 높이고 가격은 절반",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-23T01:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009188326?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 아스트라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 상장일",
+          "reason": "IPO 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 관련주",
+          "reason": "투자처 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 주가",
+          "reason": "기업가치",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "클로드 오퍼스 5.5",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "앤트로픽이 오퍼스 5.5 출시, AAII 58점으로 가격전 가세",
+      "headlines": [
+        {
+          "title": "앤트로픽·오픈AI \"속도조절\" 외치더니 가성비 AI 출시 경쟁",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T01:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014210064?sid=105"
+        },
+        {
+          "title": "AI속도조절 외친 앤트로픽, 새 모델 ‘클로드 오퍼스 5.5’ 출시…“최...",
+          "press": "dt.co.kr",
+          "publishedAt": "2026-09-22T23:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/029/0003049617?sid=105"
+        },
+        {
+          "title": "앤트로픽, '아스트라' 뛰어넘는 '오퍼스5.5' 선보여…AAII 58점",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-23T01:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009188223?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "미모-V2.6",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "샤오미가 오픈 모델 미모-V2.6 공개, 중국 AI 역대 최고 성적",
+      "headlines": [
+        {
+          "title": "샤오미, 오픈 모델 '미모-V2.6' 공개…중국 AI 중 역대 최고 성적",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-22T10:22:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215552"
+        },
+        {
+          "title": "샤오미, AI 훈련 과정 첫 '생중계'…일주일 만에 50억 투입",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-21T05:52:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215528"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "샤오미",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "샤오미 18 프로 2나노 스냅드래곤·200MP 라이카 세계 첫 탑재",
+      "headlines": [
+        {
+          "title": "스마트폰 앱 가고 에이전틱AI 시대 온다",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-22T22:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002438567?sid=105"
+        },
+        {
+          "title": "[스냅드래곤 서밋] 퍼스트 펭귄 샤오미 \"2나노 스냅드래곤 세계 최초로...",
+          "press": "econovill.com",
+          "publishedAt": "2026-09-22T21:50:00.000Z",
+          "link": "https://www.econovill.com/news/articleView.html?idxno=751642"
+        },
+        {
+          "title": "샤오미 18 프로, 200MP 라이카 카메라 듀얼 카메라 탑재 확인",
+          "press": "kbench.com",
+          "publishedAt": "2026-09-22T06:34:00.000Z",
+          "link": "https://kbench.com/?q=node/282106"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "샤오미 워치",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "샤오미 전기차",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "샤오미 폰",
+          "searchVolume": 4780,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "샤오미 로봇청소기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "샤오미 보조배터리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "샤오미 공기청정기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "샤오미 yu7",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "샤오미 선풍기",
+          "searchVolume": 3810,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "샤오미 18 출시일",
+          "reason": "발매 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "샤오미 18 스펙",
+          "reason": "사양 상세",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "샤오미 18 한국",
+          "reason": "국내 출시",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "에포크 AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "에포크 AI가 AI 벤치마크 15개 중 9개 결함 검증",
+      "headlines": [
+        {
+          "title": "에포크 AI, 벤치마크 검증 착수...\"15개 중 9개 결함\"",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-22T09:32:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215568"
+        },
+        {
+          "title": "AI ‘속도조절론’ 배경엔 최고급 모델 수익성 부담",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-09-21T11:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003471868?sid=101"
+        },
+        {
+          "title": "\"AI가 스스로 후속모델 개발 주도\"…앤트로픽 26% 수준",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-18T01:10:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016319853?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "에포크",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "드라매직",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "바이트플러스가 대본만 넣으면 숏드라마 만드는 AI 드라매직 공개",
+      "headlines": [
+        {
+          "title": "\"대본만 넣으면 숏드라마 제작\"...바이트플러스, AI '드라매직' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-22T09:12:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215569"
+        },
+        {
+          "title": "[Shopping] 인터뷰 / 티에리 드라 투르다테즈 그룹세브 회장",
+          "press": null,
+          "publishedAt": "2003-05-29T08:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0000295422?sid=111"
+        },
+        {
+          "title": "허영생, 일본 팬미팅 ‘헬로우 어게인’ 성료",
+          "press": "tenasia.co.kr",
+          "publishedAt": "2015-09-07T01:05:00.000Z",
+          "link": "https://m.entertain.naver.com/article/312/0000125877"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "드라매직 사용법",
+          "reason": "이용 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "드라매직 한국",
+          "reason": "국내 출시",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "드라매직 요금제",
+          "reason": "이용 비용",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "바이트플러스 AI",
+          "reason": "회사 정보",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "전남광주",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "전남광주통합특별시 출범 후 첫 승진인사 34명 단행",
+      "headlines": [
+        {
+          "title": "전남광주시, 첫 승진인사 단행…'조직 안정 최우선'",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-23T02:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016332070?sid=102"
+        },
+        {
+          "title": "전남광주 2년간 노쇼 사기 피해액 204억원 넘었다",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T01:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014209951?sid=102"
+        },
+        {
+          "title": "전남광주통합특별시 출범 첫 승진인사…이사관급 2급 3명 승진",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-23T01:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009188184?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "전남 광주 가볼만한곳",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 민생지원금",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남 광주 맛집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 축제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 조직개편",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 공연",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "전남광주 남구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "전남광주 시장",
+          "reason": "수장 인물",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "전남광주 청사",
+          "reason": "위치 어디",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "전남광주 조직개편",
+          "reason": "부서 개편",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -4510,7 +5471,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "성영탁",
@@ -4590,7 +5552,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "이소영 임명안 승인",
@@ -4621,7 +5584,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "송세라 금빛 개인전",
@@ -4652,390 +5616,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈AI가 보안 취약점 검증과 10개국 AI 표준 네트워크 제안 등에 나섰다",
-      "headlines": [
-        {
-          "title": "정부, 오픈AI 보안 AI 써보니…찾아낸 취약점 절반 이상 '진짜'",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-22T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014207476?sid=105"
-        },
-        {
-          "title": "오픈AI \"美, AI표준 주도해야\"…韓포함 10개국 네트워크 제안",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-21T22:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016328200?sid=104"
-        },
-        {
-          "title": "메타의 AI 비서, 챗GPT도 제쳐... 주가 11% 급등 ‘위기론’ 날렸다",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-22T08:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0003999908?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 아스트라",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI IPO",
-          "reason": "상장 시점 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "클로드 오퍼스 5.5",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "앤트로픽이 최고 성능·가격 40% 인하한 클로드 오퍼스 5.5를 출시했다",
-      "headlines": [
-        {
-          "title": "속도조절 외치던 앤트로픽·오픈AI, 새 AI모델로 가성비 속도전",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-22T19:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016331229?sid=104"
-        },
-        {
-          "title": "IPO 앞둔 앤스로픽, '가격 전쟁' 끝판왕 클로드 오퍼스 5.5 출시",
-          "press": "fnnews.com",
-          "publishedAt": "2026-09-22T18:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005580005?sid=101"
-        },
-        {
-          "title": "새로운 최고 성능·가격 40% 인하…앤트로픽, '클로드 오퍼스 5.5' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-22T20:38:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215583"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "미모-V2.6",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "샤오미가 오픈 모델 미모-V2.6을 공개하며 중국 AI 중 역대 최고 성적을 냈다",
-      "headlines": [
-        {
-          "title": "샤오미, 오픈 모델 '미모-V2.6' 공개…중국 AI 중 역대 최고 성적",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-22T10:22:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215552"
-        },
-        {
-          "title": "샤오미, AI 훈련 과정 첫 '생중계'…일주일 만에 50억 투입",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-21T05:52:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215528"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "샤오미",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "샤오미 18 프로가 200MP 라이카 카메라 탑재로 11월 한국 출시 가능성이 제기됐다",
-      "headlines": [
-        {
-          "title": "샤오미 18 프로, 200MP 라이카 카메라 듀얼 카메라 탑재 확인",
-          "press": "kbench.com",
-          "publishedAt": "2026-09-22T06:34:00.000Z",
-          "link": "https://kbench.com/?q=node/282106"
-        },
-        {
-          "title": "샤오미, 오픈 모델 '미모-V2.6' 공개…중국 AI 중 역대 최고 성적",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-22T10:22:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215552"
-        },
-        {
-          "title": "샤오미18, 11월 韓 출시 가능성…모토로라도 신제품 출격 채비",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-21T06:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005416801?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "샤오미 워치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "샤오미 전기차",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "샤오미 폰",
-          "searchVolume": 4780,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "샤오미 로봇청소기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "샤오미 보조배터리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "샤오미 yu7",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "샤오미 su7",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "샤오미 선풍기",
-          "searchVolume": 3810,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "에포크 AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "에포크 AI가 AI 벤치마크 검증서 15개 중 9개의 결함을 발견했다",
-      "headlines": [
-        {
-          "title": "에포크 AI, 벤치마크 검증 착수...\"15개 중 9개 결함\"",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-22T09:32:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215568"
-        },
-        {
-          "title": "AI ‘속도조절론’ 배경엔 최고급 모델 수익성 부담",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-09-21T11:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003471868?sid=101"
-        },
-        {
-          "title": "\"AI가 스스로 후속모델 개발 주도\"…앤트로픽 26% 수준",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-18T01:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016319853?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "에포크",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "드라매직",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "바이트플러스가 대본만 넣으면 숏드라마를 제작하는 AI 드라매직을 공개했다",
-      "headlines": [
-        {
-          "title": "\"대본만 넣으면 숏드라마 제작\"...바이트플러스, AI '드라매직' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-22T09:12:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215569"
-        },
-        {
-          "title": "[Shopping] 인터뷰 / 티에리 드라 투르다테즈 그룹세브 회장",
-          "press": null,
-          "publishedAt": "2003-05-29T08:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0000295422?sid=111"
-        },
-        {
-          "title": "허영생, 일본 팬미팅 ‘헬로우 어게인’ 성료",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2015-09-07T01:05:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000125877"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "드라매직 사용법",
-          "reason": "제작 방법 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "드라매직 한국",
-          "reason": "국내 지원 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "드라매직 저작권",
-          "reason": "제작물 권리 논란",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "드라매직 체험",
-          "reason": "무료 이용 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "전남광주",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "전남·광주 통합특별시가 공공기관 22곳을 11곳으로 합치며 60분 도시를 추진한다",
-      "headlines": [
-        {
-          "title": "\"승용차↓ 대중교통↑\" 전남광주 '60분 도시' 밑그림",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-22T07:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014208601?sid=102"
-        },
-        {
-          "title": "삼성전자, 광주 HVAC 생산라인 착공",
-          "press": "segye.com",
-          "publishedAt": "2026-09-21T21:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004160927?sid=101"
-        },
-        {
-          "title": "전남광주특별시, 백승주·윤난실 부시장 인사 청문 착수",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-09-22T07:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/047/0002529968?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "전남광주 민생지원금",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남 광주 가볼만한곳",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남 광주 맛집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 조직개편",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 축제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 통합뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 날씨",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "전남광주 공연",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "AMD",
@@ -5136,7 +5718,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "김건희 매관매직 2심",
