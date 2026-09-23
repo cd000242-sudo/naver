@@ -57,6 +57,7 @@ import { AutomationService } from './main/services/AutomationService.js'; // ✅
 import * as fs from 'fs/promises';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
 import { withTextInImage } from './image/director/thumbnailTextState.js';
+import { drawsKoreanTextItself } from './image/director/koreanTextEngines.js';
 
 
 // Re-export types for backward compatibility
@@ -246,12 +247,13 @@ function shouldApplyThumbnailTextOverlay(
   return img?.isThumbnail === true;
 }
 
+/**
+ * Engines that draw the Korean thumbnail copy themselves, so the app overlays nothing on them
+ * (image/director/koreanTextEngines: nano-banana-2/pro, flow, openai-image, dropshot).
+ * ✅ [v2.10.335] The old 'nano-banana'(2.5) breaks Korean → text-free image + app overlay.
+ */
 function isKoreanTextSupportedEngine(engine: string): boolean {
-  // ✅ [v1.4.80] 'flow' 추가 — Flow는 Nano Banana Pro 기반이라 한글 텍스트 네이티브 지원
-  // ✅ [v2.10.335] 나노바나나2(3.1)/프로(3-pro)는 한글 네이티브 지원. 구버전 'nano-banana'(2.5)는
-  //   한글 텍스트가 깨지므로 제외 → 오버레이 폴백 대상.
-  // dropshot can generate Korean, but thumbnail copy needs deterministic app-side line breaks.
-  return engine === 'nano-banana-2' || engine === 'nano-banana-pro' || engine === 'flow';
+  return drawsKoreanTextItself(engine);
 }
 
 /**
@@ -552,6 +554,12 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       const viewpointIndex = engineRotatesViewpoint(normalizedProvider)
         ? undefined
         : (diversityIndex ?? (generationSourceItems.length > 1 ? idx : undefined));
+      // [SPEC-NAVER-IMAGE-2026 V1 §9] An engine that draws Korean itself gets the short phrase, never the
+      //   whole title — in the brief and on the item (GPT Image renders it from the item). Other engines get
+      //   a text-free image and the app overlays the phrase once.
+      const thumbnailText = item.isThumbnail === true && allowText && isKoreanTextSupportedEngine(normalizedProvider)
+        ? (item.thumbnailText || resolveThumbnailOverlayText(String(options.postTitle || articleTitle || '')))
+        : undefined;
       const visualRole = sectionRoles[idx];
       // Engines that honor the role drop their own angle/colour rotation, so the role owns the camera.
       const engineHonorsRole = Boolean(visualRole) && engineHonorsVisualRole(normalizedProvider);
@@ -582,11 +590,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         engineOwnsCamera: engineRotatesViewpoint(normalizedProvider) && !engineHonorsRole,
         visualRole: briefRole,
         coverDirection: item.isThumbnail === true ? item.coverDirection : undefined,
-        // [SPEC-NAVER-IMAGE-2026 V1 §9] An engine that draws Korean itself gets the short phrase, never the
-        //   whole title. Other engines stay as before: the app overlays the text on them.
-        thumbnailText: item.isThumbnail === true && allowText && isKoreanTextSupportedEngine(normalizedProvider)
-          ? (item.thumbnailText || resolveThumbnailOverlayText(String(options.postTitle || articleTitle || '')))
-          : undefined,
+        thumbnailText,
       });
 
       return {
@@ -600,6 +604,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         visualRole: engineHonorsRole ? visualRole || undefined : undefined,
 
         isThumbnail: item.isThumbnail || false, // ✅ isThumbnail 플래그 전달
+        ...(thumbnailText ? { thumbnailText } : {}),
         allowText, // text is thumbnail-only in auto publish contexts
         englishPrompt: useContextualPrompt ? prompt : item.englishPrompt,
         sourceEnglishPrompt: item.sourceEnglishPrompt || item.englishPrompt,

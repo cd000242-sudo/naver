@@ -110,6 +110,20 @@ describe('guards', () => {
     expect(deps.judge).not.toHaveBeenCalled();
   });
 
+  it('an engine that draws text: the cover asks for the phrase; with no copy decided it stays text-free and may be cropped', async () => {
+    const drawn = makeDeps();
+    const withText = await runThumbnailDirector(makeInput({ engineDrawsText: true }), drawn);
+    expect((drawn.generateBase as any).mock.calls[0][0]).toMatchObject({ allowText: true, thumbnailText: withText!.text.text });
+    expect(withText!.engineDrewText).toBe(true);
+    expect(drawn.composeHook).not.toHaveBeenCalled();
+
+    const plain = makeDeps();
+    const noText = await runThumbnailDirector(makeInput({ engineDrawsText: true, textMode: 'exclude', qualityMode: 'high' }), plain);
+    expect((plain.generateBase as any).mock.calls[0][0]).toMatchObject({ allowText: false });
+    expect(noText!.engineDrewText).toBe(false);
+    expect(noText!.candidates.map((c) => c.kind)).toEqual(['ai-full', 'ai-tight']);
+  });
+
   it('returns null when the AI base is missing (caller reports it as before)', async () => {
     expect(await runThumbnailDirector(makeInput(), makeDeps({ generateBase: vi.fn(async () => null) }))).toBeNull();
   });

@@ -208,10 +208,12 @@ describe('Stage 4 — UI 표면 ↔ 카탈로그 일치 (그리드/드롭다운)
 describe('Stage 6 — 덕테이프 한글 네이티브 텍스트 + 이중 텍스트 차단', () => {
   const openaiCode = read('image/openaiImageGenerator.ts');
 
-  it('네이티브 한글 텍스트는 allowText이면서 썸네일이 아닌 이미지에만 적용된다', () => {
+  it('네이티브 한글 텍스트: allowText 본문 이미지, 그리고 짧은 문구가 지정된 썸네일(2026-09-23 사장님)', () => {
     expect(openaiCode).toMatch(
-      /wantsNativeKoreanText\s*=[\s\S]{0,120}?allowText === true[\s\S]{0,80}?isThumbnail !== true/,
+      /wantsNativeKoreanText\s*=[\s\S]{0,120}?allowText === true[\s\S]{0,80}?isThumbnail !== true\) \|\| wantsThumbnailText/,
     );
+    // the thumbnail renders the short phrase, never the whole title
+    expect(openaiCode).toMatch(/const koreanTextToRender = wantsThumbnailText \? thumbnailPhrase :/);
   });
 
   it('NO_TEXT_PREFIX가 보존된다 (allowText 아닌 본문 이미지는 텍스트 없음 — 회귀 차단)', () => {

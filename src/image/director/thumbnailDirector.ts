@@ -41,7 +41,7 @@ export interface ThumbnailDirectorInput {
   readonly allowBakedText: boolean;
   /** The caller's prompt is the user's own (regeneration or saved manual prompt): keep it. */
   readonly keepPrompt?: boolean;
-  /** The engine draws text itself (nano-banana-2/pro, flow) and the item allows text. */
+  /** The engine draws Korean copy itself (koreanTextEngines: nano-banana-2/pro, flow, GPT Image, dropshot). */
   readonly engineDrawsText: boolean;
   /** Composable real photos (realAssetResolver), existing local files. */
   readonly realImages: readonly string[];
@@ -75,6 +75,8 @@ export interface ThumbnailDirectorResult {
   readonly verdict: ThumbnailJudgeVerdict | null;
   readonly direction: ThumbnailDirection;
   readonly text: ThumbnailTextDecision;
+  /** The engine drew the decided copy itself (koreanTextEngines): the app adds no card and no overlay. */
+  readonly engineDrewText: boolean;
 }
 
 const LOG = '[ThumbnailDirector]';
@@ -215,33 +217,41 @@ export async function runThumbnailDirector(
   const text = decideThumbnailText({
     mode: input.textMode, title: input.title, cardPromise: input.cardPromise, realPhotoCover: realFirst, kind: input.kind,
   });
+  // A real photo gets its copy from the app (no engine is involved).
   const bake = input.allowBakedText && text.include && text.text ? { main: text.text } : null;
+  // [2026-09-23 사장님] An engine that draws Korean well draws the copy itself on the AI cover: no app card,
+  //   no app overlay on top (image/director/koreanTextEngines).
+  const engineDrew = input.engineDrawsText && text.include && Boolean(text.text);
+  const aiBake = engineDrew ? null : bake;
   // Where text cannot be baked, the legacy overlays add it later (short text) — tell the brief/judge.
-  const titleBandPlanned = !input.allowBakedText && text.include;
-  deps.log(`${LOG} 🧭 방향=${direction} · 모드=${input.qualityMode} · 문구=${text.include ? `"${text.text}"` : '없음'}(${text.reason}) · 실제 사진 ${input.realImages.length}장${prefersPair(input, direction) ? '(두 장 나란히)' : ''}`);
+  const titleBandPlanned = !engineDrew && !input.allowBakedText && text.include;
+  deps.log(`${LOG} 🧭 방향=${direction} · 모드=${input.qualityMode} · 문구=${text.include ? `"${text.text}"` : '없음'}(${text.reason})${engineDrew ? ' · 엔진이 직접 그림' : ''} · 실제 사진 ${input.realImages.length}장${prefersPair(input, direction) ? '(두 장 나란히)' : ''}`);
 
   if (realFirst) {
     const real = await collect(realMakers(input, bake, deps, direction));
     if (real.length > 0) {
       const { winner, verdict } = await pick(real, input, titleBandPlanned, deps);
-      return { base: null, winner, candidates: real, verdict, direction, text };
+      return { base: null, winner, candidates: real, verdict, direction, text, engineDrewText: false };
     }
     deps.log(`${LOG} ⚠️ 실제 사진 합성이 모두 실패 — AI 썸네일로 진행`);
   }
 
   const cover = buildCoverItem(input, direction, titleBandPlanned);
-  // An engine that draws its own text renders the decided short phrase, never the title (V1 §9).
-  const drawn = input.engineDrawsText && text.include && text.text ? { ...cover, thumbnailText: text.text } : cover;
+  // A text-drawing engine gets the decided short phrase (never the title) or, with no copy, a text-free
+  // brief; `allowText` follows the director's decision, not the caller's checkbox (V1 §9).
+  const drawn = input.engineDrawsText
+    ? { ...cover, allowText: engineDrew, thumbnailText: engineDrew ? String(text.text) : undefined }
+    : cover;
   const base = await deps.generateBase(drawn);
   if (!base) return null;
   const full: CandidateFile = { kind: 'ai-full', filePath: String(base.filePath || ''), label: 'AI 장면', bakedText: false, real: false };
   // An engine that drew its own text must not be cropped or overprinted.
-  if (!deps.isLocalFile(base.filePath) || input.engineDrawsText || deps.isCancelled?.()) {
-    return { base, winner: full, candidates: [full], verdict: null, direction, text };
+  if (!deps.isLocalFile(base.filePath) || engineDrew || deps.isCancelled?.()) {
+    return { base, winner: full, candidates: [full], verdict: null, direction, text, engineDrewText: engineDrew };
   }
-  const cardMaker: Maker | null = bake
+  const cardMaker: Maker | null = aiBake
     ? async () => {
-      const filePath = await tryCompose(deps, '짧은 문구 카드', () => deps.composeHook(full.filePath, variantPath(full.filePath, 'text'), bake));
+      const filePath = await tryCompose(deps, '짧은 문구 카드', () => deps.composeHook(full.filePath, variantPath(full.filePath, 'text'), aiBake));
       return filePath ? { kind: 'ai-hook', filePath, label: '짧은 문구 카드', bakedText: true, real: false } : null;
     }
     : null;
@@ -254,5 +264,5 @@ export async function runThumbnailDirector(
     : [...(cardMaker ? [cardMaker] : []), async () => full];
   const candidates = await collect(makers);
   const { winner, verdict } = await pick(candidates, input, titleBandPlanned, deps);
-  return { base, winner, candidates, verdict, direction, text };
+  return { base, winner, candidates, verdict, direction, text, engineDrewText: false };
 }

@@ -20,7 +20,8 @@ import { isRealAssetPriorityTopic, resolveRealAssets, summarizeInventory, type A
 import { inferArticleVisualKind } from './sectionRolePlanner.js';
 import { normalizeThumbnailTextMode, resolveThumbnailOverlayText } from './thumbnailText.js';
 import { checkThumbnailPlan } from './imageQualityCheck.js';
-import { withTextNotInImage, withTextNotWanted } from './thumbnailTextState.js';
+import { withTextInImage, withTextNotInImage, withTextNotWanted } from './thumbnailTextState.js';
+import { drawsKoreanTextItself } from './koreanTextEngines.js';
 
 type OnImage = (image: GeneratedImage, index: number, total: number) => void;
 type GenerateFn = (options: GenerateImagesOptions, apiKeys?: any, onImageGenerated?: OnImage) => Promise<GeneratedImage[]>;
@@ -39,7 +40,6 @@ export interface ThumbnailDirectorContext {
 }
 
 const LOG = '[ThumbnailDirector]';
-const NATIVE_TEXT_ENGINES = new Set(['nano-banana-2', 'nano-banana-pro', 'flow']);
 
 /** The lone thumbnail item this call is about, or null to pass straight through. */
 export function resolveThumbnailDirectorTarget(options: GenerateImagesOptions, config?: unknown): ImageRequestItem | null {
@@ -178,7 +178,8 @@ export async function generateImagesWithThumbnailDirector(
     kind,
     allowBakedText: request.allowBakedText === true,
     keepPrompt: request.keepPrompt === true,
-    engineDrawsText: NATIVE_TEXT_ENGINES.has(provider) && item.allowText === true,
+    // The engine draws the copy itself whenever the director decides there is copy (사장님 2026-09-23).
+    engineDrawsText: drawsKoreanTextItself(provider),
     realImages,
     realWorkDir: `${await getImageSaveBasePath()}/thumbnail-candidates`,
   }, {
@@ -201,7 +202,10 @@ export async function generateImagesWithThumbnailDirector(
   if (!result) return [];
 
   let image = toDirectorImage(result, item, provider);
-  if (!result.winner.bakedText) {
+  if (result.engineDrewText) {
+    // [2026-09-23 사장님] The engine drew the copy itself — no app overlay on top of it.
+    image = withTextInImage(image);
+  } else if (!result.winner.bakedText) {
     // Same overlay generateImages would have applied, same conditions (the item's allowText included) —
     // but a short phrase, never the title.
     [image] = await context.applyTitleOverlay(
@@ -217,7 +221,7 @@ export async function generateImagesWithThumbnailDirector(
     : undefined;
   const check = checkThumbnailPlan({
     title,
-    text: result.winner.bakedText ? result.text.text : (options.thumbnailTextInclude === true ? resolveThumbnailOverlayText(title) : null),
+    text: result.winner.bakedText || result.engineDrewText ? result.text.text : (options.thumbnailTextInclude === true ? resolveThumbnailOverlayText(title) : null),
     width: 800,
     height: 800,
     realAssetPriority: realPriority,

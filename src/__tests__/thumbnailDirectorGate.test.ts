@@ -96,11 +96,12 @@ describe('generateImagesWithThumbnailDirector', () => {
     expect(generate).toHaveBeenCalledWith(options, { k: 1 }, onImage);
   });
 
+  // Engines that do not draw Korean themselves (leonardo here) keep the app overlay path.
   it('flows without a text mode keep their checkbox; the overlay gets a short phrase, not the title', async () => {
     const generate = vi.fn(async () => aiResult());
     const applyTitleOverlay = vi.fn(async (images: GeneratedImage[]) => images);
     const images = await generateImagesWithThumbnailDirector(
-      thumbOptions({ thumbnailTextInclude: true, postTitle: '연말정산 미리보기로 13월의 월급 30만원 더 받는 방법' }), {}, undefined,
+      thumbOptions({ provider: 'leonardoai' as any, thumbnailTextInclude: true, postTitle: '연말정산 미리보기로 13월의 월급 30만원 더 받는 방법' }), {}, undefined,
       { config: {}, generate, applyTitleOverlay },
     );
     const sent = (generate.mock.calls[0] as any[])[0] as GenerateImagesOptions;
@@ -145,7 +146,7 @@ describe('generateImagesWithThumbnailDirector', () => {
     const generate = vi.fn(async () => aiResult());
     const applyTitleOverlay = vi.fn(async (images: GeneratedImage[]) => images);
     const images = await generateImagesWithThumbnailDirector(
-      thumbOptions({ thumbnailDirector: { allowBakedText: true, textMode: 'auto', realImages: [] } }), {}, undefined,
+      thumbOptions({ provider: 'leonardoai' as any, thumbnailDirector: { allowBakedText: true, textMode: 'auto', realImages: [] } }), {}, undefined,
       { config: {}, generate, applyTitleOverlay },
     );
     expect(generate).toHaveBeenCalledTimes(1);
@@ -172,6 +173,43 @@ describe('generateImagesWithThumbnailDirector', () => {
     );
     expect(images[0].directorNotice).toContain('실제 사진');
     expect(images[0].directorNotice).toContain('참고용 1장');
+  });
+
+  // [2026-09-23 사장님] 나노바나나·GPT 이미지는 한글을 직접 그린다 — 앱 카드·오버레이 없음.
+  it.each(['openai-image', 'nano-banana-2', 'nano-banana-pro', 'dropshot', 'flow'])(
+    '%s draws the short phrase itself: no app card, no app overlay, marked "text in image"', async (provider) => {
+      const generate = vi.fn(async () => aiResult());
+      const applyTitleOverlay = vi.fn(async (images: GeneratedImage[]) => images);
+      const images = await generateImagesWithThumbnailDirector(
+        thumbOptions({ provider: provider as any, thumbnailDirector: { allowBakedText: true, textMode: 'auto', realImages: [] } }), {}, undefined,
+        { config: {}, generate, applyTitleOverlay },
+      );
+      const cover = (generate.mock.calls[0] as any[])[0].items[0];
+      expect(cover).toMatchObject({ allowText: true, thumbnailText: '청년월세 20만원 받는 법' });
+      expect(applyTitleOverlay).not.toHaveBeenCalled();
+      expect(images[0].filePath).toBe(aiFile); // the engine's own image, not an app-made card
+      expect(images[0]).toMatchObject({ textRendered: true, disableTextOverlay: true });
+    },
+  );
+
+  it('the old nano-banana (2.5, "한글 텍스트 깨짐") still gets a text-free image and the app card', async () => {
+    const generate = vi.fn(async () => aiResult());
+    const images = await generateImagesWithThumbnailDirector(
+      thumbOptions({ provider: 'nano-banana' as any, thumbnailDirector: { allowBakedText: true, textMode: 'auto', realImages: [] } }), {}, undefined,
+      { config: {}, generate, applyTitleOverlay: vi.fn(async (i: GeneratedImage[]) => i) },
+    );
+    expect((generate.mock.calls[0] as any[])[0].items[0].thumbnailText).toBeUndefined();
+    expect(images[0].filePath).not.toBe(aiFile);
+    expect(images[0].disableTextOverlay).toBe(true);
+  });
+
+  it('a text-drawing engine with no copy decided gets a text-free brief (allowText off)', async () => {
+    const generate = vi.fn(async () => aiResult());
+    await generateImagesWithThumbnailDirector(
+      thumbOptions({ provider: 'openai-image' as any, items: [{ heading: '🖼️ 썸네일', prompt: 'x', allowText: true }], thumbnailDirector: { textMode: 'exclude' } }),
+      {}, undefined, { config: {}, generate, applyTitleOverlay: vi.fn(async (i: GeneratedImage[]) => i) },
+    );
+    expect((generate.mock.calls[0] as any[])[0].items[0]).toMatchObject({ allowText: false, thumbnailText: undefined });
   });
 
   it('a failed AI generation returns an empty list, as before', async () => {

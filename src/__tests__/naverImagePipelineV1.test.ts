@@ -129,8 +129,9 @@ describe('NAVER IMAGE PIPELINE V1 — T1–T13', () => {
   });
 
   it('T10 800x800 is the NAVER default everywhere', async () => {
-    expect(GENERATED_IMAGE_SQUARE_SIZE).toBe(800);
-    const { result } = run({ postTitle: '청년월세 20만원 받는 법', thumbnailDirector: { allowBakedText: true, textMode: 'auto' } });
+    expect(GENERATED_IMAGE_SQUARE_SIZE).toBe(800); // every AI engine's file is written at 800 (imageUtils)
+    // An app-made card (engine that does not draw Korean itself) is composed at 800x800 too.
+    const { result } = run({ provider: 'leonardoai' as any, postTitle: '청년월세 20만원 받는 법', thumbnailDirector: { allowBakedText: true, textMode: 'auto' } });
     const [image] = await result;
     const meta = await sharp(image.filePath).metadata();
     expect([meta.width, meta.height]).toEqual([800, 800]);

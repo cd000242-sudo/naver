@@ -200,11 +200,16 @@ export async function generateWithOpenAIImage(
             //   이미지 안에 직접 렌더링한다. 썸네일(index 0) 제목은 기존 오버레이 경로
             //   (imageGenerator.applyKoreanTextOverlayIfNeeded)가 처리하므로, 여기서 썸네일을
             //   제외해 이중 텍스트를 원천 차단한다.
+            // [2026-09-23 사장님] 덕테이프는 한글 표현력이 좋아 썸네일 문구도 직접 그린다. 앱 오버레이는 없다
+            //   (imageGenerator.KOREAN_TEXT_ENGINES). 썸네일에는 제목 전체가 아니라 짧은 문구(thumbnailText)만.
+            const thumbnailPhrase = String((item as any).thumbnailText || '').replace(/"/g, ' ').trim();
+            const wantsThumbnailText = (item as any).isThumbnail === true && (item as any).allowText === true && thumbnailPhrase !== '';
             const wantsNativeKoreanText =
-                (item as any).allowText === true && (item as any).isThumbnail !== true;
-            const koreanTextToRender = String(item.heading || '').trim();
+                ((item as any).allowText === true && (item as any).isThumbnail !== true) || wantsThumbnailText;
+            const koreanTextToRender = wantsThumbnailText ? thumbnailPhrase : String(item.heading || '').trim();
+            const typographyDirective = `TYPOGRAPHY REQUIREMENT: Render this exact Korean text as a bold, large, clearly legible headline integrated into the image design: "${koreanTextToRender}". The Korean characters must be spelled EXACTLY as given, sharp, high-contrast against the background, and fully readable.${wantsThumbnailText ? ' Use at most 2 lines and render it once; it is a short hook, not the article title.' : ''} Keep all text within the safe area (not cropped at edges).`;
             const textDirective = wantsNativeKoreanText && koreanTextToRender
-                ? `TYPOGRAPHY REQUIREMENT: Render this exact Korean text as a bold, large, clearly legible headline integrated into the image design: "${koreanTextToRender}". The Korean characters must be spelled EXACTLY as given, sharp, high-contrast against the background, and fully readable. Keep all text within the safe area (not cropped at edges).`
+                ? typographyDirective
                 : NO_TEXT_PREFIX;
             if (wantsNativeKoreanText && koreanTextToRender) {
                 console.log(`[OpenAI-Image] 🔤 덕테이프 한글 텍스트 네이티브 렌더링: "${koreanTextToRender.substring(0, 30)}"`);

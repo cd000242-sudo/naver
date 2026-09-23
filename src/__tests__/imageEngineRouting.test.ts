@@ -118,8 +118,10 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
 
   describe('P2: 한글 텍스트 엔진 등록 + 라벨 통일', () => {
     it("isKoreanTextSupportedEngine에 'flow' 포함 (Nano Banana Pro 기반)", () => {
+      // [2026-09-23] The list moved to image/director/koreanTextEngines (shared with the thumbnail director).
       const code = read('imageGenerator.ts');
-      expect(code).toMatch(/isKoreanTextSupportedEngine[\s\S]{0,500}?engine\s*===\s*'flow'/);
+      expect(code).toMatch(/function isKoreanTextSupportedEngine[\s\S]{0,200}?return drawsKoreanTextItself\(engine\);/);
+      expect(read('image/director/koreanTextEngines.ts')).toMatch(/'flow',/);
     });
 
     it("providerDisplayNames에 'flow' 라벨 존재", () => {
