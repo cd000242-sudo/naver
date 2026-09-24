@@ -5,6 +5,7 @@ import { naverSearchUrl } from './preemptionMeta';
 import type { DemandPoint } from './DemandChartModal';
 import { BRIDGE_OFFLINE_NOTE, BRIDGE_OUTDATED_NOTE, type BridgeMindmap } from '../../lib/bridge';
 import { formatCount } from '../../lib/keywordApi';
+import { MONEY_TIER_LABEL, moneyAmountText, moneyLine, moneyTitle, type MoneyBid } from './moneyBid';
 
 /**
  * 보드 카드 본체 — 황금키워드 탭에서 떼어 냈다(사장님 지시 2026-09-03:
@@ -144,6 +145,11 @@ export type PreemptionRow = {
         slots?: Array<{ rank: number; title: string; coverage: number }>;
     };
     firstSeenAt?: string | null;
+    /**
+     * 네이버 광고 3위 입찰가 실측(2026-09-24) — 발행이 매 회차 잰다. 못 잰 행(옛 회차 · 이슈 행)엔 없다.
+     * 70원(최저가)이면 3위 자리까지 광고 경쟁이 없다.
+     */
+    money?: MoneyBid | null;
     /** 실검 틈새 행만: 제목이 검색어를 정면으로 담은 글 수(헌터 실측). 황금 행엔 없다. */
     frontalDocCount?: number | null;
     freshFrontalCount?: number | null;
@@ -334,6 +340,16 @@ function PreemptionCard({
                             <span>지식인</span>
                             <strong>{typeof row.kinCount === 'number' ? formatCount(row.kinCount) : '—'}</strong>
                         </div>
+                        {/*
+                          * 돈 되는 말인가(사장님 2026-09-24 "돈 될 만한 황금키워드가 절대 아냐") —
+                          * 네이버 광고 3위 입찰가 실측. 숫자와 출처를 함께 적는다. 못 잰 행은 줄 자체를 안 그린다.
+                          */}
+                        {row.money && (
+                            <div className={`lw-card-money is-${row.money.tier}`} title={moneyTitle(row.money)} aria-label={moneyLine(row.money)}>
+                                <span>{MONEY_TIER_LABEL[row.money.tier]}</span>
+                                <strong>{moneyAmountText(row.money)}</strong>
+                            </div>
+                        )}
                     </div>
 
                     {row.brief && (

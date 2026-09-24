@@ -38,6 +38,54 @@ export function WriteLaneFilter({
 }
 
 /*
+ * 돈 되는 말만 추리기 — 네이버 광고 3위 입찰가 실측으로 거른다(사장님 2026-09-24
+ * "돈 될 만한 황금키워드가 절대 아냐"). 입찰가를 잰 행이 하나도 없는 옛 회차에는 안 보인다 —
+ * 눌러도 빈 화면인 버튼을 두지 않는다.
+ */
+const MONEY_FILTERS = [
+    { min: 0, label: '입찰가 전체' },
+    { min: 1000, label: '1,000원 이상' },
+    { min: 3000, label: '3,000원 이상 (고단가)' },
+] as const;
+
+export function MoneyFilter({
+    value, onChange, measured, countAtLeast, total,
+}: {
+    value: number;
+    onChange: (next: number) => void;
+    /** 입찰가를 잰 행 수 — 0 이면 거르개를 안 그린다. */
+    measured: number;
+    countAtLeast: (min: number) => number;
+    total: number;
+}) {
+    if (measured === 0) return null;
+    return (
+        <>
+            <div className="lw-segment lw-segment-wrap lw-write-lanes" role="group" aria-label="네이버 광고 입찰가로 거르기">
+                {MONEY_FILTERS.map((filter) => {
+                    const count = filter.min === 0 ? total : countAtLeast(filter.min);
+                    if (count === 0 && filter.min > 0) return null;
+                    return (
+                        <button
+                            key={filter.min}
+                            type="button"
+                            className={value === filter.min ? 'on' : ''}
+                            onClick={() => onChange(filter.min)}
+                        >{filter.label} <em>{count}</em></button>
+                    );
+                })}
+            </div>
+            {value > 0 && (
+                <p className="lw-write-hint">
+                    네이버 광고 3위 입찰가 — 이 검색어 광고를 3위에 걸려면 클릭 한 번에 거는 값입니다(네이버 검색광고 실측).
+                    광고주들이 비싸게 사는 말일수록 돈이 되는 말입니다.
+                </p>
+            )}
+        </>
+    );
+}
+
+/*
  * 카테고리는 **서브탭**이다 — 사장님 지시(2026-08-11): "서브탭으로 카테고리별로
  * 보여주고". 칩(둥근 버튼)이었던 것을 밑줄 강조 탭으로 바꾼다.
  *

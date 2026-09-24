@@ -3,14 +3,16 @@ import LicenseGate, { isUnlocked } from './LicenseGate';
 import { naverSearchUrl } from './preemptionMeta';
 import { TabIntro } from './LewordShared';
 import { BoardFreshness } from './BoardFreshness';
+import { moneyTitle, won, type MoneyBid } from './moneyBid';
 
 /**
  * 오늘의 네이버 추천키워드 — 사이드 메뉴에서 실검 틈새키워드와 키워드 분석 **사이의 서브탭**,
  * 그 안에서 **주제별 서브-서브 탭**(주제 칩을 눌러 한 주제씩 본다). 사장님 2026-09-08.
  *
  * 데이터는 leword-app CI(today-picks.yml, 매일 04:30 KST — 2026-09-15 2시간 앞당김)가 씨앗 창고에서 주제별 후보를 넓게 뽑아
- * 블로그 문서수를 오픈 API로 실측하고 **황금비(검색량 ÷ 문서수) 1 이상만** 10개씩 정적 JSON 으로
+ * 블로그 문서수를 오픈 API로 실측하고 **황금비(검색량 ÷ 문서수) 1 이상만** 30개씩(2026-09-24 10 → 30) 정적 JSON 으로
  * 발행한 것이다. 예외는 "트래픽 몰릴 예정"(이번 달·다음 달 피크 계절 씨앗)뿐 — '시즌 앞' 칩이 붙는다.
+ * 황금 안에서는 네이버 광고 3위 입찰가가 높은(돈 되는) 순이다 — 입찰가도 CI 가 잰 실측이다.
  * 여기서는 읽기만 한다. 수치는 전부 실측이고 황금비는 그 나눗셈이다. 자리(SERP)는 안 쟀다.
  *
  * 무료 건수는 실검 틈새와 같은 3건(주제당)이다.
@@ -26,6 +28,8 @@ interface PickRow {
     source: string | null;
     /** 계절 씨앗 예외 — 이번 달·다음 달 피크라 황금비가 1 미만이어도 실린 행 */
     seasonPeakMonth?: number;
+    /** 네이버 광고 3위 입찰가 실측(2026-09-24) — 옛 회차 행엔 없다. */
+    money?: MoneyBid | null;
 }
 
 interface PickTopic {
@@ -98,7 +102,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
             <TabIntro
                 title="오늘의 네이버 추천키워드"
                 desc={`주제별 황금 비율(검색량 ÷ 문서수 ${minRatio} 이상) 키워드 · 네이버 블로그 홈판·SEO 전용${data ? ` · ${kst(data.builtAt)} 실측 · 황금 ${num(golden)}건` : ''}`}
-                source="검색광고 검색량 실측 · 블로그 문서수 실측 · 매일 04:30 KST 갱신"
+                source="검색광고 검색량 실측 · 블로그 문서수 실측 · 광고 입찰가 실측 · 매일 04:30 KST 갱신"
             />
 
             <BoardFreshness
@@ -143,6 +147,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                                     <th className="n">블로그 문서수</th>
                                     <th className="n">황금비</th>
                                     <th className="n">광고</th>
+                                    <th className="n" title="네이버 검색광고 실측 — 이 검색어 광고를 3위에 걸려면 클릭 한 번에 거는 값">광고 3위 입찰가</th>
                                     <th>출처</th>
                                     {onAnalyze && <th aria-label="분석" />}
                                 </tr>
@@ -153,12 +158,17 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                                         <td>
                                             <a href={naverSearchUrl(row.keyword)} target="_blank" rel="noreferrer">{row.keyword}</a>
                                             {row.ratio >= minRatio && <span className="lw-picks-chip">황금 비율</span>}
+                                            {row.money?.tier === 'high' && <span className="lw-picks-chip lw-picks-money">고단가</span>}
                                             {row.seasonPeakMonth && <span className="lw-picks-chip lw-picks-season">{row.seasonPeakMonth}월 시즌 앞</span>}
                                         </td>
                                         <td className="n">{num(row.searchVolume)}</td>
                                         <td className="n">{num(row.documentCount)}</td>
                                         <td className={`n${row.ratio >= minRatio ? ' lw-picks-gold' : ''}`}>{ratioText(row.ratio)}</td>
                                         <td className="n">{row.depth == null ? '—' : num(row.depth)}</td>
+                                        <td
+                                            className={`n${row.money?.tier === 'high' ? ' lw-picks-bid-high' : row.money?.tier === 'none' ? ' lw-picks-bid-none' : ''}`}
+                                            title={row.money ? moneyTitle(row.money) : '이 회차엔 입찰가를 재지 않았습니다'}
+                                        >{row.money ? won(row.money.value) : '—'}</td>
                                         <td className="lw-picks-src">{row.source ? (SOURCE_LABEL[row.source] ?? row.source) : '—'}</td>
                                         {onAnalyze && (
                                             <td>

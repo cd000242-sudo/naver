@@ -1148,6 +1148,27 @@ function LewordStyles() {
              * 겹쳐 구분이 안 된다는 지적을 받았다.
              */
             .lw-card-metrics .money strong { color: #4ea8ff; }
+            /*
+             * 네이버 광고 3위 입찰가 줄(2026-09-24) — 광고수 '돈' 표시와 같은 파란 계열. 지표 격자 안에서
+             * 가로 전체를 쓴다(목록 보기는 2열, 카드 보기는 3열). 고단가만 색을 올리고 나머지는 조용히 둔다.
+             */
+            .lw-card-metrics .lw-card-money {
+                grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px;
+                padding: 7px 10px; border-radius: 9px;
+                border: 1px solid rgba(78,168,255,.2); background: rgba(78,168,255,.05);
+            }
+            .lw-card-metrics .lw-card-money span { display: inline; color: #8fc6ff; font-size: 11.5px; font-weight: 800; }
+            .lw-card-metrics .lw-card-money strong {
+                display: inline; margin-top: 0; color: #ebedf2; font-size: 13px; font-weight: 800;
+                white-space: normal; overflow: visible;
+            }
+            .lw-card-metrics .lw-card-money.is-high { border-color: rgba(78,168,255,.5); background: rgba(78,168,255,.11); }
+            .lw-card-metrics .lw-card-money.is-high strong { color: #4ea8ff; }
+            .lw-card-metrics .lw-card-money.is-low,
+            .lw-card-metrics .lw-card-money.is-none { border-color: rgba(255,255,255,.08); background: transparent; }
+            .lw-card-metrics .lw-card-money.is-low span,
+            .lw-card-metrics .lw-card-money.is-none span { color: #646b7d; }
+            .lw-card-metrics .lw-card-money.is-none strong { color: #9aa3b5; font-weight: 700; }
 
             /*
              * 주제 서브탭. 칩(둥근 버튼)에서 밑줄 탭으로 바꿨다 — 사장님 지시.
@@ -2186,6 +2207,11 @@ function LewordStyles() {
             .lw-picks-table a { color: inherit; text-decoration: none; border-bottom: 1px dotted color-mix(in srgb, currentColor 40%, transparent); }
             .lw-picks-src { opacity: 0.65; font-size: 12px; }
             .lw-picks-gold { color: #ffa500; font-weight: 700; }
+            /* 네이버 광고 3위 입찰가(2026-09-24) — 보드 카드와 같은 파란 계열. 70원(경쟁 없음)은 흐리게. */
+            /* 바로 아래 .lw-picks-chip(주황)이 같은 무게로 뒤에 선언돼 있어 두 클래스로 잡는다. */
+            .lw-picks-chip.lw-picks-money { background: color-mix(in srgb, #4ea8ff 16%, transparent); color: #4ea8ff; }
+            .lw-picks-bid-high { color: #4ea8ff; font-weight: 700; }
+            .lw-picks-bid-none { opacity: 0.55; }
             .lw-picks-chip { display: inline-block; margin-left: 6px; font-size: 11px; padding: 1px 7px; border-radius: 999px; background: color-mix(in srgb, #ffa500 16%, transparent); color: #ffa500; font-weight: 500; }
             .lw-picks-btn { font: inherit; font-size: 12px; padding: 3px 9px; border-radius: 6px; border: 1px solid color-mix(in srgb, currentColor 22%, transparent); background: transparent; color: inherit; cursor: pointer; }
             .lw-picks-btn:hover { background: color-mix(in srgb, currentColor 8%, transparent); }

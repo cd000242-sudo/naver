@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import PreemptionPlan from './PreemptionPlan';
 import { naverSearchUrl, rowMatchesWriteLane } from './preemptionMeta';
 
-import { TopicFilter, WriteLaneFilter } from './BoardFilters';
+import { MoneyFilter, TopicFilter, WriteLaneFilter } from './BoardFilters';
+import { moneyRank } from './moneyBid';
 import DemandChartModal, { pickChartSeries } from './DemandChartModal';
 import PreemptionCard, { type PreemptionRow } from './PreemptionCard';
 import { useMindmap } from './useMindmap';
@@ -54,6 +55,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [topic, setTopic] = useState('전체');
     /** 어느 판에 쓸 글인가. 배치 순서 실측으로 가른다. */
     const [writeLane, setWriteLane] = useState('all');
+    /** 네이버 광고 3위 입찰가 하한(원). 0 = 거르지 않음. */
+    const [moneyMin, setMoneyMin] = useState(0);
     // 라이선스 코드 또는 자기 API 키. 둘 중 하나면 전부 열린다.
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     /** 실행 계획을 펼친 카드. 한 번에 하나만 연다 — 다 펼치면 목록이 안 읽힌다. */
@@ -146,6 +149,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             // 레인 판정은 rowMatchesWriteLane 단일 출처 — 애드센스만 실측 의도, 나머지는 배치 순서.
             if (!rowMatchesWriteLane(row, writeLane)) return false;
             if (topic !== '전체' && row.topic !== topic) return false;
+            if (moneyMin > 0 && !((row.money?.value ?? 0) >= moneyMin)) return false;
             return true;
         });
         /*
@@ -168,6 +172,17 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 searchVolume: row.searchVolume, documentCount: row.documentCount,
             }).tier];
             if (rank(a) !== rank(b)) return rank(a) - rank(b);
+            /*
+             * 같은 등급이면 **돈 되는 말을 위로**(사장님 2026-09-24 "지금 이건 황금키워드는 맞는데
+             * 메리트가 별로 없어. 돈 될 만한 황금키워드가 절대 아냐").
+             *
+             * 네이버 광고 3위 입찰가 구간(고단가 → 중단가 → 저단가 → 광고 경쟁 없음) — 발행이 매 회차 잰
+             * 실측이다. 구간으로만 가른다: 같은 구간 안에서는 아래 오름세 · 광고 수가 그대로 순서를 정한다.
+             * 못 잰 행이 끼면 이 축은 건너뛴다 — 안 본 것을 '돈 안 됨'으로 벌주지 않는다.
+             */
+            const ma = moneyRank(a.money);
+            const mb = moneyRank(b.money);
+            if (ma !== null && mb !== null && ma !== mb) return ma - mb;
             /*
              * **오르는 중인 것을 위로**(사장님 지시 2026-08-29: "우상향이 예상되는
              * 키워드가 특히 상위로 와야 된다").
@@ -264,14 +279,14 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             depth += 1;
         }
         return hoistFree(interleaved);
-    }, [board, topic, writeLane, shuffleSeed, unlocked, freeNames]);
+    }, [board, topic, writeLane, moneyMin, shuffleSeed, unlocked, freeNames]);
 
     /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
 
     useEffect(() => {
         setVisibleCount(60);
-    }, [topic, writeLane]);
+    }, [topic, writeLane, moneyMin]);
 
     // '지식인 황금질문'은 좌측 메뉴 독립 탭(KinGoldenTab)으로 옮겨졌다(2026-08-20 정정).
     const publishedLabel = board?.publishedAt
@@ -283,7 +298,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         <>
             <TabIntro
                 title="리더남 전용 황금키워드"
-                desc="검색결과를 직접 열어 보고 '지금 들어갈 자리가 있는' 것만 남겼습니다. 상위 자리가 비어 있는 것이 맨 앞이고, 그 아래로 자리가 확실한 순서입니다. 블로그 주제 32종을 한 번에 훑었으니 카테고리를 하나씩 뒤질 필요가 없습니다."
+                desc="검색결과를 직접 열어 보고 '지금 들어갈 자리가 있는' 것만 남겼습니다. 상위 자리가 비어 있는 것이 맨 앞이고, 그 아래로 자리가 확실한 순서입니다. 같은 등급 안에서는 네이버 광고 입찰가가 높은 말(돈이 되는 말)이 먼저입니다. 블로그 주제 32종을 한 번에 훑었으니 카테고리를 하나씩 뒤질 필요가 없습니다."
                 /* 어떤 도구로 재는지는 밝히지 않는다(사장님 2026-08-20) — 잰 사실만 적는다. */
                 source={`검색결과 직접 확인${publishedLabel ? ` · ${publishedLabel} 발행` : ''}${board?.verified ? ` · ${board.verified}건 검증` : ''}`}
             />
@@ -336,6 +351,14 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             total: board.rows.length,
                             laneCount: (laneId) => board.rows.filter((row) => rowMatchesWriteLane(row, laneId)).length,
                         }}
+                    />
+
+                    <MoneyFilter
+                        value={moneyMin}
+                        onChange={setMoneyMin}
+                        measured={board.rows.filter((row) => row.money).length}
+                        countAtLeast={(min) => board.rows.filter((row) => (row.money?.value ?? 0) >= min).length}
+                        total={board.rows.length}
                     />
 
                     <TopicFilter value={topic} onChange={setTopic} topics={topics} total={board.rows.length} />
