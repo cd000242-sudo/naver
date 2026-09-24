@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-23T21:37:55.074Z",
+  "publishedAt": "2026-09-24T03:33:03.253Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 215,
-    "niche": 0,
-    "preemption": 10,
+    "candidates": 240,
+    "niche": 1,
+    "preemption": 3,
     "pending": 0
   },
   "freeSample": {
@@ -18,6 +18,195 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "한국수력원자력 본사",
+      "issue": "한국수력원자력",
+      "topic": "한국수력원자력",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "2026 한국수력원자력 연봉 1억846만원, 신입초임과 차이 큰 이유",
+          "한국수력원자력 채용 공고 안내",
+          "2027년 수시학과 선택 참고(미래 공기업 연계 취업 : 한국수력원자력)",
+          "2026 한국수력원자력 채용 총 229명, 대졸 신입 일반 사회형평 보훈전형 정리",
+          "경주 실내 아이와 가볼만한 곳 '한수원 홍보관 에너지 팜' | 경주시 SNS 알리미 이주영",
+          "2026 한국수력원자력 신입사원 하반기 채용 총정리⚡",
+          "경주 가볼만한곳 한국수력원자력 홍보관ㅣ 원자력·신재생에너지 체험관 무료 체험 후기",
+          "[7월 28일 인사] 한국수력원자력…[인사] 경기대 → '강제추행 혐의' 경기대 신임 총장, 취임 하루 만에 직위해제",
+          "경주 한수원 본사 나들이, 아들 한수원 신입사원 입사식 참석 이모저모",
+          "2026년 제3차 한국수력원자력 정규직 채용 공고 (근무조건, 응시자격, 전형일정 등 알아보기)"
+        ],
+        "measuredAt": "2026-09-24T03:31:12.489Z"
+      },
+      "documentCount": 11890,
+      "documentCountMeasured": true,
+      "searchVolume": 690,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.6908260269308092,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 690",
+        "문서수 11,890",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 690 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.7배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "한수원 사장이 추석 앞두고 원전·수력 현장을 안전점검했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "한국수력원자력 본사 경주 위치와 채용 정보 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "한국수력원자력 본사 채용 공고 보다가 연봉까지 궁금해져서 한참 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "한국수력원자력 채용",
+          "searchVolume": 15770,
+          "frame": "generic"
+        },
+        {
+          "keyword": "한국수력원자력 연봉",
+          "searchVolume": 1160,
+          "frame": "generic"
+        },
+        {
+          "keyword": "한국수력원자력 사장",
+          "searchVolume": 120,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "한국수력원자력 채용",
+          "searchVolume": 15770,
+          "documentCount": 15994,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "한국수력원자력 연봉",
+          "searchVolume": 1160,
+          "documentCount": 4909,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "한국수력원자력 사장",
+          "searchVolume": 120,
+          "documentCount": 18590,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "한수원 본사 위치",
+          "searchVolume": 30,
+          "documentCount": 2693,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "한수원 본사 경주",
+          "searchVolume": 10,
+          "documentCount": 4987,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          52,
+          100,
+          58,
+          52,
+          27,
+          19,
+          56,
+          35,
+          56,
+          58,
+          42,
+          25,
+          77,
+          79,
+          52,
+          48,
+          60,
+          21,
+          17,
+          46,
+          81,
+          48,
+          38,
+          35,
+          15,
+          29,
+          46,
+          38,
+          25
+        ]
+      },
+      "kinCount": 581,
+      "kinTop": [
+        {
+          "title": "대한민국 공기업 공공기관 갯수와 위치, 연봉, 본사 모두 알....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=495132576&answerNo=1",
+          "views": 32,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-24T03:30:00.815Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null
+    },
     {
       "keyword": "인핸스 코리아",
       "issue": "인핸스",
@@ -510,54 +699,35 @@
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "carried": true
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "파이온 투자자문",
-      "issue": "파이온",
-      "topic": "파이온",
+      "keyword": "앤드리슨 호로위츠 박성모",
+      "issue": "앤드리슨 호로위츠",
+      "topic": "앤드리슨 호로위츠",
       "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "080626 상한가 / 1000만주 주식 그리고 인사이트",
-          "어제 코스닥, 로봇이 세 종목을 동시에 들어올렸어요",
-          "[ 마감시황] 1월 이후 가장 낮은 거래대금 9월 FOMC 전까지는 개잡주 랠리",
-          "2026 09 18 주말 금요일/9월17목요일",
-          "6월25일 천기가이의 종목브리핑-비비안 20%수익,화신정공5%수익",
-          "반도체가 빠진 날, 2분기 실적이 코스닥을 달궜어요",
-          "파이온엑스 거래정지 후 투 상한가 (2026년 7월 28일)",
-          "“오후 3시30분 끝인 줄 알았는데” 한국 주식시장 14일부터 확 바뀌나",
-          "오늘 상한가 종목은? 유니켐 미국기업 인수·본느 경영권 변경·아로마티카 실적 강세",
-          "오전장 특징주 2026.06.23(화) - 국내 전선업계 사상 최대 수준 수주잔고 기록 등에 일부 전선,전력설비 테마가 상승"
-        ],
-        "measuredAt": "2026-09-21T09:31:22.198Z"
-      },
-      "documentCount": 110,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 7,
       "documentCountMeasured": true,
-      "searchVolume": 360,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.100917478721132,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "stable",
       "isHot": false,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 360",
-        "문서수 110",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "문서수 7",
+        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -565,95 +735,175 @@
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 360 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
           "code": "empty-field",
           "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
       "whySearch": {
-        "text": "투자자문 가입을 고민하거나 이미 가입한 사람이 후기·수수료·환불·해지 조건을 확인하려는 검색",
-        "basis": "AI 추론 — 근거 부족"
+        "text": "앤드리슨 호로위츠가 대학 대신할 2년제 AI 아카데미를 출범했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "파이온 투자자문 수수료와 환불 조건 실제 후기",
+          "text": "앤드리슨 호로위츠 박성모, 대학 대신 567억 AI학교 정체",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "파이온 투자자문 해지하려다 위약금 보고 다시 계산해봤어요",
+          "text": "앤드리슨 호로위츠 박성모가 a16z에 세운 학교가 대학이랑 이렇게 갈리더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          48,
-          59,
-          67,
-          30,
-          0,
-          0,
-          74,
-          67,
-          30,
-          63,
-          19,
-          0,
-          0,
-          52,
-          33,
-          70,
-          22,
-          59,
-          41,
-          0,
-          48,
-          63,
-          74,
-          81,
-          100,
-          22,
-          22,
-          26,
-          85
-        ],
-        "label": "❄️ 시즌성",
-        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-09-23T21:37:55.777Z"
-      },
+      "subKeywords": [
+        {
+          "keyword": "앤드리슨 호로위츠 a16z",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "앤드리슨 호로위츠 a16z",
+          "searchVolume": 10,
+          "documentCount": 1087,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
       "kinCount": 0,
-      "kinTop": [],
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 7,
-        "verified": 0
-      },
-      "carried": true
+      "measuredAt": "2026-09-24T03:30:00.815Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
     },
     {
-      "keyword": "KAIST 문지캠퍼스",
+      "keyword": "MBK 김병주 불기소",
+      "issue": "MBK 김병주 불기소",
+      "topic": "MBK 김병주 불기소",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 42,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 42",
+        "선점 후보 — 경쟁 문서 42건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MBK 김병주 불기소 가능성에 여야가 검찰 봐주기라 비판했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "MBK 김병주 불기소, 검찰 판단 근거와 여야 반응",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "MBK 김병주 불기소 쪽으로 기우니까 홈플러스는 어떻게 되나 싶더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "MBK 홈플러스",
+          "searchVolume": 530,
+          "frame": "generic"
+        },
+        {
+          "keyword": "MBK 파트너스 김병주",
+          "searchVolume": 80,
+          "frame": "generic"
+        },
+        {
+          "keyword": "MBK 김병주 회장",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "MBK 홈플러스",
+          "searchVolume": 530,
+          "documentCount": 21077,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "MBK 파트너스 김병주",
+          "searchVolume": 80,
+          "documentCount": 4991,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "MBK 김병주 회장",
+          "searchVolume": 10,
+          "documentCount": 5819,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김병주 MBK 회장",
+          "searchVolume": 10,
+          "documentCount": 5819,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김병주 회장 재산",
+          "searchVolume": 10,
+          "documentCount": 1444,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "MBK 불기소",
+          "searchVolume": 10,
+          "documentCount": 223,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김병주 검찰",
+          "searchVolume": 10,
+          "documentCount": 4570,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-24T03:30:00.815Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "kaist logo",
       "issue": "KAIST",
       "topic": "KAIST",
       "lane": "tech",
@@ -661,44 +911,23 @@
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "카이스트",
-          "카이스트 재학생 사이트 모음 (Useful Websites for KAISTian)",
-          "생태안보미래포럼 보고 온 후기",
-          "[코리아이글뉴스 제휴]해군, AI 무인전력 ‘Navy Sea GHOST’ 속도낸다…ADD·KRISO와 공동개발",
-          "2027학년도 KAIST·POSTECH 영재기업인교육원 모집요강 비교｜지원자격·선발방식 총정리",
-          "[M프렌즈] AI와 로봇이 여는 미래 육군 : 제9회 육군 AI·드론봇 전투발전 콘퍼런스 현장 스케치!",
-          "2027 KAIST IP영재기업인교육원 신입생 모집 선발 설명회 신청 방법 선발 전형일정 총정리",
-          "IP영재기업인교육원 신입생 선발(18기)",
-          "2027 KAIST IP영재기업인교육원 신입생 모집 일정 및 설명회 신청 완벽 정리",
-          "2027학년도 KAIST IP영재기업인교육원 신입생 모집"
-        ],
-        "measuredAt": "2026-09-22T03:30:01.694Z"
-      },
-      "documentCount": 1292,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 226,
       "documentCountMeasured": true,
-      "searchVolume": 840,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.9187466808284652,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "stable",
       "isHot": false,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 840",
-        "문서수 1,292",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "문서수 226",
+        "선점 후보 — 경쟁 문서 226건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -706,95 +935,39 @@
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 840 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.9배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
           "code": "empty-field",
           "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
       "whySearch": {
-        "text": "대학원생·입주자가 문지캠퍼스 기숙사와 본원행 셔틀, 위치·주소를 확인하려고 검색한다",
-        "basis": "AI 추론 — 근거 부족"
+        "text": "KAIST 라이보2 마라톤 완주와 권오현 이사장 선임 소식이 나왔다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "KAIST 문지캠퍼스 기숙사 신청부터 셔틀 시간까지",
+          "text": "kaist logo PNG와 AI 벡터 파일 다운로드 위치 비교",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "KAIST 문지캠퍼스 셔틀 시간 모르고 갔다가 한참 기다렸어요",
+          "text": "kaist logo 받는데 png 말고 ai 파일 찾다가 다들 헤매더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": {
-        "series": [
-          62,
-          49,
-          49,
-          64,
-          62,
-          51,
-          51,
-          67,
-          76,
-          49,
-          62,
-          56,
-          71,
-          76,
-          100,
-          44,
-          73,
-          60,
-          53,
-          69,
-          64,
-          73,
-          53,
-          47,
-          47,
-          62,
-          44,
-          58,
-          31
-        ],
-        "label": "🐢 연금형",
-        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-23T21:37:55.777Z"
-      },
-      "kinCount": 27,
-      "kinTop": [],
+      "trend": null,
+      "kinCount": 5,
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 5,
-        "verified": 0
-      },
-      "carried": true
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-09-24T03:30:00.815Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "한컴위드 커넥셔너리",
       "issue": "한컴위드",
@@ -894,7 +1067,8 @@
       "monetize": null,
       "measuredAt": "2026-09-23T21:33:51.448Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "한컴위드 anysign",
@@ -995,7 +1169,8 @@
       "monetize": null,
       "measuredAt": "2026-09-23T21:33:51.448Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "스트랜즈 하네스",
@@ -1057,7 +1232,8 @@
       "monetize": null,
       "measuredAt": "2026-09-23T21:33:51.448Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "스트랜즈 하네스 AWS",
@@ -1119,62 +1295,8 @@
       "monetize": null,
       "measuredAt": "2026-09-23T21:33:51.448Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "앤드리슨 호로위츠 박성모",
-      "issue": "앤드리슨 호로위츠",
-      "topic": "앤드리슨 호로위츠",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 7,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 7",
-        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤드리슨 호로위츠가 대학 대안 2년제 AI 아카데미를 출범했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-23T21:33:51.448Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "한컴위드 N2SF",
@@ -1287,7 +1409,8 @@
       "monetize": null,
       "measuredAt": "2026-09-23T21:33:51.448Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "한컴위드 연봉",
@@ -1380,7 +1503,8 @@
       "monetize": null,
       "measuredAt": "2026-09-23T21:33:51.448Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "앤드리슨 호로위츠 AI학교",
@@ -1442,7 +1566,8 @@
       "monetize": null,
       "measuredAt": "2026-09-23T21:33:51.448Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "출생아 출산아 차이",
@@ -1549,73 +1674,8 @@
       "monetize": null,
       "measuredAt": "2026-09-23T21:33:51.448Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "kaist logo",
-      "issue": "KAIST",
-      "topic": "KAIST",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 226,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 226",
-        "선점 후보 — 경쟁 문서 226건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "KAIST 로봇이 네이처에 실리고 권오현이 이사장에 선임됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "kaist logo 고화질 png와 ai 벡터 파일 받는 곳",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "kaist logo png로 받으면 인쇄할 때 의외로 깨지더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-23T21:33:51.448Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "인핸스 태권도 시범단",
@@ -2093,86 +2153,6 @@
       ],
       "trend": null,
       "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-23T08:57:25.835Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "MBK 김병주 불기소",
-      "issue": "MBK 김병주 불기소",
-      "topic": "MBK 김병주 불기소",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 33,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 33",
-        "선점 후보 — 경쟁 문서 33건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "검찰의 MBK 김병주 불기소 가닥에 여야가 거대자본 봐주기라며 비판",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "MBK 김병주 불기소 가닥, 대검 반려 이유와 여야 반응",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "MBK 김병주 불기소 나오고 회장 측 반응이 생각보다 조용하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "MBK 김병주 회장",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "MBK 김병주 회장",
-          "searchVolume": 10,
-          "documentCount": 5797,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
       "kinTop": null,
       "monetize": null,
       "measuredAt": "2026-09-23T08:57:25.835Z",
@@ -4659,984 +4639,46 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "앤돈랩스 파이온",
-      "issue": "앤돈랩스",
-      "topic": "앤돈랩스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 1,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 1",
-        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤돈랩스가 매장 운영 AI가 근태 불량 직원을 해고하는 실험 결과를 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤돈랩스 파이온, 기업 전반 자율 운영한다는 AI 플랫폼 실체",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "앤돈랩스 파이온한테 관리 맡겼더니 지각 직원을 손도 안 대더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "파이온 앤돈랩스",
-      "issue": "파이온",
-      "topic": "파이온",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 1,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 1",
-        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤돈랩스가 AI가 기업 전반을 자율 운영하는 플랫폼 '파이온'을 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "파이온 앤돈랩스, 24시간 일하는 AI 자율경영 플랫폼",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "파이온 앤돈랩스가 공개한 AI 사장 24시간 안 쉬고 뭘 하나 봤더니",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "큐원3.8-라이브트랜스레이트",
-      "issue": "큐원3.8-라이브트랜스레이트",
-      "topic": "큐원3.8-라이브트랜스레이트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 2,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 2",
-        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "알리바바가 통역 지연을 2.3초로 줄인 AI 큐원3.8-라이브트랜스레이트를 공개해서",
-        "basis": "뉴스 헤드라인 1건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "뉴로퓨전 최한철",
-      "issue": "뉴로퓨전",
-      "topic": "뉴로퓨전",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 47,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 47",
-        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "뉴로퓨전 금융 AI가 글로벌 미래 예측 벤치마크 포캐스트벤치 선행 리더보드 1위를 해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "뉴로퓨전 잡플래닛",
-      "issue": "뉴로퓨전",
-      "topic": "뉴로퓨전",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 6,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 6",
-        "선점 후보 — 경쟁 문서 6건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "뉴로퓨전 금융 AI가 글로벌 미래 예측 벤치마크 포캐스트벤치 선행 리더보드 1위를 해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "앤돈랩스 벤딩벤치",
-      "issue": "앤돈랩스",
-      "topic": "앤돈랩스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 13,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 13",
-        "선점 후보 — 경쟁 문서 13건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤돈랩스가 매장 운영 AI가 근태 불량 직원을 해고하는 실험 결과를 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "뉴로퓨전 블라인드",
-      "issue": "뉴로퓨전",
-      "topic": "뉴로퓨전",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 17,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 17",
-        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "뉴로퓨전 금융 AI가 글로벌 미래 예측 벤치마크 포캐스트벤치 선행 리더보드 1위를 해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "뉴로퓨전 연봉",
-      "issue": "뉴로퓨전",
-      "topic": "뉴로퓨전",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 23,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 23",
-        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "뉴로퓨전 금융 AI가 글로벌 미래 예측 벤치마크 포캐스트벤치 선행 리더보드 1위를 해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "앤돈랩스 클로드",
-      "issue": "앤돈랩스",
-      "topic": "앤돈랩스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 25,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 25",
-        "선점 후보 — 경쟁 문서 25건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤돈랩스가 매장 운영 AI가 근태 불량 직원을 해고하는 실험 결과를 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "앤돈랩스",
-      "issue": "앤돈랩스",
-      "topic": "앤돈랩스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 33,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 33",
-        "선점 후보 — 경쟁 문서 33건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤돈랩스가 매장 운영 AI가 근태 불량 직원을 해고하는 실험 결과를 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "앤돈랩스 실험",
-      "issue": "앤돈랩스",
-      "topic": "앤돈랩스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 32,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 32",
-        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤돈랩스가 매장 운영 AI가 근태 불량 직원을 해고하는 실험 결과를 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "뉴로퓨전 투자유치",
-      "issue": "뉴로퓨전",
-      "topic": "뉴로퓨전",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 44,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 44",
-        "선점 후보 — 경쟁 문서 44건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "뉴로퓨전 금융 AI가 글로벌 미래 예측 벤치마크 포캐스트벤치 선행 리더보드 1위를 해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "박신혜 오늘 득녀!",
-      "issue": "박신혜 오늘 득녀!",
-      "topic": "박신혜 오늘 득녀!",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 81,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 81",
-        "선점 후보 — 경쟁 문서 81건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "박신혜가 오늘 둘째 딸을 출산해 최태준과 두 아이 부모가 됐고 산모·아이 모두 건강해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "포캐스트벤치",
-      "issue": "뉴로퓨전",
-      "topic": "뉴로퓨전",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 81,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 81",
-        "선점 후보 — 경쟁 문서 81건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "뉴로퓨전 금융 AI가 글로벌 미래 예측 벤치마크 포캐스트벤치 선행 리더보드 1위를 해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "파이온 폴드8",
-      "issue": "파이온",
-      "topic": "파이온",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 114,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 114",
-        "선점 후보 — 경쟁 문서 114건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤돈랩스가 AI가 기업 전반을 자율 운영하는 플랫폼 '파이온'을 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "뉴로퓨전 매출",
-      "issue": "뉴로퓨전",
-      "topic": "뉴로퓨전",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 134,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 134",
-        "선점 후보 — 경쟁 문서 134건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "뉴로퓨전 금융 AI가 글로벌 미래 예측 벤치마크 포캐스트벤치 선행 리더보드 1위를 해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "뉴로퓨전 서비스",
-      "issue": "뉴로퓨전",
-      "topic": "뉴로퓨전",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "실체 궁금",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 292,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 292",
-        "선점 후보 — 경쟁 문서 292건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 실체 궁금"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "뉴로퓨전 금융 AI가 글로벌 미래 예측 벤치마크 포캐스트벤치 선행 리더보드 1위를 해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-22T03:28:10.260Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "대한민국 투자 서밋",
+      "issue": "추석 연휴 첫날",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "이재명 대통령이 월가 큰손들에게 한국 투자를 세일즈했다.",
+      "why": "연휴 첫날 고속도로 정체로 서울→부산 최대 9시간30분 걸린다",
       "headlines": [
         {
-          "title": "'대한민국 투자 서밋 2026', 기념촬영하는 이재명 대통령",
+          "title": "연휴 첫날 고속도로 정체 극심…서울→부산 최대 9시간30분",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-23T14:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016334071?sid=100"
+          "publishedAt": "2026-09-24T00:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016334409?sid=102"
         },
         {
-          "title": "이재명 대통령, '대한민국 투자 서밋 2026' [뉴시스 Pic]",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-23T20:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014211849?sid=100"
-        },
-        {
-          "title": "李대통령, 월가 큰손들에 '韓 투자' 세일즈",
+          "title": "연휴 첫날 고속도로 정체 극심…서울→부산 10시간 걸린다",
           "press": "hankyung.com",
-          "publishedAt": "2026-09-23T17:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005335831?sid=100"
+          "publishedAt": "2026-09-24T00:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005335867?sid=102"
+        },
+        {
+          "title": "추석 연휴 첫날…고속도로 본격 정체 시작",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-09-24T03:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012262944?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "대한민국",
+          "keyword": "추석",
           "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "추석연휴",
+          "searchVolume": 182900,
           "origin": "autocomplete"
         }
       ],
@@ -5644,71 +4686,1127 @@
       "rowCount": 0
     },
     {
-      "issue": "안재석 끝내기 안타",
+      "issue": "한국수력원자력",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "unknown",
+      "issueStatus": "stable",
       "isHot": true,
-      "why": "안재석 끝내기로 두산이 KIA를 3대2 역전승했다.",
+      "why": "한수원 사장이 추석 앞두고 원전·수력 현장을 안전점검했다",
       "headlines": [
         {
-          "title": "안재석 끝내기 안타...4위 두산, 5위 KIA에 3대2 역전승",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-23T13:37:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/023/0004000138"
+          "title": "한수원 김회천 사장, 추석 앞두고 원전 건설·수력발전 현장 점검",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-09-23T08:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004192617?sid=102"
         },
         {
-          "title": "이의리 무너뜨린 안재석…5위 두산, 4위 KIA에 끝내기 승리",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-09-23T13:10:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/025/0003553566"
+          "title": "한수원, 추석 맞이 원전·수력 현장 점검...안전경영 총력",
+          "press": "newscj.com",
+          "publishedAt": "2026-09-23T13:46:00.000Z",
+          "link": "https://www.newscj.com/news/articleView.html?idxno=3435275"
         },
         {
-          "title": "[AI상보] '안재석 끝내기 안타' 두산, KIA 3-2로 꺾고 4경기 차 추격",
-          "press": "newspim.com",
-          "publishedAt": "2026-09-23T12:52:00.000Z",
-          "link": "https://www.newspim.com/news/view/20260923001117"
+          "title": "한수원, 추석 앞두고 원전·수력발전소 안전점검",
+          "press": "lawissue.co.kr",
+          "publishedAt": "2026-09-23T06:44:00.000Z",
+          "link": "http://www.lawissue.co.kr/view.php?ud=202609231543257306f4ab64559d_12"
         }
       ],
       "concentrated": [
         {
-          "keyword": "안재석",
+          "keyword": "한국수력원자력 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국수력원자력 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국수력원자력 본사",
+          "searchVolume": 690,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국수력원자력 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국수력원자력 면접",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국수력원자력 인턴",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국수력원자력 위치",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국수력원자력 필기",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 1
     },
     {
-      "issue": "연휴 첫날 짙은",
+      "issue": "김우민 아시안게임 계영",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": true,
-      "why": "추석 연휴 첫날 내륙·서해안에 짙은 안개가 꼈다.",
+      "isHot": false,
+      "why": "어깨 부상 김우민이 계영 400m 예선에 출전했다",
       "headlines": [
         {
-          "title": "추석 연휴 첫날 귀성길 짙은 안개…일교차 최대 15도[내일날씨]",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-23T08:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014211408?sid=102"
-        },
-        {
-          "title": "추석 연휴 첫날 아침 내륙·서해안 짙은 안개…귀성길 '조심'",
+          "title": "[아시안게임] '부상' 김우민, 계영 400ｍ 예선 출전…\"동료 부담 덜겠다...",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-23T08:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016333514?sid=102"
+          "publishedAt": "2026-09-24T00:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016334407?sid=104"
         },
         {
-          "title": "“귀성길 운전 유의하세요”…추석 연휴 첫날 내륙·서해안 짙은 안개",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-23T12:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005739703?sid=103"
+          "title": "“결선 동료 체력 아끼기 위해”…김우민, 아픈 어깨로 계영 400m 예선 역...",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-09-24T02:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003683366?sid=104"
+        },
+        {
+          "title": "[아시안게임] 김우민, '어깨 부상'에도 계영 400m 예선 출전",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-09-24T01:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000536736?sid=104"
         }
       ],
       "concentrated": [],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "젤렌스키 북한군 포로",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "젤렌스키가 북한군 포로 2명을 한국으로 보냈다고 밝혔다",
+      "headlines": [
+        {
+          "title": "젤렌스키 \"북한군 포로 2명, 韓 보내\"…정부, 사실상 확인(종합2보)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-24T00:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016334427?sid=104"
+        },
+        {
+          "title": "젤렌스키 \"북한군 포로 2명 한국 보냈다\"…정부, 사실상 인정",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-24T00:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001390854?sid=100"
+        },
+        {
+          "title": "젤렌스키 \"북한군 포로 2명 한국으로 보냈다\" 전격 공개",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-09-24T01:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001970607?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "젤렌스키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "GTX-A 삼성역 기둥",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "서울시가 국토부에 삼성역 기둥 보강 조속 결정을 촉구했다",
+      "headlines": [
+        {
+          "title": "서울시 \"GTX-A 삼성역 기둥 보강, 늦어질수록 공사 차질\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T06:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014211030?sid=102"
+        },
+        {
+          "title": "서울시, 국토부에 GTX-A 삼성역 기둥보강 결정 촉구",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-23T07:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005335760?sid=101"
+        },
+        {
+          "title": "GTX-A 삼성역 지연 책임 공방…국토부, 서울시에 구상금 청구 검토",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-09-23T10:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000536699?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "GTX-A",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gtx-a 삼성역",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "미혼 김현주",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "50세 미혼 배우 김현주가 외로움을 뜨개질로 달랜다고 밝혔다",
+      "headlines": [
+        {
+          "title": "김현주, 벌써 미혼 50살..\"외로움 많이 타 하루종일 뜨개질, 생각 없어져...",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-09-24T02:12:00.000Z",
+          "link": "https://m.entertain.naver.com/article/109/0005611998"
+        },
+        {
+          "title": "'50세 미혼' 김현주, 외로움 커 하루종일 뜨개질..\"효과 有, 생각 없어진...",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-09-23T21:15:00.000Z",
+          "link": "https://m.entertain.naver.com/article/076/0004449289"
+        },
+        {
+          "title": "미혼 김현주, 외로움 뜨개질로 달랜다 “에겐남 취향, 첫눈에 사랑 안 ...",
+          "press": "newsen.com",
+          "publishedAt": "2026-09-23T21:14:00.000Z",
+          "link": "https://m.entertain.naver.com/article/609/0001172145"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "미혼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "이재명",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "이재명 대통령이 미국 방문 후 멕시코 국빈방문에 나섰다",
+      "headlines": [
+        {
+          "title": "이재명 대통령, 미국에서 멕시코로",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-23T20:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016334161?sid=100"
+        },
+        {
+          "title": "이 대통령, 멕시코 도착…16년 만의 국빈방문",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-24T02:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001390869?sid=100"
+        },
+        {
+          "title": "장동혁 \"이재명, 농지 전수조사, 강제매각 밀어붙이겠다는 것\"",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-09-24T02:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001525685?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "이재명 지지율",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이재명 탄핵",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이재명 임기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이재명 대통령",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이재명 기자회견",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이재명 연임",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이재명 탄핵 청원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이재명 재판",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "이재명 귀국 일정",
+          "reason": "순방 종료 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "탄핵 트리거",
+          "reason": "장동혁 경고 파장",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "농지 전수조사",
+          "reason": "강제매각 논란",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "단풍",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "올해 단풍 절정은 10월 하순, 설악산은 10월 20일이다",
+      "headlines": [
+        {
+          "title": "붉은 단풍·노란 은행…올 가을 단풍 절정은 10월 하순",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-22T01:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014207169?sid=102"
+        },
+        {
+          "title": "“단풍놀이 갔더니 죄다 퍼래요”…낭패 안보려면 이날 가시면 됩니다",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-22T01:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005738768?sid=103"
+        },
+        {
+          "title": "올해 '단풍절정'은 내달 초 시작…중순부터 전국에 단풍",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-09-22T00:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005819710?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "2026 단풍 시기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "가을 단풍 명소",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "화담숲 단풍",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "단풍 시기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "화담숲 단풍 절정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "단풍 한자뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "단풍 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "단풍 영어로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "단풍 실시간현황",
+          "reason": "헛걸음 방지 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "단풍 개화지도",
+          "reason": "지역별 시기 비교",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "건강",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "1kg 미만이던 다섯쌍둥이가 건강하게 두 돌을 맞았다",
+      "headlines": [
+        {
+          "title": "1kg도 안됐던 다섯 쌍둥이, 건강하게 두 돌 맞았다",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-23T01:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016331850?sid=102"
+        },
+        {
+          "title": "건강보험연구원장에 김지영",
+          "press": "segye.com",
+          "publishedAt": "2026-09-22T12:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004161196?sid=102"
+        },
+        {
+          "title": "27주 만에 태어난 다섯쌍둥이…치료 이겨내고 ‘건강한 두 돌’",
+          "press": "kyeonggi.com",
+          "publishedAt": "2026-09-23T13:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/666/0000124780?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "건강 간식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "건강 과자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "건강 그림",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "건강 글귀",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "건강 뉴스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "건강 덕담",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "건강 맛집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "건강 멘트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "MBK 김병주 불기소",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "MBK 김병주 불기소 가능성에 여야가 검찰 봐주기라 비판했다",
+      "headlines": [
+        {
+          "title": "MBK 김병주 불기소 가능성에…여야 “검찰, 거대 자본 봐주기” 일제히...",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-09-23T08:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003683171?sid=102"
+        },
+        {
+          "title": "여야, 檢 'MBK 김병주 불기소' 가닥에 비판…\"거대 사모펀드 총수에 면죄...",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-23T15:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009189802?sid=100"
+        },
+        {
+          "title": "MBK 김병주 불기소 가능성에 정치권 ‘면죄부’ 공방[PS]",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-09-23T07:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/382/0001295558?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "mbk",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "mbk 김병주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "MS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MS가 전쟁 위험에도 중동 AI 인프라에 13조원을 투자한다",
+      "headlines": [
+        {
+          "title": "전쟁 위험에도…MS, 중동 AI 인프라에 13조원 투자",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-23T20:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016334155?sid=104"
+        },
+        {
+          "title": "트럼프, 전쟁 와중에 주식 1천건 거래…7월, 아마존·MS 대량 매도",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T06:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014211142?sid=104"
+        },
+        {
+          "title": "MS, 전쟁 위험에도 중동 AI 인프라에 13조원 투자",
+          "press": "it.chosun.com",
+          "publishedAt": "2026-09-24T01:26:00.000Z",
+          "link": "https://it.chosun.com/news/articleView.html?idxno=2023092170843"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ms 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스",
+          "searchVolume": 24260,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MS 오피스 365",
+          "searchVolume": 11840,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 정품인증방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 한컴 차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MS 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "MS 실적발표",
+          "reason": "투자 여력 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "MS 주가전망",
+          "reason": "AI 수혜 기대",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "LG MS 협력내용",
+          "reason": "혈맹 구체 사업",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "MS AI 데이터센터",
+          "reason": "인프라 규모 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "퀄컴·삼성·구글이 차세대 XR 폼팩터 3자 연합을 구축했다",
+      "headlines": [
+        {
+          "title": "\"스마트폰 다음은 XR\"…퀄컴·삼성·구글, 차세대 폼팩터 3자 연합 구축",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-23T20:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002438688?sid=105"
+        },
+        {
+          "title": "前구글 안전담당 임원 \"AI, SNS보다 아동에 더 위험\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-22T22:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016331371?sid=104"
+        },
+        {
+          "title": "추석 귀성길, ‘가장 빠른 길’ 고집해야 할까… 구글 “차량 2% 분산해...",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-23T21:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001194301?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 킵",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "구글 TPU 성능",
+          "reason": "엔비디아 대항마",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "AI 에이전트",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "오픈AI 불량 에이전트가 호주 정부를 해킹한 첫 사례가 나왔다",
+      "headlines": [
+        {
+          "title": "오픈AI '불량 에이전트', 호주 정부에도 침투…첫 정부해킹 사례",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-24T00:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016334418?sid=104"
+        },
+        {
+          "title": "탈출한 오픈AI, 막아낸 건 '중국산 AI'였다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-23T20:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005335833?sid=104"
+        },
+        {
+          "title": "오픈AI 에이전트, 호주 정부 사이트 침투‥첫 정부 해킹",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-09-24T02:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001525684?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ai 에이전트 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "AI 에이전트 만들기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai 에이전트 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "메타 ai 에이전트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai 에이전트 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai 에이전트 책",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai 에이전트 교육",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai 에이전트 추천",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "AI 에이전트 규제",
+          "reason": "기준 마련 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "로봇 설계 원리",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "KAIST 사족보행 로봇 라이보2가 마라톤을 완주해 네이처에 실렸다",
+      "headlines": [
+        {
+          "title": "KAIST 네발 로봇 '라이보2', 마라톤 완주…배터리는 34% 남았다",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-23T15:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016334089?sid=105"
+        },
+        {
+          "title": "마라톤 완주한 사족보행로봇 원리, 네이처에 실렸다",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-09-23T20:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003683215?sid=105"
+        },
+        {
+          "title": "“로봇개가 42.195㎞를 뛰었다”…K-로봇, ‘마라톤’으로 네이처 뚫었...",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-23T15:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006375180?sid=105"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "KAIST",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "KAIST 라이보2 마라톤 완주와 권오현 이사장 선임 소식이 나왔다",
+      "headlines": [
+        {
+          "title": "마라톤 풀코스 뛴 '세계최초' 로봇…KAIST기술 네이처로",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T15:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014211792?sid=102"
+        },
+        {
+          "title": "KAIST 네발 로봇 '라이보2', 마라톤 완주…배터리는 34% 남았다",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-23T15:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016334089?sid=105"
+        },
+        {
+          "title": "마라톤 풀코스 주파한 KAIST 로봇 주행 기술, 네이처 본지에 게제",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-23T15:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009189799?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "kaist 약자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist 대학원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "KAIST 서울캠퍼스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist portal",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist 입학처",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "KAIST 학과",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "KAIST 수시일정",
+          "reason": "입시 시즌 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KAIST 등록금",
+          "reason": "진학 비용 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KAIST 편입",
+          "reason": "진입 경로 수요",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤드리슨 호로위츠",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "앤드리슨 호로위츠가 대학 대신할 2년제 AI 아카데미를 출범했다",
+      "headlines": [
+        {
+          "title": "\"대학 대신 AI학교\" 실리콘밸리의 파격",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-23T06:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005739556?sid=105"
+        },
+        {
+          "title": "앤드리슨 호로위츠, 대학 대안 'AI 아카데미' 출범...젊은 창업가 육성",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-23T07:56:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215596"
+        },
+        {
+          "title": "\"대학 대신 AI학교\"… 실리콘밸리 거물들이 567억 투자한 학교 정체는",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-23T01:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005417811?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "앤드리슨 호로위츠 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤드리슨 호로위츠 코인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤드리슨 호로위츠 박성모",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤드리슨 호로위츠 포트폴리오",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤드리슨 호로위츠(a16z)",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "퀄컴",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "퀄컴이 스냅드래곤 사운드 엘리트 2세대를 공개했다",
+      "headlines": [
+        {
+          "title": "퀄컴, '스냅드래곤 사운드 엘리트 2세대' 공개",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-23T20:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002438689?sid=105"
+        },
+        {
+          "title": "삼성전자, 퀄컴 차세대 스냅드래곤서 'LPDDR6' 검증 완료…\"업계 최초\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T01:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014209938?sid=101"
+        },
+        {
+          "title": "[스냅드래곤 서밋]퀄컴, AI 대응한 스냅드래곤 사운드 엘리트 2세대 공개",
+          "press": "etnews.com",
+          "publishedAt": "2026-09-24T02:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003469836?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "퀄컴 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퀄컴 스냅드래곤",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퀄컴 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성전자 퀄컴",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퀄컴 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퀄컴 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퀄컴 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "퀄컴 주가 토스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "웨어러블 AI",
+          "reason": "생태계 확장 방향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "오픈AI가 가성비 신모델을 출시하며 저가 경쟁에 나섰다",
+      "headlines": [
+        {
+          "title": "앤트로픽·오픈AI \"속도조절\" 외치더니 가성비 AI 출시 경쟁",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-23T01:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014210064?sid=105"
+        },
+        {
+          "title": "탈출한 오픈AI, 막아낸 건 '중국산 AI'였다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-23T20:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005335833?sid=104"
+        },
+        {
+          "title": "오픈AI, 호주 정부기관 해킹...올트먼, 안보리서 '감독 기구' 설립 촉구",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-24T01:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005418150?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 아스트라",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 요금제 변경",
+          "reason": "토큰 한도 불만",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 상장일",
+          "reason": "IPO 시점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -5789,569 +5887,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "리 성금",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "산불·이웃돕기 피해복구 성금 기탁 소식이 이어졌다.",
-      "headlines": [
-        {
-          "title": "‘우리도 겪은 아픔이기에’ 강릉성산면민, 영남 산불 피해복구 성금 기...",
-          "press": "kwnews.co.kr",
-          "publishedAt": "2025-05-11T14:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/087/0001115899?sid=102"
-        },
-        {
-          "title": "구미시 장천면 이장·주민, 경북 산불 피해 성금 200만 원 기탁",
-          "press": "hidomin.com",
-          "publishedAt": "2025-04-27T07:04:00.000Z",
-          "link": "http://www.hidomin.com/news/articleView.html?idxno=579208"
-        },
-        {
-          "title": "구미시 장천면 이장·주민, 산불 피해 성금 200만원 기탁",
-          "press": "dkilbo.com",
-          "publishedAt": "2025-04-27T05:40:00.000Z",
-          "link": "https://www.dkilbo.com/news/articleView.html?idxno=494080"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "호르무즈 해협 피격",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "호르무즈서 화물선이 발사체에 피격돼 2명 사상자가 발생했다.",
-      "headlines": [
-        {
-          "title": "\"호르무즈서 화물선 발사체 피격…사상자 2명 발생\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-23T12:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016333971?sid=104"
-        },
-        {
-          "title": "\"호르무즈서 화물선 피격…사상자 2명 발생\"",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-09-23T12:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001970590?sid=104"
-        },
-        {
-          "title": "“사상자 2명 발생…호르무즈서 화물선 발사체 피격, 화재 발생 상태로...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-23T13:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005739708?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "아시안게임 자원봉사자들 고령화",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "아시안게임 자원봉사 현장에서 초고령화 문제가 드러났다.",
-      "headlines": [
-        {
-          "title": "91세 노인이 7kg 배낭 메고 훈련···아시안게임서 드러난 ‘초고령 일...",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-09-23T07:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003472273?sid=104"
-        },
-        {
-          "title": "일본의 체면 구긴 '부실 아시안게임', 남의 일 아니다 [이영규의 비욘더...",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-09-20T15:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000535577?sid=104"
-        },
-        {
-          "title": "'운영 미숙' 인천 아시안게임…최악의 대회 '혹평'",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2014-09-29T00:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0002639959?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "생계",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "생계급여 삭감 논란과 자영업·노동자 생계 위협이 이슈가 됐다.",
-      "headlines": [
-        {
-          "title": "번 돈 맞먹는 생계급여 삭감?…국회·복지부 '94% 통계' 공방",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-23T08:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016333467?sid=102"
-        },
-        {
-          "title": "‘노쇼 사기’ 상반기 3900건·피해액 1155억…\"자영업자 생계 위협\"",
-          "press": "magazine.hankyung.com",
-          "publishedAt": "2026-09-23T07:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/050/0000111277?sid=101"
-        },
-        {
-          "title": "\"일하고도 돈 못 받은 노동자들, 명절의 기쁨보다 생계 걱정이 앞선다\"",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-09-22T06:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/047/0002529956?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "생계 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "생계 영어로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "생계 생활",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "생계 군면제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "생계 단어 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "생계 급여 제도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "생계 의료 주거",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "생계 주거 의료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "추가은 사격 금메달",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "추가은이 공기권총 10m에서 한국 사격 대회 첫 금메달을 땄다.",
-      "headlines": [
-        {
-          "title": "추가은, 사격 첫 금메달 안겨",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-23T07:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005335697?sid=104"
-        },
-        {
-          "title": "[1보] 추가은, 여자 10ｍ 공기권총 금메달…한국 사격 대회 첫 금",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-23T04:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016332611?sid=104"
-        },
-        {
-          "title": "추가은, 여자 10m 공기권총 금메달…한국 사격 대회 첫 금",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-23T04:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001390618?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "여자 기계체조 기록",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "한국 여자 기계체조가 단체전 4위로 북한에 밀려 메달을 놓쳤다.",
-      "headlines": [
-        {
-          "title": "한국 여자 기계체조, 단체전 4위…북한은 4회 연속 메달[나고야AG]",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-23T12:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014211719?sid=104"
-        },
-        {
-          "title": "여자 기계체조 단체전 4위…북한에 1.466점 밀려 동메달 무산[AG]",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-23T12:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009189744?sid=104"
-        },
-        {
-          "title": "여자 기계체조, 단체전에서 북한에 밀려 4위…남자는 5위",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-09-23T12:47:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/144/0001140194"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "로봇 설계 원리",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "KAIST 사족보행로봇 라이보2가 마라톤을 완주해 네이처에 실렸다.",
-      "headlines": [
-        {
-          "title": "KAIST 네발 로봇 '라이보2', 마라톤 완주…배터리는 34% 남았다",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-23T15:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016334089?sid=105"
-        },
-        {
-          "title": "마라톤 완주한 사족보행로봇 원리, 네이처에 실렸다",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-09-23T20:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003683215?sid=105"
-        },
-        {
-          "title": "“로봇개가 42.195㎞를 뛰었다”…K-로봇, ‘마라톤’으로 네이처 뚫었...",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-23T15:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006375180?sid=105"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "KAIST",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "KAIST 로봇이 네이처에 실리고 권오현이 이사장에 선임됐다.",
-      "headlines": [
-        {
-          "title": "마라톤 풀코스 뛴 '세계최초' 로봇…KAIST기술 네이처로",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-23T15:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014211792?sid=102"
-        },
-        {
-          "title": "KAIST 네발 로봇 '라이보2', 마라톤 완주…배터리는 34% 남았다",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-23T15:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016334089?sid=105"
-        },
-        {
-          "title": "마라톤 풀코스 주파한 KAIST 로봇 주행 기술, 네이처 본지에 게제",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-23T15:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009189799?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "kaist 약자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 대학원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 서울캠퍼스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist portal",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 학과",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 입학처",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "KAIST 운영 방향",
-          "reason": "새 이사장 정책 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "KAIST 연구비",
-          "reason": "성과 지원 규모 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "앤드리슨 호로위츠",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "앤드리슨 호로위츠가 대학 대안 2년제 AI 아카데미를 출범했다.",
-      "headlines": [
-        {
-          "title": "\"대학 대신 AI학교\" 실리콘밸리의 파격",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-23T06:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005739556?sid=105"
-        },
-        {
-          "title": "앤드리슨 호로위츠, 대학 대안 'AI 아카데미' 출범...젊은 창업가 육성",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-23T07:56:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215596"
-        },
-        {
-          "title": "\"대학 대신 AI학교\"… 실리콘밸리 거물들이 567억 투자한 학교 정체는",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-23T01:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005417811?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤드리슨 호로위츠 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤드리슨 호로위츠 코인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤드리슨 호로위츠 박성모",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤드리슨 호로위츠 포트폴리오",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤드리슨 호로위츠(a16z)",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "퀄컴",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "퀄컴이 5GHz 돌파한 차세대 스냅드래곤 8 엘리트를 공개했다.",
-      "headlines": [
-        {
-          "title": "퀄컴, '스냅드래곤 사운드 엘리트 2세대' 공개",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-23T20:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002438689?sid=105"
-        },
-        {
-          "title": "삼성전자, 퀄컴 차세대 스냅드래곤서 'LPDDR6' 검증 완료…\"업계 최초\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-23T01:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014209938?sid=101"
-        },
-        {
-          "title": "[스냅드래곤 서밋 2026] 퀄컴 \"스마트폰이 이용자 대신 행동하는 에이전...",
-          "press": "inews24.com",
-          "publishedAt": "2026-09-22T20:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/031/0001060814?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "퀄컴 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퀄컴 스냅드래곤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퀄컴 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퀄컴 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퀄컴 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퀄컴 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퀄컴 전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "퀄컴 삼성",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "퀄컴 AI 기능",
-          "reason": "에이전트 기능 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈AI가 가격을 절반 낮춘 신모델 2종을 출시했다.",
-      "headlines": [
-        {
-          "title": "앤트로픽·오픈AI \"속도조절\" 외치더니 가성비 AI 출시 경쟁",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-23T01:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014210064?sid=105"
-        },
-        {
-          "title": "\"개발비 반값\" 가성비 챗GPT '깜짝'…오픈AI 새 모델 2종 출시",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-23T04:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005335596?sid=105"
-        },
-        {
-          "title": "[단독]“AI 통제, 선두 국가인 美-中이 최소한의 공통분모 찾아내야”",
-          "press": "donga.com",
-          "publishedAt": "2026-09-23T16:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003750506?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 아스트라",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI 무료",
-          "reason": "무료 이용 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "스트랜즈 하네스",
@@ -6382,101 +5919,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "AWS",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "AWS가 오픈소스 AI 에이전트 실행환경 스트랜즈 하네스를 공개했다.",
-      "headlines": [
-        {
-          "title": "AWS, AI 에이전트도 골라 쓰는 모델로…오픈소스 실행환경 공개",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-23T05:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002438647?sid=105"
-        },
-        {
-          "title": "\"토큰 비용 28% 감소\" AWS, '스트랜즈 하네스' 공개",
-          "press": "fnnews.com",
-          "publishedAt": "2026-09-23T06:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005580397?sid=105"
-        },
-        {
-          "title": "재능대 바이오테크과, ‘산학협력 AX대회’ 우수상·AWS대표상",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-09-23T07:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/025/0003553520?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "aws 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws 코리아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws 자격증",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws saa",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws kiro",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws 가입방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "AWS 에이전트 요금",
-          "reason": "비용 절감 실측 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "AWS AI 서비스",
-          "reason": "AI 라인업 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "AWS 자격증",
-          "reason": "실무 학습 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "한컴위드",
@@ -6570,7 +6014,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "북한 리성금 금메달",
@@ -6632,49 +6077,6 @@
         }
       ],
       "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "MBK 김병주 불기소",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "검찰의 MBK 김병주 불기소 가닥에 여야가 거대자본 봐주기라며 비판",
-      "headlines": [
-        {
-          "title": "[단독] 'MBK 김병주 불기소' 보고 대검서 반려‥수사팀과 지검장 사이 이...",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-09-23T06:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001525572?sid=102"
-        },
-        {
-          "title": "MBK 김병주 불기소 가능성에 정치권 ‘면죄부’ 공방[PS]",
-          "press": "sports.donga.com",
-          "publishedAt": "2026-09-23T07:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/382/0001295558?sid=101"
-        },
-        {
-          "title": "정치권 ‘MBK 김병주 불기소 가닥’ 보도에 잇달아 쓴소리…”검찰, 거...",
-          "press": "kyeonggi.com",
-          "publishedAt": "2026-09-23T07:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/666/0000124755?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "mbk",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "mbk 김병주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
       "nextWave": [],
       "rowCount": 0,
       "carried": true
@@ -7811,269 +7213,6 @@
         {
           "keyword": "라이너 요금제",
           "reason": "이용 조건",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "박신혜 오늘 득녀!",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "박신혜가 오늘 둘째 딸을 출산해 최태준과 두 아이 부모가 됐고 산모·아이 모두 건강해서",
-      "headlines": [
-        {
-          "title": "박신혜, 오늘(22일) 득녀…두 아이 엄마됐다",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-09-22T01:24:00.000Z",
-          "link": "https://m.entertain.naver.com/article/437/0000512270"
-        },
-        {
-          "title": "박신혜·최태준, 두 아이 부모 됐다…오늘 둘째 득녀",
-          "press": "wowtv.co.kr",
-          "publishedAt": "2026-09-22T02:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/215/0001266835?sid=103"
-        },
-        {
-          "title": "박신혜, 오늘 득녀 “산모·아이 모두 건강”",
-          "press": "bntnews.co.kr",
-          "publishedAt": "2026-09-22T02:06:00.000Z",
-          "link": "https://www.bntnews.co.kr/article/view/bnt202609220199"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "박신혜",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "뉴로퓨전",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "뉴로퓨전 금융 AI가 글로벌 미래 예측 벤치마크 포캐스트벤치 선행 리더보드 1위를 해서",
-      "headlines": [
-        {
-          "title": "뉴로퓨전, AI 미래 예측 벤치마크 선행 리더보드 1위",
-          "press": "hansbiz.co.kr",
-          "publishedAt": "2026-09-21T07:00:00.000Z",
-          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=866970"
-        },
-        {
-          "title": "뉴로퓨전 금융 AI, 글로벌 미래 예측 벤치마크 1위",
-          "press": "ezyeconomy.com",
-          "publishedAt": "2026-09-21T05:32:00.000Z",
-          "link": "https://www.ezyeconomy.com/news/articleView.html?idxno=240051"
-        },
-        {
-          "title": "뉴로퓨전, AI 예측 벤치마크 '포캐스트벤치' 선행 리더보드 1위",
-          "press": "cstimes.com",
-          "publishedAt": "2026-09-21T01:06:00.000Z",
-          "link": "https://www.cstimes.com/news/articleView.html?idxno=721448"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "뉴로퓨전 주식회사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전(주)",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 투자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴로퓨전 최한철",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "뉴로퓨전 서비스",
-          "reason": "실체 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "뉴로퓨전 투자유치",
-          "reason": "성장성 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "뉴로퓨전 상장",
-          "reason": "기업 향방",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "큐원3.8-라이브트랜스레이트",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "알리바바가 통역 지연을 2.3초로 줄인 AI 큐원3.8-라이브트랜스레이트를 공개해서",
-      "headlines": [
-        {
-          "title": "알리바바, 통역 지연 '2.3초'로 줄인 AI '큐원3.8-라이브트랜스레이트' ...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-21T09:22:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215516"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "파이온",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "앤돈랩스가 AI가 기업 전반을 자율 운영하는 플랫폼 '파이온'을 공개해서",
-      "headlines": [
-        {
-          "title": "앤돈랩스, AI가 기업 전반 자율 운영하는 플랫폼 '파이온' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-21T08:52:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215537"
-        },
-        {
-          "title": "파이온코퍼레이션, 맘스터치 일본 AI 광고 제작",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-15T08:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005414181?sid=101"
-        },
-        {
-          "title": "효성, K뷰티에 300억 직접베팅…CVC 탐색서 사업화로",
-          "press": "sateconomy.co.kr",
-          "publishedAt": "2026-09-21T05:52:00.000Z",
-          "link": "http://sateconomy.co.kr/news/view/1065592017596332"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "(주)파이온",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "파이온 폴드8",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "파이온 투자자문",
-          "searchVolume": 360,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "파이온 도입기업",
-          "reason": "실사용 사례",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "파이온 사용법",
-          "reason": "이용 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "파이온 국내출시",
-          "reason": "국내 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "앤돈랩스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "앤돈랩스가 매장 운영 AI가 근태 불량 직원을 해고하는 실험 결과를 공개해서",
-      "headlines": [
-        {
-          "title": "앤돈랩스, AI가 기업 전반 자율 운영하는 플랫폼 '파이온' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-21T08:52:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215537"
-        },
-        {
-          "title": "‘AI 관리자 시대’ 아직은 아니다…실험서 상습 지각 직원 방치",
-          "press": "dt.co.kr",
-          "publishedAt": "2026-08-17T06:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/029/0003042673?sid=104"
-        },
-        {
-          "title": "샤오미, 아이헬스 랩스(iHealth Labs)에 2500만 달러 투자",
-          "press": "it.co.kr",
-          "publishedAt": "2014-09-22T05:25:00.000Z",
-          "link": "http://www.it.co.kr/news/mediaitNewsView.php?nSeq=2743575"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "앤돈랩스 국내도입",
-          "reason": "국내 여부",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
