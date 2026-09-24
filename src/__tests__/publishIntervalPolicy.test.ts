@@ -137,6 +137,6 @@ describe('발행 모드별 적용 — 임시저장·예약은 1시간 대상이 
     const { readFileSync } = await import('fs');
     const src = readFileSync('src/renderer/modules/continuousPublishing.ts', 'utf-8');
     expect(src).toContain('function getCurrentPublishModeForInterval()');
-    expect((src.match(/getCurrentPublishModeForInterval\(\)\)/g) || []).length).toBe(3);
+    expect((src.match(/getCurrentPublishModeForInterval\(\), requestedIntervalSec/g) || []).length).toBe(3);
   });
 });

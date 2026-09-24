@@ -11,7 +11,7 @@ import {
   resolveImageRegenerateRoute,
 } from '../renderer/modules/imageDisplayGrid';
 
-const read = (rel: string) => readFileSync(join(__dirname, '..', rel), 'utf-8');
+const read = (rel: string) => readFileSync(join(__dirname, '..', rel), 'utf-8').replace(/\r\n/g, '\n');
 const g = globalThis as any;
 
 function pick(source: string) {
@@ -100,7 +100,9 @@ describe('every regenerate entry point uses the one routing rule (source guards)
   const body = (src: string, name: string) => {
     const start = src.indexOf(`async function ${name}(`);
     expect(start).toBeGreaterThan(-1);
-    return src.slice(start, src.indexOf('\n}\n', start));
+    const end = src.indexOf('\n}\n', start);
+    expect(end).toBeGreaterThan(start);
+    return src.slice(start, end);
   };
 
   it('grid 🔄 and prompt card 🔄 call the routed helper, never a NAVER search or a fixed engine', () => {

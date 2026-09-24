@@ -11,7 +11,7 @@ import {
   resolveShoppingRepresentativeReference,
   resolveUsableShoppingReferenceSource,
 } from '../../image/shoppingReferenceGeneration.js';
-import { resolvePublishFloorSec, DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES } from '../../automation/publishIntervalPolicy.js';
+import { resolvePublishFloorSec, publishIntervalToFields, formatContinuousIntervalLabel, DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES } from '../../automation/publishIntervalPolicy.js';
 import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
 import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSlots.js';
 import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
@@ -324,20 +324,20 @@ function getCurrentPublishModeForInterval(): string {
   }
 }
 
-function getImageAwareSafePublishFloorSec(): number {
+function getImageAwareSafePublishFloorSec(requestedIntervalSec?: number): number {
   const imageSource = getCurrentContinuousImageSourceForSafety();
   if (UI_AUTOMATION_IMAGE_SOURCES.has(imageSource)) {
-    return resolvePublishFloorSec(UI_AUTOMATION_SAFE_PUBLISH_MIN_INTERVAL_SEC, _configuredMinIntervalMinutes, getCurrentPublishModeForInterval());
+    return resolvePublishFloorSec(UI_AUTOMATION_SAFE_PUBLISH_MIN_INTERVAL_SEC, _configuredMinIntervalMinutes, getCurrentPublishModeForInterval(), requestedIntervalSec);
   }
   if (SLOW_IMAGE_SOURCES.has(imageSource)) {
-    return resolvePublishFloorSec(IMAGE_HEAVY_SAFE_PUBLISH_MIN_INTERVAL_SEC, _configuredMinIntervalMinutes, getCurrentPublishModeForInterval());
+    return resolvePublishFloorSec(IMAGE_HEAVY_SAFE_PUBLISH_MIN_INTERVAL_SEC, _configuredMinIntervalMinutes, getCurrentPublishModeForInterval(), requestedIntervalSec);
   }
-  return resolvePublishFloorSec(SAFE_PUBLISH_MIN_INTERVAL_SEC, _configuredMinIntervalMinutes, getCurrentPublishModeForInterval());
+  return resolvePublishFloorSec(SAFE_PUBLISH_MIN_INTERVAL_SEC, _configuredMinIntervalMinutes, getCurrentPublishModeForInterval(), requestedIntervalSec);
 }
 
 function normalizeSafePublishInterval(userInterval: number): number {
-  const safeFloor = getImageAwareSafePublishFloorSec();
-  const parsed = Number.isFinite(userInterval) ? Math.floor(userInterval) : safeFloor;
+  const safeFloor = getImageAwareSafePublishFloorSec(userInterval);
+  const parsed = Number.isFinite(userInterval) && userInterval > 0 ? Math.floor(userInterval) : safeFloor;
   return Math.max(safeFloor, Math.min(86400, parsed));
 }
 
@@ -354,7 +354,7 @@ function normalizeSafePublishInterval(userInterval: number): number {
  */
 function getSafePublishInterval(userInterval: number, publishIndex: number): { interval: number; logs: string[] } {
   const logs: string[] = [];
-  const safeFloor = getImageAwareSafePublishFloorSec();
+  const safeFloor = getImageAwareSafePublishFloorSec(userInterval);
 
   // 일일 카운터 자동 리셋 (자정 기준)
   const now = Date.now();
@@ -367,7 +367,7 @@ function getSafePublishInterval(userInterval: number, publishIndex: number): { i
   _dailyPublishCount++;
 
   // === 최소 간격 강제 (5분 하드 플로어) ===
-  let interval = Math.max(safeFloor, userInterval);
+  let interval = normalizeSafePublishInterval(userInterval);
   if (userInterval < safeFloor) {
     logs.push(`[Image Safety] Publish interval adjusted: ${userInterval}s -> ${safeFloor}s (${Math.round(safeFloor / 60)}min).`);
   }
@@ -415,7 +415,7 @@ function getSafePublishInterval(userInterval: number, publishIndex: number): { i
     logs.push(`🚨 일일 상한 초과! (${_dailyPublishCount}/${DAILY_POST_LIMIT}건) → +${DAILY_LIMIT_COOLDOWN_SEC/60}분 대기`);
   }
 
-  interval = Math.max(safeFloor, interval);
+  interval = Math.max(safeFloor, Math.min(86400, interval));
 
   // 최종 요약
   logs.push(`🛡️ → 다음 발행까지 ${Math.round(interval/60)}분 ${interval % 60}초 대기 (오늘 ${_dailyPublishCount}/${DAILY_POST_LIMIT}건)`);
@@ -791,9 +791,8 @@ export function scheduleNextPosting(): void {
   const userInterval = (parseInt(intervalValEl?.value || '7') || 7) * (parseInt(intervalUnitEl?.value || '60') || 60);
   _continuousPublishCount++;
   const result = getSafePublishInterval(userInterval, _continuousPublishCount);
-  // 상한이 하한과 같으면 jitter 가 아래로만 잘린다 — 하한이 커지면 상한도 같이 올린다.
-  const floorSec = getImageAwareSafePublishFloorSec();
-  continuousCountdown = Math.max(floorSec, Math.min(Math.max(3600, floorSec * 2), result.interval));
+  // 이미 사용자 간격·이미지 하한·24시간 상한을 적용한 결과다.
+  continuousCountdown = result.interval;
 
   // 🛡️ 캡차 방지 레이어 상세 로그 출력 (사용자에게 보임)
   appendLog(``);
@@ -3491,7 +3490,7 @@ function renderQueueListV2(): void {
         <span>•</span>
         <span>${imageSourceNames[item.imageSource] || item.imageSource}</span>
         <span>•</span>
-        <span>${item.interval >= 3600 ? Math.floor(item.interval / 3600) + '시간' : (item.interval >= 60 ? Math.floor(item.interval / 60) + '분' : item.interval + '초')}</span>
+        <span>${formatContinuousIntervalLabel(item.interval)}</span>
         ${item.status === 'pending' ? `
           <div style="margin-left: auto; display: flex; gap: 0.25rem;">
             ${item.type === 'url' ? `<button type="button" class="queue-addurl-btn" data-id="${item.id}" style="padding: 0.25rem 0.5rem; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 4px; color: #22c55e; cursor: pointer; font-size: 0.7rem;" title="추가 URL 입력">+URL${item.additionalUrls && item.additionalUrls.length > 0 ? ` (${item.additionalUrls.length})` : ''}</button>` : ''}
@@ -4164,9 +4163,7 @@ function showQueueFullViewModal(): void {
     `;
   } else {
     container.innerHTML = continuousQueueV2.map((item, index) => {
-      const intervalText = item.interval >= 3600
-        ? Math.floor(item.interval / 3600) + '시간'
-        : (item.interval >= 60 ? Math.floor(item.interval / 60) + '분' : item.interval + '초');
+      const intervalText = formatContinuousIntervalLabel(item.interval);
 
       return `
         <div class="fullview-queue-item" style="background: var(--bg-secondary); border-radius: 12px; padding: 1.25rem; border-left: 5px solid ${statusColors[item.status]}; display: flex; align-items: center; gap: 1.25rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
@@ -4340,10 +4337,11 @@ function showEditQueueItemModal(item: ContinuousQueueItem, options?: { fromFullV
   if (createThumbnailCheck) createThumbnailCheck.checked = !!item.createProductThumbnail;
 
   const intervalValueEl = document.getElementById('continuous-modal-interval-value') as HTMLInputElement | null;
-  if (intervalValueEl) intervalValueEl.value = String(item.interval < 60 ? item.interval : (item.interval < 3600 ? Math.floor(item.interval / 60) : Math.floor(item.interval / 3600)));
+  const intervalFields = publishIntervalToFields(item.interval);
+  if (intervalValueEl) intervalValueEl.value = String(intervalFields.value);
 
   const intervalUnitEl = document.getElementById('continuous-modal-interval-unit') as HTMLSelectElement | null;
-  if (intervalUnitEl) intervalUnitEl.value = String(item.interval < 60 ? 1 : (item.interval < 3600 ? 60 : 3600));
+  if (intervalUnitEl) intervalUnitEl.value = String(intervalFields.unit);
 
   modal.style.display = 'flex';
 }
@@ -5479,7 +5477,7 @@ async function startContinuousPublishingV2(): Promise<void> {
       if (isScheduleMode) {
         // 예약 발행도 앱 내부에서는 콘텐츠/이미지 생성과 네이버 로그인 작업이 이어지므로 안전 간격 적용
         _continuousPublishCount++;
-        const rawInterval = Number(item.interval) || SAFE_PUBLISH_MIN_INTERVAL_SEC;
+        const rawInterval = Number(item.interval);
         const safeResult = getSafePublishInterval(rawInterval, _continuousPublishCount);
         const safeWait = safeResult.interval;
         safeResult.logs.forEach(msg => appendLog(msg));
@@ -5489,7 +5487,7 @@ async function startContinuousPublishingV2(): Promise<void> {
       } else {
         // 즉시 발행: 안전 간격 적용 (캡차 방지)
         _continuousPublishCount++;
-        const rawInterval = Number(item.interval) || SAFE_PUBLISH_MIN_INTERVAL_SEC;
+        const rawInterval = Number(item.interval);
         const safeResult = getSafePublishInterval(rawInterval, _continuousPublishCount);
         const safeWait = safeResult.interval;
         if (rawInterval < SAFE_PUBLISH_MIN_INTERVAL_SEC) {

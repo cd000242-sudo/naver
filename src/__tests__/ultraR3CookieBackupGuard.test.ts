@@ -1,6 +1,8 @@
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { existsSync, readFileSync, rmSync } from 'fs';
-import { join } from 'path';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'fs';
+import { dirname, join, resolve } from 'path';
+import { tmpdir } from 'os';
+import { app } from 'electron';
 
 import { saveCookies } from '../sessionPersistence';
 
@@ -15,13 +17,11 @@ import { saveCookies } from '../sessionPersistence';
  * 계약: (1) 네이버 도메인을 명시해 쿠키를 획득한다.
  *       (2) 유효 쿠키 0개면 기존 백업을 덮어쓰지 않는다.
  *
- * 경로: vitest.config.ts가 electron을 src/__tests__/mocks/electron.ts로 alias
- * 하므로 app.getPath('userData')는 '/mock/userData'다.
+ * 각 테스트는 쓰기 가능한 임시 userData를 사용하고 종료 시 삭제한다.
  */
-const USER_DATA = '/mock/userData';
+let userData: string;
 const ACCOUNT = 'r3-cookie-guard-account';
-const ACCOUNT_DIR = join(USER_DATA, 'sessions', ACCOUNT);
-const COOKIE_FILE = join(ACCOUNT_DIR, 'cookies.json');
+let cookieFile: string;
 
 function makePage(cookies: unknown[], calls: unknown[][] = []) {
   return {
@@ -45,13 +45,19 @@ const REAL_COOKIE = {
   secure: true,
 };
 
-function cleanup(): void {
-  try { rmSync(ACCOUNT_DIR, { recursive: true, force: true }); } catch { /* noop */ }
-}
-
 describe('R3: keep-alive 빈 쿠키가 백업을 지우지 않는다', () => {
-  beforeEach(cleanup);
-  afterEach(cleanup);
+  beforeEach(() => {
+    userData = mkdtempSync(join(tmpdir(), 'cookie-backup-guard-'));
+    cookieFile = join(userData, 'sessions', ACCOUNT, 'cookies.json');
+    vi.spyOn(app, 'getPath').mockImplementation(() => userData);
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
+    if (dirname(resolve(userData)) !== resolve(tmpdir())) {
+      throw new Error('Unsafe cookie fixture cleanup target');
+    }
+    rmSync(userData, { recursive: true, force: true });
+  });
 
   it('네이버 도메인을 명시해 쿠키를 획득한다 (about:blank에서 0개 반환 방지)', async () => {
     const calls: unknown[][] = [];
@@ -65,22 +71,22 @@ describe('R3: keep-alive 빈 쿠키가 백업을 지우지 않는다', () => {
 
   it('유효 쿠키 0개면 기존 백업 파일을 그대로 보존한다', async () => {
     await saveCookies(makePage([REAL_COOKIE]), ACCOUNT);
-    expect(existsSync(COOKIE_FILE), '백업 파일이 생성되어야 한다').toBe(true);
-    const before = readFileSync(COOKIE_FILE, 'utf-8');
+    expect(existsSync(cookieFile), '백업 파일이 생성되어야 한다').toBe(true);
+    const before = readFileSync(cookieFile, 'utf-8');
     expect(before).toContain('r3-real-session-token');
 
     // keep-alive가 about:blank에서 0개를 들고 오는 상황
     await saveCookies(makePage([]), ACCOUNT);
 
-    const after = readFileSync(COOKIE_FILE, 'utf-8');
+    const after = readFileSync(cookieFile, 'utf-8');
     expect(after).toBe(before);
     expect(after).toContain('r3-real-session-token');
   });
 
   it('백업이 없을 때는 빈 쿠키라도 파일을 생성한다 (최초 상태 기록 유지)', async () => {
     await saveCookies(makePage([]), ACCOUNT);
-    expect(existsSync(COOKIE_FILE)).toBe(true);
-    expect(JSON.parse(readFileSync(COOKIE_FILE, 'utf-8')).cookies).toEqual([]);
+    expect(existsSync(cookieFile)).toBe(true);
+    expect(JSON.parse(readFileSync(cookieFile, 'utf-8')).cookies).toEqual([]);
   });
 
   it('유효 쿠키가 있으면 정상적으로 덮어쓴다 (보존 가드가 갱신을 막지 않는다)', async () => {
@@ -89,7 +95,7 @@ describe('R3: keep-alive 빈 쿠키가 백업을 지우지 않는다', () => {
       makePage([{ ...REAL_COOKIE, value: 'r3-refreshed-token' }]),
       ACCOUNT,
     );
-    const after = readFileSync(COOKIE_FILE, 'utf-8');
+    const after = readFileSync(cookieFile, 'utf-8');
     expect(after).toContain('r3-refreshed-token');
     expect(after).not.toContain('r3-real-session-token');
   });

@@ -5,31 +5,40 @@
  * Node runtime, so it works on a PC where `npm` is nowhere on PATH.
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { delimiter } from 'path';
+import { delimiter, dirname, join, resolve } from 'path';
+import { mkdtempSync, rmSync } from 'fs';
+import { tmpdir } from 'os';
+import { app } from 'electron';
 
 const ensureBootstrappedNpmMock = vi.hoisted(() => vi.fn());
 vi.mock('../agentCli/npmBootstrap', () => ({
   ensureBootstrappedNpm: (...args: unknown[]) => ensureBootstrappedNpmMock(...args),
 }));
 
-const MANAGED_ROOT = '/mock/userData/agent-runtime';
-const BUNDLED_NPM_CLI = `${MANAGED_ROOT}/npm/bin/npm-cli.js`;
+let userData: string;
+let bundledNpmCli: string;
 
 import { resolveNpmInvocation } from '../agentCli/npmInvocation';
 import { AGENT_RUNTIME_NODE_ENV_KEY } from '../agentCli/agentRuntime';
 
 beforeEach(() => {
+  userData = mkdtempSync(join(tmpdir(), 'agent-npm-invocation-'));
+  bundledNpmCli = join(userData, 'agent-runtime', 'npm', 'bin', 'npm-cli.js');
+  vi.spyOn(app, 'getPath').mockImplementation(() => userData);
   ensureBootstrappedNpmMock.mockReset();
-  ensureBootstrappedNpmMock.mockResolvedValue(BUNDLED_NPM_CLI);
-  process.env.NAVER_PASSWORD = 'must-not-reach-npm';
-  process.env.GEMINI_API_KEY = 'must-not-reach-npm';
-  process.env.NPM_CONFIG_PREFIX = 'C:\\Users\\tester\\npm-global';
+  ensureBootstrappedNpmMock.mockResolvedValue(bundledNpmCli);
+  vi.stubEnv('NAVER_PASSWORD', 'must-not-reach-npm');
+  vi.stubEnv('GEMINI_API_KEY', 'must-not-reach-npm');
+  vi.stubEnv('NPM_CONFIG_PREFIX', join(userData, 'user-global'));
 });
 
 afterEach(() => {
-  delete process.env.NAVER_PASSWORD;
-  delete process.env.GEMINI_API_KEY;
-  delete process.env.NPM_CONFIG_PREFIX;
+  vi.restoreAllMocks();
+  vi.unstubAllEnvs();
+  if (dirname(resolve(userData)) !== resolve(tmpdir())) {
+    throw new Error('Unsafe npm fixture cleanup target');
+  }
+  rmSync(userData, { recursive: true, force: true });
 });
 
 describe('resolveNpmInvocation (bundled runtime)', () => {
@@ -37,7 +46,7 @@ describe('resolveNpmInvocation (bundled runtime)', () => {
     const invocation = await resolveNpmInvocation();
     expect(invocation.source).toBe('bundled');
     expect(invocation.command).toBe(process.execPath);
-    expect(invocation.prefixArgs).toEqual([BUNDLED_NPM_CLI]);
+    expect(invocation.prefixArgs).toEqual([bundledNpmCli]);
   });
 
   it('runs Electron in Node mode and publishes the runtime path for the shim', async () => {
@@ -50,13 +59,13 @@ describe('resolveNpmInvocation (bundled runtime)', () => {
     const invocation = await resolveNpmInvocation();
     const key = Object.keys(invocation.env).find((k) => k.toUpperCase() === 'PATH') ?? 'PATH';
     const first = String(invocation.env[key]).split(delimiter)[0];
-    expect(first.replace(/\\/g, '/')).toContain('agent-runtime/bin');
+    expect(first).toBe(join(userData, 'agent-runtime', 'bin'));
   });
 
   it('targets an app-owned prefix and cache instead of the user global folder', async () => {
     const invocation = await resolveNpmInvocation();
-    expect(String(invocation.prefix).replace(/\\/g, '/')).toContain('agent-runtime/global');
-    expect(String(invocation.cache).replace(/\\/g, '/')).toContain('agent-runtime/npm-cache');
+    expect(invocation.prefix).toBe(join(userData, 'agent-runtime', 'global'));
+    expect(invocation.cache).toBe(join(userData, 'agent-runtime', 'npm-cache'));
     // A leftover user override would make the install location ambiguous.
     expect(invocation.env.NPM_CONFIG_PREFIX).toBeUndefined();
   });
@@ -81,6 +90,6 @@ describe('resolveNpmInvocation (fallback)', () => {
   it('still targets the app-owned prefix on the fallback path', async () => {
     ensureBootstrappedNpmMock.mockRejectedValue(new Error('offline'));
     const invocation = await resolveNpmInvocation();
-    expect(String(invocation.prefix).replace(/\\/g, '/')).toContain('agent-runtime/global');
+    expect(invocation.prefix).toBe(join(userData, 'agent-runtime', 'global'));
   });
 });
