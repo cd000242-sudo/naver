@@ -48,20 +48,37 @@ export function shouldApplyUserInterval(mode: unknown): boolean {
 }
 
 /**
- * 실제로 적용할 하한. 이미지 소스별 플로어(느린 소스일수록 큼)와
- * 사용자 설정 중 큰 쪽을 쓴다 — 둘 다 "이보다 빠르면 위험" 이라는 뜻이라 최댓값이 맞다.
- * 임시저장·예약은 사용자 설정을 적용하지 않고 이미지 플로어만 지킨다.
+ * 연속 발행 화면/큐의 명시적인 간격이 있으면 이미지별 하한만 적용한다.
+ * 전역 설정은 명시 간격이 없을 때의 폴백이며 화면의 선택을 덮어쓰지 않는다.
+ * 임시저장·예약도 이미지 플로어만 지킨다.
  */
 export function resolvePublishFloorSec(
   imageAwareFloorSec: number,
   configuredMinutes: unknown,
   mode?: unknown,
+  requestedIntervalSec?: number,
 ): number {
   const imageFloor = Number.isFinite(imageAwareFloorSec) && imageAwareFloorSec > 0
     ? Math.floor(imageAwareFloorSec)
     : ABSOLUTE_MIN_PUBLISH_INTERVAL_SEC;
+  if (typeof requestedIntervalSec === 'number'
+    && Number.isFinite(requestedIntervalSec) && requestedIntervalSec > 0) return imageFloor;
   if (!shouldApplyUserInterval(mode)) return imageFloor;
   return Math.max(imageFloor, normalizeConfiguredMinIntervalSec(configuredMinutes));
+}
+
+/** Choose an exact unit for editing: 90 minutes must not become 1 hour. */
+export function publishIntervalToFields(seconds: number): { value: number; unit: number } {
+  const value = Number.isFinite(seconds) && seconds > 0
+    ? Math.min(86400, Math.floor(seconds))
+    : DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES * 60;
+  const unit = value % 3600 === 0 ? 3600 : value % 60 === 0 ? 60 : 1;
+  return { value: value / unit, unit };
+}
+
+export function formatContinuousIntervalLabel(seconds: number): string {
+  const fields = publishIntervalToFields(seconds);
+  return `${fields.value}${fields.unit === 3600 ? '시간' : fields.unit === 60 ? '분' : '초'}`;
 }
 
 /** 권장선보다 짧게 설정했을 때 사용자에게 보여줄 안내. 없으면 null. */
