@@ -1,310 +1,141 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useState } from 'react';
 import LicenseGate, { isUnlocked } from './LicenseGate';
 import { naverSearchUrl } from './preemptionMeta';
 import { TabIntro } from './LewordShared';
 import { BoardFreshness } from './BoardFreshness';
-
-/**
- * 오늘의 글감 — NOW / NEXT / ALWAYS 글감 브리프(사장님 예시 형식, 2026-09-09).
- *
- * 키워드 목록이 아니라 **날짜가 박힌 공식 사실에서 나온 글감**이다. leword-app CI(topic-briefs.yml, 매일 아침)가
- * 분야별로 네이버 뉴스 API 기사를 실측해 사실 카드를 만들고, 에이전트가 카드 **안에서만** 글감을 고르며,
- * 검증기가 카드에 없는 날짜·숫자를 떨어뜨린다. 검색량은 검색광고 실측, SERP 적합성은 정면 글 수 실측이다.
- * 안 쟀으면 '미측정'으로 그대로 보인다. 여기서는 읽기만 한다.
- *
- * 무료 건수는 다른 정적 보드와 같은 3건이다.
- */
-
-type Timing = 'NOW' | 'NEXT' | 'ALWAYS';
-
-interface BriefFact { id: string; title: string; press: string; link: string; publishedAt: string }
-
-interface Brief {
-    title: string;
-    timing: Timing;
-    types: string[];
-    primaryIntent: string;
-    value: string;
-    experience: string;
-    differentiation: string;
-    coreKeyword: string;
-    field: string;
-    facts: BriefFact[];
-    searchVolume: number | null;
-    /** 검색광고가 '< 10' 으로 답한 검색어 — 잰 것이다 */
-    searchVolumeUnder10?: boolean;
-    serpFacing: number | null;
-    serpVacancy: number | null;
-    serpFit: '높음' | '보통' | '낮음' | '미측정';
-    star: boolean;
-    /** 핵심 검색어가 낮음/보통일 때 자리를 재 본 좁은 검색어 — null = 재 봤는데 없음, 없음(undefined) = 안 잼 */
-    alternative?: { keyword: string; searchVolume: number | null; serpFacing: number | null; serpVacancy: number | null; serpFit: '높음' | '보통' | '낮음' | '미측정' } | null;
-    /** 같이 넣을 말 — 본문에 함께 담을 좁은 검색어. 전부 검색광고 실측이고 검색량도 실측이다. */
-    related?: Array<{ keyword: string; searchVolume: number; serpFacing?: number | null; serpVacancy?: number | null; serpFit?: '높음' | '보통' | '낮음' | '미측정' }>;
-    /** 제목 후보 — 유형이 서로 다른 3~4개. 교리에 걸리는 것은 회차가 이미 떨어뜨렸다. */
-    /**
-     * 제목 후보 — 셋 다 검색어로 문장이 시작하고, 끝이 다르다(2026-09-10).
-     *   검색 = 서술로 끝 · AI답변 = 물음으로 끝 · 인용 = 기사의 숫자·날짜가 박힘.
-     * target 은 생성기가 글자로 확인해 붙인 값이다. 옛 회차 파일에는 없어서 optional 이다.
-     */
-    titles?: Array<{ target?: '검색' | 'AI답변' | '인용' | null; type: string; text: string }>;
-}
+import { normalizeTopicBrief, partitionTopicBriefs, searchVolumeLabel, topicBriefCopy, type BriefMetric, type TopicBriefView } from '../../lib/topicBriefsModel';
+import './TopicBriefsBoard.css';
 
 type RoundSlot = '아침' | '오후' | '저녁';
-
-interface BriefRound {
-    slot: RoundSlot;
-    builtAt: string;
-    counts: { briefs: number; now: number; next: number; always: number; star: number };
-    briefs: Brief[];
-}
-
-interface TopicBriefs {
-    builtAt: string;
-    slot?: RoundSlot;
-    /** 오늘의 회차들(아침 04:23 · 오후 10:23 · 저녁 16:23 KST, 2026-09-15 2시간 앞당김) — 사장님 2026-09-09 "오전 오후 저녁 나눠서" */
-    rounds?: BriefRound[];
-    counts: { briefs: number; now: number; next: number; always: number; star: number };
-    briefs: Brief[];
-}
-
-// 크론이 정각을 피해 04:23·10:23·16:23 KST 로 돈다(정각은 GitHub 가 미룸). 표기도 그 시각.
-// 2026-09-12 에 2시간 앞당겼다 — 예약이 한결같이 2시간쯤 늦게 떠서, 늦어도 제 시간에 올라오게.
+interface BriefRound { slot: RoundSlot; builtAt: string; briefs: unknown[] }
+interface TopicBriefs { builtAt: string; slot?: RoundSlot; rounds?: BriefRound[]; briefs?: unknown[] }
 const SLOT_TIME: Record<RoundSlot, string> = { 아침: '04:23', 오후: '10:23', 저녁: '16:23' };
-
 const FREE_BRIEFS = 3;
-const TIMING_LABEL: Record<Timing, { name: string; desc: string }> = {
-    NOW: { name: 'NOW', desc: '지금 쓰는 글 — 이번 주 안에 찾는 것' },
-    NEXT: { name: 'NEXT', desc: '날짜가 정해진 예정 — 미리 써 두는 글' },
-    ALWAYS: { name: 'ALWAYS', desc: '철 안 타는 기준·제도 — 꾸준히 읽히는 글' },
-};
-const num = (value: number) => value.toLocaleString('ko-KR');
-const kst = (iso: string) => new Date(iso).toLocaleString('ko-KR', {
-    timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit',
-});
-const day = (iso: string) => new Date(iso).toLocaleDateString('ko-KR', { timeZone: 'Asia/Seoul', month: 'numeric', day: 'numeric' });
-// 한국 날짜만(YYYY-MM-DD) — 회차가 오늘 것인지 대조하는 데만 쓴다.
+const TIMING_LABEL = { NOW: '최근 소식', NEXT: '예정된 일정', ALWAYS: '지속 주제' };
+const kst = (iso: string) => Number.isFinite(Date.parse(iso)) ? new Date(iso).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '시간 확인 필요';
 const kstDay = (iso: string) => new Date(iso).toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
 
-/*
- * 제목 갈래(2026-09-10) — 사장님 "제목후보는 네이버에 최적화해서 SEO·AEO·GEO 에 최적화된 제목을".
- * 앱과 같은 말·같은 뜻을 쓴다. 배지 색만 사이트 팔레트에 맞춘다.
- */
-const TARGET_KEY: Record<string, string> = { '검색': 'seo', 'AI답변': 'aeo', '인용': 'geo' };
-const TARGET_HINT: Record<string, string> = {
-    '검색': '네이버 검색 결과에 걸리는 꼴 — 검색어로 시작하고 서술로 끝납니다',
-    'AI답변': '네이버 AI 브리핑·스마트블록이 답으로 물어 가는 꼴 — 검색어로 시작하고 물음으로 끝납니다',
-    '인용': '생성형 AI 가 근거로 인용하기 좋은 꼴 — 기사에 있던 숫자·날짜가 제목에 박혀 있습니다',
-};
+function Metric({ item }: { item: BriefMetric }) {
+    return <div className="tb-metric">
+        <a href={naverSearchUrl(item.keyword)} target="_blank" rel="noreferrer">{item.keyword}</a>
+        <span>월 검색량 {searchVolumeLabel(item.searchVolume, item.searchVolumeUnder10)}</span>
+        <span>정면 글 {item.serpFacing === null ? '미측정' : `${item.serpFacing}/10`}</span>
+        <span>경쟁 여유 {item.fit}</span>
+    </div>;
+}
+
+function BriefCard({ brief, initialOpen = false, onAnalyze }: { brief: TopicBriefView; initialOpen?: boolean; onAnalyze?: (keyword: string) => void }) {
+    const groupId = useId();
+    const [open, setOpen] = useState(initialOpen);
+    const [selectedTitle, setSelectedTitle] = useState(brief.titles[0]?.text || brief.title);
+    const [feedback, setFeedback] = useState('');
+    const [manualCopy, setManualCopy] = useState('');
+    const copy = async (whole: boolean) => {
+        const content = whole ? topicBriefCopy(brief, selectedTitle) : selectedTitle;
+        try {
+            if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+            await navigator.clipboard.writeText(content);
+            setManualCopy('');
+            setFeedback(whole ? '제목·답변·근거·추가 확인을 포함한 작성안을 복사했습니다.' : '선택한 제목을 복사했습니다.');
+        } catch {
+            setManualCopy(content);
+            setFeedback('자동 복사가 되지 않았습니다. 아래 내용을 선택해 복사하세요.');
+        }
+    };
+    return <details className="lw-briefs-card tb-card" open={open} onToggle={event => setOpen(event.currentTarget.open)}>
+        <summary><div className="tb-card-heading">
+            <span className={`tb-state ${brief.status === 'supported' ? 'is-ready' : ''}`}>{brief.status === 'supported' ? '근거 검토 완료' : '추가 확인 필요'}</span>
+            <span className="tb-category">{brief.field} · {TIMING_LABEL[brief.timing]}</span>
+            <h3>{brief.title}</h3><p>{brief.summary}</p>
+            {brief.audience && <span className="tb-audience">읽을 사람 · {brief.audience}</span>}
+            <span className="tb-open-label">{open ? '작성안 접기' : '질문·근거와 작성안 보기'}</span>
+        </div></summary>
+        <div className="tb-card-body">
+            {brief.recommendation && <div className="tb-recommendation"><strong>살펴볼 이유</strong><p>{brief.recommendation.reason}</p><span>작성할 검색어 · {brief.recommendation.keyword}</span></div>}
+            {brief.question && <div className="tb-question"><strong>{brief.legacy ? '조사할 질문' : '독자의 질문'}</strong><p>{brief.question}</p></div>}
+            {!brief.audience && <p className="tb-muted">읽을 사람은 원문을 확인하며 정하세요.</p>}
+            <section className="tb-answers" aria-label="질문별 답과 근거"><h4>질문별 답과 근거</h4>
+                {brief.answers.length ? brief.answers.map((answer, index) => <div className="tb-answer" key={`${answer.question}-${index}`}>
+                    <h5>{answer.question}</h5><p>{answer.answer}</p>
+                    {answer.excerpts.map((excerpt, excerptIndex) => <blockquote key={`${excerpt.factId}-${excerptIndex}`}>
+                        <p>{excerpt.text}</p><a href={excerpt.source.link} target="_blank" rel="noreferrer">{excerpt.source.title} ↗</a>
+                    </blockquote>)}
+                </div>) : <p className="tb-muted">아직 답을 뒷받침할 발췌가 준비되지 않았습니다. 아래 원문에서 조사할 질문의 답을 확인하세요.</p>}
+            </section>
+            <section className="tb-missing" aria-label="추가 확인"><h4>추가 확인</h4><ul>{(brief.missing.length ? brief.missing : ['작성 전 최신 공고·수치·일정을 확인하세요.']).map((item, index) => <li key={`${item}-${index}`}>{item}</li>)}</ul></section>
+            <div className="tb-plan">
+                <section><h4>목차 초안</h4>{brief.outline.length ? <ol>{brief.outline.map((item, index) => <li key={`${item}-${index}`}>{item}</li>)}</ol> : <p className="tb-muted">질문과 근거를 확인한 뒤 구성하세요.</p>}</section>
+                <section><h4>접근 각도</h4><p>{brief.angle || '독자가 해결할 질문을 정한 뒤 구성하세요.'}</p></section>
+            </div>
+            <fieldset className="tb-titles"><legend>제목 선택</legend>
+                {brief.titles.map(title => <label key={title.text}><input type="radio" name={`${groupId}-title`} value={title.text} checked={selectedTitle === title.text} onChange={() => setSelectedTitle(title.text)} /><span className="tb-title-kind">{title.kind}</span><span>{title.text}</span></label>)}
+            </fieldset>
+            <div className="tb-copy-actions">
+                <button type="button" className="lw-picks-btn tb-copy-all" onClick={() => void copy(true)}>작성안 전체 복사</button>
+                <button type="button" className="lw-picks-btn" onClick={() => void copy(false)}>선택 제목 복사</button>
+                {onAnalyze && <button type="button" className="lw-picks-btn" onClick={() => onAnalyze(brief.recommendation?.keyword || brief.core.keyword)}>검색어 분석</button>}
+            </div>
+            <p className="tb-feedback" role="status" aria-live="polite">{feedback}</p>
+            {manualCopy && <textarea className="tb-manual-copy" aria-label="직접 복사할 작성안" readOnly value={manualCopy} onFocus={event => event.currentTarget.select()} />}
+            <details className="tb-measurements"><summary>검색 수치 확인</summary>
+                <p className="tb-muted">정면 글 수는 측정한 상위 10개 결과 중 같은 질문을 다룬 글의 수입니다. 2개 이하는 경쟁 여유 높음, 3~5개는 보통으로 표시합니다. 검색 결과와 수요는 달라질 수 있습니다.</p>
+                <Metric item={brief.core} />
+                {brief.recommendation && brief.recommendation.keyword !== brief.core.keyword && <Metric item={brief.recommendation.metric} />}
+                {brief.related.length > 0 && <><h5>함께 조사할 검색어</h5>{brief.related.map((item, index) => <Metric key={`${item.keyword}-${index}`} item={item} />)}</>}
+            </details>
+            <section className="tb-sources" aria-label="조사할 원문"><h4>조사할 원문 · {brief.sources.length}개</h4>
+                {brief.sources.length ? <ul>{brief.sources.map((source, index) => <li key={`${source.id}-${index}`}><a href={source.link} target="_blank" rel="noreferrer">{source.title} ↗</a><small>{source.press}{source.publishedAt ? ` · ${kst(source.publishedAt)}` : ''}</small></li>)}</ul> : <p>연결된 원문이 없습니다. 출처를 확보한 뒤 작성하세요.</p>}
+            </section>
+        </div>
+    </details>;
+}
 
 export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
     const [data, setData] = useState<TopicBriefs | null>(null);
     const [error, setError] = useState('');
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
-    const [field, setField] = useState<string>('전체');
+    const [field, setField] = useState('전체');
     const [slot, setSlot] = useState<RoundSlot | null>(null);
-
     useEffect(() => {
         let alive = true;
         fetch('/data/topic-briefs.json', { cache: 'no-cache' })
-            .then((response) => (response.ok ? response.json() : Promise.reject(new Error(`HTTP ${response.status}`))))
-            .then((json) => { if (alive) setData(json as TopicBriefs); })
-            .catch((cause: unknown) => { if (alive) setError(cause instanceof Error ? cause.message : String(cause)); });
+            .then(response => response.ok ? response.json() : Promise.reject(new Error(`HTTP ${response.status}`)))
+            .then(json => { if (alive) setData(json && typeof json === 'object' ? json as TopicBriefs : { builtAt: '', briefs: [] }); })
+            .catch(() => { if (alive) setError('글감을 불러오지 못했습니다. 잠시 후 페이지를 다시 열어 주세요.'); });
         return () => { alive = false; };
     }, []);
-
-    // 회차 — rounds 가 없는 옛 파일은 한 회차로 본다. 기본은 가장 최근 회차.
-    const rounds: BriefRound[] = useMemo(() => (
-        data ? (data.rounds && data.rounds.length > 0 ? data.rounds : [{ slot: data.slot ?? '아침', builtAt: data.builtAt, counts: data.counts, briefs: data.briefs }]) : []
-    ), [data]);
-    const activeRound = rounds.find((r) => r.slot === slot) ?? rounds[rounds.length - 1] ?? null;
-    const all = activeRound?.briefs ?? [];
-    // 실린 회차가 오늘(KST) 것인가. 깃허브 예약이 늦으면 어제 회차가 그대로 남는데,
-    // 그걸 '오늘'이라고 부르면 사용자는 갱신된 줄 안다. 날짜를 실제로 대조한다.
-    const latestBuiltAt = rounds.length > 0 ? rounds[rounds.length - 1].builtAt : null;
-    const isStale = latestBuiltAt != null && kstDay(latestBuiltAt) !== kstDay(new Date().toISOString());
-    const todayTotal = rounds.reduce((sum, r) => sum + r.briefs.length, 0);
-    const todayStar = rounds.reduce((sum, r) => sum + r.briefs.filter((b) => b.star).length, 0);
-    const fields = useMemo(() => ['전체', ...Array.from(new Set(all.map((b) => b.field)))], [all]);
-    const filtered = field === '전체' ? all : all.filter((b) => b.field === field);
-    const visible = unlocked ? filtered : filtered.slice(0, FREE_BRIEFS);
-    const groups = (['NOW', 'NEXT', 'ALWAYS'] as const).map((timing) => ({ timing, items: visible.filter((b) => b.timing === timing) })).filter((g) => g.items.length > 0);
-
-    return (
-        <section className="lw-picks lw-picks-tab lw-briefs" aria-labelledby="lw-briefs-title">
-            <h2 id="lw-briefs-title" hidden>오늘의 글감</h2>
-            <TabIntro
-                title="오늘의 글감"
-                desc={`날짜가 박힌 공식 사실에서 뽑은 글감 — NOW(지금) · NEXT(예정) · ALWAYS(지속)${data ? ` · ${isStale && latestBuiltAt ? `${day(latestBuiltAt)} 회차` : '오늘'} ${rounds.length}회차 ${num(todayTotal)}건 · ★ ${num(todayStar)}` : ''}`}
-                source="네이버 뉴스 API 기사 실측 · 검색광고 검색량 실측 · 정면 글 수 실측(안 쟀으면 미측정) · 아침 04:23 · 오후 10:23 · 저녁 16:23 갱신"
-            />
-
-            <BoardFreshness
-                cadence="매일 아침·낮·저녁 세 번"
-                rounds={[
-                    { hour: 4, minute: 23, label: '아침' },
-                    { hour: 10, minute: 23, label: '오후' },
-                    { hour: 16, minute: 23, label: '저녁' },
-                ]}
-                lastBuiltAt={latestBuiltAt}
-            />
-
-            {error && <p className="lw-note lw-note-error">글감을 못 읽었습니다 — {error}</p>}
-            {!error && !data && <p className="lw-note">불러오는 중…</p>}
-
-            {isStale && latestBuiltAt && (
-                <p className="lw-note">오늘 회차가 아직 안 올라왔습니다 — 지금 보이는 것은 {day(latestBuiltAt)} 회차입니다. 아침 회차는 04:23 에 걸어 두었지만(예약이 늦는 만큼 미리) 깃허브 예약이 밀리면 늦어집니다.</p>
-            )}
-
-            {rounds.length > 0 && (
-                <div className="lw-briefs-rounds" role="tablist" aria-label="회차">
-                    {(['아침', '오후', '저녁'] as const).map((name) => {
-                        const round = rounds.find((r) => r.slot === name);
-                        const active = activeRound?.slot === name;
-                        return (
-                            <button
-                                key={name}
-                                type="button"
-                                role="tab"
-                                aria-selected={active}
-                                disabled={!round}
-                                className={`lw-briefs-round${active ? ' is-active' : ''}${round ? '' : ' is-pending'}`}
-                                onClick={() => round && setSlot(name)}
-                                title={round ? `${kst(round.builtAt)} 실측` : `${SLOT_TIME[name]} 회차 예정`}
-                            >
-                                <strong>{name}</strong>
-                                <span>{round ? `${round.briefs.length}건 · ★ ${round.briefs.filter((b) => b.star).length}` : `${SLOT_TIME[name]} 예정`}</span>
-                            </button>
-                        );
-                    })}
-                </div>
-            )}
-
-            {data && (
-                <div className="lw-picks-topics" role="tablist" aria-label="분야">
-                    {fields.map((name) => (
-                        <button
-                            key={name}
-                            type="button"
-                            role="tab"
-                            aria-selected={field === name}
-                            className={`lw-picks-topic-btn${field === name ? ' is-active' : ''}`}
-                            onClick={() => setField(name)}
-                        >
-                            {name}
-                            <b>{name === '전체' ? all.length : all.filter((b) => b.field === name).length}</b>
-                        </button>
-                    ))}
-                </div>
-            )}
-
-            {groups.map(({ timing, items }) => (
-                <div key={timing} className="lw-briefs-group">
-                    <div className="lw-briefs-group-head">
-                        <strong className={`lw-briefs-timing is-${timing.toLowerCase()}`}>{TIMING_LABEL[timing].name}</strong>
-                        <span>{TIMING_LABEL[timing].desc} · {items.length}건</span>
-                    </div>
-                    {items.map((b) => (
-                        <article key={`${b.field}-${b.title}`} className="lw-briefs-card">
-                            <header className="lw-briefs-card-head">
-                                <h3>{b.star && <span className="lw-briefs-star" title="적합성 높음 + 실측 뒷받침">★</span>}{b.title}</h3>
-                                <div className="lw-briefs-chips">
-                                    <span className="lw-picks-chip lw-briefs-field">{b.field}</span>
-                                    {b.types.map((t) => <span key={t} className="lw-picks-chip lw-briefs-type">{t}</span>)}
-                                    <span className={`lw-picks-chip lw-briefs-fit is-${b.serpFit}`}>SERP 적합성 {b.serpFit}{b.serpFacing != null ? ` · 정면 ${b.serpFacing}` : ''}{b.serpVacancy != null ? ` · 빈자리 ${b.serpVacancy}위` : ''}</span>
-                                </div>
-                            </header>
-                            <dl className="lw-briefs-dl">
-                                <dt>Primary Intent</dt><dd>{b.primaryIntent}</dd>
-                                <dt>작성가치</dt><dd>{b.value}</dd>
-                                <dt>경험활용</dt><dd>{b.experience}</dd>
-                                <dt>차별화</dt><dd>{b.differentiation}</dd>
-                            </dl>
-                            {(b.serpFit === '낮음' || b.serpFit === '보통') && b.alternative !== undefined && (
-                                <p className={`lw-briefs-alt${b.alternative?.serpFit === '높음' ? ' is-open' : ''}`}>
-                                    {b.alternative
-                                        ? <>
-                                            <em>{b.alternative.serpFit === '높음' ? '이 검색어로 쓰면 들어갑니다' : '가장 덜 막힌 대안'}</em>
-                                            {' '}<a href={naverSearchUrl(b.alternative.keyword)} target="_blank" rel="noreferrer">{b.alternative.keyword}</a>
-                                            {' · '}월 검색량 {b.alternative.searchVolume == null ? '10 미만' : num(b.alternative.searchVolume)}
-                                            {' · '}정면 {b.alternative.serpFacing ?? '—'}{b.alternative.serpVacancy != null ? ` · 빈자리 ${b.alternative.serpVacancy}위` : ''}
-                                            {' · '}적합성 {b.alternative.serpFit}
-                                        </>
-                                        : <><em>대안 검색어 없음</em> — 같은 주제의 좁은 검색어를 재 봤지만 열린 자리가 없습니다. 이 글감은 정면 승부가 어렵습니다.</>}
-                                </p>
-                            )}
-                            {b.titles && b.titles.length > 0 && (
-                                <div className="lw-briefs-titles">
-                                    <em>제목 후보</em>
-                                    <ul>
-                                        {b.titles.map((t) => (
-                                            <li key={t.text}>
-                                                {t.target ? (
-                                                    <span className={`lw-briefs-ttarget is-${TARGET_KEY[t.target]}`} title={TARGET_HINT[t.target]}>{t.target}</span>
-                                                ) : null}
-                                                <span className="lw-briefs-ttype">{t.type}</span>
-                                                <span className="lw-briefs-ttext">{t.text}</span>
-                                                <button
-                                                    type="button"
-                                                    className="lw-briefs-tcopy"
-                                                    onClick={() => { void navigator.clipboard?.writeText(t.text); }}
-                                                    aria-label={`${t.text} 복사`}
-                                                >복사</button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                            {b.related && b.related.length > 0 && (
-                                <p className="lw-briefs-related">
-                                    <em>같이 넣을 말</em>
-                                    {b.related.map((r) => (
-                                        <a
-                                            key={r.keyword}
-                                            className={r.serpFit === '높음' ? 'is-open' : ''}
-                                            href={naverSearchUrl(r.keyword)}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            title={r.serpFit
-                                                ? `월 검색량 ${num(r.searchVolume)} 실측 · 상위 10 정면 글 ${r.serpFacing ?? '—'}건${r.serpVacancy != null ? ` · 빈자리 ${r.serpVacancy}위` : ''} · 적합성 ${r.serpFit}`
-                                                : `월 검색량 ${num(r.searchVolume)} 실측 · 자리는 안 쟀습니다`}
-                                        >
-                                            {r.serpFit === '높음' && <i aria-hidden="true">●</i>}
-                                            {r.keyword}<b>{num(r.searchVolume)}</b>
-                                        </a>
-                                    ))}
-                                    {b.related.some((r) => r.serpFit === '높음') && (
-                                        <small>● 표는 지금 상위 10에 정면 글이 거의 없는 말입니다</small>
-                                    )}
-                                </p>
-                            )}
-                            <footer className="lw-briefs-foot">
-                                <span>
-                                    핵심 검색어 <a href={naverSearchUrl(b.coreKeyword)} target="_blank" rel="noreferrer">{b.coreKeyword}</a>
-                                    {' · '}월 검색량 {b.searchVolume != null ? num(b.searchVolume) : b.searchVolumeUnder10 ? '10 미만' : '미측정'}
-                                </span>
-                                <span className="lw-briefs-facts">
-                                    근거 {b.facts.slice(0, 2).map((f) => (
-                                        <a key={f.id} href={f.link} target="_blank" rel="noreferrer" title={f.title}>{f.press || '기사'} {day(f.publishedAt)}</a>
-                                    ))}
-                                </span>
-                                {onAnalyze && (
-                                    <button type="button" className="lw-picks-btn" onClick={() => onAnalyze(b.coreKeyword)}>분석</button>
-                                )}
-                            </footer>
-                        </article>
-                    ))}
-                </div>
-            ))}
-
-            {data && !unlocked && filtered.length > FREE_BRIEFS && (
-                <LicenseGate
-                    onUnlock={() => setUnlocked(true)}
-                    remaining={filtered.length - FREE_BRIEFS}
-                    freeRows={FREE_BRIEFS}
-                    boardLabel="오늘의 글감"
-                />
-            )}
-        </section>
-    );
+    const rounds = useMemo(() => {
+        const raw = data ? (Array.isArray(data.rounds) && data.rounds.length ? data.rounds : [{ slot: data.slot || '아침', builtAt: data.builtAt, briefs: data.briefs || [] }]) : [];
+        return raw.map(round => ({ ...round, items: (Array.isArray(round.briefs) ? round.briefs : []).map(normalizeTopicBrief) }));
+    }, [data]);
+    const activeRound = rounds.find(round => round.slot === slot) || rounds[rounds.length - 1];
+    const all = activeRound?.items || [];
+    const latestBuiltAt = rounds[rounds.length - 1]?.builtAt || null;
+    const isStale = latestBuiltAt && kstDay(latestBuiltAt) !== kstDay(new Date().toISOString());
+    const fields = ['전체', ...new Set(all.map(brief => brief.field))];
+    const activeField = fields.includes(field) ? field : '전체';
+    const filtered = activeField === '전체' ? all : all.filter(brief => brief.field === activeField);
+    const ordered = [...filtered.filter(brief => brief.recommended), ...filtered.filter(brief => !brief.recommended)];
+    const visible = unlocked ? ordered : ordered.slice(0, FREE_BRIEFS);
+    const sections = partitionTopicBriefs(visible);
+    const count = rounds.reduce((sum, round) => sum + round.items.length, 0);
+    return <section className="lw-picks lw-picks-tab lw-briefs tb-board" aria-label="오늘의 글감">
+        <TabIntro title="오늘의 글감" desc={`독자의 질문과 근거를 확인하고 작성안을 고르세요.${data ? ` ${rounds.length}회차 · ${count}건` : ''}`} source="기사 자료와 검색 수치를 바탕으로 구성합니다. 작성안의 준비 상태와 추가 확인할 내용을 함께 확인하세요." />
+        <BoardFreshness cadence="매일 아침·낮·저녁 세 번" rounds={[{ hour: 4, minute: 23, label: '아침' }, { hour: 10, minute: 23, label: '오후' }, { hour: 16, minute: 23, label: '저녁' }]} lastBuiltAt={latestBuiltAt} />
+        {error && <p className="lw-note lw-note-error">{error}</p>}
+        {!error && !data && <p className="lw-note">불러오는 중…</p>}
+        {isStale && latestBuiltAt && <p className="lw-note">최근 공개 회차는 {kst(latestBuiltAt)}입니다. 작성 전 일정과 조건을 다시 확인하세요.</p>}
+        {rounds.length > 0 && <div className="lw-briefs-rounds" aria-label="회차 선택">{(['아침', '오후', '저녁'] as const).map(name => {
+            const round = rounds.find(item => item.slot === name);
+            return <button type="button" key={name} disabled={!round} aria-pressed={activeRound?.slot === name} className={`lw-briefs-round${activeRound?.slot === name ? ' is-active' : ''}`} onClick={() => { setSlot(name); setField('전체'); }}><strong>{name}</strong><span>{round ? `${round.items.length}건 · ${kst(round.builtAt)}` : `${SLOT_TIME[name]} 예정`}</span></button>;
+        })}</div>}
+        {data && <div className="lw-picks-topics" aria-label="분야 선택">{fields.map(name => <button type="button" key={name} aria-pressed={activeField === name} className={`lw-picks-topic-btn${activeField === name ? ' is-active' : ''}`} onClick={() => setField(name)}>{name}<b>{name === '전체' ? all.length : all.filter(brief => brief.field === name).length}</b></button>)}</div>}
+        {data && <section className="tb-shortlist" aria-label="먼저 살펴볼 작성안"><h3>먼저 살펴볼 작성안 <span>{sections.recommended.length}건</span></h3>
+            <p className="tb-muted">근거 검토를 마치고, 작성할 검색어의 정면 글이 2개 이하인 작성안을 최대 5개 보여드립니다.</p>
+            {sections.recommended.length ? sections.recommended.map((brief, index) => <BriefCard key={brief.id} brief={brief} initialOpen={index === 0} onAnalyze={onAnalyze} />) : <p className="tb-empty">이 회차·분야에는 조건을 충족한 추천이 없습니다. 전체 글감에서 조사할 주제를 골라보세요.</p>}
+        </section>}
+        {sections.remaining.length > 0 && <details className="tb-all" key={`${activeRound?.slot}-${activeField}`} open={!sections.recommended.length}><summary>전체 글감 보기 · {sections.remaining.length}건{sections.recommended.length ? ' (위 추천 제외)' : ''}</summary><p className="tb-muted">추가 확인이 필요한 글감도 원문과 질문을 출발점으로 조사할 수 있습니다.</p>{sections.remaining.map(brief => <BriefCard key={brief.id} brief={brief} onAnalyze={onAnalyze} />)}</details>}
+        {data && !error && !filtered.length && <p className="tb-empty">이 회차에 공개된 글감이 없습니다.</p>}
+        {data && !unlocked && filtered.length > FREE_BRIEFS && <LicenseGate onUnlock={() => setUnlocked(isUnlocked())} remaining={filtered.length - FREE_BRIEFS} freeRows={FREE_BRIEFS} boardLabel="오늘의 글감" />}
+    </section>;
 }
