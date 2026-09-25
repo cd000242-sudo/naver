@@ -1,19 +1,20 @@
 {
-  "publishedAt": "2026-09-25T09:12:03.650Z",
+  "publishedAt": "2026-09-25T21:34:57.630Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
-    "niche": 1,
-    "preemption": 9,
+    "niche": 0,
+    "preemption": 4,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-09-25",
+    "day": "2026-09-26",
     "keywords": [
       "추신수 고등학교",
-      "한국수력원자력 본사"
+      "한국수력원자력 본사",
+      "국민일보 더미션"
     ]
   },
   "rows": [
@@ -98,14 +99,50 @@
       "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          96,
+          85,
+          73,
+          48,
+          77,
+          87,
+          80,
+          91,
+          72,
+          43,
+          33,
+          82,
+          72,
+          85,
+          84,
+          77,
+          65,
+          43,
+          76,
+          81,
+          86,
+          94,
+          82,
+          95,
+          48,
+          81,
+          100,
+          85,
+          77
+        ],
+        "label": "🐢 연금형",
+        "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
+        "measuredAt": "2026-09-25T21:34:58.409Z"
+      },
       "kinCount": 226,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-25T09:09:47.495Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "박지현 정치인",
@@ -216,7 +253,7 @@
           0,
           0
         ],
-        "measuredAt": "2026-09-25T09:12:04.415Z"
+        "measuredAt": "2026-09-25T21:34:58.409Z"
       },
       "kinCount": 936,
       "kinTop": [
@@ -457,7 +494,7 @@
           1,
           1
         ],
-        "measuredAt": "2026-09-25T03:36:15.278Z"
+        "measuredAt": "2026-09-25T21:34:58.409Z"
       },
       "kinCount": 642,
       "kinTop": [
@@ -661,7 +698,7 @@
           25,
           23
         ],
-        "measuredAt": "2026-09-25T09:12:04.415Z"
+        "measuredAt": "2026-09-25T21:34:58.409Z"
       },
       "kinCount": 581,
       "kinTop": [
@@ -681,6 +718,215 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "독일 변전소 1313곳",
+      "issue": "독일 변전소 1313곳",
+      "topic": "독일 변전소 1313곳",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 13,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 13",
+        "선점 후보 — 경쟁 문서 13건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-25T21:33:16.272Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "윤수정 해트트릭 4강",
+      "issue": "윤수정 해트트릭 4강",
+      "topic": "윤수정 해트트릭 4강",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 60,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 60",
+        "선점 후보 — 경쟁 문서 60건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-25T21:33:16.272Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "DMZ 지뢰폭발 은폐",
+      "issue": "DMZ 지뢰폭발 은폐",
+      "topic": "DMZ 지뢰폭발 은폐",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 290,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 290",
+        "선점 후보 — 경쟁 문서 290건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 5,
+      "kinTop": [
+        {
+          "title": "dmz 지뢰폭발 관련 의문점 질문입니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60401&docId=232704532&answerNo=3",
+          "views": 1250,
+          "answers": 3
+        },
+        {
+          "title": "지뢰 폭발 사건",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=604&docId=495289045&answerNo=1",
+          "views": 118,
+          "answers": 3
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-25T21:33:16.272Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "조엘진 100m 준결승",
+      "issue": "조엘진 100m 준결승",
+      "topic": "조엘진 100m 준결승",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 248,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 248",
+        "선점 후보 — 경쟁 문서 248건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-25T21:33:16.272Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "황서현 시인",
       "issue": "황서현",
@@ -736,7 +982,8 @@
       "monetize": null,
       "measuredAt": "2026-09-25T09:09:47.495Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "황서현 아나운서",
@@ -792,55 +1039,8 @@
       "monetize": null,
       "measuredAt": "2026-09-25T09:09:47.495Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "독일 변전소 1313곳",
-      "issue": "독일 변전소 1313곳",
-      "topic": "독일 변전소 1313곳",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 11,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 11",
-        "선점 후보 — 경쟁 문서 11건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-25T09:09:47.495Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "황서현 레이싱모델",
@@ -896,7 +1096,8 @@
       "monetize": null,
       "measuredAt": "2026-09-25T09:09:47.495Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "황서현 모델",
@@ -952,7 +1153,8 @@
       "monetize": null,
       "measuredAt": "2026-09-25T09:09:47.495Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "서은혜 초음파 AI",
@@ -1004,7 +1206,8 @@
       "monetize": null,
       "measuredAt": "2026-09-25T09:09:47.495Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "야마다 리아 사망",
@@ -1052,68 +1255,8 @@
       "monetize": null,
       "measuredAt": "2026-09-25T09:09:47.495Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "DMZ 지뢰폭발 은폐",
-      "issue": "DMZ 지뢰폭발 은폐",
-      "topic": "DMZ 지뢰폭발 은폐",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 250,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 250",
-        "선점 후보 — 경쟁 문서 250건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": [
-        {
-          "title": "dmz 지뢰폭발 관련 의문점 질문입니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60401&docId=232704532&answerNo=3",
-          "views": 1249,
-          "answers": 3
-        },
-        {
-          "title": "지뢰 폭발 사건",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=604&docId=495289045&answerNo=1",
-          "views": 108,
-          "answers": 3
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-25T09:09:47.495Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "홍콩에 막힌 펜싱",
@@ -1165,7 +1308,8 @@
       "monetize": null,
       "measuredAt": "2026-09-25T09:09:47.495Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "만인상생 조희대 박영사",
@@ -1808,715 +1952,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "한컴위드 커넥셔너리",
-      "issue": "한컴위드",
-      "topic": "한컴위드",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 2,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 2건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "한컴위드가 커넥셔너리와 AI 문서 분류·보안으로 N2SF 시장을 공략한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한컴위드 커넥셔너리 N2SF 협력 내용과 주가 영향",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한컴위드 커넥셔너리 손잡은 뒤로 주가가 왜 이러나 싶어 계속 들여다봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "한컴위드 주가",
-          "searchVolume": 6840,
-          "frame": "generic"
-        },
-        {
-          "keyword": "커넥셔너리",
-          "searchVolume": 240,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한컴위드 주식",
-          "searchVolume": 110,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "한컴위드 주가",
-          "searchVolume": 6840,
-          "documentCount": 13010,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "커넥셔너리",
-          "searchVolume": 240,
-          "documentCount": 25,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한컴위드 주식",
-          "searchVolume": 110,
-          "documentCount": 24163,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-23T21:33:51.448Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "한컴위드 anysign",
-      "issue": "한컴위드",
-      "topic": "한컴위드",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 200,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 200",
-        "선점 후보 — 경쟁 문서 200건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "한컴위드가 커넥셔너리와 AI 문서 분류·보안으로 N2SF 시장을 공략한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한컴위드 anysign 삭제 안 될 때 확인 순서",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한컴위드 anysign 지우다 문득 주가는 어떤가 싶어 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "한컴위드 주가",
-          "searchVolume": 6840,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한컴위드 채용",
-          "searchVolume": null,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한컴위드 배당",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "한컴위드 주가",
-          "searchVolume": 6840,
-          "documentCount": 13010,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 10,
-      "kinTop": [
-        {
-          "title": "한컴위드는 왜 AnySign for PC같은 걸 만드나",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110&docId=474669536&answerNo=0",
-          "views": 48,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-23T21:33:51.448Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스트랜즈 하네스",
-      "issue": "스트랜즈 하네스",
-      "topic": "스트랜즈 하네스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 7,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 7",
-        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "AWS가 토큰 비용 28% 낮춘 AI 에이전트 실행환경을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스트랜즈 하네스 토큰 비용 28% 줄인 AWS 오픈소스 실행환경",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "AWS 스트랜즈 하네스 토큰 28% 절감이라길래 한 줄 코드로 돌려봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-23T21:33:51.448Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "스트랜즈 하네스 AWS",
-      "issue": "스트랜즈 하네스",
-      "topic": "스트랜즈 하네스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 7,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 7",
-        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "AWS가 토큰 비용 28% 낮춘 AI 에이전트 실행환경을 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "스트랜즈 하네스 AWS 토큰 비용 28% 줄인 오픈소스 실행환경",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "스트랜즈 하네스 AWS가 토큰 28% 줄였다는데 뭐가 달라졌나 봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-23T21:33:51.448Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "한컴위드 N2SF",
-      "issue": "한컴위드",
-      "topic": "한컴위드",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 57,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 57",
-        "선점 후보 — 경쟁 문서 57건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "한컴위드가 커넥셔너리와 AI 문서 분류·보안으로 N2SF 시장을 공략한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한컴위드 N2SF 커넥셔너리 협력, 공공 문서보안 시장 공략 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한컴위드 N2SF 앞두고 AI가 문서 보안등급 매긴다는데 되나 싶더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "한컴위드 주가",
-          "searchVolume": 6840,
-          "frame": "generic"
-        },
-        {
-          "keyword": "N2SF 뜻",
-          "searchVolume": 170,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한컴위드 보안",
-          "searchVolume": 50,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "한컴위드 주가",
-          "searchVolume": 6840,
-          "documentCount": 13010,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "N2SF 뜻",
-          "searchVolume": 170,
-          "documentCount": 344,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한컴위드 보안",
-          "searchVolume": 50,
-          "documentCount": 9115,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한컴위드 관련주",
-          "searchVolume": 20,
-          "documentCount": 17545,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "N2SF 가이드라인",
-          "searchVolume": 10,
-          "documentCount": 612,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-23T21:33:51.448Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "한컴위드 연봉",
-      "issue": "한컴위드",
-      "topic": "한컴위드",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 230,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 230",
-        "선점 후보 — 경쟁 문서 230건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "한컴위드가 커넥셔너리와 AI 문서 분류·보안으로 N2SF 시장을 공략한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한컴위드 연봉 초봉과 신입 실수령액 채용 조건까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한컴위드 연봉 얼마나 오르나 보다가 배당금 표에서 손이 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "한컴위드 주가",
-          "searchVolume": 6840,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한컴위드 채용",
-          "searchVolume": null,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한컴위드 배당금",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "한컴위드 주가",
-          "searchVolume": 6840,
-          "documentCount": 13010,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 50,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-23T21:33:51.448Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "앤드리슨 호로위츠 AI학교",
-      "issue": "앤드리슨 호로위츠",
-      "topic": "앤드리슨 호로위츠",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 81,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 81",
-        "선점 후보 — 경쟁 문서 81건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤드리슨 호로위츠가 대학 대안 2년제 AI 아카데미를 출범했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤드리슨 호로위츠 AI학교 대학 대신 2년제 567억 투자 실체",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "앤드리슨 호로위츠 AI학교를 대학 대안이라 부르는 이유 알고 보니 좀 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-23T21:33:51.448Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "출생아 출산아 차이",
-      "issue": "출생아",
-      "topic": "출생아",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 172,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 172",
-        "선점 후보 — 경쟁 문서 172건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "7월 출생아 수가 11.1% 늘어 25개월 연속 증가했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "출생아 출산아 차이 합계출산율 조출생률 뜻까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "출생아 출산아 차이 알고 나니 2025 출생아 수 왜 이런지 보이더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "출생률 출산율 차이",
-          "searchVolume": 30,
-          "frame": "compare"
-        },
-        {
-          "keyword": "2025 출생아 수",
-          "searchVolume": 280,
-          "frame": "generic"
-        },
-        {
-          "keyword": "출생아 수 통계",
-          "searchVolume": 50,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "2025 출생아 수",
-          "searchVolume": 280,
-          "documentCount": 24108,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "출생아 수 통계",
-          "searchVolume": 50,
-          "documentCount": 32114,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "출생률 출산율 차이",
-          "searchVolume": 30,
-          "documentCount": 13334,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "출생아 수 추이",
-          "searchVolume": 10,
-          "documentCount": 5048,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-23T21:33:51.448Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -2591,7 +2026,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "박지현",
@@ -3120,217 +2556,9 @@
       "nextWave": [],
       "rowCount": 0,
       "carried": true
-    },
-    {
-      "issue": "출생아",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "declining",
-      "isHot": false,
-      "why": "7월 출생아 수가 11.1% 늘어 25개월 연속 증가했다.",
-      "headlines": [
-        {
-          "title": "7월 출생아 수 11.1% 늘어 25개월 연속 증가",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-23T03:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004000079?sid=101"
-        },
-        {
-          "title": "출생아 수 증가율 19년 만에 최대",
-          "press": "segye.com",
-          "publishedAt": "2026-09-23T05:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/022/0004161345?sid=101"
-        },
-        {
-          "title": "출생아 25개월째 늘었다…7월 2만4275명 '7년 만에 최대'",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-23T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014210426?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "출생아수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "내년 출생아 지원금",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "출생아 여부 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "출생아 성비",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "출생아 이름 통계",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "출생아 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "출생아 여부",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "출생아 조회",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "출생아 지역",
-          "reason": "어디서 늘었는지 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "스트랜즈 하네스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "AWS가 토큰 비용 28% 낮춘 AI 에이전트 실행환경을 공개했다.",
-      "headlines": [
-        {
-          "title": "\"토큰 비용 28% 감소\" AWS, '스트랜즈 하네스' 공개",
-          "press": "fnnews.com",
-          "publishedAt": "2026-09-23T06:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005580397?sid=105"
-        },
-        {
-          "title": "AWS, 오픈소스 AI 에이전트 '스트랜즈 하네스' 공개",
-          "press": "datanet.co.kr",
-          "publishedAt": "2026-09-23T05:46:00.000Z",
-          "link": "https://www.datanet.co.kr/news/articleView.html?idxno=214692"
-        },
-        {
-          "title": "AWS, AI 에이전트 실행환경 ‘스트랜즈 하네스’ 공개",
-          "press": "byline.network",
-          "publishedAt": "2026-09-23T05:56:00.000Z",
-          "link": "https://byline.network/?p=9004111222621294"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "한컴위드",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "한컴위드가 커넥셔너리와 AI 문서 분류·보안으로 N2SF 시장을 공략한다.",
-      "headlines": [
-        {
-          "title": "커넥셔너리, 한컴위드와 데이터 분류·보안 협력…N2SF 시장공략",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-23T13:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002438685?sid=105"
-        },
-        {
-          "title": "“AI가 문서 읽고 보안등급 매긴다”…한컴위드·커넥셔너리 맞손",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-23T01:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005739380?sid=105"
-        },
-        {
-          "title": "한컴위드, 커넥셔너리와 N2SF 시장 공동 공략",
-          "press": "news.mtn.co.kr",
-          "publishedAt": "2026-09-23T06:26:00.000Z",
-          "link": "https://news.mtn.co.kr/news-detail/2026092311165326913"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "한컴위드 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴위드 보안",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴위드 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴위드 금",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴위드 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴위드 특징주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴위드 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한컴위드 엔비디아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "한컴위드 주가",
-          "reason": "협력 발표 후 주가 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "한컴위드 실적",
-          "reason": "사업 성과 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "한컴위드 관련주",
-          "reason": "보안주 흐름 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-09-25T09:12:27.401Z",
+  "enrichedAt": "2026-09-25T21:35:18.537Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
