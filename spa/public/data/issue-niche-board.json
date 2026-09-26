@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-26T08:07:15.916Z",
+  "publishedAt": "2026-09-26T08:59:16.276Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 185,
+    "candidates": 141,
     "niche": 1,
-    "preemption": 5,
+    "preemption": 3,
     "pending": 0
   },
   "freeSample": {
@@ -98,7 +98,7 @@
       "kinCount": 726,
       "kinTop": [],
       "monetize": null,
-      "measuredAt": "2026-09-26T08:03:47.389Z",
+      "measuredAt": "2026-09-26T08:58:37.763Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "kinMode": "date-views-v2"
@@ -614,6 +614,76 @@
   ],
   "observations": [
     {
+      "keyword": "모별이 펜싱",
+      "issue": "모별이",
+      "topic": "모별이",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 160,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 160",
+        "선점 후보 — 경쟁 문서 160건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "펜싱 선수 누가 유명해요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100601&docId=444739267&answerNo=2",
+          "views": 625,
+          "answers": 2
+        },
+        {
+          "title": "여자 펜싱 인기",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130707&docId=473234526&answerNo=1",
+          "views": 296,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-26T08:58:37.763Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
       "keyword": "메타 드라마터그 뜻",
       "issue": "메타",
       "topic": "메타",
@@ -665,7 +735,59 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-26T08:03:47.389Z",
+      "measuredAt": "2026-09-26T08:58:37.763Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "남양주 별장 흉기",
+      "issue": "남양주 별장 흉기",
+      "topic": "남양주 별장 흉기",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 70,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 70",
+        "선점 후보 — 경쟁 문서 70건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-26T08:58:37.763Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -723,55 +845,8 @@
       "monetize": null,
       "measuredAt": "2026-09-26T08:03:47.389Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "남양주 별장 흉기",
-      "issue": "남양주 별장 흉기",
-      "topic": "남양주 별장 흉기",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 61,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 61",
-        "선점 후보 — 경쟁 문서 61건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-26T08:03:47.389Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "김지은 50M 소총",
@@ -819,7 +894,8 @@
       "monetize": null,
       "measuredAt": "2026-09-26T08:03:47.389Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "AG 핸드볼 8강",
@@ -871,7 +947,8 @@
       "monetize": null,
       "measuredAt": "2026-09-26T08:03:47.389Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "독일 변전소 1313곳",
@@ -1626,289 +1703,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "김영희 푸꾸옥",
-      "issue": "김영희",
-      "topic": "김영희",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 17,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 17",
-        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "개그우먼 김영희가 10살 연하 남편과 푸꾸옥 여행 중 부부싸움 위기를 겪었다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "김영희 푸꾸옥 여행 중 10살 연하 남편과 부부싸움 위기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "김영희 푸꾸옥 여행 갔다가 10살 연하 남편 장난에 표정 관리가 안 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "김영희 나이",
-          "searchVolume": 2630,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김영희 개그우먼",
-          "searchVolume": 260,
-          "frame": "generic"
-        },
-        {
-          "keyword": "김영희 남편 나이",
-          "searchVolume": 120,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "김영희 나이",
-          "searchVolume": 2630,
-          "documentCount": 10509,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김영희 개그우먼",
-          "searchVolume": 260,
-          "documentCount": 7353,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김영희 남편 나이",
-          "searchVolume": 120,
-          "documentCount": 2511,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김영희 개그우먼 남편",
-          "searchVolume": 10,
-          "documentCount": 1491,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김영희 말자할매",
-          "searchVolume": 10,
-          "documentCount": 2511,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-24T08:51:56.445Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "장효민 남자 에페",
-      "issue": "장효민 남자 에페",
-      "topic": "장효민 남자 에페",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 88,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 88",
-        "선점 후보 — 경쟁 문서 88건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "아시안게임 남자 에페 장효민이 8강에서 탈락했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "장효민 남자 에페 개인전 8강 탈락, 노메달로 끝난 결과",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "장효민 남자 에페 8강에서 펜싱 팬들이 아직도 그 판정 얘기하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "펜싱 장효민",
-          "searchVolume": 90,
-          "frame": "generic"
-        },
-        {
-          "keyword": "장효민 펜싱",
-          "searchVolume": 20,
-          "frame": "generic"
-        },
-        {
-          "keyword": "아시안게임 남자 에페",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "펜싱 장효민",
-          "searchVolume": 90,
-          "documentCount": 114,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "장효민 펜싱",
-          "searchVolume": 20,
-          "documentCount": 114,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "아시안게임 남자 에페",
-          "searchVolume": 10,
-          "documentCount": 2447,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-24T08:51:56.445Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "kaist logo",
-      "issue": "KAIST",
-      "topic": "KAIST",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 226,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 226",
-        "선점 후보 — 경쟁 문서 226건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "KAIST 로봇 라이보2가 마라톤을 완주하고 권오현이 이사장에 선임됐다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "kaist logo 고화질 png와 ai 파일 받는 곳",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "kaist logo 받다 보면 png랑 ai 뭐 쓸지 여기서 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-24T08:51:56.445Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -2203,217 +1997,9 @@
       "nextWave": [],
       "rowCount": 1,
       "carried": true
-    },
-    {
-      "issue": "장효민 남자 에페",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "아시안게임 남자 에페 장효민이 8강에서 탈락했다",
-      "headlines": [
-        {
-          "title": "AG 펜싱 남자 에페 장효민",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-24T07:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016334788?sid=104"
-        },
-        {
-          "title": "펜싱 전하영, 여자 사브르 개인전 8강 진출…에페 박상영은 탈락[나고야...",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-24T06:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014212338?sid=104"
-        },
-        {
-          "title": "펜싱 여자 사브르·남자 에페, 개인전 '노 메달'",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-24T07:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001390906?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "김영희",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "개그우먼 김영희가 10살 연하 남편과 푸꾸옥 여행 중 부부싸움 위기를 겪었다",
-      "headlines": [
-        {
-          "title": "김영희, 푸꾸옥 여행 중 큰 부부싸움 위기‥10살 연하 남편 장난에 찰싹",
-          "press": "newsen.com",
-          "publishedAt": "2026-09-24T05:18:00.000Z",
-          "link": "https://m.entertain.naver.com/article/609/0001172243"
-        },
-        {
-          "title": "김영희, 10살 연하 옆에서도 동안 미모…전은 안 부치나봐",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-09-23T06:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000777313"
-        },
-        {
-          "title": "김영희, 연휴 초부터 부부싸움 위기…'10살 연하' 남편 장난에 '찰싹'→...",
-          "press": "tvreport.co.kr",
-          "publishedAt": "2026-09-24T08:31:00.000Z",
-          "link": "https://m.entertain.naver.com/article/213/0001402309"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "개그우먼 김영희",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김영희 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김영희 농구선수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김영희 말자쇼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김영희 빚",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "농구선수 김영희",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김영희 논란",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "김영희 개그우먼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "김영희 남편 직업",
-          "reason": "10살 연하 정체 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김영희 브이로그",
-          "reason": "푸꾸옥 여행 후속",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "김영희 결혼",
-          "reason": "부부 스토리 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "KAIST",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "KAIST 로봇 라이보2가 마라톤을 완주하고 권오현이 이사장에 선임됐다",
-      "headlines": [
-        {
-          "title": "마라톤 풀코스 뛴 '세계최초' 로봇…KAIST기술 네이처로",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-23T15:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014211792?sid=102"
-        },
-        {
-          "title": "KAIST 네발 로봇 '라이보2', 마라톤 완주…배터리는 34% 남았다",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-23T15:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016334089?sid=105"
-        },
-        {
-          "title": "마라톤 풀코스 주파한 KAIST 로봇 주행 기술, 네이처 본지에 게제",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-23T15:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009189799?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "kaist 약자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 대학원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 서울캠퍼스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist portal",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 입학처",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 학과",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "KAIST 반도체 연구",
-          "reason": "이사장 전문성 연계",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-09-26T08:07:36.070Z",
+  "enrichedAt": "2026-09-26T08:59:34.607Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
