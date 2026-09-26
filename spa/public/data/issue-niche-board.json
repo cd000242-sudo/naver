@@ -1,18 +1,19 @@
 {
-  "publishedAt": "2026-09-26T08:59:16.276Z",
+  "publishedAt": "2026-09-26T21:31:18.716Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 141,
-    "niche": 1,
-    "preemption": 3,
+    "candidates": 209,
+    "niche": 0,
+    "preemption": 2,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-09-26",
+    "day": "2026-09-27",
     "keywords": [
       "추신수 고등학교",
+      "bob 운동화",
       "국민일보 더미션"
     ]
   },
@@ -94,14 +95,48 @@
       "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          0,
+          13,
+          0,
+          13,
+          0,
+          0,
+          0,
+          81,
+          13,
+          15,
+          10,
+          23,
+          13,
+          0,
+          10,
+          13,
+          0,
+          15,
+          0,
+          10,
+          0,
+          54,
+          100,
+          17,
+          21,
+          19,
+          81,
+          35,
+          33
+        ],
+        "measuredAt": "2026-09-26T21:31:19.304Z"
+      },
       "kinCount": 726,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-26T08:58:37.763Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "국민일보 더미션",
@@ -218,7 +253,7 @@
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-26T08:07:16.483Z"
+        "measuredAt": "2026-09-26T21:31:19.304Z"
       },
       "kinCount": 226,
       "kinTop": [],
@@ -338,7 +373,7 @@
           0,
           8
         ],
-        "measuredAt": "2026-09-26T08:07:16.483Z"
+        "measuredAt": "2026-09-26T21:31:19.304Z"
       },
       "kinCount": 936,
       "kinTop": [
@@ -581,7 +616,7 @@
         ],
         "label": "📉 단발성",
         "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-09-26T08:07:16.483Z"
+        "measuredAt": "2026-09-26T21:31:19.304Z"
       },
       "kinCount": 642,
       "kinTop": [
@@ -613,6 +648,114 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "메타 드라마터그 뜻",
+      "issue": "메타",
+      "topic": "메타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 12,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 12",
+        "선점 후보 — 경쟁 문서 12건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-26T21:29:57.084Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "bob's discount furniture",
+      "issue": "Bob",
+      "topic": "Bob",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 117,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 117",
+        "선점 후보 — 경쟁 문서 117건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 16,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-26T21:29:57.084Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "모별이 펜싱",
       "issue": "모별이",
@@ -681,63 +824,8 @@
       "monetize": null,
       "measuredAt": "2026-09-26T08:58:37.763Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "메타 드라마터그 뜻",
-      "issue": "메타",
-      "topic": "메타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 12,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 12",
-        "선점 후보 — 경쟁 문서 12건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-26T08:58:37.763Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "남양주 별장 흉기",
@@ -789,7 +877,8 @@
       "monetize": null,
       "measuredAt": "2026-09-26T08:58:37.763Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "정몽준 현재 근황",
@@ -1777,7 +1866,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "국민일보",
@@ -1999,7 +2089,7 @@
       "carried": true
     }
   ],
-  "enrichedAt": "2026-09-26T08:59:34.607Z",
+  "enrichedAt": "2026-09-26T21:31:40.114Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
