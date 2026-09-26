@@ -1,23 +1,108 @@
 {
-  "publishedAt": "2026-09-25T21:34:57.630Z",
+  "publishedAt": "2026-09-26T08:07:15.916Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 240,
-    "niche": 0,
-    "preemption": 4,
+    "candidates": 185,
+    "niche": 1,
+    "preemption": 5,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-09-26",
     "keywords": [
       "추신수 고등학교",
-      "한국수력원자력 본사",
       "국민일보 더미션"
     ]
   },
   "rows": [
+    {
+      "keyword": "bob 운동화",
+      "issue": "Bob",
+      "topic": "Bob",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "[방탈출 #6] 필름 바이 밥 | 강남 키이스케이프 메모리컴퍼니",
+          "베트남 전쟁",
+          "Democracy's Challenges - Bob Bauer et al. (2)",
+          "하나씩 뜯어보면 다 다른 매력, 스케쳐스 운동화 4종 라인업 총정리",
+          "나이키 성장 과정, 300켤레에서 글로벌 기업까지",
+          "Democracy's Challenges - Bob Bauer et al. (1)",
+          "Democracy's Challenges - Bob Bauer et al. (4)",
+          "록과 댄스 음악의 역사 - (25) 디스코",
+          "밥 피스메이커, 밥이 평화다",
+          "패션 홍보대행사 에이전시커넥션 데일리 뉴스 2026.09.17(목)"
+        ],
+        "measuredAt": "2026-09-26T08:06:19.882Z"
+      },
+      "documentCount": 10401,
+      "documentCountMeasured": true,
+      "searchVolume": 330,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.4893617569682525,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 330",
+        "문서수 10,401",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 330 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.5배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 726,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-26T08:03:47.389Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "국민일보 더미션",
       "issue": "국민일보",
@@ -101,7 +186,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          96,
           85,
           73,
           48,
@@ -129,11 +213,12 @@
           81,
           100,
           85,
-          77
+          77,
+          56
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-25T21:34:58.409Z"
+        "measuredAt": "2026-09-26T08:07:16.483Z"
       },
       "kinCount": 226,
       "kinTop": [],
@@ -223,7 +308,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          15,
           0,
           0,
           22,
@@ -251,9 +335,10 @@
           9,
           0,
           0,
-          0
+          0,
+          8
         ],
-        "measuredAt": "2026-09-25T21:34:58.409Z"
+        "measuredAt": "2026-09-26T08:07:16.483Z"
       },
       "kinCount": 936,
       "kinTop": [
@@ -477,7 +562,6 @@
           0,
           0,
           0,
-          0,
           1,
           0,
           3,
@@ -492,9 +576,12 @@
           100,
           2,
           1,
+          1,
           1
         ],
-        "measuredAt": "2026-09-25T21:34:58.409Z"
+        "label": "📉 단발성",
+        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
+        "measuredAt": "2026-09-26T08:07:16.483Z"
       },
       "kinCount": 642,
       "kinTop": [
@@ -523,71 +610,40 @@
       "exclusionReason": null,
       "carried": true,
       "kinMode": "date-views-v2"
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "한국수력원자력 본사",
-      "issue": "한국수력원자력",
-      "topic": "한국수력원자력",
-      "lane": "realtime",
+      "keyword": "메타 드라마터그 뜻",
+      "issue": "메타",
+      "topic": "메타",
+      "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "2026 한국수력원자력 연봉 1억846만원, 신입초임과 차이 큰 이유",
-          "한국수력원자력 채용 공고 안내",
-          "2027년 수시학과 선택 참고(미래 공기업 연계 취업 : 한국수력원자력)",
-          "2026 한국수력원자력 채용 총 229명, 대졸 신입 일반 사회형평 보훈전형 정리",
-          "경주 실내 아이와 가볼만한 곳 '한수원 홍보관 에너지 팜' | 경주시 SNS 알리미 이주영",
-          "2026 한국수력원자력 신입사원 하반기 채용 총정리⚡",
-          "경주 가볼만한곳 한국수력원자력 홍보관ㅣ 원자력·신재생에너지 체험관 무료 체험 후기",
-          "[7월 28일 인사] 한국수력원자력…[인사] 경기대 → '강제추행 혐의' 경기대 신임 총장, 취임 하루 만에 직위해제",
-          "경주 한수원 본사 나들이, 아들 한수원 신입사원 입사식 참석 이모저모",
-          "2026년 제3차 한국수력원자력 정규직 채용 공고 (근무조건, 응시자격, 전형일정 등 알아보기)"
-        ],
-        "measuredAt": "2026-09-24T03:31:12.489Z"
-      },
-      "documentCount": 11890,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 12,
       "documentCountMeasured": true,
-      "searchVolume": 690,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.6908260269308092,
-      "issueStatus": "stable",
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
       "isHot": true,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 690",
-        "문서수 11,890",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "문서수 12",
+        "선점 후보 — 경쟁 문서 12건, 수요 미검출"
       ],
       "evidence": [
         {
           "code": "autocomplete",
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 690 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.7배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
         },
         {
           "code": "empty-field",
@@ -598,126 +654,225 @@
           "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "whySearch": {
-        "text": "한수원 사장이 추석 앞두고 원전·수력 현장을 안전점검했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
+      "whySearch": null,
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-26T08:03:47.389Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "정몽준 현재 근황",
+      "issue": "정몽준",
+      "topic": "정몽준",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 218,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 218",
+        "선점 후보 — 경쟁 문서 218건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "한국수력원자력 본사 경주 위치와 채용 정보 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "한국수력원자력 본사 채용 공고 보다가 연봉까지 궁금해져서 한참 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "한국수력원자력 채용",
-          "searchVolume": 15770,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한국수력원자력 연봉",
-          "searchVolume": 1160,
-          "frame": "generic"
-        },
-        {
-          "keyword": "한국수력원자력 사장",
-          "searchVolume": 120,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "한국수력원자력 채용",
-          "searchVolume": 15770,
-          "documentCount": 15994,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한국수력원자력 연봉",
-          "searchVolume": 1160,
-          "documentCount": 4909,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한국수력원자력 사장",
-          "searchVolume": 120,
-          "documentCount": 18590,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한수원 본사 위치",
-          "searchVolume": 30,
-          "documentCount": 2693,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "한수원 본사 경주",
-          "searchVolume": 10,
-          "documentCount": 4987,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": {
-        "series": [
-          100,
-          58,
-          52,
-          27,
-          19,
-          56,
-          35,
-          56,
-          58,
-          42,
-          25,
-          77,
-          79,
-          52,
-          48,
-          60,
-          21,
-          17,
-          46,
-          81,
-          48,
-          38,
-          35,
-          15,
-          29,
-          46,
-          38,
-          25,
-          23
-        ],
-        "measuredAt": "2026-09-25T21:34:58.409Z"
-      },
-      "kinCount": 581,
-      "kinTop": [
-        {
-          "title": "대한민국 공기업 공공기관 갯수와 위치, 연봉, 본사 모두 알....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61401&docId=495132576&answerNo=1",
-          "views": 33,
-          "answers": 1
-        }
-      ],
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 5,
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-24T03:30:00.815Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true,
-      "kinMode": "date-views-v2"
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-09-26T08:03:47.389Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "남양주 별장 흉기",
+      "issue": "남양주 별장 흉기",
+      "topic": "남양주 별장 흉기",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 61,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 61",
+        "선점 후보 — 경쟁 문서 61건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-26T08:03:47.389Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김지은 50M 소총",
+      "issue": "김지은 50M 소총",
+      "topic": "김지은 50M 소총",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 78,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 78",
+        "선점 후보 — 경쟁 문서 78건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-26T08:03:47.389Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AG 핸드볼 8강",
+      "issue": "AG 핸드볼 8강",
+      "topic": "AG 핸드볼 8강",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 281,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 281",
+        "선점 후보 — 경쟁 문서 281건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-26T08:03:47.389Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "독일 변전소 1313곳",
       "issue": "독일 변전소 1313곳",
@@ -764,7 +919,8 @@
       "monetize": null,
       "measuredAt": "2026-09-25T21:33:16.272Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "윤수정 해트트릭 4강",
@@ -816,7 +972,8 @@
       "monetize": null,
       "measuredAt": "2026-09-25T21:33:16.272Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "DMZ 지뢰폭발 은폐",
@@ -877,7 +1034,8 @@
       "monetize": null,
       "measuredAt": "2026-09-25T21:33:16.272Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "조엘진 100m 준결승",
@@ -925,7 +1083,8 @@
       "monetize": null,
       "measuredAt": "2026-09-25T21:33:16.272Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "황서현 시인",
@@ -1750,212 +1909,82 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "앤드리슨 호로위츠 박성모",
-      "issue": "앤드리슨 호로위츠",
-      "topic": "앤드리슨 호로위츠",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 7,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 7",
-        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤드리슨 호로위츠가 대학 대신할 2년제 AI 아카데미를 출범했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤드리슨 호로위츠 박성모, 대학 대신 567억 AI학교 정체",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "앤드리슨 호로위츠 박성모가 a16z에 세운 학교가 대학이랑 이렇게 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "앤드리슨 호로위츠 a16z",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "앤드리슨 호로위츠 a16z",
-          "searchVolume": 10,
-          "documentCount": 1087,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-24T03:30:00.815Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "MBK 김병주 불기소",
-      "issue": "MBK 김병주 불기소",
-      "topic": "MBK 김병주 불기소",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 42,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 42",
-        "선점 후보 — 경쟁 문서 42건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MBK 김병주 불기소 가능성에 여야가 검찰 봐주기라 비판했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "MBK 김병주 불기소, 검찰 판단 근거와 여야 반응",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "MBK 김병주 불기소 쪽으로 기우니까 홈플러스는 어떻게 되나 싶더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "MBK 홈플러스",
-          "searchVolume": 530,
-          "frame": "generic"
-        },
-        {
-          "keyword": "MBK 파트너스 김병주",
-          "searchVolume": 80,
-          "frame": "generic"
-        },
-        {
-          "keyword": "MBK 김병주 회장",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "MBK 홈플러스",
-          "searchVolume": 530,
-          "documentCount": 21077,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "MBK 파트너스 김병주",
-          "searchVolume": 80,
-          "documentCount": 4991,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "MBK 김병주 회장",
-          "searchVolume": 10,
-          "documentCount": 5819,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김병주 MBK 회장",
-          "searchVolume": 10,
-          "documentCount": 5819,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김병주 회장 재산",
-          "searchVolume": 10,
-          "documentCount": 1444,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "MBK 불기소",
-          "searchVolume": 10,
-          "documentCount": 223,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "김병주 검찰",
-          "searchVolume": 10,
-          "documentCount": 4570,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-24T03:30:00.815Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "Bob",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": null,
+      "headlines": [
+        {
+          "title": "Bob Pettit, N.B.A. Great for the Hawks, Dies at 93",
+          "press": "nytimes.com",
+          "publishedAt": "2026-09-24T22:32:00.000Z",
+          "link": "https://www.nytimes.com/2026/09/24/obituaries/bob-pettit-dead.html?partner=naver"
+        },
+        {
+          "title": "Bob Pettit Basketball",
+          "press": null,
+          "publishedAt": "2026-09-24T22:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/077/0007176201?sid=104"
+        },
+        {
+          "title": "[AI카툰] Bob, Senior IT guy - 밥, 새 AI 글라스 테스트 중",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-26T01:00:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215659"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "bob 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "bob 골프",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "bob 매장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "bob 모자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "bob 바지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "bob 보안",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "bob 상금",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "bob 셔츠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
     {
       "issue": "국민일보",
       "issueType": "fresh",
@@ -2382,183 +2411,9 @@
       ],
       "rowCount": 0,
       "carried": true
-    },
-    {
-      "issue": "한국수력원자력",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "한수원 사장이 추석 앞두고 원전·수력 현장을 안전점검했다",
-      "headlines": [
-        {
-          "title": "한수원 김회천 사장, 추석 앞두고 원전 건설·수력발전 현장 점검",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-09-23T08:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004192617?sid=102"
-        },
-        {
-          "title": "한수원, 추석 맞이 원전·수력 현장 점검...안전경영 총력",
-          "press": "newscj.com",
-          "publishedAt": "2026-09-23T13:46:00.000Z",
-          "link": "https://www.newscj.com/news/articleView.html?idxno=3435275"
-        },
-        {
-          "title": "한수원, 추석 앞두고 원전·수력발전소 안전점검",
-          "press": "lawissue.co.kr",
-          "publishedAt": "2026-09-23T06:44:00.000Z",
-          "link": "http://www.lawissue.co.kr/view.php?ud=202609231543257306f4ab64559d_12"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "한국수력원자력 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국수력원자력 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국수력원자력 본사",
-          "searchVolume": 690,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국수력원자력 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국수력원자력 면접",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국수력원자력 인턴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국수력원자력 위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국수력원자력 필기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "MBK 김병주 불기소",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "MBK 김병주 불기소 가능성에 여야가 검찰 봐주기라 비판했다",
-      "headlines": [
-        {
-          "title": "MBK 김병주 불기소 가능성에…여야 “검찰, 거대 자본 봐주기” 일제히...",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-09-23T08:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003683171?sid=102"
-        },
-        {
-          "title": "여야, 檢 'MBK 김병주 불기소' 가닥에 비판…\"거대 사모펀드 총수에 면죄...",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-23T15:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009189802?sid=100"
-        },
-        {
-          "title": "MBK 김병주 불기소 가능성에 정치권 ‘면죄부’ 공방[PS]",
-          "press": "sports.donga.com",
-          "publishedAt": "2026-09-23T07:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/382/0001295558?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "mbk",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "mbk 김병주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "앤드리슨 호로위츠",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "앤드리슨 호로위츠가 대학 대신할 2년제 AI 아카데미를 출범했다",
-      "headlines": [
-        {
-          "title": "\"대학 대신 AI학교\" 실리콘밸리의 파격",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-23T06:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005739556?sid=105"
-        },
-        {
-          "title": "앤드리슨 호로위츠, 대학 대안 'AI 아카데미' 출범...젊은 창업가 육성",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-23T07:56:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215596"
-        },
-        {
-          "title": "\"대학 대신 AI학교\"… 실리콘밸리 거물들이 567억 투자한 학교 정체는",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-23T01:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005417811?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤드리슨 호로위츠 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤드리슨 호로위츠 코인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤드리슨 호로위츠 박성모",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤드리슨 호로위츠 포트폴리오",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤드리슨 호로위츠(a16z)",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-09-25T21:35:18.537Z",
+  "enrichedAt": "2026-09-26T08:07:36.070Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
@@ -2572,7 +2427,7 @@
     "pooled": 0,
     "aiTitled": 0,
     "trended": 0,
-    "aiCalls": 2,
+    "aiCalls": 3,
     "partial": false
   }
 }
