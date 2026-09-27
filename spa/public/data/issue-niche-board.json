@@ -1,23 +1,112 @@
 {
-  "publishedAt": "2026-09-26T21:31:18.716Z",
+  "publishedAt": "2026-09-27T03:19:10.578Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 209,
-    "niche": 0,
-    "preemption": 2,
+    "candidates": 234,
+    "niche": 1,
+    "preemption": 6,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-09-27",
     "keywords": [
-      "추신수 고등학교",
       "bob 운동화",
       "국민일보 더미션"
     ]
   },
   "rows": [
+    {
+      "keyword": "사이클 트랙 노윤서",
+      "issue": "노윤서",
+      "topic": "노윤서",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 1건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 1,
+        "sampledTitles": 10,
+        "topTitles": [
+          "2026 아시안게임 한국 경기일정 총정리｜전 종목 일정·축구 농구 야구 대진표·방송사별 중계진",
+          "2026 아시안게임 트랙 사이클 일정｜한국 대표팀·중계·메달 전망",
+          "2026년 아시안 게임 대표팀을 응원합니다!",
+          "2026.06.24(수) 패션 홍보대행사 에이전시커넥션 데일리 뉴스",
+          "노윤서 여름 사복패션 분석: 레알리자시옹파 레오파드 탑 발렌시아가 르 시티 백 착용 정보 (+가격)",
+          "2026.02.27(금) CONNECTION DAILY NEWS",
+          "3월 둘째주 공항 패션 모음",
+          "아하 이런...전국체전 2관왕을 해버렸습니다",
+          "매장 품절 발렌시아가 가방 르시티 이스트웨스트 325만→274만 직구 핫딜",
+          "[K컬쳐와 주식시그널] NASDAQ +1.9% 뉴진스 민지 셀럽 시그널 | 9th Brief 6월 22일 (월)"
+        ],
+        "measuredAt": "2026-09-27T03:17:04.677Z"
+      },
+      "documentCount": 16,
+      "documentCountMeasured": true,
+      "searchVolume": 2020,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.7418346651777974,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 2,020",
+        "문서수 16",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 2,020 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.7배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-09-27T03:16:22.294Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "bob 운동화",
       "issue": "Bob",
@@ -414,237 +503,6 @@
       "exclusionReason": null,
       "kinMode": "date-views-v2",
       "carried": true
-    },
-    {
-      "keyword": "추신수 고등학교",
-      "issue": "추신수",
-      "topic": "추신수",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "추신수 나이 프로필 이혼 아들 연봉 재산 근황 총정리",
-          "추신수 프로필 MLB 연금 최근 근황, 62세부터 매년 3억원 받는 이유",
-          "추신수 60세부터 평생 연금 3억? 재산·와이프 하원미 러브스토리·자녀 프로필",
-          "\"단순 찌라시 아니다\" SSG 이숭용 감독이 차기 사령탑으로 추신수 고려하는 이유",
-          "추신수 프로필 연봉 1억3000만 달러 MLB 기록부터 가족 은퇴 근황까지 총망라",
-          "추신수 아내인 줄만 알았는데... 하원미 과거 사진 공개되자 출연진이 말 잃은 이유",
-          "추신수 아들 메이저리그 도전 유망주 대회 최종 선발 화제 추신수♥하원미 아들 건우, 미국 유망주 대회 최종 선발…",
-          "경기고등학교 야구부",
-          "⚾ 이대호·추신수 ‘찐친이자 라이벌’… 학창 시절부터 메이저리그까지, 영화 같은 승부 스토리",
-          "텍사스의 영웅, 불가능을 깬 사나이! 추신수의 풀 스토리: 꿈, 도전, 그리고 가족"
-        ],
-        "measuredAt": "2026-09-24T21:36:21.770Z"
-      },
-      "documentCount": 3618,
-      "documentCountMeasured": true,
-      "searchVolume": 2340,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "rising",
-      "demandRatio": 2.517688647286348,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 2,340",
-        "문서수 3,618",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음",
-        "수요 상승중"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 2,340 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 2.5배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "야구여왕2에 감독으로 나온 추신수의 학창 시절과 야구 이력이 궁금해서",
-        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 9개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "추신수 고등학교 시절부터 야구여왕2 감독까지 야구 인생",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "추신수 고등학교 이력 보니 야구여왕2 감독 자리가 그냥은 아니네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "추신수 연봉",
-          "searchVolume": 1250,
-          "frame": "generic"
-        },
-        {
-          "keyword": "추신수 나이",
-          "searchVolume": 820,
-          "frame": "generic"
-        },
-        {
-          "keyword": "추신수 감독",
-          "searchVolume": 180,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "추신수 연봉",
-          "searchVolume": 1250,
-          "documentCount": 10687,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "추신수 나이",
-          "searchVolume": 820,
-          "documentCount": 9639,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "추신수 감독",
-          "searchVolume": 180,
-          "documentCount": 20262,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "추신수 하원미",
-          "searchVolume": 140,
-          "documentCount": 4258,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "추신수 부산고",
-          "searchVolume": 90,
-          "documentCount": 1483,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "추신수 저택",
-          "searchVolume": 40,
-          "documentCount": 1264,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "추신수 5500평",
-          "searchVolume": 10,
-          "documentCount": 543,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "추신수 학력",
-          "searchVolume": 10,
-          "documentCount": 1030,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "추신수 야구여왕2",
-          "searchVolume": 10,
-          "documentCount": 2403,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          1,
-          0,
-          3,
-          1,
-          1,
-          1,
-          1,
-          0,
-          0,
-          0,
-          0,
-          100,
-          2,
-          1,
-          1,
-          1
-        ],
-        "label": "📉 단발성",
-        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-09-26T21:31:19.304Z"
-      },
-      "kinCount": 642,
-      "kinTop": [
-        {
-          "title": "고등학교 투수 대학교 투수",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010204&docId=472627125&answerNo=1",
-          "views": 124,
-          "answers": 2
-        },
-        {
-          "title": "추신수 선수 고등학교 시절 사인볼을 가지고 있는데요.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001020202&docId=464349361&answerNo=1",
-          "views": 93,
-          "answers": 1
-        },
-        {
-          "title": "야구선수들 고등학교시절엔 투수 잘하는 선수가",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010202&docId=487843289&answerNo=2",
-          "views": 74,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-24T21:35:48.006Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true,
-      "kinMode": "date-views-v2"
     }
   ],
   "observations": [
@@ -700,7 +558,290 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-26T21:29:57.084Z",
+      "measuredAt": "2026-09-27T03:16:22.294Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "트웰브랩스 연봉",
+      "issue": "트웰브랩스",
+      "topic": "트웰브랩스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 60,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 60",
+        "선점 후보 — 경쟁 문서 60건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": [
+        {
+          "title": "트웰브랩스 취업 경쟁률은 얼마나 되나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=479862289&answerNo=0",
+          "views": 26,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-27T03:16:22.294Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "트웰브랩스 이재성",
+      "issue": "트웰브랩스",
+      "topic": "트웰브랩스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 154,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 154",
+        "선점 후보 — 경쟁 문서 154건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "이재성 태표의 트웰브랩스 기업 가치는 얼마인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=479867675&answerNo=0",
+          "views": 30,
+          "answers": null
+        },
+        {
+          "title": "트웰브랩스 이재성 대표 왜 화제인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=479867661&answerNo=0",
+          "views": 17,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-27T03:16:22.294Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "트웰브랩스 채용",
+      "issue": "트웰브랩스",
+      "topic": "트웰브랩스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 208,
+      "documentCountMeasured": true,
+      "searchVolume": 40,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 40",
+        "문서수 208",
+        "선점 후보 — 경쟁 문서 208건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T03:16:22.294Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "트웰브랩스 주소",
+      "issue": "트웰브랩스",
+      "topic": "트웰브랩스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 213,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 213",
+        "선점 후보 — 경쟁 문서 213건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T03:16:22.294Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아시안게임 8강 김재현-장하정",
+      "issue": "아시안게임 8강 김재현-장하정",
+      "topic": "아시안게임 8강 김재현-장하정",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 253,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 253",
+        "선점 후보 — 경쟁 문서 253건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T03:16:22.294Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -754,7 +895,8 @@
       "monetize": null,
       "measuredAt": "2026-09-26T21:29:57.084Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "모별이 펜싱",
@@ -1692,110 +1834,82 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "추신수 부인 직업",
-      "issue": "추신수",
-      "topic": "추신수",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 253,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 253",
-        "선점 후보 — 경쟁 문서 253건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "저택 살림 공개로 화제된 추신수 아내 하원미가 뭐 하는 사람인지 알려고",
-        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 3개"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "추신수 부인 직업, 하원미 나이·5500평 저택 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "추신수 부인 직업 궁금해서 하원미 하루 일과를 들여다봤더니 생각보다 만만치 않더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "추신수 연봉",
-          "searchVolume": 1250,
-          "frame": "generic"
-        },
-        {
-          "keyword": "추신수 하원미",
-          "searchVolume": 140,
-          "frame": "generic"
-        },
-        {
-          "keyword": "추신수 집",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "추신수 연봉",
-          "searchVolume": 1250,
-          "documentCount": 10687,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "추신수 하원미",
-          "searchVolume": 140,
-          "documentCount": 4258,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-24T21:35:48.006Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "노윤서",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "노윤서, 비키니 가슴 ‘하트’로 살짝…가녀린 줄 알았더니 이런 볼륨감",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-09-26T12:56:00.000Z",
+          "link": "https://m.entertain.naver.com/article/076/0004449889"
+        },
+        {
+          "title": "노윤서, 청순 이미지 벗고 과감한 비키니…하와이서 ‘시선 집중’ [IS하...",
+          "press": "isplus.com",
+          "publishedAt": "2026-09-27T01:50:00.000Z",
+          "link": "https://m.entertain.naver.com/article/241/0003532423"
+        },
+        {
+          "title": "노윤서, 청순 이미지 벗고 반전 비키니 자태",
+          "press": "gukjenews.com",
+          "publishedAt": "2026-09-26T23:22:00.000Z",
+          "link": "https://www.gukjenews.com/news/articleView.html?idxno=3706317"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "노윤서 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노윤서 프로필",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사이클 트랙 노윤서",
+          "searchVolume": 2020,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노윤서 그림",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노윤서 입꼬리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노윤서 하영",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노윤서 남주혁",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노윤서 배우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
     {
       "issue": "Bob",
       "issueType": "fresh",
@@ -2014,82 +2128,9 @@
       "nextWave": [],
       "rowCount": 1,
       "carried": true
-    },
-    {
-      "issue": "추신수",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "“5500평 집 도우미 한 명”…추신수 아내, 집안일 공개했다",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-23T23:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005739747?sid=102"
-        },
-        {
-          "title": "\"일하는 사람 나 하나\"…5,500평 저택 살림 공개한 추신수 아내",
-          "press": "wowtv.co.kr",
-          "publishedAt": "2026-09-24T08:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/215/0001267128?sid=103"
-        },
-        {
-          "title": "‘야구여왕2’ 최혜빈, 추신수 감독과 면담 중 ‘눈물 펑펑’",
-          "press": "enews.imbc.com",
-          "publishedAt": "2026-09-24T13:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/408/0000322423"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "추신수 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추신수 기록",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추신수 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추신수 연금",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추신수 와이프",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추신수 abs",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추신수 고등학교",
-          "searchVolume": 2340,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "추신수 집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-09-26T21:31:40.114Z",
+  "enrichedAt": "2026-09-27T03:19:29.199Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
@@ -2103,7 +2144,7 @@
     "pooled": 0,
     "aiTitled": 0,
     "trended": 0,
-    "aiCalls": 3,
+    "aiCalls": 4,
     "partial": false
   }
 }
