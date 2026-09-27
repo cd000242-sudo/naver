@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-27T03:19:10.578Z",
+  "publishedAt": "2026-09-27T08:41:01.797Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 234,
-    "niche": 1,
-    "preemption": 6,
+    "candidates": 168,
+    "niche": 0,
+    "preemption": 10,
     "pending": 0
   },
   "freeSample": {
@@ -98,14 +98,48 @@
       "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          64,
+          100,
+          92,
+          49,
+          41,
+          34,
+          74,
+          87,
+          77,
+          83,
+          47,
+          25,
+          37,
+          41,
+          51,
+          14
+        ],
+        "measuredAt": "2026-09-27T08:41:02.583Z"
+      },
       "kinCount": 0,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-27T03:16:22.294Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "bob 운동화",
@@ -186,7 +220,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          0,
           13,
           0,
           13,
@@ -214,9 +247,10 @@
           19,
           81,
           35,
-          33
+          33,
+          15
         ],
-        "measuredAt": "2026-09-26T21:31:19.304Z"
+        "measuredAt": "2026-09-27T08:41:02.583Z"
       },
       "kinCount": 726,
       "kinTop": [],
@@ -310,7 +344,6 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          85,
           73,
           48,
           77,
@@ -338,11 +371,12 @@
           100,
           85,
           77,
-          56
+          56,
+          62
         ],
         "label": "🐢 연금형",
         "recommendation": "한 번 쓰면 1년 꾸준 방문자. 안정적 연금 키워드",
-        "measuredAt": "2026-09-26T21:31:19.304Z"
+        "measuredAt": "2026-09-27T08:41:02.583Z"
       },
       "kinCount": 226,
       "kinTop": [],
@@ -352,71 +386,40 @@
       "exclusionReason": null,
       "kinMode": "date-views-v2",
       "carried": true
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "박지현 정치인",
-      "issue": "박지현",
-      "topic": "박지현",
-      "lane": "realtime",
+      "keyword": "스모어톡 잡플래닛",
+      "issue": "스모어톡",
+      "topic": "스모어톡",
+      "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 2건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 2,
-        "sampledTitles": 10,
-        "topTitles": [
-          "“회의실 아닌 계산대로”... 박지현 전 민주당 비대위원장, 깜짝 자영업 전선 뛰어든 까닭",
-          "'민주당 비대위원장 거쳐 지금도 활동' 박지현 생애 및 학력과 정치 경력 정리",
-          "쿠팡 뛰던 박지현, 이번엔 사장님 됐다…\"내 정치의 출발점은 회의실 아닌 계산대\"",
-          "박지현도 폭발했다…용혜인 '비례 두 번'이 여당을 갈라놓은 진짜 이유",
-          "비례 두 번 한 사람이 '평등의 수장'?…여당 지도부가 라디오서 갈라섰다",
-          "용혜인 장관 후보, '투잡' 논란에 여당도 갈렸다…위성정당 꼼수 재조명",
-          "\"정치 9단이 나타났다\"…용혜인 투잡 논란, 여당조차 갈라섰다",
-          "성평등장관인데 위장 당적? 용혜인 '투잡' 논란에 여당 초강수 반응",
-          "평등 장관이 위성정당? 국민들 난리 난 이유 딱 하나였다",
-          "2026년 9월 18일 오늘 뉴스"
-        ],
-        "measuredAt": "2026-09-25T03:35:32.738Z"
-      },
-      "documentCount": 8063,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 3,
       "documentCountMeasured": true,
-      "searchVolume": 910,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.5922835743162965,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "stable",
       "isHot": false,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 910",
-        "문서수 8,063",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "문서수 3",
+        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
       ],
       "evidence": [
         {
           "code": "autocomplete",
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 910 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.6배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
         },
         {
           "code": "empty-field",
@@ -430,82 +433,478 @@
       "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": {
-        "series": [
-          0,
-          0,
-          22,
-          58,
-          94,
-          100,
-          100,
-          81,
-          26,
-          13,
-          32,
-          12,
-          0,
-          18,
-          21,
-          17,
-          16,
-          8,
-          9,
-          6,
-          41,
-          50,
-          18,
-          7,
-          9,
-          0,
-          0,
-          0,
-          8
-        ],
-        "measuredAt": "2026-09-26T21:31:19.304Z"
-      },
-      "kinCount": 936,
-      "kinTop": [
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T08:39:40.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스모어톡 cto",
+      "issue": "스모어톡",
+      "topic": "스모어톡",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 4,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 4",
+        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
+      ],
+      "evidence": [
         {
-          "title": "드라마 '내일도 출근!'에서 박지현의 일침, 직장 내 공감 가....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6020602&docId=494509128&answerNo=0",
-          "views": 268,
-          "answers": null
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "title": "박지현이 참여한 대만 여행 프로그램의 정체는 무엇인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=9020108&docId=489816919&answerNo=2",
-          "views": 167,
-          "answers": 2
-        },
-        {
-          "title": "전통시장에서 박지현 인기, 어느 정도인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=6130106&docId=492171643&answerNo=3",
-          "views": 88,
-          "answers": 3
-        },
-        {
-          "title": "길거리 캐스팅, 박지현에게 어떤 영향을 줄까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=494542193&answerNo=1",
-          "views": 53,
-          "answers": 1
-        },
-        {
-          "title": "박지현과 류호정 직업",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61303&docId=492691724&answerNo=2",
-          "views": 51,
-          "answers": 2
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-25T03:33:23.253Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-09-27T08:39:40.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스모어톡 이정민",
+      "issue": "스모어톡",
+      "topic": "스모어톡",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 7,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 7",
+        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T08:39:40.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "부캉이 관람 구름인파",
+      "issue": "부캉이 관람 구름인파",
+      "topic": "부캉이 관람 구름인파",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 43,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 43",
+        "선점 후보 — 경쟁 문서 43건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T08:39:40.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스모어톡 채용",
+      "issue": "스모어톡",
+      "topic": "스모어톡",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 48,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 48",
+        "선점 후보 — 경쟁 문서 48건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T08:39:40.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스모어톡 플라멜",
+      "issue": "스모어톡",
+      "topic": "스모어톡",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 47,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 47",
+        "선점 후보 — 경쟁 문서 47건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T08:39:40.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스모어톡 황현지",
+      "issue": "스모어톡",
+      "topic": "스모어톡",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 43,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 43",
+        "선점 후보 — 경쟁 문서 43건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T08:39:40.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스모어톡 매출",
+      "issue": "스모어톡",
+      "topic": "스모어톡",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 110,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 110",
+        "선점 후보 — 경쟁 문서 110건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T08:39:40.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "스모어톡 투자",
+      "issue": "스모어톡",
+      "topic": "스모어톡",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 194,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 194",
+        "선점 후보 — 경쟁 문서 194건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T08:39:40.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "옥천 일가족 사망",
+      "issue": "옥천 일가족 사망",
+      "topic": "옥천 일가족 사망",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 298,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 298",
+        "선점 후보 — 경쟁 문서 298건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 61,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-27T08:39:40.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "메타 드라마터그 뜻",
       "issue": "메타",
@@ -560,7 +959,8 @@
       "monetize": null,
       "measuredAt": "2026-09-27T03:16:22.294Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "트웰브랩스 연봉",
@@ -620,7 +1020,8 @@
       "monetize": null,
       "measuredAt": "2026-09-27T03:16:22.294Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "트웰브랩스 이재성",
@@ -686,7 +1087,8 @@
       "monetize": null,
       "measuredAt": "2026-09-27T03:16:22.294Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "트웰브랩스 채용",
@@ -739,7 +1141,8 @@
       "monetize": null,
       "measuredAt": "2026-09-27T03:16:22.294Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "트웰브랩스 주소",
@@ -791,7 +1194,8 @@
       "monetize": null,
       "measuredAt": "2026-09-27T03:16:22.294Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아시안게임 8강 김재현-장하정",
@@ -843,7 +1247,8 @@
       "monetize": null,
       "measuredAt": "2026-09-27T03:16:22.294Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "bob's discount furniture",
@@ -1777,63 +2182,6 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "만인상생 조희대 박영사",
-      "issue": "조희대",
-      "topic": "조희대",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 2,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 2",
-        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-25T03:33:23.253Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
@@ -1908,7 +2256,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "Bob",
@@ -2055,82 +2404,9 @@
       "nextWave": [],
       "rowCount": 1,
       "carried": true
-    },
-    {
-      "issue": "박지현",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": null,
-      "headlines": [
-        {
-          "title": "박지현, 한국 여배우 최초 국제에미상 후보…‘은중과 상연’으로 새 역...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-25T01:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005739929?sid=103"
-        },
-        {
-          "title": "박지현, ‘은중과 상연’으로 국제에미상 여자연기상 후보…韓 배우 최...",
-          "press": "isplus.com",
-          "publishedAt": "2026-09-25T01:34:00.000Z",
-          "link": "https://m.entertain.naver.com/article/241/0003532310"
-        },
-        {
-          "title": "'은중과 상연' 박지현, 국제에미상 여자연기상 후보 올라",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-25T02:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016335799?sid=103"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "박지현 가수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지현 배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지현 트로트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지현 팬카페",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지현 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지현 콘서트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지현 농구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지현 다이어트",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-09-27T03:19:29.199Z",
+  "enrichedAt": "2026-09-27T08:41:23.609Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
@@ -2144,7 +2420,7 @@
     "pooled": 0,
     "aiTitled": 0,
     "trended": 0,
-    "aiCalls": 4,
+    "aiCalls": 3,
     "partial": false
   }
 }
