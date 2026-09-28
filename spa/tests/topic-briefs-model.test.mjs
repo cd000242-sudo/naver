@@ -17,6 +17,19 @@ const brief = (patch = {}) => ({
 
 const writing = () => ({version:1,status:'ready',title:'청년 창업 월세 지원 기준',intro:'창업 임차료 지원은 주거비 지원과 구분해서 살펴봐야 합니다.',sections:[{heading:'지원 기준',paragraphs:['청년 창업자의 월 임차료 지원 비율은 공고에 명시된 기준을 확인합니다.'],factIds:['f1']},{heading:'확인할 내용',paragraphs:['자신의 창업 조건을 공식 공고의 지원 기준과 대조한 후 다음 절차를 확인합니다.'],factIds:['f1']}],table:{caption:'지원 기준 비교',headers:['항목','기준'],rows:[['임차료','70%']],factIds:['f1']},faq:[{question:'지원 기준은?',answer:'공고의 임차료 기준을 확인합니다.',factIds:['f1']}],conclusion:'공식 공고를 기준으로 자신의 해당 여부를 확인하세요.',nextSteps:['공고의 적용 대상 확인'],missing:[],sourceIds:['f1'],reviewedAt:new Date().toISOString()});
 
+test('writing guide preserves actionable sections and only linked safe image references',()=>{
+ const guide={version:1,direction:'창업 조건을 대조한다',mustInclude:['지원 대상'],avoid:['누구나 지급'],seoTitles:['청년 창업 월세 지원 조건'],homeTitles:['"월세 지원" 청년 창업 조건부터 살펴보세요','따옴표 없는 제목'],relatedTerms:['임차료'],images:[{sourceId:'f1',url:fact.link,kind:'capture',description:'공고 비교표',captureArea:'지원 대상 및 산정 기준 표'},{sourceId:'missing',url:fact.link,kind:'capture',description:'없는 근거',captureArea:'표'},{sourceId:'f1',url:'javascript:alert(1)',kind:'reference',description:'위험',captureArea:''}]};
+ const value=model.normalizeTopicBrief(brief({documentCount:3456,documentCountMeasuredAt:'2026-09-28T00:00:00Z',writingGuide:guide}));
+ assert.equal(value.core.documentCount,3456);assert.equal(value.core.serpFacing,1);assert.equal(value.guide.images.length,1);assert.equal(value.guide.homeTitles.length,1);assert.equal(value.guide.mustInclude[0],'지원 대상');
+ assert.match(model.topicBriefCopy(value),/지원 대상 및 산정 기준 표/);
+ assert.equal(model.normalizeTopicBrief(brief()).core.documentCount,null);
+});
+
+test('legacy app content remains useful without fabricating verification or measurements',()=>{
+ const value=model.normalizeTopicBrief(brief({editorial:undefined,title:'청년 창업 지원 조건',angle:'사업장 임차료와 주거비의 차이를 설명하세요.',summary:'지원 조건을 확인하는 글감입니다.',titles:[{text:'청년 창업 지원 조건은?'}]}));
+ assert.equal(value.title,'청년 창업 지원 조건');assert.match(value.angle,/임차료/);assert.equal(value.summary,fact.snippet);assert.equal(value.recommended,false);assert.equal(value.core.documentCount,null);
+});
+
 test('검수된 작성 패키지의 본문·표·출처와 사용자가 수정한 내용을 복사한다',()=>{
  const item=model.normalizeTopicBrief(brief({writingPackage:writing()}));assert.equal(item.writing.status,'ready');
  const body=model.writingPackageBody(item);assert.match(body,/지원 기준 비교/);assert.match(body,/70%/);
@@ -137,3 +150,11 @@ test('대안은 원검색어보다 실제로 길고 다섯 단어 이내여야 �
   const result=model.normalizeTopicBrief(brief({recommendation:{keyword:target,reason:'세부 조건'},alternative:{keyword:target,serpFacing:1,searchVolume:400}}));
   assert.equal(result.recommended,true); assert.equal(result.recommendation.keyword,target);
 });
+
+ test('legacy unverified narratives and fabricated visits never become factual summaries',()=>{
+  const value=model.normalizeTopicBrief(brief({editorial:undefined,title:'지원금 받으러 다녀왔어요',value:'제가 받아보니 999만원이 지급됐어요',summary:'제가 받아보니 999만원이 지급됐어요'}));
+  assert.doesNotMatch(value.summary,/999만원|제가/);assert.doesNotMatch(value.title,/다녀왔/);
+ });
+ test('document totals require integer values and actual measurement timestamps',()=>{
+  for(const patch of [{documentCount:123},{documentCount:1.5,documentCountMeasuredAt:'2026-09-28T00:00:00Z'},{documentCount:123,documentCountMeasuredAt:'2099-01-01T00:00:00Z'}])assert.equal(model.normalizeTopicBrief(brief(patch)).core.documentCount,null);
+ });

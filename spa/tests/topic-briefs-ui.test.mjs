@@ -26,24 +26,17 @@ function load(path, reactMock) {
  return output.exports;
 }
 const {TopicBriefsContent}=load('../src/components/leword/TopicBriefsBoard.tsx');
-test('공식 자료 체험 원고는 실제 편집 가능한 패키지이며 추천 별을 만들지 않는다',()=>{
- const {writingTrial}=load('../src/lib/writingTrial.ts');
- const model=load('../src/lib/topicBriefsModel.ts');const normalized=model.normalizeTopicBrief(writingTrial);
- assert.ok(normalized.writing);assert.equal(normalized.recommended,false);
- const {WritingTrialPreview}=load('../src/components/leword/TopicBriefsBoard.tsx');
- const html=renderToStaticMarkup(React.createElement(WritingTrialPreview));
- assert.match(html,/체험 원고 열기/);assert.match(html,/검색 수요·경쟁 미측정/);assert.doesNotMatch(html,/tb-recommended-badge/);
- const panel=harness('WritingTrialPanel');const tree=panel({});
- assert.equal(nodes(tree,n=>n.type==='div'&&n.props.hidden===true).length,1);
- assert.equal(nodes(tree,n=>n.type?.name==='WritingWorkbench').length,1,'접어도 작업실을 언마운트하지 않음');
+test('main board is a dense list without hero or trial editor and page keeps login gate',()=>{
+ unlocked=true;const html=render([item(1)]);assert.doesNotMatch(html,/tb-hero|체험 원고|WritingWorkbench/);assert.match(html,/오늘의 글감/);assert.match(html,/네이버 SEO 제목/);assert.match(html,/네이버 홈판 제목/);assert.match(html,/문서량/);assert.match(html,/상위노출 가능성/);assert.match(html,/반드시 넣을 내용/);assert.match(html,/넣지 말아야 할 내용/);assert.match(html,/이미지 · 캡처 가이드/);
+ const page=fs.readFileSync(new URL('../src/pages/LewordPage.tsx',import.meta.url),'utf8');assert.doesNotMatch(page,/WritingTrialPreview/);assert.match(page,/!lockedTab && activeTab === 'briefs'/);
 });
 const sentence='신청 기간은 10월 1일부터 10월 10일까지입니다.';
 const item=(id,supported=true)=>({id,title:`지원 공고 ${id}`,coreKeyword:`지원 공고 ${id}`,field:'정책',timing:'NOW',primaryIntent:'언제 신청하나요?',searchVolume:400,serpFacing:1,star:true,facts:[{id:'f1',title:'공식 공고',snippet:sentence,link:'https://example.com/notice'}],editorial:{version:2,status:supported?'supported':'needs_research',review:{passed:supported,issues:supported?[]:['대상 확인 필요']},summary:sentence,audience:'신청 예정자',answers:[{question:'언제 신청하나요?',answer:sentence,factIds:['f1'],excerpts:[{factId:'f1',text:sentence}]}],missing:supported?[]:['대상 확인 필요'],outline:['기간 확인'],angle:'신청 일정 확인'},recommendation:{keyword:`지원 공고 ${id}`,reason:'일정 확인'}});
 function render(briefs,props={}){return renderToStaticMarkup(React.createElement(TopicBriefsContent,{data:{builtAt:new Date().toISOString(),briefs},...props}));}
-test('editorial workspace separates verified and research states without promoting research',()=>{unlocked=true;const html=render([item(1),item(2,false)]);assert.match(html,/발견의 순간을/);assert.match(html,/BETA 작성실/);assert.match(html,/먼저 살펴볼 작성안/);assert.match(html,/추가 조사가 필요한 글감/);assert.match(html,/질문별 답과 근거/);assert.match(html,/근거 검토 완료/);assert.match(html,/추가 확인 필요/);});
+test('compact cards show reviewed and research states without promoting research',()=>{unlocked=true;const html=render([item(1),item(2,false)]);assert.match(html,/오늘의 글감/);assert.match(html,/무슨 일이 있었나요/);assert.match(html,/근거 검토 완료/);assert.match(html,/추가 확인 필요/);});
 test('three free briefs remain the only rendered cards and license gate remains',()=>{unlocked=false;const html=render([1,2,3,4,5].map(id=>item(id)));assert.equal((html.match(/class="tb-card /g)||[]).length,3);assert.match(html,/LICENSE_REQUIRED/);assert.doesNotMatch(html,/<h3>지원 공고 4<\/h3>/);});
 test('source notice stays visible and source URLs remain safe through normalization',()=>{unlocked=true;const unsafe=item(1);unsafe.facts[0].link='javascript:alert(1)';const html=render([unsafe],{sourceNotice:React.createElement('p',null,'앱에서 가져온 글감')});assert.match(html,/앱에서 가져온 글감/);assert.doesNotMatch(html,/href="javascript:/);assert.match(html,/선택 제목 복사/);assert.match(html,/작성안 전체 복사/);});
-test('supported but nonrecommended briefs have a separate evidence section',()=>{unlocked=true;const value=item(1);value.serpFacing=8;const html=render([value]);assert.match(html,/근거를 확인한 글감/);assert.match(html,/추천 조건을 충족한 작성안이 없습니다/);assert.doesNotMatch(html,/aria-label="먼저 살펴볼 작성안"/);assert.match(html,/class="tb-no-recommendation"/);});
+test('supported but nonrecommended briefs have no recommendation badge',()=>{unlocked=true;const value=item(1);value.serpFacing=8;const html=render([value]);assert.match(html,/근거 검토 완료/);assert.doesNotMatch(html,/tb-recommended-badge/);assert.match(html,/상위노출 가능성/);});
 
 function harness(component, path='../src/components/leword/TopicBriefsBoard.tsx') {
  const values=[];let cursor=0;
@@ -56,7 +49,7 @@ const byText=(tree,text)=>nodes(tree,node=>node.type==='button'&&node.props.chil
 test('title choice, full brief copy and keyword analysis preserve the selected content',async()=>{
  let copied='',analyzed='';const previous=Object.getOwnPropertyDescriptor(globalThis,'navigator');Object.defineProperty(globalThis,'navigator',{configurable:true,value:{clipboard:{writeText:async value=>{copied=value;}}}});
  try{const view=harness('BriefCard');const raw=item(1);raw.titles=[{text:'지원 공고 1 신청 안내'},{text:'지원 공고 1 언제 신청하나요?'}];const model=load('../src/lib/topicBriefsModel.ts');const props={brief:model.normalizeTopicBrief(raw),onAnalyze:value=>{analyzed=value;}};
- let tree=view(props);const radios=nodes(tree,n=>n.type==='input');assert.equal(radios.length,2);radios[1].props.onChange();tree=view(props);byText(tree,'선택 제목 복사').props.onClick();await new Promise(resolve=>setImmediate(resolve));assert.equal(copied,'지원 공고 1 언제 신청하나요?');byText(tree,'작성안 전체 복사').props.onClick();await new Promise(resolve=>setImmediate(resolve));assert.match(copied,/지원 공고 1 언제 신청하나요/);assert.match(copied,/https:\/\/example.com\/notice/);byText(tree,'검색어 분석').props.onClick();assert.equal(analyzed,'지원 공고 1');tree.props.onToggle({currentTarget:{open:true}});assert.equal(view(props).props.open,true);
+ let tree=view(props);const radios=nodes(tree,n=>n.type==='input');assert.equal(radios.length,2);radios[1].props.onChange();tree=view(props);byText(tree,'선택 제목 복사').props.onClick();await new Promise(resolve=>setImmediate(resolve));assert.equal(copied,'지원 공고 1 언제 신청하나요?');byText(tree,'작성안 전체 복사').props.onClick();await new Promise(resolve=>setImmediate(resolve));assert.match(copied,/지원 공고 1 언제 신청하나요/);assert.match(copied,/https:\/\/example.com\/notice/);byText(tree,'검색어 분석').props.onClick();assert.equal(analyzed,'지원 공고 1');
  }finally{if(previous)Object.defineProperty(globalThis,'navigator',previous);else delete globalThis.navigator;}
 });
 test('denied clipboard offers selectable complete text and announces recovery',async()=>{
@@ -120,15 +113,15 @@ test('writing package preview contains real sections table FAQ and referenced so
  assert.doesNotMatch(html,/tb-recommended-badge/);
 });
 
-test('complete writing packages remain inside the free-three gate and the first package opens',()=>{
+test('complete writing packages remain inside the free-three gate without auto-opening editors',()=>{
  unlocked=false;
  const raw=[item(1),item(2),item(3),writingItem(4),writingItem(5)];
  const html=render(raw);
  assert.equal((html.match(/class="tb-card /g)||[]).length,3);assert.match(html,/LICENSE_REQUIRED/);
- assert.match(html,/지원 공고 4 신청 기간과 확인 순서/);
+ assert.match(html,/지원 공고 4/);
  const cards=nodes(harness('TopicBriefsContent')({data:{builtAt:new Date().toISOString(),briefs:raw}}),node=>node.type?.name==='BriefCard');
  assert.equal(cards.length,3);assert.equal(cards[0].props.brief.core.keyword,'지원 공고 4');
- assert.equal(cards.filter(card=>card.props.initialOpen).length,1);assert.equal(cards[0].props.initialOpen,true);
+ assert.ok(cards.every(card=>card.props.initialOpen === undefined));
  assert.equal(cards.filter(card=>card.props.brief.writing).length,2);
 });
 
@@ -178,10 +171,10 @@ test('writing clipboard failure preserves edited content with a selectable fallb
  }finally{if(previous)Object.defineProperty(globalThis,'navigator',previous);else delete globalThis.navigator;}
 });
 
-test('package card uses only the workbench copy flow and keeps keyword analysis',()=>{
+test('package card stays a briefing with whole-guide copy and keyword analysis',()=>{
  let analyzed='';const tree=harness('BriefCard')({brief:writingModel(writingItem()),onAnalyze:keyword=>{analyzed=keyword;}});
- assert.equal(byText(tree,'작성안 전체 복사'),undefined);assert.equal(byText(tree,'선택 제목 복사'),undefined);
- assert.equal(nodes(tree,node=>node.type?.name==='WritingWorkbench').length,1);
+ assert.ok(byText(tree,'작성안 전체 복사'));assert.ok(byText(tree,'선택 제목 복사'));
+ assert.equal(nodes(tree,node=>node.type?.name==='WritingWorkbench').length,0);
  byText(tree,'검색어 분석').props.onClick();assert.equal(analyzed,'지원 공고 10');
 });
 
@@ -191,4 +184,10 @@ test('unreviewed package cannot expose an editor or upgrade a research card to a
  const tree=harness('BriefCard')({brief});assert.equal(nodes(tree,node=>node.type?.name==='WritingWorkbench').length,0);
  assert.equal(nodes(tree,node=>node.props?.className==='tb-recommended-badge').length,0);
  assert.ok(byText(tree,'작성안 전체 복사'));
+});
+
+
+test('new writing guide is visible for research cards with honest document and SERP counts',()=>{
+ unlocked=true;const raw=item(31,false);raw.documentCount=6543;raw.documentCountMeasuredAt="2026-09-28T00:00:00Z";raw.alternative={keyword:'지원 공고 31 신청 조건'};raw.writingGuide={version:1,direction:'접수 대상과 제출 서류를 먼저 비교한다.',mustInclude:['신청 대상과 제외 조건'],avoid:['자동 지급 단정'],seoTitles:['지원 공고 31 대상 및 신청 방법'],homeTitles:['"접수 전 확인" 지원 공고 31 빠뜨릴 조건'],relatedTerms:['제출 서류'],images:[{sourceId:'f1',url:'https://example.com/notice',kind:'capture',description:'지원 대상 표',captureArea:'본문 지원 대상 표의 제외 조건 행'}]};
+ const html=render([raw]);for(const value of ['6,543','같은 질문을 다룬 글 1개','지원 공고 31 신청 조건','제출 서류','접수 전 확인','본문 지원 대상 표의 제외 조건 행','자동 지급 단정'])assert.ok(html.includes(value),value);assert.doesNotMatch(html,/tb-recommended-badge/);assert.match(html,/추가 확인 필요/);
 });

@@ -14,7 +14,7 @@ import RadarTab from '../components/leword/RadarTab';
 import RankTab from '../components/leword/RankTab';
 import RpmTab from '../components/leword/RpmTab';
 import TodayPicksBoard from '../components/leword/TodayPicksBoard';
-import TopicBriefsBoard, { WritingTrialPreview } from '../components/leword/TopicBriefsBoard';
+import TopicBriefsBoard from '../components/leword/TopicBriefsBoard';
 import { installKeySyncListener } from '../lib/keySync';
 import YoutubeTab from '../components/leword/YoutubeTab';
 
@@ -317,11 +317,10 @@ function LewordPage() {
                     </div>
                 )}
 
-                {lockedTab && activeTab === 'briefs' && <WritingTrialPreview />}
                 {lockedTab && (
                     <section className="lw-locked" aria-labelledby="lw-locked-title">
                         <h1 id="lw-locked-title">{activeMeta.label}</h1>
-                        <p>일일 발굴 결과는 이용권이 있는 계정으로 로그인하면 열립니다. 글감 작성실 체험은 로그인 없이 이용할 수 있습니다.</p>
+                        <p>일일 발굴 결과는 계정으로 로그인하면 열립니다. 이용권에 따라 열람 가능한 글감 수가 달라집니다.</p>
                         <button type="button" className="lw-acct-btn on" onClick={() => setAuthOpen(true)}>로그인 · 계정 만들기</button>
                     </section>
                 )}
@@ -346,3 +345,5 @@ function LewordPage() {
 }
 
 export default LewordPage;
+
+

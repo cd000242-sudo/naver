@@ -2,7 +2,7 @@ export type SerpFit = '높음' | '보통' | '낮음' | '미측정';
 export type TitleKind = '설명' | '질문' | '수치';
 export interface BriefSource { id: string; title: string; link: string; press: string; publishedAt: string; snippet: string; evidenceExcerpts: string[] }
 export interface BriefAnswer { question: string; answer: string; factIds: string[]; excerpts: Array<{ factId: string; text: string; source: BriefSource }> }
-export interface BriefMetric { keyword: string; searchVolume: number | null; searchVolumeUnder10: boolean; serpFacing: number | null; serpVacancy: number | null; fit: SerpFit }
+export interface BriefMetric { keyword: string; searchVolume: number | null; searchVolumeUnder10: boolean; serpFacing: number | null; serpVacancy: number | null; documentCount: number | null; documentCountMeasuredAt: string; fit: SerpFit }
 export interface BriefWritingPackage {
     version: 1; status: 'ready' | 'needs_research'; title: string; intro: string;
     sections: Array<{ heading: string; paragraphs: string[]; factIds: string[] }>;
@@ -10,13 +10,17 @@ export interface BriefWritingPackage {
     faq: Array<{ question: string; answer: string; factIds: string[] }>;
     conclusion: string; nextSteps: string[]; missing: string[]; sourceIds: string[]; reviewedAt: string;
 }
+export interface BriefWritingGuide {
+    direction: string; mustInclude: string[]; avoid: string[]; seoTitles: string[]; homeTitles: string[]; relatedTerms: string[];
+    images: Array<{ sourceId: string; url: string; kind: 'reference' | 'capture'; description: string; captureArea: string }>;
+}
 export interface TopicBriefView {
     id: string; title: string; field: string; timing: 'NOW' | 'NEXT' | 'ALWAYS';
     status: 'supported' | 'needs_research'; legacy: boolean; recommended: boolean;
     summary: string; audience: string; question: string; angle: string; missing: string[]; outline: string[];
     answers: BriefAnswer[]; sources: BriefSource[]; titles: Array<{ text: string; kind: TitleKind }>;
     core: BriefMetric; related: BriefMetric[]; recommendation: { keyword: string; reason: string; metric: BriefMetric } | null;
-    writing: BriefWritingPackage | null;
+    writing: BriefWritingPackage | null; guide: BriefWritingGuide; alternative: BriefMetric | null;
 }
 type RecordValue = Record<string, unknown>;
 const record = (value: unknown): RecordValue => value && typeof value === 'object' && !Array.isArray(value) ? value as RecordValue : {};
@@ -28,7 +32,7 @@ const facing = (value: unknown): number | null => Number.isInteger(value) && cou
 const unique = (items: string[]) => [...new Set(items)];
 const normalized = (value: string) => value.replace(/<[^>]*>/g, '').normalize('NFKC').replace(/\s+/g, '');
 const safeUrl = (value: unknown): string => { try { const url = new URL(text(value)); return /^(https?:)$/.test(url.protocol) && !url.username && !url.password ? url.href : ''; } catch { return ''; } };
-const personalClaim = /(?:써\s?보|써봤|직접\s?(?:써|받|가|해)|바꿨|받았|접속했|걸어놨|갔어요|안\s?놓쳤|물어봤|캐물었|알람\s?맞춰|(?:큰일\s?날|놓칠)\s?뻔|(?:^|\s)(?:제가|나는|내가)\s)/;
+const personalClaim = /(?:써\s?보|써봤|직접\s?(?:써|받|가|해)|바꿨|받았|접속했|걸어놨|갔어요|다녀\s?왔|방문했|수령했|사\s?봤|샀어요|안\s?놓쳤|물어봤|캐물었|알람\s?맞춰|(?:큰일\s?날|놓칠)\s?뻔|(?:^|\s)(?:제가|나는|내가)\s)/;
 
 export function strictSerpFit(value: unknown): SerpFit {
     const measured = facing(value);
@@ -44,7 +48,9 @@ export function titleKind(title: string): TitleKind {
 }
 function metric(value: unknown, keyword = ''): BriefMetric {
     const item = record(value);
-    return { keyword: keyword || text(item.keyword), searchVolume: count(item.searchVolume), searchVolumeUnder10: item.searchVolumeUnder10 === true, serpFacing: facing(item.serpFacing), serpVacancy: count(item.serpVacancy), fit: strictSerpFit(item.serpFacing) };
+    const stamp = Date.parse(text(item.documentCountMeasuredAt));
+    const measuredDocuments = Number.isSafeInteger(item.documentCount) && count(item.documentCount) !== null && Number.isFinite(stamp) && stamp <= Date.now() + 300_000;
+    return { keyword: keyword || text(item.keyword), searchVolume: count(item.searchVolume), searchVolumeUnder10: item.searchVolumeUnder10 === true, serpFacing: facing(item.serpFacing), serpVacancy: count(item.serpVacancy), documentCount: measuredDocuments ? count(item.documentCount) : null, documentCountMeasuredAt: measuredDocuments ? text(item.documentCountMeasuredAt) : '', fit: strictSerpFit(item.serpFacing) };
 }
 function sourceOf(value: unknown): BriefSource | null {
     const source = record(value); const link = safeUrl(source.link);
@@ -95,6 +101,19 @@ function writingOf(value: unknown, sources: BriefSource[], supported: boolean): 
     return { version: 1, status: 'ready', title: text(draft.title), intro: text(draft.intro), sections: sections.map(section => ({heading:text(section.heading),paragraphs:strings(section.paragraphs),factIds:strings(section.factIds)})), table, faq: faq.map(item => ({question:text(item.question),answer:text(item.answer),factIds:strings(item.factIds)})), conclusion:text(draft.conclusion), nextSteps, missing:[], sourceIds:ids, reviewedAt:text(draft.reviewedAt) };
 }
 
+function guideOf(value: unknown, sources: BriefSource[]): BriefWritingGuide {
+    const guide = record(value); const enabled = guide.version === 1;
+    const list = (key: string) => enabled ? unique(strings(guide[key])).slice(0, 12) : [];
+    const titles = (key: string) => list(key).filter(title => title.length <= 160 && !personalClaim.test(title));
+    const images: BriefWritingGuide['images'] = enabled ? array(guide.images).flatMap(raw => {
+        const image = record(raw); const url = safeUrl(image.url);
+        const source = sources.find(item => item.id === text(image.sourceId));
+        if (!source || url !== source.link || !text(image.description) || (image.kind !== 'reference' && image.kind !== 'capture') || (image.kind === 'capture' && !text(image.captureArea))) return [];
+        return [{ sourceId: source.id, url, kind: image.kind as 'reference' | 'capture', description: text(image.description), captureArea: text(image.captureArea) }];
+    }).slice(0, 5) : [];
+    return {direction: enabled ? text(guide.direction) : '', mustInclude:list('mustInclude'),avoid:list('avoid'),seoTitles:titles('seoTitles'),homeTitles:titles('homeTitles').filter(title => /^(?:"[^"\n]{2,60}"|“[^”\n]{2,60}”)\s*.+/.test(title)),relatedTerms:list('relatedTerms'),images};
+}
+
 export function normalizeTopicBrief(value: unknown, index = 0): TopicBriefView {
     const brief = record(value); const editorial = record(brief.editorial); const review = record(editorial.review);
     const legacy = editorial.version !== 2;
@@ -127,8 +146,8 @@ export function normalizeTopicBrief(value: unknown, index = 0): TopicBriefView {
         ...(!legacy && !validSummary ? ['요약을 뒷받침할 공개 근거를 추가로 확인해야 합니다.'] : []),
         ...(!legacy && !completeAnswers ? ['공개된 근거만으로 일부 답변을 확인할 수 없습니다. 원문 발췌를 추가로 확인하세요.'] : []),
     ]);
-    const candidates = legacy ? [] : array(brief.titles).map(record).map(item => text(item.text)).filter(title => title && !personalClaim.test(title));
-    const originalTitle = !legacy && !personalClaim.test(text(brief.title)) ? text(brief.title) : '';
+    const candidates = array(brief.titles).map(record).map(item => text(item.text)).filter(title => title && !personalClaim.test(title));
+    const originalTitle = !personalClaim.test(text(brief.title)) ? text(brief.title) : '';
     const title = originalTitle || candidates[0] || `${keyword} · 확인할 내용`;
     const titles = unique(candidates.length ? candidates : [title]).map(candidate => ({ text: candidate, kind: titleKind(candidate) }));
     const core = metric(brief, keyword);
@@ -144,11 +163,11 @@ export function normalizeTopicBrief(value: unknown, index = 0): TopicBriefView {
     return {
         id: `${index}-${keyword}-${title}`, title, field: text(brief.field) || '기타', timing: brief.timing === 'NEXT' || brief.timing === 'ALWAYS' ? brief.timing : 'NOW',
         status: supported ? 'supported' : 'needs_research', legacy, recommended: recommendation !== null,
-        summary: validSummary ? summaryText : answers[0]?.answer || '원문을 읽고 작성할 질문과 필요한 근거를 정리하는 조사 출발점입니다.',
-        audience: legacy ? '' : text(editorial.audience), question: text(brief.primaryIntent), angle: legacy ? '' : text(editorial.angle),
+        summary: validSummary ? summaryText : answers[0]?.answer || (legacy ? sources[0]?.snippet || sources[0]?.title : '') || '원문을 읽고 작성할 질문과 필요한 근거를 정리하는 조사 출발점입니다.',
+        audience: legacy ? '' : text(editorial.audience), question: text(brief.primaryIntent), angle: text(editorial.angle) || text(brief.angle) || text(brief.differentiation),
         missing, outline: legacy ? [] : strings(editorial.outline), answers, sources, titles, core, related,
         recommendation,
-        writing: writingOf(brief.writingPackage, sources, supported),
+        writing: writingOf(brief.writingPackage, sources, supported), guide: guideOf(brief.writingGuide, sources), alternative: alternative.keyword ? alternative : null,
     };
 }
 export function partitionTopicBriefs(items: TopicBriefView[], limit = 5): { recommended: TopicBriefView[]; remaining: TopicBriefView[] } {
@@ -164,6 +183,13 @@ export function topicBriefCopy(brief: TopicBriefView, selectedTitle = brief.titl
         `추가 확인:\n${brief.missing.length ? brief.missing.map(item => `- ${item}`).join('\n') : '- 작성 전 최신 공고·수치·일정을 확인하세요.'}`,
         `목차:\n${brief.outline.length ? brief.outline.map((item, index) => `${index + 1}. ${item}`).join('\n') : '질문과 근거를 확인한 뒤 구성하세요.'}`,
         `접근 각도: ${brief.angle || '독자의 질문을 정한 뒤 구성하세요.'}`,
+        `작성 방향: ${brief.guide.direction || brief.angle || '원문의 조건을 확인하며 작성하세요.'}`,
+        `반드시 넣을 내용:\n${brief.guide.mustInclude.join('\n')}`,
+        `넣지 말아야 할 내용:\n${brief.guide.avoid.join('\n')}`,
+        `네이버 SEO 제목:\n${brief.guide.seoTitles.join('\n')}`,
+        `네이버 홈판 제목:\n${brief.guide.homeTitles.join('\n')}`,
+        `같이 넣을 말: ${brief.guide.relatedTerms.join(', ')}`,
+        `이미지 · 캡처:\n${brief.guide.images.map(image => `${image.description} · ${image.captureArea}\n${image.url}`).join('\n')}`,
         `원문:\n${brief.sources.map(source => `${source.title}\n${source.link}`).join('\n')}`,
     ].join('\n\n');
 }
@@ -181,3 +207,4 @@ export function writingPackageCopy(brief: TopicBriefView, editedTitle?: string, 
     const sources = brief.sources.filter(source => brief.writing!.sourceIds.includes(source.id));
     return [`# ${editedTitle ?? brief.writing.title}`, editedBody ?? writingPackageBody(brief), `참고 출처\n${sources.map(source => `- ${source.title}\n  ${source.link}`).join('\n')}`].join('\n\n');
 }
+
