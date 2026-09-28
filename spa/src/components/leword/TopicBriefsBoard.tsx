@@ -1,14 +1,14 @@
-import { useEffect, useId, useMemo, useState } from 'react';
+import { loadSavedBoard, boardSourceNote } from '../../lib/boardBridge';
+import { useEffect, useId, useMemo, useState, type ReactNode } from 'react';
 import LicenseGate, { isUnlocked } from './LicenseGate';
 import { naverSearchUrl } from './preemptionMeta';
-import { TabIntro } from './LewordShared';
 import { BoardFreshness } from './BoardFreshness';
 import { normalizeTopicBrief, partitionTopicBriefs, searchVolumeLabel, topicBriefCopy, type BriefMetric, type TopicBriefView } from '../../lib/topicBriefsModel';
 import './TopicBriefsBoard.css';
 
 type RoundSlot = '아침' | '오후' | '저녁';
 interface BriefRound { slot: RoundSlot; builtAt: string; briefs: unknown[] }
-interface TopicBriefs { builtAt: string; slot?: RoundSlot; rounds?: BriefRound[]; briefs?: unknown[] }
+export interface TopicBriefs { builtAt: string; slot?: RoundSlot; rounds?: BriefRound[]; briefs?: unknown[] }
 const SLOT_TIME: Record<RoundSlot, string> = { 아침: '04:23', 오후: '10:23', 저녁: '16:23' };
 const FREE_BRIEFS = 3;
 const TIMING_LABEL = { NOW: '최근 소식', NEXT: '예정된 일정', ALWAYS: '지속 주제' };
@@ -24,7 +24,7 @@ function Metric({ item }: { item: BriefMetric }) {
     </div>;
 }
 
-function BriefCard({ brief, initialOpen = false, onAnalyze }: { brief: TopicBriefView; initialOpen?: boolean; onAnalyze?: (keyword: string) => void }) {
+export function BriefCard({ brief, initialOpen = false, featured = false, onAnalyze }: { brief: TopicBriefView; initialOpen?: boolean; featured?: boolean; onAnalyze?: (keyword: string) => void }) {
     const groupId = useId();
     const [open, setOpen] = useState(initialOpen);
     const [selectedTitle, setSelectedTitle] = useState(brief.titles[0]?.text || brief.title);
@@ -42,23 +42,25 @@ function BriefCard({ brief, initialOpen = false, onAnalyze }: { brief: TopicBrie
             setFeedback('자동 복사가 되지 않았습니다. 아래 내용을 선택해 복사하세요.');
         }
     };
-    return <details className="lw-briefs-card tb-card" open={open} onToggle={event => setOpen(event.currentTarget.open)}>
+    return <details className={`tb-card ${featured ? 'tb-card-featured' : ''} ${brief.status === 'supported' ? 'tb-card-ready' : 'tb-card-research'}`} open={open} onToggle={event => setOpen(event.currentTarget.open)}>
         <summary><div className="tb-card-heading">
+            {featured && <span className="tb-feature-label">우선 검토할 작성안</span>}
             <span className={`tb-state ${brief.status === 'supported' ? 'is-ready' : ''}`}>{brief.status === 'supported' ? '근거 검토 완료' : '추가 확인 필요'}</span>
             <span className="tb-category">{brief.field} · {TIMING_LABEL[brief.timing]}</span>
             <h3>{brief.title}</h3><p>{brief.summary}</p>
             {brief.audience && <span className="tb-audience">읽을 사람 · {brief.audience}</span>}
-            <span className="tb-open-label">{open ? '작성안 접기' : '질문·근거와 작성안 보기'}</span>
+            <div className="tb-card-foot"><span className="tb-evidence-count">답변 {brief.answers.length}개 <i>·</i> 원문 {brief.sources.length}개</span><span className="tb-open-label">{open ? '작성안 접기' : '작성안 펼치기'}</span></div>
         </div></summary>
         <div className="tb-card-body">
+            <div className="tb-workflow" aria-label="작성 순서"><span><b>01</b> 질문과 근거</span><span><b>02</b> 글의 구성</span><span><b>03</b> 제목과 복사</span></div>
             {brief.recommendation && <div className="tb-recommendation"><strong>살펴볼 이유</strong><p>{brief.recommendation.reason}</p><span>작성할 검색어 · {brief.recommendation.keyword}</span></div>}
             {brief.question && <div className="tb-question"><strong>{brief.legacy ? '조사할 질문' : '독자의 질문'}</strong><p>{brief.question}</p></div>}
             {!brief.audience && <p className="tb-muted">읽을 사람은 원문을 확인하며 정하세요.</p>}
             <section className="tb-answers" aria-label="질문별 답과 근거"><h4>질문별 답과 근거</h4>
                 {brief.answers.length ? brief.answers.map((answer, index) => <div className="tb-answer" key={`${answer.question}-${index}`}>
-                    <h5>{answer.question}</h5><p>{answer.answer}</p>
+                    <h5><span className="tb-answer-number">Q{index + 1}</span>{answer.question}</h5><p>{answer.answer}</p>
                     {answer.excerpts.map((excerpt, excerptIndex) => <blockquote key={`${excerpt.factId}-${excerptIndex}`}>
-                        <p>{excerpt.text}</p><a href={excerpt.source.link} target="_blank" rel="noreferrer">{excerpt.source.title} ↗</a>
+                        <span className="tb-quote-label">원문 발췌</span><p>{excerpt.text}</p><a href={excerpt.source.link} target="_blank" rel="noreferrer">{excerpt.source.title} ↗</a>
                     </blockquote>)}
                 </div>) : <p className="tb-muted">아직 답을 뒷받침할 발췌가 준비되지 않았습니다. 아래 원문에서 조사할 질문의 답을 확인하세요.</p>}
             </section>
@@ -90,20 +92,10 @@ function BriefCard({ brief, initialOpen = false, onAnalyze }: { brief: TopicBrie
     </details>;
 }
 
-export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
-    const [data, setData] = useState<TopicBriefs | null>(null);
-    const [error, setError] = useState('');
+export function TopicBriefsContent({ data, error = '', onAnalyze, sourceNotice }: { data: TopicBriefs | null; error?: string; onAnalyze?: (keyword: string) => void; sourceNotice?: ReactNode }) {
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     const [field, setField] = useState('전체');
     const [slot, setSlot] = useState<RoundSlot | null>(null);
-    useEffect(() => {
-        let alive = true;
-        fetch('/data/topic-briefs.json', { cache: 'no-cache' })
-            .then(response => response.ok ? response.json() : Promise.reject(new Error(`HTTP ${response.status}`)))
-            .then(json => { if (alive) setData(json && typeof json === 'object' ? json as TopicBriefs : { builtAt: '', briefs: [] }); })
-            .catch(() => { if (alive) setError('글감을 불러오지 못했습니다. 잠시 후 페이지를 다시 열어 주세요.'); });
-        return () => { alive = false; };
-    }, []);
     const rounds = useMemo(() => {
         const raw = data ? (Array.isArray(data.rounds) && data.rounds.length ? data.rounds : [{ slot: data.slot || '아침', builtAt: data.builtAt, briefs: data.briefs || [] }]) : [];
         return raw.map(round => ({ ...round, items: (Array.isArray(round.briefs) ? round.briefs : []).map(normalizeTopicBrief) }));
@@ -115,27 +107,55 @@ export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: 
     const fields = ['전체', ...new Set(all.map(brief => brief.field))];
     const activeField = fields.includes(field) ? field : '전체';
     const filtered = activeField === '전체' ? all : all.filter(brief => brief.field === activeField);
-    const ordered = [...filtered.filter(brief => brief.recommended), ...filtered.filter(brief => !brief.recommended)];
+    const ordered = [...filtered.filter(brief => brief.recommended), ...filtered.filter(brief => !brief.recommended && brief.status === 'supported'), ...filtered.filter(brief => !brief.recommended && brief.status !== 'supported')];
     const visible = unlocked ? ordered : ordered.slice(0, FREE_BRIEFS);
     const sections = partitionTopicBriefs(visible);
-    const count = rounds.reduce((sum, round) => sum + round.items.length, 0);
+    const ready = sections.remaining.filter(brief => brief.status === 'supported');
+    const research = sections.remaining.filter(brief => brief.status !== 'supported');
+    const supportedCount = all.filter(brief => brief.status === 'supported').length;
     return <section className="lw-picks lw-picks-tab lw-briefs tb-board" aria-label="오늘의 글감">
-        <TabIntro title="오늘의 글감" desc={`독자의 질문과 근거를 확인하고 작성안을 고르세요.${data ? ` ${rounds.length}회차 · ${count}건` : ''}`} source="기사 자료와 검색 수치를 바탕으로 구성합니다. 작성안의 준비 상태와 추가 확인할 내용을 함께 확인하세요." />
-        <BoardFreshness cadence="매일 아침·낮·저녁 세 번" rounds={[{ hour: 4, minute: 23, label: '아침' }, { hour: 10, minute: 23, label: '오후' }, { hour: 16, minute: 23, label: '저녁' }]} lastBuiltAt={latestBuiltAt} />
+        <header className="tb-hero">
+            <div className="tb-hero-copy"><span className="tb-eyebrow">LEWORD · 오늘의 글감</span><h2>오늘, 어떤 글을 쓸까요<span>?</span></h2><p>질문에서 시작해, 근거가 있는 글로.<br />글감의 준비 상태를 살펴보고 나만의 작성안을 고르세요.</p></div>
+            <div className="tb-edition"><span>{activeRound ? `${activeRound.slot} 회차` : '오늘의 편집 노트'}</span><strong>{data ? all.length : '—'}<small>개 글감</small></strong><div><span><i className="tb-dot-ready" />근거 검토 {supportedCount}</span><span><i className="tb-dot-research" />추가 조사 {all.length - supportedCount}</span></div></div>
+        </header>
+        {sourceNotice && <div className="tb-source-notice" role="status">{sourceNotice}</div>}
+        <details className="tb-freshness"><summary>{latestBuiltAt ? `최근 공개 · ${kst(latestBuiltAt)}` : '갱신 일정 확인'}<span>갱신 일정·상태</span></summary><BoardFreshness cadence="매일 아침·낮·저녁 세 번" rounds={[{ hour: 4, minute: 23, label: '아침' }, { hour: 10, minute: 23, label: '오후' }, { hour: 16, minute: 23, label: '저녁' }]} lastBuiltAt={latestBuiltAt} /></details>
         {error && <p className="lw-note lw-note-error">{error}</p>}
         {!error && !data && <p className="lw-note">불러오는 중…</p>}
         {isStale && latestBuiltAt && <p className="lw-note">최근 공개 회차는 {kst(latestBuiltAt)}입니다. 작성 전 일정과 조건을 다시 확인하세요.</p>}
-        {rounds.length > 0 && <div className="lw-briefs-rounds" aria-label="회차 선택">{(['아침', '오후', '저녁'] as const).map(name => {
+        {rounds.length > 0 && <div className="tb-rounds" aria-label="회차 선택">{(['아침', '오후', '저녁'] as const).map(name => {
             const round = rounds.find(item => item.slot === name);
-            return <button type="button" key={name} disabled={!round} aria-pressed={activeRound?.slot === name} className={`lw-briefs-round${activeRound?.slot === name ? ' is-active' : ''}`} onClick={() => { setSlot(name); setField('전체'); }}><strong>{name}</strong><span>{round ? `${round.items.length}건 · ${kst(round.builtAt)}` : `${SLOT_TIME[name]} 예정`}</span></button>;
+            return <button type="button" key={name} disabled={!round} aria-pressed={activeRound?.slot === name} className={`tb-round${activeRound?.slot === name ? ' is-active' : ''}`} onClick={() => { setSlot(name); setField('전체'); }}><strong>{name}</strong><span>{round ? `${round.items.length}건 · ${kst(round.builtAt)}` : `${SLOT_TIME[name]} 예정`}</span></button>;
         })}</div>}
-        {data && <div className="lw-picks-topics" aria-label="분야 선택">{fields.map(name => <button type="button" key={name} aria-pressed={activeField === name} className={`lw-picks-topic-btn${activeField === name ? ' is-active' : ''}`} onClick={() => setField(name)}>{name}<b>{name === '전체' ? all.length : all.filter(brief => brief.field === name).length}</b></button>)}</div>}
-        {data && <section className="tb-shortlist" aria-label="먼저 살펴볼 작성안"><h3>먼저 살펴볼 작성안 <span>{sections.recommended.length}건</span></h3>
-            <p className="tb-muted">근거 검토를 마치고, 작성할 검색어의 정면 글이 2개 이하인 작성안을 최대 5개 보여드립니다.</p>
-            {sections.recommended.length ? sections.recommended.map((brief, index) => <BriefCard key={brief.id} brief={brief} initialOpen={index === 0} onAnalyze={onAnalyze} />) : <p className="tb-empty">이 회차·분야에는 조건을 충족한 추천이 없습니다. 전체 글감에서 조사할 주제를 골라보세요.</p>}
+        {data && <div className="tb-fields" aria-label="분야 선택">{fields.map(name => <button type="button" key={name} aria-pressed={activeField === name} className={`tb-field${activeField === name ? ' is-active' : ''}`} onClick={() => setField(name)}>{name}<b>{name === '전체' ? all.length : all.filter(brief => brief.field === name).length}</b></button>)}</div>}
+        {data && sections.recommended.length > 0 && <section className="tb-shortlist" aria-label="먼저 살펴볼 작성안"><div className="tb-section-heading"><div><span className="tb-section-kicker">추천 작성안</span><h3>먼저 살펴볼 작성안 <span>{sections.recommended.length}</span></h3></div><span className="tb-selection-rule">근거 검토 + 정면 글 2개 이하</span></div>
+            <p className="tb-muted">작성할 검색어의 수요와 경쟁을 함께 확인한 작성안입니다. 최대 5개를 골라 보여드립니다.</p>
+            {sections.recommended.map((brief, index) => <BriefCard key={`${activeRound?.builtAt}-${brief.id}`} brief={brief} featured={index === 0} onAnalyze={onAnalyze} />)}
         </section>}
-        {sections.remaining.length > 0 && <details className="tb-all" key={`${activeRound?.slot}-${activeField}`} open={!sections.recommended.length}><summary>전체 글감 보기 · {sections.remaining.length}건{sections.recommended.length ? ' (위 추천 제외)' : ''}</summary><p className="tb-muted">추가 확인이 필요한 글감도 원문과 질문을 출발점으로 조사할 수 있습니다.</p>{sections.remaining.map(brief => <BriefCard key={brief.id} brief={brief} onAnalyze={onAnalyze} />)}</details>}
+        {data && filtered.length > 0 && !sections.recommended.length && <p className="tb-no-recommendation">추천 조건을 충족한 작성안이 없습니다. 아래 글감의 근거를 살펴보세요.</p>}
+        {ready.length > 0 && <section className="tb-secondary" aria-label="근거를 확인한 글감"><div className="tb-section-heading"><div><span className="tb-section-kicker">근거 검토 완료</span><h3>근거를 확인한 글감 <span>{ready.length}</span></h3></div></div><p className="tb-muted">답변의 근거를 확인한 글감입니다. 추천 여부와 별개로 검색 수요와 경쟁을 살펴보세요.</p><div className="tb-card-grid">{ready.map(brief => <BriefCard key={`${activeRound?.builtAt}-${brief.id}`} brief={brief} onAnalyze={onAnalyze} />)}</div></section>}
+        {research.length > 0 && <section className="tb-secondary tb-research-section" aria-label="추가 조사가 필요한 글감"><div className="tb-section-heading"><div><span className="tb-section-kicker">리서치 노트</span><h3>추가 조사가 필요한 글감 <span>{research.length}</span></h3></div></div><p className="tb-muted">아직 작성 준비가 끝나지 않았습니다. 원문과 확인할 질문을 출발점으로 활용하세요.</p><div className="tb-card-grid">{research.map(brief => <BriefCard key={`${activeRound?.builtAt}-${brief.id}`} brief={brief} onAnalyze={onAnalyze} />)}</div></section>}
         {data && !error && !filtered.length && <p className="tb-empty">이 회차에 공개된 글감이 없습니다.</p>}
         {data && !unlocked && filtered.length > FREE_BRIEFS && <LicenseGate onUnlock={() => setUnlocked(isUnlocked())} remaining={filtered.length - FREE_BRIEFS} freeRows={FREE_BRIEFS} boardLabel="오늘의 글감" />}
     </section>;
+}
+
+export default function TopicBriefsBoard({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
+    const [data, setData] = useState<TopicBriefs | null>(null);
+    const [error, setError] = useState('');
+    const [notice, setNotice] = useState('');
+    const [attempt, setAttempt] = useState(0);
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        let alive = true;
+        setLoading(true); setError('');
+        loadSavedBoard('topic-briefs').then(result => {
+            if (!alive) return;
+            if (result.board) setData(result.board as TopicBriefs);
+            else setError('새 결과를 불러오지 못했습니다. 앱에서 글감을 만든 뒤 다시 확인하세요.');
+            setNotice(boardSourceNote(result)); setLoading(false);
+        }).catch(() => { if (alive) {setError('자료를 불러오지 못했습니다. 기존 결과를 유지합니다.');setLoading(false);} });
+        return () => { alive = false; };
+    }, [attempt]);
+    return <TopicBriefsContent data={data} error={error} onAnalyze={onAnalyze} sourceNotice={<><span>{loading ? '사이트와 앱 저장 결과를 확인하고 있습니다…' : notice}</span><button type="button" className="lw-picks-btn" disabled={loading} onClick={() => setAttempt(value => value + 1)}>다시 확인</button></>} />;
 }

@@ -1,0 +1,11 @@
+.app-brief-titles { padding:18px; margin-top:18px; border:1px solid rgba(132,181,185,.28); border-radius:14px; background:rgba(46,94,99,.09); }
+.app-brief-title-head { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; align-items:center; }
+.app-brief-title-head strong { font-size:15px; }
+.app-brief-title-head small, .app-brief-titles p { font-size:12px; line-height:1.65; opacity:.75; }
+.app-brief-titles dl { margin:14px 0; display:grid; gap:10px; }
+.app-brief-titles dl > div { display:grid; grid-template-columns:48px 1fr; gap:10px; }
+.app-brief-titles dt { opacity:.65; font-size:12px; padding-top:2px; }
+.app-brief-titles dd { margin:0; line-height:1.65; font-size:14px; overflow-wrap:anywhere; }
+.app-brief-titles button { color:inherit; background:rgba(90,164,153,.17); border:1px solid rgba(90,164,153,.4); border-radius:8px; padding:9px 13px; font:inherit; font-size:12px; cursor:pointer; }
+.app-brief-titles button:disabled { opacity:.6; cursor:wait; }
+.app-brief-titles button:focus-visible { outline:2px solid #80c5b7; outline-offset:3px; }

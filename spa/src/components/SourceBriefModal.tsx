@@ -1,3 +1,4 @@
+import AppBriefTitles from './AppBriefTitles';
 import { useEffect, useRef, useState } from 'react';
 import { groupByIntent } from '../lib/intentGroups';
 import { ISSUE_TYPE_LABEL, findIssueBrief, loadIssueBoardOnce, type IssueBrief } from '../lib/issueFlow';
@@ -87,10 +88,18 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
 
     // 실검 틈새 회차의 이슈 묶음. 페이지에 한 번만 받고, 검색어가 바뀌면 다시 찾는다.
     const [flow, setFlow] = useState<IssueBrief | null>(null);
+    const [flowSource, setFlowSource] = useState('');
     useEffect(() => {
         let alive = true;
+        setFlow(null); setFlowSource('');
         loadIssueBoardOnce().then((board) => {
-            if (alive) setFlow(findIssueBrief(board, keyword));
+            if (alive) {
+                const matched = findIssueBrief(board, keyword);
+                setFlow(matched);
+                setFlowSource(matched?.briefSource === 'app'
+                    ? `누락된 이슈 브리프를 앱에서 가져왔습니다 · ${new Date(matched.briefGeneratedAt || '').toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })} 생성`
+                    : board?.sourceNote || '');
+            }
         });
         return () => { alive = false; };
     }, [keyword]);
@@ -203,7 +212,7 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                             <section className="brief-modal-flow" aria-label={`${keyword} 이슈 흐름`}>
                                 <div className="brief-modal-section-head">
                                     <strong>이슈 흐름 — 왜 뜨나 · 몰린 말 · 다음 물결</strong>
-                                    <small>실검 틈새 회차 실측</small>
+                                    <small>{flowSource || '실검 틈새 회차 실측'}</small>
                                 </div>
                                 <p className="brief-modal-flow-issue">
                                     <span>{flow.issue}</span>
@@ -265,28 +274,7 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                             </section>
                         )}
 
-                        {(titles.seo || titles.home) && (
-                            <section aria-label={`${keyword} 추천 제목`}>
-                                <div className="brief-modal-section-head">
-                                    <strong>이렇게 쓰세요</strong>
-                                    {titles.topic && <span className="brief-modal-topic">주제 · {titles.topic}</span>}
-                                </div>
-                                <dl className="brief-modal-titles">
-                                    {titles.seo && (
-                                        <div>
-                                            <dt>검색 유입용</dt>
-                                            <dd>{titles.seo}</dd>
-                                        </div>
-                                    )}
-                                    {titles.home && (
-                                        <div>
-                                            <dt>홈판 노출용</dt>
-                                            <dd>{titles.home}</dd>
-                                        </div>
-                                    )}
-                                </dl>
-                            </section>
-                        )}
+                        <AppBriefTitles key={keyword} keyword={keyword} fallback={titles} />
 
                         {/* 출처 기사 — 접어 둔다(사장님 2026-09-06 "접었다폈다 가능하게 하고 접어주세요"). */}
                         {(articleUrl || links.length > 0) && (

@@ -1,3 +1,4 @@
+import AppBriefTitles from '../components/AppBriefTitles';
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 import HomeOperationsBoard from '../components/HomeOperationsBoard';
@@ -1232,6 +1233,7 @@ function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceL
                 <span style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>직접 수집 확인 · {lane.label} {rank}위</span>
                 <strong>{keyword}</strong>
                 <p>{lane.label} 원본 실시간 목록에서 직접 수집한 검색 신호입니다. 관련 보도는 자동 매칭될 때만 기사 브리프로 함께 표시합니다.</p>
+                <AppBriefTitles key={keyword} keyword={keyword} fallback={briefTitles} />
                 <div className="source-insight-actions">
                     <a href={searchUrl} target="_blank" rel="noreferrer" style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>원본에서 검색</a>
                     {onOpen ? <button type="button" className="source-insight-open" onClick={onOpen}>크게 보기</button> : null}
@@ -1325,32 +1327,7 @@ function SourceSignalInsightPanel({ lane, item, items, onOpen }: { lane: SourceL
               초보자는 주제를 잘못 고르면 홈판 노출 경로가 막히는 것 자체를 모른다.
               주제는 확신이 있을 때만 표시한다(틀린 주제는 노출을 막는다).
             */}
-            {(briefTitles.seo || briefTitles.home) && (
-                <section className="source-howto" aria-label={`${keyword} 글쓰기 가이드`}>
-                    <div className="source-howto-head">
-                        <strong>이렇게 쓰세요</strong>
-                        {briefTitles.topic && (
-                            <span className="source-howto-topic">
-                                주제 · {briefTitles.topic}
-                            </span>
-                        )}
-                    </div>
-                    <dl className="source-howto-list">
-                        {briefTitles.seo && (
-                            <div>
-                                <dt>검색 유입용 제목</dt>
-                                <dd>{briefTitles.seo}</dd>
-                            </div>
-                        )}
-                        {briefTitles.home && (
-                            <div>
-                                <dt>홈판 노출용 제목</dt>
-                                <dd>{briefTitles.home}</dd>
-                            </div>
-                        )}
-                    </dl>
-                </section>
-            )}
+            <AppBriefTitles key={keyword} keyword={keyword} fallback={briefTitles} />
 
         </aside>
     );

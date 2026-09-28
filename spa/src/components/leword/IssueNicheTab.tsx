@@ -337,6 +337,8 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                 />
             )}
 
+            {sub !== 'live' && board?.sourceNote && <p className="lw-note" role="status">{board.sourceNote}</p>}
+
             {/* 서브탭(2026-09-10) — 실시간이 먼저, 틈새 판정은 그다음.
                 화면 이름이 '실시간'인데 첫 화면이 하루 3회 회차 보드였던 것이 어긋나 있었다. */}
             <div className="lw-segment lw-segment-wrap" role="tablist" aria-label="실시간 보기">

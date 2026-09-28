@@ -9,7 +9,7 @@ import { moneyTitle, won, type MoneyBid } from './moneyBid';
  * 오늘의 네이버 추천키워드 — 사이드 메뉴에서 실검 틈새키워드와 키워드 분석 **사이의 서브탭**,
  * 그 안에서 **주제별 서브-서브 탭**(주제 칩을 눌러 한 주제씩 본다). 사장님 2026-09-08.
  *
- * 데이터는 leword-app CI(today-picks.yml, 매일 04:30 KST — 2026-09-15 2시간 앞당김)가 씨앗 창고에서 주제별 후보를 넓게 뽑아
+ * 데이터는 leword-app CI(today-picks.yml, 하루 3회 06:30·13:30·19:30 KST)가 씨앗 창고에서 주제별 후보를 넓게 뽑아
  * 블로그 문서수를 오픈 API로 실측하고 **황금비(검색량 ÷ 문서수) 1 이상만** 30개씩(2026-09-24 10 → 30) 정적 JSON 으로
  * 발행한 것이다. 예외는 "트래픽 몰릴 예정"(이번 달·다음 달 피크 계절 씨앗)뿐 — '시즌 앞' 칩이 붙는다.
  * 황금 안에서는 네이버 광고 3위 입찰가가 높은(돈 되는) 순이다 — 입찰가도 CI 가 잰 실측이다.
@@ -22,6 +22,7 @@ interface PickRow {
     keyword: string;
     searchVolume: number;
     documentCount: number;
+    measuredAt?: string;
     ratio: number;
     depth: number | null;
     comp: string | null;
@@ -43,6 +44,8 @@ interface PickTopic {
 interface TodayPicks {
     builtAt: string;
     warehouseBuiltAt: string | null;
+    round?: { id: string; label: string; scheduledAt: string };
+    changes?: { added: number; changed: number; retained: number };
     perTopic: number;
     keep: number;
     minRatio?: number;
@@ -101,15 +104,23 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
             <h2 id="lw-picks-title" hidden>오늘의 네이버 추천키워드</h2>
             <TabIntro
                 title="오늘의 네이버 추천키워드"
-                desc={`주제별 황금 비율(검색량 ÷ 문서수 ${minRatio} 이상) 키워드 · 네이버 블로그 홈판·SEO 전용${data ? ` · ${kst(data.builtAt)} 실측 · 황금 ${num(golden)}건` : ''}`}
-                source="검색광고 검색량 실측 · 블로그 문서수 실측 · 광고 입찰가 실측 · 매일 04:30 KST 갱신"
+                desc={`주제별 황금 비율(검색량 ÷ 문서수 ${minRatio} 이상) 키워드 · 네이버 블로그 홈판·SEO 전용${data ? ` · ${kst(data.builtAt)} 선정 · 황금 ${num(golden)}건` : ''}`}
+                source="검색광고 검색량 실측 · 블로그 문서수 실측 · 광고 입찰가 실측 · 오전 06:30 / 오후 13:30 / 저녁 19:30 KST 갱신"
             />
 
             <BoardFreshness
-                cadence="매일 아침 한 번"
-                rounds={[{ hour: 4, minute: 30 }]}
+                cadence="매일 오전·오후·저녁 세 번"
+                rounds={[{ hour: 6, minute: 30 }, { hour: 13, minute: 30 }, { hour: 19, minute: 30 }]}
                 lastBuiltAt={data?.builtAt ?? null}
             />
+
+            {data?.round && (
+                <div className="lw-note" aria-label="추천 회차 정보" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', alignItems: 'center' }}>
+                    <strong>{data.round.label} 추천 · {kst(data.round.scheduledAt)} 회차</strong>
+                    {data.changes && <span>직전 대비 신규 {num(data.changes.added)} · 수치 변경 {num(data.changes.changed)} · 유지 {num(data.changes.retained)}</span>}
+                    <span>24시간 이내 문서수 실측은 재사용합니다. 월 검색량은 하루 동안 급등한 수치가 아닙니다.</span>
+                </div>
+            )}
 
             {error && <p className="lw-note lw-note-error">추천키워드를 못 읽었습니다 — {error}</p>}
             {!error && !data && <p className="lw-note">불러오는 중…</p>}
@@ -162,7 +173,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                                             {row.seasonPeakMonth && <span className="lw-picks-chip lw-picks-season">{row.seasonPeakMonth}월 시즌 앞</span>}
                                         </td>
                                         <td className="n">{num(row.searchVolume)}</td>
-                                        <td className="n">{num(row.documentCount)}</td>
+                                        <td className="n" title={row.measuredAt ? `문서수 실측: ${kst(row.measuredAt)}` : '문서수 실측 시각 미기록'}>{num(row.documentCount)}</td>
                                         <td className={`n${row.ratio >= minRatio ? ' lw-picks-gold' : ''}`}>{ratioText(row.ratio)}</td>
                                         <td className="n">{row.depth == null ? '—' : num(row.depth)}</td>
                                         <td

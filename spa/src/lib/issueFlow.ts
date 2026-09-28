@@ -1,3 +1,4 @@
+import { loadSavedBoard, boardSourceNote } from './boardBridge';
 /**
  * 실검 틈새 보드(정적 JSON) 읽기 — 실검 틈새 탭과 홈 실시간 검색어 브리프가 같이 쓴다.
  *
@@ -96,6 +97,8 @@ export type IssueNextWave = {
 
 /** 이슈 묶음 브리핑 — 왜 뜨나(헤드라인 검증 통과분만)·몰린 말·다음 물결. */
 export type IssueBrief = {
+    briefSource?: 'app';
+    briefGeneratedAt?: string;
     issue: string;
     issueType: string;
     lane: IssueLane;
@@ -110,6 +113,8 @@ export type IssueBrief = {
 };
 
 export type IssueBoard = {
+    dataSource?: 'site' | 'app';
+    sourceNote?: string;
     observations?: IssueBoardRow[];
     rejectedCount?: number;
     publishedAt?: string;
@@ -148,9 +153,9 @@ function normalizeRow(row: IssueBoardRow): IssueBoardRow {
 /** 발행본을 읽는다. 없거나 깨졌으면 null — 화면이 '아직 없음'으로 적는다. */
 export async function fetchIssueBoard(): Promise<IssueBoard | null> {
     try {
-        const response = await fetch(ISSUE_BOARD_URL, { cache: 'no-store' });
-        if (!response.ok) return null;
-        const data = await response.json();
+        const selected = await loadSavedBoard('issue-niche');
+        if (!selected.board) return null;
+        const data = selected.board;
         const issues: IssueBrief[] = Array.isArray(data?.issues) ? data.issues : [];
         const rows: IssueBoardRow[] = [];
         const observations: IssueBoardRow[] = [];
@@ -170,6 +175,7 @@ export async function fetchIssueBoard(): Promise<IssueBoard | null> {
         }
         return {
             ...data,
+            dataSource: selected.source || undefined, sourceNote: boardSourceNote(selected),
             rows, observations, rejectedCount,
             freeSample: data?.freeSample ? { ...data.freeSample, keywords: (data.freeSample.keywords || []).filter((keyword: string) => rows.some(row => compactKey(row.keyword) === compactKey(keyword))) } : undefined,
             issues: issues.map(issue => ({ ...issue,
@@ -185,10 +191,14 @@ export async function fetchIssueBoard(): Promise<IssueBoard | null> {
 }
 
 let boardOnce: Promise<IssueBoard | null> | null = null;
+let boardExpires = 0;
 
 /** 브리프 모달용 — 페이지 한 번에 한 번만 읽는다(카드마다 열 때마다 받지 않게). */
 export function loadIssueBoardOnce(): Promise<IssueBoard | null> {
-    if (!boardOnce) boardOnce = fetchIssueBoard();
+    if (!boardOnce || Date.now() >= boardExpires) {
+        boardExpires = Date.now() + 30000;
+        boardOnce = fetchIssueBoard().then(board => { if (!board) boardExpires = 0; return board; });
+    }
     return boardOnce;
 }
 
