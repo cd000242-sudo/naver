@@ -3,12 +3,20 @@ export type TitleKind = '설명' | '질문' | '수치';
 export interface BriefSource { id: string; title: string; link: string; press: string; publishedAt: string; snippet: string; evidenceExcerpts: string[] }
 export interface BriefAnswer { question: string; answer: string; factIds: string[]; excerpts: Array<{ factId: string; text: string; source: BriefSource }> }
 export interface BriefMetric { keyword: string; searchVolume: number | null; searchVolumeUnder10: boolean; serpFacing: number | null; serpVacancy: number | null; fit: SerpFit }
+export interface BriefWritingPackage {
+    version: 1; status: 'ready' | 'needs_research'; title: string; intro: string;
+    sections: Array<{ heading: string; paragraphs: string[]; factIds: string[] }>;
+    table: { caption: string; headers: string[]; rows: string[][]; factIds: string[] } | null;
+    faq: Array<{ question: string; answer: string; factIds: string[] }>;
+    conclusion: string; nextSteps: string[]; missing: string[]; sourceIds: string[]; reviewedAt: string;
+}
 export interface TopicBriefView {
     id: string; title: string; field: string; timing: 'NOW' | 'NEXT' | 'ALWAYS';
     status: 'supported' | 'needs_research'; legacy: boolean; recommended: boolean;
     summary: string; audience: string; question: string; angle: string; missing: string[]; outline: string[];
     answers: BriefAnswer[]; sources: BriefSource[]; titles: Array<{ text: string; kind: TitleKind }>;
     core: BriefMetric; related: BriefMetric[]; recommendation: { keyword: string; reason: string; metric: BriefMetric } | null;
+    writing: BriefWritingPackage | null;
 }
 type RecordValue = Record<string, unknown>;
 const record = (value: unknown): RecordValue => value && typeof value === 'object' && !Array.isArray(value) ? value as RecordValue : {};
@@ -19,8 +27,8 @@ const count = (value: unknown): number | null => typeof value === 'number' && Nu
 const facing = (value: unknown): number | null => Number.isInteger(value) && count(value) !== null && (value as number) <= 10 ? value as number : null;
 const unique = (items: string[]) => [...new Set(items)];
 const normalized = (value: string) => value.replace(/<[^>]*>/g, '').normalize('NFKC').replace(/\s+/g, '');
-const safeUrl = (value: unknown): string => { try { const url = new URL(text(value)); return /^(https?:)$/.test(url.protocol) ? url.href : ''; } catch { return ''; } };
-const personalClaim = /(?:써\s?보|써봤|직접\s?(?:써|받|가|해)|바꿨|받았|접속했|걸어놨|갔어요|안\s?놓쳤|물어봤|캐물었|알람\s?맞춰|(?:큰일\s?날|놓칠)\s?뻔|제가|나는\s|내가\s)/;
+const safeUrl = (value: unknown): string => { try { const url = new URL(text(value)); return /^(https?:)$/.test(url.protocol) && !url.username && !url.password ? url.href : ''; } catch { return ''; } };
+const personalClaim = /(?:써\s?보|써봤|직접\s?(?:써|받|가|해)|바꿨|받았|접속했|걸어놨|갔어요|안\s?놓쳤|물어봤|캐물었|알람\s?맞춰|(?:큰일\s?날|놓칠)\s?뻔|(?:^|\s)(?:제가|나는|내가)\s)/;
 
 export function strictSerpFit(value: unknown): SerpFit {
     const measured = facing(value);
@@ -59,6 +67,32 @@ function exactQuote(quote: string, source: BriefSource): boolean {
             return false;
         });
     });
+}
+
+/** Public packages must be complete and reviewed; old quotations are never silently expanded into an article. */
+function writingOf(value: unknown, sources: BriefSource[], supported: boolean): BriefWritingPackage | null {
+    const draft = record(value); const at = Date.parse(text(draft.reviewedAt));
+    if (!supported || draft.version !== 1 || draft.status !== 'ready' || !Array.isArray(draft.missing) || draft.missing.length || !Number.isFinite(at) || at > Date.now() + 300_000) return null;
+    const validText = (value: unknown) => typeof value === 'string' && value.trim().length > 0 && value.length <= 2_000 && !personalClaim.test(value) && !/(?:\.{3}|…)\s*$/.test(value);
+    const paragraph = (value: unknown) => validText(value) && text(value).length >= 20;
+    const ids = strings(draft.sourceIds); const known = new Set(sources.map(source => source.id));
+    if (!ids.length || ids.length !== array(draft.sourceIds).length || ids.some(id => !known.has(id))) return null;
+    const hasSources = (value: unknown) => Array.isArray(value) && value.length > 0 && value.length <= 20 && value.every(id => typeof id === 'string' && ids.includes(id));
+    const sections = array(draft.sections).map(record);
+    if (sections.length < 2 || sections.length > 8 || sections.some(section => !validText(section.heading) || !Array.isArray(section.paragraphs) || !section.paragraphs.length || section.paragraphs.length > 5 || !section.paragraphs.every(paragraph) || !hasSources(section.factIds))) return null;
+    if (!validText(draft.title) || ![draft.intro, draft.conclusion].every(paragraph)) return null;
+    const faq = array(draft.faq).map(record);
+    if (!faq.length || faq.length > 6 || faq.some(item => !validText(item.question) || !validText(item.answer) || text(item.answer).length < 15 || !hasSources(item.factIds))) return null;
+    const nextSteps = strings(draft.nextSteps);
+    if (!nextSteps.length || nextSteps.length !== array(draft.nextSteps).length || !nextSteps.every(validText)) return null;
+    let table: BriefWritingPackage['table'] = null;
+    if (draft.table !== null) {
+        const candidate = record(draft.table); const headers = strings(candidate.headers); const rows = array(candidate.rows);
+        if (!validText(candidate.caption) || headers.length < 2 || headers.length > 6 || headers.length !== array(candidate.headers).length || !headers.every(validText) || !rows.length || rows.length > 30 || !hasSources(candidate.factIds)) return null;
+        if (rows.some(row => !Array.isArray(row) || row.length !== headers.length || !row.every(validText))) return null;
+        table = { caption: text(candidate.caption), headers, rows: rows.map(strings), factIds: strings(candidate.factIds) };
+    }
+    return { version: 1, status: 'ready', title: text(draft.title), intro: text(draft.intro), sections: sections.map(section => ({heading:text(section.heading),paragraphs:strings(section.paragraphs),factIds:strings(section.factIds)})), table, faq: faq.map(item => ({question:text(item.question),answer:text(item.answer),factIds:strings(item.factIds)})), conclusion:text(draft.conclusion), nextSteps, missing:[], sourceIds:ids, reviewedAt:text(draft.reviewedAt) };
 }
 
 export function normalizeTopicBrief(value: unknown, index = 0): TopicBriefView {
@@ -114,6 +148,7 @@ export function normalizeTopicBrief(value: unknown, index = 0): TopicBriefView {
         audience: legacy ? '' : text(editorial.audience), question: text(brief.primaryIntent), angle: legacy ? '' : text(editorial.angle),
         missing, outline: legacy ? [] : strings(editorial.outline), answers, sources, titles, core, related,
         recommendation,
+        writing: writingOf(brief.writingPackage, sources, supported),
     };
 }
 export function partitionTopicBriefs(items: TopicBriefView[], limit = 5): { recommended: TopicBriefView[]; remaining: TopicBriefView[] } {
@@ -131,4 +166,18 @@ export function topicBriefCopy(brief: TopicBriefView, selectedTitle = brief.titl
         `접근 각도: ${brief.angle || '독자의 질문을 정한 뒤 구성하세요.'}`,
         `원문:\n${brief.sources.map(source => `${source.title}\n${source.link}`).join('\n')}`,
     ].join('\n\n');
+}
+
+export function writingPackageBody(brief: TopicBriefView): string {
+    const draft = brief.writing;
+    if (!draft) return '';
+    const cell = (value: string) => value.replace(/\|/g, '\\|').replace(/[\r\n]+/g, ' ');
+    return [draft.intro, ...draft.sections.map(section => `## ${section.heading}\n\n${section.paragraphs.join('\n\n')}`),
+        ...(draft.table ? [`## ${draft.table.caption}\n\n| ${draft.table.headers.map(cell).join(' | ')} |\n| ${draft.table.headers.map(() => '---').join(' | ')} |\n${draft.table.rows.map(row => `| ${row.map(cell).join(' | ')} |`).join('\n')}`] : []),
+        `## 자주 묻는 질문\n\n${draft.faq.map(item => `### ${item.question}\n\n${item.answer}`).join('\n\n')}`, draft.conclusion].join('\n\n');
+}
+export function writingPackageCopy(brief: TopicBriefView, editedTitle?: string, editedBody?: string): string {
+    if (!brief.writing) return '';
+    const sources = brief.sources.filter(source => brief.writing!.sourceIds.includes(source.id));
+    return [`# ${editedTitle ?? brief.writing.title}`, editedBody ?? writingPackageBody(brief), `참고 출처\n${sources.map(source => `- ${source.title}\n  ${source.link}`).join('\n')}`].join('\n\n');
 }

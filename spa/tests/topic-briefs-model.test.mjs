@@ -15,6 +15,29 @@ const brief = (patch = {}) => ({
   recommendation: { keyword: '청년 창업 월세 지원', reason: '창업자 지원 조건을 근거와 함께 설명할 수 있습니다.' }, ...patch,
 });
 
+const writing = () => ({version:1,status:'ready',title:'청년 창업 월세 지원 기준',intro:'창업 임차료 지원은 주거비 지원과 구분해서 살펴봐야 합니다.',sections:[{heading:'지원 기준',paragraphs:['청년 창업자의 월 임차료 지원 비율은 공고에 명시된 기준을 확인합니다.'],factIds:['f1']},{heading:'확인할 내용',paragraphs:['자신의 창업 조건을 공식 공고의 지원 기준과 대조한 후 다음 절차를 확인합니다.'],factIds:['f1']}],table:{caption:'지원 기준 비교',headers:['항목','기준'],rows:[['임차료','70%']],factIds:['f1']},faq:[{question:'지원 기준은?',answer:'공고의 임차료 기준을 확인합니다.',factIds:['f1']}],conclusion:'공식 공고를 기준으로 자신의 해당 여부를 확인하세요.',nextSteps:['공고의 적용 대상 확인'],missing:[],sourceIds:['f1'],reviewedAt:new Date().toISOString()});
+
+test('검수된 작성 패키지의 본문·표·출처와 사용자가 수정한 내용을 복사한다',()=>{
+ const item=model.normalizeTopicBrief(brief({writingPackage:writing()}));assert.equal(item.writing.status,'ready');
+ const body=model.writingPackageBody(item);assert.match(body,/지원 기준 비교/);assert.match(body,/70%/);
+ const copied=model.writingPackageCopy(item,'직접 수정한 제목','내가 수정한 본문');assert.match(copied,/직접 수정한 제목/);assert.match(copied,/내가 수정한 본문/);assert.match(copied,/https:\/\/example.com\/source/);assert.doesNotMatch(copied,/창업 임차료 지원은/);
+});
+test('옛 근거 검토만으로 작성 패키지를 만들거나 추천을 새로 부여하지 않는다',()=>{
+ assert.equal(model.normalizeTopicBrief(brief()).writing,null);
+ const item=model.normalizeTopicBrief(brief({writingPackage:writing(),searchVolume:null}));assert.ok(item.writing);assert.equal(item.recommended,false);
+});
+test('나타나는·안내가를 개인 경험으로 오인하지 않고 짧은 자리 표시는 차단한다',()=>{
+ const draft=writing();draft.intro='화면에 나타나는 안내가 올바른지 공식 공고의 적용 조건과 함께 살펴보세요.';
+ assert.ok(model.normalizeTopicBrief(brief({writingPackage:draft})).writing);
+ for(const patch of [{intro:'도입'},{conclusion:'결론'},{sections:[{heading:'내용',paragraphs:['본문'],factIds:['f1']},writing().sections[1]]}])assert.equal(model.normalizeTopicBrief(brief({writingPackage:{...writing(),...patch}})).writing,null);
+});
+test('미검수·누락·위험한 출처·빈 문단·잘못된 표·미래 검수 패키지는 공개하지 않는다',()=>{
+ for(const patch of [{status:'needs_research'},{missing:['필수 대상 조건 미확인']},{reviewedAt:''},{reviewedAt:'2099-01-01T00:00:00Z'},{sourceIds:['missing']},{sections:[{heading:'지원 기준',paragraphs:[],factIds:['f1']}]},{table:{caption:'비교',headers:['항목','기준'],rows:[['값 누락']],factIds:['f1']}}]) {
+  assert.equal(model.normalizeTopicBrief(brief({writingPackage:{...writing(),...patch}})).writing,null);
+ }
+ const unsafe=brief({writingPackage:writing(),facts:[{...fact,link:'javascript:alert(1)'}]});assert.equal(model.normalizeTopicBrief(unsafe).writing,null);
+});
+
 test('빈자리나 기존 등급과 무관하게 정면 글 2개 이하만 높음이다', () => {
   assert.equal(model.strictSerpFit(8), '낮음');
   assert.equal(model.strictSerpFit(2), '높음');

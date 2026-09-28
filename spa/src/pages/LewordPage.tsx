@@ -14,7 +14,7 @@ import RadarTab from '../components/leword/RadarTab';
 import RankTab from '../components/leword/RankTab';
 import RpmTab from '../components/leword/RpmTab';
 import TodayPicksBoard from '../components/leword/TodayPicksBoard';
-import TopicBriefsBoard from '../components/leword/TopicBriefsBoard';
+import TopicBriefsBoard, { WritingTrialPreview } from '../components/leword/TopicBriefsBoard';
 import { installKeySyncListener } from '../lib/keySync';
 import YoutubeTab from '../components/leword/YoutubeTab';
 
@@ -208,7 +208,7 @@ function LewordPage() {
                             className={`lw-navi lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}${!session && !GUEST_TABS.has(tab.id) ? ' locked' : ''}`}
                             aria-current={activeTab === tab.id ? 'page' : undefined}
                             onClick={() => {
-                                if (!session && !GUEST_TABS.has(tab.id)) { setAuthOpen(true); return; }
+                                if (!session && !GUEST_TABS.has(tab.id) && tab.id !== 'briefs') { setAuthOpen(true); return; }
                                 if (tab.id === 'picks' && activeTab === 'picks') { togglePicksFold(); return; }
                                 selectTab(tab.id);
                             }}
@@ -289,7 +289,7 @@ function LewordPage() {
                         </>
                     ) : (
                         <>
-                            <span className="lw-acct-meta">로그인하면 모든 기능이 열립니다 — 지금은 황금키워드·실검 틈새 맛보기만 보입니다.</span>
+                            <span className="lw-acct-meta">로그인하면 모든 기능이 열립니다 — 황금키워드·실검 맛보기와 글감 작성실 체험은 먼저 이용할 수 있습니다.</span>
                             <button type="button" className="lw-acct-btn on" onClick={() => setAuthOpen(true)}>
                                 로그인 · 계정 만들기
                             </button>
@@ -317,10 +317,11 @@ function LewordPage() {
                     </div>
                 )}
 
+                {lockedTab && activeTab === 'briefs' && <WritingTrialPreview />}
                 {lockedTab && (
                     <section className="lw-locked" aria-labelledby="lw-locked-title">
                         <h1 id="lw-locked-title">{activeMeta.label}</h1>
-                        <p>이용권이 있는 계정으로 로그인하면 열립니다. 비로그인은 황금키워드·실검 틈새 맛보기만 볼 수 있습니다.</p>
+                        <p>일일 발굴 결과는 이용권이 있는 계정으로 로그인하면 열립니다. 글감 작성실 체험은 로그인 없이 이용할 수 있습니다.</p>
                         <button type="button" className="lw-acct-btn on" onClick={() => setAuthOpen(true)}>로그인 · 계정 만들기</button>
                     </section>
                 )}
