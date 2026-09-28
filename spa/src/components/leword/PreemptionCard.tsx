@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { ShortTermTrend } from '../../lib/goldenFocusModel';
 import BoardCardHead from './BoardCardHead';
 import TrendSparkline from './TrendSparkline';
 import { naverSearchUrl } from './preemptionMeta';
@@ -35,6 +36,7 @@ function measuredAgo(iso: string): string {
 export type Evidence = { code: string; text: string };
 
 export type PreemptionRow = {
+    shortTermTrend?: ShortTermTrend | null;
     keyword: string;
     topic: string;
     /** 어느 층에서 올라왔는가. 확실한 층일수록 앞이다. */

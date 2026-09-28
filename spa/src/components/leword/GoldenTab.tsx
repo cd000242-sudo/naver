@@ -14,6 +14,8 @@ import { TabIntro } from './LewordShared';
 import { BoardFreshness } from './BoardFreshness';
 import ExternalTrafficBoard, { type ReferenceRow } from './ExternalTrafficBoard';
 import { preemptionIndex, TIER_ORDER } from '../../lib/preemptionIndex';
+import { goldenFocusPriority, goldenMeasurementLabel, goldenTrendLabel, matchesGoldenFocus, summarizeGoldenFocus, type GoldenFocus } from '../../lib/goldenFocusModel';
+import GoldenTrendCandidates, { type GoldenTrendCandidate } from './GoldenTrendCandidates';
 
 /**
  * 네이버 데이터랩 검색어 트렌드. 우리가 그리는 그림이 아니라 네이버가 그린 것을 연다.
@@ -22,19 +24,7 @@ import { preemptionIndex, TIER_ORDER } from '../../lib/preemptionIndex';
 const dataLabUrl = (keyword: string) =>
     `https://datalab.naver.com/keyword/trendSearch.naver?hashKey=${encodeURIComponent(keyword)}`;
 
-/**
- * 선점 황금키워드.
- *
- * 그냥 황금키워드(검색량↑ 문서수↓)가 아니다. 그건 실시간 검색어나 남의 툴과
- * 겹쳐서 값이 없다. 여기 올라오는 것은 배치가 **실제 검색결과를 열어 보고**
- * 네 조건을 전부 만족시킨 것만이다:
- *   정면으로 다룬 글 0건 · 상위 문서가 낡음 · 최근에 처음 관측 · 실시간에 아직 없음
- *
- * 사용자가 어느 주제로 블로그를 하는지 모르므로 32종을 전부 훑어 놓고 고르게 한다.
- * 카테고리를 하나씩 골라 검색하는 수고는 배치가 대신 한 것이다.
- *
- * 화면에 나가는 것은 전부 실측 사실이다. 점수·확률·예상 유입은 만들지 않는다.
- */
+/** Measured opportunities with economic priority and separately verified daily trends. */
 
 type Board = {
     publishedAt?: string;
@@ -44,6 +34,7 @@ type Board = {
     topicsWithRows?: number;
     verified?: number;
     rows: PreemptionRow[];
+    trendCandidates?: GoldenTrendCandidate[];
     /** 2군 — 네이버 자리는 늦었지만 외부 유입으로 쓸 밭. */
     reference?: ReferenceRow[];
 };
@@ -61,13 +52,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     /** 실행 계획을 펼친 카드. 한 번에 하나만 연다 — 다 펼치면 목록이 안 읽힌다. */
     const [openPlan, setOpenPlan] = useState('');
-    /*
-     * '전체' 탭 주제 로테이션 시드 — 방문마다 주제 순서가 바뀐다(사장님 지시
-     * 2026-08-19: "계속 마키나락스만 먼저 나오니 특별함이 없다. 섞어서, 계속
-     * 바뀌면서 '이런 키워드도 있었어?!' 느낌으로"). 난수는 **섞기에만** 쓴다 —
-     * 등급·점수 계산에 쓰는 것은 이 앱에서 금지다. 주제 안 순서는 등급순 유지.
-     */
-    const [shuffleSeed] = useState(() => Math.random());
+    const [focus, setFocus] = useState<GoldenFocus>('all');
+    const [now, setNow] = useState(() => Date.now());
     /*
      * 점진 렌더 — 보드가 누적형(목표 2,000행)이 되면서 전량 렌더는 폰에서 못 버틴다.
      * 처음 60행만 그리고 "더 보기"로 늘린다. 필터가 바뀌면 처음으로 돌아간다.
@@ -89,6 +75,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         let alive = true;
         let lastEnrichedAt = '';
         const load = () => {
+            setNow(Date.now());
             fetch(BOARD_URL, { cache: 'no-store' })
                 .then((response) => (response.ok ? response.json() : Promise.reject(new Error('no board'))))
                 .then((data) => {
@@ -99,7 +86,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     lastEnrichedAt = stamp;
                     const rows: PreemptionRow[] = Array.isArray(data?.rows) ? data.rows : [];
                     setBoard({ ...data, rows, reference: Array.isArray(data?.reference) ? data.reference : [] });
-                    setStatus(rows.length > 0 ? 'ready' : 'empty');
+                    setStatus(rows.length > 0 || (Array.isArray(data?.trendCandidates) && data.trendCandidates.length > 0) ? 'ready' : 'empty');
                 })
                 .catch(() => { if (alive && !lastEnrichedAt) setStatus('error'); });
         };
@@ -143,6 +130,19 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         [board],
     );
 
+    const focusSummary = useMemo(() => summarizeGoldenFocus(board?.rows || [], now), [board, now]);
+    const trendCandidates = useMemo(() => (Array.isArray(board?.trendCandidates) ? board.trendCandidates : []).filter((row) =>
+        matchesGoldenFocus(row, 'economy', now) && matchesGoldenFocus(row, 'rising', now)
+        && matchesGoldenFocus(row, focus, now) && rowMatchesWriteLane(row, writeLane)
+        && (topic === '전체' || row.topic === topic)
+        && (moneyMin === 0 || (row.money?.value ?? 0) >= moneyMin)), [board, focus, writeLane, topic, moneyMin, now]);
+    const focusOptions: Array<{ id: GoldenFocus; label: string; count: number }> = [
+        { id: 'all', label: '전체', count: focusSummary.total },
+        { id: 'economy', label: '경제·지원금', count: focusSummary.economy },
+        { id: 'rising', label: '최근 상승', count: focusSummary.rising },
+        { id: 'high-rising', label: '고단가 상승', count: focusSummary.highRising },
+    ];
+
     const rows = useMemo(() => {
         const all = board?.rows || [];
         const filtered = all.filter((row) => {
@@ -150,7 +150,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             if (!rowMatchesWriteLane(row, writeLane)) return false;
             if (topic !== '전체' && row.topic !== topic) return false;
             if (moneyMin > 0 && !((row.money?.value ?? 0) >= moneyMin)) return false;
-            return true;
+            return matchesGoldenFocus(row, focus, now);
         });
         /*
          * 줄 세우기 — **황금키워드끼리 모아 놓고, 그 안에서 광고 많은 순.**
@@ -168,6 +168,9 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
          * 배지와 순서가 어긋난다.
          */
         const sorted = [...filtered].sort((a, b) => {
+            // Main interests first, then the existing evidence-based grade and bid ordering.
+            const priority = goldenFocusPriority(a, now) - goldenFocusPriority(b, now);
+            if (topic === '전체' && priority !== 0) return priority;
             const rank = (row: PreemptionRow) => TIER_ORDER[preemptionIndex({
                 searchVolume: row.searchVolume, documentCount: row.documentCount,
             }).tier];
@@ -220,12 +223,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);
         });
 
-        /*
-         * '전체' 탭(검색 없음)은 주제 로테이션 인터리브 — 결정론 정렬이라 매번
-         * 같은 키워드가 1등이면 "특별함이 없다"(사장님). 각 주제의 1등들이 먼저
-         * 섞여 나오고, 주제 순서는 방문마다 바뀐다. 주제 안은 위의 등급순 그대로라
-         * 품질 순서는 안 무너진다. 주제 필터를 걸면 원래 정렬로 돌아간다.
-         */
+
         /*
          * 비로그인이면 **무료로 여는 다섯 건을 맨 앞으로 끌어올린다.**
          *
@@ -246,47 +244,15 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             return [...open, ...rest];
         };
 
-        if (topic !== '전체') return hoistFree(sorted);
-        const byTopicOrder = new Map<string, PreemptionRow[]>();
-        for (const row of sorted) {
-            const key = row.topic || '?';
-            if (!byTopicOrder.has(key)) byTopicOrder.set(key, []);
-            byTopicOrder.get(key)!.push(row);
-        }
-        const topicKeys = [...byTopicOrder.keys()];
-        // 시드 기반 셔플(Fisher–Yates) — 렌더 안에서는 안정, 방문마다 달라진다.
-        let seedState = Math.floor(shuffleSeed * 2 ** 31);
-        const nextRandom = () => {
-            seedState = (seedState * 1103515245 + 12345) % 2 ** 31;
-            return seedState / 2 ** 31;
-        };
-        for (let i = topicKeys.length - 1; i > 0; i--) {
-            const j = Math.floor(nextRandom() * (i + 1));
-            [topicKeys[i], topicKeys[j]] = [topicKeys[j], topicKeys[i]];
-        }
-        const interleaved: PreemptionRow[] = [];
-        let depth = 0;
-        let added = true;
-        while (added) {
-            added = false;
-            for (const key of topicKeys) {
-                const bucket = byTopicOrder.get(key)!;
-                if (depth < bucket.length) {
-                    interleaved.push(bucket[depth]);
-                    added = true;
-                }
-            }
-            depth += 1;
-        }
-        return hoistFree(interleaved);
-    }, [board, topic, writeLane, moneyMin, shuffleSeed, unlocked, freeNames]);
+        return hoistFree(sorted);
+    }, [board, topic, writeLane, moneyMin, focus, now, unlocked, freeNames]);
 
     /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
 
     useEffect(() => {
         setVisibleCount(60);
-    }, [topic, writeLane, moneyMin]);
+    }, [topic, writeLane, moneyMin, focus]);
 
     // '지식인 황금질문'은 좌측 메뉴 독립 탭(KinGoldenTab)으로 옮겨졌다(2026-08-20 정정).
     const publishedLabel = board?.publishedAt
@@ -298,7 +264,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         <>
             <TabIntro
                 title="리더남 전용 황금키워드"
-                desc="검색결과를 직접 열어 보고 '지금 들어갈 자리가 있는' 것만 남겼습니다. 상위 자리가 비어 있는 것이 맨 앞이고, 그 아래로 자리가 확실한 순서입니다. 같은 등급 안에서는 네이버 광고 입찰가가 높은 말(돈이 되는 말)이 먼저입니다. 블로그 주제 32종을 한 번에 훑었으니 카테고리를 하나씩 뒤질 필요가 없습니다."
+                desc="비즈니스·경제와 지원금 키워드를 먼저 살펴보세요. 최근 상승은 직전 7일 대비 최근 7일의 검색 수요가 20% 이상 늘고, 검색결과도 최근 7일 안에 확인한 경우만 표시합니다. 고단가 상승은 여기에 네이버 광고 3위 입찰가 3,000원 이상을 함께 충족한 키워드입니다."
                 /* 어떤 도구로 재는지는 밝히지 않는다(사장님 2026-08-20) — 잰 사실만 적는다. */
                 source={`검색결과 직접 확인${publishedLabel ? ` · ${publishedLabel} 발행` : ''}${board?.verified ? ` · ${board.verified}건 검증` : ''}`}
             />
@@ -340,9 +306,20 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                       */}
                     <div className="lw-toolbar">
                         <span className="lw-count">
-                            {rows.length}개 · 주제 {board.topicsWithRows ?? topics.length}/{board.topicsTotal ?? 32}종
+                            황금키워드 통과 {rows.length}개 · 주제 {board.topicsWithRows ?? topics.length}/{board.topicsTotal ?? 32}종
                         </span>
                     </div>
+
+                    <div className="lw-segment lw-segment-wrap lw-write-lanes" role="group" aria-label="경제와 최근 트렌드로 거르기">
+                        {focusOptions.map((option) => (
+                            <button key={option.id} type="button" className={focus === option.id ? 'on' : ''}
+                                aria-pressed={focus === option.id} onClick={() => setFocus(option.id)}>
+                                {option.label} <em>{option.count}</em>
+                            </button>
+                        ))}
+                    </div>
+                    <p className="lw-write-hint">전체 목록은 경제·지원금의 최근 상승 키워드부터 표시합니다. 필터 숫자는 황금키워드 통과 목록 기준이며 트렌드 후보는 별도로 표시합니다. 필터는 아래 주제·용도·입찰가 조건과 함께 적용됩니다. 입찰가는 광고주의 경쟁 지표이며 예상 수익이 아닙니다.</p>
+                    {focusSummary.stale > 0 && <p className="lw-note lw-note-limit">검색결과 확인이 7일 넘게 지난 항목 또는 확인일이 없는 항목 {focusSummary.stale}개는 최근 상승에서 제외했습니다. 카드의 확인일을 함께 살펴보세요.</p>}
 
                     <WriteLaneFilter
                         value={writeLane}
@@ -362,6 +339,10 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     />
 
                     <TopicFilter value={topic} onChange={setTopic} topics={topics} total={board.rows.length} />
+
+                    <GoldenTrendCandidates rows={trendCandidates} unlocked={unlocked} now={now}
+                        onUnlock={() => setUnlocked(true)} onAnalyze={onAnalyze} />
+                    {trendCandidates.length > 0 && <h3 style={{ margin: '22px 0 12px' }}>황금키워드 통과 목록 · {rows.length}개</h3>}
 
                     {!unlocked && rows.length > FREE_BOARD_ROWS && (
                         <LicenseGate
@@ -387,7 +368,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             return (
                         <PreemptionCard
                             key={`${row.topic}-${row.keyword}`}
-                            row={row}
+                            row={{ ...row, timingGroup: undefined, trendLabel: goldenTrendLabel(row, now) }}
+                            headTags={<><span className="lw-surface-tag">{row.topic}</span><span className="lw-slot-basis">{goldenMeasurementLabel(row, now)}</span></>}
                             rank={index + 1}
                             locked={locked}
                             copied={copied === row.keyword}
@@ -417,7 +399,13 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         </button>
                     )}
 
-                    {rows.length === 0 && <div className="lw-note">이 주제에는 통과한 키워드가 없습니다.</div>}
+                    {rows.length === 0 && <div className="lw-note">
+                        <strong>현재 조건에서 확인된 키워드가 없습니다</strong>
+                        <p>{focus === 'rising' || focus === 'high-rising'
+                            ? '최근 일별 수요와 검색결과가 함께 확인된 상승 키워드만 보여줍니다. 경제·지원금에서 다른 후보를 살펴보거나 다음 측정을 기다려 주세요.'
+                            : '주제·용도·입찰가 조건을 줄이면 다른 후보를 볼 수 있습니다.'}</p>
+                        <button type="button" className="lw-more-btn" onClick={() => { setFocus('all'); setTopic('전체'); setWriteLane('all'); setMoneyMin(0); }}>필터 초기화</button>
+                    </div>}
 
                     {/*
                       * 2군은 발행 데이터에 계속 있었는데 읽는 화면이 없어 묻혀 있었다.
