@@ -17,6 +17,22 @@ const brief = (patch = {}) => ({
 
 const writing = () => ({version:1,status:'ready',title:'청년 창업 월세 지원 기준',intro:'창업 임차료 지원은 주거비 지원과 구분해서 살펴봐야 합니다.',sections:[{heading:'지원 기준',paragraphs:['청년 창업자의 월 임차료 지원 비율은 공고에 명시된 기준을 확인합니다.'],factIds:['f1']},{heading:'확인할 내용',paragraphs:['자신의 창업 조건을 공식 공고의 지원 기준과 대조한 후 다음 절차를 확인합니다.'],factIds:['f1']}],table:{caption:'지원 기준 비교',headers:['항목','기준'],rows:[['임차료','70%']],factIds:['f1']},faq:[{question:'지원 기준은?',answer:'공고의 임차료 기준을 확인합니다.',factIds:['f1']}],conclusion:'공식 공고를 기준으로 자신의 해당 여부를 확인하세요.',nextSteps:['공고의 적용 대상 확인'],missing:[],sourceIds:['f1'],reviewedAt:new Date().toISOString()});
 
+test('SearchAd device ranges never become exact totals or hide low-volume uncertainty',()=>{
+ const evidence={source:'naver-searchad',keyword:'청년 창업 월세 지원',measuredAt:new Date().toISOString(),pc:100,mobile:null,pcUnder10:false,mobileUnder10:true,totalMin:100,totalMax:109,status:'range'};
+ const metric=model.normalizeTopicBrief(brief({searchVolume:999,searchVolumeEvidence:evidence})).core;
+ assert.equal(metric.searchVolume,null);assert.equal(model.briefVolumeLabel(metric),'100~109');assert.match(model.briefVolumeDetail(metric),/PC 100 · 모바일 10 미만/);
+ const low=model.normalizeTopicBrief(brief({searchVolumeEvidence:{...evidence,pc:null,pcUnder10:true,totalMin:0,totalMax:18}})).core;assert.equal(model.briefVolumeLabel(low),'0~18');
+ const exact=model.normalizeTopicBrief(brief({searchVolumeEvidence:{...evidence,mobile:200,mobileUnder10:false,totalMin:300,totalMax:300,status:'exact'}})).core;assert.equal(exact.searchVolume,300);assert.equal(model.briefVolumeLabel(exact),'300');
+});
+
+test('mismatched, stale, future, malformed or forged range evidence cannot supply volume',()=>{
+ const evidence={source:'naver-searchad',keyword:'청년 창업 월세 지원',measuredAt:new Date().toISOString(),pc:100,mobile:200,pcUnder10:false,mobileUnder10:false,totalMin:300,totalMax:300,status:'exact'};
+ for(const patch of [{keyword:'월세'},{source:'guess'},{measuredAt:'2099-01-01'},{measuredAt:'2020-01-01'},{totalMin:999},{pc:1.5},{mobile:null},{pcUnder10:true}]){
+  const metric=model.normalizeTopicBrief(brief({searchVolume:400,searchVolumeEvidence:{...evidence,...patch}})).core;assert.equal(model.briefVolumeLabel(metric),'미측정');assert.equal(metric.searchVolume,null);
+ }
+ for(const searchVolume of [null,100])assert.equal(model.briefVolumeLabel(model.normalizeTopicBrief(brief({searchVolume,searchVolumeUnder10:true})).core),'미측정');
+});
+
 test('writing guide preserves actionable sections and only linked safe image references',()=>{
  const guide={version:1,direction:'창업 조건을 대조한다',mustInclude:['지원 대상'],avoid:['누구나 지급'],seoTitles:['청년 창업 월세 지원 조건'],homeTitles:['"월세 지원" 청년 창업 조건부터 살펴보세요','따옴표 없는 제목'],relatedTerms:['임차료'],images:[{sourceId:'f1',url:fact.link,kind:'capture',description:'공고 비교표',captureArea:'지원 대상 및 산정 기준 표'},{sourceId:'missing',url:fact.link,kind:'capture',description:'없는 근거',captureArea:'표'},{sourceId:'f1',url:'javascript:alert(1)',kind:'reference',description:'위험',captureArea:''}]};
  const value=model.normalizeTopicBrief(brief({documentCount:3456,documentCountMeasuredAt:'2026-09-28T00:00:00Z',writingGuide:guide}));

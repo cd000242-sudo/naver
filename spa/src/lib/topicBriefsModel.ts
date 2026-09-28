@@ -2,7 +2,8 @@ export type SerpFit = '높음' | '보통' | '낮음' | '미측정';
 export type TitleKind = '설명' | '질문' | '수치';
 export interface BriefSource { id: string; title: string; link: string; press: string; publishedAt: string; snippet: string; evidenceExcerpts: string[] }
 export interface BriefAnswer { question: string; answer: string; factIds: string[]; excerpts: Array<{ factId: string; text: string; source: BriefSource }> }
-export interface BriefMetric { keyword: string; searchVolume: number | null; searchVolumeUnder10: boolean; serpFacing: number | null; serpVacancy: number | null; documentCount: number | null; documentCountMeasuredAt: string; fit: SerpFit }
+export interface SearchVolumeEvidence { source: 'naver-searchad'; keyword: string; measuredAt: string; pc: number | null; mobile: number | null; pcUnder10: boolean; mobileUnder10: boolean; totalMin: number; totalMax: number; status: 'exact' | 'range' }
+export interface BriefMetric { keyword: string; searchVolume: number | null; searchVolumeUnder10: boolean; searchVolumeEvidence: SearchVolumeEvidence | null; serpFacing: number | null; serpVacancy: number | null; documentCount: number | null; documentCountMeasuredAt: string; fit: SerpFit }
 export interface BriefWritingPackage {
     version: 1; status: 'ready' | 'needs_research'; title: string; intro: string;
     sections: Array<{ heading: string; paragraphs: string[]; factIds: string[] }>;
@@ -42,15 +43,38 @@ export function searchVolumeLabel(value: unknown, under10 = false): string {
     const measured = count(value);
     return measured !== null ? measured.toLocaleString('ko-KR') : under10 ? '10 미만' : '미측정';
 }
+function volumeEvidence(value: unknown, keyword: string): SearchVolumeEvidence | null {
+    const item = record(value); const at = Date.parse(text(item.measuredAt)); const now = Date.now();
+    if (item.source !== 'naver-searchad' || !keyword || normalized(text(item.keyword)).toLowerCase() !== normalized(keyword).toLowerCase() || !Number.isFinite(at) || at > now + 300_000 || now - at > 30 * 86_400_000) return null;
+    const deviceValid = (amount: unknown, low: unknown) => typeof low === 'boolean' && (low ? amount === null : Number.isSafeInteger(amount) && count(amount) !== null);
+    if (!deviceValid(item.pc, item.pcUnder10) || !deviceValid(item.mobile, item.mobileUnder10)) return null;
+    const low = item.pcUnder10 === true || item.mobileUnder10 === true;
+    const min = (item.pcUnder10 ? 0 : item.pc as number) + (item.mobileUnder10 ? 0 : item.mobile as number);
+    const max = min + (item.pcUnder10 ? 9 : 0) + (item.mobileUnder10 ? 9 : 0);
+    if (!Number.isSafeInteger(min) || !Number.isSafeInteger(max) || item.totalMin !== min || item.totalMax !== max || item.status !== (low ? 'range' : 'exact')) return null;
+    return { source: 'naver-searchad', keyword: text(item.keyword), measuredAt: text(item.measuredAt), pc: item.pc as number | null, mobile: item.mobile as number | null, pcUnder10: item.pcUnder10 as boolean, mobileUnder10: item.mobileUnder10 as boolean, totalMin: min, totalMax: max, status: low ? 'range' : 'exact' };
+}
+export function briefVolumeLabel(metric: BriefMetric): string {
+    const evidence = metric.searchVolumeEvidence;
+    return evidence?.status === 'range' ? `${searchVolumeLabel(evidence.totalMin)}~${searchVolumeLabel(evidence.totalMax)}` : searchVolumeLabel(metric.searchVolume);
+}
+export function briefVolumeDetail(metric: BriefMetric): string {
+    const evidence = metric.searchVolumeEvidence;
+    if (!evidence) return metric.searchVolume === null ? '검색량 미측정 · 재측정 필요' : '이전 검색량 · 출처와 조회 시각 재확인 필요';
+    const at = new Date(evidence.measuredAt).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    return `네이버 검색광고 · PC ${searchVolumeLabel(evidence.pc, evidence.pcUnder10)} · 모바일 ${searchVolumeLabel(evidence.mobile, evidence.mobileUnder10)} · ${at} 조회${evidence.status === 'range' ? ' · 기기별 10 미만은 합계 범위로 표시' : ''}`;
+}
 export function titleKind(title: string): TitleKind {
     if (/[?？]|(?:인가요|하나요|누구인가|무엇인가|어떻게|왜\s)/.test(title)) return '질문';
     return /\d[\d,.]*\s*(?:%|퍼센트|만원|억원|원|개월|년간|월\s*\d+일|일\b|명\b|개\b)/.test(title) ? '수치' : '설명';
 }
 function metric(value: unknown, keyword = ''): BriefMetric {
     const item = record(value);
+    const query = keyword || text(item.keyword); const evidence = volumeEvidence(item.searchVolumeEvidence, query);
+    const volume = evidence ? (evidence.status === 'exact' ? evidence.totalMin : null) : (item.searchVolumeEvidence !== undefined && item.searchVolumeEvidence !== null) || item.searchVolumeUnder10 === true ? null : count(item.searchVolume);
     const stamp = Date.parse(text(item.documentCountMeasuredAt));
     const measuredDocuments = Number.isSafeInteger(item.documentCount) && count(item.documentCount) !== null && Number.isFinite(stamp) && stamp <= Date.now() + 300_000;
-    return { keyword: keyword || text(item.keyword), searchVolume: count(item.searchVolume), searchVolumeUnder10: item.searchVolumeUnder10 === true, serpFacing: facing(item.serpFacing), serpVacancy: count(item.serpVacancy), documentCount: measuredDocuments ? count(item.documentCount) : null, documentCountMeasuredAt: measuredDocuments ? text(item.documentCountMeasuredAt) : '', fit: strictSerpFit(item.serpFacing) };
+    return { keyword: query, searchVolume: volume, searchVolumeUnder10: false, searchVolumeEvidence: evidence, serpFacing: facing(item.serpFacing), serpVacancy: count(item.serpVacancy), documentCount: measuredDocuments ? count(item.documentCount) : null, documentCountMeasuredAt: measuredDocuments ? text(item.documentCountMeasuredAt) : '', fit: strictSerpFit(item.serpFacing) };
 }
 function sourceOf(value: unknown): BriefSource | null {
     const source = record(value); const link = safeUrl(source.link);
@@ -178,6 +202,7 @@ export function partitionTopicBriefs(items: TopicBriefView[], limit = 5): { reco
 export function topicBriefCopy(brief: TopicBriefView, selectedTitle = brief.title): string {
     return [
         `제목: ${selectedTitle}`, `준비 상태: ${brief.status === 'supported' ? '근거 검토 완료' : '추가 확인 필요'}`, `요약: ${brief.summary}`,
+        `키워드: ${brief.core.keyword}\n월 검색량: ${briefVolumeLabel(brief.core)}\n${briefVolumeDetail(brief.core)}`,
         `독자: ${brief.audience || '원문을 확인하며 정하세요.'}`, `조사할 질문: ${brief.question || '원문에서 확인하세요.'}`,
         ...brief.answers.flatMap(answer => [`질문: ${answer.question}`, `답: ${answer.answer}`, ...answer.excerpts.map(excerpt => `근거: “${excerpt.text}”\n${excerpt.source.title}\n${excerpt.source.link}`)]),
         `추가 확인:\n${brief.missing.length ? brief.missing.map(item => `- ${item}`).join('\n') : '- 작성 전 최신 공고·수치·일정을 확인하세요.'}`,

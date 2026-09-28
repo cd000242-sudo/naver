@@ -46,6 +46,18 @@ function harness(component, path='../src/components/leword/TopicBriefsBoard.tsx'
 }
 function nodes(tree,predicate) { const result=[];function visit(node){if(!node||typeof node!=='object')return;if(Array.isArray(node)){node.forEach(visit);return;}if(predicate(node))result.push(node);visit(node.props?.children);}visit(tree);return result;}
 const byText=(tree,text)=>nodes(tree,node=>node.type==='button'&&node.props.children===text)[0];
+
+test('main field preference reorders without hiding briefs and defaults to financial topics',()=>{
+ unlocked=true;const view=harness('TopicBriefsContent');const props={data:{builtAt:new Date().toISOString(),briefs:[{...item(1),field:'스포츠'},{...item(2),field:'지원금·복지'},{...item(3),field:'경제·금융'}]}};
+ let tree=view(props);let cards=nodes(tree,n=>n.type?.name==='BriefCard');assert.equal(cards.length,3);assert.equal(cards[0].props.brief.field,'지원금·복지');
+ const select=nodes(tree,n=>n.type==='select'&&n.props['aria-label']==='먼저 볼 분야')[0];assert.ok(select);select.props.onChange({target:{value:'스포츠'}});tree=view(props);cards=nodes(tree,n=>n.type?.name==='BriefCard');assert.equal(cards[0].props.brief.field,'스포츠');assert.equal(cards.length,3);
+ assert.match(render(props.data.briefs),/공개된 글감의 표시 순서만 바뀝니다/);
+});
+
+test('volume details visibly identify source, device ranges and retrieval time',()=>{
+ unlocked=true;const raw=item(1);raw.searchVolumeEvidence={source:'naver-searchad',keyword:raw.coreKeyword,measuredAt:new Date().toISOString(),pc:100,mobile:null,pcUnder10:false,mobileUnder10:true,totalMin:100,totalMax:109,status:'range'};
+ const html=render([raw]);assert.match(html,/100~109/);assert.match(html,/네이버 검색광고/);assert.match(html,/PC 100 · 모바일 10 미만/);assert.match(html,/조회/);
+});
 test('title choice, full brief copy and keyword analysis preserve the selected content',async()=>{
  let copied='',analyzed='';const previous=Object.getOwnPropertyDescriptor(globalThis,'navigator');Object.defineProperty(globalThis,'navigator',{configurable:true,value:{clipboard:{writeText:async value=>{copied=value;}}}});
  try{const view=harness('BriefCard');const raw=item(1);raw.titles=[{text:'지원 공고 1 신청 안내'},{text:'지원 공고 1 언제 신청하나요?'}];const model=load('../src/lib/topicBriefsModel.ts');const props={brief:model.normalizeTopicBrief(raw),onAnalyze:value=>{analyzed=value;}};
