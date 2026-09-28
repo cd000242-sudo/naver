@@ -289,7 +289,7 @@ function LewordPage() {
                         </>
                     ) : (
                         <>
-                            <span className="lw-acct-meta">로그인하면 모든 기능이 열립니다 — 황금키워드·실검 맛보기와 글감 작성실 체험은 먼저 이용할 수 있습니다.</span>
+                            <span className="lw-acct-meta">로그인하면 이용권에 맞는 기능과 글감이 열립니다 — 황금키워드·실검 맛보기는 먼저 이용할 수 있습니다.</span>
                             <button type="button" className="lw-acct-btn on" onClick={() => setAuthOpen(true)}>
                                 로그인 · 계정 만들기
                             </button>

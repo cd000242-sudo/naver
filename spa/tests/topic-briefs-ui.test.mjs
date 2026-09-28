@@ -189,5 +189,5 @@ test('unreviewed package cannot expose an editor or upgrade a research card to a
 
 test('new writing guide is visible for research cards with honest document and SERP counts',()=>{
  unlocked=true;const raw=item(31,false);raw.documentCount=6543;raw.documentCountMeasuredAt="2026-09-28T00:00:00Z";raw.alternative={keyword:'지원 공고 31 신청 조건'};raw.writingGuide={version:1,direction:'접수 대상과 제출 서류를 먼저 비교한다.',mustInclude:['신청 대상과 제외 조건'],avoid:['자동 지급 단정'],seoTitles:['지원 공고 31 대상 및 신청 방법'],homeTitles:['"접수 전 확인" 지원 공고 31 빠뜨릴 조건'],relatedTerms:['제출 서류'],images:[{sourceId:'f1',url:'https://example.com/notice',kind:'capture',description:'지원 대상 표',captureArea:'본문 지원 대상 표의 제외 조건 행'}]};
- const html=render([raw]);for(const value of ['6,543','같은 질문을 다룬 글 1개','지원 공고 31 신청 조건','제출 서류','접수 전 확인','본문 지원 대상 표의 제외 조건 행','자동 지급 단정'])assert.ok(html.includes(value),value);assert.doesNotMatch(html,/tb-recommended-badge/);assert.match(html,/추가 확인 필요/);
+ const html=render([raw]);for(const value of ['6,543','핵심어를 포함한 제목 1개','지원 공고 31 신청 조건','제출 서류','접수 전 확인','본문 지원 대상 표의 제외 조건 행','자동 지급 단정'])assert.ok(html.includes(value),value);assert.doesNotMatch(html,/tb-recommended-badge/);assert.match(html,/추가 확인 필요/);
 });
