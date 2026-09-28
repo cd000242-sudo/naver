@@ -126,7 +126,7 @@ function LewordPage() {
      * (사장님 2026-09-08 "오늘의 네이버 추천키워드의 서브탭으로 만들어달라"). 표가 읽어 온 주제 목록을
      * 여기로 올려 받고, 고른 주제를 표로 내려보낸다.
      */
-    const [picksTopics, setPicksTopics] = useState<{ topic: string; golden: number }[]>([]);
+    const [picksTopics, setPicksTopics] = useState<{ topic: string; golden: number; rowCount: number }[]>([]);
     const [picksTopic, setPicksTopic] = useState<string | null>(() => { try { return localStorage.getItem('lw-picks-topic'); } catch { return null; } });
     const choosePicksTopic = (topic: string) => {
         setPicksTopic(topic);
@@ -246,7 +246,7 @@ function LewordPage() {
                             >
                                 <em className="lw-navi-full">{topic.topic}</em>
                                 <em className="lw-navi-short">{topic.topic}</em>
-                                <b className="lw-navi-count">{topic.golden}</b>
+                                <b className="lw-navi-count" title={`전체 ${topic.rowCount}개 · 황금 ${topic.golden}개`}>{topic.rowCount}</b>
                             </button>
                         ))}
                         </Fragment>

@@ -4,14 +4,15 @@ import { naverSearchUrl } from './preemptionMeta';
 import { TabIntro } from './LewordShared';
 import { BoardFreshness } from './BoardFreshness';
 import { moneyTitle, won, type MoneyBid } from './moneyBid';
+import { FREE_PICK_ROWS, pickCountText, pickFreshnessLabel, summarizePickTopic, visiblePickRows } from '../../lib/todayPicksModel';
 
 /**
  * 오늘의 네이버 추천키워드 — 사이드 메뉴에서 실검 틈새키워드와 키워드 분석 **사이의 서브탭**,
  * 그 안에서 **주제별 서브-서브 탭**(주제 칩을 눌러 한 주제씩 본다). 사장님 2026-09-08.
  *
  * 데이터는 leword-app CI(today-picks.yml, 하루 3회 06:30·13:30·19:30 KST)가 씨앗 창고에서 주제별 후보를 넓게 뽑아
- * 블로그 문서수를 오픈 API로 실측하고 **황금비(검색량 ÷ 문서수) 1 이상만** 30개씩(2026-09-24 10 → 30) 정적 JSON 으로
- * 발행한 것이다. 예외는 "트래픽 몰릴 예정"(이번 달·다음 달 피크 계절 씨앗)뿐 — '시즌 앞' 칩이 붙는다.
+ * 블로그 문서수를 오픈 API로 실측하고 주제별 30개를 목표로 정적 JSON으로 발행한다.
+ * 황금비 충족·계절 씨앗·일반 후보를 구분하며, 최근 노출 이력이 있는 키워드는 재추천으로 표시한다.
  * 황금 안에서는 네이버 광고 3위 입찰가가 높은(돈 되는) 순이다 — 입찰가도 CI 가 잰 실측이다.
  * 여기서는 읽기만 한다. 수치는 전부 실측이고 황금비는 그 나눗셈이다. 자리(SERP)는 안 쟀다.
  *
@@ -31,6 +32,7 @@ interface PickRow {
     seasonPeakMonth?: number;
     /** 네이버 광고 3위 입찰가 실측(2026-09-24) — 옛 회차 행엔 없다. */
     money?: MoneyBid | null;
+    freshness?: { status: 'new' | 'repeated'; lastShownAt?: string };
 }
 
 interface PickTopic {
@@ -38,6 +40,8 @@ interface PickTopic {
     candidates: number;
     measured: number;
     golden?: number;
+    targetCount?: number;
+    shortfall?: number;
     rows: PickRow[];
 }
 
@@ -46,13 +50,12 @@ interface TodayPicks {
     warehouseBuiltAt: string | null;
     round?: { id: string; label: string; scheduledAt: string };
     changes?: { added: number; changed: number; retained: number };
+    novelty?: { windowDays: number; newCount: number; repeatedCount: number };
     perTopic: number;
     keep: number;
     minRatio?: number;
     topics: PickTopic[];
 }
-
-const FREE_PICK_ROWS = 3;
 
 const num = (value: number) => value.toLocaleString('ko-KR');
 const ratioText = (ratio: number) => (ratio >= 100 ? Math.round(ratio).toLocaleString('ko-KR') : ratio >= 10 ? ratio.toFixed(1) : ratio.toFixed(2));
@@ -61,13 +64,13 @@ const kst = (iso: string) => new Date(iso).toLocaleString('ko-KR', {
     timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit',
 });
 
-export interface PicksTopicMeta { topic: string; golden: number }
+export interface PicksTopicMeta { topic: string; golden: number; rowCount: number }
 
 export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicChange }: {
     onAnalyze?: (keyword: string) => void;
     /** 사이드 메뉴 하위 항목이 고른 주제 — 없으면 첫 주제 */
     topic?: string | null;
-    /** 읽어 온 주제 목록(황금 수 포함)을 사이드 메뉴로 올려보낸다 */
+    /** 읽어 온 주제 목록과 전체·황금 수를 사이드 메뉴로 올려보낸다 */
     onTopics?: (topics: PicksTopicMeta[]) => void;
     /** 모바일에는 사이드 메뉴 하위 항목이 없다(햄버거 메뉴는 탭만) — 표 위 주제 칩이 이걸로 고른다(사장님 2026-09-09). */
     onTopicChange?: (topic: string) => void;
@@ -87,15 +90,16 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
 
     const minRatio = data?.minRatio ?? 1;
     const topics = useMemo(() => (data?.topics ?? []).filter((topic) => topic.rows.length > 0), [data]);
-    const goldenOf = (topic: PickTopic) => topic.golden ?? topic.rows.filter((row) => row.ratio >= minRatio).length;
+    const goldenOf = (topic: PickTopic) => summarizePickTopic(topic, minRatio).golden;
     const total = topics.reduce((sum, topic) => sum + topic.rows.length, 0);
     const golden = topics.reduce((sum, topic) => sum + goldenOf(topic), 0);
     const active = topics.find((item) => item.topic === topic) ?? topics[0] ?? null;
-    const rows = active ? (unlocked ? active.rows : active.rows.slice(0, FREE_PICK_ROWS)) : [];
+    const rows = active ? visiblePickRows(active.rows, unlocked) : [];
+    const activeSummary = active ? summarizePickTopic(active, minRatio, data?.keep) : null;
     const shown = unlocked ? total : topics.reduce((sum, topic) => sum + Math.min(topic.rows.length, FREE_PICK_ROWS), 0);
 
     useEffect(() => {
-        if (onTopics && topics.length > 0) onTopics(topics.map((item) => ({ topic: item.topic, golden: goldenOf(item) })));
+        if (onTopics && topics.length > 0) onTopics(topics.map((item) => ({ topic: item.topic, golden: goldenOf(item), rowCount: item.rows.length })));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [topics]);
 
@@ -104,7 +108,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
             <h2 id="lw-picks-title" hidden>오늘의 네이버 추천키워드</h2>
             <TabIntro
                 title="오늘의 네이버 추천키워드"
-                desc={`주제별 황금 비율(검색량 ÷ 문서수 ${minRatio} 이상) 키워드 · 네이버 블로그 홈판·SEO 전용${data ? ` · ${kst(data.builtAt)} 선정 · 황금 ${num(golden)}건` : ''}`}
+                desc={`주제별 ${data?.keep ?? 30}개 목표 · 황금 비율·시즌·일반 후보를 구분해 추천${data ? ` · ${kst(data.builtAt)} 선정 · 전체 ${num(total)}개 중 황금 ${num(golden)}개` : ''}`}
                 source="검색광고 검색량 실측 · 블로그 문서수 실측 · 광고 입찰가 실측 · 오전 06:30 / 오후 13:30 / 저녁 19:30 KST 갱신"
             />
 
@@ -119,6 +123,13 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                     <strong>{data.round.label} 추천 · {kst(data.round.scheduledAt)} 회차</strong>
                     {data.changes && <span>직전 대비 신규 {num(data.changes.added)} · 수치 변경 {num(data.changes.changed)} · 유지 {num(data.changes.retained)}</span>}
                     <span>24시간 이내 문서수 실측은 재사용합니다. 월 검색량은 하루 동안 급등한 수치가 아닙니다.</span>
+                </div>
+            )}
+
+            {data?.novelty && (
+                <div className="lw-note" aria-label="최근 추천 중복 안내">
+                    최근 {data.novelty.windowDays}일 이력 기준 · 새 추천 {num(data.novelty.newCount)}개 · 재추천 {num(data.novelty.repeatedCount)}개.
+                    {' '}새 후보를 우선하며, 조건에 맞는 새 후보가 부족하면 기존 키워드가 다시 포함될 수 있습니다.
                 </div>
             )}
 
@@ -137,7 +148,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                             className={`lw-picks-topic-btn${active?.topic === item.topic ? ' is-active' : ''}`}
                             onClick={() => onTopicChange(item.topic)}
                         >
-                            {item.topic}<b>{goldenOf(item)}</b>
+                            {item.topic}<b>{item.rows.length}</b>
                         </button>
                     ))}
                 </div>
@@ -147,8 +158,9 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                 <div className="lw-picks-panel" role="tabpanel" aria-label={active.topic}>
                     <div className="lw-picks-panel-head">
                         <strong>{active.topic}</strong>
-                        <span>황금 {goldenOf(active)}건{active.rows.length > goldenOf(active) ? ` · 시즌 앞 ${active.rows.length - goldenOf(active)}건` : ''}</span>
+                        <span>{activeSummary && pickCountText(activeSummary)}</span>
                     </div>
+                    <p className="lw-note">황금 비율은 월 검색량 ÷ 블로그 문서수 {minRatio} 이상입니다. 일반 후보는 이 기준에 미달하며, 상위 노출이나 수익을 보장하지 않습니다.{activeSummary && activeSummary.shortfall > 0 ? ` 현재 검증된 후보가 목표보다 ${activeSummary.shortfall}개 적습니다.` : ''}</p>
                     <div className="lw-picks-scroll">
                         <table className="lw-picks-table">
                             <thead>
@@ -171,6 +183,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                                             {row.ratio >= minRatio && <span className="lw-picks-chip">황금 비율</span>}
                                             {row.money?.tier === 'high' && <span className="lw-picks-chip lw-picks-money">고단가</span>}
                                             {row.seasonPeakMonth && <span className="lw-picks-chip lw-picks-season">{row.seasonPeakMonth}월 시즌 앞</span>}
+                                            {pickFreshnessLabel(row) && <span className="lw-picks-chip" title="최근 추천 이력에 포함된 키워드입니다">{pickFreshnessLabel(row)}</span>}
                                         </td>
                                         <td className="n">{num(row.searchVolume)}</td>
                                         <td className="n" title={row.measuredAt ? `문서수 실측: ${kst(row.measuredAt)}` : '문서수 실측 시각 미기록'}>{num(row.documentCount)}</td>
