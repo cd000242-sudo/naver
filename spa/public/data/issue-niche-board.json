@@ -1,17 +1,19 @@
 {
-  "publishedAt": "2026-09-28T09:00:09.311Z",
+  "publishedAt": "2026-09-28T21:28:06.266Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 17,
-    "candidates": 159,
-    "niche": 2,
-    "preemption": 18,
+    "issues": 18,
+    "candidates": 174,
+    "niche": 0,
+    "preemption": 16,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-09-28",
+    "day": "2026-09-29",
     "keywords": [
+      "아시안게임 등수",
+      "마키나락스 주식",
       "사이클 트랙 노윤서"
     ]
   },
@@ -90,14 +92,143 @@
           "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "whySearch": null,
+      "whySearch": {
+        "text": "대회 기간 중 국가별·한국의 메달 순위와 종합 등수를 실시간으로 확인하려는 검색",
+        "basis": "AI 추론 — 실측 확인된 확장어 10개"
+      },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
+      "titles": {
+        "seo": {
+          "text": "아시안게임 등수 국가별 메달순위 실시간 집계",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "아시안게임 등수 보다가 항저우 아시안게임 순위 표를 계속 다시 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "아시안게임 종합순위",
+          "searchVolume": 4440,
+          "source": "ai-verified",
+          "frame": "recommend"
+        },
+        {
+          "keyword": "항저우 아시안게임 순위",
+          "searchVolume": 3990,
+          "source": "ai-verified",
+          "frame": "recommend"
+        },
+        {
+          "keyword": "아시안게임 축구 순위",
+          "searchVolume": 1930,
+          "source": "ai-verified",
+          "frame": "recommend"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "아시안게임 종합순위",
+          "searchVolume": 4440,
+          "source": "ai-verified",
+          "documentCount": 14636
+        },
+        {
+          "keyword": "항저우 아시안게임 순위",
+          "searchVolume": 3990,
+          "source": "ai-verified",
+          "documentCount": 11961
+        },
+        {
+          "keyword": "아시안게임 축구 순위",
+          "searchVolume": 1930,
+          "source": "ai-verified",
+          "documentCount": 18054
+        },
+        {
+          "keyword": "아시안게임 메달집계",
+          "searchVolume": 1050,
+          "source": "ai-verified",
+          "documentCount": 3807
+        },
+        {
+          "keyword": "아시안게임 메달 현황",
+          "searchVolume": 700,
+          "source": "ai-verified",
+          "documentCount": 4207
+        },
+        {
+          "keyword": "아시안게임 국가별순위",
+          "searchVolume": 630,
+          "source": "ai-verified",
+          "documentCount": 9213
+        },
+        {
+          "keyword": "아시안게임 순위표",
+          "searchVolume": 70,
+          "source": "ai-verified",
+          "documentCount": 2303
+        },
+        {
+          "keyword": "아시안게임 메달순위",
+          "searchVolume": 50,
+          "source": "ai-verified",
+          "documentCount": 31438
+        },
+        {
+          "keyword": "아시안게임 한국 순위",
+          "searchVolume": null,
+          "source": "ai-verified",
+          "documentCount": 42654
+        },
+        {
+          "keyword": "아시안게임 금메달 순위",
+          "searchVolume": null,
+          "source": "ai-verified",
+          "documentCount": 25964
+        }
+      ],
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          9,
+          16,
+          17,
+          23,
+          34,
+          57,
+          75,
+          100
+        ],
+        "label": "🚀 떡상",
+        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
+        "measuredAt": "2026-09-28T21:28:06.964Z"
+      },
       "kinCount": 124,
       "kinTop": [
         {
@@ -117,7 +248,13 @@
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true,
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 10,
+        "verified": 10
+      }
     },
     {
       "keyword": "마키나락스 주식",
@@ -193,10 +330,100 @@
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
+      "titles": {
+        "seo": {
+          "text": "마키나락스 주식 상장일정과 기업가치 어디까지 왔나",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "마키나락스 주식 사고 싶다는데 상장 얘기부터 다시 봐야 합니다",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "마키나락스 주가",
+          "searchVolume": 37080,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
+        {
+          "keyword": "마키나락스 채용",
+          "searchVolume": 140,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
+        {
+          "keyword": "마키나락스 상장",
+          "searchVolume": 40,
+          "source": "ai-verified",
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "마키나락스 주가",
+          "searchVolume": 37080,
+          "source": "ai-verified",
+          "documentCount": 6845
+        },
+        {
+          "keyword": "마키나락스 채용",
+          "searchVolume": 140,
+          "source": "ai-verified",
+          "documentCount": 323
+        },
+        {
+          "keyword": "마키나락스 상장",
+          "searchVolume": 40,
+          "source": "ai-verified",
+          "documentCount": 8699
+        },
+        {
+          "keyword": "마키나락스 연봉",
+          "searchVolume": 40,
+          "source": "ai-verified",
+          "documentCount": 118
+        }
+      ],
+      "trend": {
+        "series": [
+          0,
+          55,
+          37,
+          100,
+          76,
+          63,
+          0,
+          0,
+          53,
+          45,
+          55,
+          50,
+          42,
+          13,
+          0,
+          50,
+          53,
+          66,
+          47,
+          50,
+          0,
+          0,
+          92,
+          68,
+          26,
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "📉 단발성",
+        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
+        "measuredAt": "2026-09-28T21:28:06.964Z"
+      },
       "kinCount": 12,
       "kinTop": [
         {
@@ -210,7 +437,13 @@
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true,
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 8,
+        "verified": 4
+      }
     },
     {
       "keyword": "사이클 트랙 노윤서",
@@ -286,13 +519,71 @@
           "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "whySearch": null,
+      "whySearch": {
+        "text": "사이클 트랙에 등장한 인물 노윤서가 누구인지 프로필·나이 등 신상 정보를 확인하려는 검색.",
+        "basis": "AI 추론 — 실측 확인된 확장어 4개"
+      },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
+      "titles": {
+        "seo": {
+          "text": "사이클 트랙 노윤서 프로필 나이 소속 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "사이클 트랙 노윤서 그 경기 돌려보다 프로필이랑 나이까지 찾아보게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "노윤서 프로필",
+          "searchVolume": 22120,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
+        {
+          "keyword": "노윤서 나이",
+          "searchVolume": 6720,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
+        {
+          "keyword": "노윤서 인스타",
+          "searchVolume": 310,
+          "source": "ai-verified",
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "노윤서 프로필",
+          "searchVolume": 22120,
+          "source": "ai-verified",
+          "documentCount": 2729
+        },
+        {
+          "keyword": "노윤서 나이",
+          "searchVolume": 6720,
+          "source": "ai-verified",
+          "documentCount": 4526
+        },
+        {
+          "keyword": "노윤서 인스타",
+          "searchVolume": 310,
+          "source": "ai-verified",
+          "documentCount": 7082
+        },
+        {
+          "keyword": "노윤서 사이클",
+          "searchVolume": 20,
+          "source": "ai-verified",
+          "documentCount": 133
+        }
+      ],
       "trend": {
         "series": [
           0,
@@ -325,7 +616,7 @@
           14,
           79
         ],
-        "measuredAt": "2026-09-28T03:34:41.505Z"
+        "measuredAt": "2026-09-28T21:28:06.964Z"
       },
       "kinCount": 0,
       "kinTop": [],
@@ -334,7 +625,12 @@
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "kinMode": "date-views-v2",
-      "carried": true
+      "carried": true,
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 5,
+        "verified": 4
+      }
     }
   ],
   "observations": [
@@ -350,7 +646,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 10,
+      "documentCount": 11,
       "documentCountMeasured": true,
       "searchVolume": 10,
       "searchVolumeLt10": true,
@@ -363,8 +659,8 @@
       "freshFrontalCount": 0,
       "reasons": [
         "검색량 10",
-        "문서수 10",
-        "선점 후보 — 경쟁 문서 10건, 수요 미검출"
+        "문서수 11",
+        "선점 후보 — 경쟁 문서 11건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -376,7 +672,539 @@
           "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
-      "whySearch": null,
+      "whySearch": {
+        "text": "트럼프가 시진핑 만찬 불참한 앤트로픽 아모데이를 백악관 단독 만찬에 초청했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "아모데이 와이프, 트럼프 백악관 단독 만찬 앤트로픽 CEO 정체",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "아모데이 와이프 찾다가 다니엘라 아모데이 이력에서 한참 머물렀네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "다리오 아모데이",
+          "searchVolume": 4920,
+          "frame": "generic"
+        },
+        {
+          "keyword": "다니엘라 아모데이",
+          "searchVolume": 100,
+          "frame": "generic"
+        },
+        {
+          "keyword": "앤트로픽 아모데이",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "다리오 아모데이",
+          "searchVolume": 4920,
+          "documentCount": 10712,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "다니엘라 아모데이",
+          "searchVolume": 100,
+          "documentCount": 888,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 아모데이",
+          "searchVolume": 40,
+          "documentCount": 7548,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "아모데이 CEO",
+          "searchVolume": 20,
+          "documentCount": 9131,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "다윈 180B",
+      "issue": "비드래프트",
+      "topic": "비드래프트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 1,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 1",
+        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "비드래프트 다윈-180B가 허깅페이스 5개 벤치마크 1위, 포켓은 100만 다운로드를 넘었다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "다윈 180B 허깅페이스 5개 벤치마크 1위 성능 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "다윈 180B가 허깅페이스 벤치마크 5개 다 1위인 방식이 좀 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 알바 후기",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 84,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 84",
+        "선점 후보 — 경쟁 문서 84건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "셀렉트스타 알바 후기 캐시미션 데이터라벨링 실제 시급",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "셀렉트스타 알바 후기 찾다가 채용 공고 시급이랑 왜 다른지 다시 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "셀렉트스타 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "셀렉트스타 연봉",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "셀렉트스타 채용",
+          "searchVolume": 40,
+          "documentCount": 542,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "셀렉트스타 연봉",
+          "searchVolume": 20,
+          "documentCount": 209,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "제브 포켓몬",
+      "issue": "제브",
+      "topic": "제브",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 32,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 32",
+        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "타입세이프 AI 제브가 클로드 오퍼스5 지원으로 포켓몬 명예의전당에 올라 개발자들이 열광했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "제브 포켓몬 명예의전당 입성, 오퍼스5 지원 타입세이프 정체",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "제브 포켓몬이 AI랑 뭐가 다른지 궁금해서 하나하나 눌러봤는데요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "제브 AI",
+          "searchVolume": 440,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "제브 AI",
+          "searchVolume": 440,
+          "documentCount": 652,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 21,
+      "kinTop": [
+        {
+          "title": "포켓몬스터 화이트 뇌문시티 관장이기는법 알려주세여.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1303010504&docId=154381943&answerNo=4",
+          "views": 3291,
+          "answers": 5
+        },
+        {
+          "title": "포켓몬블랙 기배",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20413&docId=397137456&answerNo=1",
+          "views": 756,
+          "answers": 1
+        },
+        {
+          "title": "포켓몬스터 화이트2 카밀레",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20413&docId=278054374&answerNo=1",
+          "views": 285,
+          "answers": 1
+        },
+        {
+          "title": "포켓몬블랙리그깨는법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=13030801&docId=145846418&answerNo=5",
+          "views": 100,
+          "answers": 5
+        },
+        {
+          "title": "포켓몬스터 화이트2",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20901&docId=174312762&answerNo=1",
+          "views": 99,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "제브 벤치마크",
+      "issue": "제브",
+      "topic": "제브",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 39,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 39",
+        "선점 후보 — 경쟁 문서 39건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "타입세이프 AI 제브가 클로드 오퍼스5 지원으로 포켓몬 명예의전당에 올라 개발자들이 열광했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "제브 벤치마크 193배 빠르고 444배 저렴한 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "제브 벤치마크에서 제브 AI 붙은 뒤로 뭐가 달라진 건지 다시 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "제브 AI",
+          "searchVolume": 440,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "제브 AI",
+          "searchVolume": 440,
+          "documentCount": 652,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 연봉",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 209,
+      "documentCountMeasured": true,
+      "searchVolume": 20,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 20",
+        "문서수 209",
+        "선점 후보 — 경쟁 문서 209건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "셀렉트스타 연봉 초봉과 신입 채용공고 조건 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "셀렉트스타 연봉 보러 갔다가 채용 조건에서 한참을 멈춰 있었어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "셀렉트스타 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "셀렉트스타 채용",
+          "searchVolume": 40,
+          "documentCount": 542,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "제브 클로드",
+      "issue": "제브",
+      "topic": "제브",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 77,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 77",
+        "선점 후보 — 경쟁 문서 77건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "타입세이프 AI 제브가 클로드 오퍼스5 지원으로 포켓몬 명예의전당에 올라 개발자들이 열광했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
@@ -384,10 +1212,786 @@
       "subKeywords": null,
       "keywordPool": null,
       "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "타입세이프 제브",
+      "issue": "제브",
+      "topic": "제브",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 105,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 105",
+        "선점 후보 — 경쟁 문서 105건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "타입세이프 AI 제브가 클로드 오퍼스5 지원으로 포켓몬 명예의전당에 올라 개발자들이 열광했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "타입세이프 제브 193배 빠르고 444배 저렴한 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "타입세이프 제브 긴 답변 대신 판단만 하는데 개발자들이 열광하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-28T08:58:23.180Z",
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 잡플래닛",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 14,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 14",
+        "선점 후보 — 경쟁 문서 14건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "셀렉트스타 잡플래닛 연봉·면접 후기 실제 평점",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "셀렉트스타 잡플래닛 후기에서 연봉보다 다들 이걸 더 보더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "셀렉트스타 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "셀렉트스타 연봉",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "셀렉트스타 채용",
+          "searchVolume": 40,
+          "documentCount": 542,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "셀렉트스타 연봉",
+          "searchVolume": 20,
+          "documentCount": 209,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "제브 접속",
+      "issue": "제브",
+      "topic": "제브",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "어디서 쓰는지",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 172,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 172",
+        "선점 후보 — 경쟁 문서 172건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 어디서 쓰는지"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "타입세이프 AI 제브가 클로드 오퍼스5 지원으로 포켓몬 명예의전당에 올라 개발자들이 열광했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "제브 접속 방법과 193배 빠르다는 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "제브 접속해서 제브 AI 써봤는데 긴 답변을 기대한 게 민망해지네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "제브 AI",
+          "searchVolume": 440,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "제브 AI",
+          "searchVolume": 440,
+          "documentCount": 652,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 17,
+      "kinTop": [
+        {
+          "title": "PXG 공홈 접속이 안되네요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=40613&docId=376197111&answerNo=1",
+          "views": 188,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 인턴",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 129,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 129",
+        "선점 후보 — 경쟁 문서 129건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "셀렉트스타 인턴 채용 연봉과 면접 후기 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "셀렉트스타 인턴 지원 전에 연봉이랑 회사 분위기부터 알아봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "셀렉트스타 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "셀렉트스타 연봉",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "셀렉트스타 채용",
+          "searchVolume": 40,
+          "documentCount": 542,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "셀렉트스타 연봉",
+          "searchVolume": 20,
+          "documentCount": 209,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "비드래프트 김민식",
+      "issue": "비드래프트",
+      "topic": "비드래프트",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 168,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 168",
+        "선점 후보 — 경쟁 문서 168건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "비드래프트 다윈-180B가 허깅페이스 5개 벤치마크 1위, 포켓은 100만 다운로드를 넘었다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "비드래프트 김민식 대표와 다윈 180B 벤치마크 5개 1위",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "비드래프트 김민식 대표한테 포켓 얘기 물었더니 갑자기 말수가 줄더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "비드래프트 포켓",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "비드래프트 포켓",
+          "searchVolume": 30,
+          "documentCount": 504,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "리퀴드 컨텍스트",
+      "issue": "리퀴드 AI",
+      "topic": "리퀴드 AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 157,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 157",
+        "선점 후보 — 경쟁 문서 157건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 추측적 디코딩으로 VLM 추론을 3배 가속하고 스냅드래곤 NPU에 최적화했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "리퀴드 컨텍스트 스냅드래곤 최적화, VLM 추론 3배 속도 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "리퀴드 컨텍스트 올린 스냅드래곤 폰이 의외로 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "컨텍스트 윈도우",
+          "searchVolume": 100,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "컨텍스트 윈도우",
+          "searchVolume": 100,
+          "documentCount": 15422,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "아모데이 국적",
+      "issue": "아모데이",
+      "topic": "아모데이",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 232,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 232",
+        "선점 후보 — 경쟁 문서 232건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "트럼프가 시진핑 만찬 불참한 앤트로픽 아모데이를 백악관 단독 만찬에 초청했다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "아모데이 국적부터 앤트로픽 CEO 트럼프 백악관 만찬까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "아모데이 국적 궁금해서 찾다가 앤트로픽 아모데이 CEO 이력까지 파보게 됐네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "다리오 아모데이",
+          "searchVolume": 4920,
+          "frame": "generic"
+        },
+        {
+          "keyword": "앤트로픽 아모데이",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "아모데이 CEO",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "다리오 아모데이",
+          "searchVolume": 4920,
+          "documentCount": 10712,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 아모데이",
+          "searchVolume": 40,
+          "documentCount": 7548,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "아모데이 CEO",
+          "searchVolume": 20,
+          "documentCount": 9131,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "셀렉트스타 블라인드",
+      "issue": "셀렉트스타",
+      "topic": "셀렉트스타",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 213,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 213",
+        "선점 후보 — 경쟁 문서 213건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "셀렉트스타 블라인드, EMNLP 논문 5편 채택 기업 후기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "셀렉트스타 블라인드 연봉 글 보다가 채용 공고까지 눌러보고 있네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "셀렉트스타 채용",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "셀렉트스타 연봉",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "셀렉트스타 채용",
+          "searchVolume": 40,
+          "documentCount": 542,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "셀렉트스타 연봉",
+          "searchVolume": 20,
+          "documentCount": 209,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "과기부 공무직",
+      "issue": "과기부",
+      "topic": "과기부",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 251,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 251",
+        "선점 후보 — 경쟁 문서 251건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "폐기된 모두의 AI에 미래대응기금 4.7조가 배정된 사실이 드러났다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "과기부 공무직 채용공고 급여와 지원자격 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "과기부 공무직 채용공고 급여 안 보고 지원하면 많이들 후회하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "공무직 급여",
+          "searchVolume": 1760,
+          "frame": "generic"
+        },
+        {
+          "keyword": "공무직 채용공고",
+          "searchVolume": 320,
+          "frame": "generic"
+        },
+        {
+          "keyword": "과학기술정보통신부 공무직",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "공무직 급여",
+          "searchVolume": 1760,
+          "documentCount": 17142,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "공무직 채용공고",
+          "searchVolume": 320,
+          "documentCount": 50375,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-28T21:22:22.655Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -442,7 +2046,8 @@
       "monetize": null,
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "포지큐브 잡플래닛",
@@ -494,60 +2099,8 @@
       "monetize": null,
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "셀렉트스타 알바 후기",
-      "issue": "셀렉트스타",
-      "topic": "셀렉트스타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 86,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 86",
-        "선점 후보 — 경쟁 문서 86건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T08:58:23.180Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "마키나락스 연봉",
@@ -600,112 +2153,8 @@
       "monetize": null,
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "셀렉트스타 연봉",
-      "issue": "셀렉트스타",
-      "topic": "셀렉트스타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 209,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 20",
-        "문서수 209",
-        "선점 후보 — 경쟁 문서 209건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T08:58:23.180Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "셀렉트스타 잡플래닛",
-      "issue": "셀렉트스타",
-      "topic": "셀렉트스타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 14,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 14",
-        "선점 후보 — 경쟁 문서 14건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T08:58:23.180Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "포지큐브 블라인드",
@@ -757,7 +2206,8 @@
       "monetize": null,
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "포지큐브 연봉",
@@ -809,7 +2259,8 @@
       "monetize": null,
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "포지큐브 ocr",
@@ -861,7 +2312,8 @@
       "monetize": null,
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "포지큐브 오성조",
@@ -913,7 +2365,8 @@
       "monetize": null,
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "마키나락스 블라인드",
@@ -965,7 +2418,8 @@
       "monetize": null,
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "포지큐브 매출",
@@ -1017,59 +2471,8 @@
       "monetize": null,
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "셀렉트스타 인턴",
-      "issue": "셀렉트스타",
-      "topic": "셀렉트스타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 128,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 128",
-        "선점 후보 — 경쟁 문서 128건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T08:58:23.180Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "쉰들러 ISDS 정부",
@@ -1121,7 +2524,8 @@
       "monetize": null,
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "포지큐브 투자",
@@ -1173,111 +2577,8 @@
       "monetize": null,
       "measuredAt": "2026-09-28T08:58:23.180Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "아모데이 국적",
-      "issue": "아모데이",
-      "topic": "아모데이",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 231,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 231",
-        "선점 후보 — 경쟁 문서 231건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T08:58:23.180Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "셀렉트스타 블라인드",
-      "issue": "셀렉트스타",
-      "topic": "셀렉트스타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 215,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 215",
-        "선점 후보 — 경쟁 문서 215건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T08:58:23.180Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "스모어톡 잡플래닛",
@@ -2256,6 +3557,1014 @@
   "rejectedCount": 0,
   "issues": [
     {
+      "issue": "남자 계주 동메달",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "남자 400m 계주가 실격 번복 끝 한국 신기록으로 동메달을 땄다",
+      "headlines": [
+        {
+          "title": "[아시안게임] 남자 400ｍ 계주 대표팀, 동메달…'38초43 한국 신기록'(종...",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-28T13:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016342111?sid=104"
+        },
+        {
+          "title": "‘실격 뒤 극적 구제’ 남자 계주 400m 동메달…아시안게임 2회 연속 메...",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-09-28T13:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002825037?sid=104"
+        },
+        {
+          "title": "[아시안게임] 남자 400m 계주, 기사회생 끝 '한국 신기록' 동메달",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-09-28T14:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000537457?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "DMZ 지뢰 폭발",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "군이 DMZ 폭발을 북한 지뢰 가능성 매우 높다고 판정했다",
+      "headlines": [
+        {
+          "title": "軍 \"DMZ폭발, 北지뢰 가능성 매우높아…北매설 판정시 상응조치\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-28T12:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016341991?sid=100"
+        },
+        {
+          "title": "軍 “DMZ 폭발, 北 지뢰 가능성 높아”",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-09-28T20:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003684145?sid=100"
+        },
+        {
+          "title": "DMZ 폭발 원인 \"북한군 지뢰 가능성 매우 높다\"",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-09-28T13:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001526215?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "dmz 지뢰폭발 부상자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "dmz 지뢰폭발 위치",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "dmz 지뢰폭발 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "dmz 지뢰폭발 mbc",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "삼성전기 AI 기판",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "삼성전기가 세종 4조2700억 등 AI 서버 기판에 사상 최대 투자한다",
+      "headlines": [
+        {
+          "title": "삼성전기, 세종에 4조2700억 투자…AI 서버용 반도체 기판 생산라인 증설",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-28T08:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014218771?sid=101"
+        },
+        {
+          "title": "[단독] 삼성전기, AI 기판에 6.8조 '사상 최대 투자'",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-28T08:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005336753?sid=101"
+        },
+        {
+          "title": "삼성전기, 세종에 4조2700억원 투자…단일 제품 최대 규모",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-09-28T09:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004193527?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "생각에 잠긴 모레노",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "모레노 감독이 생각에 잠긴 모습이 포착됐다",
+      "headlines": [
+        {
+          "title": "생각에 잠긴 모레노",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-28T13:15:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/003/0014219111"
+        },
+        {
+          "title": "생각에 잠긴 모레노 감독",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-28T12:28:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/421/0009196338"
+        },
+        {
+          "title": "[포토S] 생각에 잠긴 모레노 감독",
+          "press": "spotvnews.co.kr",
+          "publishedAt": "2026-09-28T12:10:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/477/0000630464"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "중구",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "서울 중구가 즉석밥 용기 20개당 종량제봉투 1장을 전국 최초 지급한다",
+      "headlines": [
+        {
+          "title": "서울 중구, 빈 즉석밥 용기 20개당 10ℓ 종량제봉투 1장 지급",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-28T04:46:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014217799?sid=102"
+        },
+        {
+          "title": "“재개발·보상 기록 찾기 쉽게”… 중구, 기록관실 추가 조성 [지금 우...",
+          "press": "segye.com",
+          "publishedAt": "2026-09-28T06:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004162330?sid=102"
+        },
+        {
+          "title": "중구, 즉석밥 용기 20개 가져오면 종량제봉투 1장…전국 최초",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-28T06:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009195556?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "서울특별시 중구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중구 구청",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중구 날씨",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중구 맛집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중구 병원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중구 인구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중구 지도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중구 치과",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "서울 레지오넬라균 검출",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "서울 다중이용시설 검체 11.1%에서 레지오넬라균이 검출됐다",
+      "headlines": [
+        {
+          "title": "서울 목욕탕 등 다중이용시설서 레지오넬라균 11.1% 검출",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-28T02:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016340209?sid=102"
+        },
+        {
+          "title": "서울 다중이용시설 검체 11%서 레지오넬라균…백화점 '최고'",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-28T02:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014217183?sid=102"
+        },
+        {
+          "title": "서울 다중이용시설 레지오넬라균 11.1% 검출…목욕탕·찜질방 집중",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-28T02:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006376261?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "영화 암살자들 고교",
+      "issueType": "entertainment",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "역사왜곡 논란 영화 암살자들의 고교 단체관람에 민원 넣자는 반발이 일었다",
+      "headlines": [
+        {
+          "title": "역사왜곡 논란 영화 ‘암살자들’ 고교 단체 관람에…\"민원 넣자\" 시끌",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-28T19:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014219279?sid=102"
+        },
+        {
+          "title": "선두 ‘암살자들’ 뒤쫓는 ‘타짜’·‘인턴’, 입소문 ‘가능한 사랑’...",
+          "press": "ddaily.co.kr",
+          "publishedAt": "2026-09-25T05:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/138/0002242673?sid=103"
+        },
+        {
+          "title": "[김용삼 칼럼] 육영수 여사 암살까지 왜곡하는 좌파 영화인들",
+          "press": "pennmike.com",
+          "publishedAt": "2026-09-16T23:02:00.000Z",
+          "link": "https://www.pennmike.com/news/articleView.html?idxno=127918"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "영화 암살자들",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "보이스 피싱",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "상반기 은행 보이스피싱 민원이 78% 폭증하고 검찰이 피해금 2억을 되찾았다",
+      "headlines": [
+        {
+          "title": "올 상반기 금융민원 40% 늘어…은행 보이스피싱 민원은 78% 폭증",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-28T21:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014219323?sid=101"
+        },
+        {
+          "title": "남편 사망보험금까지 보이스 피싱 피해… 검찰, 2억 되찾아줘",
+          "press": "busan.com",
+          "publishedAt": "2026-09-28T08:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/082/0001400169?sid=102"
+        },
+        {
+          "title": "전재산 7억 피싱에 잃은 여성, 계좌 동결로 2억 되찾아",
+          "press": "donga.com",
+          "publishedAt": "2026-09-28T09:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003751097?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "보이스 피싱 처벌",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "보이스 피싱 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "보이스 피싱 의심제보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "보이스피싱 번호조회",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "보이스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "보이스피싱 신고",
+          "reason": "즉시 대응법 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "보이스피싱 처벌",
+          "reason": "가해자 형량 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "금융 노사 협상",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "금융노사가 임금 3% 인상과 은행 9시30분 개점에 잠정 합의해 파업을 멈췄다",
+      "headlines": [
+        {
+          "title": "금융노사 추석 넘긴 협상에도 평행선…금융노조 2차 총파업 'D-2'",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-28T07:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009195920?sid=101"
+        },
+        {
+          "title": "은행 영업시간 '9시 30분~4시'로…금융노사, 임금 3.0% 인상 잠정 합의",
+          "press": "pointdaily.co.kr",
+          "publishedAt": "2026-09-28T10:12:00.000Z",
+          "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=320610"
+        },
+        {
+          "title": "[속보] 내년 4월부터 은행점포 9시30분 개점…노사 교섭 잠정 타결",
+          "press": "kado.net",
+          "publishedAt": "2026-09-28T08:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/654/0000202722?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "손흥민 A매치 58호골",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "손흥민이 우루과이전 A매치 58호골로 차범근과 나란히 섰으나 팀은 1-4 패했다",
+      "headlines": [
+        {
+          "title": "한국 축구, 손흥민 58호골에도 우루과이에 1-4 패배",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-28T12:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001194856?sid=004"
+        },
+        {
+          "title": "'A매치 58호골' 공식 기록에도 손흥민 \"제 골은 아닌 것 같아요\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-28T14:37:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/001/0016342157"
+        },
+        {
+          "title": "손흥민 A매치 58호 골 폭발…차범근과 나란히",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-28T13:32:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/015/0005336895"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "손흥민",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "과기부",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "폐기된 모두의 AI에 미래대응기금 4.7조가 배정된 사실이 드러났다",
+      "headlines": [
+        {
+          "title": "[단독] 폐기된 '모두의 AI'에 미래대응기금 4.7조 배정",
+          "press": "wowtv.co.kr",
+          "publishedAt": "2026-09-28T12:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/215/0001267460?sid=101"
+        },
+        {
+          "title": "대학 반도체 연구실 클린룸 사고 막는다…과기부, 특별 현장점검 추진",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-27T03:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006375869?sid=105"
+        },
+        {
+          "title": "李, 내일 '메가프로젝트 민관합동 점검회의' 주재…피지컬AI 등 현황 점...",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-28T00:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014216645?sid=100"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "과기부 차관",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 인사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 조직도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 민원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 위치",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 국정감사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "과기부 장관상 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "과기부 장관 입장",
+          "reason": "해명 여부 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤트로픽",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "declining",
+      "isHot": false,
+      "why": "트럼프가 AI 위험을 경고한 앤트로픽 CEO와 첫 백악관 단독 만찬을 가졌다",
+      "headlines": [
+        {
+          "title": "트럼프·앤트로픽 CEO 첫 백악관 만찬",
+          "press": "segye.com",
+          "publishedAt": "2026-09-28T12:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004162445?sid=104"
+        },
+        {
+          "title": "트럼프, 'AI 위험' 경고한 앤트로픽 CEO와 만찬…갈등 봉합할까",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-27T23:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014216469?sid=104"
+        },
+        {
+          "title": "트럼프, 앤트로픽 CEO와 첫 단독 만찬…갈등 관계 풀리나",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-28T01:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001194687?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "앤트로픽 상장일",
+          "reason": "IPO 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 관련주",
+          "reason": "수혜 종목 발굴",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "비드래프트",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "비드래프트 다윈-180B가 허깅페이스 5개 벤치마크 1위, 포켓은 100만 다운로드를 넘었다",
+      "headlines": [
+        {
+          "title": "비드래프트 '다윈-180B-RSI', 허깅페이스 5개 벤치마크 1위",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-09-28T08:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002439001?sid=105"
+        },
+        {
+          "title": "비드래프트, '재귀적 자기개선' AI로 글로벌 5개 리더보드 석권",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-28T09:14:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215729"
+        },
+        {
+          "title": "비 내리는 AG 야구장…한일전 취소 땐 한국 은메달",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-09-27T07:44:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002824801?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "비드래프트 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "비드래프트 투자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "비드래프트 김민식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "주식회사 비드래프트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "비드래프트 투자",
+          "reason": "기업 규모 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "비드래프트 상장",
+          "reason": "IPO 가능성",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "제브",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "타입세이프 AI 제브가 클로드 오퍼스5 지원으로 포켓몬 명예의전당에 올라 개발자들이 열광했다",
+      "headlines": [
+        {
+          "title": "“주절주절 말하기 대신 단답만”…타입세이프 제브와 LLM이 다른 점",
+          "press": "ddaily.co.kr",
+          "publishedAt": "2026-09-28T04:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/138/0002242812?sid=105"
+        },
+        {
+          "title": "제브, 클로드 오퍼스 5 지원받아 '포켓몬' 명예의 전당 입성",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-28T08:30:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215712"
+        },
+        {
+          "title": "\"193배 빠르고 444배 저렴\"…글 한 줄 못 써도 열광한다는 AI '제브'",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-09-22T01:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005819741?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "제브 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "제브 사용법",
+          "reason": "실사용 방법 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "제브 접속",
+          "reason": "어디서 쓰는지",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "제브 vs LLM",
+          "reason": "차별점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오퍼스5",
+          "reason": "기반 모델 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "제브 한국",
+          "reason": "국내 이용 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "리퀴드 AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "리퀴드 AI가 추측적 디코딩으로 VLM 추론을 3배 가속하고 스냅드래곤 NPU에 최적화했다",
+      "headlines": [
+        {
+          "title": "[단독] 엔비디아 AI냉각 '풀라인업' 글로벌 2곳뿐…LG전자 등재됐다",
+          "press": "newspim.com",
+          "publishedAt": "2026-09-28T06:46:00.000Z",
+          "link": "https://www.newspim.com/news/view/20260928000668"
+        },
+        {
+          "title": "리퀴드 AI, '추측적 디코딩'으로 VLM 추론 3배 가속",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-28T08:06:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215727"
+        },
+        {
+          "title": "리퀴드 AI, 스냅드래곤에 리퀴드 컨텍스트 최적화",
+          "press": "technoa.co.kr",
+          "publishedAt": "2026-09-28T12:20:00.000Z",
+          "link": "http://www.technoa.co.kr/news/articleView.html?idxno=101447"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "리퀴드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "리퀴드 AI 상장",
+          "reason": "투자 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "아모데이",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "declining",
+      "isHot": false,
+      "why": "트럼프가 시진핑 만찬 불참한 앤트로픽 아모데이를 백악관 단독 만찬에 초청했다",
+      "headlines": [
+        {
+          "title": "트럼프·앤트로픽 CEO 첫 백악관 만찬",
+          "press": "segye.com",
+          "publishedAt": "2026-09-28T12:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004162445?sid=104"
+        },
+        {
+          "title": "트럼프, 'AI 위험' 경고한 앤트로픽 CEO와 만찬…갈등 봉합할까",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-27T23:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014216469?sid=104"
+        },
+        {
+          "title": "트럼프, 앤트로픽 CEO와 첫 단독 만찬…갈등 관계 풀리나",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-28T01:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001194687?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "다리오 아모데이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아모데이 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "다니엘라 아모데이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아모데이 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아모데이 와이프",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아모데이 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아모데이 국적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아모데이 책",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "아모데이 AI경고",
+          "reason": "위험 발언 내용",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "아모데이 재산",
+          "reason": "자산 규모 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "아모데이 에세이",
+          "reason": "철학·글 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "셀렉트스타",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
+      "headlines": [
+        {
+          "title": "채택률 15.4% 뚫었다…셀렉트스타, 국제학회에 논문 5편 채택",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-28T10:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005419274?sid=101"
+        },
+        {
+          "title": "셀렉트스타, 세계적 NLP 학회 ‘EMNLP 2026’서 AI 신뢰성 연구 5편 채택",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-28T01:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006376224?sid=105"
+        },
+        {
+          "title": "셀렉트스타, EMNLP 2026에 AI 신뢰성 연구 5편 채택",
+          "press": "digitaltoday.co.kr",
+          "publishedAt": "2026-09-28T00:36:00.000Z",
+          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=703115"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "셀렉트스타 알바",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "셀렉트스타 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "셀렉트스타 매출",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "셀렉트스타 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "셀렉트스타 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "셀렉트스타 알바 후기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "셀렉트스타 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "셀렉트스타(주)",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "셀렉트스타 상장",
+          "reason": "IPO 여부 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "셀렉트스타 채용",
+          "reason": "입사 정보 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "AI 신뢰성 연구",
+          "reason": "논문 내용 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "셀렉트스타 투자",
+          "reason": "기업 성장 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "AI 참모",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "마키나락스가 군 전장망에 처음으로 생성형 AI 운영환경을 UFS에서 실증했다",
+      "headlines": [
+        {
+          "title": "[AI픽] 마키나락스, 군 지휘통제체계에 AI 운영환경 구축",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-28T00:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016339815?sid=105"
+        },
+        {
+          "title": "마키나락스, 군 지휘통제 체계에 AI 운영체제 시범 적용",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-28T01:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005740623?sid=105"
+        },
+        {
+          "title": "마키나락스, 군 전장망 첫 AI 운용체계 적용…UFS서 실증",
+          "press": "etnews.com",
+          "publishedAt": "2026-09-28T11:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003470499?sid=105"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
       "issue": "아시안게임",
       "issueType": "fresh",
       "lane": "realtime",
@@ -2325,7 +4634,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "마키나락스",
@@ -2397,7 +4707,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "노윤서",
@@ -2546,20 +4857,22 @@
       "carried": true
     }
   ],
-  "enrichedAt": "2026-09-28T09:00:27.289Z",
+  "enrichedAt": "2026-09-28T21:29:05.300Z",
   "enrichStats": {
-    "enriched": 0,
-    "subsAdded": 0,
-    "titleUpgraded": 0,
-    "proposed": 0,
-    "verified": 0,
+    "enriched": 3,
+    "subsAdded": 3,
+    "titleUpgraded": 1,
+    "proposed": 23,
+    "verified": 18,
     "judged": 0,
     "judgedBad": 0,
     "related": 0,
     "picked": 0,
-    "pooled": 0,
-    "aiTitled": 0,
+    "pooled": 18,
+    "aiTitled": 3,
     "trended": 0,
+    "homeRetried": 2,
+    "whyAdded": 2,
     "aiCalls": 3,
     "partial": false
   }
