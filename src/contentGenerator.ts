@@ -234,6 +234,7 @@ import { describeCrossSectionRepeats, findCrossSectionRepeats } from './content/
 import { describePipelineMetricLeaks, findPipelineMetricLeaks } from './content/pipelineMetricLeak.js';
 import { describeMaterialLabelLeaks, findMaterialLabelLeaks } from './content/materialLabelLeak.js';
 import { auditAttributionVoice, describeAttributionVoice } from './content/attributionVoiceAudit.js';
+import { auditTitleQuote, describeTitleQuote } from './content/titleQuoteAudit.js';
 import { describeFutureDatedPastClaims, findFutureDatedPastClaims } from './content/futureDatedPastClaim.js';
 import { buildFactVerificationReport } from './content/factVerificationReport.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
@@ -595,6 +596,28 @@ function logTitlePayoff(content: any, source: any): void {
   }
 }
 
+/*
+ * [2026-09-30] Fake quotes and demand-only titles (owner guideline K02 §3/§8).
+ * The shared title contract now bans a made-up declarative wrapped in quotes and the
+ * "눈길 간 건 따로 / 먼저 봐야 할 게 / 알려진 건 여기까지" family. Log-only: no rewrite,
+ * no extra LLM call, no publish block. The hit rate decides whether a repair step is worth adding.
+ */
+function logTitleQuoteAudit(content: any, source: any): void {
+  try {
+    const candidates = Array.isArray(content?.titleCandidates)
+      ? content.titleCandidates.map((c: any) => String(c?.text || c || '')).filter(Boolean)
+      : [];
+    const line = describeTitleQuote(auditTitleQuote({
+      title: content?.selectedTitle || content?.title || '',
+      candidates,
+      sourceText: String(source?.rawText || ''),
+    }));
+    if (line) console.warn(line);
+  } catch (err) {
+    console.log('[TitleQuote] 검사 생략:', err instanceof Error ? err.message : err);
+  }
+}
+
 /**
  * [2026-08-27] 자료에 없는 여론 서술을 알린다.
  *
@@ -751,6 +774,7 @@ function runPostGenValidator(content: any, source: any): void {
   //   가릴 근거가 로그에 없었다. 채점 축을 만들기 전에 이걸 먼저 본다.
   for (const line of buildTitleDiagnosticsLines(content)) console.log(line);
   logTitlePayoff(content, source);
+  logTitleQuoteAudit(content, source);
   logTitleAnswer(content, source);
   logVerdictStructure(content);
   logPublicReactionClaims(content, source);
