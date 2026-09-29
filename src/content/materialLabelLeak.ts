@@ -51,6 +51,6 @@ export function findMaterialLabelLeaks(text: string | undefined): string[] {
 export function describeMaterialLabelLeaks(leaks: readonly string[]): string[] {
   return leaks.map((leak) => (
     `자료를 부르는 내부 명칭이 본문에 실렸습니다 — 독자는 그게 무엇인지 모릅니다.`
-    + ` "후기에서는", "블로그 사례에서는" 처럼 실제 출처로 바꿔야 합니다: "${leak.slice(0, 40)}…"`
+    + ` 확인된 사실이면 출처 없이 단정하고, 미확정이면 "국토교통부는 ~라고 발표했다"처럼 실제 주체를 주어로 세워야 합니다: "${leak.slice(0, 40)}…"`
   ));
 }

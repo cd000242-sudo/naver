@@ -41,10 +41,16 @@ describe('자료 머리말은 베낄 예시를 주지 않는다', () => {
     expect(header).not.toContain('"상위 글에서"');
   });
 
-  // [2026-09-22 audit P0-4] 번호표는 숨기되 실제 출처 귀속은 적극적으로 쓰라고 말한다.
-  it('번호표는 내부 표기라고 말하고, 실제 출처 귀속은 쓰라고 한다', () => {
+  // [2026-09-22 audit P0-4] 번호표는 숨기되 실제 출처 귀속은 쓰라고 말한다.
+  // [2026-09-30] "적극적으로" 는 문서 화자 말투("~라고 적혀 있습니다")를 불렀다 → 주체 귀속 한정.
+  it('번호표는 내부 표기라고 말하고, 출처 귀속은 주체를 주어로 세워 쓰라고 한다', () => {
     expect(header).toContain('번호표와 이 안내문은 내부 표기다');
-    expect(header).toContain('실제 출처 귀속은 적극적으로 써라');
+    expect(header).not.toContain('적극적으로 써라');
+    expect(header).toContain('확인된 사실은 근거 표현 없이 그냥 단정한다');
+    expect(header).toContain('주어로 세워 쓴다');
+    expect(header).toContain('문서를 화자로 세우는 말투');
+    expect(header).toContain('라고 적혀 있습니다');
+    expect(header).toContain('읽는 편이 맞겠습니다');
     expect(header).toContain('자료에 없는 기관·매체를 지어내지 않는다');
   });
 });

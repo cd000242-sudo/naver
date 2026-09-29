@@ -143,6 +143,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/aiConclusionOpener.ts',
   'src/content/attributionEvidence.ts',
   'src/content/attributionGuard.ts',
+  'src/content/attributionVoiceAudit.ts',
   'src/content/blueprint/blueprintSchema.ts',
   'src/content/blueprint/buildBlueprintPrompt.ts',
   'src/content/blueprint/generateBlueprint.ts',

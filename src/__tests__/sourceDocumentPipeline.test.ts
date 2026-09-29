@@ -120,7 +120,11 @@ describe('renderSourceDocumentsForWriter', () => {
     expect(rendered).toContain('UNKNOWN_DATE');
     expect(rendered).toContain('신뢰 등급: OFFICIAL');
     expect(rendered).toContain('번호표');
-    expect(rendered).toContain('적극적으로 써라');
+    // [2026-09-30] Attribution is actor-subject only; document-narrator voice is banned.
+    expect(rendered).not.toContain('적극적으로 써라');
+    expect(rendered).toContain('주어로 세워 쓴다');
+    expect(rendered).toContain('문서를 화자로 세우는 말투');
+    expect(rendered).toContain('라고 적혀 있습니다');
     // The internal id tag must not appear inside the body text itself.
     const bodySection = rendered.split('본문:')[1];
     expect(bodySection).not.toContain('S01');

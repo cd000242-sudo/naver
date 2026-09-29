@@ -5,14 +5,24 @@
 // what to do instead, so attribution ended up either missing or copying the
 // literal "[자료 3]" tag into prose. This preamble replaces that with an
 // explicit instruction: cite the real outlet/institution name.
+//
+// [2026-09-30] "적극적으로 써라" over-corrected: the model narrated the
+// documents themselves ("~라고 적혀 있습니다", "읽는 편이 맞겠습니다").
+// The preamble now says: confirmed facts flat, attribution only for
+// unconfirmed claims, and always with the actor as the subject — never
+// the document.
 
 import { extractHostname, type SourceDocument } from './sourceDocument.js';
 
 const WRITER_PREAMBLE =
   "※ 아래 [자료 Sxx] 번호표는 내부 식별자다. 본문에 'S01', '[자료 3]' 같은 번호표를 옮겨 적지 마라. "
-  + "대신 실제 출처 귀속은 적극적으로 써라 — 확정 아닌 정보·수치·발언을 옮기는 곳(글 전체 1~3곳)에서 "
-  + "'보건복지부 발표에 따르면', '기아 공식 가격표 기준', '소속사 입장에 따르면', 'OO일보 보도에 따르면'처럼 "
-  + "그 자료의 기관/매체 이름을 그대로 쓴다(base H6 정본). 익명 전언('관계자에 따르면', '한 매체에 따르면')은 쓰지 않는다. "
+  + '자료를 읽고 쓴다는 티도 내지 마라 — 확인된 사실은 원래 알던 것처럼 근거 표현 없이 그냥 단정한다. '
+  + "실제 출처 귀속은 확정 아닌 정보·수치·발언을 옮기는 곳(글 전체 1~2곳)에서만, "
+  + "'보건복지부는 ~라고 발표했다', '기아 공식 가격표 기준', '소속사 측은 ~라고 밝혔다'처럼 "
+  + '그 자료의 기관/매체/당사자를 주어로 세워 쓴다(base H6 정본). '
+  + "문서를 화자로 세우는 말투('~라고 적혀 있습니다', '~라고 나와 있습니다', '해당 보도는 ~라고 전했다', '기사/자료에 따르면', "
+  + "'원문을 읽어보면', '읽는 편이 맞겠습니다')은 금지다. "
+  + "익명 전언('관계자에 따르면', '한 매체에 따르면')도 쓰지 않는다. "
   + '자료에 없는 기관·매체를 지어내지 않는다. '
   + "UNKNOWN_DATE 자료의 시점을 '오늘/최근'으로 단정하지 않는다.";
 

@@ -160,7 +160,8 @@ describe('Content Quality V3 evidence attestation', () => {
     expect(Object.isFrozen(current)).toBe(true);
     expect(current).toEqual({
       promptBundleSha256:
-        '59da1db556b91b80e2f6a0a9a6c10a12b6f28dbfb343a699f40a4a0883861e35',
+        // [2026-09-30] V3 SOURCE_TRUTH 에 주체 귀속·문서 화자 금지 1줄 + 사례 1/2 따름 문장을 단정형으로 교체
+        '28d9dbdd60f6ebb2038a96895967a935a0e60b7232667ad8954600e51116e2e2',
       outputSchemaSha256:
         'd2a8e746c86950e548e63f5eff7cbe00a9fc1dbf8a057b12ed7a1d36c8b07cd4',
       corpusSha256:
@@ -257,7 +258,9 @@ describe('Content Quality V3 evidence attestation', () => {
         //   (영어 881자) → 한국어 5줄 우선순위 블록 + SEO 전용 1줄로 축소(A#8/B#6)로 재계산
         // [2026-09-22 P1 홈판 병합] TITLE/GAMMA-7/RETENTION 정본화, ISSUE-STORY 통계 압축, MODE VOICE·90+·상위노출 원칙·
         //   구조 규칙·제목 조건 중복 제거, SD 오버레이 홈판 제외로 재계산
-        'eb24ef0bd5d34395c4019fca7c625fa661426f332f943336f05e08a7ae1c05d7',
+        // [2026-09-30] 문서 화자 말투 금지 — seo/base.prompt H6 ⛔ 확장(적혀 있습니다·해당 보도는·읽는 편이) +
+        //   human-writing-anti-pattern §4 주체 귀속 조항·자가점검 1줄로 재계산
+        'a20a764ec5f792dfaf252d42819a3845e339141ada18a63fb89f1da340fe7cc5',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

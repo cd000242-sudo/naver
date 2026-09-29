@@ -233,6 +233,7 @@ import { analyzeHeadingSkeletons, describeHeadingSkeletonWarnings } from './cont
 import { describeCrossSectionRepeats, findCrossSectionRepeats } from './content/crossSectionRepetition.js';
 import { describePipelineMetricLeaks, findPipelineMetricLeaks } from './content/pipelineMetricLeak.js';
 import { describeMaterialLabelLeaks, findMaterialLabelLeaks } from './content/materialLabelLeak.js';
+import { auditAttributionVoice, describeAttributionVoice } from './content/attributionVoiceAudit.js';
 import { describeFutureDatedPastClaims, findFutureDatedPastClaims } from './content/futureDatedPastClaim.js';
 import { buildFactVerificationReport } from './content/factVerificationReport.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
@@ -702,6 +703,15 @@ function logPublicReactionClaims(content: any, source: any): void {
     for (const line of describeMaterialLabelLeaks(findMaterialLabelLeaks(body))) {
       console.warn(`[LabelLeak] ⚠️ ${line}`);
     }
+
+    /*
+     * [2026-09-30] Document-narrator voice ("~라고 적혀 있습니다", "읽는 편이 맞겠습니다").
+     * The prompts (source preambles, H6, human-writing overlay) now ban it, but a rule only
+     * holds when something measures it. Log-only: no rewrite, no extra LLM call, no publish
+     * block. The hit rate decides whether a repair step is worth adding.
+     */
+    const attributionVoice = describeAttributionVoice(auditAttributionVoice(body));
+    if (attributionVoice) console.warn(attributionVoice);
 
     /*
      * [2026-09-01] 아직 오지 않은 날을 과거형으로 쓴 문장.
