@@ -28,7 +28,9 @@ describe('발행 직전 ensureServerSession timeout guard', () => {
   });
 
   it('실패/timeout 결과는 로그인 상태를 false로 전이시킨다', () => {
-    expect(code).toMatch(/serverCheck\.ok/);
+    // Verdict moved out of the in-page probe (serverSessionProbePolicy) — 2026-09-29 404 false-pass fix.
+    expect(code).toMatch(/const verdict = resolveServerSessionProbeVerdict\(serverCheck\)/);
+    expect(code).toMatch(/if\s*\(verdict\.ok\)/);
     expect(code).toMatch(/session\.loginVerifiedAt\s*=\s*0/);
     expect(code).toMatch(/session\.isLoggedIn\s*=\s*false/);
   });

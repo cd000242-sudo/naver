@@ -109,6 +109,7 @@ import {
   shouldReportFinalLoginUrlFailure,
   shouldVerifyExistingSessionAfterMissingLoginInput,
 } from './automation/loginPageNavigationPolicy.js';
+import { describeNaverSessionCookies } from './automation/sessionCookieDiagnostics.js';
 import { classifyLoginStatusUrl } from './automation/loginStatusUrlPolicy.js';
 import {
   formatPublishGuardLog,
@@ -3270,6 +3271,7 @@ export class NaverBlogAutomation {
       if (postLoginProgress.shouldMarkLoginSuccess) {
         loginSuccess = true;
         this.log('✅ 네이버 로그인이 성공적으로 완료되었습니다.');
+        this.log(`   [LoginVerdict] url=${currentUrl} ${await describeNaverSessionCookies(page)}`);
         break;
       }
 
@@ -3280,6 +3282,7 @@ export class NaverBlogAutomation {
         if (isPostLoginFinalCheckSuccess(finalCheckUrl)) {
           loginSuccess = true;
           this.log('✅ 네이버 로그인이 성공적으로 완료되었습니다.');
+          this.log(`   [LoginVerdict] url=${finalCheckUrl} ${await describeNaverSessionCookies(page)}`);
           break;
         }
       }
@@ -4010,6 +4013,7 @@ export class NaverBlogAutomation {
         // 로그인 페이지로 리다이렉트된 경우
         else if (isLoginRedirect) {
           this.log(`   ⚠️ 로그인 페이지로 리다이렉트됨. 로그인 세션이 만료되었습니다.`);
+          this.log(`   [WriteRedirect] cookies=${await describeNaverSessionCookies(page)}`);
           // ✅ [2026-03-26 FIX] isLoggedIn 캐시 무효화 — 이게 없으면 loginToNaver()가 캐시 때문에 스킵됨
           browserSessionManager.setLoggedIn(this.options.naverId, false);
 

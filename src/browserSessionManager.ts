@@ -16,6 +16,7 @@ import { promises as fs } from 'fs';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
 import { emitSessionEvent } from './session/sessionEventLogger.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
+import { resolveServerSessionProbeVerdict } from './automation/serverSessionProbePolicy.js';
 import { withCleanupTimeout } from './runtime/cleanupTimeout.js';
 
 // ✅ [2026-03-27 FIX] Stealth Plugin — 모든 evasion 모듈 명시적 활성화
@@ -648,6 +649,17 @@ class BrowserSessionManager {
         // Stage 5: Register disconnect event listener for auto-heal
         browser.on('disconnected', () => {
             console.log(`[BrowserSessionManager] 🔌 disconnected event for ${accountId.substring(0, 3)}*** — scheduling reconnect`);
+            // Read-only diagnostics (2026-09-29 login loop): tell "Chrome process died /
+            // window closed" apart from "CDP pipe dropped while Chrome kept running".
+            const describeProcess = (label: string) => {
+                try {
+                    const proc = browser.process();
+                    console.log(`[BrowserSessionManager] 🔌 disconnect ${label}: exitCode=${proc?.exitCode ?? 'n/a'} signal=${proc?.signalCode ?? 'n/a'} killed=${proc?.killed ?? 'n/a'} pid=${proc?.pid ?? 'n/a'}`);
+                } catch { /* diagnostics must never throw */ }
+            };
+            describeProcess('t+0');
+            // Second sample: the process exit event usually lands a beat after the CDP drop.
+            setTimeout(() => describeProcess('t+1500ms'), 1500).unref?.();
             this.attemptReconnect(accountId).then(ok => {
                 if (!ok) {
                     console.warn(`[BrowserSessionManager] auto-heal failed for ${accountId.substring(0, 3)}***`);
@@ -855,16 +867,16 @@ class BrowserSessionManager {
                         redirect: 'follow',
                         signal: controller.signal,
                     });
-                    // 로그인 페이지로 리다이렉트되지 않았다면 유효
+                    // Raw transport facts only; the verdict lives in serverSessionProbePolicy.
+                    // (2026-09-29: a logged-out session gets HTTP 404 here with NO login
+                    // redirect, so "not nidlogin" alone let dead cookies through.)
                     return {
-                        ok: !/nidlogin\.login|nid\.naver\.com\/nidlogin/.test(res.url),
                         finalUrl: res.url,
                         status: res.status,
                     };
                 } catch (err) {
                     const e = err as Error;
                     return {
-                        ok: false,
                         error: e?.name === 'AbortError' ? 'timeout' : (e?.message || 'fetch_failed'),
                     };
                 } finally {
@@ -872,13 +884,14 @@ class BrowserSessionManager {
                 }
             }, this.SERVER_SESSION_CHECK_TIMEOUT_MS);
 
-            if (serverCheck.ok) {
+            const verdict = resolveServerSessionProbeVerdict(serverCheck);
+            if (verdict.ok) {
+                console.log(`[BrowserSessionManager] ✅ ${accountId.substring(0, 3)}*** 발행 직전 서버 검증 통과(${verdict.reason})`);
                 session.loginVerifiedAt = Date.now();
                 session.isLoggedIn = true;
                 return true;
             } else {
-                const reason = serverCheck.error || serverCheck.finalUrl || `HTTP ${serverCheck.status ?? 'unknown'}`;
-                console.warn(`[BrowserSessionManager] 🚨 ${accountId.substring(0, 3)}*** 발행 직전 서버 검증 실패(${reason}) — 재로그인 필요`);
+                console.warn(`[BrowserSessionManager] 🚨 ${accountId.substring(0, 3)}*** 발행 직전 서버 검증 실패(${verdict.reason}) — 재로그인 필요`);
                 session.loginVerifiedAt = 0;
                 session.isLoggedIn = false;
                 // [v1.6.0] locked=false 제거 — 잠긴 세션은 앱 종료까지 파괴 금지 계약 유지
