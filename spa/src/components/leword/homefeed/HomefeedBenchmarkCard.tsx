@@ -1,10 +1,25 @@
 import { useState } from 'react';
 import { benchmarkTime, metricText, type BenchmarkCandidate } from '../../../lib/homefeedBenchmarkModel.mjs';
 const LABELS = {'review-now':'지금 검토',verify:'추가 확인',stale:'시점 재검토'};
-function TitleRow({label,text}:{label:string;text:string}) {
+function TitleRow({label,text,editor=false}:{label:string;text:string;editor?:boolean}) {
  const [notice,setNotice]=useState('');
  const copy=async()=>{try {await navigator.clipboard.writeText(text);setNotice('복사됨');} catch {setNotice('제목을 선택해 복사해 주세요');}};
- return <div className="hfb-title-row"><span>{label}</span><p>{text||'제목 제안 준비 중'}</p>{text&&<button type="button" onClick={()=>void copy()} aria-label={`${label} 제목 복사`}>복사</button>}<small role="status">{notice}</small></div>;
+ return <div className={`hfb-title-row${editor?' editor':''}`}><span>{label}</span><p>{text}</p><button type="button" onClick={()=>void copy()} aria-label={`${label} 제목 복사`}>복사</button><small role="status">{notice}</small></div>;
+}
+// 소재 1개당 홈판 후킹형 제목 20개. 검색형은 없다 — 홈판은 제목이 멈추게 해야 한다.
+function TitleList({titles,editorTitle}:{titles:string[];editorTitle:string}) {
+ const [open,setOpen]=useState(false);
+ const [notice,setNotice]=useState('');
+ const shown=open?titles:titles.slice(0,5);
+ const copyAll=async()=>{try {await navigator.clipboard.writeText(titles.join('\n'));setNotice(`${titles.length}개 복사됨`);} catch {setNotice('제목을 선택해 복사해 주세요');}};
+ return <div className="hfb-title-box">
+  <div className="hfb-title-head"><h4>홈판 후킹형 제목 {titles.length>0?<span>{titles.length}개</span>:null}</h4>{titles.length>0&&<><button type="button" onClick={()=>void copyAll()}>전체 복사</button><small role="status">{notice}</small></>}</div>
+  {editorTitle&&<TitleRow label="편집자 제목" text={editorTitle} editor/>}
+  {titles.length===0&&!editorTitle&&<p className="hfb-title-empty">제목 준비 중 — 다음 회차에 붙습니다.</p>}
+  {shown.map((text,i)=><TitleRow key={i} label={`${i+1}`} text={text}/>)}
+  {titles.length>5&&<button type="button" className="hfb-title-more" onClick={()=>setOpen(v=>!v)} aria-expanded={open}>{open?'접기':`나머지 ${titles.length-5}개 더 보기`}</button>}
+  {titles.length>0&&<p className="hfb-caption">따옴표로 시작하는 제목은 독자의 반응·상황을 표현한 초안입니다. 실제 발언 인용 여부는 원문에서 확인해 주세요.</p>}
+ </div>;
 }
 function Points({title,items,kind}:{title:string;items:string[];kind:string}) {return <div className={`hfb-points ${kind}`}><h4>{title}</h4>{items.length?<ul>{items.map((text,i)=><li key={i}>{text}</li>)}</ul>:<p>원출처 확인 후 보완해 주세요.</p>}</div>;}
 export default function HomefeedBenchmarkCard({candidate:c}:{candidate:BenchmarkCandidate}) {
@@ -16,7 +31,7 @@ export default function HomefeedBenchmarkCard({candidate:c}:{candidate:Benchmark
   <p className="hfb-summary">{c.summary||'원문을 확인한 뒤 사건 내용을 정리해 주세요.'}</p>
   {c.summaryAttribution&&<p className="hfb-attribution">{c.summaryAttribution}</p>}
   {c.why.length>0&&<div className="hfb-why"><span>검토 이유</span><ul>{c.why.map((reason,i)=><li key={i}>{reason}</li>)}</ul></div>}
-  <div className="hfb-title-box"><h4>제목 후보</h4><TitleRow label="네이버 검색형" text={c.seoTitle}/><TitleRow label="홈판 후킹형" text={c.homeTitle}/><p className="hfb-caption">따옴표로 시작하는 제목은 독자의 질문·상황을 표현한 초안입니다. 실제 발언 인용 여부는 원문에서 확인해 주세요.</p></div>
+  <TitleList titles={c.homeTitles} editorTitle={c.homeTitle}/>
   <div className="hfb-direction"><h4>이렇게 쓰세요</h4><p>{c.writingDirection||'작성 방향은 원출처 확인 후 정해 주세요.'}</p></div>
   <div className="hfb-writing-grid"><Points title="반드시 들어갈 내용" items={c.mustInclude} kind="include"/><Points title="넣지 않을 내용" items={c.mustAvoid} kind="avoid"/></div>
   {c.verificationNeeded.length>0&&<div className="hfb-verify"><b>작성 전 확인</b> {c.verificationNeeded.join(' · ')}</div>}

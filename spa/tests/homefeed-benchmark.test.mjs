@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { normalizeBenchmarkBoard, benchmarkView, filterBenchmarks, metricText, safeBenchmarkUrl } from '../src/lib/homefeedBenchmarkModel.mjs';
 const at = '2026-09-28T14:00:00Z';
-const candidate = (more = {}) => ({ id:'a', keyword:'장기전세', title:'장기전세 만기', category:'생활경제', status:'review-now', recommended:true, priority:10, publishedAt:at, capturedAt:at, why:['독자의 현재 질문'], seoTitle:'검색 제목', homeTitle:'홈판 제목', writingDirection:'조건 비교', mustInclude:['적용 조건'], mustAvoid:['보장 표현'], sources:[{id:'s',name:'공식 안내',url:'https://example.com/a'}], ...more });
+const candidate = (more = {}) => ({ id:'a', keyword:'장기전세', title:'장기전세 만기', category:'생활경제', status:'review-now', recommended:true, priority:10, publishedAt:at, capturedAt:at, why:['독자의 현재 질문'], homeTitles:['홈판 제목 하나','홈판 제목 둘'], writingDirection:'조건 비교', mustInclude:['적용 조건'], mustAvoid:['보장 표현'], sources:[{id:'s',name:'공식 안내',url:'https://example.com/a'}], ...more });
 const board = (more = {}) => ({schemaVersion:1,generatedAt:at,attemptedAt:at,status:'partial',sources:[{id:'s',name:'채널',url:'https://example.com',status:'ok',postCount:2,capturedAt:at}],candidates:[candidate()],...more});
 test('invalid schema and missing collection date never become a fresh success',()=>{
  assert.throws(()=>normalizeBenchmarkBoard({}),/형식/);
@@ -23,12 +23,21 @@ test('links reject unsafe and embedded credential schemes',()=>{
 test('stars require complete reviewed writing materials and current board',()=>{
  const data=normalizeBenchmarkBoard(board());
  assert.equal(benchmarkView(data,Date.parse(at)).candidates[0].recommended,true);
- for(const more of [{why:[]},{status:'verify'},{sources:[]},{writingDirection:''}]){
+ for(const more of [{why:[]},{status:'verify'},{sources:[]},{writingDirection:''},{homeTitles:[]}]){
   assert.equal(benchmarkView(normalizeBenchmarkBoard(board({candidates:[candidate(more)]})),Date.parse(at)).candidates[0].recommended,false);
  }
+ // 편집자가 손으로 고른 homeTitle 한 줄만 있어도 제목 요건은 채운다.
+ assert.equal(benchmarkView(normalizeBenchmarkBoard(board({candidates:[candidate({homeTitles:[],homeTitle:'편집자 제목'})]})),Date.parse(at)).candidates[0].recommended,true);
  const stale=benchmarkView(data,Date.parse(at)+48*3600000);
  assert.equal(stale.stale,true); assert.equal(stale.candidates[0].recommended,false); assert.equal(stale.candidates[0].status,'stale');
  assert.equal(data.candidates[0].status,'review-now');
+});
+test('home titles are capped at twenty strings and the retired search title is dropped',()=>{
+ const raw=candidate({homeTitles:[...Array.from({length:25},(_,i)=>`제목 ${i}`),42,''],seoTitle:'검색 제목'});
+ const item=normalizeBenchmarkBoard(board({candidates:[raw]})).candidates[0];
+ assert.equal(item.homeTitles.length,20); assert.equal(item.homeTitles[0],'제목 0');
+ assert.equal('seoTitle' in item,false);
+ assert.deepEqual(normalizeBenchmarkBoard(board({candidates:[candidate({homeTitles:'아님'})]})).candidates[0].homeTitles,[]);
 });
 test('invalid and old candidate timestamps cannot stay write-now',()=>{
  for(const more of [{capturedAt:'bad'},{capturedAt:'2026-09-20T00:00:00Z'}]){
