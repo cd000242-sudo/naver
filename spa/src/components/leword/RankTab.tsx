@@ -979,6 +979,30 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                             );
                         })}
                     </div>
+                    {/*
+                      * 통합검색 구획 배치(사장님 지시 2026-09-30 "배치순서를 보여줫으면좋겠어
+                      * 예를 들면 AI 답변 뉴스 지식인 블로그 카페"). 순위를 잰 그 HTML 에서
+                      * 위→아래 순서로 읽은 것이다. 없으면 못 읽은 것이지 "구획 없음"이 아니다.
+                      */}
+                    {(() => {
+                        const all = tabResult.tabs.all;
+                        const sections = all && all.sectionMarkerVersion === 3 && Array.isArray(all.sections) ? all.sections : null;
+                        return (
+                            <div className="lw-serp-order" title="네이버 통합검색에 뜨는 구획을 위에서 아래 순서로 잰 것">
+                                <b>통합검색 배치 (위→아래)</b>
+                                {sections === null
+                                    ? <em>못 읽음</em>
+                                    : sections.length === 0
+                                        ? <em>구획 없음</em>
+                                        : sections.map((label, index) => (
+                                            <span key={label} style={{ display: 'contents' }}>
+                                                {index > 0 && <em>→</em>}
+                                                <i className={label === 'AI브리핑' ? 'ai' : ''}>{label}</i>
+                                            </span>
+                                        ))}
+                            </div>
+                        );
+                    })()}
 
                     {/*
                       * 후보를 **전부** 보여 준다(사장님 지시 2026-08-23:
@@ -1005,10 +1029,14 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                             <th scope="col">검색어</th>
                                             <th scope="col">월 검색량</th>
                                             {TAB_META.map((tab) => <th key={tab.id} scope="col">{tab.label}</th>)}
+                                            <th scope="col" title="네이버 통합검색에 뜨는 구획을 위에서 아래 순서로 잰 것">배치 순서 (위→아래)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {tabResult.candidates.map((cand) => (
+                                        {tabResult.candidates.map((cand) => {
+                                            const all = cand.tabs?.all;
+                                            const sections = all && all.sectionMarkerVersion === 3 && Array.isArray(all.sections) ? all.sections : null;
+                                            return (
                                             <tr key={cand.keyword} className={cand.bestRank !== null ? 'lw-cand-hit' : ''}>
                                                 <td>
                                                     <a href={naverSearchUrl(cand.keyword)} target="_blank" rel="noreferrer">
@@ -1026,8 +1054,21 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                                         </td>
                                                     );
                                                 })}
+                                                <td className="lw-serp-order-cell">
+                                                    {sections === null
+                                                        ? '못 읽음'
+                                                        : sections.length === 0
+                                                            ? '구획 없음'
+                                                            : sections.map((label, index) => (
+                                                                <span key={label}>
+                                                                    {index > 0 ? ' → ' : ''}
+                                                                    <i className={label === 'AI브리핑' ? 'ai' : ''}>{label}</i>
+                                                                </span>
+                                                            ))}
+                                                </td>
                                             </tr>
-                                        ))}
+                                            );
+                                        })}
                                     </tbody>
                                 </table>
                             </div>

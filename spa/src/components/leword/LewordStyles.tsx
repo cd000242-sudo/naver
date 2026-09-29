@@ -1940,6 +1940,14 @@ function LewordStyles() {
             .lw-tabrank-cands-head span { color: #34d399; }
             .lw-cand-hit { background: rgba(52,211,153,.06); }
             .lw-cand-rank { color: #34d399; }
+            /* 통합검색 구획 배치(위→아래). AI브리핑만 보라 — 그 구획이 클릭을 가져간다. */
+            .lw-serp-order { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px; font-size: 12px; color: #8a94a6; }
+            .lw-serp-order b { color: #ebf2fa; font-weight: 600; margin-right: 4px; }
+            .lw-serp-order i { padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); color: #cbd5e1; font-style: normal; white-space: nowrap; }
+            .lw-serp-order i.ai { border-color: rgba(168,85,247,.5); background: rgba(168,85,247,.18); color: #d8b4fe; }
+            .lw-serp-order em { color: #64748b; font-style: normal; }
+            .lw-serp-order-cell { white-space: nowrap; font-size: 12px; color: #cbd5e1; }
+            .lw-serp-order-cell i.ai { color: #d8b4fe; font-style: normal; }
             .lw-branch-new { margin-left: 7px; padding: 1px 7px; border: 1px solid rgba(167,139,250,.4); border-radius: 999px; color: #c4b5fd; font-size: 11px; }
             /* 확장 표의 구역 제목 줄 — 층(주제 그대로 → 새 가지)이 바뀌는 자리. */
             .lw-tier-row td { padding: 12px 10px 6px; color: #e2e8f0; font-weight: 700; font-size: 13px; border-top: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.025); }

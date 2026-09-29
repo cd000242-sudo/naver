@@ -310,7 +310,18 @@ export type LiveTrendingVideo = {
  * 실측: 같은 글이 블로그탭 3위인데 통합검색에는 없다.
  * null 은 "못 쟀다" — 0위나 '없음'과 다르다.
  */
-export type TabRank = { rank: number | null; sampled: number } | null;
+/*
+ * 통합검색(all)에는 구획 배치가 함께 온다(사장님 지시 2026-09-30 "배치순서를
+ * 보여줫으면좋겠어 예를 들면 AI 답변 뉴스 지식인 블로그 카페"). 위에서 아래 순서다.
+ * 없으면 못 읽은 것이다(차단·짧은 응답) — "구획 없음"이 아니다.
+ */
+export type TabRank = {
+    rank: number | null;
+    sampled: number;
+    sections?: string[];
+    hasAiBriefing?: boolean;
+    sectionMarkerVersion?: number;
+} | null;
 /**
  * 검색어를 비우면 서버가 그 글의 제목을 읽고 검색어를 **찾아서** 잰다
  * (사장님 지적 2026-08-23 "주소만 넣어도 분석을 해 줘야 되는 거 아니니?").
