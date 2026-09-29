@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import LicenseGate, { isUnlocked } from './LicenseGate';
 import { naverSearchUrl } from './preemptionMeta';
 import { TabIntro } from './LewordShared';
-import { BoardFreshness } from './BoardFreshness';
+import { formatKst, formatMinutes, judgeFreshness } from '../../lib/boardFreshness';
 import { moneyTitle, won, type MoneyBid } from './moneyBid';
 import { FREE_PICK_ROWS, pickCountText, pickFreshnessLabel, summarizePickTopic, visiblePickRows } from '../../lib/todayPicksModel';
 
@@ -17,7 +17,13 @@ import { FREE_PICK_ROWS, pickCountText, pickFreshnessLabel, summarizePickTopic, 
  * 여기서는 읽기만 한다. 수치는 전부 실측이고 황금비는 그 나눗셈이다. 자리(SERP)는 안 쟀다.
  *
  * 무료 건수는 실검 틈새와 같은 3건(주제당)이다.
+ *
+ * 머리말은 한 줄이다(사장님 2026-09-29 "위에 너무 설명이 많아서 지저분하거든 하나로 요약"). 회차·판 시각·
+ * 전체/황금·새 추천/재추천을 한 줄에, 출처·갱신 시각·황금 기준은 출처 줄에. 늦고 있을 때만 한 줄 더 적는다
+ * (2026-09-12 "업데이트 안 됐다고 사람들이 물어보잖아" — 그 약속은 지킨다).
  */
+const ROUNDS = [{ hour: 6, minute: 30 }, { hour: 13, minute: 30 }, { hour: 19, minute: 30 }];
+const SOURCE_LINE = '검색량·문서수·입찰가 모두 실측 · 황금 비율 = 월 검색량 ÷ 블로그 문서수 · 매일 06:30 / 13:30 / 19:30 KST 갱신 · 상위 노출·수익을 보장하지 않습니다';
 
 interface PickRow {
     keyword: string;
@@ -59,15 +65,17 @@ interface TodayPicks {
 
 const num = (value: number) => value.toLocaleString('ko-KR');
 const ratioText = (ratio: number) => (ratio >= 100 ? Math.round(ratio).toLocaleString('ko-KR') : ratio >= 10 ? ratio.toFixed(1) : ratio.toFixed(2));
-const SOURCE_LABEL: Record<string, string> = { hint: '힌트', biztp: '업종', month: '월', event: '시즌', section: '블로그섹션' };
+const SOURCE_LABEL: Record<string, string> = { hint: '힌트', biztp: '업종', month: '월', event: '시즌', section: '블로그섹션', shopping: '쇼핑', preemption: '황금 보드' };
 const kst = (iso: string) => new Date(iso).toLocaleString('ko-KR', {
     timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit',
 });
 
 export interface PicksTopicMeta { topic: string; golden: number; rowCount: number }
 
-export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicChange }: {
+export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicChange, nowMs }: {
     onAnalyze?: (keyword: string) => void;
+    /** 시험용 — 회차가 늦었는지 가를 '지금'. 비우면 실제 시각. */
+    nowMs?: number;
     /** 사이드 메뉴 하위 항목이 고른 주제 — 없으면 첫 주제 */
     topic?: string | null;
     /** 읽어 온 주제 목록과 전체·황금 수를 사이드 메뉴로 올려보낸다 */
@@ -97,6 +105,16 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
     const rows = active ? visiblePickRows(active.rows, unlocked) : [];
     const activeSummary = active ? summarizePickTopic(active, minRatio, data?.keep) : null;
     const shown = unlocked ? total : topics.reduce((sum, topic) => sum + Math.min(topic.rows.length, FREE_PICK_ROWS), 0);
+    const summary = data
+        ? [
+            data.round ? `${data.round.label} 회차` : '',
+            `${kst(data.builtAt)} 판`,
+            `전체 ${num(total)}개 중 황금 ${num(golden)}개`,
+            data.novelty ? `새 추천 ${num(data.novelty.newCount)} · 재추천 ${num(data.novelty.repeatedCount)}` : '',
+            `주제별 ${data.keep ?? 30}개 목표`,
+        ].filter(Boolean).join(' · ')
+        : `주제별 30개 목표 · 황금 비율을 앞에 두고 추천`;
+    const freshness = judgeFreshness(ROUNDS, data?.builtAt ?? null, nowMs ?? Date.now());
 
     useEffect(() => {
         if (onTopics && topics.length > 0) onTopics(topics.map((item) => ({ topic: item.topic, golden: goldenOf(item), rowCount: item.rows.length })));
@@ -106,31 +124,12 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
     return (
         <section className="lw-picks lw-picks-tab" aria-labelledby="lw-picks-title">
             <h2 id="lw-picks-title" hidden>오늘의 네이버 추천키워드</h2>
-            <TabIntro
-                title="오늘의 네이버 추천키워드"
-                desc={`주제별 ${data?.keep ?? 30}개 목표 · 황금 비율·시즌·일반 후보를 구분해 추천${data ? ` · ${kst(data.builtAt)} 선정 · 전체 ${num(total)}개 중 황금 ${num(golden)}개` : ''}`}
-                source="검색광고 검색량 실측 · 블로그 문서수 실측 · 광고 입찰가 실측 · 오전 06:30 / 오후 13:30 / 저녁 19:30 KST 갱신"
-            />
+            <TabIntro title="오늘의 네이버 추천키워드" desc={summary} source={SOURCE_LINE} />
 
-            <BoardFreshness
-                cadence="매일 오전·오후·저녁 세 번"
-                rounds={[{ hour: 6, minute: 30 }, { hour: 13, minute: 30 }, { hour: 19, minute: 30 }]}
-                lastBuiltAt={data?.builtAt ?? null}
-            />
-
-            {data?.round && (
-                <div className="lw-note" aria-label="추천 회차 정보" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', alignItems: 'center' }}>
-                    <strong>{data.round.label} 추천 · {kst(data.round.scheduledAt)} 회차</strong>
-                    {data.changes && <span>직전 대비 신규 {num(data.changes.added)} · 수치 변경 {num(data.changes.changed)} · 유지 {num(data.changes.retained)}</span>}
-                    <span>24시간 이내 문서수 실측은 재사용합니다. 월 검색량은 하루 동안 급등한 수치가 아닙니다.</span>
-                </div>
-            )}
-
-            {data?.novelty && (
-                <div className="lw-note" aria-label="최근 추천 중복 안내">
-                    최근 {data.novelty.windowDays}일 이력 기준 · 새 추천 {num(data.novelty.newCount)}개 · 재추천 {num(data.novelty.repeatedCount)}개.
-                    {' '}새 후보를 우선하며, 조건에 맞는 새 후보가 부족하면 기존 키워드가 다시 포함될 수 있습니다.
-                </div>
+            {data && freshness.isLate && freshness.dueAt !== null && (
+                <p className="lw-note lw-note-limit" aria-label="회차 지연 안내">
+                    {formatKst(freshness.dueAt)} 회차가 예정보다 {formatMinutes(freshness.lateMinutes)} 늦고 있습니다 — 예약이 늦게 도는 날이 있어 자동으로 다시 돌립니다. 그동안은 위 판이 가장 최근 것입니다.
+                </p>
             )}
 
             {error && <p className="lw-note lw-note-error">추천키워드를 못 읽었습니다 — {error}</p>}
@@ -158,9 +157,8 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                 <div className="lw-picks-panel" role="tabpanel" aria-label={active.topic}>
                     <div className="lw-picks-panel-head">
                         <strong>{active.topic}</strong>
-                        <span>{activeSummary && pickCountText(activeSummary)}</span>
+                        <span>{activeSummary && `${pickCountText(activeSummary)}${activeSummary.shortfall > 0 ? ` · 목표보다 ${activeSummary.shortfall}개 적습니다` : ''}`}</span>
                     </div>
-                    <p className="lw-note">황금 비율은 월 검색량 ÷ 블로그 문서수 {minRatio} 이상입니다. 일반 후보는 이 기준에 미달하며, 상위 노출이나 수익을 보장하지 않습니다.{activeSummary && activeSummary.shortfall > 0 ? ` 현재 검증된 후보가 목표보다 ${activeSummary.shortfall}개 적습니다.` : ''}</p>
                     <div className="lw-picks-scroll">
                         <table className="lw-picks-table">
                             <thead>
@@ -168,7 +166,7 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
                                     <th>키워드</th>
                                     <th className="n">월 검색량</th>
                                     <th className="n">블로그 문서수</th>
-                                    <th className="n">황금비</th>
+                                    <th className="n" title={`월 검색량 ÷ 블로그 문서수 — ${minRatio} 이상이면 황금 비율. 일반 후보는 이 기준에 미달합니다`}>황금비</th>
                                     <th className="n">광고</th>
                                     <th className="n" title="네이버 검색광고 실측 — 이 검색어 광고를 3위에 걸려면 클릭 한 번에 거는 값">광고 3위 입찰가</th>
                                     <th>출처</th>
