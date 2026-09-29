@@ -299,7 +299,7 @@ export default function HomefeedTab() {
         <HomefeedBenchmarkStyles />
         <nav className="hfb-mode" aria-label="홈판 보기">
             <button type="button" aria-pressed={mode === 'benchmarks'} onClick={() => setMode('benchmarks')}>채널 벤치마크 추천</button>
-            <button type="button" aria-pressed={mode === 'tools'} onClick={() => setMode('tools')}>기존 신호 · 작성 도구</button>
+            <button type="button" className="tools" aria-pressed={mode === 'tools'} onClick={() => setMode('tools')}>기존 신호 · 작성 도구</button>
         </nav>
         {mode === 'benchmarks' ? <HomefeedBenchmarkBoard /> : <LegacyHomefeedTab />}
     </>;
