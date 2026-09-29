@@ -81,8 +81,10 @@ describe('AI mark 발행 루프 — source regression', () => {
   it('판정은 data-img-ai 1차 + provider 허용목록(isAiGeneratedImage) 2차다', () => {
     const loop = step4Block();
     expect(loop).toMatch(/getAttribute\(['"]data-img-ai['"]\)/);
-    expect(loop).toMatch(/isAiGeneratedImage\(/);
-    expect(loop).toMatch(/attrs\.ai\s*===\s*'1'/);
+    // [2026-09-29] The allowlist fallback now runs inside resolveAiMarkTarget (aiMarkCardOverride.test.ts).
+    expect(loop).toMatch(/resolveAiMarkTarget\(\{/);
+    expect(loop).toMatch(/attrAi:\s*attrs\.ai/);
+    expect(loop).toMatch(/attrProvider:\s*attrs\.provider/);
   });
 
   it('비AI 판정은 continue로 스킵한다 (opt-in)', () => {
@@ -99,7 +101,9 @@ describe('AI mark 발행 루프 — source regression', () => {
   it('"AI 활용 체크하기" 옵트인은 config.aiMarkAllImages 로 발행 루프까지 배선된다', () => {
     const loop = step4Block();
     expect(loop).toMatch(/aiMarkAllImages === true/);
-    expect(loop).toMatch(/const isAiTarget = aiMarkAllImages\s*\|\|/);
+    // [2026-09-29] Decision moved into resolveAiMarkTarget so the per-heading card toggle
+    // can outrank the global checkbox (see aiMarkCardOverride.test.ts for the precedence).
+    expect(loop).toMatch(/const isAiTarget = resolveAiMarkTarget\(\{\s*\n\s*aiMarkAllImages,/);
     expect(readSrc('configManager.ts')).toMatch(/aiMarkAllImages\?: boolean/);
     expect(readSrc('renderer/modules/imageManagementTab.ts')).toMatch(/getElementById\('image-ai-mark-all'\)/);
     expect(readSrc('renderer/modules/imageManagementTab.ts')).toMatch(/saveConfig\?\.\(\{ aiMarkAllImages: aiMarkAllCheckbox\.checked \}\)/);

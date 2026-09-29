@@ -33,7 +33,7 @@ type AutomationPayload = {
   lines?: string[];
   selectedHeadings?: string[];
   structuredContent?: StructuredContent;
-  generatedImages?: Array<{ heading: string; filePath: string; provider: string; alt?: string; caption?: string; blobId?: string }>;
+  generatedImages?: Array<{ heading: string; filePath: string; provider: string; alt?: string; caption?: string; blobId?: string; aiMarkOverride?: string }>;
   hashtags?: string[];
   generator?: 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent-codex' | 'agent-claude' | 'agent-gemini';
   keywords?: string[];

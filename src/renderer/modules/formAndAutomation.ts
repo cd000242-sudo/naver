@@ -302,6 +302,7 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
           originalIndex: img.originalIndex, // ✅ [2026-04-04 FIX] 소제목-이미지 매칭용 인덱스 보존
           headingIndex: img.headingIndex, // ✅ [2026-04-04 FIX] 소제목 인덱스 보존
           isIntro: img.isIntro || false,
+          aiMarkOverride: img.aiMarkOverride, // [2026-09-29] per-heading AI 활용 card toggle
         }))
         .filter((img: any) => Boolean(img?.heading) && Boolean(img?.filePath));
 

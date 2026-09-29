@@ -20,7 +20,7 @@ describe('image provenance ledger', () => {
     recordImageProvenance(host, 0, { provider: 'openai-image' });
     recordImageProvenance(host, 1, { source: 'issue-endgame', isCollected: true, provider: 'openai-image' });
     recordImageProvenance(host, 2, undefined);
-    expect(readImageProvenance(host, 0)).toEqual({ ai: '1', provider: 'openai-image' });
+    expect(readImageProvenance(host, 0)).toEqual({ ai: '1', provider: 'openai-image', override: '' });
     expect(readImageProvenance(host, 1)?.ai).toBe('0'); // 수집 이미지는 provider 가 AI 스러워도 0
     expect(readImageProvenance(host, 2)?.ai).toBe('0');
     expect(readImageProvenance(host, 3)).toBeUndefined();
@@ -63,7 +63,8 @@ describe('wiring — source regression', () => {
     const end = automation.indexOf('} catch (aiMarkError)', start);
     const loop = automation.slice(start, end);
     expect(loop).toMatch(/readImageProvenance\(this, i\)/);
-    expect(loop).toMatch(/ledger\?\.ai === '1'/);
+    // [2026-09-29] ledger is consumed by resolveAiMarkTarget (ledger.ai / ledger.override).
+    expect(loop).toMatch(/resolveAiMarkTarget\(\{[\s\S]{0,120}?ledger,/);
     expect(automation).toMatch(/this\._runStartMs = Date\.now\(\);\r?\n\s*resetImageProvenanceLedger\(this\);/);
   });
 });

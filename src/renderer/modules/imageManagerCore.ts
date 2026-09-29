@@ -79,6 +79,10 @@ const ImageManager = {
   // 소제목별 이미지 매핑 (heading title -> image array) - ✅ 여러 이미지 지원
   imageMap: new Map<string, any[]>(),
   unsetHeadings: new Set<string>(),
+  // [2026-09-29] Per-heading "AI 활용" card toggle: '' auto / 'on' / 'off'.
+  // Stamped onto every stored image of that heading so the publish payload
+  // (getAllImages → formAndAutomation → provenance ledger) carries it as-is.
+  aiMarkOverrides: new Map<string, string>(),
 
   // 모든 소제목 목록
   headings: [] as any[],
@@ -90,6 +94,7 @@ const ImageManager = {
     console.log('[ImageManager] 모든 데이터 초기화');
     this.imageMap.clear();
     this.unsetHeadings.clear();
+    this.aiMarkOverrides.clear();
     this.headings = [];
     try {
       (window as any).generatedImages = [];
@@ -290,6 +295,7 @@ const ImageManager = {
       images.push({
         ...entry.image,
         heading: titleKey,
+        aiMarkOverride: this._inheritAiMarkOverride(titleKey, entry.image),
         // [R4-2] Dual identity at write time — the remap check needs both.
         normKey: entry.image?.normKey || normalizeHeadingKeyForVideoCache(titleKey),
         headingIndex: typeof entry.image?.headingIndex === 'number'
@@ -320,6 +326,7 @@ const ImageManager = {
     images.push({
       ...image,
       heading: titleKey,
+      aiMarkOverride: this._inheritAiMarkOverride(titleKey, image),
       // [R4-2] Dual identity at write time — the remap check needs both.
       normKey: image?.normKey || normalizeHeadingKeyForVideoCache(titleKey),
       headingIndex: typeof image?.headingIndex === 'number'
@@ -382,6 +389,7 @@ const ImageManager = {
     const newImage = {
       ...image,
       heading: titleKey,
+      aiMarkOverride: this._inheritAiMarkOverride(titleKey, image),
       timestamp: Date.now()
     };
 
@@ -493,6 +501,44 @@ const ImageManager = {
   },
 
   /**
+   * [2026-09-29] Override inherited by a newly stored image: the heading's
+   * card choice wins, otherwise a value already carried by the image.
+   */
+  _inheritAiMarkOverride(titleKey: string, image: any): string {
+    const fromMap = this.aiMarkOverrides.get(titleKey);
+    if (fromMap !== undefined) return fromMap;
+    const v = String(image?.aiMarkOverride || '');
+    return v === 'on' || v === 'off' ? v : '';
+  },
+
+  /**
+   * [2026-09-29] Current card choice for a heading: '' auto / 'on' / 'off'.
+   */
+  getAiMarkOverride(headingTitle: string): string {
+    const titleKey = this.resolveHeadingKey(headingTitle);
+    const fromMap = this.aiMarkOverrides.get(titleKey);
+    if (fromMap !== undefined) return fromMap;
+    const first = (this.imageMap.get(titleKey) || [])[0];
+    const v = String(first?.aiMarkOverride || '');
+    return v === 'on' || v === 'off' ? v : '';
+  },
+
+  /**
+   * [2026-09-29] Set the card choice and re-stamp every stored image of the
+   * heading so getAllImages() carries it into the publish payload.
+   */
+  setAiMarkOverride(headingTitle: string, override: string): void {
+    const titleKey = this.resolveHeadingKey(headingTitle);
+    const value = override === 'on' || override === 'off' ? override : '';
+    this.aiMarkOverrides.set(titleKey, value);
+    const images = this.imageMap.get(titleKey);
+    if (images && images.length > 0) {
+      this.imageMap.set(titleKey, images.map((img: any) => ({ ...img, aiMarkOverride: value })));
+    }
+    this.syncGeneratedImagesArray();
+  },
+
+  /**
    * 모든 이미지 가져오기 (배열 - 모든 소제목의 모든 이미지)
    */
   getAllImages(): any[] {
@@ -534,6 +580,7 @@ const ImageManager = {
     console.log('[ImageManager] 전체 초기화');
     this.imageMap.clear();
     this.unsetHeadings.clear();
+    this.aiMarkOverrides.clear();
     this.headings = [];
     // ✅ [2026-02-12 P0 FIX] 전역변수도 함께 초기화
     // ✅ [2026-03-29 FIX] currentStructuredContent도 초기화 (clearAll과 동일 수준)

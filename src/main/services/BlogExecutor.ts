@@ -125,6 +125,7 @@ interface ProcessedImage {
     headingIndex?: number; // ✅ [2026-04-04 FIX] 소제목 인덱스 보존
     isThumbnail: boolean;
     isIntro: boolean;
+    aiMarkOverride?: string; // [2026-09-29] per-heading AI 활용 card toggle ('' | 'on' | 'off')
 }
 
 // 전역 의존성 저장소 (main.ts에서 주입)
@@ -405,6 +406,7 @@ export async function processImages(
                         headingIndex: (image as any).headingIndex, // ✅ [2026-04-04 FIX] 소제목 인덱스 보존
                         isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
                         isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
+                        aiMarkOverride: (image as any).aiMarkOverride, // [2026-09-29] card toggle 자동/켬/끔
                     });
 
                     sendLog(`✅ base64 이미지 저장: ${filename}`);
@@ -430,6 +432,7 @@ export async function processImages(
                 headingIndex: (image as any).headingIndex, // ✅ [2026-04-04 FIX] 소제목 인덱스 보존
                 isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
                 isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
+                aiMarkOverride: (image as any).aiMarkOverride, // [2026-09-29] card toggle 자동/켬/끔
             });
             continue;
         }
@@ -470,6 +473,7 @@ export async function processImages(
                 headingIndex: (image as any).headingIndex, // ✅ [2026-04-04 FIX] 소제목 인덱스 보존
                 isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
                 isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
+                aiMarkOverride: (image as any).aiMarkOverride, // [2026-09-29] card toggle 자동/켬/끔
             });
 
             sendLog(`✅ 이미지 복사: ${filename}`);
@@ -486,6 +490,7 @@ export async function processImages(
                 headingIndex: (image as any).headingIndex,
                 isThumbnail: image.isThumbnail || false,
                 isIntro: image.isIntro || false,
+                aiMarkOverride: (image as any).aiMarkOverride, // [2026-09-29] card toggle 자동/켬/끔
             });
         }
     }

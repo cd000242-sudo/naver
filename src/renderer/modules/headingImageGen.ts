@@ -33,6 +33,8 @@ declare const ImageManager: {
   syncAllPreviews: () => void;
   syncGeneratedImagesArray: () => void;
   setPrimaryImageByKey: (headingTitle: string, imageKey: string) => void;
+  getAiMarkOverride: (headingTitle: string) => string;
+  setAiMarkOverride: (headingTitle: string, override: string) => void;
   imageMap: Map<string, any[]>;
   unsetHeadings: Set<string>;
 };
@@ -3655,6 +3657,21 @@ export async function autoAnalyzeHeadings(
   }
 }
 
+// [2026-09-29] Per-heading "AI 활용" card toggle. Cycle and labels are kept
+// inline (renderer bundle must not import src/automation/imageProvenance).
+const AI_MARK_OVERRIDE_CYCLE: readonly string[] = ['', 'on', 'off'];
+const AI_MARK_OVERRIDE_LABELS: Record<string, string> = { '': '자동', on: '켬', off: '끔' };
+function nextAiMarkOverride(current: string): string {
+  const idx = AI_MARK_OVERRIDE_CYCLE.indexOf(current);
+  return AI_MARK_OVERRIDE_CYCLE[(idx + 1) % AI_MARK_OVERRIDE_CYCLE.length];
+}
+function aiMarkOverrideLabel(value: string): string {
+  return `🤖 AI 활용: ${AI_MARK_OVERRIDE_LABELS[value] || AI_MARK_OVERRIDE_LABELS['']}`;
+}
+function currentAiMarkOverride(headingTitle: string): string {
+  return typeof ImageManager?.getAiMarkOverride === 'function' ? ImageManager.getAiMarkOverride(headingTitle) : '';
+}
+
 // 이미지 헤딩 표시
 export function displayImageHeadingsWithPrompts(headings: any[]): void {
   const promptsContainer = document.getElementById('prompts-container') as HTMLDivElement;
@@ -3786,6 +3803,9 @@ export function displayImageHeadingsWithPrompts(headings: any[]): void {
           </button>
           <button type="button" class="clear-heading-images-btn" data-heading-index="${index}" style="padding: 0.4rem 0.75rem; background: var(--bg-tertiary); color: var(--text-muted); border: 1px solid var(--border-light); border-radius: 6px; font-size: 0.8rem; cursor: pointer;" title="모든 이미지 제거">
             🗑️ 전체삭제
+          </button>
+          <button type="button" class="ai-mark-toggle-btn" data-heading-index="${index}" style="padding: 0.4rem 0.75rem; background: var(--bg-tertiary); color: var(--text-muted); border: 1px solid var(--border-light); border-radius: 6px; font-size: 0.8rem; cursor: pointer;" title="이 소제목 이미지의 AI 활용 마크: 자동(전역 설정·출처 따름) → 켬 → 끔. 직접 찍은 사진을 넣었다면 끔">
+            ${aiMarkOverrideLabel(currentAiMarkOverride(heading.title || ''))}
           </button>
         </div>
       </div>
@@ -4398,6 +4418,21 @@ export function initUnifiedImageEventHandlers(): void {
       if (confirm(`"${headingTitle}" 소제목의 모든 이미지를 삭제하시겠습니까?`)) {
         clearHeadingImages(headingIndex, headingTitle);
       }
+      return;
+    }
+
+    // [2026-09-29] 2-5b. AI 활용 카드 토글 (자동 → 켬 → 끔 → 자동)
+    if (target.classList.contains('ai-mark-toggle-btn') || target.closest('.ai-mark-toggle-btn')) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const btn = (target.classList.contains('ai-mark-toggle-btn') ? target : target.closest('.ai-mark-toggle-btn')) as HTMLElement;
+      const headingIndex = parseInt(btn?.dataset.headingIndex || '0');
+      const headingTitle = String((window as any)._headingTitles?.[headingIndex] || '').trim() || getHeadingTitleByIndex(headingIndex);
+      const next = nextAiMarkOverride(currentAiMarkOverride(headingTitle));
+      ImageManager.setAiMarkOverride(headingTitle, next);
+      btn.textContent = aiMarkOverrideLabel(next);
+      appendLog(`🤖 "${headingTitle}" AI 활용 마크: ${AI_MARK_OVERRIDE_LABELS[next]}${next === '' ? ' (전역 설정·이미지 출처 따름)' : ''}`);
       return;
     }
 

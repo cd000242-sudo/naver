@@ -729,7 +729,7 @@ export async function insertBase64ImageAtCursor(
   filePath: string,
   // [2026-08-17] AI 마크 provenance — 썸네일/배너/표 등 base64 경로도 data-img-ai를
   // 남긴다. meta 미전달 = '0'(비AI) 태깅이라 실사진 오탐은 구조적으로 불가.
-  provenanceMeta?: { provider?: string; source?: string; isCollected?: boolean; aiGenerated?: boolean },
+  provenanceMeta?: { provider?: string; source?: string; isCollected?: boolean; aiGenerated?: boolean; aiMarkOverride?: string },
 ): Promise<void> {
   const frame = (await self.getAttachedFrame());
   const page = self.ensurePage();

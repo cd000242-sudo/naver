@@ -30,11 +30,24 @@ const AI_PROVIDER_PATTERNS = [
   'ai-generated',
 ] as const;
 
+/**
+ * [2026-09-29] Per-heading card toggle "AI 활용: 자동/켬/끔".
+ * '' = auto (provenance decides), 'on' = always mark, 'off' = never mark.
+ * Exists because the global "AI 활용 체크하기" marks every image, which would
+ * AI-mark a real photo the user inserted by hand on one heading.
+ */
+export type AiMarkOverride = '' | 'on' | 'off';
+
+export function normalizeAiMarkOverride(value: unknown): AiMarkOverride {
+  return value === 'on' || value === 'off' ? value : '';
+}
+
 export interface ImageProvenanceMeta {
   provider?: string;
   source?: string;
   isCollected?: boolean;
   aiGenerated?: boolean;
+  aiMarkOverride?: AiMarkOverride | string;
 }
 
 /** true = AI 생성 이미지 (네이버 AI 마크 대상). 불확실하면 항상 false. */
@@ -66,6 +79,29 @@ export function aiMarkAttrValue(meta: ImageProvenanceMeta | undefined | null): '
 export interface ImageProvenanceLedgerEntry {
   readonly ai: '1' | '0';
   readonly provider: string;
+  readonly override: AiMarkOverride;
+}
+
+export interface AiMarkTargetInput {
+  aiMarkAllImages: boolean;
+  ledger: ImageProvenanceLedgerEntry | undefined;
+  attrAi: string;
+  attrProvider: string;
+}
+
+/**
+ * Publish-time decision for one editor image component.
+ * Precedence: card OFF > card ON > global aiMarkAllImages > ledger '1' > DOM attr '1'
+ *             > (no ledger, no attr) provider allowlist. Unknown ⇒ false.
+ */
+export function resolveAiMarkTarget(input: AiMarkTargetInput): boolean {
+  const override = input.ledger?.override || '';
+  if (override === 'off') return false;
+  if (override === 'on') return true;
+  if (input.aiMarkAllImages) return true;
+  if (input.ledger?.ai === '1') return true;
+  if (input.attrAi === '1') return true;
+  return !input.ledger && input.attrAi === '' && isAiGeneratedImage({ provider: input.attrProvider });
 }
 
 const LEDGER_KEY = '__imageProvenanceLedger';
@@ -92,7 +128,11 @@ export function recordImageProvenance(
   if (!Number.isInteger(position) || position < 0) return;
   const ledger = ledgerOf(host);
   if (!ledger) return;
-  ledger.set(position, { ai: aiMarkAttrValue(meta), provider: String(meta?.provider || '') });
+  ledger.set(position, {
+    ai: aiMarkAttrValue(meta),
+    provider: String(meta?.provider || ''),
+    override: normalizeAiMarkOverride(meta?.aiMarkOverride),
+  });
 }
 
 export function readImageProvenance(host: unknown, position: number): ImageProvenanceLedgerEntry | undefined {

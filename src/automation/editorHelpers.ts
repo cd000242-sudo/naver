@@ -1236,6 +1236,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                   provider: firstIntroImage?.provider,
                   source: firstIntroImage?.source,
                   isCollected: firstIntroImage?.isCollected,
+                  aiMarkOverride: firstIntroImage?.aiMarkOverride,
                 });
                 // ✅ [2026-02-26 FIX] 썸네일 삽입 후 에디터 렌더링 확인 (대기 시간 500ms→2000ms + 폴링 검증)
                 await self.delay(2000);

@@ -1454,6 +1454,8 @@ type AutomationImagePayload = {
   provider: string;
   alt?: string;
   caption?: string;
+  // [2026-09-29] Per-heading card toggle ('' | 'on' | 'off'), see imageProvenance.resolveAiMarkTarget
+  aiMarkOverride?: string;
 };
 
 type AutomationRequest = {

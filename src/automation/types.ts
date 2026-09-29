@@ -41,6 +41,8 @@ export interface AutomationImage {
     source?: string;
     isCollected?: boolean;
     aiGenerated?: boolean;
+    // [2026-09-29] per-heading card toggle: '' auto | 'on' | 'off' (imageProvenance.AiMarkOverride)
+    aiMarkOverride?: string;
 }
 
 /**

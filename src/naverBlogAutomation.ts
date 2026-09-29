@@ -24,7 +24,7 @@ import { buildNaverAutomationProfile, hashAutomationAccountId, type NaverAutomat
 import { detectChromeFullVersion } from './automation/chromeVersionDetector.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
 import { performIdleMouseShake } from './automation/humanBehavior.js';
-import { isAiGeneratedImage, readImageProvenance, resetImageProvenanceLedger } from './automation/imageProvenance.js';
+import { readImageProvenance, resetImageProvenanceLedger, resolveAiMarkTarget } from './automation/imageProvenance.js';
 import { disablePlatformWebAuthn } from './automation/webauthnGuard.js';
 // [v2.10.285] 봇 감지 backoff + 로그인 자연 대기 (계정별 자동 보호)
 import { recordBotBackoff, getBotBackoff, isAccountBackedOff, computePostLoginHumanDelayMs } from './utils/botBackoff.js';
@@ -5487,12 +5487,15 @@ export class NaverBlogAutomation {
                   // [2026-09-17] DOM 속성은 업로드 완료 재렌더에서 사라진다(라이브: AI 6장 전부 ai=없음).
                   //   삽입 단계가 같은 판정을 장부(위치=문서 순서)에도 적어 두므로 그것이 1차 근거다.
                   const ledger = readImageProvenance(this, i);
-                  const isAiTarget = aiMarkAllImages
-                    || ledger?.ai === '1'
-                    || attrs.ai === '1'
-                    || (!ledger && attrs.ai === '' && isAiGeneratedImage({ provider: attrs.provider }));
+                  // [2026-09-29] Card toggle (자동/켬/끔) rides in the ledger and outranks the global checkbox.
+                  const isAiTarget = resolveAiMarkTarget({
+                    aiMarkAllImages,
+                    ledger,
+                    attrAi: attrs.ai,
+                    attrProvider: attrs.provider,
+                  });
                   if (!isAiTarget) {
-                    this.log(`   ⏭️ [AI 마크] 비AI 이미지(장부=${ledger ? ledger.ai : '없음'}, ai=${attrs.ai || '없음'}, provider=${ledger?.provider || attrs.provider || '없음'}) → 마크 스킵`);
+                    this.log(`   ⏭️ [AI 마크] 비AI 이미지(장부=${ledger ? ledger.ai : '없음'}, 카드=${ledger?.override || '자동'}, ai=${attrs.ai || '없음'}, provider=${ledger?.provider || attrs.provider || '없음'}) → 마크 스킵`);
                     continue;
                   }
 
@@ -7561,7 +7564,7 @@ export class NaverBlogAutomation {
    */
   private async insertBase64ImageAtCursor(
     filePath: string,
-    provenanceMeta?: { provider?: string; source?: string; isCollected?: boolean; aiGenerated?: boolean },
+    provenanceMeta?: { provider?: string; source?: string; isCollected?: boolean; aiGenerated?: boolean; aiMarkOverride?: string },
   ): Promise<void> {
     return await imageHelpers.insertBase64ImageAtCursor(this, filePath, provenanceMeta);
   }
