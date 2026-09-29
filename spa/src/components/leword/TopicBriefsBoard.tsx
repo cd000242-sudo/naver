@@ -7,10 +7,13 @@ import { normalizeTopicBrief, searchVolumeLabel, briefVolumeLabel, briefVolumeDe
 import './TopicBriefsBoard.css';
 
 type RoundSlot = '아침' | '오후' | '저녁';
-interface BriefRound { slot: RoundSlot; builtAt: string; briefs: unknown[] }
-export interface TopicBriefs { builtAt: string; slot?: RoundSlot; rounds?: BriefRound[]; briefs?: unknown[] }
+// day 는 7일 창고(2026-09-29)부터 적힌다. 없으면 builtAt 의 KST 날짜로 읽는다.
+interface BriefRound { day?: string; slot: RoundSlot; builtAt: string; briefs: unknown[] }
+export interface TopicBriefs { builtAt: string; day?: string; slot?: RoundSlot; shelfDays?: number; rounds?: BriefRound[]; briefs?: unknown[] }
 const SLOT_TIME: Record<RoundSlot, string> = { 아침: '04:23', 오후: '10:23', 저녁: '16:23' };
+const SLOT_ORDER: Record<RoundSlot, number> = { 아침: 0, 오후: 1, 저녁: 2 };
 const FREE_BRIEFS = 3;
+const PAGE_SIZE = 30;
 const PRIORITY_STORAGE = 'leword.briefs.main-field.v1';
 const FINANCIAL_FIRST = '__financial__';
 const ORIGINAL_ORDER = '__all__';
@@ -59,29 +62,46 @@ export function TopicBriefsContent({ data, error = '', onAnalyze, sourceNotice }
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     const [preferred, setPreferred] = useState(loadPreference);
     const choosePreference = (value: string) => { setPreferred(value); try { localStorage.setItem(PRIORITY_STORAGE, value); } catch { /* This session still uses the selected order. */ } };
-    const [field, setField] = useState('전체'); const [slot, setSlot] = useState<RoundSlot | null>(null);
+    const [field, setField] = useState('전체'); const [slot, setSlot] = useState<RoundSlot | null>(null); const [shown, setShown] = useState(PAGE_SIZE);
     const rounds = useMemo(() => {
         const raw = data ? (Array.isArray(data.rounds) && data.rounds.length ? data.rounds : [{ slot: data.slot || '아침', builtAt: data.builtAt, briefs: data.briefs || [] }]) : [];
-        return raw.map(round => ({ ...round, items: (Array.isArray(round.briefs) ? round.briefs : []).map(normalizeTopicBrief) }));
+        return raw.map(round => ({ ...round, day: round.day || kstDay(round.builtAt), items: (Array.isArray(round.briefs) ? round.briefs : []).map(normalizeTopicBrief) }))
+            .sort((a, b) => a.day.localeCompare(b.day) || (SLOT_ORDER[a.slot] ?? 0) - (SLOT_ORDER[b.slot] ?? 0));
     }, [data]);
-    const activeRound = rounds.find(round => round.slot === slot) || rounds[rounds.length - 1]; const all = activeRound?.items || [];
+    // 전체 누적(기본 보기): 최신 회차부터 합치고 같은 검색어는 최신 회차 것만 남긴다.
+    const shelfItems = useMemo(() => {
+        const seen = new Set<string>();
+        return [...rounds].reverse().flatMap(round => round.items.map(brief => ({ brief, key: `${round.day}-${round.slot}-${brief.id}` })))
+            .filter(({ brief }) => { const keyword = brief.core.keyword.trim(); if (!keyword || seen.has(keyword)) return false; seen.add(keyword); return true; });
+    }, [rounds]);
+    const latestDay = rounds[rounds.length - 1]?.day || '';
+    const latestRounds = rounds.filter(round => round.day === latestDay);
+    const activeRound = slot ? latestRounds.find(round => round.slot === slot) || null : null;
+    const items = activeRound ? activeRound.items.map(brief => ({ brief, key: `${activeRound.day}-${activeRound.slot}-${brief.id}` })) : shelfItems;
+    const all = items.map(({ brief }) => brief);
     const latestBuiltAt = rounds[rounds.length - 1]?.builtAt || null;
+    const shelfDays = data?.shelfDays && Number.isFinite(data.shelfDays) ? data.shelfDays : 7;
+    const dayCount = new Set(rounds.map(round => round.day)).size;
+    const showRound = (name: RoundSlot | null) => { setSlot(name); setField('전체'); setShown(PAGE_SIZE); };
+    const showField = (name: string) => { setField(name); setShown(PAGE_SIZE); };
     const fields = ['전체', ...new Set(all.map(brief => brief.field))]; const activeField = fields.includes(field) ? field : '전체';
-    const filtered = activeField === '전체' ? all : all.filter(brief => brief.field === activeField);
+    const filtered = activeField === '전체' ? items : items.filter(({ brief }) => brief.field === activeField);
     const activePreference = preferred === ORIGINAL_ORDER || preferred === FINANCIAL_FIRST || fields.includes(preferred) ? preferred : FINANCIAL_FIRST;
     const priority = (brief: TopicBriefView) => activePreference === FINANCIAL_FIRST ? Number(financialField(brief.field)) : Number(brief.field === activePreference);
-    const ordered = [...filtered].sort((a,b) => priority(b)-priority(a) || Number(b.recommended)-Number(a.recommended) || Number(Boolean(b.writing))-Number(Boolean(a.writing)));
-    const visible = unlocked ? ordered : ordered.slice(0, FREE_BRIEFS);
+    const ordered = [...filtered].sort((a,b) => priority(b.brief)-priority(a.brief) || Number(b.brief.recommended)-Number(a.brief.recommended) || Number(Boolean(b.brief.writing))-Number(Boolean(a.brief.writing)));
+    const visible = unlocked ? ordered.slice(0, shown) : ordered.slice(0, FREE_BRIEFS);
+    const remaining = unlocked ? ordered.length - visible.length : 0;
     return <section className="lw-picks lw-picks-tab lw-briefs tb-board" aria-label="오늘의 글감">
         <header className="tb-toolbar"><div><span className="tb-brand">LEWORD BRIEF</span><h2>오늘의 글감 <b>{data ? all.length : '—'}</b></h2></div><p>키워드부터 제목·작성 방향·이미지 출처까지</p></header>
         {sourceNotice && <div className="tb-source-notice" role="status">{sourceNotice}</div>}
         <details className="tb-freshness"><summary>{latestBuiltAt ? `최근 공개 · ${kst(latestBuiltAt)}` : '갱신 일정 확인'} · 갱신 일정·상태</summary><BoardFreshness cadence="매일 아침·낮·저녁 세 번" rounds={[{hour:4,minute:23,label:'아침'},{hour:10,minute:23,label:'오후'},{hour:16,minute:23,label:'저녁'}]} lastBuiltAt={latestBuiltAt} /></details>
         {error && <p className="lw-note lw-note-error">{error}</p>}{!error && !data && <p className="lw-note">불러오는 중…</p>}
         {latestBuiltAt && kstDay(latestBuiltAt) !== kstDay(new Date().toISOString()) && <p className="lw-note">최근 공개 회차는 {kst(latestBuiltAt)}입니다. 작성 전 일정과 조건을 다시 확인하세요.</p>}
-        {rounds.length > 0 && <div className="tb-rounds" aria-label="회차 선택">{(['아침','오후','저녁'] as const).map(name => {const round=rounds.find(item=>item.slot===name);return <button type="button" key={name} disabled={!round} aria-pressed={activeRound?.slot===name} className={`tb-round${activeRound?.slot===name?' is-active':''}`} onClick={()=>{setSlot(name);setField('전체');}}><strong>{name}</strong><span>{round?`${round.items.length}건 · ${kst(round.builtAt)}`:`${SLOT_TIME[name]} 예정`}</span></button>;})}</div>}
+        {rounds.length > 0 && <div className="tb-rounds" aria-label="회차 선택"><button type="button" aria-pressed={!activeRound} className={`tb-round${!activeRound?' is-active':''}`} onClick={()=>showRound(null)}><strong>전체 누적</strong><span>{shelfItems.length}건 · {dayCount > 1 ? `최근 ${shelfDays}일 ${dayCount}일치` : `최근 ${shelfDays}일 · 오늘 회차만`}</span></button>{(['아침','오후','저녁'] as const).map(name => {const round=latestRounds.find(item=>item.slot===name);return <button type="button" key={name} disabled={!round} aria-pressed={activeRound?.slot===name} className={`tb-round${activeRound?.slot===name?' is-active':''}`} onClick={()=>showRound(name)}><strong>{name}</strong><span>{round?`${round.items.length}건 · ${kst(round.builtAt)}`:`${SLOT_TIME[name]} 예정`}</span></button>;})}</div>}
         {data && <div className="tb-preference"><label>먼저 볼 분야 <select aria-label="먼저 볼 분야" value={activePreference} onChange={event => choosePreference(event.target.value)}><option value={FINANCIAL_FIRST}>지원금·비즈니스·경제 우선</option><option value={ORIGINAL_ORDER}>전체 분야</option>{fields.filter(name => name !== '전체').map(name => <option key={name} value={name}>{name}</option>)}</select></label><small>공개된 글감의 표시 순서만 바뀝니다. 다른 분야도 함께 볼 수 있습니다.</small></div>}
-        {data && <div className="tb-fields" aria-label="분야 선택"><strong>{filtered.length} / {all.length}개</strong>{fields.map(name=><button type="button" key={name} aria-pressed={activeField===name} className={`tb-field${activeField===name?' is-active':''}`} onClick={()=>setField(name)}>{name}<b>{name==='전체'?all.length:all.filter(brief=>brief.field===name).length}</b></button>)}</div>}
-        <div className="tb-list">{visible.map(brief=><BriefCard key={`${activeRound?.builtAt}-${brief.id}`} brief={brief} onAnalyze={onAnalyze} />)}</div>
+        {data && <div className="tb-fields" aria-label="분야 선택"><strong>{filtered.length} / {all.length}개</strong>{fields.map(name=><button type="button" key={name} aria-pressed={activeField===name} className={`tb-field${activeField===name?' is-active':''}`} onClick={()=>showField(name)}>{name}<b>{name==='전체'?all.length:all.filter(brief=>brief.field===name).length}</b></button>)}</div>}
+        <div className="tb-list">{visible.map(({ brief, key })=><BriefCard key={key} brief={brief} onAnalyze={onAnalyze} />)}</div>
+        {remaining > 0 && <button type="button" className="lw-picks-btn tb-more" onClick={()=>setShown(value=>value+PAGE_SIZE)}>더 보기 · 남은 {remaining}개</button>}
         {data && !error && !filtered.length && <p className="tb-empty">이 회차에 공개된 글감이 없습니다.</p>}
         {data && !unlocked && filtered.length>FREE_BRIEFS && <LicenseGate onUnlock={()=>setUnlocked(isUnlocked())} remaining={filtered.length-FREE_BRIEFS} freeRows={FREE_BRIEFS} boardLabel="오늘의 글감" />}
     </section>;

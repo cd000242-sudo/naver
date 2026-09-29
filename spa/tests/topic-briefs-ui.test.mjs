@@ -73,6 +73,32 @@ test('changing edition resets the field filter and selects only the chosen round
  unlocked=true;const view=harness('TopicBriefsContent');const day=new Date().toISOString();const first=item(1);const second={...item(2),field:'건강'};const props={data:{builtAt:day,rounds:[{slot:'아침',builtAt:day,briefs:[first]},{slot:'저녁',builtAt:day,briefs:[second]}]}};
  let tree=view(props);const fieldButtons=nodes(tree,n=>n.type==='button'&&n.props.className?.includes('tb-field'));fieldButtons.find(n=>n.props.children[0]==='건강').props.onClick();tree=view(props);const roundButtons=nodes(tree,n=>n.type==='button'&&n.props.className?.includes('tb-round'));roundButtons.find(n=>n.props.children[0].props.children==='아침').props.onClick();tree=view(props);const cards=nodes(tree,n=>n.type?.name==='BriefCard');assert.equal(cards.length,1);assert.equal(cards[0].props.brief.field,'정책');assert.ok(nodes(tree,n=>n.type==='button'&&n.props['aria-pressed']&&n.props.children?.[0]==='전체').length);
 });
+// 7일 창고(2026-09-29): 파일이 최근 7일 회차를 쌓고, 기본 보기는 전체 누적. 같은 검색어는 최신 회차 것만.
+const shelfRound=(day,slot,briefs)=>({day,slot,builtAt:`${day}T03:00:00.000Z`,briefs});
+test('default view is the seven-day shelf: all rounds merged, newest copy of a repeated keyword, round tabs only for the latest day',()=>{
+ unlocked=true;const view=harness('TopicBriefsContent');
+ const props={data:{builtAt:'2026-09-13T03:00:00.000Z',day:'2026-09-13',slot:'아침',shelfDays:7,rounds:[shelfRound('2026-09-11','오후',[{...item(1),field:'스포츠'},{...item(2),summary:'옛 요약'}]),shelfRound('2026-09-13','아침',[{...item(2),field:'경제·금융'},{...item(3),field:'건강'}])]}};
+ let tree=view(props);let cards=nodes(tree,n=>n.type?.name==='BriefCard');
+ assert.equal(cards.length,3);
+ assert.equal(cards.find(c=>c.props.brief.core.keyword==='지원 공고 2').props.brief.field,'경제·금융');
+ const roundButtons=nodes(tree,n=>n.type==='button'&&n.props.className?.includes('tb-round'));
+ assert.equal(roundButtons[0].props.children[0].props.children,'전체 누적');assert.equal(roundButtons[0].props['aria-pressed'],true);
+ assert.equal(roundButtons.find(n=>n.props.children[0].props.children==='아침').props.disabled,false);
+ assert.equal(roundButtons.find(n=>n.props.children[0].props.children==='오후').props.disabled,true,'옛 날짜의 오후 회차는 오늘 탭으로 열리지 않는다');
+ const html=render(props.data.rounds.flatMap(r=>r.briefs),{data:props.data});
+ assert.match(html,/최근 7일/);assert.match(html,/<b>3<\/b>/);
+ roundButtons.find(n=>n.props.children[0].props.children==='아침').props.onClick();tree=view(props);cards=nodes(tree,n=>n.type?.name==='BriefCard');
+ assert.equal(cards.length,2);assert.ok(cards.every(c=>c.props.brief.field!=='스포츠'));
+});
+test('shelf lists thirty cards at a time and reveals more on demand',()=>{
+ unlocked=true;const view=harness('TopicBriefsContent');
+ const props={data:{builtAt:new Date().toISOString(),briefs:Array.from({length:35},(_,i)=>item(i+1))}};
+ let tree=view(props);assert.equal(nodes(tree,n=>n.type?.name==='BriefCard').length,30);
+ const more=nodes(tree,n=>n.type==='button'&&n.props.className?.includes('tb-more'))[0];assert.ok(more);assert.match(String(more.props.children.join?.('')??more.props.children),/5/);
+ more.props.onClick();tree=view(props);assert.equal(nodes(tree,n=>n.type?.name==='BriefCard').length,35);
+ assert.equal(nodes(tree,n=>n.type==='button'&&n.props.className?.includes('tb-more')).length,0);
+ unlocked=false;assert.equal((render(props.data.briefs).match(/class="tb-card /g)||[]).length,3,'무료 3건 게이트는 그대로');
+});
 test('loading, empty and error states remain actionable without fictional counts',()=>{
  unlocked=true;assert.match(renderToStaticMarkup(React.createElement(TopicBriefsContent,{data:null})),/불러오는 중/);assert.match(render([]),/이 회차에 공개된 글감이 없습니다/);assert.match(renderToStaticMarkup(React.createElement(TopicBriefsContent,{data:null,error:'다시 시도해 주세요'})),/다시 시도해 주세요/);
 });
