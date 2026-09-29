@@ -4917,6 +4917,8 @@ registerDatalabApiHandlers();
 import { registerBackupHandlers, performDataBackup } from './main/ipc/backupHandlers.js';
 // ✅ [LDB] LDB IMAGE ULTRA 확장에서 완성 원고를 받는 로컬 브리지 (발행 없음, 목록에만 추가)
 import { startLdbBridge } from './main/ldb-bridge.js';
+import { deliverLdbPosts } from './main/ldb-delivery.js';
+import { materializeLdbImages } from './main/ldb-images.js';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
 import { selectItemsForHeadingImageMode } from './image/headingImageSelection.js';
 
@@ -4933,7 +4935,10 @@ const startLdbBridgeIfEnabled = async (): Promise<void> => {
   try {
     const config = await loadConfig();
     if (!config.ldbBridgeEnabled) return;
-    ldbBridge = startLdbBridge(app.getPath('userData'), (posts) => mainWindow?.webContents.send('ldb:import-posts', posts));
+    ldbBridge = startLdbBridge(app.getPath('userData'), async (posts) => {
+      const drafts = await materializeLdbImages(posts, path.join(app.getPath('userData'), 'ldb-images'));
+      return deliverLdbPosts(mainWindow?.webContents, ipcMain, drafts);
+    });
   } catch (error) {
     console.error('[LDB 브리지] 설정을 읽지 못해 시작하지 않았습니다:', error);
   }

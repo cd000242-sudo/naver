@@ -24,7 +24,7 @@ const MAX_POSTS = 30;
 
 export interface LdbBridgeDeps {
   /** 렌더러로 글을 보낸다. 실제로는 mainWindow.webContents.send(...) */
-  deliver: (posts: unknown[]) => void;
+  deliver: (posts: unknown[]) => Promise<number>;
   token: string;
 }
 
@@ -84,7 +84,7 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
 
     const url = new URL(req.url || '/', `http://127.0.0.1:${LDB_BRIDGE_PORT}`);
     if (req.method === 'GET' && url.pathname === '/v1/status') {
-      send(res, 200, { ok: true, app: 'naver-automation', accepts: 'draft-only' }, origin);
+      send(res, 200, { ok: true, app: 'naver-automation', accepts: 'draft-only', capabilities: ['renderer-ack', 'heading-images', 'draft-upsert'] }, origin);
       return;
     }
     if (req.method !== 'POST' || url.pathname !== '/v1/posts') {
@@ -103,7 +103,7 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
       if (size > MAX_BODY_BYTES) { send(res, 413, { ok: false, error: '요청이 너무 큽니다.' }, origin); req.destroy(); return; }
       chunks.push(chunk);
     });
-    req.on('end', () => {
+    req.on('end', async () => {
       if (res.writableEnded) return;
       let payload: unknown;
       try { payload = JSON.parse(Buffer.concat(chunks).toString('utf8')); }
@@ -111,8 +111,8 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
       const checked = validatePosts(payload);
       if ('error' in checked) { send(res, 400, { ok: false, error: checked.error }, origin); return; }
       try {
-        deps.deliver(checked.posts);
-        send(res, 200, { ok: true, imported: checked.posts.length }, origin);
+        const imported = await deps.deliver(checked.posts);
+        send(res, 200, { ok: true, imported }, origin);
       } catch {
         send(res, 500, { ok: false, error: '글 목록에 넣지 못했습니다. 앱 화면이 열려 있는지 확인해 주세요.' }, origin);
       }
@@ -121,7 +121,7 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
 }
 
 /** 앱 시작 때 한 번 호출한다. 실패해도 앱 기능에는 영향을 주지 않는다. */
-export function startLdbBridge(userDataPath: string, deliver: (posts: unknown[]) => void): { token: string; server: http.Server } | null {
+export function startLdbBridge(userDataPath: string, deliver: (posts: unknown[]) => Promise<number>): { token: string; server: http.Server } | null {
   try {
     const token = loadBridgeToken(path.join(userDataPath, 'ldb-bridge-token'));
     const server = createLdbBridge({ deliver, token });

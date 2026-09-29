@@ -152,7 +152,7 @@ import {
 // ✅ [2026-04-03 모듈화] Post CRUD 모듈
 import {
   saveGeneratedPostFromData, saveGeneratedPost,
-  loadGeneratedPosts, loadAllGeneratedPosts, loadGeneratedPost,
+  loadGeneratedPosts, loadAllGeneratedPosts, loadGeneratedPost, _invalidatePostsCache,
   deleteGeneratedPost, copyGeneratedPost, previewGeneratedPost,
   updatePostAfterPublish, updatePostImages,
   openPostImageFolder, deletePostImageFolder,
@@ -163,6 +163,7 @@ import {
   normalizeGeneratedPostCategoryKey, getGeneratedPostCategoryLabel,
   isGeneratedPostCategoryCollapsed, setGeneratedPostCategoryCollapsed,
 } from './modules/postManager.js';
+import { createLdbDraftReceiver } from './modules/ldbDraftImport.js';
 // ✅ [2026-01-25 모듈화] 오류 처리 시스템
 import {
   ErrorType,
@@ -859,23 +860,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const ldbApi = (window as any).electronAPI?.onLdbPosts ? (window as any).electronAPI : (window as any).api;
   if (ldbApi?.onLdbPosts && !(window as any).__ldbPostsBound) {
     (window as any).__ldbPostsBound = true;
-    ldbApi.onLdbPosts((posts: any[]) => {
-      const post = Array.isArray(posts) ? posts[0] : null;
-      if (!post) return;
-      const structured = {
-        ...(post.structuredContent || {}),
-        selectedTitle: post.title,
-        title: post.title,
-        content: post.content,
-        bodyPlain: post.content,
-        hashtags: post.hashtags || [],
-        headings: post.headings || [],
-      };
-      fillSemiAutoFields(structured);
-      appendLog(`📥 LDB 확장에서 원고를 받아 반자동 편집에 채웠습니다: "${post.title}"`);
-      // 여러 건이 오면 첫 건만 편집 칸에 올리고 나머지는 보관함으로 넘긴다.
-      if (Array.isArray(posts) && posts.length > 1) void importSelectedPosts(posts.slice(1));
-    });
+    ldbApi.onLdbPosts(createLdbDraftReceiver({
+      read: () => loadGeneratedPosts(),
+      write: (posts) => {
+        localStorage.setItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
+        _invalidatePostsCache();
+      },
+      display: async (post) => {
+        if (!document.getElementById('unified-generated-title') || !document.getElementById('unified-generated-content')) {
+          throw new Error('반자동 편집 화면이 준비되지 않았습니다.');
+        }
+        const images = post.images || [];
+        // Replace all image sources before hydration, which otherwise merges the preceding article.
+        generatedImages = images;
+        (window as any).generatedImages = images;
+        (window as any).imageManagementGeneratedImages = images;
+        fillSemiAutoFields(post.structuredContent, { persist: false });
+        const structured = (window as any).currentStructuredContent;
+        hydrateImageManagerFromImages(structured, images);
+        await autoAnalyzeHeadings(structured, { localOnly: true });
+        updateUnifiedImagePreview(structured.headings, images);
+        displayGeneratedImages(images);
+        updatePromptItemsWithImages(images);
+        refreshGeneratedPostsList();
+        appendLog('📥 LDB 원고와 이미지 ' + images.length + '개를 반자동 편집에 연결했습니다: ' + post.title);
+      },
+    }));
   }
   initCategorySelectionListener(); // ✅ 카테고리 모달 이벤트 리스너
   initHeadingImageButton();

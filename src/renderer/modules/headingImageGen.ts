@@ -3542,7 +3542,8 @@ export async function autoAnalyzeHeadings(
     && pasteRevision === Number((window as any).__semiAutoPasteRevision || 0)
     && (activeContent !== structuredContent || (window as any).currentStructuredContent === structuredContent);
   try {
-    if (!structuredContent || !structuredContent.headings || structuredContent.headings.length === 0) {
+    if (!structuredContent || !Array.isArray(structuredContent.headings)
+      || (structuredContent.headings.length === 0 && !structuredContent.introduction)) {
       renderAnalyzedImageHeadings(structuredContent, []);
       appendLog('⚠️ 소제목이 없어 분석을 건너뜁니다.');
       return;
