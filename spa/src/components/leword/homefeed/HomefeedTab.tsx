@@ -8,6 +8,8 @@ import {
     filterStories, formatTime, prepareEditorialCandidates, sortStories, sourceHealth, type HomefeedFilters,
 } from '../../../lib/homefeedModel.mjs';
 import HomefeedStyles from './HomefeedStyles';
+import HomefeedBenchmarkBoard from './HomefeedBenchmarkBoard';
+import HomefeedBenchmarkStyles from './HomefeedBenchmarkStyles';
 import HomefeedCard from './HomefeedCard';
 import HomefeedDetail from './HomefeedDetail';
 import HomefeedLearning from './HomefeedLearning';
@@ -43,7 +45,7 @@ const EVIDENCE_FILTERS: ReadonlyArray<['funGap' | 'noSearch' | 'payoff2' | 'visu
     ['funGap', '특징 표현 검출'], ['noSearch', '카드 재료 규칙 충족'], ['payoff2', '기사 재료 2개 이상'], ['visualReady', '썸네일 규칙 충족'],
 ];
 
-export default function HomefeedTab() {
+function LegacyHomefeedTab() {
     const [data, setData] = useState<HfStoriesResult | null>(null);
     const [state, setState] = useState<'loading' | 'ready' | 'offline' | 'outdated' | 'error'>('loading');
     const [error, setError] = useState('');
@@ -289,4 +291,16 @@ export default function HomefeedTab() {
             )}
         </div>
     );
+}
+
+export default function HomefeedTab() {
+    const [mode, setMode] = useState<'benchmarks' | 'tools'>('benchmarks');
+    return <>
+        <HomefeedBenchmarkStyles />
+        <nav className="hfb-mode" aria-label="홈판 보기">
+            <button type="button" aria-pressed={mode === 'benchmarks'} onClick={() => setMode('benchmarks')}>채널 벤치마크 추천</button>
+            <button type="button" aria-pressed={mode === 'tools'} onClick={() => setMode('tools')}>기존 신호 · 작성 도구</button>
+        </nav>
+        {mode === 'benchmarks' ? <HomefeedBenchmarkBoard /> : <LegacyHomefeedTab />}
+    </>;
 }
