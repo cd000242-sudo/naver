@@ -9,17 +9,22 @@ const require = createRequire(import.meta.url);
 const source = fs.readFileSync(new URL('../src/components/leword/GoldenTab.tsx',import.meta.url),'utf8');
 test('golden focus controls show counts and keep existing filters',()=>{
  for(const word of ['경제·지원금','최근 상승','고단가 상승','aria-pressed','matchesGoldenFocus(row, focus','WriteLaneFilter','MoneyFilter','TopicFilter']) assert.ok(source.includes(word),word);
- assert.ok(source.includes('goldenFocusPriority(a, now)'));
- assert.ok(!source.includes('shuffleSeed'));
+ // 경제 우선 정렬은 화면이 아니라 발굴의 몫(사장님 2026-09-29) — 전체 탭은 주제 로테이션으로 돌아왔다
+ assert.ok(!source.includes('goldenFocusPriority'));
+ assert.ok(source.includes('shuffleSeed'));
 });
 test('filtering cannot rotate the fixed free sample or unlock new rows',()=>{
  assert.ok(source.includes('repairFreeSample(board, board?.freeSample?.keywords)'));
  assert.ok(source.includes('!freeNames.includes(row.keyword)'));
  assert.ok(source.includes('return hoistFree(sorted)'));
+ assert.ok(source.includes('return hoistFree(interleaved)'));
  assert.ok(source.includes('onUnlock={() => setUnlocked(true)}'));
 });
-test('old measurements and long term movement are disclosed separately',()=>{
- for(const word of ['goldenMeasurementLabel(row, now)','goldenTrendLabel(row, now)','timingGroup: undefined','7일 넘게 지난','현재 조건에서 확인된 키워드가 없습니다','필터 초기화']) assert.ok(source.includes(word),word);
+test('old measurements are disclosed and published season badges are passed through untouched',()=>{
+ for(const word of ['goldenMeasurementLabel(row, now)','row={row}','최근 7일 수요','7일 넘게 지난','현재 조건에서 확인된 키워드가 없습니다','필터 초기화']) assert.ok(source.includes(word),word);
+ // 09-28 판이 시기 배지를 지우던 덮어쓰기 — 다시 들어오면 안 된다
+ assert.ok(!source.includes('timingGroup: undefined'));
+ assert.ok(!source.includes('trendLabel: goldenTrendLabel'));
 });
 
 function load(path, hooks, unlocked) {
@@ -33,7 +38,7 @@ function load(path, hooks, unlocked) {
   if(id==='./BoardFreshness')return {BoardFreshness:()=>null};
   if(id==='./LewordShared')return {TabIntro:props=>React.createElement('p',null,props.desc)};
   if(id==='./preemptionMeta')return {naverSearchUrl:()=>'',rowMatchesWriteLane:(row,lane)=>lane==='all'||row.layoutBestFor===lane};
-  if(id==='./PreemptionCard')return {default:props=>React.createElement('article',{'data-keyword':props.row.keyword,'data-locked':props.locked},props.headTags,props.row.trendLabel)};
+  if(id==='./PreemptionCard')return {default:props=>React.createElement('article',{'data-keyword':props.row.keyword,'data-locked':props.locked,'data-timing':props.row.timingGroup||''},props.headTags,props.row.trendLabel)};
   if(id==='./PreemptionPlan'||id==='./DemandChartModal'||id==='./ExternalTrafficBoard')return {default:()=>null};
   if(id==='./useMindmap')return {useMindmap:()=>({mindmap:{},openMindmap:()=>{}})};
   if(id.startsWith('.')){for(const ext of ['','.tsx','.ts']){const resolved=new URL(id+ext,url);if(fs.existsSync(resolved)&&fs.statSync(resolved).isFile())return load(resolved,undefined,unlocked);}}
@@ -42,19 +47,38 @@ function load(path, hooks, unlocked) {
  return output.exports;
 }
 const candidate={keyword:'소상공인 정책자금 상승후보',topic:'비즈니스·경제',searchVolume:2300,documentCount:98000,measuredAt:'2026-09-28T00:00:00Z',evidence:[],facingPosts:9,sampledTitles:10,sourceUrl:'https://example.org/policy',money:{value:3400,tier:'high',pc:3400,mobile:2400},shortTermTrend:{status:'rising',ratio:1.5,measuredAt:'2026-09-28T01:00:00Z',windowEnd:'2026-09-27',series:Array.from({length:14},(_,i)=>({period:`2026-09-${String(14+i).padStart(2,'0')}`,ratio:i<7?20:30}))}};
-const board={publishedAt:'2026-09-28T00:00:00Z',freeSample:{day:'2026-09-28',keywords:['게임 0','게임 1','게임 2','게임 3','게임 4']},rows:[...Array.from({length:6},(_,i)=>({keyword:`게임 ${i}`,topic:'게임',searchVolume:1000,documentCount:100,measuredAt:'2026-09-07T00:00:00Z',evidence:[]})),{keyword:'지원금 대상',topic:'비즈니스·경제',searchVolume:200,documentCount:100,measuredAt:'2026-09-28T00:00:00Z',evidence:[]}]};
+// 게임 5 는 발행이 잰 시즌 배지·장기 추세를 단 행 — 화면이 이걸 지우면 안 된다
+const board={publishedAt:'2026-09-28T00:00:00Z',freeSample:{day:'2026-09-28',keywords:['게임 0','게임 1','게임 2','게임 3','게임 4']},rows:[...Array.from({length:6},(_,i)=>({keyword:`게임 ${i}`,topic:'게임',searchVolume:1000,documentCount:100,measuredAt:'2026-09-07T00:00:00Z',evidence:[],...(i===5?{timingGroup:'준비 시기',timing:'성수기까지 약 2개월',trendLabel:'시즌성'}:{})})),{keyword:'지원금 대상',topic:'비즈니스·경제',searchVolume:200,documentCount:100,measuredAt:'2026-09-28T00:00:00Z',evidence:[]}]};
 function render(unlocked,focus='all',topic='전체',input=board){
  let index=0;
- const hooks={...React,useEffect:()=>{},useMemo:fn=>fn(),useState:initial=>{const i=index++;return [i===0?input:i===1?'ready':i===2?topic:i===7?focus:i===8?Date.parse('2026-09-28T09:00:00Z'):typeof initial==='function'?initial():initial,()=>{}];}};
+ // useState 순서: 0 board · 1 status · 2 topic · 7 focus · 8 now · 9 shuffleSeed(고정 — 주제 순서 결정론)
+ const hooks={...React,useEffect:()=>{},useMemo:fn=>fn(),useState:initial=>{const i=index++;return [i===0?input:i===1?'ready':i===2?topic:i===7?focus:i===8?Date.parse('2026-09-28T09:00:00Z'):i===9?0.5:typeof initial==='function'?initial():initial,()=>{}];}};
  const Board=load('../src/components/leword/GoldenTab.tsx',hooks,unlocked).default;
  return renderToStaticMarkup(React.createElement(Board,{onAnalyze:()=>{}}));
 }
-test('rendered board prioritizes economy and shows original stale dates',()=>{
+test('rendered board interleaves topics and shows original stale dates',()=>{
  const html=render(true);
- assert.ok(html.indexOf('data-keyword="지원금 대상"')<html.indexOf('data-keyword="게임 0"'));
+ // 전체 탭은 주제 로테이션 — 경제 행이 무조건 맨 앞이 아니라, 각 주제 1등이 앞 두 장 안에 온다
+ const order=[...html.matchAll(/data-keyword="([^"]+)"/g)].map(m=>m[1]);
+ assert.ok(order.indexOf('지원금 대상')<=1,order.join(','));
+ assert.ok(order.indexOf('게임 0')<=1,order.join(','));
  assert.equal((html.match(/data-locked="false"/g)||[]).length,7);
  assert.match(html,/검색결과 확인 9월 7일 · 재확인 필요/);
  assert.match(html,/경제·지원금 <em>1<\/em>/);
+ assert.doesNotMatch(html,/경제·지원금의 최근 상승 키워드부터/);
+});
+test('published season badge and long-term trend survive on golden cards; seven-day rise is only added when measured',()=>{
+ const html=render(true);
+ // 시즌성 실측(사장님 2026-09-29 "serp 트렌드 황금키워드가 빠졌어, 시즌성이 중요하거든")
+ assert.match(html,/data-keyword="게임 5" data-locked="false" data-timing="준비 시기"/);
+ assert.match(html,/시즌성<\/article>/);
+ assert.doesNotMatch(html,/최근 추세 미확인|장기 추세 ·/);
+ assert.doesNotMatch(html,/최근 7일 수요/);
+ // 7일 상승이 실측된 행에만 라벨을 덧붙인다 — 배지는 그대로 남는다
+ const rising=render(true,'all','전체',{...board,rows:[...board.rows,{...candidate,keyword:'정책자금 황금',timingGroup:'지금 뜨는 중',trendLabel:'상승세'}]});
+ assert.match(rising,/data-keyword="정책자금 황금" data-locked="false" data-timing="지금 뜨는 중"/);
+ assert.match(rising,/최근 7일 수요 1\.50배/);
+ assert.equal((rising.match(/최근 7일 수요/g)||[]).length,1);
 });
 test('free preview is fixed through focus and topic changes',()=>{
  const html=render(false);

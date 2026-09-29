@@ -14,7 +14,7 @@ import { TabIntro } from './LewordShared';
 import { BoardFreshness } from './BoardFreshness';
 import ExternalTrafficBoard, { type ReferenceRow } from './ExternalTrafficBoard';
 import { preemptionIndex, TIER_ORDER } from '../../lib/preemptionIndex';
-import { goldenFocusPriority, goldenMeasurementLabel, goldenTrendLabel, matchesGoldenFocus, summarizeGoldenFocus, type GoldenFocus } from '../../lib/goldenFocusModel';
+import { goldenMeasurementLabel, matchesGoldenFocus, recentRiseRatio, summarizeGoldenFocus, type GoldenFocus } from '../../lib/goldenFocusModel';
 import GoldenTrendCandidates, { type GoldenTrendCandidate } from './GoldenTrendCandidates';
 
 /**
@@ -54,6 +54,15 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [openPlan, setOpenPlan] = useState('');
     const [focus, setFocus] = useState<GoldenFocus>('all');
     const [now, setNow] = useState(() => Date.now());
+    /*
+     * '전체' 탭 주제 로테이션 시드 — 방문마다 주제 순서가 바뀐다(사장님 지시
+     * 2026-08-19: "계속 마키나락스만 먼저 나오니 특별함이 없다. 섞어서, 계속
+     * 바뀌면서 '이런 키워드도 있었어?!' 느낌으로"). 난수는 **섞기에만** 쓴다 —
+     * 등급·점수 계산에 쓰는 것은 이 앱에서 금지다. 주제 안 순서는 등급순 유지.
+     */
+    const [shuffleSeed] = useState(() => Math.random());
+    /** 7일 수요 상승 실측(데이터랩 14일, 최근 확인 행만). 못 쟀으면 null — 라벨을 안 단다. */
+    const sevenDayRise = (row: PreemptionRow) => recentRiseRatio(row, now);
     /*
      * 점진 렌더 — 보드가 누적형(목표 2,000행)이 되면서 전량 렌더는 폰에서 못 버틴다.
      * 처음 60행만 그리고 "더 보기"로 늘린다. 필터가 바뀌면 처음으로 돌아간다.
@@ -168,9 +177,11 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
          * 배지와 순서가 어긋난다.
          */
         const sorted = [...filtered].sort((a, b) => {
-            // Main interests first, then the existing evidence-based grade and bid ordering.
-            const priority = goldenFocusPriority(a, now) - goldenFocusPriority(b, now);
-            if (topic === '전체' && priority !== 0) return priority;
+            /*
+             * 경제 우선 정렬(09-28)은 뺐다 — 사장님 정정(2026-09-29): 경제 비중은 **발굴**에서
+             * 늘리는 것이지 화면에서 경제를 맨 앞에 세우는 게 아니다. 경제만 보려면
+             * '경제·지원금' 고르개가 있다. 전체 탭은 아래 주제 로테이션으로 돌아간다.
+             */
             const rank = (row: PreemptionRow) => TIER_ORDER[preemptionIndex({
                 searchVolume: row.searchVolume, documentCount: row.documentCount,
             }).tier];
@@ -244,8 +255,46 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             return [...open, ...rest];
         };
 
-        return hoistFree(sorted);
-    }, [board, topic, writeLane, moneyMin, focus, now, unlocked, freeNames]);
+        /*
+         * '전체' 탭은 주제 로테이션 인터리브 — 결정론 정렬이라 매번 같은 키워드가
+         * 1등이면 "특별함이 없다"(사장님 2026-08-19). 각 주제의 1등들이 먼저 섞여
+         * 나오고, 주제 순서는 방문마다 바뀐다. 주제 안은 위의 등급순 그대로라 품질
+         * 순서는 안 무너진다. 주제 필터를 걸면 원래 정렬로 돌아간다.
+         */
+        if (topic !== '전체') return hoistFree(sorted);
+        const byTopicOrder = new Map<string, PreemptionRow[]>();
+        for (const row of sorted) {
+            const key = row.topic || '?';
+            if (!byTopicOrder.has(key)) byTopicOrder.set(key, []);
+            byTopicOrder.get(key)!.push(row);
+        }
+        const topicKeys = [...byTopicOrder.keys()];
+        // 시드 기반 셔플(Fisher–Yates) — 렌더 안에서는 안정, 방문마다 달라진다.
+        let seedState = Math.floor(shuffleSeed * 2 ** 31);
+        const nextRandom = () => {
+            seedState = (seedState * 1103515245 + 12345) % 2 ** 31;
+            return seedState / 2 ** 31;
+        };
+        for (let i = topicKeys.length - 1; i > 0; i--) {
+            const j = Math.floor(nextRandom() * (i + 1));
+            [topicKeys[i], topicKeys[j]] = [topicKeys[j], topicKeys[i]];
+        }
+        const interleaved: PreemptionRow[] = [];
+        let depth = 0;
+        let added = true;
+        while (added) {
+            added = false;
+            for (const key of topicKeys) {
+                const bucket = byTopicOrder.get(key)!;
+                if (depth < bucket.length) {
+                    interleaved.push(bucket[depth]);
+                    added = true;
+                }
+            }
+            depth += 1;
+        }
+        return hoistFree(interleaved);
+    }, [board, topic, writeLane, moneyMin, focus, now, shuffleSeed, unlocked, freeNames]);
 
     /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
@@ -318,7 +367,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             </button>
                         ))}
                     </div>
-                    <p className="lw-write-hint">전체 목록은 경제·지원금의 최근 상승 키워드부터 표시합니다. 필터 숫자는 황금키워드 통과 목록 기준이며 트렌드 후보는 별도로 표시합니다. 필터는 아래 주제·용도·입찰가 조건과 함께 적용됩니다. 입찰가는 광고주의 경쟁 지표이며 예상 수익이 아닙니다.</p>
+                    <p className="lw-write-hint">전체 목록은 주제를 섞어 보여주고, 카드의 시기 배지는 회차마다 잰 시즌성 실측입니다. 경제·지원금만 보려면 위 고르개를 누르세요. 필터는 아래 주제·용도·입찰가 조건과 함께 적용됩니다. 입찰가는 광고주의 경쟁 지표이며 예상 수익이 아닙니다.</p>
                     {focusSummary.stale > 0 && <p className="lw-note lw-note-limit">검색결과 확인이 7일 넘게 지난 항목 또는 확인일이 없는 항목 {focusSummary.stale}개는 최근 상승에서 제외했습니다. 카드의 확인일을 함께 살펴보세요.</p>}
 
                     <WriteLaneFilter
@@ -368,8 +417,19 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             return (
                         <PreemptionCard
                             key={`${row.topic}-${row.keyword}`}
-                            row={{ ...row, timingGroup: undefined, trendLabel: goldenTrendLabel(row, now) }}
-                            headTags={<><span className="lw-surface-tag">{row.topic}</span><span className="lw-slot-basis">{goldenMeasurementLabel(row, now)}</span></>}
+                            /*
+                             * 행은 발행본 그대로 넘긴다 — 시기 배지(timingGroup)·장기 추세(trendLabel)는
+                             * 발행이 잰 시즌성 실측이다. 09-28 판이 이 둘을 지우고 7일 라벨로 덮어써서
+                             * "성수기까지 약 6개월" 같은 배지가 화면에서 통째로 사라졌다(사장님
+                             * "serp 트렌드 황금키워드가 빠졌어, 시즌성이 중요하거든"). 7일 상승은
+                             * 실측된 행에만 **덧붙인다**.
+                             */
+                            row={row}
+                            headTags={<>
+                                <span className="lw-surface-tag">{row.topic}</span>
+                                <span className="lw-slot-basis">{goldenMeasurementLabel(row, now)}</span>
+                                {sevenDayRise(row) !== null && <span className="lw-trend-tag">최근 7일 수요 {sevenDayRise(row)!.toFixed(2)}배</span>}
+                            </>}
                             rank={index + 1}
                             locked={locked}
                             copied={copied === row.keyword}
