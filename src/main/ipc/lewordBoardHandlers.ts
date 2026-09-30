@@ -11,10 +11,13 @@ import { ipcMain } from 'electron';
 import axios from 'axios';
 import {
   LEWORD_BOARD_URL,
+  LEWORD_BRIEFS_URL,
   LEWORD_PREEMPTION_URL,
   parseLewordBoard,
   parsePreemptionBoard,
+  parseTopicBriefs,
   type LewordBoard,
+  type LewordBoardSection,
 } from '../../analytics/lewordBoard.js';
 
 export interface LewordBoardResult {
@@ -51,19 +54,35 @@ export function registerLewordBoardHandlers(): void {
        * 워드프레스가 이기는 자리라, 그걸 모르고 쓰면 이길 수 없는 곳에 힘을 쓴다.
        * 한쪽이 실패해도 다른 쪽은 보여 준다 — 둘 다 실패해야 실패다.
        */
-      const [nicheRaw, preemptionRaw] = await Promise.allSettled([
+      /*
+       * [2026-09-30 사장님] "오늘의 글감 불러오기 클릭하면 저번부터 안바뀌는데"
+       * 사이트의 오늘의 글감(topic-briefs, 매시 갱신)을 셋째 보드로 읽어 맨 앞에 놓는다.
+       * 선점 보드는 2~3일에 한 번 갱신되는데 그게 앞에 서 있으니 윗줄이 며칠째 같았다.
+       * 출처마다 갱신 시각이 다르므로 한 줄로 섞지 않고 묶음(sections)으로 따로 준다.
+       */
+      const [briefsRaw, nicheRaw, preemptionRaw] = await Promise.allSettled([
+        fetchJson(LEWORD_BRIEFS_URL),
         fetchJson(LEWORD_BOARD_URL),
         fetchJson(LEWORD_PREEMPTION_URL),
       ]);
+      const briefs = briefsRaw.status === 'fulfilled' ? parseTopicBriefs(briefsRaw.value) : null;
       const niche = nicheRaw.status === 'fulfilled' ? parseLewordBoard(nicheRaw.value) : null;
       const preemption = preemptionRaw.status === 'fulfilled' ? parsePreemptionBoard(preemptionRaw.value) : null;
-      if (!niche && !preemption) throw new Error('두 보드 모두 받지 못했습니다');
-      const board: LewordBoard = {
+      if (!briefs && !niche && !preemption) throw new Error('세 보드 모두 받지 못했습니다');
+      const sections: LewordBoardSection[] = ([
+        { key: 'briefs', label: '오늘의 글감', board: briefs },
         // 블로그가 이기는 자리를 먼저 — 이길 수 있는가가 먼저고 돈은 그 다음이다.
-        picks: [...(preemption?.picks ?? []), ...(niche?.picks ?? [])],
-        publishedAt: niche?.publishedAt || preemption?.publishedAt || '',
+        { key: 'preemption', label: '블로그가 이기는 자리', board: preemption },
+        { key: 'niche', label: '실검 틈새', board: niche },
+      ] as const).flatMap((s) => (
+        s.board ? [{ key: s.key, label: s.label, publishedAt: s.board.publishedAt, picks: s.board.picks }] : []
+      ));
+      const board: LewordBoard = {
+        picks: sections.flatMap((s) => [...s.picks]),
+        publishedAt: briefs?.publishedAt || niche?.publishedAt || preemption?.publishedAt || '',
         schedule: niche?.schedule || preemption?.schedule || '',
-        measured: { ...(niche?.measured ?? {}), blogWinnable: preemption?.picks.length ?? 0 },
+        measured: { ...(niche?.measured ?? {}), blogWinnable: preemption?.picks.length ?? 0, briefs: briefs?.picks.length ?? 0 },
+        sections,
       };
       if (board.picks.length === 0) {
         // 보드는 받았는데 고를 것이 없는 날이 있다(niche 1 · preemption 6 실측).

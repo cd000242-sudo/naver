@@ -26,6 +26,15 @@ export const LEWORD_BOARD_URL = 'https://leaderspro.kr/data/issue-niche-board.js
  */
 export const LEWORD_PREEMPTION_URL = 'https://leaderspro.kr/data/preemption-board.json';
 
+/**
+ * 사이트의 "오늘의 글감" 탭이 읽는 바로 그 파일(NOW/NEXT/ALWAYS 브리프, 매시 갱신).
+ *
+ * [2026-09-30 사장님] "오늘의 글감 불러오기 클릭하면 저번부터 안바뀌는데" — 버튼 이름은
+ * 오늘의 글감인데 앱은 이 파일을 읽지 않았다. 선점 보드(2~3일 주기)가 광고클릭 순으로
+ * 맨 앞에 서니 윗줄 78건이 며칠째 같았고, 그날 바뀐 것은 79번째 아래에 묻혔다.
+ */
+export const LEWORD_BRIEFS_URL = 'https://leaderspro.kr/data/topic-briefs.json';
+
 export interface LewordPick {
   readonly keyword: string;
   /** 월 검색량. 모르면 null — 0 으로 적으면 "검색량 없음" 과 구분이 안 된다. */
@@ -48,6 +57,8 @@ export interface LewordPick {
   readonly saturated?: boolean;
   /** 사람이 읽는 한 줄 설명(보드가 만든 문장 그대로). */
   readonly layoutHeadline?: string;
+  /** 오늘의 글감 브리프 제목(브리프에만 있다). 키워드만으로는 무슨 글인지 안 보인다. */
+  readonly briefTitle?: string;
 }
 
 export interface LewordBoard {
@@ -56,7 +67,22 @@ export interface LewordBoard {
   readonly schedule: string;
   /** 보드가 오늘 몇 개를 재고 몇 개를 골랐는지. 적게 나오는 날이 정상이다. */
   readonly measured: Record<string, number>;
+  /**
+   * 출처별 묶음. 갱신 주기가 다른 보드를 한 줄로 섞으면 "며칠째 같은 목록" 으로 보인다 —
+   * 묶음마다 제 갱신 시각을 달고 따로 접히게 한다. 없으면 화면은 picks 를 한 묶음으로 본다.
+   */
+  readonly sections?: readonly LewordBoardSection[];
 }
+
+export interface LewordBoardSection {
+  readonly key: 'briefs' | 'preemption' | 'niche';
+  readonly label: string;
+  readonly publishedAt: string;
+  readonly picks: readonly LewordPick[];
+}
+
+/** 브리프 시점 순서 — 지금 뜨는 것이 먼저, 늘 찾는 것이 마지막. */
+const BRIEF_TIMING_ORDER: Record<string, number> = { NOW: 0, NEXT: 1, ALWAYS: 2 };
 
 const EMPTY: LewordBoard = { picks: [], publishedAt: '', schedule: '', measured: {} };
 
@@ -173,4 +199,53 @@ export function parsePreemptionBoard(raw: unknown): LewordBoard {
   }
 
   return { picks, publishedAt: str(board.publishedAt), schedule: str(board.schedule), measured };
+}
+
+/**
+ * 사이트의 오늘의 글감(topic-briefs.json)에서 키워드를 꺼낸다.
+ *
+ * 브리프 하나 = 제목 + coreKeyword + keywords[] + 분야 + 검색량·문서수. 키워드 자리에는
+ * coreKeyword 를 쓰고, 비어 있으면 keywords[0]. 둘 다 없으면 글감이 아니다.
+ * 순서는 NOW → NEXT → ALWAYS, 같은 시점 안에서는 파일 순서 그대로(사이트와 같은 순서).
+ */
+export function parseTopicBriefs(raw: unknown): LewordBoard {
+  if (!raw || typeof raw !== 'object') return EMPTY;
+  const board = raw as Record<string, unknown>;
+  const briefs = Array.isArray(board.briefs) ? board.briefs : [];
+
+  const picks: LewordPick[] = [];
+  const seen = new Set<string>();
+  for (const entry of briefs) {
+    if (!entry || typeof entry !== 'object') continue;
+    const row = entry as Record<string, unknown>;
+    const keywords = Array.isArray(row.keywords) ? row.keywords.map(str).filter(Boolean) : [];
+    const keyword = str(row.coreKeyword) || keywords[0] || '';
+    if (!keyword || seen.has(keyword)) continue;
+    seen.add(keyword);
+    const timing = str(row.timing).toUpperCase();
+    picks.push({
+      keyword,
+      searchVolume: num(row.searchVolume),
+      documentCount: num(row.documentCount),
+      verdict: timing,
+      lane: str(row.field),
+      recommended: true,
+      briefTitle: str(row.title),
+    });
+  }
+
+  const sorted = [...picks].sort(
+    (a, b) => (BRIEF_TIMING_ORDER[a.verdict] ?? 9) - (BRIEF_TIMING_ORDER[b.verdict] ?? 9),
+  );
+
+  const countsRaw = board.counts && typeof board.counts === 'object'
+    ? board.counts as Record<string, unknown>
+    : {};
+  const measured: Record<string, number> = {};
+  for (const [key, value] of Object.entries(countsRaw)) {
+    const parsed = num(value);
+    if (parsed !== null) measured[key] = parsed;
+  }
+
+  return { picks: sorted, publishedAt: str(board.builtAt), schedule: str(board.slot), measured };
 }

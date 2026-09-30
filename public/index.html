@@ -1277,14 +1277,19 @@
                                 style="width: 100%; padding: 0.875rem; border: 1px solid var(--border-medium); border-radius: 8px; background: var(--bg-primary); color: var(--text-strong); font-size: 1rem; margin-bottom: 0.5rem;">
 
                             <!-- [2026-09-10] leword 오늘의 글감 — 앱이 랜덤 시드로 키워드를 뽑던 것을 대체한다.
-                                 보드는 매일 07·13·19시 갱신되고 검색량·문서수·판정이 함께 온다. -->
+                                 [2026-09-30] 사이트의 오늘의 글감(매시 갱신)을 맨 앞에, 선점·실검 보드는 출처별로 접히는 묶음으로.
+                                 목록 전체는 "접기/펼치기" 버튼으로 재요청 없이 여닫는다. -->
                             <div style="margin-bottom: 0.6rem;">
                                 <button type="button" id="leword-board-btn"
                                     style="width: 100%; padding: 0.6rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
                                     📋 오늘의 글감 불러오기 (leword)
                                 </button>
-                                <div id="leword-board-meta" style="display: none; margin-top: 0.4rem; font-size: 0.72rem; color: var(--text-muted);"></div>
-                                <div id="leword-board-list" style="display: none; margin-top: 0.5rem; max-height: 260px; overflow-y: auto; border: 1px solid var(--border-medium); border-radius: 8px;"></div>
+                                <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-top: 0.4rem;">
+                                    <div id="leword-board-meta" style="display: none; flex: 1; font-size: 0.72rem; color: var(--text-muted);"></div>
+                                    <button type="button" id="leword-board-toggle" aria-expanded="false" aria-controls="leword-board-list"
+                                        style="display: none; flex: none; padding: 0.15rem 0.5rem; background: var(--bg-tertiary); color: var(--text-secondary); border: 1px solid var(--border-medium); border-radius: 6px; font-size: 0.72rem; cursor: pointer;">▼ 펼치기</button>
+                                </div>
+                                <div id="leword-board-list" style="display: none; margin-top: 0.5rem; max-height: 320px; overflow-y: auto; border: 1px solid var(--border-medium); border-radius: 8px;"></div>
                             </div>
 
                             <!-- ✅ [SPEC-KEYWORD-ENDGAME Phase 2-B] 블루오션 자동선정 (옵트인, 기본 OFF) -->

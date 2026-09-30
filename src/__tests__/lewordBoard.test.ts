@@ -137,3 +137,61 @@ describe('parsePreemptionBoard — 블로그가 이길 자리를 가려낸다', 
     expect(LEWORD_PREEMPTION_URL).toMatch(/^https:\/\/.*preemption-board\.json$/);
   });
 });
+
+/**
+ * [2026-09-30 사장님] "오늘의 글감 불러오기 클릭하면 저번부터 안바뀌는데"
+ *
+ * 버튼 이름은 "오늘의 글감" 인데 앱은 사이트의 오늘의 글감(topic-briefs.json, 매시 갱신)을
+ * 읽지 않았다. 선점 보드(2~3일에 한 번 갱신)를 광고클릭 순으로 맨 앞에 놓으니 화면 윗줄이
+ * 며칠째 같은 78건이었고, 그날 바뀐 실검 틈새는 79번째 아래에 묻혔다.
+ */
+describe('parseTopicBriefs — 사이트의 오늘의 글감을 그대로 읽는다', () => {
+  const raw = {
+    builtAt: '2026-09-30T03:29:21.943Z',
+    day: '2026-09-30',
+    slot: '오후',
+    counts: { briefs: 3, now: 1, next: 1, always: 1 },
+    briefs: [
+      { title: '초과세수 63조, 어디에 쓰나', timing: 'NEXT', coreKeyword: '초과세수', keywords: ['초과세수', '초과세수 63조'], field: '경제·금융', searchVolume: 940, documentCount: 69249 },
+      { title: '청주 특례시 지정되면 복지 기준 어떻게 바뀌나', timing: 'NOW', coreKeyword: '청주 특례시', keywords: ['청주 특례시'], field: '지원금·복지', searchVolume: 5100, documentCount: 4748 },
+      { title: '연금 수령 나이', timing: 'ALWAYS', coreKeyword: '', keywords: ['연금 수령 나이'], field: '경제·금융', searchVolume: null, documentCount: 12 },
+      { title: '키워드 없음', timing: 'NOW', coreKeyword: '', keywords: [] },
+    ],
+  };
+
+  it('NOW → NEXT → ALWAYS 순서로 놓는다 — 지금 뜨는 것이 먼저다', async () => {
+    const { parseTopicBriefs } = await import('../analytics/lewordBoard');
+    const picks = parseTopicBriefs(raw).picks;
+    expect(picks.map((p) => p.keyword)).toEqual(['청주 특례시', '초과세수', '연금 수령 나이']);
+    expect(picks.map((p) => p.verdict)).toEqual(['NOW', 'NEXT', 'ALWAYS']);
+  });
+
+  it('coreKeyword 가 비면 keywords[0], 둘 다 없으면 버린다', async () => {
+    const { parseTopicBriefs } = await import('../analytics/lewordBoard');
+    const picks = parseTopicBriefs(raw).picks;
+    expect(picks.some((p) => p.keyword === '키워드 없음')).toBe(false);
+    expect(picks.find((p) => p.keyword === '연금 수령 나이')?.briefTitle).toBe('연금 수령 나이');
+  });
+
+  it('브리프 제목·분야·검색량·문서수를 싣고 builtAt 을 갱신 시각으로 쓴다', async () => {
+    const { parseTopicBriefs } = await import('../analytics/lewordBoard');
+    const board = parseTopicBriefs(raw);
+    expect(board.publishedAt).toBe('2026-09-30T03:29:21.943Z');
+    expect(board.picks[0].briefTitle).toBe('청주 특례시 지정되면 복지 기준 어떻게 바뀌나');
+    expect(board.picks[0].lane).toBe('지원금·복지');
+    expect(board.picks[0].searchVolume).toBe(5100);
+    expect(board.picks[0].documentCount).toBe(4748);
+    expect(board.picks[0].recommended).toBe(true);
+  });
+
+  it('형태가 다르면 빈 결과 — 앱을 깨뜨리지 않는다', async () => {
+    const { parseTopicBriefs } = await import('../analytics/lewordBoard');
+    expect(parseTopicBriefs(null).picks).toEqual([]);
+    expect(parseTopicBriefs({ briefs: 'nope' }).picks).toEqual([]);
+  });
+
+  it('주소는 사이트의 오늘의 글감 데이터를 가리킨다', async () => {
+    const { LEWORD_BRIEFS_URL } = await import('../analytics/lewordBoard');
+    expect(LEWORD_BRIEFS_URL).toMatch(/^https:\/\/.*topic-briefs\.json$/);
+  });
+});
