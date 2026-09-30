@@ -1,22 +1,1018 @@
 {
-  "publishedAt": "2026-09-30T09:31:47.665Z",
+  "publishedAt": "2026-09-30T21:48:52.067Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 225,
-    "niche": 0,
-    "preemption": 7,
+    "candidates": 164,
+    "niche": 5,
+    "preemption": 19,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-09-30",
+    "day": "2026-10-01",
     "keywords": [
-      "김유정 더쿠",
-      "63빌딩 부페"
+      "신병 경태",
+      "신병 중사",
+      "신병 갤"
     ]
   },
   "rows": [
+    {
+      "keyword": "신병 경태",
+      "issue": "신병",
+      "topic": "신병",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "신병 시즌 1:4화 가버린 친구에게 바침 리뷰",
+          "대구대구대구",
+          "로또 1등도 출근합니다 3화: 이준혁 사고치고 서현우 금쪽이 탈출 티빙드라마 추천",
+          "조선왕조실록(단종) – 단종 원년 9월",
+          "ENA 드라마 신병 시즌 2 - 23.8.28 - 23. 9.12 (6부작)",
+          "신병 시즌 2: 7. 마음의 편지 리뷰",
+          "신병 시즌2: 10. 일병김동우 리뷰",
+          "신병 시즌3 끝",
+          "제7회 김포 홍삼포르테 빅밴드 정기연주회",
+          "드라마 신병 시즌 3 7회 리뷰"
+        ],
+        "measuredAt": "2026-09-30T21:40:18.741Z"
+      },
+      "documentCount": 140,
+      "documentCountMeasured": true,
+      "searchVolume": 1760,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.3058239947910295,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 1,760",
+        "문서수 140",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 1,760 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.3배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "웹툰·드라마 신병의 코믹 캐릭터 왕경태와 그 배우·짤을 찾으려는 검색",
+        "basis": "AI 추론 — 실측 확인된 확장어 1개"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "신병 경태 왕경태 배우와 명대사 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "신병 경태 말고 다른 등장인물도 궁금해서 쭉 찾아봤다가 시간 순삭됐어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "신병 등장인물",
+          "searchVolume": 27660,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
+        {
+          "keyword": "신병 시즌5",
+          "searchVolume": 17630,
+          "frame": "generic"
+        },
+        {
+          "keyword": "신병4 경태",
+          "searchVolume": 310,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "신병 등장인물",
+          "searchVolume": 27660,
+          "source": "ai-verified",
+          "documentCount": 19681
+        }
+      ],
+      "trend": {
+        "series": [
+          39,
+          30,
+          33,
+          29,
+          29,
+          43,
+          40,
+          48,
+          51,
+          37,
+          45,
+          48,
+          43,
+          41,
+          43,
+          67,
+          35,
+          30,
+          45,
+          35,
+          39,
+          44,
+          100,
+          68,
+          51,
+          61,
+          49,
+          43,
+          38
+        ],
+        "label": "❄️ 시즌성",
+        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보"
+      },
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "신병 시즌4",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=210&docId=495073397&answerNo=1",
+          "views": 157,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 5,
+        "verified": 1
+      }
+    },
+    {
+      "keyword": "신병 동우",
+      "issue": "신병",
+      "topic": "신병",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "신병 시즌 1: 3화 작업의 계절 리뷰",
+          "\"말로는 표현 못할 감정이다\"전역해본 사람만 알수있는 그날의 기분,신병4 ,10화",
+          "신병4 10화 줄거리 김하나 등장 변수? 조백호 소령 진급 감격 ENA드라마 종영까지 몇부작",
+          "신병4 10화 찬석 병남 전역, 중대장 드디어 소령 진급! 여군 소령 등장",
+          "드라마 신병4: 사보타주 10회 집으로 가는 길 리뷰",
+          "신병 시즌 1:4화 가버린 친구에게 바침 리뷰",
+          "신병4 사보타주 20화 결말 해석 줄거리 정보 후기",
+          "신병4 사보타주 10화 줄거리 결말 눈물의 전역식 + 공민정 정이랑 11화 예고",
+          "[드라마 리뷰] 신병4 사보타주 10화 줄거리 결말! 특전사 전멸 작전부터 강찬석 눈물의 전역식까지 (스포주의)",
+          "신병4 등장인물 총정리, 시즌5는 몇 부작으로 돌아올까"
+        ],
+        "measuredAt": "2026-09-30T21:40:30.676Z"
+      },
+      "documentCount": 576,
+      "documentCountMeasured": true,
+      "searchVolume": 1670,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.1963360686249271,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 1,670",
+        "문서수 576",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 1,670 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.2배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "웹툰·드라마 '신병' 속 이병 김동우가 누구인지, 배우와 스토리를 찾는 검색",
+        "basis": "AI 추론 — 실측 확인된 확장어 2개"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "신병 동우 배우와 실제 모델 웹툰 드라마 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "신병 동우 결말 보고 나서 왜 다들 이 장면 얘기하는지 알겠더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "신병 김동우",
+          "searchVolume": 10670,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
+        {
+          "keyword": "신병 동우 결말",
+          "searchVolume": 110,
+          "source": "ai-verified",
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "신병 김동우",
+          "searchVolume": 10670,
+          "source": "ai-verified",
+          "documentCount": 1196
+        },
+        {
+          "keyword": "신병 동우 결말",
+          "searchVolume": 110,
+          "source": "ai-verified",
+          "documentCount": 69
+        }
+      ],
+      "trend": {
+        "series": [
+          25,
+          42,
+          30,
+          35,
+          24,
+          38,
+          27,
+          71,
+          58,
+          55,
+          38,
+          46,
+          40,
+          36,
+          58,
+          100,
+          60,
+          57,
+          49,
+          39,
+          38,
+          69,
+          96,
+          61,
+          48,
+          68,
+          54,
+          43,
+          44
+        ],
+        "label": "❄️ 시즌성",
+        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보"
+      },
+      "kinCount": 46,
+      "kinTop": [
+        {
+          "title": "드라마 신병 관련 군대 질문 여러개ㅠㅠ군필 환영",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=481908439&answerNo=1",
+          "views": 1272,
+          "answers": 1
+        },
+        {
+          "title": "신병1 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30101&docId=456262187&answerNo=2",
+          "views": 73,
+          "answers": 2
+        },
+        {
+          "title": "신병 시즌1 동우 마음의편지",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=473777032&answerNo=0",
+          "views": 24,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 7,
+        "verified": 2
+      }
+    },
+    {
+      "keyword": "신병 중사",
+      "issue": "신병",
+      "topic": "신병",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "신병4 해병대 배우들 누구? 오강철·마태호·강무적 등장인물 총정리",
+          "신병4 해병대 배우들 누구? | 이중구 상사 役 김진태",
+          "《신병4: 사보타주》 해병대 등장인물과 배우 출연진 프로필 총정리(+인스타그램)",
+          "〈신병4: 사보타주〉 9회 스포 리뷰 | 육군 vs 해병대, 결국 '원팀'이 되다! 조백호의 특전사 전멸 작전 + 빨간 활동복 선물 (10회 예고 포함)",
+          "[신병4 : 사보타주] 등장인물·인물관계도·출연진 총정리! 몇부작·OTT·방송시간까지",
+          "ENA 신병4 9회 9화 줄거리 이중구 상사의 카리스마",
+          "신병4 사보타주 11회 리뷰｜조백호 소령 진급, 모포 빨래 대참사, 김하나 소령 기습 등장! 최종회 관전 포인트",
+          "ENA 신병4 11회 11화 줄거리 간호장교 김혜선의 존재감",
+          "신병4:사보타주_신화부대 발칵 뒤집은 뉴비 2인_기본정보 인물분석 OTT 촬영지 부제뜻",
+          "군대 행보관은 무슨 일을 할까? 신병4 박재수로 보는 중대장과의 차이"
+        ],
+        "measuredAt": "2026-09-30T21:40:45.778Z"
+      },
+      "documentCount": 4490,
+      "documentCountMeasured": true,
+      "searchVolume": 910,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "rising",
+      "demandRatio": 1.5476194375433052,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 910",
+        "문서수 4,490",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음",
+        "수요 상승중"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 910 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.5배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "신병4 자체 최고 5.2% 시청률로 종영, 시즌5 확정",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "신병 중사와 신화부대 통폐합, 신병4 5.2% 종영과 시즌5 확정까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "신병 중사 시즌5 확정됐다길래 등장인물들 지금 뭐 하나 찾아봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "신병 등장인물",
+          "searchVolume": 27660,
+          "frame": "generic"
+        },
+        {
+          "keyword": "신병 시즌5",
+          "searchVolume": 17630,
+          "frame": "generic"
+        },
+        {
+          "keyword": "신병 시즌5 확정",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "신병 등장인물",
+          "searchVolume": 27660,
+          "documentCount": 19681,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 시즌5",
+          "searchVolume": 17630,
+          "documentCount": 10149,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 시즌5 확정",
+          "searchVolume": 10,
+          "documentCount": 2025,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 중사 배우",
+          "searchVolume": 10,
+          "documentCount": 767,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          26,
+          25,
+          15,
+          19,
+          26,
+          24,
+          13,
+          23,
+          11,
+          19,
+          19,
+          17,
+          16,
+          18,
+          46,
+          33,
+          21,
+          27,
+          25,
+          29,
+          20,
+          40,
+          36,
+          44,
+          23,
+          28,
+          13,
+          55,
+          100
+        ],
+        "label": "🚀 떡상",
+        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음"
+      },
+      "kinCount": 1388,
+      "kinTop": [
+        {
+          "title": "해군 전문하사 후 단기전환 중사전역으로 산업기사 응시 자....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=113103&docId=492839966&answerNo=3",
+          "views": 698,
+          "answers": 4
+        },
+        {
+          "title": "여동생이 해병대 중사에게 성희롱을 당했습니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=70109&docId=491069585&answerNo=3",
+          "views": 453,
+          "answers": 5
+        },
+        {
+          "title": "신병4 9화 배우 찾아주세여",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3031101&docId=495261279&answerNo=2",
+          "views": 275,
+          "answers": 2
+        },
+        {
+          "title": "신병4에서 소대장 원래",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010101&docId=495190098&answerNo=2",
+          "views": 54,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "신병 갤",
+      "issue": "신병",
+      "topic": "신병",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "신내림굿,신굿ㅡ방울을 처음 쥐는 날",
+          "훈련소 샤워시간 얼마나 될까? 샤워실 이용과 세면 준비",
+          "군대 ep.3(신교대 생활)",
+          "평행세계의 퍼렁별",
+          "탈출기 한국독립운동사연구소",
+          "2026_9",
+          "카오룽 카오룽이다",
+          "여름 가고 가을이 왓다네?",
+          "어서와5월에",
+          "칭다오 여행은 꼭 가고싶음 (모든 여행 내가 직접 감)"
+        ],
+        "measuredAt": "2026-09-30T21:40:03.630Z"
+      },
+      "documentCount": 2416,
+      "documentCountMeasured": true,
+      "searchVolume": 3050,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.9864427826879641,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 3,050",
+        "문서수 2,416",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 3,050 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "신병4 자체 최고 5.2% 시청률로 종영, 시즌5 확정",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "신병 갤 신병4 5.2% 종영과 시즌5 확정된 결말",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "신병 갤 시즌5 확정 소식에 신화부대 통폐합이 왜 저 결말인지 다시 보게 되더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "신병 등장인물",
+          "searchVolume": 27660,
+          "frame": "generic"
+        },
+        {
+          "keyword": "신병 시즌5",
+          "searchVolume": 17630,
+          "frame": "generic"
+        },
+        {
+          "keyword": "신병 웹툰",
+          "searchVolume": 7770,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "신병 등장인물",
+          "searchVolume": 27660,
+          "documentCount": 19681,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 시즌5",
+          "searchVolume": 17630,
+          "documentCount": 10149,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 웹툰",
+          "searchVolume": 7770,
+          "documentCount": 4271,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 다시보기",
+          "searchVolume": 6120,
+          "documentCount": 113879,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 드라마",
+          "searchVolume": 3370,
+          "documentCount": 37598,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 시즌5 확정",
+          "searchVolume": 10,
+          "documentCount": 2025,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          71,
+          44,
+          14,
+          6,
+          6,
+          6,
+          42,
+          81,
+          55,
+          18,
+          15,
+          10,
+          8,
+          52,
+          82,
+          50,
+          17,
+          9,
+          9,
+          7,
+          56,
+          96,
+          51,
+          16,
+          13,
+          6,
+          7,
+          41,
+          100
+        ]
+      },
+      "kinCount": 345,
+      "kinTop": [
+        {
+          "title": "신병이나 빙의치료를 하는방법??",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60903&docId=489369643&answerNo=6",
+          "views": 602,
+          "answers": 16
+        },
+        {
+          "title": "혹시 신병 안걸려도 신내림이 가능한가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60906&docId=487437892&answerNo=2",
+          "views": 437,
+          "answers": 5
+        },
+        {
+          "title": "신병증상인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60906&docId=489613997&answerNo=3",
+          "views": 325,
+          "answers": 8
+        },
+        {
+          "title": "제가 신병같은거 앓을 확률 높을까요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60903&docId=488113583&answerNo=2",
+          "views": 81,
+          "answers": 6
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "신병 작가",
+      "issue": "신병",
+      "topic": "신병",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "신병 4 : 사보타주 공개전 시즌 1부터 시즌 4까지 기본 정보 - 그대에게 드림 후속작",
+          "신병4 캐스팅, 김민호·남태우 최종화 왜 모였나?",
+          "[신병1] ENA 신병 시즌1 다시보기 리뷰, 기본정보·10부작 줄거리·등장인물·결말 정리",
+          "신병5 제작 확정 방영일은 언제? 신병 더 무비 영화, 써닝 야구단 차기작",
+          "\"끝이 아니었네? 군 병원 가더니 벌써 '신병5' 확정된 역대급 대박 소식\"",
+          "신병4 결말 다음은? 신병5 제작 확정과 신병 더 무비 소식 총정리",
+          "써닝야구단 캐스팅·제작진 총정리(오정세·전혜진·신병4 사단)",
+          "드라마 신병 시즌1 등장인물 출연진 몇부작 줄거리 총정리 (김민호 X 남태우)",
+          "신병5 나올까? 신병 시즌5 가능성, 신병4 시청률 5.2%로 끝난 마지막회 결말",
+          "'신병4' 시청률 4.4% 4년 만에 최고 시청률 달성! 원작자 하차 우려 씻어낸 완벽한 반전은?"
+        ],
+        "measuredAt": "2026-09-30T21:40:14.485Z"
+      },
+      "documentCount": 18195,
+      "documentCountMeasured": true,
+      "searchVolume": 1910,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.1149051887905455,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 1,910",
+        "문서수 18,195",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 1,910 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "신병4 자체 최고 5.2% 시청률로 종영, 시즌5 확정",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "신병 작가와 원작 웹툰, 5.2% 종영한 신병4 시즌5까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "신병 작가 찾다 보니 신병4 결말에서 시즌5가 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "신병 등장인물",
+          "searchVolume": 27660,
+          "frame": "generic"
+        },
+        {
+          "keyword": "신병 시즌5",
+          "searchVolume": 17630,
+          "frame": "generic"
+        },
+        {
+          "keyword": "신병 웹툰",
+          "searchVolume": 7770,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "신병 등장인물",
+          "searchVolume": 27660,
+          "documentCount": 19681,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 시즌5",
+          "searchVolume": 17630,
+          "documentCount": 10149,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 웹툰",
+          "searchVolume": 7770,
+          "documentCount": 4271,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 원작",
+          "searchVolume": 2870,
+          "documentCount": 8393,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 원작 웹툰",
+          "searchVolume": 2190,
+          "documentCount": 2036,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 웹툰 작가",
+          "searchVolume": 180,
+          "documentCount": 1520,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "신병 드라마 원작",
+          "searchVolume": 10,
+          "documentCount": 5783,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": {
+        "series": [
+          64,
+          65,
+          33,
+          34,
+          34,
+          34,
+          29,
+          71,
+          90,
+          53,
+          53,
+          51,
+          44,
+          51,
+          70,
+          97,
+          67,
+          55,
+          60,
+          41,
+          55,
+          97,
+          78,
+          52,
+          66,
+          49,
+          59,
+          55,
+          100
+        ]
+      },
+      "kinCount": 3944,
+      "kinTop": [
+        {
+          "title": "이게 신병인가요..? 제 사주좀 봐주세요ㅠㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1111&docId=495338803&answerNo=8",
+          "views": 123,
+          "answers": 11
+        },
+        {
+          "title": "'신병' 시리즈와 '써닝야구단', 어떤 작품이 더 기대되시나요....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=90104&docId=495362609&answerNo=0",
+          "views": 15,
+          "answers": null
+        },
+        {
+          "title": "'신병' 시리즈와 '써닝야구단'의 차이점은 무엇인가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30102&docId=495362863&answerNo=1",
+          "views": 14,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "바레인 마라톤선수",
       "issue": "바레인",
@@ -92,25 +1088,31 @@
         }
       ],
       "whySearch": {
-        "text": "바레인이 카타르 33-32로 꺾고 첫 아시안게임 핸드볼 금",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+        "text": "바레인 마라톤선수가 아프리카 출신 귀화 선수인 배경과 대회 성적을 확인하려는 검색",
+        "basis": "AI 추론 — 실측 확인된 확장어 2개"
       },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "바레인 마라톤선수 귀화 과정과 아시안게임 육상 성적",
+          "text": "바레인 마라톤선수 귀화 배경과 아시안게임 성적",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "바레인 마라톤선수 아시안게임 성적 보다가 뭔가 이상해서 다시 봤네요",
+          "text": "바레인 마라톤선수 아시안게임 국적만 보고 넘겼는데 사연이 좀 다르더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "subKeywords": [
+        {
+          "keyword": "바레인 여자 마라톤선수",
+          "searchVolume": 760,
+          "source": "ai-verified",
+          "frame": "generic"
+        },
         {
           "keyword": "바레인 육상선수",
           "searchVolume": 120,
@@ -124,16 +1126,16 @@
       ],
       "keywordPool": [
         {
-          "keyword": "바레인 육상선수",
-          "searchVolume": 120,
-          "documentCount": 866,
-          "source": "ai-verified"
+          "keyword": "바레인 여자 마라톤선수",
+          "searchVolume": 760,
+          "source": "ai-verified",
+          "documentCount": 269
         },
         {
-          "keyword": "바레인 아시안게임",
-          "searchVolume": 70,
-          "documentCount": 8112,
-          "source": "ai-verified"
+          "keyword": "바레인 육상선수",
+          "searchVolume": 120,
+          "source": "ai-verified",
+          "documentCount": 868
         }
       ],
       "trend": {
@@ -168,15 +1170,21 @@
           1,
           0
         ],
-        "measuredAt": "2026-09-30T09:31:48.415Z"
+        "measuredAt": "2026-09-30T21:48:52.852Z"
       },
       "kinCount": 35,
-      "kinTop": null,
+      "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-30T03:23:26.919Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "carried": true
+      "carried": true,
+      "kinMode": "date-views-v2",
+      "enrichedBy": {
+        "provider": "claude",
+        "proposed": 6,
+        "verified": 2
+      }
     },
     {
       "keyword": "김유정 더쿠",
@@ -360,15 +1368,16 @@
         ],
         "label": "❄️ 시즌성",
         "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-09-30T09:05:36.139Z"
+        "measuredAt": "2026-09-30T21:48:52.852Z"
       },
       "kinCount": 2,
-      "kinTop": null,
+      "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-09-29T08:59:51.419Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "carried": true
+      "carried": true,
+      "kinMode": "date-views-v2"
     },
     {
       "keyword": "63빌딩 부페",
@@ -559,38 +1568,38 @@
         ],
         "label": "🚀 떡상",
         "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-09-30T09:05:36.139Z"
+        "measuredAt": "2026-09-30T21:48:52.852Z"
       },
       "kinCount": 720,
       "kinTop": [
         {
           "title": "63빌딩 뷔페 임산부 할인되나요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=40702&docId=475211545&answerNo=1",
-          "views": 2384,
+          "views": 2386,
           "answers": 1
         },
         {
           "title": "63빌딩 63파빌리온뷔페 왜 갑자기 영업을 안하나여??",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=80208&docId=480339734&answerNo=1",
-          "views": 711,
+          "views": 713,
           "answers": 1
         },
         {
           "title": "63빌딩 파빌리온뷔페 언제 오픈해여???",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=80208&docId=482109446&answerNo=1",
-          "views": 515,
+          "views": 516,
           "answers": 1
         },
         {
           "title": "63빌딩 파빌리온 뷔페 열렸나여?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=80208&docId=487187085&answerNo=1",
-          "views": 421,
+          "views": 423,
           "answers": 1
         },
         {
           "title": "63빌딩 파빌리온 뷔페 언제 여나여?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=80208&docId=483366406&answerNo=1",
-          "views": 86,
+          "views": 87,
           "answers": 1
         }
       ],
@@ -598,7 +1607,8 @@
       "measuredAt": "2026-09-29T03:40:55.874Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "carried": true
+      "carried": true,
+      "kinMode": "date-views-v2"
     }
   ],
   "observations": [
@@ -614,7 +1624,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 1,
+      "documentCount": 2,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": false,
@@ -626,8 +1636,8 @@
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "문서수 1",
-        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
+        "문서수 2",
+        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -636,7 +1646,7 @@
         }
       ],
       "whySearch": {
-        "text": "알리바바, 대화 타이밍 판단 음성 AI 큐원-오디오-3.1 리얼타임 공개",
+        "text": "알리바바가 대화 타이밍 판단하는 음성 AI 큐원-오디오-3.1-리얼타임 공개",
         "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -644,14 +1654,14 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "큐원-오디오-3.1-리얼타임 가격 95% 인하 성능 정리",
+          "text": "큐원-오디오-3.1-리얼타임 가격 95% 파괴 근거",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "큐원-오디오-3.1-리얼타임 이게 뭔지 몰라서 찾아봤습니다",
-          "frame": "generic",
-          "basis": "근거 프레임 없음 — 일반형"
+          "text": "큐원-오디오-3.1-리얼타임 알리바바가 가격을 95%나 내린 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "subKeywords": null,
@@ -660,7 +1670,77 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-30T09:29:31.280Z",
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "장항준 내과 뉴저지",
+      "issue": "장항준",
+      "topic": "장항준",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 11,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 11",
+        "선점 후보 — 경쟁 문서 11건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "장항준 감독 드라마 시간추적자 설록 0%대로 종영",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "장항준 내과 뉴저지 어떤 정보가 있는지",
+          "frame": "generic",
+          "basis": "근거 프레임 없음 — 일반형"
+        },
+        "home": {
+          "text": "장항준 내과 뉴저지 예약하려다 대기시간이 생각보다 길어서 고민했어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -702,7 +1782,7 @@
         }
       ],
       "whySearch": {
-        "text": "AIIA, 한국평가데이터와 AI 기업 발굴·성장 지원 협력",
+        "text": "AIIA가 한국평가데이터와 협력해 AI 기업 발굴 지원",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -715,7 +1795,7 @@
           "basis": "근거 프레임 없음 — 일반형"
         },
         "home": {
-          "text": "aiia 가수 무대 처음 봤을 때 이 목소리가 진짜인지 헷갈리더라고요",
+          "text": "aiia 가수 누군지 찾다가 무대 영상 보고 계속 돌려보게 됐네요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -726,7 +1806,155 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-30T09:29:31.280Z",
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "리퀴드 AI d1",
+      "issue": "리퀴드 AI",
+      "topic": "리퀴드 AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 30,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 30",
+        "선점 후보 — 경쟁 문서 30건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 의사결정 모델 d1 출시해 기존 1위 제쳐",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "리퀴드 AI d1 의사결정 모델 출시, 기존 1위와 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "리퀴드 AI d1이 기존 1위를 제쳤다길래 뭐가 다른지 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "큐원 오디오3.1",
+      "issue": "큐원-오디오-3.1-리얼타임",
+      "topic": "큐원-오디오-3.1-리얼타임",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 30,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 30",
+        "선점 후보 — 경쟁 문서 30건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "알리바바가 대화 타이밍 판단하는 음성 AI 큐원-오디오-3.1-리얼타임 공개",
+        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "큐원 오디오3.1 리얼타임 기능과 가격 95% 파괴 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "큐원 오디오3.1 알리바바가 가격을 95%나 내린 데는 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "알리바바 큐원",
+          "searchVolume": 40,
+          "frame": "generic"
+        },
+        {
+          "keyword": "큐원 AI",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "알리바바 큐원",
+          "searchVolume": 40,
+          "documentCount": 2234,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "큐원 AI",
+          "searchVolume": 40,
+          "documentCount": 3034,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -768,7 +1996,7 @@
         }
       ],
       "whySearch": {
-        "text": "AIIA, 한국평가데이터와 AI 기업 발굴·성장 지원 협력",
+        "text": "AIIA가 한국평가데이터와 협력해 AI 기업 발굴 지원",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -776,12 +2004,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "aiia-ai.org 2027 AI+X Top100 모집 조건 정리",
+          "text": "aiia-ai.org 2027 AI+X Top100 후보기업 모집 조건",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "aiia-ai.org 들어가서 AI+X Top100 지원하다 여기서 한참 막혔어요",
+          "text": "aiia-ai.org AI+X Top100 후보기업 넣으려다 조건에서 막히더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -792,7 +2020,212 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-30T09:29:31.280Z",
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "백종헌 보좌관 뇌물",
+      "issue": "백종헌 보좌관 뇌물",
+      "topic": "백종헌 보좌관 뇌물",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 41,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 41",
+        "선점 후보 — 경쟁 문서 41건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "검찰이 9500만원 뇌물 혐의 백종헌 의원 전 보좌관 구속기소",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "백종헌 보좌관 뇌물 9500만원 구속기소 혐의 내용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "백종헌 보좌관 뇌물 사건 터지고 나서 의원 프로필부터 다시 찾아봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "백종헌 프로필",
+          "searchVolume": 1330,
+          "frame": "generic"
+        },
+        {
+          "keyword": "백종헌 의원",
+          "searchVolume": 1120,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "백종헌 프로필",
+          "searchVolume": 1330,
+          "documentCount": 162,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "백종헌 의원",
+          "searchVolume": 1120,
+          "documentCount": 5946,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "김정난 갑상샘암 수술",
+      "issue": "김정난 갑상샘암 수술",
+      "topic": "김정난 갑상샘암 수술",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 45,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 45",
+        "선점 후보 — 경쟁 문서 45건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "라디오스타에서 김정난이 갑상샘암 초기 발견해 수술 고백",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "김정난 갑상샘암 수술 초기 발견에 항암 없이 수술만",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "김정난 갑상샘암 수술 이겨낸 배우 나이가 궁금해서 남편까지 찾아봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "김정난 나이",
+          "searchVolume": 1240,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김정난 배우",
+          "searchVolume": 100,
+          "frame": "generic"
+        },
+        {
+          "keyword": "김정난 남편",
+          "searchVolume": 70,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "김정난 나이",
+          "searchVolume": 1240,
+          "documentCount": 3392,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김정난 배우",
+          "searchVolume": 100,
+          "documentCount": 11147,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김정난 남편",
+          "searchVolume": 70,
+          "documentCount": 3972,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "갑상샘암 초기증상",
+          "searchVolume": 70,
+          "documentCount": 6170,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김정난 라디오스타",
+          "searchVolume": 50,
+          "documentCount": 786,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "김정난 박미선",
+          "searchVolume": 30,
+          "documentCount": 673,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -834,7 +2267,7 @@
         }
       ],
       "whySearch": {
-        "text": "AIIA, 한국평가데이터와 AI 기업 발굴·성장 지원 협력",
+        "text": "AIIA가 한국평가데이터와 협력해 AI 기업 발굴 지원",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -842,12 +2275,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "aiia journal 한국평가데이터 협력과 Top100 후보 모집",
+          "text": "aiia journal AIIA Top100 후보기업 모집 조건",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "aiia journal 찾다 알게 된 Top100 후보 모집, 의외로 놓치는 게 있더라",
+          "text": "aiia journal 뜨자마자 AIIA Top100 지원 기준부터 다시 봤어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -858,7 +2291,501 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-30T09:29:31.280Z",
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AIIA 모집",
+      "issue": "AIIA",
+      "topic": "AIIA",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 55,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 55",
+        "선점 후보 — 경쟁 문서 55건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AIIA가 한국평가데이터와 협력해 AI 기업 발굴 지원",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AIIA 모집 2027 AI+X Top100 후보기업 신청조건",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AIIA 모집 Top100 후보 조건 보다가 많이들 헷갈려하는 부분",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AIIA 뜻",
+      "issue": "AIIA",
+      "topic": "AIIA",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 86,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 86",
+        "선점 후보 — 경쟁 문서 86건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AIIA가 한국평가데이터와 협력해 AI 기업 발굴 지원",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": {
+        "seo": {
+          "text": "AIIA 뜻, AI산업협회와 아주대 인공지능연구원 차이",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AIIA 뜻 찾다 보면 AI산업협회랑 아주대 연구원 많이들 헷갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": {
+        "verdict": "bad",
+        "points": [
+          {
+            "text": "'AIIA 뜻'은 약자 풀이 한 줄만 손에 넣으면 끝나는 검색이다 — 검색자가 원하는 건 'AIIA가 무엇의 약자인가' 그 한 문장이지 도구·구매처·절차가 아니다. 정보 그것도 단답형 정보만 필요하다."
+          },
+          {
+            "text": "'뜻'을 치는 사람은 구매·가입 의도가 전혀 없는 상태다. 이 각도에서 뜨는 광고는 결제나 견적으로 이어지는 고단가 광고가 아니라 AI 관련 범용 디스플레이 광고 정도다 — 클릭할 이유가 붙는 상태가 아니다."
+          },
+          {
+            "text": "'AIIA 뜻'은 한 줄 얻고 나가는 검색의 교과서다. 정의를 확인하는 순간 체류가 끝나므로 광고가 눈에 들어오고 클릭까지 갈 시간 자체가 안 나온다. 읽어야 풀리는 검색이 아니다."
+          },
+          {
+            "text": "같이 검색되는 확인된 검색어가 '(없음)'이라는 점도 불리하다 — 확장될 상업적 후속 의도(비교·가격·신청 등)가 실측으로 잡히지 않아, 이 약자 풀이 하나에서 수익 경로로 넘어갈 근거가 없다."
+          }
+        ],
+        "angle": "굳이 쓴다면 'AIIA 뜻'을 미끼 제목으로만 쓰고, 본문은 그 AIIA가 가리키는 대상(예: 특정 AI 인증·협회·제품)의 신청 절차·가격·대안 비교처럼 상업 의도가 붙는 덩어리로 전환시키는 구조. 단, 어떤 AIIA인지 지시하는 후속 검색어가 실측으로 잡히기 전엔 각도를 고정하지 마라."
+      },
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "장항준 내과 뉴욕",
+      "issue": "장항준",
+      "topic": "장항준",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 72,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 72",
+        "선점 후보 — 경쟁 문서 72건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "장항준 감독 드라마 시간추적자 설록 0%대로 종영",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "장항준 내과 뉴욕 어떤 정보가 있는지",
+          "frame": "generic",
+          "basis": "근거 프레임 없음 — 일반형"
+        },
+        "home": {
+          "text": "장항준 내과 뉴욕에서 진료 마치고 받은 영수증을 한참 다시 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": [
+        {
+          "title": "장 항준 내과 의사 미국 거주인의 개인 프로필은 없나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=106&docId=352065566&answerNo=1",
+          "views": 4364,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "설록 종영",
+      "issue": "장항준",
+      "topic": "장항준",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 84,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 84",
+        "선점 후보 — 경쟁 문서 84건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "장항준 감독 드라마 시간추적자 설록 0%대로 종영",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "설록 종영 전회차 0%대 시청률, 장항준 감독이 남긴 말",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "설록 종영하고 시간추적자 시청률이 끝에 가서 어땠는지 다시 찾아보게 되네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "시간추적자 설록",
+          "searchVolume": 17490,
+          "frame": "generic"
+        },
+        {
+          "keyword": "시간추적자 설록 시청률",
+          "searchVolume": 390,
+          "frame": "generic"
+        },
+        {
+          "keyword": "설록 출연진",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "시간추적자 설록",
+          "searchVolume": 17490,
+          "documentCount": 847,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "시간추적자 설록 시청률",
+          "searchVolume": 390,
+          "documentCount": 93,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "설록 출연진",
+          "searchVolume": 20,
+          "documentCount": 926,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "장항준 설록",
+          "searchVolume": 10,
+          "documentCount": 312,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "설록 재방송",
+          "searchVolume": 10,
+          "documentCount": 88,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 7,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "제미나이 4 아르곤",
+      "issue": "제미나이 4 아르곤",
+      "topic": "제미나이 4 아르곤",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 92,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 92",
+        "선점 후보 — 경쟁 문서 92건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "구글이 제미나이4 플래그십 AI 아르곤 공개",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "제미나이 4 아르곤 성능 1위와 일반 사용 제한 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "제미나이 4 아르곤 출시일 맞춰 깔았다가 코딩만 된다는 말에 갸웃했네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "제미나이 4",
+          "searchVolume": 2330,
+          "frame": "generic"
+        },
+        {
+          "keyword": "구글 제미나이 4",
+          "searchVolume": 100,
+          "frame": "generic"
+        },
+        {
+          "keyword": "제미나이 4 출시일",
+          "searchVolume": 30,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "제미나이 4",
+          "searchVolume": 2330,
+          "documentCount": 207941,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "구글 제미나이 4",
+          "searchVolume": 100,
+          "documentCount": 81147,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "제미나이 4 출시일",
+          "searchVolume": 30,
+          "documentCount": 26221,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AIIA 가입",
+      "issue": "AIIA",
+      "topic": "AIIA",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "참여 방법",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 89,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 89",
+        "선점 후보 — 경쟁 문서 89건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 참여 방법"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AIIA가 한국평가데이터와 협력해 AI 기업 발굴 지원",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "AIIA 가입 조건과 회비 회원사 혜택 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AIIA 가입 회비만 보고 정하면 놓치는 게 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -900,7 +2827,7 @@
         }
       ],
       "whySearch": {
-        "text": "AIIA, 한국평가데이터와 AI 기업 발굴·성장 지원 협력",
+        "text": "AIIA가 한국평가데이터와 협력해 AI 기업 발굴 지원",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -908,12 +2835,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "aiia theater tokyo 좌석배치도 2층 시야 정리",
+          "text": "aiia theater tokyo 좌석 시야와 가는 길 미리 확인",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "aiia theater tokyo 2층에서 무대 보다가 목이 아팠어요",
+          "text": "aiia theater tokyo 좌석 예매하기 전에 많이들 놓치는 게 있더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -924,7 +2851,217 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-30T09:29:31.280Z",
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AIIA Top100",
+      "issue": "AIIA",
+      "topic": "AIIA",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "후보 모집",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 161,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 161",
+        "선점 후보 — 경쟁 문서 161건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 후보 모집"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AIIA가 한국평가데이터와 협력해 AI 기업 발굴 지원",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AIIA Top100 2027 후보기업 모집 대상과 신청 시기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AIIA Top100 후보기업 모집 시작됐는데 지원 조건에서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "AIIA 협력",
+      "issue": "AIIA",
+      "topic": "AIIA",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 207,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 207",
+        "선점 후보 — 경쟁 문서 207건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AIIA가 한국평가데이터와 협력해 AI 기업 발굴 지원",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "AIIA 협력 한국평가데이터와 AI기업 발굴·성장 지원",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "AIIA가 AI기업 평가를 한국평가데이터에 맡긴 데는 이유가 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 7,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "큐원 오디오",
+      "issue": "큐원-오디오-3.1-리얼타임",
+      "topic": "큐원-오디오-3.1-리얼타임",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 284,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 284",
+        "선점 후보 — 경쟁 문서 284건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "알리바바가 대화 타이밍 판단하는 음성 AI 큐원-오디오-3.1-리얼타임 공개",
+        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "큐원 오디오 3.1 가격 95% 인하와 리얼타임 성능 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "큐원 오디오 며칠 만져보니 알리바바가 왜 이걸 내놨는지 알겠더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "알리바바 큐원",
+          "searchVolume": 40,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "알리바바 큐원",
+          "searchVolume": 40,
+          "documentCount": 2234,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 22,
+      "kinTop": [
+        {
+          "title": "오디오북 엠피쓰리에 넣는방법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1020402&docId=106752581&answerNo=0",
+          "views": 15,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-30T21:39:07.481Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -992,76 +3129,8 @@
       "monetize": null,
       "measuredAt": "2026-09-30T09:29:31.280Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "큐원 오디오",
-      "issue": "큐원-오디오-3.1-리얼타임",
-      "topic": "큐원-오디오-3.1-리얼타임",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 283,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 283",
-        "선점 후보 — 경쟁 문서 283건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "알리바바, 대화 타이밍 판단 음성 AI 큐원-오디오-3.1 리얼타임 공개",
-        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "큐원 오디오 3.1 공개, 가격 95% 파괴에 리얼타임까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "큐원 오디오 3.1 가격이 95%나 싸졌다길래 이유를 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 22,
-      "kinTop": [
-        {
-          "title": "오디오북 엠피쓰리에 넣는방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1020402&docId=106752581&answerNo=0",
-          "views": 14,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-30T09:29:31.280Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이영준 동점골로 위기",
@@ -3493,1076 +5562,114 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "셀렉트스타 알바 후기",
-      "issue": "셀렉트스타",
-      "topic": "셀렉트스타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 84,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 20",
-        "문서수 84",
-        "선점 후보 — 경쟁 문서 84건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "셀렉트스타 알바 후기 캐시미션 데이터라벨링 실제 시급",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "셀렉트스타 알바 후기 찾다가 채용 공고 시급이랑 왜 다른지 다시 봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "셀렉트스타 채용",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "셀렉트스타 연봉",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "셀렉트스타 채용",
-          "searchVolume": 40,
-          "documentCount": 542,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "셀렉트스타 연봉",
-          "searchVolume": 20,
-          "documentCount": 209,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T21:22:22.655Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "제브 벤치마크",
-      "issue": "제브",
-      "topic": "제브",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 39,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 39",
-        "선점 후보 — 경쟁 문서 39건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "타입세이프 AI 제브가 클로드 오퍼스5 지원으로 포켓몬 명예의전당에 올라 개발자들이 열광했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "제브 벤치마크 193배 빠르고 444배 저렴한 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "제브 벤치마크에서 제브 AI 붙은 뒤로 뭐가 달라진 건지 다시 봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "제브 AI",
-          "searchVolume": 440,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "제브 AI",
-          "searchVolume": 440,
-          "documentCount": 652,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T21:22:22.655Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "셀렉트스타 연봉",
-      "issue": "셀렉트스타",
-      "topic": "셀렉트스타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 209,
-      "documentCountMeasured": true,
-      "searchVolume": 20,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 20",
-        "문서수 209",
-        "선점 후보 — 경쟁 문서 209건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "셀렉트스타 연봉 초봉과 신입 채용공고 조건 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "셀렉트스타 연봉 보러 갔다가 채용 조건에서 한참을 멈춰 있었어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "셀렉트스타 채용",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "셀렉트스타 채용",
-          "searchVolume": 40,
-          "documentCount": 542,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T21:22:22.655Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "제브 클로드",
-      "issue": "제브",
-      "topic": "제브",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 77,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 77",
-        "선점 후보 — 경쟁 문서 77건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "타입세이프 AI 제브가 클로드 오퍼스5 지원으로 포켓몬 명예의전당에 올라 개발자들이 열광했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T21:22:22.655Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "타입세이프 제브",
-      "issue": "제브",
-      "topic": "제브",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 105,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 105",
-        "선점 후보 — 경쟁 문서 105건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "타입세이프 AI 제브가 클로드 오퍼스5 지원으로 포켓몬 명예의전당에 올라 개발자들이 열광했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "타입세이프 제브 193배 빠르고 444배 저렴한 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "타입세이프 제브 긴 답변 대신 판단만 하는데 개발자들이 열광하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T21:22:22.655Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "셀렉트스타 잡플래닛",
-      "issue": "셀렉트스타",
-      "topic": "셀렉트스타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 14,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 14",
-        "선점 후보 — 경쟁 문서 14건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "셀렉트스타 잡플래닛 연봉·면접 후기 실제 평점",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "셀렉트스타 잡플래닛 후기에서 연봉보다 다들 이걸 더 보더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "셀렉트스타 채용",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "셀렉트스타 연봉",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "셀렉트스타 채용",
-          "searchVolume": 40,
-          "documentCount": 542,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "셀렉트스타 연봉",
-          "searchVolume": 20,
-          "documentCount": 209,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T21:22:22.655Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "제브 접속",
-      "issue": "제브",
-      "topic": "제브",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "어디서 쓰는지",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 172,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 172",
-        "선점 후보 — 경쟁 문서 172건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 어디서 쓰는지"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "타입세이프 AI 제브가 클로드 오퍼스5 지원으로 포켓몬 명예의전당에 올라 개발자들이 열광했다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "제브 접속 방법과 193배 빠르다는 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "제브 접속해서 제브 AI 써봤는데 긴 답변을 기대한 게 민망해지네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "제브 AI",
-          "searchVolume": 440,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "제브 AI",
-          "searchVolume": 440,
-          "documentCount": 652,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 17,
-      "kinTop": [
-        {
-          "title": "PXG 공홈 접속이 안되네요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=40613&docId=376197111&answerNo=1",
-          "views": 188,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-28T21:22:22.655Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "셀렉트스타 인턴",
-      "issue": "셀렉트스타",
-      "topic": "셀렉트스타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 129,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 129",
-        "선점 후보 — 경쟁 문서 129건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "셀렉트스타 인턴 채용 연봉과 면접 후기 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "셀렉트스타 인턴 지원 전에 연봉이랑 회사 분위기부터 알아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "셀렉트스타 채용",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "셀렉트스타 연봉",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "셀렉트스타 채용",
-          "searchVolume": 40,
-          "documentCount": 542,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "셀렉트스타 연봉",
-          "searchVolume": 20,
-          "documentCount": 209,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T21:22:22.655Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "셀렉트스타 블라인드",
-      "issue": "셀렉트스타",
-      "topic": "셀렉트스타",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 213,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 213",
-        "선점 후보 — 경쟁 문서 213건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "셀렉트스타 블라인드, EMNLP 논문 5편 채택 기업 후기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "셀렉트스타 블라인드 연봉 글 보다가 채용 공고까지 눌러보고 있네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "셀렉트스타 채용",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "셀렉트스타 연봉",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "셀렉트스타 채용",
-          "searchVolume": 40,
-          "documentCount": 542,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "셀렉트스타 연봉",
-          "searchVolume": 20,
-          "documentCount": 209,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-28T21:22:22.655Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
-  "rejectedCount": 1,
+  "rejectedCount": 0,
   "issues": [
     {
-      "issue": "주택 신속공급",
+      "issue": "미국 PCE 물가",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "서울 도심복합사업 신규 후보지 11곳 1.8만가구 선정",
+      "why": "미국 8월 PCE 물가 3.4% 올라 전망치 하회",
       "headlines": [
         {
-          "title": "서울 11곳 1만8000가구…도심공공주택복합사업 신규 후보지 나왔다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-30T02:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005337536?sid=101"
-        },
-        {
-          "title": "서울 도심공공주택 복합사업 후보지 11곳 선정…1만8천가구 공급",
+          "title": "美 8월 PCE 물가 3.4%↑…전망 밑돌며 10월 금리인상 부담 완화(종합)",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T02:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016346130?sid=101"
+          "publishedAt": "2026-09-30T14:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016348654?sid=104"
         },
         {
-          "title": "서울 집값 역대 최장 상승 눈앞…규제 넘어 공급 시험대",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-30T05:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014223954?sid=101"
-        }
-      ],
-      "concentrated": [
+          "title": "[속보] 미국 8월 PCE 물가지수 전년대비 3.4%↑…전망치 밑돌아",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-30T12:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005742314?sid=101"
+        },
         {
-          "keyword": "주택 신속공급 대책",
-          "searchVolume": null,
-          "origin": "autocomplete"
+          "title": "미국 8월 PCE 물가 전년 대비 3.4%↑…전망치 소폭 하회",
+          "press": "yonhapnewstv.co.kr",
+          "publishedAt": "2026-09-30T12:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/422/0000911342?sid=104"
         }
       ],
+      "concentrated": [],
       "nextWave": [],
       "rowCount": 0
     },
     {
-      "issue": "추경호에 징역 20년",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "특검이 계엄표결 방해 혐의 추경호에 징역 20년 구형",
-      "headlines": [
-        {
-          "title": "'계엄표결 방해' 추경호에 징역 20년 구형…11월18일 선고(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T08:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016348024?sid=102"
-        },
-        {
-          "title": "특검, '계엄해제 표결 방해 의혹' 추경호에 징역 20년 구형",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-09-30T06:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001526549?sid=102"
-        },
-        {
-          "title": "특검, ‘계엄 해제 표결 방해’ 추경호에 징역 20년 구형",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-09-30T06:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012265506?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "계엄 표결 방해",
-          "reason": "사건 실체 검색",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "중국",
+      "issue": "나는 솔로",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "쌍둥이 판다 루이·후이바오 12월 중국 이송 확정",
+      "why": "나는솔로 33기 최종 선택으로 최종 커플 탄생",
       "headlines": [
         {
-          "title": "'쌍둥이 판다' 12월 한국 떠난다…중국 이송 일정 확정",
-          "press": "yna.co.kr",
+          "title": "‘나는솔로’ 33기 최종 선택",
+          "press": "bntnews.co.kr",
           "publishedAt": "2026-09-30T00:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016345638?sid=102"
+          "link": "https://www.bntnews.co.kr/article/view/bnt202609300165"
         },
         {
-          "title": "남자 축구, 중국에 역전승 거두고 결승행",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-30T08:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001392190?sid=104"
+          "title": "나는솔로 33기 최커 탄생… 라방은 어디서?",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-09-30T16:34:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1163147"
         },
         {
-          "title": "푸바오 동생 루이바오·후이바오, 12월 셋째 주 중국으로",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-09-30T01:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001195224?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "중국 환율",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 입국신고서",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 여행",
-          "searchVolume": 32040,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 지도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 이심",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국 중국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 추석",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "중국 한국 야구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "수시 원서접수 먹통",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "수시 먹통으로 80개대 3184건 추가접수 경쟁률 0.22% 상승",
-      "headlines": [
-        {
-          "title": "'수시 먹통'에 80개大 3천184건 추가접수…경쟁률 0.22%↑",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T05:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016346960?sid=102"
-        },
-        {
-          "title": "수시 '먹통' 1시간 연장에 3184건 추가 접수…80개 대학서 발생",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-09-30T06:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004194352?sid=102"
-        },
-        {
-          "title": "'수시 먹통' 뒤 80개대 3184건 추가 접수…경쟁률 0.22%↑",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-30T06:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014224367?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "트럼프 한국 알래스카",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "트럼프 30일 한국의 알래스카 LNG 540억불 투자 발표 전망",
-      "headlines": [
-        {
-          "title": "\"트럼프, 이르면 30일 한국의 알래스카 540억불 투자 발표\"(종합)",
+          "title": "'나는솔로' 33기 모솔 현숙, 영수에 막판 호감 시그널…영자는 \"바보같...",
           "press": "news1.kr",
-          "publishedAt": "2026-09-30T00:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009199576?sid=104"
-        },
-        {
-          "title": "'추가 검토' 분류된 알래스카 LNG…트럼프 발표로 흔들리나",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T06:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016347460?sid=101"
-        },
-        {
-          "title": "한국 돈으로 알래스카 표심 사려는 트럼프, 30일 백악관서 발표 [이상은...",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-30T08:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005337725?sid=104"
+          "publishedAt": "2026-09-30T02:40:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009200278"
         }
       ],
       "concentrated": [
         {
-          "keyword": "트럼프",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "현대모비스 램프사업 매각",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "dead",
-      "isHot": true,
-      "why": "현대모비스 램프사업부 6000억에 프랑스 OP모빌리티 매각",
-      "headlines": [
-        {
-          "title": "현대모비스, 램프사업부 6000억에 프랑스 OP모빌리티에 매각",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-30T07:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005337702?sid=101"
-        },
-        {
-          "title": "[단독] 현대모비스, '램프 매각' 전격 본계약…오늘 유력",
-          "press": "biz.sbs.co.kr",
-          "publishedAt": "2026-09-29T23:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/374/0000535495?sid=101"
-        },
-        {
-          "title": "현대모비스, 램프사업 매각 마무리 수순…프랑스 OP와 본계약",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T06:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016347601?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "현대모비스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "과태료",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "금융위, 실손24 미연계 의료기관 과태료 부과 검토",
-      "headlines": [
-        {
-          "title": "'실손24' 연계율 47.7%…금융위 \"미연계 업체 과태료 검토\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-30T01:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014222750?sid=101"
-        },
-        {
-          "title": "실손보험 청구전산화 연계율 47%…\"미연계 시 과태료 부과 검토\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T01:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016345734?sid=101"
-        },
-        {
-          "title": "실손24 연계율 90% 끌어올린다…참여 저조 의료기관엔 과태료 추진",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-30T01:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009199800?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "차량 과태료 조회",
+          "keyword": "나는 솔로 33기",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "과태료 납부",
+          "keyword": "나는 솔로 갤러리",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "과태료 범칙금 차이",
+          "keyword": "나는 솔로 ott",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "과속 과태료 조회",
+          "keyword": "나는 솔로 그후",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "속도위반 과태료",
+          "keyword": "나는 솔로 31기",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "과태료 이의신청",
+          "keyword": "나는 솔로 결혼",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "주정차 과태료 조회",
+          "keyword": "나는 솔로 옥순",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "과태료 확인",
+          "keyword": "나는솔로 갤",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "실손24 과태료 금액",
-          "reason": "부과 수준 궁금",
+          "keyword": "나는솔로 34기",
+          "reason": "다음 기수",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4571,30 +5678,30 @@
       "rowCount": 0
     },
     {
-      "issue": "이은우 KTV 원장",
+      "issue": "북한군 MDL 침범",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "계엄 비판 자막 삭제 이은우 전 KTV 원장 2심도 집행유예",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "북한군 8~9월 MDL 50여차례 침범, 유엔사 정전협정 위반 지적",
       "headlines": [
         {
-          "title": "'계엄 비판자막 삭제' 이은우 前 KTV 원장, 2심도 징역형 집유",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-30T02:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014223250?sid=102"
+          "title": "北, 8∼9월 총 50여차례 MDL 침범…9월에만 30여차례",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-30T09:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016348344?sid=100"
         },
         {
-          "title": "'계엄 비판 자막 삭제' 이은우 전 KTV 원장, 2심도 징역형 집유",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-09-30T03:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000513412?sid=102"
+          "title": "\"북한군, 거의 매일 침범했다\"…두 달간 50여차례 MDL 넘어",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-30T10:58:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005337848?sid=100"
         },
         {
-          "title": "‘계엄 비판 뉴스 삭제’ 이은우 전 KTV 원장, 2심도 징역형 집유",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-09-30T02:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003473336?sid=102"
+          "title": "유엔사 \"MDL넘어온 北지뢰, 정전협정 위반\"",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-30T08:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005742252?sid=100"
         }
       ],
       "concentrated": [],
@@ -4602,40 +5709,333 @@
       "rowCount": 0
     },
     {
-      "issue": "빌리 츠키 대학",
+      "issue": "아시안게임 4연패 대결!",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "빌리 츠키 건강 문제로 대학축제 불참 회복 집중",
+      "why": "남자축구 3회 연속 아시안게임 결승서 일본과 맞대결",
       "headlines": [
         {
-          "title": "빌리 츠키, 건강 문제로 대학행사 빠진다 “휴식과 회복에 집중”",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-09-30T07:08:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001141352"
+          "title": "[아시안게임] 박혜정, 역도 여자 최중량급 은메달…2연속 메달",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-29T08:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016344835?sid=104"
         },
         {
-          "title": "빌리 츠키, 건강상 이유로 대학 축제 빠진다…\"회복에 집중\"",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-09-30T07:01:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000778147"
+          "title": "[아시안게임] '역도 요정' 박혜정, 여자 86㎏ 이상급 은메달",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-09-29T09:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000642109?sid=104"
         },
         {
-          "title": "빌리 츠키, 건강상 이유로 대학축제 불참 \"건강 회복 집중\"",
-          "press": "celuvmedia.com",
-          "publishedAt": "2026-09-30T06:54:00.000Z",
-          "link": "http://www.celuvmedia.com/article.php?aid=1790749424528529007"
+          "title": "‘4연패 도전’ 남자축구, 3회 연속 아시안게임 결승서 일본과 맞대결",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-09-30T15:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002825428?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "새로운 암살자들",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "오세훈이 영화 암살자(들) 역사 왜곡 사과 요구",
+      "headlines": [
+        {
+          "title": "오세훈 “‘암살자(들)’ 역사 왜곡 사과해야…정치권은 자제를”",
+          "press": "sedaily.com",
+          "publishedAt": "2026-09-29T04:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004666377?sid=102"
+        },
+        {
+          "title": "오세훈 “역사 왜곡이 (영화) 흥행의 연료가 돼선 안돼”… ‘암살자(들...",
+          "press": "segye.com",
+          "publishedAt": "2026-09-29T07:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004162690?sid=100"
+        },
+        {
+          "title": "“창작의 산물” 항변에도…‘암살자(들)’ 역사 왜곡 논란 일파만파",
+          "press": "kmib.co.kr",
+          "publishedAt": "2026-09-30T07:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/005/0001875918?sid=103"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "신병",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "신병4 자체 최고 5.2% 시청률로 종영, 시즌5 확정",
+      "headlines": [
+        {
+          "title": "‘신병4’, 자체 최고 5.2%로 유종의 미…시즌5 기대↑",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-09-30T02:02:00.000Z",
+          "link": "https://m.entertain.naver.com/article/009/0005741848"
+        },
+        {
+          "title": "5%도 넘었다…'신병4', 전 시즌 최고 시청률로 종영",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-09-30T00:08:00.000Z",
+          "link": "https://m.entertain.naver.com/article/018/0006377447"
+        },
+        {
+          "title": "'신병4', 시리즈 최고 시청률 5.2%로 종영…시즌5 확정",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-09-30T02:11:00.000Z",
+          "link": "https://m.entertain.naver.com/article/629/0000538022"
         }
       ],
       "concentrated": [
         {
-          "keyword": "빌리",
+          "keyword": "신병 등장인물",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "빌리 츠키",
+          "keyword": "신병 ott",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신병 시즌4",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신병 시즌3",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신병 김현욱",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신병 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신병 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "신병 전세계",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "신병 출연진",
+          "reason": "배우 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "신병 웹툰",
+          "reason": "원작 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 5
+    },
+    {
+      "issue": "백종헌 보좌관 뇌물",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "검찰이 9500만원 뇌물 혐의 백종헌 의원 전 보좌관 구속기소",
+      "headlines": [
+        {
+          "title": "검찰, 9천500만원 뇌물 혐의 백종헌 의원 전 보좌관 구속기소",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-30T10:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016348400?sid=102"
+        },
+        {
+          "title": "검찰, '9500만원 뇌물 혐의' 백종헌 의원 前 보좌관 구속기소",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-30T10:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005337845?sid=102"
+        },
+        {
+          "title": "백종헌 의원 前보좌관 구속기소...9500만원 뇌물 수수 혐의",
+          "press": "fnnews.com",
+          "publishedAt": "2026-09-30T11:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005583269?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "이도현 스포츠클라이밍 은메달",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "스포츠클라이밍 이도현 볼더링 은메달로 2연속 입상",
+      "headlines": [
+        {
+          "title": "스포츠클라이밍 이도현, 볼더링 은메달…두 대회 연속 입상[나고야AG]",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-30T10:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014225128?sid=104"
+        },
+        {
+          "title": "[아시안게임] 클라이밍 '간판' 이도현, 1번 과제 0점에도 극적인 은메달...",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-30T13:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016348632?sid=104"
+        },
+        {
+          "title": "男볼더링 이도현 은메달…스포츠클라이밍 첫 AG 2연속 입상",
+          "press": "donga.com",
+          "publishedAt": "2026-09-30T12:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003751835?sid=104"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "장항준",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "장항준 감독 드라마 시간추적자 설록 0%대로 종영",
+      "headlines": [
+        {
+          "title": "전 회차 0%대 시청률로 막 내렸다…장항준 감독 \"전하지 못한 이야기 많...",
+          "press": "tenasia.co.kr",
+          "publishedAt": "2026-09-30T02:01:00.000Z",
+          "link": "https://m.entertain.naver.com/article/312/0000778090"
+        },
+        {
+          "title": "'시간추적자 설록' 종영…장항준 \"또 다른 이야기로 만나길\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-30T07:51:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009201606"
+        },
+        {
+          "title": "‘왕사남’으로 1600만 동원한 장항준인데 ‘설록’은 전회차 0%대 시청...",
+          "press": "newsen.com",
+          "publishedAt": "2026-09-30T03:11:00.000Z",
+          "link": "https://m.entertain.naver.com/article/609/0001173871"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "장항준감독",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "장항준 김은희",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "장항준 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "장항준 영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "장항준 와이프",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "정준원 장항준",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "장항준 사주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "장항준 정준원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "장항준 차기작",
+          "reason": "다음 작품",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "장항준 예능",
+          "reason": "거장항준 활동",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "김정난 갑상샘암 수술",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "라디오스타에서 김정난이 갑상샘암 초기 발견해 수술 고백",
+      "headlines": [
+        {
+          "title": "'라디오스타' 김정난, 갑상샘암 수술 고백…\"박미선 큰 힘 됐다\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-30T14:33:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009201986"
+        },
+        {
+          "title": "‘라디오스타’ 김정난 갑상샘암 고백",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-09-30T21:10:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202610010001"
+        },
+        {
+          "title": "김정난, 사실 암이었다 \"갑상샘암 초기 발견…항암 없이 수술만\"",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-30T17:39:00.000Z",
+          "link": "https://m.entertain.naver.com/article/008/0005420623"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김정난",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -4644,75 +6044,172 @@
       "rowCount": 0
     },
     {
-      "issue": "아시안게임 축구",
+      "issue": "제미나이 4 아르곤",
       "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "남자축구 중국에 2-1 역전승 결승 진출 4연패 도전",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "구글이 제미나이4 플래그십 AI 아르곤 공개",
       "headlines": [
         {
-          "title": "남자 축구, 중국에 역전승 거두고 결승행",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-09-30T08:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001392190?sid=104"
+          "title": "구글, 제미나이4 플래그십 AI '아르곤' 공개…오픈AI·앤트로픽 추격",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-30T20:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009202052?sid=104"
         },
         {
-          "title": "동점골 넣는 이영준",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T07:34:00.000Z",
-          "link": "https://m.sports.naver.com/kfootball/article/001/0016347849"
+          "title": "코딩 신기록·사이버보안 공동 1위…구글 '제미나이 4' 공개",
+          "press": "fnnews.com",
+          "publishedAt": "2026-09-30T20:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005583309?sid=101"
         },
         {
-          "title": "[속보] 남자축구, 4연패 보인다…중국 꺾고 결승 진출",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-30T07:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005337706?sid=104"
+          "title": "구글, '제미나이 4 아르곤' 공개…성능 1위 탈환에도 \"일반 사용 제한\"",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-30T21:24:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215821"
         }
       ],
       "concentrated": [
         {
-          "keyword": "아시안게임 축구 일정",
+          "keyword": "제미나이",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "아시안게임 축구 명단",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안게임 축구 감독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안게임 축구 와일드카드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안게임 축구 조편성",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안게임 축구 중계",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "나고야 아시안게임 축구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안게임 축구 8강",
+          "keyword": "구글 제미나이",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "유튜브 계정공유 중단 피해 속출, 서울시가 구글에 개선 요청",
+      "headlines": [
+        {
+          "title": "유튜브 계정공유 중단 피해 속출…서울시, 구글에 개선 요청",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-30T21:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014225377?sid=102"
+        },
+        {
+          "title": "\"클로드 한 달간 무료\"라더니…'구글 계정' 탈탈 털린다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-30T06:39:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005337659?sid=105"
+        },
+        {
+          "title": "구글, 제미나이4 플래그십 AI '아르곤' 공개…오픈AI·앤트로픽 추격",
+          "press": "news1.kr",
+          "publishedAt": "2026-09-30T20:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009202052?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 홈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 게임",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "구글 계정 보안",
+          "reason": "해킹 예방",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "RRSI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "구글이 재학습 없이 스스로 개선하는 RRSI 공개",
+      "headlines": [
+        {
+          "title": "구글, AI 모델 재학습 없이 '하네스' 스스로 개선하는 'RRSI' 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-09-30T09:10:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215802"
+        },
+        {
+          "title": "'기생충'이 한국 영화 최초로 골든글로브 외국어영화상을 수상했다",
+          "press": "huffingtonpost.kr",
+          "publishedAt": "2020-01-06T03:46:00.000Z",
+          "link": "https://www.huffingtonpost.kr/entry/parasite_kr_5e128f0ae4b0b2520d23a6e5?utm_id=naver"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "RRSI 뜻",
+          "reason": "개념 이해",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "RRSI 활용",
+          "reason": "실제 적용",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "RRSI 공개",
+          "reason": "오픈 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -4721,7 +6218,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "리퀴드 AI 의사결정 모델 'd1' 출시 기존 1위 제쳤다",
+      "why": "리퀴드 AI가 의사결정 모델 d1 출시해 기존 1위 제쳐",
       "headlines": [
         {
           "title": "AI·청정에너지로… 롯데, 기술 사업 재편 속도",
@@ -4751,15 +6248,8 @@
       ],
       "nextWave": [
         {
-          "keyword": "리퀴드 AI 활용",
-          "reason": "적용 분야 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
           "keyword": "리퀴드 AI 회사",
-          "reason": "기업 정보 검색",
+          "reason": "기업 정보",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4773,7 +6263,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "알리바바, 대화 타이밍 판단 음성 AI 큐원-오디오-3.1 리얼타임 공개",
+      "why": "알리바바가 대화 타이밍 판단하는 음성 AI 큐원-오디오-3.1-리얼타임 공개",
       "headlines": [
         {
           "title": "알리바바, 대화 타이밍까지 판단하는 음성 AI '큐원-오디오-3.1-리얼타임...",
@@ -4863,137 +6353,22 @@
       ],
       "nextWave": [
         {
-          "keyword": "알리바바 주가 전망",
-          "reason": "GPU 허용 호재",
+          "keyword": "알리바바 주가",
+          "reason": "주가 반응",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "알리바바 관련주",
-          "reason": "수혜주 관심",
+          "keyword": "알리바바 AI",
+          "reason": "신제품 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "알리바바 AI 경쟁",
-          "reason": "미중 구도 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "알리바바 에이전틱",
-          "reason": "신규 AI 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "'클로드 무료' 사칭에 구글 계정 탈취 피해 발생",
-      "headlines": [
-        {
-          "title": "\"클로드 한 달간 무료\"라더니…'구글 계정' 탈탈 털린다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-09-30T06:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005337659?sid=105"
-        },
-        {
-          "title": "구글, '경쟁사에 AI·검색 개방' EU 명령에 불복",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-29T09:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016344960?sid=104"
-        },
-        {
-          "title": "대신 쇼핑하는 메타 '뮤즈' VS 대신 일하는 오픈AI '닷'…AI 에이전트 대...",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-30T01:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014223027?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 번역기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 영국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 클래스룸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 홈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 게임",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "구글 계정 예방법",
-          "reason": "피해 방지 수요",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "구글 계정 복구",
-          "reason": "탈취 후 대응",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "구글 비밀번호 변경",
-          "reason": "즉시 보안 조치",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "구글 피해 신고",
-          "reason": "신고 절차 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "구글 EU 소송",
-          "reason": "개방 명령 불복 이슈",
+          "keyword": "알리바바 주식",
+          "reason": "투자 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -5007,7 +6382,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "AIIA, 한국평가데이터와 AI 기업 발굴·성장 지원 협력",
+      "why": "AIIA가 한국평가데이터와 협력해 AI 기업 발굴 지원",
       "headlines": [
         {
           "title": "AI 기업 평가에 KODATA 활용…AIIA와 맞손",
@@ -5057,95 +6432,22 @@
       ],
       "nextWave": [
         {
-          "keyword": "AIIA 모집 일정",
-          "reason": "접수 기간 확인",
+          "keyword": "AIIA Top100",
+          "reason": "후보 모집",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "AIIA 지원 혜택",
-          "reason": "참여 이점 관심",
+          "keyword": "AIIA 가입",
+          "reason": "참여 방법",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "AWS",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "AWS 서울 리전서 클로드 오퍼스·소네트 5 제공 데이터 국내 처리",
-      "headlines": [
-        {
-          "title": "AWS 서울 리전서 '클로드 오퍼스 5' 제공…데이터 국내 처리",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-30T07:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014224696?sid=105"
         },
         {
-          "title": "[AI픽] AWS, 최신 클로드 국내서 제공…데이터 해외 반출 없이 쓴다",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T02:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016346246?sid=105"
-        },
-        {
-          "title": "삼성전자, ‘삼성 AI 포럼 2026’ 개최…오픈AI·AWS 등 참여",
-          "press": "donga.com",
-          "publishedAt": "2026-09-30T01:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003751658?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "aws 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws 코리아",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws 자격증",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws 자격증 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws 베드락",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아마존 aws",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "aws 공부방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "삼성 AI 포럼",
-          "reason": "연계 행사 관심",
+          "keyword": "후보기업",
+          "reason": "선정 대상",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -5154,84 +6456,36 @@
       "rowCount": 0
     },
     {
-      "issue": "오픈AI",
+      "issue": "이은우 KTV 원장",
       "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈AI, 비용 80% 줄인 가성비 'GPT-6.1 솔' 공개",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "계엄 비판 자막 삭제 이은우 전 KTV 원장 2심도 집행유예",
       "headlines": [
         {
-          "title": "“챗GPT, 대화창 넘어 업무·앱 유통 중심지로”… 오픈AI의 거대 플랫폼...",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-09-30T07:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001195381?sid=105"
-        },
-        {
-          "title": "배경훈 \"독파모 계속…프론티어 AI와 '두 축'으로 간다\"",
+          "title": "'계엄 비판자막 삭제' 이은우 前 KTV 원장, 2심도 징역형 집유",
           "press": "newsis.com",
-          "publishedAt": "2026-09-30T00:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014222540?sid=105"
+          "publishedAt": "2026-09-30T02:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014223250?sid=102"
         },
         {
-          "title": "AI 권력지형도 보여준 트럼프의 빅테크 초청 오찬",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-30T04:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004001284?sid=104"
+          "title": "'계엄 비판 자막 삭제' 이은우 전 KTV 원장, 2심도 징역형 집유",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-09-30T03:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/437/0000513412?sid=102"
+        },
+        {
+          "title": "‘계엄 비판 뉴스 삭제’ 이은우 전 KTV 원장, 2심도 징역형 집유",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-09-30T02:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003473336?sid=102"
         }
       ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 아스트라",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI 보안 논란",
-          "reason": "경고 묵살 이슈",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "이영준 동점골로 위기",
@@ -6530,108 +7784,25 @@
       ],
       "rowCount": 0,
       "carried": true
-    },
-    {
-      "issue": "셀렉트스타",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "셀렉트스타가 NLP 학회 EMNLP 2026에 AI 신뢰성 연구 5편을 채택시켰다",
-      "headlines": [
-        {
-          "title": "채택률 15.4% 뚫었다…셀렉트스타, 국제학회에 논문 5편 채택",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-28T10:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005419274?sid=101"
-        },
-        {
-          "title": "셀렉트스타, 세계적 NLP 학회 ‘EMNLP 2026’서 AI 신뢰성 연구 5편 채택",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-28T01:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006376224?sid=105"
-        },
-        {
-          "title": "셀렉트스타, EMNLP 2026에 AI 신뢰성 연구 5편 채택",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-09-28T00:36:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=703115"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "셀렉트스타 알바",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "셀렉트스타 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "셀렉트스타 매출",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "셀렉트스타 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "셀렉트스타 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "셀렉트스타 알바 후기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "셀렉트스타 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "셀렉트스타(주)",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "셀렉트스타 상장",
-          "reason": "IPO 여부 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "셀렉트스타 채용",
-          "reason": "입사 정보 검색",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "AI 신뢰성 연구",
-          "reason": "논문 내용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "셀렉트스타 투자",
-          "reason": "기업 성장 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
     }
-  ]
+  ],
+  "enrichedAt": "2026-09-30T21:50:08.251Z",
+  "enrichStats": {
+    "enriched": 3,
+    "subsAdded": 3,
+    "titleUpgraded": 0,
+    "proposed": 18,
+    "verified": 5,
+    "judged": 0,
+    "judgedBad": 0,
+    "related": 0,
+    "picked": 0,
+    "pooled": 5,
+    "aiTitled": 3,
+    "trended": 1,
+    "homeRetried": 3,
+    "whyAdded": 3,
+    "aiCalls": 3,
+    "partial": false
+  }
 }
