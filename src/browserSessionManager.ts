@@ -117,6 +117,11 @@ class BrowserSessionManager {
     private readonly RECONNECT_MAX_RETRIES = 3;
     private readonly RECONNECT_RETRY_DELAY_MS = 5000;
 
+    // Accounts whose browser we are closing on purpose (quit, re-login). Their
+    // 'disconnected' event must not start the reconnect loop: the quit log showed
+    // reconnect attempts firing against browsers closeAllSessions() had just closed.
+    private readonly closingAccounts = new Set<string>();
+
     private constructor() {
         console.log('[BrowserSessionManager] 싱글톤 인스턴스 생성됨');
     }
@@ -646,9 +651,11 @@ class BrowserSessionManager {
         // ✅ [v1.4.78] 첫 세션 생성 시 keep-alive 자동 시작 (싱글톤 타이머)
         this.startKeepalive();
 
+        // A fresh browser for this account is ours to heal again.
+        this.closingAccounts.delete(accountId);
+
         // Stage 5: Register disconnect event listener for auto-heal
         browser.on('disconnected', () => {
-            console.log(`[BrowserSessionManager] 🔌 disconnected event for ${accountId.substring(0, 3)}*** — scheduling reconnect`);
             // Read-only diagnostics (2026-09-29 login loop): tell "Chrome process died /
             // window closed" apart from "CDP pipe dropped while Chrome kept running".
             const describeProcess = (label: string) => {
@@ -658,6 +665,11 @@ class BrowserSessionManager {
                 } catch { /* diagnostics must never throw */ }
             };
             describeProcess('t+0');
+            if (this.closingAccounts.has(accountId)) {
+                console.log(`[BrowserSessionManager] 🔌 disconnected event for ${accountId.substring(0, 3)}*** — closing on purpose, reconnect skipped`);
+                return;
+            }
+            console.log(`[BrowserSessionManager] 🔌 disconnected event for ${accountId.substring(0, 3)}*** — scheduling reconnect`);
             // Second sample: the process exit event usually lands a beat after the CDP drop.
             setTimeout(() => describeProcess('t+1500ms'), 1500).unref?.();
             this.attemptReconnect(accountId).then(ok => {
@@ -974,6 +986,8 @@ class BrowserSessionManager {
         }
 
         try {
+            // Mark before close(): the 'disconnected' event lands while close() is still pending.
+            this.closingAccounts.add(accountId);
             await withCleanupTimeout(
                 () => session.browser.close(),
                 this.BROWSER_CLOSE_TIMEOUT_MS,

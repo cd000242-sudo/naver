@@ -9,6 +9,7 @@ import { detectLowSpec, logLowSpecStatus } from './diagnostics/lowSpecMode.js';
 import { globalLimiter } from './runtime/adaptiveLimiter.js';
 import { initSessionTracking, shouldDisableGpuFromHistory, getRecentFreezeAvg } from './runtime/runtimeStats.js';
 import { withCleanupTimeout } from './runtime/cleanupTimeout.js';
+import { armExitWatchdog } from './runtime/exitWatchdog.js';
 import {
   sanitizeRendererIpcResult,
   sanitizeUserVisibleError,
@@ -8880,6 +8881,16 @@ app.on('before-quit', (event) => {
   });
 });
 
+// [2026-09-30] 'quit' is emitted synchronously inside Electron's Shutdown(), right
+// before the main message loop stops. Nothing scheduled with setTimeout runs after
+// that point, so the process.exit() backstops above cannot rescue a hang in native
+// teardown — which is what left the app alive in Task Manager after automation runs.
+// Arm an OS-level watchdog here instead; it is a no-op when teardown finishes.
+app.on('quit', () => {
+  const armed = armExitWatchdog();
+  console.log(`[Main] quit: exit watchdog ${armed ? 'armed' : 'not armed'}`);
+});
+
 // ffmpeg 경고 무시 (미디어 재생 기능 미사용)
 // ✅ [v2.7.47 게임 친화] 작업표시줄 깜빡임 차단 — 5중 가드
 //   1. CalculateNativeWinOcclusion: Windows occlusion 계산 비활성 (fullscreen 게임 깜빡임 주범)
@@ -10263,6 +10274,12 @@ async function _runFullCleanup(reason: string): Promise<void> {
         stopPeriodicCheck();
       }),
       runCleanupStep('trend monitor', () => trendMonitor.stop()),
+      // worker_threads Workers are joined by Node during native teardown; close them
+      // while the event loop is still ours instead.
+      runCleanupStep('base64 worker pool', () => {
+        const { globalBase64Pool } = require('./main/workers/base64Pool.js');
+        return globalBase64Pool.terminate();
+      }, 3_000),
     ];
     if (resourceCleanupComplete) {
       backgroundCleanupSteps.push(runCleanupStep('zombie recovery lock', () => {
