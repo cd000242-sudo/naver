@@ -41,10 +41,10 @@ export default function HomefeedBenchmarkBoard() {
  const categories=useMemo(()=>['전체',...new Set(view?.candidates.map(c=>c.category)??[])],[view]);
  const items=useMemo(()=>filterBenchmarks(view?.candidates??[],{category,status,query}),[view,category,status,query]);
  const healthy=view?.sources.filter(s=>s.status==='ok').length??0;
- return <section className="hf-benchmark" aria-label="채널 벤치마크 추천">
+ return <section className="hf-benchmark" aria-label="리더남 홈판 추천 소재 · 제목">
   <HomefeedBenchmarkStyles />
   <header className="hfb-header">
-   <div><span className="hfb-eyebrow">BENCHMARK RADAR · 리더남의 채널 리스트</span><h2>발견한 소재를, <span>지금 쓸 이야기로.</span></h2><p>벤치마크 채널 전체에서 작성 시점과 근거를 검토합니다.</p></div>
+   <div><span className="hfb-eyebrow">BENCHMARK RADAR · 리더남의 채널 리스트</span><h2>리더남 홈판 추천 <span>소재 · 제목</span></h2><p>벤치마크 채널에서 최근 48시간 안에 나온 소재를 전부 모았습니다. 여러 채널이 함께 다룬 소재가 먼저 나옵니다.</p></div>
    <div className="hfb-count"><strong>{view?.candidates.length ?? '—'}</strong><span>검토할 소재</span></div>
   </header>
   <div className="hfb-meta"><span>{view ? `마지막 수집 ${benchmarkTime(view.generatedAt)} KST` : '벤치마크 자료 연결 중'}</span><button type="button" onClick={()=>void load()} disabled={loading}>{loading?'불러오는 중…':'자료 새로고침'}</button></div>
@@ -60,7 +60,7 @@ export default function HomefeedBenchmarkBoard() {
     <div className="hfb-filter-row" role="group" aria-label="검토 상태">{FILTERS.map(([id,label])=><button type="button" key={id} aria-pressed={status===id} onClick={()=>setStatus(id)}>{label} <span>{id==='all'?view.candidates.length:id==='recommended'?view.candidates.filter(c=>c.recommended).length:view.candidates.filter(c=>c.status===id).length}</span></button>)}</div>
     <div className="hfb-filter-bottom"><div className="hfb-categories" role="group" aria-label="분야">{categories.map(c=><button type="button" key={c} aria-pressed={category===c} onClick={()=>setCategory(c)}>{c}</button>)}</div><input type="search" aria-label="벤치마크 소재 검색" placeholder="키워드·이야기 검색" value={query} onChange={e=>setQuery(e.target.value)}/></div>
    </div>
-   <p className="hfb-legend">★는 근거와 작성 재료를 갖춘 우선 검토 소재입니다. 홈판 노출 확인과는 별개이며, 제목은 작성용 제안입니다.</p>
+   <p className="hfb-legend">★는 최근 이틀 안에 벤치마크 채널 두 곳 이상이 함께 다룬 소재입니다. 홈판 노출 확인과는 별개이며, 제목은 작성용 제안입니다.</p>
    <div className="hfb-list">{items.slice(0,limit).map(c=><HomefeedBenchmarkCard key={c.id} candidate={c}/>)}</div>
    {items.length===0 && <div className="hfb-empty"><strong>이 조건에 맞는 소재가 없습니다.</strong><button type="button" onClick={()=>{setCategory('전체');setStatus('all');setQuery('');}}>전체 소재 보기</button></div>}
    {items.length>limit&&<button type="button" className="hfb-more" onClick={()=>setLimit(n=>n+12)}>소재 더 보기 · {Math.min(limit,items.length)}/{items.length}</button>}

@@ -33,7 +33,7 @@ const TABS = [
     { id: 'golden', label: '리더남 전용 황금키워드', short: '황금키워드', icon: '◆' },
     { id: 'issue', label: '실검 틈새키워드', short: '실검 틈새', icon: '⚡' },
     // 홈판 신호(사장님 명령서 STORY RADAR v2.0, 2026-09-16) — 실검 틈새 바로 옆. 이용권 탭(맛보기 목록에 넣지 않는다).
-    { id: 'homefeed', label: '홈판 신호', short: '홈판 신호', icon: '◉' },
+    { id: 'homefeed', label: '리더남 홈판 추천 소재 · 제목', short: '홈판 추천', icon: '◉' },
     { id: 'picks', label: '오늘의 네이버 추천키워드', short: '추천키워드', icon: 'N' },
     { id: 'briefs', label: '오늘의 글감', short: '글감', icon: '✎' },
     { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },

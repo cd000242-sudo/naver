@@ -22,7 +22,8 @@ const homefeedFiles = () => readdirSync(join(SRC, DIR)).filter((name) => name.en
 test('홈판 신호 탭은 실검 틈새 바로 뒤의 이용권 탭이고, 실검 틈새 탭은 그대로다', () => {
     const page = read('pages/LewordPage.tsx');
     const issueAt = page.indexOf("{ id: 'issue',");
-    const homefeedAt = page.indexOf("{ id: 'homefeed', label: '홈판 신호'");
+    // 2026-09-30 사장님: 탭 이름을 '리더남 홈판 추천 소재 · 제목' 으로(기존 신호 · 작성 도구 화면은 입구를 뺐다).
+    const homefeedAt = page.indexOf("{ id: 'homefeed', label: '리더남 홈판 추천 소재 · 제목'");
     const picksAt = page.indexOf("{ id: 'picks',");
     assert.ok(issueAt > 0 && issueAt < homefeedAt && homefeedAt < picksAt, '탭 순서');
     assert.match(page, /const GUEST_TABS: ReadonlySet<string> = new Set\(\['golden', 'issue'\]\);/);
