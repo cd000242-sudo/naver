@@ -23,7 +23,10 @@ function read(rel: string): string {
 describe('아이디·비밀번호 기억하기 — 업데이트 후에도 유지', () => {
   const config = read('configManager.ts');
   const save = read('renderer/modules/credentialsSave.ts');
-  const form = read('renderer/modules/formUtilities.ts');
+  // 2026-09-30: the second copy of initCredentialsSave in formUtilities.ts is gone
+  // (it shadowed the real one in the bundle and swallowed the password eye toggle —
+  // see credentialsSaveToggle.test.ts). Only credentialsSave.ts carries the intent now.
+  const intentSources = [save];
 
   it('"직접 껐다" 표시가 설정에 있다', () => {
     expect(config).toMatch(/credentialsOptOut\?: boolean;/);
@@ -49,13 +52,13 @@ describe('아이디·비밀번호 기억하기 — 업데이트 후에도 유지
   });
 
   it('체크 해제 시 의도를 남긴다', () => {
-    for (const source of [save, form]) {
+    for (const source of intentSources) {
       expect(source).toMatch(/rememberCredentials: false,[\s\S]{0,220}credentialsOptOut: true,/);
     }
   });
 
   it('다시 체크하면 의도 표시를 지운다', () => {
-    for (const source of [save, form]) {
+    for (const source of intentSources) {
       expect(source).toMatch(/rememberCredentials: true,[\s\S]{0,200}credentialsOptOut: false,/);
     }
   });

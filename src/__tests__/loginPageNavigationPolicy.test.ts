@@ -149,6 +149,34 @@ describe('loginPageNavigationPolicy', () => {
     expect(isLoginChallengeUrl('about:blank')).toBe(false);
   });
 
+  // [2026-09-30] Live log 06:30:30 (311***): after the password login Naver parked the
+  // browser on nid.naver.com/user2/help/idSafetyRelease (보호조치 해제 안내). The URL has
+  // no 'login' marker, so resolvePostLoginProgressUrl called it a success, the app saved
+  // cookies and went to the write editor, which bounced to nidlogin → another password
+  // login. Five to seven automated logins in ten minutes is exactly what trips 보호조치.
+  // The challenge check at step 2 never ran because step 1 broke out of the loop first.
+  it('treats the idSafetyRelease (보호조치) page as a challenge, never as a login success', () => {
+    const loginUrl = 'https://nid.naver.com/nidlogin.login';
+    const idSafety = 'https://nid.naver.com/user2/help/idSafetyRelease?m=viewIdSafetyInfo&token_help=abc';
+    const protect = 'https://nid.naver.com/user2/protect';
+
+    expect(isLoginChallengeUrl(idSafety)).toBe(true);
+
+    for (const url of [idSafety, protect]) {
+      expect(resolvePostLoginProgressUrl(url, loginUrl)).toMatchObject({
+        status: 'pending',
+        shouldMarkLoginSuccess: false,
+        shouldRecheckAfterDelay: false,
+      });
+      expect(isPostLoginFinalCheckSuccess(url)).toBe(false);
+    }
+
+    // Ordinary nid.naver.com pages that are not challenges keep their old verdict.
+    expect(resolvePostLoginProgressUrl('https://nid.naver.com/user2/help/myInfo', loginUrl)).toMatchObject({
+      status: 'success',
+    });
+  });
+
   it('limits login DOM inspection to NID login/account surfaces', () => {
     expect(shouldInspectLoginPageDom('https://nid.naver.com/nidlogin.login')).toBe(true);
     expect(shouldInspectLoginPageDom('https://nid.naver.com/login/ext/deviceConfirm')).toBe(true);

@@ -9,6 +9,7 @@ import * as path from 'path';
 import {
   resolveServerSessionProbeVerdict,
   isServerSessionLoginRedirect,
+  SERVER_SESSION_PROBE_URL,
 } from '../automation/serverSessionProbePolicy';
 
 describe('resolveServerSessionProbeVerdict', () => {
@@ -67,5 +68,20 @@ describe('ensureServerSession wiring', () => {
 
   it('logs the probe reason on the success branch too (next report needs status+url)', () => {
     expect(body).toMatch(/if\s*\(verdict\.ok\)[\s\S]{0,400}?console\.log\([\s\S]{0,200}?verdict\.reason/);
+  });
+
+  // [2026-09-30] The bare PostWriteForm.naver route (no blogId) is 404 for a logged-out
+  // client (measured 2026-09-29 and again 2026-09-30 with plain node fetch); nothing
+  // ever showed it is 2xx for a logged-in one — v2.11.306 logged 0 passes / 2 fails on a
+  // session that had published four posts hours earlier. GoBlogWrite.naver is the URL
+  // the real editor navigation uses: logged out → 302 to nidlogin (measured), logged in
+  // → editor 200 (hundreds of live runs). The probe must fetch the same thing.
+  it('probes GoBlogWrite.naver — the same URL the editor navigation uses — not the bare 404 route', () => {
+    // page.evaluate cannot see module constants — the URL must travel in as an argument.
+    expect(body).toMatch(/page\.evaluate\(\s*async\s*\(probeUrl: string, timeoutMs: number\)/);
+    expect(body).toMatch(/fetch\(probeUrl,/);
+    expect(body).toMatch(/\},\s*SERVER_SESSION_PROBE_URL,\s*this\.SERVER_SESSION_CHECK_TIMEOUT_MS\)/);
+    expect(body).not.toMatch(/fetch\('https:\/\/blog\.naver\.com\/PostWriteForm\.naver'/);
+    expect(SERVER_SESSION_PROBE_URL).toBe('https://blog.naver.com/GoBlogWrite.naver');
   });
 });

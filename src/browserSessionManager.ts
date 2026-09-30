@@ -16,7 +16,7 @@ import { promises as fs } from 'fs';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
 import { emitSessionEvent } from './session/sessionEventLogger.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
-import { resolveServerSessionProbeVerdict } from './automation/serverSessionProbePolicy.js';
+import { resolveServerSessionProbeVerdict, SERVER_SESSION_PROBE_URL } from './automation/serverSessionProbePolicy.js';
 import { withCleanupTimeout } from './runtime/cleanupTimeout.js';
 
 // ✅ [2026-03-27 FIX] Stealth Plugin — 모든 evasion 모듈 명시적 활성화
@@ -868,11 +868,14 @@ class BrowserSessionManager {
 
         try {
             // 실제 네이버 에디터 접근으로 서버 세션 유효성 확인
-            const serverCheck = await page.evaluate(async (timeoutMs: number) => {
+            // (2026-09-30: 에디터 이동과 같은 GoBlogWrite.naver 를 조회 — 로그아웃이면 nidlogin 으로
+            //  302, 로그인이면 에디터 200. blogId 없는 PostWriteForm.naver 는 로그아웃 404 만 실측됐고
+            //  로그인 2xx 는 한 번도 관측되지 않아 매 발행 비밀번호 로그인을 부르고 있었다)
+            const serverCheck = await page.evaluate(async (probeUrl: string, timeoutMs: number) => {
                 const controller = new AbortController();
                 const timer = setTimeout(() => controller.abort(), timeoutMs);
                 try {
-                    const res = await fetch('https://blog.naver.com/PostWriteForm.naver', {
+                    const res = await fetch(probeUrl, {
                         method: 'GET',
                         credentials: 'include',
                         cache: 'no-store',
@@ -894,7 +897,7 @@ class BrowserSessionManager {
                 } finally {
                     clearTimeout(timer);
                 }
-            }, this.SERVER_SESSION_CHECK_TIMEOUT_MS);
+            }, SERVER_SESSION_PROBE_URL, this.SERVER_SESSION_CHECK_TIMEOUT_MS);
 
             const verdict = resolveServerSessionProbeVerdict(serverCheck);
             if (verdict.ok) {

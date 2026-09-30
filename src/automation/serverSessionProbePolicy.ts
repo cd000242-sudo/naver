@@ -10,7 +10,16 @@
  * A valid session now requires BOTH: no login redirect AND a 2xx response.
  * Anything ambiguous resolves to "invalid" — a wasted re-login is recoverable,
  * a skipped login on a dead session is not.
+ *
+ * 2026-09-30 follow-up: the bare PostWriteForm.naver route (no blogId) is 404 for
+ * a logged-out client, but nothing ever showed it is 2xx for a logged-in one —
+ * v2.11.306 logged 0 passes / 2 fails on a session that had published four posts
+ * hours earlier, and every "fail" costs a fresh password login (the 보호조치
+ * trigger). The probe now fetches GoBlogWrite.naver, the URL the editor navigation
+ * itself uses: logged out → 302 to nidlogin (measured), logged in → editor 200.
  */
+
+export const SERVER_SESSION_PROBE_URL = 'https://blog.naver.com/GoBlogWrite.naver';
 
 export interface ServerSessionProbeResult {
   finalUrl?: string;

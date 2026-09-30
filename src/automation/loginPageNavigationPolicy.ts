@@ -131,7 +131,10 @@ export function isLoginChallengeUrl(value: string): boolean {
   return (
     lowerUrl.includes('protect') ||
     lowerUrl.includes('security') ||
-    lowerUrl.includes('verification')
+    lowerUrl.includes('verification') ||
+    // 2026-09-30: nid.naver.com/user2/help/idSafetyRelease — the 보호조치 release notice
+    // Naver parks the browser on after a login it does not fully accept.
+    lowerUrl.includes('idsafety')
   );
 }
 
@@ -159,7 +162,16 @@ export function resolvePostLoginProgressUrl(
   const url = String(currentUrl || '');
   const lowerUrl = url.toLowerCase();
 
-  if (isNidLoginSurface(url) || isBlankSurface(url) || lowerUrl === String(loginUrl || '').toLowerCase()) {
+  // A challenge page (보호조치/본인인증) is on naver.com and usually carries no 'login'
+  // marker, so it used to fall through to 'success' — the caller then saved cookies,
+  // opened the editor, bounced back to nidlogin and typed the password again. Keep it
+  // pending so the caller's challenge branch gets to run and wait for the user.
+  if (
+    isNidLoginSurface(url) ||
+    isBlankSurface(url) ||
+    lowerUrl === String(loginUrl || '').toLowerCase() ||
+    isLoginChallengeUrl(url)
+  ) {
     return {
       status: 'pending',
       shouldMarkLoginSuccess: false,
@@ -192,7 +204,12 @@ export function resolvePostLoginProgressUrl(
 
 export function isPostLoginFinalCheckSuccess(value: string): boolean {
   const url = String(value || '');
-  return !isNidLoginSurface(url) && !isBlankSurface(url) && !hasGenericLoginMarker(url);
+  return (
+    !isNidLoginSurface(url) &&
+    !isBlankSurface(url) &&
+    !hasGenericLoginMarker(url) &&
+    !isLoginChallengeUrl(url)
+  );
 }
 
 export function isLoginProxyFailureBody(value: string): boolean {
