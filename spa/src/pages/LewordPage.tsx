@@ -10,6 +10,7 @@ import HomefeedTab from '../components/leword/homefeed/HomefeedTab';
 import KeysTab from '../components/leword/KeysTab';
 import KinGoldenTab from '../components/leword/KinGoldenTab';
 import LewordStyles from '../components/leword/LewordStyles';
+import MyBlogTab from '../components/leword/MyBlogTab';
 import RadarTab from '../components/leword/RadarTab';
 import RankTab from '../components/leword/RankTab';
 import RpmTab from '../components/leword/RpmTab';
@@ -41,6 +42,7 @@ const TABS = [
     { id: 'youtube', label: '유튜브 급상승 글감', short: '유튜브 글감', icon: '▶' },
     { id: 'radar', label: '외부유입 레이더', short: '레이더', icon: '⊚' },
     { id: 'rank', label: '노출 추적', short: '노출 추적', icon: '↗' },
+    { id: 'myblog', label: '내 블로그 오늘 쓸 글', short: '내 블로그', icon: '☖' },
     { id: 'rpm', label: '글 RPM 확인', short: 'RPM', icon: '$' },
     { id: 'keys', label: '내 API 키', short: 'API 키', icon: '⚿' },
 ] as const;
@@ -337,6 +339,7 @@ function LewordPage() {
                 {!lockedTab && activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'radar' && <RadarTab initialUrl={handoffPostUrl} />}
                 {!lockedTab && activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} onAnalyze={sendToAnalyze} />}
+                {!lockedTab && activeTab === 'myblog' && <MyBlogTab />}
                 {!lockedTab && activeTab === 'rpm' && <RpmTab onRadar={sendToRadar} />}
                 {!lockedTab && activeTab === 'keys' && <KeysTab />}
             </section>

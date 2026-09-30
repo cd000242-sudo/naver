@@ -75,6 +75,29 @@ async function decryptKeys(record: SyncRecord, blob: string): Promise<UserKeys |
     } catch { return null; }
 }
 
+/**
+ * 같은 유도 키로 다른 판(내 블로그 앱 실측 등)을 잠근다 — 동기화가 꺼져 있으면 null.
+ * 워커는 슬롯별 암호문만 보관하므로 여기서 잠근 것은 비밀번호를 아는 브라우저만 연다(2026-09-30 플랜 B).
+ */
+export async function sealWithKeySync(value: unknown): Promise<{ slot: string; blob: string } | null> {
+    const record = loadRecord();
+    if (!record || !cryptoOk()) return null;
+    return { slot: record.slot, blob: await encryptKeys(record, value as UserKeys) };
+}
+
+/** sealWithKeySync 로 잠근 암호문을 연다. 동기화가 꺼져 있거나 키가 다르면 null. */
+export async function openWithKeySync<T = unknown>(blob: string): Promise<T | null> {
+    const record = loadRecord();
+    if (!record || !cryptoOk() || !blob) return null;
+    return (await decryptKeys(record, blob)) as T | null;
+}
+
+/** 동기화 슬롯 주소(있을 때만) — 워커에서 잠근 판을 찾는 열쇠. */
+export function keySyncSlot(): string | null {
+    const record = loadRecord();
+    return record ? record.slot : null;
+}
+
 /** 지금 저장된 키를 올린다. 동기화가 켜져 있지 않으면 아무것도 안 한다. 실패는 조용히(다음 저장 때 다시). */
 export async function pushUserKeys(keys: UserKeys = loadUserKeys()): Promise<boolean> {
     return (await pushUserKeysDetailed(keys)).ok;
