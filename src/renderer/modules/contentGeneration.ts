@@ -16,6 +16,7 @@ import { resolveTextModelProfile, isAgentTextProvider } from '../../runtime/mode
 import type { FillSemiAutoFieldsOptions } from '../types/index.js';
 import { resolveArticleTypeHint } from '../../shared/categoryTaxonomy.js';
 import { decideKeywordPrefix } from '../../content/keywordTitlePrefixPolicy.js';
+import { renderTitleCandidateChips } from './titleCandidateChips.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -188,6 +189,30 @@ function applyManualTitleOverrideToContent(structuredContent: any, manualTitle?:
   structuredContent.manualTitleValue = title;
   structuredContent.titleAlternatives = [title];
   structuredContent.titleCandidates = [{ text: title, score: 100, reasoning: '사용자 지정 제목' }];
+}
+
+/** Swaps the semi-auto title for one of the generator's other candidates (chip click). */
+function applyTitleCandidate(nextTitle: string): void {
+  const title = String(nextTitle || '').trim();
+  const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement | null;
+  if (!title || !titleInput) return;
+  titleInput.value = title;
+  // Preview sync + image-tab title mirror both listen for 'input'.
+  titleInput.dispatchEvent(new Event('input', { bubbles: true }));
+  const sc = (window as any).currentStructuredContent;
+  if (sc) {
+    sc.selectedTitle = title;
+    sc.title = title;
+    if (sc._postId) {
+      try {
+        saveGeneratedPost(sc, true);
+      } catch (err) {
+        console.warn('[TitleCandidate] 저장 글 제목 갱신 실패:', err instanceof Error ? err.message : err);
+      }
+    }
+    renderTitleCandidateChips(sc, applyTitleCandidate);
+  }
+  appendLog(`📝 제목 후보 적용: "${title}"`);
 }
 
 // ✅ [2026-03-14] 강화된 키워드 중복 제거 공통 함수
@@ -1772,6 +1797,7 @@ export function fillSemiAutoFields(
   } else {
     console.error('[fillSemiAutoFields] unified-generated-title NOT found!');
   }
+  renderTitleCandidateChips(structuredContent, applyTitleCandidate);
 
   // 본문 필드 채움 (수정 가능)
   const contentTextarea = document.getElementById('unified-generated-content') as HTMLTextAreaElement;

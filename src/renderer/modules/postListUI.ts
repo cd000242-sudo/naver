@@ -29,6 +29,7 @@ declare function normalizeGeneratedPostCategoryKey(key: string): string;
 declare function getGeneratedPostCategoryLabel(key: string): string;
 declare function getRequiredImageBasePath(): Promise<string>;
 import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
+import { renderTitleCandidateChips } from './titleCandidateChips.js';
 
 declare function updateUnifiedImagePreview(headings: any[], images: any[]): void;
 declare function displayGeneratedImages(images: any[]): void;
@@ -150,6 +151,8 @@ export function populateGeneratedPostFields(
   if (imageTitleInput) {
     imageTitleInput.value = title;
   }
+  // Candidates are not in the saved snapshot — clear chips left over from the last generation.
+  renderTitleCandidateChips(null, () => {});
 
   dispatchCompletedFieldEvents([titleInput, contentTextarea, hashtagsInput]);
 }

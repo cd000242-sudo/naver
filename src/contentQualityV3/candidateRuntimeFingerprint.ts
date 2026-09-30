@@ -757,6 +757,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/tailUIUtils.ts',
   'src/renderer/modules/thumbnailGenerator.ts',
   'src/renderer/modules/thumbnailPreview.ts',
+  'src/renderer/modules/titleCandidateChips.ts',
   'src/renderer/modules/titleGeneration.ts',
   'src/renderer/modules/tutorialsTab.ts',
   'src/renderer/modules/undoImageChange.ts',

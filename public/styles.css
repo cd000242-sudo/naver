@@ -4423,3 +4423,40 @@ select option {
     white-space: normal !important;
   }
 }
+
+/* [2026-09-30] Semi-auto title candidate chips (titleCandidateChips.ts) */
+.title-candidates {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+}
+.title-candidate-label {
+    font-size: 0.78rem;
+    color: #6b7280;
+    margin-right: 2px;
+}
+.title-candidate-chip {
+    max-width: 100%;
+    padding: 5px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 999px;
+    background: #f9fafb;
+    color: #1f2937;
+    font-size: 0.82rem;
+    line-height: 1.3;
+    text-align: left;
+    white-space: normal;
+    cursor: pointer;
+}
+.title-candidate-chip:hover {
+    border-color: #10b981;
+    background: #ecfdf5;
+}
+.title-candidate-chip.is-active {
+    border-color: #10b981;
+    background: #10b981;
+    color: #fff;
+    cursor: default;
+}

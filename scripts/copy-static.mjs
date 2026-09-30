@@ -563,6 +563,7 @@ try {
     'businessAngleRotation.js',  // [2026-06-12] 업체홍보 각도 로테이션 (fullAutoFlow보다 먼저 로드 — window 전역 등록)
     'publishingHandlers.js',
     'fullAutoFlow.js',
+    'titleCandidateChips.js',  // [2026-09-30] 반자동 제목 후보 칩 — contentGeneration/postListUI 가 import
     'contentGeneration.js',
     'undoImageChange.js',
     'formAndAutomation.js',
