@@ -9,7 +9,14 @@ export function safeBenchmarkUrl(value) {
 export function metricText(value) { const n = number(value); return n === null ? '미측정' : n.toLocaleString('ko-KR'); }
 export function benchmarkTime(value) { const d = date(value); return d ? new Intl.DateTimeFormat('ko-KR', { timeZone:'Asia/Seoul', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit', hour12:false }).format(new Date(d)) : '미확인'; }
 function source(raw = {}) {
- return { id:str(raw.id,120), name:str(raw.name,160) || str(raw.id,120) || '출처', platform:str(raw.platform,40), url:safeBenchmarkUrl(raw.url), status:['ok','unavailable','failed'].includes(raw.status) ? raw.status : 'unavailable', reason:str(raw.reason), postCount:number(raw.postCount) ?? 0, capturedAt:date(raw.capturedAt), publishedAt:date(raw.publishedAt), title:str(raw.title), summary:str(raw.summary), discoveryOnly:raw.discoveryOnly !== false, metrics:{views:number(raw.metrics?.views), likes:number(raw.metrics?.likes), comments:number(raw.metrics?.comments)} };
+ return { id:str(raw.id,120), name:str(raw.name,160) || str(raw.id,120) || '출처', platform:str(raw.platform,40), url:safeBenchmarkUrl(raw.url), status:['ok','unavailable','failed'].includes(raw.status) ? raw.status : 'unavailable', reason:str(raw.reason), postCount:number(raw.postCount) ?? 0, capturedAt:date(raw.capturedAt), publishedAt:date(raw.publishedAt), title:str(raw.title), summary:str(raw.summary), discoveryOnly:raw.discoveryOnly !== false, metrics:{views:number(raw.metrics?.views), likes:number(raw.metrics?.likes), comments:number(raw.metrics?.comments)}, growth:growthOf(raw.growth) };
+}
+/** 이전 수집 대비 반응 증가(CI 판이 잰 값, 2026-10-01). 모양이 맞는 칸만 옮긴다. */
+function growthOf(raw) {
+ const one=(g)=>g && typeof g==='object' && number(g.change)!==null && number(g.elapsedMinutes)!==null ? {change:number(g.change),elapsedMinutes:number(g.elapsedMinutes)} : null;
+ if(!raw || typeof raw!=='object') return null;
+ const out={views:one(raw.views),likes:one(raw.likes),comments:one(raw.comments)};
+ return out.views||out.likes||out.comments ? out : null;
 }
 function candidate(raw, index) {
  // seoTitle(검색형)은 폐기. homeTitle 은 편집자가 손으로 고른 한 줄, homeTitles 는 소재당 홈판 후킹형 20개.

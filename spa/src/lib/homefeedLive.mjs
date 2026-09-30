@@ -139,13 +139,23 @@ export function groupTokens(title) {
     .map((t) => (t.length >= 3 && PARTICLE.test(t) ? t.replace(PARTICLE, '') : t))
     .filter((t) => t.length >= 2 && !/^\d+$/.test(t) && !/^[a-z0-9_.]{6,}$/.test(t) && !GROUP_STOP.test(t)))];
 }
-function sharedTokens(a, b) {
+// 일반어 · 겹침 단위 · 같은 소재 판정 — 수집기 homefeed-benchmarks-core.cjs 와 같다(2026-10-01 188곳 오묶음 수리).
+const GENERIC = new Set(['패션', '스타일', '코디', '얼굴', '몸매', '미모', '비주얼', '연예인', '배우', '여배우', '남배우', '아이돌', '가수', '스타', '셀럽', '화보', '공항', '공항패션', '반전', '레전드', '충격', '대박', '난리', '정체', '방법', '후기', '정보', '추천', '비교', '가격', '신차', '출시', '발표', '사람들', '남자들', '여자들', '여자', '남자', '정신', '모습', '포인트', '느낌', '분위기', '매력', '인기', '순위', '역대', '최고', '최초', '완전', '하는', '되는', '있는', '없는', '보니', '같은', '이유가', '누구', '앞두고', '달라진', '몰라보게', '되더니', '했더니', '결혼', '명품', '가방', '명품백', '신상', '할인', '일정', '이벤트']);
+const isGeneric = (token) => GENERIC.has(token) || /^\d{1,2}(대|세|살)$/.test(token) || /^\d+(위|명|개|원|만원|천만원|억|억원|km|%)$/.test(token);
+function sharedUnits(a, b) {
   const contains = (t, u) => !/\d/.test(t) && !/\d/.test(u) && t.length >= 2 && u.length >= 2 && (t.includes(u) || u.includes(t));
-  return a.filter((t) => b.some((u) => t === u || contains(t, u))).length;
+  const units = new Set();
+  for (const t of a) for (const u of b) {
+    if (t === u) units.add(t);
+    else if (contains(t, u)) units.add(t.length <= u.length ? t : u);
+  }
+  return [...units];
 }
-function sameStory(a, b) {
-  const shared = Math.max(sharedTokens(a, b), sharedTokens(b, a));
-  return shared >= 2 && shared / Math.min(a.length, b.length) >= 0.5;
+export function sameStory(a, b) {
+  const units = sharedUnits(a, b);
+  const specific = units.filter((u) => !isGeneric(u)).length;
+  const ratio = units.length / Math.min(a.length, b.length);
+  return specific >= 2 && ratio >= 0.5;
 }
 function category(title) {
   for (const [name, pattern] of [['생활경제·주거', /전세|주택|아파트|대출|지원금|연금|세금|청약|금리|부동산|소상공인|보조금|저축/], ['패션·뷰티', /패션|코디|착장|가방|샤넬|데님|세럼|화장품|여행룩/], ['여행·생활', /여행|숙소|호텔|런던|공항|맛집|날씨|교통/], ['스포츠·게임', /야구|축구|선수|아시안게임|올림픽|게임|메달|홈런/], ['문화·연예', /배우|가수|아이돌|방송|드라마|영화|콘서트|아이브|카즈하|고윤정|카리나|트로트/]]) if (pattern.test(title)) return name;
@@ -197,8 +207,11 @@ function groupPosts(posts) {
   return groups;
 }
 
-/** 수집기 buildCandidates 와 같은 규칙(반응 증가만 뺌). 최근 48시간 소재, 추천이 앞, 300장까지. */
-export function buildLiveCandidates(posts, now) {
+/**
+ * 수집기 buildCandidates 와 같은 규칙. 최근 48시간 소재, 추천이 앞, 300장까지.
+ * 반응 증가는 화면이 잴 수 없어(이전 수집이 없다) CI 판이 잰 글별 증가(growthByUrl: 원문 주소 → 증가)를 같은 기준으로 쓴다.
+ */
+export function buildLiveCandidates(posts, now, growthByUrl = new Map()) {
   const groups = groupPosts(posts);
   return groups.filter((group) => group.posts.some((p) => p.platform !== 'community-ranking' && p.summary)).map((group) => {
     const sorted = [...group.posts].sort((a, b) => Number(Boolean(b.summary)) - Number(Boolean(a.summary)) || (Date.parse(b.publishedAt) || 0) - (Date.parse(a.publishedAt) || 0));
@@ -209,18 +222,22 @@ export function buildLiveCandidates(posts, now) {
     const stale = (age > 7 && Boolean(lead.publishedAt)) || flags.includes('recycled-material');
     const platforms = new Set(sorted.map((p) => p.platform));
     const reaction = sorted.some((p) => Number(p.metrics?.comments) > 0 || Number(p.metrics?.views) > 0 || Number(p.reactionCount) > 0);
+    const growthOf = new Map(sorted.map((p) => [p.url, growthByUrl.get(p.url) || null]));
+    const growth = sorted.map((p) => growthOf.get(p.url)).find(Boolean) || null;
+    const positiveGrowth = Boolean(growth && Object.entries(growth).some(([key, g]) => g.change >= ({ views: 100, likes: 5, comments: 10 }[key] || Infinity)));
     const channels = new Set(sorted.map((p) => p.sourceId)).size;
-    const recommended = age <= 2 && !flags.some((f) => ['sponsored', 'sensitive-claim', 'recycled-material', 'possible-syndication'].includes(f)) && Boolean(lead.summary) && (channels >= 2 || (platforms.size >= 2 && reaction));
+    const recommended = age <= 2 && !flags.some((f) => ['sponsored', 'sensitive-claim', 'recycled-material', 'possible-syndication'].includes(f)) && Boolean(lead.summary) && (channels >= 2 || (platforms.size >= 2 && reaction) || positiveGrowth);
     const keyword = tokens(lead.title).slice(0, 5).join(' ').slice(0, 55) || lead.title.slice(0, 55);
     const why = [lead.publishedAt ? `벤치마크 발행 ${lead.publishedAt.slice(0, 10)} · 사건 발생일은 별도 확인` : '발행일을 확인하지 못해 최신 사건으로 판단하지 않았습니다.'];
     if (sorted.length > 1) why.push(`${new Set(sorted.map((p) => p.sourceId)).size}개 채널에서 관련 제목 발견 · 독립 사실 확인과는 다릅니다.`);
     if (reaction) why.push('공개 반응이 있는 소재 · 플랫폼별 지표는 원문별로 표시합니다.');
+    if (positiveGrowth) why.push('같은 게시물의 공개 반응이 이전 수집보다 늘었습니다. 채널 평소 대비 성과는 미확인입니다.');
     if (flags.includes('sponsored')) why.push('제품 제공·협찬 고지 감지: 자연 유행 근거에서 제외');
     if (stale) why.push('과거 자료 또는 발행 7일 경과: 새 사실 확보 전 작성 우선순위를 낮춥니다.');
     return {
       id: idOf(lead.url), keyword, title: lead.title, category: category(lead.title),
       status: stale ? 'stale' : recommended ? 'review-now' : 'verify', recommended,
-      priority: Math.max(0, (age <= 1 ? 30 : age <= 2 ? 24 : age <= 7 ? 12 : 0) + (lead.summary ? 10 : 0) + Math.min(24, (channels - 1) * 8) + (platforms.size >= 2 ? 15 : 0) + (reaction ? 10 : 0) - (flags.includes('sponsored') ? 25 : 0) - (stale ? 30 : 0) - (flags.includes('sensitive-claim') ? 20 : 0)),
+      priority: Math.max(0, (age <= 1 ? 30 : age <= 2 ? 24 : age <= 7 ? 12 : 0) + (lead.summary ? 10 : 0) + Math.min(24, (channels - 1) * 8) + (platforms.size >= 2 ? 15 : 0) + (reaction ? 10 : 0) + (positiveGrowth ? 10 : 0) - (flags.includes('sponsored') ? 25 : 0) - (stale ? 30 : 0) - (flags.includes('sensitive-claim') ? 20 : 0)),
       publishedAt: lead.publishedAt, eventAt: null, capturedAt: lead.capturedAt,
       freshnessLabel: stale ? '시점 재검토' : recommended ? '원문 재확인 후 우선 검토' : '원출처 확인 필요', why,
       summary: lead.summary ? plainText(lead.summary, 140) : '제목과 공개 목록만 확인했습니다. 사건 내용은 원문 확인 후 작성하세요.',
@@ -232,8 +249,8 @@ export function buildLiveCandidates(posts, now) {
       relatedKeywords: tokens(lead.title).slice(0, 6),
       verificationNeeded: ['원출처의 실제 사건 날짜와 최신 변경 사항', '사진 원작자와 재사용 조건', ...(flags.includes('sensitive-claim') ? ['당사자·공식 자료 확인 전 인물 관련 의혹 제외'] : []), ...(flags.includes('sponsored') ? ['상업적 관계와 홍보성 주장 확인'] : [])],
       imageGuide: { url: lead.url, instruction: `${lead.name} 원문에서 이미지의 원출처를 먼저 확인하세요. 원본 게시물의 제목·게시일·관련 장면을 확인한 뒤 사용 조건에 맞게 캡처하고 출처를 남기세요. 벤치마크 사진 자체의 재사용 허용 여부는 미확인입니다.` },
-      metrics: { searchVolume: null, documentCount: null, rankingPossibility: 'unmeasured', reactionGrowth: null }, homefeedExposure: 'unverified',
-      sources: sorted.slice(0, 5).map((p) => ({ id: p.sourceId, platform: p.platform, name: p.name, title: p.title, url: p.url, publishedAt: p.publishedAt, summary: plainText(p.summary, 140), metrics: p.metrics, ...(p.reactionCount != null ? { reactionCount: p.reactionCount, reactionLabel: p.reactionLabel } : {}), ...(p.metricNote ? { metricNote: p.metricNote } : {}), discoveryOnly: true })),
+      metrics: { searchVolume: null, documentCount: null, rankingPossibility: 'unmeasured', reactionGrowth: growth }, homefeedExposure: 'unverified',
+      sources: sorted.slice(0, 5).map((p) => ({ id: p.sourceId, platform: p.platform, name: p.name, title: p.title, url: p.url, publishedAt: p.publishedAt, summary: plainText(p.summary, 140), metrics: p.metrics, ...(p.reactionCount != null ? { reactionCount: p.reactionCount, reactionLabel: p.reactionLabel } : {}), ...(p.metricNote ? { metricNote: p.metricNote } : {}), ...(growthOf.get(p.url) ? { growth: growthOf.get(p.url) } : {}), discoveryOnly: true })),
       flags,
     };
   })
@@ -283,7 +300,20 @@ export function mergeLiveBoard(board, feeds, now) {
     if (!titles.length && !c.homeTitle) continue;
     for (const s of c.sources || []) if (s.url && !titlesByUrl.has(s.url)) titlesByUrl.set(s.url, { homeTitles: titles, homeTitle: c.homeTitle || '', homeTitlesAt: c.homeTitlesAt || null });
   }
-  const built = buildLiveCandidates([...live.posts, ...igPosts], now)
+  /*
+   * 공감 수 · 반응 증가는 CI 판이 잰 값을 원문 주소로 붙인다(2026-10-01) — RSS 엔 반응 수치가 없고,
+   * 증가는 이전 수집과 견줘야 해서 화면이 직접 잴 수 없다. 못 받은 글은 그대로(빈 칸).
+   */
+  const likesByUrl = new Map(); const growthByUrl = new Map();
+  for (const c of board?.candidates || []) {
+    for (const s of c.sources || []) {
+      if (!s.url) continue;
+      if (Number.isFinite(s.metrics?.likes) && !likesByUrl.has(s.url)) likesByUrl.set(s.url, s.metrics.likes);
+      if (s.growth && typeof s.growth === 'object' && !growthByUrl.has(s.url)) growthByUrl.set(s.url, s.growth);
+    }
+  }
+  const livePosts = live.posts.map((p) => (likesByUrl.has(p.url) ? { ...p, metrics: { ...p.metrics, likes: likesByUrl.get(p.url) } } : p));
+  const built = buildLiveCandidates([...livePosts, ...igPosts], now, growthByUrl)
     .filter((c) => !c.sources.some((s) => reviewedUrls.has(s.url)))
     .map((c) => {
       const hit = c.sources.map((s) => titlesByUrl.get(s.url)).find(Boolean);

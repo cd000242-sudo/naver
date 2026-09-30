@@ -106,3 +106,12 @@ test('실시간 원문은 키 없는 액션 하나로만 받고 AI 를 부르지
   assert.doesNotMatch(src, /loadUserKeys|licenseCode|api\.openai\.com|api\.anthropic\.com|generativelanguage/);
   assert.doesNotMatch(readFileSync(fileURLToPath(new URL('../src/lib/homefeedLive.mjs', import.meta.url)), 'utf8'), /\bfetch\(|Math\.random\(/);
 });
+test('일반어로만 · 구체어 하나로만 겹치면 다른 소재, 구체어 둘이면 같은 소재(수집기와 같은 사례)', () => {
+  const apart = [
+    ['그랜저 계약 취소각? 정신 차리고 바뀐 디자인 BMW 알피나.', '"드디어 정신차렷나" 실물 공개에 그랜저 취소합니다'],
+    ['공룡 얼굴 복원도 근황.jpg', '요즘 2030 여자들이 목숨건다는 동안 얼굴 포인트'],
+    ['한채영 미모는 회춘했는데... 아쉬운 패션 스타일 근황', '순간 ‘지디인 줄’.. 살 붙고 확 달라진 연예인 공항패션'],
+  ];
+  for (const [a, b] of apart) assert.equal(build([other('a', a), other('bb', b)]).length, 2, `${a} / ${b}`);
+  assert.equal(build([other('a', '전지현 생로랑 파리 패션쇼 착장 공개'), other('bb', '쌩얼로 등장... 전지현 생로랑 공항 패션')]).length, 1);
+});

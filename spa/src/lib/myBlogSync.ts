@@ -5,10 +5,12 @@
  * 앱이 넘기는 판(sync-view)에는 계정 id·글 id·창구 이름이 없다. 여기서는 그것을 그대로 잠그기만 한다.
  * 404 는 '앱이 구버전'(bridgeCall 규칙). 동기화(비밀번호 키)가 꺼져 있으면 올리지도 내리지도 않는다.
  */
-import { BRIDGE_BASE, bridgeCall, type BridgeFailure } from './bridge';
+import { bridgeCall, type BridgeFailure } from './bridge';
 import { callWorkerRaw } from './keywordApi';
 import { keySyncSlot, openWithKeySync, sealWithKeySync } from './keySync';
+import { packBundle, unpackBundle } from './syncPack.mjs';
 
+// bridgeCall 이 앞에 BRIDGE_BASE 를 붙인다 — 여기서 또 붙이면 주소가 두 번 겹쳐 앱에 못 닿는다(2026-10-01 수리).
 const ROUTE = '/v1/bridge/my-blog/';
 const BLOB_LIMIT = 65536;
 
@@ -58,6 +60,10 @@ export interface AdvisorDailyView {
     topicsWeek: { topic: string; value: number }[];
     myHours: { hour: number; yesterday: number; dayBefore: number; monthAverage: number }[];
     homefeedTitles: { title: string; url: string }[];
+    /** 최근 7일 홈판 유입 상위(앱 v2.49.145+). 옛 앱은 없다. */
+    homefeedWeek?: { day: string; rank: number; title: string; url: string }[];
+    /** 여러 날에서 모은 '홈판 유입을 받은 내 글'(앱 v2.49.145+). 옛 앱은 없다. */
+    myHomefeedHits?: { title: string; day: string; count: number }[];
     missingCount: number;
 }
 
@@ -80,14 +86,15 @@ export type MyBlogSyncPush =
 export async function pushMyBlogSync(): Promise<MyBlogSyncPush> {
     if (!keySyncSlot()) return { status: 'no-sync' };
     const [planRes, dailyRes] = await Promise.all([
-        bridgeCall<{ plan: TodayPlanView | null }>(BRIDGE_BASE + ROUTE + 'today-plan', undefined, 8000),
-        bridgeCall<{ record: AdvisorDailyView | null }>(BRIDGE_BASE + ROUTE + 'advisor-daily', undefined, 8000),
+        bridgeCall<{ plan: TodayPlanView | null }>(ROUTE + 'today-plan', undefined, 8000),
+        bridgeCall<{ record: AdvisorDailyView | null }>(ROUTE + 'advisor-daily', undefined, 8000),
     ]);
     if (planRes.status !== 'ok') return planRes;
     if (dailyRes.status !== 'ok') return dailyRes;
     const bundle: MyBlogSyncBundle = { syncedAt: new Date().toISOString(), plan: planRes.result.plan, daily: dailyRes.result.record };
     if (!bundle.plan && !bundle.daily) return { status: 'empty' };
-    const sealed = await sealWithKeySync(bundle);
+    // 잠그기 전에 gzip 으로 줄인다 — 7일 홈판 제목을 싣자 워커 상한 64KB 를 넘었다(2026-10-01 실측, syncPack).
+    const sealed = await sealWithKeySync(await packBundle(bundle));
     if (!sealed) return { status: 'no-sync' };
     if (sealed.blob.length > BLOB_LIMIT) return { status: 'too-large' };
     try {
@@ -112,7 +119,7 @@ export async function pullMyBlogSync(): Promise<MyBlogSyncPull> {
     if (!res || !res.ok) return { status: 'worker-failed' };
     const blob = typeof res.blob === 'string' ? res.blob : '';
     if (!blob) return { status: 'none' };
-    const bundle = await openWithKeySync<MyBlogSyncBundle>(blob);
+    const bundle = await unpackBundle<MyBlogSyncBundle>(await openWithKeySync(blob));
     if (!bundle || typeof bundle !== 'object') return { status: 'unreadable' };
     return { status: 'ok', bundle, savedAt: typeof res.savedAt === 'number' ? res.savedAt : null };
 }
