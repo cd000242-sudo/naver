@@ -58,11 +58,15 @@ function matchWords(keyword: string): string[] {
 
 const lowerTitle = (title: string) => String(title || '').toLowerCase();
 
-/** 후보 하나를 내 제목들에 대 본다 — 어절 절반 이상이 든 글만 '내가 다룬 글'로 센다. */
+/**
+ * 후보 하나를 내 제목들에 대 본다 — 1~3어절은 전부, 4어절 이상은 하나만 빠져도 '내가 다룬 글'로 센다.
+ * 절반 규칙은 '양조간장 501 701 차이'가 '차이' 한 어절로, '기아 ev5'가 '기아'로,
+ * '릴 에이블 하이브리드 차이'가 '하이브리드 차이'로 자동차 글에 붙었다(2026-09-30 실측).
+ */
 function fitFor(keyword: string, titles: string[]): { matchedWords: string[]; wordCount: number; myPosts: number; sampleTitles: string[] } {
     const words = matchWords(keyword);
     if (words.length === 0) return { matchedWords: [], wordCount: 0, myPosts: 0, sampleTitles: [] };
-    const need = Math.ceil(words.length / 2);
+    const need = words.length <= 3 ? words.length : words.length - 1;
     const matched = new Set<string>();
     const samples: string[] = [];
     let myPosts = 0;

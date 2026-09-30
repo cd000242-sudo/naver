@@ -29,19 +29,26 @@ const golden = [
  { keyword: '제주 렌트카', topic: '여행', tierLabel: '상위 3', openSlot: 2, searchVolume: null, documentCount: null },
 ];
 
-test('내 제목 어절 절반 이상이 든 보드 키워드만 남고, 빈자리 실측 → 내 글 편수 → 검색량 순', () => {
+test('1~3어절은 전부, 4어절+는 하나만 빠져도 든 보드 키워드만 남고, 빈자리 실측 → 내 글 편수 → 검색량 순', () => {
  const rows = myBlogFitRows(titles, picks, golden);
  assert.deepEqual(rows.map((row) => row.keyword), ['제주 렌트카', '쏘렌토 하이브리드 실연비', '쏘렌토 하이브리드', '아이오닉5 충전']);
  assert.equal(rows.find((row) => row.keyword === '그랜저 풀체인지'), undefined);
  const sorento = rows.find((row) => row.keyword === '쏘렌토 하이브리드');
- // '쏘렌토' 하나만 든 두 번째 글도 어절 2개 중 1개(절반)라 센다
- assert.equal(sorento.myPosts, 2);
+ // '쏘렌토' 하나만 든 두 번째 글은 안 센다(2어절은 둘 다 있어야) — '기아 ev5'가 '기아'만으로 붙던 실측 결함
+ assert.equal(sorento.myPosts, 1);
  assert.deepEqual(sorento.matchedWords, ['쏘렌토', '하이브리드']);
- assert.equal(sorento.sampleTitles.length, 2);
+ assert.equal(sorento.sampleTitles.length, 1);
  const golden1 = rows.find((row) => row.keyword === '쏘렌토 하이브리드 실연비');
  assert.equal(golden1.source, 'golden'); assert.equal(golden1.openSlot, 4); assert.equal(golden1.tierLabel, '1페이지');
- // 어절 3개 중 2개 이상 — 첫 글만
+ // 어절 3개 전부 — 첫 글만
  assert.equal(golden1.myPosts, 1);
+ // 4어절은 하나 빠져도 센다('릴' 처럼 한 글자 어절은 애초에 어절로 안 친다)
+ const four = myBlogFitRows([{ title: '릴 에이블 하이브리드 차이 써 봤습니다' }], [],
+  [{ keyword: '릴 에이블 하이브리드 차이 가격', topic: '기타', openSlot: null, searchVolume: 10, documentCount: 1 }]);
+ assert.equal(four.length, 1); assert.equal(four[0].wordCount, 4);
+ // 3어절 중 2어절만 든 자동차 글엔 안 붙는다(실측 결함)
+ assert.deepEqual(myBlogFitRows([{ title: '쏘렌토 하이브리드 차이 정리' }], [],
+  [{ keyword: '릴 에이블 하이브리드 차이', topic: '문학·책', openSlot: 2, searchVolume: 690, documentCount: 580 }]), []);
 });
 
 test('숫자 시작 어절은 매칭에서 빼고, 두 보드에 다 있으면 황금 쪽을 남기며 빈 검색량은 다른 쪽 값으로 채운다', () => {
@@ -58,7 +65,9 @@ test('숫자 시작 어절은 매칭에서 빼고, 두 보드에 다 있으면 �
 test('제목이 없으면 빈 표, 상한을 지킨다', () => {
  assert.deepEqual(myBlogFitRows([], picks, golden), []);
  const many = Array.from({ length: 40 }, (_, i) => ({ keyword: `말${i} 후기`, topic: '기타', openSlot: null, searchVolume: i, documentCount: 1 }));
- assert.equal(myBlogFitRows([{ title: '후기 모음' }], [], many, 30).length, 30);
+ assert.equal(myBlogFitRows(many.map((row) => ({ title: `${row.keyword} 모음` })), [], many, 30).length, 30);
+ // 2어절 중 하나('후기')만 든 글은 안 센다
+ assert.deepEqual(myBlogFitRows([{ title: '후기 모음' }], [], many, 30), []);
 });
 
 test('내 제목 어절 상위 — 글 편수 기준, 한 글에 두 번 나와도 1편', () => {
