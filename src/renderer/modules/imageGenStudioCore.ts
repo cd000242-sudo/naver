@@ -75,6 +75,62 @@ export function variationTail(includeText: boolean): string {
 }
 
 // ---------------------------------------------------------------------------
+// Studio items — the item must describe the user's prompt, not the studio
+// ---------------------------------------------------------------------------
+
+export interface StudioImageItem {
+  readonly heading: string;
+  readonly prompt: string;
+  readonly allowText: boolean;
+  readonly articleTitle: string;
+  readonly globalSubject: string;
+  readonly sectionContent: string;
+  readonly isThumbnail: boolean;
+}
+
+const STUDIO_FALLBACK_HEADING = '이미지 생성 스튜디오';
+const HEADING_MAX_CHARS = 40;
+const HEADING_CLAUSE_SPLIT = /[\n,，.。!?…|]|\s[-–—]\s/u;
+
+/** Short label for the brief's SECTION HEADING: the prompt's first clause, cut at a word boundary. */
+export function studioItemHeading(prompt: string): string {
+  const clean = String(prompt || '').replace(/\s+/gu, ' ').trim();
+  if (!clean) return STUDIO_FALLBACK_HEADING;
+  const clause = (clean.split(HEADING_CLAUSE_SPLIT)[0] || '').trim() || clean;
+  if (clause.length <= HEADING_MAX_CHARS) return clause;
+  const kept: string[] = [];
+  for (const word of clause.split(' ')) {
+    if ([...kept, word].join(' ').length > HEADING_MAX_CHARS) break;
+    kept.push(word);
+  }
+  return kept.join(' ') || clause.slice(0, HEADING_MAX_CHARS);
+}
+
+/**
+ * [2026-09-30] The studio used to send `heading: '이미지 생성 스튜디오'` and nothing else about the prompt,
+ * so the contextual brief (imageGenerator → contextualImagePrompt) read "Untitled article" /
+ * "이미지 생성 스튜디오" as the scene facts and, with text on, the engine drew that label. Every field the
+ * brief treats as authoritative now carries the prompt. With text on, the item is a text-bearing cover:
+ * main then names an exact phrase from the prompt (resolveThumbnailOverlayText(articleTitle)) instead of
+ * "render the requested title text" with no text named.
+ * §12.8: every item still gets its own unique variation seed.
+ */
+export function buildStudioItems(prompts: readonly string[], count: number, includeText: boolean): StudioImageItem[] {
+  return prompts.flatMap((rawPrompt) => {
+    const prompt = String(rawPrompt || '').trim();
+    return Array.from({ length: count }, () => ({
+      heading: studioItemHeading(prompt),
+      prompt: `${prompt}${variationTail(includeText)}`,
+      allowText: includeText,
+      articleTitle: prompt,
+      globalSubject: prompt,
+      sectionContent: prompt,
+      isThumbnail: includeText,
+    }));
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Engine select + cost preview (DOM helpers)
 // ---------------------------------------------------------------------------
 

@@ -20,7 +20,7 @@ import {
   updateEngineNote,
   updateCostPreview,
   readCount,
-  variationTail,
+  buildStudioItems,
   parseBatchPromptList,
 } from './imageGenStudioCore.js';
 
@@ -133,14 +133,9 @@ async function _run(): Promise<void> {
     if (!ok) return;
   }
 
-  // §12.8: 모든 엔진 공통, 매 item unique variation seed.
-  const items = prompts.flatMap((prompt) =>
-    Array.from({ length: count }, () => ({
-      heading: '이미지 생성 스튜디오',
-      prompt: `${prompt}${variationTail(includeText)}`,
-      allowText: includeText,
-    }))
-  );
+  // Items describe the prompt itself (heading/title/subject/evidence) — the fixed studio label used to
+  // become the drawn text. With text on, main names a short phrase from the prompt for the engine.
+  const items = buildStudioItems(prompts, count, includeText);
 
   _busy = true;
   _resultSrcs = [];
@@ -153,6 +148,7 @@ async function _run(): Promise<void> {
   if (resultsBtnEl) resultsBtnEl.style.display = 'block';
   openResults();
   _studioLog(`${engine.label} · 프롬프트 ${prompts.length}개 × ${count}장 = 총 ${total}장 생성 시작`);
+  if (includeText) _studioLog('텍스트 포함: 각 프롬프트의 첫 구절(최대 16자)을 엔진이 이미지에 그립니다.');
   _setStatus(`${engine.label} · 총 ${total}장 생성 중…`, 'info');
   _setGenerateDisabled(true);
 

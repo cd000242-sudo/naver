@@ -28,4 +28,4 @@
 //   계정 활성화 시점(config:set __userId)에 다시 읽고 화면에도 알려 준다.
 //   실측: 재시작만으로 47630 열림 + 체크박스 true.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '80a6d041a53208b00bbc77c25468ddcb6a259b69f624f7a50133dffb488f420a' as const;
+  '55f0bc8a2e6fce9334ae4bb5bc15bfdef6bb9071e4fd994e939cdcfb1b5a09b3' as const;
