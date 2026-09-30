@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-09-30T09:05:35.508Z",
+  "publishedAt": "2026-09-30T09:31:47.665Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 229,
+    "candidates": 225,
     "niche": 0,
-    "preemption": 3,
+    "preemption": 7,
     "pending": 0
   },
   "freeSample": {
@@ -167,7 +167,8 @@
           1,
           1,
           0
-        ]
+        ],
+        "measuredAt": "2026-09-30T09:31:48.415Z"
       },
       "kinCount": 35,
       "kinTop": null,
@@ -635,7 +636,7 @@
         }
       ],
       "whySearch": {
-        "text": "알리바바가 대화 타이밍 판단 음성AI '큐원-오디오-3.1' 공개, 최대 95% 인하",
+        "text": "알리바바, 대화 타이밍 판단 음성 AI 큐원-오디오-3.1 리얼타임 공개",
         "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -643,12 +644,78 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "큐원-오디오-3.1-리얼타임 가격 최대 95% 낮춘 알리바바 음성 AI",
+          "text": "큐원-오디오-3.1-리얼타임 가격 95% 인하 성능 정리",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "큐원-오디오-3.1-리얼타임 가격 95% 내렸다는데 대화 끊는 타이밍이 의외로 다르더라",
+          "text": "큐원-오디오-3.1-리얼타임 이게 뭔지 몰라서 찾아봤습니다",
+          "frame": "generic",
+          "basis": "근거 프레임 없음 — 일반형"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T09:29:31.280Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "aiia 가수",
+      "issue": "AIIA",
+      "topic": "AIIA",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 22,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 22",
+        "선점 후보 — 경쟁 문서 22건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AIIA, 한국평가데이터와 AI 기업 발굴·성장 지원 협력",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "aiia 가수 어떤 정보가 있는지",
+          "frame": "generic",
+          "basis": "근거 프레임 없음 — 일반형"
+        },
+        "home": {
+          "text": "aiia 가수 무대 처음 봤을 때 이 목소리가 진짜인지 헷갈리더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -659,7 +726,340 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-30T09:03:14.937Z",
+      "measuredAt": "2026-09-30T09:29:31.280Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "aiia-ai.org",
+      "issue": "AIIA",
+      "topic": "AIIA",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 30,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 30",
+        "선점 후보 — 경쟁 문서 30건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AIIA, 한국평가데이터와 AI 기업 발굴·성장 지원 협력",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "aiia-ai.org 2027 AI+X Top100 모집 조건 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "aiia-ai.org 들어가서 AI+X Top100 지원하다 여기서 한참 막혔어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T09:29:31.280Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "aiia journal",
+      "issue": "AIIA",
+      "topic": "AIIA",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 67,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 67",
+        "선점 후보 — 경쟁 문서 67건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AIIA, 한국평가데이터와 AI 기업 발굴·성장 지원 협력",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "aiia journal 한국평가데이터 협력과 Top100 후보 모집",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "aiia journal 찾다 알게 된 Top100 후보 모집, 의외로 놓치는 게 있더라",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T09:29:31.280Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "aiia theater tokyo",
+      "issue": "AIIA",
+      "topic": "AIIA",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 176,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 176",
+        "선점 후보 — 경쟁 문서 176건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "AIIA, 한국평가데이터와 AI 기업 발굴·성장 지원 협력",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "aiia theater tokyo 좌석배치도 2층 시야 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "aiia theater tokyo 2층에서 무대 보다가 목이 아팠어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T09:29:31.280Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이은우 KTV 원장",
+      "issue": "이은우 KTV 원장",
+      "topic": "이은우 KTV 원장",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 210,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 2,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 210",
+        "선점 후보 — 경쟁 문서 210건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 2건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "계엄 비판 자막 삭제 이은우 전 KTV 원장 2심도 집행유예",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이은우 KTV 원장 계엄 자막 삭제 2심 징역형 집유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이은우 KTV 원장 계엄 자막 삭제 사건 2심 판결 이렇게 나왔더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-09-30T09:29:31.280Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "큐원 오디오",
+      "issue": "큐원-오디오-3.1-리얼타임",
+      "topic": "큐원-오디오-3.1-리얼타임",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 283,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 283",
+        "선점 후보 — 경쟁 문서 283건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "알리바바, 대화 타이밍 판단 음성 AI 큐원-오디오-3.1 리얼타임 공개",
+        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "큐원 오디오 3.1 공개, 가격 95% 파괴에 리얼타임까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "큐원 오디오 3.1 가격이 95%나 싸졌다길래 이유를 찾아봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 22,
+      "kinTop": [
+        {
+          "title": "오디오북 엠피쓰리에 넣는방법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1020402&docId=106752581&answerNo=0",
+          "views": 14,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-09-30T09:29:31.280Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -740,100 +1140,8 @@
       "monetize": null,
       "measuredAt": "2026-09-30T09:03:14.937Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "큐원 오디오",
-      "issue": "큐원-오디오-3.1-리얼타임",
-      "topic": "큐원-오디오-3.1-리얼타임",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 283,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 283",
-        "선점 후보 — 경쟁 문서 283건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "알리바바가 대화 타이밍 판단 음성AI '큐원-오디오-3.1' 공개, 최대 95% 인하",
-        "basis": "뉴스 헤드라인 2건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "큐원 오디오 3.1 리얼타임 기능과 95% 가격 인하 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "큐원 오디오 새 버전 알리바바 큐원한테 말 걸어봤더니 반응이 좀 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "알리바바 큐원",
-          "searchVolume": 40,
-          "frame": "generic"
-        },
-        {
-          "keyword": "큐원 AI",
-          "searchVolume": 40,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "알리바바 큐원",
-          "searchVolume": 40,
-          "documentCount": 2233,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "큐원 AI",
-          "searchVolume": 40,
-          "documentCount": 3034,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 22,
-      "kinTop": [
-        {
-          "title": "오디오북 엠피쓰리에 넣는방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1020402&docId=106752581&answerNo=0",
-          "views": 13,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-09-30T09:03:14.937Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "성현주 딸 첫돌",
@@ -2903,69 +3211,6 @@
       "carried": true
     },
     {
-      "keyword": "리퀴드 컨텍스트",
-      "issue": "리퀴드 AI",
-      "topic": "리퀴드 AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 157,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 157",
-        "선점 후보 — 경쟁 문서 157건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드AI가 스냅드래곤 NPU로 에이전틱 폰 진화를 앞당긴다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리퀴드 컨텍스트 스냅드래곤 최적화, VLM 추론 3배 가속",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리퀴드 컨텍스트가 스냅드래곤에 들어가고 나서 폰이 말하기 전에 움직이더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-29T03:40:55.874Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
       "keyword": "비드래프트 김민식",
       "issue": "비드래프트",
       "topic": "비드래프트",
@@ -3990,38 +4235,38 @@
       "carried": true
     }
   ],
-  "rejectedCount": 0,
+  "rejectedCount": 1,
   "issues": [
     {
-      "issue": "추경호 징역 20년",
+      "issue": "주택 신속공급",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "특검이 계엄해제 표결 방해 혐의로 추경호에 징역 20년 구형했다",
+      "why": "서울 도심복합사업 신규 후보지 11곳 1.8만가구 선정",
       "headlines": [
         {
-          "title": "'계엄표결 방해' 추경호에 징역 20년 구형…11월18일 선고(종합)",
+          "title": "서울 11곳 1만8000가구…도심공공주택복합사업 신규 후보지 나왔다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-30T02:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005337536?sid=101"
+        },
+        {
+          "title": "서울 도심공공주택 복합사업 후보지 11곳 선정…1만8천가구 공급",
           "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T08:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016348024?sid=102"
+          "publishedAt": "2026-09-30T02:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016346130?sid=101"
         },
         {
-          "title": "특검, '계엄해제 표결 방해' 혐의 추경호 징역 20년 구형",
+          "title": "서울 집값 역대 최장 상승 눈앞…규제 넘어 공급 시험대",
           "press": "newsis.com",
-          "publishedAt": "2026-09-30T06:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014224483?sid=102"
-        },
-        {
-          "title": "특검, '계엄해제 표결 방해 의혹' 추경호에 징역 20년 구형",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-09-30T06:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001526549?sid=102"
+          "publishedAt": "2026-09-30T05:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014223954?sid=101"
         }
       ],
       "concentrated": [
         {
-          "keyword": "추경호",
+          "keyword": "주택 신속공급 대책",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -4030,33 +4275,113 @@
       "rowCount": 0
     },
     {
-      "issue": "이영준 동점골로 위기",
+      "issue": "추경호에 징역 20년",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "이영준 동점골·배준호 역전골로 한국이 중국 꺾고 AG 결승행",
+      "why": "특검이 계엄표결 방해 혐의 추경호에 징역 20년 구형",
       "headlines": [
         {
-          "title": "[나고야AG]‘이영준 동점·배준호 역전골’…이민성호 결승행 '4연패 눈...",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-09-30T08:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005822973?sid=104"
+          "title": "'계엄표결 방해' 추경호에 징역 20년 구형…11월18일 선고(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-30T08:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016348024?sid=102"
         },
         {
-          "title": "이영준 동점골·배준호 역전골…한국, 중국 꺾고 결승행",
-          "press": "dailysportshankook.co.kr",
-          "publishedAt": "2026-09-30T08:26:00.000Z",
-          "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=434028"
+          "title": "특검, '계엄해제 표결 방해 의혹' 추경호에 징역 20년 구형",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-09-30T06:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001526549?sid=102"
         },
         {
-          "title": "[현장 REVIEW] '소림축구' 중국에 선제 실점 이민성호, '이영준 동점골+...",
-          "press": "spotvnews.co.kr",
-          "publishedAt": "2026-09-30T07:53:00.000Z",
-          "link": "https://m.sports.naver.com/kfootball/article/477/0000630889"
+          "title": "특검, ‘계엄 해제 표결 방해’ 추경호에 징역 20년 구형",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-09-30T06:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012265506?sid=102"
         }
       ],
       "concentrated": [],
+      "nextWave": [
+        {
+          "keyword": "계엄 표결 방해",
+          "reason": "사건 실체 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "중국",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "쌍둥이 판다 루이·후이바오 12월 중국 이송 확정",
+      "headlines": [
+        {
+          "title": "'쌍둥이 판다' 12월 한국 떠난다…중국 이송 일정 확정",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-30T00:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016345638?sid=102"
+        },
+        {
+          "title": "남자 축구, 중국에 역전승 거두고 결승행",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-30T08:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001392190?sid=104"
+        },
+        {
+          "title": "푸바오 동생 루이바오·후이바오, 12월 셋째 주 중국으로",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-30T01:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001195224?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "중국 환율",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 입국신고서",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 여행",
+          "searchVolume": 32040,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 지도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 이심",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "한국 중국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 추석",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 한국 야구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
       "nextWave": [],
       "rowCount": 0
     },
@@ -4066,7 +4391,7 @@
       "lane": "realtime",
       "issueStatus": "dead",
       "isHot": false,
-      "why": "수시 접수 먹통으로 80개대 3184건 추가접수, 경쟁률 0.22%↑",
+      "why": "수시 먹통으로 80개대 3184건 추가접수 경쟁률 0.22% 상승",
       "headlines": [
         {
           "title": "'수시 먹통'에 80개大 3천184건 추가접수…경쟁률 0.22%↑",
@@ -4092,125 +4417,24 @@
       "rowCount": 0
     },
     {
-      "issue": "아시안 게임",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "AG서 사이클·양궁 동메달, 유도 정수진 계체 실격",
-      "headlines": [
-        {
-          "title": "[아시안게임] 한국 트랙 사이클 남녀 단체추발, 나란히 동메달 획득",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T07:49:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016347940?sid=104"
-        },
-        {
-          "title": "[아시안게임] 양궁 여자 컴파운드 단체전, 2회 연속 '동메달'",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-09-30T02:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000642226?sid=104"
-        },
-        {
-          "title": "[아시안게임] 100g에 막힌 첫 AG…유도 정수진, 출전도 못 하고 실격",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-09-30T05:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000538144?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "아시안 게임 축구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안 게임 야구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안 게임 일정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안 게임 롤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안 게임 농구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안 게임 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안 게임 배드민턴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "아시안게임 2026",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "아시안게임 메달순위",
-          "reason": "국가별 순위 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "아시안게임 축구",
-          "reason": "인기종목 일정 검색",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "아시안게임 야구",
-          "reason": "대표팀 경기 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "아시안게임 롤",
-          "reason": "e스포츠 관심 급증",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
       "issue": "트럼프 한국 알래스카",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "트럼프가 30일 한국의 알래스카 LNG 540억불 투자 발표 전망",
+      "why": "트럼프 30일 한국의 알래스카 LNG 540억불 투자 발표 전망",
       "headlines": [
-        {
-          "title": "'추가 검토' 분류된 알래스카 LNG…트럼프 발표로 흔들리나",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T06:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016347460?sid=101"
-        },
         {
           "title": "\"트럼프, 이르면 30일 한국의 알래스카 540억불 투자 발표\"(종합)",
           "press": "news1.kr",
           "publishedAt": "2026-09-30T00:07:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/421/0009199576?sid=104"
+        },
+        {
+          "title": "'추가 검토' 분류된 알래스카 LNG…트럼프 발표로 흔들리나",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-30T06:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016347460?sid=101"
         },
         {
           "title": "한국 돈으로 알래스카 표심 사려는 트럼프, 30일 백악관서 발표 [이상은...",
@@ -4219,40 +4443,9 @@
           "link": "https://n.news.naver.com/mnews/article/015/0005337725?sid=104"
         }
       ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "LH 공공주택 하자",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "LH 공공주택 하자가 4년 새 2.3배 늘어 세대당 11.5건",
-      "headlines": [
-        {
-          "title": "\"LH표 공공주택 하자, 4년 새 2배 증가\"",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-30T05:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006377750?sid=101"
-        },
-        {
-          "title": "LH 공공주택 하자 4년새 125% 늘어",
-          "press": "sidae.com",
-          "publishedAt": "2026-09-30T01:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/417/0001159626?sid=102"
-        },
-        {
-          "title": "LH 공공주택 하자, 4년만 두배 늘었다",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-09-30T01:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005822668?sid=101"
-        }
-      ],
       "concentrated": [
         {
-          "keyword": "lh",
+          "keyword": "트럼프",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -4264,9 +4457,9 @@
       "issue": "현대모비스 램프사업 매각",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "stable",
+      "issueStatus": "dead",
       "isHot": true,
-      "why": "현대모비스가 램프사업부를 프랑스 OP모빌리티에 6000억에 매각",
+      "why": "현대모비스 램프사업부 6000억에 프랑스 OP모빌리티 매각",
       "headlines": [
         {
           "title": "현대모비스, 램프사업부 6000억에 프랑스 OP모빌리티에 매각",
@@ -4298,59 +4491,12 @@
       "rowCount": 0
     },
     {
-      "issue": "빌리 츠키",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "빌리 츠키가 건강 문제로 30일 대학축제 불참, 회복 집중",
-      "headlines": [
-        {
-          "title": "빌리 츠키, 건강 문제로 오늘(30일) 대학축제 불참",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-09-30T07:01:00.000Z",
-          "link": "https://m.entertain.naver.com/article/437/0000513447"
-        },
-        {
-          "title": "빌리 츠키, 건강 문제로 30일 대학 축제 무대 불참…\"회복 집중 예정\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-30T07:48:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009201593"
-        },
-        {
-          "title": "빌리 츠키, 건강 문제로 대학행사 빠진다 “휴식과 회복에 집중”",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-09-30T07:08:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001141352"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "빌리 츠키 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "빌리 츠키 워터밤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "빌리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
       "issue": "과태료",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "금융위가 실손24 미연계 의료기관에 과태료 부과 검토",
+      "why": "금융위, 실손24 미연계 의료기관 과태료 부과 검토",
       "headlines": [
         {
           "title": "'실손24' 연계율 47.7%…금융위 \"미연계 업체 과태료 검토\"",
@@ -4413,38 +4559,212 @@
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
+      "nextWave": [
+        {
+          "keyword": "실손24 과태료 금액",
+          "reason": "부과 수준 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
-      "issue": "지자체 지방교부세 반대",
+      "issue": "이은우 KTV 원장",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "전국 지자체 63곳이 미래대응기금발 지방교부세 축소에 반대",
+      "why": "계엄 비판 자막 삭제 이은우 전 KTV 원장 2심도 집행유예",
       "headlines": [
         {
-          "title": "전국지자체 63곳, 미래기금發 지방교부세 축소에 우려·반대(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-30T00:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016345605?sid=100"
+          "title": "'계엄 비판자막 삭제' 이은우 前 KTV 원장, 2심도 징역형 집유",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-30T02:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014223250?sid=102"
         },
         {
-          "title": "정부 ‘달래기’에도 부산 등 지자체 63곳, 지방교부세 축소에 “우려·...",
-          "press": "busan.com",
-          "publishedAt": "2026-09-30T01:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/082/0001400465?sid=100"
+          "title": "'계엄 비판 자막 삭제' 이은우 전 KTV 원장, 2심도 징역형 집유",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-09-30T03:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/437/0000513412?sid=102"
         },
         {
-          "title": "지자체 미래대응기금發 교부세 축소 반발 확산…\"재정 위험 지방에 전가...",
-          "press": "fnnews.com",
-          "publishedAt": "2026-09-30T01:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005582805?sid=100"
+          "title": "‘계엄 비판 뉴스 삭제’ 이은우 전 KTV 원장, 2심도 징역형 집유",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-09-30T02:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003473336?sid=102"
         }
       ],
       "concentrated": [],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "빌리 츠키 대학",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "빌리 츠키 건강 문제로 대학축제 불참 회복 집중",
+      "headlines": [
+        {
+          "title": "빌리 츠키, 건강 문제로 대학행사 빠진다 “휴식과 회복에 집중”",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-09-30T07:08:00.000Z",
+          "link": "https://m.entertain.naver.com/article/144/0001141352"
+        },
+        {
+          "title": "빌리 츠키, 건강상 이유로 대학 축제 빠진다…\"회복에 집중\"",
+          "press": "tenasia.co.kr",
+          "publishedAt": "2026-09-30T07:01:00.000Z",
+          "link": "https://m.entertain.naver.com/article/312/0000778147"
+        },
+        {
+          "title": "빌리 츠키, 건강상 이유로 대학축제 불참 \"건강 회복 집중\"",
+          "press": "celuvmedia.com",
+          "publishedAt": "2026-09-30T06:54:00.000Z",
+          "link": "http://www.celuvmedia.com/article.php?aid=1790749424528529007"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "빌리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "빌리 츠키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "아시안게임 축구",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "남자축구 중국에 2-1 역전승 결승 진출 4연패 도전",
+      "headlines": [
+        {
+          "title": "남자 축구, 중국에 역전승 거두고 결승행",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-09-30T08:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001392190?sid=104"
+        },
+        {
+          "title": "동점골 넣는 이영준",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-30T07:34:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/001/0016347849"
+        },
+        {
+          "title": "[속보] 남자축구, 4연패 보인다…중국 꺾고 결승 진출",
+          "press": "hankyung.com",
+          "publishedAt": "2026-09-30T07:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005337706?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "아시안게임 축구 일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아시안게임 축구 명단",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아시안게임 축구 감독",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아시안게임 축구 와일드카드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아시안게임 축구 조편성",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아시안게임 축구 중계",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나고야 아시안게임 축구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아시안게임 축구 8강",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "리퀴드 AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "리퀴드 AI 의사결정 모델 'd1' 출시 기존 1위 제쳤다",
+      "headlines": [
+        {
+          "title": "AI·청정에너지로… 롯데, 기술 사업 재편 속도",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-09-30T08:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001195399?sid=101"
+        },
+        {
+          "title": "롯데, AI 소재·청정수소·바이오로 미래 먹거리 키운다",
+          "press": "biz.newdaily.co.kr",
+          "publishedAt": "2026-09-30T05:18:00.000Z",
+          "link": "https://biz.newdaily.co.kr/site/data/html/2026/09/30/2026093000236.html"
+        },
+        {
+          "title": "롯데, 신사업 삼각편대 ‘AI 소재·청정수소·바이오’ 키운다",
+          "press": "dnews.co.kr",
+          "publishedAt": "2026-09-30T07:02:00.000Z",
+          "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202609301531420530977"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "리퀴드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "리퀴드 AI 활용",
+          "reason": "적용 분야 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "리퀴드 AI 회사",
+          "reason": "기업 정보 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -4453,7 +4773,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "알리바바가 대화 타이밍 판단 음성AI '큐원-오디오-3.1' 공개, 최대 95% 인하",
+      "why": "알리바바, 대화 타이밍 판단 음성 AI 큐원-오디오-3.1 리얼타임 공개",
       "headlines": [
         {
           "title": "알리바바, 대화 타이밍까지 판단하는 음성 AI '큐원-오디오-3.1-리얼타임...",
@@ -4478,7 +4798,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "정태영 부회장 알리바바 방문, 중국이 알리바바에 엔비디아 신형칩 허용",
+      "why": "중국이 알리바바 등에 엔비디아 신형 GPU 구매 허용",
       "headlines": [
         {
           "title": "中 알리바바·유니트리 찾은 정태영 부회장",
@@ -4543,8 +4863,29 @@
       ],
       "nextWave": [
         {
-          "keyword": "알리바바 AI폰",
-          "reason": "신제품 관심",
+          "keyword": "알리바바 주가 전망",
+          "reason": "GPU 허용 호재",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "알리바바 관련주",
+          "reason": "수혜주 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "알리바바 AI 경쟁",
+          "reason": "미중 구도 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "알리바바 에이전틱",
+          "reason": "신규 AI 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4558,7 +4899,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "구글이 EU의 AI·검색 개방 명령에 개인정보 침해 이유로 불복 소송",
+      "why": "'클로드 무료' 사칭에 구글 계정 탈취 피해 발생",
       "headlines": [
         {
           "title": "\"클로드 한 달간 무료\"라더니…'구글 계정' 탈탈 털린다",
@@ -4623,15 +4964,36 @@
       ],
       "nextWave": [
         {
-          "keyword": "구글 소송 결과",
-          "reason": "소송 향방 관심",
+          "keyword": "구글 계정 예방법",
+          "reason": "피해 방지 수요",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "구글 국감 질의",
-          "reason": "국감 소환 관심",
+          "keyword": "구글 계정 복구",
+          "reason": "탈취 후 대응",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "구글 비밀번호 변경",
+          "reason": "즉시 보안 조치",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "구글 피해 신고",
+          "reason": "신고 절차 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "구글 EU 소송",
+          "reason": "개방 명령 불복 이슈",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4643,9 +5005,9 @@
       "issue": "AIIA",
       "issueType": "fresh",
       "lane": "tech",
-      "issueStatus": "dead",
+      "issueStatus": "stable",
       "isHot": false,
-      "why": "AIIA가 한국평가데이터와 협력해 AI 기업 발굴·성장 지원",
+      "why": "AIIA, 한국평가데이터와 AI 기업 발굴·성장 지원 협력",
       "headlines": [
         {
           "title": "AI 기업 평가에 KODATA 활용…AIIA와 맞손",
@@ -4695,15 +5057,15 @@
       ],
       "nextWave": [
         {
-          "keyword": "AIIA 신청방법",
-          "reason": "모집 참여 관심",
+          "keyword": "AIIA 모집 일정",
+          "reason": "접수 기간 확인",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "AIIA 지원내용",
-          "reason": "지원 혜택 궁금",
+          "keyword": "AIIA 지원 혜택",
+          "reason": "참여 이점 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4717,7 +5079,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "AWS 서울 리전서 클로드 오퍼스·소네트 5 제공, 데이터 국내 처리",
+      "why": "AWS 서울 리전서 클로드 오퍼스·소네트 5 제공 데이터 국내 처리",
       "headlines": [
         {
           "title": "AWS 서울 리전서 '클로드 오퍼스 5' 제공…데이터 국내 처리",
@@ -4782,8 +5144,8 @@
       ],
       "nextWave": [
         {
-          "keyword": "AWS 클로드 요금",
-          "reason": "이용 비용 관심",
+          "keyword": "삼성 AI 포럼",
+          "reason": "연계 행사 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -4797,7 +5159,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "오픈AI가 비용 80% 줄인 가성비 'GPT-6.1 솔' 공개",
+      "why": "오픈AI, 비용 80% 줄인 가성비 'GPT-6.1 솔' 공개",
       "headlines": [
         {
           "title": "“챗GPT, 대화창 넘어 업무·앱 유통 중심지로”… 오픈AI의 거대 플랫폼...",
@@ -4860,88 +5222,48 @@
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "카카오",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "카카오가 카페 통합 금액권 제휴 타진, 북미 삼각편대 해체",
-      "headlines": [
-        {
-          "title": "[단독] 카카오, '카페 통합 금액권' 제휴 타진…선물하기 영역 넓힌다",
-          "press": "bloter.net",
-          "publishedAt": "2026-09-30T06:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/293/0000091071?sid=101"
-        },
-        {
-          "title": "[단독]카카오 '북미 삼각편대' 해체…450억에 산 우시아월드도 되팔았다",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-30T01:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005420153?sid=105"
-        },
-        {
-          "title": "카톡으로 국민연금 조회·가입 신청…카카오AI ‘국민비서’ 연계",
-          "press": "chosun.com",
-          "publishedAt": "2026-09-30T05:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004001302?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "카카오 ai 퀴즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 이모티콘샵",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 쿠키런",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 돛",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 콘",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 광고",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 구독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
       "nextWave": [
         {
-          "keyword": "카카오 실적",
-          "reason": "매각 실적 영향",
+          "keyword": "오픈AI 보안 논란",
+          "reason": "경고 묵살 이슈",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         }
       ],
       "rowCount": 0
+    },
+    {
+      "issue": "이영준 동점골로 위기",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "이영준 동점골·배준호 역전골로 한국이 중국 꺾고 AG 결승행",
+      "headlines": [
+        {
+          "title": "[나고야AG]‘이영준 동점·배준호 역전골’…이민성호 결승행 '4연패 눈...",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-09-30T08:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005822973?sid=104"
+        },
+        {
+          "title": "이영준 동점골·배준호 역전골…한국, 중국 꺾고 결승행",
+          "press": "dailysportshankook.co.kr",
+          "publishedAt": "2026-09-30T08:26:00.000Z",
+          "link": "https://www.dailysportshankook.co.kr/news/articleView.html?idxno=434028"
+        },
+        {
+          "title": "[현장 REVIEW] '소림축구' 중국에 선제 실점 이민성호, '이영준 동점골+...",
+          "press": "spotvnews.co.kr",
+          "publishedAt": "2026-09-30T07:53:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/477/0000630889"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "이란 다야니 ISDS",
@@ -6092,52 +6414,6 @@
         {
           "keyword": "제브 개발",
           "reason": "제작사 검색",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "리퀴드 AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "리퀴드AI가 스냅드래곤 NPU로 에이전틱 폰 진화를 앞당긴다",
-      "headlines": [
-        {
-          "title": "[단독] 엔비디아 AI냉각 '풀라인업' 글로벌 2곳뿐…LG전자 등재됐다",
-          "press": "newspim.com",
-          "publishedAt": "2026-09-28T06:46:00.000Z",
-          "link": "https://www.newspim.com/news/view/20260928000668"
-        },
-        {
-          "title": "리퀴드 AI, '추측적 디코딩'으로 VLM 추론 3배 가속",
-          "press": "aitimes.com",
-          "publishedAt": "2026-09-28T08:06:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215727"
-        },
-        {
-          "title": "리퀴드 AI, 스냅드래곤에 리퀴드 컨텍스트 최적화",
-          "press": "technoa.co.kr",
-          "publishedAt": "2026-09-28T12:20:00.000Z",
-          "link": "http://www.technoa.co.kr/news/articleView.html?idxno=101447"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "리퀴드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "리퀴드AI 성능",
-          "reason": "속도 비교 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
