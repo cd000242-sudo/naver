@@ -33,9 +33,20 @@ export const LOGIN_SELECTORS: SelectorMap<LoginSelectorKey> = {
     ['#keep', 'input.input_keep', 'input[name="nvlong"]'],
     '로그인 유지 체크박스',
   ),
+  // [2026-09-30] nid.naver.com now renders `<button type="button" class="btn_done" id="loginBtn_column">`
+  // (plus `#loginBtn_row`); `#log.login` / `button[type="submit"]` are gone, which cost ~8s of dead
+  // selector timeouts per login. Never use bare `.btn_done` — the passkey buttons share that class.
   loginButton: entry(
-    '#log\\.login',
-    ['button[type="submit"].btn_login', 'button.btn_login', 'button[type="submit"].next_step', 'button[type="submit"]'],
+    '#loginBtn_column',
+    [
+      '#loginBtn_row',
+      'button.btn_done[id^="loginBtn"]',
+      '#log\\.login',
+      'button[type="submit"].btn_login',
+      'button.btn_login',
+      'button[type="submit"].next_step',
+      'button[type="submit"]',
+    ],
     '로그인 버튼',
   ),
   logoutLink: entry(

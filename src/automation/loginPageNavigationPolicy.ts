@@ -212,6 +212,17 @@ export function isPostLoginFinalCheckSuccess(value: string): boolean {
   );
 }
 
+export type LoginClickResult = 'success' | 'error' | 'challenge' | 'pending';
+
+/**
+ * [2026-09-30] After the login click, `waitForClickResponse` already reports 'success' once the page has
+ * left nid.naver.com. Waiting for `waitForNavigation` on top of that just burns its 20s timeout (measured
+ * 22s per login), because the navigation it is waiting for has already happened.
+ */
+export function shouldAwaitPostLoginNavigation(clickResult: LoginClickResult): boolean {
+  return clickResult !== 'success';
+}
+
 export function isLoginProxyFailureBody(value: string): boolean {
   const bodyText = String(value || '').toLowerCase();
 

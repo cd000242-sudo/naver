@@ -104,6 +104,7 @@ import {
   isPostLoginFinalCheckSuccess,
   resolveLoginPageNavigationUrl,
   resolvePostLoginProgressUrl,
+  shouldAwaitPostLoginNavigation,
   shouldInspectLoginPageDom,
   shouldNavigateToLoginPageFromCurrentUrl,
   shouldReportFinalLoginUrlFailure,
@@ -2814,10 +2815,14 @@ export class NaverBlogAutomation {
     // ID/PW가 입력돼도 off 클래스가 유지되어 버튼 클릭이 무시됨.
     // input 이벤트를 재발생시키고 off 클래스를 강제 제거하여 클릭 가능 상태로 전환.
     try {
-      const offRemoved = await page.evaluate(() => {
+      const offRemoved = await page.evaluate((selectors: readonly string[]) => {
         const idEl = document.querySelector('#id') as HTMLInputElement;
         const pwEl = document.querySelector('#pw') as HTMLInputElement;
-        const btn = document.querySelector('#log\\.login') as HTMLButtonElement;
+        let btn: HTMLButtonElement | null = null;
+        for (const selector of selectors) {
+          btn = document.querySelector(selector) as HTMLButtonElement | null;
+          if (btn) break;
+        }
         if (!btn) return { removed: false, reason: 'no-button' };
 
         // ID/PW 필드에 input 이벤트 재발생 (off 클래스 토글 트리거)
@@ -2830,7 +2835,7 @@ export class NaverBlogAutomation {
           btn.classList.remove('off');
         }
         return { removed: hadOff, idLen: idEl?.value?.length || 0, pwLen: pwEl?.value?.length || 0 };
-      });
+      }, this.LOGIN_BUTTON_SELECTORS);
       if (offRemoved.removed) {
         this.log(`⚠️ 로그인 버튼 off 클래스 강제 제거 (ID: ${offRemoved.idLen}자, PW: ${offRemoved.pwLen}자 입력됨)`);
       }
@@ -2989,7 +2994,9 @@ export class NaverBlogAutomation {
         // 이전: cursor.moveTo() → page.mouse.down/up → 두 시스템 위치 불일치로 클릭 미스
         // 수정: cursor.click()은 내부적으로 moveTo + 같은 위치에서 click을 보장
         try {
-          await this.cursor.click('#log\\.login', { paddingPercentage: 10 });
+          // ✅ [2026-09-30] 찾아둔 핸들로 클릭 — 문자열 '#log\.login' 은 현재 네이버 마크업에 없어
+          //   Ghost Cursor 가 매번 "Could not find element" 로 죽고 폴백 click() 만 살았다.
+          await this.cursor.click(loginButton, { paddingPercentage: 10 });
         } catch (cursorErr) {
           this.log(`⚠️ Ghost Cursor click 실패: ${(cursorErr as Error).message} → loginButton.click() 폴백`);
           await loginButton.click();
@@ -3030,10 +3037,12 @@ export class NaverBlogAutomation {
     if (clickResult === 'pending') {
       this.log('🔁 로그인 1.5차 시도: JS element.click() (Playwright 실증)');
       try {
-        await page.evaluate(() => {
-          const btn = document.querySelector('#log\\.login') as HTMLElement;
-          if (btn) btn.click();
-        });
+        await page.evaluate((selectors: readonly string[]) => {
+          for (const selector of selectors) {
+            const btn = document.querySelector(selector) as HTMLElement | null;
+            if (btn && btn.offsetParent !== null) { btn.click(); return; }
+          }
+        }, loginButtonSelectors);
         clickResult = await waitForClickResponse(3000);
       } catch (e) {
         this.log(`⚠️ 1.5차 클릭 예외: ${(e as Error).message}`);
@@ -3175,11 +3184,15 @@ export class NaverBlogAutomation {
     }
 
     // 기존 네비게이션 대기 유지 (도메인 이동 안정화 목적)
-    try {
-      await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 20000 });
-    } catch (navError) {
-      // 네비게이션 타임아웃은 캡차/2FA로 인한 것일 수 있으므로 루프 진입
-      await this.delay(1000);
+    // ✅ [2026-09-30] 클릭 응답이 이미 'success'(nid.naver.com 이탈 확인)면 이 대기는 매번 20초 타임아웃만
+    //   소모했다(실측 22초/로그인). 이미 일어난 이동을 다시 기다리지 않는다.
+    if (shouldAwaitPostLoginNavigation(clickResult)) {
+      try {
+        await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 20000 });
+      } catch (navError) {
+        // 네비게이션 타임아웃은 캡차/2FA로 인한 것일 수 있으므로 루프 진입
+        await this.delay(1000);
+      }
     }
 
     // ✅ [2026-03-30 OVERHAUL] 캡차/보안 감지 + 사용자 알림 통합 개선
@@ -3509,7 +3522,8 @@ export class NaverBlogAutomation {
             const hasIdField = !!document.querySelector('#id');
             const hasPwField = !!document.querySelector('#pw');
             const hasLoginButton = !!(
-              document.querySelector('#log\\.login') ||
+              document.querySelector('button.btn_done[id^="loginBtn"]') ||
+              document.getElementById('log.login') ||
               document.querySelector('button.btn_login') ||
               document.querySelector('button[type="submit"]')
             );

@@ -83,9 +83,22 @@ export function isOutsideBlogWriteSurface(value: string): boolean {
   return !state.isBlogDomain && !state.isEditorUrl;
 }
 
+/**
+ * [2026-09-30] `warmupSession` parks the page on section.blog.naver.com (blog home). That host is not part of
+ * `isNaverBlogDomainUrl` (editor-surface logic depends on the strict list), but for the pre-editor warmup
+ * it is already "inside the blog" — re-running the 끝판왕 warmup from there measured ~19s of duplicate visits.
+ */
+function isBlogSectionHomeUrl(value: string): boolean {
+  try {
+    return new URL(String(value || '')).hostname === 'section.blog.naver.com';
+  } catch {
+    return false;
+  }
+}
+
 export function shouldSkipBlogWriteWarmup(value: string): boolean {
   const state = classifyBlogWriteNavigationUrl(value);
-  return state.isBlogDomain || state.isEditorUrl;
+  return state.isBlogDomain || state.isEditorUrl || isBlogSectionHomeUrl(value);
 }
 
 export function isBlogWriteLoginRedirect(value: string): boolean {
