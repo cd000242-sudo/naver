@@ -962,13 +962,17 @@ function hasTableReferenceCue(value: string): boolean {
   return TABLE_REFERENCE_CUE_RE.test(stripInlineMarkdown(String(value || '')));
 }
 
+/*
+ * [2026-09-30 owner screenshot] Never cut a cell. The old 59-char + "..." cap published
+ * "...복귀 결정은 아닙니다. 실제로 작동..." rows. Cells wrap (keep-all/break-word), so
+ * the full sentence goes in and the layout handles the line breaks.
+ */
 function trimFallbackTableCell(value: string, fallback: string): string {
   const cleaned = stripInlineMarkdown(value)
     .replace(TABLE_REFERENCE_CUE_RE, '')
     .replace(/\s+/g, ' ')
     .trim();
-  const source = cleaned || fallback;
-  return source.length > 62 ? `${source.slice(0, 59).trim()}...` : source;
+  return cleaned || fallback;
 }
 
 function plainTextFromRenderNode(node: RenderNode): string {
