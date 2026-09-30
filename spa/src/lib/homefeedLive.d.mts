@@ -1,0 +1,11 @@
+export function plainText(value: unknown, length?: number): string;
+export function safeLink(value: unknown, base?: string): string | null;
+export function validDate(value: unknown, now: string): string | null;
+export function groupTokens(title: string): string[];
+export function parseRss(xml: string, source: Record<string, unknown>, capturedAt: string): { name: string; posts: Record<string, unknown>[] };
+export function parseYoutube(xml: string, source: Record<string, unknown>, capturedAt: string): { name: string; posts: Record<string, unknown>[] };
+export function parseCommunity(html: string, source: Record<string, unknown>, capturedAt: string): { name: string; posts: Record<string, unknown>[] };
+export function parseNate(html: string, source: Record<string, unknown>, capturedAt: string): { name: string; posts: Record<string, unknown>[] };
+export function buildLiveCandidates(posts: Record<string, unknown>[], now: string): Record<string, unknown>[];
+export function postsFromFeeds(feeds: unknown, now: string): { sources: Record<string, unknown>[]; posts: Record<string, unknown>[] };
+export function mergeLiveBoard(board: unknown, feeds: unknown, now: string): Record<string, unknown>;

@@ -1,0 +1,104 @@
+/**
+ * 홈판 벤치마크 실시간 판(2026-10-01) — spa/src/lib/homefeedLive.mjs.
+ *
+ * 규칙은 leword-app scripts/homefeed-benchmarks-core.cjs 와 같아야 한다. 아래 '묶기 · 추천' 사례는 그쪽
+ * scripts/homefeed-benchmarks.test.cjs 와 **같은 사례**다 — 한쪽만 바꾸면 여기서 드러난다.
+ * (2026-10-01 실원문 18곳으로 대조: 게시물 18/18 원천 완전 일치, 카드 81/81 내용 일치.)
+ */
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import * as live from '../src/lib/homefeedLive.mjs';
+
+const now = '2026-09-28T14:00:00.000Z';
+const post = (extra = {}) => ({ sourceId: 'sample', platform: 'naver-blog', name: '표본', title: '서울 장기전세 만기 확인', url: 'https://blog.naver.com/sample/123', summary: '서울 장기전세 20년 만기를 앞두고 확인할 내용입니다.', publishedAt: now, capturedAt: now, eventAt: null, metrics: { views: null, likes: null, comments: null }, ...extra });
+const other = (id, title, extra = {}) => post({ sourceId: id, url: `https://blog.naver.com/${id}/9${id.length}1`, title, summary: `${title} 요약입니다.`, ...extra });
+const build = (posts) => live.buildLiveCandidates(posts, now);
+
+test('같은 원문을 퍼 나른 것은 한 소재지만 독립 근거가 아니다', () => {
+  const result = build([post(), post({ sourceId: 'other', url: 'https://blog.naver.com/other/456' })]);
+  assert.equal(result.length, 1);
+  assert.equal(result[0].recommended, false);
+  assert.ok(result[0].flags.includes('possible-syndication'));
+});
+test('조사·붙여쓰기가 달라도 같은 소재는 한 묶음이고, 채널 두 곳이면 추천이다', () => {
+  const result = build([other('a', '디올과 원영의 만남 🎀'), other('bb', '🎀 디올원영 어떤데?')]);
+  assert.equal(result.length, 1);
+  assert.equal(result[0].recommended, true);
+  assert.equal(result[0].status, 'review-now');
+});
+test('공통어 · 한 낱말 · 나라 이름 · 질문 틀 · 숫자 든 말만 겹치면 다른 소재다', () => {
+  const pairs = [
+    ['260930 에스파 카리나 (katarinabluu) 인스타그램', '260930 아이브 레이 (reinyourheart) 인스타그램'],
+    ['디올과 원영의 만남', '기다렸던 디올 현진 등장'],
+    ['“일본도 다낭도 아니었다” 추석 해외여행 1위, 중국 한국인들 몰린 곳', '[한국 v 중국] 배준호 역전골 ㄷㄷㄷㄷㄷ'],
+    ['죽은 구교환 "72시간 뒤 다시 부활" 예매 1위 영화 부활남 원작과 뭐가 다를까', '최민식X한소희 ‘인턴’, 원작과 뭐가 다를까 한국판'],
+    ['🚨윤남노가 2년 동안 서먹했던', '소녀시대 탈퇴 후 12년 만에 마린룩으로 냉면 무대 제시카 그동안 무슨 일이 있었나'],
+  ];
+  for (const [a, b] of pairs) assert.equal(build([other('a', a), other('bb', b)]).length, 2, `${a} / ${b}`);
+});
+test('채널 한 곳뿐이면 추천이 아니고, 많은 채널이 다룬 소재가 앞에 선다', () => {
+  assert.equal(build([other('a', '디올과 원영의 만남 🎀')])[0].status, 'verify');
+  const result = build([other('a', '안세영 금메달 포상금 얼마'), other('bb', '안세영 금메달 포상금 공개'), other('ccc', '디올과 원영의 만남'), other('dddd', '디올원영 어떤데'), other('eeeee', '원영 디올 행사 사진')]);
+  assert.equal(new Set(result[0].sources.map((s) => s.id)).size, 3);
+});
+test('30장 상한 없음 · 48시간이 지난 소재는 싣지 않는다 · 협찬은 추천 불가', () => {
+  assert.equal(build(Array.from({ length: 45 }, (_, i) => other(`s${i}`, `가나${i}다 라마${i}바 사아${i}자`))).length, 45);
+  assert.equal(build([post({ publishedAt: '2026-09-25T10:00:00Z' })]).length, 0);
+  const sponsored = build([post({ summary: '업체로부터 제품을 무상 제공받았습니다.' })])[0];
+  assert.equal(sponsored.recommended, false);
+  assert.ok(sponsored.flags.includes('sponsored'));
+});
+
+test('RSS — 작품명 꺾쇠는 글자로 남기고, CDATA · 태그 · 엔티티를 수집기와 같게 푼다', () => {
+  const xml = '<rss><channel><title>표본 블로그</title><item><title><![CDATA[죽은 구교환 영화 <부활남: 더 레드> 원작과 뭐가 다를까?]]></title><link>https://blog.naver.com/sample/123?fromRss=true</link><description><![CDATA[<b>본문</b> &amp; 설명<script>bad()</script>]]></description><pubDate>Mon, 28 Sep 2026 10:00:00 +0900</pubDate></item><item><title>위험</title><link>https://evil.test/a</link></item></channel></rss>';
+  const { name, posts } = live.parseRss(xml, { id: 'sample', platform: 'naver-blog' }, now);
+  assert.equal(name, '표본 블로그');
+  assert.equal(posts.length, 1);
+  assert.equal(posts[0].title, '죽은 구교환 영화 <부활남: 더 레드> 원작과 뭐가 다를까?');
+  assert.equal(posts[0].url, 'https://blog.naver.com/sample/123');
+  assert.equal(posts[0].summary, '본문 & 설명');
+});
+test('네이트 · 이슈링크 — 제목 · 공감 · 댓글 · 시각을 뽑는다', () => {
+  const nate = '<a href="//news.nate.com/view/20260930n32410?mid=n1009" class="lt1"><span class="tb"><h2 class="tit">허진호 감독, 역사 논란</h2><span class="desc"> 허진호 감독이 입을 열었다. </span></span><span class="rnk-emotion"><span class="img">공감수</span><span class="emcnt"><em>358</em></span></span></a>';
+  const n = live.parseNate(nate, { id: 'nate-ent', platform: 'news-ranking', url: 'https://news.nate.com/rank/emoticon?cate=ent' }, now).posts[0];
+  assert.equal(n.url, 'https://news.nate.com/view/20260930n32410');
+  assert.equal(n.title, '허진호 감독, 역사 논란');
+  assert.equal(n.reactionCount, 358);
+  const il = "<tr><td class='h5'>1</br> <small>펨코</small></td><td><div class='first_title'><span class='title'><a href='https://www.issuelink.co.kr/community/go/fmkorea/10396146863'>이동진: 말씀드립니다 <small>[2066]</small></a></span></div><div class=\"second_date\"> <span>2026-09-28 20:30:00</span></div></td></tr>";
+  const c = live.parseCommunity(il, { id: 'issuelink', platform: 'community-ranking', url: 'https://www.issuelink.co.kr/community/listview/all/24/comment/_blank' }, now).posts[0];
+  assert.equal(c.title, '이동진: 말씀드립니다');
+  assert.equal(c.metrics.comments, 2066);
+  assert.equal(c.name, '이슈링크 · 펨코');
+  assert.equal(c.publishedAt, '2026-09-28T11:30:00.000Z');
+});
+
+test('합치기 — 인스타는 CI 판에서 되살려 함께 묶고, 홈판 제목은 같은 원문 주소의 CI 카드에서 가져온다', () => {
+  const rss = (id, title, logNo) => ({ id, platform: 'naver-blog', name: id, status: 'ok', text: `<rss><channel><title>${id}</title><item><title>${title}</title><link>https://blog.naver.com/${id}/${logNo}</link><description>${title} 요약</description><pubDate>Mon, 28 Sep 2026 20:00:00 +0900</pubDate></item></channel></rss>` });
+  const board = {
+    schemaVersion: 1, generatedAt: '2026-09-28T10:00:00Z', status: 'partial',
+    sources: [{ id: 'a', platform: 'naver-blog', url: 'https://blog.naver.com/a', status: 'ok' }, { id: 'ig', platform: 'instagram', url: 'https://www.instagram.com/ig/', status: 'ok', postCount: 1 }],
+    candidates: [
+      { id: 'x', title: '디올과 원영의 만남', homeTitles: ['제목 하나'], capturedAt: now, sources: [{ id: 'a', platform: 'naver-blog', url: 'https://blog.naver.com/a/111', title: '디올과 원영의 만남' }] },
+      { id: 'y', title: '원영 디올 행사', capturedAt: now, sources: [{ id: 'ig', platform: 'instagram', url: 'https://www.instagram.com/p/ABC123/', title: '원영 디올 행사 🎀', summary: '원영 디올 행사 사진', publishedAt: '2026-09-28T09:00:00Z', metrics: { views: null, likes: 900, comments: 20 } }] },
+    ],
+  };
+  const merged = live.mergeLiveBoard(board, [rss('a', '디올과 원영의 만남', 111), { id: 'b', platform: 'naver-blog', name: 'b', status: 'failed' }], now);
+  assert.equal(merged.live, true);
+  assert.equal(merged.generatedAt, now);
+  const card = merged.candidates.find((c) => c.sources.some((s) => s.url === 'https://blog.naver.com/a/111'));
+  assert.deepEqual(card.homeTitles, ['제목 하나']);
+  assert.ok(card.sources.some((s) => s.platform === 'instagram'), '인스타 게시물이 같은 소재로 묶였다');
+  assert.equal(card.recommended, true);
+  assert.equal(merged.sources.find((s) => s.id === 'b').status, 'failed');
+  assert.equal(merged.sources.find((s) => s.id === 'ig').status, 'ok');
+  assert.equal(merged.sources.find((s) => s.id === 'a').capturedAt, now);
+});
+
+test('실시간 원문은 키 없는 액션 하나로만 받고 AI 를 부르지 않는다', () => {
+  const src = readFileSync(fileURLToPath(new URL('../src/lib/homefeedLiveFetch.ts', import.meta.url)), 'utf8');
+  assert.match(src, /callWorkerRaw\('homefeed-benchmark-feeds', \{\}\)/);
+  assert.doesNotMatch(src, /loadUserKeys|licenseCode|api\.openai\.com|api\.anthropic\.com|generativelanguage/);
+  assert.doesNotMatch(readFileSync(fileURLToPath(new URL('../src/lib/homefeedLive.mjs', import.meta.url)), 'utf8'), /\bfetch\(|Math\.random\(/);
+});
