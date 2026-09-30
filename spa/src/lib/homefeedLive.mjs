@@ -30,7 +30,8 @@ function decodeEntities(value) {
 /** 태그를 벗기고 엔티티를 푼 한 줄 글자(수집기 plainText 와 같은 결과). */
 export function plainText(value, length = 300) {
   // 태그는 영문자로 시작하는 것만 — '<부활남: 더 레드>' 같은 작품명 꺾쇠는 글자다(수집기 cheerio 도 글자로 둔다).
-  const stripped = String(value || '').replace(/<(script|style|iframe|object|svg)\b[\s\S]*?<\/\1>/gi, ' ').replace(/<!--[\s\S]*?-->/g, ' ').replace(/<\/?[a-zA-Z][^<>]*>/g, ' ');
+  // 벗긴 자리엔 빈칸을 넣지 않는다 — cheerio .text() 도 안 넣는다('솔로곡인<Dream>으로' → '솔로곡인으로', 실원문 대조).
+  const stripped = String(value || '').replace(/<(script|style|iframe|object|svg)\b[\s\S]*?<\/\1>/gi, '').replace(/<!--[\s\S]*?-->/g, '').replace(/<\/?[a-zA-Z][^<>]*>/g, '');
   return decodeEntities(stripped).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').replace(/\s+/g, ' ').trim().slice(0, length);
 }
 /** XML 요소 안쪽 글자 — CDATA 를 풀고 엔티티를 한 번 푼다(수집기의 xmlMode .text() 와 같은 단계). */
@@ -168,20 +169,42 @@ function idOf(url) {
   return `live-${h.toString(16).padStart(8, '0')}`;
 }
 
-/** 수집기 buildCandidates 와 같은 규칙(반응 증가만 뺌). 최근 48시간 소재 전부, 추천이 앞. */
-export function buildLiveCandidates(posts, now) {
-  const groups = [];
+const MAX_CARDS = 300;
+function bigrams(token) { const out = []; for (let i = 0; i + 1 < token.length; i += 1) out.push(token.slice(i, i + 2)); return out; }
+/** 수집기 groupPosts 와 같은 묶기 — 같은 주소 · 같은 제목은 표로, 같은 소재 후보는 두 글자 조각을 나눠 가진 묶음만 견준다. */
+function groupPosts(posts) {
+  const groups = []; const byUrl = new Map(); const byNorm = new Map(); const byGram = new Map();
+  const remember = (map, key, index) => { if (!map.has(key)) map.set(key, index); };
   for (const post of posts.filter((p) => p.title && safeLink(p.url) && !/ㅇㅎ[)\s]|후방주의|여캠시절|노출사진/.test(p.title))) {
-    const terms = groupTokens(post.title);
-    let group = groups.find((g) => g.posts.some((p) => p.url === post.url || normalized(p.title) === normalized(post.title)));
-    if (!group && terms.length >= 2) group = groups.find((g) => sameStory(terms, g.terms));
-    if (group) { if (!group.posts.some((p) => p.url === post.url)) group.posts.push(post); } else groups.push({ posts: [post], terms });
+    const norm = normalized(post.title); const terms = groupTokens(post.title);
+    const exact = [byUrl.get(post.url), byNorm.get(norm)].filter((i) => i !== undefined);
+    let index = exact.length ? Math.min(...exact) : -1;
+    if (index < 0 && terms.length >= 2) {
+      const seen = new Set();
+      for (const t of terms) for (const g of bigrams(t)) for (const i of byGram.get(g) || []) seen.add(i);
+      for (const i of [...seen].sort((a, b) => a - b)) if (sameStory(terms, groups[i].terms)) { index = i; break; }
+    }
+    if (index >= 0) {
+      const group = groups[index];
+      if (!group.urls.has(post.url)) { group.posts.push(post); group.urls.add(post.url); group.norms.set(post, norm); remember(byUrl, post.url, index); remember(byNorm, norm, index); }
+    } else {
+      index = groups.length;
+      groups.push({ posts: [post], terms, urls: new Set([post.url]), norms: new Map([[post, norm]]) });
+      for (const t of terms) for (const g of new Set(bigrams(t))) { if (!byGram.has(g)) byGram.set(g, []); byGram.get(g).push(index); }
+      remember(byUrl, post.url, index); remember(byNorm, norm, index);
+    }
   }
+  return groups;
+}
+
+/** 수집기 buildCandidates 와 같은 규칙(반응 증가만 뺌). 최근 48시간 소재, 추천이 앞, 300장까지. */
+export function buildLiveCandidates(posts, now) {
+  const groups = groupPosts(posts);
   return groups.filter((group) => group.posts.some((p) => p.platform !== 'community-ranking' && p.summary)).map((group) => {
     const sorted = [...group.posts].sort((a, b) => Number(Boolean(b.summary)) - Number(Boolean(a.summary)) || (Date.parse(b.publishedAt) || 0) - (Date.parse(a.publishedAt) || 0));
     const lead = sorted[0];
     const flags = [...new Set(sorted.flatMap((p) => flagsFor(p, now)))];
-    if (sorted.length > 1 && sorted.some((p, i) => sorted.slice(i + 1).some((q) => normalized(p.title) === normalized(q.title)))) flags.push('possible-syndication');
+    if (sorted.length > 1 && sorted.some((p, i) => sorted.slice(i + 1).some((q) => group.norms.get(p) === group.norms.get(q)))) flags.push('possible-syndication');
     const age = lead.publishedAt ? (Date.parse(now) - Date.parse(lead.publishedAt)) / DAY : Infinity;
     const stale = (age > 7 && Boolean(lead.publishedAt)) || flags.includes('recycled-material');
     const platforms = new Set(sorted.map((p) => p.platform));
@@ -215,7 +238,8 @@ export function buildLiveCandidates(posts, now) {
     };
   })
     .filter((c) => !c.publishedAt || Date.parse(now) - Date.parse(c.publishedAt) <= 2 * DAY)
-    .sort((a, b) => Number(b.recommended) - Number(a.recommended) || b.priority - a.priority || a.id.localeCompare(b.id));
+    .sort((a, b) => Number(b.recommended) - Number(a.recommended) || b.priority - a.priority || (Date.parse(b.publishedAt) || 0) - (Date.parse(a.publishedAt) || 0) || a.sources[0].url.localeCompare(b.sources[0].url))
+    .slice(0, MAX_CARDS);
 }
 
 /** 워커 원문 → 원천별 게시물. 못 푼 원천은 failed 로 남긴다(지어내지 않는다). */

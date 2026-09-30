@@ -22,8 +22,8 @@ function candidate(raw, index) {
 export function normalizeBenchmarkBoard(raw) {
  if (!raw || raw.schemaVersion !== 1 || !Array.isArray(raw.candidates) || !Array.isArray(raw.sources)) throw new Error('벤치마크 데이터 형식을 확인하지 못했습니다.');
  if (!date(raw.generatedAt)) throw new Error('마지막 수집 시각을 확인하지 못했습니다.');
- const sources = raw.sources.slice(0,100).filter(x=>x && typeof x==='object').map(source);
- return {schemaVersion:1,generatedAt:date(raw.generatedAt),attemptedAt:date(raw.attemptedAt),status:['fresh','partial','stale'].includes(raw.status) ? raw.status : 'partial',sources,sourceCount:sources.length,collectedPostCount:sources.filter(s=>s.status==='ok').reduce((sum,s)=>sum+s.postCount,0),candidates:raw.candidates.slice(0,200).filter(x=>x && typeof x==='object').map(candidate)};
+ const sources = raw.sources.slice(0,300).filter(x=>x && typeof x==='object').map(source);
+ return {schemaVersion:1,generatedAt:date(raw.generatedAt),attemptedAt:date(raw.attemptedAt),status:['fresh','partial','stale'].includes(raw.status) ? raw.status : 'partial',sources,sourceCount:sources.length,collectedPostCount:sources.filter(s=>s.status==='ok').reduce((sum,s)=>sum+s.postCount,0),candidates:raw.candidates.slice(0,300).filter(x=>x && typeof x==='object').map(candidate)};
 }
 export function benchmarkView(board, now = Date.now()) {
  const isOld = (value) => !value || now - Date.parse(value) > MAX_AGE || Date.parse(value) > now + 5*60*1000;

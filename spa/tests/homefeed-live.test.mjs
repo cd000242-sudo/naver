@@ -60,6 +60,10 @@ test('RSS — 작품명 꺾쇠는 글자로 남기고, CDATA · 태그 · 엔티
   assert.equal(posts[0].url, 'https://blog.naver.com/sample/123');
   assert.equal(posts[0].summary, '본문 & 설명');
 });
+test('영문 꺾쇠(태그로 읽힘)는 빈칸 없이 벗긴다 — 수집기 cheerio 와 같다(실원문 mira841213)', () => {
+  assert.equal(live.plainText('솔로곡인<Dream>으로 베스트 팝'), '솔로곡인으로 베스트 팝');
+  assert.equal(live.plainText('영화 <부활남: 더 레드> 원작'), '영화 <부활남: 더 레드> 원작');
+});
 test('네이트 · 이슈링크 — 제목 · 공감 · 댓글 · 시각을 뽑는다', () => {
   const nate = '<a href="//news.nate.com/view/20260930n32410?mid=n1009" class="lt1"><span class="tb"><h2 class="tit">허진호 감독, 역사 논란</h2><span class="desc"> 허진호 감독이 입을 열었다. </span></span><span class="rnk-emotion"><span class="img">공감수</span><span class="emcnt"><em>358</em></span></span></a>';
   const n = live.parseNate(nate, { id: 'nate-ent', platform: 'news-ranking', url: 'https://news.nate.com/rank/emoticon?cate=ent' }, now).posts[0];
@@ -98,7 +102,7 @@ test('합치기 — 인스타는 CI 판에서 되살려 함께 묶고, 홈판 �
 
 test('실시간 원문은 키 없는 액션 하나로만 받고 AI 를 부르지 않는다', () => {
   const src = readFileSync(fileURLToPath(new URL('../src/lib/homefeedLiveFetch.ts', import.meta.url)), 'utf8');
-  assert.match(src, /callWorkerRaw\('homefeed-benchmark-feeds', \{\}\)/);
+  assert.match(src, /callWorkerRaw\('homefeed-benchmark-feeds', \{ batch: String\(batch\) \}\)/);
   assert.doesNotMatch(src, /loadUserKeys|licenseCode|api\.openai\.com|api\.anthropic\.com|generativelanguage/);
   assert.doesNotMatch(readFileSync(fileURLToPath(new URL('../src/lib/homefeedLive.mjs', import.meta.url)), 'utf8'), /\bfetch\(|Math\.random\(/);
 });
