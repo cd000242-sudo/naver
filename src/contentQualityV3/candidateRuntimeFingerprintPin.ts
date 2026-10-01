@@ -48,5 +48,8 @@
 //   캡션 칸까지 배선했다. 캡션에 글자가 들어가면 .se-text-paragraph 역순 탐색이 캡션을
 //   '마지막 문단'으로 집어 본문이 사진 설명 안으로 들어갈 수 있으므로, richTextPaste 의
 //   캐럿 탐색 세 경로에 캡션 제외를 넣었다(캡션이 비어 있던 종전과 같은 블록이 선택된다).
+//
+// [2026-10-01 세 번째] v2.11.308 버전업으로 재계산했다 (package.json +
+//   src/runtime/version.generated.ts). 코드 변경은 위 두 항목뿐이다.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  'a26ff22f5698a62c40075aabd9f2ed0a6952e1c5fc5421698d81c36e6afe9e62' as const;
+  '29d225efd3b809a9a8987161eef8d344f01c2e85eb3f1dc4668d82cf12721cce' as const;
