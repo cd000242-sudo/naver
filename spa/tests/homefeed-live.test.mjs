@@ -129,3 +129,20 @@ test('일반어로만 · 구체어 하나로만 겹치면 다른 소재, 구체�
   for (const [a, b] of apart) assert.equal(build([other('a', a), other('bb', b)]).length, 2, `${a} / ${b}`);
   assert.equal(build([other('a', '전지현 생로랑 파리 패션쇼 착장 공개'), other('bb', '쌩얼로 등장... 전지현 생로랑 공항 패션')]).length, 1);
 });
+test('분야 — 자동차·IT · 건강, 제목 단서 없으면 출처 주제(수집기와 같은 사례)', () => {
+  assert.equal(live.category('그랜저 하이브리드 연비 실제로 타보니'), '자동차·IT');
+  assert.equal(live.category('아이폰 18 프로 출시일과 가격 정리'), '자동차·IT');
+  assert.equal(live.category('이제 과태료에 벌점까지 깜빡이 키셨나요'), '자동차·IT');
+  assert.equal(live.category('위고비 끊고 26일 만에 10kg 뺀 식단'), '건강');
+  assert.equal(live.category('요즘 다들 이렇게 한다는 그것', ['IT/차테크', 'IT/차테크', '스포츠']), '자동차·IT');
+  assert.equal(live.category('요즘 다들 이렇게 한다는 그것', ['건강 상식']), '건강');
+  assert.equal(live.category('요즘 다들 이렇게 한다는 그것'), '사회·이슈');
+  assert.equal(live.category('손흥민 결승골 터진 순간 아시안게임', ['IT/차테크']), '스포츠·게임');
+  assert.equal(live.category('41홈런으로 홈런왕 굳히나 기아타이거즈 김도영'), '스포츠·게임');
+});
+test('실시간 판도 CI 판 출처 목록의 주제로 분야를 매긴다', () => {
+  const board = { schemaVersion: 1, generatedAt: now, status: 'partial', sources: [{ id: 'car1', platform: 'naver-blog', url: 'https://blog.naver.com/car1', status: 'ok', topic: 'IT/차테크' }], candidates: [] };
+  const feeds = [{ id: 'car1', platform: 'naver-blog', name: 'car1', status: 'ok', text: '<rss><channel><title>car1</title><item><title>요즘 다들 이렇게 한다는 그것</title><link>https://blog.naver.com/car1/111</link><description>요약</description><pubDate>Mon, 28 Sep 2026 20:00:00 +0900</pubDate></item></channel></rss>' }];
+  const merged = live.mergeLiveBoard(board, feeds, now);
+  assert.equal(merged.candidates[0].category, '자동차·IT');
+});

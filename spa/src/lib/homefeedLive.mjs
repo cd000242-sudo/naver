@@ -157,9 +157,28 @@ export function sameStory(a, b) {
   const ratio = units.length / Math.min(a.length, b.length);
   return specific >= 2 && ratio >= 0.5;
 }
-function category(title) {
-  for (const [name, pattern] of [['생활경제·주거', /전세|주택|아파트|대출|지원금|연금|세금|청약|금리|부동산|소상공인|보조금|저축/], ['패션·뷰티', /패션|코디|착장|가방|샤넬|데님|세럼|화장품|여행룩/], ['여행·생활', /여행|숙소|호텔|런던|공항|맛집|날씨|교통/], ['스포츠·게임', /야구|축구|선수|아시안게임|올림픽|게임|메달|홈런/], ['문화·연예', /배우|가수|아이돌|방송|드라마|영화|콘서트|아이브|카즈하|고윤정|카리나|트로트/]]) if (pattern.test(title)) return name;
-  return '사회·이슈';
+/**
+ * 분야(2026-10-01 사장님 "자동차 IT 는 안 보여") — 제목 단서가 먼저, 없으면 출처 블로그 주제(운영자가 목록에 적은 구역)의 다수결,
+ * 그것도 없으면 사회·이슈. 예전엔 제목 단서만 봐서 자동차 · IT 분야가 아예 없었고 판 300장 중 225장이 사회·이슈였다.
+ * 규칙은 수집기 scripts/homefeed-benchmarks-core.cjs 와 같아야 한다(같은 사례를 양쪽 테스트가 잠갔다).
+ */
+const TOPIC_CATEGORY = { 'IT/차테크': '자동차·IT', 'IT·컴퓨터': '자동차·IT', '자동차': '자동차·IT', '재테크 라이프': '생활경제·주거', '비즈니스·경제': '생활경제·주거', '연예인 패션': '패션·뷰티', '패션·미용': '패션·뷰티', '미용·패션': '패션·뷰티', '방송 이슈': '문화·연예', '방송': '문화·연예', '드라마': '문화·연예', '스타·연예인': '문화·연예', '스포츠': '스포츠·게임', '건강 상식': '건강', '건강·의학': '건강', '리빙 라이프': '여행·생활', '인테리어·DIY': '여행·생활', '요리·레시피': '여행·생활', '맛집': '여행·생활', '육아·결혼': '여행·생활' };
+const CATEGORY_PATTERNS = [
+  ['생활경제·주거', /전세|주택|아파트|대출|지원금|연금|세금|청약|금리|부동산|소상공인|보조금|저축/],
+  ['자동차·IT', /자동차|신차|전기차|하이브리드|SUV|세단|차량|운전|주차|과태료|벌점|깜빡이|타이어|연비|현대차|기아(?!\s*타이거즈)|제네시스|테슬라|벤츠|BMW|아우디|그랜저|쏘렌토|카니발|아이오닉|스마트폰|아이폰|갤럭시|노트북|태블릿|인공지능|챗GPT|요금제|통신사/],
+  ['건강', /건강|다이어트|위고비|비만|혈압|혈당|당뇨|콜레스테롤|영양제|비타민|검진|위암|유방암|폐암|갑상선|두통|불면/],
+  ['패션·뷰티', /패션|코디|착장|가방|샤넬|데님|세럼|화장품|여행룩/],
+  ['여행·생활', /여행|숙소|호텔|런던|공항|맛집|날씨|교통/],
+  ['스포츠·게임', /야구|축구|선수|아시안게임|올림픽|게임|메달|홈런/],
+  ['문화·연예', /배우|가수|아이돌|방송|드라마|영화|콘서트|아이브|카즈하|고윤정|카리나|트로트/],
+];
+export function category(title, topics = []) {
+  for (const [name, pattern] of CATEGORY_PATTERNS) if (pattern.test(title)) return name;
+  const counts = new Map();
+  for (const topic of topics) { const name = TOPIC_CATEGORY[topic]; if (name) counts.set(name, (counts.get(name) || 0) + 1); }
+  let best = null;
+  for (const [name, n] of counts) if (!best || n > best[1]) best = [name, n];
+  return best ? best[0] : '사회·이슈';
 }
 function flagsFor(post, now) {
   const text = `${post.title} ${post.summary}`; const flags = [];
@@ -235,7 +254,7 @@ export function buildLiveCandidates(posts, now, growthByUrl = new Map()) {
     if (flags.includes('sponsored')) why.push('제품 제공·협찬 고지 감지: 자연 유행 근거에서 제외');
     if (stale) why.push('과거 자료 또는 발행 7일 경과: 새 사실 확보 전 작성 우선순위를 낮춥니다.');
     return {
-      id: idOf(lead.url), keyword, title: lead.title, category: category(lead.title),
+      id: idOf(lead.url), keyword, title: lead.title, category: category(lead.title, sorted.map((p) => p.topic)),
       status: stale ? 'stale' : recommended ? 'review-now' : 'verify', recommended,
       priority: Math.max(0, (age <= 1 ? 30 : age <= 2 ? 24 : age <= 7 ? 12 : 0) + (lead.summary ? 10 : 0) + Math.min(24, (channels - 1) * 8) + (platforms.size >= 2 ? 15 : 0) + (reaction ? 10 : 0) + (positiveGrowth ? 10 : 0) - (flags.includes('sponsored') ? 25 : 0) - (stale ? 30 : 0) - (flags.includes('sensitive-claim') ? 20 : 0)),
       publishedAt: lead.publishedAt, eventAt: null, capturedAt: lead.capturedAt,
@@ -295,7 +314,7 @@ export function mergeLiveBoard(board, feeds, now) {
     for (const s of c.sources || []) {
       if ((s.platform !== 'instagram' && !revived.has(s.id)) || !s.url || seenIg.has(s.url)) continue;
       seenIg.add(s.url);
-      igPosts.push({ sourceId: s.id, platform: s.platform, name: s.name || s.id, title: s.title || c.title, url: s.url, publishedAt: s.publishedAt || null, capturedAt: c.capturedAt || now, eventAt: null, summary: s.summary || '', metrics: s.metrics || { views: null, likes: null, comments: null } });
+      igPosts.push({ sourceId: s.id, platform: s.platform, topic: boardOk.get(s.id)?.topic || null, name: s.name || s.id, title: s.title || c.title, url: s.url, publishedAt: s.publishedAt || null, capturedAt: c.capturedAt || now, eventAt: null, summary: s.summary || '', metrics: s.metrics || { views: null, likes: null, comments: null } });
     }
   }
   const reviewed = (board?.candidates || []).filter((c) => (c.flags || []).includes('editor-reviewed'));
@@ -318,7 +337,9 @@ export function mergeLiveBoard(board, feeds, now) {
       if (s.growth && typeof s.growth === 'object' && !growthByUrl.has(s.url)) growthByUrl.set(s.url, s.growth);
     }
   }
-  const livePosts = live.posts.map((p) => (likesByUrl.has(p.url) ? { ...p, metrics: { ...p.metrics, likes: likesByUrl.get(p.url) } } : p));
+  // 출처 주제(CI 판 출처 목록) — 분야를 수집기와 같게 매긴다(2026-10-01).
+  const topicById = new Map((board?.sources || []).map((s) => [s.id, s.topic || null]));
+  const livePosts = live.posts.map((p) => ({ ...p, topic: topicById.get(p.sourceId) ?? null, ...(likesByUrl.has(p.url) ? { metrics: { ...p.metrics, likes: likesByUrl.get(p.url) } } : {}) }));
   const built = buildLiveCandidates([...livePosts, ...igPosts], now, growthByUrl)
     .filter((c) => !c.sources.some((s) => reviewedUrls.has(s.url)))
     .map((c) => {
