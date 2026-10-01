@@ -40,7 +40,9 @@ export function registerImageCollectUrlHandlers(): void {
             let match;
             while ((match = imgRegex.exec(html)) !== null) {
                 const imgUrl = match[1];
-                if (imgUrl.startsWith('http') && /\.(jpg|jpeg|png|gif|webp)/i.test(imgUrl)) {
+                // [2026-10-01] .avif 도 수집한다 — 뉴스사 이미지가 AVIF 로 내려온다.
+                //   저장 단계(imageDownloadHandlers)에서 JPEG 로 변환된다.
+                if (imgUrl.startsWith('http') && /\.(jpg|jpeg|png|gif|webp|avif)/i.test(imgUrl)) {
                     images.push(imgUrl);
                 }
             }

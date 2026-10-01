@@ -23,6 +23,8 @@ import {
 import { summarizeBatchImageDownloads } from './imageDownloadResultPolicy.js';
 import { resolveExtensionFromBytes } from './imageExtensionPolicy.js';
 import { verifyImagePayload } from './imagePayloadPolicy.js';
+// [2026-10-01] AVIF/HEIC 는 네이버가 받지 않는다 — 저장하기 전에 JPEG 로 바꾼다.
+import { ensureNaverDecodableBuffer } from '../../image/naverImageTranscode.js';
 
 export function registerImageDownloadHandlers(): void {
     ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string, category?: string) => {
@@ -95,6 +97,17 @@ export function registerImageDownloadHandlers(): void {
                         }).on('error', reject);
                     });
                     ext = path.extname(parsedUrl.pathname) || '.jpg';
+                }
+            }
+
+            // [2026-10-01] AVIF/HEIC 는 네이버 허용 목록에 없다 — 저장 단계에서 JPEG 로 바꾼다.
+            //   이걸 안 하면 아래 resolveExtensionFromBytes 가 AVIF 를 몰라서 폴백 '.jpg' 를
+            //   돌려주고, AVIF 바이트가 .jpg 이름으로 저장돼 발행 때 네이버가 거부한다.
+            {
+                const decodable = await ensureNaverDecodableBuffer(buffer, (msg) => console.log(`[Main] ${msg}`));
+                if (decodable.converted) {
+                    buffer = decodable.buffer;
+                    ext = '.jpg';
                 }
             }
 
@@ -325,12 +338,21 @@ export function registerImageDownloadHandlers(): void {
                 }
 
                 try {
+                    // [2026-10-01] 배치 저장도 AVIF/HEIC 를 JPEG 로 바꾼 뒤 확장자를 정한다.
+                    const decodable = await ensureNaverDecodableBuffer(
+                        result.buffer,
+                        (msg) => console.log(`[Main] 이미지 ${i + 1} ${msg}`),
+                    );
+                    const buffer = decodable.buffer;
+
                     // [2026-08-18] 배치 저장도 동일 정책 — Content-Type/URL이 틀려도
                     // 실제 바이트로 확장자를 확정한다 (네이버 "알 수 없는 파일" 차단).
-                    const ext = resolveExtensionFromBytes(
-                        result.buffer,
-                        getExtensionFromContentType(result.contentType, img.url),
-                    );
+                    const ext = decodable.converted
+                        ? '.jpg'
+                        : resolveExtensionFromBytes(
+                            buffer,
+                            getExtensionFromContentType(result.contentType, img.url),
+                        );
                     const safeHeading = img.heading.replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/g, '').substring(0, 50);
                     const fileName = buildBatchImageFileName(
                         i,
@@ -342,8 +364,8 @@ export function registerImageDownloadHandlers(): void {
                     );
                     const filePath = path.join(imagesPath, fileName);
 
-                    await fsp.writeFile(filePath, result.buffer);
-                    console.log(`[Main] ✅ 이미지 ${i + 1} 저장 완료: ${fileName} (${Math.round(result.buffer.length / 1024)}KB)`);
+                    await fsp.writeFile(filePath, buffer);
+                    console.log(`[Main] ✅ 이미지 ${i + 1} 저장 완료: ${fileName} (${Math.round(buffer.length / 1024)}KB)`);
 
                     return { filePath, heading: img.heading };
                 } catch (writeError) {

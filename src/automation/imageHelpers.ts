@@ -32,6 +32,8 @@ function humanDwell(baseMs: number): number {
 // [SPEC-FREEZE-GUARD-001-P2 R5 / v2.10.264] Base64 디코딩 워커 분리 — data URL 본문
 import { decodeBase64Async } from '../main/utils/base64Async.js';
 import { downloadImageBuffer } from '../image/imageUrlDownload.js';
+// [2026-10-01] AVIF/HEIC 는 네이버 허용 목록에 없다 — 올리기 전에 JPEG 로 바꾼다.
+import { ensureNaverDecodableFile } from '../image/naverImageTranscode.js';
 import {
   SELECTORS,
   findElement,
@@ -614,6 +616,12 @@ export async function insertImageViaUploadButton(self: any, filePath: string): P
       throw new Error(`이미지 파일을 찾을 수 없습니다: ${absolutePath}`);
     }
 
+    // 2.4 [2026-10-01] AVIF/HEIC → JPG 변환 (네이버 허용 목록에 없는 포맷)
+    {
+      const transcoded = await ensureNaverDecodableFile(absolutePath, (msg: string) => self.log(msg));
+      if (transcoded.converted) absolutePath = transcoded.filePath;
+    }
+
     // 2.5 ✅ 네이버 블로그 이미지 용량 제한 가드 (공식 단일 이미지 20MB 초과 시 자동 압축)
     absolutePath = await ensureImageUnderSizeLimit(absolutePath, (msg: string) => self.log(msg));
 
@@ -862,6 +870,17 @@ export async function insertBase64ImageAtCursor(
       await fs.access(absolutePath);
     } catch {
       throw new Error(`이미지 파일을 찾을 수 없습니다: ${absolutePath}`);
+    }
+  }
+
+  // [2026-10-01] AVIF/HEIC → JPG 변환. 확장자가 아니라 내용으로 판정한다 — 구버전이
+  //   저장한 "AVIF 바이트인 .jpg" 파일이 수집 폴더에 남아 있어 확장자 검사로는 못 잡는다.
+  //   아래 정상화/용량 가드보다 먼저 돌려서 이후 단계가 전부 JPEG 를 보게 한다.
+  {
+    const transcoded = await ensureNaverDecodableFile(absolutePath, (msg: string) => self.log(msg));
+    if (transcoded.converted) {
+      absolutePath = transcoded.filePath;
+      isTemporaryFile = true;
     }
   }
 

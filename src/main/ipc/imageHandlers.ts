@@ -261,7 +261,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
                 if (e?.code === 'ENOENT') return [];
                 throw e;
             }
-            return files.filter(f => /\.(png|jpg|jpeg|gif|webp)$/i.test(f));
+            return files.filter(f => /\.(png|jpg|jpeg|gif|webp|avif)$/i.test(f));
         } catch {
             return [];
         }

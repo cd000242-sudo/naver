@@ -29,7 +29,9 @@ interface ParsedFile {
 }
 
 /** 지원 이미지 확장자 */
-const SUPPORTED_EXTENSIONS = ['.jpg', '.jpeg', '.jfif', '.jpe', '.png', '.webp', '.gif']; // [2026-09-22] .jfif = JPEG 별칭(윈도우 저장 기본)
+// [2026-09-22] .jfif = JPEG 별칭(윈도우 저장 기본)
+// [2026-10-01] .avif = 네이버 비허용 — 업로드 직전 naverImageTranscode 가 JPG 로 바꾼다.
+const SUPPORTED_EXTENSIONS = ['.jpg', '.jpeg', '.jfif', '.jpe', '.png', '.webp', '.gif', '.avif'];
 
 /** 썸네일 인식 키워드 */
 const THUMBNAIL_KEYWORDS = ['썸네일', 'thumbnail', 'thumb', '대표'];

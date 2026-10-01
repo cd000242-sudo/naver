@@ -29,6 +29,34 @@ export function sniffImageExtension(buffer: Buffer): string | null {
 }
 
 /**
+ * 네이버는 안 받지만 sharp(libheif) 가 디코딩할 수 있는 포맷.
+ * 'heic' 는 HEIC/HEIF/HEIX 계열을 함께 뜻한다.
+ */
+export type TranscodableImageFormat = 'avif' | 'heic';
+
+const ISO_BMFF_AVIF_BRANDS = ['avif', 'avis'];
+const ISO_BMFF_HEIF_BRANDS = ['heic', 'heix', 'heif', 'mif1', 'msf1'];
+
+/**
+ * ISO-BMFF 브랜드로 "변환하면 올릴 수 있는 이미지"를 판별한다. 아니면 null.
+ *
+ * [2026-10-01 사용자 요청 "avif 파일도 인식해서 올라가게"] sniffImageExtension 에는
+ * AVIF 분기가 없어서 resolveExtensionFromBytes 가 폴백 '.jpg' 를 돌려줬고, AVIF
+ * 바이트가 .jpg 이름으로 저장돼 네이버가 "파일 전송 오류 — 알 수 없는 파일"로
+ * 거부했다. 이름이 아니라 내용을 바꿔야 하므로 변환 대상임을 따로 알린다.
+ * (sniffImageExtension 은 그대로 둔다 — 네이버 비허용 확장자를 돌려주면
+ *  resolveExtensionFromBytes 계약인 "항상 네이버가 받는 확장자"가 깨진다.)
+ */
+export function sniffTranscodableFormat(buffer: Buffer): TranscodableImageFormat | null {
+  if (!buffer || buffer.length < 16) return null;
+  if (buffer.subarray(4, 8).toString('latin1') !== 'ftyp') return null;
+  const brand = buffer.subarray(8, 12).toString('latin1');
+  if (ISO_BMFF_AVIF_BRANDS.includes(brand)) return 'avif';
+  if (ISO_BMFF_HEIF_BRANDS.includes(brand)) return 'heic';
+  return null;
+}
+
+/**
  * 저장에 쓸 최종 확장자.
  * 1순위 매직 바이트 → 2순위 기존(URL/헤더) 확장자가 네이버 허용 목록일 때 → 최후 .jpg.
  * 반환값은 항상 네이버가 받는 확장자다.

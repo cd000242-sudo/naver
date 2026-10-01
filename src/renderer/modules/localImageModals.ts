@@ -46,7 +46,7 @@ export async function loadImagesFromFolder(postId: string): Promise<any[]> {
 
     // 폴더 내 파일 목록 읽기
     const files = await window.api.readDir(folderPath);
-    const imageFiles = files.filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f));
+    const imageFiles = files.filter(f => /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(f));
 
     const images = imageFiles.map((file, index) => {
       const filePath = `${folderPath}/${file}`.replace(/\\/g, '/');
@@ -132,7 +132,7 @@ export async function getAllGeneratedImagesFromFolders(): Promise<Array<{ postId
           const files = await window.api.readDir(folderPath);
           if (!files || files.length === 0) continue;
 
-          const imageFiles = files.filter((f: string) => /\.(jpg|jpeg|png|gif|webp)$/i.test(f));
+          const imageFiles = files.filter((f: string) => /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(f));
 
           if (imageFiles.length > 0) {
             const post = posts.find(p => p.id === folderName);
@@ -519,7 +519,7 @@ export async function showFolderSelectionModal(options?: { onFolderSelected?: (f
       const folders = await window.api.readDir(basePath);
       folderList = (folders || []).filter((item: string) => {
         // 파일은 제외하고 폴더만 (확장자가 없는 것들)
-        return !/\.(jpg|jpeg|png|gif|webp|txt|json)$/i.test(item);
+        return !/\.(jpg|jpeg|png|gif|webp|avif|txt|json)$/i.test(item);
       });
     }
 
@@ -744,7 +744,7 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
 
     // 폴더 내 이미지 파일 읽기
     const files = await window.api.readDir(folderPath);
-    const imageFiles = files.filter((f: string) => /\.(jpg|jpeg|png|gif|webp)$/i.test(f));
+    const imageFiles = files.filter((f: string) => /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(f));
 
     if (imageFiles.length === 0) {
       alert(`"${safeTitleFolder}" 폴더에 이미지가 없습니다.\n\n이미지를 폴더에 저장한 후 다시 시도해주세요.`);

@@ -4938,7 +4938,7 @@ async function showFolderSelectionForHeading(
     if (mode === 'multi' && typeof (window.api as any)?.showOpenDialog === 'function') {
       const pick = await (window.api as any).showOpenDialog({
         properties: ['openFile', 'multiSelections'],
-        filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'jfif', 'jpe', 'png', 'gif', 'webp', 'bmp'] }],
+        filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'jfif', 'jpe', 'png', 'gif', 'webp', 'bmp', 'avif'] }],
       });
       const paths = Array.isArray(pick?.filePaths) ? pick.filePaths : [];
       if (!pick?.canceled && paths.length > 0) {
@@ -4964,7 +4964,8 @@ async function loadImagesFromFolderForHeading(folderPath: string): Promise<any[]
     const files = await window.api.readDirWithStats?.(folderPath);
     if (!files) return [];
 
-    const imageExtensions = ['.jpg', '.jpeg', '.jfif', '.jpe', '.png', '.gif', '.webp', '.bmp']; // [2026-09-22] .jfif = JPEG 별칭
+    // [2026-09-22] .jfif = JPEG 별칭 / [2026-10-01] .avif = 업로드 직전 JPG 변환
+    const imageExtensions = ['.jpg', '.jpeg', '.jfif', '.jpe', '.png', '.gif', '.webp', '.bmp', '.avif'];
     const imageFiles = files.filter((file: any) =>
       !file.isDirectory &&
       imageExtensions.some(ext => file.name.toLowerCase().endsWith(ext))
@@ -5519,7 +5520,7 @@ async function addMultipleImagesToHeading(headingIndex: number, headingTitle: st
     if (typeof (window.api as any)?.showOpenDialog === 'function') {
       const pick = await (window.api as any).showOpenDialog({
         properties: ['openFile', 'multiSelections'],
-        filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'jfif', 'jpe', 'png', 'gif', 'webp', 'bmp'] }],
+        filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'jfif', 'jpe', 'png', 'gif', 'webp', 'bmp', 'avif'] }],
       });
       const paths = Array.isArray(pick?.filePaths) ? pick.filePaths : [];
       if (!pick?.canceled && paths.length > 0) {

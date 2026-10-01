@@ -54,7 +54,12 @@ describe('배선 계약 (source regression)', () => {
   it('저장 핸들러가 내용 기반 확장자를 적용한다 (단일·배치 모두)', () => {
     const src = read('../main/ipc/imageDownloadHandlers.ts');
     expect(src).toMatch(/resolveExtensionFromBytes\(buffer/);
-    expect(src).toMatch(/resolveExtensionFromBytes\(\s*result\.buffer/);
+    // [2026-10-01] 배치 경로는 AVIF/HEIC 변환을 거친 버퍼로 확장자를 정한다.
+    //   종전 단언은 `result.buffer` 리터럴을 박아, 변환 배선을 회귀로 오인했다.
+    //   계약은 "쓰려는 바이트로 확장자를 정한다" 지, 특정 변수명이 아니다.
+    expect(src).toMatch(/const buffer = decodable\.buffer/);
+    expect(src).toMatch(/resolveExtensionFromBytes\(\s*buffer,\s*getExtensionFromContentType/);
+    expect(src).toContain('await fsp.writeFile(filePath, buffer)');
   });
 
   it('업로드 직전에도 네이버 허용 확장자로 정상화한다', () => {

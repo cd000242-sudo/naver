@@ -10221,7 +10221,7 @@ async function showLocalImagePickerForReplace(folderName: string, slot: ImageSlo
     }
 
     const files = await window.api.readDir(folderPath);
-    const imageFiles = (files || []).filter((f: string) => /\.(jpg|jpeg|png|gif|webp)$/i.test(String(f || '')));
+    const imageFiles = (files || []).filter((f: string) => /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(String(f || '')));
     if (imageFiles.length === 0) {
       toastManager.warning('선택한 폴더에 이미지가 없습니다.');
       return;

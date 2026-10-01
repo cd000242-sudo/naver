@@ -7,7 +7,7 @@
 // 네이버 에디터가 이 파일을 거부해 3회 재시도 뒤 IMAGE_INSERTION_FAILED 로
 // 발행 전체가 중단됐다. 깨진 파일은 발행이 아니라 다운로드 단계에서 잘라낸다.
 
-import { sniffImageExtension } from './imageExtensionPolicy.js';
+import { sniffImageExtension, sniffTranscodableFormat } from './imageExtensionPolicy.js';
 
 /** 이 크기 미만이면 실제 이미지가 아니라 에러 본문일 가능성이 높다. */
 export const MIN_IMAGE_BYTES = 1024;
@@ -19,10 +19,9 @@ export const MIN_IMAGE_BYTES = 1024;
  * (네이버가 받는 확장자로 바꾸는 일은 저장 확장자 정책의 몫이다.)
  */
 function isIsoBmffImage(buffer: Buffer): boolean {
-    if (buffer.length < 16) return false;
-    if (buffer.subarray(4, 8).toString('latin1') !== 'ftyp') return false;
-    const brand = buffer.subarray(8, 12).toString('latin1');
-    return ['avif', 'avis', 'heic', 'heix', 'heif', 'mif1', 'msf1'].includes(brand);
+    // [2026-10-01] 브랜드 목록은 imageExtensionPolicy 단일 출처 — 여기서 따로 들고 있으면
+    // 둘이 어긋난다(저장은 통과시키는데 변환은 안 하는 조합).
+    return sniffTranscodableFormat(buffer) !== null;
 }
 
 /** 저장 확장자와 무관하게 "이미지 바이트인가"만 본다. */

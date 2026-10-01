@@ -8213,7 +8213,8 @@ ipcMain.handle('library:selectLocalImageFile', async (): Promise<{ success: bool
     const result = await dialog.showOpenDialog(mainWindow, {
       title: '이미지 파일 선택',
       filters: [
-        { name: '이미지 파일', extensions: ['png', 'jpg', 'jpeg', 'jfif', 'jpe', 'gif', 'webp', 'bmp'] },
+        // [2026-10-01] avif 는 네이버 비허용 — 업로드 직전 naverImageTranscode 가 JPG 로 바꾼다.
+        { name: '이미지 파일', extensions: ['png', 'jpg', 'jpeg', 'jfif', 'jpe', 'gif', 'webp', 'bmp', 'avif'] },
         { name: '모든 파일', extensions: ['*'] },
       ],
       properties: ['openFile'],

@@ -27,5 +27,15 @@
 //   켜 둔 사용자도 앱을 껐다 켜면 포트가 안 열리고 체크박스도 풀려 있었다.
 //   계정 활성화 시점(config:set __userId)에 다시 읽고 화면에도 알려 준다.
 //   실측: 재시작만으로 47630 열림 + 체크박스 true.
+// [2026-10-01] AVIF/HEIC 업로드 지원으로 재계산했다.
+//   바뀐 해시 대상: src/automation/imageHelpers.ts, src/main.ts,
+//   src/main/ipc/imageExtensionPolicy.ts, src/renderer/modules/headingImageGen.ts,
+//   src/renderer/modules/localFolderImageLoader.ts, src/renderer/modules/localImageModals.ts,
+//   src/renderer/renderer.ts, src/contentQualityV3/candidateRuntimeFingerprint.ts(목록)
+//   신규 해시 대상: src/image/naverImageTranscode.ts
+//   내용: 네이버가 받지 않는 AVIF/HEIC 를 업로드/저장 직전 JPEG 로 변환하고, 입구
+//   화이트리스트에 avif 를 넣었다. 종전에는 AVIF 바이트가 .jpg 이름으로 저장돼
+//   발행 때 "파일 전송 오류 — 알 수 없는 파일"로 거부됐다. 네이버 허용 확장자
+//   목록(NAVER_SUPPORTED_IMAGE_EXTENSIONS)은 그대로다 — 변환이 그 앞에서 끝난다.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '2cf81e6f2eb5c0ff4897f3d612df14bc6c2dcf7e9b8bcdaf007ac0f630339d63' as const;
+  '176a59fa90a7f433b4bd2160c3a74008fa9f4f1eab1b87126d5d3eefd7a8264a' as const;

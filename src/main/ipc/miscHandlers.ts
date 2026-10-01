@@ -35,7 +35,7 @@ export function registerMiscHandlers(): void {
     ipcMain.handle('images:getSaved', async (_event, dirPath: string) => {
         try {
             const files = await fs.readdir(dirPath);
-            const imageFiles = files.filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f));
+            const imageFiles = files.filter(f => /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(f));
             const images = imageFiles.map(f => path.join(dirPath, f));
             return { success: true, images };
         } catch (error) {
