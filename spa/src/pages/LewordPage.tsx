@@ -18,6 +18,7 @@ import TodayPicksBoard from '../components/leword/TodayPicksBoard';
 import TopicBriefsBoard from '../components/leword/TopicBriefsBoard';
 import { installKeySyncListener } from '../lib/keySync';
 import YoutubeTab from '../components/leword/YoutubeTab';
+import AssistantPanel from '../components/leword/AssistantPanel';
 
 /**
  * /leword — 좌측 사이드탭으로 기능을 하나씩 쓰는 화면.
@@ -77,6 +78,8 @@ function LewordPage() {
      */
     const [session, setSession] = useState<LewordSession | null>(loadSession);
     const [authOpen, setAuthOpen] = useState(false);
+    // LEWORD 비서(2026-10-01) — 상단 계정 줄의 [AI 비서]로 연다. 오른쪽 아래 문의 버튼과 겹치지 않게 옆 창으로.
+    const [assistantOpen, setAssistantOpen] = useState(false);
     const left = session ? daysLeft(session) : null;
     const activeMeta = TABS.find((tab) => tab.id === activeTab) ?? TABS[0];
     /** 이용권 없이 주소로 들어온 유료 탭 — 본문 대신 잠금 안내. */
@@ -283,6 +286,7 @@ function LewordPage() {
                                     <i aria-hidden="true" />{left}일 남음
                                 </span>
                             )}
+                            <button type="button" className="lw-acct-btn on" onClick={() => setAssistantOpen(true)} aria-haspopup="dialog">AI 비서</button>
                             <button
                                 type="button"
                                 className="lw-acct-btn"
@@ -317,6 +321,10 @@ function LewordPage() {
                             onCancel={() => setAuthOpen(false)}
                         />
                     </div>
+                )}
+
+                {assistantOpen && session && (
+                    <AssistantPanel tabId={activeTab} tabLabel={activeMeta.label} onClose={() => setAssistantOpen(false)} />
                 )}
 
                 {lockedTab && (
