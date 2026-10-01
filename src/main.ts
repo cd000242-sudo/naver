@@ -3332,10 +3332,20 @@ ipcMain.handle('free:verify', async (_event, userInfo?: { nickname: string; phon
 ipcMain.handle('localFolder:resizeImage', async (_event, filePath: string, maxWidth: number, maxHeight: number) => {
   try {
     const sharp = (await import('sharp')).default;
-    const outputPath = filePath.replace(/(\.[^.]+)$/, `_resized_${Date.now()}$1`);
-    await sharp(filePath)
-      .resize(maxWidth, maxHeight, { fit: 'inside', withoutEnlargement: true })
-      .toFile(outputPath);
+    // [2026-10-01] AVIF/HEIC 는 리사이즈 결과도 JPEG 로 낸다.
+    //   sharp 는 출력 확장자로 포맷을 정하므로 종전에는 .avif 입력을 AVIF 로 다시
+    //   인코딩했다(libaom 이 느려 5MB+ 이미지에서 수십 초). 어차피 업로드 직전에
+    //   JPEG 로 변환되므로 여기서 한 번에 끝낸다.
+    const { sniffTranscodableFormat } = await import('./main/ipc/imageExtensionPolicy.js');
+    const head = await fs.readFile(filePath);
+    const transcodable = sniffTranscodableFormat(head);
+    const outputExt = transcodable ? '.jpg' : (path.extname(filePath) || '.jpg');
+    const outputPath = filePath.replace(/(\.[^.]+)?$/, `_resized_${Date.now()}${outputExt}`);
+    const pipeline = sharp(head).resize(maxWidth, maxHeight, { fit: 'inside', withoutEnlargement: true });
+    await (transcodable ? pipeline.rotate().jpeg({ quality: 92, mozjpeg: true }) : pipeline).toFile(outputPath);
+    if (transcodable) {
+      console.log(`[LocalFolder] 🔄 ${transcodable.toUpperCase()} → JPG 리사이즈: ${path.basename(outputPath)}`);
+    }
     return { success: true, filePath: outputPath };
   } catch (error) {
     console.error('[LocalFolder] 이미지 리사이즈 실패:', error);

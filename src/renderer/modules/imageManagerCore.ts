@@ -592,6 +592,30 @@ const ImageManager = {
   },
 
   /**
+   * [2026-10-01] 이미지 관리 탭 "링크 일괄 적용" — 저장된 모든 이미지에 링크를 찍는다.
+   *
+   * 종전에는 window.imageManagementGeneratedImages 배열에만 img.link 를 썼다.
+   * 그 배열은 imageSyncService 가 ImageManager 를 우선으로 다시 만들기 때문에,
+   * 이미지 추가·교체·제거가 한 번만 일어나면 링크가 통째로 사라졌다.
+   * (발행 페이로드 화이트리스트에서도 빠져 있어서 2026-07-30 이후 죽은 상태였다.)
+   *
+   * 빈 문자열이면 링크를 지운다.
+   */
+  setAllImageLinks(linkUrl: string): number {
+    const link = String(linkUrl || '').trim();
+    let count = 0;
+    this.imageMap.forEach((images, key) => {
+      if (!Array.isArray(images) || images.length === 0) return;
+      this.imageMap.set(key, images.map((img: any) => {
+        count += 1;
+        return link ? { ...img, link } : { ...img, link: '' };
+      }));
+    });
+    this.syncGeneratedImagesArray();
+    return count;
+  },
+
+  /**
    * 모든 이미지 가져오기 (배열 - 모든 소제목의 모든 이미지)
    */
   getAllImages(): any[] {

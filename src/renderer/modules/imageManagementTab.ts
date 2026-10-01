@@ -27,6 +27,8 @@ declare function showLocalImageManagementModal(): Promise<void>;
 declare function displayGeneratedImages(images: any[]): void;
 declare function updatePromptItemsWithImages(images: any[]): void;
 declare let generatedImages: any[];
+// [2026-10-01] 링크 일괄 적용이 ImageManager 에도 기록한다 (번들 스코프 전역).
+declare const ImageManager: any;
 
 // appendLog는 rendererUtils.ts에서 전역 스코프로 제공됨
 declare function appendLog(message: string, logOutputId?: string): void;
@@ -824,6 +826,16 @@ export async function initImageManagementTab(): Promise<void> {
           img.link = linkUrl;
           count++;
         });
+
+        // [2026-10-01] ImageManager 에도 쓴다. 이 배열은 imageSyncService 가
+        //   ImageManager 를 우선으로 다시 만들기 때문에, 여기만 쓰면 이미지 추가·교체가
+        //   한 번 일어나는 순간 링크가 사라진다(발행 페이로드에도 안 실렸다).
+        try {
+          const stamped = (ImageManager as any).setAllImageLinks?.(linkUrl);
+          if (typeof stamped === 'number' && stamped > count) count = stamped;
+        } catch (e) {
+          console.warn('[imageManagementTab] ImageManager 링크 기록 실패:', e);
+        }
 
         // 전역 상태 업데이트
         (window as any).imageManagementGeneratedImages = allImages;

@@ -51,5 +51,15 @@
 //
 // [2026-10-01 세 번째] v2.11.308 버전업으로 재계산했다 (package.json +
 //   src/runtime/version.generated.ts). 코드 변경은 위 두 항목뿐이다.
+//
+// [2026-10-01 네 번째] v2.11.309 — v2.11.308 에서 "별건"으로 남긴 3건 마감.
+//   바뀐 해시 대상: package.json, src/main.ts, src/main/services/BlogExecutor.ts,
+//   src/main/ipc/imageNarrativeSupportHandlers.ts, src/renderer/modules/formAndAutomation.ts,
+//   src/renderer/modules/imageManagementTab.ts, src/renderer/modules/imageManagerCore.ts,
+//   src/renderer/modules/imageNarrativeUpload.ts, src/runtime/version.generated.ts
+//   내용: (A) 사진 모드가 AVIF 를 받고 sharp 로 변환한다(heic-convert 는 폴백) + EXIF 를
+//   변환 전 원본에서 읽는다. (B) localFolder:resizeImage 가 AVIF 입력을 JPG 로 낸다.
+//   (C) image.link 를 발행 페이로드 2홉(formAndAutomation·BlogExecutor 4분기)에 싣고,
+//   링크 일괄 적용이 ImageManager 에도 기록해 동기화가 덮어쓰지 못하게 했다.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '29d225efd3b809a9a8987161eef8d344f01c2e85eb3f1dc4668d82cf12721cce' as const;
+  '2e089b2cf9d5bcd8d4d558c2b2973b0d75a963d1a593726059a816ebb7c78254' as const;

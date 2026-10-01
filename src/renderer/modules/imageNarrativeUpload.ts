@@ -44,6 +44,9 @@ const ACCEPTED_MIME_TYPES = new Set([
   'image/webp',
   'image/heic',
   'image/heif',
+  // [2026-10-01] AVIF 추가. vision provider 는 AVIF 를 받지 않으므로 업로드 단계에서
+  //   JPEG 로 바꿔 보낸다(HEIC 와 같은 경로).
+  'image/avif',
 ]);
 
 // ---------------------------------------------------------------------------
@@ -212,7 +215,7 @@ export async function addFiles(files: File[]): Promise<void> {
 export function _isAcceptedImage(file: File): boolean {
   if (ACCEPTED_MIME_TYPES.has(file.type)) return true;
   const ext = file.name.split('.').pop()?.toLowerCase() ?? '';
-  return ['jpg', 'jpeg', 'jfif', 'jpe', 'png', 'gif', 'webp', 'heic', 'heif'].includes(ext);
+  return ['jpg', 'jpeg', 'jfif', 'jpe', 'png', 'gif', 'webp', 'heic', 'heif', 'avif'].includes(ext);
 }
 
 /**
@@ -223,6 +226,21 @@ export function isHeicFile(file: File): boolean {
   if (file.type === 'image/heic' || file.type === 'image/heif') return true;
   const ext = file.name.split('.').pop()?.toLowerCase() ?? '';
   return ext === 'heic' || ext === 'heif';
+}
+
+/**
+ * [2026-10-01] vision provider 가 못 받는 포맷인가.
+ *
+ * Claude 는 jpeg/png/gif/webp 만 받는다. HEIC 는 v2.11.135 에서 변환을 붙였지만
+ * AVIF 는 빠져 있어서 업로드 자체가 거부됐다(_isAcceptedImage 에 avif 없음).
+ * 둘 다 ISO-BMFF 계열이라 같은 변환 IPC 로 처리한다.
+ * isHeicFile 은 그대로 둔다 — 기존 테스트가 "HEIC 판별" 계약으로 잠가 둔 함수다.
+ */
+export function needsVisionFormatConversion(file: File): boolean {
+  if (isHeicFile(file)) return true;
+  if (file.type === 'image/avif') return true;
+  const ext = file.name.split('.').pop()?.toLowerCase() ?? '';
+  return ext === 'avif';
 }
 
 /**
@@ -246,22 +264,27 @@ export function uint8ToBase64(bytes: Uint8Array): string {
 async function _processFile(file: File): Promise<UploadedImage> {
   let processedFile: File = file;
   let wasConverted = false;
+  // [2026-10-01] EXIF 는 변환 전 원본에서 읽는다 — 아래 참조.
+  let originalBase64 = '';
 
-  // Delegate HEIC conversion to main process via IPC
-  if (isHeicFile(file)) {
+  // Delegate HEIC/AVIF conversion to main process via IPC
+  if (needsVisionFormatConversion(file)) {
     try {
       const arrayBuffer = await file.arrayBuffer();
       const base64Input = uint8ToBase64(new Uint8Array(arrayBuffer));
+      originalBase64 = base64Input;
       const converted = await (window as any).electronAPI?.convertHeic?.({ base64: base64Input });
       if (converted?.base64) {
         const bytes = Uint8Array.from(atob(converted.base64), (c) => c.charCodeAt(0));
-        processedFile = new File([bytes], file.name.replace(/\.heic?$/i, '.jpg'), {
+        // [2026-10-01] 종전 정규식 /\.heic?$/i 는 ".hei"·".heic" 만 맞아서 .heif/.avif 는
+        //   확장자가 그대로 남았다 (type 은 image/jpeg 인데 이름은 .heif).
+        processedFile = new File([bytes], file.name.replace(/\.(heic|heif|avif)$/i, '.jpg'), {
           type: 'image/jpeg',
         });
         wasConverted = true;
       }
     } catch (err) {
-      console.warn('[ImageNarrativeUpload] HEIC conversion failed, using original:', err);
+      console.warn('[ImageNarrativeUpload] HEIC/AVIF conversion failed, using original:', err);
     }
   }
 
@@ -271,9 +294,16 @@ async function _processFile(file: File): Promise<UploadedImage> {
   const previewUrl = URL.createObjectURL(processedFile);
 
   // Extract EXIF via main process (sharp)
+  //
+  // [2026-10-01] 변환본이 아니라 원본 바이트로 읽는다. 변환은 JPEG 재인코딩이라
+  //   메타데이터가 사라지고, 그래서 아이폰 HEIC 사진의 촬영 날짜·위치가 사진 모드
+  //   추론 재료에서 통째로 비어 있었다(변환을 붙인 v2.11.135 부터). AVIF 도 같다.
+  //   원본이 없으면(변환 안 한 일반 JPEG) 지금까지처럼 그 바이트를 쓴다.
   let exif: ImageExif = {};
   try {
-    const exifResult = await (window as any).electronAPI?.extractExif?.({ base64, mimeType: processedFile.type });
+    const exifSource = wasConverted && originalBase64 ? originalBase64 : base64;
+    const exifMime = wasConverted && originalBase64 ? (file.type || '') : processedFile.type;
+    const exifResult = await (window as any).electronAPI?.extractExif?.({ base64: exifSource, mimeType: exifMime });
     if (exifResult) exif = exifResult;
   } catch {
     // EXIF extraction is best-effort; non-fatal

@@ -126,6 +126,7 @@ interface ProcessedImage {
     isThumbnail: boolean;
     isIntro: boolean;
     aiMarkOverride?: string; // [2026-09-29] per-heading AI 활용 card toggle ('' | 'on' | 'off')
+    link?: string; // [2026-10-01] 이미지 관리 탭 "링크 일괄 적용" 개별 링크 (imageHelpers.ts:1558 가 읽는다)
 }
 
 // 전역 의존성 저장소 (main.ts에서 주입)
@@ -407,6 +408,7 @@ export async function processImages(
                         isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
                         isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
                         aiMarkOverride: (image as any).aiMarkOverride, // [2026-09-29] card toggle 자동/켬/끔
+                        link: (image as any).link, // [2026-10-01] 링크 일괄 적용 개별 링크
                     });
 
                     sendLog(`✅ base64 이미지 저장: ${filename}`);
@@ -433,6 +435,7 @@ export async function processImages(
                 isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
                 isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
                 aiMarkOverride: (image as any).aiMarkOverride, // [2026-09-29] card toggle 자동/켬/끔
+                link: (image as any).link, // [2026-10-01] 링크 일괄 적용 개별 링크
             });
             continue;
         }
@@ -474,6 +477,7 @@ export async function processImages(
                 isThumbnail: image.isThumbnail || false, // ✅ [2026-02-25 FIX] 썸네일 플래그 보존
                 isIntro: image.isIntro || false, // ✅ [2026-02-25 FIX] 서론 이미지 플래그 보존
                 aiMarkOverride: (image as any).aiMarkOverride, // [2026-09-29] card toggle 자동/켬/끔
+                link: (image as any).link, // [2026-10-01] 링크 일괄 적용 개별 링크
             });
 
             sendLog(`✅ 이미지 복사: ${filename}`);
@@ -491,6 +495,7 @@ export async function processImages(
                 isThumbnail: image.isThumbnail || false,
                 isIntro: image.isIntro || false,
                 aiMarkOverride: (image as any).aiMarkOverride, // [2026-09-29] card toggle 자동/켬/끔
+                link: (image as any).link, // [2026-10-01] 링크 일괄 적용 개별 링크
             });
         }
     }

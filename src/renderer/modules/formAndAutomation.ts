@@ -304,9 +304,11 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
           isIntro: img.isIntro || false,
           aiMarkOverride: img.aiMarkOverride, // [2026-09-29] per-heading AI 활용 card toggle
           // [2026-10-01] 이미지 관리 탭 출처 입력칸 → 네이버 "사진 설명".
-          //   이 화이트리스트에서 빠지면 입력은 저장되는데 발행에는 안 들어간다
-          //   (image.link 가 2026-07-30 부터 그 상태로 남아 있다 — imageHelpers.ts:1558).
+          //   이 화이트리스트에서 빠지면 입력은 저장되는데 발행에는 안 들어간다.
           caption: img.caption,
+          // [2026-10-01] "링크 일괄 적용"이 심는 개별 링크. imageHelpers.ts:1558 이
+          //   이미 읽고 있었는데 여기서 탈락해 2026-07-30 부터 죽어 있었다.
+          link: img.link,
         }))
         .filter((img: any) => Boolean(img?.heading) && Boolean(img?.filePath));
 
