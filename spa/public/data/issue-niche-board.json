@@ -1,23 +1,259 @@
 {
-  "publishedAt": "2026-10-01T09:56:12.437Z",
+  "publishedAt": "2026-10-01T21:20:58.214Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 18,
-    "candidates": 198,
-    "niche": 1,
-    "preemption": 13,
+    "issues": 17,
+    "candidates": 194,
+    "niche": 3,
+    "preemption": 4,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-01",
+    "day": "2026-10-02",
     "keywords": [
       "신병 경태",
-      "신병 중사",
-      "신병 갤"
+      "신병 동우",
+      "신병 중사"
     ]
   },
   "rows": [
+    {
+      "keyword": "삼척시청 여자핸드볼",
+      "issue": "삼척시청",
+      "topic": "삼척시청",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "여자핸드볼 금메달 8년 만의 정상 탈환",
+          "2026 아시안게임 여자 핸드볼 8년 만에 정상 탈환",
+          "'아시안게임 국가대표 금메달' 핸드볼 김민서 프로필 누구? '160cm 막내' 소속팀 플레이스타일 포지션 연봉 나무위키 총정리",
+          "여자핸드볼 금메달 8년 만에 정상 탈환",
+          "여자핸드볼 금메달 일본 꺾고 8년 만에 정상 탈환",
+          "여자 핸드볼 아시안게임 금메달 8년 만의 정상 탈환",
+          "160cm 작은 거인이 해냈다…22세 김민서 누구? 일본 꺾고 여자핸드볼 AG 금메달",
+          "[아이치·나고야 AG] 여자 핸드볼 첫판부터 48골 폭격! 이원정·전지연 맹활약과 숙적 일본전 로드맵",
+          "3년 전 10점 차 완패, 일본 안방에서 되갚은 여자 핸드볼",
+          "여자핸드볼 금메달 8년 만의 정상 탈환"
+        ],
+        "measuredAt": "2026-10-01T21:19:59.638Z"
+      },
+      "documentCount": 1559,
+      "documentCountMeasured": true,
+      "searchVolume": 1140,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 1,140",
+        "문서수 1,559",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 1,140 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 37,
+      "kinTop": [
+        {
+          "title": "여자 핸드볼 시즌이 어떻게 되나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100109&docId=398138251&answerNo=1",
+          "views": 1257,
+          "answers": 1
+        },
+        {
+          "title": "여자 핸드볼 역대 리그 성적 궁금합니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100109&docId=379301015&answerNo=1",
+          "views": 364,
+          "answers": 1
+        },
+        {
+          "title": "여자핸드볼선수이름ㅠㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010405&docId=341183321&answerNo=1",
+          "views": 238,
+          "answers": 1
+        },
+        {
+          "title": "여자핸드볼경기",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100109&docId=258990648&answerNo=1",
+          "views": 214,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-01T21:19:21.450Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
+    {
+      "keyword": "이시언 아기",
+      "issue": "이시언",
+      "topic": "이시언",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "유전자 진짜 대박! 이시언♥서지승 4개월 아들 공개｜누굴 닮았나 봤더니",
+          "10년 전 만난 이시언이 아빠로…아들 처음 본 한혜진 반응",
+          "“애기 이시언이 또 있네”…생후 4개월 아들 사진에 쏟아진 반응",
+          "이시언♥서지승, 각방 생활 고백…새벽 6시 아내 깼는데 “못 뜨는 척했다”",
+          "“각방 씁니다” 이시언♥서지승, 아들 태어난 후 달라진 부부 생활…이유 들어보니",
+          "“이젠 진짜 아빠라니…” 한혜진, 이시언♥서지승 2세 만나 찐 이모 미소…“똑같이 생겨",
+          "이시언 서지승 각방 생활 고백, 불화가 아닌 출산 후 육아 현실인 이유",
+          "이시언, 서지승과 각방 육아 고백 “못 뜨는 척도” 비 반응",
+          "이시언 서지승 부부 아들 사진, 첫 아들은 엄마 닮는다는 말 진짜일까?",
+          "이시언♥서지승 생후 4개월 아들 공개…“아빠 판박이” 솔민 군, 결혼 4년여 만에 찾아온 행복"
+        ],
+        "measuredAt": "2026-10-01T21:20:13.179Z"
+      },
+      "documentCount": 2363,
+      "documentCountMeasured": true,
+      "searchVolume": 680,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.5774003428300969,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 680",
+        "문서수 2,363",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 680 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.6배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 40,
+      "kinTop": [
+        {
+          "title": "이시언 임신 축하 파티, 서지승 위한 깜짝 이벤트 있었나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30104&docId=491446762&answerNo=1",
+          "views": 65,
+          "answers": 1
+        },
+        {
+          "title": "출산 앞둔 이시언 부부, 주변 반응은 어떤가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8010501&docId=493363550&answerNo=2",
+          "views": 62,
+          "answers": 2
+        },
+        {
+          "title": "이시언 아기침대",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8050102&docId=493720294&answerNo=0",
+          "views": 52,
+          "answers": null
+        },
+        {
+          "title": "이시언♥서지승 커플, 임신 축하 파티에서 가장 인상 깊었던....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30104&docId=491446713&answerNo=1",
+          "views": 45,
+          "answers": 1
+        },
+        {
+          "title": "이시언의 '태어난 김에 세계일주4'에서의 2세 바람, 현실이 ....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010203&docId=491084013&answerNo=1",
+          "views": 45,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-01T21:19:21.450Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "인셉션 쿠키",
       "issue": "인셉션",
@@ -51,7 +287,7 @@
       },
       "documentCount": 3480,
       "documentCountMeasured": true,
-      "searchVolume": 770,
+      "searchVolume": 780,
       "searchVolumeLt10": true,
       "hasLiveDemand": true,
       "demandStatus": "stable",
@@ -61,7 +297,7 @@
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 770",
+        "검색량 780",
         "문서수 3,480",
         "데이터랩 실측 수요",
         "블로그탭 상위 10 정면글 0건 — 자리 있음"
@@ -73,7 +309,7 @@
         },
         {
           "code": "traffic",
-          "text": "검색광고 월 검색량 770 실측 — 트래픽 하한 통과"
+          "text": "검색광고 월 검색량 780 실측 — 트래픽 하한 통과"
         },
         {
           "code": "demand",
@@ -88,73 +324,28 @@
           "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
-      "whySearch": {
-        "text": "오믈렛·티냅스가 엔비디아 인셉션 챌린지 아태 톱10 선정",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
+      "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "인셉션 쿠키 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "근거 프레임 없음 — 일반형"
-        },
-        "home": {
-          "text": "인셉션 쿠키 그냥 구웠는데 반죽이 자꾸 겹쳐 나오더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
+      "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": {
-        "series": [
-          39,
-          46,
-          44,
-          70,
-          81,
-          47,
-          42,
-          54,
-          26,
-          63,
-          74,
-          100,
-          49,
-          46,
-          44,
-          33,
-          39,
-          61,
-          79,
-          25,
-          28,
-          18,
-          32,
-          39,
-          33,
-          37,
-          23,
-          14,
-          0
-        ]
-      },
+      "trend": null,
       "kinCount": 42,
       "kinTop": [
         {
           "title": "영화 오디세이, 쿠키 영상은 정말 없나요?",
           "link": "https://kin.naver.com/qna/detail.naver?dirId=30306&docId=494625462&answerNo=5",
-          "views": 726,
+          "views": 727,
           "answers": 5
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
+      "measuredAt": "2026-10-01T21:19:21.450Z",
       "recommendationStatus": "recommend",
-      "exclusionReason": null
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
     },
     {
       "keyword": "신병 경태",
@@ -309,7 +500,7 @@
         ],
         "label": "❄️ 시즌성",
         "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-10-01T05:11:34.536Z"
+        "measuredAt": "2026-10-01T21:20:58.975Z"
       },
       "kinCount": 2,
       "kinTop": [
@@ -491,7 +682,7 @@
           44,
           48
         ],
-        "measuredAt": "2026-10-01T05:11:34.536Z"
+        "measuredAt": "2026-10-01T21:20:58.975Z"
       },
       "kinCount": 46,
       "kinTop": [
@@ -697,7 +888,7 @@
         ],
         "label": "🚀 떡상",
         "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-10-01T05:11:34.536Z"
+        "measuredAt": "2026-10-01T21:20:58.975Z"
       },
       "kinCount": 1388,
       "kinTop": [
@@ -915,7 +1106,7 @@
         ],
         "label": "🚀 떡상",
         "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-10-01T05:11:34.536Z"
+        "measuredAt": "2026-10-01T21:20:58.975Z"
       },
       "kinCount": 345,
       "kinTop": [
@@ -1139,7 +1330,7 @@
         ],
         "label": "❄️ 시즌성",
         "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-10-01T05:11:34.536Z"
+        "measuredAt": "2026-10-01T21:20:58.975Z"
       },
       "kinCount": 3944,
       "kinTop": [
@@ -1328,7 +1519,7 @@
         ],
         "label": "📉 단발성",
         "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-10-01T05:11:34.536Z"
+        "measuredAt": "2026-10-01T21:20:58.975Z"
       },
       "kinCount": 35,
       "kinTop": [],
@@ -1358,7 +1549,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 3,
+      "documentCount": 4,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": false,
@@ -1370,8 +1561,8 @@
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
+        "문서수 4",
+        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -1379,32 +1570,178 @@
           "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
-      "whySearch": {
-        "text": "엔비디아가 물리 법칙 배우는 영상 생성 프레임워크 파이시스-랭 공개",
-        "basis": "뉴스 헤드라인 1건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
+      "whySearch": null,
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "파이시스-랭 엔비디아가 공개한 물리 법칙 영상 생성 프레임워크",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "파이시스-랭이 물리 법칙을 배운다는데 영상이 진짜 달라지나 봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
+      "titles": null,
       "subKeywords": null,
       "keywordPool": null,
       "trend": null,
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
+      "measuredAt": "2026-10-01T21:19:21.450Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오픈클로 헤르메스 차이",
+      "issue": "오픈클로",
+      "topic": "오픈클로",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 118,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 118",
+        "선점 후보 — 경쟁 문서 118건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-01T21:19:21.450Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오픈클로 맥미니 사양",
+      "issue": "오픈클로",
+      "topic": "오픈클로",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 200,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 200",
+        "선점 후보 — 경쟁 문서 200건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-01T21:19:21.450Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "삼척시청 대학생 아르바이트",
+      "issue": "삼척시청",
+      "topic": "삼척시청",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 244,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 244",
+        "선점 후보 — 경쟁 문서 244건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-01T21:19:21.450Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1468,7 +1805,8 @@
       "monetize": null,
       "measuredAt": "2026-10-01T09:51:54.643Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오픈클로 OCE",
@@ -1530,7 +1868,8 @@
       "monetize": null,
       "measuredAt": "2026-10-01T09:51:54.643Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "머큐리 보이스 인셉션",
@@ -1592,7 +1931,8 @@
       "monetize": null,
       "measuredAt": "2026-10-01T09:51:54.643Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "전종민 중수청 차장",
@@ -1671,7 +2011,8 @@
       "monetize": null,
       "measuredAt": "2026-10-01T09:51:54.643Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "머큐리 보이스 지연시간",
@@ -1733,7 +2074,8 @@
       "monetize": null,
       "measuredAt": "2026-10-01T09:51:54.643Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "윤규성 품새 금메달!",
@@ -1834,7 +2176,8 @@
       "monetize": null,
       "measuredAt": "2026-10-01T09:51:54.643Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "OCE 요금",
@@ -1900,86 +2243,8 @@
       "monetize": null,
       "measuredAt": "2026-10-01T09:51:54.643Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오픈클로 헤르메스 차이",
-      "issue": "오픈클로",
-      "topic": "오픈클로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 118,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 118",
-        "선점 후보 — 경쟁 문서 118건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 에이전트 플랫폼 엔터프라이즈 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈클로 헤르메스 차이 기능과 가격 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오픈클로 헤르메스 차이 비교하다가 결제창 앞에서 한참 망설였어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "오픈클로 헤르메스 비교",
-          "searchVolume": 10,
-          "frame": "compare"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "오픈클로 헤르메스 비교",
-          "searchVolume": 10,
-          "documentCount": 121,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "oce.global",
@@ -2045,7 +2310,8 @@
       "monetize": null,
       "measuredAt": "2026-10-01T09:51:54.643Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "oce.cn",
@@ -2111,7 +2377,8 @@
       "monetize": null,
       "measuredAt": "2026-10-01T09:51:54.643Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "OCE 플랫폼",
@@ -2173,73 +2440,8 @@
       "monetize": null,
       "measuredAt": "2026-10-01T09:51:54.643Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오픈클로 맥미니 사양",
-      "issue": "오픈클로",
-      "topic": "오픈클로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 200,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 200",
-        "선점 후보 — 경쟁 문서 200건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 에이전트 플랫폼 엔터프라이즈 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈클로 맥미니 사양 어떤 정보가 있는지",
-          "frame": "generic",
-          "basis": "근거 프레임 없음 — 일반형"
-        },
-        "home": {
-          "text": "오픈클로 맥미니 사양 뭘 골라야 하나 고민하다 주문창을 다시 닫았어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "중수청 전종민 차장",
@@ -6154,6 +6356,222 @@
   "rejectedCount": 0,
   "issues": [
     {
+      "issue": "삼척시청",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "삼척시, 아시안게임 금메달 핸드볼 선수단에 포상금 4천200만원",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-01T06:32:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/001/0016351047"
+        },
+        {
+          "title": "삼척시, 아시안게임 금메달 여자핸드볼 국가대표 6명에 포상금",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-01T06:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014227617?sid=102"
+        },
+        {
+          "title": "삼척시, 아시안게임 金 여자 핸드볼 대표 6명에 1인당 700만 원 포상금",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-10-01T07:47:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/448/0000642544"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "삼척시청 핸드볼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼척시청 민원실",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼척시청 맛집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼척시청 교통과",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼척시청 일자리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼척시청 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼척시청 여자핸드볼",
+          "searchVolume": 1140,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼척시청 구인구직",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
+      "issue": "이시언",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "이시언♥서지승, 5월 득남했는데 둘째 계획?…“더 갖고 싶어”",
+          "press": "sports.donga.com",
+          "publishedAt": "2026-10-01T14:10:00.000Z",
+          "link": "https://m.entertain.naver.com/article/382/0001296823"
+        },
+        {
+          "title": "“둘째 갖고 싶다” 이시언♥서지승, 득남 이후 전한 솔직한 자녀 계획",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-10-01T15:27:00.000Z",
+          "link": "https://m.entertain.naver.com/article/144/0001141737"
+        },
+        {
+          "title": "\"아빠 품이 지상낙원\"…이시언, 4개월 아들 재우는 초보아빠에 '♥서지...",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-10-01T06:34:00.000Z",
+          "link": "https://m.entertain.naver.com/article/076/0004451805"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "이시언 블랙샴푸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이시언 샴푸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이시언 샴푸 후기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이시언 와이프",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이시언 아기",
+          "searchVolume": 680,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이시언 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "동국대 이시언",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이시언 집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
+      "issue": "인셉션",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": null,
+      "headlines": [
+        {
+          "title": "오믈렛, 엔비디아 인셉션 챌린지 톱10",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-09-30T13:44:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=868931"
+        },
+        {
+          "title": "'산업 의사결정 AI' 오믈렛, 엔비디아 인셉션 챌린지 '아태 톱10' 선정",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-30T07:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005420472?sid=101"
+        },
+        {
+          "title": "오믈렛, ‘엔비디아 인셉션 그랜드 챌린지 2026’ 아태 최종 톱10 선정",
+          "press": "sentv.co.kr",
+          "publishedAt": "2026-09-30T04:18:00.000Z",
+          "link": "https://www.sentv.co.kr/article/view/sentv202609300120"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "인셉션 영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 ott",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 결말",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 여주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "영화 인셉션",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 쿠키",
+          "searchVolume": 780,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 해석",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
       "issue": "윤규성 품새 금메달!",
       "issueType": "fresh",
       "lane": "realtime",
@@ -6182,85 +6600,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "현대차 판매 감소",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "현대차 9월 판매가 추석 연휴 여파로 16% 감소",
-      "headlines": [
-        {
-          "title": "현대차, 9월 판매 16% 감소…\"신차 대기 수요 여파\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T07:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016351304?sid=101"
-        },
-        {
-          "title": "현대차, 9월 내수 4만9022대 판매…전년 대비 25.7% 감소",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-01T07:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005338227?sid=103"
-        },
-        {
-          "title": "‘RV 판매 감소’ 현대차, 9월 30만7998대 판매…전년比 16%↓",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-01T07:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005742762?sid=103"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "코스피 코스닥 상승",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "반도체 수출과 마이크론 호실적에 코스피·코스닥 급등",
-      "headlines": [
-        {
-          "title": "코스피·코스닥, 상승 마감",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-01T06:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009204405?sid=101"
-        },
-        {
-          "title": "'마이크론·반도체 수출' 훈풍…코스피 1.95%·코스닥 4.48%↑",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T06:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016351130?sid=101"
-        },
-        {
-          "title": "반도체 수출·마이크론 호실적에 코스피 7000선 눈앞…코스닥 4%대 급등...",
-          "press": "sedaily.com",
-          "publishedAt": "2026-10-01T07:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004667390?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "코스피",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코스피 코스닥",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코스닥",
-          "searchVolume": 888700,
-          "origin": "related"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "전종민 중수청 차장",
@@ -6291,411 +6632,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "국회 본회의",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "응급실 뺑뺑이 방지법 통과로 119센터가 이송병원 지정",
-      "headlines": [
-        {
-          "title": "'응급실 뺑뺑이 방지법' 국회 통과…119센터가 이송 병원 지정",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-01T07:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009204602?sid=100"
-        },
-        {
-          "title": "'응급실 뺑뺑이 방지법' 국회 본회의 통과(종합)",
-          "press": "imaeil.com",
-          "publishedAt": "2026-10-01T06:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/088/0001031766?sid=100"
-        },
-        {
-          "title": "'응급실 뺑뺑이 방지' 응급의료법 개정안 본회의 통과…119센터가 이송병...",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-01T06:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014227969?sid=100"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "국회 본회의 일정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "국회 본회의 통과",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "국회 본회의 참관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "국회 본회의 안건",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "국회 본회의 방청",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "국회 본회의 법안",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "국회",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "화성",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "경복궁서 화성까지 정조대왕 능행차 대행렬 진행",
-      "headlines": [
-        {
-          "title": "4일 경복궁서 화성까지 31.8㎞ '정조대왕 능행차'…4천명 대행렬",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T02:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016349713?sid=103"
-        },
-        {
-          "title": "화성특례시, 10월3~4일 ‘정조효문화제·정조대왕능행차’ 개최",
-          "press": "sports.donga.com",
-          "publishedAt": "2026-10-01T06:08:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/382/0001296757?sid=102"
-        },
-        {
-          "title": "[화성소식]화성FC, 동탄 메타폴리스몰서 팬 팝업 행사 등",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-01T01:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014226261?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "화성 황금해안길",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화성 가볼만한곳",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화성 날씨",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화성 에코팜랜드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화성 맛집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화성 율암온천",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화성 코리요",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화성 영어로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "김성환 재생에너지 확대",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "김성환이 내년부터 재생에너지 연 10GW 이상 확대 발표",
-      "headlines": [
-        {
-          "title": "기후부 출범 1년…김성환 \"재생에너지 총량 확대 미흡…내년부터 10GW 이...",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-01T07:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005823671?sid=101"
-        },
-        {
-          "title": "김성환 \"탄소감축 미흡해 죄송…AI 수요에 전력부문 감축 늦어질 수도\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-01T07:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014227975?sid=101"
-        },
-        {
-          "title": "김성환 \"기후부 핵심은 공존... 재생에너지, 내년 본격 이륙\"",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-10-01T08:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/047/0002530925?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "아시안게임 남자골프",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "김주형·문도엽 남자골프 2R 공동 5위, 단체전 3위",
-      "headlines": [
-        {
-          "title": "‘금’ 노리는 한국 골프, 첫날부터 순항",
-          "press": "munhwa.com",
-          "publishedAt": "2026-09-30T09:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/021/0002822291?sid=104"
-        },
-        {
-          "title": "[아시안게임] 김주형·문도엽, 남자 골프 2R 공동 5위…단체전은 3위",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T09:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016351926?sid=104"
-        },
-        {
-          "title": "'4타 줄인' 김주형, 골프 2R 5위 도약…단체전 한 타 차 3위(종합)[AG]",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-01T09:04:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009204927?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "현판 교체 작업",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "대검찰청 현판 교체 작업이 비공개로 진행",
-      "headlines": [
-        {
-          "title": "'검찰' 간판 내려놓은 전주지검…신청사 시대 7년 못 돼 얼굴 교체",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-01T04:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014226894?sid=102"
-        },
-        {
-          "title": "대검찰청 현판 교체 작업중",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-01T07:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009204700?sid=102"
-        },
-        {
-          "title": "'대검찰청' 현판 교체",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-01T08:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014228422?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "현판",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "대미 투자 브리핑",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "한국이 미국 원전 8기에 1200억달러 투자 추진",
-      "headlines": [
-        {
-          "title": "산업장관 \"알래스카 발표 이의제기…상업적 합리성 없으면 안해\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T07:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016351236?sid=101"
-        },
-        {
-          "title": "K-원전 美 진출 임박…대미 투자로 '윈윈' 모색",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-30T22:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002439394?sid=105"
-        },
-        {
-          "title": "산업장관 \"대미투자, 韓산업 경쟁력 강화 계기 만들 것\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-01T07:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014227977?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "파이시스-랭",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "엔비디아가 물리 법칙 배우는 영상 생성 프레임워크 파이시스-랭 공개",
-      "headlines": [
-        {
-          "title": "엔비디아, 물리 법칙 배우는 영상 생성 프레임워크 '파이시스-랭' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-01T09:36:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215862"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "파이시스-랭 사용법",
-          "reason": "출시 후 사용 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "파이시스-랭 공개일",
-          "reason": "공개 시점 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "파이시스-랭 데모",
-          "reason": "시연 영상 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "엔비디아",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "마이크론·LG전자 등 엔비디아 협력 소식 잇따라",
-      "headlines": [
-        {
-          "title": "GPU 1장으로 구동하는 韓 LLM, 엔비디아·알리바바 모델 제쳤다",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-01T08:45:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005421266?sid=101"
-        },
-        {
-          "title": "\"엔비디아 쿠다 물렀거라\" 딥시크, 화웨이 AI칩용 개발도구 공개",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-01T08:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014228295?sid=104"
-        },
-        {
-          "title": "KB인베, 엔비디아와 GMI클라우드에 시리즈B 투자",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-01T00:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006378307?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "엔비디아 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 마곡",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 그래픽카드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 양재",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 자사주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "엔비디아 회장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "엔비디아 실적발표",
-          "reason": "다음 실적 일정 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엔비디아 관련주",
-          "reason": "협력사 수혜 기대",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엔비디아 주가 전망",
-          "reason": "협력 호재 주가",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "OCE",
@@ -6764,7 +6702,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "오픈클로",
@@ -6858,7 +6797,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "머큐리 보이스",
@@ -6910,218 +6850,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "인셉션",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오믈렛·티냅스가 엔비디아 인셉션 챌린지 아태 톱10 선정",
-      "headlines": [
-        {
-          "title": "오믈렛, 엔비디아 인셉션 챌린지 톱10",
-          "press": "hansbiz.co.kr",
-          "publishedAt": "2026-09-30T13:44:00.000Z",
-          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=868931"
-        },
-        {
-          "title": "'산업 의사결정 AI' 오믈렛, 엔비디아 인셉션 챌린지 '아태 톱10' 선정",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-30T07:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005420472?sid=101"
-        },
-        {
-          "title": "오믈렛, ‘엔비디아 인셉션 그랜드 챌린지 2026’ 아태 최종 톱10 선정",
-          "press": "sentv.co.kr",
-          "publishedAt": "2026-09-30T04:18:00.000Z",
-          "link": "https://www.sentv.co.kr/article/view/sentv202609300120"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "인셉션 영화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 ott",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 결말",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 여주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "영화 인셉션",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 쿠키",
-          "searchVolume": 770,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 해석",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "인셉션 챌린지 혜택",
-          "reason": "선정 기업 혜택 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "엔비디아 인셉션 가입",
-          "reason": "프로그램 참여 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1
-    },
-    {
-      "issue": "네이버",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "네이버 웨일이 요약·일정관리 되는 AI Chat 출시",
-      "headlines": [
-        {
-          "title": "네이버와 같은 월 4900원…카카오멤버십은 뭐가 다를까",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-01T08:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014228328?sid=105"
-        },
-        {
-          "title": "[단독]검색 순위 왜곡 논란...토스, '리워드광고'서 네이버 뺀다",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-01T02:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005420886?sid=101"
-        },
-        {
-          "title": "웹페이지 요약부터 일정 관리까지…네이버 웨일 'AI Chat' 출시",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T01:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016349470?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "네이버 시계",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "네이버 길찾기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "네이버 맞춤법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "네이버 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "네이버 예약 확인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "네이버 사전",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "네이버 환율",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "네이버 고객센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "네이버 멤버십 혜택",
-          "reason": "카카오와 차이 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "네이버 통합교섭",
-          "reason": "노사 교섭 전개",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "AI 가격 급락",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "AI 가격 급락이 기술 역사상 최고 속도로 진행",
-      "headlines": [
-        {
-          "title": "AI에 돈 쏟아붓더니…\"역대급 충격 온다\" 섬뜩한 경고",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-01T08:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005338252?sid=101"
-        },
-        {
-          "title": "아리바이오 합병 철회에 홀딩스 급락…HLB제약 이틀 새 63%↑[바이오맥짚...",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-30T21:42:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006378169?sid=105"
-        },
-        {
-          "title": "제본스가 AI를 본다면, 역설일까 사이클일까[투데이 窓/이윤학]",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-30T19:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005420648?sid=110"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "정하은 태권도 금메달",
@@ -8452,5 +8182,22 @@
       "rowCount": 0,
       "carried": true
     }
-  ]
+  ],
+  "enrichedAt": "2026-10-01T21:21:23.024Z",
+  "enrichStats": {
+    "enriched": 0,
+    "subsAdded": 0,
+    "titleUpgraded": 0,
+    "proposed": 0,
+    "verified": 0,
+    "judged": 0,
+    "judgedBad": 0,
+    "related": 0,
+    "picked": 0,
+    "pooled": 0,
+    "aiTitled": 0,
+    "trended": 0,
+    "aiCalls": 3,
+    "partial": false
+  }
 }
