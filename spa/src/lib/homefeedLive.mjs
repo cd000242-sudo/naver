@@ -283,13 +283,19 @@ export function postsFromFeeds(feeds, now) {
  */
 export function mergeLiveBoard(board, feeds, now) {
   const live = postsFromFeeds(feeds, now);
+  /*
+   * 실시간에서 실패했는데 CI 판에선 잡힌 출처는 CI 글을 되살린다(2026-10-01) — 유튜브 RSS 는 같은 주소가 404 · 200 을 오가
+   * 새로고침마다 '확인 필요'가 생겼다 없어졌다 했다. 인스타(하루 1회 유료 수집분)도 같은 길로 되살린다.
+   */
+  const boardOk = new Map((board?.sources || []).filter((s) => s.status === 'ok').map((s) => [s.id, s]));
+  const revived = new Set(live.sources.filter((s) => s.status !== 'ok' && boardOk.has(s.id)).map((s) => s.id));
   const igPosts = [];
   const seenIg = new Set();
   for (const c of board?.candidates || []) {
     for (const s of c.sources || []) {
-      if (s.platform !== 'instagram' || !s.url || seenIg.has(s.url)) continue;
+      if ((s.platform !== 'instagram' && !revived.has(s.id)) || !s.url || seenIg.has(s.url)) continue;
       seenIg.add(s.url);
-      igPosts.push({ sourceId: s.id, platform: 'instagram', name: s.name || s.id, title: s.title || c.title, url: s.url, publishedAt: s.publishedAt || null, capturedAt: c.capturedAt || now, eventAt: null, summary: s.summary || '', metrics: s.metrics || { views: null, likes: null, comments: null } });
+      igPosts.push({ sourceId: s.id, platform: s.platform, name: s.name || s.id, title: s.title || c.title, url: s.url, publishedAt: s.publishedAt || null, capturedAt: c.capturedAt || now, eventAt: null, summary: s.summary || '', metrics: s.metrics || { views: null, likes: null, comments: null } });
     }
   }
   const reviewed = (board?.candidates || []).filter((c) => (c.flags || []).includes('editor-reviewed'));
@@ -322,7 +328,9 @@ export function mergeLiveBoard(board, feeds, now) {
   const boardSources = new Map((board?.sources || []).map((s) => [s.id, s]));
   const liveIds = new Set(live.sources.map((s) => s.id));
   // 실시간으로 잰 원천은 이번 시각과 원래 채널 주소를 단다(수집 상태 표가 '확인 시각 · 채널 링크'를 그린다).
-  const liveSources = live.sources.map((s) => ({ ...s, url: s.url || boardSources.get(s.id)?.url || '', capturedAt: now }));
+  const liveSources = live.sources.map((s) => (revived.has(s.id)
+    ? { ...boardSources.get(s.id) }
+    : { ...s, url: s.url || boardSources.get(s.id)?.url || '', capturedAt: now }));
   const sources = [...liveSources, ...(board?.sources || []).filter((s) => !liveIds.has(s.id))];
   const allOk = sources.every((s) => s.status === 'ok');
   return {

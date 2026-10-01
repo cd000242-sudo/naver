@@ -100,6 +100,20 @@ test('합치기 — 인스타는 CI 판에서 되살려 함께 묶고, 홈판 �
   assert.equal(merged.sources.find((s) => s.id === 'a').capturedAt, now);
 });
 
+test('실시간에서 실패한 출처는 CI 판이 그 출처로 잡은 글을 되살린다 — 유튜브 RSS 404 처럼 들쭉날쭉한 원천(2026-10-01)', () => {
+  const board = {
+    schemaVersion: 1, generatedAt: '2026-09-28T10:00:00Z', status: 'partial',
+    sources: [{ id: 'yt', platform: 'youtube', url: 'https://www.youtube.com/@yt', status: 'ok', postCount: 1, capturedAt: '2026-09-28T10:00:00Z' }, { id: 'dead', platform: 'naver-blog', url: 'https://blog.naver.com/dead', status: 'failed' }],
+    candidates: [{ id: 'v', title: '디올과 원영의 만남', capturedAt: now, sources: [{ id: 'yt', platform: 'youtube', name: 'yt', url: 'https://www.youtube.com/watch?v=abcdefghijk', title: '디올과 원영의 만남 영상', summary: '디올 원영 행사', publishedAt: '2026-09-28T09:00:00Z', metrics: { views: 1200, likes: null, comments: null } }] }],
+  };
+  const feeds = [{ id: 'yt', platform: 'youtube', name: 'yt', status: 'failed', reason: 'HTTP 404' }, { id: 'dead', platform: 'naver-blog', name: 'dead', status: 'ok', text: '<rss><channel></channel></rss>' }];
+  const merged = live.mergeLiveBoard(board, feeds, now);
+  const yt = merged.sources.find((s) => s.id === 'yt');
+  assert.equal(yt.status, 'ok', '되살린 출처는 확인 필요로 세지 않는다');
+  assert.equal(yt.capturedAt, '2026-09-28T10:00:00Z', '되살린 출처는 CI 수집 시각을 그대로 단다');
+  assert.ok(merged.candidates.some((c) => c.sources.some((s) => s.url === 'https://www.youtube.com/watch?v=abcdefghijk')));
+  assert.equal(merged.sources.find((s) => s.id === 'dead').status, 'failed', 'CI 도 실패한 출처는 그대로 실패');
+});
 test('실시간 원문은 키 없는 액션 하나로만 받고 AI 를 부르지 않는다', () => {
   const src = readFileSync(fileURLToPath(new URL('../src/lib/homefeedLiveFetch.ts', import.meta.url)), 'utf8');
   assert.match(src, /callWorkerRaw\('homefeed-benchmark-feeds', \{ batch: String\(batch\) \}\)/);
