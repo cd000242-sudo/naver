@@ -215,6 +215,44 @@ export function getStableImageKey(img: any): string {
     return toFileUrlMaybe(String(raw || '').trim());
 }
 
+/** [2026-10-01] 네이버 "사진 설명" 칸에 넣는 출처 문구의 길이 상한. */
+export const IMAGE_CAPTION_MAX_LENGTH = 200;
+
+/**
+ * [2026-10-01] 수집 이미지의 출처 입력칸 기본값.
+ *
+ * 수집 엔트리는 원본 이미지 주소를 url 에 들고 온다(semiAutoImageSearch·URL 수집 모두
+ * `url: imgUrl, isCollected: true`). 그 도메인만 쓴다 — 전체 주소는 사진 설명 한 줄에
+ * 너무 길다.
+ *
+ * 수집 이미지가 아니면 빈 문자열이다. AI 생성 이미지의 url 은 생성 제공자 주소라
+ * 그대로 쓰면 "출처: image.pollinations.ai" 같은 거짓 출처가 박힌다. 직접 찍은 사진도
+ * 출처가 없다. 사용자가 직접 입력하는 건 언제나 가능하다.
+ */
+export function deriveImageSourceCaption(img: any): string {
+    if (!img || typeof img !== 'object') return '';
+
+    const marker = String(img.provider || img.source || '').toLowerCase();
+    const collected = img.isCollected === true
+        || marker.includes('collect')
+        || marker.includes('shopping')
+        || marker.includes('smartstore')
+        || marker.includes('coupang');
+    if (!collected) return '';
+
+    for (const raw of [img.sourceUrl, img.originalUrl, img.url]) {
+        const value = String(raw || '').trim();
+        if (!/^https?:\/\//i.test(value)) continue;
+        try {
+            const host = new URL(value).hostname.replace(/^www\./i, '');
+            if (host) return host.slice(0, IMAGE_CAPTION_MAX_LENGTH);
+        } catch {
+            continue;
+        }
+    }
+    return '';
+}
+
 /**
  * 이미지 저장 기본 경로 가져오기
  * ✅ [v2.9.0 FIX] '추가' 버튼이 자동 수집된 폴더를 못 찾던 회귀 차단
@@ -261,5 +299,6 @@ export async function getRequiredImageBasePath(): Promise<string> {
 (window as any).getHeadingTitleByIndex = getHeadingTitleByIndex;
 (window as any).getStableImageKey = getStableImageKey;
 (window as any).getRequiredImageBasePath = getRequiredImageBasePath;
+(window as any).deriveImageSourceCaption = deriveImageSourceCaption;
 
 console.log('[ImageHelpers] 📦 모듈 로드됨!');

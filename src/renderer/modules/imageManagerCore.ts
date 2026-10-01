@@ -14,6 +14,9 @@ declare function syncGlobalImagesFromImageManager(): void;
 declare function toFileUrlMaybe(p: string): string;
 declare function normalizeHeadingKeyForVideoCache(title: string): string;
 declare function getStableImageKey(heading: any): string;
+// [2026-10-01] utils/imageHelpers.ts 가 번들에서 먼저 인라인된다 — window 조회가 아니라
+// 번들 스코프의 값을 그대로 쓴다(window 경유는 adapter 누락 시 조용히 undefined).
+declare const IMAGE_CAPTION_MAX_LENGTH: number;
 declare function ensureKenBurnsStyles(): void;
 declare function escapeHtml(str: string): string;
 declare function setVeoProgressOverlay(...args: any[]): void;
@@ -536,6 +539,56 @@ const ImageManager = {
       this.imageMap.set(titleKey, images.map((img: any) => ({ ...img, aiMarkOverride: value })));
     }
     this.syncGeneratedImagesArray();
+  },
+
+  /**
+   * [2026-10-01] 이미지 관리 탭에서 입력한 출처 문구를 그 이미지 하나에만 적어 둔다.
+   * 발행 때 네이버 "사진 설명" 칸으로 들어간다(imageCaption.ts).
+   *
+   * 왜 모델에 적어 두는가: 카드 그리드는 innerHTML 을 통째로 다시 그리기 때문에
+   * input 의 value 만으로는 재렌더 한 번에 사라진다 (setAiMarkOverride 와 같은 이유).
+   * captionTouched 는 "사용자가 손댔다" 는 뜻 — 자동 프리필이 사용자가 지운 값을
+   * 되살리지 않게 만드는 유일한 신호다.
+   *
+   * syncAllPreviews 를 부르지 않는 것도 의도다 — 타이핑 중에 그리드를 다시 그리면
+   * 입력 포커스가 날아간다. generatedImages 배열만 맞춰 둔다.
+   */
+  setImageCaption(headingTitle: string, imageKey: string, caption: string): void {
+    const key = String(imageKey || '').trim();
+    if (!key) return;
+    const titleKey = this.resolveHeadingKey(headingTitle);
+    const images = this.imageMap.get(titleKey);
+    if (!images || images.length === 0) return;
+    const idx = images.findIndex((img: any) => getStableImageKey(img) === key);
+    if (idx < 0) return;
+
+    const text = String(caption || '').trim().slice(0, IMAGE_CAPTION_MAX_LENGTH);
+    if (String(images[idx]?.caption || '') === text && images[idx]?.captionTouched === true) return;
+
+    images[idx] = { ...images[idx], caption: text, captionTouched: true };
+    this.imageMap.set(titleKey, images);
+    this.syncGeneratedImagesArray();
+  },
+
+  /**
+   * [2026-10-01] 프리필 결과를 모델에 적는다 — 사용자가 손댄 칸은 건드리지 않는다.
+   * 입력칸을 처음 그릴 때만 쓰인다.
+   */
+  setImageCaptionPrefill(headingTitle: string, imageKey: string, caption: string): void {
+    const key = String(imageKey || '').trim();
+    if (!key) return;
+    const titleKey = this.resolveHeadingKey(headingTitle);
+    const images = this.imageMap.get(titleKey);
+    if (!images || images.length === 0) return;
+    const idx = images.findIndex((img: any) => getStableImageKey(img) === key);
+    if (idx < 0) return;
+    if (images[idx]?.captionTouched === true) return;
+    if (String(images[idx]?.caption || '').trim()) return;
+
+    const text = String(caption || '').trim().slice(0, IMAGE_CAPTION_MAX_LENGTH);
+    if (!text) return;
+    images[idx] = { ...images[idx], caption: text };
+    this.imageMap.set(titleKey, images);
   },
 
   /**

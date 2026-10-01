@@ -22,6 +22,10 @@ declare const updateReserveImagesThumbnails: any;
 declare const autoAnalyzeHeadings: any;
 declare const generateEnglishPromptForHeadingSync: any;
 declare const toFileUrlMaybe: any;
+// [2026-10-01] 출처 입력칸 — utils/imageHelpers.ts 가 번들에서 먼저 인라인된다.
+declare const getStableImageKey: any;
+declare const deriveImageSourceCaption: any;
+declare const IMAGE_CAPTION_MAX_LENGTH: number;
 declare const generatedImages: any[];
 declare const showHeadingImagesModal: any;
 declare const showImageModal: any;
@@ -108,6 +112,25 @@ export function displayGeneratedImages(images: any[]): void {
         ? `<div style="margin-top: 2px; display: flex; align-items: center; gap: 6px;"><span style="font-size: 0.65rem; color: #22c55e; font-weight: 600; white-space: nowrap;">🎞 영상 세팅됨</span><button type="button" class="remove-heading-video-btn" data-heading-index="${index}" data-heading-title="${heading}" style="padding: 2px 6px; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.65rem; font-weight: 700;" title="영상 해제">해제</button></div>`
         : '';
 
+      // [2026-10-01] 출처 입력칸. 발행 때 네이버 "사진 설명" 칸으로 들어간다.
+      //   수집 이미지는 도메인을 미리 채워 두고(deriveImageSourceCaption), 사용자가
+      //   고치거나 지우면 그 선택이 captionTouched 로 남아 프리필이 되살리지 않는다.
+      //   값을 ImageManager 에 적어 두는 이유: 이 그리드는 innerHTML 을 통째로 다시
+      //   그려서, input.value 만으로는 재렌더 한 번에 사라진다.
+      const captionStored = String(image?.caption || '').trim();
+      if (!captionStored && image?.captionTouched !== true) {
+        const prefill = deriveImageSourceCaption(image);
+        if (prefill) {
+          try {
+            ImageManager.setImageCaptionPrefill(headingRaw, getStableImageKey(image), prefill);
+            image.caption = prefill;
+          } catch (e) {
+            console.warn('[imageDisplayGrid] 출처 프리필 실패:', e);
+          }
+        }
+      }
+      const captionValue = escapeHtml(String(image?.caption || '').trim());
+
       // ✅ GIF(영상에서 변환된 이미지)는 썸네일 우상단에 항상 보이는 X 버튼 추가
       const isGifFromVideo = String(image?.provider || '') === 'gif-from-video';
       const gifDeleteButtonHtml = isGifFromVideo
@@ -142,10 +165,47 @@ export function displayGeneratedImages(images: any[]): void {
             <div style="font-weight: 600; color: var(--text-strong); font-size: 0.75rem; margin-bottom: 2px; word-break: break-word; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${heading}">${heading}</div>
             <div style="font-size: 0.65rem; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${prompt}">${prompt}</div>
             ${videoBadgeHtml}
+            <input type="text" class="image-source-caption-input" data-image-index="${index}"
+                   value="${captionValue}" maxlength="${IMAGE_CAPTION_MAX_LENGTH}"
+                   placeholder="출처 (비우면 안 넣음)"
+                   title="발행 시 사진 아래 '사진 설명'으로 들어갑니다. 비우면 넣지 않습니다."
+                   style="width: 100%; margin-top: 6px; padding: 4px 6px; box-sizing: border-box; background: var(--bg-primary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 6px; font-size: 0.65rem; cursor: text;" />
           </div>
         </div>
       `;
     }).join('');
+
+    // [2026-10-01] 출처 입력칸 저장 — change(엔터·포커스 이탈)에서만 모델에 쓴다.
+    //   input 마다 쓰면 타이핑 중에 generatedImages 가 매 글자 재생성된다.
+    //   클릭/키 이벤트는 카드로 올려 보내지 않는다 — 카드 클릭은 선택 토글이다.
+    generatedImagesGrid.querySelectorAll('.image-source-caption-input').forEach(el => {
+      const input = el as HTMLInputElement;
+      ['click', 'mousedown', 'dblclick', 'keydown'].forEach(type => {
+        input.addEventListener(type, (e) => { e.stopPropagation(); });
+      });
+      input.addEventListener('change', () => {
+        const index = parseInt(input.getAttribute('data-image-index') || '-1', 10);
+        const image = validImages[index];
+        if (!image) return;
+        const key = getStableImageKey(image);
+        const text = input.value.trim();
+        try {
+          ImageManager.setImageCaption(String(image.heading || ''), key, text);
+          image.caption = text;
+          image.captionTouched = true;
+          input.value = text;
+          appendLog(
+            text
+              ? `📝 출처 저장: "${text}" (${String(image.heading || '')})`
+              : `📝 출처 비움: ${String(image.heading || '')}`,
+            'images-log-output',
+          );
+        } catch (err) {
+          console.error('[imageDisplayGrid] 출처 저장 실패:', err);
+          toastManager.error('출처를 저장하지 못했습니다.');
+        }
+      });
+    });
 
     // 호버 시 오버레이 표시 + 이미지 확대 효과
     generatedImagesGrid.querySelectorAll('.generated-image-item').forEach(item => {

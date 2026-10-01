@@ -303,6 +303,10 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
           headingIndex: img.headingIndex, // ✅ [2026-04-04 FIX] 소제목 인덱스 보존
           isIntro: img.isIntro || false,
           aiMarkOverride: img.aiMarkOverride, // [2026-09-29] per-heading AI 활용 card toggle
+          // [2026-10-01] 이미지 관리 탭 출처 입력칸 → 네이버 "사진 설명".
+          //   이 화이트리스트에서 빠지면 입력은 저장되는데 발행에는 안 들어간다
+          //   (image.link 가 2026-07-30 부터 그 상태로 남아 있다 — imageHelpers.ts:1558).
+          caption: img.caption,
         }))
         .filter((img: any) => Boolean(img?.heading) && Boolean(img?.filePath));
 

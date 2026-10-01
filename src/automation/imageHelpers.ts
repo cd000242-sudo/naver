@@ -34,6 +34,8 @@ import { decodeBase64Async } from '../main/utils/base64Async.js';
 import { downloadImageBuffer } from '../image/imageUrlDownload.js';
 // [2026-10-01] AVIF/HEIC 는 네이버 허용 목록에 없다 — 올리기 전에 JPEG 로 바꾼다.
 import { ensureNaverDecodableFile } from '../image/naverImageTranscode.js';
+// [2026-10-01] 이미지 관리 탭 출처 입력칸 → 네이버 "사진 설명" 칸.
+import { applyCaptionToLastImage } from './imageCaption.js';
 import {
   SELECTORS,
   findElement,
@@ -132,16 +134,14 @@ export function generateAltWithSource(self: any, image: any): string {
 }
 
 // ── applyCaption ──
+/**
+ * [2026-10-01] 구현을 imageCaption.ts 로 옮겼다.
+ * 종전 구현은 frame.$(selector) 로 문서의 '첫 번째' 캡션 칸을 집어서, 이미지가 여러
+ * 장이면 2번째 이후 사진의 캡션이 모두 1번 사진에 겹쳐 들어갔다. 구현이 두 개가 되면
+ * 그 버그가 다시 살아나므로 여기서는 위임만 한다.
+ */
 export async function applyCaption(self: any, caption: string): Promise<void> {
-  if (!caption) return;
-  const frame = await self.getAttachedFrame();
-  const selectors = ['.se-caption-input input', '.se-caption-textarea textarea', '.se-image-caption input'];
-  for (const selector of selectors) {
-    const input = await frame.$(selector);
-    if (input) {
-      try { await input.click({ clickCount: 3 }); await input.type(caption, { delay: 25 }); self.log('📝 이미지 캡션을 입력했습니다.'); return; } catch { continue; }
-    }
-  }
+  await applyCaptionToLastImage(self, caption);
 }
 
 // ── setImageSizeToDocumentWidth ──
@@ -1587,6 +1587,19 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
       }
     } catch (sizeError) {
       self.log(`      ⚠️ 문서너비 설정 실패 (계속 진행): ${(sizeError as Error).message}`);
+    }
+
+    // [2026-10-01] 이미지 관리 탭에서 입력한 출처를 사진 설명 칸에 넣는다.
+    //   문서너비/링크 뒤에 둔다 — 그 단계가 이미지를 더블클릭하고 툴바를 열어서,
+    //   먼저 넣으면 캡션 포커스가 깨지고 좌표도 밀린다.
+    //   비어 있으면 아무것도 하지 않는다(사용자가 안 넣었으면 안 넣는다).
+    try {
+      const sourceCaption = typeof (image as any).caption === 'string' ? (image as any).caption.trim() : '';
+      if (sourceCaption) {
+        await applyCaptionToLastImage(self, sourceCaption);
+      }
+    } catch (captionError) {
+      self.log(`      ⚠️ 출처 입력 실패 (계속 진행): ${(captionError as Error).message}`);
     }
 
     // 마지막 이미지가 아니면 줄바꿈 시도

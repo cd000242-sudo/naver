@@ -37,5 +37,16 @@
 //   화이트리스트에 avif 를 넣었다. 종전에는 AVIF 바이트가 .jpg 이름으로 저장돼
 //   발행 때 "파일 전송 오류 — 알 수 없는 파일"로 거부됐다. 네이버 허용 확장자
 //   목록(NAVER_SUPPORTED_IMAGE_EXTENSIONS)은 그대로다 — 변환이 그 앞에서 끝난다.
+//
+// [2026-10-01 두 번째] 이미지 출처 → 네이버 "사진 설명" 배선으로 재계산했다.
+//   바뀐 해시 대상: src/automation/imageHelpers.ts, src/automation/richTextPaste.ts,
+//   src/renderer/modules/formAndAutomation.ts, src/renderer/modules/imageDisplayGrid.ts,
+//   src/renderer/modules/imageManagerCore.ts, src/renderer/utils/imageHelpers.ts,
+//   src/contentQualityV3/candidateRuntimeFingerprint.ts(목록)
+//   신규 해시 대상: src/automation/imageCaption.ts
+//   내용: 이미지 관리 탭 카드의 출처 입력칸을 ImageManager → 발행 페이로드 → 에디터
+//   캡션 칸까지 배선했다. 캡션에 글자가 들어가면 .se-text-paragraph 역순 탐색이 캡션을
+//   '마지막 문단'으로 집어 본문이 사진 설명 안으로 들어갈 수 있으므로, richTextPaste 의
+//   캐럿 탐색 세 경로에 캡션 제외를 넣었다(캡션이 비어 있던 종전과 같은 블록이 선택된다).
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '176a59fa90a7f433b4bd2160c3a74008fa9f4f1eab1b87126d5d3eefd7a8264a' as const;
+  'a26ff22f5698a62c40075aabd9f2ed0a6952e1c5fc5421698d81c36e6afe9e62' as const;

@@ -106,6 +106,17 @@ const SMART_EDITOR_ROOT_SELECTORS = [
 // can hide the real article root and make tail/hashtag checks read 0 chars.
 const SMART_EDITOR_PANEL_SELECTOR = '.se-popup, .se-layer, .se-modal, [role="dialog"], [aria-modal="true"]';
 
+/**
+ * [2026-10-01] 사진 설명(캡션)은 본문 캐럿 후보가 아니다.
+ *
+ * 캡션도 .se-text-paragraph 라서 "마지막 문단" 역순 탐색에 걸린다. 지금까지는 캡션이
+ * 비어 있어 높이가 0이고 placeholder 뿐이라 rect 검사에서 떨어졌는데, 이미지 관리 탭
+ * 출처 입력(imageCaption.ts)으로 캡션에 실제 글자가 들어가면 높이를 얻어 유효한
+ * 후보가 된다. 그러면 그다음 본문 붙여넣기가 사진 설명 안으로 들어간다.
+ * panelSelector 에 섞지 않는 이유: 그 값은 붙여넣기 측정에도 쓰여서 의미가 달라진다.
+ */
+const SMART_EDITOR_CAPTION_SELECTOR = '.se-caption, .se-module-caption';
+
 export const SOFT_TABLE_THEMES: SoftTableTheme[] = [
   {
     name: 'sage',
@@ -2529,7 +2540,7 @@ async function resetInlineFormattingState(page: Page, frame: Frame): Promise<voi
 }
 
 export async function focusLastEditableLine(page: Page, frame: Frame): Promise<void> {
-  const focusedBySelection = await frame.evaluate(({ rootSelectors, panelSelector }) => {
+  const focusedBySelection = await frame.evaluate(({ rootSelectors, panelSelector, captionSelector }) => {
     function getSmartEditorDocumentRoot(): HTMLElement | null {
       const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
       let best: HTMLElement | null = null;
@@ -2566,6 +2577,8 @@ export async function focusLastEditableLine(page: Page, frame: Frame): Promise<v
       const target = candidates[i];
       if (target.closest('.se-documentTitle')) continue;
       if (target.closest(panelSelector)) continue;
+      // [2026-10-01] 사진 설명은 본문 캐럿이 아니다 — 본문이 캡션 안으로 들어간다.
+      if (target.closest(captionSelector)) continue;
       const rect = target.getBoundingClientRect();
       const style = window.getComputedStyle(target);
       if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
@@ -2584,6 +2597,7 @@ export async function focusLastEditableLine(page: Page, frame: Frame): Promise<v
   }, {
     rootSelectors: [...SMART_EDITOR_ROOT_SELECTORS],
     panelSelector: SMART_EDITOR_PANEL_SELECTOR,
+    captionSelector: SMART_EDITOR_CAPTION_SELECTOR,
   }).catch(() => false);
 
   if (focusedBySelection) return;
@@ -2591,6 +2605,11 @@ export async function focusLastEditableLine(page: Page, frame: Frame): Promise<v
   const handles = await frame.$$('.se-main-container .se-text-paragraph, article.se-components-wrap .se-text-paragraph, .se-canvas > article.se-components-wrap .se-text-paragraph');
   for (let i = handles.length - 1; i >= 0; i -= 1) {
     const handle = handles[i];
+    // [2026-10-01] 캡션 제외 — CSS :not() 중첩에 의존하지 않고 요소에서 직접 확인한다.
+    const inCaption = await handle
+      .evaluate((el: Element, selector: string) => Boolean(el.closest(selector)), SMART_EDITOR_CAPTION_SELECTOR)
+      .catch(() => false);
+    if (inCaption) continue;
     const box = await handle.boundingBox().catch(() => null);
     if (!box || box.width <= 0 || box.height <= 0 || box.x < -1000) continue;
     await page.mouse.click(box.x + Math.min(40, Math.max(8, box.width / 4)), box.y + Math.min(16, Math.max(8, box.height / 2)));
@@ -2675,6 +2694,7 @@ export async function ensureTailTypingReady(
   const documentRootPayload = {
     rootSelectors: [...SMART_EDITOR_ROOT_SELECTORS],
     panelSelector: SMART_EDITOR_PANEL_SELECTOR,
+    captionSelector: SMART_EDITOR_CAPTION_SELECTOR,
   };
 
   // 1) Wait until the editor stops mutating (paste digestion complete).
@@ -2725,7 +2745,7 @@ export async function ensureTailTypingReady(
   // element click handles the iframe offset math that broke the manual
   // coordinate path historically (N3).
   const clickParagraphEnd = async (textBearingOnly: boolean): Promise<void> => {
-    const handle = await frame.evaluateHandle(({ onlyText, rootSelectors, panelSelector }) => {
+    const handle = await frame.evaluateHandle(({ onlyText, rootSelectors, panelSelector, captionSelector }) => {
       function getSmartEditorDocumentRoot(): HTMLElement | null {
         const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
         let best: HTMLElement | null = null;
@@ -2764,6 +2784,8 @@ export async function ensureTailTypingReady(
         if (/^(내용을 입력하세요|삭제)$/u.test(paragraphText)) continue;
         if (paras[i].closest('.se-documentTitle')) continue;
         if (paras[i].closest(panelSelector)) continue;
+        // [2026-10-01] 사진 설명은 본문 캐럿이 아니다 — 본문이 캡션 안으로 들어간다.
+        if (paras[i].closest(captionSelector)) continue;
         const rect = paras[i].getBoundingClientRect();
         const style = window.getComputedStyle(paras[i]);
         if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
@@ -2796,7 +2818,7 @@ export async function ensureTailTypingReady(
     // Scroll the true last block into view FIRST — clicking coordinates that
     // sit below the fold misses or hits the wrong paragraph (the cause of
     // tail-inserted-mid-body incidents). Rect is computed after the scroll.
-    const rect = await frame.evaluate(({ rootSelectors, panelSelector }) => {
+    const rect = await frame.evaluate(({ rootSelectors, panelSelector, captionSelector }) => {
       function getSmartEditorDocumentRoot(): HTMLElement | null {
         const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
         let best: HTMLElement | null = null;
@@ -2837,7 +2859,13 @@ export async function ensureTailTypingReady(
         const probe = el.getBoundingClientRect();
         // Must carry TEXT: clicking an empty trailing block does not restore
         // keyboard focus (live-observed) — only a text-bearing block does.
-        const hasText = (el.innerText || el.textContent || '').trim().length > 0;
+        // [2026-10-01] 캡션 글자는 여기서 "본문 텍스트"로 세지 않는다. 출처가 들어간
+        //   이미지 컴포넌트가 '글자 있는 마지막 블록'으로 뽑히면 캐럿이 사진 설명
+        //   끝에 잡히고 본문이 캡션 안으로 들어간다. 캡션을 뺀 사본으로 판정해
+        //   캡션이 비어 있던 종전과 같은 블록이 선택되게 한다.
+        const probeClone = el.cloneNode(true) as HTMLElement;
+        probeClone.querySelectorAll(captionSelector).forEach((node) => node.remove());
+        const hasText = (probeClone.innerText || probeClone.textContent || '').trim().length > 0;
         if (hasText && probe.width > 0 && probe.height > 0) break;
         el = el.previousElementSibling as HTMLElement | null;
       }
