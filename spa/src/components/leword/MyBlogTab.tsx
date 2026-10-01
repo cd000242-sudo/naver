@@ -13,6 +13,7 @@ import { boardKeywordCount, myBlogFitRows, myTitleWords, type GoldenRowInput, ty
 import { pullMyBlogSync, pushMyBlogSync, type MyBlogSyncBundle, type TodayKeywordRow } from '../../lib/myBlogSync';
 import { bridgeFailureNote } from '../../lib/bridge';
 import { TabIntro } from './LewordShared';
+import PostAutopsyPanel from './PostAutopsyPanel';
 
 const TITLES_STORE_KEY = 'leaderspro.leword.myBlogTitles.v1';
 const AUDIT_STORE_KEY = 'leaderspro.leword.blogAudit.v1';
@@ -166,6 +167,8 @@ function MyBlogTab() {
 
             {error && <div className="lw-note lw-note-error"><strong>{error}</strong></div>}
             {syncNote && <div className="lw-note lw-note-plain">{syncNote}</div>}
+
+            <PostAutopsyPanel key={bundle?.syncedAt ?? 'none'} />
 
             {titles && (
                 <p style={MUTED}>

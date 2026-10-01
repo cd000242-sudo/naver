@@ -9,6 +9,7 @@ import { bridgeCall, type BridgeFailure } from './bridge';
 import { callWorkerRaw } from './keywordApi';
 import { keySyncSlot, openWithKeySync, sealWithKeySync } from './keySync';
 import { packBundle, unpackBundle } from './syncPack.mjs';
+import type { AutopsyFacts } from './postAutopsy.mjs';
 
 // bridgeCall 이 앞에 BRIDGE_BASE 를 붙인다 — 여기서 또 붙이면 주소가 두 번 겹쳐 앱에 못 닿는다(2026-10-01 수리).
 const ROUTE = '/v1/bridge/my-blog/';
@@ -64,6 +65,8 @@ export interface AdvisorDailyView {
     homefeedWeek?: { day: string; rank: number; title: string; url: string }[];
     /** 여러 날에서 모은 '홈판 유입을 받은 내 글'(앱 v2.49.145+). 옛 앱은 없다. */
     myHomefeedHits?: { title: string; day: string; count: number }[];
+    /** 0명 글 부검 사실 — 최근 14일 내 글 · 조회 · 같은 기간 홈판 상위(앱 v2.49.146+). 옛 앱은 없다. */
+    autopsy?: AutopsyFacts | null;
     missingCount: number;
 }
 
