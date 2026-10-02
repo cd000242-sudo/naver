@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-10-01T21:20:58.214Z",
+  "publishedAt": "2026-10-02T03:26:22.443Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 17,
-    "candidates": 194,
-    "niche": 3,
-    "preemption": 4,
+    "candidates": 167,
+    "niche": 1,
+    "preemption": 12,
     "pending": 0
   },
   "freeSample": {
@@ -18,6 +18,99 @@
     ]
   },
   "rows": [
+    {
+      "keyword": "인셉션 쿠키",
+      "issue": "인셉션",
+      "topic": "인셉션",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "빠르게 알려드립니다! 오디세이 쿠키 영상 있을까? 러닝타임과 엔딩곡까지 총정리",
+          "오디세이 쿠키 영상 몇 개일까? 모르고 끝까지 기다리면… 영화 후기 총정리",
+          "오디세이 쿠키 영상 진짜 없을까? 172분 솔직 상영관 꿀팁",
+          "오디세이 쿠키영상 있을까? 없지만 끝까지 봐야 하는 이유 총정리",
+          "영화 오디세이 쿠키영상 0개, 바로 나가도 될까? 러닝타임·출연진 총정리",
+          "오디세이 쿠키 몇 개? 172분 기다리지 말고 이것만 확인하세요",
+          "오디세이 쿠키 영상 있을까? 크리스토퍼 놀란 감독 신작 관람 전 필수 체크",
+          "영화 오디세이 줄거리 쿠키영상 IMAX 관람후기｜아이맥스로 봐야 하는 이유",
+          "\"끝까지 앉아있었는데..\" 오디세이 쿠키 영상 유무와 관람 팁",
+          "영화 《오디세이》 쿠키영상 있나요?｜쿠키 개수부터 엔딩 크레딧까지 완벽 정리"
+        ],
+        "measuredAt": "2026-10-01T09:29:23.349Z"
+      },
+      "documentCount": 3481,
+      "documentCountMeasured": true,
+      "searchVolume": 780,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 0.6065571874584381,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 780",
+        "문서수 3,481",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 780 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.6배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 42,
+      "kinTop": [
+        {
+          "title": "영화 오디세이, 쿠키 영상은 정말 없나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30306&docId=494625462&answerNo=5",
+          "views": 729,
+          "answers": 5
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-02T03:24:55.455Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "삼척시청 여자핸드볼",
       "issue": "삼척시청",
@@ -99,7 +192,40 @@
       "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          100,
+          0,
+          0,
+          0
+        ],
+        "measuredAt": "2026-10-02T03:26:23.207Z"
+      },
       "kinCount": 37,
       "kinTop": [
         {
@@ -131,7 +257,8 @@
       "measuredAt": "2026-10-01T21:19:21.450Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "이시언 아기",
@@ -214,7 +341,40 @@
       "titles": null,
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          11,
+          8,
+          8,
+          10,
+          10,
+          10,
+          11,
+          13,
+          8,
+          8,
+          91,
+          100,
+          19,
+          22,
+          21,
+          28,
+          25,
+          17,
+          12,
+          14,
+          11,
+          15,
+          12,
+          8,
+          13,
+          16,
+          7,
+          5,
+          85
+        ],
+        "measuredAt": "2026-10-02T03:26:23.207Z"
+      },
       "kinCount": 40,
       "kinTop": [
         {
@@ -252,100 +412,8 @@
       "measuredAt": "2026-10-01T21:19:21.450Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
-    },
-    {
-      "keyword": "인셉션 쿠키",
-      "issue": "인셉션",
-      "topic": "인셉션",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "빠르게 알려드립니다! 오디세이 쿠키 영상 있을까? 러닝타임과 엔딩곡까지 총정리",
-          "오디세이 쿠키 영상 몇 개일까? 모르고 끝까지 기다리면… 영화 후기 총정리",
-          "오디세이 쿠키 영상 진짜 없을까? 172분 솔직 상영관 꿀팁",
-          "오디세이 쿠키영상 있을까? 없지만 끝까지 봐야 하는 이유 총정리",
-          "영화 오디세이 쿠키영상 0개, 바로 나가도 될까? 러닝타임·출연진 총정리",
-          "오디세이 쿠키 몇 개? 172분 기다리지 말고 이것만 확인하세요",
-          "오디세이 쿠키 영상 있을까? 크리스토퍼 놀란 감독 신작 관람 전 필수 체크",
-          "영화 오디세이 줄거리 쿠키영상 IMAX 관람후기｜아이맥스로 봐야 하는 이유",
-          "\"끝까지 앉아있었는데..\" 오디세이 쿠키 영상 유무와 관람 팁",
-          "영화 《오디세이》 쿠키영상 있나요?｜쿠키 개수부터 엔딩 크레딧까지 완벽 정리"
-        ],
-        "measuredAt": "2026-10-01T09:29:23.349Z"
-      },
-      "documentCount": 3480,
-      "documentCountMeasured": true,
-      "searchVolume": 780,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.6065571874584381,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 780",
-        "문서수 3,480",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 780 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.6배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 42,
-      "kinTop": [
-        {
-          "title": "영화 오디세이, 쿠키 영상은 정말 없나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30306&docId=494625462&answerNo=5",
-          "views": 727,
-          "answers": 5
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-01T21:19:21.450Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "신병 경태",
@@ -468,7 +536,6 @@
       ],
       "trend": {
         "series": [
-          30,
           33,
           29,
           29,
@@ -496,11 +563,10 @@
           49,
           43,
           38,
-          68
+          68,
+          69
         ],
-        "label": "❄️ 시즌성",
-        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-10-01T21:20:58.975Z"
+        "measuredAt": "2026-10-02T03:26:23.207Z"
       },
       "kinCount": 2,
       "kinTop": [
@@ -652,7 +718,6 @@
       ],
       "trend": {
         "series": [
-          42,
           30,
           35,
           24,
@@ -680,9 +745,10 @@
           54,
           43,
           44,
-          48
+          48,
+          45
         ],
-        "measuredAt": "2026-10-01T21:20:58.975Z"
+        "measuredAt": "2026-10-02T03:26:23.207Z"
       },
       "kinCount": 46,
       "kinTop": [
@@ -856,7 +922,6 @@
       ],
       "trend": {
         "series": [
-          25,
           15,
           19,
           26,
@@ -884,11 +949,12 @@
           13,
           55,
           100,
-          60
+          60,
+          33
         ],
         "label": "🚀 떡상",
         "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-10-01T21:20:58.975Z"
+        "measuredAt": "2026-10-02T03:26:23.207Z"
       },
       "kinCount": 1388,
       "kinTop": [
@@ -1074,7 +1140,6 @@
       ],
       "trend": {
         "series": [
-          44,
           14,
           6,
           6,
@@ -1102,11 +1167,10 @@
           7,
           41,
           100,
-          62
+          62,
+          12
         ],
-        "label": "🚀 떡상",
-        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-10-01T21:20:58.975Z"
+        "measuredAt": "2026-10-02T03:26:23.207Z"
       },
       "kinCount": 345,
       "kinTop": [
@@ -1298,7 +1362,6 @@
       ],
       "trend": {
         "series": [
-          55,
           28,
           29,
           29,
@@ -1326,11 +1389,12 @@
           50,
           46,
           84,
-          100
+          100,
+          65
         ],
         "label": "❄️ 시즌성",
         "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-10-01T21:20:58.975Z"
+        "measuredAt": "2026-10-02T03:26:23.207Z"
       },
       "kinCount": 3944,
       "kinTop": [
@@ -1359,54 +1423,36 @@
       "exclusionReason": null,
       "kinMode": "date-views-v2",
       "carried": true
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "바레인 마라톤선수",
-      "issue": "바레인",
-      "topic": "바레인",
-      "lane": "realtime",
+      "keyword": "코드잇 인턴 후기",
+      "issue": "코드잇",
+      "topic": "코드잇",
+      "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "2026 아이치 나고야 아시안게임 마라톤 대회 일정, 대한민국 선수 및 출전 선수 명단",
-          "나고야 아시안게임 마라톤 결과, 8위 박민호의 36초 반전",
-          "박민호 8위로 끝난 아시안게임 마라톤",
-          "♂️ 아시안게임 마라톤 완벽 분석 우승 전망",
-          "“아시안게임에서도 이 정도라고?” 처참해진 한국 마라톤... 언제까지 황영조와 이봉주 바라기만?",
-          "한국 마라톤 메달 무산…박민호 8위·최경선 12위, 2010 지영준 이후 4대회 연속 ‘노메달’",
-          "9월 23일 아시안게임 경기일정 한국 주요 경기 총정리",
-          "42.195km를 달리고 단 25초 차, 아이치·나고야 여자 마라톤 결과",
-          "2026 아이치·나고야 아시안게임 9월 23일 주요 경기 일정 및 실시간 온라인 중계 총정리(+야구, 체조, 헨드볼, 복싱, 육상, 사격, 탁구, 승마, 하키, 우슈, 사이클)",
-          "2026년 아이치.나고야 AG게임한국 육상 마라톤 빈손으로 귀환!"
-        ],
-        "measuredAt": "2026-09-30T03:24:40.448Z"
-      },
-      "documentCount": 440,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 112,
       "documentCountMeasured": true,
-      "searchVolume": 540,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1,
-      "issueStatus": "rising",
-      "isHot": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 540",
-        "문서수 440",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "검색량 30",
+        "문서수 112",
+        "선점 후보 — 경쟁 문서 112건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -1414,129 +1460,25 @@
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 540 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
           "code": "empty-field",
           "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "whySearch": {
-        "text": "바레인 마라톤선수가 아프리카 출신 귀화 선수인 배경과 대회 성적을 확인하려는 검색",
-        "basis": "AI 추론 — 실측 확인된 확장어 2개"
-      },
-      "intentLabel": "분류 안 됨",
+      "whySearch": null,
+      "intentLabel": "구매 검토",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "바레인 마라톤선수 귀화 배경과 아시안게임 성적",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "바레인 마라톤선수 아시안게임 국적만 보고 넘겼는데 사연이 좀 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "바레인 여자 마라톤선수",
-          "searchVolume": 760,
-          "source": "ai-verified",
-          "frame": "generic"
-        },
-        {
-          "keyword": "바레인 육상선수",
-          "searchVolume": 120,
-          "frame": "generic"
-        },
-        {
-          "keyword": "바레인 아시안게임",
-          "searchVolume": 70,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "바레인 여자 마라톤선수",
-          "searchVolume": 760,
-          "source": "ai-verified",
-          "documentCount": 269
-        },
-        {
-          "keyword": "바레인 육상선수",
-          "searchVolume": 120,
-          "source": "ai-verified",
-          "documentCount": 868
-        }
-      ],
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          100,
-          1,
-          1,
-          0,
-          0
-        ],
-        "label": "📉 단발성",
-        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-10-01T21:20:58.975Z"
-      },
-      "kinCount": 35,
-      "kinTop": [],
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-09-30T03:23:26.919Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true,
-      "kinMode": "date-views-v2",
-      "enrichedBy": {
-        "provider": "claude",
-        "proposed": 6,
-        "verified": 2
-      }
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-10-02T03:24:55.455Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "파이시스-랭",
       "issue": "파이시스-랭",
@@ -1549,7 +1491,7 @@
       "verdict": "preemption",
       "preemptionKind": "no-demand",
       "serp": null,
-      "documentCount": 4,
+      "documentCount": 7,
       "documentCountMeasured": true,
       "searchVolume": null,
       "searchVolumeLt10": false,
@@ -1558,16 +1500,16 @@
       "demandRatio": 0,
       "issueStatus": "unknown",
       "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
       "reasons": [
-        "문서수 4",
-        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
+        "문서수 7",
+        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
       ],
       "evidence": [
         {
           "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
         }
       ],
       "whySearch": null,
@@ -1581,7 +1523,242 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-01T21:19:21.450Z",
+      "measuredAt": "2026-10-02T03:24:55.455Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코드잇 매출",
+      "issue": "코드잇",
+      "topic": "코드잇",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 294,
+      "documentCountMeasured": true,
+      "searchVolume": 30,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 30",
+        "문서수 294",
+        "선점 후보 — 경쟁 문서 294건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-02T03:24:55.455Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코드잇 비추",
+      "issue": "코드잇",
+      "topic": "코드잇",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 20,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 20",
+        "선점 후보 — 경쟁 문서 20건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "코드잇 데이터분석교육",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=468263464&answerNo=1",
+          "views": 41,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-02T03:24:55.455Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코드잇 사업자번호",
+      "issue": "코드잇",
+      "topic": "코드잇",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 48,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 48",
+        "선점 후보 — 경쟁 문서 48건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-02T03:24:55.455Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코드잇 환불",
+      "issue": "코드잇",
+      "topic": "코드잇",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 55,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 55",
+        "선점 후보 — 경쟁 문서 55건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": [
+        {
+          "title": "코드잇(codeit) 올인원 패키지 환불 방법",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=104&docId=329695916&answerNo=0",
+          "views": 21,
+          "answers": null
+        },
+        {
+          "title": "코드잇 환불 문의",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60207&docId=390943600&answerNo=0",
+          "views": 16,
+          "answers": null
+        },
+        {
+          "title": "코드잇 결제",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110603&docId=490295943&answerNo=1",
+          "views": null,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-02T03:24:55.455Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1633,7 +1810,163 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-01T21:19:21.450Z",
+      "measuredAt": "2026-10-02T03:24:55.455Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "oce.global",
+      "issue": "OCE",
+      "topic": "OCE",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 158,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 158",
+        "선점 후보 — 경쟁 문서 158건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 10,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-02T03:24:55.455Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "oce.cn",
+      "issue": "OCE",
+      "topic": "OCE",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 204,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 204",
+        "선점 후보 — 경쟁 문서 204건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 12,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-02T03:24:55.455Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "캘리포니아주 댄빌",
+      "issue": "캘리포니아주",
+      "topic": "캘리포니아주",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 223,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 223",
+        "선점 후보 — 경쟁 문서 223건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-02T03:24:55.455Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1685,7 +2018,59 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-01T21:19:21.450Z",
+      "measuredAt": "2026-10-02T03:24:55.455Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "코드잇 기업규모",
+      "issue": "코드잇",
+      "topic": "코드잇",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 295,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 295",
+        "선점 후보 — 경쟁 문서 295건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-02T03:24:55.455Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -1743,7 +2128,8 @@
       "monetize": null,
       "measuredAt": "2026-10-01T21:19:21.450Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "OCE 오픈클로",
@@ -2239,140 +2625,6 @@
       "keywordPool": null,
       "trend": null,
       "kinCount": 10,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "oce.global",
-      "issue": "OCE",
-      "topic": "OCE",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 158,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 158",
-        "선점 후보 — 경쟁 문서 158건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 AI 에이전트 제어 플랫폼 OCE 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "oce.global 오픈클로 OCE 엔터프라이즈 공개 내용 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "oce.global 들어가봤더니 오픈클로 OCE가 생각보다 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 10,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "oce.cn",
-      "issue": "OCE",
-      "topic": "OCE",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 204,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 204",
-        "선점 후보 — 경쟁 문서 204건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 AI 에이전트 제어 플랫폼 OCE 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "oce.cn 오픈클로 OCE 엔터프라이즈 공개, 무엇이 달라졌나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "oce.cn 찾아보니 오픈클로가 공개한 OCE, 생각보다 결이 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 12,
       "kinTop": null,
       "monetize": null,
       "measuredAt": "2026-10-01T09:51:54.643Z",
@@ -5456,905 +5708,82 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "성현주 딸 첫돌",
-      "issue": "성현주",
-      "topic": "성현주",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 7,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 7",
-        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "성현주가 허경환이 신인 시절 자기 집에서 자주 잤다고 폭로",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "성현주 딸 첫돌 앞두고 나온 허경환 19년 전 이야기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "성현주 딸 첫돌인데 19년 전 허경환 폭로가 자꾸 붙어 다니네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "성현주 개그우먼",
-          "searchVolume": 50,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 30,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 허경환",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "성현주 개그우먼",
-          "searchVolume": 50,
-          "documentCount": 822,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 30,
-          "documentCount": 426,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 허경환",
-          "searchVolume": 20,
-          "documentCount": 330,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 남편",
-          "searchVolume": 20,
-          "documentCount": 526,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-30T03:23:26.919Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "성현주 아들 사인",
-      "issue": "성현주",
-      "topic": "성현주",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 33,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 33",
-        "선점 후보 — 경쟁 문서 33건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "성현주가 허경환이 신인 시절 자기 집에서 자주 잤다고 폭로",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "성현주 아들 사인보다 허경환 폭로가 먼저 뜨는 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "성현주 아들 사인 찾다가 허경환 자주 잤다는 말에 멈췄어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "성현주 개그우먼",
-          "searchVolume": 50,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 30,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 허경환",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "성현주 개그우먼",
-          "searchVolume": 50,
-          "documentCount": 822,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 30,
-          "documentCount": 426,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 허경환",
-          "searchVolume": 20,
-          "documentCount": 330,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 남편",
-          "searchVolume": 20,
-          "documentCount": 526,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "허경환 성현주",
-          "searchVolume": 10,
-          "documentCount": 329,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-30T03:23:26.919Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "성현주 아들 사고",
-      "issue": "성현주",
-      "topic": "성현주",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 63,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 63",
-        "선점 후보 — 경쟁 문서 63건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "성현주가 허경환이 신인 시절 자기 집에서 자주 잤다고 폭로",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "성현주 아들 사고 아닌 딸 첫돌, 허경환 폭로 내용 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "성현주 아들 사고 걱정했는데 남편 얘기까지 나와서 다시 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "성현주 개그우먼",
-          "searchVolume": 50,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 30,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 남편",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "성현주 개그우먼",
-          "searchVolume": 50,
-          "documentCount": 822,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 30,
-          "documentCount": 426,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 남편",
-          "searchVolume": 20,
-          "documentCount": 526,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-30T03:23:26.919Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이란 다야니 ISDS",
-      "issue": "이란 다야니 ISDS",
-      "topic": "이란 다야니 ISDS",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 70,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 70",
-        "선점 후보 — 경쟁 문서 70건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "정부가 이란 다야니 2차 ISDS서 전부 승소, 7700억 청구 기각",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이란 다야니 ISDS 2차 승소, 7700억 기각에 소송비 48억까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이란 다야니 ISDS 2차 이겼는데 소송비 48억이 더 눈에 띄더라고요",
-          "frame": "ai",
-          "basis": "메인+후킹 (실측 근거·확장어 미포함)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "ISDS 뜻",
-          "searchVolume": 1290,
-          "frame": "generic"
-        },
-        {
-          "keyword": "다야니 가문",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "ISDS 뜻",
-          "searchVolume": 1290,
-          "documentCount": 645,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-30T03:23:26.919Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "유재명 백발",
-      "issue": "유재명",
-      "topic": "유재명",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 70,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 70",
-        "선점 후보 — 경쟁 문서 70건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "73년생 유재명이 54세 유재석보다 어린 백발 포스로 화제",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "유재명 백발 53세, 유재석보다 한 살 어린 반전 나이",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "유재명 백발 보니까 나이가 궁금해져서 프로필을 다시 들여다봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "유재명 프로필",
-          "searchVolume": 530,
-          "frame": "generic"
-        },
-        {
-          "keyword": "유재명 나이",
-          "searchVolume": 160,
-          "frame": "generic"
-        },
-        {
-          "keyword": "이선빈 유재명",
-          "searchVolume": 80,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "유재명 프로필",
-          "searchVolume": 530,
-          "documentCount": 996,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "유재명 나이",
-          "searchVolume": 160,
-          "documentCount": 4192,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이선빈 유재명",
-          "searchVolume": 80,
-          "documentCount": 440,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "유재명 드라마",
-          "searchVolume": 20,
-          "documentCount": 27302,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-30T03:23:26.919Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "성현주 폭로",
-      "issue": "성현주",
-      "topic": "성현주",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 147,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 147",
-        "선점 후보 — 경쟁 문서 147건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "성현주가 허경환이 신인 시절 자기 집에서 자주 잤다고 폭로",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "성현주 폭로 허경환과 19년 전 우리 집서 자주 잤다",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "성현주 폭로 나온 김에 개그우먼 프로필 찾아봤는데 나이가 좀 걸리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "성현주 프로필",
-          "searchVolume": 1030,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 개그우먼",
-          "searchVolume": 50,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "성현주 프로필",
-          "searchVolume": 1030,
-          "documentCount": 260,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 개그우먼",
-          "searchVolume": 50,
-          "documentCount": 822,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 30,
-          "documentCount": 426,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 허경환",
-          "searchVolume": 20,
-          "documentCount": 330,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 남편",
-          "searchVolume": 20,
-          "documentCount": 526,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "허경환 성현주",
-          "searchVolume": 10,
-          "documentCount": 329,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-30T03:23:26.919Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "kaist logo",
-      "issue": "KAIST",
-      "topic": "KAIST",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 229,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 229",
-        "선점 후보 — 경쟁 문서 229건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "KR과 KAIST가 조선·해양 딥테크 스타트업 실증 지원",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "kaist logo 카이스트 CI 심볼 png 파일 다운로드",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "kaist logo png로 받았는데 크게 키우니 다 깨지더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 5,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-30T03:23:26.919Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "과기부 공무직",
-      "issue": "과기부",
-      "topic": "과기부",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 249,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 249",
-        "선점 후보 — 경쟁 문서 249건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "산업부 장관이 베트남 과기부 장관과 닌투언 원전 협력 논의",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "과기부 공무직 채용공고 지원자격과 급여 조건 확인하기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "과기부 공무직 넣어보려다 과학기술정보통신부 채용 조건에서 걸렸네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "과학기술정보통신부 공무직",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-30T03:23:26.919Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "변요한과 티파니 극비",
-      "issue": "변요한과 티파니 극비",
-      "topic": "변요한과 티파니 극비",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 99,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 99",
-        "선점 후보 — 경쟁 문서 99건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "변요한이 티파니와 극비 결혼식을 올렸다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "변요한과 티파니 극비 결혼식, 나이차와 신혼여행 근황까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "변요한과 티파니 극비 결혼했다는데 유재석이 서운했던 이유가 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "변요한 티파니 결혼",
-          "searchVolume": 1130,
-          "frame": "generic"
-        },
-        {
-          "keyword": "변요한 아내 티파니",
-          "searchVolume": 1000,
-          "frame": "generic"
-        },
-        {
-          "keyword": "소녀시대 티파니 결혼",
-          "searchVolume": 270,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "변요한 티파니 결혼",
-          "searchVolume": 1130,
-          "documentCount": 11968,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "변요한 아내 티파니",
-          "searchVolume": 1000,
-          "documentCount": 3443,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "소녀시대 티파니 결혼",
-          "searchVolume": 270,
-          "documentCount": 12034,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "변요한 티파니 나이차",
-          "searchVolume": 60,
-          "documentCount": 650,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "변요한 티파니 열애",
-          "searchVolume": 30,
-          "documentCount": 5497,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-09-29T21:34:58.196Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "인셉션",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": null,
+      "headlines": [
+        {
+          "title": "오믈렛, 엔비디아 인셉션 챌린지 톱10",
+          "press": "hansbiz.co.kr",
+          "publishedAt": "2026-09-30T13:44:00.000Z",
+          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=868931"
+        },
+        {
+          "title": "'산업 의사결정 AI' 오믈렛, 엔비디아 인셉션 챌린지 '아태 톱10' 선정",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-09-30T07:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005420472?sid=101"
+        },
+        {
+          "title": "오믈렛, ‘엔비디아 인셉션 그랜드 챌린지 2026’ 아태 최종 톱10 선정",
+          "press": "sentv.co.kr",
+          "publishedAt": "2026-09-30T04:18:00.000Z",
+          "link": "https://www.sentv.co.kr/article/view/sentv202609300120"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "인셉션 영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 ott",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 결말",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 여주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 쿠키",
+          "searchVolume": 780,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "영화 인셉션",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "인셉션 팽이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
     {
       "issue": "삼척시청",
       "issueType": "fresh",
@@ -6425,7 +5854,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "이시언",
@@ -6497,79 +5927,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
-    },
-    {
-      "issue": "인셉션",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": null,
-      "headlines": [
-        {
-          "title": "오믈렛, 엔비디아 인셉션 챌린지 톱10",
-          "press": "hansbiz.co.kr",
-          "publishedAt": "2026-09-30T13:44:00.000Z",
-          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=868931"
-        },
-        {
-          "title": "'산업 의사결정 AI' 오믈렛, 엔비디아 인셉션 챌린지 '아태 톱10' 선정",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-30T07:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005420472?sid=101"
-        },
-        {
-          "title": "오믈렛, ‘엔비디아 인셉션 그랜드 챌린지 2026’ 아태 최종 톱10 선정",
-          "press": "sentv.co.kr",
-          "publishedAt": "2026-09-30T04:18:00.000Z",
-          "link": "https://www.sentv.co.kr/article/view/sentv202609300120"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "인셉션 영화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 ott",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 결말",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 여주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "영화 인셉션",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 쿠키",
-          "searchVolume": 780,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 해석",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "윤규성 품새 금메달!",
@@ -7691,499 +7050,9 @@
       "nextWave": [],
       "rowCount": 0,
       "carried": true
-    },
-    {
-      "issue": "이란 다야니 ISDS",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "정부가 이란 다야니 2차 ISDS서 전부 승소, 7700억 청구 기각",
-      "headlines": [
-        {
-          "title": "정부, 이란 다야니 ISDS 2차 사건 승소…소송 비용 48억도 환수",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-30T01:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014222927?sid=102"
-        },
-        {
-          "title": "정부, 이란 다야니 가문 ISDS 승소…7700억 국고 유출 막아(종합)",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-30T02:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009200322?sid=102"
-        },
-        {
-          "title": "정부, 이란 다야니 2차 ISDS 전부승소…7700억원 배상 청구 기각",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-09-30T02:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000642238?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "이란",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이란 속보",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "바레인",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "바레인이 카타르 33-32로 꺾고 첫 아시안게임 핸드볼 금",
-      "headlines": [
-        {
-          "title": "바레인, ‘왕좌’ 카타르 33-32로 꺾고 사상 첫 아시안게임 핸드볼 금메...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-30T02:23:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/410/0001141804"
-        },
-        {
-          "title": "코리아타운 바이 부티카트, 바레인 진출",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-09-29T05:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/353/0000056736?sid=102"
-        },
-        {
-          "title": "코리아타운 바이 부티카트, 바레인에 첫 매장 오픈… GCC 시장 확대",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-09-29T02:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003684335?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "바레인 국기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "바레인 위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "바레인 수도",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "바레인 마라톤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "바레인 여자마라톤",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카타르 바레인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "바레인 마라톤선수",
-          "searchVolume": 540,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "바레인 하브테",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "바레인 주역 선수",
-          "reason": "결승 활약 선수",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "성현주",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "성현주가 허경환이 신인 시절 자기 집에서 자주 잤다고 폭로",
-      "headlines": [
-        {
-          "title": "\"우리 집서 자주 잤다\"…성현주, 허경환과 과거사 깜짝 폭로",
-          "press": "newsis.com",
-          "publishedAt": "2026-09-29T23:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014222376"
-        },
-        {
-          "title": "성현주, 허경환 신인 시절 폭로 “우리 집에서 자주 잤다”",
-          "press": "segye.com",
-          "publishedAt": "2026-09-29T23:48:00.000Z",
-          "link": "https://m.entertain.naver.com/article/022/0004162879"
-        },
-        {
-          "title": "성현주, 딸 첫돌 코앞인데…19년 전엔 “허경환과 자주 잤어요”",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-09-30T00:52:00.000Z",
-          "link": "https://m.entertain.naver.com/article/410/0001141749"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "개그우먼 성현주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "개그맨 성현주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "성현주 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "성현주 아들상",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "성현주 아들",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "성현주 개그우먼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "성현주 아들 사고",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "성현주 아들 사인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "성현주 딸",
-          "reason": "육아 근황 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "성현주 남편",
-          "reason": "결혼 상대 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "유재명",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "73년생 유재명이 54세 유재석보다 어린 백발 포스로 화제",
-      "headlines": [
-        {
-          "title": "\"편하게 부르기가\"…54세 유재석, '한살 동생' 유재명 '큰아버지 포스'에...",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-29T23:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009199399"
-        },
-        {
-          "title": "\"재명아 먹어라\" 72년생 유재석, 73년생 유재명에 어색한 반말 (틈만나면...",
-          "press": "xportsnews.com",
-          "publishedAt": "2026-09-29T23:29:00.000Z",
-          "link": "https://m.entertain.naver.com/article/311/0002063552"
-        },
-        {
-          "title": "53세 백발 유재명, 유재석보다 1살 동생…반전에 유연석 깜짝 (틈만나면...",
-          "press": "newsen.com",
-          "publishedAt": "2026-09-29T21:12:00.000Z",
-          "link": "https://m.entertain.naver.com/article/609/0001173672"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "배우 유재명",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "유재명 키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "유재명 논란",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "유재명 결혼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "유재명 나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "유재명 배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "유재명 부인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "유재명 신작",
-          "reason": "드라마 정보 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "유재명 실제 나이",
-          "reason": "나이 화제성",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "이선빈 유재명",
-          "reason": "드라마 케미 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "유재명 대표작",
-          "reason": "필모 확인",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "과기부",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "산업부 장관이 베트남 과기부 장관과 닌투언 원전 협력 논의",
-      "headlines": [
-        {
-          "title": "산업장관, 베트남 과기부장관 면담…닌투언 원전 수주 지원",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-29T23:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016345305?sid=101"
-        },
-        {
-          "title": "과기부, 서울대에 ‘AI반도체 혁신연구소’ 열어",
-          "press": "donga.com",
-          "publishedAt": "2026-09-29T15:32:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003751501?sid=101"
-        },
-        {
-          "title": "증평군 과기부 스마트빌리지 보급 확산 사업 공모 선정",
-          "press": "news1.kr",
-          "publishedAt": "2026-09-30T01:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009199972?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "과기부 차관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 인사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 국정감사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 민원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "과기부 산하기관",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "KAIST",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "KR과 KAIST가 조선·해양 딥테크 스타트업 실증 지원",
-      "headlines": [
-        {
-          "title": "KR, KAIST와 조선·해양 딥테크 스타트업 기술·현장실증 지원",
-          "press": "fnnews.com",
-          "publishedAt": "2026-09-30T01:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005582798?sid=101"
-        },
-        {
-          "title": "조선·해양 딥테크, ‘기술’보다 어려운 현장 실증…KR·KAIST가 돕는다",
-          "press": "sedaily.com",
-          "publishedAt": "2026-09-30T01:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004666744?sid=102"
-        },
-        {
-          "title": "KR-KAIST,조선·해양 딥테크 스타트업 기술사업 본격화",
-          "press": "todayenergy.kr",
-          "publishedAt": "2026-09-30T01:12:00.000Z",
-          "link": "https://www.todayenergy.kr/news/articleView.html?idxno=303645"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "kaist 약자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 대학원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "KAIST 서울캠퍼스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist mba",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist portal",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 학과",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "kaist 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "KAIST 스타트업 지원",
-          "reason": "창업 프로그램 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "변요한과 티파니 극비",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "변요한이 티파니와 극비 결혼식을 올렸다.",
-      "headlines": [
-        {
-          "title": "변요한♥티파니, 극비 결혼식…\"유재석 초대해달라고\"",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-29T20:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/008/0005419974"
-        },
-        {
-          "title": "변요한♥티파니영, 극비 결혼식 올렸다…\"신혼여행도 조용히\" ('틈만나...",
-          "press": "tenasia.co.kr",
-          "publishedAt": "2026-09-29T13:47:00.000Z",
-          "link": "https://m.entertain.naver.com/article/312/0000778034"
-        },
-        {
-          "title": "변요한♥티파니 영, 극비 결혼식 올렸다..\"유재석이 초대해달라 했는데...",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-09-29T13:28:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004451118"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-10-01T21:21:23.024Z",
+  "enrichedAt": "2026-10-02T03:26:54.563Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
