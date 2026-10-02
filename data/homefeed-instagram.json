@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "day": "2026-10-02",
+  "day": "2026-10-03",
   "posts": [
     {
       "sourceId": "wide_story",
@@ -1356,9 +1356,9 @@
     }
   ],
   "fetchedAt": "2026-10-01T19:39:53.163Z",
-  "snapshotId": "sd_mupxuopzhhyj5k2at",
-  "snapshotStatus": "ready",
-  "reserved": 40,
+  "snapshotId": null,
+  "snapshotStatus": "failed",
+  "reserved": 0,
   "attempts": 1,
-  "reason": null
+  "reason": "인스타 읽기 요청 실패(HTTP 400)."
 }
