@@ -15,6 +15,7 @@ const fixtureLogin = 'ldb_e2e_fixture';
 const categories = [{ id: '7', name: '연결 검증' }, { id: '8', name: '이미지 검증' }];
 const origin = 'chrome-extension://' + 'a'.repeat(32);
 const runtimeErrors: string[] = [];
+const bridgeStartupErrors: string[] = [];
 
 async function bridge(route: string, body?: unknown) {
   const response = await fetch(baseUrl + route, {
@@ -66,22 +67,41 @@ test.beforeAll(async () => {
     cwd: path.join(__dirname, '..'), timeout: 60_000,
     env: { ...process.env, ...profile.env, E2E_PUBLISH_CAPTURE_FILE: path.join(profile.root, 'must-not-publish.ndjson') },
   });
-  app.process().stdout?.on('data', chunk => {
+  const recordMainOutput = (chunk: Buffer | string) => {
     const text = String(chunk);
     if (/IPC Guard.*ldb:|이중.*ldb:/.test(text)) runtimeErrors.push('LDB IPC listener registration was rejected');
-  });
+    if (/\[LDB 브리지\].*(실패|시작하지 않았습니다)/.test(text)) {
+      bridgeStartupErrors.push(text.trim());
+      if (bridgeStartupErrors.length > 10) bridgeStartupErrors.shift();
+    }
+  };
+  app.process().stdout?.on('data', recordMainOutput);
+  app.process().stderr?.on('data', recordMainOutput);
   page = await waitForMainWindow(app);
   page.on('pageerror', error => runtimeErrors.push(error.message));
   page.on('dialog', dialog => { void dialog.dismiss(); });
   await page.waitForFunction(() => (window as any).__ldbPostsBound === true && typeof (window as any).applyLdbMainAccount === 'function');
-  accountId = await page.evaluate(async ({ login }) => {
+  // LDB listeners bind at DOMContentLoaded, before initializeApplication finishes
+  // loading settings. Wait for initUnifiedTab, which follows those awaited reads,
+  // before switching the fixture's account config and enabling the bridge.
+  await expect(page.locator('#refresh-posts-list-btn'))
+    .toHaveAttribute('data-listener-added', 'true', { timeout: 45_000 });
+  const accountSetup = await page.evaluate(async ({ login }) => {
     const result = await (window as any).api.addBlogAccount('LDB E2E 계정', '카테고리 표시 이름', login, 'not-a-real-password', {});
     if (!result.success || !result.account?.id) throw new Error('Fixture account creation failed');
-    await (window as any).api.saveConfig({ __userId: 'ldb-e2e-user', ldbBridgeEnabled: true });
-    return result.account.id;
+    // Match the real flow: login activates/loads an account first, and the
+    // settings toggle then saves its preference into that established account.
+    await (window as any).api.saveConfig({ __userId: 'ldb-e2e-user' });
+    await (window as any).api.getConfig();
+    await (window as any).api.saveConfig({ ldbBridgeEnabled: true });
+    const reloaded = await (window as any).api.getConfig();
+    return { id: result.account.id, reloadedEnabled: reloaded.ldbBridgeEnabled };
   }, { login: fixtureLogin });
+  expect(accountSetup.reloadedEnabled, 'LDB fixture setting changed before bridge startup').toBe(true);
+  accountId = accountSetup.id;
   const credentials = await page.evaluate(() => (window as any).api.getLdbBridgeToken());
-  expect(credentials.ok).toBe(true);
+  expect(credentials.ok, `LDB startup failed (enabled=${credentials.enabled}); ${bridgeStartupErrors.join(' | ')}`).toBe(true);
+  expect(credentials.token).toMatch(/^[A-Za-z0-9_-]{16,}$/);
   token = credentials.token;
   await expect.poll(() => app.evaluate(() => Number(process.env.LDB_E2E_PORT || 0))).toBeGreaterThan(0);
   const port = await app.evaluate(() => Number(process.env.LDB_E2E_PORT || 0));
