@@ -62,4 +62,4 @@
 //   (C) image.link 를 발행 페이로드 2홉(formAndAutomation·BlogExecutor 4분기)에 싣고,
 //   링크 일괄 적용이 ImageManager 에도 기록해 동기화가 덮어쓰지 못하게 했다.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '2e089b2cf9d5bcd8d4d558c2b2973b0d75a963d1a593726059a816ebb7c78254' as const;
+  '0a9b7b6ba7d1c38a29ee9a421869a2eb8b2c955aa7569f36ef1b6c4a6170174e' as const;
