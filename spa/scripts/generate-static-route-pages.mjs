@@ -51,8 +51,8 @@ const routes = [
   },
   {
     path: 'chatbots',
-    title: '무료 챗봇 | Leaders Pro',
-    description: 'Leaders Pro가 제공하는 무료 AI 챗봇과 키워드 도구를 확인하세요.',
+    title: '무료 제미나이 챗봇 | Leaders Pro',
+    description: '무료 제미나이 챗봇으로 글쓰기를 시작하세요. 부티크 인포의 글쓰기 프롬프트 페이지로 바로 연결합니다.',
   },
   {
     path: 'reviews',
