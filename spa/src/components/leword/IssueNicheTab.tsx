@@ -11,6 +11,7 @@ import PreemptionCard from './PreemptionCard';
 import PreemptionPlan from './PreemptionPlan';
 import IssueFlowBrief from './IssueFlowBrief';
 import RealtimeStrip from './RealtimeStrip';
+import { realtimeSources, type RealtimeSourceId } from '../../lib/realtimeSources.mjs';
 import LiveNichePanel from './LiveNichePanel';
 import { useMindmap } from './useMindmap';
 import { fetchHotKeywords, fetchRealtimeIssues } from '../../lib/keywordApi';
@@ -135,25 +136,26 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
      */
     type RealtimePayload = NonNullable<Awaited<ReturnType<typeof fetchRealtimeIssues>>['data']>;
     const [realtime, setRealtime] = useState<RealtimePayload | null>(null);
-    /*
-     * 대조 풀은 넓을수록 좋다 — signal.bz(realtime-issues) 9건만으로는 발행 이슈와
-     * 겹칠 확률이 낮다. 인기(네이트)·구글 급상승(hot-keywords)까지 합쳐 "지금 어디서든
-     * 검색되고 있나"를 본다. {키워드, 순위, 진입경과} 로 평평하게 편다.
-     */
-    const [livePool, setLivePool] = useState<Array<{ keyword: string; rank: number; ageMs: number | null }>>([]);
+    type HotPayload = NonNullable<Awaited<ReturnType<typeof fetchHotKeywords>>['data']>;
+    const [hot, setHot] = useState<HotPayload | null>(null);
+    const [source, setSource] = useState<RealtimeSourceId>('signal');
+    const [liveLoading, setLiveLoading] = useState(true);
+    const [liveErrors, setLiveErrors] = useState({ signal: false, hot: false });
+    const sources = useMemo(() => realtimeSources(realtime, hot), [realtime, hot]);
+    const selectedSource = sources.find(item => item.id === source)!;
+    const livePool = useMemo(() => sources.filter(lane => lane.id === 'signal' ? !liveErrors.signal : !liveErrors.hot).flatMap(lane => lane.items.map(item => ({
+        keyword: item.keyword, rank: item.rank, source: lane.label,
+        ageMs: item.firstSeenAt ? Math.max(0, nowMs - item.firstSeenAt) : null,
+    }))), [sources, nowMs, liveErrors]);
     useEffect(() => {
         let alive = true;
         const load = () => {
-            Promise.all([fetchRealtimeIssues().catch(() => null), fetchHotKeywords().catch(() => null)]).then(([rt, hot]) => {
+            Promise.all([fetchRealtimeIssues().catch(() => null), fetchHotKeywords().catch(() => null)]).then(([rt, hotResult]) => {
                 if (!alive) return;
                 if (rt?.ok && rt.data) setRealtime(rt.data);
-                const pool: Array<{ keyword: string; rank: number; ageMs: number | null }> = [];
-                for (const it of (rt?.ok && rt.data?.items) || []) pool.push({ keyword: it.keyword, rank: it.rank, ageMs: it.seenAgeMs });
-                const lanes = hot?.ok ? hot.data?.lanes : null;
-                for (const laneId of ['popular', 'google', 'daum'] as const) {
-                    for (const it of (lanes?.[laneId]?.items) || []) pool.push({ keyword: it.keyword, rank: it.rank, ageMs: it.seenAgeMs });
-                }
-                setLivePool(pool);
+                if (hotResult?.ok && hotResult.data) setHot(hotResult.data);
+                setLiveErrors({ signal: !rt?.ok || !rt.data, hot: !hotResult?.ok || !hotResult.data });
+                setLiveLoading(false);
             });
         };
         load();
@@ -161,12 +163,12 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
         return () => { alive = false; window.clearInterval(timer); };
     }, []);
     /** 카드 이슈/키워드가 지금 어디선가 실시간으로 검색되면 그 순위·진입 경과를 준다. */
-    const liveFor = (row: IssueBoardRow): { rank: number; ago: string } | null => {
-        let best: { rank: number; ago: string } | null = null;
+    const liveFor = (row: IssueBoardRow): { rank: number; ago: string; source: string } | null => {
+        let best: { rank: number; ago: string; source: string } | null = null;
         for (const item of livePool) {
             if (compactKey(item.keyword) === compactKey(row.keyword)) {
                 // 여러 소스에 걸리면 순위가 가장 높은(숫자 작은) 것을 쓴다.
-                if (!best || item.rank < best.rank) best = { rank: item.rank, ago: liveAgo(item.ageMs) };
+                if (!best || item.rank < best.rank) best = { rank: item.rank, ago: liveAgo(item.ageMs), source: item.source };
             }
         }
         return best;
@@ -274,8 +276,8 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
               증거다(사장님 2026-09-06). "지금 N위, N분 전 진입"은 실측이라 그대로 싣는다.
             */}
             {live && (
-                <span className="lw-warn-tag" title={`지금 실시간 검색어 ${live.rank}위 — 사람들이 이 순간 검색하고 있습니다${live.ago ? ` (${live.ago} 진입)` : ''}`}>
-                    🔴 지금 실검 {live.rank}위{live.ago ? ` · ${live.ago} 진입` : ''}
+                <span className="lw-warn-tag" title={`${live.source} 목록 ${live.rank}위${live.ago ? ` (${live.ago} 진입)` : ''}`}>
+                    🔴 {live.source} {live.rank}위{live.ago ? ` · ${live.ago} 진입` : ''}
                 </span>
             )}
             <span className="lw-trend-tag">
@@ -317,10 +319,10 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
             <TabIntro
                 title={sub === 'live' ? '실시간 검색어' : '실검 틈새키워드'}
                 desc={sub === 'live'
-                    ? '지금 이 순간 사람들이 찾고 있는 말입니다. 5분마다 다시 받아 그대로 보여 주고, 고른 말은 그 자리에서 검색량·문서수·자리를 잽니다.'
+                    ? '시그널·네이트·다음·구글의 이슈와 검색 트렌드를 출처별로 보여 줍니다. 선택한 출처의 키워드는 아래에서 검색량·문서수·자리를 바로 잴 수 있습니다.'
                     : "실제 이슈와 같은 사건·인물을 다루는 세부 검색어인지 먼저 확인합니다. 최근 수요와 검색량이 확인된 틈새, 절대 검색량 미확인 선점 후보, 수요 미확인 관찰을 구분합니다. '지금 실검' 배지는 정확히 같은 검색어가 현재 목록에 있을 때만 표시하며, 노출과 트래픽을 보장하지 않습니다."}
                 source={sub === 'live'
-                    ? '네이트·구글·다음 실시간 신호 — 5분마다 갱신'
+                    ? '시그널·네이트·다음·구글 — 5분마다 다시 받음 · 원문 갱신 시각은 출처별로 다름'
                     : `실시간 이슈 실측 회차${publishedLabel ? ` · ${publishedLabel} 발행` : ''} · ${board?.schedule || '매일 05·11·17시(KST) 갱신'}`}
             />
 
@@ -343,7 +345,7 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
                 화면 이름이 '실시간'인데 첫 화면이 하루 3회 회차 보드였던 것이 어긋나 있었다. */}
             <div className="lw-segment lw-segment-wrap" role="tablist" aria-label="실시간 보기">
                 <button type="button" role="tab" aria-selected={sub === 'live'} className={sub === 'live' ? 'on' : ''} onClick={() => setSub('live')}>
-                    실시간 검색어 <em>{realtime?.items?.length || 0}</em>
+                    실시간 검색어 <em>{selectedSource.items.length}</em>
                 </button>
                 <button type="button" role="tab" aria-selected={sub === 'niche'} className={sub === 'niche' ? 'on' : ''} onClick={() => setSub('niche')}>
                     실검 틈새키워드 <em>{(board?.rows || []).length}</em>
@@ -353,9 +355,9 @@ function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void })
             {sub === 'live' && (
                 <>
                     {/* 살아 있는 줄 — 목록만 5분마다 따로 받아 "지금 뭐가 뜨는지"를 그대로 보여 준다. */}
-                    <RealtimeStrip measuredKeys={measuredKeySet} data={realtime} />
+                    <RealtimeStrip measuredKeys={measuredKeySet} sources={sources} selected={source} onSelect={setSource} loading={liveLoading} failed={source === 'signal' ? liveErrors.signal : liveErrors.hot} nowMs={nowMs} />
                     {/* 지금 목록을 그 자리에서 재는 판(사장님 2026-09-10 "이것도 수정해줘야지 실시간이라고"). */}
-                    <LiveNichePanel items={(realtime?.items || []).map((item) => ({ rank: item.rank, keyword: item.keyword }))} />
+                    <LiveNichePanel key={source} items={selectedSource.items.map((item) => ({ rank: item.rank, keyword: item.keyword }))} />
                 </>
             )}
 

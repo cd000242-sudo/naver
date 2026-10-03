@@ -206,7 +206,7 @@ function LewordPage() {
                 <nav className="lw-nav">
                     {TABS.map((tab) => (
                         <Fragment key={tab.id}>
-                        <div className={tab.id === 'picks' ? 'lw-navi-wrap' : undefined}>
+                        <div className={tab.id === 'picks' ? `lw-navi-wrap${activeTab === 'picks' && picksTopics.length > 0 ? ' has-fold' : ''}` : undefined}>
                         <button
                             type="button"
                             // 탭별 고유색(사장님 지정 2026-08-20: 금·파랑·초록·주황·빨강·분홍·은색).
@@ -237,7 +237,7 @@ function LewordPage() {
                                 aria-label={picksFolded ? '주제 펼치기' : '주제 접기'}
                                 onClick={togglePicksFold}
                             >
-                                {picksFolded ? '▸' : '▾'}
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ transform: picksFolded ? 'rotate(-90deg)' : undefined }}><path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg>
                             </button>
                         )}
                         </div>
