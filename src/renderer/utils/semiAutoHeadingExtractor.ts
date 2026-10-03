@@ -17,6 +17,8 @@ export type SemiAutoPublishStructureStrategy = 'body-sections' | 'existing-secti
 export interface SemiAutoPublishStructureOptions {
   bodyIsAuthoritative?: boolean;
   existingIntroduction?: string;
+  /** 이미지 관리에서 확인한 제목들이 현재 본문의 독립된 줄에 모두 있으면 그 구성을 유지한다. */
+  preferKnownHeadings?: boolean;
   /**
    * [2026-08-23] 이미지가 걸려 있는 소제목 제목들. 이미지가 존재한다는 것은 그 소제목이 실재했다는
    * 증거다. 추출도 기존 소제목 슬라이스도 실패했을 때 마지막으로 이 제목들로 본문을 잘라 구조를
@@ -168,7 +170,12 @@ function findSemiAutoHeadingMatches(lines: readonly string[]): SemiAutoHeadingMa
 
 export function extractSemiAutoDocumentFromBody(body: string, options: { markedOnly?: boolean } = {}): SemiAutoExtractedDocument {
   const lines = String(body || '').split(/\r?\n/);
-  const matches = options.markedOnly === true ? listHeadingLines(body) : findSemiAutoHeadingMatches(lines);
+  const markedHeadings = listHeadingLines(body);
+  // 명시된 소제목이 있으면 일반 본문을 추가 소제목으로 추측하지 않는다.
+  // 이미지 관리의 markedOnly 분석과 발행 시 분석이 같은 구간을 사용해야 한다.
+  const matches = options.markedOnly === true || markedHeadings.length > 0
+    ? markedHeadings
+    : findSemiAutoHeadingMatches(lines);
 
   if (matches.length === 0) {
     return { introduction: options.markedOnly === true ? String(body || '').trim() : '', headings: [] };
@@ -355,6 +362,33 @@ export function bodyIsTitlelessReconstruction(body: unknown, headings: readonly 
   return true;
 }
 
+function resolveKnownHeadingLines(body: string, headings: readonly any[]): SemiAutoPublishStructure | null {
+  if (headings.length === 0) return null;
+  const lines = body.split('\n');
+  let searchFrom = 0;
+  const positions = headings.map((heading) => {
+    const title = String(heading?.title || '').trim();
+    const at = title ? lines.findIndex((line, index) => index >= searchFrom && line.trim() === title) : -1;
+    searchFrom = at < 0 ? lines.length : at + 1;
+    return at;
+  });
+  if (positions.some((at) => at < 0)) return null;
+  const sections = headings.map((heading, index) => ({
+    ...heading,
+    title: String(heading.title).trim(),
+    content: lines.slice(positions[index] + 1, positions[index + 1] ?? lines.length).join('\n').trim(),
+    prompt: String(heading.prompt || heading.title),
+    source: String(heading.source || 'publish:known-heading-lines'),
+  }));
+  if (sections.some((heading) => !heading.content)) return null;
+  return {
+    introduction: lines.slice(0, positions[0]).join('\n').trim(),
+    headings: sections,
+    strategy: 'body-sections',
+    orderLocked: true,
+  };
+}
+
 export function resolveSemiAutoPublishStructure(
   body: string,
   existingHeadings: readonly any[] = [],
@@ -362,13 +396,18 @@ export function resolveSemiAutoPublishStructure(
 ): SemiAutoPublishStructure {
   const normalizedBody = String(body || '').replace(/\r\n/g, '\n').trim();
   const extracted = extractSemiAutoDocumentFromBody(normalizedBody, { markedOnly: options.bodyMarkupIsAuthoritative === true });
-  if (options.bodyMarkupIsAuthoritative === true) {
+  if (options.bodyMarkupIsAuthoritative === true || listHeadingLines(normalizedBody).length > 0) {
     return {
       introduction: extracted.introduction,
       headings: extracted.headings.map((heading) => ({ ...heading })),
       strategy: extracted.headings.length > 0 ? 'body-sections' : 'plain-body',
       orderLocked: true,
     };
+  }
+
+  if (options.preferKnownHeadings === true) {
+    const knownStructure = resolveKnownHeadingLines(normalizedBody, existingHeadings);
+    if (knownStructure) return knownStructure;
   }
 
   const knownExistingTitles = existingHeadings

@@ -172,3 +172,67 @@ test('semi-auto UI preserves pasted article order through the main IPC handoff',
   expect(third).toBeGreaterThan(second);
   expect(payload.structuredContent.bodyPlain).toBe(content);
 });
+
+test('semi-auto publish keeps comparison lines inside the four generated sections', async () => {
+  const comparison = '함께한 사람: 3년 전 혼자 / 이번엔 아내와';
+  const headings = [
+    { title: '카메라를 든 사람은 아내였다', content: '이번 여행에서는 아내가 카메라를 들었습니다.' },
+    { title: '한 끼 100달러, 그리고 케이크까지 먹은 김종국', content: '두 사람은 함께 식사하고 케이크도 먹었습니다.' },
+    {
+      title: '3년 전 혼자 갔던 하와이와 나란히 놓으면',
+      content: [
+        '김종국은 이번 영상을 일부러 비교 구성으로 만들었습니다.',
+        '',
+        comparison,
+        '',
+        '같은 여행지라도 함께한 사람이 달라지면서 일상의 모습도 달라졌습니다.',
+      ].join('\n'),
+    },
+    { title: '얼굴도 신상도 비공개, 그래도 일상은 보여준다', content: '개인 정보는 공개하지 않으면서 여행의 일상은 전했습니다.' },
+  ];
+  const introduction = '하와이 여행 영상에 담긴 네 가지 장면을 살펴봅니다.';
+  const articleBody = [introduction, ...headings.flatMap(heading => [heading.title, heading.content])].join('\n\n');
+  const title = '생성 원고의 네 소제목과 비교 본문 보존 테스트';
+
+  // The preceding capture can arrive before the renderer finishes its cleanup.
+  await expect.poll(() => mainWindow.evaluate(() => Boolean((window as any).__pipelineRunOwner)))
+    .toBe(false);
+  await fs.writeFile(captureFile, '', 'utf8');
+  await mainWindow.evaluate(({ articleTitle, body, intro, sections }) => {
+    (window as any).resetAllFields();
+    const setValue = (id: string, value: string) => {
+      const element = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
+      if (!element) throw new Error(`missing E2E field: ${id}`);
+      element.value = value;
+    };
+    setValue('naver-id', 'e2e-runtime');
+    setValue('naver-password', 'not-a-real-password');
+    setValue('unified-publish-mode', 'publish');
+    setValue('unified-generated-title', '');
+    setValue('unified-generated-content', '');
+    const skipImages = document.getElementById('unified-skip-images') as HTMLInputElement | null;
+    if (skipImages) skipImages.checked = true;
+    // Generated/loaded articles already have the same four sections used by image
+    // analysis. Empty editor fields exercise the real fillSemiAutoFields path in
+    // handleSemiAutoPublish without a synthetic paste event reparsing this state.
+    (window as any).currentStructuredContent = {
+      selectedTitle: articleTitle,
+      introduction: intro,
+      headings: sections,
+      bodyPlain: body,
+      content: body,
+      hashtags: [],
+    };
+    document.getElementById('semi-auto-publish-btn')!.click();
+  }, { articleTitle: title, body: articleBody, intro: introduction, sections: headings });
+
+  const payload = await waitForCapture();
+  expect(payload._publishFlow).toBe('semi_auto');
+  expect(payload.title).toBe(title);
+  expect(payload.structuredContent.headings.map((heading: any) => heading.title))
+    .toEqual(headings.map(heading => heading.title));
+  expect(payload.structuredContent.headings[2].content).toBe(headings[2].content);
+  expect(payload.structuredContent.headings[2].content).toContain(comparison);
+  expect(payload.structuredContent.bodyPlain).toBe(payload.content);
+  expect(payload.content).toContain(comparison);
+});

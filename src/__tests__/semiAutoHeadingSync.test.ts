@@ -81,7 +81,9 @@ describe('manual editor heading synchronization', () => {
       '이용 기준',
       '이용 가능한 날짜와 조건을 확인합니다.',
     ].join('\n');
-    expect(extractor.extractSemiAutoHeadingsFromBody(mixed).length).toBeGreaterThan(1);
+    const extracted = extractor.extractSemiAutoHeadingsFromBody(mixed);
+    expect(extracted.map((heading) => heading.title)).toEqual(['신청 방법']);
+    expect(extracted[0].content).toContain('이용 기준');
     await input(mixed);
     expect((window as any).currentStructuredContent.headings.map((h: any) => h.title)).toEqual(['신청 방법']);
     expect(analyze.mock.calls.at(-1)?.[0].headings.map((h: any) => h.title)).toEqual(['신청 방법']);
