@@ -17,6 +17,7 @@ import http from 'http';
 import { randomBytes } from 'crypto';
 import { readFileSync, writeFileSync } from 'fs';
 import path from 'path';
+import type { createLdbDestinations } from './ldb-destinations.js';
 
 export const LDB_BRIDGE_PORT = 47630;
 const MAX_BODY_BYTES = 4 * 1024 * 1024;
@@ -26,6 +27,7 @@ export interface LdbBridgeDeps {
   /** 렌더러로 글을 보낸다. 실제로는 mainWindow.webContents.send(...) */
   deliver: (posts: unknown[]) => Promise<number>;
   token: string;
+  destinations?: ReturnType<typeof createLdbDestinations>;
 }
 
 /** 확장만 허용한다. 일반 웹페이지는 이 브리지를 부를 수 없다. */
@@ -84,10 +86,10 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
 
     const url = new URL(req.url || '/', `http://127.0.0.1:${LDB_BRIDGE_PORT}`);
     if (req.method === 'GET' && url.pathname === '/v1/status') {
-      send(res, 200, { ok: true, app: 'naver-automation', accepts: 'draft-only', capabilities: ['renderer-ack', 'heading-images', 'draft-upsert'] }, origin);
+      send(res, 200, { ok: true, app: 'naver-automation', accepts: 'draft-only', capabilities: ['renderer-ack', 'heading-images', 'draft-upsert', ...(deps.destinations ? ['account-categories'] : [])] }, origin);
       return;
     }
-    if (req.method !== 'POST' || url.pathname !== '/v1/posts') {
+    if (!['/v1/posts', '/v1/accounts', '/v1/categories', '/v1/selection'].includes(url.pathname)) {
       send(res, 404, { ok: false, error: '지원하지 않는 경로입니다.' }, origin);
       return;
     }
@@ -96,6 +98,12 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
       return;
     }
 
+    if (req.method === 'GET' && deps.destinations && ['/v1/accounts', '/v1/categories'].includes(url.pathname)) {
+      const work = url.pathname === '/v1/accounts' ? Promise.resolve().then(() => deps.destinations!.accounts()) : deps.destinations.categories(url.searchParams.get('accountId') || '');
+      void work.then(value => send(res, 200, { ok: true, ...value }, origin)).catch(() => send(res, 409, { ok: false, error: '계정 또는 실제 카테고리를 확인하지 못했습니다. 앱에서 계정을 확인하고 다시 불러와주세요.' }, origin));
+      return;
+    }
+    if (req.method !== 'POST' || !['/v1/posts', '/v1/selection'].includes(url.pathname)) { send(res, 404, { ok: false, error: '지원하지 않는 경로입니다.' }, origin); return; }
     const chunks: Buffer[] = [];
     let size = 0;
     req.on('data', (chunk: Buffer) => {
@@ -108,11 +116,19 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
       let payload: unknown;
       try { payload = JSON.parse(Buffer.concat(chunks).toString('utf8')); }
       catch { send(res, 400, { ok: false, error: 'JSON 본문을 읽을 수 없습니다.' }, origin); return; }
+      if (url.pathname === '/v1/selection') {
+        if (!deps.destinations) { send(res, 409, { ok: false, error: '앱을 업데이트해주세요.' }, origin); return; }
+        try { const selection = await deps.destinations.select(payload); send(res, 200, { ok: true, selection }, origin); }
+        catch { send(res, 409, { ok: false, error: '앱에서 계정·카테고리 적용을 확인하지 못했습니다. 다시 불러와주세요.' }, origin); }
+        return;
+      }
       const checked = validatePosts(payload);
       if ('error' in checked) { send(res, 400, { ok: false, error: checked.error }, origin); return; }
       try {
-        const imported = await deps.deliver(checked.posts);
-        send(res, 200, { ok: true, imported }, origin);
+        const destination = (payload as Record<string, unknown>).destination;
+        if (destination !== undefined && !deps.destinations) { send(res, 409, { ok: false, error: '앱을 업데이트해주세요.' }, origin); return; }
+        const result = deps.destinations ? await deps.destinations.send(checked.posts, destination) : { imported: await deps.deliver(checked.posts) };
+        send(res, 200, { ok: true, ...result }, origin);
       } catch {
         send(res, 500, { ok: false, error: '글 목록에 넣지 못했습니다. 앱 화면이 열려 있는지 확인해 주세요.' }, origin);
       }
@@ -121,13 +137,13 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
 }
 
 /** 앱 시작 때 한 번 호출한다. 실패해도 앱 기능에는 영향을 주지 않는다. */
-export function startLdbBridge(userDataPath: string, deliver: (posts: unknown[]) => Promise<number>): { token: string; server: http.Server } | null {
+export function startLdbBridge(userDataPath: string, deliver: (posts: unknown[]) => Promise<number>, destinations?: LdbBridgeDeps['destinations']): { token: string; server: http.Server } | null {
   try {
     const token = loadBridgeToken(path.join(userDataPath, 'ldb-bridge-token'));
-    const server = createLdbBridge({ deliver, token });
+    const server = createLdbBridge({ deliver, token, destinations });
     server.on('error', (error) => { console.error('[LDB 브리지] 시작 실패:', error); });
     server.listen(LDB_BRIDGE_PORT, '127.0.0.1', () => {
-      console.log(`[LDB 브리지] http://127.0.0.1:${LDB_BRIDGE_PORT} · 토큰 ${token}`);
+      console.log(`[LDB 브리지] http://127.0.0.1:${LDB_BRIDGE_PORT} · 연결 준비 완료`);
     });
     return { token, server };
   } catch (error) {

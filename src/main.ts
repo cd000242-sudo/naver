@@ -4932,6 +4932,7 @@ import { registerBackupHandlers, performDataBackup } from './main/ipc/backupHand
 import { startLdbBridge } from './main/ldb-bridge.js';
 import { deliverLdbPosts } from './main/ldb-delivery.js';
 import { materializeLdbImages } from './main/ldb-images.js';
+import { createLdbDestinations, type LdbResolvedDestination } from './main/ldb-destinations.js';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
 import { selectItemsForHeadingImageMode } from './image/headingImageSelection.js';
 
@@ -4948,10 +4949,15 @@ const startLdbBridgeIfEnabled = async (): Promise<void> => {
   try {
     const config = await loadConfig();
     if (!config.ldbBridgeEnabled) return;
-    ldbBridge = startLdbBridge(app.getPath('userData'), async (posts) => {
-      const drafts = await materializeLdbImages(posts, path.join(app.getPath('userData'), 'ldb-images'));
-      return deliverLdbPosts(mainWindow?.webContents, ipcMain, drafts);
+    const deliver = async (posts: unknown[], destination?: LdbResolvedDestination) => {
+      const drafts = posts.length ? await materializeLdbImages(posts, path.join(app.getPath('userData'), 'ldb-images')) : [];
+      return deliverLdbPosts(mainWindow?.webContents, ipcMain, drafts, 20_000, destination);
+    };
+    const destinations = createLdbDestinations({
+      accounts: () => blogAccountManager.getAllAccounts(), active: () => blogAccountManager.getActiveAccount(),
+      fetchCategories: fetchLdbBlogCategories, deliver,
     });
+    ldbBridge = startLdbBridge(app.getPath('userData'), deliver, destinations);
   } catch (error) {
     console.error('[LDB 브리지] 설정을 읽지 못해 시작하지 않았습니다:', error);
   }
@@ -4967,7 +4973,8 @@ const broadcastLdbBridgeState = (enabled: boolean): void => {
 registerBackupHandlers({ debugLog });
 
 // ✅ 네이버 블로그 카테고리 분석 (크롤링)
-ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: string; blogId?: string }) => {
+ipcMain.handle('blog:fetchCategories', (_event, arg) => fetchLdbBlogCategories(arg));
+async function fetchLdbBlogCategories(arg: string | { naverId?: string; blogId?: string }) {
   // ✅ 실행 직전 최신 설정 강제 동기화
   try {
     const config = await loadConfig();
@@ -5228,7 +5235,7 @@ ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: 
     console.error('[Main] 블로그 카테고리 분석 오류:', error);
     return { success: false, message: `카테고리 분석 실패: ${(error as Error).message}` };
   }
-});
+}
 
 // ✅ 다중계정 동시발행 (병렬 처리)
 

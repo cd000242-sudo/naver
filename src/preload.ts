@@ -253,11 +253,11 @@ contextBridge.exposeInMainWorld('api', {
     return () => { ipcRenderer.removeListener('ldb:bridge-state', handler); };
   },
   // ✅ [LDB] LDB IMAGE ULTRA 확장이 보낸 완성 원고 수신 (발행 아님 — 글 목록에만 추가)
-  onLdbPosts: (callback: (posts: any[]) => Promise<number>) => {
-    const handler = async (_event: any, posts: any[], requestId: string) => {
+  onLdbPosts: (callback: (posts: any[], destination?: any) => Promise<number>) => {
+    const handler = async (_event: any, posts: any[], requestId: string, destination?: any) => {
       try {
-        const imported = await callback(posts);
-        ipcRenderer.send('ldb:import-posts-result', { requestId, ok: true, imported });
+        const imported = await callback(posts, destination);
+        ipcRenderer.send('ldb:import-posts-result', { requestId, ok: true, imported, ...(destination ? { selection: { accountId: destination.accountId, categoryId: destination.categoryId } } : {}) });
       } catch {
         ipcRenderer.send('ldb:import-posts-result', { requestId, ok: false });
       }

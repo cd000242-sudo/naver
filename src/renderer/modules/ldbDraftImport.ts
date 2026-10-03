@@ -56,16 +56,25 @@ export interface LdbDraftReceiverDeps {
   read: () => any[];
   write: (posts: any[]) => void;
   display: (post: any) => Promise<void> | void;
+  applyDestination?: (destination: any) => Promise<void>;
+  verifyDestination?: (destination: any) => void;
 }
 
 /** Serialize deliveries so two clicks cannot interleave article/image state. */
-export function createLdbDraftReceiver(deps: LdbDraftReceiverDeps): (posts: any[]) => Promise<number> {
+export function createLdbDraftReceiver(deps: LdbDraftReceiverDeps): (posts: any[], destination?: any) => Promise<number> {
   let tail: Promise<unknown> = Promise.resolve();
-  return (incoming) => {
+  return (incoming, destination) => {
     const next = tail.then(async () => {
-      const { posts, drafts } = prepareLdbDrafts(incoming, deps.read());
+      const prepared = incoming.length ? prepareLdbDrafts(incoming, deps.read()) : null;
+      if (destination) {
+        if (!deps.applyDestination) throw new Error('계정 연결 화면이 준비되지 않았습니다.');
+        await deps.applyDestination(destination);
+      }
+      if (!prepared) { if (destination) deps.verifyDestination?.(destination); return 0; }
+      const { posts, drafts } = prepared;
       deps.write(posts);
       await deps.display(drafts[0]);
+      if (destination) deps.verifyDestination?.(destination);
       return drafts.length;
     });
     tail = next.catch(() => undefined);

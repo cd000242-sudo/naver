@@ -734,6 +734,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/intervalJitter.ts',
   'src/renderer/modules/issueCollectConsent.ts',
   'src/renderer/modules/issueCollectMode.ts',
+  'src/renderer/modules/ldbDestinationSelection.ts',
   'src/renderer/modules/ldbDraftImport.ts',
   'src/renderer/modules/lewordBoardPicker.ts',
   'src/renderer/modules/licenseUI.ts',

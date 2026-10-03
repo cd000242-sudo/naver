@@ -4672,6 +4672,7 @@ function initMainAccountSelector() {
         return;
     let currentAccountId = null;
     let isRefreshingAccountList = false;
+    let accountListRevision = 0;
     let refreshAccountListTimer = null;
     let lastMultiAccountModalVisible = false;
     const scheduleAccountListRefresh = () => {
@@ -4691,6 +4692,7 @@ function initMainAccountSelector() {
         try {
             const previousValue = accountSelector.value;
             isRefreshingAccountList = true;
+            accountListRevision += 1;
             const result = await window.api.getAllBlogAccounts();
             if (result.success && result.accounts) {
                 accountSelector.innerHTML = '<option value="">직접 입력</option>';
@@ -4827,10 +4829,34 @@ function initMainAccountSelector() {
         if (skipCta)
             skipCta.checked = false;
     }
-    accountSelector.addEventListener('change', async () => {
-        if (isRefreshingAccountList)
+    async function applyMainAccountSelection(selectedId, preserveContent = false) {
+        if (isRefreshingAccountList) {
+            if (preserveContent) throw new Error('계정 목록을 갱신 중입니다. 잠시 후 다시 선택해주세요.');
             return;
-        const selectedId = accountSelector.value;
+        }
+        if (preserveContent) {
+            const revision = accountListRevision;
+            const result = await window.api.getAllBlogAccounts();
+            const selected = result.accounts?.find(a => a.id === selectedId);
+            if (!selected) throw new Error('선택한 계정이 삭제되었습니다.');
+            const credentials = await window.api.getAccountCredentials(selectedId);
+            if (!credentials.success || !credentials.credentials?.naverId || !credentials.credentials?.naverPassword) throw new Error('앱에서 선택한 계정의 로그인 정보를 먼저 저장해주세요.');
+            if (isRefreshingAccountList || revision !== accountListRevision) throw new Error('계정 목록이 변경되었습니다. 다시 선택해주세요.');
+            const activated = await window.api.setActiveBlogAccount(selectedId);
+            if (!activated.success) throw new Error('계정을 적용하지 못했습니다.');
+            if (isRefreshingAccountList || revision !== accountListRevision) throw new Error('계정 목록이 변경되었습니다. 다시 선택해주세요.');
+            if (!Array.from(accountSelector.options).some(option => option.value === selectedId)) {
+                const option = document.createElement('option'); option.value = selectedId; option.textContent = selected.name; accountSelector.appendChild(option);
+            }
+            accountSelector.value = selectedId;
+            currentAccountId = selectedId;
+            window.currentMainAccountSettings = selected.settings || {};
+            if (naverIdInput) naverIdInput.value = credentials.credentials.naverId;
+            if (naverPwInput) naverPwInput.value = credentials.credentials.naverPassword;
+            if (selectedAccountInfo) selectedAccountInfo.style.display = 'block';
+            if (selectedAccountName) selectedAccountName.textContent = selected.name;
+            return;
+        }
         // Keyword/URL are account-independent content inputs. Switching the
         // account (session clear or restore) must not wipe what the user typed,
         // so snapshot them here and re-apply after the switch. The manual
@@ -4850,6 +4876,12 @@ function initMainAccountSelector() {
             const result = await window.api.getAllBlogAccounts();
             const account = result.accounts?.find((a) => a.id === selectedId);
             if (account) {
+                const activated = await window.api.setActiveBlogAccount(selectedId);
+                if (!activated.success) throw new Error('계정을 적용하지 못했습니다.');
+                const realCategories = document.getElementById('real-blog-category-select');
+                if (realCategories && realCategories.dataset.ldbAccountId !== selectedId) {
+                    realCategories.replaceChildren(); delete realCategories.dataset.ldbAccountId;
+                }
                 window.currentMainAccountSettings = account.settings || {};
                 if (selectedAccountInfo)
                     selectedAccountInfo.style.display = 'block';
@@ -4902,7 +4934,14 @@ function initMainAccountSelector() {
             if (el && value)
                 el.value = value;
         });
-    });
+    }
+    let selectionTail = Promise.resolve();
+    const selectAccount = (id, preserveContent = false) => {
+        const next = selectionTail.then(() => applyMainAccountSelection(id, preserveContent));
+        selectionTail = next.catch(() => undefined); return next;
+    };
+    window.applyLdbMainAccount = (id) => selectAccount(id, true);
+    accountSelector.addEventListener('change', () => { void selectAccount(accountSelector.value).catch(error => console.error('[Account] 선택 실패:', error)); });
     addAccountBtn?.addEventListener('click', () => {
         if (typeof window.openAccountEditModal === 'function') {
             window.openAccountEditModal();

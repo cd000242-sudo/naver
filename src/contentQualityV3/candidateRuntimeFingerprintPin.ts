@@ -61,5 +61,9 @@
 //   변환 전 원본에서 읽는다. (B) localFolder:resizeImage 가 AVIF 입력을 JPG 로 낸다.
 //   (C) image.link 를 발행 페이로드 2홉(formAndAutomation·BlogExecutor 4분기)에 싣고,
 //   링크 일괄 적용이 ImageManager 에도 기록해 동기화가 덮어쓰지 못하게 했다.
+// [2026-10-03] v2.11.311 — 확장 리모컨의 앱 계정·실제 카테고리 선택 연동.
+//   신규 렌더러 의존성 ldbDestinationSelection.ts를 런타임 목록에 포함하고,
+//   검토한 브리지·계정 선택·렌더러 배선과 버전 변경을 지문에 반영했다.
+//   발행 증거를 재사용하거나 품질 게이트를 활성화하는 변경은 아니다.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '0a9b7b6ba7d1c38a29ee9a421869a2eb8b2c955aa7569f36ef1b6c4a6170174e' as const;
+  '85dd2b987261c580a36142019c113c5f4208cb74eeec13dfa8f58f7c53f07262' as const;

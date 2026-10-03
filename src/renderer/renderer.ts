@@ -105,6 +105,7 @@ import { shouldRunAutoImageSearch, runAutoImageSearch, injectAutoCollectCheckbox
 // ✅ [2026-01-25 모듈화] 카테고리 모달 유틸리티
 import { initCategorySelectionListener } from './utils/categoryModalUtils.js';
 import { markRealBlogCategoryOption } from './utils/realBlogCategoryPolicy.js';
+import { applyLdbDestination, verifyLdbDestination } from './modules/ldbDestinationSelection.js';
 // ✅ [2026-01-25 모듈화] 앱 이벤트 핸들러
 import { initAllAppEventHandlers } from './utils/appEventsHandler.js';
 // ✅ [2026-01-25 모듈화] 전체 자동 발행 유틸리티
@@ -861,6 +862,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (ldbApi?.onLdbPosts && !(window as any).__ldbPostsBound) {
     (window as any).__ldbPostsBound = true;
     ldbApi.onLdbPosts(createLdbDraftReceiver({
+      applyDestination: (destination) => applyLdbDestination(destination, document, window as any),
+      verifyDestination: (destination) => verifyLdbDestination(destination, document),
       read: () => loadGeneratedPosts(),
       write: (posts) => {
         localStorage.setItem(GENERATED_POSTS_KEY, JSON.stringify(posts));
