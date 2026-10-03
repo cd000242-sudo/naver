@@ -8945,6 +8945,8 @@ const PRESERVE_FIELDS = [
   // ===== 네이버 API =====
   'naverClientId', 'naver-client-id',
   'naverClientSecret', 'naver-client-secret',
+  'naverHubClientId', 'naver-hub-client-id',
+  'naverHubClientSecret', 'naver-hub-client-secret',
   'naverAdApiKey', 'naver-ad-api-key',
   'naverAdSecretKey', 'naverAdCustomerId',
   'naverDatalabClientId', 'naverDatalabClientSecret',

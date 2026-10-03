@@ -43,6 +43,13 @@ test.beforeAll(async () => {
     env: { ...process.env, ...testProfile.env, E2E_TEST: '1' },
   });
   mainWindow = await waitForMainWindow(app);
+  // DOM readiness does not mean the asynchronous application initialization has
+  // bound the editor input listener. This marker is set after that binding.
+  await expect(mainWindow.locator('#refresh-posts-list-btn'))
+    .toHaveAttribute('data-listener-added', 'true', { timeout: 45_000 });
+  await expect.poll(() => mainWindow.evaluate(() =>
+    (document.getElementById('heading-control-panel') as any)?.__bound === true,
+  ), { timeout: 45_000 }).toBe(true);
 });
 
 test.afterAll(async () => {
@@ -64,12 +71,15 @@ test('소제목 편집이 구조 미리보기까지 도달한다', async () => {
      * 고정 대기는 게이트 전체를 돌릴 때(앞선 스위트로 머신이 바쁠 때) 흔들린다 —
      * 실제로 단독 실행은 통과하고 게이트에서만 실패했다. 조건이 참이 될 때까지 폴링한다.
      */
-    const until = async (check: () => boolean, budgetMs = 45000): Promise<void> => {
+    const until = async (stage: string, check: () => boolean, budgetMs = 45000): Promise<void> => {
       const deadline = Date.now() + budgetMs;
       while (Date.now() < deadline) {
         if (check()) return;
         await wait(200);
       }
+      throw new Error(`${stage} did not synchronize within ${budgetMs}ms: ${JSON.stringify({
+        panel: panelTitles(), cards: cards(), headings: structuredTitles(),
+      })}`);
     };
     const previewHtml = () => document.getElementById('unified-integrated-preview')?.innerHTML || '';
     // 구조 미리보기의 소제목 카드 제목만 뽑는다.
@@ -77,13 +87,17 @@ test('소제목 편집이 구조 미리보기까지 도달한다', async () => {
     const panelTitles = () => Array.from(
       document.querySelectorAll('#heading-list input[data-heading-line]'),
     ).map((el) => (el as HTMLInputElement).value);
+    const structuredTitles = () => ((window as any).currentStructuredContent?.headings || [])
+      .map((h: any) => String(h?.title || ''));
+    const matches = (expected: string[]) => [panelTitles(), cards(), structuredTitles()]
+      .every(actual => JSON.stringify(actual) === JSON.stringify(expected));
 
     const textarea = document.getElementById('unified-generated-content') as HTMLTextAreaElement | null;
     if (!textarea) return { error: 'no textarea' };
 
     textarea.value = input.body;
     textarea.dispatchEvent(new Event('input', { bubbles: true }));
-    await until(() => panelTitles().length === 3 && cards().length === 3);
+    await until('Initial input', () => matches(['첫 번째 소제목', '두 번째 소제목', '세 번째 소제목']));
 
     const panelTitlesBefore = panelTitles();
     const cardsBefore = cards();
@@ -92,7 +106,7 @@ test('소제목 편집이 구조 미리보기까지 도달한다', async () => {
     const unmark = document.querySelectorAll('#heading-list button[data-heading-unmark]');
     if (unmark.length < 3) return { error: `panel rows: ${unmark.length}` };
     (unmark[2] as HTMLButtonElement).click();
-    await until(() => cards().length === 2);
+    await until('Unmark third heading', () => matches(['첫 번째 소제목', '두 번째 소제목']));
     const cardsAfterUnmark = cards();
 
     // 2) 이름 수정 — 역시 적용 없이.
@@ -100,14 +114,27 @@ test('소제목 편집이 구조 미리보기까지 도달한다', async () => {
     if (!first) return { error: 'no rename input' };
     first.value = input.renamed;
     first.dispatchEvent(new Event('change', { bubbles: true }));
-    await until(() => cards()[0] === input.renamed);
+    await until('Rename first heading', () => matches([input.renamed, '두 번째 소제목']));
     const cardsAfterRename = cards();
 
     // 3) 적용 버튼.
-    (document.getElementById('heading-apply-to-preview') as HTMLButtonElement | null)?.click();
-    await until(() => cards().length === 2 && cards()[0] === input.renamed);
-    // 적용 뒤 뒤늦게 덮어쓰는 경로가 없는지 한 박자 더 본다.
-    await wait(1200);
+    const apply = document.getElementById('heading-apply-to-preview') as HTMLButtonElement | null;
+    if (!apply) return { error: 'no apply button' };
+    apply.click();
+    await until('Apply edited headings', () => matches([input.renamed, '두 번째 소제목'])
+      && (document.getElementById('unified-preview-section') as HTMLElement | null)?.style.display === 'block');
+    // Apply starts from the already-renamed state. Observe the debounce window
+    // as well, so a delayed analysis cannot silently restore the old headings.
+    const stableUntil = Date.now() + 1200;
+    do {
+      await wait(100);
+      if (!matches([input.renamed, '두 번째 소제목'])
+        || (document.getElementById('unified-preview-section') as HTMLElement | null)?.style.display !== 'block') {
+        throw new Error(`Applied headings changed during stabilization: ${JSON.stringify({
+          panel: panelTitles(), cards: cards(), headings: structuredTitles(),
+        })}`);
+      }
+    } while (Date.now() < stableUntil);
 
     return {
       panelTitlesBefore,
@@ -117,8 +144,7 @@ test('소제목 편집이 구조 미리보기까지 도달한다', async () => {
       cardsAfterRename,
       cardsAfterApply: cards(),
       previewSectionDisplay: (document.getElementById('unified-preview-section') as HTMLElement | null)?.style.display,
-      structuredHeadings: ((window as any).currentStructuredContent?.headings || [])
-        .map((h: any) => String(h?.title || '')),
+      structuredHeadings: structuredTitles(),
     };
   }, { body: BODY, renamed: RENAMED });
 
@@ -126,12 +152,13 @@ test('소제목 편집이 구조 미리보기까지 도달한다', async () => {
 
   expect((report as any).error).toBeUndefined();
   expect((report as any).previewSectionDisplay).toBe('block');
-  expect((report as any).panelTitlesBefore).toHaveLength(3);
+  expect((report as any).panelTitlesBefore).toEqual(['첫 번째 소제목', '두 번째 소제목', '세 번째 소제목']);
   expect((report as any).cardsBefore).toEqual(['첫 번째 소제목', '두 번째 소제목', '세 번째 소제목']);
   // 적용을 누르지 않아도 미리보기가 따라와야 한다.
   expect((report as any).cardsAfterUnmark).toEqual(['첫 번째 소제목', '두 번째 소제목']);
   expect((report as any).cardsAfterRename).toEqual([RENAMED, '두 번째 소제목']);
   // 적용을 눌러도 같은 상태를 유지한다.
   expect((report as any).cardsAfterApply).toEqual([RENAMED, '두 번째 소제목']);
+  expect((report as any).panelTitlesEnd).toEqual([RENAMED, '두 번째 소제목']);
   expect((report as any).structuredHeadings).toEqual([RENAMED, '두 번째 소제목']);
 });
