@@ -17,11 +17,13 @@ export default function GoldenWritingRecommendations({ rows, currentRows, freeNa
     const lockedRecommendations = recommendations.filter(item => !canReadGoldenWriting(item.row, unlocked, freeNames)).length;
     const lockedCandidates = candidates.filter(row => !canReadGoldenWriting(row, unlocked, freeNames)).length;
     const lockedCount = lockedRecommendations + lockedCandidates;
-    return <section aria-labelledby="golden-writing-title" style={{ padding: 'clamp(16px, 3vw, 26px)', margin: '0 0 26px', border: '1px solid #9270ed', borderRadius: 18, background: 'linear-gradient(130deg, #2b2050 0%, #171d36 65%, #173137 100%)', color: '#f4f0ff' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
-            <div><span style={{ color: '#ffe095', fontSize: 12, letterSpacing: 1 }}>오늘의 작성 후보</span><h2 id="golden-writing-title" style={{ margin: '7px 0', fontSize: 'clamp(21px, 4vw, 28px)' }}>★ 근거를 갖춘 글부터</h2></div>
-            <strong style={{ color: '#ffe095', fontSize: 22 }}>별표 추천 {recommendations.length}개</strong>
-        </div>
+    return <details aria-labelledby="golden-writing-title" style={{ padding: 18, margin: '0 0 18px', border: '1px solid #9270ed', borderRadius: 18, background: 'linear-gradient(130deg, #2b2050 0%, #171d36 65%, #173137 100%)', color: '#f4f0ff' }}>
+        <summary style={{ cursor: 'pointer', lineHeight: 1.8 }}>
+            <strong id="golden-writing-title">★ 오늘의 작성 후보</strong>{' '}
+            <span style={{ color: '#ffe095', marginLeft: 8 }}>별표 추천 {recommendations.length}개</span>{' '}
+            <span style={{ color: '#c7c9df', marginLeft: 8 }}>최신 조사 {candidates.length}개</span>
+            <span style={{ color: '#c7c9df', marginLeft: 12, fontSize: 13 }}>후보 보기</span>
+        </summary>
         <p style={{ color: '#c7c9df', lineHeight: 1.7, margin: '8px 0 20px' }}>최근 검색 수요·출처·독자 질문·제목이 함께 준비된 후보만 추천합니다. 별표는 작성 준비 기준이며 수익이나 노출을 보장하지 않습니다.</p>
         {sourceNote && <p style={{ color: '#afbcd4', fontSize: 12 }}>{sourceNote}</p>}
         {recommendations.length === 0 && <div style={{ padding: 16, borderRadius: 12, background: '#ffffff09', border: '1px solid #ffffff21', lineHeight: 1.7 }}><strong>지금은 별표 추천 기준을 모두 충족한 글감이 없습니다.</strong><div style={{ color: '#c7c9df' }}>최신 조사 후보와 아래 탐색 목록에서 재료를 살펴보세요. 출처나 작성 방향이 부족한 글감에 별표를 붙여 채우지 않습니다.</div></div>}
@@ -52,5 +54,5 @@ export default function GoldenWritingRecommendations({ rows, currentRows, freeNa
             {lockedCandidates > 0 && <p style={{ padding: 16, borderRadius: 12, background: '#ffffff08' }}>최신 조사 후보 {lockedCandidates}개는 라이선스 등록 후 확인할 수 있습니다.</p>}
         </div>}
         {lockedCount > 0 && <LicenseGate onUnlock={onUnlock} remaining={lockedCount} />}
-    </section>;
+    </details>;
 }

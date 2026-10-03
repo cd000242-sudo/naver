@@ -28,11 +28,12 @@ export default function GoldenTrendCandidates({ rows, unlocked, onUnlock, onAnal
     now: number;
 }) {
     if (rows.length === 0) return null;
-    return <section aria-label="경제·지원금 트렌드 후보" style={{ margin: '18px 0', padding: 18, border: '1px solid #3e547d', borderRadius: 16, background: 'linear-gradient(120deg, #172842, #222039)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
-            <h3 style={{ margin: 0, color: '#d6edff' }}>↗ 경제·지원금 트렌드 후보</h3>
+    return <details aria-label="경제·지원금 트렌드 후보" style={{ margin: '18px 0', padding: 18, border: '1px solid #3e547d', borderRadius: 16, background: 'linear-gradient(120deg, #172842, #222039)' }}>
+        <summary style={{ cursor: 'pointer', color: '#d6edff', lineHeight: 1.8 }}>
+            <strong>↗ 경제·지원금 트렌드 후보</strong>{' '}
             <strong style={{ color: '#80dfff' }}>{rows.length}개</strong>
-        </div>
+            <span style={{ marginLeft: 12, color: '#bacbe4', fontSize: 13 }}>후보 보기</span>
+        </summary>
         <p style={{ margin: '8px 0', color: '#bacbe4' }}>검색 수요 상승 · 황금키워드 통과 여부 별도</p>
         <p className="lw-write-hint">최근 수요가 늘어난 주제입니다. 경쟁이 높은 후보도 포함되므로 대상·신청 조건·지역을 좁혀 작성할 틈을 확인하세요.</p>
         {!unlocked ? <>
@@ -66,5 +67,5 @@ export default function GoldenTrendCandidates({ rows, unlocked, onUnlock, onAnal
                 </article>;
             })}
         </div>}
-    </section>;
+    </details>;
 }
