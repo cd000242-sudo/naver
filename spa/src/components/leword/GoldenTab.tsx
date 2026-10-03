@@ -15,6 +15,9 @@ import { BoardFreshness } from './BoardFreshness';
 import ExternalTrafficBoard, { type ReferenceRow } from './ExternalTrafficBoard';
 import { preemptionIndex, TIER_ORDER } from '../../lib/preemptionIndex';
 import { goldenMeasurementLabel, matchesGoldenFocus, recentRiseRatio, summarizeGoldenFocus, type GoldenFocus } from '../../lib/goldenFocusModel';
+import GoldenWritingRecommendations from './GoldenWritingRecommendations';
+import { loadSavedBoard, boardSourceNote } from '../../lib/boardBridge';
+import { currentGoldenBriefRows } from '../../lib/goldenCurrentBriefs';
 import GoldenTrendCandidates, { type GoldenTrendCandidate } from './GoldenTrendCandidates';
 
 /**
@@ -73,6 +76,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     /** 크게 보는 수요 그래프의 대상 키워드. 한 번에 하나만 연다. */
     const [chartKeyword, setChartKeyword] = useState('');
     const { mindmap, openMindmap } = useMindmap();
+    const [currentBriefs, setCurrentBriefs] = useState<unknown>(null);
+    const [currentBriefSource, setCurrentBriefSource] = useState('');
 
     /*
      * 그래프 — 앱의 30일 트렌드와 같은 실측을 웹에 그린다. 앱이 꺼져 있으면
@@ -85,6 +90,9 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         let lastEnrichedAt = '';
         const load = () => {
             setNow(Date.now());
+            loadSavedBoard('topic-briefs')
+                .then(result => { if (alive && result.board) { setCurrentBriefs(result.board); setCurrentBriefSource(boardSourceNote(result)); } })
+                .catch(() => { /* Keep the last verified payload; the quality gate checks its age. */ });
             fetch(BOARD_URL, { cache: 'no-store' })
                 .then((response) => (response.ok ? response.json() : Promise.reject(new Error('no board'))))
                 .then((data) => {
@@ -139,6 +147,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         [board],
     );
 
+    const currentRows = useMemo(() => currentGoldenBriefRows(currentBriefs, now), [currentBriefs, now]);
     const focusSummary = useMemo(() => summarizeGoldenFocus(board?.rows || [], now), [board, now]);
     const trendCandidates = useMemo(() => (Array.isArray(board?.trendCandidates) ? board.trendCandidates : []).filter((row) =>
         matchesGoldenFocus(row, 'economy', now) && matchesGoldenFocus(row, 'rising', now)
@@ -313,7 +322,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         <>
             <TabIntro
                 title="리더남 전용 황금키워드"
-                desc="비즈니스·경제와 지원금 키워드를 먼저 살펴보세요. 최근 상승은 직전 7일 대비 최근 7일의 검색 수요가 20% 이상 늘고, 검색결과도 최근 7일 안에 확인한 경우만 표시합니다. 고단가 상승은 여기에 네이버 광고 3위 입찰가 3,000원 이상을 함께 충족한 키워드입니다."
+                desc="지금 쓸 글감은 출처와 작성 방향까지 확인하고, 장기·계절성 키워드는 따로 탐색하세요. 검색량·문서량 비율만으로 작성이나 수익을 추천하지 않습니다."
                 /* 어떤 도구로 재는지는 밝히지 않는다(사장님 2026-08-20) — 잰 사실만 적는다. */
                 source={`검색결과 직접 확인${publishedLabel ? ` · ${publishedLabel} 발행` : ''}${board?.verified ? ` · ${board.verified}건 검증` : ''}`}
             />
@@ -345,6 +354,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 </div>
             )}
 
+            {(board || currentRows.length > 0) && <GoldenWritingRecommendations rows={board?.rows || []} currentRows={currentRows} sourceNote={currentBriefSource} freeNames={freeNames} unlocked={unlocked} now={now} onUnlock={() => setUnlocked(true)} onAnalyze={onAnalyze} />}
+
             {status === 'ready' && board && (
                 <>
                     {/*
@@ -353,9 +364,12 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                       * 키워드를 발견하러 오는 곳이지 아는 것을 찾으러 오는 곳이 아니다.
                       * 주제·레인 고르개가 추리는 일을 한다.
                       */}
+
+                    <h2 style={{ fontSize: 21, margin: '24px 0 8px' }}>탐색·계절성 키워드</h2>
+                    <p className="lw-write-hint">검색 지표와 계절성으로 찾은 보관 목록입니다. 모든 항목이 바로 작성할 수 있는 추천 글감은 아닙니다.</p>
                     <div className="lw-toolbar">
                         <span className="lw-count">
-                            황금키워드 통과 {rows.length}개 · 주제 {board.topicsWithRows ?? topics.length}/{board.topicsTotal ?? 32}종
+                            탐색 후보 {rows.length}개 · 주제 {board.topicsWithRows ?? topics.length}/{board.topicsTotal ?? 32}종
                         </span>
                     </div>
 
@@ -391,7 +405,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
                     <GoldenTrendCandidates rows={trendCandidates} unlocked={unlocked} now={now}
                         onUnlock={() => setUnlocked(true)} onAnalyze={onAnalyze} />
-                    {trendCandidates.length > 0 && <h3 style={{ margin: '22px 0 12px' }}>황금키워드 통과 목록 · {rows.length}개</h3>}
+                    {trendCandidates.length > 0 && <h3 style={{ margin: '22px 0 12px' }}>탐색·계절성 목록 · {rows.length}개</h3>}
 
                     {!unlocked && rows.length > FREE_BOARD_ROWS && (
                         <LicenseGate
@@ -425,6 +439,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                              * 실측된 행에만 **덧붙인다**.
                              */
                             row={row}
+                            titleReview
                             headTags={<>
                                 <span className="lw-surface-tag">{row.topic}</span>
                                 <span className="lw-slot-basis">{goldenMeasurementLabel(row, now)}</span>

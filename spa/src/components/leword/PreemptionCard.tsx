@@ -1,3 +1,4 @@
+import { safeGoldenTitle } from '../../lib/goldenEditorialModel.mjs';
 import type { ReactNode } from 'react';
 import type { ShortTermTrend } from '../../lib/goldenFocusModel';
 import BoardCardHead from './BoardCardHead';
@@ -130,7 +131,7 @@ export type PreemptionRow = {
         hasAiBriefing?: boolean;
         sampledTitles: number;
         exactTitleHits: number;
-        partialTitleHits: number;
+        partialTitleHits?: number;
         /** 상단 파워링크 광고 건수(실측). 없으면 못 잰 회차다. */
         adCount?: number | null;
         /** 황금 행만 잰다. 이슈 행의 자리 실측(블로그탭 상위 10 제목 판정)에는 없다. */
@@ -168,6 +169,7 @@ export type MindmapEntry = {
 
 type Props = {
     observation?: boolean;
+    titleReview?: boolean;
     row: PreemptionRow;
     rank: number;
     locked: boolean;
@@ -187,8 +189,10 @@ type Props = {
 
 function PreemptionCard({
     row, rank, locked, copied, onCopy, planOpen, onTogglePlan, onOpenChart, mindmap, onMindmap, onAnalyze,
-    variant = 'golden', headTags, observation = false,
+    variant = 'golden', headTags, observation = false, titleReview = false,
 }: Props) {
+    const reviewedSeo = titleReview ? safeGoldenTitle(row, row.titles?.seo?.text) : row.titles?.seo?.text;
+    const reviewedHome = titleReview ? safeGoldenTitle(row, row.titles?.home?.text) : row.titles?.home?.text;
     return (
                 <article className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
                     <BoardCardHead
@@ -452,16 +456,17 @@ function PreemptionCard({
                       * 전부 회차 실측에서 조립된 값이고, 옛 회차 데이터에는 없으므로
                       * 있을 때만 그린다. 서브는 마인드맵 확장의 시작점이다.
                       */}
+                    {!observation && titleReview && !reviewedSeo && <p className="lw-write-hint">제목 재작성 필요 · 일반형·근거 없는 체험·주제 혼합 제목은 추천하지 않습니다.</p>}
                     {!observation && (row.titles?.seo || row.titles?.home || (row.subKeywords?.length ?? 0) > 0) && (
                         <div className="lw-forge">
-                            {row.titles?.seo && (
-                                <div className="lw-forge-title" title={row.titles.seo.basis || ''}>
-                                    <span>SEO 제목</span>{row.titles.seo.text}
+                            {reviewedSeo && (
+                                <div className="lw-forge-title" title={row.titles?.seo?.basis || ''}>
+                                    <span>SEO 제목</span>{reviewedSeo}
                                 </div>
                             )}
-                            {row.titles?.home && (
-                                <div className="lw-forge-title" title={row.titles.home.basis || ''}>
-                                    <span>홈판 제목</span>{row.titles.home.text}
+                            {reviewedHome && (
+                                <div className="lw-forge-title" title={row.titles?.home?.basis || ''}>
+                                    <span>홈판 제목</span>{reviewedHome}
                                 </div>
                             )}
                             {(row.subKeywords?.length ?? 0) > 0 && (
