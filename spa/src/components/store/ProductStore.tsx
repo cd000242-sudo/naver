@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../../lib/pricingSchedule';
 import { fetchSiteContent } from '../../lib/siteOps';
 import {
@@ -107,6 +108,29 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
     const [recurringConsent, setRecurringConsent] = useState(false);
     const lewordSubscription = term === 'monthly' && picked.length === 1 && picked[0].id === 'leword';
     useEffect(() => { setRecurringConsent(false); }, [term, totalCard, cart.join(',')]);
+    useEffect(() => {
+        if (!payOpen) return;
+        const previousFocus = document.activeElement as HTMLElement | null;
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        document.querySelector<HTMLInputElement>('.st-pay-mail input')?.focus();
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') { event.preventDefault(); setPayOpen(false); }
+            if (event.key !== 'Tab') return;
+            const focusable = document.querySelector('.st-pay')?.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled)');
+            if (!focusable?.length) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+            else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        };
+        document.addEventListener('keydown', onKeyDown);
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            document.removeEventListener('keydown', onKeyDown);
+            previousFocus?.focus();
+        };
+    }, [payOpen]);
     useEffect(() => {
         if (!onPick) return;
         onPick(picked.length === 0 ? null : {
@@ -300,7 +324,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                         <button type="button" className="st-cart-go" onClick={() => setPayOpen(true)}>결제하기</button>
                     </div>
 
-                    {payOpen && (
+                    {payOpen && typeof document !== 'undefined' && createPortal(
                         /*
                          * 담기부터 결제까지 **한 자리에서** 끝낸다(사장님 지적 2026-08-21
                          * "가격표랑 아래 이메일이랑 합쳐야 되지 않니").
@@ -310,7 +334,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                          * 라이선스를 받는 유일한 통로인데, 그게 흐름 밖에 떨어져 있었다.
                          * 창 안에서 담은 내역·이메일·수단을 다 보이게 두고 여기서 끝낸다.
                          */
-                        <div className="st-pay-backdrop" role="dialog" aria-modal="true" aria-label="결제" onClick={() => setPayOpen(false)}>
+                        <div className="st st-pay-backdrop" role="dialog" aria-modal="true" aria-label="결제" onClick={() => setPayOpen(false)}>
                             <div className="st-pay" onClick={(event) => event.stopPropagation()}>
                                 <div className="st-pay-head">
                                     <b>결제</b>
@@ -377,7 +401,8 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                     코드 발급 후 7일 이내 미사용이면 전액 환불됩니다 · 결제 진행 시 이용약관과 개인정보처리방침에 동의하는 것으로 봅니다.
                                 </p>
                             </div>
-                        </div>
+                        </div>,
+                        document.body,
                     )}
                     {showSwap && savedByBundle > 0 && (
                         <div className="st-swap">

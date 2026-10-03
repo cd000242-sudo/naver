@@ -6,17 +6,20 @@ import { createRequire } from 'node:module';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 const require = createRequire(import.meta.url);
+const portalTargets=[];
+const documentStub={body:{style:{}},activeElement:null,querySelector:()=>null,addEventListener:()=>{},removeEventListener:()=>{}};
 function load(path, hooks) {
  const url = new URL(path, import.meta.url);
  const code = ts.transpileModule(fs.readFileSync(url,'utf8'), {compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2020}}).outputText;
  const output={exports:{}};
- new Function('require','module','exports',code)((id)=>{
+ new Function('require','module','exports','document',code)((id)=>{
   if(id==='react'&&hooks)return hooks;
+  if(id==='react-dom')return {createPortal:(children,target)=>{portalTargets.push(target);return children;}};
   if(id.endsWith('/siteOps'))return {fetchSiteContent:()=>Promise.resolve(null)};
   if(id==='./StoreStyles')return {default:()=>null};
   if(id.startsWith('.')){for(const ext of ['','.tsx','.ts']){const resolved=new URL(id+ext,url);if(fs.existsSync(resolved)&&fs.statSync(resolved).isFile())return load(resolved);}}
   return require(id);
- },output,output.exports);
+ },output,output.exports,documentStub);
  return output.exports;
 }
 const catalog=load('../src/lib/productCatalog.ts');
@@ -98,4 +101,16 @@ test('unchanged cart does not notify the parent on every render',()=>{
  const onPick=()=>calls++;
  for(let i=0;i<3;i++){index=0;pending=[];Store({onPick});for(const effect of pending)effect();}
  assert.equal(calls,1);
+});
+
+
+test('checkout dialog mounts on document body beyond the filtered pricing container',()=>{
+ portalTargets.length=0;
+ const {html}=render(['leword'],true);
+ assert.equal(portalTargets.length,1);
+ assert.equal(portalTargets[0],documentStub.body);
+ assert.match(html,/class="st st-pay-backdrop"/);
+ const styles=fs.readFileSync(new URL('../src/components/store/StoreStyles.tsx',import.meta.url),'utf8');
+ assert.match(styles,/max-height: calc\(100dvh - 36px\)/);
+ assert.match(styles,/overflow-y: auto/);
 });

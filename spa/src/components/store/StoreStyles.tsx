@@ -259,11 +259,12 @@ function StoreStyles() {
 
             /* ── 결제수단 고르기 모달 ─────────────────────── */
             .st-pay-backdrop {
-                position: fixed; inset: 0; z-index: 80; display: grid; place-items: center;
+                position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center;
                 background: rgba(4, 6, 12, .68); backdrop-filter: blur(6px); padding: 18px;
             }
             .st-pay {
                 width: min(440px, 100%); border-radius: 18px; padding: 22px;
+                max-height: calc(100vh - 36px); max-height: calc(100dvh - 36px); overflow-y: auto; overscroll-behavior: contain;
                 background: #10131c; border: 1px solid rgba(255,255,255,.1);
                 box-shadow: 0 24px 70px rgba(0,0,0,.5);
             }
