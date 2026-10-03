@@ -18,12 +18,31 @@ function load(file, overrides={}) {
  new Function('require','exports','module',js)(id=> {
   if(id in overrides)return overrides[id];
   if(id.endsWith('.css'))return {};
+  // Preference transport has its own suite; saved-board tests isolate this boundary.
+  if(id==='./boardPreferences')return {syncBoardPreference:async()=>{}};
   if(id==='./boardFallback'||id==='../lib/boardFallback')return load('lib/boardFallback.ts');
   return require(id);
  },mod.exports,mod);
  return mod.exports;
 }
 async function withFetch(fn, run) {const original=globalThis.fetch;globalThis.fetch=fn;try{await run();}finally{globalThis.fetch=original;}}
+
+test('글감 조회만 엔진 설정을 동기화하고 설정 응답을 기다리지 않고 저장본을 읽는다', async()=>{
+ const calls=[];let syncs=0;const pending=deferred();
+ const bridge=load('lib/boardBridge.ts',{
+  './bridge':{bridgeCall:async(path,options)=>{calls.push([path,options]);return ok(board());}},
+  './boardPreferences':{syncBoardPreference:()=>{syncs++;return pending.promise;}},
+ });
+ try {
+  await withFetch(async()=>({ok:false}),async()=>{
+   const result=await bridge.loadSavedBoard('topic-briefs');
+   assert.equal(result.source,'app');assert.equal(syncs,1);
+   await bridge.loadSavedBoard('issue-niche');await bridge.loadSavedBriefTitles();
+   assert.equal(syncs,1);
+   assert.deepEqual(calls,[['/v1/bridge/boards/topic-briefs',undefined],['/v1/bridge/boards/issue-niche',undefined],['/v1/bridge/boards/brief-titles',undefined]]);
+  });
+ } finally {pending.resolve();}
+});
 
 test('깨진 공개 JSON이어도 정상 앱 저장본을 읽으며 AI 경로는 호출하지 않는다', async()=>{
  const calls=[];
