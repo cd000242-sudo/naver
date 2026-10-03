@@ -1,19 +1,131 @@
 {
-  "publishedAt": "2026-10-03T09:39:15.799Z",
+  "publishedAt": "2026-10-03T21:27:51.055Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 227,
+    "candidates": 216,
     "niche": 1,
-    "preemption": 8,
+    "preemption": 7,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-03",
-    "keywords": []
+    "day": "2026-10-04",
+    "keywords": [
+      "김혜성 복근",
+      "인셉션 쿠키",
+      "박지만 회장"
+    ]
   },
   "rows": [
+    {
+      "keyword": "박지만 회장",
+      "issue": "박지만",
+      "topic": "박지만",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "박지만 암살자들 무슨 관계? 육영수 피격 당시 직접 밝힌 기억",
+          "박지만 “우리 아버지가 그렇게 미운가”…‘암살자들’ 직접 본 황현필은 말할 자격 없다!",
+          "\"우리 아버지가 그렇게 미운가요?\" 박정희 아들 박지만 암살자들 유족 솔직 심경 밝혀 | 박지만 누구? 나이 가족 결혼 아내 자녀 누나 박근혜 인스타",
+          "박지만 “아버지가 그렇게 소리 내어 우는 모습 처음 봤다”…육영수 피격 사건 회고",
+          "‘암살자(들)’ 논란에 입 연 박지만",
+          "박지만 “어머니 돌아가신 날, 아버지가 소리 내어 우는 모습 처음 봤다”…‘암살자(들)’ 논란에 입 열었다",
+          "암살자들 논란 입장 한눈에 정리｜박지만 반박부터 여야·황현필 발언까지",
+          "“우리 아버지가 그렇게 미운가” 박지만, ‘암살자들’ 논란에 결국 입 열었다",
+          "“아버지가 그렇게 우는 모습 처음 봤다”박지만, 영화 ‘암살자(들)’ 논란에 처음 입 열었다",
+          "박지만 “우리 아버지가 그렇게 미운가”…영화 ‘암살자(들)’ 논란과 52년 전 그날"
+        ],
+        "measuredAt": "2026-10-03T21:26:00.022Z"
+      },
+      "documentCount": 5615,
+      "documentCountMeasured": true,
+      "searchVolume": 4690,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "stable",
+      "demandRatio": 1.1404486330305756,
+      "issueStatus": "rising",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 4,690",
+        "문서수 5,615",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 4,690 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 173,
+      "kinTop": [
+        {
+          "title": "박정희 대통령의 외아들 박지만 EG회장이 결혼적령기에 결혼....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61303&docId=491382890&answerNo=1",
+          "views": 42,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-03T21:25:41.838Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2"
+    },
     {
       "keyword": "김혜성 복근",
       "issue": "김혜성",
@@ -106,14 +218,48 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": null,
+      "trend": {
+        "series": [
+          51,
+          60,
+          100,
+          62,
+          26,
+          23,
+          19,
+          21,
+          30,
+          19,
+          0,
+          0,
+          0,
+          17,
+          0,
+          21,
+          0,
+          0,
+          0,
+          15,
+          0,
+          13,
+          13,
+          11,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "measuredAt": "2026-10-03T21:27:51.842Z"
+      },
       "kinCount": 6,
       "kinTop": [],
       "monetize": null,
       "measuredAt": "2026-10-03T09:38:03.728Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2"
+      "kinMode": "date-views-v2",
+      "carried": true
     },
     {
       "keyword": "인셉션 쿠키",
@@ -235,7 +381,7 @@
           0,
           18
         ],
-        "measuredAt": "2026-10-03T09:39:16.593Z"
+        "measuredAt": "2026-10-03T21:27:51.842Z"
       },
       "kinCount": 42,
       "kinTop": [
@@ -248,336 +394,6 @@
       ],
       "monetize": null,
       "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
-    },
-    {
-      "keyword": "삼척시청 여자핸드볼",
-      "issue": "삼척시청",
-      "topic": "삼척시청",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "여자핸드볼 금메달 8년 만의 정상 탈환",
-          "2026 아시안게임 여자 핸드볼 8년 만에 정상 탈환",
-          "'아시안게임 국가대표 금메달' 핸드볼 김민서 프로필 누구? '160cm 막내' 소속팀 플레이스타일 포지션 연봉 나무위키 총정리",
-          "여자핸드볼 금메달 8년 만에 정상 탈환",
-          "여자핸드볼 금메달 일본 꺾고 8년 만에 정상 탈환",
-          "여자 핸드볼 아시안게임 금메달 8년 만의 정상 탈환",
-          "160cm 작은 거인이 해냈다…22세 김민서 누구? 일본 꺾고 여자핸드볼 AG 금메달",
-          "[아이치·나고야 AG] 여자 핸드볼 첫판부터 48골 폭격! 이원정·전지연 맹활약과 숙적 일본전 로드맵",
-          "3년 전 10점 차 완패, 일본 안방에서 되갚은 여자 핸드볼",
-          "여자핸드볼 금메달 8년 만의 정상 탈환"
-        ],
-        "measuredAt": "2026-10-01T21:19:59.638Z"
-      },
-      "documentCount": 1559,
-      "documentCountMeasured": true,
-      "searchVolume": 1140,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 1,140",
-        "문서수 1,559",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 1,140 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.0배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          1,
-          100,
-          0,
-          0,
-          0,
-          1
-        ],
-        "label": "📉 단발성",
-        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-10-03T09:39:16.593Z"
-      },
-      "kinCount": 37,
-      "kinTop": [
-        {
-          "title": "여자 핸드볼 시즌이 어떻게 되나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=100109&docId=398138251&answerNo=1",
-          "views": 1257,
-          "answers": 1
-        },
-        {
-          "title": "여자 핸드볼 역대 리그 성적 궁금합니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=100109&docId=379301015&answerNo=1",
-          "views": 364,
-          "answers": 1
-        },
-        {
-          "title": "여자핸드볼선수이름ㅠㅠ",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010405&docId=341183321&answerNo=1",
-          "views": 238,
-          "answers": 1
-        },
-        {
-          "title": "여자핸드볼경기",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=100109&docId=258990648&answerNo=1",
-          "views": 214,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-01T21:19:21.450Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
-    },
-    {
-      "keyword": "이시언 아기",
-      "issue": "이시언",
-      "topic": "이시언",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "유전자 진짜 대박! 이시언♥서지승 4개월 아들 공개｜누굴 닮았나 봤더니",
-          "10년 전 만난 이시언이 아빠로…아들 처음 본 한혜진 반응",
-          "“애기 이시언이 또 있네”…생후 4개월 아들 사진에 쏟아진 반응",
-          "이시언♥서지승, 각방 생활 고백…새벽 6시 아내 깼는데 “못 뜨는 척했다”",
-          "“각방 씁니다” 이시언♥서지승, 아들 태어난 후 달라진 부부 생활…이유 들어보니",
-          "“이젠 진짜 아빠라니…” 한혜진, 이시언♥서지승 2세 만나 찐 이모 미소…“똑같이 생겨",
-          "이시언 서지승 각방 생활 고백, 불화가 아닌 출산 후 육아 현실인 이유",
-          "이시언, 서지승과 각방 육아 고백 “못 뜨는 척도” 비 반응",
-          "이시언 서지승 부부 아들 사진, 첫 아들은 엄마 닮는다는 말 진짜일까?",
-          "이시언♥서지승 생후 4개월 아들 공개…“아빠 판박이” 솔민 군, 결혼 4년여 만에 찾아온 행복"
-        ],
-        "measuredAt": "2026-10-01T21:20:13.179Z"
-      },
-      "documentCount": 2363,
-      "documentCountMeasured": true,
-      "searchVolume": 680,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.5774003428300969,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 680",
-        "문서수 2,363",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 680 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.6배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          3,
-          3,
-          5,
-          5,
-          5,
-          5,
-          6,
-          4,
-          4,
-          40,
-          44,
-          8,
-          10,
-          9,
-          13,
-          11,
-          8,
-          5,
-          6,
-          5,
-          7,
-          5,
-          3,
-          6,
-          7,
-          3,
-          2,
-          38,
-          100
-        ],
-        "label": "🚀 떡상",
-        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-10-03T09:39:16.593Z"
-      },
-      "kinCount": 40,
-      "kinTop": [
-        {
-          "title": "이시언 임신 축하 파티, 서지승 위한 깜짝 이벤트 있었나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30104&docId=491446762&answerNo=1",
-          "views": 65,
-          "answers": 1
-        },
-        {
-          "title": "출산 앞둔 이시언 부부, 주변 반응은 어떤가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8010501&docId=493363550&answerNo=2",
-          "views": 62,
-          "answers": 2
-        },
-        {
-          "title": "이시언 아기침대",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8050102&docId=493720294&answerNo=0",
-          "views": 52,
-          "answers": null
-        },
-        {
-          "title": "이시언♥서지승 커플, 임신 축하 파티에서 가장 인상 깊었던....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30104&docId=491446713&answerNo=1",
-          "views": 45,
-          "answers": 1
-        },
-        {
-          "title": "이시언의 '태어난 김에 세계일주4'에서의 2세 바람, 현실이 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010203&docId=491084013&answerNo=1",
-          "views": 45,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-01T21:19:21.450Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "kinMode": "date-views-v2",
@@ -633,7 +449,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-03T09:38:03.728Z",
+      "measuredAt": "2026-10-03T21:25:41.838Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -685,7 +501,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-03T09:38:03.728Z",
+      "measuredAt": "2026-10-03T21:25:41.838Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -737,7 +553,7 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-03T09:38:03.728Z",
+      "measuredAt": "2026-10-03T21:25:41.838Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -800,7 +616,166 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-03T09:38:03.728Z",
+      "measuredAt": "2026-10-03T21:25:41.838Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뮤즈 가젯",
+      "issue": "뮤즈 가젯",
+      "topic": "뮤즈 가젯",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 137,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 137",
+        "선점 후보 — 경쟁 문서 137건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 14,
+      "kinTop": [
+        {
+          "title": "한성 gadget10, 아이뮤즈 뮤패드10.1 주연테크 j tab2",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010703&docId=214834870&answerNo=0",
+          "views": 59,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-03T21:25:41.838Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "버블쉐어 채용",
+      "issue": "버블쉐어",
+      "topic": "버블쉐어",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 178,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 178",
+        "선점 후보 — 경쟁 문서 178건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-03T21:25:41.838Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "엄지성 결승골 기여",
+      "issue": "엄지성 결승골 기여",
+      "topic": "엄지성 결승골 기여",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 255,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 255",
+        "선점 후보 — 경쟁 문서 255건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-03T21:25:41.838Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -867,62 +842,8 @@
       "monetize": null,
       "measuredAt": "2026-10-03T09:38:03.728Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "뮤즈 가젯",
-      "issue": "뮤즈 가젯",
-      "topic": "뮤즈 가젯",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 133,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 133",
-        "선점 후보 — 경쟁 문서 133건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 14,
-      "kinTop": [
-        {
-          "title": "한성 gadget10, 아이뮤즈 뮤패드10.1 주연테크 j tab2",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010703&docId=214834870&answerNo=0",
-          "views": 56,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-03T09:38:03.728Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "김주형 AG 골프",
@@ -974,59 +895,8 @@
       "monetize": null,
       "measuredAt": "2026-10-03T09:38:03.728Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "버블쉐어 채용",
-      "issue": "버블쉐어",
-      "topic": "버블쉐어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 177,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 177",
-        "선점 후보 — 경쟁 문서 177건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-03T09:38:03.728Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오예진 변호사",
@@ -2622,631 +2492,82 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "삼척시청 대학생 아르바이트",
-      "issue": "삼척시청",
-      "topic": "삼척시청",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 244,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 244",
-        "선점 후보 — 경쟁 문서 244건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T21:19:21.450Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "OCE 오픈클로",
-      "issue": "OCE",
-      "topic": "OCE",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 AI 에이전트 제어 플랫폼 OCE 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "OCE 오픈클로 엔터프라이즈 기업용 AI 에이전트 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "OCE 오픈클로 공개됐다는데 에이전트 제어가 생각보다 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오픈클로 OCE",
-      "issue": "오픈클로",
-      "topic": "오픈클로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 에이전트 플랫폼 엔터프라이즈 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈클로 OCE 기업용 AI 에이전트 제어, 퓨전 클로와 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오픈클로 OCE 공개됐는데 오라클 퓨전 클로랑 뭐가 다른지 많이들 헷갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "머큐리 보이스 인셉션",
-      "issue": "머큐리 보이스",
-      "topic": "머큐리 보이스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 11,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 11",
-        "선점 후보 — 경쟁 문서 11건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "인셉션이 확산 모델 기반 음성 에이전트 머큐리 보이스 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "머큐리 보이스 인셉션 확산 모델 음성 에이전트 정체",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "머큐리 보이스 인셉션이 굳이 확산 모델을 꺼낸 이유 다들 놓치더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "전종민 중수청 차장",
-      "issue": "전종민 중수청 차장",
-      "topic": "전종민 중수청 차장",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 27,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 27",
-        "선점 후보 — 경쟁 문서 27건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "전종민이 초대 중수청 차장에 임명",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "전종민 중수청 차장에 최재민·임은정까지 초대 인선 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "전종민 중수청 차장 됐는데 중수청 조직도 보니까 자리 애매하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "중수청 조직도",
-          "searchVolume": 420,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "중수청 조직도",
-          "searchVolume": 420,
-          "documentCount": 4569,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "머큐리 보이스 지연시간",
-      "issue": "머큐리 보이스",
-      "topic": "머큐리 보이스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 83,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 83",
-        "선점 후보 — 경쟁 문서 83건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "인셉션이 확산 모델 기반 음성 에이전트 머큐리 보이스 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "머큐리 보이스 지연시간, 확산 모델로 얼마나 줄었나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "머큐리 보이스 지연시간이 확산 모델 덕이라는데 써보니 체감이 의외로 다르네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "윤규성 품새 금메달!",
-      "issue": "윤규성 품새 금메달!",
-      "topic": "윤규성 품새 금메달!",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 138,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 138",
-        "선점 후보 — 경쟁 문서 138건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "윤규성이 태권도 품새 남자 개인전 금메달로 3연패 달성",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "윤규성 품새 금메달! 남자 개인전 3연패 기록",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "윤규성 품새 금메달! 윤규성 태권도 프로필 찾아보다 손이 멈췄네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "윤규성 프로필",
-          "searchVolume": 300,
-          "frame": "generic"
-        },
-        {
-          "keyword": "태권도 품새 금메달",
-          "searchVolume": 30,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤규성 태권도",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "윤규성 프로필",
-          "searchVolume": 300,
-          "documentCount": 12,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "태권도 품새 금메달",
-          "searchVolume": 30,
-          "documentCount": 8948,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤규성 태권도",
-          "searchVolume": 10,
-          "documentCount": 264,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "OCE 요금",
-      "issue": "OCE",
-      "topic": "OCE",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "기업 도입 비용",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 115,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 115",
-        "선점 후보 — 경쟁 문서 115건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 기업 도입 비용"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 AI 에이전트 제어 플랫폼 OCE 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "OCE 요금 오픈클로 기업용 AI 에이전트 플랫폼 도입 비용",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "OCE 요금 궁금해서 들어갔다가 결제 전에 한참을 망설이게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 10,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "OCE 플랫폼",
-      "issue": "OCE",
-      "topic": "OCE",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 190,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 190",
-        "선점 후보 — 경쟁 문서 190건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 AI 에이전트 제어 플랫폼 OCE 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "OCE 플랫폼 오픈클로 엔터프라이즈 기업용 에이전트 제어 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "OCE 플랫폼 오픈클로가 공개한 기업용 에이전트 제어 직접 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "박지만",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "박지만 입 열었다…“우리 아버지 그리 미운가”",
+          "press": "ichannela.com",
+          "publishedAt": "2026-10-03T09:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/449/0000362908?sid=100"
+        },
+        {
+          "title": "박지만 \"그렇게 소리 내 우는 모습 처음 봤다…아버지가 그렇게 미운가...",
+          "press": "weekly.chosun.com",
+          "publishedAt": "2026-10-03T14:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/053/0000061980?sid=102"
+        },
+        {
+          "title": "박지만 “가슴 들썩이도록 울던 아버지, 그날 처음 봤다”",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-02T15:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004001921?sid=110"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "박지만 회장",
+          "searchVolume": 4690,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지만 암살자들",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지만 자녀",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "암살자들 박지만",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지만 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지만 암살자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지만 근황",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지만 부인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
     {
       "issue": "김혜성",
       "issueType": "fresh",
@@ -3317,7 +2638,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 1
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "인셉션",
@@ -3390,216 +2712,6 @@
       ],
       "nextWave": [],
       "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "삼척시청",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "삼척시, 아시안게임 금메달 핸드볼 선수단에 포상금 4천200만원",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T06:32:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/001/0016351047"
-        },
-        {
-          "title": "삼척시, 아시안게임 금메달 여자핸드볼 국가대표 6명에 포상금",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-01T06:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014227617?sid=102"
-        },
-        {
-          "title": "삼척시, 아시안게임 金 여자 핸드볼 대표 6명에 1인당 700만 원 포상금",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-01T07:47:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/448/0000642544"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "삼척시청 핸드볼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼척시청 민원실",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼척시청 맛집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼척시청 교통과",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼척시청 일자리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼척시청 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼척시청 여자핸드볼",
-          "searchVolume": 1140,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "삼척시청 구인구직",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "이시언",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "이시언♥서지승, 5월 득남했는데 둘째 계획?…“더 갖고 싶어”",
-          "press": "sports.donga.com",
-          "publishedAt": "2026-10-01T14:10:00.000Z",
-          "link": "https://m.entertain.naver.com/article/382/0001296823"
-        },
-        {
-          "title": "“둘째 갖고 싶다” 이시언♥서지승, 득남 이후 전한 솔직한 자녀 계획",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-10-01T15:27:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001141737"
-        },
-        {
-          "title": "\"아빠 품이 지상낙원\"…이시언, 4개월 아들 재우는 초보아빠에 '♥서지...",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-10-01T06:34:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004451805"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "이시언 블랙샴푸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이시언 샴푸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이시언 샴푸 후기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이시언 와이프",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이시언 아기",
-          "searchVolume": 680,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이시언 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "동국대 이시언",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이시언 집",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "윤규성 품새 금메달!",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "윤규성이 태권도 품새 남자 개인전 금메달로 3연패 달성",
-      "headlines": [
-        {
-          "title": "[속보] 윤규성 태권도 품새 금메달… 남자 개인전 3회 연속 우승",
-          "press": "hankookilbo.com",
-          "publishedAt": "2026-10-01T09:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/469/0000957215?sid=104"
-        },
-        {
-          "title": "[속보] 윤규성, 태권도 품새 금메달…한국 남자 개인전 3연패",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-10-01T09:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002704547?sid=104"
-        },
-        {
-          "title": "윤규성, 태권도 품새 금메달…한국 남자 개인전 3연패",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-01T09:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012266425?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "전종민 중수청 차장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "전종민이 초대 중수청 차장에 임명",
-      "headlines": [
-        {
-          "title": "[단독] 중수청 차장에 전종민, 서울지방중수청장 최재민 유력...청장급 ...",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-10-01T06:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000513644?sid=102"
-        },
-        {
-          "title": "서울중수청장 최재민·중수청 차장 전종민…광주 임은정(종합2보)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T08:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016351860?sid=100"
-        },
-        {
-          "title": "초대 서울중수청장 최재민·중수청 차장 전종민",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-01T07:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012266377?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
       "carried": true
     },
     {
@@ -3766,62 +2878,9 @@
       ],
       "rowCount": 0,
       "carried": true
-    },
-    {
-      "issue": "머큐리 보이스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "인셉션이 확산 모델 기반 음성 에이전트 머큐리 보이스 출시",
-      "headlines": [
-        {
-          "title": "인셉션, 음성 에이전트 '머큐리 보이스' 출시…'확산 모델'로 지연시간...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-01T09:14:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215864"
-        },
-        {
-          "title": "허스키 보이스의 주인공, 보니 타일러를 추억하다",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-07-10T07:06:00.000Z",
-          "link": "https://m.entertain.naver.com/article/047/0002522166"
-        },
-        {
-          "title": "프레디 머큐리 가려진 삶, 마이클 잭슨과 함께한 프레디 머큐리, 'Thrille...",
-          "press": "topstarnews.net",
-          "publishedAt": "2018-12-22T14:55:00.000Z",
-          "link": "http://www.topstarnews.net/news/articleView.html?idxno=551673"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "머큐리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "머큐리 보이스 사용법",
-          "reason": "출시 후 이용 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "머큐리 보이스 요금",
-          "reason": "도입 비용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
     }
   ],
-  "enrichedAt": "2026-10-03T09:39:37.564Z",
+  "enrichedAt": "2026-10-03T21:28:12.305Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,
@@ -3835,7 +2894,7 @@
     "pooled": 0,
     "aiTitled": 0,
     "trended": 0,
-    "aiCalls": 4,
+    "aiCalls": 3,
     "partial": false
   }
 }
