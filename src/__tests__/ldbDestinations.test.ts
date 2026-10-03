@@ -12,6 +12,31 @@ describe('LDB destination bridge', () => {
     expect(service.accounts()).toEqual({ accounts: [{ id: 'a', label: '계정', blogId: 'blog' }], activeAccountId: 'a' });
     expect(await service.categories('a')).toEqual({ accountId: 'a', categories: [{ id: '2', name: '실제 카테고리' }] });
   });
+  it('uses the same saved login ID as the app when blogId contains a display label', async () => {
+    const { service, deps } = fixture();
+    deps.accounts = () => [{ ...account, blogId: '연예 이슈', naverId: ' saved_login ' }];
+    await service.categories('a');
+    expect(deps.fetchCategories).toHaveBeenCalledWith('saved_login');
+    expect(service.accounts().accounts[0]).toEqual({ id: 'a', label: '계정', blogId: '연예 이슈' });
+    expect(JSON.stringify(service.accounts())).not.toContain('saved_login');
+  });
+  it('keeps legacy blog ID lookup for accounts without a saved login ID', async () => {
+    const { service, deps } = fixture();
+    deps.accounts = () => [{ ...account, blogId: ' legacy_blog ', naverId: ' ' }];
+    await service.categories('a');
+    expect(deps.fetchCategories).toHaveBeenCalledWith('legacy_blog');
+  });
+  it('rejects a login ID changed in place while its categories are loading', async () => {
+    const { service, deps, deliver } = fixture();
+    const mutable = { ...account, blogId: '표시 이름', naverId: 'before_login' };
+    deps.accounts = () => [mutable];
+    deps.fetchCategories.mockImplementation(async () => {
+      mutable.naverId = 'after_login';
+      return { success: true, categories: [{ id: '2', name: '실제', password: '' }] };
+    });
+    await expect(service.select({ accountId: 'a', categoryId: '2' })).rejects.toThrow();
+    expect(deliver).not.toHaveBeenCalled();
+  });
   it('rejects unknown accounts, missing categories, and synthetic fallback', async () => {
     const { service, deps, deliver } = fixture();
     await expect(service.select({ accountId: 'wrong', categoryId: '2' })).rejects.toThrow();
