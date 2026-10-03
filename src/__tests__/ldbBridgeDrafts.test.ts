@@ -66,7 +66,7 @@ describe('LDB draft and image delivery', () => {
     expect(displayed).toEqual(['제목', '수정 제목']);
     await expect(createLdbDraftReceiver({ read: () => [], write: () => { throw new Error('quota'); }, display: vi.fn() })([draft()])).rejects.toThrow('quota');
   });
-  it('acknowledges only the same request and renderer, then removes its listener', async () => {
+  it('acknowledges only the same request and renderer, then retains its single router', async () => {
     const ipc = new EventEmitter();
     const send = vi.fn();
     const pending = deliverLdbPosts({ id: 10, isDestroyed: () => false, isLoading: () => false, send }, ipc, [draft()]);
@@ -75,12 +75,12 @@ describe('LDB draft and image delivery', () => {
     expect(ipc.listenerCount('ldb:import-posts-result')).toBe(1);
     ipc.emit('ldb:import-posts-result', { sender: { id: 10 } }, { requestId, ok: true, imported: 1 });
     await expect(pending).resolves.toBe(1);
-    expect(ipc.listenerCount('ldb:import-posts-result')).toBe(0);
+    expect(ipc.listenerCount('ldb:import-posts-result')).toBe(1);
   });
   it('missing acknowledgement fails instead of claiming imported', async () => {
     const ipc = new EventEmitter();
     await expect(deliverLdbPosts({ id: 1, isDestroyed: () => false, isLoading: () => false, send: () => {} }, ipc, [draft()], 5)).rejects.toThrow();
-    expect(ipc.listenerCount('ldb:import-posts-result')).toBe(0);
+    expect(ipc.listenerCount('ldb:import-posts-result')).toBe(1);
   });
   it('rejects a renderer failure acknowledgement', async () => {
     const ipc = new EventEmitter();
@@ -88,7 +88,7 @@ describe('LDB draft and image delivery', () => {
     const pending = deliverLdbPosts({ id: 10, isDestroyed: () => false, isLoading: () => false, send }, ipc, [draft()]);
     ipc.emit('ldb:import-posts-result', { sender: { id: 10 } }, { requestId: send.mock.calls[0][2], ok: false });
     await expect(pending).rejects.toThrow();
-    expect(ipc.listenerCount('ldb:import-posts-result')).toBe(0);
+    expect(ipc.listenerCount('ldb:import-posts-result')).toBe(1);
   });
   it('HTTP bridge waits for delivery and propagates failure', async () => {
     let release: (value: number) => void = () => {};
