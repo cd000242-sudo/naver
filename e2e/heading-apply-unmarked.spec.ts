@@ -37,6 +37,14 @@ test.beforeAll(async () => {
     env: { ...process.env, ...testProfile.env, E2E_TEST: '1' },
   });
   mainWindow = await waitForMainWindow(app);
+  // DOMContentLoaded precedes the asynchronous configuration/license startup.
+  // This marker is set in initUnifiedTab after the editor input listeners bind;
+  // sending a synthetic input before it exists loses the event permanently.
+  await expect(mainWindow.locator('#refresh-posts-list-btn'))
+    .toHaveAttribute('data-listener-added', 'true', { timeout: 45_000 });
+  await expect.poll(() => mainWindow.evaluate(() =>
+    (document.getElementById('heading-control-panel') as any)?.__bound === true,
+  ), { timeout: 45_000 }).toBe(true);
 });
 
 test.afterAll(async () => {
@@ -61,6 +69,7 @@ test('표기 없는 본문에서 적용을 눌러도 소제목이 사라지지 �
         if (check()) return;
         await wait(200);
       }
+      throw new Error(`Heading editor condition did not become ready within ${budgetMs}ms`);
     };
     const cards = () => Array.from(
       (document.getElementById('unified-integrated-preview')?.innerHTML || '').matchAll(/📝 ([^<]+)</g),
@@ -96,8 +105,9 @@ test('표기 없는 본문에서 적용을 눌러도 소제목이 사라지지 �
 
   console.log('[E2E] unmarked report:', JSON.stringify(report, null, 2));
   expect((report as any).error).toBeUndefined();
+  expect((report as any).cardsBefore).toEqual(['신청 방법', '이용 기준']);
   expect((report as any).cardsAfterApply).toEqual((report as any).cardsBefore);
-  expect((report as any).structuredHeadings.length).toBeGreaterThan(0);
+  expect((report as any).structuredHeadings).toEqual(['신청 방법', '이용 기준']);
 });
 
 test('마무리 단어가 들어간 세 번째 소제목도 이미지 관리에 표시된다', async () => {
