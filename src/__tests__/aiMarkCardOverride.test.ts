@@ -5,7 +5,7 @@
  * Reason: the global checkbox marks *every* image, so a real photo the user inserted
  * by hand on one heading would be AI-marked. The card override wins over the global.
  */
-import { describe, it, expect } from 'vitest';
+import { afterEach, beforeEach, describe, it, expect, vi } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 import {
@@ -70,6 +70,19 @@ describe('ledger carries the override', () => {
 });
 
 describe('ImageManager card toggle (renderer half)', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(async () => {
+    try {
+      // 없는 미리보기 DOM을 찾는 재시도도 테스트 안에서 완료해 늦은 로그를 남기지 않는다.
+      await vi.runAllTimersAsync();
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
   // Renderer module relies on copy-static globals; stub the ones the toggle path touches.
   const loadImageManager = async () => {
     const g = globalThis as any;
@@ -85,7 +98,7 @@ describe('ImageManager card toggle (renderer half)', () => {
     g.ensureKenBurnsStyles = () => {};
     g.setVeoProgressOverlay = () => {};
     g.showVeoProgressOverlay = () => {};
-    // syncAllPreviews() walks the DOM; an empty document makes every preview a no-op.
+    // DOM이 없는 미리보기는 재시도하므로 afterEach에서 타이머를 끝까지 실행한다.
     g.document = { getElementById: () => null, querySelector: () => null, querySelectorAll: () => [] };
     const mod = await import('../renderer/modules/imageManagerCore');
     mod.ImageManager.clearAll();
