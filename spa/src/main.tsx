@@ -5,9 +5,11 @@ import App from './App';
 import './styles/global.css';
 import { startVersionWatch } from './lib/versionWatch';
 import { purgeLegacyClaudeState } from './lib/userKeys';
+import { startBoardPreferenceSync } from './lib/boardPreferences';
 
 // 새 배포가 나가면 캐시에 물린 화면이 스스로 갈아탄다(탭 복귀 시 1회).
 startVersionWatch();
+startBoardPreferenceSync();
 
 /*
  * 사이트는 클로드 구독 토큰을 들고 있지 않는다(사장님 결정 2026-09-16 "브리지 전용으로 정리").

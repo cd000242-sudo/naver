@@ -1,4 +1,5 @@
 import { bridgeCall, type BridgeFailure } from './bridge';
+import { syncBoardPreference } from './boardPreferences';
 import { chooseBoard, mergeBriefTitles, type BoardChoice, type BoardKind, type BoardRecord, type SavedBriefTitle } from './boardFallback';
 export interface SavedBoardResult { board: BoardRecord | null; source: 'app'; generatedAt: string | null; state: 'ready' | 'empty' }
 export interface BoardLoad extends BoardChoice { appFailure: BridgeFailure | null }
@@ -11,6 +12,7 @@ async function publicBoard(kind: BoardKind): Promise<unknown> {
 }
 const lastGood = new Map<BoardKind, BoardChoice>();
 export async function loadSavedBoard(kind: BoardKind): Promise<BoardLoad> {
+    if (kind === 'topic-briefs') void syncBoardPreference();
     const [site, app] = await Promise.all([publicBoard(kind), bridgeCall<SavedBoardResult>(`/v1/bridge/boards/${kind}`, undefined, 3500)]);
     const current = chooseBoard(kind, site, app.status === 'ok' && app.result.state === 'ready' ? app.result.board : null);
     const previous = lastGood.get(kind);
