@@ -195,3 +195,27 @@ test('date tabs retain the original free sample and cannot unlock a fresh keywor
  assert.match(html,/data-keyword="잠긴 오늘 후보" data-locked="true"/);
  assert.equal((html.match(/data-locked="false"/g)||[]).length,0);
 });
+
+
+test('rejection-only revisions refresh an open board without changing the measurement date',async()=>{
+ const effects=[], updates=[]; let index=0, refresh, payload={...board};
+ const hooks={...React,useEffect:fn=>effects.push(fn),useMemo:fn=>fn(),useState:initial=>{const i=index++;return [typeof initial==='function'?initial():initial,value=>updates.push({index:i,value})];}};
+ const Component=load('../src/components/leword/GoldenTab.tsx',hooks,false,async()=>({board:null})).default;
+ const saved={window:globalThis.window,document:globalThis.document,fetch:globalThis.fetch};
+ try {
+  globalThis.window={setInterval:fn=>{refresh=fn;return 1;},clearInterval:()=>{}};
+  globalThis.document={addEventListener:()=>{},removeEventListener:()=>{}};
+  globalThis.fetch=async()=>({ok:true,json:async()=>payload});
+  renderToStaticMarkup(React.createElement(Component,{onAnalyze:()=>{}}));
+  const cleanup=effects[0](); await new Promise(resolve=>setImmediate(resolve));
+  const publishedAt=payload.publishedAt;
+  payload={...payload,revalidatedAt:'2026-09-28T10:00:00Z',rows:payload.rows.map(row=>({...row,revalidation:{status:'rejected',checkedAt:'2026-09-28T10:00:00Z'}}))};
+  refresh(); await new Promise(resolve=>setImmediate(resolve));
+  const loaded=updates.filter(item=>item.index===0);
+  assert.equal(loaded.length,2); assert.equal(loaded[1].value.publishedAt,publishedAt);
+  assert.equal(loaded[1].value.rows[0].revalidation.status,'rejected');
+  refresh(); await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(updates.filter(item=>item.index===0).length,2);
+  cleanup();
+ } finally {for(const [key,value] of Object.entries(saved)){if(value===undefined)delete globalThis[key];else globalThis[key]=value;}}
+});
