@@ -21,6 +21,7 @@ import {
     type UserKeys,
 } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
+import { boardPreferenceNote, boardPreferenceState, subscribeBoardPreference } from '../../lib/boardPreferences';
 
 /*
  * 사용량은 이 PC 의 LEWORD 앱이 센 호출 수다(사장님 결정 2026-09-16) — 서비스 공식 한도(%)가 아니다.
@@ -84,6 +85,8 @@ const AGENT_CHAIN = [
 function KeysTab() {
     const [keys, setKeys] = useState<UserKeys>(() => loadUserKeys());
     const [saved, setSaved] = useState(false);
+    const [boardPreference, setBoardPreference] = useState(boardPreferenceState);
+    useEffect(() => subscribeBoardPreference(setBoardPreference), []);
     const [revealed, setRevealed] = useState<Record<string, boolean>>({});
     /*
      * AI 추론은 API 키가 아니라 **클로드코드 연동**이다(사장님 지시 2026-08-17).
@@ -388,13 +391,18 @@ function KeysTab() {
                         <b>쓸 엔진에서 [사용].</b>{' '}
                         {activeProvider
                             ? <span className="lw-step-ok">✅ {AGENT_CHAIN.find((item) => item.id === activeProvider)?.label} 사용 중</span>
-                            : '고른 엔진 하나로만 돕니다. 몰래 다른 엔진으로 갈아타지 않습니다.'}
+                            : '오늘의 글감은 고른 엔진을 우선 시도하고, 실패하면 사용 가능한 다른 엔진으로 이어갑니다.'}
                     </li>
                 </ol>
                 <p className="lw-card-note" style={{ marginBottom: 12 }}>
                     <b>AI 는 앱을 통해서만 씁니다.</b> 사이트는 구독 토큰을 받지도 보관하지도 않습니다 —
                     클로드·코덱스·제미나이·그록 모두 <b>앱을 켜 두면</b> 앱이 이 PC 의 구독으로 대신 돌려 줍니다(추가 비용 없음).
                     앱이 꺼져 있으면 AI 부분만 멈추고 그 자리에서 알려 드립니다.
+                </p>
+
+                <p role="status" aria-live="polite" className="lw-card-note" style={{ marginBottom: 12 }}>
+                    {boardPreferenceNote(boardPreference)}<br />
+                    <small>이 설정은 이 PC 앱의 글감 생성에 적용됩니다. 사이트 공용 서버의 예약 생성 설정은 별도입니다.</small>
                 </p>
 
                 <div className="lw-engines-list">
@@ -431,7 +439,7 @@ function KeysTab() {
                                             const next = { ...keys, aiProvider: item.id };
                                             setKeys(next);
                                             saveUserKeys(next);
-                                            setLoginNote(`${item.label}(으)로 사용합니다 — 답변·추론·진단이 이 엔진으로 돕니다.`);
+                                            setLoginNote(`${item.label} 선택을 브라우저에 저장했습니다. 오늘의 글감 앱 적용 상태는 위 안내를 확인하세요.`);
                                         }}
                                     >{active ? '사용 중' : '사용'}</button>
                                 </div>

@@ -94,6 +94,7 @@ export function bridgeFailureNote(failure: BridgeFailure, failedLabel = '실패'
 export async function probeBridge(): Promise<BridgeStatus> {
     const body = await bridgeFetch('/v1/bridge/status', undefined, 20_000) as { version?: string; agents?: BridgeAgentStatus[] } | null;
     if (!body) return { connected: false };
+    window.dispatchEvent(new Event('leword:bridge-connected'));
     return { connected: true, version: body.version, agents: body.agents || [] };
 }
 
