@@ -18,6 +18,7 @@ import { goldenMeasurementLabel, matchesGoldenFocus, recentRiseRatio, summarizeG
 import GoldenWritingRecommendations from './GoldenWritingRecommendations';
 import { loadSavedBoard, boardSourceNote } from '../../lib/boardBridge';
 import { currentGoldenBriefRows } from '../../lib/goldenCurrentBriefs';
+import { goldenDailyCheckedAt, goldenDailyStatus, selectGoldenDailyRows, summarizeGoldenDaily } from '../../lib/goldenDailyModel';
 import GoldenTrendCandidates, { type GoldenTrendCandidate } from './GoldenTrendCandidates';
 
 /**
@@ -78,6 +79,18 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const { mindmap, openMindmap } = useMindmap();
     const [currentBriefs, setCurrentBriefs] = useState<unknown>(null);
     const [currentBriefSource, setCurrentBriefSource] = useState('');
+    const [dailyView, setDailyView] = useState<'today' | 'recent' | 'all'>('today');
+    const dailySummary = useMemo(() => summarizeGoldenDaily(board?.rows || [], now), [board, now]);
+    const dailyRows = useMemo(() => {
+        const all = board?.rows || [];
+        if (dailyView === 'all') return all;
+        const today = selectGoldenDailyRows(all, 'today', now);
+        return dailyView === 'today' ? today : [...today, ...selectGoldenDailyRows(all, 'recent', now)];
+    }, [board, dailyView, now]);
+    const changeDailyView = (view: 'today' | 'recent' | 'all') => {
+        setDailyView(view); setTopic('전체'); setWriteLane('all'); setMoneyMin(0); setFocus('all');
+        setOpenPlan(''); setChartKeyword('');
+    };
 
     /*
      * 그래프 — 앱의 30일 트렌드와 같은 실측을 웹에 그린다. 앱이 꺼져 있으면
@@ -98,7 +111,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 .then((data) => {
                     if (!alive) return;
                     // 같은 판이면 화면을 안 건드린다 — 스크롤·펼친 카드가 튀지 않게.
-                    const stamp = String(data?.enrichedAt || data?.publishedAt || '');
+                    const stamp = [data?.publishedAt, data?.enrichedAt, data?.revalidatedAt].filter(Boolean).join('|');
                     if (stamp && stamp === lastEnrichedAt) return;
                     lastEnrichedAt = stamp;
                     const rows: PreemptionRow[] = Array.isArray(data?.rows) ? data.rows : [];
@@ -127,9 +140,9 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     /** 실제로 행이 있는 주제만 칩으로 낸다. 빈 칩을 누르게 하면 안 된다. */
     const topics = useMemo(() => {
         const counts = new Map<string, number>();
-        for (const row of board?.rows || []) counts.set(row.topic, (counts.get(row.topic) || 0) + 1);
+        for (const row of dailyRows) counts.set(row.topic, (counts.get(row.topic) || 0) + 1);
         return [...counts.entries()].sort((a, b) => b[1] - a[1]);
-    }, [board]);
+    }, [dailyRows]);
 
     /*
      * 실제로 열어 줄 다섯 이름.
@@ -148,7 +161,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     );
 
     const currentRows = useMemo(() => currentGoldenBriefRows(currentBriefs, now), [currentBriefs, now]);
-    const focusSummary = useMemo(() => summarizeGoldenFocus(board?.rows || [], now), [board, now]);
+    const focusSummary = useMemo(() => summarizeGoldenFocus(dailyRows, now), [dailyRows, now]);
     const trendCandidates = useMemo(() => (Array.isArray(board?.trendCandidates) ? board.trendCandidates : []).filter((row) =>
         matchesGoldenFocus(row, 'economy', now) && matchesGoldenFocus(row, 'rising', now)
         && matchesGoldenFocus(row, focus, now) && rowMatchesWriteLane(row, writeLane)
@@ -162,7 +175,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     ];
 
     const rows = useMemo(() => {
-        const all = board?.rows || [];
+        const all = dailyRows;
         const filtered = all.filter((row) => {
             // 레인 판정은 rowMatchesWriteLane 단일 출처 — 애드센스만 실측 의도, 나머지는 배치 순서.
             if (!rowMatchesWriteLane(row, writeLane)) return false;
@@ -270,6 +283,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
          * 나오고, 주제 순서는 방문마다 바뀐다. 주제 안은 위의 등급순 그대로라 품질
          * 순서는 안 무너진다. 주제 필터를 걸면 원래 정렬로 돌아간다.
          */
+        // 오늘/최근 목록은 측정 시점과 작성 시기 순서를 유지한다. 보관 목록만 주제를 섞는다.
+        if (dailyView !== 'all') return hoistFree(filtered);
         if (topic !== '전체') return hoistFree(sorted);
         const byTopicOrder = new Map<string, PreemptionRow[]>();
         for (const row of sorted) {
@@ -303,14 +318,14 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             depth += 1;
         }
         return hoistFree(interleaved);
-    }, [board, topic, writeLane, moneyMin, focus, now, shuffleSeed, unlocked, freeNames]);
+    }, [dailyRows, dailyView, topic, writeLane, moneyMin, focus, now, shuffleSeed, unlocked, freeNames]);
 
     /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
 
     useEffect(() => {
         setVisibleCount(60);
-    }, [topic, writeLane, moneyMin, focus]);
+    }, [topic, writeLane, moneyMin, focus, dailyView]);
 
     // '지식인 황금질문'은 좌측 메뉴 독립 탭(KinGoldenTab)으로 옮겨졌다(2026-08-20 정정).
     const publishedLabel = board?.publishedAt
@@ -322,18 +337,20 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         <>
             <TabIntro
                 title="리더남 전용 황금키워드"
-                desc="지금 쓸 글감은 출처와 작성 방향까지 확인하고, 장기·계절성 키워드는 따로 탐색하세요. 검색량·문서량 비율만으로 작성이나 수익을 추천하지 않습니다."
+                desc="오늘 검색 수요와 경쟁을 확인한 황금키워드부터 살펴보세요. 지난 측정과 계절성 키워드는 최근 7일·전체 보관에서 이어서 볼 수 있습니다."
                 /* 어떤 도구로 재는지는 밝히지 않는다(사장님 2026-08-20) — 잰 사실만 적는다. */
                 source={`검색결과 직접 확인${publishedLabel ? ` · ${publishedLabel} 발행` : ''}${board?.verified ? ` · ${board.verified}건 검증` : ''}`}
             />
 
-            {/* 방문자가 "왜 업데이트가 안 됐냐"고 묻지 않도록, 주기와 늦는 사정을 그대로 적는다. */}
-            <BoardFreshness
-                cadence="월요일과 금요일 이른 아침에"
-                rounds={[{ hour: 4, minute: 23 }]}
-                days={[1, 5]}
-                lastBuiltAt={board?.publishedAt ?? null}
-            />
+            <details style={{ marginBottom: 14, color: '#aebbd1', fontSize: 13 }}>
+                <summary style={{ cursor: 'pointer', padding: '8px 0' }}>수집 일정·최근 발행 확인</summary>
+                <BoardFreshness
+                    cadence="매일 오전에 일부 키워드를 재검증하고"
+                    rounds={[{ hour: 7, minute: 23 }]}
+                    lastBuiltAt={board?.publishedAt ?? null}
+                />
+                <p>월·금에는 전체 발굴도 진행합니다. 오늘 확인은 개별 키워드의 실제 측정일로 구분합니다.</p>
+            </details>
 
             {status === 'loading' && <div className="lw-note">발굴 결과를 불러오는 중입니다…</div>}
 
@@ -365,14 +382,26 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                       * 주제·레인 고르개가 추리는 일을 한다.
                       */}
 
-                    <h2 style={{ fontSize: 21, margin: '24px 0 8px' }}>탐색·계절성 키워드</h2>
-                    <p className="lw-write-hint">검색 지표와 계절성으로 찾은 보관 목록입니다. 모든 항목이 바로 작성할 수 있는 추천 글감은 아닙니다.</p>
-                    <div className="lw-toolbar">
-                        <span className="lw-count">
-                            탐색 후보 {rows.length}개 · 주제 {board.topicsWithRows ?? topics.length}/{board.topicsTotal ?? 32}종
-                        </span>
+                    <div style={{ margin: '18px 0', padding: 18, borderRadius: 16, border: '1px solid #365564', background: 'linear-gradient(115deg, #132a30, #1c2236)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                            <h2 style={{ fontSize: 21, margin: 0 }}>오늘 쓸 키워드 찾기</h2>
+                            <span style={{ fontSize: 12, color: '#9bded6' }}>{new Intl.DateTimeFormat('ko-KR', { timeZone: 'Asia/Seoul', month: 'long', day: 'numeric' }).format(now)} 기준</span>
+                        </div>
+                        <div role="group" aria-label="키워드 확인 시점" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 14 }}>
+                            {([
+                                { id: 'today', label: '오늘 확인', count: dailySummary.today },
+                                { id: 'recent', label: '최근 7일', count: dailySummary.today + dailySummary.recent },
+                                { id: 'all', label: '전체 보관', count: board.rows.length },
+                            ] as const).map(item => <button key={item.id} type="button" aria-pressed={dailyView === item.id} onClick={() => changeDailyView(item.id)} style={{ flex: '1 1 140px', cursor: 'pointer', padding: '12px 16px', borderRadius: 11, border: dailyView === item.id ? '1px solid #68dec5' : '1px solid #ffffff25', background: dailyView === item.id ? '#b4f7df' : '#101926', color: dailyView === item.id ? '#09251e' : '#c7d5e9', fontWeight: 800, fontSize: 15 }}>{item.label} <span style={{ marginLeft: 8 }}>{item.count}</span></button>)}
+                        </div>
+                        <p style={{ color: '#bacddd', fontSize: 13, lineHeight: 1.7, margin: '12px 0 0' }}>{dailyView === 'today'
+                            ? '한국 시간 오늘 확인한 수요·검색결과 중, 황금 비율과 경쟁 여지가 확인된 키워드입니다. 먼 시즌의 준비 주제는 보관 목록에 둡니다.'
+                            : dailyView === 'recent' ? '최근 7일 안에 확인한 후보입니다. 오늘 확인된 항목도 함께 보여주며, 카드에 실제 확인일을 표시합니다.'
+                            : '기존 키워드 전체를 보관합니다. 지난 측정·미리 준비할 시즌 주제도 포함되니 작성 전 다시 확인하세요.'} 월 검색량은 월간 조회수이며 오늘 하루의 검색량이 아닙니다.</p>
                     </div>
+                    <div className="lw-toolbar"><span className="lw-count">현재 조건 {rows.length}개 · 주제 {topics.length}종</span></div>
 
+                    {dailyRows.length > 0 && <>
                     <div className="lw-segment lw-segment-wrap lw-write-lanes" role="group" aria-label="경제와 최근 트렌드로 거르기">
                         {focusOptions.map((option) => (
                             <button key={option.id} type="button" className={focus === option.id ? 'on' : ''}
@@ -381,31 +410,35 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             </button>
                         ))}
                     </div>
-                    <p className="lw-write-hint">전체 목록은 주제를 섞어 보여주고, 카드의 시기 배지는 회차마다 잰 시즌성 실측입니다. 경제·지원금만 보려면 위 고르개를 누르세요. 필터는 아래 주제·용도·입찰가 조건과 함께 적용됩니다. 입찰가는 광고주의 경쟁 지표이며 예상 수익이 아닙니다.</p>
-                    {focusSummary.stale > 0 && <p className="lw-note lw-note-limit">검색결과 확인이 7일 넘게 지난 항목 또는 확인일이 없는 항목 {focusSummary.stale}개는 최근 상승에서 제외했습니다. 카드의 확인일을 함께 살펴보세요.</p>}
+                    <details style={{ margin: '8px 0 14px', color: '#aebbd1', fontSize: 12 }}>
+                        <summary style={{ cursor: 'pointer' }}>선정 기준·검색 지표 안내</summary>
+                        <p className="lw-write-hint">오늘·최근 목록은 실제 확인일과 현재 작성 시기로 추립니다. 전체 보관은 주제를 섞어 보여주며, 카드의 시즌 배지를 유지합니다. 경제·지원금 필터는 아래 주제·용도·입찰가 조건과 함께 적용됩니다. 입찰가는 광고주의 경쟁 지표이며 예상 수익이 아닙니다.</p>
+                        {focusSummary.stale > 0 && <p className="lw-note lw-note-limit">검색결과 확인이 7일 넘게 지난 항목 또는 확인일이 없는 항목 {focusSummary.stale}개는 최근 상승에서 제외했습니다. 카드의 확인일을 함께 살펴보세요.</p>}
+                    </details>
 
                     <WriteLaneFilter
                         value={writeLane}
                         onChange={setWriteLane}
                         counts={{
-                            total: board.rows.length,
-                            laneCount: (laneId) => board.rows.filter((row) => rowMatchesWriteLane(row, laneId)).length,
+                            total: dailyRows.length,
+                            laneCount: (laneId) => dailyRows.filter((row) => rowMatchesWriteLane(row, laneId)).length,
                         }}
                     />
 
                     <MoneyFilter
                         value={moneyMin}
                         onChange={setMoneyMin}
-                        measured={board.rows.filter((row) => row.money).length}
-                        countAtLeast={(min) => board.rows.filter((row) => (row.money?.value ?? 0) >= min).length}
-                        total={board.rows.length}
+                        measured={dailyRows.filter((row) => row.money).length}
+                        countAtLeast={(min) => dailyRows.filter((row) => (row.money?.value ?? 0) >= min).length}
+                        total={dailyRows.length}
                     />
 
-                    <TopicFilter value={topic} onChange={setTopic} topics={topics} total={board.rows.length} />
+                    <TopicFilter value={topic} onChange={setTopic} topics={topics} total={dailyRows.length} />
+                    </>}
 
-                    <GoldenTrendCandidates rows={trendCandidates} unlocked={unlocked} now={now}
-                        onUnlock={() => setUnlocked(true)} onAnalyze={onAnalyze} />
-                    {trendCandidates.length > 0 && <h3 style={{ margin: '22px 0 12px' }}>탐색·계절성 목록 · {rows.length}개</h3>}
+                    {dailyView === 'all' && <GoldenTrendCandidates rows={trendCandidates} unlocked={unlocked} now={now}
+                        onUnlock={() => setUnlocked(true)} onAnalyze={onAnalyze} />}
+                    {trendCandidates.length > 0 && <h3 style={{ margin: '22px 0 12px' }}>{dailyView === 'all' ? '탐색·계절성 목록' : dailyView === 'today' ? '오늘 확인한 황금키워드' : '최근 확인한 황금키워드'} · {rows.length}개</h3>}
 
                     {!unlocked && rows.length > FREE_BOARD_ROWS && (
                         <LicenseGate
@@ -441,8 +474,9 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             row={row}
                             titleReview
                             headTags={<>
+                                {dailyView !== 'all' && <span style={{ color: '#92e9cc', fontSize: 12 }}>✓ {goldenDailyStatus(row, now).reason}</span>}
                                 <span className="lw-surface-tag">{row.topic}</span>
-                                <span className="lw-slot-basis">{goldenMeasurementLabel(row, now)}</span>
+                                <span className="lw-slot-basis">{goldenMeasurementLabel({ ...row, measuredAt: goldenDailyCheckedAt(row, now) === null ? null : new Date(goldenDailyCheckedAt(row, now)!).toISOString() }, now)}</span>
                                 {sevenDayRise(row) !== null && <span className="lw-trend-tag">최근 7일 수요 {sevenDayRise(row)!.toFixed(2)}배</span>}
                             </>}
                             rank={index + 1}
@@ -475,11 +509,15 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     )}
 
                     {rows.length === 0 && <div className="lw-note">
-                        <strong>현재 조건에서 확인된 키워드가 없습니다</strong>
-                        <p>{focus === 'rising' || focus === 'high-rising'
-                            ? '최근 일별 수요와 검색결과가 함께 확인된 상승 키워드만 보여줍니다. 경제·지원금에서 다른 후보를 살펴보거나 다음 측정을 기다려 주세요.'
+                        <strong>{dailyView === 'today' && dailySummary.today === 0 ? '오늘 확인 기준을 통과한 키워드가 아직 없습니다' : '현재 조건에서 확인된 키워드가 없습니다'}</strong>
+                        <p>{dailyView === 'today' && dailySummary.today === 0
+                            ? '지난 측정에 오늘 날짜를 붙이지 않습니다. 최근 7일 후보나 전체 보관 목록을 확인해보세요.'
                             : '주제·용도·입찰가 조건을 줄이면 다른 후보를 볼 수 있습니다.'}</p>
-                        <button type="button" className="lw-more-btn" onClick={() => { setFocus('all'); setTopic('전체'); setWriteLane('all'); setMoneyMin(0); }}>필터 초기화</button>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+                            <button type="button" className="lw-more-btn" onClick={() => { setFocus('all'); setTopic('전체'); setWriteLane('all'); setMoneyMin(0); }}>필터 초기화</button>
+                            {dailyView === 'today' && <button type="button" className="lw-more-btn" onClick={() => changeDailyView('recent')}>최근 7일 후보 보기 ({dailySummary.today + dailySummary.recent})</button>}
+                            {dailyView !== 'all' && <button type="button" className="lw-more-btn" onClick={() => changeDailyView('all')}>전체 보관 보기 ({board.rows.length})</button>}
+                        </div>
                     </div>}
 
                     {/*
@@ -487,12 +525,15 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                       * 매 회차 80건쯤이 그렇게 버려졌다 — 사장님 지적으로 드러났다.
                       * 주제 필터는 여기에도 건다(위에서 고른 주제와 따로 놀면 안 된다).
                       */}
-                    <ExternalTrafficBoard
-                        rows={(board.reference || []).filter((row) => topic === '전체' || row.topic === topic)}
-                        onAnalyze={onAnalyze}
-                        searchUrl={naverSearchUrl}
-                        locked={!unlocked}
-                    />
+                    {dailyView === 'all' && <details style={{ marginTop: 20 }}>
+                        <summary style={{ cursor: 'pointer', padding: 14, border: '1px solid #ffffff25', borderRadius: 12 }}>외부유입 참고 키워드 보기</summary>
+                        <ExternalTrafficBoard
+                            rows={(board.reference || []).filter((row) => topic === '전체' || row.topic === topic)}
+                            onAnalyze={onAnalyze}
+                            searchUrl={naverSearchUrl}
+                            locked={!unlocked}
+                        />
+                    </details>}
 
                     {(() => {
                         const chartRow = rows.find((row) => row.keyword === chartKeyword);

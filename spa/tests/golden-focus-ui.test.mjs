@@ -21,7 +21,7 @@ test('filtering cannot rotate the fixed free sample or unlock new rows',()=>{
  assert.ok(source.includes('onUnlock={() => setUnlocked(true)}'));
 });
 test('old measurements are disclosed and published season badges are passed through untouched',()=>{
- for(const word of ['goldenMeasurementLabel(row, now)','row={row}','최근 7일 수요','7일 넘게 지난','현재 조건에서 확인된 키워드가 없습니다','필터 초기화']) assert.ok(source.includes(word),word);
+ for(const word of ['goldenDailyCheckedAt(row, now)','row={row}','최근 7일 수요','7일 넘게 지난','현재 조건에서 확인된 키워드가 없습니다','필터 초기화']) assert.ok(source.includes(word),word);
  // 09-28 판이 시기 배지를 지우던 덮어쓰기 — 다시 들어오면 안 된다
  assert.ok(!source.includes('timingGroup: undefined'));
  assert.ok(!source.includes('trendLabel: goldenTrendLabel'));
@@ -50,10 +50,10 @@ function load(path, hooks, unlocked, boardLoader) {
 const candidate={keyword:'소상공인 정책자금 상승후보',topic:'비즈니스·경제',searchVolume:2300,documentCount:98000,measuredAt:'2026-09-28T00:00:00Z',evidence:[],facingPosts:9,sampledTitles:10,sourceUrl:'https://example.org/policy',money:{value:3400,tier:'high',pc:3400,mobile:2400},shortTermTrend:{status:'rising',ratio:1.5,measuredAt:'2026-09-28T01:00:00Z',windowEnd:'2026-09-27',series:Array.from({length:14},(_,i)=>({period:`2026-09-${String(14+i).padStart(2,'0')}`,ratio:i<7?20:30}))}};
 // 게임 5 는 발행이 잰 시즌 배지·장기 추세를 단 행 — 화면이 이걸 지우면 안 된다
 const board={publishedAt:'2026-09-28T00:00:00Z',freeSample:{day:'2026-09-28',keywords:['게임 0','게임 1','게임 2','게임 3','게임 4']},rows:[...Array.from({length:6},(_,i)=>({keyword:`게임 ${i}`,topic:'게임',searchVolume:1000,documentCount:100,measuredAt:'2026-09-07T00:00:00Z',evidence:[],...(i===5?{timingGroup:'준비 시기',timing:'성수기까지 약 2개월',trendLabel:'시즌성'}:{})})),{keyword:'지원금 대상',topic:'비즈니스·경제',searchVolume:200,documentCount:100,measuredAt:'2026-09-28T00:00:00Z',evidence:[]}]};
-function render(unlocked,focus='all',topic='전체',input=board,current=null){
+function render(unlocked,focus='all',topic='전체',input=board,current=null,dailyView='all'){
  let index=0;
  // useState 순서: 0 board · 1 status · 2 topic · 7 focus · 8 now · 9 shuffleSeed(고정 — 주제 순서 결정론)
- const hooks={...React,useEffect:()=>{},useMemo:fn=>fn(),useState:initial=>{const i=index++;return [i===0?input:i===1?'ready':i===2?topic:i===7?focus:i===8?Date.parse('2026-09-28T09:00:00Z'):i===9?0.5:i===13?current:typeof initial==='function'?initial():initial,()=>{}];}};
+ const hooks={...React,useEffect:()=>{},useMemo:fn=>fn(),useState:initial=>{const i=index++;return [i===0?input:i===1?'ready':i===2?topic:i===7?focus:i===8?Date.parse('2026-09-28T09:00:00Z'):i===9?0.5:i===13?current:i===15?dailyView:typeof initial==='function'?initial():initial,()=>{}];}};
  const Board=load('../src/components/leword/GoldenTab.tsx',hooks,unlocked).default;
  return renderToStaticMarkup(React.createElement(Board,{onAnalyze:()=>{}}));
 }
@@ -164,4 +164,34 @@ test('golden latest feed uses existing saved-board fallback even when legacy net
   assert.ok(updates.some(update=>update.index===1&&update.value==='error'));
   cleanup();
  } finally {for(const [key,value] of Object.entries(saved)){if(value===undefined)delete globalThis[key];else globalThis[key]=value;}}
+});
+
+
+test('daily screen separates today, recent and archive without re-dating old measurements',()=>{
+ const eligible={...board.rows[0],keyword:'오늘 확인',measuredAt:'2026-09-28T01:00:00Z',timingGroup:'연중 상시',serp:{sampledTitles:10,exactTitleHits:2}};
+ const recent={...eligible,keyword:'어제 확인',measuredAt:'2026-09-27T01:00:00Z'};
+ const old={...eligible,keyword:'예전 확인',measuredAt:'2026-09-01T01:00:00Z'};
+ const futureSeason={...eligible,keyword:'미리 준비',timingGroup:'준비 시기'};
+ const input={...board,rows:[old,recent,futureSeason,eligible],freeSample:{keywords:['오늘 확인']}};
+ const today=render(true,'all','전체',input,null,'today');
+ assert.match(today,/data-keyword="오늘 확인"/);
+ assert.doesNotMatch(today,/data-keyword="(?:어제 확인|예전 확인|미리 준비)"/);
+ assert.match(today,/오늘 확인/);assert.match(today,/최근 7일/);assert.match(today,/전체 보관/);
+ assert.match(today,/오늘 하루의 검색량이 아닙니다/);
+ const recentHtml=render(true,'all','전체',input,null,'recent');
+ assert.match(recentHtml,/data-keyword="오늘 확인"/);assert.match(recentHtml,/data-keyword="어제 확인"/);
+ assert.doesNotMatch(recentHtml,/data-keyword="예전 확인"/);
+ const archive=render(true,'all','전체',input);
+ for(const name of ['오늘 확인','어제 확인','예전 확인','미리 준비'])assert.ok(archive.includes(`data-keyword="${name}"`));
+ const empty=render(true,'all','전체',{...input,rows:[old]},null,'today');
+ assert.match(empty,/오늘 확인 기준을 통과한 키워드가 아직 없습니다/);
+ assert.match(empty,/전체 보관 보기/);assert.doesNotMatch(empty,/data-keyword=/);
+});
+
+test('date tabs retain the original free sample and cannot unlock a fresh keyword',()=>{
+ const fresh={...board.rows[0],keyword:'잠긴 오늘 후보',measuredAt:'2026-09-28T01:00:00Z',serp:{sampledTitles:10,exactTitleHits:2}};
+ const input={...board,rows:[...board.rows,fresh]};
+ const html=render(false,'all','전체',input,null,'today');
+ assert.match(html,/data-keyword="잠긴 오늘 후보" data-locked="true"/);
+ assert.equal((html.match(/data-locked="false"/g)||[]).length,0);
 });

@@ -30,3 +30,18 @@ test('calendar overflow and malformed fact inputs never earn a recommendation',(
  const r=row();r.measuredAt='2026-09-31T01:00:00Z';assert.equal(assessGoldenEditorial(r,now).ready,false);
  for(const fact of [null,{}, {...row().brief.facts[0],publishedAt:'2026-09-31T01:00:00Z'}, {...row().brief.facts[0],link:'https://user:pass@example.org/policy'}]) {const candidate=row();candidate.brief.facts=[fact];assert.equal(assessGoldenEditorial(candidate,now).ready,false);}
 });
+test('newer confirmed revalidation failure removes stars and surfaces a research follow-up reason',()=>{
+ const r={...row(),revalidation:{status:'rejected',checkedAt:'2026-10-02T03:00:00Z',reason:'상위 글 경쟁 심화'}};
+ const assessment=assessGoldenEditorial(r,now);
+ assert.equal(assessment.ready,false);
+ assert.ok(assessment.reasons.some(reason=>reason.includes('최근 재검증 미통과')&&reason.includes('상위 글 경쟁 심화')));
+ assert.equal(selectGoldenWriting([r],now).length,0);
+ assert.equal(selectGoldenResearch([r]).length,1);
+ assert.equal(assessGoldenEditorial({...r,revalidation:{...r.revalidation,checkedAt:r.measuredAt}},now).ready,false);
+});
+test('a newer successful measurement supersedes prior rejection but invalid rejection stamps do not override evidence',()=>{
+ const r={...row(),revalidation:{status:'rejected',checkedAt:'2026-10-02T03:00:00Z'}};
+ assert.equal(assessGoldenEditorial({...r,measuredAt:'2026-10-02T04:00:00Z'},now).ready,true);
+ for(const checkedAt of ['2026-09-31T03:00:00Z','bad','2026-10-04T03:00:00Z','2026-10-02T03:00:00',null]) assert.equal(assessGoldenEditorial({...r,revalidation:{...r.revalidation,checkedAt}},now).ready,true);
+ assert.equal(assessGoldenEditorial({...r,revalidation:{...r.revalidation,status:'passed'}},now).ready,true);
+});

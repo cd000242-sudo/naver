@@ -22,6 +22,14 @@ export function safeGoldenTitle(row, input) {
 }
 export function assessGoldenEditorial(row, now=Date.now()) {
  const reasons=[]; const brief=row?.brief;
+ const rejection=row?.revalidation;
+ const rejectedStamp=clean(rejection?.checkedAt);
+ const validRejection=rejection?.status==='rejected'
+  && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(rejectedStamp)
+  && fresh(rejectedStamp,now,Infinity)
+  && fresh(row?.measuredAt,now,Infinity)
+  && Date.parse(rejectedStamp)>=Date.parse(row.measuredAt);
+ if(validRejection)reasons.push(`최근 재검증 미통과${clean(rejection.reason)?`: ${clean(rejection.reason).slice(0,200)}`:''}`);
  if(row?.editorialReady===false||(Array.isArray(row?.editorialMissing)&&row.editorialMissing.length>0))reasons.push('작성 자료 추가 확인'); const title=safeGoldenTitle(row,row?.titles?.seo?.text);
  if(!fresh(row?.measuredAt,now,7))reasons.push('검색결과 재확인');
  if(!(typeof row?.searchVolume==='number'&&Number.isFinite(row.searchVolume)&&row.searchVolume>=100))reasons.push('검색 수요 확인');
@@ -58,3 +66,4 @@ export function selectGoldenResearch(rows, preferred='경제·지원금', limit=
  const initial=[...primary.slice(0,preferredCount),...other.slice(0,cap-preferredCount)];
  return [...initial,...primary.slice(preferredCount)].slice(0,cap);
 }
+
