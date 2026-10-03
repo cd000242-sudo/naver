@@ -8,7 +8,7 @@ import { createShoppingCollectedPublishImages } from '../../image/shoppingRefere
 import { getSubImageMode } from '../utils/subImageMode.js';
 import { beginImagePreviewBatch, endImagePreviewBatch, setImagePreviewBatchSlot } from './imagePreviewBatch.js';
 import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
-import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
+import { extractSemiAutoDocumentFromBody } from '../utils/semiAutoHeadingExtractor.js';
  
 
 // --- Global declarations (exposed by renderer.ts via window) ---
@@ -104,36 +104,35 @@ declare const aiProgressModal: {
 declare function getHeadingTitleByIndex(index: number): string;
 
 /**
- * The live structuredContent to analyze. autoAnalyzeHeadings writes the generated English
- * prompts back into `headings[i].prompt`, and image generation reads them from the very same
- * object, so the live object is returned (never a copy). When the loaded post carries no
- * headings, they are recovered from the body the user is looking at.
+ * Explicit body headings take precedence over an older analysis. Preserve image metadata
+ * by title and publish the new object so prompt write-back targets the active article.
  */
 function resolveStructuredContentForHeadingAnalysis(): any | null {
   const live = (window as any).currentStructuredContent;
-  if (live && typeof live === 'object' && Array.isArray(live.headings) && live.headings.length > 0) {
-    return live;
-  }
-
+  const existing = Array.isArray(live?.headings) ? live.headings : [];
   const bodyEl = document.getElementById('unified-generated-content') as HTMLTextAreaElement | null;
   const body = String(bodyEl?.value || '').trim();
-  if (!body) return null;
-  const extracted = extractSemiAutoHeadingsFromBody(body);
-  if (extracted.length === 0) return null;
+  if (!body) return existing.length > 0 ? live : null;
+  const marked = extractSemiAutoDocumentFromBody(body, { markedOnly: true });
+  const useMarked = live?.headingsLockedByUser === true || marked.headings.length > 0;
+  // Plain-text detection is heuristic; do not discard known generated sections.
+  if (!useMarked && existing.length > 0) return live;
+  const extracted = useMarked ? marked : extractSemiAutoDocumentFromBody(body);
+  if (extracted.headings.length === 0 && !useMarked) return null;
 
-  const target = (live && typeof live === 'object') ? live : {};
-  target.headings = extracted.map((heading) => ({
-    title: heading.title,
-    content: heading.content,
-    prompt: heading.prompt || heading.title,
-    source: 'image-tab:body-heading',
-  }));
-  if (!target.bodyPlain) target.bodyPlain = body;
-  if (!target.selectedTitle) {
-    const titleEl = document.getElementById('unified-generated-title') as HTMLInputElement | null;
-    const title = String(titleEl?.value || '').trim();
-    if (title) target.selectedTitle = title;
-  }
+  const titleEl = document.getElementById('unified-generated-title') as HTMLInputElement | null;
+  const target = {
+    ...(live && typeof live === 'object' ? live : {}),
+    selectedTitle: live?.selectedTitle || String(titleEl?.value || '').trim(),
+    bodyPlain: body,
+    introduction: extracted.introduction,
+    conclusion: '',
+    headings: extracted.headings.map((heading) => {
+      const previous = existing.find((item: any) => item?.title === heading.title);
+      return { ...previous, ...heading, prompt: previous?.prompt || heading.prompt || heading.title, source: 'image-tab:body-heading' };
+    }),
+  };
+  currentStructuredContent = target;
   (window as any).currentStructuredContent = target;
   return target;
 }
@@ -3619,6 +3618,7 @@ export async function autoAnalyzeHeadings(
           title,
           content: section.content,
           prompt,
+          isHeading: section.isHeading,
           isIntro: section.isIntro,
           isConclusion: section.isConclusion
         };
@@ -3705,7 +3705,8 @@ export function displayImageHeadingsWithPrompts(headings: any[]): void {
     const override = getManualEnglishPromptOverrideForHeading(title);
     const promptRaw = typeof h === 'string' ? '' : String(h?.prompt || '').trim();
     const prompt = override || promptRaw || generateEnglishPromptForHeadingSync(title);
-    const isConclusion = h?.isConclusion || title.includes('📝 마무리') || title.includes('마무리');
+    // Section roles are explicit; a body heading can legitimately be named 마무리.
+    const isConclusion = h?.isConclusion === true;
     // ✅ [2026-02-24 FIX] isIntro/isThumbnail 플래그 보존 → 모달 썸네일 배지 표시용
     const isIntro = !!(h?.isIntro);
     const isThumbnail = !!(h?.isThumbnail);
@@ -3720,8 +3721,8 @@ export function displayImageHeadingsWithPrompts(headings: any[]): void {
 
   // ✅ 각 소제목에 대한 프롬프트 아이템 동적 생성
   // ✅ 프롬프트 데이터는 글로벌 배열에 저장하여 data- 속성 문제 방지
-  (window as any)._headingPrompts = normalizedHeadings.map((h) => h.prompt || '');
-  (window as any)._headingTitles = normalizedHeadings.map((h) => h.title || '');
+  (window as any)._headingPrompts = displayHeadings.map((h) => h.prompt || '');
+  (window as any)._headingTitles = displayHeadings.map((h) => h.title || '');
 
   displayHeadings.forEach((heading, index) => {
     // ✅ 안전한 HTML 이스케이프 적용

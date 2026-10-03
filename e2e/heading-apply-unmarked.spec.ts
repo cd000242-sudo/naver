@@ -99,3 +99,14 @@ test('표기 없는 본문에서 적용을 눌러도 소제목이 사라지지 �
   expect((report as any).cardsAfterApply).toEqual((report as any).cardsBefore);
   expect((report as any).structuredHeadings.length).toBeGreaterThan(0);
 });
+
+test('마무리 단어가 들어간 세 번째 소제목도 이미지 관리에 표시된다', async () => {
+  const titles = ['여행 준비', '이동 방법', '여행을 마무리하는 방법', '다음 일정'];
+  await mainWindow.evaluate((headings) => {
+    const textarea = document.getElementById('unified-generated-content') as HTMLTextAreaElement;
+    textarea.value = headings.map(title => `## ${title}\n${title}에 대한 안내 본문입니다.`).join('\n\n');
+    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+  }, titles);
+  await expect.poll(() => mainWindow.locator('#prompts-container .heading-title-pure').allTextContents(), { timeout: 45000 }).toEqual(titles);
+  expect(await mainWindow.evaluate(() => (window as any)._headingTitles)).toEqual(titles);
+});

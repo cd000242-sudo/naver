@@ -11,6 +11,7 @@ const code = ts.transpileModule(source.slice(
 
 describe('image heading analysis lifecycle', () => {
   let analyze: (sc: any, options?: any) => Promise<void>;
+  let render: (headings: any[]) => void;
   let ai: ReturnType<typeof vi.fn>;
   let restoreImages: ReturnType<typeof vi.fn>;
   const image = { heading: '신청 방법', filePath: '/existing-image.png' };
@@ -35,7 +36,9 @@ describe('image heading analysis lifecycle', () => {
       updatePromptItemsWithImages: restoreImages,
       escapeHtml: (value: string) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'),
     };
-    analyze = new Function(...Object.keys(dependencies), `${code}\nreturn autoAnalyzeHeadings;`)(...Object.values(dependencies));
+    const harness = new Function(...Object.keys(dependencies), `${code}\nreturn { analyze: autoAnalyzeHeadings, render: displayImageHeadingsWithPrompts };`)(...Object.values(dependencies));
+    analyze = harness.analyze;
+    render = harness.render;
   });
 
   it('shows manually entered headings without requesting AI and preserves saved images', async () => {
@@ -88,5 +91,28 @@ describe('image heading analysis lifecycle', () => {
     expect((window as any)._headingTitles).toEqual([]);
     expect((window as any)._headingPrompts).toEqual([]);
     expect(document.getElementById('prompts-placeholder')?.style.display).toBe('block');
+  });
+
+  it.each([true, false])('keeps the third body heading containing 마무리 (localOnly=%s)', async (localOnly) => {
+    const expected = ['여행 준비', '이동 방법', '여행을 마무리하는 방법', '다음 일정'];
+    const sc = { headings: expected.map((title) => ({ title, content: `${title} 본문` })), conclusion: '별도 마무리 문단' };
+    await analyze(sc, { localOnly });
+    expect(titles()).toEqual(expected);
+    expect((window as any)._headingTitles).toEqual(expected);
+    document.querySelectorAll('.edit-heading-prompt-btn').forEach((button, index) => {
+      expect(button.getAttribute('data-heading-index')).toBe(String(index));
+      expect((window as any)._headingTitles[index]).toBe(expected[index]);
+    });
+  });
+
+  it('keeps an explicitly structured heading named 마무리', async () => {
+    await analyze({ headings: [{ title: '마무리', content: '직접 지정한 본문 섹션' }] });
+    expect(titles()).toEqual(['마무리']);
+  });
+
+  it('keeps body titles when prompt refresh supplies only title and prompt', () => {
+    render([{ title: '준비 방법', prompt: 'first' }, { title: '마무리', prompt: 'second' }]);
+    expect(titles()).toEqual(['준비 방법', '마무리']);
+    expect((window as any)._headingTitles).toEqual(['준비 방법', '마무리']);
   });
 });
