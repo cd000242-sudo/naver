@@ -60,7 +60,10 @@
                     </p>
                 </div>
 
-                <div class="code-label">올인원 라이선스 코드</div>
+                <div id="subscription-notice" class="hidden" style="background: rgba(68,215,182,0.08); border: 1px solid rgba(68,215,182,0.25); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 16px; color: var(--text-secondary); line-height: 1.7; font-size: 0.9rem;"></div>
+                <a id="subscription-manage" class="hidden" href="/lookup" style="display: block; color: var(--success); margin-bottom: 24px;">구독 조회 · 자동결제 해지</a>
+
+                <div class="code-label" id="license-code-label">올인원 라이선스 코드</div>
                 <div class="code-display" id="license-code"></div>
 
                 <button class="btn-copy" id="btn-copy" onclick="copyCode()">
@@ -71,7 +74,7 @@
                     style="background: rgba(68, 215, 182, 0.06); border: 1px solid rgba(68, 215, 182, 0.15); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
                     <p style="font-size: 0.85rem; color: var(--success); font-weight: 600; margin-bottom: 6px;">💡
                         사용 방법</p>
-                    <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+                    <p id="license-usage" style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
                         Leaders Pro 제품군 앱에서 라이선스 등록 화면을 열고<br>
                         위 올인원 코드를 입력하면 사용할 수 있습니다.<br>
                         Better Life Naver, Leaders Orbit, LEWORD를 이용 기간 안에서 함께 사용할 수 있습니다.
@@ -174,7 +177,7 @@
         // ===== URL 파라미터 파싱 =====
         // 토스 콜백 query string:
         // - 단건/즉시결제: paymentKey + orderId + amount
-        // - 정기결제 인증(7일 무료): customerKey + authKey  (paymentKey 없음)
+        // - 정기결제 인증: customerKey + authKey (LEWORD 월 구독은 즉시 첫 결제)
         function getParams() {
             const params = new URLSearchParams(window.location.search);
             return {
@@ -190,8 +193,9 @@
             };
         }
 
-        // ===== Trial 시작 JSONP 호출 =====
+        // ===== 정기결제 JSONP 호출 (상품별 서버 액션) =====
         function callStartTrialJSONP(params) {
+            const action = params.productId === 'leword-monthly' ? 'register-billing' : 'start-trial';
             return new Promise((resolve, reject) => {
                 const timeoutId = setTimeout(() => { cleanup(); reject(new Error('TIMEOUT')); }, CONFIG.TIMEOUT_MS);
                 const callbackName = '__trialCallback_' + Date.now();
@@ -203,7 +207,7 @@
                 }
                 const script = document.createElement('script');
                 script.id = 'jsonp-trial-script';
-                script.src = `${CONFIG.GAS_URL}?action=start-trial` +
+                script.src = `${CONFIG.GAS_URL}?action=${action}` +
                     `&authKey=${encodeURIComponent(params.authKey)}` +
                     `&customerKey=${encodeURIComponent(params.customerKey)}` +
                     `&amount=${encodeURIComponent(params.amount || '')}` +
@@ -258,7 +262,7 @@
         }
 
         // ===== 코드 표시 =====
-        function showCode(code, product) {
+        function showCode(code, product, sendEmail = true) {
             currentCode = code;
             currentProduct = product;
 
@@ -272,7 +276,7 @@
             document.title = '라이선스 발급 완료 — Leaders Pro';
 
             // 이메일이 있으면 자동 발송
-            if (buyerEmail) {
+            if (buyerEmail && sendEmail) {
                 autoSendEmail(buyerEmail, code, product);
             }
         }
@@ -351,7 +355,7 @@
                 // 이메일 발송 성공: UI 업데이트
                 document.getElementById('email-sent-notice').classList.remove('hidden');
                 document.getElementById('email-sent-address').textContent =
-                    `${email}로 올인원 라이선스 코드가 발송되었습니다.`;
+                    `${email}로 라이선스 코드가 발송되었습니다.`;
                 document.getElementById('email-backup-section').classList.add('hidden');
             } catch (err) {
                 // 자동 발송 실패: 수동 백업 섹션 유지
@@ -532,37 +536,57 @@
             showCode(result.code, result.product);
         }
 
+        // ===== LEWORD 월 구독 성공 화면 =====
+        function renderSubscriptionSuccess(result) {
+            document.getElementById('success-headline').textContent = 'LEWORD 월 구독이 시작되었습니다!';
+            document.getElementById('success-subtitle').textContent = '첫 결제가 완료되어 지금부터 LEWORD를 이용할 수 있습니다.';
+            document.getElementById('license-code-label').textContent = 'LEWORD 라이선스 코드';
+            document.getElementById('license-usage').textContent = 'LEWORD의 라이선스 등록 화면에 위 코드를 입력해 이용하세요.';
+            document.getElementById('trial-notice').classList.add('hidden');
+            const nextDate = result.nextPaymentDate ? new Date(result.nextPaymentDate) : null;
+            const dateLabel = nextDate && Number.isFinite(nextDate.getTime())
+                ? nextDate.toLocaleDateString('sv-SE', { timeZone: 'Asia/Seoul' }) : '주문 조회에서 확인';
+            const notice = document.getElementById('subscription-notice');
+            notice.textContent = '결제 금액 19,900원 (부가세 포함) · 30일마다 19,900원 자동결제. 다음 결제일: ' + dateLabel + '. 자동결제를 해지해도 결제한 이용 기간은 유지됩니다.';
+            notice.classList.remove('hidden');
+            document.getElementById('subscription-manage').classList.remove('hidden');
+            // 서버가 결제 메일을 발송한다. 새로고침 때 별도 메일 발송 요청을 반복하지 않는다.
+            showCode(result.code, result.product, false);
+            if (result.emailSent && buyerEmail) {
+                document.getElementById('email-sent-notice').classList.remove('hidden');
+                document.getElementById('email-sent-address').textContent = buyerEmail + '로 LEWORD 라이선스 코드가 발송되었습니다.';
+                document.getElementById('email-backup-section').classList.add('hidden');
+            }
+        }
+
         // ===== 메인 실행 =====
         async function main() {
             const params = getParams();
             buyerEmail = params.email || null;
 
-            // ── 정기결제 trial 분기: customerKey + authKey 있으면 7일 무료 시작 흐름
+            // 정기결제 인증 콜백: LEWORD 월 구독만 즉시 첫 결제, 다른 상품은 기존 체험 유지.
             if (params.customerKey && params.authKey) {
-                /*
-                 * [2026-09-15] authKey 는 토스에서 한 번만 쓸 수 있다. 그런데 이 페이지는 열릴
-                 * 때마다 start-trial 을 불렀다 — 새로고침 한 번, 뒤로가기 한 번이면 이미 소멸된
-                 * authKey 로 다시 호출되고, 토스가 "빌링키가 존재하지 않습니다"를 돌려준다.
-                 * 첫 호출이 성공했어도 사용자는 실패 화면을 본다.
-                 * 그래서 성공 결과를 브라우저에 남겨 두고, 재진입이면 다시 부르지 않고 그대로 보여준다.
-                 */
-                const guardKey = 'lp_trial_' + params.authKey;
+                const isSubscription = params.productId === 'leword-monthly';
+                const renderSuccess = isSubscription ? renderSubscriptionSuccess : renderTrialSuccess;
+                // authKey는 일회성이므로 성공 결과만 보관한다. 체험 결과와 구독 결과는 섞지 않는다.
+                const guardKey = (isSubscription ? 'lp_subscription_' : 'lp_trial_') + params.authKey;
                 let cached = null;
                 try { cached = JSON.parse(localStorage.getItem(guardKey) || 'null'); } catch (e) { cached = null; }
-                if (cached && cached.code) {
-                    renderTrialSuccess(cached);
+                if (cached && cached.ok && cached.code) {
+                    renderSuccess(cached);
                     return;
                 }
+                document.getElementById('btn-check-order').style.display = 'none';
                 try {
                     const result = await callStartTrialJSONP(params);
                     if (result.ok && result.code) {
                         try { localStorage.setItem(guardKey, JSON.stringify(result)); } catch (e) { /* 저장 못 해도 화면은 그대로 */ }
-                        renderTrialSuccess(result);
+                        renderSuccess(result);
                     } else {
-                        showError(result.error || 'trial 등록 중 오류가 발생했습니다.', 'trial 시작 실패');
+                        showError(result.error || '구독 등록 중 오류가 발생했습니다.', '구독 시작 실패');
                     }
                 } catch (err) {
-                    showError('서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.', '연결 실패');
+                    showError('서버 응답을 확인하지 못했습니다. 결제되었을 수 있으니 주문 조회에서 상태를 확인하거나 고객 지원에 문의해주세요.', '연결 확인 필요');
                 }
                 return;
             }

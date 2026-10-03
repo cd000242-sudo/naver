@@ -1,7 +1,7 @@
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import ProofShowcase from '../components/ProofShowcase';
-import ProductStore from '../components/store/ProductStore';
+import ProductStore, { type StorePick } from '../components/store/ProductStore';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 import { gradient, onGold, whiteA } from '../styles/tokens';
@@ -237,6 +237,16 @@ function PricingPage() {
     const initialTab = (searchParams.get('tab') as TabKey | null);
     const [tab, setTab] = useState<TabKey>(TAB_KEYS.includes(initialTab as TabKey) ? (initialTab as TabKey) : 'naver');
     const [selected, setSelected] = useState<Plan | null>(null);
+    const handleStorePick = useCallback((pick: StorePick | null) => setSelected(pick ? {
+        id: pick.id,
+        name: pick.name,
+        desc: pick.desc,
+        amount: pick.amount,
+        // VAT 포함 상품은 중복 과세하지 않은 제품별 합계를 사용한다.
+        amountCard: pick.amountCard,
+        period: '',
+        features: [],
+    } : null), []);
     const [email, setEmail] = useState('');
     const [paying, setPaying] = useState(false);
     const [pricingNow, setPricingNow] = useState(() => Date.now());
@@ -852,6 +862,7 @@ function buildCustomerKey(email: string): string {
                             <details className="st-faq">
                                 <summary>결제 전 자주 묻는 질문</summary>
                                 <div>
+                                    <p><b>LEWORD 월 구독은 어떻게 갱신하나요?</b><br />월 19,900원(부가세 포함)입니다. 카드 구독은 30일마다 자동결제되며, 계좌이체는 30일 이용권을 직접 입금해 수동 갱신합니다. 계좌에서 자동출금되지 않습니다.</p>
                                     <p><b>결제 정보는 안전한가요?</b><br />토스페이먼츠 공식 PG 로 처리됩니다. 카드 정보는 저희 서버에 저장되지 않습니다.</p>
                                     <p><b>환불이 정말 가능한가요?</b><br />라이선스 발급 후 7일 이내·서비스 미사용이면 전액 환불됩니다. 카카오톡 1:1 상담으로 바로 신청하실 수 있습니다.</p>
                                     <p><b>사용법이 어렵지 않나요?</b><br />설치하고 키워드만 넣으면 글·이미지·발행까지 자동입니다. 처음 5분 안내 영상과 카카오톡 지원이 함께 갑니다.</p>
@@ -866,17 +877,7 @@ function buildCustomerKey(email: string): string {
                             </p>
                         </>
                     )}
-                    onPick={(pick) => setSelected(pick ? {
-                        id: pick.id,
-                        name: pick.name,
-                        desc: pick.desc,
-                        amount: pick.amount,
-                        // 카드 결제 교리: 카드는 VAT 10% 포함 금액을 청구한다.
-                        // 이게 없으면 담은 주문의 카드 청구가 부가세 없이 나갔다.
-                        amountCard: Math.round(pick.amount * 1.1),
-                        period: '',
-                        features: [],
-                    } : null)}
+                    onPick={handleStorePick}
                     onCardPay={(mail) => {
                         // 창에서 받은 이메일을 아래 구역에도 채워 둔다 — 되돌아왔을 때 다시 안 적게.
                         setEmail(mail);

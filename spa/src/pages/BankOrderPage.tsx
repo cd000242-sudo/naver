@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
-import { applyStoreOverrides, normalPriceOf, TERMS, won, type Product, type TermId } from '../lib/productCatalog';
+import { applyStoreOverrides, isTaxIncludedPrice, normalPriceOf, TERMS, won, type Product, type TermId } from '../lib/productCatalog';
 import { fetchSiteContent } from '../lib/siteOps';
 import { color, gradient, onGold, whiteA } from '../styles/tokens';
 
@@ -68,7 +68,7 @@ async function fetchOrderStatus(orderId: string) {
  * 알아서 담아온 것을 통째로 무시했다(사장님 실측 2026-08-20). 값은 카탈로그
  * 실측이다. 자동 인상은 껐다(배수 1) — 배수를 되살리면 여기서도 전환된다.
  */
-function readCartOrder(params: URLSearchParams, catalog: Product[]): { label: string; names: string[]; amount: number } | null {
+function readCartOrder(params: URLSearchParams, catalog: Product[]): { label: string; names: string[]; amount: number; monthly: boolean; taxNote: string } | null {
     const ids = (params.get('items') || '').split(',').map((id) => id.trim()).filter(Boolean);
     const term = params.get('term') as TermId | null;
     if (ids.length === 0 || !term || !TERMS.some((item) => item.id === term)) return null;
@@ -86,6 +86,8 @@ function readCartOrder(params: URLSearchParams, catalog: Product[]): { label: st
         label: `${picked.map((product) => product.name).join(' · ')} ${termLabel}`,
         names: picked.map((product) => `${product.name} ${termLabel}`),
         amount,
+        monthly: term === 'monthly',
+        taxNote: picked.every((product) => isTaxIncludedPrice(product, term)) ? '부가세 포함' : picked.some((product) => isTaxIncludedPrice(product, term)) ? 'LEWORD 월 구독 부가세 포함 · 나머지 별도' : '부가세 별도',
     };
 }
 
@@ -271,10 +273,11 @@ function BankOrderPage() {
                                 </div>
                             ))}
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 10, paddingTop: 12, borderTop: '1px solid rgba(201,168,76,0.2)' }}>
-                                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>합계 (부가세 별도)</span>
+                                <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>합계 ({cartOrder.taxNote})</span>
                                 <strong style={{ fontSize: 22, fontWeight: 800, color: '#FFD700' }}>{won(cartOrder.amount)}원</strong>
                             </div>
                         </div>
+                        {cartOrder.monthly && <p style={{ margin: '14px 0 0', padding: '12px 14px', borderRadius: 10, background: 'rgba(201,168,76,0.10)', color: '#f8e9b0', fontSize: 13, lineHeight: 1.7 }}>월 이용권 · 30일 이용 후 수동 갱신<br />계좌이체는 자동출금되지 않습니다. 계속 이용하려면 매 회차 직접 주문·입금해 주세요. 입금 확인 후 새 이용권을 발급합니다.</p>}
                         <p style={{ margin: '10px 0 0', fontSize: 12.5, color: 'rgba(255,255,255,0.5)' }}>
                             제품을 바꾸시려면 <a href="/pricing" style={{ color: '#FFD700' }}>가격표로 돌아가기 →</a>
                         </p>

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../../lib/pricingSchedule';
 import { fetchSiteContent } from '../../lib/siteOps';
 import {
-    applyStoreOverrides, individualTotal, normalPriceOf, perDay, perMonth, sellableProducts, TERMS, won,
+    applyStoreOverrides, individualTotal, isTaxIncludedPrice, productCardAmount, normalPriceOf, perDay, perMonth, sellableProducts, TERMS, won,
     type Product, type TermId,
 } from '../../lib/productCatalog';
 import StoreStyles from './StoreStyles';
@@ -24,7 +24,7 @@ function daysToSwitch(): number | null {
 }
 
 /** 담은 결과를 바깥(결제 구역)에 알려 준다. 아무것도 안 담았으면 null. */
-export type StorePick = { id: string; name: string; amount: number; desc: string };
+export type StorePick = { id: string; name: string; amount: number; amountCard: number; desc: string };
 
 function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
     onPick?: (pick: StorePick | null) => void;
@@ -48,7 +48,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
     /** 별점·사용자 수·환불 보장 — 값 바로 옆에 선다. 결정하는 순간에 필요한 재료다. */
     trust?: ReactNode;
 }) {
-    const [term, setTerm] = useState<TermId>('yearly');
+    const [term, setTerm] = useState<TermId>('monthly');
     const [cart, setCart] = useState<string[]>([]);
     const dday = daysToSwitch();
     const normalActive = isNormalPricingActive();
@@ -64,13 +64,14 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
         }).catch(() => { /* 못 읽으면 기본값 그대로 */ });
         return () => { cancelled = true; };
     }, []);
-    const products = sellableProducts(catalog);
+    const products = useMemo(() => sellableProducts(catalog), [catalog]);
 
     const toggle = (product: Product) => {
         setCart((was) => {
             // 올인원을 담으면 개별은 비운다 — 둘 다 사는 사람은 없다.
             if (product.bundle) return was.includes(product.id) ? [] : [product.id];
-            const withoutBundle = was.filter((id) => !products.find((item) => item.id === id)?.bundle);
+            if (term === 'monthly' && product.id === 'leword') return was.includes(product.id) ? [] : ['leword'];
+            const withoutBundle = was.filter((id) => !products.find((item) => item.id === id)?.bundle && !(term === 'monthly' && id === 'leword'));
             return withoutBundle.includes(product.id)
                 ? withoutBundle.filter((id) => id !== product.id)
                 : [...withoutBundle, product.id];
@@ -83,6 +84,10 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
         [cart, products],
     );
     const total = picked.reduce((sum, product) => sum + priceOf(product, term, normalActive), 0);
+
+    const totalCard = picked.reduce((sum, product) => sum + productCardAmount(product, term, priceOf(product, term, normalActive)), 0);
+    const includesTaxIncludedPrice = picked.some((product) => isTaxIncludedPrice(product, term));
+    const bankTaxNote = picked.every((product) => isTaxIncludedPrice(product, term)) ? '부가세 포함' : includesTaxIncludedPrice ? 'LEWORD 월 구독 부가세 포함 · 나머지 별도' : '부가세 별도';
 
     /*
      * 결제 구역은 예전부터 "고른 플랜 하나"를 받는 구조다. 여러 개를 담을 수 있게
@@ -99,15 +104,19 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
     /** 라이선스를 받을 이메일 — 로그인이 없으니 이 주소가 유일한 통로다. */
     const [email, setEmail] = useState('');
     const [mailWarn, setMailWarn] = useState(false);
+    const [recurringConsent, setRecurringConsent] = useState(false);
+    const lewordSubscription = term === 'monthly' && picked.length === 1 && picked[0].id === 'leword';
+    useEffect(() => { setRecurringConsent(false); }, [term, totalCard, cart.join(',')]);
     useEffect(() => {
         if (!onPick) return;
         onPick(picked.length === 0 ? null : {
             id: `${picked.map((product) => product.id).join('+')}-${term}`,
             name: `${picked.map((product) => product.name).join(' · ')} ${termLabel}`,
             amount: total,
+            amountCard: totalCard,
             desc: `${picked.length}개 제품 · ${termLabel}`,
         });
-    }, [onPick, picked, term, total, termLabel]);
+    }, [onPick, picked, term, total, totalCard, termLabel]);
 
     /** 개별을 둘 이상 담았을 때만 올인원과 견준다. */
     const bundle = products.find((product) => product.bundle);
@@ -131,7 +140,10 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                             key={item.id}
                             type="button"
                             className={term === item.id ? 'on' : ''}
-                            onClick={() => setTerm(item.id)}
+                            onClick={() => {
+                                setTerm(item.id);
+                                if (item.id === 'monthly') setCart((was) => was.includes('leword') ? ['leword'] : was);
+                            }}
                         >
                             {item.label}{item.note && <em>{item.note}</em>}
                         </button>
@@ -217,6 +229,14 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                 {(() => {
                                     const daily = perDay(price, term);
                                     const termUnit = term === 'lifetime' ? '' : term === 'yearly' ? '년' : '월';
+                                    if (isTaxIncludedPrice(product, term)) {
+                                        return <>
+                                            <div className="st-price"><b>{won(price)}</b><i>원 / 월</i></div>
+                                            <p className="st-permo">부가세 포함 · 카드 30일마다 자동결제</p>
+                                            <p style={{ fontSize: 12, color: '#f0b53f', margin: '0 0 8px' }}>LEWORD는 개별 구독으로 결제합니다.</p>
+                                            <p style={{ fontSize: 12, lineHeight: 1.6, color: '#cbd5e1', margin: '0 0 14px' }}>계좌이체는 30일 이용 후 수동 갱신 · 자동출금 없음</p>
+                                        </>;
+                                    }
                                     if (!daily) {
                                         return (
                                             <>
@@ -274,7 +294,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                             ))}
                         </div>
                         <div className="st-cart-total">
-                            <em>{picked.length}개 · 부가세 별도</em>
+                            <em>{picked.length}개 · {bankTaxNote}</em>
                             <strong>{won(total)}원</strong>
                         </div>
                         <button type="button" className="st-cart-go" onClick={() => setPayOpen(true)}>결제하기</button>
@@ -299,7 +319,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                 </div>
 
                                 <div className="st-pay-sum">
-                                    <span>{picked.length}개 제품 · 부가세 별도</span>
+                                    <span>{picked.length}개 제품 · {bankTaxNote}</span>
                                     <b>{won(total)}원</b>
                                 </div>
 
@@ -316,10 +336,17 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                     <em>{mailWarn ? '이메일을 정확히 적어 주세요 — 여기로만 코드가 갑니다.' : '결제가 끝나면 이 주소로 라이선스 코드가 갑니다. 따로 로그인이 없어 이 주소가 유일한 통로입니다.'}</em>
                                 </label>
 
+                                {lewordSubscription && <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '16px 0', padding: 14, borderRadius: 10, background: 'rgba(240,181,63,0.08)', color: '#e2e8f0', fontSize: 13, lineHeight: 1.7 }}>
+                                    <input type="checkbox" checked={recurringConsent} onChange={(event) => setRecurringConsent(event.target.checked)} style={{ marginTop: 5, flexShrink: 0 }} />
+                                    <span>첫 결제는 즉시 {won(totalCard)}원(부가세 포함), 이후 해지 전까지 30일마다 같은 금액으로 자동결제되는 것에 동의합니다. 갱신일 전 <a href="/lookup" style={{ color: '#f0b53f' }}>구독 조회·해지</a>에서 해지할 수 있습니다.</span>
+                                </label>}
                                 <button
                                     type="button"
                                     className="st-pay-opt"
+                                    disabled={lewordSubscription && !recurringConsent}
+                                    style={lewordSubscription && !recurringConsent ? { opacity: 0.45, cursor: 'not-allowed' } : undefined}
                                     onClick={() => {
+                                        if (lewordSubscription && !recurringConsent) return;
                                         const mail = email.trim();
                                         if (!mail || !mail.includes('@')) { setMailWarn(true); return; }
                                         setPayOpen(false);
@@ -329,7 +356,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                     <span className="st-pay-ico" aria-hidden="true">💳</span>
                                     <span className="st-pay-body">
                                         <b>카드결제</b>
-                                        <em>토스페이먼츠 보안 결제 · VAT 10% 포함 청구 · 바로 시작</em>
+                                        <em>{won(totalCard)}원 (부가세 포함){term === 'monthly' ? ' · 30일마다 자동결제' : ' · 토스페이먼츠 보안 결제'}</em>
                                     </span>
                                     <i aria-hidden="true">→</i>
                                 </button>
@@ -340,11 +367,12 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                     <span className="st-pay-ico" aria-hidden="true">🏦</span>
                                     <span className="st-pay-body">
                                         <b>계좌이체</b>
-                                        <em>본인 이름으로 입금 · 확인 즉시 오픈채팅으로 코드 안내</em>
+                                        <em>{won(total)}원 · {term === 'monthly' ? '30일 이용 · 수동 갱신 · 자동출금 없음' : '본인 이름으로 입금 · 확인 후 코드 안내'}</em>
                                     </span>
                                     <i aria-hidden="true">→</i>
                                 </a>
 
+                                {term === 'monthly' && <p style={{ margin: '14px 0', color: '#cbd5e1', fontSize: 13, lineHeight: 1.7 }}>카드 구독은 해지 전까지 30일마다 갱신됩니다. 다음 결제를 원하지 않으면 갱신일 전에 구독을 해지해 주세요. 계좌이체는 매 회차 직접 입금하고 확인 후 새 이용권을 받습니다.</p>}
                                 <p className="st-pay-foot">
                                     코드 발급 후 7일 이내 미사용이면 전액 환불됩니다 · 결제 진행 시 이용약관과 개인정보처리방침에 동의하는 것으로 봅니다.
                                 </p>

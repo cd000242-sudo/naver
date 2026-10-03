@@ -89,7 +89,7 @@ export const PRODUCTS: Product[] = [
         image: '/images/leword/hero-banner-card.webp',
         accent: '#f0b53f',
         glyph: '◆',
-        prices: { monthly: 9900, yearly: 150000, lifetime: 750000 },
+        prices: { monthly: 19900, yearly: 150000, lifetime: 750000 },
         features: ['황금키워드 보드 · 하루 갱신', '키워드 분석 · 검색량 문서수 실측', '지식인 황금질문', '유튜브 급상승 글감'],
         // 설치가 없다 — 로그인만 하면 브라우저에서 바로 열린다.
         status: 'on',
@@ -203,3 +203,11 @@ export function perDay(price: number, term: TermId): number | null {
 }
 
 export const won = (value: number) => value.toLocaleString('ko-KR');
+
+/** LEWORD 월 구독만 표시 금액에 VAT가 포함된다. 기존 기간권의 과세 규칙은 유지한다. */
+export const isTaxIncludedPrice = (product: Product, term: TermId): boolean => product.id === 'leword' && term === 'monthly';
+
+/** 혼합 주문도 제품별로 과세한다. VAT 포함 월 구독에 다시 10%를 더하지 않는다. */
+export function productCardAmount(product: Product, term: TermId, price = product.prices[term] || 0): number {
+    return isTaxIncludedPrice(product, term) ? price : Math.round(price * 1.1);
+}
