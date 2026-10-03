@@ -93,29 +93,33 @@ export default function RealtimeStrip({ measuredKeys, onPick, data: injected }: 
                     signal.bz(뉴스 기반) 소스 기준 {agoText(sourceAge)} · 5분마다 다시 받음
                 </span>
             </div>
-            <div className="lw-realtime-items">
+            <ol className="lw-realtime-items" aria-label="지금 실시간 검색어 순위">
                 {items.map((item) => {
                     const measured = measuredKeys?.has(item.keyword.replace(/\s+/g, '').toLowerCase());
                     const up = item.rankDelta != null && item.rankDelta > 0;
                     const down = item.rankDelta != null && item.rankDelta < 0;
+                    const Row = onPick ? 'button' : 'div';
                     return (
-                        <button
-                            key={item.keyword}
-                            type="button"
+                        <li key={item.keyword}>
+                        <Row
+                            type={onPick ? 'button' : undefined}
                             className={`lw-realtime-item${measured ? ' measured' : ''}`}
                             title={`${item.rank}위 · 우리가 처음 본 때 ${agoText(ageFrom(item.firstSeenAt))}${item.prevRank ? ` · 직전 ${item.prevRank}위` : ''}`}
                             onClick={() => onPick?.(item.keyword)}
                         >
                             <span className="lw-realtime-rank">{item.rank}</span>
                             <span className="lw-realtime-word">{item.keyword}</span>
+                            <span className="lw-realtime-badges">
                             {up && <span className="lw-realtime-delta up">▲{item.rankDelta}</span>}
                             {down && <span className="lw-realtime-delta down">▼{Math.abs(item.rankDelta as number)}</span>}
                             {item.prevRank == null && <span className="lw-realtime-new">새로 진입 · {agoText(ageFrom(item.firstSeenAt))}</span>}
                             {measured && <span className="lw-realtime-measured">판정 있음</span>}
-                        </button>
+                            </span>
+                        </Row>
+                        </li>
                     );
                 })}
-            </div>
+            </ol>
         </div>
     );
 }
