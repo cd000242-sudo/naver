@@ -7,6 +7,7 @@ import { loadAdvisorDaily } from '../../../lib/homefeedEvidenceLoad';
 import type { AdvisorDailyView } from '../../../lib/myBlogSync';
 import HomefeedBenchmarkCard from './HomefeedBenchmarkCard';
 import HomefeedBenchmarkStyles from './HomefeedBenchmarkStyles';
+import HomefeedTrendsPanel from './HomefeedTrendsPanel';
 
 const FILTERS = [['all','전체'],['recommended','★ 우선 검토'],['review-now','지금 검토'],['verify','추가 확인'],['stale','시점 재검토']];
 const SOURCE_STATUS = {ok:'수집 확인',failed:'수집 실패',unavailable:'확인 못함'};
@@ -98,6 +99,8 @@ export default function HomefeedBenchmarkBoard() {
     <div className="hfb-source-grid">{view.sources.map((s,index)=><div key={`${s.id}-${index}`} className="hfb-channel"><b>{s.url ? <a href={s.url} target="_blank" rel="noopener noreferrer">{s.name} ↗</a> : s.name}</b><span data-state={s.status}>{SOURCE_STATUS[s.status]}{s.status==='ok'?` · ${s.postCount}개`:''}</span>{s.reason&&<small>{s.reason}</small>}<small>확인 {benchmarkTime(s.capturedAt)}</small></div>)}</div>
    </details>
    <p className="hfb-proof-summary">{proofSummary ? `실제 홈판 기록과 맞댐 · 어드바이저 ${proofSummary.from?.slice(5).replace('-','/')}~${proofSummary.to?.slice(5).replace('-','/')} 홈판 상위 ${proofSummary.homefeedTitles}개 · 내 블로그 홈판 유입 글 ${proofSummary.myHits}개 (${advisor?.from==='app'?'이 PC 앱에서':'동기화본에서'} 받음)` : 'LEWORD 앱에서 네이버 로그인(어드바이저) 후 로그인 · 동기화하면, 실제 홈판에 오른 소재와 내 블로그 홈판 유입 소재를 카드에 표시합니다.'}</p>
+   {/* 오늘의 홈판 흐름(2026-10-06) — 수집기가 판에 실은 trends. 옛 판엔 없어서 그때는 안 그린다. */}
+   {view.trends && <HomefeedTrendsPanel trends={view.trends} realTitles={advisor?.daily?.homefeedTitles ?? []} onPickCategory={(name)=>{ setCategory(name); setStatus('all'); setQuery(''); }} />}
    <div className="hfb-filters">
     <div className="hfb-filter-row" role="group" aria-label="검토 상태">{FILTERS.map(([id,label])=><button type="button" key={id} aria-pressed={status===id} onClick={()=>setStatus(id)}>{label} <span>{id==='all'?view.candidates.length:id==='recommended'?view.candidates.filter(c=>c.recommended).length:view.candidates.filter(c=>c.status===id).length}</span></button>)}{proofSummary&&PROOF_FILTERS.map(([id,label])=><button type="button" key={id} className="proof" aria-pressed={status===id} onClick={()=>setStatus(id)}>{label} <span>{annotated.filter(c=>id==='homefeed'?c.evidence.homefeed:c.evidence.mine).length}</span></button>)}</div>
     <div className="hfb-filter-bottom"><div className="hfb-categories" role="group" aria-label="분야">{categories.map(c=><button type="button" key={c} aria-pressed={category===c} onClick={()=>setCategory(c)}>{c}</button>)}</div><input type="search" aria-label="벤치마크 소재 검색" placeholder="키워드·이야기 검색" value={query} onChange={e=>setQuery(e.target.value)}/></div>

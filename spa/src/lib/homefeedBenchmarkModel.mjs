@@ -26,11 +26,27 @@ function candidate(raw, index) {
  const officialSources = Array.isArray(raw.officialSources) ? raw.officialSources.slice(0,6).filter(x=>x && typeof x==='object').map(x=>({title:str(x.title,150),url:safeBenchmarkUrl(x.url)})).filter(x=>x.url) : [];
  return {...strings, homeTitles, id:str(raw.id,120) || `candidate-${index}`, category:str(raw.category,80) || '기타', status:['review-now','verify','stale'].includes(raw.status) ? raw.status : 'verify', recommended:raw.recommended === true, priority:number(raw.priority) ?? 0, publishedAt:date(raw.publishedAt), eventAt:date(raw.eventAt), capturedAt:date(raw.capturedAt), reviewedUntil:date(raw.reviewedUntil), officialSources, why:list(raw.why), mustInclude:list(raw.mustInclude), mustAvoid:list(raw.mustAvoid), relatedKeywords:list(raw.relatedKeywords), verificationNeeded:list(raw.verificationNeeded), flags:list(raw.flags), imageGuide:{url:safeBenchmarkUrl(raw.imageGuide?.url),instruction:str(raw.imageGuide?.instruction)}, metrics:{searchVolume:number(raw.metrics?.searchVolume),documentCount:number(raw.metrics?.documentCount),rankingPossibility:'unmeasured',reactionGrowth:number(raw.metrics?.reactionGrowth)}, homefeedExposure:raw.homefeedExposure === 'confirmed' ? 'confirmed' : 'unverified', sources:Array.isArray(raw.sources) ? raw.sources.slice(0,30).filter(x=>x && typeof x==='object').map(source) : []};
 }
+/*
+ * 홈판 흐름 요약(2026-10-06) — 사장님 "오늘의 자주 뜨는 홈판 주제는 없네? · 고수 블로거들을 어떻게 썼고 우리는 어떻게".
+ * 수집기(앱 레포 scripts/homefeed-benchmarks-trends.cjs)가 계산해 판에 싣는다 — 화면은 검사만 하고 그대로 그린다.
+ */
+const int = (v) => (typeof v === 'number' && Number.isFinite(v) && v >= 0 ? Math.round(v) : 0);
+const story = (raw = {}) => ({ keyword:str(raw.keyword,80), title:str(raw.title,200), category:str(raw.category,40) || '기타', channels:int(raw.channels), homeTitle:str(raw.homeTitle,120) });
+export function normalizeTrends(raw) {
+ if (!raw || typeof raw !== 'object' || !Array.isArray(raw.categories) || !Array.isArray(raw.topStories)) return null;
+ const stats = raw.writing?.stats || {};
+ return {
+  windowHours:int(raw.windowHours) || 24, from:date(raw.from), to:date(raw.to), posts:int(raw.posts), channels:int(raw.channels),
+  categories:raw.categories.slice(0,12).filter(x=>x && typeof x==='object').map(c=>({ category:str(c.category,40) || '기타', posts:int(c.posts), channels:int(c.channels), stories:Array.isArray(c.stories) ? c.stories.slice(0,3).map(story) : [], examples:Array.isArray(c.examples) ? c.examples.slice(0,3).filter(x=>x && typeof x==='object').map(x=>({ title:str(x.title,200), name:str(x.name,80), url:safeBenchmarkUrl(x.url) })).filter(x=>x.title) : [] })),
+  topStories:raw.topStories.slice(0,10).filter(x=>x && typeof x==='object').map(story).filter(x=>x.keyword),
+  writing:{ basis:str(raw.writing?.basis,40), stats:{ count:int(stats.count), length:{ median:int(stats.length?.median), p25:int(stats.length?.p25), p75:int(stats.length?.p75) }, quoteStart:int(stats.quoteStart), ellipsis:int(stats.ellipsis), question:int(stats.question), exclaim:int(stats.exclaim), number:int(stats.number), colloquial:int(stats.colloquial) }, guide:list(raw.writing?.guide).slice(0,8) },
+ };
+}
 export function normalizeBenchmarkBoard(raw) {
  if (!raw || raw.schemaVersion !== 1 || !Array.isArray(raw.candidates) || !Array.isArray(raw.sources)) throw new Error('벤치마크 데이터 형식을 확인하지 못했습니다.');
  if (!date(raw.generatedAt)) throw new Error('마지막 수집 시각을 확인하지 못했습니다.');
  const sources = raw.sources.slice(0,300).filter(x=>x && typeof x==='object').map(source);
- return {schemaVersion:1,generatedAt:date(raw.generatedAt),attemptedAt:date(raw.attemptedAt),status:['fresh','partial','stale'].includes(raw.status) ? raw.status : 'partial',sources,sourceCount:sources.length,collectedPostCount:sources.filter(s=>s.status==='ok').reduce((sum,s)=>sum+s.postCount,0),candidates:raw.candidates.slice(0,300).filter(x=>x && typeof x==='object').map(candidate)};
+ return {schemaVersion:1,generatedAt:date(raw.generatedAt),attemptedAt:date(raw.attemptedAt),status:['fresh','partial','stale'].includes(raw.status) ? raw.status : 'partial',sources,sourceCount:sources.length,collectedPostCount:sources.filter(s=>s.status==='ok').reduce((sum,s)=>sum+s.postCount,0),candidates:raw.candidates.slice(0,300).filter(x=>x && typeof x==='object').map(candidate),trends:normalizeTrends(raw.trends)};
 }
 export function benchmarkView(board, now = Date.now()) {
  const isOld = (value) => !value || now - Date.parse(value) > MAX_AGE || Date.parse(value) > now + 5*60*1000;
