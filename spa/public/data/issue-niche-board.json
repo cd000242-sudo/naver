@@ -1,18 +1,17 @@
 {
-  "publishedAt": "2026-10-05T09:56:04.238Z",
+  "publishedAt": "2026-10-05T21:46:27.879Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 18,
-    "candidates": 221,
+    "issues": 17,
+    "candidates": 234,
     "niche": 0,
-    "preemption": 6,
+    "preemption": 9,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-05",
+    "day": "2026-10-06",
     "keywords": [
-      "박지만 회장",
       "kia rv"
     ]
   },
@@ -141,7 +140,7 @@
           80,
           18
         ],
-        "measuredAt": "2026-10-05T09:36:49.971Z"
+        "measuredAt": "2026-10-05T21:46:28.566Z"
       },
       "kinCount": 138,
       "kinTop": [
@@ -158,54 +157,36 @@
       "exclusionReason": null,
       "kinMode": "date-views-v2",
       "carried": true
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "박지만 회장",
-      "issue": "박지만",
-      "topic": "박지만",
+      "keyword": "우리들의 발라드2 허채민",
+      "issue": "우리들의 발라드2",
+      "topic": "우리들의 발라드2",
       "lane": "realtime",
       "issueType": "fresh",
       "isDerived": true,
       "origin": "autocomplete",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "박지만 암살자들 무슨 관계? 육영수 피격 당시 직접 밝힌 기억",
-          "박지만 “우리 아버지가 그렇게 미운가”…‘암살자들’ 직접 본 황현필은 말할 자격 없다!",
-          "\"우리 아버지가 그렇게 미운가요?\" 박정희 아들 박지만 암살자들 유족 솔직 심경 밝혀 | 박지만 누구? 나이 가족 결혼 아내 자녀 누나 박근혜 인스타",
-          "박지만 “아버지가 그렇게 소리 내어 우는 모습 처음 봤다”…육영수 피격 사건 회고",
-          "‘암살자(들)’ 논란에 입 연 박지만",
-          "박지만 “어머니 돌아가신 날, 아버지가 소리 내어 우는 모습 처음 봤다”…‘암살자(들)’ 논란에 입 열었다",
-          "암살자들 논란 입장 한눈에 정리｜박지만 반박부터 여야·황현필 발언까지",
-          "“우리 아버지가 그렇게 미운가” 박지만, ‘암살자들’ 논란에 결국 입 열었다",
-          "“아버지가 그렇게 우는 모습 처음 봤다”박지만, 영화 ‘암살자(들)’ 논란에 처음 입 열었다",
-          "박지만 “우리 아버지가 그렇게 미운가”…영화 ‘암살자(들)’ 논란과 52년 전 그날"
-        ],
-        "measuredAt": "2026-10-03T21:26:00.022Z"
-      },
-      "documentCount": 5615,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 19,
       "documentCountMeasured": true,
-      "searchVolume": 4690,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 1.1404486330305756,
+      "searchVolume": 280,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
       "issueStatus": "rising",
       "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
       "reasons": [
-        "검색량 4,690",
-        "문서수 5,615",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "검색량 280",
+        "문서수 19",
+        "선점 후보 — 경쟁 문서 19건, 수요 미검출"
       ],
       "evidence": [
         {
@@ -213,98 +194,721 @@
           "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
         },
         {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 4,690 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
           "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
         },
         {
           "code": "fresh",
           "text": "이슈 자체가 지금 뜨는 중(HOT)"
         }
       ],
-      "whySearch": null,
+      "whySearch": {
+        "text": "'우리들의 발라드2'가 첫 방송하며 선공개 영상 주인공이 등장했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+          "text": "우리들의 발라드2 허채민 프로필·선공개 영상 우승후보 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+          "text": "우리들의 발라드2 허채민 심사위원들이 무대 끝나고 서로 쳐다보더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "우리들의 발라드2 재방송",
+          "searchVolume": 1700,
+          "frame": "generic"
+        },
+        {
+          "keyword": "우리들의 발라드2 출연진",
+          "searchVolume": 1250,
+          "frame": "generic"
+        },
+        {
+          "keyword": "우리들의 발라드2 심사위원",
+          "searchVolume": 640,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "우리들의 발라드2 재방송",
+          "searchVolume": 1700,
+          "documentCount": 1291,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "우리들의 발라드2 출연진",
+          "searchVolume": 1250,
+          "documentCount": 12589,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "우리들의 발라드2 심사위원",
+          "searchVolume": 640,
+          "documentCount": 6910,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "우리들의 발라드2 참가자",
+          "searchVolume": 170,
+          "documentCount": 13312,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-05T21:42:06.266Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "sift-ag.com",
+      "issue": "SIFT",
+      "topic": "SIFT",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 59,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 59",
+        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "sift-ag.com SIFT 자가 진화 AI 에이전트 뭐가 다른지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "sift-ag.com SIFT 에이전트 검증 비용 병목 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          25,
-          80,
-          30,
-          16,
-          18,
-          100,
-          76
-        ],
-        "label": "🚀 떡상",
-        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-10-05T09:36:49.971Z"
-      },
-      "kinCount": 173,
-      "kinTop": [
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-05T21:42:06.266Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "SIFT AI 에이전트",
+      "issue": "SIFT",
+      "topic": "SIFT",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 59,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 59",
+        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
+      ],
+      "evidence": [
         {
-          "title": "박정희 대통령의 외아들 박지만 EG회장이 결혼적령기에 결혼....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61303&docId=491382890&answerNo=1",
-          "views": 42,
-          "answers": 2
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
         }
       ],
+      "whySearch": {
+        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "SIFT AI 에이전트 MIT·사카나 자가 진화 기술 뜯어보기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "SIFT AI 에이전트가 검증 비용 병목을 푸는 방식이 생각보다 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-03T21:25:41.838Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-10-05T21:42:06.266Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "sift.jp",
+      "issue": "SIFT",
+      "topic": "SIFT",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 79,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 79",
+        "선점 후보 — 경쟁 문서 79건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "sift.jp 주소만 넣었는데 메일함에서 뭐가 나오더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-05T21:42:06.266Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "WOF 회장",
+      "issue": "김재열 WOF 회장",
+      "topic": "김재열 WOF 회장",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 187,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 187",
+        "선점 후보 — 경쟁 문서 187건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "김재열 ISU 회장이 동계 7개 종목 협의체 WOF 회장으로 선출됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "WOF 회장 김재열 선출, 동계 7개 종목 협의체란",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "WOF 회장 선출됐다는데 여기서 또 김재열 회장 이름이 보이네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "WOF 뜻",
+          "searchVolume": null,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-05T21:42:06.266Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "sift 명사 뜻",
+      "issue": "SIFT",
+      "topic": "SIFT",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 164,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 164",
+        "선점 후보 — 경쟁 문서 164건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "정보",
+      "adsenseFit": true,
+      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
+      "titles": {
+        "seo": {
+          "text": "sift 명사 뜻, 동사와 차이와 sift through 예문까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "sift 명사 뜻만 알면 되는 줄 알았는데 through 붙으니 또 다르네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "sift 뜻",
+          "searchVolume": 160,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "sift 뜻",
+          "searchVolume": 160,
+          "documentCount": 1018,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 14,
+      "kinTop": [
+        {
+          "title": "영어 단어중 6글자로 이루어진 명사를 조회하고 싶습니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080301&docId=128538204&answerNo=1",
+          "views": 8340,
+          "answers": 1
+        },
+        {
+          "title": "s랑 t가 단어 가장자리에 있는 명사좀 알려주세요 .",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080302&docId=203262905&answerNo=2",
+          "views": 126,
+          "answers": 2
+        },
+        {
+          "title": "토익 대명사 파트 질문입니다.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=110803&docId=59539764&answerNo=1",
+          "views": 43,
+          "answers": 1
+        },
+        {
+          "title": "동명사(gerund.)로 만들어 주실분 찾아요.",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080302&docId=235531213&answerNo=1",
+          "views": 35,
+          "answers": 1
+        }
+      ],
+      "monetize": {
+        "verdict": "bad",
+        "points": [
+          {
+            "text": "'sift 뜻'(월 160)은 영단어 한글 뜻 한 줄만 손에 넣으면 끝나는 사전형 질의다. 검색자가 원하는 건 도구도 구매처도 아니고 '체로 치다/거르다, (명사) 체질' 수준의 정의 한 줄뿐이라, 글이 줄 수 있는 가치가 그 한 줄에서 멈춘다."
+          },
+          {
+            "text": "'sift 명사 뜻'처럼 품사까지 특정해 찾는 사람은 이미 숙제·독해·단어시험 같은 즉답 목적이다. 구매·비교·신청 의도가 전혀 없어 광고를 누를 '상태'가 아니고, 떠봐야 영어학습앱 같은 저단가 디스플레이 광고라 클릭·단가 둘 다 바닥이다."
+          },
+          {
+            "text": "'sift 뜻'은 전형적인 '한 줄 얻고 나가는' 검색이다. 명사 뜻은 한두 줄, 예문 몇 개면 완결되어 체류시간과 스크롤이 거의 없고, 사전 사이트·검색 스니펫에 상위를 뺏겨 클릭 자체도 블로그로 잘 안 온다."
+          },
+          {
+            "text": "'sift 뜻'(월 160)은 볼륨도 작고 그마저 단일 의도로 쪼개져, 이 키워드 하나로 광고 수익을 기대할 근거가 어느 판단에도 없다."
+          }
+        ],
+        "angle": "정 쓴다면 'sift 뜻' 단독이 아니라, sift가 실제로 꽂히는 맥락 — IT 보안 'SIFT'(포렌식 배포판), 베이킹 'sift flour', 데이터 'SIFT 알고리즘' 등 동음이의를 한 페이지에서 구분해주는 '왜 검색마다 뜻이 다른가' 묶음 글. 이 경우 포렌식툴·베이킹도구 같은 상위 의도로 연결돼 체류와 광고 접점이 생긴다. 순수 '명사 뜻'만"
+      },
+      "measuredAt": "2026-10-05T21:42:06.266Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "MIT SIFT",
+      "issue": "SIFT",
+      "topic": "SIFT",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 147,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 147",
+        "선점 후보 — 경쟁 문서 147건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "MIT SIFT 사카나 공동 발표 자가진화 에이전트 핵심",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "MIT SIFT 자가진화 에이전트라는데 검증 비용에서 의외로 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-05T21:42:06.266Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴럴링크 뉴로모픽 차이",
+      "issue": "뉴럴링크",
+      "topic": "뉴럴링크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 202,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 202",
+        "선점 후보 — 경쟁 문서 202건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴럴링크로 루게릭병 환자가 생각만으로 음성을 전했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴럴링크 뉴로모픽 차이 BCI와 반도체 어디가 다른가",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴럴링크 뉴로모픽 차이 모르고 관련주 담았다가 종목 다시 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "뉴럴링크 주가",
+          "searchVolume": 240,
+          "frame": "generic"
+        },
+        {
+          "keyword": "뉴럴링크 관련주",
+          "searchVolume": 190,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "뉴럴링크 주가",
+          "searchVolume": 240,
+          "documentCount": 5119,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "뉴럴링크 관련주",
+          "searchVolume": 190,
+          "documentCount": 5816,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-05T21:42:06.266Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뉴럴링크 근황",
+      "issue": "뉴럴링크",
+      "topic": "뉴럴링크",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 289,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 289",
+        "선점 후보 — 경쟁 문서 289건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "뉴럴링크로 루게릭병 환자가 생각만으로 음성을 전했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "뉴럴링크 근황 5만시간 뇌 데이터로 바뀐 BCI 임상",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "뉴럴링크 근황 보러 갔다가 상장 얘기에 눈이 가더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "뉴럴링크 주가",
+          "searchVolume": 240,
+          "frame": "generic"
+        },
+        {
+          "keyword": "뉴럴링크 관련주",
+          "searchVolume": 190,
+          "frame": "generic"
+        },
+        {
+          "keyword": "뉴럴링크 상장",
+          "searchVolume": 20,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "뉴럴링크 주가",
+          "searchVolume": 240,
+          "documentCount": 5119,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "뉴럴링크 관련주",
+          "searchVolume": 190,
+          "documentCount": 5816,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "뉴럴링크 상장",
+          "searchVolume": 20,
+          "documentCount": 3294,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "뉴럴링크 칩",
+          "searchVolume": 20,
+          "documentCount": 11090,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-05T21:42:06.266Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "주민번호 유출 505만건",
       "issue": "주민번호 유출 505만건",
@@ -351,188 +955,8 @@
       "monetize": null,
       "measuredAt": "2026-10-05T09:54:52.372Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "sift-ag.com",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 59,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 59",
-        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-05T09:54:52.372Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "sift.jp",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 79,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 79",
-        "선점 후보 — 경쟁 문서 79건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-05T09:54:52.372Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "sift 명사 뜻",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 164,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 164",
-        "선점 후보 — 경쟁 문서 164건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 14,
-      "kinTop": [
-        {
-          "title": "영어 단어중 6글자로 이루어진 명사를 조회하고 싶습니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080301&docId=128538204&answerNo=1",
-          "views": 8331,
-          "answers": 1
-        },
-        {
-          "title": "s랑 t가 단어 가장자리에 있는 명사좀 알려주세요 .",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080302&docId=203262905&answerNo=2",
-          "views": 125,
-          "answers": 2
-        },
-        {
-          "title": "토익 대명사 파트 질문입니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110803&docId=59539764&answerNo=1",
-          "views": 42,
-          "answers": 1
-        },
-        {
-          "title": "동명사(gerund.)로 만들어 주실분 찾아요.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080302&docId=235531213&answerNo=1",
-          "views": 34,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-05T09:54:52.372Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "브로드컴 심볼",
@@ -584,7 +1008,8 @@
       "monetize": null,
       "measuredAt": "2026-10-05T09:54:52.372Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "김도영 역전 스리런포!",
@@ -636,7 +1061,8 @@
       "monetize": null,
       "measuredAt": "2026-10-05T09:54:52.372Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이수영 아들 백혈병",
@@ -1315,127 +1741,1073 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "앤트로픽 엔스로픽 차이",
-      "issue": "앤트로픽",
-      "topic": "앤트로픽",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 32,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 32",
-        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "앤트로픽 엔스로픽 차이 , 기준은 하나면 됩니다",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-03T21:25:41.838Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "엄지성 결승골 기여",
-      "issue": "엄지성 결승골 기여",
-      "topic": "엄지성 결승골 기여",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 255,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 255",
-        "선점 후보 — 경쟁 문서 255건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-03T21:25:41.838Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "LG전자 5GW 냉각",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "LG전자가 북미 5GW AI데이터센터 냉각 솔루션 공급 계약을 따냈다.",
+      "headlines": [
+        {
+          "title": "LG전자, 북미서 5GW AI데이터센터 냉각 수주…수조원대 추정",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-05T13:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006381600?sid=101"
+        },
+        {
+          "title": "LG전자, 북미서 5GW AIDC 냉각 설루션 장기 공급 계약 따냈다",
+          "press": "biz.heraldcorp.com",
+          "publishedAt": "2026-10-05T13:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/016/0002705571?sid=101"
+        },
+        {
+          "title": "LG전자, 美서 5GW 규모 AI 데이터센터 냉각 수주…K가전 새 돌파구",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-05T13:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004002178?sid=105"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김재열 WOF 회장",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "김재열 ISU 회장이 동계 7개 종목 협의체 WOF 회장으로 선출됐다.",
+      "headlines": [
+        {
+          "title": "김재열, 동계올림픽 7개 종목 협의체 이끈다…WOF 회장 선출",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-05T12:48:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/001/0016358277"
+        },
+        {
+          "title": "김재열 ISU 회장, 동계올림픽 7개 종목 협의체 WOF 회장으로 선출",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-05T13:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004002179?sid=102"
+        },
+        {
+          "title": "김재열 WOF 회장 선출… 동계 7개 종목 협의체 이끈다",
+          "press": "donga.com",
+          "publishedAt": "2026-10-05T19:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003752882?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김재열",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "우리들의 발라드2",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "'우리들의 발라드2'가 첫 방송하며 선공개 영상 주인공이 등장했다.",
+      "headlines": [
+        {
+          "title": "‘우리들의발라드2’ 우승후보 등장",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-10-04T23:36:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202610050078"
+        },
+        {
+          "title": "'우라들의 발라드2' 첫 방송…선공개 영상 주인공 등장",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-05T11:15:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014234074"
+        },
+        {
+          "title": "'우리들의 발라드 2' 탑백귀 심사 난항...시즌1 우승자 누구였지?",
+          "press": "gukjenews.com",
+          "publishedAt": "2026-10-05T13:04:00.000Z",
+          "link": "https://www.gukjenews.com/news/articleView.html?idxno=3713483"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "우리들의 발라드2 ott",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "우리들의 발라드2 재방송",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "우리들의 발라드2 방청",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "우리들의 발라드2 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "우리들의 발라드2 넷플릭스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "우리들의 발라드2 출연진",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "우리들의 발라드2 편성표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "우리들의 발라드2 허채민",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "AI 해킹",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "AI 해킹으로 은행·토스뱅크·보험사 등 금융권 공격이 확산됐다.",
+      "headlines": [
+        {
+          "title": "[단독] 해킹 막을 AI센터 세워놓고, 예산 91억 전액 삭감한 정부",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-10-05T20:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003555930?sid=105"
+        },
+        {
+          "title": "'정보보호 100점'이라더니…AI 해킹에 민망해진 은행들",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-04T20:46:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016357165?sid=101"
+        },
+        {
+          "title": "토스뱅크서도 해킹 시도…일부 보험사도 공격 흔적 포착",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-05T10:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014234061?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "AI 해킹 대응",
+          "reason": "대책 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "AMRO 한국 성장률",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "AMRO가 올해 한국 성장률을 3.3%로 0.2%p 상향 조정했다.",
+      "headlines": [
+        {
+          "title": "AMRO, 올해 한국 경제성장률 3.3%로 0.2%p 상향 조정",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-10-05T02:32:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012267926?sid=101"
+        },
+        {
+          "title": "AMRO, 韓 성장률 또 올렸다…올해 3.3% 전망",
+          "press": "sedaily.com",
+          "publishedAt": "2026-10-05T07:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004668238?sid=101"
+        },
+        {
+          "title": "AMRO, 한국 2026년 성장률 3.3% 전망…7월 이어 또 상향",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-10-05T02:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004195637?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "뇌물",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "법무부가 세월호·MB 뇌물 등 장기보관 디지털증거 폐기를 심의했다.",
+      "headlines": [
+        {
+          "title": "[단독] 법무부, ‘세월호·MB 뇌물’ 등 디지털증거 폐기 논의…내란 사...",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-10-05T10:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002826124?sid=102"
+        },
+        {
+          "title": "법무부, '세월호·MB 뇌물' 장기보관 디지털증거도 폐기 심의",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-05T12:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009210348?sid=102"
+        },
+        {
+          "title": "警 전문성 부족에…뇌물·배임 수사 '하세월'",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-05T08:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005744116?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "뇌물 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뇌물 영어로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "공무원 뇌물",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뇌물 한자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뇌물 처벌",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뇌물 공소시효",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뇌물 일본어로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뇌물 공여죄 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "백종헌 의원",
+          "reason": "의원 연루 여부",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "뇌물 무죄 이유",
+          "reason": "위법수집증거 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "노벨 생리의학상",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "노벨 생리의학상에 광유전학 개척자 칼 다이서로스 등 3인이 선정됐다.",
+      "headlines": [
+        {
+          "title": "역대 노벨 생리의학상 수상자는…117회 걸쳐 235명 영예",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-05T10:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016358227?sid=104"
+        },
+        {
+          "title": "노벨 생리의학상에 다이서로스·헤게만·나겔…'광유전학' 개척(종합)",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-05T10:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014234066?sid=104"
+        },
+        {
+          "title": "노벨 생리의학상에 '광유전학' 칼 다이서로스 등 3인",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-10-05T09:45:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001393231?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "노벨 생리의학상 후보",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "2026 노벨 생리의학상",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노벨 생리의학상 2025",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노벨 생리의학상 수상자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노벨 생리의학상 2024",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노벨 생리의학상 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노벨 생리의학상 영어로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "노벨 생리의학상 상금",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "KIA 김도영 역전승",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "김도영이 9회 역전 스리런포로 시즌 42호를 쳐 KIA가 LG에 역전승했다.",
+      "headlines": [
+        {
+          "title": "'김도영 9회 스리런포' KIA, LG에 짜릿한 역전승…3위 수성",
+          "press": "stoo.com",
+          "publishedAt": "2026-10-05T08:30:00.000Z",
+          "link": "http://www.stoo.com/article.php?aid=109231782063"
+        },
+        {
+          "title": "KIA 김도영, 9회 2사 후 역전 스리런포…'시즌 42호' 홈런 단독 선두",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-05T08:34:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/421/0009210224"
+        },
+        {
+          "title": "김도영, 9회초 2사 후 역전 스리런포...KIA, LG 8연패 빠뜨려",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-05T08:50:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/018/0006381356"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "추미애 GTX 철도망",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "추미애가 국토부에 GTX D~H 등 40개 철도사업 국가철도망 반영을 요청했다.",
+      "headlines": [
+        {
+          "title": "추미애, 국토부 장관에 \"40개 사업, 국가철도망 반영해달라\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-05T00:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014233402?sid=102"
+        },
+        {
+          "title": "연내 고시 앞둔 국가철도망…추미애, GTX D~H 등 40개 반영 요청",
+          "press": "etoday.co.kr",
+          "publishedAt": "2026-10-05T06:14:00.000Z",
+          "link": "https://www.etoday.co.kr/news/view/2632462"
+        },
+        {
+          "title": "추미애, 국토장관에 40개 사업 국가철도망 구축계획 반영 요청",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-04T22:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016357251?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "구글이 제미나이 요금제를 개편해 무료·저가 이용자는 프로 모델을 못 쓴다.",
+      "headlines": [
+        {
+          "title": "월 7500원 내도 제미나이 '프로' 모델 못쓴다…구글 요금제 개편",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-05T00:17:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014233387?sid=105"
+        },
+        {
+          "title": "구글 제미나이 AI요금 개편…월10달러 내도 '프로' 모델 못쓴다",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-04T17:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016357153?sid=104"
+        },
+        {
+          "title": "월 7500원 내도 ‘프로’ 못 쓴다…구글 제미나이, 무료는 ‘라이트’만",
+          "press": "munhwa.com",
+          "publishedAt": "2026-10-05T01:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/021/0002823053?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 챗",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "클로드",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "클로드에 이어 챗GPT도 EU에서 텍스트 워터마크를 우선 적용한다.",
+      "headlines": [
+        {
+          "title": "클로드 이어 챗GPT도 텍스트 워터마크 적용…EU지역 우선 적용",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-05T19:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016358313?sid=104"
+        },
+        {
+          "title": "클로드 이어 챗GPT도 텍스트 식별무늬 적용",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-10-05T20:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012268121?sid=104"
+        },
+        {
+          "title": "클로드 이어 챗GPT도 텍스트 '워터마크' 적용...EU에서 우선 적용",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-10-05T21:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002415035?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "클로드 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 요금제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 모네",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 코워크",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ai 클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 섀넌",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "클로드 계정 도용",
+          "reason": "보안 우려",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "클로드 맥스 사기",
+          "reason": "피싱 주의",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "클로드 맥스 무료",
+          "reason": "사칭 진위 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "뉴럴링크",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "뉴럴링크로 루게릭병 환자가 생각만으로 음성을 전했다.",
+      "headlines": [
+        {
+          "title": "머스크, 네 아이 엄마 질리스와 결별…\"예고 없이 헤어져\"",
+          "press": "dailian.co.kr",
+          "publishedAt": "2026-10-04T09:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/119/0003139395?sid=104"
+        },
+        {
+          "title": "뉴럴링크, 5만시간 뇌 데이터 사전학습…BCI도 '파운데이션 모델' 시대 ...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-05T10:50:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215977"
+        },
+        {
+          "title": "생각만으로 아내에게 “사랑해”…뉴럴링크로 음성 전한 루게릭병 환자...",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-09-21T08:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012261270?sid=121"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "뉴럴링크 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴럴링크 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "일론머스크 뉴럴링크",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴럴링크 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴럴링크 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴럴링크 칩",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴럴링크 책 요약",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴럴링크 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "뉴럴링크 상용화",
+          "reason": "일반 적용 시기",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "뉴럴링크 임상 신청",
+          "reason": "참여 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "KAIST",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "AI·반도체 열풍에 KAIST 등 과기원 지원자가 5년 만에 2.5배 급증했다.",
+      "headlines": [
+        {
+          "title": "'AI·반도체' 열풍에 KAIST 등 전국 과기원 지원자 급증…5년 만 2.5배",
+          "press": "daejonilbo.com",
+          "publishedAt": "2026-10-05T05:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/656/0000188593?sid=102"
+        },
+        {
+          "title": "'기술 구루' 실험실 밖으로…KAIST 상반기 창업 107명",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-04T08:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005339041?sid=101"
+        },
+        {
+          "title": "KAIST, 데이터 추가·삭제에도 검색 정확도 유지하는 'CONDA' 개발",
+          "press": "etnews.com",
+          "publishedAt": "2026-10-05T03:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003472282?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "kaist 약자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist 대학원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "KAIST 서울캠퍼스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist mba",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist 학과",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "kaist portal",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "KAIST 수시",
+          "reason": "지원 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "KAIST 반도체학과",
+          "reason": "인기 학과",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "GPT-6 아스트라",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "오픈AI가 상시가동 AI에이전트 '닷츠'를 공개하며 GPT-6 아스트라를 탑재했다.",
+      "headlines": [
+        {
+          "title": "챗GPT 맞설 국산 AI 키운다…'독파모' 연계는 숙제",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-10-05T03:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004195645?sid=101"
+        },
+        {
+          "title": "오픈AI, 상시가동 AI에이전트 '닷츠' 공개…GPT-6 아스트라 탑재",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-09-29T17:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016345156?sid=104"
+        },
+        {
+          "title": "월 79만원짜리 챗GPT 등판…올트먼 \"AI, 사람에게 더 큰 힘 줘야\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-09-30T05:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014224158?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "gpt-6 아스트라 비용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "GPT-6 아스트라 수능",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gpt-6 아스트라 하는법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gpt-6 아스트라 사용법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "GPT-6 아스트라 출시",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gpt-6 아스트라 sol차이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "gpt-6",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "SIFT",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
+      "headlines": [
+        {
+          "title": "MIT·사카나, 자가 진화 AI 에이전트 'SIFT' 발표...'검증 비용 병목' 해...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-05T08:34:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215967"
+        },
+        {
+          "title": "마인크래프트', 14년 만에 네 번째 차원 공개",
+          "press": "game.donga.com",
+          "publishedAt": "2026-09-29T01:48:00.000Z",
+          "link": "https://game.donga.com/124466/"
+        },
+        {
+          "title": "'마인크래프트 던전스 2', 4인 협동으로 누빈 신규 차원 '시프트'",
+          "press": "gamevu.co.kr",
+          "publishedAt": "2026-09-28T01:38:00.000Z",
+          "link": "https://www.gamevu.co.kr/news/articleView.html?idxno=61060"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "sift 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "the sift",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "sift through",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "sift out",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "sift 명사 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "sift-ms",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "sift.jp",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "sift.com",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "SIFT 성능",
+          "reason": "성능 수준",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "아마존",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "아마존이 재무 부담 완화를 위해 80억달러 규모 엔비디아 AI칩 매각을 추진한다.",
+      "headlines": [
+        {
+          "title": "\"누가 좀 사가세요\"…11조 규모 '엔비디아 칩' 파는 아마존",
+          "press": "magazine.hankyung.com",
+          "publishedAt": "2026-10-03T22:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/050/0000111614?sid=101"
+        },
+        {
+          "title": "아마존, 美데이터센터 반발에 5년간 1.3조원 지역상생 투자 발표",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-02T17:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016354965?sid=104"
+        },
+        {
+          "title": "아마존, 美 인디애나 새 제조공장에 1억달러 투자",
+          "press": "irobotnews.com",
+          "publishedAt": "2026-10-05T09:34:00.000Z",
+          "link": "https://www.irobotnews.com/news/articleView.html?idxno=48829"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "아마존 재팬",
+          "searchVolume": 58500,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 프라임",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 미국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "일본 아마존",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 익스프레스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아마존 쇼핑",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "아마존 주가",
+          "reason": "재무 조정 반응",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "아마존 데이터센터 반발",
+          "reason": "지역 갈등",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "아마존 관련주",
+          "reason": "투자 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "가상 착용",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "오픈AI가 챗GPT에 옷을 입어보는 '가상 착용' 기능을 도입했다.",
+      "headlines": [
+        {
+          "title": "챗GPT서 옷 입어보고 쇼핑한다... 오픈AI, '가상 착용' 도입",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-05T07:12:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=215969"
+        },
+        {
+          "title": "챗GPT 옷도 입어본다…AI가 상품 탐색부터 가상 착용까지",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-02T02:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004001752?sid=105"
+        },
+        {
+          "title": "VR 쓰고 가상 경기장서 겨루기… 잦은 고장에 ‘눈살’",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-02T09:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005743425?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "가상",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "가상 착용 사용법",
+          "reason": "기능 이용 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
     {
       "issue": "KIA",
       "issueType": "fresh",
@@ -1501,79 +2873,6 @@
         },
         {
           "keyword": "kia shop",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "박지만",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": null,
-      "headlines": [
-        {
-          "title": "박지만 입 열었다…“우리 아버지 그리 미운가”",
-          "press": "ichannela.com",
-          "publishedAt": "2026-10-03T09:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/449/0000362908?sid=100"
-        },
-        {
-          "title": "박지만 \"그렇게 소리 내 우는 모습 처음 봤다…아버지가 그렇게 미운가...",
-          "press": "weekly.chosun.com",
-          "publishedAt": "2026-10-03T14:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/053/0000061980?sid=102"
-        },
-        {
-          "title": "박지만 “가슴 들썩이도록 울던 아버지, 그날 처음 봤다”",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-02T15:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004001921?sid=110"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "박지만 회장",
-          "searchVolume": 4690,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지만 암살자들",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지만 자녀",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "암살자들 박지만",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지만 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지만 암살자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지만 근황",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "박지만 부인",
           "searchVolume": null,
           "origin": "autocomplete"
         }
