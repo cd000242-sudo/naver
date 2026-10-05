@@ -66,4 +66,4 @@
 //   검토한 브리지·계정 선택·렌더러 배선과 버전 변경을 지문에 반영했다.
 //   발행 증거를 재사용하거나 품질 게이트를 활성화하는 변경은 아니다.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '3b3b9f25025dff9ebb7055e6fbc60e1038ec1625bd3de88ca72e997813d9a106' as const;
+  '1dfb6aea542a69df6fcbddcc16e8857c7c8aaac31554973ad478c41416c59d59' as const;

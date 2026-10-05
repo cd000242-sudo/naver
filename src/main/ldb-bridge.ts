@@ -27,6 +27,7 @@ export interface LdbBridgeDeps {
   /** 렌더러로 글을 보낸다. 실제로는 mainWindow.webContents.send(...) */
   deliver: (posts: unknown[]) => Promise<number>;
   token: string;
+  status?: () => { version: string; auth: 'ready' | 'login-required'; ready: boolean; update: import('./ldb-launch.js').LdbUpdateStatus };
   destinations?: ReturnType<typeof createLdbDestinations>;
 }
 
@@ -86,7 +87,7 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
 
     const url = new URL(req.url || '/', `http://127.0.0.1:${LDB_BRIDGE_PORT}`);
     if (req.method === 'GET' && url.pathname === '/v1/status') {
-      send(res, 200, { ok: true, app: 'naver-automation', accepts: 'draft-only', capabilities: ['renderer-ack', 'heading-images', 'draft-upsert', ...(deps.destinations ? ['account-categories'] : [])] }, origin);
+      send(res, 200, { ok: true, app: 'naver-automation', ...(deps.status?.() || {}), accepts: 'draft-only', capabilities: ['renderer-ack', 'heading-images', 'draft-upsert', ...(deps.destinations ? ['account-categories'] : [])] }, origin);
       return;
     }
     if (!['/v1/posts', '/v1/accounts', '/v1/categories', '/v1/selection'].includes(url.pathname)) {
@@ -95,6 +96,11 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
     }
     if (req.headers.authorization !== `Bearer ${deps.token}`) {
       send(res, 401, { ok: false, error: '브리지 토큰이 맞지 않습니다.' }, origin);
+      return;
+    }
+
+    if (deps.status && !deps.status().ready) {
+      send(res, 503, { ok: false, code: 'APP_NOT_READY', error: '앱 로그인 또는 화면 준비가 끝나면 자동으로 다시 연결됩니다.' }, origin);
       return;
     }
 
@@ -137,10 +143,10 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
 }
 
 /** 앱 시작 때 한 번 호출한다. 실패해도 앱 기능에는 영향을 주지 않는다. */
-export function startLdbBridge(userDataPath: string, deliver: (posts: unknown[]) => Promise<number>, destinations?: LdbBridgeDeps['destinations']): { token: string; server: http.Server } | null {
+export function startLdbBridge(userDataPath: string, deliver: (posts: unknown[]) => Promise<number>, destinations?: LdbBridgeDeps['destinations'], status?: LdbBridgeDeps['status']): { token: string; server: http.Server } | null {
   try {
     const token = loadBridgeToken(path.join(userDataPath, 'ldb-bridge-token'));
-    const server = createLdbBridge({ deliver, token, destinations });
+    const server = createLdbBridge({ deliver, token, destinations, status });
     server.on('error', (error) => { console.error('[LDB 브리지] 시작 실패:', error); });
     server.listen(LDB_BRIDGE_PORT, '127.0.0.1', () => {
       console.log(`[LDB 브리지] http://127.0.0.1:${LDB_BRIDGE_PORT} · 연결 준비 완료`);

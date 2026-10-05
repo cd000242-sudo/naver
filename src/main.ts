@@ -269,7 +269,7 @@ import { getBlogRecentPosts } from './rssSearcher.js';
 import { browserSessionManager } from './browserSessionManager.js';
 
 // ✅ [2026-02-04] 자동 업데이트 모듈
-import { initAutoUpdater, initAutoUpdaterEarly, setUpdaterLoginWindow, isUpdating, waitForUpdateCheck, waitForUpdateDeferral } from './updater.js';
+import { initAutoUpdater, initAutoUpdaterEarly, setUpdaterLoginWindow, isUpdating, waitForUpdateCheck, waitForUpdateDeferral, checkForUpdates, getLdbUpdateStatus } from './updater.js';
 // v2.7.1: 앱 종료 시 Flow/ImageFX persistent context 쿠키 flush — 매번 로그인 강제 방지
 import { resetFlowState } from './image/flowGenerator.js';
 import { cleanupImageFxBrowser } from './image/imageFxGenerator.js';
@@ -4930,6 +4930,7 @@ registerDatalabApiHandlers();
 import { registerBackupHandlers, performDataBackup } from './main/ipc/backupHandlers.js';
 // ✅ [LDB] LDB IMAGE ULTRA 확장에서 완성 원고를 받는 로컬 브리지 (발행 없음, 목록에만 추가)
 import { startLdbBridge } from './main/ldb-bridge.js';
+import { isLdbConnectUrl, LDB_CONNECT_SCHEME, createSerializedRefresh } from './main/ldb-launch.js';
 import { deliverLdbPosts } from './main/ldb-delivery.js';
 import { materializeLdbImages } from './main/ldb-images.js';
 import { createLdbDestinations, type LdbResolvedDestination } from './main/ldb-destinations.js';
@@ -4944,22 +4945,60 @@ import { selectItemsForHeadingImageMode } from './image/headingImageSelection.js
  * 켜 둔 사용자도 앱을 껐다 켤 때마다 포트가 안 열린다(2026-09-17 실측).
  */
 let ldbBridge: ReturnType<typeof startLdbBridge> = null;
-const startLdbBridgeIfEnabled = async (): Promise<void> => {
-  if (ldbBridge) return;
-  try {
-    const config = await loadConfig();
-    if (!config.ldbBridgeEnabled) return;
-    const deliver = async (posts: unknown[], destination?: LdbResolvedDestination) => {
-      const drafts = posts.length ? await materializeLdbImages(posts, path.join(app.getPath('userData'), 'ldb-images')) : [];
-      return deliverLdbPosts(mainWindow?.webContents, ipcMain, drafts, 20_000, destination);
-    };
-    const destinations = createLdbDestinations({
-      accounts: () => blogAccountManager.getAllAccounts(), active: () => blogAccountManager.getActiveAccount(),
-      fetchCategories: fetchLdbBlogCategories, deliver,
-    });
-    ldbBridge = startLdbBridge(app.getPath('userData'), deliver, destinations);
-  } catch (error) {
-    console.error('[LDB 브리지] 설정을 읽지 못해 시작하지 않았습니다:', error);
+let ldbConnectPending = process.argv.some(isLdbConnectUrl);
+let ldbLaunchUpdateCheckedAt = 0;
+const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
+    try {
+      const config = await loadConfig();
+      if (!config.ldbBridgeEnabled) {
+        if (ldbBridge) {
+          const stopping = ldbBridge; ldbBridge = null;
+          await new Promise<void>(resolve => stopping.server.close(() => resolve()));
+        }
+        return;
+      }
+      if (ldbBridge) return;
+      const deliver = async (posts: unknown[], destination?: LdbResolvedDestination) => {
+        const drafts = posts.length ? await materializeLdbImages(posts, path.join(app.getPath('userData'), 'ldb-images')) : [];
+        return deliverLdbPosts(mainWindow?.webContents, ipcMain, drafts, 20_000, destination);
+      };
+      const destinations = createLdbDestinations({
+        accounts: () => blogAccountManager.getAllAccounts(), active: () => blogAccountManager.getActiveAccount(),
+        fetchCategories: fetchLdbBlogCategories, deliver,
+      });
+      ldbBridge = startLdbBridge(app.getPath('userData'), deliver, destinations, () => ({
+        version: app.getVersion(), auth: isLicenseValid ? 'ready' : 'login-required',
+        ready: Boolean(isLicenseValid && mainWindow && !mainWindow.isDestroyed() && !mainWindow.webContents.isLoading() && !isUpdating()),
+        update: getLdbUpdateStatus(),
+      }));
+      const startedBridge = ldbBridge;
+      startedBridge?.server.once('error', () => { if (ldbBridge === startedBridge) ldbBridge = null; });
+    } catch (error) {
+      console.error('[LDB 브리지] 설정을 읽지 못해 시작하지 않았습니다:', error);
+    }
+});
+
+/** Fixed URI only opens the existing app/settings; never enables the bridge or publishes. */
+const resumeLdbConnect = async (): Promise<void> => {
+  if (!ldbConnectPending || !isLicenseValid || !mainWindow || mainWindow.isDestroyed() || mainWindow.webContents.isLoading()) return;
+  await startLdbBridgeIfEnabled();
+  if (!mainWindow || mainWindow.isDestroyed() || mainWindow.webContents.isLoading()) return;
+  const config = await loadConfig();
+  ldbConnectPending = false;
+  if (mainWindow.isMinimized()) mainWindow.restore();
+  mainWindow.show(); mainWindow.focus();
+  if (!config.ldbBridgeEnabled) mainWindow.webContents.send('ldb:connect-request');
+};
+const handleLdbConnectUrl = (value: unknown): void => {
+  if (!isLdbConnectUrl(value)) return;
+  ldbConnectPending = true;
+  if (!app.isReady()) return;
+  void resumeLdbConnect().catch(() => console.warn('[LDB 브리지] 연결 준비 재시도 필요'));
+  // Reuse the updater, but never interrupt an active automation job.
+  if (!automationRunning && !automation && automationMap.size === 0 && !isUpdating() && Date.now() - ldbLaunchUpdateCheckedAt > 60_000) {
+    ldbLaunchUpdateCheckedAt = Date.now();
+    initAutoUpdaterEarly();
+    if (getLdbUpdateStatus().state !== 'checking') void checkForUpdates();
   }
 };
 
@@ -6869,6 +6908,7 @@ registerConfigHandlers({
     await startLdbBridgeIfEnabled();
     const config = await loadConfig().catch(() => ({} as AppConfig));
     broadcastLdbBridgeState(Boolean(config.ldbBridgeEnabled));
+    await resumeLdbConnect();
   })(); },
 });
 
@@ -7809,6 +7849,7 @@ ipcMain.handle('login:success', async (): Promise<void> => {
   }
 
   debugLog('[login:success] License authentication successful');
+  void resumeLdbConnect().catch(() => console.warn('[LDB 브리지] 로그인 연결 재시도 필요'));
 
   // 계정별 설정이 이제야 활성화된다. 여기서 다시 읽어야 켜 둔 사람의 포트가 열린다.
   void (async () => {
@@ -8821,9 +8862,17 @@ if (!gotTheLock) {
   setTimeout(() => process.exit(0), 2000);
 } else {
   console.log('[Main] Single instance lock acquired');
+  // Packaged registration follows the installed executable after each update.
+  if (app.isPackaged && !isE2ETestMode() && process.env.SELF_TEST !== '1') app.setAsDefaultProtocolClient(LDB_CONNECT_SCHEME);
+  app.on('open-url', (event, url) => { event.preventDefault(); handleLdbConnectUrl(url); });
+  app.on('browser-window-created', (_event, window) => {
+    window.webContents.on('did-finish-load', () => { void resumeLdbConnect().catch(() => console.warn('[LDB 브리지] 로그인 후 연결 준비 실패')); });
+  });
 
   app.on('second-instance', (event, commandLine, workingDirectory) => {
     console.log('[Main] Second instance attempt detected. Focusing existing window...');
+
+    for (const argument of commandLine) handleLdbConnectUrl(argument);
 
     // 메인 창이 있으면 포커스
     if (mainWindow) {
