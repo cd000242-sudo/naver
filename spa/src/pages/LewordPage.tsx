@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import LewordAuth from '../components/leword/LewordAuth';
 import { clearSession, daysLeft, loadSession, type LewordSession } from '../lib/lewordAuth';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -19,6 +19,9 @@ import TopicBriefsBoard from '../components/leword/TopicBriefsBoard';
 import { installKeySyncListener } from '../lib/keySync';
 import YoutubeTab from '../components/leword/YoutubeTab';
 import AssistantPanel from '../components/leword/AssistantPanel';
+import AssistantFab from '../components/leword/AssistantFab';
+
+const ASSIST_OPEN_KEY = 'leword.assist.open';
 
 /**
  * /leword — 좌측 사이드탭으로 기능을 하나씩 쓰는 화면.
@@ -78,8 +81,15 @@ function LewordPage() {
      */
     const [session, setSession] = useState<LewordSession | null>(loadSession);
     const [authOpen, setAuthOpen] = useState(false);
-    // LEWORD 비서(2026-10-01) — 상단 계정 줄의 [AI 비서]로 연다. 오른쪽 아래 문의 버튼과 겹치지 않게 옆 창으로.
-    const [assistantOpen, setAssistantOpen] = useState(false);
+    // LEWORD 비서 — 2026-10-06 우측 상단 떠 있는 버튼(AssistantFab)으로 어느 탭에서든 접었다 편다.
+    // 편 채로 떠났으면 다음에도 펴서 시작한다(이 브라우저에만 기억).
+    const [assistantOpen, setAssistantOpen] = useState(() => { try { return localStorage.getItem(ASSIST_OPEN_KEY) === '1'; } catch { return false; } });
+    const [assistantBusy, setAssistantBusy] = useState(false);
+    const setAssistant = useCallback((open: boolean) => {
+        setAssistantOpen(open);
+        try { localStorage.setItem(ASSIST_OPEN_KEY, open ? '1' : '0'); } catch { /* 저장 못 해도 연다 */ }
+    }, []);
+    const collapseAssistant = useCallback(() => setAssistant(false), [setAssistant]);
     const left = session ? daysLeft(session) : null;
     const activeMeta = TABS.find((tab) => tab.id === activeTab) ?? TABS[0];
     /** 이용권 없이 주소로 들어온 유료 탭 — 본문 대신 잠금 안내. */
@@ -286,7 +296,6 @@ function LewordPage() {
                                     <i aria-hidden="true" />{left}일 남음
                                 </span>
                             )}
-                            <button type="button" className="lw-acct-btn on" onClick={() => setAssistantOpen(true)} aria-haspopup="dialog">AI 비서</button>
                             <button
                                 type="button"
                                 className="lw-acct-btn"
@@ -323,8 +332,14 @@ function LewordPage() {
                     </div>
                 )}
 
-                {assistantOpen && session && (
-                    <AssistantPanel tabId={activeTab} tabLabel={activeMeta.label} onClose={() => setAssistantOpen(false)} />
+                {/* 비로그인이면 버튼이 로그인 창을 연다 — 비서는 계정 · 앱이 있어야 답한다. */}
+                <AssistantFab
+                    open={assistantOpen && Boolean(session)}
+                    busy={assistantBusy}
+                    onToggle={() => { if (!session) { setAuthOpen(true); return; } setAssistant(!assistantOpen); }}
+                />
+                {session && (
+                    <AssistantPanel open={assistantOpen} tabId={activeTab} tabLabel={activeMeta.label} onClose={collapseAssistant} onBusyChange={setAssistantBusy} />
                 )}
 
                 {lockedTab && (

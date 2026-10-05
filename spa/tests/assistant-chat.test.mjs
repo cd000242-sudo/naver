@@ -21,5 +21,14 @@ test('비서 창은 운영자 연결을 1:1 문의로 잇고, 로그인한 사�
   assert.match(panel, /m\.escalate &&/);
   assert.doesNotMatch(panel, /fetch\(/);
   const page = read('../src/pages/LewordPage.tsx');
-  assert.match(page, /\{assistantOpen && session && \(/);
+  // 2026-10-06: 우측 상단 떠 있는 버튼으로 접었다 편다 — 패널은 로그인했을 때만 붙고, 접으면 숨기기만 해 대화가 남는다.
+  assert.match(page, /\{session && \(\s*<AssistantPanel open=\{assistantOpen\}/);
+  assert.match(page, /if \(!session\) \{ setAuthOpen\(true\); return; \}/);
+  assert.match(panel, /display: open \? 'flex' : 'none'/);
+});
+
+test('비서 버튼은 우측 상단 고정이라 스크롤을 따라온다', () => {
+  const fab = read('../src/components/leword/AssistantFab.tsx');
+  assert.match(fab, /position: 'fixed', top: ASSIST_FAB_TOP, right: 16/);
+  assert.match(fab, /aria-expanded=\{open\}/);
 });
