@@ -276,6 +276,10 @@ function LewordPage() {
             </aside>
 
             <section className="lw-main">
+                {/* 비서 띠(2026-10-06) — 상단 메뉴 바로 밑에 붙어 스크롤해도 남고, 내용은 이 띠 밑으로 지나가 버튼과 안 겹친다. 비로그인이면 버튼이 로그인 창을 연다. */}
+                <div className="lw-assist-bar">
+                    <AssistantFab docked open={assistantOpen && Boolean(session)} busy={assistantBusy} onToggle={() => { if (!session) { setAuthOpen(true); return; } setAssistant(!assistantOpen); }} />
+                </div>
                 {/*
                   * 계정 줄 — 아이디와 **언제까지 쓸 수 있는지**가 늘 보여야 한다.
                   * 30일 이하부터 노랑, 7일 이하부터 빨강. 만료 당일에 알면 늦다.
@@ -332,12 +336,6 @@ function LewordPage() {
                     </div>
                 )}
 
-                {/* 비로그인이면 버튼이 로그인 창을 연다 — 비서는 계정 · 앱이 있어야 답한다. */}
-                <AssistantFab
-                    open={assistantOpen && Boolean(session)}
-                    busy={assistantBusy}
-                    onToggle={() => { if (!session) { setAuthOpen(true); return; } setAssistant(!assistantOpen); }}
-                />
                 {session && (
                     <AssistantPanel open={assistantOpen} tabId={activeTab} tabLabel={activeMeta.label} onClose={collapseAssistant} onBusyChange={setAssistantBusy} />
                 )}

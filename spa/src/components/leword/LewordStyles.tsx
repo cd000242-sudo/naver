@@ -117,6 +117,8 @@ function LewordStyles() {
 
             /* ── 본문 ── */
             .lw-main { padding: clamp(20px, 3vw, 34px) clamp(16px, 3vw, 34px) 72px; min-width: 0; }
+            /* 비서 띠 — 상단 메뉴(72px) 밑에 붙는다. 본문 좌우 여백만큼 넓혀 내용이 띠 밑으로 깔끔히 지나간다. */
+            .lw-assist-bar { position: sticky; top: 72px; z-index: 60; display: flex; justify-content: flex-end; align-items: center; height: 54px; margin: calc(-1 * clamp(20px, 3vw, 34px)) calc(-1 * clamp(16px, 3vw, 34px)) 10px; padding: 0 clamp(16px, 3vw, 34px); background: rgba(7, 9, 13, .9); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255, 255, 255, .06); }
 
             .lw-intro { margin-bottom: 20px; }
             .lw-intro h1 { margin: 0 0 8px; color: #fff; font-size: clamp(23px, 3vw, 30px); font-weight: 900; }

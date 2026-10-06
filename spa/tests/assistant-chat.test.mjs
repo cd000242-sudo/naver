@@ -27,8 +27,11 @@ test('비서 창은 운영자 연결을 1:1 문의로 잇고, 로그인한 사�
   assert.match(panel, /display: open \? 'flex' : 'none'/);
 });
 
-test('비서 버튼은 우측 상단 고정이라 스크롤을 따라온다', () => {
+test('비서 버튼은 본문 맨 위 고정 띠 안에 있어 스크롤해도 남고 내용과 안 겹친다(2026-10-06)', () => {
   const fab = read('../src/components/leword/AssistantFab.tsx');
-  assert.match(fab, /position: 'fixed', top: ASSIST_FAB_TOP, right: 16/);
   assert.match(fab, /aria-expanded=\{open\}/);
+  const page = read('../src/pages/LewordPage.tsx');
+  assert.match(page, /<div className="lw-assist-bar">\s*<AssistantFab docked/);
+  const styles = read('../src/components/leword/LewordStyles.tsx');
+  assert.match(styles, /\.lw-assist-bar \{ position: sticky; top: 72px;/);
 });
