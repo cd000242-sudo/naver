@@ -7,7 +7,11 @@ import { useState } from 'react';
  */
 export const ASSIST_FAB_TOP = 84;
 
-export default function AssistantFab({ open, busy, onToggle }: { open: boolean; busy: boolean; onToggle: () => void }) {
+/*
+ * 2026-10-06 사장님 "비서랑 뒤에 버튼이 겹쳐 있다, 분리시켜 줘" — 떠 있으면 스크롤할 때 내용 위에 얹힌다.
+ * 본문 맨 위 고정 띠(.lw-assist-bar, sticky) 안에 놓아 내용이 띠 밑으로 지나가게 한다(docked).
+ */
+export default function AssistantFab({ open, busy, onToggle, docked = false }: { open: boolean; busy: boolean; onToggle: () => void; docked?: boolean }) {
     const [hover, setHover] = useState(false);
     const label = busy ? '답 쓰는 중…' : open ? '비서 접기' : 'AI 비서';
     return (
@@ -20,7 +24,7 @@ export default function AssistantFab({ open, busy, onToggle }: { open: boolean; 
             aria-controls="lw-assistant-panel"
             title="AI 비서 (어느 탭에서든)"
             style={{
-                position: 'fixed', top: ASSIST_FAB_TOP, right: 16, zIndex: 10060,
+                ...(docked ? { position: 'relative' as const } : { position: 'fixed' as const, top: ASSIST_FAB_TOP, right: 16, zIndex: 10060 }),
                 display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 15px 6px 6px',
                 border: '1px solid transparent', borderRadius: 999,
                 background: 'linear-gradient(#10142a, #10142a) padding-box, linear-gradient(135deg, #fde68a, #f59e0b 45%, #a78bfa) border-box',
