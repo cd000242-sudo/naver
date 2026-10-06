@@ -27,6 +27,7 @@ export default function HomefeedBenchmarkBoard() {
  /** 실시간 수집이 성공한 시각 — 실패하면 CI 판(정기 수집)으로 그리고 그렇다고 적는다. */
  const [liveAt,setLiveAt] = useState<string|null>(null);
  const [liveFailed,setLiveFailed] = useState(false);
+ const [livePending,setLivePending] = useState(false);
  /*
   * 실측 홈판 기록(사장님 2026-10-01 "1번 2번 3번 전부") — 앱이 켜져 있으면 앱에서, 아니면 비밀번호로 잠근 동기화본에서.
   * 없으면 판은 그대로 그리고 머리에 '로그인 · 동기화하면 표시된다'고 적는다.
@@ -37,28 +38,36 @@ export default function HomefeedBenchmarkBoard() {
   * 새로고침 = 벤치마크 원천을 그 자리에서 다시 긁는다(사장님 2026-10-01 "홈판은 시의성 · 속보성이 강력하니까").
   * 워커가 원천 원문을 받아 오고(1분 캐시) 화면이 판을 새로 만든다. 인스타 · 홈판 제목은 CI 판에서 합친다.
   */
+ /*
+  * 2026-10-06 "벤치마크 자료가 엄청 오래 걸리네" — 실시간 수집이 14초 · 22MB 인데 그걸 다 받은 뒤에야 그렸다.
+  * 이제 정기 판(2MB)을 먼저 그리고, 실시간 판은 뒤에서 받아 바꿔 끼운다(livePending 동안 '실시간 수집 중' 표시).
+  */
  const load = useCallback(async () => {
   request.current?.abort();
   const controller = new AbortController(); request.current = controller;
   const timeout = window.setTimeout(()=>controller.abort(),25_000);
   setLoading(true);
+  let raw: unknown = null;
   try {
-   const [response, live] = await Promise.all([
-    fetch('/data/homefeed-benchmarks.json',{cache:'no-store',signal:controller.signal}),
-    fetchLiveFeeds().catch(()=>null),
-   ]);
+   const response = await fetch('/data/homefeed-benchmarks.json',{cache:'no-store',signal:controller.signal});
    if (!response.ok) throw new Error('공개 벤치마크 자료를 불러오지 못했습니다.');
-   const raw = await response.json();
-   let next = normalizeBenchmarkBoard(raw);
-   if (live) {
-    try { next = normalizeBenchmarkBoard(mergeLiveBoard(raw, live.feeds, live.fetchedAt)); setLiveAt(live.fetchedAt); setLiveFailed(false); }
-    catch { setLiveFailed(true); }
-   } else setLiveFailed(true);
+   raw = await response.json();
    if(request.current !== controller) return;
-   setData(next); setError(''); setNow(Date.now());
+   setData(normalizeBenchmarkBoard(raw)); setError(''); setNow(Date.now());
   } catch (cause) {
    if(request.current === controller) setError(controller.signal.aborted ? '불러오는 시간이 길어졌습니다. 잠시 후 다시 시도해 주세요.' : cause instanceof Error ? cause.message : '자료를 불러오지 못했습니다.');
-  } finally { window.clearTimeout(timeout); if(request.current === controller) setLoading(false); }
+   window.clearTimeout(timeout); if(request.current === controller) setLoading(false);
+   return;
+  }
+  window.clearTimeout(timeout); setLoading(false); setLivePending(true);
+  try {
+   const sources = Array.isArray((raw as { sources?: unknown[] })?.sources) ? (raw as { sources: unknown[] }).sources.length : 0;
+   const live = await fetchLiveFeeds(Math.ceil(sources / 40));
+   if(request.current !== controller) return;
+   if (live) { setData(normalizeBenchmarkBoard(mergeLiveBoard(raw, live.feeds, live.fetchedAt))); setLiveAt(live.fetchedAt); setLiveFailed(false); setNow(Date.now()); }
+   else setLiveFailed(true);
+  } catch { if(request.current === controller) setLiveFailed(true); }
+  finally { if(request.current === controller) setLivePending(false); }
  },[]);
  useEffect(()=>{ loadAdvisor(); },[loadAdvisor]);
  useEffect(()=>{
@@ -90,7 +99,7 @@ export default function HomefeedBenchmarkBoard() {
    <div><span className="hfb-eyebrow">BENCHMARK RADAR · 리더남의 채널 리스트</span><h2>리더남 홈판 추천 <span>소재 · 제목</span></h2><p>벤치마크 채널에서 최근 48시간 안에 나온 소재를 전부 모았습니다. 여러 채널이 함께 다룬 소재가 먼저 나옵니다.</p></div>
    <div className="hfb-count"><strong>{view?.candidates.length ?? '—'}</strong><span>검토할 소재</span></div>
   </header>
-  <div className="hfb-meta"><span>{view ? (liveAt && !liveFailed ? `실시간 수집 ${benchmarkTime(liveAt)} KST · 5분마다 다시 긁습니다` : `정기 수집 ${benchmarkTime(view.generatedAt)} KST · 실시간 수집에 실패해 마지막 정기 판을 보여 드립니다`) : '벤치마크 자료 연결 중'}</span><button type="button" onClick={()=>{void load(); loadAdvisor();}} disabled={loading}>{loading?'새로 긁는 중…':'지금 새로 긁기'}</button></div>
+  <div className="hfb-meta"><span>{view ? (livePending ? `정기 수집 ${benchmarkTime(view.generatedAt)} KST 판을 먼저 보여 드립니다 · 실시간 수집 중…` : liveAt && !liveFailed ? `실시간 수집 ${benchmarkTime(liveAt)} KST · 5분마다 다시 긁습니다` : `정기 수집 ${benchmarkTime(view.generatedAt)} KST · 실시간 수집에 실패해 마지막 정기 판을 보여 드립니다`) : '벤치마크 자료 연결 중'}</span><button type="button" onClick={()=>{void load(); loadAdvisor();}} disabled={loading || livePending}>{loading || livePending?'새로 긁는 중…':'지금 새로 긁기'}</button></div>
   {error && <div className="hfb-alert" role="alert">{error}{view && ' 마지막으로 읽은 자료를 보여드립니다.'}</div>}
   {view?.stale && <div className="hfb-alert" role="status">최근 36시간 안에 확인된 자료가 아닙니다. 우선 추천 별을 내리고 시점 재검토로 표시했습니다.</div>}
   {!view && !loading && !error && <p className="hfb-empty">아직 공개된 벤치마크 자료가 없습니다.</p>}

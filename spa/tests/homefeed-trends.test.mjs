@@ -58,3 +58,19 @@ test('홈판 화면 모델은 출처 · 카드를 300에서 자르지 않는다 
   assert.equal(board.candidates.length, 1000);
   assert.match(read('../src/lib/homefeedLive.mjs'), /const MAX_CARDS = 1000;/);
 });
+
+/*
+ * 2026-10-06 사장님 "벤치마크 자료가 엄청 오래 걸리네" — 실측: 실시간 수집이 14초 · 22MB(출처 781곳 20묶음)인데
+ * 화면이 그걸 다 받은 뒤에야 처음 그렸다. 정기 판(2MB)을 먼저 그리고 실시간은 뒤에서 바꿔 끼운다.
+ * 묶음 수는 정기 판의 출처 수로 미리 알 수 있어 20묶음을 처음부터 동시에 부른다(첫 묶음 7초 대기 없앰).
+ */
+test('홈판 벤치마크는 정기 판을 먼저 그리고 실시간 판은 뒤에서 바꿔 끼운다', () => {
+  const board = read('../src/components/leword/homefeed/HomefeedBenchmarkBoard.tsx');
+  assert.doesNotMatch(board, /Promise\.all\(\[\s*fetch\('\/data\/homefeed-benchmarks\.json'/);
+  const firstPaint = board.indexOf('setData(normalizeBenchmarkBoard(raw))');
+  const liveCall = board.indexOf('fetchLiveFeeds(');
+  assert.ok(firstPaint > 0 && liveCall > firstPaint, '정기 판을 그린 뒤에 실시간을 부른다');
+  assert.match(board, /livePending/);
+  const live = read('../src/lib/homefeedLiveFetch.ts');
+  assert.match(live, /export async function fetchLiveFeeds\(expectedBatches = 0\)/);
+});
