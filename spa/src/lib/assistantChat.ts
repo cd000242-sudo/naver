@@ -16,8 +16,8 @@ export async function askAssistant(turns: AssistantTurn[], page: string, facts: 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ turns: turns.slice(-MAX_TURNS), page, facts: facts.slice(0, MAX_FACTS) }),
-    // 2026-10-06: 비서가 앱에서 검색량 · 자리를 재며 답한다(앱 상한 240초) — 그보다 조금 길게 기다린다.
-    }, 250_000);
+    // 2026-10-06: 비서가 앱에서 검색량 · 자리를 재며 답한다(앱 상한 280초) — 그보다 조금 길게 기다린다.
+    }, 320_000);
 }
 
 /** 운영자 1:1 문의(카카오톡) — 사이트 오른쪽 아래 버튼과 같은 주소. */
