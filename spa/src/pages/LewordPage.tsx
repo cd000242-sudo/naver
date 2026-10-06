@@ -146,6 +146,8 @@ function LewordPage() {
     };
 
     const sendToAnalyze = (keyword: string) => selectTab('analyze', keyword);
+    // 제목이 없는 카드에서 '설계실에서 제목 받기' — 설계실이 실측 가지로 제목을 그 자리에서 만든다(2026-10-06).
+    const sendToPlan = (keyword: string) => selectTab('plan', keyword);
     /*
      * 오늘의 네이버 추천키워드의 주제는 본문 칩이 아니라 사이드 메뉴의 하위 항목이다
      * (사장님 2026-09-08 "오늘의 네이버 추천키워드의 서브탭으로 만들어달라"). 표가 읽어 온 주제 목록을
@@ -357,8 +359,8 @@ function LewordPage() {
                         <button type="button" className="lw-acct-btn on" onClick={() => setAuthOpen(true)}>로그인 · 계정 만들기</button>
                     </section>
                 )}
-                {!lockedTab && activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
-                {!lockedTab && activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
+                {!lockedTab && activeTab === 'golden' && <GoldenTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} onPlan={sendToPlan} />}
+                {!lockedTab && activeTab === 'issue' && <IssueNicheTab key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} onPlan={sendToPlan} />}
                 {!lockedTab && activeTab === 'homefeed' && <HomefeedTab />}
                 {/* 실검 틈새키워드와 키워드 분석 사이의 서브탭 — 오늘의 네이버 추천키워드(사장님 2026-09-08). */}
                 {!lockedTab && activeTab === 'picks' && <TodayPicksBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} topic={currentPicksTopic} onTopics={setPicksTopics} onTopicChange={choosePicksTopic} />}
@@ -366,7 +368,7 @@ function LewordPage() {
                 {!lockedTab && activeTab === 'briefs' && <TopicBriefsBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'kin' && <KinGoldenTab onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
-                {!lockedTab && activeTab === 'plan' && <PostPlanTab />}
+                {!lockedTab && activeTab === 'plan' && <PostPlanTab initialKeyword={handoffKeyword} />}
                 {!lockedTab && activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'radar' && <RadarTab initialUrl={handoffPostUrl} />}

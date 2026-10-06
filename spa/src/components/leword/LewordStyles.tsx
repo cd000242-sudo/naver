@@ -1437,6 +1437,11 @@ function LewordStyles() {
                 background: rgba(124,92,255,.1); border: 1px solid rgba(124,92,255,.2);
                 color: rgba(207,196,255,.9); font-size: 12.5px; word-break: keep-all;
             }
+            .lw-write-hint-link {
+                padding: 0; border: 0; background: none; cursor: pointer;
+                color: #c4b5fd; font: inherit; font-weight: 800; text-decoration: underline; text-underline-offset: 3px;
+            }
+            .lw-write-hint-link:hover { color: #fff; }
             .lw-gate {
                 display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
                 margin: 0 0 14px; padding: 16px 20px; border-radius: 13px;

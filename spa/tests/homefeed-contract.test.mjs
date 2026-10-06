@@ -28,7 +28,7 @@ test('홈판 신호 탭은 실검 틈새 바로 뒤의 이용권 탭이고, 실�
     assert.ok(issueAt > 0 && issueAt < homefeedAt && homefeedAt < picksAt, '탭 순서');
     assert.match(page, /const GUEST_TABS: ReadonlySet<string> = new Set\(\['golden', 'issue'\]\);/);
     assert.match(page, /activeTab === 'homefeed' && <HomefeedTab \/>/);
-    assert.match(page, /activeTab === 'issue' && <IssueNicheTab key=\{session \? session\.userId : 'guest'\} onAnalyze=\{sendToAnalyze\} \/>/);
+    assert.match(page, /activeTab === 'issue' && <IssueNicheTab key=\{session \? session\.userId : 'guest'\} onAnalyze=\{sendToAnalyze\} onPlan=\{sendToPlan\} \/>/);
     assert.match(read('components/leword/LewordStyles.tsx'), /\.lw-navi-homefeed \{ --tabc:/);
 });
 

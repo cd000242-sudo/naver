@@ -181,6 +181,8 @@ type Props = {
     mindmap?: MindmapEntry;
     onMindmap: () => void;
     onAnalyze?: (keyword: string) => void;
+    /** 제목이 없을 때 설계실로 — 설계실이 실측 가지로 제목을 그 자리에서 만든다. */
+    onPlan?: (keyword: string) => void;
     /** 지표 줄 변형 — 'issue' 는 광고수·빈자리 대신 정면 글을 낸다. */
     variant?: 'golden' | 'issue';
     /** 카드 머리 배지 앞에 끼울 태그(이슈 탭: 이슈명·실측 수요·급상승). */
@@ -188,7 +190,7 @@ type Props = {
 };
 
 function PreemptionCard({
-    row, rank, locked, copied, onCopy, planOpen, onTogglePlan, onOpenChart, mindmap, onMindmap, onAnalyze,
+    row, rank, locked, copied, onCopy, planOpen, onTogglePlan, onOpenChart, mindmap, onMindmap, onAnalyze, onPlan,
     variant = 'golden', headTags, observation = false, titleReview = false,
 }: Props) {
     const reviewedSeo = titleReview ? safeGoldenTitle(row, row.titles?.seo?.text) : row.titles?.seo?.text;
@@ -456,7 +458,13 @@ function PreemptionCard({
                       * 전부 회차 실측에서 조립된 값이고, 옛 회차 데이터에는 없으므로
                       * 있을 때만 그린다. 서브는 마인드맵 확장의 시작점이다.
                       */}
-                    {!observation && titleReview && !reviewedSeo && <p className="lw-write-hint">제목 재작성 필요 · 일반형·근거 없는 체험·주제 혼합 제목은 추천하지 않습니다.</p>}
+                    {/* 옛 문구 '제목 재작성 필요'는 고장처럼 보였다(2026-10-06 — 보드 177행 중 제목 0개 표시). 왜 없는지와 받을 곳을 말한다. */}
+                    {!observation && titleReview && !reviewedSeo && (
+                        <p className="lw-write-hint">
+                            제목 재료(실측 검색 질문)가 부족해 추천 제목을 만들지 않았습니다.
+                            {onPlan && <> <button type="button" className="lw-write-hint-link" onClick={() => onPlan(row.keyword)}>설계실에서 이 키워드로 제목 받기 →</button></>}
+                        </p>
+                    )}
                     {!observation && (row.titles?.seo || row.titles?.home || (row.subKeywords?.length ?? 0) > 0) && (
                         <div className="lw-forge">
                             {reviewedSeo && (
@@ -563,7 +571,7 @@ function PreemptionCard({
                             onClick={onMindmap}
                             disabled={mindmap?.status === 'loading'}
                         >
-                            {mindmap?.status === 'loading' ? '확장 중…' : '마인드맵 확장키워드'}
+                            {mindmap?.status === 'loading' ? '확장 중… (최대 4분)' : '마인드맵 확장키워드'}
                             <small>내 클로드코드 구독</small>
                         </button>
                         {/* '그래프보기' 버튼은 뺐다(사장님 지시 2026-08-19) — 30일 실측이

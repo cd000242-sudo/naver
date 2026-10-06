@@ -10,14 +10,21 @@ function fresh(value, now, days) { const raw=clean(value); const time=Date.parse
 function publicUrl(value) { try { const u=new URL(value); return /^https?:$/.test(u.protocol)&&!u.username&&!u.password&&!/^(?:localhost|127\.|10\.|192\.168\.|0\.|\[)/i.test(u.hostname) ? u.href : null; } catch { return null; } }
 function subjectTokens(row) { return clean(row?.keyword).split(/\s+/).map(compact).filter(s=>s.length>=2&&!/^(?:신청|대상|방법|후기|가격|조건|202\d)$/.test(s)); }
 function sourceRelated(row, fact) { const text=compact(fact?.title); return subjectTokens(row).slice(0,2).some(token=>text.includes(token)); }
+/*
+ * 제목 대장간(앱 title-forge)의 고정 틀 문구 — 주장이 아니라 글의 형식이다(체험·일반형 틀은 뺐다).
+ * 2026-10-06 실측: 이 낱말들과 실측 키워드 풀 낱말을 근거로 안 쳐서 보드 제목 66개가 전부 탈락했다.
+ */
+const FRAME_WORDS = new Set(['따라하기','쉬운','순서','무엇이','어떻게','다른가','실제','비용','정리','언제부터','언제까지','원인과','해결법','고르는','기준','단계별','방법','빠뜨리기','것들','이','순서대로만','하면','됩니다','기준은','하나면','미리','알면','다릅니다','지금이','준비할','때입니다','원인은','따로','있습니다','고르다','지쳤다면','볼','것','어렵게','할','필요','없습니다','글','하나로','끝냅니다','경험담을','판단할','누구에게','맞는지','먼저','살펴보세요']);
+/** 실측 키워드 풀·서브키워드 — 보드가 이 행을 위해 검색량·문서수를 잰 말들. */
+function measuredWords(row) { return [...(Array.isArray(row?.keywordPool)?row.keywordPool:[]),...(Array.isArray(row?.subKeywords)?row.subKeywords:[])].map(p=>clean(p?.keyword)).filter(Boolean); }
 /** Conservative display gate: lexical support is necessary, never proof of truth or of a competitor body gap. */
 export function safeGoldenTitle(row, input) {
  const title=clean(input); const keyword=compact(row?.keyword);
  if(!title||!keyword||!compact(title).includes(keyword)||GENERIC.test(title)||PERSONAL.test(title)||PROMISE.test(title))return null;
  const brief=row?.brief;
- const support=compact([row.keyword,brief?.primaryIntent,brief?.angle,...(Array.isArray(brief?.facts)?brief.facts.filter(f=>sourceRelated(row,f)).map(f=>f.title):[])].join(' '));
+ const support=compact([row.keyword,brief?.primaryIntent,brief?.angle,...(Array.isArray(brief?.facts)?brief.facts.filter(f=>sourceRelated(row,f)).map(f=>f.title):[]),...measuredWords(row)].join(' '));
  const extra=title.split(/[\s,·:—()“”"!?]+/).filter(Boolean).filter(t=>compact(t).length>1);
- if(extra.some(token=>!TITLE_CONNECTORS.test(token)&&!support.includes(compact(token).replace(/(?:에서|으로|까지|부터|은|는|을|를|의|과|와)$/,''))))return null;
+ if(extra.some(token=>!TITLE_CONNECTORS.test(token)&&!FRAME_WORDS.has(token)&&!support.includes(compact(token).replace(/(?:에서|으로|까지|부터|은|는|을|를|의|과|와)$/,''))))return null;
  return title;
 }
 export function assessGoldenEditorial(row, now=Date.now()) {

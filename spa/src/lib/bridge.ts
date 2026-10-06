@@ -130,7 +130,9 @@ export async function bridgeMindmap(keyword: string, light = false): Promise<Bri
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ keyword, light }),
-    }, 90_000);
+        // 앱이 수요 분석(AI)·추가 검색어 실측까지 한 번에 하느라 90초를 넘긴다 — 2026-10-06 실서비스에서
+        // 사이트가 먼저 포기해 '확장 실패: 앱 응답이 너무 오래 걸립니다'만 떴다. 4분 기다린다.
+    }, 240_000);
 }
 
 export interface BridgeTrend {

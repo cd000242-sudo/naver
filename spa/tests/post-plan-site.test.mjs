@@ -42,7 +42,9 @@ const readSrc = (rel) => readFileSync(new URL(rel, import.meta.url), 'utf8');
 test('설계실 탭은 키워드 분석 바로 뒤 · 로그인 탭 · 화면이 붙어 있다', () => {
   const page = readSrc('../src/pages/LewordPage.tsx');
   assert.ok(page.indexOf("id: 'analyze'") < page.indexOf("id: 'plan'") && page.indexOf("id: 'plan'") < page.indexOf("id: 'kin'"));
-  assert.match(page, /\{!lockedTab && activeTab === 'plan' && <PostPlanTab \/>\}/);
+  assert.match(page, /\{!lockedTab && activeTab === 'plan' && <PostPlanTab initialKeyword=\{handoffKeyword\} \/>\}/);
+  // 제목이 없는 카드 → 설계실로 키워드를 넘긴다(2026-10-06)
+  assert.match(page, /const sendToPlan = \(keyword: string\) => selectTab\('plan', keyword\);/);
   assert.doesNotMatch(page, /GUEST_TABS[^\n]*'plan'/);
 });
 test('설계실 ③ 질문은 키를 싣지 않는 호출(유료 커뮤니티 검색이 돌지 않게)', () => {
