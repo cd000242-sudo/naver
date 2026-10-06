@@ -1,4 +1,4 @@
-// 자동 생성 — 앱 레포 src/utils/title-forge/varied.ts 묶음(원본 해시 cc7ac543252bab29). 손으로 고치지 말고 spa/scripts/build-title-forge.mjs 를 다시 돌릴 것.
+// 자동 생성 — 앱 레포 src/utils/title-forge/varied.ts 묶음(원본 해시 2d5237212beb3d72). 손으로 고치지 말고 spa/scripts/build-title-forge.mjs 를 다시 돌릴 것.
 
 // ../../../../park/leword-app/src/utils/shopping-purchase-angle.ts
 var DOMAIN_ANGLES = [
@@ -263,9 +263,38 @@ var HOME_TEMPLATE = {
    */
   generic: (kw) => `${kw} \uC774\uAC8C \uBB54\uC9C0 \uBAB0\uB77C\uC11C \uCC3E\uC544\uBD24\uC2B5\uB2C8\uB2E4`
 };
-function extraTokens(derived, keyword) {
-  const base = new Set(keyword.split(/\s+/).filter(Boolean));
-  return derived.split(/\s+/).filter((token) => token.length > 0 && !base.has(token)).join(" ");
+function splitExtra(derived, keyword) {
+  const words = keyword.split(/\s+/).filter(Boolean);
+  const short = new Set(words.filter((w) => w.length < 2));
+  const text = collapse(derived);
+  const covered = Array.from({ length: text.length }, () => false);
+  for (const word of words) {
+    if (word.length < 2) continue;
+    for (let at = text.indexOf(word); at >= 0; at = text.indexOf(word, at + word.length)) {
+      for (let k = at; k < at + word.length; k += 1) covered[k] = true;
+    }
+  }
+  const runs = [];
+  let start = -1;
+  for (let i = 0; i <= text.length; i += 1) {
+    const cut = i === text.length || covered[i] || text[i] === " ";
+    if (cut && start >= 0) {
+      runs.push({ text: text.slice(start, i), start, end: i });
+      start = -1;
+    }
+    if (!cut && start < 0) start = i;
+  }
+  const glued = (r) => r.start > 0 && covered[r.start - 1] || r.end < text.length && covered[r.end];
+  const kept = runs.filter((r) => !short.has(r.text) && !(r.text.length === 1 && glued(r)));
+  const firstCovered = covered.indexOf(true);
+  const isBefore = (r) => firstCovered >= 0 && r.end <= firstCovered;
+  return {
+    before: kept.filter(isBefore).map((r) => r.text).join(" "),
+    after: kept.filter((r) => !isBefore(r)).map((r) => r.text).join(" ")
+  };
+}
+function withoutRepeats(extra, suffix) {
+  return extra.split(" ").filter((token) => token && !suffix.includes(token)).join(" ");
 }
 function collapse(text) {
   return text.replace(/\s+/g, " ").trim();
@@ -312,10 +341,10 @@ function forgeTitles(input) {
   const keyword = collapse(input.keyword);
   const frame = pickFrame(input);
   const derived = derivedForFrame(input, frame);
-  const extra = derived ? extraTokens(derived.keyword, keyword) : "";
+  const { before, after } = derived ? splitExtra(derived.keyword, keyword) : { before: "", after: "" };
   const basis = basisFor(input, frame, derived);
   const seo = {
-    text: fitWithin(`${keyword} ${extra} ${SEO_SUFFIX[frame]}`, SEO_MAX),
+    text: fitWithin(`${keyword} ${withoutRepeats(after, SEO_SUFFIX[frame])} ${SEO_SUFFIX[frame]}`, SEO_MAX),
     frame,
     basis
   };
@@ -337,7 +366,7 @@ function forgeTitles(input) {
     }
   }
   const home = {
-    text: fitWithin(HOME_TEMPLATE[frame](keyword, extra), HOME_MAX),
+    text: fitWithin(HOME_TEMPLATE[frame](collapse(`${before} ${keyword}`), after).replace(/\s+,/g, ","), HOME_MAX),
     frame,
     basis
   };
