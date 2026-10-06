@@ -114,4 +114,14 @@ export function summarizeGoldenDaily(rows: readonly PreemptionRow[], now = Date.
     return summary;
 }
 
+/**
+ * 처음 열 보기 — 비어 있지 않은 첫 보기(오늘 → 최근 7일 → 전체 보관). 2026-10-06 사장님 "선점보드가 불완전한 것 같은데":
+ * 회차가 없는 날은 '오늘 확인'이 0행이라 판이 빈 것처럼 보였다. 버튼 · 개수는 그대로라 무엇을 보는지는 화면에 드러난다.
+ */
+export function defaultGoldenDailyView(summary: Record<GoldenDailyView, number>): 'today' | 'recent' | 'all' {
+    if (summary.today > 0) return 'today';
+    if (summary.today + summary.recent > 0) return 'recent';
+    return 'all';
+}
+
 

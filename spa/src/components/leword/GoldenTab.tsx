@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import PreemptionPlan from './PreemptionPlan';
 import { naverSearchUrl, rowMatchesWriteLane } from './preemptionMeta';
 
@@ -18,7 +18,7 @@ import { goldenMeasurementLabel, matchesGoldenFocus, recentRiseRatio, summarizeG
 import GoldenWritingRecommendations from './GoldenWritingRecommendations';
 import { loadSavedBoard, boardSourceNote } from '../../lib/boardBridge';
 import { currentGoldenBriefRows } from '../../lib/goldenCurrentBriefs';
-import { goldenDailyCheckedAt, goldenDailyStatus, selectGoldenDailyRows, summarizeGoldenDaily } from '../../lib/goldenDailyModel';
+import { defaultGoldenDailyView, goldenDailyCheckedAt, goldenDailyStatus, selectGoldenDailyRows, summarizeGoldenDaily } from '../../lib/goldenDailyModel';
 import GoldenTrendCandidates, { type GoldenTrendCandidate } from './GoldenTrendCandidates';
 
 /**
@@ -87,7 +87,13 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         const today = selectGoldenDailyRows(all, 'today', now);
         return dailyView === 'today' ? today : [...today, ...selectGoldenDailyRows(all, 'recent', now)];
     }, [board, dailyView, now]);
+    /*
+     * 처음 열 보기는 보드를 읽은 뒤 한 번만 고른다 — 회차 없는 날 '오늘 확인' 0행으로 판이 빈 것처럼 보이던 것(2026-10-06).
+     * 사용자가 버튼을 누른 뒤로는 그 선택을 따른다.
+     */
+    const viewPicked = useRef(false);
     const changeDailyView = (view: 'today' | 'recent' | 'all') => {
+        viewPicked.current = true;
         setDailyView(view); setTopic('전체'); setWriteLane('all'); setMoneyMin(0); setFocus('all');
         setOpenPlan(''); setChartKeyword('');
     };
@@ -136,6 +142,13 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             document.removeEventListener('visibilitychange', onVisible);
         };
     }, []);
+
+    // 처음 열 보기 — 보드 읽기 effect 뒤에 둔다(위 viewPicked 주석).
+    useEffect(() => {
+        if (viewPicked.current || !board?.rows?.length) return;
+        viewPicked.current = true;
+        setDailyView(defaultGoldenDailyView(dailySummary));
+    }, [board, dailySummary]);
 
     /** 실제로 행이 있는 주제만 칩으로 낸다. 빈 칩을 누르게 하면 안 된다. */
     const topics = useMemo(() => {

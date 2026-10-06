@@ -84,3 +84,11 @@ test('public checked-at helper returns oldest actual evidence timestamp for hone
  assert.equal(model.goldenDailyCheckedAt({...row,searchVolumeMeasuredAt:'2026-10-01T00:00:00Z',serp:{...row.serp,measuredAt:'2026-10-02T00:00:00Z'}},now),Date.parse('2026-10-01T00:00:00Z'));
  assert.equal(model.goldenDailyCheckedAt({...row,documentCountMeasuredAt:null},now),null);
 });
+
+// 2026-10-06 사장님 "선점보드가 불완전한 것 같은데" — 회차가 없는 날 기본 보기 '오늘 확인'이 0행이라 판이 빈 것처럼 보였다.
+// 오늘 확인분이 없으면 최근 7일, 그것도 없으면 전체 보관을 연다. 버튼과 개수는 그대로라 무엇을 보는지는 화면에 드러난다.
+test('기본 보기는 비어 있지 않은 첫 보기 — 오늘 → 최근 7일 → 전체 보관', () => {
+ assert.equal(model.defaultGoldenDailyView({today:15,recent:15,archive:165}),'today');
+ assert.equal(model.defaultGoldenDailyView({today:0,recent:30,archive:165}),'recent');
+ assert.equal(model.defaultGoldenDailyView({today:0,recent:0,archive:195}),'all');
+});
