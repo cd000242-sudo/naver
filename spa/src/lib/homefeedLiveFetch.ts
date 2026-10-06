@@ -15,9 +15,17 @@ async function batchOf(batch: number): Promise<Batch | null> {
     return { fetchedAt: result.fetchedAt, batches: Math.max(1, Math.min(20, Number(result.batches) || 1)), feeds: result.feeds as LiveFeed[] };
 }
 
-export async function fetchLiveFeeds(): Promise<{ fetchedAt: string; feeds: LiveFeed[] } | null> {
-    const first = await batchOf(0);
+/**
+ * expectedBatches: 정기 판의 출처 수로 미리 센 묶음 수(2026-10-06). 알면 처음부터 동시에 불러 첫 묶음 대기(약 7초)를 없앤다.
+ * 워커가 더 많은 묶음을 말하면 나머지를 더 받는다. 모르면(0) 예전처럼 첫 묶음으로 묶음 수를 알아낸다.
+ */
+export async function fetchLiveFeeds(expectedBatches = 0): Promise<{ fetchedAt: string; feeds: LiveFeed[] } | null> {
+    const guess = Math.max(1, Math.min(20, Math.floor(expectedBatches) || 1));
+    const head = await Promise.all(Array.from({ length: guess }, (_, i) => batchOf(i)));
+    const first = head[0];
     if (!first) return null;
-    const rest = await Promise.all(Array.from({ length: first.batches - 1 }, (_, i) => batchOf(i + 1)));
-    return { fetchedAt: first.fetchedAt, feeds: [first, ...rest].flatMap((b) => (b ? b.feeds : [])) };
+    const rest = first.batches > guess
+        ? await Promise.all(Array.from({ length: first.batches - guess }, (_, i) => batchOf(guess + i)))
+        : [];
+    return { fetchedAt: first.fetchedAt, feeds: [...head, ...rest].slice(0, first.batches).flatMap((b) => (b ? b.feeds : [])) };
 }
