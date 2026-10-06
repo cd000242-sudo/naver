@@ -45,3 +45,17 @@ test('a newer successful measurement supersedes prior rejection but invalid reje
  for(const checkedAt of ['2026-09-31T03:00:00Z','bad','2026-10-04T03:00:00Z','2026-10-02T03:00:00',null]) assert.equal(assessGoldenEditorial({...r,revalidation:{...r.revalidation,checkedAt}},now).ready,true);
  assert.equal(assessGoldenEditorial({...r,revalidation:{...r.revalidation,status:'passed'}},now).ready,true);
 });
+
+// 2026-10-06 실측: 보드 177행 중 제목 있는 66행이 전부(66/66) 이 검사에서 떨어져 카드마다 '제목 재작성 필요'만 떴다.
+// 규칙 제목의 덧붙은 말은 실측 키워드 풀(keywordPool·subKeywords)에서 오거나 고정 틀 문구다 — 지어낸 주장이 아니다.
+test('measured keyword pool words and fixed frame wording count as support',()=>{
+ const pr={keyword:'상토 배양토 차이',keywordPool:[{keyword:'상토 재사용 방법',searchVolume:null},{keyword:'배양토 만들기',searchVolume:20}],subKeywords:[{keyword:'배롱나무 백일홍 차이',searchVolume:930}]};
+ assert.equal(safeGoldenTitle(pr,'상토 배양토 차이 재사용 방법 단계별 방법'),'상토 배양토 차이 재사용 방법 단계별 방법');
+ const camp={keyword:'강동오토캠핑장 예약'};
+ assert.equal(safeGoldenTitle(camp,'강동오토캠핑장 예약 언제부터 언제까지'),'강동오토캠핑장 예약 언제부터 언제까지');
+ assert.equal(safeGoldenTitle(camp,'강동오토캠핑장 예약, 지금이 준비할 때입니다'),'강동오토캠핑장 예약, 지금이 준비할 때입니다');
+ // 풀에 없는 다른 대상명 · 체험 · 일반형은 여전히 막는다
+ assert.equal(safeGoldenTitle(pr,'상토 배양토 차이 다이소 상토 후기'),null);
+ assert.equal(safeGoldenTitle(camp,'강동오토캠핑장 예약 직접 써본 기록'),null);
+ assert.equal(safeGoldenTitle(camp,'강동오토캠핑장 예약 어떤 정보가 있는지'),null);
+});

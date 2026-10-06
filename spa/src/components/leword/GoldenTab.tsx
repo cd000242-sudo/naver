@@ -44,7 +44,7 @@ type Board = {
 };
 
 const BOARD_URL = '/data/preemption-board.json';
-function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
+function GoldenTab({ onAnalyze, onPlan }: { onAnalyze: (keyword: string) => void; onPlan?: (keyword: string) => void }) {
     const [board, setBoard] = useState<Board | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
     const [topic, setTopic] = useState('전체');
@@ -476,6 +476,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                     : index >= FREE_BOARD_ROWS);
                             return (
                         <PreemptionCard
+                            onPlan={onPlan}
                             key={`${row.topic}-${row.keyword}`}
                             /*
                              * 행은 발행본 그대로 넘긴다 — 시기 배지(timingGroup)·장기 추세(trendLabel)는
@@ -563,6 +564,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
                     {planRow && (
                         <PreemptionPlan
+                            onPlan={onPlan}
                             row={planRow}
                             onClose={() => setOpenPlan('')}
                             onAnalyze={onAnalyze}

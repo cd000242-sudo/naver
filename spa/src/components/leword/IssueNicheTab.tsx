@@ -112,7 +112,7 @@ const liveAgo = (ms: number | null | undefined): string => {
     return hours < 24 ? `${hours}시간 전` : `${Math.floor(hours / 24)}일 전`;
 };
 
-function IssueNicheTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
+function IssueNicheTab({ onAnalyze, onPlan }: { onAnalyze?: (keyword: string) => void; onPlan?: (keyword: string) => void }) {
     const [snapshot, setBoard] = useState<IssueBoard | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
     const [view, setView] = useState<View>('niche');
@@ -462,6 +462,7 @@ role="group" aria-label="판정">
                                         : (freeNames.length > 0 ? !freeNames.includes(row.keyword) : index >= FREE_ISSUE_ROWS);
                                     return (
                                         <PreemptionCard
+                                            onPlan={onPlan}
                                             key={`${row.issue}-${row.keyword}`}
                                             row={row}
                                             rank={view === 'observe' ? 0 : index + 1}
@@ -501,6 +502,7 @@ role="group" aria-label="판정">
 
                             {planRow && (
                                 <PreemptionPlan
+                                    onPlan={onPlan}
                                     row={planRow}
                                     onClose={() => setOpenPlan('')}
                                     onAnalyze={(keyword) => onAnalyze?.(keyword)}

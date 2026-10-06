@@ -116,6 +116,8 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
      */
     const [extraExp, setExtraExp] = useState<Array<{ keyword: string; searchVolume: number | null; drifted?: boolean }>>([]);
     const [widenedFrom, setWidenedFrom] = useState<string | null>(null);
+    /** 보충 확장 요청이 끝났는지 — 끝났는데 가지가 0이면 '끝 가지' 안내(2026-10-06: 표가 말없이 사라져 고장처럼 보였다). */
+    const [extraDone, setExtraDone] = useState(false);
     /** 그래프 확대(사장님 지시 2026-08-23 "그래프 클릭하면 크게 볼 수 있게"). */
     const [chartOpen, setChartOpen] = useState(false);
     const [expState, setExpState] = useState<'idle' | 'loading' | 'done'>('idle');
@@ -310,13 +312,15 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
          */
         expFor.current = result.keyword;
         let cancelled = false;
+        setExtraDone(false);
         fetchKeywordExpansions(result.keyword).then((res) => {
+            if (!cancelled) setExtraDone(true);
             if (cancelled || !res.ok || !res.data) return;
             setExtraExp(res.data.items.map((item) => ({
                 keyword: item.keyword, searchVolume: item.searchVolume, drifted: item.drifted,
             })));
             setWidenedFrom(res.data.widenedFrom);
-        }).catch(() => { /* 보충이 없어도 표는 그대로 */ });
+        }).catch(() => { if (!cancelled) setExtraDone(true); /* 보충이 없어도 표는 그대로 */ });
         return () => { cancelled = true; };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result]);
@@ -639,6 +643,28 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                       * 사장님 지적(2026-08-23): 황금키워드 카드처럼 여기서도
                       * 확장어가 같이 분석돼야 하고, 거기서 또 파고들 수 있어야 한다.
                       */}
+                    {expansionRows.length === 0 && extraDone && (
+                        <section className="lw-panel" aria-label="확장 키워드">
+                            <div className="lw-panel-head">
+                                <h2>확장 키워드 — 자리까지 실측</h2>
+                                <span>더 뻗을 가지가 없습니다</span>
+                            </div>
+                            {trail.length > 0 && (
+                                <div className="lw-analyze-trail">
+                                    {trail.map((step) => (
+                                        <button key={step} type="button" onClick={() => { setKeyword(step); run(step); }}>
+                                            {step}
+                                        </button>
+                                    ))}
+                                    <span>→ {result.keyword}</span>
+                                </div>
+                            )}
+                            <p className="lw-write-hint" style={{ margin: '10px 0 0' }}>
+                                '{result.keyword}'은(는) 끝 가지(가장 구체적인 롱테일)입니다 — 자동완성·연관 검색어에서 더 이어지는 말이 없습니다.
+                                위 황금지수가 높으면 그대로 쓸 키워드이고, 다른 가지를 보려면 위 경로를 눌러 한 단계 돌아가세요.
+                            </p>
+                        </section>
+                    )}
                     {expansionRows.length > 0 && (
                         <section className="lw-panel" aria-label="확장 키워드">
                             <div className="lw-panel-head">
@@ -646,7 +672,7 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                                 <span>
                                     검색량은 검색광고, 문서수는 블로그검색 실측
                                     {expState === 'loading' ? ' · 문서수 재는 중…' : ''}
-                                    {' · 한 줄을 누르면 그 검색어로 이어서 파고듭니다'}
+                                    {' · 줄 끝 [더 파기 →]를 누르면 그 검색어로 이어서 파고듭니다'}
                                 </span>
                             </div>
                             {trail.length > 0 && (
@@ -751,7 +777,7 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                                 <span>
                                     검색광고가 함께 돌려준 실측 목록 {result.related.length}개 · 의도는 키워드 속 단서 어휘로 분류
                                     {expState === 'loading' ? ' · 문서수 재는 중…' : ''}
-                                    {' · 한 줄을 누르면 그 검색어로 이어서 파고듭니다'}
+                                    {' · 줄 끝 [더 파기 →]를 누르면 그 검색어로 이어서 파고듭니다'}
                                 </span>
                             </div>
                             <div className="lw-table-scroll">

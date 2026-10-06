@@ -131,7 +131,7 @@ function AppPlanBlock({ plan, from }: { plan: AppPlan; from: 'app' | 'sync' }) {
     );
 }
 
-export default function PostPlanTab() {
+export default function PostPlanTab({ initialKeyword = '' }: { initialKeyword?: string } = {}) {
     const [keyword, setKeyword] = useState('');
     const [running, setRunning] = useState(false);
     const [error, setError] = useState('');
@@ -146,6 +146,10 @@ export default function PostPlanTab() {
         setKeyword(kw); setRunning(true); setError(''); setResult(null);
         try { setResult(await measureOnSite(kw)); } catch (e) { setError(e instanceof Error ? e.message : '설계하지 못했습니다.'); } finally { setRunning(false); }
     };
+
+    // 다른 탭(제목이 없는 카드)에서 키워드를 넘겨받으면 바로 설계한다.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => { if (initialKeyword.trim()) void run(initialKeyword); }, [initialKeyword]);
 
     const appPlans = app.status === 'ok' ? app.plans : [];
     const matched = result ? matchAppPlan(appPlans, result.keyword) : null;

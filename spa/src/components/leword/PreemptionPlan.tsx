@@ -62,13 +62,14 @@ type Props = {
     row: PlanRow;
     onClose: () => void;
     onAnalyze: (keyword: string) => void;
+    onPlan?: (keyword: string) => void;
     /** 사용자가 자기 눈으로 자리를 확인할 수 있어야 한다. */
     searchUrl: string;
     /** 지금 실검에 살아있으면 그 순위·진입 경과(이슈 탭이 대조해 넘긴다). 트래픽 근거. */
     live?: { rank: number; ago: string } | null;
 };
 
-function PreemptionPlan({ row, onClose, onAnalyze, searchUrl, live }: Props) {
+function PreemptionPlan({ row, onClose, onAnalyze, onPlan, searchUrl, live }: Props) {
     const closeRef = useRef<HTMLButtonElement>(null);
     /** 방금 복사한 제목 — 제목은 복사해서 바로 쓰라고 있는 것이다. */
     const [copiedTitle, setCopiedTitle] = useState('');
@@ -184,7 +185,15 @@ function PreemptionPlan({ row, onClose, onAnalyze, searchUrl, live }: Props) {
                         </section>
                     )}
 
-                    {(row.titles?.seo || row.titles?.home) && (
+                    {/* 제목 칸은 글자가 있을 때만 — 빈 '제목 — 복사해서 그대로 쓰세요' 칸이 떠 있었다(2026-10-06). */}
+                    {!(row.titles?.seo?.text || row.titles?.home?.text) && (
+                        <section className="lw-plan-titles">
+                            <strong>제목</strong>
+                            <p>제목 재료(실측 검색 질문)가 부족해 추천 제목을 만들지 않았습니다.</p>
+                            {onPlan && <button type="button" onClick={() => { onPlan(row.keyword); onClose(); }}>설계실에서 이 키워드로 제목 받기 →</button>}
+                        </section>
+                    )}
+                    {(row.titles?.seo?.text || row.titles?.home?.text) && (
                         <section className="lw-plan-titles">
                             <strong>제목 — 복사해서 그대로 쓰세요</strong>
                             {[
