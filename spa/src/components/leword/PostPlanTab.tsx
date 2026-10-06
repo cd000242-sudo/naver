@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { callWorkerRaw, fetchKeywordBid, fetchKeywordDocs, fetchKeywordExpansions, fetchKeywordFrontal, fetchKeywordVolumes } from '../../lib/keywordApi';
 import { frontalCount, FRONTAL_SATURATION } from '../../lib/expansionTier';
 import { forgeVariedTitles } from '../../lib/titleForge.generated.mjs';
-import { affiliateCandidates, matchAppPlan, questionChecklist, type AffiliateCandidate, type PlanQuestion } from '../../lib/postPlanSiteModel.mjs';
+import { affiliateCandidates, matchAppPlan, questionChecklist, relatedForTitles, volumeOf, type AffiliateCandidate, type PlanQuestion } from '../../lib/postPlanSiteModel.mjs';
 import { loadAppPlans, type AppPlan, type AppPlansLoad } from '../../lib/postPlanSync';
 
 /*
@@ -51,15 +51,11 @@ async function measureOnSite(keyword: string): Promise<SiteResult> {
         json('/data/preemption-board.json'),
     ]);
     const topTitles = (frontal.ok && frontal.data?.titles?.[keyword]) || [];
-    const derived = (expansions.ok ? expansions.data?.items || [] : [])
-        .filter((i) => typeof i.searchVolume === 'number' && i.searchVolume > 0 && compact(i.keyword) !== compact(keyword))
-        .sort((a, b) => (b.searchVolume || 0) - (a.searchVolume || 0))
-        .slice(0, 20)
-        .map((i) => ({ keyword: i.keyword, searchVolume: i.searchVolume }));
+    const derived = relatedForTitles(keyword, expansions.ok ? expansions.data?.items || [] : []);
     const row = (Array.isArray(board?.rows) ? board.rows : []).find((r: any) => compact(r.keyword) === compact(keyword));
     return {
         keyword,
-        volume: vol.ok ? (vol.data?.volumes?.[keyword] ?? null) : null,
+        volume: vol.ok ? volumeOf(vol.data?.volumes, keyword) : null,
         docs: docs.ok ? (docs.data?.docs?.[keyword] ?? null) : null,
         frontal: frontalCount(topTitles, keyword),
         sampled: topTitles.length,

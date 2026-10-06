@@ -53,3 +53,28 @@ export function matchAppPlan(plans, keyword) {
   const hits = (plans || []).filter((p) => p && String(p.keyword || '').replace(/\s+/g, '') === key);
   return hits.sort((a, b) => (Date.parse(b.updatedAt) || 0) - (Date.parse(a.updatedAt) || 0))[0] || null;
 }
+
+const compactOf = (s) => String(s || '').replace(/\s+/g, '');
+
+/** 검색량 표에서 키워드 값 — 워커는 띄어쓰기 없는 키로 준다(2026-10-06 실측). 없으면 null. */
+export function volumeOf(volumes, keyword) {
+  if (!volumes || typeof volumes !== 'object') return null;
+  const key = compactOf(keyword);
+  for (const [k, v] of Object.entries(volumes)) if (compactOf(k) === key && typeof v === 'number') return v;
+  return null;
+}
+
+/**
+ * 제목 재료 연관어 — 키워드 낱말(2자 이상) 절반 이상을 담은 것만, 검색량 큰 순 20개(키워드 자신 제외).
+ * 연관어 확장은 엉뚱하게 번진 말('현대차' 665,800)까지 줘서 제목에 섞였다(2026-10-06 실주행). 앱 post-plan 과 같은 규칙.
+ */
+export function relatedForTitles(keyword, items) {
+  const self = compactOf(keyword);
+  const words = String(keyword || '').split(/\s+/).filter((w) => w.length >= 2);
+  return (items || [])
+    .filter((i) => i && typeof i.searchVolume === 'number' && i.searchVolume > 0 && compactOf(i.keyword) !== self)
+    .filter((i) => { const c = compactOf(i.keyword); return words.length === 0 || words.filter((w) => c.includes(w)).length * 2 >= words.length; })
+    .sort((a, b) => b.searchVolume - a.searchVolume)
+    .slice(0, 20)
+    .map((i) => ({ keyword: i.keyword, searchVolume: i.searchVolume }));
+}

@@ -50,3 +50,16 @@ test('설계실 ③ 질문은 키를 싣지 않는 호출(유료 커뮤니티 �
   assert.match(tab, /callWorkerRaw\('radar-search'/);
   assert.doesNotMatch(tab, /fetchRadarSearch/);
 });
+
+import { relatedForTitles, volumeOf } from '../src/lib/postPlanSiteModel.mjs';
+// 실서비스 실주행(2026-10-06 '자동차 보험 갱신'): 검색량 칸이 비었고(워커는 띄어쓰기 없는 키로 준다),
+// 제목 재료에 '현대차'(665,800)가 섞여 '자동차 보험 갱신 현대차 어떤 정보가 있는지'가 나왔다.
+test('검색량은 띄어쓰기를 무시하고 찾는다', () => {
+  assert.equal(volumeOf({ '자동차보험갱신': 1600 }, '자동차 보험 갱신'), 1600);
+  assert.equal(volumeOf({ '자동차 보험 갱신': 1600 }, '자동차 보험 갱신'), 1600);
+  assert.equal(volumeOf({}, '자동차 보험 갱신'), null);
+});
+test('제목 재료 연관어는 키워드 낱말 절반 이상을 담은 것만 · 검색량 큰 순 20개', () => {
+  const items = [{ keyword: '현대차', searchVolume: 665800 }, { keyword: '자동차보험비교', searchVolume: 88000 }, { keyword: '자동차 보험 갱신 방법', searchVolume: 320 }, { keyword: '자동차 보험 갱신', searchVolume: 1600 }, { keyword: '보험', searchVolume: null }];
+  assert.deepEqual(relatedForTitles('자동차 보험 갱신', items), [{ keyword: '자동차보험비교', searchVolume: 88000 }, { keyword: '자동차 보험 갱신 방법', searchVolume: 320 }]);
+});
