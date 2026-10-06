@@ -6,6 +6,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import HomefeedBenchmarkStyles from '../homefeed/HomefeedBenchmarkStyles';
 import { bridgeBenchmarkTitles } from '../../../lib/bridge';
+import { callWorkerRaw } from '../../../lib/keywordApi';
 import { adsenseCategories, adsenseWritingAdvice, blogCount, filterAdsenseCards, type AdsenseBoard, type AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
 
 const kst = (iso: string | null | undefined) => {
@@ -58,6 +59,49 @@ function SearchTitles({ c }: { c: AdsenseCard }) {
     );
 }
 
+/*
+ * 글 구조 보기(2026-10-07 사장님 "벤치마킹 글을 볼 수 있어야 본보기가 된다 — 반드시").
+ * 티스토리가 사장님 IP 를 막아도 워커(다른 IP)가 글을 읽어 구조만 돌려준다 — 본문 통째는 싣지 않는다(저작권). 개인 키는 보내지 않는다.
+ */
+interface PostOutlineData { ok: boolean; error?: string; title?: string; headings?: Array<{ level: number; text: string }>; chars?: number; images?: number; tables?: number; lists?: number; adSlots?: number; firstLines?: string }
+function PostOutline({ s }: { s: AdsenseCard['sources'][number] }) {
+    const [open, setOpen] = useState(false);
+    const [o, setO] = useState<PostOutlineData | null>(null);
+    const [loading, setLoading] = useState(false);
+    const toggle = async () => {
+        if (open) { setOpen(false); return; }
+        setOpen(true);
+        if (o?.ok) return;
+        setLoading(true);
+        const r = await callWorkerRaw('adsense-post-outline', { url: s.url });
+        setLoading(false);
+        setO(r && typeof r === 'object' ? (r as unknown as PostOutlineData) : { ok: false, error: '글을 받지 못했습니다 — 잠시 뒤 다시 눌러 주세요' });
+    };
+    const num = (v: number | undefined) => (typeof v === 'number' ? v.toLocaleString('ko-KR') : '—');
+    return (
+        <div style={{ margin: '2px 0 8px 34px' }}>
+            <button type="button" onClick={() => void toggle()} aria-expanded={open} style={{ background: 'transparent', border: '1px solid #33415a', color: '#9fb3cc', borderRadius: 7, padding: '3px 9px', fontSize: 12, cursor: 'pointer' }}>{open ? '글 구조 접기' : '글 구조 보기'}</button>
+            {open && (
+                <div style={{ marginTop: 6, padding: '10px 12px', border: '1px solid #26324a', borderRadius: 10, background: 'rgba(15,23,42,0.55)', fontSize: 12.5, color: '#c7d2e0' }}>
+                    {loading && <p style={{ margin: 0 }}>글을 읽는 중…</p>}
+                    {!loading && o && !o.ok && <p role="status" style={{ margin: 0, color: '#fca5a5' }}>{o.error || '글을 받지 못했습니다'}</p>}
+                    {!loading && o?.ok && (
+                        <>
+                            <p style={{ margin: '0 0 6px', color: '#e2e8f0' }}>
+                                글자 <b>{num(o.chars)}</b> · 소제목 <b>{num(o.headings?.length)}</b> · 이미지 <b>{num(o.images)}</b> · 표 <b>{num(o.tables)}</b> · 목록 <b>{num(o.lists)}</b> · 본문 광고 자리 <b>{num(o.adSlots)}</b>
+                            </p>
+                            {o.firstLines && <p style={{ margin: '0 0 6px', color: '#94a3b8' }}>첫 문단: {o.firstLines}…</p>}
+                            {(o.headings?.length ?? 0) > 0
+                                ? <ol style={{ margin: 0, paddingLeft: 18 }}>{o.headings!.map((h, i) => <li key={`${i}-${h.text}`} style={{ marginLeft: (h.level - 2) * 14, color: h.level === 2 ? '#e2e8f0' : '#a8b6cb' }}>H{h.level} · {h.text}</li>)}</ol>
+                                : <p style={{ margin: 0, color: '#94a3b8' }}>소제목(H2~H4) 없이 쓴 글입니다.</p>}
+                        </>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+}
+
 function AdsenseCardView({ c }: { c: AdsenseCard }) {
     const blogs = blogCount(c);
     return (
@@ -82,10 +126,13 @@ function AdsenseCardView({ c }: { c: AdsenseCard }) {
             <div className="hfb-title-box">
                 <div className="hfb-title-head"><h4>고수들이 쓴 제목 <span>{c.sources.length}개</span></h4></div>
                 {c.sources.map((s) => (
-                    <div key={s.url} className="hfb-title-row">
-                        <span>{s.grade || '—'}</span>
-                        <p><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a></p>
-                        <small style={{ color: '#8d9db4' }}>{s.name} · {day(s.publishedAt)}</small>
+                    <div key={s.url}>
+                        <div className="hfb-title-row">
+                            <span>{s.grade || '—'}</span>
+                            <p><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a></p>
+                            <small style={{ color: '#8d9db4' }}>{s.name} · {day(s.publishedAt)}</small>
+                        </div>
+                        <PostOutline s={s} />
                     </div>
                 ))}
             </div>
