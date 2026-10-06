@@ -42,4 +42,16 @@ test('탭 배선 — 홈판 추천 바로 아래 · 로그인 탭 · 판 파일 
   const board = readFileSync(new URL('../src/components/leword/adsense/AdsenseBenchmarkBoard.tsx', import.meta.url), 'utf8');
   assert.ok(board.includes("'/data/adsense-benchmarks.json'"));
   assert.ok(!/예상\s*(수익|트래픽|유입)|확률/.test(board), '추정치 문구 금지');
+  // 실측 칸 — 숫자일 때만 그리고 아니면 '미측정'(지어내지 않음)
+  for (const k of ['searchVolume', 'documentCount', 'bid']) assert.ok(board.includes(`typeof c.metrics?.${k} === 'number'`), k);
+  assert.ok(board.includes("'미측정'"));
+});
+
+test('검색용 제목 — 회차 제목이 없으면 실측 검색어가 있을 때만 [지금 제목 만들기](앱 · 검색형 엔진)', () => {
+  const board = readFileSync(new URL('../src/components/leword/adsense/AdsenseBenchmarkBoard.tsx', import.meta.url), 'utf8');
+  assert.ok(board.includes("kind: 'adsense'") && board.includes('query: c.metrics.query'), '검색형 엔진 · 대표 검색어를 넘긴다');
+  assert.ok(board.includes('c.metrics?.query') && board.includes('대표 검색어가 아직 실측되지 않아'), '검색어 없으면 버튼 대신 이유');
+  assert.ok(board.includes('localStorage.setItem(MADE_KEY(c.id)'));
+  const bridge = readFileSync(new URL('../src/lib/bridge.ts', import.meta.url), 'utf8');
+  assert.ok(bridge.includes("kind?: 'homefeed' | 'adsense'"));
 });
