@@ -465,7 +465,8 @@ function PreemptionCard({
                             {onPlan && <> <button type="button" className="lw-write-hint-link" onClick={() => onPlan(row.keyword)}>설계실에서 이 키워드로 제목 받기 →</button></>}
                         </p>
                     )}
-                    {!observation && (row.titles?.seo || row.titles?.home || (row.subKeywords?.length ?? 0) > 0) && (
+                    {/* 글자 없는 제목 객체({text:''})만 있으면 빈 노란 띠가 떴다 — 실제로 보일 것이 있을 때만(2026-10-06). */}
+                    {!observation && (reviewedSeo || reviewedHome || (row.subKeywords?.length ?? 0) > 0) && (
                         <div className="lw-forge">
                             {reviewedSeo && (
                                 <div className="lw-forge-title" title={row.titles?.seo?.basis || ''}>
