@@ -139,7 +139,7 @@ export async function bridgeMindmap(keyword: string, light = false): Promise<Bri
  * 홈판 벤치마크 소재 하나의 제목을 앱(본인 구독)이 바로 짓는다(2026-10-07). 회차가 시간당 수십 장밖에 못 지어
  * 1,000장 판에 제목이 25장뿐이었다 — 비어 있는 카드에서 부른다. 회차와 같은 엔진 · 같은 검사.
  */
-export interface BenchmarkTitleCardInput { id: string; keyword: string; category: string; title: string; summary: string; sourceTitles: string[]; relatedKeywords: string[] }
+export interface BenchmarkTitleCardInput { id: string; keyword: string; category: string; title: string; summary: string; sourceTitles: string[]; relatedKeywords: string[]; /** 'adsense' 면 구글 · 다음 검색용 제목 엔진(대표 검색어 query 필수) */ kind?: 'homefeed' | 'adsense'; query?: string }
 export async function bridgeBenchmarkTitles(card: BenchmarkTitleCardInput): Promise<BridgeCallResult<{ id: string; provider: string; titles: string[] }>> {
     return bridgeCall<{ id: string; provider: string; titles: string[] }>('/v1/bridge/benchmark-titles', {
         method: 'POST',

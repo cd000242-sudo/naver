@@ -2,7 +2,7 @@ export interface AdsenseSource { id: string; name: string; grade: string; catego
 export interface AdsenseCard {
   id: string; keyword: string; title: string; category: string; grade: string; recommended: boolean; priority: number;
   publishedAt: string | null; capturedAt: string; why: string[];
-  metrics: { searchVolume: number | null; documentCount: number | null; bid: number | null };
+  metrics: { query?: string | null; searchVolume: number | null; documentCount: number | null; bid: number | null; measuredAt?: string };
   titles: string[]; sources: AdsenseSource[];
 }
 export interface AdsenseTitleShape { count: number; lengthMedian: number | null; yearPct: number | null; numberPct: number | null; questionPct: number | null; bracketPct: number | null }

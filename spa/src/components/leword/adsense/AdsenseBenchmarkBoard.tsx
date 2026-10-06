@@ -5,6 +5,7 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 import HomefeedBenchmarkStyles from '../homefeed/HomefeedBenchmarkStyles';
+import { bridgeBenchmarkTitles } from '../../../lib/bridge';
 import { adsenseCategories, adsenseWritingAdvice, blogCount, filterAdsenseCards, type AdsenseBoard, type AdsenseCard } from '../../../lib/adsenseBenchmarkModel.mjs';
 
 const kst = (iso: string | null | undefined) => {
@@ -13,6 +14,49 @@ const kst = (iso: string | null | undefined) => {
     return Number.isFinite(d.getTime()) ? d.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—';
 };
 const day = (iso: string | null | undefined) => (iso ? kst(iso).replace(/\s*\d{1,2}:\d{2}.*$/, '').replace(/\s*(오전|오후).*$/, '') : '');
+
+/** 앱이 즉석으로 지은 검색용 제목은 이 브라우저에 기억(다음 회차 제목이 붙으면 그쪽이 우선). */
+const MADE_KEY = (id: string) => `leword.ads.madeTitles.${id}`;
+function readMade(id: string): string[] { try { const v = JSON.parse(localStorage.getItem(MADE_KEY(id)) || 'null'); return Array.isArray(v) ? v.filter((t) => typeof t === 'string') : []; } catch { return []; } }
+
+function SearchTitles({ c }: { c: AdsenseCard }) {
+    const [made, setMade] = useState<string[]>(() => (c.titles?.length ? [] : readMade(c.id)));
+    const titles = c.titles?.length ? c.titles : made;
+    const [open, setOpen] = useState(false);
+    const [state, setState] = useState<'idle' | 'loading'>('idle');
+    const [note, setNote] = useState('');
+    const [copied, setCopied] = useState('');
+    const copy = async (t: string) => { try { await navigator.clipboard.writeText(t); setCopied(t); window.setTimeout(() => setCopied(''), 1200); } catch { setNote('제목을 선택해 복사해 주세요'); } };
+    const make = async () => {
+        if (!c.metrics?.query) return;
+        setState('loading'); setNote('');
+        const r = await bridgeBenchmarkTitles({ kind: 'adsense', query: c.metrics.query, id: c.id, keyword: c.keyword, category: c.category, title: c.title, summary: '', sourceTitles: c.sources.map((s) => s.title).slice(0, 6), relatedKeywords: [] });
+        setState('idle');
+        if (r.status === 'ok' && r.result.titles.length) { try { localStorage.setItem(MADE_KEY(c.id), JSON.stringify(r.result.titles)); } catch { /* 기억 못 해도 화면엔 보인다 */ } setMade(r.result.titles); return; }
+        if (r.status === 'ok') { setNote('검사를 통과한 제목이 없었습니다 — 한 번 더 눌러 주세요.'); return; }
+        if (r.status === 'offline') { setNote('PC 에서 LEWORD 앱을 켜 두면 내 구독 AI 로 바로 만듭니다 — 앱을 켠 뒤 다시 눌러 주세요.'); return; }
+        if (r.status === 'outdated') { setNote('LEWORD 앱이 구버전이라 이 기능이 없습니다 — 앱을 최신 버전으로 업데이트해 주세요.'); return; }
+        setNote(r.message || '만들지 못했습니다 — 잠시 뒤 다시 눌러 주세요.');
+    };
+    const shown = open ? titles : titles.slice(0, 5);
+    return (
+        <div className="hfb-title-box">
+            <div className="hfb-title-head"><h4>검색용 제목 {titles.length > 0 ? <span>{titles.length}개</span> : null}</h4>{titles.length > 0 && <button type="button" onClick={() => void copy(titles.join(String.fromCharCode(10)))}>전체 복사</button>}</div>
+            {titles.length === 0 && (
+                <div className="hfb-title-empty">
+                    {c.metrics?.query
+                        ? <><p>이 소재는 아직 회차가 검색용 제목을 짓지 못했습니다.</p><button type="button" className="hfb-title-make" disabled={state === 'loading'} onClick={() => void make()}>{state === 'loading' ? '제목 만드는 중… (약 1~2분)' : '지금 제목 만들기 · 내 구독 AI'}</button></>
+                        : <p>대표 검색어가 아직 실측되지 않아 검색용 제목을 짓지 않았습니다.</p>}
+                    {note && <small role="status">{note}</small>}
+                </div>
+            )}
+            {shown.map((t, i) => (
+                <div key={t} className="hfb-title-row"><span>{i + 1}</span><p>{t}</p><button type="button" onClick={() => void copy(t)}>{copied === t ? '복사됨' : '복사'}</button></div>
+            ))}
+            {titles.length > 5 && <button type="button" className="hfb-title-more" onClick={() => setOpen((v) => !v)} aria-expanded={open}>{open ? '접기' : `나머지 ${titles.length - 5}개 더 보기`}</button>}
+        </div>
+    );
+}
 
 function AdsenseCardView({ c }: { c: AdsenseCard }) {
     const blogs = blogCount(c);
@@ -26,8 +70,15 @@ function AdsenseCardView({ c }: { c: AdsenseCard }) {
                 <span className="hfb-timing">발행 {day(c.publishedAt)}</span>
             </div>
             <h3>{c.title}</h3>
-            <div className="hfb-keyword"><strong>{c.keyword}</strong></div>
+            {/* 실측(2단계) — 대표 검색어(소재 낱말 후보의 정확 검색량 최대) · 블로그 문서수 · 파워링크 3위 입찰가. 없으면 '미측정'만. */}
+            <div className="hfb-keyword">
+                <strong>{c.metrics?.query || c.keyword}</strong>
+                <span>월 검색량<b>{typeof c.metrics?.searchVolume === 'number' ? c.metrics.searchVolume.toLocaleString('ko-KR') : '미측정'}</b></span>
+                <span>블로그 문서수<b>{typeof c.metrics?.documentCount === 'number' ? c.metrics.documentCount.toLocaleString('ko-KR') : '미측정'}</b></span>
+                <span>파워링크 3위 입찰가<b>{typeof c.metrics?.bid === 'number' ? `${c.metrics.bid.toLocaleString('ko-KR')}원` : '미측정'}</b></span>
+            </div>
             {c.why?.length > 0 && <div className="hfb-why"><span>검토 이유</span><ul>{c.why.map((w) => <li key={w}>{w}</li>)}</ul></div>}
+            <SearchTitles c={c} />
             <div className="hfb-title-box">
                 <div className="hfb-title-head"><h4>고수들이 쓴 제목 <span>{c.sources.length}개</span></h4></div>
                 {c.sources.map((s) => (
