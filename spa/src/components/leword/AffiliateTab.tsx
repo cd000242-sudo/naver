@@ -442,21 +442,6 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             )}
                                         </div>
                                     </div>
-                                    {item.brief && (
-                                        <div className="lw-card-brief lw-product-brief" title={item.brief.basis}>
-                                            <div className="lw-card-brief-head">
-                                                <strong className={`lw-briefs-timing is-${item.brief.timing.toLowerCase()}`}>{item.brief.timing}</strong>
-                                                <span>글감 브리프 · {item.brief.basis} · 검색어 {item.seat?.keyword}</span>
-                                            </div>
-                                            <dl className="lw-briefs-dl">
-                                                <dt>Primary Intent</dt><dd>{item.brief.primaryIntent}</dd>
-                                                <dt>작성가치</dt><dd>{item.brief.value}</dd>
-                                                {item.brief.experience && <><dt>경험활용</dt><dd>{item.brief.experience}</dd></>}
-                                                {item.brief.differentiation && <><dt>차별화</dt><dd>{item.brief.differentiation}</dd></>}
-                                                <dt>추천 각도</dt><dd>{item.brief.angle}</dd>
-                                            </dl>
-                                        </div>
-                                    )}
                                     <div className="lw-product-actions">
                                         <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(query)}>LEWORD 키워드분석</button>
                                         <a
@@ -516,6 +501,25 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             </a>
                                         )}
                                     </div>
+                                    {/*
+                                      * 브리프(풀폭 한 줄)는 버튼 열 **뒤에** 둔다 — 앞에 두면 격자 첫 줄이 끊겨
+                                      * 버튼 열이 다음 줄 26px 순위 칸으로 밀려 글자가 세로로 쌓였다(사장님 2026-10-06).
+                                      */}
+                                    {item.brief && (
+                                        <div className="lw-card-brief lw-product-brief" title={item.brief.basis}>
+                                            <div className="lw-card-brief-head">
+                                                <strong className={`lw-briefs-timing is-${item.brief.timing.toLowerCase()}`}>{item.brief.timing}</strong>
+                                                <span>글감 브리프 · {item.brief.basis} · 검색어 {item.seat?.keyword}</span>
+                                            </div>
+                                            <dl className="lw-briefs-dl">
+                                                <dt>Primary Intent</dt><dd>{item.brief.primaryIntent}</dd>
+                                                <dt>작성가치</dt><dd>{item.brief.value}</dd>
+                                                {item.brief.experience && <><dt>경험활용</dt><dd>{item.brief.experience}</dd></>}
+                                                {item.brief.differentiation && <><dt>차별화</dt><dd>{item.brief.differentiation}</dd></>}
+                                                <dt>추천 각도</dt><dd>{item.brief.angle}</dd>
+                                            </dl>
+                                        </div>
+                                    )}
                                     <AffiliateTitles keyword={query} product={item.name} item={item} assessment={recommendation} onAnalyze={onAnalyze} />
                                 </li>
                             );
