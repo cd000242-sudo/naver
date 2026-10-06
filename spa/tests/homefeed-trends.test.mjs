@@ -74,3 +74,14 @@ test('홈판 벤치마크는 정기 판을 먼저 그리고 실시간 판은 뒤
   const live = read('../src/lib/homefeedLiveFetch.ts');
   assert.match(live, /export async function fetchLiveFeeds\(expectedBatches = 0\)/);
 });
+
+// 실시간 판 계산(글 1만 5천 개 소재 묶기)은 19초 — 화면 스레드에서 돌면 그동안 화면이 멈춘다. 작업 스레드로 옮긴다(규칙은 그대로).
+test('실시간 판 계산은 작업 스레드(Web Worker)에서 돌고, 못 쓰면 예전처럼 화면에서 계산한다', () => {
+  const board = read('../src/components/leword/homefeed/HomefeedBenchmarkBoard.tsx');
+  assert.match(board, /await mergeLiveBoardOffThread\(raw, live\.feeds, live\.fetchedAt\)/);
+  const off = read('../src/lib/homefeedLiveOffThread.ts');
+  assert.match(off, /new Worker\(new URL\('\.\/homefeedLiveWorker\.mjs', import\.meta\.url\), \{ type: 'module' \}\)/);
+  assert.match(off, /typeof Worker === 'undefined'/);
+  const worker = read('../src/lib/homefeedLiveWorker.mjs');
+  assert.match(worker, /import \{ mergeLiveBoard \} from '\.\/homefeedLive\.mjs'/);
+});

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { benchmarkTime, benchmarkView, filterBenchmarks, normalizeBenchmarkBoard, type BenchmarkBoard } from '../../../lib/homefeedBenchmarkModel.mjs';
-import { mergeLiveBoard } from '../../../lib/homefeedLive.mjs';
+import { mergeLiveBoardOffThread } from '../../../lib/homefeedLiveOffThread';
 import { fetchLiveFeeds } from '../../../lib/homefeedLiveFetch';
 import { annotateEvidence, describeEvidence, evidenceSummary } from '../../../lib/homefeedEvidence.mjs';
 import { loadAdvisorDaily } from '../../../lib/homefeedEvidenceLoad';
@@ -64,7 +64,11 @@ export default function HomefeedBenchmarkBoard() {
    const sources = Array.isArray((raw as { sources?: unknown[] })?.sources) ? (raw as { sources: unknown[] }).sources.length : 0;
    const live = await fetchLiveFeeds(Math.ceil(sources / 40));
    if(request.current !== controller) return;
-   if (live) { setData(normalizeBenchmarkBoard(mergeLiveBoard(raw, live.feeds, live.fetchedAt))); setLiveAt(live.fetchedAt); setLiveFailed(false); setNow(Date.now()); }
+   if (live) {
+    const merged = await mergeLiveBoardOffThread(raw, live.feeds, live.fetchedAt);
+    if(request.current !== controller) return;
+    setData(normalizeBenchmarkBoard(merged)); setLiveAt(live.fetchedAt); setLiveFailed(false); setNow(Date.now());
+   }
    else setLiveFailed(true);
   } catch { if(request.current === controller) setLiveFailed(true); }
   finally { if(request.current === controller) setLivePending(false); }
