@@ -62,8 +62,15 @@ type TabId = (typeof TABS)[number]['id'];
  */
 const GUEST_TABS: ReadonlySet<string> = new Set(['golden', 'issue']);
 
+/*
+ * 숨긴 탭(사장님 2026-10-06 "내 블로그 오늘 쓸 글이랑 글 RPM 확인은 숨겨주세요") — 메뉴(데스크톱 · 모바일)와
+ * 주소 진입(?tab=)에서 뺀다. 정의 · 화면 코드는 남겨 둔다 — 되살릴 때 여기서 빼면 된다.
+ */
+const HIDDEN_TABS: ReadonlySet<string> = new Set(['myblog', 'rpm']);
+const VISIBLE_TABS = TABS.filter((tab) => !HIDDEN_TABS.has(tab.id));
+
 function isTabId(value: string): value is TabId {
-    return TABS.some((tab) => tab.id === value);
+    return VISIBLE_TABS.some((tab) => tab.id === value);
 }
 
 function LewordPage() {
@@ -197,7 +204,7 @@ function LewordPage() {
                 </button>
                 {mobileNavOpen && (
                     <div className="lw-mobile-menu" id="lw-mobile-menu" role="menu">
-                        {TABS.map((tab) => (
+                        {VISIBLE_TABS.map((tab) => (
                             <button
                                 key={tab.id}
                                 type="button"
@@ -214,7 +221,7 @@ function LewordPage() {
                 )}
 
                 <nav className="lw-nav">
-                    {TABS.map((tab) => (
+                    {VISIBLE_TABS.map((tab) => (
                         <Fragment key={tab.id}>
                         <div className={tab.id === 'picks' ? `lw-navi-wrap${activeTab === 'picks' && picksTopics.length > 0 ? ' has-fold' : ''}` : undefined}>
                         <button

@@ -91,3 +91,13 @@ test('LewordPage 에 myblog 탭이 노출 추적 뒤에 등록되어 있다', ()
  assert.ok(page.indexOf("id: 'rank'") < page.indexOf("id: 'myblog'"));
  assert.match(page, /activeTab === 'myblog' && <MyBlogTab \/>/);
 });
+
+// 2026-10-06 사장님 "내 블로그 오늘 쓸 글이랑 글 RPM 확인은 숨겨주세요" — 메뉴(데스크톱 · 모바일)와 주소 진입에서 뺀다.
+// 화면 코드는 남겨 둔다(되살릴 때 한 줄).
+test('내 블로그 · 글 RPM 탭은 메뉴와 주소 진입에서 숨긴다', () => {
+ const page = fs.readFileSync(new URL('../src/pages/LewordPage.tsx', import.meta.url), 'utf8');
+ assert.match(page, /const HIDDEN_TABS[^=]*= new Set\(\['myblog', 'rpm'\]\)/);
+ assert.doesNotMatch(page, /\{TABS\.map\(\(tab\)/);
+ assert.equal((page.match(/\{VISIBLE_TABS\.map\(\(tab\)/g) || []).length, 2);
+ assert.match(page, /return VISIBLE_TABS\.some\(\(tab\) => tab\.id === value\)/);
+});

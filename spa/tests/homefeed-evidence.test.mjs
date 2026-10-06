@@ -6,7 +6,7 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { annotateEvidence, evidenceSummary } from '../src/lib/homefeedEvidence.mjs';
+import { annotateEvidence, describeEvidence, evidenceSummary } from '../src/lib/homefeedEvidence.mjs';
 
 const card = (id, title, sources) => ({ id, title, sources: sources.map(([t, url]) => ({ title: t, url })) });
 const daily = {
@@ -49,4 +49,20 @@ test('기록이 없으면 표시 없이 그대로, 원본은 안 바꾼다', () 
 test('요약 — 실제 홈판 제목 수 · 기간 · 내 홈판 글 수', () => {
   assert.deepEqual(evidenceSummary(daily), { homefeedTitles: 3, days: 3, from: '2026-09-28', to: '2026-09-30', myHits: 1 });
   assert.equal(evidenceSummary(null), null);
+});
+
+/*
+ * 2026-10-06 사장님 "이것도 똑바로 수정해주시고" — 옛 문장 "실제 홈판 기록과 맞댐 · 어드바이저 09/29~10/05 홈판 상위 93개 ·
+ * 내 블로그 홈판 유입 글 19개"는 무엇을 했는지(어디서 온 기록을, 카드 몇 개와 겹쳐 봤는지) 알아듣기 어려웠다.
+ */
+test('근거 문장은 기록의 출처 · 기간 · 겹친 카드 수를 쉬운 말로 말한다', () => {
+ const text = describeEvidence({ homefeedTitles: 93, days: 7, from: '2026-09-29', to: '2026-10-05', myHits: 19 }, { homefeed: 12, mine: 3 }, 'app');
+ assert.match(text, /9월 29일~10월 5일 \(7일\)/);
+ assert.match(text, /홈판에 오른 글 93개/);
+ assert.match(text, /내 블로그 글 19개/);
+ assert.match(text, /아래 소재 중 12개/);
+ assert.match(text, /3개/);
+ assert.match(text, /이 PC 앱/);
+ assert.doesNotMatch(text, /맞댐/);
+ assert.match(describeEvidence({ homefeedTitles: 20, days: 1, from: '2026-10-05', to: '2026-10-05', myHits: 0 }, { homefeed: 0, mine: 0 }, 'sync'), /10월 5일 하루/);
 });

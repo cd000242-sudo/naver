@@ -56,3 +56,22 @@ export function evidenceSummary(daily) {
   const days = [...new Set(rows.map((r) => r.day).filter(Boolean))].sort();
   return { homefeedTitles: rows.length, days: days.length, from: days[0] || null, to: days[days.length - 1] || null, myHits: myRows(daily).length };
 }
+
+const koDay = (iso) => { const m = /^\d{4}-(\d{2})-(\d{2})/.exec(String(iso || '')); return m ? `${Number(m[1])}월 ${Number(m[2])}일` : ''; };
+
+/**
+ * 화면 머리 문장(2026-10-06 사장님 "이것도 똑바로 수정해주시고") — 어디서 온 기록을, 며칠치를, 아래 카드 몇 개와 겹쳐 봤는지.
+ * 옛 문장("실제 홈판 기록과 맞댐 · 어드바이저 …")은 무엇을 했는지 알아듣기 어려웠다. 숫자는 센 값 그대로다.
+ * matched: 아래 소재 카드 중 홈판 기록 · 내 글과 같은 소재로 확인된 수. from: 'app' 이 PC 앱 | 'sync' 동기화본.
+ */
+export function describeEvidence(summary, matched, from) {
+  if (!summary) return '';
+  const range = summary.from && summary.to
+    ? (summary.from === summary.to ? `${koDay(summary.from)} 하루` : `${koDay(summary.from)}~${koDay(summary.to)} (${summary.days}일)`)
+    : '최근';
+  const where = from === 'app' ? '이 PC 앱' : '계정 동기화본';
+  return `네이버 크리에이터 어드바이저 실제 기록(${where}에서 받음) — ${range} 동안 홈판에 오른 글 ${summary.homefeedTitles}개, `
+    + `홈판에서 사람이 들어온 내 블로그 글 ${summary.myHits}개. `
+    + `아래 소재 중 ${matched.homefeed}개가 실제 홈판 글과, ${matched.mine}개가 내 홈판 글과 같은 소재입니다. `
+    + `어드바이저는 하루 늦게 집계돼 어제까지만 있습니다.`;
+}

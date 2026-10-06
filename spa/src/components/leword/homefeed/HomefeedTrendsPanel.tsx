@@ -1,4 +1,11 @@
+import { useState } from 'react';
 import type { BenchmarkTrends } from '../../../lib/homefeedBenchmarkModel.mjs';
+
+/** 접기 상태는 이 브라우저에만 기억한다(사장님 2026-10-06 "오늘 홈판 흐름 접었다 폈다 가능하게"). 못 읽으면 펼친다. */
+const OPEN_KEY = 'leword.homefeedTrends.open';
+function readOpen(): boolean {
+    try { return localStorage.getItem(OPEN_KEY) !== '0'; } catch { return true; }
+}
 
 /*
  * 오늘의 홈판 흐름(2026-10-06) — 사장님 "홈판에 뜬 것들과 고수 블로거들을 어떻게 썼고 우리는 어떻게 써야 하는지
@@ -21,14 +28,24 @@ export default function HomefeedTrendsPanel({ trends, realTitles, onPickCategory
     const cats = trends.categories.slice(0, 8);
     const max = Math.max(1, ...cats.map((c) => c.channels));
     const stats = trends.writing.stats;
+    const [open, setOpen] = useState(readOpen);
+    const toggle = () => setOpen((prev) => {
+        const next = !prev;
+        try { localStorage.setItem(OPEN_KEY, next ? '1' : '0'); } catch { /* 저장 못 해도 이번 화면에선 접힌다 */ }
+        return next;
+    });
     return (
-        <section className="hft" aria-label="오늘의 홈판 흐름">
+        <section className={`hft${open ? '' : ' closed'}`} aria-label="오늘의 홈판 흐름">
             <style>{CSS}</style>
             <div className="hft-head">
-                <span className="hft-eyebrow">TODAY · 최근 {trends.windowHours}시간</span>
-                <h3>오늘의 홈판 흐름</h3>
-                <p>벤치마크 채널 {trends.channels.toLocaleString('ko-KR')}곳이 올린 글 {trends.posts.toLocaleString('ko-KR')}개를 분야별로 셌습니다. 분야를 누르면 아래 소재가 그 분야로 걸러집니다.</p>
+                <div className="hft-head-text">
+                    <span className="hft-eyebrow">TODAY · 최근 {trends.windowHours}시간</span>
+                    <h3>오늘의 홈판 흐름</h3>
+                    <p>벤치마크 채널 {trends.channels.toLocaleString('ko-KR')}곳이 올린 글 {trends.posts.toLocaleString('ko-KR')}개를 분야별로 셌습니다. 분야를 누르면 아래 소재가 그 분야로 걸러집니다.</p>
+                </div>
+                <button type="button" className="hft-toggle" onClick={toggle} aria-expanded={open} aria-controls="hft-body">{open ? '접기 ▲' : '펼치기 ▼'}</button>
             </div>
+            {open && <div id="hft-body">
             <div className="hft-grid">
                 <div className="hft-card">
                     <h4>오늘 자주 뜨는 홈판 주제</h4>
@@ -83,12 +100,19 @@ export default function HomefeedTrendsPanel({ trends, realTitles, onPickCategory
                     <ol className="hft-real">{realTitles.slice(0, 20).map((t) => <li key={t.title}>{t.url ? <a href={t.url} target="_blank" rel="noopener noreferrer">{t.title}</a> : t.title}</li>)}</ol>
                 </details>
             )}
+            </div>}
         </section>
     );
 }
 
 const CSS = `
 .hft{border:1px solid rgba(250,204,21,.28);border-radius:16px;background:linear-gradient(180deg,rgba(250,204,21,.06),rgba(20,30,48,.6) 40%);padding:18px 20px;margin:14px 0}
+.hft-head{display:flex;align-items:flex-start;gap:14px}
+.hft-head-text{flex:1;min-width:0}
+.hft-toggle{flex:none;margin-top:2px;font:inherit;font-size:12px;font-weight:700;color:#fde68a;border:1px solid rgba(250,204,21,.4);border-radius:8px;padding:5px 11px;background:rgba(250,204,21,.08);cursor:pointer}
+.hft-toggle:hover{background:rgba(250,204,21,.16)}
+.hft-toggle:focus-visible{outline:3px solid #67e8f9;outline-offset:3px}
+.hft.closed .hft-head p{display:none}
 .hft-head h3{margin:2px 0 4px;font-size:19px;color:#fff;text-wrap:balance}
 .hft-head p{margin:0;color:#a8b6cb;font-size:12.5px}
 .hft-eyebrow{font-size:10px;letter-spacing:1.6px;font-weight:800;color:#fcd34d}
