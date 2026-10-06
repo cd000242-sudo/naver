@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { benchmarkTime, benchmarkView, filterBenchmarks, normalizeBenchmarkBoard, type BenchmarkBoard } from '../../../lib/homefeedBenchmarkModel.mjs';
 import { mergeLiveBoard } from '../../../lib/homefeedLive.mjs';
 import { fetchLiveFeeds } from '../../../lib/homefeedLiveFetch';
-import { annotateEvidence, evidenceSummary } from '../../../lib/homefeedEvidence.mjs';
+import { annotateEvidence, describeEvidence, evidenceSummary } from '../../../lib/homefeedEvidence.mjs';
 import { loadAdvisorDaily } from '../../../lib/homefeedEvidenceLoad';
 import type { AdvisorDailyView } from '../../../lib/myBlogSync';
 import HomefeedBenchmarkCard from './HomefeedBenchmarkCard';
@@ -78,6 +78,7 @@ export default function HomefeedBenchmarkBoard() {
   return cards.map((c,i)=>({c,i})).sort((a,b)=>rank(a.c)-rank(b.c)||a.i-b.i).map(x=>x.c);
  },[view,advisor]);
  const proofSummary=useMemo(()=>evidenceSummary(advisor?.daily??null),[advisor]);
+ const proofText=useMemo(()=>describeEvidence(proofSummary,{homefeed:annotated.filter(c=>c.evidence.homefeed).length,mine:annotated.filter(c=>c.evidence.mine).length},advisor?.from),[proofSummary,annotated,advisor]);
  const items=useMemo(()=>{
   if(status==='homefeed'||status==='mine') return filterBenchmarks(annotated.filter(c=>status==='homefeed'?c.evidence.homefeed:c.evidence.mine),{category,status:'all',query}) as typeof annotated;
   return filterBenchmarks(annotated,{category,status,query}) as typeof annotated;
@@ -98,7 +99,7 @@ export default function HomefeedBenchmarkBoard() {
     <p>게시물 수는 수집 범위입니다. 추천 수나 본문·반응 검증 수와 다릅니다.</p>
     <div className="hfb-source-grid">{view.sources.map((s,index)=><div key={`${s.id}-${index}`} className="hfb-channel"><b>{s.url ? <a href={s.url} target="_blank" rel="noopener noreferrer">{s.name} ↗</a> : s.name}</b><span data-state={s.status}>{SOURCE_STATUS[s.status]}{s.status==='ok'?` · ${s.postCount}개`:''}</span>{s.reason&&<small>{s.reason}</small>}<small>확인 {benchmarkTime(s.capturedAt)}</small></div>)}</div>
    </details>
-   <p className="hfb-proof-summary">{proofSummary ? `실제 홈판 기록과 맞댐 · 어드바이저 ${proofSummary.from?.slice(5).replace('-','/')}~${proofSummary.to?.slice(5).replace('-','/')} 홈판 상위 ${proofSummary.homefeedTitles}개 · 내 블로그 홈판 유입 글 ${proofSummary.myHits}개 (${advisor?.from==='app'?'이 PC 앱에서':'동기화본에서'} 받음)` : 'LEWORD 앱에서 네이버 로그인(어드바이저) 후 로그인 · 동기화하면, 실제 홈판에 오른 소재와 내 블로그 홈판 유입 소재를 카드에 표시합니다.'}</p>
+   <p className="hfb-proof-summary">{proofSummary ? proofText : 'LEWORD 앱에서 네이버 로그인(어드바이저) 후 로그인 · 동기화하면, 실제 홈판에 오른 소재와 내 블로그 홈판 유입 소재를 카드에 표시합니다.'}</p>
    {/* 오늘의 홈판 흐름(2026-10-06) — 수집기가 판에 실은 trends. 옛 판엔 없어서 그때는 안 그린다. */}
    {view.trends && <HomefeedTrendsPanel trends={view.trends} realTitles={advisor?.daily?.homefeedTitles ?? []} onPickCategory={(name)=>{ setCategory(name); setStatus('all'); setQuery(''); }} />}
    <div className="hfb-filters">

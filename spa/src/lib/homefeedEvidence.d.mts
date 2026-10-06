@@ -4,3 +4,4 @@ export interface HomefeedEvidence {
 }
 export function annotateEvidence<T extends { title: string; sources: { title: string; url: string | null }[] }>(candidates: T[], daily: unknown): (T & { evidence: HomefeedEvidence })[];
 export function evidenceSummary(daily: unknown): { homefeedTitles: number; days: number; from: string | null; to: string | null; myHits: number } | null;
+export function describeEvidence(summary: { homefeedTitles: number; days: number; from: string | null; to: string | null; myHits: number } | null, matched: { homefeed: number; mine: number }, from: 'app' | 'sync' | undefined): string;
