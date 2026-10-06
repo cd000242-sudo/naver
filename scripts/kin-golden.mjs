@@ -166,7 +166,8 @@ async function fetchSearchCandidates() {
     try {
       const html = await fetchText(`https://kin.naver.com/search/list.naver?query=${encodeURIComponent(seed)}&period=1&sort=date&page=${page}`);
       const items = html.split('<ul class="basic1"')[1] || '';
-      for (const block of items.split(/<li>/).slice(1)) {
+      // 행은 `<li data-nlog-imp-params=…>` 로 시작한다(2026-10-06 실측) — `<li>` 로만 자르면 숨은 Q&A 가 0건이었다.
+      for (const block of items.split(/<li[\s>]/).slice(1)) {
         const link = (block.match(/href="(https:\/\/kin\.naver\.com\/qna\/detail\.naver[^"]+)"/) || [])[1];
         // 검색어 하이라이트(<b>) 가 제목 중간에 끼므로 태그 너머까지 받아 걷어낸다.
         const title = ((block.match(/_searchListTitleAnchor">([\s\S]*?)<\/a>/) || [])[1] || '').replace(/<[^>]*>/g, '');
