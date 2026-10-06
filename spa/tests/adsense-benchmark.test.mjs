@@ -55,3 +55,12 @@ test('검색용 제목 — 회차 제목이 없으면 실측 검색어가 있을
   const bridge = readFileSync(new URL('../src/lib/bridge.ts', import.meta.url), 'utf8');
   assert.ok(bridge.includes("kind?: 'homefeed' | 'adsense'"));
 });
+
+// 사장님(2026-10-07) "벤치마킹 글을 볼 수 있어야 본보기가 된다 — 반드시". 티스토리가 사장님 IP 를 막아도 워커가 구조만 읽어 온다.
+test('글 구조 보기 — 고수 글마다 워커(다른 IP)로 소제목 목차 · 글자 수 · 이미지 · 표 · 광고 자리, 개인 키는 싣지 않는다', () => {
+  const board = readFileSync(new URL('../src/components/leword/adsense/AdsenseBenchmarkBoard.tsx', import.meta.url), 'utf8');
+  assert.ok(board.includes("callWorkerRaw('adsense-post-outline', { url: s.url })"), '키 없이 워커 직접(callWorkerRaw)');
+  assert.ok(board.includes('글 구조 보기'));
+  for (const k of ['o.chars', 'o.headings', 'o.images', 'o.tables', 'o.adSlots']) assert.ok(board.includes(k), k);
+  assert.ok(!/dangerouslySetInnerHTML/.test(board), '남의 글 HTML 을 그대로 꽂지 않는다');
+});
