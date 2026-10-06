@@ -4,6 +4,7 @@ import { clearSession, daysLeft, loadSession, type LewordSession } from '../lib/
 import { Link, useSearchParams } from 'react-router-dom';
 import AffiliateTab from '../components/leword/AffiliateTab';
 import AnalyzeTab from '../components/leword/AnalyzeTab';
+import PostPlanTab from '../components/leword/PostPlanTab';
 import GoldenTab from '../components/leword/GoldenTab';
 import IssueNicheTab from '../components/leword/IssueNicheTab';
 import HomefeedTab from '../components/leword/homefeed/HomefeedTab';
@@ -41,6 +42,8 @@ const TABS = [
     { id: 'picks', label: '오늘의 네이버 추천키워드', short: '추천키워드', icon: 'N' },
     { id: 'briefs', label: '오늘의 글감', short: '글감', icon: '✎' },
     { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },
+    // 글 한 편 유입 설계실(2026-10-06 4차) — 사이트만으로 ①~④, 앱 설계가 있으면 덧붙인다.
+    { id: 'plan', label: '글 한 편 유입 설계실', short: '설계실', icon: '✚' },
     { id: 'kin', label: '지식인 황금질문', short: '황금질문', icon: '✦' },
     { id: 'affiliate', label: '제휴 황금키워드', short: '제휴', icon: '◇' },
     { id: 'youtube', label: '유튜브 급상승 글감', short: '유튜브 글감', icon: '▶' },
@@ -363,6 +366,7 @@ function LewordPage() {
                 {!lockedTab && activeTab === 'briefs' && <TopicBriefsBoard key={session ? session.userId : 'guest'} onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'kin' && <KinGoldenTab onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
+                {!lockedTab && activeTab === 'plan' && <PostPlanTab />}
                 {!lockedTab && activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
                 {!lockedTab && activeTab === 'radar' && <RadarTab initialUrl={handoffPostUrl} />}

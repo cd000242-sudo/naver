@@ -26,7 +26,7 @@ const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
  * 이 PC 의 LEWORD 앱 브리지(lib/bridge.ts)로만 돈다(사장님 결정 2026-09-16 "브리지 전용으로 정리").
  * post-audit-analyze 는 실측 체크리스트만 받는다(aiVia 'app' — 워커가 AI 를 돌리지 않는다).
  */
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'post-audit-analyze', 'kin-search', 'radar-search', 'keyword-volumes', 'keyword-docs', 'keyword-frontal', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues', 'issue-brief', 'hot-keywords', 'user-keys-get', 'user-keys-put']);
+const WORKER_ACTIONS = new Set(['keyword-bid', 'keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'post-audit-analyze', 'kin-search', 'radar-search', 'keyword-volumes', 'keyword-docs', 'keyword-frontal', 'keyword-expansions', 'youtube-trending', 'rank-by-tabs', 'realtime-issues', 'issue-brief', 'hot-keywords', 'user-keys-get', 'user-keys-put']);
 /**
  * 장부(쿼터)가 필요해 GAS 에 남은 키워드 액션들은 엣지 방패(leaderspro-edge)를
  * 거친다 — 같은 질문은 15분 캐시로 즉답(0.5초), 처음 질문만 GAS 로 간다(장부도
@@ -732,3 +732,10 @@ export const fetchRadarSearch = (queries: string[], coreKeywords: string[], shor
         coreKeywords: JSON.stringify(coreKeywords),
         shortQueries: JSON.stringify(shortQueries),
     });
+
+/**
+ * 파워링크 3위 추정 입찰가(모바일) — 사이트판 글 한 편 유입 설계실 ④(2026-10-06). 내 검색광고 키가 있어야 잰다.
+ * 앱과 같은 형식(공백 뺀 키워드)이라 같은 값이 나온다(실측: '자동차 보험 갱신' 12,920원).
+ */
+export const fetchKeywordBid = (keyword: string) =>
+    call<{ bid: number | null; device: string; position: number }>('keyword-bid', { keyword });
