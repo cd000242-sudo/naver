@@ -26,3 +26,11 @@ test('Coupang discovery keeps a separate default and does not masquerade as sear
   assert.match(source, /discovery\.sourceLabel/);
   assert.doesNotMatch(source, /goldboxRank\}위|bestRank.*\}위/);
 });
+
+test('제휴 카드 버튼 열은 첫 줄 4번째 칸에 남는다 — 풀폭 브리프가 그 앞에 오면 26px 순위 칸으로 밀린다(2026-10-06)', () => {
+  const source = read('components/leword/AffiliateTab.tsx');
+  const actions = source.indexOf('<div className="lw-product-actions">');
+  const brief = source.indexOf('className="lw-card-brief lw-product-brief"');
+  assert.ok(actions > 0 && brief > 0, '버튼 열과 브리프가 모두 있어야 한다');
+  assert.ok(brief > actions, '브리프는 버튼 열 뒤에 둔다');
+});
