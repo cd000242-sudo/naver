@@ -142,12 +142,21 @@ export function groupTokens(title) {
 // 일반어 · 겹침 단위 · 같은 소재 판정 — 수집기 homefeed-benchmarks-core.cjs 와 같다(2026-10-01 188곳 오묶음 수리).
 const GENERIC = new Set(['패션', '스타일', '코디', '얼굴', '몸매', '미모', '비주얼', '연예인', '배우', '여배우', '남배우', '아이돌', '가수', '스타', '셀럽', '화보', '공항', '공항패션', '반전', '레전드', '충격', '대박', '난리', '정체', '방법', '후기', '정보', '추천', '비교', '가격', '신차', '출시', '발표', '사람들', '남자들', '여자들', '여자', '남자', '정신', '모습', '포인트', '느낌', '분위기', '매력', '인기', '순위', '역대', '최고', '최초', '완전', '하는', '되는', '있는', '없는', '보니', '같은', '이유가', '누구', '앞두고', '달라진', '몰라보게', '되더니', '했더니', '결혼', '명품', '가방', '명품백', '신상', '할인', '일정', '이벤트']);
 const isGeneric = (token) => GENERIC.has(token) || /^\d{1,2}(대|세|살)$/.test(token) || /^\d+(위|명|개|원|만원|천만원|억|억원|km|%)$/.test(token);
+/*
+ * 판정은 수집기와 같다. 속도만(2026-10-06): 예전엔 단어 쌍마다 '숫자가 들어 있나'를 정규식으로 다시 검사해
+ * 글 1만 5천 개 판이 30초 걸렸다(프로파일: contains 13.7초 · 정규식 \d 7.9초). 숫자 여부를 단어마다 한 번만 센다.
+ */
+const DIGIT = /\d/;
 function sharedUnits(a, b) {
-  const contains = (t, u) => !/\d/.test(t) && !/\d/.test(u) && t.length >= 2 && u.length >= 2 && (t.includes(u) || u.includes(t));
+  const plainB = b.map((u) => !DIGIT.test(u) && u.length >= 2);
   const units = new Set();
-  for (const t of a) for (const u of b) {
-    if (t === u) units.add(t);
-    else if (contains(t, u)) units.add(t.length <= u.length ? t : u);
+  for (const t of a) {
+    const plainT = !DIGIT.test(t) && t.length >= 2;
+    for (let j = 0; j < b.length; j += 1) {
+      const u = b[j];
+      if (t === u) units.add(t);
+      else if (plainT && plainB[j] && (t.includes(u) || u.includes(t))) units.add(t.length <= u.length ? t : u);
+    }
   }
   return [...units];
 }
