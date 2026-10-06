@@ -6,6 +6,7 @@ import {
 import { loadUserKeys } from '../../lib/userKeys';
 import { BRIDGE_OFFLINE_NOTE, BRIDGE_OUTDATED_NOTE, bridgeFailureNote, bridgeKinAnswer, bridgeRadarAnalyze, bridgeRadarEvaluate } from '../../lib/bridge';
 import { TabIntro } from './LewordShared';
+import { radarAgeLabel } from '../../lib/radarFreshness.mjs';
 
 /*
  * 앱 경유 평가의 종합점수 — **정본은 워커의 RADAR_CONFIG** 다.
@@ -301,7 +302,7 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                 <section className="lw-panel lw-radar-brief">
                     <div className="lw-panel-head">
                         <h2>{analysis.title || '제목 없는 글'}</h2>
-                        {counts && <span>검색 {counts.found}건 → 중복 제거 {counts.deduped}건</span>}
+                        {counts && <span>작성 14일 안의 글만 · 링크 금지 판 제외 · 검색 {counts.found}건 → 중복 제거 {counts.deduped}건</span>}
                     </div>
                     <div className="lw-radar-kws">
                         {analysis.coreKeywords.map((k) => (
@@ -390,7 +391,9 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                                             <span className={`lw-radar-src src-${item.source}`}>
                                                 {item.source === 'community' && item.siteName
                                                     ? item.siteName
-                                                    : SOURCE_LABEL[item.source] || item.source}
+                                                    : item.source === 'cafearticle' && item.cafeName
+                                                        ? `카페 · ${item.cafeName}`
+                                                        : SOURCE_LABEL[item.source] || item.source}
                                             </span>
                                             {item.source === 'community' && item.replyGate === 'instant' && (
                                                 <span className="lw-radar-gate" title={item.gateWhy || '지금 바로 답을 달 수 있는 판입니다'}>
@@ -403,7 +406,7 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                                                     title={item.linkPolicy === 'banned'
                                                         ? '이 판은 외부 링크가 삭제·차단됩니다 — 링크 없이 답만 다는 자리로 보세요'
                                                         : item.linkPolicy === 'careful'
-                                                            ? '링크를 달 수 있으나 홍보로 보이면 지워집니다'
+                                                            ? `링크를 달 수 있으나 홍보로 보이면 지워집니다${item.policyWhy ? ` — ${item.policyWhy}` : ''}`
                                                             : item.linkPolicy === 'unknown'
                                                                 ? '링크 정책을 아직 확인하지 못했습니다 — 직접 확인하고 판단하세요'
                                                                 : '링크를 달 수 있는 판입니다'}
@@ -420,7 +423,7 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                                         )}
                                         <div className="lw-radar-meta">
                                             {item.matchedQueries?.length > 0 && <span>걸린 검색어 · {item.matchedQueries.slice(0, 3).join(' · ')}</span>}
-                                            {item.postdate && <span>{item.postdate}</span>}
+                                            {item.postdate && <span title="작성일 — 14일 안의 글만 보여 드립니다">작성 {radarAgeLabel(item)}</span>}
                                         </div>
                                         <div className="lw-radar-actions">
                                             {group.id !== 'SKIP' && (
@@ -472,7 +475,7 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                 <section className="lw-panel lw-radar-gated">
                     <div className="lw-panel-head">
                         <h2>지금은 답을 못 다는 판 <em>{gatedSites.length}</em></h2>
-                        <span>훑지 않았습니다 — 미리 준비해 두면 열리는 곳이 있습니다</span>
+                        <span>훑지 않았습니다 — 가입 조건이 있는 곳은 미리 준비하면 열리고, 링크 금지 판은 이용 규칙상 내 글 링크를 달 수 없습니다</span>
                     </div>
                     <ul>
                         {gatedSites.map((site) => (
@@ -483,7 +486,7 @@ function RadarTab({ initialUrl }: { initialUrl?: string } = {}) {
                                   * 아하는 전문가 등록을 해야 열린다 — 기다린다고 열리지 않는다.
                                   * 둘을 함께 담는 말로 바꾸고, 무엇을 해야 하는지는 아래 why 가 적는다.
                                   */}
-                                <i>{site.gate === 'delayed' ? '조건 채우면 열림' : '가입 막힘'}</i>
+                                <i>{site.gate === 'delayed' ? '조건 채우면 열림' : site.gate === 'banned' ? '링크 금지' : '가입 막힘'}</i>
                                 <span>{site.why || '확인된 근거 없음'}</span>
                             </li>
                         ))}
