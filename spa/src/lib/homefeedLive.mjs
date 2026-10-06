@@ -198,7 +198,8 @@ function idOf(url) {
   return `live-${h.toString(16).padStart(8, '0')}`;
 }
 
-const MAX_CARDS = 300;
+// 앱 레포 scripts/homefeed-benchmarks-core.cjs MAX_CARDS 와 같은 값(2026-10-06 300 → 1,000, 추천 카드가 잘리지 않게).
+const MAX_CARDS = 1000;
 function bigrams(token) { const out = []; for (let i = 0; i + 1 < token.length; i += 1) out.push(token.slice(i, i + 2)); return out; }
 /** 수집기 groupPosts 와 같은 묶기 — 같은 주소 · 같은 제목은 표로, 같은 소재 후보는 두 글자 조각을 나눠 가진 묶음만 견준다. */
 function groupPosts(posts) {

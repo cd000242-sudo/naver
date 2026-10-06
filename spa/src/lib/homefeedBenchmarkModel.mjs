@@ -45,8 +45,9 @@ export function normalizeTrends(raw) {
 export function normalizeBenchmarkBoard(raw) {
  if (!raw || raw.schemaVersion !== 1 || !Array.isArray(raw.candidates) || !Array.isArray(raw.sources)) throw new Error('벤치마크 데이터 형식을 확인하지 못했습니다.');
  if (!date(raw.generatedAt)) throw new Error('마지막 수집 시각을 확인하지 못했습니다.');
- const sources = raw.sources.slice(0,300).filter(x=>x && typeof x==='object').map(source);
- return {schemaVersion:1,generatedAt:date(raw.generatedAt),attemptedAt:date(raw.attemptedAt),status:['fresh','partial','stale'].includes(raw.status) ? raw.status : 'partial',sources,sourceCount:sources.length,collectedPostCount:sources.filter(s=>s.status==='ok').reduce((sum,s)=>sum+s.postCount,0),candidates:raw.candidates.slice(0,300).filter(x=>x && typeof x==='object').map(candidate),trends:normalizeTrends(raw.trends)};
+ // 출처 · 카드 상한 1,000(2026-10-06) — 300이면 출처 786곳 중 300곳 · 추천 791장 중 300장만 보였다. 판 생성기 MAX_CARDS 와 같은 값.
+ const sources = raw.sources.slice(0,1000).filter(x=>x && typeof x==='object').map(source);
+ return {schemaVersion:1,generatedAt:date(raw.generatedAt),attemptedAt:date(raw.attemptedAt),status:['fresh','partial','stale'].includes(raw.status) ? raw.status : 'partial',sources,sourceCount:sources.length,collectedPostCount:sources.filter(s=>s.status==='ok').reduce((sum,s)=>sum+s.postCount,0),candidates:raw.candidates.slice(0,1000).filter(x=>x && typeof x==='object').map(candidate),trends:normalizeTrends(raw.trends)};
 }
 export function benchmarkView(board, now = Date.now()) {
  const isOld = (value) => !value || now - Date.parse(value) > MAX_AGE || Date.parse(value) > now + 5*60*1000;

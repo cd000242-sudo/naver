@@ -45,3 +45,16 @@ test('보드 맨 위에 흐름 판이 붙고, 분야를 누르면 카드가 그 
   // 추정치 금지 — 확률 · 예상 문구를 쓰지 않는다.
   assert.doesNotMatch(panel, /확률|예상 (조회|트래픽|수익)/);
 });
+
+/*
+ * 2026-10-06 사장님 "홈판은 사이트에 300개 초과해서는 안 보여 주네요?" — 출처 786곳을 모아도 화면 모델이 출처를 300곳,
+ * 카드를 300장에서 잘랐다(추천 791장 중 491장 버림, 실측). 판 생성기(앱 레포 core.cjs) · 실시간 계산(homefeedLive.mjs)과 같은 1,000.
+ */
+test('홈판 화면 모델은 출처 · 카드를 300에서 자르지 않는다 — 상한 1,000', () => {
+  const source = (i) => ({ id: `s${i}`, name: `블로그${i}`, platform: 'naver-blog', url: `https://blog.naver.com/b${i}`, status: 'ok', postCount: 1 });
+  const card = (i) => ({ id: `c${i}`, keyword: `소재${i}`, title: `제목${i}`, category: '문화·연예', status: 'verify', recommended: true, sources: [] });
+  const board = normalizeBenchmarkBoard({ schemaVersion: 1, generatedAt: '2026-10-06T00:00:00.000Z', status: 'fresh', sources: Array.from({ length: 1100 }, (_, i) => source(i)), candidates: Array.from({ length: 1100 }, (_, i) => card(i)) });
+  assert.equal(board.sources.length, 1000);
+  assert.equal(board.candidates.length, 1000);
+  assert.match(read('../src/lib/homefeedLive.mjs'), /const MAX_CARDS = 1000;/);
+});
