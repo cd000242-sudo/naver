@@ -693,10 +693,16 @@ export type RadarCandidate = {
     /** 지금 바로 답을 달 수 있는가. 닫힌·지연 판은 애초에 검색하지 않는다. */
     replyGate?: 'instant' | 'delayed' | 'closed' | 'unknown';
     gateWhy?: string;
+    /** 링크 정책의 근거(이용 규칙 요약). */
+    policyWhy?: string;
+    /** 카페 글일 때 카페 이름. */
+    cafeName?: string;
     title: string;
     link: string;
     excerpt: string;
+    /** 작성일 YYYY-MM-DD(KST) — 워커가 실제로 읽은 값. 14일 넘었거나 못 읽은 글은 아예 안 온다(2026-10-06). */
     postdate: string;
+    postedAt?: string;
     matchedQueries: string[];
     cheapScore: number;
 };
@@ -710,7 +716,7 @@ export type RadarEvaluated = RadarCandidate & {
     trafficPotential?: number; contentMatch?: number; spamRisk?: number;
 };
 /** 훑지 않은 판과 그 이유 — 미리 가입해 두면 열리는 곳을 알 수 있게. */
-export type RadarGatedSite = { name: string; domain: string; gate: 'delayed' | 'closed'; why: string };
+export type RadarGatedSite = { name: string; domain: string; gate: 'delayed' | 'closed' | 'banned'; why: string };
 
 export const fetchRadarSearch = (queries: string[], coreKeywords: string[], shortQueries: string[] = []) =>
     call<{
@@ -719,6 +725,8 @@ export const fetchRadarSearch = (queries: string[], coreKeywords: string[], shor
         totalFound: number;
         afterDedupe: number;
         gatedSites?: RadarGatedSite[];
+        /** 작성일 기준(일) — 이보다 오래됐거나 날짜를 못 읽은 글은 워커가 뺐다. */
+        freshness?: { maxAgeDays: number };
     }>('radar-search', {
         queries: JSON.stringify(queries),
         coreKeywords: JSON.stringify(coreKeywords),
