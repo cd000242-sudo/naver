@@ -1,6 +1,6 @@
-// 자동 생성 — 앱 레포 src/utils/title-forge/varied.ts 묶음(원본 해시 2d5237212beb3d72). 손으로 고치지 말고 spa/scripts/build-title-forge.mjs 를 다시 돌릴 것.
+// 자동 생성 — 앱 레포 src/utils/title-forge/varied.ts 묶음(원본 해시 cc65dbc682055362). 손으로 고치지 말고 spa/scripts/build-title-forge.mjs 를 다시 돌릴 것.
 
-// ../../../../park/leword-app/src/utils/shopping-purchase-angle.ts
+// ../../../park/leword-app/src/utils/shopping-purchase-angle.ts
 var DOMAIN_ANGLES = [
   {
     id: "baby",
@@ -191,7 +191,7 @@ function buildPurchaseDesireAngles(input, keyword = "") {
   }).slice(0, 3);
 }
 
-// ../../../../park/leword-app/src/utils/title-forge/frame-analysis.ts
+// ../../../park/leword-app/src/utils/title-forge/frame-analysis.ts
 var FRAME_PATTERNS = [
   { frame: "recipe", pattern: /레시피/ },
   { frame: "review", pattern: /후기|내돈내산|사용기|리뷰|써보/ },
@@ -223,7 +223,114 @@ function findEmptyFrames(serpTitles, supportedFrames2) {
   return supportedFrames2.filter((frame) => !counts.has(frame));
 }
 
-// ../../../../park/leword-app/src/utils/title-forge/forge.ts
+// ../../../park/leword-app/src/utils/title-forge/issue.ts
+var ROLE_PREFIXES = ["\uD2B8\uB85C\uD2B8\uAC00\uC218", "\uAC1C\uADF8\uC6B0\uBA3C", "\uAC1C\uADF8\uB9E8", "\uC544\uB098\uC6B4\uC11C", "\uBC29\uC1A1\uC778", "\uC5EC\uBC30\uC6B0", "\uB0A8\uBC30\uC6B0", "\uC720\uD29C\uBC84", "\uC544\uC774\uB3CC", "\uBC30\uC6B0", "\uAC00\uC218", "\uBAA8\uB378", "\uAC10\uB3C5", "\uC791\uAC00", "\uC120\uC218"];
+var INTENT_SUFFIXES = [
+  "\uC0AC\uB9DD\uC6D0\uC778",
+  "\uB098\uBB34\uC704\uD0A4",
+  "\uCD1D\uC815\uB9AC",
+  "\uD504\uB85C\uD544",
+  "\uC774\uC720",
+  "\uC6D0\uC778",
+  "\uB098\uC774",
+  "\uADFC\uD669",
+  "\uB0A8\uD3B8",
+  "\uC544\uB0B4",
+  "\uBD80\uC778",
+  "\uD559\uB825",
+  "\uC7AC\uC0B0",
+  "\uACB0\uD63C",
+  "\uC774\uD63C",
+  "\uC0AC\uB9DD",
+  "\uBCC4\uC138",
+  "\uBD80\uACE0",
+  "\uC7A5\uB840",
+  "\uBC29\uBC95",
+  "\uC2E0\uCCAD",
+  "\uAE30\uAC04",
+  "\uC870\uAC74",
+  "\uB300\uC0C1",
+  "\uC790\uACA9",
+  "\uD6C4\uAE30",
+  "\uAC00\uACA9",
+  "\uCD94\uCC9C",
+  "\uC21C\uC704",
+  "\uC77C\uC815",
+  "\uC2DC\uAC04",
+  "\uC608\uB9E4",
+  "\uCC28\uC774",
+  "\uC885\uB958",
+  "\uBE44\uAD50",
+  "\uC815\uB9AC"
+];
+var PERSON_ISSUE_WORDS = /* @__PURE__ */ new Set(["\uBCC4\uC138", "\uC0AC\uB9DD", "\uC0AC\uB9DD\uC6D0\uC778", "\uBD80\uACE0", "\uC7A5\uB840", "\uADFC\uD669", "\uC5F4\uC560", "\uC774\uD63C", "\uD504\uB85C\uD544", "\uD559\uB825", "\uB17C\uB780"]);
+var RUMOR_WORDS = /* @__PURE__ */ new Set(["\uBCC4\uC138", "\uC0AC\uB9DD", "\uC0AC\uB9DD\uC6D0\uC778", "\uBD80\uACE0", "\uC7A5\uB840", "\uC5F4\uC560", "\uC774\uD63C", "\uB17C\uB780"]);
+var PERSON_EXTRA_WORDS = /* @__PURE__ */ new Set([...PERSON_ISSUE_WORDS, "\uB098\uC774", "\uB0A8\uD3B8", "\uC544\uB0B4", "\uACB0\uD63C", "\uC790\uB140", "\uACE0\uD5A5", "\uC7AC\uC0B0"]);
+var HOME_DROP = /* @__PURE__ */ new Set(["\uC774\uC720", "\uC6D0\uC778"]);
+var collapse = (text) => String(text || "").replace(/\s+/g, " ").trim();
+var compact = (text) => String(text || "").replace(/\s+/g, "");
+function spaceOutKeyword(keyword) {
+  const raw = String(keyword || "").trim();
+  if (!raw || /\s/.test(raw) || raw.length < 5) return null;
+  let core = raw;
+  const head = [];
+  const tail = [];
+  const prefix = ROLE_PREFIXES.find((p) => core.startsWith(p) && core.length - p.length >= 2);
+  if (prefix) {
+    head.push(prefix);
+    core = core.slice(prefix.length);
+  }
+  for (let guard = 0; guard < 4; guard += 1) {
+    const suffix = INTENT_SUFFIXES.find((s) => core.endsWith(s) && core.length - s.length >= 2);
+    if (!suffix) break;
+    tail.unshift(suffix);
+    core = core.slice(0, -suffix.length);
+  }
+  if (!head.length && !tail.length) return null;
+  return [...head, core, ...tail].join(" ");
+}
+function displayKeyword(keyword) {
+  return collapse(spaceOutKeyword(keyword) || keyword);
+}
+function isPersonIssueKeyword(keyword) {
+  const words = displayKeyword(keyword).split(" ");
+  return ROLE_PREFIXES.includes(words[0]) || words.some((w) => PERSON_ISSUE_WORDS.has(w));
+}
+function personExtras(display, derived) {
+  const words = display.split(" ").filter((w) => w.length >= 2);
+  const picked = [];
+  let from = null;
+  const ordered = [...derived].sort((a, b) => (b.searchVolume || 0) - (a.searchVolume || 0));
+  for (const item of ordered) {
+    let rest = compact(item.keyword);
+    for (const w of words) rest = rest.split(w).join(" ");
+    for (const piece of rest.split(" ").filter(Boolean)) {
+      if (!PERSON_EXTRA_WORDS.has(piece) || picked.includes(piece) || words.includes(piece)) continue;
+      picked.push(piece);
+      if (!from) from = item;
+    }
+    if (picked.length >= 2) break;
+  }
+  return { words: picked.slice(0, 2), from };
+}
+function fitWithin(text, max) {
+  let words = collapse(text).split(" ");
+  while (words.join(" ").length > max && words.length > 1) words = words.slice(0, -1);
+  return words.join(" ");
+}
+function issueTitles(keyword, derived) {
+  const display = displayKeyword(keyword);
+  const words = display.split(" ");
+  const short = words.filter((w) => !ROLE_PREFIXES.includes(w) && !HOME_DROP.has(w)).join(" ") || display;
+  const extras = personExtras(display, derived);
+  const basis = extras.from ? `\uAC80\uC0C9 \uC2E4\uCE21 '${extras.from.keyword}' (\uAC80\uC0C9\uB7C9 ${extras.from.searchVolume === null ? "\uBBF8\uCE21\uC815" : extras.from.searchVolume}) \u2014 \uC778\uBB3C \xB7 \uC774\uC288 \uD0A4\uC6CC\uB4DC, \uD655\uC778\uB41C \uC0AC\uC2E4\uB9CC` : "\uC778\uBB3C \xB7 \uC774\uC288 \uD0A4\uC6CC\uB4DC \u2014 \uD655\uC778 \uC548 \uB41C \uB0B4\uC6A9\uC740 \uB2E8\uC815\uD558\uC9C0 \uC54A\uB294 \uD2C0";
+  const seo = fitWithin(`${display}, ${extras.words.length ? `${extras.words.join("\xB7")}\uAE4C\uC9C0 ` : ""}\uD655\uC778\uB41C \uC0AC\uC2E4\uB9CC`, 40);
+  const rumor = words.some((w) => RUMOR_WORDS.has(w));
+  const home = fitWithin(rumor ? `${short} \uC18C\uC2DD \uB3CC\uB358\uB370\u2026 \uC9C1\uC811 \uD655\uC778\uD574 \uBD24\uC2B5\uB2C8\uB2E4` : `${short} \uAD81\uAE08\uD574\uC11C \uC9C1\uC811 \uCC3E\uC544\uBD24\uC2B5\uB2C8\uB2E4`, 38);
+  return { seo: { text: seo, basis }, home: { text: home, basis } };
+}
+
+// ../../../park/leword-app/src/utils/title-forge/forge.ts
 var SEO_MAX = 40;
 var HOME_MAX = 38;
 var SEO_SUFFIX = {
@@ -241,8 +348,28 @@ var SEO_SUFFIX = {
    * 옛 문구 '기본 정보와 최근 소식' 은 '최근 소식' 이 있다고 단정했다 —
    * 우리는 그런 걸 잰 적이 없다(사장님 지적 2026-08-22).
    */
-  generic: "\uC5B4\uB5A4 \uC815\uBCF4\uAC00 \uC788\uB294\uC9C0"
+  generic: "\uC5B4\uB5A4 \uC815\uBCF4\uAC00 \uC788\uB294\uC9C0",
+  // 인물 · 이슈(2026-10-07) — 확인 안 된 사실(가짜 뉴스일 수 있다)을 단정하지 않는다. 실제 제목은 issue.ts 가 만든다.
+  issue: "\uD655\uC778\uB41C \uC0AC\uC2E4\uB9CC"
 };
+var SEO_SUFFIX_ALT = {
+  recipe: "\uC2E4\uD328 \uC5C6\uB294 \uC21C\uC11C",
+  review: "\uC368 \uBCF4\uACE0 \uC54C\uAC8C \uB41C \uAC83",
+  compare: "\uBB34\uC5C7\uC744 \uBCF4\uACE0 \uACE0\uB97C\uC9C0",
+  price: "\uC2E4\uC81C\uB85C \uB4DC\uB294 \uAE08\uC561",
+  schedule: "\uB193\uCE58\uC9C0 \uC54A\uB294 \uB0A0\uC9DC",
+  mistake: "\uC65C \uC0DD\uAE30\uACE0 \uC5B4\uB5BB\uAC8C \uD478\uB294\uC9C0",
+  recommend: "\uACE0\uB97C \uB54C \uBCF4\uB294 \uAE30\uC900",
+  howto: "\uCC98\uC74C \uD574\uB3C4 \uB9C9\uD788\uC9C0 \uC54A\uB294 \uC21C\uC11C",
+  checklist: "\uBE60\uB728\uB9AC\uAE30 \uC26C\uC6B4 \uAC83\uB4E4"
+};
+function suffixFor(frame, keyword) {
+  const words = keyword.split(/\s+/).filter((w) => w.length >= 2);
+  const overlaps = (suffix) => suffix.split(" ").some((token) => words.some((w) => w.includes(token) || token.includes(w)));
+  const base = SEO_SUFFIX[frame];
+  const alt = SEO_SUFFIX_ALT[frame];
+  return overlaps(base) && alt && !overlaps(alt) ? alt : base;
+}
 var HOME_TEMPLATE = {
   recipe: (kw) => `${kw}, \uC774 \uC21C\uC11C\uB300\uB85C\uB9CC \uD558\uBA74 \uB429\uB2C8\uB2E4`,
   review: (kw) => `${kw} \uC9C1\uC811 \uC368\uBCF4\uACE0 \uC54C\uAC8C \uB41C \uAC83\uB4E4`,
@@ -261,12 +388,13 @@ var HOME_TEMPLATE = {
    * 근거가 없을 때는 모른다는 사실에 맞는 말을 쓴다 — 단정도 질문 떠넘기기도 없이.
    * 쉼표 이분법도 피한다(홈판 교리 ②).
    */
-  generic: (kw) => `${kw} \uC774\uAC8C \uBB54\uC9C0 \uBAB0\uB77C\uC11C \uCC3E\uC544\uBD24\uC2B5\uB2C8\uB2E4`
+  generic: (kw) => `${kw} \uC774\uAC8C \uBB54\uC9C0 \uBAB0\uB77C\uC11C \uCC3E\uC544\uBD24\uC2B5\uB2C8\uB2E4`,
+  issue: (kw) => `${kw} \uC18C\uC2DD \uB3CC\uB358\uB370\u2026 \uC9C1\uC811 \uD655\uC778\uD574 \uBD24\uC2B5\uB2C8\uB2E4`
 };
 function splitExtra(derived, keyword) {
   const words = keyword.split(/\s+/).filter(Boolean);
   const short = new Set(words.filter((w) => w.length < 2));
-  const text = collapse(derived);
+  const text = collapse2(derived);
   const covered = Array.from({ length: text.length }, () => false);
   for (const word of words) {
     if (word.length < 2) continue;
@@ -293,14 +421,19 @@ function splitExtra(derived, keyword) {
     after: kept.filter((r) => !isBefore(r)).map((r) => r.text).join(" ")
   };
 }
+function withoutDangling(extra) {
+  const tokens = extra.split(" ").filter(Boolean);
+  while (tokens.length && /^[가-힣]{2,}(려면|으면|는데|지만|하면|면)$/.test(tokens[tokens.length - 1]) && !/^[가-힣]라면$/.test(tokens[tokens.length - 1])) tokens.pop();
+  return tokens.join(" ");
+}
 function withoutRepeats(extra, suffix) {
   return extra.split(" ").filter((token) => token && !suffix.includes(token)).join(" ");
 }
-function collapse(text) {
+function collapse2(text) {
   return text.replace(/\s+/g, " ").trim();
 }
-function fitWithin(text, max) {
-  let words = collapse(text).split(" ");
+function fitWithin2(text, max) {
+  let words = collapse2(text).split(" ");
   while (words.join(" ").length > max && words.length > 1) {
     words = words.slice(0, -1);
   }
@@ -311,6 +444,7 @@ function supportedFrames(input) {
   const frames = [];
   for (const derived of ordered) {
     const frame = classifyTitleFrame(derived.keyword);
+    if (frame === "generic") continue;
     if (!frames.includes(frame)) frames.push(frame);
   }
   if (input.timing && !frames.includes("schedule")) frames.push("schedule");
@@ -338,13 +472,15 @@ function basisFor(input, frame, derived) {
   return "\uADFC\uAC70 \uD504\uB808\uC784 \uC5C6\uC74C \u2014 \uC77C\uBC18\uD615";
 }
 function forgeTitles(input) {
-  const keyword = collapse(input.keyword);
+  const keyword = displayKeyword(input.keyword);
   const frame = pickFrame(input);
   const derived = derivedForFrame(input, frame);
-  const { before, after } = derived ? splitExtra(derived.keyword, keyword) : { before: "", after: "" };
+  const split = derived ? splitExtra(derived.keyword, keyword) : { before: "", after: "" };
+  const before = split.before;
+  const after = withoutDangling(split.after);
   const basis = basisFor(input, frame, derived);
   const seo = {
-    text: fitWithin(`${keyword} ${withoutRepeats(after, SEO_SUFFIX[frame])} ${SEO_SUFFIX[frame]}`, SEO_MAX),
+    text: fitWithin2(`${keyword} ${withoutRepeats(after, suffixFor(frame, keyword))} ${suffixFor(frame, keyword)}`, SEO_MAX),
     frame,
     basis
   };
@@ -358,7 +494,7 @@ function forgeTitles(input) {
       return {
         seo,
         home: {
-          text: fitWithin(angle.text, HOME_MAX),
+          text: fitWithin2(angle.text, HOME_MAX),
           frame,
           basis: `${angle.kind} \xB7 ${angle.basis}`
         }
@@ -366,14 +502,14 @@ function forgeTitles(input) {
     }
   }
   const home = {
-    text: fitWithin(HOME_TEMPLATE[frame](collapse(`${before} ${keyword}`), after).replace(/\s+,/g, ","), HOME_MAX),
+    text: fitWithin2(HOME_TEMPLATE[frame](collapse2(`${before} ${keyword}`), after).replace(/\s+,/g, ","), HOME_MAX),
     frame,
     basis
   };
   return { seo, home };
 }
 
-// ../../../../park/leword-app/src/utils/title-forge/varied.ts
+// ../../../park/leword-app/src/utils/title-forge/varied.ts
 var FRAME_CAP = 3;
 var FRAME_LABEL = {
   recipe: "\uC21C\uC11C",
@@ -385,10 +521,18 @@ var FRAME_LABEL = {
   recommend: "\uCD94\uCC9C",
   howto: "\uBC29\uBC95",
   checklist: "\uCCB4\uD06C",
-  generic: "\uC77C\uBC18"
+  generic: "\uC77C\uBC18",
+  issue: "\uC778\uBB3C\xB7\uC774\uC288"
 };
 var norm = (value) => String(value || "").replace(/\s+/g, "");
 function forgeVariedTitles(keyword, derived, serpTitles, frameCap = FRAME_CAP) {
+  if (isPersonIssueKeyword(keyword)) {
+    const t = issueTitles(keyword, derived);
+    return [
+      { text: t.home.text, kind: "\uB04C\uB9AC\uB294", frame: "issue", frameLabel: FRAME_LABEL.issue, basis: t.home.basis },
+      { text: t.seo.text, kind: "\uAC80\uC0C9\uC6A9", frame: "issue", frameLabel: FRAME_LABEL.issue, basis: t.seo.basis }
+    ];
+  }
   const base = { keyword, derivedKeywords: derived, serpTitles };
   const supported = supportedFrames(base);
   if (supported.length === 0) {

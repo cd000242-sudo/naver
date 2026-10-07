@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { callWorkerRaw, fetchKeywordBid, fetchKeywordDocs, fetchKeywordExpansions, fetchKeywordFrontal, fetchKeywordVolumes } from '../../lib/keywordApi';
 import { frontalCount, FRONTAL_SATURATION } from '../../lib/expansionTier';
 import { forgeVariedTitles } from '../../lib/titleForge.generated.mjs';
-import { affiliateCandidates, expansionRetryQueries, matchAppPlan, questionChecklist, relatedForTitles, searchCuriosities, spaceOutKeyword, volumeOf, type AffiliateCandidate, type PlanQuestion } from '../../lib/postPlanSiteModel.mjs';
+import { affiliateCandidates, expansionRetryQueries, matchAppPlan, questionChecklist, searchCuriosities, spaceOutKeyword, volumeOf, type AffiliateCandidate, type PlanQuestion } from '../../lib/postPlanSiteModel.mjs';
 import { loadAppPlans, type AppPlan, type AppPlansLoad } from '../../lib/postPlanSync';
 
 /*
@@ -69,7 +69,10 @@ async function measureOnSite(keyword: string): Promise<SiteResult> {
     ]);
     const { radar, extra } = radarOut;
     const topTitles = (frontal.ok && frontal.data?.titles?.[keyword]) || [];
-    const derived = relatedForTitles(keyword, searched.items);
+    // 제목 재료 = ③ 검색 궁금증 중 검색량을 잰 말(2026-10-07) — 붙여 쓴 키워드는 연관어 필터를 못 넘어 일반형 제목만 나왔다(앱과 같은 재료)
+    const derived = searchCuriosities(keyword, searched.items, 20)
+        .filter((v) => typeof v.searchVolume === 'number' && v.searchVolume > 0)
+        .map((v) => ({ keyword: v.keyword, searchVolume: v.searchVolume as number }));
     const row = (Array.isArray(board?.rows) ? board.rows : []).find((r: any) => compact(r.keyword) === compact(keyword));
     return {
         keyword,
