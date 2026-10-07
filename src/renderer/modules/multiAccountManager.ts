@@ -2483,12 +2483,10 @@ async function initMultiAccountPublishModal() {
                 if (isJabBlogCheckbox)
                     isJabBlogCheckbox.checked = account.settings?.isJabBlog === true;
                 const credResult = await window.api.getAccountCredentials(accountId);
-                if (credResult.success && credResult.credentials) {
-                    if (naverIdInput)
-                        naverIdInput.value = credResult.credentials.naverId || '';
-                    if (naverPwInput)
-                        naverPwInput.value = credResult.credentials.naverPassword || '';
-                }
+                if (naverIdInput)
+                    naverIdInput.value = credResult?.credentials?.naverId || account.naverId || '';
+                if (naverPwInput)
+                    naverPwInput.value = credResult?.credentials?.naverPassword || '';
                 if (dailyLimitInput)
                     dailyLimitInput.value = String(account.settings?.dailyLimit || 5);
                 if (imageSourceSelect)
@@ -2550,6 +2548,7 @@ async function initMultiAccountPublishModal() {
                 naverIdInput.style.background = 'var(--bg-tertiary)';
                 naverIdInput.style.color = 'var(--text-muted)';
             }
+            setEditClearPasswordOption(true);
         }
         else {
             if (titleEl)
@@ -2570,6 +2569,7 @@ async function initMultiAccountPublishModal() {
             }
             if (naverPwInput)
                 naverPwInput.value = '';
+            setEditClearPasswordOption(false);
             if (isJabBlogCheckbox)
                 isJabBlogCheckbox.checked = false;
             if (dailyLimitInput)
@@ -2676,8 +2676,9 @@ async function initMultiAccountPublishModal() {
         const blogId = blogIdInput?.value.trim() || name;
         const naverId = naverIdInput?.value.trim();
         const naverPw = naverPwInput?.value;
-        if (!name || !naverId || !naverPw) {
-            toastManager.warning('필수 항목(별명, 네이버 ID, 비밀번호)을 모두 입력해주세요.');
+        // The password is optional (automatic jobs never type it); an empty field keeps the saved one.
+        if (!name || !naverId) {
+            toastManager.warning('필수 항목(별명, 네이버 ID)을 입력해주세요.');
             return;
         }
         const settings = {
@@ -2695,7 +2696,8 @@ async function initMultiAccountPublishModal() {
         try {
             if (accountId) {
                 await window.api.updateBlogAccount(accountId, { name, blogId });
-                await window.api.updateAccountCredentials(accountId, naverId, naverPw);
+                const clearPassword = document.getElementById('ma-edit-clear-pw')?.checked === true;
+                await window.api.updateAccountCredentials(accountId, naverId, clearPassword ? '' : naverPw, clearPassword);
                 await window.api.updateAccountSettings(accountId, settings);
                 toastManager.success('계정 설정이 업데이트되었습니다.');
             }
@@ -3829,7 +3831,7 @@ async function initMultiAccountPublishModal() {
                     const credResult = await window.api.getAccountCredentials(queueItem.accountId);
                     console.log('[FullAuto] 계정 자격증명 결과:', credResult.success);
                     if (!credResult.success || !credResult.credentials) {
-                        throw new Error('계정 자격증명을 가져올 수 없습니다.');
+                        throw new Error('계정의 네이버 아이디를 찾을 수 없습니다.');
                     }
                     updateMAStep('ma-step-login', 'completed');
                     updateMAStep('ma-step-publish', 'active');
@@ -4857,7 +4859,7 @@ function initMainAccountSelector() {
             const selected = result.accounts?.find(a => a.id === selectedId);
             if (!selected) throw new Error('선택한 계정이 삭제되었습니다.');
             const credentials = await window.api.getAccountCredentials(selectedId);
-            if (!credentials.success || !credentials.credentials?.naverId || !credentials.credentials?.naverPassword) throw new Error('앱에서 선택한 계정의 로그인 정보를 먼저 저장해주세요.');
+            if (!credentials.success || !credentials.credentials?.naverId) throw new Error('앱에서 선택한 계정의 네이버 아이디를 먼저 저장해주세요.');
             if (isRefreshingAccountList || revision !== accountListRevision) throw new Error('계정 목록이 변경되었습니다. 다시 선택해주세요.');
             const activated = await window.api.setActiveBlogAccount(selectedId);
             if (!activated.success) throw new Error('계정을 적용하지 못했습니다.');
@@ -5025,3 +5027,11 @@ function initMainAccountSelector() {
 
 
 export { initMultiAccountManager, generateImagesForAutomation, initMultiAccountPublishModal, initMainAccountSelector };
+
+/** Account edit form: "저장된 비밀번호 지우기" is offered only when editing an existing account. */
+function setEditClearPasswordOption(visible) {
+    const row = document.getElementById('ma-edit-clear-pw-row');
+    const checkbox = document.getElementById('ma-edit-clear-pw');
+    if (checkbox) checkbox.checked = false;
+    if (row) row.style.display = visible ? 'block' : 'none';
+}

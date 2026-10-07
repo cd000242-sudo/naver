@@ -35,7 +35,7 @@ export function initUserGuideModal(): void {
             </li>
             <li style="margin-bottom: 1rem;">
               <strong>3단계: 네이버 계정 입력</strong><br>
-              <span style="color: var(--text-muted);"><strong>🚀 스마트 자동 발행</strong> 탭에서 네이버 아이디/비밀번호 입력 후 "기억하기" 체크</span>
+              <span style="color: var(--text-muted);"><strong>🚀 스마트 자동 발행</strong> 탭에서 네이버 아이디 입력 후 "기억하기" 체크 (비밀번호는 선택)</span>
             </li>
             <li style="margin-bottom: 1rem;">
               <strong>4단계: 콘텐츠 생성</strong><br>
@@ -117,7 +117,7 @@ export function initUserGuideModal(): void {
         <ol style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
           <li style="margin-bottom: 1rem;">
             <strong>1단계: 네이버 계정 입력</strong><br>
-            <span style="color: var(--text-muted);">메인 화면 상단의 "네이버 아이디"와 "비밀번호"를 입력하세요. "기억하기"를 체크하면 다음에 자동으로 입력됩니다.</span>
+            <span style="color: var(--text-muted);">메인 화면 상단의 "네이버 아이디"를 입력하세요(비밀번호는 선택). 로그인은 네이버 창에서 직접 합니다. "기억하기"를 체크하면 다음에 자동으로 입력됩니다.</span>
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>2단계: 콘텐츠 소스 선택</strong><br>
@@ -341,7 +341,7 @@ export function initUserGuideModal(): void {
         <ol style="padding-left: 1.5rem; margin-bottom: 1.5rem;">
           <li style="margin-bottom: 1rem;">
             <strong>🔐 네이버 계정 정보</strong><br>
-            <span style="color: var(--text-muted);">네이버 아이디와 비밀번호를 입력하세요. "기억하기"를 체크하면 다음에 자동으로 입력됩니다. <strong style="color: var(--primary);">체크박스를 체크하고 입력하면 앱을 껐다 켜도 저장됩니다!</strong></span>
+            <span style="color: var(--text-muted);">네이버 아이디를 입력하세요(비밀번호는 선택). "기억하기"를 체크하면 다음에 자동으로 입력됩니다. <strong style="color: var(--primary);">체크박스를 체크하고 입력하면 앱을 껐다 켜도 저장됩니다!</strong></span>
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>📝 콘텐츠 입력</strong><br>
@@ -371,7 +371,7 @@ export function initUserGuideModal(): void {
         
         <div style="background: rgba(212, 175, 55, 0.1); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
           <h4 style="color: #D4AF37; margin-bottom: 0.5rem;">💾 네이버 계정 저장 기능</h4>
-          <p style="margin: 0;"><strong>중요:</strong> "기억하기" 체크박스를 체크하고 네이버 아이디와 비밀번호를 입력하면, 앱을 껐다 켜도 자동으로 입력됩니다. 체크박스를 해제하면 저장되지 않습니다.</p>
+          <p style="margin: 0;"><strong>중요:</strong> "기억하기" 체크박스를 체크하고 네이버 아이디를 입력하면, 앱을 껐다 켜도 자동으로 입력됩니다. 체크박스를 해제하면 저장되지 않습니다.</p>
         </div>
         
         <div style="background: rgba(16, 185, 129, 0.1); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">

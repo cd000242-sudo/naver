@@ -57,9 +57,9 @@ export function registerAccountHandlers(ctx: IpcContext, deps: AccountHandlerDep
     });
 
     // ✅ 계정 로그인 정보 업데이트
-    ipcMain.handle('account:updateCredentials', async (_event, accountId: string, naverId: string, naverPassword: string) => {
+    ipcMain.handle('account:updateCredentials', async (_event, accountId: string, naverId: string, naverPassword: string, clearPassword?: boolean) => {
         try {
-            const result = blogAccountManager.updateAccountCredentials(accountId, naverId, naverPassword);
+            const result = blogAccountManager.updateAccountCredentials(accountId, naverId, naverPassword, clearPassword === true);
             return { success: result, message: result ? '로그인 정보 업데이트 완료' : '계정을 찾을 수 없습니다.' };
         } catch (error) {
             return { success: false, message: `업데이트 실패: ${(error as Error).message}` };

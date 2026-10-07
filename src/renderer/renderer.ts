@@ -3726,8 +3726,8 @@ function initRealCategorySync(): void {
       const naverId = (document.getElementById('naver-id') as HTMLInputElement)?.value?.trim() || config.savedNaverId;
       const naverPassword = (document.getElementById('naver-password') as HTMLInputElement)?.value?.trim() || config.savedNaverPassword;
 
-      if (!naverId || !naverPassword) {
-        alert('⚠️ 네이버 아이디와 비밀번호를 먼저 입력하거나 저장해주세요.');
+      if (!naverId) {
+        alert('⚠️ 네이버 아이디를 먼저 입력하거나 저장해주세요.');
         analyzeBtn.disabled = false;
         analyzeBtn.innerHTML = originalHtml;
         return;
@@ -6327,7 +6327,7 @@ URL: ${firstUrl}
           // 계정 자격 증명 가져오기
           const credResult = await window.api.getAccountCredentials(item.accountId);
           if (!credResult.success || !credResult.credentials) {
-            appendLog(`❌ [${i + 1}/${publishQueue.length}] ${item.accountName}: 자격 증명을 가져올 수 없습니다.`);
+            appendLog(`❌ [${i + 1}/${publishQueue.length}] ${item.accountName}: 계정의 네이버 아이디를 찾을 수 없습니다.`);
             failCount++;
             continue;
           }

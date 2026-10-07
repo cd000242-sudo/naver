@@ -782,7 +782,7 @@ interface AutomationAPI {
   toggleBlogAccount: (accountId: string) => Promise<{ success: boolean; isActive?: boolean; message?: string }>;
   recordBlogPublish: (accountId: string) => Promise<{ success: boolean; message?: string }>;
   getAccountCredentials: (accountId: string) => Promise<{ success: boolean; credentials?: { naverId: string; naverPassword: string } | null; message?: string }>;
-  updateAccountCredentials: (accountId: string, naverId: string, naverPassword: string) => Promise<{ success: boolean; message?: string }>;
+  updateAccountCredentials: (accountId: string, naverId: string, naverPassword: string, clearPassword?: boolean) => Promise<{ success: boolean; message?: string }>;
   updateAccountSettings: (accountId: string, settings: any) => Promise<{ success: boolean; message?: string }>;
   getNextContentSource: (accountId: string) => Promise<{ success: boolean; source?: { type: 'keyword' | 'url'; value: string } | null; message?: string }>;
 

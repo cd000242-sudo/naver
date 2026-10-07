@@ -194,20 +194,21 @@ export async function resolveAccount(
 ): Promise<{ naverId: string; naverPassword: string; accountId?: string } | null> {
     const deps = getDependencies();
 
+    // The chosen Naver ID decides the account; a missing password must not hand the post to another account.
     // context에서 제공된 경우 (다중계정 발행)
-    if (context.naverId && context.naverPassword) {
+    if (context.naverId) {
         return {
             naverId: context.naverId,
-            naverPassword: context.naverPassword,
+            naverPassword: context.naverPassword || '',
             accountId: context.accountId,
         };
     }
 
     // payload에서 제공된 경우
-    if (payload.naverId && payload.naverPassword) {
+    if (payload.naverId) {
         return {
             naverId: payload.naverId,
-            naverPassword: payload.naverPassword,
+            naverPassword: payload.naverPassword || '',
         };
     }
 
@@ -844,7 +845,7 @@ export async function runFullPostCycle(
         // 4. 계정 정보 해결
         const account = await resolveAccount(payload, context);
         if (!account) {
-            const message = '네이버 아이디와 비밀번호를 입력해주세요.';
+            const message = '네이버 아이디를 입력하거나 계정 관리에서 계정을 선택해주세요.';
             const failure = classifyPublishFailure(message);
             sendStatus({ success: false, message, failureCode: failure.code });
             return { success: false, message, failureCode: failure.code };

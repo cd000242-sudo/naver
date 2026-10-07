@@ -146,24 +146,29 @@ export class BlogAccountManager {
   }
 
   // ✅ 계정 로그인 정보 가져오기 (복호화된 비밀번호)
+  // The Naver ID is what identifies the account; automatic jobs never type a password any more, so an
+  // account without a saved password is still usable (naverPassword is then '').
   getAccountCredentials(accountId: string): { naverId: string; naverPassword: string } | null {
     const account = this.accounts.get(accountId);
-    if (!account || !account.naverId || !account.naverPassword) {
+    if (!account || !account.naverId) {
       return null;
     }
     return {
       naverId: account.naverId,
-      naverPassword: this.decryptPassword(account.naverPassword),
+      naverPassword: account.naverPassword ? this.decryptPassword(account.naverPassword) : '',
     };
   }
 
   // ✅ 계정 로그인 정보 업데이트
-  updateAccountCredentials(accountId: string, naverId: string, naverPassword: string): boolean {
+  // An empty password keeps the saved one: clearing a field must not silently erase stored data.
+  // clearPassword is the explicit "저장된 비밀번호 지우기" choice in the account edit form.
+  updateAccountCredentials(accountId: string, naverId: string, naverPassword: string, clearPassword = false): boolean {
     const account = this.accounts.get(accountId);
     if (!account) return false;
 
     account.naverId = naverId;
-    account.naverPassword = this.encryptPassword(naverPassword);
+    if (clearPassword) delete account.naverPassword;
+    else if (naverPassword) account.naverPassword = this.encryptPassword(naverPassword);
     this.accounts.set(accountId, account);
     this.saveToStorage();
 

@@ -1958,7 +1958,7 @@ export async function handleMultiAccountPublish(): Promise<void> {
       // 계정 자격 증명 가져오기
       const credResult = await window.api.getAccountCredentials(accountId);
       if (!credResult.success || !credResult.credentials) {
-        appendLog(`❌ [${i + 1}/${selectedAccountIds.length}] ${account.name}: 자격 증명을 가져올 수 없습니다.`);
+        appendLog(`❌ [${i + 1}/${selectedAccountIds.length}] ${account.name}: 계정의 네이버 아이디를 찾을 수 없습니다.`);
         failCount++;
         continue;
       }

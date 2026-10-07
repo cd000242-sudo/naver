@@ -1113,8 +1113,8 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('account:recordPublish', accountId),
   getAccountCredentials: (accountId: string): Promise<{ success: boolean; credentials?: { naverId: string; naverPassword: string } | null; message?: string }> =>
     ipcRenderer.invoke('account:getCredentials', accountId),
-  updateAccountCredentials: (accountId: string, naverId: string, naverPassword: string): Promise<{ success: boolean; message?: string }> =>
-    ipcRenderer.invoke('account:updateCredentials', accountId, naverId, naverPassword),
+  updateAccountCredentials: (accountId: string, naverId: string, naverPassword: string, clearPassword?: boolean): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('account:updateCredentials', accountId, naverId, naverPassword, clearPassword === true),
   updateAccountSettings: (accountId: string, settings: any): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('account:updateSettings', accountId, settings),
   getNextContentSource: (accountId: string): Promise<{ success: boolean; source?: { type: 'keyword' | 'url'; value: string } | null; message?: string }> =>

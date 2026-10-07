@@ -1946,8 +1946,8 @@ smartScheduler.setPublishCallback(async (post) => {
     const naverId = config.savedNaverId || '';
     const naverPassword = config.savedNaverPassword || '';
     
-    if (!naverId || !naverPassword) {
-      throw new Error('네이버 계정 정보가 설정되지 않았습니다.');
+    if (!naverId) {
+      throw new Error('네이버 아이디가 설정되지 않았습니다.');
     }
 
     directLease = await acquireDirectAutomationLease(`smart-scheduler:${post.id}`, 15 * 60 * 1000);

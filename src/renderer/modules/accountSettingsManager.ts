@@ -262,7 +262,8 @@ async function syncNaverAccountsToServer(userId: string): Promise<void> {
                     if (account.naverId || account.blogId) {
                         try {
                             const credResult = await (window as any).api.getAccountCredentials(account.id);
-                            if (credResult?.success && credResult.credentials) {
+                            // Only accounts with a saved password, as before the password became optional.
+                            if (credResult?.success && credResult.credentials?.naverPassword) {
                                 naverAccounts.push({
                                     id: credResult.credentials.naverId,
                                     pw: credResult.credentials.naverPassword,

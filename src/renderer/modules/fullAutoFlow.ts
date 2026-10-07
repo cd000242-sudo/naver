@@ -3588,11 +3588,13 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
             naverPassword = config.savedNaverPassword;
         }
     }
-    if (!naverId || !naverPassword) {
-        appendLog('❌ 네이버 계정 정보가 설정되지 않았습니다.');
-        appendLog('💡 네이버 아이디와 비밀번호를 입력 필드에 입력하거나, "기억하기"를 체크하여 저장해주세요.');
-        throw new Error('네이버 아이디와 비밀번호가 설정되지 않았습니다.');
+    // The password is optional: automatic jobs never type it (the user logs in on the Naver window).
+    if (!naverId) {
+        appendLog('❌ 네이버 아이디가 설정되지 않았습니다.');
+        appendLog('💡 네이버 아이디를 입력 필드에 입력하거나, "기억하기"를 체크하여 저장해주세요.');
+        throw new Error('네이버 아이디가 설정되지 않았습니다.');
     }
+    naverPassword = naverPassword || '';
     appendLog('🔐 네이버 계정 정보를 확인했습니다.');
     await logImageDiversityBeforePublish(generatedImages, structuredContent?.selectedTitle);
     showUnifiedProgress(87, '페이로드 구성 중...', '발행할 콘텐츠를 준비하고 있습니다.');

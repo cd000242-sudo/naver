@@ -378,7 +378,7 @@
                                 <label for="naver-password">🔑 비밀번호</label>
                                 <!-- ✅ [v2.7.69] 눈 버튼으로 비밀번호 표시/숨김 토글 -->
                                 <div style="position: relative;">
-                                    <input type="password" id="naver-password" placeholder="비밀번호 입력"
+                                    <input type="password" id="naver-password" placeholder="선택 — 로그인은 네이버 창에서 직접"
                                         style="padding-right: 2.75rem; width: 100%;">
                                     <button type="button" id="toggle-naver-password" tabindex="-1"
                                         aria-label="비밀번호 보이기/숨기기"
@@ -9669,7 +9669,7 @@
                             <label
                                 style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem; display: block;">네이버
                                 비밀번호</label>
-                            <input type="password" id="new-account-naver-pw" placeholder="네이버 로그인 비밀번호"
+                            <input type="password" id="new-account-naver-pw" placeholder="선택 — 로그인은 네이버 창에서 직접"
                                 style="width: 100%; padding: 0.5rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: 6px; color: var(--text-strong);">
                         </div>
                     </div>
@@ -10549,9 +10549,12 @@
                             <div class="field">
                                 <label
                                     style="color: var(--text-gold); font-weight: 700; margin-bottom: 0.5rem; display: block;">🔑
-                                    비밀번호</label>
-                                <input type="password" id="ma-edit-naver-pw" placeholder="비밀번호 입력"
+                                    비밀번호 <span style="font-weight: 400; color: var(--text-muted);">(선택)</span></label>
+                                <input type="password" id="ma-edit-naver-pw" placeholder="선택 — 로그인은 네이버 창에서 직접 합니다"
                                     style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 2px solid var(--border-medium); color: var(--text-strong); border-radius: 10px;">
+                                <label id="ma-edit-clear-pw-row" style="display: none; margin-top: 0.4rem; font-size: 0.8rem; color: var(--text-muted); cursor: pointer;">
+                                    <input type="checkbox" id="ma-edit-clear-pw"> 저장된 비밀번호 지우기
+                                </label>
                             </div>
                         </div>
 

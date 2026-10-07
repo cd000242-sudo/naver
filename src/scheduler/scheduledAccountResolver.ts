@@ -35,7 +35,8 @@ function validCredentials(credentials: {
   naverId?: string;
   naverPassword?: string;
 } | null | undefined): credentials is { naverId: string; naverPassword: string } {
-  return Boolean(value(credentials?.naverId) && value(credentials?.naverPassword));
+  // The Naver ID identifies the account; automatic jobs never type a password, so it is optional.
+  return Boolean(value(credentials?.naverId));
 }
 
 export function resolveScheduledAccountCredentials(
@@ -48,7 +49,7 @@ export function resolveScheduledAccountCredentials(
   const hasBinding = Boolean(scheduledAccountId || scheduledNaverId);
 
   if (!hasBinding) {
-    if (configuredNaverId && configuredNaverPassword) {
+    if (configuredNaverId) {
       return {
         naverId: configuredNaverId,
         naverPassword: configuredNaverPassword,
@@ -60,7 +61,6 @@ export function resolveScheduledAccountCredentials(
 
   if (scheduledNaverId
     && configuredNaverId
-    && configuredNaverPassword
     && sameAccount(scheduledNaverId, configuredNaverId)) {
     return {
       accountId: scheduledAccountId || undefined,

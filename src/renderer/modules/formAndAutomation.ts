@@ -51,16 +51,17 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
   const generatorSelect = document.getElementById('generator') as HTMLSelectElement;
   const targetAgeSelect = document.getElementById('target-age') as HTMLSelectElement;
 
-  if (!naverIdInput || !naverPasswordInput) {
-    alert('네이버 아이디와 비밀번호를 입력해주세요.');
+  if (!naverIdInput) {
+    alert('네이버 아이디를 입력해주세요.');
     return null;
   }
 
   const naverId = naverIdInput.value.trim();
-  const naverPassword = naverPasswordInput.value.trim();
+  // Optional: automatic jobs never type the password (the user logs in on the Naver window).
+  const naverPassword = naverPasswordInput?.value.trim() || '';
 
-  if (!naverId || !naverPassword) {
-    alert('네이버 아이디와 비밀번호를 입력해주세요.');
+  if (!naverId) {
+    alert('네이버 아이디를 입력해주세요.');
     return null;
   }
 
