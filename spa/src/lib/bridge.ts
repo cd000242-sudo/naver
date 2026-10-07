@@ -242,7 +242,8 @@ export async function bridgeAgentLogin(
  * 사장님 2026-09-09 "앱에서든 사이트에서든 하나처럼". 구버전 앱(경로 없음)은 outdated.
  */
 export type BridgeApiKeys =
-    | { status: 'ok'; keys: Record<string, string>; count: number }
+    /** savedAt — 앱 키 칸이 마지막으로 바뀐 시각(옛 앱은 빈 값). 마지막 저장 판정에 쓴다(2026-10-07). */
+    | { status: 'ok'; keys: Record<string, string>; count: number; savedAt: string }
     | { status: 'offline' }
     | { status: 'outdated' };
 
@@ -252,12 +253,31 @@ export async function bridgeApiKeys(): Promise<BridgeApiKeys> {
     try {
         const response = await fetch(`${BRIDGE_BASE}/v1/bridge/api-keys`, { method: 'POST', headers: { 'content-type': 'application/json' }, signal: controller.signal });
         if (response.status === 404) return { status: 'outdated' };
-        const body = await response.json().catch(() => null) as { ok?: boolean; result?: { ok?: boolean; keys?: Record<string, string>; count?: number } } | null;
+        const body = await response.json().catch(() => null) as { ok?: boolean; result?: { ok?: boolean; keys?: Record<string, string>; count?: number; savedAt?: string } } | null;
         const result = body?.result;
-        if (response.ok && body?.ok && result?.ok && result.keys) return { status: 'ok', keys: result.keys, count: Number(result.count) || Object.keys(result.keys).length };
+        if (response.ok && body?.ok && result?.ok && result.keys) return { status: 'ok', keys: result.keys, count: Number(result.count) || Object.keys(result.keys).length, savedAt: String(result.savedAt || '') };
         return { status: 'offline' };
     } catch {
         return { status: 'offline' };
+    } finally {
+        window.clearTimeout(timer);
+    }
+}
+
+/**
+ * 사이트에서 저장한 키를 같은 PC 의 앱 설정에 넣는다(2026-10-07 "둘이 한 몸"). 앱이 값 있는 칸만 받아 넣는다(빈 값으로 덮지 않음).
+ * 구버전 앱(경로 없음)은 outdated — 그때는 사이트가 넘길 것을 기억해 두었다가 업데이트 뒤 넘긴다.
+ */
+export async function bridgeSaveApiKeys(keys: Record<string, string>, savedAt: string): Promise<'ok' | 'offline' | 'outdated'> {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 8_000);
+    try {
+        const response = await fetch(`${BRIDGE_BASE}/v1/bridge/api-keys-save`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ keys, savedAt }), signal: controller.signal });
+        if (response.status === 404) return 'outdated';
+        const body = await response.json().catch(() => null) as { ok?: boolean; result?: { ok?: boolean } } | null;
+        return response.ok && body?.ok && body.result?.ok ? 'ok' : 'offline';
+    } catch {
+        return 'offline';
     } finally {
         window.clearTimeout(timer);
     }

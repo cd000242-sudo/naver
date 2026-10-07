@@ -197,7 +197,7 @@ export async function pullUserKeys(options: { waitMs?: number; onWait?: (elapsed
         for (const [field, value] of Object.entries(remote)) {
             if (!local[field as keyof UserKeys] && value) filled += 1;
         }
-        saveUserKeys(merged); // 저장 이벤트 → 합친 결과가 다시 올라간다
+        saveUserKeys(merged, { source: 'cloud' }); // 저장 이벤트 → 합친 결과가 다시 올라간다. 사람 저장이 아니라 앱 맞춤의 "마지막 저장" 시각은 그대로.
         if (legacy) await pushUserKeys(loadUserKeys());
         return { status: 'merged', filled, savedAt };
     } catch { return { status: 'unavailable', filled: 0, savedAt: null }; }

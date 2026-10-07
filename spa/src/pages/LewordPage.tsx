@@ -1,6 +1,7 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import LewordAuth from '../components/leword/LewordAuth';
 import { clearSession, daysLeft, loadSession, logoutWeb, pingWebSession, type LewordSession } from '../lib/lewordAuth';
+import { syncKeysWithApp } from '../lib/appKeySync';
 
 /** 웹 세션 확인 간격 — 서버는 다른 브라우저가 10분 안에 활동했으면 새 로그인을 막는다(먼저 쓰는 쪽이 이김, 2026-10-07). */
 const WEB_SESSION_PING_MS = 3 * 60 * 1000;
@@ -102,6 +103,21 @@ function LewordPage() {
      * 확인이 이 브라우저의 활동 시각을 갱신해서, 쓰는 동안은 다른 곳의 새 로그인이 막힌다. 연결 실패는 내쫓지 않는다.
      */
     const [kickNotice, setKickNotice] = useState('');
+    /*
+     * 앱 ↔ 사이트 API 키 한 몸(2026-10-07 사장님 "앱에서 등록됐다면 로그인했을 때 읽고 내 api 키에 자동 연동되어야").
+     * 로그인 · 화면 열 때, 그리고 이 화면에서 사람이 키를 저장할 때 같은 PC 의 앱과 맞춘다(마지막 저장이 이김).
+     * 앱 맞춤으로 생긴 저장(source 'app')과 다른 기기 합치기('cloud')는 다시 맞추지 않는다.
+     */
+    useEffect(() => {
+        if (!session) return undefined;
+        void syncKeysWithApp();
+        const onSaved = (event: Event) => {
+            const source = (event as CustomEvent<{ source?: string }>).detail?.source;
+            if (source === 'user') void syncKeysWithApp();
+        };
+        window.addEventListener('leword:keys-saved', onSaved);
+        return () => window.removeEventListener('leword:keys-saved', onSaved);
+    }, [session]);
     useEffect(() => {
         if (!session?.webSessionToken) return undefined;
         let stopped = false;
