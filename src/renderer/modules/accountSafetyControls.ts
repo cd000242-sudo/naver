@@ -1,4 +1,4 @@
-type SafetyState = { paused: boolean; busy: boolean; version: number; code?: string; label: string; pendingToken?: string };
+type SafetyState = { paused: boolean; busy: boolean; version: number; code?: string; label: string; pendingToken?: string; journalUnreadable?: boolean };
 type Response = { success: boolean; state?: SafetyState; message?: string };
 type SafetyApi = { accountSafety(id: string, action: string, version?: number, outcome?: string, token?: string): Promise<Response> };
 
@@ -28,21 +28,25 @@ export function installAccountSafetyControls(root: Document = document): () => v
         finally {
           if (timer) clearTimeout(timer);
           if (serial === request) buttons.forEach(b => { b.disabled = Boolean(state?.busy) && b.dataset.action !== 'status'; });
-          for (const b of buttons) if (b.dataset.action === 'confirm') { b.hidden = !state?.pendingToken; b.style.setProperty('display', b.hidden ? 'none' : 'inline-flex', 'important'); }
+          for (const b of buttons) {
+            const shown = b.dataset.action === 'confirm' ? Boolean(state?.pendingToken) : b.dataset.action === 'reset-journal' ? Boolean(state?.journalUnreadable) : true;
+            if (b.dataset.action === 'confirm' || b.dataset.action === 'reset-journal') { b.hidden = !shown; b.style.setProperty('display', shown ? 'inline-flex' : 'none', 'important'); }
+          }
         }
       };
       const add = (text: string, action: string, outcome?: string) => {
         const button = root.createElement('button'); button.type = 'button'; button.textContent = text; button.dataset.action = action;
         button.style.cssText = 'background:#16834a;color:white;border:0;border-radius:6px;padding:7px;cursor:pointer;';
         button.addEventListener('click', () => {
+          if (action === 'reset-journal' && !window.confirm('발행 기록 파일을 읽을 수 없습니다. 네이버 글 목록과 예약 목록에서 마지막 글의 발행 여부를 확인했나요? 기존 파일은 지우지 않고 옆에 보관합니다.')) return;
           if (action === 'confirm' && !window.confirm(outcome === 'published' ? '네이버 글 목록에서 게시 또는 예약 완료를 확인했나요? 이 작업은 재발행하지 않습니다.' : '네이버 글 목록과 예약 목록 모두에서 해당 글이 없는 것을 확인했나요? 불확실하면 취소해주세요.')) return;
           void update(action, outcome);
         });
-        if (action === 'confirm') { button.hidden = true; button.style.setProperty('display', 'none', 'important'); }
+        if (action === 'confirm' || action === 'reset-journal') { button.hidden = true; button.style.setProperty('display', 'none', 'important'); }
         buttons.push(button); panel.append(button);
       };
       add('네이버에서 확인하기', 'open'); add('확인 후 재개', 'resume'); add('상태 확인', 'status');
-      add('발행됨 확인', 'confirm', 'published'); add('발행 안 됨 확인', 'confirm', 'not-published');
+      add('발행됨 확인', 'confirm', 'published'); add('발행 안 됨 확인', 'confirm', 'not-published'); add('발행 기록 초기화', 'reset-journal');
       card.append(panel); void update('status');
     }
   };

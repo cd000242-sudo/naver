@@ -22,8 +22,8 @@ import {
 } from './image/tableImageGenerator.js';
 import { extractProsConsWithGemini } from './image/geminiTableExtractor.js';
 import { browserSessionManager, type SessionInfo } from './browserSessionManager.js';
-// [v2.10.113] 명시적 쿠키 파일 저장/복원 — userDataDir 보조 안전망 (캡차 반복 차단)
-import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromFile } from './sessionPersistence.js';
+// [v2.10.113] 명시적 쿠키 파일 복원 — userDataDir 보조 안전망. 저장은 서버 확인 직후 browserSessionManager 가 한다.
+import { restoreCookies as restoreCookiesFromFile } from './sessionPersistence.js';
 import { buildNaverAutomationProfile, hashAutomationAccountId, type NaverAutomationProfile } from './automation/accountProfilePolicy.js';
 import { detectChromeFullVersion } from './automation/chromeVersionDetector.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
@@ -497,10 +497,6 @@ export class NaverBlogAutomation {
   private readonly PUBLISH_BUTTON_SELECTORS = getAllSelectors(SELECTORS.publish.publishButton);
   private readonly CONFIRM_PUBLISH_SELECTORS = getAllSelectors(SELECTORS.publish.confirmPublishButton);
   private readonly SAVE_BUTTON_SELECTORS = getSaveButtonSelectors(getAllSelectors(SELECTORS.publish.saveButton));
-  private readonly LOGIN_BUTTON_SELECTORS = getAllSelectors(SELECTORS.login.loginButton);
-  private readonly LOGIN_ID_INPUT_SELECTORS = getAllSelectors(SELECTORS.login.idInput);
-  private readonly LOGIN_PASSWORD_INPUT_SELECTORS = getAllSelectors(SELECTORS.login.pwInput);
-  private readonly KEEP_LOGIN_SELECTORS = getAllSelectors(SELECTORS.login.keepLoginCheckbox);
 
   // Delay 상수
   private readonly DELAYS = {
@@ -1892,26 +1888,6 @@ export class NaverBlogAutomation {
     });
 
     this.log('🛡️ Dialog 자동 수락 핸들러 등록 완료');
-  }
-
-  /**
-   * 쿠키 저장 — userDataDir + 명시적 파일 이중 안전망 (v2.10.113)
-   * 사용자 보고: 세션 유지 안 됨, 캡차 자주 뜸 → userDataDir만으로는 불충분.
-   * sessionPersistence.saveCookies로 cookies.json 별도 저장.
-   */
-  private async saveCookies(): Promise<void> {
-    try {
-      const page = this.ensurePage();
-      const naverId = this.options.naverId;
-      if (page && naverId) {
-        await saveCookiesToFile(page, naverId);
-        this.log('🍪 쿠키 저장 완료 (userDataDir + 명시적 파일 이중 안전망)');
-      } else {
-        this.log('🍪 쿠키 저장 스킵 (page 또는 naverId 없음)');
-      }
-    } catch (e) {
-      this.log(`⚠️ 명시적 쿠키 저장 실패 (userDataDir는 유효): ${(e as Error).message}`);
-    }
   }
 
   /**
@@ -6787,6 +6763,10 @@ export class NaverBlogAutomation {
       try {
         if (this.options.getExpectedBlogId) browserSessionManager.setExpectedBlogId(this.options.naverId, this.options.getExpectedBlogId(this.options.naverId));
         const result = await work();
+        // A run that reports failure after the publish click has an unknown outcome, never a confirmed one.
+        if (journal.hasUnconfirmed(this.options.naverId) && (result as { success?: unknown } | undefined)?.success === false) {
+          throw new AccountExecutionGuardError('PUBLISH_OUTCOME_UNKNOWN');
+        }
         if (journal.hasUnconfirmed(this.options.naverId)) journal.markConfirmed(this.options.naverId, this.accountWorkId, this.publishedUrl || undefined);
         return result;
       }

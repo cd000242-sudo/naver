@@ -30,9 +30,14 @@ export function createAccountSafetyController(accounts: () => Account[], session
     const state = guard.getStatus(id);
     let pendingToken: string | undefined;
     try { if (!state.busy) pendingToken = journal.getPendingToken(id); } catch { /* Storage error remains stopped. */ }
-    return { ...state, label: state.storageError ? '상태 저장소 확인 필요' : state.paused ? ACCOUNT_SAFETY_LABELS[state.code!] : '중단 없음 · 로그인은 실행 시 확인', pendingToken };
+    const journalUnreadable = !state.busy && journal.isUnreadable(id);
+    const label = journalUnreadable ? '발행 기록 파일 확인 필요: 네이버 글 목록을 확인한 뒤 발행 기록 초기화'
+      : state.storageError ? '상태 저장소 확인 필요' : state.paused ? ACCOUNT_SAFETY_LABELS[state.code!] : '중단 없음 · 로그인은 실행 시 확인';
+    return { ...state, label, pendingToken, journalUnreadable };
   }
-  async function act(accountId: string, action: 'status' | 'open' | 'resume' | 'confirm', expectedVersion?: number,
+  /** PUBLISH_OUTCOME_UNKNOWN with nothing left to confirm (already confirmed, or the record was reset). */
+  const outcomeSettled = (id: string, code?: string) => code === 'PUBLISH_OUTCOME_UNKNOWN' && !journal.isUnreadable(id) && !journal.hasUnconfirmed(id);
+  async function act(accountId: string, action: 'status' | 'open' | 'resume' | 'confirm' | 'reset-journal', expectedVersion?: number,
     outcome?: 'published' | 'not-published', pendingToken?: string) {
     const id = resolve(accountId);
     if (action === 'status') return { success: true, state: status(accountId) };
@@ -40,8 +45,20 @@ export function createAccountSafetyController(accounts: () => Account[], session
     if (before.busy) return { success: false, state: before, message: '이 계정의 작업이 끝난 뒤 다시 확인해주세요.' };
     if (action !== 'open' && expectedVersion !== before.version) return { success: false, state: before, message: '계정 상태가 변경되었습니다. 확인 후 다시 눌러주세요.' };
     if (action === 'open') { await sessions.openForUser(id); return { success: true, state: status(accountId), message: '열린 네이버 창에서 직접 로그인·본인확인을 완료해주세요.' }; }
+    if (action === 'reset-journal') {
+      if (!before.journalUnreadable) return { success: false, state: before, message: '초기화할 발행 기록 문제가 없습니다.' };
+      const reset = journal.resetUnreadable(id);
+      if (reset === 'unavailable') return { success: false, state: status(accountId), message: '발행 기록 파일을 지금 읽거나 옮길 수 없습니다(백신·권한 잠금 가능). 잠시 뒤 다시 눌러주세요. 파일은 그대로 두었습니다.' };
+      return { success: true, state: status(accountId), message: reset === 'reset'
+        ? '손상된 발행 기록을 옆에 보관하고 새로 시작했습니다. 확인 후 재개를 눌러주세요.'
+        : '발행 기록 파일은 정상이라 그대로 두었습니다. 상태를 다시 확인해주세요.' };
+    }
     if (action === 'resume') {
-      const success = await sessions.resumeAccount(id);
+      // Re-checked after the session probe: a pending record written meanwhile keeps the account stopped.
+      const verifyReady = async () => (await sessions.verifyAccountForUser(id)).status === 'ready' && !journal.hasUnconfirmed(id);
+      const success = outcomeSettled(id, before.code)
+        ? await guard.resumeAfterOutcomeConfirmation(id, verifyReady)
+        : await sessions.resumeAccount(id);
       return { success, state: status(accountId), message: success ? '확인 완료. 원고를 확인하고 원하는 작업을 다시 실행해주세요.' : '인증 또는 계정 확인이 끝나지 않았습니다. 네이버 글쓰기 화면과 선택 계정을 확인해주세요.' };
     }
     if (action !== 'confirm' || !pendingToken || !['published', 'not-published'].includes(outcome || '')) throw new Error('발행 결과 확인 값이 올바르지 않습니다.');

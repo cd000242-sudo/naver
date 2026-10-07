@@ -14,13 +14,17 @@ export class PublicationCommitJournal {
   }
   private accountKey(accountId: string): string { return this.key(accountId.toLowerCase()); }
   private stop(): never { throw new AccountExecutionGuardError('PUBLISH_OUTCOME_UNKNOWN', '이전 발행 결과가 확인되지 않았습니다. 글 목록에서 결과를 직접 확인해 주세요.'); }
+  private static isValidState(state: unknown): state is JournalState {
+    const value = state as JournalState;
+    if (!value || value.schema !== 1 || !value.confirmed || typeof value.confirmed !== 'object' || Array.isArray(value.confirmed) || (value.pending !== undefined && !/^[a-f0-9]{64}$/.test(value.pending))) return false;
+    return Object.entries(value.confirmed).every(([job, entry]) => /^[a-f0-9]{64}$/.test(job) && entry?.confirmed === true);
+  }
   private read(accountId: string): JournalState {
     const key = this.accountKey(accountId);
     if (this.failed.has(key)) return this.stop();
     try {
-      const state = JSON.parse(readFileSync(join(this.storageDir, key + '.json'), 'utf8')) as JournalState;
-      if (state.schema !== 1 || !state.confirmed || typeof state.confirmed !== 'object' || Array.isArray(state.confirmed) || (state.pending !== undefined && !/^[a-f0-9]{64}$/.test(state.pending))) return this.stop();
-      for (const [job, value] of Object.entries(state.confirmed)) if (!/^[a-f0-9]{64}$/.test(job) || value?.confirmed !== true) return this.stop();
+      const state: unknown = JSON.parse(readFileSync(join(this.storageDir, key + '.json'), 'utf8'));
+      if (!PublicationCommitJournal.isValidState(state)) return this.stop();
       return state;
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code === 'ENOENT') return { schema: 1, confirmed: {} };
@@ -36,6 +40,37 @@ export class PublicationCommitJournal {
       renameSync(temporary, join(this.storageDir, key + '.json'));
     } catch { this.failed.add(key); this.stop(); }
     finally { if (descriptor !== undefined) { try { closeSync(descriptor); } catch { /* Remain stopped. */ } } try { unlinkSync(temporary); } catch { /* Renamed or never created. */ } }
+  }
+  /**
+   * The stored file itself, ignoring the in-memory stop flag (a failed write leaves a valid file).
+   * 'unavailable' is an I/O error (an antivirus lock, permissions): the file may be fine, so it is never moved.
+   */
+  private inspectFile(accountId: string): 'valid' | 'corrupt' | 'unavailable' {
+    let text: string;
+    try { text = readFileSync(join(this.storageDir, this.accountKey(accountId) + '.json'), 'utf8'); }
+    catch (error) { return (error as NodeJS.ErrnoException).code === 'ENOENT' ? 'valid' : 'unavailable'; }
+    try { return PublicationCommitJournal.isValidState(JSON.parse(text)) ? 'valid' : 'corrupt'; }
+    catch { return 'corrupt'; }
+  }
+  /** True when the journal cannot be read, so the account stays stopped until the user resets it. */
+  isUnreadable(accountId: string): boolean {
+    try { this.read(accountId); return false; } catch { return true; }
+  }
+  /**
+   * Explicit user recovery after checking the Naver post list: an unreadable file is moved aside (never deleted)
+   * and the journal starts empty. A readable file is kept as is; only the stop flag of a failed write is cleared.
+   */
+  resetUnreadable(accountId: string): 'reset' | 'kept' | 'unavailable' {
+    const key = this.accountKey(accountId);
+    const verdict = this.inspectFile(accountId);
+    if (verdict === 'unavailable') return 'unavailable';
+    if (verdict === 'corrupt') {
+      const file = join(this.storageDir, key + '.json');
+      try { renameSync(file, join(this.storageDir, `${key}.corrupt-${Date.now()}.json`)); }
+      catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') return 'unavailable'; }
+    }
+    this.failed.delete(key);
+    return verdict === 'corrupt' ? 'reset' : 'kept';
   }
   getPendingToken(accountId: string): string | undefined { return this.read(accountId).pending; }
   /** Token comes from the displayed pending attempt, so stale UI cannot clear a newer one. */
