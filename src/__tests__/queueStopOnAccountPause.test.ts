@@ -51,7 +51,20 @@ describe('sequential multi-account publishing', () => {
   it('stops instead of opening the next account after a paused one', () => {
     const source = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
     expect(source).toContain("import { requiresAccountStop } from '../../automation/publishFailureClassifier.js';");
-    expect(source).toMatch(/if \(requiresAccountStop\(\{ code: failureCode, message: result\.message \}\)\) \{[\s\S]{0,200}?break;/);
+    expect(source).toMatch(/if \(requiresAccountStop\(\{ code: accountResult\?\.failureCode, message: accountMessage \}\)\) \{[\s\S]{0,200}?break;/);
+    expect(source).toMatch(/catch \(error\) \{[\s\S]{0,200}?if \(requiresAccountStop\(error\)\) \{[\s\S]{0,200}?break;/);
+  });
+
+  it('reads the account result, not only the run flag (main returns success: true even when the account failed)', () => {
+    const source = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
+    expect(source).toContain('if (result.success && accountResult?.success === true) {');
+    expect(source).not.toMatch(/\n\s*if \(result\.success\) \{\n\s*appendLog\(`✅ \[\$\{i \+ 1\}\/\$\{selectedAccountIds\.length\}\]/);
+    expect(read('src', 'main.ts')).toContain('return { success: true, results, summary: { total: results.length, success: successCount, fail: failCount } };');
+  });
+
+  it('an exception waits the normal interval before the next account', () => {
+    const source = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
+    expect(source).toMatch(/catch \(error\) \{[\s\S]{0,700}?applySequentialMultiAccountJitter\(intervalPolicy\.safe, intervalPolicy\.safe\)[\s\S]{0,300}?waitInterruptible\(waitSeconds\)/);
   });
 
   it('the renderer bundle carries the classifier module', () => {
