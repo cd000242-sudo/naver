@@ -960,9 +960,22 @@ class BrowserSessionManager {
                     return { ok: false, status: 'unknown', reason: 'account-identity-unverified' };
                 }
                 session.isLoggedIn = true; session.loginVerifiedAt = Date.now();
+                // Persist only cookies the server just confirmed for the expected account: the next app start
+                // restores them at session creation instead of stopping at LOGIN_REQUIRED, and a stale file is replaced.
+                void this.persistVerifiedCookies(accountId, page);
             } else { session.isLoggedIn = false; session.loginVerifiedAt = 0; }
             return verdict;
         } catch { return { ok: false, status: 'unavailable', reason: 'probe-unavailable' }; }
+    }
+
+    /** Best effort: a failed write keeps the previous file and never blocks publishing. */
+    private async persistVerifiedCookies(accountId: string, page: Page): Promise<void> {
+        try {
+            const { saveCookies } = await import('./sessionPersistence.js');
+            await saveCookies(page, accountId);
+        } catch (error) {
+            console.warn(`[BrowserSessionManager] ⚠️ 확인된 로그인 쿠키 저장 실패 (무시): ${(error as Error).message}`);
+        }
     }
 
     /** 이전 boolean 호출부도 false→자동 로그인으로 진행하지 못하도록 중단 오류를 던진다. */
