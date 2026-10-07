@@ -81,6 +81,18 @@
                     </p>
                 </div>
 
+                <!-- [2026-10-07] 설치 파일 · 다운로드 비밀번호 · LEWORD 사용법 — 사장님 "구매하면 다운로드 바로가기랑 비밀번호 알려 주는지" -->
+                <div id="purchase-next"
+                    style="background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.22); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px; text-align: center;">
+                    <p style="font-size: 0.9rem; color: var(--gold-primary); font-weight: 700; margin-bottom: 10px;">📥 설치 파일 받기</p>
+                    <a id="download-link" href="/download" target="_blank" rel="noreferrer"
+                        style="display: block; padding: 12px; border-radius: 10px; background: var(--gold-gradient); color: #0a0a0f; font-weight: 700; font-size: 0.92rem; text-decoration: none; margin-bottom: 8px;">다운로드 페이지 열기</a>
+                    <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0;">다운로드 비밀번호:
+                        <strong style="color: #fff; background: rgba(201,168,76,0.3); padding: 2px 8px; border-radius: 4px;">1645</strong></p>
+                    <a id="guide-link" class="hidden" href="https://app.notion.com/p/LEWORD-77c9b1f8e6824ed7b8e70c5d1926dcf8" target="_blank" rel="noreferrer"
+                        style="display: block; margin-top: 12px; padding: 11px; border-radius: 10px; border: 1px solid var(--success); color: var(--success); font-weight: 700; font-size: 0.88rem; text-decoration: none;">📘 LEWORD 사용법 보기(노션)</a>
+                </div>
+
                 <!-- 이메일 발송 상태 -->
                 <div id="email-sent-notice" class="hidden"
                     style="background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 24px;">
@@ -261,6 +273,38 @@
             });
         }
 
+        // ===== [2026-10-07] 산 제품에 맞춘 안내 — 다운로드 바로가기 · 코드 이름 · 사용법 · LEWORD 노션 =====
+        // productId: 상점 'naver+leword-yearly' 꼴 · 예전 'all-in-one-yearly' · 'leword-monthly'.
+        const PURCHASE_NAMES = { naver: 'Better Life Naver', orbit: 'Leadernam Orbit', leword: 'LEWORD', all: 'All in one' };
+        function purchasedIds(productId) {
+            const key = String(productId || '');
+            if (key.startsWith('all-in-one-')) return ['all'];
+            const m = key.match(/^([a-z0-9_]+(?:\+[a-z0-9_]+)*)-(monthly|yearly|lifetime|quarterly)$/);
+            return m ? m[1].split('+') : [];
+        }
+        function applyPurchaseInfo(productId) {
+            const ids = purchasedIds(productId);
+            const single = ids.length === 1 ? ids[0] : '';
+            const link = document.getElementById('download-link');
+            if (link && ['naver', 'orbit', 'leword'].includes(single)) link.href = '/download?product=' + single;
+            const guide = document.getElementById('guide-link');
+            if (guide && (ids.includes('leword') || ids.includes('all'))) guide.classList.remove('hidden');
+            if (!single || single === 'all') return; // 올인원 · 여러 제품 묶음은 올인원 안내 그대로
+            const name = PURCHASE_NAMES[single] || single;
+            const label = document.getElementById('license-code-label');
+            if (label) label.textContent = name + ' 라이선스 코드';
+            const headline = document.getElementById('success-headline');
+            if (headline && headline.textContent.indexOf('올인원') >= 0) headline.textContent = name + ' 라이선스 발급 완료!';
+            const sub = document.getElementById('success-subtitle');
+            if (sub && sub.textContent.indexOf('제품군') >= 0) sub.textContent = '아래 코드로 ' + name + '를 이용할 수 있습니다.';
+            const usage = document.getElementById('license-usage');
+            if (usage) {
+                usage.textContent = single === 'leword'
+                    ? 'leaderspro.kr/leword 에서 [로그인 · 계정 만들기] → 아이디 · 비밀번호를 정하고 위 코드를 입력하세요. PC 앱은 아래에서 설치한 뒤 같은 아이디로 로그인합니다.'
+                    : name + ' 앱을 아래에서 설치하고, 라이선스 등록 화면에 위 코드를 입력하세요.';
+            }
+        }
+
         // ===== 코드 표시 =====
         function showCode(code, product, sendEmail = true) {
             currentCode = code;
@@ -272,6 +316,7 @@
             document.getElementById('loading-section').classList.add('hidden');
             document.getElementById('error-section').classList.add('hidden');
             document.getElementById('code-section').classList.remove('hidden');
+            applyPurchaseInfo(getParams().productId || '');
 
             document.title = '라이선스 발급 완료 — Leaders Pro';
 

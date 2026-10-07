@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ZoomableImage from '../components/ZoomableImage';
 import downloadCatalog from '../data/download-catalog.json';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 import { gradient, onGold, radius } from '../styles/tokens';
+import { DOWNLOAD_PASSWORD } from '../lib/purchaseGuide.mjs';
 
 /**
  * 다운로드 — payment-page/download.html 마이그.
@@ -12,7 +13,8 @@ import { gradient, onGold, radius } from '../styles/tokens';
  */
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-const DOWNLOAD_PW = '1645';
+// 구매 완료 화면 · 주문 조회 · 메일과 같은 값(purchaseGuide.DOWNLOAD_PASSWORD, 2026-10-07).
+const DOWNLOAD_PW = DOWNLOAD_PASSWORD;
 
 type DownloadChoice = {
     key: 'windows' | 'android' | 'mac-arm' | 'mac-intel';
@@ -82,6 +84,8 @@ function DownloadPage() {
         fetchSiteContent().then(setSiteContent);
     }, []);
 
+    // ?product=leword — 구매 완료 화면 · 메일의 [설치 파일 받기]가 산 제품을 짚어 준다(2026-10-07).
+    const [picked] = useState(() => { try { const searchParams = new URLSearchParams(window.location.search); return searchParams.get('product') || ''; } catch { return ''; } });
     const page = siteContent?.downloads?.page || {};
     const downloadBgImage = siteContent?.theme?.downloadBgImage;
 
@@ -124,9 +128,9 @@ function DownloadPage() {
                 <LeadCapture />
 
                 <div className="download-product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24, margin: '32px auto 0' }}>
-                    <DownloadCard productKey="naver" siteContent={siteContent} />
-                    <DownloadCard productKey="leword" siteContent={siteContent} />
-                    <DownloadCard productKey="orbit" siteContent={siteContent} />
+                    <DownloadCard productKey="naver" siteContent={siteContent} picked={picked === 'naver'} />
+                    <DownloadCard productKey="leword" siteContent={siteContent} picked={picked === 'leword'} />
+                    <DownloadCard productKey="orbit" siteContent={siteContent} picked={picked === 'orbit'} />
                 </div>
             </section>
         </div>
@@ -191,8 +195,10 @@ function LeadCapture() {
 }
 
 // ─── Download card ───
-function DownloadCard({ productKey, siteContent }: { productKey: ProductKey; siteContent: SiteContent | null }) {
+function DownloadCard({ productKey, siteContent, picked = false }: { productKey: ProductKey; siteContent: SiteContent | null; picked?: boolean }) {
     const product = applyDownloadOverrides(productKey, siteContent);
+    const cardRef = useRef<HTMLDivElement | null>(null);
+    useEffect(() => { if (picked) cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, [picked]);
     const [pw, setPw] = useState('');
     const [error, setError] = useState(false);
     const [shake, setShake] = useState(false);
@@ -238,7 +244,8 @@ function DownloadCard({ productKey, siteContent }: { productKey: ProductKey; sit
     };
 
     return (
-        <div style={{ background: 'rgba(18,18,26,0.6)', backdropFilter: 'blur(20px)', border: `1px solid ${product.borderColor}`, borderRadius: 20, padding: 24, transition: 'transform 0.3s' }}>
+        <div ref={cardRef} style={{ background: 'rgba(18,18,26,0.6)', backdropFilter: 'blur(20px)', border: picked ? '2px solid #FFD700' : `1px solid ${product.borderColor}`, boxShadow: picked ? '0 0 0 4px rgba(255,215,0,0.15)' : undefined, borderRadius: 20, padding: 24, transition: 'transform 0.3s' }}>
+            {picked && <div style={{ marginBottom: 12, color: '#FFD700', fontSize: 13, fontWeight: 800 }}>✅ 구매하신 제품입니다 — 아래 칸에 비밀번호 {DOWNLOAD_PASSWORD} 을 넣고 받으세요</div>}
             <div style={{
                 width: '100%',
                 aspectRatio: '1 / 1',  // Leword(정사각, 더 큰 쪽) 기준 통일

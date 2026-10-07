@@ -2,6 +2,7 @@ import { Fragment, useCallback, useEffect, useState } from 'react';
 import LewordAuth from '../components/leword/LewordAuth';
 import { clearSession, daysLeft, loadSession, logoutWeb, pingWebSession, type LewordSession } from '../lib/lewordAuth';
 import { syncKeysWithApp } from '../lib/appKeySync';
+import { LEWORD_GUIDE_URL } from '../lib/purchaseGuide.mjs';
 
 /** 웹 세션 확인 간격 — 서버는 다른 브라우저가 10분 안에 활동했으면 새 로그인을 막는다(먼저 쓰는 쪽이 이김, 2026-10-07). */
 const WEB_SESSION_PING_MS = 3 * 60 * 1000;
@@ -357,6 +358,8 @@ function LewordPage() {
                                     <i aria-hidden="true" />{left}일 남음
                                 </span>
                             )}
+                            {/* 2026-10-07 사장님 "리워드 사용법 노션 — 구매하면 이거 볼 수 있도록" — 로그인한 이용권 보유자에게만 */}
+                            <a className="lw-acct-btn" href={LEWORD_GUIDE_URL} target="_blank" rel="noreferrer">📘 사용법</a>
                             <button
                                 type="button"
                                 className="lw-acct-btn"
