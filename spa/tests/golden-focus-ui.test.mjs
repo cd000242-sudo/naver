@@ -14,7 +14,9 @@ test('golden focus controls show counts and keep existing filters',()=>{
  assert.ok(source.includes('shuffleSeed'));
 });
 test('filtering cannot rotate the fixed free sample or unlock new rows',()=>{
- assert.ok(source.includes('repairFreeSample(board, board?.freeSample?.keywords)'));
+ // 무료 다섯은 처음 보는 목록(오늘 → 최근 7일)에서 먼저 — 그 목록도 필터 전 board.rows 전체에서 만든다(2026-10-07).
+ assert.ok(source.includes('repairFreeSample(board, board?.freeSample?.keywords, firstSeen)'));
+ assert.ok(/const all = board\?\.rows \|\| \[\];\s+const firstSeen = \[\.\.\.selectGoldenDailyRows\(all, 'today', now\), \.\.\.selectGoldenDailyRows\(all, 'recent', now\)\]/.test(source));
  assert.ok(source.includes('!freeNames.includes(row.keyword)'));
  assert.ok(source.includes('return hoistFree(sorted)'));
  assert.ok(source.includes('return hoistFree(interleaved)'));
@@ -188,12 +190,24 @@ test('daily screen separates today, recent and archive without re-dating old mea
  assert.match(empty,/전체 보관 보기/);assert.doesNotMatch(empty,/data-keyword=/);
 });
 
-test('date tabs retain the original free sample and cannot unlock a fresh keyword',()=>{
- const fresh={...board.rows[0],keyword:'잠긴 오늘 후보',measuredAt:'2026-09-28T01:00:00Z',serp:{sampledTitles:10,exactTitleHits:2}};
+/*
+ * 2026-10-07 사장님 "LEWORD 5개는 보여줘야 되지 않니?" — 옛 규칙은 무료 다섯이 보관 앞줄이라 처음 열리는 '오늘 확인'이
+ * 전부 잠겼다(실측: 오늘 6개 모두 잠김). 이제 오늘 목록에서 먼저 연다. 대신 어느 탭 · 주제로 봐도 같은 다섯이고 다섯을 넘지 않는다.
+ */
+const unlockedNames=html=>[...html.matchAll(/data-keyword="([^"]+)" data-locked="false"/g)].map(m=>m[1]);
+test('date tabs share one fixed free five — today opens first and switching tabs or topics never unlocks more',()=>{
+ const fresh={...board.rows[0],keyword:'오늘 후보',measuredAt:'2026-09-28T01:00:00Z',serp:{sampledTitles:10,exactTitleHits:2}};
  const input={...board,rows:[...board.rows,fresh]};
- const html=render(false,'all','전체',input,null,'today');
- assert.match(html,/data-keyword="잠긴 오늘 후보" data-locked="true"/);
- assert.equal((html.match(/data-locked="false"/g)||[]).length,0);
+ const todayHtml=render(false,'all','전체',input,null,'today');
+ const today=unlockedNames(todayHtml);
+ assert.ok(today.includes('오늘 후보'), today.join(','));
+ // 오늘 목록이 다섯 이하면 첫 화면에 잠긴 카드가 하나도 없어야 한다
+ assert.equal((todayHtml.match(/data-locked="true"/g)||[]).length,0);
+ const all=unlockedNames(render(false,'all','전체',input,null,'all'));
+ assert.equal(all.length,5,all.join(','));
+ for(const name of today) assert.ok(all.includes(name), name+' 가 전체 보관 탭에서 잠겼다 — 탭마다 다섯이 다르다');
+ const game=unlockedNames(render(false,'all','게임',input,null,'all'));
+ for(const name of game) assert.ok(all.includes(name), name+' — 주제를 바꿔 새 키워드가 열렸다');
 });
 
 

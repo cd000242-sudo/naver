@@ -8,4 +8,6 @@ export declare const FREE_SAMPLE_SIZE: number;
 export declare function repairFreeSample(
     board: { rows?: Array<{ keyword?: string }> } | null | undefined,
     published: readonly string[] | null | undefined,
+    /** 처음 보는 목록(오늘 확인 → 최근 7일, 필터 전) 이름 — 있으면 그 안에서 먼저 연다. */
+    prefer?: readonly string[] | null,
 ): string[];

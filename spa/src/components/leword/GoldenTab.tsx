@@ -168,10 +168,12 @@ function GoldenTab({ onAnalyze, onPlan }: { onAnalyze: (keyword: string) => void
      * 메울 때는 board.rows(발행 순서) 에서만 가져온다. 화면이 주제·레인으로 거른 목록에서
      * 채우면 필터를 돌려 가며 새 키워드를 여는 구멍이 생긴다.
      */
-    const freeNames = useMemo(
-        () => repairFreeSample(board, board?.freeSample?.keywords),
-        [board],
-    );
+    const freeNames = useMemo(() => {
+        // 처음 열리는 '오늘 확인'(없으면 최근 7일) 목록에서 먼저 연다 — 필터 전 전체라 하루 동안 같은 다섯(2026-10-07).
+        const all = board?.rows || [];
+        const firstSeen = [...selectGoldenDailyRows(all, 'today', now), ...selectGoldenDailyRows(all, 'recent', now)].map((row) => row.keyword);
+        return repairFreeSample(board, board?.freeSample?.keywords, firstSeen);
+    }, [board, now]);
 
     const currentRows = useMemo(() => currentGoldenBriefRows(currentBriefs, now), [currentBriefs, now]);
     const focusSummary = useMemo(() => summarizeGoldenFocus(dailyRows, now), [dailyRows, now]);
