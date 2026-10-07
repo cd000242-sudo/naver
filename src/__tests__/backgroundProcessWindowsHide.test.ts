@@ -38,7 +38,7 @@ describe('background processes do not open Windows consoles', () => {
   // Large Electron entry points cannot be imported without launching the app.
   // Check the actual call expressions, excluding member calls such as RegExp.exec.
   it.each([
-    ['src/naverBlogAutomation.ts', 6],
+    ['src/naverBlogAutomation.ts', 2],
     ['src/browserSessionManager.ts', 1],
     ['src/image/imageFxGenerator.ts', 6],
     ['src/main/ipc/imageHandlers.ts', 2],

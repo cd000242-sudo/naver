@@ -132,7 +132,7 @@ describe('loginPageNavigationPolicy', () => {
   it('checks delayed post-login URLs conservatively', () => {
     expect(isPostLoginFinalCheckSuccess('https://www.naver.com')).toBe(true);
     expect(isPostLoginFinalCheckSuccess('https://blog.naver.com/leader_248')).toBe(true);
-    expect(isPostLoginFinalCheckSuccess('https://example.com/complete')).toBe(true);
+    expect(isPostLoginFinalCheckSuccess('https://example.com/complete')).toBe(false);
 
     expect(isPostLoginFinalCheckSuccess('https://nid.naver.com/nidlogin.login')).toBe(false);
     expect(isPostLoginFinalCheckSuccess('https://www.naver.com/login/help')).toBe(false);
@@ -208,5 +208,37 @@ describe('loginPageNavigationPolicy', () => {
     expect(isDeviceConfirmBodyText('새로운 기기를 등록하고 계속 진행하세요')).toBe(true);
     expect(isDeviceConfirmBodyText('기기를 등록하면 로그인 알림을 받을 수 있습니다')).toBe(true);
     expect(isDeviceConfirmBodyText('네이버 블로그 글쓰기 화면입니다')).toBe(false);
+  });
+});
+
+
+describe('strict login URL boundaries', () => {
+  it.each([
+    'https://www.naver.com.evil.example/complete',
+    'https://example.com/?next=https://www.naver.com',
+    'https://nid.naver.com.evil.example/nidlogin.login',
+    'https://example.com/nidlogin.login',
+    'http://www.naver.com',
+    'https://www.naver.com:8443',
+    'https://user:password@www.naver.com',
+    'javascript://www.naver.com',
+  ])('never marks a lookalike or unexpected URL as authenticated: %s', url => {
+    expect(resolveLoginPageNavigationUrl(url).isAlreadyLoggedInRedirect).toBe(false);
+    expect(resolvePostLoginProgressUrl(url, 'https://nid.naver.com/nidlogin.login').shouldMarkLoginSuccess).toBe(false);
+    expect(isPostLoginFinalCheckSuccess(url)).toBe(false);
+    expect(shouldInspectLoginPageDom(url)).toBe(false);
+    expect(isLoginChallengeUrl(url)).toBe(false);
+  });
+  it('keeps protection and verification surfaces in place instead of navigating away', () => {
+    for (const url of ['https://nid.naver.com/user2/protect', 'https://nid.naver.com/user2/help/idSafetyRelease', 'https://nid.naver.com/login/ext/verification']) {
+      expect(shouldNavigateToLoginPageFromCurrentUrl(url)).toBe(false);
+      expect(shouldVerifyExistingSessionAfterMissingLoginInput(url)).toBe(false);
+      expect(resolveLoginPageNavigationUrl(url).isAlreadyLoggedInRedirect).toBe(false);
+    }
+  });
+  it('requires NID origin for device confirmations and ignores markers in query text', () => {
+    expect(isDeviceConfirmUrl('https://evil.example/deviceconfirm')).toBe(false);
+    expect(isLoginChallengeUrl('https://nid.naver.com/user2/help/myInfo?next=/protect')).toBe(false);
+    expect(isDeviceConfirmUrl('https://nid.naver.com/user2/help/myInfo?next=/deviceconfirm')).toBe(false);
   });
 });

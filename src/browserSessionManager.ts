@@ -17,6 +17,9 @@ import { getProxyUrl } from './crawler/utils/proxyManager.js';
 import { emitSessionEvent } from './session/sessionEventLogger.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
 import { resolveServerSessionProbeVerdict, SERVER_SESSION_PROBE_URL } from './automation/serverSessionProbePolicy.js';
+import { isLoginChallengeUrl, isNaverSessionLoginUrl, parseNaverSessionUrl } from './automation/loginPageNavigationPolicy.js';
+import { getAccountExecutionGuard, AccountExecutionGuardError, type AccountPauseCode } from './automation/accountExecutionGuard.js';
+import type { ServerSessionProbeVerdict } from './automation/serverSessionProbePolicy.js';
 import { withCleanupTimeout } from './runtime/cleanupTimeout.js';
 
 // ✅ [2026-03-27 FIX] Stealth Plugin — 모든 evasion 모듈 명시적 활성화
@@ -52,17 +55,13 @@ export interface SessionInfo {
     profileDir: string;
     proxyUrl: string | undefined; // ✅ [2026-03-26] 세션 생성 시 사용된 프록시 URL 추적
     // ✅ [v1.4.78] 다중계정 첫 캡차 해제 후 세션 잠금 플래그
-    // true면 keep-alive가 이 세션을 절대 폐기하지 않고, 실패 시 강제 복원 시도
-    // 앱 종료 전까지 이 계정은 재로그인·재캡차 없이 유지됨
+    // true preserves browser ownership until explicit unlock or forced shutdown.
+    // Authentication still requires current server evidence.
     locked: boolean;
     lockedAt: number; // 잠금 마킹 시각
-    // [v1.6.0] keep-alive 연속 실패 카운터 (locked 세션 단일 실패 로그아웃 차단용)
-    // 3회 연속 리다이렉트/실패 시에만 isLoggedIn=false로 전이
+    // Legacy serialized field; idle keepalive is disabled.
     consecutiveKeepaliveFails?: number;
-    // [R7] 실제 발행이 진행 중인 동안만 true — keep-alive ping이 이 세션의 page를
-    // 건드리지 않게 skip 판정에 사용한다. activeAccountId(세션 재사용 시 설정되고
-    // closeSession 전까지 안 풀림)로 skip하던 기존 방식은 발행이 끝나도 영구 skip →
-    // 세션이 서서히 만료 → 재로그인 → 캡차를 유발했다.
+    // Tracks active publishing for UI and lifecycle ownership.
     publishInProgress?: boolean;
 }
 
@@ -77,32 +76,20 @@ class BrowserSessionManager {
 
     // 현재 활성 세션
     private activeAccountId: string | null = null;
+    private readonly serverSessionChecks = new Map<string, Promise<ServerSessionProbeVerdict>>();
+    private readonly expectedBlogIds = new Map<string, string>();
 
     // 프로필 베이스 경로
     private readonly PROFILE_BASE = path.join(os.homedir(), '.naver-blog-automation', 'profiles');
 
-    // ✅ [v1.4.78] 세션 최대 수명 제거 — keep-alive 루프로 무기한 유지
+    // Persist profile ownership without an artificial age-based restart.
     // 이전: 4시간 하드 상한 → 수명 초과 시 재생성 → 사용자 로그인 반복
     // 현재: Number.MAX_SAFE_INTEGER (사실상 앱 종료까지 유지)
     private readonly SESSION_MAX_AGE = Number.MAX_SAFE_INTEGER;
 
-    // ✅ [v1.4.79] Keep-alive 설정 — 18건 결함 교정 후 재설계
-    // 네이버 서버측 쿠키 TTL이 ~30~60분이므로 15분마다 ping하여 서버측에서 TTL을 리셋
-    // 봇 탐지 회피: 지터 ±5분 확대 + URL 풀 랜덤 선택 + 15% skip (자리비움 시뮬레이션)
-    private readonly KEEPALIVE_INTERVAL_MS = 15 * 60 * 1000; // 15분
-    private readonly KEEPALIVE_JITTER_MS = 5 * 60 * 1000;    // ±5분 (2분→5분 확대)
-    private readonly KEEPALIVE_SKIP_PROB = 0.15;             // 15% 확률 skip
+    // Cancel any legacy idle timer; no periodic network keepalive is scheduled.
     private keepaliveTimer: NodeJS.Timeout | null = null;
     private isPinging = false; // ✅ [v1.4.79] Bug 8, 13 — 종료 race 방지
-
-    // ✅ [v1.4.79] ping URL 풀 (R-01 — 단일 URL 고정 반복 → AuthGR 탐지 리스크)
-    //   로그인 필수 API를 포함하여 서버가 NID_SES TTL을 실제로 갱신하도록 강제
-    private readonly KEEPALIVE_URL_POOL = [
-        'https://www.naver.com/',
-        'https://blog.naver.com/',
-        'https://nid.naver.com/user2/api/bascls/token', // 인증 필수 — TTL 리셋 확실
-        'https://mail.naver.com/v2/',
-    ];
 
     // ✅ [2026-03-26] isLoggedIn 캐시 TTL
     private readonly LOGIN_CACHE_TTL = 2 * 60 * 60 * 1000; // 2시간
@@ -130,6 +117,12 @@ class BrowserSessionManager {
      * ✅ [2026-03-26] 프록시 URL 정규화 — "", null, undefined를 모두 undefined로 통일
      * 비교 시 falsy 값 차이로 인한 오탐 방지
      */
+    /** Keep existing profile keys stable while matching account IDs case-insensitively. */
+    private resolveSessionAccountId(accountId: string): string {
+        const normalized = accountId.trim().toLowerCase();
+        return [...this.sessions.keys()].find(key => key.trim().toLowerCase() === normalized) || accountId.trim();
+    }
+
     private normalizeProxyUrl(url: string | null | undefined): string | undefined {
         if (!url || url.trim() === '') return undefined;
         return url.trim();
@@ -138,12 +131,13 @@ class BrowserSessionManager {
     /**
      * Stage 2: Attempt to reconnect a disconnected session.
      * Retries up to RECONNECT_MAX_RETRIES times with RECONNECT_RETRY_DELAY_MS gap.
-     * Stage 3 functional ping (page.goto about:blank) verifies renderer health after reconnect.
+     * A bounded read of document.readyState verifies renderer health without navigation.
      * Returns true when the session is confirmed usable, false after all retries fail.
      */
     private async attemptReconnect(accountId: string): Promise<boolean> {
+        accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
-        if (!session) return false;
+        if (!session || getAccountExecutionGuard().getStatus(accountId).paused) return false;
 
         for (let attempt = 1; attempt <= this.RECONNECT_MAX_RETRIES; attempt++) {
             console.log(`[BrowserSessionManager] reconnect attempt ${attempt}/${this.RECONNECT_MAX_RETRIES} for ${accountId.substring(0, 3)}***`);
@@ -161,7 +155,10 @@ class BrowserSessionManager {
 
             // Stage 3: Page-level functional ping — confirms renderer is alive
             try {
-                await session.page.goto('about:blank', { timeout: 3000, waitUntil: 'domcontentloaded' });
+                if (getAccountExecutionGuard().getStatus(accountId).paused || this.sessions.get(accountId) !== session) return false;
+                if (session.page.isClosed()) return false;
+                await withCleanupTimeout(() => session.page.evaluate(() => document.readyState), 3000, 'renderer-health');
+                if (getAccountExecutionGuard().getStatus(accountId).paused || this.sessions.get(accountId) !== session || session.page.isClosed()) return false;
                 console.log(`[BrowserSessionManager] page ping passed on attempt ${attempt} for ${accountId.substring(0, 3)}***`);
                 return true;
             } catch {
@@ -256,7 +253,9 @@ class BrowserSessionManager {
     /**
      * 세션 가져오기 또는 생성
      */
-    async getOrCreateSession(accountId: string, headless: boolean = false, accountProxyUrl?: string): Promise<SessionInfo> {
+    async getOrCreateSession(accountId: string, headless: boolean = false, accountProxyUrl?: string, options: { userInitiated?: boolean } = {}): Promise<SessionInfo> {
+        accountId = this.resolveSessionAccountId(accountId);
+        if (!options.userInitiated) getAccountExecutionGuard().assertAllowed(accountId);
         // ✅ [2026-05-26 v2.10.377 SPEC-NAVER-PROTECTION-2026 P1 Fix 1.4]
         //   sticky proxy 매핑 — env PROXY_POOL_URLS 설정 시 accountId hash 기반 deterministic 선택.
         //   같은 계정 = 항상 같은 proxy 회선 (다계정 격리 + lifetime 안정성).
@@ -495,14 +494,7 @@ class BrowserSessionManager {
 
         const page = await browser.newPage();
 
-        // ✅ [v2.11.144] 패스키(WebAuthn) OS 프롬프트 차단 — "Windows 보안" 모달은 페이지 밖이라
-        //   Puppeteer가 닫을 수 없고 WebAuthn timeout으로도 안 닫힌다(실측). 로그인 진입 전에 건다.
-        try {
-            const { disablePlatformWebAuthn } = await import('./automation/webauthnGuard.js');
-            await disablePlatformWebAuthn(page);
-        } catch (e) {
-            console.warn('[BrowserSessionManager] 패스키 차단 적용 실패 (무시):', (e as Error).message);
-        }
+        // User-managed authentication keeps native passkeys and second-factor choices available.
 
         // ✅ [v1.4.54] 진단 버퍼 연결 — 실패 시 자동 덤프용 console/network 수집
         try {
@@ -628,21 +620,14 @@ class BrowserSessionManager {
         //   userDataDir만으로는 session cookie(expires=-1)가 브라우저 재시작 시 소실되므로
         //   sessionPersistence의 JSON 백업에서 복원 시도 (실패해도 무시, 다음 loginToNaver에서 처리)
         try {
+            if (options.userInitiated) throw new Error('manual-profile-only');
             const { restoreCookies } = await import('./sessionPersistence.js');
             const restored = await restoreCookies(page, accountId);
             if (restored) {
                 console.log(`[BrowserSessionManager] 🔄 ${accountId.substring(0, 3)}*** 저장된 쿠키 복원 (앱 재시작 연속성)`);
-                // [v1.6.0] 쿠키 복원 성공 시 isLoggedIn=true 동기화 + auto-lock
-                //   이전: restoreCookies만 호출하고 isLoggedIn=false 유지 → 다음 발행 시 재로그인 강제 유도
-                //   수정: 복원된 쿠키 기준으로 logged-in 상태 가정, ensureServerSession이 실측 검증
-                sessionInfo.isLoggedIn = true;
-                sessionInfo.loginVerifiedAt = Date.now();
-                if (!sessionInfo.locked) {
-                    sessionInfo.locked = true;
-                    sessionInfo.lockedAt = Date.now();
-                    console.log(`[BrowserSessionManager] 🔒 ${accountId.substring(0, 3)}*** 쿠키 복원 기반 auto-lock (앱 종료까지 유지)`);
-                }
-                emitSessionEvent('login', accountId, sessionInfo.createdAt);
+                // Restored cookies are credentials, not proof of a currently authenticated editor.
+                sessionInfo.isLoggedIn = false;
+                sessionInfo.loginVerifiedAt = 0;
             }
         } catch (restoreErr) {
             // 저장된 쿠키 없음 or 복원 실패 — 무시 (loginToNaver에서 수동 로그인 유도)
@@ -712,6 +697,7 @@ class BrowserSessionManager {
      * 로그인 상태 업데이트
      */
     setLoggedIn(accountId: string, isLoggedIn: boolean): void {
+        accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
         if (session) {
             session.isLoggedIn = isLoggedIn;
@@ -737,11 +723,12 @@ class BrowserSessionManager {
     /**
      * ✅ [v1.4.78] 세션 잠금 — 명시적 호출용 (다중계정 첫 로그인 완료 후)
      * 잠금된 세션은:
-     *   - keep-alive가 절대 폐기하지 않음
-     *   - SESSION_MAX_AGE 무시
-     *   - ping 실패해도 삭제 대신 복원 시도
+     *   - Ordinary cleanup preserves this browser.
+     *   - SESSION_MAX_AGE does not cause a locked browser restart.
+     *   - This lock is not authentication evidence.
      */
     lockSession(accountId: string): void {
+        accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
         if (session && !session.locked) {
             session.locked = true;
@@ -752,10 +739,11 @@ class BrowserSessionManager {
 
     /**
      * [R7] 발행 진행 상태 마킹 — 발행 시작 시 true, 종료(성공/실패/취소) 시 false.
-     * keep-alive ping은 publishInProgress=true인 세션만 skip한다. 반드시 finally에서
-     * false로 풀어야 keep-alive가 재개되어 세션이 살아있고 캡차가 안 뜬다.
+     * Clear the flag in finally so account controls reflect the actual running task.
+     * No idle network requests are started by this flag.
      */
     markPublishing(accountId: string, inProgress: boolean): void {
+        accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
         if (session) {
             session.publishInProgress = inProgress;
@@ -767,6 +755,7 @@ class BrowserSessionManager {
      * 잠금 해제 (재로그인 필요 시)
      */
     unlockSession(accountId: string): void {
+        accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
         if (session?.locked) {
             session.locked = false;
@@ -779,6 +768,7 @@ class BrowserSessionManager {
      * 세션 잠금 상태 조회 (다중계정 로직에서 재로그인 필요 여부 판정용)
      */
     isSessionLocked(accountId: string): boolean {
+        accountId = this.resolveSessionAccountId(accountId);
         return this.sessions.get(accountId)?.locked === true;
     }
 
@@ -788,6 +778,7 @@ class BrowserSessionManager {
      * 프록시가 실제로 Chrome에 적용되었는지 100% 확인 (검증 API와 Chrome 설정의 불일치 방지)
      */
     async detectSessionPublicIp(accountId: string): Promise<string | null> {
+        accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
         if (!session || !session.browser.connected) return null;
         const page = session.page;
@@ -852,71 +843,137 @@ class BrowserSessionManager {
         throw new Error(msg);
     }
 
-    /**
-     * ✅ [v1.4.79] Bug 3, 11 — 발행 직전 서버 세션 실측 검증 gate
-     * locked=true라도 이 함수는 무조건 실제 HTTP 호출로 서버 세션 유효성 확인
-     * 반환값: true = 발행 진행 가능, false = 재로그인 필요
-     *
-     * 사용: 발행 직전 `if (!await browserSessionManager.ensureServerSession(id)) await this.loginToNaver()`
-     */
-    async ensureServerSession(accountId: string): Promise<boolean> {
+    /** 명시적인 사용자 동작에서만 호출한다. 보호 화면은 이동시키지 않는다. */
+    async openForUser(accountId: string): Promise<void> {
+        accountId = this.resolveSessionAccountId(accountId);
+        return getAccountExecutionGuard().runUserActionExclusive(accountId, async () => {
+        let session = this.sessions.get(accountId);
+        if (!session?.browser.connected || session.page.isClosed()) session = await this.getOrCreateSession(accountId, false, undefined, { userInitiated: true });
+        await session.page.bringToFront();
+        const current = session.page.url();
+        if (isLoginChallengeUrl(current) || isNaverSessionLoginUrl(current)) return;
+        // Opening account controls must not discard an existing blog draft.
+        try { const url = new URL(current); if (url.protocol === 'https:' && ['blog.naver.com', 'm.blog.naver.com'].includes(url.hostname) && !url.username && !url.password && !url.port) return; } catch { /* A new blank page can navigate to login. */ }
+        // An explicit user action may open login; automatic jobs never do so.
+        await session.page.goto('https://nid.naver.com/nidlogin.login', { waitUntil: 'domcontentloaded', timeout: 30000 });
+        });
+    }
+
+    async verifyAccountForUser(accountId: string): Promise<ServerSessionProbeVerdict> {
+        accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
-        if (!session || !session.browser.connected) return false;
-
-        const page = session.page;
-        if (!page || page.isClosed()) return false;
-
+        if (!session?.browser.connected || session.page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-unavailable' };
+        const current = session.page.url();
+        if (isLoginChallengeUrl(current) || isNaverSessionLoginUrl(current)) return this.inspectServerSessionState(accountId);
         try {
-            // 실제 네이버 에디터 접근으로 서버 세션 유효성 확인
-            // (2026-09-30: 에디터 이동과 같은 GoBlogWrite.naver 를 조회 — 로그아웃이면 nidlogin 으로
-            //  302, 로그인이면 에디터 200. blogId 없는 PostWriteForm.naver 는 로그아웃 404 만 실측됐고
-            //  로그인 2xx 는 한 번도 관측되지 않아 매 발행 비밀번호 로그인을 부르고 있었다)
-            const serverCheck = await page.evaluate(async (probeUrl: string, timeoutMs: number) => {
+            // First inspect the current page: a ready editor may contain an unsaved draft.
+            const existing = await this.inspectServerSessionState(accountId);
+            const currentSurface = parseNaverSessionUrl(current);
+            const canOpenEditor = current === 'about:blank' || Boolean(currentSurface && ['www.naver.com', 'naver.com'].includes(currentSurface.hostname));
+            if (!canOpenEditor || !['unknown', 'unavailable'].includes(existing.status) || existing.reason === 'account-identity-unverified' || existing.reason === 'session-changed') return existing;
+            if (this.sessions.get(accountId) !== session || session.page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-changed' };
+            // Only explicit resume may advance an unverified non-editor to the editor.
+            await session.page.goto(SERVER_SESSION_PROBE_URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
+            if (isLoginChallengeUrl(session.page.url()) || isNaverSessionLoginUrl(session.page.url())) return this.inspectServerSessionState(accountId);
+            await session.page.waitForFunction(() => {
+                const docs: Document[] = [document];
+                for (const frame of Array.from(document.querySelectorAll('iframe'))) { try { if (frame.contentDocument) docs.push(frame.contentDocument); } catch { /* Other origin */ } }
+                return docs.some(doc => !!doc.querySelector('.se-main-container, .se-documentTitle'));
+            }, { timeout: 15000 });
+            return this.inspectServerSessionState(accountId);
+        } catch { return { ok: false, status: 'unavailable', reason: 'editor-unavailable' }; }
+    }
+
+    setExpectedBlogId(accountId: string, blogId: string): void {
+        if (!/^[A-Za-z0-9_-]{1,100}$/.test(blogId)) throw new AccountExecutionGuardError('ACCOUNT_MISMATCH');
+        this.expectedBlogIds.set(accountId.trim().toLowerCase(), blogId.toLowerCase());
+    }
+
+    async resumeAccount(accountId: string): Promise<boolean> {
+        accountId = this.resolveSessionAccountId(accountId);
+        return getAccountExecutionGuard().resume(accountId, async () => (await this.verifyAccountForUser(accountId)).status === 'ready');
+    }
+
+    async ensureServerSessionState(accountId: string): Promise<ServerSessionProbeVerdict> {
+        accountId = this.resolveSessionAccountId(accountId);
+        getAccountExecutionGuard().assertAllowed(accountId);
+        return this.inspectServerSessionState(accountId);
+    }
+
+    /** 재개 버튼의 검증에도 사용한다. 페이지 이동이나 자동 로그인은 하지 않는다. */
+    inspectServerSessionState(accountId: string): Promise<ServerSessionProbeVerdict> {
+        accountId = this.resolveSessionAccountId(accountId);
+        const pending = this.serverSessionChecks.get(accountId);
+        if (pending) return pending;
+        const next = this.probeServerSessionState(accountId).finally(() => {
+            if (this.serverSessionChecks.get(accountId) === next) this.serverSessionChecks.delete(accountId);
+        });
+        this.serverSessionChecks.set(accountId, next);
+        return next;
+    }
+
+    private async probeServerSessionState(accountId: string): Promise<ServerSessionProbeVerdict> {
+        accountId = this.resolveSessionAccountId(accountId);
+        const session = this.sessions.get(accountId);
+        if (!session || !session.browser.connected || !session.page || session.page.isClosed()) return { ok: false, status: 'unavailable', reason: 'session-unavailable' };
+        const page = session.page;
+        const expectedIdentity = this.expectedBlogIds.get(accountId.trim().toLowerCase()) || accountId.trim().toLowerCase();
+        try {
+            const pendingCheck = page.evaluate(async (probeUrl: string, timeoutMs: number) => {
+                const read = (doc: Document, finalUrl: string) => {
+                    const hasEditor = !!doc.querySelector('.se-main-container') && !!doc.querySelector('.se-documentTitle, .se-text-paragraph[contenteditable], .se-component-content[contenteditable]');
+                    const hasLoginForm = !!doc.querySelector('input[type="password"]') && !!doc.querySelector('input[name="id"], input#id');
+                    const bodyText = hasEditor ? '' : (doc.body?.textContent || '').slice(0, 12000);
+                    const hasChallenge = !!doc.querySelector('input[name="captcha"], input#captcha') || /자동입력 방지|보안문자를 입력|본인 확인이 필요/.test(bodyText);
+                    const hasProtection = /보호조치가 적용|보호조치 해제|이용이 제한/.test(bodyText);
+                    // 에디터 응답의 공식 URL blogId 매개변수만 계정 증거로 사용한다.
+                    let accountIdentity: string | undefined;
+                    try { const url = new URL(finalUrl); if (['blog.naver.com', 'm.blog.naver.com'].includes(url.hostname)) { accountIdentity = url.searchParams.get('blogId') || undefined; if (!accountIdentity && hasEditor && url.searchParams.get('Redirect') === 'Write') accountIdentity = /^\/([A-Za-z0-9_-]+)$/.exec(url.pathname)?.[1]; } } catch { /* unknown */ }
+                    return { finalUrl, status: 200, hasEditor, hasLoginForm, hasChallenge, hasProtection, bodyText, accountIdentity };
+                };
+                const current = read(document, location.href);
+                if (current.hasChallenge || current.hasProtection || current.hasLoginForm) return current;
+                for (const frame of Array.from(document.querySelectorAll('iframe'))) {
+                    try {
+                        if (!frame.contentDocument || !frame.contentWindow) continue;
+                        const nested = read(frame.contentDocument, frame.contentWindow.location.href);
+                        if (nested.hasProtection || nested.hasChallenge || nested.hasLoginForm || nested.hasEditor) return nested;
+                    } catch { /* Different origin cannot establish account identity. */ }
+                }
+                if (current.hasEditor) return current;
                 const controller = new AbortController();
                 const timer = setTimeout(() => controller.abort(), timeoutMs);
                 try {
-                    const res = await fetch(probeUrl, {
-                        method: 'GET',
-                        credentials: 'include',
-                        cache: 'no-store',
-                        redirect: 'follow',
-                        signal: controller.signal,
-                    });
-                    // Raw transport facts only; the verdict lives in serverSessionProbePolicy.
-                    // (2026-09-29: a logged-out session gets HTTP 404 here with NO login
-                    // redirect, so "not nidlogin" alone let dead cookies through.)
-                    return {
-                        finalUrl: res.url,
-                        status: res.status,
-                    };
-                } catch (err) {
-                    const e = err as Error;
-                    return {
-                        error: e?.name === 'AbortError' ? 'timeout' : (e?.message || 'fetch_failed'),
-                    };
-                } finally {
-                    clearTimeout(timer);
-                }
+                    const res = await fetch(probeUrl, { method: 'GET', credentials: 'include', cache: 'no-store', redirect: 'follow', signal: controller.signal });
+                    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+                    return { ...read(doc, res.url), status: res.status };
+                } catch { return { error: 'probe-unavailable' }; }
+                finally { clearTimeout(timer); }
             }, SERVER_SESSION_PROBE_URL, this.SERVER_SESSION_CHECK_TIMEOUT_MS);
-
+            // The page's AbortController cannot bound a stalled renderer/CDP connection.
+            const serverCheck = await withCleanupTimeout(() => pendingCheck, this.SERVER_SESSION_CHECK_TIMEOUT_MS + 1000, 'server-session-probe');
+            if (this.sessions.get(accountId) !== session || session.page !== page || page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-changed' };
             const verdict = resolveServerSessionProbeVerdict(serverCheck);
             if (verdict.ok) {
-                console.log(`[BrowserSessionManager] ✅ ${accountId.substring(0, 3)}*** 발행 직전 서버 검증 통과(${verdict.reason})`);
-                session.loginVerifiedAt = Date.now();
-                session.isLoggedIn = true;
-                return true;
-            } else {
-                console.warn(`[BrowserSessionManager] 🚨 ${accountId.substring(0, 3)}*** 발행 직전 서버 검증 실패(${verdict.reason}) — 재로그인 필요`);
-                session.loginVerifiedAt = 0;
-                session.isLoggedIn = false;
-                // [v1.6.0] locked=false 제거 — 잠긴 세션은 앱 종료까지 파괴 금지 계약 유지
-                // 재로그인은 호출부에서 기존 브라우저 그대로 수행해야 함 (새 창/탭 금지)
-                return false;
-            }
-        } catch (err) {
-            console.warn(`[BrowserSessionManager] ⚠️ ensureServerSession 예외: ${(err as Error).message}`);
-            return false;
-        }
+                if (!('accountIdentity' in serverCheck) || !serverCheck.accountIdentity || serverCheck.accountIdentity.toLowerCase() !== expectedIdentity) {
+                    session.isLoggedIn = false; session.loginVerifiedAt = 0;
+                    return { ok: false, status: 'unknown', reason: 'account-identity-unverified' };
+                }
+                session.isLoggedIn = true; session.loginVerifiedAt = Date.now();
+            } else { session.isLoggedIn = false; session.loginVerifiedAt = 0; }
+            return verdict;
+        } catch { return { ok: false, status: 'unavailable', reason: 'probe-unavailable' }; }
+    }
+
+    /** 이전 boolean 호출부도 false→자동 로그인으로 진행하지 못하도록 중단 오류를 던진다. */
+    async ensureServerSession(accountId: string): Promise<boolean> {
+        accountId = this.resolveSessionAccountId(accountId);
+        const state = await this.ensureServerSessionState(accountId);
+        if (state.status === 'ready') { getAccountExecutionGuard().assertAllowed(accountId); return true; }
+        const codes: Record<string, AccountPauseCode> = { 'login-required': 'LOGIN_REQUIRED', challenge: 'LOGIN_CHALLENGE', protected: 'ACCOUNT_PROTECTED', unavailable: 'NETWORK_WAIT', unknown: 'NETWORK_WAIT' };
+        const code = state.reason === 'account-identity-unverified' ? 'ACCOUNT_MISMATCH' : codes[state.status] || 'NETWORK_WAIT';
+        getAccountExecutionGuard().pause(accountId, code);
+        throw new AccountExecutionGuardError(code);
     }
 
     /**
@@ -924,16 +981,14 @@ class BrowserSessionManager {
      * 로그인 성공 후 LOGIN_CACHE_TTL(30분) 이내면 true, 초과하면 false 반환하여 재검증 트리거
      */
     isAccountLoggedIn(accountId: string): boolean {
+        accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
         if (!session?.isLoggedIn) return false;
 
-        // ✅ [v1.4.78] 잠긴 세션은 TTL 체크 생략 — 다중계정 첫 로그인 후 재검증 불필요
-        //    keep-alive가 15분마다 서버 TTL 리셋 + 쿠키 자동 갱신 중이므로 안전
-        if (session.locked) {
-            return true;
-        }
+        // Ownership locks preserve the browser; they never prove authentication.
+        if (getAccountExecutionGuard().getStatus(accountId).paused) return false;
 
-        // 잠기지 않은 세션: TTL 방어 (기존 로직)
+        // Cached authentication always expires, including locked sessions.
         const elapsed = Date.now() - session.loginVerifiedAt;
         if (elapsed > this.LOGIN_CACHE_TTL) {
             console.log(`[BrowserSessionManager] ⏰ 로그인 캐시 TTL 초과 (${Math.floor(elapsed / 60000)}분 경과), 재검증 필요`);
@@ -947,6 +1002,7 @@ class BrowserSessionManager {
      * SW_HIDE 상태에서 복원 + CDP 최대화
      */
     async restoreWindow(accountId: string): Promise<void> {
+        accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
         if (!session?.browser) return;
         try {
@@ -981,6 +1037,8 @@ class BrowserSessionManager {
      * ✅ [v1.4.79] Bug D1 — force=false(기본)면 잠긴 세션 보호. 앱 종료/재로그인은 force=true 사용
      */
     async closeSession(accountId: string, force: boolean = false): Promise<boolean> {
+        accountId = this.resolveSessionAccountId(accountId);
+        if (!force && getAccountExecutionGuard().getStatus(accountId).paused) return false;
         const session = this.sessions.get(accountId);
         if (!session) return true;
         if (session.locked && !force) {
@@ -1015,216 +1073,14 @@ class BrowserSessionManager {
         }
     }
 
-    /**
-     * ✅ [v1.4.78] Keep-alive 시작 — 15분 간격으로 모든 활성 세션에 네이버 ping
-     * 네이버 서버측 쿠키 TTL 리셋 → 앱이 실행 중인 동안 세션 무기한 유지
-     * 이미 시작된 경우 중복 실행 방지 (싱글톤 타이머)
-     */
-    startKeepalive(): void {
-        if (this.keepaliveTimer) {
-            console.log('[BrowserSessionManager] ⏰ Keep-alive 이미 실행 중');
-            return;
-        }
-        // ✅ [v1.4.79] Bug 2 — try/finally로 루프 영구 사망 방지
-        const scheduleNext = () => {
-            const jitter = (Math.random() * 2 - 1) * this.KEEPALIVE_JITTER_MS;
-            const interval = this.KEEPALIVE_INTERVAL_MS + jitter;
-            this.keepaliveTimer = setTimeout(async () => {
-                try {
-                    await this.runKeepalivePing();
-                } catch (err) {
-                    console.error('[BrowserSessionManager] ⚠️ runKeepalivePing 예외 (루프 유지):', (err as Error).message);
-                } finally {
-                    // 항상 재스케줄 — 타이머 루프가 절대 끊기지 않도록
-                    scheduleNext();
-                }
-            }, interval);
-        };
-        console.log(`[BrowserSessionManager] ⏰ Keep-alive 시작 (${this.KEEPALIVE_INTERVAL_MS / 60000}분 ± ${this.KEEPALIVE_JITTER_MS / 60000}분, skip ${this.KEEPALIVE_SKIP_PROB * 100}%)`);
-        scheduleNext();
-    }
-
-    /**
-     * Keep-alive 중지 (앱 종료 시 호출)
-     */
+    /** 유휴 세션을 유지하려는 네트워크 요청은 수행하지 않는다. 업무 시에만 검사한다. */
+    startKeepalive(): void { this.stopKeepalive(); }
     stopKeepalive(): void {
-        if (this.keepaliveTimer) {
-            clearTimeout(this.keepaliveTimer);
-            this.keepaliveTimer = null;
-            console.log('[BrowserSessionManager] ⏰ Keep-alive 중지');
-        }
+        if (this.keepaliveTimer) clearTimeout(this.keepaliveTimer);
+        this.keepaliveTimer = null;
     }
-
-    /**
-     * ✅ [v1.4.79] Keep-alive ping — 18건 결함 교정 후 재설계
-     * - URL 풀에서 랜덤 선택 (Bug R-01 — 단일 URL 패턴 탐지 회피)
-     * - 15% 확률로 skip (자리비움 시뮬레이션)
-     * - 리다이렉트 감지: 응답 URL이 nidlogin.login이면 세션 만료로 판정 (Bug D2)
-     * - ping 실패 시 page.isClosed() 이면 newPage()로 교체 (Bug S4-renderer-dead)
-     * - activeAccountId와 동일한 계정은 ping skip (Bug 10 — 발행 중 경쟁)
-     * - restoreCookies 반환값 확인 (Bug 4)
-     * - 복원 성공 시 isLoggedIn=true 동기화 (Bug 6)
-     * - isPinging flag로 종료 race 방지 (Bug 8, 13)
-     */
-    private async runKeepalivePing(): Promise<void> {
-        this.isPinging = true;
-        try {
-            // 15% 확률 skip (자리비움 시뮬레이션 — 봇 탐지 회피)
-            if (Math.random() < this.KEEPALIVE_SKIP_PROB) {
-                console.log('[BrowserSessionManager] 💤 Keep-alive skip (자리비움 시뮬레이션)');
-                return;
-            }
-
-            const accountIds = Array.from(this.sessions.keys());
-            if (accountIds.length === 0) {
-                console.log('[BrowserSessionManager] 🔍 활성 세션 없음, keep-alive skip');
-                return;
-            }
-            console.log(`[BrowserSessionManager] 🔄 Keep-alive ping 시작 (${accountIds.length}개 세션)`);
-
-            // ✅ [v1.4.79] 계정 수에 비례 세션 간 간격 (IP당 집중 요청 방지)
-            const minGapMs = Math.max(5000, accountIds.length * 3000);
-            const maxGapMs = minGapMs + 10000;
-
-            for (const accountId of accountIds) {
-                const session = this.sessions.get(accountId);
-                if (!session || !session.browser.connected) continue;
-
-                // [R7] Skip ONLY while a publish is actually running on this
-                // session (page is in use). The old `accountId === activeAccountId`
-                // check stuck after publishing finished, so keep-alive never
-                // pinged the single account again → server session expired →
-                // re-login → CAPTCHA. Now idle sessions get pinged and stay alive.
-                if (session.publishInProgress) {
-                    console.log(`[BrowserSessionManager] ⏭️ ${accountId.substring(0, 3)}*** 발행 중 — ping skip`);
-                    continue;
-                }
-
-                await this.pingSingleSession(session);
-
-                // 세션 간 랜덤 간격
-                await new Promise(r => setTimeout(r, minGapMs + Math.random() * (maxGapMs - minGapMs)));
-            }
-        } finally {
-            this.isPinging = false;
-        }
-    }
-
-    /**
-     * ✅ [v1.4.79] 단일 세션 ping — URL 풀 + 리다이렉트 감지 + page 재생성 + 쿠키 검증
-     */
-    private async pingSingleSession(session: SessionInfo): Promise<void> {
-        const accountId = session.accountId;
-        const pingUrl = this.KEEPALIVE_URL_POOL[Math.floor(Math.random() * this.KEEPALIVE_URL_POOL.length)];
-        const pingStartedAt = Date.now();
-
-        try {
-            let page = session.page;
-            // ✅ [v1.4.79] Bug S4 — page 죽어있으면 새 page 생성
-            if (!page || page.isClosed()) {
-                console.log(`[BrowserSessionManager] 🔄 ${accountId.substring(0, 3)}*** page 재생성`);
-                page = await session.browser.newPage();
-                session.page = page;
-            }
-
-            // ✅ [v1.4.79] Bug D2 — 리다이렉트 감지로 세션 만료 판정
-            const redirected = await page.evaluate(async (url: string) => {
-                try {
-                    const res = await fetch(url, {
-                        method: 'GET',
-                        credentials: 'include',
-                        cache: 'no-store',
-                        redirect: 'follow',
-                    });
-                    // 응답 최종 URL이 로그인 페이지면 세션 만료
-                    return /nidlogin\.login|nid\.naver\.com\/nidlogin/.test(res.url);
-                } catch {
-                    return false;
-                }
-            }, pingUrl);
-
-            session.lastActivity = Date.now();
-            const elapsed = Date.now() - pingStartedAt;
-            const ageMin = Math.floor((Date.now() - session.createdAt) / 60000);
-
-            if (redirected) {
-                // [v1.6.0] locked 세션은 일시적 네트워크/AuthGR 일시 차단으로 리다이렉트 나올 수 있음
-                //   → 단일 리다이렉트로 isLoggedIn=false 전이 금지, 3회 연속 시에만 전이
-                //   → 쿠키 복원 1회 시도로 서버 TTL 회복을 노려봄
-                const fails = (session.consecutiveKeepaliveFails ?? 0) + 1;
-                session.consecutiveKeepaliveFails = fails;
-                console.warn(`[BrowserSessionManager] 🚨 ${accountId.substring(0, 3)}*** 서버 세션 만료 감지 (로그인 페이지 리다이렉트, ${fails}/3)`);
-                emitSessionEvent('expire', accountId, session.createdAt);
-                session.loginVerifiedAt = 0;
-
-                if (session.locked) {
-                    // locked 세션: 즉시 쿠키 복원 시도로 TTL 회복
-                    try {
-                        const { restoreCookies } = await import('./sessionPersistence.js');
-                        const restored = await restoreCookies(session.page, accountId);
-                        if (restored) {
-                            console.log(`[BrowserSessionManager] ✅ ${accountId.substring(0, 3)}*** 리다이렉트 감지 → 쿠키 복원 성공 (locked 유지)`);
-                            session.loginVerifiedAt = Date.now();
-                            session.isLoggedIn = true;
-                            session.consecutiveKeepaliveFails = 0;
-                            emitSessionEvent('reconnect_ok', accountId, session.createdAt);
-                            return;
-                        }
-                    } catch (restoreErr) {
-                        console.warn(`[BrowserSessionManager] ⚠️ 쿠키 복원 예외 (무시): ${(restoreErr as Error).message}`);
-                    }
-                    if (fails < 3) {
-                        console.log(`[BrowserSessionManager] ⏳ ${accountId.substring(0, 3)}*** locked 세션 — isLoggedIn 유지 (연속 실패 ${fails}/3)`);
-                        return;
-                    }
-                }
-
-                session.isLoggedIn = false; // 3회 연속 실패 또는 unlocked 세션만 로그아웃 전이
-                return;
-            }
-
-            // 성공 시 연속 실패 카운터 리셋
-            session.consecutiveKeepaliveFails = 0;
-            console.log(`[BrowserSessionManager] 💓 ${accountId.substring(0, 3)}*** keep-alive OK (${elapsed}ms, 수명 ${ageMin}분, ping=${new URL(pingUrl).hostname})`);
-            emitSessionEvent('keepalive_ok', accountId, session.createdAt, { elapsedMs: elapsed, ageMin, pingHost: new URL(pingUrl).hostname });
-
-            // ✅ 쿠키 저장 (앱 재시작 복원용)
-            try {
-                const { saveCookies } = await import('./sessionPersistence.js');
-                await saveCookies(session.page, accountId);
-            } catch (saveErr) {
-                console.warn(`[BrowserSessionManager] ⚠️ 쿠키 저장 실패 (무시): ${(saveErr as Error).message}`);
-            }
-        } catch (err) {
-            console.warn(`[BrowserSessionManager] ⚠️ ${accountId.substring(0, 3)}*** keep-alive 실패: ${(err as Error).message}`);
-            emitSessionEvent('keepalive_fail', accountId, session.createdAt, { error: (err as Error).message });
-            // ✅ [v1.4.79] Bug D1 — 잠긴 세션은 절대 closeSession 호출 금지
-            //    복원 시도 + 반환값 확인 (Bug 4) + isLoggedIn 동기화 (Bug 6)
-            if (session.locked && session.isLoggedIn) {
-                console.log(`[BrowserSessionManager] 🔒 ${accountId.substring(0, 3)}*** 잠긴 세션 — 쿠키 복원 시도`);
-                try {
-                    const { restoreCookies } = await import('./sessionPersistence.js');
-                    const restored = await restoreCookies(session.page, accountId);
-                    if (restored) {
-                        session.loginVerifiedAt = Date.now();
-                        session.isLoggedIn = true; // ✅ Bug 6 — 동기화
-                        console.log(`[BrowserSessionManager] ✅ ${accountId.substring(0, 3)}*** 쿠키 복원 성공`);
-                        emitSessionEvent('reconnect_ok', accountId, session.createdAt);
-                    } else {
-                        // ✅ Bug 4 — 반환값이 false면 실제로 복원 안 됨 → 재검증 필요
-                        session.loginVerifiedAt = 0;
-                        console.warn(`[BrowserSessionManager] ⚠️ ${accountId.substring(0, 3)}*** 쿠키 복원 빈 결과 — 재발행 시 재로그인 필요`);
-                        emitSessionEvent('reconnect_fail', accountId, session.createdAt, { reason: 'empty_restore' });
-                    }
-                } catch (restoreErr) {
-                    console.warn(`[BrowserSessionManager] ⚠️ 쿠키 복원 실패: ${(restoreErr as Error).message}`);
-                    session.loginVerifiedAt = 0;
-                }
-            } else {
-                session.loginVerifiedAt = 0;
-            }
-        }
-    }
+    private async runKeepalivePing(): Promise<void> { /* 비업무 요청 없음 */ }
+    private async pingSingleSession(_session: SessionInfo): Promise<void> { /* 쿠키 복원·페이지 재생성 없음 */ }
 
     /**
      * 모든 세션 종료 (앱 종료 시)

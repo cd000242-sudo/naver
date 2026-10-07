@@ -12,6 +12,7 @@ export class AutomationError extends Error {
   readonly category: ErrorCategory;
   readonly retryable: boolean;
   readonly fatal: boolean;
+  readonly userActionRequired: boolean;
   readonly userMessage: string;
   readonly context: Record<string, unknown>;
   readonly timestamp: string;
@@ -32,6 +33,7 @@ export class AutomationError extends Error {
     this.category = props.category;
     this.retryable = props.retryable;
     this.fatal = props.fatal;
+    this.userActionRequired = ['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'].includes(code);
     this.userMessage = props.userMessage;
     this.context = { ...context };
     this.timestamp = new Date().toISOString();
@@ -55,7 +57,9 @@ export class AutomationError extends Error {
       return error;
     }
 
-    const code = classifyErrorMessage(error.message);
+    const typedCode = (error as Error & { code?: unknown }).code;
+    const code = typeof typedCode === 'string' && Object.values(ErrorCode).includes(typedCode as ErrorCode)
+      ? typedCode as ErrorCode : classifyErrorMessage(error.message);
     return new AutomationError(
       code ?? fallbackCode,
       error.message,
@@ -76,6 +80,7 @@ export class AutomationError extends Error {
       userMessage: this.userMessage,
       retryable: this.retryable,
       fatal: this.fatal,
+      userActionRequired: this.userActionRequired,
       context: this.context,
       timestamp: this.timestamp,
       stack: this.stack,
@@ -86,6 +91,7 @@ export class AutomationError extends Error {
 // ── 메시지 기반 에러 분류 (레거시 호환) ──
 
 const MESSAGE_PATTERNS: ReadonlyArray<readonly [RegExp, ErrorCode]> = [
+  [/보호\s*조치|계정.*보호|비정상적인\s*활동|account.*protect/i, ErrorCode.ACCOUNT_PROTECTED],
   // NETWORK
   [/timeout|timed?\s*out/i, ErrorCode.NETWORK_TIMEOUT],
   [/navigation/i, ErrorCode.NETWORK_NAVIGATION_FAILED],

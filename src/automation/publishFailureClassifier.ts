@@ -1,4 +1,9 @@
 export type PublishFailureCode =
+  | 'LOGIN_REQUIRED'
+  | 'ACCOUNT_PROTECTED'
+  | 'NETWORK_WAIT'
+  | 'ACCOUNT_MISMATCH'
+  | 'ACCOUNT_BUSY'
   | 'USER_CANCELLED'
   | 'PUBLISH_OUTCOME_UNKNOWN'
   | 'BROWSER_CLOSED'
@@ -31,7 +36,15 @@ function includesAny(value: string, patterns: readonly string[]): boolean {
 }
 
 export function classifyPublishFailure(input: unknown): PublishFailureClassification {
+  const code = input && typeof input === 'object' ? (input as { code?: unknown }).code : undefined;
+  if (typeof code === 'string' && ['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN', 'ACCOUNT_BUSY'].includes(code)) {
+    return { code: code as PublishFailureCode, retryable: false, userActionRequired: code !== 'ACCOUNT_BUSY' };
+  }
   const message = toMessage(input);
+  const serializedCode = /\[(LOGIN_REQUIRED|LOGIN_CHALLENGE|ACCOUNT_PROTECTED|NETWORK_WAIT|ACCOUNT_MISMATCH|PUBLISH_OUTCOME_UNKNOWN|ACCOUNT_BUSY)\]/.exec(message)?.[1];
+  if (serializedCode) return { code: serializedCode as PublishFailureCode, retryable: false, userActionRequired: serializedCode !== 'ACCOUNT_BUSY' };
+
+  if (/보호\s*조치|계정.*보호|비정상적인\s*활동|account.*protect/i.test(message)) return { code: 'ACCOUNT_PROTECTED', retryable: false, userActionRequired: true };
 
   if (includesAny(message, [
     '[content-quality-v3-publish-handoff]',

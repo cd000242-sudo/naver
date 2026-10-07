@@ -1,16 +1,3 @@
-/**
- * humanBehaviorGuard.test.ts — Phase B (P5 행동 패턴) 회귀 가드
- *
- * SPEC P5: 로그인 직후 마우스 정지 = 봇 시그니처.
- * 사람은 무의식적으로 1~3회 미세 움직임 발생.
- * performIdleMouseShake() 헬퍼로 가변 jitter 적용.
- *
- * 검증:
- * - humanBehavior 모듈 export 존재
- * - naverBlogAutomation의 로그인 후 흐름에서 호출됨
- * - 함수가 try/catch 패턴으로 예외 흡수 (발행 흐름 무영향)
- */
-
 import { describe, it, expect } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -45,28 +32,21 @@ describe('P5 humanBehavior 모듈 존재 보호 (v2.10.381)', () => {
   });
 });
 
-describe('P5 naverBlogAutomation 호출지 보호', () => {
-  it('naverBlogAutomation.ts가 humanBehavior import', () => {
-    const src = readSrc('src/naverBlogAutomation.ts');
-    expect(src).toMatch(/from\s+['"]\.\/automation\/humanBehavior(\.js)?['"]/);
+describe('automatic publishing does not synthesize idle human activity', () => {
+  it('does not import idle-motion behavior into publishing', () => {
+    const source = readSrc('src/naverBlogAutomation.ts');
+    expect(/from\s+['"]\.\/automation\/humanBehavior(?:\.js)?['"]/.test(source)).toBe(false);
   });
-
-  it('naverBlogAutomation.ts가 performIdleMouseShake 호출', () => {
-    const src = readSrc('src/naverBlogAutomation.ts');
-    expect(src).toMatch(/performIdleMouseShake\s*\(/);
+  it('does not execute idle mouse movement or warmup browsing', () => {
+    const source = readSrc('src/naverBlogAutomation.ts');
+    expect(/performIdleMouseShake\s*\(|warmupSession\s*\(/.test(source)).toBe(false);
   });
-
-  it('호출이 예외 흡수 패턴 (try/catch 또는 .catch)', () => {
-    const src = readSrc('src/naverBlogAutomation.ts');
-    // performIdleMouseShake 호출 라인이 .catch 또는 try 블록 내부
-    const lines = src.split('\n');
-    const callIdx = lines.findIndex((l) => /performIdleMouseShake\s*\(/.test(l));
-    expect(callIdx).toBeGreaterThanOrEqual(0);
-    const callLine = lines[callIdx];
-    const hasCatch = /\.catch\(/.test(callLine);
-    // 또는 try 블록 내부 (이전 50줄 내 'try {' + 이후 50줄 내 'catch')
-    const surround = lines.slice(Math.max(0, callIdx - 50), Math.min(lines.length, callIdx + 50)).join('\n');
-    const inTryBlock = /try\s*\{[\s\S]*performIdleMouseShake[\s\S]*\}\s*catch/m.test(surround);
-    expect(hasCatch || inTryBlock).toBe(true);
+  it('checks the persistent account stop state at automation cancellation checkpoints', () => {
+    const source = readSrc('src/naverBlogAutomation.ts');
+    const start = source.indexOf('private ensureNotCancelled(');
+    expect(start).toBeGreaterThan(-1);
+    const checkpoint = source.slice(start, start + 1600);
+    expect(checkpoint.includes('assertAllowed(this.options.naverId)')).toBe(true);
+    expect(checkpoint.includes('isLoginChallengeUrl')).toBe(true);
   });
 });

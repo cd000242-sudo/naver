@@ -373,6 +373,10 @@ try {
       filePath: path.join(projectRoot, 'dist', 'content', 'keywordTitlePrefixPolicy.js'),
     },
     {
+      label: 'automation/publishFailureClassifier.js',
+      filePath: path.join(projectRoot, 'dist', 'automation', 'publishFailureClassifier.js'),
+    },
+    {
       // [2026-08-26] 붙여넣기 줄바꿈 미리보기 — fullAutoFlow 가 값으로 가져온다.
       //   미리보기와 발행 결과가 갈리지 않도록 같은 함수를 쓴다.
       label: 'automation/richTextPaste.js',
@@ -545,6 +549,7 @@ try {
     'thumbnailGenerator.js',
     'intervalJitter.js',  // ✅ [2026-05-23 A5] 발행 간격 jitter 유틸 (multiAccountManager보다 먼저 로드 필수)
     'featureLockModal.js',  // ✅ [2026-05-25 v2.10.353] Pro 기능 잠금 모달 (continuousPublishing/multiAccountManager보다 먼저 로드 필수 — window 글로벌 등록)
+    'accountSafetyControls.js',
     'multiAccountManager.js',
     // ✅ [이슈 끝판왕 수집] 저작권 동의 모달 + 수집 모드 (headingImageGen보다 먼저 로드 — declare 참조)
     'issueCollectConsent.js',

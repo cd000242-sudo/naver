@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Restored from dist/renderer/modules/fullAutoFlow.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
+import { classifyPublishFailure } from '../../automation/publishFailureClassifier.js';
 import { buildPastePreviewHtml } from '../../automation/richTextPaste.js';
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
 import { fillSemiAutoFields, readSummaryTableOptionFromUi } from './contentGeneration.js';
@@ -3366,6 +3367,11 @@ function isPostContentAppliedPublishError(errorMsg) {
     return message.includes('POST_CONTENT_APPLIED') || message.includes('POST_TAIL_INCOMPLETE');
 }
 function blockPostContentAppliedPublishRetry(errorMsg) {
+    const failure = classifyPublishFailure(errorMsg);
+    if (!failure.retryable) {
+        appendLog('작업을 중단했습니다. 계정 상태와 발행 결과를 확인한 후 직접 재개해주세요.');
+        return true;
+    }
     if (!isPostContentAppliedPublishError(errorMsg)) {
         return false;
     }

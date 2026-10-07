@@ -33,6 +33,13 @@ export enum ErrorCategory {
 // ── 에러 코드 ──
 
 export enum ErrorCode {
+  LOGIN_REQUIRED = 'LOGIN_REQUIRED',
+  LOGIN_CHALLENGE = 'LOGIN_CHALLENGE',
+  ACCOUNT_PROTECTED = 'ACCOUNT_PROTECTED',
+  NETWORK_WAIT = 'NETWORK_WAIT',
+  ACCOUNT_MISMATCH = 'ACCOUNT_MISMATCH',
+  PUBLISH_OUTCOME_UNKNOWN = 'PUBLISH_OUTCOME_UNKNOWN',
+  ACCOUNT_BUSY = 'ACCOUNT_BUSY',
   // --- NETWORK ---
   NETWORK_TIMEOUT = 'NETWORK.TIMEOUT',
   NETWORK_NAVIGATION_FAILED = 'NETWORK.NAVIGATION_FAILED',
@@ -122,6 +129,13 @@ interface ErrorProperties {
 }
 
 const ERROR_PROPERTIES: Readonly<Record<ErrorCode, ErrorProperties>> = {
+  [ErrorCode.LOGIN_REQUIRED]: { retryable: false, fatal: true, category: ErrorCategory.AUTH, userMessage: '계정 작업을 중단했습니다. 상태 확인 후 직접 재개해 주세요.' },
+  [ErrorCode.LOGIN_CHALLENGE]: { retryable: false, fatal: true, category: ErrorCategory.AUTH, userMessage: '계정 작업을 중단했습니다. 상태 확인 후 직접 재개해 주세요.' },
+  [ErrorCode.ACCOUNT_PROTECTED]: { retryable: false, fatal: true, category: ErrorCategory.AUTH, userMessage: '계정 작업을 중단했습니다. 상태 확인 후 직접 재개해 주세요.' },
+  [ErrorCode.NETWORK_WAIT]: { retryable: false, fatal: true, category: ErrorCategory.NETWORK, userMessage: '계정 작업을 중단했습니다. 상태 확인 후 직접 재개해 주세요.' },
+  [ErrorCode.ACCOUNT_MISMATCH]: { retryable: false, fatal: true, category: ErrorCategory.AUTH, userMessage: '계정 작업을 중단했습니다. 상태 확인 후 직접 재개해 주세요.' },
+  [ErrorCode.PUBLISH_OUTCOME_UNKNOWN]: { retryable: false, fatal: true, category: ErrorCategory.PUBLISH, userMessage: '계정 작업을 중단했습니다. 상태 확인 후 직접 재개해 주세요.' },
+  [ErrorCode.ACCOUNT_BUSY]: { retryable: false, fatal: true, category: ErrorCategory.AUTH, userMessage: '이 계정의 작업이 이미 실행 중입니다.' },
   // NETWORK — 대부분 재시도 가능
   [ErrorCode.NETWORK_TIMEOUT]: { retryable: true, fatal: false, category: ErrorCategory.NETWORK, userMessage: '네트워크 응답 시간 초과' },
   [ErrorCode.NETWORK_NAVIGATION_FAILED]: { retryable: true, fatal: false, category: ErrorCategory.NETWORK, userMessage: '페이지 이동 실패' },

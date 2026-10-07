@@ -1097,6 +1097,8 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('account:setActive', accountId),
   getActiveBlogAccount: (): Promise<{ success: boolean; account?: any; message?: string }> =>
     ipcRenderer.invoke('account:getActive'),
+  accountSafety: (accountId: string, action: string, version?: number, outcome?: string, token?: string) =>
+    ipcRenderer.invoke('account:safety', accountId, action, version, outcome, token),
   getAllBlogAccounts: (): Promise<{ success: boolean; accounts?: any[]; message?: string }> =>
     ipcRenderer.invoke('account:getAll'),
   getNextBlogAccount: (): Promise<{ success: boolean; account?: any; message?: string }> =>

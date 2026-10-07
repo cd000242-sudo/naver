@@ -1,3 +1,4 @@
+import { waitForScheduleConfirmation } from './scheduleConfirmation.js';
 /**
  * publishHelpers.ts - 발행/카테고리/예약 관련 함수
  * naverBlogAutomation.ts에서 추출됨
@@ -1495,24 +1496,24 @@ export async function publishScheduled(
       throw new Error('확인 버튼을 찾을 수 없습니다. 스크린샷을 확인하세요.');
     }
 
-    // Irreversible boundary: a click may reach Naver even if the browser
-    // context closes before Puppeteer receives the acknowledgement.
+    // Only visible system notices are evidence; article body text is excluded.
+    const readConfirmation = async () => {
+      const notices: string[] = [];
+      for (const context of [page, frame]) {
+        const texts = await context.evaluate(() => Array.from(document.querySelectorAll('[role="alert"], [role="status"], [class*="toast"], [class*="Toast"]'))
+          .filter(el => !el.closest('.se-main-container, .se-component') && el.getBoundingClientRect().width > 0 && el.getBoundingClientRect().height > 0 && getComputedStyle(el).visibility !== 'hidden')
+          .map(el => (el.textContent || '').trim()).filter(Boolean));
+        notices.push(...texts);
+      }
+      return { url: page.url(), notices };
+    };
+    const beforeNotices = (await readConfirmation()).notices;
+    // A click may reach Naver even if Puppeteer loses its acknowledgement.
     await beforeIrreversibleCommit?.();
     confirmationAttempted = true;
     await confirmButton.click();
-    await self.delay(2000);
-
-    self.log(`✅ 블로그 글이 예약발행되었습니다: ${scheduleDate}`);
-
-    // 예약 완료 후 URL 로깅
-    try {
-      const pageUrl = page.url();
-      if (pageUrl && /blog\.naver\.com/i.test(pageUrl)) {
-        self.log(`POST_URL_SCHEDULED: ${pageUrl} @ ${scheduleDate}`);
-      } else {
-        self.log(`POST_URL_SCHEDULED: (예약 완료, URL 미확정) @ ${scheduleDate}`);
-      }
-    } catch { }
+    await waitForScheduleConfirmation(readConfirmation, beforeNotices, ms => self.delay(ms));
+    self.log(`✅ 예약 완료 안내를 확인했습니다: ${scheduleDate}`);
 
   } catch (error: any) {
     self.log(`❌ 예약발행 실패: ${(error as Error).message}`);

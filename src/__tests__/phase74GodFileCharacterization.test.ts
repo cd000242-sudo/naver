@@ -134,7 +134,7 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
       'isDeviceConfirmBodyText(text)',
       'GoBlogWrite.naver',
       'PostWriteForm',
-      'manual login detected on blog domain; moving to write editor',
+      "getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED')",
       'findEditorTitleInputElement(frame, page, 60000',
       'shouldRetryEditorReadiness(snapshot)',
       '에디터 프레임은 열렸지만 내부 문서가 비어 있습니다',

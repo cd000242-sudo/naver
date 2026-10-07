@@ -1,34 +1,29 @@
-/**
- * loginStallGuard.test.ts
- *
- * 자동 로그인 클릭이 실제 챌린지 없이 응답하지 않는 경우를
- * 10분 보안인증 대기와 분리한다. 사용자는 이 케이스를 "멍때림"으로 느낀다.
- */
-import { describe, it, expect } from 'vitest';
-import * as fs from 'fs';
-import * as path from 'path';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { mkdtempSync, rmSync, readFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { AccountExecutionGuard } from '../automation/accountExecutionGuard';
 
-const FILE = path.resolve(__dirname, '../naverBlogAutomation.ts');
-const code = fs.readFileSync(FILE, 'utf-8');
+describe('manual authentication stop replaces background login waiting', () => {
+  const dirs: string[] = [];
+  const guard = () => { const storageDir = mkdtempSync(join(tmpdir(), 'login-stall-')); dirs.push(storageDir); return new AccountExecutionGuard({ storageDir }); };
+  afterEach(() => { for (const dir of dirs.splice(0)) rmSync(dir, { recursive: true, force: true }); });
 
-describe('자동 로그인 generic stall guard', () => {
-  it('generic login stall timeout은 90초로 제한한다', () => {
-    expect(code).toMatch(/GENERIC_LOGIN_STALL_TIMEOUT\s*=\s*90000/);
+  it.each(['LOGIN_REQUIRED', 'LOGIN_CHALLENGE'] as const)('%s immediately rejects work without running its callback', async (code) => {
+    const state = guard(); const work = vi.fn(); state.pause('account', code);
+    await expect(state.runExclusive('account', work)).rejects.toMatchObject({ code, retryable: false });
+    expect(work).not.toHaveBeenCalled();
   });
-
-  it('genericLoginStallDetected 상태 플래그가 존재한다', () => {
-    expect(code).toMatch(/let\s+genericLoginStallDetected\s*=\s*false/);
-    expect(code).toMatch(/genericLoginStallDetected\s*=\s*true/);
+  it('failed manual verification keeps the account stopped and does not start jobs', async () => {
+    const state = guard(); state.pause('account', 'LOGIN_CHALLENGE');
+    expect(await state.resume('account', async () => false)).toBe(false);
+    expect(state.getStatus('account')).toMatchObject({ paused: true, code: 'LOGIN_CHALLENGE', busy: false });
   });
-
-  it('캡차/2FA가 아닌 로그인 페이지 정체는 명확한 오류로 종료된다', () => {
-    expect(code).toMatch(/stuckDuration\s*>\s*GENERIC_LOGIN_STALL_TIMEOUT/);
-    expect(code).toMatch(/자동 로그인 응답 없음/);
-  });
-
-  it('캡차와 2FA는 기존 10분 보안인증 대기 경로를 보존한다', () => {
-    expect(code).toMatch(/const\s+LOGIN_TOTAL_TIMEOUT\s*=\s*600000/);
-    expect(code).toMatch(/캡차\/보안문자 감지/);
-    expect(code).toMatch(/2단계 인증 승인 대기/);
+  it('automatic login path only verifies a session and has no credential typing or navigation', () => {
+    const source = readFileSync('src/naverBlogAutomation.ts', 'utf8');
+    const login = source.slice(source.indexOf('async loginToNaver()'), source.indexOf('async navigateToBlogWrite()'));
+    expect(login.includes('ensureServerSession(this.options.naverId)')).toBe(true);
+    expect(login.includes("new AccountExecutionGuardError('LOGIN_REQUIRED'")).toBe(true);
+    expect(/\.type\(|\.click\(|\.goto\(|waitForNavigation|naverPassword|LOGIN_TOTAL_TIMEOUT/.test(login)).toBe(false);
   });
 });

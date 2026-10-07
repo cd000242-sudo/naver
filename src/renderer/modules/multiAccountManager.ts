@@ -1,6 +1,11 @@
 // @ts-nocheck
 // Restored from dist/renderer/modules/multiAccountManager.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
+import { classifyPublishFailure } from '../../automation/publishFailureClassifier.js';
+import { installAccountSafetyControls } from './accountSafetyControls.js';
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => installAccountSafetyControls(), { once: true });
+else installAccountSafetyControls();
+
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
 import { readSummaryTableOptionFromUi } from './contentGeneration.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
@@ -3104,6 +3109,7 @@ async function initMultiAccountPublishModal() {
         intervalSeconds = Math.min(intervalSeconds, 86400);
         isPublishing = true;
         stopRequested = false;
+        let safetyStopped = false;
         window.stopFullAutoPublish = false;
         const startBtn = document.getElementById('ma-start-publish-btn');
         const startBtnOriginalHtml = startBtn?.innerHTML || '';
@@ -4108,7 +4114,8 @@ async function initMultiAccountPublishModal() {
                         }
                     }
                     else {
-                        throw new Error(result.results?.[0]?.message || '발행 실패');
+                        const failedResult = result.results?.find(item => !item.success) || result;
+                        throw Object.assign(new Error(failedResult.message || '발행 실패'), { code: failedResult.failureCode });
                     }
                     if (stopRequested || window.stopFullAutoPublish) {
                         break;
@@ -4119,8 +4126,18 @@ async function initMultiAccountPublishModal() {
                         addMALog(`⚠️ ${queueItem.accountName}: 발행은 성공했지만 후처리에 실패했습니다. ${error.message}`, 'warning');
                     }
                     else {
+                        const failure = classifyPublishFailure(error);
+                        if (['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'].includes(failure.code)) {
+                            stopRequested = true;
+                            safetyStopped = true;
+                            queueItem.failureCode = failure.code;
+                            addMALog('⏹️ 계정 상태 확인이 필요하여 대기열을 중단했습니다. 계정 관리에서 확인 후 직접 재개해주세요.', 'warning');
+                        }
                         const stopped = stopRequested || window.stopFullAutoPublish;
-                        if (publishStarted) {
+                        if (safetyStopped && failure.code !== 'PUBLISH_OUTCOME_UNKNOWN') {
+                            queueItem.pipelineStatus = 'failed';
+                        }
+                        else if (publishStarted) {
                             queueItem.pipelineStatus = resolveInterruptedPublishStatus(true, 'failed');
                             addMALog(`⚠️ ${queueItem.accountName}: 발행 결과를 확정하지 못해 자동 재시도에서 제외합니다. 네이버에서 확인해주세요.`, 'warning');
                         }
@@ -4183,7 +4200,7 @@ async function initMultiAccountPublishModal() {
             renderQueue();
             updateMAProgress(totalItems, totalItems, '완료', wasStopped ? '⏹️ 발행이 중지되었습니다.' : '🎉 모든 발행 완료!');
             addMALog(wasStopped ? '⏹️ 발행이 중지되었습니다.' : `🎉 모든 발행 완료! (성공: ${totalSuccess}, 실패: ${totalFail})`, wasStopped ? 'warning' : 'success');
-            try {
+            if (!safetyStopped) try {
                 console.log('[FullAuto] 🧹 발행 완료 → 전체 상태 초기화 시작...');
                 if (typeof window.resetAfterPublish === 'function') {
                     window.resetAfterPublish();

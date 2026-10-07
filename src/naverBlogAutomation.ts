@@ -1,5 +1,9 @@
 // ✅ puppeteer-extra + stealth plugin 적용 (봇 감지 완벽 우회)
 import puppeteer from 'puppeteer-extra';
+import { randomUUID } from 'node:crypto';
+import { getPublicationCommitJournal } from './automation/publicationCommitJournal.js';
+import { getAccountExecutionGuard, AccountExecutionGuardError, ACCOUNT_PAUSE_CODES, type AccountPauseCode } from './automation/accountExecutionGuard.js';
+import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
 // ✅ [2026-05-25 v2.10.357] StealthPlugin import 제거 — browserSessionManager.ts에서 단일 등록
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { Browser, Dialog, Frame, Page, ElementHandle, KeyInput } from 'puppeteer';
@@ -19,17 +23,14 @@ import {
 import { extractProsConsWithGemini } from './image/geminiTableExtractor.js';
 import { browserSessionManager, type SessionInfo } from './browserSessionManager.js';
 // [v2.10.113] 명시적 쿠키 파일 저장/복원 — userDataDir 보조 안전망 (캡차 반복 차단)
-import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromFile, warmupSession } from './sessionPersistence.js';
+import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromFile } from './sessionPersistence.js';
 import { buildNaverAutomationProfile, hashAutomationAccountId, type NaverAutomationProfile } from './automation/accountProfilePolicy.js';
 import { detectChromeFullVersion } from './automation/chromeVersionDetector.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
-import { performIdleMouseShake } from './automation/humanBehavior.js';
 import { readImageProvenance, resetImageProvenanceLedger, resolveAiMarkTarget } from './automation/imageProvenance.js';
-import { disablePlatformWebAuthn } from './automation/webauthnGuard.js';
 // [v2.10.285] 봇 감지 backoff + 로그인 자연 대기 (계정별 자동 보호)
-import { recordBotBackoff, getBotBackoff, isAccountBackedOff, computePostLoginHumanDelayMs } from './utils/botBackoff.js';
 import { withRetry, findWithFallback, clickWithRetry, navigateWithRetry, isRetryableError } from './errorRecovery.js';
-import { createGhostCursor, safeClick, safeType, safeClickInFrame, waitRandom, randomMouseMovement, type GhostCursor } from './ghostCursorHelper.js';
+import { createGhostCursor, safeClick, safeType, safeClickInFrame, waitRandom, type GhostCursor } from './ghostCursorHelper.js';
 import * as imageHelpers from './automation/imageHelpers';
 import * as publishHelpers from './automation/publishHelpers';
 import * as ctaHelpers from './automation/ctaHelpers';
@@ -91,7 +92,6 @@ import {
   formatPipelineUrlLog,
   PUBLISH_PIPELINE_LOG_MESSAGES,
 } from './automation/publishPipelineLogPolicy.js';
-import { createPostPublishReviewPlan } from './automation/postPublishReviewPlan.js';
 import { resolvePostRunBrowserPolicy } from './automation/postRunBrowserPolicy.js';
 import { resolvePostRunPageHealthDecision } from './automation/postRunPageHealthPolicy.js';
 import { resolveStalePageCleanupPlan } from './automation/postRunStalePagePolicy.js';
@@ -292,6 +292,7 @@ async function smartTypeWithAutoHighlight(
 // puppeteer.use(StealthPlugin());  // 제거: 이중 등록 회피 (browserSessionManager.ts:39에서 단일 등록)
 
 export interface AutomationOptions {
+  getExpectedBlogId?: (naverId: string) => string;
   naverId: string;
   naverPassword: string;
   loginUrl?: string;
@@ -962,301 +963,6 @@ export class NaverBlogAutomation {
     return isDeviceConfirmBodyText(text);
   }
 
-  // ✅ [2026-03-07] 기기 등록 화면 자동 처리 — "등록" 클릭
-  // 검증된 실제 DOM 구조 (Playwright 스냅샷 2026-03-07):
-  //   URL: nid.naver.com/login/ext/deviceConfirm
-  //   <fieldset> (group "새로운 기기 등록")
-  //     <a href="#">등록</a>      ← 첫 번째 링크
-  //     <a href="#">등록안함</a>   ← 두 번째 링크
-  //   </fieldset>
-  //   ※ ID 셀렉터 없음 (#new.save, #new.dontsave 존재하지 않음)
-  // 계정별 독립 프로필(userDataDir) 사용 → 기기 등록이 안전
-  // "등록안함" 시 미등록 기기로 남아 보호조치 발동 위험 ↑
-  private async handleDeviceConfirmPage(page: Page): Promise<boolean> {
-    this.log('📱 기기 등록 페이지 감지 → 자동으로 "등록" 클릭 (신뢰 기기 등록)...');
-    try {
-      // 페이지 로드 대기 (링크가 렌더링될 때까지)
-      await page.waitForSelector('fieldset a, a', { timeout: 5000 }).catch(() => null);
-      await this.delay(500);
-
-      // ═══════════════════════════════════════════════════
-      // 1단계: 텍스트 정확 매칭 (가장 신뢰도 높음)
-      // 실제 DOM: <a href="#">등록</a> (텍스트가 정확히 "등록")
-      // ═══════════════════════════════════════════════════
-      const clicked = await page.evaluate(() => {
-        const allLinks = document.querySelectorAll('a, button');
-        // 1차: 정확한 '등록' 매칭 (텍스트가 오직 "등록"인 경우)
-        for (const el of allLinks) {
-          const text = (el.textContent || '').trim();
-          if (text === '등록') {
-            (el as HTMLElement).click();
-            return 'exact';
-          }
-        }
-        // 2차: '등록하기', '기기 등록' 등 변형 (안함/안 함 제외)
-        for (const el of allLinks) {
-          const text = (el.textContent || '').trim();
-          if ((text === '기기 등록' || text === '기기등록' || text === '등록하기') &&
-            !text.includes('안함') && !text.includes('안 함')) {
-            (el as HTMLElement).click();
-            return 'variant';
-          }
-        }
-        return null;
-      }).catch(() => null);
-
-      if (clicked) {
-        this.log(`✅ "등록" 클릭 성공! (텍스트 매칭: ${clicked})`);
-        await this.delay(2000);
-        await this.removeBareUrlTextAfterLinkCard().catch(error => {
-          this.log(`   ⚠️ 링크카드 URL 원문 정리 실패 (계속 진행): ${(error as Error).message}`);
-        });
-        return true;
-      }
-
-      // ═══════════════════════════════════════════════════
-      // 2단계: fieldset 내 첫 번째 <a> 클릭
-      // 검증된 구조: 등록=첫 번째, 등록안함=두 번째
-      // ═══════════════════════════════════════════════════
-      const fieldsetClick = await page.evaluate(() => {
-        const fieldset = document.querySelector('fieldset');
-        if (fieldset) {
-          const links = fieldset.querySelectorAll('a');
-          if (links.length >= 2) {
-            const firstText = (links[0].textContent || '').trim();
-            if (!firstText.includes('안함') && !firstText.includes('안 함')) {
-              (links[0] as HTMLElement).click();
-              return `fieldset-first: "${firstText}"`;
-            }
-          }
-          // 단일 링크인 경우
-          if (links.length === 1) {
-            (links[0] as HTMLElement).click();
-            return `fieldset-only: "${(links[0].textContent || '').trim()}"`;
-          }
-        }
-        return null;
-      }).catch(() => null);
-
-      if (fieldsetClick) {
-        this.log(`✅ "등록" 클릭 성공! (${fieldsetClick})`);
-        await this.delay(2000);
-        return true;
-      }
-
-      // ═══════════════════════════════════════════════════
-      // 3단계: 최후 폴백 — "등록" 포함 + "안함" 미포함 링크
-      // ═══════════════════════════════════════════════════
-      const lastResort = await page.evaluate(() => {
-        const allLinks = document.querySelectorAll('a');
-        for (const el of allLinks) {
-          const text = (el.textContent || '').trim();
-          if (text.includes('등록') && !text.includes('안함') && !text.includes('안 함') &&
-            !text.includes('하지') && text.length < 15) {
-            (el as HTMLElement).click();
-            return `partial: "${text}"`;
-          }
-        }
-        return null;
-      }).catch(() => null);
-
-      if (lastResort) {
-        this.log(`✅ "등록" 클릭 성공! (폴백: ${lastResort})`);
-        await this.delay(2000);
-        return true;
-      }
-
-      this.log('⚠️ "등록" 버튼을 찾지 못했습니다. 수동으로 클릭해주세요.');
-      const debugInfo = await page.evaluate(() => {
-        const els = document.querySelectorAll('a, button');
-        return Array.from(els).map(el => `[${el.tagName}] "${(el.textContent || '').trim()}" id=${el.id}`).join(' | ');
-      }).catch(() => '');
-      this.log(`   🔍 페이지 요소: ${debugInfo}`);
-      return false;
-    } catch (err) {
-      this.log(`⚠️ 기기 등록 화면 처리 실패: ${(err as Error).message}`);
-      return false;
-    }
-  }
-
-  // ✅ [2026-02-09] 2단계 인증 페이지 감지 및 자동 처리
-  // - "이 브라우저는 2단계 인증 없이 로그인합니다" 체크박스 자동 체크
-  // - 사용자가 네이버 앱에서 승인할 때까지 대기
-  private async handleTwoFactorAuthPage(page: Page, alreadyNotified: boolean = false): Promise<boolean> {
-    try {
-      // 2단계 인증 페이지 여부 확인 (페이지 텍스트 기반)
-      const is2FA = await page.evaluate(() => {
-        const bodyText = document.body.innerText || '';
-        return (bodyText.includes('2단계 인증') &&
-          (bodyText.includes('알림 발송') || bodyText.includes('인증요청') ||
-            bodyText.includes('인증 알림') || bodyText.includes('승인하시겠습니까')));
-      }).catch(() => false);
-
-      if (!is2FA) return false;
-
-      if (!alreadyNotified) {
-        this.log('');
-        this.log('🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐');
-        this.log('📱  2단계 인증 페이지 감지!');
-        this.log('📲  네이버 앱에서 인증을 승인해주세요!');
-        this.log('⏳  승인 후 자동으로 진행됩니다.');
-        this.log('🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐🔐');
-        this.log('');
-
-        // ✅ "이 브라우저는 2단계 인증 없이 로그인합니다" 체크박스 자동 체크
-        const checkedSkip = await page.evaluate(() => {
-          // 방법 1: 표준 checkbox
-          const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-          for (const cb of checkboxes) {
-            const parent = cb.closest('label') || cb.parentElement;
-            const nearbyText = parent?.textContent || '';
-            if (nearbyText.includes('2단계') && nearbyText.includes('없이')) {
-              if (!(cb as HTMLInputElement).checked) {
-                (cb as HTMLInputElement).click();
-              }
-              return 'checkbox';
-            }
-          }
-          // 방법 2: 텍스트 기반 클릭 (커스텀 체크박스)
-          const allEls = document.querySelectorAll('label, span, div, a, button, p');
-          for (const el of allEls) {
-            const text = (el.textContent || '').trim();
-            if (text.includes('2단계') && text.includes('없이') && text.includes('로그인')) {
-              const innerCb = el.querySelector('input[type="checkbox"]');
-              if (innerCb) {
-                if (!(innerCb as HTMLInputElement).checked) {
-                  (innerCb as HTMLInputElement).click();
-                }
-                return 'inner-checkbox';
-              }
-              (el as HTMLElement).click();
-              return 'element-click';
-            }
-          }
-          return null;
-        }).catch(() => null);
-
-        if (checkedSkip) {
-          this.log(`✅ "이 브라우저는 2단계 인증 없이 로그인" 자동 체크! (${checkedSkip})`);
-        } else {
-          this.log('ℹ️ 체크박스를 찾지 못했습니다 (이미 체크됐거나 없는 페이지)');
-        }
-
-        // Windows 소리 알림 (3번)
-        try {
-          const { exec } = await import('child_process');
-          exec('powershell -c "1..3 | ForEach-Object { (New-Object Media.SoundPlayer \\\"C:\\Windows\\Media\\notify.wav\\\").PlaySync(); Start-Sleep -Milliseconds 500 }"', { windowsHide: true });
-        } catch { /* ignore */ }
-
-        // progressCallback으로 UI 알림
-        if (this.progressCallback) {
-          this.progressCallback(0, 100, '📱 2단계 인증! 네이버 앱에서 승인해주세요!');
-        }
-      }
-
-      return true;
-    } catch (err) {
-      this.log(`⚠️ 2단계 인증 처리 중 오류: ${(err as Error).message}`);
-      return false;
-    }
-  }
-
-  // ✅ 수동 로그인 대기 함수 (페이지 이동 없이 현재 URL만 확인)
-  private async waitForManualLogin(page: Page, maxWaitMs: number = 600000): Promise<void> {
-    const startTime = Date.now();
-    const checkInterval = 2000; // 2초마다 확인
-
-    this.log('');
-    this.log('👀 브라우저 창에서 로그인을 완료해주세요...');
-    this.log('   로그인이 완료되면 자동으로 감지됩니다.');
-    this.log('');
-
-    while (Date.now() - startTime < maxWaitMs) {
-      this.ensureNotCancelled();
-
-      // 현재 페이지 URL만 확인 (페이지 이동 없이!)
-      const currentUrl = page.url();
-
-      // ✅ [2026-02-14] 기기 등록 화면 자동 처리 (URL + 페이지 텍스트 이중 감지)
-      const deviceConfirmDetected = await this.isDeviceConfirmPage(page);
-      const twoFactorDetected = deviceConfirmDetected ? false : await this.handleTwoFactorAuthPage(page);
-      const manualLoginCheckpoint = resolveManualLoginCheckpoint({
-        currentUrl,
-        deviceConfirmDetected,
-        twoFactorDetected,
-      });
-
-      if (manualLoginCheckpoint.action === 'handle-device-confirm') {
-        await this.handleDeviceConfirmPage(page);
-        continue;
-      }
-
-      // ✅ [2026-02-09] 2단계 인증 페이지 자동 처리
-      if (manualLoginCheckpoint.action === 'wait-two-factor') {
-        continue;
-      }
-
-      // 로그인 페이지가 아니고, 블로그 페이지에 도착했으면 성공
-      if (manualLoginCheckpoint.action === 'success' || manualLoginCheckpoint.action === 'navigate-write-editor') {
-        if (manualLoginCheckpoint.action === 'navigate-write-editor') {
-          this.log('[LoginFlow] manual login detected on blog domain; moving to write editor...');
-          try {
-            await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
-              waitUntil: 'domcontentloaded',
-              timeout: NAVER_TIMEOUTS.PAGE_LOAD
-            });
-            await this.delay(2000);
-          } catch (e) {
-            this.log(`[LoginFlow] write editor navigation after manual login failed: ${(e as Error).message}`);
-          }
-        }
-        this.log('');
-        this.log('✅✅✅ 블로그 페이지 도착! 로그인 성공! ✅✅✅');
-        this.log('🎉 이제 자동화를 계속 진행합니다.');
-        this.log('');
-        return;
-      }
-
-      // 네이버 메인이나 다른 페이지로 이동했으면 (로그인 페이지가 아닌 경우)
-      if (manualLoginCheckpoint.action === 'navigate-from-naver-domain') {
-        // 블로그 페이지로 직접 이동 시도
-        this.log('✅ 로그인 감지! 블로그 페이지로 이동합니다...');
-        try {
-          await page.goto('https://blog.naver.com/GoBlogWrite.naver', {
-            waitUntil: 'domcontentloaded',
-            timeout: 15000
-          });
-          await this.delay(2000);
-
-          const newUrl = page.url();
-          if (isManualLoginBlogLandingSuccessful(newUrl)) {
-            this.log('');
-            this.log('✅✅✅ 블로그 페이지 접속 성공! ✅✅✅');
-            this.log('');
-            return;
-          }
-        } catch (e) {
-          // 이동 실패하면 계속 대기
-        }
-      }
-
-      // 남은 시간 표시 (30초마다)
-      const elapsed = Date.now() - startTime;
-      const remaining = maxWaitMs - elapsed;
-      const remainingMin = Math.floor(remaining / 60000);
-      const remainingSec = Math.floor((remaining % 60000) / 1000);
-
-      if (Math.floor(elapsed / 1000) % 30 === 0 && elapsed > 0) {
-        this.log(`⏳ 로그인 대기 중... (남은 시간: ${remainingMin}분 ${remainingSec}초)`);
-        this.log(`   현재 URL: ${currentUrl.substring(0, 60)}...`);
-      }
-
-      await this.delay(checkInterval);
-    }
-
-    throw new Error('수동 로그인 시간이 초과되었습니다. (10분)');
-  }
-
   // ✅ [2026-05-25 v2.10.357 P2] 진단용 시작 시각 — 95% 멈춤 위치 추적
   private _runStartMs: number = 0;
 
@@ -1442,6 +1148,11 @@ export class NaverBlogAutomation {
   }
 
   private ensureNotCancelled(): void {
+    const guard = getAccountExecutionGuard();
+    if (this.page && !this.page.isClosed() && isLoginChallengeUrl(this.page.url())) {
+      if (!guard.getStatus(this.options.naverId).paused) guard.pause(this.options.naverId, 'LOGIN_CHALLENGE');
+    }
+    getAccountExecutionGuard().assertAllowed(this.options.naverId);
     if (this.cancelRequested) {
       throw new Error('사용자가 자동화를 취소했습니다.');
     }
@@ -2287,1878 +1998,45 @@ export class NaverBlogAutomation {
     }
   }
 
+  /** Authentication is completed by the user; automatic jobs never submit credentials. */
   async loginToNaver(): Promise<void> {
-    const page = this.ensurePage();
-
     this.ensureNotCancelled();
-
-    // ✅ [v1.4.62] 캐시/쿠키 기반 fast-path 제거 — 거짓 양성 근본 차단
-    //
-    // 기존: isAccountLoggedIn() 캐시 + checkLoginStatus()의 NID_AUT/NID_SES 존재 검사로
-    //       "로그인됨" 판정 → 그러나 쿠키는 브라우저 프로필(userDataDir)에 계속 남아있어
-    //       서버 세션이 만료돼도 true를 반환 → loginToNaver() 조용히 return →
-    //       워밍업 브라우징만 수행한 채 에디터 이동 시 로그인 페이지로 리다이렉트 →
-    //       재시도 루프 → 사용자 체감 "ID/PW 입력도 안 하고 로그인 버튼도 안 누름".
-    //
-    // 수정: 항상 네이버 로그인 페이지로 이동한다. 서버 세션이 유효하면 네이버가
-    //       자동으로 메인/블로그로 리다이렉트 → line 2337 처리기가 이를 감지해 스킵.
-    //       세션이 만료됐으면 nidlogin 페이지가 그대로 뜸 → 정상적으로 ID/PW 입력 진행.
-    //       네비게이션 기반이라 거짓 양성이 구조적으로 불가능하다.
-    //       비용: 정상 로그인 유지 케이스에 1회 HTTP round-trip 추가 (~500ms) — 허용.
-
-    this.log('🔐 네이버 로그인을 시작합니다...');
-    this.log('💡 캡차가 나오면 브라우저에서 직접 해결해주세요!');
-
-    // ✅ [v2.11.144] 로그인 페이지 진입 직전 패스키(WebAuthn) 차단.
-    //   네이버 로그인 페이지는 conditional mediation을 쓰므로 아이디 칸에 포커스만 가도
-    //   "Windows 보안" OS 모달이 뜨고, 그 모달은 페이지 밖이라 자동화가 영구 정지한다.
-    //   세션 매니저를 거치지 않고 만들어진 page(폴백 경로)도 여기서 함께 커버된다.
-    await disablePlatformWebAuthn(page);
-
-    const loginUrl = this.options.loginUrl ?? 'https://nid.naver.com/nidlogin.login';
-
-    this.log('🔄 네이버 로그인 페이지로 이동 중...');
-
-    // 로그인 페이지로 이동 전 현재 URL 확인
-    const currentUrl = page.url();
-    this.log(`   현재 페이지: ${currentUrl}`);
-
-    // 이미 로그인 페이지에 있으면 이동하지 않음
-    if (shouldNavigateToLoginPageFromCurrentUrl(currentUrl)) {
-      // ✅ [2026-06-23] 3→4: 네이버 일시 차단(프록시 미사용 다중계정)은 길게 기다리면 풀리므로
-      //   재시도 기회를 한 번 더 준다. 백오프가 길어 실패 케이스에서만 시간이 늘고 정상 로그인은 영향 없음.
-      const LOGIN_MAX_RETRIES = 4;
-      let loginPageLoaded = false;
-
-      for (let loginAttempt = 1; loginAttempt <= LOGIN_MAX_RETRIES; loginAttempt++) {
-        try {
-          this.log(`🔄 로그인 페이지 접속 시도 ${loginAttempt}/${LOGIN_MAX_RETRIES}...`);
-          const response = await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-
-          // 응답 상태 코드 검사 (407/502/503)
-          const statusCode = response?.status() ?? 0;
-          if (statusCode === 407 || statusCode === 502 || statusCode === 503) {
-            this.log(`🔴 서버 에러 감지 (HTTP ${statusCode})`);
-            if (loginAttempt < LOGIN_MAX_RETRIES) {
-              const waitSec = loginAttempt * 5;
-              this.log(`⏳ ${waitSec}초 후 재시도합니다...`);
-              await this.delay(waitSec * 1000);
-              continue;
-            }
-          }
-
-          // 페이지 본문에서 에러 감지 ("페이지가 작동하지 않습니다", "HTTP ERROR")
-          if (statusCode >= 400 || statusCode === 0) {
-            const bodyText = await page.evaluate(() => document.body?.innerText?.substring(0, 500) || '').catch(() => '');
-            if (bodyText.includes('작동하지 않습니다') || bodyText.includes('HTTP ERROR') ||
-                bodyText.includes('ERR_') || bodyText.includes('프록시') || bodyText.includes('proxy')) {
-              this.log(`🔴 에러 페이지 감지: ${bodyText.substring(0, 100)}`);
-              if (loginAttempt < LOGIN_MAX_RETRIES) {
-                // ✅ [2026-06-23] 프록시 미사용 다중계정에서 "작동하지 않습니다"는 대부분 네이버가
-                //   같은 IP의 짧은 간격 연속 로그인을 일시 차단한 것. 5초 같은 짧은 재시도는 같은
-                //   차단에 다시 걸리므로, 길고 지터를 둔 백오프로 차단이 풀릴 시간을 준다.
-                const backoffSec = loginAttempt * 12 + this.randomInt(0, 8);
-                this.log(`⏳ 네이버 일시 차단 추정 — ${backoffSec}초 대기 후 재시도 (${loginAttempt}/${LOGIN_MAX_RETRIES}). 반복되면 다중계정 발행 간격을 늘려주세요(프록시 미사용 시 예방).`);
-                await this.delay(backoffSec * 1000);
-                continue;
-              }
-            }
-          }
-
-          // 로드 검증
-          const loadedUrl = page.url();
-          const loginPageNavigation = resolveLoginPageNavigationUrl(loadedUrl);
-          if (loginPageNavigation.isLoginPageLoaded) {
-            loginPageLoaded = true;
-            break; // 성공
-          }
-
-          // ✅ [v1.4.62] nidlogin.login으로 이동했지만 다른 URL로 리다이렉트됨
-          // → 네이버가 "이미 로그인됨" 판정하여 referrer/메인으로 튕겨낸 것.
-          // 이는 실패가 아니라 "세션 유효" 신호이므로 즉시 성공 처리.
-          if (loginPageNavigation.isAlreadyLoggedInRedirect) {
-            this.log(`✅ 로그인 페이지 요청이 ${loadedUrl.substring(0, 60)}으로 리다이렉트됨 → 이미 로그인된 상태`);
-            browserSessionManager.setLoggedIn(this.options.naverId, true);
-            return;
-          }
-
-          this.log(`⚠️ 로그인 페이지 로드 실패 (URL: ${loadedUrl})`);
-        } catch (gotoError: any) {
-          const errorMsg = gotoError.message || '';
-          const loginGotoError = classifyLoginGotoError(errorMsg);
-
-          // 프록시 관련 에러 감지 (accountProxyUrl 사용 시에만 의미 있음)
-          if (loginGotoError.isProxyError) {
-            this.log(`🔴 프록시/터널 연결 실패: ${errorMsg.substring(0, 80)}`);
-            // ⚠️ 크롤링 모듈의 전역 프록시 상태를 건드리지 않음 (블로그 자동화와 크롤링은 독립)
-          }
-
-          if (loginGotoError.shouldRetry && loginAttempt < LOGIN_MAX_RETRIES) {
-            const waitSec = loginAttempt * 5;
-            this.log(`⚠️ 네트워크 오류 (${errorMsg.substring(0, 60)})`);
-            this.log(`⏳ ${waitSec}초 후 재시도합니다... (${loginAttempt}/${LOGIN_MAX_RETRIES})`);
-            await this.delay(waitSec * 1000);
-            continue;
-          }
-
-          throw gotoError;
-        }
-      }
-
-      if (!loginPageLoaded) {
-        this.log(`⚠️ ${LOGIN_MAX_RETRIES}회 시도 후에도 실패, 최종 시도...`);
-        await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-      }
-
-      // ✅ [중요] 인간적인 관찰 타임 (화면 로드 후 잠깐 멈추거나 마우스 흔들기)
-      this.log('   👀 페이지 훑어보는 중 (봇 감지 우회)...');
-      await this.humanDelay(1500, 3000);
-
-      // 자연스럽게 살짝 스크롤
-      await page.evaluate(() => window.scrollBy(0, 50 + Math.random() * 50));
-      await this.humanDelay(500, 1000);
-      await page.evaluate(() => window.scrollBy(0, -50 - Math.random() * 20));
-
-      // 랜덤 마우스 이동
-      const viewSize = page.viewport();
-      if (viewSize) {
-        for (let i = 0; i < 3; i++) {
-          await page.mouse.move(this.randomInt(0, viewSize.width), this.randomInt(0, viewSize.height), { steps: 5 });
-          await this.humanDelay(100, 300);
-        }
-      }
+    const ready = await browserSessionManager.ensureServerSession(this.options.naverId);
+    if (!ready) {
+      getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED');
+      throw new AccountExecutionGuardError('LOGIN_REQUIRED', '계정 관리에서 네이버에 로그인한 뒤 확인 후 재개를 눌러주세요.');
     }
-
-    this.ensureNotCancelled();
-
-    // ✅ 캡차 사전 체크 제거 - 먼저 자동 로그인 시도하고, 캡차 나오면 그때 대기
-
-    // 로그인 필드 확인 — 다중 셀렉터 순회
-    let idInput: import('puppeteer-core').ElementHandle<Element> | null = null;
-    for (const sel of this.LOGIN_ID_INPUT_SELECTORS) {
-      idInput = await page.waitForSelector(sel, { visible: true, timeout: 3000 }).catch(() => null);
-      if (idInput) {
-        this.log(`✅ 아이디 입력 필드 발견 (셀렉터: ${sel})`);
-        break;
-      }
-    }
-
-    if (!idInput) {
-      // ✅ 현재 페이지 상태 진단 로그 (디버깅용)
-      const diagUrl = page.url();
-      const diagTitle = await page.title().catch(() => '(제목 가져오기 실패)');
-      this.log(`⚠️ 아이디 입력 필드 1차 탐색 실패`);
-      this.log(`   📍 현재 URL: ${diagUrl}`);
-      this.log(`   📍 페이지 제목: ${diagTitle}`);
-
-      // 이미 로그인되어 있을 수 있음
-      if (shouldVerifyExistingSessionAfterMissingLoginInput(diagUrl)) {
-        const finalCheck = await this.checkLoginStatus();
-        if (finalCheck) {
-          this.log('✅ 이미 로그인되어 있습니다.');
-          browserSessionManager.setLoggedIn(this.options.naverId, true); // ✅ 캐시 반영
-          return;
-        }
-      }
-
-      // ✅ [2026-03-27 FIX] 쿠키 삭제 제거 — 유효한 세션까지 파괴하여 캡차를 강제 유발하는 치명적 버그였음
-      // 로그인 필드가 안 보이는 이유는 쿠키 문제가 아니라 페이지 로딩 지연/리다이렉트일 가능성이 높음
-      // 쿠키를 보존한 채 로그인 페이지만 다시 이동하여 ID/PW 필드 탐색 재시도
-      this.log('🔄 로그인 페이지 재이동 (쿠키 보존)...');
-
-      await page.goto(loginUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-      await this.humanDelay(2000, 3000);
-
-      // 2차 시도 — 다중 셀렉터 순회 (3초 × 4 = 최대 12초)
-      for (const sel of this.LOGIN_ID_INPUT_SELECTORS) {
-        idInput = await page.waitForSelector(sel, { visible: true, timeout: 3000 }).catch(() => null);
-        if (idInput) {
-          this.log(`✅ 아이디 입력 필드 발견 (2차, 셀렉터: ${sel})`);
-          break;
-        }
-      }
-
-      if (!idInput) {
-        const failUrl = page.url();
-        const failTitle = await page.title().catch(() => '');
-        const failBodySnippet = await page.evaluate(() => document.body?.innerText?.substring(0, 300) || '').catch(() => '');
-        this.log(`❌ 최종 실패 — URL: ${failUrl}`);
-        this.log(`❌ 최종 실패 — 제목: ${failTitle}`);
-        this.log(`❌ 최종 실패 — 본문: ${failBodySnippet.substring(0, 150)}`);
-
-        // 에러 원인 세분화 — [2026-06-23] 프록시 설정 여부로 정확히 분기
-        //   기존 버그: 프록시 미설정인데도 "작동하지 않습니다"를 무조건 프록시 실패로 오분류해
-        //   "프록시 연결 실패(407)"라는 틀린 안내를 던졌다. 다중계정 사용자 대부분 프록시 미사용이라
-        //   실제론 일시적 네이버/네트워크 오류(잦은 순차 로그인 차단 등)인데 엉뚱한 조치를 유도.
-        const proxyConfigured = !!this.options.accountProxyUrl;
-        const looksLikePageError = isLoginProxyFailureBody(failBodySnippet) ||
-          failBodySnippet.includes('작동하지 않습니다') || failBodySnippet.includes('HTTP ERROR') ||
-          failBodySnippet.includes('ERR_');
-        if (proxyConfigured && looksLikePageError) {
-          throw new Error(`프록시 연결 실패로 로그인 페이지를 열 수 없습니다. 계정 프록시(${String(this.options.accountProxyUrl).replace(/:[^:@/]+@/, ':***@')})가 응답하지 않습니다 — 프록시를 끄거나 다른 프록시로 교체 후 다시 시도하세요.`);
-        }
-        if (!proxyConfigured && looksLikePageError) {
-          throw new Error(`네이버 로그인 페이지가 일시적으로 열리지 않습니다 (네트워크/네이버 일시 오류, 프록시 미사용). 잠시 후 다시 시도하거나, 다중계정 발행 간격을 늘려주세요. 여러 계정을 짧은 간격으로 연속 로그인하면 네이버가 일시 차단할 수 있습니다.`);
-        }
-        throw new Error(`아이디 입력 필드를 찾을 수 없습니다. (URL: ${failUrl}, 제목: ${failTitle})`);
-      }
-    }
-
-    // ✅ Ghost Cursor 사용 (사람 같은 마우스 이동)
-    if (this.cursor) {
-      this.log('🎯 Ghost Cursor로 아이디 입력 중...');
-
-      // 랜덤 마우스 이동 (의심 회피)
-      await randomMouseMovement(page, this.cursor, { count: 2 });
-
-      // 아이디 입력 필드 클릭
-      await safeClick(page, this.cursor, '#id', {
-        delayBefore: [300, 600],
-        delayAfter: [200, 400],
-        log: this.log.bind(this),
-      });
-
-      // ✅ [2026-03-27 FIX] bvsd._data._tseq 대응: focus → 첫 키 입력까지 인간적 관찰 대기
-      // 실제 사용자는 필드 클릭 후 1~3초 정도 커서 위치/내용을 확인한 후 타이핑 시작
-      await this.humanDelay(1000, 3000);
-
-      // ✅ [2026-03-27 FIX] 리스크12: 필드가 비어있으면 Ctrl+A→Backspace 스킵 (bvsd에 기계적 초기화 패턴 기록 방지)
-      const idCurrentValue = await page.evaluate(() => {
-        const el = document.querySelector('#id') as HTMLInputElement;
-        return el?.value || '';
-      });
-      if (idCurrentValue.length > 0) {
-        await page.keyboard.down('Control');
-        await page.keyboard.press('a');
-        await page.keyboard.up('Control');
-        await waitRandom(100, 200);
-        await page.keyboard.press('Backspace');
-        await waitRandom(100, 200);
-      }
-
-      // ✅ [2026-03-27 FIX] 리스크13: loginKeyType 사용 (keydown-keyup 간격 30~100ms)
-      for (const char of this.options.naverId) {
-        await this.loginKeyType(page, char);
-        if (Math.random() < 0.05) {
-          await this.humanDelay(200, 400);
-        }
-      }
-      await this.humanDelay(400, 800);
-    } else {
-      // ✅ 폴백: 기존 마우스 이동 방식
-      this.log('⚠️ Ghost Cursor 없음, 기존 방식 사용');
-      const box = await idInput.boundingBox();
-      if (box) {
-        await page.mouse.move(
-          box.x + box.width / 2 + this.randomInt(-50, 50),
-          box.y + box.height / 2 + this.randomInt(-50, 50)
-        );
-        await this.humanDelay(200, 500);
-      }
-      // ✅ [2026-03-27 FIX] 리스크14: triple-click → 단일 클릭 + Ctrl+A (보다 자연스러움)
-      await idInput.click();
-      await this.humanDelay(300, 600);
-      // 필드 내용 있으면 선택 → 덮어쓰기
-      const idFallbackValue = await idInput.evaluate((el) => (el as HTMLInputElement).value);
-      if (idFallbackValue.length > 0) {
-        await page.keyboard.down('Control');
-        await page.keyboard.press('a');
-        await page.keyboard.up('Control');
-        await waitRandom(100, 200);
-      }
-      for (const char of this.options.naverId) {
-        await this.loginKeyType(page, char);
-        if (Math.random() < 0.05) {
-          await this.humanDelay(200, 400);
-        }
-      }
-      await this.humanDelay(400, 800);
-    }
-
-    // 입력 확인
-    const typedId = await idInput.evaluate((el) => {
-      const input = el as HTMLInputElement;
-      return input.value;
-    });
-    if (typedId !== this.options.naverId) {
-      this.log('⚠️ 아이디 입력이 제대로 되지 않았습니다. 다시 시도합니다...');
-      // ✅ [2026-03-27 FIX] triple-click → 단일클릭 + Ctrl+A
-      await idInput.click();
-      await this.humanDelay(200, 400);
-      await page.keyboard.down('Control');
-      await page.keyboard.press('a');
-      await page.keyboard.up('Control');
-      await this.humanDelay(100, 200);
-      for (const char of this.options.naverId) {
-        await this.loginKeyType(page, char);
-      }
-      await this.humanDelay(400, 700);
-
-      // ✅ [v1.4.66] 2차 확인 — 여전히 실패하면 evaluate로 직접 값 설정
-      const retypedId = await idInput.evaluate((el) => (el as HTMLInputElement).value);
-      if (retypedId !== this.options.naverId) {
-        this.log('⚠️ 키보드 입력 2차 실패 → JavaScript 직접 값 설정');
-        await page.evaluate((naverId: string) => {
-          const el = document.querySelector('#id') as HTMLInputElement;
-          if (el) {
-            el.value = naverId;
-            el.dispatchEvent(new Event('input', { bubbles: true }));
-            el.dispatchEvent(new Event('change', { bubbles: true }));
-          }
-        }, this.options.naverId);
-      }
-    }
-    this.log('✅ 아이디 입력 완료');
-
-    // ✅ [2026-03-27 FIX] bvsd 대응: ID→PW 이동을 Tab vs 마우스 클릭 랜덤화 (70:30)
-    // bvsd._data._tseq가 Tab 이벤트와 Mouse 이벤트 모두 수집 → 실제 사용자처럼 랜덤
-    const useTabForPw = Math.random() < 0.7;
-
-    const pwInput = await page.waitForSelector('#pw', { visible: true, timeout: 8000 });
-    if (!pwInput) {
-      throw new Error('비밀번호 입력 필드를 찾을 수 없습니다.');
-    }
-
-    if (this.cursor) {
-      this.log('🎯 Ghost Cursor로 비밀번호 입력 중...');
-
-      if (useTabForPw) {
-        // Tab 키로 이동 (70% 확률) — 가장 자연스러운 행동
-        await page.keyboard.press('Tab');
-        await this.humanDelay(500, 1500);
-      } else {
-        // 마우스로 PW 필드 직접 클릭 (30% 확률)
-        await safeClick(page, this.cursor, '#pw', {
-          delayBefore: [300, 600],
-          delayAfter: [200, 400],
-          log: this.log.bind(this),
-        });
-      }
-
-      // ✅ bvsd._data._tseq: PW 필드 focus 후 인간적 관찰 대기
-      await this.humanDelay(800, 2000);
-
-      // ✅ [2026-03-27 FIX] 리스크12: PW필드도 비어있으면 Ctrl+A 스킵
-      const pwCurrentValue = await page.evaluate(() => {
-        const el = document.querySelector('#pw') as HTMLInputElement;
-        return el?.value || '';
-      });
-      if (pwCurrentValue.length > 0) {
-        await page.keyboard.down('Control');
-        await page.keyboard.press('a');
-        await page.keyboard.up('Control');
-        await waitRandom(100, 200);
-        await page.keyboard.press('Backspace');
-        await waitRandom(100, 200);
-      }
-
-      // ✅ [2026-03-27 FIX] 리스크13: loginKeyType 사용
-      for (const char of this.options.naverPassword) {
-        await this.loginKeyType(page, char);
-        if (Math.random() < 0.05) {
-          await this.humanDelay(200, 400);
-        }
-      }
-      await this.humanDelay(400, 800);
-    } else {
-      // ✅ 폴백: 기존 마우스 이동 방식
-      // ✅ [2026-03-27 FIX] 리스크14: triple-click → 단일 클릭 + Ctrl+A
-      if (useTabForPw) {
-        await page.keyboard.press('Tab');
-        await this.humanDelay(500, 1500);
-      } else {
-        const pwBox = await pwInput.boundingBox();
-        if (pwBox) {
-          await page.mouse.move(
-            pwBox.x + pwBox.width / 2 + this.randomInt(-30, 30),
-            pwBox.y + pwBox.height / 2 + this.randomInt(-10, 10)
-          );
-          await this.humanDelay(200, 500);
-        }
-        await pwInput.click();
-      }
-      await this.humanDelay(300, 600);
-      // PW 필드 내용 있으면 선택
-      const pwFallbackValue = await pwInput.evaluate((el) => (el as HTMLInputElement).value);
-      if (pwFallbackValue.length > 0) {
-        await page.keyboard.down('Control');
-        await page.keyboard.press('a');
-        await page.keyboard.up('Control');
-        await waitRandom(100, 200);
-      }
-      for (const char of this.options.naverPassword) {
-        await this.loginKeyType(page, char);
-        if (Math.random() < 0.05) {
-          await this.humanDelay(200, 400);
-        }
-      }
-      await this.humanDelay(400, 800);
-    }
-
-    // 입력 확인
-    const typedPw = await pwInput.evaluate((el) => {
-      const input = el as HTMLInputElement;
-      return input.value;
-    }) as string;
-    if (typedPw.length === 0) {
-      this.log('⚠️ 비밀번호 입력이 제대로 되지 않았습니다. 다시 시도합니다...');
-      // ✅ [2026-03-27 FIX] triple-click → 단일클릭 + Ctrl+A
-      await pwInput.click();
-      await this.humanDelay(200, 400);
-      await page.keyboard.down('Control');
-      await page.keyboard.press('a');
-      await page.keyboard.up('Control');
-      await this.humanDelay(100, 200);
-      for (const char of this.options.naverPassword) {
-        await this.loginKeyType(page, char);
-      }
-      await this.humanDelay(400, 700);
-
-      // ✅ [v1.4.66] 2차 확인 — 여전히 비어있으면 evaluate로 직접 값 설정
-      const retypedPw = await pwInput.evaluate((el) => (el as HTMLInputElement).value);
-      if (retypedPw.length === 0) {
-        this.log('⚠️ 비밀번호 키보드 입력 2차 실패 → JavaScript 직접 값 설정');
-        await page.evaluate((pw: string) => {
-          const el = document.querySelector('#pw') as HTMLInputElement;
-          if (el) {
-            el.value = pw;
-            el.dispatchEvent(new Event('input', { bubbles: true }));
-            el.dispatchEvent(new Event('change', { bubbles: true }));
-          }
-        }, this.options.naverPassword);
-      }
-    }
-    this.log('✅ 비밀번호 입력 완료');
-
-    // ✅ [2026-03-30 FIX] 로그인 상태 유지 체크 (세션 만료 방지)
-    // [Playwright 검증] 실제 셀렉터: #nvlong (class: input_keep, name: nvlong)
-    // ⚠️ 이전 #keep은 존재하지 않아 항상 null → 세션 미유지 → 매번 재로그인 → 캡차 유발 근본 원인!
-    try {
-      let keepLoggedIn: import('puppeteer-core').ElementHandle<Element> | null = null;
-      let usedSelector = '';
-      for (const sel of this.KEEP_LOGIN_SELECTORS) {
-        keepLoggedIn = await page.$(sel);
-        if (keepLoggedIn) {
-          usedSelector = sel;
-          break;
-        }
-      }
-
-      if (keepLoggedIn) {
-        // 이미 체크되어 있는지 확인
-        const isChecked = await page.evaluate((el) => {
-          const input = el as HTMLInputElement;
-          return input.checked;
-        }, keepLoggedIn);
-
-        if (!isChecked) {
-          this.log(`✅ 로그인 상태 유지 활성화... (셀렉터: ${usedSelector})`);
-          // ✅ Ghost Cursor로 클릭 (봇 감지 우회)
-          if (this.cursor) {
-            await this.cursor.click(usedSelector).catch(async () => {
-              await keepLoggedIn!.click(); // fallback
-            });
-          } else {
-            await keepLoggedIn.click();
-          }
-          // 체크 확인
-          const nowChecked = await page.evaluate((el) => (el as HTMLInputElement).checked, keepLoggedIn).catch(() => false);
-          if (!nowChecked) {
-            // 클릭이 안 먹은 경우 JavaScript로 강제 체크
-            await page.evaluate((el) => { (el as HTMLInputElement).checked = true; }, keepLoggedIn);
-            this.log('   ⚠️ 클릭 실패 → JavaScript로 강제 체크');
-          }
-        } else {
-          this.log('ℹ️ 로그인 상태 유지가 이미 활성화되어 있습니다.');
-        }
-        await this.humanDelay(300, 600);
-      } else {
-        this.log('⚠️ 로그인 상태 유지 체크박스를 찾을 수 없습니다 (시도된 셀렉터: ' + this.KEEP_LOGIN_SELECTORS.join(', ') + ')');
-      }
-    } catch (e) {
-      this.log(`⚠️ 로그인 상태 유지 체크 실패: ${(e as Error).message}`);
-    }
-
-    // ✅ 로그인 버튼 클릭 전 인간적인 행동 추가 (CAPTCHA 방지)
-    // 1. 입력 내용 확인하듯 잠시 대기
-    await this.humanDelay(800, 1500);
-
-    // 2. 가끔 약관/정책 링크 근처로 마우스 이동 (읽는 것처럼)
-    if (Math.random() < 0.3) {  // 30% 확률
-      const viewSize = page.viewport();
-      if (viewSize) {
-        await page.mouse.move(
-          this.randomInt(100, 300),
-          this.randomInt(viewSize.height - 150, viewSize.height - 50),
-          { steps: 10 }
-        );
-        await this.humanDelay(500, 1000);
-      }
-    }
-
-    // 3. 입력 필드로 다시 시선 이동 (확인하듯)
-    if (Math.random() < 0.2) {  // 20% 확률
-      const idBox = await page.$('#id');
-      if (idBox) {
-        const box = await idBox.boundingBox();
-        if (box) {
-          await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 5 });
-          await this.humanDelay(200, 400);
-        }
-      }
-    }
-
-    this.ensureNotCancelled();
-
-    // ✅ [v1.4.66] 로그인 버튼 off 클래스 강제 해제
-    // 네이버 bvsd가 CDP 기반 키 입력을 유효하지 않은 것으로 판정하면
-    // ID/PW가 입력돼도 off 클래스가 유지되어 버튼 클릭이 무시됨.
-    // input 이벤트를 재발생시키고 off 클래스를 강제 제거하여 클릭 가능 상태로 전환.
-    try {
-      const offRemoved = await page.evaluate((selectors: readonly string[]) => {
-        const idEl = document.querySelector('#id') as HTMLInputElement;
-        const pwEl = document.querySelector('#pw') as HTMLInputElement;
-        let btn: HTMLButtonElement | null = null;
-        for (const selector of selectors) {
-          btn = document.querySelector(selector) as HTMLButtonElement | null;
-          if (btn) break;
-        }
-        if (!btn) return { removed: false, reason: 'no-button' };
-
-        // ID/PW 필드에 input 이벤트 재발생 (off 클래스 토글 트리거)
-        if (idEl?.value) idEl.dispatchEvent(new Event('input', { bubbles: true }));
-        if (pwEl?.value) pwEl.dispatchEvent(new Event('input', { bubbles: true }));
-
-        // off 클래스가 여전히 남아있으면 강제 제거
-        const hadOff = btn.classList.contains('off');
-        if (hadOff) {
-          btn.classList.remove('off');
-        }
-        return { removed: hadOff, idLen: idEl?.value?.length || 0, pwLen: pwEl?.value?.length || 0 };
-      }, this.LOGIN_BUTTON_SELECTORS);
-      if (offRemoved.removed) {
-        this.log(`⚠️ 로그인 버튼 off 클래스 강제 제거 (ID: ${offRemoved.idLen}자, PW: ${offRemoved.pwLen}자 입력됨)`);
-      }
-    } catch (e) {
-      // non-critical
-    }
-
-    this.log('🔄 로그인 버튼 클릭 중...');
-
-    const loginButtonSelectors = this.LOGIN_BUTTON_SELECTORS;
-
-    let loginButton: ElementHandle<Element> | null = null;
-    // ✅ [v2.11.140] 즉시 탐색 우선 — ID/PW를 이미 입력한 시점이라 로그인 폼(버튼)은 확실히
-    //   렌더돼 있다. 기존엔 셀렉터 5개를 waitForSelector(timeout:5000)로 순회해, 페이지에 없는
-    //   1순위 '#log\.login' 등에서 셀렉터당 5초씩 낭비 → 버튼 클릭까지 최대 ~25초 지연 버그.
-    //   먼저 page.$()로 즉시(ms) 훑고, 전부 실패할 때만 짧게 대기한다. (안티봇 무관 — 요소 탐색 속도)
-    for (const selector of loginButtonSelectors) {
-      const handle = await page.$(selector).catch(() => null);
-      if (!handle) continue;
-      const visible = await handle.evaluate((el: Element) => (el as HTMLElement).offsetParent !== null).catch(() => false);
-      if (visible) { loginButton = handle; break; }
-    }
-    if (!loginButton) {
-      // 드물게 폼이 아직 렌더 중 — 짧은 timeout으로만 대기 (5000→1500)
-      for (const selector of loginButtonSelectors) {
-        loginButton = await page.waitForSelector(selector, { visible: true, timeout: 1500 }).catch(() => null);
-        if (loginButton) break;
-      }
-    }
-
-    if (!loginButton) {
-      loginButton = await page.evaluateHandle(() => {
-        const buttons = Array.from(document.querySelectorAll('button'));
-        return buttons.find(btn => {
-          const text = btn.textContent || '';
-          return text.includes('로그인') && (btn as HTMLElement).offsetParent !== null;
-        }) || null;
-      }) as ElementHandle<Element> | null;
-    }
-
-    if (!loginButton) {
-      // ✅ [v1.4.54] 로그인 버튼 자체를 못 찾음 → 즉시 덤프 (네이버 UI 변경 가능성)
-      await this.dumpFailure('LOGIN_BUTTON_NOT_FOUND', new Error('로그인 버튼을 찾을 수 없습니다.'), {
-        errorCode: 'LOGIN_E002',
-        context: { triedSelectors: loginButtonSelectors },
-      });
-      throw new Error('로그인 버튼을 찾을 수 없습니다.');
-    }
-
-    const isClickable = await loginButton.evaluate((el: Element) => {
-      const htmlEl = el as HTMLElement;
-      const buttonEl = el as HTMLButtonElement;
-      return !buttonEl.disabled && htmlEl.offsetParent !== null;
-    }).catch(() => false);
-
-    if (!isClickable) {
-      await this.delay(1000);
-    }
-
-    // ✅ [v1.4.53] 로그인 버튼 클릭 3단계 폴백 — 계정 리스크 점수 높은 계정 대응
-    // 배경: 네이버가 의심 계정에 오버레이/pointer-events/버튼 지연 enable을 끼워넣어
-    //       Ghost Cursor 클릭이 버튼에 도달하지 못하는 케이스 발생 (5계정 중 2개 실패)
-    // 해결: 1차 Ghost Cursor → 2차 Enter 키 → 3차 form.submit() 순차 시도 + 각 단계 성공 검증
-
-    await loginButton.evaluate((el: Element) => {
-      (el as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-    await this.humanDelay(300, 600);
-
-    // 버튼 상태 사전 검증 — disabled/pointer-events/overlay 감지
-    const buttonState = await loginButton.evaluate((el: Element) => {
-      const htmlEl = el as HTMLElement;
-      const rect = htmlEl.getBoundingClientRect();
-      const style = window.getComputedStyle(htmlEl);
-      const atPoint = document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
-      return {
-        disabled: (el as HTMLButtonElement).disabled,
-        pointerEvents: style.pointerEvents,
-        opacity: parseFloat(style.opacity || '1'),
-        // 버튼 중앙 지점에 버튼 자신 또는 자식이 있어야 정상. 아니면 오버레이 의심
-        blocked: atPoint !== null && atPoint !== el && !htmlEl.contains(atPoint),
-        blockerTag: atPoint && atPoint !== el ? (atPoint as HTMLElement).tagName : null,
-      };
-    }).catch(() => null);
-
-    if (buttonState) {
-      if (buttonState.disabled || buttonState.pointerEvents === 'none' || buttonState.opacity < 0.5) {
-        this.log(`⚠️ 로그인 버튼 비활성 감지 (disabled=${buttonState.disabled}, pointer-events=${buttonState.pointerEvents}, opacity=${buttonState.opacity}) → 2초 대기`);
-        await this.delay(2000);
-      }
-      if (buttonState.blocked) {
-        this.log(`⚠️ 로그인 버튼 위 오버레이 감지 (차단 요소: ${buttonState.blockerTag}) → 제거 시도`);
-        await page.evaluate(() => {
-          // 버튼 위를 덮는 fixed/absolute 오버레이 강제 숨김
-          document.querySelectorAll('div, section, aside').forEach((el) => {
-            const s = window.getComputedStyle(el);
-            const z = parseInt(s.zIndex || '0', 10);
-            if ((s.position === 'fixed' || s.position === 'absolute') && z > 100) {
-              (el as HTMLElement).style.pointerEvents = 'none';
-            }
-          });
-        }).catch(() => {});
-      }
-    }
-
-    // 클릭 성공 판정 헬퍼 — URL 이동 or 에러 메시지 or 챌린지 페이지 감지
-    const checkLoginProgress = async (): Promise<'success' | 'error' | 'challenge' | 'pending'> => {
-      try {
-        const url = page.url();
-        // 로그인 페이지를 벗어나면 성공 (또는 최소한 "다음 단계"로 넘어감)
-        if (!url.includes('nid.naver.com/nidlogin') && !url.includes('nid.naver.com/login')) {
-          return 'success';
-        }
-        // 에러/챌린지 페이지 감지
-        const pageInfo = await page.evaluate(() => {
-          const errEl = document.querySelector('.error_message, .alert_msg, #err_common, .error_on');
-          const errText = errEl ? ((errEl as HTMLElement).innerText || '').trim() : '';
-          const bodyText = (document.body?.innerText || '').substring(0, 500);
-          const hasCaptcha = /보안문자|자동입력|captcha/i.test(bodyText);
-          const hasDeny = /새로운 기기|인증 필요|본인 확인/.test(bodyText);
-          return { errText, hasCaptcha, hasDeny };
-        });
-        if (pageInfo.hasCaptcha || pageInfo.hasDeny) return 'challenge';
-        if (pageInfo.errText) return 'error';
-        return 'pending';
-      } catch {
-        return 'pending';
-      }
-    };
-
-    // 각 시도 후 3초간 반응 감지
-    const waitForClickResponse = async (timeoutMs: number = 3000): Promise<'success' | 'error' | 'challenge' | 'pending'> => {
-      const start = Date.now();
-      while (Date.now() - start < timeoutMs) {
-        const state = await checkLoginProgress();
-        if (state !== 'pending') return state;
-        await this.delay(200);
-      }
-      return 'pending';
-    };
-
-    // ━━━ 1차 시도: Ghost Cursor 클릭 (뷰포트 보정) ━━━
-    // ✅ [v1.4.66] Ghost Cursor 유지 (isTrusted: true → 캡차 방지)
-    // 버그 수정: scrollIntoView 완료 대기 + boundingBox 뷰포트 내 검증 추가
-    this.log('🔄 로그인 1차 시도: Ghost Cursor 클릭');
-    let clickResult: 'success' | 'error' | 'challenge' | 'pending' = 'pending';
-    try {
-      if (this.cursor) {
-        // scrollIntoView를 instant로 변경하고 충분히 대기
-        await loginButton.evaluate((el: Element) => {
-          (el as HTMLElement).scrollIntoView({ behavior: 'instant', block: 'center' });
-        });
-        await this.delay(500);
-
-        // ✅ [v1.4.66] cursor.click()으로 통합 — moveTo + page.mouse.down/up 분리 버그 수정
-        // 이전: cursor.moveTo() → page.mouse.down/up → 두 시스템 위치 불일치로 클릭 미스
-        // 수정: cursor.click()은 내부적으로 moveTo + 같은 위치에서 click을 보장
-        try {
-          // ✅ [2026-09-30] 찾아둔 핸들로 클릭 — 문자열 '#log\.login' 은 현재 네이버 마크업에 없어
-          //   Ghost Cursor 가 매번 "Could not find element" 로 죽고 폴백 click() 만 살았다.
-          await this.cursor.click(loginButton, { paddingPercentage: 10 });
-        } catch (cursorErr) {
-          this.log(`⚠️ Ghost Cursor click 실패: ${(cursorErr as Error).message} → loginButton.click() 폴백`);
-          await loginButton.click();
-        }
-      } else {
-        await loginButton.click();
-      }
-      clickResult = await waitForClickResponse(3000);
-    } catch (e) {
-      this.log(`⚠️ 1차 클릭 예외: ${(e as Error).message}`);
-    }
-
-    const focusPwInput = async (): Promise<boolean> => {
-      for (const sel of this.LOGIN_PASSWORD_INPUT_SELECTORS) {
-        const ok = await page.focus(sel).then(() => true).catch(() => false);
-        if (ok) return true;
-      }
-      return false;
-    };
-
-    // 로그인 버튼 재조회 (스테일 핸들 방지)
-    const relocateButton = async (): Promise<ElementHandle<Element> | null> => {
-      for (const selector of loginButtonSelectors) {
-        const btn = await page.waitForSelector(selector, { visible: true, timeout: 2000 }).catch(() => null);
-        if (btn) return btn as ElementHandle<Element>;
-      }
-      // 텍스트 기반 폴백
-      return await page.evaluateHandle(() => {
-        const buttons = Array.from(document.querySelectorAll('button'));
-        return buttons.find(btn => {
-          const text = btn.textContent || '';
-          return text.includes('로그인') && (btn as HTMLElement).offsetParent !== null;
-        }) || null;
-      }).then(h => h as ElementHandle<Element> | null).catch(() => null);
-    };
-
-    // ━━━ 1.5차 시도: JS element.click() — Playwright 실증 완료 ━━━
-    if (clickResult === 'pending') {
-      this.log('🔁 로그인 1.5차 시도: JS element.click() (Playwright 실증)');
-      try {
-        await page.evaluate((selectors: readonly string[]) => {
-          for (const selector of selectors) {
-            const btn = document.querySelector(selector) as HTMLElement | null;
-            if (btn && btn.offsetParent !== null) { btn.click(); return; }
-          }
-        }, loginButtonSelectors);
-        clickResult = await waitForClickResponse(3000);
-      } catch (e) {
-        this.log(`⚠️ 1.5차 클릭 예외: ${(e as Error).message}`);
-      }
-    }
-
-    // ━━━ 2차 시도: 버튼 재조회 + click + Enter + submit 이벤트 dispatch ━━━
-    if (clickResult === 'pending') {
-      this.log('🔁 로그인 2차 시도: 버튼 재조회 + click + Enter + submit 이벤트 dispatch');
-      try {
-        const freshButton = await relocateButton();
-        if (freshButton) {
-          await freshButton.click().catch(() => {});
-        }
-        await this.humanDelay(100, 200);
-
-        // Enter 키 전송 (셀렉터 폴백 적용)
-        const focused = await focusPwInput();
-        if (focused) {
-          await page.keyboard.press('Enter').catch(() => {});
-        }
-        await this.humanDelay(100, 200);
-
-        // 폼에 직접 submit 이벤트 dispatch — keydown.preventDefault 우회
-        await page.evaluate(() => {
-          const form = (document.querySelector('#frmNIDLogin') as HTMLFormElement)
-                    || (document.querySelector('form[name="frmNIDLogin"]') as HTMLFormElement)
-                    || (document.querySelector('form') as HTMLFormElement);
-          if (form) {
-            form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-          }
-        }).catch(() => {});
-
-        clickResult = await waitForClickResponse(3000);
-      } catch (e) {
-        this.log(`⚠️ 2차 시도 예외: ${(e as Error).message}`);
-      }
-    }
-
-    // ━━━ 3차 시도: 네이티브 프로토타입 form.submit() — 오버라이드 우회 ━━━
-    if (clickResult === 'pending') {
-      this.log('🔁 로그인 3차 시도: 네이티브 HTMLFormElement.prototype.submit 직접 호출');
-      try {
-        const submitted = await page.evaluate(() => {
-          const form = (document.querySelector('#frmNIDLogin') as HTMLFormElement)
-                    || (document.querySelector('form[name="frmNIDLogin"]') as HTMLFormElement)
-                    || (document.querySelector('form[action*="nidlogin"]') as HTMLFormElement)
-                    || (document.querySelector('form') as HTMLFormElement);
-          if (!form) return { ok: false, reason: 'no-form' };
-
-          // HTMLFormElement.prototype.submit을 네이티브에서 직접 가져와 호출
-          // → 네이버가 form.submit을 오버라이드했어도 우회
-          try {
-            const nativeSubmit = HTMLFormElement.prototype.submit;
-            nativeSubmit.call(form);
-            return { ok: true, reason: 'native-submit' };
-          } catch (e) {
-            // 그래도 실패하면 requestSubmit 시도 (더 현대 API)
-            try {
-              if (typeof (form as any).requestSubmit === 'function') {
-                (form as any).requestSubmit();
-                return { ok: true, reason: 'requestSubmit' };
-              }
-            } catch {}
-            return { ok: false, reason: `error: ${(e as Error).message}` };
-          }
-        });
-
-        if (!submitted.ok) {
-          this.log(`⚠️ 3차 시도 실패: ${submitted.reason}`);
-        } else {
-          this.log(`✅ 3차 시도 실행: ${submitted.reason}`);
-          clickResult = await waitForClickResponse(5000);
-        }
-      } catch (e) {
-        this.log(`⚠️ 3차 시도 예외: ${(e as Error).message}`);
-      }
-    }
-
-    // ━━━ 4차 시도 (최후): XMLHttpRequest로 로그인 POST 직접 전송 ━━━
-    // 모든 DOM 기반 submit이 막혔을 때의 마지막 수단
-    if (clickResult === 'pending') {
-      this.log('🔁 로그인 4차 시도: XHR 직접 전송 (DOM 우회 최후 수단)');
-      try {
-        const xhrResult = await page.evaluate(() => {
-          const form = (document.querySelector('#frmNIDLogin') as HTMLFormElement)
-                    || (document.querySelector('form[name="frmNIDLogin"]') as HTMLFormElement)
-                    || (document.querySelector('form') as HTMLFormElement);
-          if (!form) return { ok: false, reason: 'no-form' };
-
-          const formData = new FormData(form);
-          const body = new URLSearchParams();
-          formData.forEach((value, key) => body.append(key, value.toString()));
-
-          return fetch(form.action || location.href, {
-            method: (form.method || 'POST').toUpperCase(),
-            body: body.toString(),
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            credentials: 'include',
-            redirect: 'follow',
-          }).then(async (res) => {
-            // 로그인 성공 시 서버가 redirect 응답을 주므로 최종 URL로 이동
-            if (res.url && res.url !== location.href) {
-              location.href = res.url;
-            } else {
-              // redirect가 자동 처리된 경우 naver.com 홈으로 이동해서 세션 확인
-              location.href = 'https://www.naver.com/';
-            }
-            return { ok: true, reason: `xhr-${res.status}` };
-          }).catch((e) => ({ ok: false, reason: `xhr-error: ${e.message}` }));
-        });
-
-        if (xhrResult && xhrResult.ok) {
-          this.log(`✅ 4차 시도 실행: ${xhrResult.reason}`);
-          clickResult = await waitForClickResponse(8000);
-        } else {
-          this.log(`⚠️ 4차 시도 실패: ${xhrResult?.reason || 'unknown'}`);
-        }
-      } catch (e) {
-        this.log(`⚠️ 4차 시도 예외: ${(e as Error).message}`);
-      }
-    }
-
-    // 결과 로깅 — 사용자에게 정확한 원인 표시
-    if (clickResult === 'pending') {
-      this.log('❌ 로그인 4단계 시도 모두 응답 없음 — 네이버가 해당 계정에 강한 차단을 걸었을 가능성. 수동 로그인 + 며칠간 정상 사용으로 리스크 점수 회복 권장');
-      // ✅ [v1.4.54] 로그인 4단계 모두 실패 → 자동 덤프
-      await this.dumpFailure('LOGIN_ALL_FALLBACKS_FAILED', new Error('All 4 login click strategies failed'), {
-        errorCode: 'LOGIN_E001',
-        fallbackStage: 4,
-        context: { buttonState },
-      });
-    } else if (clickResult === 'challenge') {
-      this.log('🔐 로그인 챌린지(캡차/본인확인) 감지 — 사용자 개입 필요');
-    } else if (clickResult === 'error') {
-      this.log('⚠️ 로그인 에러 메시지 감지 (비번 오류 등)');
-    } else {
-      this.log('✅ 로그인 클릭 성공 — 다음 단계로 진행');
-    }
-
-    // 기존 네비게이션 대기 유지 (도메인 이동 안정화 목적)
-    // ✅ [2026-09-30] 클릭 응답이 이미 'success'(nid.naver.com 이탈 확인)면 이 대기는 매번 20초 타임아웃만
-    //   소모했다(실측 22초/로그인). 이미 일어난 이동을 다시 기다리지 않는다.
-    if (shouldAwaitPostLoginNavigation(clickResult)) {
-      try {
-        await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 20000 });
-      } catch (navError) {
-        // 네비게이션 타임아웃은 캡차/2FA로 인한 것일 수 있으므로 루프 진입
-        await this.delay(1000);
-      }
-    }
-
-    // ✅ [2026-03-30 OVERHAUL] 캡차/보안 감지 + 사용자 알림 통합 개선
-    // 핵심 변경:
-    // 1. 텍스트 기반 캡차 감지 (DOM innerText로 '자동입력 방지', '보안문자' 등 탐지)
-    // 2. 로그인 에러 메시지 감지 (비밀번호 틀림, 계정 잠금 등)
-    // 3. 시간 기반 루프 (10분 통합 타임아웃, 캡차 미감지 시에도 충분한 대기)
-    // 4. 30초마다 반복 알림 소리 (사용자가 자리 비운 경우 대비)
-    // 5. 브라우저 창 포그라운드로 올리기 (BrowserWindow.focus)
-    let challengeDetected = false;  // 캡차/보안문자/인증 등 사용자 개입 필요 상태
-    let loginSuccess = false;
-    let twoFactorDetected = false;
-    let loginErrorDetected: string | null = null;
-    const LOGIN_TOTAL_TIMEOUT = 600000; // 10분 통합 타임아웃
-    const loginStartTime = Date.now();
-    let lastSoundTime = 0;
-    const SOUND_INTERVAL = 30000; // 30초마다 알림 소리
-    let stuckOnLoginPageSince: number | null = null; // 로그인 페이지에 머무른 시점
-    const STUCK_THRESHOLD = 15000; // 15초 이상 로그인 페이지에 머물면 사용자 개입 필요로 판단
-    let genericLoginStallDetected = false; // 캡차/2FA가 아닌 로그인 페이지 정체
-    const GENERIC_LOGIN_STALL_TIMEOUT = 90000; // 자동 클릭 무응답은 10분까지 끌지 않는다
-
-    // 🔊 [2026-03-30 FIX] 알림 소리 재생 헬퍼 — execFile + timeout/unref로 좀비 프로세스 방지
-    const playAlertSound = async (count: number = 3) => {
-      try {
-        const { execFile } = await import('child_process');
-        const child = execFile('powershell', [
-          '-NoProfile', '-NonInteractive', '-Command',
-          `Add-Type -AssemblyName System.Media; 1..${count} | ForEach-Object { (New-Object Media.SoundPlayer 'C:\\Windows\\Media\\notify.wav').PlaySync(); Start-Sleep -Milliseconds 300 }`
-        ], { timeout: 10000, windowsHide: true });
-        child.unref();
-      } catch (e) { console.debug('[Sound] 알림 사운드 재생 실패:', (e as Error).message); }
-    };
-
-    // 🪟 [2026-03-30 FIX] 브라우저 창 포커스 헬퍼
-    // 이전: page.bringToFront()는 탭만 전환하지 실제 윈도우를 올리지 않음
-    // 현재: Electron BrowserWindow.focus() + setAlwaysOnTop으로 실제 윈도우 활성화
-    const bringBrowserToFront = async () => {
-      try {
-        // Puppeteer 탭 포커스 (기본)
-        if (this.page) {
-          await this.page.bringToFront();
-        }
-        // Electron BrowserWindow 활성화 (실제 윈도우를 최상위로)
-        try {
-          const { BrowserWindow } = await import('electron');
-          const allWindows = BrowserWindow.getAllWindows();
-          for (const win of allWindows) {
-            if (!win.isDestroyed()) {
-              if (win.isMinimized()) win.restore();
-              win.focus();
-              // 일시적으로 최상위에 표시 후 해제 (사용자 경험 보호)
-              win.setAlwaysOnTop(true);
-              setTimeout(() => {
-                try { win.setAlwaysOnTop(false); } catch (e) { console.debug('[Window] setAlwaysOnTop(false) 실패:', (e as Error).message); }
-              }, 3000);
-              break;
-            }
-          }
-        } catch { /* Electron import 실패 시 무시 (테스트 환경) */ }
-      } catch (e) { console.debug('[Window] bringBrowserToFront 실패:', (e as Error).message); }
-    };
-
-    while (true) {
-      this.ensureNotCancelled();
-
-      // ⏰ 전체 타임아웃 확인
-      const elapsed = Date.now() - loginStartTime;
-      if (elapsed >= LOGIN_TOTAL_TIMEOUT) {
-        const finalUrl = page.url();
-        if (challengeDetected) {
-          throw new Error(`보안 인증 해결 시간이 초과되었습니다. (10분) 최종 URL: ${finalUrl}`);
-        } else if (loginErrorDetected) {
-          throw new Error(loginErrorDetected);
-        } else {
-          throw new Error(`로그인 시간이 초과되었습니다. (10분) 최종 URL: ${finalUrl}`);
-        }
-      }
-
-      // 대기 시간 (챌린지 감지 시 2초, 일반 1초)
-      await this.delay(challengeDetected ? 2000 : 1000);
-
-      const currentUrl = page.url();
-      const postLoginProgress = resolvePostLoginProgressUrl(currentUrl, loginUrl);
-
-      // ═══════════════════════════════════════════════════════════════
-      // 1️⃣ 로그인 성공 여부 우선 확인
-      // ═══════════════════════════════════════════════════════════════
-      if (postLoginProgress.shouldMarkLoginSuccess) {
-        loginSuccess = true;
-        this.log('✅ 네이버 로그인이 성공적으로 완료되었습니다.');
-        this.log(`   [LoginVerdict] url=${currentUrl} ${await describeNaverSessionCookies(page)}`);
-        break;
-      }
-
-      if (postLoginProgress.shouldRecheckAfterDelay) {
-        await this.delay(1000);
-        this.ensureNotCancelled();
-        const finalCheckUrl = page.url();
-        if (isPostLoginFinalCheckSuccess(finalCheckUrl)) {
-          loginSuccess = true;
-          this.log('✅ 네이버 로그인이 성공적으로 완료되었습니다.');
-          this.log(`   [LoginVerdict] url=${finalCheckUrl} ${await describeNaverSessionCookies(page)}`);
-          break;
-        }
-      }
-
-      // ═══════════════════════════════════════════════════════════════
-      // 2️⃣ 보호조치/본인인증 페이지 감지 (URL 기반)
-      // ═══════════════════════════════════════════════════════════════
-      if (isLoginChallengeUrl(currentUrl)) {
-        if (!challengeDetected) {
-          challengeDetected = true;
-          this.log('');
-          this.log('🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒');
-          this.log('⚠️  보호조치/본인인증 페이지 감지!');
-          this.log('🖱️  브라우저에서 본인인증을 완료해주세요!');
-          this.log('⏳  최대 10분간 기다립니다...');
-          this.log('🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒🔒');
-          this.log('');
-          await bringBrowserToFront();
-          await playAlertSound(5);
-          if (this.progressCallback) {
-            this.progressCallback(0, 100, '🔒 보호조치 감지! 브라우저에서 본인인증을 완료해주세요!');
-          }
-        }
-        // 주기적 알림
-        if (Date.now() - lastSoundTime > SOUND_INTERVAL) {
-          lastSoundTime = Date.now();
-          const remainSec = Math.floor((LOGIN_TOTAL_TIMEOUT - elapsed) / 1000);
-          this.log(`⏳ 보호조치 대기 중... (남은 시간: ${Math.floor(remainSec / 60)}분 ${remainSec % 60}초)`);
-          await playAlertSound(2);
-          if (this.progressCallback) {
-            this.progressCallback(0, 100, `🔒 보호조치 대기 중 (${Math.floor(remainSec / 60)}분 ${remainSec % 60}초 남음)`);
-          }
-        }
-        continue;
-      }
-
-      // ═══════════════════════════════════════════════════════════════
-      // 3️⃣ 기기 등록 페이지 자동 처리
-      // ═══════════════════════════════════════════════════════════════
-      if (await this.isDeviceConfirmPage(page)) {
-        await this.handleDeviceConfirmPage(page);
-        continue;
-      }
-
-      // ═══════════════════════════════════════════════════════════════
-      // 4️⃣ 2단계 인증 처리
-      // ═══════════════════════════════════════════════════════════════
-      const is2FALogin = await this.handleTwoFactorAuthPage(page, twoFactorDetected);
-      if (is2FALogin) {
-        if (!twoFactorDetected) {
-          twoFactorDetected = true;
-          challengeDetected = true;
-          await bringBrowserToFront();
-          await playAlertSound(5);
-        }
-        // 주기적 알림
-        if (Date.now() - lastSoundTime > SOUND_INTERVAL) {
-          lastSoundTime = Date.now();
-          const remainSec = Math.floor((LOGIN_TOTAL_TIMEOUT - elapsed) / 1000);
-          this.log(`⏳ 2단계 인증 승인 대기 중... 네이버 앱에서 승인해주세요! (${Math.floor(remainSec / 60)}분 ${remainSec % 60}초 남음)`);
-          await playAlertSound(2);
-          if (this.progressCallback) {
-            this.progressCallback(0, 100, `📱 2단계 인증 대기 중 (${Math.floor(remainSec / 60)}분 ${remainSec % 60}초 남음)`);
-          }
-        }
-        continue;
-      } else if (twoFactorDetected) {
-        twoFactorDetected = false;
-        challengeDetected = false;
-        this.log('✅ 2단계 인증이 완료되었습니다! 로그인을 계속 진행합니다.');
-        await this.delay(1500);
-        continue;
-      }
-
-      // ═══════════════════════════════════════════════════════════════
-      // 5️⃣ 로그인 페이지에 머물러 있는 경우 — 종합 진단
-      // ═══════════════════════════════════════════════════════════════
-      if (shouldInspectLoginPageDom(currentUrl)) {
-        try {
-          // 🔍 [Playwright 검증 완료] 페이지 DOM 종합 분석 (2026-03-30 실제 nid.naver.com 확인)
-          // 검증된 셀렉터:
-          //   ID: #id (class: input_id), PW: #pw (class: input_pw)
-          //   로그인 버튼: #log.login (class: btn_login off next_step nlog-click)
-          //   캡차 hidden input: #ncaptchaSplit (value="none" → 캡차 활성 시 값 변경)
-          //   에러 div: #err_common, #err_empty_id, #err_empty_pw, #err_capslock (모두 class: login_error_wrap)
-          //   에러 텍스트: .error_message 내부
-          const pageAnalysis = await page.evaluate(() => {
-            const bodyText = document.body?.innerText || '';
-
-            // ═══ 1. 캡차/보안문자 감지 ═══
-
-            // [Playwright 검증] #ncaptchaSplit: 기본값 "none", 캡차 활성 시 값 변경
-            const ncaptchaSplit = document.querySelector('#ncaptchaSplit') as HTMLInputElement | null;
-            const ncaptchaSplitActive = ncaptchaSplit && ncaptchaSplit.value !== 'none' && ncaptchaSplit.value !== '';
-
-            // 텍스트 기반 캡차 감지
-            const captchaKeywords = [
-              '자동입력 방지', '자동 입력 방지', '보안문자', '자동등록방지',
-              '아래 문자를 입력', '이미지에 보이는', '보이는 문자',
-              '글자를 입력', '인증 문자', 'captcha', 'CAPTCHA',
-              '자동입력방지문자', '방지 문자',
-            ];
-            const hasCaptchaText = captchaKeywords.some(function(kw) { return bodyText.includes(kw); });
-
-            // CSS 셀렉터 기반 캡차 요소 감지 (visible 요소만)
-            const captchaSelectors = [
-              '#captcha', '.captcha', '#captchaimg', '.captcha_img',
-              'iframe[src*="captcha"]', 'iframe[src*="challenge"]',
-              'iframe[src*="recaptcha"]', 'iframe[src*="hcaptcha"]',
-              '#chptchaArea', '#captcha_area', '.login_captcha',
-              '[class*="captcha_wrap"]', '[class*="chptcha"]',
-              'img[src*="captcha"]', 'img[alt*="자동입력"]', 'img[alt*="보안"]',
-            ];
-            let hasCaptchaElement = false;
-            for (let i = 0; i < captchaSelectors.length; i++) {
-              try {
-                const el = document.querySelector(captchaSelectors[i]);
-                if (el) {
-                  const htmlEl = el as HTMLElement;
-                  const style = getComputedStyle(htmlEl);
-                  if (style.display !== 'none' && style.visibility !== 'hidden' && htmlEl.offsetParent !== null) {
-                    hasCaptchaElement = true;
-                    break;
-                  }
-                }
-              } catch (e) { /* 무시 */ }
-            }
-
-            // 캡차 이미지 감지 (src에 captcha 포함)
-            let hasCaptchaImage = false;
-            const imgs = document.querySelectorAll('img');
-            for (let j = 0; j < imgs.length; j++) {
-              const src = imgs[j].src || '';
-              if (src.includes('captcha') || src.includes('Captcha') || src.includes('CAPTCHA')) {
-                hasCaptchaImage = true;
-                break;
-              }
-            }
-
-            // iframe 내 CAPTCHA 감지
-            let suspiciousIframeCount = 0;
-            const iframes = document.querySelectorAll('iframe');
-            for (let k = 0; k < iframes.length; k++) {
-              const iframeSrc = iframes[k].src || '';
-              if (iframeSrc.includes('captcha') || iframeSrc.includes('challenge') ||
-                  iframeSrc.includes('recaptcha') || iframeSrc.includes('hcaptcha') ||
-                  iframeSrc.includes('turnstile') || iframeSrc.includes('arkose')) {
-                suspiciousIframeCount++;
-              }
-            }
-
-            const hasCaptcha = !!(ncaptchaSplitActive || hasCaptchaText || hasCaptchaElement || hasCaptchaImage || suspiciousIframeCount > 0);
-
-            // ═══ 2. 로그인 에러 메시지 감지 ═══
-            // [Playwright 검증] 네이버 에러 div들 (기본 display:none, 에러 시 visible)
-            const errorMessages: { type: string; text: string }[] = [];
-            const naverErrorDivs = ['#err_common', '#err_empty_id', '#err_empty_pw', '#err_capslock',
-                                  '#err_passkey_common', '#err_passkey_common2', '#err_passkey_common3', '#err_passkey_common4'];
-            for (let m = 0; m < naverErrorDivs.length; m++) {
-              try {
-                const errDiv = document.querySelector(naverErrorDivs[m]) as HTMLElement | null;
-                if (errDiv) {
-                  const errStyle = getComputedStyle(errDiv);
-                  // [Playwright 검증] 기본은 display:none, 에러 시 display가 변경됨
-                  if (errStyle.display !== 'none') {
-                    const errText = errDiv.innerText.trim();
-                    if (errText) {
-                      errorMessages.push({ type: naverErrorDivs[m], text: errText });
-                    }
-                  }
-                }
-              } catch (e) { /* 무시 */ }
-            }
-
-            // [Playwright 검증] .error_message 클래스 (에러 div 내부 텍스트 컨테이너)
-            const errMsgEls = document.querySelectorAll('.error_message');
-            for (let n = 0; n < errMsgEls.length; n++) {
-              try {
-                const errMsgEl = errMsgEls[n] as HTMLElement;
-                const errMsgStyle = getComputedStyle(errMsgEl);
-                if (errMsgStyle.display !== 'none' && errMsgEl.offsetParent !== null) {
-                  const msgText = errMsgEl.innerText.trim();
-                  if (msgText) {
-                    errorMessages.push({ type: '.error_message', text: msgText });
-                  }
-                }
-              } catch (e) { /* 무시 */ }
-            }
-
-            // ✅ [2026-03-30 FIX] 에러 키워드를 visible 에러 div 텍스트에서만 검색
-            // 이전: bodyText 전체에서 검색 → footer/약관의 '잠시 후 다시' 같은 일반 텍스트에 오탐
-            // 현재: 에러 div에서 추출된 errorMessages 텍스트 + #err_common 내용에서만 검색
-            const visibleErrorText = errorMessages.map(function(e) { return e.text; }).join(' ');
-
-            const errorKeywords = [
-              { keyword: '비밀번호가 일치하지', type: 'wrong_password' },
-              { keyword: '비밀번호를 잘못', type: 'wrong_password' },
-              { keyword: '비밀번호가 틀', type: 'wrong_password' },
-              { keyword: '아이디 또는 비밀번호가', type: 'wrong_credentials' },
-              { keyword: '아이디 또는 비밀번호를 다시', type: 'wrong_credentials' },
-              { keyword: '존재하지 않는 아이디', type: 'wrong_id' },
-              { keyword: '등록되지 않은', type: 'wrong_id' },
-              { keyword: '제한된 아이디', type: 'account_locked' },
-              { keyword: '이용이 제한', type: 'account_locked' },
-              { keyword: '계정이 잠', type: 'account_locked' },
-              { keyword: '로그인 제한', type: 'login_restricted' },
-              { keyword: '해외 로그인 차단', type: 'overseas_blocked' },
-              { keyword: '비정상적인 로그인', type: 'suspicious_login' },
-              { keyword: '횟수가 초과', type: 'too_many_attempts' },
-              { keyword: '잠시 후 다시', type: 'too_many_attempts' },
-              { keyword: '새로운 환경', type: 'new_environment' },
-            ];
-            const detectedErrors: { keyword: string; type: string }[] = [];
-            // visible 에러 div 텍스트에서만 키워드 검색 (false positive 방지)
-            if (visibleErrorText.length > 0) {
-              for (let p = 0; p < errorKeywords.length; p++) {
-                if (visibleErrorText.includes(errorKeywords[p].keyword)) {
-                  detectedErrors.push(errorKeywords[p]);
-                }
-              }
-            }
-
-            // ═══ 3. 페이지 요소 존재 확인 ═══
-            const hasIdField = !!document.querySelector('#id');
-            const hasPwField = !!document.querySelector('#pw');
-            const hasLoginButton = !!(
-              document.querySelector('button.btn_done[id^="loginBtn"]') ||
-              document.getElementById('log.login') ||
-              document.querySelector('button.btn_login') ||
-              document.querySelector('button[type="submit"]')
-            );
-
-            // 캡차 감지 방식 (디버깅용)
-            const captchaMethod = ncaptchaSplitActive ? 'ncaptchaSplit' :
-              hasCaptchaText ? '텍스트' :
-              hasCaptchaElement ? 'DOM요소' :
-              hasCaptchaImage ? '이미지' :
-              suspiciousIframeCount > 0 ? 'iframe' : 'none';
-
-            return {
-              hasCaptchaText: hasCaptchaText,
-              hasCaptchaElement: hasCaptchaElement,
-              hasCaptchaImage: hasCaptchaImage,
-              ncaptchaSplitActive: !!ncaptchaSplitActive,
-              hasCaptcha: hasCaptcha,
-              captchaMethod: captchaMethod,
-              errorMessages: errorMessages,
-              detectedErrors: detectedErrors,
-              hasIdField: hasIdField,
-              hasPwField: hasPwField,
-              hasLoginButton: hasLoginButton,
-              suspiciousIframeCount: suspiciousIframeCount,
-              bodyTextSnippet: bodyText.substring(0, 500),
-            };
-          }).catch(() => null);
-
-          if (!pageAnalysis) {
-            // evaluate 실패 — 페이지 전환 중일 수 있음
-            continue;
-          }
-
-          // ─── 5-A: 로그인 에러 메시지 감지 → 즉시 실패 (재시도 무의미) ───
-          if (pageAnalysis.detectedErrors.length > 0) {
-            const firstError = pageAnalysis.detectedErrors[0];
-            const errorTexts = pageAnalysis.errorMessages.map(e => e.text).join(', ');
-
-            switch (firstError.type) {
-              case 'wrong_password':
-                loginErrorDetected = `❌ 비밀번호가 틀렸습니다. 네이버 로그인 비밀번호를 확인해주세요.${errorTexts ? ` (${errorTexts})` : ''}`;
-                break;
-              case 'wrong_credentials':
-                loginErrorDetected = `❌ 아이디 또는 비밀번호가 일치하지 않습니다. 다시 확인해주세요.${errorTexts ? ` (${errorTexts})` : ''}`;
-                break;
-              case 'wrong_id':
-                loginErrorDetected = `❌ 존재하지 않는 아이디입니다. 아이디를 확인해주세요.${errorTexts ? ` (${errorTexts})` : ''}`;
-                break;
-              case 'account_locked':
-                loginErrorDetected = `🔒 계정이 잠겼거나 이용이 제한되었습니다. 네이버 고객센터에서 확인해주세요.${errorTexts ? ` (${errorTexts})` : ''}`;
-                break;
-              case 'too_many_attempts':
-                loginErrorDetected = `⏳ 로그인 시도 횟수가 초과되었습니다. 잠시 후 다시 시도해주세요.${errorTexts ? ` (${errorTexts})` : ''}`;
-                break;
-              default:
-                loginErrorDetected = `❌ 로그인 에러: ${firstError.keyword}${errorTexts ? ` (${errorTexts})` : ''}`;
-            }
-
-            this.log(`❌ 로그인 에러 감지: ${loginErrorDetected}`);
-
-            // 사용자에게 알림
-            if (this.progressCallback) {
-              this.progressCallback(0, 100, loginErrorDetected);
-            }
-            await playAlertSound(3);
-
-            // ⚠️ 단, 'too_many_attempts'와 'new_environment'는 사용자 개입으로 해결 가능
-            if (firstError.type === 'too_many_attempts' || firstError.type === 'new_environment' || firstError.type === 'suspicious_login') {
-              challengeDetected = true;
-              stuckOnLoginPageSince = stuckOnLoginPageSince || Date.now();
-              // ✅ [v2.10.285] 봇 감지 — 이 계정 backoff 기록 (다음 자동 발행 흐름에서 자동 skip)
-              try {
-                const accountId = (this as any).naverId || (this as any).accountId || 'unknown';
-                if (accountId && accountId !== 'unknown') {
-                  recordBotBackoff(accountId, firstError.type);
-                  this.log(`🛡️ [Backoff] ${firstError.type} 감지 → 봇 점수 자연 감소 위해 일정 시간 자동 발행 제외됩니다.`);
-                }
-              } catch { /* silent */ }
-              continue; // 사용자가 해결할 수 있으므로 대기 계속
-            }
-
-            // 비밀번호 틀림 등은 즉시 실패
-            throw new Error(loginErrorDetected);
-          }
-
-          // ─── 5-B: 캡차/보안문자 감지 ───
-          if (pageAnalysis.hasCaptcha) {
-            if (!challengeDetected) {
-              challengeDetected = true;
-              lastSoundTime = Date.now();
-              stuckOnLoginPageSince = null; // 캡차 감지되었으므로 stuck 카운터 리셋
-              // ✅ [v2.10.285] 캡차 = 봇 감지 — 이 계정 backoff 기록
-              try {
-                const accountId = (this as any).naverId || (this as any).accountId || 'unknown';
-                if (accountId && accountId !== 'unknown') {
-                  recordBotBackoff(accountId, 'captcha');
-                  this.log('🛡️ [Backoff] 캡차 감지 → 봇 점수 자연 감소 위해 일정 시간 자동 발행 제외됩니다.');
-                }
-              } catch { /* silent */ }
-
-              const detectionMethod = pageAnalysis.captchaMethod || 'unknown';
-
-              this.log('');
-              this.log('🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨');
-              this.log(`⚠️  캡차/보안문자가 감지되었습니다! (감지 방식: ${detectionMethod})`);
-              this.log('🖱️  브라우저 창에서 캡차를 직접 해결해주세요!');
-              this.log('📝  캡차 해결 후 비밀번호가 지워졌다면 다시 입력해주세요!');
-              this.log('⏳  해결될 때까지 최대 10분간 기다립니다...');
-              this.log('🔔  30초마다 알림 소리가 울립니다.');
-              this.log('🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨');
-              this.log('');
-
-              await bringBrowserToFront();
-              await playAlertSound(5); // 첫 감지 시 5번 울림
-
-              if (this.progressCallback) {
-                this.progressCallback(0, 100, '🚨 캡차 감지! 브라우저에서 캡차를 해결해주세요!');
-              }
-            } else {
-              // 주기적 알림 (30초 간격)
-              if (Date.now() - lastSoundTime > SOUND_INTERVAL) {
-                lastSoundTime = Date.now();
-                const remainSec = Math.floor((LOGIN_TOTAL_TIMEOUT - elapsed) / 1000);
-                this.log(`⏳ 캡차 해결 대기 중... (남은 시간: ${Math.floor(remainSec / 60)}분 ${remainSec % 60}초)`);
-                this.log(`   💡 브라우저 창에서 캡차를 직접 해결해주세요!`);
-                await playAlertSound(2);
-                if (this.progressCallback) {
-                  this.progressCallback(0, 100, `🚨 캡차 대기 중 (${Math.floor(remainSec / 60)}분 ${remainSec % 60}초 남음)`);
-                }
-              }
-            }
-            continue;
-          } else if (challengeDetected && !twoFactorDetected) {
-            // 캡차가 사라졌으면 해결된 것으로 간주
-            challengeDetected = false;
-            stuckOnLoginPageSince = null;
-            this.log('✅ 캡차/보안 인증이 해결되었습니다! 로그인을 계속 진행합니다...');
-
-            // ✅ [2026-03-30 FIX] 캡차 해결 후 비밀번호 필드 확인 — 캡차 과정에서 초기화되었을 수 있음
-            try {
-              const pwAfterCaptcha = await page.evaluate(() => {
-                const pw = document.querySelector('#pw') as HTMLInputElement;
-                return pw?.value?.length || 0;
-              });
-              if (pwAfterCaptcha === 0) {
-                this.log('⚠️ 비밀번호가 초기화되었습니다. 자동 재입력 시도...');
-                const pwInput = await page.$('#pw');
-                if (pwInput) {
-                  await pwInput.click();
-                  await this.humanDelay(300, 600);
-                  for (const char of this.options.naverPassword) {
-                    await this.loginKeyType(page, char);
-                    if (Math.random() < 0.05) await this.humanDelay(200, 400);
-                  }
-                  await this.humanDelay(400, 800);
-                  this.log('✅ 비밀번호 재입력 완료');
-                }
-              }
-            } catch (pwCheckErr) {
-              this.log(`⚠️ 비밀번호 확인 중 오류 (무시): ${(pwCheckErr as Error).message?.substring(0, 60)}`);
-            }
-
-            // 캡차 해결 후 로그인 버튼 재클릭 시도
-            await this.delay(1000);
-            try {
-              const retryBtnSelectors = this.LOGIN_BUTTON_SELECTORS;
-
-              for (const selector of retryBtnSelectors) {
-                const retryBtn = await page.$(selector).catch(() => null);
-                if (retryBtn) {
-                  const isClickable = await retryBtn.evaluate((el: Element) => {
-                    const htmlEl = el as HTMLElement;
-                    const buttonEl = el as HTMLButtonElement;
-                    return !buttonEl.disabled && htmlEl.offsetParent !== null;
-                  }).catch(() => false);
-
-                  if (isClickable) {
-                    if (this.cursor) {
-                      const box = await retryBtn.boundingBox();
-                      if (box) {
-                        await this.cursor.moveTo({ x: box.x + box.width / 2, y: box.y + box.height / 2 });
-                        await this.humanDelay(100, 300);
-                        await page.mouse.down();
-                        await this.humanDelay(50, 150);
-                        await page.mouse.up();
-                      } else {
-                        await retryBtn.click();
-                      }
-                    } else {
-                      await retryBtn.click();
-                    }
-                    this.log('🔄 로그인 버튼을 다시 클릭했습니다.');
-                    await this.delay(2000);
-                    break;
-                  }
-                }
-              }
-            } catch (error) {
-              this.log(`ℹ️ 로그인 버튼 재클릭 시도 중 오류 (무시): ${(error as Error).message}`);
-            }
-            continue;
-          }
-
-          // ─── 5-C: 로그인 페이지에 너무 오래 머물러 있음 (미감지 챌린지) ───
-          // 캡차도, 에러도 감지 안 됐는데 여전히 로그인 페이지면 → 무언가 사용자 개입이 필요
-          if (pageAnalysis.hasIdField || pageAnalysis.hasPwField) {
-            if (!stuckOnLoginPageSince) {
-              stuckOnLoginPageSince = Date.now();
-            }
-
-            const stuckDuration = Date.now() - stuckOnLoginPageSince;
-            if (genericLoginStallDetected && stuckDuration > GENERIC_LOGIN_STALL_TIMEOUT) {
-              const stalledUrl = page.url();
-              const hint = pageAnalysis.bodyTextSnippet?.substring(0, 180) || '';
-              throw new Error(
-                `자동 로그인 응답 없음: 로그인 버튼 클릭 후에도 ${Math.round(stuckDuration / 1000)}초 동안 로그인 페이지에 머물러 있습니다.\n` +
-                `캡차/2단계 인증은 감지되지 않았습니다.\n` +
-                `현재 URL: ${stalledUrl}\n` +
-                `화면 일부: ${hint}\n` +
-                `브라우저에서 버튼 상태를 확인하거나 반자동 모드로 다시 시도해주세요.`
-              );
-            }
-            if (stuckDuration > STUCK_THRESHOLD && !challengeDetected) {
-              challengeDetected = true;
-              genericLoginStallDetected = true;
-              lastSoundTime = Date.now();
-
-              this.log('');
-              this.log('🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔');
-              this.log('⚠️  로그인이 진행되지 않고 있습니다!');
-              this.log('🖱️  브라우저를 확인해주세요!');
-              this.log('   가능한 원인:');
-              this.log('   • 캡차/보안문자가 떴을 수 있습니다');
-              this.log('   • 비밀번호가 틀렸을 수 있습니다');
-              this.log('   • 새로운 보안 인증이 필요할 수 있습니다');
-              this.log('⏳  최대 10분간 기다립니다. 브라우저에서 직접 로그인을 완료해주세요!');
-              this.log('🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔🔔');
-              this.log('');
-              this.log(`   📍 현재 페이지 내용 (일부): ${pageAnalysis.bodyTextSnippet.substring(0, 200)}`);
-
-              await bringBrowserToFront();
-              await playAlertSound(5);
-
-              if (this.progressCallback) {
-                this.progressCallback(0, 100, '🔔 로그인 진행 안 됨! 브라우저를 확인해주세요!');
-              }
-            } else if (challengeDetected && Date.now() - lastSoundTime > SOUND_INTERVAL) {
-              // 주기적 알림 (30초 간격)
-              lastSoundTime = Date.now();
-              const remainSec = Math.floor((LOGIN_TOTAL_TIMEOUT - elapsed) / 1000);
-              this.log(`⏳ 브라우저 확인 대기 중... (남은 시간: ${Math.floor(remainSec / 60)}분 ${remainSec % 60}초)`);
-              await playAlertSound(2);
-              if (this.progressCallback) {
-                this.progressCallback(0, 100, `🔔 브라우저 확인 필요 (${Math.floor(remainSec / 60)}분 ${remainSec % 60}초 남음)`);
-              }
-            }
-          }
-        } catch (evalError) {
-          // evaluate 실패 — 페이지 전환 중일 수 있으므로 무시
-          this.log(`   ⚠️ 페이지 분석 중 오류 (무시): ${(evalError as Error).message?.substring(0, 80)}`);
-        }
-      }
-    }
-
-    // 최종 확인
-    const finalUrl = page.url();
-    if (!loginSuccess && shouldReportFinalLoginUrlFailure(finalUrl)) {
-      if (loginErrorDetected) {
-        throw new Error(loginErrorDetected);
-      } else if (challengeDetected) {
-        throw new Error(`보안 인증 해결 시간이 초과되었습니다. 최종 URL: ${finalUrl}`);
-      } else {
-        throw new Error(`로그인에 실패했습니다. 아이디/비밀번호를 확인해주세요. 최종 URL: ${finalUrl}`);
-      }
-    }
-
-    if (!loginSuccess) {
-      throw new Error('로그인에 실패했습니다. URL이 변경되지 않았습니다.');
-    }
-
-    // 로그인 성공 후 쿠키 저장
-    await this.saveCookies();
-
-    // ✅ BrowserSessionManager에 로그인 상태 알림
-    browserSessionManager.setLoggedIn(this.options.naverId, true);
-
-    // ✅ [v2.10.285] (B) 로그인 후 자연스러운 사람 패턴 대기 — 7~13초 랜덤
-    //    같은 PC에서 즉시 다음 액션으로 가면 봇 감지 점수 ↑.
-    //    실제 사람은 로그인 직후 잠시 페이지를 둘러보거나 멈춤.
-    try {
-      const humanDelay = computePostLoginHumanDelayMs();
-      this.log(`⏱️ 로그인 성공 후 자연 대기 ${Math.round(humanDelay / 1000)}초 (봇 감지 회피)`);
-      await new Promise((resolve) => setTimeout(resolve, humanDelay));
-    } catch { /* ignore */ }
-
-    // ✅ 로그인 직후 세션 워밍업 — 블로그 홈·피드를 둘러보는 사람 패턴으로 봇 감지 회피.
-    //    "로그인 → 즉시 발행"은 네이버 제재 트리거이므로, 발행 전 자연스러운 브라우징을 1회 수행한다.
-    //    warmupSession은 내부에서 예외를 흡수하므로 실패해도 발행 흐름에 영향 없음.
-    try {
-      this.log('🔥 세션 워밍업 중 (블로그 홈·피드 둘러보기)...');
-      await warmupSession(page);
-    } catch { /* 워밍업 실패는 무시 */ }
-
-    // P5 SPEC-NAVER-PROTECTION-2026 — idle mouse shake post-login
-    // Static cursor immediately after login is a bot signature; emit 1~3
-    // micro-movements (~200~900ms total) to mimic involuntary hand motion.
-    await performIdleMouseShake(page).catch(() => { /* ignore */ });
+    this.log('✅ 기존 로그인 상태를 확인했습니다.');
   }
 
   async navigateToBlogWrite(): Promise<void> {
-    const page = this.ensurePage();
-    const blogWriteUrl = this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver';
-
     this.ensureNotCancelled();
-    this.log('🔄 블로그 글쓰기 페이지로 이동 중...');
-
-    // 현재 URL 확인
-    const currentUrl = page.url();
-    this.log(`   현재 URL: ${currentUrl}`);
-
-    // ✅ [2026-03-27 FIX] about:blank 경유 제거 — 네이버 세션 의심 유발 + 캡차 트리거
-    // 이전 에디터의 alert는 ensureDialogHandler()가 자동으로 수락하므로 about:blank 불필요
-    // about:blank → blog.naver.com 패턴은 봇 행동으로 감지될 수 있음
-    if (shouldSkipBlogWriteWarmup(currentUrl)) {
-      this.log('   ℹ️ 이전 에디터 페이지에서 GoBlogWrite로 직접 이동합니다 (about:blank 미경유)');
+    const page = this.ensurePage();
+    // A challenge page must remain visible until an explicit user recovery action.
+    if (isLoginChallengeUrl(page.url())) {
+      getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_CHALLENGE');
+      throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
     }
-
-    // 로그인 페이지에 있으면 로그인이 필요함
-    if (isBlogWriteLoginRedirect(currentUrl)) {
-      this.log('   ⚠️ 로그인 페이지에 있습니다. 로그인을 다시 시도합니다...');
-      // ✅ [2026-03-26 FIX] isLoggedIn 캐시 무효화 — 서버 측 세션 만료 감지
-      // 이 호출이 없으면 다음 run()에서 loginToNaver()가 스킵되어 무한 실패
-      browserSessionManager.setLoggedIn(this.options.naverId, false);
-      throw new Error(
-        '로그인이 필요합니다.\n\n' +
-        '현재 로그인 페이지에 있습니다.\n' +
-        '이는 다음과 같은 이유로 발생할 수 있습니다:\n\n' +
-        '1. 로그인이 완료되지 않았습니다.\n' +
-        '2. 로그인 세션이 만료되었습니다.\n' +
-        '3. 캡차 인증이 필요합니다.\n\n' +
-        '해결 방법:\n' +
-        '1. 브라우저 창에서 로그인을 완료해주세요.\n' +
-        '2. 캡차가 나타나면 수동으로 해결해주세요.\n' +
-        '3. 로그인 완료 후 다시 시도해주세요.'
-      );
-    }
-
-    // ═══════════════════════════════════════════════════════════════════
-    // 🛡️ [2026-03-23] 끝판왕 워밍업 브라우징 — 네이버 메인 → (랜덤 서비스) → 블로그 홈 → 글쓰기
-    // ✅ [2026-03-27 FIX] 이미 블로그/에디터에 있으면 워밍업 스킵 — 매 발행마다 반복하면 봇 패턴
-    // ═══════════════════════════════════════════════════════════════════
-    const shouldSkipWarmup = shouldSkipBlogWriteWarmup(currentUrl);
-
-    if (shouldSkipWarmup) {
-      this.log('   ⚡ 워밍업 스킵 (이미 블로그 도메인에 위치 — 연속 발행 최적화)');
-    } else {
-    this.log('   🛡️ 끝판왕 워밍업 브라우징 시작...');
     try {
-      // Step 1: 네이버 메인 방문 (5~8초 체류)
-      this.log('   🌐 네이버 메인 방문 중...');
-      await page.goto('https://www.naver.com', { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => {});
-      const naverStay = this.randomInt(5000, 8000);
-      
-      // 네이버 메인에서 자연스러운 행동
-      await page.evaluate(() => window.scrollBy(0, 150 + Math.random() * 250)).catch(() => {});
-      await this.humanDelay(1500, 2500);
-      
-      // 마우스 이동 시뮬레이션 (검색창 근처)
-      const vs1 = page.viewport();
-      if (vs1) {
-        await page.mouse.move(
-          this.randomInt(300, vs1.width - 300),
-          this.randomInt(80, 200),
-          { steps: this.randomInt(10, 20) }
-        ).catch(() => {});
-      }
-      await this.humanDelay(1000, 2000);
-      await page.evaluate(() => window.scrollBy(0, 100 + Math.random() * 300)).catch(() => {});
-      await this.delay(naverStay - 3000);
-      this.log(`   ✅ 네이버 메인 ${Math.round(naverStay/1000)}초 체류 완료`);
-      
-      // Step 1.5: (끝판왕) 20% 확률로 랜덤 네이버 서비스 경유 — 실제 사용자는 뉴스/카페도 봄
-      if (Math.random() < 0.20) {
-        const naverServices = [
-          { name: '네이버 뉴스', url: 'https://news.naver.com' },
-          { name: '네이버 카페', url: 'https://cafe.naver.com' },
-          { name: '네이버 쇼핑', url: 'https://shopping.naver.com' },
-          { name: '네이버 블로그 탐색', url: 'https://section.blog.naver.com' },
-        ];
-        const service = naverServices[Math.floor(Math.random() * naverServices.length)];
-        this.log(`   🎲 랜덤 서비스 경유: ${service.name} (끝판왕 행동)`);
-        await page.goto(service.url, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
-        
-        const serviceStay = this.randomInt(3000, 7000);
-        // 서비스 페이지에서 자연스러운 행동
-        for (let s = 0; s < this.randomInt(1, 3); s++) {
-          await page.evaluate(() => window.scrollBy(0, 200 + Math.random() * 400)).catch(() => {});
-          await this.humanDelay(800, 1800);
-        }
-        await this.delay(Math.max(0, serviceStay - 2000));
-        this.log(`   ✅ ${service.name} ${Math.round(serviceStay/1000)}초 체류 완료`);
-      }
-      
-      // Step 2: 블로그 홈 방문 (5~10초 체류)
-      const blogHomeUrl = `https://blog.naver.com/${this.options.naverId}`;
-      this.log('   🏠 블로그 홈 방문 중...');
-      await page.goto(blogHomeUrl, { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(() => {});
-      
-      const blogStay = this.randomInt(5000, 10000);
-      this.log(`   👀 블로그 홈 둘러보는 중... (${Math.round(blogStay/1000)}초)`);
-      
-      // 자연스러운 스크롤 (여러 번)
-      for (let scroll = 0; scroll < this.randomInt(2, 4); scroll++) {
-        await page.evaluate(() => window.scrollBy(0, 200 + Math.random() * 300)).catch(() => {});
-        await this.humanDelay(800, 2000);
-      }
-      
-      // 마우스 이동 시뮬레이션 (여러 번)
-      const vs2 = page.viewport();
-      if (vs2) {
-        for (let mm = 0; mm < this.randomInt(2, 3); mm++) {
-          await page.mouse.move(
-            this.randomInt(150, vs2.width - 150),
-            this.randomInt(150, vs2.height - 150),
-            { steps: this.randomInt(8, 15) }
-          ).catch(() => {});
-          await this.humanDelay(500, 1200);
-        }
-      }
-      
-      await this.delay(Math.max(0, blogStay - 4000));
-      
-      // 스크롤 복귀
-      await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'smooth' })).catch(() => {});
-      await this.humanDelay(800, 1500);
-      this.log('   🛡️ 끝판왕 워밍업 브라우징 완료!');
-    } catch (warmupErr) {
-      this.log(`   ⚠️ 워밍업 브라우징 스킵 (${(warmupErr as Error).message})`);
-    }
-    } // ✅ [2026-03-27] shouldSkipWarmup else 블록 종료
-
-    // 블로그 글쓰기 페이지로 이동
-    this.log('   📝 블로그 글쓰기 페이지로 이동합니다...');
-
-    let navigationSuccess = false;
-    let lastError: Error | null = null;
-
-    // 최대 3번 시도
-    for (let attempt = 1; attempt <= 3; attempt++) {
-      try {
-        this.log(`   🔄 시도 ${attempt}/3...`);
-
-        // ✅ [v2.10.67] 30000 → 60000ms 확장
-        //   사용자 보고: Navigation timeout of 30000 ms exceeded
-        //   원인: 네트워크/세션/네이버 응답 지연 시 30초 부족 (특히 GEO 오버레이 등으로 발행 부하 증가 시점)
-        await page.goto(blogWriteUrl, {
-          waitUntil: 'domcontentloaded',
-          timeout: NAVER_TIMEOUTS.PAGE_LOAD
+      if (!classifyBlogWriteNavigationUrl(page.url()).isEditorUrl) {
+        const response = await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
+          waitUntil: 'domcontentloaded', timeout: NAVER_TIMEOUTS.PAGE_LOAD,
         });
-
-        // 페이지 로드 대기
-        await this.delay(3000);
-
-        // URL 확인
-        const finalUrl = page.url();
-        const finalNavigation = classifyBlogWriteNavigationUrl(finalUrl);
-        this.log(`   최종 URL: ${finalUrl}`);
-
-        // Chromium 에러 페이지 감지 (일시적 네트워크 오류/차단/리다이렉트 실패 등)
-        if (finalNavigation.isBrowserError) {
-          const pageTitle = await page.title().catch(() => '');
-          throw new Error(
-            `페이지 로딩 오류 감지 (크롬 에러 페이지)\n` +
-            `URL: ${finalUrl}\n` +
-            (pageTitle ? `TITLE: ${pageTitle}` : '')
-          );
-        }
-
-        // ✅ [2026-02-14] 기기 등록 페이지 자동 처리 (URL + 페이지 텍스트 이중 감지)
-        if (await this.isDeviceConfirmPage(page)) {
-          this.log('   📱 기기 등록 페이지 감지 - 자동 바이패스 중...');
-          await this.handleDeviceConfirmPage(page);
-          continue; // 바이패스 후 다시 블로그 이동 시도
-        }
-
-        // ✅ [2026-03-24 FIX] 로그인/세션 문제 감지 — 로그인 페이지 + 메인 페이지 리다이렉트 통합 처리
-        const isLoginRedirect = finalNavigation.isLoginRedirect;
-        // ✅ [v2.7.41] 에디터 URL 화이트리스트 — Redirect 체인 누락 회귀 수정
-        //   사용자 보고: blog.naver.com/{id}?Redirect=Write 페이지에서 "글을 불러오고 있습니다..." 무한로딩
-        //   원인: GoBlogWrite → blog.naver.com/{id}?Redirect=Write → PostWriteForm.naver redirect 체인에서
-        //         중간 URL이 화이트리스트 누락 → fallback 분기로 빠져 #mainFrame 못 찾고 멍때림
-        //   수정: Redirect=Write / PostWriteForm 패턴 추가 + #mainFrame 안착 별도 검증
-        const isEditorUrl = finalNavigation.isEditorUrl;
-        const isBlogDomain = finalNavigation.isBlogDomain;
-
-        // 에디터 URL 패턴이 확인되면 즉시 성공 (가장 빠른 경로)
-        if (isEditorUrl) {
-          this.log(`   ✅ 에디터 페이지 확인됨`);
-          // 아래 성공 처리로 진행
-        }
-        // 로그인 페이지로 리다이렉트된 경우
-        else if (isLoginRedirect) {
-          this.log(`   ⚠️ 로그인 페이지로 리다이렉트됨. 로그인 세션이 만료되었습니다.`);
-          this.log(`   [WriteRedirect] cookies=${await describeNaverSessionCookies(page)}`);
-          // ✅ [2026-03-26 FIX] isLoggedIn 캐시 무효화 — 이게 없으면 loginToNaver()가 캐시 때문에 스킵됨
-          browserSessionManager.setLoggedIn(this.options.naverId, false);
-
-          // 마지막 시도가 아니면 재로그인 시도
-          if (attempt < 3) {
-            this.log(`   🔄 로그인을 다시 시도합니다...`);
-            await this.loginToNaver();
-            continue;
-          } else {
-            // ✅ 바로 에러 던지지 말고 수동 로그인 대기!
-            this.log('');
-            this.log('🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨');
-            this.log('⚠️  세션이 계속 만료됩니다!');
-            this.log('');
-            this.log('🖱️  브라우저에서 직접 로그인해주세요:');
-            this.log('   1. 아이디/비밀번호 입력');
-            this.log('   2. 캡차 해결 (있으면)');
-            this.log('   3. 로그인 버튼 클릭');
-            this.log('');
-            this.log('⏳  로그인 완료될 때까지 10분간 기다립니다...');
-            this.log('🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨');
-            this.log('');
-
-            // Windows 알림음
-            try {
-              const { exec } = await import('child_process');
-              exec('powershell -c "1..5 | ForEach-Object { [console]::beep(1000,200); Start-Sleep -Milliseconds 100 }"', { windowsHide: true });
-            } catch (e) { console.debug('[Sound] 세션만료 알림음 실패:', (e as Error).message); }
-
-            if (this.progressCallback) {
-              this.progressCallback(0, 100, '🚨 세션 만료! 브라우저에서 직접 로그인해주세요!');
-            }
-
-            // 수동 로그인 대기 (최대 10분)
-            await this.waitForManualLogin(page, 600000);
-
-            // 수동 로그인 성공 후 블로그 페이지로 다시 이동
-            this.log('🔄 블로그 글쓰기 페이지로 다시 이동합니다...');
-            // ✅ [2026-03-26 FIX] 수동 로그인 성공 캐시 반영
-            browserSessionManager.setLoggedIn(this.options.naverId, true);
-            // ✅ [v2.10.67] 30000 → 60000ms (사용자 보고: Navigation timeout of 30000 ms exceeded)
-            await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
-              waitUntil: 'domcontentloaded',
-              timeout: NAVER_TIMEOUTS.PAGE_LOAD
-            });
-            await this.delay(3000);
-
-            const retryUrl = page.url();
-            const retryNavigation = classifyBlogWriteNavigationUrl(retryUrl);
-            const retryIsEditor = retryNavigation.isEditorUrl;
-            const retryHasEditorFrame = !retryIsEditor ? await page.evaluate(() => {
-              return !!document.querySelector('#mainFrame, iframe[name="mainFrame"]');
-            }).catch(() => false) : true;
-            const manualRetryNavigation = resolveManualLoginRetryWriteNavigation(retryUrl, retryHasEditorFrame);
-
-            if (manualRetryNavigation.isReadyForEditor) {
-              navigationSuccess = true;
-              break;
-            } else if (manualRetryNavigation.status === 'blog-main-without-editor') {
-              // 블로그 도메인이지만 에디터가 아님 → 재시도 (에러 대신)
-              this.log(`   ⚠️ 수동 로그인 후 블로그 메인으로 이동됨 (에디터 아님): ${retryUrl}`);
-              throw new Error('수동 로그인 후 블로그 에디터가 아닌 메인 페이지로 이동되었습니다.');
-            } else {
-              throw new Error('수동 로그인 후에도 블로그 페이지 접근 실패');
-            }
-          }
-        }
-        // ✅ [2026-03-24 FIX] 메인 페이지 또는 비-에디터 페이지로 리다이렉트 감지
-        // 네이버 메인(www.naver.com) 또는 블로그 홈(blog.naver.com/{id})으로 리다이렉트된 경우
-        // → 세션이 유효하지만 GoBlogWrite 리다이렉트가 에디터 대신 메인으로 이동한 경우
-        else if (!isBlogDomain) {
-          // 네이버 메인이나 완전히 다른 페이지로 이동됨
-          this.log(`   ⚠️ 메인 페이지로 리다이렉트됨: ${finalUrl}`);
-          // ✅ [2026-03-26 FIX] isLoggedIn 캐시 무효화 — 이게 없으면 loginToNaver()가 캐시 때문에 스킵됨
-          browserSessionManager.setLoggedIn(this.options.naverId, false);
-          if (attempt < 3) {
-            this.log(`   🔄 세션 문제로 판단, 재로그인 후 재시도합니다...`);
-            await this.loginToNaver();
-            continue;
-          }
-          throw new Error(
-            `블로그 글쓰기 페이지로 이동하지 못했습니다.\n\n` +
-            `현재 URL: ${finalUrl}\n` +
-            `예상 URL: https://blog.naver.com/GoBlogWrite.naver\n\n` +
-            `네이버 메인 페이지로 리다이렉트되었습니다. 세션이 만료되었을 수 있습니다.`
-          );
-        }
-        // blog.naver.com 도메인이지만 에디터가 아닌 경우 (블로그 홈 등)
-        else if (isBlogDomain && !isEditorUrl) {
-          // DOM에서 에디터 프레임 존재 여부로 최종 판단
-          const hasEditorFrame = await page.evaluate(() => {
-            return !!document.querySelector('#mainFrame, iframe[name="mainFrame"]');
-          }).catch(() => false);
-
-          if (hasEditorFrame) {
-            this.log(`   ✅ URL에 에디터 패턴은 없지만 에디터 프레임 확인됨`);
-            // 아래 성공 처리로 진행
-          } else {
-            this.log(`   ⚠️ 블로그 메인 페이지로 리다이렉트됨 (에디터 프레임 없음): ${finalUrl}`);
-            if (attempt < 3) {
-              this.log(`   🔄 에디터가 아닌 블로그 페이지입니다. 재시도합니다...`);
-              continue;
-            }
-            throw new Error(
-              `블로그 에디터가 아닌 블로그 메인 페이지로 이동되었습니다.\n\n` +
-              `현재 URL: ${finalUrl}\n` +
-              `에디터 페이지로 직접 이동해주세요.`
-            );
-          }
-        }
-
-        // 성공!
-        navigationSuccess = true;
-        break;
-
-      } catch (error) {
-        lastError = error as Error;
-        this.log(`   ❌ 시도 ${attempt} 실패: ${lastError.message}`);
-
-        if (attempt < 3) {
-          this.log(`   ⏳ 2초 후 재시도합니다...`);
-          await this.delay(2000);
-        }
+        this.ensureNotCancelled();
+        if (response && response.status() >= 400) throw new AccountExecutionGuardError('NETWORK_WAIT');
       }
+      if (isLoginChallengeUrl(page.url())) throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
+      const destination = classifyBlogWriteNavigationUrl(page.url());
+      if (destination.isLoginRedirect) throw new AccountExecutionGuardError('LOGIN_REQUIRED');
+      if (!destination.isBlogDomain) throw new AccountExecutionGuardError('NETWORK_WAIT');
+      // The frame/readiness code handles editor rendering without another login.
+      await page.waitForSelector('#mainFrame, iframe[name="mainFrame"], .se-main-container', { timeout: 20000 });
+      this.ensureNotCancelled();
+    } catch (error) {
+      const code = error instanceof AccountExecutionGuardError ? error.code : 'NETWORK_WAIT';
+      getAccountExecutionGuard().pause(this.options.naverId, code === 'ACCOUNT_BUSY' ? 'NETWORK_WAIT' : code);
+      throw error instanceof AccountExecutionGuardError ? error : new AccountExecutionGuardError('NETWORK_WAIT', '글쓰기 화면을 확인하지 못했습니다. 원고를 보존했으니 연결 상태를 확인해 주세요.');
     }
-
-    if (!navigationSuccess) {
-      throw lastError || new Error('블로그 글쓰기 페이지로 이동할 수 없습니다.');
-    }
-
-    this.log('✅ 블로그 글쓰기 페이지로 성공적으로 이동했습니다.');
   }
 
   async switchToMainFrame(): Promise<void> {
@@ -4171,52 +2049,10 @@ export class NaverBlogAutomation {
     let currentUrl = page.url();
     this.log(`   현재 페이지 URL: ${currentUrl}`);
 
-    // ✅ 로그인 페이지에 있으면 수동 로그인 대기 (바로 에러 던지지 않음!)
     if (isBlogWriteLoginRedirect(currentUrl)) {
-      this.log('');
-      this.log('🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨');
-      this.log('⚠️  로그인 페이지에 있습니다!');
-      this.log('');
-      this.log('🖱️  브라우저에서 직접 로그인해주세요:');
-      this.log('   1. 아이디/비밀번호 입력');
-      this.log('   2. 캡차 해결 (있으면)');
-      this.log('   3. 로그인 버튼 클릭');
-      this.log('');
-      this.log('⏳  로그인 완료될 때까지 10분간 기다립니다...');
-      this.log('🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨');
-      this.log('');
-
-      // Windows 알림음
-      try {
-        const { exec } = await import('child_process');
-        exec('powershell -c "1..5 | ForEach-Object { [console]::beep(1000,200); Start-Sleep -Milliseconds 100 }"', { windowsHide: true });
-      } catch (e) { console.debug('[Sound] 로그인 알림음 실패:', (e as Error).message); }
-
-      if (this.progressCallback) {
-        this.progressCallback(0, 100, '🚨 로그인 필요! 브라우저에서 직접 로그인해주세요!');
-      }
-
-      // 수동 로그인 대기 (최대 10분)
-      await this.waitForManualLogin(page, 600000);
-
-      // 로그인 성공 후 블로그 페이지로 이동
-      this.log('🔄 블로그 글쓰기 페이지로 이동합니다...');
-      // ✅ [2026-03-26 FIX] 수동 로그인 성공 캐시 반영
-      browserSessionManager.setLoggedIn(this.options.naverId, true);
-      // ✅ [v2.10.67] 30000 → 60000ms (사용자 보고: Navigation timeout)
-      await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
-        waitUntil: 'domcontentloaded',
-        timeout: NAVER_TIMEOUTS.PAGE_LOAD
-      });
-      await this.delay(3000);
-
-      // URL 다시 확인
-      currentUrl = page.url();
-      this.log(`   로그인 후 URL: ${currentUrl}`);
-
-      if (isBlogWriteLoginRedirect(currentUrl)) {
-        throw new Error('로그인 후에도 블로그 페이지 접근 실패. 네이버 계정 보안 설정을 확인해주세요.');
-      }
+      this.log('로그인이 필요하여 작업을 중단했습니다. 계정 관리에서 네이버 확인 후 재개해주세요.');
+      getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED');
+      throw new AccountExecutionGuardError('LOGIN_REQUIRED');
     }
 
     // ✅ [2026-03-24 FIX] 블로그 글쓰기 페이지 검증 강화 — URL 패턴 + DOM 기반
@@ -5165,7 +3001,8 @@ export class NaverBlogAutomation {
   ): Promise<void> {
     if (mode === 'publish') this.immediatePublishCommitAttempted = false;
     const beforeIrreversibleCommit = async (): Promise<void> => {
-      if (!runOptions) return;
+      this.ensureNotCancelled();
+      if (runOptions) {
       let validatedSnapshot: Awaited<ReturnType<typeof collectEditorVisibleSnapshot>> | undefined;
       if (requiresMainProcessEditorVisibleSnapshot(runOptions)) {
         const snapshotFrame = await this.getAttachedFrame();
@@ -5177,6 +3014,14 @@ export class NaverBlogAutomation {
         const finalSnapshotFrame = await this.getAttachedFrame();
         const finalSnapshot = await collectEditorVisibleSnapshot(finalSnapshotFrame);
         assertEditorVisibleSnapshotUnchanged(validatedSnapshot, finalSnapshot);
+      }
+      }
+      this.ensureNotCancelled();
+      if (mode !== 'draft') {
+        await browserSessionManager.ensureServerSession(this.options.naverId);
+        this.ensureNotCancelled();
+        if (!this.accountWorkId) throw new AccountExecutionGuardError('PUBLISH_OUTCOME_UNKNOWN');
+        getPublicationCommitJournal().markSubmitting(this.options.naverId, this.accountWorkId);
       }
     };
     // ✅ [2026-02-07 FIX] 발행 모드 명시적 로깅 (디버깅용)
@@ -6752,6 +4597,12 @@ export class NaverBlogAutomation {
         }
         return result;
       } catch (error) {
+        if (getPublicationCommitJournal().hasUnconfirmed(this.options.naverId)) {
+          getAccountExecutionGuard().pause(this.options.naverId, 'PUBLISH_OUTCOME_UNKNOWN');
+          throw new AccountExecutionGuardError('PUBLISH_OUTCOME_UNKNOWN');
+        }
+        if (!classifyPublishFailure(error).retryable) throw error;
+        this.ensureNotCancelled();
         lastError = error as Error;
         if (
           this.immediatePublishCommitAttempted
@@ -8552,6 +6403,10 @@ export class NaverBlogAutomation {
    * 브라우저를 닫지 않고 포스팅만 수행 (엑셀 포스팅용)
    */
   async runPostOnly(runOptions: RunOptions = {}, keepBrowserOpen: boolean = true): Promise<void> {
+    return this.withAccountExecution(() => this.runPostOnlyInternal(runOptions, keepBrowserOpen));
+  }
+
+  private async runPostOnlyInternal(runOptions: RunOptions = {}, keepBrowserOpen: boolean = true): Promise<void> {
     this.cancelRequested = false;
     const resolvedOptions = this.resolveRunOptions(runOptions);
     beginMainProcessEditorCommitCandidate(runOptions, resolvedOptions, {
@@ -8578,8 +6433,7 @@ export class NaverBlogAutomation {
         // server session; cookie presence alone is a false positive. Verify
         // against the server before entering the editor, re-login if dead.
         const serverSessionOk = await browserSessionManager
-          .ensureServerSession(this.options.naverId)
-          .catch(() => false);
+          .ensureServerSession(this.options.naverId);
         if (serverSessionOk) {
           this.log('✅ 발행 전 서버 세션 유효 확인 — 로그인 단계 건너뜀');
         } else {
@@ -8673,7 +6527,7 @@ export class NaverBlogAutomation {
       // [R7] 발행 종료 — keep-alive ping 재개로 세션 유지(캡차 방지).
       try { browserSessionManager.markPublishing(this.options.naverId, false); } catch { /* best-effort */ }
       // keepBrowserOpen이 false이거나 오류 발생 시에만 브라우저 종료
-      if (!keepBrowserOpen && !postContentAppliedPublishFailure && this.browser) {
+      if (!getAccountExecutionGuard().getStatus(this.options.naverId).paused && !keepBrowserOpen && !postContentAppliedPublishFailure && this.browser) {
         this.log('⏳ 브라우저 종료 중...');
         await this.browser.close().catch(() => undefined);
         this.browser = null;
@@ -8880,6 +6734,7 @@ export class NaverBlogAutomation {
   }
 
   async closeBrowser(): Promise<void> {
+    if (getAccountExecutionGuard().getStatus(this.options.naverId).paused) return;
     if (this.browser) {
       this.log('⏳ 브라우저 종료 중...');
 
@@ -8916,6 +6771,43 @@ export class NaverBlogAutomation {
   }
 
   async run(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string }> {
+    return this.withAccountExecution(() => this.runAccountInternal(runOptions));
+  }
+
+  private accountWorkId = '';
+  private async withAccountExecution<T>(work: () => Promise<T>): Promise<T> {
+    const guard = getAccountExecutionGuard();
+    const journal = getPublicationCommitJournal();
+    if (guard.getStatus(this.options.naverId).busy) throw new AccountExecutionGuardError('ACCOUNT_BUSY');
+    if (journal.hasUnconfirmed(this.options.naverId)) {
+      guard.pause(this.options.naverId, 'PUBLISH_OUTCOME_UNKNOWN');
+    }
+    return guard.runExclusive(this.options.naverId, async () => {
+      this.accountWorkId = randomUUID();
+      try {
+        if (this.options.getExpectedBlogId) browserSessionManager.setExpectedBlogId(this.options.naverId, this.options.getExpectedBlogId(this.options.naverId));
+        const result = await work();
+        if (journal.hasUnconfirmed(this.options.naverId)) journal.markConfirmed(this.options.naverId, this.accountWorkId, this.publishedUrl || undefined);
+        return result;
+      }
+      catch (error) {
+        if (journal.hasUnconfirmed(this.options.naverId)) {
+          guard.pause(this.options.naverId, 'PUBLISH_OUTCOME_UNKNOWN');
+          throw new AccountExecutionGuardError('PUBLISH_OUTCOME_UNKNOWN');
+        }
+        const code = (error as { code?: AccountPauseCode })?.code;
+        if (code && ACCOUNT_PAUSE_CODES.includes(code)) {
+          if (!guard.getStatus(this.options.naverId).paused) guard.pause(this.options.naverId, code);
+        } else {
+          const failure = classifyPublishFailure(error);
+          if (ACCOUNT_PAUSE_CODES.includes(failure.code as AccountPauseCode)) guard.pause(this.options.naverId, failure.code as AccountPauseCode);
+        }
+        throw error;
+      }
+    });
+  }
+
+  private async runAccountInternal(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string }> {
     // ✅ [v2.7.27] Adaptive Limiter — Puppeteer 부하 시 발행 동시성 자동 다운
     const { globalLimiter } = await import('./runtime/adaptiveLimiter.js');
     const release = await globalLimiter.acquire('publish');
@@ -8932,38 +6824,7 @@ export class NaverBlogAutomation {
     this.publishedUrl = null; // ✅ 초기화
     this.log('🚀 네이버 블로그 자동화를 시작합니다...');
 
-    // ✅ [v2.10.285] (C) 봇 감지 backoff 체크 — 이 계정이 backoff 중이면 즉시 skip
-    // ✅ [2026-05-25 v2.10.355] 반자동 모드(skipBotBackoff=true)는 백오프 우회 — 사용자가 캡차 직접 풀 수 있음
-    //   원인: 자동 발행 중 captcha로 인한 백오프가 사용자 즉시 반자동 발행까지 차단하던 회귀
-    //   수정: skipBotBackoff 옵션 시 백오프 체크 skip (this.options/runOptions 둘 다 확인 — BlogExecutor가 runOptions로 전달)
-    const skipBackoff = (this.options as any)?.skipBotBackoff === true || (runOptions as any)?.skipBotBackoff === true;
-    if (!skipBackoff) {
-      try {
-        const accountId = this.options?.naverId;
-        if (accountId) {
-          const backoff = getBotBackoff(accountId);
-          if (backoff) {
-            const remainMs = backoff.expiresAt - Date.now();
-            const remainMin = Math.round(remainMs / 60000);
-            this.log(`🛡️ [Backoff] ${backoff.reason} 감지로 자동 발행 일시 제외 중 (남은 시간: ${Math.floor(remainMin / 60)}h ${remainMin % 60}m)`);
-            this.log('   💡 봇 점수 자연 감소를 위해 잠시 쉽니다. 다음 실행 시 자동 회복됩니다.');
-            throw new Error(`이 계정은 봇 감지로 자동 발행이 일시 중단되었습니다 (${backoff.reason}). 약 ${Math.floor(remainMin / 60)}시간 ${remainMin % 60}분 후 자동 회복됩니다.`);
-          }
-        }
-      } catch (backoffErr: any) {
-        if (backoffErr.message?.includes('봇 감지')) throw backoffErr;
-        // 기타 에러는 무시 (정상 흐름 진행)
-      }
-    } else {
-      this.log('🔓 [Backoff] 반자동 모드 (사용자가 캡차 직접 풀 수 있음) → 봇 감지 백오프 우회');
-    }
-
-    // ✅ [v2.10.285] (A) 계정별 로그인 시차 — multi-account에서 봇 감지 회피
-    if (runOptions.loginStaggerMs && runOptions.loginStaggerMs > 0) {
-      const staggerMs = Math.min(runOptions.loginStaggerMs, 30 * 60 * 1000); // 최대 30분
-      this.log(`⏱️ [Stagger] 다른 계정과 시차를 두기 위해 ${Math.round(staggerMs / 1000)}초 대기합니다 (봇 감지 회피).`);
-      await new Promise((resolve) => setTimeout(resolve, staggerMs));
-    }
+    this.ensureNotCancelled();
 
     const resolvedOptions = this.resolveRunOptions(runOptions);
     beginMainProcessEditorCommitCandidate(runOptions, resolvedOptions, {
@@ -9056,8 +6917,7 @@ export class NaverBlogAutomation {
        //   that false-positived on stale cookies. A dead server session returns false → normal
        //   re-login; any exception/timeout also resolves to false → login proceeds (safe default).
        const serverSessionOk = await browserSessionManager
-         .ensureServerSession(this.options.naverId)
-         .catch(() => false);
+         .ensureServerSession(this.options.naverId);
        if (serverSessionOk) {
          this.log('✅ 발행 전 서버 세션 유효 확인 — 로그인 단계 건너뜀');
        } else {
@@ -9171,68 +7031,17 @@ export class NaverBlogAutomation {
         hasPublishedUrl: Boolean(this.publishedUrl),
       });
 
-      if (postRunPolicy.shouldCloseBrowser && this.browser) {
+      if (!getAccountExecutionGuard().getStatus(this.options.naverId).paused && postRunPolicy.shouldCloseBrowser && this.browser) {
         this.log('⏳ 브라우저 종료 중...');
         await this.browser.close().catch(() => undefined);
         this.browser = null;
         this.page = null;
         this.mainFrame = null;
         this.log('🔚 브라우저가 종료되었습니다.');
-      } else if (postRunPolicy.shouldLogKeepOpen) {
+      } else if (!getAccountExecutionGuard().getStatus(this.options.naverId).paused && postRunPolicy.shouldLogKeepOpen) {
         this.log('ℹ️ 세션 유지를 위해 브라우저를 열어둡니다.');
 
-        // ✅ [2026-03-23] 발행 후 "여운 행동" 극한 강화 — 발행글 확인 + 스크롤 + 블로그 홈 방문 (봇 감지 회피)
-        // 인간은 발행 후 자신의 글을 확인하고, 블로그 홈을 둘러보는 패턴
-        if (postRunPolicy.shouldReviewPublishedPost && this.page && this.publishedUrl) {
-          try {
-            this.log('👀 발행된 글 확인 중... (여운 행동)');
-            const reviewPlan = createPostPublishReviewPlan({
-              naverId: this.options.naverId,
-              publishedUrl: this.publishedUrl,
-              viewport: this.page.viewport(),
-              randomInt: (min, max) => this.randomInt(min, max),
-            });
-
-            await this.page.goto(reviewPlan.publishedUrl, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
-            
-            // 발행된 글에서 5~10초 체류 (인간적 확인 행동)
-            this.log(`   📖 발행글 읽는 중... (${Math.round(reviewPlan.reviewDurationMs/1000)}초)`);
-            
-            // 여러 번 스크롤 (글을 읽는 것처럼)
-            for (let s = 0; s < reviewPlan.reviewScrollCount; s++) {
-              await this.page.evaluate(() => window.scrollBy(0, 200 + Math.random() * 400)).catch(() => {});
-              await this.humanDelay(800, 2000);
-            }
-            
-            // 마우스 이동
-            if (reviewPlan.mouseMove) {
-              await this.page.mouse.move(
-                reviewPlan.mouseMove.x,
-                reviewPlan.mouseMove.y,
-                { steps: reviewPlan.mouseMove.steps }
-              ).catch(() => {});
-            }
-            await this.delay(reviewPlan.afterReviewDelayMs);
-            
-            // 스크롤 복귀
-            await this.page.evaluate(() => window.scrollTo({ top: 0, behavior: 'smooth' })).catch(() => {});
-            await this.humanDelay(500, 1000);
-            
-            // 블로그 홈으로 자연스럽게 이동 (2~5초 체류)
-            this.log('🏠 블로그 홈으로 이동...');
-            await this.page.goto(reviewPlan.blogHomeUrl, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
-            
-            // 블로그 홈에서 스크롤
-            await this.page.evaluate(() => window.scrollBy(0, 150 + Math.random() * 300)).catch(() => {});
-            await this.humanDelay(800, 1500);
-            await this.page.evaluate(() => window.scrollTo({ top: 0, behavior: 'smooth' })).catch(() => {});
-            await this.delay(reviewPlan.afterHomeDelayMs);
-            
-            this.log('✅ 여운 행동 완료 (발행글 확인 → 블로그 홈)');
-          } catch (afterErr) {
-            this.log(`⚠️ 여운 행동 스킵: ${(afterErr as Error).message}`);
-          }
-        }
+        // Keep the published page unchanged; no synthetic browsing or scrolling.
 
         // ✅ [2026-03-26] 발행 완료 후 브라우저 창 최소화 — 사용자가 실수로 닫는 것 방지
         if (postRunPolicy.shouldMinimizeBrowser) {

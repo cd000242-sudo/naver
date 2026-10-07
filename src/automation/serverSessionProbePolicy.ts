@@ -1,58 +1,49 @@
-/**
- * Verdict policy for the pre-publish server-session probe.
- *
- * Background (2026-09-29 diagnostics, accounts mic*, pnc*): the probe
- * fetched PostWriteForm.naver and treated "final URL is not the login page"
- * as a valid session. Naver answers that URL with HTTP 404 (no redirect) when
- * the session is dead, so the gate passed with expired cookies, the editor
- * navigation bounced to nidlogin, and a three-attempt re-login loop followed.
- *
- * A valid session now requires BOTH: no login redirect AND a 2xx response.
- * Anything ambiguous resolves to "invalid" — a wasted re-login is recoverable,
- * a skipped login on a dead session is not.
- *
- * 2026-09-30 follow-up: the bare PostWriteForm.naver route (no blogId) is 404 for
- * a logged-out client, but nothing ever showed it is 2xx for a logged-in one —
- * v2.11.306 logged 0 passes / 2 fails on a session that had published four posts
- * hours earlier, and every "fail" costs a fresh password login (the 보호조치
- * trigger). The probe now fetches GoBlogWrite.naver, the URL the editor navigation
- * itself uses: logged out → 302 to nidlogin (measured), logged in → editor 200.
- */
+import { isLoginChallengeUrl, isLoginProtectionUrl, isNaverSessionLoginUrl, parseNaverSessionUrl } from './loginPageNavigationPolicy.js';
 
 export const SERVER_SESSION_PROBE_URL = 'https://blog.naver.com/GoBlogWrite.naver';
-
+export type ServerSessionProbeStatus = 'ready' | 'login-required' | 'challenge' | 'protected' | 'unavailable' | 'unknown';
 export interface ServerSessionProbeResult {
   finalUrl?: string;
   status?: number;
   error?: string;
+  hasEditor?: boolean;
+  hasLoginForm?: boolean;
+  hasChallenge?: boolean;
+  hasProtection?: boolean;
+  /** Bounded visible text, used only when no editor is present. Never returned in diagnostics. */
+  bodyText?: string;
 }
-
 export interface ServerSessionProbeVerdict {
+  status: ServerSessionProbeStatus;
+  /** Compatibility only: false does NOT mean that submitting credentials is appropriate. */
   ok: boolean;
   reason: string;
 }
-
-const LOGIN_REDIRECT_PATTERN = /nidlogin\.login|nid\.naver\.com\/nidlogin/;
-
 export function isServerSessionLoginRedirect(finalUrl: string | undefined): boolean {
-  return LOGIN_REDIRECT_PATTERN.test(String(finalUrl || ''));
+  return isNaverSessionLoginUrl(finalUrl) && !isLoginChallengeUrl(String(finalUrl || ''));
 }
+const verdict = (status: ServerSessionProbeStatus, reason: string): ServerSessionProbeVerdict => ({ status, ok: status === 'ready', reason });
 
-export function resolveServerSessionProbeVerdict(
-  result: ServerSessionProbeResult | null | undefined,
-): ServerSessionProbeVerdict {
-  if (!result) {
-    return { ok: false, reason: 'no-result' };
+/** Fail closed on ambiguous responses; transport failures never imply logged-out credentials. */
+export function resolveServerSessionProbeVerdict(result: ServerSessionProbeResult | null | undefined): ServerSessionProbeVerdict {
+  if (!result) return verdict('unknown', 'no-result');
+  const url = parseNaverSessionUrl(result.finalUrl);
+  if (!url) return result.error ? verdict('unavailable', 'network-error') : verdict('unknown', 'untrusted-url');
+  // Positive blocking evidence takes priority over stale editor evidence or an HTTP 200.
+  const text = result.hasEditor ? '' : String(result.bodyText || '').slice(0, 12000).replace(/\s+/g, ' ');
+  if (isLoginProtectionUrl(result.finalUrl) || result.hasProtection === true
+    || /보호\s*조치(?:가\s*)?(?:되었|됐|되었습니다|중|된|되었습니다)|이용이\s*제한되었습니다/.test(text)) {
+    return verdict('protected', 'account-protected');
   }
-  if (result.error) {
-    return { ok: false, reason: result.error };
+  if (isLoginChallengeUrl(result.finalUrl || '') || result.hasChallenge === true
+    || /(?:본인\s*(?:인증|확인)|보안\s*(?:인증|확인))(?:을|이)?\s*(?:완료|진행|해\s*주|필요)|자동\s*입력\s*방지\s*(?:문자|확인)/.test(text)) {
+    return verdict('challenge', 'verification-required');
   }
-  if (isServerSessionLoginRedirect(result.finalUrl)) {
-    return { ok: false, reason: `login-redirect ${result.finalUrl}` };
-  }
-  const status = typeof result.status === 'number' ? result.status : NaN;
-  if (!(status >= 200 && status < 300)) {
-    return { ok: false, reason: `http-${Number.isNaN(status) ? 'unknown' : status} ${result.finalUrl || ''}`.trim() };
-  }
-  return { ok: true, reason: `http-${status} ${result.finalUrl || ''}`.trim() };
+  if (result.error) return verdict('unavailable', 'network-error');
+  const httpStatus = Number.isInteger(result.status) ? result.status! : 0;
+  if (httpStatus === 429 || httpStatus >= 500 && httpStatus <= 599) return verdict('unavailable', 'http-' + httpStatus);
+  if (isServerSessionLoginRedirect(result.finalUrl) || result.hasLoginForm === true) return verdict('login-required', 'login-redirect-or-form');
+  if (httpStatus < 200 || httpStatus >= 300) return verdict('unknown', 'http-' + (httpStatus || 'unknown'));
+  if (['blog.naver.com', 'm.blog.naver.com'].includes(url.hostname) && result.hasEditor === true) return verdict('ready', 'editor-http-' + httpStatus);
+  return verdict('unknown', 'missing-editor-evidence');
 }

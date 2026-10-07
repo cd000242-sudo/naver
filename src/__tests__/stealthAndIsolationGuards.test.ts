@@ -159,16 +159,14 @@ describe('T5: 백오프된 계정의 발행 차단 신호', () => {
     expect(isAccountBackedOff(B)).toBe(false);
   });
 
-  it('naverBlogAutomation.ts 백오프 체크 → throw 패턴 보호', () => {
+  it('production publishing uses a persistent stop instead of an expiring backoff', () => {
     const src = readSrc(NBA_PATH);
-    // 핵심 차단 코드 무결성 검증 — 회귀 시 throw 사라지면 즉시 fail
-    expect(src).toMatch(/getBotBackoff\(accountId\)/);
-    expect(src).toMatch(/이 계정은 봇 감지로 자동 발행이 일시 중단/);
+    expect(src.includes('getAccountExecutionGuard().assertAllowed')).toBe(true);
+    expect(src.includes('guard.runExclusive(this.options.naverId')).toBe(true);
   });
-
-  it('skipBotBackoff 옵션 가드 존재 (반자동 모드 우회 보호)', () => {
+  it('semi-automatic mode cannot bypass the account stop', () => {
     const src = readSrc(NBA_PATH);
-    // v2.10.355 fix — 반자동 모드는 백오프 우회. 이 가드 자체가 회귀로 깨지면 fail
-    expect(src).toMatch(/skipBotBackoff/);
+    expect(src.includes('skipBotBackoff')).toBe(false);
+    expect(src.includes('return this.withAccountExecution(() => this.runPostOnlyInternal')).toBe(true);
   });
 });

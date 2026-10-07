@@ -329,6 +329,8 @@ function collectProductionPromptResources(workspaceRoot: string): readonly strin
 }
 
 const SUPPLEMENTAL_RUNTIME_CLOSURE_ROOTS = Object.freeze([
+  'src/main/accountSafetyController.ts',
+  'src/automation/expectedBlogIdentity.ts',
   'src/content/internalLinkManager.ts',
   'src/content/kinExperienceMaterial.ts',
   'src/contentPolicy/claimRepair.ts',
@@ -990,6 +992,8 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
 
     expect(unresolvedEdges).toEqual([]);
     expect(missingRuntimeSources).toEqual([]);
+    const extraRuntimeSources = CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS.filter(p => !expectedRuntimeSources.includes(p));
+    expect(extraRuntimeSources, 'Unreachable runtime sources').toEqual([]);
     expect(CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS).toEqual(expectedRuntimeSources);
     /* [2026-09-01] 30_000 은 전체 스위트 동시 실행에서 부족했다 (실측 35.2초). */
   }, 300_000);

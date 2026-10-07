@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { classifyBlogWriteNavigationUrl } from '../automation/editorNavigationUrlPolicy';
+import { resolveServerSessionProbeVerdict } from '../automation/serverSessionProbePolicy';
 
 const root = process.cwd();
 const read = (relativePath: string): string => readFileSync(join(root, relativePath), 'utf8');
@@ -39,60 +41,25 @@ describe('automation login and image pipeline contracts', () => {
     expect(source).toContain("formData.imageSource === 'local-folder'");
   });
 
-  it('recognizes current Naver writer URL variants after manual login', () => {
-    const source = read('src/naverBlogAutomation.ts');
-    const navigationPolicy = read('src/automation/editorNavigationUrlPolicy.ts');
-    const loginStatusPolicy = read('src/automation/loginStatusUrlPolicy.ts');
-    const loginPageNavigationPolicy = read('src/automation/loginPageNavigationPolicy.ts');
-    const urlState = read('src/automation/editorUrlState.ts');
-    const manualLoginPolicy = read('src/automation/manualLoginRecoveryPolicy.ts');
-    const pipelineLogPolicy = read('src/automation/publishPipelineLogPolicy.ts');
+  it.each([
+    'https://blog.naver.com/GoBlogWrite.naver',
+    'https://blog.naver.com/PostWriteForm.naver?blogId=account',
+    'https://blog.naver.com/account?Redirect=Write',
+  ])('recognizes %s after manual login only with positive editor evidence', (finalUrl) => {
+    expect(classifyBlogWriteNavigationUrl(finalUrl).isEditorUrl).toBe(true);
+    expect(resolveServerSessionProbeVerdict({ finalUrl, status: 200, hasEditor: true }).ok).toBe(true);
+    expect(resolveServerSessionProbeVerdict({ finalUrl, status: 200 }).ok).toBe(false);
+  });
 
-    expect(source).toContain('classifyLoginStatusUrl(currentUrl)');
-    expect(loginStatusPolicy).toContain("includes('blog.naver.com')");
-    expect(loginStatusPolicy).toContain("includes('naver.com')");
-    expect(loginPageNavigationPolicy).toContain('resolveLoginPageNavigationUrl');
-    expect(loginPageNavigationPolicy).toContain('classifyLoginGotoError');
-    expect(loginPageNavigationPolicy).toContain('isLoginProxyFailureBody');
-    expect(loginPageNavigationPolicy).toContain('resolvePostLoginProgressUrl');
-    expect(loginPageNavigationPolicy).toContain('isPostLoginFinalCheckSuccess');
-    expect(loginPageNavigationPolicy).toContain('isLoginChallengeUrl');
-    expect(loginPageNavigationPolicy).toContain('shouldInspectLoginPageDom');
-    expect(loginPageNavigationPolicy).toContain('shouldReportFinalLoginUrlFailure');
-    expect(loginPageNavigationPolicy).toContain('shouldNavigateToLoginPageFromCurrentUrl');
-    expect(loginPageNavigationPolicy).toContain('shouldVerifyExistingSessionAfterMissingLoginInput');
-    expect(source).toContain('resolveLoginPageNavigationUrl(loadedUrl)');
-    expect(source).toContain('classifyLoginGotoError(errorMsg)');
-    expect(source).toContain('isLoginProxyFailureBody(failBodySnippet)');
-    expect(source).toContain('resolvePostLoginProgressUrl(currentUrl, loginUrl)');
-    expect(source).toContain('isPostLoginFinalCheckSuccess(finalCheckUrl)');
-    expect(source).toContain('isLoginChallengeUrl(currentUrl)');
-    expect(source).toContain('shouldInspectLoginPageDom(currentUrl)');
-    expect(source).toContain('shouldReportFinalLoginUrlFailure(finalUrl)');
-    expect(source).toContain('shouldNavigateToLoginPageFromCurrentUrl(currentUrl)');
-    expect(source).toContain('shouldVerifyExistingSessionAfterMissingLoginInput(diagUrl)');
-    expect(source).toContain('resolveBlogWriteFrameSwitchSurface(currentUrl)');
-    expect(source).toContain('classifyBlogWriteNavigationUrl(finalUrl)');
-    expect(source).toContain('classifyBlogWriteNavigationUrl(retryUrl)');
-    expect(navigationPolicy).toContain('isNaverWriteEditorUrl(value)');
-    expect(navigationPolicy).toContain('isNaverBlogDomainUrl(value)');
-    expect(navigationPolicy).toContain('isNaverLoginUrl(value)');
-    expect(navigationPolicy).toContain('shouldSkipBlogWriteWarmup');
-    expect(source).toContain('shouldSkipBlogWriteWarmup(currentUrl)');
-    expect(navigationPolicy).toContain('isBlogWriteLoginRedirect');
-    expect(source).toContain('isBlogWriteLoginRedirect(currentUrl)');
-    expect(navigationPolicy).toContain('resolveBlogWriteFrameSwitchSurface');
-    expect(navigationPolicy).toContain('resolveManualLoginRetryWriteNavigation');
-    expect(source).toContain('resolveManualLoginRetryWriteNavigation(retryUrl, retryHasEditorFrame)');
-    expect(manualLoginPolicy).toContain('isManualLoginBlogLandingSuccessful');
-    expect(source).toContain('isManualLoginBlogLandingSuccessful(newUrl)');
-    expect(source).toContain('resolveManualLoginCheckpoint({');
-    expect(manualLoginPolicy).toContain('needsWriteEditorNavigationAfterManualLogin(currentUrl)');
-    expect(urlState).toContain('PostWriteForm');
-    expect(urlState).toContain('[?&]Redirect=Write');
-    expect(source).toContain('PUBLISH_PIPELINE_LOG_MESSAGES.loginStart');
-    expect(source).toContain('PUBLISH_PIPELINE_LOG_MESSAGES.editorFrameReady');
-    expect(pipelineLogPolicy).toContain('[Pipeline] login step start');
-    expect(pipelineLogPolicy).toContain('[Pipeline] editor frame ready');
+  it('checks persistent session state and preserves typed stop errors before editor navigation', () => {
+    const source = read('src/naverBlogAutomation.ts');
+    const manager = read('src/browserSessionManager.ts');
+    expect(source.includes('ensureServerSession(this.options.naverId)')).toBe(true);
+    expect(source.includes('resolveBlogWriteFrameSwitchSurface(currentUrl)')).toBe(true);
+    expect(source.includes('classifyBlogWriteNavigationUrl(page.url())')).toBe(true);
+    expect(source.includes('PUBLISH_PIPELINE_LOG_MESSAGES.editorFrameReady')).toBe(true);
+    expect(manager.includes('getAccountExecutionGuard().pause(accountId, code)')).toBe(true);
+    expect(manager.includes('throw new AccountExecutionGuardError(code)')).toBe(true);
+    expect(/ensureServerSession\([^)]*\)\s*\.catch\(\(\)\s*=>\s*false/.test(source)).toBe(false);
   });
 });

@@ -54,9 +54,12 @@ describe('로그인 → 타이핑 지연 — 설계가 아닌 세 구간', () =>
     expect(shouldAwaitPostLoginNavigation('pending')).toBe(true);
     expect(shouldAwaitPostLoginNavigation('error')).toBe(true);
     expect(shouldAwaitPostLoginNavigation('challenge')).toBe(true);
-    // Wiring guard: the automation consults the policy in front of the 20s navigation wait.
+    // The legacy helper remains compatible, but automatic jobs no longer submit a login form.
     const src = read('naverBlogAutomation.ts');
-    expect(src).toMatch(/if \(shouldAwaitPostLoginNavigation\(clickResult\)\) \{[\s\S]{0,200}waitForNavigation/);
+    expect(/shouldAwaitPostLoginNavigation\(clickResult\)/.test(src)).toBe(false);
+    const login = src.slice(src.indexOf('async loginToNaver()'), src.indexOf('async navigateToBlogWrite()'));
+    expect(login.includes('ensureServerSession(this.options.naverId)')).toBe(true);
+    expect(/waitForNavigation|\.click\(|\.type\(/.test(login)).toBe(false);
   });
 
   it('워밍업 중복 19초: 세션 워밍업이 세워둔 블로그 홈(section.blog.naver.com)도 블로그 도메인으로 본다', () => {

@@ -1,3 +1,4 @@
+import { resolveExpectedBlogId } from './automation/expectedBlogIdentity.js';
 import { app, BrowserWindow, dialog, ipcMain, nativeImage, NativeImage, shell, Notification, Tray, Menu } from 'electron';
 import './runtime/e2eUserDataBootstrap.js';
 // ✅ [v2.7.28] IPC 이중 등록 가드 — 다른 IPC 등록 이전에 반드시 첫 import
@@ -4930,6 +4931,7 @@ registerDatalabApiHandlers();
 import { registerBackupHandlers, performDataBackup } from './main/ipc/backupHandlers.js';
 // ✅ [LDB] LDB IMAGE ULTRA 확장에서 완성 원고를 받는 로컬 브리지 (발행 없음, 목록에만 추가)
 import { startLdbBridge } from './main/ldb-bridge.js';
+import { createAccountSafetyController } from './main/accountSafetyController.js';
 import { isLdbConnectUrl, LDB_CONNECT_SCHEME, createSerializedRefresh } from './main/ldb-launch.js';
 import { deliverLdbPosts } from './main/ldb-delivery.js';
 import { materializeLdbImages } from './main/ldb-images.js';
@@ -4962,7 +4964,9 @@ const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
         const drafts = posts.length ? await materializeLdbImages(posts, path.join(app.getPath('userData'), 'ldb-images')) : [];
         return deliverLdbPosts(mainWindow?.webContents, ipcMain, drafts, 20_000, destination);
       };
+      const accountSafety = createAccountSafetyController(() => blogAccountManager.getAllAccounts(), browserSessionManager);
       const destinations = createLdbDestinations({
+        safety: accountId => accountSafety.status(accountId),
         accounts: () => blogAccountManager.getAllAccounts(), active: () => blogAccountManager.getActiveAccount(),
         fetchCategories: fetchLdbBlogCategories, deliver,
       });
@@ -6126,12 +6130,21 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           sendLog(`✅ [${account.name}] 발행 성공: ${result.url || '완료'}`);
         } else {
           sendLog(`❌ [${account.name}] 발행 실패: ${result.message}`);
+          if (['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'].includes(failureCode)) {
+            sendLog('⏹️ 계정 상태 확인이 필요하여 전체 대기열을 중단합니다. 다른 계정으로 이어서 발행하지 않습니다.');
+            break; // finally still refunds the quota and releases the handoff owner.
+          }
         }
 
       } catch (error) {
         const errorMsg = (error as Error).message;
-        results.push({ accountId, success: false, message: errorMsg, failureCode: classifyPublishFailure(error).code });
+        const failureCode = classifyPublishFailure(error).code;
+        results.push({ accountId, success: false, message: errorMsg, failureCode });
         sendLog(`❌ [${account.name}] 발행 오류: ${errorMsg}`);
+        if (['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'].includes(failureCode)) {
+          sendLog('⏹️ 계정 상태 확인이 필요하여 전체 대기열을 중단합니다.');
+          break;
+        }
       } finally {
         try {
           await accountQuotaLease?.rollback();
@@ -9543,7 +9556,7 @@ app.whenReady().then(async () => {
       createAutomation: (naverId: string, naverPassword: string, accountProxyUrl?: string) => {
         // ✅ [2026-03-02] sendLog 주입 → 브라우저 자동화 로그가 UI에 실시간 표시
         // ✅ [2026-03-23] accountProxyUrl → 계정별 프록시 우선, 미설정 시 글로벌 SmartProxy 폴백
-        return new NaverBlogAutomation({ naverId, naverPassword, accountProxyUrl }, (msg: string) => {
+        return new NaverBlogAutomation({ naverId, naverPassword, accountProxyUrl, getExpectedBlogId: id => resolveExpectedBlogId(id, blogAccountManager.getAllAccounts()) }, (msg: string) => {
           const safeMsg = redactKnownAccountId(msg, naverId);
           console.log(safeMsg);  // 터미널에도 출력
           sendLog(safeMsg);      // 렌더러 UI에도 전달
@@ -9868,6 +9881,7 @@ app.whenReady().then(async () => {
                 // ✅ [2026-03-02] sendLog 주입 → 예약발행 자동화 로그도 UI에 표시
                 schedulerAutomation = new NaverBlogAutomation({
                   naverId: accountNaverId,
+                  getExpectedBlogId: id => resolveExpectedBlogId(id, blogAccountManager.getAllAccounts()),
                   naverPassword: accountNaverPassword,
                   headless: false,
                   slowMo: 50,

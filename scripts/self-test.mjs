@@ -26,6 +26,7 @@ function run(label, command, args, env = {}, timeoutMs = TIMEOUT_MS) {
   const result = spawnSync(command, args, {
     stdio: 'inherit',
     shell: process.platform === 'win32',
+    windowsHide: true,
     timeout: timeoutMs,
     env: { ...process.env, ...env },
   });
@@ -38,8 +39,6 @@ function run(label, command, args, env = {}, timeoutMs = TIMEOUT_MS) {
   console.log(`[self-test] ✅ ${label} 통과`);
 }
 
-run('자동화 파이프라인 모의 smoke', 'node', ['dist/tests/automationSmoke.js']);
-
 const isolatedRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'bln-self-test-'));
 const appEnv = {
   SELF_TEST: '1',
@@ -47,14 +46,18 @@ const appEnv = {
   E2E_USER_DATA_DIR: path.join(isolatedRoot, 'userdata'),
   APPDATA: path.join(isolatedRoot, 'appdata'),
   LOCALAPPDATA: path.join(isolatedRoot, 'localappdata'),
+  HOME: path.join(isolatedRoot, 'home'),
+  USERPROFILE: path.join(isolatedRoot, 'home'),
+  E2E_PROFILE_ROOT: isolatedRoot,
 };
-for (const dir of ['userdata', 'appdata', 'localappdata']) {
+for (const dir of ['userdata', 'appdata', 'localappdata', 'home']) {
   fs.mkdirSync(path.join(isolatedRoot, dir), { recursive: true });
 }
 // Claude Code 등 호스트가 남긴 ELECTRON_RUN_AS_NODE가 있으면 electron이
 // plain node로 떠서 ipcMain이 undefined가 된다 — 반드시 제거.
 delete process.env.ELECTRON_RUN_AS_NODE;
 try {
+  run('자동화 파이프라인 모의 smoke', 'node', ['dist/tests/automationSmoke.js'], appEnv);
   run('앱 부팅 + 번들 헬스 + IPC 핸드셰이크 5종', 'npx', ['electron', '.'], appEnv, BOOT_TIMEOUT_MS);
 } finally {
   /*

@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
+import { resolveServerSessionProbeVerdict } from '../automation/serverSessionProbePolicy';
 import {
   summarizeNaverSessionCookies,
   describeNaverSessionCookies,
@@ -42,18 +43,18 @@ describe('describeNaverSessionCookies', () => {
   });
 });
 
-describe('login diagnostics wiring in naverBlogAutomation', () => {
-  const code = fs.readFileSync(path.resolve(__dirname, '../naverBlogAutomation.ts'), 'utf-8');
-
-  it('logs URL + cookie summary right after every "로그인이 성공적으로 완료" verdict', () => {
-    const hits = code.split('✅ 네이버 로그인이 성공적으로 완료되었습니다.').length - 1;
-    expect(hits).toBeGreaterThanOrEqual(2);
-    const wired = code.match(/로그인이 성공적으로 완료되었습니다\.'\);\s*\n\s*this\.log\(`\s*\[LoginVerdict\] url=/g) || [];
-    expect(wired.length).toBe(hits);
+describe('session diagnostics avoid raw authentication URLs and cookies', () => {
+  it('does not log obsolete login success or redirect URL/cookie bundles', () => {
+    const code = fs.readFileSync(path.resolve(__dirname, '../naverBlogAutomation.ts'), 'utf8');
+    expect(/\[LoginVerdict\]|\[WriteRedirect\]/.test(code)).toBe(false);
   });
-
-  it('logs the cookie summary when the write editor bounces to the login page', () => {
-    expect(code).toMatch(/로그인 페이지로 리다이렉트됨\. 로그인 세션이 만료되었습니다\.`\);\s*\n\s*this\.log\(`\s*\[WriteRedirect\] cookies=/);
+  it('returns a bounded reason without raw URLs or transport error secrets', () => {
+    const verdict = resolveServerSessionProbeVerdict({
+      finalUrl: 'https://blog.naver.com/GoBlogWrite.naver?token=SECRET-TOKEN',
+      error: 'network failed with cookie SECRET-COOKIE',
+    });
+    expect(verdict).toEqual({ status: 'unavailable', ok: false, reason: 'network-error' });
+    expect(JSON.stringify(verdict)).not.toContain('SECRET');
   });
 });
 

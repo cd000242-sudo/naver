@@ -72,3 +72,8 @@ describe('LDB destination bridge', () => {
     expect(deliver).not.toHaveBeenCalled();
   });
 });
+
+it('queries a configured blog ID when it differs from the login ID', async () => {
+ const {service,deps}=fixture(); await service.categories('a');
+ expect(deps.fetchCategories).toHaveBeenCalledWith('blog');
+});

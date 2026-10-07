@@ -11,8 +11,10 @@ describe('post-run policy wiring guard', () => {
     expect(source).toContain('resolvePostRunBrowserPolicy({');
     expect(source).toContain('resolvePostRunPageHealthDecision({');
     expect(source).toContain('resolveStalePageCleanupPlan(allPages, this.page)');
-    expect(source).toContain('createPostPublishReviewPlan({');
-    expect(source).toContain('reviewPlan.reviewScrollCount');
-    expect(source).toContain('reviewPlan.afterHomeDelayMs');
+    expect(/createPostPublishReviewPlan\s*\(/.test(source)).toBe(false);
+    expect(source.includes('reviewPlan.reviewScrollCount')).toBe(false);
+    expect(source.includes('reviewPlan.afterHomeDelayMs')).toBe(false);
+    expect(source.includes('!getAccountExecutionGuard().getStatus(this.options.naverId).paused && postRunPolicy.shouldCloseBrowser')).toBe(true);
+    expect(source.includes('!getAccountExecutionGuard().getStatus(this.options.naverId).paused && postRunPolicy.shouldLogKeepOpen')).toBe(true);
   });
 });

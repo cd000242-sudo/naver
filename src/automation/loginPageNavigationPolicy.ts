@@ -1,4 +1,4 @@
-import { isNaverBlogDomainUrl } from './editorUrlState.js';
+
 
 export type LoginPageNavigationStatus =
   | 'login-page-loaded'
@@ -53,52 +53,36 @@ const DEVICE_CONFIRM_URL_MARKERS = [
   'devicereg',
 ] as const;
 
-function isNidLoginSurface(value: string): boolean {
-  const lowerUrl = String(value || '').toLowerCase();
-  return lowerUrl.includes('nidlogin') || lowerUrl.includes('nid.naver.com/login');
+/** Only these known HTTPS origins can supply session evidence. Query text is never an origin. */
+export function parseNaverSessionUrl(value: string | undefined): URL | null {
+  try {
+    const parsed = new URL(String(value || ''));
+    if (parsed.protocol !== 'https:' || parsed.port || parsed.username || parsed.password) return null;
+    return ['naver.com', 'www.naver.com', 'blog.naver.com', 'm.blog.naver.com', 'nid.naver.com', 'login.naver.com'].includes(parsed.hostname) ? parsed : null;
+  } catch { return null; }
 }
 
-function isNidAccountSurface(value: string): boolean {
-  const lowerUrl = String(value || '').toLowerCase();
-  return lowerUrl.includes('nidlogin') || lowerUrl.includes('nid.naver.com');
+export function isNaverSessionLoginUrl(value: string | undefined): boolean {
+  const parsed = parseNaverSessionUrl(value);
+  return Boolean(parsed && (parsed.hostname === 'login.naver.com'
+    || (parsed.hostname === 'nid.naver.com' && /^\/(?:nidlogin(?:\.login)?(?:\/|$)|login(?:\/|$))/i.test(parsed.pathname))));
 }
 
-function isBlankSurface(value: string): boolean {
-  return String(value || '').toLowerCase() === 'about:blank';
-}
-
+function isNidLoginSurface(value: string): boolean { return isNaverSessionLoginUrl(value); }
+function isNidAccountSurface(value: string): boolean { return parseNaverSessionUrl(value)?.hostname === 'nid.naver.com'; }
+function isBlankSurface(value: string): boolean { return String(value || '').toLowerCase() === 'about:blank'; }
 function hasGenericLoginMarker(value: string): boolean {
-  return String(value || '').toLowerCase().includes('login');
+  try { return /(?:^|\/)login(?:\/|$)/i.test(new URL(value).pathname); } catch { return false; }
+}
+function isTrustedPostLoginDestination(value: string): boolean {
+  return Boolean(parseNaverSessionUrl(value)) && !isNidLoginSurface(value)
+    && !hasGenericLoginMarker(value) && !isLoginChallengeUrl(value);
 }
 
 export function resolveLoginPageNavigationUrl(value: string): LoginPageNavigationDecision {
-  const url = String(value || '');
-  const lowerUrl = url.toLowerCase();
-
-  if (isNidLoginSurface(url)) {
-    return {
-      status: 'login-page-loaded',
-      isLoginPageLoaded: true,
-      isAlreadyLoggedInRedirect: false,
-    };
-  }
-
-  if (
-    (lowerUrl.includes('naver.com') || isNaverBlogDomainUrl(url)) &&
-    !lowerUrl.includes('login')
-  ) {
-    return {
-      status: 'already-logged-in-redirect',
-      isLoginPageLoaded: false,
-      isAlreadyLoggedInRedirect: true,
-    };
-  }
-
-  return {
-    status: 'unexpected',
-    isLoginPageLoaded: false,
-    isAlreadyLoggedInRedirect: false,
-  };
+  if (isNidLoginSurface(value)) return { status: 'login-page-loaded', isLoginPageLoaded: true, isAlreadyLoggedInRedirect: false };
+  if (isTrustedPostLoginDestination(value)) return { status: 'already-logged-in-redirect', isLoginPageLoaded: false, isAlreadyLoggedInRedirect: true };
+  return { status: 'unexpected', isLoginPageLoaded: false, isAlreadyLoggedInRedirect: false };
 }
 
 export function classifyLoginGotoError(message: string): LoginGotoErrorDecision {
@@ -115,27 +99,25 @@ export function classifyLoginGotoError(message: string): LoginGotoErrorDecision 
 }
 
 export function shouldNavigateToLoginPageFromCurrentUrl(value: string): boolean {
-  return !isNidLoginSurface(value);
+  return !isNidLoginSurface(value) && !isLoginChallengeUrl(value);
 }
 
 export function shouldVerifyExistingSessionAfterMissingLoginInput(value: string): boolean {
-  return !isNidLoginSurface(value);
+  return !isNidLoginSurface(value) && !isLoginChallengeUrl(value);
 }
 
-export function isLoginChallengeUrl(value: string): boolean {
-  const lowerUrl = String(value || '').toLowerCase();
-  if (!isNidAccountSurface(lowerUrl)) {
-    return false;
-  }
+export function isLoginProtectionUrl(value: string | undefined): boolean {
+  const parsed = parseNaverSessionUrl(value);
+  return Boolean(parsed?.hostname === 'nid.naver.com' && /(?:protect|idsafety)/i.test(parsed.pathname));
+}
 
-  return (
-    lowerUrl.includes('protect') ||
-    lowerUrl.includes('security') ||
-    lowerUrl.includes('verification') ||
-    // 2026-09-30: nid.naver.com/user2/help/idSafetyRelease — the 보호조치 release notice
-    // Naver parks the browser on after a login it does not fully accept.
-    lowerUrl.includes('idsafety')
-  );
+/** Protection remains a challenge for existing boolean callers. */
+export function isLoginChallengeUrl(value: string): boolean {
+  const parsed = parseNaverSessionUrl(value);
+  return Boolean(parsed?.hostname === 'nid.naver.com' && (
+    isLoginProtectionUrl(value) || /(?:security|verification|captcha)/i.test(parsed.pathname)
+    || DEVICE_CONFIRM_URL_MARKERS.some(marker => parsed.pathname.toLowerCase().includes(marker))
+  ));
 }
 
 export function shouldInspectLoginPageDom(value: string): boolean {
@@ -143,16 +125,10 @@ export function shouldInspectLoginPageDom(value: string): boolean {
 }
 
 export function shouldReportFinalLoginUrlFailure(value: string): boolean {
-  const lowerUrl = String(value || '').toLowerCase();
-  if (!lowerUrl || isBlankSurface(lowerUrl)) {
-    return false;
-  }
-
-  if (isNidAccountSurface(lowerUrl) || lowerUrl.includes('login.naver')) {
-    return true;
-  }
-
-  return lowerUrl.includes('/login') && !isNaverBlogDomainUrl(lowerUrl);
+  if (!value || isBlankSurface(value)) return false;
+  const parsed = parseNaverSessionUrl(value);
+  if (isNidAccountSurface(value) || parsed?.hostname === 'login.naver.com') return true;
+  return hasGenericLoginMarker(value) && !['blog.naver.com', 'm.blog.naver.com'].includes(parsed?.hostname || '');
 }
 
 export function resolvePostLoginProgressUrl(
@@ -179,7 +155,7 @@ export function resolvePostLoginProgressUrl(
     };
   }
 
-  if (lowerUrl.includes('naver.com') && !hasGenericLoginMarker(url)) {
+  if (isTrustedPostLoginDestination(url)) {
     return {
       status: 'success',
       shouldMarkLoginSuccess: true,
@@ -203,13 +179,7 @@ export function resolvePostLoginProgressUrl(
 }
 
 export function isPostLoginFinalCheckSuccess(value: string): boolean {
-  const url = String(value || '');
-  return (
-    !isNidLoginSurface(url) &&
-    !isBlankSurface(url) &&
-    !hasGenericLoginMarker(url) &&
-    !isLoginChallengeUrl(url)
-  );
+  return isTrustedPostLoginDestination(value);
 }
 
 export type LoginClickResult = 'success' | 'error' | 'challenge' | 'pending';
@@ -235,8 +205,8 @@ export function isLoginProxyFailureBody(value: string): boolean {
 }
 
 export function isDeviceConfirmUrl(value: string): boolean {
-  const lowerUrl = String(value || '').toLowerCase();
-  return DEVICE_CONFIRM_URL_MARKERS.some((marker) => lowerUrl.includes(marker));
+  const parsed = parseNaverSessionUrl(value);
+  return Boolean(parsed?.hostname === 'nid.naver.com' && DEVICE_CONFIRM_URL_MARKERS.some(marker => parsed.pathname.toLowerCase().includes(marker)));
 }
 
 export function isDeviceConfirmBodyText(value: string): boolean {

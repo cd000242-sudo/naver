@@ -11,10 +11,12 @@ import {
 import { AutomationError, classifyErrorMessage } from '../errors/AutomationError';
 
 describe('ErrorCode enum', () => {
-  it('모든 에러 코드가 "카테고리.사유" 형식이다', () => {
+  it('일반 에러는 카테고리.사유 형식이고 계정 중단 코드는 명시된 전송 계약이다', () => {
     const codes = Object.values(ErrorCode);
     for (const code of codes) {
-      expect(code).toMatch(/^[A-Z]+\.[A-Z_]+$/);
+      const accountContractCodes = ['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN', 'ACCOUNT_BUSY'];
+      if (!accountContractCodes.includes(code)) expect(code).toMatch(/^[A-Z]+\.[A-Z_]+$/);
+      else expect(getErrorProperties(code).retryable).toBe(false);
     }
   });
 

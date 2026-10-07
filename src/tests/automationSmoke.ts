@@ -1,3 +1,4 @@
+import { browserSessionManager } from '../browserSessionManager.js';
 import { NaverBlogAutomation } from '../naverBlogAutomation.js';
 
 async function runSmokeTest(): Promise<void> {
@@ -12,6 +13,10 @@ async function runSmokeTest(): Promise<void> {
   );
 
   const mock = automation as any;
+  // This smoke covers orchestration only. Real state classification has separate tests.
+  let verifiedSessions = 0;
+  browserSessionManager.ensureServerSession = async () => { verifiedSessions++; return true; };
+
 
   mock.setupBrowser = async () => {
     console.log('🧪 [MOCK] 브라우저 초기화 생략');
@@ -65,6 +70,7 @@ async function runSmokeTest(): Promise<void> {
     hashtags: ['mock', 'automation', 'test'],
   });
 
+  if (verifiedSessions !== 1) throw new Error('Expected exactly one mocked session verification');
   console.log('✅ 모의 자동화 테스트가 오류 없이 완료되었습니다.');
 }
 

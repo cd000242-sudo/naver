@@ -25,8 +25,15 @@ describe('run() 로그인 스킵 게이트 (유효 세션 재로그인 방지)',
     expect(skipHits.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('게이트 예외/timeout은 catch(() => false)로 안전하게 로그인으로 폴백한다', () => {
-    expect(code).toMatch(/\.ensureServerSession\(this\.options\.naverId\)\s*\n?\s*\.catch\(\(\)\s*=>\s*false\)/);
+  it('session errors propagate instead of triggering an automatic credential fallback', () => {
+    expect(/\.ensureServerSession\(this\.options\.naverId\)\s*\.catch\(\(\)\s*=>\s*false\)/.test(code)).toBe(false);
+    const manager = fs.readFileSync(path.resolve(__dirname, '../browserSessionManager.ts'), 'utf8');
+    const start = manager.indexOf('async ensureServerSession(accountId:');
+    expect(start).toBeGreaterThan(-1);
+    const gate = manager.slice(start, manager.indexOf('isAccountLoggedIn(', start));
+    expect(gate.includes('getAccountExecutionGuard().pause(accountId, code)')).toBe(true);
+    expect(gate.includes('throw new AccountExecutionGuardError(code)')).toBe(true);
+    expect(/return false/.test(gate)).toBe(false);
   });
 
   it('스킵 게이트는 loginStart 파이프라인 로그 직후에 위치한다 (loginToNaver 무조건 호출 제거)', () => {

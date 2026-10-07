@@ -69,3 +69,13 @@ describe('self-test wiring (6.3)', () => {
     expect(orchestrator).toMatch(/fs\.rmSync\(isolatedRoot,\s*\{[^}]*recursive:\s*true/);
   });
 });
+
+it('isolates smoke guard storage and explicitly mocks the session probe', () => {
+ const orchestrator=read('scripts','self-test.mjs');
+ expect(orchestrator).toContain("HOME: path.join(isolatedRoot, 'home')");
+ expect(orchestrator).toContain("USERPROFILE: path.join(isolatedRoot, 'home')");
+ expect(orchestrator).toContain("['dist/tests/automationSmoke.js'], appEnv");
+ const smoke=read('src','tests','automationSmoke.ts');
+ expect(smoke).toContain('browserSessionManager.ensureServerSession = async');
+ expect(smoke).toContain('verifiedSessions !== 1');
+});

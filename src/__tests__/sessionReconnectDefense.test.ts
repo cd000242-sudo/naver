@@ -1,96 +1,88 @@
-/**
- * [TDD] browserSessionManager.ts — reconnect defense layer
- *
- * Bug reproduction:
- *   - isConnected() === false on transient WiFi flap → session destroyed without retry
- *   - locked session has no reconnect path → high-value session lost on CDP blip
- *   - No functional ping (page-level) before trusting WebSocket status
- *
- * Design under test: 3-5 stage defense chain
- *   Stage 1: isConnected() — fast WebSocket gate (existing)
- *   Stage 2: reconnect() — up to 3 retries, 5 s apart (NEW)
- *   Stage 3: page functional ping — page.goto('about:blank') smoke check (NEW)
- *   Stage 4: locked guard — never delete locked session without exhausting reconnect (NEW)
- *   Stage 5: disconnect event listener for auto-heal (NEW)
- */
-import { describe, it, expect } from 'vitest';
-import * as fs from 'fs';
-import * as path from 'path';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { readFileSync } from 'node:fs';
+const guard = vi.hoisted(() => ({ getStatus: vi.fn(() => ({ paused: false, busy: false, version: 0 })), assertAllowed: vi.fn(), pause: vi.fn(), runUserActionExclusive: vi.fn(async (_id: string, run: () => Promise<void>) => run()) }));
+vi.mock('puppeteer-extra', () => ({ default: { use: vi.fn() } }));
+vi.mock('puppeteer-extra-plugin-stealth', () => ({ default: () => ({ enabledEvasions: new Set() }) }));
+vi.mock('../session/sessionEventLogger.js', () => ({ emitSessionEvent: vi.fn() }));
+vi.mock('../automation/accountExecutionGuard.js', () => ({ getAccountExecutionGuard: () => guard, AccountExecutionGuardError: class extends Error { constructor(public code: string) { super(code); } } }));
+import { browserSessionManager } from '../browserSessionManager.js';
+const manager = browserSessionManager as any;
+function setup(id = 'test_account') {
+  const page = { evaluate: vi.fn(async () => 'complete'), isClosed: vi.fn(() => false), goto: vi.fn(), bringToFront: vi.fn(), url: vi.fn(() => 'https://blog.naver.com/test_account?Redirect=Write'), waitForFunction: vi.fn() };
+  const session = { accountId: id, browser: { connected: true, newPage: vi.fn(), close: vi.fn(async () => {}), process: vi.fn() }, page, isLoggedIn: true, loginVerifiedAt: Date.now(), locked: true, lockedAt: Date.now(), lastActivity: 0, createdAt: Date.now(), publishInProgress: false };
+  manager.sessions.set(id, session); return session;
+}
+beforeEach(() => { vi.useFakeTimers(); vi.clearAllMocks(); manager.sessions.clear(); manager.serverSessionChecks.clear(); manager.expectedBlogIds.clear(); manager.stopKeepalive(); guard.getStatus.mockReturnValue({ paused: false, busy: false, version: 0 }); });
+afterEach(() => { vi.restoreAllMocks(); manager.stopKeepalive(); vi.useRealTimers(); });
 
-const FILE = path.resolve(__dirname, '../browserSessionManager.ts');
-const code = fs.readFileSync(FILE, 'utf-8');
-
-describe('Session Reconnect Defense — Stage gates', () => {
-
-  describe('Stage 2 — reconnect() retry method', () => {
-    it('attemptReconnect private method exists', () => {
-      expect(code).toMatch(/private\s+async\s+attemptReconnect/);
-    });
-
-    it('retries up to 3 times (RECONNECT_MAX_RETRIES = 3)', () => {
-      expect(code).toMatch(/RECONNECT_MAX_RETRIES\s*=\s*3/);
-    });
-
-    it('uses 5-second delay between retries (RECONNECT_RETRY_DELAY_MS = 5000)', () => {
-      expect(code).toMatch(/RECONNECT_RETRY_DELAY_MS\s*=\s*5000/);
-    });
-
-    it('returns boolean indicating reconnect success', () => {
-      // Method signature must return Promise<boolean>
-      expect(code).toMatch(/attemptReconnect[\s\S]{0,200}Promise<boolean>/);
-    });
+describe('bounded renderer recovery without destroying the page', () => {
+  it('checks the current renderer without navigating or recreating it', async () => {
+    const session = setup(); expect(await manager.attemptReconnect('test_account')).toBe(true);
+    expect(session.page.evaluate).toHaveBeenCalledTimes(1); expect(session.page.goto).not.toHaveBeenCalled(); expect(session.browser.newPage).not.toHaveBeenCalled();
   });
-
-  describe('Stage 3 — page functional ping', () => {
-    it('page-level ping via page.goto uses about:blank', () => {
-      expect(code).toMatch(/page\.goto\(['"]about:blank['"]/);
-    });
-
-    it('page ping is wrapped in try/catch (non-throwing)', () => {
-      // about:blank goto must be in a try block
-      expect(code).toMatch(/try[\s\S]{0,300}about:blank[\s\S]{0,300}catch/);
-    });
-
-    it('ping timeout is short — max 3000ms', () => {
-      expect(code).toMatch(/about:blank[\s\S]{0,200}timeout:\s*3000/);
-    });
+  it('times out a hung renderer rather than hanging forever', async () => {
+    const session = setup(); session.page.evaluate.mockImplementation(() => new Promise(() => {}));
+    let completed = false; const pending = manager.attemptReconnect('test_account').then((value: boolean) => { completed = true; return value; });
+    await vi.advanceTimersByTimeAsync(20000); expect(completed).toBe(true); expect(await pending).toBe(false);
+    expect(session.page.goto).not.toHaveBeenCalled(); expect(vi.getTimerCount()).toBe(0);
   });
-
-  describe('Stage 4 — locked session indestructibility', () => {
-    it('locked session triggers attemptReconnect before any delete', () => {
-      // When session is locked AND disconnected: attemptReconnect must be called
-      expect(code).toMatch(/locked[\s\S]{0,300}attemptReconnect/);
-    });
-
-    it('locked session path retains ownership until browser close succeeds', () => {
-      // Reconnect exhaustion must close through the ownership-aware helper.
-      // A timeout blocks recreation instead of orphaning the old browser.
-      expect(code).toMatch(/existingSession\.locked[\s\S]{0,900}disconnectedSessionClosed/);
-      expect(code).toContain('if (!disconnectedSessionClosed)');
-      expect(code).toContain('BROWSER_SESSION_CLEANUP_INCOMPLETE');
-    });
-
-    it('locked session logs warning before forced close', () => {
-      expect(code).toMatch(/locked.*재연결 실패|재연결 실패.*locked/);
-    });
+  it('does not trust a response after a newer pause', async () => {
+    const session = setup(); session.page.evaluate.mockImplementation(async () => { guard.getStatus.mockReturnValue({ paused: true, busy: false, version: 1 }); return 'complete'; });
+    expect(await manager.attemptReconnect('test_account')).toBe(false);
   });
-
-  describe('Stage 5 — disconnect event auto-heal', () => {
-    it('browser.on disconnected event listener registered', () => {
-      expect(code).toMatch(/browser\.on\(['"]disconnected['"]/);
-    });
-
-    it('disconnect handler calls attemptReconnect', () => {
-      expect(code).toMatch(/disconnected[\s\S]{0,500}attemptReconnect/);
-    });
+  it('does not trust the renderer of a replaced session', async () => {
+    const session = setup(); session.page.evaluate.mockImplementation(async () => { setup(); return 'complete'; });
+    expect(await manager.attemptReconnect('test_account')).toBe(false);
   });
-
-  describe('Existing stage 1 — connected gate preserved (Puppeteer 25 property)', () => {
-    it('browser.connected check still present as fast gate', () => {
-      // ✅ [Puppeteer 25] isConnected() method → connected property 변경 (v2.10.358)
-      //   API breaking change에 회귀 테스트도 동기화. .connected property로 가드 보호.
-      expect(code).toMatch(/\.connected/);
-    });
+  it('performs no renderer request on a paused or closed session', async () => {
+    const session = setup(); guard.getStatus.mockReturnValue({ paused: true, busy: false, version: 1 });
+    expect(await manager.attemptReconnect('test_account')).toBe(false); expect(session.page.evaluate).not.toHaveBeenCalled();
+    guard.getStatus.mockReturnValue({ paused: false, busy: false, version: 2 }); session.page.isClosed.mockReturnValue(true);
+    expect(await manager.attemptReconnect('test_account')).toBe(false); expect(session.page.evaluate).not.toHaveBeenCalled();
   });
+  it('preserves a ready editor during explicit account verification', async () => {
+    const session = setup(); vi.spyOn(manager, 'inspectServerSessionState').mockResolvedValue({ ok: true, status: 'ready', reason: 'editor-ready' });
+    expect((await manager.verifyAccountForUser('test_account')).status).toBe('ready');
+    expect(session.page.goto).not.toHaveBeenCalled();
+  });
+  it('opens an existing blog editor by bringing it forward, without losing its draft', async () => {
+    const session = setup(); await manager.openForUser('test_account');
+    expect(session.page.bringToFront).toHaveBeenCalledOnce(); expect(session.page.goto).not.toHaveBeenCalled();
+  });
+  it('does not navigate away from a login challenge during verification', async () => {
+    const session = setup(); session.page.url.mockReturnValue('https://nid.naver.com/nidlogin.login');
+    vi.spyOn(manager, 'inspectServerSessionState').mockResolvedValue({ ok: false, status: 'challenge', reason: 'challenge' });
+    expect((await manager.verifyAccountForUser('test_account')).status).toBe('challenge'); expect(session.page.goto).not.toHaveBeenCalled();
+  });
+});
 
+describe('server inspection deadline', () => {
+  it('ends a hung renderer probe and releases the single-flight entry', async () => {
+    const session = setup(); session.page.evaluate.mockImplementation(() => new Promise(() => {}));
+    const pending = manager.inspectServerSessionState('test_account');
+    await vi.advanceTimersByTimeAsync(9000);
+    expect(await pending).toMatchObject({ ok: false, status: 'unavailable' });
+    expect(manager.serverSessionChecks.size).toBe(0); expect(vi.getTimerCount()).toBe(0);
+  });
+  it('late positive evidence after timeout never updates the login cache', async () => {
+    const session = setup(); session.isLoggedIn = false;
+    let finish!: (value: any) => void;
+    session.page.evaluate.mockImplementation(() => new Promise(resolve => { finish = resolve; }));
+    const pending = manager.inspectServerSessionState('test_account'); await vi.advanceTimersByTimeAsync(9000);
+    expect((await pending).status).toBe('unavailable');
+    finish({ finalUrl: 'https://blog.naver.com/GoBlogWrite.naver', status: 200, hasEditor: true, accountIdentity: 'test_account' });
+    await Promise.resolve(); expect(session.isLoggedIn).toBe(false);
+  });
+});
+
+it('explicit resume can open the editor from the home page when cross-origin inspection fails', async () => {
+ const session=setup(); session.page.url.mockReturnValue('https://www.naver.com/');
+ vi.spyOn(manager,'inspectServerSessionState').mockResolvedValueOnce({ok:false,status:'unavailable',reason:'probe-unavailable'}).mockResolvedValueOnce({ok:true,status:'ready',reason:'editor-ready'});
+ expect((await manager.verifyAccountForUser('test_account')).status).toBe('ready');
+ expect(session.page.goto).toHaveBeenCalledTimes(1);
+});
+it('an unavailable editor is preserved for manual review rather than navigated away', async () => {
+ const session=setup();vi.spyOn(manager,'inspectServerSessionState').mockResolvedValue({ok:false,status:'unavailable',reason:'probe-unavailable'});
+ expect((await manager.verifyAccountForUser('test_account')).status).toBe('unavailable');
+ expect(session.page.goto).not.toHaveBeenCalled();
 });

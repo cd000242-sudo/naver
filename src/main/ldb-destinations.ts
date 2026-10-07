@@ -1,6 +1,8 @@
+import { resolveExpectedBlogId } from '../automation/expectedBlogIdentity.js';
 export interface LdbDestination { accountId: string; categoryId: string }
 export interface LdbResolvedDestination extends LdbDestination { categoryName: string; categories: { id: string; name: string }[] }
 interface Dependencies {
+  safety?: (accountId: string) => { paused: boolean; busy: boolean; version: number; code?: string; label: string };
   accounts: () => { id: string; name: string; blogId: string; naverId?: string }[];
   active: () => { id: string } | null;
   fetchCategories: (blogId: string) => Promise<{ success: boolean; categories?: { id: string; name: string }[] }>;
@@ -20,7 +22,9 @@ export function createLdbDestinations(deps: Dependencies) {
   async function categories(accountId: string) {
     // 기존 앱의 실제 카테고리 분석과 같은 로그인 ID를 사용한다.
     // blogId는 구형 계정 편집 화면에서 표시명으로 저장될 수 있으므로 보조값으로만 쓴다.
-    const lookupId = (value: ReturnType<typeof account>) => value.naverId?.trim() || value.blogId.trim();
+    const lookupId = (value: ReturnType<typeof account>) => resolveExpectedBlogId(value.naverId?.trim() || value.blogId.trim(), [value]);
+    const safety = deps.safety?.(accountId);
+    if (safety?.paused || safety?.busy) throw new Error('네이버 계정 작업이 중단되었거나 실행 중입니다. 앱 계정 관리에서 상태를 확인해주세요.');
     const beforeId = lookupId(account(accountId));
     const result = await deps.fetchCategories(beforeId);
     if (lookupId(account(accountId)) !== beforeId) throw new Error('계정이 변경되었습니다. 다시 불러와주세요.');
@@ -40,7 +44,7 @@ export function createLdbDestinations(deps: Dependencies) {
     return { ...selected, categoryName: category.name, categories: list.categories };
   }
   return {
-    accounts: () => ({ accounts: deps.accounts().map(value => ({ id: value.id, label: value.name, blogId: value.blogId })), activeAccountId: deps.active()?.id || null }),
+    accounts: () => ({ accounts: deps.accounts().map(value => ({ id: value.id, label: value.name, blogId: value.blogId, ...(deps.safety ? { sessionSafety: deps.safety(value.id) } : {}) })), activeAccountId: deps.active()?.id || null }),
     categories,
     select: (value: unknown) => queued(async () => { const selected = await resolve(value); await deps.deliver([], selected); return { accountId: selected.accountId, categoryId: selected.categoryId }; }),
     send: (posts: unknown[], value?: unknown) => queued(async () => {
