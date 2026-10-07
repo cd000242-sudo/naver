@@ -102,6 +102,25 @@ function PostOutline({ s }: { s: AdsenseCard['sources'][number] }) {
     );
 }
 
+/* 애드센스 고수 벤치마크는 금색(2026-10-07 사장님) — 홈판과 같은 틀을 쓰되 이 화면만 브랜드 금색 #FFD700 → #FFA500 으로 덮는다. */
+function AdsenseGoldStyles() {
+    return (
+        <style>{`
+.ads-gold .hfb-header{border-color:rgba(255,215,0,.45);background:radial-gradient(ellipse at 100% 0,rgba(255,165,0,.22),transparent 65%),linear-gradient(115deg,#3a2c05,#1a1a12 55%,#141b2b)}
+.ads-gold .hfb-eyebrow{color:#ffd700}
+.ads-gold .hfb-header h2 span{background:linear-gradient(135deg,#ffd700,#ffa500);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ads-gold .hfb-count{color:#fcd34d}
+.ads-gold .hfb-count strong{color:#ffd700}
+.ads-gold .hfb-filter-row button[aria-pressed=true]{border-color:#e0b400;color:#fff7d1;background:#4a3a08}
+.ads-gold .hfb-categories button[aria-pressed=true]{color:#ffd700;border-color:#a88a1c;background:#3a300c}
+.ads-gold .hfb-more,.ads-gold .hfb-meta button,.ads-gold .hfb-empty button{color:#fff1b8;background:#2e2610;border-color:#8c7320}
+.ads-gold .hfb-card.recommended{border-color:#b8962e;box-shadow:inset 3px 0 #ffd700;background:radial-gradient(ellipse at 100% 0,rgba(255,215,0,.08),transparent 50%),linear-gradient(130deg,#1c2133,#111a2a)}
+.ads-gold .hfb-title-make{color:#2b1f00;background:linear-gradient(135deg,#ffd700,#ffa500)}
+.ads-gold .hfb-title-make:hover{background:#ffd700}
+`}</style>
+    );
+}
+
 function AdsenseCardView({ c }: { c: AdsenseCard }) {
     const blogs = blogCount(c);
     return (
@@ -167,8 +186,9 @@ export default function AdsenseBenchmarkBoard() {
     const failed = board ? board.sourceCount - board.okCount : 0;
 
     return (
-        <section className="hf-benchmark" aria-label="애드센스 고수 벤치마크">
+        <section className="hf-benchmark ads-gold" aria-label="애드센스 고수 벤치마크">
             <HomefeedBenchmarkStyles />
+            <AdsenseGoldStyles />
             <header className="hfb-header">
                 <div>
                     <span className="hfb-eyebrow">ADSENSE BENCHMARK · 애드센스 고수 블로그 {board?.sourceCount ?? '—'}곳</span>
