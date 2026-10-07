@@ -80,9 +80,10 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
     };
 
     /** 담은 값의 합. 화면에서 만드는 숫자는 이 덧셈 하나뿐이다. */
+    // 고른 기간에 가격이 없는 제품은 뺀다(2026-10-07 LEWORD 영구제 판매 중지) — 담은 채 기간을 바꾸면 카드는 숨는데 주문에 남아 서버가 거절했다.
     const picked = useMemo(
-        () => cart.map((id) => products.find((item) => item.id === id)).filter(Boolean) as Product[],
-        [cart, products],
+        () => (cart.map((id) => products.find((item) => item.id === id)).filter(Boolean) as Product[]).filter((product) => priceOf(product, term, normalActive) > 0),
+        [cart, products, term, normalActive],
     );
     const total = picked.reduce((sum, product) => sum + priceOf(product, term, normalActive), 0);
 

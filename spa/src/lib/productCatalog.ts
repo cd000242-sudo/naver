@@ -89,7 +89,9 @@ export const PRODUCTS: Product[] = [
         image: '/images/leword/hero-banner-card.webp',
         accent: '#f0b53f',
         glyph: '◆',
-        prices: { monthly: 19900, yearly: 150000, lifetime: 750000 },
+        // 2026-10-07 사장님 결정 — 월 19,900원 유지(검증된 도구보다 같거나 싸게) · 1년은 월 10달 치 199,000원 · 영구제 판매 중지
+        //   (실측 · 수집 원가가 매달 나가는 도구라 평생권은 오래 쓸수록 손해). 서버(GAS)도 같은 표 · 관리자 저장값을 읽는다.
+        prices: { monthly: 19900, yearly: 199000 },
         features: ['황금키워드 보드 · 하루 갱신', '키워드 분석 · 검색량 문서수 실측', '지식인 황금질문', '유튜브 급상승 글감'],
         // 설치가 없다 — 로그인만 하면 브라우저에서 바로 열린다.
         status: 'on',

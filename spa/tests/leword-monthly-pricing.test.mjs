@@ -25,10 +25,11 @@ function load(path, hooks) {
 const catalog=load('../src/lib/productCatalog.ts');
 const product=id=>catalog.PRODUCTS.find(p=>p.id===id);
 test('LEWORD monthly is 19,900 including VAT while other published prices remain unchanged',()=>{
- assert.deepEqual(product('leword').prices,{monthly:19900,yearly:150000,lifetime:750000});
+ // 2026-10-07 사장님 결정: 월 19,900원 유지 · 1년 199,000원(월 10달 치) · 영구제 판매 중지(가격 칸 없음 → 0 = 안 팜).
+ assert.deepEqual(product('leword').prices,{monthly:19900,yearly:199000});
  assert.equal(catalog.productCardAmount(product('leword'),'monthly'),19900);
- assert.equal(catalog.productCardAmount(product('leword'),'yearly'),165000);
- assert.equal(catalog.productCardAmount(product('leword'),'lifetime'),825000);
+ assert.equal(catalog.productCardAmount(product('leword'),'yearly'),218900);
+ assert.equal(catalog.productCardAmount(product('leword'),'lifetime'),0);
  assert.equal(catalog.productCardAmount(product('naver'),'monthly'),31900);
  assert.equal(catalog.productCardAmount(product('all'),'monthly'),55000);
 });
