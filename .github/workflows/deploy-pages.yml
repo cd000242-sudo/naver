@@ -50,7 +50,7 @@ jobs:
       - name: Verify LEWORD monthly checkout
         run: node --test spa/tests/leword-monthly-pricing.test.mjs spa/tests/leword-billing-callback.test.mjs
       - name: Verify purchase guide, sessions, key sync and product pages
-        run: node --test spa/tests/purchase-guide.test.mjs spa/tests/leword-web-session.test.mjs spa/tests/app-key-sync.test.mjs spa/tests/product-pages.test.mjs scripts/tests/free-sample-repair.test.mjs
+        run: node --test spa/tests/purchase-guide.test.mjs spa/tests/leword-web-session.test.mjs spa/tests/app-key-sync.test.mjs spa/tests/product-pages.test.mjs scripts/tests/free-sample-repair.test.mjs spa/tests/post-plan-site.test.mjs
 
       - name: Prepare deploy directory
         run: |

@@ -65,3 +65,51 @@ test('제목 재료 연관어는 키워드 낱말 절반 이상을 담은 것만
   const items = [{ keyword: '현대차', searchVolume: 665800 }, { keyword: '자동차보험비교', searchVolume: 88000 }, { keyword: '자동차 보험 갱신 방법', searchVolume: 320 }, { keyword: '자동차 보험 갱신', searchVolume: 1600 }, { keyword: '보험', searchVolume: null }];
   assert.deepEqual(relatedForTitles('자동차 보험 갱신', items), [{ keyword: '자동차보험비교', searchVolume: 88000 }, { keyword: '자동차 보험 갱신 방법', searchVolume: 320 }]);
 });
+
+/*
+ * ③ 검색에서 궁금해하는 것(2026-10-07 사장님 "지식인 · 카페만 볼 게 아니라 실제 검색에서 사람들이 뭘 궁금해하는지").
+ * 앱 레포 src/utils/__tests__/post-plan-model.test.ts 와 같은 사례 — 두 곳 규칙이 같아야 앱 · 사이트가 같은 목록을 낸다.
+ */
+import { expansionRetryQueries, searchCuriosities, spaceOutKeyword } from '../src/lib/postPlanSiteModel.mjs';
+
+test('검색 궁금증 — 띄어쓰기 없는 긴 키워드는 흔한 앞말 · 뒷말 자리에 띄어쓰기, 다시 찾을 말은 직업 앞말 뗀 것 먼저', () => {
+  assert.equal(spaceOutKeyword('가수주현미별세이유'), '가수 주현미 별세 이유');
+  assert.equal(spaceOutKeyword('청년도약계좌신청방법'), '청년도약계좌 신청 방법');
+  assert.equal(spaceOutKeyword('자동차 보험 갱신'), null);
+  assert.equal(spaceOutKeyword('주현미'), null);
+  assert.deepEqual(expansionRetryQueries('가수주현미별세이유'), ['주현미 별세 이유', '가수 주현미 별세 이유']);
+  assert.deepEqual(expansionRetryQueries('자동차 보험 갱신'), []);
+});
+
+test('검색 궁금증 — 낱말 많이 든 말 먼저 → 검색량 순 · 자기 자신 · 번진 말 · 3자 이상 안 겹치는 말 제외 · 못 잰 검색량 null', () => {
+  const rows = searchCuriosities('가수주현미별세이유', [
+    { keyword: '가수주현미별세', searchVolume: 301600 },
+    { keyword: '가수주현미별세이유', searchVolume: 19560 },
+    { keyword: '주현미', searchVolume: 118900 },
+    { keyword: '주현미 죽음', searchVolume: 250 },
+    { keyword: '주현미 콘서트', searchVolume: 3360 },
+    { keyword: '주현민', searchVolume: 900 },
+    { keyword: '가수 김호중', searchVolume: 50000 },
+    { keyword: '가수별세', searchVolume: 7000 },
+    { keyword: '현대차', searchVolume: 665800, drifted: true },
+    { keyword: '주현미 근황 2026', searchVolume: null },
+  ], 10);
+  assert.deepEqual(rows.map((r) => r.keyword), ['가수주현미별세', '주현미', '주현미 콘서트', '주현미 죽음', '주현미 근황 2026']);
+  assert.equal(rows[rows.length - 1].searchVolume, null);
+  const insurance = searchCuriosities('자동차 보험 갱신', [
+    { keyword: 'KB자동차보험', searchVolume: 115300 },
+    { keyword: '자동차보험 갱신 기간', searchVolume: 2100 },
+    { keyword: '자동차보험료계산', searchVolume: 8290 },
+    { keyword: '보험 비교', searchVolume: 40000 },
+  ], 10);
+  assert.deepEqual(insurance.map((r) => r.keyword), ['자동차보험 갱신 기간', 'KB자동차보험', '자동차보험료계산']);
+});
+
+test('질문 체크리스트 — 띄운 말(alsoKeywords)로도 관련성을 본다(띄어쓰기 없는 키워드가 늘 0건이던 결함)', () => {
+  const items = [
+    { source: 'kin', title: '주현미 별세 소식 사실인가요', link: 'k1', postdate: '2026-10-06' },
+    { source: 'kin', title: '트로트 가수 추천해 주세요', link: 'k2', postdate: '2026-10-06' },
+  ];
+  assert.deepEqual(questionChecklist(items, 10, '가수주현미별세이유'), []);
+  assert.deepEqual(questionChecklist(items, 10, '가수주현미별세이유', ['가수 주현미 별세 이유']).map((q) => q.link), ['k1']);
+});
