@@ -82,6 +82,31 @@ describe('generateWithAgent — 일시 오류 1회 재시도', () => {
     expect(recordCallMock).toHaveBeenCalledTimes(1);
   });
 
+  it('server_overloaded는 15초를 기다린 뒤 한 번 재시도하며 성공한 응답만 사용량에 기록한다', async () => {
+    vi.useFakeTimers();
+    try {
+      claudeRunMock
+        .mockRejectedValueOnce(new AgentCliError('server_overloaded', 'claude', '서버 과부하'))
+        .mockResolvedValueOnce('과부하 해소 후 성공');
+
+      const pending = generateWithAgent({ provider: 'claude', prompt: '글' });
+      await vi.advanceTimersByTimeAsync(0);
+      expect(claudeRunMock).toHaveBeenCalledTimes(1);
+      expect(recordCallMock).not.toHaveBeenCalled();
+
+      await vi.advanceTimersByTimeAsync(14_999);
+      expect(claudeRunMock).toHaveBeenCalledTimes(1);
+      await vi.advanceTimersByTimeAsync(1);
+
+      await expect(pending).resolves.toMatchObject({ text: '과부하 해소 후 성공' });
+      expect(claudeRunMock).toHaveBeenCalledTimes(2);
+      expect(recordCallMock).toHaveBeenCalledExactlyOnceWith('claude');
+      expect(recordRateLimitMock).not.toHaveBeenCalled();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it('rate_limited는 재시도하지 않고 리셋 시각 기록 훅을 부른다', async () => {
     claudeRunMock.mockRejectedValue(
       new AgentCliError('rate_limited', 'claude', '한도 소진', 'resets 3pm'),

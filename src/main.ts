@@ -4961,7 +4961,11 @@ const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
       }
       if (ldbBridge) return;
       const deliver = async (posts: unknown[], destination?: LdbResolvedDestination) => {
-        const drafts = posts.length ? await materializeLdbImages(posts, path.join(app.getPath('userData'), 'ldb-images')) : [];
+        let drafts: unknown[] = [];
+        if (posts.length) {
+          const { getImageSaveBasePath } = await import('./image/imageUtils.js');
+          drafts = await materializeLdbImages(posts, await getImageSaveBasePath());
+        }
         return deliverLdbPosts(mainWindow?.webContents, ipcMain, drafts, 20_000, destination);
       };
       const accountSafety = createAccountSafetyController(() => blogAccountManager.getAllAccounts(), browserSessionManager);

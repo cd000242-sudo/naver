@@ -12,6 +12,67 @@ const PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCA
 const draft = () => ({ id: 'ldb_job1', title: '제목', content: '도입부\n\n소제목\n내용', headings: [{ title: '소제목', content: '내용' }], hashtags: ['태그'], publishMode: 'draft', images: [{ heading: '썸네일', filePath: PNG }, { heading: '소제목', filePath: PNG }] });
 
 describe('LDB draft and image delivery', () => {
+  it('keeps received image directions through disk storage, heading previews and draft persistence', async () => {
+    const directory = await mkdtemp(path.join(tmpdir(), 'ldb-prompt-test-'));
+    try {
+      const input = { ...draft(), structuredContent: { thumbnailPrompt: 'A calm desktop viewed from above' },
+        headings: [{ title: '소제목', content: '내용', prompt: '원고에서 정한 책꽂이 배치' }],
+        images: [{ heading: '썸네일', filePath: PNG, prompt: '이미지의 썸네일 방향' }, { heading: '소제목', filePath: PNG, prompt: 'A shelf seen from the side' }] };
+      const materialized = await materializeLdbImages([input], directory) as any[];
+      const { posts, drafts } = prepareLdbDrafts(materialized);
+      expect(drafts[0].images.map((image: any) => image.prompt)).toEqual(['이미지의 썸네일 방향', 'A shelf seen from the side']);
+      expect(drafts[0].headings[0].prompt).toBe('원고에서 정한 책꽂이 배치');
+      expect(drafts[0].structuredContent.thumbnailPrompt).toBe('A calm desktop viewed from above');
+      expect(posts[0].images[1].prompt).toBe('A shelf seen from the side');
+      expect(posts[0].content).toBe(input.content);
+      const relative = path.relative(directory, posts[0].images[0].filePath);
+      expect(relative.startsWith('..')).toBe(false);
+      expect(relative.split(path.sep)).toHaveLength(2);
+      expect(path.basename(path.dirname(posts[0].images[0].filePath))).toContain('제목');
+      expect(await readdir(path.dirname(posts[0].images[0].filePath))).toHaveLength(1);
+    } finally { await rm(directory, { recursive: true, force: true }); }
+  });
+  it('fills missing heading and thumbnail directions from their explicitly matched images', () => {
+    const input = { ...draft(), images: draft().images.map((image, index) => ({ ...image, prompt: `원본 방향 ${index}` })) };
+    const { drafts } = prepareLdbDrafts([input]);
+    expect(drafts[0].structuredContent.thumbnailPrompt).toBe('원본 방향 0');
+    expect(drafts[0].structuredContent.headings[0].prompt).toBe('원본 방향 1');
+    expect(input.headings[0]).not.toHaveProperty('prompt');
+  });
+  it('keeps separate safe folders per article even for identical titles and image bytes', async () => {
+    const directory = await mkdtemp(path.join(tmpdir(), 'ldb-path-test-'));
+    try {
+      const input = { ...draft(), title: '../../CON:<bad>\\other' };
+      const results = await materializeLdbImages([input, { ...input, id: 'ldb_other' }], directory) as any[];
+      expect(await readdir(directory)).toHaveLength(2);
+      expect(results[0].images[0].filePath).not.toBe(results[1].images[0].filePath);
+      for (const result of results) {
+        const relative = path.relative(directory, result.images[0].filePath);
+        expect(relative.startsWith('..')).toBe(false);
+        expect(relative.split(path.sep)).toHaveLength(2);
+        expect(path.basename(path.dirname(result.images[0].filePath))).not.toMatch(/[<>:"/\\|?*]/u);
+      }
+      const repeated = await materializeLdbImages([input], directory) as any[];
+      expect(repeated[0].images[0].filePath).toBe(results[0].images[0].filePath);
+      expect(await readdir(path.dirname(repeated[0].images[0].filePath))).toHaveLength(1);
+    } finally { await rm(directory, { recursive: true, force: true }); }
+  });
+  it.each([123, 'x'.repeat(12001)])('rejects malformed prompt metadata before storing image files', async (badPrompt) => {
+    const directory = await mkdtemp(path.join(tmpdir(), 'ldb-invalid-prompt-'));
+    try {
+      const cases = [
+        { ...draft(), images: [{ ...draft().images[0], prompt: badPrompt }] },
+        { ...draft(), headings: [{ ...draft().headings[0], prompt: badPrompt }] },
+        { ...draft(), structuredContent: { thumbnailPrompt: badPrompt } },
+      ];
+      for (const input of cases) {
+        await expect(materializeLdbImages([input], directory)).rejects.toThrow(/프롬프트/u);
+        expect(() => prepareLdbDrafts([input])).toThrow(/프롬프트/u);
+      }
+      expect(await readdir(directory)).toHaveLength(0);
+    } finally { await rm(directory, { recursive: true, force: true }); }
+  });
+
   it('persists only validated image files, deduplicates bytes and keeps storage compact', async () => {
     const directory = await mkdtemp(path.join(tmpdir(), 'ldb-bridge-test-'));
     try {
@@ -23,6 +84,35 @@ describe('LDB draft and image delivery', () => {
       expect(drafts[0].images[1].previewDataUrl).toBe(PNG);
       await expect(materializeLdbImages([{ ...draft(), images: [{ filePath: 'http://example.test/image.png' }] }], directory)).rejects.toThrow();
       await expect(materializeLdbImages([{ ...draft(), images: [{ filePath: 'data:image/png;base64,PHNjcmlwdD4=' }] }], directory)).rejects.toThrow();
+    } finally { await rm(directory, { recursive: true, force: true }); }
+  });
+  it('validates every received article before writing and leaves no directories for text-only drafts', async () => {
+    const directory = await mkdtemp(path.join(tmpdir(), 'ldb-input-boundary-'));
+    try {
+      const badInputs = [null, { ...draft(), id: '../../outside' }, { ...draft(), headings: {} },
+        { ...draft(), images: {} }, { ...draft(), images: Array(9).fill(draft().images[0]) },
+        { ...draft(), images: [{}] }, { ...draft(), images: [{ filePath: 'x'.repeat(2 * 1024 * 1024 + 1) }] },
+        { ...draft(), images: [{ filePath: 'data:image/png;base64,abc' }] }];
+      for (const bad of badInputs) await expect(materializeLdbImages([draft(), bad], directory)).rejects.toThrow();
+      expect(await readdir(directory)).toHaveLength(0);
+      await expect(materializeLdbImages([{ ...draft(), images: [] }], directory)).resolves.toHaveLength(1);
+      expect(await readdir(directory)).toHaveLength(0);
+    } finally { await rm(directory, { recursive: true, force: true }); }
+  });
+  it('accepts supported raster signatures and preserves optional empty directions without using title paths', async () => {
+    const directory = await mkdtemp(path.join(tmpdir(), 'ldb-raster-boundary-'));
+    try {
+      const headers = [
+        ['jpeg', Buffer.from([0xff, 0xd8, 0xff, 0xe0])], ['gif', Buffer.from('GIF89a')],
+        ['webp', Buffer.from('RIFF1234WEBP')],
+      ] as const;
+      for (const [mime, bytes] of headers) {
+        const input = { ...draft(), title: '... ', images: [{ heading: '썸네일', prompt: '', previewDataUrl: `data:image/${mime};base64,${bytes.toString('base64')}` }] };
+        const [result] = await materializeLdbImages([input], directory) as any[];
+        expect(await readFile(result.images[0].filePath)).toEqual(bytes);
+        expect(result.images[0].prompt).toBe('');
+        expect(path.basename(path.dirname(result.images[0].filePath))).toMatch(/^원고-/u);
+      }
     } finally { await rm(directory, { recursive: true, force: true }); }
   });
   it('upserts one stable draft without reconstructing its authored body', () => {

@@ -1,3 +1,9 @@
+function optionalPrompt(value: unknown): string | undefined {
+  if (value === undefined) return undefined;
+  if (typeof value !== 'string' || value.length > 12000) throw new Error('이미지 프롬프트 형식을 확인해주세요.');
+  return value.trim();
+}
+
 /** Normalize and upsert extension drafts without invoking generation or publication. */
 export function prepareLdbDrafts(incoming: any[], existing: any[] = []): { posts: any[]; drafts: any[] } {
   if (!Array.isArray(incoming) || !incoming.length || incoming.length > 30) throw new Error('전달할 원고가 없습니다.');
@@ -10,12 +16,14 @@ export function prepareLdbDrafts(incoming: any[], existing: any[] = []): { posts
     if (previous?.isPublished || previous?.publishedUrl) throw new Error('이미 발행한 원고에는 덮어쓸 수 없습니다.');
     const headings = (Array.isArray(post.headings) ? post.headings : []).map((heading: any) => ({
       title: String(heading?.title || '').trim(), content: String(heading?.content || ''),
+      ...(heading?.prompt !== undefined ? { prompt: optionalPrompt(heading.prompt) } : {}),
     }));
     if (headings.some((heading: any) => !heading.title) || new Set(headings.map((heading: any) => heading.title)).size !== headings.length) {
       throw new Error('소제목이 비어 있거나 중복됩니다. 소제목을 구분한 뒤 다시 보내주세요.');
     }
     if (post.images !== undefined && !Array.isArray(post.images)) throw new Error('이미지 목록이 올바르지 않습니다.');
     const images = (post.images || []).map((image: any) => {
+      const prompt = optionalPrompt(image?.prompt);
       const source = image?.previewDataUrl || image?.filePath;
       if (typeof source !== 'string' || !/^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/]+={0,2}$/u.test(source)) {
         throw new Error('실제 이미지 데이터가 필요합니다.');
@@ -28,8 +36,15 @@ export function prepareLdbDrafts(incoming: any[], existing: any[] = []): { posts
         ...(isThumbnail ? { isThumbnail: true } : { headingIndex }),
         filePath: image.savedToLocal === true ? image.filePath : source, previewDataUrl: source, url: source,
         provider: 'ldb-image-ultra', savedToLocal: image.savedToLocal === true,
+        ...(prompt !== undefined ? { prompt } : {}),
       };
     });
+    const imageHeadings = headings.map((heading: any) => {
+      const prompt = heading.prompt || images.find((image: any) => !image.isThumbnail && image.heading === heading.title)?.prompt;
+      return { ...heading, ...(prompt ? { prompt } : {}) };
+    });
+    const thumbnailPrompt = optionalPrompt(post.structuredContent?.thumbnailPrompt)
+      || images.find((image: any) => image.isThumbnail)?.prompt;
     const firstHeading = headings[0]?.title;
     const firstHeadingLine = firstHeading ? post.content.split('\n').findIndex((line: string) => line.includes(firstHeading)) : -1;
     const introduction = headings.length === 0 ? post.content
@@ -37,11 +52,12 @@ export function prepareLdbDrafts(incoming: any[], existing: any[] = []): { posts
     const structuredContent = {
       _postId: post.id, _source: 'ldb-bridge', _preferBodyPlain: true,
       selectedTitle: post.title, title: post.title, bodyPlain: post.content, content: post.content,
-      headings, hashtags: Array.isArray(post.hashtags) ? post.hashtags : [], introduction,
+      headings: imageHeadings, hashtags: Array.isArray(post.hashtags) ? post.hashtags : [], introduction,
+      ...(thumbnailPrompt ? { thumbnailPrompt } : {}),
     };
     return {
       ...previous, id: post.id, title: post.title, content: post.content,
-      headings, hashtags: structuredContent.hashtags, structuredContent,
+      headings: imageHeadings, hashtags: structuredContent.hashtags, structuredContent,
       images, imageCount: images.length, isPublished: false, publishMode: 'draft', contentMode: 'custom',
       createdAt: previous?.createdAt || post.createdAt || new Date().toISOString(), updatedAt: new Date().toISOString(),
     };

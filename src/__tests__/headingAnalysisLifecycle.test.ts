@@ -50,6 +50,16 @@ describe('image heading analysis lifecycle', () => {
     expect(sc.headings[0].imageKey).toBe('saved-image');
   });
 
+  it('uses received cover and section directions without replacing them or making an AI request', async () => {
+    const sc = { ...article(), introduction: '도입부', thumbnailPrompt: '원본 썸네일 방향', headings: [{ title: '신청 방법', content: '본문', prompt: 'An overhead guide' }] };
+    await analyze(sc, { localOnly: true });
+    expect(titles()).toEqual(['🖼️ 썸네일', '신청 방법']);
+    expect(Array.from(document.querySelectorAll('.prompt-text'), element => element.textContent)).toEqual(['원본 썸네일 방향', 'An overhead guide']);
+    expect(document.getElementById('prompts-container')?.textContent).toContain('이미지 프롬프트');
+    expect(document.getElementById('prompts-container')?.textContent).not.toContain('영어 프롬프트:');
+    expect(ai).not.toHaveBeenCalled();
+  });
+
   it('renders headings before a slow AI response completes', async () => {
     let complete!: (value: string) => void;
     ai.mockReturnValue(new Promise<string>((resolve) => { complete = resolve; }));

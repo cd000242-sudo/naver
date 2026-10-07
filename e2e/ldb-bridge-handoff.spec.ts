@@ -11,6 +11,7 @@ let baseUrl: string;
 let token: string;
 let accountId: string;
 let imageBytes: Buffer;
+let customImageSavePath: string;
 const fixtureLogin = 'ldb_e2e_fixture';
 const categories = [{ id: '7', name: '연결 검증' }, { id: '8', name: '이미지 검증' }];
 const origin = 'chrome-extension://' + 'a'.repeat(32);
@@ -31,6 +32,7 @@ async function bridge(route: string, body?: unknown) {
 
 test.beforeAll(async () => {
   profile = await createElectronTestProfile('bln-ldb-handoff-e2e-');
+  customImageSavePath = path.join(profile.root, 'configured-image-folder');
   // 실제 네트워크만 고정하며, 부트스트랩 이후 원본 앱 전체를 실행한다.
   const root = path.join(__dirname, '..');
   const bootstrap = path.join(profile.root, 'ldb-test-main.cjs');
@@ -66,24 +68,33 @@ test.beforeAll(async () => {
     cwd: path.join(__dirname, '..'), timeout: 60_000,
     env: { ...process.env, ...profile.env, E2E_PUBLISH_CAPTURE_FILE: path.join(profile.root, 'must-not-publish.ndjson') },
   });
+  let startupOutput = '';
+  const recordStartup = (chunk: Buffer) => { startupOutput = (startupOutput + String(chunk)).slice(-64 * 1024); };
+  app.process().stderr?.on('data', recordStartup);
   app.process().stdout?.on('data', chunk => {
+    recordStartup(chunk);
     const text = String(chunk);
     if (/IPC Guard.*ldb:|이중.*ldb:/.test(text)) runtimeErrors.push('LDB IPC listener registration was rejected');
   });
-  page = await waitForMainWindow(app);
+  try { page = await waitForMainWindow(app); }
+  catch (error) {
+    await fs.mkdir(path.join(root, 'tmp'), { recursive: true });
+    await fs.writeFile(path.join(root, 'tmp', 'ldb-317-image-handoff-startup.log'), startupOutput, 'utf8');
+    throw error;
+  }
   page.on('pageerror', error => runtimeErrors.push(error.message));
   page.on('dialog', dialog => { void dialog.dismiss(); });
   await page.waitForFunction(() => (window as any).__ldbPostsBound === true && typeof (window as any).applyLdbMainAccount === 'function');
-  accountId = await page.evaluate(async ({ login }) => {
+  accountId = await page.evaluate(async ({ login, imageSavePath }) => {
     const result = await (window as any).api.addBlogAccount('LDB E2E 계정', '카테고리 표시 이름', login, 'not-a-real-password', {});
     if (!result.success || !result.account?.id) throw new Error('Fixture account creation failed');
     // Match the isolated license identity used by asynchronous renderer startup.
     const license = await (window as any).api.getLicense();
     const fixtureUser = license?.license?.userId || await (window as any).api.getDeviceId();
     if (!fixtureUser) throw new Error('Isolated license identity missing');
-    await (window as any).api.saveConfig({ __userId: fixtureUser, ldbBridgeEnabled: true });
+    await (window as any).api.saveConfig({ __userId: fixtureUser, ldbBridgeEnabled: true, customImageSavePath: imageSavePath });
     return result.account.id;
-  }, { login: fixtureLogin });
+  }, { login: fixtureLogin, imageSavePath: customImageSavePath });
   const credentials = await page.evaluate(() => (window as any).api.getLdbBridgeToken());
   expect(credentials.ok).toBe(true);
   token = credentials.token;
@@ -112,7 +123,9 @@ test('real HTTP selection, article, heading images and repeat delivery cross pre
   const content = '연결 테스트를 위한 원고입니다.\n\n## 준비할 내용\n\n첫 번째 소제목의 실제 본문입니다.\n\n## 확인할 내용\n\n두 번째 소제목의 실제 본문입니다.';
   const article = {
     id: 'ldb_e2e_handoff', title: 'LDB 수신 연결 검증', content, publishMode: 'draft',
-    headings: [{ title: '준비할 내용', content: '첫 번째 소제목의 실제 본문입니다.' }, { title: '확인할 내용', content: '두 번째 소제목의 실제 본문입니다.' }],
+    structuredContent: { thumbnailPrompt: '정돈된 책상 위 준비물을 한눈에 보여주는 썸네일' },
+    headings: [{ title: '준비할 내용', content: '첫 번째 소제목의 실제 본문입니다.', prompt: 'A neatly arranged desk with preparation materials' },
+      { title: '확인할 내용', content: '두 번째 소제목의 실제 본문입니다.', prompt: 'A close-up checklist with distinct completed tasks' }],
     hashtags: ['연결테스트'], images: [] as any[],
   };
   const articleAck = await bridge('/v1/posts', { posts: [article], destination });
@@ -121,13 +134,17 @@ test('real HTTP selection, article, heading images and repeat delivery cross pre
   await expect(page.locator('#unified-generated-title')).toHaveValue(article.title);
   await expect(page.locator('#unified-generated-content')).toHaveValue(content);
   await expect(page.locator('#prompts-container .prompt-item')).toHaveCount(3);
+  const expectedPrompts = [article.structuredContent.thumbnailPrompt, ...article.headings.map(heading => heading.prompt)];
+  await expect(page.locator('#prompts-container .prompt-item .prompt-text')).toHaveText(expectedPrompts);
 
   const png = 'data:image/png;base64,' + imageBytes.toString('base64');
-  article.images = [{ heading: '🖼️ 썸네일', isThumbnail: true, previewDataUrl: png }, ...article.headings.map((heading, headingIndex) => ({ heading: heading.title, headingIndex, previewDataUrl: png }))];
+  article.images = [{ heading: '🖼️ 썸네일', isThumbnail: true, prompt: article.structuredContent.thumbnailPrompt, previewDataUrl: png },
+    ...article.headings.map((heading, headingIndex) => ({ heading: heading.title, headingIndex, prompt: heading.prompt, previewDataUrl: png }))];
   for (let attempt = 0; attempt < 2; attempt += 1) {
     const ack = await bridge('/v1/posts', { posts: [article], destination });
     expect(ack.imported).toBe(1);
     expect(ack.selection).toEqual(destination);
+    await expect(page.locator('#prompts-container .prompt-item .prompt-text')).toHaveText(expectedPrompts);
   }
   await expect(page.locator('#prompts-container .prompt-item .generated-image img')).toHaveCount(3);
   const headingImages = page.locator('#prompts-container .prompt-item .generated-image img');
@@ -135,8 +152,8 @@ test('real HTTP selection, article, heading images and repeat delivery cross pre
   const state = await page.evaluate(() => {
     const posts = JSON.parse(localStorage.getItem('naver_blog_generated_posts') || '[]');
     return {
-      posts: posts.map((post: any) => ({ id: post.id, isPublished: post.isPublished, images: post.images })),
-      manager: (window as any).ImageManager?.getAllImages().map((image: any) => ({ heading: image.heading, isThumbnail: image.isThumbnail === true, filePath: image.filePath })),
+      posts: posts.map((post: any) => ({ id: post.id, isPublished: post.isPublished, images: post.images, structuredContent: post.structuredContent })),
+      manager: (window as any).ImageManager?.getAllImages().map((image: any) => ({ heading: image.heading, isThumbnail: image.isThumbnail === true, filePath: image.filePath, prompt: image.prompt })),
       selection: (document.getElementById('real-blog-category-select') as HTMLSelectElement).selectedOptions[0]?.dataset.realBlogCategoryId,
     };
   });
@@ -145,14 +162,25 @@ test('real HTTP selection, article, heading images and repeat delivery cross pre
   expect(state.posts[0].images.map((image: any) => image.heading)).toEqual(['🖼️ 썸네일', '준비할 내용', '확인할 내용']);
   expect(state.manager?.map((image: any) => image.heading)).toEqual(expect.arrayContaining(['🖼️ 썸네일', '준비할 내용', '확인할 내용']));
   expect(state.selection).toBe('7');
+  expect(state.posts[0].images.map((image: any) => image.prompt)).toEqual(expectedPrompts);
+  expect(state.posts[0].structuredContent.thumbnailPrompt).toBe(expectedPrompts[0]);
+  expect(state.posts[0].structuredContent.headings.map((heading: any) => heading.prompt)).toEqual(expectedPrompts.slice(1));
+  expect(state.manager?.map((image: any) => image.prompt)).toEqual(expect.arrayContaining(expectedPrompts));
   for (const image of state.posts[0].images) {
-    expect(path.relative(profile.env.E2E_USER_DATA_DIR!, image.filePath)).toMatch(/^ldb-images[\\/]/);
+    const relative = path.relative(customImageSavePath, image.filePath);
+    expect(path.isAbsolute(relative)).toBe(false);
+    expect(relative).not.toMatch(/^\.\.(?:[\\/]|$)/);
+    expect(relative.split(path.sep)).toHaveLength(2);
     expect(await fs.readFile(image.filePath)).toEqual(imageBytes);
   }
+  const savedFolders = await fs.readdir(customImageSavePath);
+  expect(savedFolders).toHaveLength(1);
+  expect(await fs.readdir(path.join(customImageSavePath, savedFolders[0]))).toHaveLength(1);
   await bridge('/v1/selection', { accountId, categoryId: '8' });
   await expect(page.locator('#real-blog-category-select')).toHaveValue('이미지 검증');
   await expect(page.locator('#unified-generated-content')).toHaveValue(content);
   await expect(page.locator('#prompts-container .prompt-item .generated-image img')).toHaveCount(3);
   expect(await fs.stat(path.join(profile.root, 'must-not-publish.ndjson')).then(() => true, () => false)).toBe(false);
+  await expect(page.locator('#prompts-container .prompt-item .prompt-text')).toHaveText(expectedPrompts);
   expect(runtimeErrors).toEqual([]);
 });
