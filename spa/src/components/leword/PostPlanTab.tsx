@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { callWorkerRaw, fetchKeywordBid, fetchKeywordDocs, fetchKeywordExpansions, fetchKeywordFrontal, fetchKeywordVolumes } from '../../lib/keywordApi';
 import { frontalCount, FRONTAL_SATURATION } from '../../lib/expansionTier';
 import { forgeVariedTitles } from '../../lib/titleForge.generated.mjs';
-import { affiliateCandidates, matchAppPlan, questionChecklist, relatedForTitles, volumeOf, type AffiliateCandidate, type PlanQuestion } from '../../lib/postPlanSiteModel.mjs';
+import { affiliateCandidates, expansionRetryQueries, matchAppPlan, questionChecklist, relatedForTitles, searchCuriosities, spaceOutKeyword, volumeOf, type AffiliateCandidate, type PlanQuestion } from '../../lib/postPlanSiteModel.mjs';
 import { loadAppPlans, type AppPlan, type AppPlansLoad } from '../../lib/postPlanSync';
 
 /*
@@ -19,6 +19,8 @@ interface SiteResult {
     sampled: number;
     board: { openSlot: number | null; tierLabel: string } | null;
     titles: Array<{ text: string; kind: string; frameLabel: string; basis: string }>;
+    searches: Array<{ keyword: string; searchVolume: number | null }>;
+    searchesNote: string;
     questions: PlanQuestion[];
     questionsNote: string;
     bid: number | null;
@@ -35,23 +37,39 @@ async function json(url: string): Promise<any> {
 }
 
 async function measureOnSite(keyword: string): Promise<SiteResult> {
-    const [vol, docs, frontal, expansions, radar, bid, affiliate, board] = await Promise.all([
+    // ③ 검색에서 궁금해하는 것(2026-10-07) — 확장을 먼저 받고(띄어쓰기 없는 긴 키워드는 0개라 띄운 말로 다시),
+    // 지식인 · 카페는 띄운 말 · 검색 궁금증 맨 위 말로도 함께 찾는다. 앱 설계실과 같은 규칙(postPlanSiteModel).
+    const searchesRun = (async () => {
+        let res = await fetchKeywordExpansions(keyword);
+        for (const retry of expansionRetryQueries(keyword)) {
+            if (res.ok && (res.data?.items || []).length) break;
+            res = await fetchKeywordExpansions(retry);
+        }
+        return { ok: res.ok, items: res.ok ? res.data?.items || [] : [] };
+    })();
+    const radarRun = searchesRun.then((s) => {
+        const top = searchCuriosities(keyword, s.items, 1)[0]?.keyword;
+        const extra = [...new Set([spaceOutKeyword(keyword), top].filter((x): x is string => Boolean(x) && compact(String(x)) !== compact(keyword)))].slice(0, 2);
+        // 키를 싣지 않는 호출 — 사용자 Bright Data 토큰이 실리면 유료 커뮤니티 검색이 돈다. 지식인 · 카페만(무료).
+        return callWorkerRaw('radar-search', {
+            queries: JSON.stringify([keyword, `${keyword} 질문`, ...extra]),
+            coreKeywords: JSON.stringify([{ keyword }, ...extra.map((q) => ({ keyword: q }))]),
+            shortQueries: JSON.stringify([keyword, ...extra]),
+        }).then((radar) => ({ radar, extra }));
+    });
+    const [vol, docs, frontal, searched, radarOut, bid, affiliate, board] = await Promise.all([
         fetchKeywordVolumes([keyword]),
         fetchKeywordDocs([keyword]),
         fetchKeywordFrontal([keyword]),
-        fetchKeywordExpansions(keyword),
-        // 키를 싣지 않는 호출 — 사용자 Bright Data 토큰이 실리면 유료 커뮤니티 검색이 돈다. 지식인 · 카페만(무료).
-        callWorkerRaw('radar-search', {
-            queries: JSON.stringify([keyword, `${keyword} 질문`]),
-            coreKeywords: JSON.stringify([{ keyword }]),
-            shortQueries: JSON.stringify([keyword]),
-        }),
+        searchesRun,
+        radarRun,
         fetchKeywordBid(keyword),
         json('/data/affiliate-campaigns.json'),
         json('/data/preemption-board.json'),
     ]);
+    const { radar, extra } = radarOut;
     const topTitles = (frontal.ok && frontal.data?.titles?.[keyword]) || [];
-    const derived = relatedForTitles(keyword, expansions.ok ? expansions.data?.items || [] : []);
+    const derived = relatedForTitles(keyword, searched.items);
     const row = (Array.isArray(board?.rows) ? board.rows : []).find((r: any) => compact(r.keyword) === compact(keyword));
     return {
         keyword,
@@ -61,7 +79,9 @@ async function measureOnSite(keyword: string): Promise<SiteResult> {
         sampled: topTitles.length,
         board: row ? { openSlot: row.openSlot ?? null, tierLabel: String(row.tierLabel || '') } : null,
         titles: forgeVariedTitles(keyword, derived, topTitles).filter((t) => t.text).slice(0, 4),
-        questions: radar && radar.ok ? questionChecklist((radar.items as unknown[]) || [], 10, keyword) : [],
+        searches: searchCuriosities(keyword, searched.items, 10),
+        searchesNote: searched.ok ? '' : '검색 자동완성 · 연관 키워드를 받지 못했습니다 — 잠시 뒤 다시 눌러 주세요.',
+        questions: radar && radar.ok ? questionChecklist((radar.items as unknown[]) || [], 10, keyword, extra) : [],
         questionsNote: radar && radar.ok ? '' : '질문을 찾지 못했습니다 — 잠시 뒤 다시 눌러 주세요.',
         bid: bid.ok ? (bid.data?.bid ?? null) : null,
         bidNote: bid.ok ? '' : (bid.message || '내 API 키 탭에 검색광고 키를 넣으면 입찰가를 잽니다.'),
@@ -189,7 +209,19 @@ export default function PostPlanTab({ initialKeyword = '' }: { initialKeyword?: 
                         {result.titles.length ? result.titles.map((t) => <TitleRow key={t.text} tag={t.kind === '검색용' ? '검색용' : '끌리는'} text={t.text} sub={`${t.frameLabel} · ${t.basis}`} />)
                             : <p style={{ fontSize: 12.5, color: '#94a3b8' }}>만든 제목이 없습니다.</p>}
                     </Box>
-                    <Box title="③ 사람들이 실제로 물은 것 · 최근 14일">
+                    <Box title="③ 사람들이 궁금해하는 것">
+                        <div style={{ fontSize: 12, fontWeight: 700, color: '#fbbf24', marginBottom: 6 }}>검색에서</div>
+                        {result.searchesNote && <p style={{ fontSize: 12, color: '#fbbf24' }}>{result.searchesNote}</p>}
+                        {!result.searchesNote && result.searches.length === 0 && <p style={{ fontSize: 12.5, color: '#94a3b8' }}>검색 자동완성 · 연관 키워드에서 이 키워드와 겹치는 말을 찾지 못했습니다.</p>}
+                        {result.searches.length > 0 && <p style={{ fontSize: 11.5, color: '#94a3b8', margin: '0 0 8px' }}>사람들이 검색으로 실제로 찾는 말입니다. 소제목 · 본문에서 답해 주면 그 검색까지 받습니다. 숫자는 월 검색량(실측).</p>}
+                        {result.searches.map((s) => (
+                            <div key={s.keyword} style={{ display: 'flex', gap: 8, alignItems: 'baseline', padding: '6px 0', borderTop: '1px solid rgba(255,255,255,.05)' }}>
+                                <span style={{ color: '#64748b' }}>□</span>
+                                <span style={{ flex: 1, color: '#e2e8f0', fontSize: 13 }}>{s.keyword}</span>
+                                <span style={{ fontSize: 12, color: '#94a3b8', fontVariantNumeric: 'tabular-nums' }}>{s.searchVolume == null ? '미측정' : num(s.searchVolume)}</span>
+                            </div>
+                        ))}
+                        <div style={{ fontSize: 12, fontWeight: 700, color: '#fbbf24', margin: '14px 0 6px' }}>지식인 · 카페 · 최근 14일</div>
                         {result.questionsNote && <p style={{ fontSize: 12, color: '#fbbf24' }}>{result.questionsNote}</p>}
                         {!result.questionsNote && result.questions.length === 0 && <p style={{ fontSize: 12.5, color: '#94a3b8' }}>최근 14일 안에 이 키워드로 새로 올라온 질문이 없습니다.</p>}
                         {result.questions.map((q) => (

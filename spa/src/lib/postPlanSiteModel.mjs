@@ -10,12 +10,13 @@ const whereOf = (item) => {
 };
 
 /** 최근 14일 질문(워커가 이미 14일로 거름) → 체크리스트. 작성일 없음 제외 · 키워드 낱말 절반 이상이 제목에 · 최근 순 · 같은 주소 한 번. */
-export function questionChecklist(items, limit, keyword = '') {
-  const words = String(keyword).split(/\s+/).filter((w) => w.length >= 2);
+export function questionChecklist(items, limit, keyword = '', alsoKeywords = []) {
+  // 띄어쓰기 없는 키워드는 낱말이 하나라 늘 0건이었다(2026-10-07) → 띄운 말(alsoKeywords)로도 본다
+  const wordSets = [keyword, ...alsoKeywords].map((k) => String(k).split(/\s+/).filter((w) => w.length >= 2)).filter((ws) => ws.length);
   const relevant = (title) => {
-    if (!words.length) return true;
+    if (!wordSets.length) return true;
     const compact = String(title).replace(/\s+/g, '');
-    return words.filter((w) => compact.includes(w)).length * 2 >= words.length;
+    return wordSets.some((words) => words.filter((w) => compact.includes(w)).length * 2 >= words.length);
   };
   const when = (item) => Date.parse(item.postedAt || `${item.postdate}T00:00:00+09:00`) || 0;
   const seen = new Set();
@@ -77,4 +78,75 @@ export function relatedForTitles(keyword, items) {
     .sort((a, b) => b.searchVolume - a.searchVolume)
     .slice(0, 20)
     .map((i) => ({ keyword: i.keyword, searchVolume: i.searchVolume }));
+}
+
+/*
+ * ③ 검색에서 궁금해하는 것(2026-10-07 사장님 "지식인 · 카페만 볼 게 아니라 실제 검색에서 사람들이 뭘 궁금해하는지").
+ * 재료는 워커 keyword-expansions(자동완성 · 검색광고 연관어 + 실측 검색량). 앱 post-plan-model.ts 와 같은 규칙(두 곳을 같이 고칠 것).
+ */
+const ROLE_PREFIXES = ['트로트가수', '개그우먼', '개그맨', '아나운서', '방송인', '여배우', '남배우', '유튜버', '아이돌', '배우', '가수', '모델', '감독', '작가', '선수'];
+const INTENT_SUFFIXES = ['사망원인', '나무위키', '총정리', '프로필', '이유', '원인', '나이', '근황', '남편', '아내', '부인', '학력', '재산', '결혼', '이혼', '사망', '별세', '부고', '장례',
+  '방법', '신청', '기간', '조건', '대상', '자격', '후기', '가격', '추천', '순위', '일정', '시간', '예매', '차이', '종류', '비교', '정리'];
+
+/** 띄어쓰기 없는 긴 키워드에 흔한 앞말(직업) · 뒷말(의도) 자리 띄어쓰기 — 띄어쓰기가 없으면 확장이 0개라서(실측). 없으면 null. */
+export function spaceOutKeyword(keyword) {
+  const raw = String(keyword || '').trim();
+  if (!raw || /\s/.test(raw) || raw.length < 5) return null;
+  let core = raw;
+  const head = [];
+  const tail = [];
+  const prefix = ROLE_PREFIXES.find((p) => core.startsWith(p) && core.length - p.length >= 2);
+  if (prefix) { head.push(prefix); core = core.slice(prefix.length); }
+  for (let guard = 0; guard < 4; guard += 1) {
+    const suffix = INTENT_SUFFIXES.find((s) => core.endsWith(s) && core.length - s.length >= 2);
+    if (!suffix) break;
+    tail.unshift(suffix);
+    core = core.slice(0, -suffix.length);
+  }
+  if (!head.length && !tail.length) return null;
+  return [...head, core, ...tail].join(' ');
+}
+
+/** 확장이 0개일 때 다시 찾을 말(순서대로) — 직업 앞말 뗀 것 먼저, 그다음 띄운 말 그대로. 띄울 게 없으면 빈 목록. */
+export function expansionRetryQueries(keyword) {
+  const spaced = spaceOutKeyword(keyword);
+  if (!spaced) return [];
+  const words = spaced.split(' ');
+  const noRole = ROLE_PREFIXES.includes(words[0]) && words.length >= 3 ? words.slice(1).join(' ') : spaced;
+  return [...new Set([noRole, spaced])];
+}
+
+function longestShared(a, b) {
+  let best = 0;
+  const prev = new Array(b.length + 1).fill(0);
+  for (let i = 1; i <= a.length; i += 1) {
+    let diag = 0;
+    for (let j = 1; j <= b.length; j += 1) {
+      const keep = prev[j];
+      prev[j] = a[i - 1] === b[j - 1] ? diag + 1 : 0;
+      if (prev[j] > best) best = prev[j];
+      diag = keep;
+    }
+  }
+  return best;
+}
+
+/** 검색에서 궁금해하는 말 — 키워드와 3자 이상 겹치는 말만, 키워드 낱말 많이 든 순 → 검색량 순(못 잰 값은 뒤, null). 자기 자신 · 번진 말 제외. */
+export function searchCuriosities(keyword, items, limit) {
+  const self = compactOf(keyword);
+  const words = String(spaceOutKeyword(keyword) || keyword).split(/\s+/).filter((w) => w.length >= 2);
+  const seen = new Set();
+  const rows = [];
+  for (const item of items || []) {
+    if (!item || !item.keyword || item.drifted) continue;
+    const c = compactOf(item.keyword);
+    if (!c || c === self || seen.has(c) || longestShared(c, self) < 3) continue;
+    seen.add(c);
+    const volume = typeof item.searchVolume === 'number' && Number.isFinite(item.searchVolume) ? item.searchVolume : null;
+    rows.push({ keyword: item.keyword, searchVolume: volume, score: words.filter((w) => c.includes(w)).length });
+  }
+  return rows
+    .sort((a, b) => b.score - a.score || (b.searchVolume ?? -1) - (a.searchVolume ?? -1))
+    .slice(0, limit)
+    .map(({ keyword: k, searchVolume }) => ({ keyword: k, searchVolume }));
 }
