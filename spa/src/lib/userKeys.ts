@@ -153,7 +153,40 @@ export function loadUserKeys(): UserKeys {
     }
 }
 
-export function saveUserKeys(keys: UserKeys): void {
+/*
+ * 앱 ↔ 사이트 키 한 몸(2026-10-07) — 마지막에 저장한 쪽이 이긴다(사장님 결정). 그래서 사이트도 "사람이 마지막으로 저장한 시각"과
+ * "아직 앱에 못 넘긴 저장이 있나(pendingToApp)"를 기억한다.
+ *   source 'user'  : 이 화면에서 사람이 저장 → 시각 갱신 · 앱에 넘길 것 있음
+ *   source 'app'   : 앱에서 받아 맞춘 저장 → 앱의 시각을 그대로(핑퐁 방지) · 넘길 것 없음
+ *   source 'cloud' : 다른 기기 암호문을 합친 저장(로그인마다) → 시각 · 넘길 것 그대로. 이걸 사람 저장으로 치면
+ *                    로그인할 때마다 사이트가 "가장 최근"이 되어 앱에서 막 바꾼 키를 옛 값으로 덮는다.
+ */
+const META_KEY = 'leaderspro.keyword.userKeys.meta.v1';
+export type UserKeysMeta = { savedAt: string; pendingToApp: boolean };
+export type UserKeysSaveSource = 'user' | 'app' | 'cloud';
+
+export function loadUserKeysMeta(): UserKeysMeta {
+    try {
+        const parsed = JSON.parse(localStorage.getItem(META_KEY) || 'null');
+        return { savedAt: typeof parsed?.savedAt === 'string' ? parsed.savedAt : '', pendingToApp: parsed?.pendingToApp === true };
+    } catch {
+        return { savedAt: '', pendingToApp: false };
+    }
+}
+
+function saveUserKeysMeta(meta: UserKeysMeta): void {
+    try { localStorage.setItem(META_KEY, JSON.stringify(meta)); } catch { /* 기억 못 해도 저장은 됐다 */ }
+}
+
+/** 앱에 다 넘겼다 — 다음부터는 시각으로만 판정한다. */
+export function markKeysSyncedToApp(): void {
+    saveUserKeysMeta({ ...loadUserKeysMeta(), pendingToApp: false });
+}
+
+export function saveUserKeys(keys: UserKeys, options: { source?: UserKeysSaveSource; savedAt?: string } = {}): void {
+    const source: UserKeysSaveSource = options.source || 'user';
+    if (source === 'user') saveUserKeysMeta({ savedAt: new Date().toISOString(), pendingToApp: true });
+    if (source === 'app') saveUserKeysMeta({ savedAt: options.savedAt || loadUserKeysMeta().savedAt, pendingToApp: false });
     try {
         // 빈 값은 저장하지 않는다. 빈 문자열이 남아 있으면 서버가 "넣었다"고
         // 착각해 사장님 키로 넘어가는 폴백을 막아 버린다.
@@ -165,7 +198,8 @@ export function saveUserKeys(keys: UserKeys): void {
         }
         localStorage.setItem(STORE_KEY, JSON.stringify(cleaned));
         // 계정 동기화(keySync)가 이 이벤트를 받아 암호문을 올린다 — 저장 지점이 여럿이라 여기서 한 번.
-        try { window.dispatchEvent(new CustomEvent('leword:keys-saved')); } catch { /* 이벤트가 없어도 저장은 됐다 */ }
+        // detail.source — 앱 맞춤('app')으로 생긴 저장은 앱 맞춤을 다시 부르지 않는다(무한 반복 방지).
+        try { window.dispatchEvent(new CustomEvent('leword:keys-saved', { detail: { source } })); } catch { /* 이벤트가 없어도 저장은 됐다 */ }
     } catch {
         // 저장이 안 되더라도 이번 세션 조회는 되게 둔다.
     }

@@ -4,13 +4,13 @@ import {
     BRIDGE_OUTDATED_NOTE,
     bridgeAgentLogin,
     bridgeAgentUsage,
-    bridgeApiKeys,
     probeBridge,
     type BridgeAgentUsage,
     type BridgeStatus,
 } from '../../lib/bridge';
 import { enableKeySync, keySyncInfo, pullUserKeys, pushUserKeysDetailed } from '../../lib/keySync';
 import { loadSession, login } from '../../lib/lewordAuth';
+import { syncKeysWithApp } from '../../lib/appKeySync';
 import {
     KEY_GROUPS,
     checkKeyShape,
@@ -162,16 +162,13 @@ function KeysTab() {
     const importFromApp = async () => {
         setSyncBusy(true);
         try {
-            const r = await bridgeApiKeys();
-            if (r.status !== 'ok') { setSyncNote(r.status === 'outdated' ? BRIDGE_OUTDATED_NOTE : '이 PC 에서 LEWORD 앱을 켠 뒤 다시 눌러 주세요 — 키는 같은 PC 의 앱에서만 가져옵니다.'); return; }
-            const next: UserKeys = { ...keys };
-            let added = 0;
-            for (const [field, value] of Object.entries(r.keys)) {
-                if (!next[field as keyof UserKeys] && value) { next[field as keyof UserKeys] = value; added += 1; }
-            }
-            setKeys(next);
-            saveUserKeys(next); // 저장 이벤트 → 동기화가 켜져 있으면 다른 기기로도 간다
-            setSyncNote(added > 0 ? `✅ 앱에서 키 ${added}개를 가져와 저장했습니다${syncInfo.enabled ? ' — 다른 기기로도 올라갑니다' : ''}.` : '앱의 키가 이미 전부 들어 있습니다.');
+            // 앱 ↔ 사이트 맞추기(2026-10-07) — 로그인 · 화면 열 때 자동으로도 돈다. 이 버튼은 지금 바로 한 번 더.
+            const r = await syncKeysWithApp();
+            if (r.status !== 'synced') { setSyncNote(r.status === 'outdated' ? BRIDGE_OUTDATED_NOTE : '이 PC 에서 LEWORD 앱을 켠 뒤 다시 눌러 주세요 — 키는 같은 PC 의 앱과 맞춥니다.'); return; }
+            setKeys(loadUserKeys());
+            setSyncNote(r.toSite + r.toApp > 0
+                ? `✅ 앱과 맞췄습니다 — 앱 → 사이트 ${r.toSite}개 · 사이트 → 앱 ${r.toApp}개${syncInfo.enabled ? ' (다른 기기로도 올라갑니다)' : ''}.`
+                : '앱과 사이트의 키가 이미 같습니다.');
         } finally { setSyncBusy(false); }
     };
     const refreshAgents = async () => {
