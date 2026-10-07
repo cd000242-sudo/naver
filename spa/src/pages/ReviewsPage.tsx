@@ -26,7 +26,8 @@ const AVATAR_COLORS: Array<[string, string]> = [
     ['#c2e9fb', '#a1c4fd'], ['#fbc2eb', '#a6c1ee'],
 ];
 
-interface Testimonial {
+// 제품 페이지(components/products/ReviewQuotes)도 같은 정리 · 가리기를 쓴다(2026-10-07).
+export interface Testimonial {
     author: string;
     role?: string;
     /** 작성 시각 — 화면에 날짜로 적는다. 없으면 비운다. */
@@ -78,7 +79,7 @@ function firstText(...values: unknown[]): string {
     return '';
 }
 
-function normalizeReview(raw: any): Testimonial | null {
+export function normalizeReview(raw: any): Testimonial | null {
     const email = firstText(raw?.email);
     const phone = firstText(raw?.phone, raw?.tel, raw?.mobile);
     const author = firstText(raw?.author, raw?.name, raw?.nickname, email ? maskEmail(email) : '', '익명');

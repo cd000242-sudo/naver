@@ -39,6 +39,13 @@ type ProductConfig = {
  */
 const PRODUCTS = downloadCatalog as unknown as Record<'naver' | 'leword' | 'orbit', ProductConfig>;
 
+/*
+ * 관리자 [다운로드] 안내 문구에 끝난 사실("LEWORD는 올인원 라이선스 보유자용" 등)이 저장돼 있으면 쓰지 않는다
+ * (2026-10-07 — 각 제품은 단품으로 산다). 새 문구를 저장하면 그대로 나온다.
+ */
+const RETIRED_COPY = /올인원 라이선스|보유자용|영구제만|3개월|올인원 구매 후/;
+const DEFAULT_NOTE = 'Better Life Naver · Leadernam Orbit은 30일 동안 하루 3편까지 무료로 체험할 수 있습니다. LEWORD는 웹에서 바로 쓰고, PC 앱은 여기서 받습니다.';
+
 type ProductKey = keyof typeof PRODUCTS;
 
 function applyDownloadOverrides(productKey: ProductKey, siteContent: SiteContent | null): ProductConfig {
@@ -122,7 +129,7 @@ function DownloadPage() {
                     <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>{page.eyebrow || 'DOWNLOAD'}</span>
                     <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>{page.title || '프로그램 다운로드'}</h2>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>{page.desc || '비밀번호를 입력하면 최신 버전을 다운로드할 수 있습니다.'}</p>
-                    <p style={{ color: 'rgba(255,255,255,0.52)', fontSize: 13, marginTop: 8 }}>{page.note || '무료 체험은 Better Life Naver만 제공됩니다. LEWORD는 올인원 라이선스 보유자용입니다.'}</p>
+                    <p style={{ color: 'rgba(255,255,255,0.52)', fontSize: 13, marginTop: 8 }}>{page.note && !RETIRED_COPY.test(page.note) ? page.note : DEFAULT_NOTE}</p>
                 </div>
 
                 <LeadCapture />
