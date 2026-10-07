@@ -69,3 +69,29 @@ test('주제·레인으로 거른 목록이 아니라 보드 전체에서 메운
   const b = { rows: [{ keyword: '가', topic: 'A' }, { keyword: '나', topic: 'B' }, { keyword: '다', topic: 'A' }] };
   assert.deepEqual(repairFreeSample(b, null), ['가', '나', '다']);
 });
+
+/*
+ * 2026-10-07 사장님 "LEWORD 5개는 보여줘야 되지 않니?" — 실측: 발행본 무료 다섯(보드 앞줄 '카니발 풀체인지 시기' 등)이
+ * 처음 열리는 '오늘 확인' 6개(보드 13·126·144·150·164·169번째)와 하나도 겹치지 않아, 비로그인 방문자는 첫 화면에서
+ * 6장 모두 잠긴 카드만 봤다. 처음 보는 목록(오늘 → 최근 7일, 필터 전 전체)에서 먼저 연다.
+ */
+test('처음 보는 오늘 목록에서 먼저 연다 — 발행본 다섯이 오늘 목록과 안 겹쳐도 첫 화면이 전부 잠기지 않는다', () => {
+  const names = Array.from({ length: 20 }, (_, i) => `보관${i}`);
+  const b = board(names);
+  const today = ['보관13', '보관16', '보관18'];
+  const recent = ['보관9', '보관11', '보관15'];
+  const got = repairFreeSample(b, ['보관0', '보관1', '보관2', '보관3', '보관4'], [...today, ...recent]);
+  assert.deepEqual(got, ['보관13', '보관16', '보관18', '보관9', '보관11']);
+});
+
+test('처음 보는 목록 — 발행본 이름이 그 안에 있으면 그 자리를 먼저 지킨다', () => {
+  const b = board(['가', '나', '다', '라', '마', '바', '사']);
+  assert.deepEqual(repairFreeSample(b, ['마', '가'], ['라', '마', '바']), ['마', '라', '바', '가', '나']);
+});
+
+test('처음 보는 목록 — 보드에 없는 이름은 열지 않고, 비면 예전 규칙(발행본 → 보드 앞줄)', () => {
+  const b = board(['가', '나', '다']);
+  assert.deepEqual(repairFreeSample(b, ['다'], ['없는말', '나']), ['나', '다', '가']);
+  assert.deepEqual(repairFreeSample(b, ['다'], []), ['다', '가', '나']);
+  assert.deepEqual(repairFreeSample(b, ['다']), ['다', '가', '나']);
+});
