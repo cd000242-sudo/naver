@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { color, gradient, onGold, radius } from '../styles/tokens';
+import PurchaseNextSteps from '../components/store/PurchaseNextSteps';
 
 /**
  * 주문 조회 — payment-page/lookup.html 마이그.
@@ -233,6 +234,7 @@ function LookupPage() {
                         <ResultRow label="라이선스 코드" value={order.code || '—'} mono copy onCopy={() => order.code && copyText(order.code)} />
                         <ResultRow label="주문번호" value={order.orderId || '—'} small />
                         <ResultRow label="결제일" value={order.date || '—'} dim />
+                        {order.code && <PurchaseNextSteps product={order.product || ''} compact />}
                     </div>
                 ))}
 
@@ -247,12 +249,14 @@ function LookupPage() {
                             const nextDate = (sub.nextPaymentDate || '').split('T')[0];
                             const cancelDate = (sub.cancelledAt || '').split('T')[0];
                             const accent = isActive ? '#44d7b6' : isCancelled ? '#FFA500' : '#ff5c75';
-                            const statusLabel = isActive ? '활성' : isCancelled ? `해지됨 (${nextDate}까지 사용 가능)` : isExpired ? '만료' : sub.status;
+                            // 'paid' — 1년권 · 영구제는 한 번만 결제하고 끝난다(2026-10-07, 자동결제 없음).
+                            const statusLabel = isActive ? '활성' : isCancelled ? `해지됨 (${nextDate}까지 사용 가능)` : isExpired ? '만료' : sub.status === 'paid' ? '결제 완료 (자동결제 없음)' : sub.status;
                             return (
                                 <div key={sub.licenseCode} style={{ marginTop: 12, padding: 16, background: 'rgba(255,255,255,0.04)', border: `1px solid ${accent}33`, borderRadius: 12 }}>
                                     <ResultRow label="상품" value={sub.productName} />
                                     <ResultRow label="라이선스 코드" value={sub.licenseCode || '—'} mono copy onCopy={() => sub.licenseCode && copyText(sub.licenseCode)} />
                                     <ResultRow label="결제 금액" value={sub.amount ? `${sub.amount.toLocaleString()}원` : '—'} />
+                                    {sub.licenseCode && <PurchaseNextSteps product={sub.productName || ''} compact />}
                                     <ResultRow label={isActive ? '다음 결제일' : isCancelled ? '서비스 종료일' : '결제 예정일'} value={nextDate || '—'} />
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>
                                         <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>상태</span>

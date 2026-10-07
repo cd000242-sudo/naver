@@ -3,6 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
 import { applyStoreOverrides, isTaxIncludedPrice, normalPriceOf, TERMS, won, type Product, type TermId } from '../lib/productCatalog';
 import { fetchSiteContent } from '../lib/siteOps';
+import { purchaseGuide } from '../lib/purchaseGuide.mjs';
+import PurchaseNextSteps from '../components/store/PurchaseNextSteps';
 import { color, gradient, onGold, whiteA } from '../styles/tokens';
 
 /**
@@ -459,15 +461,17 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                     <div style={{ background: 'linear-gradient(135deg, rgba(68,215,182,0.08), rgba(201,168,76,0.08))', border: '1px solid rgba(68,215,182,0.4)', borderRadius: 14, padding: 24, marginTop: 18, textAlign: 'left' }}>
                         <div style={{ fontSize: 36, textAlign: 'center', marginBottom: 8 }}>🎉</div>
                         <div style={{ textAlign: 'center', color: '#44d7b6', fontSize: 18, fontWeight: 800, marginBottom: 16 }}>라이선스 발급 완료</div>
-                        <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, marginBottom: 6 }}>All in one 라이선스 코드</div>
+                        <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, marginBottom: 6 }}>{purchaseGuide(info.product || '').codeLabel}</div>
                         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                             <input readOnly value={code} style={{ flex: 1, background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 10, padding: '14px 16px', color: '#c9a84c', fontFamily: 'monospace', fontSize: 16, fontWeight: 800, letterSpacing: 0.5 }} />
                             <button onClick={() => copyLicense(code)} style={{ background: gradient.goldBright, color: onGold.black, border: 'none', borderRadius: 10, padding: '14px 18px', fontWeight: 800, cursor: 'pointer', fontSize: 14, whiteSpace: 'nowrap' }}>{licCopyLabel}</button>
                         </div>
                         <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginTop: 14, lineHeight: 1.6 }}>
                             이 코드는 입력하신 이메일로도 발송되었습니다.<br />
-                            올인원 코드 1개로 이용 기간 안에서 Better Life Naver, Leaders Orbit, LEWORD를 함께 사용할 수 있습니다.
+                            {purchaseGuide(info.product || '').usage}
                         </div>
+                        {/* 2026-10-07 — 어떤 제품이든 설치 파일 바로가기 · 다운로드 비밀번호 · (LEWORD) 노션 사용법 */}
+                        <PurchaseNextSteps product={info.product || ''} />
                     </div>
                 )}
 
