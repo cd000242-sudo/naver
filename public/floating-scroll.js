@@ -1,3 +1,31 @@
+// Keep the shortcut outside the filtered header so it stays fixed to the viewport.
+(function initPublishShortcut() {
+  const toolbar = document.getElementById('right-floating-buttons');
+  const shortcut = document.getElementById('publish-shortcut-btn');
+  if (!toolbar || !shortcut) return;
+  document.body.appendChild(shortcut);
+  let highlightTimer;
+  shortcut.addEventListener('click', () => {
+    const tab = document.querySelector('.tab-button[data-tab="unified"]');
+    const section = document.getElementById('unified-only-publish-settings');
+    if (!tab || !section) return;
+    tab.click();
+    // Reveal the single-post controls even after a continuous/multi-account tab.
+    document.querySelector('.pub-mode-tab[data-pubmode="single"]')?.click();
+    window.requestAnimationFrame(() => {
+      if (!section.getClientRects().length) return;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const controls = document.getElementById('publish-btn-container') || section;
+      controls.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'center' });
+      // Focus the section, not the publish button: repeated Enter must only navigate.
+      section.focus({ preventScroll: true });
+      section.classList.add('publish-shortcut-highlight');
+      window.clearTimeout(highlightTimer);
+      highlightTimer = window.setTimeout(() => section.classList.remove('publish-shortcut-highlight'), 2200);
+    });
+  });
+})();
+
 // 플로팅 버튼 스크롤 따라다니기 스크립트
 (function() {
   let lastScrollTop = 0;
