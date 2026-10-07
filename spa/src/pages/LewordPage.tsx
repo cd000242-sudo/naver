@@ -1,6 +1,9 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import LewordAuth from '../components/leword/LewordAuth';
-import { clearSession, daysLeft, loadSession, type LewordSession } from '../lib/lewordAuth';
+import { clearSession, daysLeft, loadSession, logoutWeb, pingWebSession, type LewordSession } from '../lib/lewordAuth';
+
+/** 웹 세션 확인 간격 — 서버는 다른 브라우저가 10분 안에 활동했으면 새 로그인을 막는다(먼저 쓰는 쪽이 이김, 2026-10-07). */
+const WEB_SESSION_PING_MS = 3 * 60 * 1000;
 import { Link, useSearchParams } from 'react-router-dom';
 import AffiliateTab from '../components/leword/AffiliateTab';
 import AnalyzeTab from '../components/leword/AnalyzeTab';
@@ -94,6 +97,29 @@ function LewordPage() {
      */
     const [session, setSession] = useState<LewordSession | null>(loadSession);
     const [authOpen, setAuthOpen] = useState(false);
+    /*
+     * 동시 로그인 막기(2026-10-07 사장님 "같은 계정으로 돌아가면서 쓰는 걸 방지") — 몇 분마다 · 탭으로 돌아올 때 서버에 확인한다.
+     * 확인이 이 브라우저의 활동 시각을 갱신해서, 쓰는 동안은 다른 곳의 새 로그인이 막힌다. 연결 실패는 내쫓지 않는다.
+     */
+    const [kickNotice, setKickNotice] = useState('');
+    useEffect(() => {
+        if (!session?.webSessionToken) return undefined;
+        let stopped = false;
+        const check = async () => {
+            const result = await pingWebSession(session);
+            if (stopped || result === 'ok' || result === 'offline') return;
+            clearSession();
+            setSession(null);
+            setKickNotice(result === 'expired'
+                ? '이용 기간이 끝나 로그아웃됐습니다. 라이선스 코드로 다시 인증해 주세요.'
+                : '다른 곳에서 이 계정으로 로그인해서 이 화면은 로그아웃됐습니다. 한 계정은 한 곳에서만 쓸 수 있습니다.');
+        };
+        void check();
+        const timer = window.setInterval(() => { void check(); }, WEB_SESSION_PING_MS);
+        const onVisible = () => { if (document.visibilityState === 'visible') void check(); };
+        document.addEventListener('visibilitychange', onVisible);
+        return () => { stopped = true; window.clearInterval(timer); document.removeEventListener('visibilitychange', onVisible); };
+    }, [session]);
     // LEWORD 비서 — 2026-10-06 우측 상단 떠 있는 버튼(AssistantFab)으로 어느 탭에서든 접었다 편다.
     // 편 채로 떠났으면 다음에도 펴서 시작한다(이 브라우저에만 기억).
     const [assistantOpen, setAssistantOpen] = useState(() => { try { return localStorage.getItem(ASSIST_OPEN_KEY) === '1'; } catch { return false; } });
@@ -318,11 +344,12 @@ function LewordPage() {
                             <button
                                 type="button"
                                 className="lw-acct-btn"
-                                onClick={() => { clearSession(); setSession(null); selectTab('golden'); }}
+                                onClick={() => { void logoutWeb(session); setSession(null); selectTab('golden'); }}
                             >로그아웃</button>
                         </>
                     ) : (
                         <>
+                            {kickNotice && <span className="lw-acct-meta" role="alert" style={{ color: '#fca5a5' }}>{kickNotice}</span>}
                             <span className="lw-acct-meta">로그인하면 이용권에 맞는 기능과 글감이 열립니다 — 황금키워드·실검 맛보기는 먼저 이용할 수 있습니다.</span>
                             <button type="button" className="lw-acct-btn on" onClick={() => setAuthOpen(true)}>
                                 로그인 · 계정 만들기
@@ -345,7 +372,7 @@ function LewordPage() {
                          */
                     >
                         <LewordAuth
-                            onDone={(next) => { setSession(next); setAuthOpen(false); }}
+                            onDone={(next) => { setSession(next); setAuthOpen(false); setKickNotice(''); }}
                             onCancel={() => setAuthOpen(false)}
                         />
                     </div>

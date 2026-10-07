@@ -15,7 +15,13 @@ import { GAS_URL } from './siteOps';
 
 /** 라이선스 시트가 플랫폼을 가리는 데 쓰는 값. 앱과 같은 것을 보내야 같은 계정이다. */
 const APP_ID = 'com.leword.keyword.master';
-const SESSION_KEY = 'leaderspro.leword.session.v1';
+/*
+ * v2(2026-10-07 동시 로그인 막기): 웹 세션 토큰을 함께 저장한다. 판을 올려 토큰 없는 예전 로그인은 한 번 다시 로그인하게 한다
+ * — 그대로 두면 같은 계정을 돌려쓰던 브라우저들이 예전 로그인으로 계속 열려 있다.
+ */
+const SESSION_KEY = 'leaderspro.leword.session.v2';
+/** 이 브라우저의 임의 ID — 서버가 "같은 브라우저 재로그인"과 "다른 곳"을 가른다. 개인정보가 아니다. */
+const DEVICE_KEY = 'leaderspro.leword.device.v1';
 const TIMEOUT_MS = 20000;
 
 export type LewordSession = {
@@ -24,7 +30,24 @@ export type LewordSession = {
     expiresAt: string | null;
     licenseType: string;
     savedAt: string;
+    /** 서버(webSessions 칸)가 준 웹 세션 토큰. 없으면 세션을 만들지 않는 옛 서버 — 확인(ping)을 건너뛴다. */
+    webSessionToken?: string | null;
 };
+
+function getDeviceId(): string {
+    try {
+        const saved = localStorage.getItem(DEVICE_KEY);
+        if (saved) return saved;
+        const made = typeof crypto !== 'undefined' && 'randomUUID' in crypto
+            ? crypto.randomUUID()
+            : `b_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 12)}`;
+        localStorage.setItem(DEVICE_KEY, made);
+        return made;
+    } catch {
+        // 저장이 막힌 브라우저(사생활 모드 등) — 매번 새 ID 라 다른 곳으로 보인다. 로그인 자체는 된다.
+        return `b_${Date.now().toString(36)}`;
+    }
+}
 
 export type AuthResult =
     | { ok: true; session: LewordSession }
@@ -51,6 +74,7 @@ export function daysLeft(session: Pick<LewordSession, 'expiresAt'>): number | nu
  */
 export function loadSession(): LewordSession | null {
     try {
+        localStorage.removeItem('leaderspro.leword.session.v1');
         const raw = localStorage.getItem(SESSION_KEY);
         if (!raw) return null;
         const session = JSON.parse(raw) as LewordSession;
@@ -115,7 +139,43 @@ function toSession(payload: Record<string, unknown>, userId: string): LewordSess
         expiresAt: (payload.expiresAt as string) || null,
         licenseType: String(payload.licenseType || ''),
         savedAt: new Date().toISOString(),
+        webSessionToken: typeof payload.webSessionToken === 'string' && payload.webSessionToken ? payload.webSessionToken : null,
     };
+}
+
+export type WebSessionCheck = 'ok' | 'replaced' | 'expired' | 'offline';
+
+/**
+ * 웹 세션 확인(2026-10-07 동시 로그인 막기) — 화면이 몇 분마다 · 탭으로 돌아올 때 부른다.
+ *   replaced : 다른 곳이 이 계정을 이어받았거나 차단 · 세션 없음 → 화면이 로그아웃시킨다
+ *   expired  : 이용 기간 끝
+ *   offline  : 연결 실패 · 서버 붐빔 — 로그아웃하지 않는다(잠깐 끊긴 사람을 내쫓지 않는다)
+ * 토큰이 없는 세션(옛 서버가 만든 것)은 확인할 게 없어 'ok'.
+ */
+export async function pingWebSession(session: LewordSession): Promise<WebSessionCheck> {
+    // 가장 최근에 저장된 토큰으로 묻는다 — 키 동기화가 같은 브라우저에서 다시 로그인하면 토큰이 새로 바뀐다(화면 상태는 옛 값).
+    const latest = loadSession();
+    const current = latest && latest.userId === session.userId ? latest : session;
+    if (!current.webSessionToken) return 'ok';
+    try {
+        const payload = await callGas({ action: 'web-session-ping', userId: current.userId, webSessionToken: current.webSessionToken });
+        if (payload.ok) return 'ok';
+        const code = String(payload.code || '');
+        if (code === 'LICENSE_EXPIRED') return 'expired';
+        if (['SESSION_REPLACED', 'MISSING_SESSION', 'USER_BLOCKED'].includes(code)) return 'replaced';
+        return 'offline';
+    } catch {
+        return 'offline';
+    }
+}
+
+/** 로그아웃 — 서버의 웹 세션을 비워 다른 곳에서 바로 들어올 수 있게 하고, 이 브라우저 기억을 지운다. 서버가 안 받아도 지운다. */
+export async function logoutWeb(session: LewordSession | null): Promise<void> {
+    const current = loadSession() || session;
+    clearSession();
+    if (current?.webSessionToken) {
+        try { await callGas({ action: 'web-logout', userId: current.userId, webSessionToken: current.webSessionToken }); } catch { /* 이미 지웠다 */ }
+    }
 }
 
 function toFailure(payload: Record<string, unknown>): AuthResult {
@@ -139,7 +199,8 @@ function toFailure(payload: Record<string, unknown>): AuthResult {
  */
 export async function login(userId: string, userPassword: string): Promise<AuthResult> {
     try {
-        let payload = await callGas({ action: 'verify-web-login', userId, userPassword });
+        // deviceId — 서버가 다른 브라우저가 10분 안에 쓰고 있으면 ALREADY_LOGGED_IN 으로 막는다(먼저 쓰는 쪽이 이김, 2026-10-07).
+        let payload = await callGas({ action: 'verify-web-login', userId, userPassword, deviceId: getDeviceId() });
         if (String(payload.error || '') === 'Unauthorized') {
             payload = await callGas({ action: 'verify-credentials', userId, userPassword });
         }
@@ -229,9 +290,8 @@ export async function registerWithLicense(
             email: email.trim(),
         });
         if (!payload.ok || !payload.valid) return toFailure(payload);
-        const session = toSession(payload, userId);
-        saveSession(session);
-        return { ok: true, session };
+        // 가입 · 재인증은 계정만 만든다 — 웹 세션은 로그인 경로가 만든다(토큰 없는 세션이 남지 않게, 2026-10-07).
+        return login(userId, userPassword);
     } catch (error) {
         return { ok: false, code: 'NETWORK', message: error instanceof Error ? error.message : '연결에 실패했습니다.' };
     }
