@@ -1,6 +1,6 @@
 {
   "name": "better-life-naver",
-  "version": "2.11.311",
+  "version": "2.11.316",
   "description": "Better Life Naver - 네이버 블로그 자동화 앱으로 더 나은 삶을 만들어가세요. Electron, Node.js, TypeScript, and Puppeteer.",
   "author": "Better Life Team",
   "license": "AGPL-3.0-or-later",
@@ -271,6 +271,14 @@
       "owner": "cd000242-sudo",
       "repo": "naver",
       "releaseType": "release"
-    }
+    },
+    "protocols": [
+      {
+        "name": "LDB extension connection",
+        "schemes": [
+          "better-life-naver"
+        ]
+      }
+    ]
   }
 }

@@ -784,6 +784,16 @@ import { initClockAndCalendar, externalLinks, loadCalendarMemo, saveCalendarMemo
 
 
 document.addEventListener('DOMContentLoaded', () => {
+  const ldbConnectApi = (window as any).electronAPI?.onLdbConnectRequest ? (window as any).electronAPI : (window as any).api;
+  ldbConnectApi?.onLdbConnectRequest?.(() => {
+    (window as any).openSettingsModal?.();
+    document.getElementById('nav-api-keys-btn')?.click();
+    const field = document.getElementById('ldb-bridge-enabled');
+    field?.scrollIntoView({ block: 'center' });
+    field?.focus();
+    const status = document.getElementById('ldb-bridge-status');
+    if (status) status.textContent = '확장 연결 사용을 켜면 리모컨이 계정을 자동으로 다시 불러옵니다. 최초 연결은 토큰을 복사해 확장 연결 설정에 저장해 주세요.';
+  });
   // ✅ [LDB] 확장 연결 사용 여부. 기본은 꺼짐 — 켠 사람만 로컬 포트가 열린다.
   const ldbEnabled = document.getElementById('ldb-bridge-enabled') as HTMLInputElement | null;
   if (ldbEnabled && !ldbEnabled.hasAttribute('data-listener-added')) {
@@ -806,7 +816,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await bridgeApi()?.saveConfig?.({ ldbBridgeEnabled: ldbEnabled.checked });
         if (status) {
           status.textContent = ldbEnabled.checked
-            ? '켰습니다. 아래 토큰 불러오기를 누르면 연결이 시작됩니다.'
+            ? '연결을 시작했습니다. 리모컨에서 자동으로 다시 확인합니다. 최초 연결은 아래 토큰을 확장에 저장해 주세요.'
             : '껐습니다. 앱을 다시 시작하면 포트가 완전히 닫힙니다.';
         }
       } catch {

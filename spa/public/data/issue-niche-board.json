@@ -1,161 +1,27 @@
 {
-  "publishedAt": "2026-10-03T03:27:02.661Z",
+  "publishedAt": "2026-10-04T21:32:50.121Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 199,
-    "niche": 0,
-    "preemption": 10,
+    "candidates": 240,
+    "niche": 1,
+    "preemption": 3,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-03",
-    "keywords": []
+    "day": "2026-10-05",
+    "keywords": [
+      "박지만 회장",
+      "김혜성 복근",
+      "kia rv"
+    ]
   },
   "rows": [
     {
-      "keyword": "인셉션 쿠키",
-      "issue": "인셉션",
-      "topic": "인셉션",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "빠르게 알려드립니다! 오디세이 쿠키 영상 있을까? 러닝타임과 엔딩곡까지 총정리",
-          "오디세이 쿠키 영상 몇 개일까? 모르고 끝까지 기다리면… 영화 후기 총정리",
-          "오디세이 쿠키 영상 진짜 없을까? 172분 솔직 상영관 꿀팁",
-          "오디세이 쿠키영상 있을까? 없지만 끝까지 봐야 하는 이유 총정리",
-          "영화 오디세이 쿠키영상 0개, 바로 나가도 될까? 러닝타임·출연진 총정리",
-          "오디세이 쿠키 몇 개? 172분 기다리지 말고 이것만 확인하세요",
-          "오디세이 쿠키 영상 있을까? 크리스토퍼 놀란 감독 신작 관람 전 필수 체크",
-          "영화 오디세이 줄거리 쿠키영상 IMAX 관람후기｜아이맥스로 봐야 하는 이유",
-          "\"끝까지 앉아있었는데..\" 오디세이 쿠키 영상 유무와 관람 팁",
-          "영화 《오디세이》 쿠키영상 있나요?｜쿠키 개수부터 엔딩 크레딧까지 완벽 정리"
-        ],
-        "measuredAt": "2026-10-01T09:29:23.349Z"
-      },
-      "documentCount": 3481,
-      "documentCountMeasured": true,
-      "searchVolume": 780,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.6065571874584381,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 780",
-        "문서수 3,481",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 780 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.6배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        },
-        "home": {
-          "text": "",
-          "frame": "generic",
-          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          44,
-          70,
-          81,
-          47,
-          42,
-          54,
-          26,
-          63,
-          74,
-          100,
-          49,
-          46,
-          44,
-          33,
-          39,
-          61,
-          79,
-          25,
-          28,
-          18,
-          32,
-          39,
-          33,
-          37,
-          23,
-          14,
-          0,
-          0,
-          18
-        ],
-        "measuredAt": "2026-10-03T03:27:03.399Z"
-      },
-      "kinCount": 42,
-      "kinTop": [
-        {
-          "title": "영화 오디세이, 쿠키 영상은 정말 없나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30306&docId=494625462&answerNo=5",
-          "views": 729,
-          "answers": 5
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
-    },
-    {
-      "keyword": "삼척시청 여자핸드볼",
-      "issue": "삼척시청",
-      "topic": "삼척시청",
+      "keyword": "kia rv",
+      "issue": "KIA",
+      "topic": "KIA",
       "lane": "realtime",
       "issueType": "fresh",
       "isDerived": true,
@@ -170,33 +36,33 @@
         "partialTitleHits": 0,
         "sampledTitles": 10,
         "topTitles": [
-          "여자핸드볼 금메달 8년 만의 정상 탈환",
-          "2026 아시안게임 여자 핸드볼 8년 만에 정상 탈환",
-          "'아시안게임 국가대표 금메달' 핸드볼 김민서 프로필 누구? '160cm 막내' 소속팀 플레이스타일 포지션 연봉 나무위키 총정리",
-          "여자핸드볼 금메달 8년 만에 정상 탈환",
-          "여자핸드볼 금메달 일본 꺾고 8년 만에 정상 탈환",
-          "여자 핸드볼 아시안게임 금메달 8년 만의 정상 탈환",
-          "160cm 작은 거인이 해냈다…22세 김민서 누구? 일본 꺾고 여자핸드볼 AG 금메달",
-          "[아이치·나고야 AG] 여자 핸드볼 첫판부터 48골 폭격! 이원정·전지연 맹활약과 숙적 일본전 로드맵",
-          "3년 전 10점 차 완패, 일본 안방에서 되갚은 여자 핸드볼",
-          "여자핸드볼 금메달 8년 만의 정상 탈환"
+          "현대·기아가 모든 디젤차를 없앤다? 제조사 공식 정보와 업계 보도 구분",
+          "2027 쏘렌토·스포티지·카니발, 이번엔 ‘블랙’이다 기아 RV 3종 블랙 에디션 출시",
+          "[기아 10월 구매혜택 총정리] 2026년 10월 기아자동차 전 차종 프로모션·재고할인·보조금 영끌 비결 완벽 분석! (승용/RV/EV/PBV/봉고3 상용)",
+          "9월 기아 구매 혜택 총정리",
+          "3,636만 원 시작에 하이브리드 복합 14.0km/L! 2026 기아 더 뉴 카니발 출고가 2열 다이내믹 바디케어 스펙",
+          "기아 대표 RV 3종 블랙에디션 출시",
+          "[기아 RV 3대장] K-아빠를 위한 카니발 총정리(가격·블랙 에디션·하이루프까지)",
+          "4050 아빠들 마음에 쏙 드는 디자인인데? 쏘렌토·카니발·스포티지 새롭게 변했다",
+          "[KIA] 뭐가뭐가 잘 팔렸나?? (26년9월 TOP 5)",
+          "HK COGO_기아 타스만 (HK COGO Kia Tasman)"
         ],
-        "measuredAt": "2026-10-01T21:19:59.638Z"
+        "measuredAt": "2026-10-04T21:31:38.980Z"
       },
-      "documentCount": 1559,
+      "documentCount": 4569,
       "documentCountMeasured": true,
-      "searchVolume": 1140,
-      "searchVolumeLt10": true,
+      "searchVolume": 630,
+      "searchVolumeLt10": false,
       "hasLiveDemand": true,
       "demandStatus": "stable",
-      "demandRatio": 1,
+      "demandRatio": 1.000232282890112,
       "issueStatus": "stable",
       "isHot": true,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 1,140",
-        "문서수 1,559",
+        "검색량 630",
+        "문서수 4,569",
         "데이터랩 실측 수요",
         "블로그탭 상위 10 정면글 0건 — 자리 있음"
       ],
@@ -207,7 +73,7 @@
         },
         {
           "code": "traffic",
-          "text": "검색광고 월 검색량 1,140 실측 — 트래픽 하한 통과"
+          "text": "검색광고 월 검색량 630 실측 — 트래픽 하한 통과"
         },
         {
           "code": "demand",
@@ -244,80 +110,26 @@
       },
       "subKeywords": null,
       "keywordPool": null,
-      "trend": {
-        "series": [
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          1,
-          100,
-          0,
-          0,
-          0,
-          1
-        ],
-        "label": "📉 단발성",
-        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-10-03T03:27:03.399Z"
-      },
-      "kinCount": 37,
+      "trend": null,
+      "kinCount": 138,
       "kinTop": [
         {
-          "title": "여자 핸드볼 시즌이 어떻게 되나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=100109&docId=398138251&answerNo=1",
-          "views": 1257,
-          "answers": 1
-        },
-        {
-          "title": "여자 핸드볼 역대 리그 성적 궁금합니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=100109&docId=379301015&answerNo=1",
-          "views": 364,
-          "answers": 1
-        },
-        {
-          "title": "여자핸드볼선수이름ㅠㅠ",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10010405&docId=341183321&answerNo=1",
-          "views": 238,
-          "answers": 1
-        },
-        {
-          "title": "여자핸드볼경기",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=100109&docId=258990648&answerNo=1",
-          "views": 214,
+          "title": "기아 (kia)신차 계약시 혜택적용 문의드립니다. [기아 카 마스....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=8110201&docId=349765607&answerNo=1",
+          "views": 89,
           "answers": 1
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-01T21:19:21.450Z",
+      "measuredAt": "2026-10-04T21:29:52.539Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
-      "kinMode": "date-views-v2",
-      "carried": true
+      "kinMode": "date-views-v2"
     },
     {
-      "keyword": "이시언 아기",
-      "issue": "이시언",
-      "topic": "이시언",
+      "keyword": "박지만 회장",
+      "issue": "박지만",
+      "topic": "박지만",
       "lane": "realtime",
       "issueType": "fresh",
       "isDerived": true,
@@ -332,33 +144,33 @@
         "partialTitleHits": 0,
         "sampledTitles": 10,
         "topTitles": [
-          "유전자 진짜 대박! 이시언♥서지승 4개월 아들 공개｜누굴 닮았나 봤더니",
-          "10년 전 만난 이시언이 아빠로…아들 처음 본 한혜진 반응",
-          "“애기 이시언이 또 있네”…생후 4개월 아들 사진에 쏟아진 반응",
-          "이시언♥서지승, 각방 생활 고백…새벽 6시 아내 깼는데 “못 뜨는 척했다”",
-          "“각방 씁니다” 이시언♥서지승, 아들 태어난 후 달라진 부부 생활…이유 들어보니",
-          "“이젠 진짜 아빠라니…” 한혜진, 이시언♥서지승 2세 만나 찐 이모 미소…“똑같이 생겨",
-          "이시언 서지승 각방 생활 고백, 불화가 아닌 출산 후 육아 현실인 이유",
-          "이시언, 서지승과 각방 육아 고백 “못 뜨는 척도” 비 반응",
-          "이시언 서지승 부부 아들 사진, 첫 아들은 엄마 닮는다는 말 진짜일까?",
-          "이시언♥서지승 생후 4개월 아들 공개…“아빠 판박이” 솔민 군, 결혼 4년여 만에 찾아온 행복"
+          "박지만 암살자들 무슨 관계? 육영수 피격 당시 직접 밝힌 기억",
+          "박지만 “우리 아버지가 그렇게 미운가”…‘암살자들’ 직접 본 황현필은 말할 자격 없다!",
+          "\"우리 아버지가 그렇게 미운가요?\" 박정희 아들 박지만 암살자들 유족 솔직 심경 밝혀 | 박지만 누구? 나이 가족 결혼 아내 자녀 누나 박근혜 인스타",
+          "박지만 “아버지가 그렇게 소리 내어 우는 모습 처음 봤다”…육영수 피격 사건 회고",
+          "‘암살자(들)’ 논란에 입 연 박지만",
+          "박지만 “어머니 돌아가신 날, 아버지가 소리 내어 우는 모습 처음 봤다”…‘암살자(들)’ 논란에 입 열었다",
+          "암살자들 논란 입장 한눈에 정리｜박지만 반박부터 여야·황현필 발언까지",
+          "“우리 아버지가 그렇게 미운가” 박지만, ‘암살자들’ 논란에 결국 입 열었다",
+          "“아버지가 그렇게 우는 모습 처음 봤다”박지만, 영화 ‘암살자(들)’ 논란에 처음 입 열었다",
+          "박지만 “우리 아버지가 그렇게 미운가”…영화 ‘암살자(들)’ 논란과 52년 전 그날"
         ],
-        "measuredAt": "2026-10-01T21:20:13.179Z"
+        "measuredAt": "2026-10-03T21:26:00.022Z"
       },
-      "documentCount": 2363,
+      "documentCount": 5615,
       "documentCountMeasured": true,
-      "searchVolume": 680,
+      "searchVolume": 4690,
       "searchVolumeLt10": false,
       "hasLiveDemand": true,
       "demandStatus": "stable",
-      "demandRatio": 0.5774003428300969,
-      "issueStatus": "stable",
+      "demandRatio": 1.1404486330305756,
+      "issueStatus": "rising",
       "isHot": true,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 680",
-        "문서수 2,363",
+        "검색량 4,690",
+        "문서수 5,615",
         "데이터랩 실측 수요",
         "블로그탭 상위 10 정면글 0건 — 자리 있음"
       ],
@@ -369,11 +181,11 @@
         },
         {
           "code": "traffic",
-          "text": "검색광고 월 검색량 680 실측 — 트래픽 하한 통과"
+          "text": "검색광고 월 검색량 4,690 실측 — 트래픽 하한 통과"
         },
         {
           "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.6배"
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 1.1배"
         },
         {
           "code": "slot",
@@ -408,75 +220,184 @@
       "keywordPool": null,
       "trend": {
         "series": [
-          3,
-          3,
-          5,
-          5,
-          5,
-          5,
-          6,
-          4,
-          4,
-          40,
-          44,
-          8,
-          10,
-          9,
-          13,
-          11,
-          8,
-          5,
-          6,
-          5,
-          7,
-          5,
-          3,
-          6,
-          7,
-          3,
-          2,
-          38,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          25,
+          80,
+          30,
+          16,
+          18,
           100
         ],
-        "label": "🚀 떡상",
-        "recommendation": "지금 당장 작성! 3일 내 급증 포착 → 선점 시 상위 노출 확률 매우 높음",
-        "measuredAt": "2026-10-03T03:27:03.399Z"
+        "measuredAt": "2026-10-04T21:32:50.819Z"
       },
-      "kinCount": 40,
+      "kinCount": 173,
       "kinTop": [
         {
-          "title": "이시언 임신 축하 파티, 서지승 위한 깜짝 이벤트 있었나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30104&docId=491446762&answerNo=1",
-          "views": 65,
-          "answers": 1
-        },
-        {
-          "title": "출산 앞둔 이시언 부부, 주변 반응은 어떤가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8010501&docId=493363550&answerNo=2",
-          "views": 62,
+          "title": "박정희 대통령의 외아들 박지만 EG회장이 결혼적령기에 결혼....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61303&docId=491382890&answerNo=1",
+          "views": 42,
           "answers": 2
-        },
-        {
-          "title": "이시언 아기침대",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8050102&docId=493720294&answerNo=0",
-          "views": 52,
-          "answers": null
-        },
-        {
-          "title": "이시언♥서지승 커플, 임신 축하 파티에서 가장 인상 깊었던....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=30104&docId=491446713&answerNo=1",
-          "views": 45,
-          "answers": 1
-        },
-        {
-          "title": "이시언의 '태어난 김에 세계일주4'에서의 2세 바람, 현실이 ....",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010203&docId=491084013&answerNo=1",
-          "views": 45,
-          "answers": 1
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-01T21:19:21.450Z",
+      "measuredAt": "2026-10-03T21:25:41.838Z",
+      "recommendationStatus": "recommend",
+      "exclusionReason": null,
+      "kinMode": "date-views-v2",
+      "carried": true
+    },
+    {
+      "keyword": "김혜성 복근",
+      "issue": "김혜성",
+      "topic": "김혜성",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "niche",
+      "preemptionKind": null,
+      "serp": {
+        "verdict": "WINNABLE",
+        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
+        "exactTitleHits": 0,
+        "partialTitleHits": 0,
+        "sampledTitles": 10,
+        "topTitles": [
+          "2024 프로야구 짤 모음 .zip 3 (한화이글스위주)",
+          "[데일리 IL] 9월 15일 MLB 경기별 부상자 명단 총정리",
+          "김민지 솔로지옥5 출연 후 '육상 카리나' 몸매 여전해??? 타임스퀘어까지 난리",
+          "통산 49 홈런 군대 면제 스위치히터 NC 김주원 국대 유격수의 야구 인생",
+          "[2026.03.26.] 스포타임 올해 느낌 왔다",
+          "부산 개성중학교 야구부 2학년 신민서 필라테스 트레이닝",
+          "웹툰 냐한남자 속 영철이와 함께 나눈 인터뷰 #귀여움이이긴다",
+          "인간이 아냐 WBC 2000년생 홈런왕도 놀란 KIA 김도영",
+          "힘들어서 좌절하고 싶은데 그러기엔 다음 고난과 역경이 좌절할 틈을 안 줘서 어쩔 수 없이 이겨낸 건에 대하여",
+          "5월 21일 두산 : 넥센"
+        ],
+        "measuredAt": "2026-10-03T09:21:55.747Z"
+      },
+      "documentCount": 98,
+      "documentCountMeasured": true,
+      "searchVolume": 320,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": true,
+      "demandStatus": "declining",
+      "demandRatio": 0.45872985494869023,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 320",
+        "문서수 98",
+        "데이터랩 실측 수요",
+        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "traffic",
+          "text": "검색광고 월 검색량 320 실측 — 트래픽 하한 통과"
+        },
+        {
+          "code": "demand",
+          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.5배"
+        },
+        {
+          "code": "slot",
+          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        },
+        "home": {
+          "text": "",
+          "frame": "generic",
+          "basis": "제목 제안 보류 — 구체적인 검색 질문과 출처 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": {
+        "series": [
+          60,
+          100,
+          62,
+          26,
+          23,
+          19,
+          21,
+          30,
+          19,
+          0,
+          0,
+          0,
+          17,
+          0,
+          21,
+          0,
+          0,
+          0,
+          15,
+          0,
+          13,
+          13,
+          11,
+          0,
+          0,
+          0,
+          0,
+          0,
+          11
+        ],
+        "measuredAt": "2026-10-04T21:32:50.819Z"
+      },
+      "kinCount": 6,
+      "kinTop": [],
+      "monetize": null,
+      "measuredAt": "2026-10-03T09:38:03.728Z",
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "kinMode": "date-views-v2",
@@ -484,6 +405,811 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "Kia Talent Lounge",
+      "issue": "KIA",
+      "topic": "KIA",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 39,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 39",
+        "선점 후보 — 경쟁 문서 39건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-04T21:29:52.539Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "장규리 하트시그널",
+      "issue": "장규리",
+      "topic": "장규리",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 59,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 59",
+        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-04T21:29:52.539Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "뮤즈 가젯",
+      "issue": "뮤즈 가젯",
+      "topic": "뮤즈 가젯",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 153,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 153",
+        "선점 후보 — 경쟁 문서 153건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 14,
+      "kinTop": [
+        {
+          "title": "한성 gadget10, 아이뮤즈 뮤패드10.1 주연테크 j tab2",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010703&docId=214834870&answerNo=0",
+          "views": 63,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-04T21:29:52.539Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "남문철 태양의 후예",
+      "issue": "남문철",
+      "topic": "남문철",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 94,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 94",
+        "선점 후보 — 경쟁 문서 94건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 8,
+      "kinTop": [
+        {
+          "title": "태양의후예고반장(?)",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30101&docId=247826402&answerNo=1",
+          "views": 2678,
+          "answers": 1
+        },
+        {
+          "title": "태양의 후예 출연배우",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3031101&docId=249208506&answerNo=1",
+          "views": 852,
+          "answers": 1
+        },
+        {
+          "title": "태양의 후예 배우 누군가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3031101&docId=248146797&answerNo=1",
+          "views": 198,
+          "answers": 1
+        },
+        {
+          "title": "태양의 후예 고반장",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30101&docId=269597486&answerNo=1",
+          "views": 127,
+          "answers": 1
+        },
+        {
+          "title": "태양의 후예",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=130401&docId=289086788&answerNo=1",
+          "views": 115,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-04T08:54:17.205Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "조현아 연예인 집착",
+      "issue": "조현아 연예인 집착",
+      "topic": "조현아 연예인 집착",
+      "lane": "realtime",
+      "issueType": "entertainment",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 229,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 229",
+        "선점 후보 — 경쟁 문서 229건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-04T08:54:17.205Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "남문철 승부",
+      "issue": "남문철",
+      "topic": "남문철",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 226,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 226",
+        "선점 후보 — 경쟁 문서 226건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-04T08:54:17.205Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "버블쉐어 이수아",
+      "issue": "버블쉐어",
+      "topic": "버블쉐어",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 4,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 4",
+        "선점 후보 — 경쟁 문서 4건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-03T21:25:41.838Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "버블쉐어 잡플래닛",
+      "issue": "버블쉐어",
+      "topic": "버블쉐어",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 10,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 10",
+        "선점 후보 — 경쟁 문서 10건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-03T21:25:41.838Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "버블쉐어 geo",
+      "issue": "버블쉐어",
+      "topic": "버블쉐어",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 29,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 29",
+        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-03T21:25:41.838Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "앤트로픽 엔스로픽 차이",
+      "issue": "앤트로픽",
+      "topic": "앤트로픽",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 32,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 32",
+        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
+          "frame": "compare",
+          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "앤트로픽 엔스로픽 차이 , 기준은 하나면 됩니다",
+          "frame": "compare",
+          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-03T21:25:41.838Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "버블쉐어 채용",
+      "issue": "버블쉐어",
+      "topic": "버블쉐어",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 178,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 178",
+        "선점 후보 — 경쟁 문서 178건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-03T21:25:41.838Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "엄지성 결승골 기여",
+      "issue": "엄지성 결승골 기여",
+      "topic": "엄지성 결승골 기여",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 255,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 255",
+        "선점 후보 — 경쟁 문서 255건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-03T21:25:41.838Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "안성 축제 줄꾼",
+      "issue": "안성 축제 줄꾼",
+      "topic": "안성 축제 줄꾼",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 69,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 69",
+        "선점 후보 — 경쟁 문서 69건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "지역마다 가을축제가 열리는 곳은 어디가 있나요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1201&docId=20559914&answerNo=1",
+          "views": 20695,
+          "answers": 3
+        },
+        {
+          "title": "가을축제",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1212&docId=20496136&answerNo=4",
+          "views": 4446,
+          "answers": 4
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-03T09:38:03.728Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
+    {
+      "keyword": "김주형 AG 골프",
+      "issue": "김주형 AG 골프",
+      "topic": "김주형 AG 골프",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 162,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 162",
+        "선점 후보 — 경쟁 문서 162건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": null,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": null,
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-03T09:38:03.728Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified",
+      "carried": true
+    },
     {
       "keyword": "오예진 변호사",
       "issue": "오예진",
@@ -539,7 +1265,8 @@
       "monetize": null,
       "measuredAt": "2026-10-03T03:25:04.009Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오예진 아나운서",
@@ -603,7 +1330,8 @@
       "monetize": null,
       "measuredAt": "2026-10-03T03:25:04.009Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "스트랜즈 디사이더 2B",
@@ -651,7 +1379,8 @@
       "monetize": null,
       "measuredAt": "2026-10-03T03:25:04.009Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "솔라 디사이드",
@@ -699,7 +1428,8 @@
       "monetize": null,
       "measuredAt": "2026-10-03T03:25:04.009Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "개천절 한성숙 국무총리",
@@ -751,7 +1481,8 @@
       "monetize": null,
       "measuredAt": "2026-10-03T03:25:04.009Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "bob's discount furniture",
@@ -803,7 +1534,8 @@
       "monetize": null,
       "measuredAt": "2026-10-03T03:25:04.009Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "춘천연합마라톤 파이팅",
@@ -855,7 +1587,8 @@
       "monetize": null,
       "measuredAt": "2026-10-03T03:25:04.009Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "모레노호 베네수엘라 무승부",
@@ -903,7 +1636,8 @@
       "monetize": null,
       "measuredAt": "2026-10-03T03:25:04.009Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "텐센트 위티비 차이",
@@ -966,7 +1700,8 @@
       "monetize": null,
       "measuredAt": "2026-10-03T03:25:04.009Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "텐센트 샴푸",
@@ -1018,3221 +1753,6 @@
       "monetize": null,
       "measuredAt": "2026-10-03T03:25:04.009Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "김경문 소믈리에",
-      "issue": "김경문",
-      "topic": "김경문",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 134,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 134",
-        "선점 후보 — 경쟁 문서 134건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": [
-        {
-          "title": "제일 유명한 와인소믈리에 자격증",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=8020506&docId=289253658&answerNo=1",
-          "views": 5610,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-02T21:20:38.389Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "lg유플러스 us fair",
-      "issue": "LG유플러스",
-      "topic": "LG유플러스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 105,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 105",
-        "선점 후보 — 경쟁 문서 105건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T21:20:38.389Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "美 고용 2.9만명",
-      "issue": "美 고용 2.9만명",
-      "topic": "美 고용 2.9만명",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 233,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 233",
-        "선점 후보 — 경쟁 문서 233건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T21:20:38.389Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "lg유플러스 소액인출 방법",
-      "issue": "LG유플러스",
-      "topic": "LG유플러스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 202,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 202",
-        "선점 후보 — 경쟁 문서 202건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 26,
-      "kinTop": [
-        {
-          "title": "보이스피싱 소액결제 피해 신고 후 배상 방법은?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60215&docId=493546115&answerNo=1",
-          "views": 333,
-          "answers": 1
-        },
-        {
-          "title": "핸드폰 요금 미납 방법 LGu+",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=107020103&docId=477936892&answerNo=7",
-          "views": 213,
-          "answers": 9
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-02T21:20:38.389Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "김경문 결혼 몇번",
-      "issue": "김경문",
-      "topic": "김경문",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 297,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 297",
-        "선점 후보 — 경쟁 문서 297건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T21:20:38.389Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "머스크 코튼 향차이",
-      "issue": "머스크",
-      "topic": "머스크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 7,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 7",
-        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T08:59:47.294Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "앤트로픽 엔스로픽 차이",
-      "issue": "앤트로픽",
-      "topic": "앤트로픽",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 32,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 32",
-        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T08:59:47.294Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "비드래프트 김민식",
-      "issue": "비드래프트",
-      "topic": "비드래프트",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 169,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 169",
-        "선점 후보 — 경쟁 문서 169건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T08:59:47.294Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "코드잇 인턴 후기",
-      "issue": "코드잇",
-      "topic": "코드잇",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 112,
-      "documentCountMeasured": true,
-      "searchVolume": 30,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 30",
-        "문서수 112",
-        "선점 후보 — 경쟁 문서 112건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "파이시스-랭",
-      "issue": "파이시스-랭",
-      "topic": "파이시스-랭",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 7,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 7",
-        "선점 후보 — 경쟁 문서 7건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "코드잇 매출",
-      "issue": "코드잇",
-      "topic": "코드잇",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 294,
-      "documentCountMeasured": true,
-      "searchVolume": 30,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 30",
-        "문서수 294",
-        "선점 후보 — 경쟁 문서 294건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "코드잇 비추",
-      "issue": "코드잇",
-      "topic": "코드잇",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 20,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 20",
-        "선점 후보 — 경쟁 문서 20건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "코드잇 데이터분석교육",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=406&docId=468263464&answerNo=1",
-          "views": 41,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "코드잇 사업자번호",
-      "issue": "코드잇",
-      "topic": "코드잇",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 48,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 48",
-        "선점 후보 — 경쟁 문서 48건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "코드잇 환불",
-      "issue": "코드잇",
-      "topic": "코드잇",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 55,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 55",
-        "선점 후보 — 경쟁 문서 55건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": [
-        {
-          "title": "코드잇(codeit) 올인원 패키지 환불 방법",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=104&docId=329695916&answerNo=0",
-          "views": 21,
-          "answers": null
-        },
-        {
-          "title": "코드잇 환불 문의",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60207&docId=390943600&answerNo=0",
-          "views": 16,
-          "answers": null
-        },
-        {
-          "title": "코드잇 결제",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110603&docId=490295943&answerNo=1",
-          "views": null,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오픈클로 헤르메스 차이",
-      "issue": "오픈클로",
-      "topic": "오픈클로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 118,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 118",
-        "선점 후보 — 경쟁 문서 118건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "oce.global",
-      "issue": "OCE",
-      "topic": "OCE",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 158,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 158",
-        "선점 후보 — 경쟁 문서 158건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 10,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "oce.cn",
-      "issue": "OCE",
-      "topic": "OCE",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 204,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 204",
-        "선점 후보 — 경쟁 문서 204건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 12,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "캘리포니아주 댄빌",
-      "issue": "캘리포니아주",
-      "topic": "캘리포니아주",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 223,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 223",
-        "선점 후보 — 경쟁 문서 223건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오픈클로 맥미니 사양",
-      "issue": "오픈클로",
-      "topic": "오픈클로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 200,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 200",
-        "선점 후보 — 경쟁 문서 200건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "코드잇 기업규모",
-      "issue": "코드잇",
-      "topic": "코드잇",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 295,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 295",
-        "선점 후보 — 경쟁 문서 295건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-02T03:24:55.455Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "삼척시청 대학생 아르바이트",
-      "issue": "삼척시청",
-      "topic": "삼척시청",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 244,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 244",
-        "선점 후보 — 경쟁 문서 244건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": null,
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T21:19:21.450Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "OCE 오픈클로",
-      "issue": "OCE",
-      "topic": "OCE",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 AI 에이전트 제어 플랫폼 OCE 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "OCE 오픈클로 엔터프라이즈 기업용 AI 에이전트 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "OCE 오픈클로 공개됐다는데 에이전트 제어가 생각보다 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오픈클로 OCE",
-      "issue": "오픈클로",
-      "topic": "오픈클로",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 에이전트 플랫폼 엔터프라이즈 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오픈클로 OCE 기업용 AI 에이전트 제어, 퓨전 클로와 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오픈클로 OCE 공개됐는데 오라클 퓨전 클로랑 뭐가 다른지 많이들 헷갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "머큐리 보이스 인셉션",
-      "issue": "머큐리 보이스",
-      "topic": "머큐리 보이스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 11,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 11",
-        "선점 후보 — 경쟁 문서 11건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "인셉션이 확산 모델 기반 음성 에이전트 머큐리 보이스 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "머큐리 보이스 인셉션 확산 모델 음성 에이전트 정체",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "머큐리 보이스 인셉션이 굳이 확산 모델을 꺼낸 이유 다들 놓치더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "전종민 중수청 차장",
-      "issue": "전종민 중수청 차장",
-      "topic": "전종민 중수청 차장",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 27,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 27",
-        "선점 후보 — 경쟁 문서 27건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "전종민이 초대 중수청 차장에 임명",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "전종민 중수청 차장에 최재민·임은정까지 초대 인선 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "전종민 중수청 차장 됐는데 중수청 조직도 보니까 자리 애매하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "중수청 조직도",
-          "searchVolume": 420,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "중수청 조직도",
-          "searchVolume": 420,
-          "documentCount": 4569,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "머큐리 보이스 지연시간",
-      "issue": "머큐리 보이스",
-      "topic": "머큐리 보이스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 83,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 83",
-        "선점 후보 — 경쟁 문서 83건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "인셉션이 확산 모델 기반 음성 에이전트 머큐리 보이스 출시",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "머큐리 보이스 지연시간, 확산 모델로 얼마나 줄었나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "머큐리 보이스 지연시간이 확산 모델 덕이라는데 써보니 체감이 의외로 다르네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "윤규성 품새 금메달!",
-      "issue": "윤규성 품새 금메달!",
-      "topic": "윤규성 품새 금메달!",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 138,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 138",
-        "선점 후보 — 경쟁 문서 138건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "윤규성이 태권도 품새 남자 개인전 금메달로 3연패 달성",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "윤규성 품새 금메달! 남자 개인전 3연패 기록",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "윤규성 품새 금메달! 윤규성 태권도 프로필 찾아보다 손이 멈췄네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "윤규성 프로필",
-          "searchVolume": 300,
-          "frame": "generic"
-        },
-        {
-          "keyword": "태권도 품새 금메달",
-          "searchVolume": 30,
-          "frame": "generic"
-        },
-        {
-          "keyword": "윤규성 태권도",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "윤규성 프로필",
-          "searchVolume": 300,
-          "documentCount": 12,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "태권도 품새 금메달",
-          "searchVolume": 30,
-          "documentCount": 8948,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "윤규성 태권도",
-          "searchVolume": 10,
-          "documentCount": 264,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "OCE 요금",
-      "issue": "OCE",
-      "topic": "OCE",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "기업 도입 비용",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 115,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 115",
-        "선점 후보 — 경쟁 문서 115건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 기업 도입 비용"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 AI 에이전트 제어 플랫폼 OCE 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "OCE 요금 오픈클로 기업용 AI 에이전트 플랫폼 도입 비용",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "OCE 요금 궁금해서 들어갔다가 결제 전에 한참을 망설이게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 10,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "OCE 플랫폼",
-      "issue": "OCE",
-      "topic": "OCE",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 190,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 190",
-        "선점 후보 — 경쟁 문서 190건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈클로가 기업용 AI 에이전트 제어 플랫폼 OCE 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "OCE 플랫폼 오픈클로 엔터프라이즈 기업용 에이전트 제어 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "OCE 플랫폼 오픈클로가 공개한 기업용 에이전트 제어 직접 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:51:54.643Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "중수청 전종민 차장",
-      "issue": "중수청 전종민 차장",
-      "topic": "중수청 전종민 차장",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 27,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 27",
-        "선점 후보 — 경쟁 문서 27건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "중수청 차장 전종민, 초대 서울청장 최재민, 광주청장 임은정 임명.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "중수청 전종민 차장과 서울·광주청장 최재민 임은정",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "중수청 전종민 차장 소식에 최재민 임은정이 왜 같이 뜨나 했더니",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "중수청 인사",
-          "searchVolume": 1130,
-          "frame": "generic"
-        },
-        {
-          "keyword": "중수청 차장",
-          "searchVolume": 170,
-          "frame": "generic"
-        },
-        {
-          "keyword": "중수청 임은정",
-          "searchVolume": 80,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "중수청 인사",
-          "searchVolume": 1130,
-          "documentCount": 6929,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "중수청 차장",
-          "searchVolume": 170,
-          "documentCount": 1840,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "중수청 임은정",
-          "searchVolume": 80,
-          "documentCount": 629,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "중수청 청장",
-          "searchVolume": 30,
-          "documentCount": 3564,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:28:09.676Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "인셉션 음성 에이전트",
-      "issue": "머큐리 보이스",
-      "topic": "머큐리 보이스",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 85,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 85",
-        "선점 후보 — 경쟁 문서 85건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "인셉션이 확산 모델 기반 음성 에이전트 '머큐리 보이스'를 출시.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "인셉션 음성 에이전트 머큐리 보이스 확산 모델 지연시간 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "인셉션 음성 에이전트 머큐리 보이스 지연시간이 짧은 데는 이유가 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:28:09.676Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "정하은 태권도 금메달",
-      "issue": "정하은 태권도 금메달",
-      "topic": "정하은 태권도 금메달",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 178,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 178",
-        "선점 후보 — 경쟁 문서 178건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "정하은이 AG 태권도 품새에서 금메달, 여자 개인전 2연패 달성.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "정하은 태권도 금메달, 품새 여자 개인전 한국 2연패",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "정하은 태권도 금메달 보고 나서 정하은 프로필을 한참 찾아봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "정하은 프로필",
-          "searchVolume": 1170,
-          "frame": "generic"
-        },
-        {
-          "keyword": "태권도 품새 금메달",
-          "searchVolume": 30,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "정하은 프로필",
-          "searchVolume": 1170,
-          "documentCount": 376,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "태권도 품새 금메달",
-          "searchVolume": 30,
-          "documentCount": 8944,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T09:28:09.676Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "덴컴 덴트허브",
-      "issue": "덴컴",
-      "topic": "덴컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 1,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 1",
-        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "덴컴 덴트허브 1.0 공개, 치과 AI 플랫폼 실제 기능",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "치과에서 덴컴 덴트허브로 진료 대화부터 청구까지 묶는다는데 생각보다 큰 변화네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "디시전스 API",
-      "issue": "디시전스 API",
-      "topic": "디시전스 API",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 8,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 8",
-        "선점 후보 — 경쟁 문서 8건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈AI가 디시전스 API를 AI 에이전트 안전장치로 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "디시전스 API 오픈AI 에이전트 안전장치로 주목받는 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "디시전스 API 나오고 AI 에이전트가 컴퓨터까지 직접 다루더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "주식회사 덴컴",
-      "issue": "덴컴",
-      "topic": "덴컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 10,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 10",
-        "선점 후보 — 경쟁 문서 10건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "주식회사 덴컴 덴트허브 1.0 치과 AI 플랫폼 공개",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "주식회사 덴컴 덴트허브로 진료 대화가 청구까지 이렇게 이어질 줄은",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "덴컴 상장",
-      "issue": "덴컴",
-      "topic": "덴컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "향후 계획 궁금",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 13,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 13",
-        "선점 후보 — 경쟁 문서 13건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 향후 계획 궁금"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "덴컴 상장일 공모가 청약 일정과 주가 전망",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "덴컴 상장 기다리다가 덴트허브 1.0 보고 생각이 좀 바뀌었어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "덴컴 채용",
-      "issue": "덴컴",
-      "topic": "덴컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 16,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 16",
-        "선점 후보 — 경쟁 문서 16건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "덴컴 채용 전 덴트허브 만든 회사 연봉·복지·면접 보기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "덴컴 채용 뜨고 나서 덴트허브 만든 회사 맞는지 다시 확인했어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "덴컴 임병준",
-      "issue": "덴컴",
-      "topic": "덴컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 16,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 16",
-        "선점 후보 — 경쟁 문서 16건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "덴컴 임병준 대표가 공개한 치과 AI 덴트허브 1.0 정체",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "덴컴 임병준 대표가 공개한 덴트허브 치과 진료가 의외로 이렇게 바뀌네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "덴트허브 1.0",
-      "issue": "덴트허브 1.0",
-      "topic": "덴트허브 1.0",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 24,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 24",
-        "선점 후보 — 경쟁 문서 24건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 4건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "덴트허브 1.0 진료 대화부터 청구까지 연결되는 치과 AI",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "덴트허브 1.0 나왔다길래 봤더니 진료부터 청구까지 의외로 다르네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "덴컴 투자유치",
-      "issue": "덴컴",
-      "topic": "덴컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "자금 조달 관심",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 29,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 29",
-        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 자금 조달 관심"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "덴컴 투자유치, 치과 AI 덴트허브 1.0 공개로 보는 기업가치",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "덴컴 투자유치 소식 찾다가 치과 AI 덴트허브에서 발이 묶였어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "덴컴 대표",
-      "issue": "덴컴",
-      "topic": "덴컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 34,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 34",
-        "선점 후보 — 경쟁 문서 34건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "덴컴 대표가 공개한 치과 AI 덴트허브 1.0 어떤 플랫폼",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "덴컴 대표가 공개한 덴트허브 1.0 치과 청구까지 바뀐다길래 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "덴컴 투자",
-      "issue": "덴컴",
-      "topic": "덴컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 39,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 39",
-        "선점 후보 — 경쟁 문서 39건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "덴컴 투자, 덴트허브 1.0 공개로 본 상장 가능성",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "덴컴 투자 그냥 넘기려다 덴트허브 1.0 나왔다길래 다시 열어봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "주 덴컴",
-      "issue": "덴컴",
-      "topic": "덴컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 32,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 32",
-        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "주 덴컴 덴트허브 1.0 치과 AI 어디까지 되나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "주 덴컴이 덴트허브로 진료부터 청구까지 어떻게 묶는지 직접 눌러봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "덴컴 치과 AI",
-      "issue": "덴컴",
-      "topic": "덴컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 38,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 38",
-        "선점 후보 — 경쟁 문서 38건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "덴컴 치과 AI 덴트허브 1.0 공개, 진료부터 청구까지 연결",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "덴컴 치과 AI 덴트허브 처음 써보는데 진료 대화가 청구까지 이어진다는 게",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "송곳니 남여차이",
-      "issue": "송곳니",
-      "topic": "송곳니",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 35,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 35",
-        "선점 후보 — 경쟁 문서 35건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "인도 16세 소년 눈꺼풀에서 송곳니가 자라 제거됐다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "송곳니 남여차이 교정 기간과 발치 기준까지 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "송곳니 남여차이 신경 쓰여서 발치하려다 교정으로 돌린 이유",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "송곳니 뾰족한 이유",
-          "searchVolume": null,
-          "frame": "mistake"
-        },
-        {
-          "keyword": "송곳니 임플란트",
-          "searchVolume": 160,
-          "frame": "generic"
-        },
-        {
-          "keyword": "송곳니 교정",
-          "searchVolume": 140,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "송곳니 임플란트",
-          "searchVolume": 160,
-          "documentCount": 40270,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "송곳니 교정",
-          "searchVolume": 140,
-          "documentCount": 62872,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "송곳니 발치",
-          "searchVolume": 130,
-          "documentCount": 67967,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "송곳니 신경치료",
-          "searchVolume": 70,
-          "documentCount": 43564,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "송곳니 통증",
-          "searchVolume": 70,
-          "documentCount": 50625,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "송곳니 영어",
-          "searchVolume": 60,
-          "documentCount": 8242,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "송곳니 덧니 교정",
-          "searchVolume": 60,
-          "documentCount": 21734,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "송곳니 역할",
-          "searchVolume": 20,
-          "documentCount": 48245,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "덴컴 기업정보",
-      "issue": "덴컴",
-      "topic": "덴컴",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 32,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 32",
-        "선점 후보 — 경쟁 문서 32건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "덴컴 기업정보 덴트허브 1.0 공개한 치과 AI 기업",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "덴컴 기업정보 보다가 덴트허브라는 치과 AI에서 멈췄네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "중학생 궁사 강연서",
-      "issue": "중학생 궁사 강연서",
-      "topic": "중학생 궁사 강연서",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 55,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 55",
-        "선점 후보 — 경쟁 문서 55건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "14살 강연서가 박정윤 꺾고 컴파운드 개인전 동메달",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "중학생 궁사 강연서 나이와 컴파운드 개인전 동메달",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "중학생 궁사 강연서 양궁 어쩌다 시작했는지 듣고 영상 다시 돌려봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "양궁 강연서",
-          "searchVolume": 2920,
-          "frame": "generic"
-        },
-        {
-          "keyword": "강연서 양궁",
-          "searchVolume": 440,
-          "frame": "generic"
-        },
-        {
-          "keyword": "강연서 선수",
-          "searchVolume": 70,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "양궁 강연서",
-          "searchVolume": 2920,
-          "documentCount": 792,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "강연서 양궁",
-          "searchVolume": 440,
-          "documentCount": 790,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "강연서 선수",
-          "searchVolume": 70,
-          "documentCount": 847,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "강연서 나이",
-          "searchVolume": 50,
-          "documentCount": 342,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "송곳니 갈기 부작용",
-      "issue": "송곳니",
-      "topic": "송곳니",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 172,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 172",
-        "선점 후보 — 경쟁 문서 172건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "인도 16세 소년 눈꺼풀에서 송곳니가 자라 제거됐다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 27,
-      "kinTop": [
-        {
-          "title": "송곳니 갈기 치아 쉐이핑 ?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70205&docId=374167869&answerNo=1",
-          "views": 114,
-          "answers": 1
-        },
-        {
-          "title": "치과 교정, 라미네이트, 송곳니 갈기",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70201&docId=487839455&answerNo=1",
-          "views": null,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "제미나이 4 아르곤",
-      "issue": "제미나이 4 아르곤",
-      "topic": "제미나이 4 아르곤",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 208,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 208",
-        "선점 후보 — 경쟁 문서 208건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "구글이 플래그십 제미나이4 아르곤 공개, 일반 접근 제한",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "제미나이 4 아르곤 100만 토큰과 오픈AI·앤트로픽 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "제미나이 4 아르곤 공개됐는데 일반 접근은 아직 막혀 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-01T05:06:01.757Z",
-      "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
     }
@@ -4240,80 +1760,7 @@
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "인셉션",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": null,
-      "headlines": [
-        {
-          "title": "오믈렛, 엔비디아 인셉션 챌린지 톱10",
-          "press": "hansbiz.co.kr",
-          "publishedAt": "2026-09-30T13:44:00.000Z",
-          "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=868931"
-        },
-        {
-          "title": "'산업 의사결정 AI' 오믈렛, 엔비디아 인셉션 챌린지 '아태 톱10' 선정",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-09-30T07:30:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005420472?sid=101"
-        },
-        {
-          "title": "오믈렛, ‘엔비디아 인셉션 그랜드 챌린지 2026’ 아태 최종 톱10 선정",
-          "press": "sentv.co.kr",
-          "publishedAt": "2026-09-30T04:18:00.000Z",
-          "link": "https://www.sentv.co.kr/article/view/sentv202609300120"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "인셉션 영화",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 ott",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 결말",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 여주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 쿠키",
-          "searchVolume": 780,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "영화 인셉션",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "인셉션 팽이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "삼척시청",
+      "issue": "KIA",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
@@ -4321,62 +1768,134 @@
       "why": null,
       "headlines": [
         {
-          "title": "삼척시, 아시안게임 금메달 핸드볼 선수단에 포상금 4천200만원",
+          "title": "'9회 3득점' KIA, 35일 만에 3위 탈환…LG 7연패 추락",
           "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T06:32:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/001/0016351047"
+          "publishedAt": "2026-10-04T08:58:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/001/0016356884"
         },
         {
-          "title": "삼척시, 아시안게임 금메달 여자핸드볼 국가대표 6명에 포상금",
+          "title": "9회 3점' KIA 짜릿한 역전승으로 3위 탈환...LG 7연패",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-10-04T14:35:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/052/0002414754"
+        },
+        {
+          "title": "'역전극' KIA, LG 7연패 몰아넣고 3위 탈환…두산, 삼성 7연승 저지(종합...",
           "press": "newsis.com",
-          "publishedAt": "2026-10-01T06:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014227617?sid=102"
-        },
-        {
-          "title": "삼척시, 아시안게임 金 여자 핸드볼 대표 6명에 1인당 700만 원 포상금",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-01T07:47:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/448/0000642544"
+          "publishedAt": "2026-10-04T12:14:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/003/0014233185"
         }
       ],
       "concentrated": [
         {
-          "keyword": "삼척시청 핸드볼",
+          "keyword": "KIA 타이거즈",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "삼척시청 민원실",
+          "keyword": "kia 자동차",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "삼척시청 맛집",
+          "keyword": "kia connect",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "삼척시청 교통과",
+          "keyword": "kt kia",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "삼척시청 일자리",
+          "keyword": "kia rv",
+          "searchVolume": 630,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "lg kia",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "삼척시청 채용",
+          "keyword": "kia tigers",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "삼척시청 여자핸드볼",
-          "searchVolume": 1140,
+          "keyword": "kia shop",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 1
+    },
+    {
+      "issue": "박지만",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": null,
+      "headlines": [
+        {
+          "title": "박지만 입 열었다…“우리 아버지 그리 미운가”",
+          "press": "ichannela.com",
+          "publishedAt": "2026-10-03T09:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/449/0000362908?sid=100"
+        },
+        {
+          "title": "박지만 \"그렇게 소리 내 우는 모습 처음 봤다…아버지가 그렇게 미운가...",
+          "press": "weekly.chosun.com",
+          "publishedAt": "2026-10-03T14:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/053/0000061980?sid=102"
+        },
+        {
+          "title": "박지만 “가슴 들썩이도록 울던 아버지, 그날 처음 봤다”",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-02T15:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004001921?sid=110"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "박지만 회장",
+          "searchVolume": 4690,
           "origin": "autocomplete"
         },
         {
-          "keyword": "삼척시청 구인구직",
+          "keyword": "박지만 암살자들",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지만 자녀",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "암살자들 박지만",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지만 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지만 암살자",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지만 근황",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박지만 부인",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -4386,7 +1905,7 @@
       "carried": true
     },
     {
-      "issue": "이시언",
+      "issue": "김혜성",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
@@ -4394,744 +1913,72 @@
       "why": null,
       "headlines": [
         {
-          "title": "이시언♥서지승, 5월 득남했는데 둘째 계획?…“더 갖고 싶어”",
-          "press": "sports.donga.com",
-          "publishedAt": "2026-10-01T14:10:00.000Z",
-          "link": "https://m.entertain.naver.com/article/382/0001296823"
+          "title": "하성-혜성 ML 가을야구에서 코리안더비 실화?…“누구보다 빨라” 김혜...",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-10-03T07:40:00.000Z",
+          "link": "https://m.sports.naver.com/wbaseball/article/109/0005617667"
         },
         {
-          "title": "“둘째 갖고 싶다” 이시언♥서지승, 득남 이후 전한 솔직한 자녀 계획",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-10-01T15:27:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001141737"
+          "title": "'팬들 예상' 김하성-김혜성 맞대결, 성사 가능성 높아졌다",
+          "press": "stnsports.co.kr",
+          "publishedAt": "2026-10-03T06:05:00.000Z",
+          "link": "https://m.sports.naver.com/wbaseball/article/450/0000154618"
         },
         {
-          "title": "\"아빠 품이 지상낙원\"…이시언, 4개월 아들 재우는 초보아빠에 '♥서지...",
-          "press": "sportschosun.com",
-          "publishedAt": "2026-10-01T06:34:00.000Z",
-          "link": "https://m.entertain.naver.com/article/076/0004451805"
+          "title": "'이럴수가' 美가을야구 '히어로즈' 더비 성사 직전! 김하성·김혜성, 모...",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-10-03T03:37:00.000Z",
+          "link": "https://m.sports.naver.com/wbaseball/article/108/0003475679"
         }
       ],
       "concentrated": [
         {
-          "keyword": "이시언 블랙샴푸",
+          "keyword": "김혜성 야구선수",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "이시언 샴푸",
+          "keyword": "김혜성 배우",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "이시언 샴푸 후기",
+          "keyword": "김혜성 나무위키",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "이시언 와이프",
+          "keyword": "김혜성 아나운서",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "이시언 아기",
-          "searchVolume": 680,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이시언 나무위키",
+          "keyword": "김혜성 근황",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "동국대 이시언",
+          "keyword": "김혜성 연봉",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "이시언 집",
+          "keyword": "la다저스 김혜성",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김혜성 성우",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
       "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "윤규성 품새 금메달!",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "윤규성이 태권도 품새 남자 개인전 금메달로 3연패 달성",
-      "headlines": [
-        {
-          "title": "[속보] 윤규성 태권도 품새 금메달… 남자 개인전 3회 연속 우승",
-          "press": "hankookilbo.com",
-          "publishedAt": "2026-10-01T09:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/469/0000957215?sid=104"
-        },
-        {
-          "title": "[속보] 윤규성, 태권도 품새 금메달…한국 남자 개인전 3연패",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-10-01T09:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002704547?sid=104"
-        },
-        {
-          "title": "윤규성, 태권도 품새 금메달…한국 남자 개인전 3연패",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-01T09:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012266425?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "전종민 중수청 차장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "전종민이 초대 중수청 차장에 임명",
-      "headlines": [
-        {
-          "title": "[단독] 중수청 차장에 전종민, 서울지방중수청장 최재민 유력...청장급 ...",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-10-01T06:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000513644?sid=102"
-        },
-        {
-          "title": "서울중수청장 최재민·중수청 차장 전종민…광주 임은정(종합2보)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T08:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016351860?sid=100"
-        },
-        {
-          "title": "초대 서울중수청장 최재민·중수청 차장 전종민",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-01T07:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012266377?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "OCE",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈클로가 기업용 AI 에이전트 제어 플랫폼 OCE 공개",
-      "headlines": [
-        {
-          "title": "오픈클로, 기업용 AI 에이전트 제어 플랫폼 'OCE' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-01T09:22:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215847"
-        },
-        {
-          "title": "오픈클로 재단, 기업용 에이전트 플랫폼 '오픈클로 엔터프라이즈' 오픈...",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-09-30T08:12:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=704023"
-        },
-        {
-          "title": "캐논, ‘OCE PRO STREAM 1000’ 전 세계 1호기 국내 도입",
-          "press": "news.kmib.co.kr",
-          "publishedAt": "2018-02-05T07:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001070958?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "oce.cn",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "oce.kr",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "oce.global",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "OCE 사용법",
-          "reason": "출시 후 도입 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "OCE 요금",
-          "reason": "기업 도입 비용",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "OCE 보안",
-          "reason": "기업 보안 우려",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "오픈클로",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈클로가 기업용 에이전트 플랫폼 엔터프라이즈 공개",
-      "headlines": [
-        {
-          "title": "오픈클로, 기업용 AI 에이전트 제어 플랫폼 'OCE' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-01T09:22:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215847"
-        },
-        {
-          "title": "계획 넘어 실행까지…오라클, 기업용 AI 런타임 '퓨전 클로' 공개",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-09-30T05:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002439310?sid=105"
-        },
-        {
-          "title": "오라클 퓨전 클로 공개 \"AI가 결산부터 인력 배치까지\"",
-          "press": "econovill.com",
-          "publishedAt": "2026-09-30T00:08:00.000Z",
-          "link": "https://www.econovill.com/news/articleView.html?idxno=752217"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈클로 클로드 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈클로 설치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈클로 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈클로 디시",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈클로 맥미니",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈클로 헤르메스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈클로 윈도우 설치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈클로 구독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈클로 요금",
-          "reason": "도입 비용 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오픈클로 보안",
-          "reason": "기업 보안 우려",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오픈클로 클로드",
-          "reason": "클로드 연동 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "머큐리 보이스",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "인셉션이 확산 모델 기반 음성 에이전트 머큐리 보이스 출시",
-      "headlines": [
-        {
-          "title": "인셉션, 음성 에이전트 '머큐리 보이스' 출시…'확산 모델'로 지연시간...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-01T09:14:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215864"
-        },
-        {
-          "title": "허스키 보이스의 주인공, 보니 타일러를 추억하다",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-07-10T07:06:00.000Z",
-          "link": "https://m.entertain.naver.com/article/047/0002522166"
-        },
-        {
-          "title": "프레디 머큐리 가려진 삶, 마이클 잭슨과 함께한 프레디 머큐리, 'Thrille...",
-          "press": "topstarnews.net",
-          "publishedAt": "2018-12-22T14:55:00.000Z",
-          "link": "http://www.topstarnews.net/news/articleView.html?idxno=551673"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "머큐리",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "머큐리 보이스 사용법",
-          "reason": "출시 후 이용 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "머큐리 보이스 요금",
-          "reason": "도입 비용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "정하은 태권도 금메달",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "정하은이 AG 태권도 품새에서 금메달, 여자 개인전 2연패 달성.",
-      "headlines": [
-        {
-          "title": "[1보] 정하은, AG 태권도 품새 금메달…한국 여자 개인전 2연패",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T07:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016351420?sid=104"
-        },
-        {
-          "title": "정하은, 태권도 품새 금메달…한국 여자 개인전 2연패",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-01T07:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012266366?sid=104"
-        },
-        {
-          "title": "정하은, 여자 품새 금메달…한국 태권도 첫 금빛 소식",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-01T08:03:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001195697?sid=004"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "중수청 전종민 차장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "중수청 차장 전종민, 초대 서울청장 최재민, 광주청장 임은정 임명.",
-      "headlines": [
-        {
-          "title": "[단독] 중수청 차장에 전종민, 서울지방중수청장 최재민 유력...청장급 ...",
-          "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-10-01T06:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000513644?sid=102"
-        },
-        {
-          "title": "서울중수청장 최재민·중수청 차장 전종민…광주 임은정(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-01T07:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016351533?sid=100"
-        },
-        {
-          "title": "초대 서울중수청장 최재민·중수청 차장 전종민",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-01T07:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012266377?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "송곳니",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "인도 16세 소년 눈꺼풀에서 송곳니가 자라 제거됐다",
-      "headlines": [
-        {
-          "title": "눈꺼풀에서 송곳니가 나왔다…어쩌다가 이런 일이?",
-          "press": "munhwa.com",
-          "publishedAt": "2026-10-01T01:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/021/0002822426?sid=104"
-        },
-        {
-          "title": "눈꺼풀서 '송곳니' 자란 16세 소년…전세계 '화들짝' [글로벌 pick]",
-          "press": "wowtv.co.kr",
-          "publishedAt": "2026-10-01T02:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/215/0001267844?sid=104"
-        },
-        {
-          "title": "눈꺼풀에서 송곳니가 자랐다…10대 소년에게 무슨 일이",
-          "press": "yonhapnewstv.co.kr",
-          "publishedAt": "2026-10-01T00:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/422/0000911446?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "송곳니 빠지는 꿈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "송곳니 갈기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "송곳니 뾰족",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "송곳니 빠지는 시기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "송곳니 레진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "송곳니 충치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "송곳니 영어로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "송곳니 교정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "송곳니 자란 원인",
-          "reason": "왜 생겼나 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "중학생 궁사 강연서",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "14살 강연서가 박정윤 꺾고 컴파운드 개인전 동메달",
-      "headlines": [
-        {
-          "title": "14살 중학생 궁사 강연서, 박정윤 꺾고 여자 개인전 동메달",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-01T02:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012266194?sid=104"
-        },
-        {
-          "title": "집안 싸움 승자는 '중학생 궁사'… 강연서, 박정윤 제치고 개인전 동메...",
-          "press": "hankookilbo.com",
-          "publishedAt": "2026-10-01T02:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/469/0000957060?sid=104"
-        },
-        {
-          "title": "'체험수업에서 처음 잡은 활' 중학생 궁사 강연서, 양궁 컴파운드 개인...",
-          "press": "nocutnews.co.kr",
-          "publishedAt": "2026-10-01T02:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/079/0004194614?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "중학생",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "디시전스 API",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "오픈AI가 디시전스 API를 AI 에이전트 안전장치로 공개",
-      "headlines": [
-        {
-          "title": "오픈AI '디시전스 API', AI 에이전트 안전장치로 주목",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-10-01T01:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002439455?sid=105"
-        },
-        {
-          "title": "오픈AI, 빠른 판단 지원하는 '디시전스 API' 선봬…소프트웨어 자동화 겨...",
-          "press": "digitaltoday.co.kr",
-          "publishedAt": "2026-09-30T20:24:00.000Z",
-          "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=704133"
-        },
-        {
-          "title": "오픈AI, 자체 에이전트에 '디시전스 API' 적용...AI 아키텍처 판도 바뀐...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-01T04:10:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215835"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "디시전스 API 사용법",
-          "reason": "적용 방법 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "디시전스 API 활용",
-          "reason": "실무 쓰임새 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "덴트허브 1.0",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-      "headlines": [
-        {
-          "title": "덴컴, 진료 대화부터 청구까지 연결하는 치과 AI 플랫폼 ‘덴트허브 1.0...",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-01T00:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006378249?sid=105"
-        },
-        {
-          "title": "덴컴, 치과 AI 플랫폼 ‘덴트허브 1.0’ 공개",
-          "press": "sentv.co.kr",
-          "publishedAt": "2026-10-01T00:02:00.000Z",
-          "link": "https://www.sentv.co.kr/article/view/sentv202609300211"
-        },
-        {
-          "title": "덴컴, 치과 진료 전 과정 연결한 AI 플랫폼 '덴트허브 1.0' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-01T01:32:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215822"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "덴컴",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "덴컴이 치과 AI 플랫폼 덴트허브 1.0을 공개",
-      "headlines": [
-        {
-          "title": "덴컴, 치과 AI 플랫폼 ‘덴트허브 1.0’ 공개",
-          "press": "sentv.co.kr",
-          "publishedAt": "2026-10-01T00:02:00.000Z",
-          "link": "https://www.sentv.co.kr/article/view/sentv202609300211"
-        },
-        {
-          "title": "덴컴, 치과 진료 전 과정 연결한 AI 플랫폼 '덴트허브 1.0' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-01T01:32:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215822"
-        },
-        {
-          "title": "덴컴, 진료 대화부터 청구까지 연결하는 치과 AI 플랫폼 ‘덴트허브 1.0...",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-01T00:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006378249?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "덴컴 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "덴컴 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "덴컴 투자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "덴컴 임병준",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "주 덴컴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "주식회사 덴컴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "덴컴 투자유치",
-          "reason": "자금 조달 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "덴컴 상장",
-          "reason": "향후 계획 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "덴컴 매출",
-          "reason": "사업 규모 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "제미나이 4 아르곤",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "구글이 플래그십 제미나이4 아르곤 공개, 일반 접근 제한",
-      "headlines": [
-        {
-          "title": "구글, '제미나이 4 아르곤' 공개…오픈AI·앤트로픽에 도전장",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-01T01:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014226005?sid=104"
-        },
-        {
-          "title": "구글, '제미나이 4 아르곤' 공개…100만 토큰·사이버보안 강화",
-          "press": "etnews.com",
-          "publishedAt": "2026-09-30T22:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003471385?sid=105"
-        },
-        {
-          "title": "구글, 업무·보안 강화한 '제미나이 4 아르곤' 공개…\"안전장치 보완 중...",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-10-01T00:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002439415?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
       "carried": true
     }
   ],
-  "enrichedAt": "2026-10-03T03:27:23.985Z",
+  "enrichedAt": "2026-10-04T21:33:10.332Z",
   "enrichStats": {
     "enriched": 0,
     "subsAdded": 0,

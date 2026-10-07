@@ -2383,6 +2383,8 @@ export async function handleSemiAutoPublish(): Promise<any> {
   const bodySlotImageCount = semiAutoImageTitles.bodySlotImages;
   const semiAutoPublishStructure = resolveSemiAutoPublishStructure(content, existingSemiAutoHeadings, {
     bodyIsAuthoritative: true,
+    // 이미지 관리와 같은 소제목을 유지하고 일반 본문을 발행 시 새 소제목으로 승격하지 않는다.
+    preferKnownHeadings: true,
     existingIntroduction: structuredContent.introduction || '',
     imageHeadingTitles,
     // [2026-09-10] 소제목 패널에서 직접 지정했으면 본문 표기가 이긴다 — 복구 사다리가 옛 제목으로 되돌리지 못한다.

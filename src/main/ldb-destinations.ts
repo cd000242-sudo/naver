@@ -1,7 +1,7 @@
 export interface LdbDestination { accountId: string; categoryId: string }
 export interface LdbResolvedDestination extends LdbDestination { categoryName: string; categories: { id: string; name: string }[] }
 interface Dependencies {
-  accounts: () => { id: string; name: string; blogId: string }[];
+  accounts: () => { id: string; name: string; blogId: string; naverId?: string }[];
   active: () => { id: string } | null;
   fetchCategories: (blogId: string) => Promise<{ success: boolean; categories?: { id: string; name: string }[] }>;
   deliver: (posts: unknown[], destination?: LdbResolvedDestination) => Promise<number>;
@@ -18,9 +18,12 @@ export function createLdbDestinations(deps: Dependencies) {
   function queued<T>(run: () => Promise<T>): Promise<T> { const result = tail.then(run); tail = result.catch(() => undefined); return result; }
   function account(id: string) { const found = deps.accounts().find(value => value.id === id); if (!found) throw new Error('앱에 등록된 계정이 아닙니다.'); return found; }
   async function categories(accountId: string) {
-    const before = account(accountId);
-    const result = await deps.fetchCategories(before.blogId);
-    if (account(accountId).blogId !== before.blogId) throw new Error('계정이 변경되었습니다. 다시 불러와주세요.');
+    // 기존 앱의 실제 카테고리 분석과 같은 로그인 ID를 사용한다.
+    // blogId는 구형 계정 편집 화면에서 표시명으로 저장될 수 있으므로 보조값으로만 쓴다.
+    const lookupId = (value: ReturnType<typeof account>) => value.naverId?.trim() || value.blogId.trim();
+    const beforeId = lookupId(account(accountId));
+    const result = await deps.fetchCategories(beforeId);
+    if (lookupId(account(accountId)) !== beforeId) throw new Error('계정이 변경되었습니다. 다시 불러와주세요.');
     const values = (result.categories || []).filter(value => /^[1-9]\d{0,15}$/.test(String(value.id)) && String(value.name || '').trim())
       .map(value => ({ id: String(value.id), name: String(value.name).trim() }));
     if (!result.success || !values.length || new Set(values.map(value => value.id)).size !== values.length) throw new Error('실제 발행 카테고리를 확인하지 못했습니다.');

@@ -3,7 +3,6 @@ import type { LdbResolvedDestination } from './ldb-destinations.js';
 
 interface DeliveryIpc {
   on: (channel: string, listener: (...args: any[]) => void) => unknown;
-  removeListener: (channel: string, listener: (...args: any[]) => void) => unknown;
 }
 interface DeliveryTarget {
   id: number;
@@ -11,25 +10,42 @@ interface DeliveryTarget {
   isLoading: () => boolean;
   send: (channel: string, ...args: any[]) => void;
 }
+interface PendingDelivery {
+  senderId: number;
+  acknowledge: (reply: any) => void;
+}
+const deliveryRouters = new WeakMap<DeliveryIpc, Map<string, PendingDelivery>>();
 
-/**
- * HTTP success is contingent on the intended renderer acknowledging its update.
- * The parameter is named ipcMain on purpose: the IPC contract lint (scripts/lint-ipc.mjs,
- * ipcWiringIntegrity.test.ts) only recognises literal ipcMain.on(...) registrations.
- */
+/** 앱의 register-once 가드를 지키면서 요청별 ACK를 하나의 수신기로 분배한다. */
+function getDeliveryRouter(ipcMain: DeliveryIpc): Map<string, PendingDelivery> {
+  const existing = deliveryRouters.get(ipcMain);
+  if (existing) return existing;
+  const pending = new Map<string, PendingDelivery>();
+  ipcMain.on('ldb:import-posts-result', (event: any, reply: any) => {
+    if (typeof reply?.requestId !== 'string') return;
+    const request = pending.get(reply.requestId);
+    if (!request || event?.sender?.id !== request.senderId) return;
+    request.acknowledge(reply);
+  });
+  deliveryRouters.set(ipcMain, pending);
+  return pending;
+}
+
+/** HTTP 성공은 해당 렌더러의 동일 요청·계정·카테고리 ACK가 있어야만 반환한다. */
 export function deliverLdbPosts(target: DeliveryTarget | undefined, ipcMain: DeliveryIpc, posts: unknown[], timeoutMs = 12_000, destination?: LdbResolvedDestination): Promise<number> {
   if (!target || target.isDestroyed() || target.isLoading()) return Promise.reject(new Error('앱 화면이 준비되지 않았습니다.'));
   return new Promise((resolve, reject) => {
+    const pending = getDeliveryRouter(ipcMain);
     const requestId = randomUUID();
-    const cleanup = () => { clearTimeout(timer); ipcMain.removeListener('ldb:import-posts-result', listener); };
-    const listener = (event: any, reply: any) => {
-      if (event.sender?.id !== target.id || reply?.requestId !== requestId) return;
-      cleanup();
-      if (reply.ok === true && reply.imported === posts.length && (!destination || (reply.selection?.accountId === destination.accountId && reply.selection?.categoryId === destination.categoryId))) resolve(reply.imported);
-      else reject(new Error('앱에서 원고와 이미지 배치를 완료하지 못했습니다.'));
-    };
+    const expectedCount = posts.length;
+    const expectedSelection = destination ? { accountId: destination.accountId, categoryId: destination.categoryId } : undefined;
+    const cleanup = () => { clearTimeout(timer); pending.delete(requestId); };
     const timer = setTimeout(() => { cleanup(); reject(new Error('앱 수신 확인 시간이 초과되었습니다.')); }, timeoutMs);
-    ipcMain.on('ldb:import-posts-result', listener);
+    pending.set(requestId, { senderId: target.id, acknowledge: (reply: any) => {
+      cleanup();
+      if (reply.ok === true && reply.imported === expectedCount && (!expectedSelection || (reply.selection?.accountId === expectedSelection.accountId && reply.selection?.categoryId === expectedSelection.categoryId))) resolve(reply.imported);
+      else reject(new Error('앱에서 원고와 이미지 배치를 완료하지 못했습니다.'));
+    } });
     try { target.send('ldb:import-posts', posts, requestId, destination); }
     catch (error) { cleanup(); reject(error); }
   });

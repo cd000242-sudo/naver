@@ -101,10 +101,12 @@ describe('발행 배선 — 사용자가 지정한 소제목이 발행까지 살
     { title: '옛 소제목 둘', content: '내용 라마바' },
   ];
 
-  it('잠금이 없으면 기존 동작 그대로 — 근거가 더 많은 옛 소제목으로 복구된다', async () => {
+  it('잠금이 없어도 명시한 표기가 우선이며 옛 소제목은 본문으로 남는다', async () => {
     const { resolveSemiAutoPublishStructure } = await import('../renderer/utils/semiAutoHeadingExtractor');
     const structure = resolveSemiAutoPublishStructure(body, staleHeadings, { bodyIsAuthoritative: true });
-    expect(structure.headings.map((h) => h.title)).toEqual(['옛 소제목 하나', '옛 소제목 둘']);
+    expect(structure.headings.map((h) => h.title)).toEqual(['내가 정한 소제목']);
+    expect(structure.headings[0].content).toContain('옛 소제목 하나');
+    expect(structure.headings[0].content).toContain('옛 소제목 둘');
   });
 
   it('사용자가 지정했으면 본문 표기가 이긴다 — 복구 사다리가 되돌리지 못한다', async () => {

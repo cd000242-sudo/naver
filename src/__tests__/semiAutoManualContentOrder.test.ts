@@ -40,6 +40,7 @@ describe('semi-auto manual content order guards', () => {
     const publishBlock = publishingHandlers.slice(publishStart);
 
     expect(publishBlock).toContain('resolveSemiAutoPublishStructure(content, existingSemiAutoHeadings');
+    expect(publishBlock).toContain('preferKnownHeadings: true');
     expect(publishBlock).not.toContain('reSyncHeadingsContent(existingSemiAutoHeadings, content)');
     expect(publishBlock).toContain('_manualSectionOrderLocked: semiAutoPublishStructure.orderLocked');
     expect(publishBlock).toContain('introduction: semiAutoPublishStructure.introduction');

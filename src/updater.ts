@@ -6,6 +6,9 @@
 
 import { app, BrowserWindow, ipcMain, dialog, shell } from 'electron';
 import { spawnSync } from 'child_process';
+import { createUpdateStatus } from './main/ldb-launch.js';
+const ldbUpdateStatus = createUpdateStatus();
+export const getLdbUpdateStatus = () => ldbUpdateStatus.get();
 
 // ✅ [2026-04-03] electron-updater 지연 로드 (개발 모드 crash 방지)
 let _autoUpdater: any = null;
@@ -359,6 +362,7 @@ function sendLogToRenderer(message: string): void {
  * 렌더러에 상태 전송
  */
 function sendStatusToWindow(channel: string, data?: any): void {
+    ldbUpdateStatus.record(channel, data);
     if (mainWindow && !mainWindow.isDestroyed()) {
         mainWindow.webContents.send(channel, data);
     }
@@ -370,10 +374,11 @@ function sendStatusToWindow(channel: string, data?: any): void {
 export async function checkForUpdates(): Promise<void> {
     try {
         const updater = getAutoUpdater();
-        if (!updater) return;
+        if (!updater || !app.isPackaged || !getMacCodeSignatureInfo().supported) { ldbUpdateStatus.record('update-not-available', { reason: 'unavailable' }); return; }
         console.log('[Updater] 업데이트 확인 시작...');
         await updater.checkForUpdates();
     } catch (error) {
+        ldbUpdateStatus.record('update-error');
         console.error('[Updater] 업데이트 확인 실패:', error);
     }
 }
@@ -649,6 +654,7 @@ export function initAutoUpdaterEarly(): void {
 
     // ✅ 에러 처리 - [2026-02-05 FIX] 진행률 창을 바로 닫지 않고 에러 표시 후 사용자 확인 대기
     updater.on('error', (error: any) => {
+        ldbUpdateStatus.record('update-error');
         if (isTransientGitHubUpdateError(error)) {
             isUpdateInProgress = false;
             notifyUpdateDeferred('GitHub 일시 오류 — 재시도 예약');

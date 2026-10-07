@@ -49,6 +49,7 @@ export function registerConfigHandlers(ctx: ConfigHandlerContext): void {
         const config = await saveConfig(payload);
         ctx.setAppConfig(config);
         applyConfigToEnv(config);
+        if (typeof payload.ldbBridgeEnabled === 'boolean') ctx.onAccountActivated?.();
         return config;
     });
 
@@ -88,7 +89,7 @@ export function registerConfigHandlers(ctx: ConfigHandlerContext): void {
         const nextConfig = await saveConfig(payload ?? {});
         ctx.setAppConfig(nextConfig);
         applyConfigToEnv(nextConfig);
-        if (activatesAccount) {
+        if (activatesAccount || typeof payload.ldbBridgeEnabled === 'boolean') {
             try { ctx.onAccountActivated?.(); }
             catch (error) { console.error('[Main] 계정 활성화 후처리 실패:', error); }
         }

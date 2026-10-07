@@ -104,6 +104,7 @@ const PRESERVE_FIELDS = [
     'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey',
     'naverDatalabClientId', 'naverDatalabClientSecret',
     'naverClientId', 'naverClientSecret',
+    'naverHubClientId', 'naverHubClientSecret',
     'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
     'rememberCredentials', 'savedNaverId', 'savedNaverPassword',
     'rememberLicenseCredentials', 'savedLicenseUserId', 'savedLicensePassword',
