@@ -19,10 +19,15 @@ const day = (iso: string | null | undefined) => (iso ? kst(iso).replace(/\s*\d{1
 /** 앱이 즉석으로 지은 검색용 제목은 이 브라우저에 기억(다음 회차 제목이 붙으면 그쪽이 우선). */
 const MADE_KEY = (id: string) => `leword.ads.madeTitles.${id}`;
 function readMade(id: string): string[] { try { const v = JSON.parse(localStorage.getItem(MADE_KEY(id)) || 'null'); return Array.isArray(v) ? v.filter((t) => typeof t === 'string') : []; } catch { return []; } }
+const MADE_EDGE_KEY = (id: string) => `leword.ads.madeTitleEdges.${id}`;
+function readMadeEdges(id: string): string[] { try { const v = JSON.parse(localStorage.getItem(MADE_EDGE_KEY(id)) || 'null'); return Array.isArray(v) ? v.map((t) => (typeof t === 'string' ? t : '')) : []; } catch { return []; } }
 
 function SearchTitles({ c }: { c: AdsenseCard }) {
     const [made, setMade] = useState<string[]>(() => (c.titles?.length ? [] : readMade(c.id)));
     const titles = c.titles?.length ? c.titles : made;
+    // 제목과 같은 순서 — 그 제목이 고수 제목보다 나은 점(2026-10-07 사장님 "고수 제목보다 훨씬 상위호환이어야").
+    const [madeEdges, setMadeEdges] = useState<string[]>(() => (c.titles?.length ? [] : readMadeEdges(c.id)));
+    const edges = c.titles?.length ? (c.titleEdges || []) : madeEdges;
     const [open, setOpen] = useState(false);
     const [state, setState] = useState<'idle' | 'loading'>('idle');
     const [note, setNote] = useState('');
@@ -33,7 +38,11 @@ function SearchTitles({ c }: { c: AdsenseCard }) {
         setState('loading'); setNote('');
         const r = await bridgeBenchmarkTitles({ kind: 'adsense', query: c.metrics.query, id: c.id, keyword: c.keyword, category: c.category, title: c.title, summary: '', sourceTitles: c.sources.map((s) => s.title).slice(0, 6), relatedKeywords: [] });
         setState('idle');
-        if (r.status === 'ok' && r.result.titles.length) { try { localStorage.setItem(MADE_KEY(c.id), JSON.stringify(r.result.titles)); } catch { /* 기억 못 해도 화면엔 보인다 */ } setMade(r.result.titles); return; }
+        if (r.status === 'ok' && r.result.titles.length) {
+            const madeNow = r.result.edges || [];
+            try { localStorage.setItem(MADE_KEY(c.id), JSON.stringify(r.result.titles)); localStorage.setItem(MADE_EDGE_KEY(c.id), JSON.stringify(madeNow)); } catch { /* 기억 못 해도 화면엔 보인다 */ }
+            setMade(r.result.titles); setMadeEdges(madeNow); return;
+        }
         if (r.status === 'ok') { setNote('검사를 통과한 제목이 없었습니다 — 한 번 더 눌러 주세요.'); return; }
         if (r.status === 'offline') { setNote('PC 에서 LEWORD 앱을 켜 두면 내 구독 AI 로 바로 만듭니다 — 앱을 켠 뒤 다시 눌러 주세요.'); return; }
         if (r.status === 'outdated') { setNote('LEWORD 앱이 구버전이라 이 기능이 없습니다 — 앱을 최신 버전으로 업데이트해 주세요.'); return; }
@@ -42,7 +51,7 @@ function SearchTitles({ c }: { c: AdsenseCard }) {
     const shown = open ? titles : titles.slice(0, 5);
     return (
         <div className="hfb-title-box">
-            <div className="hfb-title-head"><h4>검색용 제목 {titles.length > 0 ? <span>{titles.length}개</span> : null}</h4>{titles.length > 0 && <button type="button" onClick={() => void copy(titles.join(String.fromCharCode(10)))}>전체 복사</button>}</div>
+            <div className="hfb-title-head"><h4>검색용 제목 {titles.length > 0 ? <span>{titles.length}개</span> : null}</h4>{titles.length > 0 && <button type="button" onClick={() => void copy(titles.join(String.fromCharCode(10)))}>전체 복사</button>}{edges.length > 0 && <small>고수 제목보다 나은 것만 · 같은 채점표로 비교</small>}</div>
             {titles.length === 0 && (
                 <div className="hfb-title-empty">
                     {c.metrics?.query
@@ -52,7 +61,7 @@ function SearchTitles({ c }: { c: AdsenseCard }) {
                 </div>
             )}
             {shown.map((t, i) => (
-                <div key={t} className="hfb-title-row"><span>{i + 1}</span><p>{t}</p><button type="button" onClick={() => void copy(t)}>{copied === t ? '복사됨' : '복사'}</button></div>
+                <div key={t} className="hfb-title-row"><span>{i + 1}</span><p>{t}{edges[i] ? <span style={{ display: 'block', marginTop: 2, fontSize: 11.5, color: '#fcd34d' }}>↑ {edges[i]}</span> : null}</p><button type="button" onClick={() => void copy(t)}>{copied === t ? '복사됨' : '복사'}</button></div>
             ))}
             {titles.length > 5 && <button type="button" className="hfb-title-more" onClick={() => setOpen((v) => !v)} aria-expanded={open}>{open ? '접기' : `나머지 ${titles.length - 5}개 더 보기`}</button>}
         </div>

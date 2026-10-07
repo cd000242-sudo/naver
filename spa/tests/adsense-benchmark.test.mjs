@@ -64,3 +64,15 @@ test('글 구조 보기 — 고수 글마다 워커(다른 IP)로 소제목 목�
   for (const k of ['o.chars', 'o.headings', 'o.images', 'o.tables', 'o.adSlots']) assert.ok(board.includes(k), k);
   assert.ok(!/dangerouslySetInnerHTML/.test(board), '남의 글 HTML 을 그대로 꽂지 않는다');
 });
+
+// 사장님(2026-10-07) "검색용 추천 제목은 고수들이 쓴 제목보다 훨씬 상위호환이어야" — 제목마다 고수보다 나은 점을 보여 준다.
+test('검색용 제목마다 고수보다 나은 점(titleEdges · 브리지 edges)을 같은 순서로 보여 준다', () => {
+  const board = readFileSync(new URL('../src/components/leword/adsense/AdsenseBenchmarkBoard.tsx', import.meta.url), 'utf8');
+  assert.ok(board.includes('c.titleEdges'), '판 카드의 나은 점');
+  assert.ok(board.includes('r.result.edges'), '지금 만든 제목의 나은 점');
+  assert.ok(board.includes('고수 제목보다 나은 것만'), '무엇을 기준으로 골랐는지 안내');
+  const types = readFileSync(new URL('../src/lib/adsenseBenchmarkModel.d.mts', import.meta.url), 'utf8');
+  assert.ok(types.includes('titleEdges?: string[]'));
+  const bridge = readFileSync(new URL('../src/lib/bridge.ts', import.meta.url), 'utf8');
+  assert.ok(bridge.includes('edges?: string[]'));
+});

@@ -4,6 +4,8 @@ export interface AdsenseCard {
   publishedAt: string | null; capturedAt: string; why: string[];
   metrics: { query?: string | null; searchVolume: number | null; documentCount: number | null; bid: number | null; measuredAt?: string };
   titles: string[]; sources: AdsenseSource[];
+  /** titles 와 같은 순서 — 그 제목이 고수 제목보다 나은 점(같은 채점표로 가장 높은 고수 제목을 넘은 것만 실린다). */
+  titleEdges?: string[]; masterBest?: number;
 }
 export interface AdsenseTitleShape { count: number; lengthMedian: number | null; yearPct: number | null; numberPct: number | null; questionPct: number | null; bracketPct: number | null }
 export interface AdsenseBoard {

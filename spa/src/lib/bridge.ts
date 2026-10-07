@@ -140,8 +140,8 @@ export async function bridgeMindmap(keyword: string, light = false): Promise<Bri
  * 1,000장 판에 제목이 25장뿐이었다 — 비어 있는 카드에서 부른다. 회차와 같은 엔진 · 같은 검사.
  */
 export interface BenchmarkTitleCardInput { id: string; keyword: string; category: string; title: string; summary: string; sourceTitles: string[]; relatedKeywords: string[]; /** 'adsense' 면 구글 · 다음 검색용 제목 엔진(대표 검색어 query 필수) */ kind?: 'homefeed' | 'adsense'; query?: string }
-export async function bridgeBenchmarkTitles(card: BenchmarkTitleCardInput): Promise<BridgeCallResult<{ id: string; provider: string; titles: string[] }>> {
-    return bridgeCall<{ id: string; provider: string; titles: string[] }>('/v1/bridge/benchmark-titles', {
+export async function bridgeBenchmarkTitles(card: BenchmarkTitleCardInput): Promise<BridgeCallResult<{ id: string; provider: string; titles: string[]; edges?: string[] }>> {
+    return bridgeCall<{ id: string; provider: string; titles: string[]; edges?: string[] }>('/v1/bridge/benchmark-titles', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ card }),
