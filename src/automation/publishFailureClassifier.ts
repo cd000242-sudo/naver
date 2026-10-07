@@ -35,6 +35,21 @@ function includesAny(value: string, patterns: readonly string[]): boolean {
   return patterns.some((pattern) => normalized.includes(pattern.toLowerCase()));
 }
 
+const ACCOUNT_STOP_FAILURE_CODES: readonly PublishFailureCode[] = ['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'];
+
+/**
+ * The failure paused the account (login, challenge, protection, connection, wrong account, unknown publish outcome).
+ * Running the next post or account would only repeat it — and spend content generation on a post that cannot publish.
+ * Only an explicit code counts (the error's `code`, or "[CODE]" carried through IPC). The text heuristics below
+ * would also stop on unrelated messages such as an AI agent's "로그인 필요".
+ */
+export function requiresAccountStop(input: unknown): boolean {
+  const code = input && typeof input === 'object' ? (input as { code?: unknown }).code : undefined;
+  if (typeof code === 'string' && ACCOUNT_STOP_FAILURE_CODES.includes(code as PublishFailureCode)) return true;
+  const serialized = /\[(LOGIN_REQUIRED|LOGIN_CHALLENGE|ACCOUNT_PROTECTED|NETWORK_WAIT|ACCOUNT_MISMATCH|PUBLISH_OUTCOME_UNKNOWN)\]/.exec(toMessage(input))?.[1];
+  return Boolean(serialized);
+}
+
 export function classifyPublishFailure(input: unknown): PublishFailureClassification {
   const code = input && typeof input === 'object' ? (input as { code?: unknown }).code : undefined;
   if (typeof code === 'string' && ['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN', 'ACCOUNT_BUSY'].includes(code)) {

@@ -66,7 +66,7 @@ describe('continuous Flow publish handoff regression guard', () => {
     expect(runAutomationIndex).toBeGreaterThan(dispatchMarkerIndex);
 
     expect(continuous).toContain('const publishWasDispatched = (window as any)._publishAutomationDispatched === true;');
-    expect(continuous).toContain('if ((item as any)._publishStarted && publishWasDispatched)');
+    expect(continuous).toContain('const outcomeUncertain = Boolean((item as any)._publishStarted && publishWasDispatched);');
   });
 
   it('announces and reasserts the continuous state before the login handoff', () => {

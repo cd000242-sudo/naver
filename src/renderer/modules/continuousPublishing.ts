@@ -12,6 +12,7 @@ import {
   resolveUsableShoppingReferenceSource,
 } from '../../image/shoppingReferenceGeneration.js';
 import { resolvePublishFloorSec, publishIntervalToFields, formatContinuousIntervalLabel, DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES } from '../../automation/publishIntervalPolicy.js';
+import { requiresAccountStop } from '../../automation/publishFailureClassifier.js';
 import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
 import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSlots.js';
 import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
@@ -5362,7 +5363,23 @@ async function startContinuousPublishingV2(): Promise<void> {
         console.warn('[Continuous] 상태 정리 오류 (무시):', cleanupErr);
       }
 
-      if ((item as any)._publishStarted && publishWasDispatched) {
+      // The account is paused (login, challenge, protection, connection, wrong account, unknown outcome):
+      // the next post would only fail the same way after paying for its content, so the queue stops here.
+      if (requiresAccountStop(error)) {
+        item.status = resolveInterruptedPublishStatus(Boolean((item as any)._publishStarted && publishWasDispatched), 'failed');
+        delete (item as any)._publishStarted;
+        failCount++;
+        appendLog(`⏹️ 계정 확인이 필요해 연속발행을 멈춥니다: ${errMsg}`);
+        appendLog('ℹ️ 계정 관리에서 네이버 로그인·본인확인을 마친 뒤 [확인 후 재개]를 누르고 다시 시작하세요.');
+        updateContinuousProgressModal({ step: '계정 확인 필요 — 중단', log: errMsg, percentage: (currentIdx / totalCount) * 100 });
+        stopContinuousMode('manual');
+        break;
+      }
+
+      // Sent to Naver but the result is unknown: never retried (duplicate risk), but still counted as a failure
+      // and followed by the normal publish interval instead of jumping straight to the next post.
+      const outcomeUncertain = Boolean((item as any)._publishStarted && publishWasDispatched);
+      if (outcomeUncertain) {
         item.status = resolveInterruptedPublishStatus(true, 'failed');
         delete (item as any)._publishStarted;
         appendLog(`⚠️ 발행 호출 이후 결과를 확정하지 못했습니다. 중복 발행 방지를 위해 자동 재시도하지 않습니다.`);
@@ -5371,7 +5388,6 @@ async function startContinuousPublishingV2(): Promise<void> {
           log: `네이버 블로그에서 "${item.value.substring(0, 30)}"의 발행 여부를 확인해주세요.`,
           percentage: (currentIdx / totalCount) * 100,
         });
-        continue;
       }
 
       if ((item as any)._publishStarted) {
@@ -5400,7 +5416,7 @@ async function startContinuousPublishingV2(): Promise<void> {
       // ✅ [2026-03-21] 1회 재시도 (아이템별 _retryCount로 무한루프 완벽 방지)
       // 단, 사용자 입력 오류는 재시도 없이 즉시 실패 처리
       const retryCount = (item as any)._retryCount || 0;
-      if (retryCount < 1 && !isInputError) {
+      if (retryCount < 1 && !isInputError && !outcomeUncertain) {
         (item as any)._retryCount = retryCount + 1;
         appendLog(`⚠️ 실패: ${errMsg} — 15초 후 1회 재시도합니다... (${retryCount + 1}/1)`);
         updateContinuousProgressModal({
@@ -5421,7 +5437,7 @@ async function startContinuousPublishingV2(): Promise<void> {
       }
 
       // 2회 이상 실패: 건너뛰고 다음으로
-      item.status = 'failed';
+      if (!outcomeUncertain) item.status = 'failed';
       failCount++;
       // ✅ _consecutiveFailCount는 리셋하지 않음 — 성공 시에만 리셋 (line 3660)
       appendLog(`❌ 실패 (건너뜀): ${errMsg}`);

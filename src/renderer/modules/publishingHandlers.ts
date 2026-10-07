@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
+import { requiresAccountStop } from '../../automation/publishFailureClassifier.js';
 import { toCollectedImagePreviews } from './collectedImagePreview.js';
 import {
   extractSemiAutoHeadingsFromBody,
@@ -2076,6 +2077,13 @@ export async function handleMultiAccountPublish(): Promise<void> {
       } else {
         appendLog(`❌ [${i + 1}/${selectedAccountIds.length}] ${account.name}: ${result.message || '발행 실패'}`);
         failCount++;
+        // Same rule as the main multi-account loop: a paused account (login, challenge, protection, connection,
+        // wrong account, unknown outcome) stops the run instead of opening the next account on this PC.
+        const failureCode = (result as { results?: Array<{ failureCode?: string }> }).results?.[0]?.failureCode;
+        if (requiresAccountStop({ code: failureCode, message: result.message })) {
+          appendLog('⏹️ 계정 확인이 필요해 다중계정 발행을 멈춥니다. 계정 관리에서 확인 후 재개한 뒤 다시 시작하세요.');
+          break;
+        }
       }
 
       // 다음 계정 발행 전 대기 (마지막 계정 제외)
