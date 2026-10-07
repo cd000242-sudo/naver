@@ -10,7 +10,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const APP = process.env.LEWORD_APP_REPO || 'C:/Users/park/leword-app';
-const SOURCES = ['varied.ts', 'forge.ts', 'frame-analysis.ts'].map((f) => path.join(APP, 'src/utils/title-forge', f))
+const SOURCES = ['varied.ts', 'forge.ts', 'frame-analysis.ts', 'issue.ts'].map((f) => path.join(APP, 'src/utils/title-forge', f))
   .concat(path.join(APP, 'src/utils/shopping-purchase-angle.ts'));
 const hash = createHash('sha256').update(SOURCES.map((f) => readFileSync(f, 'utf8').replace(/\r/g, '')).join('\n')).digest('hex').slice(0, 16);
 const here = path.dirname(fileURLToPath(import.meta.url));
