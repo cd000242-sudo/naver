@@ -1,3 +1,16 @@
+# Public release completed — 2026-10-06 (Asia/Seoul)
+
+Windows 2.11.316 is public Latest: https://github.com/cd000242-sudo/naver/releases/tag/v2.11.316
+Release ID: 403270622. Tag/source commit: 0c10fd9916bef1a7cce2cb98f5a424113c07cace (codex/release-2.11.316). Remote main and original local HEAD/index were preserved.
+
+- Draft and public verification passed: all 12 assets have matching SHA256/size; public HTTP 200; Windows and Mac manifest SHA512 matches.
+- Actual installed dependency electron-updater GitHubProvider resolves Windows 2.11.316 and its installer correctly against the live public feed.
+- Mac 2.11.315 manifest and all nine assets are preserved unchanged on the new tag. The auto-triggered 316 Mac build 37341523878 was cancelled to retain the validated platform state.
+- Official website Windows download link was updated to 2.11.316 and read back successfully.
+- Evidence: C:/Users/박성현/Desktop/LDBIMAGEULTRA/release-316-publish/public-verified.json and provider-verified.json.
+- No installation over the user's live app or real authenticated Chrome extension roundtrip was performed. The earlier local-only/no-upload notes below describe past checkpoints and are superseded by this release record.
+
+---
 # Final result — 2026-10-05
 
 Local installer completed. No public upload or installation over the user's live app was performed.

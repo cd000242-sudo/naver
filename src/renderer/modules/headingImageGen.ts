@@ -3559,6 +3559,7 @@ export async function autoAnalyzeHeadings(
       allSections.push({
         title: '🖼️ 썸네일',
         content: structuredContent.introduction,
+        prompt: structuredContent.thumbnailPrompt,
         isThumbnail: true,
         isIntro: true
       });
@@ -3760,7 +3761,7 @@ export function displayImageHeadingsWithPrompts(headings: any[]): void {
         </div>
       </div>
       <div style="margin-bottom: 0.75rem;">
-        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">📝 영어 프롬프트:</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">📝 이미지 프롬프트:</div>
         <div class="prompt-text" style="font-size: 0.9rem; color: var(--text-strong); padding: 0.5rem; background: var(--bg-tertiary); border-radius: 6px; font-family: monospace; word-break: break-word;">${safePrompt}</div>
         <div style="display:flex; gap:0.5rem; justify-content:flex-end; margin-top: 0.5rem;">
           <button type="button" class="edit-heading-prompt-btn" data-heading-index="${index}" style="padding: 0.35rem 0.65rem; background: rgba(59,130,246,0.16); color: var(--text-strong); border: 1px solid rgba(59,130,246,0.35); border-radius: 6px; font-size: 0.75rem; cursor: pointer;">✏️ 수정</button>
