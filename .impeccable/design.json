@@ -1,0 +1,433 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T05:42:33.802431+00:00",
+  "title": "Design System: Leaders Pro 제품 페이지",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "밤 바닥",
+        "canonical": "oklch(14.6% 0.008 285)",
+        "tonalRamp": [
+          "oklch(15% 0.008 285)",
+          "oklch(27% 0.008 285)",
+          "oklch(39% 0.008 285)",
+          "oklch(51% 0.008 285)",
+          "oklch(63% 0.008 285)",
+          "oklch(75% 0.008 285)",
+          "oklch(85% 0.008 285)",
+          "oklch(95% 0.008 285)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "슬레이트 판",
+        "canonical": "oklch(18.4% 0.014 285)",
+        "tonalRamp": [
+          "oklch(15% 0.014 285)",
+          "oklch(27% 0.014 285)",
+          "oklch(39% 0.014 285)",
+          "oklch(51% 0.014 285)",
+          "oklch(63% 0.014 285)",
+          "oklch(75% 0.014 285)",
+          "oklch(85% 0.014 285)",
+          "oklch(95% 0.014 285)"
+        ]
+      },
+      "inset": {
+        "role": "neutral",
+        "displayName": "안쪽 판",
+        "canonical": "oklch(16.2% 0.012 285)",
+        "tonalRamp": [
+          "oklch(15% 0.012 285)",
+          "oklch(27% 0.012 285)",
+          "oklch(39% 0.012 285)",
+          "oklch(51% 0.012 285)",
+          "oklch(63% 0.012 285)",
+          "oklch(75% 0.012 285)",
+          "oklch(85% 0.012 285)",
+          "oklch(95% 0.012 285)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "가는 선",
+        "canonical": "rgba(255,255,255,.09)",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(85% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "또렷한 선",
+        "canonical": "rgba(255,255,255,.16)",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(85% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "먹",
+        "canonical": "oklch(97.3% 0.006 265)",
+        "tonalRamp": [
+          "oklch(15% 0.006 265)",
+          "oklch(27% 0.006 265)",
+          "oklch(39% 0.006 265)",
+          "oklch(51% 0.006 265)",
+          "oklch(63% 0.006 265)",
+          "oklch(75% 0.006 265)",
+          "oklch(85% 0.006 265)",
+          "oklch(95% 0.006 265)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "보조 먹",
+        "canonical": "oklch(76.6% 0.024 265)",
+        "tonalRamp": [
+          "oklch(15% 0.024 265)",
+          "oklch(27% 0.024 265)",
+          "oklch(39% 0.024 265)",
+          "oklch(51% 0.024 265)",
+          "oklch(63% 0.024 265)",
+          "oklch(75% 0.024 265)",
+          "oklch(85% 0.024 265)",
+          "oklch(95% 0.024 265)"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "흐린 먹",
+        "canonical": "oklch(61.4% 0.03 265)",
+        "tonalRamp": [
+          "oklch(15% 0.03 265)",
+          "oklch(27% 0.03 265)",
+          "oklch(39% 0.03 265)",
+          "oklch(51% 0.03 265)",
+          "oklch(63% 0.03 265)",
+          "oklch(75% 0.03 265)",
+          "oklch(85% 0.03 265)",
+          "oklch(95% 0.03 265)"
+        ]
+      },
+      "gold": {
+        "role": "primary",
+        "displayName": "행동 금색",
+        "canonical": "oklch(85.8% 0.175 87)",
+        "tonalRamp": [
+          "oklch(15% 0.175 87)",
+          "oklch(27% 0.175 87)",
+          "oklch(39% 0.175 87)",
+          "oklch(51% 0.175 87)",
+          "oklch(63% 0.175 87)",
+          "oklch(75% 0.175 87)",
+          "oklch(85% 0.175 87)",
+          "oklch(95% 0.175 87)"
+        ]
+      },
+      "gold-a": {
+        "role": "primary",
+        "displayName": "금색 채움 시작",
+        "canonical": "oklch(88.7% 0.182 95)",
+        "tonalRamp": [
+          "oklch(15% 0.182 95)",
+          "oklch(27% 0.182 95)",
+          "oklch(39% 0.182 95)",
+          "oklch(51% 0.182 95)",
+          "oklch(63% 0.182 95)",
+          "oklch(75% 0.182 95)",
+          "oklch(85% 0.182 95)",
+          "oklch(95% 0.182 95)"
+        ]
+      },
+      "gold-b": {
+        "role": "primary",
+        "displayName": "금색 채움 끝",
+        "canonical": "oklch(79.2% 0.171 70)",
+        "tonalRamp": [
+          "oklch(15% 0.171 70)",
+          "oklch(27% 0.171 70)",
+          "oklch(39% 0.171 70)",
+          "oklch(51% 0.171 70)",
+          "oklch(63% 0.171 70)",
+          "oklch(75% 0.171 70)",
+          "oklch(85% 0.171 70)",
+          "oklch(95% 0.171 70)"
+        ]
+      },
+      "on-gold": {
+        "role": "primary",
+        "displayName": "금색 위 글자",
+        "canonical": "oklch(20.2% 0.042 85)",
+        "tonalRamp": [
+          "oklch(15% 0.042 85)",
+          "oklch(27% 0.042 85)",
+          "oklch(39% 0.042 85)",
+          "oklch(51% 0.042 85)",
+          "oklch(63% 0.042 85)",
+          "oklch(75% 0.042 85)",
+          "oklch(85% 0.042 85)",
+          "oklch(95% 0.042 85)"
+        ]
+      },
+      "mint": {
+        "role": "secondary",
+        "displayName": "실측 민트",
+        "canonical": "oklch(79.6% 0.13 172)",
+        "tonalRamp": [
+          "oklch(15% 0.13 172)",
+          "oklch(27% 0.13 172)",
+          "oklch(39% 0.13 172)",
+          "oklch(51% 0.13 172)",
+          "oklch(63% 0.13 172)",
+          "oklch(75% 0.13 172)",
+          "oklch(85% 0.13 172)",
+          "oklch(95% 0.13 172)"
+        ]
+      },
+      "mint-ink": {
+        "role": "secondary",
+        "displayName": "민트 강조",
+        "canonical": "oklch(86.4% 0.11 172)",
+        "tonalRamp": [
+          "oklch(15% 0.11 172)",
+          "oklch(27% 0.11 172)",
+          "oklch(39% 0.11 172)",
+          "oklch(51% 0.11 172)",
+          "oklch(63% 0.11 172)",
+          "oklch(75% 0.11 172)",
+          "oklch(85% 0.11 172)",
+          "oklch(95% 0.11 172)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "첫 화면 제목 하나. 손으로 나눈 3줄, 마지막 구만 금색."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "본문 띠 머리 제목 · 끝 행동 제목."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "기능 띠 하나의 제목."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "첫 화면 설명(34ch) · 띠 머리 설명(58ch). 휴대폰 17px."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "기본 본문. 휴대폰 16px. 낱말을 쪼개지 않는다(keep-all)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "탭 알약 · 화면 바꿔 보기 단추 · 나은 점 줄."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "출처 한 줄 · 캡처 캡션."
+      }
+    },
+    "shadows": [
+      {
+        "name": "gold-glow",
+        "value": "0 10px 30px -12px rgba(255,170,0,.55)",
+        "purpose": "금색 채움 주 버튼 아래 금빛 번짐."
+      },
+      {
+        "name": "gold-glow-hover",
+        "value": "0 16px 36px -14px rgba(255,170,0,.7)",
+        "purpose": "주 버튼을 올렸을 때."
+      },
+      {
+        "name": "shot-frame",
+        "value": "0 30px 60px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(255,198,26,.04)",
+        "purpose": "실제 화면 캡처 액자 전용."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-lift",
+        "value": ".18s cubic-bezier(.2,.8,.2,1)",
+        "purpose": "버튼 떠오름 · 화살표 3px 밀기 · 테두리/바탕 전환."
+      },
+      {
+        "name": "faq-turn",
+        "value": "transform .2s",
+        "purpose": "펼친 질문의 + 아이콘 45도 회전."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "@media (prefers-reduced-motion: reduce) { .pp * { transition:none !important } }",
+        "purpose": "움직임 줄이기 설정이면 전환을 모두 끈다. 띠 속 영상은 자동 재생 대신 조작 단추."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack",
+        "value": "1080px"
+      },
+      {
+        "name": "phone",
+        "value": "720px"
+      }
+    ],
+    "gradients": [
+      {
+        "name": "gold-fill",
+        "value": "linear-gradient(135deg, #ffd700, #ffa500)",
+        "purpose": "주 버튼 바탕 · 우리 값 막대(90deg)에만. 글자에는 쓰지 않는다."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "주 버튼",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "금색 채움 행동 버튼. 맛보기 · 담으러 가기.",
+      "html": "<a class=\"ds-btn-gold\" href=\"#\">맛보기 시작<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn-gold{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;word-break:keep-all;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:62px;padding:0 26px;border-radius:12px;font-size:19px;font-weight:800;letter-spacing:-.01em;text-decoration:none;background:linear-gradient(135deg,#ffd700,#ffa500);color:#1d1500;box-shadow:0 10px 30px -12px rgba(255,170,0,.55);transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .18s}.ds-btn-gold svg{transition:transform .18s cubic-bezier(.2,.8,.2,1)}.ds-btn-gold:hover{transform:translateY(-1px);box-shadow:0 16px 36px -14px rgba(255,170,0,.7)}.ds-btn-gold:hover svg{transform:translateX(3px)}.ds-btn-gold:focus-visible{outline:2px solid #ffc61a;outline-offset:3px}"
+    },
+    {
+      "name": "외곽선 버튼",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "금색 외곽선 보조 행동. 가격으로 시작 · 계좌이체.",
+      "html": "<a class=\"ds-btn-line\" href=\"#\">월 19,900원으로 시작<svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn-line{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;word-break:keep-all;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:62px;padding:0 26px;border-radius:12px;font-size:19px;font-weight:800;letter-spacing:-.01em;text-decoration:none;border:1.5px solid rgba(255,198,26,.7);color:#ffc61a;background:#0a0a0f;font-variant-numeric:tabular-nums;transition:background .18s,border-color .18s}.ds-btn-line svg{transition:transform .18s cubic-bezier(.2,.8,.2,1)}.ds-btn-line:hover{background:rgba(255,198,26,.07);border-color:#ffc61a}.ds-btn-line:hover svg{transform:translateX(3px)}.ds-btn-line:focus-visible{outline:2px solid #ffc61a;outline-offset:3px}"
+    },
+    {
+      "name": "VS 비교 판",
+      "kind": "custom",
+      "refersTo": "vs-board",
+      "description": "이 체계의 얼굴. 상대편은 흐리게, 우리 쪽은 밝게 + 나은 점, 위에 실측 칩.",
+      "html": "<div class=\"ds-vs\"><div class=\"ds-vs-chip\"><span>문화누리카드 잔액</span><i></i><span>검색량 <b>7,180</b></span><i></i><span>문서수 <b>16,294</b></span><i></i><span>실측</span></div><div class=\"ds-vs-cols\"><div><h3>고수 글 5편 중 1편</h3><div class=\"ds-vs-row theirs\">문화누리카드 취소 환불 2026, 잔액은 언제 돌아오나요?</div></div><div class=\"ds-vs-mid\"><span>VS</span></div><div><h3 class=\"ours\">LEWORD 제목</h3><div class=\"ds-vs-row ours\">문화누리카드 잔액 확인법, 발급 대상과 연 15만 원 지원 기준<span class=\"ds-vs-edge\"><svg viewBox=\"0 0 24 24\" width=\"15\" height=\"15\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 19V5M6 11l6-6 6 6\"/></svg><span>고수 5명이 안 다룬 '조건·자격'까지</span></span></div></div></div><p class=\"ds-vs-foot\">애드센스 고수 벤치마크 실제 카드 · 2026-10-07 기준</p></div>",
+      "css": ".ds-vs{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;word-break:keep-all;position:relative;margin-top:24px;border:1px solid rgba(255,255,255,.16);border-radius:20px;background:#12121a;padding:38px 30px 30px;color:#f4f6fb}.ds-vs-chip{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);display:flex;gap:14px;align-items:center;white-space:nowrap;padding:11px 22px;border-radius:12px;background:#0d0d14;border:1px solid rgba(255,255,255,.16);color:#44d7b6;font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}.ds-vs-chip b{color:#7be9cf;font-weight:800}.ds-vs-chip i{width:3px;height:3px;border-radius:50%;background:#7c8597}.ds-vs-cols{display:grid;grid-template-columns:1fr 64px 1fr}.ds-vs h3{margin:6px 0 18px;text-align:center;font-size:19px;font-weight:800;letter-spacing:-.02em;color:#aab2c2}.ds-vs h3.ours{color:#ffc61a}.ds-vs-row{min-height:108px;display:flex;flex-direction:column;justify-content:center;padding:16px 20px;border-radius:12px;border:1px solid rgba(255,255,255,.09)}.ds-vs-row.theirs{background:rgba(255,255,255,.025);color:#7c8597;font-size:16px}.ds-vs-row.ours{background:#0f0f17;border-color:rgba(255,255,255,.16);font-size:17px;font-weight:700;line-height:1.5}.ds-vs-edge{display:flex;gap:6px;margin-top:8px;color:#ffc61a;font-size:14.5px;font-weight:600}.ds-vs-edge svg{flex:none;margin-top:2px}.ds-vs-mid{display:flex;align-items:center;justify-content:center}.ds-vs-mid span{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:#0d0d14;border:1.5px solid #ffc61a;color:#ffc61a;font-weight:800;font-size:17px}.ds-vs-foot{margin:16px 0 0;color:#7c8597;font-size:13.5px;text-align:right}"
+    },
+    {
+      "name": "실측 칩",
+      "kind": "chip",
+      "refersTo": "chip-measured",
+      "description": "재서 얻은 숫자 · 확인 가능한 사실만 싣는 민트 띠.",
+      "html": "<div class=\"ds-chip\"><span>검색량 <b>7,180</b></span><i></i><span>문서수 <b>16,294</b></span><i></i><span>실측</span></div>",
+      "css": ".ds-chip{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;word-break:keep-all;display:inline-flex;gap:14px;align-items:center;padding:11px 22px;border-radius:12px;background:#0d0d14;border:1px solid rgba(255,255,255,.16);color:#44d7b6;font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}.ds-chip b{color:#7be9cf;font-weight:800}.ds-chip i{width:3px;height:3px;border-radius:50%;background:#7c8597}"
+    },
+    {
+      "name": "탭 알약 · 화면 바꿔 보기",
+      "kind": "chip",
+      "refersTo": "switch-pill-active",
+      "description": "띠가 보여 주는 실제 탭 이름(누를 수 없음)과, 같은 모양의 화면 바꿔 보기 단추(고른 것은 금색).",
+      "html": "<div class=\"ds-pills\"><span class=\"ds-pill\">키워드 분석</span><button class=\"ds-pill ds-switch\" aria-pressed=\"true\">황금키워드</button><button class=\"ds-pill ds-switch\" aria-pressed=\"false\">오늘의 글감</button></div>",
+      "css": ".ds-pills{display:flex;flex-wrap:wrap;gap:8px}.ds-pill{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;word-break:keep-all;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.16);color:#f4f6fb;font-size:14.5px;font-weight:600;background:rgba(255,255,255,.03)}.ds-switch{font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;min-height:40px;color:#aab2c2;transition:color .18s,border-color .18s,background .18s}.ds-switch:hover{color:#f4f6fb;border-color:rgba(255,198,26,.45)}.ds-switch[aria-pressed=\"true\"]{color:#ffc61a;border-color:#ffc61a;background:rgba(255,198,26,.08)}.ds-switch:focus-visible{outline:2px solid #ffc61a;outline-offset:3px}"
+    },
+    {
+      "name": "증거 바로가기",
+      "kind": "card",
+      "refersTo": "proof-link",
+      "description": "첫 화면 아래 3칸 — 후기 · 수익 인증 · 웹/PC 앱으로 가는 링크.",
+      "html": "<a class=\"ds-proof\" href=\"#\"><span class=\"ds-proof-icon\"><svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 5h16v11H9l-5 4z\"/><path d=\"M12 7.6l1 2 2.2.3-1.6 1.5.4 2.2-2-1-2 1 .4-2.2-1.6-1.5 2.2-.3z\"/></svg></span><span><strong>구매 후기</strong><span>실제 구매자가 남긴 후기</span></span><span class=\"ds-chev\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 6l6 6-6 6\"/></svg></span></a>",
+      "css": ".ds-proof{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;word-break:keep-all;display:flex;align-items:center;gap:18px;padding:22px 24px;border-radius:16px;border:1px solid rgba(255,255,255,.09);background:rgba(18,18,26,.6);color:#f4f6fb;text-decoration:none;max-width:420px;transition:border-color .18s,background .18s}.ds-proof:hover{border-color:rgba(255,198,26,.45);background:rgba(22,22,34,.8)}.ds-proof:focus-visible{outline:2px solid #ffc61a;outline-offset:3px}.ds-proof-icon{flex:none;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,198,26,.35);color:#ffc61a}.ds-proof strong{display:block;font-size:19px;font-weight:800;letter-spacing:-.02em}.ds-proof span span{color:#aab2c2;font-size:15px}.ds-chev{margin-left:auto;color:#7c8597;display:flex}"
+    },
+    {
+      "name": "실제 화면 액자",
+      "kind": "card",
+      "refersTo": "shot-frame",
+      "description": "기능 띠의 실제 제품 화면 캡처. 휴대폰은 별도 확대 잘라낸 화면.",
+      "html": "<figure class=\"ds-shot\"><div class=\"ds-shot-img\"></div><figcaption>키워드 분석 · 실제 화면</figcaption></figure>",
+      "css": ".ds-shot{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;word-break:keep-all;margin:0;max-width:480px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.16);background:#0d0d14;box-shadow:0 30px 60px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,198,26,.04)}.ds-shot-img{aspect-ratio:16/10;background:#12121a}.ds-shot figcaption{padding:12px 16px;border-top:1px solid rgba(255,255,255,.09);color:#7c8597;font-size:13.5px}"
+    },
+    {
+      "name": "가격 한 판",
+      "kind": "card",
+      "refersTo": "vs-board",
+      "description": "기간별 칸을 세로선으로 나눈 한 판. 값은 useProduct(상점과 같은 값)에서 읽는다.",
+      "html": "<div class=\"ds-price\"><div><small>1개월</small><strong>19,900<span>원 / 월</span></strong><p>부가세 포함 · 30일마다 자동결제</p></div><div><small>1년</small><strong>199,000<span>원 / 1년</span></strong><p>부가세 별도</p></div></div>",
+      "css": ".ds-price{font-family:'Pretendard Variable',Pretendard,system-ui,sans-serif;word-break:keep-all;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));border:1px solid rgba(255,255,255,.16);border-radius:20px;overflow:hidden;color:#f4f6fb;font-variant-numeric:tabular-nums}.ds-price>div{padding:34px 32px;border-left:1px solid rgba(255,255,255,.09)}.ds-price>div:first-child{border-left:0}.ds-price small{display:block;color:#aab2c2;font-size:15px;font-weight:700}.ds-price strong{display:block;margin:10px 0 6px;font-size:40px;letter-spacing:-.03em;font-weight:800}.ds-price strong span{font-size:18px;color:#aab2c2;font-weight:700;margin-left:4px}.ds-price p{margin:0;color:#7c8597;font-size:14.5px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "나란히 세운 증거판",
+    "overview": "이 체계는 Leaders Pro 제품 페이지(/products · /leword-detail · /detail · /orbit) 전용이다. 사이트 전체 메뉴 줄 · 바닥글, 하늘 사진을 깐 나머지 페이지는 이 체계가 아니며 여기서 규칙으로 삼지 않는다.\n\n페이지는 검정 바닥 위에 놓인 증거판이다. 방문자가 처음 보는 것은 기능 목록이 아니라, 왼쪽에 흐리게 깔린 \"고수 글\" 또는 \"직접 할 때\"와, 오른쪽에 밝게 선 \"우리 결과\"가 한 판 안에 나란히 놓인 모습이다. 우리 쪽 줄마다 금색 화살표로 \"무엇이 더 나은지\"가 한 줄씩 붙고, 판 위에는 민트 칩으로 실제로 잰 숫자가 얹힌다. 설득은 형용사가 아니라 이 나란한 배치와 숫자가 한다.\n\n밀도는 넉넉하다. 큰 굵은 한국어 제목(Pretendard 800), 넓은 띠 간격, 1px 슬레이트 선이 구조를 잡고, 장식은 거의 없다. 색은 세 가지 역할만 한다. 검정은 바닥, 금색은 행동과 \"우리 쪽\" 표시, 민트는 실측 숫자. 화면 캡처는 전부 실제 제품 화면이고, 같은 크기 카드를 격자로 늘어놓는 대신 글 한쪽 · 화면 한쪽을 번갈아 놓는 띠로 기능을 보여 준다.",
+    "keyCharacteristics": [
+      "첫 화면은 5:7 두 칸 — 왼쪽 3줄 제목 · 한 줄 설명 · 버튼 둘, 오른쪽 실측 칩을 얹은 VS 비교 판, 아래 증거 바로가기 3칸.",
+      "검정 바닥(ground) 위 반투명 슬레이트 판, 1px 흰 반투명 선으로 나누는 평평한 층.",
+      "금색은 하나의 색조(텍스트는 gold, 채움은 gold-a→gold-b 그라디언트)로 행동과 우리 쪽만 칠한다.",
+      "민트는 재거나 확인할 수 있는 숫자 · 사실에만.",
+      "한국어 낱말을 쪼개지 않는다(word-break: keep-all), 제목은 text-wrap: balance.",
+      "아이콘은 1.8 선 굵기로 직접 그린 SVG 한 벌."
+    ],
+    "rules": [
+      {
+        "name": "The One Gold Rule",
+        "body": "금색은 한 색조뿐이다. 텍스트 · 선은 gold, 채움은 gold-a→gold-b. 금색이 칠하는 것은 두 가지 — 누를 수 있는 행동, 그리고 비교에서 \"우리 쪽\". 금색 장식 · 금색 그라디언트 글자는 없다.",
+        "section": "colors"
+      },
+      {
+        "name": "The Measured Mint Rule",
+        "body": "민트는 재거나 확인할 수 있는 숫자 · 사실(검색량 · 문서수 · 실측 표시, 받은 통계 화면의 숫자, 무료 체험 기간 같은 확인 가능한 조건)에만 쓴다. 추정치는 민트로도, 어떤 색으로도 화면에 내지 않는다.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dim Theirs Rule",
+        "body": "비교의 상대편은 흐린 먹(ink-3)과 거의 투명한 바탕(흰색 2.5%)으로 물러서고, 우리 쪽은 먹(ink) 700 굵기와 또렷한 선으로 앞에 선다. 대비는 색이 아니라 명도와 굵기로 만든다.",
+        "section": "colors"
+      },
+      {
+        "name": "The Keep-All Rule",
+        "body": "한국어 낱말은 절대 중간에서 끊지 않는다(`word-break: keep-all; overflow-wrap: break-word`). 제목과 설명은 `text-wrap: balance`, 따옴표로 묶은 말('서류·준비물')은 통째로 한 줄에 둔다.",
+        "section": "typography"
+      },
+      {
+        "name": "The Heavy Korean Rule",
+        "body": "제목은 800 하나로 통일한다. 중간 굵기(500~600) 제목을 섞지 않는다. 위계는 크기와 색(ink → ink-2 → ink-3)으로 나눈다.",
+        "section": "typography"
+      },
+      {
+        "name": "The Slate Line Rule",
+        "body": "판을 띄우는 방법은 1px 선이다. 새 판을 만들면 그림자 대신 line 또는 line-strong 테두리와 한 단계 다른 바탕을 쓴다.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** 모든 제품 첫 화면에 VS 비교 판을 둔다 — 상대편(고수 · 직접 할 때 · 따로 살 때)은 흐리게, 우리 쪽은 밝게, 우리 쪽 줄마다 금색 \"나은 점\" 한 줄.",
+      "**Do** 비교 판 위 칩에는 실측 숫자나 확인 가능한 사실만, 민트(#44d7b6)로 싣고, 판 아래에 기준과 날짜를 적는다.",
+      "**Do** 두 열이 1:1 대응이 아니면 `paired=false`로 높이 맞춤을 푼다.",
+      "**Do** 금색은 행동(주 버튼 채움 · 외곽선 버튼 · 링크)과 우리 쪽 표시(열 제목 · 나은 점 · 우리 값 막대)에만 쓴다.",
+      "**Do** 첫 화면 제목은 800 굵기로 줄을 손으로 나누고, 마지막 구 하나만 `<em>` 금색으로 칠한다.",
+      "**Do** 한국어는 `word-break: keep-all`, 제목은 `text-wrap: balance`.",
+      "**Do** 가격은 언제나 `useProduct`(상점과 같은 값)로 읽고, 팔지 않는 기간은 칸째 뺀다.",
+      "**Do** 기능은 실제 제품 화면 캡처로 보여 주고, 캡처마다 출처 기록 파일을 두며, 휴대폰용 확대 잘라낸 화면을 `<picture>`로 따로 준다(≤720px).",
+      "**Do** 판은 1px 선(line · line-strong)과 명도 한 단계로 띄운다.",
+      "**Do** 아이콘은 1.8 선 굵기 · 둥근 끝의 직접 그린 SVG 한 벌에서 가져온다.",
+      "**Do** 맞는 후기가 없으면 후기 묶음을 통째로 없앤다. 다른 제품 후기를 섞지 않는다."
+    ],
+    "donts": [
+      "**Don't** 같은 크기 아이콘 카드를 격자로 늘어놓아 기능을 소개하지 않는다. 글 · 화면을 번갈아 놓는 띠나 두 단 목록을 쓴다.",
+      "**Don't** 추정치(예상 수익 · 예상 트래픽 · 노출 확률 · 지어낸 점수)나 근거 없는 통계(가입자 수 · 평균 수익)를 화면에 내지 않는다.",
+      "**Don't** 제목 위에 눈썹 라벨 · 영어 소제목을 달지 않는다.",
+      "**Don't** 이모지나 글자 기호(★ ✓ →)를 아이콘 대신 쓰지 않는다.",
+      "**Don't** 그라디언트 글자를 쓰지 않는다. 금색 그라디언트는 채움 면(주 버튼 · 우리 값 막대)에만.",
+      "**Don't** 제품 페이지에 배경 사진을 깔지 않는다. 바닥은 #0a0a0f 하나.",
+      "**Don't** 판 · 줄 · 칩에 그림자를 주지 않는다. 그림자는 주 버튼과 화면 액자 두 곳뿐이다.",
+      "**Don't** 지어낸 화면이나 생성 이미지를 \"실제 화면\"으로 싣지 않는다."
+    ]
+  }
+}

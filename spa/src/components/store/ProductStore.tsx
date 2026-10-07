@@ -213,7 +213,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                         ? <img src={product.image} alt="" loading="lazy" />
                                         : <span className="st-shot-glyph" style={{ color: product.accent }} aria-hidden="true">{product.glyph}</span>}
                                     {product.trial && <span className="st-flag">무료 체험 있음</span>}
-                                    {product.id === 'leword' && <span className="st-flag st-flag-web">설치 없이 바로</span>}
+                                    {product.id === 'leword' && <span className="st-flag st-flag-web">웹에서 바로 · PC 앱도</span>}
                                 </div>
                             )}
 
@@ -271,7 +271,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                                     <i>원{termUnit ? ` / ${termUnit}` : ''}</i>
                                                 </div>
                                                 <p className="st-permo">
-                                                    {product.bundle ? `따로 사면 ${won(individualTotal(term, catalog))}원` : ' '}
+                                                    {product.bundle ? `따로 사면 ${won(individualTotal(term, catalog))}원 · 부가세 별도` : '부가세 별도'}
                                                 </p>
                                             </>
                                         );
@@ -288,6 +288,7 @@ function ProductStore({ onPick, onCardPay, proof, bundleMedia, notes, trust }: {
                                                 {termUnit ? ` / ${termUnit}` : ''}
                                                 {term !== 'monthly' && monthly ? ` · 월 ${won(monthly)}원` : ''}
                                                 {product.bundle && ` · 따로 사면 ${won(individualTotal(term, catalog))}원`}
+                                                {' · 부가세 별도'}
                                             </p>
                                         </>
                                     );
