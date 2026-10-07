@@ -136,8 +136,8 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
       'PostWriteForm',
       "getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED')",
       'findEditorTitleInputElement(frame, page, 60000',
-      'shouldRetryEditorReadiness(snapshot)',
-      '에디터 프레임은 열렸지만 내부 문서가 비어 있습니다',
+      // One readiness-checked editor entry; a missing title afterwards stops instead of re-opening the editor.
+      'waitForEditorReady(page, { timeoutMs: 45000, isCancelled })',
       'collectEditorTitleDiagnostics(frame, page)',
       'setTitleByDomEvent(titleElement, titleText)',
     ]);

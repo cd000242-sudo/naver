@@ -72,6 +72,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/editorHelpers.ts',
   'src/automation/editorNavigationUrlPolicy.ts',
   'src/automation/editorOfficialSiteTail.ts',
+  'src/automation/editorReadiness.ts',
   'src/automation/editorReadinessDiagnostics.ts',
   'src/automation/editorTailActions.ts',
   'src/automation/editorTailPlan.ts',
