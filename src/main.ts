@@ -10107,6 +10107,8 @@ app.whenReady().then(async () => {
     // ✅ [신규] 주기적 서버 상태 동기화 및 점검 모드 감지 (5분마다)
     // 점검 모드, 기기 차단, 구버전 등을 실시간으로 감지하여 앱을 종료시킵니다.
     cron.schedule('*/5 * * * *', async () => {
+      // E2E runs use a local license fixture; a sync crossing a 5-minute boundary broke the release gate (2026-10-09).
+      if (isE2ETestMode()) return;
       // 1. 이미 종료 절차 중이면 스킵
       if (isGracefulShutdownInProgress) return;
       if ((globalThis as any).isQuitting) return;
