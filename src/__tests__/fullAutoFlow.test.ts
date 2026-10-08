@@ -150,15 +150,12 @@ describe('friendlyErrorMessage', () => {
 describe('detached Naver login frame publish retry guard', () => {
   const source = readFileSync(new URL('../renderer/modules/fullAutoFlow.ts', import.meta.url), 'utf8');
 
-  it('detects detached Naver login frame errors before treating publish as failed', () => {
-    expect(source).toContain('function isDetachedLoginFrameError');
-    expect(source).toContain('execution context is not available in detached frame');
-    expect(source).toContain('nidlogin.login');
-    expect(source).toContain('retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg)');
+  it('a login-frame refresh never reruns the publish (automatic login is gone)', () => {
+    expect(source).not.toContain('function isDetachedLoginFrameError');
+    expect(source).not.toContain('retryRunAutomationAfterDetachedLoginFrame');
   });
 
-  it('closes stale browser automation once without marking the publish as user-cancelled', () => {
-    expect(source).toContain('MAX_DETACHED_LOGIN_FRAME_RETRIES = 1');
+  it('a dead browser is still closed before its single rerun, without marking the publish as user-cancelled', () => {
     expect(source).toContain('closeBrowserForPublishRetry(payload)');
     expect(source).not.toContain('cancelAutomation failed before detached-frame retry');
     expect(source).toContain('timeout: PUBLISH_AUTOMATION_TIMEOUT_MS');
@@ -176,11 +173,11 @@ describe('recoverable publish session retry guard', () => {
     expect(source).toContain('retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg)');
   });
 
-  it('keeps the same browser for editor-not-ready recovery and only closes hard-dead sessions', () => {
+  it('reruns only a browser that actually died; an editor that was not ready is not rerun (the engine re-entered once)', () => {
     expect(source).toContain('function shouldCloseBrowserBeforePublishRetry');
     expect(source).toContain('const closeBeforeRetry = shouldCloseBrowserBeforePublishRetry(errorMsg)');
-    expect(source).toContain('if (closeBeforeRetry)');
-    expect(source).toContain('에디터가 아직 준비되지 않아 같은 브라우저에서 다시 시도합니다');
+    expect(source).toMatch(/const closeBeforeRetry = shouldCloseBrowserBeforePublishRetry\(errorMsg\);[\s\S]{0,400}?if \(!closeBeforeRetry\) \{\s*return null;/);
+    expect(source).not.toContain('에디터가 아직 준비되지 않아 같은 브라우저에서 다시 시도합니다');
     expect(source).toContain('const retryPayload = {');
     expect(source).toContain('...payload');
     expect(source).toContain('timeout: PUBLISH_AUTOMATION_TIMEOUT_MS');
@@ -195,14 +192,12 @@ describe('recoverable publish session retry guard', () => {
     expect(source).toContain("showUnifiedProgress(95, '본문 작성 완료 — 발행 상태 확인 필요'");
 
     const markerGuard = source.indexOf('blockPostContentAppliedPublishRetry(errorMsg)');
-    const detachedRetry = source.indexOf('retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg)');
     const recoverableRetry = source.indexOf('retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg)');
-    const networkRetry = source.indexOf("payload._networkRetryCount = retryAttempts + 1");
 
     expect(markerGuard).toBeGreaterThan(-1);
-    expect(detachedRetry).toBeGreaterThan(markerGuard);
     expect(recoverableRetry).toBeGreaterThan(markerGuard);
-    expect(networkRetry).toBeGreaterThan(markerGuard);
+    // Network errors are reported, never rerun (the engine already re-enters the editor once).
+    expect(source).not.toContain('payload._networkRetryCount = retryAttempts + 1');
   });
 });
 
