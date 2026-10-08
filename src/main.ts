@@ -287,7 +287,7 @@ import { registerAllHandlers, registerAccountHandlers, registerAdminHandlers } f
 import { registerConfigHandlers } from './main/ipc/configHandlers.js';
 import { registerContentHandlers } from './main/ipc/contentHandlers.js';
 import { registerHeadingHandlers } from './main/ipc/headingHandlers.js';
-import { registerDiagnosticsHandlers, generateDiagnosticReport } from './main/ipc/diagnosticsHandlers.js';
+import { registerDiagnosticsHandlers } from './main/ipc/diagnosticsHandlers.js';
 import { registerDefamationHandlers } from './main/ipc/defamationHandlers.js';
 import { registerLicenseHandlers } from './main/ipc/authHandlers.js';
 import { registerQuotaHandlers } from './main/ipc/quotaHandlers.js';
@@ -3769,10 +3769,10 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
           } catch (e) { console.error('[Main] 쿼터 환불 오류:', e); }
         }
         const failureCode = (result as any).failureCode || classifyPublishFailure(result.message).code;
-        // [2026-06-23] 발행 실패 시 진단 리포트 자동 생성 — 추측 대신 데이터로 즉시 원인 파악.
-        const diag = await generateDiagnosticReport({ lastError: result.message, stage: 'result-failure' }).catch(() => null);
-        if (diag?.savedPath) {
-          (result as any).message = `${result.message}\n\n🔧 진단 리포트가 저장됐어요:\n${diag.savedPath}\n이 파일을 개발자에게 보내주시면 원인을 바로 찾을 수 있어요.`;
+        // [2026-10-09] No automatic report file: customers got one on the desktop for every failure (cancels and
+        // transient stops included) and kept deleting them. The manual button makes the same report on demand.
+        if (failureCode !== 'USER_CANCELLED') {
+          (result as any).message = `${result.message}\n\n문제가 계속되면 화면의 [🔧 오류 진단 저장] 버튼으로 진단 파일을 만들어 개발자에게 보내주세요.`;
         }
         sendStatus({ success: false, message: (result as any).message, failureCode });
       }
@@ -3789,11 +3789,10 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
       const baseMessage = (error as Error).message || '자동화 실행 중 오류가 발생했습니다.';
       console.error('[Main] automation:run 오류:', baseMessage);
       const failureCode = classifyPublishFailure(error).code;
-      // [2026-06-23] 예외 발생 시에도 진단 리포트 자동 생성.
-      const diag = await generateDiagnosticReport({ lastError: baseMessage, stage: 'automation:run/exception' }).catch(() => null);
-      const message = diag?.savedPath
-        ? `${baseMessage}\n\n🔧 진단 리포트가 저장됐어요:\n${diag.savedPath}\n이 파일을 개발자에게 보내주시면 원인을 바로 찾을 수 있어요.`
-        : baseMessage;
+      // [2026-10-09] Same as above: point to the manual report button instead of writing a file every time.
+      const message = failureCode === 'USER_CANCELLED'
+        ? baseMessage
+        : `${baseMessage}\n\n문제가 계속되면 화면의 [🔧 오류 진단 저장] 버튼으로 진단 파일을 만들어 개발자에게 보내주세요.`;
       sendStatus({ success: false, message, failureCode });
       AutomationService.stopRunning();
       return { success: false, message, failureCode };
