@@ -36,6 +36,13 @@ import { downloadImageBuffer } from '../image/imageUrlDownload.js';
 import { ensureNaverDecodableFile } from '../image/naverImageTranscode.js';
 // [2026-10-01] 이미지 관리 탭 출처 입력칸 → 네이버 "사진 설명" 칸.
 import { applyCaptionToLastImage } from './imageCaption.js';
+// [2026-10-09] 느린 업로드를 실패로 보지 않는다 — 이미지 개수 증가분을 시간에 따라 본다.
+import {
+  IMAGE_ROUND_GROWTH_TIMEOUT_MS,
+  IMAGE_UPLOAD_GROWTH_TIMEOUT_MS,
+  IMAGE_UPLOAD_SETTLE_MS,
+  waitForImageCountGrowth,
+} from './imageUploadArrival.js';
 import {
   SELECTORS,
   findElement,
@@ -938,6 +945,46 @@ export async function insertBase64ImageAtCursor(
     throw new Error('네이버 블로그에서 이미지 업로드 버튼을 찾을 수 없습니다');
   }
 
+  // [2026-10-09] The image is really in the editor: tag it, record provenance, close popups and size it.
+  //   Shared by the on-time path and the late-arrival paths, so a slow upload is finished exactly like a
+  //   fast one and is never inserted a second time by the Base64 fallback.
+  const readImageCount = (): Promise<number> => frame.$$eval(IMG_SELECTOR, (imgs: any) => imgs.length).catch(() => 0);
+  const completeInsertedImage = async (imgCount: number): Promise<void> => {
+    self.log(`   ✅ 이미지 버튼 클릭 + FileChooser 성공 (이미지 ${imgBeforeCount}→${imgCount}개, +${imgCount - imgBeforeCount})`);
+
+    // ✅ [2026-08-17] data-img-ai 태깅 (AI 마크 판정 근거 — 미전달 시 '0')
+    await frame.evaluate((aiValue: string) => {
+      const editor = document.querySelector('.se-main-container');
+      if (!editor) return;
+      const imgs = editor.querySelectorAll('img');
+      const target = imgs[imgs.length - 1] as HTMLImageElement | undefined;
+      if (target) target.setAttribute('data-img-ai', aiValue);
+    }, aiMarkAttrValue(provenanceMeta)).catch(() => undefined);
+    // [2026-09-17] DOM 속성은 마크 시점까지 못 살아남는다 — 장부에도 적는다(위치 = 개수-1).
+    recordImageProvenance(self, imgCount - 1, provenanceMeta);
+
+    // ✅ MyBox 팝업 자동 닫기
+    await self.delay(500); // 팝업이 뜰 시간 대기
+    await page.keyboard.press('Escape').catch(() => { });
+    await self.delay(300);
+    await page.keyboard.press('Escape').catch(() => { }); // 한 번 더 (확실히)
+    await self.delay(300);
+    self.log('   ✅ MyBox 팝업 자동 닫기 완료');
+
+    // ✅ [2026-03-14 FIX] 이미지 크기를 '문서 너비'로 설정 (이전에 dead code로 누락)
+    try {
+      await setImageSizeToDocumentWidth(self);
+      self.log(`   ✅ 이미지 크기 '문서 너비'로 설정 완료`);
+    } catch (sizeError) {
+      self.log(`   ⚠️ 이미지 크기 설정 실패 (계속 진행): ${(sizeError as Error).message}`);
+    }
+
+    if (isTemporaryFile) {
+      await fs.unlink(absolutePath).catch(() => { });
+    }
+  };
+  let uploadSubmitted = false;
+
   // 이미지 버튼 클릭 + FileChooser
   try {
     self.log(`   🔄 FileChooser 대기 중...`);
@@ -949,6 +996,7 @@ export async function insertBase64ImageAtCursor(
 
     // ✅ 파일 선택 먼저 수행 (ESC 키는 나중에!)
     await fileChooser.accept([absolutePath]);
+    uploadSubmitted = true;
     self.log(`   ✅ FileChooser로 파일 선택 완료`);
 
     // 업로드 완료 대기 (충분히 기다림)
@@ -995,41 +1043,20 @@ export async function insertBase64ImageAtCursor(
     }
 
     // 이미지가 삽입되었는지 확인 — 절대 개수가 아니라 '증가분'으로 판정
-    const imgCount = await frame.$$eval(IMG_SELECTOR, (imgs: any) => imgs.length).catch(() => 0);
+    let imgCount = await frame.$$eval(IMG_SELECTOR, (imgs: any) => imgs.length).catch(() => 0);
+    if (imgCount <= imgBeforeCount) {
+      // [2026-10-09] A slow upload is not a failed upload. Falling through to the Base64 fallback here
+      //   inserted the same image a second time when the first one landed late. Watch the count grow.
+      self.log(`   ⏳ 이미지가 아직 보이지 않음 — 느린 업로드일 수 있어 증가를 기다립니다 (최대 ${Math.round(IMAGE_UPLOAD_GROWTH_TIMEOUT_MS / 1000)}초)`);
+      imgCount = await waitForImageCountGrowth({
+        readCount: readImageCount,
+        baseline: imgBeforeCount,
+        delay: (ms: number) => self.delay(ms),
+      });
+    }
 
     if (imgCount > imgBeforeCount) {
-      self.log(`   ✅ 이미지 버튼 클릭 + FileChooser 성공 (이미지 ${imgBeforeCount}→${imgCount}개, +${imgCount - imgBeforeCount})`);
-
-      // ✅ [2026-08-17] data-img-ai 태깅 (AI 마크 판정 근거 — 미전달 시 '0')
-      await frame.evaluate((aiValue: string) => {
-        const editor = document.querySelector('.se-main-container');
-        if (!editor) return;
-        const imgs = editor.querySelectorAll('img');
-        const target = imgs[imgs.length - 1] as HTMLImageElement | undefined;
-        if (target) target.setAttribute('data-img-ai', aiValue);
-      }, aiMarkAttrValue(provenanceMeta)).catch(() => undefined);
-      // [2026-09-17] DOM 속성은 마크 시점까지 못 살아남는다 — 장부에도 적는다(위치 = 개수-1).
-      recordImageProvenance(self, imgCount - 1, provenanceMeta);
-
-      // ✅ MyBox 팝업 자동 닫기
-      await self.delay(500); // 팝업이 뜰 시간 대기
-      await page.keyboard.press('Escape').catch(() => { });
-      await self.delay(300);
-      await page.keyboard.press('Escape').catch(() => { }); // 한 번 더 (확실히)
-      await self.delay(300);
-      self.log('   ✅ MyBox 팝업 자동 닫기 완료');
-
-      // ✅ [2026-03-14 FIX] 이미지 크기를 '문서 너비'로 설정 (이전에 dead code로 누락)
-      try {
-        await setImageSizeToDocumentWidth(self);
-        self.log(`   ✅ 이미지 크기 '문서 너비'로 설정 완료`);
-      } catch (sizeError) {
-        self.log(`   ⚠️ 이미지 크기 설정 실패 (계속 진행): ${(sizeError as Error).message}`);
-      }
-
-      if (isTemporaryFile) {
-        await fs.unlink(absolutePath).catch(() => { });
-      }
+      await completeInsertedImage(imgCount);
       return;
     } else {
       throw new Error('파일 선택했으나 이미지가 삽입되지 않음');
@@ -1038,6 +1065,22 @@ export async function insertBase64ImageAtCursor(
     // ESC로 열린 패널 닫기
     await page.keyboard.press('Escape').catch(() => { });
     await self.delay(300);
+
+    // [2026-10-09] Re-check after a short settle before inserting the image again: an upload that
+    //   landed just after the wait must be accepted, not duplicated by the Base64 fallback.
+    if (uploadSubmitted) {
+      const settledCount = await waitForImageCountGrowth({
+        readCount: readImageCount,
+        baseline: imgBeforeCount,
+        delay: (ms: number) => self.delay(ms),
+        timeoutMs: IMAGE_UPLOAD_SETTLE_MS,
+      });
+      if (settledCount > imgBeforeCount) {
+        self.log(`   ✅ 늦게 도착한 업로드 확인 (이미지 ${imgBeforeCount}→${settledCount}개) — Base64 폴백 없이 성공 처리`);
+        await completeInsertedImage(settledCount);
+        return;
+      }
+    }
 
     self.log(`   ⚠️ FileChooser 방식 실패, Base64 변환 방식으로 폴백 시도...`);
 
@@ -1510,6 +1553,10 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
       'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"]',
       (imgs: any) => imgs.length
     ).catch(() => 0);
+    const readRoundImageCount = (): Promise<number> => frame.$$eval(
+      'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"]',
+      (imgs: any) => imgs.length
+    ).catch(() => 0);
 
     // ✅ [핵심] 재시도 로직 (최대 3회)
     let insertSuccess = false;
@@ -1519,10 +1566,16 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
         await self.delay(1500); // 안정화 대기: 1초 → 1.5초
 
         // ✅ [신규] 삽입 성공 확인
-        const afterCount = await frame.$$eval(
-          'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"]',
-          (imgs: any) => imgs.length
-        ).catch(() => 0);
+        let afterCount = await readRoundImageCount();
+        if (afterCount <= beforeCount) {
+          // [2026-10-09] 느린 업로드는 실패가 아니다 — 재시도는 같은 사진을 한 장 더 넣는다. 증가를 기다린다.
+          afterCount = await waitForImageCountGrowth({
+            readCount: readRoundImageCount,
+            baseline: beforeCount,
+            delay: (ms: number) => self.delay(ms),
+            timeoutMs: IMAGE_ROUND_GROWTH_TIMEOUT_MS,
+          });
+        }
 
         if (afterCount > beforeCount) {
           self.log(`      ✅ 이미지 삽입 확인됨 (${beforeCount} → ${afterCount})`);
@@ -1533,6 +1586,19 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
         }
       } catch (error) {
         self.log(`      ⚠️ 이미지 삽입 시도 ${attempt}/${MAX_RETRIES} 실패: ${(error as Error).message}`);
+        // [2026-10-09] 재시도 직전 정착 후 다시 센다 — 실패로 보인 시도의 업로드가 뒤늦게 들어왔다면
+        //   성공이다. 그대로 재시도하면 같은 사진이 또 들어간다.
+        const settledCount = await waitForImageCountGrowth({
+          readCount: readRoundImageCount,
+          baseline: beforeCount,
+          delay: (ms: number) => self.delay(ms),
+          timeoutMs: IMAGE_UPLOAD_SETTLE_MS,
+        });
+        if (settledCount > beforeCount) {
+          self.log(`      ✅ 늦게 도착한 이미지 확인됨 (${beforeCount} → ${settledCount}) — 재시도하지 않음`);
+          insertSuccess = true;
+          break;
+        }
         if (attempt < MAX_RETRIES) {
           // 점진적 대기 (1초, 2초)
           const waitTime = 1000 * attempt;

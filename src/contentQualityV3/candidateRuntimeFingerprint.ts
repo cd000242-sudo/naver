@@ -87,6 +87,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/imagePathResolve.ts',
   'src/automation/imageProvenance.ts',
   'src/automation/imageTextInterleavePlan.ts',
+  'src/automation/imageUploadArrival.ts',
   'src/automation/immediatePublishCommitPolicy.ts',
   'src/automation/initialEditorReadiness.ts',
   'src/automation/loginPageNavigationPolicy.ts',
