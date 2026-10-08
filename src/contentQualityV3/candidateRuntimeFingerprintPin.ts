@@ -67,5 +67,15 @@
 //   발행 증거를 재사용하거나 품질 게이트를 활성화하는 변경은 아니다.
 // [2026-10-08] v2.11.321 — 전용 다운로드 폴더의 실제 이미지 파일을 검증해 수신하고
 //   손상된 앱 이미지 복사본을 원자적으로 복구한다. 관련 이미지 수신 모듈을 지문 목록에 포함했다.
+// [2026-10-09] 발행 직전 세션 게이트·계정 식별·상태 파일 교체 보정으로 재계산했다.
+//   바뀐 해시 대상: src/browserSessionManager.ts, src/naverBlogAutomation.ts,
+//   src/automation/serverSessionProbePolicy.ts, src/automation/expectedBlogIdentity.ts,
+//   src/automation/accountExecutionGuard.ts, src/automation/publicationCommitJournal.ts,
+//   src/contentQualityV3/candidateRuntimeFingerprint.ts(목록)
+//   신규 해시 대상: src/automation/safeStateRename.ts
+//   내용: 클릭 직전 세션 확인은 보호조치·인증요구·로그인 화면·확정된 다른 블로그일 때만 멈춘다
+//   (불명확 증거는 진입 시 확인된 세션으로 계속). 블로그 주소를 붙여 넣은 계정 ID는 순수 ID로
+//   환원한다. 저널·가드의 상태 파일 교체는 EPERM/EBUSY/EACCES 에서 최대 5회(≤650ms) 재시도하고
+//   그래도 실패하면 종전처럼 멈춘다.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '98b368e73f1ec410efcaca73bba3b3bc733ea35f3f75b2a15207cbdb4415931d' as const;
+  '24edbfe44ca6d1cb4a59a3ef57fa67e84c8e240ab54403b89c6124197b4986a8' as const;

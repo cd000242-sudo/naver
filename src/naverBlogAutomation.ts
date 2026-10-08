@@ -2964,7 +2964,12 @@ export class NaverBlogAutomation {
       }
       this.ensureNotCancelled();
       if (mode !== 'draft') {
-        await browserSessionManager.ensureServerSession(this.options.naverId);
+        // Only positive evidence (protection, challenge, login screen, confirmed other blog) stops here; unclear
+        // evidence right before the click must not pause an account whose session was verified at entry.
+        const sessionVerdict = await browserSessionManager.ensureServerSessionForCommit(this.options.naverId);
+        if (!sessionVerdict.ok) {
+          this.log(`⚠️ 발행 직전 세션 확인 결과가 불명확합니다(${sessionVerdict.status}/${sessionVerdict.reason}) — 차단할 증거가 없어 진입 시 확인된 세션으로 계속합니다.`);
+        }
         this.ensureNotCancelled();
         if (!this.accountWorkId) throw new AccountExecutionGuardError('PUBLISH_OUTCOME_UNKNOWN');
         getPublicationCommitJournal().markSubmitting(this.options.naverId, this.accountWorkId);

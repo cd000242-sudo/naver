@@ -1,7 +1,8 @@
 import { createHash, randomBytes } from 'node:crypto';
-import { mkdirSync, readFileSync, openSync, writeFileSync, fsyncSync, closeSync, renameSync, unlinkSync } from 'node:fs';
+import { mkdirSync, readFileSync, openSync, writeFileSync, fsyncSync, closeSync, unlinkSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
+import { renameWithRetry } from './safeStateRename.js';
 
 export const ACCOUNT_PAUSE_CODES = ['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'] as const;
 export type AccountPauseCode = typeof ACCOUNT_PAUSE_CODES[number];
@@ -56,7 +57,7 @@ export class AccountExecutionGuard {
       mkdirSync(this.storageDir, { recursive: true, mode: 0o700 });
       descriptor = openSync(temporary, 'wx', 0o600);
       writeFileSync(descriptor, JSON.stringify(state), 'utf8'); fsyncSync(descriptor); closeSync(descriptor); descriptor = undefined;
-      renameSync(temporary, join(this.storageDir, key + '.json'));
+      renameWithRetry(temporary, join(this.storageDir, key + '.json'));
       this.failed.delete(key);
     } catch {
       this.failed.set(key, { paused: true, code: state.code || 'NETWORK_WAIT', version: state.version, storageError: true, busy: this.busy.has(key) });

@@ -3,6 +3,7 @@ import { mkdirSync, readFileSync, openSync, writeFileSync, fsyncSync, closeSync,
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { AccountExecutionGuardError } from './accountExecutionGuard.js';
+import { renameWithRetry } from './safeStateRename.js';
 interface JournalState { schema: 1; pending?: string; confirmed: Record<string, { confirmed: true; url?: string }> }
 export class PublicationCommitJournal {
   private readonly storageDir: string;
@@ -37,7 +38,7 @@ export class PublicationCommitJournal {
     try {
       mkdirSync(this.storageDir, { recursive: true, mode: 0o700 }); descriptor = openSync(temporary, 'wx', 0o600);
       writeFileSync(descriptor, JSON.stringify(state)); fsyncSync(descriptor); closeSync(descriptor); descriptor = undefined;
-      renameSync(temporary, join(this.storageDir, key + '.json'));
+      renameWithRetry(temporary, join(this.storageDir, key + '.json'));
     } catch { this.failed.add(key); this.stop(); }
     finally { if (descriptor !== undefined) { try { closeSync(descriptor); } catch { /* Remain stopped. */ } } try { unlinkSync(temporary); } catch { /* Renamed or never created. */ } }
   }

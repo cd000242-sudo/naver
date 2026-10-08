@@ -16,7 +16,7 @@ import { promises as fs } from 'fs';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
 import { emitSessionEvent } from './session/sessionEventLogger.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
-import { resolveServerSessionProbeVerdict, SERVER_SESSION_PROBE_URL } from './automation/serverSessionProbePolicy.js';
+import { resolveCommitTimeBlock, resolveServerSessionProbeVerdict, SERVER_SESSION_PROBE_URL } from './automation/serverSessionProbePolicy.js';
 import { isLoginChallengeUrl, isNaverSessionLoginUrl, parseNaverSessionUrl } from './automation/loginPageNavigationPolicy.js';
 import { getAccountExecutionGuard, AccountExecutionGuardError, type AccountPauseCode } from './automation/accountExecutionGuard.js';
 import type { ServerSessionProbeVerdict } from './automation/serverSessionProbePolicy.js';
@@ -965,7 +965,11 @@ class BrowserSessionManager {
             if (verdict.ok) {
                 if (!('accountIdentity' in serverCheck) || !serverCheck.accountIdentity || serverCheck.accountIdentity.toLowerCase() !== expectedIdentity) {
                     session.isLoggedIn = false; session.loginVerifiedAt = 0;
-                    return { ok: false, status: 'unknown', reason: 'account-identity-unverified' };
+                    // A well-formed identity that differs from the configured blog is positive evidence of another account;
+                    // a missing or malformed one only means the identity could not be read.
+                    const seen = 'accountIdentity' in serverCheck ? serverCheck.accountIdentity : undefined;
+                    const confirmedOther = typeof seen === 'string' && /^[A-Za-z0-9_-]{1,100}$/.test(seen);
+                    return { ok: false, status: 'unknown', reason: 'account-identity-unverified', ...(confirmedOther ? { identityMismatch: true as const } : {}) };
                 }
                 session.isLoggedIn = true; session.loginVerifiedAt = Date.now();
                 // Persist only cookies the server just confirmed for the expected account: the next app start
@@ -993,6 +997,22 @@ class BrowserSessionManager {
         if (state.status === 'ready') { getAccountExecutionGuard().assertAllowed(accountId); return true; }
         const codes: Record<string, AccountPauseCode> = { 'login-required': 'LOGIN_REQUIRED', challenge: 'LOGIN_CHALLENGE', protected: 'ACCOUNT_PROTECTED', unavailable: 'NETWORK_WAIT', unknown: 'NETWORK_WAIT' };
         const code = state.reason === 'account-identity-unverified' ? 'ACCOUNT_MISMATCH' : codes[state.status] || 'NETWORK_WAIT';
+        getAccountExecutionGuard().pause(accountId, code);
+        throw new AccountExecutionGuardError(code);
+    }
+
+    /**
+     * Pre-click gate (just before the irreversible publish click). Same probe as ensureServerSession, but only
+     * POSITIVE evidence stops the run: protection, a verification challenge, a login screen, or an editor that
+     * confirms a different blog. Unclear evidence (frame detached/changed, page changed, probe timeout, identity
+     * unreadable) is returned to the caller for logging and the run continues on the session verified at entry.
+     */
+    async ensureServerSessionForCommit(accountId: string): Promise<ServerSessionProbeVerdict> {
+        accountId = this.resolveSessionAccountId(accountId);
+        const state = await this.ensureServerSessionState(accountId);
+        if (state.status === 'ready') { getAccountExecutionGuard().assertAllowed(accountId); return state; }
+        const code = resolveCommitTimeBlock(state);
+        if (!code) return state;
         getAccountExecutionGuard().pause(accountId, code);
         throw new AccountExecutionGuardError(code);
     }
