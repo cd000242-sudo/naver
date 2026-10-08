@@ -1,4 +1,4 @@
-import { resolveExpectedBlogId } from '../automation/expectedBlogIdentity.js';
+import { resolveExpectedBlog, type ExpectedBlog } from '../automation/expectedBlogIdentity.js';
 import { getAccountExecutionGuard } from '../automation/accountExecutionGuard.js';
 import { getPublicationCommitJournal } from '../automation/publicationCommitJournal.js';
 
@@ -11,16 +11,20 @@ export const ACCOUNT_SAFETY_LABELS: Record<string, string> = {
 export type SafetyLookup = 'account' | 'naver-id';
 export type SafetyAction = 'status' | 'open' | 'open-posts' | 'resume' | 'confirm' | 'reset-journal';
 type Account = { id: string; naverId?: string; blogId: string };
-type Verdict = { status: string; reason?: string };
+type Verdict = { status: string; reason?: string; blogId?: string; observedBlogId?: string; expectedBlogId?: string };
 type Sessions = {
-  setExpectedBlogId(id: string, blogId: string): void;
+  /** 'fallback' = blogId is only the login ID, so the real blog is learned from the editor. */
+  setExpectedBlogId(id: string, blogId: string, source?: 'configured' | 'fallback'): void;
+  /** The registered blog, else the one learned from the editor. */
+  getKnownBlogId?(id: string): string | undefined;
   openForUser(id: string): Promise<void>;
   /** Make sure this account's browser exists (no navigation, no login) so a check has a window to look at. */
   ensureSessionForUser(id: string): Promise<void>;
   /** Open the blog's post list in a tab of this account's own browser. */
   openPostListForUser(id: string, blogId: string): Promise<void>;
   inspectServerSessionState(id: string): Promise<{ status: string }>;
-  verifyAccountForUser(id: string): Promise<Verdict>;
+  /** `allowRelearn`: the user is looking at the window, so it may replace a learned blog (never a registered one). */
+  verifyAccountForUser(id: string, options?: { allowRelearn?: boolean }): Promise<Verdict>;
 };
 const OPEN_FAILED = '네이버 창을 열지 못했습니다. 크롬이 설치돼 있는지, 같은 계정의 다른 작업이 끝났는지 확인한 뒤 다시 눌러주세요.';
 const PENDING_FIRST = '직전 글의 발행 결과를 먼저 확인해주세요. 네이버 글 목록을 본 뒤 [발행됨 확인] 또는 [발행 안 됨 확인]을 눌러야 합니다.';
@@ -28,6 +32,8 @@ const JOURNAL_FIRST = '발행 기록 파일을 읽을 수 없습니다. 네이�
 const STATE_CHANGED = '계정 상태가 방금 바뀌었습니다. 상태를 다시 확인한 뒤 눌러주세요.';
 /** Windows the user must act in: bring them forward after a failed check. */
 const needsWindow = (v?: Verdict) => ['login-required', 'challenge', 'protected'].includes(String(v?.status)) || v?.reason === 'account-identity-unverified';
+/** The blog the check confirmed, shown in the success text so the user can see which blog this account publishes to. */
+const blogNote = (v?: Verdict) => v?.blogId ? ` (블로그: ${v.blogId})` : '';
 function explainVerdict(verdict?: Verdict): string {
   if (verdict?.status === 'login-required') return '네이버 로그인이 아직 되어 있지 않습니다. 열린 네이버 창에서 직접 로그인한 뒤 다시 눌러주세요(비밀번호는 앱이 입력하지 않습니다).';
   if (verdict?.status === 'challenge') return '네이버 창에 본인확인 화면이 있습니다. 그 창에서 직접 마친 뒤 다시 눌러주세요.';
@@ -40,19 +46,22 @@ function explainVerdict(verdict?: Verdict): string {
 export function createAccountSafetyController(accounts: () => Account[], sessions: Sessions,
   guard = getAccountExecutionGuard(), journal = getPublicationCommitJournal()) {
   const resolve = (key: string, lookup: SafetyLookup = 'account'): { id: string; blogId: string } => {
-    let id: string; let blogId: string;
+    let id: string; let expected: ExpectedBlog;
     if (lookup === 'naver-id') {
       id = typeof key === 'string' ? key.trim().toLowerCase() : '';
       if (!id || id.length > 100) throw new Error('네이버 아이디를 확인해주세요.');
       // Same rule the publish engine uses (main.ts getExpectedBlogId): a registered account with this Naver ID names the blog.
-      blogId = resolveExpectedBlogId(id, accounts());
+      expected = resolveExpectedBlog(id, accounts());
     } else {
       const account = accounts().find(a => a.id === key);
       if (!account || !account.naverId?.trim()) throw new Error('계정 관리에서 네이버 아이디를 확인해주세요.');
       id = account.naverId.trim().toLowerCase();
-      blogId = resolveExpectedBlogId(id, [account]);
+      expected = resolveExpectedBlog(id, [account]);
     }
-    sessions.setExpectedBlogId(id, blogId);
+    if (expected.configured) sessions.setExpectedBlogId(id, expected.blogId);
+    else sessions.setExpectedBlogId(id, expected.blogId, 'fallback');
+    // A login ID is not the blog address: without a registered blog, use the one the editor confirmed earlier.
+    const blogId = expected.configured ? expected.blogId : (sessions.getKnownBlogId?.(id) || expected.blogId);
     return { id, blogId };
   };
   function status(key: string, lookup: SafetyLookup = 'account') {
@@ -102,20 +111,20 @@ export function createAccountSafetyController(accounts: () => Account[], session
       if (before.pendingToken) return { success: false, state: before, message: PENDING_FIRST };
       if (!(await ensureSession(id))) return { success: false, state: status(key, lookup), message: OPEN_FAILED };
       // Re-checked after the session probe: a pending record written meanwhile keeps the account stopped.
-      const verifyReady = async () => { verdict = await sessions.verifyAccountForUser(id); return verdict.status === 'ready' && !journal.hasUnconfirmed(id); };
+      const verifyReady = async () => { verdict = await sessions.verifyAccountForUser(id, { allowRelearn: true }); return verdict.status === 'ready' && !journal.hasUnconfirmed(id); };
       const success = outcomeSettled(id, before.code) ? await guard.resumeAfterOutcomeConfirmation(id, verifyReady) : await guard.resume(id, verifyReady);
-      return finish(success, '확인 완료. 원고를 확인하고 원하는 작업을 다시 실행해주세요.');
+      return finish(success, `확인 완료${blogNote(verdict)}. 원고를 확인하고 원하는 작업을 다시 실행해주세요.`);
     }
     if (action !== 'confirm' || !pendingToken || !['published', 'not-published'].includes(outcome || '')) throw new Error('발행 결과 확인 값이 올바르지 않습니다.');
     if (before.code !== 'PUBLISH_OUTCOME_UNKNOWN' || before.pendingToken !== pendingToken) throw new Error('확인할 발행 기록이 변경되었습니다.');
     if (!(await ensureSession(id))) return { success: false, state: status(key, lookup), message: OPEN_FAILED };
     const success = await guard.resumeAfterOutcomeConfirmation(id, async () => {
-      verdict = await sessions.verifyAccountForUser(id);
+      verdict = await sessions.verifyAccountForUser(id, { allowRelearn: true });
       if (verdict.status !== 'ready') return false;
       journal.confirmPendingOutcome(id, pendingToken, outcome!);
       return true;
     });
-    return finish(success, '발행 결과를 기록했습니다. 자동으로 다시 발행하지 않습니다.');
+    return finish(success, `발행 결과를 기록했습니다${blogNote(verdict)}. 자동으로 다시 발행하지 않습니다.`);
   }
   return { status, act };
 }

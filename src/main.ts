@@ -1,4 +1,4 @@
-import { resolveExpectedBlogId } from './automation/expectedBlogIdentity.js';
+import { findAccountsNamingBlog, resolveExpectedBlog } from './automation/expectedBlogIdentity.js';
 import { app, BrowserWindow, dialog, ipcMain, nativeImage, NativeImage, shell, Notification, Tray, Menu } from 'electron';
 import './runtime/e2eUserDataBootstrap.js';
 // ✅ [v2.7.28] IPC 이중 등록 가드 — 다른 IPC 등록 이전에 반드시 첫 import
@@ -9562,6 +9562,9 @@ app.whenReady().then(async () => {
       setDailyLimit(appConfig.dailyPostLimit);
     }
 
+    // A blog address registered for another Naver ID is never learned for this one (positive evidence of another account).
+    browserSessionManager.setConfiguredBlogOwnerResolver(blogId => findAccountsNamingBlog(blogId, blogAccountManager.getAllAccounts()));
+
     // ✅ [리팩토링] BlogExecutor 의존성 주입 (핸들러 로직 이동 지원)
     (injectBlogExecutorDeps as (deps: any) => void)({
       loadConfig,
@@ -9569,7 +9572,7 @@ app.whenReady().then(async () => {
       createAutomation: (naverId: string, naverPassword: string, accountProxyUrl?: string) => {
         // ✅ [2026-03-02] sendLog 주입 → 브라우저 자동화 로그가 UI에 실시간 표시
         // ✅ [2026-03-23] accountProxyUrl → 계정별 프록시 우선, 미설정 시 글로벌 SmartProxy 폴백
-        return new NaverBlogAutomation({ naverId, naverPassword, accountProxyUrl, getExpectedBlogId: id => resolveExpectedBlogId(id, blogAccountManager.getAllAccounts()) }, (msg: string) => {
+        return new NaverBlogAutomation({ naverId, naverPassword, accountProxyUrl, getExpectedBlog: id => resolveExpectedBlog(id, blogAccountManager.getAllAccounts()) }, (msg: string) => {
           const safeMsg = redactKnownAccountId(msg, naverId);
           console.log(safeMsg);  // 터미널에도 출력
           sendLog(safeMsg);      // 렌더러 UI에도 전달
@@ -9894,7 +9897,7 @@ app.whenReady().then(async () => {
                 // ✅ [2026-03-02] sendLog 주입 → 예약발행 자동화 로그도 UI에 표시
                 schedulerAutomation = new NaverBlogAutomation({
                   naverId: accountNaverId,
-                  getExpectedBlogId: id => resolveExpectedBlogId(id, blogAccountManager.getAllAccounts()),
+                  getExpectedBlog: id => resolveExpectedBlog(id, blogAccountManager.getAllAccounts()),
                   naverPassword: accountNaverPassword,
                   headless: false,
                   slowMo: 50,

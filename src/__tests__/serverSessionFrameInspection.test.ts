@@ -4,6 +4,7 @@ vi.mock('puppeteer-extra', () => ({ default: { use: vi.fn() } }));
 vi.mock('puppeteer-extra-plugin-stealth', () => ({ default: () => ({ enabledEvasions: new Set() }) }));
 vi.mock('../sessionPersistence.js', () => ({ saveCookies: vi.fn(async () => {}) }));
 import { browserSessionManager } from '../browserSessionManager.js';
+import { isolateBlogIdentity } from './mocks/isolatedBlogIdentity';
 const manager = browserSessionManager as any;
 const editorUrl = 'https://blog.naver.com/PostWriteForm.naver?blogId=test_account';
 function frame(url = editorUrl, selectors = ['.se-main-container', '.se-documentTitle'], bodyText = '') {
@@ -18,7 +19,7 @@ function setup(frames = [frame()]) {
   const session = { accountId: 'test_account', browser: { connected: true }, page, isLoggedIn: false, loginVerifiedAt: 0 };
   manager.sessions.set('test_account', session); return session;
 }
-beforeEach(() => { manager.sessions.clear(); manager.serverSessionChecks.clear(); manager.expectedBlogIds.clear(); vi.clearAllMocks(); });
+beforeEach(() => { manager.sessions.clear(); manager.serverSessionChecks.clear(); manager.expectedBlogIds.clear(); isolateBlogIdentity(manager); vi.clearAllMocks(); });
 describe('current editor frame session evidence', () => {
   it('recognizes an independently evaluated cross-origin nested editor without a network request', async () => {
     const shell = frame('https://blog.naver.com/test_account?Redirect=Write', []);
@@ -31,7 +32,8 @@ describe('current editor frame session evidence', () => {
     setup([frame(editorUrl, ['.se-main-container', '.se-section-documentTitle'])]);
     expect((await manager.inspectServerSessionState('test_account')).status).toBe('ready');
   });
-  it('accepts only matching official URL identity', async () => {
+  it('accepts only matching official URL identity of a registered blog', async () => {
+    manager.setExpectedBlogId('test_account', 'test_account');
     for (const url of ['https://blog.naver.com/PostWriteForm.naver', editorUrl.replace('test_account', 'other_account')]) {
       const session = setup([frame(url)]);
       expect(await manager.inspectServerSessionState('test_account')).toMatchObject({ ok: false, reason: 'account-identity-unverified' });
@@ -95,6 +97,7 @@ describe('current editor frame session evidence', () => {
     expect((await manager.inspectServerSessionState('test_account')).status).toBe('protected');
   });
   it('rejects conflicting editor identities instead of choosing the first frame', async () => {
+    manager.setExpectedBlogId('test_account', 'test_account');
     setup([frame(), frame(editorUrl.replace('test_account', 'other_account'))]);
     expect(await manager.inspectServerSessionState('test_account')).toMatchObject({ ok: false, reason: 'account-identity-unverified' });
   });

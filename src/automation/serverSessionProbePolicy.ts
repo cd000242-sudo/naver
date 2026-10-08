@@ -18,8 +18,13 @@ export interface ServerSessionProbeVerdict {
   /** Compatibility only: false does NOT mean that submitting credentials is appropriate. */
   ok: boolean;
   reason: string;
-  /** True only when an editor frame confirmed a DIFFERENT blog id than the one configured for the account. */
+  /** True only when an editor frame confirmed a DIFFERENT blog id than the one expected for the account (configured or learned). */
   identityMismatch?: true;
+  /** With `identityMismatch`: the blog the window holds, and the blog this account is expected to have (absent when none is known). */
+  observedBlogId?: string;
+  expectedBlogId?: string;
+  /** On a ready verdict: the blog the editor confirmed for this account. */
+  blogId?: string;
 }
 export type CommitTimeBlockCode = 'LOGIN_REQUIRED' | 'LOGIN_CHALLENGE' | 'ACCOUNT_PROTECTED' | 'ACCOUNT_MISMATCH';
 /**

@@ -15,6 +15,7 @@ vi.mock('../automation/accountExecutionGuard.js', () => ({
   AccountExecutionGuardError: class extends Error { constructor(public code: string) { super(code); } },
 }));
 import { browserSessionManager } from '../browserSessionManager.js';
+import { isolateBlogIdentity } from './mocks/isolatedBlogIdentity';
 import { resolveCommitTimeBlock } from '../automation/serverSessionProbePolicy.js';
 
 const manager = browserSessionManager as any;
@@ -35,7 +36,7 @@ function setup(frames: any[] = [frame()]) {
   return session;
 }
 beforeEach(() => {
-  manager.sessions.clear(); manager.serverSessionChecks.clear(); manager.expectedBlogIds.clear();
+  manager.sessions.clear(); manager.serverSessionChecks.clear(); manager.expectedBlogIds.clear(); isolateBlogIdentity(manager);
   vi.clearAllMocks(); guard.assertAllowed.mockReset(); guard.getStatus.mockReturnValue({ paused: false, version: 0 });
 });
 afterEach(() => { vi.useRealTimers(); });
@@ -122,6 +123,7 @@ describe('ensureServerSessionForCommit: positive evidence stops', () => {
     expect(guard.pause).toHaveBeenCalledWith('test_account', code);
   });
   it('a confirmed different account pauses with ACCOUNT_MISMATCH', async () => {
+    manager.setExpectedBlogId('test_account', 'test_account');
     setup([frame(editorUrl.replace('test_account', 'other_account'))]);
     await expect(manager.ensureServerSessionForCommit('test_account')).rejects.toMatchObject({ code: 'ACCOUNT_MISMATCH' });
     expect(guard.pause).toHaveBeenCalledWith('test_account', 'ACCOUNT_MISMATCH');
@@ -140,6 +142,7 @@ describe('entry gate keeps its strict semantics', () => {
     expect(guard.pause).toHaveBeenCalledWith('test_account', 'NETWORK_WAIT');
   });
   it('ensureServerSession still maps both identity reasons to ACCOUNT_MISMATCH', async () => {
+    manager.setExpectedBlogId('test_account', 'test_account');
     for (const url of ['https://blog.naver.com/PostWriteForm.naver', editorUrl.replace('test_account', 'other_account')]) {
       manager.serverSessionChecks.clear(); guard.pause.mockClear(); setup([frame(url)]);
       await expect(manager.ensureServerSession('test_account')).rejects.toMatchObject({ code: 'ACCOUNT_MISMATCH' });

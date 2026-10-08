@@ -34,7 +34,7 @@ describe('PUBLISH_OUTCOME_UNKNOWN with nothing left to confirm', () => {
     expect(state.pendingToken).toBeUndefined();
     expect((await controller.act('app-id', 'resume', state.version)).success).toBe(true);
     expect(guard.getStatus('login-id').paused).toBe(false);
-    expect(sessions.verifyAccountForUser).toHaveBeenCalledWith('login-id');
+    expect(sessions.verifyAccountForUser).toHaveBeenCalledWith('login-id', { allowRelearn: true });
   });
 
   it('still refuses while a publication outcome is pending', async () => {

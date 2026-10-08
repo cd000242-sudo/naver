@@ -32,7 +32,7 @@ describe('run() 로그인 스킵 게이트 (유효 세션 재로그인 방지)',
     expect(start).toBeGreaterThan(-1);
     const gate = manager.slice(start, manager.indexOf('isAccountLoggedIn(', start));
     expect(gate.includes('getAccountExecutionGuard().pause(accountId, code)')).toBe(true);
-    expect(gate.includes('throw new AccountExecutionGuardError(code)')).toBe(true);
+    expect(gate.includes('throw new AccountExecutionGuardError(code,')).toBe(true);
     expect(/return false/.test(gate)).toBe(false);
   });
 

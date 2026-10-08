@@ -1,4 +1,5 @@
 import { waitForScheduleConfirmation } from './scheduleConfirmation.js';
+import { getBlogIdentityStore } from './blogIdentityStore.js';
 /**
  * publishHelpers.ts - 발행/카테고리/예약 관련 함수
  * naverBlogAutomation.ts에서 추출됨
@@ -1186,9 +1187,16 @@ export async function debugPublishModal(self: any): Promise<void> {
 
 // ── publishScheduled ──
 
-/** The blog id from the app's account configuration (never from a page); '' when unset or invalid. */
+/** The blog id from the app's account configuration or the one learned from the editor (never from a page URL); '' when unset or invalid. */
 function configuredBlogId(self: any): string {
   try {
+    const naverId = self.options?.naverId;
+    const expected = self.options?.getExpectedBlog?.(naverId);
+    if (expected) {
+      // Without a registered blog the expectation is only the login ID, which Naver does not require to equal the blog address.
+      const blog = expected.configured ? expected.blogId : (getBlogIdentityStore().get(naverId) || expected.blogId);
+      return String(blog || '').trim().toLowerCase();
+    }
     return String(self.options?.getExpectedBlogId?.(self.options?.naverId) || '').trim().toLowerCase();
   } catch {
     return '';

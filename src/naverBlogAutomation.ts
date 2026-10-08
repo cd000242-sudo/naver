@@ -297,6 +297,8 @@ async function smartTypeWithAutoHighlight(
 
 export interface AutomationOptions {
   getExpectedBlogId?: (naverId: string) => string;
+  /** Preferred over getExpectedBlogId: also says whether a registered account names the blog or it is only the login ID (a fallback). */
+  getExpectedBlog?: (naverId: string) => { blogId: string; configured: boolean };
   naverId: string;
   naverPassword: string;
   loginUrl?: string;
@@ -6726,6 +6728,13 @@ export class NaverBlogAutomation {
     }
   }
 
+  /** Tells the session manager which blog this login must show: a registered one (strict) or only the login ID (learned from the editor). */
+  private registerExpectedBlog(id: string): void {
+    const expected = this.options.getExpectedBlog?.(id);
+    if (expected) browserSessionManager.setExpectedBlogId(id, expected.blogId, expected.configured ? 'configured' : 'fallback');
+    else if (this.options.getExpectedBlogId) browserSessionManager.setExpectedBlogId(id, this.options.getExpectedBlogId(id));
+  }
+
   private userRunResumeDeps(): UserRunResumeDeps {
     const id = this.options.naverId;
     const guard = getAccountExecutionGuard();
@@ -6735,7 +6744,7 @@ export class NaverBlogAutomation {
       openSession: async () => {
         // The check compares the editor's blogId with this account's blog; a login id that differs from the blog id
         // (tnqls… → leader_248) otherwise reads as ACCOUNT_MISMATCH. withAccountExecution sets it only afterwards.
-        if (this.options.getExpectedBlogId) browserSessionManager.setExpectedBlogId(id, this.options.getExpectedBlogId(id));
+        this.registerExpectedBlog(id);
         const session =await browserSessionManager.getOrCreateSession(id, this.options.headless ?? false, this.options.accountProxyUrl, { userInitiated: true });
         // The check below loads the editor: register the stealth supplements first, exactly as a normal run
         // does before its first navigation (setupBrowser reuses this same page afterwards).
@@ -6762,7 +6771,7 @@ export class NaverBlogAutomation {
     return guard.runExclusive(this.options.naverId, async () => {
       this.accountWorkId = randomUUID();
       try {
-        if (this.options.getExpectedBlogId) browserSessionManager.setExpectedBlogId(this.options.naverId, this.options.getExpectedBlogId(this.options.naverId));
+        this.registerExpectedBlog(this.options.naverId);
         const result = await work();
         // A run that reports failure after the publish click has an unknown outcome, never a confirmed one.
         if (journal.hasUnconfirmed(this.options.naverId) && (result as { success?: unknown } | undefined)?.success === false) {
