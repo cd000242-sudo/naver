@@ -309,6 +309,9 @@ function enrichImageGenerationOptionsWithArticleContext(rawOptions: any): any {
     globalSubject,
     articleContext,
     items: ipcItems,
+    // [2026-10-08] The article publish path: its section images may carry their heading ("소제목 글자 넣기").
+    //   The image studio calls the IPC directly and never sets this.
+    articleSectionImages: true,
     // [SPEC-NAVER-IMAGE-2026] The article's full heading list, so a one-item call gets the same section
     //   role as a batch (main: director/sectionRoleAssignment). Only when this article's context is bound.
     ...(canUseStructuredContext && !Array.isArray(options.sectionPlanHeadings)

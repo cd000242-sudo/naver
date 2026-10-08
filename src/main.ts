@@ -5921,6 +5921,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                       items: imageItems,
                       postTitle: title,
                       isFullAuto: true,
+                      articleSectionImages: true, // [2026-10-08] article section images ("소제목 글자 넣기")
                       isShoppingConnect: options?.contentMode === 'affiliate',
                       imageStyle: options?.imageStyle,
                       imageRatio: options?.subheadingImageRatio || options?.thumbnailImageRatio || '1:1',

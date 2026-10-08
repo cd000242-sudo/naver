@@ -22,9 +22,11 @@ import { buildOpenaiImageEditsRequest } from './openaiImageEditsRequest.js';
 import { resolveOpenAIImageQuality } from './openaiImageQuality.js';
 // [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — gpt-image-2 b64_json 1.18MB+
 import { decodeBase64Async } from '../main/utils/base64Async.js';
-import { buildContextualImagePrompt } from './contextualImagePrompt.js';
+import { buildContextualImagePrompt, buildHeadingTitleTypography, buildPosterTitleTypography } from './contextualImagePrompt.js';
 
 const OPENAI_IMAGES_API_URL = 'https://api.openai.com/v1/images/generations';
+// [2026-10-08 사장님 "AI 티가 많이 난다"] A cover reads as a real photo, not a render.
+const NATURAL_PHOTO_LOOK = 'PHOTO LOOK: a real camera photograph — 50mm lens, soft natural daylight, true-to-life colours and skin texture, gentle depth of field. Avoid airbrushed or plastic skin, HDR glow, neon, lens flare, floating particles, a 3D-render or illustration look, and distorted hands or extra fingers.';
 // ✅ 모델은 사용자 선택(config.openaiImageModel). gpt-image-1.5 = 저비용 기본,
 //    gpt-image-2 = 고품질. config 누락 시 저비용 기본으로 폴백해 비용이 조용히
 //    상승하는 일을 차단한다. 두 모델 모두 Organization 인증 필요(403) 가능 —
@@ -159,6 +161,11 @@ export async function generateWithOpenAIImage(
                 // Promise identity preservation only when the reference was
                 // actually loaded into this OpenAI request.
                 hasReferenceImage: Boolean(cachedReferenceImage),
+                // Only the director's poster cover / a marked section image add their text here; other items keep
+                // the brief exactly as before.
+                thumbnailText: (item as any).coverStyle === 'poster' ? (item as any).thumbnailText : undefined,
+                coverStyle: (item as any).coverStyle,
+                headingText: (item as any).headingText,
                 // 이 생성기는 아래에서 dh.angle 을 프롬프트 앞머리에 붙인다 — 카메라 소유자는 여기다.
                 engineOwnsCamera: true,
             });
@@ -201,13 +208,29 @@ export async function generateWithOpenAIImage(
             //   (imageGenerator.applyKoreanTextOverlayIfNeeded)가 처리하므로, 여기서 썸네일을
             //   제외해 이중 텍스트를 원천 차단한다.
             // [2026-09-23 사장님] 덕테이프는 한글 표현력이 좋아 썸네일 문구도 직접 그린다. 앱 오버레이는 없다
-            //   (imageGenerator.KOREAN_TEXT_ENGINES). 썸네일에는 제목 전체가 아니라 짧은 문구(thumbnailText)만.
+            //   (imageGenerator.KOREAN_TEXT_ENGINES).
+            // [2026-10-08 사장님] 썸네일은 제목 전체를 포스터로(짧게 자른 후킹 문구 아님), 소제목 이미지는 소제목 그대로.
+            //   브리프와 같은 함수로 만들어 두 지시가 서로 어긋나지 않게 한다.
             const thumbnailPhrase = String((item as any).thumbnailText || '').replace(/"/g, ' ').trim();
             const wantsThumbnailText = (item as any).isThumbnail === true && (item as any).allowText === true && thumbnailPhrase !== '';
             const wantsNativeKoreanText =
                 ((item as any).allowText === true && (item as any).isThumbnail !== true) || wantsThumbnailText;
             const koreanTextToRender = wantsThumbnailText ? thumbnailPhrase : String(item.heading || '').trim();
-            const typographyDirective = `TYPOGRAPHY REQUIREMENT: Render this exact Korean text as a bold, large, clearly legible headline integrated into the image design: "${koreanTextToRender}". The Korean characters must be spelled EXACTLY as given, sharp, high-contrast against the background, and fully readable.${wantsThumbnailText ? ' Use at most 2 lines and render it once; it is a short hook, not the article title.' : ''} Keep all text within the safe area (not cropped at edges).`;
+            // Only the director's cover is a poster and only a marked section image gets its heading verbatim;
+            // the image studio and manual tools keep the old wording exactly.
+            const directorCover = (item as any).isThumbnail === true && Boolean((item as any).coverStyle);
+            const posterText = wantsThumbnailText && (item as any).coverStyle === 'poster';
+            const headingText = !wantsThumbnailText ? String((item as any).headingText || '').trim() : '';
+            const newTypography = posterText
+                ? buildPosterTitleTypography(koreanTextToRender)
+                : (headingText ? buildHeadingTitleTypography(headingText) : '');
+            const typographyDirective = newTypography
+                // The brief's TEXT POLICY already carries the same block — point at it instead of repeating it,
+                // so the engine is not told twice (a title drawn twice).
+                ? (prompt.includes(newTypography)
+                    ? 'TYPOGRAPHY REQUIREMENT: Draw exactly the Korean text named in the TEXT POLICY below, once — sharp, high-contrast, fully readable.'
+                    : `TYPOGRAPHY REQUIREMENT: ${newTypography} Letters must be sharp, high-contrast, and fully readable.`)
+                : `TYPOGRAPHY REQUIREMENT: Render this exact Korean text as a bold, large, clearly legible headline integrated into the image design: "${koreanTextToRender}". The Korean characters must be spelled EXACTLY as given, sharp, high-contrast against the background, and fully readable.${wantsThumbnailText ? ' Use at most 2 lines and render it once; it is a short hook, not the article title.' : ''} Keep all text within the safe area (not cropped at edges).`;
             const textDirective = wantsNativeKoreanText && koreanTextToRender
                 ? typographyDirective
                 : NO_TEXT_PREFIX;
@@ -221,7 +244,8 @@ export async function generateWithOpenAIImage(
                 // [2026-09-08] 스타일 분기에도 각도를 싣는다 — 종전에는 스틱맨/라운디/2D/빈티지가
                 //   각도 지시를 아예 못 받아 순번을 실어도 구도가 고정됐다(실측).
                 // [SPEC-NAVER-IMAGE-2026] A planned section role owns the camera (brief); skip the rotation.
-                prompt = (item as any).visualRole
+                // [2026-10-08] The cover's layout is owned by the brief's cover lines: no rotation there either.
+                prompt = ((item as any).visualRole || directorCover)
                     ? `${textDirective} ${stylePromptText}, ${prompt}.`
                     : `${textDirective} ${stylePromptText}, ${dh.angle}, ${prompt}, ${dh.framing}.`;
             } else {
@@ -230,9 +254,14 @@ export async function generateWithOpenAIImage(
                 //   도는 것처럼 보였지만 프롬프트에는 없었다(실측). 6축 중 5축을 싣는다.
                 // [SPEC-NAVER-IMAGE-2026] With a planned role the brief owns camera and look (natural light);
                 //   the random angle/lighting/colour rotation (dutch angle, neon, tilt-shift…) read as AI.
-                prompt = (item as any).visualRole
-                    ? `${textDirective} ${koreanPersonDirective}${prompt}`
-                    : `${textDirective} ${dh.angle}, ${dh.framing}, ${koreanPersonDirective}${prompt}, ${dh.lighting}, ${dh.focus}, ${dh.color}.`;
+                // [2026-10-08 사장님 "AI 티"] Covers drop the rotation too and get the natural photo look.
+                if (directorCover) {
+                    prompt = `${textDirective} ${koreanPersonDirective}${prompt} ${NATURAL_PHOTO_LOOK}`;
+                } else {
+                    prompt = (item as any).visualRole
+                        ? `${textDirective} ${koreanPersonDirective}${prompt}`
+                        : `${textDirective} ${dh.angle}, ${dh.framing}, ${koreanPersonDirective}${prompt}, ${dh.lighting}, ${dh.focus}, ${dh.color}.`;
+                }
             }
 
             // 이미지 비율 설정

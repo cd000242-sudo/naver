@@ -165,6 +165,9 @@ export interface AppConfig {
   // [SPEC-NAVER-IMAGE-2026] 이미지 관리 탭 "고품질 썸네일" — 'high' 면 썸네일 후보 2~3장 + 자동 심사 1회.
   //   기본(미설정·'standard')은 썸네일 1장, 심사 호출 없음 (NAVER IMAGE PIPELINE V1 §10·§27).
   thumbnailQualityMode?: 'standard' | 'high';
+  // [2026-10-08] 이미지 관리 탭 "소제목 이미지에 소제목 글자 넣기" — true 면 한글을 직접 그리는 엔진
+  //   (koreanTextEngines)이 소제목 이미지에 소제목 문장을 그대로 그린다. 기본 OFF.
+  headingImageTextInclude?: boolean;
 
   externalApiCostConsent?: boolean;
   externalApiCostConsentAt?: string;

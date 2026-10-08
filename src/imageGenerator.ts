@@ -57,7 +57,7 @@ import { AutomationService } from './main/services/AutomationService.js'; // ✅
 import * as fs from 'fs/promises';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
 import { withTextInImage } from './image/director/thumbnailTextState.js';
-import { drawsKoreanTextItself } from './image/director/koreanTextEngines.js';
+import { drawsKoreanTextItself, resolveHeadingImageText } from './image/director/koreanTextEngines.js';
 
 
 // Re-export types for backward compatibility
@@ -240,6 +240,16 @@ function shouldAllowTextForImageItem(item: any, options: GenerateImagesOptions):
 
   if (!thumbnailOnlyContext) return true;
   return item?.isThumbnail === true;
+}
+
+/** config.headingImageTextInclude, read defensively: an unreadable config keeps section images text-free. */
+async function readHeadingImageTextSetting(): Promise<boolean> {
+  try {
+    const { loadConfig } = await import('./configManager.js');
+    return (await loadConfig())?.headingImageTextInclude === true;
+  } catch {
+    return false;
+  }
 }
 
 function shouldApplyThumbnailTextOverlay(
@@ -546,9 +556,18 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     console.log(`[ImageRole] 🎭 소제목 역할: ${summary}`);
   }
 
+  // [2026-10-08 사장님] "소제목 이미지에 소제목 글자 넣기" — read here so every article flow (single, continuous,
+  //   multi-account, heading regeneration) gets the same answer without each renderer path carrying it.
+  //   Only article section images (never the studio or tools) and never shopping product-reference images.
+  const headingTextEligible = options.articleSectionImages === true
+    && options.isShoppingConnect !== true
+    && isKoreanTextSupportedEngine(normalizedProvider)
+    && generationSourceItems.some((item) => item.isThumbnail !== true);
+  const headingImageTextOn = headingTextEligible && await readHeadingImageTextSetting();
   const mappedItems = generationSourceItems
     .map((item, idx) => {
-      const allowText = shouldAllowTextForImageItem(item, options);
+      const headingText = resolveHeadingImageText(item, normalizedProvider, headingImageTextOn);
+      const allowText = shouldAllowTextForImageItem(item, options) || headingText !== null;
       const basePrompt = String(item.englishPrompt || item.prompt || '').trim();
       const legacyPrompt = options.isShoppingConnect
         ? buildShoppingReferencePrompt(basePrompt, item.heading, allowText)
@@ -602,6 +621,8 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         visualRole: briefRole,
         coverDirection: item.isThumbnail === true ? item.coverDirection : undefined,
         thumbnailText,
+        coverStyle: item.isThumbnail === true ? item.coverStyle : undefined,
+        headingText: headingText ?? undefined,
       });
 
       return {
@@ -616,7 +637,9 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
 
         isThumbnail: item.isThumbnail || false, // ✅ isThumbnail 플래그 전달
         ...(thumbnailText ? { thumbnailText } : {}),
-        allowText, // text is thumbnail-only in auto publish contexts
+        ...(item.isThumbnail === true && item.coverStyle ? { coverStyle: item.coverStyle } : {}),
+        ...(headingText ? { headingText } : {}),
+        allowText, // text is thumbnail-only in auto publish contexts, unless "소제목 글자 넣기" draws the heading
         englishPrompt: useContextualPrompt ? prompt : item.englishPrompt,
         sourceEnglishPrompt: item.sourceEnglishPrompt || item.englishPrompt,
         category: item.category || options.category || '', // ✅ [2026-02-12] options.category 폴백 → DeepInfra 카테고리별 스타일 적용

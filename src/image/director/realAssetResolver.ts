@@ -101,3 +101,14 @@ export function summarizeInventory(inventory: AssetInventory): string {
   const c = inventory.counts;
   return `사용자 ${c.USER_ASSET} · 수집(배치) ${c.SOURCE_ASSET} · 참고용 ${c.REFERENCE_ONLY} · AI ${c.AI_ASSET} · 표/배너 ${c.INFOGRAPHIC}`;
 }
+
+/**
+ * [2026-10-08 사장님] With an engine that draws the title poster itself, only photos the user put in
+ * themselves outrank it; photos from an automatic collection run give way to the AI poster.
+ */
+export function userPlacedComposable(inventory: AssetInventory): string[] {
+  return inventory.assets
+    .filter((asset) => asset.assetClass === 'USER_ASSET' && asset.composable)
+    .map((asset) => String(asset.entry.filePath || '').trim())
+    .filter((filePath) => inventory.composable.includes(filePath));
+}

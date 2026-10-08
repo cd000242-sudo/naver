@@ -22,6 +22,8 @@ export interface ThumbnailPlanFacts {
   readonly usedRealAsset: boolean;
   /** The cover shows an AI-made person standing in for a real, named person. */
   readonly aiDepictsRealPerson: boolean;
+  /** The engine drew the whole title as a poster (사장님 2026-10-08) — the title IS the text there. */
+  readonly posterTitle?: boolean;
 }
 
 export interface QualityReport {
@@ -32,7 +34,7 @@ export interface QualityReport {
 export function checkThumbnailPlan(facts: ThumbnailPlanFacts): QualityReport {
   const reasons: string[] = [];
   if (facts.width !== 800 || facts.height !== 800) reasons.push(`크기 ${facts.width}x${facts.height} — NAVER 기본 800x800 아님`);
-  if (facts.text) {
+  if (facts.text && facts.posterTitle !== true) {
     if (isFullTitleCopy(facts.text, facts.title)) reasons.push('제목 전체를 썸네일에 복사');
     else if (facts.text.replace(/\s/gu, '').length > THUMBNAIL_TEXT_MAX_CHARS * 2) reasons.push('썸네일 문구가 너무 김');
   }
