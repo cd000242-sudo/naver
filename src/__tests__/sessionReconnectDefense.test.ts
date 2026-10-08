@@ -77,6 +77,8 @@ describe('server inspection deadline', () => {
 
 it('explicit resume can open the editor from the home page when cross-origin inspection fails', async () => {
  const session=setup(); session.page.url.mockReturnValue('https://www.naver.com/');
+ session.page.goto.mockImplementation(async () => { session.page.url.mockReturnValue('https://blog.naver.com/test_account?Redirect=Write'); });
+ Object.assign(session.page, { frames: () => [{ url: () => session.page.url(), evaluate: vi.fn(async () => 'ready') }] });
  vi.spyOn(manager,'inspectServerSessionState').mockResolvedValueOnce({ok:false,status:'unavailable',reason:'probe-unavailable'}).mockResolvedValueOnce({ok:true,status:'ready',reason:'editor-ready'});
  expect((await manager.verifyAccountForUser('test_account')).status).toBe('ready');
  expect(session.page.goto).toHaveBeenCalledTimes(1);

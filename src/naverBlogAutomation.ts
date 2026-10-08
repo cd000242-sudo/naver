@@ -34,6 +34,7 @@ import { createGhostCursor, safeClick, safeType, safeClickInFrame, waitRandom, t
 import * as imageHelpers from './automation/imageHelpers';
 import * as publishHelpers from './automation/publishHelpers';
 import * as ctaHelpers from './automation/ctaHelpers';
+import { waitForInitialEditorReadiness, InitialEditorReadinessError, findReadyEditorFrame, EditorFrameProtectionError } from './automation/initialEditorReadiness.js';
 import { NAVER_TIMEOUTS, NAVER_WAIT_UNTIL } from './automation/timeouts';
 import * as editorHelpers from './automation/editorHelpers';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
@@ -2005,30 +2006,16 @@ export class NaverBlogAutomation {
       const destination = classifyBlogWriteNavigationUrl(page.url());
       if (destination.isLoginRedirect) throw new AccountExecutionGuardError('LOGIN_REQUIRED');
       if (!destination.isBlogDomain) throw new AccountExecutionGuardError('NETWORK_WAIT');
-      // An iframe element can exist before its editor document has loaded.
-      // Wait for usable editor DOM before the caller checks account identity.
-      await page.waitForSelector('#mainFrame, iframe[name="mainFrame"], .se-main-container', { timeout: 20000 });
-      await page.waitForFunction(() => {
-        if (['nid.naver.com', 'login.naver.com'].includes(location.hostname)) return true;
-        const docs: Document[] = [document];
-        for (const frame of Array.from(document.querySelectorAll('iframe'))) {
-          try { if (frame.contentDocument) docs.push(frame.contentDocument); } catch { /* Cross-origin frames provide no editor evidence. */ }
-        }
-        return docs.some(doc => {
-          const editorReady = !!doc.querySelector('.se-main-container')
-            && !!doc.querySelector('.se-documentTitle, .se-text-paragraph[contenteditable], .se-component-content[contenteditable]');
-          const blocked = !!doc.querySelector('input[name="captcha"], input#captcha')
-            || (!!doc.querySelector('input[type="password"]') && !!doc.querySelector('input[name="id"], input#id'))
-            || /보호조치가 적용|보호조치 해제|이용이 제한|자동입력 방지|보안문자를 입력|본인 확인이 필요/.test((doc.body?.textContent || '').slice(0, 12000));
-          return editorReady || blocked;
-        });
-      }, { timeout: 20000, polling: 250 });
+      // Cross-origin and nested editor documents must be inspected in their own frame contexts.
+      await waitForInitialEditorReadiness(page, { ensureNotCancelled: () => this.ensureNotCancelled() });
       this.ensureNotCancelled();
       if (isLoginChallengeUrl(page.url())) throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
       const readyDestination = classifyBlogWriteNavigationUrl(page.url());
       if (readyDestination.isLoginRedirect) throw new AccountExecutionGuardError('LOGIN_REQUIRED');
       if (!readyDestination.isBlogDomain) throw new AccountExecutionGuardError('NETWORK_WAIT');
     } catch (error) {
+      const detail = error instanceof InitialEditorReadinessError ? error.message : (error instanceof AccountExecutionGuardError ? error.code : 'navigation-or-readiness-error');
+      this.log(`⚠️ 글쓰기 화면 확인 실패: ${detail}`);
       const code = error instanceof AccountExecutionGuardError ? error.code : 'NETWORK_WAIT';
       getAccountExecutionGuard().pause(this.options.naverId, code === 'ACCOUNT_BUSY' ? 'NETWORK_WAIT' : code);
       throw error instanceof AccountExecutionGuardError ? error : new AccountExecutionGuardError('NETWORK_WAIT', '글쓰기 화면을 확인하지 못했습니다. 원고를 보존했으니 연결 상태를 확인해 주세요.');
@@ -2051,6 +2038,22 @@ export class NaverBlogAutomation {
       throw new AccountExecutionGuardError('LOGIN_REQUIRED');
     }
 
+    if (isLoginChallengeUrl(currentUrl)) {
+      getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_CHALLENGE');
+      throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
+    }
+    let frame: Frame | null;
+    try { frame = await findReadyEditorFrame(page); }
+    catch (error) {
+      if (error instanceof EditorFrameProtectionError) {
+        getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_CHALLENGE');
+        throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
+      }
+      getAccountExecutionGuard().pause(this.options.naverId, 'NETWORK_WAIT');
+      throw new AccountExecutionGuardError('NETWORK_WAIT', '글쓰기 입력 화면의 상태가 변경되어 작업을 중단했습니다. 원고를 보존했으니 화면을 확인한 뒤 재개해 주세요.');
+    }
+    this.ensureNotCancelled();
+    if (!frame) {
     // ✅ [2026-03-24 FIX] 블로그 글쓰기 페이지 검증 강화 — URL 패턴 + DOM 기반
     let frameSwitchSurface = resolveBlogWriteFrameSwitchSurface(currentUrl);
     let isOnEditorByUrl = frameSwitchSurface.isEditorSurface;
@@ -2225,9 +2228,11 @@ export class NaverBlogAutomation {
       );
     }
 
-    const frame = await frameHandle.contentFrame();
+    frame = await frameHandle.contentFrame();
     if (!frame) {
       throw new Error('메인 프레임으로 전환할 수 없습니다. iframe이 아직 로드되지 않았을 수 있습니다.');
+    }
+
     }
 
     // ✅ 프레임이 실제 콘텐츠를 로드할 때까지 잠시 대기
