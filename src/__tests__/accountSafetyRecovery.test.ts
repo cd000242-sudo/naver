@@ -21,7 +21,7 @@ function setup() {
   const journalDir = join(dir, 'journal');
   const guard = new AccountExecutionGuard({ storageDir: join(dir, 'guard') });
   const journal = new PublicationCommitJournal({ storageDir: journalDir });
-  const sessions = { setExpectedBlogId: vi.fn(), openForUser: vi.fn(async () => {}), inspectServerSessionState: vi.fn(async () => ({ status: 'ready' })), verifyAccountForUser: vi.fn(async () => ({ status: 'ready' })), resumeAccount: vi.fn(async (id: string) => guard.resume(id, async () => true)) };
+  const sessions = { setExpectedBlogId: vi.fn(), openForUser: vi.fn(async () => {}), inspectServerSessionState: vi.fn(async () => ({ status: 'ready' })), verifyAccountForUser: vi.fn(async () => ({ status: 'ready' })), ensureSessionForUser: vi.fn(async () => {}), openPostListForUser: vi.fn(async () => {}) };
   const controller = createAccountSafetyController(() => [{ id: 'app-id', naverId: 'login-id', blogId: 'login-id' }], sessions, guard, journal);
   return { controller, guard, journal, journalDir, sessions };
 }
@@ -68,7 +68,7 @@ describe('unreadable publication record', () => {
     const file = corrupt(journalDir, journal);
     const fresh = new PublicationCommitJournal({ storageDir: journalDir });
     const recovery = createAccountSafetyController(() => [{ id: 'app-id', naverId: 'login-id', blogId: 'login-id' }],
-      { setExpectedBlogId: vi.fn(), openForUser: vi.fn(async () => {}), inspectServerSessionState: vi.fn(async () => ({ status: 'ready' })), verifyAccountForUser: vi.fn(async () => ({ status: 'ready' })), resumeAccount: vi.fn(async (id: string) => guard.resume(id, async () => true)) },
+      { setExpectedBlogId: vi.fn(), openForUser: vi.fn(async () => {}), inspectServerSessionState: vi.fn(async () => ({ status: 'ready' })), verifyAccountForUser: vi.fn(async () => ({ status: 'ready' })), ensureSessionForUser: vi.fn(async () => {}), openPostListForUser: vi.fn(async () => {}) },
       guard, fresh);
     const state = recovery.status('app-id');
     expect(state.journalUnreadable).toBe(true);
@@ -103,7 +103,7 @@ describe('unreadable publication record', () => {
     fs.mkdirSync(join(journalDir, file)); // reading a directory fails with an I/O error (EISDIR), like a lock
     const locked = new PublicationCommitJournal({ storageDir: journalDir });
     const recovery = createAccountSafetyController(() => [{ id: 'app-id', naverId: 'login-id', blogId: 'login-id' }],
-      { setExpectedBlogId: vi.fn(), openForUser: vi.fn(async () => {}), inspectServerSessionState: vi.fn(async () => ({ status: 'ready' })), verifyAccountForUser: vi.fn(async () => ({ status: 'ready' })), resumeAccount: vi.fn(async (id: string) => guard.resume(id, async () => true)) },
+      { setExpectedBlogId: vi.fn(), openForUser: vi.fn(async () => {}), inspectServerSessionState: vi.fn(async () => ({ status: 'ready' })), verifyAccountForUser: vi.fn(async () => ({ status: 'ready' })), ensureSessionForUser: vi.fn(async () => {}), openPostListForUser: vi.fn(async () => {}) },
       guard, locked);
     const state = recovery.status('app-id');
     expect(state.journalUnreadable).toBe(true);
@@ -139,6 +139,6 @@ describe('run result after the publish click', () => {
     expect(ui).toContain("b.dataset.action === 'reset-journal' ? Boolean(state?.journalUnreadable)");
     expect(ui).toMatch(/action === 'reset-journal' && !window\.confirm\(/);
     const ipc = fs.readFileSync(path.resolve(__dirname, '..', 'main', 'ipc', 'accountHandlers.ts'), 'utf-8');
-    expect(ipc).toContain("['status', 'open', 'resume', 'confirm', 'reset-journal'].includes(action)");
+    expect(ipc).toContain("['status', 'open', 'open-posts', 'resume', 'confirm', 'reset-journal'].includes(action)");
   });
 });

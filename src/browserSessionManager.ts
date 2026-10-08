@@ -861,6 +861,35 @@ class BrowserSessionManager {
         });
     }
 
+    /**
+     * Explicit user action: make sure this account has a live browser to check. It never navigates, focuses or logs in.
+     * Right after an app restart no session exists and verifyAccountForUser answers "session-unavailable".
+     * Must run before guard.resume*, which holds the account busy while it verifies.
+     */
+    async ensureSessionForUser(accountId: string): Promise<void> {
+        accountId = this.resolveSessionAccountId(accountId);
+        return getAccountExecutionGuard().runUserActionExclusive(accountId, async () => {
+            const session = this.sessions.get(accountId);
+            if (session?.browser.connected && !session.page.isClosed()) return;
+            await this.getOrCreateSession(accountId, false, undefined, { userInitiated: true });
+        });
+    }
+
+    /** Explicit user action: show the blog's post list in this account's own browser; an open editor page stays untouched. */
+    async openPostListForUser(accountId: string, blogId: string): Promise<void> {
+        accountId = this.resolveSessionAccountId(accountId);
+        if (!/^[A-Za-z0-9_-]{1,100}$/.test(String(blogId))) throw new AccountExecutionGuardError('ACCOUNT_MISMATCH');
+        const url = `https://blog.naver.com/PostList.naver?blogId=${blogId}&categoryNo=0&from=postList`;
+        return getAccountExecutionGuard().runUserActionExclusive(accountId, async () => {
+            let session = this.sessions.get(accountId);
+            if (!session?.browser.connected || session.page.isClosed()) session = await this.getOrCreateSession(accountId, false, undefined, { userInitiated: true });
+            // Only a blank page is reused; a page that may hold a draft or a login screen is never navigated away.
+            const tab = session.page.url() === 'about:blank' ? session.page : await session.browser.newPage();
+            await tab.bringToFront();
+            await tab.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+        });
+    }
+
     async verifyAccountForUser(accountId: string): Promise<ServerSessionProbeVerdict> {
         accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);

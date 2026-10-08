@@ -546,6 +546,7 @@ try {
     //   수정: 정적 inline + 호출지점에서 동적 import 제거 (static import로 변경).
     'openaiImageGuard.js',
     'pipelineConfig.js',  // [Phase 7.1] 발행 파이프라인 설정 단일 해석처 (publishingHandlers/continuousPublishing/multiAccountManager보다 먼저 로드)
+    'accountPauseModal.js',  // [2026-10-09] 메인 화면 발행 중 계정 멈춤 안내 패널 (continuousPublishing/fullAutoFlow 가 import)
     'continuousPublishModeHelpers.js',  // ✅ 연속발행 publishMode 해석 헬퍼 (continuousPublishing보다 먼저 로드)
     'continuousPublishing.js',
     'thumbnailGenerator.js',

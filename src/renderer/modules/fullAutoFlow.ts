@@ -24,6 +24,7 @@ import {
     selectShoppingBodyHeadingSlotsForMode,
 } from '../../image/shoppingReferenceGeneration.js';
 import { reconcileOpenaiImageModelSelection } from '../../image/openaiImageModelReconcile.js';
+import { noteAccountPauseDispatch, showAccountPauseModal } from './accountPauseModal.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emitLog = emitLog;
 exports.resolveImageManagerKeys = resolveImageManagerKeys;
@@ -3913,6 +3914,8 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     showUnifiedProgress(95, '콘텐츠 발행 중...', '네이버 블로그에 콘텐츠를 업로드하고 있습니다.');
     window._publishAutomationDispatched = true;
     window._publishAutomationDispatchedAt = Date.now();
+    // [2026-10-09] Remember which post this attempt is, so an unknown-outcome stop can name it (accountPauseModal).
+    noteAccountPauseDispatch(naverId, structuredContent?.selectedTitle);
     appendLog('📤 네이버 로그인·발행 엔진으로 작업을 전달했습니다.');
     const apiResponse = await apiClient.call('runAutomation', [payload], {
         retryCount: 0,
@@ -3927,6 +3930,8 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
             responseKeys: Object.keys(apiResponse || {}),
         });
         if (blockPostContentAppliedPublishRetry(errorMsg)) {
+            // [2026-10-09] An account stop is cleared on the main screen itself, not only in the account-management cards.
+            void showAccountPauseModal(errorMsg, { naverId });
             throw new Error(errorMsg);
         }
         if (/CONTENT_POLICY_BLOCKED|BLOCK_FABRICATED_FACT/i.test(errorMsg) || isContentQualityV3TerminalError(errorMsg)) {
@@ -3958,6 +3963,8 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
             throw new Error(friendlyErrorMessage({ message: errorMsg }));
         }
         if (blockPostContentAppliedPublishRetry(errorMsg)) {
+            // [2026-10-09] An account stop is cleared on the main screen itself, not only in the account-management cards.
+            void showAccountPauseModal(errorMsg, { naverId });
             throw new Error(errorMsg);
         }
         const recoverablePublishRetryResult = await retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg);

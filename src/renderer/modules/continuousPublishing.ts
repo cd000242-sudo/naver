@@ -13,6 +13,7 @@ import {
 } from '../../image/shoppingReferenceGeneration.js';
 import { resolvePublishFloorSec, publishIntervalToFields, formatContinuousIntervalLabel, DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES } from '../../automation/publishIntervalPolicy.js';
 import { requiresAccountStop } from '../../automation/publishFailureClassifier.js';
+import { showAccountPauseModal } from './accountPauseModal.js';
 import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
 import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSlots.js';
 import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
@@ -5370,7 +5371,9 @@ async function startContinuousPublishingV2(): Promise<void> {
         delete (item as any)._publishStarted;
         failCount++;
         appendLog(`⏹️ 계정 확인이 필요해 연속발행을 멈춥니다: ${errMsg}`);
-        appendLog('ℹ️ 계정 관리에서 네이버 로그인·본인확인을 마친 뒤 [확인 후 재개]를 누르고 다시 시작하세요.');
+        appendLog('ℹ️ 화면에 열린 안내 창에서 네이버 로그인·본인확인을 마친 뒤 [확인 후 재개]를 누르고 다시 시작하세요.');
+        // Already shown by the publish step; the panel is idempotent, so this only covers a stop that surfaced elsewhere.
+        void showAccountPauseModal(error);
         updateContinuousProgressModal({ step: '계정 확인 필요 — 중단', log: errMsg, percentage: (currentIdx / totalCount) * 100 });
         stopContinuousMode('manual');
         break;
