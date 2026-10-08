@@ -9637,6 +9637,7 @@ async function executeUnifiedAutomation(formData: any): Promise<any> {
   // ✅ [v2.10.13] 발행 결과 마커 reset — 후처리 에러로 인한 잘못된 '실패' 토스트 차단용
   (window as any)._lastPublishOutcome = null;
   (window as any)._lastPipelineError = null;
+  (window as any)._lastPublishFailure = null; // what main reported for a failed publish (read by the continuous queue)
 
   try {
     const result = await withErrorHandling(async () => {

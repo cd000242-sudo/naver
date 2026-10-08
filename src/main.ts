@@ -192,7 +192,7 @@ import {
   acquireScheduledPublishQuota,
   type ScheduledPublishQuotaLease,
 } from './scheduler/scheduledPublishQuota.js';
-import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
+import { classifyPublishFailure, describeAccountStop, extractAccountStopCode, stopsAllAccounts } from './automation/publishFailureClassifier.js';
 import { isConcreteNaverBlogPostUrl } from './automation/publishOutcomeResolver.js';
 import { KeywordAnalyzer, type KeywordCompetition, type BlueOceanKeyword } from './analytics/keywordAnalyzer.js';
 // ✅ [v2.10.36] BestProductCollector main.ts 미사용 — 다른 파일이 자체 인스턴스 생성
@@ -259,6 +259,7 @@ import {
   createPublishedScheduledPostState,
   createFailedScheduledPostState,
   createPublishingScheduledPostState,
+  createScheduledPublishError,
   resolveScheduledPostStateAfterError,
   type ScheduledPost,
 } from './scheduledPostsManager.js';
@@ -2022,7 +2023,7 @@ smartScheduler.setPublishCallback(async (post) => {
     );
     
     if (!runResult.success) {
-      throw new Error('SCHEDULED_PUBLISH_FAILED: SmartScheduler publish did not succeed');
+      throw createScheduledPublishError(runResult);
     }
 
     const publishedUrl = requireConcreteNaverPostUrl(resolvePublishedUrl(
@@ -5402,7 +5403,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
     sendLog(`🚀 다중계정 동시발행 시작: ${accountIds.length}개 계정`);
 
-    const results: Array<{ accountId: string; success: boolean; message?: string; url?: string; failureCode?: string }> = [];
+    const results: Array<{ accountId: string; success: boolean; message?: string; url?: string; failureCode?: string; refusedBeforeStart?: boolean }> = [];
 
     // ✅ [2026-01-20] 순차 예약 시간 계산을 위한 기준값
     let baseScheduleDate = options?.scheduleDate;
@@ -6128,6 +6129,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           message: result.message,
           url: result.url,
           failureCode,
+          // The guard refused the job before any browser opened: the caller must not read it as an unknown outcome.
+          ...((result as any).refusedBeforeStart === true ? { refusedBeforeStart: true } : {}),
         });
 
         if (result.success) {
@@ -6135,21 +6138,26 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           sendLog(`✅ [${account.name}] 발행 성공: ${result.url || '완료'}`);
         } else {
           sendLog(`❌ [${account.name}] 발행 실패: ${result.message}`);
-          if (['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'].includes(failureCode)) {
-            sendLog('⏹️ 계정 상태 확인이 필요하여 전체 대기열을 중단합니다. 다른 계정으로 이어서 발행하지 않습니다.');
+          const stopCode = extractAccountStopCode({ code: failureCode });
+          if (stopsAllAccounts({ code: failureCode })) {
+            sendLog('⏹️ 보호조치·본인확인이 감지되어 전체 대기열을 중단합니다. 다른 계정으로 이어서 발행하지 않습니다.');
             break; // finally still refunds the quota and releases the handoff owner.
           }
+          // One account is stopped (login, connection, wrong account, unknown outcome): only that account is skipped.
+          if (stopCode) sendLog(`⏭️ ${describeAccountStop(stopCode, account.name)} 이 계정만 건너뛰고 다음 계정을 이어서 발행합니다.`);
         }
 
       } catch (error) {
         const errorMsg = (error as Error).message;
         const failureCode = classifyPublishFailure(error).code;
-        results.push({ accountId, success: false, message: errorMsg, failureCode });
+        results.push({ accountId, success: false, message: errorMsg, failureCode, ...((error as any)?.refusedBeforeStart === true ? { refusedBeforeStart: true } : {}) });
         sendLog(`❌ [${account.name}] 발행 오류: ${errorMsg}`);
-        if (['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'].includes(failureCode)) {
-          sendLog('⏹️ 계정 상태 확인이 필요하여 전체 대기열을 중단합니다.');
+        const stopCode = extractAccountStopCode({ code: failureCode });
+        if (stopsAllAccounts({ code: failureCode })) {
+          sendLog('⏹️ 보호조치·본인확인이 감지되어 전체 대기열을 중단합니다.');
           break;
         }
+        if (stopCode) sendLog(`⏭️ ${describeAccountStop(stopCode, account.name)} 이 계정만 건너뛰고 다음 계정을 이어서 발행합니다.`);
       } finally {
         try {
           await accountQuotaLease?.rollback();
@@ -9969,7 +9977,7 @@ app.whenReady().then(async () => {
               );
 
               if (!automationResult.success) {
-                throw new Error('SCHEDULED_PUBLISH_FAILED: automation did not report success');
+                throw createScheduledPublishError(automationResult);
               }
 
               // ✅ 발행된 글 URL 가져오기 (실제 발행 URL 우선, 없을 때만 블로그 홈 fallback)

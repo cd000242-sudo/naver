@@ -48,11 +48,11 @@ describe('continuous publishing queue', () => {
 });
 
 describe('sequential multi-account publishing', () => {
-  it('stops instead of opening the next account after a paused one', () => {
+  it('stops instead of opening the next account after a challenge or protection notice (other stops skip only that account)', () => {
     const source = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
-    expect(source).toContain("import { requiresAccountStop } from '../../automation/publishFailureClassifier.js';");
-    expect(source).toMatch(/if \(requiresAccountStop\(\{ code: accountResult\?\.failureCode, message: accountMessage \}\)\) \{[\s\S]{0,200}?break;/);
-    expect(source).toMatch(/catch \(error\) \{[\s\S]{0,200}?if \(requiresAccountStop\(error\)\) \{[\s\S]{0,200}?break;/);
+    expect(source).toMatch(/import \{[^}]*requiresAccountStop[^}]*stopsAllAccounts[^}]*\} from '\.\.\/\.\.\/automation\/publishFailureClassifier\.js';/);
+    expect(source).toMatch(/if \(stopsAllAccounts\(accountStop\)\) \{[\s\S]{0,300}?break;/);
+    expect(source).toMatch(/catch \(error\) \{[\s\S]{0,200}?if \(stopsAllAccounts\(error\)\) \{[\s\S]{0,200}?break;/);
   });
 
   it('reads the account result, not only the run flag (main returns success: true even when the account failed)', () => {

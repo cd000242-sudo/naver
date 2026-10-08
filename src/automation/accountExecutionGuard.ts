@@ -10,10 +10,16 @@ type StoredState = Omit<AccountExecutionStatus, 'busy' | 'storageError'> & { sch
 export class AccountExecutionGuardError extends Error {
   readonly retryable = false;
   readonly userActionRequired: boolean;
-  constructor(readonly code: AccountPauseCode | 'ACCOUNT_BUSY', message?: string) {
+  /**
+   * True when the guard refused the job at admission (account paused or busy): no browser was opened and nothing
+   * reached Naver, so the caller may treat the post as not started instead of as an unknown outcome.
+   */
+  readonly refusedBeforeStart: boolean;
+  constructor(readonly code: AccountPauseCode | 'ACCOUNT_BUSY', message?: string, refusedBeforeStart = code === 'ACCOUNT_BUSY') {
     super(`[${code}] ${message || (code === 'ACCOUNT_BUSY' ? '이 계정의 작업이 이미 실행 중입니다.' : '계정 작업이 중단되었습니다. 계정 관리에서 상태 확인 후 직접 재개해 주세요.')}`);
     this.name = 'AccountExecutionGuardError';
     this.userActionRequired = code !== 'ACCOUNT_BUSY';
+    this.refusedBeforeStart = refusedBeforeStart;
   }
 }
 
@@ -103,7 +109,8 @@ export class AccountExecutionGuard {
   }
   async runExclusive<T>(accountId: string, operation: () => Promise<T>): Promise<T> {
     const key = this.key(accountId);
-    this.assertAllowed(accountId);
+    const admission = this.getStatus(accountId);
+    if (admission.paused) throw new AccountExecutionGuardError(admission.code!, undefined, true);
     if (this.busy.has(key)) throw new AccountExecutionGuardError('ACCOUNT_BUSY');
     this.busy.add(key);
     try { return await operation(); } finally { this.busy.delete(key); }

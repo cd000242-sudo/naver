@@ -35,19 +35,122 @@ function includesAny(value: string, patterns: readonly string[]): boolean {
   return patterns.some((pattern) => normalized.includes(pattern.toLowerCase()));
 }
 
-const ACCOUNT_STOP_FAILURE_CODES: readonly PublishFailureCode[] = ['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'];
+const ACCOUNT_STOP_FAILURE_CODES = ['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'] as const;
+export type AccountStopCode = typeof ACCOUNT_STOP_FAILURE_CODES[number];
+/** A challenge or protection notice on one account says the PC/IP itself is flagged: nothing else may run on it. */
+const ALL_ACCOUNT_STOP_CODES: readonly AccountStopCode[] = ['LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED'];
+
+/**
+ * The explicit account-stop code carried by an error/result (its `code`, or "[CODE]" carried through IPC).
+ * Text heuristics are deliberately not used: they would also stop on unrelated messages such as an AI agent's "로그인 필요".
+ */
+export function extractAccountStopCode(input: unknown): AccountStopCode | undefined {
+  const code = input && typeof input === 'object' ? (input as { code?: unknown }).code : undefined;
+  if (typeof code === 'string' && (ACCOUNT_STOP_FAILURE_CODES as readonly string[]).includes(code)) return code as AccountStopCode;
+  return /\[(LOGIN_REQUIRED|LOGIN_CHALLENGE|ACCOUNT_PROTECTED|NETWORK_WAIT|ACCOUNT_MISMATCH|PUBLISH_OUTCOME_UNKNOWN)\]/.exec(toMessage(input))?.[1] as AccountStopCode | undefined;
+}
 
 /**
  * The failure paused the account (login, challenge, protection, connection, wrong account, unknown publish outcome).
  * Running the next post or account would only repeat it — and spend content generation on a post that cannot publish.
- * Only an explicit code counts (the error's `code`, or "[CODE]" carried through IPC). The text heuristics below
- * would also stop on unrelated messages such as an AI agent's "로그인 필요".
  */
 export function requiresAccountStop(input: unknown): boolean {
-  const code = input && typeof input === 'object' ? (input as { code?: unknown }).code : undefined;
-  if (typeof code === 'string' && ACCOUNT_STOP_FAILURE_CODES.includes(code as PublishFailureCode)) return true;
-  const serialized = /\[(LOGIN_REQUIRED|LOGIN_CHALLENGE|ACCOUNT_PROTECTED|NETWORK_WAIT|ACCOUNT_MISMATCH|PUBLISH_OUTCOME_UNKNOWN)\]/.exec(toMessage(input))?.[1];
-  return Boolean(serialized);
+  return extractAccountStopCode(input) !== undefined;
+}
+
+/** The stop must also halt every other account/queue on this PC (challenge or protection), not just this account. */
+export function stopsAllAccounts(input: unknown): boolean {
+  const code = extractAccountStopCode(input);
+  return code !== undefined && ALL_ACCOUNT_STOP_CODES.includes(code);
+}
+
+const ACCOUNT_STOP_REASONS: Record<AccountStopCode, string> = {
+  LOGIN_REQUIRED: '네이버 로그인이 필요합니다',
+  LOGIN_CHALLENGE: '네이버가 본인확인(보안 인증)을 요구합니다',
+  ACCOUNT_PROTECTED: '네이버 보호조치가 감지되었습니다',
+  NETWORK_WAIT: '연결 또는 글쓰기 화면 확인이 필요합니다',
+  ACCOUNT_MISMATCH: '선택한 계정과 로그인된 계정이 다릅니다',
+  PUBLISH_OUTCOME_UNKNOWN: '이전 글의 발행 결과 확인이 필요합니다',
+};
+
+/** One Korean line that names the account and the reason; keeps "[CODE]" so the text alone still reads as a stop. */
+export function describeAccountStop(code: AccountStopCode, accountId?: string): string {
+  const who = accountId && accountId.trim() ? `네이버 계정 "${accountId.trim()}"` : '네이버 계정';
+  return `[${code}] ${who} 작업이 중단되었습니다 — ${ACCOUNT_STOP_REASONS[code]}. 계정 관리에서 확인한 뒤 [확인 후 재개]를 눌러 주세요.`;
+}
+
+type AccountSafetyApi = (accountId: string, action: string) => Promise<unknown>;
+export interface PausedQueueAccount { accountId: string; accountName: string; code: AccountStopCode; label: string }
+
+/**
+ * Whether main has this account stopped right now (account:safety 'status'). null when it is not stopped or cannot be
+ * read: main still refuses a paused account at admission, so an unreadable state must not block the queue.
+ */
+export async function readAccountPause(
+  accountSafety: AccountSafetyApi | undefined,
+  accountId: string,
+): Promise<{ code: AccountStopCode; label: string } | null> {
+  if (typeof accountSafety !== 'function') return null;
+  try {
+    const reply = await accountSafety(accountId, 'status') as { success?: boolean; state?: { paused?: boolean; code?: string; label?: string; journalUnreadable?: boolean } } | undefined;
+    const state = reply?.success === true ? reply.state : undefined;
+    if (!state) return null;
+    // An unreadable publication record stops the next run exactly like an unconfirmed publication.
+    const code = extractAccountStopCode({ code: state.paused ? state.code : (state.journalUnreadable ? 'PUBLISH_OUTCOME_UNKNOWN' : undefined) });
+    return code ? { code, label: String(state.label || ACCOUNT_STOP_REASONS[code]) } : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Every distinct queued account that is stopped right now, in queue order. */
+export async function findPausedQueueAccounts(
+  accountSafety: AccountSafetyApi | undefined,
+  items: ReadonlyArray<{ accountId: string; accountName?: string }>,
+): Promise<PausedQueueAccount[]> {
+  const found: PausedQueueAccount[] = [];
+  const seen = new Set<string>();
+  for (const item of items) {
+    if (!item?.accountId || seen.has(item.accountId)) continue;
+    seen.add(item.accountId);
+    const pause = await readAccountPause(accountSafety, item.accountId);
+    if (pause) found.push({ accountId: item.accountId, accountName: item.accountName || item.accountId, ...pause });
+  }
+  return found;
+}
+
+/** What the renderer remembers about the last failed publish call (the flow error itself is swallowed upstream). */
+export interface PublishFailureReport {
+  code: string;
+  message: string;
+  /** Main refused the job at admission: no browser opened, nothing reached Naver. */
+  refusedBeforeStart: boolean;
+  accountId?: string;
+}
+
+/**
+ * @param firstAttempt false for a rerun after an earlier attempt of the same post was dispatched: a refusal of the
+ *   rerun must not turn the earlier, possibly published, attempt into "not started".
+ */
+export function buildPublishFailureReport(
+  input: { message?: unknown; failureCode?: unknown; refusedBeforeStart?: unknown },
+  accountId: string | undefined,
+  firstAttempt: boolean,
+): PublishFailureReport {
+  const message = String(input?.message || '').trim() || '블로그 발행 실패';
+  const explicit = typeof input?.failureCode === 'string' ? input.failureCode : '';
+  const code = extractAccountStopCode({ code: explicit, message }) || explicit || 'UNKNOWN';
+  return { code, message, refusedBeforeStart: firstAttempt && input?.refusedBeforeStart === true, ...(accountId ? { accountId } : {}) };
+}
+
+/** The error the continuous queue throws when a publish was not confirmed; carries the code the queue acts on. */
+export function createQueuePublishError(failure: PublishFailureReport | null | undefined): Error {
+  const stopCode = extractAccountStopCode(failure);
+  const error = new Error(stopCode
+    ? describeAccountStop(stopCode, failure?.accountId)
+    : '발행 완료가 확인되지 않았습니다 (발행 결과 미확인). 작성중/임시저장/블로그홈 상태를 완료로 처리하지 않습니다.');
+  if (failure?.code) Object.assign(error, { code: failure.code, refusedBeforeStart: failure.refusedBeforeStart === true });
+  return error;
 }
 
 export function classifyPublishFailure(input: unknown): PublishFailureClassification {
