@@ -164,7 +164,8 @@ import {
   normalizeGeneratedPostCategoryKey, getGeneratedPostCategoryLabel,
   isGeneratedPostCategoryCollapsed, setGeneratedPostCategoryCollapsed,
 } from './modules/postManager.js';
-import { createLdbDraftReceiver } from './modules/ldbDraftImport.js';
+import { createLdbDraftReceiver, createLdbDraftUiReadyGate } from './modules/ldbDraftImport.js';
+const ldbDraftUiReady = createLdbDraftUiReadyGate();
 import { revealLdbDraft } from './modules/ldbHandoffPresentation.js';
 // ✅ [2026-01-25 모듈화] 오류 처리 시스템
 import {
@@ -873,6 +874,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (ldbApi?.onLdbPosts && !(window as any).__ldbPostsBound) {
     (window as any).__ldbPostsBound = true;
     ldbApi.onLdbPosts(createLdbDraftReceiver({
+      waitUntilReady: ldbDraftUiReady.waitUntilReady,
       applyDestination: (destination) => applyLdbDestination(destination, document, window as any),
       verifyDestination: (destination) => verifyLdbDestination(destination, document),
       read: () => loadGeneratedPosts(),
@@ -3374,6 +3376,7 @@ async function initializeApplication(): Promise<void> {
   initUnifiedImageEventHandlers(); _perfMark('initUnifiedImageEventHandlers'); await _yieldIfNeeded();
   initShoppingConnectObserver(); _perfMark('initShoppingConnectObserver'); await _yieldIfNeeded();
   initShoppingConnectCTA(); _perfMark('initShoppingConnectCTA');
+  ldbDraftUiReady.markReady();
   _perfMark('═══ 모든 동기 init 완료 ═══');
 
   // ✅ [v2.10.94] 글 목록 강제 재로드 — initUnifiedTab의 첫 호출이 _yieldIfNeeded
@@ -6349,6 +6352,8 @@ URL: ${firstUrl}
 
           // 현재 세팅을 이 항목의 세팅으로 설정
           (window as any).currentStructuredContent = item.structuredContent;
+          // The publish handler reads the visible editor; explicitly load each queued draft.
+          fillSemiAutoFields(item.structuredContent, { persist: false, scroll: false });
           (window as any).generatedImages = item.generatedImages;
           (window as any).imageManagementGeneratedImages = item.generatedImages;
 
@@ -8294,6 +8299,7 @@ function resetAllFields(): void {
 
 // ✅ [New] 편집 필드와 통합 미리보기 실시간 동기화 함수
 function syncIntegratedPreviewFromInputs(): void {
+  (window as any).updatePublishButtonVisibility?.();
   const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement;
   const contentArea = document.getElementById('unified-generated-content') as HTMLTextAreaElement;
   const hashtagsInput = document.getElementById('unified-generated-hashtags') as HTMLInputElement;

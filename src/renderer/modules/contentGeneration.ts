@@ -284,6 +284,7 @@ export function clearSemiAutoFieldsBeforeGeneration(): void {
       HTMLInputElement | HTMLTextAreaElement | null;
     if (el) el.value = '';
   }
+  (window as any).updatePublishButtonVisibility?.();
 }
 
 function cleanKeywordFromTitle(keyword: string, title: string): string {

@@ -14,6 +14,13 @@ export function resolvePublishAutomationMode(value: unknown): 'full-auto' | 'sem
   return value === 'full-auto' ? 'full-auto' : 'semi-auto';
 }
 
+// Visible edits are authoritative, including an intentionally cleared field.
+export function readSemiAutoEditorDraft(): { title: string; content: string; ready: boolean } {
+  const title = (document.getElementById('unified-generated-title') as HTMLInputElement | null)?.value.trim() || '';
+  const content = (document.getElementById('unified-generated-content') as HTMLTextAreaElement | null)?.value.trim() || '';
+  return { title, content, ready: Boolean(title && content) };
+}
+
 // [NAVER FULL AUTO] Same inline bundle scope (pipelineConfig).
 declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): any;
 declare function resolveFullAutoImagePolicyFromPipeline(config: any, overrides?: any): any;
@@ -396,12 +403,10 @@ export function initContentModeHelpAndSmartPublish() {
   // 초기 상태 설정
   setTimeout(updateAffiliateModeState, 500);
 
-  // ✅ 스마트 발행 버튼 가시성 관리 (발행 모드 상단 선택 연동)
-  let hasGeneratedContent = false;
-
   // ✅ 핵심 함수: 발행 모드에 따라 글 생성/발행 버튼 상태 일괄 제어
   function syncPublishMode(requestedMode: 'full-auto' | 'semi-auto'): void {
     const mode = resolvePublishAutomationMode(requestedMode);
+    const hasGeneratedContent = readSemiAutoEditorDraft().ready;
     const topSelect = document.getElementById('publish-mode-top-select') as HTMLSelectElement;
     const bottomSelect = document.getElementById('publish-mode-select') as HTMLSelectElement;
     const topDesc = document.getElementById('publish-mode-top-desc');
@@ -492,15 +497,15 @@ export function initContentModeHelpAndSmartPublish() {
           publishBtn.style.cursor = 'not-allowed';
           publishBtn.style.background = 'linear-gradient(135deg, #6b7280, #4b5563)';
           publishBtn.style.boxShadow = 'none';
-          if (publishBtnText) publishBtnText.textContent = '⏳ 먼저 글을 생성하거나 가져오세요';
+          if (publishBtnText) publishBtnText.textContent = '⏳ 제목과 본문을 입력하거나 가져오세요';
         }
       }
       if (publishBtnIcon) publishBtnIcon.textContent = hasGeneratedContent ? '📤' : '⏳';
 
       // 설명 텍스트
       if (topDesc) topDesc.textContent = hasGeneratedContent
-        ? '✅ 글이 생성되었습니다! 미리보기 확인 후 발행하세요.'
-        : '💡 글을 생성하거나 가져온 후, 확인하고 발행합니다.';
+        ? '✅ 원고가 준비되었습니다! 미리보기 확인 후 발행하세요.'
+        : '💡 제목과 본문을 입력하거나 가져온 후, 확인하고 발행합니다.';
       // 상단 섹션 색상
       if (topSection) topSection.style.borderColor = hasGeneratedContent
         ? 'rgba(245, 158, 11, 0.4)'
@@ -510,11 +515,18 @@ export function initContentModeHelpAndSmartPublish() {
     if (bottomDesc) bottomDesc.textContent = mode === 'full-auto'
       ? '💡 URL/키워드 입력 → 글 작성 → 발행 자동!'
       : '💡 글과 이미지를 확인한 후 반자동으로 발행합니다.';
+    // Completion hides Stop before refreshing; the lexical running flag clears later.
+    if (document.getElementById('unified-stop-btn')?.style.display === 'flex') {
+      if (publishBtn) publishBtn.disabled = true;
+      if (bottomDesc) bottomDesc.textContent = '⏳ 작업 진행 중... 중지하려면 버튼을 클릭하세요';
+    }
     console.log(`[SyncPublishMode] 모드 변경: ${mode}, 글 생성됨: ${hasGeneratedContent}`);
   }
 
   // 기존 호환성을 위한 updatePublishButtonVisibility (syncPublishMode 위임)
   function updatePublishButtonVisibility(): void {
+    const draft = readSemiAutoEditorDraft();
+    const hasPreviewContent = Boolean(draft.title || draft.content);
     const topSelect = document.getElementById('publish-mode-top-select') as HTMLSelectElement;
     const mode = resolvePublishAutomationMode(topSelect?.value);
     syncPublishMode(mode);
@@ -524,7 +536,7 @@ export function initContentModeHelpAndSmartPublish() {
     const semiAutoSection = document.getElementById('unified-semi-auto-section');
     const postsListContent = document.getElementById('posts-list-content');
 
-    if (hasGeneratedContent) {
+    if (hasPreviewContent) {
       if (previewSection) previewSection.style.display = 'block';
       if (semiAutoSection) semiAutoSection.style.display = 'block';
     } else {
@@ -559,6 +571,7 @@ export function initContentModeHelpAndSmartPublish() {
 
   // 통합 발행 버튼 클릭 핸들러
   document.getElementById('unified-publish-btn')?.addEventListener('click', () => {
+    if (document.getElementById('unified-stop-btn')?.style.display === 'flex') return;
     const topSelect = document.getElementById('publish-mode-top-select') as HTMLSelectElement;
     const mode = resolvePublishAutomationMode(topSelect?.value);
 
@@ -567,6 +580,10 @@ export function initContentModeHelpAndSmartPublish() {
       document.getElementById('full-auto-publish-btn')?.click();
     } else {
       // 반자동 발행 실행
+      if (!readSemiAutoEditorDraft().ready) {
+        updatePublishButtonVisibility();
+        return;
+      }
       document.getElementById('semi-auto-publish-btn')?.click();
     }
   });
@@ -582,49 +599,20 @@ export function initContentModeHelpAndSmartPublish() {
 
   // 콘텐츠 생성 완료 감지
   function markContentGenerated(): void {
-    hasGeneratedContent = true;
     updatePublishButtonVisibility();
-    console.log('[SmartPublish] Content generated - 반자동 모드 발행 버튼 활성화');
   }
 
   function markContentCleared(): void {
-    hasGeneratedContent = false;
     updatePublishButtonVisibility();
-    console.log('[SmartPublish] Content cleared - 상태 초기화');
   }
 
-  // 글 생성 버튼 클릭 시 콘텐츠 생성됨으로 마킹
-  document.getElementById('generate-from-url-btn')?.addEventListener('click', () => {
-    markContentGenerated();
-  });
-
-  document.getElementById('generate-manual-btn')?.addEventListener('click', () => {
-    markContentGenerated();
-  });
-
-  // 백업 불러오기 시 콘텐츠 생성됨으로 마킹
-  document.getElementById('load-backup-btn')?.addEventListener('click', () => {
-    setTimeout(markContentGenerated, 1000);
-  });
-
-  // 글 목록에서 불러오기 시 콘텐츠 생성됨으로 마킹 (이벤트 위임 사용)
-  const postsListContainer = document.getElementById('generated-posts-list');
-  if (postsListContainer) {
-    postsListContainer.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement;
-      // "불러오기" 버튼 클릭 감지 (클래스 또는 텍스트로)
-      if (target.classList.contains('load-post-btn') ||
-        target.closest('.load-post-btn') ||
-        target.textContent?.includes('불러오기')) {
-        setTimeout(markContentGenerated, 500);
-      }
-    });
+  // Native edits and pastes update readiness independently of generated/cache state.
+  for (const id of ['unified-generated-title', 'unified-generated-content']) {
+    const field = document.getElementById(id);
+    field?.addEventListener('input', updatePublishButtonVisibility);
+    field?.addEventListener('change', updatePublishButtonVisibility);
+    field?.addEventListener('paste', () => setTimeout(updatePublishButtonVisibility, 0));
   }
-
-  // 전체 초기화 버튼 클릭 시 콘텐츠 클리어
-  document.getElementById('global-refresh-btn')?.addEventListener('click', () => {
-    setTimeout(markContentCleared, 500);
-  });
 
   // 초기 상태 설정
   setTimeout(() => {
@@ -640,8 +628,11 @@ export function initContentModeHelpAndSmartPublish() {
   // 전역 함수로 노출 (다른 곳에서도 사용 가능)
   (window as any).markContentGenerated = markContentGenerated;
   (window as any).markContentCleared = markContentCleared;
+  (window as any).updatePublishButtonVisibility = updatePublishButtonVisibility;
   (window as any).updateAffiliateModeState = updateAffiliateModeState;
   (window as any).syncPublishMode = syncPublishMode;
+
+  updatePublishButtonVisibility();
 
   console.log('[ContentModeHelp] Content mode help modal and smart publish buttons initialized');
 }

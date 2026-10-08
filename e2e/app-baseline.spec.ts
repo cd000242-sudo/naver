@@ -76,7 +76,13 @@ test('fresh app defaults to semi-auto and keeps an explicit mode through stop/re
   await expect(mainWindow.locator('#generate-manual-btn')).toBeEnabled();
   await expect(publish).toBeDisabled();
   const publicationDisposition = await mainWindow.locator('#unified-publish-mode').inputValue();
-  await mainWindow.evaluate(() => (window as any).markContentGenerated());
+  await mainWindow.evaluate(() => {
+    for (const [id, value] of [['unified-generated-title', '준비된 원고 제목'], ['unified-generated-content', '직접 입력한 원고 본문입니다.']]) {
+      const field = document.getElementById(id) as HTMLInputElement;
+      field.value = value;
+      field.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  });
   await expect(publish).toBeEnabled();
   await expect(publish).toContainText('반자동 발행');
   await mainWindow.evaluate(() => { (window as any).showStopButton(); (window as any).hideStopButton(); });
@@ -84,7 +90,7 @@ test('fresh app defaults to semi-auto and keeps an explicit mode through stop/re
   await expect(mainWindow.locator('#publish-mode-desc')).toContainText('반자동');
   // Changing settings does not click any generation or publication command.
   await top.selectOption('full-auto');
-  await mainWindow.evaluate(() => { (window as any).showStopButton(); (window as any).hideStopButton(); (window as any).markContentCleared(); });
+  await mainWindow.evaluate(() => { (window as any).showStopButton(); (window as any).hideStopButton(); (window as any).resetAllFields(); });
   await expect(bottom).toHaveValue('full-auto');
   await expect(publish).toContainText('풀오토');
   await top.selectOption('semi-auto');
