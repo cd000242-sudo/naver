@@ -592,6 +592,11 @@ export async function executePublishing(
             skipImages: payload.skipImages,
             // ✅ [2026-05-25 v2.10.355] 반자동 모드 시 봇 감지 백오프 우회 (payload.skipBotBackoff → automation.run runOptions)
             skipBotBackoff: (payload as any).skipBotBackoff === true,
+            // [2026-10-08 사장님] Only a semi-auto publish the user pressed may re-check a stale account stop
+            //   itself (automation/userRunResume). App schedules and automatic queues keep stopping.
+            resumeOnUserRun: (payload as any)._publishFlow === 'semi_auto'
+                && (payload as any)._userPressedPublish === true
+                && !(payload.publishMode === 'schedule' && (payload as any).scheduleType === 'app-schedule'),
             // ✅ [2026-02-08 FIX] scheduleDate + scheduleTime 합성 (네이버 예약발행 'YYYY-MM-DD HH:mm' 형식 필수)
             scheduleDate: (() => {
                 if (payload.publishMode === 'schedule' && payload.scheduleDate) {

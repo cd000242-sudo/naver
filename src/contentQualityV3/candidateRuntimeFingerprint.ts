@@ -133,6 +133,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/timeouts.ts',
   'src/automation/typingFallbackPlan.ts',
   'src/automation/typingUtils.ts',
+  'src/automation/userRunResume.ts',
   'src/browserSessionManager.ts',
   'src/browserUtils.ts',
   'src/configManager.ts',

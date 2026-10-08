@@ -3902,6 +3902,9 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
             ? 'semi_auto'
             : (window.isContinuousMode === true ? 'continuous' : 'full_auto'),
         _semiAutoMode: formData._semiAutoMode === true,
+        // [2026-10-08] A person pressed the semi-auto publish button (never the continuous queue): main may
+        //   re-check a stale account stop by itself instead of answering with a bare stop (userRunResume).
+        _userPressedPublish: formData._semiAutoMode === true && window.isContinuousMode !== true,
         skipBotBackoff: formData._semiAutoMode === true,
     };
     emitRendererPublishTailDebug('renderer-payload-before-runAutomation', payload, {

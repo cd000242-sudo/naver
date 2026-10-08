@@ -3,6 +3,7 @@ import puppeteer from 'puppeteer-extra';
 import { randomUUID } from 'node:crypto';
 import { getPublicationCommitJournal } from './automation/publicationCommitJournal.js';
 import { getAccountExecutionGuard, AccountExecutionGuardError, ACCOUNT_PAUSE_CODES, type AccountPauseCode } from './automation/accountExecutionGuard.js';
+import { explainUserRunStop, resumePausedAccountForUserRun, type UserRunResumeDeps } from './automation/userRunResume.js';
 import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
 // ✅ [2026-05-25 v2.10.357] StealthPlugin import 제거 — browserSessionManager.ts에서 단일 등록
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
@@ -323,6 +324,8 @@ export interface AutomationOptions {
 export type PublishMode = 'draft' | 'publish' | 'schedule';
 
 export interface RunOptions {
+  /** [2026-10-08] Semi-auto publish pressed by the user: re-check a LOGIN_REQUIRED/NETWORK_WAIT stop first. */
+  resumeOnUserRun?: boolean;
   title?: string;
   content?: string;
   lines?: number;
@@ -6780,7 +6783,37 @@ export class NaverBlogAutomation {
   }
 
   async run(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string }> {
-    return this.withAccountExecution(() => this.runAccountInternal(runOptions));
+    // [2026-10-08 사장님] A semi-auto publish the user pressed re-checks a stale stop itself (automation/userRunResume).
+    if (runOptions.resumeOnUserRun !== true) return this.withAccountExecution(() => this.runAccountInternal(runOptions));
+    const deps = this.userRunResumeDeps();
+    await resumePausedAccountForUserRun(deps);
+    try {
+      return await this.withAccountExecution(() => this.runAccountInternal(runOptions));
+    } catch (error) {
+      throw await explainUserRunStop(error, deps);
+    }
+  }
+
+  private userRunResumeDeps(): UserRunResumeDeps {
+    const id = this.options.naverId;
+    const guard = getAccountExecutionGuard();
+    return {
+      status: () => guard.getStatus(id),
+      hasUnconfirmedPublication: () => getPublicationCommitJournal().hasUnconfirmed(id),
+      openSession: async () => {
+        const session = await browserSessionManager.getOrCreateSession(id, this.options.headless ?? false, this.options.accountProxyUrl, { userInitiated: true });
+        // The check below loads the editor: register the stealth supplements first, exactly as a normal run
+        // does before its first navigation (setupBrowser reuses this same page afterwards).
+        this.browser = session.browser;
+        this.page = session.page;
+        await this.setupStealthSupplements().catch(() => undefined);
+      },
+      resume: (verify) => guard.resume(id, verify),
+      verify: () => browserSessionManager.verifyAccountForUser(id),
+      showLogin: () => browserSessionManager.openForUser(id),
+      pause: (code) => { guard.pause(id, code); },
+      log: (message) => this.log(message),
+    };
   }
 
   private accountWorkId = '';
