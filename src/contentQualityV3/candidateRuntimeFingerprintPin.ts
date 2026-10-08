@@ -68,4 +68,4 @@
 // [2026-10-08] v2.11.321 — 전용 다운로드 폴더의 실제 이미지 파일을 검증해 수신하고
 //   손상된 앱 이미지 복사본을 원자적으로 복구한다. 관련 이미지 수신 모듈을 지문 목록에 포함했다.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '19e978de87dab2dafdbae66688d7510391be52baaa8af19b86c09cf79c34a34f' as const;
+  'b410bacc9a5130bcbfe879b9d07c553a07a5f59b71a6bfab02bdd7bc98912146' as const;
