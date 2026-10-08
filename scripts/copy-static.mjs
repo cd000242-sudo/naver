@@ -377,6 +377,11 @@ try {
       filePath: path.join(projectRoot, 'dist', 'automation', 'publishFailureClassifier.js'),
     },
     {
+      // [2026-10-09] richTextPaste(렌더러 번들)가 붙여넣기 도착 대기 헬퍼를 import 한다 — 등록 누락이면 런타임 ReferenceError.
+      label: 'automation/pasteArrival.js',
+      filePath: path.join(projectRoot, 'dist', 'automation', 'pasteArrival.js'),
+    },
+    {
       // [2026-08-26] 붙여넣기 줄바꿈 미리보기 — fullAutoFlow 가 값으로 가져온다.
       //   미리보기와 발행 결과가 갈리지 않도록 같은 함수를 쓴다.
       label: 'automation/richTextPaste.js',

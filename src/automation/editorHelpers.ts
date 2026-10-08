@@ -448,7 +448,7 @@ export async function typeBodyWithRetry(self: any,
 
     if (rich.html) {
       self.log(`   ✨ [리치입력] 모바일 단락 ${rich.paragraphCount}개, 하이라이트 ${rich.highlightCount}개, 표 ${rich.tableCount}개`);
-      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText, rich.tableCount);
+      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText, rich.tableCount, (message: string) => self.log(message));
       if (pasteResult.ok) {
         self.log(`   ✅ [리치입력] HTML 붙여넣기 완료 (표 ${pasteResult.beforeTables}→${pasteResult.afterTables})`);
 
