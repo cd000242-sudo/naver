@@ -10,9 +10,11 @@ import { CAPTION_RELEVANCE_PASS_SCORE, judgeCaptionRelevance } from '../crawler/
 
 const CTX = { subject: '정주리', heading: '세 번째 장편까지 칸으로 향했습니다', mainKeyword: '도라 영화' };
 
+// [2026-10-08] 통과 조건 강화 — 주제어 + 소제목 근거(captionRelevanceStrictGate.test.ts).
+// 아래 통과 케이스는 소제목 낱말("장편")을 캡션에 함께 담는다.
 describe('캡션 관련성 판정 — 모델 없이', () => {
-  it('주제어가 캡션에 나오면 통과한다', () => {
-    const v = judgeCaptionRelevance({ caption: '정주리 감독 영화 도라 스틸컷', url: 'https://img.example.com/a.jpg' }, CTX);
+  it('주제어와 소제목 근거가 캡션에 나오면 통과한다', () => {
+    const v = judgeCaptionRelevance({ caption: '정주리 감독 세 번째 장편 도라 스틸컷', url: 'https://img.example.com/a.jpg' }, CTX);
     expect(v.relevant).toBe(true);
     expect(v.matched).toContain('정주리');
     expect(v.score).toBeGreaterThanOrEqual(CAPTION_RELEVANCE_PASS_SCORE);
@@ -30,7 +32,7 @@ describe('캡션 관련성 판정 — 모델 없이', () => {
   });
 
   it('캡션이 없으면 출처 주소의 읽을 수 있는 부분을 본다', () => {
-    const v = judgeCaptionRelevance({ url: 'https://cdn.news.com/2026/09/정주리-감독-인터뷰.jpg' }, CTX);
+    const v = judgeCaptionRelevance({ url: 'https://cdn.news.com/2026/09/정주리-감독-장편-인터뷰.jpg' }, CTX);
     expect(v.relevant).toBe(true);
   });
 
@@ -46,7 +48,7 @@ describe('캡션 관련성 판정 — 모델 없이', () => {
   });
 
   it('띄어쓰기·기호가 달라도 같은 말로 본다', () => {
-    const v = judgeCaptionRelevance({ caption: '[포토] 정 주 리 감독' }, CTX);
+    const v = judgeCaptionRelevance({ caption: '[포토] 정 주 리 감독 장편' }, CTX);
     expect(v.relevant).toBe(true);
   });
 });

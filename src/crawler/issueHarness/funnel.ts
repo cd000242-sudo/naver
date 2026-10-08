@@ -10,6 +10,8 @@ import {
   type FetchedCandidate,
 } from './candidateFetcher.js';
 import { runVisionGate, type VisionGateBudget, type VisionSubjectContext } from './visionGate.js';
+import { detectWatermark } from './watermarkCheck.js';
+import { isPressAgencyHost } from './pressHosts.js';
 import type { IssueVisionRoute } from './visionRoute.js';
 import type { IssueCandidateImage } from './types.js';
 
@@ -48,9 +50,19 @@ function sourceWeight(name: string): number {
   return SOURCE_WEIGHT[name] ?? 1.5;
 }
 
-/** Pre-fetch ordering: source priority first, then claimed resolution. */
+/** 1 when the candidate comes from a press-agency/broadcaster host (ranked after all others). */
+function pressRank(candidate: IssueCandidateImage): number {
+  return isPressAgencyHost(candidate.url, candidate.pageUrl) ? 1 : 0;
+}
+
+/**
+ * Pre-fetch ordering: press/broadcaster hosts last (burned-in credits are common), then
+ * source priority, then claimed resolution. Press hosts are demoted, never dropped.
+ */
 export function orderCandidatesForFetch(pool: IssueCandidateImage[]): IssueCandidateImage[] {
   return [...pool].sort((a, b) => {
+    const byPress = pressRank(a) - pressRank(b);
+    if (byPress !== 0) return byPress;
     const byWeight = sourceWeight(b.sourceName) - sourceWeight(a.sourceName);
     if (byWeight !== 0) return byWeight;
     return (b.width || 0) * (b.height || 0) - (a.width || 0) * (a.height || 0);
@@ -71,11 +83,13 @@ export function rankCleanCandidates(items: FetchedCandidate[]): FetchedCandidate
   return [...items].sort((a, b) => {
     const soloDiff = Number(b.soloSubject === true) - Number(a.soloSubject === true);
     if (soloDiff !== 0) return soloDiff;
+    const pressDiff = pressRank(a.candidate) - pressRank(b.candidate);
+    if (pressDiff !== 0) return pressDiff;
     return score(b) - score(a);
   });
 }
 
-import { judgeCaptionRelevance } from './captionRelevanceGate.js';
+import { filterByCaptionEvidence, judgeCaptionRelevance } from './captionRelevanceGate.js';
 
 export interface FunnelOptions {
   /** 고른 글생성 엔진이 정한 비전 경로. 없으면 무료 캡션 게이트로 내려간다. */
@@ -86,6 +100,8 @@ export interface FunnelOptions {
   cleanTarget?: number;
   /** 관련성 판정 기준 (주체·소제목). 없으면 Vision 게이트가 전량 탈락시킨다. */
   subjectContext: VisionSubjectContext;
+  /** 쿼리 플랜의 행사·팬덤 검색어, 프로그램명 — 캡션 게이트의 장면 근거 후보. */
+  sceneTerms?: readonly string[];
 }
 
 export interface FunnelResult {
@@ -93,6 +109,8 @@ export interface FunnelResult {
   fetched: number;
   duplicates: number;
   visionUsed: boolean;
+  /** 워터마크·로고 픽셀 검사에 걸려 제외된 장수. */
+  watermarkRejected: number;
   /** 이번 라운드에서 실제로 다운로드까지 시도한 URL — 다음 라운드에서 재시도 방지 */
   attemptedUrls: string[];
 }
@@ -107,12 +125,17 @@ export async function refineHeadingCandidates(
   options: FunnelOptions,
 ): Promise<FunnelResult> {
   const cleanTarget = options.cleanTarget ?? 6;
-  const ordered = orderCandidatesForFetch(pool);
+  // 캡션 판정은 텍스트만 쓰므로 다운로드 전에 걸러 30장 다운로드 한도를 근거 있는 후보에 쓴다.
+  const fetchPool = options.visionRoute
+    ? pool
+    : filterByCaptionEvidence(pool, options.subjectContext, options.sceneTerms);
+  const ordered = orderCandidatesForFetch(fetchPool);
 
   const validated: FetchedCandidate[] = [];
   const attemptedUrls: string[] = [];
   let fetched = 0;
   let duplicates = 0;
+  let watermarkRejected = 0;
 
   for (const candidate of ordered) {
     if (fetched >= MAX_FETCHES_PER_HEADING) break;
@@ -129,12 +152,21 @@ export async function refineHeadingCandidates(
       console.log(`${LOG} ♻️ 지각 중복 제외: ${item.candidate.url.slice(0, 70)}`);
       continue;
     }
+    // 무료 워터마크·로고 픽셀 검사 — 해시 등록 전에 걸러야 같은 사진의 깨끗한 사본이 통과한다.
+    const mark = await detectWatermark(item.buffer);
+    if (mark.suspected) {
+      watermarkRejected++;
+      console.log(
+        `${LOG} 🚫 워터마크/로고 의심 제외 (${mark.region}, 점수 ${mark.score}): ${item.candidate.url.slice(0, 70)}`,
+      );
+      continue;
+    }
     options.phashRegistry.hashes.push(item.dhash);
     validated.push(item);
   }
 
   console.log(
-    `${LOG} 다운로드 ${fetched} → 해상도/디코딩 통과 ${validated.length} (지각중복 ${duplicates})`,
+    `${LOG} 다운로드 ${fetched} → 해상도/디코딩/워터마크 통과 ${validated.length} (지각중복 ${duplicates}, 워터마크 의심 ${watermarkRejected})`,
   );
 
   let clean: FetchedCandidate[];
@@ -174,6 +206,7 @@ export async function refineHeadingCandidates(
           subject: options.subjectContext?.mainSubject,
           heading: options.subjectContext?.heading,
           mainKeyword: options.subjectContext?.mainSubject,
+          sceneTerms: options.sceneTerms,
         },
       );
       return verdict.relevant;
@@ -181,9 +214,9 @@ export async function refineHeadingCandidates(
     clean = passed.slice(0, cleanTarget);
     console.warn(
       `${LOG} Gemini 키 없음 — 캡션 근거로만 판정: ${validated.length}장 중 ${passed.length}장 통과`
-      + ' (워터마크·구도는 검사하지 못한다)',
+      + ' (워터마크·로고는 픽셀 검사로 걸렀고, 옅은 워터마크와 구도는 못 본다)',
     );
   }
 
-  return { clean: rankCleanCandidates(clean), fetched, duplicates, visionUsed, attemptedUrls };
+  return { clean: rankCleanCandidates(clean), fetched, duplicates, visionUsed, watermarkRejected, attemptedUrls };
 }

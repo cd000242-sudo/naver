@@ -10,6 +10,7 @@ import { buildIssueQueryPlan } from './queryFanout.js';
 import { filterIssueCandidates } from './urlPolicy.js';
 import { createPhashRegistry, refineHeadingCandidates, type FunnelOptions } from './funnel.js';
 import type { FetchedCandidate } from './candidateFetcher.js';
+import { filterByCaptionEvidence } from './captionRelevanceGate.js';
 import { createVisionBudget } from './visionGate.js';
 import { naverApiSource, naverApiDateSource } from './sources/naverApiSource.js';
 import { googleSource } from './sources/googleSource.js';
@@ -109,12 +110,13 @@ async function collectCleanForHeading(
   cap: number,
   target: number,
   funnelOptions: Omit<FunnelOptions, 'cleanTarget'>,
-): Promise<{ clean: FetchedCandidate[]; poolSize: number; duplicates: number; visionUsed: boolean }> {
+): Promise<{ clean: FetchedCandidate[]; poolSize: number; duplicates: number; visionUsed: boolean; watermarkRejected: number }> {
   const seenQueries = new Set<string>();
   const attempted = new Set<string>();
   const pool: IssueCandidateImage[] = [];
   const clean: FetchedCandidate[] = [];
   let duplicates = 0;
+  let watermarkRejected = 0;
   let visionUsed = false;
 
   const tiers: Array<{ label: string; steps: SourceStep[] }> = [
@@ -134,6 +136,7 @@ async function collectCleanForHeading(
       });
       refined.attemptedUrls.forEach((u) => attempted.add(u));
       duplicates += refined.duplicates;
+      watermarkRejected += refined.watermarkRejected;
       visionUsed = visionUsed || refined.visionUsed;
       clean.push(...refined.clean);
       console.log(`${LOG} "${qs.heading}" ${tier.label} 결과: 클린 누적 ${clean.length}/${target}`);
@@ -141,20 +144,23 @@ async function collectCleanForHeading(
     if (clean.length >= target) break;
   }
 
-  // 전 티어를 돌고도 비면 광역 폴백(주체만으로 검색) 한 번 더.
+  // 전 티어를 돌고도 비면 광역 폴백(주체만 검색) 한 번 더. 일반 주체 사진이 구체적 소제목에
+  // 들어가지 않도록 엄격 캡션 게이트(주제어+장면 근거)를 통과한 것만 올린다(Vision 모드 포함).
   if (clean.length === 0 && qs.broaderQuery) {
-    const wide = filterIssueCandidates(await naverApiSource.search(qs.broaderQuery, 30), cap)
+    const found = filterIssueCandidates(await naverApiSource.search(qs.broaderQuery, 30), cap)
       .filter((c) => !attempted.has(c.url));
+    const wide = filterByCaptionEvidence(found, funnelOptions.subjectContext, funnelOptions.sceneTerms);
     if (wide.length > 0) {
       const refined = await refineHeadingCandidates(wide, { ...funnelOptions, cleanTarget: target });
       clean.push(...refined.clean);
       duplicates += refined.duplicates;
+      watermarkRejected += refined.watermarkRejected;
       visionUsed = visionUsed || refined.visionUsed;
-      console.log(`${LOG} "${qs.heading}" 광역 폴백 결과: 클린 ${refined.clean.length}`);
+      console.log(`${LOG} "${qs.heading}" 광역 폴백: 장면 근거 ${wide.length}/${found.length}장 → 클린 ${refined.clean.length}`);
     }
   }
 
-  return { clean, poolSize: pool.length, duplicates, visionUsed };
+  return { clean, poolSize: pool.length, duplicates, visionUsed, watermarkRejected };
 }
 
 /**
@@ -197,6 +203,7 @@ export async function collectIssueImages(
   let afterFilter = 0;
   let cleanTotal = 0;
   let perceptualDuplicates = 0;
+  let watermarkRejectedTotal = 0;
   let visionUsedAny = false;
   const globallyUsed = new Set<string>();
   const visionBudget = createVisionBudget(120);
@@ -220,6 +227,7 @@ export async function collectIssueImages(
       visionRoute: options.visionRoute,
       visionBudget,
       phashRegistry,
+      sceneTerms: [qs.eventQuery, qs.fandomQuery, plan.programName],
       // 관련성 판정 기준 — 사건 맥락까지 넘겨 "소제목 문구"가 아니라 "무슨 사건인지"로
       // 판정한다. 주체가 비면 게이트가 전량 미배치(빈 슬롯)로 막는다.
       subjectContext: {
@@ -243,6 +251,7 @@ export async function collectIssueImages(
     }
     cleanTotal += refined.clean.length;
     perceptualDuplicates += refined.duplicates;
+    watermarkRejectedTotal += refined.watermarkRejected;
     visionUsedAny = visionUsedAny || refined.visionUsed;
 
     const cleanCandidates = refined.clean
@@ -285,6 +294,7 @@ export async function collectIssueImages(
       visionInspected: visionBudget.inspected,
       cleanTotal,
       perceptualDuplicates,
+      watermarkRejected: watermarkRejectedTotal,
     },
   };
 }

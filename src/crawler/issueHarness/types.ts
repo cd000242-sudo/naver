@@ -134,6 +134,8 @@ export interface IssueHarnessStats {
   visionInspected?: number;
   cleanTotal?: number;
   perceptualDuplicates?: number;
+  /** 무료 워터마크·로고 픽셀 검사로 제외된 후보 수. */
+  watermarkRejected?: number;
 }
 
 export interface IssueHarnessResult {

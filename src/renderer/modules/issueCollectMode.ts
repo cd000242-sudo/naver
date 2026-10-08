@@ -190,7 +190,8 @@ export async function runIssueEndgameCollect(
         const engine = stats.visionVendor ? ` · ${stats.visionVendor}${stats.visionFree ? ' (구독, 추가 과금 0)' : ''}` : '';
         appendLogFn(`👁️ Vision 게이트${engine}: ${stats.visionInspected ?? 0}장 검사, 지각 중복 ${stats.perceptualDuplicates ?? 0}장 통합`);
     } else {
-        appendLogFn('⚠️ 고른 AI 엔진으로 이미지 검사를 할 수 없어 캡션 텍스트로만 판정했습니다(무료) — 워터마크/구도는 미검사입니다.');
+        const wmSkipped = Number(stats.watermarkRejected) || 0;
+        appendLogFn(`⚠️ 고른 AI 엔진으로 이미지 검사를 할 수 없어 캡션 텍스트로 관련성을 판정했습니다(무료) — 워터마크·로고는 무료 픽셀 검사로 걸렀지만(의심 ${wmSkipped}장 제외) 옅은 워터마크는 놓칠 수 있고 구도는 미검사입니다.`);
     }
 
     const ImageManager = (window as any).ImageManager;
