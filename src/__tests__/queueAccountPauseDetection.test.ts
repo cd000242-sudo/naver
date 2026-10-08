@@ -159,6 +159,7 @@ describe('continuous queue wiring (executed from the real source)', () => {
     const logs: string[] = [];
     const item: Record<string, unknown> = { status: 'processing', _publishStarted: flags.started };
     const stopContinuousMode = vi.fn();
+    const showAccountPauseModal = vi.fn();
     const code = `let failCount = 0; let reachedAfterStop = true;
       for (let pass = 0; pass < 1; pass++) {
         try { throw theError; } catch (error) { ${source.slice(start, end)} }
@@ -166,14 +167,14 @@ describe('continuous queue wiring (executed from the real source)', () => {
       }
       return { failCount, reachedAfterStop };`;
     const result = await compile(code, {
-      theError: error, item, currentIdx: 1, totalCount: 3, isContinuousMode: true, stopContinuousMode, requiresAccountStop,
+      theError: error, item, currentIdx: 1, totalCount: 3, isContinuousMode: true, stopContinuousMode, requiresAccountStop, showAccountPauseModal,
       window: { _publishAutomationDispatched: flags.dispatched, stopFullAutoPublish: false },
       resolveInterruptedPublishStatus: (started: boolean, fallback: string) => (started ? 'uncertain' : fallback),
       appendLog: (message: string) => logs.push(message), updateContinuousProgressModal: vi.fn(), console: { log() {}, warn() {} },
       UserCancelledError: class UserCancelledError extends Error {}, ImageManager: undefined,
       revokeAllImageDataUrls() {}, clearImageGenerationLocks() {},
     });
-    return { result, item, logs, stopContinuousMode };
+    return { result, item, logs, stopContinuousMode, showAccountPauseModal };
   }
 
   it('throws an error with the recorded code instead of a codeless generic one', async () => {
@@ -191,8 +192,10 @@ describe('continuous queue wiring (executed from the real source)', () => {
 
   it('stops the queue at once and names the account when main reports a paused account', async () => {
     const error = createQueuePublishError({ code: 'NETWORK_WAIT', message: 'x', refusedBeforeStart: false, accountId: 'blog-owner' });
-    const { item, logs, stopContinuousMode, result } = await runFailure(error, { dispatched: true, started: true });
+    const { item, logs, stopContinuousMode, result, showAccountPauseModal } = await runFailure(error, { dispatched: true, started: true });
     expect(stopContinuousMode).toHaveBeenCalledWith('manual');
+    // The stop is cleared in place: the pause panel is asked for with the coded error.
+    expect(showAccountPauseModal).toHaveBeenCalledWith(error);
     expect(result.failCount).toBe(1);
     expect(logs.join('\n')).toContain('blog-owner');
     // The run stopped mid-publish: the outcome stays unknown.
