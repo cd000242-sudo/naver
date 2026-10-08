@@ -139,6 +139,6 @@ describe('run result after the publish click', () => {
     expect(ui).toContain("b.dataset.action === 'reset-journal' ? Boolean(state?.journalUnreadable)");
     expect(ui).toMatch(/action === 'reset-journal' && !window\.confirm\(/);
     const ipc = fs.readFileSync(path.resolve(__dirname, '..', 'main', 'ipc', 'accountHandlers.ts'), 'utf-8');
-    expect(ipc).toContain("['status', 'open', 'resume', 'confirm', 'reset-journal'].includes(action)");
+    expect(ipc).toContain("['status', 'open', 'open-posts', 'resume', 'confirm', 'reset-journal'].includes(action)");
   });
 });
