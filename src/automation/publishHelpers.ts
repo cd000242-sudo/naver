@@ -1500,20 +1500,22 @@ export async function publishScheduled(
     const readConfirmation = async () => {
       const notices: string[] = [];
       for (const context of [page, frame]) {
+        // The editor frame is gone once Naver swaps the editor for the blog; the page still reports where it went.
         const texts = await context.evaluate(() => Array.from(document.querySelectorAll('[role="alert"], [role="status"], [class*="toast"], [class*="Toast"]'))
           .filter(el => !el.closest('.se-main-container, .se-component') && el.getBoundingClientRect().width > 0 && el.getBoundingClientRect().height > 0 && getComputedStyle(el).visibility !== 'hidden')
-          .map(el => (el.textContent || '').trim()).filter(Boolean));
+          .map(el => (el.textContent || '').trim()).filter(Boolean)).catch(() => [] as string[]);
         notices.push(...texts);
       }
       return { url: page.url(), notices };
     };
-    const beforeNotices = (await readConfirmation()).notices;
+    const beforeState = await readConfirmation();
+    const beforeNotices = beforeState.notices;
     // A click may reach Naver even if Puppeteer loses its acknowledgement.
     await beforeIrreversibleCommit?.();
     confirmationAttempted = true;
     await confirmButton.click();
-    await waitForScheduleConfirmation(readConfirmation, beforeNotices, ms => self.delay(ms));
-    self.log(`✅ 예약 완료 안내를 확인했습니다: ${scheduleDate}`);
+    await waitForScheduleConfirmation(readConfirmation, beforeNotices, ms => self.delay(ms), beforeState.url);
+    self.log(`✅ 예약 완료를 확인했습니다(완료 안내 또는 블로그로 이동): ${scheduleDate} → ${page.url()}`);
 
   } catch (error: any) {
     self.log(`❌ 예약발행 실패: ${(error as Error).message}`);
@@ -1536,6 +1538,8 @@ export async function publishScheduled(
 
     if (confirmationAttempted) {
       self.log('예약 확인 이후 결과 미확정: 중복 예약 방지를 위해 자동 재시도를 차단합니다.');
+      // Where the page ended up is the evidence a person needs (and the report used to lack it).
+      try { self.log(`   마지막 화면 주소: ${page.url()}`); } catch { /* page gone */ }
       throw createSchedulePublishOutcomeUnknownError(error);
     }
 

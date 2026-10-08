@@ -15,7 +15,8 @@ it.each([
 ])('never treats a click, unchanged page, foreign URL or rejection as confirmation', async value => {
  const read=vi.fn().mockResolvedValue(value);
  await expect(waitForScheduleConfirmation(read,[],async()=>{})).rejects.toMatchObject({code:'SCHEDULE_PUBLISH_OUTCOME_UNKNOWN'});
- expect(read.mock.calls.length).toBeLessThanOrEqual(12);
+ // [2026-10-08] The wait grew from ~6s to ~30s (Naver closes the editor late); still bounded.
+ expect(read.mock.calls.length).toBeLessThanOrEqual(61);
 });
 it('does not reuse stale success text from before the click', async () => {
  await expect(waitForScheduleConfirmation(async()=>ready,ready.notices,async()=>{})).rejects.toThrow('SCHEDULE_PUBLISH_OUTCOME_UNKNOWN');
