@@ -20,18 +20,21 @@ function blogIdOf(url: URL): string {
 /**
  * [2026-10-08 고객 진단 리포트] Naver answers a reservation by closing the editor and opening the same blog, usually
  * without a notice (owner's logs: 15 of 60 already on the blog home 2s after the click, the rest still in the editor).
+ *
+ * A bare GoBlogWrite.naver editor URL carries no blog id; `expectedBlogId` (from the app's account configuration,
+ * never from a page) stands in for it. An id present in the editor URL always wins.
  */
-export function leftEditorForSameBlog(current: URL, editorUrl?: string): boolean {
+export function leftEditorForSameBlog(current: URL, editorUrl?: string, expectedBlogId?: string): boolean {
   const editor = editorUrl ? parseNaverSessionUrl(editorUrl) : null;
   if (!editor || !BLOG_HOSTS.includes(editor.hostname) || isEditor(current)) return false;
-  const id = blogIdOf(editor);
+  const id = blogIdOf(editor) || String(expectedBlogId || '').trim().toLowerCase();
   return Boolean(id) && blogIdOf(current) === id;
 }
 
 /** Ambiguous completion stays pending; never retry a potentially accepted click. */
 export async function waitForScheduleConfirmation(
   read: () => Promise<ScheduleConfirmationSnapshot>, before: readonly string[], delay: (ms: number) => Promise<void>,
-  editorUrl?: string,
+  editorUrl?: string, expectedBlogId?: string,
 ): Promise<void> {
   for (let attempt = 0; attempt < ATTEMPTS; attempt++) {
     let timer: ReturnType<typeof setTimeout> | undefined;
@@ -45,10 +48,12 @@ export async function waitForScheduleConfirmation(
     if (state) {
       const url = parseNaverSessionUrl(state.url);
       if (!url || !BLOG_HOSTS.includes(url.hostname)) throw createSchedulePublishOutcomeUnknownError();
+      // Positive evidence first: once the editor was left for the same blog, an unrelated alert/status element on
+      // the blog page (any error word) must not turn a done reservation into an unknown one.
+      if (leftEditorForSameBlog(url, editorUrl, expectedBlogId)) return;
       const notices = state.notices.filter(text => !before.includes(text));
       if (notices.some(text => /실패|오류|불가|제한|완료되지|보호조치/.test(text))) throw createSchedulePublishOutcomeUnknownError();
       if (notices.some(text => /예약\s*(?:발행|등록|설정)?(?:이|가)?\s*(?:완료되었습니다|완료됐습니다|되었습니다|됐습니다)/.test(text))) return;
-      if (leftEditorForSameBlog(url, editorUrl)) return;
       // Out of the editor but not on this blog (another blog, an unexpected page): never a confirmation.
       if (!isEditor(url)) throw createSchedulePublishOutcomeUnknownError();
     }
