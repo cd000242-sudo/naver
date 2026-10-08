@@ -2432,7 +2432,8 @@ async function createWindow(): Promise<void> {
 
     // ✅ [2026-04-03] X 버튼 = 확인 다이얼로그 표시 (실수로 종료 방지)
     mainWindow.on('close', (event) => {
-      if (isE2ETestMode()) {
+      // E2E_QUIT_CONFIRM=1 lets an E2E drive the real confirmation dialog (e2e/quit-confirm-twice.spec.ts).
+      if (isE2ETestMode() && process.env.E2E_QUIT_CONFIRM !== '1') {
         (globalThis as any).isQuitting = true;
         return;
       }
