@@ -24,6 +24,28 @@ const BLOCKING_PHRASES = [
   '로그인이 필요합니다',
 ] as const;
 
+// Phrases an error screen shows but a rendered article can also quote ("권한이 없습니다" in a how-to post). They only
+// block when no rendered article is on the page; the other phrases above block regardless.
+const ARTICLE_QUOTABLE_PHRASES = new Set<string>([
+  '삭제되었거나',
+  '비공개 게시물',
+  '권한이 없습니다',
+  '로그인이 필요합니다',
+]);
+
+// Elements that exist only while a post is rendered (the og: meta tags also appear on error screens, so they are no
+// evidence). This is the viewer page, so .se-main-container is the article here.
+const RENDERED_ARTICLE_SELECTORS = new Set<string>([
+  '#postViewArea',
+  '.post-view',
+  '.se-title-text',
+  '.se-main-container',
+  'article.se-components-wrap',
+  '.area_sympathy',
+  '[class*="sympathy"]',
+  'a[class*="u_likeit"]',
+]);
+
 const STRONG_SELECTORS = new Set<string>([
   '#postViewArea',
   '.post-view',
@@ -85,7 +107,11 @@ export function resolvePublishedPostPageConfirmation(
     };
   }
 
-  const blockingPhrase = BLOCKING_PHRASES.find((phrase) => combinedText.includes(phrase));
+  // The text scanned here includes the article itself: with a rendered article on screen, quoted error phrases in it
+  // are content, not a failure screen.
+  const hasRenderedArticle = evidence.some((selector) => RENDERED_ARTICLE_SELECTORS.has(selector));
+  const blockingPhrase = BLOCKING_PHRASES.find((phrase) => combinedText.includes(phrase)
+    && !(hasRenderedArticle && ARTICLE_QUOTABLE_PHRASES.has(phrase)));
   if (blockingPhrase) {
     return {
       ok: false,

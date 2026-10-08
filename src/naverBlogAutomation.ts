@@ -118,9 +118,11 @@ import {
   formatPublishGuardLog,
   isConcreteNaverBlogPostUrl,
   isNaverEditorUrl,
+  normalizeNaverBlogPostUrl,
   resolveImmediatePublishOutcome,
   resolvePublishedUrlAfterOutcome,
 } from './automation/publishOutcomeResolver';
+import { sanitizeUserVisibleError } from './runtime/userVisibleError.js';
 import {
   PUBLISHED_POST_PAGE_SIGNAL_SELECTORS,
   resolvePublishedPostPageConfirmation,
@@ -2939,6 +2941,68 @@ export class NaverBlogAutomation {
     }
   }
 
+  /**
+   * Bounded wait (polling only: no click, no navigation, no reload) for the page to reach a concrete post URL after
+   * the publish click. [2026-06-23] One look right after the click is not enough on a slow PC: the publish is still
+   * navigating, and failing fast made the outer retry re-type the body (3489 -> 5311 chars, doubled hashtags).
+   * [2026-10-09] Every immediate-publish branch whose first look did not see a post URL ends here, including a URL
+   * that changed to a non-post page (blog home, ?Redirect= landing): Naver may still be on its way to the post.
+   * Ends in PUBLISH_UNCONFIRMED (no automatic retry) when no post URL shows up in time.
+   */
+  private async waitForPublishedPostUrl(beforeUrl: string): Promise<void> {
+    const PUBLISH_CONFIRM_POLL_MS = 30000;
+    this.log(`⚠️ 게시글 주소가 아직 확인되지 않아 발행 완료를 최대 ${PUBLISH_CONFIRM_POLL_MS / 1000}초 폴링으로 확인합니다...`);
+
+    const pollPublished = async (): Promise<string | null> => {
+      const url = this.ensurePage().url();
+      // 1) Moved to a post URL (/{id}/{logNo} or the ?logNo= landing) = published.
+      if (url !== beforeUrl && isConcreteNaverBlogPostUrl(url)) return url;
+      // 2) Leaving the editor for a blog page is not enough (blog home / draft / redirect screens), only a post URL is.
+      // 3) Published-post screen signals, scanned in the top document and its iframes (the sympathy/reaction area
+      //    lives inside mainFrame). Only visible short elements count (no hidden CDATA false positives).
+      const domOk = await this.ensurePage().evaluate(() => {
+        const docs: Document[] = [document];
+        document.querySelectorAll('iframe').forEach((f) => {
+          try { const d = (f as HTMLIFrameElement).contentDocument; if (d) docs.push(d); } catch { /* cross-origin */ }
+        });
+        for (const doc of docs) {
+          const toast = Array.from(doc.querySelectorAll('div,span,p,strong')).some((el) => {
+            const t = (el.textContent || '').trim();
+            if (!t || t.length > 40) return false;
+            const r = (el as HTMLElement).getBoundingClientRect?.();
+            return !!r && r.width > 0 && r.height > 0 &&
+              (t.includes('발행되었습니다') || t.includes('발행 완료') || t.includes('게시되었습니다'));
+          });
+          if (toast) return true;
+          // Only a published post has the sympathy/reaction area (the writing editor does not).
+          if (doc.querySelector('.area_sympathy, [class*="sympathy"], a[class*="u_likeit"]')) return true;
+        }
+        return false;
+      }).catch(() => false);
+      if (!domOk) return null;
+
+      const domUrl = this.ensurePage().url();
+      return isConcreteNaverBlogPostUrl(domUrl) ? domUrl : null;
+    };
+
+    let confirmedUrl: string | null = null;
+    const deadline = Date.now() + PUBLISH_CONFIRM_POLL_MS;
+    while (Date.now() < deadline) {
+      confirmedUrl = await pollPublished();
+      if (confirmedUrl) break;
+      await this.delay(1500);
+    }
+
+    if (!confirmedUrl) {
+      // No post URL in time: never auto-republish, so the outer retry cannot type the body twice.
+      throw new Error('PUBLISH_UNCONFIRMED:발행 버튼을 눌렀지만 시간 내 발행 완료를 확인하지 못했습니다. 이중 발행·본문 중복 방지를 위해 자동 재시도하지 않습니다 — 네이버 블로그에서 글이 실제로 발행됐는지 확인해주세요.');
+    }
+    confirmedUrl = normalizeNaverBlogPostUrl(confirmedUrl) ?? confirmedUrl;
+    this.log(`✅ 블로그 글이 발행되었습니다 (폴링 확인).`);
+    this.log(`POST_URL: ${confirmedUrl}`);
+    this.publishedUrl = confirmedUrl; // ✅ URL 저장
+  }
+
   async publishBlogPost(
     mode: PublishMode,
     scheduleDate?: string,
@@ -3666,81 +3730,10 @@ export class NaverBlogAutomation {
                 this.log(`✅ 블로그 글이 즉시발행되었습니다.`);
                 this.log(`POST_URL: ${afterUrl}`);
                 this.publishedUrl = afterUrl; // ✅ URL 저장
-              } else if (urlChanged) {
-                // URL은 변경되었지만 블로그 포스트 URL이 아닌 경우
-                this.log(`⚠️ URL이 변경되었지만 블로그 포스트 URL이 아닙니다: ${afterUrl}`);
-                throw new Error('PUBLISH_UNCONFIRMED:발행 버튼 클릭 후 URL은 바뀌었지만 실제 게시글 URL을 확인하지 못했습니다. 작성중/블로그홈 이동을 발행 완료로 처리하지 않습니다.');
               } else {
-                // [2026-06-23] URL이 아직 안 바뀐 경우 — 느린 PC에서는 발행 네비게이션이
-                // 첫 확인(클릭+1s+nav+2s) 안에 끝나지 않는다. 단발 판정으로 성급히 "실패"를
-                // 던지면 (a) 실제로는 발행이 진행 중인데 실패 처리되고 (b) 상위 재시도 루프가
-                // 본문을 중복 입력해 글이 오염된다. (suma0404 라이브: 확정버튼 클릭은 성공했고
-                // 발행도 실제로 됐는데 — 2·3차 재시도에서 페이지가 발행된 글 화면(공감 버튼)으로
-                // 이동 — 검증 단발 + 숨은 CDATA "오류/실패" 텍스트 오탐으로 실패 처리 → 본문
-                // 3489→5311자/해시태그 2배 중복.) → 성공 신호를 길게 폴링한다.
-                const PUBLISH_CONFIRM_POLL_MS = 30000;
-                this.log(`⚠️ URL 미변경 — 발행 완료를 최대 ${PUBLISH_CONFIRM_POLL_MS / 1000}초 폴링으로 확인합니다...`);
-
-                const pollPublished = async (): Promise<string | null> => {
-                  const url = this.ensurePage().url();
-                  // 1) 블로그 포스트 URL(/{id}/{글번호})로 이동 = 발행 완료
-                  if (url !== beforeUrl && isConcreteNaverBlogPostUrl(url)) return url;
-                  // 2) 글쓰기 에디터를 벗어난 blog 도메인만으로는 발행 완료가 아니다.
-                  //    블로그홈/작성중/리다이렉트 화면을 성공으로 오판하지 않기 위해 실제 글번호 URL만 인정한다.
-                  // 3) 발행된 글 화면 신호 — top + iframe(mainFrame)까지 스캔(공감/반응 영역은
-                  //    mainFrame 안에 있다 — Playwright 라이브 검증: .area_sympathy 2개,
-                  //    a.u_likeit_button 26개 in mainFrame). 보이는 짧은 요소만(CDATA/숨김 오탐 방지).
-                  const domOk = await this.ensurePage().evaluate(() => {
-                    const docs: Document[] = [document];
-                    document.querySelectorAll('iframe').forEach((f) => {
-                      try { const d = (f as HTMLIFrameElement).contentDocument; if (d) docs.push(d); } catch { /* cross-origin */ }
-                    });
-                    for (const doc of docs) {
-                      const toast = Array.from(doc.querySelectorAll('div,span,p,strong')).some((el) => {
-                        const t = (el.textContent || '').trim();
-                        if (!t || t.length > 40) return false;
-                        const r = (el as HTMLElement).getBoundingClientRect?.();
-                        return !!r && r.width > 0 && r.height > 0 &&
-                          (t.includes('발행되었습니다') || t.includes('발행 완료') || t.includes('게시되었습니다'));
-                      });
-                      if (toast) return true;
-                      // 발행된 글 화면에만 있는 공감/반응 영역 (글쓰기 에디터에는 없음)
-                      if (doc.querySelector('.area_sympathy, [class*="sympathy"], a[class*="u_likeit"]')) return true;
-                    }
-                    return false;
-                  }).catch(() => false);
-                  if (!domOk) return null;
-
-                  const domUrl = this.ensurePage().url();
-                  return isConcreteNaverBlogPostUrl(domUrl) ? domUrl : null;
-                };
-
-                let confirmedUrl: string | null = null;
-                const deadline = Date.now() + PUBLISH_CONFIRM_POLL_MS;
-                while (Date.now() < deadline) {
-                  confirmedUrl = await pollPublished();
-                  if (confirmedUrl) break;
-                  await this.delay(1500);
-                }
-
-                if (confirmedUrl) {
-                  // 토스트가 먼저 뜨고 URL은 약간 늦게 바뀔 수 있어 포스트 URL을 한 번 더 확보 시도
-                  if (!isConcreteNaverBlogPostUrl(confirmedUrl)) {
-                    await this.delay(2500);
-                    const late = this.ensurePage().url();
-                    if (isConcreteNaverBlogPostUrl(late)) confirmedUrl = late;
-                  }
-                  if (!isConcreteNaverBlogPostUrl(confirmedUrl)) {
-                    throw new Error('PUBLISH_UNCONFIRMED:발행 성공 신호는 보였지만 실제 게시글 URL을 확인하지 못했습니다. 작성중/임시저장 상태를 발행 완료로 처리하지 않습니다.');
-                  }
-                  this.log(`✅ 블로그 글이 발행되었습니다 (폴링 확인).`);
-                  this.log(`POST_URL: ${confirmedUrl}`);
-                  this.publishedUrl = confirmedUrl; // ✅ URL 저장
-                } else {
-                  // 폴링 종료까지 발행 신호 없음 — 상위 재시도가 본문을 중복 입력하지 않도록
-                  // 자동 재발행하지 않는 코드(PUBLISH_UNCONFIRMED)로 던진다.
-                  throw new Error('PUBLISH_UNCONFIRMED:발행 버튼을 눌렀지만 시간 내 발행 완료를 확인하지 못했습니다. 이중 발행·본문 중복 방지를 위해 자동 재시도하지 않습니다 — 네이버 블로그에서 글이 실제로 발행됐는지 확인해주세요.');
-                }
+                // [2026-10-09] Neither "URL unchanged" nor "changed to a non-post page" (blog home, ?Redirect= landing)
+                // is a failure on the first look: Naver may still be on its way to the post. Poll, never re-click.
+                await this.waitForPublishedPostUrl(beforeUrl);
               }
             } else {
               this.log('⚠️ 발행 확인 버튼이 비활성화 상태입니다. 잠시 후 다시 시도합니다...');
@@ -3778,7 +3771,7 @@ export class NaverBlogAutomation {
                   this.log(`POST_URL: ${afterUrl}`);
                   this.publishedUrl = afterUrl; // ✅ URL 저장
                 } else {
-                  throw new Error('발행이 완료되지 않았습니다. 발행 버튼이 비활성화되어 있거나 네비게이션이 발생하지 않았습니다.');
+                  await this.waitForPublishedPostUrl(beforeUrl);
                 }
               } else {
                 throw new Error('발행 확인 버튼이 계속 비활성화되어 있습니다. 발행 조건을 확인해주세요.');
@@ -3972,16 +3965,7 @@ export class NaverBlogAutomation {
               this.log(`POST_URL: ${afterUrl}`);
               this.publishedUrl = afterUrl; // ✅ URL 저장
             } else {
-              // 추가 확인
-              await this.delay(3000);
-              const finalUrl = this.ensurePage().url();
-              if (finalUrl !== beforeUrl && isConcreteNaverBlogPostUrl(finalUrl)) {
-                this.log('✅ 블로그 글이 즉시발행되었습니다.');
-                this.log(`POST_URL: ${finalUrl}`);
-                this.publishedUrl = finalUrl; // ✅ URL 저장
-              } else {
-                throw new Error('PUBLISH_UNCONFIRMED:발행 버튼 클릭 후 실제 게시글 URL을 확인하지 못했습니다. 작성중/블로그홈/임시저장 상태를 발행 완료로 처리하지 않습니다.');
-              }
+              await this.waitForPublishedPostUrl(beforeUrl);
             }
           } else {
             // [SPEC-STABILITY-2026 R11/A-3] 임시저장 silent 전환 제거 —
@@ -4071,6 +4055,8 @@ export class NaverBlogAutomation {
         if (!scheduleSuccess) {
           throw new Error(`예약발행 ${MAX_SCHEDULE_RETRIES}회 시도 모두 실패: ${lastScheduleError?.message || '알 수 없는 오류'}`);
         }
+        // The reservation was verified by waitForScheduleConfirmation: record it before anything else can fail.
+        this.confirmPublicationInJournal();
       }
     }, 2, '블로그 발행');
   }
@@ -4405,10 +4391,9 @@ export class NaverBlogAutomation {
    * 사용자가 생성된 글을 직접 수정할 수 있도록 함
    */
   private async activateEditorForEditing(): Promise<void> {
-    const frame = (await this.getAttachedFrame());
-    const page = this.ensurePage();
-
     try {
+      // Acquired inside the try: this is a best-effort step and must never fail a run that already saved its post.
+      const frame = (await this.getAttachedFrame());
       this.log('✏️ 에디터를 편집 가능한 상태로 활성화 중...');
 
       // 1. 에디터 영역 클릭하여 포커스 설정
@@ -6783,6 +6768,8 @@ export class NaverBlogAutomation {
       }
       catch (error) {
         if (journal.hasUnconfirmed(this.options.naverId)) {
+          // The generic stop below replaces the cause; keep a scrubbed copy of it in the log for diagnosis.
+          this.log(`[PUBLISH_OUTCOME_UNKNOWN] 원래 오류: ${sanitizeUserVisibleError(error)}`);
           guard.pause(this.options.naverId, 'PUBLISH_OUTCOME_UNKNOWN');
           throw new AccountExecutionGuardError('PUBLISH_OUTCOME_UNKNOWN');
         }
@@ -6796,6 +6783,26 @@ export class NaverBlogAutomation {
         throw error;
       }
     });
+  }
+
+  /**
+   * Records the pending publication as confirmed the moment it is verified. Whatever fails afterwards (logging,
+   * editor re-activation, browser clean-up) must not turn a verified publish/reservation into PUBLISH_OUTCOME_UNKNOWN.
+   * A no-op when nothing is pending (draft mode, or already confirmed).
+   */
+  private confirmPublicationInJournal(): void {
+    const journal = getPublicationCommitJournal();
+    if (!this.accountWorkId || !journal.hasUnconfirmed(this.options.naverId)) return;
+    journal.markConfirmed(this.options.naverId, this.accountWorkId, this.publishedUrl || undefined);
+  }
+
+  /**
+   * Only a draft leaves the editor open for the user. After a verified publish or reservation the editor is gone,
+   * and touching its frame would re-run frame recovery (which pauses the account) for nothing.
+   */
+  private async activateEditorAfterRun(publishMode: PublishMode): Promise<void> {
+    if (publishMode !== 'draft') return;
+    await this.activateEditorForEditing();
   }
 
   private async runAccountInternal(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string }> {
@@ -6990,15 +6997,17 @@ export class NaverBlogAutomation {
         throw publishError;
       }
 
-      // ✅ 자동화 완료 후 에디터를 편집 가능한 상태로 활성화
-      await this.activateEditorForEditing();
+      // ✅ 임시저장일 때만 에디터를 편집 가능한 상태로 활성화 (발행/예약 뒤에는 에디터가 이미 닫혔다)
+      await this.activateEditorAfterRun(resolvedOptions.publishMode);
 
       this.log('🎉 모든 자동화 과정이 성공적으로 완료되었습니다!');
       const modeText = resolvedOptions.publishMode === 'draft' ? '임시저장' :
         resolvedOptions.publishMode === 'publish' ? '즉시발행' :
           `예약발행 (${resolvedOptions.scheduleDate})`;
       this.log(`💡 블로그 글이 자동으로 작성되고 ${modeText}되었습니다.`);
-      this.log('✏️ 에디터가 편집 가능한 상태로 활성화되었습니다. 직접 수정하실 수 있습니다.');
+      if (resolvedOptions.publishMode === 'draft') {
+        this.log('✏️ 에디터가 편집 가능한 상태로 활성화되었습니다. 직접 수정하실 수 있습니다.');
+      }
 
       // ✅ 발행된 URL 반환
       if (this.publishedUrl) {
@@ -7149,8 +7158,10 @@ export class NaverBlogAutomation {
     let lastEvidence = 'none';
     let consecutiveOkCount = 0;
     let lastOkReason = '';
+    let attempt = 0;
 
     while (Date.now() < deadline) {
+      attempt += 1;
       const snapshot = await this.collectPublishedPostPageSnapshot(expectedUrl);
       const confirmation = resolvePublishedPostPageConfirmation(snapshot);
 
@@ -7158,6 +7169,7 @@ export class NaverBlogAutomation {
         consecutiveOkCount += 1;
         lastOkReason = confirmation.reason;
         lastEvidence = confirmation.evidence.join(',') || 'none';
+        this.log(`[PostPageCheck] #${attempt} 통과: ${confirmation.reason} (연속 ${consecutiveOkCount}/${requiredConsecutiveOk}, evidence=${lastEvidence})`);
 
         if (consecutiveOkCount >= requiredConsecutiveOk) {
           this.log(`✅ 실제 게시글 화면 연속 확인 완료 (${consecutiveOkCount}/${requiredConsecutiveOk}, ${lastOkReason}, evidence=${lastEvidence})`);
@@ -7171,6 +7183,7 @@ export class NaverBlogAutomation {
       consecutiveOkCount = 0;
       lastFailureMessage = confirmation.message;
       lastEvidence = confirmation.evidence.join(',') || 'none';
+      this.log(`[PostPageCheck] #${attempt} 미확인: ${confirmation.code} — ${confirmation.message} (evidence=${lastEvidence})`);
       await this.delay(1000);
     }
 
@@ -7197,6 +7210,8 @@ export class NaverBlogAutomation {
     }
 
     await this.waitForPublishedPostPageConfirmation(this.publishedUrl);
+    // Verified (concrete post URL + readable post screen): record it before any later step can fail.
+    this.confirmPublicationInJournal();
 
     const guardLog = formatPublishGuardLog(outcome, this.publishedUrl);
     if (guardLog) {
