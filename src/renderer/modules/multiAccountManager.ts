@@ -4692,6 +4692,8 @@ function initMainAccountSelector() {
     let currentAccountId = null;
     let isRefreshingAccountList = false;
     let accountListRevision = 0;
+    // Refresh and selection share one queue so a late list response cannot undo a selection.
+    let selectionTail = Promise.resolve();
     let refreshAccountListTimer = null;
     let lastMultiAccountModalVisible = false;
     const scheduleAccountListRefresh = () => {
@@ -4707,7 +4709,12 @@ function initMainAccountSelector() {
         }, 250);
     };
     const accountSessions = new Map();
-    async function loadAccountList() {
+    function loadAccountList() {
+        const next = selectionTail.then(() => refreshAccountList());
+        selectionTail = next.catch(() => undefined);
+        return next;
+    }
+    async function refreshAccountList() {
         try {
             const previousValue = accountSelector.value;
             isRefreshingAccountList = true;
@@ -4774,6 +4781,7 @@ function initMainAccountSelector() {
             genContent.value = session.generatedContent || '';
         if (genHashtags)
             genHashtags.value = session.generatedHashtags || '';
+        window.updatePublishButtonVisibility?.();
         const generator = document.getElementById('unified-generator');
         const publishMode = document.getElementById('unified-publish-mode');
         const toneStyle = document.getElementById('unified-tone-style');
@@ -4838,6 +4846,7 @@ function initMainAccountSelector() {
             genContent.value = '';
         if (genHashtags)
             genHashtags.value = '';
+        window.updatePublishButtonVisibility?.();
         const ctaText = document.getElementById('unified-cta-text');
         const ctaLink = document.getElementById('unified-cta-link');
         const skipCta = document.getElementById('unified-skip-cta');
@@ -4897,6 +4906,8 @@ function initMainAccountSelector() {
             if (account) {
                 const activated = await window.api.setActiveBlogAccount(selectedId);
                 if (!activated.success) throw new Error('계정을 적용하지 못했습니다.');
+                // A preceding queued refresh may have restored the old DOM value.
+                accountSelector.value = selectedId;
                 const realCategories = document.getElementById('real-blog-category-select');
                 if (realCategories && realCategories.dataset.ldbAccountId !== selectedId) {
                     realCategories.replaceChildren(); delete realCategories.dataset.ldbAccountId;
@@ -4953,8 +4964,8 @@ function initMainAccountSelector() {
             if (el && value)
                 el.value = value;
         });
+        window.updatePublishButtonVisibility?.();
     }
-    let selectionTail = Promise.resolve();
     const selectAccount = (id, preserveContent = false) => {
         const next = selectionTail.then(() => applyMainAccountSelection(id, preserveContent));
         selectionTail = next.catch(() => undefined); return next;

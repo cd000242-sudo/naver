@@ -1269,6 +1269,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
               introImages.forEach((img: any) => { const p = img?.filePath || img?.url; if (p) usedImagePaths.add(p); });
             }
           } catch (overlayError) {
+            // Upload failures may follow an already inserted thumbnail. Do
+            // not replay the whole intro as an overlay-generation fallback.
+            if ((overlayError as Error)?.message?.startsWith('IMAGE_INSERTION_FAILED:')) throw overlayError;
             self.log(`   ⚠️ 텍스트 오버레이 실패: ${(overlayError as Error).message} → 원본 삽입`);
             await self.insertImagesAtCurrentCursor(introImages, page, frame, resolved.affiliateLink);
           }
@@ -1349,6 +1352,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             await page.keyboard.press('Enter');
             await self.delay(200);
           } catch (safetyNetError) {
+            if ((safetyNetError as Error)?.message?.startsWith('IMAGE_INSERTION_FAILED:')) throw safetyNetError;
             recordSilentFailure('editor:safety-net-thumbnail');
             self.log(`   ⚠️ [Safety Net] 썸네일 삽입 실패: ${(safetyNetError as Error).message}`);
           }

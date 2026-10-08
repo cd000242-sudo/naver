@@ -178,11 +178,14 @@ const CATEGORY_PATTERNS = [
   ['건강', /건강|다이어트|위고비|비만|혈압|혈당|당뇨|콜레스테롤|영양제|비타민|검진|위암|유방암|폐암|갑상선|두통|불면/],
   ['패션·뷰티', /패션|코디|착장|가방|샤넬|데님|세럼|화장품|여행룩/],
   ['여행·생활', /여행|숙소|호텔|런던|공항|맛집|날씨|교통/],
-  ['스포츠·게임', /야구|축구|선수|아시안게임|올림픽|게임|메달|홈런/],
+  ['스포츠·게임', /야구|축구|선수|아시안게임|올림픽|게임|메달|홈런|손흥민|이강인|김민재|A매치|월드컵|국가대표|K리그|EPL|프리킥|득점|결승골|선제골|\d+호골|골프|농구|배구/],
   ['문화·연예', /배우|가수|아이돌|방송|드라마|영화|콘서트|아이브|카즈하|고윤정|카리나|트로트/],
 ];
-export function category(title, topics = []) {
+export function category(title, topics = [], summary = '') {
   for (const [name, pattern] of CATEGORY_PATTERNS) if (pattern.test(title)) return name;
+  // 제목에 없으면 요약에서(2026-10-08) — 요약이 있는데 단서가 없으면 블로그 주제를 믿지 않는다(여러 주제를 쓰는 블로그: 차범근 · 부캉이 · 마케팅 글이 IT/차테크로 갔다)
+  for (const [name, pattern] of CATEGORY_PATTERNS) if (pattern.test(String(summary || ''))) return name;
+  if (String(summary || '').trim()) return '사회·이슈';
   const counts = new Map();
   for (const topic of topics) { const name = TOPIC_CATEGORY[topic]; if (name) counts.set(name, (counts.get(name) || 0) + 1); }
   let best = null;
@@ -264,7 +267,7 @@ export function buildLiveCandidates(posts, now, growthByUrl = new Map()) {
     if (flags.includes('sponsored')) why.push('제품 제공·협찬 고지 감지: 자연 유행 근거에서 제외');
     if (stale) why.push('과거 자료 또는 발행 7일 경과: 새 사실 확보 전 작성 우선순위를 낮춥니다.');
     return {
-      id: idOf(lead.url), keyword, title: lead.title, category: category(lead.title, sorted.map((p) => p.topic)),
+      id: idOf(lead.url), keyword, title: lead.title, category: category(lead.title, sorted.map((p) => p.topic), lead.summary),
       status: stale ? 'stale' : recommended ? 'review-now' : 'verify', recommended,
       priority: Math.max(0, (age <= 1 ? 30 : age <= 2 ? 24 : age <= 7 ? 12 : 0) + (lead.summary ? 10 : 0) + Math.min(24, (channels - 1) * 8) + (platforms.size >= 2 ? 15 : 0) + (reaction ? 10 : 0) + (positiveGrowth ? 10 : 0) - (flags.includes('sponsored') ? 25 : 0) - (stale ? 30 : 0) - (flags.includes('sensitive-claim') ? 20 : 0)),
       publishedAt: lead.publishedAt, eventAt: null, capturedAt: lead.capturedAt,

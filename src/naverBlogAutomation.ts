@@ -3,6 +3,7 @@ import puppeteer from 'puppeteer-extra';
 import { randomUUID } from 'node:crypto';
 import { getPublicationCommitJournal } from './automation/publicationCommitJournal.js';
 import { getAccountExecutionGuard, AccountExecutionGuardError, ACCOUNT_PAUSE_CODES, type AccountPauseCode } from './automation/accountExecutionGuard.js';
+import { explainUserRunStop, resumePausedAccountForUserRun, type UserRunResumeDeps } from './automation/userRunResume.js';
 import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
 // ✅ [2026-05-25 v2.10.357] StealthPlugin import 제거 — browserSessionManager.ts에서 단일 등록
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
@@ -34,6 +35,7 @@ import { createGhostCursor, safeClick, safeType, safeClickInFrame, waitRandom, t
 import * as imageHelpers from './automation/imageHelpers';
 import * as publishHelpers from './automation/publishHelpers';
 import * as ctaHelpers from './automation/ctaHelpers';
+import { waitForInitialEditorReadiness, InitialEditorReadinessError, findReadyEditorFrame, EditorFrameProtectionError } from './automation/initialEditorReadiness.js';
 import { NAVER_TIMEOUTS, NAVER_WAIT_UNTIL } from './automation/timeouts';
 import * as editorHelpers from './automation/editorHelpers';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
@@ -54,6 +56,10 @@ import {
   readEditorTitleText,
   setTitleByDomEvent,
 } from './automation/editorTitleHelpers.js';
+import {
+  collectEditorReadinessSnapshot,
+  shouldRetryEditorReadiness,
+} from './automation/editorReadinessDiagnostics.js';
 import {
   DRAFT_POPUP_CANCEL_SELECTORS,
   isEditorDraftConflictMessage,
@@ -80,7 +86,6 @@ import {
   resolveManualLoginRetryWriteNavigation,
   shouldSkipBlogWriteWarmup,
 } from './automation/editorNavigationUrlPolicy.js';
-import { waitForEditorReady } from './automation/editorReadiness.js';
 import {
   isManualLoginBlogLandingSuccessful,
   resolveManualLoginCheckpoint,
@@ -319,6 +324,8 @@ export interface AutomationOptions {
 export type PublishMode = 'draft' | 'publish' | 'schedule';
 
 export interface RunOptions {
+  /** [2026-10-08] Semi-auto publish pressed by the user: re-check a LOGIN_REQUIRED/NETWORK_WAIT stop first. */
+  resumeOnUserRun?: boolean;
   title?: string;
   content?: string;
   lines?: number;
@@ -1990,43 +1997,28 @@ export class NaverBlogAutomation {
       getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_CHALLENGE');
       throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
     }
-    // One post = one fresh editor entry (never reuse an editor left open by an earlier post), checked once for
-    // readiness. Only an editor that did not become usable gets one more entry; then the run stops. Steps after
-    // this never navigate (see switchToMainFrame).
-    const writeUrl = this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver';
-    const isCancelled = () => { try { this.ensureNotCancelled(); return false; } catch { return true; } };
     try {
-      for (let entry = 1; entry <= 2; entry++) {
-        let response;
-        try {
-          response = await page.goto(writeUrl, { waitUntil: 'domcontentloaded', timeout: NAVER_TIMEOUTS.PAGE_LOAD });
-        } catch (navigationError) {
-          // A dropped connection or a slow first load gets the same single re-entry as an editor that was not ready.
-          if (entry === 1) {
-            this.log(`   ⚠️ 글쓰기 화면을 여는 중 연결 오류 — 한 번만 다시 엽니다: ${(navigationError as Error).message.slice(0, 80)}`);
-            continue;
-          }
-          throw navigationError;
-        }
+      if (!classifyBlogWriteNavigationUrl(page.url()).isEditorUrl) {
+        const response = await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
+          waitUntil: 'domcontentloaded', timeout: NAVER_TIMEOUTS.PAGE_LOAD,
+        });
         this.ensureNotCancelled();
         if (response && response.status() >= 400) throw new AccountExecutionGuardError('NETWORK_WAIT');
-        if (isLoginChallengeUrl(page.url())) throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
-        const destination = classifyBlogWriteNavigationUrl(page.url());
-        if (destination.isLoginRedirect) throw new AccountExecutionGuardError('LOGIN_REQUIRED');
-        if (!destination.isBlogDomain) throw new AccountExecutionGuardError('NETWORK_WAIT');
-        const readiness = await waitForEditorReady(page, { timeoutMs: 45000, isCancelled });
-        this.ensureNotCancelled();
-        if (readiness.reason === 'login') throw new AccountExecutionGuardError(isLoginChallengeUrl(page.url()) ? 'LOGIN_CHALLENGE' : 'LOGIN_REQUIRED');
-        if (readiness.ready) {
-          this.log(entry === 1 ? '✅ 글쓰기 화면 준비 확인' : '✅ 글쓰기 화면 준비 확인 (다시 열기 1회)');
-          return;
-        }
-        this.log(entry === 1
-          ? `   ⚠️ 글쓰기 화면이 준비되지 않았습니다(${readiness.reason}) — 한 번만 다시 엽니다.`
-          : `   ⚠️ 다시 열어도 글쓰기 화면이 준비되지 않았습니다(${readiness.reason}).`);
       }
-      throw new AccountExecutionGuardError('NETWORK_WAIT', '글쓰기 화면을 두 번 열었지만 준비되지 않았습니다. 원고는 보존했습니다. 네이버 연결을 확인한 뒤 계정 관리에서 재개해 주세요.');
+      if (isLoginChallengeUrl(page.url())) throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
+      const destination = classifyBlogWriteNavigationUrl(page.url());
+      if (destination.isLoginRedirect) throw new AccountExecutionGuardError('LOGIN_REQUIRED');
+      if (!destination.isBlogDomain) throw new AccountExecutionGuardError('NETWORK_WAIT');
+      // Cross-origin and nested editor documents must be inspected in their own frame contexts.
+      await waitForInitialEditorReadiness(page, { ensureNotCancelled: () => this.ensureNotCancelled() });
+      this.ensureNotCancelled();
+      if (isLoginChallengeUrl(page.url())) throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
+      const readyDestination = classifyBlogWriteNavigationUrl(page.url());
+      if (readyDestination.isLoginRedirect) throw new AccountExecutionGuardError('LOGIN_REQUIRED');
+      if (!readyDestination.isBlogDomain) throw new AccountExecutionGuardError('NETWORK_WAIT');
     } catch (error) {
+      const detail = error instanceof InitialEditorReadinessError ? error.message : (error instanceof AccountExecutionGuardError ? error.code : 'navigation-or-readiness-error');
+      this.log(`⚠️ 글쓰기 화면 확인 실패: ${detail}`);
       const code = error instanceof AccountExecutionGuardError ? error.code : 'NETWORK_WAIT';
       getAccountExecutionGuard().pause(this.options.naverId, code === 'ACCOUNT_BUSY' ? 'NETWORK_WAIT' : code);
       throw error instanceof AccountExecutionGuardError ? error : new AccountExecutionGuardError('NETWORK_WAIT', '글쓰기 화면을 확인하지 못했습니다. 원고를 보존했으니 연결 상태를 확인해 주세요.');
@@ -2049,13 +2041,111 @@ export class NaverBlogAutomation {
       throw new AccountExecutionGuardError('LOGIN_REQUIRED');
     }
 
+    if (isLoginChallengeUrl(currentUrl)) {
+      getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_CHALLENGE');
+      throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
+    }
+    let frame: Frame | null;
+    try { frame = await findReadyEditorFrame(page); }
+    catch (error) {
+      if (error instanceof EditorFrameProtectionError) {
+        getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_CHALLENGE');
+        throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
+      }
+      getAccountExecutionGuard().pause(this.options.naverId, 'NETWORK_WAIT');
+      throw new AccountExecutionGuardError('NETWORK_WAIT', '글쓰기 입력 화면의 상태가 변경되어 작업을 중단했습니다. 원고를 보존했으니 화면을 확인한 뒤 재개해 주세요.');
+    }
+    this.ensureNotCancelled();
+    if (!frame) {
     // ✅ [2026-03-24 FIX] 블로그 글쓰기 페이지 검증 강화 — URL 패턴 + DOM 기반
-    const frameSwitchSurface = resolveBlogWriteFrameSwitchSurface(currentUrl);
+    let frameSwitchSurface = resolveBlogWriteFrameSwitchSurface(currentUrl);
+    let isOnEditorByUrl = frameSwitchSurface.isEditorSurface;
+    let isOnBlogDomain = frameSwitchSurface.isBlogDomainSurface;
 
     if (frameSwitchSurface.shouldRetryNavigation) {
-      // Never navigate from here: this runs on every frame error, also in the middle of writing a post, so a
-      // reload/goto here re-opened the editor over and over. Entering the editor is navigateToBlogWrite's job.
-      throw new Error(`메인 프레임을 찾을 수 없습니다. 에디터가 아닌 페이지입니다: ${currentUrl}`);
+      // 완전히 다른 도메인(www.naver.com 등)에 있는 경우 → 자동 재이동
+      this.log(`   ⚠️ 에디터가 아닌 페이지에 있습니다: ${currentUrl}`);
+      this.log(`   🔄 블로그 글쓰기 페이지로 재이동 시도...`);
+      try {
+        // ✅ [v2.10.67] 30000 → 60000ms (사용자 보고: Navigation timeout)
+        await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
+          waitUntil: 'domcontentloaded',
+          timeout: NAVER_TIMEOUTS.PAGE_LOAD
+        });
+        await this.delay(3000);
+        currentUrl = page.url();
+        this.log(`   재이동 후 URL: ${currentUrl}`);
+        frameSwitchSurface = resolveBlogWriteFrameSwitchSurface(currentUrl);
+        isOnEditorByUrl = frameSwitchSurface.isEditorSurface;
+        isOnBlogDomain = frameSwitchSurface.isBlogDomainSurface;
+      } catch (retryErr) {
+        // 재이동도 실패하면 에러
+      }
+
+      // 재이동 후에도 에디터가 아니면 에러
+      const stillNotEditor = frameSwitchSurface.shouldRetryNavigation;
+      if (stillNotEditor) {
+        throw new Error(
+          `메인 프레임을 찾을 수 없습니다.\n` +
+          `페이지 URL: ${currentUrl}\n` +
+          `가능한 원인:\n` +
+          `1. 블로그 글쓰기 페이지로 이동하지 못했습니다.\n` +
+          `2. 네이버 메인 페이지로 리다이렉트되었습니다.\n` +
+          `해결 방법: 블로그 글쓰기 페이지로 이동한 후 다시 시도해주세요.`
+        );
+      }
+    } else if (isOnBlogDomain && !isOnEditorByUrl) {
+      // ✅ [v2.7.41] redirect 체인 + 스피너 안착 폴링 — "글을 불러오고 있습니다..." 무한로딩 차단
+      //   기존: 1회 DOM 검사 → 없으면 GoBlogWrite로 단순 재이동(3초만 대기)
+      //   문제: redirect 체인이 SPA 라우팅으로 늦게 끝나 #mainFrame 안착 전에 검사 통과 못함
+      //   수정: waitForFunction으로 #mainFrame 안착까지 최대 25초 폴링
+      this.log(`   🔍 #mainFrame 안착 폴링 (최대 25초)...`);
+      let hasEditorFrame = false;
+      try {
+        await page.waitForFunction(
+          () => !!document.querySelector('#mainFrame, iframe[name="mainFrame"]'),
+          { timeout: 25000, polling: 500 }
+        );
+        hasEditorFrame = true;
+        this.log(`   ✅ #mainFrame 안착 확인`);
+      } catch {
+        hasEditorFrame = false;
+      }
+
+      if (!hasEditorFrame) {
+        // 추가 진단: "글을 불러오고 있습니다" 스피너 텍스트 감지
+        const isStuckOnSpinner = await page.evaluate(() => {
+          const t = document.body?.innerText || '';
+          return /글을 불러오고 있습니다|불러오는 중/.test(t);
+        }).catch(() => false);
+        this.log(`   ⚠️ 블로그 도메인이지만 에디터 프레임 안착 실패 (스피너 정체: ${isStuckOnSpinner})`);
+        this.log(`   🔄 블로그 글쓰기 페이지로 reload + 재이동...`);
+        try {
+          // 1차: reload (cookies 유지 + redirect 체인 다시 시작)
+          // ✅ [v2.10.67] 30000 → 60000ms (사용자 보고: Navigation timeout)
+          await page.reload({ waitUntil: 'domcontentloaded', timeout: NAVER_TIMEOUTS.PAGE_RELOAD }).catch(() => {});
+          await this.delay(2000);
+          // 2차: 그래도 #mainFrame 없으면 직접 goto
+          const stillNoFrame = await page.evaluate(() => {
+            return !document.querySelector('#mainFrame, iframe[name="mainFrame"]');
+          }).catch(() => true);
+          if (stillNoFrame) {
+            await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
+              waitUntil: 'domcontentloaded',
+              timeout: NAVER_TIMEOUTS.PAGE_LOAD
+            });
+            // ✅ delay → waitForFunction으로 명시 안착 대기
+            await page.waitForFunction(
+              () => !!document.querySelector('#mainFrame, iframe[name="mainFrame"]'),
+              { timeout: 20000, polling: 500 }
+            ).catch(() => {});
+          }
+          currentUrl = page.url();
+          this.log(`   재이동 후 URL: ${currentUrl}`);
+        } catch (retryErr) {
+          this.log(`   ⚠️ 재이동 실패: ${(retryErr as Error).message}`);
+        }
+      }
     }
 
     // ✅ 최적화: 짧은 대기 후 즉시 프레임 찾기 시작
@@ -2141,9 +2231,11 @@ export class NaverBlogAutomation {
       );
     }
 
-    const frame = await frameHandle.contentFrame();
+    frame = await frameHandle.contentFrame();
     if (!frame) {
       throw new Error('메인 프레임으로 전환할 수 없습니다. iframe이 아직 로드되지 않았을 수 있습니다.');
+    }
+
     }
 
     // ✅ 프레임이 실제 콘텐츠를 로드할 때까지 잠시 대기
@@ -2564,9 +2656,26 @@ export class NaverBlogAutomation {
     }
 
     // ✅ 타임아웃 설정 (60초)
-    // The editor was confirmed ready on entry (navigateToBlogWrite); a missing title here is a stop, not a reason
-    // to open the editor again.
-    const titleElement = await findEditorTitleInputElement(frame, page, 60000, (message) => this.log(message));
+    let titleElement = await findEditorTitleInputElement(frame, page, 60000, (message) => this.log(message));
+    if (!titleElement) {
+      const snapshot = await collectEditorReadinessSnapshot(frame, page).catch(() => null);
+      if (snapshot && shouldRetryEditorReadiness(snapshot)) {
+        this.log('   ⚠️ 에디터 프레임은 열렸지만 내부 문서가 비어 있습니다. 글쓰기 페이지를 재안착합니다...');
+        try {
+          await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
+            waitUntil: 'domcontentloaded',
+            timeout: NAVER_TIMEOUTS.PAGE_LOAD
+          });
+          await this.delay(3000);
+          await this.switchToMainFrame();
+          const recoveredFrame = await this.getAttachedFrame();
+          frame = recoveredFrame;
+          titleElement = await findEditorTitleInputElement(recoveredFrame, page, 45000, (message) => this.log(message));
+        } catch (recoveryError) {
+          this.log(`   ⚠️ 에디터 재안착 실패: ${(recoveryError as Error).message}`);
+        }
+      }
+    }
     if (!titleElement) {
       const diagnostics = await collectEditorTitleDiagnostics(await this.getAttachedFrame(), page);
       throw new Error(`제목 입력 필드를 찾을 수 없습니다. ${diagnostics}`);
@@ -3962,8 +4071,8 @@ export class NaverBlogAutomation {
           }
         }
 
-        // One attempt + one repair, only before the confirm click (a confirm attempt ends as OUTCOME_UNKNOWN).
-        const MAX_SCHEDULE_RETRIES = 2;
+        // ✅ [2026-03-21 FIX] 예약발행 재시도 (최대 3회, 임시저장 폴백 제거)
+        const MAX_SCHEDULE_RETRIES = 3;
         let scheduleSuccess = false;
         let lastScheduleError: Error | null = null;
 
@@ -4021,7 +4130,7 @@ export class NaverBlogAutomation {
           throw new Error(`예약발행 ${MAX_SCHEDULE_RETRIES}회 시도 모두 실패: ${lastScheduleError?.message || '알 수 없는 오류'}`);
         }
       }
-    }, 2, '블로그 발행'); // one attempt + one repair on the same page (no re-navigation); the commit journal blocks a second confirm
+    }, 3, '블로그 발행');
   }
 
   private async applyPlainContent(resolved: ResolvedRunOptions): Promise<void> {
@@ -6318,15 +6427,24 @@ export class NaverBlogAutomation {
     }
 
     try {
-      // 브라우저가 없으면 새로 설정
-      if (!this.browser) {
+      const needsBrowserSetup = !this.browser;
+      if (needsBrowserSetup) {
         this.log('🚀 브라우저 초기화 중...');
         await this.setupBrowser();
+      }
+      this.ensureDialogHandler();
+      const entryPage = this.ensurePage();
+      const enteredFromBlank = entryPage.url() === 'about:blank';
+      // A fresh page has no blog origin for the read-only session probe.
+      // Perform this post's normal editor entry first; never enter it twice.
+      if (enteredFromBlank) await this.navigateToBlogWrite();
+      this.ensureNotCancelled();
+      if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
+
+      if (needsBrowserSetup) {
         await this.loginToNaver();
       } else {
-        // [v1.6.0 design — finally wired] A reused browser can hold an expired
-        // server session; cookie presence alone is a false positive. Verify
-        // against the server before entering the editor, re-login if dead.
+        // Verify current server/account evidence; blocking verdicts stop the run.
         const serverSessionOk = await browserSessionManager
           .ensureServerSession(this.options.naverId);
         if (serverSessionOk) {
@@ -6337,12 +6455,11 @@ export class NaverBlogAutomation {
         }
       }
 
-      // run()뿐 아니라 브라우저 재사용/엑셀 발행 경로에서도 네이티브
-      // "작성중인 글" confirm을 항상 처리한다.
-      this.ensureDialogHandler();
+      this.ensureNotCancelled();
+      if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
 
       // 글쓰기 페이지로 이동
-      await this.navigateToBlogWrite();
+      if (!enteredFromBlank) await this.navigateToBlogWrite();
       await this.switchToMainFrame();
 
       // 팝업이 완전히 렌더링될 때까지 대기 (최적화)
@@ -6666,7 +6783,37 @@ export class NaverBlogAutomation {
   }
 
   async run(runOptions: RunOptions = {}): Promise<{ success: boolean; url?: string }> {
-    return this.withAccountExecution(() => this.runAccountInternal(runOptions));
+    // [2026-10-08 사장님] A semi-auto publish the user pressed re-checks a stale stop itself (automation/userRunResume).
+    if (runOptions.resumeOnUserRun !== true) return this.withAccountExecution(() => this.runAccountInternal(runOptions));
+    const deps = this.userRunResumeDeps();
+    await resumePausedAccountForUserRun(deps);
+    try {
+      return await this.withAccountExecution(() => this.runAccountInternal(runOptions));
+    } catch (error) {
+      throw await explainUserRunStop(error, deps);
+    }
+  }
+
+  private userRunResumeDeps(): UserRunResumeDeps {
+    const id = this.options.naverId;
+    const guard = getAccountExecutionGuard();
+    return {
+      status: () => guard.getStatus(id),
+      hasUnconfirmedPublication: () => getPublicationCommitJournal().hasUnconfirmed(id),
+      openSession: async () => {
+        const session = await browserSessionManager.getOrCreateSession(id, this.options.headless ?? false, this.options.accountProxyUrl, { userInitiated: true });
+        // The check below loads the editor: register the stealth supplements first, exactly as a normal run
+        // does before its first navigation (setupBrowser reuses this same page afterwards).
+        this.browser = session.browser;
+        this.page = session.page;
+        await this.setupStealthSupplements().catch(() => undefined);
+      },
+      resume: (verify) => guard.resume(id, verify),
+      verify: () => browserSessionManager.verifyAccountForUser(id),
+      showLogin: () => browserSessionManager.openForUser(id),
+      pause: (code) => { guard.pause(id, code); },
+      log: (message) => this.log(message),
+    };
   }
 
   private accountWorkId = '';
@@ -6803,18 +6950,18 @@ export class NaverBlogAutomation {
     // setupBrowser()는 세션 재사용 시 early-return하여 핸들러 등록을 건너뛸 수 있음
     // → run()에서 확정적으로 등록하여 어떤 경로든 dialog 자동 수락 보장
      this.ensureDialogHandler();
+     const entryPage = this.ensurePage();
+     const enteredFromBlank = entryPage.url() === 'about:blank';
 
      try {
+       // On a fresh blank page, establish the blog origin through this post's
+       // normal editor entry before the read-only account identity check.
+       if (enteredFromBlank) await this.navigateToBlogWrite();
+       this.ensureNotCancelled();
+       if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.loginStart);
-       // [2026-07-01 FIX] Skip login when the server session is already valid.
-       //   Root cause: run() always called loginToNaver() after setupBrowser() reused a
-       //   session (cookie restore sets isLoggedIn=true), forcing a full re-login every
-       //   publish (~148s wasted). runPostOnly() already gates on ensureServerSession();
-       //   run() lacked it, so the two publish paths were asymmetric.
-       //   ensureServerSession() is a real server-side HTTP probe (fetch PostWriteForm.naver
-       //   + login-redirect check), fundamentally different from the v1.4.62 cookie fast-path
-       //   that false-positived on stale cookies. A dead server session returns false → normal
-       //   re-login; any exception/timeout also resolves to false → login proceeds (safe default).
+       // Cookie presence alone is insufficient. Blocking verdicts and transport
+       // failures throw a pause error; they never trigger automatic credentials.
        const serverSessionOk = await browserSessionManager
          .ensureServerSession(this.options.naverId);
        if (serverSessionOk) {
@@ -6822,10 +6969,12 @@ export class NaverBlogAutomation {
        } else {
          await this.loginToNaver();
        }
+       this.ensureNotCancelled();
+       if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
        this.log(formatPipelineUrlLog('loginDone', this.page?.url()));
 
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.openingWriteEditor);
-       await this.navigateToBlogWrite();
+       if (!enteredFromBlank) await this.navigateToBlogWrite();
        this.log(formatPipelineUrlLog('writeEditorNavigationDone', this.page?.url()));
 
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.switchingEditorFrame);

@@ -2,9 +2,7 @@ name: Build macOS Universal Release
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - 'v*'
+  # macOS 빌드는 사용자가 요청했을 때 수동으로 실행합니다.
 
 permissions:
   contents: write

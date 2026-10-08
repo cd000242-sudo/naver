@@ -21,6 +21,8 @@ import { isLoginChallengeUrl, isNaverSessionLoginUrl, parseNaverSessionUrl } fro
 import { getAccountExecutionGuard, AccountExecutionGuardError, type AccountPauseCode } from './automation/accountExecutionGuard.js';
 import type { ServerSessionProbeVerdict } from './automation/serverSessionProbePolicy.js';
 import { withCleanupTimeout } from './runtime/cleanupTimeout.js';
+import { waitForInitialEditorReadiness } from './automation/initialEditorReadiness.js';
+import { inspectCurrentSessionFrames } from './automation/serverSessionFrameProbe.js';
 
 // ✅ [2026-03-27 FIX] Stealth Plugin — 모든 evasion 모듈 명시적 활성화
 // 기본 설정에서 일부 모듈(chrome.csi 등)이 비활성화되어 있을 수 있으므로 명시적으로 설정
@@ -863,7 +865,8 @@ class BrowserSessionManager {
         accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
         if (!session?.browser.connected || session.page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-unavailable' };
-        const current = session.page.url();
+        const page = session.page;
+        const current = page.url();
         if (isLoginChallengeUrl(current) || isNaverSessionLoginUrl(current)) return this.inspectServerSessionState(accountId);
         try {
             // First inspect the current page: a ready editor may contain an unsaved draft.
@@ -871,15 +874,13 @@ class BrowserSessionManager {
             const currentSurface = parseNaverSessionUrl(current);
             const canOpenEditor = current === 'about:blank' || Boolean(currentSurface && ['www.naver.com', 'naver.com'].includes(currentSurface.hostname));
             if (!canOpenEditor || !['unknown', 'unavailable'].includes(existing.status) || existing.reason === 'account-identity-unverified' || existing.reason === 'session-changed') return existing;
-            if (this.sessions.get(accountId) !== session || session.page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-changed' };
+            if (this.sessions.get(accountId) !== session || session.page !== page || page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-changed' };
             // Only explicit resume may advance an unverified non-editor to the editor.
-            await session.page.goto(SERVER_SESSION_PROBE_URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-            if (isLoginChallengeUrl(session.page.url()) || isNaverSessionLoginUrl(session.page.url())) return this.inspectServerSessionState(accountId);
-            await session.page.waitForFunction(() => {
-                const docs: Document[] = [document];
-                for (const frame of Array.from(document.querySelectorAll('iframe'))) { try { if (frame.contentDocument) docs.push(frame.contentDocument); } catch { /* Other origin */ } }
-                return docs.some(doc => !!doc.querySelector('.se-main-container, .se-documentTitle'));
-            }, { timeout: 15000 });
+            await page.goto(SERVER_SESSION_PROBE_URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
+            if (this.sessions.get(accountId) !== session || session.page !== page || page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-changed' };
+            if (isLoginChallengeUrl(page.url()) || isNaverSessionLoginUrl(page.url())) return this.inspectServerSessionState(accountId);
+            await waitForInitialEditorReadiness(page, { timeoutMs: 15000 });
+            if (this.sessions.get(accountId) !== session || session.page !== page || page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-changed' };
             return this.inspectServerSessionState(accountId);
         } catch { return { ok: false, status: 'unavailable', reason: 'editor-unavailable' }; }
     }
@@ -917,42 +918,49 @@ class BrowserSessionManager {
         const session = this.sessions.get(accountId);
         if (!session || !session.browser.connected || !session.page || session.page.isClosed()) return { ok: false, status: 'unavailable', reason: 'session-unavailable' };
         const page = session.page;
+        const initialUrl = typeof page.url === 'function' ? page.url() : undefined;
         const expectedIdentity = this.expectedBlogIds.get(accountId.trim().toLowerCase()) || accountId.trim().toLowerCase();
         try {
-            const pendingCheck = page.evaluate(async (probeUrl: string, timeoutMs: number) => {
-                const read = (doc: Document, finalUrl: string) => {
-                    const hasEditor = !!doc.querySelector('.se-main-container') && !!doc.querySelector('.se-documentTitle, .se-text-paragraph[contenteditable], .se-component-content[contenteditable]');
-                    const hasLoginForm = !!doc.querySelector('input[type="password"]') && !!doc.querySelector('input[name="id"], input#id');
-                    const bodyText = hasEditor ? '' : (doc.body?.textContent || '').slice(0, 12000);
-                    const hasChallenge = !!doc.querySelector('input[name="captcha"], input#captcha') || /자동입력 방지|보안문자를 입력|본인 확인이 필요/.test(bodyText);
-                    const hasProtection = /보호조치가 적용|보호조치 해제|이용이 제한/.test(bodyText);
-                    // 에디터 응답의 공식 URL blogId 매개변수만 계정 증거로 사용한다.
-                    let accountIdentity: string | undefined;
-                    try { const url = new URL(finalUrl); if (['blog.naver.com', 'm.blog.naver.com'].includes(url.hostname)) { accountIdentity = url.searchParams.get('blogId') || undefined; if (!accountIdentity && hasEditor && url.searchParams.get('Redirect') === 'Write') accountIdentity = /^\/([A-Za-z0-9_-]+)$/.exec(url.pathname)?.[1]; } } catch { /* unknown */ }
-                    return { finalUrl, status: 200, hasEditor, hasLoginForm, hasChallenge, hasProtection, bodyText, accountIdentity };
-                };
-                const current = read(document, location.href);
-                if (current.hasChallenge || current.hasProtection || current.hasLoginForm) return current;
-                for (const frame of Array.from(document.querySelectorAll('iframe'))) {
-                    try {
-                        if (!frame.contentDocument || !frame.contentWindow) continue;
-                        const nested = read(frame.contentDocument, frame.contentWindow.location.href);
-                        if (nested.hasProtection || nested.hasChallenge || nested.hasLoginForm || nested.hasEditor) return nested;
-                    } catch { /* Different origin cannot establish account identity. */ }
+            const pendingCheck = (async () => {
+                if (typeof page.frames === 'function') {
+                    const currentFrames = await inspectCurrentSessionFrames(page);
+                    if (currentFrames) return currentFrames;
                 }
-                if (current.hasEditor) return current;
-                const controller = new AbortController();
-                const timer = setTimeout(() => controller.abort(), timeoutMs);
-                try {
-                    const res = await fetch(probeUrl, { method: 'GET', credentials: 'include', cache: 'no-store', redirect: 'follow', signal: controller.signal });
-                    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
-                    return { ...read(doc, res.url), status: res.status };
-                } catch { return { error: 'probe-unavailable' }; }
-                finally { clearTimeout(timer); }
-            }, SERVER_SESSION_PROBE_URL, this.SERVER_SESSION_CHECK_TIMEOUT_MS);
+                return page.evaluate(async (probeUrl: string, timeoutMs: number) => {
+                    const read = (doc: Document, finalUrl: string) => {
+                        const hasEditor = !!doc.querySelector('.se-main-container') && !!doc.querySelector('.se-documentTitle, .se-text-paragraph[contenteditable], .se-component-content[contenteditable]');
+                        const hasLoginForm = !!doc.querySelector('input[type="password"]') && !!doc.querySelector('input[name="id"], input#id');
+                        const bodyText = hasEditor ? '' : (doc.body?.textContent || '').slice(0, 12000);
+                        const hasChallenge = !!doc.querySelector('input[name="captcha"], input#captcha') || /자동입력 방지|보안문자를 입력|본인 확인이 필요/.test(bodyText);
+                        const hasProtection = /보호조치가 적용|보호조치 해제|이용이 제한/.test(bodyText);
+                        // 에디터 응답의 공식 URL blogId 매개변수만 계정 증거로 사용한다.
+                        let accountIdentity: string | undefined;
+                        try { const url = new URL(finalUrl); if (['blog.naver.com', 'm.blog.naver.com'].includes(url.hostname)) { accountIdentity = url.searchParams.get('blogId') || undefined; if (!accountIdentity && hasEditor && url.searchParams.get('Redirect') === 'Write') accountIdentity = /^\/([A-Za-z0-9_-]+)$/.exec(url.pathname)?.[1]; } } catch { /* unknown */ }
+                        return { finalUrl, status: 200, hasEditor, hasLoginForm, hasChallenge, hasProtection, bodyText, accountIdentity };
+                    };
+                    const current = read(document, location.href);
+                    if (current.hasChallenge || current.hasProtection || current.hasLoginForm) return current;
+                    for (const frame of Array.from(document.querySelectorAll('iframe'))) {
+                        try {
+                            if (!frame.contentDocument || !frame.contentWindow) continue;
+                            const nested = read(frame.contentDocument, frame.contentWindow.location.href);
+                            if (nested.hasProtection || nested.hasChallenge || nested.hasLoginForm || nested.hasEditor) return nested;
+                        } catch { /* Different origin cannot establish account identity. */ }
+                    }
+                    if (current.hasEditor) return current;
+                    const controller = new AbortController();
+                    const timer = setTimeout(() => controller.abort(), timeoutMs);
+                    try {
+                        const res = await fetch(probeUrl, { method: 'GET', credentials: 'include', cache: 'no-store', redirect: 'follow', signal: controller.signal });
+                        const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+                        return { ...read(doc, res.url), status: res.status };
+                    } catch { return { error: 'probe-unavailable' }; }
+                    finally { clearTimeout(timer); }
+                }, SERVER_SESSION_PROBE_URL, this.SERVER_SESSION_CHECK_TIMEOUT_MS);
+            })();
             // The page's AbortController cannot bound a stalled renderer/CDP connection.
             const serverCheck = await withCleanupTimeout(() => pendingCheck, this.SERVER_SESSION_CHECK_TIMEOUT_MS + 1000, 'server-session-probe');
-            if (this.sessions.get(accountId) !== session || session.page !== page || page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-changed' };
+            if (this.sessions.get(accountId) !== session || session.page !== page || page.isClosed() || (initialUrl !== undefined && page.url() !== initialUrl)) return { ok: false, status: 'unknown', reason: 'session-changed' };
             const verdict = resolveServerSessionProbeVerdict(serverCheck);
             if (verdict.ok) {
                 if (!('accountIdentity' in serverCheck) || !serverCheck.accountIdentity || serverCheck.accountIdentity.toLowerCase() !== expectedIdentity) {

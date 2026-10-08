@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { expect, test, _electron as electron, type ElectronApplication, type Page } from '@playwright/test';
 import { closeElectronTestSession, createElectronTestProfile, type ElectronTestProfile, waitForMainWindow } from './electronTestUtils';
@@ -12,6 +13,7 @@ let token: string;
 let accountId: string;
 let imageBytes: Buffer;
 let customImageSavePath: string;
+let downloadSavePath: string;
 const fixtureLogin = 'ldb_e2e_fixture';
 const categories = [{ id: '7', name: '연결 검증' }, { id: '8', name: '이미지 검증' }];
 const origin = 'chrome-extension://' + 'a'.repeat(32);
@@ -33,6 +35,8 @@ async function bridge(route: string, body?: unknown) {
 test.beforeAll(async () => {
   profile = await createElectronTestProfile('bln-ldb-handoff-e2e-');
   customImageSavePath = path.join(profile.root, 'configured-image-folder');
+  downloadSavePath = path.join(profile.root, 'isolated-downloads');
+  await fs.mkdir(downloadSavePath, { recursive: true });
   // 실제 네트워크만 고정하며, 부트스트랩 이후 원본 앱 전체를 실행한다.
   const root = path.join(__dirname, '..');
   const bootstrap = path.join(profile.root, 'ldb-test-main.cjs');
@@ -40,6 +44,7 @@ test.beforeAll(async () => {
     const root = ${JSON.stringify(root)};
     const electron = require('electron');
     electron.app.setAppPath(root);
+    electron.app.setPath('downloads', ${JSON.stringify(downloadSavePath)});
     const nodeRequire = require('node:module').createRequire(root + '/package.json');
     const axios = nodeRequire('axios').default;
     const originalAdapter = axios.getAdapter(axios.defaults.adapter);
@@ -128,11 +133,23 @@ test('real HTTP selection, article, heading images and repeat delivery cross pre
       { title: '확인할 내용', content: '두 번째 소제목의 실제 본문입니다.', prompt: 'A close-up checklist with distinct completed tasks' }],
     hashtags: ['연결테스트'], images: [] as any[],
   };
+  await page.locator('.tab-button[data-tab="unified"]').focus();
+  await page.keyboard.press('Enter');
+  await page.locator('.pub-mode-tab[data-pubmode="continuous"]').click();
+  await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().find(window => !window.isDestroyed() && window.webContents.getURL().includes('index.html'))!.minimize());
   const articleAck = await bridge('/v1/posts', { posts: [article], destination });
   expect(articleAck.imported).toBe(1);
   expect(articleAck.selection).toEqual(destination);
   await expect(page.locator('#unified-generated-title')).toHaveValue(article.title);
   await expect(page.locator('#unified-generated-content')).toHaveValue(content);
+  await expect(page.locator('.tab-button[data-tab="unified"]')).toHaveClass(/active/);
+  await expect(page.locator('.pub-mode-tab[data-pubmode="single"]')).toHaveClass(/active/);
+  await expect(page.locator('#unified-semi-auto-section')).toBeInViewport();
+  await expect(page.locator('#unified-semi-auto-section')).toBeFocused();
+  await expect.poll(() => app.evaluate(({ BrowserWindow }) => {
+    const window = BrowserWindow.getAllWindows().find(value => value.webContents.getURL().includes('index.html'))!;
+    return { visible: window.isVisible(), minimized: window.isMinimized(), focused: window.isFocused() };
+  })).toEqual({ visible: true, minimized: false, focused: true });
   await expect(page.locator('#prompts-container .prompt-item')).toHaveCount(3);
   const expectedPrompts = [article.structuredContent.thumbnailPrompt, ...article.headings.map(heading => heading.prompt)];
   await expect(page.locator('#prompts-container .prompt-item .prompt-text')).toHaveText(expectedPrompts);
@@ -141,10 +158,20 @@ test('real HTTP selection, article, heading images and repeat delivery cross pre
   article.images = [{ heading: '🖼️ 썸네일', isThumbnail: true, prompt: article.structuredContent.thumbnailPrompt, previewDataUrl: png },
     ...article.headings.map((heading, headingIndex) => ({ heading: heading.title, headingIndex, prompt: heading.prompt, previewDataUrl: png }))];
   for (let attempt = 0; attempt < 2; attempt += 1) {
+    await page.locator('.tab-button[data-tab="images"]').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('#images-subtab-generate').click();
+    await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().find(window => window.webContents.getURL().includes('index.html'))!.hide());
     const ack = await bridge('/v1/posts', { posts: [article], destination });
     expect(ack.imported).toBe(1);
     expect(ack.selection).toEqual(destination);
     await expect(page.locator('#prompts-container .prompt-item .prompt-text')).toHaveText(expectedPrompts);
+    await expect(page.locator('.tab-button[data-tab="images"]')).toHaveClass(/active/);
+    await expect(page.locator('#images-subpanel-manage')).toBeVisible();
+    await expect(page.locator('#images-subpanel-generate')).toBeHidden();
+    await expect(page.locator('#prompts-container')).toBeInViewport();
+    await expect(page.locator('#prompts-container')).toBeFocused();
+    await expect.poll(() => app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().find(window => window.webContents.getURL().includes('index.html'))!.isVisible())).toBe(true);
   }
   await expect(page.locator('#prompts-container .prompt-item .generated-image img')).toHaveCount(3);
   const headingImages = page.locator('#prompts-container .prompt-item .generated-image img');
@@ -183,4 +210,104 @@ test('real HTTP selection, article, heading images and repeat delivery cross pre
   expect(await fs.stat(path.join(profile.root, 'must-not-publish.ndjson')).then(() => true, () => false)).toBe(false);
   await expect(page.locator('#prompts-container .prompt-item .prompt-text')).toHaveText(expectedPrompts);
   expect(runtimeErrors).toEqual([]);
+});
+
+test('saved download files retain exact thumbnail and heading assignments through HTTP, disk and renderer ACK', async () => {
+  test.setTimeout(90_000);
+  expect((await bridge('/v1/status')).capabilities).toContain('download-image-files');
+  const headings = [{ title: '준비 장면', content: '준비할 내용', prompt: 'A blue preparation desk' },
+    { title: '확인 장면', content: '확인할 내용', prompt: 'A green completed checklist' }];
+  const article = { id: 'ldb_e2e_saved_downloads', title: '다운로드 폴더 이미지 배치 검증',
+    content: '다운로드한 파일을 실제로 읽어 배치합니다.\n\n## 준비 장면\n준비할 내용\n\n## 확인 장면\n확인할 내용',
+    headings, structuredContent: { thumbnailPrompt: 'A warm orange overview' }, publishMode: 'draft', images: [] as any[] };
+  const destination = { accountId, categoryId: '7' };
+  await bridge('/v1/posts', { posts: [article], destination });
+  const colors = ['#e88c29', '#287ad2', '#23a066'];
+  const bytes = await Promise.all(colors.map(background => sharp({ create: { width: 8, height: 8, channels: 4, background } }).png().toBuffer()));
+  const imageHeadings = ['🖼️ 썸네일', ...headings.map(value => value.title)];
+  for (let index = 0; index < bytes.length; index++) {
+    const relativePath = `LDB Image Ultra/다운로드 배치 검증-e2e/${index === 0 ? '00-thumbnail' : `0${index}-heading`}.png`;
+    const filename = path.join(downloadSavePath, relativePath);
+    await fs.mkdir(path.dirname(filename), { recursive: true });
+    await fs.writeFile(filename, bytes[index]);
+    article.images.push({ heading: imageHeadings[index], isThumbnail: index === 0, ...(index ? { headingIndex: index - 1 } : {}),
+      prompt: index ? headings[index - 1].prompt : article.structuredContent.thumbnailPrompt,
+      // A deliberately different inline fallback proves that the saved file is authoritative.
+      previewDataUrl: 'data:image/png;base64,' + imageBytes.toString('base64'),
+      downloadRef: { relativePath, mime: 'image/png', byteLength: bytes[index].length,
+        sha256: createHash('sha256').update(bytes[index]).digest('hex') } });
+  }
+  await page.locator('.tab-button[data-tab="unified"]').focus();
+  await page.keyboard.press('Enter');
+  await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().find(window => window.webContents.getURL().includes('index.html'))!.minimize());
+  const ack = await bridge('/v1/posts', { posts: [article], destination });
+  expect(ack).toMatchObject({ imported: 1, selection: destination });
+  await expect(page.locator('.tab-button[data-tab="images"]')).toHaveClass(/active/);
+  await expect(page.locator('#images-subpanel-manage')).toBeVisible();
+  await expect(page.locator('#prompts-container')).toBeFocused();
+  await expect.poll(() => app.evaluate(({ BrowserWindow }) => {
+    const window = BrowserWindow.getAllWindows().find(value => value.webContents.getURL().includes('index.html'))!;
+    return { visible: window.isVisible(), minimized: window.isMinimized(), focused: window.isFocused() };
+  })).toEqual({ visible: true, minimized: false, focused: true });
+  const imageRows = page.locator('#prompts-container .prompt-item');
+  await expect(imageRows).toHaveCount(3);
+  for (let index = 0; index < 3; index++) {
+    const row = imageRows.filter({ has: page.locator(`.generated-image img[src="data:image/png;base64,${bytes[index].toString('base64')}"]`) });
+    await expect(row).toHaveCount(1);
+    await expect(row).toHaveAttribute('data-heading-title', imageHeadings[index]);
+    await expect.poll(() => row.locator('.generated-image img').evaluate(image => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth)).toBe(8);
+  }
+  const stored = await page.evaluate(id => JSON.parse(localStorage.getItem('naver_blog_generated_posts') || '[]').find((value: any) => value.id === id), article.id);
+  expect(stored.isPublished).toBe(false);
+  expect(stored.images.map((image: any) => image.heading)).toEqual(imageHeadings);
+  const saveFolders = new Set<string>();
+  for (let index = 0; index < 3; index++) {
+    const filePath = stored.images[index].filePath;
+    expect(path.relative(customImageSavePath, filePath)).not.toMatch(/^\.\.(?:[\\/]|$)/u);
+    expect(await fs.readFile(filePath)).toEqual(bytes[index]);
+    saveFolders.add(path.dirname(filePath));
+  }
+  expect(saveFolders.size).toBe(1);
+  expect(await fs.readdir([...saveFolders][0])).toHaveLength(3);
+  expect(await fs.stat(path.join(profile.root, 'must-not-publish.ndjson')).then(() => true, () => false)).toBe(false);
+  expect(runtimeErrors).toEqual([]);
+});
+
+
+test('received article rises above another window from visible and minimized states', async () => {
+  test.setTimeout(60_000);
+  const competitorId = await app.evaluate(async ({ BrowserWindow }) => {
+    const competitor = new BrowserWindow({ width: 640, height: 420, show: false,
+      webPreferences: { sandbox: true, contextIsolation: true, nodeIntegration: false } });
+    await competitor.loadURL('data:text/html;charset=utf-8,<title>LDB isolated focus fixture</title><p>Other window</p>');
+    return competitor.id;
+  });
+  try {
+    for (const minimized of [false, true]) {
+      await app.evaluate(({ BrowserWindow }, { competitorId, minimized }) => {
+        const target = BrowserWindow.getAllWindows().find(window => window.webContents.getURL().includes('index.html'))!;
+        if (minimized) target.minimize(); else { target.restore(); target.show(); }
+        const competitor = BrowserWindow.fromId(competitorId)!;
+        competitor.show(); competitor.moveTop(); competitor.focus();
+      }, { competitorId, minimized });
+      await expect.poll(() => app.evaluate(({ BrowserWindow }, competitorId) => ({
+        competitorFocused: BrowserWindow.fromId(competitorId)!.isFocused(),
+        appFocused: BrowserWindow.getAllWindows().find(window => window.webContents.getURL().includes('index.html'))!.isFocused(),
+      }), competitorId)).toEqual({ competitorFocused: true, appFocused: false });
+      const article = { id: 'ldb_e2e_foreground_' + String(minimized), title: '수신 원고 전면 확인 ' + String(minimized),
+        content: '사용자가 가져간 원고를 앱에서 바로 확인하는 격리 테스트입니다.', publishMode: 'draft', headings: [], hashtags: [], images: [] };
+      const ack = await bridge('/v1/posts', { posts: [article], destination: { accountId, categoryId: '7' } });
+      expect(ack.imported).toBe(1);
+      await expect(page.locator('#unified-generated-title')).toHaveValue(article.title);
+      await expect(page.locator('#unified-generated-content')).toHaveValue(article.content);
+      await expect.poll(() => app.evaluate(({ BrowserWindow }, competitorId) => {
+        const target = BrowserWindow.getAllWindows().find(window => window.webContents.getURL().includes('index.html'))!;
+        return { visible: target.isVisible(), minimized: target.isMinimized(), focused: target.isFocused(),
+          topmost: target.isAlwaysOnTop(), competitorFocused: BrowserWindow.fromId(competitorId)!.isFocused() };
+      }, competitorId)).toEqual({ visible: true, minimized: false, focused: true, topmost: false, competitorFocused: false });
+    }
+    expect(await fs.stat(path.join(profile.root, 'must-not-publish.ndjson')).then(() => true, () => false)).toBe(false);
+  } finally {
+    await app.evaluate(({ BrowserWindow }, competitorId) => BrowserWindow.fromId(competitorId)?.destroy(), competitorId);
+  }
 });

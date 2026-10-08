@@ -11,6 +11,8 @@ export type GeneratorType = 'gemini' | 'openai' | 'claude' | 'perplexity';
 
 export interface FillSemiAutoFieldsOptions {
     persist?: boolean;
+    /** External handoffs scroll to their receiving screen after all previews are ready. */
+    scroll?: boolean;
 }
 
 // ── 자동화 이미지 ──

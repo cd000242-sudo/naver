@@ -69,6 +69,7 @@ export function prepareLdbDrafts(incoming: any[], existing: any[] = []): { posts
 }
 
 export interface LdbDraftReceiverDeps {
+  waitUntilReady?: () => Promise<void>;
   read: () => any[];
   write: (posts: any[]) => void;
   display: (post: any) => Promise<void> | void;
@@ -76,11 +77,35 @@ export interface LdbDraftReceiverDeps {
   verifyDestination?: (destination: any) => void;
 }
 
+/** Bound each incoming request's wait to less than the main-process ACK budget. */
+export function createLdbDraftUiReadyGate(timeoutMs = 15_000): { waitUntilReady: () => Promise<void>; markReady: () => void } {
+  let ready = false;
+  const waiters = new Set<() => void>();
+  return {
+    waitUntilReady: () => ready ? Promise.resolve() : new Promise<void>((resolve, reject) => {
+      const finish = () => { clearTimeout(timer); waiters.delete(finish); resolve(); };
+      const timer = setTimeout(() => {
+        waiters.delete(finish);
+        reject(new Error('앱 편집 화면 준비 시간이 초과되었습니다. 앱 초기화 후 다시 보내주세요.'));
+      }, timeoutMs);
+      waiters.add(finish);
+    }),
+    markReady: () => {
+      ready = true;
+      for (const finish of [...waiters]) finish();
+    },
+  };
+}
+
 /** Serialize deliveries so two clicks cannot interleave article/image state. */
 export function createLdbDraftReceiver(deps: LdbDraftReceiverDeps): (posts: any[], destination?: any) => Promise<number> {
   let tail: Promise<unknown> = Promise.resolve();
   return (incoming, destination) => {
+    // Start the readiness deadline on arrival, even behind a preceding delivery.
+    const ready = Promise.resolve().then(() => deps.waitUntilReady?.());
+    void ready.catch(() => undefined); // The serialized task below owns the rejection.
     const next = tail.then(async () => {
+      await ready;
       const prepared = incoming.length ? prepareLdbDrafts(incoming, deps.read()) : null;
       if (destination) {
         if (!deps.applyDestination) throw new Error('계정 연결 화면이 준비되지 않았습니다.');

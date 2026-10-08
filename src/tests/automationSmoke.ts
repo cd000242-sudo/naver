@@ -16,7 +16,10 @@ async function runSmokeTest(): Promise<void> {
   // This smoke covers orchestration only. Real state classification has separate tests.
   let verifiedSessions = 0;
   browserSessionManager.ensureServerSession = async () => { verifiedSessions++; return true; };
-
+  let pageUrl = 'about:blank';
+  let editorEntries = 0;
+  mock.page = { url: () => pageUrl, isClosed: () => false };
+  mock.ensureDialogHandler = () => undefined;
 
   mock.setupBrowser = async () => {
     console.log('🧪 [MOCK] 브라우저 초기화 생략');
@@ -25,6 +28,8 @@ async function runSmokeTest(): Promise<void> {
     console.log('🧪 [MOCK] 로그인 단계 생략');
   };
   mock.navigateToBlogWrite = async () => {
+    editorEntries++;
+    pageUrl = 'https://blog.naver.com/remember-test-id?Redirect=Write';
     console.log('🧪 [MOCK] 블로그 글쓰기 페이지 이동 생략');
   };
   mock.switchToMainFrame = async () => {
@@ -71,6 +76,7 @@ async function runSmokeTest(): Promise<void> {
   });
 
   if (verifiedSessions !== 1) throw new Error('Expected exactly one mocked session verification');
+  if (editorEntries !== 1) throw new Error('Expected exactly one editor entry from a blank page');
   console.log('✅ 모의 자동화 테스트가 오류 없이 완료되었습니다.');
 }
 

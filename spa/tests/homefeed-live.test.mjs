@@ -140,9 +140,21 @@ test('분야 — 자동차·IT · 건강, 제목 단서 없으면 출처 주제(
   assert.equal(live.category('손흥민 결승골 터진 순간 아시안게임', ['IT/차테크']), '스포츠·게임');
   assert.equal(live.category('41홈런으로 홈런왕 굳히나 기아타이거즈 김도영'), '스포츠·게임');
 });
-test('실시간 판도 CI 판 출처 목록의 주제로 분야를 매긴다', () => {
+// 2026-10-08: 카드는 늘 요약이 있어서 블로그 주제가 아니라 제목 · 요약 단서로 분야가 정해진다(블로그 주제는 요약 없는 글만)
+test('실시간 판도 CI 판 카드 분야 — 제목에 단서가 없으면 요약 단서로', () => {
   const board = { schemaVersion: 1, generatedAt: now, status: 'partial', sources: [{ id: 'car1', platform: 'naver-blog', url: 'https://blog.naver.com/car1', status: 'ok', topic: 'IT/차테크' }], candidates: [] };
-  const feeds = [{ id: 'car1', platform: 'naver-blog', name: 'car1', status: 'ok', text: '<rss><channel><title>car1</title><item><title>요즘 다들 이렇게 한다는 그것</title><link>https://blog.naver.com/car1/111</link><description>요약</description><pubDate>Mon, 28 Sep 2026 20:00:00 +0900</pubDate></item></channel></rss>' }];
+  const feeds = [{ id: 'car1', platform: 'naver-blog', name: 'car1', status: 'ok', text: '<rss><channel><title>car1</title><item><title>요즘 다들 이렇게 한다는 그것</title><link>https://blog.naver.com/car1/111</link><description>신형 그랜저를 한 달 타 보니 연비가 이렇게 나왔습니다</description><pubDate>Mon, 28 Sep 2026 20:00:00 +0900</pubDate></item></channel></rss>' }];
   const merged = live.mergeLiveBoard(board, feeds, now);
   assert.equal(merged.candidates[0].category, '자동차·IT');
+});
+
+// 2026-10-08 사장님 "카테고리 제대로 — 차범근 · 부캉이 · 마케팅 글이 자동차·IT" — 출처 블로그 주제(IT/차테크)만 보고 넣었다.
+// 제목 → 요약 순으로 단서를 찾고, 블로그 주제는 요약이 아예 없는 글에만 쓴다(요약이 있는데 단서가 없으면 사회·이슈).
+test('분야 — 요약까지 보고, 요약이 있으면 블로그 주제를 믿지 않는다(차범근 · 부캉이 · 마케팅 실사고)', () => {
+  const IT = ['IT/차테크', 'IT/차테크', 'IT/차테크'];
+  assert.equal(live.category("[에나가]손흥민, 전설 차범근 넘었다... A매치 최다 59호골 '새 역사'", IT, '우즈베크전서 프리킥 선제골 A매치 4연전 마지막 경기'), '스포츠·게임');
+  assert.equal(live.category('부산 상어 부캉이 정체는? 이름부터 특별한 흑상어 이야기', IT, '"부산에 상어가 나타났다"는 소식에 한동안 관심이 뜨거웠죠. 바로 부캉이예요. 약 3m 크기의 암컷 흑상어였어요'), '사회·이슈');
+  assert.equal(live.category('10월 7일 마케팅 뉴스', IT, '1. 유튜브 MAU 5074만명, 넷플릭스의 3배 넘어 9월 국내 유튜브 앱 월간 이용자, 쿠팡은 3565만명'), '사회·이슈');
+  assert.equal(live.category('요즘 다들 이렇게 한다는 그것', IT, '신형 그랜저를 한 달 타 보니 연비가 이렇게 나왔습니다'), '자동차·IT');
+  assert.equal(live.category('요즘 다들 이렇게 한다는 그것', IT, ''), '자동차·IT', '요약이 없으면 예전처럼 블로그 주제');
 });

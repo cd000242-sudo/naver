@@ -18,6 +18,7 @@ import { randomBytes } from 'crypto';
 import { readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import type { createLdbDestinations } from './ldb-destinations.js';
+import { LdbDownloadImageError } from './ldb-download-images.js';
 
 export const LDB_BRIDGE_PORT = 47630;
 const MAX_BODY_BYTES = 4 * 1024 * 1024;
@@ -29,6 +30,8 @@ export interface LdbBridgeDeps {
   token: string;
   status?: () => { version: string; auth: 'ready' | 'login-required'; ready: boolean; update: import('./ldb-launch.js').LdbUpdateStatus };
   destinations?: ReturnType<typeof createLdbDestinations>;
+  /** True only when the receiving app reads verified files from its own OS Downloads directory. */
+  downloadImageFiles?: boolean;
 }
 
 /** 확장만 허용한다. 일반 웹페이지는 이 브리지를 부를 수 없다. */
@@ -87,7 +90,7 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
 
     const url = new URL(req.url || '/', `http://127.0.0.1:${LDB_BRIDGE_PORT}`);
     if (req.method === 'GET' && url.pathname === '/v1/status') {
-      send(res, 200, { ok: true, app: 'naver-automation', ...(deps.status?.() || {}), accepts: 'draft-only', capabilities: ['renderer-ack', 'heading-images', 'draft-upsert', ...(deps.destinations ? ['account-categories'] : [])] }, origin);
+      send(res, 200, { ok: true, app: 'naver-automation', ...(deps.status?.() || {}), accepts: 'draft-only', capabilities: ['renderer-ack', 'heading-images', 'draft-upsert', ...(deps.destinations ? ['account-categories'] : []), ...(deps.downloadImageFiles ? ['download-image-files'] : [])] }, origin);
       return;
     }
     if (!['/v1/posts', '/v1/accounts', '/v1/categories', '/v1/selection'].includes(url.pathname)) {
@@ -135,7 +138,10 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
         if (destination !== undefined && !deps.destinations) { send(res, 409, { ok: false, error: '앱을 업데이트해주세요.' }, origin); return; }
         const result = deps.destinations ? await deps.destinations.send(checked.posts, destination) : { imported: await deps.deliver(checked.posts) };
         send(res, 200, { ok: true, ...result }, origin);
-      } catch {
+      } catch (error) {
+        if (error instanceof LdbDownloadImageError) {
+          send(res, 409, { ok: false, code: error.code, error: error.message }, origin); return;
+        }
         send(res, 500, { ok: false, error: '글 목록에 넣지 못했습니다. 앱 화면이 열려 있는지 확인해 주세요.' }, origin);
       }
     });
@@ -143,10 +149,10 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
 }
 
 /** 앱 시작 때 한 번 호출한다. 실패해도 앱 기능에는 영향을 주지 않는다. */
-export function startLdbBridge(userDataPath: string, deliver: (posts: unknown[]) => Promise<number>, destinations?: LdbBridgeDeps['destinations'], status?: LdbBridgeDeps['status']): { token: string; server: http.Server } | null {
+export function startLdbBridge(userDataPath: string, deliver: (posts: unknown[]) => Promise<number>, destinations?: LdbBridgeDeps['destinations'], status?: LdbBridgeDeps['status'], downloadImageFiles = false): { token: string; server: http.Server } | null {
   try {
     const token = loadBridgeToken(path.join(userDataPath, 'ldb-bridge-token'));
-    const server = createLdbBridge({ deliver, token, destinations, status });
+    const server = createLdbBridge({ deliver, token, destinations, status, downloadImageFiles });
     server.on('error', (error) => { console.error('[LDB 브리지] 시작 실패:', error); });
     server.listen(LDB_BRIDGE_PORT, '127.0.0.1', () => {
       console.log(`[LDB 브리지] http://127.0.0.1:${LDB_BRIDGE_PORT} · 연결 준비 완료`);

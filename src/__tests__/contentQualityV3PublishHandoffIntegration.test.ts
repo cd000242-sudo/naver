@@ -65,11 +65,13 @@ describe('Content Quality V3 publish handoff production wiring', () => {
       'function hydrateNarrativeImageMetadata(',
     );
     const terminalIndex = publish.indexOf('isContentQualityV3TerminalError(errorMsg)');
+    const detachedRetryIndex = publish.indexOf('retryRunAutomationAfterDetachedLoginFrame(');
     const recoveryRetryIndex = publish.indexOf('retryRunAutomationAfterRecoverablePublishFailure(');
     expect(fullAutoFlow).toMatch(
       /content-quality-v3-\(\?:publication\|publish-handoff\|durable-provenance\)/,
     );
     expect(terminalIndex).toBeGreaterThanOrEqual(0);
+    expect(detachedRetryIndex).toBeGreaterThan(terminalIndex);
     expect(recoveryRetryIndex).toBeGreaterThan(terminalIndex);
   });
 

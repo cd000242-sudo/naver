@@ -9,6 +9,7 @@ import { getSubImageMode } from '../utils/subImageMode.js';
 import { beginImagePreviewBatch, endImagePreviewBatch, setImagePreviewBatchSlot } from './imagePreviewBatch.js';
 import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
 import { extractSemiAutoDocumentFromBody } from '../utils/semiAutoHeadingExtractor.js';
+import { attachImagePickerPreview } from './imagePickerPreview.js';
  
 
 // --- Global declarations (exposed by renderer.ts via window) ---
@@ -5010,12 +5011,14 @@ function showImageSelectionForHeading(headingIndex: number, headingTitle: string
         </h2>
         <button id="close-img-modal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
       </div>
-      <p style="color: var(--text-muted); margin-bottom: 1rem;">📁 ${safeFolderName} (${images.length}개 이미지) - 여러 개 선택 가능</p>
+      <p style="color: var(--text-muted); font-size:1rem; margin-bottom: 1rem;">📁 ${safeFolderName} (${images.length}개 이미지) · 이미지를 눌러 선택하세요. 크게 보기는 선택을 바꾸지 않습니다.</p>
       
-      <div id="images-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; max-height: 50vh; overflow-y: auto; padding: 0.5rem;">
+      <div id="images-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem; margin-bottom: 1.5rem; max-height: 50vh; overflow-y: auto; padding: 0.5rem;">
         ${images.map((img, i) => `
-          <div class="img-item" data-img-path="${escapeHtml(img.filePath)}" style="
+          <div class="image-picker-tile" style="min-width:0;">
+          <button type="button" class="img-item" aria-label="${i + 1}번 이미지 선택" aria-pressed="false" data-img-path="${escapeHtml(img.filePath)}" style="
             position: relative;
+            width:100%; padding:0; display:block; background:var(--bg-tertiary);
             aspect-ratio: 1;
             border-radius: 8px;
             overflow: hidden;
@@ -5023,11 +5026,12 @@ function showImageSelectionForHeading(headingIndex: number, headingTitle: string
             cursor: pointer;
             transition: all 0.2s;
           ">
-            <img src="${img.previewDataUrl}" style="width: 100%; height: 100%; object-fit: cover;" 
+            <img src="${escapeHtml(img.previewDataUrl || toFileUrlMaybe(img.filePath))}" alt="${i + 1}번 이미지" style="width: 100%; height: 100%; object-fit: cover;"
                  onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect fill=%22%23333%22 width=%22100%22 height=%22100%22/%3E%3C/svg%3E'">
             <div class="check-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(59, 130, 246, 0.5); display: none; align-items: center; justify-content: center;">
               <span style="font-size: 2rem;">✅</span>
             </div>
+          </button>
           </div>
         `).join('')}
       </div>
@@ -5050,7 +5054,15 @@ function showImageSelectionForHeading(headingIndex: number, headingTitle: string
   modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
 
   // 이미지 선택 토글
-  modal.querySelectorAll('.img-item').forEach(item => {
+  modal.querySelectorAll('.img-item').forEach((item, imageIndex) => {
+    attachImagePickerPreview(item.parentElement!, {
+      src: item.querySelector('img')?.getAttribute('src') || '',
+      title: `${headingTitle} · ${imageIndex + 1}번 이미지`,
+      isSelected: () => selectedImages.has((item as HTMLElement).dataset.imgPath || ''),
+      onSelect: () => {
+        if (!selectedImages.has((item as HTMLElement).dataset.imgPath || '')) (item as HTMLButtonElement).click();
+      },
+    });
     item.addEventListener('click', () => {
       const imgPath = (item as HTMLElement).dataset.imgPath || '';
       const overlay = item.querySelector('.check-overlay') as HTMLElement;
@@ -5067,6 +5079,7 @@ function showImageSelectionForHeading(headingIndex: number, headingTitle: string
 
       const countEl = modal.querySelector('#selected-count');
       if (countEl) countEl.textContent = `${selectedImages.size}개 선택됨`;
+      item.setAttribute('aria-pressed', String(selectedImages.has(imgPath)));
     });
   });
 
@@ -5562,11 +5575,11 @@ function showMultipleImageSelectionModal(headingIndex: number, headingTitle: str
   modal.innerHTML = `
     <div style="background: var(--bg-primary); border-radius: 12px; padding: 1.5rem; width: 90%; max-width: 800px; max-height: 80vh; overflow-y: auto;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3 style="margin: 0; color: var(--text-strong);">🖼️ "${headingTitle}" 소제목에 추가할 이미지 선택</h3>
+        <h3 style="margin: 0; color: var(--text-strong);">🖼️ "${escapeHtml(headingTitle)}" 소제목에 추가할 이미지 선택</h3>
         <button id="close-multi-img-modal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
           </div>
-      <p style="color: var(--text-muted); margin-bottom: 1rem;">여러 이미지를 선택하면 소제목에 모두 추가됩니다.</p>
-      <div id="multi-images-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.75rem; margin-bottom: 1rem;"></div>
+      <p style="color: var(--text-muted); font-size:1rem; margin-bottom: 1rem;">이미지를 눌러 선택하세요. 크게 보기는 선택을 바꾸지 않습니다. 선택 완료를 누르면 소제목에 추가됩니다.</p>
+      <div id="multi-images-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem; margin-bottom: 1rem;"></div>
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <span id="selected-count" style="color: var(--text-muted);">0개 선택됨</span>
         <div style="display: flex; gap: 0.75rem;">
@@ -5607,28 +5620,41 @@ function showMultipleImageSelectionModal(headingIndex: number, headingTitle: str
 
       const countEl = modal.querySelector('#selected-count');
       if (countEl) countEl.textContent = `${selectedImages.size}개 선택됨`;
+      item.setAttribute('aria-pressed', String(selectedImages.has(imgPath)));
     });
   };
 
   const renderNextBatch = () => {
-    if (!gridEl) return;
+    if (!gridEl || !modal.isConnected) return;
     const frag = document.createDocumentFragment();
     const end = Math.min(images.length, renderIndex + renderBatchSize);
     for (let i = renderIndex; i < end; i++) {
       const img = images[i];
-      const item = document.createElement('div');
+      const tile = document.createElement('div');
+      tile.className = 'image-picker-tile';
+      tile.style.minWidth = '0';
+      const item = document.createElement('button');
+      item.type = 'button';
       item.className = 'multi-img-item';
+      item.setAttribute('aria-label', `${i + 1}번 이미지 선택`);
+      item.setAttribute('aria-pressed', 'false');
       item.setAttribute('data-img-path', img);
-      item.style.cssText = 'position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; border: 3px solid transparent; cursor: pointer; transition: all 0.2s;';
-      const src = `file:///${img.replace(/\\/g, '/')}`;
+      item.style.cssText = 'width:100%; padding:0; display:block; background:var(--bg-tertiary); position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; border: 3px solid transparent; cursor: pointer; transition: all 0.2s;';
+      const src = toFileUrlMaybe(img);
       item.innerHTML = `
-        <img src="${src}" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='${safeFallback}'">
+        <img src="${escapeHtml(src)}" alt="${i + 1}번 이미지" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='${safeFallback}'">
         <div class="check-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(59, 130, 246, 0.5); display: none; align-items: center; justify-content: center;">
           <span style="font-size: 2rem;">✅</span>
         </div>
       `;
       attachItemHandlers(item);
-      frag.appendChild(item);
+      tile.append(item);
+      attachImagePickerPreview(tile, {
+        src, title: `${headingTitle} · ${i + 1}번 이미지`,
+        isSelected: () => selectedImages.has(img),
+        onSelect: () => { if (!selectedImages.has(img)) item.click(); },
+      });
+      frag.appendChild(tile);
     }
     gridEl.appendChild(frag);
     renderIndex = end;

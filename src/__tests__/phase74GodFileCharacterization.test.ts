@@ -133,14 +133,15 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
       'isDeviceConfirmUrl(page.url())',
       'isDeviceConfirmBodyText(text)',
       'GoBlogWrite.naver',
-      'PostWriteForm',
       "getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED')",
       'findEditorTitleInputElement(frame, page, 60000',
-      // One readiness-checked editor entry; a missing title afterwards stops instead of re-opening the editor.
-      'waitForEditorReady(page, { timeoutMs: 45000, isCancelled })',
+      'shouldRetryEditorReadiness(snapshot)',
+      '에디터 프레임은 열렸지만 내부 문서가 비어 있습니다',
       'collectEditorTitleDiagnostics(frame, page)',
       'setTitleByDomEvent(titleElement, titleText)',
     ]);
+    // Editor URL recognition lives in the shared policy, not a login comment.
+    expect(read('src', 'automation', 'editorUrlState.ts')).toContain('PostWriteForm');
 
     expect(automation).not.toContain('private async findTitleInputElement(');
     expect(automation).not.toContain('private async readEditorTitleText(');

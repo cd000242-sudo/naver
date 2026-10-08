@@ -208,13 +208,12 @@ test('semi-auto publish keeps comparison lines inside the four generated section
     setValue('naver-id', 'e2e-runtime');
     setValue('naver-password', 'not-a-real-password');
     setValue('unified-publish-mode', 'publish');
-    setValue('unified-generated-title', '');
-    setValue('unified-generated-content', '');
+    setValue('unified-generated-title', articleTitle);
+    setValue('unified-generated-content', body);
     const skipImages = document.getElementById('unified-skip-images') as HTMLInputElement | null;
     if (skipImages) skipImages.checked = true;
-    // Generated/loaded articles already have the same four sections used by image
-    // analysis. Empty editor fields exercise the real fillSemiAutoFields path in
-    // handleSemiAutoPublish without a synthetic paste event reparsing this state.
+    // Loaded editor fields and their saved sections must agree. Publishing never
+    // refills intentionally cleared fields from an older structured-content cache.
     (window as any).currentStructuredContent = {
       selectedTitle: articleTitle,
       introduction: intro,

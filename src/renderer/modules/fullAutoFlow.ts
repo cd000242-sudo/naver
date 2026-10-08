@@ -3334,9 +3334,22 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
     return finalImagesWithThumbnail;
 }
 const PUBLISH_AUTOMATION_TIMEOUT_MS = 1500000;
-// Automatic login was removed (the user logs in on the Naver window): a login-frame refresh never reruns the publish.
+const DETACHED_LOGIN_FRAME_RETRY_DELAY_MS = 10000;
+const MAX_DETACHED_LOGIN_FRAME_RETRIES = 1;
 const PUBLISH_SESSION_RECOVERY_RETRY_DELAY_MS = 10000;
 const MAX_PUBLISH_SESSION_RECOVERY_RETRIES = 1;
+function isDetachedLoginFrameError(message) {
+    const normalized = String(message || '').toLowerCase();
+    const hasDetachedFrameSignal = normalized.includes('execution context is not available in detached frame') ||
+        normalized.includes('detached frame') ||
+        normalized.includes('execution context was destroyed') ||
+        normalized.includes('cannot find context with specified id') ||
+        normalized.includes('frame was detached');
+    const hasNaverLoginSignal = normalized.includes('nidlogin.login') ||
+        normalized.includes('nid.naver.com') ||
+        normalized.includes('naver login');
+    return hasDetachedFrameSignal && hasNaverLoginSignal;
+}
 function getPublishRetryNaverId(payload) {
     return String(payload?.naverId || payload?.accountId || payload?.account?.naverId || '').trim();
 }
@@ -3365,6 +3378,40 @@ function blockPostContentAppliedPublishRetry(errorMsg) {
     appendLog('⚠️ 본문 작성 완료 후 발행 단계 오류가 감지되어 자동 재로그인/재작성을 중단합니다.');
     appendLog('   네이버 글쓰기 창의 작성 내용 또는 임시저장 상태를 먼저 확인해주세요.');
     return true;
+}
+async function retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg) {
+    if (isPostContentAppliedPublishError(errorMsg)) {
+        return null;
+    }
+    if (!isDetachedLoginFrameError(errorMsg)) {
+        return null;
+    }
+    const retryAttempts = Number(payload._detachedLoginFrameRetryCount || 0);
+    if (retryAttempts >= MAX_DETACHED_LOGIN_FRAME_RETRIES) {
+        return null;
+    }
+    const nextAttempt = retryAttempts + 1;
+    appendLog(`⚠️ 네이버 로그인 프레임이 새로고침되어 발행 연결이 끊겼습니다: ${errorMsg.substring(0, 80)}`);
+    appendLog(`🔄 브라우저 세션을 정리하고 ${DETACHED_LOGIN_FRAME_RETRY_DELAY_MS / 1000}초 후 발행을 1회 재시도합니다. (${nextAttempt}/${MAX_DETACHED_LOGIN_FRAME_RETRIES})`);
+    showUnifiedProgress(88, '로그인 프레임 복구 중...', '네이버 로그인 화면이 갱신되어 브라우저 세션을 다시 준비합니다.');
+    await closeBrowserForPublishRetry(payload);
+    await new Promise(resolve => setTimeout(resolve, DETACHED_LOGIN_FRAME_RETRY_DELAY_MS));
+    const retryPayload = {
+        ...payload,
+        _detachedLoginFrameRetryCount: nextAttempt,
+    };
+    const retryResponse = await apiClient.call('runAutomation', [retryPayload], {
+        retryCount: 0,
+        retryDelay: 5000,
+        timeout: PUBLISH_AUTOMATION_TIMEOUT_MS,
+    });
+    if (retryResponse.success && retryResponse.data?.success) {
+        appendLog('✅ 로그인 프레임 복구 후 발행 재시도에 성공했습니다.');
+        return retryResponse.data;
+    }
+    const retryErrorMsg = retryResponse.error || retryResponse.data?.message || '로그인 프레임 복구 재시도 실패';
+    appendLog(`❌ 로그인 프레임 복구 재시도 실패: ${retryErrorMsg}`);
+    throw new Error(retryErrorMsg);
 }
 function isRecoverablePublishAutomationError(errorMsg) {
     if (isPostContentAppliedPublishError(errorMsg)) {
@@ -3460,16 +3507,18 @@ async function retryRunAutomationAfterRecoverablePublishFailure(apiClient, paylo
         return null;
     }
     const nextAttempt = retryAttempts + 1;
+    appendLog(`🔄 브라우저/에디터 세션이 끊겨 발행을 복구합니다: ${String(errorMsg || '').substring(0, 100)}`);
     const closeBeforeRetry = shouldCloseBrowserBeforePublishRetry(errorMsg);
-    // An editor that was not ready already got its single bounded re-entry inside the engine; running the publish
-    // again in the same browser only doubled the editor loads. Only a browser that actually died is rerun once.
-    if (!closeBeforeRetry) {
-        return null;
+    if (closeBeforeRetry) {
+        appendLog(`🔄 브라우저 세션을 정리하고 ${PUBLISH_SESSION_RECOVERY_RETRY_DELAY_MS / 1000}초 후 같은 글/이미지로 1회 재시도합니다. (${nextAttempt}/${MAX_PUBLISH_SESSION_RECOVERY_RETRIES})`);
     }
-    appendLog(`🔄 브라우저 세션이 끊겨 발행을 복구합니다: ${String(errorMsg || '').substring(0, 100)}`);
-    appendLog(`🔄 브라우저 세션을 정리하고 ${PUBLISH_SESSION_RECOVERY_RETRY_DELAY_MS / 1000}초 후 같은 글/이미지로 1회 재시도합니다. (${nextAttempt}/${MAX_PUBLISH_SESSION_RECOVERY_RETRIES})`);
+    else {
+        appendLog(`🔄 에디터가 아직 준비되지 않아 같은 브라우저에서 다시 시도합니다. (${nextAttempt}/${MAX_PUBLISH_SESSION_RECOVERY_RETRIES})`);
+    }
     showUnifiedProgress(88, '브라우저 세션 복구 중...', '글과 이미지는 유지한 채 네이버 발행 브라우저만 다시 준비합니다.');
-    await closeBrowserForPublishRetry(payload);
+    if (closeBeforeRetry) {
+        await closeBrowserForPublishRetry(payload);
+    }
     await new Promise(resolve => setTimeout(resolve, PUBLISH_SESSION_RECOVERY_RETRY_DELAY_MS));
     const retryPayload = {
         ...payload,
@@ -3853,6 +3902,9 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
             ? 'semi_auto'
             : (window.isContinuousMode === true ? 'continuous' : 'full_auto'),
         _semiAutoMode: formData._semiAutoMode === true,
+        // [2026-10-08] A person pressed the semi-auto publish button (never the continuous queue): main may
+        //   re-check a stale account stop by itself instead of answering with a bare stop (userRunResume).
+        _userPressedPublish: formData._semiAutoMode === true && window.isContinuousMode !== true,
         skipBotBackoff: formData._semiAutoMode === true,
     };
     emitRendererPublishTailDebug('renderer-payload-before-runAutomation', payload, {
@@ -3928,11 +3980,40 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         if (/CONTENT_POLICY_BLOCKED|BLOCK_FABRICATED_FACT/i.test(errorMsg) || isContentQualityV3TerminalError(errorMsg)) {
             throw new Error(friendlyErrorMessage({ message: errorMsg }));
         }
+        const detachedFrameRetryResult = await retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg);
+        if (detachedFrameRetryResult) {
+            return detachedFrameRetryResult;
+        }
         const recoverablePublishRetryResult = await retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg);
         if (recoverablePublishRetryResult) {
             return recoverablePublishRetryResult;
         }
-        // Network errors are reported, not rerun: the engine already re-enters the editor once.
+        const isNetworkError = errorMsg.includes('ERR_CONNECTION_RESET') ||
+            errorMsg.includes('ERR_CONNECTION_REFUSED') ||
+            errorMsg.includes('ERR_CONNECTION_TIMED_OUT') ||
+            errorMsg.includes('ERR_INTERNET_DISCONNECTED') ||
+            errorMsg.includes('net::');
+        if (isNetworkError) {
+            const retryAttempts = payload._networkRetryCount || 0;
+            const MAX_NETWORK_RETRIES = 2;
+            if (retryAttempts < MAX_NETWORK_RETRIES) {
+                const waitSec = (retryAttempts + 1) * 10;
+                appendLog(`⚠️ 네트워크 오류 감지: ${errorMsg.substring(0, 60)}`);
+                appendLog(`🔄 ${waitSec}초 후 발행을 다시 시도합니다... (${retryAttempts + 1}/${MAX_NETWORK_RETRIES})`);
+                showUnifiedProgress(88, `네트워크 오류 → ${waitSec}초 후 재시도...`, `재시도 ${retryAttempts + 1}/${MAX_NETWORK_RETRIES}`);
+                await new Promise(resolve => setTimeout(resolve, waitSec * 1000));
+                payload._networkRetryCount = retryAttempts + 1;
+                appendLog(`🚀 발행 재시도 시작... (${retryAttempts + 1}/${MAX_NETWORK_RETRIES})`);
+                const retryResponse = await apiClient.call('runAutomation', [payload], { retryCount: 0, retryDelay: 5000, timeout: 300000 });
+                if (retryResponse.success && retryResponse.data?.success) {
+                    appendLog(`✅ 재시도 성공! 블로그 발행이 완료되었습니다.`);
+                    return retryResponse.data;
+                }
+                const retryErrorMsg = retryResponse.error || retryResponse.data?.message || '재시도 실패';
+                appendLog(`❌ 재시도도 실패했습니다: ${retryErrorMsg}`);
+                throw new Error(retryErrorMsg);
+            }
+        }
         appendLog(`❌ 블로그 발행에 실패했습니다: ${errorMsg}`);
         throw new Error(errorMsg);
     }
@@ -3956,11 +4037,33 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         if (blockPostContentAppliedPublishRetry(errorMsg)) {
             throw new Error(errorMsg);
         }
+        const detachedFrameRetryResult = await retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg);
+        if (detachedFrameRetryResult) {
+            return detachedFrameRetryResult;
+        }
         const recoverablePublishRetryResult = await retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg);
         if (recoverablePublishRetryResult) {
             return recoverablePublishRetryResult;
         }
-        // Network errors are reported, not rerun: the engine already re-enters the editor once.
+        const isNetworkError2 = errorMsg.includes('ERR_CONNECTION_RESET') ||
+            errorMsg.includes('ERR_CONNECTION_REFUSED') ||
+            errorMsg.includes('ERR_CONNECTION_TIMED_OUT') ||
+            errorMsg.includes('net::');
+        if (isNetworkError2) {
+            const retryAttempts = payload._networkRetryCount || 0;
+            if (retryAttempts < 2) {
+                const waitSec = (retryAttempts + 1) * 10;
+                appendLog(`⚠️ 네트워크 오류: ${errorMsg.substring(0, 60)}`);
+                appendLog(`🔄 ${waitSec}초 후 발행을 다시 시도합니다... (${retryAttempts + 1}/2)`);
+                await new Promise(resolve => setTimeout(resolve, waitSec * 1000));
+                payload._networkRetryCount = retryAttempts + 1;
+                const retryResponse2 = await apiClient.call('runAutomation', [payload], { retryCount: 0, retryDelay: 5000, timeout: 300000 });
+                if (retryResponse2.success && retryResponse2.data?.success) {
+                    appendLog(`✅ 재시도 성공!`);
+                    return retryResponse2.data;
+                }
+            }
+        }
         try {
             hideUnifiedProgress();
         }

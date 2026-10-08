@@ -4933,7 +4933,7 @@ import { registerBackupHandlers, performDataBackup } from './main/ipc/backupHand
 import { startLdbBridge } from './main/ldb-bridge.js';
 import { createAccountSafetyController } from './main/accountSafetyController.js';
 import { isLdbConnectUrl, LDB_CONNECT_SCHEME, createSerializedRefresh } from './main/ldb-launch.js';
-import { deliverLdbPosts } from './main/ldb-delivery.js';
+import { deliverLdbPostsToWindow } from './main/ldb-delivery.js';
 import { materializeLdbImages } from './main/ldb-images.js';
 import { createLdbDestinations, type LdbResolvedDestination } from './main/ldb-destinations.js';
 import { resolveThumbnailOverlayText } from './image/director/thumbnailText.js';
@@ -4964,9 +4964,9 @@ const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
         let drafts: unknown[] = [];
         if (posts.length) {
           const { getImageSaveBasePath } = await import('./image/imageUtils.js');
-          drafts = await materializeLdbImages(posts, await getImageSaveBasePath());
+          drafts = await materializeLdbImages(posts, await getImageSaveBasePath(), app.getPath('downloads'));
         }
-        return deliverLdbPosts(mainWindow?.webContents, ipcMain, drafts, 20_000, destination);
+        return deliverLdbPostsToWindow(mainWindow, ipcMain, drafts, 20_000, destination);
       };
       const accountSafety = createAccountSafetyController(() => blogAccountManager.getAllAccounts(), browserSessionManager);
       const destinations = createLdbDestinations({
@@ -4978,7 +4978,7 @@ const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
         version: app.getVersion(), auth: isLicenseValid ? 'ready' : 'login-required',
         ready: Boolean(isLicenseValid && mainWindow && !mainWindow.isDestroyed() && !mainWindow.webContents.isLoading() && !isUpdating()),
         update: getLdbUpdateStatus(),
-      }));
+      }), true);
       const startedBridge = ldbBridge;
       startedBridge?.server.once('error', () => { if (ldbBridge === startedBridge) ldbBridge = null; });
     } catch (error) {

@@ -21,6 +21,7 @@ import {
     getCachedLicense,
     isLicenseExpired,
     type LicenseInfo,
+    type CredentialLoginResult,
 } from '../../licenseManager.js';
 
 /**
@@ -40,10 +41,12 @@ export function registerLicenseHandlers(_ctx: IpcContext): void {
         }
     });
 
-    ipcMain.handle('license:verifyWithCredentials', async (_event, userId: string, password: string, deviceId: string): Promise<{ valid: boolean; license?: LicenseInfo; message?: string; debugInfo?: any }> => {
+    ipcMain.handle('license:verifyWithCredentials', async (_event, userId: string, password: string, deviceId: string, options?: { takeoverSession?: unknown }): Promise<CredentialLoginResult> => {
         try {
             const serverUrl = process.env.LICENSE_SERVER_URL || 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-            return await verifyLicenseWithCredentials(userId, password, deviceId, serverUrl);
+            const takeover = options?.takeoverSession === true ? { takeoverSession: true } : undefined;
+            const currentDeviceId = takeover ? await getDeviceId() : deviceId;
+            return await verifyLicenseWithCredentials(userId, password, currentDeviceId, serverUrl, takeover);
         } catch (error) {
             return {
                 valid: false,
