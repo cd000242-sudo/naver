@@ -1,7 +1,7 @@
 // @ts-nocheck
 // Restored from dist/renderer/modules/fullAutoFlow.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
-import { classifyPublishFailure } from '../../automation/publishFailureClassifier.js';
+import { buildPublishFailureReport, classifyPublishFailure } from '../../automation/publishFailureClassifier.js';
 import { buildPastePreviewHtml } from '../../automation/richTextPaste.js';
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
 import { fillSemiAutoFields, readSummaryTableOptionFromUi } from './contentGeneration.js';
@@ -3450,6 +3450,21 @@ function shouldCloseBrowserBeforePublishRetry(errorMsg) {
     ];
     return hardSessionSignals.some((signal) => normalized.includes(signal.toLowerCase()));
 }
+// [2026-10-09] executeUnifiedAutomation's withErrorHandling swallows the flow error, so the continuous queue never
+//   learned WHY a publish failed. Keep what main reported (code, text, and whether it refused the job at admission,
+//   before any browser opened) where the queue can read it after the call.
+function recordPublishFailureForQueue(response, errorMsg, naverId, firstAttempt) {
+    const source = response?.data && typeof response.data === 'object' ? response.data : {};
+    const report = buildPublishFailureReport({
+        message: errorMsg,
+        failureCode: source.failureCode,
+        refusedBeforeStart: source.refusedBeforeStart,
+    }, naverId, firstAttempt);
+    window._lastPublishFailure = report;
+    // A refusal handed nothing to Naver: the dispatch marker must not make the queue read this post as an unknown outcome.
+    if (report.refusedBeforeStart) window._publishAutomationDispatched = false;
+    return report;
+}
 async function retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg) {
     if (isPostContentAppliedPublishError(errorMsg)) {
         return null;
@@ -3488,6 +3503,8 @@ async function retryRunAutomationAfterRecoverablePublishFailure(apiClient, paylo
     }
     const retryErrorMsg = retryResponse.error || retryResponse.data?.message || '브라우저 세션 복구 재시도 실패';
     appendLog(`❌ 브라우저 세션 복구 재시도도 실패했습니다: ${String(retryErrorMsg).substring(0, 120)}`);
+    // The first attempt was dispatched, so a refusal of this rerun must not read as "never started".
+    recordPublishFailureForQueue(retryResponse, retryErrorMsg, getPublishRetryNaverId(payload), false);
     throw new Error(retryErrorMsg);
 }
 // [2026-09-06 R-A/C] Measurement only: aHash the local image files and log how alike they
@@ -3924,6 +3941,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     });
     if (!apiResponse.success) {
         const errorMsg = apiResponse.error || '블로그 발행 실패';
+        recordPublishFailureForQueue(apiResponse, errorMsg, naverId, true);
         emitRendererPublishTailDebug('renderer-runAutomation-api-error', payload, {
             errorMsg,
             apiSuccess: apiResponse.success,
@@ -3947,6 +3965,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     }
     else if (!apiResponse.data?.success) {
         const errorMsg = apiResponse.data?.message || apiResponse.error || '블로그 발행 실패';
+        recordPublishFailureForQueue(apiResponse, errorMsg, naverId, true);
         emitRendererPublishTailDebug('renderer-runAutomation-data-error', payload, {
             errorMsg,
             apiSuccess: apiResponse.success,
@@ -3986,6 +4005,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     const automationResult = apiResponse.data;
     assertAutomationPublishResult(automationResult, payload);
     window._lastPublishOutcome = 'success';
+    window._lastPublishFailure = null;
     emitRendererPublishTailDebug('renderer-runAutomation-success', payload, {
         resultKeys: Object.keys(automationResult || {}),
     });

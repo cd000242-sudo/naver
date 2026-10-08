@@ -526,7 +526,7 @@ export async function executePublishing(
     payload: PostCyclePayload,
     processedImages: ProcessedImage[],
     beforePublishCommit?: (candidate: EditorCommitCandidate) => Promise<void>,
-): Promise<{ success: boolean; url?: string; message?: string; failureCode?: import('../../automation/publishFailureClassifier.js').PublishFailureCode }> {
+): Promise<{ success: boolean; url?: string; message?: string; failureCode?: import('../../automation/publishFailureClassifier.js').PublishFailureCode; refusedBeforeStart?: boolean }> {
     // 취소 체크
     if (AutomationService.isCancelRequested()) {
         return { success: false, message: '사용자가 취소했습니다.', failureCode: 'USER_CANCELLED' };
@@ -707,7 +707,9 @@ export async function executePublishing(
         sendLog(`❌ 발행 오류: ${message}`);
         const failure = classifyPublishFailure(error);
         sendStatus({ success: false, message, failureCode: failure.code });
-        return { success: false, message, failureCode: failure.code };
+        // The guard refused the job at admission (account paused/busy): no browser opened, nothing reached Naver.
+        const refusedBeforeStart = (error as { refusedBeforeStart?: unknown })?.refusedBeforeStart === true;
+        return { success: false, message, failureCode: failure.code, ...(refusedBeforeStart ? { refusedBeforeStart } : {}) };
     }
 }
 
@@ -1053,6 +1055,7 @@ export async function runFullPostCycle(
             url: result.url,
             message: result.message,
             failureCode: result.failureCode,
+            ...(result.refusedBeforeStart ? { refusedBeforeStart: true } : {}),
         };
 
         if (result.success && preparedPolicy && effectivePayload.publishMode !== 'draft') {

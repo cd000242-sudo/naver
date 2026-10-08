@@ -541,6 +541,8 @@ export interface PostCycleResult {
     url?: string;
     cancelled?: boolean;
     failureCode?: import('../../automation/publishFailureClassifier.js').PublishFailureCode;
+    /** The account guard refused the job at admission: no browser opened, nothing reached Naver. */
+    refusedBeforeStart?: boolean;
     manualReviewRequired?: boolean;
     manualReviewReasons?: string[];
     structuredContent?: any;
