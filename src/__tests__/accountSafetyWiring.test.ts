@@ -29,7 +29,7 @@ it('rejects overlapping dispatch before interpreting an active commit as abandon
 });
 it('renderer blocks serialized account stops before any browser recovery or network retry', () => {
   const renderer = readFileSync(new URL('../renderer/modules/fullAutoFlow.ts', import.meta.url), 'utf8');
-  const block = renderer.slice(renderer.indexOf('function blockPostContentAppliedPublishRetry'), renderer.indexOf('function isRecoverablePublishAutomationError'));
+  const block = renderer.slice(renderer.indexOf('function blockPostContentAppliedPublishRetry'), renderer.indexOf('async function retryRunAutomationAfterDetachedLoginFrame'));
   expect(block.includes('classifyPublishFailure(errorMsg)')).toBe(true);
   expect(block.includes('failure.retryable')).toBe(true);
 });
