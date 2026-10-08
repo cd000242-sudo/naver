@@ -89,6 +89,36 @@ export function planTypingFallback(
 }
 
 /**
+ * [2026-10-09] Browser-side reader for the fallback's before/after editor measurement.
+ * It runs inside frame.evaluate, so it must stay self-contained (no imports, no outer-scope reads).
+ *
+ * The live SmartEditor has no `.se-main-container` (that class is the published-post viewer's); title and
+ * body share `article.se-components-wrap`. The root is picked by selector priority and every text node
+ * under it is read once. Summing nested selectors (.se-section-text + .se-component + ...) counted the
+ * same text 4-5 times and pushed the "already typed" offset past the real end of the text, so the tail
+ * comparison came back empty and the whole section was retyped on top of a partial paste ("본문 2벌").
+ * Placeholders / blind labels appear and vanish with focus and zero-width spaces pad empty paragraphs,
+ * so both are dropped; whitespace is collapsed so before/after offsets live in one unit.
+ */
+export function readEditorBodyText(rootSelectors: string[]): string {
+  let root: Element | null = null;
+  for (const selector of rootSelectors) {
+    root = document.querySelector(selector);
+    if (root) break;
+  }
+  const scope = root || document.body;
+  if (!scope) return '';
+  const ignored = '.se-placeholder, .se-blind, .blind, script, style';
+  const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
+  let text = '';
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    if (node.parentElement && node.parentElement.closest(ignored)) continue;
+    text += node.nodeValue || '';
+  }
+  return text.replace(/\u200b/g, '').replace(/\s+/g, ' ').trim();
+}
+
+/**
  * Map a whitespace-stripped offset back into the raw paragraph (which still
  * contains \n chunk breaks) and return the untyped remainder.
  * [2026-08-06] Offset unit follows planTypingFallback's whitespace-stripped

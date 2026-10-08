@@ -94,7 +94,7 @@ const SECTION_HIGHLIGHT_MIN_SCORE = 3;
 const INLINE_FORMAT_COMMANDS = ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript'];
 const TEXT_DECORATION_RESET = 'text-decoration:none';
 const FONT_STYLE_RESET = 'font-style:normal';
-const SMART_EDITOR_ROOT_SELECTORS = [
+export const SMART_EDITOR_ROOT_SELECTORS = [
   'article.se-components-wrap',
   '.se-canvas > article.se-components-wrap',
   '.se-content article.se-components-wrap',
