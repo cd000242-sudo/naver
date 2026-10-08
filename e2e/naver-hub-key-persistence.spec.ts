@@ -48,7 +48,10 @@ async function settingsFieldsOnDisk(): Promise<Record<string, string[]>> {
       const full = path.join(dir, entry.name);
       if (entry.isDirectory()) { await walk(full); continue; }
       if (!/^settings.*\.json$/i.test(entry.name)) continue;
-      const parsed = JSON.parse(await fs.readFile(full, 'utf8').catch(() => '{}')) as Record<string, unknown>;
+      // The app may be mid-write (atomic temp+rename elsewhere, plain writes here): a half-written file is "not yet",
+      // so the poll reads it again instead of failing the run.
+      let parsed: Record<string, unknown> = {};
+      try { parsed = JSON.parse(await fs.readFile(full, 'utf8')) as Record<string, unknown>; } catch { continue; }
       found[path.relative(root, full)] = Object.keys(parsed).filter((key) => /hub/i.test(key) && String(parsed[key] ?? '').length > 0);
     }
   };
