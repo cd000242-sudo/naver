@@ -58,7 +58,12 @@ for (const dir of ['userdata', 'appdata', 'localappdata', 'home']) {
 delete process.env.ELECTRON_RUN_AS_NODE;
 try {
   run('자동화 파이프라인 모의 smoke', 'node', ['dist/tests/automationSmoke.js'], appEnv);
-  run('앱 부팅 + 번들 헬스 + IPC 핸드셰이크 5종', 'npx', ['electron', '.'], appEnv, BOOT_TIMEOUT_MS);
+  // Match Electron E2E's mock keychain so isolated macOS test profiles cannot
+  // block CI on an OS keychain dialog. Production app launches stay unchanged.
+  const bootArgs = process.platform === 'darwin'
+    ? ['electron', '--use-mock-keychain', '.']
+    : ['electron', '.'];
+  run('앱 부팅 + 번들 헬스 + IPC 핸드셰이크 5종', 'npx', bootArgs, appEnv, BOOT_TIMEOUT_MS);
 } finally {
   /*
    * [2026-08-27] 임시 프로필 삭제 실패로 릴리즈를 막지 않는다.
