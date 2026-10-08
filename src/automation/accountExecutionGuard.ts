@@ -17,7 +17,7 @@ export class AccountExecutionGuardError extends Error {
    */
   readonly refusedBeforeStart: boolean;
   constructor(readonly code: AccountPauseCode | 'ACCOUNT_BUSY', message?: string, refusedBeforeStart = code === 'ACCOUNT_BUSY') {
-    super(`[${code}] ${message || (code === 'ACCOUNT_BUSY' ? '이 계정의 작업이 이미 실행 중입니다.' : '계정 작업이 중단되었습니다. 계정 관리에서 상태 확인 후 직접 재개해 주세요.')}`);
+    super(`[${code}] ${message || (code === 'ACCOUNT_BUSY' ? '이 계정의 작업이 이미 실행 중입니다.' : '계정 작업이 중단되었습니다. 화면의 안내 창(또는 계정 관리)에서 상태 확인 후 직접 재개해 주세요.')}`);
     this.name = 'AccountExecutionGuardError';
     this.userActionRequired = code !== 'ACCOUNT_BUSY';
     this.refusedBeforeStart = refusedBeforeStart;

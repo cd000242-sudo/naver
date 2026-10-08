@@ -1988,7 +1988,7 @@ export class NaverBlogAutomation {
     const ready = await browserSessionManager.ensureServerSession(this.options.naverId);
     if (!ready) {
       getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED');
-      throw new AccountExecutionGuardError('LOGIN_REQUIRED', '계정 관리에서 네이버에 로그인한 뒤 확인 후 재개를 눌러주세요.');
+      throw new AccountExecutionGuardError('LOGIN_REQUIRED', '네이버 창에서 직접 로그인한 뒤 화면의 안내 창(또는 계정 관리)의 [확인 후 재개]를 눌러주세요.');
     }
     this.log('✅ 기존 로그인 상태를 확인했습니다.');
   }
@@ -2040,7 +2040,7 @@ export class NaverBlogAutomation {
     this.log(`   현재 페이지 URL: ${currentUrl}`);
 
     if (isBlogWriteLoginRedirect(currentUrl)) {
-      this.log('로그인이 필요하여 작업을 중단했습니다. 계정 관리에서 네이버 확인 후 재개해주세요.');
+      this.log('로그인이 필요하여 작업을 중단했습니다. 화면의 안내 창(또는 계정 관리)에서 네이버 확인 후 재개해주세요.');
       getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED');
       throw new AccountExecutionGuardError('LOGIN_REQUIRED');
     }

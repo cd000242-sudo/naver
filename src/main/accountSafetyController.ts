@@ -1,4 +1,4 @@
-import { resolveExpectedBlog, type ExpectedBlog } from '../automation/expectedBlogIdentity.js';
+import { blogMismatchStopMessage, resolveExpectedBlog, type ExpectedBlog } from '../automation/expectedBlogIdentity.js';
 import { getAccountExecutionGuard } from '../automation/accountExecutionGuard.js';
 import { getPublicationCommitJournal } from '../automation/publicationCommitJournal.js';
 
@@ -11,7 +11,7 @@ export const ACCOUNT_SAFETY_LABELS: Record<string, string> = {
 export type SafetyLookup = 'account' | 'naver-id';
 export type SafetyAction = 'status' | 'open' | 'open-posts' | 'resume' | 'confirm' | 'reset-journal';
 type Account = { id: string; naverId?: string; blogId: string };
-type Verdict = { status: string; reason?: string; blogId?: string; observedBlogId?: string; expectedBlogId?: string };
+type Verdict = { status: string; reason?: string; identityMismatch?: boolean; blogId?: string; observedBlogId?: string; expectedBlogId?: string };
 type Sessions = {
   /** 'fallback' = blogId is only the login ID, so the real blog is learned from the editor. */
   setExpectedBlogId(id: string, blogId: string, source?: 'configured' | 'fallback'): void;
@@ -38,6 +38,10 @@ function explainVerdict(verdict?: Verdict): string {
   if (verdict?.status === 'login-required') return '네이버 로그인이 아직 되어 있지 않습니다. 열린 네이버 창에서 직접 로그인한 뒤 다시 눌러주세요(비밀번호는 앱이 입력하지 않습니다).';
   if (verdict?.status === 'challenge') return '네이버 창에 본인확인 화면이 있습니다. 그 창에서 직접 마친 뒤 다시 눌러주세요.';
   if (verdict?.status === 'protected') return '네이버에서 보호조치 안내가 나왔습니다. 열린 네이버 창의 안내에 따라 해제한 뒤 다시 눌러주세요.';
+  if (verdict?.identityMismatch === true) {
+    const named = blogMismatchStopMessage(verdict);
+    if (named) return named;
+  }
   if (verdict?.reason === 'account-identity-unverified') return '선택한 계정과 다른 네이버 계정이 로그인돼 있을 수 있습니다. 열린 네이버 창에서 이 계정으로 로그인했는지 확인한 뒤 다시 눌러주세요.';
   if (verdict?.reason === 'session-unavailable') return OPEN_FAILED;
   if (verdict?.status === 'ready') return STATE_CHANGED;
