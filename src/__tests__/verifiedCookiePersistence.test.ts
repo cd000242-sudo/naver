@@ -12,6 +12,7 @@ vi.mock('puppeteer-extra-plugin-stealth', () => ({ default: () => ({ enabledEvas
 vi.mock('../automation/accountExecutionGuard.js', () => ({ getAccountExecutionGuard: () => guard, AccountExecutionGuardError: class extends Error { constructor(public code: string) { super(code); } } }));
 vi.mock('../sessionPersistence.js', () => persistence);
 import { browserSessionManager } from '../browserSessionManager.js';
+import { isolateBlogIdentity } from './mocks/isolatedBlogIdentity';
 
 const manager = browserSessionManager as any;
 
@@ -26,6 +27,8 @@ const flush = () => new Promise(resolve => setTimeout(resolve, 0));
 
 beforeEach(() => {
   manager.sessions.clear(); manager.serverSessionChecks?.clear(); vi.clearAllMocks();
+  // A registered blog stays strict: a different or unreadable blog must never be treated as this account.
+  isolateBlogIdentity(manager); manager.expectedBlogIds.clear(); manager.setExpectedBlogId('test_account', 'test_account');
   guard.getStatus.mockReturnValue({ paused: false, version: 0 });
 });
 

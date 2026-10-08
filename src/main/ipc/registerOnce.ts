@@ -55,6 +55,31 @@ if (!installed) {
     return originalOn(channel, listener);
   }) as typeof ipcMain.on;
 
+  // [2026-10-09] A channel whose listeners were all removed must be registrable again. Per-use listeners (the quit
+  // confirmation registers one per close attempt and removes it) were otherwise dropped forever after the first use:
+  // cancel one close, and the next close's [종료] answer reached nobody — the app looked frozen.
+  const releaseIfEmpty = (channel: string | symbol | undefined): void => {
+    if (typeof channel !== 'string') return;
+    if (ipcMain.listenerCount(channel) === 0) registered.delete(`on:${channel}`);
+  };
+  const originalRemoveListener = ipcMain.removeListener.bind(ipcMain);
+  (ipcMain as unknown as { removeListener: typeof ipcMain.removeListener }).removeListener = ((channel: string, listener: (...args: any[]) => void) => {
+    const result = originalRemoveListener(channel, listener);
+    releaseIfEmpty(channel);
+    return result;
+  }) as typeof ipcMain.removeListener;
+  (ipcMain as unknown as { off: typeof ipcMain.off }).off = ipcMain.removeListener;
+  const originalRemoveAll = ipcMain.removeAllListeners.bind(ipcMain);
+  (ipcMain as unknown as { removeAllListeners: typeof ipcMain.removeAllListeners }).removeAllListeners = ((channel?: string) => {
+    const result = originalRemoveAll(channel as string);
+    if (channel === undefined) {
+      for (const key of [...registered]) if (key.startsWith('on:')) registered.delete(key);
+    } else {
+      releaseIfEmpty(channel);
+    }
+    return result;
+  }) as typeof ipcMain.removeAllListeners;
+
   // eslint-disable-next-line no-console
   console.log('[IPC Guard] ipcMain.handle/on 이중 등록 가드 설치 완료');
 }

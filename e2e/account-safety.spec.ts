@@ -15,6 +15,8 @@ test.beforeAll(async () => {
  const sessions=req(root+'/dist/browserSessionManager.js').browserSessionManager;
  global.__safetyE2E={guard,journal,opened:0};
  sessions.openForUser=async()=>{global.__safetyE2E.opened++};
+ // Resume/confirm open the account's browser before verifying (no real Chrome in this fixture).
+ sessions.ensureSessionForUser=async()=>{global.__safetyE2E.ensured=(global.__safetyE2E.ensured||0)+1};
  sessions.verifyAccountForUser=async()=>({status:'ready'});
  sessions.resumeAccount=async id=>guard.resume(id,async()=>true);
  guard.pause('safety_fixture','ACCOUNT_PROTECTED');

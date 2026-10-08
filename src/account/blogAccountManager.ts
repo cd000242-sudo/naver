@@ -1,6 +1,8 @@
 // ✅ 다중 블로그 관리 기능
 // 여러 네이버 계정을 동시에 관리
 
+import { normalizeBlogId } from '../automation/expectedBlogIdentity.js';
+
 export type BlogAccount = {
   id: string;
   name: string; // 계정 별명
@@ -118,7 +120,8 @@ export class BlogAccountManager {
     const account: BlogAccount = {
       id,
       name,
-      blogId,
+      // A pasted blog address is saved as its bare id; anything else (id, legacy label) is kept as typed.
+      blogId: normalizeBlogId(blogId) ?? blogId,
       naverId: naverId || undefined,
       naverPassword: naverPassword ? this.encryptPassword(naverPassword) : undefined,
       isActive: true,
@@ -181,6 +184,7 @@ export class BlogAccountManager {
     if (!account) return false;
 
     const updatedAccount = { ...account, ...updates };
+    if (typeof updates.blogId === 'string') updatedAccount.blogId = normalizeBlogId(updates.blogId) ?? updates.blogId;
     this.accounts.set(accountId, updatedAccount);
     this.saveToStorage();
 

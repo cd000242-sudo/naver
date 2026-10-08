@@ -1,6 +1,12 @@
 import type { Frame, KeyInput, Page } from 'puppeteer';
 import { balanceMobileLineBreaks } from '../content/mobileLineBalance.js';
 import { paragraphGroupSizes } from '../content/sentenceParagraphs.js';
+import {
+  PASTE_FALLBACK_ARRIVAL_MAX_WAIT_MS,
+  detectLateArrival,
+  logDuplicateSuspect,
+  waitForPasteArrival,
+} from './pasteArrival.js';
 
 export interface MobileRichHtmlOptions {
   maxChunkChars?: number;
@@ -94,7 +100,7 @@ const SECTION_HIGHLIGHT_MIN_SCORE = 3;
 const INLINE_FORMAT_COMMANDS = ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript'];
 const TEXT_DECORATION_RESET = 'text-decoration:none';
 const FONT_STYLE_RESET = 'font-style:normal';
-const SMART_EDITOR_ROOT_SELECTORS = [
+export const SMART_EDITOR_ROOT_SELECTORS = [
   'article.se-components-wrap',
   '.se-canvas > article.se-components-wrap',
   '.se-content article.se-components-wrap',
@@ -3266,12 +3272,86 @@ export async function ensureTailTypingReady(
   return false;
 }
 
+/**
+ * [2026-10-09] A paste that has not arrived YET looks exactly like one that failed. After a rollback
+ * the editor is back at `before`; if it grows again within a short settle, the earlier Ctrl+V was
+ * only late — pasting again would land the body twice (live: 본문 2벌, isPasteVisible has no upper
+ * bound). Returns a final result when the late arrival decides the outcome, or null when nothing is
+ * pending (or a partial arrival was rolled back cleanly) and the caller may run its next stage.
+ */
+async function resolveLateArrival(args: {
+  page: Page;
+  frame: Frame;
+  before: { chars: number; tables: number; text: string };
+  trimmedPlain: string;
+  expectedTableCount: number;
+  method: RichPasteResult['method'];
+  log?: (message: string) => void;
+}): Promise<RichPasteResult | null> {
+  const { page, frame, before, trimmedPlain, expectedTableCount, method, log } = args;
+  const visible = (snapshot: { chars: number; tables: number; text: string }): boolean =>
+    isPasteVisible(before, snapshot, trimmedPlain, expectedTableCount);
+  const late = await detectLateArrival({
+    readEditor: () => readEditorStats(frame),
+    reference: before,
+    isVisible: visible,
+  });
+  if (!late.arrived) return null;
+
+  const snapshot = late.snapshot;
+  const counts = {
+    beforeChars: before.chars,
+    afterChars: snapshot.chars,
+    beforeTables: before.tables,
+    afterTables: snapshot.tables,
+  };
+  if (visible(snapshot)) {
+    log?.('   ⏱️ [리치입력] 늦게 도착한 붙여넣기를 확인 — 다시 붙여넣지 않고 성공 처리');
+    logDuplicateSuspect(log, before, snapshot, trimmedPlain);
+    return { ok: true, method, reason: 'late-arrival: previous paste landed after the wait', ...counts };
+  }
+
+  // Partial late arrival: same recovery as a partial native paste.
+  const rollback = resolvePasteRollbackPolicy(await rollbackPartialPaste(page, frame, before, snapshot));
+  if (!rollback.safeToFallback) {
+    const salvage = assessPartialSalvage(before, snapshot, trimmedPlain);
+    if (salvage.acceptable) {
+      return {
+        ok: true,
+        method,
+        reason: `partial-accepted: cov=${salvage.coverage.toFixed(2)} late-arrival rollback-unverified — 꼬리 일부는 라이브 확인 대상`,
+        ...counts,
+      };
+    }
+    return {
+      ok: false,
+      method: 'none',
+      reason: buildPasteFailureReason('late partial paste + rollback unverified → 키보드 입력 fallback으로 복구 진행', before, snapshot, trimmedPlain),
+      safeToFallback: true,
+      ...counts,
+    };
+  }
+  if (!rollback.canContinuePasteFallback) {
+    return {
+      ok: false,
+      method: 'none',
+      reason: buildPasteFailureReason('late partial paste rolled back but tail re-anchor was unavailable', before, snapshot, trimmedPlain),
+      safeToFallback: true,
+      ...counts,
+      afterChars: before.chars,
+      afterTables: before.tables,
+    };
+  }
+  return null;
+}
+
 export async function pasteRichHtmlAtCursor(
   page: Page,
   frame: Frame,
   html: string,
   plainText: string,
   expectedTableCount = 0,
+  log?: (message: string) => void,
 ): Promise<RichPasteResult> {
   const before = await readEditorStats(frame);
   const trimmedHtml = String(html || '').trim();
@@ -3398,6 +3478,12 @@ export async function pasteRichHtmlAtCursor(
         await page.bringToFront().catch(() => undefined);
         const retryCaretReady = await ensureTailTypingReady(page, frame).catch(() => false);
         if (!retryCaretReady) break;
+        // [2026-10-09] The first Ctrl+V may simply be late (slow PC): the rollback above saw an
+        // unchanged editor. Never press again while it is still arriving.
+        const lateNative = await resolveLateArrival({
+          page, frame, before, trimmedPlain, expectedTableCount, method: 'clipboard-html', log,
+        });
+        if (lateNative) return lateNative;
       }
       await new Promise(resolve => setTimeout(resolve, 150));
       await pressControlShortcut(page, 'V');
@@ -3405,24 +3491,15 @@ export async function pasteRichHtmlAtCursor(
       // [2026-06-22] Slow-client fix: a long article can take several seconds to
       // finish rendering after Ctrl+V on slower machines. The old single fixed-wait
       // snapshot caught the paste mid-insertion, so only the first fragment was seen.
-      // Poll until the body covers the expected content, or the char count stops
-      // growing (paste settled / genuinely incomplete), up to ~6s.
-      after = await readEditorStats(frame);
-      const pollStart = Date.now();
-      let lastChars = -1;
-      let stableReads = 0;
-      while (Date.now() - pollStart < 6000) {
-        if (isPasteVisible(before, after, trimmedPlain, expectedTableCount)) break;
-        if (after.chars === lastChars) {
-          stableReads += 1;
-          if (stableReads >= 3) break; // count stalled → paste won't grow further
-        } else {
-          stableReads = 0;
-        }
-        lastChars = after.chars;
-        await new Promise(resolve => setTimeout(resolve, 400));
-        after = await readEditorStats(frame);
-      }
+      // Poll until the body covers the expected content, or growth has started and then
+      // stalled (paste settled / genuinely incomplete), up to ~6s.
+      // [2026-10-09] Zero growth never counts as "stalled": a paste that has not arrived yet
+      // looks the same as one that never will, so only the cap may end that wait.
+      after = await waitForPasteArrival({
+        readEditor: () => readEditorStats(frame),
+        reference: before,
+        isVisible: (snapshot) => isPasteVisible(before, snapshot, trimmedPlain, expectedTableCount),
+      });
       inserted = isPasteVisible(before, after, trimmedPlain, expectedTableCount);
       if (inserted) break;
 
@@ -3434,6 +3511,7 @@ export async function pasteRichHtmlAtCursor(
     }
 
     if (inserted) {
+      logDuplicateSuspect(log, before, after, trimmedPlain);
       return {
         ok: true,
         method: 'clipboard-html',
@@ -3471,6 +3549,14 @@ export async function pasteRichHtmlAtCursor(
         afterTables: after.tables,
       };
     }
+    if (nativeRollback) {
+      // [2026-10-09] Rolled back and about to leave the native stage: a Ctrl+V that was only late
+      // must not be followed by the synthetic-event / plain-paste / typing stages.
+      const lateNative = await resolveLateArrival({
+        page, frame, before, trimmedPlain, expectedTableCount, method: 'clipboard-html', log,
+      });
+      if (lateNative) return lateNative;
+    }
     if (nativeRollback && !nativeRollback.canContinuePasteFallback) {
       return {
         ok: false,
@@ -3487,9 +3573,16 @@ export async function pasteRichHtmlAtCursor(
     const eventResult = await dispatchRichPasteEventAtCursor(frame, trimmedHtml, trimmedPlain);
     let afterEvent = await readEditorStats(frame);
     if (eventResult.ok) {
-      await new Promise(resolve => setTimeout(resolve, 900));
-      afterEvent = await readEditorStats(frame);
+      // [2026-10-09] Poll for arrival instead of one fixed 900ms snapshot — a slow PC digests
+      // the synthetic paste late, and the plain-paste stage must not run on top of it.
+      afterEvent = await waitForPasteArrival({
+        readEditor: () => readEditorStats(frame),
+        reference: before,
+        isVisible: (snapshot) => isPasteVisible(before, snapshot, trimmedPlain, expectedTableCount),
+        maxWaitMs: PASTE_FALLBACK_ARRIVAL_MAX_WAIT_MS,
+      });
       if (isPasteVisible(before, afterEvent, trimmedPlain, expectedTableCount)) {
+        logDuplicateSuspect(log, before, afterEvent, trimmedPlain);
         return {
           ok: true,
           method: 'paste-event-html',
@@ -3529,6 +3622,10 @@ export async function pasteRichHtmlAtCursor(
         afterTables: afterEvent.tables,
       };
     }
+    const lateEvent = await resolveLateArrival({
+      page, frame, before, trimmedPlain, expectedTableCount, method: 'paste-event-html', log,
+    });
+    if (lateEvent) return lateEvent;
     if (!eventRollback.canContinuePasteFallback) {
       return {
         ok: false,
@@ -3564,9 +3661,15 @@ export async function pasteRichHtmlAtCursor(
 
     const plainResult = await pastePlainTextAtCursor(page, frame, trimmedPlain);
     if (plainResult.ok) {
-      await new Promise(resolve => setTimeout(resolve, 900));
-      const afterPlain = await readEditorStats(frame);
+      // [2026-10-09] Same as the event stage: follow the paste's arrival instead of one 900ms snapshot.
+      const afterPlain = await waitForPasteArrival({
+        readEditor: () => readEditorStats(frame),
+        reference: before,
+        isVisible: (snapshot) => isPasteVisible(before, snapshot, trimmedPlain, expectedTableCount),
+        maxWaitMs: PASTE_FALLBACK_ARRIVAL_MAX_WAIT_MS,
+      });
       if (isPasteVisible(before, afterPlain, trimmedPlain, expectedTableCount)) {
+        logDuplicateSuspect(log, before, afterPlain, trimmedPlain);
         return {
           ok: true,
           method: 'clipboard-plain',
@@ -3578,6 +3681,11 @@ export async function pasteRichHtmlAtCursor(
         };
       }
       await rollbackPartialPaste(page, frame, before, afterPlain).catch(() => undefined);
+      // [2026-10-09] The keyboard fallback is the next stage: do not type over a plain paste that is only late.
+      const latePlain = await resolveLateArrival({
+        page, frame, before, trimmedPlain, expectedTableCount, method: 'clipboard-plain', log,
+      });
+      if (latePlain) return latePlain;
       // [v2.11.140b] plain 검증 실패도 항상 키보드 입력 fallback으로 이어져 완주한다.
       return {
         ok: false,

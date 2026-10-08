@@ -18,6 +18,25 @@ export interface ServerSessionProbeVerdict {
   /** Compatibility only: false does NOT mean that submitting credentials is appropriate. */
   ok: boolean;
   reason: string;
+  /** True only when an editor frame confirmed a DIFFERENT blog id than the one expected for the account (configured or learned). */
+  identityMismatch?: true;
+  /** With `identityMismatch`: the blog the window holds, and the blog this account is expected to have (absent when none is known). */
+  observedBlogId?: string;
+  expectedBlogId?: string;
+  /** On a ready verdict: the blog the editor confirmed for this account. */
+  blogId?: string;
+}
+export type CommitTimeBlockCode = 'LOGIN_REQUIRED' | 'LOGIN_CHALLENGE' | 'ACCOUNT_PROTECTED' | 'ACCOUNT_MISMATCH';
+/**
+ * Right before the irreversible publish click only POSITIVE evidence of a problem may stop the run. Missing or
+ * unclear evidence (frame detached/changed, page changed, probe timeout, identity not readable) says nothing
+ * about the account, and the session was already verified when the run started.
+ */
+export function resolveCommitTimeBlock(verdict: ServerSessionProbeVerdict): CommitTimeBlockCode | undefined {
+  if (verdict.status === 'protected') return 'ACCOUNT_PROTECTED';
+  if (verdict.status === 'challenge') return 'LOGIN_CHALLENGE';
+  if (verdict.status === 'login-required') return 'LOGIN_REQUIRED';
+  return verdict.identityMismatch === true ? 'ACCOUNT_MISMATCH' : undefined;
 }
 export function isServerSessionLoginRedirect(finalUrl: string | undefined): boolean {
   return isNaverSessionLoginUrl(finalUrl) && !isLoginChallengeUrl(String(finalUrl || ''));

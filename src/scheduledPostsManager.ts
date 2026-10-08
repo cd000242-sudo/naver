@@ -184,6 +184,22 @@ export function createPublishingScheduledPostState(
   };
 }
 
+/**
+ * The error a scheduler throws when the publish run reported failure. It keeps what main reported (reason and code) so
+ * a paused account is named as such and a genuinely unknown outcome becomes `uncertain` instead of an anonymous failure.
+ */
+export function createScheduledPublishError(
+  result: { message?: unknown; failureCode?: unknown; refusedBeforeStart?: unknown } | null | undefined,
+): Error {
+  const message = typeof result?.message === 'string' && result.message.trim()
+    ? result.message
+    : 'SCHEDULED_PUBLISH_FAILED: automation did not report success';
+  const error = new Error(message);
+  if (typeof result?.failureCode === 'string' && result.failureCode) Object.assign(error, { code: result.failureCode });
+  if (result?.refusedBeforeStart === true) Object.assign(error, { refusedBeforeStart: true });
+  return error;
+}
+
 export function createFailedScheduledPostState(
   post: ScheduledPost,
   error: unknown,
@@ -200,7 +216,9 @@ export function createFailedScheduledPostState(
     || classifiedCode === 'PUBLISH_OUTCOME_UNKNOWN'
     ? 'PUBLISH_OUTCOME_UNKNOWN'
     : (explicitCode || classifiedCode);
-  const status: ScheduledPost['status'] = failureCode === 'PUBLISH_OUTCOME_UNKNOWN'
+  // Main refused the job at admission (account paused): nothing reached Naver, so there is no outcome to check.
+  const refusedBeforeStart = (error as { refusedBeforeStart?: unknown } | null | undefined)?.refusedBeforeStart === true;
+  const status: ScheduledPost['status'] = failureCode === 'PUBLISH_OUTCOME_UNKNOWN' && !refusedBeforeStart
     ? 'uncertain'
     : 'failed';
 

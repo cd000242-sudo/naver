@@ -11,7 +11,7 @@ function setup() {
   const dir = mkdtempSync(join(tmpdir(), 'account-controller-')); roots.push(dir);
   const guard = new AccountExecutionGuard({ storageDir: join(dir, 'guard') });
   const journal = new PublicationCommitJournal({ storageDir: join(dir, 'journal') });
-  const sessions = { setExpectedBlogId: vi.fn(), openForUser: vi.fn(async () => {}), inspectServerSessionState: vi.fn(async () => ({ status: 'ready' })), verifyAccountForUser: vi.fn(async () => ({ status: 'ready' })), resumeAccount: vi.fn(async (id: string) => guard.resume(id, async () => true)) };
+  const sessions = { setExpectedBlogId: vi.fn(), openForUser: vi.fn(async () => {}), inspectServerSessionState: vi.fn(async () => ({ status: 'ready' })), verifyAccountForUser: vi.fn(async () => ({ status: 'ready' })), ensureSessionForUser: vi.fn(async () => {}), openPostListForUser: vi.fn(async () => {}) };
   const controller = createAccountSafetyController(() => [{ id: 'app-id', naverId: 'login-id', blogId: 'custom-blog' }], sessions, guard, journal);
   return { controller, guard, journal, sessions };
 }
@@ -25,7 +25,7 @@ describe('account safety user actions', () => {
   it('rejects stale resume without inspecting or clearing protection', async () => {
     const { controller, guard, sessions } = setup(); guard.pause('login-id', 'ACCOUNT_PROTECTED');
     expect((await controller.act('app-id', 'resume', 0)).success).toBe(false);
-    expect(sessions.resumeAccount).not.toHaveBeenCalled(); expect(guard.getStatus('login-id').paused).toBe(true);
+    expect(sessions.verifyAccountForUser).not.toHaveBeenCalled(); expect(sessions.ensureSessionForUser).not.toHaveBeenCalled(); expect(guard.getStatus('login-id').paused).toBe(true);
   });
   it('opening the browser does not release the account stop', async () => {
     const { controller, guard, sessions } = setup(); guard.pause('login-id', 'LOGIN_REQUIRED');

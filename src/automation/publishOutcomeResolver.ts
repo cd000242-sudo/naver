@@ -60,6 +60,9 @@ export interface NaverBlogPostIdentity {
   logNo: string;
 }
 
+// A blog id as it appears as the only path segment (page names such as PostList.naver contain a dot and never match).
+const BLOG_ID_PATH_SEGMENT = /^[A-Za-z0-9_-]+$/;
+
 export function extractNaverBlogPostIdentity(value: string): NaverBlogPostIdentity | null {
   if (!isNaverBlogUrl(value) || isNaverEditorUrl(value)) {
     return null;
@@ -77,6 +80,11 @@ export function extractNaverBlogPostIdentity(value: string): NaverBlogPostIdenti
     if (segments.length >= 2 && /^\d+$/.test(segments[1])) {
       return { blogId: decodeURIComponent(segments[0]), logNo: segments[1] };
     }
+    // [2026-10-09] Real landing after an immediate publish: https://blog.naver.com/<id>?Redirect=Update&...&logNo=<N>
+    // (the post existed). The blog id is the only path segment, the post number is in the query.
+    if (segments.length === 1 && logNo && /^\d+$/.test(logNo) && BLOG_ID_PATH_SEGMENT.test(segments[0])) {
+      return { blogId: segments[0], logNo };
+    }
     return null;
   } catch {
     const match = value.match(/blog\.naver\.com\/([^/\s?#]+)\/(\d+)/i);
@@ -86,6 +94,24 @@ export function extractNaverBlogPostIdentity(value: string): NaverBlogPostIdenti
 
 export function isConcreteNaverBlogPostUrl(value: string): boolean {
   return extractNaverBlogPostIdentity(value) !== null;
+}
+
+/**
+ * The canonical https://blog.naver.com/<id>/<logNo> for the `?logNo=` landing shape whose path carries the blog id.
+ * Every other concrete shape is returned as given; anything that is not a post URL returns null.
+ */
+export function normalizeNaverBlogPostUrl(value: string): string | null {
+  const identity = extractNaverBlogPostIdentity(value);
+  if (!identity) return null;
+  try {
+    const segments = new URL(value).pathname.split('/').filter(Boolean);
+    if (segments.length === 1 && segments[0] === identity.blogId) {
+      return `https://blog.naver.com/${identity.blogId}/${identity.logNo}`;
+    }
+  } catch {
+    // Not parseable: keep the value as given.
+  }
+  return value;
 }
 
 function changedCandidates(input: ImmediatePublishOutcomeInput): string[] {
@@ -119,7 +145,7 @@ export function resolveImmediatePublishOutcome(input: ImmediatePublishOutcomeInp
   if (concretePostUrl) {
     return {
       success: true,
-      url: concretePostUrl,
+      url: normalizeNaverBlogPostUrl(concretePostUrl) ?? concretePostUrl,
       reason: 'CONCRETE_POST_URL',
       needsManualUrlCheck: false,
     };

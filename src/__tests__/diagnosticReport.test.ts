@@ -30,9 +30,16 @@ describe('diagnostic report wiring', () => {
     expect(handler).toMatch(/desktop/);
   });
 
-  it('auto-generates a report on publish failure (both result-failure and exception paths)', () => {
-    const calls = (mainSrc.match(/generateDiagnosticReport\(/g) || []).length;
-    expect(calls).toBeGreaterThanOrEqual(2);
+  // [2026-10-09] Customers: a report file landed on the desktop for every failure, cancels and transient stops included,
+  // and they had to keep deleting them. Reports are made only on demand now; a failure points to the button.
+  it('never writes a report on its own when a publish fails', () => {
+    expect(mainSrc).not.toMatch(/generateDiagnosticReport\(/);
+    expect(mainSrc).not.toContain('진단 리포트가 저장됐어요');
+  });
+
+  it('a failed publish points to the manual [오류 진단 저장] button instead', () => {
+    const hints = (mainSrc.match(/\[🔧 오류 진단 저장\]/g) || []).length;
+    expect(hints).toBeGreaterThanOrEqual(2);
   });
 
   it('registers the IPC handler and exposes it through preload', () => {

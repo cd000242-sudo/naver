@@ -14,21 +14,25 @@
  * Automatic work (continuous, multi-account, schedulers) never comes here and keeps stopping.
  */
 import { AccountExecutionGuardError, type AccountPauseCode } from './accountExecutionGuard.js';
+import { blogMismatchStopMessage } from './expectedBlogIdentity.js';
 
 /** Stops a user-pressed run may re-check by itself. */
 export const USER_RUN_RESUMABLE_CODES: ReadonlySet<string> = new Set(['LOGIN_REQUIRED', 'NETWORK_WAIT']);
 
 const KEEP = ' 원고는 그대로 있습니다.';
 export const LOGIN_WINDOW_MESSAGE = `네이버 로그인 창을 앞으로 띄웠습니다. 그 창에서 직접 로그인(필요하면 본인확인)한 뒤 발행 버튼을 다시 눌러주세요.${KEEP}`;
-export const CHALLENGE_WINDOW_MESSAGE = `네이버 창에 본인확인·보호조치 화면이 있습니다. 그 창에서 직접 마친 뒤 계정 관리의 [확인 후 재개]를 눌러주세요.${KEEP}`;
-export const MISMATCH_MESSAGE = `선택한 계정과 다른 네이버 계정이 로그인돼 있습니다. 열린 창에서 이 계정으로 다시 로그인한 뒤 계정 관리의 [확인 후 재개]를 눌러주세요.${KEEP}`;
-export const OUTCOME_UNKNOWN_MESSAGE = `직전 글이 발행됐는지 확인되지 않았습니다(중복 발행 방지). 네이버 글 목록을 확인한 뒤 계정 관리에서 [발행됨 확인] 또는 [발행 안 됨 확인]을 눌러주세요.${KEEP}`;
+export const CHALLENGE_WINDOW_MESSAGE = `네이버 창에 본인확인·보호조치 화면이 있습니다. 그 창에서 직접 마친 뒤 화면의 안내 창(또는 계정 관리)의 [확인 후 재개]를 눌러주세요.${KEEP}`;
+export const MISMATCH_MESSAGE = `선택한 계정과 다른 네이버 계정이 로그인돼 있습니다. 열린 창에서 이 계정으로 다시 로그인한 뒤 화면의 안내 창(또는 계정 관리)의 [확인 후 재개]를 눌러주세요.${KEEP}`;
+export const OUTCOME_UNKNOWN_MESSAGE = `직전 글이 발행됐는지 확인되지 않았습니다(중복 발행 방지). 네이버 글 목록을 확인한 뒤 화면의 안내 창(또는 계정 관리)에서 [발행됨 확인] 또는 [발행 안 됨 확인]을 눌러주세요.${KEEP}`;
 export const STATE_CHANGED_MESSAGE = `계정 상태가 방금 바뀌었습니다. 잠시 뒤 발행 버튼을 다시 눌러주세요.${KEEP}`;
 export const EDITOR_UNAVAILABLE_MESSAGE = `네이버 글쓰기 화면을 확인하지 못했습니다. 인터넷 연결을 확인하고 잠시 뒤 발행 버튼을 다시 눌러주세요.${KEEP}`;
 
 export interface UserRunVerdict {
   readonly status: string;
   readonly reason?: string;
+  /** With a confirmed other blog: the blog the window holds and the blog this account is expected to have. */
+  readonly observedBlogId?: string;
+  readonly expectedBlogId?: string;
 }
 
 export interface UserRunResumeDeps {
@@ -51,14 +55,15 @@ function stopError(code: AccountPauseCode, message: string): AccountExecutionGua
 }
 
 /** A stop the user decides: never cleared here, but the message names the exact button. */
-async function guidanceForManualStop(code: string, deps: UserRunResumeDeps): Promise<AccountExecutionGuardError> {
+async function guidanceForManualStop(code: string, deps: UserRunResumeDeps, verdict?: UserRunVerdict): Promise<AccountExecutionGuardError> {
   if (code === 'LOGIN_CHALLENGE' || code === 'ACCOUNT_PROTECTED') {
     await deps.showLogin().catch(() => undefined);
     return stopError(code, CHALLENGE_WINDOW_MESSAGE);
   }
   if (code === 'ACCOUNT_MISMATCH') {
     await deps.showLogin().catch(() => undefined);
-    return stopError('ACCOUNT_MISMATCH', MISMATCH_MESSAGE);
+    const named = blogMismatchStopMessage(verdict);
+    return stopError('ACCOUNT_MISMATCH', named ? `${named}${KEEP}` : MISMATCH_MESSAGE);
   }
   return stopError('PUBLISH_OUTCOME_UNKNOWN', OUTCOME_UNKNOWN_MESSAGE);
 }
@@ -77,7 +82,7 @@ async function stopAfterFailedCheck(verdict: UserRunVerdict, fallback: AccountPa
   }
   if (verdict.reason === 'account-identity-unverified') {
     record('ACCOUNT_MISMATCH');
-    return guidanceForManualStop('ACCOUNT_MISMATCH', deps);
+    return guidanceForManualStop('ACCOUNT_MISMATCH', deps, verdict);
   }
   // The check passed but the stop changed meanwhile (another action, a version bump): just retry.
   if (verdict.status === 'ready') return stopError(fallback, STATE_CHANGED_MESSAGE);

@@ -16,13 +16,16 @@ import { promises as fs } from 'fs';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
 import { emitSessionEvent } from './session/sessionEventLogger.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
-import { resolveServerSessionProbeVerdict, SERVER_SESSION_PROBE_URL } from './automation/serverSessionProbePolicy.js';
+import { resolveCommitTimeBlock, resolveServerSessionProbeVerdict, SERVER_SESSION_PROBE_URL } from './automation/serverSessionProbePolicy.js';
 import { isLoginChallengeUrl, isNaverSessionLoginUrl, parseNaverSessionUrl } from './automation/loginPageNavigationPolicy.js';
 import { getAccountExecutionGuard, AccountExecutionGuardError, type AccountPauseCode } from './automation/accountExecutionGuard.js';
 import type { ServerSessionProbeVerdict } from './automation/serverSessionProbePolicy.js';
 import { withCleanupTimeout } from './runtime/cleanupTimeout.js';
 import { EDITOR_BODY_SELECTOR, waitForInitialEditorReadiness } from './automation/initialEditorReadiness.js';
 import { inspectCurrentSessionFrames } from './automation/serverSessionFrameProbe.js';
+import { decideBlogIdentity, type BlogIdentityDecision } from './automation/blogIdentityPolicy.js';
+import { getBlogIdentityStore, type BlogIdentityStore } from './automation/blogIdentityStore.js';
+import { blogMismatchStopMessage } from './automation/expectedBlogIdentity.js';
 
 // ✅ [2026-03-27 FIX] Stealth Plugin — 모든 evasion 모듈 명시적 활성화
 // 기본 설정에서 일부 모듈(chrome.csi 등)이 비활성화되어 있을 수 있으므로 명시적으로 설정
@@ -79,7 +82,11 @@ class BrowserSessionManager {
     // 현재 활성 세션
     private activeAccountId: string | null = null;
     private readonly serverSessionChecks = new Map<string, Promise<ServerSessionProbeVerdict>>();
+    // Blogs a registered account names (strict). A login ID with no registered blog is NOT stored here: its blog is learned.
     private readonly expectedBlogIds = new Map<string, string>();
+    private identityStore: BlogIdentityStore = getBlogIdentityStore();
+    // Naver IDs of registered accounts that name a blog; lets the conflict guard see accounts this run has not touched yet.
+    private blogOwnerResolver?: (blogId: string) => ReadonlyArray<string>;
 
     // 프로필 베이스 경로
     private readonly PROFILE_BASE = path.join(os.homedir(), '.naver-blog-automation', 'profiles');
@@ -861,16 +868,46 @@ class BrowserSessionManager {
         });
     }
 
-    async verifyAccountForUser(accountId: string): Promise<ServerSessionProbeVerdict> {
+    /**
+     * Explicit user action: make sure this account has a live browser to check. It never navigates, focuses or logs in.
+     * Right after an app restart no session exists and verifyAccountForUser answers "session-unavailable".
+     * Must run before guard.resume*, which holds the account busy while it verifies.
+     */
+    async ensureSessionForUser(accountId: string): Promise<void> {
+        accountId = this.resolveSessionAccountId(accountId);
+        return getAccountExecutionGuard().runUserActionExclusive(accountId, async () => {
+            const session = this.sessions.get(accountId);
+            if (session?.browser.connected && !session.page.isClosed()) return;
+            await this.getOrCreateSession(accountId, false, undefined, { userInitiated: true });
+        });
+    }
+
+    /** Explicit user action: show the blog's post list in this account's own browser; an open editor page stays untouched. */
+    async openPostListForUser(accountId: string, blogId: string): Promise<void> {
+        accountId = this.resolveSessionAccountId(accountId);
+        if (!/^[A-Za-z0-9_-]{1,100}$/.test(String(blogId))) throw new AccountExecutionGuardError('ACCOUNT_MISMATCH');
+        const url = `https://blog.naver.com/PostList.naver?blogId=${blogId}&categoryNo=0&from=postList`;
+        return getAccountExecutionGuard().runUserActionExclusive(accountId, async () => {
+            let session = this.sessions.get(accountId);
+            if (!session?.browser.connected || session.page.isClosed()) session = await this.getOrCreateSession(accountId, false, undefined, { userInitiated: true });
+            // Only a blank page is reused; a page that may hold a draft or a login screen is never navigated away.
+            const tab = session.page.url() === 'about:blank' ? session.page : await session.browser.newPage();
+            await tab.bringToFront();
+            await tab.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+        });
+    }
+
+    /** `allowRelearn`: the user pressed [확인 후 재개] while looking at this window, so it may replace a learned (never a configured) blog. */
+    async verifyAccountForUser(accountId: string, options: { allowRelearn?: boolean } = {}): Promise<ServerSessionProbeVerdict> {
         accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
         if (!session?.browser.connected || session.page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-unavailable' };
         const page = session.page;
         const current = page.url();
-        if (isLoginChallengeUrl(current) || isNaverSessionLoginUrl(current)) return this.inspectServerSessionState(accountId);
+        if (isLoginChallengeUrl(current) || isNaverSessionLoginUrl(current)) return this.inspectServerSessionState(accountId, options);
         try {
             // First inspect the current page: a ready editor may contain an unsaved draft.
-            const existing = await this.inspectServerSessionState(accountId);
+            const existing = await this.inspectServerSessionState(accountId, options);
             const currentSurface = parseNaverSessionUrl(current);
             const canOpenEditor = current === 'about:blank' || Boolean(currentSurface && ['www.naver.com', 'naver.com'].includes(currentSurface.hostname));
             if (!canOpenEditor || !['unknown', 'unavailable'].includes(existing.status) || existing.reason === 'account-identity-unverified' || existing.reason === 'session-changed') return existing;
@@ -878,16 +915,46 @@ class BrowserSessionManager {
             // Only explicit resume may advance an unverified non-editor to the editor.
             await page.goto(SERVER_SESSION_PROBE_URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
             if (this.sessions.get(accountId) !== session || session.page !== page || page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-changed' };
-            if (isLoginChallengeUrl(page.url()) || isNaverSessionLoginUrl(page.url())) return this.inspectServerSessionState(accountId);
+            if (isLoginChallengeUrl(page.url()) || isNaverSessionLoginUrl(page.url())) return this.inspectServerSessionState(accountId, options);
             await waitForInitialEditorReadiness(page, { timeoutMs: 15000 });
             if (this.sessions.get(accountId) !== session || session.page !== page || page.isClosed()) return { ok: false, status: 'unknown', reason: 'session-changed' };
-            return this.inspectServerSessionState(accountId);
+            return this.inspectServerSessionState(accountId, options);
         } catch { return { ok: false, status: 'unavailable', reason: 'editor-unavailable' }; }
     }
 
-    setExpectedBlogId(accountId: string, blogId: string): void {
+    /**
+     * 'configured': a registered account names this blog, compared strictly. 'fallback': `blogId` is only the login ID, which Naver
+     * does not require to equal the blog address, so any earlier configured blog is dropped and the real blog is learned from the editor.
+     */
+    setExpectedBlogId(accountId: string, blogId: string, source: 'configured' | 'fallback' = 'configured'): void {
         if (!/^[A-Za-z0-9_-]{1,100}$/.test(blogId)) throw new AccountExecutionGuardError('ACCOUNT_MISMATCH');
-        this.expectedBlogIds.set(accountId.trim().toLowerCase(), blogId.toLowerCase());
+        const key = accountId.trim().toLowerCase();
+        if (source === 'fallback') this.expectedBlogIds.delete(key);
+        else this.expectedBlogIds.set(key, blogId.toLowerCase());
+    }
+
+    /** The blog this account is known to publish to: a registered one, else the one learned from the editor. */
+    getKnownBlogId(accountId: string): string | undefined {
+        return this.expectedBlogIds.get(accountId.trim().toLowerCase()) || this.identityStore.get(accountId);
+    }
+
+    setConfiguredBlogOwnerResolver(resolver: ((blogId: string) => ReadonlyArray<string>) | undefined): void {
+        this.blogOwnerResolver = resolver;
+    }
+
+    /** The blog is registered or learned for a Naver ID other than this one: positive evidence the window holds another account. */
+    private isBlogClaimedByOther(blogId: string, naverKey: string): boolean {
+        for (const [other, blog] of this.expectedBlogIds) if (other !== naverKey && blog === blogId) return true;
+        if (this.blogOwnerResolver?.(blogId).some(owner => owner.trim().toLowerCase() !== naverKey)) return true;
+        return this.identityStore.isLearnedByOther(blogId, naverKey);
+    }
+
+    private rememberLearnedBlog(accountId: string, decision: Extract<BlogIdentityDecision, { outcome: 'learn' }>): void {
+        this.identityStore.learn(accountId, decision.blogId);
+        const who = `${accountId.substring(0, 3)}***`;
+        console.log(decision.replaced
+            ? `[BrowserSessionManager] ℹ️ 이 계정(${who})의 블로그 주소를 ${decision.replaced} → ${decision.blogId} 로 다시 확인했습니다.`
+            : `[BrowserSessionManager] ℹ️ 이 계정(${who})의 블로그 주소를 ${decision.blogId} 로 확인했습니다.`);
     }
 
     async resumeAccount(accountId: string): Promise<boolean> {
@@ -902,24 +969,26 @@ class BrowserSessionManager {
     }
 
     /** 재개 버튼의 검증에도 사용한다. 페이지 이동이나 자동 로그인은 하지 않는다. */
-    inspectServerSessionState(accountId: string): Promise<ServerSessionProbeVerdict> {
+    inspectServerSessionState(accountId: string, options: { allowRelearn?: boolean } = {}): Promise<ServerSessionProbeVerdict> {
         accountId = this.resolveSessionAccountId(accountId);
-        const pending = this.serverSessionChecks.get(accountId);
+        // A user verification must not piggy-back on a probe that may not re-learn.
+        const checkKey = options.allowRelearn ? accountId + '|relearn' : accountId;
+        const pending = this.serverSessionChecks.get(checkKey);
         if (pending) return pending;
-        const next = this.probeServerSessionState(accountId).finally(() => {
-            if (this.serverSessionChecks.get(accountId) === next) this.serverSessionChecks.delete(accountId);
+        const next = this.probeServerSessionState(accountId, options.allowRelearn === true).finally(() => {
+            if (this.serverSessionChecks.get(checkKey) === next) this.serverSessionChecks.delete(checkKey);
         });
-        this.serverSessionChecks.set(accountId, next);
+        this.serverSessionChecks.set(checkKey, next);
         return next;
     }
 
-    private async probeServerSessionState(accountId: string): Promise<ServerSessionProbeVerdict> {
+    private async probeServerSessionState(accountId: string, allowRelearn = false): Promise<ServerSessionProbeVerdict> {
         accountId = this.resolveSessionAccountId(accountId);
         const session = this.sessions.get(accountId);
         if (!session || !session.browser.connected || !session.page || session.page.isClosed()) return { ok: false, status: 'unavailable', reason: 'session-unavailable' };
         const page = session.page;
         const initialUrl = typeof page.url === 'function' ? page.url() : undefined;
-        const expectedIdentity = this.expectedBlogIds.get(accountId.trim().toLowerCase()) || accountId.trim().toLowerCase();
+        const naverKey = accountId.trim().toLowerCase();
         try {
             const pendingCheck = (async () => {
                 if (typeof page.frames === 'function') {
@@ -963,15 +1032,27 @@ class BrowserSessionManager {
             if (this.sessions.get(accountId) !== session || session.page !== page || page.isClosed() || (initialUrl !== undefined && page.url() !== initialUrl)) return { ok: false, status: 'unknown', reason: 'session-changed' };
             const verdict = resolveServerSessionProbeVerdict(serverCheck);
             if (verdict.ok) {
-                if (!('accountIdentity' in serverCheck) || !serverCheck.accountIdentity || serverCheck.accountIdentity.toLowerCase() !== expectedIdentity) {
+                // The login ID is not evidence of the blog address: a registered blog is compared strictly, otherwise the blog the
+                // editor confirms is learned and compared on later runs. A well-formed blog that differs is positive evidence of
+                // another account; a missing or malformed one only means the identity could not be read.
+                const seen = 'accountIdentity' in serverCheck ? serverCheck.accountIdentity : undefined;
+                const decision = decideBlogIdentity({
+                    observed: seen, configured: this.expectedBlogIds.get(naverKey), learned: this.identityStore.get(naverKey),
+                    allowRelearn, claimedByOther: blog => this.isBlogClaimedByOther(blog, naverKey),
+                });
+                if (decision.outcome === 'unreadable' || decision.outcome === 'mismatch') {
                     session.isLoggedIn = false; session.loginVerifiedAt = 0;
-                    return { ok: false, status: 'unknown', reason: 'account-identity-unverified' };
+                    if (decision.outcome === 'unreadable') return { ok: false, status: 'unknown', reason: 'account-identity-unverified' };
+                    return { ok: false, status: 'unknown', reason: 'account-identity-unverified', identityMismatch: true as const, observedBlogId: decision.observed, ...(decision.expected ? { expectedBlogId: decision.expected } : {}) };
                 }
+                if (decision.outcome === 'learn') this.rememberLearnedBlog(accountId, decision);
                 session.isLoggedIn = true; session.loginVerifiedAt = Date.now();
                 // Persist only cookies the server just confirmed for the expected account: the next app start
                 // restores them at session creation instead of stopping at LOGIN_REQUIRED, and a stale file is replaced.
                 void this.persistVerifiedCookies(accountId, page);
-            } else { session.isLoggedIn = false; session.loginVerifiedAt = 0; }
+                return { ...verdict, blogId: String(seen).toLowerCase() };
+            }
+            session.isLoggedIn = false; session.loginVerifiedAt = 0;
             return verdict;
         } catch { return { ok: false, status: 'unavailable', reason: 'probe-unavailable' }; }
     }
@@ -994,7 +1075,23 @@ class BrowserSessionManager {
         const codes: Record<string, AccountPauseCode> = { 'login-required': 'LOGIN_REQUIRED', challenge: 'LOGIN_CHALLENGE', protected: 'ACCOUNT_PROTECTED', unavailable: 'NETWORK_WAIT', unknown: 'NETWORK_WAIT' };
         const code = state.reason === 'account-identity-unverified' ? 'ACCOUNT_MISMATCH' : codes[state.status] || 'NETWORK_WAIT';
         getAccountExecutionGuard().pause(accountId, code);
-        throw new AccountExecutionGuardError(code);
+        throw new AccountExecutionGuardError(code, code === 'ACCOUNT_MISMATCH' ? blogMismatchStopMessage(state) : undefined);
+    }
+
+    /**
+     * Pre-click gate (just before the irreversible publish click). Same probe as ensureServerSession, but only
+     * POSITIVE evidence stops the run: protection, a verification challenge, a login screen, or an editor that
+     * confirms a different blog. Unclear evidence (frame detached/changed, page changed, probe timeout, identity
+     * unreadable) is returned to the caller for logging and the run continues on the session verified at entry.
+     */
+    async ensureServerSessionForCommit(accountId: string): Promise<ServerSessionProbeVerdict> {
+        accountId = this.resolveSessionAccountId(accountId);
+        const state = await this.ensureServerSessionState(accountId);
+        if (state.status === 'ready') { getAccountExecutionGuard().assertAllowed(accountId); return state; }
+        const code = resolveCommitTimeBlock(state);
+        if (!code) return state;
+        getAccountExecutionGuard().pause(accountId, code);
+        throw new AccountExecutionGuardError(code, code === 'ACCOUNT_MISMATCH' ? blogMismatchStopMessage(state) : undefined);
     }
 
     /**

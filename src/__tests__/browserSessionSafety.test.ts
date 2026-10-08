@@ -4,13 +4,14 @@ vi.mock('puppeteer-extra', () => ({ default: { use: vi.fn() } }));
 vi.mock('puppeteer-extra-plugin-stealth', () => ({ default: () => ({ enabledEvasions: new Set() }) }));
 vi.mock('../automation/accountExecutionGuard.js', () => ({ getAccountExecutionGuard: () => guard, AccountExecutionGuardError: class extends Error { constructor(public code: string) { super(code); } } }));
 import { browserSessionManager } from '../browserSessionManager.js';
+import { isolateBlogIdentity } from './mocks/isolatedBlogIdentity';
 const manager = browserSessionManager as any;
 function setup(evaluate = vi.fn(async () => ({ finalUrl: 'https://blog.naver.com/GoBlogWrite.naver', status: 200, hasEditor: true, accountIdentity: 'test_account' }))) {
   const page = { evaluate, isClosed: () => false, goto: vi.fn(), bringToFront: vi.fn() };
   const session = { accountId: 'test_account', browser: { connected: true, newPage: vi.fn(), close: vi.fn() }, page, isLoggedIn: false, loginVerifiedAt: 0 };
   manager.sessions.set('test_account', session); return session;
 }
-beforeEach(() => { manager.sessions.clear(); manager.serverSessionChecks?.clear(); vi.clearAllMocks(); guard.getStatus.mockReturnValue({ paused: false, version: 0 }); });
+beforeEach(() => { manager.sessions.clear(); manager.serverSessionChecks?.clear(); isolateBlogIdentity(manager); manager.expectedBlogIds.clear(); manager.setExpectedBlogId('test_account', 'test_account'); vi.clearAllMocks(); guard.getStatus.mockReturnValue({ paused: false, version: 0 }); });
 describe('server session inspection safety', () => {
   it('shares one in-flight probe and verifies the selected account', async () => {
     let finish!: (v: any) => void; const session = setup(vi.fn(() => new Promise(resolve => { finish = resolve; })) as any);

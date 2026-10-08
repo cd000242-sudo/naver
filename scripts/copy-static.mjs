@@ -377,6 +377,11 @@ try {
       filePath: path.join(projectRoot, 'dist', 'automation', 'publishFailureClassifier.js'),
     },
     {
+      // [2026-10-09] richTextPaste(렌더러 번들)가 붙여넣기 도착 대기 헬퍼를 import 한다 — 등록 누락이면 런타임 ReferenceError.
+      label: 'automation/pasteArrival.js',
+      filePath: path.join(projectRoot, 'dist', 'automation', 'pasteArrival.js'),
+    },
+    {
       // [2026-08-26] 붙여넣기 줄바꿈 미리보기 — fullAutoFlow 가 값으로 가져온다.
       //   미리보기와 발행 결과가 갈리지 않도록 같은 함수를 쓴다.
       label: 'automation/richTextPaste.js',
@@ -546,6 +551,9 @@ try {
     //   수정: 정적 inline + 호출지점에서 동적 import 제거 (static import로 변경).
     'openaiImageGuard.js',
     'pipelineConfig.js',  // [Phase 7.1] 발행 파이프라인 설정 단일 해석처 (publishingHandlers/continuousPublishing/multiAccountManager보다 먼저 로드)
+    'accountPauseModal.js',  // [2026-10-09] 메인 화면 발행 중 계정 멈춤 안내 패널 (continuousPublishing/fullAutoFlow 가 import)
+    'accountManageForm.js',  // [2026-10-09] ⚙️ 계정 관리 창의 수정 폼 (accountManageWindow 가 import — 먼저 로드)
+    'accountManageWindow.js',  // [2026-10-09] ⚙️ 계정 관리 창 (accountPauseModal 의 [풀기] 패널을 쓰므로 그 뒤에 로드)
     'continuousPublishModeHelpers.js',  // ✅ 연속발행 publishMode 해석 헬퍼 (continuousPublishing보다 먼저 로드)
     'continuousPublishing.js',
     'thumbnailGenerator.js',

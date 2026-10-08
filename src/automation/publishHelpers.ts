@@ -1,4 +1,5 @@
 import { waitForScheduleConfirmation } from './scheduleConfirmation.js';
+import { getBlogIdentityStore } from './blogIdentityStore.js';
 /**
  * publishHelpers.ts - 발행/카테고리/예약 관련 함수
  * naverBlogAutomation.ts에서 추출됨
@@ -1186,6 +1187,22 @@ export async function debugPublishModal(self: any): Promise<void> {
 
 // ── publishScheduled ──
 
+/** The blog id from the app's account configuration or the one learned from the editor (never from a page URL); '' when unset or invalid. */
+function configuredBlogId(self: any): string {
+  try {
+    const naverId = self.options?.naverId;
+    const expected = self.options?.getExpectedBlog?.(naverId);
+    if (expected) {
+      // Without a registered blog the expectation is only the login ID, which Naver does not require to equal the blog address.
+      const blog = expected.configured ? expected.blogId : (getBlogIdentityStore().get(naverId) || expected.blogId);
+      return String(blog || '').trim().toLowerCase();
+    }
+    return String(self.options?.getExpectedBlogId?.(self.options?.naverId) || '').trim().toLowerCase();
+  } catch {
+    return '';
+  }
+}
+
 /**
  * 네이버 블로그 예약발행 (완벽 수정 버전 - 자동으로 최적 방식 선택)
  */
@@ -1510,11 +1527,13 @@ export async function publishScheduled(
     };
     const beforeState = await readConfirmation();
     const beforeNotices = beforeState.notices;
+    // A bare GoBlogWrite.naver editor URL has no blog id; the configured one lets "left the editor for this blog" count.
+    const expectedBlogId = configuredBlogId(self);
     // A click may reach Naver even if Puppeteer loses its acknowledgement.
     await beforeIrreversibleCommit?.();
     confirmationAttempted = true;
     await confirmButton.click();
-    await waitForScheduleConfirmation(readConfirmation, beforeNotices, ms => self.delay(ms), beforeState.url);
+    await waitForScheduleConfirmation(readConfirmation, beforeNotices, ms => self.delay(ms), beforeState.url, expectedBlogId);
     self.log(`✅ 예약 완료를 확인했습니다(완료 안내 또는 블로그로 이동): ${scheduleDate} → ${page.url()}`);
 
   } catch (error: any) {

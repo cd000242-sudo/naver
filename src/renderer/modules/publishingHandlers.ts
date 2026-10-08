@@ -5,7 +5,7 @@
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
 import { readSemiAutoEditorDraft } from './tailUIUtils.js';
-import { requiresAccountStop } from '../../automation/publishFailureClassifier.js';
+import { describeAccountStop, extractAccountStopCode, requiresAccountStop, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
 import { toCollectedImagePreviews } from './collectedImagePreview.js';
 import {
   extractSemiAutoHeadingsFromBody,
@@ -2074,7 +2074,7 @@ export async function handleMultiAccountPublish(): Promise<void> {
 
       // The IPC reports the run (success: true) separately from this account's result (results[0]); reading only the
       // run flag logged every failed account as "발행 성공" and never reached the stop below.
-      const accountResult = (result as { results?: Array<{ success?: boolean; message?: string; failureCode?: string }> }).results?.[0];
+      const accountResult = (result as { results?: Array<{ success?: boolean; message?: string; failureCode?: string; refusedBeforeStart?: boolean }> }).results?.[0];
       const accountMessage = accountResult?.message || result.message;
       if (result.success && accountResult?.success === true) {
         appendLog(`✅ [${i + 1}/${selectedAccountIds.length}] ${account.name}: 발행 성공!`);
@@ -2082,11 +2082,17 @@ export async function handleMultiAccountPublish(): Promise<void> {
       } else {
         appendLog(`❌ [${i + 1}/${selectedAccountIds.length}] ${account.name}: ${accountMessage || '발행 실패'}`);
         failCount++;
-        // Same rule as the main multi-account loop: a paused account (login, challenge, protection, connection,
-        // wrong account, unknown outcome) stops the run instead of opening the next account on this PC.
-        if (requiresAccountStop({ code: accountResult?.failureCode, message: accountMessage })) {
-          appendLog('⏹️ 계정 확인이 필요해 다중계정 발행을 멈춥니다. 계정 관리에서 확인 후 재개한 뒤 다시 시작하세요.');
+        // Same rule as the main multi-account loop: a challenge or protection notice means this PC/IP is flagged and
+        // stops the run; any other stop (login, connection, wrong account, unknown outcome) only skips this account.
+        const accountStop = { code: accountResult?.failureCode, message: accountMessage };
+        if (stopsAllAccounts(accountStop)) {
+          appendLog('⏹️ 보호조치·본인확인이 감지되어 다중계정 발행을 멈춥니다. 계정 관리에서 확인한 뒤 다시 시작하세요.');
           break;
+        }
+        if (requiresAccountStop(accountStop)) {
+          appendLog(`⏭️ ${describeAccountStop(extractAccountStopCode(accountStop)!, account.name)} 이 계정은 건너뛰고 다음 계정으로 이어갑니다.`);
+          // Main refused the job before any browser opened: nothing touched Naver, so no interval is needed.
+          if (accountResult?.refusedBeforeStart === true) continue;
         }
       }
 
@@ -2104,8 +2110,8 @@ export async function handleMultiAccountPublish(): Promise<void> {
     } catch (error) {
       appendLog(`❌ [${i + 1}/${selectedAccountIds.length}] 오류: ${(error as Error).message}`);
       failCount++;
-      if (requiresAccountStop(error)) {
-        appendLog('⏹️ 계정 확인이 필요해 다중계정 발행을 멈춥니다. 계정 관리에서 확인 후 재개한 뒤 다시 시작하세요.');
+      if (stopsAllAccounts(error)) {
+        appendLog('⏹️ 보호조치·본인확인이 감지되어 다중계정 발행을 멈춥니다. 계정 관리에서 확인한 뒤 다시 시작하세요.');
         break;
       }
       // An error is not a reason to open the next account immediately: keep the same interval as after a result.

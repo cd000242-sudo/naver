@@ -1,7 +1,7 @@
 // @ts-nocheck
 // Restored from dist/renderer/modules/multiAccountManager.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
-import { classifyPublishFailure } from '../../automation/publishFailureClassifier.js';
+import { classifyPublishFailure, describeAccountStop, extractAccountStopCode, findPausedQueueAccounts, readAccountPause, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
 import { installAccountSafetyControls } from './accountSafetyControls.js';
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => installAccountSafetyControls(), { once: true });
 else installAccountSafetyControls();
@@ -3113,6 +3113,18 @@ async function initMultiAccountPublishModal() {
         stopRequested = false;
         let safetyStopped = false;
         window.stopFullAutoPublish = false;
+        // [2026-10-09] Pause scan: a stopped account is reported before any content is generated for it. A challenge or
+        //   protection notice (the PC/IP is flagged) refuses the whole start; any other stop only skips that account.
+        const pausedAtStart = await findPausedQueueAccounts(window.api?.accountSafety, publishQueue.filter(item => item.pipelineStatus !== 'completed' && item.pipelineStatus !== 'uncertain' && item.pipelineStatus !== 'publishing'));
+        const blockingPause = pausedAtStart.find(paused => stopsAllAccounts({ code: paused.code }));
+        if (blockingPause) {
+            isPublishing = false;
+            toastManager.error(`${describeAccountStop(blockingPause.code, blockingPause.accountName)} 대기열을 시작하지 않았습니다.`);
+            return;
+        }
+        if (pausedAtStart.length > 0) {
+            toastManager.warning(`중단된 계정 ${pausedAtStart.length}개는 건너뜁니다: ${pausedAtStart.map(paused => `${paused.accountName}(${paused.label})`).join(', ')}`);
+        }
         const startBtn = document.getElementById('ma-start-publish-btn');
         const startBtnOriginalHtml = startBtn?.innerHTML || '';
         if (startBtn) {
@@ -3266,6 +3278,21 @@ async function initMultiAccountPublishModal() {
                     break;
                 }
                 const queueItem = queueSnapshot[i];
+                // [2026-10-09] A paused account is skipped before any content or image is paid for; main would refuse it anyway.
+                const pausedNow = await readAccountPause(window.api?.accountSafety, queueItem.accountId);
+                if (pausedNow) {
+                    queueItem.failureCode = pausedNow.code;
+                    queueItem.pipelineStatus = 'failed';
+                    totalFail++;
+                    addMALog(`⏭️ ${describeAccountStop(pausedNow.code, queueItem.accountName)}`, 'warning');
+                    addProgressItem(`⏭️ [${i + 1}/${totalItems}] ${queueItem.accountName}: ${pausedNow.label} — 건너뜁니다`, 'warning');
+                    if (stopsAllAccounts({ code: pausedNow.code })) {
+                        stopRequested = true;
+                        safetyStopped = true;
+                        break;
+                    }
+                    continue;
+                }
                 // [Phase 7.1-c] Per-item snapshot — settings changed mid-run
                 // apply from the NEXT account/post (design §2.2).
                 const itemPipelineCfg = resolvePipelineConfig('multi-account');
@@ -4117,7 +4144,7 @@ async function initMultiAccountPublishModal() {
                     }
                     else {
                         const failedResult = result.results?.find(item => !item.success) || result;
-                        throw Object.assign(new Error(failedResult.message || '발행 실패'), { code: failedResult.failureCode });
+                        throw Object.assign(new Error(failedResult.message || '발행 실패'), { code: failedResult.failureCode, refusedBeforeStart: failedResult.refusedBeforeStart === true });
                     }
                     if (stopRequested || window.stopFullAutoPublish) {
                         break;
@@ -4129,14 +4156,25 @@ async function initMultiAccountPublishModal() {
                     }
                     else {
                         const failure = classifyPublishFailure(error);
-                        if (['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'].includes(failure.code)) {
-                            stopRequested = true;
-                            safetyStopped = true;
+                        const stopCode = extractAccountStopCode({ code: failure.code });
+                        // Main refused the job before any browser opened: nothing reached Naver, so it is not an unknown outcome.
+                        const refusedBeforeStart = error.refusedBeforeStart === true;
+                        if (stopCode) {
                             queueItem.failureCode = failure.code;
-                            addMALog('⏹️ 계정 상태 확인이 필요하여 대기열을 중단했습니다. 계정 관리에서 확인 후 직접 재개해주세요.', 'warning');
+                            if (stopsAllAccounts({ code: failure.code })) {
+                                stopRequested = true;
+                                safetyStopped = true;
+                                addMALog('⏹️ 보호조치·본인확인이 감지되어 대기열 전체를 중단했습니다. 계정 관리에서 확인 후 직접 재개해주세요.', 'warning');
+                            }
+                            else {
+                                addMALog(`⏭️ ${describeAccountStop(stopCode, queueItem.accountName)} 이 계정은 건너뛰고 다음 계정을 이어서 발행합니다.`, 'warning');
+                            }
                         }
                         const stopped = stopRequested || window.stopFullAutoPublish;
-                        if (safetyStopped && failure.code !== 'PUBLISH_OUTCOME_UNKNOWN') {
+                        if (stopCode && failure.code !== 'PUBLISH_OUTCOME_UNKNOWN') {
+                            queueItem.pipelineStatus = 'failed';
+                        }
+                        else if (refusedBeforeStart) {
                             queueItem.pipelineStatus = 'failed';
                         }
                         else if (publishStarted) {

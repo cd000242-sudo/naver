@@ -371,6 +371,8 @@
                             <button type="button" id="main-add-account-btn"
                                 onclick="(function(btn){try{if(typeof window.closeStaleBackdrops==='function'){window.closeStaleBackdrops('btn-onclick');}btn.style.background='linear-gradient(135deg, #22c55e, #16a34a)';btn.textContent='✅ 클릭됨';setTimeout(function(){btn.style.background='linear-gradient(135deg, #8b5cf6, #7c3aed)';btn.textContent='➕ 계정 추가';},800);console.log('[AddAccount] 🔘 onclick v2.10.210');if(typeof window.openAddAccountModalDirect==='function'){window.openAddAccountModalDirect();}else{alert('계정 추가 함수 미로드 — v2.10.210 재설치 필요');}}catch(e){alert('❌ onclick 에러: '+e.message);}})(this);"
                                 style="padding: 0.6rem 1rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; white-space: nowrap; position: relative; z-index: 100;">➕ 계정 추가</button>
+                            <button type="button" id="main-manage-accounts-btn"
+                                style="padding: 0.6rem 1rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; white-space: nowrap; position: relative; z-index: 100;">⚙️ 계정 관리</button>
                         </div>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
@@ -437,6 +439,8 @@
                                 <button type="button" id="ma-add-account-inline"
                                     onclick="(function(btn){try{if(typeof window.closeStaleBackdrops==='function'){window.closeStaleBackdrops('btn-onclick');}btn.style.background='linear-gradient(135deg, #22c55e, #16a34a)';btn.textContent='✅ 클릭됨';setTimeout(function(){btn.style.background='linear-gradient(135deg, #8b5cf6, #7c3aed)';btn.textContent='➕ 계정 추가';},800);console.log('[AddAccount-Inline] 🔘 onclick v2.10.210');if(typeof window.openAddAccountModalDirect==='function'){window.openAddAccountModalDirect();}else{alert('계정 추가 함수 미로드 — v2.10.210 재설치 필요');}}catch(e){alert('❌ onclick 에러: '+e.message);}})(this);"
                                     style="padding: 0.4rem 0.75rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; white-space: nowrap; position: relative; z-index: 100;">➕ 계정 추가</button>
+                                <button type="button" id="ma-manage-accounts-inline"
+                                    style="padding: 0.4rem 0.75rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; white-space: nowrap; position: relative; z-index: 100;">⚙️ 계정 관리</button>
                             </div>
                         </div>
 

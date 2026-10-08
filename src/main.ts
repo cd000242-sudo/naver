@@ -1,4 +1,4 @@
-import { resolveExpectedBlogId } from './automation/expectedBlogIdentity.js';
+import { findAccountsNamingBlog, resolveExpectedBlog } from './automation/expectedBlogIdentity.js';
 import { app, BrowserWindow, dialog, ipcMain, nativeImage, NativeImage, shell, Notification, Tray, Menu } from 'electron';
 import './runtime/e2eUserDataBootstrap.js';
 // ✅ [v2.7.28] IPC 이중 등록 가드 — 다른 IPC 등록 이전에 반드시 첫 import
@@ -192,7 +192,7 @@ import {
   acquireScheduledPublishQuota,
   type ScheduledPublishQuotaLease,
 } from './scheduler/scheduledPublishQuota.js';
-import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
+import { classifyPublishFailure, describeAccountStop, extractAccountStopCode, stopsAllAccounts } from './automation/publishFailureClassifier.js';
 import { isConcreteNaverBlogPostUrl } from './automation/publishOutcomeResolver.js';
 import { KeywordAnalyzer, type KeywordCompetition, type BlueOceanKeyword } from './analytics/keywordAnalyzer.js';
 // ✅ [v2.10.36] BestProductCollector main.ts 미사용 — 다른 파일이 자체 인스턴스 생성
@@ -259,6 +259,7 @@ import {
   createPublishedScheduledPostState,
   createFailedScheduledPostState,
   createPublishingScheduledPostState,
+  createScheduledPublishError,
   resolveScheduledPostStateAfterError,
   type ScheduledPost,
 } from './scheduledPostsManager.js';
@@ -286,7 +287,7 @@ import { registerAllHandlers, registerAccountHandlers, registerAdminHandlers } f
 import { registerConfigHandlers } from './main/ipc/configHandlers.js';
 import { registerContentHandlers } from './main/ipc/contentHandlers.js';
 import { registerHeadingHandlers } from './main/ipc/headingHandlers.js';
-import { registerDiagnosticsHandlers, generateDiagnosticReport } from './main/ipc/diagnosticsHandlers.js';
+import { registerDiagnosticsHandlers } from './main/ipc/diagnosticsHandlers.js';
 import { registerDefamationHandlers } from './main/ipc/defamationHandlers.js';
 import { registerLicenseHandlers } from './main/ipc/authHandlers.js';
 import { registerQuotaHandlers } from './main/ipc/quotaHandlers.js';
@@ -2022,7 +2023,7 @@ smartScheduler.setPublishCallback(async (post) => {
     );
     
     if (!runResult.success) {
-      throw new Error('SCHEDULED_PUBLISH_FAILED: SmartScheduler publish did not succeed');
+      throw createScheduledPublishError(runResult);
     }
 
     const publishedUrl = requireConcreteNaverPostUrl(resolvePublishedUrl(
@@ -2431,7 +2432,8 @@ async function createWindow(): Promise<void> {
 
     // ✅ [2026-04-03] X 버튼 = 확인 다이얼로그 표시 (실수로 종료 방지)
     mainWindow.on('close', (event) => {
-      if (isE2ETestMode()) {
+      // E2E_QUIT_CONFIRM=1 lets an E2E drive the real confirmation dialog (e2e/quit-confirm-twice.spec.ts).
+      if (isE2ETestMode() && process.env.E2E_QUIT_CONFIRM !== '1') {
         (globalThis as any).isQuitting = true;
         return;
       }
@@ -3768,10 +3770,10 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
           } catch (e) { console.error('[Main] 쿼터 환불 오류:', e); }
         }
         const failureCode = (result as any).failureCode || classifyPublishFailure(result.message).code;
-        // [2026-06-23] 발행 실패 시 진단 리포트 자동 생성 — 추측 대신 데이터로 즉시 원인 파악.
-        const diag = await generateDiagnosticReport({ lastError: result.message, stage: 'result-failure' }).catch(() => null);
-        if (diag?.savedPath) {
-          (result as any).message = `${result.message}\n\n🔧 진단 리포트가 저장됐어요:\n${diag.savedPath}\n이 파일을 개발자에게 보내주시면 원인을 바로 찾을 수 있어요.`;
+        // [2026-10-09] No automatic report file: customers got one on the desktop for every failure (cancels and
+        // transient stops included) and kept deleting them. The manual button makes the same report on demand.
+        if (failureCode !== 'USER_CANCELLED') {
+          (result as any).message = `${result.message}\n\n문제가 계속되면 화면의 [🔧 오류 진단 저장] 버튼으로 진단 파일을 만들어 개발자에게 보내주세요.`;
         }
         sendStatus({ success: false, message: (result as any).message, failureCode });
       }
@@ -3788,11 +3790,10 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
       const baseMessage = (error as Error).message || '자동화 실행 중 오류가 발생했습니다.';
       console.error('[Main] automation:run 오류:', baseMessage);
       const failureCode = classifyPublishFailure(error).code;
-      // [2026-06-23] 예외 발생 시에도 진단 리포트 자동 생성.
-      const diag = await generateDiagnosticReport({ lastError: baseMessage, stage: 'automation:run/exception' }).catch(() => null);
-      const message = diag?.savedPath
-        ? `${baseMessage}\n\n🔧 진단 리포트가 저장됐어요:\n${diag.savedPath}\n이 파일을 개발자에게 보내주시면 원인을 바로 찾을 수 있어요.`
-        : baseMessage;
+      // [2026-10-09] Same as above: point to the manual report button instead of writing a file every time.
+      const message = failureCode === 'USER_CANCELLED'
+        ? baseMessage
+        : `${baseMessage}\n\n문제가 계속되면 화면의 [🔧 오류 진단 저장] 버튼으로 진단 파일을 만들어 개발자에게 보내주세요.`;
       sendStatus({ success: false, message, failureCode });
       AutomationService.stopRunning();
       return { success: false, message, failureCode };
@@ -5402,7 +5403,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
     sendLog(`🚀 다중계정 동시발행 시작: ${accountIds.length}개 계정`);
 
-    const results: Array<{ accountId: string; success: boolean; message?: string; url?: string; failureCode?: string }> = [];
+    const results: Array<{ accountId: string; success: boolean; message?: string; url?: string; failureCode?: string; refusedBeforeStart?: boolean }> = [];
 
     // ✅ [2026-01-20] 순차 예약 시간 계산을 위한 기준값
     let baseScheduleDate = options?.scheduleDate;
@@ -6128,6 +6129,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           message: result.message,
           url: result.url,
           failureCode,
+          // The guard refused the job before any browser opened: the caller must not read it as an unknown outcome.
+          ...((result as any).refusedBeforeStart === true ? { refusedBeforeStart: true } : {}),
         });
 
         if (result.success) {
@@ -6135,21 +6138,26 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           sendLog(`✅ [${account.name}] 발행 성공: ${result.url || '완료'}`);
         } else {
           sendLog(`❌ [${account.name}] 발행 실패: ${result.message}`);
-          if (['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'].includes(failureCode)) {
-            sendLog('⏹️ 계정 상태 확인이 필요하여 전체 대기열을 중단합니다. 다른 계정으로 이어서 발행하지 않습니다.');
+          const stopCode = extractAccountStopCode({ code: failureCode });
+          if (stopsAllAccounts({ code: failureCode })) {
+            sendLog('⏹️ 보호조치·본인확인이 감지되어 전체 대기열을 중단합니다. 다른 계정으로 이어서 발행하지 않습니다.');
             break; // finally still refunds the quota and releases the handoff owner.
           }
+          // One account is stopped (login, connection, wrong account, unknown outcome): only that account is skipped.
+          if (stopCode) sendLog(`⏭️ ${describeAccountStop(stopCode, account.name)} 이 계정만 건너뛰고 다음 계정을 이어서 발행합니다.`);
         }
 
       } catch (error) {
         const errorMsg = (error as Error).message;
         const failureCode = classifyPublishFailure(error).code;
-        results.push({ accountId, success: false, message: errorMsg, failureCode });
+        results.push({ accountId, success: false, message: errorMsg, failureCode, ...((error as any)?.refusedBeforeStart === true ? { refusedBeforeStart: true } : {}) });
         sendLog(`❌ [${account.name}] 발행 오류: ${errorMsg}`);
-        if (['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'].includes(failureCode)) {
-          sendLog('⏹️ 계정 상태 확인이 필요하여 전체 대기열을 중단합니다.');
+        const stopCode = extractAccountStopCode({ code: failureCode });
+        if (stopsAllAccounts({ code: failureCode })) {
+          sendLog('⏹️ 보호조치·본인확인이 감지되어 전체 대기열을 중단합니다.');
           break;
         }
+        if (stopCode) sendLog(`⏭️ ${describeAccountStop(stopCode, account.name)} 이 계정만 건너뛰고 다음 계정을 이어서 발행합니다.`);
       } finally {
         try {
           await accountQuotaLease?.rollback();
@@ -9554,6 +9562,9 @@ app.whenReady().then(async () => {
       setDailyLimit(appConfig.dailyPostLimit);
     }
 
+    // A blog address registered for another Naver ID is never learned for this one (positive evidence of another account).
+    browserSessionManager.setConfiguredBlogOwnerResolver(blogId => findAccountsNamingBlog(blogId, blogAccountManager.getAllAccounts()));
+
     // ✅ [리팩토링] BlogExecutor 의존성 주입 (핸들러 로직 이동 지원)
     (injectBlogExecutorDeps as (deps: any) => void)({
       loadConfig,
@@ -9561,7 +9572,7 @@ app.whenReady().then(async () => {
       createAutomation: (naverId: string, naverPassword: string, accountProxyUrl?: string) => {
         // ✅ [2026-03-02] sendLog 주입 → 브라우저 자동화 로그가 UI에 실시간 표시
         // ✅ [2026-03-23] accountProxyUrl → 계정별 프록시 우선, 미설정 시 글로벌 SmartProxy 폴백
-        return new NaverBlogAutomation({ naverId, naverPassword, accountProxyUrl, getExpectedBlogId: id => resolveExpectedBlogId(id, blogAccountManager.getAllAccounts()) }, (msg: string) => {
+        return new NaverBlogAutomation({ naverId, naverPassword, accountProxyUrl, getExpectedBlog: id => resolveExpectedBlog(id, blogAccountManager.getAllAccounts()) }, (msg: string) => {
           const safeMsg = redactKnownAccountId(msg, naverId);
           console.log(safeMsg);  // 터미널에도 출력
           sendLog(safeMsg);      // 렌더러 UI에도 전달
@@ -9886,7 +9897,7 @@ app.whenReady().then(async () => {
                 // ✅ [2026-03-02] sendLog 주입 → 예약발행 자동화 로그도 UI에 표시
                 schedulerAutomation = new NaverBlogAutomation({
                   naverId: accountNaverId,
-                  getExpectedBlogId: id => resolveExpectedBlogId(id, blogAccountManager.getAllAccounts()),
+                  getExpectedBlog: id => resolveExpectedBlog(id, blogAccountManager.getAllAccounts()),
                   naverPassword: accountNaverPassword,
                   headless: false,
                   slowMo: 50,
@@ -9969,7 +9980,7 @@ app.whenReady().then(async () => {
               );
 
               if (!automationResult.success) {
-                throw new Error('SCHEDULED_PUBLISH_FAILED: automation did not report success');
+                throw createScheduledPublishError(automationResult);
               }
 
               // ✅ 발행된 글 URL 가져오기 (실제 발행 URL 우선, 없을 때만 블로그 홈 fallback)

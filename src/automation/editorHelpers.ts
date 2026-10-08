@@ -22,10 +22,10 @@ import { pickBannerHook } from './bannerPhrasePool.js';
 import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
-import { buildMobileRichHtml, pasteRichHtmlAtCursor, buildTypingStyleResetHtml, pickRichArticleThemes, ensureTailTypingReady, focusLastEditableLine } from './richTextPaste.js';
+import { buildMobileRichHtml, pasteRichHtmlAtCursor, buildTypingStyleResetHtml, pickRichArticleThemes, ensureTailTypingReady, focusLastEditableLine, SMART_EDITOR_ROOT_SELECTORS } from './richTextPaste.js';
 import { planImageTextInterleave } from './imageTextInterleavePlan.js';
 import { stripBoundaryHeading, headingLineBoundary } from './structuredHeadingCleanup.js';
-import { planTypingFallback, splitFallbackParagraphs, sliceParagraphFromNormalizedOffset } from './typingFallbackPlan.js';
+import { planTypingFallback, splitFallbackParagraphs, sliceParagraphFromNormalizedOffset, readEditorBodyText } from './typingFallbackPlan.js';
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 import {
   stripBodyHashtagBlocks,
@@ -423,6 +423,11 @@ export async function typeBodyWithRetry(self: any,
       return combined.trim().length;
     }).catch(() => 0);
     const editorCharsBeforeBody = await readEditorTextLen();
+    // [2026-10-09] The fallback plan slices the editor text at an offset, so offset and text must come from the
+    // same reader on the real editor root. editorCharsBeforeBody above counts nested selectors (inflated) and
+    // only serves the growth checks.
+    const editorBodyRoots = [...SMART_EDITOR_ROOT_SELECTORS];
+    const editorBodyLenBeforeBody = (await frame.evaluate(readEditorBodyText, editorBodyRoots).catch(() => '')).length;
     // A full insertion grows the editor by at least ~40% of the section length
     // (innerText ≈ source; nested selectors inflate the count further, so this floor
     // is conservative). Heading-only state grows ~0 → fails → outer retry re-types.
@@ -443,7 +448,7 @@ export async function typeBodyWithRetry(self: any,
 
     if (rich.html) {
       self.log(`   ✨ [리치입력] 모바일 단락 ${rich.paragraphCount}개, 하이라이트 ${rich.highlightCount}개, 표 ${rich.tableCount}개`);
-      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText, rich.tableCount);
+      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText, rich.tableCount, (message: string) => self.log(message));
       if (pasteResult.ok) {
         self.log(`   ✅ [리치입력] HTML 붙여넣기 완료 (표 ${pasteResult.beforeTables}→${pasteResult.afterTables})`);
 
@@ -482,11 +487,9 @@ export async function typeBodyWithRetry(self: any,
     const expectedFallbackSource = rich.plainText && rich.plainText.trim().length > 0
       ? rich.plainText
       : materializeEditorBodyFallbackText(normalizedText);
-    const editorTailForPlan: string = await frame.evaluate((beforeLen: number) => {
-      const root = document.querySelector('.se-main-container') || document.body;
-      const full = ((root as HTMLElement).innerText || root.textContent || '').replace(/​/g, '');
-      return full.slice(Math.max(0, beforeLen - 80));
-    }, editorCharsBeforeBody).catch(() => '');
+    const editorTailForPlan: string = await frame.evaluate(readEditorBodyText, editorBodyRoots)
+      .then((full: string) => full.slice(Math.max(0, editorBodyLenBeforeBody - 80)))
+      .catch(() => '');
     const fallbackPlan = planTypingFallback(expectedFallbackSource, editorTailForPlan);
 
     if (fallbackPlan.mode === 'skip') {

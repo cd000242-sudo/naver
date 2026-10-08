@@ -11,6 +11,7 @@ export const SECRET_CONFIG_FIELDS = [
   'pixabayApiKey',
   'naverClientSecret',
   'naverDatalabClientSecret',
+  'naverHubClientSecret',
   'naverAdApiKey',
   'naverAdSecretKey',
   'naverAdCustomerId',

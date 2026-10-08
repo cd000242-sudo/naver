@@ -45,7 +45,7 @@ describe('a user-pressed re-check knows the blog id before verifying', () => {
     const start = engine.indexOf('  private userRunResumeDeps(): UserRunResumeDeps {');
     const body = engine.slice(start, engine.indexOf('\n  }\n', start));
     const open = body.indexOf('openSession: async () => {');
-    const setId = body.indexOf('browserSessionManager.setExpectedBlogId(id, this.options.getExpectedBlogId(id))');
+    const setId = body.indexOf('this.registerExpectedBlog(id)');
     expect(open).toBeGreaterThan(-1);
     expect(setId).toBeGreaterThan(open);
     expect(setId).toBeLessThan(body.indexOf('resume: (verify)'));

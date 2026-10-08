@@ -1,7 +1,8 @@
 import { createHash, randomBytes } from 'node:crypto';
-import { mkdirSync, readFileSync, openSync, writeFileSync, fsyncSync, closeSync, renameSync, unlinkSync } from 'node:fs';
+import { mkdirSync, readFileSync, openSync, writeFileSync, fsyncSync, closeSync, unlinkSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
+import { renameWithRetry } from './safeStateRename.js';
 
 export const ACCOUNT_PAUSE_CODES = ['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'] as const;
 export type AccountPauseCode = typeof ACCOUNT_PAUSE_CODES[number];
@@ -10,10 +11,16 @@ type StoredState = Omit<AccountExecutionStatus, 'busy' | 'storageError'> & { sch
 export class AccountExecutionGuardError extends Error {
   readonly retryable = false;
   readonly userActionRequired: boolean;
-  constructor(readonly code: AccountPauseCode | 'ACCOUNT_BUSY', message?: string) {
-    super(`[${code}] ${message || (code === 'ACCOUNT_BUSY' ? '이 계정의 작업이 이미 실행 중입니다.' : '계정 작업이 중단되었습니다. 계정 관리에서 상태 확인 후 직접 재개해 주세요.')}`);
+  /**
+   * True when the guard refused the job at admission (account paused or busy): no browser was opened and nothing
+   * reached Naver, so the caller may treat the post as not started instead of as an unknown outcome.
+   */
+  readonly refusedBeforeStart: boolean;
+  constructor(readonly code: AccountPauseCode | 'ACCOUNT_BUSY', message?: string, refusedBeforeStart = code === 'ACCOUNT_BUSY') {
+    super(`[${code}] ${message || (code === 'ACCOUNT_BUSY' ? '이 계정의 작업이 이미 실행 중입니다.' : '계정 작업이 중단되었습니다. 화면의 안내 창(또는 계정 관리)에서 상태 확인 후 직접 재개해 주세요.')}`);
     this.name = 'AccountExecutionGuardError';
     this.userActionRequired = code !== 'ACCOUNT_BUSY';
+    this.refusedBeforeStart = refusedBeforeStart;
   }
 }
 
@@ -56,7 +63,7 @@ export class AccountExecutionGuard {
       mkdirSync(this.storageDir, { recursive: true, mode: 0o700 });
       descriptor = openSync(temporary, 'wx', 0o600);
       writeFileSync(descriptor, JSON.stringify(state), 'utf8'); fsyncSync(descriptor); closeSync(descriptor); descriptor = undefined;
-      renameSync(temporary, join(this.storageDir, key + '.json'));
+      renameWithRetry(temporary, join(this.storageDir, key + '.json'));
       this.failed.delete(key);
     } catch {
       this.failed.set(key, { paused: true, code: state.code || 'NETWORK_WAIT', version: state.version, storageError: true, busy: this.busy.has(key) });
@@ -103,7 +110,8 @@ export class AccountExecutionGuard {
   }
   async runExclusive<T>(accountId: string, operation: () => Promise<T>): Promise<T> {
     const key = this.key(accountId);
-    this.assertAllowed(accountId);
+    const admission = this.getStatus(accountId);
+    if (admission.paused) throw new AccountExecutionGuardError(admission.code!, undefined, true);
     if (this.busy.has(key)) throw new AccountExecutionGuardError('ACCOUNT_BUSY');
     this.busy.add(key);
     try { return await operation(); } finally { this.busy.delete(key); }
