@@ -111,6 +111,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/publishedPostPageConfirmation.ts',
   'src/automation/richTextPaste.ts',
   'src/automation/runOptionsPolicy.ts',
+  'src/automation/safeStateRename.ts',
   'src/automation/scheduleConfirmation.ts',
   'src/automation/scheduleDatePolicy.ts',
   'src/automation/schedulePublishCommitPolicy.ts',

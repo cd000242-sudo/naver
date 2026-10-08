@@ -36,8 +36,9 @@ it('renderer blocks serialized account stops before any browser recovery or netw
 
 it('rechecks the selected session before recording any irreversible commit', () => {
   const commit = source.slice(source.indexOf('const beforeIrreversibleCommit = async'), source.indexOf('// ✅ [2026-02-07 FIX]'));
-  expect(commit.includes('await browserSessionManager.ensureServerSession(this.options.naverId)')).toBe(true);
-  expect(commit.indexOf('ensureServerSession')).toBeLessThan(commit.indexOf('markSubmitting'));
+  // 2026-10-09: the pre-click recheck stops only on positive evidence (see commitTimeSessionGate.test.ts).
+  expect(commit.includes('await browserSessionManager.ensureServerSessionForCommit(this.options.naverId)')).toBe(true);
+  expect(commit.indexOf('ensureServerSessionForCommit')).toBeLessThan(commit.indexOf('markSubmitting'));
 });
 
 it('leaves passkeys, second-factor trust and device enrollment to the user', () => {

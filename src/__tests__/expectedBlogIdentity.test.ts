@@ -6,7 +6,8 @@ it('uses saved blog identity without requiring an account-management UI visit', 
 });
 it('rejects conflicting or invalid saved destinations', () => {
  expect(()=>resolveExpectedBlogId('one',[{naverId:'one',blogId:'a'},{naverId:'ONE',blogId:'b'}])).toThrow();
- expect(()=>resolveExpectedBlogId('one',[{naverId:'one',blogId:'https://blog.naver.com/wrong'}])).toThrow();
+ // 2026-10-09: a pasted Naver blog URL is now reduced to its bare id (blogIdNormalization.test.ts); a foreign URL still fails.
+ expect(()=>resolveExpectedBlogId('one',[{naverId:'one',blogId:'https://example.com/wrong'}])).toThrow();
  expect(()=>resolveExpectedBlogId('',[])).toThrow();
 });
 it('normalizes duplicates without silently choosing a different blog', () => {
