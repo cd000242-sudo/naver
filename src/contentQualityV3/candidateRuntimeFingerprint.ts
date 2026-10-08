@@ -733,6 +733,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/imageNarrativeQuickMode.ts',
   'src/renderer/modules/imageNarrativeReview.ts',
   'src/renderer/modules/imageNarrativeUpload.ts',
+  'src/renderer/modules/imagePickerPreview.ts',
   'src/renderer/modules/imagePreviewBatch.ts',
   'src/renderer/modules/imageSyncService.ts',
   'src/renderer/modules/intervalJitter.ts',

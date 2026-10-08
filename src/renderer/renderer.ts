@@ -35,6 +35,7 @@ import { initPriceInfoModal } from './modules/priceInfoModal.js';
 import { initAgentQuotaBadge, refreshAgentQuotaBadge } from './modules/agentQuotaBadge.js';
 import { initNoticeAdmin } from './modules/noticeAdmin.js';
 import { initImageManagementTab } from './modules/imageManagementTab.js';
+import { attachImagePickerPreview } from './modules/imagePickerPreview.js';
 import { testLicenseCode, initLicenseBadge, initCustomerServiceButton, initGlobalRefreshButton, performGlobalRefresh, initLicenseModal, showErrorAlertModal } from './modules/licenseUI.js';
 import { showRescheduleModal, initScheduleManagement, showSchedulePreviewModal, connectToAdminPanel, syncAdminSettings, sendAdminReport, checkAdminPermissions } from './modules/scheduleManager.js';
 import { loadImagesFromFolder, getAllGeneratedImagesFromFolders, showLocalImageManagementModal, openGeneratedImagesFolder, openExistingImageFolder, showFolderSelectionModal, showLocalImageSelectionModal, showLoadImagesFromFoldersModal, showImagePlacementModal } from './modules/localImageModals.js';
@@ -10260,12 +10261,14 @@ async function showLocalImagePickerForReplace(folderName: string, slot: ImageSlo
         const filePath = `${folderPath}/${file}`.replace(/\\/g, '/');
         const fileUrl = toFileUrlMaybe(filePath);
         return `
-          <button type="button" class="replace-image-pick" data-file-path="${escapeHtml(filePath)}" data-file-url="${escapeHtml(fileUrl)}" data-file-name="${escapeHtml(file)}" style="border: 2px solid var(--border-light); border-radius: 12px; overflow: hidden; padding: 0; cursor: pointer; background: var(--bg-secondary); text-align: left;">
+          <div class="image-picker-tile" style="min-width:0;">
+          <button type="button" class="replace-image-pick" aria-label="${escapeHtml(file)} 이미지로 변경" data-file-path="${escapeHtml(filePath)}" data-file-url="${escapeHtml(fileUrl)}" data-file-name="${escapeHtml(file)}" style="width:100%; border: 2px solid var(--border-light); border-radius: 12px; overflow: hidden; padding: 0; cursor: pointer; background: var(--bg-secondary); text-align: left;">
             <div style="aspect-ratio: 1/1; background: var(--bg-tertiary); overflow: hidden;">
-              <img src="${fileUrl}" alt="${escapeHtml(file)}" style="width: 100%; height: 100%; object-fit: cover; display:block;" onerror="this.style.display='none';">
+              <img src="${escapeHtml(fileUrl)}" alt="${escapeHtml(file)}" style="width: 100%; height: 100%; object-fit: cover; display:block;" onerror="this.style.display='none';">
             </div>
-            <div style="padding: 0.5rem; font-size: 0.75rem; color: var(--text-muted); word-break: break-all;">${escapeHtml(file)}</div>
+            <div style="padding: 0.5rem; font-size: 1rem; color: var(--text-muted); word-break: break-all;">${escapeHtml(file)}</div>
           </button>
+          </div>
         `;
       })
       .join('');
@@ -10275,7 +10278,7 @@ async function showLocalImagePickerForReplace(folderName: string, slot: ImageSlo
         <div style="display:flex; align-items:center; justify-content: space-between; gap: 0.75rem; margin-bottom: 1rem;">
           <div style="min-width:0;">
             <div style="font-weight: 900; color: var(--text-strong);">📁 ${escapeHtml(folderName)} 이미지 선택</div>
-            <div style="font-size: 0.8rem; color: var(--text-muted);">이미지를 클릭하면 해당 소제목 이미지가 즉시 교체됩니다.</div>
+            <div style="font-size: 1rem; color: var(--text-muted);">이미지를 누르면 변경됩니다. 크게 보기는 이미지를 바꾸지 않고 확인만 합니다.</div>
           </div>
           <div style="display:flex; gap: 0.5rem; align-items:center;">
             <button type="button" class="back-to-folder-select" style="padding: 0.6rem 0.9rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 10px; cursor: pointer; font-weight: 800;">← 폴더</button>
@@ -10283,7 +10286,7 @@ async function showLocalImagePickerForReplace(folderName: string, slot: ImageSlo
           </div>
         </div>
         <div style="flex: 1; overflow-y: auto; padding: 0.25rem;">
-          <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.75rem;">
+          <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 0.75rem;">
             ${gridHtml}
           </div>
         </div>
@@ -10302,6 +10305,11 @@ async function showLocalImagePickerForReplace(folderName: string, slot: ImageSlo
     });
 
     modal.querySelectorAll('.replace-image-pick').forEach((btn) => {
+      attachImagePickerPreview(btn.parentElement!, {
+        src: btn.getAttribute('data-file-url') || '',
+        title: btn.getAttribute('data-file-name') || '이미지',
+        onSelect: () => (btn as HTMLButtonElement).click(),
+      });
       btn.addEventListener('click', () => {
         const filePath = String((btn as HTMLElement).getAttribute('data-file-path') || '').trim();
         const fileUrl = String((btn as HTMLElement).getAttribute('data-file-url') || '').trim();

@@ -509,6 +509,7 @@ try {
     'headingControlPanel.js',
     'photoModeReset.js',
     'imagePreviewBatch.js',
+    'imagePickerPreview.js', // Shared large preview for image replacement/addition grids.
     // ✅ [Phase 5B] renderer.ts에서 추출된 모듈 (의존성 순서: 유틸→DOM캐시→이미지→포스트→기능)
     'rendererUtils.js',            // 5B-1: 이벤트리스너, DOM캐시, 디바운스, 버튼, 로깅
     'unifiedDOMCache.js',          // 5B-2: UnifiedDOMCache 객체
