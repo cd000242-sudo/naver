@@ -26,7 +26,7 @@ import { initApiGuideModal } from './modules/apiGuideModals.js';
 import { initAllApiKeysModal } from './modules/apiGuideModals.js';
 import { initUserGuideModal } from './modules/guideModals.js';
 // ✅ [2026-02-26 모듈화] 도구 모음/Gemini 선택/콘텐츠 모드/이미지 화질/예약 도움말
-import { initToolsHubModal, initGeminiSelectionUI, initContentModeHelpAndSmartPublish } from './modules/tailUIUtils.js';
+import { initToolsHubModal, initGeminiSelectionUI, initContentModeHelpAndSmartPublish, resolvePublishAutomationMode } from './modules/tailUIUtils.js';
 import { initBestProductModal } from './modules/bestProductModal.js';
 import './modules/tailUIUtils.js';
 // ✅ [2026-02-26 모듈화] AI 어시스턴트 + 가격 정보 + 이미지 관리
@@ -7167,7 +7167,7 @@ function hideStopButton(): void {
 
   // 버튼 스타일 리셋 — syncPublishMode로 위임
   const publishModeTopSelect = document.getElementById('publish-mode-top-select') as HTMLSelectElement;
-  const currentMode = publishModeTopSelect?.value || (document.getElementById('publish-mode-select') as HTMLSelectElement)?.value || 'full-auto';
+  const currentMode = resolvePublishAutomationMode(publishModeTopSelect?.value || (document.getElementById('publish-mode-select') as HTMLSelectElement)?.value);
   if (typeof (window as any).syncPublishMode === 'function') {
     (window as any).syncPublishMode(currentMode);
   }

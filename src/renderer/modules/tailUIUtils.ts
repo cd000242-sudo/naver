@@ -8,6 +8,12 @@ import { loadTutorialVideos } from './tutorialsTab.js';
 import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
 import { FULL_AUTO_CONTENT_MODE_LABELS } from '../../image/fullAuto/fullAutoQueueStatus.js';
 
+// Automation mode is separate from immediate/draft/scheduled publication.
+// Only an explicit full-auto selection may enable the full automation route.
+export function resolvePublishAutomationMode(value: unknown): 'full-auto' | 'semi-auto' {
+  return value === 'full-auto' ? 'full-auto' : 'semi-auto';
+}
+
 // [NAVER FULL AUTO] Same inline bundle scope (pipelineConfig).
 declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): any;
 declare function resolveFullAutoImagePolicyFromPipeline(config: any, overrides?: any): any;
@@ -394,10 +400,12 @@ export function initContentModeHelpAndSmartPublish() {
   let hasGeneratedContent = false;
 
   // ✅ 핵심 함수: 발행 모드에 따라 글 생성/발행 버튼 상태 일괄 제어
-  function syncPublishMode(mode: 'full-auto' | 'semi-auto'): void {
+  function syncPublishMode(requestedMode: 'full-auto' | 'semi-auto'): void {
+    const mode = resolvePublishAutomationMode(requestedMode);
     const topSelect = document.getElementById('publish-mode-top-select') as HTMLSelectElement;
     const bottomSelect = document.getElementById('publish-mode-select') as HTMLSelectElement;
     const topDesc = document.getElementById('publish-mode-top-desc');
+    const bottomDesc = document.getElementById('publish-mode-desc');
     const topSection = document.getElementById('publish-mode-top-section');
     const genTabs = document.getElementById('content-generation-tabs');
     const urlBtn = document.getElementById('generate-from-url-btn') as HTMLButtonElement;
@@ -484,7 +492,7 @@ export function initContentModeHelpAndSmartPublish() {
           publishBtn.style.cursor = 'not-allowed';
           publishBtn.style.background = 'linear-gradient(135deg, #6b7280, #4b5563)';
           publishBtn.style.boxShadow = 'none';
-          if (publishBtnText) publishBtnText.textContent = '⏳ 먼저 글을 생성하세요';
+          if (publishBtnText) publishBtnText.textContent = '⏳ 먼저 글을 생성하거나 가져오세요';
         }
       }
       if (publishBtnIcon) publishBtnIcon.textContent = hasGeneratedContent ? '📤' : '⏳';
@@ -492,20 +500,23 @@ export function initContentModeHelpAndSmartPublish() {
       // 설명 텍스트
       if (topDesc) topDesc.textContent = hasGeneratedContent
         ? '✅ 글이 생성되었습니다! 미리보기 확인 후 발행하세요.'
-        : '💡 먼저 URL 또는 키워드로 글을 생성한 후, 확인하고 발행합니다.';
+        : '💡 글을 생성하거나 가져온 후, 확인하고 발행합니다.';
       // 상단 섹션 색상
       if (topSection) topSection.style.borderColor = hasGeneratedContent
         ? 'rgba(245, 158, 11, 0.4)'
         : 'rgba(139, 92, 246, 0.3)';
     }
 
+    if (bottomDesc) bottomDesc.textContent = mode === 'full-auto'
+      ? '💡 URL/키워드 입력 → 글 작성 → 발행 자동!'
+      : '💡 글과 이미지를 확인한 후 반자동으로 발행합니다.';
     console.log(`[SyncPublishMode] 모드 변경: ${mode}, 글 생성됨: ${hasGeneratedContent}`);
   }
 
   // 기존 호환성을 위한 updatePublishButtonVisibility (syncPublishMode 위임)
   function updatePublishButtonVisibility(): void {
     const topSelect = document.getElementById('publish-mode-top-select') as HTMLSelectElement;
-    const mode = (topSelect?.value || 'full-auto') as 'full-auto' | 'semi-auto';
+    const mode = resolvePublishAutomationMode(topSelect?.value);
     syncPublishMode(mode);
 
     // 미리보기/반자동 섹션/글 목록 상태 관리 (모드 무관)
@@ -530,7 +541,7 @@ export function initContentModeHelpAndSmartPublish() {
   // 발행 모드 드롭다운 변경 시 버튼 스타일 업데이트 (기존 호환)
   function updatePublishButtonStyle(): void {
     const topSelect = document.getElementById('publish-mode-top-select') as HTMLSelectElement;
-    const mode = (topSelect?.value || 'full-auto') as 'full-auto' | 'semi-auto';
+    const mode = resolvePublishAutomationMode(topSelect?.value);
     syncPublishMode(mode);
   }
 
@@ -549,7 +560,7 @@ export function initContentModeHelpAndSmartPublish() {
   // 통합 발행 버튼 클릭 핸들러
   document.getElementById('unified-publish-btn')?.addEventListener('click', () => {
     const topSelect = document.getElementById('publish-mode-top-select') as HTMLSelectElement;
-    const mode = topSelect?.value || 'full-auto';
+    const mode = resolvePublishAutomationMode(topSelect?.value);
 
     if (mode === 'full-auto') {
       // 풀오토 발행 실행
@@ -619,9 +630,9 @@ export function initContentModeHelpAndSmartPublish() {
   setTimeout(() => {
     const pendingMode = (window as any).__pendingPublishMode;
     const selectedMode = (document.getElementById('publish-mode-top-select') as HTMLSelectElement | null)?.value;
-    const initialMode = pendingMode === 'semi-auto' || selectedMode === 'semi-auto'
+    const initialMode = pendingMode === 'semi-auto'
       ? 'semi-auto'
-      : 'full-auto';
+      : resolvePublishAutomationMode(selectedMode);
     syncPublishMode(initialMode);
     delete (window as any).__pendingPublishMode;
   }, 1000);

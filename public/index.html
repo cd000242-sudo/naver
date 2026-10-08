@@ -1138,11 +1138,11 @@
                         <select id="publish-mode-top-select"
                             style="flex: 1; max-width: 220px; padding: 0.7rem 1rem; background: var(--bg-primary); border: 2px solid rgba(139, 92, 246, 0.4); border-radius: 10px; color: var(--text-strong); font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.2s;">
                             <option value="full-auto">⚡ 풀오토 (원클릭 발행)</option>
-                            <option value="semi-auto">🔧 반자동 (글 확인 후 발행)</option>
+                            <option value="semi-auto" selected>🔧 반자동 (글 확인 후 발행)</option>
                         </select>
                         <p id="publish-mode-top-desc"
                             style="margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; flex: 1;">
-                            💡 URL/키워드 → AI 글생성 → 이미지 → 발행까지 한 번에!
+                            💡 글을 생성하거나 가져온 후, 확인하고 발행합니다.
                         </p>
                     </div>
                     <!-- ✅ [v2.11.143] 팩트체크 엔진 — 발행 화면 노출 (환경설정과 자동 동기화) -->
@@ -1601,7 +1601,7 @@
                             <select id="publish-mode-select"
                                 style="width: 100%; padding: 0.65rem 0.75rem; background: var(--bg-primary); border: 2px solid var(--border-medium); border-radius: var(--radius-sm); color: var(--text-strong); font-size: 0.85rem; font-weight: 600; cursor: pointer;">
                                 <option value="full-auto">⚡ 풀오토</option>
-                                <option value="semi-auto">🔧 반자동</option>
+                                <option value="semi-auto" selected>🔧 반자동</option>
                             </select>
                         </div>
 
@@ -1663,10 +1663,10 @@
                     <!-- 발행 버튼 영역 -->
                     <div id="publish-btn-container">
                         <!-- 통합 발행 버튼 (기본 표시) -->
-                        <button type="button" id="unified-publish-btn" class="unified-start-btn"
-                            style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: var(--radius-lg); font-weight: 700; font-size: 1rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4); display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
-                            <span id="publish-btn-icon">🚀</span>
-                            <span id="publish-btn-text">발행 시작하기</span>
+                        <button type="button" id="unified-publish-btn" class="unified-start-btn" disabled
+                            style="width: 100%; padding: 1rem; background: linear-gradient(135deg, #6b7280, #4b5563); color: white; border: none; border-radius: var(--radius-lg); font-weight: 700; font-size: 1rem; cursor: not-allowed; opacity: 0.4; transition: transform 0.2s, box-shadow 0.2s; box-shadow: none; display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+                            <span id="publish-btn-icon">⏳</span>
+                            <span id="publish-btn-text">⏳ 먼저 글을 생성하거나 가져오세요</span>
                         </button>
 
                         <!-- 중지 버튼 (발행 중일 때만 표시) -->
@@ -1679,7 +1679,7 @@
 
                     <p id="publish-mode-desc"
                         style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin: 0.5rem 0 0 0;">
-                        💡 URL/키워드 입력 → 글 작성 → 발행 자동!
+                        💡 글과 이미지를 확인한 후 반자동으로 발행합니다.
                     </p>
                     <!-- [NAVER FULL AUTO] 글쓰기 모드와 이미지 전략을 따로 보여 준다 (tailUIUtils.refreshFullAutoImageSummary) -->
                     <p id="unified-fullauto-image-summary"
