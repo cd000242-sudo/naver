@@ -2705,7 +2705,7 @@ export class NaverBlogAutomation {
 
     if (rich.html) {
       this.log(`✨ 리치 본문 붙여넣기 시도: ${rich.paragraphCount}개 모바일 단락, ${rich.highlightCount}개 하이라이트, ${rich.tableCount}개 표`);
-      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText, rich.tableCount);
+      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText, rich.tableCount, (message: string) => this.log(message));
       if (pasteResult.ok) {
         this.log(`✅ 리치 본문 입력 완료 (${pasteResult.afterChars - pasteResult.beforeChars}자 증가, 표 ${pasteResult.beforeTables}→${pasteResult.afterTables})`);
         return rich.plainText;
