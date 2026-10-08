@@ -1,19 +1,18 @@
 {
-  "publishedAt": "2026-10-08T03:22:42.446Z",
+  "publishedAt": "2026-10-08T09:25:21.205Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 118,
+    "candidates": 156,
     "niche": 0,
-    "preemption": 5,
+    "preemption": 13,
     "pending": 0
   },
   "freeSample": {
     "day": "2026-10-08",
     "keywords": [
-      "주진우 부인",
-      "이유진 국어 카페"
+      "주진우 부인"
     ]
   },
   "rows": [
@@ -188,7 +187,6 @@
           0,
           0,
           0,
-          0,
           27,
           19,
           35,
@@ -213,9 +211,10 @@
           31,
           35,
           23,
-          35
+          35,
+          0
         ],
-        "measuredAt": "2026-10-07T21:26:03.194Z"
+        "measuredAt": "2026-10-08T09:25:21.666Z"
       },
       "kinCount": 86,
       "kinTop": null,
@@ -224,72 +223,156 @@
       "recommendationStatus": "recommend",
       "exclusionReason": null,
       "carried": true
-    },
+    }
+  ],
+  "observations": [
     {
-      "keyword": "이유진 국어 카페",
-      "issue": "이유진",
-      "topic": "이유진",
-      "lane": "realtime",
+      "keyword": "리퀴드 ai d1-3b",
+      "issue": "리퀴드 AI",
+      "topic": "리퀴드 AI",
+      "lane": "tech",
       "issueType": "fresh",
       "isDerived": true,
-      "origin": "autocomplete",
+      "origin": "derived",
       "originReason": null,
-      "verdict": "niche",
-      "preemptionKind": null,
-      "serp": {
-        "verdict": "WINNABLE",
-        "reason": "상위 10개 중 제목 정면 대응 0건(부분 0건) — 정면으로 답한 글 없음",
-        "exactTitleHits": 0,
-        "partialTitleHits": 0,
-        "sampledTitles": 10,
-        "topTitles": [
-          "2026.지방직 공부 후기(일행/30대 중반/재시생)",
-          "2026 보건직 공무원 필기합격수기 (최종합격)",
-          "2026.09.28-10.04 공시생 기록 / 교육학 기본서 완강 / 카공 실패 / 국어 문풀 시작",
-          "2026 8급 간호직 공무원 합격 수기",
-          "26년 간호직공무원 합격 후기/3개월 단기합격후기/공부법/지방직공무원/필기합격후기/ 공무원 면접후기",
-          "워킹맘 공시생 공부일기 #30 | 아니 이게 무슨 일이야? 평일 오전 10시 도서관 만차",
-          "2026 맘시생 교행 공부 비용",
-          "간호직 공무원 합격수기 1: 국어 공부법 (이선재 선생님)",
-          "[지방직 공무원 필기 합격]",
-          "[합격수기] 2026 국가직 일반행정 단기합격(9개월)"
-        ],
-        "measuredAt": "2026-10-06T03:32:42.125Z"
-      },
-      "documentCount": 837,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 2,
       "documentCountMeasured": true,
-      "searchVolume": 360,
+      "searchVolume": null,
       "searchVolumeLt10": false,
-      "hasLiveDemand": true,
-      "demandStatus": "stable",
-      "demandRatio": 0.8504088240999004,
-      "issueStatus": "stable",
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 2",
+        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 모델 d1-3B를 출시해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "리퀴드 AI d1-3b가 10배 큰 모델 제쳤다는데 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3b 매개변수",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 29,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 29",
+        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 모델을 제친 멀티모달 의사결정 모델 d1-3B를 출시해서",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "d1-3b 매개변수 규모와 10배 큰 모델 이긴 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3b 매개변수 생각보다 작은데 10배 큰 모델을 이겼다더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "알레스 페레이라",
+      "issue": "알레스 페레이라",
+      "topic": "알레스 페레이라",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 59,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
       "isHot": true,
       "frontalDocCount": 0,
       "freshFrontalCount": 0,
       "reasons": [
-        "검색량 360",
-        "문서수 837",
-        "데이터랩 실측 수요",
-        "블로그탭 상위 10 정면글 0건 — 자리 있음"
+        "문서수 59",
+        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
       ],
       "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 360 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "demand",
-          "text": "데이터랩 최근 7일 수요 실측 — 7일/30일 0.9배"
-        },
-        {
-          "code": "slot",
-          "text": "블로그탭 상위 10 제목 중 정면 대응 0건 — 자리 있음 (실측)"
-        },
         {
           "code": "empty-field",
           "text": "정면으로 다룬 글 0건 (최근 0건)"
@@ -300,7 +383,144 @@
         }
       ],
       "whySearch": {
-        "text": "이효정 아들 이유진이 배우 차경은과 11월14일 결혼한다.",
+        "text": "UFC 챔피언 알렉스 페레이라가 한국을 찾아 팬미팅·세미나를 열어서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "알레스 페레이라가 존 존스전 먼저 꺼낸 이유 들어보니 좀 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 37,
+      "kinTop": [
+        {
+          "title": "알렉스 페레이라",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=100405&docId=470755165&answerNo=0",
+          "views": 18,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3b 다운로드",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "접근 경로 주목",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 66,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 66",
+        "선점 후보 — 경쟁 문서 66건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 접근 경로 주목"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 모델을 제친 멀티모달 의사결정 모델 d1-3B를 출시해서",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "d1-3b 다운로드 10배 큰 모델 제친 멀티모달 받기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3b 다운로드 전에 10배 큰 모델을 어떻게 제쳤는지 궁금하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 78,
+      "kinTop": [
+        {
+          "title": "슈스케2차지원서다운로드",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010201&docId=169612263&answerNo=3",
+          "views": 57689,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "MAI-코드-1.1",
+      "issue": "MAI-코드-1.1",
+      "topic": "MAI-코드-1.1",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 93,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 93",
+        "선점 후보 — 경쟁 문서 93건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS가 서피스 랩톱 울트라 출시와 함께 온디바이스 최적화 MAI-코드-1.1을 공개해서",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -308,113 +528,611 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "이유진 국어 카페 커리큘럼 원인과 해결법",
-          "frame": "mistake",
-          "basis": "검색 질문 '이유진 국어 커리큘럼' 기반 초안 · 경쟁 제목 10개 중 동일 유형 1개 · 본문 사실 확인 필요"
+          "text": "MAI-코드-1.1 플래시 가격 4분의 1로 낮췄다",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "이유진 국어 카페 처음 들어가보니 교재 고를 때 많이들 놓치더라고요",
+          "text": "MAI-코드-1.1 플래시 가격이 4분의 1이라길래 뭐가 빠진 건지 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "저커버그 부부의 바이오허브",
+      "issue": "저커버그 부부의 바이오허브",
+      "topic": "저커버그 부부의 바이오허브",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 106,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 106",
+        "선점 후보 — 경쟁 문서 106건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "미 정부·구글이 저커버그 부부의 바이오허브에 2.4조 AI 생물학 프로젝트로 합류해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "저커버그 부부의 바이오허브, 구글·미 정부 2.4조 AI 생물학 데이터",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "저커버그 부부의 바이오허브가 왜 질병을 미리 잡겠다는 건지 찾아봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "mai 코드 1.1",
+      "issue": "MAI-코드-1.1",
+      "topic": "MAI-코드-1.1",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 93,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 93",
+        "선점 후보 — 경쟁 문서 93건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS가 서피스 랩톱 울트라 출시와 함께 온디바이스 최적화 MAI-코드-1.1을 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "mai 코드 1.1 플래시 가격 4분의 1로 낮춘 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "mai 코드 1.1 플래시 가격이 4분의 1로 내려간 이유가 의외네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": [
+        {
+          "title": "rl크래프트 종료코드1",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20411&docId=458352857&answerNo=1",
+          "views": 293,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3b 성능",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 117,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 117",
+        "선점 후보 — 경쟁 문서 117건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 모델을 제친 멀티모달 의사결정 모델 d1-3B를 출시해서",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "d1-3b 성능 10배 큰 체급 제친 멀티모달 모델",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3b 성능이 10배 체급 모델을 제쳤다는 게 의외로 이유가 있네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 37,
+      "kinTop": [
+        {
+          "title": "컴퓨터 성능대비 효율문제.. 부탁드립니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10103&docId=219249544&answerNo=0",
+          "views": 7,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이재명 이집트 CEPA",
+      "issue": "이재명 이집트 CEPA",
+      "topic": "이재명 이집트 CEPA",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 188,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 188",
+        "선점 후보 — 경쟁 문서 188건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이재명 대통령이 한·이집트 전략적 동반자 격상과 CEPA 협상 개시를 밝혀서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이재명 이집트 CEPA 협상 개시, 전략적 동반자 격상 핵심",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이재명 이집트 CEPA 협상 개시됐는데 전략적 동반자 격상 많이들 놓치더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 18,
+      "kinTop": [
+        {
+          "title": "이재명보단 윤석열???",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=408281624&answerNo=10",
+          "views": 1558,
+          "answers": 12
+        },
+        {
+          "title": "이재명 대통령되면",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=413599949&answerNo=6",
+          "views": 1412,
+          "answers": 7
+        },
+        {
+          "title": "이재명,민주당은 일본에만 엄격한가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60501&docId=399896481&answerNo=6",
+          "views": 1290,
+          "answers": 7
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3b 활용",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 157,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 157",
+        "선점 후보 — 경쟁 문서 157건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 모델을 제친 멀티모달 의사결정 모델 d1-3B를 출시해서",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "d1-3b 활용, 10배 큰 모델 제친 멀티모달 의사결정 성능 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3b가 덩치 10배 모델을 제쳤다는 멀티모달이라 뭐가 다른지 궁금해들 하더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 23,
+      "kinTop": [
+        {
+          "title": "이미지맵 활용 시 링크를 클릭하면 테두리가 생기면서 보이....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10402&docId=224970695&answerNo=1",
+          "views": 4154,
+          "answers": 1
+        },
+        {
+          "title": "등비급수활용",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1113&docId=275822115&answerNo=1",
+          "views": 80,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3b 사용법",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "모델 활용 방법 궁금",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 196,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 196",
+        "선점 후보 — 경쟁 문서 196건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 모델 활용 방법 궁금"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 모델을 제친 멀티모달 의사결정 모델 d1-3B를 출시해서",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "d1-3b 사용법 10배 큰 모델 제친 멀티모달 세팅",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3b 사용법 찾다 보면 멀티모달 쪽에서 많이들 헷갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 327,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "CPTPP 가입 말라",
+      "issue": "CPTPP 가입 말라",
+      "topic": "CPTPP 가입 말라",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 299,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 299",
+        "선점 후보 — 경쟁 문서 299건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이재명 대통령이 연내 CPTPP 가입 신청을 하지 말라고 지시해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "CPTPP 가입 말라, 李 연내 신청 보류 지시 배경과 농어민 쟁점",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "CPTPP 가입 말라더니 CPTPP 가입국 명단 보다가 좀 멈칫했어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "subKeywords": [
         {
-          "keyword": "이유진 국어 커리큘럼",
-          "searchVolume": 10,
-          "frame": "mistake"
+          "keyword": "CPTPP 뜻",
+          "searchVolume": 7710,
+          "frame": "generic"
         },
         {
-          "keyword": "이유진 국어 교재",
-          "searchVolume": 10,
-          "frame": "mistake"
+          "keyword": "CPTPP 가입국",
+          "searchVolume": 280,
+          "frame": "generic"
         }
       ],
       "keywordPool": [
         {
-          "keyword": "이유진 국어 커리큘럼",
-          "searchVolume": 10,
-          "documentCount": 471,
+          "keyword": "CPTPP 뜻",
+          "searchVolume": 7710,
+          "documentCount": 1636,
           "source": "ai-verified"
         },
         {
-          "keyword": "이유진 국어 교재",
-          "searchVolume": 10,
-          "documentCount": 1171,
+          "keyword": "CPTPP 가입국",
+          "searchVolume": 280,
+          "documentCount": 537,
           "source": "ai-verified"
         }
       ],
-      "trend": {
-        "series": [
-          26,
-          55,
-          29,
-          21,
-          32,
-          0,
-          50,
-          0,
-          21,
-          29,
-          21,
-          13,
-          0,
-          13,
-          18,
-          0,
-          16,
-          34,
-          100,
-          39,
-          50,
-          32,
-          61,
-          18,
-          18,
-          13,
-          24,
-          13,
-          21
-        ],
-        "label": "📉 단발성",
-        "recommendation": "회피! 지난 며칠 폭발 후 급락 중. 글 써도 유입 없음",
-        "measuredAt": "2026-10-07T21:26:03.194Z"
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "서피스 랩톱 울트라",
+      "issue": "서피스 랩톱 울트라",
+      "topic": "서피스 랩톱 울트라",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 249,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 249",
+        "선점 후보 — 경쟁 문서 249건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS가 엔비디아 RTX 스파크를 탑재한 서피스 랩톱 울트라를 공개해서",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
-      "kinCount": 17,
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "서피스 랩톱 울트라 가격 800만원, 맥북 프로와 스펙 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "서피스 랩톱 울트라 800만원인데 맥북 프로랑 붙여보니 여기서 갈리네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
       "kinTop": [
         {
-          "title": "공무원 국어 비문학 독해능력",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080106&docId=327659813&answerNo=4",
-          "views": 208,
-          "answers": 4
-        },
-        {
-          "title": "이유진 2025 화제의모의고사 난이도가 어떻게 되나요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080106&docId=486124304&answerNo=1",
-          "views": 90,
-          "answers": 1
-        },
-        {
-          "title": "공무원 국어 공부시작하려는데요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080106&docId=327243727&answerNo=2",
-          "views": 78,
-          "answers": 5
-        },
-        {
-          "title": "공무원 준비 하는데 국어 준비가 막막",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080106&docId=329029519&answerNo=3",
-          "views": 47,
-          "answers": 5
+          "title": "엘지 울트라pc 14U390",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10102&docId=364102432&answerNo=2",
+          "views": 113,
+          "answers": 3
         }
       ],
       "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "recommend",
-      "exclusionReason": null,
-      "carried": true
-    }
-  ],
-  "observations": [
+      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "앤트로픽 엔스로픽 차이",
       "issue": "앤트로픽",
@@ -544,7 +1262,8 @@
       "monetize": null,
       "measuredAt": "2026-10-08T03:20:06.552Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "진영승 합참의장 질의",
@@ -651,7 +1370,8 @@
       "monetize": null,
       "measuredAt": "2026-10-08T03:20:06.552Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "수양딸 윤소희 차별",
@@ -717,7 +1437,8 @@
       "monetize": null,
       "measuredAt": "2026-10-08T03:20:06.552Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "유승호와 임세주 연애",
@@ -783,7 +1504,8 @@
       "monetize": null,
       "measuredAt": "2026-10-08T03:20:06.552Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "클로드 하이쿠 5.5",
@@ -858,7 +1580,8 @@
       "monetize": null,
       "measuredAt": "2026-10-08T03:20:06.552Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "페가수스 1.6 VLM",
@@ -4652,1373 +5375,874 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "이유진 보디빌더",
-      "issue": "이유진",
-      "topic": "이유진",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 136,
-      "documentCountMeasured": true,
-      "searchVolume": 330,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 330",
-        "문서수 136",
-        "선점 후보 — 경쟁 문서 136건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "traffic",
-          "text": "검색광고 월 검색량 330 실측 — 트래픽 하한 통과"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이효정 아들 이유진이 배우 차경은과 11월14일 결혼한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이유진 보디빌더 차경은과 11월 14일 결혼, 이효정 아들 맞나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이유진 보디빌더가 이효정 아들이라는데 차경은과는 첫 연출작에서 만났다네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": {
-        "series": [
-          56,
-          67,
-          100,
-          72,
-          44,
-          61,
-          72,
-          0,
-          61,
-          72,
-          100,
-          44,
-          67,
-          50,
-          39,
-          0,
-          44,
-          89,
-          44,
-          83,
-          50,
-          28,
-          33,
-          56,
-          100,
-          56,
-          0,
-          56,
-          61
-        ]
-      },
-      "kinCount": 6,
-      "kinTop": [
-        {
-          "title": "보디빌더 맨즈 피지크",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=70701&docId=395747289&answerNo=1",
-          "views": 469,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "사카나 SIFT",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 3,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 3",
-        "선점 후보 — 경쟁 문서 3건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "사카나 SIFT 자가 진화 AI 에이전트가 푼 검증 비용 병목",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "사카나 SIFT 돌려봤더니 사카나 AI 성능이 생각보다 이렇게 바뀌더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "사카나 AI",
-          "searchVolume": 80,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "사카나 AI",
-          "searchVolume": 80,
-          "documentCount": 788,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "성현주 중환자실",
-      "issue": "성현주",
-      "topic": "성현주",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 52,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 52",
-        "선점 후보 — 경쟁 문서 52건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "성현주가 8살에 떠난 첫째 아들을 처음으로 이야기했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "성현주 중환자실 1000일, 8살 아들 짠한형 사연",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "성현주 중환자실 1000일 이야기, 짠한형에서 8살 아들 얘기 꺼낸 날 많이들 울었더라",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "성현주 아들",
-          "searchVolume": 1190,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 아들 사고",
-          "searchVolume": 230,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 90,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "성현주 아들",
-          "searchVolume": 1190,
-          "documentCount": 801,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 아들 사고",
-          "searchVolume": 230,
-          "documentCount": 123,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 90,
-          "documentCount": 488,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 개그맨",
-          "searchVolume": 50,
-          "documentCount": 733,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이유진 차경은",
-      "issue": "이유진",
-      "topic": "이유진",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 127,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 127",
-        "선점 후보 — 경쟁 문서 127건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이효정 아들 이유진이 배우 차경은과 11월14일 결혼한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이유진 차경은 11월 14일 결혼, 차경은 프로필과 나이",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이유진 차경은 결혼 기사 뜬 김에 이유진 감독 프로필 찾아보다 멈췄네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "이유진 프로필",
-          "searchVolume": 3810,
-          "frame": "mistake"
-        },
-        {
-          "keyword": "이유진 감독",
-          "searchVolume": 130,
-          "frame": "mistake"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "이유진 프로필",
-          "searchVolume": 3810,
-          "documentCount": 3392,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "이유진 감독",
-          "searchVolume": 130,
-          "documentCount": 10038,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이유진 오보에",
-      "issue": "이유진",
-      "topic": "이유진",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 167,
-      "documentCountMeasured": true,
-      "searchVolume": 170,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 170",
-        "문서수 167",
-        "선점 후보 — 경쟁 문서 167건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이효정 아들 이유진이 배우 차경은과 11월14일 결혼한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이유진 오보에 원인과 해결법",
-          "frame": "mistake",
-          "basis": "검색 질문 '이유진 오보에' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "이유진 오보에 , 원인은 따로 있습니다",
-          "frame": "mistake",
-          "basis": "검색 질문 '이유진 오보에' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "성현주 사연",
-      "issue": "성현주",
-      "topic": "성현주",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 266,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 266",
-        "선점 후보 — 경쟁 문서 266건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "성현주가 8살에 떠난 첫째 아들을 처음으로 이야기했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "성현주 사연 짠한형에서 밝힌 8살 아들 1000일",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "성현주가 짠한형에서 8살 아들 보낸 사연 꺼내는데 1000일을 버텼더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "성현주 아들",
-          "searchVolume": 1190,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 아들 사고",
-          "searchVolume": 230,
-          "frame": "generic"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 90,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "성현주 아들",
-          "searchVolume": 1190,
-          "documentCount": 801,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 아들 사고",
-          "searchVolume": 230,
-          "documentCount": 123,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 나이",
-          "searchVolume": 90,
-          "documentCount": 488,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "성현주 개그맨",
-          "searchVolume": 50,
-          "documentCount": 733,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "sift-ag.com",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 59,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 59",
-        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "home": {
-          "text": "sift-ag.com 들어가보니 생각보다 손이 자꾸 가더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "sift.jp",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 79,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 79",
-        "선점 후보 — 경쟁 문서 79건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "home": {
-          "text": "sift.jp 처음 켰을 때 화면이 비어 있어서 한참 헤맸네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "SIFT 에이전트",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 73,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 73",
-        "선점 후보 — 경쟁 문서 73건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "SIFT 에이전트 자가 진화 원리와 검증 비용 병목 짚어보기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "SIFT 에이전트 혼자 돌려봤더니 자꾸 같은 데서 멈추네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "SIFT 상용화",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "공개 여부 궁금",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 105,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 105",
-        "선점 후보 — 경쟁 문서 105건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 공개 여부 궁금"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "SIFT 상용화, MIT·사카나 자가진화 에이전트 검증 비용 쟁점",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "SIFT 상용화까지 왜 멀었나 봤더니 검증 비용에서 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 7,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "강신철 DMZ 지뢰제거",
-      "issue": "강신철 DMZ 지뢰제거",
-      "topic": "강신철 DMZ 지뢰제거",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 152,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 152",
-        "선점 후보 — 경쟁 문서 152건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "강신철 국방장관이 북한군 DMZ 지뢰 제거작전을 역사상 처음이라 밝혔다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "강신철 DMZ 지뢰제거 발언 전문과 북한군 대응 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "강신철 DMZ 지뢰제거 단호하다는데 국방장관 브리핑 들어보면 느낌이 좀 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "강신철 프로필",
-          "searchVolume": 133000,
-          "frame": "generic"
-        },
-        {
-          "keyword": "강신철 국방장관",
-          "searchVolume": 740,
-          "frame": "generic"
-        },
-        {
-          "keyword": "강신철 장관",
-          "searchVolume": 480,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "강신철 프로필",
-          "searchVolume": 133000,
-          "documentCount": 1377,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "강신철 국방장관",
-          "searchVolume": 740,
-          "documentCount": 5778,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "강신철 장관",
-          "searchVolume": 480,
-          "documentCount": 6500,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "sift 명사 뜻",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 164,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 164",
-        "선점 후보 — 경쟁 문서 164건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "정보",
-      "adsenseFit": true,
-      "adsenseReason": "정보형 검색 — 광고 게재·클릭 최적",
-      "titles": {
-        "seo": {
-          "text": "sift 명사 뜻과 동사 뜻 차이, 발음·예문까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "sift 명사 뜻 찾다가 동사랑 뜻이 다른 거 보고 다시 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "sift 뜻",
-          "searchVolume": 160,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "sift 뜻",
-          "searchVolume": 160,
-          "documentCount": 1019,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 14,
-      "kinTop": [
-        {
-          "title": "영어 단어중 6글자로 이루어진 명사를 조회하고 싶습니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080301&docId=128538204&answerNo=1",
-          "views": 8342,
-          "answers": 1
-        },
-        {
-          "title": "s랑 t가 단어 가장자리에 있는 명사좀 알려주세요 .",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080302&docId=203262905&answerNo=2",
-          "views": 127,
-          "answers": 2
-        },
-        {
-          "title": "토익 대명사 파트 질문입니다.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110803&docId=59539764&answerNo=1",
-          "views": 44,
-          "answers": 1
-        },
-        {
-          "title": "동명사(gerund.)로 만들어 주실분 찾아요.",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=11080302&docId=235531213&answerNo=1",
-          "views": 37,
-          "answers": 1
-        }
-      ],
-      "monetize": {
-        "verdict": "bad",
-        "points": [
-          {
-            "text": "'sift 명사 뜻'과 'sift 뜻'(월 160) 둘 다 단어 하나의 정의를 찾는 사전형 검색이다. 검색자가 손에 넣고 만족하는 건 '한 줄 정의'(정보)뿐이고, 도구·구매처·절차 어느 것도 아니다. 애초에 sift는 동사(체로 치다/걸러내다)가 주용법이라 '명사 뜻'을 캐물을 만큼 상업적 깊이가 없다."
-          },
-          {
-            "text": "'sift 뜻'을 치는 사람은 구매·전환 의도가 0에 가깝다. 뜰 광고는 영어사전앱·단어장·토익강의 같은 저단가 교육/디스플레이 광고가 전부고, 이 검색자는 지금 뭘 사거나 신청할 상태가 아니라 뜻만 확인하고 넘어갈 상태다. 클릭 유인이 거의 없다."
-          },
-          {
-            "text": "체류시간이 치명적이다. 'sift 명사 뜻'은 읽어야 풀리는 문제가 아니라 '한 줄 얻고 나가는' 전형적 바운스 검색이다. 정의 보여주는 순간 이탈하므로 스크롤·광고 노출 시간이 안 나온다. 월 160(sift 뜻 기준)이라는 볼륨도 이탈형 트래픽이라 수익 레버가 없다."
-          },
-          {
-            "text": "sift가 노리기엔 다의성·상업성이 둘 다 부족하다. 'sift science'(기업명) 같은 분기라도 있으면 B2B 각도가 생기는데, 'sift 명사 뜻'/'sift 뜻' 검색어는 순수 영단어 풀이로만 수렴해 그 각도마저 안 열린다."
-          }
-        ],
-        "angle": "쓴다면 단독 글 금지. 'sift 뜻·발음·예문'을 동사/명사 통째로 담되, '체로 거르다'라는 뜻을 데이터 필터링·정보 선별(sift through) 뉘앙스로 확장해 IELTS/토익 영단어 모음글의 한 섹션으로만 흡수시키는 것. 저볼륨 사전검색을 묶음 페이지의 내부 유입·체류용 꼬리로 쓰고, 수익은 단어 하나가 아니라 묶음 전체의 세션 길이에서 노린다."
-      },
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "SIFT 검증비용",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 183,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 183",
-        "선점 후보 — 경쟁 문서 183건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "SIFT 검증비용 병목 왜 생기나, 사카나 자가진화 에이전트 구조",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "SIFT 검증비용이 자가진화 에이전트 발목을 잡는다는데 여기서 많이 갈리네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이유진 연출작",
-      "issue": "이유진",
-      "topic": "이유진",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 208,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 208",
-        "선점 후보 — 경쟁 문서 208건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이효정 아들 이유진이 배우 차경은과 11월14일 결혼한다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이유진 연출작 차경은과 11월 14일 결혼 소식 정리",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이유진 연출작에서 만난 차경은, 교제 5개월 만에 결혼까지 갔네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "이유진 차경은",
-          "searchVolume": 10,
-          "frame": "mistake"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "이유진 차경은",
-          "searchVolume": 10,
-          "documentCount": 127,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "뉴럴링크 뉴로모픽 차이",
-      "issue": "뉴럴링크",
-      "topic": "뉴럴링크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 202,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 202",
-        "선점 후보 — 경쟁 문서 202건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "머스크가 네 자녀 어머니 질리스와 예고 없이 결별했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "뉴럴링크 뉴로모픽 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '뉴럴링크 뉴로모픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "뉴럴링크 뉴로모픽 차이 , 기준은 하나면 됩니다",
-          "frame": "compare",
-          "basis": "검색 질문 '뉴럴링크 뉴로모픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "뉴럴링크 근황",
-      "issue": "뉴럴링크",
-      "topic": "뉴럴링크",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 289,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 289",
-        "선점 후보 — 경쟁 문서 289건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "머스크가 네 자녀 어머니 질리스와 예고 없이 결별했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "뉴럴링크 근황 5만시간 뇌파 학습, 상장·임상 어디까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "뉴럴링크 근황 보다가 관련주 주가 흐름까지 넘어가서 한참 들여다봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "뉴럴링크 주가",
-          "searchVolume": 240,
-          "frame": "generic"
-        },
-        {
-          "keyword": "뉴럴링크 관련주",
-          "searchVolume": 190,
-          "frame": "generic"
-        },
-        {
-          "keyword": "뉴럴링크 상장",
-          "searchVolume": 20,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "뉴럴링크 주가",
-          "searchVolume": 240,
-          "documentCount": 5120,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "뉴럴링크 관련주",
-          "searchVolume": 190,
-          "documentCount": 5816,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "뉴럴링크 상장",
-          "searchVolume": 20,
-          "documentCount": 3293,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "뉴럴링크 칩",
-          "searchVolume": 20,
-          "documentCount": 11091,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T03:31:16.759Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
+    {
+      "issue": "CPTPP 가입 말라",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "이재명 대통령이 연내 CPTPP 가입 신청을 하지 말라고 지시해서",
+      "headlines": [
+        {
+          "title": "李 “CPTPP 연내 가입신청 말라…농어민과 충분히 대화”",
+          "press": "donga.com",
+          "publishedAt": "2026-10-08T07:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003753732?sid=100"
+        },
+        {
+          "title": "李 대통령 \"연내 CPTPP 가입 신청 말라\"…지속 대화 당부",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-10-08T07:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000540627?sid=100"
+        },
+        {
+          "title": "李대통령, 연내 CPTPP 가입 신청 말라 지시…\"신뢰 회복 우선\"",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-08T07:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005424000?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "유승호 임세주 결별소식",
+      "issueType": "entertainment",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "유승호와 임세주가 6년 열애설 당일 이미 결별했다고 확인해서",
+      "headlines": [
+        {
+          "title": "유승호·임세주, ‘6년 열애설’ 당일 “이미 결별” 확인",
+          "press": "biz.heraldcorp.com",
+          "publishedAt": "2026-10-08T07:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/016/0002707115?sid=103"
+        },
+        {
+          "title": "유승호·임세주, 6년 열애→결별 초고속 인정…앞으로 행보는? [종합]",
+          "press": "enews.imbc.com",
+          "publishedAt": "2026-10-08T08:26:00.000Z",
+          "link": "https://m.entertain.naver.com/article/408/0000323801"
+        },
+        {
+          "title": "유승호·임세주, 6년 열애설 터졌는데…\"이미 결별\"",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-08T04:40:00.000Z",
+          "link": "https://m.entertain.naver.com/article/015/0005340520"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "새 시즌 각오",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "남자배구 7개 구단이 새 시즌 개막 앞두고 우승 다짐을 밝혀서",
+      "headlines": [
+        {
+          "title": "새 시즌 각오 밝히는 라미레즈 KB손보 감독",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-08T06:19:00.000Z",
+          "link": "https://m.sports.naver.com/volleyball/article/421/0009217964"
+        },
+        {
+          "title": "\"원팀·넥스트레벨·진인사대천명\"…남자배구, 새 시즌 출사표",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T08:55:00.000Z",
+          "link": "https://m.sports.naver.com/volleyball/article/003/0014242841"
+        },
+        {
+          "title": "'신인감독2' 김연경 \"화내고 고성 불편해하는 분도, 시즌2도 본모습 나와...",
+          "press": "joynews24.com",
+          "publishedAt": "2026-10-08T06:34:00.000Z",
+          "link": "http://www.joynews24.com/view/2013223"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "새시즌",
+          "searchVolume": null,
+          "origin": "related"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "코스피 6600선 하락",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "외인·기관의 대량 매도에 코스피가 사흘째 밀려 6600선까지 하락해서",
+      "headlines": [
+        {
+          "title": "코스피 사흘째 하락... 6600선까지 밀려",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T06:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016366481?sid=101"
+        },
+        {
+          "title": "코스피, 외인·기관 3.6조 '팔자'에 2.6% 급락…6600선",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-08T06:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340582?sid=101"
+        },
+        {
+          "title": "코스피, 3주 만에 6600선 후퇴…삼전닉스 동반하락 [마켓시그널]",
+          "press": "sedaily.com",
+          "publishedAt": "2026-10-08T07:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004669507?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "이재명 이집트 CEPA",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "이재명 대통령이 한·이집트 전략적 동반자 격상과 CEPA 협상 개시를 밝혀서",
+      "headlines": [
+        {
+          "title": "李대통령 \"韓-이집트, '전략적 동반자' 격상…CEPA 협상 개시\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T03:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016365778?sid=100"
+        },
+        {
+          "title": "李대통령 \"한·이집트 CEPA 협상 개시\"…전략적 동반자 관계 격상",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-08T03:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009217303?sid=100"
+        },
+        {
+          "title": "이 대통령 \"한-이집트, 전략적 동반자 관계 격상…CEPA 협상 개시 공식 ...",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T03:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014241828?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "신인감독 김연경 결정적",
+      "issueType": "entertainment",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "신인감독 김연경이 한일전 승리를 위해 결정적 승부수를 던져서",
+      "headlines": [
+        {
+          "title": "한국 여자농구 새 주축... '김연경 닮은꼴' 이해란의 발견",
+          "press": "ohmynews.com",
+          "publishedAt": "2026-10-07T23:16:00.000Z",
+          "link": "https://m.sports.naver.com/basketball/article/047/0002531534"
+        },
+        {
+          "title": "김연경, 한일전 승리 위해 던진 결정적 승부수(신인감독 김연경)",
+          "press": "spotvnews.co.kr",
+          "publishedAt": "2025-10-19T01:24:00.000Z",
+          "link": "https://m.entertain.naver.com/article/477/0000574583"
+        },
+        {
+          "title": "은퇴 표승주, 옛 스승 고희진과 1년만 재회 뭉클 “연락 조심스러워” ...",
+          "press": "newsen.com",
+          "publishedAt": "2025-11-16T20:32:00.000Z",
+          "link": "https://m.entertain.naver.com/article/609/0001058553"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "고우석",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "LG 고우석이 포스트시즌에 못 뛰게 되는 전력 악재가 겹쳐서",
+      "headlines": [
+        {
+          "title": "역투 펼치는 고우석",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-07T11:58:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/421/0009216023"
+        },
+        {
+          "title": "[포토] 고우석 '살짝 빠졌네'",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-10-07T11:59:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/108/0003476938"
+        },
+        {
+          "title": "[포토] 역투하는 LG 고우석",
+          "press": "sportsseoul.com",
+          "publishedAt": "2026-10-07T12:04:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/468/0001271313"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "고우석 연봉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고우석 이종범",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고우석 가을야구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고우석 이정후",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고우석 포스트시즌",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고우석 fa",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고우석 lg",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "고우석 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "고우석 복귀",
+          "reason": "포스트시즌 출전 여부 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "고우석 부상 정도",
+          "reason": "이탈 원인 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "농지 전수조사 처분",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "정부가 상속·고령농·임대차 농지를 전수조사 처분 대상에서 제외해서",
+      "headlines": [
+        {
+          "title": "농지조사 논란에 \"투기만 처분\" 선그은 정부…일각선 후퇴 지적도(종합...",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T06:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016366289?sid=101"
+        },
+        {
+          "title": "농지은행 안 맡겨도 처분 안 한다…투기 아니면 구제 '특별법' 추진",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T02:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014241203?sid=101"
+        },
+        {
+          "title": "상속·고령농·임대차 농지 ‘전수조사 처분’에서 제외",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-08T02:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004002774?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "농지 전수조사 처분방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "농지 전수조사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "농지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "정은경 장관 질의",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "정은경 보건복지부 장관이 국감에서 기초연금·비대면 약배송 질의에 답해서",
+      "headlines": [
+        {
+          "title": "질의 답하는 정은경 보건복지부 장관",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T06:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016366438?sid=100"
+        },
+        {
+          "title": "[국감] 질의 답하는 정은경 보건복지부 장관",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-08T07:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009218166?sid=100"
+        },
+        {
+          "title": "정은경 장관, 비대면 약 배송 속도조절 시사…\"직능의견 수렴\"",
+          "press": "new.dailypharm.com",
+          "publishedAt": "2026-10-08T08:30:00.000Z",
+          "link": "https://new.dailypharm.com/user/news/343241?REFERER=NP"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "알레스 페레이라",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "UFC 챔피언 알렉스 페레이라가 한국을 찾아 팬미팅·세미나를 열어서",
+      "headlines": [
+        {
+          "title": "페레이라, 1회 원샷 원킬. 아데산야 KO시켰다더니 진짜네-UFC 276",
+          "press": "maniareport.com",
+          "publishedAt": "2022-07-03T03:29:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/425/0000130326"
+        },
+        {
+          "title": "페레이라 놀란 팬? 러시아 무술 세계 2위 이상수 [인터뷰]",
+          "press": "mk.co.kr",
+          "publishedAt": "2024-11-30T15:01:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/410/0001039078"
+        },
+        {
+          "title": "UFC 페레이라 “존 존스와 대결, 서로가 원해” [인터뷰]",
+          "press": "mk.co.kr",
+          "publishedAt": "2024-11-22T15:01:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/410/0001037516"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "서울대 연구진이 갤럭시·구글 픽셀도 뚫리는 해킹 구멍을 발견해서",
+      "headlines": [
+        {
+          "title": "갤럭시·구글 픽셀도 뚫리는 해킹 구멍, 서울대 연구진이 발견했다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-08T02:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340506?sid=105"
+        },
+        {
+          "title": "삼성전자 영업익 '100조 신화'…엔비디아·구글·애플 넘었다",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-08T01:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009216669?sid=101"
+        },
+        {
+          "title": "\"AI로 질병예방\"‥美정부·구글, 저커버그의 바이오허브에 합류",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-10-08T05:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001527907?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 챗",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "구글 픽셀 업데이트",
+          "reason": "패치 적용 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "구글 ai 게임",
+          "reason": "유니티 플랫폼 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "카카오",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "카카오가 국제 AI 학회에서 대규모 언어모델 최적화 기술을 발표해서",
+      "headlines": [
+        {
+          "title": "카카오, AI 학습 비용 줄이는 기술 개발…국제학회서 성과 공개",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T00:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014240661?sid=105"
+        },
+        {
+          "title": "[테크스냅] 카카오, 국제 AI 학회서 대규모 언어모델 최적화 기술 발표",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T00:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016364921?sid=105"
+        },
+        {
+          "title": "카카오, AI 모델 학습·경량화 기술 공개…크기 줄이고 성능은↑",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-08T00:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009216557?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "카카오 ai 퀴즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 이모티콘샵",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 쿠키런",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 돛",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 콘",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 펑",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 구독",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "카카오 ai 서비스",
+          "reason": "기술 상용화 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "카카오 ai 적용",
+          "reason": "실제 제품 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "카카오 주식 전망",
+          "reason": "기술 발표 주가 영향",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "카카오 ai 모델명",
+          "reason": "공개 모델 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "d1-3B",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "리퀴드 AI가 10배 큰 모델을 제친 멀티모달 의사결정 모델 d1-3B를 출시해서",
+      "headlines": [
+        {
+          "title": "리퀴드 AI, 10배 큰 체급 제친 멀티모달 의사결정 모델 'd1-3B' 출시",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-08T07:52:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216087"
+        },
+        {
+          "title": "[허가/임상] 트렘피어, IV 제형 추가에 적응증도 확대",
+          "press": "hitnews.co.kr",
+          "publishedAt": "2025-08-24T21:12:00.000Z",
+          "link": "http://www.hitnews.co.kr/news/articleView.html?idxno=68168"
+        },
+        {
+          "title": "[보고서] ‘3세대 유전자 가위’ 논문·특허기술 전쟁 3…논문 분석",
+          "press": "itnews.or.kr",
+          "publishedAt": "2017-08-01T01:58:00.000Z",
+          "link": "http://www.itnews.or.kr/?p=22879"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "d1 3b",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "d1-3b 사용법",
+          "reason": "모델 활용 방법 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "d1-3b 다운로드",
+          "reason": "접근 경로 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "d1-3b 벤치마크",
+          "reason": "성능 비교 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "리퀴드 AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 모델 d1-3B를 출시해서",
+      "headlines": [
+        {
+          "title": "LG전자 '美 AI센터 냉각설비' 5조 계약 따냈다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-05T13:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005339332?sid=101"
+        },
+        {
+          "title": "리퀴드 AI, 10배 큰 체급 제친 멀티모달 의사결정 모델 'd1-3B' 출시",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-08T07:52:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216087"
+        },
+        {
+          "title": "증권가 \"LG전자 3Q 실적 아쉽지만 AI 데이터센터 냉각·로봇 성장성 무게...",
+          "press": "econovill.com",
+          "publishedAt": "2026-10-08T02:54:00.000Z",
+          "link": "https://www.econovill.com/news/articleView.html?idxno=753080"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "리퀴드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "리퀴드 ai 창업자",
+          "reason": "개발사 배경 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "리퀴드 ai 투자",
+          "reason": "기업 가치 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "MAI-코드-1.1",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "MS가 서피스 랩톱 울트라 출시와 함께 온디바이스 최적화 MAI-코드-1.1을 공개해서",
+      "headlines": [
+        {
+          "title": "MS, 서피스 랩톱 울트라 출시에 'MAI-코드-1.1' 온디바이스 최적화 공개",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-08T07:44:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216071"
+        },
+        {
+          "title": "MS, 온디바이스 AI '서피스 랩톱 울트라' 공개...1200억 매개변수 모델 ...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-08T06:52:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216065"
+        },
+        {
+          "title": "\"파일 정리부터 코딩까지 알아서\"…MS, 윈도우11에 AI일꾼 심는다",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-08T05:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009217776?sid=105"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "MS",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "MS가 애플에 도전장을 내며 AI 기능 강화 노트북을 출시해서",
+      "headlines": [
+        {
+          "title": "'메타 뮤즈' 품은 MS PC",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-08T08:31:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340632?sid=105"
+        },
+        {
+          "title": "MS, 애플에 도전장…AI 기능 강화한 노트북 출시",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T05:46:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016366166?sid=101"
+        },
+        {
+          "title": "MS, 엔비디아 RTX 스파크 탑재 ‘서피스 랩톱 울트라’ 공개",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-10-08T03:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002440299?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "ms 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스",
+          "searchVolume": 22030,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 365",
+          "searchVolume": 10320,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 정품인증방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "MS 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 쿠키허용방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "서피스 랩톱 울트라",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "MS가 엔비디아 RTX 스파크를 탑재한 서피스 랩톱 울트라를 공개해서",
+      "headlines": [
+        {
+          "title": "MS, 엔비디아 RTX 스파크 탑재 ‘서피스 랩톱 울트라’ 공개",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-10-08T03:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002440299?sid=105"
+        },
+        {
+          "title": "MS, RTX 스파크 탑재한 ‘서피스 랩톱 울트라’ 출시… 맥북 프로와 경쟁",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-08T07:09:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001196966?sid=105"
+        },
+        {
+          "title": "MS, ‘엔비디아 칩 탑재’ 800만원 노트북 선봬",
+          "press": "sedaily.com",
+          "publishedAt": "2026-10-08T08:39:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004669550?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "서피스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "저커버그 부부의 바이오허브",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "미 정부·구글이 저커버그 부부의 바이오허브에 2.4조 AI 생물학 프로젝트로 합류해서",
+      "headlines": [
+        {
+          "title": "\"AI로 질병예방\"…美정부·구글, 저커버그의 바이오허브에 합류",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T05:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016366029?sid=104"
+        },
+        {
+          "title": "\"AI로 질병예방\"‥美정부·구글, 저커버그의 바이오허브에 합류",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-10-08T05:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001527907?sid=104"
+        },
+        {
+          "title": "\"AI로 질병 예방\"...미 정부·구글, 저커버그의 바이오허브에 합류",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-10-08T05:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002416311?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "저커버그",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
     {
       "issue": "오만석 개런티 낮춰",
       "issueType": "fresh",
@@ -7330,411 +7554,6 @@
         {
           "keyword": "화웨이 폴더블",
           "reason": "로직폴딩 적용 제품",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "이유진",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "이효정 아들 이유진이 배우 차경은과 11월14일 결혼한다.",
-      "headlines": [
-        {
-          "title": "'이효정 아들' 이유진, 차경은과 내달 14일 결혼",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-06T02:24:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014235141"
-        },
-        {
-          "title": "'이효정 아들' 이유진, 차경은과 11월 14일 결혼",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-06T01:47:00.000Z",
-          "link": "https://m.entertain.naver.com/article/015/0005339463"
-        },
-        {
-          "title": "‘이효정 아들’ 이유진, 차경은과 11월 14일 결혼",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-06T01:27:00.000Z",
-          "link": "https://m.entertain.naver.com/article/009/0005744333"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "이유진 배우",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이유진 농구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이유진 국어",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이유진 보디빌더",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이유진 아나운서",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "배우 이유진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이유진 기자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이유진 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "이유진 신혼집",
-          "reason": "결혼 후 거주 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "이유진 2세",
-          "reason": "결혼 다음 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 1,
-      "carried": true
-    },
-    {
-      "issue": "성현주",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "성현주가 8살에 떠난 첫째 아들을 처음으로 이야기했다.",
-      "headlines": [
-        {
-          "title": "“5살 사고, 천일 의식없다 8살 하늘로 보냈다”…성현주가 전한 못다한...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-05T23:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005744229?sid=103"
-        },
-        {
-          "title": "성현주 \"5살에 사고, 8살에 보내줘\"…처음 꺼낸 첫째 아들 이야기",
-          "press": "fnnews.com",
-          "publishedAt": "2026-10-05T20:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005585180?sid=103"
-        },
-        {
-          "title": "성현주, 먼저 떠난 8살 아들…\"1000일 동안 의식 없었다\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-05T20:00:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014234154"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "개그우먼 성현주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "성현주 아들상",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "성현주 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "개그맨 성현주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "성현주 허경환",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "성현주 개콘",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "개콘 성현주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "허경환 성현주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "성현주 둘째",
-          "reason": "남은 자녀 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "성현주 남편",
-          "reason": "가족 근황 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "성현주 근황",
-          "reason": "현재 활동 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "성현주 인터뷰",
-          "reason": "전체 사연 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "강신철 DMZ 지뢰제거",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "강신철 국방장관이 북한군 DMZ 지뢰 제거작전을 역사상 처음이라 밝혔다.",
-      "headlines": [
-        {
-          "title": "강신철 \"北지뢰제거작전, DMZ 역사상 처음…단호한 대응\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-06T00:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016358795?sid=100"
-        },
-        {
-          "title": "강신철 \"北지뢰제거작전, DMZ 역사상 처음…단호한 대응\"(종합)",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-06T01:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014234967?sid=100"
-        },
-        {
-          "title": "강신철 \"북한군 지뢰 제거작전, DMZ 역사상 처음‥단호한 대응\"",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-10-06T02:31:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001527365?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "뉴럴링크",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "머스크가 네 자녀 어머니 질리스와 예고 없이 결별했다.",
-      "headlines": [
-        {
-          "title": "머스크, 네 아이 엄마 질리스와 결별…\"예고 없이 헤어져\"",
-          "press": "dailian.co.kr",
-          "publishedAt": "2026-10-04T09:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/119/0003139395?sid=104"
-        },
-        {
-          "title": "뉴럴링크, 5만 시간 뇌파 학습 AI 개발…'반복 보정' BCI 난제 해결",
-          "press": "theguru.co.kr",
-          "publishedAt": "2026-10-06T00:36:00.000Z",
-          "link": "https://www.theguru.co.kr/news/article.html?no=107871"
-        },
-        {
-          "title": "뉴럴링크, 5만시간 뇌 데이터 사전학습…BCI도 '파운데이션 모델' 시대 ...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-05T10:50:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215977"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "뉴럴링크 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴럴링크 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "일론머스크 뉴럴링크",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴럴링크 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴럴링크 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴럴링크 칩",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴럴링크 책 요약",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "뉴럴링크 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "뉴럴링크 상용화",
-          "reason": "시기 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "뉴럴링크 환자",
-          "reason": "임상 사례 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "SIFT",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
-      "headlines": [
-        {
-          "title": "MIT·사카나, 자가 진화 AI 에이전트 'SIFT' 발표...'검증 비용 병목' 해...",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-05T08:34:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=215967"
-        },
-        {
-          "title": "마인크래프트', 14년 만에 네 번째 차원 공개",
-          "press": "game.donga.com",
-          "publishedAt": "2026-09-29T01:48:00.000Z",
-          "link": "https://game.donga.com/124466/"
-        },
-        {
-          "title": "'마인크래프트 던전스 2', 4인 협동으로 누빈 신규 차원 '시프트'",
-          "press": "gamevu.co.kr",
-          "publishedAt": "2026-09-28T01:38:00.000Z",
-          "link": "https://www.gamevu.co.kr/news/articleView.html?idxno=61060"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "sift 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "the sift",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "sift through",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "sift out",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "sift 명사 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "sift-ms",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "sift.jp",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "sift.com",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "SIFT 원리",
-          "reason": "작동 방식 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "SIFT 상용화",
-          "reason": "공개 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "SIFT 성능",
-          "reason": "벤치마크 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
