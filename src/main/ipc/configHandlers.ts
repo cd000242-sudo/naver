@@ -126,6 +126,13 @@ export function registerConfigHandlers(ctx: ConfigHandlerContext): void {
             console.log('[Main] ⚠️ Perplexity API 키 미저장 (config에 없음)');
         }
 
+        // [2026-10-09] The HUB key was the only key saved without a confirmation, so a lost key went unnoticed.
+        const hubId = String((nextConfig as any).naverHubClientId || '').trim();
+        const hubSecret = String((nextConfig as any).naverHubClientSecret || '').trim();
+        if (hubId && hubSecret) {
+            ctx.sendLog(`✅ 네이버 API HUB 키 저장됨 (Client ID ${hubId.length}자, Secret ${hubSecret.length}자)`);
+        }
+
         if (nextConfig.dailyPostLimit !== undefined) {
             setDailyLimit(nextConfig.dailyPostLimit);
         }

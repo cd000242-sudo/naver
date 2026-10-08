@@ -82,6 +82,22 @@ describe('secret value normalization', () => {
     expect(config.geminiApiKeys).toEqual(['AIzaCleanKey', '']);
   });
 
+  // [2026-10-09] The API HUB secret goes into an HTTP header like the legacy one, but it was not in the list:
+  // a masked display value could overwrite the real key on save and crash fetch on use.
+  it('keeps the previous real API HUB secret when a masked value would overwrite it', () => {
+    const { config } = normalizeSecretConfig(
+      { naverHubClientSecret: '••••••' },
+      { naverHubClientSecret: 'hub-real-secret' },
+    );
+    expect(config.naverHubClientSecret).toBe('hub-real-secret');
+  });
+
+  it('drops a masked API HUB secret to empty when no clean value is recoverable', () => {
+    const { config, changed } = normalizeSecretConfig({ naverHubClientSecret: 'hub••••tail' });
+    expect(changed).toBe(true);
+    expect(config.naverHubClientSecret).toBe('');
+  });
+
   it('leaves a clean secret untouched (no false-positive drop)', () => {
     const { config, changed } = normalizeSecretConfig({ openaiApiKey: 'sk-live-real-key' });
     expect(changed).toBe(false);
