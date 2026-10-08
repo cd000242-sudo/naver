@@ -65,5 +65,7 @@
 //   신규 렌더러 의존성 ldbDestinationSelection.ts를 런타임 목록에 포함하고,
 //   검토한 브리지·계정 선택·렌더러 배선과 버전 변경을 지문에 반영했다.
 //   발행 증거를 재사용하거나 품질 게이트를 활성화하는 변경은 아니다.
+// [2026-10-08] v2.11.321 — 전용 다운로드 폴더의 실제 이미지 파일을 검증해 수신하고
+//   손상된 앱 이미지 복사본을 원자적으로 복구한다. 관련 이미지 수신 모듈을 지문 목록에 포함했다.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  '19d6a950ab9820adadc39dc7f378d913f23d6c0076370ae15881acfe2a8d0494' as const;
+  '474a483504b0ddbfadce0a8492533a89515992f1c92803eba2300bbe67ac8bbc' as const;
