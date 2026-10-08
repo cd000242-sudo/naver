@@ -3,9 +3,10 @@
  *
  * 전수 분석 결과 확정된 "멀쩡한 글을 죽이던" 3개 축:
  *  1) 사진모드: 사진 1장 추론 실패 = 글 전체 중단 (per-task catch 없음)
- *  2) 발행: 이미지 부분 삽입 실패 = 배치 전체 throw = 발행 중단
+ *  2) 발행: 실제 요청 이미지 삽입 실패는 v2.11.327부터 부분 실패도 차단한다.
+ *     실행 회귀는 nestedEditorPublishAcceptance / imageInsertionFailureRecovery 참조.
  *  3) 에이전트: bad_json/empty_output/timeout 1회로 즉시 종결 (재시도 0)
- * 완화 원칙: 경고+계속, 임계(과반 실패/전량 실패) 미달 시에만 중단.
+ * 사진 추론의 부분 실패 허용과 에이전트의 일시 오류 재시도 정책은 유지한다.
  */
 import { describe, expect, it } from 'vitest';
 import * as fs from 'fs';
@@ -26,16 +27,6 @@ describe('1) 사진모드 — 부분 실패 허용', () => {
   it('과반 실패(성공 < max(2, 50%))일 때만 중단한다', () => {
     expect(code).toMatch(/Math\.max\(2, Math\.ceil\(images\.length \* 0\.5\)\)/);
     expect(code).toMatch(/enriched\.length < requiredSuccesses/);
-  });
-});
-
-describe('2) 발행 — 이미지 부분 삽입 실패 허용', () => {
-  it('전량 실패일 때만 IMAGE_INSERTION_FAILED를 던진다', () => {
-    const code = read('automation/imageHelpers.ts');
-    expect(code).toMatch(/failures\.length > 0 && failures\.length >= images\.length/);
-    expect(code).toMatch(/나머지로 발행을 계속합니다/);
-    // 부분 실패 무조건 throw 패턴이 부활하면 안 된다.
-    expect(code).not.toMatch(/if \(failures\.length > 0\) \{\s*\n\s*throw new Error\(`IMAGE_INSERTION_FAILED/);
   });
 });
 
