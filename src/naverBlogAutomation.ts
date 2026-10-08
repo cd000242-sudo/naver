@@ -2032,7 +2032,7 @@ export class NaverBlogAutomation {
     this.log('🔄 메인 프레임으로 전환 중...');
 
     // 현재 페이지 URL 확인
-    let currentUrl = page.url();
+    const currentUrl = page.url();
     this.log(`   현재 페이지 URL: ${currentUrl}`);
 
     if (isBlogWriteLoginRedirect(currentUrl)) {
@@ -2058,42 +2058,22 @@ export class NaverBlogAutomation {
     this.ensureNotCancelled();
     if (!frame) {
     // ✅ [2026-03-24 FIX] 블로그 글쓰기 페이지 검증 강화 — URL 패턴 + DOM 기반
-    let frameSwitchSurface = resolveBlogWriteFrameSwitchSurface(currentUrl);
-    let isOnEditorByUrl = frameSwitchSurface.isEditorSurface;
-    let isOnBlogDomain = frameSwitchSurface.isBlogDomainSurface;
+    const frameSwitchSurface = resolveBlogWriteFrameSwitchSurface(currentUrl);
+    const isOnEditorByUrl = frameSwitchSurface.isEditorSurface;
+    const isOnBlogDomain = frameSwitchSurface.isBlogDomainSurface;
 
+    // [2026-10-08 사장님 "10번 다시 열고 20회 재실행하면 봇 감지"] One post = one editor entry (navigateToBlogWrite).
+    //   This step runs after that entry and on every frame miss, so it never navigates or reloads again.
     if (frameSwitchSurface.shouldRetryNavigation) {
-      // 완전히 다른 도메인(www.naver.com 등)에 있는 경우 → 자동 재이동
       this.log(`   ⚠️ 에디터가 아닌 페이지에 있습니다: ${currentUrl}`);
-      this.log(`   🔄 블로그 글쓰기 페이지로 재이동 시도...`);
-      try {
-        // ✅ [v2.10.67] 30000 → 60000ms (사용자 보고: Navigation timeout)
-        await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
-          waitUntil: 'domcontentloaded',
-          timeout: NAVER_TIMEOUTS.PAGE_LOAD
-        });
-        await this.delay(3000);
-        currentUrl = page.url();
-        this.log(`   재이동 후 URL: ${currentUrl}`);
-        frameSwitchSurface = resolveBlogWriteFrameSwitchSurface(currentUrl);
-        isOnEditorByUrl = frameSwitchSurface.isEditorSurface;
-        isOnBlogDomain = frameSwitchSurface.isBlogDomainSurface;
-      } catch (retryErr) {
-        // 재이동도 실패하면 에러
-      }
-
-      // 재이동 후에도 에디터가 아니면 에러
-      const stillNotEditor = frameSwitchSurface.shouldRetryNavigation;
-      if (stillNotEditor) {
-        throw new Error(
-          `메인 프레임을 찾을 수 없습니다.\n` +
-          `페이지 URL: ${currentUrl}\n` +
-          `가능한 원인:\n` +
-          `1. 블로그 글쓰기 페이지로 이동하지 못했습니다.\n` +
-          `2. 네이버 메인 페이지로 리다이렉트되었습니다.\n` +
-          `해결 방법: 블로그 글쓰기 페이지로 이동한 후 다시 시도해주세요.`
-        );
-      }
+      throw new Error(
+        `메인 프레임을 찾을 수 없습니다.\n` +
+        `페이지 URL: ${currentUrl}\n` +
+        `가능한 원인:\n` +
+        `1. 블로그 글쓰기 페이지로 이동하지 못했습니다.\n` +
+        `2. 네이버 메인 페이지로 리다이렉트되었습니다.\n` +
+        `해결 방법: 블로그 글쓰기 페이지로 이동한 후 다시 시도해주세요.`
+      );
     } else if (isOnBlogDomain && !isOnEditorByUrl) {
       // ✅ [v2.7.41] redirect 체인 + 스피너 안착 폴링 — "글을 불러오고 있습니다..." 무한로딩 차단
       //   기존: 1회 DOM 검사 → 없으면 GoBlogWrite로 단순 재이동(3초만 대기)
@@ -2119,32 +2099,7 @@ export class NaverBlogAutomation {
           return /글을 불러오고 있습니다|불러오는 중/.test(t);
         }).catch(() => false);
         this.log(`   ⚠️ 블로그 도메인이지만 에디터 프레임 안착 실패 (스피너 정체: ${isStuckOnSpinner})`);
-        this.log(`   🔄 블로그 글쓰기 페이지로 reload + 재이동...`);
-        try {
-          // 1차: reload (cookies 유지 + redirect 체인 다시 시작)
-          // ✅ [v2.10.67] 30000 → 60000ms (사용자 보고: Navigation timeout)
-          await page.reload({ waitUntil: 'domcontentloaded', timeout: NAVER_TIMEOUTS.PAGE_RELOAD }).catch(() => {});
-          await this.delay(2000);
-          // 2차: 그래도 #mainFrame 없으면 직접 goto
-          const stillNoFrame = await page.evaluate(() => {
-            return !document.querySelector('#mainFrame, iframe[name="mainFrame"]');
-          }).catch(() => true);
-          if (stillNoFrame) {
-            await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
-              waitUntil: 'domcontentloaded',
-              timeout: NAVER_TIMEOUTS.PAGE_LOAD
-            });
-            // ✅ delay → waitForFunction으로 명시 안착 대기
-            await page.waitForFunction(
-              () => !!document.querySelector('#mainFrame, iframe[name="mainFrame"]'),
-              { timeout: 20000, polling: 500 }
-            ).catch(() => {});
-          }
-          currentUrl = page.url();
-          this.log(`   재이동 후 URL: ${currentUrl}`);
-        } catch (retryErr) {
-          this.log(`   ⚠️ 재이동 실패: ${(retryErr as Error).message}`);
-        }
+        this.log('   ⚠️ 글쓰기 화면을 다시 열지 않습니다(글 1편 = 진입 1회) — 아래 프레임 확인에서 멈춥니다.');
       }
     }
 
@@ -2641,7 +2596,7 @@ export class NaverBlogAutomation {
   }
 
   async inputTitle(title: string): Promise<string> {
-    let frame = (await this.getAttachedFrame());
+    const frame = (await this.getAttachedFrame());
     const page = this.ensurePage();
     this.ensureNotCancelled();
     // 초안 복구 팝업은 에디터 진입 후 늦게 나타날 수 있으므로 타이핑 직전에 재확인한다.
@@ -2656,25 +2611,12 @@ export class NaverBlogAutomation {
     }
 
     // ✅ 타임아웃 설정 (60초)
-    let titleElement = await findEditorTitleInputElement(frame, page, 60000, (message) => this.log(message));
+    const titleElement = await findEditorTitleInputElement(frame, page, 60000, (message) => this.log(message));
+    // [2026-10-08] No re-landing here: the editor was entered once (navigateToBlogWrite) and checked for readiness.
+    //   Re-opening GoBlogWrite mid-post was one of the repeated editor loads per post.
     if (!titleElement) {
       const snapshot = await collectEditorReadinessSnapshot(frame, page).catch(() => null);
-      if (snapshot && shouldRetryEditorReadiness(snapshot)) {
-        this.log('   ⚠️ 에디터 프레임은 열렸지만 내부 문서가 비어 있습니다. 글쓰기 페이지를 재안착합니다...');
-        try {
-          await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
-            waitUntil: 'domcontentloaded',
-            timeout: NAVER_TIMEOUTS.PAGE_LOAD
-          });
-          await this.delay(3000);
-          await this.switchToMainFrame();
-          const recoveredFrame = await this.getAttachedFrame();
-          frame = recoveredFrame;
-          titleElement = await findEditorTitleInputElement(recoveredFrame, page, 45000, (message) => this.log(message));
-        } catch (recoveryError) {
-          this.log(`   ⚠️ 에디터 재안착 실패: ${(recoveryError as Error).message}`);
-        }
-      }
+      if (snapshot && shouldRetryEditorReadiness(snapshot)) this.log('   ⚠️ 에디터 프레임은 열렸지만 내부 문서가 비어 있습니다 — 다시 열지 않고 멈춥니다.');
     }
     if (!titleElement) {
       const diagnostics = await collectEditorTitleDiagnostics(await this.getAttachedFrame(), page);
@@ -4072,7 +4014,7 @@ export class NaverBlogAutomation {
         }
 
         // ✅ [2026-03-21 FIX] 예약발행 재시도 (최대 3회, 임시저장 폴백 제거)
-        const MAX_SCHEDULE_RETRIES = 3;
+        const MAX_SCHEDULE_RETRIES = 2;
         let scheduleSuccess = false;
         let lastScheduleError: Error | null = null;
 
@@ -4130,7 +4072,7 @@ export class NaverBlogAutomation {
           throw new Error(`예약발행 ${MAX_SCHEDULE_RETRIES}회 시도 모두 실패: ${lastScheduleError?.message || '알 수 없는 오류'}`);
         }
       }
-    }, 3, '블로그 발행');
+    }, 2, '블로그 발행');
   }
 
   private async applyPlainContent(resolved: ResolvedRunOptions): Promise<void> {
