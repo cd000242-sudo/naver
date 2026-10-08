@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-10-08T09:25:21.205Z",
+  "publishedAt": "2026-10-08T09:47:59.446Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
-    "candidates": 156,
+    "candidates": 174,
     "niche": 0,
-    "preemption": 13,
+    "preemption": 15,
     "pending": 0
   },
   "freeSample": {
@@ -227,6 +227,72 @@
   ],
   "observations": [
     {
+      "keyword": "주우크라 대사 본국",
+      "issue": "주우크라 대사 본국",
+      "topic": "주우크라 대사 본국",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 2,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 1,
+      "reasons": [
+        "문서수 2",
+        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 1건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "외교부가 북한군 포로 공개에 항의해 주우크라이나 대사를 본국 소환했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "주우크라 대사 본국 소환 이유, 북한군 포로 공개 항의 배경",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "주우크라 대사 본국 소환 소식에 다들 북한군 포로부터 찾더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
       "keyword": "리퀴드 ai d1-3b",
       "issue": "리퀴드 AI",
       "topic": "리퀴드 AI",
@@ -260,15 +326,20 @@
         }
       ],
       "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 모델 d1-3B를 출시해서",
+        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 모델 d1-3B를 출시했다.",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
       "adsenseFit": null,
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
+        "seo": {
+          "text": "리퀴드 ai d1-3b 10배 큰 모델 제친 멀티모달 성능",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
         "home": {
-          "text": "리퀴드 AI d1-3b가 10배 큰 모델 제쳤다는데 여기서 갈리더라고요",
+          "text": "리퀴드 ai d1-3b 덩치 10배 모델 제쳤다는데 많이들 놓치는 부분",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -279,7 +350,954 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3b 사양",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 37,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 37",
+        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 의사결정 모델 d1-3B를 출시했다.",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "d1-3b 사양 10배 큰 체급 제친 멀티모달 모델 성능",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3b 사양 봤는데 멀티모달로 10배 체급을 제친 게 의외네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 143,
+      "kinTop": [
+        {
+          "title": "배트필드 하드라인 사양 질문",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10102&docId=227421491&answerNo=1",
+          "views": 569,
+          "answers": 1
+        },
+        {
+          "title": "오버워치 할려는데 사양좀봐주세요",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20313&docId=257498220&answerNo=1",
+          "views": 217,
+          "answers": 4
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3b 벤치마크",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 34,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 34",
+        "선점 후보 — 경쟁 문서 34건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 의사결정 모델 d1-3B를 출시했다.",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "d1-3b 벤치마크 10배 큰 모델 제친 성능 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3b 벤치마크 보면 10배 큰 모델 제친 게 생각보다 커요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 40,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3b 다운로드",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "접근 경로 확인",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 66,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 66",
+        "선점 후보 — 경쟁 문서 66건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 접근 경로 확인"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 의사결정 모델 d1-3B를 출시했다.",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "d1-3b 다운로드 10배 체급 제친 멀티모달 받는 법",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3b 다운로드 전에 리퀴드 AI가 10배 제쳤다는 근거부터 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 78,
+      "kinTop": [
+        {
+          "title": "슈스케2차지원서다운로드",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010201&docId=169612263&answerNo=3",
+          "views": 57691,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "MAI-코드-1.1",
+      "issue": "MAI-코드-1.1",
+      "topic": "MAI-코드-1.1",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 93,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 93",
+        "선점 후보 — 경쟁 문서 93건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS가 서피스 랩톱 울트라 출시에 맞춰 코딩 AI MAI-코드-1.1 플래시를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "MAI-코드-1.1 플래시 가격 4분의 1로 낮춘 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "MAI-코드-1.1 플래시 가격 4분의 1인데 많이들 놓치는 게 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "저커버그 부부의 바이오허브",
+      "issue": "저커버그 부부의 바이오허브",
+      "topic": "저커버그 부부의 바이오허브",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 106,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 106",
+        "선점 후보 — 경쟁 문서 106건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "미 정부·구글이 저커버그 부부의 바이오허브 AI 생물학 2.4조 프로젝트에 합류했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "저커버그 부부의 바이오허브 미 정부·구글 2.4조 AI 합류",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "저커버그 부부의 바이오허브 뒤에 챈 저커버그 이니셔티브가 왜 이렇게 바빠졌을까요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "저커버그 부인",
+          "searchVolume": 130,
+          "frame": "generic"
+        },
+        {
+          "keyword": "챈 저커버그 이니셔티브",
+          "searchVolume": 50,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "저커버그 부인",
+          "searchVolume": 130,
+          "documentCount": 3577,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "챈 저커버그 이니셔티브",
+          "searchVolume": 50,
+          "documentCount": 420,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "mai 코드 1.1",
+      "issue": "MAI-코드-1.1",
+      "topic": "MAI-코드-1.1",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 93,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 93",
+        "선점 후보 — 경쟁 문서 93건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS가 서피스 랩톱 울트라 출시에 맞춰 코딩 AI MAI-코드-1.1 플래시를 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "mai 코드 1.1 플래시 가격 4분의 1로 낮춘 배경",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "mai 코드 1.1 플래시 가격 4분의 1 됐는데 코파일럿이랑 뭐가 다른지",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 3,
+      "kinTop": [
+        {
+          "title": "rl크래프트 종료코드1",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=20411&docId=458352857&answerNo=1",
+          "views": 294,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3b 성능",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 117,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 117",
+        "선점 후보 — 경쟁 문서 117건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 의사결정 모델 d1-3B를 출시했다.",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "d1-3b 성능, 10배 큰 모델 제친 멀티모달 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3b 성능이 10배 큰 모델 제쳤다는데 멀티모달에서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 37,
+      "kinTop": [
+        {
+          "title": "컴퓨터 성능대비 효율문제.. 부탁드립니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10103&docId=219249544&answerNo=0",
+          "views": 8,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "CPTPP 가입 보류",
+      "issue": "CPTPP 가입 보류",
+      "topic": "CPTPP 가입 보류",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 242,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 242",
+        "선점 후보 — 경쟁 문서 242건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이 대통령이 농어민 신뢰 회복 우선으로 연내 가입신청 보류를 지시했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "CPTPP 가입 보류 이유와 1년 지연 시 6조 손실 쟁점",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "CPTPP 가입 보류되고 나서 CPTPP 가입국 목록 다시 들여다봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "CPTPP 뜻",
+          "searchVolume": 7710,
+          "frame": "generic"
+        },
+        {
+          "keyword": "CPTPP 가입국",
+          "searchVolume": 280,
+          "frame": "generic"
+        },
+        {
+          "keyword": "CPTPP 회원국",
+          "searchVolume": 140,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "CPTPP 뜻",
+          "searchVolume": 7710,
+          "documentCount": 1637,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "CPTPP 가입국",
+          "searchVolume": 280,
+          "documentCount": 537,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "CPTPP 회원국",
+          "searchVolume": 140,
+          "documentCount": 3097,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "CPTPP 한국 가입",
+          "searchVolume": 130,
+          "documentCount": 6310,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이재명 이집트 CEPA",
+      "issue": "이재명 이집트 CEPA",
+      "topic": "이재명 이집트 CEPA",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 191,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 191",
+        "선점 후보 — 경쟁 문서 191건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이 대통령이 알시시 대통령과 회담해 한-이집트 CEPA 협상 개시와 관계 격상을 밝혔다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이재명 이집트 CEPA 협상 개시와 전략적 동반자 격상 내용",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이재명 이집트 CEPA 협상 개시에서 방산 협력이 왜 자꾸 나오는지 찾아봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 18,
+      "kinTop": [
+        {
+          "title": "이재명보단 윤석열???",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=408281624&answerNo=10",
+          "views": 1559,
+          "answers": 12
+        },
+        {
+          "title": "이재명 대통령되면",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=413599949&answerNo=6",
+          "views": 1413,
+          "answers": 7
+        },
+        {
+          "title": "이재명,민주당은 일본에만 엄격한가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60501&docId=399896481&answerNo=6",
+          "views": 1291,
+          "answers": 7
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3b 사용법",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "실제 활용 궁금",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 196,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 196",
+        "선점 후보 — 경쟁 문서 196건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 실제 활용 궁금"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 의사결정 모델 d1-3B를 출시했다.",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "d1-3b 사용법 리퀴드 AI 멀티모달 모델 실행 순서",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3b 사용법 찾다가 10배 큰 모델 제쳤다는 말부터 걸리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 327,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "리퀴드 ai 멀티모달",
+      "issue": "리퀴드 AI",
+      "topic": "리퀴드 AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 223,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 223",
+        "선점 후보 — 경쟁 문서 223건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 모델 d1-3B를 출시했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "리퀴드 ai 멀티모달 d1-3B 10배 체급 제친 모델",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "리퀴드 ai 멀티모달 d1-3B가 10배 큰 모델을 제쳤다는데 여기서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "서피스 랩톱 울트라",
+      "issue": "서피스 랩톱 울트라",
+      "topic": "서피스 랩톱 울트라",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 250,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 250",
+        "선점 후보 — 경쟁 문서 250건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "MS가 RTX 스파크 칩을 얹은 800만원대 서피스 랩톱 울트라를 애플과 경쟁하려 공개했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "서피스 랩톱 울트라 가격 800만원 맥북 프로 스펙 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "서피스 랩톱 울트라 애플보다 AI 두 배 빠르다더니 가격이 발목을 잡네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 4,
+      "kinTop": [
+        {
+          "title": "엘지 울트라pc 14U390",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10102&docId=364102432&answerNo=2",
+          "views": 114,
+          "answers": 3
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3b 모델",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 250,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 250",
+        "선점 후보 — 경쟁 문서 250건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 의사결정 모델 d1-3B를 출시했다.",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "d1-3b 모델 성능 리퀴드 AI 멀티모달 의사결정 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3b 모델이 10배 큰 체급을 제쳤다는데 생각보다 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 37,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T09:43:28.262Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -343,7 +1361,8 @@
       "monetize": null,
       "measuredAt": "2026-10-08T09:19:40.023Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "알레스 페레이라",
@@ -411,427 +1430,8 @@
       "monetize": null,
       "measuredAt": "2026-10-08T09:19:40.023Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "d1-3b 다운로드",
-      "issue": "d1-3B",
-      "topic": "d1-3B",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "접근 경로 주목",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 66,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 66",
-        "선점 후보 — 경쟁 문서 66건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 접근 경로 주목"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 모델을 제친 멀티모달 의사결정 모델 d1-3B를 출시해서",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "d1-3b 다운로드 10배 큰 모델 제친 멀티모달 받기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "d1-3b 다운로드 전에 10배 큰 모델을 어떻게 제쳤는지 궁금하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 78,
-      "kinTop": [
-        {
-          "title": "슈스케2차지원서다운로드",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010201&docId=169612263&answerNo=3",
-          "views": 57689,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "MAI-코드-1.1",
-      "issue": "MAI-코드-1.1",
-      "topic": "MAI-코드-1.1",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 93,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 93",
-        "선점 후보 — 경쟁 문서 93건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MS가 서피스 랩톱 울트라 출시와 함께 온디바이스 최적화 MAI-코드-1.1을 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "MAI-코드-1.1 플래시 가격 4분의 1로 낮췄다",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "MAI-코드-1.1 플래시 가격이 4분의 1이라길래 뭐가 빠진 건지 봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "저커버그 부부의 바이오허브",
-      "issue": "저커버그 부부의 바이오허브",
-      "topic": "저커버그 부부의 바이오허브",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 106,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 106",
-        "선점 후보 — 경쟁 문서 106건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "미 정부·구글이 저커버그 부부의 바이오허브에 2.4조 AI 생물학 프로젝트로 합류해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "저커버그 부부의 바이오허브, 구글·미 정부 2.4조 AI 생물학 데이터",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "저커버그 부부의 바이오허브가 왜 질병을 미리 잡겠다는 건지 찾아봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "mai 코드 1.1",
-      "issue": "MAI-코드-1.1",
-      "topic": "MAI-코드-1.1",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 93,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 93",
-        "선점 후보 — 경쟁 문서 93건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MS가 서피스 랩톱 울트라 출시와 함께 온디바이스 최적화 MAI-코드-1.1을 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "mai 코드 1.1 플래시 가격 4분의 1로 낮춘 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "mai 코드 1.1 플래시 가격이 4분의 1로 내려간 이유가 의외네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": [
-        {
-          "title": "rl크래프트 종료코드1",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20411&docId=458352857&answerNo=1",
-          "views": 293,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "d1-3b 성능",
-      "issue": "d1-3B",
-      "topic": "d1-3B",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 117,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 117",
-        "선점 후보 — 경쟁 문서 117건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 모델을 제친 멀티모달 의사결정 모델 d1-3B를 출시해서",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "d1-3b 성능 10배 큰 체급 제친 멀티모달 모델",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "d1-3b 성능이 10배 체급 모델을 제쳤다는 게 의외로 이유가 있네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 37,
-      "kinTop": [
-        {
-          "title": "컴퓨터 성능대비 효율문제.. 부탁드립니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10103&docId=219249544&answerNo=0",
-          "views": 7,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "이재명 이집트 CEPA",
-      "issue": "이재명 이집트 CEPA",
-      "topic": "이재명 이집트 CEPA",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 188,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 188",
-        "선점 후보 — 경쟁 문서 188건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이재명 대통령이 한·이집트 전략적 동반자 격상과 CEPA 협상 개시를 밝혀서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이재명 이집트 CEPA 협상 개시, 전략적 동반자 격상 핵심",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이재명 이집트 CEPA 협상 개시됐는데 전략적 동반자 격상 많이들 놓치더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 18,
-      "kinTop": [
-        {
-          "title": "이재명보단 윤석열???",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=408281624&answerNo=10",
-          "views": 1558,
-          "answers": 12
-        },
-        {
-          "title": "이재명 대통령되면",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=413599949&answerNo=6",
-          "views": 1412,
-          "answers": 7
-        },
-        {
-          "title": "이재명,민주당은 일본에만 엄격한가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60501&docId=399896481&answerNo=6",
-          "views": 1290,
-          "answers": 7
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "d1-3b 활용",
@@ -906,73 +1506,8 @@
       "monetize": null,
       "measuredAt": "2026-10-08T09:19:40.023Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "d1-3b 사용법",
-      "issue": "d1-3B",
-      "topic": "d1-3B",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "모델 활용 방법 궁금",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 196,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 196",
-        "선점 후보 — 경쟁 문서 196건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 모델 활용 방법 궁금"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 모델을 제친 멀티모달 의사결정 모델 d1-3B를 출시해서",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "d1-3b 사용법 10배 큰 모델 제친 멀티모달 세팅",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "d1-3b 사용법 찾다 보면 멀티모달 쪽에서 많이들 헷갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 327,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "CPTPP 가입 말라",
@@ -1062,76 +1597,8 @@
       "monetize": null,
       "measuredAt": "2026-10-08T09:19:40.023Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "서피스 랩톱 울트라",
-      "issue": "서피스 랩톱 울트라",
-      "topic": "서피스 랩톱 울트라",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 249,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 249",
-        "선점 후보 — 경쟁 문서 249건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MS가 엔비디아 RTX 스파크를 탑재한 서피스 랩톱 울트라를 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "서피스 랩톱 울트라 가격 800만원, 맥북 프로와 스펙 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "서피스 랩톱 울트라 800만원인데 맥북 프로랑 붙여보니 여기서 갈리네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": [
-        {
-          "title": "엘지 울트라pc 14U390",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10102&docId=364102432&answerNo=2",
-          "views": 113,
-          "answers": 3
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "앤트로픽 엔스로픽 차이",
@@ -4259,1134 +4726,24 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "흑상어 수명",
-      "issue": "흑상어",
-      "topic": "흑상어",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 23,
-      "documentCountMeasured": true,
-      "searchVolume": 10,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 10",
-        "문서수 23",
-        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "흑상어 수명 3m 암컷 부캉이가 멸종위기인 이유까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "흑상어 수명 찾다가 흑상어 크기 보니까 생각보다 커서 자꾸 다시 보게 되더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "흑상어 크기",
-          "searchVolume": null,
-          "frame": "generic"
-        },
-        {
-          "keyword": "흑상어 특징",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "파판 흑상어",
-      "issue": "흑상어",
-      "topic": "흑상어",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 1,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 1",
-        "선점 후보 — 경쟁 문서 1건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "파판 흑상어 부캉이 정체, 3m 암컷 멸종위기종 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "파판 흑상어로 불리던 부캉이 정체가 생각보다 많이 달랐더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "흑상어 멸종위기 이유",
-      "issue": "흑상어",
-      "topic": "흑상어",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 34,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 34",
-        "선점 후보 — 경쟁 문서 34건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "흑상어 멸종위기 이유 부캉이 3m 암컷 정체 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "흑상어 멸종위기 이유 찾아보다 흑상어 크기 숫자 앞에서 한참 멈췄네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "흑상어 크기",
-          "searchVolume": null,
-          "frame": "generic"
-        },
-        {
-          "keyword": "흑상어 특징",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "흑상어 어뢰",
-      "issue": "흑상어",
-      "topic": "흑상어",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 46,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 46",
-        "선점 후보 — 경쟁 문서 46건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": null,
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 34,
-      "kinTop": [
-        {
-          "title": "흑상어 어뢰",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60401&docId=188815263&answerNo=3",
-          "views": 547,
-          "answers": 3
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "흑상어 영어로",
-      "issue": "흑상어",
-      "topic": "흑상어",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 75,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 75",
-        "선점 후보 — 경쟁 문서 75건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "흑상어 영어로 뜻과 부캉이 멸종위기종 3m 암컷 정체",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "흑상어 영어로 뭔지 찾다가 실제 크기 보고 화면을 다시 봤더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "흑상어 뜻",
-          "searchVolume": 10,
-          "frame": "generic"
-        },
-        {
-          "keyword": "흑상어 크기",
-          "searchVolume": null,
-          "frame": "generic"
-        },
-        {
-          "keyword": "흑상어 영어",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "흑상어 뜻",
-          "searchVolume": 10,
-          "documentCount": 304,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 6,
-      "kinTop": [
-        {
-          "title": "영어로 좀 바꾸어주세요~~~",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=110803&docId=66150793&answerNo=2",
-          "views": 496,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "흑상어 무태상어 차이",
-      "issue": "흑상어",
-      "topic": "흑상어",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 79,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 79",
-        "선점 후보 — 경쟁 문서 79건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "흑상어 무태상어 차이, 부캉이 3m 암컷으로 구별",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "흑상어 무태상어 차이 크기부터 다르다길래 둘 나란히 놓고 봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "흑상어 무태상어",
-          "searchVolume": 80,
-          "frame": "generic"
-        },
-        {
-          "keyword": "흑상어 크기",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "흑상어 무태상어",
-          "searchVolume": 80,
-          "documentCount": 576,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "흑상어 멸종위기",
-      "issue": "흑상어",
-      "topic": "흑상어",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 76,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 76",
-        "선점 후보 — 경쟁 문서 76건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "흑상어 멸종위기 부캉이 정체 몸길이 3m 암컷 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "흑상어 멸종위기라는데 크기가 생각보다 커서 바다에서 마주치면 어쩌나 싶더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "흑상어 크기",
-          "searchVolume": null,
-          "frame": "generic"
-        },
-        {
-          "keyword": "흑상어 특징",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": [
-        {
-          "title": "ㄱ~ㅎ까지 천연기념물,멸종위기종 동,식물 알려주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=90104&docId=472167963&answerNo=1",
-          "views": 1915,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "흑상어 서식지",
-      "issue": "흑상어",
-      "topic": "흑상어",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 77,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 77",
-        "선점 후보 — 경쟁 문서 77건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "흑상어 서식지 부산 앞바다 3m 암컷 부캉이 발견 지점",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "흑상어 서식지 찾다 흑상어 크기 보고 왜 부산 앞바다인지 알겠더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "흑상어 크기",
-          "searchVolume": null,
-          "frame": "generic"
-        },
-        {
-          "keyword": "흑상어 특징",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "흑상어 박성배",
-      "issue": "흑상어",
-      "topic": "흑상어",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 93,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 93",
-        "선점 후보 — 경쟁 문서 93건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "흑상어 박성배 부캉이 정체 3m 암컷 멸종위기 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "흑상어 박성배 영상 보다가 흑상어 크기 찾아봤는데 생각보다 커서 다시 봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "흑상어 크기",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "암컷 흑상어",
-      "issue": "흑상어",
-      "topic": "흑상어",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 106,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 2,
-      "freshFrontalCount": 2,
-      "reasons": [
-        "문서수 106",
-        "선점 후보 — 경쟁 문서 106건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 2건 (최근 2건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "암컷 흑상어 3m 부캉이 정체 멸종위기종까지 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "암컷 흑상어 부캉이 3m인데 멸종위기라길래 다시 찾아봤네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이유진 차경은 임신과",
-      "issue": "이유진 차경은 임신과",
-      "topic": "이유진 차경은 임신과",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 170,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 170",
-        "선점 후보 — 경쟁 문서 170건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이유진·차경은이 11월 결혼을 앞두고 임신 소식을 알렸다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이유진 차경은 임신과 11월 14일 결혼 겹경사 소식",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이유진 차경은 임신에 11월 결혼까지 겹경사 소식 생각보다 빨랐네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "코히어 노스",
-      "issue": "코히어",
-      "topic": "코히어",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 215,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 215",
-        "선점 후보 — 경쟁 문서 215건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "코히어가 에이전트 비용·보안 통제 플랫폼 '노스 2'를 출시했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "코히어 노스 2, LG CNS가 도입한 에이전틱 AI 플랫폼 정체",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "코히어 노스 2를 LG CNS가 먼저 들인 이유가 생각보다 단순하지 않더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "흑상어 특징",
-      "issue": "흑상어",
-      "topic": "흑상어",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 274,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "declining",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 274",
-        "선점 후보 — 경쟁 문서 274건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "흑상어 특징 3m 암컷과 멸종위기종으로 불리는 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "흑상어 특징 찾다 보니 수명이 궁금해져서 결국 밤새 자료만 뒤졌네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "흑상어 수명",
-          "searchVolume": 10,
-          "frame": "generic"
-        },
-        {
-          "keyword": "흑상어 크기",
-          "searchVolume": null,
-          "frame": "generic"
-        },
-        {
-          "keyword": "흑상어 먹이",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "흑상어 수명",
-          "searchVolume": 10,
-          "documentCount": 23,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": [
-        {
-          "title": "심해 생물의 특징이 무엇인가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=111603&docId=339756777&answerNo=1",
-          "views": 2334,
-          "answers": 3
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "화웨이 레드미 차이",
-      "issue": "화웨이",
-      "topic": "화웨이",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 295,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 295",
-        "선점 후보 — 경쟁 문서 295건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "화웨이가 퀄컴과 5G 특허 상호사용 계약으로 25년 만의 특허료 역전을 앞뒀다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "화웨이 레드미 차이 성능과 가격 어디서 갈리나",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "화웨이 레드미 차이 샤오미랑 같은 줄 알았다가 헷갈리는 분들 많더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "화웨이 샤오미 차이",
-          "searchVolume": 10,
-          "frame": "compare"
-        },
-        {
-          "keyword": "화웨이 샤오미 비교",
-          "searchVolume": null,
-          "frame": "compare"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "화웨이 샤오미 차이",
-          "searchVolume": 10,
-          "documentCount": 9462,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-06T09:27:23.377Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "CPTPP 가입 말라",
+      "issue": "CPTPP 가입 보류",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "이재명 대통령이 연내 CPTPP 가입 신청을 하지 말라고 지시해서",
+      "why": "이 대통령이 농어민 신뢰 회복 우선으로 연내 가입신청 보류를 지시했다.",
       "headlines": [
+        {
+          "title": "이 대통령, CPTPP 연내 가입신청 보류 지시",
+          "press": "ohmynews.com",
+          "publishedAt": "2026-10-08T08:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/047/0002531640?sid=100"
+        },
         {
           "title": "李 “CPTPP 연내 가입신청 말라…농어민과 충분히 대화”",
           "press": "donga.com",
@@ -5394,118 +4751,127 @@
           "link": "https://n.news.naver.com/mnews/article/020/0003753732?sid=100"
         },
         {
-          "title": "李 대통령 \"연내 CPTPP 가입 신청 말라\"…지속 대화 당부",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-10-08T07:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000540627?sid=100"
-        },
-        {
-          "title": "李대통령, 연내 CPTPP 가입 신청 말라 지시…\"신뢰 회복 우선\"",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-08T07:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005424000?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "유승호 임세주 결별소식",
-      "issueType": "entertainment",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "유승호와 임세주가 6년 열애설 당일 이미 결별했다고 확인해서",
-      "headlines": [
-        {
-          "title": "유승호·임세주, ‘6년 열애설’ 당일 “이미 결별” 확인",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-10-08T07:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002707115?sid=103"
-        },
-        {
-          "title": "유승호·임세주, 6년 열애→결별 초고속 인정…앞으로 행보는? [종합]",
-          "press": "enews.imbc.com",
-          "publishedAt": "2026-10-08T08:26:00.000Z",
-          "link": "https://m.entertain.naver.com/article/408/0000323801"
-        },
-        {
-          "title": "유승호·임세주, 6년 열애설 터졌는데…\"이미 결별\"",
+          "title": "4번째 CPTPP 가입 시도, 또 급제동…1년 밀리면 6조 '기회 손실'",
           "press": "hankyung.com",
-          "publishedAt": "2026-10-08T04:40:00.000Z",
-          "link": "https://m.entertain.naver.com/article/015/0005340520"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "새 시즌 각오",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "남자배구 7개 구단이 새 시즌 개막 앞두고 우승 다짐을 밝혀서",
-      "headlines": [
-        {
-          "title": "새 시즌 각오 밝히는 라미레즈 KB손보 감독",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-08T06:19:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/421/0009217964"
-        },
-        {
-          "title": "\"원팀·넥스트레벨·진인사대천명\"…남자배구, 새 시즌 출사표",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-08T08:55:00.000Z",
-          "link": "https://m.sports.naver.com/volleyball/article/003/0014242841"
-        },
-        {
-          "title": "'신인감독2' 김연경 \"화내고 고성 불편해하는 분도, 시즌2도 본모습 나와...",
-          "press": "joynews24.com",
-          "publishedAt": "2026-10-08T06:34:00.000Z",
-          "link": "http://www.joynews24.com/view/2013223"
+          "publishedAt": "2026-10-08T08:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340658?sid=101"
         }
       ],
       "concentrated": [
         {
-          "keyword": "새시즌",
+          "keyword": "cptpp",
           "searchVolume": null,
-          "origin": "related"
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "cptpp 가입",
+          "searchVolume": null,
+          "origin": "autocomplete"
         }
       ],
       "nextWave": [],
       "rowCount": 0
     },
     {
-      "issue": "코스피 6600선 하락",
+      "issue": "한기성 전 군단장",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "외인·기관의 대량 매도에 코스피가 사흘째 밀려 6600선까지 하락해서",
+      "why": "한기성 전 1군단장이 국감서 '빈총경계' 논란에 대비태세 문제없다고 해명했다.",
       "headlines": [
         {
-          "title": "코스피 사흘째 하락... 6600선까지 밀려",
+          "title": "국감장 나온 '빈총경계' 前1군단장 \"대비태세 문제 없었다\" 주장",
           "press": "yna.co.kr",
-          "publishedAt": "2026-10-08T06:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016366481?sid=101"
+          "publishedAt": "2026-10-08T08:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016366860?sid=100"
         },
         {
-          "title": "코스피, 외인·기관 3.6조 '팔자'에 2.6% 급락…6600선",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-08T06:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005340582?sid=101"
+          "title": "한기성 前1군단장 '빈총경계' 국감서 해명 \"탄통은 결합, 실탄 한 발만 ...",
+          "press": "imaeil.com",
+          "publishedAt": "2026-10-08T09:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/088/0001033128?sid=100"
         },
         {
-          "title": "코스피, 3주 만에 6600선 후퇴…삼전닉스 동반하락 [마켓시그널]",
-          "press": "sedaily.com",
-          "publishedAt": "2026-10-08T07:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004669507?sid=101"
+          "title": "국감장 나온 한기성 前1군단장 “빈총경계 용어는 부적절..대비태세 문...",
+          "press": "biz.heraldcorp.com",
+          "publishedAt": "2026-10-08T09:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/016/0002707174?sid=100"
         }
       ],
       "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "대한축구협회",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "FIFA가 K-축구혁신위 활동 정지를 요청하고 쿠팡플레이 특혜 의혹이 제기됐다.",
+      "headlines": [
+        {
+          "title": "[단독]FIFA, K-축구혁신위 활동 사실상 일시 정지 요청→KFA, 회의록 등 ...",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-10-08T04:07:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/076/0004454295"
+        },
+        {
+          "title": "최휘영 \"K-컬처 저력 기초예술서 나와…투자 늘려\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-07T02:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014237985?sid=103"
+        },
+        {
+          "title": "이경규, AG축구팀 軍 발언에 일침…\"유럽서 달려온 '병필' 이영준을 봐라...",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-08T00:41:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/421/0009216531"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "대한축구협회 회장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대한축구협회 예매",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대한축구협회 아마추어",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대한축구협회 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대한축구협회 부회장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대한축구협회 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대한축구협회 조직도",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대한축구협회 홈페이지",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
       "nextWave": [],
       "rowCount": 0
     },
@@ -5515,7 +4881,7 @@
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "이재명 대통령이 한·이집트 전략적 동반자 격상과 CEPA 협상 개시를 밝혀서",
+      "why": "이 대통령이 알시시 대통령과 회담해 한-이집트 CEPA 협상 개시와 관계 격상을 밝혔다.",
       "headlines": [
         {
           "title": "李대통령 \"韓-이집트, '전략적 동반자' 격상…CEPA 협상 개시\"",
@@ -5541,226 +4907,244 @@
       "rowCount": 0
     },
     {
-      "issue": "신인감독 김연경 결정적",
+      "issue": "V리그 남자부 미디어데이",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "2026-2027 V리그 남자부 미디어데이에서 감독·선수들이 신경전을 벌였다.",
+      "headlines": [
+        {
+          "title": "기념촬영하는 V리그 남자부 미디어데이 감독",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T07:25:00.000Z",
+          "link": "https://m.sports.naver.com/volleyball/article/001/0016366634"
+        },
+        {
+          "title": "2026-2027 시즌 V-리그 남자부 미디어데이, '우승을 향한 여정'",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-08T07:27:00.000Z",
+          "link": "https://m.sports.naver.com/volleyball/article/421/0009218184"
+        },
+        {
+          "title": "“소속팀에선 적이다”…V리그 남자부, 개막 전부터 불꽃 신경전",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-08T08:27:00.000Z",
+          "link": "https://m.sports.naver.com/volleyball/article/018/0006384020"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "v리그",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "주우크라 대사 본국",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "외교부가 북한군 포로 공개에 항의해 주우크라이나 대사를 본국 소환했다.",
+      "headlines": [
+        {
+          "title": "외교부 “주우크라 대사 본국 소환”…‘북한군 포로 공개’ 항의",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-10-08T08:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003556685?sid=100"
+        },
+        {
+          "title": "외교부, 주우크라 대사 본국 소환 결정…北 포로 갈등 지속",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-10-08T08:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000540683?sid=100"
+        },
+        {
+          "title": "정부, 주우크라 대사 본국 소환…北 포로 송환 공개에 항의 차원",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-10-08T08:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003687315?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "제네시스 gv90",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "제네시스가 용인 수지서 GV90 외장 16색·내장 10색과 한정판 네오룬을 전시했다.",
+      "headlines": [
+        {
+          "title": "제네시스, GV90 특별 전시…모든 색상 한 자리에",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T00:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016364816?sid=101"
+        },
+        {
+          "title": "제네시스, 수지서 GV90 특별 전시…외장 16색·내장 10색 공개",
+          "press": "zdnet.co.kr",
+          "publishedAt": "2026-10-08T05:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/092/0002440331?sid=103"
+        },
+        {
+          "title": "“내 GV90는 무슨 색?”…제네시스 수지에 16가지 컬러 ‘총집합’",
+          "press": "dailian.co.kr",
+          "publishedAt": "2026-10-08T00:24:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/119/0003140713?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "제네시스 gv90 출시일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제네시스 gv90 네오룬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제네시스 gv90 전시",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제네시스 gv90 전시장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제네시스 gv90 실내",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제네시스 gv90 내부",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "제네시스",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "GV90",
+          "searchVolume": 268200,
+          "origin": "related"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "쿠팡 개인정보 유출",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "쿠팡이 개인정보 유출 6200억대 과징금에 불복해 행정소송과 집행정지를 냈다.",
+      "headlines": [
+        {
+          "title": "쿠팡, '개인정보 유출' 6200억대 과징금 불복…행정소송 제기",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T07:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014242675?sid=102"
+        },
+        {
+          "title": "쿠팡, ‘개인정보 유출·활동기록 무단수집’ 6247억 과징금 불복 소송",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-08T08:03:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001196984?sid=102"
+        },
+        {
+          "title": "쿠팡, 개인정보유출 등 6천억대 과징금에 불복소송…집행정지도",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T09:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016366906?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "쿠팡",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김고은 액터스 하우스",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "김고은이 부산국제영화제 액터스 하우스에 참석해 '가난 밈'에 상처받았다고 밝혔다.",
+      "headlines": [
+        {
+          "title": "'액터스 하우스 김고은'",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T07:58:00.000Z",
+          "link": "https://m.entertain.naver.com/article/001/0016366736"
+        },
+        {
+          "title": "액터스 하우스 참석한 김고은",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T07:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014242608?sid=103"
+        },
+        {
+          "title": "액터스 하우스 주인장 김고은",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-08T07:34:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009218199"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김고은",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "임세주 배우",
       "issueType": "entertainment",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "신인감독 김연경이 한일전 승리를 위해 결정적 승부수를 던져서",
+      "why": "유승호와 임세주가 6년 연인이었으나 최근 결별했다고 소속사가 밝혔다.",
       "headlines": [
         {
-          "title": "한국 여자농구 새 주축... '김연경 닮은꼴' 이해란의 발견",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-10-07T23:16:00.000Z",
-          "link": "https://m.sports.naver.com/basketball/article/047/0002531534"
+          "title": "유승호 측, 배우 임세주와 6년 열애설에…“이미 헤어진 사이”",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-08T05:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001196922?sid=004"
         },
         {
-          "title": "김연경, 한일전 승리 위해 던진 결정적 승부수(신인감독 김연경)",
-          "press": "spotvnews.co.kr",
-          "publishedAt": "2025-10-19T01:24:00.000Z",
-          "link": "https://m.entertain.naver.com/article/477/0000574583"
+          "title": "유승호·임세주, 6년간 연인이었다…소속사 “최근 헤어져”",
+          "press": "donga.com",
+          "publishedAt": "2026-10-08T04:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003753661?sid=102"
         },
         {
-          "title": "은퇴 표승주, 옛 스승 고희진과 1년만 재회 뭉클 “연락 조심스러워” ...",
-          "press": "newsen.com",
-          "publishedAt": "2025-11-16T20:32:00.000Z",
-          "link": "https://m.entertain.naver.com/article/609/0001058553"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "고우석",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "LG 고우석이 포스트시즌에 못 뛰게 되는 전력 악재가 겹쳐서",
-      "headlines": [
-        {
-          "title": "역투 펼치는 고우석",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-07T11:58:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/421/0009216023"
-        },
-        {
-          "title": "[포토] 고우석 '살짝 빠졌네'",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-10-07T11:59:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/108/0003476938"
-        },
-        {
-          "title": "[포토] 역투하는 LG 고우석",
-          "press": "sportsseoul.com",
-          "publishedAt": "2026-10-07T12:04:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/468/0001271313"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "고우석 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고우석 이종범",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고우석 가을야구",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고우석 이정후",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고우석 포스트시즌",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고우석 fa",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고우석 lg",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고우석 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "고우석 복귀",
-          "reason": "포스트시즌 출전 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "고우석 부상 정도",
-          "reason": "이탈 원인 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "농지 전수조사 처분",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "정부가 상속·고령농·임대차 농지를 전수조사 처분 대상에서 제외해서",
-      "headlines": [
-        {
-          "title": "농지조사 논란에 \"투기만 처분\" 선그은 정부…일각선 후퇴 지적도(종합...",
+          "title": "유승호 측, 배우 임세주와 6년 열애설에…\"연인이었으나 결별\"",
           "press": "yna.co.kr",
-          "publishedAt": "2026-10-08T06:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016366289?sid=101"
-        },
-        {
-          "title": "농지은행 안 맡겨도 처분 안 한다…투기 아니면 구제 '특별법' 추진",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-08T02:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014241203?sid=101"
-        },
-        {
-          "title": "상속·고령농·임대차 농지 ‘전수조사 처분’에서 제외",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-08T02:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004002774?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "농지 전수조사 처분방법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "농지 전수조사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "농지",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "정은경 장관 질의",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "정은경 보건복지부 장관이 국감에서 기초연금·비대면 약배송 질의에 답해서",
-      "headlines": [
-        {
-          "title": "질의 답하는 정은경 보건복지부 장관",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-08T06:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016366438?sid=100"
-        },
-        {
-          "title": "[국감] 질의 답하는 정은경 보건복지부 장관",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-08T07:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009218166?sid=100"
-        },
-        {
-          "title": "정은경 장관, 비대면 약 배송 속도조절 시사…\"직능의견 수렴\"",
-          "press": "new.dailypharm.com",
-          "publishedAt": "2026-10-08T08:30:00.000Z",
-          "link": "https://new.dailypharm.com/user/news/343241?REFERER=NP"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "알레스 페레이라",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "UFC 챔피언 알렉스 페레이라가 한국을 찾아 팬미팅·세미나를 열어서",
-      "headlines": [
-        {
-          "title": "페레이라, 1회 원샷 원킬. 아데산야 KO시켰다더니 진짜네-UFC 276",
-          "press": "maniareport.com",
-          "publishedAt": "2022-07-03T03:29:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/425/0000130326"
-        },
-        {
-          "title": "페레이라 놀란 팬? 러시아 무술 세계 2위 이상수 [인터뷰]",
-          "press": "mk.co.kr",
-          "publishedAt": "2024-11-30T15:01:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/410/0001039078"
-        },
-        {
-          "title": "UFC 페레이라 “존 존스와 대결, 서로가 원해” [인터뷰]",
-          "press": "mk.co.kr",
-          "publishedAt": "2024-11-22T15:01:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/410/0001037516"
+          "publishedAt": "2026-10-08T03:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016365785?sid=103"
         }
       ],
       "concentrated": [],
@@ -5773,7 +5157,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "서울대 연구진이 갤럭시·구글 픽셀도 뚫리는 해킹 구멍을 발견해서",
+      "why": "서울대 연구진이 갤럭시·구글 픽셀도 뚫리는 해킹 취약점을 발견했다.",
       "headlines": [
         {
           "title": "갤럭시·구글 픽셀도 뚫리는 해킹 구멍, 서울대 연구진이 발견했다",
@@ -5838,15 +5222,8 @@
       ],
       "nextWave": [
         {
-          "keyword": "구글 픽셀 업데이트",
-          "reason": "패치 적용 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
           "keyword": "구글 ai 게임",
-          "reason": "유니티 플랫폼 주목",
+          "reason": "무코딩 개발 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -5860,7 +5237,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "카카오가 국제 AI 학회에서 대규모 언어모델 최적화 기술을 발표해서",
+      "why": "카카오가 국제 AI 학회서 대규모 언어모델 학습비용·경량화 최적화 기술을 공개했다.",
       "headlines": [
         {
           "title": "카카오, AI 학습 비용 줄이는 기술 개발…국제학회서 성과 공개",
@@ -5926,28 +5303,21 @@
       "nextWave": [
         {
           "keyword": "카카오 ai 서비스",
-          "reason": "기술 상용화 궁금",
+          "reason": "기술 적용처 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "카카오 ai 적용",
-          "reason": "실제 제품 주목",
+          "keyword": "카카오 주가 전망",
+          "reason": "ai 호재 영향",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "카카오 주식 전망",
-          "reason": "기술 발표 주가 영향",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "카카오 ai 모델명",
-          "reason": "공개 모델 관심",
+          "keyword": "카카오 ai 출시",
+          "reason": "상용화 시점 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -5961,7 +5331,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "리퀴드 AI가 10배 큰 모델을 제친 멀티모달 의사결정 모델 d1-3B를 출시해서",
+      "why": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 의사결정 모델 d1-3B를 출시했다.",
       "headlines": [
         {
           "title": "리퀴드 AI, 10배 큰 체급 제친 멀티모달 의사결정 모델 'd1-3B' 출시",
@@ -5992,21 +5362,14 @@
       "nextWave": [
         {
           "keyword": "d1-3b 사용법",
-          "reason": "모델 활용 방법 궁금",
+          "reason": "실제 활용 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "d1-3b 다운로드",
-          "reason": "접근 경로 주목",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "d1-3b 벤치마크",
-          "reason": "성능 비교 궁금",
+          "reason": "접근 경로 확인",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -6020,7 +5383,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 모델 d1-3B를 출시해서",
+      "why": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 모델 d1-3B를 출시했다.",
       "headlines": [
         {
           "title": "LG전자 '美 AI센터 냉각설비' 5조 계약 따냈다",
@@ -6050,15 +5413,22 @@
       ],
       "nextWave": [
         {
+          "keyword": "리퀴드 ai 활용",
+          "reason": "적용 분야 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
           "keyword": "리퀴드 ai 창업자",
-          "reason": "개발사 배경 궁금",
+          "reason": "회사 배경 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
           "keyword": "리퀴드 ai 투자",
-          "reason": "기업 가치 궁금",
+          "reason": "기업 동향 추적",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -6072,7 +5442,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "MS가 서피스 랩톱 울트라 출시와 함께 온디바이스 최적화 MAI-코드-1.1을 공개해서",
+      "why": "MS가 서피스 랩톱 울트라 출시에 맞춰 코딩 AI MAI-코드-1.1 플래시를 공개했다.",
       "headlines": [
         {
           "title": "MS, 서피스 랩톱 울트라 출시에 'MAI-코드-1.1' 온디바이스 최적화 공개",
@@ -6103,7 +5473,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "MS가 애플에 도전장을 내며 AI 기능 강화 노트북을 출시해서",
+      "why": "MS가 엔비디아 RTX 스파크 칩을 탑재한 800만원대 서피스 랩톱 울트라를 애플 대항마로 출시했다.",
       "headlines": [
         {
           "title": "'메타 뮤즈' 품은 MS PC",
@@ -6166,7 +5536,15 @@
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
+      "nextWave": [
+        {
+          "keyword": "ms ai 기능",
+          "reason": "윈도우11 ai 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -6175,7 +5553,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "MS가 엔비디아 RTX 스파크를 탑재한 서피스 랩톱 울트라를 공개해서",
+      "why": "MS가 RTX 스파크 칩을 얹은 800만원대 서피스 랩톱 울트라를 애플과 경쟁하려 공개했다.",
       "headlines": [
         {
           "title": "MS, 엔비디아 RTX 스파크 탑재 ‘서피스 랩톱 울트라’ 공개",
@@ -6212,7 +5590,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "미 정부·구글이 저커버그 부부의 바이오허브에 2.4조 AI 생물학 프로젝트로 합류해서",
+      "why": "미 정부·구글이 저커버그 부부의 바이오허브 AI 생물학 2.4조 프로젝트에 합류했다.",
       "headlines": [
         {
           "title": "\"AI로 질병예방\"…美정부·구글, 저커버그의 바이오허브에 합류",
@@ -6242,6 +5620,70 @@
       ],
       "nextWave": [],
       "rowCount": 0
+    },
+    {
+      "issue": "CPTPP 가입 말라",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "이재명 대통령이 연내 CPTPP 가입 신청을 하지 말라고 지시해서",
+      "headlines": [
+        {
+          "title": "李 “CPTPP 연내 가입신청 말라…농어민과 충분히 대화”",
+          "press": "donga.com",
+          "publishedAt": "2026-10-08T07:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003753732?sid=100"
+        },
+        {
+          "title": "李 대통령 \"연내 CPTPP 가입 신청 말라\"…지속 대화 당부",
+          "press": "news.tf.co.kr",
+          "publishedAt": "2026-10-08T07:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/629/0000540627?sid=100"
+        },
+        {
+          "title": "李대통령, 연내 CPTPP 가입 신청 말라 지시…\"신뢰 회복 우선\"",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-08T07:23:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005424000?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0,
+      "carried": true
+    },
+    {
+      "issue": "알레스 페레이라",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "UFC 챔피언 알렉스 페레이라가 한국을 찾아 팬미팅·세미나를 열어서",
+      "headlines": [
+        {
+          "title": "페레이라, 1회 원샷 원킬. 아데산야 KO시켰다더니 진짜네-UFC 276",
+          "press": "maniareport.com",
+          "publishedAt": "2022-07-03T03:29:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/425/0000130326"
+        },
+        {
+          "title": "페레이라 놀란 팬? 러시아 무술 세계 2위 이상수 [인터뷰]",
+          "press": "mk.co.kr",
+          "publishedAt": "2024-11-30T15:01:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/410/0001039078"
+        },
+        {
+          "title": "UFC 페레이라 “존 존스와 대결, 서로가 원해” [인터뷰]",
+          "press": "mk.co.kr",
+          "publishedAt": "2024-11-22T15:01:00.000Z",
+          "link": "https://m.sports.naver.com/general/article/410/0001037516"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "오만석 개런티 낮춰",
@@ -7353,207 +6795,6 @@
         {
           "keyword": "전원주 투자법",
           "reason": "주식 비결 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "이유진 차경은 임신과",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "이유진·차경은이 11월 결혼을 앞두고 임신 소식을 알렸다.",
-      "headlines": [
-        {
-          "title": "[단독] ‘이유진♥’ 차경은 임신, 11월 14일 결혼 겹경사",
-          "press": "sports.donga.com",
-          "publishedAt": "2026-10-06T06:01:00.000Z",
-          "link": "https://m.entertain.naver.com/article/382/0001297461"
-        },
-        {
-          "title": "이유진·차경은, 11월 결혼 앞두고 임신…\"양가 모두 기쁜 마음\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-06T06:57:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014236202"
-        },
-        {
-          "title": "이유진♥차경은, 11월 결혼 준비 중 임신…\"새 생명 맞을 준비 중\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-06T07:21:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009212304"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "흑상어",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "declining",
-      "isHot": true,
-      "why": "부산 '부캉이' 정체가 3m 멸종위기 암컷 흑상어로 확인됐다.",
-      "headlines": [
-        {
-          "title": "부산 '부캉이' 정체는 멸종위기 흑상어…\"몸길이 3ｍ 암컷\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-06T06:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016360285?sid=102"
-        },
-        {
-          "title": "100만 명 모은 상어 '부캉이' 흑상어로 확인…\"3m 암컷\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-06T06:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014236152?sid=102"
-        },
-        {
-          "title": "‘부캉이’는 멸종위기 흑상어, 3m 암컷이었다",
-          "press": "donga.com",
-          "publishedAt": "2026-10-06T08:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003753107?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "무태상어 흑상어",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "흑상어 성격",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "흑상어 무태상어",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "흑상어 수명",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "흑상어 식인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "흑상어 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "흑상어 새끼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "흑상어 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "흑상어 위험성",
-          "reason": "식인 여부 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "흑상어 출현이유",
-          "reason": "부산 등장 배경 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "화웨이",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "화웨이가 퀄컴과 5G 특허 상호사용 계약으로 25년 만의 특허료 역전을 앞뒀다.",
-      "headlines": [
-        {
-          "title": "화웨이, 퀄컴과 특허 교차계약…25년 만에 ‘특허료 역전’ 눈앞",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-06T06:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004002360?sid=105"
-        },
-        {
-          "title": "[올댓차이나] 화웨이, 퀄컴과 5G 특허 첫 상호사용 계약…반도체 기술 ...",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-06T00:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014234614?sid=104"
-        },
-        {
-          "title": "美 제재에도 특허 협력…화웨이, 퀄컴과 5G·AI·컴퓨팅 상호 사용",
-          "press": "etnews.com",
-          "publishedAt": "2026-10-06T07:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003472762?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "화웨이 워치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화웨이 스마트폰",
-          "searchVolume": 940,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화웨이 프리클립2",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화웨이 워치핏4",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화웨이 자동차",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화웨이 퓨라x",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화웨이 폰",
-          "searchVolume": 500,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "화웨이 스마트워치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "화웨이 폴더블",
-          "reason": "로직폴딩 적용 제품",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
