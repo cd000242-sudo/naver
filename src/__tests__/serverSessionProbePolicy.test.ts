@@ -78,9 +78,9 @@ describe('ensureServerSession wiring', () => {
   // → editor 200 (hundreds of live runs). The probe must fetch the same thing.
   it('probes GoBlogWrite.naver — the same URL the editor navigation uses — not the bare 404 route', () => {
     // page.evaluate cannot see module constants — the URL must travel in as an argument.
-    expect(body).toMatch(/page\.evaluate\(\s*async\s*\(probeUrl: string, timeoutMs: number\)/);
+    expect(body).toMatch(/page\.evaluate\(\s*async\s*\(probeUrl: string, timeoutMs: number, editorBodySelector: string\)/);
     expect(body).toMatch(/fetch\(probeUrl,/);
-    expect(body).toMatch(/\},\s*SERVER_SESSION_PROBE_URL,\s*this\.SERVER_SESSION_CHECK_TIMEOUT_MS\)/);
+    expect(body).toMatch(/\},\s*SERVER_SESSION_PROBE_URL,\s*this\.SERVER_SESSION_CHECK_TIMEOUT_MS,\s*EDITOR_BODY_SELECTOR\)/);
     expect(body).not.toMatch(/fetch\('https:\/\/blog\.naver\.com\/PostWriteForm\.naver'/);
     expect(SERVER_SESSION_PROBE_URL).toBe('https://blog.naver.com/GoBlogWrite.naver');
   });

@@ -6743,7 +6743,10 @@ export class NaverBlogAutomation {
       status: () => guard.getStatus(id),
       hasUnconfirmedPublication: () => getPublicationCommitJournal().hasUnconfirmed(id),
       openSession: async () => {
-        const session = await browserSessionManager.getOrCreateSession(id, this.options.headless ?? false, this.options.accountProxyUrl, { userInitiated: true });
+        // The check compares the editor's blogId with this account's blog; a login id that differs from the blog id
+        // (tnqls… → leader_248) otherwise reads as ACCOUNT_MISMATCH. withAccountExecution sets it only afterwards.
+        if (this.options.getExpectedBlogId) browserSessionManager.setExpectedBlogId(id, this.options.getExpectedBlogId(id));
+        const session =await browserSessionManager.getOrCreateSession(id, this.options.headless ?? false, this.options.accountProxyUrl, { userInitiated: true });
         // The check below loads the editor: register the stealth supplements first, exactly as a normal run
         // does before its first navigation (setupBrowser reuses this same page afterwards).
         this.browser = session.browser;

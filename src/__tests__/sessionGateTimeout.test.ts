@@ -24,8 +24,8 @@ describe('발행 직전 ensureServerSession timeout guard', () => {
 
   it('timeout 값을 evaluate로 전달해 브라우저 내부 fetch에 적용한다', () => {
     // 2026-09-30: the probe URL travels in as the first argument (see serverSessionProbePolicy).
-    expect(code).toMatch(/page\.evaluate\(async\s*\(probeUrl:\s*string,\s*timeoutMs:\s*number\)/);
-    expect(code).toMatch(/},\s*SERVER_SESSION_PROBE_URL,\s*this\.SERVER_SESSION_CHECK_TIMEOUT_MS\)/);
+    expect(code).toMatch(/page\.evaluate\(async\s*\(probeUrl:\s*string,\s*timeoutMs:\s*number,\s*editorBodySelector:\s*string\)/);
+    expect(code).toMatch(/},\s*SERVER_SESSION_PROBE_URL,\s*this\.SERVER_SESSION_CHECK_TIMEOUT_MS,\s*EDITOR_BODY_SELECTOR\)/);
   });
 
   it('실패/timeout 결과는 로그인 상태를 false로 전이시킨다', () => {

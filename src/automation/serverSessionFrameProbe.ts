@@ -1,5 +1,5 @@
 import type { Page } from 'puppeteer';
-import { isTrustedNaverEditorFrameUrl } from './initialEditorReadiness.js';
+import { EDITOR_BODY_SELECTOR, isTrustedNaverEditorFrameUrl } from './initialEditorReadiness.js';
 import { parseNaverSessionUrl } from './loginPageNavigationPolicy.js';
 import { resolveServerSessionProbeVerdict, type ServerSessionProbeResult } from './serverSessionProbePolicy.js';
 
@@ -7,7 +7,7 @@ export interface ServerSessionFrameEvidence extends ServerSessionProbeResult { a
 
 // A string avoids bundler-generated function wrappers inside the browser context.
 export const SESSION_FRAME_EVIDENCE_SCRIPT = `(() => {
-  const hasEditor = !!document.querySelector('.se-main-container') && !!document.querySelector('.se-documentTitle, .se-section-documentTitle, [data-name="documentTitle"], .se-text-paragraph[contenteditable], .se-component-content[contenteditable]');
+  const hasEditor = !!document.querySelector('${EDITOR_BODY_SELECTOR}') &&!!document.querySelector('.se-documentTitle, .se-section-documentTitle, [data-name="documentTitle"], .se-text-paragraph[contenteditable], .se-component-content[contenteditable]');
   const bodyText = hasEditor ? '' : (document.body?.textContent || '').slice(0, 12000);
   return {
     finalUrl: location.href, status: 200, hasEditor, bodyText,

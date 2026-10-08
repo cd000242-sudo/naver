@@ -21,7 +21,7 @@ import { isLoginChallengeUrl, isNaverSessionLoginUrl, parseNaverSessionUrl } fro
 import { getAccountExecutionGuard, AccountExecutionGuardError, type AccountPauseCode } from './automation/accountExecutionGuard.js';
 import type { ServerSessionProbeVerdict } from './automation/serverSessionProbePolicy.js';
 import { withCleanupTimeout } from './runtime/cleanupTimeout.js';
-import { waitForInitialEditorReadiness } from './automation/initialEditorReadiness.js';
+import { EDITOR_BODY_SELECTOR, waitForInitialEditorReadiness } from './automation/initialEditorReadiness.js';
 import { inspectCurrentSessionFrames } from './automation/serverSessionFrameProbe.js';
 
 // ✅ [2026-03-27 FIX] Stealth Plugin — 모든 evasion 모듈 명시적 활성화
@@ -926,9 +926,9 @@ class BrowserSessionManager {
                     const currentFrames = await inspectCurrentSessionFrames(page);
                     if (currentFrames) return currentFrames;
                 }
-                return page.evaluate(async (probeUrl: string, timeoutMs: number) => {
+                return page.evaluate(async (probeUrl: string, timeoutMs: number, editorBodySelector: string) => {
                     const read = (doc: Document, finalUrl: string) => {
-                        const hasEditor = !!doc.querySelector('.se-main-container') && !!doc.querySelector('.se-documentTitle, .se-text-paragraph[contenteditable], .se-component-content[contenteditable]');
+                        const hasEditor = !!doc.querySelector(editorBodySelector) && !!doc.querySelector('.se-documentTitle, .se-text-paragraph[contenteditable], .se-component-content[contenteditable]');
                         const hasLoginForm = !!doc.querySelector('input[type="password"]') && !!doc.querySelector('input[name="id"], input#id');
                         const bodyText = hasEditor ? '' : (doc.body?.textContent || '').slice(0, 12000);
                         const hasChallenge = !!doc.querySelector('input[name="captcha"], input#captcha') || /자동입력 방지|보안문자를 입력|본인 확인이 필요/.test(bodyText);
@@ -956,7 +956,7 @@ class BrowserSessionManager {
                         return { ...read(doc, res.url), status: res.status };
                     } catch { return { error: 'probe-unavailable' }; }
                     finally { clearTimeout(timer); }
-                }, SERVER_SESSION_PROBE_URL, this.SERVER_SESSION_CHECK_TIMEOUT_MS);
+                }, SERVER_SESSION_PROBE_URL, this.SERVER_SESSION_CHECK_TIMEOUT_MS, EDITOR_BODY_SELECTOR);
             })();
             // The page's AbortController cannot bound a stalled renderer/CDP connection.
             const serverCheck = await withCleanupTimeout(() => pendingCheck, this.SERVER_SESSION_CHECK_TIMEOUT_MS + 1000, 'server-session-probe');

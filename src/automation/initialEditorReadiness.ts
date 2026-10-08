@@ -7,10 +7,17 @@ export function isTrustedNaverEditorFrameUrl(value: string): boolean {
   } catch { return false; }
 }
 
+/**
+ * Editor body evidence. The live SmartEditor (read 2026-10-08) wraps title + body in `article.se-components-wrap`
+ * and has no `.se-main-container` — that class is the published-post viewer's. Requiring it alone made a visible
+ * editor time out as NETWORK_WAIT from v2.11.326 on.
+ */
+export const EDITOR_BODY_SELECTOR = '.se-main-container, .se-components-wrap';
+
 // A string keeps the browser predicate independent of TypeScript/bundler helpers.
 // Evaluate it within each Puppeteer frame, never through iframe.contentDocument.
 export const INITIAL_EDITOR_READINESS_SCRIPT = `(() => {
-  const hasEditor = !!document.querySelector('.se-main-container')
+  const hasEditor = !!document.querySelector('${EDITOR_BODY_SELECTOR}')
     && !!document.querySelector('.se-documentTitle, .se-section-documentTitle, [data-name="documentTitle"], .se-text-paragraph[contenteditable], .se-component-content[contenteditable]');
   const blocked = !!document.querySelector('input[name="captcha"], input#captcha')
     || (!!document.querySelector('input[type="password"]') && !!document.querySelector('input[name="id"], input#id'))
