@@ -133,7 +133,6 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
       'isDeviceConfirmUrl(page.url())',
       'isDeviceConfirmBodyText(text)',
       'GoBlogWrite.naver',
-      'PostWriteForm',
       "getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED')",
       'findEditorTitleInputElement(frame, page, 60000',
       'shouldRetryEditorReadiness(snapshot)',
@@ -141,6 +140,8 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
       'collectEditorTitleDiagnostics(frame, page)',
       'setTitleByDomEvent(titleElement, titleText)',
     ]);
+    // Editor URL recognition lives in the shared policy, not a login comment.
+    expect(read('src', 'automation', 'editorUrlState.ts')).toContain('PostWriteForm');
 
     expect(automation).not.toContain('private async findTitleInputElement(');
     expect(automation).not.toContain('private async readEditorTitleText(');

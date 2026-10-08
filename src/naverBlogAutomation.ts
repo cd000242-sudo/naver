@@ -2005,9 +2005,29 @@ export class NaverBlogAutomation {
       const destination = classifyBlogWriteNavigationUrl(page.url());
       if (destination.isLoginRedirect) throw new AccountExecutionGuardError('LOGIN_REQUIRED');
       if (!destination.isBlogDomain) throw new AccountExecutionGuardError('NETWORK_WAIT');
-      // The frame/readiness code handles editor rendering without another login.
+      // An iframe element can exist before its editor document has loaded.
+      // Wait for usable editor DOM before the caller checks account identity.
       await page.waitForSelector('#mainFrame, iframe[name="mainFrame"], .se-main-container', { timeout: 20000 });
+      await page.waitForFunction(() => {
+        if (['nid.naver.com', 'login.naver.com'].includes(location.hostname)) return true;
+        const docs: Document[] = [document];
+        for (const frame of Array.from(document.querySelectorAll('iframe'))) {
+          try { if (frame.contentDocument) docs.push(frame.contentDocument); } catch { /* Cross-origin frames provide no editor evidence. */ }
+        }
+        return docs.some(doc => {
+          const editorReady = !!doc.querySelector('.se-main-container')
+            && !!doc.querySelector('.se-documentTitle, .se-text-paragraph[contenteditable], .se-component-content[contenteditable]');
+          const blocked = !!doc.querySelector('input[name="captcha"], input#captcha')
+            || (!!doc.querySelector('input[type="password"]') && !!doc.querySelector('input[name="id"], input#id'))
+            || /보호조치가 적용|보호조치 해제|이용이 제한|자동입력 방지|보안문자를 입력|본인 확인이 필요/.test((doc.body?.textContent || '').slice(0, 12000));
+          return editorReady || blocked;
+        });
+      }, { timeout: 20000, polling: 250 });
       this.ensureNotCancelled();
+      if (isLoginChallengeUrl(page.url())) throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
+      const readyDestination = classifyBlogWriteNavigationUrl(page.url());
+      if (readyDestination.isLoginRedirect) throw new AccountExecutionGuardError('LOGIN_REQUIRED');
+      if (!readyDestination.isBlogDomain) throw new AccountExecutionGuardError('NETWORK_WAIT');
     } catch (error) {
       const code = error instanceof AccountExecutionGuardError ? error.code : 'NETWORK_WAIT';
       getAccountExecutionGuard().pause(this.options.naverId, code === 'ACCOUNT_BUSY' ? 'NETWORK_WAIT' : code);
@@ -6399,15 +6419,24 @@ export class NaverBlogAutomation {
     }
 
     try {
-      // 브라우저가 없으면 새로 설정
-      if (!this.browser) {
+      const needsBrowserSetup = !this.browser;
+      if (needsBrowserSetup) {
         this.log('🚀 브라우저 초기화 중...');
         await this.setupBrowser();
+      }
+      this.ensureDialogHandler();
+      const entryPage = this.ensurePage();
+      const enteredFromBlank = entryPage.url() === 'about:blank';
+      // A fresh page has no blog origin for the read-only session probe.
+      // Perform this post's normal editor entry first; never enter it twice.
+      if (enteredFromBlank) await this.navigateToBlogWrite();
+      this.ensureNotCancelled();
+      if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
+
+      if (needsBrowserSetup) {
         await this.loginToNaver();
       } else {
-        // [v1.6.0 design — finally wired] A reused browser can hold an expired
-        // server session; cookie presence alone is a false positive. Verify
-        // against the server before entering the editor, re-login if dead.
+        // Verify current server/account evidence; blocking verdicts stop the run.
         const serverSessionOk = await browserSessionManager
           .ensureServerSession(this.options.naverId);
         if (serverSessionOk) {
@@ -6418,12 +6447,11 @@ export class NaverBlogAutomation {
         }
       }
 
-      // run()뿐 아니라 브라우저 재사용/엑셀 발행 경로에서도 네이티브
-      // "작성중인 글" confirm을 항상 처리한다.
-      this.ensureDialogHandler();
+      this.ensureNotCancelled();
+      if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
 
       // 글쓰기 페이지로 이동
-      await this.navigateToBlogWrite();
+      if (!enteredFromBlank) await this.navigateToBlogWrite();
       await this.switchToMainFrame();
 
       // 팝업이 완전히 렌더링될 때까지 대기 (최적화)
@@ -6884,18 +6912,18 @@ export class NaverBlogAutomation {
     // setupBrowser()는 세션 재사용 시 early-return하여 핸들러 등록을 건너뛸 수 있음
     // → run()에서 확정적으로 등록하여 어떤 경로든 dialog 자동 수락 보장
      this.ensureDialogHandler();
+     const entryPage = this.ensurePage();
+     const enteredFromBlank = entryPage.url() === 'about:blank';
 
      try {
+       // On a fresh blank page, establish the blog origin through this post's
+       // normal editor entry before the read-only account identity check.
+       if (enteredFromBlank) await this.navigateToBlogWrite();
+       this.ensureNotCancelled();
+       if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.loginStart);
-       // [2026-07-01 FIX] Skip login when the server session is already valid.
-       //   Root cause: run() always called loginToNaver() after setupBrowser() reused a
-       //   session (cookie restore sets isLoggedIn=true), forcing a full re-login every
-       //   publish (~148s wasted). runPostOnly() already gates on ensureServerSession();
-       //   run() lacked it, so the two publish paths were asymmetric.
-       //   ensureServerSession() is a real server-side HTTP probe (fetch PostWriteForm.naver
-       //   + login-redirect check), fundamentally different from the v1.4.62 cookie fast-path
-       //   that false-positived on stale cookies. A dead server session returns false → normal
-       //   re-login; any exception/timeout also resolves to false → login proceeds (safe default).
+       // Cookie presence alone is insufficient. Blocking verdicts and transport
+       // failures throw a pause error; they never trigger automatic credentials.
        const serverSessionOk = await browserSessionManager
          .ensureServerSession(this.options.naverId);
        if (serverSessionOk) {
@@ -6903,10 +6931,12 @@ export class NaverBlogAutomation {
        } else {
          await this.loginToNaver();
        }
+       this.ensureNotCancelled();
+       if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
        this.log(formatPipelineUrlLog('loginDone', this.page?.url()));
 
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.openingWriteEditor);
-       await this.navigateToBlogWrite();
+       if (!enteredFromBlank) await this.navigateToBlogWrite();
        this.log(formatPipelineUrlLog('writeEditorNavigationDone', this.page?.url()));
 
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.switchingEditorFrame);

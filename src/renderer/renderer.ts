@@ -6995,18 +6995,15 @@ URL: ${firstUrl}
       const enabled = localStorage.getItem('ftcDisclosureEnabled') === 'true';
       const preset = localStorage.getItem('ftcDisclosurePreset') || 'affiliate';
       const text = localStorage.getItem('ftcDisclosureText') || FTC_PRESETS_SYNC[preset] || FTC_PRESETS_SYNC.affiliate;
-      // ✅ unified 폼은 모드 기반(쇼핑커넥트만 ON), continuous/ma는 자체 localStorage 유지
-      const _syncMode = (document.getElementById('unified-content-mode') as HTMLInputElement | null)?.value || 'seo';
-      const unifiedEnabled = _syncMode === 'affiliate';
+      // 모드 기본값은 초기화/모드 변경에서만 적용하고, 동기화는 사용자의 선택을 유지한다.
 
       for (const cfg of ftcConfigs) {
         const cb = document.getElementById(cfg.cb) as HTMLInputElement;
         const panel = document.getElementById(cfg.panel) as HTMLDivElement;
         const presetEl = document.getElementById(cfg.preset) as HTMLSelectElement;
         const textEl = document.getElementById(cfg.text) as HTMLTextAreaElement;
-        const cbEnabled = cfg.cb === 'unified-ftc-disclosure' ? unifiedEnabled : enabled;
-        if (cb) cb.checked = cbEnabled;
-        if (panel) panel.style.display = cbEnabled ? 'block' : 'none';
+        if (cb) cb.checked = enabled;
+        if (panel) panel.style.display = enabled ? 'block' : 'none';
         if (presetEl) presetEl.value = preset;
         if (textEl) {
           textEl.value = text;
@@ -7016,8 +7013,8 @@ URL: ${firstUrl}
       }
       const badge = document.getElementById('ftc-status-badge') as HTMLSpanElement;
       const section = document.getElementById('ftc-disclosure-section') as HTMLDivElement;
-      if (badge) badge.style.display = unifiedEnabled ? 'inline-block' : 'none';
-      if (section) section.style.borderColor = unifiedEnabled ? 'rgba(245, 158, 11, 0.6)' : 'rgba(245, 158, 11, 0.4)';
+      if (badge) badge.style.display = enabled ? 'inline-block' : 'none';
+      if (section) section.style.borderColor = enabled ? 'rgba(245, 158, 11, 0.6)' : 'rgba(245, 158, 11, 0.4)';
     };
 
     setTimeout(syncAllFtc, 300);
