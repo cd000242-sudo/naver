@@ -272,3 +272,42 @@ test('saved download files retain exact thumbnail and heading assignments throug
   expect(await fs.stat(path.join(profile.root, 'must-not-publish.ndjson')).then(() => true, () => false)).toBe(false);
   expect(runtimeErrors).toEqual([]);
 });
+
+
+test('received article rises above another window from visible and minimized states', async () => {
+  test.setTimeout(60_000);
+  const competitorId = await app.evaluate(async ({ BrowserWindow }) => {
+    const competitor = new BrowserWindow({ width: 640, height: 420, show: false,
+      webPreferences: { sandbox: true, contextIsolation: true, nodeIntegration: false } });
+    await competitor.loadURL('data:text/html;charset=utf-8,<title>LDB isolated focus fixture</title><p>Other window</p>');
+    return competitor.id;
+  });
+  try {
+    for (const minimized of [false, true]) {
+      await app.evaluate(({ BrowserWindow }, { competitorId, minimized }) => {
+        const target = BrowserWindow.getAllWindows().find(window => window.webContents.getURL().includes('index.html'))!;
+        if (minimized) target.minimize(); else { target.restore(); target.show(); }
+        const competitor = BrowserWindow.fromId(competitorId)!;
+        competitor.show(); competitor.moveTop(); competitor.focus();
+      }, { competitorId, minimized });
+      await expect.poll(() => app.evaluate(({ BrowserWindow }, competitorId) => ({
+        competitorFocused: BrowserWindow.fromId(competitorId)!.isFocused(),
+        appFocused: BrowserWindow.getAllWindows().find(window => window.webContents.getURL().includes('index.html'))!.isFocused(),
+      }), competitorId)).toEqual({ competitorFocused: true, appFocused: false });
+      const article = { id: 'ldb_e2e_foreground_' + String(minimized), title: '수신 원고 전면 확인 ' + String(minimized),
+        content: '사용자가 가져간 원고를 앱에서 바로 확인하는 격리 테스트입니다.', publishMode: 'draft', headings: [], hashtags: [], images: [] };
+      const ack = await bridge('/v1/posts', { posts: [article], destination: { accountId, categoryId: '7' } });
+      expect(ack.imported).toBe(1);
+      await expect(page.locator('#unified-generated-title')).toHaveValue(article.title);
+      await expect(page.locator('#unified-generated-content')).toHaveValue(article.content);
+      await expect.poll(() => app.evaluate(({ BrowserWindow }, competitorId) => {
+        const target = BrowserWindow.getAllWindows().find(window => window.webContents.getURL().includes('index.html'))!;
+        return { visible: target.isVisible(), minimized: target.isMinimized(), focused: target.isFocused(),
+          topmost: target.isAlwaysOnTop(), competitorFocused: BrowserWindow.fromId(competitorId)!.isFocused() };
+      }, competitorId)).toEqual({ visible: true, minimized: false, focused: true, topmost: false, competitorFocused: false });
+    }
+    expect(await fs.stat(path.join(profile.root, 'must-not-publish.ndjson')).then(() => true, () => false)).toBe(false);
+  } finally {
+    await app.evaluate(({ BrowserWindow }, competitorId) => BrowserWindow.fromId(competitorId)?.destroy(), competitorId);
+  }
+});

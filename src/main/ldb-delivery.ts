@@ -57,6 +57,7 @@ interface DeliveryWindow {
   isMinimized: () => boolean;
   restore: () => void;
   show: () => void;
+  moveTop: () => void;
   focus: () => void;
 }
 
@@ -69,6 +70,8 @@ export async function deliverLdbPostsToWindow(window: DeliveryWindow | null | un
     if (window.isDestroyed()) throw new Error('앱 화면이 닫혔습니다. 앱을 다시 열어주세요.');
     if (window.isMinimized()) window.restore();
     window.show();
+    // Windows에서 다른 앱 뒤에 가려진 창도 수신 완료 후 한 번만 앞으로 올린다.
+    window.moveTop();
     window.focus();
   }
   return imported;

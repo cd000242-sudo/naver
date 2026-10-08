@@ -6,11 +6,14 @@ import { revealLdbDraft } from '../renderer/modules/ldbHandoffPresentation.js';
 
 function desktop() {
   const ipc = new EventEmitter();
-  const window = { isDestroyed: () => false, isMinimized: () => true, restore: vi.fn(), show: vi.fn(), focus: vi.fn(),
+  const operations: string[] = [];
+  const window = { isDestroyed: () => false, isMinimized: () => true,
+    restore: vi.fn(() => operations.push('restore')), show: vi.fn(() => operations.push('show')),
+    moveTop: vi.fn(() => operations.push('moveTop')), focus: vi.fn(() => operations.push('focus')),
     webContents: { id: 4, isDestroyed: () => false, isLoading: () => false, send: vi.fn() } };
   const acknowledge = (ok: boolean, imported: number) => ipc.emit('ldb:import-posts-result', { sender: { id: 4 } },
     { requestId: window.webContents.send.mock.calls.at(-1)?.[2], ok, imported });
-  return { ipc, window, acknowledge };
+  return { ipc, window, acknowledge, operations };
 }
 
 function screen() {
@@ -31,14 +34,23 @@ function screen() {
 }
 
 describe('LDB handoff presentation', () => {
-  it('restores and focuses the desktop only after the article renderer acknowledges delivery', async () => {
-    const { ipc, window, acknowledge } = desktop();
+  it('restores, raises and focuses the desktop in order only after the renderer acknowledges delivery', async () => {
+    const { ipc, window, acknowledge, operations } = desktop();
     const delivery = deliverLdbPostsToWindow(window, ipc, [{}]);
-    expect(window.restore).not.toHaveBeenCalled();
+    expect(operations).toEqual([]);
     acknowledge(true, 1);
     await expect(delivery).resolves.toBe(1);
     expect(window.restore).toHaveBeenCalledOnce();
     expect(window.show).toHaveBeenCalledOnce(); expect(window.focus).toHaveBeenCalledOnce();
+    expect(operations).toEqual(['restore', 'show', 'moveTop', 'focus']);
+  });
+  it('raises an already visible app without restoring it or leaving it always on top', async () => {
+    const { ipc, window, acknowledge, operations } = desktop();
+    window.isMinimized = () => false;
+    const delivery = deliverLdbPostsToWindow(window, ipc, [{}]);
+    acknowledge(true, 1);
+    await expect(delivery).resolves.toBe(1);
+    expect(operations).toEqual(['show', 'moveTop', 'focus']);
   });
   it('does not steal focus for selection-only requests or rejected deliveries', async () => {
     const { ipc, window, acknowledge } = desktop();
@@ -46,6 +58,7 @@ describe('LDB handoff presentation', () => {
     const failed = deliverLdbPostsToWindow(window, ipc, [{}]); acknowledge(false, 0);
     await expect(failed).rejects.toThrow();
     expect(window.restore).not.toHaveBeenCalled(); expect(window.show).not.toHaveBeenCalled();
+    expect(window.moveTop).not.toHaveBeenCalled(); expect(window.focus).not.toHaveBeenCalled();
   });
   it('reports a closed window instead of claiming a visible successful handoff', async () => {
     const { ipc, window, acknowledge } = desktop();
