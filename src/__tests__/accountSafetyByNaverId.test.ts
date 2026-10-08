@@ -37,7 +37,7 @@ describe('account safety by Naver ID (main publish screen)', () => {
     const { controller, sessions } = setup();
     const state = controller.status('Main-Screen-ID ', 'naver-id');
     expect(state.paused).toBe(false);
-    expect(sessions.setExpectedBlogId).toHaveBeenCalledWith('main-screen-id', 'main-screen-id');
+    expect(sessions.setExpectedBlogId).toHaveBeenCalledWith('main-screen-id', 'main-screen-id', 'fallback');
     expect(JSON.stringify(state)).not.toContain('main-screen-id');
   });
 

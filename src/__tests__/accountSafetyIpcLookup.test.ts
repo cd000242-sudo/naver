@@ -35,7 +35,7 @@ describe('account:safety handler', () => {
     const reply = await call(ID, 'status', undefined, undefined, undefined, 'naver-id');
     expect(reply.success).toBe(true);
     expect(reply.state.paused).toBe(false);
-    expect(sessions.setExpectedBlogId).toHaveBeenCalledWith(ID, ID);
+    expect(sessions.setExpectedBlogId).toHaveBeenCalledWith(ID, ID, 'fallback');
   });
 
   it('opens the post list through the session manager', async () => {

@@ -297,6 +297,8 @@ async function smartTypeWithAutoHighlight(
 
 export interface AutomationOptions {
   getExpectedBlogId?: (naverId: string) => string;
+  /** Preferred over getExpectedBlogId: also says whether a registered account names the blog or it is only the login ID (a fallback). */
+  getExpectedBlog?: (naverId: string) => { blogId: string; configured: boolean };
   naverId: string;
   naverPassword: string;
   loginUrl?: string;
@@ -1986,7 +1988,7 @@ export class NaverBlogAutomation {
     const ready = await browserSessionManager.ensureServerSession(this.options.naverId);
     if (!ready) {
       getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED');
-      throw new AccountExecutionGuardError('LOGIN_REQUIRED', '계정 관리에서 네이버에 로그인한 뒤 확인 후 재개를 눌러주세요.');
+      throw new AccountExecutionGuardError('LOGIN_REQUIRED', '네이버 창에서 직접 로그인한 뒤 화면의 안내 창(또는 계정 관리)의 [확인 후 재개]를 눌러주세요.');
     }
     this.log('✅ 기존 로그인 상태를 확인했습니다.');
   }
@@ -2038,7 +2040,7 @@ export class NaverBlogAutomation {
     this.log(`   현재 페이지 URL: ${currentUrl}`);
 
     if (isBlogWriteLoginRedirect(currentUrl)) {
-      this.log('로그인이 필요하여 작업을 중단했습니다. 계정 관리에서 네이버 확인 후 재개해주세요.');
+      this.log('로그인이 필요하여 작업을 중단했습니다. 화면의 안내 창(또는 계정 관리)에서 네이버 확인 후 재개해주세요.');
       getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED');
       throw new AccountExecutionGuardError('LOGIN_REQUIRED');
     }
@@ -6726,6 +6728,13 @@ export class NaverBlogAutomation {
     }
   }
 
+  /** Tells the session manager which blog this login must show: a registered one (strict) or only the login ID (learned from the editor). */
+  private registerExpectedBlog(id: string): void {
+    const expected = this.options.getExpectedBlog?.(id);
+    if (expected) browserSessionManager.setExpectedBlogId(id, expected.blogId, expected.configured ? 'configured' : 'fallback');
+    else if (this.options.getExpectedBlogId) browserSessionManager.setExpectedBlogId(id, this.options.getExpectedBlogId(id));
+  }
+
   private userRunResumeDeps(): UserRunResumeDeps {
     const id = this.options.naverId;
     const guard = getAccountExecutionGuard();
@@ -6735,7 +6744,7 @@ export class NaverBlogAutomation {
       openSession: async () => {
         // The check compares the editor's blogId with this account's blog; a login id that differs from the blog id
         // (tnqls… → leader_248) otherwise reads as ACCOUNT_MISMATCH. withAccountExecution sets it only afterwards.
-        if (this.options.getExpectedBlogId) browserSessionManager.setExpectedBlogId(id, this.options.getExpectedBlogId(id));
+        this.registerExpectedBlog(id);
         const session =await browserSessionManager.getOrCreateSession(id, this.options.headless ?? false, this.options.accountProxyUrl, { userInitiated: true });
         // The check below loads the editor: register the stealth supplements first, exactly as a normal run
         // does before its first navigation (setupBrowser reuses this same page afterwards).
@@ -6762,7 +6771,7 @@ export class NaverBlogAutomation {
     return guard.runExclusive(this.options.naverId, async () => {
       this.accountWorkId = randomUUID();
       try {
-        if (this.options.getExpectedBlogId) browserSessionManager.setExpectedBlogId(this.options.naverId, this.options.getExpectedBlogId(this.options.naverId));
+        this.registerExpectedBlog(this.options.naverId);
         const result = await work();
         // A run that reports failure after the publish click has an unknown outcome, never a confirmed one.
         if (journal.hasUnconfirmed(this.options.naverId) && (result as { success?: unknown } | undefined)?.success === false) {

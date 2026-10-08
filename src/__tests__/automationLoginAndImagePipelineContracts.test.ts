@@ -59,7 +59,7 @@ describe('automation login and image pipeline contracts', () => {
     expect(source.includes('classifyBlogWriteNavigationUrl(page.url())')).toBe(true);
     expect(source.includes('PUBLISH_PIPELINE_LOG_MESSAGES.editorFrameReady')).toBe(true);
     expect(manager.includes('getAccountExecutionGuard().pause(accountId, code)')).toBe(true);
-    expect(manager.includes('throw new AccountExecutionGuardError(code)')).toBe(true);
+    expect(manager.includes('throw new AccountExecutionGuardError(code,')).toBe(true);
     expect(/ensureServerSession\([^)]*\)\s*\.catch\(\(\)\s*=>\s*false/.test(source)).toBe(false);
   });
 });

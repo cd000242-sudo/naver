@@ -18,19 +18,46 @@ export function normalizeBlogId(input: unknown): string | undefined {
  const candidate = url.searchParams.has('blogid') ? url.searchParams.get('blogid') : url.pathname.split('/').filter(Boolean)[0];
  return candidate && BLOG_ID_PATTERN.test(candidate) ? candidate : undefined;
 }
-/** App configuration, never an untrusted page, selects the destination identity. */
-export function resolveExpectedBlogId(naverId: string, accounts: ReadonlyArray<{ naverId?: string; blogId: string }>): string {
+/** The blog an account is expected to publish to. `configured` = a registered account names it; otherwise it is only the login ID. */
+export interface ExpectedBlog { blogId: string; configured: boolean }
+/**
+ * App configuration, never an untrusted page, selects the destination identity.
+ * A Naver login ID can differ from the blog address (login tnqls6550- -> blog leader_248), so the login ID returned when no
+ * registered account names a blog is only a FALLBACK (`configured: false`): the session probe learns the real blog instead.
+ */
+export function resolveExpectedBlog(naverId: string, accounts: ReadonlyArray<{ naverId?: string; blogId: string }>): ExpectedBlog {
  const login = naverId.trim().toLowerCase();
  const matches = accounts.filter(a => a.naverId?.trim().toLowerCase() === login);
+ let configured = false;
  const blogs = [...new Set(matches.map(a => {
   const saved = a.blogId.trim().toLowerCase();
   const extracted = normalizeBlogId(saved);
-  if (extracted) return extracted;
+  if (extracted) { configured = true; return extracted; }
   // Older account forms stored a Korean display label in this field.
   if (!saved || (/[^a-z0-9_-]/.test(saved) && !/[.:/\\@]/.test(saved))) return login;
+  configured = true;
   return saved;
  }))];
  const blog = blogs[0] || login;
  if (!/^[a-z0-9_-]+$/.test(blog) || blogs.length > 1) throw new AccountExecutionGuardError('ACCOUNT_MISMATCH', '계정 관리에 등록된 블로그 ID를 확인해주세요.');
- return blog;
+ return { blogId: blog, configured };
+}
+export function resolveExpectedBlogId(naverId: string, accounts: ReadonlyArray<{ naverId?: string; blogId: string }>): string {
+ return resolveExpectedBlog(naverId, accounts).blogId;
+}
+/** Korean sentence for a blog id that is not this account's blog. `expected` is omitted when the account has no known blog. */
+export function describeBlogMismatch(observed: string, expected?: string): string {
+ return expected
+  ? `이 창은 다른 블로그(${observed})로 로그인돼 있습니다 (이 계정의 블로그: ${expected}).`
+  : `이 창의 블로그(${observed})는 다른 계정에 등록된 블로그입니다.`;
+}
+/** Naver IDs of registered accounts whose blog address is `blogId` (labels and accounts without a Naver ID name nothing). */
+export function findAccountsNamingBlog(blogId: string, accounts: ReadonlyArray<{ naverId?: string; blogId: string }>): string[] {
+ const wanted = String(blogId).trim().toLowerCase();
+ return accounts.filter(a => a.naverId?.trim() && normalizeBlogId(a.blogId) === wanted).map(a => a.naverId!.trim().toLowerCase());
+}
+/** Full stop text for a confirmed other blog; undefined when the verdict does not carry the blogs (callers keep their generic text). */
+export function blogMismatchStopMessage(verdict: { observedBlogId?: string; expectedBlogId?: string } | undefined): string | undefined {
+ if (!verdict?.observedBlogId) return undefined;
+ return `${describeBlogMismatch(verdict.observedBlogId, verdict.expectedBlogId)} 열린 창에서 이 계정으로 다시 로그인한 뒤 화면의 안내 창(또는 계정 관리)의 [확인 후 재개]를 눌러주세요.`;
 }
