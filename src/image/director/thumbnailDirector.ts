@@ -65,6 +65,8 @@ export interface ThumbnailDirectorDeps {
   isLocalFile(filePath: string | undefined): boolean;
   log(message: string): void;
   isCancelled?(): boolean;
+  /** Removes composed candidate files that were not chosen (never the AI base image). */
+  discard?(filePaths: readonly string[]): Promise<void>;
 }
 
 export interface ThumbnailDirectorResult {
@@ -132,13 +134,23 @@ async function tryCompose(deps: ThumbnailDirectorDeps, label: string, run: () =>
 
 type Maker = () => Promise<CandidateFile | null>;
 
-async function collect(makers: readonly Maker[]): Promise<CandidateFile[]> {
+async function collect(makers: readonly Maker[], made: string[]): Promise<CandidateFile[]> {
   const out: CandidateFile[] = [];
   for (const make of makers) {
-    const made = await make();
-    if (made) out.push(made);
+    const file = await make();
+    if (file) { out.push(file); made.push(file.filePath); }
   }
   return out.slice(0, 3);
+}
+
+/**
+ * [2026-10-08 사장님 "왜 자꾸 마음대로 다운로드되는건데?"] Every composed candidate used to stay in the save folder
+ * (all makers run, three are kept, one is chosen). Only the winner — and the AI base image — remain.
+ */
+async function discardUnchosen(deps: ThumbnailDirectorDeps, made: readonly string[], keep: readonly string[]): Promise<void> {
+  const losers = [...new Set(made)].filter((file) => file && !keep.includes(file));
+  if (!losers.length || !deps.discard) return;
+  try { await deps.discard(losers); } catch (error) { deps.log(`${LOG} ⚠️ 쓰지 않은 후보 정리 실패(무시): ${(error as Error)?.message || error}`); }
 }
 
 /**
@@ -235,10 +247,12 @@ export async function runThumbnailDirector(
   const titleBandPlanned = !engineDrew && !input.allowBakedText && text.include;
   deps.log(`${LOG} 🧭 방향=${direction} · 모드=${input.qualityMode} · 문구=${aiText.include ? `"${aiText.text}"` : '없음'}(${aiText.reason})${engineDrew ? (realFirst ? ' · AI로 갈 때만 제목 포스터(실제 사진 합성은 짧은 문구)' : ' · 엔진이 제목 전체를 포스터로 그림') : ''} · 실제 사진 ${input.realImages.length}장${prefersPair(input, direction) ? '(두 장 나란히)' : ''}`);
 
+  const made: string[] = [];
   if (realFirst) {
-    const real = await collect(realMakers(input, bake, deps, direction));
+    const real = await collect(realMakers(input, bake, deps, direction), made);
     if (real.length > 0) {
       const { winner, verdict } = await pick(real, input, titleBandPlanned, deps);
+      await discardUnchosen(deps, made, [winner.filePath]);
       return { base: null, winner, candidates: real, verdict, direction, text, engineDrewText: false };
     }
     deps.log(`${LOG} ⚠️ 실제 사진 합성이 모두 실패 — AI 썸네일로 진행`);
@@ -270,7 +284,8 @@ export async function runThumbnailDirector(
   const makers: Maker[] = input.qualityMode === 'high'
     ? [async () => full, ...(cardMaker ? [cardMaker] : []), tightMaker]
     : [...(cardMaker ? [cardMaker] : []), async () => full];
-  const candidates = await collect(makers);
+  const candidates = await collect(makers, made);
   const { winner, verdict } = await pick(candidates, input, titleBandPlanned, deps);
+  await discardUnchosen(deps, made, [winner.filePath, full.filePath]);
   return { base, winner, candidates, verdict, direction, text, engineDrewText: false };
 }

@@ -210,6 +210,7 @@ export async function generateImagesWithThumbnailDirector(
       images, ctx, candidates, route ? (imgs, prompt) => judgeImagesWithRoute(imgs, prompt, route) : null, log,
     ),
     isLocalFile: isLocalImageFile,
+    discard: async (files) => { for (const file of files) await fs.promises.unlink(file).catch(() => undefined); },
     log,
     isCancelled: () => options.stopCheck?.() === true,
   });

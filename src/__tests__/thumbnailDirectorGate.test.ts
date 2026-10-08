@@ -13,12 +13,21 @@ import {
   toDirectorImage,
 } from '../image/director/thumbnailDirectorGate';
 
+// [2026-10-08 사장님 "이런 이미지들은 왜 자꾸 마음대로 다운로드되는건데?"] The gate writes real-photo candidates under the
+// image save path; unmocked, every test run left brown sample squares in the owner's real Downloads folder.
+const saved = vi.hoisted(() => ({ base: '' }));
+vi.mock('../image/imageUtils', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../image/imageUtils')>()),
+  getImageSaveBasePath: async () => saved.base,
+}));
+
 let dir = '';
 let aiFile = '';
 let userPhoto = '';
 
 beforeAll(async () => {
   dir = fs.mkdtempSync(path.join(os.tmpdir(), 'thumb-gate-'));
+  saved.base = path.join(dir, 'saved');
   aiFile = path.join(dir, 'base.png');
   userPhoto = path.join(dir, 'user.jpg');
   await sharp({ create: { width: 1024, height: 1024, channels: 3, background: '#557799' } }).png().toFile(aiFile);
@@ -164,6 +173,10 @@ describe('generateImagesWithThumbnailDirector', () => {
     );
     expect(generate).not.toHaveBeenCalled();
     expect(images[0]).toMatchObject({ provider: 'collected-image', isCollected: true });
+    // Work files stay inside the test's own folder, and only the chosen thumbnail is kept.
+    const work = path.join(saved.base, 'thumbnail-candidates');
+    expect(path.resolve(images[0].filePath).startsWith(path.resolve(work))).toBe(true);
+    expect(fs.readdirSync(work)).toEqual([path.basename(images[0].filePath)]);
   });
 
   it('real-photo topic without a usable photo: honest cover plus a one-line notice', async () => {

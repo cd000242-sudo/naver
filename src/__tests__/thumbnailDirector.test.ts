@@ -159,3 +159,29 @@ describe('buildCoverItem', () => {
     expect(cover.englishPrompt).toBe('thumbnail emoji prompt');
   });
 });
+
+// [2026-10-08 사장님 "이런 이미지들은 왜 자꾸 마음대로 다운로드되는건데?"] Every candidate the director composed stayed in
+// the save folder (collect makes them all, keeps 3, the judge picks 1). Only the chosen file is kept.
+describe('composed candidates that were not chosen are removed', () => {
+  it('real photos: everything composed except the winner is discarded (also the ones past the first three)', async () => {
+    const discard = vi.fn(async () => undefined);
+    const result = await runThumbnailDirector(makeInput({ realImages: ['C:/p/a.jpg', 'C:/p/b.jpg'], allowBakedText: true }), makeDeps({ discard }));
+    const removed = (discard.mock.calls as unknown as Array<[string[]]>).flatMap(([files]) => files);
+    expect(removed).not.toContain(result!.winner.filePath);
+    expect(removed.length).toBeGreaterThan(0);
+    expect(removed.every((file) => file.startsWith('C:/work/'))).toBe(true);
+  });
+
+  it('AI cover: the generated base image itself is never discarded', async () => {
+    const discard = vi.fn(async () => undefined);
+    const result = await runThumbnailDirector(makeInput({ qualityMode: 'high', realImages: [] }), makeDeps({ discard }));
+    const removed = (discard.mock.calls as unknown as Array<[string[]]>).flatMap(([files]) => files);
+    expect(removed).not.toContain(result!.winner.filePath);
+    expect(removed).not.toContain(String(result!.base?.filePath));
+  });
+
+  it('a failing discard never breaks the thumbnail', async () => {
+    const result = await runThumbnailDirector(makeInput({ realImages: ['C:/p/a.jpg', 'C:/p/b.jpg'] }), makeDeps({ discard: vi.fn(async () => { throw new Error('locked'); }) }));
+    expect(result?.winner.real).toBe(true);
+  });
+});
