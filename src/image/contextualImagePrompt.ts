@@ -44,13 +44,89 @@ export interface ContextualImagePromptInput {
    * Without it "render only the requested title text" named no text, and engines drew the whole title.
    */
   thumbnailText?: string;
+  /** [2026-10-08] 'poster' only on the thumbnail director's cover: thumbnailText is the whole title. */
+  coverStyle?: 'poster' | 'photo';
+  /** [2026-10-08] The heading to draw verbatim ("소제목 글자 넣기" on, article section image only). */
+  headingText?: string;
 }
 
-/** Text policy naming the exact thumbnail phrase, or null when no phrase applies. */
+function cleanDrawnText(value: unknown): string {
+  return String(value || '').replace(/["\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+// Separators: '|', ': ' (a colon with a space — never "10:30"), or a comma that is not inside a number
+// ("12,000원"). '·' joins words ("청년·신혼") and never splits.
+const POSTER_KICKER = /^(.{2,20}?)(?:\s*\|\s*|\s*:\s+|\s*(?:(?<!\d)[,，]|[,，](?!\d))\s*)(\S.*)$/u;
+// Digits with an attached unit; a trailing comma or period is punctuation, not part of the number.
+const POSTER_NUMBER = /\d(?:[\d,.]*\d)?(?:만\s?원|억\s?원|천\s?원|원|만|억|%|배|명|개월|개|곳|가지|년|월|일|세|살|조건|단계|차|위|가구)?/gu;
+const EXACT_SPELLING = 'Spell every Korean character and digit exactly as given, in the same order; break lines only between words; never shorten, paraphrase, translate, repeat, or add words.';
+const NO_OTHER_TEXT = 'No other text, labels, logos, watermarks, URLs, hashtags, or badges.';
+
+/** A leading keyword phrase before a separator becomes the small label line; the rest is the headline. */
+export function splitPosterTitle(title: string): { kicker: string | null; headline: string } {
+  const clean = cleanDrawnText(title);
+  const match = clean.match(POSTER_KICKER);
+  return match ? { kicker: match[1].trim(), headline: match[2].trim() } : { kicker: null, headline: clean };
+}
+
+/** Numbers with their unit ("2,255만원", "3조건"), at most three, for the accent colour. */
+export function posterEmphasisTokens(title: string): string[] {
+  const found = cleanDrawnText(title).match(POSTER_NUMBER) || [];
+  return [...new Set(found.map((token) => token.trim()).filter(Boolean))].slice(0, 3);
+}
+
+/**
+ * [2026-10-08 사장님] Cover text = the whole title laid out as a Korean blog poster, never a cut hook.
+ * Shared by the brief and the GPT Image generator so both say the same thing.
+ */
+export function buildPosterTitleTypography(title: string): string {
+  const { kicker, headline } = splitPosterTitle(title);
+  const tokens = posterEmphasisTokens(title);
+  // The title is stated once — as label + headline when it splits — so it cannot be drawn twice.
+  return [
+    kicker
+      ? `Cover text, drawn once and nothing else: a small label line "${kicker}" above the headline "${headline}" (2 to 4 lines).`
+      : `Cover text, drawn once and nothing else: the headline "${headline}" (2 to 4 lines).`,
+    'Headline: very large, heavy bold sans-serif, dark navy or black on a light area, aligned to one side of the square.',
+    EXACT_SPELLING,
+    tokens.length > 0 ? `Highlight ${tokens.map((token) => `"${token}"`).join(', ')} in a bright accent colour (a yellow or orange highlight).` : '',
+    'Keep every letter inside the safe area, well away from the edges.',
+    NO_OTHER_TEXT,
+  ].filter(Boolean).join(' ');
+}
+
+/** [2026-10-08 사장님] Section images carry their heading verbatim ("제목이 그대로 들어가야"). */
+export function buildHeadingTitleTypography(heading: string): string {
+  return [
+    `Write this exact Korean section title in the image: "${cleanDrawnText(heading)}".`,
+    EXACT_SPELLING,
+    'Bold sans-serif in 1 to 3 lines, clearly readable but smaller than a cover headline, on a clean band or a calm area that does not cover the main subject; keep it inside the safe area.',
+    NO_OTHER_TEXT,
+  ].join(' ');
+}
+
+/** True when this is the director's poster cover with text to draw. */
+function isPosterCover(input: ContextualImagePromptInput): boolean {
+  return input.isThumbnail === true && input.allowText === true && input.coverStyle === 'poster'
+    && cleanDrawnText(input.thumbnailText) !== '';
+}
+
+/** Text policy naming the exact thumbnail text, or null when no text applies. */
 function resolveThumbnailTextPolicy(input: ContextualImagePromptInput): string | null {
-  const text = String(input.thumbnailText || '').replace(/["\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+  const text = cleanDrawnText(input.thumbnailText);
   if (!input.isThumbnail || !input.allowText || !text) return null;
+  if (isPosterCover(input)) return buildPosterTitleTypography(text);
   return `Render exactly this Korean text once, at most 2 lines, large and legible: "${text}". It is a short hook, not the article title; never write the article title. No other labels, captions, logos, or watermarks.`;
+}
+
+/**
+ * Section text policy: the heading verbatim when "소제목 글자 넣기" marked it (headingText), the legacy
+ * wording for any other section item that allows text, or null when the section image stays text-free.
+ */
+function resolveHeadingTextPolicy(input: ContextualImagePromptInput, legacy: string): string | null {
+  if (input.isThumbnail || !input.allowText) return null;
+  const heading = cleanDrawnText(input.headingText);
+  return heading ? buildHeadingTitleTypography(heading) : legacy;
 }
 
 export interface ContextualVisualRole {
@@ -457,9 +533,9 @@ function buildCompactContextualImagePrompt(input: ContextualImagePromptInput): s
   const sectionHeading = compactText(input.sectionHeading, 220) || globalSubject;
   const sectionContent = compactText(input.sectionContent, 500) || sectionHeading;
   const existingPrompt = compactText(input.existingPrompt, 320);
-  const textPolicy = resolveThumbnailTextPolicy(input) ?? (input.allowText && !input.isThumbnail
-    ? 'Render only the explicitly requested title text and no other writing.'
-    : 'Create a text-free image with no letters, labels, logos, captions, or watermark.');
+  const textPolicy = resolveThumbnailTextPolicy(input)
+    ?? resolveHeadingTextPolicy(input, 'Render only the explicitly requested title text and no other writing.')
+    ?? 'Create a text-free image with no letters, labels, logos, captions, or watermark.';
   const referencePolicy = input.hasReferenceImage
     ? REFERENCE_IDENTITY_POLICY
     : NO_REFERENCE_IDENTITY_POLICY;
@@ -478,7 +554,9 @@ function buildCompactContextualImagePrompt(input: ContextualImagePromptInput): s
     `SECTION EVIDENCE: ${quoted(sectionContent)}`,
     `ARTICLE TITLE: ${quoted(articleTitle)}`,
     visualHint ? `VISUAL HINT: ${quoted(visualHint)}` : '',
-    'Create one literal, physically plausible scene in which the section evidence is visually recognizable. Keep the subject dominant and omit unrelated generic interiors or posed people.',
+    isPosterCover(input)
+      ? 'Create one physically plausible cover scene in which the section evidence is visually recognizable. Keep the subject dominant and omit unrelated generic interiors.'
+      : 'Create one literal, physically plausible scene in which the section evidence is visually recognizable. Keep the subject dominant and omit unrelated generic interiors or posed people.',
     compactRoleLine,
     compactCoverLine,
     viewpointLine ? viewpointLine.replace(/^- /, '') : '',
@@ -533,17 +611,21 @@ export function buildContextualImagePrompt(input: ContextualImagePromptInput): s
   //   overlay; "render the requested title text" with no text named made engines draw the whole title,
   //   and the overlay then printed the phrase on top of it (the only double text that could happen).
   const thumbnailTextPolicy = resolveThumbnailTextPolicy(input);
-  const textPolicy = thumbnailTextPolicy
-    ? `TEXT POLICY: ${thumbnailTextPolicy}`
-    : input.allowText && !input.isThumbnail
-      ? 'TEXT POLICY: Render only explicitly requested title text; no other labels, captions, logos, or watermarks.'
-      : 'TEXT POLICY: ZERO TEXT, ZERO LETTERS, ZERO WORDS, ZERO WRITING, no logos, no captions, no watermark.';
+  // A poster cover (the engine draws the whole title) shows a person with props by design.
+  const posterCover = isPosterCover(input);
+  const drawnTextPolicy = thumbnailTextPolicy
+    ?? resolveHeadingTextPolicy(input, 'Render only explicitly requested title text; no other labels, captions, logos, or watermarks.');
+  const textPolicy = drawnTextPolicy
+    ? `TEXT POLICY: ${drawnTextPolicy}`
+    : 'TEXT POLICY: ZERO TEXT, ZERO LETTERS, ZERO WORDS, ZERO WRITING, no logos, no captions, no watermark.';
   const referencePolicy = input.hasReferenceImage
     ? REFERENCE_IDENTITY_POLICY
     : NO_REFERENCE_IDENTITY_POLICY;
   const modePolicy = input.isShoppingConnect
     ? 'SHOPPING MODE: The referenced product remains the unmistakable hero subject; illustrate the section-specific use, feature, inspection, or decision without redesigning it.'
-    : 'EDITORIAL MODE: Depict the real, literal situation described by the section rather than a symbolic stock-photo substitute.';
+    : posterCover
+      ? 'COVER POSTER MODE: A clean, bright Korean blog cover — a believable photo subject with real topic props on one side, the title headline on the other.'
+      : 'EDITORIAL MODE: Depict the real, literal situation described by the section rather than a symbolic stock-photo substitute.';
 
   const roleLine = !input.isThumbnail && input.visualRole?.composition
     ? `- VISUAL ROLE (${input.visualRole.name}): ${input.visualRole.composition}. Other sections of this article use different roles; keep to this one.`
@@ -590,7 +672,7 @@ export function buildContextualImagePrompt(input: ContextualImagePromptInput): s
     '',
     'CONSTRAINTS:',
     '- No unrelated or generic scene. Never substitute a decorative generic living room, generic kitchen, generic sofa, dining setup, ornamental decor, or aspirational interior for the stated subject.',
-    '- No posed person, smiling family, lounging person, cooking person, or decorative human figure unless the section evidence explicitly requires that exact human action.',
+    posterCover ? '' : '- No posed person, smiling family, lounging person, cooking person, or decorative human figure unless the section evidence explicitly requires that exact human action.',
     '- Do not omit, generalize, beautify away, or contradict the article subject and section evidence.',
     ...roleConstraintLines,
     `- ${textPolicy}`,

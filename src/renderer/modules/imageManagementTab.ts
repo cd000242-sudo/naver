@@ -680,6 +680,25 @@ export async function initImageManagementTab(): Promise<void> {
     });
   }
 
+  // [2026-10-08] "소제목 이미지에 소제목 글자 넣기" — main 의 generateImages 가 config 로 읽는다(모든 발행 경로 공통).
+  const headingTextCheckbox = document.getElementById('image-heading-text-include') as HTMLInputElement | null;
+  if (headingTextCheckbox) {
+    try {
+      const cfg = await (window as any).api?.getConfig?.();
+      headingTextCheckbox.checked = cfg?.headingImageTextInclude === true;
+    } catch { /* 무시 */ }
+    headingTextCheckbox.addEventListener('change', async () => {
+      try {
+        await (window as any).api?.saveConfig?.({ headingImageTextInclude: headingTextCheckbox.checked });
+        appendLog(headingTextCheckbox.checked
+          ? '🔤 소제목 글자 ON — 한글을 그리는 엔진이 소제목 문장을 그대로 이미지에 넣습니다'
+          : '🔤 소제목 글자 OFF — 소제목 이미지는 글자 없이 만듭니다');
+      } catch (e: any) {
+        console.warn('[HeadingImageText] 설정 저장 실패:', e);
+      }
+    });
+  }
+
   // ✅ OpenAI 이미지 모델·품질 라디오 — config 양방향 sync + 실시간 비용 표시
   const openaiModelRadios = document.querySelectorAll('input[name="openai-image-model"]');
   const openaiQualityRadios = document.querySelectorAll('input[name="openai-image-quality"]');

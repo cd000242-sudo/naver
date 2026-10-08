@@ -52,6 +52,15 @@ export interface ImageRequestItem {
   coverDirection?: string[];
   /** [SPEC-NAVER-IMAGE-2026 V1 §9] Exact short phrase a text-drawing engine renders on the thumbnail. */
   thumbnailText?: string;
+  /**
+   * [2026-10-08 사장님] Set only on the thumbnail director's cover: 'poster' = the engine draws the whole
+   * title as a poster (thumbnailText is the title), 'photo' = a text-free cover. Either way the cover
+   * gets the natural photo look instead of the random camera rotation. The image studio and manual
+   * tools never set it, so their own prompts stay as they were.
+   */
+  coverStyle?: 'poster' | 'photo';
+  /** [2026-10-08] Heading drawn verbatim on this section image (generateImages sets it; "소제목 글자 넣기"). */
+  headingText?: string;
 }
 
 /**
@@ -101,6 +110,12 @@ export interface GenerateImagesOptions {
   crawledImages?: string[]; // ✅ [2026-01-28] 크롤링에서 수집된 이미지 URL (img2img 참조용)
   stopCheck?: () => boolean; // ✅ [100점 수정] 중지 여부 확인 콜백
   thumbnailTextInclude?: boolean; // ✅ [2026-01-28] 1번 이미지에 텍스트 포함 여부
+  /**
+   * [2026-10-08] Set by the article publish paths (renderer generateImagesWithCostSafety, main auto path):
+   * these items are the post's section images, so "소제목 글자 넣기" may draw their heading. The image
+   * studio and other tools never set it.
+   */
+  articleSectionImages?: boolean;
   category?: string; // ✅ [2026-02-12] 전체 배치의 카테고리 (items에 개별 category 없을 때 폴백)
   isContinuousMode?: boolean;
   isMultiAccount?: boolean;

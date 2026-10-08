@@ -201,6 +201,19 @@ function gitPush() {
          * push 를 3회 재시도하고, 그래도 실패하면 올라간 태그를 지워 빈 릴리즈를
          * 남기지 않는다.
          */
+        /*
+         * [2026-10-08 v2.11.330 실사고] 빌드 5분 사이 봇이 main 에 커밋 1개를 올려 push 가 거절됐고, 재시도의
+         * rebase 는 다른 세션의 미커밋 데이터 파일(sitemap·homefeed) 때문에 3번 모두 실패 → 빈 릴리즈가 3분간
+         * Latest(latest.yml 404). rebase 는 작업 폴더가 깨끗해야 하지만 merge 는 겹치지 않는 미커밋 파일을 허용한다.
+         * push 전에 미리 합치고, 재시도도 merge 로 한다(태그는 릴리즈 커밋에 그대로 남는다).
+         */
+        const syncWithOrigin = () => {
+            execFileSync('git', ['fetch', 'origin'], opts);
+            execFileSync('git', ['merge', '--no-edit', 'origin/main'], opts);
+        };
+        try { syncWithOrigin(); } catch (syncErr) {
+            try { execFileSync('git', ['merge', '--abort'], opts); } catch (abortErr) { /* no merge in progress */ }
+        }
         let pushed = false;
         for (let attempt = 1; attempt <= 3 && !pushed; attempt++) {
             try {
@@ -208,12 +221,9 @@ function gitPush() {
                 pushed = true;
                 console.log('   ✅ Push 완료');
             } catch (e) {
-                console.log(`   ⚠️ Push 실패(${attempt}/3): ${e.message.substring(0, 80)} — fetch+rebase 후 재시도`);
-                try {
-                    execFileSync('git', ['fetch', 'origin'], opts);
-                    execFileSync('git', ['rebase', 'origin/main'], opts);
-                } catch (rebaseErr) {
-                    try { execFileSync('git', ['rebase', '--abort'], opts); } catch (abortErr) { /* no rebase in progress */ }
+                console.log(`   ⚠️ Push 실패(${attempt}/3): ${e.message.substring(0, 80)} — fetch+merge 후 재시도`);
+                try { syncWithOrigin(); } catch (mergeErr) {
+                    try { execFileSync('git', ['merge', '--abort'], opts); } catch (abortErr) { /* no merge in progress */ }
                 }
             }
         }

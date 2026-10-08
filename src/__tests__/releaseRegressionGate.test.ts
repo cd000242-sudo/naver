@@ -64,6 +64,13 @@ describe('release regression gate', () => {
     expect(uploader).toContain(':refs/tags/'); // 최종 실패 시 부분 푸시된 태그 회수
   });
 
+  it('[2026-10-08 v2.11.330] syncs with origin by merge, never rebase — other sessions leave uncommitted data files', () => {
+    expect(uploader).toContain("execFileSync('git', ['merge', '--no-edit', 'origin/main'], opts)");
+    expect(uploader).not.toMatch(/\['rebase', 'origin\/main'\]/);
+    // Synced once before the first push attempt, not only after a rejection.
+    expect(uploader.indexOf('try { syncWithOrigin(); }')).toBeLessThan(uploader.indexOf("execFileSync('git', ['push', 'origin', 'main', TAG], opts)"));
+  });
+
   it('returns a failing shell exit code even when an early release stage aborts', () => {
     expect(releaseAll).toMatch(
       /finally \{[\s\S]{0,900}?if \(!allSuccess\) process\.exitCode = 1/,

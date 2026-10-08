@@ -1,5 +1,6 @@
 /**
- * SPEC-NAVER-IMAGE-2026 — thumbnail text: AUTO / include / exclude, and never the whole title.
+ * SPEC-NAVER-IMAGE-2026 — thumbnail text: AUTO / include / exclude. App-made cards never carry the whole
+ * title; an engine that draws Korean itself gets the whole title as a poster (decidePosterTitleText).
  *
  * NAVER IMAGE PIPELINE V1 §9: "텍스트를 넣어도 제목 전체를 복사하지 않는다." The overlays used to print
  * the full post title (3 lines of 18 chars) on the cover; on a ~200px home-feed card that is noise.
@@ -112,4 +113,26 @@ export function decideThumbnailText(input: {
     text,
     reason: input.realPhotoCover ? '자동: 실제 사진 + 짧은 핵심 문구' : '자동: 짧은 핵심 문구',
   };
+}
+
+/**
+ * [2026-10-08 사장님] An engine that draws Korean itself lays the WHOLE title out as a cover poster
+ * (keyword label + 2–4 line headline). The 16-character cut above stays for app-made cards only:
+ * "썸네일은 후킹문구만 짤려서 나오는 구조". Same AUTO rule for products and places as decideThumbnailText.
+ */
+export function decidePosterTitleText(input: {
+  readonly mode: ThumbnailTextMode;
+  readonly title: string;
+  readonly cardPromise?: string;
+  readonly kind: ArticleVisualKind;
+}): ThumbnailTextDecision {
+  if (input.mode === 'exclude') return { include: false, text: null, reason: '사용자 설정: 미포함' };
+  const title = compact(input.title);
+  if (!title) return { include: false, text: null, reason: '제목 없음' };
+  if (input.mode === 'include') return { include: true, text: title, reason: '사용자 설정: 포함 · 제목 전체' };
+  const hasNumber = extractThumbnailHook(title, input.cardPromise) !== null;
+  if (!hasNumber && !QUOTED.test(title) && (input.kind === 'product' || input.kind === 'travel')) {
+    return { include: false, text: null, reason: '자동: 제품·장소 자체가 핵심' };
+  }
+  return { include: true, text: title, reason: '자동: 제목 전체(엔진이 직접 그림)' };
 }

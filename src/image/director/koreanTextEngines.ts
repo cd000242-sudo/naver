@@ -23,3 +23,21 @@ export const KOREAN_TEXT_ENGINES: ReadonlySet<string> = new Set([
 export function drawsKoreanTextItself(provider: unknown): boolean {
   return KOREAN_TEXT_ENGINES.has(String(provider ?? '').trim().toLowerCase());
 }
+
+const SLOT_OR_PLACEHOLDER = /^(?:🖼️?\s*)?(?:썸네일|thumbnail|이미지\s*\d+)$/iu;
+
+/**
+ * [2026-10-08 사장님] "소제목 이미지에 소제목 글자 넣기" (image management tab, config.headingImageTextInclude):
+ * the heading to draw verbatim on a section image, or null when the image stays text-free — the setting
+ * is off, the item is the cover, the engine cannot draw Korean, or the heading is only a slot name.
+ */
+export function resolveHeadingImageText(
+  item: { readonly heading?: unknown; readonly isThumbnail?: unknown },
+  provider: unknown,
+  enabled: boolean,
+): string | null {
+  if (!enabled || item?.isThumbnail === true || !drawsKoreanTextItself(provider)) return null;
+  const heading = String(item?.heading ?? '').replace(/["\r\n]+/gu, ' ').replace(/\s+/gu, ' ').trim();
+  if (!heading || SLOT_OR_PLACEHOLDER.test(heading)) return null;
+  return heading;
+}

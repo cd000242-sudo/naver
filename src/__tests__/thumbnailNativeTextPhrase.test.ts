@@ -1,4 +1,6 @@
 // SPEC-NAVER-IMAGE-2026 V1 §9 — engines that draw their own thumbnail text get the short phrase, not the title.
+// [2026-10-08 사장님] Except the thumbnail director's cover: there the engine draws the whole title as a poster
+// (coverStyle 'poster'). Items without that mark — the image studio, legacy templates — keep the short phrase.
 // Before: the brief said "render only the requested title text" without naming it, and the legacy nano
 // template said Render EXACTLY "<whole title>" — so nano banana wrote the full 40-character title.
 import { readFileSync } from 'fs';
@@ -42,6 +44,12 @@ describe('contextual brief names the exact thumbnail phrase', () => {
     const section = policyLine(buildContextualImagePrompt({ ...base, isThumbnail: false, thumbnailText: SHORT }));
     expect(section).not.toContain(SHORT);
     expect(section).toContain('Render only explicitly requested title text');
+  });
+
+  it('[2026-10-08] a section image marked by "소제목 글자 넣기" names its heading verbatim', () => {
+    const section = policyLine(buildContextualImagePrompt({ ...base, isThumbnail: false, headingText: '트림별 가격 비교', thumbnailText: SHORT }));
+    expect(section).not.toContain(SHORT);
+    expect(section).toContain('Write this exact Korean section title in the image: "트림별 가격 비교"');
   });
 });
 
@@ -92,13 +100,15 @@ describe('wiring', () => {
     expect(markEngineDrawnThumbnailText(images, 'nano-banana', [{ heading: '표지', isThumbnail: true, allowText: true }])[0].textRendered).toBeUndefined();
   });
 
-  it('the director passes its decided phrase to an engine that draws text', async () => {
+  it('[2026-10-08] the director passes the whole title, marked as a poster, to an engine that draws text', async () => {
     const generate = vi.fn(async () => [{ heading: 'x', filePath: 'C:/none/cover.png', previewDataUrl: 'data:a', provider: 'nano-banana-pro' } as GeneratedImage]);
     await generateImagesWithThumbnailDirector(
       { provider: 'nano-banana-pro', postTitle: TITLE, thumbnailTextInclude: true, thumbnailDirector: {}, items: [{ heading: '🖼️ 썸네일', prompt: 'x', allowText: true }] } as GenerateImagesOptions,
       {}, undefined, { config: {}, generate, applyTitleOverlay: vi.fn(async (i: GeneratedImage[]) => i) },
     );
     expect(generate).toHaveBeenCalledTimes(1);
-    expect((generate.mock.calls[0] as any[])[0].items[0].thumbnailText).toBe(SHORT);
+    const cover = (generate.mock.calls[0] as any[])[0].items[0];
+    expect(cover.thumbnailText).toBe(TITLE);
+    expect(cover.coverStyle).toBe('poster');
   });
 });

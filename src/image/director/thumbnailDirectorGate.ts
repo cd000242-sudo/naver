@@ -16,9 +16,9 @@ import { composeHookCard800, composeSquare800, composeTightCrop800 } from './thu
 import { MIN_REAL_PHOTO_SIDE, composePair800, readOrientedSize } from './thumbnailPairComposer.js';
 import { judgeThumbnailCandidates } from './thumbnailJudge.js';
 import { runThumbnailDirector, type ThumbnailDirectorResult } from './thumbnailDirector.js';
-import { isRealAssetPriorityTopic, resolveRealAssets, summarizeInventory, type AssetEntry } from './realAssetResolver.js';
+import { isRealAssetPriorityTopic, resolveRealAssets, summarizeInventory, userPlacedComposable, type AssetEntry } from './realAssetResolver.js';
 import { inferArticleVisualKind } from './sectionRolePlanner.js';
-import { normalizeThumbnailTextMode, resolveThumbnailOverlayText } from './thumbnailText.js';
+import { decidePosterTitleText, normalizeThumbnailTextMode, resolveThumbnailOverlayText } from './thumbnailText.js';
 import { checkThumbnailPlan } from './imageQualityCheck.js';
 import { withTextInImage, withTextNotInImage, withTextNotWanted } from './thumbnailTextState.js';
 import { drawsKoreanTextItself } from './koreanTextEngines.js';
@@ -173,7 +173,13 @@ export async function generateImagesWithThumbnailDirector(
   const realPriority = isRealAssetPriorityTopic(title, options.category);
   const route = qualityMode === 'high' ? resolveIssueVisionRoute(context.config) : null;
   const log = (message: string) => console.log(message);
-  const realImages = await keepUsableRealPhotos(inventory.composable, log);
+  const engineDrawsText = drawsKoreanTextItself(provider);
+  // [2026-10-08 사장님] When the engine will draw the title poster, only photos the user put in outrank it —
+  //   auto-collected photos give way. Not on real-photo-first topics (people, events, products, places):
+  //   an AI poster may not show a real person, so the collected photo stays first there.
+  const posterWillDraw = engineDrawsText && !realPriority
+    && decidePosterTitleText({ mode: textMode, title, cardPromise: String(request.cardPromise || ''), kind }).include;
+  const realImages = await keepUsableRealPhotos(posterWillDraw ? userPlacedComposable(inventory) : inventory.composable, log);
   log(`${LOG} 🖼️ 썸네일 설계 · 자산: ${summarizeInventory(inventory)} · 실제 사진 우선 주제=${realPriority}`
     + ` · 심사: ${qualityMode === 'high' ? (route ? `${route.label}${route.free ? ' (구독, 추가 과금 0)' : ' (유료 API, 최저가 모델)'}` : '경로 없음(1번 유지)') : '없음(표준 모드)'}`);
 
@@ -187,7 +193,7 @@ export async function generateImagesWithThumbnailDirector(
     allowBakedText: request.allowBakedText === true,
     keepPrompt: request.keepPrompt === true,
     // The engine draws the copy itself whenever the director decides there is copy (사장님 2026-09-23).
-    engineDrawsText: drawsKoreanTextItself(provider),
+    engineDrawsText,
     realImages,
     realWorkDir: `${await getImageSaveBasePath()}/thumbnail-candidates`,
   }, {
@@ -236,6 +242,7 @@ export async function generateImagesWithThumbnailDirector(
     realAssetAvailable: realImages.length > 0,
     usedRealAsset: result.winner.real,
     aiDepictsRealPerson: false,
+    posterTitle: result.engineDrewText,
   });
   log(`${LOG} 🏁 선택: ${result.winner.label} (${result.verdict ? result.verdict.source : '단일'}) · 후보 ${result.candidates.length}개 · 점검 ${check.verdict}${check.reasons.length ? ` — ${check.reasons.join(' / ')}` : ''}`);
   if (notice) log(`${LOG} 💡 ${notice}`);

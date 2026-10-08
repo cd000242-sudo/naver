@@ -6,16 +6,16 @@
  *   standard mode (default)→ exactly one thumbnail, no judge call (V1 §10, §15, §27)
  *   high mode (opt-in)     → 2–3 free variants of that one image + one vision judge call
  *
- * Text is never the whole title (V1 §9): a short phrase, baked only where the no-overlay flag survives
- * to publish. Every side effect is injected. Optional steps never destroy a result: a failed variant,
+ * App-made text is never the whole title (V1 §9): a short phrase, baked only where the no-overlay flag
+ * survives to publish. An engine that draws Korean itself lays out the whole title as a poster. Every side effect is injected. Optional steps never destroy a result: a failed variant,
  * card or judge keeps the plain first image — the same image the app produced before this module.
  */
 import type { GeneratedImage, ImageRequestItem } from '../types.js';
 import type { ComposeResult } from './thumbnailComposer.js';
 import type { ThumbnailJudgeCandidate, ThumbnailJudgeContext, ThumbnailJudgeVerdict } from './thumbnailJudge.js';
 import type { ArticleVisualKind } from './sectionRolePlanner.js';
-import { chooseThumbnailDirection, coverDirectionLines, type ThumbnailDirection } from './thumbnailStrategy.js';
-import { decideThumbnailText, type ThumbnailTextDecision, type ThumbnailTextMode } from './thumbnailText.js';
+import { chooseThumbnailDirection, coverDirectionLines, posterCoverLines, type ThumbnailDirection } from './thumbnailStrategy.js';
+import { decidePosterTitleText, decideThumbnailText, type ThumbnailTextDecision, type ThumbnailTextMode } from './thumbnailText.js';
 
 export type CandidateKind =
   | 'ai-full' | 'ai-tight' | 'ai-hook'
@@ -90,6 +90,7 @@ export function buildCoverItem(
   input: ThumbnailDirectorInput,
   direction: ThumbnailDirection,
   titleBandPlanned = false,
+  poster = false,
 ): ImageRequestItem {
   const heading = String(input.item.heading || '');
   const slot = isSlotName(heading) || !heading.trim();
@@ -107,7 +108,9 @@ export function buildCoverItem(
       .filter(Boolean)
       .join(' / ')
       .slice(0, 900) || undefined,
-    coverDirection: coverDirectionLines(direction, { titleBandPlanned, cardPromise: input.cardPromise }),
+    coverDirection: poster
+      ? posterCoverLines(direction, { cardPromise: input.cardPromise })
+      : coverDirectionLines(direction, { titleBandPlanned, cardPromise: input.cardPromise }),
   };
 }
 
@@ -217,15 +220,20 @@ export async function runThumbnailDirector(
   const text = decideThumbnailText({
     mode: input.textMode, title: input.title, cardPromise: input.cardPromise, realPhotoCover: realFirst, kind: input.kind,
   });
-  // A real photo gets its copy from the app (no engine is involved).
+  // A real photo gets its copy from the app (no engine is involved): the short phrase.
   const bake = input.allowBakedText && text.include && text.text ? { main: text.text } : null;
   // [2026-09-23 사장님] An engine that draws Korean well draws the copy itself on the AI cover: no app card,
   //   no app overlay on top (image/director/koreanTextEngines).
-  const engineDrew = input.engineDrawsText && text.include && Boolean(text.text);
+  // [2026-10-08 사장님] …and it draws the whole title as a poster, not the 16-character cut.
+  const poster = input.engineDrawsText
+    ? decidePosterTitleText({ mode: input.textMode, title: input.title, cardPromise: input.cardPromise, kind: input.kind })
+    : null;
+  const engineDrew = Boolean(poster?.include && poster.text);
+  const aiText = engineDrew && poster ? poster : text;
   const aiBake = engineDrew ? null : bake;
   // Where text cannot be baked, the legacy overlays add it later (short text) — tell the brief/judge.
   const titleBandPlanned = !engineDrew && !input.allowBakedText && text.include;
-  deps.log(`${LOG} 🧭 방향=${direction} · 모드=${input.qualityMode} · 문구=${text.include ? `"${text.text}"` : '없음'}(${text.reason})${engineDrew ? ' · 엔진이 직접 그림' : ''} · 실제 사진 ${input.realImages.length}장${prefersPair(input, direction) ? '(두 장 나란히)' : ''}`);
+  deps.log(`${LOG} 🧭 방향=${direction} · 모드=${input.qualityMode} · 문구=${aiText.include ? `"${aiText.text}"` : '없음'}(${aiText.reason})${engineDrew ? (realFirst ? ' · AI로 갈 때만 제목 포스터(실제 사진 합성은 짧은 문구)' : ' · 엔진이 제목 전체를 포스터로 그림') : ''} · 실제 사진 ${input.realImages.length}장${prefersPair(input, direction) ? '(두 장 나란히)' : ''}`);
 
   if (realFirst) {
     const real = await collect(realMakers(input, bake, deps, direction));
@@ -236,18 +244,18 @@ export async function runThumbnailDirector(
     deps.log(`${LOG} ⚠️ 실제 사진 합성이 모두 실패 — AI 썸네일로 진행`);
   }
 
-  const cover = buildCoverItem(input, direction, titleBandPlanned);
-  // A text-drawing engine gets the decided short phrase (never the title) or, with no copy, a text-free
-  // brief; `allowText` follows the director's decision, not the caller's checkbox (V1 §9).
-  const drawn = input.engineDrawsText
-    ? { ...cover, allowText: engineDrew, thumbnailText: engineDrew ? String(text.text) : undefined }
-    : cover;
+  const cover = buildCoverItem(input, direction, titleBandPlanned, engineDrew);
+  // A text-drawing engine gets the whole title as a poster or, with no copy, a text-free brief;
+  // `allowText` follows the director's decision, not the caller's checkbox (V1 §9).
+  const drawn: ImageRequestItem = input.engineDrawsText
+    ? { ...cover, allowText: engineDrew, thumbnailText: engineDrew ? String(aiText.text) : undefined, coverStyle: engineDrew ? 'poster' : 'photo' }
+    : { ...cover, coverStyle: 'photo' };
   const base = await deps.generateBase(drawn);
   if (!base) return null;
   const full: CandidateFile = { kind: 'ai-full', filePath: String(base.filePath || ''), label: 'AI 장면', bakedText: false, real: false };
   // An engine that drew its own text must not be cropped or overprinted.
   if (!deps.isLocalFile(base.filePath) || engineDrew || deps.isCancelled?.()) {
-    return { base, winner: full, candidates: [full], verdict: null, direction, text, engineDrewText: engineDrew };
+    return { base, winner: full, candidates: [full], verdict: null, direction, text: aiText, engineDrewText: engineDrew };
   }
   const cardMaker: Maker | null = aiBake
     ? async () => {
