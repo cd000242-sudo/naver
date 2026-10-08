@@ -432,7 +432,7 @@ interface AutomationAPI {
   }>;
   getLicense: () => Promise<{ license: LicenseInfo | null }>;
   verifyLicense: (code: string, deviceId: string, email?: string) => Promise<{ valid: boolean; license?: LicenseInfo; message?: string }>;
-  verifyLicenseWithCredentials: (userId: string, password: string, deviceId: string) => Promise<{ valid: boolean; license?: LicenseInfo; message?: string; debugInfo?: any }>;
+  verifyLicenseWithCredentials: (userId: string, password: string, deviceId: string, options?: { takeoverSession?: boolean }) => Promise<{ valid: boolean; license?: LicenseInfo; message?: string; code?: string; takeoverAvailable?: boolean; previousSessionTerminated?: boolean; debugInfo?: any }>;
   onSessionForceLogout: (callback: (data: { message: string }) => void) => () => void; // 중복 로그인 강제 로그아웃 이벤트
   registerExternalInflowLicense: () => Promise<{ success: boolean; message: string; expiresAt?: string }>;
   canUseExternalInflow: () => Promise<boolean>;

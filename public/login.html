@@ -985,6 +985,14 @@
 
     <div id="error-message" class="error-message"></div>
 
+    <div id="session-takeover" hidden style="margin-bottom: 18px; padding: 14px; border: 1px solid rgba(251, 191, 36, 0.5); border-radius: 8px;">
+      <p id="session-takeover-description" style="margin: 0 0 10px; color: #fbbf24; font-size: 13px; line-height: 1.6;">
+        계속하면 다른 기기의 로그인 권한이 종료되고 이 기기에서 로그인합니다.
+      </p>
+      <button type="button" id="session-takeover-button" class="login-button"
+        aria-describedby="session-takeover-description" disabled>다른 기기 접속 해제하고 로그인</button>
+    </div>
+
     <form id="login-form">
       <!-- [2026-09-05] 로그인이 기본이다. 코드 등록은 평생 한 번, 로그인은 매일이다.
            예전에는 등록 화면이 기본이라 매일 쓰는 사람이 "이미 등록했나요?" 링크를
@@ -1383,6 +1391,41 @@
     }
 
     let deviceId = '';
+    let credentialRevision = 0;
+    let sessionTakeoverOffer = null;
+
+    function clearSessionTakeover() {
+      sessionTakeoverOffer = null;
+      const section = document.getElementById('session-takeover');
+      const button = document.getElementById('session-takeover-button');
+      if (section) section.hidden = true;
+      if (button) button.disabled = true;
+    }
+
+    function invalidateSessionTakeover() {
+      credentialRevision += 1;
+      clearSessionTakeover();
+    }
+
+    function matchesCurrentCredentials(credentials) {
+      return credentials && isReauthMode && credentials.revision === credentialRevision
+        && credentials.userId === document.getElementById('user-id')?.value.trim()
+        && credentials.password === document.getElementById('password')?.value.trim();
+    }
+
+    function offerSessionTakeover(credentials) {
+      if (!matchesCurrentCredentials(credentials)) return;
+      sessionTakeoverOffer = credentials;
+      const section = document.getElementById('session-takeover');
+      const button = document.getElementById('session-takeover-button');
+      if (section) section.hidden = false;
+      if (button) button.disabled = false;
+    }
+
+    ['user-id', 'password'].forEach(id => {
+      document.getElementById(id)?.addEventListener('input', invalidateSessionTakeover);
+      document.getElementById(id)?.addEventListener('change', invalidateSessionTakeover);
+    });
 
     // 기기 ID 가져오기
 
@@ -1510,6 +1553,7 @@
      * needed:false 로 뭉개져 버튼이 아무 반응도 안 하는 것처럼 보였다).
      */
     document.getElementById('open-phone-verify-btn')?.addEventListener('click', async () => {
+      invalidateSessionTakeover();
       let status = null;
       try {
         status = await ipcRenderer.invoke('license:phoneStatus');
@@ -1536,6 +1580,7 @@
      * 확인하고, 같은 아이디의 **모든** 라이선스 행에 새 비밀번호를 쓴다.
      */
     function openPasswordReset() {
+      invalidateSessionTakeover();
       const backdrop = document.getElementById('pw-reset-backdrop');
       const userIdInput = document.getElementById('pw-reset-userid');
       const phoneInput = document.getElementById('pw-reset-phone');
@@ -1624,6 +1669,7 @@
           // 바로 로그인할 수 있게 아이디/비밀번호 칸을 채워 둔다.
           const idField = document.getElementById('user-id');
           const pwField = document.getElementById('password');
+          invalidateSessionTakeover();
           if (idField) idField.value = userId;
           if (pwField) pwField.value = newPassword;
           setTimeout(() => { backdrop.style.display = 'none'; }, 1500);
@@ -1696,14 +1742,19 @@
     }
 
     // 에러 메시지 표시 (+ 라이선스 만료 시 ACCESS DENIED 모달 표시)
-    function showError(message) {
+    function isSessionConflictMessage(message) {
+      return /already\s+logged\s+in|다른\s*기기|이미\s*로그인|(?:세션|접속).{0,30}(?:종료|만료|중복)/i.test(String(message));
+    }
+
+    function showError(message, sessionConflict = false) {
       // 등록 모달이 떠 있으면 뒤쪽 화면의 에러 줄은 보이지 않는다 — 모달에도 같이 띄운다.
       if (typeof isRegisterModalOpen === 'function' && isRegisterModalOpen()) {
         setRegisterStatus(String(message));
       }
       // 먼저 ACCESS DENIED 모달 표시 여부 확인
       const expiredKeywords = ['라이선스 만료', '이용 기간이 종료', '기간이 종료', '만료되었습니다', '만료', '종료', 'expired', 'license expired'];
-      const isExpired = expiredKeywords.some(kw => String(message).toLowerCase().includes(kw.toLowerCase()));
+      const isExpired = !sessionConflict && !isSessionConflictMessage(message)
+        && expiredKeywords.some(kw => String(message).toLowerCase().includes(kw.toLowerCase()));
       if (isExpired) {
         showAccessDeniedModal();
         return; // ACCESS DENIED 모달만 표시하고 기본 오류 메시지는 숨김
@@ -1721,6 +1772,7 @@
       const errorElement = document.getElementById('error-message');
       if (errorElement) {
         errorElement.classList.remove('show');
+        errorElement.textContent = '';
       }
     }
 
@@ -1794,7 +1846,8 @@
 
     function checkAndShowAccessDenied(errorMessage) {
       const expiredKeywords = ['라이선스 만료', '이용 기간이 종료', '기간이 종료', '만료되었습니다', '만료', '종료', 'expired', 'license expired'];
-      const isExpired = expiredKeywords.some(kw => String(errorMessage).toLowerCase().includes(kw.toLowerCase()));
+      const isExpired = !isSessionConflictMessage(errorMessage)
+        && expiredKeywords.some(kw => String(errorMessage).toLowerCase().includes(kw.toLowerCase()));
       if (isExpired) {
         showAccessDeniedModal();
         return true;
@@ -1845,6 +1898,7 @@
     let isReauthMode = true;
 
     function setRegisterModal(open) {
+      invalidateSessionTakeover();
       const backdrop = document.getElementById('license-register-backdrop');
       if (!backdrop) return;
       backdrop.style.display = open ? 'flex' : 'none';
@@ -1911,6 +1965,7 @@
 
     // ✅ [2026-03-26] free-use-button → 개인정보 수집 모달 먼저 표시
     document.getElementById('free-use-button')?.addEventListener('click', async () => {
+      invalidateSessionTakeover();
       hideError();
       try {
         // 페이월 체크 (이미 한도 초과된 경우)
@@ -2261,13 +2316,17 @@
       }
     });
 
-    // 폼 제출
-    document.getElementById('login-form')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      hideError();
-
+    // 일반 제출에는 세션 해제 의도를 싣지 않는다. 명시적 버튼 클릭 한 번에만 적용한다.
+    async function submitLogin(takeoverSession = false) {
       const loginButton = document.getElementById('login-button');
       const rememberCheckbox = document.getElementById('remember-credentials');
+      if (loginButton?.disabled) return;
+      if (takeoverSession && !matchesCurrentCredentials(sessionTakeoverOffer)) {
+        clearSessionTakeover();
+        return;
+      }
+      clearSessionTakeover();
+      hideError();
 
       if (loginButton) {
         loginButton.disabled = true;
@@ -2284,6 +2343,7 @@
 
           const userId = userIdInput?.value.trim() || '';
           const password = passwordInput?.value.trim() || '';
+          const credentials = { userId, password, revision: credentialRevision };
 
           if (!userId || !password) {
             showError('아이디와 비밀번호를 모두 입력해주세요.');
@@ -2294,27 +2354,17 @@
             return;
           }
 
-          console.log('[Login] 재인증 요청 시작:', { userId, deviceId: deviceId.substring(0, 8) + '...' });
-          result = await ipcRenderer.invoke('license:verifyWithCredentials', userId, password, deviceId);
-          console.log('[Login] 재인증 응답:', result);
-          console.log('[Login] 재인증 응답 전체 (JSON):', JSON.stringify(result, null, 2));
-
-          // 디버그 정보 출력
-          if (result && result.debugInfo) {
-            console.log('🔍 [Login] 재인증 디버그 정보:');
-            if (result.debugInfo.verify) {
-              console.log('🔍 [Login] - action:', result.debugInfo.verify.action);
-              console.log('🔍 [Login] - userId:', result.debugInfo.verify.userId);
-              console.log('🔍 [Login] - fullResponse:', JSON.stringify(result.debugInfo.verify.fullResponse, null, 2));
-              console.log('🔍 [Login] - ok:', result.debugInfo.verify.ok);
-              console.log('🔍 [Login] - valid:', result.debugInfo.verify.valid);
-            }
-          }
+          result = takeoverSession
+            ? await ipcRenderer.invoke('license:verifyWithCredentials', userId, password, deviceId, { takeoverSession: true })
+            : await ipcRenderer.invoke('license:verifyWithCredentials', userId, password, deviceId);
 
           // 원본 응답은 진단에만 사용하고, 성공 여부는 메인 프로세스의 정규화 결과를 따른다.
           const verifyResponse = result?.debugInfo?.verify?.fullResponse;
 
           if (result?.valid === true) {
+            clearSessionTakeover();
+            hideError();
+            hideAccessDeniedModal();
             // 재인증 성공
             console.log('[Login] ✅ 재인증 성공');
 
@@ -2330,7 +2380,7 @@
                 };
                 await ipcRenderer.invoke('config:save', updatedConfig);
               } catch (error) {
-                console.error('자격증명 저장 실패:', error);
+                console.error('[Login] 자격증명 저장 실패');
               }
             }
 
@@ -2353,14 +2403,16 @@
             return;
           } else {
             // ❌ 재인증 실패
+            const sessionConflict = result?.code === 'ALREADY_LOGGED_IN';
             const errorMessage = resolveLoginAuthenticationResultError(
               result,
               verifyResponse,
-              '아이디 또는 비밀번호가 올바르지 않습니다.',
+              sessionConflict ? '다른 기기에서 이미 로그인 중입니다.' : '아이디 또는 비밀번호가 올바르지 않습니다.',
             );
-            console.error('[Login] ❌ 재인증 실패 - result.valid:', result?.valid, 'message:', errorMessage);
-
-            showError(errorMessage);
+            showError(errorMessage, sessionConflict);
+            if (sessionConflict && result?.takeoverAvailable === true) {
+              offerSessionTakeover(credentials);
+            }
             if (loginButton) {
               loginButton.disabled = false;
               loginButton.textContent = '인증하기';
@@ -2588,20 +2640,22 @@
           return;
         }
       } catch (error) {
-        console.error('[Login] 인증 중 예외 발생:', error);
-        console.error('[Login] 오류 상세:', {
-          message: error.message,
-          stack: error.stack,
-          name: error.name
-        });
+        console.error('[Login] 인증 요청 실패');
         showError(`오류: ${error.message}`);
         if (loginButton) {
           loginButton.disabled = false;
           loginButton.textContent = '인증하기';
         }
       }
-    });
+    }
 
+    document.getElementById('login-form')?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      void submitLogin();
+    });
+    document.getElementById('session-takeover-button')?.addEventListener('click', () => {
+      void submitLogin(true);
+    });
 
     // 초기화 (초기 인증창을 먼저 표시, 자동 로그인 하지 않음)
     async function initialize() {
