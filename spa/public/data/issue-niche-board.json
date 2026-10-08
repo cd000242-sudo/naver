@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-10-07T21:26:02.555Z",
+  "publishedAt": "2026-10-08T03:22:42.446Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
-    "issues": 17,
-    "candidates": 178,
+    "issues": 18,
+    "candidates": 118,
     "niche": 0,
-    "preemption": 7,
+    "preemption": 5,
     "pending": 0
   },
   "freeSample": {
@@ -416,6 +416,451 @@
   ],
   "observations": [
     {
+      "keyword": "앤트로픽 엔스로픽 차이",
+      "issue": "앤트로픽",
+      "topic": "앤트로픽",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 33,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 33",
+        "선점 후보 — 경쟁 문서 33건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "표기가 둘로 달라 같은 회사인지, 오픈AI와는 뭐가 다른지 확인하려는 검색",
+        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 9개"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "앤트로픽 엔스로픽 차이 같은 회사인지 표기 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "앤트로픽 엔스로픽 차이 찾다 오픈AI랑도 헷갈리는 분 많더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "앤트로픽 오픈AI 차이",
+          "searchVolume": 10,
+          "frame": "compare"
+        },
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": 11930,
+          "frame": "generic"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": 2970,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": 11930,
+          "documentCount": 23701,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": 2970,
+          "documentCount": 35541,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": 2120,
+          "documentCount": 32083,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 CEO",
+          "searchVolume": 1950,
+          "documentCount": 23062,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 뜻",
+          "searchVolume": 300,
+          "documentCount": 16730,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 회사",
+          "searchVolume": 50,
+          "documentCount": 34568,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 SKT",
+          "searchVolume": 20,
+          "documentCount": 3293,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 오픈AI 차이",
+          "searchVolume": 10,
+          "documentCount": 10125,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T03:20:06.552Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "진영승 합참의장 질의",
+      "issue": "진영승 합참의장 질의",
+      "topic": "진영승 합참의장 질의",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 79,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 79",
+        "선점 후보 — 경쟁 문서 79건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "국회에서 의원 질의에 답하는 합참의장 진영승의 발언 내용과 프로필을 확인하려고",
+        "basis": "AI 추론 — 뉴스 헤드라인 4건 + 실측 확인된 확장어 4개"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "진영승 합참의장 질의 의원 질문에 답한 발언 내용 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "진영승 합참의장 질의 장면 보다가 프로필 나이부터 다시 찾아봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "진영승 프로필",
+          "searchVolume": 3900,
+          "frame": "generic"
+        },
+        {
+          "keyword": "진영승 합참의장 프로필",
+          "searchVolume": 2030,
+          "frame": "generic"
+        },
+        {
+          "keyword": "진영승 합참의장 나이",
+          "searchVolume": 60,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "진영승 프로필",
+          "searchVolume": 3900,
+          "documentCount": 115,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "진영승 합참의장 프로필",
+          "searchVolume": 2030,
+          "documentCount": 95,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "진영승 합참의장 나이",
+          "searchVolume": 60,
+          "documentCount": 55,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "진영승 합참의장 고향",
+          "searchVolume": 30,
+          "documentCount": 42,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T03:20:06.552Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "수양딸 윤소희 차별",
+      "issue": "수양딸 윤소희 차별",
+      "topic": "수양딸 윤소희 차별",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 98,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 98",
+        "선점 후보 — 경쟁 문서 98건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "추석 영상 속 박위 가족이 수양딸 윤소희만 챙기고 며느리 송지은은 차별했다는 논란의 진위를 확인하려고",
+        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 1개"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "수양딸 윤소희 차별 논란 송지은 식기 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "수양딸 윤소희 차별 추석 영상 다시 봤더니 식기에서 갈리더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T03:20:06.552Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "유승호와 임세주 연애",
+      "issue": "유승호와 임세주 연애",
+      "topic": "유승호와 임세주 연애",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 115,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 115",
+        "선점 후보 — 경쟁 문서 115건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "6년 열애설의 사실 여부와 상대인 가수 겸 배우 임세주가 누구인지 확인하려는 검색",
+        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 2개"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "유승호와 임세주 연애 6년 열애설 소속사 확인중 상황",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "유승호와 임세주 연애 소식에 2살 연상 임세주가 누군지 찾아보게 되네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T03:20:06.552Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "클로드 하이쿠 5.5",
+      "issue": "클로드 하이쿠 5.5",
+      "topic": "클로드 하이쿠 5.5",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 247,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 247",
+        "선점 후보 — 경쟁 문서 247건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "앤트로픽이 API 비용을 낮춘 신모델을 GPT-6와 같은 날 내놔 가격·성능을 확인하려는 검색",
+        "basis": "AI 추론 — 뉴스 헤드라인 6건 + 실측 확인된 확장어 1개"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "클로드 하이쿠 5.5 API 비용 90% 절감, GPT-6와 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "클로드 하이쿠 5.5 한참 써보니 소넷이랑 차이가 이렇게 나더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "클로드 하이쿠 소넷 차이",
+          "searchVolume": 10,
+          "frame": "compare"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "클로드 하이쿠 소넷 차이",
+          "searchVolume": 10,
+          "documentCount": 192,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-08T03:20:06.552Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
       "keyword": "페가수스 1.6 VLM",
       "issue": "페가수스 1.6",
       "topic": "페가수스 1.6",
@@ -475,7 +920,8 @@
       "monetize": null,
       "measuredAt": "2026-10-07T21:23:08.005Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오만석 개런티 낮춰",
@@ -582,126 +1028,8 @@
       "monetize": null,
       "measuredAt": "2026-10-07T21:23:08.005Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "앤트로픽 엔스로픽 차이",
-      "issue": "앤트로픽",
-      "topic": "앤트로픽",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 33,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 33",
-        "선점 후보 — 경쟁 문서 33건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "JP모건 다이먼이 앤트로픽 미토스 출시 후 AI 위험 10배 경고.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트로픽 엔스로픽 차이, 클로드 만든 AI 기업 바른 표기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "앤트로픽 엔스로픽 뭐가 맞나 했는데 클로드 만든 회사 찾다 보니 알겠더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": 2120,
-          "frame": "generic"
-        },
-        {
-          "keyword": "앤트로픽 CEO",
-          "searchVolume": 1950,
-          "frame": "generic"
-        },
-        {
-          "keyword": "앤트로픽 AI",
-          "searchVolume": 1520,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": 2120,
-          "documentCount": 32027,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 CEO",
-          "searchVolume": 1950,
-          "documentCount": 23049,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 AI",
-          "searchVolume": 1520,
-          "documentCount": 84078,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 뜻",
-          "searchVolume": 300,
-          "documentCount": 16685,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 미토스",
-          "searchVolume": 100,
-          "documentCount": 6663,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 회사",
-          "searchVolume": 50,
-          "documentCount": 34523,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-07T21:23:08.005Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "페가수스 1.6 기능",
@@ -763,7 +1091,8 @@
       "monetize": null,
       "measuredAt": "2026-10-07T21:23:08.005Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "amd 커옵 방법",
@@ -836,87 +1165,8 @@
       "monetize": null,
       "measuredAt": "2026-10-07T21:23:08.005Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "클로드 하이쿠 5.5",
-      "issue": "클로드 하이쿠 5.5",
-      "topic": "클로드 하이쿠 5.5",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 217,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 217",
-        "선점 후보 — 경쟁 문서 217건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤트로픽이 API 비용 최대 90% 낮춘 클로드 하이쿠 5.5 공개.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "클로드 하이쿠 5.5 API 비용 90% 절감 소넷 5.5와 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "클로드 하이쿠 5.5 비용 90% 낮췄다는데 소넷이랑 뭐가 다른지",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "클로드 하이쿠 소넷 차이",
-          "searchVolume": 10,
-          "frame": "compare"
-        },
-        {
-          "keyword": "클로드 5.5",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "클로드 하이쿠 소넷 차이",
-          "searchVolume": 10,
-          "documentCount": 189,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-07T21:23:08.005Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "미스트랄 라지 4",
@@ -1002,7 +1252,8 @@
       "monetize": null,
       "measuredAt": "2026-10-07T21:23:08.005Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "미스트랄 패딩",
@@ -5764,497 +6015,10 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "우리들의 발라드2 허채민",
-      "issue": "우리들의 발라드2",
-      "topic": "우리들의 발라드2",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 19,
-      "documentCountMeasured": true,
-      "searchVolume": 280,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "rising",
-      "isHot": true,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "검색량 280",
-        "문서수 19",
-        "선점 후보 — 경쟁 문서 19건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "'우리들의 발라드2'가 첫 방송하며 선공개 영상 주인공이 등장했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "우리들의 발라드2 허채민 프로필·선공개 영상 우승후보 확인",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "우리들의 발라드2 허채민 심사위원들이 무대 끝나고 서로 쳐다보더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "우리들의 발라드2 재방송",
-          "searchVolume": 1700,
-          "frame": "generic"
-        },
-        {
-          "keyword": "우리들의 발라드2 출연진",
-          "searchVolume": 1250,
-          "frame": "generic"
-        },
-        {
-          "keyword": "우리들의 발라드2 심사위원",
-          "searchVolume": 640,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "우리들의 발라드2 재방송",
-          "searchVolume": 1700,
-          "documentCount": 1291,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "우리들의 발라드2 출연진",
-          "searchVolume": 1250,
-          "documentCount": 12589,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "우리들의 발라드2 심사위원",
-          "searchVolume": 640,
-          "documentCount": 6910,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "우리들의 발라드2 참가자",
-          "searchVolume": 170,
-          "documentCount": 13312,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-05T21:42:06.266Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "SIFT AI 에이전트",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 59,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 59",
-        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "SIFT AI 에이전트 MIT·사카나 자가 진화 기술 뜯어보기",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "SIFT AI 에이전트가 검증 비용 병목을 푸는 방식이 생각보다 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-05T21:42:06.266Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "WOF 회장",
-      "issue": "김재열 WOF 회장",
-      "topic": "김재열 WOF 회장",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 187,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 187",
-        "선점 후보 — 경쟁 문서 187건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "김재열 ISU 회장이 동계 7개 종목 협의체 WOF 회장으로 선출됐다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "WOF 회장 김재열 선출, 동계 7개 종목 협의체란",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "WOF 회장 선출됐다는데 여기서 또 김재열 회장 이름이 보이네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "WOF 뜻",
-          "searchVolume": null,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-05T21:42:06.266Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "MIT SIFT",
-      "issue": "SIFT",
-      "topic": "SIFT",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 147,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 147",
-        "선점 후보 — 경쟁 문서 147건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MIT·사카나가 자가 진화 AI 에이전트 'SIFT'를 발표했다.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "MIT SIFT 사카나 공동 발표 자가진화 에이전트 핵심",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "MIT SIFT 자가진화 에이전트라는데 검증 비용에서 의외로 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-05T21:42:06.266Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
-    {
-      "issue": "LG 잠실 마지막",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "LG가 잠실구장 마지막 경기서 두산에 승리하며 4위 확보, 임찬규 15승.",
-      "headlines": [
-        {
-          "title": "프로야구 LG, 잠실구장 마지막 경기서 두산에 승리…4위 확보",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-07T12:30:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/001/0016364422"
-        },
-        {
-          "title": "프로야구 LG, 잠실구장 마지막 경기서 두산에 승리…최소 4위",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-07T13:06:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/055/0001393874"
-        },
-        {
-          "title": "LG, '마지막 잠실 맞대결' 두산에 7-5 승리…'15승' 임찬규, 다승 단독 선...",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-07T12:33:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/003/0014240280"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "누리호 발사",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "누리호 5차 발사 성공, 초소형 위성 5기 첫 동시 투입.",
-      "headlines": [
-        {
-          "title": "누리호 5차 발사 성공…초소형 위성 5기 첫 동시 투입(종합2보)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-07T06:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016363519?sid=101"
-        },
-        {
-          "title": "'바다 넘어 우주로' HD현대중, 누리호 5차 발사 성공 기여",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-07T06:10:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014239306?sid=102"
-        },
-        {
-          "title": "\"황홀했다\"…5천 여명 환호한 누리호, 5차 발사 성공",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-07T12:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000643647?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "누리호 발사 일정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "누리호 발사 장소",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "누리호 발사 명당",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "누리호 발사 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "누리호 발사 위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "누리호 발사 관측",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "고흥 누리호 발사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "누리호",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "CJ제일제당 삼양사 담합",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "CJ제일제당·삼양사 대표가 국감서 설탕 가격담합 사과.",
-      "headlines": [
-        {
-          "title": "\"공정경쟁 훼손 사죄\"…CJ제일제당·삼양사 대표 '가격담합 사과'",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-07T07:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005340135?sid=102"
-        },
-        {
-          "title": "김찬호 CJ제일제당 대표·이운익 삼양사 대표, 국감서 담합 사과…\"재발...",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-07T07:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014239851?sid=101"
-        },
-        {
-          "title": "[국감현장]'설탕 담합'에 고개 숙인 CJ제일제당·삼양사…\"국민께 사죄...",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-07T06:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009215380?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "나주 부부 살해",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "나주 60대 부부 결박 살해 용의자 50대, 이틀 만에 무안서 검거.",
-      "headlines": [
-        {
-          "title": "나주 60대 부부 살해 용의자 무안서 검거",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-07T06:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001393766?sid=102"
-        },
-        {
-          "title": "나주 60대 부부 살해 용의자 무안에서 검거",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-10-07T07:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002415883?sid=102"
-        },
-        {
-          "title": "경찰, 나주 60대 부부 살해 용의자 체포",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-10-07T07:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/047/0002531491?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "나주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "범행 동기",
-          "reason": "경찰 동기 입증 주력",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
     {
       "issue": "오만석 개런티 낮춰",
       "issueType": "fresh",
@@ -6290,310 +6054,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "공수처 검사 각하",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "공수처가 이화영 재판 집단퇴정 검사 4명 고발사건 각하 처분.",
-      "headlines": [
-        {
-          "title": "[단독] 공수처, 이화영 재판 ‘집단퇴정’ 검사 사건 각하",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-10-07T11:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001877398?sid=102"
-        },
-        {
-          "title": "공수처, ‘검사 집단 퇴정’ 사건 각하…이화영 측 “조작 결론났는데 ...",
-          "press": "khan.co.kr",
-          "publishedAt": "2026-10-07T12:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/032/0003475001?sid=102"
-        },
-        {
-          "title": "공수처, 이화영 재판 '검사 집단퇴정' 고발 사건 각하",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-07T13:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016364475?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "회사채",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "파라다이스 회사채 600억 모집에 2050억 몰려 3.4배 흥행.",
-      "headlines": [
-        {
-          "title": "파라다이스, 회사채 수요예측에 2050억 몰려…모집액 3.4배",
-          "press": "bloter.net",
-          "publishedAt": "2026-10-07T04:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/293/0000091304?sid=101"
-        },
-        {
-          "title": "\"스페이스X, 엔비디아 칩 구매용 54조원 조달 추진\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-07T01:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016361662?sid=101"
-        },
-        {
-          "title": "파라다이스, 회사채 수요예측 흥행…모집액 3.4배 몰려",
-          "press": "dealsite.co.kr",
-          "publishedAt": "2026-10-07T05:02:00.000Z",
-          "link": "https://dealsite.co.kr/articles/170250"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "회사채 금리",
-          "searchVolume": 1210,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "회사채 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "회사채 주식 차이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "회사채 금리 조회",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "회사채 등급",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "회사채 발행",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "회사채 사는법",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "회사채 etf",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "회사채 발행금리",
-          "reason": "금리 결정 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "2분기 기업 여유자금",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "반도체 호조로 2분기 기업 여유자금 67.1조 역대 최대.",
-      "headlines": [
-        {
-          "title": "기업 여유자금 46조 늘 때…가계는 18조 '뚝'",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-07T08:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005745504?sid=101"
-        },
-        {
-          "title": "반도체 호조에 2분기 기업 여윳돈 67.1조…역대 최대",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-07T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014238158?sid=101"
-        },
-        {
-          "title": "2분기 기업 여유자금 또 ‘역대 최대’…3배 급등",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-07T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012269240?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "2분기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "47세 한다감 아들",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "슈돌 한다감이 47세에 제왕절개로 아들 출산.",
-      "headlines": [
-        {
-          "title": "'슈돌' 한다감, 47세 엄마 됐다…아들 출산에 '눈물'",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-07T12:22:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009216048"
-        },
-        {
-          "title": "‘47세 최고령 산모’ 한다감, 눈물의 아들 출산기 공개(슈퍼맨이 돌아...",
-          "press": "sports.khan.co.kr",
-          "publishedAt": "2026-10-07T14:27:00.000Z",
-          "link": "https://m.entertain.naver.com/article/144/0001142795"
-        },
-        {
-          "title": "‘47세 아들 출산’ 한다감, 눈물 가득했던 병원 현장 (‘슈돌’) [종합...",
-          "press": "tvdaily.co.kr",
-          "publishedAt": "2026-10-07T12:16:00.000Z",
-          "link": "https://m.entertain.naver.com/article/440/0000048248"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "클로드 하이쿠 5.5",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "앤트로픽이 API 비용 최대 90% 낮춘 클로드 하이쿠 5.5 공개.",
-      "headlines": [
-        {
-          "title": "앤트로픽, API 비용 최대 90% 낮춘 '클로드 하이쿠 5.5' 공개",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-07T20:36:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216044"
-        },
-        {
-          "title": "앤트로픽, 효율 높인 소네트5.5 출시…AI속도조절론 이후 두번째",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-09-28T21:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016342285?sid=104"
-        },
-        {
-          "title": "앤스로픽, 성능·속도 높이고 비용 줄인 '클로드 소넷 5.5' 출시",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-09-29T05:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006377027?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "앤트로픽",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "JP모건 다이먼이 앤트로픽 미토스 출시 후 AI 위험 10배 경고.",
-      "headlines": [
-        {
-          "title": "다이먼 \"앤트로픽 미토스 출시 후 AI 위험 10배 치솟아\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-06T23:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016361251?sid=101"
-        },
-        {
-          "title": "“앤트로픽 미토스 출시 후 AI 위험 10배 치솟아” JP모건 수장의 경고",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-10-07T01:39:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002706319?sid=104"
-        },
-        {
-          "title": "\"AI 통제권 잃고 인류 멸종될 수도\"…앤트로픽 떠난 연구원 경고",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-06T09:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005825269?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "앤트로픽 상장일",
-          "reason": "IPO 시점 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 티커",
-          "reason": "주식 투자 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "AMD",
@@ -6687,184 +6149,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "스마트폰 대체",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "하크가 스마트폰 대체 AI 에이전트 공개, 2027년 전용 기기 예고.",
-      "headlines": [
-        {
-          "title": "용정순 도의원 “스마트폰 사용 제한과 함께 대체활동 지원해야”",
-          "press": "kwnews.co.kr",
-          "publishedAt": "2026-10-07T08:58:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/087/0001222553?sid=102"
-        },
-        {
-          "title": "롯데건설, 스마트홈 앱에 'AI 귀' 달았다…\"거실 불 꺼줘\" 폰에 말하면 ...",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-07T00:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005825430?sid=101"
-        },
-        {
-          "title": "안민석 \"교권보호·폰프리 정착, 신바람 경기교육 만들 것\"",
-          "press": "sidae.com",
-          "publishedAt": "2026-10-07T08:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/417/0001160337?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "스마트폰",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "하크",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "하크가 스마트폰 대체 AI 에이전트 공개, 2027년 전용 기기 출시.",
-      "headlines": [
-        {
-          "title": "하크, '스마트폰 대체' AI 에이전트 공개...2027년 전용 기기 출시",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-07T08:00:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216039"
-        },
-        {
-          "title": "[김종석의 그라운드] 권순우와 8년 만에 다시 한판…46세 파키스탄 테니...",
-          "press": "tennis.co.kr",
-          "publishedAt": "2026-09-27T22:55:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/481/0000014347"
-        },
-        {
-          "title": "[기획 5] 하십울 하크 Causal Dynamics Lab CEO, 운영 맥락을 연결해 AI 책...",
-          "press": "koreaittimes.com",
-          "publishedAt": "2026-09-23T02:04:00.000Z",
-          "link": "https://www.koreaittimes.com/news/articleView.html?idxno=157473"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [
-        {
-          "keyword": "하크 출시일",
-          "reason": "2027년 일정 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "하크 사용법",
-          "reason": "활용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "하크 투자",
-          "reason": "관련주 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "하크 경쟁사",
-          "reason": "유사 제품 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "구글이 미국 최대 원전기업 컨스텔레이션과 3.6GW 전력공급 계약.",
-      "headlines": [
-        {
-          "title": "구글, 美 최대 원전기업과 전력공급 계약…\"데이터센터 대응\"",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-06T21:44:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005825316?sid=104"
-        },
-        {
-          "title": "구글, 美최대 원전기업 컨스텔레이션서 3.6GW 전력공급 계약",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-06T20:51:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016361158?sid=104"
-        },
-        {
-          "title": "구글, 美 최대 원전 기업과 3.6GW 전력구매 계약",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-07T00:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001196537?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 번역기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 영국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 클래스룸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 재팬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 킵",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "구글 핀란드 공사",
-          "reason": "중단 명령 후속",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "페가수스 1.6",
@@ -6901,7 +6187,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "라지 4",
@@ -6953,7 +6240,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "미스트랄",
@@ -8452,117 +7740,6 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "김재열 WOF 회장",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "김재열 ISU 회장이 동계 7개 종목 협의체 WOF 회장으로 선출됐다.",
-      "headlines": [
-        {
-          "title": "김재열, 동계올림픽 7개 종목 협의체 이끈다…WOF 회장 선출",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-05T12:48:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/001/0016358277"
-        },
-        {
-          "title": "김재열 ISU 회장, 동계올림픽 7개 종목 협의체 WOF 회장으로 선출",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-05T13:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004002179?sid=102"
-        },
-        {
-          "title": "김재열 WOF 회장 선출… 동계 7개 종목 협의체 이끈다",
-          "press": "donga.com",
-          "publishedAt": "2026-10-05T19:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003752882?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "김재열",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "우리들의 발라드2",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "'우리들의 발라드2'가 첫 방송하며 선공개 영상 주인공이 등장했다.",
-      "headlines": [
-        {
-          "title": "‘우리들의발라드2’ 우승후보 등장",
-          "press": "bntnews.co.kr",
-          "publishedAt": "2026-10-04T23:36:00.000Z",
-          "link": "https://www.bntnews.co.kr/article/view/bnt202610050078"
-        },
-        {
-          "title": "'우라들의 발라드2' 첫 방송…선공개 영상 주인공 등장",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-05T11:15:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014234074"
-        },
-        {
-          "title": "'우리들의 발라드 2' 탑백귀 심사 난항...시즌1 우승자 누구였지?",
-          "press": "gukjenews.com",
-          "publishedAt": "2026-10-05T13:04:00.000Z",
-          "link": "https://www.gukjenews.com/news/articleView.html?idxno=3713483"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "우리들의 발라드2 ott",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우리들의 발라드2 재방송",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우리들의 발라드2 방청",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우리들의 발라드2 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우리들의 발라드2 넷플릭스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우리들의 발라드2 출연진",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우리들의 발라드2 편성표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "우리들의 발라드2 허채민",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
       "rowCount": 0,
       "carried": true
     }
