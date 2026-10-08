@@ -165,6 +165,7 @@ import {
   isGeneratedPostCategoryCollapsed, setGeneratedPostCategoryCollapsed,
 } from './modules/postManager.js';
 import { createLdbDraftReceiver } from './modules/ldbDraftImport.js';
+import { revealLdbDraft } from './modules/ldbHandoffPresentation.js';
 // ✅ [2026-01-25 모듈화] 오류 처리 시스템
 import {
   ErrorType,
@@ -888,7 +889,7 @@ document.addEventListener('DOMContentLoaded', () => {
         generatedImages = images;
         (window as any).generatedImages = images;
         (window as any).imageManagementGeneratedImages = images;
-        fillSemiAutoFields(post.structuredContent, { persist: false });
+        fillSemiAutoFields(post.structuredContent, { persist: false, scroll: false });
         const structured = (window as any).currentStructuredContent;
         hydrateImageManagerFromImages(structured, images);
         await autoAnalyzeHeadings(structured, { localOnly: true });
@@ -896,6 +897,7 @@ document.addEventListener('DOMContentLoaded', () => {
         displayGeneratedImages(images);
         updatePromptItemsWithImages(images);
         refreshGeneratedPostsList();
+        revealLdbDraft(post, document);
         appendLog('📥 LDB 원고와 이미지 ' + images.length + '개를 반자동 편집에 연결했습니다: ' + post.title);
       },
     }));

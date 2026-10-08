@@ -1764,9 +1764,11 @@ export function fillSemiAutoFields(
     }, 50);
 
     // 섹션으로 스크롤
-    setTimeout(() => {
-      semiAutoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 300);
+    if (options.scroll !== false) {
+      setTimeout(() => {
+        semiAutoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+    }
   } else {
     console.warn('[fillSemiAutoFields] unified-semi-auto-section NOT found in DOM!');
   }

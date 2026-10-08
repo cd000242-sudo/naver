@@ -517,6 +517,7 @@ try {
     'costAndAutoGen.js',           // 5B-6: 비용 안전 + 자동 이미지 생성
     'ldbDestinationSelection.js', // Actual account/category renderer selection
     'ldbDraftImport.js', // Draft and heading image receiver for the extension bridge
+    'ldbHandoffPresentation.js', // Navigate to the completed article/image handoff
     'postManager.js',              // 5B-5: 포스트 CRUD (renderer.ts에서 삭제된 함수들)
     'contentPreviewAndLibrary.js', // 5B-7: 이미지 라이브러리 + 탭 + 템플릿
     // ✅ [2026-02-26] renderer.ts에서 import하는 모든 모듈 완전 포함

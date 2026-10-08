@@ -128,11 +128,23 @@ test('real HTTP selection, article, heading images and repeat delivery cross pre
       { title: '확인할 내용', content: '두 번째 소제목의 실제 본문입니다.', prompt: 'A close-up checklist with distinct completed tasks' }],
     hashtags: ['연결테스트'], images: [] as any[],
   };
+  await page.locator('.tab-button[data-tab="unified"]').focus();
+  await page.keyboard.press('Enter');
+  await page.locator('.pub-mode-tab[data-pubmode="continuous"]').click();
+  await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().find(window => !window.isDestroyed() && window.webContents.getURL().includes('index.html'))!.minimize());
   const articleAck = await bridge('/v1/posts', { posts: [article], destination });
   expect(articleAck.imported).toBe(1);
   expect(articleAck.selection).toEqual(destination);
   await expect(page.locator('#unified-generated-title')).toHaveValue(article.title);
   await expect(page.locator('#unified-generated-content')).toHaveValue(content);
+  await expect(page.locator('.tab-button[data-tab="unified"]')).toHaveClass(/active/);
+  await expect(page.locator('.pub-mode-tab[data-pubmode="single"]')).toHaveClass(/active/);
+  await expect(page.locator('#unified-semi-auto-section')).toBeInViewport();
+  await expect(page.locator('#unified-semi-auto-section')).toBeFocused();
+  await expect.poll(() => app.evaluate(({ BrowserWindow }) => {
+    const window = BrowserWindow.getAllWindows().find(value => value.webContents.getURL().includes('index.html'))!;
+    return { visible: window.isVisible(), minimized: window.isMinimized(), focused: window.isFocused() };
+  })).toEqual({ visible: true, minimized: false, focused: true });
   await expect(page.locator('#prompts-container .prompt-item')).toHaveCount(3);
   const expectedPrompts = [article.structuredContent.thumbnailPrompt, ...article.headings.map(heading => heading.prompt)];
   await expect(page.locator('#prompts-container .prompt-item .prompt-text')).toHaveText(expectedPrompts);
@@ -141,10 +153,20 @@ test('real HTTP selection, article, heading images and repeat delivery cross pre
   article.images = [{ heading: '🖼️ 썸네일', isThumbnail: true, prompt: article.structuredContent.thumbnailPrompt, previewDataUrl: png },
     ...article.headings.map((heading, headingIndex) => ({ heading: heading.title, headingIndex, prompt: heading.prompt, previewDataUrl: png }))];
   for (let attempt = 0; attempt < 2; attempt += 1) {
+    await page.locator('.tab-button[data-tab="images"]').focus();
+    await page.keyboard.press('Enter');
+    await page.locator('#images-subtab-generate').click();
+    await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().find(window => window.webContents.getURL().includes('index.html'))!.hide());
     const ack = await bridge('/v1/posts', { posts: [article], destination });
     expect(ack.imported).toBe(1);
     expect(ack.selection).toEqual(destination);
     await expect(page.locator('#prompts-container .prompt-item .prompt-text')).toHaveText(expectedPrompts);
+    await expect(page.locator('.tab-button[data-tab="images"]')).toHaveClass(/active/);
+    await expect(page.locator('#images-subpanel-manage')).toBeVisible();
+    await expect(page.locator('#images-subpanel-generate')).toBeHidden();
+    await expect(page.locator('#prompts-container')).toBeInViewport();
+    await expect(page.locator('#prompts-container')).toBeFocused();
+    await expect.poll(() => app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().find(window => window.webContents.getURL().includes('index.html'))!.isVisible())).toBe(true);
   }
   await expect(page.locator('#prompts-container .prompt-item .generated-image img')).toHaveCount(3);
   const headingImages = page.locator('#prompts-container .prompt-item .generated-image img');
