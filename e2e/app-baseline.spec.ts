@@ -64,6 +64,41 @@ test('생성된 글 영역 존재 (post list)', async () => {
   await expect(postsArea).toBeAttached({ timeout: 15_000 });
 });
 
+test('fresh app defaults to semi-auto and keeps an explicit mode through stop/reset UI', async () => {
+  const top = mainWindow.locator('#publish-mode-top-select');
+  const bottom = mainWindow.locator('#publish-mode-select');
+  const publish = mainWindow.locator('#unified-publish-btn');
+  await mainWindow.waitForFunction(() => typeof (window as any).syncPublishMode === 'function');
+  // Startup deliberately synchronizes after 1s; verify the settled state too.
+  await mainWindow.waitForTimeout(1200);
+  await expect(top).toHaveValue('semi-auto');
+  await expect(bottom).toHaveValue('semi-auto');
+  await expect(mainWindow.locator('#generate-manual-btn')).toBeEnabled();
+  await expect(publish).toBeDisabled();
+  const publicationDisposition = await mainWindow.locator('#unified-publish-mode').inputValue();
+  await mainWindow.evaluate(() => {
+    for (const [id, value] of [['unified-generated-title', '준비된 원고 제목'], ['unified-generated-content', '직접 입력한 원고 본문입니다.']]) {
+      const field = document.getElementById(id) as HTMLInputElement;
+      field.value = value;
+      field.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  });
+  await expect(publish).toBeEnabled();
+  await expect(publish).toContainText('반자동 발행');
+  await mainWindow.evaluate(() => { (window as any).showStopButton(); (window as any).hideStopButton(); });
+  await expect(top).toHaveValue('semi-auto');
+  await expect(mainWindow.locator('#publish-mode-desc')).toContainText('반자동');
+  // Changing settings does not click any generation or publication command.
+  await top.selectOption('full-auto');
+  await mainWindow.evaluate(() => { (window as any).showStopButton(); (window as any).hideStopButton(); (window as any).resetAllFields(); });
+  await expect(bottom).toHaveValue('full-auto');
+  await expect(publish).toContainText('풀오토');
+  await top.selectOption('semi-auto');
+  await expect(publish).toBeDisabled();
+  await expect(mainWindow.locator('#unified-publish-mode')).toHaveValue(publicationDisposition);
+  await mainWindow.screenshot({ path: test.info().outputPath('initial-semi-auto.png') });
+});
+
 test('console에 치명적 에러 없음 (앱 시작 직후)', async () => {
   const errors: string[] = [];
   mainWindow.on('console', (msg) => {

@@ -1,6 +1,8 @@
 import { createHash } from 'crypto';
-import { mkdir, writeFile } from 'fs/promises';
+import { mkdir } from 'fs/promises';
 import path from 'path';
+import { readLdbDownloadImage, validateDownloadReference } from './ldb-download-images.js';
+import { storeLdbImage } from './ldb-image-storage.js';
 
 function optionalPrompt(value: unknown): string | undefined {
   if (value === undefined) return undefined;
@@ -16,19 +18,27 @@ function articleDirectory(directory: string, post: any): string {
   return path.resolve(directory, `${safeTitle}-${identity}`);
 }
 
-/** Accept inline rasters only; never fetch caller URLs or trust caller file paths. */
-export async function materializeLdbImages(posts: unknown[], directory: string): Promise<unknown[]> {
-  const prepared = posts.map((raw: any) => {
+/** Accept inline rasters or verified dedicated Downloads references; never fetch caller URLs or arbitrary paths. */
+export async function materializeLdbImages(posts: unknown[], directory: string, downloadsDirectory?: string): Promise<unknown[]> {
+  // Bound all referenced bytes before asynchronous reads. Inline requests retain the HTTP body limit.
+  let downloadBytes = 0;
+  for (const raw of posts as any[]) for (const image of Array.isArray(raw?.images) ? raw.images : []) {
+    if (image && Object.prototype.hasOwnProperty.call(image, 'downloadRef')) downloadBytes += validateDownloadReference(image.downloadRef).byteLength;
+  }
+  if (downloadBytes > 3 * 1024 * 1024) throw new Error('한 번에 저장할 이미지의 전체 크기가 너무 큽니다.');
+  const prepared = await Promise.all(posts.map(async (raw: any) => {
     if (!raw || typeof raw !== 'object' || !/^ldb_[\p{L}\p{N}_.-]{1,120}$/u.test(raw.id || '')) throw new Error('원고 식별자를 확인해주세요.');
     if (!Array.isArray(raw.headings || [])) throw new Error('소제목 목록을 확인해주세요.');
     for (const heading of raw.headings || []) optionalPrompt(heading?.prompt);
     optionalPrompt(raw.structuredContent?.thumbnailPrompt);
     const targetDirectory = articleDirectory(directory, raw);
     if (!Array.isArray(raw.images || []) || (raw.images || []).length > 8) throw new Error('이미지는 최대 8개입니다.');
-    const images = (raw.images || []).map((image: any) => {
+    const images = await Promise.all((raw.images || []).map(async (image: any) => {
       const prompt = optionalPrompt(image?.prompt);
-      const data = image?.previewDataUrl || image?.filePath;
-      if (typeof data !== 'string' || data.length > 2 * 1024 * 1024) throw new Error('이미지 크기를 확인해주세요.');
+      const fromDownload = image && Object.prototype.hasOwnProperty.call(image, 'downloadRef');
+      const data = fromDownload
+        ? await readLdbDownloadImage(image.downloadRef, downloadsDirectory) : image?.previewDataUrl || image?.filePath;
+      if (typeof data !== 'string' || (!fromDownload && data.length > 2 * 1024 * 1024)) throw new Error('이미지 크기를 확인해주세요.');
       const match = /^data:image\/(png|jpeg|webp|gif);base64,([A-Za-z0-9+/]+={0,2})$/u.exec(data);
       if (!match || match[2].length % 4 !== 0) throw new Error('이미지 데이터 형식이 올바르지 않습니다.');
       const bytes = Buffer.from(match[2], 'base64');
@@ -42,15 +52,14 @@ export async function materializeLdbImages(posts: unknown[], directory: string):
       const filePath = path.join(targetDirectory, hash + '.' + match[1]);
       return { bytes, image: { heading: image.heading, isThumbnail: image.isThumbnail === true,
         headingIndex: image.headingIndex, ...(prompt !== undefined ? { prompt } : {}), filePath, previewDataUrl: data, savedToLocal: true } };
-    });
+    }));
     return { raw, images, targetDirectory };
-  });
+  }));
   const result: unknown[] = [];
   for (const { raw, images, targetDirectory } of prepared) {
     if (images.length) await mkdir(targetDirectory, { recursive: true });
     for (const { bytes, image } of images) {
-      try { await writeFile(image.filePath, bytes, { flag: 'wx' }); }
-      catch (error: any) { if (error?.code !== 'EEXIST') throw error; }
+      await storeLdbImage(image.filePath, bytes);
     }
     result.push({ ...raw, images: images.map(({ image }: any) => image) });
   }

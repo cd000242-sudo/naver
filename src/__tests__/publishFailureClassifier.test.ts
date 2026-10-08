@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+import { readFileSync } from 'node:fs';
+import ts from 'typescript';
 import { classifyPublishFailure } from '../automation/publishFailureClassifier';
 
 describe('classifyPublishFailure', () => {
@@ -36,6 +38,47 @@ describe('classifyPublishFailure', () => {
       retryable: false,
       userActionRequired: true,
     });
+  });
+
+  it.each([
+    'Protocol error: Target closed',
+    'Execution context is not available in detached frame',
+    '브라우저 세션이 종료되었습니다',
+  ])('keeps explicit image insertion failures terminal despite transport detail: %s', detail => {
+    const message = `IMAGE_INSERTION_FAILED:1/3개 이미지 삽입 실패 — ${detail}`;
+    for (const input of [message, new Error(message), { message }]) {
+      expect(classifyPublishFailure(input)).toEqual({
+        code: 'IMAGE_REJECTED', retryable: false, userActionRequired: true,
+      });
+    }
+  });
+
+  it('honors the explicit image insertion error code before browser-close heuristics', () => {
+    expect(classifyPublishFailure({ code: 'IMAGE_INSERTION_FAILED', message: 'Protocol error: Target closed' })).toEqual({
+      code: 'IMAGE_REJECTED', retryable: false, userActionRequired: true,
+    });
+  });
+
+  it('stops the production retry loop after the first partial image insertion failure', async () => {
+    const source = ts.createSourceFile('automation.ts', readFileSync(new URL('../naverBlogAutomation.ts', import.meta.url), 'utf8'), ts.ScriptTarget.Latest, true);
+    let retryMethod: ts.MethodDeclaration | undefined;
+    const visit = (node: ts.Node) => {
+      if (ts.isMethodDeclaration(node) && node.name.getText(source) === 'retry') retryMethod = node;
+      ts.forEachChild(node, visit);
+    };
+    visit(source);
+    if (!retryMethod) throw new Error('Production retry method missing');
+    const compiled = ts.transpileModule(`class RetryHarness { ${retryMethod.getText(source)} }`, {
+      compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
+    }).outputText;
+    const retry = new Function('classifyPublishFailure', 'getPublicationCommitJournal', `${compiled}; return RetryHarness.prototype.retry;`)(
+      classifyPublishFailure, () => ({ hasUnconfirmed: () => false }),
+    );
+    const error = new Error('IMAGE_INSERTION_FAILED:1/3개 이미지 삽입 실패 — Protocol error: Target closed');
+    const insert = vi.fn(async () => { throw error; });
+    const context = { options: { naverId: 'test_account' }, ensureNotCancelled: vi.fn(), log: vi.fn() };
+    await expect(retry.call(context, insert, 3, '이미지 삽입')).rejects.toBe(error);
+    expect(insert).toHaveBeenCalledOnce();
   });
 
   it('classifies localized browser-session and editor-ready failures as retryable', () => {

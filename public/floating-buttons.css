@@ -142,3 +142,46 @@
   }
 }
 
+/* Keep the shortcut readable at every window size, below the cost button. */
+#right-floating-buttons {
+  top: 120px !important;
+  max-height: calc(100dvh - 136px) !important;
+}
+
+#publish-shortcut-btn {
+  position: fixed;
+  top: 56px;
+  right: 20px;
+  z-index: 1001;
+  width: 180px;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #34d399;
+  border-radius: 12px;
+  background: #087c4c;
+  color: #fff;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+#publish-shortcut-btn:hover { background: #06633d; }
+#publish-shortcut-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -5px;
+}
+
+#unified-only-publish-settings { scroll-margin: 24px; }
+#unified-only-publish-settings.publish-shortcut-highlight,
+#unified-only-publish-settings:focus-visible {
+  outline: 3px solid #34d399;
+  outline-offset: 4px;
+}
+

@@ -3,7 +3,7 @@ import { EventEmitter } from 'events';
 import { mkdtemp, readFile, readdir, rm } from 'fs/promises';
 import { tmpdir } from 'os';
 import path from 'path';
-import { prepareLdbDrafts, createLdbDraftReceiver } from '../renderer/modules/ldbDraftImport.js';
+import { prepareLdbDrafts, createLdbDraftReceiver, createLdbDraftUiReadyGate } from '../renderer/modules/ldbDraftImport.js';
 import { deliverLdbPosts } from '../main/ldb-delivery.js';
 import { createLdbBridge } from '../main/ldb-bridge.js';
 import { materializeLdbImages } from '../main/ldb-images.js';
@@ -12,6 +12,64 @@ const PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCA
 const draft = () => ({ id: 'ldb_job1', title: '제목', content: '도입부\n\n소제목\n내용', headings: [{ title: '소제목', content: '내용' }], hashtags: ['태그'], publishMode: 'draft', images: [{ heading: '썸네일', filePath: PNG }, { heading: '소제목', filePath: PNG }] });
 
 describe('LDB draft and image delivery', () => {
+  it('expires all startup requests from arrival without later writes and accepts a new ready request', async () => {
+    vi.useFakeTimers();
+    try {
+      const gate = createLdbDraftUiReadyGate(100);
+      const write = vi.fn();
+      const display = vi.fn();
+      const receive = createLdbDraftReceiver({ read: () => [], write, display, waitUntilReady: gate.waitUntilReady });
+      const first = receive([draft()]).catch(error => error.message);
+      const second = receive([draft()]).catch(error => error.message);
+      await vi.advanceTimersByTimeAsync(100);
+      expect(await first).toContain('준비 시간이 초과');
+      expect(await second).toContain('준비 시간이 초과');
+      gate.markReady();
+      expect(write).not.toHaveBeenCalled();
+      expect(display).not.toHaveBeenCalled();
+      expect(vi.getTimerCount()).toBe(0);
+      await expect(receive([draft()])).resolves.toBe(1);
+      expect(write).toHaveBeenCalledOnce();
+    } finally { vi.useRealTimers(); }
+  });
+
+  it('gates selection-only requests too and clears readiness timers once initialized', async () => {
+    vi.useFakeTimers();
+    try {
+      const gate = createLdbDraftUiReadyGate();
+      const applyDestination = vi.fn();
+      const write = vi.fn();
+      const receive = createLdbDraftReceiver({ read: () => [], write, display: vi.fn(), applyDestination, waitUntilReady: gate.waitUntilReady });
+      const destination = { accountId: 'fixture' };
+      const pending = receive([], destination);
+      await vi.advanceTimersByTimeAsync(1);
+      expect(applyDestination).not.toHaveBeenCalled();
+      gate.markReady();
+      gate.markReady();
+      await expect(pending).resolves.toBe(0);
+      expect(applyDestination).toHaveBeenCalledExactlyOnceWith(destination);
+      expect(write).not.toHaveBeenCalled();
+      expect(vi.getTimerCount()).toBe(0);
+    } finally { vi.useRealTimers(); }
+  });
+
+  it('queues an early import until actual editor navigation is ready', async () => {
+    let ready!: () => void;
+    const readiness = new Promise<void>(resolve => { ready = resolve; });
+    const write = vi.fn();
+    const display = vi.fn();
+    const receive = createLdbDraftReceiver({ read: () => [], write, display, waitUntilReady: () => readiness });
+    const pending = receive([draft()]);
+    await Promise.resolve();
+    await Promise.resolve();
+    expect(write).not.toHaveBeenCalled();
+    expect(display).not.toHaveBeenCalled();
+    ready();
+    await expect(pending).resolves.toBe(1);
+    expect(write).toHaveBeenCalledOnce();
+    expect(display).toHaveBeenCalledOnce();
+  });
+
   it('keeps received image directions through disk storage, heading previews and draft persistence', async () => {
     const directory = await mkdtemp(path.join(tmpdir(), 'ldb-prompt-test-'));
     try {

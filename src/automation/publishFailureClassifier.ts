@@ -80,6 +80,11 @@ export function classifyPublishFailure(input: unknown): PublishFailureClassifica
     return { code: 'PUBLISH_CONDITION', retryable: false, userActionRequired: true };
   }
 
+  // Some images may already be inserted: a nested transport error must not replay the whole post.
+  if (code === 'IMAGE_INSERTION_FAILED' || includesAny(message, ['IMAGE_INSERTION_FAILED'])) {
+    return { code: 'IMAGE_REJECTED', retryable: false, userActionRequired: true };
+  }
+
   if (includesAny(message, [
     'target closed',
     'detached frame',

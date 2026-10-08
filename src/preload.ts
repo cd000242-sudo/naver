@@ -501,9 +501,9 @@ contextBridge.exposeInMainWorld('api', {
       throw new Error(`라이선스 인증 중 오류가 발생했습니다: ${(error as Error).message}`);
     }
   },
-  verifyLicenseWithCredentials: async (userId: string, password: string, deviceId: string): Promise<{ valid: boolean; license?: LicenseInfo; message?: string }> => {
+  verifyLicenseWithCredentials: async (userId: string, password: string, deviceId: string, options?: { takeoverSession?: boolean }): Promise<{ valid: boolean; license?: LicenseInfo; message?: string; code?: string; takeoverAvailable?: boolean; previousSessionTerminated?: boolean }> => {
     try {
-      return await ipcRenderer.invoke('license:verifyWithCredentials', userId, password, deviceId);
+      return await ipcRenderer.invoke('license:verifyWithCredentials', userId, password, deviceId, options);
     } catch (error) {
       console.error('[Preload] Verify license with credentials error:', error);
       throw new Error(`라이선스 인증 중 오류가 발생했습니다: ${(error as Error).message}`);

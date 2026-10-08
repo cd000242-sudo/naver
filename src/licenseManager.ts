@@ -799,23 +799,40 @@ export async function registerLicense(
 /**
  * 아이디/비밀번호로 라이선스 인증 (영구제 사용자용)
  */
+export interface CredentialLoginOptions { takeoverSession?: boolean }
+export interface CredentialLoginResult {
+  valid: boolean;
+  license?: LicenseInfo;
+  message?: string;
+  code?: string;
+  takeoverAvailable?: boolean;
+  previousSessionTerminated?: boolean;
+  debugInfo?: any;
+}
+
 export async function verifyLicenseWithCredentials(
   userId: string,
   password: string,
   deviceId: string,
   serverUrl?: string,
-): Promise<{ valid: boolean; license?: LicenseInfo; message?: string; debugInfo?: any }> {
-  if (!userId || !password) {
+  options?: CredentialLoginOptions,
+): Promise<CredentialLoginResult> {
+  if (typeof userId !== 'string' || typeof password !== 'string' || !userId.trim() || !password.trim()) {
     return {
       valid: false,
       message: '아이디와 비밀번호를 입력해주세요.',
     };
   }
+  const takeoverSession = options?.takeoverSession === true;
+  if (takeoverSession && (typeof deviceId !== 'string' || !deviceId.trim())) {
+    return { valid: false, message: '현재 기기 정보를 확인하지 못했습니다. 앱을 다시 실행해주세요.' };
+  }
 
   // 서버 검증 (서버 URL이 제공된 경우)
   if (serverUrl) {
+    let requestTimeout: ReturnType<typeof setTimeout> | undefined;
     try {
-      console.log('[LicenseManager] 서버 검증 시도 (credentials):', serverUrl);
+      console.log('[LicenseManager] 자격증명 인증 요청', { takeoverSession });
 
       const requestBody = {
         action: 'verify-credentials',
@@ -824,13 +841,12 @@ export async function verifyLicenseWithCredentials(
         userPassword: password.trim(), // 공백 제거
         deviceId,
         appVersion: app.getVersion(),
+        ...(takeoverSession ? { takeoverSession: true } : {}),
       };
 
-      console.log('[LicenseManager] 요청 전송: action=' + requestBody.action + ', userId=' + userId.trim());
-
-      // 타임아웃 추가 (60초) - GAS 배치 쓰기 기반
+      // Bound the full request and body read; all exits clear this timer.
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), LICENSE_REQUEST_TIMEOUT_MS);
+      requestTimeout = setTimeout(() => controller.abort(), LICENSE_REQUEST_TIMEOUT_MS);
 
       const response = await fetch(serverUrl, {
         method: 'POST',
@@ -841,13 +857,10 @@ export async function verifyLicenseWithCredentials(
         signal: controller.signal,
       });
 
-      clearTimeout(timeoutId);
-
       console.log('[LicenseManager] 서버 응답:', response.status, response.statusText);
 
       // 응답 본문을 텍스트로 먼저 확인
       const responseText = await response.text();
-      console.log('[LicenseManager] 서버 응답 본문 (텍스트):', responseText);
 
       if (!response.ok) {
         return {
@@ -860,39 +873,44 @@ export async function verifyLicenseWithCredentials(
       let result;
       try {
         result = JSON.parse(responseText);
-        console.log('[LicenseManager] 서버 응답 데이터 (JSON):', JSON.stringify(result, null, 2));
       } catch (parseError) {
-        console.error('[LicenseManager] JSON 파싱 실패:', parseError);
+        console.error('[LicenseManager] 자격증명 응답 JSON 파싱 실패');
         return {
           valid: false,
-          message: translateErrorMessage(`서버 응답 형식 오류: ${responseText.substring(0, 100)}`),
+          message: '인증 서버 응답을 확인하지 못했습니다. 잠시 후 다시 시도해주세요.',
         };
       }
 
       // [2026-09-12] 성공 신호가 없으면 성공이 아니다. 리다이렉트 사고로 온 기본 응답이
       //   프리미엄 라이선스로 저장되던 구멍을 막는다.
       if (isServerPlaceholderResponse(result) || (result.ok !== false && result.valid !== false && !hasPositiveAuthSignal(result))) {
-        console.error('[LicenseManager] 🚨 판정 불가 응답 — 성공으로 세지 않는다:', JSON.stringify(result).slice(0, 200));
+        console.error('[LicenseManager] 판정 불가 인증 응답');
         return { valid: false, message: TRANSIENT_AUTH_MESSAGE };
       }
 
       if (result.ok === false || result.valid === false) {
         // ★ 중복 로그인 차단 에러 처리
         if (result.code === 'ALREADY_LOGGED_IN') {
-          console.warn('[LicenseManager] 중복 로그인 차단:', result.error);
+          console.warn('[LicenseManager] 다른 기기에서 로그인 중');
           return {
             valid: false,
-            message: result.error || '이미 다른 기기에서 로그인 중입니다. 기존 기기에서 로그아웃하거나 10분 후 다시 시도해주세요.',
+            code: 'ALREADY_LOGGED_IN',
+            takeoverAvailable: result.takeoverAvailable === true,
+            message: '이미 다른 기기에서 로그인 중입니다.',
           };
         }
         const errorMsg = getServerErrorMessage(result, '아이디 또는 비밀번호가 올바르지 않습니다.');
         const translatedMsg = translateErrorMessage(typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg));
-        console.error('[LicenseManager] 서버 오류:', errorMsg);
-        console.error('[LicenseManager] 서버 응답 전체:', JSON.stringify(result, null, 2));
+        console.error('[LicenseManager] 자격증명 인증 거부');
         return {
           valid: false,
           message: translatedMsg,
+          code: typeof result.code === 'string' ? result.code : undefined,
         };
+      }
+
+      if (takeoverSession && (result.valid !== true || typeof result.sessionToken !== 'string' || !result.sessionToken.trim())) {
+        return { valid: false, message: '기기 전환을 확인하지 못했습니다. 다시 로그인해주세요.' };
       }
 
       // 서버에서 발급한 세션 토큰 사용 (중복 로그인 방지)
@@ -939,28 +957,30 @@ export async function verifyLicenseWithCredentials(
         verify: {
           action: 'verify-credentials',
           userId: userId.trim(),
-          fullResponse: result,
+          fullResponse: { ok: result.ok, valid: result.valid, phoneVerified: result.phoneVerified, expiresAt: result.expiresAt, licenseType: result.licenseType },
           ok: result.ok !== false, // result.ok가 false가 아니면 true
           valid: result.valid !== false, // result.valid가 false가 아니면 true
         },
       };
 
-      console.log('[LicenseManager] 재인증 성공 - debugInfo:', JSON.stringify(debugInfo, null, 2));
+      console.log('[LicenseManager] 재인증 성공');
 
-      return { valid: true, license, debugInfo };
+      return { valid: true, license, debugInfo, previousSessionTerminated: result.previousSessionTerminated === true };
     } catch (error) {
-      console.error('[LicenseManager] 서버 연결 오류:', error);
+      console.error('[LicenseManager] 자격증명 인증 서버 연결 오류');
       const err = error as Error;
       if (err.name === 'AbortError') {
         return {
           valid: false,
-          message: '서버 응답 시간 초과 (30초). 네트워크 연결을 확인하거나 관리자에게 문의하세요.',
+          message: '인증 서버 응답 시간이 초과되었습니다. 잠시 후 다시 로그인해주세요.',
         };
       }
       return {
         valid: false,
         message: translateErrorMessage(err.message) || '서버 연결에 실패했습니다. 관리자에게 문의하세요.',
       };
+    } finally {
+      if (requestTimeout !== undefined) clearTimeout(requestTimeout);
     }
   }
 
