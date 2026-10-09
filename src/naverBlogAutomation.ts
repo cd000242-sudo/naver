@@ -482,6 +482,8 @@ export class NaverBlogAutomation {
   private pendingDraftConflictDialog = false;
   /** Do not write again until the editor has been proven to be a fresh post. */
   private requiresFreshEditorContext = false;
+  /** [2026-10-09] 이번 글에서 새 글쓰기 화면을 이미 열었는지. 이전 글이 남긴 화면은 다시 쓰지 않는다. */
+  private editorEnteredThisRun = false;
   private _prosConsAlreadyInserted = false; // ✅ [2026-02-19] 장단점 표 중복 삽입 방지 플래그
 
   // ✅ Ghost Cursor 인스턴스 (사람 같은 마우스 이동)
@@ -2059,7 +2061,11 @@ export class NaverBlogAutomation {
       throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
     }
     try {
-      if (!classifyBlogWriteNavigationUrl(page.url()).isEditorUrl) {
+      // [2026-10-09 고객 진단 파일] 이전 글을 쓰던 글쓰기 화면(이미지 5개 남음)이 열린 채 다음 글이 시작되자 새로 열지 않고
+      //   그 위에 이어 써서 이미지가 안 들어갔다. 이번 글에서 이미 연 화면만 다시 쓰고, 그 외에는 새 글쓰기 화면을 연다.
+      const onEditorAlready = classifyBlogWriteNavigationUrl(page.url()).isEditorUrl;
+      if (onEditorAlready && !this.editorEnteredThisRun) this.log('🆕 이전 글의 글쓰기 화면이 열려 있어 새 글쓰기 화면을 엽니다.');
+      if (!onEditorAlready || !this.editorEnteredThisRun) {
         const response = await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
           waitUntil: 'domcontentloaded', timeout: NAVER_TIMEOUTS.PAGE_LOAD,
         });
@@ -2085,6 +2091,7 @@ export class NaverBlogAutomation {
       const readyDestination = classifyBlogWriteNavigationUrl(page.url());
       if (readyDestination.isLoginRedirect) throw new AccountExecutionGuardError('LOGIN_REQUIRED');
       if (!readyDestination.isBlogDomain) throw new AccountExecutionGuardError('NETWORK_WAIT');
+      this.editorEnteredThisRun = true;
     } catch (error) {
       const detail = error instanceof InitialEditorReadinessError ? error.message : (error instanceof AccountExecutionGuardError ? error.code : 'navigation-or-readiness-error');
       this.log(`⚠️ 글쓰기 화면 확인 실패: ${detail} (화면: ${describeUrlForLog(page.isClosed() ? 'closed' : page.url())})`);
@@ -6434,6 +6441,7 @@ export class NaverBlogAutomation {
         await this.setupBrowser();
       }
       this.ensureDialogHandler();
+      this.editorEnteredThisRun = false;
       // [2026-10-09 사장님 선택] 로그인을 못 알아보거나 글쓰기 창을 못 찾으면 크롬을 다시 띄워 한 번 더 들어간다(비밀번호 입력 없음).
       await this.enterEditorWithOneRestart(async (deferPause) => {
       const entryPage = this.ensurePage();
@@ -6988,6 +6996,7 @@ export class NaverBlogAutomation {
      this.ensureDialogHandler();
 
      try {
+       this.editorEnteredThisRun = false;
        // [2026-10-09 사장님 선택] 로그인을 못 알아보거나 글쓰기 창을 못 찾으면 크롬을 다시 띄워 한 번 더 들어간다(비밀번호 입력 없음).
        await this.enterEditorWithOneRestart(async (deferPause) => {
        const entryPage = this.ensurePage();

@@ -185,6 +185,42 @@ describe('글쓰기 이동: 첫 시도는 멈춤 저장을 미루고, 잠깐 보
   });
 });
 
+// [2026-10-09 고객 진단 파일 08-49] 이전 글을 쓰던 글쓰기 화면(이미지 5개 남음)이 열린 채 다음 글이 시작되자
+//   "이미 글쓰기 주소"라며 새로 열지 않고 그 위에 이어 써서 이미지가 3번 다 안 들어갔다(IMAGE_INSERTION_FAILED 1/1).
+describe('새 글은 새 글쓰기 화면에서 쓴다', () => {
+  class GuardError extends Error { constructor(public code: string) { super(code); } }
+  function freshHarness(url: string, enteredThisRun?: boolean) {
+    const page = { url: () => url, isClosed: () => false, goto: vi.fn(async () => { url = 'https://blog.naver.com/acct?Redirect=Write&'; return { status: () => 200 }; }) };
+    const state: any = { page, options: { naverId: 'acct' }, ensurePage: () => page, ensureNotCancelled: vi.fn(), log: vi.fn(), delay: vi.fn(async () => undefined),
+      editorEnteredThisRun: enteredThisRun };
+    const dependencies = {
+      classifyBlogWriteNavigationUrl, isLoginChallengeUrl, AccountExecutionGuardError: GuardError, InitialEditorReadinessError,
+      waitForInitialEditorReadiness: vi.fn(async () => undefined), getAccountExecutionGuard: () => ({ pause: vi.fn() }), NAVER_TIMEOUTS: { PAGE_LOAD: 30000 },
+      waitForLoginRedirectToSettle, describeUrlForLog,
+    };
+    state.pauseEntry = method('pauseEntry', dependencies);
+    return { state, page, run: () => method('navigateToBlogWrite', dependencies).call(state) };
+  }
+
+  it('이전 글이 남긴 글쓰기 화면이면 새 글쓰기 화면을 연다', async () => {
+    const h = freshHarness('https://blog.naver.com/acct?Redirect=Write&');
+    await h.run();
+    expect(h.page.goto).toHaveBeenCalledTimes(1);
+    expect(h.state.editorEnteredThisRun).toBe(true);
+    expect(h.state.log.mock.calls.map((c: unknown[]) => c[0]).join('\n')).toContain('이전 글의 글쓰기 화면이 열려 있어 새 글쓰기 화면을 엽니다');
+  });
+
+  it('이번 글에서 이미 새로 들어간 글쓰기 화면이면 다시 열지 않는다(글 1편 = 진입 1회)', async () => {
+    const h = freshHarness('https://blog.naver.com/acct?Redirect=Write&', true);
+    await h.run();
+    expect(h.page.goto).not.toHaveBeenCalled();
+  });
+
+  it('두 발행 경로 모두 글을 시작할 때 "이번 글 진입" 표시를 지운다', () => {
+    expect((engineText.match(/this\.editorEnteredThisRun = false;\r?\n\s*\/\/ \[2026-10-09 사장님 선택\]/g) || []).length).toBe(2);
+  });
+});
+
 describe('연결 확인', () => {
   it('두 발행 경로 모두 진입 구간을 재시작 감싸개로 묶고, 첫 시도 선택값을 세 단계에 넘긴다', () => {
     expect((engineText.match(/await this\.enterEditorWithOneRestart\(async \(deferPause\) => \{/g) || []).length).toBe(2);
