@@ -53,8 +53,8 @@ describe('wiring — source regression', () => {
     const writers = helpers.split("setAttribute('data-img-ai'").length - 1;
     const records = helpers.split('recordImageProvenance(self,').length - 1;
     expect(writers).toBe(3);
-    // 3 writers + base64 fallback path
-    expect(records).toBe(4);
+    // 3 writers (the Base64 fallback path was removed 2026-10-09)
+    expect(records).toBe(3);
   });
 
   it('publish loop reads the ledger first and resets it at run start', () => {

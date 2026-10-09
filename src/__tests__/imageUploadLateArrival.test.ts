@@ -8,12 +8,17 @@
  *
  * These tests drive the REAL functions with a fake page/frame on a virtual clock; the "editor" image
  * count is a function of virtual time, so an upload simply lands later on a slow PC.
+ *
+ * [2026-10-09] The Base64 (clipboard) fallback was removed from the live path: a failed upload now
+ * throws instead of pasting the image again. Naver's rejection popup ("파일 전송 오류") and files that
+ * are not photos are not retryable (ImageUploadNotRetryableError).
  */
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { insertBase64ImageAtCursor, insertImagesAtCurrentCursor } from '../automation/imageHelpers.js';
+import { insertBase64ImageAtCursor, insertImageViaBase64, insertImagesAtCurrentCursor } from '../automation/imageHelpers.js';
+import { ImageUploadNotRetryableError, isImageUploadNotRetryable } from '../automation/imageUploadPreflight.js';
 
 const PNG_1X1 = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
@@ -41,18 +46,33 @@ interface Rig {
   setFileChooserFails: (fails: boolean) => void;
   /** Virtual time at which the FileChooser step was reached (real file I/O before it is not counted). */
   chooserAt: () => number;
+  chooserCalls: () => number;
+  dismissClicks: () => number;
 }
 
 /**
  * `uploadLandsAfterMs`: virtual ms after the FileChooser accepted the file until the image shows up
- * (undefined = the upload never lands). The Base64 fallback lands its image immediately.
+ * (undefined = the upload never lands). `rejection`: Naver's rejection popup is visible from
+ * `showsAfterMs` after the FileChooser accepted (`stale` = already on screen before the click).
  */
-function makeRig(options: { uploadLandsAfterMs?: number; startImages?: number } = {}): Rig {
+function makeRig(options: {
+  uploadLandsAfterMs?: number;
+  startImages?: number;
+  rejection?: { showsAfterMs?: number; stale?: boolean };
+} = {}): Rig {
   const startMs = Date.now();
   const landings: number[] = Array.from({ length: options.startImages ?? 0 }, () => startMs - 1);
   let fileChooserFails = false;
+  let dismissClicks = 0;
+  let chooserCalls = 0;
   let fallbackCalls = 0;
   let chooserAt = 0;
+  let acceptedAt = Infinity;
+  const rejectionShown = (): boolean => {
+    const r = options.rejection;
+    if (!r) return false;
+    return r.stale ? true : Date.now() >= acceptedAt + (r.showsAfterMs ?? 0);
+  };
   const count = (): number => landings.filter((t) => t <= Date.now()).length;
 
   const button = { click: async () => undefined };
@@ -60,15 +80,24 @@ function makeRig(options: { uploadLandsAfterMs?: number; startImages?: number } 
     $$eval: async (_selector: string, fn: (imgs: unknown[]) => unknown) => fn(new Array(count())),
     $: async (selector: string) => (selector.includes('data-name="image"') ? button : null),
     waitForSelector: async () => null,
-    evaluate: async () => undefined,
+    evaluate: async (fn: unknown, _phrases?: unknown, dismiss?: boolean) => {
+      if (typeof fn === 'function' && fn.name === 'scanUploadRejectionInPage') {
+        if (!rejectionShown()) return null;
+        if (dismiss) dismissClicks += 1;
+        return '파일 전송 오류 알 수 없는 파일 확인';
+      }
+      return undefined;
+    },
   };
   const page: any = {
     keyboard: { press: async () => undefined },
     waitForFileChooser: async () => {
+      chooserCalls += 1;
       chooserAt = Date.now();
       if (fileChooserFails) throw new Error('Waiting for `FileChooser` failed: 5000ms exceeded');
       return {
         accept: async () => {
+          acceptedAt = Date.now();
           if (options.uploadLandsAfterMs !== undefined) landings.push(Date.now() + options.uploadLandsAfterMs);
         },
       };
@@ -81,6 +110,7 @@ function makeRig(options: { uploadLandsAfterMs?: number; startImages?: number } 
     ensurePage: () => page,
     ensureNotCancelled: vi.fn(),
     normalizeSpacingAfterLastImage: async () => undefined,
+    // [2026-10-09] The live path must never call this any more (fallbackCalls stays 0).
     insertImageViaBase64: vi.fn(async () => {
       fallbackCalls += 1;
       landings.push(Date.now());
@@ -90,6 +120,8 @@ function makeRig(options: { uploadLandsAfterMs?: number; startImages?: number } 
     self, landings, startMs, count,
     fallbackCalls: () => fallbackCalls,
     chooserAt: () => chooserAt,
+    chooserCalls: () => chooserCalls,
+    dismissClicks: () => dismissClicks,
     setFileChooserFails: (fails) => { fileChooserFails = fails; },
   };
 }
@@ -140,24 +172,66 @@ describe('FileChooser upload (insertBase64ImageAtCursor)', () => {
     expect(finishedAt - rig.chooserAt()).toBeLessThan(8000);
   });
 
-  it('upload that never lands -> falls back to Base64 once, as before', async () => {
+  it('upload that never lands -> rejects once, no Base64 fallback', async () => {
     const rig = makeRig({});
-    const { finishedAt } = await drive(insertBase64ImageAtCursor(rig.self, imagePath));
+    const { value, finishedAt } = await drive(insertBase64ImageAtCursor(rig.self, imagePath).catch((e: unknown) => e));
 
-    expect(rig.fallbackCalls()).toBe(1);
-    expect(rig.count()).toBe(1);
-    // Patience is bounded: 5 s wait + ~14 s growth watch + short settle, then the fallback.
+    expect(value).toBeInstanceOf(Error);
+    expect((value as Error).message).toContain('이미지 삽입 실패');
+    expect(rig.fallbackCalls()).toBe(0);
+    expect(rig.count()).toBe(0);
+    // Patience is bounded: 5 s wait + ~14 s growth watch + short settle, then the error.
     expect(finishedAt - rig.chooserAt()).toBeLessThan(24_000);
   });
 
-  it('FileChooser never opens -> immediate fallback without the upload patience', async () => {
+  it('FileChooser never opens -> immediate rejection without the upload patience', async () => {
     const rig = makeRig({});
     rig.setFileChooserFails(true);
-    const { finishedAt } = await drive(insertBase64ImageAtCursor(rig.self, imagePath));
+    const { value, finishedAt } = await drive(insertBase64ImageAtCursor(rig.self, imagePath).catch((e: unknown) => e));
 
-    expect(rig.fallbackCalls()).toBe(1);
-    expect(rig.count()).toBe(1);
+    expect(value).toBeInstanceOf(Error);
+    expect(rig.fallbackCalls()).toBe(0);
+    expect(rig.count()).toBe(0);
     expect(finishedAt - rig.chooserAt()).toBeLessThan(1500);
+  });
+
+  it("Naver's rejection popup after accept -> not-retryable throw without the growth wait", async () => {
+    const rig = makeRig({ rejection: { showsAfterMs: 1000 } });
+    const { value, finishedAt } = await drive(insertBase64ImageAtCursor(rig.self, imagePath).catch((e: unknown) => e));
+
+    expect(isImageUploadNotRetryable(value)).toBe(true);
+    expect((value as Error).message).toContain('photo.png');
+    expect(rig.fallbackCalls()).toBe(0);
+    expect(rig.dismissClicks()).toBeGreaterThanOrEqual(1);
+    expect(finishedAt - rig.chooserAt()).toBeLessThan(8000);
+  });
+
+  it('rejection popup visible but the image still landed -> success (settle re-check wins)', async () => {
+    const rig = makeRig({ uploadLandsAfterMs: 2000, rejection: { showsAfterMs: 1000 } });
+    await drive(insertBase64ImageAtCursor(rig.self, imagePath));
+
+    expect(rig.count()).toBe(1);
+    expect(rig.fallbackCalls()).toBe(0);
+  });
+
+  it('a popup that was already on screen before the click is not judged', async () => {
+    const rig = makeRig({ rejection: { stale: true } });
+    const { value } = await drive(insertBase64ImageAtCursor(rig.self, imagePath).catch((e: unknown) => e));
+
+    expect(value).toBeInstanceOf(Error);
+    expect(isImageUploadNotRetryable(value)).toBe(false);
+    expect(rig.dismissClicks()).toBe(0);
+  });
+
+  it('a file that is not a photo (167-byte html) -> throws before the FileChooser is opened', async () => {
+    const htmlPath = join(workDir, 'fake.jpg');
+    writeFileSync(htmlPath, '<html>' + 'x'.repeat(161));
+    const rig = makeRig({});
+    const { value } = await drive(insertBase64ImageAtCursor(rig.self, htmlPath).catch((e: unknown) => e));
+
+    expect(isImageUploadNotRetryable(value)).toBe(true);
+    expect((value as Error).message).toContain('fake.jpg');
+    expect(rig.chooserCalls()).toBe(0);
   });
 
   it('keeps tagging the late image with provenance like the on-time path', async () => {
@@ -215,5 +289,32 @@ describe('per-image retry loop (insertImagesAtCurrentCursor)', () => {
 
     expect(rig.self.insertBase64ImageAtCursor).toHaveBeenCalledTimes(1);
     expect(finishedAt - startedAt).toBeLessThan(6000);
+  });
+
+  it('a not-retryable failure is tried once and reported with its reason and file name', async () => {
+    const rig = makeRig({});
+    rig.self.insertBase64ImageAtCursor = vi.fn(async () => {
+      throw new ImageUploadNotRetryableError('사진 파일이 아님 (167바이트, 내용 "<html>") — fake.jpg');
+    });
+    const { value } = await drive(insertImagesAtCurrentCursor(rig.self, [image]).catch((e: unknown) => e));
+
+    expect(rig.self.insertBase64ImageAtCursor).toHaveBeenCalledTimes(1);
+    expect(String((value as Error).message)).toContain('1회 삽입 실패 (마지막 이유: 사진 파일이 아님');
+    expect(String((value as Error).message)).toContain('fake.jpg');
+  });
+});
+
+describe('insertImageViaBase64 never reports success without growth', () => {
+  it('rejects when the pasted image does not show up', async () => {
+    const rig = makeRig({});
+    const frame: any = {
+      $$eval: async (_s: string, fn: (imgs: unknown[]) => unknown) => fn(new Array(rig.count())),
+      evaluate: async () => true,
+    };
+    const page: any = { keyboard: { down: async () => undefined, press: async () => undefined, up: async () => undefined } };
+    const { value } = await drive(insertImageViaBase64(rig.self, imagePath, frame, page).catch((e: unknown) => e));
+
+    expect(value).toBeInstanceOf(Error);
+    expect((value as Error).message).toContain('사진이 늘지 않음');
   });
 });

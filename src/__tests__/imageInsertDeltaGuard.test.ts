@@ -14,7 +14,7 @@ function read(rel: string): string {
  * success — the Base64 fallback was skipped and the image was silently missing.
  *
  * Fix: snapshot the image count before the upload and require the count to GROW
- * (`imgCount > imgBeforeCount`), so a failed upload falls through to the Base64 fallback.
+ * (`imgCount > imgBeforeCount`), so a failed upload is reported as a failure (the Base64 fallback was removed 2026-10-09).
  */
 describe('image insert delta guard', () => {
   const img = read('automation/imageHelpers.ts');

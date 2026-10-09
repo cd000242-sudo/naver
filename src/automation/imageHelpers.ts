@@ -52,6 +52,13 @@ import {
   getSelectorStrings,
 } from './selectors';
 import { summarizeImageInsertFailure } from './imageInsertFailureReason.js';
+import {
+  ImageUploadNotRetryableError,
+  describeUploadSource,
+  isImageUploadNotRetryable,
+  prepareImageFileForUpload,
+} from './imageUploadPreflight.js';
+import { readNaverUploadRejection } from './naverUploadRejection.js';
 
 // ── 네이버 블로그 이미지 용량 제한 가드 (공식 단일 이미지 20MB) ──
 const NAVER_MAX_IMAGE_BYTES = NAVER_SINGLE_IMAGE_MAX_BYTES;
@@ -920,6 +927,21 @@ export async function insertBase64ImageAtCursor(
   // ✅ 네이버 블로그 이미지 용량 제한 가드 (공식 단일 이미지 20MB 초과 시 자동 압축)
   absolutePath = await ensureImageUnderSizeLimit(absolutePath, (msg: string) => self.log(msg));
 
+  // [2026-10-09] 업로드 직전 검사 — 사진이 아닌 파일은 바로 끊고, 250자 이상 경로는 임시 사본으로 올린다(크롬 MAX_PATH).
+  const uploadDisplayName = describeUploadSource(filePath);
+  try {
+    const prepared = await prepareImageFileForUpload(absolutePath, { displayName: uploadDisplayName });
+    if (prepared.tempCopy) {
+      if (isTemporaryFile) await fs.unlink(absolutePath).catch(() => { });
+      self.log(`   🔧 경로 ${prepared.originalLength}자 — 크롬이 못 읽어 임시 사본으로 올립니다`);
+      absolutePath = prepared.filePath;
+      isTemporaryFile = true;
+    }
+  } catch (preflightError) {
+    if (isTemporaryFile) await fs.unlink(absolutePath).catch(() => { });
+    throw preflightError;
+  }
+
   // 보안: 파일 경로 마스킹
   const maskedPath = absolutePath.replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~');
   self.log(`   📁 파일 경로: ${maskedPath}`);
@@ -991,6 +1013,17 @@ export async function insertBase64ImageAtCursor(
 
   // 이미지 버튼 클릭 + FileChooser
   try {
+    // [2026-10-09] 누르기 전부터 떠 있던 오류창은 이번 사진 탓이 아니다 — 이번 시도에선 판정에 쓰지 않는다.
+    const staleRejection = await readNaverUploadRejection([frame, page]);
+    const throwIfNaverRejected = async (): Promise<void> => {
+      if (staleRejection) return;
+      const shown = await readNaverUploadRejection([frame, page]);
+      if (!shown) return;
+      self.log(`   ⚠️ 네이버 거부창 감지: "${shown}" — 재시도하지 않습니다`);
+      await readNaverUploadRejection([frame, page], true); // 그 창 안의 확인 버튼만 누른다
+      throw new ImageUploadNotRetryableError(`네이버가 사진을 거부함 ("${shown}") — ${uploadDisplayName}`);
+    };
+
     self.log(`   🔄 FileChooser 대기 중...`);
 
     const [fileChooser] = await Promise.all([
@@ -1007,31 +1040,8 @@ export async function insertBase64ImageAtCursor(
     self.log(`   ⏳ 이미지 업로드 처리 중... (5초 대기)`);
     await self.delay(5000);
 
-    // ✅ 파일 전송 오류 다이얼로그 감지 및 처리 (용량 초과 등)
-    try {
-      const errorDialog = await frame.waitForSelector(
-        ':is(:text("파일 전송 오류"), :text("용량 초과"), :text("파일 형식 오류"))',
-        { timeout: 2000 }
-      ).catch(() => null);
-
-      if (errorDialog) {
-        self.log(`   ⚠️ 파일 전송 오류 다이얼로그 감지됨 — 확인 버튼 클릭 후 폴백 시도`);
-        const allButtons = await frame.$$('button').catch(() => []);
-        for (const btn of allButtons) {
-          const btnText = await btn.evaluate((el: Element) => el.textContent?.trim() || '').catch(() => '');
-          if (btnText === '확인' || btnText === 'OK') {
-            await btn.click();
-            self.log(`   ✅ 오류 다이얼로그 확인 버튼 클릭 완료`);
-            await self.delay(500);
-            break;
-          }
-        }
-        throw new Error(`파일 전송 오류: 네이버 에디터에서 이미지 업로드 거부 (용량 초과 또는 형식 오류)`);
-      }
-    } catch (dialogError) {
-      if ((dialogError as Error).message.includes('파일 전송 오류')) throw dialogError;
-      // 오류 다이얼로그가 없으면 정상 진행
-    }
+    // [2026-10-09] 종전 감지는 Playwright 전용 텍스트 셀렉터라 Puppeteer 에선 늘 null 이었다(감지 0회).
+    await throwIfNaverRejected();
 
     // ✅ 파일 업로드 후 MYBOX 팝업 닫기
     await page.keyboard.press('Escape').catch(() => { });
@@ -1039,12 +1049,8 @@ export async function insertBase64ImageAtCursor(
     await page.keyboard.press('Escape').catch(() => { });
     await self.delay(300);
 
-    // 확인 버튼이 있으면 클릭 (정상 업로드 완료 확인)
-    const confirmButton = await frame.$('button:has-text("확인"), button:has-text("삽입")').catch(() => null);
-    if (confirmButton) {
-      await confirmButton.click();
-      await self.delay(1000);
-    }
+    // [2026-10-09] 확인 버튼 클릭 제거(Playwright 전용 셀렉터) — Puppeteer 에선 늘 셀렉터 오류로 무동작이었다.
+    //   고치면 성공 경로에서 아무 확인 버튼이나 누르게 되므로 삭제한다.
 
     // 이미지가 삽입되었는지 확인 — 절대 개수가 아니라 '증가분'으로 판정
     let imgCount = await frame.$$eval(IMG_SELECTOR, (imgs: any) => imgs.length).catch(() => 0);
@@ -1063,6 +1069,8 @@ export async function insertBase64ImageAtCursor(
       await completeInsertedImage(imgCount);
       return;
     } else {
+      // [2026-10-09] 큰 파일은 거부창이 5초 뒤에 뜬다 — 던지기 전에 한 번 더 본다.
+      await throwIfNaverRejected();
       throw new Error('파일 선택했으나 이미지가 삽입되지 않음');
     }
   } catch (error) {
@@ -1086,23 +1094,10 @@ export async function insertBase64ImageAtCursor(
       }
     }
 
-    self.log(`   ⚠️ FileChooser 방식 실패, Base64 변환 방식으로 폴백 시도...`);
-
-    // ✅ Base64 변환 방식으로 폴백
-    try {
-      await self.insertImageViaBase64(absolutePath, frame, page);
-      self.log(`   ✅ Base64 변환 방식으로 이미지 삽입 성공`);
-      const fallbackCount = await frame.$$eval(IMG_SELECTOR, (imgs: any) => imgs.length).catch(() => 0);
-      recordImageProvenance(self, fallbackCount - 1, provenanceMeta);
-
-      if (isTemporaryFile) {
-        await fs.unlink(absolutePath).catch(() => { });
-      }
-      return;
-    } catch (base64Error) {
-      self.log(`   ❌ Base64 변환 방식도 실패: ${(base64Error as Error).message}`);
-      throw new Error(`이미지 삽입 실패 (FileChooser + Base64 모두 실패): ${(error as Error).message}`);
-    }
+    // [2026-10-09] Base64(클립보드) 폴백 제거 — 실측 성공 0회. 거짓 성공이 출처 장부를 오기록하고 사용자 클립보드를 덮어썼다.
+    if (isTemporaryFile) await fs.unlink(absolutePath).catch(() => { });
+    if (isImageUploadNotRetryable(error)) throw error;
+    throw new Error(`이미지 삽입 실패: ${(error as Error).message}`);
   }
 
   // ✅ 이미지 크기를 '문서 너비'로 설정
@@ -1232,7 +1227,8 @@ export async function insertImageViaBase64(self: any, filePath: string, frame?: 
   if (imgCount > imgBeforeCount) {
     self.log(`   ✅ Base64 방식으로 이미지 삽입 성공 (이미지 ${imgBeforeCount}→${imgCount}개, +${imgCount - imgBeforeCount})`);
   } else {
-    self.log(`   ⚠️ Base64 방식으로 삽입했으나 새 이미지가 DOM에 늘지 않음 (${imgBeforeCount}개 그대로)`);
+    // [2026-10-09] 늘지 않았는데 돌아가면 호출자가 성공으로 기록한다 — 반드시 던진다.
+    throw new Error(`Base64 붙여넣기로도 사진이 늘지 않음 (${imgBeforeCount}개 그대로)`);
   }
 
   // ✅ 이미지 크기를 '문서 너비'로 설정
@@ -1565,7 +1561,9 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
     // ✅ [핵심] 재시도 로직 (최대 3회)
     let insertSuccess = false;
     let lastInsertReason = '';
+    let attemptsMade = 0;
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      attemptsMade = attempt;
       try {
         await self.insertBase64ImageAtCursor(imagePath, image as any);
         await self.delay(1500); // 안정화 대기: 1초 → 1.5초
@@ -1605,6 +1603,8 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
           insertSuccess = true;
           break;
         }
+        // [2026-10-09] 사진이 아님·네이버 거부창 = 다시 해도 같은 결과. 정착 확인 뒤 바로 멈춘다.
+        if (isImageUploadNotRetryable(error)) { self.log(`      ⛔ 재시도해도 같은 결과라 멈춥니다: ${lastInsertReason}`); break; }
         if (attempt < MAX_RETRIES) {
           // 점진적 대기 (1초, 2초)
           const waitTime = 1000 * attempt;
@@ -1620,7 +1620,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
 
     if (!insertSuccess) {
       // [2026-10-09 고객 신고] 화면 오류만 보고도 원인을 알 수 있게 마지막 이유를 붙인다.
-      failures.push(`이미지 ${imgIdx + 1}: ${MAX_RETRIES}회 삽입 실패${lastInsertReason ? ` (마지막 이유: ${lastInsertReason})` : ''}`);
+      failures.push(`이미지 ${imgIdx + 1}: ${attemptsMade}회 삽입 실패${lastInsertReason ? ` (마지막 이유: ${lastInsertReason})` : ''}`);
       self.log(`      ❌ 이미지 ${imgIdx + 1} 최종 삽입 실패, 건너뜀`);
       continue;
     }

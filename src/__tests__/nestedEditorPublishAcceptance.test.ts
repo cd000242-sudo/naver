@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import ts from 'typescript';
 import { describe, expect, it, vi } from 'vitest';
 import { insertImagesAtCurrentCursor } from '../automation/imageHelpers.js';
+import { ImageUploadNotRetryableError } from '../automation/imageUploadPreflight.js';
 import { isBlogWriteLoginRedirect, resolveBlogWriteFrameSwitchSurface } from '../automation/editorNavigationUrlPolicy.js';
 import { isLoginChallengeUrl } from '../automation/loginPageNavigationPolicy.js';
 import { EditorFrameProtectionError, findReadyEditorFrame, INITIAL_EDITOR_READINESS_SCRIPT } from '../automation/initialEditorReadiness.js';
@@ -25,7 +26,7 @@ function productionMethod(name: string, dependencies: Record<string, unknown>) {
   return new Function(...Object.keys(dependencies), `${compiled}; return Harness.prototype.${name};`)(...Object.values(dependencies));
 }
 
-function harness(mode: 'success' | 'no-dom-image' | 'upload-error' | 'partial-upload-error' | 'partial-no-dom-image' = 'success') {
+function harness(mode: 'success' | 'no-dom-image' | 'upload-error' | 'partial-upload-error' | 'partial-no-dom-image' | 'unusable-file' = 'success') {
   const events: string[] = [];
   let insertedImages: unknown[] = [];
   const editor = {
@@ -75,6 +76,8 @@ function harness(mode: 'success' | 'no-dom-image' | 'upload-error' | 'partial-up
   state.insertBase64ImageAtCursor = vi.fn(async (path: string) => {
     expect(await state.getAttachedFrame()).toBe(editor);
     events.push('upload');
+    // [2026-10-09] 사진이 아닌 파일·네이버 거부창 = 다시 해도 같은 결과 — 재시도 없이 장마다 1회.
+    if (mode === 'unusable-file') throw new ImageUploadNotRetryableError('사진 파일이 아님 (167바이트) — fixture.jpg');
     if (mode === 'upload-error' || (mode === 'partial-upload-error' && path.endsWith('fixture1'))) {
       throw new Error('Fixture upload rejected');
     }
@@ -115,6 +118,14 @@ describe('nested editor through image insertion to publish acceptance', () => {
     expect(h.state.publishBlogPost).not.toHaveBeenCalled();
     expect(h.state.verifyImmediatePublishOutcome).not.toHaveBeenCalled();
     expect(h.state.browser.close).not.toHaveBeenCalled();
+    expect(h.events).not.toContain('images-verified');
+  });
+
+  it('does not retry an unusable file: each of the three images is tried once, then publishing is blocked', async () => {
+    const h = harness('unusable-file');
+    await expect(h.execute()).rejects.toThrow('IMAGE_INSERTION_FAILED:3/3');
+    expect(h.state.insertBase64ImageAtCursor).toHaveBeenCalledTimes(3);
+    expect(h.state.publishBlogPost).not.toHaveBeenCalled();
     expect(h.events).not.toContain('images-verified');
   });
 
