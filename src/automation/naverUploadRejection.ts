@@ -20,7 +20,8 @@ export function scanUploadRejectionInPage(phrases: readonly string[], dismiss: b
   const isHidden = (start: Element): boolean => {
     for (let el: Element | null = start; el; el = el.parentElement) {
       const style = window.getComputedStyle(el as HTMLElement);
-      if (style.display === 'none' || style.visibility === 'hidden') return true;
+      // [2026-10-09] 투명하게 미리 그려 둔 알림 레이어도 숨김으로 본다(검토 지적).
+      if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') return true;
       if (el.hasAttribute('hidden') || el.getAttribute('aria-hidden') === 'true') return true;
     }
     return false;

@@ -107,6 +107,40 @@ describe('진입 뒤 프레임 재획득', () => {
   });
 });
 
+describe('⑦ 중간에서 삼킨 재획득 실패 (2026-10-09 검토 지적)', () => {
+  /** 재획득 실패를 호출한 쪽이 .catch 로 삼킨 뒤, 실행이 다른 이름의 오류로 끝나는 경우. */
+  async function swallowThenFail(finalError: Error) {
+    const automation = make(closedPage());
+    await expect(automation.withAccountExecution(async () => {
+      await automation.switchToMainFrame({ afterEntry: true }).catch(() => null);
+      throw finalError;
+    })).rejects.toBe(finalError);
+    return automation;
+  }
+
+  it('실행이 일반 오류(에디터 준비 실패 등)로 끝나면 미뤄 둔 NETWORK_WAIT 를 한 번 저장한다', async () => {
+    await swallowThenFail(new Error('에디터를 찾을 수 없습니다'));
+    expect(paused()).toMatchObject({ paused: true, code: 'NETWORK_WAIT', version: 1 });
+  });
+
+  it('사용자가 크롬을 닫아 끝난 실행은 저장하지 않는다(10/9 사고 경로)', async () => {
+    await swallowThenFail(new Error('Target closed: 브라우저가 닫혔습니다'));
+    expect(paused().paused).toBe(false);
+  });
+
+  it('삼킨 뒤에도 실행이 성공하면 저장하지 않는다', async () => {
+    const automation = make(closedPage());
+    await automation.withAccountExecution(async () => { await automation.switchToMainFrame({ afterEntry: true }).catch(() => null); return { success: true }; });
+    expect(paused().paused).toBe(false);
+  });
+
+  it('그 뒤 프레임을 다시 잡으면 표시를 지운다(소스 단언: 프레임 저장 직후 초기화)', () => {
+    const main = readFileSync(new URL('../naverBlogAutomation.ts', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
+    expect(main).toContain('    this.mainFrame = frame;\n    this.deferredFrameStop = false;\n');
+    expect(main.match(/this\.deferredFrameStop = false;/g) ?? []).toHaveLength(3); // 프레임 회복 1 + 두 발행 경로 시작 2
+  });
+});
+
 describe('⑥ 소스 단언', () => {
   const read = (f: string) => readFileSync(new URL(`../automation/${f}`, import.meta.url), 'utf8');
   const main = readFileSync(new URL('../naverBlogAutomation.ts', import.meta.url), 'utf8');

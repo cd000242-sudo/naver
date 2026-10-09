@@ -50,6 +50,11 @@ describe('scanUploadRejectionInPage', () => {
     expect(scan()).toBeNull();
   });
 
+  it('ignores a box pre-rendered with opacity 0 (2026-10-09 review)', () => {
+    document.body.innerHTML = '<div style="opacity:0"><div class="se-popup-alert">파일 전송 오류</div></div>';
+    expect(scan()).toBeNull();
+  });
+
   it('ignores aria-hidden boxes', () => {
     document.body.innerHTML = '<div class="se-popup-alert" aria-hidden="true">파일 전송 오류</div>';
     expect(scan()).toBeNull();

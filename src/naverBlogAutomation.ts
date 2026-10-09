@@ -484,6 +484,8 @@ export class NaverBlogAutomation {
   private requiresFreshEditorContext = false;
   /** [2026-10-09] 이번 글에서 새 글쓰기 화면을 이미 열었는지. 이전 글이 남긴 화면은 다시 쓰지 않는다. */
   private editorEnteredThisRun = false;
+  /** [2026-10-09] 진입 뒤 프레임 재획득이 NETWORK_WAIT 로 실패한 채 아직 회복되지 않았는지(저장은 미뤘다). */
+  private deferredFrameStop = false;
   private _prosConsAlreadyInserted = false; // ✅ [2026-02-19] 장단점 표 중복 삽입 방지 플래그
 
   // ✅ Ghost Cursor 인스턴스 (사람 같은 마우스 이동)
@@ -2131,6 +2133,7 @@ export class NaverBlogAutomation {
       // [2026-10-09] 진입 뒤 프레임 재획득(afterEntry)의 연결 실패는 저장하지 않고 던진다 — 실행이 끝내 실패하면
       //   withAccountExecution 이 그 코드로 한 번만 저장한다. 로그인·본인확인 증거는 지금처럼 바로 저장한다(창을 남겨야 한다).
       this.pauseEntry('NETWORK_WAIT', options.deferPause || options.afterEntry);
+      if (options.afterEntry && !options.deferPause) this.deferredFrameStop = true;
       throw new AccountExecutionGuardError('NETWORK_WAIT', '글쓰기 입력 화면의 상태가 변경되어 작업을 중단했습니다. 원고를 보존했으니 화면을 확인한 뒤 재개해 주세요.');
     }
     this.ensureNotCancelled();
@@ -2277,6 +2280,7 @@ export class NaverBlogAutomation {
     } catch (e) { console.debug('[Editor] 프레임 로드 대기 타임아웃 (정상 진행):', (e as Error).message); }
 
     this.mainFrame = frame;
+    this.deferredFrameStop = false;
 
     // ✅ [2026-03-24 FIX] 에디터 iframe 내 beforeunload 이벤트 제거
     // 네이버 에디터가 등록한 beforeunload 핸들러가 페이지 이동 시
@@ -6450,6 +6454,7 @@ export class NaverBlogAutomation {
         await this.setupBrowser();
       }
       this.ensureDialogHandler();
+      this.deferredFrameStop = false;
       this.editorEnteredThisRun = false;
       // [2026-10-09 사장님 선택] 로그인을 못 알아보거나 글쓰기 창을 못 찾으면 크롬을 다시 띄워 한 번 더 들어간다(비밀번호 입력 없음).
       await this.enterEditorWithOneRestart(async (deferPause) => {
@@ -6882,6 +6887,10 @@ export class NaverBlogAutomation {
         } else {
           const failure = classifyPublishFailure(error);
           if (ACCOUNT_PAUSE_CODES.includes(failure.code as AccountPauseCode)) guard.pause(this.options.naverId, failure.code as AccountPauseCode);
+          // [2026-10-09] 진입 뒤 프레임 재획득 실패(NETWORK_WAIT)를 중간에서 삼킨 뒤 다른 이름으로 실패한 실행은 여기서 한 번 저장한다.
+          //   사용자가 크롬을 닫았거나 취소한 실행은 제외 — 10/9 tjd*** 사고(크롬을 닫은 뒤 멈춤 저장)가 바로 그 경우였다.
+          else if (this.deferredFrameStop && failure.code !== 'BROWSER_CLOSED' && failure.code !== 'USER_CANCELLED'
+            && !guard.getStatus(this.options.naverId).paused) guard.pause(this.options.naverId, 'NETWORK_WAIT');
         }
         throw error;
       }
@@ -7007,6 +7016,7 @@ export class NaverBlogAutomation {
      this.ensureDialogHandler();
 
      try {
+       this.deferredFrameStop = false;
        this.editorEnteredThisRun = false;
        // [2026-10-09 사장님 선택] 로그인을 못 알아보거나 글쓰기 창을 못 찾으면 크롬을 다시 띄워 한 번 더 들어간다(비밀번호 입력 없음).
        await this.enterEditorWithOneRestart(async (deferPause) => {
