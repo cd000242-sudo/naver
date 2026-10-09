@@ -390,7 +390,7 @@ export async function typeBodyWithRetry(self: any,
     } catch (error) {
       if ((error as Error).message.includes('detached')) {
         self.log('   ⚠️ Frame이 detached 됨. 메인 프레임을 재연결합니다...');
-        await self.switchToMainFrame();
+        await self.switchToMainFrame({ afterEntry: true });
         frame = (await self.getAttachedFrame());
       } else {
         throw error;
@@ -2482,7 +2482,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         if (i < headings.length - 1) {
           await self.delay(self.DELAYS.LONG); // 500ms 대기
           try {
-            await self.switchToMainFrame();
+            await self.switchToMainFrame({ afterEntry: true });
             self.log(`   ✅ 다음 섹션을 위한 Frame 재설정 완료`);
           } catch (frameError) {
             self.log(`   ⚠️ Frame 재설정 실패(무시하고 계속): ${(frameError as Error).message} `);

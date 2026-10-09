@@ -1236,7 +1236,7 @@ export class NaverBlogAutomation {
 
   private async getAttachedFrame(): Promise<Frame> {
     if (!this.mainFrame) {
-      await this.switchToMainFrame();
+      await this.switchToMainFrame({ afterEntry: true });
     } else {
       try {
         // 프레임이 여전히 유효한지 확인
@@ -1247,7 +1247,7 @@ export class NaverBlogAutomation {
         this.log(`   ⚠️ 프레임 오류 발생: ${errorMsg.substring(0, 50)}...`);
         this.log('   🔄 프레임 재연결 시도 중...');
         this.mainFrame = null; // 강제 리셋
-        await this.switchToMainFrame();
+        await this.switchToMainFrame({ afterEntry: true });
       }
     }
 
@@ -2101,7 +2101,7 @@ export class NaverBlogAutomation {
     }
   }
 
-  async switchToMainFrame(options: { deferPause?: boolean } = {}): Promise<void> {
+  async switchToMainFrame(options: { deferPause?: boolean; afterEntry?: boolean } = {}): Promise<void> {
     const page = this.ensurePage();
 
     this.ensureNotCancelled();
@@ -2128,7 +2128,9 @@ export class NaverBlogAutomation {
         this.pauseEntry('LOGIN_CHALLENGE', options.deferPause);
         throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
       }
-      this.pauseEntry('NETWORK_WAIT', options.deferPause);
+      // [2026-10-09] 진입 뒤 프레임 재획득(afterEntry)의 연결 실패는 저장하지 않고 던진다 — 실행이 끝내 실패하면
+      //   withAccountExecution 이 그 코드로 한 번만 저장한다. 로그인·본인확인 증거는 지금처럼 바로 저장한다(창을 남겨야 한다).
+      this.pauseEntry('NETWORK_WAIT', options.deferPause || options.afterEntry);
       throw new AccountExecutionGuardError('NETWORK_WAIT', '글쓰기 입력 화면의 상태가 변경되어 작업을 중단했습니다. 원고를 보존했으니 화면을 확인한 뒤 재개해 주세요.');
     }
     this.ensureNotCancelled();
@@ -4472,6 +4474,11 @@ export class NaverBlogAutomation {
    * 사용자가 생성된 글을 직접 수정할 수 있도록 함
    */
   private async activateEditorForEditing(): Promise<void> {
+    // [2026-10-09] 사용자가 크롬을 닫았으면 건드리지 않는다 — 닫힌 창의 프레임을 다시 찾다가 임시저장 성공 뒤 계정을 멈추던 문제.
+    if (!this.page || this.page.isClosed() || (this.browser as any)?.connected === false) {
+      this.log('ℹ️ 글쓰기 창이 닫혀 있어 편집 활성화를 건너뜁니다.');
+      return;
+    }
     try {
       // Acquired inside the try: this is a best-effort step and must never fail a run that already saved its post.
       const frame = (await this.getAttachedFrame());
@@ -4687,7 +4694,7 @@ export class NaverBlogAutomation {
           try {
             // ✅ [2026-03-05 FIX] mainFrame을 null로 리셋하여 강제 재연결
             this.mainFrame = null;
-            await this.switchToMainFrame();
+            await this.switchToMainFrame({ afterEntry: true });
             this.log(`   ✅ 프레임 재연결 성공`);
             await this.delay(3000); // 2000ms → 3000ms (프레임 완전 로드 대기)
             // ✅ 프레임이 실제로 유효한지 간단 검증
@@ -4699,6 +4706,8 @@ export class NaverBlogAutomation {
             continue; // 재시도
           } catch (frameError) {
             this.log(`   ❌ 프레임 재연결 실패: ${(frameError as Error).message}`);
+            // [2026-10-09] 멈춤 코드는 그대로 올린다 — 저장은 withAccountExecution 이 이 코드로 한 번만 한다.
+            if (frameError instanceof AccountExecutionGuardError) throw frameError;
             // 프레임 재연결 실패 시 치명적 에러로 처리
             throw new Error(`${operationName} 실패 - 브라우저 프레임이 유효하지 않습니다. 다시 시작해주세요.`);
           }

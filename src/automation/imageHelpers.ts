@@ -1539,7 +1539,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
     } catch {
       self.log(`      ⚠️ 프레임 연결 불안정, 재연결 시도...`);
       try {
-        await self.switchToMainFrame();
+        await self.switchToMainFrame({ afterEntry: true });
         frame = await self.getAttachedFrame();
       } catch (reconnectError) {
         failures.push(`이미지 ${imgIdx + 1}: 프레임 재연결 실패 (${(reconnectError as Error).message})`);
