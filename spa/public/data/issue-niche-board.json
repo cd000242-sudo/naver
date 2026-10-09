@@ -1,17 +1,19 @@
 {
-  "publishedAt": "2026-10-09T10:10:23.814Z",
+  "publishedAt": "2026-10-09T21:43:23.860Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
     "niche": 0,
-    "preemption": 8,
+    "preemption": 11,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-09",
-    "keywords": []
+    "day": "2026-10-10",
+    "keywords": [
+      "레이예스 응원가"
+    ]
   },
   "rows": [
     {
@@ -168,7 +170,8 @@
           33
         ],
         "label": "❄️ 시즌성",
-        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보"
+        "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
+        "measuredAt": "2026-10-09T21:43:24.352Z"
       },
       "kinCount": 14,
       "kinTop": [
@@ -211,6 +214,915 @@
     }
   ],
   "observations": [
+    {
+      "keyword": "이율린 점심이네",
+      "issue": "이율린",
+      "topic": "이율린",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 16,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 16",
+        "선점 후보 — 경쟁 문서 16건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이율린이 골프 경기에서 티샷하는 모습이 포착됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이율린 점심이네 골프 선수 최근 경기 티샷 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이율린 점심이네 갔다가 이율린 프로 연습하는 거 봤는데 자세가 생각보다 다르더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이율린 프로",
+          "searchVolume": 1870,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이율린 프로",
+          "searchVolume": 1870,
+          "documentCount": 1778,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T21:38:13.046Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이율린 유튜버",
+      "issue": "이율린",
+      "topic": "이율린",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 5,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 5",
+        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이율린이 골프 경기에서 티샷하는 모습이 포착됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이율린 유튜버 골프 선수 프로필과 유튜브 채널 정보",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이율린 유튜버인 줄 알고 프로필 뒤졌는데 생각보다 다른 쪽이더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "documentCount": 210,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T21:38:13.046Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이율린 배우",
+      "issue": "이율린",
+      "topic": "이율린",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 131,
+      "documentCountMeasured": true,
+      "searchVolume": 40,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 1,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 40",
+        "문서수 131",
+        "선점 후보 — 경쟁 문서 131건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 1건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이율린이 골프 경기에서 티샷하는 모습이 포착됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이율린 배우로 검색되지만 티샷 날리는 골프선수입니다",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이율린 배우 프로필 찾다가 티샷 자세 보고 한참 멈췄네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "documentCount": 210,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T21:38:13.046Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "죽음 Thần Trùng",
+      "issue": "죽음",
+      "topic": "죽음",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 17,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 17",
+        "선점 후보 — 경쟁 문서 17건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "조경태가 봉하마을을 참배하며 죽음은 정쟁 대상이 아니라고 말했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "home": {
+          "text": "죽음 Thần Trùng 베트남 친구가 밤마다 이 말 꺼내더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T21:38:13.046Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "앤트로픽 엔스로픽 차이",
+      "issue": "앤트로픽",
+      "topic": "앤트로픽",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 34,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 34",
+        "선점 후보 — 경쟁 문서 34건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "앤트로픽이 클로드 학대 금지 정책을 도입하고 오픈AI와 같은 날 신모델을 냈다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "구매 검토",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "앤트로픽 엔스로픽 차이와 클로드 만든 회사 바로 알기",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "앤트로픽 엔스로픽 차이 찾다가 클로드 만든 그 회사라는 걸 알았어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": 10590,
+          "frame": "generic"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": 2860,
+          "frame": "generic"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": 2010,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": 10590,
+          "documentCount": 23904,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": 2860,
+          "documentCount": 35850,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": 2010,
+          "documentCount": 32346,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 CEO",
+          "searchVolume": 1970,
+          "documentCount": 23157,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 뜻",
+          "searchVolume": 280,
+          "documentCount": 16978,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 오픈AI",
+          "searchVolume": 60,
+          "documentCount": 48545,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "앤트로픽 회사",
+          "searchVolume": 50,
+          "documentCount": 34932,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T21:38:13.046Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "데이터센터 전문 퍼머스",
+      "issue": "데이터센터 전문 퍼머스",
+      "topic": "데이터센터 전문 퍼머스",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 45,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 45",
+        "선점 후보 — 경쟁 문서 45건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "엔비디아가 지원한 데이터센터 기업 퍼머스가 호주 IPO를 철회했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "데이터센터 전문 퍼머스 50억달러 IPO 철회 배경",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "데이터센터 전문 퍼머스 엔비디아 후광에도 호주 IPO 접은 거 의외더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T21:38:13.046Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이율린 프로 개명",
+      "issue": "이율린",
+      "topic": "이율린",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 46,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 46",
+        "선점 후보 — 경쟁 문서 46건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이율린이 골프 경기에서 티샷하는 모습이 포착됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이율린 프로 개명 전 본명과 프로필 나이까지 확인",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이율린 프로 개명했다는데 바뀌기 전 이름이랑 프로필까지 다들 다시 찾아보더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "documentCount": 210,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T21:38:13.046Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이율린 개명",
+      "issue": "이율린",
+      "topic": "이율린",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 57,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 57",
+        "선점 후보 — 경쟁 문서 57건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이율린이 골프 경기에서 티샷하는 모습이 포착됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이율린 개명 전 본명과 골프 프로필 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이율린 개명 전 이름 궁금해서 프로필 뒤져보다 멈칫했네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "documentCount": 210,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": [
+        {
+          "title": "개명할건데 이름추천좀요 ㅠ",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=31506&docId=495183546&answerNo=5",
+          "views": 120,
+          "answers": 11
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-09T21:38:13.046Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "애덤 올러 방어율",
+      "issue": "애덤 올러",
+      "topic": "애덤 올러",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 71,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 71",
+        "선점 후보 — 경쟁 문서 71건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "KIA 선발 애덤 올러가 LG전에 등판했다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "애덤 올러 방어율과 KIA 선발 등판 성적 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "애덤 올러 방어율보다 KIA 1회 초반이 더 신경 쓰이더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "애덤 올러",
+          "searchVolume": 8240,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "애덤 올러",
+          "searchVolume": 8240,
+          "documentCount": 2105,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T21:38:13.046Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이율린 프로나이",
+      "issue": "이율린",
+      "topic": "이율린",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 122,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 122",
+        "선점 후보 — 경쟁 문서 122건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이율린이 골프 경기에서 티샷하는 모습이 포착됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이율린 프로나이 나이와 KLPGA 소속 프로필 정보",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이율린 프로나이 치는 장면 돌려보다가 프로필부터 뒤져보게 됐네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "documentCount": 210,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T21:38:13.046Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이율린 나이",
+      "issue": "이율린",
+      "topic": "이율린",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 140,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 140",
+        "선점 후보 — 경쟁 문서 140건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이율린이 골프 경기에서 티샷하는 모습이 포착됐다.",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이율린 나이와 프로필 키 소속 정보 정리",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이율린 나이 찾다가 티샷 사진보다 프로필 소속에 눈이 더 갔네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "이율린 프로필",
+          "searchVolume": 100,
+          "documentCount": 210,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T21:38:13.046Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "대우건설 팰팍",
       "issue": "대우건설",
@@ -292,7 +1204,8 @@
       "monetize": null,
       "measuredAt": "2026-10-09T10:07:40.119Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "d1-3B 벤치마크",
@@ -354,73 +1267,8 @@
       "monetize": null,
       "measuredAt": "2026-10-09T10:07:40.119Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "앤트로픽 엔스로픽 차이",
-      "issue": "앤트로픽",
-      "topic": "앤트로픽",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 34,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 34",
-        "선점 후보 — 경쟁 문서 34건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "앤트로픽·오픈AI 같은 날 새 모델 발표",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "구매 검토",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        },
-        "home": {
-          "text": "앤트로픽 엔스로픽 차이, 기준은 하나면 됩니다",
-          "frame": "compare",
-          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-09T10:07:40.119Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "d1-3B 다운로드",
@@ -489,7 +1337,8 @@
       "monetize": null,
       "measuredAt": "2026-10-09T10:07:40.119Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오픈AI 닷츠 이용방법",
@@ -561,7 +1410,8 @@
       "monetize": null,
       "measuredAt": "2026-10-09T10:07:40.119Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "d1-3B 성능",
@@ -630,7 +1480,8 @@
       "monetize": null,
       "measuredAt": "2026-10-09T10:07:40.119Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이재명 이집트 CEPA",
@@ -715,7 +1566,8 @@
       "monetize": null,
       "measuredAt": "2026-10-09T10:07:40.119Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "d1-3B 사용법",
@@ -781,7 +1633,8 @@
       "monetize": null,
       "measuredAt": "2026-10-09T10:07:40.119Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "레이예스 부인",
@@ -3025,430 +3878,35 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "페가수스 1.6 VLM",
-      "issue": "페가수스 1.6",
-      "topic": "페가수스 1.6",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 2,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 2",
-        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "트웰브랩스가 로봇 학습용 영상 이해 VLM 페가수스 1.6 출시.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "페가수스 1.6 VLM, 트웰브랩스 피지컬 AI 1인칭 영상 이해",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "페가수스 1.6 VLM 보고 34년 걸릴 일을 하루 만에 한다는 말 이해됐어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-07T21:23:08.005Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "오만석 개런티 낮춰",
-      "issue": "오만석 개런티 낮춰",
-      "topic": "오만석 개런티 낮춰",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 16,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 16",
-        "선점 후보 — 경쟁 문서 16건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "오만석이 라스에서 개런티 낮춰 다작하는 비결 전함.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "오만석 개런티 낮춰 라스에서 밝힌 다작 비결",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오만석 개런티 낮춰 다작한다길래 프로필부터 봤더니 나이에서 눈이 좀 멈추더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "오만석 프로필",
-          "searchVolume": 1610,
-          "frame": "generic"
-        },
-        {
-          "keyword": "오만석 나이",
-          "searchVolume": 760,
-          "frame": "generic"
-        },
-        {
-          "keyword": "오만석 배우",
-          "searchVolume": 160,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "오만석 프로필",
-          "searchVolume": 1610,
-          "documentCount": 1227,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "오만석 나이",
-          "searchVolume": 760,
-          "documentCount": 4870,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "오만석 배우",
-          "searchVolume": 160,
-          "documentCount": 25192,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "오만석 한예종",
-          "searchVolume": 10,
-          "documentCount": 510,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-07T21:23:08.005Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "페가수스 1.6 기능",
-      "issue": "페가수스 1.6",
-      "topic": "페가수스 1.6",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 71,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 71",
-        "선점 후보 — 경쟁 문서 71건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "트웰브랩스가 로봇 학습용 영상 이해 VLM 페가수스 1.6 출시.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "페가수스 1.6 기능, 트웰브랩스 로봇 학습 영상 분석 VLM",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "페가수스 1.6 기능 중에 로봇한테 행동 가르치는 부분이 의외로 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-07T21:23:08.005Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "amd 커옵 방법",
-      "issue": "AMD",
-      "topic": "AMD",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 71,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 71",
-        "선점 후보 — 경쟁 문서 71건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "AMD 리사 수가 삼성·SK하이닉스 등 K-AI 반도체 기업과 회동.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "amd 커옵 방법 PBO 설정부터 안정화 테스트까지",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "amd 커옵 방법 남들 추천값 그대로 넣었다가 재부팅만 반복하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 9,
-      "kinTop": [
-        {
-          "title": "배그 프레임이 너무 떨어지는데 해결방법이 있을까요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=1010302&docId=479138529&answerNo=1",
-          "views": 181,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-07T21:23:08.005Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "미스트랄 라지 4",
-      "issue": "라지 4",
-      "topic": "라지 4",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 209,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 209",
-        "선점 후보 — 경쟁 문서 209건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "미스트랄이 1조 매개변수 오픈웨이트 라지 4 공개, 160개 언어 학습.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "미스트랄 라지 4 성능, 1조 파라미터로 160개 언어 학습",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "미스트랄 라지 4 두고 삼성이 왜 투자했나 싶었는데 써보니 그럴 만하네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "미스트랄 AI",
-          "searchVolume": 1680,
-          "frame": "generic"
-        },
-        {
-          "keyword": "미스트랄 삼성 투자",
-          "searchVolume": 80,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "미스트랄 AI",
-          "searchVolume": 1680,
-          "documentCount": 6565,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "미스트랄 삼성 투자",
-          "searchVolume": 80,
-          "documentCount": 2338,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 2,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-07T21:23:08.005Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "극초음속 활공비행체 시험발사",
+      "issue": "트럼프 푸틴 경유",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "극초음속 활공비행체 최초 시험발사 성공, 이 대통령 참관",
+      "why": "트럼프가 푸틴과 러시아 경유 30만톤 즉각 공급에 합의했다.",
       "headlines": [
         {
-          "title": "극초음속 활공비행체 최초 시험발사",
+          "title": "트럼프 \"푸틴과 방금 협의…러 경유 30만t 즉각 시장에 풀기로\"",
           "press": "yna.co.kr",
-          "publishedAt": "2026-10-09T07:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016367794?sid=100"
+          "publishedAt": "2026-10-09T19:05:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016367982?sid=104"
         },
         {
-          "title": "극초음속 활공비행체 최초 시험발사 성공‥李 \"적극 지원\"",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-10-08T09:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001527944?sid=100"
+          "title": "트럼프 \"푸틴과 러시아 경유 30만 톤 즉각 공급 합의\"",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-10-09T21:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001394359?sid=104"
         },
         {
-          "title": "이 대통령, ‘극초음속 활공비행체’ 최초 시험발사 성공 참관",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-10-08T09:16:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002826670?sid=100"
+          "title": "트럼프 “푸틴과 통화…러 경유 공급 합의”",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-10-09T21:04:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012271110?sid=104"
         }
       ],
       "concentrated": [],
@@ -3456,39 +3914,120 @@
       "rowCount": 0
     },
     {
-      "issue": "주지훈 액터스 하우스",
+      "issue": "김신영",
       "issueType": "fresh",
       "lane": "realtime",
-      "issueStatus": "unknown",
+      "issueStatus": "stable",
       "isHot": true,
-      "why": "부산영화제 액터스 하우스에서 주지훈이 재혼황후 언급",
+      "why": "김신영이 나혼산에서 밥 소믈리에 자격증에 합격했다.",
       "headlines": [
         {
-          "title": "주지훈 '액터스 하우스' 오픈",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-09T07:34:00.000Z",
-          "link": "https://m.entertain.naver.com/article/001/0016367807"
+          "title": "‘나혼산’ 김신영, 밥 소믈리에 시험 합격⋯\"밥 좋아서 도전\"",
+          "press": "etoday.co.kr",
+          "publishedAt": "2026-10-09T15:10:00.000Z",
+          "link": "https://www.etoday.co.kr/news/view/2634184"
         },
         {
-          "title": "BIFF 액터스 하우스 주지훈",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-09T07:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014243719?sid=103"
+          "title": "'나혼산' 조작설 속 '밥 소믈리에' 도전한 김신영 \"내 의도가 제일 순수...",
+          "press": "sportschosun.com",
+          "publishedAt": "2026-10-09T14:46:00.000Z",
+          "link": "https://m.entertain.naver.com/article/076/0004454577"
         },
         {
-          "title": "주지훈, 액터스 하우스 오픈",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-09T07:30:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009219378"
+          "title": "'나 혼자 산다' 김신영, 밥 소믈리에 자격증→류혜영에 집밥 대접",
+          "press": "enter.etoday.co.kr",
+          "publishedAt": "2026-10-09T13:56:00.000Z",
+          "link": "https://enter.etoday.co.kr/news/view/303505"
         }
       ],
       "concentrated": [
         {
-          "keyword": "주지훈",
+          "keyword": "김신영 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김신영 다이어트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김신영 롤팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김신영 요요",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김신영 집",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김신영 열쫄냉",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김신영 고구마칩",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김신영 도마",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
+      "nextWave": [
+        {
+          "keyword": "김신영 다음자격증",
+          "reason": "자격증 부자 다음 행보",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "나혼산 조작설",
+          "reason": "방송 논란 연결 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "중국 EU 하이브리드",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "중국이 EU에 하이브리드차 수출을 줄이고 희토류 수출허가 편의를 주기로 했다.",
+      "headlines": [
+        {
+          "title": "中, EU에 하이브리드차 수출 줄이기로…희토류 수출허가 편의(종합)",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-09T14:53:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016367964?sid=104"
+        },
+        {
+          "title": "깊어지는 EU-中 무역갈등…하이브리드車 수입 제한 검토",
+          "press": "nocutnews.co.kr",
+          "publishedAt": "2026-10-08T08:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/079/0004197113?sid=104"
+        },
+        {
+          "title": "중국 “EU와 하이브리드차 무역 협의…희토류 수출허가 편의”",
+          "press": "news.kbs.co.kr",
+          "publishedAt": "2026-10-09T13:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/056/0012271097?sid=104"
+        }
+      ],
+      "concentrated": [],
       "nextWave": [],
       "rowCount": 0
     },
@@ -3498,7 +4037,7 @@
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "쿠팡이 2시간 먹통 뒤 주문취소 고객에 캐시 5000원 보상",
+      "why": "쿠팡이 새벽 접속 장애로 주문 취소된 고객에 5000원 캐시를 보상한다.",
       "headlines": [
         {
           "title": "한밤 중 동시다발 ‘먹통 사태’… 쿠팡, 캐시로 보상",
@@ -3524,166 +4063,1045 @@
       "rowCount": 0
     },
     {
-      "issue": "삼성전자 3분기 실적",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "삼성전자 3분기 영업이익 107조, 국내 첫 100조 돌파",
-      "headlines": [
-        {
-          "title": "[단독] 삼성전자 물량 80%가 장기계약분…빅테크 줄섰다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-09T08:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005340893?sid=101"
-        },
-        {
-          "title": "'107조 잭팟' 삼성전자, '63만전자' 시동거나",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-08T22:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014243117?sid=101"
-        },
-        {
-          "title": "SK하이닉스 ‘꿈의 이익률’ 80% 달성할까…삼성 이어 실적 기대감 고조",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-10-09T05:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001877785?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "삼성전자 3분기 실적발표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "최태원 호남 반도체",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "최태원이 호남 반도체 부지 첫 방문해 빠른 착공 강조",
-      "headlines": [
-        {
-          "title": "최태원, 호남 반도체부지 첫 방문…\"가장 빠른 속도로 짓겠다\"(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-09T07:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016367827?sid=105"
-        },
-        {
-          "title": "최태원, 호남 반도체부지 첫 방문‥\"가장 빠른 속도로 짓겠다\"",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-10-09T08:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001528110?sid=101"
-        },
-        {
-          "title": "호남 반도체 부지 간 최태원... “전력·용수 늦어도 먼저 착공”",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-09T06:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004002962?sid=102"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "최태원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "휴머노이드",
+      "issue": "이율린",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
       "isHot": true,
-      "why": "격투로봇이 인간에 발차기, 가정용 휴머노이드도 등장",
+      "why": "이율린이 골프 경기에서 티샷하는 모습이 포착됐다.",
       "headlines": [
         {
-          "title": "로봇이 인간에게 발차기 날렸다... 현실판 ‘터미네이터’ 소름",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-09T04:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004002952?sid=105"
+          "title": "[mhn포토] 이율린, 후반 시작합니다",
+          "press": "mhnse.com",
+          "publishedAt": "2026-10-09T12:34:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/445/0000474500"
         },
         {
-          "title": "인간 발로 차며 몰아붙였다…‘터미네이터’ 살인 로봇 현실로?",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-10-09T07:27:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/025/0003556855?sid=104"
+          "title": "[mhn포토] 이율린, 정타 날려 보낸다",
+          "press": "mhnse.com",
+          "publishedAt": "2026-10-09T12:34:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/445/0000474495"
         },
         {
-          "title": "\"대구·경북을 휴머노이드 중심지로\" 국회서 전략 논의",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-08T08:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016366814?sid=102"
+          "title": "[mhn포토] 이율린, 어드레스 정렬",
+          "press": "mhnse.com",
+          "publishedAt": "2026-10-09T12:33:00.000Z",
+          "link": "https://m.sports.naver.com/golf/article/445/0000474493"
         }
       ],
       "concentrated": [
         {
-          "keyword": "휴머노이드 로봇",
-          "searchVolume": 7030,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "휴머노이드 뜻",
+          "keyword": "이율린 프로나이",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "휴머노이드 etf",
+          "keyword": "이율린 고향",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "중국 휴머노이드",
+          "keyword": "이율린 배우",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "중국 휴머노이드 로봇",
+          "keyword": "이율린 유튜버",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "테슬라 휴머노이드",
+          "keyword": "이율린 황유민",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "차이나 휴머노이드 etf",
+          "keyword": "이율린 점심이네",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "삼성 휴머노이드",
+          "keyword": "이율린 프로고향",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이율린 프로 개명",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [
         {
-          "keyword": "휴머노이드 출시일",
-          "reason": "언제 나오나 궁금",
+          "keyword": "이율린 성적",
+          "reason": "경기 결과 궁금",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "가정용 휴머노이드",
-          "reason": "상용화 시점 궁금",
+          "keyword": "이율린 우승",
+          "reason": "첫 우승 여부 관심",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
         },
         {
-          "keyword": "국내 휴머노이드 기업",
-          "reason": "투자 대상 관심",
+          "keyword": "이율린 황유민",
+          "reason": "동료 비교 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "이율린 다음대회",
+          "reason": "출전 일정 탐색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "죽음",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "조경태가 봉하마을을 참배하며 죽음은 정쟁 대상이 아니라고 말했다.",
+      "headlines": [
+        {
+          "title": "조경태, 봉하마을 참배…\"죽음은 정쟁 대상 아냐, 대신 사죄\"",
+          "press": "imaeil.com",
+          "publishedAt": "2026-10-09T10:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/088/0001033258?sid=100"
+        },
+        {
+          "title": "국힘 당원권 정지 조경태, 노무현 前 대통령 묘역 참배…“죽음은 정쟁...",
+          "press": "sedaily.com",
+          "publishedAt": "2026-10-09T10:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/011/0004669771?sid=100"
+        },
+        {
+          "title": "존엄한 죽음, 그 한계",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-09T15:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004003013?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "휘성 죽음 이유",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "휘성 죽음",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이선균 죽음",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "시진핑 죽음",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "성룡 죽음",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "최진실 죽음",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김광석 죽음",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "나폴레옹 죽음 원인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "천우희",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "천우희가 나혼산에서 절친 이주승의 새집 집들이를 방문했다.",
+      "headlines": [
+        {
+          "title": "이주승, 새집 공개..천우희 \"남사친 집 첫 방문\" [나혼산]",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-10-09T09:40:00.000Z",
+          "link": "https://m.entertain.naver.com/article/108/0003477480"
+        },
+        {
+          "title": "‘나혼자산다’ 이주승 집에 천우희 초대(나혼산)",
+          "press": "bntnews.co.kr",
+          "publishedAt": "2026-10-09T07:30:00.000Z",
+          "link": "https://www.bntnews.co.kr/article/view/bnt202610090176"
+        },
+        {
+          "title": "\"남사친 집 처음\" 천우희, 이주승 새집 문턱 넘는다 (나혼산) [T-데이]",
+          "press": "tvdaily.co.kr",
+          "publishedAt": "2026-10-09T11:20:00.000Z",
+          "link": "https://m.entertain.naver.com/article/440/0000048329"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "천우희 안재홍",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "천우희 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "천우희 영화",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "천우희 쿠키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "천우희 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "마더 천우희",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "안재홍 천우희",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "곡성 천우희",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "이주승 새집",
+          "reason": "공개된 집 구경 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "천우희 이주승",
+          "reason": "13년 지기 관계 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "천우희 안재홍",
+          "reason": "열애설 연결 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "천우희 차기작",
+          "reason": "근황 뒤 작품 탐색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "박승수",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "박승수가 전역모 논란에 이어 시상식 메롱 세리머니로 논란이 됐다.",
+      "headlines": [
+        {
+          "title": "전역모 논란 박승수, 이번엔 시상식서 혀 내밀기…영상 확산",
+          "press": "weekly.chosun.com",
+          "publishedAt": "2026-10-09T03:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/053/0000062114?sid=102"
+        },
+        {
+          "title": "\"금메달 받고 카메라에 메롱\"…박승수, 전역모 이어 시상식 행동 논란",
+          "press": "fnnews.com",
+          "publishedAt": "2026-10-08T22:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005587049?sid=103"
+        },
+        {
+          "title": "금메달 목에 걸고 '메롱'…박승수, 전역모 이어 시상식도 태도 논란",
+          "press": "mbn.mk.co.kr",
+          "publishedAt": "2026-10-09T01:19:00.000Z",
+          "link": "https://m.sports.naver.com/kfootball/article/057/0001972616"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "축구 박승수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박승수 인스타",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박승수 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박승수 전역모",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "뉴캐슬 박승수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "박승수 아시안게임",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "축구 박승수 인스타",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "아시안게임 박승수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "박승수 징계",
+          "reason": "논란 뒤 처분 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "박승수 사과문",
+          "reason": "추가 사과 여부 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "박승수 뉴캐슬",
+          "reason": "소속팀 입장 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "서장훈 소문 해명",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "서장훈이 재산 2조설과 오정연 관련 소문을 직접 해명했다.",
+      "headlines": [
+        {
+          "title": "'비서진' 서장훈, 재산 2조설에 억울⋯500억설에는 '미소'",
+          "press": "etoday.co.kr",
+          "publishedAt": "2026-10-09T15:52:00.000Z",
+          "link": "https://www.etoday.co.kr/news/view/2634186"
+        },
+        {
+          "title": "이형택, 이대훈에 맞았다? '폭행설' 직접 해명…\"같이 넘어진 것\" (라스...",
+          "press": "xportsnews.com",
+          "publishedAt": "2026-09-17T03:55:00.000Z",
+          "link": "https://m.entertain.naver.com/article/311/0002057952"
+        },
+        {
+          "title": "\"28억에 산 양재역 빌딩, 450억 매물로\" … '착한 건물주' 서장훈, 26년 ...",
+          "press": "newdaily.co.kr",
+          "publishedAt": "2026-08-07T05:12:00.000Z",
+          "link": "https://www.newdaily.co.kr/site/data/html/2026/08/07/2026080700159.html"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "애덤 올러",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "KIA 선발 애덤 올러가 LG전에 등판했다.",
+      "headlines": [
+        {
+          "title": "[사진]이 악문 KIA 선발 애덤 올러",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-10-05T05:47:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/109/0005618464"
+        },
+        {
+          "title": "[IS 잠실] '전상현 휴식' KIA, LG전 싹쓸이 도전…이범호 감독 “올러가...",
+          "press": "isplus.com",
+          "publishedAt": "2026-10-05T04:03:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/241/0003533823"
+        },
+        {
+          "title": "날씨가 가른 LG와 KIA의 운명, 12일 시즌 최종전 광주서 결판날까",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-10-05T09:30:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/081/0003686130"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "애덤",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "애덤 올러 성적",
+          "reason": "등판 결과 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "애덤 올러 재계약",
+          "reason": "시즌 후 거취 탐색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "오픈AI 매출이 예상보다 27조원 적다는 전망에 거품론이 번졌다.",
+      "headlines": [
+        {
+          "title": "반도체주 담은 개미들 '술렁'…67조 쇼크에 '무서운 경고'",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-09T08:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340866?sid=101"
+        },
+        {
+          "title": "“오픈AI 매출 40% 부풀려져”",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-09T15:36:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004003047?sid=105"
+        },
+        {
+          "title": "700억 달러 아니네?…오픈AI 매출 축소 전망에 ‘거품론’ 고개",
+          "press": "donga.com",
+          "publishedAt": "2026-10-09T06:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003753908?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 닷츠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 상장",
+          "reason": "실적 논란 뒤 IPO 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "스페이스X",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "스페이스X가 저대역 주파수를 11조원에 인수하며 통신업계가 긴장했다.",
+      "headlines": [
+        {
+          "title": "스페이스X, 저대역 주파수 11조원에 인수…이동통신업계 긴장",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-09T20:37:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016367990?sid=104"
+        },
+        {
+          "title": "스페이스X, 저대역 주파수 11조원에 인수 추진…통신업계 긴장",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-09T21:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014244011?sid=104"
+        },
+        {
+          "title": "머스크, 美 통신 3사에 도전장…스페이스X, 10조원대 주파수 인수",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-09T08:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004002974?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "스페이스x 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스페이스x 관련주",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스페이스x 발사 일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스페이스x 스타쉽",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스페이스x 발사",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스페이스x 전망",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스페이스x 공모가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "스페이스x 상장가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "스페이스X 관련주",
+          "reason": "통신 진출 수혜주 탐색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "스페이스X 상장",
+          "reason": "공모 일정 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "미 통신주",
+          "reason": "급락 종목 영향 검색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "데이터센터 전문 퍼머스",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "엔비디아가 지원한 데이터센터 기업 퍼머스가 호주 IPO를 철회했다.",
+      "headlines": [
+        {
+          "title": "데이터센터 전문 퍼머스, 호주 IPO 철회…'엔비디아 후광'도 안 통했다",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-09T10:30:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216103"
+        },
+        {
+          "title": "[호주 특징주] 엔비디아 지원 퍼머스, 50억달러 IPO 철회…AI 투자 '옥석...",
+          "press": "newspim.com",
+          "publishedAt": "2026-10-09T02:31:00.000Z",
+          "link": "https://www.newspim.com/news/view/20261009000071"
+        },
+        {
+          "title": "\"동남아서 챗GPT 굴린다\"… 오픈AI, 호주 '퍼머스'와 말레이시아 AI 데이...",
+          "press": "g-enews.com",
+          "publishedAt": "2026-09-08T21:56:00.000Z",
+          "link": "https://www.g-enews.com/view.php?ud=2026090823433016850c8c1c064d_1"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "데이터센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤트로픽",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "앤트로픽이 클로드 학대 금지 정책을 도입하고 오픈AI와 같은 날 신모델을 냈다.",
+      "headlines": [
+        {
+          "title": "반도체주 담은 개미들 '술렁'…67조 쇼크에 '무서운 경고'",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-09T08:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340866?sid=101"
+        },
+        {
+          "title": "\"8분 만에 취약점 6개\"…'자율형 AI 해킹' 현실로[해킹 에이전트②]",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T23:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014243146?sid=105"
+        },
+        {
+          "title": "앤트로픽·오픈AI 같은 날 새 모델 발표",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-10-08T09:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000643825?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "앤트로픽 상장",
+          "reason": "IPO 일정 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "AI 학대 금지",
+          "reason": "정책 의미 호기심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 관련주",
+          "reason": "수혜주 탐색",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "애플",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "declining",
+      "isHot": false,
+      "why": "신형 아이폰 꺼짐 교환이 1500건 접수됐으나 애플이 원인을 기밀로 했다.",
+      "headlines": [
+        {
+          "title": "애플, 27일 첫 터치스크린 맥북 공개 예정",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-09T05:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004002960?sid=105"
+        },
+        {
+          "title": "신형 아이폰 '꺼짐' 교환 접수만 1500건인데...애플, 원인 비공개",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-10-08T05:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002416320?sid=101"
+        },
+        {
+          "title": "신형 아이폰 '꺼짐' 접수만 1500건인데…애플 \"원인은 기밀\"",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-08T07:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006383950?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "애플 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 서비스센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 폴더블",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 환불",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 고객센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 정품 확인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "터치스크린 맥북",
+          "reason": "27일 공개 기대",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "제미나이 에이전트",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "구글이 기업용 제미나이 에이전트를 공개해 오픈AI 닷에 맞불을 놓았다.",
+      "headlines": [
+        {
+          "title": "구글, 기업용 ‘제미나이 에이전트’ 공개… 오픈AI ‘닷’에 맞불",
+          "press": "ddaily.co.kr",
+          "publishedAt": "2026-10-09T04:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/138/0002244220?sid=105"
+        },
+        {
+          "title": "구글클라우드, 업무용 '제미나이 에이전트' 선봬",
+          "press": "epnc.co.kr",
+          "publishedAt": "2026-10-09T02:34:00.000Z",
+          "link": "https://www.epnc.co.kr/news/articleView.html?idxno=407974"
+        },
+        {
+          "title": "구글, 업무용 에이전틱 AI '제미나이 에이전트' 공개",
+          "press": "thelec.kr",
+          "publishedAt": "2026-10-09T08:12:00.000Z",
+          "link": "https://www.thelec.kr/news/articleView.html?idxno=63507"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 닷",
+          "reason": "맞불 대상 확인",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "클로드",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "금융권 연쇄 해킹범이 클로드에 이력서를 쓰다 신상 단서가 드러났다.",
+      "headlines": [
+        {
+          "title": "클로드에 이력서 썼다가 들통?…금융권 해킹범의 '신상 단서'",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-10-08T05:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001394043?sid=101"
+        },
+        {
+          "title": "금융권 연쇄 해킹, 20대 中 해커 소행 정황…유출 정보 팔 곳도 AI에 물...",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-07T23:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014240539?sid=105"
+        },
+        {
+          "title": "금융권 해킹 배후로 중국 광둥성 20대 인물 추정…딥시크 등 AI 활용",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-10-08T01:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005826199?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "클로드 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 요금제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 모네",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 코워크",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 프로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 디자인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "우크라이나가 러시아의 구글로 불리는 얀덱스 데이터센터를 이틀째 공격했다.",
+      "headlines": [
+        {
+          "title": "우크라, '러시아 구글' 얀덱스 데이터센터 연일 공격",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-09T11:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016367945?sid=104"
+        },
+        {
+          "title": "‘러시아의 구글’ 데이터센터 피격…우크라 드론 공습 이어져",
+          "press": "biz.heraldcorp.com",
+          "publishedAt": "2026-10-09T12:40:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/016/0002707406?sid=104"
+        },
+        {
+          "title": "“러시아의 구글도 당했다”…우크라, 얀덱스 AI 데이터센터 이틀째 공...",
+          "press": "munhwa.com",
+          "publishedAt": "2026-10-09T11:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/021/0002824079?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "얀덱스",
+          "reason": "러시아 구글 정체 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "우크라 드론",
+          "reason": "공습 전개 상황 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "구글 픽셀 해킹",
+          "reason": "내 폰 보안 걱정",
           "searchVolume": null,
           "documentCount": null,
           "onBoard": false
@@ -3776,7 +5194,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "이재명 이집트 CEPA",
@@ -3807,623 +5226,8 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "이억원 금융위원장 AI해킹",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "이억원 금융위원장이 AI 해킹 대응 미흡, AI로 막아야 강조",
-      "headlines": [
-        {
-          "title": "이억원 \"해킹대응 기본적 부분도 미흡…AI로 막아야\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-08T03:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016365727?sid=101"
-        },
-        {
-          "title": "이억원 금융위원장 “AI 해킹 위협 커지는데 기본 대응 미흡”",
-          "press": "etnews.com",
-          "publishedAt": "2026-10-08T04:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/030/0003473479?sid=101"
-        },
-        {
-          "title": "이억원 금융위원장 \"AI 해킹은 AI로 막아야…망분리 규제 살피는 중\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-08T03:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014241594?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "이억원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "이억원 금융위원장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "방탄소년단 키즈 초이스",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "방탄소년단이 2026 키즈 초이스 어워드 3개 부문 후보 선정",
-      "headlines": [
-        {
-          "title": "방탄소년단, 美 '2026 키즈 초이스 어워드' 3개 부문 후보 선정",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-09T08:47:00.000Z",
-          "link": "https://m.entertain.naver.com/article/421/0009219413"
-        },
-        {
-          "title": "BTS·블랙핑크 등 美 '2026 키즈 초이스 어워즈' 후보",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-09T07:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016367854?sid=103"
-        },
-        {
-          "title": "방탄소년단, 美 '2026 키즈 초이스 어워드' 후보..역대 최다 기록 보유",
-          "press": "starnewskorea.com",
-          "publishedAt": "2026-10-09T06:47:00.000Z",
-          "link": "https://m.entertain.naver.com/article/108/0003477440"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "앤트로픽",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "앤트로픽·오픈AI 같은 날 새 모델 발표",
-      "headlines": [
-        {
-          "title": "반도체주 담은 개미들 어쩌나…67조 쇼크에 '공포' 덮쳤다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-09T08:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005340866?sid=101"
-        },
-        {
-          "title": "\"8분 만에 취약점 6개\"…'자율형 AI 해킹' 현실로[해킹 에이전트②]",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-08T23:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014243146?sid=105"
-        },
-        {
-          "title": "앤트로픽·오픈AI 같은 날 새 모델 발표",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-08T09:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000643825?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "앤트로픽 상장일",
-          "reason": "IPO 시점 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 기업가치",
-          "reason": "밸류 논란 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 수혜주",
-          "reason": "국내 관련주 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "애플",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "declining",
-      "isHot": false,
-      "why": "신형 아이폰 꺼짐 1500건, 애플 원인 비공개",
-      "headlines": [
-        {
-          "title": "애플, 27일 첫 터치스크린 맥북 공개 예정",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-09T05:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004002960?sid=105"
-        },
-        {
-          "title": "신형 아이폰 '꺼짐' 교환 접수만 1500건인데...애플, 원인 비공개",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-10-08T05:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002416320?sid=101"
-        },
-        {
-          "title": "신형 아이폰 '꺼짐' 접수만 1500건인데…애플 \"원인은 기밀\"",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-08T07:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006383950?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "애플 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 서비스센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 폴더블",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 환불",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 고객센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 정품 확인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈AI 매출 27조원 적다는 전망에 기술주 하락",
-      "headlines": [
-        {
-          "title": "반도체주 담은 개미들 어쩌나…67조 쇼크에 '공포' 덮쳤다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-09T08:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005340866?sid=101"
-        },
-        {
-          "title": "700억 달러 아니네?…오픈AI 매출 축소 전망에 ‘거품론’ 고개",
-          "press": "donga.com",
-          "publishedAt": "2026-10-09T06:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003753908?sid=101"
-        },
-        {
-          "title": "뉴욕증시, 오픈AI 매출 우려에 기술주 약세…나스닥 1.25% 하락",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-08T21:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004002935?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 닷츠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI 상장일",
-          "reason": "IPO 시점 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오픈AI 수익 구조",
-          "reason": "매출 실체 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "제미나이 에이전트",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "구글이 기업용 제미나이 에이전트 공개, 오픈AI 닷에 맞불",
-      "headlines": [
-        {
-          "title": "구글, 기업용 ‘제미나이 에이전트’ 공개… 오픈AI ‘닷’에 맞불",
-          "press": "ddaily.co.kr",
-          "publishedAt": "2026-10-09T04:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/138/0002244220?sid=105"
-        },
-        {
-          "title": "구글클라우드, 업무용 '제미나이 에이전트' 선봬",
-          "press": "epnc.co.kr",
-          "publishedAt": "2026-10-09T02:34:00.000Z",
-          "link": "https://www.epnc.co.kr/news/articleView.html?idxno=407974"
-        },
-        {
-          "title": "구글, 업무용 에이전틱 AI '제미나이 에이전트' 공개",
-          "press": "thelec.kr",
-          "publishedAt": "2026-10-09T08:12:00.000Z",
-          "link": "https://www.thelec.kr/news/articleView.html?idxno=63507"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "제미나이 에이전트 출시일",
-          "reason": "국내 출시 시점",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "클로드",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "금융권 해킹범이 클로드에 이력서 쓰다 신상 단서 노출",
-      "headlines": [
-        {
-          "title": "클로드에 이력서 썼다가 들통?…금융권 해킹범의 '신상 단서'",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-08T05:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001394043?sid=101"
-        },
-        {
-          "title": "금융권 연쇄 해킹, 20대 中 해커 소행 정황…유출 정보 팔 곳도 AI에 물...",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-07T23:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014240539?sid=105"
-        },
-        {
-          "title": "금융권 해킹 배후로 중국 광둥성 20대 인물 추정…딥시크 등 AI 활용",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-08T01:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005826199?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "클로드 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 요금제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 모네",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 코워크",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 프로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 디자인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "서울대 연구진이 갤럭시·구글 픽셀 뚫는 해킹 구멍 발견",
-      "headlines": [
-        {
-          "title": "갤럭시·구글 픽셀도 뚫리는 해킹 구멍, 서울대 연구진이 발견했다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-08T02:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005340506?sid=105"
-        },
-        {
-          "title": "삼성전자 영업익 '100조 신화'…엔비디아·구글·애플 넘었다",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-08T01:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009216669?sid=101"
-        },
-        {
-          "title": "\"AI로 질병예방\"‥美정부·구글, 저커버그의 바이오허브에 합류",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-10-08T05:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001527907?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 번역기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 영국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 클래스룸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 재미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 재팬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "카카오",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "카카오가 국제 AI 학회서 LLM 경량화 기술 공개",
-      "headlines": [
-        {
-          "title": "“내일모레 50인데”…배윤정, 둘째 간절했지만 시험관 결국 포기",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-09T05:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005746331?sid=102"
-        },
-        {
-          "title": "카카오, AI 학습 비용 줄이는 기술 개발…국제학회서 성과 공개",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-08T00:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014240661?sid=105"
-        },
-        {
-          "title": "[테크스냅] 카카오, 국제 AI 학회서 대규모 언어모델 최적화 기술 발표",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-08T00:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016364921?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "카카오 ai 퀴즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 이모티콘샵",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 친구위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 구독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 굿딜",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 나무",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 내비",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "카카오 인적분할 일정",
-          "reason": "주총 시점 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "카카오 분할 주가",
-          "reason": "분할 영향 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "카카오 소액주주 설득",
-          "reason": "주주 반발 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "카카오 AI 적용",
-          "reason": "기술 활용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "d1-3B",
@@ -4475,7 +5279,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "레이예스",
@@ -5052,230 +5857,6 @@
       ],
       "concentrated": [],
       "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "오만석 개런티 낮춰",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "오만석이 라스에서 개런티 낮춰 다작하는 비결 전함.",
-      "headlines": [
-        {
-          "title": "오만석 다작 비결, 장동건과 한예종 초창기 스타인데 “개런티 상당히 ...",
-          "press": "newsen.com",
-          "publishedAt": "2026-10-07T13:54:00.000Z",
-          "link": "https://m.entertain.naver.com/article/609/0001176497"
-        },
-        {
-          "title": "오만석, 개런티 낮춰 다작 비결 전해… \"개런티 낮아지니 겸손함 생기더...",
-          "press": "mhnse.com",
-          "publishedAt": "2026-10-06T23:33:00.000Z",
-          "link": "https://m.entertain.naver.com/article/445/0000472832"
-        },
-        {
-          "title": "‘라스’ 오만석 “이 가격이면 안 할 거 같은데 수준의 개런티로 낮춰...",
-          "press": "heraldmuse.com",
-          "publishedAt": "2026-10-07T01:16:00.000Z",
-          "link": "https://m.entertain.naver.com/article/112/0003809295"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오만석",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "AMD",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "AMD 리사 수가 삼성·SK하이닉스 등 K-AI 반도체 기업과 회동.",
-      "headlines": [
-        {
-          "title": "AMD 리사 수 만난 K-AI 반도체…세계 시장 통할 '레퍼런스 모델' 만든다",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-07T00:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014237236?sid=105"
-        },
-        {
-          "title": "리사 수 \"한국 AI에 투자\"…정부, AMD와 3대 프로젝트 협력 모색",
-          "press": "fnnews.com",
-          "publishedAt": "2026-10-07T05:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/014/0005586118?sid=105"
-        },
-        {
-          "title": "AMD 리사수, 삼성전자 전영현·SK하이닉스 곽노정과 회동",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-07T06:05:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016363382?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "amd 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "amd 그래픽카드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "amd 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "amd 9800x3d",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "amd 직무",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "amd cpu",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "amd 7800x3d",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "amd 리사수",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "AMD 관련주",
-          "reason": "협력 수혜주 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "AMD 주가",
-          "reason": "투자 영향",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "AMD 엔비디아",
-          "reason": "경쟁 구도 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "페가수스 1.6",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "트웰브랩스가 로봇 학습용 영상 이해 VLM 페가수스 1.6 출시.",
-      "headlines": [
-        {
-          "title": "트웰브랩스, 사람 행동 보고 로봇 가르치는 '페가수스 1.6' 출시",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-07T02:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016362218?sid=105"
-        },
-        {
-          "title": "트웰브랩스, 1인칭 영상 이해 VLM '페가수스 1.6' 출시",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-07T06:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005423291?sid=101"
-        },
-        {
-          "title": "트웰브랩스, 피지컬 AI 데이터 병목 푼다…‘페가수스 1.6’ 출시",
-          "press": "economist.co.kr",
-          "publishedAt": "2026-10-07T05:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/243/0000103951?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "페가수스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "라지 4",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "미스트랄이 1조 매개변수 오픈웨이트 라지 4 공개, 160개 언어 학습.",
-      "headlines": [
-        {
-          "title": "佛 미스트랄, AI 모델 '라지 4' 공개⋯160개 언어로 학습",
-          "press": "inews24.com",
-          "publishedAt": "2026-10-06T23:55:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/031/0001063980?sid=104"
-        },
-        {
-          "title": "삼성 투자받은 佛 미스트랄, 1조 파라미터 ‘라지 4’ 공개… \"美·中 외...",
-          "press": "dt.co.kr",
-          "publishedAt": "2026-10-06T23:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/029/0003051829?sid=105"
-        },
-        {
-          "title": "[월드IT뷰] 미스트랄, 1조 매개변수 '라지 4' 공개…유럽 AI 반격 본격화",
-          "press": "newsworks.co.kr",
-          "publishedAt": "2026-10-07T00:52:00.000Z",
-          "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=855762"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "라지",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "라지 4 사용법",
-          "reason": "오픈모델 활용 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "라지 4 비교",
-          "reason": "중국 모델 경쟁",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
       "rowCount": 0,
       "carried": true
     }
