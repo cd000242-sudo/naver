@@ -9655,6 +9655,10 @@ app.whenReady().then(async () => {
       }
     });
 
+    // [2026-10-09 사장님 승인] 연결 확인(NETWORK_WAIT)으로 멈춘 계정의 예약 글을 시작 전에 자동 재확인하는 컨트롤러.
+    const scheduledPostsSafety = createAccountSafetyController(() => blogAccountManager.getAllAccounts(), browserSessionManager);
+    const scheduledRecheckLogged = new Map<string, number>(); // 예약 글 id → 마지막으로 알린 다음 확인 시각(같은 안내 반복 방지)
+
     // ✅ 예약 발행 실행 (1분마다 체크)
     cron.schedule('* * * * *', async () => {
       if (scheduledPostsCronRunning) {
@@ -9840,6 +9844,22 @@ app.whenReady().then(async () => {
               });
               const accountNaverId = scheduledAccount.naverId;
               const accountNaverPassword = scheduledAccount.naverPassword;
+
+              // [2026-10-09 사장님 승인] 연결 확인으로 멈춘 계정이면 시작 전에 자동 재확인한다(비밀번호 입력 없음).
+              //   시각 전이거나 확인이 실패하면 'scheduled' 그대로 두고 다음 점검에서 다시 본다. 3번 실패하거나 다른 멈춤이면
+              //   그대로 진행해 시작 단계에서 지금처럼 거절·실패 처리된다. 쿼터 확보·'publishing' 표시보다 앞이라 아무것도 쓰지 않는다.
+              if (accountNaverId) {
+                const scheduledRecheck = ((await scheduledPostsSafety.act(accountNaverId, 'auto-recheck', undefined, undefined, undefined, 'naver-id').catch(() => null)) as { recheck?: { kind?: string; nextAt?: number; attempt?: number } } | null)?.recheck;
+                if (scheduledRecheck?.kind === 'wait') {
+                  if (scheduledRecheckLogged.get(post.id) !== scheduledRecheck.nextAt) {
+                    scheduledRecheckLogged.set(post.id, Number(scheduledRecheck.nextAt));
+                    sendLog(`⏸️ 연결 확인으로 멈춘 계정이라 "${post.title}"은 ${new Date(Number(scheduledRecheck.nextAt)).toLocaleTimeString('ko-KR')} 이후 로그인 상태를 다시 확인한 뒤 이어서 발행합니다(${scheduledRecheck.attempt}/3, 비밀번호 입력 없음).`);
+                  }
+                  continue;
+                }
+                scheduledRecheckLogged.delete(post.id);
+                if (scheduledRecheck?.kind === 'resumed') sendLog('✅ 로그인 상태를 다시 확인했습니다 — 멈춤을 풀고 예약 발행을 이어갑니다.');
+              }
 
               scheduledQuotaLease = await acquireScheduledPublishQuota({
                 validate: async () => {

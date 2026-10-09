@@ -529,6 +529,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/main/ldb-download-images.ts',
   'src/main/ldb-image-storage.ts',
   'src/main/ldb-images.ts',
+  'src/main/networkWaitRecheck.ts',
   'src/main/services/AutomationService.ts',
   'src/main/services/BlogExecutor.ts',
   'src/main/userDataMigration.ts',

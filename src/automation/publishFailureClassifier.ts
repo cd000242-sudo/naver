@@ -234,3 +234,26 @@ export function classifyPublishFailure(input: unknown): PublishFailureClassifica
 
   return { code: 'UNKNOWN', retryable: true, userActionRequired: false };
 }
+
+/**
+ * [2026-10-09 사장님 승인] 대기열이 NETWORK_WAIT 계정을 만나면 글을 만들기 전에 main 의 자동 재확인을 기다린다.
+ * null = 풀림(이어서 만든다) · {code,label} = 여전히 멈춤(지금처럼) · 'cancelled' = 기다리는 중 중지.
+ * sleepUntil 은 중지되면 true 를 돌려준다.
+ */
+export async function awaitNetworkWaitRecheck(
+  accountSafety: AccountSafetyApi | undefined,
+  accountId: string,
+  sleepUntil: (atMs: number) => Promise<boolean>,
+  log: (message: string) => void,
+): Promise<{ code: AccountStopCode; label: string } | null | 'cancelled'> {
+  for (let round = 0; typeof accountSafety === 'function' && round < 12; round++) {
+    let r: { kind?: string; nextAt?: number; attempt?: number } | undefined;
+    try { r = ((await accountSafety(accountId, 'auto-recheck')) as { recheck?: typeof r } | undefined)?.recheck; } catch { break; }
+    if (r?.kind === 'resumed') log('✅ 로그인 상태를 다시 확인했습니다 — 멈춤을 풀고 이어갑니다.');
+    if (r?.kind === 'resumed' || r?.kind === 'not-paused') return null;
+    if (r?.kind !== 'wait' || typeof r.nextAt !== 'number') break;
+    log(`⏸️ 연결 확인으로 멈춘 계정 — 약 ${Math.max(1, Math.ceil((r.nextAt - Date.now()) / 60_000))}분 뒤 로그인 상태를 다시 확인합니다(${r.attempt}/3, 비밀번호 입력 없음).`);
+    if (await sleepUntil(r.nextAt)) return 'cancelled';
+  }
+  return readAccountPause(accountSafety, accountId);
+}

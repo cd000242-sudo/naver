@@ -12,7 +12,7 @@ import {
   resolveUsableShoppingReferenceSource,
 } from '../../image/shoppingReferenceGeneration.js';
 import { resolvePublishFloorSec, publishIntervalToFields, formatContinuousIntervalLabel, DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES } from '../../automation/publishIntervalPolicy.js';
-import { createQueuePublishError, requiresAccountStop } from '../../automation/publishFailureClassifier.js';
+import { awaitNetworkWaitRecheck, createQueuePublishError, extractAccountStopCode, readAccountPause, requiresAccountStop } from '../../automation/publishFailureClassifier.js';
 import { showAccountPauseModal } from './accountPauseModal.js';
 import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
 import { describeFullAutoImageStage } from '../../image/fullAuto/fullAutoImageSlots.js';
@@ -4636,6 +4636,32 @@ async function startContinuousPublishingV2(): Promise<void> {
     if (!isContinuousMode) break;
     if (item.status !== 'pending') continue;
 
+    // [2026-10-09 사장님 승인] 계정이 멈춰 있으면 유료 생성 전에 먼저 본다. NETWORK_WAIT(연결 확인)만 main 의 자동 재확인
+    //   (2·5·10분, 최대 3번, 비밀번호 입력 없음)을 기다리고, 다른 멈춤은 기다리지 않고 지금처럼 바로 멈춘다.
+    {
+      let preflightId = String((document.getElementById('naver-id') as HTMLInputElement | null)?.value || '').trim();
+      if (!preflightId) {
+        try { preflightId = String((await window.api.getConfig())?.savedNaverId || '').trim(); } catch { /* 아이디를 못 구하면 사전 확인을 건너뛴다. */ }
+      }
+      preflightId = preflightId.toLowerCase();
+      if (preflightId) {
+        const safetyApi = (id: string, action: string) => (window.api as any).accountSafety(id, action, undefined, undefined, undefined, 'naver-id');
+        let preflightPause = await readAccountPause(safetyApi, preflightId);
+        if (preflightPause?.code === 'NETWORK_WAIT') {
+          const rechecked = await awaitNetworkWaitRecheck(safetyApi, preflightId,
+            (at) => cancellableSleep(Math.max(0, at - Date.now())), appendLog);
+          if (rechecked === 'cancelled') break;
+          preflightPause = rechecked;
+        }
+        if (preflightPause) {
+          appendLog(`⏹️ 계정 확인이 필요해 연속발행을 멈춥니다: ${preflightPause.label}`);
+          void showAccountPauseModal({ code: preflightPause.code }, { naverId: preflightId });
+          stopContinuousMode('manual');
+          break;
+        }
+      }
+    }
+
     // [Phase 7.1-b] Per-item snapshot — settings changed mid-run apply from
     // the NEXT post, never mid-post (design §2.2).
     const itemPipelineCfg = resolvePipelineConfig('continuous');
@@ -5368,6 +5394,20 @@ async function startContinuousPublishingV2(): Promise<void> {
 
       // The account is paused (login, challenge, protection, connection, wrong account, unknown outcome):
       // the next post would only fail the same way after paying for its content, so the queue stops here.
+      // [2026-10-09 사장님 승인] 연결 확인 멈춤은 대기열을 세우지 않는다 — 다음 글을 만들기 전에 위 사전 확인이 자동 재확인을 기다린다.
+      if (extractAccountStopCode(error) === 'NETWORK_WAIT') {
+        // [2026-10-09] 마지막 성공 뒤 첫 번째만 넘긴다. 로그인은 살아 있는데 글쓰기만 매번 실패하면(326~332 사례)
+        //   글마다 유료 생성만 버리게 되므로, 연속 두 번째부터는 아래 기존 분기로 지금처럼 대기열을 멈춘다.
+        if (_consecutiveFailCount < 1) {
+          item.status = resolveInterruptedPublishStatus(Boolean((item as any)._publishStarted && publishWasDispatched), 'failed');
+          delete (item as any)._publishStarted;
+          failCount++;
+          _consecutiveFailCount++;
+          appendLog(`⏸️ 연결 확인이 필요해 이 글은 실패로 남기고, 다음 글 전에 로그인 상태를 자동으로 다시 확인합니다: ${errMsg}`);
+          continue;
+        }
+      }
+
       if (requiresAccountStop(error)) {
         item.status = resolveInterruptedPublishStatus(Boolean((item as any)._publishStarted && publishWasDispatched), 'failed');
         delete (item as any)._publishStarted;

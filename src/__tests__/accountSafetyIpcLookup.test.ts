@@ -69,3 +69,13 @@ describe('preload bridge', () => {
     expect(preload).toMatch(/accountSafety: \(accountId: string, action: string, version\?: number, outcome\?: string, token\?: string, lookup\?: string\) =>\s*\n\s*ipcRenderer\.invoke\('account:safety', accountId, action, version, outcome, token, lookup\)/);
   });
 });
+
+describe('auto-recheck action ([2026-10-09] 무인 작업 NETWORK_WAIT 재확인)', () => {
+  it('is accepted by the same channel and reports not-paused for a healthy Naver ID without opening anything', async () => {
+    const reply = await call(ID, 'auto-recheck', undefined, undefined, undefined, 'naver-id');
+    expect(reply.success).toBe(true);
+    expect(reply.recheck).toEqual({ kind: 'not-paused' });
+    expect(sessions.verifyAccountForUser).not.toHaveBeenCalled();
+    expect(sessions.ensureSessionForUser).not.toHaveBeenCalled();
+  });
+});

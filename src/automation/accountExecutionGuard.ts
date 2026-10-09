@@ -88,6 +88,12 @@ export class AccountExecutionGuard {
   async resumeAfterOutcomeConfirmation(accountId: string, verify: () => Promise<boolean>): Promise<boolean> {
     return this.resumeVerified(accountId, verify);
   }
+  /** [2026-10-09 사장님 승인] 무인 작업 자동 재확인 전용: NETWORK_WAIT(저장소 오류 아님)만, 검증 통과·상태 불변일 때만 푼다. */
+  async resumeNetworkWait(accountId: string, verify: () => Promise<boolean>): Promise<boolean> {
+    const s = this.getStatus(accountId);
+    if (!s.paused || s.code !== 'NETWORK_WAIT' || s.storageError) return false;
+    return this.resumeVerified(accountId, verify);
+  }
   private async resumeVerified(accountId: string, verify: () => Promise<boolean>): Promise<boolean> {
     const key = this.key(accountId);
     if (this.busy.has(key)) return false;

@@ -48,6 +48,7 @@ async function runRenderer(code: string, extra: Record<string, unknown> = {}) {
   const publish = vi.fn(async () => ({ success: true, results: [{ success: false, message: '작업 실패', failureCode: code, ...extra }] }));
   const rotate = vi.fn();
   const run = `let stopRequested = false, safetyStopped = false, totalFail = 0, totalSuccess = 0;
+    const networkWaitFailures = new Map();
     const queueSnapshot = [{ accountId: 'a', accountName: 'a' }, { accountId: 'b', accountName: 'b' }];
     const totalItems = queueSnapshot.length;
     for (let i = 0; i < totalItems && !stopRequested && !window.stopFullAutoPublish; i++) {
@@ -55,7 +56,7 @@ async function runRenderer(code: string, extra: Record<string, unknown> = {}) {
       try { ${source.slice(start, end)}
       if (!stopRequested && !window.stopFullAutoPublish) rotate();
     }
-    return { stopRequested, safetyStopped, totalFail, queueSnapshot };`;
+    return { stopRequested, safetyStopped, totalFail, queueSnapshot, networkWaitFailures: Object.fromEntries(networkWaitFailures) };`;
   const result = await compile(run, { ...classifierBindings, window: { stopFullAutoPublish: false, api: { multiAccountPublish: publish } },
     addMALog() {}, addProgressItem() {}, updateMAStep() {}, resolveInterruptedPublishStatus: (started: boolean, fallback: string) => started ? 'uncertain' : fallback,
     console: { log() {} }, rotate });
@@ -104,6 +105,10 @@ describe('multi-account batches react to account stops', () => {
   it.each(['LOGIN_REQUIRED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH'])('renderer keeps %s retryable (failed), as before', async code => {
     const { result } = await runRenderer(code);
     expect(result.queueSnapshot[0].pipelineStatus).toBe('failed');
+  });
+  it('renderer counts NETWORK_WAIT per account so the auto recheck stops after a repeat (2026-10-09)', async () => {
+    expect((await runRenderer('NETWORK_WAIT')).result.networkWaitFailures).toEqual({ a: 1, b: 1 });
+    expect((await runRenderer('LOGIN_REQUIRED')).result.networkWaitFailures).toEqual({});
   });
   it('renderer keeps an unknown outcome uncertain so it is never re-sent', async () => {
     const { result } = await runRenderer('PUBLISH_OUTCOME_UNKNOWN');

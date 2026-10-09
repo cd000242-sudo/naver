@@ -11,7 +11,8 @@
  *     Credentials are never typed by the app.
  *   - stops that are the user's own decision (challenge, protection, wrong account, unknown publication
  *     outcome) stay stopped, but the message names the exact button instead of the bare stop text.
- * Automatic work (continuous, multi-account, schedulers) never comes here and keeps stopping.
+ * Automatic work (continuous, multi-account, schedulers) never comes here and keeps stopping,
+ * except that a NETWORK_WAIT stop is re-checked by networkWaitRecheck (src/main) — [2026-10-09] 자동 작업의 NETWORK_WAIT 는 networkWaitRecheck 가 처리한다.
  */
 import { AccountExecutionGuardError, type AccountPauseCode } from './accountExecutionGuard.js';
 import { blogMismatchStopMessage } from './expectedBlogIdentity.js';

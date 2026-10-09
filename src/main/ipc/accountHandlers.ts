@@ -25,7 +25,7 @@ export function registerAccountHandlers(ctx: IpcContext, deps: AccountHandlerDep
     ipcMain.handle('account:safety', async (event, accountId: string, action: string, version?: number, outcome?: string, token?: string, lookup?: string) => {
         const window = ctx.getMainWindow();
         if (!window || window.isDestroyed() || event.sender !== window.webContents || event.senderFrame !== window.webContents.mainFrame) return { success: false, message: '앱의 계정 관리 화면에서 실행해주세요.' };
-        if (typeof accountId !== 'string' || accountId.length > 128 || !['status', 'open', 'open-posts', 'resume', 'confirm', 'reset-journal'].includes(action) || (lookup !== undefined && lookup !== 'account' && lookup !== 'naver-id')) return { success: false, message: '지원하지 않는 요청입니다.' };
+        if (typeof accountId !== 'string' || accountId.length > 128 || !['status', 'open', 'open-posts', 'resume', 'confirm', 'reset-journal', 'auto-recheck'].includes(action) || (lookup !== undefined && lookup !== 'account' && lookup !== 'naver-id')) return { success: false, message: '지원하지 않는 요청입니다.' };
         try {
             return await safety.act(accountId, action as SafetyAction, version, outcome as 'published' | 'not-published' | undefined, token, lookup as SafetyLookup | undefined);
         } catch { return { success: false, message: '계정 상태를 확인하지 못했습니다. 네이버 아이디·블로그 ID와 상태 저장소를 확인해주세요.' }; }

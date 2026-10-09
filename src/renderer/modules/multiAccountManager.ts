@@ -1,7 +1,7 @@
 // @ts-nocheck
 // Restored from dist/renderer/modules/multiAccountManager.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
-import { classifyPublishFailure, describeAccountStop, extractAccountStopCode, findPausedQueueAccounts, readAccountPause, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
+import { awaitNetworkWaitRecheck, classifyPublishFailure, describeAccountStop, extractAccountStopCode, findPausedQueueAccounts, readAccountPause, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
 import { installAccountSafetyControls } from './accountSafetyControls.js';
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => installAccountSafetyControls(), { once: true });
 else installAccountSafetyControls();
@@ -3112,6 +3112,9 @@ async function initMultiAccountPublishModal() {
         isPublishing = true;
         stopRequested = false;
         let safetyStopped = false;
+        // [2026-10-09] 이번 실행에서 계정별 연결 확인(NETWORK_WAIT) 실패 횟수. 두 번째부터는 자동 재확인 없이 지금처럼 건너뛴다 —
+        //   로그인은 살아 있는데 글쓰기만 매번 실패하면 재확인이 매번 풀어 줘서 그 계정 글마다 유료 생성만 버리게 된다.
+        const networkWaitFailures = new Map();
         window.stopFullAutoPublish = false;
         // [2026-10-09] Pause scan: a stopped account is reported before any content is generated for it. A challenge or
         //   protection notice (the PC/IP is flagged) refuses the whole start; any other stop only skips that account.
@@ -3279,7 +3282,14 @@ async function initMultiAccountPublishModal() {
                 }
                 const queueItem = queueSnapshot[i];
                 // [2026-10-09] A paused account is skipped before any content or image is paid for; main would refuse it anyway.
-                const pausedNow = await readAccountPause(window.api?.accountSafety, queueItem.accountId);
+                let pausedNow = await readAccountPause(window.api?.accountSafety, queueItem.accountId);
+                if (pausedNow?.code === 'NETWORK_WAIT' && (networkWaitFailures.get(queueItem.accountId) || 0) < 2) { // [2026-10-09 사장님 승인] 연결 확인 멈춤만 자동 재확인을 기다린다
+                    const rechecked = await awaitNetworkWaitRecheck(window.api?.accountSafety, queueItem.accountId,
+                        async (at) => !(await waitInterruptible(Math.max(0, (at - Date.now()) / 1000), i, totalItems)), (m) => addMALog(m, 'info'));
+                    if (rechecked === 'cancelled')
+                        break;
+                    pausedNow = rechecked; // null 이면 생성 진행, 여전히 멈춤이면 아래 기존 건너뛰기/전체중단
+                }
                 if (pausedNow) {
                     queueItem.failureCode = pausedNow.code;
                     queueItem.pipelineStatus = 'failed';
@@ -4100,6 +4110,7 @@ async function initMultiAccountPublishModal() {
                         publishConfirmed = true;
                         queueItem.pipelineStatus = 'completed';
                         totalSuccess++;
+                        networkWaitFailures.delete(queueItem.accountId);
                         updateMAStep('ma-step-publish', 'completed');
                         const publishedUrl = result.results?.[0]?.url;
                         if (publishedUrl && structuredContent?.selectedTitle) {
@@ -4161,6 +4172,8 @@ async function initMultiAccountPublishModal() {
                         const refusedBeforeStart = error.refusedBeforeStart === true;
                         if (stopCode) {
                             queueItem.failureCode = failure.code;
+                            if (stopCode === 'NETWORK_WAIT')
+                                networkWaitFailures.set(queueItem.accountId, (networkWaitFailures.get(queueItem.accountId) || 0) + 1);
                             if (stopsAllAccounts({ code: failure.code })) {
                                 stopRequested = true;
                                 safetyStopped = true;

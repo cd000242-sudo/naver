@@ -167,7 +167,7 @@ describe('continuous queue wiring (executed from the real source)', () => {
       }
       return { failCount, reachedAfterStop };`;
     const result = await compile(code, {
-      theError: error, item, currentIdx: 1, totalCount: 3, isContinuousMode: true, stopContinuousMode, requiresAccountStop, showAccountPauseModal,
+      theError: error, item, currentIdx: 1, totalCount: 3, isContinuousMode: true, stopContinuousMode, requiresAccountStop, extractAccountStopCode, showAccountPauseModal,
       window: { _publishAutomationDispatched: flags.dispatched, stopFullAutoPublish: false },
       resolveInterruptedPublishStatus: (started: boolean, fallback: string) => (started ? 'uncertain' : fallback),
       appendLog: (message: string) => logs.push(message), updateContinuousProgressModal: vi.fn(), console: { log() {}, warn() {} },
@@ -191,7 +191,8 @@ describe('continuous queue wiring (executed from the real source)', () => {
   });
 
   it('stops the queue at once and names the account when main reports a paused account', async () => {
-    const error = createQueuePublishError({ code: 'NETWORK_WAIT', message: 'x', refusedBeforeStart: false, accountId: 'blog-owner' });
+    // [2026-10-09] NETWORK_WAIT 는 자동 재확인 대상이라 대기열을 세우지 않는다(queueNetworkWaitRecheck.test.ts). 사람이 풀어야 하는 코드로 확인한다.
+    const error = createQueuePublishError({ code: 'LOGIN_REQUIRED', message: 'x', refusedBeforeStart: false, accountId: 'blog-owner' });
     const { item, logs, stopContinuousMode, result, showAccountPauseModal } = await runFailure(error, { dispatched: true, started: true });
     expect(stopContinuousMode).toHaveBeenCalledWith('manual');
     // The stop is cleared in place: the pause panel is asked for with the coded error.

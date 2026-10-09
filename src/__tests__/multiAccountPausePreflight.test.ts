@@ -188,3 +188,69 @@ describe('sequential multi-account publishing (executed from the real source)', 
     expect(outcome.iterations).toBe(2); expect(outcome.reachedWait).toBe(0);
   });
 });
+
+describe('multi-account NETWORK_WAIT auto recheck (executed from the real source)', () => {
+  // [2026-10-09 사장님 승인] 연결 확인 멈춤만 생성 전에 자동 재확인을 기다린다.
+  const source = read('src', 'renderer', 'modules', 'multiAccountManager.ts');
+
+  async function runItemCheck(recheckReplies: Array<Record<string, unknown>>, waitResult = true, priorNetworkWaitFailures = 0) {
+    const start = source.indexOf('const queueItem = queueSnapshot[i];\n                // [2026-10-09] A paused account');
+    const end = source.indexOf('// [Phase 7.1-c] Per-item snapshot', start);
+    expect(start).toBeGreaterThan(-1); expect(end).toBeGreaterThan(start);
+    const replies = [...recheckReplies];
+    const accountSafety = vi.fn(async (_id: string, action: string) => action === 'status'
+      ? { success: true, state: { paused: true, code: 'NETWORK_WAIT', label: '연결 또는 화면 확인 필요' } }
+      : { success: true, recheck: replies.shift() });
+    const waits: number[] = [];
+    const generated: number[] = [];
+    const logs: string[] = [];
+    const run = `let stopRequested = false, safetyStopped = false, totalFail = 0;
+      const networkWaitFailures = new Map(priorNetworkWaitFailures ? [['a', priorNetworkWaitFailures]] : []);
+      const queueSnapshot = [{ accountId: 'a', accountName: '계정A' }];
+      const totalItems = queueSnapshot.length;
+      for (let i = 0; i < totalItems && !stopRequested; i++) {
+        ${source.slice(start, end)}
+        generated.push(i);
+      }
+      return { stopRequested, totalFail, queueSnapshot };`;
+    const result = await compile(run, { ...classifier, window: { api: { accountSafety } }, generated, priorNetworkWaitFailures,
+      waitInterruptible: async (seconds: number) => { waits.push(seconds); return waitResult; },
+      addMALog: (message: string) => logs.push(message), addProgressItem: (message: string) => logs.push(message) });
+    return { result, generated, waits, accountSafety, logs };
+  }
+
+  it('generates after main reports the stop was cleared', async () => {
+    const { generated, result } = await runItemCheck([{ kind: 'resumed', attempt: 1 }]);
+    expect(generated).toEqual([0]); expect(result.totalFail).toBe(0);
+  });
+
+  it('skips the account when the recheck gives up (manual) and nothing is generated', async () => {
+    const { generated, result } = await runItemCheck([{ kind: 'manual', code: 'NETWORK_WAIT', reason: 'exhausted' }]);
+    expect(generated).toEqual([]); expect(result.totalFail).toBe(1);
+    expect(result.queueSnapshot[0]).toMatchObject({ pipelineStatus: 'failed', failureCode: 'NETWORK_WAIT' });
+  });
+
+  it('waits until the time main gave, then generates once it resumes', async () => {
+    const nextAt = Date.now() + 120_000;
+    const { generated, waits } = await runItemCheck([{ kind: 'wait', attempt: 1, nextAt }, { kind: 'resumed', attempt: 1 }]);
+    expect(generated).toEqual([0]);
+    expect(waits).toHaveLength(1);
+    expect(waits[0]).toBeGreaterThan(100); expect(waits[0]).toBeLessThanOrEqual(120);
+  });
+
+  it('stops the whole queue when the user presses stop while waiting', async () => {
+    const { generated, result } = await runItemCheck([{ kind: 'wait', attempt: 1, nextAt: Date.now() + 60_000 }], false);
+    expect(generated).toEqual([]); expect(result.totalFail).toBe(0);
+  });
+
+  it('이번 실행에서 그 계정이 연결 확인으로 두 번 실패했으면 다시 재확인하지 않고 지금처럼 건너뛴다(유료 생성 낭비 방지)', async () => {
+    const { generated, result, accountSafety } = await runItemCheck([{ kind: 'resumed', attempt: 1 }], true, 2);
+    expect(generated).toEqual([]); expect(result.totalFail).toBe(1);
+    expect(accountSafety.mock.calls.some(([, action]) => action === 'auto-recheck')).toBe(false);
+  });
+
+  it('한 번 실패한 계정은 한 번 더 재확인을 기다린다', async () => {
+    const { generated } = await runItemCheck([{ kind: 'resumed', attempt: 1 }], true, 1);
+    expect(generated).toEqual([0]);
+  });
+});

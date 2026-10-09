@@ -1,6 +1,7 @@
 import { blogMismatchStopMessage, resolveExpectedBlog, type ExpectedBlog } from '../automation/expectedBlogIdentity.js';
 import { getAccountExecutionGuard } from '../automation/accountExecutionGuard.js';
 import { getPublicationCommitJournal } from '../automation/publicationCommitJournal.js';
+import { recheckNetworkWaitStop } from './networkWaitRecheck.js';
 
 export const ACCOUNT_SAFETY_LABELS: Record<string, string> = {
   LOGIN_REQUIRED: '네이버 로그인 필요', LOGIN_CHALLENGE: '네이버에서 본인확인 필요',
@@ -9,7 +10,7 @@ export const ACCOUNT_SAFETY_LABELS: Record<string, string> = {
 };
 /** 'account' = a registered account id (account panels); 'naver-id' = the Naver ID typed/saved on the main publish screen. */
 export type SafetyLookup = 'account' | 'naver-id';
-export type SafetyAction = 'status' | 'open' | 'open-posts' | 'resume' | 'confirm' | 'reset-journal';
+export type SafetyAction = 'status' | 'open' | 'open-posts' | 'resume' | 'confirm' | 'reset-journal' | 'auto-recheck';
 type Account = { id: string; naverId?: string; blogId: string };
 type Verdict = { status: string; reason?: string; identityMismatch?: boolean; blogId?: string; observedBlogId?: string; expectedBlogId?: string };
 type Sessions = {
@@ -87,6 +88,18 @@ export function createAccountSafetyController(accounts: () => Account[], session
     outcome?: 'published' | 'not-published', pendingToken?: string, lookup: SafetyLookup = 'account') {
     const { id, blogId } = resolve(key, lookup);
     if (action === 'status') return { success: true, state: status(key, lookup) };
+    if (action === 'auto-recheck') {   // [2026-10-09] 무인 작업 전용 — NETWORK_WAIT 멈춤만 읽기 전용으로 다시 확인(networkWaitRecheck)
+      status(key, lookup); // 미확정 발행 기록이 있으면 먼저 PUBLISH_OUTCOME_UNKNOWN 으로 멈춰 둔다.
+      const recheck = await recheckNetworkWaitStop(id, {
+        status: x => guard.getStatus(x),
+        journalBlocked: x => journal.hasUnconfirmed(x) || journal.isUnreadable(x),
+        ensureSession: x => sessions.ensureSessionForUser(x),
+        verify: x => sessions.verifyAccountForUser(x),
+        resumeNetworkWait: (x, verify) => guard.resumeNetworkWait(x, verify),
+        recordStop: (x, code) => { guard.pause(x, code); },
+      });
+      return { success: true, state: status(key, lookup), recheck };
+    }
     const before = status(key, lookup);
     if (before.busy) return { success: false, state: before, message: '이 계정의 작업이 끝난 뒤 다시 확인해주세요.' };
     const readOnly = action === 'open' || action === 'open-posts';

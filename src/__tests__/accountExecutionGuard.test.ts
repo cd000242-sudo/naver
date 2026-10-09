@@ -47,3 +47,20 @@ it('serializes explicit user login with publishing while preserving a paused sta
  await expect(guard.runUserActionExclusive('one',async()=>{throw Error('closed');})).rejects.toThrow('closed');
  expect(guard.getStatus('one').busy).toBe(false);
 });
+
+it('resumeNetworkWait: [2026-10-09] clears only a NETWORK_WAIT stop (never other codes or a storage error)',async()=>{
+ const {guard,storageDir}=setup();const verify=vi.fn(async()=>true);
+ guard.pause('one','LOGIN_REQUIRED');expect(await guard.resumeNetworkWait('one',verify)).toBe(false);expect(verify).not.toHaveBeenCalled();
+ guard.pause('one','PUBLISH_OUTCOME_UNKNOWN');expect(await guard.resumeNetworkWait('one',verify)).toBe(false);
+ expect(await guard.resumeNetworkWait('never-paused',verify)).toBe(false);
+ guard.pause('two','NETWORK_WAIT');expect(await guard.resumeNetworkWait('two',async()=>false)).toBe(false);expect(guard.getStatus('two').paused).toBe(true);
+ expect(await guard.resumeNetworkWait('two',verify)).toBe(true);expect(guard.getStatus('two').paused).toBe(false);
+ guard.pause('three','NETWORK_WAIT');writeFileSync(join(storageDir,readdirSync(storageDir).find(f=>f.endsWith('.json')&&readFileSync(join(storageDir,f),'utf8').includes('NETWORK_WAIT'))!),'{bad');
+ const broken=new AccountExecutionGuard({storageDir});const bad=vi.fn(async()=>true);
+ expect(broken.getStatus('three')).toMatchObject({paused:true,code:'NETWORK_WAIT',storageError:true});expect(await broken.resumeNetworkWait('three',bad)).toBe(false);expect(bad).not.toHaveBeenCalled();
+});
+it('resumeNetworkWait: a stop that changes while verifying is kept',async()=>{
+ const {guard}=setup();guard.pause('one','NETWORK_WAIT');
+ let release!:(v:boolean)=>void;const waiting=guard.resumeNetworkWait('one',()=>new Promise(r=>{release=r;}));
+ guard.pause('one','LOGIN_CHALLENGE');release(true);expect(await waiting).toBe(false);expect(guard.getStatus('one').code).toBe('LOGIN_CHALLENGE');
+});
