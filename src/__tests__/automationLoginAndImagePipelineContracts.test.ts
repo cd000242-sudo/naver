@@ -54,7 +54,7 @@ describe('automation login and image pipeline contracts', () => {
   it('checks persistent session state and preserves typed stop errors before editor navigation', () => {
     const source = read('src/naverBlogAutomation.ts');
     const manager = read('src/browserSessionManager.ts');
-    expect(source.includes('ensureServerSession(this.options.naverId)')).toBe(true);
+    expect(source.includes('ensureServerSession(this.options.naverId')).toBe(true);
     expect(source.includes('resolveBlogWriteFrameSwitchSurface(currentUrl)')).toBe(true);
     expect(source.includes('classifyBlogWriteNavigationUrl(page.url())')).toBe(true);
     expect(source.includes('PUBLISH_PIPELINE_LOG_MESSAGES.editorFrameReady')).toBe(true);

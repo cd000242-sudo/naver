@@ -61,12 +61,15 @@ function harness(mode: 'success' | 'no-dom-image' | 'upload-error' | 'partial-up
     log: vi.fn(), delay: vi.fn(async () => undefined), ensureNotCancelled: vi.fn(),
     ensurePage: () => page, ensureDialogHandler: vi.fn(), resolveRunOptions: () => resolved,
     navigateToBlogWrite: vi.fn(async () => { events.push('enter'); }),
+    // 진입 계약만 본다 — 재시작 1회 감싸개는 editorEntryRestart.test.ts 에서 따로 본다.
+    enterEditorWithOneRestart: async (entry: (deferPause: boolean) => Promise<void>) => entry(false),
     closeDraftPopup: vi.fn(), assertFreshDraftContext: vi.fn(), closePopups: vi.fn(),
     normalizeSpacingAfterLastImage: vi.fn(async (frame: unknown) => expect(frame).toBe(editor)),
     setImageSizeAndAttachLink: vi.fn(), invalidateEditorStateAfterAmbiguousPublish: vi.fn(),
     publishBlogPost: vi.fn(async () => { events.push('publish'); }),
     verifyImmediatePublishOutcome: vi.fn(async () => { events.push('verify-publish'); }),
   };
+  state.pauseEntry = productionMethod('pauseEntry', dependencies);
   state.switchToMainFrame = productionMethod('switchToMainFrame', dependencies);
   state.getAttachedFrame = productionMethod('getAttachedFrame', dependencies);
   state.insertBase64ImageAtCursor = vi.fn(async (path: string) => {

@@ -4,6 +4,7 @@ import ts from 'typescript';
 import { describe, expect, it, vi } from 'vitest';
 import { classifyBlogWriteNavigationUrl, isBlogWriteLoginRedirect, resolveBlogWriteFrameSwitchSurface } from '../automation/editorNavigationUrlPolicy.js';
 import { isLoginChallengeUrl } from '../automation/loginPageNavigationPolicy.js';
+import { waitForLoginRedirectToSettle, describeUrlForLog } from '../automation/editorEntryRecovery.js';
 import { findReadyEditorFrame, EditorFrameProtectionError, InitialEditorReadinessError, waitForInitialEditorReadiness, INITIAL_EDITOR_READINESS_SCRIPT, isTrustedNaverEditorFrameUrl } from '../automation/initialEditorReadiness.js';
 const source = ts.createSourceFile('automation.ts', readFileSync(resolve('src/naverBlogAutomation.ts'), 'utf8'), ts.ScriptTarget.Latest, true);
 class GuardError extends Error { constructor(public code: string) { super(code); } }
@@ -23,11 +24,16 @@ function harness() {
   const state: any = { page, browser: {}, options: { naverId: 'test' }, ensurePage: () => page,
     ensureNotCancelled: () => { if (state.cancelRequested) throw Error('cancelled'); },
     ensureDialogHandler: vi.fn(), resolveRunOptions: () => ({}), log: vi.fn(),
-    switchToMainFrame: vi.fn(async () => { throw stop; }) };
+    switchToMainFrame: vi.fn(async () => { throw stop; }),
+    // 진입 계약만 본다 — 재시작 1회 감싸개는 editorEntryRestart.test.ts 에서 따로 본다.
+    enterEditorWithOneRestart: async (entry: (deferPause: boolean) => Promise<void>) => entry(false),
+    delay: async () => undefined };
   const dependencies = { classifyBlogWriteNavigationUrl, isLoginChallengeUrl, AccountExecutionGuardError: GuardError,
     InitialEditorReadinessError, waitForInitialEditorReadiness: (page: any, options: any) => waitForInitialEditorReadiness(page, { ...options, timeoutMs: 40, pollIntervalMs: 1 }),
     getAccountExecutionGuard: () => ({ pause, getStatus: () => ({ paused: false }) }), NAVER_TIMEOUTS: { PAGE_LOAD: 30000 },
-    browserSessionManager: { ensureServerSession: verify, markPublishing: vi.fn() }, beginMainProcessEditorCommitCandidate: vi.fn() };
+    browserSessionManager: { ensureServerSession: verify, markPublishing: vi.fn() }, beginMainProcessEditorCommitCandidate: vi.fn(),
+    waitForLoginRedirectToSettle: (target: any, options: any) => waitForLoginRedirectToSettle(target, { ...options, timeoutMs: 0 }), describeUrlForLog };
+  state.pauseEntry = method('pauseEntry', dependencies);
   state.navigateToBlogWrite = method('navigateToBlogWrite', dependencies);
   const run = method('runPostOnlyInternal', dependencies);
   return { state, frame, page, pause, verify, stop, setUrl: (url: string) => { current = url; }, execute: () => run.call(state, {}), navigate: () => state.navigateToBlogWrite() };
@@ -175,6 +181,7 @@ describe('safe input frame selection', () => {
     const switchFrame = method('switchToMainFrame', { isBlogWriteLoginRedirect, resolveBlogWriteFrameSwitchSurface,
       isLoginChallengeUrl, findReadyEditorFrame, EditorFrameProtectionError, AccountExecutionGuardError: GuardError,
       getAccountExecutionGuard: () => ({ pause }) });
+    state.pauseEntry = method('pauseEntry', { getAccountExecutionGuard: () => ({ pause }) });
     await expect(switchFrame.call(state)).rejects.toMatchObject({ code: 'LOGIN_CHALLENGE' });
     expect(pause).toHaveBeenCalledWith('test', 'LOGIN_CHALLENGE');
     expect(state.mainFrame).toBeUndefined(); expect(page.goto).not.toHaveBeenCalled();

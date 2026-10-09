@@ -3,6 +3,7 @@ import puppeteer from 'puppeteer-extra';
 import { randomUUID } from 'node:crypto';
 import { getPublicationCommitJournal } from './automation/publicationCommitJournal.js';
 import { getAccountExecutionGuard, AccountExecutionGuardError, ACCOUNT_PAUSE_CODES, type AccountPauseCode } from './automation/accountExecutionGuard.js';
+import { waitForLoginRedirectToSettle, isRestartRecoverableEntryError, describeUrlForLog } from './automation/editorEntryRecovery.js';
 import { explainUserRunStop, resumePausedAccountForUserRun, type UserRunResumeDeps } from './automation/userRunResume.js';
 import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
 // ✅ [2026-05-25 v2.10.357] StealthPlugin import 제거 — browserSessionManager.ts에서 단일 등록
@@ -1983,22 +1984,78 @@ export class NaverBlogAutomation {
   }
 
   /** Authentication is completed by the user; automatic jobs never submit credentials. */
-  async loginToNaver(): Promise<void> {
+  async loginToNaver(options: { deferPause?: boolean } = {}): Promise<void> {
     this.ensureNotCancelled();
-    const ready = await browserSessionManager.ensureServerSession(this.options.naverId);
+    const ready = await browserSessionManager.ensureServerSession(this.options.naverId, options);
     if (!ready) {
-      getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED');
+      this.pauseEntry('LOGIN_REQUIRED', options.deferPause);
       throw new AccountExecutionGuardError('LOGIN_REQUIRED', '네이버 창에서 직접 로그인한 뒤 화면의 안내 창(또는 계정 관리)의 [확인 후 재개]를 눌러주세요.');
     }
     this.log('✅ 기존 로그인 상태를 확인했습니다.');
   }
 
-  async navigateToBlogWrite(): Promise<void> {
+  /** 글쓰기 진입 첫 시도에서는 멈춤 저장을 미룬다 — 크롬 재시작 1회 뒤에도 실패할 때만 저장한다. */
+  private pauseEntry(code: AccountPauseCode, deferPause?: boolean): void {
+    if (!deferPause) getAccountExecutionGuard().pause(this.options.naverId, code);
+  }
+
+  /**
+   * [2026-10-09 고객 신고·사장님 선택] 로그인을 못 알아보거나(LOGIN_REQUIRED) 글쓰기 창을 못 찾으면(NETWORK_WAIT·메인 프레임 없음)
+   * 크롬을 끄고 다시 띄워 한 번만 더 들어간다. 보호조치·본인확인·계정 불일치는 재시도하지 않는다 — 첫 시도에서 미룬 멈춤은
+   * withAccountExecution 이 오류 코드로 저장한다. 비밀번호는 어느 경우에도 입력하지 않는다.
+   */
+  private async enterEditorWithOneRestart(entry: (deferPause: boolean) => Promise<void>): Promise<void> {
+    try {
+      await entry(true);
+      return;
+    } catch (error) {
+      const guard = getAccountExecutionGuard();
+      // 첫 시도에서 미룬 멈춤을 던지기 전에 저장한다 — 그래야 finally 가 보호조치·본인확인 창을 닫지 않고 남겨 둔다.
+      const persistDeferredStop = () => {
+        if (!(error instanceof AccountExecutionGuardError) || error.refusedBeforeStart) return;
+        const code = error.code as AccountPauseCode;
+        if (ACCOUNT_PAUSE_CODES.includes(code) && !guard.getStatus(this.options.naverId).paused) guard.pause(this.options.naverId, code);
+      };
+      // 실행 중 다른 경로가 이미 멈춘 계정은 다시 띄우지 않는다(세션 관리 밖 브라우저가 뜨는 것을 막는다).
+      if (!isRestartRecoverableEntryError(error) || guard.getStatus(this.options.naverId).paused) {
+        persistDeferredStop();
+        throw error;
+      }
+      this.ensureNotCancelled();
+      const login = error instanceof AccountExecutionGuardError && error.code === 'LOGIN_REQUIRED';
+      this.log(`🔁 ${login ? '로그인 상태를 확인하지 못해' : '글쓰기 화면을 찾지 못해'} 크롬을 다시 띄워 한 번 더 들어갑니다(비밀번호는 입력하지 않습니다).`);
+      try {
+        await this.restartBrowserForEditorEntry();
+      } catch (restartError) {
+        // 재시작이 실패하면 원래 이유로 멈춘다 — 재시작 오류가 원인을 덮지 않게 한다.
+        this.log(`⚠️ 크롬을 다시 띄우지 못했습니다: ${(restartError as Error)?.message || restartError}`);
+        persistDeferredStop();
+        throw error;
+      }
+    }
+    await entry(false);
+  }
+
+  /** 같은 계정 프로필로 크롬을 새로 띄운다(쿠키 복원 규칙은 세션 생성과 같다). */
+  private async restartBrowserForEditorEntry(): Promise<void> {
+    try { browserSessionManager.markPublishing(this.options.naverId, false); } catch { /* best-effort */ }
+    await browserSessionManager.closeSession(this.options.naverId, true).catch(() => false);
+    this.browser = null;
+    this.page = null;
+    this.mainFrame = null;
+    this.cursor = null;
+    await this.delay(2000);
+    this.ensureNotCancelled();
+    await this.setupBrowser();
+    this.ensureDialogHandler();
+  }
+
+  async navigateToBlogWrite(options: { deferPause?: boolean } = {}): Promise<void> {
     this.ensureNotCancelled();
     const page = this.ensurePage();
     // A challenge page must remain visible until an explicit user recovery action.
     if (isLoginChallengeUrl(page.url())) {
-      getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_CHALLENGE');
+      this.pauseEntry('LOGIN_CHALLENGE', options.deferPause);
       throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
     }
     try {
@@ -2010,7 +2067,15 @@ export class NaverBlogAutomation {
         if (response && response.status() >= 400) throw new AccountExecutionGuardError('NETWORK_WAIT');
       }
       if (isLoginChallengeUrl(page.url())) throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
-      const destination = classifyBlogWriteNavigationUrl(page.url());
+      let destination = classifyBlogWriteNavigationUrl(page.url());
+      if (destination.isLoginRedirect) {
+        // [2026-10-09 고객 신고] 로그인돼 있는데 첫 이동 직후 로그인 주소가 잠깐 보여 멈췄다. 입력 없이 최대 15초 지켜본다.
+        destination = classifyBlogWriteNavigationUrl(await waitForLoginRedirectToSettle(page, {
+          delay: (ms) => this.delay(ms), ensureNotCancelled: () => this.ensureNotCancelled(),
+        }));
+        if (!destination.isLoginRedirect) this.log('✅ 네이버가 로그인을 확인하고 글쓰기로 다시 보냈습니다 — 계속 진행합니다.');
+      }
+      if (isLoginChallengeUrl(page.url())) throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
       if (destination.isLoginRedirect) throw new AccountExecutionGuardError('LOGIN_REQUIRED');
       if (!destination.isBlogDomain) throw new AccountExecutionGuardError('NETWORK_WAIT');
       // Cross-origin and nested editor documents must be inspected in their own frame contexts.
@@ -2022,14 +2087,14 @@ export class NaverBlogAutomation {
       if (!readyDestination.isBlogDomain) throw new AccountExecutionGuardError('NETWORK_WAIT');
     } catch (error) {
       const detail = error instanceof InitialEditorReadinessError ? error.message : (error instanceof AccountExecutionGuardError ? error.code : 'navigation-or-readiness-error');
-      this.log(`⚠️ 글쓰기 화면 확인 실패: ${detail}`);
+      this.log(`⚠️ 글쓰기 화면 확인 실패: ${detail} (화면: ${describeUrlForLog(page.isClosed() ? 'closed' : page.url())})`);
       const code = error instanceof AccountExecutionGuardError ? error.code : 'NETWORK_WAIT';
-      getAccountExecutionGuard().pause(this.options.naverId, code === 'ACCOUNT_BUSY' ? 'NETWORK_WAIT' : code);
+      this.pauseEntry(code === 'ACCOUNT_BUSY' ? 'NETWORK_WAIT' : code, options.deferPause);
       throw error instanceof AccountExecutionGuardError ? error : new AccountExecutionGuardError('NETWORK_WAIT', '글쓰기 화면을 확인하지 못했습니다. 원고를 보존했으니 연결 상태를 확인해 주세요.');
     }
   }
 
-  async switchToMainFrame(): Promise<void> {
+  async switchToMainFrame(options: { deferPause?: boolean } = {}): Promise<void> {
     const page = this.ensurePage();
 
     this.ensureNotCancelled();
@@ -2041,22 +2106,22 @@ export class NaverBlogAutomation {
 
     if (isBlogWriteLoginRedirect(currentUrl)) {
       this.log('로그인이 필요하여 작업을 중단했습니다. 화면의 안내 창(또는 계정 관리)에서 네이버 확인 후 재개해주세요.');
-      getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED');
+      this.pauseEntry('LOGIN_REQUIRED', options.deferPause);
       throw new AccountExecutionGuardError('LOGIN_REQUIRED');
     }
 
     if (isLoginChallengeUrl(currentUrl)) {
-      getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_CHALLENGE');
+      this.pauseEntry('LOGIN_CHALLENGE', options.deferPause);
       throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
     }
     let frame: Frame | null;
     try { frame = await findReadyEditorFrame(page); }
     catch (error) {
       if (error instanceof EditorFrameProtectionError) {
-        getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_CHALLENGE');
+        this.pauseEntry('LOGIN_CHALLENGE', options.deferPause);
         throw new AccountExecutionGuardError('LOGIN_CHALLENGE');
       }
-      getAccountExecutionGuard().pause(this.options.naverId, 'NETWORK_WAIT');
+      this.pauseEntry('NETWORK_WAIT', options.deferPause);
       throw new AccountExecutionGuardError('NETWORK_WAIT', '글쓰기 입력 화면의 상태가 변경되어 작업을 중단했습니다. 원고를 보존했으니 화면을 확인한 뒤 재개해 주세요.');
     }
     this.ensureNotCancelled();
@@ -6367,25 +6432,27 @@ export class NaverBlogAutomation {
         await this.setupBrowser();
       }
       this.ensureDialogHandler();
+      // [2026-10-09 사장님 선택] 로그인을 못 알아보거나 글쓰기 창을 못 찾으면 크롬을 다시 띄워 한 번 더 들어간다(비밀번호 입력 없음).
+      await this.enterEditorWithOneRestart(async (deferPause) => {
       const entryPage = this.ensurePage();
       const enteredFromBlank = entryPage.url() === 'about:blank';
       // A fresh page has no blog origin for the read-only session probe.
       // Perform this post's normal editor entry first; never enter it twice.
-      if (enteredFromBlank) await this.navigateToBlogWrite();
+      if (enteredFromBlank) await this.navigateToBlogWrite({ deferPause });
       this.ensureNotCancelled();
       if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
 
       if (needsBrowserSetup) {
-        await this.loginToNaver();
+        await this.loginToNaver({ deferPause });
       } else {
         // Verify current server/account evidence; blocking verdicts stop the run.
         const serverSessionOk = await browserSessionManager
-          .ensureServerSession(this.options.naverId);
+          .ensureServerSession(this.options.naverId, { deferPause });
         if (serverSessionOk) {
           this.log('✅ 발행 전 서버 세션 유효 확인 — 로그인 단계 건너뜀');
         } else {
           this.log('⚠️ 발행 전 서버 세션 만료 감지 — 재로그인을 진행합니다.');
-          await this.loginToNaver();
+          await this.loginToNaver({ deferPause });
         }
       }
 
@@ -6393,8 +6460,9 @@ export class NaverBlogAutomation {
       if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
 
       // 글쓰기 페이지로 이동
-      if (!enteredFromBlank) await this.navigateToBlogWrite();
-      await this.switchToMainFrame();
+      if (!enteredFromBlank) await this.navigateToBlogWrite({ deferPause });
+      await this.switchToMainFrame({ deferPause });
+      });
 
       // 팝업이 완전히 렌더링될 때까지 대기 (최적화)
       await this.delay(1000); // 2000ms → 1000ms
@@ -6916,35 +6984,38 @@ export class NaverBlogAutomation {
     // setupBrowser()는 세션 재사용 시 early-return하여 핸들러 등록을 건너뛸 수 있음
     // → run()에서 확정적으로 등록하여 어떤 경로든 dialog 자동 수락 보장
      this.ensureDialogHandler();
-     const entryPage = this.ensurePage();
-     const enteredFromBlank = entryPage.url() === 'about:blank';
 
      try {
+       // [2026-10-09 사장님 선택] 로그인을 못 알아보거나 글쓰기 창을 못 찾으면 크롬을 다시 띄워 한 번 더 들어간다(비밀번호 입력 없음).
+       await this.enterEditorWithOneRestart(async (deferPause) => {
+       const entryPage = this.ensurePage();
+       const enteredFromBlank = entryPage.url() === 'about:blank';
        // On a fresh blank page, establish the blog origin through this post's
        // normal editor entry before the read-only account identity check.
-       if (enteredFromBlank) await this.navigateToBlogWrite();
+       if (enteredFromBlank) await this.navigateToBlogWrite({ deferPause });
        this.ensureNotCancelled();
        if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.loginStart);
        // Cookie presence alone is insufficient. Blocking verdicts and transport
        // failures throw a pause error; they never trigger automatic credentials.
        const serverSessionOk = await browserSessionManager
-         .ensureServerSession(this.options.naverId);
+         .ensureServerSession(this.options.naverId, { deferPause });
        if (serverSessionOk) {
          this.log('✅ 발행 전 서버 세션 유효 확인 — 로그인 단계 건너뜀');
        } else {
-         await this.loginToNaver();
+         await this.loginToNaver({ deferPause });
        }
        this.ensureNotCancelled();
        if (this.page !== entryPage || entryPage.isClosed()) throw new AccountExecutionGuardError('NETWORK_WAIT');
        this.log(formatPipelineUrlLog('loginDone', this.page?.url()));
 
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.openingWriteEditor);
-       if (!enteredFromBlank) await this.navigateToBlogWrite();
+       if (!enteredFromBlank) await this.navigateToBlogWrite({ deferPause });
        this.log(formatPipelineUrlLog('writeEditorNavigationDone', this.page?.url()));
 
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.switchingEditorFrame);
-       await this.switchToMainFrame();
+       await this.switchToMainFrame({ deferPause });
+       });
       this.log(PUBLISH_PIPELINE_LOG_MESSAGES.editorFrameReady);
 
       // 팝업이 완전히 렌더링될 때까지 대기 (최적화)

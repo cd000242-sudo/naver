@@ -1067,14 +1067,17 @@ class BrowserSessionManager {
         }
     }
 
-    /** 이전 boolean 호출부도 false→자동 로그인으로 진행하지 못하도록 중단 오류를 던진다. */
-    async ensureServerSession(accountId: string): Promise<boolean> {
+    /**
+     * 이전 boolean 호출부도 false→자동 로그인으로 진행하지 못하도록 중단 오류를 던진다.
+     * deferPause: 글쓰기 진입 첫 시도 — 크롬 재시작 1회 뒤에도 실패할 때만 멈춤을 저장한다(오류는 그대로 던진다).
+     */
+    async ensureServerSession(accountId: string, options: { deferPause?: boolean } = {}): Promise<boolean> {
         accountId = this.resolveSessionAccountId(accountId);
         const state = await this.ensureServerSessionState(accountId);
         if (state.status === 'ready') { getAccountExecutionGuard().assertAllowed(accountId); return true; }
         const codes: Record<string, AccountPauseCode> = { 'login-required': 'LOGIN_REQUIRED', challenge: 'LOGIN_CHALLENGE', protected: 'ACCOUNT_PROTECTED', unavailable: 'NETWORK_WAIT', unknown: 'NETWORK_WAIT' };
         const code = state.reason === 'account-identity-unverified' ? 'ACCOUNT_MISMATCH' : codes[state.status] || 'NETWORK_WAIT';
-        getAccountExecutionGuard().pause(accountId, code);
+        if (!options.deferPause) getAccountExecutionGuard().pause(accountId, code);
         throw new AccountExecutionGuardError(code, code === 'ACCOUNT_MISMATCH' ? blogMismatchStopMessage(state) : undefined);
     }
 

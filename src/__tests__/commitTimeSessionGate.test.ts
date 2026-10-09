@@ -160,6 +160,6 @@ describe('commit wiring', () => {
     expect(commit.indexOf('ensureServerSessionForCommit')).toBeLessThan(commit.indexOf('markSubmitting'));
   });
   it('the three entry callers still use the strict gate', () => {
-    expect((source.match(/browserSessionManager\s*\.ensureServerSession\(this\.options\.naverId\)/g) || []).length).toBe(3);
+    expect((source.match(/browserSessionManager\s*\.ensureServerSession\(this\.options\.naverId(?:, (?:\{ deferPause \}|options))?\)/g) || []).length).toBe(3);
   });
 });

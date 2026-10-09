@@ -27,6 +27,8 @@ function harness(name: string, initial: string, existingBrowser = true) {
     navigateToBlogWrite: vi.fn(async () => { events.push('navigate'); current = 'https://blog.naver.com/test_account?Redirect=Write'; }),
     loginToNaver: vi.fn(async () => { events.push('login'); return verify(); }),
     switchToMainFrame: vi.fn(async () => { events.push('frame'); throw stopBeforeInput; }),
+    // 이 장치는 진입 계약만 본다 — 재시작 1회 감싸개는 editorEntryRestart.test.ts 에서 따로 본다.
+    enterEditorWithOneRestart: async (entry: (deferPause: boolean) => Promise<void>) => entry(false),
   };
   const verify = vi.fn(async () => {
     events.push('verify');

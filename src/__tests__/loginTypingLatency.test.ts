@@ -57,8 +57,9 @@ describe('로그인 → 타이핑 지연 — 설계가 아닌 세 구간', () =>
     // The legacy helper remains compatible, but automatic jobs no longer submit a login form.
     const src = read('naverBlogAutomation.ts');
     expect(/shouldAwaitPostLoginNavigation\(clickResult\)/.test(src)).toBe(false);
-    const login = src.slice(src.indexOf('async loginToNaver()'), src.indexOf('async navigateToBlogWrite()'));
-    expect(login.includes('ensureServerSession(this.options.naverId)')).toBe(true);
+    const login = src.slice(src.indexOf('async loginToNaver('), src.indexOf('async navigateToBlogWrite('));
+    expect(login.length).toBeGreaterThan(100);
+    expect(login.includes('ensureServerSession(this.options.naverId')).toBe(true);
     expect(/waitForNavigation|\.click\(|\.type\(/.test(login)).toBe(false);
   });
 

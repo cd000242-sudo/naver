@@ -269,8 +269,8 @@ describe('rich paste tail wiring', () => {
     const start = code.indexOf('async runPostOnly(');
     expect(start).toBeGreaterThan(-1);
     const runPostOnly = code.slice(start, start + 4500);
-    expect(runPostOnly).toMatch(/ensureServerSession\(this\.options\.naverId\)/);
-    expect(runPostOnly).toMatch(/loginToNaver\(\)/);
+    expect(runPostOnly).toMatch(/ensureServerSession\(this\.options\.naverId(?:, (?:\{ deferPause \}|options))?\)/);
+    expect(runPostOnly).toMatch(/loginToNaver\(/);
   });
 
   it('skips link-card waiting and proceeds to hashtags when there is no previous post', () => {

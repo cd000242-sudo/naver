@@ -15,7 +15,7 @@ const code = fs.readFileSync(FILE, 'utf-8');
 
 describe('run() 로그인 스킵 게이트 (유효 세션 재로그인 방지)', () => {
   it('both publish paths (run + runPostOnly) gate on ensureServerSession', () => {
-    const gateHits = code.match(/ensureServerSession\(this\.options\.naverId\)/g) || [];
+    const gateHits = code.match(/ensureServerSession\(this\.options\.naverId(?:, (?:\{ deferPause \}|options))?\)/g) || [];
     // 최소 2회: run() + runPostOnly() 각각 1회. 하나라도 사라지면 비대칭 회귀.
     expect(gateHits.length).toBeGreaterThanOrEqual(2);
   });
@@ -26,7 +26,7 @@ describe('run() 로그인 스킵 게이트 (유효 세션 재로그인 방지)',
   });
 
   it('session errors propagate instead of triggering an automatic credential fallback', () => {
-    expect(/\.ensureServerSession\(this\.options\.naverId\)\s*\.catch\(\(\)\s*=>\s*false\)/.test(code)).toBe(false);
+    expect(/\.ensureServerSession\(this\.options\.naverId[^)]*\)\s*\.catch\(\(\)\s*=>\s*false\)/.test(code)).toBe(false);
     const manager = fs.readFileSync(path.resolve(__dirname, '../browserSessionManager.ts'), 'utf8');
     const start = manager.indexOf('async ensureServerSession(accountId:');
     expect(start).toBeGreaterThan(-1);
@@ -41,7 +41,7 @@ describe('run() 로그인 스킵 게이트 (유효 세션 재로그인 방지)',
     expect(loginStartIdx).toBeGreaterThan(-1);
     // loginStart 로그 이후 가까운 범위 안에 게이트가 있어야 함
     const window = code.slice(loginStartIdx, loginStartIdx + 1400);
-    expect(window).toContain('ensureServerSession(this.options.naverId)');
-    expect(window).toContain('await this.loginToNaver();');
+    expect(window).toContain('ensureServerSession(this.options.naverId');
+    expect(window).toContain('await this.loginToNaver(');
   });
 });

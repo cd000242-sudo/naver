@@ -13,6 +13,7 @@ import { app } from 'electron';
 import * as path from 'path';
 import { promises as fs } from 'fs';
 import * as os from 'os';
+import { shouldKeepProfileCookies } from './automation/cookieRestorePolicy.js';
 
 // ─── 타입 정의 ───────────────────────────────────────────────
 
@@ -196,6 +197,16 @@ export async function restoreCookies(
     if (validCookies.length === 0) {
       console.log(
         `[SessionPersistence] 유효한 쿠키 없음: ${accountId.substring(0, 3)}***`
+      );
+      return false;
+    }
+
+    // [2026-10-09 고객 신고] 크롬 프로필에 살아 있는 네이버 로그인(NID_AUT)이 있으면 그쪽이 더 최신이다.
+    //   더 오래된 저장본으로 덮어쓰면 살아 있는 로그인을 스스로 끊는다. 세션 쿠키 계정은 크롬을 끄면 사라지므로 그때만 넣는다.
+    const profileCookies = await page.cookies('https://nid.naver.com', 'https://www.naver.com', 'https://blog.naver.com').catch(() => []);
+    if (shouldKeepProfileCookies(profileCookies)) {
+      console.log(
+        `[SessionPersistence] 크롬 프로필의 로그인 쿠키를 그대로 씀(저장본 덮어쓰기 안 함): ${accountId.substring(0, 3)}***`
       );
       return false;
     }

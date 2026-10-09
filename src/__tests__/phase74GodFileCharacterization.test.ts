@@ -133,7 +133,8 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
       'isDeviceConfirmUrl(page.url())',
       'isDeviceConfirmBodyText(text)',
       'GoBlogWrite.naver',
-      "getAccountExecutionGuard().pause(this.options.naverId, 'LOGIN_REQUIRED')",
+      // [2026-10-09] 진입 첫 시도는 멈춤 저장을 미루고(크롬 재시작 1회), 최종 시도에서 저장한다.
+      "this.pauseEntry('LOGIN_REQUIRED'",
       'findEditorTitleInputElement(frame, page, 60000',
       'shouldRetryEditorReadiness(snapshot)',
       '에디터 프레임은 열렸지만 내부 문서가 비어 있습니다',

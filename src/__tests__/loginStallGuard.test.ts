@@ -21,8 +21,9 @@ describe('manual authentication stop replaces background login waiting', () => {
   });
   it('automatic login path only verifies a session and has no credential typing or navigation', () => {
     const source = readFileSync('src/naverBlogAutomation.ts', 'utf8');
-    const login = source.slice(source.indexOf('async loginToNaver()'), source.indexOf('async navigateToBlogWrite()'));
-    expect(login.includes('ensureServerSession(this.options.naverId)')).toBe(true);
+    const login = source.slice(source.indexOf('async loginToNaver('), source.indexOf('async navigateToBlogWrite('));
+    expect(login.length).toBeGreaterThan(100);
+    expect(login.includes('ensureServerSession(this.options.naverId')).toBe(true);
     expect(login.includes("new AccountExecutionGuardError('LOGIN_REQUIRED'")).toBe(true);
     expect(/\.type\(|\.click\(|\.goto\(|waitForNavigation|naverPassword|LOGIN_TOTAL_TIMEOUT/.test(login)).toBe(false);
   });
