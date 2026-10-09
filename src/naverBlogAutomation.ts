@@ -3255,7 +3255,9 @@ export class NaverBlogAutomation {
         // 순차 실행: 클릭 먼저, 그 다음 네비게이션 대기
         await saveButton.click();
         await this.delay(this.DELAYS.MEDIUM); // 클릭 후 안정화 대기
-        await frame.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => undefined);
+        // [2026-10-09 고객 진단 파일] 임시저장은 페이지 이동이 없는 저장이라 이동을 기다리면 제한 시간을 다 채웠다
+        //   (고객 61초, 이 PC 46.9초). 이동이 있으면 받되 최대 10초만 기다린다.
+        await frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 10000 }).catch(() => undefined);
 
         this.log('✅ 블로그 글이 임시저장되었습니다.');
       } else if (mode === 'publish') {

@@ -12,17 +12,30 @@ import * as os from 'os';
 import * as path from 'path';
 import * as fs from 'fs';
 import { getChromiumExecutablePath } from '../../browserUtils.js';
+import { pickProblemLogLines } from './diagnosticsLogFilter.js';
 
-function readRecentMainLog(maxLines = 500): string {
+function readTodayMainLogLines(): string[] | string {
   try {
     const today = new Date().toISOString().slice(0, 10);
     const logFile = path.join(app.getPath('userData'), 'logs', `main-${today}.log`);
     if (!fs.existsSync(logFile)) return '(오늘 날짜 로그 파일이 없습니다)';
-    const lines = fs.readFileSync(logFile, 'utf8').split('\n');
-    return lines.slice(-maxLines).join('\n');
+    return fs.readFileSync(logFile, 'utf8').split('\n');
   } catch (e) {
     return `(로그 읽기 실패: ${(e as Error).message})`;
   }
+}
+
+function readRecentMainLog(maxLines = 500): string {
+  const lines = readTodayMainLogLines();
+  return typeof lines === 'string' ? lines : lines.slice(-maxLines).join('\n');
+}
+
+/** [2026-10-09] 마지막 500줄 밖으로 밀려난 오류도 남도록 오늘 기록의 오류·경고 줄을 따로 담는다. */
+function readTodayProblemLines(): string {
+  const lines = readTodayMainLogLines();
+  if (typeof lines === 'string') return lines;
+  const picked = pickProblemLogLines(lines);
+  return picked.length ? picked.join('\n') : '(오늘 기록에 오류·경고 줄이 없습니다)';
 }
 
 async function describeBrowser(): Promise<string[]> {
@@ -61,6 +74,9 @@ export async function generateDiagnosticReport(context?: { lastError?: string; s
     lines.push('----- 마지막 오류 -----');
     lines.push(context.lastError);
   }
+  lines.push('');
+  lines.push('----- 오늘 기록 중 오류·경고 줄 (최대 300줄, 오래된 것부터) -----');
+  lines.push(readTodayProblemLines());
   lines.push('');
   lines.push('----- 최근 로그 (main, 마지막 500줄) -----');
   lines.push(readRecentMainLog());

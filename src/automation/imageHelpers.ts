@@ -51,6 +51,7 @@ import {
   getAllSelectors,
   getSelectorStrings,
 } from './selectors';
+import { summarizeImageInsertFailure } from './imageInsertFailureReason.js';
 
 // ── 네이버 블로그 이미지 용량 제한 가드 (공식 단일 이미지 20MB) ──
 const NAVER_MAX_IMAGE_BYTES = NAVER_SINGLE_IMAGE_MAX_BYTES;
@@ -392,8 +393,11 @@ export async function verifyImagePlacement(self: any, expectedCount: number): Pr
       let uiImages = 0;
       const imageDetails: Array<{ src: string, isContent: boolean }> = [];
 
-      if (contentArea) {
-        const allImages = contentArea.querySelectorAll('img');
+      // [2026-10-09 고객 진단 파일] 이미지 없는 칸(제목 영역 등)을 먼저 잡으면 9장이 들어가도 0장으로 셌다.
+      //   고른 영역에 이미지가 없으면 문서 전체에서 센다(아래 판별이 UI 아이콘을 거른다).
+      const imageScope: ParentNode | null = contentArea && contentArea.querySelector('img') ? contentArea : (contentArea ? document : null);
+      if (imageScope) {
+        const allImages = imageScope.querySelectorAll('img');
         allImages.forEach((img: any) => {
           const src = img.getAttribute('src') || '';
 
@@ -1560,6 +1564,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
 
     // ✅ [핵심] 재시도 로직 (최대 3회)
     let insertSuccess = false;
+    let lastInsertReason = '';
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
       try {
         await self.insertBase64ImageAtCursor(imagePath, image as any);
@@ -1586,6 +1591,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
         }
       } catch (error) {
         self.log(`      ⚠️ 이미지 삽입 시도 ${attempt}/${MAX_RETRIES} 실패: ${(error as Error).message}`);
+        lastInsertReason = summarizeImageInsertFailure((error as Error)?.message);
         // [2026-10-09] 재시도 직전 정착 후 다시 센다 — 실패로 보인 시도의 업로드가 뒤늦게 들어왔다면
         //   성공이다. 그대로 재시도하면 같은 사진이 또 들어간다.
         const settledCount = await waitForImageCountGrowth({
@@ -1613,7 +1619,8 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
     }
 
     if (!insertSuccess) {
-      failures.push(`이미지 ${imgIdx + 1}: ${MAX_RETRIES}회 삽입 실패`);
+      // [2026-10-09 고객 신고] 화면 오류만 보고도 원인을 알 수 있게 마지막 이유를 붙인다.
+      failures.push(`이미지 ${imgIdx + 1}: ${MAX_RETRIES}회 삽입 실패${lastInsertReason ? ` (마지막 이유: ${lastInsertReason})` : ''}`);
       self.log(`      ❌ 이미지 ${imgIdx + 1} 최종 삽입 실패, 건너뜀`);
       continue;
     }
