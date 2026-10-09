@@ -1,12 +1,12 @@
 {
-  "publishedAt": "2026-10-09T09:51:03.010Z",
+  "publishedAt": "2026-10-09T10:10:23.814Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
-    "niche": 1,
-    "preemption": 10,
+    "niche": 0,
+    "preemption": 8,
     "pending": 0
   },
   "freeSample": {
@@ -206,10 +206,94 @@
         "provider": "claude",
         "proposed": 7,
         "verified": 4
-      }
+      },
+      "carried": true
     }
   ],
   "observations": [
+    {
+      "keyword": "대우건설 팰팍",
+      "issue": "대우건설",
+      "topic": "대우건설",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 5,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 5",
+        "선점 후보 — 경쟁 문서 5건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "대우건설 조직개편으로 데이터센터팀 신설, 임원 절반 교체",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "대우건설 팰팍 푸르지오 팝업가든 단지 순환 운영 일정",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "대우건설 팰팍 푸르지오랑 이름만 비슷한 건지 다들 헷갈려 하시더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "대우건설 푸르지오",
+          "searchVolume": 290,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "대우건설 푸르지오",
+          "searchVolume": 290,
+          "documentCount": 160167,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T10:07:40.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
     {
       "keyword": "d1-3B 벤치마크",
       "issue": "d1-3B",
@@ -244,7 +328,7 @@
         }
       ],
       "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 모델 제친 멀티모달 의사결정 모델 d1-3B를 출시해서.",
+        "text": "리퀴드 AI가 10배 큰 모델 제친 멀티모달 d1-3B 출시",
         "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -252,12 +336,12 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "d1-3B 벤치마크, 10배 큰 모델 제친 멀티모달 성능 비교",
+          "text": "d1-3B 벤치마크, 10배 큰 모델 제친 멀티모달 성능",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "d1-3B 벤치마크 뜯어보니 체급 10배 차이에서 갈리더라고요",
+          "text": "d1-3B 벤치마크 보면 10배 큰 모델이랑 어디서 갈리나 싶어요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -268,7 +352,7 @@
       "kinCount": 40,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-09T09:45:04.411Z",
+      "measuredAt": "2026-10-09T10:07:40.119Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -310,7 +394,7 @@
         }
       ],
       "whySearch": {
-        "text": "앤트로픽과 오픈AI가 같은 날 새 AI 모델을 발표해서.",
+        "text": "앤트로픽·오픈AI 같은 날 새 모델 발표",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "구매 검토",
@@ -318,76 +402,384 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "seo": {
-          "text": "앤트로픽 엔스로픽 차이 결국 같은 곳인 이유",
+          "text": "앤트로픽 엔스로픽 차이 무엇이 어떻게 다른가",
+          "frame": "compare",
+          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        },
+        "home": {
+          "text": "앤트로픽 엔스로픽 차이, 기준은 하나면 됩니다",
+          "frame": "compare",
+          "basis": "검색 질문 '앤트로픽 엔스로픽 차이' 기반 초안 · 경쟁 제목 0개 중 동일 유형 0개 · 본문 사실 확인 필요"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T10:07:40.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3B 다운로드",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 66,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 66",
+        "선점 후보 — 경쟁 문서 66건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 모델 제친 멀티모달 d1-3B 출시",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "d1-3B 다운로드, 10배 큰 모델 제친 리퀴드AI 멀티모달",
           "frame": "ai",
           "basis": "실측 풀 근거 AI 작성"
         },
         "home": {
-          "text": "앤트로픽 엔스로픽 차이 모르고 클로드 뉴스 읽다 자꾸 멈칫했어요",
+          "text": "d1-3B 다운로드 받기 전에 10배 큰 모델이랑 체급부터 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 78,
+      "kinTop": [
+        {
+          "title": "슈스케2차지원서다운로드",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010201&docId=169612263&answerNo=3",
+          "views": 57719,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-09T10:07:40.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "오픈AI 닷츠 이용방법",
+      "issue": "오픈AI",
+      "topic": "오픈AI",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 110,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 110",
+        "선점 후보 — 경쟁 문서 110건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "오픈AI 매출 27조원 적다는 전망에 기술주 하락",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "거래",
+      "adsenseFit": false,
+      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
+      "titles": {
+        "seo": {
+          "text": "오픈AI 닷츠 이용방법 가입부터 사용 순서까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "오픈AI 닷츠 처음 켜고 여기서 많이들 멈추더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
       },
       "subKeywords": [
         {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": 11050,
-          "frame": "generic"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": 2930,
-          "frame": "generic"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": 2070,
+          "keyword": "오픈AI 닷츠 뜻",
+          "searchVolume": null,
           "frame": "generic"
         }
       ],
-      "keywordPool": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": 11050,
-          "documentCount": 23862,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": 2930,
-          "documentCount": 35782,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": 2070,
-          "documentCount": 32296,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 뜻",
-          "searchVolume": 290,
-          "documentCount": 16919,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 오픈ai",
-          "searchVolume": 70,
-          "documentCount": 48449,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "앤트로픽 기업가치",
-          "searchVolume": 20,
-          "documentCount": 33137,
-          "source": "ai-verified"
-        }
-      ],
+      "keywordPool": null,
       "trend": null,
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-09T09:45:04.411Z",
+      "measuredAt": "2026-10-09T10:07:40.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3B 성능",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 119,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 119",
+        "선점 후보 — 경쟁 문서 119건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 모델 제친 멀티모달 d1-3B 출시",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "d1-3B 성능 10배 큰 모델 제친 멀티모달 비교",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3B 성능 10배 큰 모델 제쳤다는데 생각보다 다른 이유가 있네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 37,
+      "kinTop": [
+        {
+          "title": "컴퓨터 성능대비 효율문제.. 부탁드립니다",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=10103&docId=219249544&answerNo=0",
+          "views": 12,
+          "answers": null
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-09T10:07:40.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "이재명 이집트 CEPA",
+      "issue": "이재명 이집트 CEPA",
+      "topic": "이재명 이집트 CEPA",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 237,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 237",
+        "선점 후보 — 경쟁 문서 237건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "한-이집트 전략적 동반자 격상, CEPA 협상 개시",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "이재명 이집트 CEPA 협상 개시, 전략적 동반자 격상까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "이재명 이집트 CEPA 협상 시작됐는데 방산 협력이 생각보다 커요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 18,
+      "kinTop": [
+        {
+          "title": "이재명보단 윤석열???",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=408281624&answerNo=10",
+          "views": 1563,
+          "answers": 12
+        },
+        {
+          "title": "이재명 대통령되면",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=413599949&answerNo=6",
+          "views": 1416,
+          "answers": 7
+        },
+        {
+          "title": "이재명,민주당은 일본에만 엄격한가요?",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=60501&docId=399896481&answerNo=6",
+          "views": 1295,
+          "answers": 7
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-09T10:07:40.119Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "d1-3B 사용법",
+      "issue": "d1-3B",
+      "topic": "d1-3B",
+      "lane": "tech",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "실제 사용 방법",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 198,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": false,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 198",
+        "선점 후보 — 경쟁 문서 198건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 실제 사용 방법"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "리퀴드 AI가 10배 큰 모델 제친 멀티모달 d1-3B 출시",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "d1-3B 사용법 리퀴드 AI 멀티모달 모델 실행 설정",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "d1-3B 사용법만 보고 돌리면 멀티모달 쪽에서 많이들 헤매더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": null,
+      "keywordPool": null,
+      "trend": null,
+      "kinCount": 327,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-09T10:07:40.119Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -524,80 +916,8 @@
       "monetize": null,
       "measuredAt": "2026-10-09T09:45:04.411Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "d1-3B 다운로드",
-      "issue": "d1-3B",
-      "topic": "d1-3B",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "어디서 받나",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 66,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 66",
-        "선점 후보 — 경쟁 문서 66건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 어디서 받나"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 모델 제친 멀티모달 의사결정 모델 d1-3B를 출시해서.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "d1-3B 다운로드, 10배 체급 제친 멀티모달 모델 성능",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "d1-3B 다운로드 하기 전에 10배 큰 모델을 어떻게 제쳤는지 궁금하더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 78,
-      "kinTop": [
-        {
-          "title": "슈스케2차지원서다운로드",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=3010201&docId=169612263&answerNo=3",
-          "views": 57718,
-          "answers": 2
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-09T09:45:04.411Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "레서판다 위협 짤",
@@ -656,155 +976,8 @@
       "monetize": null,
       "measuredAt": "2026-10-09T09:45:04.411Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "오픈AI 닷츠 이용방법",
-      "issue": "오픈AI",
-      "topic": "오픈AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "autocomplete",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 110,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "stable",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 110",
-        "선점 후보 — 경쟁 문서 110건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "autocomplete",
-          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "오픈AI 매출이 예상보다 27조원 적다는 전망에 기술주가 하락해서.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "오픈AI 닷츠 이용방법 가입부터 요금까지 순서대로",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "오픈AI 닷츠 이용방법 한국에서 쓰려니 생각보다 걸리는 게 많더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "오픈AI 닷츠 한국",
-          "searchVolume": 10,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "오픈AI 닷츠 한국",
-          "searchVolume": 10,
-          "documentCount": 362,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-09T09:45:04.411Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "d1-3B 성능",
-      "issue": "d1-3B",
-      "topic": "d1-3B",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 119,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 119",
-        "선점 후보 — 경쟁 문서 119건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 모델 제친 멀티모달 의사결정 모델 d1-3B를 출시해서.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "d1-3B 성능, 10배 큰 체급 제친 멀티모달 의사결정 모델",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "d1-3B 성능이 10배 큰 모델을 눌렀다는 게 많이들 의외라더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 37,
-      "kinTop": [
-        {
-          "title": "컴퓨터 성능대비 효율문제.. 부탁드립니다",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10103&docId=219249544&answerNo=0",
-          "views": 11,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-09T09:45:04.411Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "d1-3B 활용",
@@ -879,7 +1052,8 @@
       "monetize": null,
       "measuredAt": "2026-10-09T09:45:04.411Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "레서판다 레드판다 차이",
@@ -997,73 +1171,8 @@
       "monetize": null,
       "measuredAt": "2026-10-09T09:45:04.411Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
-    },
-    {
-      "keyword": "d1-3B 사용법",
-      "issue": "d1-3B",
-      "topic": "d1-3B",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "next-wave",
-      "originReason": "어떻게 쓰나",
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 198,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 198",
-        "선점 후보 — 경쟁 문서 198건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "next-wave",
-          "text": "다음 물결 — 어떻게 쓰나"
-        },
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 모델 제친 멀티모달 의사결정 모델 d1-3B를 출시해서.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "d1-3B 사용법 리퀴드AI 멀티모달 모델 실행 순서",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "d1-3B 사용법 찾기 전에 덩치 10배 모델 꺾었다는 이유부터 봤습니다",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 327,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-09T09:45:04.411Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "프로배구 코치 성비위",
@@ -1503,88 +1612,6 @@
       "trend": null,
       "kinCount": 0,
       "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-09T03:34:58.878Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "이재명 이집트 CEPA",
-      "issue": "이재명 이집트 CEPA",
-      "topic": "이재명 이집트 CEPA",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 228,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 228",
-        "선점 후보 — 경쟁 문서 228건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "이재명 대통령이 알시시와 회담해 한-이집트 CEPA 협상 개시를 밝혔다",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "이재명 이집트 CEPA 협상 개시, 전략적 동반자 격상 내용",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "이재명 이집트 CEPA 소식에 방산 협력 얘기가 왜 같이 나오나 했더니",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 18,
-      "kinTop": [
-        {
-          "title": "이재명보단 윤석열???",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=408281624&answerNo=10",
-          "views": 1562,
-          "answers": 12
-        },
-        {
-          "title": "이재명 대통령되면",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=61404&docId=413599949&answerNo=6",
-          "views": 1415,
-          "answers": 7
-        },
-        {
-          "title": "이재명,민주당은 일본에만 엄격한가요?",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=60501&docId=399896481&answerNo=6",
-          "views": 1294,
-          "answers": 7
-        }
-      ],
       "monetize": null,
       "measuredAt": "2026-10-09T03:34:58.878Z",
       "recommendationStatus": "observe",
@@ -3398,12 +3425,148 @@
   "rejectedCount": 0,
   "issues": [
     {
+      "issue": "극초음속 활공비행체 시험발사",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "극초음속 활공비행체 최초 시험발사 성공, 이 대통령 참관",
+      "headlines": [
+        {
+          "title": "극초음속 활공비행체 최초 시험발사",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-09T07:18:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016367794?sid=100"
+        },
+        {
+          "title": "극초음속 활공비행체 최초 시험발사 성공‥李 \"적극 지원\"",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-10-08T09:20:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001527944?sid=100"
+        },
+        {
+          "title": "이 대통령, ‘극초음속 활공비행체’ 최초 시험발사 성공 참관",
+          "press": "hani.co.kr",
+          "publishedAt": "2026-10-08T09:16:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/028/0002826670?sid=100"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "주지훈 액터스 하우스",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "부산영화제 액터스 하우스에서 주지훈이 재혼황후 언급",
+      "headlines": [
+        {
+          "title": "주지훈 '액터스 하우스' 오픈",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-09T07:34:00.000Z",
+          "link": "https://m.entertain.naver.com/article/001/0016367807"
+        },
+        {
+          "title": "BIFF 액터스 하우스 주지훈",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-09T07:22:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014243719?sid=103"
+        },
+        {
+          "title": "주지훈, 액터스 하우스 오픈",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-09T07:30:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009219378"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "주지훈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "쿠팡 먹통 보상",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "쿠팡이 2시간 먹통 뒤 주문취소 고객에 캐시 5000원 보상",
+      "headlines": [
+        {
+          "title": "한밤 중 동시다발 ‘먹통 사태’… 쿠팡, 캐시로 보상",
+          "press": "kmib.co.kr",
+          "publishedAt": "2026-10-09T05:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/005/0001877786?sid=101"
+        },
+        {
+          "title": "쿠팡 먹통, 나도 보상받나?…주문 취소됐다면 캐시 5000원",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-09T02:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006384468?sid=101"
+        },
+        {
+          "title": "‘새벽 먹통’ 쿠팡, 피해 고객에 5000원 캐시 보상",
+          "press": "biz.chosun.com",
+          "publishedAt": "2026-10-09T09:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/366/0001197062?sid=101"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "삼성전자 3분기 실적",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "삼성전자 3분기 영업이익 107조, 국내 첫 100조 돌파",
+      "headlines": [
+        {
+          "title": "[단독] 삼성전자 물량 80%가 장기계약분…빅테크 줄섰다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-09T08:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340893?sid=101"
+        },
+        {
+          "title": "'107조 잭팟' 삼성전자, '63만전자' 시동거나",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T22:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014243117?sid=101"
+        },
+        {
+          "title": "SK하이닉스 ‘꿈의 이익률’ 80% 달성할까…삼성 이어 실적 기대감 고조",
+          "press": "kmib.co.kr",
+          "publishedAt": "2026-10-09T05:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/005/0001877785?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "삼성전자 3분기 실적발표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
       "issue": "최태원 호남 반도체",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "stable",
-      "isHot": true,
-      "why": "최태원이 호남 반도체부지 첫 방문해 가장 빠른 착공 의지를 밝혀서.",
+      "isHot": false,
+      "why": "최태원이 호남 반도체 부지 첫 방문해 빠른 착공 강조",
       "headlines": [
         {
           "title": "최태원, 호남 반도체부지 첫 방문…\"가장 빠른 속도로 짓겠다\"(종합)",
@@ -3435,30 +3598,211 @@
       "rowCount": 0
     },
     {
-      "issue": "활공비행체 시험발사 공개",
+      "issue": "휴머노이드",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "격투로봇이 인간에 발차기, 가정용 휴머노이드도 등장",
+      "headlines": [
+        {
+          "title": "로봇이 인간에게 발차기 날렸다... 현실판 ‘터미네이터’ 소름",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-09T04:07:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004002952?sid=105"
+        },
+        {
+          "title": "인간 발로 차며 몰아붙였다…‘터미네이터’ 살인 로봇 현실로?",
+          "press": "joongang.co.kr",
+          "publishedAt": "2026-10-09T07:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/025/0003556855?sid=104"
+        },
+        {
+          "title": "\"대구·경북을 휴머노이드 중심지로\" 국회서 전략 논의",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T08:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016366814?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "휴머노이드 로봇",
+          "searchVolume": 7030,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "휴머노이드 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "휴머노이드 etf",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 휴머노이드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "중국 휴머노이드 로봇",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "테슬라 휴머노이드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "차이나 휴머노이드 etf",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "삼성 휴머노이드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "휴머노이드 출시일",
+          "reason": "언제 나오나 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "가정용 휴머노이드",
+          "reason": "상용화 시점 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "국내 휴머노이드 기업",
+          "reason": "투자 대상 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "대우건설",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "대우건설 조직개편으로 데이터센터팀 신설, 임원 절반 교체",
+      "headlines": [
+        {
+          "title": "플랜트·토목 힘주는 대우건설, 신임 본부장 2단계 특진",
+          "press": "bloter.net",
+          "publishedAt": "2026-10-08T07:33:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/293/0000091382?sid=101"
+        },
+        {
+          "title": "대우건설, 조직개편 단행…도시정비 확대·데이터센터팀 신설",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T04:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014241940?sid=101"
+        },
+        {
+          "title": "대우건설, 임원 절반 교체",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-08T08:27:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340623?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "대우건설 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 채용",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 아파트",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 회장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 목표주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 주가전망",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 이강석",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "대우건설 사장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "대우건설 수주",
+          "reason": "신조직 성과 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "대우건설 목표주가",
+          "reason": "개편 후 주가",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "이재명 이집트 CEPA",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
       "isHot": true,
-      "why": "극초음속 활공비행체 최초 시험발사가 공개되고 성공해서.",
+      "why": "한-이집트 전략적 동반자 격상, CEPA 협상 개시",
       "headlines": [
         {
-          "title": "극초음속 활공비행체(HGV) 최초 시험발사 공개",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-09T08:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005746434?sid=100"
+          "title": "李대통령 \"韓-이집트, '전략적 동반자' 격상…CEPA 협상 개시\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T03:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016365778?sid=100"
         },
         {
-          "title": "[포토] 우리 기술 ‘극초음속 미사일’ 전격 공개…첫 시험발사 성공 장...",
-          "press": "hani.co.kr",
-          "publishedAt": "2026-10-09T07:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/028/0002826807?sid=100"
-        },
-        {
-          "title": "극초음속 활공비행체(HGV) 최초 시험발사 장면 공개",
+          "title": "李대통령 \"한·이집트 CEPA 협상 개시\"…전략적 동반자 관계 격상",
           "press": "news1.kr",
-          "publishedAt": "2026-10-09T07:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009219360?sid=100"
+          "publishedAt": "2026-10-08T03:54:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009217303?sid=100"
+        },
+        {
+          "title": "한-이집트, 전략적 동반자 관계로 격상…CEPA 협상 개시",
+          "press": "mbn.co.kr",
+          "publishedAt": "2026-10-08T10:15:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001972588?sid=100"
         }
       ],
       "concentrated": [],
@@ -3466,34 +3810,671 @@
       "rowCount": 0
     },
     {
-      "issue": "쿠팡 먹통 보상",
+      "issue": "이억원 금융위원장 AI해킹",
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": false,
-      "why": "쿠팡 2시간 먹통으로 주문취소 고객에 5000원 캐시를 보상해서.",
+      "isHot": true,
+      "why": "이억원 금융위원장이 AI 해킹 대응 미흡, AI로 막아야 강조",
       "headlines": [
         {
-          "title": "한밤 중 동시다발 ‘먹통 사태’… 쿠팡, 캐시로 보상",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-10-09T05:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001877786?sid=101"
+          "title": "이억원 \"해킹대응 기본적 부분도 미흡…AI로 막아야\"",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T03:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016365727?sid=101"
         },
         {
-          "title": "쿠팡 먹통, 나도 보상받나?…주문 취소됐다면 캐시 5000원",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-09T02:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006384468?sid=101"
+          "title": "이억원 금융위원장 “AI 해킹 위협 커지는데 기본 대응 미흡”",
+          "press": "etnews.com",
+          "publishedAt": "2026-10-08T04:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/030/0003473479?sid=101"
         },
         {
-          "title": "‘새벽 먹통’ 쿠팡, 피해 고객에 5000원 캐시 보상",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-09T09:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001197062?sid=101"
+          "title": "이억원 금융위원장 \"AI 해킹은 AI로 막아야…망분리 규제 살피는 중\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T03:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014241594?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "이억원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "이억원 금융위원장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "방탄소년단 키즈 초이스",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "방탄소년단이 2026 키즈 초이스 어워드 3개 부문 후보 선정",
+      "headlines": [
+        {
+          "title": "방탄소년단, 美 '2026 키즈 초이스 어워드' 3개 부문 후보 선정",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-09T08:47:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009219413"
+        },
+        {
+          "title": "BTS·블랙핑크 등 美 '2026 키즈 초이스 어워즈' 후보",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-09T07:55:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016367854?sid=103"
+        },
+        {
+          "title": "방탄소년단, 美 '2026 키즈 초이스 어워드' 후보..역대 최다 기록 보유",
+          "press": "starnewskorea.com",
+          "publishedAt": "2026-10-09T06:47:00.000Z",
+          "link": "https://m.entertain.naver.com/article/108/0003477440"
         }
       ],
       "concentrated": [],
       "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "앤트로픽",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "앤트로픽·오픈AI 같은 날 새 모델 발표",
+      "headlines": [
+        {
+          "title": "반도체주 담은 개미들 어쩌나…67조 쇼크에 '공포' 덮쳤다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-09T08:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340866?sid=101"
+        },
+        {
+          "title": "\"8분 만에 취약점 6개\"…'자율형 AI 해킹' 현실로[해킹 에이전트②]",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T23:00:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014243146?sid=105"
+        },
+        {
+          "title": "앤트로픽·오픈AI 같은 날 새 모델 발표",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-10-08T09:02:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000643825?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "앤트로픽 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ipo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 클로드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 상장일",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "앤트로픽 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "앤트로픽 상장일",
+          "reason": "IPO 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 기업가치",
+          "reason": "밸류 논란 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "앤트로픽 수혜주",
+          "reason": "국내 관련주 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "애플",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "declining",
+      "isHot": false,
+      "why": "신형 아이폰 꺼짐 1500건, 애플 원인 비공개",
+      "headlines": [
+        {
+          "title": "애플, 27일 첫 터치스크린 맥북 공개 예정",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-09T05:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004002960?sid=105"
+        },
+        {
+          "title": "신형 아이폰 '꺼짐' 교환 접수만 1500건인데...애플, 원인 비공개",
+          "press": "ytn.co.kr",
+          "publishedAt": "2026-10-08T05:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/052/0002416320?sid=101"
+        },
+        {
+          "title": "신형 아이폰 '꺼짐' 접수만 1500건인데…애플 \"원인은 기밀\"",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-08T07:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/018/0006383950?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "애플 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 서비스센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 폴더블",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 환불",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 ceo",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 고객센터",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 정품 확인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "애플 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "오픈AI",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "오픈AI 매출 27조원 적다는 전망에 기술주 하락",
+      "headlines": [
+        {
+          "title": "반도체주 담은 개미들 어쩌나…67조 쇼크에 '공포' 덮쳤다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-09T08:35:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340866?sid=101"
+        },
+        {
+          "title": "700억 달러 아니네?…오픈AI 매출 축소 전망에 ‘거품론’ 고개",
+          "press": "donga.com",
+          "publishedAt": "2026-10-09T06:57:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/020/0003753908?sid=101"
+        },
+        {
+          "title": "뉴욕증시, 오픈AI 매출 우려에 기술주 약세…나스닥 1.25% 하락",
+          "press": "chosun.com",
+          "publishedAt": "2026-10-08T21:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/023/0004002935?sid=101"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "오픈ai 상장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 대표",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 종류",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 닷츠",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 순위",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "오픈ai 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "오픈AI 상장일",
+          "reason": "IPO 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "오픈AI 수익 구조",
+          "reason": "매출 실체 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "제미나이 에이전트",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "dead",
+      "isHot": false,
+      "why": "구글이 기업용 제미나이 에이전트 공개, 오픈AI 닷에 맞불",
+      "headlines": [
+        {
+          "title": "구글, 기업용 ‘제미나이 에이전트’ 공개… 오픈AI ‘닷’에 맞불",
+          "press": "ddaily.co.kr",
+          "publishedAt": "2026-10-09T04:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/138/0002244220?sid=105"
+        },
+        {
+          "title": "구글클라우드, 업무용 '제미나이 에이전트' 선봬",
+          "press": "epnc.co.kr",
+          "publishedAt": "2026-10-09T02:34:00.000Z",
+          "link": "https://www.epnc.co.kr/news/articleView.html?idxno=407974"
+        },
+        {
+          "title": "구글, 업무용 에이전틱 AI '제미나이 에이전트' 공개",
+          "press": "thelec.kr",
+          "publishedAt": "2026-10-09T08:12:00.000Z",
+          "link": "https://www.thelec.kr/news/articleView.html?idxno=63507"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "제미나이 에이전트 출시일",
+          "reason": "국내 출시 시점",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "클로드",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "금융권 해킹범이 클로드에 이력서 쓰다 신상 단서 노출",
+      "headlines": [
+        {
+          "title": "클로드에 이력서 썼다가 들통?…금융권 해킹범의 '신상 단서'",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-10-08T05:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001394043?sid=101"
+        },
+        {
+          "title": "금융권 연쇄 해킹, 20대 中 해커 소행 정황…유출 정보 팔 곳도 AI에 물...",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-07T23:26:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014240539?sid=105"
+        },
+        {
+          "title": "금융권 해킹 배후로 중국 광둥성 20대 인물 추정…딥시크 등 AI 활용",
+          "press": "view.asiae.co.kr",
+          "publishedAt": "2026-10-08T01:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/277/0005826199?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "클로드 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 요금제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 모네",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 코워크",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 프로",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "클로드 디자인",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "구글",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "서울대 연구진이 갤럭시·구글 픽셀 뚫는 해킹 구멍 발견",
+      "headlines": [
+        {
+          "title": "갤럭시·구글 픽셀도 뚫리는 해킹 구멍, 서울대 연구진이 발견했다",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-08T02:43:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340506?sid=105"
+        },
+        {
+          "title": "삼성전자 영업익 '100조 신화'…엔비디아·구글·애플 넘었다",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-08T01:19:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/421/0009216669?sid=101"
+        },
+        {
+          "title": "\"AI로 질병예방\"‥美정부·구글, 저커버그의 바이오허브에 합류",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-10-08T05:28:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001527907?sid=104"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "구글 제미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 번역기",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 영국",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 클래스룸",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재미나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 재팬",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "구글 원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "카카오",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "카카오가 국제 AI 학회서 LLM 경량화 기술 공개",
+      "headlines": [
+        {
+          "title": "“내일모레 50인데”…배윤정, 둘째 간절했지만 시험관 결국 포기",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-09T05:34:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005746331?sid=102"
+        },
+        {
+          "title": "카카오, AI 학습 비용 줄이는 기술 개발…국제학회서 성과 공개",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-08T00:12:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014240661?sid=105"
+        },
+        {
+          "title": "[테크스냅] 카카오, 국제 AI 학회서 대규모 언어모델 최적화 기술 발표",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T00:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016364921?sid=105"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "카카오 ai 퀴즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 이모티콘샵",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 친구위치",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 구독",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 굿딜",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 나무",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "카카오 내비",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "카카오 인적분할 일정",
+          "reason": "주총 시점 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "카카오 분할 주가",
+          "reason": "분할 영향 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "카카오 소액주주 설득",
+          "reason": "주주 반발 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "카카오 AI 적용",
+          "reason": "기술 활용 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "d1-3B",
+      "issueType": "fresh",
+      "lane": "tech",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "리퀴드 AI가 10배 큰 모델 제친 멀티모달 d1-3B 출시",
+      "headlines": [
+        {
+          "title": "리퀴드 AI, 10배 큰 체급 제친 멀티모달 의사결정 모델 'd1-3B' 출시",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-08T07:52:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216087"
+        },
+        {
+          "title": "[허가/임상] 트렘피어, IV 제형 추가에 적응증도 확대",
+          "press": "hitnews.co.kr",
+          "publishedAt": "2025-08-24T21:12:00.000Z",
+          "link": "http://www.hitnews.co.kr/news/articleView.html?idxno=68168"
+        },
+        {
+          "title": "[보고서] ‘3세대 유전자 가위’ 논문·특허기술 전쟁 3…논문 분석",
+          "press": "itnews.or.kr",
+          "publishedAt": "2017-08-01T01:58:00.000Z",
+          "link": "http://www.itnews.or.kr/?p=22879"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "d1 3b",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "d1-3B 사용법",
+          "reason": "실제 사용 방법",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "d1-3B 한국어",
+          "reason": "한국어 지원 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -3588,152 +4569,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 1
-    },
-    {
-      "issue": "첫 홀 버디",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "유현조가 HJ중공업·동부건설 챔피언십 2R 단독 선두에 올라서.",
-      "headlines": [
-        {
-          "title": "[포토]최민경,첫 홀 버디 들어가라",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-09T09:09:00.000Z",
-          "link": "https://m.sports.naver.com/golf/article/018/0006384888"
-        },
-        {
-          "title": "유현조, HJ중공업·동부건설 챔피언십 2R 단독 1위…버디 11개",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-09T08:49:00.000Z",
-          "link": "https://m.sports.naver.com/golf/article/001/0016367877"
-        },
-        {
-          "title": "18홀 ‘22점’ 신기록 작성 유현조, ‘HJ중공업·동부건설’ 2R 단독 선두",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-10-09T08:37:00.000Z",
-          "link": "https://m.sports.naver.com/golf/article/005/0001877801"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "첫홀 버디 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "첫홀",
-          "searchVolume": null,
-          "origin": "related"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "양대노총 공공노동자 결의대회",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "한글날 양대노총이 공공기관 통폐합·이전에 반대하며 결의대회를 열어서.",
-      "headlines": [
-        {
-          "title": "한글날 서울 도심 곳곳 집회…양대노총 \"일방적 공공기관 통폐합 규탄\"",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-09T06:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009219319?sid=102"
-        },
-        {
-          "title": "연대사하는 양경수 민주노총 위원장",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-09T06:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016367761?sid=102"
-        },
-        {
-          "title": "한글날 양대 노총 대규모 집회…\"일방적 공공기관 통폐합 규탄\"",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-09T08:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000643994?sid=102"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "한국표준과학연구원",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "stable",
-      "isHot": true,
-      "why": "표준연 연구원들이 연구비로 양주·레고 사고 토너 산 척 1억3천만원 적발돼서.",
-      "headlines": [
-        {
-          "title": "연구비로 개인용 양주 등 1억 3천만 원 어치 구매…표준연 연구원들 감...",
-          "press": "news.kbs.co.kr",
-          "publishedAt": "2026-10-09T02:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/056/0012270908?sid=105"
-        },
-        {
-          "title": "양주·레고 사고 토너 산 척…표준연 직원들 감사 적발",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-08T23:33:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016367221?sid=105"
-        },
-        {
-          "title": "‘술 사고 장난감 산 뒤 토너 산 척’…출연연 연구원들 적발",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-10-09T01:29:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003687528?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "한국표준과학연구원 채용",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국표준과학연구원 연봉",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국표준과학연구원 견학",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국표준과학연구원 위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국표준과학연구원 양자",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국표준과학연구원 면접",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국표준과학연구원 기숙사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "한국표준과학연구원 인턴 후기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
+      "rowCount": 1,
+      "carried": true
     },
     {
       "issue": "레서판다",
@@ -3827,681 +4664,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
-    },
-    {
-      "issue": "삼성전자 3분기 실적",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "삼성전자 3분기 영업이익 107조원으로 국내 첫 100조를 돌파해서.",
-      "headlines": [
-        {
-          "title": "[단독] 삼성전자 물량 80%가 장기계약분…빅테크 줄 섰다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-09T08:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005340893?sid=101"
-        },
-        {
-          "title": "'107조 잭팟' 삼성전자, '63만전자' 시동거나",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-08T22:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014243117?sid=101"
-        },
-        {
-          "title": "SK하이닉스 ‘꿈의 이익률’ 80% 달성할까…삼성 이어 실적 기대감 고조",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-10-09T05:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001877785?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "삼성전자 3분기 실적발표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "앤트로픽",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "앤트로픽과 오픈AI가 같은 날 새 AI 모델을 발표해서.",
-      "headlines": [
-        {
-          "title": "반도체주 담은 개미들 어쩌나…67조 쇼크에 '공포' 덮쳤다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-09T08:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005340866?sid=101"
-        },
-        {
-          "title": "\"8분 만에 취약점 6개\"…'자율형 AI 해킹' 현실로[해킹 에이전트②]",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-08T23:00:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014243146?sid=105"
-        },
-        {
-          "title": "앤트로픽·오픈AI 같은 날 새 모델 발표",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-08T09:02:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000643825?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "앤트로픽 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ipo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 클로드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 상장일",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "앤트로픽 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "앤트로픽 상장시점",
-          "reason": "IPO 언제인지",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 오픈AI 성능",
-          "reason": "모델 우위 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 투자방법",
-          "reason": "국내 접근 가능",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "앤트로픽 관련주",
-          "reason": "수혜 종목 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "애플",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "declining",
-      "isHot": false,
-      "why": "신형 아이폰 꺼짐 1500건 접수됐는데 애플이 원인을 기밀이라 밝혀서.",
-      "headlines": [
-        {
-          "title": "애플, 27일 첫 터치스크린 맥북 공개 예정",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-09T05:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004002960?sid=105"
-        },
-        {
-          "title": "신형 아이폰 '꺼짐' 교환 접수만 1500건인데...애플, 원인 비공개",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-10-08T05:50:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002416320?sid=101"
-        },
-        {
-          "title": "신형 아이폰 '꺼짐' 접수만 1500건인데…애플 \"원인은 기밀\"",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-08T07:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/018/0006383950?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "애플 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 서비스센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 폴더블",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 환불",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 ceo",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 고객센터",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 정품 확인",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "애플 본사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "오픈AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "오픈AI 매출이 예상보다 27조원 적다는 전망에 기술주가 하락해서.",
-      "headlines": [
-        {
-          "title": "700억 달러 아니네?…오픈AI 매출 축소 전망에 ‘거품론’ 고개",
-          "press": "donga.com",
-          "publishedAt": "2026-10-09T06:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003753908?sid=101"
-        },
-        {
-          "title": "뉴욕증시, 오픈AI 매출 우려에 기술주 약세…나스닥 1.25% 하락",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-08T21:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/023/0004002935?sid=101"
-        },
-        {
-          "title": "오픈AI 연매출 예상보다 27조원 적었다…AI 낙관론에 ‘찬물’",
-          "press": "kmib.co.kr",
-          "publishedAt": "2026-10-09T02:36:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/005/0001877768?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "오픈ai 상장",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 대표",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 종류",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 닷츠",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 순위",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "오픈ai 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI 상장",
-          "reason": "IPO 영향 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "제미나이 에이전트",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "dead",
-      "isHot": false,
-      "why": "구글이 기업용 제미나이 에이전트를 공개해 오픈AI에 맞불을 놓아서.",
-      "headlines": [
-        {
-          "title": "구글, 기업용 ‘제미나이 에이전트’ 공개… 오픈AI ‘닷’에 맞불",
-          "press": "ddaily.co.kr",
-          "publishedAt": "2026-10-09T04:11:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/138/0002244220?sid=105"
-        },
-        {
-          "title": "구글클라우드, 업무용 '제미나이 에이전트' 선봬",
-          "press": "epnc.co.kr",
-          "publishedAt": "2026-10-09T02:34:00.000Z",
-          "link": "https://www.epnc.co.kr/news/articleView.html?idxno=407974"
-        },
-        {
-          "title": "구글, 업무용 에이전틱 AI '제미나이 에이전트' 공개",
-          "press": "thelec.kr",
-          "publishedAt": "2026-10-09T08:12:00.000Z",
-          "link": "https://www.thelec.kr/news/articleView.html?idxno=63507"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "제미나이 에이전트 출시일",
-          "reason": "언제 쓰나",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "제미나이 에이전트 요금",
-          "reason": "비용 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "제미나이 에이전트 사용법",
-          "reason": "쓰는 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "클로드",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "금융권 해킹범이 클로드에 이력서를 쓰다 신상 단서를 남겨 추적돼서.",
-      "headlines": [
-        {
-          "title": "클로드에 이력서 썼다가 들통?…금융권 해킹범의 '신상 단서'",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-08T05:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/055/0001394043?sid=101"
-        },
-        {
-          "title": "금융권 연쇄 해킹, 20대 中 해커 소행 정황…유출 정보 팔 곳도 AI에 물...",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-07T23:26:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014240539?sid=105"
-        },
-        {
-          "title": "금융권 해킹 배후로 중국 광둥성 20대 인물 추정…딥시크 등 AI 활용",
-          "press": "view.asiae.co.kr",
-          "publishedAt": "2026-10-08T01:52:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/277/0005826199?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "클로드 ai",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 요금제",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 무료",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 모네",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 코워크",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 프로",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "클로드 스킬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "구글",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "서울대 연구진이 갤럭시·구글 픽셀도 뚫리는 해킹 구멍을 발견해서.",
-      "headlines": [
-        {
-          "title": "갤럭시·구글 픽셀도 뚫리는 해킹 구멍, 서울대 연구진이 발견했다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-08T02:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005340506?sid=105"
-        },
-        {
-          "title": "삼성전자 영업익 '100조 신화'…엔비디아·구글·애플 넘었다",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-08T01:19:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009216669?sid=101"
-        },
-        {
-          "title": "\"AI로 질병예방\"‥美정부·구글, 저커버그의 바이오허브에 합류",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-10-08T05:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001527907?sid=104"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구글 제미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 번역기",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 영국",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 클래스룸",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 재미나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 재팬",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구글 주식",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "카카오",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
-      "isHot": false,
-      "why": "카카오가 국제 AI 학회에서 언어모델 최적화·경량화 기술을 공개해서.",
-      "headlines": [
-        {
-          "title": "“내일모레 50인데”…배윤정, 둘째 간절했지만 시험관 결국 포기",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-09T05:34:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005746331?sid=102"
-        },
-        {
-          "title": "카카오, AI 학습 비용 줄이는 기술 개발…국제학회서 성과 공개",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-08T00:12:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014240661?sid=105"
-        },
-        {
-          "title": "[테크스냅] 카카오, 국제 AI 학회서 대규모 언어모델 최적화 기술 발표",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-08T00:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016364921?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "카카오 ai 퀴즈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 이모티콘샵",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 친구위치",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 구독",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 굿딜",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 나무",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "카카오 내비",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "카카오 분할 일정",
-          "reason": "주총 언제인지",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "카카오 주가 영향",
-          "reason": "주주 손익 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "카카오 카나나",
-          "reason": "AI 서비스 궁금",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "카카오 소액주주 설득",
-          "reason": "찬반 관심",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "카카오 분할 구조",
-          "reason": "분할 후 변화",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "d1-3B",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "리퀴드 AI가 10배 큰 모델 제친 멀티모달 의사결정 모델 d1-3B를 출시해서.",
-      "headlines": [
-        {
-          "title": "리퀴드 AI, 10배 큰 체급 제친 멀티모달 의사결정 모델 'd1-3B' 출시",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-08T07:52:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216087"
-        },
-        {
-          "title": "[허가/임상] 트렘피어, IV 제형 추가에 적응증도 확대",
-          "press": "hitnews.co.kr",
-          "publishedAt": "2025-08-24T21:12:00.000Z",
-          "link": "http://www.hitnews.co.kr/news/articleView.html?idxno=68168"
-        },
-        {
-          "title": "[보고서] ‘3세대 유전자 가위’ 논문·특허기술 전쟁 3…논문 분석",
-          "press": "itnews.or.kr",
-          "publishedAt": "2017-08-01T01:58:00.000Z",
-          "link": "http://www.itnews.or.kr/?p=22879"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "d1 3b",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "d1-3B 사용법",
-          "reason": "어떻게 쓰나",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "d1-3B 다운로드",
-          "reason": "어디서 받나",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "d1-3B 챗gpt 비교",
-          "reason": "성능 차이",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "d1-3B 라이선스",
-          "reason": "상업 이용 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "d1-3B 한국어",
-          "reason": "지원 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "김인석",
@@ -4588,38 +4752,6 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "이재명 이집트 CEPA",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "이재명 대통령이 알시시와 회담해 한-이집트 CEPA 협상 개시를 밝혔다",
-      "headlines": [
-        {
-          "title": "李대통령 \"韓-이집트, '전략적 동반자' 격상…CEPA 협상 개시\"",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-08T03:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016365778?sid=100"
-        },
-        {
-          "title": "李대통령 \"한·이집트 CEPA 협상 개시\"…전략적 동반자 관계 격상",
-          "press": "news1.kr",
-          "publishedAt": "2026-10-08T03:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/421/0009217303?sid=100"
-        },
-        {
-          "title": "한-이집트, 전략적 동반자 관계로 격상…CEPA 협상 개시",
-          "press": "mbn.co.kr",
-          "publishedAt": "2026-10-08T10:15:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001972588?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
       "rowCount": 0,
       "carried": true
     },
@@ -5147,23 +5279,5 @@
       "rowCount": 0,
       "carried": true
     }
-  ],
-  "enrichedAt": "2026-10-09T09:51:57.948Z",
-  "enrichStats": {
-    "enriched": 1,
-    "subsAdded": 1,
-    "titleUpgraded": 0,
-    "proposed": 7,
-    "verified": 4,
-    "judged": 0,
-    "judgedBad": 0,
-    "related": 0,
-    "picked": 0,
-    "pooled": 2,
-    "aiTitled": 1,
-    "trended": 1,
-    "whyAdded": 1,
-    "aiCalls": 1,
-    "partial": false
-  }
+  ]
 }
