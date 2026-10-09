@@ -109,6 +109,8 @@ export async function resumePausedAccountForUserRun(deps: UserRunResumeDeps): Pr
     deps.log('✅ 로그인 확인 완료 — 멈춤을 풀고 발행을 이어갑니다.');
     return;
   }
+  // [2026-10-09] 재확인이 왜 멈춤 유지로 끝났는지 기록 1줄(아이디는 싣지 않는다).
+  console.warn(`[AccountGuard] ⚠️ 직접 발행 재확인 실패 — 멈춤 유지(${code}): ${verdict.status}${verdict.reason ? '/' + verdict.reason : ''}`);
   throw await stopAfterFailedCheck(verdict, code as AccountPauseCode, deps);
 }
 

@@ -51,7 +51,8 @@ import {
   getAllSelectors,
   getSelectorStrings,
 } from './selectors';
-import { summarizeImageInsertFailure } from './imageInsertFailureReason.js';
+import { summarizeImageInsertFailure, describeImageInsertAttempts, describeImageFileForFailure } from './imageInsertFailureReason.js';
+import { maskUserNameInPaths } from '../debug/privacyScrubber.js';
 import {
   ImageUploadNotRetryableError,
   describeUploadSource,
@@ -943,7 +944,7 @@ export async function insertBase64ImageAtCursor(
   }
 
   // 보안: 파일 경로 마스킹
-  const maskedPath = absolutePath.replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~');
+  const maskedPath = maskUserNameInPaths(absolutePath.replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~'));
   self.log(`   📁 파일 경로: ${maskedPath}`);
 
   // ✅ 이미지 버튼 클릭 + FileChooser만 사용 (file input 직접 사용 안 함)
@@ -968,6 +969,8 @@ export async function insertBase64ImageAtCursor(
   }
 
   if (!imageButton) {
+    // [2026-10-09] 임시 파일(변환본·긴 경로 사본)이 시도마다 남지 않게 지운다.
+    if (isTemporaryFile) await fs.unlink(absolutePath).catch(() => { });
     throw new Error('네이버 블로그에서 이미지 업로드 버튼을 찾을 수 없습니다');
   }
 
@@ -1507,7 +1510,8 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
 
   for (let imgIdx = 0; imgIdx < images.length; imgIdx++) {
     const image = images[imgIdx];
-    const maskedPath = (image.filePath || '').replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~');
+    // [2026-10-09] `/`·`\\` 경로도 사용자 이름을 가린다.
+    const maskedPath = maskUserNameInPaths((image.filePath || '').replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~'));
 
     self.log(`      📷 이미지 ${imgIdx + 1}/${images.length} 업로드 시도: ${maskedPath}`);
 
@@ -1562,6 +1566,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
     let insertSuccess = false;
     let lastInsertReason = '';
     let attemptsMade = 0;
+    const attemptReasons: string[] = [];
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
       attemptsMade = attempt;
       try {
@@ -1590,6 +1595,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
       } catch (error) {
         self.log(`      ⚠️ 이미지 삽입 시도 ${attempt}/${MAX_RETRIES} 실패: ${(error as Error).message}`);
         lastInsertReason = summarizeImageInsertFailure((error as Error)?.message);
+        attemptReasons.push(lastInsertReason);
         // [2026-10-09] 재시도 직전 정착 후 다시 센다 — 실패로 보인 시도의 업로드가 뒤늦게 들어왔다면
         //   성공이다. 그대로 재시도하면 같은 사진이 또 들어간다.
         const settledCount = await waitForImageCountGrowth({
@@ -1620,7 +1626,9 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
 
     if (!insertSuccess) {
       // [2026-10-09 고객 신고] 화면 오류만 보고도 원인을 알 수 있게 마지막 이유를 붙인다.
-      failures.push(`이미지 ${imgIdx + 1}: ${attemptsMade}회 삽입 실패${lastInsertReason ? ` (마지막 이유: ${lastInsertReason})` : ''}`);
+      // [2026-10-09] 회차별 이유와 파일 사실(확장자·실제 형식·크기, 경로 없음)을 함께 남긴다.
+      const fileFacts = await describeImageFileForFailure(imagePath).catch(() => '파일 읽기 실패');
+      failures.push(`이미지 ${imgIdx + 1}: ${attemptsMade}회 삽입 실패 [${fileFacts}]${attemptReasons.length ? ` (${describeImageInsertAttempts(attemptReasons)})` : ''}`);
       self.log(`      ❌ 이미지 ${imgIdx + 1} 최종 삽입 실패, 건너뜀`);
       continue;
     }

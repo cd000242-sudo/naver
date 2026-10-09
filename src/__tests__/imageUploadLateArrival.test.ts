@@ -299,7 +299,8 @@ describe('per-image retry loop (insertImagesAtCurrentCursor)', () => {
     const { value } = await drive(insertImagesAtCurrentCursor(rig.self, [image]).catch((e: unknown) => e));
 
     expect(rig.self.insertBase64ImageAtCursor).toHaveBeenCalledTimes(1);
-    expect(String((value as Error).message)).toContain('1회 삽입 실패 (마지막 이유: 사진 파일이 아님');
+    expect(String((value as Error).message)).toContain('1회 삽입 실패 [');
+    expect(String((value as Error).message)).toContain('(1회: 사진 파일이 아님');
     expect(String((value as Error).message)).toContain('fake.jpg');
   });
 });

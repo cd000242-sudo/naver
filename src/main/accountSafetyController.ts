@@ -48,6 +48,19 @@ function explainVerdict(verdict?: Verdict): string {
   if (verdict?.status === 'ready') return STATE_CHANGED;
   return '인증 또는 계정 확인이 끝나지 않았습니다. 네이버 글쓰기 화면과 선택 계정을 확인해주세요.';
 }
+/** [2026-10-09] 자동 재확인 기록 1줄. 'wait' 는 확인을 실제로 한 때만, 같은 'manual' 은 한 번만 남긴다(아이디는 앞 3자). */
+const lastAutoRecheckLog = new Map<string, string>();
+function logAutoRecheck(id: string, recheck: { kind: string; attempt?: number; reason?: string }, attempted: boolean): void {
+  try {
+    if (recheck.kind === 'not-paused') { lastAutoRecheckLog.delete(id); return; }
+    if (recheck.kind === 'wait' && !attempted) return;
+    const line = `${recheck.kind}${recheck.attempt ? ` ${recheck.attempt}/3` : ''}${recheck.reason ? ` (${recheck.reason})` : ''}`;
+    const signature = `${recheck.kind}:${recheck.reason ?? ''}:${recheck.attempt ?? ''}`;
+    if (!attempted && lastAutoRecheckLog.get(id) === signature) return;
+    lastAutoRecheckLog.set(id, signature);
+    console.warn(`[AccountGuard] 🔁 연결 확인 자동 재확인: ${line} · ${id.substring(0, 3)}***`);
+  } catch { /* 기록 실패는 무시 */ }
+}
 export function createAccountSafetyController(accounts: () => Account[], sessions: Sessions,
   guard = getAccountExecutionGuard(), journal = getPublicationCommitJournal()) {
   const resolve = (key: string, lookup: SafetyLookup = 'account'): { id: string; blogId: string } => {
@@ -90,14 +103,16 @@ export function createAccountSafetyController(accounts: () => Account[], session
     if (action === 'status') return { success: true, state: status(key, lookup) };
     if (action === 'auto-recheck') {   // [2026-10-09] 무인 작업 전용 — NETWORK_WAIT 멈춤만 읽기 전용으로 다시 확인(networkWaitRecheck)
       status(key, lookup); // 미확정 발행 기록이 있으면 먼저 PUBLISH_OUTCOME_UNKNOWN 으로 멈춰 둔다.
+      let attempted = false; // 예약 cron 이 매분 부르므로, 실제로 확인한 때(와 상태가 바뀐 때)만 기록한다.
       const recheck = await recheckNetworkWaitStop(id, {
         status: x => guard.getStatus(x),
         journalBlocked: x => journal.hasUnconfirmed(x) || journal.isUnreadable(x),
         ensureSession: x => sessions.ensureSessionForUser(x),
-        verify: x => sessions.verifyAccountForUser(x),
+        verify: x => { attempted = true; return sessions.verifyAccountForUser(x); },
         resumeNetworkWait: (x, verify) => guard.resumeNetworkWait(x, verify),
         recordStop: (x, code) => { guard.pause(x, code); },
       });
+      logAutoRecheck(id, recheck, attempted);
       return { success: true, state: status(key, lookup), recheck };
     }
     const before = status(key, lookup);

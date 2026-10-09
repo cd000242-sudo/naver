@@ -185,3 +185,16 @@ export function generatePrivacyReport(
   lines.push('=========================');
   return lines.join('\n');
 }
+
+/**
+ * [2026-10-09] 기록·진단 파일 안의 PC 사용자 이름을 가린다.
+ * 윈도(`C:\Users\이름`, `C:/Users/이름`, JSON 이스케이프 `C:\Users\이름`)와 맥·리눅스(`/Users/이름`, `/home/이름`) 모양을 처리한다.
+ */
+const WINDOWS_USER_DIR = /\b([A-Za-z]:(?:\\{1,2}|\/)(?:Users|Documents and Settings)(?:\\{1,2}|\/))[^\\/\r\n"'<>|:*?,;)]+/gi;
+const POSIX_USER_DIR = /(\/(?:Users|home)\/)[^/\s"'<>|:*?,;)]+/g;
+
+export function maskUserNameInPaths(text: string): string {
+  return String(text ?? '')
+    .replace(WINDOWS_USER_DIR, '$1<사용자>')
+    .replace(POSIX_USER_DIR, '$1<사용자>');
+}

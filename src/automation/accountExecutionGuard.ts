@@ -3,6 +3,7 @@ import { mkdirSync, readFileSync, openSync, writeFileSync, fsyncSync, closeSync,
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { renameWithRetry } from './safeStateRename.js';
+import { logAccountPause } from './accountPauseLog.js';
 
 export const ACCOUNT_PAUSE_CODES = ['LOGIN_REQUIRED', 'LOGIN_CHALLENGE', 'ACCOUNT_PROTECTED', 'NETWORK_WAIT', 'ACCOUNT_MISMATCH', 'PUBLISH_OUTCOME_UNKNOWN'] as const;
 export type AccountPauseCode = typeof ACCOUNT_PAUSE_CODES[number];
@@ -76,7 +77,15 @@ export class AccountExecutionGuard {
   pause(accountId: string, code: AccountPauseCode): AccountExecutionStatus {
     if (!ACCOUNT_PAUSE_CODES.includes(code)) throw new AccountExecutionGuardError('ACCOUNT_MISMATCH', '지원하지 않는 중단 코드입니다.');
     const previous = this.getStatus(accountId);
-    this.persist(accountId, { schema: 1, paused: true, code, version: previous.version + 1, pausedAt: new Date().toISOString() });
+    // [2026-10-09] 멈춤 기록 1줄 — 호출 위치는 여기서 잡아야 하므로 스택을 먼저 얻는다. 저장 성패와 무관하게 남긴다.
+    const stack = new Error().stack;
+    let saved = false;
+    try {
+      this.persist(accountId, { schema: 1, paused: true, code, version: previous.version + 1, pausedAt: new Date().toISOString() });
+      saved = true;
+    } finally {
+      logAccountPause(accountId, code, saved, stack);
+    }
     return this.getStatus(accountId);
   }
   /** Call only from an explicit user-resume action; never from automatic retries. */

@@ -21,6 +21,7 @@ import { isLoginChallengeUrl, isNaverSessionLoginUrl, parseNaverSessionUrl } fro
 import { getAccountExecutionGuard, AccountExecutionGuardError, type AccountPauseCode } from './automation/accountExecutionGuard.js';
 import type { ServerSessionProbeVerdict } from './automation/serverSessionProbePolicy.js';
 import { withCleanupTimeout } from './runtime/cleanupTimeout.js';
+import { setPausePageUrlReader } from './automation/accountPauseLog.js';
 import { EDITOR_BODY_SELECTOR, waitForInitialEditorReadiness } from './automation/initialEditorReadiness.js';
 import { inspectCurrentSessionFrames } from './automation/serverSessionFrameProbe.js';
 import { decideBlogIdentity, type BlogIdentityDecision } from './automation/blogIdentityPolicy.js';
@@ -120,6 +121,11 @@ class BrowserSessionManager {
 
     private constructor() {
         console.log('[BrowserSessionManager] 싱글톤 인스턴스 생성됨');
+        // [2026-10-09] 계정이 멈출 때 기록에 현재 화면 주소를 싣도록 읽기 함수를 등록한다(없으면 빈 값).
+        setPausePageUrlReader((id) => {
+            const session = this.sessions.get(this.resolveSessionAccountId(id));
+            return session && !session.page.isClosed() ? session.page.url() : '';
+        });
     }
 
     /**
@@ -290,7 +296,7 @@ class BrowserSessionManager {
                 const strictMode = (process.env.STRICT_PROXY_FOR_MULTI_ACCOUNT || '').trim() === '1';
                 const otherIds = Array.from(this.sessions.keys()).filter(id => id !== accountId);
                 if (otherIds.length > 0) {
-                    const msg = `⚠️ proxy null + 다계정 활성 (${otherIds.length}개) — ${accountId}가 다른 계정과 동일 IP 사용 위험 (네이버 다계정 탐지 트리거 가능)`;
+                    const msg = `⚠️ proxy null + 다계정 활성 (${otherIds.length}개) — ${accountId.substring(0, 3)}***가 다른 계정과 동일 IP 사용 위험 (네이버 다계정 탐지 트리거 가능)`;
                     if (strictMode) {
                         console.error(`[BrowserSessionManager] ${msg} — STRICT 모드 hard-block`);
                         throw new Error(`STRICT_PROXY_FOR_MULTI_ACCOUNT=1: ${msg}. proxy 설정 후 재시도하세요.`);

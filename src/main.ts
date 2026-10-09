@@ -287,7 +287,7 @@ import { registerAllHandlers, registerAccountHandlers, registerAdminHandlers } f
 import { registerConfigHandlers } from './main/ipc/configHandlers.js';
 import { registerContentHandlers } from './main/ipc/contentHandlers.js';
 import { registerHeadingHandlers } from './main/ipc/headingHandlers.js';
-import { registerDiagnosticsHandlers } from './main/ipc/diagnosticsHandlers.js';
+import { registerDiagnosticsHandlers, setMainLogFileGetter } from './main/ipc/diagnosticsHandlers.js';
 import { registerDefamationHandlers } from './main/ipc/defamationHandlers.js';
 import { registerLicenseHandlers } from './main/ipc/authHandlers.js';
 import { registerQuotaHandlers } from './main/ipc/quotaHandlers.js';
@@ -3761,6 +3761,7 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
             console.log(`[Main] 발행 취소: 쿼터 환불 완료 (현재: ${refunded.publish})`);
           } catch (e) { console.error('[Main] 쿼터 환불 오류:', e); }
         }
+        console.log('[RunEnd] ⏹️ 사용자 취소로 끝남(USER_CANCELLED)');
         sendStatus({ success: false, cancelled: true, message: result.message, failureCode: 'USER_CANCELLED' });
       } else {
         if (preConsumed) {
@@ -3770,6 +3771,8 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
           } catch (e) { console.error('[Main] 쿼터 환불 오류:', e); }
         }
         const failureCode = (result as any).failureCode || classifyPublishFailure(result.message).code;
+        // [2026-10-09] 실행 끝 기록 1줄 — 접두어 [RunEnd] 는 화면 전달 목록에 없어 화면에 두 번 뜨지 않는다. 아이디는 앞 3자만.
+        console.warn(`[RunEnd] ❌ 발행 실패(${failureCode}${(result as any).refusedBeforeStart ? ', 시작 전 거절' : ''}) ${String(payload.naverId || '').slice(0, 3)}***: ${redactKnownAccountId(sanitizeUserVisibleError(result.message), payload.naverId)}`);
         // [2026-10-09] No automatic report file: customers got one on the desktop for every failure (cancels and
         // transient stops included) and kept deleting them. The manual button makes the same report on demand.
         if (failureCode !== 'USER_CANCELLED') {
@@ -4817,6 +4820,8 @@ registerAgentHandlers({
 });
 // ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고) — 환경별 버그 즉시 진단
 registerDiagnosticsHandlers();
+// [2026-10-09] 진단 파일이 앱을 켠 날의 실제 기록 파일(+회전본)을 읽도록 알려준다.
+setMainLogFileGetter(() => _logFilePath);
 // ✅ [SPEC-DEFAMATION-2026 P1] 발행 경계 위험 게이트 — 저장본/붙여넣기 재발행 사각지대 커버
 registerDefamationHandlers();
 registerKeywordHandlers();

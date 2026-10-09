@@ -18,6 +18,8 @@ import {
 import type { IExecutionDependencies, IAutomationInstance } from '../../types/automation.js';
 import { AutomationService, type PostCyclePayload, type PostCycleContext, type PostCycleResult } from './AutomationService.js';
 import { Logger } from '../utils/logger.js';
+import { sanitizeUserVisibleError } from '../../runtime/userVisibleError.js';
+import { redactKnownAccountId } from '../../debug/privacyScrubber.js';
 import { sendLog, sendStatus, sendProgress } from '../utils/ipcHelpers.js';
 import { classifyPublishFailure } from '../../automation/publishFailureClassifier.js';
 import { isConcreteNaverBlogPostUrl } from '../../automation/publishOutcomeResolver.js';
@@ -521,6 +523,18 @@ export async function processImages(
 /**
  * 5단계: 실제 발행 실행
  */
+/**
+ * [2026-10-09] 발행 끝 기록 1줄. `[RunEnd]` 는 화면 전달 목록에 없어 화면에 두 번 뜨지 않는다.
+ * 아이디는 앞 3자만, 메시지는 경로·키를 걷어내고 아이디 전체를 가린다. 기록 실패가 발행을 막지 않게 throw 하지 않는다.
+ */
+function logPublishEnd(label: string, code: string, message: string | undefined, naverId: string | undefined, refused = false): void {
+    try {
+        const id = String(naverId || '').trim();
+        const who = id ? `${id.substring(0, 3)}***` : '계정 미상';
+        console.warn(`[RunEnd] ❌ ${label}(${code}${refused ? ', 시작 전 거절' : ''}) ${who}: ${redactKnownAccountId(sanitizeUserVisibleError(message), id)}`);
+    } catch { /* 기록 실패는 무시 */ }
+}
+
 export async function executePublishing(
     automation: IAutomationInstance,
     payload: PostCyclePayload,
@@ -693,6 +707,7 @@ export async function executePublishing(
         } else {
             sendLog(`❌ 발행 실패: ${result.message}`);
             const failure = classifyPublishFailure(result.message);
+            logPublishEnd('발행 실패', failure.code, result.message, (payload as any).naverId || (payload as any).accountId);
             sendStatus({ success: false, message: result.message, failureCode: failure.code });
         }
 
@@ -706,9 +721,10 @@ export async function executePublishing(
         const message = (error as Error).message || '발행 중 오류가 발생했습니다.';
         sendLog(`❌ 발행 오류: ${message}`);
         const failure = classifyPublishFailure(error);
-        sendStatus({ success: false, message, failureCode: failure.code });
         // The guard refused the job at admission (account paused/busy): no browser opened, nothing reached Naver.
         const refusedBeforeStart = (error as { refusedBeforeStart?: unknown })?.refusedBeforeStart === true;
+        logPublishEnd('발행 오류', failure.code, message, (payload as any).naverId || (payload as any).accountId, refusedBeforeStart);
+        sendStatus({ success: false, message, failureCode: failure.code });
         return { success: false, message, failureCode: failure.code, ...(refusedBeforeStart ? { refusedBeforeStart } : {}) };
     }
 }
