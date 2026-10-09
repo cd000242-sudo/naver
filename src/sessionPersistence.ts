@@ -13,7 +13,7 @@ import { app } from 'electron';
 import * as path from 'path';
 import { promises as fs } from 'fs';
 import * as os from 'os';
-import { shouldKeepProfileCookies } from './automation/cookieRestorePolicy.js';
+import { shouldKeepProfileCookies, buildPersistentLoginCookies } from './automation/cookieRestorePolicy.js';
 
 // ─── 타입 정의 ───────────────────────────────────────────────
 
@@ -183,6 +183,22 @@ export async function saveCookies(
  * - page.setCookie()로 복원
  * @returns 복원 성공 여부
  */
+/**
+ * [2026-10-09] 세션 쿠키로 받은 네이버 로그인 쿠키에 만료일을 붙여 크롬을 닫아도 남게 한다(값 그대로, 비밀번호 없음).
+ * 네이버가 쿠키를 갱신하면 다시 세션 쿠키가 되므로 확인 시점·글 끝·크롬 닫기 직전에 다시 부른다. 실패해도 발행은 막지 않는다.
+ */
+export async function keepLoginCookies(page: Page): Promise<number> {
+  try {
+    if (page.isClosed()) return 0;
+    const cookies = await page.cookies('https://nid.naver.com', 'https://www.naver.com', 'https://blog.naver.com');
+    const persistent = buildPersistentLoginCookies(cookies);
+    if (persistent.length) await page.setCookie(...(persistent as CookieParam[]));
+    return persistent.length;
+  } catch {
+    return 0;
+  }
+}
+
 export async function restoreCookies(
   page: Page,
   accountId: string

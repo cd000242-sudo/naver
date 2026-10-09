@@ -36,7 +36,7 @@ function harness(name: string, initial: string, existingBrowser = true) {
     return true;
   });
   const run = loadMethod(name, {
-    browserSessionManager: { ensureServerSession: verify, markPublishing: vi.fn() },
+    browserSessionManager: { ensureServerSession: verify, markPublishing: vi.fn(), keepLoginAfterRun: vi.fn(async () => undefined) },
     beginMainProcessEditorCommitCandidate: vi.fn(), resetImageProvenanceLedger: vi.fn(),
     getAccountExecutionGuard: () => ({ getStatus: () => ({ paused: false }) }),
     AccountExecutionGuardError: GuardError,

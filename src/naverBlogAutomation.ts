@@ -6550,6 +6550,8 @@ export class NaverBlogAutomation {
       }
       // [R7] 발행 종료 — keep-alive ping 재개로 세션 유지(캡차 방지).
       try { browserSessionManager.markPublishing(this.options.naverId, false); } catch { /* best-effort */ }
+      // [2026-10-09] 아래에서 크롬을 닫을 수 있으니 그 전에 로그인 쿠키 만료일을 다시 붙인다.
+      await browserSessionManager.keepLoginAfterRun(this.options.naverId).catch(() => undefined);
       // keepBrowserOpen이 false이거나 오류 발생 시에만 브라우저 종료
       if (!getAccountExecutionGuard().getStatus(this.options.naverId).paused && !keepBrowserOpen && !postContentAppliedPublishFailure && this.browser) {
         this.log('⏳ 브라우저 종료 중...');
@@ -7119,6 +7121,8 @@ export class NaverBlogAutomation {
     } finally {
       // [R7] 발행 종료 — keep-alive가 이 세션을 다시 ping해 살려두도록 해제.
       try { browserSessionManager.markPublishing(this.options.naverId, false); } catch { /* best-effort */ }
+      // [2026-10-09] 아래에서 크롬을 닫을 수 있으니 그 전에 로그인 쿠키 만료일을 다시 붙인다.
+      await browserSessionManager.keepLoginAfterRun(this.options.naverId).catch(() => undefined);
       if (postContentAppliedPublishFailure) {
         this.invalidateEditorStateAfterAmbiguousPublish();
       }

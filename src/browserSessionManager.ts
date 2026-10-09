@@ -1060,11 +1060,27 @@ class BrowserSessionManager {
     /** Best effort: a failed write keeps the previous file and never blocks publishing. */
     private async persistVerifiedCookies(accountId: string, page: Page): Promise<void> {
         try {
-            const { saveCookies } = await import('./sessionPersistence.js');
-            await saveCookies(page, accountId);
+            const persistence = await import('./sessionPersistence.js');
+            await persistence.saveCookies(page, accountId);
         } catch (error) {
             console.warn(`[BrowserSessionManager] ⚠️ 확인된 로그인 쿠키 저장 실패 (무시): ${(error as Error).message}`);
         }
+        // [2026-10-09] 확인된 로그인 쿠키가 세션 쿠키면 만료일을 붙여 크롬을 닫아도 남게 한다(저장과 별개로, 실패해도 무시).
+        try {
+            const { keepLoginCookies } = await import('./sessionPersistence.js');
+            await keepLoginCookies(page);
+        } catch { /* best-effort */ }
+    }
+
+    /** [2026-10-09] 글 한 편이 끝날 때 로그인 쿠키 만료일을 다시 붙인다 — 글 쓰는 동안 네이버가 갱신한 쿠키도 남도록. */
+    async keepLoginAfterRun(accountId: string): Promise<void> {
+        try {
+            accountId = this.resolveSessionAccountId(accountId);
+            const session = this.sessions.get(accountId);
+            if (!session || session.loginVerifiedAt <= 0 || session.page.isClosed()) return;
+            const { keepLoginCookies } = await import('./sessionPersistence.js');
+            await withCleanupTimeout(() => keepLoginCookies(session.page), 3000, 'keep-login-cookies');
+        } catch { /* best-effort: 발행 결과에 영향 없음 */ }
     }
 
     /**
@@ -1170,6 +1186,13 @@ class BrowserSessionManager {
         try {
             // Mark before close(): the 'disconnected' event lands while close() is still pending.
             this.closingAccounts.add(accountId);
+            // [2026-10-09] 닫기 직전 로그인 쿠키 만료일을 다시 붙인다(이 크롬에서 로그인이 확인된 적 있을 때만). 실패해도 닫기는 진행한다.
+            try {
+                if (session.loginVerifiedAt > 0 && !session.page.isClosed()) {
+                    const { keepLoginCookies } = await import('./sessionPersistence.js');
+                    await withCleanupTimeout(() => keepLoginCookies(session.page), 3000, 'keep-login-cookies');
+                }
+            } catch { /* best-effort */ }
             await withCleanupTimeout(
                 () => session.browser.close(),
                 this.BROWSER_CLOSE_TIMEOUT_MS,

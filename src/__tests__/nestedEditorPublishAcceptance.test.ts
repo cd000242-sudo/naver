@@ -51,7 +51,7 @@ function harness(mode: 'success' | 'no-dom-image' | 'upload-error' | 'partial-up
     findReadyEditorFrame, EditorFrameProtectionError,
     getAccountExecutionGuard: () => guard,
     beginMainProcessEditorCommitCandidate: vi.fn(), bindMainProcessEditorCommitCandidate: vi.fn(),
-    browserSessionManager: { ensureServerSession: vi.fn(async () => true), markPublishing: vi.fn() },
+    browserSessionManager: { ensureServerSession: vi.fn(async () => true), markPublishing: vi.fn(), keepLoginAfterRun: vi.fn(async () => undefined) },
     throwPostContentAppliedPublishError: (error: Error) => { throw error; },
     throwPostTailIncompleteError: (error: Error) => { throw error; },
     createImmediatePublishOutcomeUnknownError: (error: Error) => error,

@@ -6,7 +6,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const guard = vi.hoisted(() => ({ assertAllowed: vi.fn(), getStatus: vi.fn(() => ({ paused: false, version: 0 })), pause: vi.fn(), resume: vi.fn(async (_id: string, check: () => Promise<boolean>) => check()) }));
-const persistence = vi.hoisted(() => ({ saveCookies: vi.fn(async () => undefined), restoreCookies: vi.fn(async () => false) }));
+const persistence = vi.hoisted(() => ({ saveCookies: vi.fn(async () => undefined), restoreCookies: vi.fn(async () => false), keepLoginCookies: vi.fn(async () => 0) }));
 vi.mock('puppeteer-extra', () => ({ default: { use: vi.fn() } }));
 vi.mock('puppeteer-extra-plugin-stealth', () => ({ default: () => ({ enabledEvasions: new Set() }) }));
 vi.mock('../automation/accountExecutionGuard.js', () => ({ getAccountExecutionGuard: () => guard, AccountExecutionGuardError: class extends Error { constructor(public code: string) { super(code); } } }));

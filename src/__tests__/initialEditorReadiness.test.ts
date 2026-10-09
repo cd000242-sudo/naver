@@ -31,7 +31,7 @@ function harness() {
   const dependencies = { classifyBlogWriteNavigationUrl, isLoginChallengeUrl, AccountExecutionGuardError: GuardError,
     InitialEditorReadinessError, waitForInitialEditorReadiness: (page: any, options: any) => waitForInitialEditorReadiness(page, { ...options, timeoutMs: 40, pollIntervalMs: 1 }),
     getAccountExecutionGuard: () => ({ pause, getStatus: () => ({ paused: false }) }), NAVER_TIMEOUTS: { PAGE_LOAD: 30000 },
-    browserSessionManager: { ensureServerSession: verify, markPublishing: vi.fn() }, beginMainProcessEditorCommitCandidate: vi.fn(),
+    browserSessionManager: { ensureServerSession: verify, markPublishing: vi.fn(), keepLoginAfterRun: vi.fn(async () => undefined) }, beginMainProcessEditorCommitCandidate: vi.fn(),
     waitForLoginRedirectToSettle: (target: any, options: any) => waitForLoginRedirectToSettle(target, { ...options, timeoutMs: 0 }), describeUrlForLog };
   state.pauseEntry = method('pauseEntry', dependencies);
   state.navigateToBlogWrite = method('navigateToBlogWrite', dependencies);
