@@ -128,22 +128,22 @@ export function migrateNanoBananaSingleEngine(storage?: Pick<Storage, 'getItem' 
 }
 
 // ═════════════════════════════════════════════════════════════════
-// [2026-10-10] 덕트테이프(openai-image) 세부 모델은 gpt-image-2.5-flare(기본)·sunburst 둘만 남긴다.
-//   옛 저장값 gpt-image-2 는 Sunburst(품질형)로, gpt-image-1 / 1.5 는 Flare 로 이관한다. config 쪽은 configManager 정규화가 맡는다.
+// [2026-10-10] 덕트테이프(openai-image) 세부 모델은 gpt-image-2.5-sunburst(기본)·flare 둘만 남긴다.
+//   사용자가 명시적으로 고른 flare / sunburst 는 그대로 두고, 옛 gpt-image-1 / 1.5 / 2 는 새 기본값 Sunburst 로 이관한다. config 쪽은 configManager 정규화가 맡는다.
 //   (렌더러 번들에 인라인되는 파일이라 policy 모듈을 import 하지 않고 값을 직접 둔다.)
 // ═════════════════════════════════════════════════════════════════
 
 /** 화면에서 내려간 옛 OpenAI 이미지 모델 값 */
 const RETIRED_OPENAI_IMAGE_MODELS: ReadonlySet<string> = new Set(['gpt-image-1', 'gpt-image-1.5', 'gpt-image-2']);
 
-/** 옛 gpt-image-2 는 gpt-image-2.5-sunburst 로, 옛 1 / 1.5 는 gpt-image-2.5-flare 로, 아니면 그대로 돌려준다. */
-export function normalizeRetiredOpenaiImageModel<T>(value: T): T | 'gpt-image-2.5-flare' | 'gpt-image-2.5-sunburst' {
+/** 옛 gpt-image-1 / 1.5 / 2 는 모두 gpt-image-2.5-sunburst 로, 아니면 그대로 돌려준다. */
+export function normalizeRetiredOpenaiImageModel<T>(value: T): T | 'gpt-image-2.5-sunburst' {
   if (typeof value !== 'string' || !RETIRED_OPENAI_IMAGE_MODELS.has(value.trim())) return value;
-  return value.trim() === 'gpt-image-2' ? 'gpt-image-2.5-sunburst' : 'gpt-image-2.5-flare';
+  return 'gpt-image-2.5-sunburst';
 }
 
 /**
- * localStorage 의 openaiImageModel 옛 값을 Flare(1 / 1.5) 또는 Sunburst(2)로 이관한다. 멱등이라 매 기동 호출해도 안전하다.
+ * localStorage 의 openaiImageModel 옛 값(1 / 1.5 / 2)을 새 기본값 Sunburst 로 이관한다. 명시 선택한 flare 는 건드리지 않는다. 멱등이라 매 기동 호출해도 안전하다.
  * @returns 바꾼 키 개수 (0 또는 1)
  */
 export function migrateOpenaiImageTwoModels(storage?: Pick<Storage, 'getItem' | 'setItem'>): number {
@@ -154,7 +154,7 @@ export function migrateOpenaiImageTwoModels(storage?: Pick<Storage, 'getItem' | 
     const next = normalizeRetiredOpenaiImageModel(saved);
     if (saved !== null && next !== saved) {
       store.setItem('openaiImageModel', next as string);
-      console.log(`[ImageMigration] 🔄 openaiImageModel: ${saved} → ${next} (덕트테이프 2모델 정리)`);
+      console.log(`[ImageMigration] 🔄 openaiImageModel: ${saved} → ${next} (덕트테이프 기본값 Sunburst 이관)`);
       return 1;
     }
     return 0;

@@ -33,7 +33,7 @@ function getGlobalImageSettings() {
   // accessor; window getter priority and per-key defaults are unchanged.
   const rawPipeline = readRawPipelineSettings();
   return {
-    imageSource: w.getFullAutoImageSource?.() || rawPipeline.fullAutoImageSource || w.getGlobalImageSource?.() || rawPipeline.globalImageSource || 'nano-banana-2',
+    imageSource: w.getFullAutoImageSource?.() || rawPipeline.fullAutoImageSource || w.getGlobalImageSource?.() || rawPipeline.globalImageSource || 'openai-image',
     imageStyle: w.getImageStyle?.() || rawPipeline.imageStyle || 'realistic',
     imageRatio: w.getImageRatio?.() || rawPipeline.imageRatio || '1:1',
     thumbnailRatio: w.getThumbnailRatio?.() || rawPipeline.thumbnailImageRatio || '1:1',

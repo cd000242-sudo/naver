@@ -3257,7 +3257,7 @@ async function initializeApplication(): Promise<void> {
     migrateImageProviderStorage();
     // [2026-10-10] 나노바나나 프로·2.5 저장값과 슬롯 모델을 나노바나나2로 이관 (멱등)
     migrateNanoBananaSingleEngine();
-    migrateOpenaiImageTwoModels(); // [2026-10-10] 덕트테이프 옛 모델 값 → Flare
+    migrateOpenaiImageTwoModels(); // [2026-10-10] 덕트테이프 옛 모델 값 → 기본값 Sunburst
   } catch (e) {
     console.warn('[Init] 이미지 provider 마이그레이션 스킵:', e);
   }
@@ -5826,7 +5826,7 @@ URL: ${firstUrl}
     const imageSource = document.querySelector('.unified-img-source-btn.selected')?.getAttribute('data-source')
       || localStorage.getItem('fullAutoImageSource')
       || localStorage.getItem('globalImageSource')
-      || 'nano-banana-2';
+      || 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
     // ✅ [2026-04-18 FIX] SSOT 헬퍼 사용 — 배치 큐 저장 시 localStorage 반영 (이전: DOM만 읽어서 모달 설정 무시)
     const skipImages = isImageSkipEnabled();
     const skipCta = (document.getElementById('unified-skip-cta') as HTMLInputElement)?.checked || false;
@@ -9387,7 +9387,7 @@ function collectUnifiedFormData(): any {
   const imageSource = document.querySelector('.unified-img-source-btn.selected')?.getAttribute('data-source')
     || localStorage.getItem('fullAutoImageSource')
     || localStorage.getItem('globalImageSource')
-    || 'nano-banana-2';
+    || 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
   // ✅ [2026-04-18 FIX] SSOT 헬퍼 사용 — headingImageMode='none'도 반영 (이전: 2개만 OR)
   const skipImages = isImageSkipEnabled();
   const publishMode = (document.getElementById('unified-publish-mode') as HTMLInputElement)?.value || 'publish'; // ✅ [2026-03-10 FIX] 기본값을 즉시발행으로 변경

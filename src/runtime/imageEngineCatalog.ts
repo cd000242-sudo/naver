@@ -80,14 +80,14 @@ export const NANO_BANANA: ImageEngineSpec = {
     '한글 텍스트가 깨질 수 있어 한글 텍스트가 필요하면 나노바나나2를 권장합니다.',
 };
 
-/** 덕테이프 — OpenAI gpt-image-2.5 (Flare 기본 / Sunburst) · 한글 텍스트 가능 */
+/** 덕테이프 — OpenAI gpt-image-2.5 (Sunburst 기본 / Flare) · 한글 텍스트 가능 */
 export const DUCK_TAPE: ImageEngineSpec = {
   value: 'openai-image',
   label: '덕테이프',
   tagline: 'OpenAI gpt-image-2.5 Flare / Sunburst · 한글 텍스트 가능 · 계정에 따라 Org 인증 필요할 수 있음',
-  model: OPENAI_IMAGE_MODELS.GPT_IMAGE_2_5_FLARE,
+  model: OPENAI_IMAGE_MODELS.GPT_IMAGE_2_5_SUNBURST,
   forceModelKey: null,
-  costKrw: 18, // [2026-10-10] 기본 Flare·Medium 단가(imageCostUtils 와 시험으로 일치 고정)
+  costKrw: 18, // [2026-10-10] 기본 Sunburst·Medium 단가(imageCostUtils 와 시험으로 일치 고정)
   koreanText: true,
   icon: '🦆',
   freeTierNote:

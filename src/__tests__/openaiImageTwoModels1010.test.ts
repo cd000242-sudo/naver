@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 /**
- * [2026-10-10] 덕트테이프(openai-image) 세부 모델은 gpt-image-2.5 Flare(기본)·Sunburst 둘만 남긴다.
+ * [2026-10-10] 덕트테이프(openai-image) 세부 모델은 gpt-image-2.5 Sunburst(기본)·Flare 둘만 남긴다.
  * 화면 옵션 삭제 + 저장값 이관 + 기본값/정규화 변경이 함께 유지되는지 못 박는다.
  */
 import { describe, it, expect } from 'vitest';
@@ -39,9 +39,9 @@ describe('덕트테이프 화면 — 1.5 / 2 / 1 이 없다', () => {
     expect(values).toEqual([FLARE, SUNBURST]);
   });
 
-  it('Flare 가 기본 checked 이고 Sunburst 는 아니다', () => {
-    expect(radios[0]).toContain('checked');
-    expect(radios[1]).not.toContain('checked');
+  it('Sunburst 가 기본 checked 이고 Flare 는 아니다', () => {
+    expect(radios[0]).not.toContain('checked');
+    expect(radios[1]).toContain('checked');
   });
 
   it('품질 xhigh/max 를 숨기는 data-v25-only 표시가 화면에 없다', () => {
@@ -59,51 +59,56 @@ describe('덕트테이프 화면 — 1.5 / 2 / 1 이 없다', () => {
     expect(src).not.toMatch(/<option value="gpt-image-2">/);
     expect(src).toContain(`<option value="${FLARE}">`);
     expect(src).toContain(`<option value="${SUNBURST}">`);
-    // 목록 밖이면 Flare 로 복원
-    expect(src).toMatch(/validModels\.includes\(restoredModel\) \? restoredModel : 'gpt-image-2\.5-flare'/);
-    // 옛 gpt-image-2(고품질)는 Sunburst 로 복원
-    expect(src).toMatch(/savedModel === 'gpt-image-2' \? 'gpt-image-2\.5-sunburst' : savedModel/);
+    // 목록 밖(옛 1 / 1.5 / 2·빈 값)이면 기본값 Sunburst 로 복원, 명시 선택한 Flare 는 그대로
+    expect(src).toMatch(/validModels\.includes\(restoredModel\) \? restoredModel : 'gpt-image-2\.5-sunburst'/);
+    expect(src).toMatch(/\|\| localStorage\.getItem\('openaiImageModel'\) \|\| 'gpt-image-2\.5-sunburst'/);
+    expect(src).not.toMatch(/savedModel === 'gpt-image-2'/);
+    // 서브모달 select 의 첫 option(저장값이 없을 때 보이는 값)이 기본값 Sunburst 다
+    expect(src.indexOf(`<option value="${SUNBURST}">`)).toBeLessThan(src.indexOf(`<option value="${FLARE}">`));
   });
 
-  it('이미지 생성 스튜디오·엔진 목록은 2.5 기준 표기이고 대표 모델이 Flare 다', () => {
+  it('이미지 생성 스튜디오·엔진 목록은 2.5 기준 표기이고 대표 모델이 Sunburst 다', () => {
     const studio = read('../renderer/modules/imageGenStudioCore.ts');
     expect(studio).not.toMatch(/gpt-image-2 \/ 2\.5/);
     expect(studio).toContain('gpt-image-2.5 Flare / Sunburst');
-    expect(DUCK_TAPE.model).toBe(FLARE);
+    expect(DUCK_TAPE.model).toBe(SUNBURST);
   });
 
-  it('이미지 관리 탭 모델 목록·폴백이 Flare 기준이다', () => {
+  it('이미지 관리 탭 모델 목록·폴백이 Sunburst 기준이다', () => {
     const src = read('../renderer/modules/imageManagementTab.ts');
     expect(src).toContain(`const OPENAI_MODEL_VALUES = ['${FLARE}', '${SUNBURST}'];`);
     expect(src).not.toMatch(/'gpt-image-1\.5'/);
+    expect(src).toContain("getOpenAISel('openai-image-model', 'gpt-image-2.5-sunburst')");
+    expect(src).not.toContain("getOpenAISel('openai-image-model', 'gpt-image-2.5-flare')");
     expect(src).not.toMatch(/data-v25-only|v25Only/);
   });
 });
 
-describe('설정 정규화 — 옛 gpt-image-2 는 Sunburst, 나머지 옛 값·이상값은 Flare', () => {
-  it.each(['gpt-image-1.5', 'gpt-image-1', '', '   ', 'dall-e-3', 'whatever'])(
-    '%j → Flare',
-    (v) => expect(normalizeOpenaiImageModel(v)).toBe(FLARE),
+describe('설정 정규화 — 명시 선택은 그대로, 옛 1 / 1.5 / 2·빈 값·이상값은 기본값 Sunburst', () => {
+  it.each(['gpt-image-1.5', 'gpt-image-1', 'gpt-image-2', '', '   ', 'dall-e-3', 'whatever'])(
+    '%j → Sunburst',
+    (v) => expect(normalizeOpenaiImageModel(v)).toBe(SUNBURST),
   );
 
-  it('옛 고품질 gpt-image-2 는 품질형 Sunburst 로 이관 (공백 포함, 멱등)', () => {
+  it('옛 gpt-image-2 도 Sunburst (공백 포함, 멱등)', () => {
     expect(normalizeOpenaiImageModel('gpt-image-2')).toBe(SUNBURST);
     expect(normalizeOpenaiImageModel(' gpt-image-2 ')).toBe(SUNBURST);
     expect(normalizeOpenaiImageModel(normalizeOpenaiImageModel('gpt-image-2'))).toBe(SUNBURST);
   });
 
-  it.each([undefined, null, 0, {}, []])('문자열이 아닌 값 %j → Flare', (v) => {
-    expect(normalizeOpenaiImageModel(v)).toBe(FLARE);
+  it.each([undefined, null, 0, {}, []])('문자열이 아닌 값 %j → Sunburst', (v) => {
+    expect(normalizeOpenaiImageModel(v)).toBe(SUNBURST);
   });
 
-  it('Flare·Sunburst 는 그대로 (앞뒤 공백만 정리)', () => {
+  it('사용자가 명시적으로 고른 Flare·Sunburst 는 그대로 (앞뒤 공백만 정리)', () => {
+    expect(normalizeOpenaiImageModel(` ${FLARE} `)).toBe(FLARE);
     expect(normalizeOpenaiImageModel(FLARE)).toBe(FLARE);
     expect(normalizeOpenaiImageModel(SUNBURST)).toBe(SUNBURST);
     expect(normalizeOpenaiImageModel(` ${SUNBURST} `)).toBe(SUNBURST);
   });
 
   it('기본값과 선택지가 정책대로다', () => {
-    expect(DEFAULT_OPENAI_IMAGE_MODEL).toBe(FLARE);
+    expect(DEFAULT_OPENAI_IMAGE_MODEL).toBe(SUNBURST);
     expect([...OPENAI_IMAGE_MODEL_CHOICES]).toEqual([FLARE, SUNBURST]);
   });
 
@@ -114,7 +119,7 @@ describe('설정 정규화 — 옛 gpt-image-2 는 Sunburst, 나머지 옛 값·
     expect(src).not.toMatch(/: 'gpt-image-1\.5',/);
   });
 
-  it('openaiImageGenerator 기본 모델이 Flare 이고 지정값은 정규화를 탄다', () => {
+  it('openaiImageGenerator 기본 모델이 Sunburst 이고 지정값은 정규화를 탄다', () => {
     const src = read('../image/openaiImageGenerator.ts');
     expect(src).not.toMatch(/DEFAULT_OPENAI_IMAGE_MODEL\s*=\s*'gpt-image-1\.5'/);
     expect(src).toMatch(/normalizeOpenaiImageModel\(overrideModel \|\| config\.openaiImageModel\)/);
@@ -123,10 +128,16 @@ describe('설정 정규화 — 옛 gpt-image-2 는 Sunburst, 나머지 옛 값·
 });
 
 describe('localStorage 이관 — 멱등', () => {
-  it.each(['gpt-image-1.5', 'gpt-image-1'])('%s → Flare 로 바뀐다', (old) => {
+  it.each(['gpt-image-1.5', 'gpt-image-1'])('%s → Sunburst 로 바뀐다', (old) => {
     const store = makeStore({ openaiImageModel: old });
     expect(migrateOpenaiImageTwoModels(store)).toBe(1);
-    expect(store.data.openaiImageModel).toBe(FLARE);
+    expect(store.data.openaiImageModel).toBe(SUNBURST);
+  });
+
+  it('사용자가 명시적으로 고른 Flare 는 건드리지 않는다', () => {
+    const picked = makeStore({ openaiImageModel: FLARE });
+    expect(migrateOpenaiImageTwoModels(picked)).toBe(0);
+    expect(picked.data.openaiImageModel).toBe(FLARE);
   });
 
   it('gpt-image-2 → Sunburst 로 바뀌고 품질 값은 그대로다', () => {
@@ -158,8 +169,8 @@ describe('localStorage 이관 — 멱등', () => {
   });
 });
 
-describe('쇼핑 강제 모델 — Flare', () => {
-  it('별칭 provider(gpt-image-2)는 Flare 로 승계되어 통과한다', () => {
+describe('쇼핑 강제 모델 — 기본값 Sunburst', () => {
+  it('별칭 provider(gpt-image-2)는 Sunburst 로 승계되어 통과한다', () => {
     expect(isShoppingReferenceGenerationSelectionSupported('gpt-image-2')).toBe(true);
   });
 
@@ -170,15 +181,17 @@ describe('쇼핑 강제 모델 — Flare', () => {
     expect(isShoppingReferenceGenerationSelectionSupported('openai-image', SUNBURST)).toBe(true);
   });
 
-  it('pipelineConfig 가 덕트테이프 별칭에 강제하는 모델은 Flare 다', () => {
+  it('pipelineConfig 가 덕트테이프 별칭에 강제하는 모델은 기본값 Sunburst 다', () => {
     const src = read('../renderer/modules/pipelineConfig.ts');
     expect(src).not.toMatch(/\? 'gpt-image-2'\s*[:\r\n]/);
-    expect(src.match(/\? 'gpt-image-2\.5-flare'/g)?.length).toBe(2);
+    expect(src.match(/\? 'gpt-image-2\.5-sunburst'/g)?.length).toBe(2);
+    // [2026-10-10] 쇼핑에서 덕트테이프를 골라도 모델을 강제하지 않는다(사용자가 고른 Flare 를 Sunburst 로 덮지 않음).
+    expect(src).not.toContain('shoppingUiSelectsDucttape');
   });
 });
 
-describe('단가표 — 모르는 모델은 Flare 단가', () => {
-  it('옛 모델·이상값도 Flare 단가로 계산한다', () => {
+describe('단가표 — 모르는 모델은 기본 모델(Sunburst) 단가', () => {
+  it('옛 모델·이상값도 기본 모델 단가로 계산한다', () => {
     const flare = getOpenAIImageCostKRW(FLARE, 'medium', 1400);
     expect(flare).toBe(Math.round(0.0132 * 1400));
     for (const m of ['gpt-image-1.5', 'gpt-image-2', 'gpt-image-1', '', 'unknown']) {
@@ -190,11 +203,11 @@ describe('단가표 — 모르는 모델은 Flare 단가', () => {
     expect(getOpenAIImageCostKRW(SUNBURST, 'max', 1400)).toBe(Math.round(0.2107 * 1400));
   });
 
-  it('스튜디오·카탈로그 덕트테이프 단가 = imageCostUtils Flare medium 단가 (옛 ₩280 고정 금지)', () => {
-    const flareMedium = getOpenAIImageCostKRW(FLARE, 'medium');
-    expect(flareMedium).toBe(18);
-    expect(DUCK_TAPE.costKrw).toBe(flareMedium);
-    expect(studioEngineCostKrw('openai-image')).toBe(flareMedium);
+  it('스튜디오·카탈로그 덕트테이프 단가 = imageCostUtils 기본 모델(Sunburst) medium 단가 (옛 ₩280 고정 금지)', () => {
+    const defaultMedium = getOpenAIImageCostKRW(SUNBURST, 'medium');
+    expect(defaultMedium).toBe(18);
+    expect(DUCK_TAPE.costKrw).toBe(defaultMedium);
+    expect(studioEngineCostKrw('openai-image')).toBe(defaultMedium);
     expect(read('../renderer/modules/imageGenStudioCore.ts')).not.toMatch(/고가/);
   });
 });

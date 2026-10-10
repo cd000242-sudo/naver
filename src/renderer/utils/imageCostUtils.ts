@@ -67,7 +67,7 @@ export function getOpenAIImageQualities(model: string): string[] {
 
 /** OpenAI 이미지 한 장당 예상 비용(원). 모델/품질 미지정 시 저비용 기본으로 폴백. */
 export function getOpenAIImageCostKRW(model: string, quality: string, usdToKrwRate: number = 1400): number {
-    const tier = OPENAI_IMAGE_PRICE_USD[model] || OPENAI_IMAGE_PRICE_USD['gpt-image-2.5-flare'];
+    const tier = OPENAI_IMAGE_PRICE_USD[model] || OPENAI_IMAGE_PRICE_USD['gpt-image-2.5-sunburst'];
     // xhigh/max 는 2.5 전용 — 구 모델에 들어오면 high 로 취급 (생성기와 동일 규칙)
     const usd = tier[quality] ?? (quality === 'xhigh' || quality === 'max' ? tier.high : tier.medium);
     const rate = (typeof usdToKrwRate === 'number' && usdToKrwRate > 0) ? usdToKrwRate : 1400;
@@ -75,7 +75,7 @@ export function getOpenAIImageCostKRW(model: string, quality: string, usdToKrwRa
 }
 
 /**
- * "한 장당 약 ₩18원 (gpt-image-2.5-flare / Medium)" 형태의 표시 문자열.
+ * "한 장당 약 ₩18원 (gpt-image-2.5-sunburst / Medium)" 형태의 표시 문자열.
  * imageCount > 1이면 "× N장 = ₩XXX" 총액을 덧붙인다.
  */
 export function formatOpenAIImageCostLabel(

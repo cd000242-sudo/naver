@@ -424,7 +424,7 @@ function resolveImageProviderFallback() {
     const rawGlobal = _rawPipeline.globalImageSource;
     return (rawFullAuto && !INVALID_PROVIDERS.includes(rawFullAuto) ? rawFullAuto : null) ||
         (rawGlobal && !INVALID_PROVIDERS.includes(rawGlobal) ? rawGlobal : null) ||
-        'nano-banana-2';
+        'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
 }
 async function generateImagesForAutomation(provider, headings, postTitle, options = {}) {
     const flightKey = [
@@ -1669,7 +1669,7 @@ async function initMultiAccountPublishModal() {
             keywordInput.value = '';
         if (imageSourceSelect) {
             const currentUiSource = UnifiedDOMCache.getImageSource();
-            imageSourceSelect.value = currentUiSource || 'nano-banana-2';
+            imageSourceSelect.value = currentUiSource || 'openai-image';
         }
         if (toneSelect)
             toneSelect.value = 'friendly';

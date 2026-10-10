@@ -84,8 +84,13 @@
             <!-- 우측 플로팅 버튼들 (스크롤 따라다님) -->
             <div id="right-floating-buttons"
                 style="position: fixed; top: 16px; right: 20px; z-index: 999; display: flex; flex-direction: column; gap: 0.6rem; transition: all 0.3s ease; max-height: calc(100vh - 32px); overflow-y: auto; overscroll-behavior: contain; padding-right: 6px;">
+                <!-- [2026-10-10] 이미지 바로가기: floating-scroll.js 가 body 로 옮겨 오른쪽 아래에 고정한다 -->
+                <button type="button" id="image-shortcut-btn" aria-controls="tab-images"
+                    aria-label="이미지 생성·관리 탭으로 이동" title="이미지 생성·관리 탭으로 이동">
+                    <span aria-hidden="true">🖼️</span><span>이미지 바로가기</span>
+                </button>
                 <button type="button" id="publish-shortcut-btn" aria-controls="unified-only-publish-settings"
-                    title="글 발행하기의 발행 설정과 버튼으로 이동">
+                    aria-label="글 발행하기의 발행 설정과 버튼으로 이동" title="글 발행하기의 발행 설정과 버튼으로 이동">
                     <span aria-hidden="true">↗</span><span>발행 바로가기</span>
                 </button>
                 <!-- 라이선스 기간 배지 -->
@@ -3856,7 +3861,7 @@
         </div><!-- 이미지 도구 탭 끝 -->
 
         <!-- 이미지 관리 탭 -->
-        <div id="tab-images" class="tab-panel" role="tabpanel">
+        <div id="tab-images" class="tab-panel" role="tabpanel" tabindex="-1" aria-label="이미지 생성·관리">
             <section class="form-section">
                 <h2
                     style="display: flex; align-items: center; gap: 1rem; background: linear-gradient(135deg, #8b5cf6, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 2rem;">
@@ -4053,8 +4058,8 @@
                             <option value="nano-banana-2" data-icon="🍌" data-price="Gemini 3.1 Flash Image | ₩97/장 | 한글 가능">🍌 나노바나나2 (Gemini 3.1 Flash, ₩97/장, 한글 가능) ★추천</option>
                             <option value="deepinfra" data-icon="⚡" data-price="$0.01/장 | FLUX-2">⚡ DeepInfra (FLUX-2,
                                 $0.01/장)</option>
-                            <option value="openai-image" data-icon="🦆" data-price="gpt-image-2.5 Flare(기본)/Sunburst | $0.006~$0.21 | 한글 최강">🦆 덕트테이프
-                                (gpt-image-2.5 Flare/Sunburst 선택 가능, 다국어 최강 | Org 인증 필요할 수 있음)</option>
+                            <option value="openai-image" data-icon="🦆" data-price="gpt-image-2.5 Sunburst(기본)/Flare | $0.006~$0.21 | 한글 최강" selected>🦆 덕트테이프
+                                (gpt-image-2.5 Sunburst/Flare 선택 가능, 다국어 최강 | Org 인증 필요할 수 있음)</option>
                             <!-- v2.10.295: DALL-E 3 옵션 완전 삭제 — OpenAI 2026-05-12 폐기 + 사용자 요청 -->
 
                             <option value="leonardoai" data-icon="🦁" data-price="Phoenix 1.0 | $0.01~$0.02">🦁 Leonardo
@@ -4063,7 +4068,7 @@
                             <option value="flow" data-icon="🍌" data-price="Google Flow | UI 자동화 · 로그인 필요">🍌 Flow (Google Labs, 로그인 필요)</option>
                             <option value="prodia" data-icon="⚡" data-price="Prodia API | $0.0025~$0.01/장">⚡ Prodia (API 키 필요)</option>
                             <!-- ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 (UI 자동화 · 로그인 필요) -->
-                            <option value="dropshot" data-icon="🍌" data-price="Pro 구독자 무제한 · 추가비용 0원 | UI 자동화 · 로그인 필요" selected>🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)</option>
+                            <option value="dropshot" data-icon="🍌" data-price="Pro 구독자 무제한 · 추가비용 0원 | UI 자동화 · 로그인 필요">🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)</option>
                         </select>
 
                         <!-- 선택된 소스 정보 배지 -->
@@ -4158,12 +4163,12 @@
                         <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">🦆 OpenAI 이미지 모델</label>
                         <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.85rem;">
                             <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
-                                <input type="radio" name="openai-image-model" value="gpt-image-2.5-flare" checked style="accent-color: #8b5cf6;">
-                                gpt-image-2.5 Flare (속도형 · 기본 · 5단계 품질)
+                                <input type="radio" name="openai-image-model" value="gpt-image-2.5-flare" style="accent-color: #8b5cf6;">
+                                gpt-image-2.5 Flare (속도형 · 5단계 품질)
                             </label>
                             <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-strong);">
-                                <input type="radio" name="openai-image-model" value="gpt-image-2.5-sunburst" style="accent-color: #8b5cf6;">
-                                gpt-image-2.5 Sunburst (품질형 · 5단계 품질)
+                                <input type="radio" name="openai-image-model" value="gpt-image-2.5-sunburst" checked style="accent-color: #8b5cf6;">
+                                gpt-image-2.5 Sunburst (품질형 · 기본 · 5단계 품질)
                             </label>
                         </div>
                         <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem;">🎚️ 이미지 품질</label>
@@ -4191,9 +4196,9 @@
                         </div>
                         <div id="openai-image-cost-display"
                             style="font-size: 0.8rem; font-weight: 700; color: #7c3aed; padding: 0.5rem 0.7rem; background: rgba(139, 92, 246, 0.1); border-radius: 6px;">
-                            한 장당 약 ₩18원 (gpt-image-2.5-flare / Medium)
+                            한 장당 약 ₩18원 (gpt-image-2.5-sunburst / Medium)
                         </div>
-                        <p id="openai-image-quality-hint" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem;">💡 Flare + Medium이 가성비 기본값입니다. Sunburst는 품질형이고, XHigh/Max는 단가가 크게 올라갑니다.</p>
+                        <p id="openai-image-quality-hint" style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem;">💡 Sunburst + Medium이 기본값입니다. Flare는 속도형이고, XHigh/Max는 단가가 크게 올라갑니다.</p>
                     </div>
 
                     <!-- 안내 문구 -->

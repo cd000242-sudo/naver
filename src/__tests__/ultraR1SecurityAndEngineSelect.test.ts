@@ -62,8 +62,10 @@ describe('R1-2: 이미지 엔진 select 무시 → 최고가 대체 과금 차�
     expect(explicitFailures?.length).toBe(2);
   });
 
-  it('UI 기본 선택값이 여전히 dropshot이다 (분기 대상 확인)', () => {
+  it('UI 기본 선택값은 덕트테이프(openai-image)이고 dropshot 은 선택지로 남아 있다 (분기 대상 확인)', () => {
     const html = readFileSync(new URL('../../public/index.html', import.meta.url), 'utf8');
-    expect(html).toMatch(/<option value="dropshot"[^>]*selected>/);
+    // [2026-10-10] 기본 선택값을 dropshot → openai-image 로 옮겼다. dropshot 분기는 저장값으로 고른 사용자용으로 유지.
+    expect(html).toMatch(/<option value="openai-image"[^>]*selected>/);
+    expect(html).toMatch(/<option value="dropshot"/);
   });
 });

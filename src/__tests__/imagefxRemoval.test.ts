@@ -16,7 +16,9 @@ describe('image engine selection surface', () => {
     expect(html).not.toMatch(/<option value="imagefx"/);
     expect(html).toMatch(/<option value="flow"/);
     expect(html).toMatch(/<option value="prodia"/);
-    expect(html).toMatch(/<option value="dropshot"[^>]*selected/);
+    // [2026-10-10] 기본 선택값 = 덕트테이프(openai-image)
+    expect(html).toMatch(/<option value="openai-image"[^>]*selected/);
+    expect(html).not.toMatch(/<option value="dropshot"[^>]*selected/);
   });
 
   it('keeps ImageFX hidden while restoring Flow and Prodia in heading image settings', () => {

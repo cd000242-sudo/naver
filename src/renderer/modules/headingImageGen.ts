@@ -908,7 +908,7 @@ export function initHeadingImageGeneration(): void {
       const selectedSource = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
       // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
       const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
-      const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-2';
+      const imageSource = dropdownSource || selectedSource?.dataset.source || 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
       console.log(`[ImageGeneration] 이미지 소스: ${imageSource} (드롭다운: ${dropdownSource || '없음'}, 버튼: ${selectedSource?.dataset.source || '없음'})`);
 
       try {
@@ -1384,7 +1384,7 @@ export function initHeadingImageGeneration(): void {
                 const _m = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
                 _modelLabel = ` | 📦 모델: ${_m}`;
               } else if (imageSource === 'openai-image') {
-                { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${_oiRaw === 'gpt-image-2.5-sunburst' || _oiRaw === 'gpt-image-2' ? 'gpt-image-2.5-sunburst' : 'gpt-image-2.5-flare'}`; } // [2026-10-10] 실제 선택 모델 표시(옛 gpt-image-2 는 Sunburst)
+                { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${_oiRaw === 'gpt-image-2.5-flare' ? 'gpt-image-2.5-flare' : 'gpt-image-2.5-sunburst'}`; } // [2026-10-10] 실제 선택 모델 표시(명시 Flare 외에는 기본 Sunburst)
               }
               appendLog(`  🖥️ 엔진: ${_srcLabel}${_modelLabel} | 🎨 스타일: ${_styleNames[_style] || _style} | 📐 ${_ratio}`, 'images-log-output');
               liveImagePreview.addLog(`🖥️ ${_srcLabel}${_modelLabel} | 🎨 ${_styleNames[_style] || _style} | 📐 ${_ratio}`);
@@ -1854,7 +1854,7 @@ export function initHeadingImageGeneration(): void {
       const selectedSource = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
       // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
       const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
-      const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-2';
+      const imageSource = dropdownSource || selectedSource?.dataset.source || 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
       console.log(`[ImageGeneration] 남은 이미지 소스: ${imageSource}`);
 
       try {
@@ -1899,7 +1899,7 @@ export function initHeadingImageGeneration(): void {
               const _m = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
               _modelLabel = ` | 📦 모델: ${_m}`;
             } else if (imageSource === 'openai-image') {
-              { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${_oiRaw === 'gpt-image-2.5-sunburst' || _oiRaw === 'gpt-image-2' ? 'gpt-image-2.5-sunburst' : 'gpt-image-2.5-flare'}`; } // [2026-10-10] 실제 선택 모델 표시(옛 gpt-image-2 는 Sunburst)
+              { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${_oiRaw === 'gpt-image-2.5-flare' ? 'gpt-image-2.5-flare' : 'gpt-image-2.5-sunburst'}`; } // [2026-10-10] 실제 선택 모델 표시(명시 Flare 외에는 기본 Sunburst)
             }
             appendLog(`  🖥️ 엔진: ${_srcLabel}${_modelLabel} | 🎨 스타일: ${_styleNames[_style] || _style} | 📐 ${_ratio}`, 'images-log-output');
 
@@ -5176,7 +5176,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
     // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
     const selectedSource = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
     const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
-    const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-2';
+    const imageSource = dropdownSource || selectedSource?.dataset.source || 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
     console.log(`[ImageGeneration] 개별 이미지 소스: ${imageSource}`);
 
     // ✅ 블로그 제목 가져오기 (썸네일용)

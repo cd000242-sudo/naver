@@ -54,11 +54,13 @@ describe('v1.4.81 — 비용표·환경설정 현대화', () => {
   });
 
   describe('이미지 소스 드롭다운 (image-source-select)', () => {
-    it('ImageFX는 숨기고 Flow/Prodia는 복구하며 dropshot 기본값은 유지한다', () => {
+    it('ImageFX는 숨기고 Flow/Prodia는 복구하며 기본 선택값은 덕트테이프(openai-image)다', () => {
       expect(html).not.toMatch(/<option value="imagefx"/);
       expect(html).toMatch(/<option value="flow"/);
       expect(html).toMatch(/<option value="prodia"/);
-      expect(html).toMatch(/<option value="dropshot"[^>]*selected/);
+      // [2026-10-10] 시니어 배려로 기본 선택값을 dropshot → openai-image(덕트테이프)로 옮겼다
+      expect(html).toMatch(/<option value="openai-image"[^>]*selected/);
+      expect(html).not.toMatch(/<option value="dropshot"[^>]*selected/);
     });
 
     it('Nano Banana Pro 옵션 존재', () => {

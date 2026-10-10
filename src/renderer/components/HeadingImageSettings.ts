@@ -287,7 +287,7 @@ export function getHeadingImageModeDisplayText(): string {
 
 let currentHeadingImageMode: HeadingImageMode = 'all';
 // ✅ [v2.10.335] 기본값 nano-banana-2 (적정가·한글 가능 추천) — 신규 사용자 고가 프로 기본화 방지
-let currentGlobalImageSource: GlobalImageSource = 'nano-banana-2';
+let currentGlobalImageSource: GlobalImageSource = 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프(시니어 배려)
 let currentImageStyle: ImageStyleType = 'realistic'; // ✅ 기본값: 실사
 let currentImageRatio: ImageAspectRatio = '1:1'; // ✅ 기본값: 정사각형
 
@@ -400,8 +400,8 @@ export function getFullAutoImageSource(): GlobalImageSource {
     try { localStorage.removeItem('globalImageSource'); } catch (_) { /* ignore */ }
   }
 
-  // ✅ [v2.10.335] 최종 폴백 nano-banana-2 — 구 통합 기본값과 동일 모델(gemini-3.1-flash)
-  return 'nano-banana-2';
+  // [2026-10-10] 저장값이 전혀 없을 때의 기본 = 덕트테이프. 저장된 값은 위에서 먼저 반환되므로 건드리지 않는다.
+  return 'openai-image';
 }
 
 export function setFullAutoImageSource(source: GlobalImageSource): void {
@@ -2417,8 +2417,8 @@ export function createHeadingImageModal(): void {
           <div style="background: rgba(124, 58, 237, 0.1); padding: 14px; border-radius: 12px; border: 1px solid rgba(124, 58, 237, 0.3);">
             <label style="display: block; font-weight: 600; color: #a78bfa; margin-bottom: 8px; font-size: 13px;">🦆 OpenAI Image</label>
             <select id="submodal-openai-image-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
+              <option value="gpt-image-2.5-sunburst">☀️ gpt-image-2.5 Sunburst (기본 · 품질형 · 5단계 품질)</option>
               <option value="gpt-image-2.5-flare">🔥 gpt-image-2.5 Flare (신모델 · 속도형 · 5단계 품질)</option>
-              <option value="gpt-image-2.5-sunburst">☀️ gpt-image-2.5 Sunburst (신모델 · 품질형 · 5단계 품질)</option>
             </select>
             <select id="submodal-openai-image-quality" style="width: 100%; padding: 10px; margin-top: 8px; background: #1a1a2e; border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
               <option value="low">low (저비용)</option>
@@ -2497,14 +2497,14 @@ export function createHeadingImageModal(): void {
     if (nanoSubSelect) nanoSubSelect.value = migratedSub;
     if (deepinfraSelect) deepinfraSelect.value = localStorage.getItem('deepinfraModel') || 'flux-2-dev';
     if (leonardoaiSelect) leonardoaiSelect.value = localStorage.getItem('leonardoaiModel') || 'seedream-4.5';
-    // [2026-05-27] OpenAI Image 모델/품질 복원 (config.json 우선, localStorage 폴백, 둘 다 없으면 Flare/medium)
+    // [2026-05-27] OpenAI Image 모델/품질 복원 (config.json 우선, localStorage 폴백, 둘 다 없으면 Sunburst/medium)
     if (openaiImageModelSelect) {
       const cfg = await safeIpcInvoke<any>('config:get');
-      const savedModel = (cfg?.openaiImageModel as string) || localStorage.getItem('openaiImageModel') || 'gpt-image-2.5-flare';
-      // [2026-10-10] 옛 gpt-image-2 는 Sunburst(품질형), 그 밖의 목록 밖 값(옛 1/1.5 포함)은 Flare 로 복원
+      const savedModel = (cfg?.openaiImageModel as string) || localStorage.getItem('openaiImageModel') || 'gpt-image-2.5-sunburst';
+      // [2026-10-10] 명시 선택한 Flare·Sunburst 는 그대로, 옛 1/1.5/2 와 목록 밖 값은 기본값 Sunburst 로 복원
       const validModels = ['gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'];
-      const restoredModel = savedModel === 'gpt-image-2' ? 'gpt-image-2.5-sunburst' : savedModel;
-      openaiImageModelSelect.value = validModels.includes(restoredModel) ? restoredModel : 'gpt-image-2.5-flare';
+      const restoredModel = savedModel;
+      openaiImageModelSelect.value = validModels.includes(restoredModel) ? restoredModel : 'gpt-image-2.5-sunburst';
       const savedQuality = (cfg?.openaiImageQuality as string) || localStorage.getItem('openaiImageQuality') || 'medium';
       if (openaiImageQualitySelect) {
         openaiImageQualitySelect.value = ['low', 'medium', 'high', 'xhigh', 'max'].includes(savedQuality) ? savedQuality : 'medium';
@@ -3065,7 +3065,10 @@ export function initHeadingImageButton(): void {
       bottom: 130px;
       right: 24px;
       z-index: 9998;
-      padding: 14px 24px;
+      box-sizing: border-box;
+      height: 56px;
+      line-height: 50px; /* [2026-10-10] 높이 고정(56px) — 바로가기 두 개가 이 버튼 위에 정확히 쌓이도록 */
+      padding: 0 24px;
       background: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #D4AF37 100%);
       background-size: 200% auto;
       color: #0d0d0d;

@@ -179,7 +179,8 @@ const SHOPPING_AI_ENGINE_NAMES = new Set([
   'dropshot',
 ]);
 
-const DEFAULT_SHOPPING_REFERENCE_ENGINE = 'nano-banana-2';
+// [2026-10-10] 저장값 없음 기본 = 덕트테이프(참조 이미지 지원 확인: shoppingReferenceGeneration 허용 목록)
+const DEFAULT_SHOPPING_REFERENCE_ENGINE = 'openai-image';
 
 const SHOPPING_ENGINE_ALIASES: Readonly<Record<string, string>> = {
   'gpt-image-2': 'openai-image',
@@ -330,14 +331,11 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
   const resolvedImageSource = currentFullAutoImageSource
     || raw.fullAutoImageSource
     || raw.globalImageSource
-    || 'nano-banana-2';
+    || 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
   const fullAutoShoppingEngine = flow === 'full-auto'
     ? currentFullAutoImageSource
     : '';
-  const shoppingUiSelectsDucttape = currentShoppingSelection?.subImageMode === 'ai'
-    && (flow === 'full-auto'
-      ? fullAutoShoppingEngine === 'openai-image'
-      : currentShoppingSelection.aiImageEngine === 'openai-image');
+  // [2026-10-10] 쇼핑 화면이 덕트테이프를 골라도 모델을 강제하지 않는다 — 2.5 두 모델 모두 참조 이미지를 지원한다.
   const storedSelectionUsesDucttapeAlias = [
     raw.fullAutoImageSource,
     raw.globalImageSource,
@@ -358,7 +356,7 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       textOnlyPublish: pipelineReadBool('textOnlyPublish'),
       imageSource: resolvedImageSource,
       imageModel: currentFullAutoImageModel
-        || (storedSelectionUsesDucttapeAlias ? 'gpt-image-2.5-flare' : '')
+        || (storedSelectionUsesDucttapeAlias ? 'gpt-image-2.5-sunburst' : '')
         || raw.openaiImageModel
         || '',
       imageStyle: pipelineReadString('imageStyle', 'realistic'),
@@ -373,13 +371,17 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
     shopping: {
       subImageMode: normalizeShoppingSubImageMode(raw, currentShoppingSelection?.subImageMode || null),
       aiImageEngine: resolvedShoppingEngine,
+      // [2026-10-10] 쇼핑에서 덕트테이프를 골라도 사용자가 고른 2.5 모델(Flare/Sunburst)을 따른다.
+      //   옛 별칭(gpt-image-2)만 Sunburst 로 잇고, 고른 값이 없거나 옛 모델이면 기본값 Sunburst.
       aiImageModel: resolvedShoppingEngine === 'openai-image'
         ? (currentFullAutoImageModel
-          || (shoppingUiSelectsDucttape || storedShoppingSelectionUsesDucttapeAlias || storedSelectionUsesDucttapeAlias
-            ? 'gpt-image-2.5-flare'
+          || (storedShoppingSelectionUsesDucttapeAlias || storedSelectionUsesDucttapeAlias
+            ? 'gpt-image-2.5-sunburst'
             : '')
-          || raw.openaiImageModel
-          || '')
+          || (raw.openaiImageModel === 'gpt-image-2.5-flare' || raw.openaiImageModel === 'gpt-image-2.5-sunburst'
+            ? raw.openaiImageModel
+            : '')
+          || 'gpt-image-2.5-sunburst')
         : '',
       autoThumbnail: raw.scAutoThumbnailSetting === 'true',
     },

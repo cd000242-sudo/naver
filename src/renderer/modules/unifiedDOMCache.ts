@@ -246,21 +246,21 @@ const UnifiedDOMCache = {
     // 3순위: 선택된 버튼 확인
     const selectedBtn = document.querySelector('.unified-img-source-btn.selected');
     if (selectedBtn) {
-      const btnSource = selectedBtn.getAttribute('data-source') || 'nano-banana-2';
+      const btnSource = selectedBtn.getAttribute('data-source') || 'openai-image'; // [2026-10-10] 값이 비었을 때 기본 = 덕트테이프
       console.log(`[UnifiedDOMCache] 🎨 DOM 버튼 선택됨, data-source = "${btnSource}"`);
       return btnSource;
     }
 
     // 4순위: 드롭다운(select) 확인
     if (this.unifiedImageSource) {
-      const selectVal = this.unifiedImageSource.value || 'nano-banana-2';
+      const selectVal = this.unifiedImageSource.value || 'openai-image'; // [2026-10-10] 값이 비었을 때 기본 = 덕트테이프
       console.log(`[UnifiedDOMCache] 🎨 드롭다운 값 = "${selectVal}"`);
       return selectVal;
     }
 
     // 5순위: 최후의 보루 (DOM 직접 확인)
     const fallbackSelect = document.getElementById('unified-image-source') as HTMLSelectElement;
-    const finalVal = fallbackSelect?.value || 'nano-banana-2';
+    const finalVal = fallbackSelect?.value || 'openai-image'; // [2026-10-10] 값이 비었을 때 기본 = 덕트테이프
     console.log(`[UnifiedDOMCache] ⚠️ 최후의 보루: fallback = "${finalVal}"`);
     return finalVal;
   },

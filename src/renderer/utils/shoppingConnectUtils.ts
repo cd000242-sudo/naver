@@ -256,7 +256,7 @@ export function getShoppingConnectAIEngine(): ShoppingConnectAIEngine {
             globalImageSource: localStorage.getItem('globalImageSource'),
         }) as ShoppingConnectAIEngine;
     } catch { /* noop */ }
-    return 'nano-banana-2';
+    return 'openai-image'; // [2026-10-10] 저장값 없음 기본 = 덕트테이프
 }
 
 export function setShoppingConnectAIEngine(engine: ShoppingConnectAIEngine, syncFullAuto: boolean = true): void {

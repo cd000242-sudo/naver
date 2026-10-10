@@ -41,7 +41,7 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
       headingImageMode: 'all',
       thumbnailTextInclude: false,
       textOnlyPublish: false,
-      imageSource: 'nano-banana-2',
+      imageSource: 'openai-image', // [2026-10-10] 저장값 없음 기본 = 덕트테이프
       imageModel: '',
       imageStyle: 'realistic',
       imageRatio: '1:1',
@@ -55,8 +55,8 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     });
     expect(cfg.shopping).toEqual({
       subImageMode: 'collected',
-      aiImageEngine: 'nano-banana-2',
-      aiImageModel: '',
+      aiImageEngine: 'openai-image',
+      aiImageModel: 'gpt-image-2.5-sunburst', // 기본 엔진이 덕트테이프라 모델도 기본값으로 채워 실행 가능하게 한다
       autoThumbnail: false,
     });
     expect(cfg.disclosure).toEqual({
@@ -125,7 +125,7 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     expect(config.shopping.aiImageEngine).toBe('dropshot');
   });
 
-  it('maps the continuous shopping Ducttape choice to gpt-image-2.5-flare exactly', () => {
+  it('maps the continuous shopping Ducttape choice to gpt-image-2.5-sunburst exactly', () => {
     (globalThis as any).document = {
       querySelector: (selector: string) => selector === 'input[name="continuous-modal-shopping-subimage-source"]:checked'
         ? { value: 'openai-image' }
@@ -134,14 +134,15 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
 
     const config = resolvePipelineConfig('continuous');
     expect(config.shopping.aiImageEngine).toBe('openai-image');
-    expect(config.shopping.aiImageModel).toBe('gpt-image-2.5-flare');
+    expect(config.shopping.aiImageModel).toBe('gpt-image-2.5-sunburst');
     expect(config.image.imageModel).toBe('');
   });
 
-  it('pins a full-auto shopping Ducttape route to gpt-image-2.5-flare when no live model was selected', () => {
+  // [2026-10-10] 쇼핑 덕트테이프는 사용자가 고른 2.5 모델을 따른다(두 모델 모두 참조 이미지 지원) — 고른 값이 없으면 기본 Sunburst.
+  it('uses the explicitly chosen 2.5 model on a full-auto shopping Ducttape route', () => {
     (globalThis as any).localStorage = makeStorage({
       scSubImageMode: 'ai',
-      openaiImageModel: 'gpt-image-2.5-sunburst',
+      openaiImageModel: 'gpt-image-2.5-flare',
     });
     (globalThis as any).document = {
       querySelector: (selector: string) => selector === 'input[name="sc-subimage-mode-inline-radio"]:checked'
@@ -155,7 +156,22 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     const config = resolvePipelineConfig('full-auto');
     expect(config.shopping.aiImageEngine).toBe('openai-image');
     expect(config.shopping.aiImageModel).toBe('gpt-image-2.5-flare');
-    expect(config.image.imageModel).toBe('gpt-image-2.5-sunburst');
+    expect(config.image.imageModel).toBe('gpt-image-2.5-flare');
+  });
+
+  it('falls back to the default Sunburst on a shopping Ducttape route when no 2.5 model was chosen', () => {
+    for (const saved of [undefined, 'gpt-image-1.5']) {
+      (globalThis as any).localStorage = makeStorage({ scSubImageMode: 'ai', ...(saved ? { openaiImageModel: saved } : {}) });
+      (globalThis as any).document = {
+        querySelector: (selector: string) => selector === 'input[name="sc-subimage-mode-inline-radio"]:checked'
+          ? { value: 'ai' }
+          : null,
+        getElementById: (id: string) => id === 'image-source-select'
+          ? { value: 'openai-image' }
+          : null,
+      };
+      expect(resolvePipelineConfig('full-auto').shopping.aiImageModel).toBe('gpt-image-2.5-sunburst');
+    }
   });
 
   it('preserves an explicitly selected unsupported OpenAI model for the final shopping guard', () => {
@@ -204,22 +220,22 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
 
     const config = resolvePipelineConfig('multi-account');
     expect(config.shopping.aiImageEngine).toBe('openai-image');
-    expect(config.shopping.aiImageModel).toBe('gpt-image-2.5-flare');
-    expect(config.image.imageModel).toBe('gpt-image-2.5-flare');
+    expect(config.shopping.aiImageModel).toBe('gpt-image-2.5-sunburst');
+    expect(config.image.imageModel).toBe('gpt-image-2.5-sunburst');
   });
 
   it('does not leak a legacy shopping Ducttape alias into a later general OpenAI model', () => {
     (globalThis as any).localStorage = makeStorage({
       scSubImageMode: 'collected',
       scAIImageEngine: 'gpt-image-2',
-      openaiImageModel: 'gpt-image-2.5-sunburst',
+      openaiImageModel: 'gpt-image-2.5-flare',
       fullAutoImageSource: 'openai-image',
     });
 
     const config = resolvePipelineConfig('continuous');
     expect(config.shopping.aiImageEngine).toBe('openai-image');
-    expect(config.shopping.aiImageModel).toBe('gpt-image-2.5-flare');
-    expect(config.image.imageModel).toBe('gpt-image-2.5-sunburst');
+    expect(config.shopping.aiImageModel).toBe('gpt-image-2.5-sunburst');
+    expect(config.image.imageModel).toBe('gpt-image-2.5-flare');
   });
 
   it('풀오토에서는 현재 이미지 엔진이 오래된 쇼핑 전용 엔진보다 우선한다', () => {

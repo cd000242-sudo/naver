@@ -26,6 +26,31 @@
   });
 })();
 
+// [2026-10-10] 이미지 바로가기 — 발행 바로가기와 같은 방식(body 로 옮겨 viewport 에 고정, 클릭은 이동만).
+(function initImageShortcut() {
+  const toolbar = document.getElementById('right-floating-buttons');
+  const shortcut = document.getElementById('image-shortcut-btn');
+  if (!toolbar || !shortcut) return;
+  document.body.appendChild(shortcut);
+  let highlightTimer;
+  shortcut.addEventListener('click', () => {
+    const tab = document.querySelector('.tab-button[data-tab="images"]');
+    const panel = document.getElementById('tab-images');
+    if (!tab || !panel) return;
+    tab.click();
+    window.requestAnimationFrame(() => {
+      if (!panel.getClientRects().length) return;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      panel.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'start' });
+      // 패널에 포커스를 둔다 — Enter 를 반복해도 아무 버튼도 눌리지 않고 이동만 한다.
+      panel.focus({ preventScroll: true });
+      panel.classList.add('image-shortcut-highlight');
+      window.clearTimeout(highlightTimer);
+      highlightTimer = window.setTimeout(() => panel.classList.remove('image-shortcut-highlight'), 2200);
+    });
+  });
+})();
+
 // 플로팅 버튼 스크롤 따라다니기 스크립트
 (function() {
   let lastScrollTop = 0;

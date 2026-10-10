@@ -262,7 +262,8 @@ describe('Content Quality V3 evidence attestation', () => {
         //   human-writing-anti-pattern §4 주체 귀속 조항·자가점검 1줄로 재계산
         // [2026-10-10] 덕트테이프 모델 정책(modelRegistry 2모델 정리 + 정규화 함수)으로 재계산
         // [2026-10-10 2차] 옛 gpt-image-2 → Sunburst 이관 규칙(normalizeOpenaiImageModel)으로 재계산
-        '2e293ba4fd4e5466c7fc7e9302195241a673bea25c4f6ba0cc6b1e7278ef574a',
+        // [2026-10-10 3차] 덕트테이프 기본 모델 Sunburst(옛 1/1.5/2·빈 값 → Sunburst, 명시 Flare 유지)로 재계산
+        'ae2b23de80b11ad51540afb86e11fd83b24efd947501ebd14016bdc4c3953f27',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

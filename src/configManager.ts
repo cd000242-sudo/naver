@@ -241,7 +241,7 @@ export interface AppConfig {
 
   // ✅ [2026-02-08] 이미지 엔진 모델 설정 (DeepInfra만 유지)
   deepinfraModel?: string;
-  // ✅ OpenAI 이미지 모델·품질 선택 ([2026-10-10] Flare = 기본·속도형, Sunburst = 품질형 두 가지만),
+  // ✅ OpenAI 이미지 모델·품질 선택 ([2026-10-10] Sunburst = 기본·품질형, Flare = 속도형 두 가지만),
   //    gpt-image-2.5-flare/sunburst = 2026-09 신모델 — xhigh/max 는 2.5 계열에서만 유효)
   openaiImageModel?: 'gpt-image-2.5-flare' | 'gpt-image-2.5-sunburst';
   openaiImageQuality?: 'low' | 'medium' | 'high' | 'xhigh' | 'max' | 'auto';
@@ -661,10 +661,10 @@ export async function loadConfig(): Promise<AppConfig> {
       deepinfraApiKey: parsed.deepinfraApiKey || parsed['deepinfra-api-key'] || undefined,
       // ✅ [2026-02-08] 이미지 엔진 모델 설정 명시적 파싱
       deepinfraModel: parsed.deepinfraModel || undefined,
-      // ✅ OpenAI 이미지 모델·품질·환율 — 기본값 보장 (저비용 기본: gpt-image-2.5-flare + medium).
+      // ✅ OpenAI 이미지 모델·품질·환율 — 기본값 보장 (기본: gpt-image-2.5-sunburst + medium).
       //    Anything other than the explicit high-cost model falls back to the cheap default,
       //    so a missing/corrupt config can never silently select the expensive option.
-      // [2026-10-10] 목록 밖·옛 값(gpt-image-1/1.5/2)은 Flare 로 — 계정별 settings 파일도 이 경로를 탄다.
+      // [2026-10-10] 목록 밖·옛 값(gpt-image-1/1.5/2)은 기본값 Sunburst 로 — 계정별 settings 파일도 이 경로를 탄다.
       openaiImageModel: normalizeOpenaiImageModel(parsed.openaiImageModel),
       openaiImageQuality: ['low', 'medium', 'high', 'xhigh', 'max', 'auto'].includes(parsed.openaiImageQuality)
         ? parsed.openaiImageQuality

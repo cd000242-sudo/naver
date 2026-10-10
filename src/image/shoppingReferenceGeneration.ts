@@ -286,7 +286,7 @@ export function isShoppingReferenceGenerationSelectionSupported(
   const rawProvider = String(provider || '').trim();
   const normalizedProvider = rawProvider === 'gpt-image-2' ? 'openai-image' : rawProvider;
   const normalizedModel = rawProvider === 'gpt-image-2'
-    ? 'gpt-image-2.5-flare'
+    ? 'gpt-image-2.5-sunburst'
     : String(model || '').trim();
 
   if (!isShoppingReferenceImageEngine(normalizedProvider)) return false;
@@ -296,7 +296,7 @@ export function isShoppingReferenceGenerationSelectionSupported(
 
 /**
  * 대표이미지 참조(img2img) 편집을 믿고 쓸 수 있는 OpenAI 모델.
- * [2026-10-10] 덕트테이프는 gpt-image-2.5(flare/sunburst) 두 가지만 남았다. 옛 1/1.5/2 값은 설정 정규화가 Flare 로 돌린다.
+ * [2026-10-10] 덕트테이프는 gpt-image-2.5(flare/sunburst) 두 가지만 남았다. 옛 1/1.5/2 값은 설정 정규화가 기본값 Sunburst 로 돌린다.
  */
 export function isShoppingReferenceCapableOpenaiModel(model: unknown): boolean {
   const m = String(model || '').trim();

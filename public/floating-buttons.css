@@ -142,38 +142,58 @@
   }
 }
 
-/* Keep the shortcut readable at every window size, below the cost button. */
+/*
+ * [2026-10-10] 시니어 배려 — 바로가기 두 개를 오른쪽 아래로 옮겨 알림창(오른쪽 위)에 가려지지 않게 한다.
+ * 쌓는 순서(아래에서 위): 메인 풀오토 이미지 설정(bottom 130, 높이 56) → 발행 바로가기 → 이미지 바로가기. 간격 12px.
+ * 오른쪽 끝(right 24px)은 메인 풀오토 버튼과 맞춘다. 메인 풀오토 버튼이 숨는 탭에서도 같은 자리에 보인다.
+ * 위쪽 도구 모음은 이미지 바로가기 위에서 끝나도록 높이를 줄이고, 넘치는 항목은 스크롤로 본다.
+ */
 #right-floating-buttons {
   top: 120px !important;
-  max-height: calc(100dvh - 136px) !important;
+  max-height: max(120px, calc(100dvh - 450px)) !important;
 }
 
-#publish-shortcut-btn {
+#publish-shortcut-btn,
+#image-shortcut-btn {
   position: fixed;
-  top: 56px;
-  right: 20px;
+  right: 24px;
   z-index: 1001;
-  width: 180px;
-  min-height: 52px;
+  box-sizing: border-box;
+  width: 210px;
+  height: 56px;
+  min-height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px;
-  border: 1px solid #34d399;
+  padding: 0 12px;
   border-radius: 12px;
-  background: #087c4c;
   color: #fff;
   font: inherit;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 800;
+  line-height: 1.2;
   white-space: nowrap;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
+#publish-shortcut-btn {
+  bottom: 198px;
+  border: 1px solid #34d399;
+  background: #087c4c;
+}
 #publish-shortcut-btn:hover { background: #06633d; }
-#publish-shortcut-btn:focus-visible {
+
+#image-shortcut-btn {
+  bottom: 266px;
+  border: 1px solid #93c5fd;
+  background: #1d4ed8;
+}
+#image-shortcut-btn:hover { background: #1e40af; }
+
+#publish-shortcut-btn:focus-visible,
+#image-shortcut-btn:focus-visible {
   outline: 3px solid #fff;
   outline-offset: -5px;
 }
@@ -185,3 +205,9 @@
   outline-offset: 4px;
 }
 
+#tab-images { scroll-margin: 24px; }
+#tab-images.image-shortcut-highlight,
+#tab-images:focus-visible {
+  outline: 3px solid #60a5fa;
+  outline-offset: 4px;
+}
