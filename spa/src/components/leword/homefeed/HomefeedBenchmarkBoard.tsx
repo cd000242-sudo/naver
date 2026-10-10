@@ -3,6 +3,8 @@ import { benchmarkTime, benchmarkView, filterBenchmarks, normalizeBenchmarkBoard
 import { mergeLiveBoardOffThread } from '../../../lib/homefeedLiveOffThread';
 import { fetchLiveFeeds } from '../../../lib/homefeedLiveFetch';
 import { withGuides } from '../../../lib/homefeedGuides.mjs';
+import { shuffleWithinTiers } from '../../../lib/hourlyShuffle.mjs';
+import { useShuffleSeed } from '../../../lib/useShuffleSeed';
 import { annotateEvidence, describeEvidence, evidenceSummary } from '../../../lib/homefeedEvidence.mjs';
 import { loadAdvisorDaily } from '../../../lib/homefeedEvidenceLoad';
 import type { AdvisorDailyView } from '../../../lib/myBlogSync';
@@ -86,13 +88,17 @@ export default function HomefeedBenchmarkBoard() {
  },[load]);
  useEffect(()=>setLimit(12),[category,status,query]);
  const view=useMemo(()=>data ? benchmarkView(data,now) : null,[data,now]);
+ const [seed,reshuffle]=useShuffleSeed();
  const categories=useMemo(()=>['전체',...new Set(view?.candidates.map(c=>c.category)??[])],[view]);
- /* 확인된 홈판 증거가 있는 소재를 맨 앞에(같은 글 → 비슷한 소재), 나머지는 원래 순서 그대로. */
+ /*
+  * 확인된 홈판 증거가 있는 소재를 맨 앞에(같은 글 → 비슷한 소재 → 내 유입), 그다음 ★ · 나머지 · 시점 재검토.
+  * 묶음 안은 매시 정각 새로 섞는다(2026-10-10 사장님 "워낙 많아서 상위만 본다 — 1시간 주기로 섞고 수동 버튼").
+  */
  const annotated=useMemo(()=>{
   const cards=annotateEvidence(view?.candidates??[],advisor?.daily??null);
   const rank=(c:typeof cards[number])=>c.evidence.homefeed?.kind==='same-post'?0:c.evidence.homefeed?1:c.evidence.mine?2:3;
-  return cards.map((c,i)=>({c,i})).sort((a,b)=>rank(a.c)-rank(b.c)||a.i-b.i).map(x=>x.c);
- },[view,advisor]);
+  return shuffleWithinTiers(cards,(c)=>rank(c)*4+(c.recommended?0:2)+(c.status==='stale'?1:0),seed);
+ },[view,advisor,seed]);
  const proofSummary=useMemo(()=>evidenceSummary(advisor?.daily??null),[advisor]);
  const proofText=useMemo(()=>describeEvidence(proofSummary,{homefeed:annotated.filter(c=>c.evidence.homefeed).length,mine:annotated.filter(c=>c.evidence.mine).length},advisor?.from),[proofSummary,annotated,advisor]);
  const items=useMemo(()=>{
@@ -122,6 +128,7 @@ export default function HomefeedBenchmarkBoard() {
     <div className="hfb-filter-row" role="group" aria-label="검토 상태">{FILTERS.map(([id,label])=><button type="button" key={id} aria-pressed={status===id} onClick={()=>setStatus(id)}>{label} <span>{id==='all'?view.candidates.length:id==='recommended'?view.candidates.filter(c=>c.recommended).length:view.candidates.filter(c=>c.status===id).length}</span></button>)}{proofSummary&&PROOF_FILTERS.map(([id,label])=><button type="button" key={id} className="proof" aria-pressed={status===id} onClick={()=>setStatus(id)}>{label} <span>{annotated.filter(c=>id==='homefeed'?c.evidence.homefeed:c.evidence.mine).length}</span></button>)}</div>
     <div className="hfb-filter-bottom"><div className="hfb-categories" role="group" aria-label="분야">{categories.map(c=><button type="button" key={c} aria-pressed={category===c} onClick={()=>setCategory(c)}>{c}</button>)}</div><input type="search" aria-label="벤치마크 소재 검색" placeholder="키워드·이야기 검색" value={query} onChange={e=>setQuery(e.target.value)}/></div>
    </div>
+   <div className="hfb-shuffle"><button type="button" onClick={()=>{reshuffle();setLimit(12);}}>순서 섞기</button><small>매시 정각 새 순서로 섞입니다 · 실제 홈판 증거 · ★ 소재가 먼저</small></div>
    <p className="hfb-legend">★는 최근 이틀 안에 벤치마크 채널 두 곳 이상이 함께 다룬 소재입니다. 홈판 노출 확인과는 별개이며, 제목은 작성용 제안입니다. 방금 새로 잡힌 소재는 다음 정기 수집(매시) 때 홈판 제목이 붙습니다.</p>
    <div className="hfb-list">{items.slice(0,limit).map(c=><HomefeedBenchmarkCard key={c.id} candidate={c} evidence={c.evidence}/>)}</div>
    {items.length===0 && <div className="hfb-empty"><strong>이 조건에 맞는 소재가 없습니다.</strong><button type="button" onClick={()=>{setCategory('전체');setStatus('all');setQuery('');}}>전체 소재 보기</button></div>}

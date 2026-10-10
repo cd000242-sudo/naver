@@ -1,5 +1,7 @@
 import { loadSavedBoard, boardSourceNote } from '../../lib/boardBridge';
 import { useEffect, useId, useMemo, useState, type ReactNode } from 'react';
+import { shuffleWithinTiers } from '../../lib/hourlyShuffle.mjs';
+import { useShuffleSeed } from '../../lib/useShuffleSeed';
 import LicenseGate, { isUnlocked } from './LicenseGate';
 import { naverSearchUrl } from './preemptionMeta';
 import { BoardFreshness } from './BoardFreshness';
@@ -62,6 +64,7 @@ export function TopicBriefsContent({ data, error = '', onAnalyze, sourceNotice }
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     const [preferred, setPreferred] = useState(loadPreference);
     const choosePreference = (value: string) => { setPreferred(value); try { localStorage.setItem(PRIORITY_STORAGE, value); } catch { /* This session still uses the selected order. */ } };
+    const [seed, reshuffle] = useShuffleSeed();
     const [field, setField] = useState('전체'); const [slot, setSlot] = useState<RoundSlot | null>(null); const [shown, setShown] = useState(PAGE_SIZE);
     const rounds = useMemo(() => {
         const raw = data ? (Array.isArray(data.rounds) && data.rounds.length ? data.rounds : [{ slot: data.slot || '아침', builtAt: data.builtAt, briefs: data.briefs || [] }]) : [];
@@ -88,7 +91,10 @@ export function TopicBriefsContent({ data, error = '', onAnalyze, sourceNotice }
     const filtered = activeField === '전체' ? items : items.filter(({ brief }) => brief.field === activeField);
     const activePreference = preferred === ORIGINAL_ORDER || preferred === FINANCIAL_FIRST || fields.includes(preferred) ? preferred : FINANCIAL_FIRST;
     const priority = (brief: TopicBriefView) => activePreference === FINANCIAL_FIRST ? Number(financialField(brief.field)) : Number(brief.field === activePreference);
-    const ordered = [...filtered].sort((a,b) => priority(b.brief)-priority(a.brief) || Number(b.brief.recommended)-Number(a.brief.recommended) || Number(Boolean(b.brief.writing))-Number(Boolean(a.brief.writing)));
+    // 먼저 볼 분야 → 추천 → 작성 안내 있음 묶음은 지키고, 묶음 안은 매시 정각 새로 섞는다(2026-10-10 사장님 "오늘의 글감도 1시간 주기로 섞고 수동 버튼").
+    // 무료(잠김)는 고정 3장 그대로 — 섞으면 매시간 다른 3장이 보여 무료 한도가 사실상 풀린다.
+    const tier = ({ brief }: { brief: TopicBriefView }) => (1 - priority(brief)) * 4 + (brief.recommended ? 0 : 2) + (brief.writing ? 0 : 1);
+    const ordered = unlocked ? shuffleWithinTiers(filtered, tier, seed) : [...filtered].sort((a, b) => tier(a) - tier(b));
     const visible = unlocked ? ordered.slice(0, shown) : ordered.slice(0, FREE_BRIEFS);
     const remaining = unlocked ? ordered.length - visible.length : 0;
     return <section className="lw-picks lw-picks-tab lw-briefs tb-board" aria-label="오늘의 글감">
@@ -98,7 +104,7 @@ export function TopicBriefsContent({ data, error = '', onAnalyze, sourceNotice }
         {error && <p className="lw-note lw-note-error">{error}</p>}{!error && !data && <p className="lw-note">불러오는 중…</p>}
         {latestBuiltAt && kstDay(latestBuiltAt) !== kstDay(new Date().toISOString()) && <p className="lw-note">최근 공개 회차는 {kst(latestBuiltAt)}입니다. 작성 전 일정과 조건을 다시 확인하세요.</p>}
         {rounds.length > 0 && <div className="tb-rounds" aria-label="회차 선택"><button type="button" aria-pressed={!activeRound} className={`tb-round${!activeRound?' is-active':''}`} onClick={()=>showRound(null)}><strong>전체 누적</strong><span>{shelfItems.length}건 · {dayCount > 1 ? `최근 ${shelfDays}일 ${dayCount}일치` : `최근 ${shelfDays}일 · 오늘 회차만`}</span></button>{(['아침','오후','저녁'] as const).map(name => {const round=latestRounds.find(item=>item.slot===name);return <button type="button" key={name} disabled={!round} aria-pressed={activeRound?.slot===name} className={`tb-round${activeRound?.slot===name?' is-active':''}`} onClick={()=>showRound(name)}><strong>{name}</strong><span>{round?`${round.items.length}건 · ${kst(round.builtAt)}`:`${SLOT_TIME[name]} 예정`}</span></button>;})}</div>}
-        {data && <div className="tb-preference"><label>먼저 볼 분야 <select aria-label="먼저 볼 분야" value={activePreference} onChange={event => choosePreference(event.target.value)}><option value={FINANCIAL_FIRST}>지원금·비즈니스·경제 우선</option><option value={ORIGINAL_ORDER}>전체 분야</option>{fields.filter(name => name !== '전체').map(name => <option key={name} value={name}>{name}</option>)}</select></label><small>공개된 글감의 표시 순서만 바뀝니다. 다른 분야도 함께 볼 수 있습니다.</small></div>}
+        {data && <div className="tb-preference"><label>먼저 볼 분야 <select aria-label="먼저 볼 분야" value={activePreference} onChange={event => choosePreference(event.target.value)}><option value={FINANCIAL_FIRST}>지원금·비즈니스·경제 우선</option><option value={ORIGINAL_ORDER}>전체 분야</option>{fields.filter(name => name !== '전체').map(name => <option key={name} value={name}>{name}</option>)}</select></label><small>공개된 글감의 표시 순서만 바뀝니다. 다른 분야도 함께 볼 수 있습니다. 같은 묶음 안은 매시 정각 새로 섞입니다.</small>{unlocked && <button type="button" className="tb-shuffle" onClick={() => { reshuffle(); setShown(PAGE_SIZE); }}>순서 섞기</button>}</div>}
         {data && <div className="tb-fields" aria-label="분야 선택"><strong>{filtered.length} / {all.length}개</strong>{fields.map(name=><button type="button" key={name} aria-pressed={activeField===name} className={`tb-field${activeField===name?' is-active':''}`} onClick={()=>showField(name)}>{name}<b>{name==='전체'?all.length:all.filter(brief=>brief.field===name).length}</b></button>)}</div>}
         <div className="tb-list">{visible.map(({ brief, key })=><BriefCard key={key} brief={brief} onAnalyze={onAnalyze} />)}</div>
         {remaining > 0 && <button type="button" className="lw-picks-btn tb-more" onClick={()=>setShown(value=>value+PAGE_SIZE)}>더 보기 · 남은 {remaining}개</button>}
