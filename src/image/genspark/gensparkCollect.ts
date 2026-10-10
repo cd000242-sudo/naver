@@ -57,7 +57,10 @@ export async function checkGensparkJob(
   try {
     await page.goto(job.jobUrl, { waitUntil: 'domcontentloaded', timeout: 30_000 });
   } catch (error) {
-    throw new GensparkError(GENSPARK_SUBMIT_FAILED, `작업 화면 이동 실패: ${(error as Error)?.message || error}`);
+    // [2026-10-10 실측] CPU 가 바쁜 PC 에서 작업 화면 열기가 30초를 넘겼다. 전송은 이미 됐으니 "전송 실패"로 같은 그림을 새로
+    //   요청하지 않고 진행 중으로 두어 다음 확인 때 다시 연다. 계속 안 열리면 작업별 한도(jobDeadlineMs)에서 시간 초과로 끝난다.
+    console.warn(`[젠스파크] 작업 화면 열기 지연 — 다음 확인 때 다시 엽니다: ${String((error as Error)?.message || error).slice(0, 80)}`);
+    return { status: 'pending' };
   }
 
   // [2026-10-10 실측] 작업 화면은 열고 1~4초 뒤에야 결과가 그려진다 — 1초 한 번만 보면 늘 '진행 중'으로 오판했다.

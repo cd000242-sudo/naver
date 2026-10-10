@@ -45,6 +45,8 @@ export interface FakeState {
   focusFails: boolean;
   /** 작업 화면 이미지가 몇 번째 읽기부터 보일지(0=바로, 2026-10-10 실측: 열고 1~4초 뒤) */
   jobImagesAfterReads: number;
+  /** 앞으로 goto 를 몇 번 실패시킬지(바쁜 PC 에서 화면 열기 시간 초과 흉내) */
+  gotoFails: number;
 }
 
 export function newFakeState(): FakeState {
@@ -69,6 +71,7 @@ export function newFakeState(): FakeState {
     escapeIgnored: false,
     focusFails: false,
     jobImagesAfterReads: 0,
+    gotoFails: 0,
   };
 }
 
@@ -112,7 +115,12 @@ export function createFakePage(state: FakeState): FakePage {
   const page: FakePage = {
     state,
     calls,
-    async goto(url) { calls.gotos.push(url); state.url = url; return undefined; },
+    async goto(url) {
+      calls.gotos.push(url);
+      if (state.gotoFails > 0) { state.gotoFails -= 1; throw new Error('page.goto: Timeout 30000ms exceeded.'); }
+      state.url = url;
+      return undefined;
+    },
     url() {
       if (state.sendClicked && state.jobUrlAfterPolls >= 0 && polls++ >= state.jobUrlAfterPolls) state.url = state.jobUrl;
       return state.url;

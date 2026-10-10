@@ -967,6 +967,8 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.postId,
         options.stopCheck,
         onImageGenerated,
+        undefined,
+        { allowPartial: options.allowPartialResults === true },
       );
       if (gensparkImages.length === 0) {
         throw new Error('젠스파크 0건 반환 — 로그인/세션 확인 필요');

@@ -74,6 +74,11 @@ describe('젠스파크 생성 분기(imageGenerator.ts)', () => {
     expect(branch).not.toMatch(/generateWithNanoBananaPro|fallbackReason|generateWithDropshot/);
   });
 
+  // [2026-10-10] 발행 "미리 한꺼번에" 요청만 일부 결과를 받는다 — 다른 호출은 지금처럼 전부 아니면 실패.
+  it('allowPartialResults === true 일 때만 생성기에 allowPartial 을 넘긴다', () => {
+    expect(branch).toMatch(/generateWithGenspark\([\s\S]*?undefined,\s*\{ allowPartial: options\.allowPartialResults === true \}/);
+    expect(read('image/types.ts')).toMatch(/allowPartialResults\?: boolean;/);
+  });
   it('렌더러가 실어 보낸 options.imageModel 을 쓰지 않는다', () => {
     expect(branch).not.toMatch(/options\.imageModel/);
   });

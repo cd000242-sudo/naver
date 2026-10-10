@@ -66,6 +66,8 @@ export async function generateWithGenspark(
   stopCheck?: () => boolean,
   onImageGenerated?: GensparkImageCallback,
   runtime?: GensparkRuntime,
+  /** allowPartial: 일부만 완성돼도 받은 것만 돌려준다(발행 "미리 한꺼번에" 요청 — 못 받은 칸은 호출자가 1장씩 다시). 0장이면 여전히 실패. */
+  options: { allowPartial?: boolean } = {},
 ): Promise<GensparkGeneratedImage[]> {
   const config = (await loadConfig()) as unknown as Record<string, unknown>;
   const model = resolveModel(config?.gensparkImageModel);
@@ -84,6 +86,16 @@ export async function generateWithGenspark(
   const usedAHashes: bigint[] = [];
   const images = new Map<number, GensparkGeneratedImage>();
   const rt = runtime ?? (await loadDefaultRuntime());
+  // [2026-10-10] 4장이 끝나는 순서는 뒤섞인다. 미리보기는 0번이 오면 화면을 비우므로 요청 순서대로 내보낸다(못 받은 칸은 끝에 건너뜀).
+  let nextPreview = 0;
+  const emitPreviewInOrder = (skipMissing: boolean): void => {
+    while (nextPreview < items.length) {
+      const img = images.get(nextPreview);
+      if (img) onImageGenerated?.(img, nextPreview, items.length);
+      else if (!skipMissing) break;
+      nextPreview++;
+    }
+  };
 
   const outcome = await rt.withSession(model, async (engine) => {
     const deps: GensparkBatchDeps = {
@@ -134,19 +146,22 @@ export async function generateWithGenspark(
       requests,
       deps,
       { ...GENSPARK_DEFAULT_BATCH_OPTIONS, modelCreditFree: model.creditFree },
-      (_result, requestIndex, total) => {
-        const img = images.get(requestIndex);
-        if (img) onImageGenerated?.(img, requestIndex, total);
-      },
+      () => emitPreviewInOrder(false),
     );
   });
+  emitPreviewInOrder(true);
 
   // 로그인 풀림·모델 없음·중지 등은 다른 엔진으로 넘기지 않고 '[젠스파크] …' 오류로 멈춘다.
   if (outcome.fatal) throw outcome.fatal;
 
   const ordered = [...images.entries()].sort((a, b) => a[0] - b[0]).map(([, img]) => img);
   if (ordered.length !== items.length) {
-    throw new Error(gensparkFormatIncomplete(ordered.length, items.length, outcome.failures));
+    const incomplete = gensparkFormatIncomplete(ordered.length, items.length, outcome.failures);
+    if (options.allowPartial && ordered.length > 0) {
+      log(`[젠스파크] 일부만 완성 — 받은 ${ordered.length}장만 돌려줍니다 (${incomplete})`);
+      return ordered;
+    }
+    throw new Error(incomplete);
   }
   return ordered;
 }

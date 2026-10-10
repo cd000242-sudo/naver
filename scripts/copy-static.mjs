@@ -488,6 +488,11 @@ try {
       filePath: path.join(projectRoot, 'dist', 'image', 'fullAuto', 'fullAutoImageRequest.js'),
     },
     {
+      // [2026-10-10] 젠스파크 발행 이미지 "미리 한꺼번에" 판단(순수 파일, import 없음) — multiAccountManager 가 값으로 가져온다.
+      label: 'image/fullAuto/gensparkBodyPrefetch.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'fullAuto', 'gensparkBodyPrefetch.js'),
+    },
+    {
       label: 'image/fullAuto/fullAutoImageRunner.js',
       filePath: path.join(projectRoot, 'dist', 'image', 'fullAuto', 'fullAutoImageRunner.js'),
     },

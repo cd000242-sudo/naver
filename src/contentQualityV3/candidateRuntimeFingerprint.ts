@@ -477,6 +477,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/image/fullAuto/fullAutoImageSlots.ts',
   'src/image/fullAuto/fullAutoPublishDecision.ts',
   'src/image/fullAuto/fullAutoQueueStatus.ts',
+  'src/image/fullAuto/gensparkBodyPrefetch.ts',
   'src/image/geminiAutoRecovery.ts',
   'src/image/geminiQuotaClassifier.ts',
   'src/image/geminiTableExtractor.ts',

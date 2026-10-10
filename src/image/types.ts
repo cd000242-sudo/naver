@@ -117,6 +117,11 @@ export interface GenerateImagesOptions {
    * studio and other tools never set it.
    */
   articleSectionImages?: boolean;
+  /**
+   * [2026-10-10] Genspark publish "prefetch" only: return the images that finished even when some items failed,
+   * so the caller regenerates just the missing slots (no re-generating — or double charging — the ones that worked).
+   */
+  allowPartialResults?: boolean;
   category?: string; // ✅ [2026-02-12] 전체 배치의 카테고리 (items에 개별 category 없을 때 폴백)
   isContinuousMode?: boolean;
   isMultiAccount?: boolean;

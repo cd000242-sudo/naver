@@ -22,6 +22,7 @@ import { normalizePublishImageSequence } from '../../image/publishImageSequence.
 import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
 import { FULL_AUTO_THUMBNAIL_SLOT_KEY, describeFullAutoImageStage, fullAutoItemsForScope, fullAutoSectionSlotKey } from '../../image/fullAuto/fullAutoImageSlots.js';
 import { buildFullAutoDirectorRequest, buildFullAutoImageCallOptions } from '../../image/fullAuto/fullAutoImageRequest.js';
+import { gsPrefetchBodyIndexes, gsPrefetchMatchImages, gsPrefetchTimeoutMs } from '../../image/fullAuto/gensparkBodyPrefetch.js';
 import { describeFullAutoImagePolicy } from '../../image/fullAuto/fullAutoImagePolicy.js';
 import { describeFullAutoImageReview } from '../../image/fullAuto/fullAutoPublishDecision.js';
 import { recheckFullAutoDecisionBeforePublish, runFullAutoImages } from '../../image/fullAuto/fullAutoImageRunner.js';
@@ -755,6 +756,42 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         onProgress?.(`✅ [run #${runId}] 대표 원본 1장 + AI 소제목 ${actualBodyCount}장 확인 완료`);
         return safeBatch.images;
     }
+    // [2026-10-10] 젠스파크: 본문 소제목 이미지를 먼저 한 번에 요청한다(엔진이 4장씩 동시 생성). 받은 칸은 아래 루프에서
+    //   그대로 쓰고, 못 받은 칸만 지금처럼 1장씩 다시 만든다. 썸네일은 연출(director) 때문에 루프에서 따로 만든다.
+    let gsPrefetched = new Map();
+    const gsPrefetchIndexes = gsPrefetchBodyIndexes(provider, itemsForGeneration);
+    if (gsPrefetchIndexes.length > 0 && !(stopCheck && stopCheck())) {
+        const gsPrefetchItems = gsPrefetchIndexes.map((index) => itemsForGeneration[index]);
+        onProgress?.(`🚀 [run #${runId}] 젠스파크: 소제목 이미지 ${gsPrefetchItems.length}장을 한 번에 요청합니다 (최대 4장 동시).`);
+        try {
+            const gsPrefetchResult = await generateImagesWithCostSafety({
+                provider: provider,
+                imageModel: options.imageModel,
+                items: gsPrefetchItems,
+                postTitle: postTitle,
+                regenerate: false,
+                collectedImages: options.collectedImages,
+                isShoppingConnect,
+                thumbnailTextInclude: false,
+                headingImageMode: 'all',
+                imageFallbackPolicy: 'engine-only',
+                isMultiAccount: true,
+                longRunImageGeneration: true,
+                allowPartialResults: true,
+                imageGenerationTimeoutMs: gsPrefetchTimeoutMs(gsPrefetchItems.length, BATCH_TIMEOUT_MS),
+                ...(imagePolicy ? buildFullAutoImageCallOptions(imagePolicy) : {}),
+            });
+            gsPrefetched = gsPrefetchMatchImages(itemsForGeneration, gsPrefetchIndexes, Array.isArray(gsPrefetchResult?.images) ? gsPrefetchResult.images : []);
+            const gsMissing = gsPrefetchIndexes.length - gsPrefetched.size;
+            onProgress?.(`✅ [run #${runId}] 젠스파크: ${gsPrefetched.size}/${gsPrefetchIndexes.length}장 받음${gsMissing > 0 ? ` — 못 받은 ${gsMissing}칸은 1장씩 다시 만듭니다` : ''}`);
+        }
+        catch (gsPrefetchError) {
+            // 로그인·모델·보안 확인 오류는 1장씩 해도 같으므로 아래 루프가 같은 오류를 만나 지금처럼 멈춘다.
+            onProgress?.(`⚠️ [run #${runId}] 젠스파크 한꺼번에 요청 실패 — 1장씩 만듭니다: ${String(gsPrefetchError?.message || gsPrefetchError).substring(0, 160)}`);
+        }
+        if (stopCheck && stopCheck())
+            return sequentialImages;
+    }
     // Marks this and every later slot FAILED with one reason (dead engine, batch timeout) and stops.
     const failRemainingSlots = (fromIndex, reason) => {
         for (let rest = fromIndex; rest < itemsForGeneration.length; rest++) {
@@ -763,6 +800,14 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
     };
     for (let itemIndex = 0; itemIndex < itemsForGeneration.length; itemIndex++) {
         const item = itemsForGeneration[itemIndex];
+        const gsReady = gsPrefetched.get(itemIndex);
+        if (gsReady) {
+            // 한꺼번에 받은 칸: 다시 만들지 않는다.
+            sequentialImages.push(gsReady);
+            reportSlot(itemIndex, { state: 'SUCCESS', image: gsReady });
+            onProgress?.(`✅ [${itemIndex + 1}/${_displayCount}][run #${runId}] 이미지 준비됨(한꺼번에 받음): ${String(gsReady.heading || '').substring(0, 30)}...`);
+            continue;
+        }
         if (continueOnImageFailure && checkBatchTimeout()) {
             const reason = `이미지 생성 시간 초과(${Math.round(BATCH_TIMEOUT_MS / 60000)}분)`;
             onProgress?.(`⏰ ${reason} — 남은 ${itemsForGeneration.length - itemIndex}개 이미지는 만들지 않았습니다.`);

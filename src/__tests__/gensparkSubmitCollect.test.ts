@@ -186,6 +186,13 @@ describe('checkGensparkJob', () => {
     expect(waits.reduce((a, b) => a + b, 0)).toBeLessThanOrEqual(2_000);
   });
 
+  // [2026-10-10 실측] CPU 82% PC 에서 작업 화면 열기가 30초를 넘겼는데 "전송 실패"로 보고 같은 그림을 새로 요청했다.
+  it('작업 화면 열기 시간 초과는 진행 중(pending) — 같은 그림을 새로 요청하지 않고 다음 확인 때 다시 연다', async () => {
+    const { page } = setup({ jobImages: [A], gotoFails: 1 });
+    expect(await checkGensparkJob(page, job, new Set(), { sleep })).toEqual({ status: 'pending' });
+    expect(await checkGensparkJob(page, job, new Set(), { sleep })).toEqual({ status: 'done', imageUrl: A });
+  });
+
   it('이미지도 신호도 없으면 pending, 실패 문구면 failed', async () => {
     expect((await checkGensparkJob(setup().page, job, new Set(), { sleep })).status).toBe('pending');
     const f = setup({ signals: { hasComposer: false, loginRequired: false, challenge: false, rateLimited: false, failed: true } });
