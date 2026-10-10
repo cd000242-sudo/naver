@@ -9,7 +9,7 @@ import type { StructuredContent, ImagePlan, HeadingPlan } from '../contentGenera
 import type { AutoAnalyzeHeadingsOptions } from './modules/headingImageGen.js';
 import { FTC_DISCLOSURE_PRESETS } from '../automation/ftcDisclosurePresets.js';
 // ✅ [v2.10.335] 나노바나나 3종 분리 — provider 저장값 1회성 마이그레이션
-import { migrateImageProviderStorage } from '../runtime/imageProviderMigration.js';
+import { migrateImageProviderStorage, migrateNanoBananaSingleEngine } from '../runtime/imageProviderMigration.js';
 // ✅ [2026-02-26 모듈화] 프롬프트 번역 모듈
 import { generateEnglishPromptForHeading, decomposeKoreanCompound, koreanMorphemes, getTranslationPrompt, cacheTranslation, _promptTranslationCache } from './modules/promptTranslation.js';
 // ✅ [2026-02-26 모듈화] 페이월 시스템 모듈
@@ -3255,6 +3255,8 @@ async function initializeApplication(): Promise<void> {
   //   다른 어떤 코드가 이미지 소스 localStorage를 읽기 전에 최우선 실행해야 한다.
   try {
     migrateImageProviderStorage();
+    // [2026-10-10] 나노바나나 프로·2.5 저장값과 슬롯 모델을 나노바나나2로 이관 (멱등)
+    migrateNanoBananaSingleEngine();
   } catch (e) {
     console.warn('[Init] 이미지 provider 마이그레이션 스킵:', e);
   }
@@ -5823,7 +5825,7 @@ URL: ${firstUrl}
     const imageSource = document.querySelector('.unified-img-source-btn.selected')?.getAttribute('data-source')
       || localStorage.getItem('fullAutoImageSource')
       || localStorage.getItem('globalImageSource')
-      || 'nano-banana-pro';
+      || 'nano-banana-2';
     // ✅ [2026-04-18 FIX] SSOT 헬퍼 사용 — 배치 큐 저장 시 localStorage 반영 (이전: DOM만 읽어서 모달 설정 무시)
     const skipImages = isImageSkipEnabled();
     const skipCta = (document.getElementById('unified-skip-cta') as HTMLInputElement)?.checked || false;
@@ -9384,7 +9386,7 @@ function collectUnifiedFormData(): any {
   const imageSource = document.querySelector('.unified-img-source-btn.selected')?.getAttribute('data-source')
     || localStorage.getItem('fullAutoImageSource')
     || localStorage.getItem('globalImageSource')
-    || 'nano-banana-pro';
+    || 'nano-banana-2';
   // ✅ [2026-04-18 FIX] SSOT 헬퍼 사용 — headingImageMode='none'도 반영 (이전: 2개만 OR)
   const skipImages = isImageSkipEnabled();
   const publishMode = (document.getElementById('unified-publish-mode') as HTMLInputElement)?.value || 'publish'; // ✅ [2026-03-10 FIX] 기본값을 즉시발행으로 변경

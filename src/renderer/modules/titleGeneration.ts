@@ -472,7 +472,7 @@ export async function autoGenerateImagesAndPublish(structuredContent: any): Prom
 
     // ✅ [2026-02-01 FIX] collectedImages 전달하여 중복 크롤링 방지
     const generatedImages = await generateImagesForContent(structuredContent, {
-      imageSource: 'nano-banana-pro',
+      imageSource: 'nano-banana-2',
       skipImages: false,
       collectedImages: structuredContent?.collectedImages || structuredContent?.images || []
     });

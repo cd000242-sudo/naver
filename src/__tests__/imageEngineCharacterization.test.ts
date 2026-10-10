@@ -111,9 +111,18 @@ describe('Stage 0 — imageGenerator 디스패치 현재 동작 고정', () => {
     );
   });
 
-  it("'nano-banana-pro'는 generateWithNanoBananaPro로 라우팅된다 (불변 — 변경 금지)", () => {
+  it("nano 분기는 generateWithNanoBananaPro로 라우팅되고 모델은 NANO_PROVIDER_TO_MODEL_KEY가 정한다", () => {
     expect(dispatchCode).toMatch(
       /normalizedProvider === 'nano-banana-pro'[\s\S]{0,900}?generateWithNanoBananaPro/,
     );
+  });
+
+  it("[2026-10-10] 입구에서 'nano-banana-pro'·'nano-banana'는 'nano-banana-2'로 바뀐다 (고가 3 Pro 미호출)", () => {
+    const aliasAt = dispatchCode.search(
+      /if \(normalizedProvider === 'nano-banana-pro' \|\| normalizedProvider === 'nano-banana'\) \{[\s\S]{0,260}?normalizedProvider = 'nano-banana-2';/,
+    );
+    const dispatchAt = dispatchCode.indexOf("if (normalizedProvider === 'nano-banana' || normalizedProvider === 'nano-banana-2'");
+    expect(aliasAt).toBeGreaterThan(-1);
+    expect(aliasAt).toBeLessThan(dispatchAt);
   });
 });

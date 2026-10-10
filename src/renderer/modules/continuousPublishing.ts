@@ -3,6 +3,7 @@
 // modules/continuousPublishing.ts
 // ============================================
 
+import { normalizeRetiredNanoEngine } from '../../runtime/imageProviderMigration.js';
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
 import { applyKeywordPrefixToTitle } from '../utils/titleUtils.js';
 import type { ContinuousQueueItem } from '../types/index';
@@ -577,6 +578,8 @@ function processNextInQueue(): void {
         // ✅ [2026-02-18 FIX] null/undefined 방지 — item.imageSource가 null이면 "null" 문자열이 저장되는 버그
         if (item.imageSource && item.imageSource !== 'null' && item.imageSource !== 'undefined') {
           // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 정규화 제거 (각각 별개 모델)
+          // [2026-10-10] 큐에 남은 옛 나노바나나 프로·2.5 값은 나노바나나2로 이관
+          item.imageSource = normalizeRetiredNanoEngine(item.imageSource) as typeof item.imageSource;
           localStorage.setItem('fullAutoImageSource', item.imageSource);
           console.log(`[Continuous] ✅ fullAutoImageSource localStorage 동기화: "${item.imageSource}"`);
         } else {
@@ -3200,8 +3203,9 @@ function hideProgressFloatingButton(): void {
 }
 
 const imageSourceNames: Record<string, string> = {
-  'nano-banana-2': '🍌 나노바나나 (Gemini 2.5 Flash Image, ₩54/장) ★',
-  'nano-banana-pro': '🍌🦍 나노바나나(고급 라벨) (현재 동일 모델, ₩54/장)',
+  'nano-banana-2': '🍌 나노바나나2 (Gemini 3.1 Flash Image, ₩97/장) ★',
+  // [2026-10-10] 옛 큐에 남은 프로 값은 나노바나나2로 이관되어 실행된다
+  'nano-banana-pro': '🍌 나노바나나2 (Gemini 3.1 Flash Image, ₩97/장) ★',
   'naver': '🔍 네이버 검색',
   'prodia': '⚡ Prodia',
   'stability': '🚀 Stability AI',

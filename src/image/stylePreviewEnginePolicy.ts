@@ -54,5 +54,7 @@ const ROUTES: Readonly<Record<string, StylePreviewEngineRoute>> = Object.freeze(
 /** Resolve only engines the style-preview implementation can actually call. */
 export function resolveStylePreviewEngine(value: unknown): StylePreviewEngineRoute | null {
   const requested = String(value || 'flow').trim().toLowerCase();
-  return ROUTES[requested] || null;
+  // [2026-10-10] 나노바나나 프로·2.5는 화면에서 내려감 — 옛 값은 나노바나나2 경로로
+  const effective = requested === 'nano-banana-pro' || requested === 'nano-banana' ? 'nano-banana-2' : requested;
+  return ROUTES[effective] || null;
 }

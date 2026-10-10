@@ -12,6 +12,9 @@ import * as path from 'path';
 import {
   IMAGE_ENGINE_CATALOG,
   NANO_PROVIDER_TO_MODEL_KEY,
+  NANO_BANANA,
+  NANO_BANANA_2,
+  NANO_BANANA_PRO,
   getImageEngineSpec,
 } from '../runtime/imageEngineCatalog.js';
 import {
@@ -24,13 +27,27 @@ import { ALLOWED_PROVIDER, assertProvider } from '../image/types.js';
 const ROOT = path.resolve(__dirname, '..');
 const read = (rel: string): string => fs.readFileSync(path.join(ROOT, rel), 'utf-8');
 
-/** 사용자가 그리드/드롭다운에서 고를 수 있는 4개 AI 생성엔진 */
-const ENGINE_VALUES = ['nano-banana-2', 'nano-banana-pro', 'nano-banana', 'openai-image', 'flow', 'prodia'];
+/** 사용자가 그리드/드롭다운에서 고를 수 있는 AI 생성엔진 — [2026-10-10] 나노바나나는 나노바나나2 한 종류만 노출 */
+const ENGINE_VALUES = ['nano-banana-2', 'openai-image', 'flow', 'prodia'];
+/** 화면에서 내려갔지만 백엔드 라우팅은 남겨 둔 옛 나노바나나 값 */
+const RETIRED_NANO_VALUES = ['nano-banana-pro', 'nano-banana'];
+/** 백엔드가 아는 나노바나나 3종 (스펙 상수는 카탈로그 목록과 별개로 유지) */
 const NANO_VALUES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro'];
+const NANO_SPECS: Record<string, typeof NANO_BANANA_2> = {
+  'nano-banana': NANO_BANANA,
+  'nano-banana-2': NANO_BANANA_2,
+  'nano-banana-pro': NANO_BANANA_PRO,
+};
 
 describe('Stage 4 — 카탈로그 무결성', () => {
-  it('카탈로그는 API 엔진 4종 + dropshot(UI 자동화) = 5개 엔진을 가진다', () => {
+  it('카탈로그는 노출 엔진 4종 + dropshot(UI 자동화) = 5개 엔진을 가진다', () => {
     expect(IMAGE_ENGINE_CATALOG.map((e) => e.value).sort()).toEqual([...ENGINE_VALUES, 'dropshot'].sort());
+  });
+
+  it('[2026-10-10] 카탈로그(사용자 목록)에 나노바나나 프로·2.5가 없다', () => {
+    const values = IMAGE_ENGINE_CATALOG.map((e) => e.value);
+    for (const v of RETIRED_NANO_VALUES) expect(values).not.toContain(v);
+    expect(getImageEngineSpec('nano-banana-pro')).toBeUndefined();
   });
 
   it('모든 엔진의 model ID는 VERIFIED_IMAGE_MODELS에 속한다 (가짜 ID 차단)', () => {
@@ -50,7 +67,7 @@ describe('Stage 4 — 카탈로그 무결성', () => {
   });
 
   it('나노바나나 3종의 모델은 서로 다르다 (통합 회귀 차단)', () => {
-    const models = NANO_VALUES.map((v) => getImageEngineSpec(v)!.model);
+    const models = NANO_VALUES.map((v) => NANO_SPECS[v].model);
     expect(new Set(models).size).toBe(3);
   });
 });
@@ -120,13 +137,13 @@ describe('Stage 4 — provider → 모델 키 → API 모델 ID 연동 체인', 
 
   it('카탈로그 forceModelKey와 NANO_PROVIDER_TO_MODEL_KEY가 일치한다 (SSOT 단일성)', () => {
     for (const v of NANO_VALUES) {
-      expect(getImageEngineSpec(v)!.forceModelKey).toBe(NANO_PROVIDER_TO_MODEL_KEY[v]);
+      expect(NANO_SPECS[v].forceModelKey).toBe(NANO_PROVIDER_TO_MODEL_KEY[v]);
     }
   });
 
   it('카탈로그의 model과 모델 키 해석 결과가 일치한다', () => {
     for (const v of NANO_VALUES) {
-      const spec = getImageEngineSpec(v)!;
+      const spec = NANO_SPECS[v];
       const resolved = NANO_BANANA_USER_KEY_TO_MODEL[spec.forceModelKey!];
       expect(resolved.model, v).toBe(spec.model);
     }
@@ -167,7 +184,7 @@ describe('Stage 4 — nanoBananaProGenerator MODEL_MAP 연동', () => {
 
   it('3개 모델 키가 MODEL_MAP에서 카탈로그와 동일한 API 모델로 매핑된다', () => {
     for (const v of NANO_VALUES) {
-      const spec = getImageEngineSpec(v)!;
+      const spec = NANO_SPECS[v];
       const key = spec.forceModelKey!;
       // MODEL_MAP 항목: 'key': { model: 'modelId' ...
       const re = new RegExp(`'${key.replace(/[.\-]/g, '\\$&')}':\\s*\\{\\s*model:\\s*'${spec.model.replace(/[.\-]/g, '\\$&')}'`);
@@ -186,6 +203,9 @@ describe('Stage 4 — UI 표면 ↔ 카탈로그 일치 (그리드/드롭다운)
     for (const v of ENGINE_VALUES) {
       expect(block, `드롭다운 option value="${v}"`).toContain(`value="${v}"`);
     }
+    for (const v of RETIRED_NANO_VALUES) {
+      expect(block, `드롭다운에 내려간 옵션 value="${v}"`).not.toContain(`value="${v}"`);
+    }
   });
 
   it('[Stage 5 게이트] HeadingImageSettings 엔진 선택 그리드에 4개 엔진 data-value가 모두 존재한다', () => {
@@ -193,6 +213,9 @@ describe('Stage 4 — UI 표면 ↔ 카탈로그 일치 (그리드/드롭다운)
     const block = code.match(/id="image-source-submodal"[\s\S]{0,8000}?image-source-confirm/)?.[0] || '';
     for (const v of ENGINE_VALUES) {
       expect(block, `그리드 data-value="${v}"`).toContain(`data-value="${v}"`);
+    }
+    for (const v of RETIRED_NANO_VALUES) {
+      expect(block, `그리드에 내려간 카드 data-value="${v}"`).not.toContain(`data-value="${v}"`);
     }
   });
 

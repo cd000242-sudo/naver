@@ -310,7 +310,12 @@ export function setHeadingImageMode(mode: HeadingImageMode): void {
 
 // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 별칭 제거 (각각 별개 모델).
 //   별칭 맵은 향후 확장 대비 빈 상태로 유지 (normalizeImageSource 시그니처 보존).
-const IMAGE_SOURCE_ALIAS_MAP: Record<string, string> = {};
+// [2026-10-10] 나노바나나는 나노바나나2 한 종류만 노출 — 옛 프로·2.5 저장값은 읽기·쓰기 모두 나노바나나2로 이관.
+//   (Leonardo 하위 모델 값 'nano-banana-pro'는 leonardoaiModel 키에 따로 저장되어 이 맵을 거치지 않는다.)
+const IMAGE_SOURCE_ALIAS_MAP: Record<string, string> = {
+  'nano-banana-pro': 'nano-banana-2',
+  'nano-banana': 'nano-banana-2',
+};
 
 export function normalizeImageSource(raw: string | null | undefined): GlobalImageSource | null {
   if (!raw || raw === 'null' || raw === 'undefined') return null;
@@ -853,9 +858,7 @@ export function createHeadingImageModal(): void {
             <div id="local-folder-fallback-engine-wrap" style="display: none; margin-top: 8px; padding: 10px 12px; border-radius: 8px; background: rgba(99,102,241,0.08); border: 1px dashed rgba(99,102,241,0.3);">
               <div style="font-size: 11px; color: #a5b4fc; margin-bottom: 6px; font-weight: 600;">🎨 부족분 생성에 사용할 AI 엔진</div>
               <select id="local-folder-fallback-engine" style="width: 100%; padding: 8px 10px; border-radius: 6px; background: #1e1e2e; color: #e2e8f0; border: 1px solid rgba(99,102,241,0.3); font-size: 12px; cursor: pointer;">
-                <option value="nano-banana">나노바나나 (₩54/장, Gemini 2.5 Flash Image)</option>
-                <option value="nano-banana-2">나노바나나2 (₩97/장, Gemini 3.1 Flash Image)</option>
-                <option value="nano-banana-pro" selected>나노바나나 프로 (₩185/장, Gemini 3 Pro Image)</option>
+                <option value="nano-banana-2" selected>나노바나나2 (₩97/장, Gemini 3.1 Flash Image)</option>
                 <option value="deepinfra">FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">OpenAI Image (gpt-image-1 / 1.5 / 2)</option>
                 <option value="leonardoai">Leonardo AI</option>
@@ -957,16 +960,6 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 1.5rem;">🍌</div>
             <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노바나나2 ★</div>
             <div style="font-size: 10px; color: #a16207;">Gemini 3.1 Flash | ₩97/장 | 한글 가능</div>
-          </label>
-          <label class="source-option" data-value="nano-banana-pro" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s;">
-            <div style="font-size: 1.5rem;">🍌</div>
-            <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노바나나 프로</div>
-            <div style="font-size: 10px; color: #a16207;">Gemini 3 Pro | ₩185/장 | 한글 최강</div>
-          </label>
-          <label class="source-option" data-value="nano-banana" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s;">
-            <div style="font-size: 1.5rem;">🍌</div>
-            <div style="font-size: 12px; font-weight: 600; color: #92400e;">나노바나나</div>
-            <div style="font-size: 10px; color: #a16207;">Gemini 2.5 Flash | ₩54/장 | 한글 깨짐</div>
           </label>
           <label class="source-option" data-value="deepinfra" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #d1fae5, #6ee7b7); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🚀</div>
@@ -1287,8 +1280,6 @@ export function createHeadingImageModal(): void {
               <select id="test-engine-select" style="width: 100%; padding: 10px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 13px; color: #374151; background: white; cursor: pointer; transition: border-color 0.2s;" onfocus="this.style.borderColor='#6366f1'" onblur="this.style.borderColor='#e5e7eb'">
                 <option value="">📌 현재 저장된 엔진 사용</option>
                 <option value="nano-banana-2">🍌 나노바나나2 (Gemini 3.1 Flash, ₩97/장, 한글 가능) ★추천</option>
-                <option value="nano-banana-pro">🍌 나노바나나 프로 (Gemini 3 Pro, ₩185/장, 한글 최강)</option>
-                <option value="nano-banana">🍌 나노바나나 (Gemini 2.5 Flash, ₩54/장, 한글 텍스트 깨짐)</option>
                 <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">🦆 OpenAI Image (gpt-image-1 / 1.5 / 2)</option>
                 <option value="leonardoai">🦁 Leonardo AI</option>
@@ -1592,7 +1583,7 @@ export function createHeadingImageModal(): void {
         if (radio) radio.checked = true;
         // [2026-05-26] Restore fallback engine + bind radio toggle for engine wrap
         const fallbackEngineSel = document.getElementById('local-folder-fallback-engine') as HTMLSelectElement | null;
-        const savedEngine = localStorage.getItem('localFolderFallbackEngine') || 'nano-banana-pro';
+        const savedEngine = localStorage.getItem('localFolderFallbackEngine') || 'nano-banana-2';
         if (fallbackEngineSel) fallbackEngineSel.value = savedEngine;
         const engineWrap = document.getElementById('local-folder-fallback-engine-wrap');
         if (engineWrap) engineWrap.style.display = savedFallback === 'ai-generate' ? 'block' : 'none';
@@ -2390,16 +2381,15 @@ export function createHeadingImageModal(): void {
         <div style="display: grid; gap: 12px;">
           <!-- 🍌 나노 바나나 프로 (Gemini) - 분리 -->
           <div style="background: rgba(251, 191, 36, 0.1); padding: 14px; border-radius: 12px; border: 1px solid rgba(251, 191, 36, 0.3); display: flex; flex-direction: column; gap: 10px;">
-            <label style="display: block; font-weight: 600; color: #fbbf24; font-size: 13px; margin-bottom: 2px;">🍌 나노 바나나 프로 (Gemini) <span style="color: #22c55e; font-size: 11px;">★ 추천</span></label>
+            <label style="display: block; font-weight: 600; color: #fbbf24; font-size: 13px; margin-bottom: 2px;">🍌 나노바나나2 (Gemini 3.1 Flash) <span style="color: #22c55e; font-size: 11px;">★ 추천</span></label>
             
             <div>
               <label style="display: block; font-weight: 500; color: #d1d5db; margin-bottom: 6px; font-size: 12px;">🖼️ 썸네일 (대표) 모델</label>
               <select id="submodal-nano-main-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
                 <option value="gemini-3-1-flash">⚡ 나노바나나2 (Gemini 3.1 Flash Image) - ₩97/장 ★추천</option>
-                <option value="gemini-2.5-flash">💡 나노바나나 (Gemini 2.5 Flash Image) - ₩54/장 (한글 깨짐)</option>
               </select>
               <div style="font-size: 10px; color: #9ca3af; margin-top: 4px; line-height: 1.4;">
-                ℹ️ 나노바나나2(Gemini 3.1 Flash)는 한글 텍스트가 가능하며, 나노바나나(Gemini 2.5 Flash)는 한글 텍스트가 깨질 수 있습니다.
+                ℹ️ 나노바나나2(Gemini 3.1 Flash)는 한글 텍스트가 가능합니다.
               </div>
             </div>
 
@@ -2407,7 +2397,6 @@ export function createHeadingImageModal(): void {
               <label style="display: block; font-weight: 500; color: #d1d5db; margin-bottom: 6px; font-size: 12px;">📝 본문 (서브) 모델</label>
               <select id="submodal-nano-sub-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(251, 191, 36, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
                 <option value="gemini-3-1-flash">⚡ 나노바나나2 (Gemini 3.1 Flash Image) - ₩97/장 ★추천</option>
-                <option value="gemini-2.5-flash">💡 나노바나나 (Gemini 2.5 Flash Image) - ₩54/장 (한글 깨짐)</option>
               </select>
             </div>
           </div>
@@ -2489,7 +2478,7 @@ export function createHeadingImageModal(): void {
 
     // ✅ [v1.5.9] 비싼 모델(3 Pro 4K = ₩336/장) 사용 중이면 자동으로 3.1 Flash로 마이그레이션
     //   사용자 요청: "나노바나나프로 비싸니까 3.1로" — Gemini 3.1 Flash(₩97)가 품질/가격 최적점
-    const EXPENSIVE_MODELS = ['gemini-3-pro-4k', 'gemini-3-pro'];
+    const EXPENSIVE_MODELS = ['gemini-3-pro-4k', 'gemini-3-pro', 'gemini-2.5-flash']; // [2026-10-10] 2.5 Flash도 화면에서 내려가 함께 이관
     const migratedMain = (() => {
         const saved = localStorage.getItem('nanoBananaMainModel') || localStorage.getItem('nanoBananaModel') || 'gemini-3-1-flash';
         if (EXPENSIVE_MODELS.includes(saved)) {
@@ -2550,7 +2539,7 @@ export function createHeadingImageModal(): void {
     // 프리셋 버튼 - 가성비 (SDXL + Gemini 3 Pro)
     subModal.querySelector('#preset-budget-submodal')?.addEventListener('click', () => {
       if (nanoMainSelect) nanoMainSelect.value = 'gemini-3-1-flash';
-      if (nanoSubSelect) nanoSubSelect.value = 'gemini-2.5-flash';
+      if (nanoSubSelect) nanoSubSelect.value = 'gemini-3-1-flash';
       if (deepinfraSelect) deepinfraSelect.value = 'flux-schnell';
       if (leonardoaiSelect) leonardoaiSelect.value = 'seedream-4.5';
       if ((window as any).toastManager) (window as any).toastManager.success('💰 가성비 조합 적용됨');
@@ -2558,8 +2547,8 @@ export function createHeadingImageModal(): void {
 
     // 프리셋 버튼 - 고퀄리티 (Ultra + Pro 4K)
     subModal.querySelector('#preset-premium-submodal')?.addEventListener('click', () => {
-      if (nanoMainSelect) nanoMainSelect.value = 'gemini-3-pro-4k';
-      if (nanoSubSelect) nanoSubSelect.value = 'gemini-3-pro';
+      if (nanoMainSelect) nanoMainSelect.value = 'gemini-3-1-flash';
+      if (nanoSubSelect) nanoSubSelect.value = 'gemini-3-1-flash';
       if (deepinfraSelect) deepinfraSelect.value = 'flux-2-dev';
       if (leonardoaiSelect) leonardoaiSelect.value = 'phoenix-1.0';
       if ((window as any).toastManager) (window as any).toastManager.success('🏆 고퀄리티 조합 적용됨');
@@ -2777,7 +2766,7 @@ export function openHeadingImageModal(): void {
         if (radio) radio.checked = true;
         // [2026-05-26] Restore fallback engine + bind radio toggle for engine wrap
         const fallbackEngineSel = document.getElementById('local-folder-fallback-engine') as HTMLSelectElement | null;
-        const savedEngine = localStorage.getItem('localFolderFallbackEngine') || 'nano-banana-pro';
+        const savedEngine = localStorage.getItem('localFolderFallbackEngine') || 'nano-banana-2';
         if (fallbackEngineSel) fallbackEngineSel.value = savedEngine;
         const engineWrap = document.getElementById('local-folder-fallback-engine-wrap');
         if (engineWrap) engineWrap.style.display = savedFallback === 'ai-generate' ? 'block' : 'none';

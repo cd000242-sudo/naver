@@ -5777,7 +5777,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         let generatedThumbnailPath: string | undefined;
         if (!options?.skipImages && options?.useAiImage !== false && generatedImages.length === 0) {
           try {
-            const imageProvider = options?.imageSource || 'nano-banana-pro';
+            const imageProvider = options?.imageSource || 'nano-banana-2';
             const headingImageMode = options?.headingImageMode || 'all';
             const isThumbnailOnly = options?.thumbnailOnly === true;
             const normalizedImageProvider = String(imageProvider || '').trim();
@@ -9900,7 +9900,7 @@ app.whenReady().then(async () => {
                 return {
                   heading: img.heading || '',
                   filePath: finalFilePath,
-                  provider: img.provider || 'nano-banana-pro',
+                  provider: img.provider || 'nano-banana-2',
                   alt: img.alt || '',
                   caption: img.caption || '',
                   savedToLocal: img.savedToLocal

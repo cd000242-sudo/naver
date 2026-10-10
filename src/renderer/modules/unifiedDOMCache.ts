@@ -149,6 +149,9 @@ const UnifiedDOMCache = {
     const ALIAS_MAP: Record<string, string> = {
       'dall-e-3': 'openai-image',
       local: 'saved',
+      // [2026-10-10] 나노바나나 프로·2.5는 화면에서 내려감 — 옛 저장값은 나노바나나2로
+      'nano-banana-pro': 'nano-banana-2',
+      'nano-banana': 'nano-banana-2',
     };
     // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
     const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'dropshot', 'falai', 'pollinations', 'local-folder', 'saved'];
@@ -243,21 +246,21 @@ const UnifiedDOMCache = {
     // 3순위: 선택된 버튼 확인
     const selectedBtn = document.querySelector('.unified-img-source-btn.selected');
     if (selectedBtn) {
-      const btnSource = selectedBtn.getAttribute('data-source') || 'nano-banana-pro';
+      const btnSource = selectedBtn.getAttribute('data-source') || 'nano-banana-2';
       console.log(`[UnifiedDOMCache] 🎨 DOM 버튼 선택됨, data-source = "${btnSource}"`);
       return btnSource;
     }
 
     // 4순위: 드롭다운(select) 확인
     if (this.unifiedImageSource) {
-      const selectVal = this.unifiedImageSource.value || 'nano-banana-pro';
+      const selectVal = this.unifiedImageSource.value || 'nano-banana-2';
       console.log(`[UnifiedDOMCache] 🎨 드롭다운 값 = "${selectVal}"`);
       return selectVal;
     }
 
     // 5순위: 최후의 보루 (DOM 직접 확인)
     const fallbackSelect = document.getElementById('unified-image-source') as HTMLSelectElement;
-    const finalVal = fallbackSelect?.value || 'nano-banana-pro';
+    const finalVal = fallbackSelect?.value || 'nano-banana-2';
     console.log(`[UnifiedDOMCache] ⚠️ 최후의 보루: fallback = "${finalVal}"`);
     return finalVal;
   },

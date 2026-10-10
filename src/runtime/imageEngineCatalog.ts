@@ -139,10 +139,9 @@ export const DROPSHOT: ImageEngineSpec = {
 };
 
 /** AI 생성엔진 카탈로그 — 그리드/드롭다운 노출 순서 */
+// [2026-10-10] 사용자에게 보이는 목록에서 나노바나나 프로·2.5는 뺐다 (스펙 상수와 NANO_PROVIDER_TO_MODEL_KEY는 옛 값 호환용으로 유지).
 export const IMAGE_ENGINE_CATALOG: ImageEngineSpec[] = [
   NANO_BANANA_2,
-  NANO_BANANA_PRO,
-  NANO_BANANA,
   DUCK_TAPE,
   FLOW,
   PRODIA,

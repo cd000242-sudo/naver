@@ -330,7 +330,7 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
   const resolvedImageSource = currentFullAutoImageSource
     || raw.fullAutoImageSource
     || raw.globalImageSource
-    || 'nano-banana-pro';
+    || 'nano-banana-2';
   const fullAutoShoppingEngine = flow === 'full-auto'
     ? currentFullAutoImageSource
     : '';

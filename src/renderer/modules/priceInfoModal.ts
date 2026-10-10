@@ -6,6 +6,7 @@
  */
 
 import { toastManager } from '../utils/uiManagers.js';
+import { normalizeRetiredNanoSlotModel } from '../../runtime/imageProviderMigration.js';
 import { rememberPlan } from '../utils/geminiPlanMemo.js';
 import { normalizeGeminiTextModelId } from '../../runtime/modelRegistry.js';
 import {
@@ -1320,8 +1321,8 @@ export async function initPriceInfoModal(): Promise<void> {
 
       if (falaiModelSelect) falaiModelSelect.value = (config as any).falaiModel || 'flux-realism';
       if (stabilityModelSelect) stabilityModelSelect.value = (config as any).stabilityModel || 'sd35-large-turbo';
-      if (nanoBananaMainModel) nanoBananaMainModel.value = (config as any).nanoBananaMainModel || 'gemini-3-1-flash';  // ✅ [2026-03-11] 기본값 나노바나나2로 통일
-      if (nanoBananaSubModel) nanoBananaSubModel.value = (config as any).nanoBananaSubModel || 'gemini-3-1-flash';  // ✅ [2026-03-11] 기본값 나노바나나2로 통일
+      if (nanoBananaMainModel) nanoBananaMainModel.value = normalizeRetiredNanoSlotModel((config as any).nanoBananaMainModel || 'gemini-3-1-flash');  // ✅ [2026-03-11] 기본값 나노바나나2로 통일
+      if (nanoBananaSubModel) nanoBananaSubModel.value = normalizeRetiredNanoSlotModel((config as any).nanoBananaSubModel || 'gemini-3-1-flash');  // ✅ [2026-03-11] 기본값 나노바나나2로 통일
       if (pollinationsModelSelect) pollinationsModelSelect.value = (config as any).pollinationsModel || 'default';
 
       console.log('[Settings] 이미지 모델 고급 설정 로드됨:', {

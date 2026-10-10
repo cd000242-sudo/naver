@@ -45,7 +45,9 @@ describe('v1.4.81 — 비용표·환경설정 현대화', () => {
       const noticeMatch = html.match(/이미지 생성[\s\S]{0,500}?공공자료/);
       expect(noticeMatch).toBeTruthy();
       const notice = noticeMatch ? noticeMatch[0] : '';
-      expect(notice).toMatch(/Nano Banana Pro/);
+      // [2026-10-10] 나노바나나는 나노바나나2 한 종류만 안내한다 (프로 문구는 사라진다)
+      expect(notice).toMatch(/나노바나나2/);
+      expect(notice).not.toMatch(/Nano Banana Pro/);
       expect(notice).toMatch(/Flow/);
       expect(notice).toMatch(/ImageFX/);
     });

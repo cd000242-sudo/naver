@@ -344,7 +344,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
             const config = await configModule.loadConfig();
 
             // ✅ 전달받은 엔진 사용, 없으면 config에서 가져옴
-            const imageSource = engine || (config as any).globalImageSource || 'nano-banana-pro';
+            const imageSource = engine || (config as any).globalImageSource || 'nano-banana-2';
             console.log(`[imageHandlers] 🎨 테스트 이미지 생성: engine=${imageSource}, style=${style}, ratio=${ratio}`);
 
             // ✅ [2026-02-08] 11가지 스타일별 프롬프트 매핑 (3카테고리 동기화)
@@ -783,7 +783,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
 
             const configModule = await import('../../configManager.js');
             const config = await configModule.loadConfig();
-            const requestedSource = engine || (config as any).globalImageSource || 'nano-banana-pro';
+            const requestedSource = engine || (config as any).globalImageSource || 'nano-banana-2';
             const route = resolveStylePreviewEngine(requestedSource);
             if (!route) {
                 return {

@@ -4046,13 +4046,11 @@
                         이미지 소스 선택</h3>
 
                     <!-- ✅ [2026-01-27] 드롭다운으로 리뉴얼 - 7개 옵션 깔끔하게 정리 -->
-                    <!-- ✅ [v2.7.57] 나노바나나2/프로 옵션 통합 — 세부 모델은 "이미지 모델 설정"에서 선택 -->
+                    <!-- [2026-10-10] 나노바나나는 나노바나나2(Gemini 3.1 Flash) 한 종류만 노출 — 프로·2.5 저장값은 나노바나나2로 이관 -->
                     <div style="display: flex; gap: 0.75rem; align-items: center;">
                         <select id="image-source-select"
                             style="flex: 1; padding: 0.875rem 1rem; background: var(--bg-tertiary); border: 2px solid var(--border-gold); border-radius: 10px; color: var(--text-strong); font-size: 0.95rem; font-weight: 600; cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Cpath fill=%22%23d4af37%22 d=%22M2 4l4 4 4-4%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 1rem center;">
                             <option value="nano-banana-2" data-icon="🍌" data-price="Gemini 3.1 Flash Image | ₩97/장 | 한글 가능">🍌 나노바나나2 (Gemini 3.1 Flash, ₩97/장, 한글 가능) ★추천</option>
-                            <option value="nano-banana-pro" data-icon="🍌" data-price="Gemini 3 Pro Image | ₩185/장 | 한글 최강">🍌 나노바나나 프로 (Gemini 3 Pro, ₩185/장, 한글 최강·고가)</option>
-                            <option value="nano-banana" data-icon="🍌" data-price="Gemini 2.5 Flash Image | ₩54/장 | 한글 깨짐">🍌 나노바나나 (Gemini 2.5 Flash, ₩54/장, 한글 텍스트 깨짐)</option>
                             <option value="deepinfra" data-icon="⚡" data-price="$0.01/장 | FLUX-2">⚡ DeepInfra (FLUX-2,
                                 $0.01/장)</option>
                             <option value="openai-image" data-icon="🦆" data-price="gpt-image-1.5(기본)~2 | $0.02~$0.20 | 한글 최강">🦆 덕트테이프
@@ -4104,14 +4102,14 @@
                         </div>
                     </label>
 
-                    <!-- [2026-10-08] 소제목 이미지에 소제목 글자 넣기 — 한글을 직접 그리는 엔진(GPT 이미지·나노바나나 2/프로·Flow·리더스 나노바나나)만. 기본 OFF. -->
+                    <!-- [2026-10-08] 소제목 이미지에 소제목 글자 넣기 — 한글을 직접 그리는 엔진(GPT 이미지·나노바나나2·Flow·리더스 나노바나나)만. 기본 OFF. -->
                     <label
                         style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; cursor: pointer; padding: 0.5rem 0.75rem; background: rgba(59, 130, 246, 0.08); border-radius: var(--radius-sm); border: 1px solid rgba(59, 130, 246, 0.25);">
                         <input type="checkbox" id="image-heading-text-include"
                             style="width: 16px; height: 16px; accent-color: var(--primary);">
                         <div>
                             <span style="font-size: 0.85rem; color: var(--text-strong); font-weight: 600;">🔤 소제목 이미지에 소제목 글자 넣기</span>
-                            <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">소제목 문장을 줄이지 않고 그대로 이미지에 넣습니다. GPT 이미지·나노바나나 2/프로·Flow·리더스 나노바나나에서만 적용 (나노바나나 2.5 등 한글이 깨지는 엔진은 글자 없이).</span>
+                            <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: 0.4rem;">소제목 문장을 줄이지 않고 그대로 이미지에 넣습니다. GPT 이미지·나노바나나2·Flow·리더스 나노바나나에서만 적용 (한글이 깨지는 엔진은 글자 없이).</span>
                         </div>
                     </label>
 
@@ -4213,12 +4211,11 @@
                         필요합니다.
                     </p>
 
-                    <!-- 🍌 나노바나나2/프로 모델 및 프로젝트 한도 안내 -->
+                    <!-- 🍌 나노바나나2 모델 및 프로젝트 한도 안내 -->
                     <details style="margin-bottom: 0.75rem; font-size: 0.75rem; color: var(--text-muted);">
-                        <summary style="cursor: pointer; font-weight: 600; color: var(--text-strong);">🍌 나노바나나2/프로 사용 한도는?</summary>
+                        <summary style="cursor: pointer; font-weight: 600; color: var(--text-strong);">🍌 나노바나나2 사용 한도는?</summary>
                         <div style="margin-top: 0.5rem; padding: 0.5rem 0.75rem; background: rgba(251, 191, 36, 0.08); border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.2); line-height: 1.5;">
                             <p style="margin: 0 0 0.5rem 0;"><strong>나노바나나2 (Gemini 3.1 Flash Image):</strong><br>종료된 preview ID 대신 안정 모델을 사용합니다. 사용 가능 여부와 RPM·TPM·RPD는 프로젝트 등급과 과금 상태에 따라 달라지므로 Google AI Studio 사용량 페이지에서 확인하세요.</p>
-                            <p style="margin: 0;"><strong>나노바나나 프로 (Gemini 3 Pro Image):</strong><br>안정 모델을 사용합니다. 현재 단가와 프로젝트별 한도는 Google AI Studio에서 확인하며, 앱은 접근 불가 응답을 받으면 검증된 대체 모델로 복구합니다.</p>
                         </div>
                     </details>
 
@@ -6421,7 +6418,7 @@
                                 style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.6;">
                                 ✅ <strong>정책/계정 설정에 따라 무료 티어 또는 과금</strong> | 할당량은 각 AI 정책에 따름<br>
                                 ✅ <strong>글 생성</strong>: Gemini 3.1/3.5 · GPT-5.6 · Claude Haiku 4.5/Sonnet 5/Fable 5 (3단계 선택)<br>
-                                ✅ <strong>이미지 생성</strong>: Nano Banana Pro (Gemini 3 Pro 4K · 유료) / Flow (AI Pro/Ultra 무료) / ImageFX (Imagen 3.5 · 무료) / Leonardo · DeepInfra (FLUX) / 공공자료
+                                ✅ <strong>이미지 생성</strong>: 나노바나나2 (Gemini 3.1 Flash · 유료) / Flow (AI Pro/Ultra 무료) / ImageFX (Imagen 3.5 · 무료) / Leonardo · DeepInfra (FLUX) / 공공자료
                             </p>
 
                             <!-- ✅ [2026-01-27] AI 텍스트 엔진 저장 버튼 — [v2.10.168] var(--primary-gold) 미정의 fix -->
@@ -6521,9 +6518,6 @@
                                 <div style="font-weight: 700; color: #d97706; margin-bottom: 0.35rem; font-size: 0.95rem;">🍌 나노바나나 (Gemini API, 기본 나노바나나2)</div>
                                 <div style="font-size: 0.8rem; color: #1f2937; line-height: 1.7;">
                                     • <strong>나노바나나2 (Gemini 3.1 Flash): ₩97/장</strong> ★ 기본값<br>
-                                    • Gemini 2.5 Flash: <strong>₩28/장</strong> (빠름, 가성비)<br>
-                                    • Gemini 3 Pro: <strong>₩77/장</strong> (고품질)<br>
-                                    • Gemini 3 Pro 4K: <strong>₩336/장</strong> (초고해상도, 비쌈)<br>
                                     • Imagen 4 폴백: <strong>₩46/장</strong> (안전망)
                                 </div>
                             </div>
@@ -6556,13 +6550,11 @@
                                     <span>🍌 Flow</span><strong style="color: #10b981;">₩0</strong>
                                     <span>✨ ImageFX</span><strong style="color: #10b981;">₩0</strong>
                                     <span>🔥 FLUX Schnell</span><strong style="color: #10b981;">₩0</strong>
-                                    <span>🍌 Gemini 2.5 Flash</span><strong>₩196</strong>
                                     <span>🔥 FLUX-2 dev</span><strong>₩245</strong>
                                     <span>🦁 SeeDream 4.5</span><strong>₩392</strong>
                                     <span>🦆 덕트테이프 (Med)</span><strong>₩539</strong>
                                     <span>🍌 Gemini 3.1 Flash</span><strong>₩679</strong>
                                     <span>🦆 덕트테이프 (High)</span><strong style="color: #dc2626;">₩1,960</strong>
-                                    <span>🍌 Gemini 3 Pro 4K</span><strong style="color: #dc2626;">₩2,352</strong>
                                 </div>
                             </div>
                         </div>
@@ -6622,9 +6614,6 @@
                                     <select id="nano-banana-main-model"
                                         style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem; cursor: pointer;">
                                         <option value="gemini-3-1-flash" selected>🍌 나노바나나2 (Gemini 3.1 Flash) - ₩97 ★ 권장</option>
-                                        <option value="gemini-2.5-flash">⚡ Gemini 2.5 Flash - ₩28 (가성비)</option>
-                                        <option value="gemini-3-pro">🏆 Gemini 3 Pro - ₩77 (고품질)</option>
-                                        <option value="gemini-3-pro-4k">🎬 Gemini 3 Pro 4K - ₩336 (초고해상도, 비싸)</option>
                                     </select>
                                     <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem;">
                                         ℹ️ 첫 번째 이미지와 블로그 썸네일에 적용됩니다. 기본값: 나노바나나2.
@@ -6638,9 +6627,6 @@
                                     <select id="nano-banana-sub-model"
                                         style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 6px; color: var(--text-strong); font-size: 0.85rem; cursor: pointer;">
                                         <option value="gemini-3-1-flash" selected>🍌 나노바나나2 (Gemini 3.1 Flash) - ₩97 ★ 권장</option>
-                                        <option value="gemini-2.5-flash">⚡ Gemini 2.5 Flash - ₩28 (가성비)</option>
-                                        <option value="gemini-3-pro">🏆 Gemini 3 Pro - ₩77 (고품질)</option>
-                                        <option value="gemini-3-pro-4k">🎬 Gemini 3 Pro 4K - ₩336 (초고해상도, 비싸)</option>
                                     </select>
                                 </div>
                             </div>
@@ -7527,7 +7513,7 @@
                                         <span
                                             style="font-weight: 700; color: var(--text-strong); font-size: 0.85rem;">🖼️
                                             썸네일 텍스트 포함</span>
-                                        <span style="font-size: 0.75rem; color: var(--text-muted);">나노바나나프로는 항상
+                                        <span style="font-size: 0.75rem; color: var(--text-muted);">나노바나나2는 항상
                                             포함</span>
                                     </span>
                                 </label>
@@ -8379,12 +8365,6 @@
                             </label>
                             <label
                                 style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
-                                <input type="radio" name="continuous-modal-shopping-subimage-source" value="nano-banana-pro"
-                                    style="accent-color: #f59e0b;">
-                                <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🍌 나노바나나프로 (AI)</span>
-                            </label>
-                            <label
-                                style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
                                 <input type="radio" name="continuous-modal-shopping-subimage-source" value="openai-image"
                                     style="accent-color: #8b5cf6;">
                                 <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🦆 덕트테이프 gpt-image-2 (AI)</span>
@@ -8403,7 +8383,7 @@
                             </label>
                         </div>
                         <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">
-                            ℹ️ AI: 나노바나나2·나노바나나프로·덕트테이프(gpt-image-2)·리더스 무제한만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로
+                            ℹ️ AI: 나노바나나2·덕트테이프(gpt-image-2)·리더스 무제한만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로
                         </p>
                     </div>
 
@@ -10417,12 +10397,6 @@
                                 </label>
                                 <label
                                     style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
-                                    <input type="radio" name="ma-shopping-subimage-source" value="nano-banana-pro"
-                                        style="accent-color: #f59e0b;">
-                                    <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🍌 나노바나나프로 (AI)</span>
-                                </label>
-                                <label
-                                    style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
                                     <input type="radio" name="ma-shopping-subimage-source" value="openai-image"
                                         style="accent-color: #8b5cf6;">
                                     <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🦆 덕트테이프 gpt-image-2 (AI)</span>
@@ -10441,7 +10415,7 @@
                                 </label>
                             </div>
                             <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">
-                                ℹ️ AI: 나노바나나2·나노바나나프로·덕트테이프(gpt-image-2)·리더스 무제한만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로
+                                ℹ️ AI: 나노바나나2·덕트테이프(gpt-image-2)·리더스 무제한만 대표 상품 이미지 기반 생성 | 수집: 크롤링 원본 그대로
                             </p>
                         </div>
 
@@ -13121,18 +13095,6 @@
                             <td style="padding: 0.7rem; text-align: right; color: #4ade80;">가능 ✓</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.7rem; font-weight: bold; color: #fbbf24;">🍌 나노바나나 프로</td>
-                            <td style="padding: 0.7rem; color: #e2e8f0;">Gemini 3 Pro Image · 끝판왕 · 한글 최강</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩185</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #4ade80;">최강 ✓</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.7rem; font-weight: bold; color: #fbbf24;">🍌 나노바나나 <span style="font-size: 0.7rem; color: #94a3b8;">(구버전)</span></td>
-                            <td style="padding: 0.7rem; color: #e2e8f0;">Gemini 2.5 Flash Image · 퀄리티 좋음</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩54</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #a1a1aa;">깨짐 ✗</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 0.7rem; font-weight: bold; color: #60a5fa;">⚡ DeepInfra (FLUX-2)</td>
                             <td style="padding: 0.7rem; color: #e2e8f0;">FLUX-2 · 빠른 저비용 · API 키 필요</td>
                             <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩17</td>
@@ -13211,20 +13173,6 @@
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩97</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩388</td>
                             <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩679</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.6rem; color: #fbbf24; font-weight: bold;">🍌 나노바나나 프로</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩185</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩185</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩740</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩1,295</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.6rem; color: #fbbf24; font-weight: bold;">🍌 나노바나나 <span style="font-size:0.7rem; color:#94a3b8;">(구버전)</span></td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩54</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩54</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩216</td>
-                            <td style="padding: 0.6rem; text-align: right; color: #cbd5e1;">₩378</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 0.6rem; color: #60a5fa; font-weight: bold;">⚡ DeepInfra (FLUX-2)</td>
@@ -13339,8 +13287,8 @@
                     <h5 style="margin: 0 0 0.5rem 0; color: #60a5fa; font-size: 0.92rem;">💡 실전 운용 팁 — 비용 최소화</h5>
                     <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.82rem; line-height: 1.7;">
                         <li><strong style="color: #4ade80;">대량·무료</strong> → Flow(쿼터 내) 또는 Dropshot 구독(무제한)</li>
-                        <li><strong style="color: #fbbf24;">한글 썸네일</strong> → 나노바나나2(₩97) / 나노바나나 프로(₩185) / 덕테이프(₩77~280)</li>
-                        <li><strong style="color: #fca5a5;">최저 종량제</strong> → Prodia(₩14, 한글 깨짐) · 나노바나나(₩54, 한글 깨짐)</li>
+                        <li><strong style="color: #fbbf24;">한글 썸네일</strong> → 나노바나나2(₩97) / 덕테이프(₩77~280)</li>
+                        <li><strong style="color: #fca5a5;">최저 종량제</strong> → Prodia(₩14, 한글 깨짐)</li>
                         <li><strong style="color: #f472b6;">쇼핑커넥트 모드</strong> → 수집 이미지 자동 사용 (AI 엔진 우회 = ₩0)</li>
                     </ul>
                 </div>
@@ -13392,9 +13340,9 @@
                         </h5>
                         <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.7;">
                             <li><strong>글:</strong> Claude Fable 5 (₩588 · 절약 ₩437) — 균형을 원하면 Claude Sonnet 5 (₩176 · 절약 ₩131)</li>
-                            <li><strong>썸네일·본문 모두:</strong> <strong>나노바나나 프로</strong> (Gemini 3 Pro Image · 한글 최강 · ₩185/장) — 최고가·최고퀄</li>
+                            <li><strong>썸네일·본문 모두:</strong> <strong>나노바나나2</strong> (Gemini 3.1 Flash Image · 한글 가능 · ₩97/장) — 한글 썸네일 권장</li>
                             <li style="margin-top: 0.5rem; color: #fbbf24; font-weight: bold; background: rgba(245, 158, 11, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
-                                총 비용: 약 ₩1,880 / 편 (글 ₩588 + 이미지 7장 ₩1,295)</li>
+                                총 비용: 약 ₩1,267 / 편 (글 ₩588 + 이미지 7장 ₩679)</li>
                         </ul>
                         <div style="margin-top: 0.8rem; font-size: 0.8rem; color: #fde68a; background: rgba(245, 158, 11, 0.1); padding: 0.6rem; border-radius: 6px; line-height: 1.5;">
                             💡 중요 브랜드 포스트 · $10(약 ₩14,000)으로 약 7편

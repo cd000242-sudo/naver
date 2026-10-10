@@ -1187,7 +1187,7 @@ export async function generateNanoBananaProImage(prompt: string, headingOrRegene
   }
   const ref = heading ? await resolveReferenceImageForHeadingAsync(heading) : {};
   const response = await generateImagesWithCostSafety({
-    provider: 'nano-banana-pro',
+    provider: 'nano-banana-2',
     items: [{ heading: heading || 'image', prompt: prompt, ...ref }],
     regenerate
   });

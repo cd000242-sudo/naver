@@ -386,10 +386,6 @@ export async function initImageManagementTab(): Promise<void> {
 
       if (selectedSource === 'nano-banana-2') {
         appendLog('✅ 🍌 나노바나나2(Gemini 3.1 Flash Image)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩97 | 한글 가능');
-      } else if (selectedSource === 'nano-banana-pro') {
-        appendLog('✅ 🍌 나노바나나 프로(Gemini 3 Pro Image)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩185 | 한글 최강');
-      } else if (selectedSource === 'nano-banana') {
-        appendLog('✅ 🍌 나노바나나(Gemini 2.5 Flash Image)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩54 | 한글 텍스트 깨짐 주의');
       } else if (selectedSource === 'saved') {
         const confirmed = window.confirm(
           '⚠️ 저작권 경고\n\n' +
@@ -399,8 +395,8 @@ export async function initImageManagementTab(): Promise<void> {
         );
 
         if (!confirmed) {
-          // 이전 선택으로 되돌리기 (나노 바나나 프로로)
-          imageSourceSelect.value = 'nano-banana-pro';
+          // 이전 선택으로 되돌리기 (나노바나나2로)
+          imageSourceSelect.value = 'nano-banana-2';
           appendLog('⚠️ 저장된 이미지 사용이 취소되었습니다.');
           return;
         }
@@ -505,8 +501,6 @@ export async function initImageManagementTab(): Promise<void> {
       if (imageSourceInfoBadge) {
         const colorMap: Record<string, string> = {
           'nano-banana-2': 'linear-gradient(135deg, #f59e0b, #d97706)',
-          'nano-banana-pro': 'linear-gradient(135deg, #03c75a, #02a94f)',
-          'nano-banana': 'linear-gradient(135deg, #fbbf24, #f59e0b)',
           'deepinfra': 'linear-gradient(135deg, #fb923c, #f97316)',
           'falai': 'linear-gradient(135deg, #ec4899, #db2777)',
           'pollinations': 'linear-gradient(135deg, #f472b6, #ec4899)',
@@ -519,7 +513,7 @@ export async function initImageManagementTab(): Promise<void> {
           'local-folder': 'linear-gradient(135deg, #4338ca, #6366f1)',
           'saved': 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
         };
-        imageSourceInfoBadge.style.background = colorMap[selectedSource] || colorMap['nano-banana-pro'];
+        imageSourceInfoBadge.style.background = colorMap[selectedSource] || colorMap['nano-banana-2'];
       }
     });
 

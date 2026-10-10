@@ -242,7 +242,7 @@ export function initHeadingImageGeneration(): void {
         appendLog(`🎨 ${headingsToGenerate.length}개 소제목의 이미지 생성 시작... (전체 ${selectedHeadings.length}개 중)`);
 
         const selectedBtn = (document.querySelector('.image-source-btn.selected') || document.querySelector('.unified-img-source-btn.selected')) as HTMLButtonElement;
-        const provider = (selectedBtn?.dataset.source || 'nano-banana-pro') as 'nano-banana-pro' | 'prodia' | 'stability' | 'deepinfra' | 'falai' | 'pollinations';
+        const provider = (selectedBtn?.dataset.source || 'nano-banana-2') as 'nano-banana-2' | 'nano-banana-pro' | 'prodia' | 'stability' | 'deepinfra' | 'falai' | 'pollinations';
 
         // ✅ [2026-03-03 FIX v2] 옵션 A+B 강화: imagePrompt 영문/한국어/없음 모두 처리
         // ✅ [v2.10.33] 무제한 Promise.all → batch=3 (외부 AI 번역 호출 동시성 제한)
@@ -550,7 +550,7 @@ export function initHeadingImageGeneration(): void {
 
     try {
       const result = await generateImagesWithCostSafety({
-        provider: 'nano-banana-pro',
+        provider: 'nano-banana-2', // [2026-10-10] 예비 이미지도 나노바나나2
         items,
         postTitle: blogTitle,
         isFullAuto: false,
@@ -571,7 +571,7 @@ export function initHeadingImageGeneration(): void {
           previewDataUrl: preview,
           prompt: items[idx]?.prompt || '',
           headingIndex: -1, // 예비 이미지는 소제목 인덱스와 무관
-          provider: 'nano-banana-pro',
+          provider: 'nano-banana-2',
         };
       });
 
@@ -585,6 +585,7 @@ export function initHeadingImageGeneration(): void {
 
   // ✅ [2026-02-02] 이미지 소스 한글 이름 매핑
   const imageSourceNames: Record<string, string> = {
+    'nano-banana-2': '나노바나나2 (Gemini 3.1 Flash)',
     'nano-banana-pro': '나노 바나나 프로 (Gemini)',
     'deepinfra': 'DeepInfra (FLUX-2-dev)',
     'deepinfra-flux': 'DeepInfra (FLUX-2-dev)',
@@ -907,7 +908,7 @@ export function initHeadingImageGeneration(): void {
       const selectedSource = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
       // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
       const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
-      const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-pro';
+      const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-2';
       console.log(`[ImageGeneration] 이미지 소스: ${imageSource} (드롭다운: ${dropdownSource || '없음'}, 버튼: ${selectedSource?.dataset.source || '없음'})`);
 
       try {
@@ -1853,7 +1854,7 @@ export function initHeadingImageGeneration(): void {
       const selectedSource = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
       // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
       const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
-      const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-pro';
+      const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-2';
       console.log(`[ImageGeneration] 남은 이미지 소스: ${imageSource}`);
 
       try {
@@ -5175,7 +5176,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
     // ✅ [2026-02-02 FIX] 드롭다운 값 우선 사용
     const selectedSource = document.querySelector('.image-source-btn.selected') as HTMLButtonElement;
     const dropdownSource = (document.getElementById('image-source-select') as HTMLSelectElement)?.value;
-    const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-pro';
+    const imageSource = dropdownSource || selectedSource?.dataset.source || 'nano-banana-2';
     console.log(`[ImageGeneration] 개별 이미지 소스: ${imageSource}`);
 
     // ✅ 블로그 제목 가져오기 (썸네일용)

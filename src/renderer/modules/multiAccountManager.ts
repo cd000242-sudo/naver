@@ -3,6 +3,7 @@
 "use strict";
 import { awaitNetworkWaitRecheck, classifyPublishFailure, describeAccountStop, extractAccountStopCode, findPausedQueueAccounts, readAccountPause, stopsAllAccounts } from '../../automation/publishFailureClassifier.js';
 import { installAccountSafetyControls } from './accountSafetyControls.js';
+import { normalizeRetiredNanoEngine } from '../../runtime/imageProviderMigration.js';
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => installAccountSafetyControls(), { once: true });
 else installAccountSafetyControls();
 
@@ -423,7 +424,7 @@ function resolveImageProviderFallback() {
     const rawGlobal = _rawPipeline.globalImageSource;
     return (rawFullAuto && !INVALID_PROVIDERS.includes(rawFullAuto) ? rawFullAuto : null) ||
         (rawGlobal && !INVALID_PROVIDERS.includes(rawGlobal) ? rawGlobal : null) ||
-        'nano-banana-pro';
+        'nano-banana-2';
 }
 async function generateImagesForAutomation(provider, headings, postTitle, options = {}) {
     const flightKey = [
@@ -1668,7 +1669,7 @@ async function initMultiAccountPublishModal() {
             keywordInput.value = '';
         if (imageSourceSelect) {
             const currentUiSource = UnifiedDOMCache.getImageSource();
-            imageSourceSelect.value = currentUiSource || 'nano-banana-pro';
+            imageSourceSelect.value = currentUiSource || 'nano-banana-2';
         }
         if (toneSelect)
             toneSelect.value = 'friendly';
@@ -1690,7 +1691,7 @@ async function initMultiAccountPublishModal() {
                 if (ctaTextInputInit && typeof last.ctaText === 'string')
                     ctaTextInputInit.value = last.ctaText;
                 if (imageSourceSelect && typeof last.imageSource === 'string')
-                    imageSourceSelect.value = last.imageSource;
+                    imageSourceSelect.value = normalizeRetiredNanoEngine(last.imageSource);
                 const catSel = document.getElementById('ma-setting-category');
                 if (catSel && typeof last.category === 'string')
                     catSel.value = last.category;
@@ -2490,7 +2491,7 @@ async function initMultiAccountPublishModal() {
                 if (dailyLimitInput)
                     dailyLimitInput.value = String(account.settings?.dailyLimit || 5);
                 if (imageSourceSelect)
-                    imageSourceSelect.value = account.settings?.imageSource || 'gemini';
+                    imageSourceSelect.value = normalizeRetiredNanoEngine(account.settings?.imageSource) || 'gemini';
                 if (toneSelect)
                     toneSelect.value = account.settings?.toneStyle || 'friendly';
                 if (publishModeSelect)
@@ -3534,7 +3535,7 @@ async function initMultiAccountPublishModal() {
                         const isShoppingAiMode = queueItem.contentMode === 'affiliate' && scSubImageModePre === 'ai';
                         const imageSource = isShoppingAiMode
                             ? itemPipelineCfg.shopping.aiImageEngine
-                            : (queueItem.imageSource || getFullAutoImageSource());
+                            : (normalizeRetiredNanoEngine(queueItem.imageSource) || getFullAutoImageSource());
                         let shoppingCollectedImages = resolveShoppingRepresentativeReference([
                             ...(structuredContent.collectedImages || []),
                             ...(structuredContent.images || []),

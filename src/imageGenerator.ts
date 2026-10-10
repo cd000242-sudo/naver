@@ -402,6 +402,12 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     console.log(`[ImageGenerator] 📋 프로바이더 정규화: ${options.provider} → deepinfra`);
     normalizedProvider = 'deepinfra';
   }
+  // [2026-10-10] 나노바나나는 나노바나나2 한 종류만 노출 — 옛 저장값·큐가 pro/2.5 provider로 직접 들어와도
+  //   고가 3 Pro(₩185)·2.5(한글 깨짐)를 부르지 않고 나노바나나2로 보낸다. 아래 pro/2.5 라우팅 자체는 백엔드 호환용으로 남긴다.
+  if (normalizedProvider === 'nano-banana-pro' || normalizedProvider === 'nano-banana') {
+    console.log(`[ImageGenerator] 🔁 ${normalizedProvider} → nano-banana-2 (나노바나나 단일화)`);
+    normalizedProvider = 'nano-banana-2';
+  }
   const requestedProvider = normalizedProvider;
   const fallbackPolicy = normalizeImageFallbackPolicy(options.imageFallbackPolicy);
   console.log(`[이미지생성] 🧭 엔진 실패 시 동작: ${fallbackPolicy}`);
@@ -1003,17 +1009,17 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     }
   }
 
-  // ✅ [2026-03-17 FIX] 'saved', 'skip' 등 유효하지 않은 provider는 nano-banana-pro로 폴백
+  // ✅ [2026-03-17 FIX] 'saved', 'skip' 등 유효하지 않은 provider는 폴백 (2026-10-10: 나노바나나2로 변경)
   const unsupportedReason = `지원하지 않는 이미지 제공자입니다: ${normalizedProvider}`;
   if (!shouldUseAutomaticFallback(fallbackPolicy)) {
-    throw createFallbackPolicyError(requestedProvider, 'nano-banana-pro', fallbackPolicy, unsupportedReason);
+    throw createFallbackPolicyError(requestedProvider, 'nano-banana-2', fallbackPolicy, unsupportedReason);
   }
-  console.warn(`[ImageGenerator] ⚠️ 지원하지 않는 제공자 "${normalizedProvider}" → nano-banana-pro(Gemini)로 폴백 (결과 보장 모드)`);
-  normalizedProvider = 'nano-banana-pro';
+  console.warn(`[ImageGenerator] ⚠️ 지원하지 않는 제공자 "${normalizedProvider}" → nano-banana-2(Gemini)로 폴백 (결과 보장 모드)`);
+  normalizedProvider = 'nano-banana-2';
 
-  // nano-banana-pro 폴백 실행 (Gemini API)
+  // nano-banana-2 폴백 실행 (Gemini API)
   try {
-    console.log(`[이미지생성] 🍌 폴백: 나노 바나나 프로(Gemini)로 ${items.length}개 이미지 생성 시작...`);
+    console.log(`[이미지생성] 🍌 폴백: 나노바나나2(Gemini)로 ${items.length}개 이미지 생성 시작...`);
     const fallbackImages = await generateWithNanoBananaPro(
       items,
       options.postTitle,
@@ -1025,13 +1031,13 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       options.stopCheck,
       onImageGenerated,
       (options as any).productData,
-      undefined,
+      NANO_PROVIDER_TO_MODEL_KEY['nano-banana-2'], // [2026-10-10] 폴백도 나노바나나2 모델로 고정
       shouldForceSequentialImages
     );
-    console.log(`[이미지생성] ✅ 폴백 나노 바나나 프로(Gemini)로 ${fallbackImages.length}개 이미지 생성 완료!`);
+    console.log(`[이미지생성] ✅ 폴백 나노바나나2(Gemini)로 ${fallbackImages.length}개 이미지 생성 완료!`);
     return finalizeImages(annotateEngineTrace(fallbackImages, {
       requestedProvider,
-      actualProvider: 'nano-banana-pro',
+      actualProvider: 'nano-banana-2',
       policy: fallbackPolicy,
       fallbackReason: unsupportedReason,
     }));

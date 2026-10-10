@@ -41,7 +41,7 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
       headingImageMode: 'all',
       thumbnailTextInclude: false,
       textOnlyPublish: false,
-      imageSource: 'nano-banana-pro',
+      imageSource: 'nano-banana-2',
       imageModel: '',
       imageStyle: 'realistic',
       imageRatio: '1:1',

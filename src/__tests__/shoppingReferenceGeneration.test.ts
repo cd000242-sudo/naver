@@ -566,8 +566,11 @@ describe('shopping reference engine UI wiring', () => {
   it('does not expose reference-free engines as selectable shopping AI engines', () => {
     expect(html).not.toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="(?:flow|prodia)"/);
     expect(html).not.toMatch(/name="ma-shopping-subimage-source"\s+value="(?:flow|prodia)"/);
-    expect(html).toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="nano-banana-pro"/);
-    expect(html).toMatch(/name="ma-shopping-subimage-source"\s+value="nano-banana-pro"/);
+    // [2026-10-10] 나노바나나는 나노바나나2만 남기고 프로 라디오는 내린다
+    expect(html).toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="nano-banana-2"/);
+    expect(html).toMatch(/name="ma-shopping-subimage-source"\s+value="nano-banana-2"/);
+    expect(html).not.toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="nano-banana-pro"/);
+    expect(html).not.toMatch(/name="ma-shopping-subimage-source"\s+value="nano-banana-pro"/);
     expect(continuous).not.toMatch(/normalizedValue === 'dropshot' \|\| normalizedValue === 'flow'/);
     expect(multi).not.toMatch(/value === 'dropshot' \|\| value === 'flow'/);
   });

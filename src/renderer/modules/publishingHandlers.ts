@@ -1805,7 +1805,7 @@ export async function handleMultiAccountPublish(): Promise<void> {
   }
   // ✅ [2026-02-16 FIX] 다중계정 발행 전 API 키 체크 — 이미 로드된 이미지가 있으면 건너뛰기
   const firstSelectedBtn = (document.querySelector('.image-source-btn.selected') || document.querySelector('.unified-img-source-btn.selected')) as HTMLButtonElement;
-  const commonImageSource = firstSelectedBtn?.dataset.source || 'nano-banana-pro';
+  const commonImageSource = firstSelectedBtn?.dataset.source || 'nano-banana-2';
   const intervalPolicy = getSafeSequentialMultiAccountInterval(requestedIntervalSeconds, selectedAccountIds.length, commonImageSource);
   const maPreloadedImages = ImageManager.getAllImages();
   const maHasPreloadedImages = maPreloadedImages && maPreloadedImages.length > 0;
@@ -1861,7 +1861,7 @@ export async function handleMultiAccountPublish(): Promise<void> {
     keywords: (document.getElementById('unified-keywords') as HTMLInputElement)?.value || '',
     url: (document.querySelector('.unified-url-input') as HTMLInputElement)?.value || '',
     generator: UnifiedDOMCache.getGenerator(),
-    imageSource: UnifiedDOMCache.getImageSource() || 'nano-banana-pro',
+    imageSource: UnifiedDOMCache.getImageSource() || 'nano-banana-2',
     toneStyle: (document.getElementById('unified-tone-style') as HTMLInputElement)?.value || 'friendly',
     useAiImage: (document.getElementById('unified-use-ai-image') as HTMLInputElement)?.checked ?? true,
     createProductThumbnail: (document.getElementById('unified-create-product-thumbnail') as HTMLInputElement)?.checked ?? false,

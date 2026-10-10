@@ -360,7 +360,7 @@ export class ThumbnailGenerator {
 
         // ✅ 나노 바나나 프로 (Gemini) 사용
         const result = await generateImagesWithCostSafety({
-          provider: 'nano-banana-pro',
+          provider: 'nano-banana-2',
           // ✅ [2026-03-01 FIX] 썸네일 전용 모델(nanoBananaMainModel)을 타도록 isThumbnail 명시
           items: [{ heading: 'thumbnail-bg', prompt: prompt, isThumbnail: true }],
           styleHint: 'background',

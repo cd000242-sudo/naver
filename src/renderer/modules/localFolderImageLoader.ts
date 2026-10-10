@@ -397,19 +397,19 @@ export async function loadLocalFolderWithFallback(
 }
 
 /** AI 폴백 시 안전한 provider 반환 (local-folder 자기참조 방지)
- *  Priority: user-selected fallback engine > main image source > nano-banana-pro
+ *  Priority: user-selected fallback engine > main image source > nano-banana-2
  *  [Phase 7.1-f] main source read goes through the pipeline accessor;
  *  localFolderFallbackEngine is a flow-local key and stays a direct read. */
 function getSafeAiProvider(fallbackProvider?: string): string {
   if (fallbackProvider !== undefined) {
-    const picked = fallbackProvider.trim() || 'nano-banana-pro';
-    return picked === 'local-folder' ? 'nano-banana-pro' : picked;
+    const picked = fallbackProvider.trim() || 'nano-banana-2';
+    return picked === 'local-folder' ? 'nano-banana-2' : picked;
   }
 
   const explicit = localStorage.getItem('localFolderFallbackEngine');
   const main = readRawPipelineSettings().fullAutoImageSource;
-  const picked = explicit || main || 'nano-banana-pro';
-  return picked === 'local-folder' ? 'nano-banana-pro' : picked;
+  const picked = explicit || main || 'nano-banana-2';
+  return picked === 'local-folder' ? 'nano-banana-2' : picked;
 }
 
 // ═══════════════════════════════════════════════════════════════════
