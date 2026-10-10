@@ -1,0 +1,105 @@
+name: Windows Release
+
+# Builds and publishes the Windows installer on a GitHub-hosted Windows runner, for releases started
+# away from the owner's PC. Same order as scripts/release-all.js: release gate -> installer ->
+# packaged-app smoke -> latest.yml -> upload -> latest pointer check. Manual only.
+# The release is created with its assets in one call (draft -> upload -> publish), so no empty
+# release ever becomes Latest (latest.yml 404 breaks every customer's auto-update).
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'package.json version on the selected commit (e.g. 2.11.341)'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: windows-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build and publish Setup.exe
+    runs-on: windows-latest
+    timeout-minutes: 120
+    env:
+      VERSION: ${{ inputs.version }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check version, tag and release notes
+        shell: bash
+        run: |
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "::error::version must be X.Y.Z"; exit 1; fi
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          if [ "$PKG_VERSION" != "$VERSION" ]; then echo "::error::package.json is $PKG_VERSION, input is $VERSION"; exit 1; fi
+          if git ls-remote --exit-code --tags origin "refs/tags/v$VERSION" > /dev/null; then echo "::error::tag v$VERSION already exists"; exit 1; fi
+          if [ ! -s "tmp/release-notes-v$VERSION.md" ]; then echo "::error::tmp/release-notes-v$VERSION.md is missing"; exit 1; fi
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          for attempt in 1 2 3; do
+            npm ci && exit 0
+            echo "::warning::npm ci failed (attempt $attempt/3)"
+            sleep $((attempt * 30))
+          done
+          exit 1
+
+      - name: Release gate (lint, tests, coverage, build, IPC, self-test, E2E)
+        run: node scripts/release-gate.js
+
+      - name: Clear sensitive settings
+        run: node scripts/reset-config-for-pack.js
+
+      - name: Build installer
+        run: npx electron-builder --win --config.win.target=nsis --publish never
+
+      - name: Packaged app smoke
+        run: node scripts/packaged-app-smoke.mjs
+
+      - name: Restore after pack
+        run: node scripts/restore-after-pack.js
+
+      - name: Sync latest.yml
+        run: node scripts/fix-latest-yml.js
+
+      - name: Publish release with assets
+        shell: bash
+        run: |
+          EXE="release_final/Better-Life-Naver-Setup-$VERSION.exe"
+          for f in "$EXE" "$EXE.blockmap" release_final/latest.yml; do
+            if [ ! -s "$f" ]; then echo "::error::missing artifact $f"; ls -la release_final; exit 1; fi
+          done
+          grep -q "^version: $VERSION$" release_final/latest.yml || { echo "::error::latest.yml version mismatch"; cat release_final/latest.yml; exit 1; }
+          gh release create "v$VERSION" "$EXE" "$EXE.blockmap" release_final/latest.yml \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "v$VERSION" \
+            --notes-file "tmp/release-notes-v$VERSION.md" --latest
+
+      - name: Verify assets and Latest pointer
+        shell: bash
+        run: |
+          sleep 10
+          ASSETS=$(gh release view "v$VERSION" --repo "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name')
+          echo "$ASSETS"
+          for name in "Better-Life-Naver-Setup-$VERSION.exe" "Better-Life-Naver-Setup-$VERSION.exe.blockmap" latest.yml; do
+            echo "$ASSETS" | grep -qx "$name" || { echo "::error::asset $name missing"; exit 1; }
+          done
+          LATEST=$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)
+          if [ "$LATEST" != "v$VERSION" ]; then echo "::error::Latest is $LATEST, expected v$VERSION"; exit 1; fi
+          curl -fsSL "https://github.com/$GITHUB_REPOSITORY/releases/latest/download/latest.yml" | tee latest-check.yml
+          grep -q "^version: $VERSION$" latest-check.yml || { echo "::error::releases/latest/download/latest.yml is not $VERSION"; exit 1; }
