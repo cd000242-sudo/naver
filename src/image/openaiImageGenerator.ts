@@ -2,6 +2,7 @@
 // OpenAI Images API를 사용한 고품질 이미지 생성
 
 import axios from 'axios';
+import { normalizeOpenaiImageModel } from '../runtime/modelRegistry.js';
 import * as fs from 'fs';
 import * as path from 'path';
 import { app } from 'electron';
@@ -27,12 +28,11 @@ import { buildContextualImagePrompt, buildHeadingTitleTypography, buildPosterTit
 const OPENAI_IMAGES_API_URL = 'https://api.openai.com/v1/images/generations';
 // [2026-10-08 사장님 "AI 티가 많이 난다"] A cover reads as a real photo, not a render.
 const NATURAL_PHOTO_LOOK = 'PHOTO LOOK: a real camera photograph — 50mm lens, soft natural daylight, true-to-life colours and skin texture, gentle depth of field. Avoid airbrushed or plastic skin, HDR glow, neon, lens flare, floating particles, a 3D-render or illustration look, and distorted hands or extra fingers.';
-// ✅ 모델은 사용자 선택(config.openaiImageModel). gpt-image-1.5 = 저비용 기본,
-//    gpt-image-2 = 고품질. config 누락 시 저비용 기본으로 폴백해 비용이 조용히
+// ✅ 모델은 사용자 선택(config.openaiImageModel). [2026-10-10] Flare = 속도형 기본,
+//    Sunburst = 품질형. config 누락 시 저비용 기본으로 폴백해 비용이 조용히
 //    상승하는 일을 차단한다. 두 모델 모두 Organization 인증 필요(403) 가능 —
 //    미인증 시 OPENAI_ORG_VERIFY_REQUIRED: 태그 에러로 렌더러가 안내 모달 표시.
 //    gpt-image-2.5-flare / -sunburst (2026-09) 는 5단계 품질 — resolveOpenAIImageQuality 가 모델별로 정규화.
-const DEFAULT_OPENAI_IMAGE_MODEL = 'gpt-image-1.5';
 const MIN_VALID_IMAGE_BYTES = 1024;
 
 /**
@@ -93,7 +93,8 @@ export async function generateWithOpenAIImage(
         || '';
     let triedFallbackTextKey = false;
 
-    const resolvedModel = overrideModel || config.openaiImageModel || DEFAULT_OPENAI_IMAGE_MODEL;
+    // [2026-10-10] 옛 값은 Flare 로 정규화하되, 호출자가 명시한 dall-e-3 강제 지정은 그대로 둔다.
+    const resolvedModel: string = overrideModel === 'dall-e-3' ? 'dall-e-3' : normalizeOpenaiImageModel(overrideModel || config.openaiImageModel);
     console.log(`[OpenAI-Image] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${resolvedModel}, 키 source: ${keySource}, 키 길이: ${apiKey.length})`);
 
     // ✅ [2026-03-03] 참조 이미지 사전 캐싱 (쇼핑커넥트 수집 이미지)
@@ -465,7 +466,7 @@ export async function generateWithOpenAIImage(
                         break;
                     }
 
-                    // ✅ 모델 미존재/미지원 — gpt-image-1.5 등 접근 불가. silent 폴백 금지(사용자 선택 존중), 즉시 중단.
+                    // ✅ 모델 미존재/미지원 — 모델 접근 불가. silent 폴백 금지(사용자 선택 존중), 즉시 중단.
                     const isModelUnavailable = (status === 400 || status === 404)
                         && (errCode === 'model_not_found'
                             || /model.*(not found|does not exist|not supported|unsupported)/i.test(errMsg));
@@ -543,7 +544,7 @@ export async function generateSingleOpenAIImage(
     try {
         // ✅ 테스트 이미지도 사용자 환경설정(모델·품질)을 반영 — config 직접 로드 (호출자 시그니처 변경 불필요)
         const config = await loadConfig();
-        const singleModel = options.model || config.openaiImageModel || DEFAULT_OPENAI_IMAGE_MODEL;
+        const singleModel = normalizeOpenaiImageModel(options.model || config.openaiImageModel);
         const singleQuality = resolveOpenAIImageQuality(singleModel, config.openaiImageQuality);
         const response = await axios.post(
             OPENAI_IMAGES_API_URL,

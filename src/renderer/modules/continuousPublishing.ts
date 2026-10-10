@@ -3214,7 +3214,7 @@ const imageSourceNames: Record<string, string> = {
   'falai': '🎨 Fal.ai FLUX',
   'pollinations': '🌸 Pollinations (무료)',
   'leonardoai': '🎨 Leonardo AI',
-  'openai-image': '🦆 덕트테이프 (gpt-image-1.5/2)',
+  'openai-image': '🦆 덕트테이프 (gpt-image-2.5)',
   'dall-e-3': '🦆 GPT 이미지 시리즈 (레거시 설정)',
   'imagefx': '✨ ImageFX (Google Labs, 제한 가능)',
   'flow': '🍌 Flow (Nano Banana 2)', // ✅ [v1.4.80]
@@ -3577,7 +3577,7 @@ function renderQueueListV2(): void {
   });
 }
 
-// v2.7.5: 덕트테이프(gpt-image-2) 사용 시 OpenAI Organization 미인증 안내 모달
+// v2.7.5: 덕트테이프(gpt-image-2.5) 사용 시 OpenAI Organization 미인증 안내 모달
 // 단일 인스턴스 가드 — 연속 발행 중 N건 연속 실패해도 모달 1개만 표시
 let __openaiOrgVerifyModalShown = false;
 function showOpenAIOrgVerifyModal(): void {

@@ -26,7 +26,7 @@ export function getCostRiskProviderLabel(provider: string): string {
     if (p === 'prodia') return 'Prodia AI';
     if (p === 'stability') return 'Stability AI';
     if (p === 'leonardoai') return 'Leonardo AI';
-    if (p === 'openai-image') return 'OpenAI 덕트테이프 (gpt-image-1.5 / 2 / 2.5)';
+    if (p === 'openai-image') return 'OpenAI 덕트테이프 (gpt-image-2.5 Flare / Sunburst)';
     if (p === 'dall-e-3') return 'OpenAI GPT 이미지 시리즈 (레거시 설정)';
     return p || 'AI 이미지';
 }
@@ -48,9 +48,7 @@ export function getTodayKey(): string {
  * import할 수 없으므로 표시용 사본을 둔다 (가격 변경 시 두 곳 동시 갱신 필요).
  */
 const OPENAI_IMAGE_PRICE_USD: Record<string, Record<string, number>> = {
-    'gpt-image-1.5': { low: 0.009, medium: 0.034, high: 0.133 },
-    'gpt-image-2': { low: 0.006, medium: 0.053, high: 0.211 },
-    // gpt-image-2.5 (2026-09): 5단계. 라벨 의미가 바뀌어 2.5 high ≈ 구 gpt-image-2 medium, 2.5 max ≈ 구 high.
+    // gpt-image-2.5 (2026-09): 5단계. [2026-10-10] 덕트테이프는 이 두 모델만 남겼다 (옛 1.5/2 단가는 기록용 apiUsageTracker 에만 둔다).
     'gpt-image-2.5-flare': { low: 0.0059, medium: 0.0132, high: 0.0527, xhigh: 0.0937, max: 0.2107 },
     'gpt-image-2.5-sunburst': { low: 0.0059, medium: 0.0132, high: 0.0527, xhigh: 0.0937, max: 0.2107 },
 };
@@ -69,7 +67,7 @@ export function getOpenAIImageQualities(model: string): string[] {
 
 /** OpenAI 이미지 한 장당 예상 비용(원). 모델/품질 미지정 시 저비용 기본으로 폴백. */
 export function getOpenAIImageCostKRW(model: string, quality: string, usdToKrwRate: number = 1400): number {
-    const tier = OPENAI_IMAGE_PRICE_USD[model] || OPENAI_IMAGE_PRICE_USD['gpt-image-1.5'];
+    const tier = OPENAI_IMAGE_PRICE_USD[model] || OPENAI_IMAGE_PRICE_USD['gpt-image-2.5-flare'];
     // xhigh/max 는 2.5 전용 — 구 모델에 들어오면 high 로 취급 (생성기와 동일 규칙)
     const usd = tier[quality] ?? (quality === 'xhigh' || quality === 'max' ? tier.high : tier.medium);
     const rate = (typeof usdToKrwRate === 'number' && usdToKrwRate > 0) ? usdToKrwRate : 1400;
@@ -77,7 +75,7 @@ export function getOpenAIImageCostKRW(model: string, quality: string, usdToKrwRa
 }
 
 /**
- * "한 장당 약 ₩56원 (gpt-image-1.5 / Medium)" 형태의 표시 문자열.
+ * "한 장당 약 ₩18원 (gpt-image-2.5-flare / Medium)" 형태의 표시 문자열.
  * imageCount > 1이면 "× N장 = ₩XXX" 총액을 덧붙인다.
  */
 export function formatOpenAIImageCostLabel(

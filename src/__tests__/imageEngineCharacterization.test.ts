@@ -42,8 +42,9 @@ describe('Stage 0 — 마이그레이션 타깃 측정 (레거시 nano-banana-pr
 
   it("nanoBananaProGenerator 기본 모델 키는 'gemini-3-1-flash'다", () => {
     // 기본 config 사용자 → userMainModel/userSubModel 폴백값
-    expect(genCode).toMatch(/nanoBananaMainModel\s*\|\|\s*'gemini-3-1-flash'/);
-    expect(genCode).toMatch(/nanoBananaSubModel\s*\|\|\s*'gemini-3-1-flash'/);
+    // [2026-10-10] 옛 슬롯 값 정규화(normalizeRetiredNanoSlotModel(...))로 감싸도 기본값은 그대로 3.1 Flash.
+    expect(genCode).toMatch(/nanoBananaMainModel\)?\s*\|\|\s*'gemini-3-1-flash'/);
+    expect(genCode).toMatch(/nanoBananaSubModel\)?\s*\|\|\s*'gemini-3-1-flash'/);
   });
 
   it("MODEL_MAP에서 'gemini-3-1-flash'는 gemini-3.1-flash-image로 매핑된다", () => {

@@ -110,7 +110,7 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'stability': 'Stability AI',
   'pollinations': 'Pollinations',
   'deepinfra': 'FLUX-2 (DeepInfra)',
-  'openai-image': 'OpenAI Image (gpt-image-1 / 1.5 / 2)',
+  'openai-image': 'OpenAI Image (gpt-image-2.5 Flare / Sunburst)',
   'dall-e-3': 'GPT 이미지 시리즈 (레거시 설정)',
   'leonardoai': 'Leonardo AI',
   'imagefx': 'ImageFX (Google Labs, 제한 가능)',
@@ -2413,13 +2413,10 @@ export function createHeadingImageModal(): void {
             <p style="margin: 6px 0 0; font-size: 11px; color: #9ca3af;">ℹ️ DeepInfra 계정 필요</p>
           </div>
 
-          <!-- 🦆 OpenAI Image (gpt-image-1 / 1.5 / 2 / 2.5) -->
+          <!-- 🦆 OpenAI Image (gpt-image-2.5 Flare / Sunburst) -->
           <div style="background: rgba(124, 58, 237, 0.1); padding: 14px; border-radius: 12px; border: 1px solid rgba(124, 58, 237, 0.3);">
             <label style="display: block; font-weight: 600; color: #a78bfa; margin-bottom: 8px; font-size: 13px;">🦆 OpenAI Image</label>
             <select id="submodal-openai-image-model" style="width: 100%; padding: 10px; background: #1a1a2e; border: 2px solid rgba(124, 58, 237, 0.4); border-radius: 8px; color: white; font-size: 13px; cursor: pointer;">
-              <option value="gpt-image-1">🎨 gpt-image-1 (GPT 이미지 시리즈)</option>
-              <option value="gpt-image-1.5">⚡ gpt-image-1.5 (저비용 기본, 추천)</option>
-              <option value="gpt-image-2">👑 gpt-image-2 (고품질)</option>
               <option value="gpt-image-2.5-flare">🔥 gpt-image-2.5 Flare (신모델 · 속도형 · 5단계 품질)</option>
               <option value="gpt-image-2.5-sunburst">☀️ gpt-image-2.5 Sunburst (신모델 · 품질형 · 5단계 품질)</option>
             </select>
@@ -2427,8 +2424,8 @@ export function createHeadingImageModal(): void {
               <option value="low">low (저비용)</option>
               <option value="medium" selected>medium (기본)</option>
               <option value="high">high (고품질)</option>
-              <option value="xhigh" data-v25-only="1">xhigh (gpt-image-2.5 전용)</option>
-              <option value="max" data-v25-only="1">max (gpt-image-2.5 전용 · 최고가)</option>
+              <option value="xhigh">xhigh (고품질)</option>
+              <option value="max">max (최고가)</option>
             </select>
             <p style="margin: 6px 0 0; font-size: 11px; color: #9ca3af;">ℹ️ OpenAI Organization 인증 필요 (403 발생 시 platform.openai.com 인증 확인)</p>
           </div>
@@ -2500,12 +2497,13 @@ export function createHeadingImageModal(): void {
     if (nanoSubSelect) nanoSubSelect.value = migratedSub;
     if (deepinfraSelect) deepinfraSelect.value = localStorage.getItem('deepinfraModel') || 'flux-2-dev';
     if (leonardoaiSelect) leonardoaiSelect.value = localStorage.getItem('leonardoaiModel') || 'seedream-4.5';
-    // [2026-05-27] OpenAI Image 모델/품질 복원 (config.json 우선, localStorage 폴백, 둘 다 없으면 1.5/medium)
+    // [2026-05-27] OpenAI Image 모델/품질 복원 (config.json 우선, localStorage 폴백, 둘 다 없으면 Flare/medium)
     if (openaiImageModelSelect) {
       const cfg = await safeIpcInvoke<any>('config:get');
-      const savedModel = (cfg?.openaiImageModel as string) || localStorage.getItem('openaiImageModel') || 'gpt-image-1.5';
-      const validModels = ['gpt-image-1', 'gpt-image-1.5', 'gpt-image-2', 'gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'];
-      openaiImageModelSelect.value = validModels.includes(savedModel) ? savedModel : 'gpt-image-1.5';
+      const savedModel = (cfg?.openaiImageModel as string) || localStorage.getItem('openaiImageModel') || 'gpt-image-2.5-flare';
+      // [2026-10-10] 목록 밖(옛 gpt-image-1/1.5/2 포함)이면 Flare 로 복원
+      const validModels = ['gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'];
+      openaiImageModelSelect.value = validModels.includes(savedModel) ? savedModel : 'gpt-image-2.5-flare';
       const savedQuality = (cfg?.openaiImageQuality as string) || localStorage.getItem('openaiImageQuality') || 'medium';
       if (openaiImageQualitySelect) {
         openaiImageQualitySelect.value = ['low', 'medium', 'high', 'xhigh', 'max'].includes(savedQuality) ? savedQuality : 'medium';
@@ -2518,7 +2516,7 @@ export function createHeadingImageModal(): void {
             const enabled = isV25 || opt.dataset.v25Only !== '1';
             opt.disabled = !enabled;
             const baseLabel = opt.textContent?.replace(/\s*·\s*₩[\d,]+\/장$/, '') || opt.value;
-            opt.textContent = (enabled && typeof perImage === 'function' && model !== 'gpt-image-1')
+            opt.textContent = (enabled && typeof perImage === 'function')
               ? `${baseLabel} · ₩${Number(perImage(model, opt.value)).toLocaleString('ko-KR')}/장`
               : baseLabel;
           });
@@ -2672,7 +2670,7 @@ function showOpenAiTierWarningModal(reason: 'precheck' | 'rate-limit-hit' = 'pre
         </table>
         <div style="margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px dashed rgba(239, 68, 68, 0.3); font-size: 0.72rem; color: #fca5a5;">
           ⚠️ ChatGPT Plus/Pro 구독($20~$200/월)은 API와 <b>완전 별개</b>입니다. 구독해도 API Tier는 0.
-          gpt-image-1.5/2는 추가로 <b>Organization 인증</b> 필요(403 에러 시).
+          덕트테이프(gpt-image-2.5)는 계정에 따라 <b>Organization 인증</b>이 필요할 수 있습니다(403 에러 시).
         </div>
       </div>
       <div style="background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1.25rem;">

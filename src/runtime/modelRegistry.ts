@@ -367,8 +367,6 @@ export const VERIFIED_IMAGE_MODELS = [
   'gemini-3.1-flash-image',
   'gemini-3-pro-image',
   'imagen-4.0-generate-001',
-  'gpt-image-1.5',
-  'gpt-image-2',
   'gpt-image-2.5-flare',
   'gpt-image-2.5-sunburst',
 ] as const;
@@ -395,4 +393,26 @@ export function isBannedModelId(id: string): boolean {
  */
 export function isVerifiedImageModel(id: string): boolean {
   return (VERIFIED_IMAGE_MODELS as readonly string[]).includes(id);
+}
+
+// ═════════════════════════════════════════════════════════════════
+// [2026-10-10] 덕트테이프(openai-image) 세부 모델 정책 — 사장님 결정.
+//   남기는 모델은 gpt-image-2.5-flare(속도형, 기본)와 gpt-image-2.5-sunburst(품질형) 둘뿐이다.
+//   gpt-image-1 / 1.5 / 2 와 빈 값·이상값은 모두 Flare 로 돌린다. 순수 함수라 main·시험이 함께 쓴다.
+// ═════════════════════════════════════════════════════════════════
+
+/** 화면·설정에 남기는 덕트테이프 모델 */
+export const OPENAI_IMAGE_MODEL_CHOICES = ['gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'] as const;
+
+export type OpenaiImageModelChoice = (typeof OPENAI_IMAGE_MODEL_CHOICES)[number];
+
+/** 기본 모델 (Flare) */
+export const DEFAULT_OPENAI_IMAGE_MODEL: OpenaiImageModelChoice = 'gpt-image-2.5-flare';
+
+/** 목록 안의 값은 그대로, 옛 값·빈 값·이상값은 Flare 로 돌려준다. */
+export function normalizeOpenaiImageModel(value: unknown): OpenaiImageModelChoice {
+  const v = typeof value === 'string' ? value.trim() : '';
+  return (OPENAI_IMAGE_MODEL_CHOICES as readonly string[]).includes(v)
+    ? (v as OpenaiImageModelChoice)
+    : DEFAULT_OPENAI_IMAGE_MODEL;
 }

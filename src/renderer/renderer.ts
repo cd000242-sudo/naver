@@ -9,7 +9,7 @@ import type { StructuredContent, ImagePlan, HeadingPlan } from '../contentGenera
 import type { AutoAnalyzeHeadingsOptions } from './modules/headingImageGen.js';
 import { FTC_DISCLOSURE_PRESETS } from '../automation/ftcDisclosurePresets.js';
 // ✅ [v2.10.335] 나노바나나 3종 분리 — provider 저장값 1회성 마이그레이션
-import { migrateImageProviderStorage, migrateNanoBananaSingleEngine } from '../runtime/imageProviderMigration.js';
+import { migrateImageProviderStorage, migrateNanoBananaSingleEngine, migrateOpenaiImageTwoModels } from '../runtime/imageProviderMigration.js';
 // ✅ [2026-02-26 모듈화] 프롬프트 번역 모듈
 import { generateEnglishPromptForHeading, decomposeKoreanCompound, koreanMorphemes, getTranslationPrompt, cacheTranslation, _promptTranslationCache } from './modules/promptTranslation.js';
 // ✅ [2026-02-26 모듈화] 페이월 시스템 모듈
@@ -3257,6 +3257,7 @@ async function initializeApplication(): Promise<void> {
     migrateImageProviderStorage();
     // [2026-10-10] 나노바나나 프로·2.5 저장값과 슬롯 모델을 나노바나나2로 이관 (멱등)
     migrateNanoBananaSingleEngine();
+    migrateOpenaiImageTwoModels(); // [2026-10-10] 덕트테이프 옛 모델 값 → Flare
   } catch (e) {
     console.warn('[Init] 이미지 provider 마이그레이션 스킵:', e);
   }

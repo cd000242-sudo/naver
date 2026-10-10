@@ -358,7 +358,7 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       textOnlyPublish: pipelineReadBool('textOnlyPublish'),
       imageSource: resolvedImageSource,
       imageModel: currentFullAutoImageModel
-        || (storedSelectionUsesDucttapeAlias ? 'gpt-image-2' : '')
+        || (storedSelectionUsesDucttapeAlias ? 'gpt-image-2.5-flare' : '')
         || raw.openaiImageModel
         || '',
       imageStyle: pipelineReadString('imageStyle', 'realistic'),
@@ -376,7 +376,7 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       aiImageModel: resolvedShoppingEngine === 'openai-image'
         ? (currentFullAutoImageModel
           || (shoppingUiSelectsDucttape || storedShoppingSelectionUsesDucttapeAlias || storedSelectionUsesDucttapeAlias
-            ? 'gpt-image-2'
+            ? 'gpt-image-2.5-flare'
             : '')
           || raw.openaiImageModel
           || '')

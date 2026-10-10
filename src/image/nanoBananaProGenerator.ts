@@ -32,6 +32,7 @@ import sharp from 'sharp';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 // [SPEC-FREEZE-GUARD-001-P2 R3 / v2.10.262] Base64 디코딩 워커 분리 — 1MB+ Gemini/Imagen 4 inline data
 import { decodeBase64Async } from '../main/utils/base64Async.js';
+import { normalizeRetiredNanoSlotModel } from '../runtime/imageProviderMigration.js';
 
 // ✅ [2026-03-02] 실시간 이미지 생성 로그 → 렌더러 UI로 IPC 전송
 function sendImageLog(message: string): void {
@@ -599,9 +600,11 @@ export async function generateWithNanoBananaPro(
   const configModuleForKeys = await import('../configManager.js');
   const configForKeys = await configModuleForKeys.loadConfig();
   const preflightModelKey = forceModelKey?.trim();
+  // [2026-10-10] 화면에서 내려간 슬롯 모델(2.5 / 3 Pro / 3 Pro 4K)이 설정 파일에 남아 있어도 나노바나나2(3.1 Flash)로 읽는다
+  //   — 이관은 renderer localStorage 만 바꾸므로, 모델을 고정하지 않는 호출이 옛 고가 모델로 나가지 않게 여기서 막는다.
   const validatedModelConfiguration = assertCurrentGeminiImageModelConfiguration(
-    preflightModelKey || (configForKeys as any).nanoBananaMainModel || 'gemini-3-1-flash',
-    preflightModelKey || (configForKeys as any).nanoBananaSubModel || 'gemini-3-1-flash',
+    preflightModelKey || normalizeRetiredNanoSlotModel((configForKeys as any).nanoBananaMainModel) || 'gemini-3-1-flash',
+    preflightModelKey || normalizeRetiredNanoSlotModel((configForKeys as any).nanoBananaSubModel) || 'gemini-3-1-flash',
   );
   if (preflightModelKey) {
     console.log(`[NanoBananaPro] 🎯 forceModelKey="${preflightModelKey}" — 배치 전체 모델 고정`);

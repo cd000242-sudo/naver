@@ -5,6 +5,7 @@ import {
   readClearIntent,
 } from './content/credentialClearIntent.js';
 import { describeNaverKeyPosture } from './naver/index.js';
+import { normalizeOpenaiImageModel } from './runtime/modelRegistry.js';
 import fs from 'fs/promises';
 import path from 'path';
 import {
@@ -240,9 +241,9 @@ export interface AppConfig {
 
   // ✅ [2026-02-08] 이미지 엔진 모델 설정 (DeepInfra만 유지)
   deepinfraModel?: string;
-  // ✅ OpenAI 이미지 모델·품질 선택 (gpt-image-1.5 = 저비용 기본, gpt-image-2 = 고품질,
+  // ✅ OpenAI 이미지 모델·품질 선택 ([2026-10-10] Flare = 기본·속도형, Sunburst = 품질형 두 가지만),
   //    gpt-image-2.5-flare/sunburst = 2026-09 신모델 — xhigh/max 는 2.5 계열에서만 유효)
-  openaiImageModel?: 'gpt-image-1.5' | 'gpt-image-2' | 'gpt-image-2.5-flare' | 'gpt-image-2.5-sunburst';
+  openaiImageModel?: 'gpt-image-2.5-flare' | 'gpt-image-2.5-sunburst';
   openaiImageQuality?: 'low' | 'medium' | 'high' | 'xhigh' | 'max' | 'auto';
   // ✅ USD→KRW 환율 (이미지 비용 원화 표시용, 기본 1400)
   usdToKrwRate?: number;
@@ -660,12 +661,11 @@ export async function loadConfig(): Promise<AppConfig> {
       deepinfraApiKey: parsed.deepinfraApiKey || parsed['deepinfra-api-key'] || undefined,
       // ✅ [2026-02-08] 이미지 엔진 모델 설정 명시적 파싱
       deepinfraModel: parsed.deepinfraModel || undefined,
-      // ✅ OpenAI 이미지 모델·품질·환율 — 기본값 보장 (저비용 기본: gpt-image-1.5 + medium).
+      // ✅ OpenAI 이미지 모델·품질·환율 — 기본값 보장 (저비용 기본: gpt-image-2.5-flare + medium).
       //    Anything other than the explicit high-cost model falls back to the cheap default,
       //    so a missing/corrupt config can never silently select the expensive option.
-      openaiImageModel: ['gpt-image-2', 'gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'].includes(parsed.openaiImageModel)
-        ? parsed.openaiImageModel
-        : 'gpt-image-1.5',
+      // [2026-10-10] 목록 밖·옛 값(gpt-image-1/1.5/2)은 Flare 로 — 계정별 settings 파일도 이 경로를 탄다.
+      openaiImageModel: normalizeOpenaiImageModel(parsed.openaiImageModel),
       openaiImageQuality: ['low', 'medium', 'high', 'xhigh', 'max', 'auto'].includes(parsed.openaiImageQuality)
         ? parsed.openaiImageQuality
         : 'medium',

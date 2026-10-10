@@ -356,9 +356,9 @@ export class ThumbnailGenerator {
 
       try {
         bgAiBtn.disabled = true;
-        bgAiBtn.innerHTML = '<span>🔄</span> 나노 바나나 프로로 생성중...';
+        bgAiBtn.innerHTML = '<span>🔄</span> 나노바나나2로 생성중...';
 
-        // ✅ 나노 바나나 프로 (Gemini) 사용
+        // ✅ [2026-10-10] 나노바나나2 (Gemini 3.1 Flash Image) 사용 — 나노바나나는 한 종류만 남겼다
         const result = await generateImagesWithCostSafety({
           provider: 'nano-banana-2',
           // ✅ [2026-03-01 FIX] 썸네일 전용 모델(nanoBananaMainModel)을 타도록 isThumbnail 명시
@@ -375,7 +375,7 @@ export class ThumbnailGenerator {
             img.onload = () => {
               this.backgroundImage = img;
               this.render();
-              toastManager.success('✅ 나노 바나나 프로로 배경 생성 완료!');
+              toastManager.success('✅ 나노바나나2로 배경 생성 완료!');
             };
             img.onerror = () => {
               toastManager.error('❌ 이미지 로드에 실패했습니다.');

@@ -126,3 +126,39 @@ export function migrateNanoBananaSingleEngine(storage?: Pick<Storage, 'getItem' 
     return 0;
   }
 }
+
+// ═════════════════════════════════════════════════════════════════
+// [2026-10-10] 덕트테이프(openai-image) 세부 모델은 gpt-image-2.5-flare(기본)·sunburst 둘만 남긴다.
+//   옛 저장값 gpt-image-1 / 1.5 / 2 는 Flare 로 이관한다. config 쪽은 configManager 정규화가 맡는다.
+//   (렌더러 번들에 인라인되는 파일이라 policy 모듈을 import 하지 않고 값을 직접 둔다.)
+// ═════════════════════════════════════════════════════════════════
+
+/** 화면에서 내려간 옛 OpenAI 이미지 모델 값 */
+const RETIRED_OPENAI_IMAGE_MODELS: ReadonlySet<string> = new Set(['gpt-image-1', 'gpt-image-1.5', 'gpt-image-2']);
+
+/** 옛 덕트테이프 모델 값이면 gpt-image-2.5-flare 로, 아니면 그대로 돌려준다. */
+export function normalizeRetiredOpenaiImageModel<T>(value: T): T | 'gpt-image-2.5-flare' {
+  return typeof value === 'string' && RETIRED_OPENAI_IMAGE_MODELS.has(value.trim()) ? 'gpt-image-2.5-flare' : value;
+}
+
+/**
+ * localStorage 의 openaiImageModel 옛 값을 Flare 로 이관한다. 멱등이라 매 기동 호출해도 안전하다.
+ * @returns 바꾼 키 개수 (0 또는 1)
+ */
+export function migrateOpenaiImageTwoModels(storage?: Pick<Storage, 'getItem' | 'setItem'>): number {
+  try {
+    const store = storage ?? (typeof localStorage === 'undefined' ? undefined : localStorage);
+    if (!store) return 0;
+    const saved = store.getItem('openaiImageModel');
+    const next = normalizeRetiredOpenaiImageModel(saved);
+    if (saved !== null && next !== saved) {
+      store.setItem('openaiImageModel', next as string);
+      console.log(`[ImageMigration] 🔄 openaiImageModel: ${saved} → ${next} (덕트테이프 2모델 정리)`);
+      return 1;
+    }
+    return 0;
+  } catch (e) {
+    console.warn('[ImageMigration] ⚠️ 덕트테이프 모델 이관 실패(무시):', (e as Error).message);
+    return 0;
+  }
+}

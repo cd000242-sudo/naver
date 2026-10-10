@@ -19,8 +19,9 @@ function read(rel: string): string {
  * 화면에서 고른 값이 읽는 쪽에 도달하지 못해, 빈 모델을 본 쇼핑커넥트 검사가 막았다.
  */
 describe('쇼핑커넥트 대표이미지 모델 판정 (기존 계약)', () => {
-  it('gpt-image-2 면 통과한다', () => {
-    expect(isShoppingReferenceGenerationSelectionSupported('openai-image', 'gpt-image-2')).toBe(true);
+  it('gpt-image-2.5 Flare/Sunburst 면 통과한다', () => {
+    expect(isShoppingReferenceGenerationSelectionSupported('openai-image', 'gpt-image-2.5-flare')).toBe(true);
+    expect(isShoppingReferenceGenerationSelectionSupported('openai-image', 'gpt-image-2.5-sunburst')).toBe(true);
   });
 
   it('provider 자체가 gpt-image-2 여도 통과한다', () => {
@@ -34,6 +35,8 @@ describe('쇼핑커넥트 대표이미지 모델 판정 (기존 계약)', () => 
 
   it('다른 OpenAI 모델은 막는다', () => {
     expect(isShoppingReferenceGenerationSelectionSupported('openai-image', 'gpt-image-1.5')).toBe(false);
+    // [2026-10-10] 화면에서 내려간 gpt-image-2 도 모델로는 더 이상 통과하지 않는다 (별칭 provider 만 Flare 로 승계)
+    expect(isShoppingReferenceGenerationSelectionSupported('openai-image', 'gpt-image-2')).toBe(false);
   });
 });
 

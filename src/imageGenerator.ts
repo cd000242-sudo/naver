@@ -696,10 +696,10 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     return [];
   }
 
-  // ✅ [v1.5.5] OpenAI 덕트테이프 (gpt-image-2) 선택 시
+  // ✅ [v1.5.5] OpenAI 덕트테이프 선택 시 ([2026-10-10] 로그에는 실제 모델명 표기)
   if (normalizedProvider === 'openai-image') {
     try {
-      console.log(`[이미지생성] 🦆 OpenAI 덕트테이프(gpt-image-2)로 ${items.length}개 이미지 생성 시작...`);
+      console.log(`[이미지생성] 🦆 OpenAI 덕트테이프(${options.imageModel || '설정 모델'})로 ${items.length}개 이미지 생성 시작...`);
       const openaiImages = await generateWithOpenAIImage(
         items,
         options.postTitle,
@@ -712,7 +712,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.imageModel,
         apiKeys?.openaiApiKey
       );
-      console.log(`[이미지생성] ✅ 덕트테이프(gpt-image-2)로 ${openaiImages.length}개 이미지 생성 완료!`);
+      console.log(`[이미지생성] ✅ 덕트테이프(${options.imageModel || '설정 모델'})로 ${openaiImages.length}개 이미지 생성 완료!`);
       return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(openaiImages, {
         requestedProvider,
         actualProvider: 'openai-image',

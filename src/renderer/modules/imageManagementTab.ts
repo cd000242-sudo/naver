@@ -413,7 +413,7 @@ export async function initImageManagementTab(): Promise<void> {
       } else if (selectedSource === 'stability') {
         appendLog('✅ Stability AI(고품질)가 선택되었습니다.');
       } else if (selectedSource === 'openai-image') {
-        appendLog('✅ 🦆 덕트테이프(OpenAI gpt-image-1.5/2, 기본 1.5)가 선택되었습니다. — OpenAI API 키 필요, 장당 ₩25~₩280');
+        appendLog('✅ 🦆 덕트테이프(OpenAI gpt-image-2.5 Flare/Sunburst, 기본 Flare)가 선택되었습니다. — OpenAI API 키 필요, 장당 ₩25~₩280');
       } else if (selectedSource === 'leonardoai') {
         appendLog('✅ Leonardo AI가 선택되었습니다. API 키가 필요합니다.');
       } else if (selectedSource === 'flow') {
@@ -701,7 +701,8 @@ export async function initImageManagementTab(): Promise<void> {
     let openaiUsdRate = 1400;
     const getOpenAISel = (name: string, fallback: string): string =>
       (document.querySelector(`input[name="${name}"]:checked`) as HTMLInputElement)?.value || fallback;
-    const OPENAI_MODEL_VALUES = ['gpt-image-1.5', 'gpt-image-2', 'gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'];
+    // [2026-10-10] 덕트테이프는 Flare(기본)·Sunburst 두 가지만
+    const OPENAI_MODEL_VALUES = ['gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'];
     const OPENAI_QUALITY_VALUES = ['low', 'medium', 'high', 'xhigh', 'max'];
     /*
      * 품질 옵션별 장당 원가 표기 + 모델 호환 게이트.
@@ -709,16 +710,12 @@ export async function initImageManagementTab(): Promise<void> {
      * 이미 xhigh/max 가 선택돼 있었다면 high 로 옮긴다 (생성기도 같은 규칙으로 강등하므로 실제 과금과 일치).
      */
     const refreshOpenAIQualityOptions = (): void => {
-      const model = getOpenAISel('openai-image-model', 'gpt-image-1.5');
-      const isV25 = typeof (window as any).isOpenAIImageModelFiveTier === 'function'
-        ? (window as any).isOpenAIImageModelFiveTier(model)
-        : model.startsWith('gpt-image-2.5');
+      const model = getOpenAISel('openai-image-model', 'gpt-image-2.5-flare');
       const perImage = (window as any).getOpenAIImageCostKRW;
       openaiQualityRadios.forEach((r) => {
         const input = r as HTMLInputElement;
         const label = input.closest('label') as HTMLElement | null;
-        const v25Only = label?.dataset?.v25Only === '1';
-        const enabled = isV25 || !v25Only;
+        const enabled = true; // [2026-10-10] 남은 두 모델 모두 5단계 품질 — 숨기거나 막는 옵션 없음
         input.disabled = !enabled;
         if (label) label.style.opacity = enabled ? '' : '0.45';
         const costSpan = label?.querySelector('.openai-q-cost') as HTMLElement | null;
@@ -740,18 +737,18 @@ export async function initImageManagementTab(): Promise<void> {
       const fmt = (window as any).formatOpenAIImageCostLabel;
       if (typeof fmt === 'function') {
         openaiCostDisplay.textContent = fmt(
-          getOpenAISel('openai-image-model', 'gpt-image-1.5'),
+          getOpenAISel('openai-image-model', 'gpt-image-2.5-flare'),
           getOpenAISel('openai-image-quality', 'medium'),
           openaiUsdRate,
         );
       }
     };
-    // 초기 복원: config의 모델/품질/환율 반영 (없으면 HTML 기본값 gpt-image-1.5/medium 유지)
+    // 초기 복원: config의 모델/품질/환율 반영 (없으면 HTML 기본값 gpt-image-2.5-flare/medium 유지)
     try {
       const cfg = await (window as any).api?.getConfig?.();
       if (cfg) {
         openaiUsdRate = (typeof cfg.usdToKrwRate === 'number' && cfg.usdToKrwRate > 0) ? cfg.usdToKrwRate : 1400;
-        const savedModel = OPENAI_MODEL_VALUES.includes(cfg.openaiImageModel) ? cfg.openaiImageModel : 'gpt-image-1.5';
+        const savedModel = OPENAI_MODEL_VALUES.includes(cfg.openaiImageModel) ? cfg.openaiImageModel : 'gpt-image-2.5-flare';
         const savedQuality = OPENAI_QUALITY_VALUES.includes(cfg.openaiImageQuality) ? cfg.openaiImageQuality : 'medium';
         const mr = document.querySelector(`input[name="openai-image-model"][value="${savedModel}"]`) as HTMLInputElement | null;
         const qr = document.querySelector(`input[name="openai-image-quality"][value="${savedQuality}"]`) as HTMLInputElement | null;
@@ -767,7 +764,7 @@ export async function initImageManagementTab(): Promise<void> {
       refreshOpenAICost();
       try {
         const cfg = await (window as any).api?.getConfig?.();
-        const model = getOpenAISel('openai-image-model', 'gpt-image-1.5');
+        const model = getOpenAISel('openai-image-model', 'gpt-image-2.5-flare');
         const quality = getOpenAISel('openai-image-quality', 'medium');
         await (window as any).api?.saveConfig?.({ ...cfg, openaiImageModel: model, openaiImageQuality: quality });
         /*

@@ -260,7 +260,8 @@ describe('Content Quality V3 evidence attestation', () => {
         //   구조 규칙·제목 조건 중복 제거, SD 오버레이 홈판 제외로 재계산
         // [2026-09-30] 문서 화자 말투 금지 — seo/base.prompt H6 ⛔ 확장(적혀 있습니다·해당 보도는·읽는 편이) +
         //   human-writing-anti-pattern §4 주체 귀속 조항·자가점검 1줄로 재계산
-        'a20a764ec5f792dfaf252d42819a3845e339141ada18a63fb89f1da340fe7cc5',
+        // [2026-10-10] 덕트테이프 모델 정책(modelRegistry 2모델 정리 + 정규화 함수)으로 재계산
+        'b733ac6f32217efe7ede9d07b05c7cd7e910232de739b090ed24eb49d336d495',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

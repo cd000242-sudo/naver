@@ -158,7 +158,8 @@ describe('shopping representative image-to-image policy', () => {
   it.each([
     ['nano-banana-2', undefined],
     ['nano-banana-pro', undefined],
-    ['openai-image', 'gpt-image-2'],
+    ['openai-image', 'gpt-image-2.5-flare'],
+    ['openai-image', 'gpt-image-2.5-sunburst'],
     ['gpt-image-2', undefined],
     ['dropshot', undefined],
   ])('allows the exact shopping reference selection %s / %s', (provider, model) => {
@@ -169,6 +170,7 @@ describe('shopping representative image-to-image policy', () => {
     ['nano-banana', undefined],
     ['openai-image', undefined],
     ['openai-image', 'gpt-image-1.5'],
+    ['openai-image', 'gpt-image-2'],
     ['flow', undefined],
     ['prodia', undefined],
     ['deepinfra', undefined],

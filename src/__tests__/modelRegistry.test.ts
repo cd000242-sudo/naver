@@ -161,7 +161,9 @@ describe('modelRegistry SSOT 회귀 가드', () => {
     expect('FREE_EXP' in GEMINI_IMAGE_MODELS).toBe(false);
   });
 
-  it('OPENAI_IMAGE_MODELS — gpt-image-1.5(저비용 기본) + gpt-image-2(고품질)', () => {
+  it('OPENAI_IMAGE_MODELS — 2.5 Flare/Sunburst 가 현행, 1.5/2 상수는 기록·이관용으로만 남는다', () => {
+    expect(OPENAI_IMAGE_MODELS.GPT_IMAGE_2_5_FLARE).toBe('gpt-image-2.5-flare');
+    expect(OPENAI_IMAGE_MODELS.GPT_IMAGE_2_5_SUNBURST).toBe('gpt-image-2.5-sunburst');
     expect(OPENAI_IMAGE_MODELS.GPT_IMAGE_1_5).toBe('gpt-image-1.5');
     expect(OPENAI_IMAGE_MODELS.GPT_IMAGE_2).toBe('gpt-image-2');
   });
@@ -199,15 +201,19 @@ describe('modelRegistry SSOT 회귀 가드', () => {
     expect(VERIFIED_IMAGE_MODELS).toContain('gemini-3-pro-image');
     expect(VERIFIED_IMAGE_MODELS).not.toContain('gemini-2.0-flash-preview-image-generation');
     expect(VERIFIED_IMAGE_MODELS).not.toContain('gemini-2.0-flash-exp-image-generation');
-    expect(VERIFIED_IMAGE_MODELS).toContain('gpt-image-1.5');
-    expect(VERIFIED_IMAGE_MODELS).toContain('gpt-image-2');
+    // [2026-10-10] 화면에서 내려간 1.5/2 는 검증 목록에서도 뺀다 (옛 값은 설정 정규화가 Flare 로 돌린다)
+    expect(VERIFIED_IMAGE_MODELS).toContain('gpt-image-2.5-flare');
+    expect(VERIFIED_IMAGE_MODELS).toContain('gpt-image-2.5-sunburst');
+    expect(VERIFIED_IMAGE_MODELS).not.toContain('gpt-image-1.5');
+    expect(VERIFIED_IMAGE_MODELS).not.toContain('gpt-image-2');
   });
 
   it('isVerifiedImageModel — 검증된 모델만 true', () => {
     expect(isVerifiedImageModel('gemini-3-pro-image')).toBe(true);
     expect(isVerifiedImageModel('gemini-3-pro-image-preview')).toBe(false);
-    expect(isVerifiedImageModel('gpt-image-1.5')).toBe(true);
-    expect(isVerifiedImageModel('gpt-image-2')).toBe(true);
+    expect(isVerifiedImageModel('gpt-image-2.5-flare')).toBe(true);
+    expect(isVerifiedImageModel('gpt-image-1.5')).toBe(false);
+    expect(isVerifiedImageModel('gpt-image-2')).toBe(false);
     expect(isVerifiedImageModel('gemini-3.1-flash-image')).toBe(true);
     expect(isVerifiedImageModel('gpt-4o')).toBe(false);
   });

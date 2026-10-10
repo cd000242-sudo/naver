@@ -67,19 +67,22 @@ describe('레지스트리 / 설정 / 표시 단가', () => {
 
   it('configManager sanitizer 가 2.5 두 모델과 xhigh/max 를 받는다 (소스 핀)', () => {
     const src = fs.readFileSync(path.resolve(__dirname, '../configManager.ts'), 'utf-8');
-    expect(src).toMatch(/\['gpt-image-2', 'gpt-image-2\.5-flare', 'gpt-image-2\.5-sunburst'\]\.includes\(parsed\.openaiImageModel\)/);
+    // [2026-10-10] 정규화는 정책 모듈(normalizeOpenaiImageModel)이 맡는다 — 옛 값 허용 목록으로 되돌아가면 실패
+    expect(src).toMatch(/openaiImageModel: normalizeOpenaiImageModel\(parsed\.openaiImageModel\)/);
+    expect(src).not.toMatch(/'gpt-image-2', 'gpt-image-2\.5-flare'/);
     expect(src).toMatch(/\['low', 'medium', 'high', 'xhigh', 'max', 'auto'\]\.includes\(parsed\.openaiImageQuality\)/);
   });
 
   it('표시 단가(₩, 환율 1400)가 apiUsageTracker 와 같은 수치다', () => {
     expect(getOpenAIImageCostKRW('gpt-image-2.5-flare', 'low', 1400)).toBe(Math.round(0.0059 * 1400));
     expect(getOpenAIImageCostKRW('gpt-image-2.5-sunburst', 'max', 1400)).toBe(Math.round(0.2107 * 1400));
-    expect(getOpenAIImageCostKRW('gpt-image-2', 'medium', 1400)).toBe(Math.round(0.053 * 1400));
-    expect(getOpenAIImageCostKRW('gpt-image-1.5', 'medium', 1400)).toBe(Math.round(0.034 * 1400));
+    // 단가표에 없는 옛 모델(1.5/2)은 Flare 단가를 쓴다 (기본 모델 기준)
+    expect(getOpenAIImageCostKRW('gpt-image-2', 'medium', 1400)).toBe(Math.round(0.0132 * 1400));
+    expect(getOpenAIImageCostKRW('gpt-image-1.5', 'medium', 1400)).toBe(Math.round(0.0132 * 1400));
   });
 
-  it('구 모델에 xhigh 를 물으면 high 단가 (생성기 강등 규칙과 일치)', () => {
-    expect(getOpenAIImageCostKRW('gpt-image-2', 'xhigh', 1400)).toBe(Math.round(0.211 * 1400));
+  it('단가표에 없는 옛 모델이어도 Flare 5단계 단가로 계산한다 (이관 전 잔존값 안전망)', () => {
+    expect(getOpenAIImageCostKRW('gpt-image-2', 'xhigh', 1400)).toBe(Math.round(0.0937 * 1400));
   });
 
   it('getOpenAIImageQualities — 2.5 는 5단계, 그 외 3단계', () => {

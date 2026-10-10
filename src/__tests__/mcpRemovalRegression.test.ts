@@ -87,7 +87,7 @@ describe('MCP removal regression', () => {
     expect(hasElement(html, 'option', { value: 'openai-image' })).toBe(true);
     expect(hasElement(html, 'input', {
       name: 'openai-image-model',
-      value: 'gpt-image-1.5',
+      value: 'gpt-image-2.5-flare',
     })).toBe(true);
     expect(hasElement(html, 'input', {
       name: 'openai-image-quality',
