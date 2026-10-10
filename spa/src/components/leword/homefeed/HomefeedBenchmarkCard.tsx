@@ -9,6 +9,12 @@ function TitleRow({label,text,editor=false}:{label:string;text:string;editor?:bo
  const copy=async()=>{try {await navigator.clipboard.writeText(text);setNotice('복사됨');} catch {setNotice('제목을 선택해 복사해 주세요');}};
  return <div className={`hfb-title-row${editor?' editor':''}`}><span>{label}</span><p>{text}</p><button type="button" onClick={()=>void copy()} aria-label={`${label} 제목 복사`}>복사</button><small role="status">{notice}</small></div>;
 }
+/** 카드 맨 위 소재 제목 복사(2026-10-10 사장님 "이 제목도 복사 가능하게"). */
+function CopyHeadline({text}:{text:string}) {
+ const [notice,setNotice]=useState('');
+ const copy=async()=>{try {await navigator.clipboard.writeText(text);setNotice('복사됨');} catch {setNotice('제목을 선택해 복사해 주세요');}};
+ return <span className="hfb-headline-copy"><button type="button" onClick={()=>void copy()} aria-label="소재 제목 복사">복사</button><small role="status">{notice}</small></span>;
+}
 // 소재 1개당 홈판 후킹형 제목 20개. 검색형은 없다 — 홈판은 제목이 멈추게 해야 한다.
 /** 앱이 즉석으로 지은 제목은 이 브라우저에만 기억한다 — 새로고침해도 다시 보이게(다음 회차가 붙이면 그쪽이 우선). */
 const MADE_KEY=(id:string)=>`leword.hfb.madeTitles.${id}`;
@@ -55,7 +61,7 @@ export default function HomefeedBenchmarkCard({candidate:c,evidence}:{candidate:
  const proof=evidence?.homefeed;
  return <article className={`hfb-card ${c.recommended?'recommended':''}`}>
   <div className="hfb-card-top"><span className={`hfb-status ${c.status}`}>{LABELS[c.status]}</span>{c.recommended&&<span className="hfb-star" aria-label="우선 검토 추천">★ 추천</span>}{proof&&<span className={`hfb-proof ${proof.kind}`}>{proof.kind==='same-post'?'이 글이 실제 홈판':'비슷한 소재가 실제 홈판'} {proof.rank?`${proof.rank}위`:''} · {monthDay(proof.day)}</span>}{evidence?.mine&&<span className="hfb-proof mine">내 블로그 홈판 유입 소재 · {evidence.mine.count.toLocaleString('ko-KR')}회</span>}<span className="hfb-category">{c.category}</span><span className="hfb-timing">{c.freshnessLabel||'작성 시점 확인 필요'}</span></div>
-  <h3>{c.title||c.keyword}</h3>
+  <div className="hfb-headline"><h3>{c.title||c.keyword}</h3><CopyHeadline text={c.title||c.keyword}/></div>
   <div className="hfb-keyword"><strong>{c.keyword}</strong><span>검색량 <b>{metricText(c.metrics.searchVolume)}</b></span><span>문서량 <b>{metricText(c.metrics.documentCount)}</b></span><span>상위노출 <b>판정 보류</b></span></div>
   {c.relatedKeywords.length>0&&<p className="hfb-alternatives"><span>대안·연관 키워드</span> {c.relatedKeywords.join(' · ')}</p>}
   <p className="hfb-summary">{c.summary||'원문을 확인한 뒤 사건 내용을 정리해 주세요.'}</p>
