@@ -1,9 +1,20 @@
-// Keep the shortcut outside the filtered header so it stays fixed to the viewport.
+// [2026-10-11] 바로가기 두 개는 위쪽 고정 줄(⚙·💰비용표·추천 왼쪽)에 둔다 — body 바로 아래 #top-shortcuts.
+//   필터가 걸린 헤더 밖이라 화면에 고정되고, 스크롤해도 늘 보인다. 왼쪽부터 이미지 → 발행.
+function ensureTopShortcutBar() {
+  let bar = document.getElementById('top-shortcuts');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'top-shortcuts';
+    document.body.appendChild(bar);
+  }
+  return bar;
+}
+
 (function initPublishShortcut() {
   const toolbar = document.getElementById('right-floating-buttons');
   const shortcut = document.getElementById('publish-shortcut-btn');
   if (!toolbar || !shortcut) return;
-  document.body.appendChild(shortcut);
+  ensureTopShortcutBar().appendChild(shortcut);
   let highlightTimer;
   shortcut.addEventListener('click', () => {
     const tab = document.querySelector('.tab-button[data-tab="unified"]');
@@ -26,12 +37,18 @@
   });
 })();
 
-// [2026-10-10] 이미지 바로가기 — 발행 바로가기와 같은 방식(body 로 옮겨 viewport 에 고정, 클릭은 이동만).
+// [2026-10-10] 이미지 바로가기 — 발행 바로가기와 같은 줄(왼쪽), 클릭은 이동만.
 (function initImageShortcut() {
   const toolbar = document.getElementById('right-floating-buttons');
   const shortcut = document.getElementById('image-shortcut-btn');
   if (!toolbar || !shortcut) return;
-  document.body.appendChild(shortcut);
+  const bar = ensureTopShortcutBar();
+  bar.insertBefore(shortcut, bar.firstChild);
+  // [2026-10-11] ⚙·💰비용표·추천도 같은 줄 오른쪽에 모은다(위치만 옮기고 동작·모양은 그대로) — 간격이 고르게 맞는다.
+  for (const id of ['admin-gear-btn', 'reopen-price-info-btn']) {
+    const el = document.getElementById(id);
+    if (el) bar.appendChild(el);
+  }
   let highlightTimer;
   shortcut.addEventListener('click', () => {
     const tab = document.querySelector('.tab-button[data-tab="images"]');

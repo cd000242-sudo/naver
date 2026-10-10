@@ -4,7 +4,7 @@ import { test, expect, _electron as electron, type ElectronApplication, type Loc
 import { closeElectronTestSession, createElectronTestProfile, waitForMainWindow, type ElectronTestProfile } from './electronTestUtils';
 
 // [2026-10-10] 이미지 바로가기 + 발행 바로가기 배치 시험.
-// 아래에서 위로: 메인 풀오토 이미지 설정(#heading-image-setting-btn) → 발행 바로가기 → 이미지 바로가기.
+// [2026-10-11] 위쪽 고정 줄: [이미지 바로가기][발행 바로가기][⚙][💰 비용표·추천]. 오른쪽 아래엔 메인 풀오토 이미지 설정.
 
 let app: ElectronApplication;
 let page: Page;
@@ -82,55 +82,51 @@ test('keyboard Enter and Space on the image shortcut only navigate and never pub
   expect(await page.evaluate(() => (window as any).__imageShortcutPublishClicks)).toBe(0);
 });
 
-test('the two shortcuts and the main full-auto button never overlap in a small window', async () => {
+test('the shortcuts sit in the top row left of ⚙ and the cost button, same height, and toasts start below the row', async () => {
+  // [2026-10-11 사장님] "버튼 구조가 조화롭지 못하다 — 위쪽(비용표 옆)에 두고 크기도 줄여 달라."
+  //   왼쪽부터 [이미지 바로가기][발행 바로가기][⚙][💰 비용표·추천] — 한 줄, 같은 높이, 서로 겹치지 않음.
   await app.evaluate(({ BrowserWindow }) => {
     BrowserWindow.getAllWindows().find(win => win.webContents.getURL().includes('index.html'))?.setSize(900, 680);
   });
-  // 메인 풀오토 이미지 설정 버튼은 unified·images·image-tools 탭에서만 보인다 — 세 버튼을 함께 비교한다.
   await page.locator('.tab-button[data-tab="images"]').focus();
   await page.keyboard.press('Enter');
-  await page.evaluate(() => {
-    const toolbar = document.getElementById('right-floating-buttons')!;
-    toolbar.scrollTop = toolbar.scrollHeight;
-  });
   const image = page.locator('#image-shortcut-btn');
   const publish = page.locator('#publish-shortcut-btn');
+  const gear = page.locator('#admin-gear-btn');
+  const cost = page.locator('#reopen-price-info-btn');
   const main = page.locator('#heading-image-setting-btn');
   await expect(main).toBeVisible();
-  const [imageBox, publishBox, mainBox] = [await box(image), await box(publish), await box(main)];
+  const [imageBox, publishBox, gearBox, costBox, mainBox] = [await box(image), await box(publish), await box(gear), await box(cost), await box(main)];
+  const middle = (b: { y: number; height: number }) => b.y + b.height / 2;
 
-  // 위에서 아래로: 이미지 → 발행 → 메인 풀오토, 서로 겹치지 않고 간격 10~16px.
-  // (메인 버튼은 그림자·테두리·화면 배율 때문에 상자가 1~2px 달라질 수 있어 위쪽 한도를 16px 로 둔다 — 10/10 실측 13.9px)
-  expect(overlaps(imageBox, publishBox)).toBe(false);
-  expect(overlaps(publishBox, mainBox)).toBe(false);
-  expect(overlaps(imageBox, mainBox)).toBe(false);
-  expect(publishBox.y - (imageBox.y + imageBox.height)).toBeGreaterThanOrEqual(10);
-  expect(publishBox.y - (imageBox.y + imageBox.height)).toBeLessThanOrEqual(16);
-  expect(mainBox.y - (publishBox.y + publishBox.height)).toBeGreaterThanOrEqual(10);
-  expect(mainBox.y - (publishBox.y + publishBox.height)).toBeLessThanOrEqual(16);
+  // 한 줄: 세로 가운데가 비용표 버튼과 2px 안, 높이는 비용표 버튼과 2px 안.
+  for (const b of [imageBox, publishBox, gearBox]) expect(Math.abs(middle(b) - middle(costBox))).toBeLessThanOrEqual(2);
+  for (const b of [imageBox, publishBox]) expect(Math.abs(b.height - costBox.height)).toBeLessThanOrEqual(2);
 
-  // 오른쪽 끝 정렬과 시니어 크기 기준.
-  expect(Math.abs((imageBox.x + imageBox.width) - (mainBox.x + mainBox.width))).toBeLessThanOrEqual(1);
-  expect(Math.abs((publishBox.x + publishBox.width) - (mainBox.x + mainBox.width))).toBeLessThanOrEqual(1);
-  // 56px(CSS) — 화면 배율 반올림으로 55.99 처럼 재질 수 있어 0.5px 여유.
-  expect(imageBox.height).toBeGreaterThanOrEqual(55.5);
-  expect(publishBox.height).toBeGreaterThanOrEqual(55.5);
-  expect(Math.abs(imageBox.width - publishBox.width)).toBeLessThanOrEqual(1);
-
-  // 위쪽 도구 모음(비용 버튼)과도 겹치지 않는다.
-  const cost = await box(page.locator('#reopen-price-info-btn'));
-  expect(imageBox.y).toBeGreaterThan(cost.y + cost.height);
+  // 왼쪽부터 이미지 → 발행 → ⚙ → 비용표, 서로 겹치지 않고 간격이 고르다(모두 6~10px).
+  const gaps = [[imageBox, publishBox], [publishBox, gearBox], [gearBox, costBox]].map(([a, b]) => b.x - (a.x + a.width));
+  for (const gap of gaps) {
+    expect(gap).toBeGreaterThanOrEqual(6);
+    expect(gap).toBeLessThanOrEqual(10);
+  }
+  for (const [a, b] of [[imageBox, mainBox], [publishBox, mainBox]] as const) expect(overlaps(a, b)).toBe(false);
   await expect(image).toBeInViewport({ ratio: 1 });
   await expect(publish).toBeInViewport({ ratio: 1 });
 
-  // 메인 풀오토 버튼이 숨는 탭에서도 바로가기 두 개는 같은 자리에 보인다.
+  // 알림창은 이 줄 아래에서 시작한다(알림창이 줄을 덮지 않는다).
+  await page.evaluate(() => (window as any).showToast?.('바로가기 배치 확인용 알림', 'info', 3000));
+  const toast = page.locator('#toast-container');
+  await expect(toast).toBeVisible();
+  expect((await box(toast)).y).toBeGreaterThanOrEqual(costBox.y + costBox.height);
+
+  // 스크롤을 내려도, 탭을 바꿔도 같은 자리에 있다.
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
   await page.locator('.tab-button[data-tab="analytics"]').focus();
   await page.keyboard.press('Enter');
   await expect(main).toBeHidden();
-  const imageAfter = await box(image);
-  const publishAfter = await box(publish);
   // 탭마다 세로 스크롤바 유무가 달라 고정 요소가 몇 px 옆으로 움직일 수 있다 — 3px 안이면 같은 자리.
-  for (const [after, before] of [[imageAfter, imageBox], [publishAfter, publishBox]] as const) {
+  for (const [locator, before] of [[image, imageBox], [publish, publishBox]] as const) {
+    const after = await box(locator);
     expect(Math.abs(after.x - before.x)).toBeLessThanOrEqual(3);
     expect(Math.abs(after.y - before.y)).toBeLessThanOrEqual(3);
     expect(Math.abs(after.width - before.width)).toBeLessThanOrEqual(1);

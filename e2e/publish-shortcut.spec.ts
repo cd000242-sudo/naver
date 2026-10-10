@@ -75,7 +75,8 @@ test('continuous and multi-account navigation preserves the draft and keyboard n
   }
 });
 
-test('small windows and scrolled toolbars keep a large unobscured shortcut', async () => {
+// [2026-10-11 사장님] 바로가기는 위쪽 고정 줄(비용표 왼쪽)에 같은 크기로 — 작은 창에서도 다 보이고 비용표와 겹치지 않는다.
+test('small windows and scrolled toolbars keep the shortcut visible in the top row', async () => {
   await app.evaluate(({ BrowserWindow }) => {
     BrowserWindow.getAllWindows().find(win => win.webContents.getURL().includes('index.html'))?.setSize(900, 680);
   });
@@ -87,9 +88,11 @@ test('small windows and scrolled toolbars keep a large unobscured shortcut', asy
   const shortcut = page.locator('#publish-shortcut-btn');
   await expect(shortcut).toBeInViewport({ ratio: 1 });
   const box = await shortcut.boundingBox();
-  expect(box!.height).toBeGreaterThanOrEqual(44);
   const costBox = await page.locator('#reopen-price-info-btn').boundingBox();
-  expect(box!.y).toBeGreaterThan(costBox!.y + costBox!.height);
+  // 같은 줄(세로 가운데 2px 안)·같은 높이(2px 안)·비용표 왼쪽에서 끝난다.
+  expect(Math.abs((box!.y + box!.height / 2) - (costBox!.y + costBox!.height / 2))).toBeLessThanOrEqual(2);
+  expect(Math.abs(box!.height - costBox!.height)).toBeLessThanOrEqual(2);
+  expect(box!.x + box!.width).toBeLessThan(costBox!.x);
   await shortcut.click();
   await expectAtPublishControls();
   await page.screenshot({ path: path.join(__dirname, '../tmp/publish-shortcut-small.png') });

@@ -99,7 +99,7 @@ export class ToastManager {
             if (!this.container) {
                 this.container = document.createElement('div');
                 this.container.id = 'toast-container';
-                this.container.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 100000; display: flex; flex-direction: column; gap: 10px; max-width: 350px;';
+                this.container.style.cssText = 'position: fixed; top: 56px; right: 20px; z-index: 100000; display: flex; flex-direction: column; gap: 10px; max-width: 350px;';
                 document.body.appendChild(this.container);
             }
         }

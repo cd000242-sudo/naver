@@ -3167,7 +3167,7 @@ button:not(:disabled):active,
 /* 알림 토스트 */
 .toast-container {
   position: fixed;
-  top: 20px;
+  top: 56px;
   right: 20px;
   z-index: 10000;
   pointer-events: none;

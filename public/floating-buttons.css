@@ -143,59 +143,68 @@
 }
 
 /*
- * [2026-10-10] 시니어 배려 — 바로가기 두 개를 오른쪽 아래로 옮겨 알림창(오른쪽 위)에 가려지지 않게 한다.
- * 쌓는 순서(아래에서 위): 메인 풀오토 이미지 설정(bottom 130, 높이 56) → 발행 바로가기 → 이미지 바로가기. 간격 12px.
- * 오른쪽 끝(right 24px)은 메인 풀오토 버튼과 맞춘다. 메인 풀오토 버튼이 숨는 탭에서도 같은 자리에 보인다.
- * 위쪽 도구 모음은 이미지 바로가기 위에서 끝나도록 높이를 줄이고, 넘치는 항목은 스크롤로 본다.
+ * [2026-10-11 사장님] 바로가기 두 개는 위쪽 고정 줄에 둔다 — 왼쪽부터 [이미지][발행][⚙][💰비용표·추천].
+ * 비용표 버튼과 같은 알약 모양·여백·글자 크기로 줄여 한 줄로 어울리게 한다(색만 파랑/초록으로 구분).
+ * 알림창(#toast-container)은 이 줄 아래(top 56px)에서 시작해 겹치지 않는다.
+ * 오른쪽 아래에는 메인 풀오토 이미지 설정(bottom 130, 높이 56)만 남으므로 도구 모음은 그 위까지 길게 쓴다.
  */
 #right-floating-buttons {
   top: 120px !important;
-  max-height: max(120px, calc(100dvh - 450px)) !important;
+  max-height: max(120px, calc(100dvh - 330px)) !important;
+}
+
+#top-shortcuts {
+  position: fixed;
+  top: 10px;
+  right: 16px;
+  z-index: 20005;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ⚙·💰비용표·추천도 같은 줄에 넣어 간격을 고르게 한다 — 버튼의 원래 인라인 위치(fixed)만 끈다. */
+#top-shortcuts > #admin-gear-btn,
+#top-shortcuts > #reopen-price-info-btn {
+  position: static !important;
 }
 
 #publish-shortcut-btn,
 #image-shortcut-btn {
-  position: fixed;
-  right: 24px;
-  z-index: 1001;
-  box-sizing: border-box;
-  width: 210px;
-  height: 56px;
-  min-height: 56px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 0 12px;
-  border-radius: 12px;
+  gap: 6px;
+  padding: 0.45rem 0.9rem;
+  border: none;
+  border-radius: 999px;
   color: #fff;
-  font: inherit;
-  font-size: 17px;
+  font-size: 0.82rem;
   font-weight: 800;
-  line-height: 1.2;
   white-space: nowrap;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+#image-shortcut-btn {
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
 }
 
 #publish-shortcut-btn {
-  bottom: 198px;
-  border: 1px solid #34d399;
-  background: #087c4c;
+  background: linear-gradient(135deg, #047857, #10b981);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
 }
-#publish-shortcut-btn:hover { background: #06633d; }
 
-#image-shortcut-btn {
-  bottom: 266px;
-  border: 1px solid #93c5fd;
-  background: #1d4ed8;
+#publish-shortcut-btn:hover,
+#image-shortcut-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
 }
-#image-shortcut-btn:hover { background: #1e40af; }
 
 #publish-shortcut-btn:focus-visible,
 #image-shortcut-btn:focus-visible {
-  outline: 3px solid #fff;
-  outline-offset: -5px;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }
 
 #unified-only-publish-settings { scroll-margin: 24px; }

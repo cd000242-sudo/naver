@@ -117,7 +117,7 @@ describe('A. 이미지 엔진 기본값 = 덕트테이프(openai-image)', () => 
   });
 });
 
-describe('B. 바로가기 두 개 — 메인 풀오토 이미지 설정 버튼 위에 쌓는다', () => {
+describe('B. 바로가기 두 개 — 위쪽 고정 줄(비용표 왼쪽)', () => {
   /** CSS 에서 선택자(쉼표 목록 포함) 그대로의 규칙 본문을 돌려준다. */
   const rule = (selector: string): string => {
     // 쉼표 목록의 뒤쪽 선택자("..,\n#image-shortcut-btn {")를 단독 규칙으로 착각하지 않도록 앞이 쉼표가 아닌 경우만 센다
@@ -137,32 +137,47 @@ describe('B. 바로가기 두 개 — 메인 풀오토 이미지 설정 버튼 �
     expect(html).toMatch(/<div id="tab-images" class="tab-panel" role="tabpanel" tabindex="-1"/);
   });
 
-  it('두 버튼 모두 bottom 기준이고 위로 쌓인다 (이미지 > 발행 > 메인 풀오토 130px), 간격 10~12px', () => {
+  // [2026-10-11 사장님] "버튼 구조가 조화롭지 못하다 — 위쪽(비용표 옆)에 두고 크기도 줄여 달라."
+  it('두 버튼은 위쪽 고정 줄(#top-shortcuts, ⚙ 왼쪽)에 있고 비용표 버튼과 같은 모양·크기다', () => {
+    const bar = rule('#top-shortcuts');
+    expect(bar).toMatch(/position:\s*fixed/);
+    expect(px(bar, 'top')).toBe(10);
+    // ⚙·비용표도 이 줄에 들어오므로 줄 자체가 비용표 자리(right 16px)에서 끝난다.
+    expect(px(bar, 'right')).toBe(16);
+    expect(css).toMatch(/#top-shortcuts > #admin-gear-btn,\n#top-shortcuts > #reopen-price-info-btn\s*\{\s*position:\s*static !important;/);
+    expect(px(bar, 'z-index')).toBeGreaterThanOrEqual(20005);
+    expect(bar).toMatch(/display:\s*flex/);
     const base = rule(BASE);
-    const pub = rule('#publish-shortcut-btn');
-    const img = rule('#image-shortcut-btn');
-    expect(base).toMatch(/position:\s*fixed/);
-    expect(base).toMatch(/right:\s*24px/);
-    expect(base).not.toMatch(/\btop:/);
-    expect(px(base, 'height')).toBeGreaterThanOrEqual(56);
-    expect(px(base, 'font-size')).toBeGreaterThanOrEqual(17);
-    expect(base).toMatch(/font-weight:\s*800/);
-    expect(px(base, 'z-index')).toBeLessThan(10000);
-    const mainTop = 130 + 56;
-    expect(px(pub, 'bottom') - mainTop).toBeGreaterThanOrEqual(10);
-    expect(px(pub, 'bottom') - mainTop).toBeLessThanOrEqual(12);
-    const pubTop = px(pub, 'bottom') + px(base, 'height');
-    expect(px(img, 'bottom') - pubTop).toBeGreaterThanOrEqual(10);
-    expect(px(img, 'bottom') - pubTop).toBeLessThanOrEqual(12);
+    for (const banned of [/position:\s*fixed/, /(^|\s)bottom:/, /(^|\s)height:/, /(^|\s)width:/]) expect(base).not.toMatch(banned);
+    const cost = /id="reopen-price-info-btn"[^>]*style="([^"]+)"/.exec(html)?.[1] || '';
+    const valueOf = (body: string, prop: string): string | undefined => {
+      const at = body.search(new RegExp('(^|[;\\s])' + prop + ':'));
+      if (at < 0) return undefined;
+      const from = body.indexOf(':', at) + 1;
+      return body.slice(from, body.indexOf(';', from)).trim();
+    };
+    for (const prop of ['padding', 'font-size', 'font-weight', 'border-radius']) {
+      const want = valueOf(cost, prop);
+      expect(want, prop).toBeTruthy();
+      expect(valueOf(base, prop), prop).toBe(want);
+    }
+    expect(px(/top: (\d+)px;[^']*z-index: 100000/.exec(read('src', 'renderer', 'utils', 'uiManagers.ts'))?.[0] || '', 'top')).toBe(56);
   });
 
-  it('색(발행=초록 유지, 이미지=파랑)·포커스 표시·같은 너비', () => {
-    expect(rule('#publish-shortcut-btn')).toMatch(/background:\s*#087c4c/);
-    expect(rule('#image-shortcut-btn')).toMatch(/background:\s*#1d4ed8/);
-    expect(css).toMatch(/#publish-shortcut-btn:focus-visible,\n#image-shortcut-btn:focus-visible\s*\{[^}]*outline:\s*3px solid/);
-    expect(rule(BASE)).toMatch(/width:\s*210px/);
-    expect(rule('#publish-shortcut-btn')).not.toMatch(/\bwidth:/);
-    expect(rule('#image-shortcut-btn')).not.toMatch(/\bwidth:/);
+  it('스크립트: 두 버튼을 #top-shortcuts 로 옮기고 이미지가 왼쪽(먼저)이다', () => {
+    expect(js).toContain('function ensureTopShortcutBar()');
+    expect(js).toContain("bar.id = 'top-shortcuts';");
+    expect(js).toContain('ensureTopShortcutBar().appendChild(shortcut);');
+    expect(js).toContain('bar.insertBefore(shortcut, bar.firstChild);');
+    expect(js).not.toContain('document.body.appendChild(shortcut)');
+    // ⚙·비용표는 바로가기 뒤(오른쪽)에 붙여 같은 간격으로 놓는다.
+    expect(js).toMatch(/for \(const id of \['admin-gear-btn', 'reopen-price-info-btn'\]\) \{[\s\S]*?bar\.appendChild\(el\);/);
+  });
+
+  it('색(발행=초록, 이미지=파랑)·포커스 표시', () => {
+    expect(rule('#publish-shortcut-btn')).toMatch(/background:\s*linear-gradient\([^)]*#10b981/);
+    expect(rule('#image-shortcut-btn')).toMatch(/background:\s*linear-gradient\([^)]*#1d4ed8/);
+    expect(css).toMatch(/#publish-shortcut-btn:focus-visible,\n#image-shortcut-btn:focus-visible\s*\{[^}]*outline:\s*2px solid #fff/);
   });
 
   it('메인 풀오토 이미지 설정 버튼은 bottom 130px · right 24px · 높이 56px 로 고정된다', () => {
@@ -180,7 +195,7 @@ describe('B. 바로가기 두 개 — 메인 풀오토 이미지 설정 버튼 �
     const body = js.slice(start, js.indexOf('// 플로팅 버튼 스크롤 따라다니기'));
     expect(start).toBeGreaterThan(-1);
     expect(body).toContain("document.getElementById('image-shortcut-btn')");
-    expect(body).toContain('document.body.appendChild(shortcut)');
+    expect(body).toContain('bar.insertBefore(shortcut, bar.firstChild)');
     expect(body).toContain('.tab-button[data-tab="images"]');
     expect(body).toContain("document.getElementById('tab-images')");
     expect(body).toContain('tab.click()');
