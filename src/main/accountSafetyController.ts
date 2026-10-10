@@ -2,6 +2,7 @@ import { blogMismatchStopMessage, resolveExpectedBlog, type ExpectedBlog } from 
 import { getAccountExecutionGuard } from '../automation/accountExecutionGuard.js';
 import { getPublicationCommitJournal } from '../automation/publicationCommitJournal.js';
 import { recheckNetworkWaitStop } from './networkWaitRecheck.js';
+import { LOGIN_AUTO_RESUME_CODES, isWatchingLoginForAutoResume, watchLoginForAutoResume, type LoginWindowPeek } from './loginAutoResume.js';
 
 export const ACCOUNT_SAFETY_LABELS: Record<string, string> = {
   LOGIN_REQUIRED: '네이버 로그인 필요', LOGIN_CHALLENGE: '네이버에서 본인확인 필요',
@@ -26,6 +27,10 @@ type Sessions = {
   inspectServerSessionState(id: string): Promise<{ status: string }>;
   /** `allowRelearn`: the user is looking at the window, so it may replace a learned blog (never a registered one). */
   verifyAccountForUser(id: string, options?: { allowRelearn?: boolean }): Promise<Verdict>;
+  /** [2026-10-11] 이 계정의 네이버 창이 열려 있는지(읽기만). */
+  isWindowOpenForUser?(id: string): boolean;
+  /** [2026-10-11] 로그인 자동 재개 지켜보기용 — 주소·로그인 쿠키 해시만 읽는다(이동·클릭 없음). */
+  peekLoginWindowForUser?(id: string): Promise<LoginWindowPeek>;
 };
 const OPEN_FAILED = '네이버 창을 열지 못했습니다. 크롬이 설치돼 있는지, 같은 계정의 다른 작업이 끝났는지 확인한 뒤 다시 눌러주세요.';
 const PENDING_FIRST = '직전 글의 발행 결과를 먼저 확인해주세요. 네이버 글 목록을 본 뒤 [발행됨 확인] 또는 [발행 안 됨 확인]을 눌러야 합니다.';
@@ -91,8 +96,28 @@ export function createAccountSafetyController(accounts: () => Account[], session
     const journalUnreadable = !state.busy && journal.isUnreadable(id);
     const label = journalUnreadable ? '발행 기록 파일 확인 필요: 네이버 글 목록을 확인한 뒤 발행 기록 초기화'
       : state.storageError ? '상태 저장소 확인 필요' : state.paused ? ACCOUNT_SAFETY_LABELS[state.code!] : '중단 없음 · 로그인은 실행 시 확인';
-    return { ...state, label, pendingToken, journalUnreadable };
+    return { ...state, label, pendingToken, journalUnreadable,
+      windowOpen: Boolean(sessions.isWindowOpenForUser?.(id)), autoResumeWatching: isWatchingLoginForAutoResume(id) };
   }
+  /**
+   * [2026-10-11 사장님 승인] 로그인 필요·다른 계정 멈춤이고 창이 열려 있으면 로그인 완료를 지켜보다 자동으로 푼다(loginAutoResume).
+   *   확인은 [확인 후 재개]와 같지만, 실패해도 창을 로그인 화면으로 옮기지 않는다(사람이 입력 중일 수 있다).
+   */
+  const maybeWatchLogin = (id: string): void => {
+    const s = guard.getStatus(id);
+    if (!s.paused || !LOGIN_AUTO_RESUME_CODES.includes(String(s.code))) return;
+    if (!sessions.peekLoginWindowForUser || !sessions.isWindowOpenForUser?.(id)) return;
+    const peek = sessions.peekLoginWindowForUser.bind(sessions);
+    watchLoginForAutoResume(id, {
+      status: x => guard.getStatus(x),
+      peek: x => peek(x),
+      resume: async x => {
+        if (journal.hasUnconfirmed(x) || journal.isUnreadable(x)) return false;
+        return guard.resume(x, async () => (await sessions.verifyAccountForUser(x, { allowRelearn: true })).status === 'ready' && !journal.hasUnconfirmed(x));
+      },
+      log: message => console.warn(message),
+    });
+  };
   /** PUBLISH_OUTCOME_UNKNOWN with nothing left to confirm (already confirmed, or the record was reset). */
   const outcomeSettled = (id: string, code?: string) => code === 'PUBLISH_OUTCOME_UNKNOWN' && !journal.isUnreadable(id) && !journal.hasUnconfirmed(id);
   /** The check needs a browser to look at; open it first. It must happen before guard.resume*, which holds the account busy. */
@@ -100,7 +125,7 @@ export function createAccountSafetyController(accounts: () => Account[], session
   async function act(key: string, action: SafetyAction, expectedVersion?: number,
     outcome?: 'published' | 'not-published', pendingToken?: string, lookup: SafetyLookup = 'account') {
     const { id, blogId } = resolve(key, lookup);
-    if (action === 'status') return { success: true, state: status(key, lookup) };
+    if (action === 'status') { status(key, lookup); maybeWatchLogin(id); return { success: true, state: status(key, lookup) }; }
     if (action === 'auto-recheck') {   // [2026-10-09] 무인 작업 전용 — NETWORK_WAIT 멈춤만 읽기 전용으로 다시 확인(networkWaitRecheck)
       status(key, lookup); // 미확정 발행 기록이 있으면 먼저 PUBLISH_OUTCOME_UNKNOWN 으로 멈춰 둔다.
       let attempted = false; // 예약 cron 이 매분 부르므로, 실제로 확인한 때(와 상태가 바뀐 때)만 기록한다.
@@ -119,7 +144,7 @@ export function createAccountSafetyController(accounts: () => Account[], session
     if (before.busy) return { success: false, state: before, message: '이 계정의 작업이 끝난 뒤 다시 확인해주세요.' };
     const readOnly = action === 'open' || action === 'open-posts';
     if (!readOnly && expectedVersion !== before.version) return { success: false, state: before, message: '계정 상태가 변경되었습니다. 확인 후 다시 눌러주세요.' };
-    if (action === 'open') { await sessions.openForUser(id); return { success: true, state: status(key, lookup), message: '열린 네이버 창에서 직접 로그인·본인확인을 완료해주세요.' }; }
+    if (action === 'open') { await sessions.openForUser(id); maybeWatchLogin(id); return { success: true, state: status(key, lookup), message: '열린 네이버 창에서 직접 로그인·본인확인을 완료해주세요.' }; }
     if (action === 'open-posts') {
       try { await sessions.openPostListForUser(id, blogId); } catch { return { success: false, state: status(key, lookup), message: OPEN_FAILED }; }
       return { success: true, state: status(key, lookup), message: '네이버 글 목록을 열었습니다. 방금 글이 올라갔는지(예약 발행이면 예약 목록도) 확인한 뒤 알려주세요.' };

@@ -7,7 +7,7 @@
 // NOTE: inline bundle = single scope. Every top-level identifier here is prefixed accountPauseModal* /
 // AccountPauseModal* to avoid collisions (see memory: identifier clash). Credentials are never typed by the app.
 
-type AccountPauseModalState = { paused: boolean; busy: boolean; version: number; code?: string; label?: string; pendingToken?: string };
+type AccountPauseModalState = { paused: boolean; busy: boolean; version: number; code?: string; label?: string; pendingToken?: string; windowOpen?: boolean; autoResumeWatching?: boolean };
 type AccountPauseModalReply = { success: boolean; state?: AccountPauseModalState; message?: string };
 type AccountPauseModalApi = {
   accountSafety?: (id: string, action: string, version?: number, outcome?: string, token?: string, lookup?: string) => Promise<AccountPauseModalReply>;
@@ -18,6 +18,9 @@ const ACCOUNT_PAUSE_MODAL_ID = 'account-pause-modal';
 const ACCOUNT_PAUSE_MODAL_TIMEOUT_MS = 120_000; // opening Chrome + checking the editor can take a minute
 const ACCOUNT_PAUSE_MODAL_STATUS_TIMEOUT_MS = 5_000;
 const ACCOUNT_PAUSE_MODAL_TITLES_KEY = 'accountPauseModalTitles.v1';
+// [2026-10-11 사장님] 로그인 필요·다른 계정은 창에서 로그인하면 앱이 알아서 푼다(main loginAutoResume) — 안내 창은 상태를 다시 읽어 알아챈다.
+const ACCOUNT_PAUSE_MODAL_AUTO_CODES = ['LOGIN_REQUIRED', 'ACCOUNT_MISMATCH'];
+const ACCOUNT_PAUSE_MODAL_POLL_MS = 4_000;
 const ACCOUNT_PAUSE_MODAL_TITLES_MAX = 20;
 const ACCOUNT_PAUSE_MODAL_CODE_PATTERN = /\[(LOGIN_REQUIRED|LOGIN_CHALLENGE|ACCOUNT_PROTECTED|NETWORK_WAIT|ACCOUNT_MISMATCH|PUBLISH_OUTCOME_UNKNOWN)\]/;
 const ACCOUNT_PAUSE_MODAL_LABELS: Record<string, string> = {
@@ -142,11 +145,12 @@ export async function showAccountPauseModal(input: unknown, context: { naverId?:
   const heading = accountPauseModalElement('div', 'font-size:1.05rem;font-weight:700;margin-bottom:0.6rem;');
   heading.id = 'account-pause-modal-heading';
   const reason = accountPauseModalElement('div', 'font-size:0.88rem;line-height:1.6;color:var(--text-muted,#cbd5e1);margin-bottom:0.7rem;');
+  const hint = accountPauseModalElement('div', 'font-size:0.88rem;font-weight:600;line-height:1.55;margin-bottom:0.7rem;color:#86efac;');
   const question = accountPauseModalElement('div', 'font-size:0.95rem;font-weight:700;line-height:1.5;margin-bottom:0.7rem;color:#fbbf24;');
   const statusLine = accountPauseModalElement('div', 'font-size:0.85rem;line-height:1.5;min-height:1.2rem;margin-bottom:0.8rem;color:#93c5fd;', '계정 상태를 확인하는 중입니다…');
   statusLine.setAttribute('role', 'status');
   const actions = accountPauseModalElement('div', 'display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:flex-end;');
-  panel.append(heading, reason, question, statusLine, actions); overlay.append(panel);
+  panel.append(heading, reason, hint, question, statusLine, actions); overlay.append(panel);
 
   const draw = () => {
     if (state?.paused && state.code && state.code in ACCOUNT_PAUSE_MODAL_COPY) { code = state.code; overlay.dataset.code = code; }
@@ -155,13 +159,22 @@ export async function showAccountPauseModal(input: unknown, context: { naverId?:
     reason.textContent = ACCOUNT_PAUSE_MODAL_COPY[code].reason; reason.hidden = !live && state !== undefined;
     const asking = live && code === 'PUBLISH_OUTCOME_UNKNOWN' && Boolean(state?.pendingToken);
     question.hidden = !asking; question.textContent = asking ? `직전 글${title ? `(${title})` : ''}이 네이버에 올라갔나요?` : '';
-    const names = !live ? [] : asking ? ['open-posts', 'confirm-published', 'confirm-not-published'] : ['open', 'resume'];
+    // [2026-10-11 사장님] 창이 이미 열려 있으면 [확인 후 재개]를 앞세우고 [네이버 창 열기]는 '보기'로 낮춘다.
+    const windowOpen = live && !asking && Boolean(state?.windowOpen);
+    const auto = ACCOUNT_PAUSE_MODAL_AUTO_CODES.includes(code);
+    hint.textContent = !live || asking ? ''
+      : auto && windowOpen ? '네이버 창이 열려 있습니다. 그 창에서 로그인을 마치면 앱이 자동으로 확인해 이어갑니다. [확인 후 재개]를 누르지 않아도 됩니다.'
+        : auto ? '[네이버 창 열기]로 창을 열고 로그인을 마치면 앱이 자동으로 확인해 이어갑니다.'
+          : windowOpen ? '네이버 창이 이미 열려 있습니다. 열려 있는 네이버 창에서 마친 뒤 아래 [확인 후 재개]를 눌러주세요.' : '';
+    hint.hidden = !hint.textContent;
+    const names = !live ? [] : asking ? ['open-posts', 'confirm-published', 'confirm-not-published'] : windowOpen ? ['resume', 'open'] : ['open', 'resume'];
     actions.textContent = '';
     for (const name of [...names, 'close']) {
-      const button = accountPauseModalElement('button', name === 'close'
+      const secondary = name === 'close' || (windowOpen && name === 'open');
+      const button = accountPauseModalElement('button', secondary
         ? 'padding:0.5rem 1rem;border-radius:8px;border:1px solid rgba(148,163,184,0.4);background:transparent;color:inherit;cursor:pointer;'
-        : `padding:0.5rem 1rem;border-radius:8px;border:none;background:${name === 'confirm-not-published' ? '#b45309' : '#16834a'};color:#fff;font-weight:600;cursor:pointer;`,
-      name === 'close' ? '닫기' : ACCOUNT_PAUSE_MODAL_LABELS[name]);
+        : `padding:0.5rem 1rem;border-radius:8px;border:none;background:${name === 'confirm-not-published' ? '#b45309' : '#16834a'};color:#fff;font-weight:600;cursor:pointer;${windowOpen && name === 'resume' ? 'font-weight:800;box-shadow:0 0 0 3px rgba(74,222,128,0.45);' : ''}`,
+      name === 'close' ? '닫기' : windowOpen && name === 'open' ? '네이버 창 보기' : ACCOUNT_PAUSE_MODAL_LABELS[name]);
       button.type = 'button'; button.dataset.action = name;
       button.addEventListener('click', () => {
         if (name === 'close') return accountPauseModalClose?.();
@@ -174,6 +187,7 @@ export async function showAccountPauseModal(input: unknown, context: { naverId?:
       });
       actions.append(button);
     }
+    if (windowOpen && overlay.isConnected) actions.querySelector<HTMLButtonElement>('button[data-action="resume"]')?.focus();
   };
   const finishText = (action: string, outcome: string | undefined, message?: string) => {
     const follow = action === 'resume' ? '발행 버튼을 다시 눌러주세요. 앱이 자동으로 다시 발행하지는 않습니다.'
@@ -181,8 +195,9 @@ export async function showAccountPauseModal(input: unknown, context: { naverId?:
         : '이제 발행 버튼을 다시 눌러 발행할 수 있습니다. 앱이 자동으로 다시 발행하지는 않습니다.';
     return `${message || '처리했습니다.'} ${follow}`;
   };
+  let running = false;
   const run = async (action: string, outcome?: string) => {
-    const mine = ++serial;
+    const mine = ++serial; running = true;
     actions.querySelectorAll('button').forEach(b => { b.disabled = true; });
     statusLine.textContent = action === 'open' || action === 'open-posts' ? '네이버 창을 여는 중입니다…' : '네이버 창을 열어 확인하는 중입니다(최대 1~2분)…';
     try {
@@ -193,10 +208,33 @@ export async function showAccountPauseModal(input: unknown, context: { naverId?:
       statusLine.textContent = resolved ? finishText(action, outcome, reply.message) : (reply.message || state?.label || '상태를 확인하지 못했습니다.');
     } catch (error) {
       if (mine === serial) statusLine.textContent = error instanceof Error ? error.message : '상태 확인 실패';
-    } finally { if (mine === serial && overlay.isConnected) draw(); }
+    } finally { if (mine === serial) running = false; if (mine === serial && overlay.isConnected) draw(); }
+  };
+  // 로그인 필요·다른 계정: 앱이 창을 지켜보다 풀면 이 창도 알아챈다(4초마다 상태만 읽는다).
+  let pollTimer: ReturnType<typeof setTimeout> | undefined;
+  const poll = () => {
+    pollTimer = setTimeout(async () => {
+      if (!overlay.isConnected) return;
+      if (running || resolved || !state?.paused || !ACCOUNT_PAUSE_MODAL_AUTO_CODES.includes(code)) { if (!resolved && state?.paused) poll(); return; }
+      try {
+        const reply = await accountPauseModalCall(naverId, 'status', undefined, undefined, ACCOUNT_PAUSE_MODAL_STATUS_TIMEOUT_MS);
+        if (!overlay.isConnected || running) return poll();
+        if (reply.success && reply.state) {
+          const before = JSON.stringify([state?.paused, state?.code, state?.windowOpen]);
+          state = reply.state;
+          if (!state.paused) {
+            resolved = true;
+            statusLine.textContent = '로그인을 확인해 자동으로 이어갈 수 있게 했습니다. 발행 버튼을 다시 눌러주세요. 앱이 자동으로 다시 발행하지는 않습니다.';
+            return draw();
+          }
+          if (JSON.stringify([state.paused, state.code, state.windowOpen]) !== before) draw();
+        }
+      } catch { /* 다음 차례에 다시 읽는다 */ }
+      poll();
+    }, ACCOUNT_PAUSE_MODAL_POLL_MS);
   };
   const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') accountPauseModalClose?.(); };
-  const close = () => { document.removeEventListener('keydown', onKey); overlay.remove(); if (accountPauseModalClose === close) accountPauseModalClose = null; };
+  const close = () => { if (pollTimer) clearTimeout(pollTimer); document.removeEventListener('keydown', onKey); overlay.remove(); if (accountPauseModalClose === close) accountPauseModalClose = null; };
   accountPauseModalClose = close;
   overlay.addEventListener('click', (event) => { if (event.target === overlay) close(); });
   document.addEventListener('keydown', onKey);
@@ -214,5 +252,6 @@ export async function showAccountPauseModal(input: unknown, context: { naverId?:
     if (overlay.isConnected) statusLine.textContent = error instanceof Error ? error.message : '계정 상태를 확인하지 못했습니다.';
   }
   if (overlay.isConnected) draw();
+  if (overlay.isConnected && state?.paused && ACCOUNT_PAUSE_MODAL_AUTO_CODES.includes(code)) poll();
   return true;
 }

@@ -12,6 +12,7 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { Browser, Page, Frame } from 'puppeteer';
 import * as path from 'path';
 import * as os from 'os';
+import { createHash } from 'crypto';
 import { promises as fs } from 'fs';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
 import { emitSessionEvent } from './session/sessionEventLogger.js';
@@ -874,6 +875,29 @@ class BrowserSessionManager {
         // An explicit user action may open login; automatic jobs never do so.
         await session.page.goto('https://nid.naver.com/nidlogin.login', { waitUntil: 'domcontentloaded', timeout: 30000 });
         });
+    }
+
+    /** [2026-10-11] 이 계정의 네이버 창이 열려 있는지만 본다(읽기만). */
+    isWindowOpenForUser(accountId: string): boolean {
+        const session = this.sessions.get(this.resolveSessionAccountId(accountId));
+        return Boolean(session?.browser.connected && !session.page.isClosed());
+    }
+
+    /**
+     * [2026-10-11] 로그인 자동 재개 지켜보기용 — 창 주소와 로그인 쿠키(NID_AUT·NID_SES) 해시만 읽는다.
+     * 이동·클릭·입력은 하지 않고, 쿠키 값은 해시로만 남긴다(로그·반환값에 값 없음).
+     */
+    async peekLoginWindowForUser(accountId: string): Promise<{ open: boolean; onLoginPage: boolean; fingerprint: string }> {
+        const session = this.sessions.get(this.resolveSessionAccountId(accountId));
+        if (!session?.browser.connected || session.page.isClosed()) return { open: false, onLoginPage: false, fingerprint: '' };
+        const url = session.page.url();
+        let cookieSignature = 'unknown';
+        try {
+            const cookies = await session.page.cookies('https://www.naver.com');
+            const auth = cookies.filter(c => c.name === 'NID_AUT' || c.name === 'NID_SES').map(c => `${c.name}=${c.value}`).sort().join(';');
+            cookieSignature = auth ? createHash('sha256').update(auth).digest('hex').slice(0, 16) : 'none';
+        } catch { /* 쿠키를 못 읽으면 주소만으로 판단한다. */ }
+        return { open: true, onLoginPage: isLoginChallengeUrl(url) || isNaverSessionLoginUrl(url), fingerprint: `${url}|${cookieSignature}` };
     }
 
     /**

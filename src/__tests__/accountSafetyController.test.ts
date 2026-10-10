@@ -60,3 +60,42 @@ it('status polling during an active commit does not stop or expose the pending a
   });
   expect(controller.status('app-id').paused).toBe(false);
 });
+
+// [2026-10-11 사장님 승인] 로그인 필요·다른 계정 멈춤은 열린 창에서 로그인이 끝나면 [확인 후 재개] 없이 자동으로 풀린다.
+describe('login auto-resume', () => {
+  afterEach(async () => { (await import('../main/loginAutoResume')).stopLoginAutoResumeWatch(); vi.useRealTimers(); });
+
+  it('상태에 네이버 창이 열려 있는지 싣는다', () => {
+    const { controller, sessions } = setup();
+    expect(controller.status('app-id').windowOpen).toBe(false);
+    (sessions as any).isWindowOpenForUser = () => true;
+    expect(controller.status('app-id').windowOpen).toBe(true);
+  });
+
+  it('창이 열린 로그인 필요 멈춤: 상태 확인 때 지켜보기 시작 → 로그인 화면을 벗어나면 자동으로 확인해 푼다(창은 옮기지 않음)', async () => {
+    vi.useFakeTimers();
+    const { controller, guard, sessions } = setup(); guard.pause('login-id', 'LOGIN_REQUIRED');
+    let page = { open: true, onLoginPage: true, fingerprint: 'login|none' };
+    Object.assign(sessions as any, { isWindowOpenForUser: () => true, peekLoginWindowForUser: vi.fn(async () => page) });
+    const state = (await controller.act('app-id', 'status')).state as any;
+    expect(state.autoResumeWatching).toBe(true);
+    await vi.advanceTimersByTimeAsync(8_000);
+    expect(sessions.verifyAccountForUser).not.toHaveBeenCalled(); // 로그인 화면에서는 아무것도 안 한다
+    page = { open: true, onLoginPage: false, fingerprint: 'https://www.naver.com/|new' };
+    await vi.advanceTimersByTimeAsync(4_000);
+    expect(sessions.verifyAccountForUser).toHaveBeenCalledWith('login-id', { allowRelearn: true });
+    expect(guard.getStatus('login-id').paused).toBe(false);
+    expect(sessions.openForUser).not.toHaveBeenCalled();
+  });
+
+  it('본인확인 멈춤은 창이 열려 있어도 자동으로 풀지 않는다', async () => {
+    vi.useFakeTimers();
+    const { controller, guard, sessions } = setup(); guard.pause('login-id', 'LOGIN_CHALLENGE');
+    Object.assign(sessions as any, { isWindowOpenForUser: () => true, peekLoginWindowForUser: vi.fn(async () => ({ open: true, onLoginPage: false, fingerprint: 'x' })) });
+    const state = (await controller.act('app-id', 'status')).state as any;
+    expect(state.autoResumeWatching).toBe(false);
+    await vi.advanceTimersByTimeAsync(12_000);
+    expect(sessions.verifyAccountForUser).not.toHaveBeenCalled();
+    expect(guard.getStatus('login-id').paused).toBe(true);
+  });
+});
