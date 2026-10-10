@@ -5,7 +5,7 @@ interface Dependencies {
   safety?: (accountId: string) => { paused: boolean; busy: boolean; version: number; code?: string; label: string };
   accounts: () => { id: string; name: string; blogId: string; naverId?: string }[];
   active: () => { id: string } | null;
-  fetchCategories: (blogId: string) => Promise<{ success: boolean; categories?: { id: string; name: string }[] }>;
+  fetchCategories: (blogId: string) => Promise<{ success: boolean; categories?: { id: string; name: string }[]; message?: string }>;
   deliver: (posts: unknown[], destination?: LdbResolvedDestination) => Promise<number>;
 }
 export function parseLdbDestination(value: unknown): LdbDestination {
@@ -30,7 +30,13 @@ export function createLdbDestinations(deps: Dependencies) {
     if (lookupId(account(accountId)) !== beforeId) throw new Error('계정이 변경되었습니다. 다시 불러와주세요.');
     const values = (result.categories || []).filter(value => /^[1-9]\d{0,15}$/.test(String(value.id)) && String(value.name || '').trim())
       .map(value => ({ id: String(value.id), name: String(value.name).trim() }));
-    if (!result.success || !values.length || new Set(values.map(value => value.id)).size !== values.length) throw new Error('실제 발행 카테고리를 확인하지 못했습니다.');
+    if (!result.success || !values.length || new Set(values.map(value => value.id)).size !== values.length) {
+      // [2026-10-10] 리모컨이 "(409)"만 보여 원인을 몰랐다 — 조회한 블로그 아이디와 이유를 담는다.
+      //   로그인 아이디와 블로그 주소가 다른 계정은 블로그 ID 칸에 닉네임이 있으면 로그인 아이디로 조회돼 실패한다.
+      // 크롬 오류 원문의 파일 경로(사용자 이름 포함)는 지운다 — 확장은 경로 섞인 문구를 통째로 버린다.
+      const detail = String(result.message || '').replace(/[A-Za-z]:[\\/][^\s)]*|\/(?:Users|home)\/[^\s)]*/g, '(경로)').replace(/\s+/g, ' ').trim().slice(0, 160);
+      throw new Error(`'${beforeId}' 블로그에서 실제 발행 카테고리를 찾지 못했습니다. 블로그 주소가 로그인 아이디와 다르면 앱 계정 관리의 블로그 ID 칸에 블로그 주소(blog.naver.com/ 뒤 아이디)를 넣어 주세요.${detail ? ` (${detail})` : ''}`);
+    }
     return { accountId, categories: values };
   }
   // 발행기가 카테고리를 이름으로 비교할 때 사용하는 장식 제거 규칙과 동일하다.

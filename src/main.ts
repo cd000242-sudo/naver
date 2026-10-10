@@ -163,6 +163,7 @@ import { applyConfigToEnv, loadConfig, saveConfig, validateApiKeyFormat, type Ap
 import { generateBlogContent, setGeminiModel, flushGeminiUsage, getGeminiUsageSnapshot } from './gemini.js';
 import { flushAllApiUsage, getApiUsageSnapshot, resetApiUsage, type ApiProvider } from './apiUsageTracker.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
+import { resolveCategoryBrowserLaunch } from './main/blogCategoryBrowser.js';
 import { PostPublishBooster } from './publisher/postPublishBooster.js';
 // ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 발행 메타 기록 훅
 import { recordPublishMeta } from './services/publishMetadataRecorder.js';
@@ -5046,6 +5047,8 @@ async function fetchLdbBlogCategories(arg: string | { naverId?: string; blogId?:
       return { success: false, message: '블로그 ID가 필요합니다.' };
     }
 
+    // [2026-10-10] 1단계가 왜 실패했는지 최종 실패 문구에 붙인다(리모컨에 이유가 보이도록).
+    let stage1Note = '네이버 응답에 카테고리 없음';
     // ✅ 1단계: 딥 모바일 API 호출 (Axios 기반, 가장 강력하고 정확함)
     try {
       console.log('[Main] Stage 1: 딥 모바일 API 시도...', blogId);
@@ -5138,18 +5141,22 @@ async function fetchLdbBlogCategories(arg: string | { naverId?: string; blogId?:
       }
     } catch (e) {
       console.warn('[Main] Stage 1 실패 (API 차단 또는 비공개), Stage 2로 전환:', (e as Error).message);
+      const status = (e as { response?: { status?: number } })?.response?.status;
+      stage1Note = status ? `네이버 응답 ${status}` : `네이버 연결 실패: ${String((e as Error)?.message || e).slice(0, 60)}`;
     }
 
     // ✅ 2단계: 모바일 페이지 분석 (Puppeteer 기반, 최후의 보루)
+    // [2026-10-10] 경로 없이 띄우면 개발용 퍼피티어 캐시만 찾아 일반 사용자 PC 에선 늘 실패했다 — 앱이 찾은 크롬·엣지로 띄운다.
+    const launchOptions = await resolveCategoryBrowserLaunch(getChromiumExecutablePath);
+    if (!launchOptions) {
+      return { success: false, message: `1단계: ${stage1Note} · 2단계: 블로그 화면을 열 크롬·엣지를 찾지 못했습니다.` };
+    }
     const puppeteer = await import('puppeteer-extra');
     const StealthPlugin = await import('puppeteer-extra-plugin-stealth');
     const puppeteerWithStealth = puppeteer.default as any;
     puppeteerWithStealth.use((StealthPlugin as any).default());
 
-    const browser = await puppeteerWithStealth.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu'],
-    });
+    const browser = await puppeteerWithStealth.launch(launchOptions);
 
     try {
       const page = await browser.newPage();
@@ -5278,7 +5285,7 @@ async function fetchLdbBlogCategories(arg: string | { naverId?: string; blogId?:
       return {
         success: true,
         categories: [{ id: '0', name: '전체 (기본)' }],
-        message: '카테고리를 분석하지 못해 기본 목록을 제공합니다.'
+        message: `카테고리를 분석하지 못해 기본 목록을 제공합니다. (1단계: ${stage1Note} · 2단계: 블로그 화면에 카테고리 없음)`
       };
 
     } catch (error) {

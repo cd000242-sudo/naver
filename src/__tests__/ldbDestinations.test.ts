@@ -37,6 +37,19 @@ describe('LDB destination bridge', () => {
     await expect(service.select({ accountId: 'a', categoryId: '2' })).rejects.toThrow();
     expect(deliver).not.toHaveBeenCalled();
   });
+  // [2026-10-10 사장님 신고] 리모컨에 "(409)" 숫자만 보여 원인을 몰랐다 — 조회한 블로그 아이디와 이유를 문구에 담는다.
+  it('names the looked-up blog ID and the fetch reason when real categories are missing', async () => {
+    const { service, deps } = fixture();
+    deps.fetchCategories.mockResolvedValue({ success: false, message: '카테고리 분석 실패: 블로그 화면을 열 크롬·엣지를 찾지 못했습니다.' } as never);
+    await expect(service.categories('a')).rejects.toThrow(/'blog' 블로그에서 실제 발행 카테고리를 찾지 못했습니다.*블로그 ID 칸.*블로그 주소.*\(카테고리 분석 실패: 블로그 화면을 열 크롬·엣지를 찾지 못했습니다\.\)/);
+    deps.fetchCategories.mockResolvedValue({ success: true, categories: [{ id: '0', name: '전체 (기본)', password: '' }], message: '카테고리를 분석하지 못해 기본 목록을 제공합니다.' } as never);
+    await expect(service.categories('a')).rejects.toThrow(/'blog' 블로그에서.*\(카테고리를 분석하지 못해 기본 목록을 제공합니다\.\)/);
+    // 크롬 오류 원문의 파일 경로는 지운다(리모컨이 경로 섞인 문구를 통째로 버리지 않게).
+    deps.fetchCategories.mockResolvedValue({ success: false, message: '카테고리 분석 실패: Could not find Chrome. cache path is C:\\Users\\someone\\.cache\\puppeteer and /home/someone/x' } as never);
+    const error = await service.categories('a').catch((e: Error) => e);
+    expect(error.message).toMatch(/Could not find Chrome/);
+    expect(error.message).not.toMatch(/[A-Za-z]:[\\/]|\/home\/|someone/);
+  });
   it('rejects unknown accounts, missing categories, and synthetic fallback', async () => {
     const { service, deps, deliver } = fixture();
     await expect(service.select({ accountId: 'wrong', categoryId: '2' })).rejects.toThrow();

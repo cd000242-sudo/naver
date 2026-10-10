@@ -109,7 +109,8 @@ export function createLdbBridge(deps: LdbBridgeDeps): http.Server {
 
     if (req.method === 'GET' && deps.destinations && ['/v1/accounts', '/v1/categories'].includes(url.pathname)) {
       const work = url.pathname === '/v1/accounts' ? Promise.resolve().then(() => deps.destinations!.accounts()) : deps.destinations.categories(url.searchParams.get('accountId') || '');
-      void work.then(value => send(res, 200, { ok: true, ...value }, origin)).catch(() => send(res, 409, { ok: false, error: '계정 또는 실제 카테고리를 확인하지 못했습니다. 앱에서 계정을 확인하고 다시 불러와주세요.' }, origin));
+      // [2026-10-10] 이유를 버리고 일반 문구만 보내 리모컨이 "(409)"만 보였다 — 앱이 만든 이유 문구를 그대로(길이 제한) 싣는다.
+      void work.then(value => send(res, 200, { ok: true, ...value }, origin)).catch((error: unknown) => send(res, 409, { ok: false, error: (error instanceof Error && error.message.trim() ? error.message.trim().slice(0, 400) : '') || '계정 또는 실제 카테고리를 확인하지 못했습니다. 앱에서 계정을 확인하고 다시 불러와주세요.' }, origin));
       return;
     }
     if (req.method !== 'POST' || !['/v1/posts', '/v1/selection'].includes(url.pathname)) { send(res, 404, { ok: false, error: '지원하지 않는 경로입니다.' }, origin); return; }

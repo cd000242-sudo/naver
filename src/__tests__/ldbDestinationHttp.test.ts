@@ -27,6 +27,22 @@ describe('LDB authenticated account/category HTTP', () => {
       expect((await fetch(base + '/v1/accounts', { headers: { ...headers, Origin: 'https://evil.test' } })).status).toBe(403);
     } finally { server.closeAllConnections(); await new Promise<void>(resolve => server.close(() => resolve())); }
   });
+  // [2026-10-10 사장님 신고] 409 응답에 이유를 버리고 일반 문구만 실어 리모컨이 원인을 못 보여 줬다.
+  it('carries the category failure reason in the 409 body', async () => {
+    const destinations = createLdbDestinations({ accounts: () => [{ id: 'a', name: '이슈블로그', blogId: '이슈블로그', naverId: 'login_id' }], active: () => ({ id: 'a' }), fetchCategories: async () => ({ success: false, message: '카테고리 분석 실패: 블로그 화면을 열 크롬·엣지를 찾지 못했습니다.' }), deliver: vi.fn(async () => 0) });
+    const server = createLdbBridge({ token: 'test', deliver: vi.fn(async () => 0), destinations });
+    await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
+    const base = `http://127.0.0.1:${(server.address() as any).port}`;
+    try {
+      const response = await fetch(base + '/v1/categories?accountId=a', { headers: { Authorization: 'Bearer test' } });
+      expect(response.status).toBe(409);
+      const body = await response.json();
+      expect(body.ok).toBe(false);
+      expect(body.error).toMatch(/'login_id' 블로그에서 실제 발행 카테고리를 찾지 못했습니다/);
+      expect(body.error).toMatch(/크롬·엣지를 찾지 못했습니다/);
+      expect(body.error.length).toBeLessThanOrEqual(400);
+    } finally { server.closeAllConnections(); await new Promise<void>(resolve => server.close(() => resolve())); }
+  });
   it('does not accept renderer ACK with another account or category', async () => {
     const ipc = new EventEmitter(); const send = vi.fn();
     const waiting = deliverLdbPosts({ id: 1, isDestroyed: () => false, isLoading: () => false, send }, ipc, [], 1000, { ...selection, categoryName: '카테고리', categories: [] });

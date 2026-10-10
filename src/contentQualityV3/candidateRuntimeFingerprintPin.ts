@@ -78,4 +78,4 @@
 //   환원한다. 저널·가드의 상태 파일 교체는 EPERM/EBUSY/EACCES 에서 최대 5회(≤650ms) 재시도하고
 //   그래도 실패하면 종전처럼 멈춘다.
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 =
-  'c57e58b21f24b39950fadbd47e6bea792f44bc38369fb3334ed87a86fcbe379c' as const;
+  '10ff71c963d48de7c1b8537c876d5a5af54dd1cec1b2cf5da3bb8aa391aaaad5' as const;
