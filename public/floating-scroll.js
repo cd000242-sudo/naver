@@ -81,8 +81,12 @@ function ensureTopShortcutBar() {
   const leftButtons = document.getElementById('left-floating-buttons');
   const rightButtons = document.getElementById('right-floating-buttons');
   
+  // [2026-10-11 사장님 "스크롤 따라다니게"] 필터가 걸린 헤더 안에서는 position:fixed 가 화면이 아니라 헤더에 붙어
+  //   페이지와 같이 올라갔다 — 바로가기처럼 body 바로 아래로 옮겨 화면에 고정한다(위치·동작은 그대로).
+  //   왼쪽 도구 모음이 없는 화면에서도 옮겨야 하므로 아래 조기 종료보다 먼저 한다.
+  if (rightButtons && rightButtons.parentElement !== document.body) document.body.appendChild(rightButtons);
   if (!leftButtons || !rightButtons) return;
-  
+
   // 초기 위치 설정
   const initialTop = 16;
   const minTop = 16;

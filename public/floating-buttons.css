@@ -148,9 +148,66 @@
  * 알림창(#toast-container)은 이 줄 아래(top 56px)에서 시작해 겹치지 않는다.
  * 오른쪽 아래에는 메인 풀오토 이미지 설정(bottom 130, 높이 56)만 남으므로 도구 모음은 그 위까지 길게 쓴다.
  */
+/*
+ * [2026-10-11 사장님] 오른쪽 도구 모음 — 안쪽 스크롤 상자 없이 전부 보이게, 버튼 크기·모양을 하나로 맞춘다.
+ * 위쪽 바로가기 줄 바로 아래(56px)에서 시작해 스크롤해도 화면에 고정된다. 버튼은 줄어들지 않는다(환경 설정 찌그러짐의 뿌리).
+ * 표시·숨김(display)은 각 기능의 스크립트가 정하므로 여기서 건드리지 않는다.
+ */
 #right-floating-buttons {
-  top: 120px !important;
-  max-height: max(120px, calc(100dvh - 330px)) !important;
+  top: 56px !important;
+  right: 16px !important;
+  width: 178px;
+  max-height: none !important;
+  overflow: visible !important;
+  padding-right: 0 !important;
+  gap: 6px !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+#right-floating-buttons > .floating-btn {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  padding: 0 14px !important;
+  border-radius: 10px !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap;
+}
+
+#right-floating-buttons > .floating-btn > :first-child {
+  font-size: 1rem !important;
+  margin: 0 !important;
+}
+
+/* 반투명 배경 버튼은 스크롤하며 본문 위에 떠 있을 때 뒤 글자가 비쳐 겹쳐 보였다 — 어두운 바탕을 깐다. */
+#right-floating-buttons > #license-badge,
+#right-floating-buttons > #purchase-inquiry-btn {
+  background-color: #17140d !important;
+}
+
+/* 황금키워드 버튼의 왕관·반짝이 아이콘도 다른 버튼과 같은 크기로. */
+#right-floating-buttons > #launch-leword-btn > span:not(.gold-badge) {
+  font-size: 1rem !important;
+}
+#right-floating-buttons > #launch-leword-btn > span:not(.gold-badge):nth-of-type(3) {
+  font-size: 0.85rem !important;
+}
+
+/* 아주 낮은 창에서만, 아래 메인 풀오토 이미지 설정 버튼을 덮지 않게 안쪽 스크롤을 다시 쓴다. */
+@media (max-height: 560px) {
+  #right-floating-buttons {
+    max-height: calc(100dvh - 250px) !important;
+    overflow-y: auto !important;
+  }
 }
 
 #top-shortcuts {
