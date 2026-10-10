@@ -4,6 +4,8 @@
  * 최근 7일 소재 판을 싣는다. 화면은 홈판 추천 판과 같은 틀 · 같은 스타일(hfb-*)이다. 수치는 판에 실린 실측만 그린다.
  */
 import { useEffect, useMemo, useState } from 'react';
+import { shuffleWithinTiers } from '../../../lib/hourlyShuffle.mjs';
+import { useShuffleSeed } from '../../../lib/useShuffleSeed';
 import HomefeedBenchmarkStyles from '../homefeed/HomefeedBenchmarkStyles';
 import { bridgeBenchmarkTitles } from '../../../lib/bridge';
 import { callWorkerRaw } from '../../../lib/keywordApi';
@@ -188,7 +190,9 @@ export default function AdsenseBenchmarkBoard() {
     }, []);
 
     const cards = board?.candidates ?? [];
-    const items = useMemo(() => filterAdsenseCards(cards, { mode, category, query }), [cards, mode, category, query]);
+    // ★(고수 3곳 이상) 먼저, 묶음 안은 매시 정각 새로 섞는다(2026-10-10 사장님 "상위만 본다 — 1시간 주기로 섞고 수동 버튼")
+    const [seed, reshuffle] = useShuffleSeed();
+    const items = useMemo(() => filterAdsenseCards(shuffleWithinTiers(cards, (c) => (c.recommended ? 0 : 1), seed), { mode, category, query }), [cards, mode, category, query, seed]);
     const cats = useMemo(() => adsenseCategories(cards), [cards]);
     const advice = adsenseWritingAdvice(board?.trends?.titleShape, cards);
     const shape = board?.trends?.titleShape;
@@ -237,6 +241,7 @@ export default function AdsenseBenchmarkBoard() {
                         <button type="button" aria-pressed={mode === 'all'} onClick={() => setMode('all')}>전체 <span>{cards.length}</span></button>
                         <button type="button" aria-pressed={mode === 'star'} onClick={() => setMode('star')}>★ 고수 3곳 이상 <span>{cards.filter((c) => c.recommended).length}</span></button>
                     </div>
+                    <div className="hfb-shuffle"><button type="button" onClick={() => { reshuffle(); setLimit(24); }}>순서 섞기</button><small>매시 정각 새 순서로 섞입니다 · ★ 소재가 먼저</small></div>
                     <div className="hfb-filter-bottom">
                         <div className="hfb-categories" role="group" aria-label="분야">
                             <button type="button" aria-pressed={category === ''} onClick={() => setCategory('')}>전체</button>
