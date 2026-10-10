@@ -47,7 +47,7 @@ function TitleList({titles:boardTitles,editorTitle,c}:{titles:string[];editorTit
   {titles.length>0&&<p className="hfb-caption">따옴표로 시작하는 제목은 독자의 반응·상황을 표현한 초안입니다. 실제 발언 인용 여부는 원문에서 확인해 주세요.</p>}
  </div>;
 }
-function Points({title,items,kind}:{title:string;items:string[];kind:string}) {return <div className={`hfb-points ${kind}`}><h4>{title}</h4>{items.length?<ul>{items.map((text,i)=><li key={i}>{text}</li>)}</ul>:<p>원출처 확인 후 보완해 주세요.</p>}</div>;}
+function Points({title,items,kind}:{title:string;items:string[];kind:string}) {return <div className={`hfb-points ${kind}`}><h4>{title}</h4><ul>{items.map((text,i)=><li key={i}>{text}</li>)}</ul></div>;}
 /*
  * 실측 홈판 증거(2026-10-01) — 어드바이저가 잰 실제 홈판 상위 · 내 블로그 홈판 유입과 맞댄 결과. 확률이 아니라 확인된 사실만 단다.
  */
@@ -63,8 +63,9 @@ export default function HomefeedBenchmarkCard({candidate:c,evidence}:{candidate:
   {(proof||evidence?.mine)&&<div className="hfb-proof-box">{proof&&<p><b>실제 홈판 {proof.rank?`${proof.rank}위`:''} ({monthDay(proof.day)})</b> {proof.url?<a href={proof.url} target="_blank" rel="noopener noreferrer">{proof.title} ↗</a>:proof.title}</p>}{evidence?.mine&&<p><b>내 글 홈판 유입 {evidence.mine.count.toLocaleString('ko-KR')}회 ({monthDay(evidence.mine.day)})</b> {evidence.mine.title}</p>}<small>어드바이저 실측과 맞댄 결과입니다. 같은 소재라도 이번 글의 홈판 노출을 보장하지는 않습니다.</small></div>}
   {c.why.length>0&&<div className="hfb-why"><span>검토 이유</span><ul>{c.why.map((reason,i)=><li key={i}>{reason}</li>)}</ul></div>}
   <TitleList titles={c.homeTitles} editorTitle={c.homeTitle} c={c}/>
-  <div className="hfb-direction"><h4>이렇게 쓰세요</h4><p>{c.writingDirection||'작성 방향은 원출처 확인 후 정해 주세요.'}</p></div>
-  <div className="hfb-writing-grid"><Points title="반드시 들어갈 내용" items={c.mustInclude} kind="include"/><Points title="넣지 않을 내용" items={c.mustAvoid} kind="avoid"/></div>
+  {/* 작성 안내는 회차가 구독 AI 로 이 소재를 분석한 카드에만 있다(2026-10-10 하드코딩 폐기 — 없으면 칸을 그리지 않는다) */}
+  {c.writingDirection&&<div className="hfb-direction"><h4>이렇게 쓰세요</h4><p>{c.writingDirection}</p>{c.searchTargets.length>0&&<p className="hfb-alternatives"><span>노릴 검색어 · 네이버 자동완성</span> {c.searchTargets.join(' · ')}</p>}</div>}
+  {(c.mustInclude.length>0||c.mustAvoid.length>0)&&<div className="hfb-writing-grid">{c.mustInclude.length>0&&<Points title="반드시 들어갈 내용" items={c.mustInclude} kind="include"/>}{c.mustAvoid.length>0&&<Points title="넣지 않을 내용" items={c.mustAvoid} kind="avoid"/>}</div>}
   {c.verificationNeeded.length>0&&<div className="hfb-verify"><b>작성 전 확인</b> {c.verificationNeeded.join(' · ')}</div>}
   <details className="hfb-reference"><summary>이미지·캡처 안내와 출처 <span>{c.sources.length}곳</span></summary>
    <div className="hfb-image-guide"><h4>이미지 레퍼런스</h4><p>{c.imageGuide.instruction||'원출처의 이미지 재사용 조건을 확인하고 직접 촬영·제작한 이미지를 준비해 주세요.'}</p>{c.imageGuide.url&&<a href={c.imageGuide.url} target="_blank" rel="noopener noreferrer">캡처할 원문 열기 ↗</a>}</div>

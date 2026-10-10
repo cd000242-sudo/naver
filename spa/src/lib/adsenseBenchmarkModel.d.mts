@@ -18,4 +18,4 @@ export interface AdsenseBoard {
 export function blogCount(card: AdsenseCard): number;
 export function filterAdsenseCards(cards: AdsenseCard[], opts?: { mode?: 'all' | 'star'; category?: string; query?: string }): AdsenseCard[];
 export function adsenseCategories(cards: AdsenseCard[]): Array<{ category: string; count: number }>;
-export function adsenseWritingAdvice(shape: AdsenseTitleShape | null | undefined): string[];
+export function adsenseWritingAdvice(shape: AdsenseTitleShape | null | undefined, cards?: AdsenseCard[]): string[];

@@ -31,6 +31,22 @@ test('쓰는 요령은 실측 통계에서만 — 통계가 없으면 빈 목록
   assert.deepEqual(adsenseWritingAdvice(null), []);
 });
 
+// 2026-10-10 사장님 "이렇게 쓰세요가 하드코딩 — '한겨울에 눈 내립니다' 같은 뻔한 소리". 통계 뒤에 붙던 고정 조언 문장을 빼고,
+// 그 자리에 고수가 실제로 쓴 제목을 예로 단다(★ 소재 먼저). 예가 없으면 수치만.
+test('쓰는 요령 — 고정 조언 문장 대신 고수가 실제로 쓴 제목을 예로 단다', () => {
+  const shape = { count: 7900, lengthMedian: 14, yearPct: 20, numberPct: 50, questionPct: 15, bracketPct: 15 };
+  const cards = [
+    card({ id: '1', recommended: true, sources: [{ id: 'a', name: '고수A', title: '2026 청년미래적금 우대형 조건 3가지', url: 'https://a.tistory.com/1' }, { id: 'b', name: '고수B', title: '청년도약계좌 해지하면 손해일까?', url: 'https://b.tistory.com/2' }] }),
+    card({ id: '2', sources: [{ id: 'c', name: '고수C', title: '[총정리] 혈압약 부작용 정리', url: 'https://c.tistory.com/3' }] }),
+  ];
+  const advice = adsenseWritingAdvice(shape, cards);
+  assert.ok(advice.some((a) => a.includes('50%') && a.includes('2026 청년미래적금 우대형 조건 3가지')), '숫자 예');
+  assert.ok(advice.some((a) => a.includes('15%') && a.includes('청년도약계좌 해지하면 손해일까?')), '질문형 예');
+  assert.ok(advice.some((a) => a.includes('[총정리] 혈압약 부작용 정리')), '괄호 예');
+  for (const a of advice) assert.doesNotMatch(a, /구체적인 숫자를 넣습니다|해가 바뀌면 달라지는 정보|검색어 자체가 질문일 때|부제\(조건/);
+  assert.ok(adsenseWritingAdvice(shape, []).every((a) => !a.includes('예:')), '예가 없으면 수치만');
+});
+
 test('탭 배선 — 홈판 추천 바로 아래 · 로그인 탭 · 판 파일 · 지어낸 수치 없음', () => {
   const page = readFileSync(new URL('../src/pages/LewordPage.tsx', import.meta.url), 'utf8');
   const homefeedAt = page.indexOf("{ id: 'homefeed'");

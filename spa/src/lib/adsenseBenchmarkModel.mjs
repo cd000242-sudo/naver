@@ -29,14 +29,36 @@ export function adsenseCategories(cards) {
   return [...counts.entries()].map(([category, count]) => ({ category, count })).sort((a, b) => b.count - a.count || a.category.localeCompare(b.category));
 }
 
-/** "우리는 이렇게 쓰자" — 고수 제목 실측 통계를 그대로 문장으로. 통계가 없으면 빈 목록. */
-export function adsenseWritingAdvice(shape) {
+/*
+ * "고수는 이렇게 썼다" — 고수 제목 실측 통계 + 고수가 실제로 쓴 제목 예(★ 소재 먼저).
+ * 2026-10-10 사장님 "하드코딩 — 뻔한 소리": 통계 뒤에 붙던 고정 조언 문장("구체적인 숫자를 넣습니다" 등)을 빼고 실제 제목을 단다.
+ * 판정식은 수집기(앱 레포 scripts/adsense-benchmarks-core.cjs titleShape)와 같다. 예가 없으면 수치만, 통계가 없으면 빈 목록.
+ */
+const SHAPE_TESTS = { year: /20\d\d/, number: /\d/, question: /\?|까$|나요|을까|ㄹ까/, bracket: /[[\](){}【】]/ };
+function masterTitles(cards) {
+  const sorted = [...(Array.isArray(cards) ? cards : [])].sort((a, b) => Number(Boolean(b?.recommended)) - Number(Boolean(a?.recommended)) || (b?.priority || 0) - (a?.priority || 0));
+  // 사이트 주소가 든 '바로가기' 글 제목은 본보기가 아니다(실제 판: "동행복권 홈페이지 바로가기 (www.dhlottery.co.kr)")
+  return sorted.flatMap((c) => (Array.isArray(c?.sources) ? c.sources : []).map((s) => (typeof s?.title === 'string' ? s.title.trim() : '')))
+    .filter((t) => t && !/https?:|www\.|\.(co\.kr|go\.kr|or\.kr|com|net)\b/i.test(t));
+}
+export function adsenseWritingAdvice(shape, cards = []) {
   if (!shape || !shape.count) return [];
+  const titles = masterTitles(cards);
+  const used = new Set();
+  const pick = (ok) => { const t = titles.find((x) => !used.has(x) && ok(x)); if (t) used.add(t); return t ? ` · 예: 「${t}」` : ''; };
+  const has = (k) => Number.isFinite(shape[k]);
+  // 모양별 예를 먼저 고르고 길이 예는 남은 제목에서(같은 제목이 두 줄에 안 겹치게)
+  const ex = {
+    number: has('numberPct') ? pick((t) => SHAPE_TESTS.number.test(t)) : '',
+    year: has('yearPct') ? pick((t) => SHAPE_TESTS.year.test(t)) : '',
+    question: has('questionPct') ? pick((t) => SHAPE_TESTS.question.test(t)) : '',
+    bracket: has('bracketPct') ? pick((t) => SHAPE_TESTS.bracket.test(t)) : '',
+  };
   const out = [];
-  if (Number.isFinite(shape.lengthMedian)) out.push(`제목 길이는 ${shape.lengthMedian}자 안팎 — 고수 제목 ${shape.count.toLocaleString()}개의 가운데 길이입니다.`);
-  if (Number.isFinite(shape.numberPct)) out.push(`숫자가 든 제목이 ${shape.numberPct}% — 금액 · 기간 · 비율처럼 구체적인 숫자를 넣습니다.`);
-  if (Number.isFinite(shape.yearPct)) out.push(`연도(2026 등)를 넣은 제목이 ${shape.yearPct}% — 해가 바뀌면 달라지는 정보에만 붙입니다.`);
-  if (Number.isFinite(shape.questionPct)) out.push(`질문형 제목이 ${shape.questionPct}% — 검색어 자체가 질문일 때 씁니다.`);
-  if (Number.isFinite(shape.bracketPct)) out.push(`괄호·대괄호를 쓴 제목이 ${shape.bracketPct}% — 부제(조건 · 금액 · 날짜)를 묶는 데 씁니다.`);
+  if (has('lengthMedian')) out.push(`제목 길이 가운데값 ${shape.lengthMedian}자(고수 제목 ${shape.count.toLocaleString()}개)${pick((t) => Math.abs(t.length - shape.lengthMedian) <= 2)}`);
+  if (has('numberPct')) out.push(`숫자가 든 제목 ${shape.numberPct}%${ex.number}`);
+  if (has('yearPct')) out.push(`연도(2026 등)를 넣은 제목 ${shape.yearPct}%${ex.year}`);
+  if (has('questionPct')) out.push(`질문형 제목 ${shape.questionPct}%${ex.question}`);
+  if (has('bracketPct')) out.push(`괄호·대괄호를 쓴 제목 ${shape.bracketPct}%${ex.bracket}`);
   return out;
 }

@@ -190,7 +190,7 @@ export default function AdsenseBenchmarkBoard() {
     const cards = board?.candidates ?? [];
     const items = useMemo(() => filterAdsenseCards(cards, { mode, category, query }), [cards, mode, category, query]);
     const cats = useMemo(() => adsenseCategories(cards), [cards]);
-    const advice = adsenseWritingAdvice(board?.trends?.titleShape);
+    const advice = adsenseWritingAdvice(board?.trends?.titleShape, cards);
     const shape = board?.trends?.titleShape;
     const failed = board ? board.sourceCount - board.okCount : 0;
 

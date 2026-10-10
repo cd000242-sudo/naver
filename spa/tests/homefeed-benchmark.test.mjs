@@ -23,9 +23,11 @@ test('links reject unsafe and embedded credential schemes',()=>{
 test('stars require complete reviewed writing materials and current board',()=>{
  const data=normalizeBenchmarkBoard(board());
  assert.equal(benchmarkView(data,Date.parse(at)).candidates[0].recommended,true);
- for(const more of [{why:[]},{status:'verify'},{sources:[]},{writingDirection:''},{homeTitles:[]}]){
+ for(const more of [{why:[]},{status:'verify'},{sources:[]},{homeTitles:[]}]){
   assert.equal(benchmarkView(normalizeBenchmarkBoard(board({candidates:[candidate(more)]})),Date.parse(at)).candidates[0].recommended,false);
  }
+ // 2026-10-10: 작성 안내는 AI 가 지은 카드에만 있다(하드코딩 폐기) — 안내가 비어도 별은 소재 근거로 정한다.
+ assert.equal(benchmarkView(normalizeBenchmarkBoard(board({candidates:[candidate({writingDirection:'',mustInclude:[]})]})),Date.parse(at)).candidates[0].recommended,true);
  // 편집자가 손으로 고른 homeTitle 한 줄만 있어도 제목 요건은 채운다.
  assert.equal(benchmarkView(normalizeBenchmarkBoard(board({candidates:[candidate({homeTitles:[],homeTitle:'편집자 제목'})]})),Date.parse(at)).candidates[0].recommended,true);
  const stale=benchmarkView(data,Date.parse(at)+48*3600000);
@@ -63,4 +65,10 @@ test('editorial review expiry removes star and falls back to verification even o
  assert.equal(view.candidates[0].recommended,false);
  assert.equal(view.candidates[0].status,'verify');
  assert.equal(view.candidates[0].officialSources.length,1);
+});
+
+test('노릴 검색어(AI 안내의 자동완성 검색어)는 문자열만 6개까지, 없으면 빈 목록',()=>{
+ const item=normalizeBenchmarkBoard(board({candidates:[candidate({searchTargets:['동구동락 축제 라인업','',42,...Array.from({length:8},(_,i)=>`검색어 ${i}`)]})]})).candidates[0];
+ assert.equal(item.searchTargets[0],'동구동락 축제 라인업'); assert.equal(item.searchTargets.length,6);
+ assert.deepEqual(normalizeBenchmarkBoard(board()).candidates[0].searchTargets,[]);
 });
