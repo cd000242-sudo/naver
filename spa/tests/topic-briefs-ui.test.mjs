@@ -49,7 +49,7 @@ const byText=(tree,text)=>nodes(tree,node=>node.type==='button'&&node.props.chil
 
 test('main field preference reorders without hiding briefs and defaults to financial topics',()=>{
  unlocked=true;const view=harness('TopicBriefsContent');const props={data:{builtAt:new Date().toISOString(),briefs:[{...item(1),field:'스포츠'},{...item(2),field:'지원금·복지'},{...item(3),field:'경제·금융'}]}};
- let tree=view(props);let cards=nodes(tree,n=>n.type?.name==='BriefCard');assert.equal(cards.length,3);assert.equal(cards[0].props.brief.field,'지원금·복지');
+ let tree=view(props);let cards=nodes(tree,n=>n.type?.name==='BriefCard');assert.equal(cards.length,3);assert.ok(['지원금·복지','경제·금융'].includes(cards[0].props.brief.field),'금융 분야가 먼저');assert.equal(cards[2].props.brief.field,'스포츠','금융 아닌 분야는 뒤 — 같은 묶음 안 순서는 매시 섞인다(2026-10-10)');
  const select=nodes(tree,n=>n.type==='select'&&n.props['aria-label']==='먼저 볼 분야')[0];assert.ok(select);select.props.onChange({target:{value:'스포츠'}});tree=view(props);cards=nodes(tree,n=>n.type?.name==='BriefCard');assert.equal(cards[0].props.brief.field,'스포츠');assert.equal(cards.length,3);
  assert.match(render(props.data.briefs),/공개된 글감의 표시 순서만 바뀝니다/);
 });
