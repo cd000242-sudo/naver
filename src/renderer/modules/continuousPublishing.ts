@@ -3598,7 +3598,7 @@ function showOpenAIOrgVerifyModal(): void {
         <div style="flex: 1;">
           <h2 style="margin: 0 0 4px; font-size: 1.2rem; color: #fff;">덕트테이프 사용 — OpenAI 인증 필요</h2>
           <p style="margin: 0; font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.5;">
-            <strong style="color:#a78bfa;">gpt-image-2(덕트테이프)</strong>는 OpenAI가 Organization 인증된 계정에만 풀어주는 신모델입니다. 인증은 5~15분 정도 걸리고, 한 번만 하면 영구입니다.
+            <strong style="color:#a78bfa;">덕트테이프(gpt-image-2.5)</strong>는 계정에 따라 OpenAI Organization 인증이 필요할 수 있습니다(403 시). 인증은 5~15분 정도 걸리고, 한 번만 하면 영구입니다.
           </p>
         </div>
       </div>

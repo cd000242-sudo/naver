@@ -3,7 +3,7 @@
  *
  * 정책:
  *   - dall-e-3: 2026-05-12 OpenAI 폐기 → 5/12 이후 호출 차단, 5/12 이전은 1회성 D-Day 안내
- *   - openai-image (덕트테이프, gpt-image-2): OpenAI Org Verification 필요 →
+ *   - openai-image (덕트테이프, gpt-image-2.5): 계정에 따라 OpenAI Org Verification 필요할 수 있음 →
  *     첫 사용 시 인증 가이드 모달, 사용자가 '인증 완료' 확인하면 이후 스킵
  *
  * 사용자 원칙: 폴백 금지. 사용자가 선택한 엔진이 사용 불가하면 발행 전체를 중단하고
@@ -167,7 +167,7 @@ export async function checkOpenAIVerification(imageSource: string): Promise<Guar
                 <li>심사 1~수일 (영업일 기준)</li>
                 <li>승인 메일 수신 후 덕트테이프 호출 가능</li>
             </ol>
-            <p style="margin: 0; color: #ff6b6b; font-size: 0.85rem;">⚠️ 인증 안 된 상태로 호출하면 OpenAI 측에서 403 에러 반환 → 발행 실패</p>
+            <p style="margin: 0; color: #ff6b6b; font-size: 0.85rem;">⚠️ 인증이 필요한 계정에서 인증 없이 호출하면 OpenAI 측에서 403 에러 반환 → 발행 실패</p>
         `,
         primary: { label: '인증 완료 — 진행' },
         secondary: { label: '아직 안 함 — 중단' },

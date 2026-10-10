@@ -398,7 +398,8 @@ export function isVerifiedImageModel(id: string): boolean {
 // ═════════════════════════════════════════════════════════════════
 // [2026-10-10] 덕트테이프(openai-image) 세부 모델 정책 — 사장님 결정.
 //   남기는 모델은 gpt-image-2.5-flare(속도형, 기본)와 gpt-image-2.5-sunburst(품질형) 둘뿐이다.
-//   gpt-image-1 / 1.5 / 2 와 빈 값·이상값은 모두 Flare 로 돌린다. 순수 함수라 main·시험이 함께 쓴다.
+//   옛 gpt-image-2(고품질 모델)는 품질형 Sunburst 로, gpt-image-1 / 1.5 와 빈 값·이상값은 Flare 로 돌린다.
+//   순수 함수라 main·시험이 함께 쓴다.
 // ═════════════════════════════════════════════════════════════════
 
 /** 화면·설정에 남기는 덕트테이프 모델 */
@@ -409,9 +410,11 @@ export type OpenaiImageModelChoice = (typeof OPENAI_IMAGE_MODEL_CHOICES)[number]
 /** 기본 모델 (Flare) */
 export const DEFAULT_OPENAI_IMAGE_MODEL: OpenaiImageModelChoice = 'gpt-image-2.5-flare';
 
-/** 목록 안의 값은 그대로, 옛 값·빈 값·이상값은 Flare 로 돌려준다. */
+/** 목록 안의 값은 그대로, 옛 gpt-image-2 는 Sunburst, 그 밖의 옛 값·빈 값·이상값은 Flare 로 돌려준다. */
 export function normalizeOpenaiImageModel(value: unknown): OpenaiImageModelChoice {
   const v = typeof value === 'string' ? value.trim() : '';
+  // [2026-10-10] 옛 고품질 모델(gpt-image-2)을 쓰던 사용자의 품질을 조용히 낮추지 않는다
+  if (v === 'gpt-image-2') return 'gpt-image-2.5-sunburst';
   return (OPENAI_IMAGE_MODEL_CHOICES as readonly string[]).includes(v)
     ? (v as OpenaiImageModelChoice)
     : DEFAULT_OPENAI_IMAGE_MODEL;

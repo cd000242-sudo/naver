@@ -64,7 +64,7 @@ declare function generateImagesWithCostSafety(options: any): Promise<any>;
 declare function readSelectedImageSource(): string;
 declare function resolveImageRegenerateRoute(source: unknown): { kind: 'generate'; provider: string } | { kind: 'blocked'; message: string };
 declare function takeThumbnailDirectorMeta(heading: string, imageUrl: string): Record<string, unknown>;
-declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
+declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null; openaiImageModel: string | null };
 declare function generateNanoBananaProImage(prompt: string): Promise<string>;
 declare function isShoppingConnectModeActive(): boolean;
 // Shared helpers live in renderer/utils/shoppingConnectUtils.ts and are
@@ -1384,7 +1384,7 @@ export function initHeadingImageGeneration(): void {
                 const _m = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
                 _modelLabel = ` | 📦 모델: ${_m}`;
               } else if (imageSource === 'openai-image') {
-                _modelLabel = ' | 📦 모델: gpt-image-1';
+                { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${_oiRaw === 'gpt-image-2.5-sunburst' || _oiRaw === 'gpt-image-2' ? 'gpt-image-2.5-sunburst' : 'gpt-image-2.5-flare'}`; } // [2026-10-10] 실제 선택 모델 표시(옛 gpt-image-2 는 Sunburst)
               }
               appendLog(`  🖥️ 엔진: ${_srcLabel}${_modelLabel} | 🎨 스타일: ${_styleNames[_style] || _style} | 📐 ${_ratio}`, 'images-log-output');
               liveImagePreview.addLog(`🖥️ ${_srcLabel}${_modelLabel} | 🎨 ${_styleNames[_style] || _style} | 📐 ${_ratio}`);
@@ -1899,7 +1899,7 @@ export function initHeadingImageGeneration(): void {
               const _m = (document.getElementById('stability-model-select') as HTMLSelectElement)?.value || 'ultra';
               _modelLabel = ` | 📦 모델: ${_m}`;
             } else if (imageSource === 'openai-image') {
-              _modelLabel = ' | 📦 모델: gpt-image-1';
+              { const _oiRaw = String(_rawPipeline.openaiImageModel || '').trim(); _modelLabel = ` | 📦 모델: ${_oiRaw === 'gpt-image-2.5-sunburst' || _oiRaw === 'gpt-image-2' ? 'gpt-image-2.5-sunburst' : 'gpt-image-2.5-flare'}`; } // [2026-10-10] 실제 선택 모델 표시(옛 gpt-image-2 는 Sunburst)
             }
             appendLog(`  🖥️ 엔진: ${_srcLabel}${_modelLabel} | 🎨 스타일: ${_styleNames[_style] || _style} | 📐 ${_ratio}`, 'images-log-output');
 

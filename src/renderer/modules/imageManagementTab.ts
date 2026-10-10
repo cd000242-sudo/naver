@@ -413,7 +413,7 @@ export async function initImageManagementTab(): Promise<void> {
       } else if (selectedSource === 'stability') {
         appendLog('✅ Stability AI(고품질)가 선택되었습니다.');
       } else if (selectedSource === 'openai-image') {
-        appendLog('✅ 🦆 덕트테이프(OpenAI gpt-image-2.5 Flare/Sunburst, 기본 Flare)가 선택되었습니다. — OpenAI API 키 필요, 장당 ₩25~₩280');
+        appendLog('✅ 🦆 덕트테이프(OpenAI gpt-image-2.5 Flare/Sunburst, 기본 Flare)가 선택되었습니다. — OpenAI API 키 필요, 장당 ₩8~₩295 (기본 Flare·Medium 약 ₩18)');
       } else if (selectedSource === 'leonardoai') {
         appendLog('✅ Leonardo AI가 선택되었습니다. API 키가 필요합니다.');
       } else if (selectedSource === 'flow') {

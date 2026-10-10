@@ -15,6 +15,7 @@ import { migrateOpenaiImageTwoModels } from '../runtime/imageProviderMigration.j
 import { isShoppingReferenceGenerationSelectionSupported } from '../image/shoppingReferenceGeneration.js';
 import { getOpenAIImageCostKRW } from '../renderer/utils/imageCostUtils.js';
 import { DUCK_TAPE } from '../runtime/imageEngineCatalog.js';
+import { studioEngineCostKrw } from '../renderer/modules/imageGenStudioCore.js';
 
 const read = (rel: string): string => fs.readFileSync(path.resolve(__dirname, rel), 'utf-8');
 const FLARE = 'gpt-image-2.5-flare';
@@ -59,7 +60,9 @@ describe('덕트테이프 화면 — 1.5 / 2 / 1 이 없다', () => {
     expect(src).toContain(`<option value="${FLARE}">`);
     expect(src).toContain(`<option value="${SUNBURST}">`);
     // 목록 밖이면 Flare 로 복원
-    expect(src).toMatch(/validModels\.includes\(savedModel\) \? savedModel : 'gpt-image-2\.5-flare'/);
+    expect(src).toMatch(/validModels\.includes\(restoredModel\) \? restoredModel : 'gpt-image-2\.5-flare'/);
+    // 옛 gpt-image-2(고품질)는 Sunburst 로 복원
+    expect(src).toMatch(/savedModel === 'gpt-image-2' \? 'gpt-image-2\.5-sunburst' : savedModel/);
   });
 
   it('이미지 생성 스튜디오·엔진 목록은 2.5 기준 표기이고 대표 모델이 Flare 다', () => {
@@ -77,11 +80,17 @@ describe('덕트테이프 화면 — 1.5 / 2 / 1 이 없다', () => {
   });
 });
 
-describe('설정 정규화 — 옛 값·이상값은 Flare', () => {
-  it.each(['gpt-image-1.5', 'gpt-image-2', 'gpt-image-1', '', '   ', 'dall-e-3', 'whatever'])(
+describe('설정 정규화 — 옛 gpt-image-2 는 Sunburst, 나머지 옛 값·이상값은 Flare', () => {
+  it.each(['gpt-image-1.5', 'gpt-image-1', '', '   ', 'dall-e-3', 'whatever'])(
     '%j → Flare',
     (v) => expect(normalizeOpenaiImageModel(v)).toBe(FLARE),
   );
+
+  it('옛 고품질 gpt-image-2 는 품질형 Sunburst 로 이관 (공백 포함, 멱등)', () => {
+    expect(normalizeOpenaiImageModel('gpt-image-2')).toBe(SUNBURST);
+    expect(normalizeOpenaiImageModel(' gpt-image-2 ')).toBe(SUNBURST);
+    expect(normalizeOpenaiImageModel(normalizeOpenaiImageModel('gpt-image-2'))).toBe(SUNBURST);
+  });
 
   it.each([undefined, null, 0, {}, []])('문자열이 아닌 값 %j → Flare', (v) => {
     expect(normalizeOpenaiImageModel(v)).toBe(FLARE);
@@ -114,17 +123,24 @@ describe('설정 정규화 — 옛 값·이상값은 Flare', () => {
 });
 
 describe('localStorage 이관 — 멱등', () => {
-  it.each(['gpt-image-1.5', 'gpt-image-2', 'gpt-image-1'])('%s → Flare 로 바뀐다', (old) => {
+  it.each(['gpt-image-1.5', 'gpt-image-1'])('%s → Flare 로 바뀐다', (old) => {
     const store = makeStore({ openaiImageModel: old });
     expect(migrateOpenaiImageTwoModels(store)).toBe(1);
     expect(store.data.openaiImageModel).toBe(FLARE);
+  });
+
+  it('gpt-image-2 → Sunburst 로 바뀌고 품질 값은 그대로다', () => {
+    const store = makeStore({ openaiImageModel: 'gpt-image-2', openaiImageQuality: 'high' });
+    expect(migrateOpenaiImageTwoModels(store)).toBe(1);
+    expect(store.data.openaiImageModel).toBe(SUNBURST);
+    expect(store.data.openaiImageQuality).toBe('high');
   });
 
   it('두 번 돌려도 같은 결과이고 두 번째는 바꾼 게 없다', () => {
     const store = makeStore({ openaiImageModel: 'gpt-image-2' });
     migrateOpenaiImageTwoModels(store);
     expect(migrateOpenaiImageTwoModels(store)).toBe(0);
-    expect(store.data.openaiImageModel).toBe(FLARE);
+    expect(store.data.openaiImageModel).toBe(SUNBURST);
   });
 
   it('사용자가 고른 Sunburst 는 건드리지 않고, 값이 없으면 키를 만들지 않는다', () => {
@@ -172,5 +188,43 @@ describe('단가표 — 모르는 모델은 Flare 단가', () => {
 
   it('Sunburst 도 같은 5단계 단가표를 쓴다', () => {
     expect(getOpenAIImageCostKRW(SUNBURST, 'max', 1400)).toBe(Math.round(0.2107 * 1400));
+  });
+
+  it('스튜디오·카탈로그 덕트테이프 단가 = imageCostUtils Flare medium 단가 (옛 ₩280 고정 금지)', () => {
+    const flareMedium = getOpenAIImageCostKRW(FLARE, 'medium');
+    expect(flareMedium).toBe(18);
+    expect(DUCK_TAPE.costKrw).toBe(flareMedium);
+    expect(studioEngineCostKrw('openai-image')).toBe(flareMedium);
+    expect(read('../renderer/modules/imageGenStudioCore.ts')).not.toMatch(/고가/);
+  });
+});
+
+describe('사용자 노출 문구 — 옛 모델명·엇갈린 Org 안내 재발 방지', () => {
+  // 검사 범위: src/renderer 와 src/imageGenerator.ts 의 .ts 소스 전체.
+  // 제외: 줄 주석(// 또는 * 로 시작하는 줄), 이관 코드(imageProviderMigration 은 src/runtime 이라 범위 밖),
+  //       기록용 단가표(apiUsageTracker 는 src/main 쪽이라 범위 밖), 로그에만 남는 console.* 줄.
+  const walk = (dir: string): string[] =>
+    fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) return walk(full);
+      return e.name.endsWith('.ts') && !e.name.endsWith('.d.ts') ? [full] : [];
+    });
+  const files = [...walk(path.resolve(__dirname, '../renderer')), path.resolve(__dirname, '../imageGenerator.ts')];
+  const banned = [/gpt-image-1 \/ 1\.5 \/ 2/, /gpt-image-1\/1\.5\/2/, /gpt-image-2\(덕트테이프\)/, /📦 모델: gpt-image-1/];
+  const offenders = files.flatMap((f) =>
+    fs.readFileSync(f, 'utf-8').split(/\r?\n/).flatMap((line, i) => {
+      const t = line.trim();
+      if (t.startsWith('//') || t.startsWith('*') || t.startsWith('/*') || /^console\./.test(t)) return [];
+      return banned.some((re) => re.test(line)) ? [`${path.basename(f)}:${i + 1}`] : [];
+    }),
+  );
+
+  it('금지 문구가 사용자 노출 문자열에 없다', () => {
+    expect(offenders).toEqual([]);
+  });
+
+  it('진행 로그는 실제 선택 모델을 읽는다', () => {
+    const src = read('../renderer/modules/headingImageGen.ts');
+    expect(src.match(/_rawPipeline\.openaiImageModel/g)?.length).toBe(2);
   });
 });

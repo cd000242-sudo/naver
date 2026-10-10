@@ -759,7 +759,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     } catch (migrationError) {
       console.error(`[ImageGenerator] ❌ gpt-image-1 자동 마이그레이션 실패:`, (migrationError as Error).message);
       const userMsg = getImageErrorMessage(migrationError);
-      throw new Error(`기존 DALL-E 설정은 사용할 수 없어 GPT 이미지 시리즈로 전환해야 합니다.\n환경설정 → 이미지 엔진에서 OpenAI Image (gpt-image-1 / 1.5 / 2)를 선택해주세요.\n\n원본 오류: ${userMsg}`);
+      throw new Error(`기존 DALL-E 설정은 사용할 수 없어 GPT 이미지 시리즈로 전환해야 합니다.\n환경설정 → 이미지 엔진에서 덕트테이프 (gpt-image-2.5 Flare / Sunburst)를 선택해주세요.\n\n원본 오류: ${userMsg}`);
     }
   }
 

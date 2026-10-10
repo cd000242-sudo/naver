@@ -84,15 +84,15 @@ export const NANO_BANANA: ImageEngineSpec = {
 export const DUCK_TAPE: ImageEngineSpec = {
   value: 'openai-image',
   label: '덕테이프',
-  tagline: 'OpenAI gpt-image-2.5 Flare / Sunburst · 한글 텍스트 가능 · Org 인증 필요',
+  tagline: 'OpenAI gpt-image-2.5 Flare / Sunburst · 한글 텍스트 가능 · 계정에 따라 Org 인증 필요할 수 있음',
   model: OPENAI_IMAGE_MODELS.GPT_IMAGE_2_5_FLARE,
   forceModelKey: null,
-  costKrw: 280,
+  costKrw: 18, // [2026-10-10] 기본 Flare·Medium 단가(imageCostUtils 와 시험으로 일치 고정)
   koreanText: true,
   icon: '🦆',
   freeTierNote:
     'OpenAI gpt-image 시리즈는 무료 플랜이 없습니다. 사용량만큼 과금되며(모델·품질 옵션에 따라 장당 ' +
-    '약 ₩8~₩295), Organization 인증이 필요합니다.',
+    '약 ₩8~₩295), 계정에 따라 Organization 인증이 필요할 수 있습니다(403 시).',
 };
 
 /**

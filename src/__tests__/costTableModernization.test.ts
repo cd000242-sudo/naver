@@ -122,7 +122,9 @@ describe('v1.4.81 — headingImageGen.ts openai-image 라벨', () => {
 
   it("openai-image 로그 라벨 'gpt-image-1'로 변경 (DALL-E 3 제거)", () => {
     expect(code).not.toMatch(/모델: DALL-E 3/);
-    expect(code).toMatch(/모델: gpt-image-1/);
+    // [2026-10-10] 고정 'gpt-image-1' 표기 폐기 — 실제 선택 모델(Flare/Sunburst)을 표시한다
+    expect(code).not.toMatch(/모델: gpt-image-1'/);
+    expect(code).toMatch(/gpt-image-2\.5-sunburst/);
   });
 });
 

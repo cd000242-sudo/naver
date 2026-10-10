@@ -860,7 +860,7 @@ export function createHeadingImageModal(): void {
               <select id="local-folder-fallback-engine" style="width: 100%; padding: 8px 10px; border-radius: 6px; background: #1e1e2e; color: #e2e8f0; border: 1px solid rgba(99,102,241,0.3); font-size: 12px; cursor: pointer;">
                 <option value="nano-banana-2" selected>나노바나나2 (₩97/장, Gemini 3.1 Flash Image)</option>
                 <option value="deepinfra">FLUX-2 (DeepInfra)</option>
-                <option value="openai-image">OpenAI Image (gpt-image-1 / 1.5 / 2)</option>
+                <option value="openai-image">덕트테이프 (gpt-image-2.5 Flare / Sunburst)</option>
                 <option value="leonardoai">Leonardo AI</option>
                 <option value="flow">Flow (Google Labs)</option>
                 <option value="prodia">Prodia</option>
@@ -969,7 +969,7 @@ export function createHeadingImageModal(): void {
           <label class="source-option" data-value="openai-image" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ede9fe, #c4b5fd); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦆</div>
             <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">OpenAI Image</div>
-            <div style="font-size: 10px; color: #7c3aed;">gpt-image-1 / 1.5 / 2 | Org 인증 필요</div>
+            <div style="font-size: 10px; color: #7c3aed;">gpt-image-2.5 Flare / Sunburst | 계정에 따라 Org 인증 필요할 수 있음</div>
           </label>
           <label class="source-option" data-value="leonardoai" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #ffedd5, #fdba74); text-align: center; transition: all 0.2s;">
             <div style="font-size: 1.5rem;">🦁</div>
@@ -1281,7 +1281,7 @@ export function createHeadingImageModal(): void {
                 <option value="">📌 현재 저장된 엔진 사용</option>
                 <option value="nano-banana-2">🍌 나노바나나2 (Gemini 3.1 Flash, ₩97/장, 한글 가능) ★추천</option>
                 <option value="deepinfra">⚡ FLUX-2 (DeepInfra)</option>
-                <option value="openai-image">🦆 OpenAI Image (gpt-image-1 / 1.5 / 2)</option>
+                <option value="openai-image">🦆 덕트테이프 (gpt-image-2.5 Flare / Sunburst)</option>
                 <option value="leonardoai">🦁 Leonardo AI</option>
               </select>
             </div>
@@ -2427,7 +2427,7 @@ export function createHeadingImageModal(): void {
               <option value="xhigh">xhigh (고품질)</option>
               <option value="max">max (최고가)</option>
             </select>
-            <p style="margin: 6px 0 0; font-size: 11px; color: #9ca3af;">ℹ️ OpenAI Organization 인증 필요 (403 발생 시 platform.openai.com 인증 확인)</p>
+            <p style="margin: 6px 0 0; font-size: 11px; color: #9ca3af;">ℹ️ 계정에 따라 OpenAI Organization 인증이 필요할 수 있음 (403 발생 시 platform.openai.com 인증 확인)</p>
           </div>
 
           <!-- 🦁 Leonardo AI -->
@@ -2501,9 +2501,10 @@ export function createHeadingImageModal(): void {
     if (openaiImageModelSelect) {
       const cfg = await safeIpcInvoke<any>('config:get');
       const savedModel = (cfg?.openaiImageModel as string) || localStorage.getItem('openaiImageModel') || 'gpt-image-2.5-flare';
-      // [2026-10-10] 목록 밖(옛 gpt-image-1/1.5/2 포함)이면 Flare 로 복원
+      // [2026-10-10] 옛 gpt-image-2 는 Sunburst(품질형), 그 밖의 목록 밖 값(옛 1/1.5 포함)은 Flare 로 복원
       const validModels = ['gpt-image-2.5-flare', 'gpt-image-2.5-sunburst'];
-      openaiImageModelSelect.value = validModels.includes(savedModel) ? savedModel : 'gpt-image-2.5-flare';
+      const restoredModel = savedModel === 'gpt-image-2' ? 'gpt-image-2.5-sunburst' : savedModel;
+      openaiImageModelSelect.value = validModels.includes(restoredModel) ? restoredModel : 'gpt-image-2.5-flare';
       const savedQuality = (cfg?.openaiImageQuality as string) || localStorage.getItem('openaiImageQuality') || 'medium';
       if (openaiImageQualitySelect) {
         openaiImageQualitySelect.value = ['low', 'medium', 'high', 'xhigh', 'max'].includes(savedQuality) ? savedQuality : 'medium';
@@ -2658,7 +2659,7 @@ function showOpenAiTierWarningModal(reason: 'precheck' | 'rate-limit-hit' = 'pre
       <p style="margin: 0 0 1rem 0; color: #fde68a; font-size: 0.85rem; line-height: 1.6;">
         ${isHit
           ? '방금 발행 시도가 <b>429 Rate Limit</b> 에러로 실패했습니다. OpenAI의 Tier 시스템 한도에 도달한 것입니다. 아래 옵션 중 하나를 선택하세요.'
-          : 'OpenAI Image(gpt-image-1/1.5/2)는 <b>Tier 시스템</b>으로 사용량이 단계별로 제한됩니다. 결제 누적액에 따라 RPM 한도가 달라지며, <b>Tier 1은 분당 5장만</b> 생성 가능합니다.'}
+          : '덕트테이프(gpt-image-2.5 Flare / Sunburst)는 <b>Tier 시스템</b>으로 사용량이 단계별로 제한됩니다. 결제 누적액에 따라 RPM 한도가 달라지며, <b>Tier 1은 분당 5장만</b> 생성 가능합니다.'}
       </p>
       <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1rem;">
         <div style="font-weight: 700; color: #f87171; font-size: 0.85rem; margin-bottom: 0.5rem;">📊 OpenAI Tier 한도 (이미지 모델)</div>

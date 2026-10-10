@@ -357,7 +357,7 @@ export function initUserGuideModal(): void {
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>🎨 이미지 소스 선택</strong><br>
-            <span style="color: var(--text-muted);">ImageFX·Flow(Google Labs, 계정/IP 제한 가능), Nano Banana Pro·Leonardo·DeepInfra·gpt-image-1(유료), 내 폴더(로컬) 중 선택할 수 있습니다.</span>
+            <span style="color: var(--text-muted);">ImageFX·Flow(Google Labs, 계정/IP 제한 가능), Nano Banana Pro·Leonardo·DeepInfra·덕트테이프 gpt-image-2.5(유료), 내 폴더(로컬) 중 선택할 수 있습니다.</span>
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>📤 발행 모드 선택</strong><br>
@@ -402,7 +402,7 @@ export function initUserGuideModal(): void {
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>2단계: 이미지 소스 선택</strong><br>
-            <span style="color: var(--text-muted);">ImageFX·Flow(Google Labs), Nano Banana Pro·Leonardo·DeepInfra·gpt-image-1(유료) 중 선택하세요. 대량 발행 전에는 실제 생성 테스트가 통과한 엔진을 권장합니다.</span>
+            <span style="color: var(--text-muted);">ImageFX·Flow(Google Labs), Nano Banana Pro·Leonardo·DeepInfra·덕트테이프 gpt-image-2.5(유료) 중 선택하세요. 대량 발행 전에는 실제 생성 테스트가 통과한 엔진을 권장합니다.</span>
           </li>
           <li style="margin-bottom: 1rem;">
             <strong>3단계: 소제목 분석</strong><br>
