@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { benchmarkTime, benchmarkView, filterBenchmarks, normalizeBenchmarkBoard, type BenchmarkBoard } from '../../../lib/homefeedBenchmarkModel.mjs';
 import { mergeLiveBoardOffThread } from '../../../lib/homefeedLiveOffThread';
 import { fetchLiveFeeds } from '../../../lib/homefeedLiveFetch';
+import { withGuides } from '../../../lib/homefeedGuides.mjs';
 import { annotateEvidence, describeEvidence, evidenceSummary } from '../../../lib/homefeedEvidence.mjs';
 import { loadAdvisorDaily } from '../../../lib/homefeedEvidenceLoad';
 import type { AdvisorDailyView } from '../../../lib/myBlogSync';
@@ -49,9 +50,11 @@ export default function HomefeedBenchmarkBoard() {
   setLoading(true);
   let raw: unknown = null;
   try {
+   // 작성 안내는 따로 쌓이는 파일(2026-10-10 안내 작업이 카드마다 지음) — 못 받아도 판은 그린다(안내 칸만 빈다).
+   const guidesFile = fetch('/data/homefeed-benchmark-guides.json',{cache:'no-store',signal:controller.signal}).then((r)=>r.ok?r.json():null).catch(()=>null);
    const response = await fetch('/data/homefeed-benchmarks.json',{cache:'no-store',signal:controller.signal});
    if (!response.ok) throw new Error('공개 벤치마크 자료를 불러오지 못했습니다.');
-   raw = await response.json();
+   raw = withGuides(await response.json(), await guidesFile);
    if(request.current !== controller) return;
    setData(normalizeBenchmarkBoard(raw)); setError(''); setNow(Date.now());
   } catch (cause) {
