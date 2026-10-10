@@ -2,7 +2,9 @@ name: Windows Release
 
 # Builds and publishes the Windows installer on a GitHub-hosted Windows runner, for releases started
 # away from the owner's PC. Same order as scripts/release-all.js: release gate -> installer ->
-# packaged-app smoke -> latest.yml -> upload -> latest pointer check. Manual only.
+# packaged-app smoke -> latest.yml -> upload -> latest pointer check.
+# Started by hand (Run workflow) or by pushing the release commit to the release/windows branch
+# (the cloud session's GitHub app cannot dispatch workflows); a push releases package.json's version.
 # The release is created with its assets in one call (draft -> upload -> publish), so no empty
 # release ever becomes Latest (latest.yml 404 breaks every customer's auto-update).
 
@@ -13,6 +15,8 @@ on:
         description: 'package.json version on the selected commit (e.g. 2.11.341)'
         required: true
         type: string
+  push:
+    branches: ['release/windows']
 
 permissions:
   contents: write
@@ -27,7 +31,7 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 120
     env:
-      VERSION: ${{ inputs.version }}
+      INPUT_VERSION: ${{ inputs.version }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -44,8 +48,10 @@ jobs:
       - name: Check version, tag and release notes
         shell: bash
         run: |
-          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "::error::version must be X.Y.Z"; exit 1; fi
           PKG_VERSION=$(node -p "require('./package.json').version")
+          VERSION="${INPUT_VERSION:-$PKG_VERSION}"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then echo "::error::version must be X.Y.Z"; exit 1; fi
           if [ "$PKG_VERSION" != "$VERSION" ]; then echo "::error::package.json is $PKG_VERSION, input is $VERSION"; exit 1; fi
           if git ls-remote --exit-code --tags origin "refs/tags/v$VERSION" > /dev/null; then echo "::error::tag v$VERSION already exists"; exit 1; fi
           if [ ! -s "tmp/release-notes-v$VERSION.md" ]; then echo "::error::tmp/release-notes-v$VERSION.md is missing"; exit 1; fi
