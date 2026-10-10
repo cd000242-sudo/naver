@@ -39,7 +39,10 @@ describe('clean images are not flagged', () => {
     expect(v.suspected).toBe(false);
   });
 
-  it.skipIf(!existsSync(LDB_DIR))('all original LDB clean images (full resolution)', async () => {
+  // [2026-10-10] Opt-in only (LDB_CLEAN_CALIBRATION=1): it scans whatever is in the owner's Downloads folder, and newer
+  //   LDB output carries a "leadernam" corner signature and dense on-image text — correctly flagged, not a clean base.
+  //   A release gate must not depend on that folder's current contents; the pinned bases above stay mandatory.
+  it.skipIf(!existsSync(LDB_DIR) || process.env.LDB_CLEAN_CALIBRATION !== '1')('all original LDB clean images (full resolution)', async () => {
     const files = readdirSync(LDB_DIR)
       .map((d) => join(LDB_DIR, d))
       .filter((p) => statSync(p).isDirectory())
