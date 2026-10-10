@@ -158,3 +158,26 @@ test('분야 — 요약까지 보고, 요약이 있으면 블로그 주제를 �
   assert.equal(live.category('요즘 다들 이렇게 한다는 그것', IT, '신형 그랜저를 한 달 타 보니 연비가 이렇게 나왔습니다'), '자동차·IT');
   assert.equal(live.category('요즘 다들 이렇게 한다는 그것', IT, ''), '자동차·IT', '요약이 없으면 예전처럼 블로그 주제');
 });
+
+// 2026-10-10 사장님 "이렇게 쓰세요 · 반드시 · 넣지 말 것이 하드코딩 — '한겨울에 눈 내립니다' 같은 뻔한 소리".
+// 실시간 판은 안내를 짓지 않는다(빈칸) — CI 가 구독 AI 로 지은 안내만 같은 원문 주소로 이어 붙인다.
+test('작성 안내 — 실시간 판은 뻔한 문장을 찍지 않고, CI 카드의 AI 안내를 같은 원문 주소로 이어 받는다', () => {
+  const rss = (id, title, logNo) => ({ id, platform: 'naver-blog', name: id, status: 'ok', text: `<rss><channel><title>${id}</title><item><title>${title}</title><link>https://blog.naver.com/${id}/${logNo}</link><description>${title} 요약</description><pubDate>Mon, 28 Sep 2026 20:00:00 +0900</pubDate></item></channel></rss>` });
+  const guide = { writingDirection: '동구동락 축제 라인업 검색 수요를 노린다.', searchTargets: ['동구동락 축제 라인업'], mustInclude: ['리센느 무대 시간', '날짜별 라인업 표'], mustAvoid: ['멤버 개인사 추측'], verificationNeeded: ['대전 동구청 공지의 최종 일정'] };
+  const board = {
+    schemaVersion: 1, generatedAt: '2026-09-28T10:00:00Z', status: 'partial',
+    sources: [{ id: 'a', platform: 'naver-blog', url: 'https://blog.naver.com/a', status: 'ok' }, { id: 'b', platform: 'naver-blog', url: 'https://blog.naver.com/b', status: 'ok' }],
+    candidates: [{ id: 'x', title: '대전 동구동락 축제 리센느 무대', capturedAt: now, ...guide, sources: [{ id: 'a', platform: 'naver-blog', url: 'https://blog.naver.com/a/111', title: '대전 동구동락 축제 리센느 무대' }] }],
+  };
+  const merged = live.mergeLiveBoard(board, [rss('a', '대전 동구동락 축제 리센느 무대', 111), rss('b', '그랜저 하이브리드 연비 실제로 타보니', 222)], now);
+  const withGuide = merged.candidates.find((c) => c.sources.some((s) => s.url === 'https://blog.naver.com/a/111'));
+  for (const [k, v] of Object.entries(guide)) assert.deepEqual(withGuide[k], v, k);
+  const bare = merged.candidates.find((c) => c.sources.some((s) => s.url === 'https://blog.naver.com/b/222'));
+  assert.equal(bare.writingDirection, '');
+  assert.deepEqual(bare.mustInclude, []);
+  assert.deepEqual(bare.mustAvoid, []);
+  assert.deepEqual(bare.searchTargets, []);
+  assert.deepEqual(bare.verificationNeeded, [], '어느 카드에나 붙던 "사건 날짜 · 사진 원작자" 확인은 뺐다');
+  const src = readFileSync(fileURLToPath(new URL('../src/lib/homefeedLive.mjs', import.meta.url)), 'utf8');
+  assert.doesNotMatch(src, /독자의 질문에 답하는 해설|원문 링크와 발행일|사진 원작자와 재사용 조건/);
+});
