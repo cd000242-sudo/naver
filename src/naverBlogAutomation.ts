@@ -139,6 +139,7 @@ import {
   getSaveButtonSelectors,
   SAVE_BUTTON_TEXT_CANDIDATES,
 } from './automation/publishSaveButtonPolicy.js';
+import { waitForDraftSaveSignal } from './automation/draftSaveConfirmation.js';
 import { resolveNaverRunOptions } from './automation/runOptionsPolicy.js';
 import {
   beginMainProcessEditorCommitCandidate,
@@ -3265,12 +3266,21 @@ export class NaverBlogAutomation {
           throw new Error('저장 버튼을 찾을 수 없습니다.');
         }
 
-        // 순차 실행: 클릭 먼저, 그 다음 네비게이션 대기
+        // [2026-10-10] Read the header draft count before clicking so the save can be confirmed by its increase.
+        const draftCountBefore = await this.readTempSaveDraftCount();
+        // 순차 실행: 클릭 먼저, 그 다음 저장 확인 대기
         await saveButton.click();
         await this.delay(this.DELAYS.MEDIUM); // 클릭 후 안정화 대기
         // [2026-10-09 고객 진단 파일] 임시저장은 페이지 이동이 없는 저장이라 이동을 기다리면 제한 시간을 다 채웠다
         //   (고객 61초, 이 PC 46.9초). 이동이 있으면 받되 최대 10초만 기다린다.
-        await frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 10000 }).catch(() => undefined);
+        // [2026-10-10] Finish as soon as the draft count grows instead of always running out the 10s.
+        const saveSignal = await waitForDraftSaveSignal(draftCountBefore, {
+          readCount: () => this.readTempSaveDraftCount(),
+          waitNavigation: (ms) => frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: ms }),
+          delay: (ms) => this.delay(ms),
+        });
+        if (saveSignal === 'count') this.log('   ✅ 네이버 "임시저장된 글" 개수가 늘어 저장을 확인했습니다.');
+        else if (saveSignal === 'timeout') this.log('   ℹ️ 10초 안에 저장 확인 신호가 없어 그대로 진행합니다. (기존 임시저장 글을 덮어쓰면 개수가 그대로입니다)');
 
         this.log('✅ 블로그 글이 임시저장되었습니다.');
       } else if (mode === 'publish') {

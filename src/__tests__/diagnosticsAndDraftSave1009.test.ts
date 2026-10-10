@@ -45,8 +45,21 @@ describe('임시저장: 이동이 없는 저장을 오래 기다리지 않는다
     const engine = readFileSync(resolve('src/naverBlogAutomation.ts'), 'utf8').replace(/\r\n/g, '\n');
     const draft = engine.slice(engine.indexOf("this.log('🔄 블로그 글 임시저장 중...');"), engine.indexOf("this.log('✅ 블로그 글이 임시저장되었습니다.');"));
     expect(draft.length).toBeGreaterThan(200);
-    expect(draft).toContain("await frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: 10000 }).catch(() => undefined);");
+    expect(draft).toContain("frame.waitForNavigation({ waitUntil: 'networkidle2', timeout: ms })");
     expect(draft).not.toMatch(/waitForNavigation\(\{ waitUntil: 'networkidle2' \}\)/);
+  });
+
+  // [2026-10-10 사장님] "저장됐는데도 멍때린다" — 저장 버튼을 누르기 전 개수를 읽고, 늘면 바로 끝낸다(draftSaveConfirmation).
+  it('누르기 전 임시저장 개수를 읽어 두고, 개수가 늘면 기다리지 않는다', () => {
+    const engine = readFileSync(resolve('src/naverBlogAutomation.ts'), 'utf8').replace(/\r\n/g, '\n');
+    const draft = engine.slice(engine.indexOf("this.log('🔄 블로그 글 임시저장 중...');"), engine.indexOf("this.log('✅ 블로그 글이 임시저장되었습니다.');"));
+    const before = draft.indexOf('const draftCountBefore = await this.readTempSaveDraftCount();');
+    const click = draft.indexOf('await saveButton.click();');
+    const wait = draft.indexOf('await waitForDraftSaveSignal(draftCountBefore, {');
+    expect(before).toBeGreaterThan(-1);
+    expect(click).toBeGreaterThan(before);
+    expect(wait).toBeGreaterThan(click);
+    expect(draft).toContain('readCount: () => this.readTempSaveDraftCount()');
   });
 });
 

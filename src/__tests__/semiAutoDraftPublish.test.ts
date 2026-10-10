@@ -54,7 +54,11 @@ describe('publish save button policy', () => {
   it('extends the selector registry with modern fallback selectors', () => {
     const selectors = getSaveButtonSelectors(getAllSelectors(PUBLISH_SELECTORS.saveButton));
 
-    expect(selectors[0]).toBe('button.save_btn__bzc5B[data-click-area="tpb.save"]');
+    // [2026-10-10] 네이버가 클래스 이름을 save_btn__FuUyN 으로 바꿔 옛 이름 두 개가 3초씩(6초) 헛돌았다 —
+    //   잘 안 바뀌는 data-click-area 를 맨 앞에, 해시 붙은 옛 클래스 이름은 그 뒤에 둔다.
+    expect(selectors[0]).toBe('button[data-click-area="tpb.save"]');
+    expect(selectors.indexOf('button.save_btn__bzc5B')).toBeGreaterThan(selectors.indexOf('button[class*="save_btn"]'));
+    expect(selectors.indexOf('button.save_btn__bzc5B[data-click-area="tpb.save"]')).toBeGreaterThan(selectors.indexOf('button[class*="save_btn"]'));
     expect(selectors).toContain('button[class*="save_btn"]');
     expect(selectors).toContain('button[aria-label*="저장"]');
     expect(selectors).toContain('button[data-testid*="save" i]');
