@@ -634,8 +634,10 @@ class BrowserSessionManager {
         // ✅ [v1.4.79] Bug D4 / S9 — 신규 Chrome 세션이라도 저장된 쿠키가 있으면 자동 주입
         //   userDataDir만으로는 session cookie(expires=-1)가 브라우저 재시작 시 소실되므로
         //   sessionPersistence의 JSON 백업에서 복원 시도 (실패해도 무시, 다음 loginToNaver에서 처리)
+        // [2026-10-10] User-opened windows (resume check, account window, NETWORK_WAIT auto-recheck) restore as well.
+        //   Skipping them sent session-cookie accounts to LOGIN_REQUIRED after an app or Chrome restart although the file
+        //   is written only after the server confirms this account. restoreCookies never overwrites a live profile login.
         try {
-            if (options.userInitiated) throw new Error('manual-profile-only');
             const { restoreCookies } = await import('./sessionPersistence.js');
             const restored = await restoreCookies(page, accountId);
             if (restored) {
