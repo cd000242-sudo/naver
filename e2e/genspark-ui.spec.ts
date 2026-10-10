@@ -20,9 +20,14 @@ test('엔진 select 에 젠스파크, 관리 탭 행·모델 15개, 크레딧 �
   test.setTimeout(120_000);
   // 엔진 선택 칸은 "이미지 생성·관리" 탭 안에 있다 — 먼저 그 탭으로 간다(다른 e2e 처럼 키보드로 탭 전환).
   await expect(page.locator('#refresh-posts-list-btn')).toHaveAttribute('data-listener-added', 'true', { timeout: 45_000 });
-  await page.locator('.tab-button[data-tab="images"]').focus();
-  await page.keyboard.press('Enter');
-  await expect(page.locator('.tab-button[data-tab="images"]')).toHaveAttribute('aria-selected', 'true');
+  // [2026-10-10] 게시글 버튼 준비 표시는 탭 전환(initTabSwitching)보다 먼저 찍힌다 — 바쁜 PC(릴리즈 게이트)에선
+  //   탭 기능이 붙기 전에 Enter 가 눌려 무반응이었다. 탭이 실제로 바뀔 때까지 다시 누른다.
+  const imagesTab = page.locator('.tab-button[data-tab="images"]');
+  await expect(async () => {
+    await imagesTab.focus();
+    await page.keyboard.press('Enter');
+    await expect(imagesTab).toHaveAttribute('aria-selected', 'true', { timeout: 2_000 });
+  }).toPass({ timeout: 45_000 });
   const select = page.locator('#image-source-select');
   await expect(select.locator('option[value="genspark"]')).toHaveCount(1);
   expect(await select.inputValue()).not.toBe('genspark');
