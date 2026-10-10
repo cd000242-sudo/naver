@@ -1,10 +1,12 @@
 // [2026-10-10] 젠스파크 로그인 시험 — 가짜 브라우저·가짜 대기. 실제 크롬·사이트 접속 없음.
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { readFileSync } from 'node:fs';
 import {
   gensparkClassifySignals,
   checkGensparkLogin,
   openGensparkLoginWindow,
   prepareGensparkGenerationPage,
+  waitForGensparkLoginCheck,
 } from '../image/genspark/gensparkLogin';
 import { buildGensparkLaunchArgs, isGensparkProfileLockError } from '../image/genspark/gensparkBrowser';
 import {
@@ -101,6 +103,36 @@ describe('로그인 흐름(가짜 브라우저)', () => {
     expect(res.state).toBe('logged-out');
     expect(ctx.closed).toBe(1);
     expect(getGensparkCachedContext()).toBeNull();
+  });
+
+  // [2026-10-10 실측] 엔진을 고르자마자 생성을 누르면, 로그인 확인이 숨은 창을 붙잡은 동안 생성이 "이미 열려 있음"으로 바로 실패했다.
+  it('진행 중인 로그인 확인은 끝날 때까지 기다릴 수 있고, 끝나면 그 창이 생성용으로 남는다', async () => {
+    const { page, bind } = fakePage([{ hasComposer: true }]);
+    const ctx = fakeCtx(page); bind(ctx);
+    let releaseLaunch: () => void = () => undefined;
+    const launchGate = new Promise<void>((resolve) => { releaseLaunch = resolve; });
+    const check = checkGensparkLogin({ launch: async () => { await launchGate; trackGensparkContext(ctx); return ctx; }, sleep: noSleep });
+    let waited = false;
+    const waiting = waitForGensparkLoginCheck().then(() => { waited = true; });
+    await new Promise((r) => setTimeout(r, 10));
+    expect(waited).toBe(false);
+    expect(tryBeginGensparkGeneration()).toBe(false); // 확인 중에는 바로 시작하면 막힌다
+    releaseLaunch();
+    await waiting;
+    expect((await check).state).toBe('logged-in');
+    expect(tryBeginGensparkGeneration()).toBe(true); // 기다린 뒤에는 시작할 수 있다
+    expect(getGensparkCachedContext()).toBe(ctx);
+  });
+
+  it('진행 중인 확인이 없으면 바로 끝난다', async () => {
+    await expect(waitForGensparkLoginCheck()).resolves.toBeUndefined();
+  });
+
+  it('생성 시작부는 로그인 확인이 끝나길 기다린 뒤 생성 잠금을 잡는다', () => {
+    const runtime = readFileSync(new URL('../image/genspark/gensparkRuntime.ts', import.meta.url), 'utf8');
+    const body = runtime.slice(runtime.indexOf('enqueueGensparkGeneration(async () => {'));
+    expect(body.indexOf('await waitForGensparkLoginCheck();')).toBeGreaterThan(0);
+    expect(body.indexOf('await waitForGensparkLoginCheck();')).toBeLessThan(body.indexOf('tryBeginGensparkGeneration()'));
   });
 
   it('확인: 생성 중이면 BUSY 로 미룬다', async () => {

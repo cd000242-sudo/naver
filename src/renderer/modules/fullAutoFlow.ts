@@ -25,6 +25,7 @@ import {
 } from '../../image/shoppingReferenceGeneration.js';
 import { reconcileOpenaiImageModelSelection } from '../../image/openaiImageModelReconcile.js';
 import { noteAccountPauseDispatch, showAccountPauseModal } from './accountPauseModal.js';
+import { gsPrefetchMatchImages } from '../../image/fullAuto/gensparkBodyPrefetch.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emitLog = emitLog;
 exports.resolveImageManagerKeys = resolveImageManagerKeys;
@@ -3223,14 +3224,9 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         return safeBatch.images;
     }
 
-    const generateOne = async (heading, i) => {
-        try {
-            if (isFullAutoStopRequested()) {
-                appendLog(`⏹️ 이미지 생성 중지됨 (${i + 1}/${headings.length})`);
-                return [];
-            }
-            const headingTitle = heading.title || heading || `이미지 ${i + 1}`;
-            appendLog(`🎨 [${i + 1}/${headings.length}] "${String(headingTitle).substring(0, 20)}" 이미지 생성 시작...`);
+    // [2026-10-10] 소제목 이미지 요청 항목 만들기(프롬프트·참조·글 속 위치)를 생성과 나눴다 — 젠스파크는 항목을 먼저 모두
+    //   만들어 한 번에(4장씩 동시) 요청하고, 1장씩 경로는 지금처럼 소제목마다 만든다. 항목 모양은 두 경로가 같다.
+    const buildBodyImageItem = async (heading, i) => {
             const isThumbnail = false;
             const shouldIncludeText = false;
             const useAiImageChecked = isShoppingConnect
@@ -3267,10 +3263,7 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
                 const title = String(heading?.title || heading || '').trim();
                 return imageContextHeadings.findIndex((h) => String(h?.title || h || '').trim() === title);
             })();
-            const imageResult = await generateImagesWithCostSafety({
-                provider: imageSource,
-                imageModel,
-                items: [{
+            return {
                         heading: heading.title,
                         prompt: englishPrompt,
                         englishPrompt: englishPrompt,
@@ -3285,7 +3278,31 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
                         imageStyle: imageStyle,
                         imageRatio: globalSettings.subheadingRatio || imageRatio,
                         ...ref,
-                }],
+            };
+    };
+    // 젠스파크로 한꺼번에 받은 칸(소제목 위치 → 이미지). 비어 있으면 모든 칸을 1장씩 만든다.
+    let gsSemiPrefetched = new Map();
+    const generateOne = async (heading, i, prebuiltItem = null) => {
+        try {
+            if (isFullAutoStopRequested()) {
+                appendLog(`⏹️ 이미지 생성 중지됨 (${i + 1}/${headings.length})`);
+                return [];
+            }
+            const headingTitle = heading.title || heading || `이미지 ${i + 1}`;
+            const gsReady = gsSemiPrefetched.get(i);
+            if (gsReady) {
+                completedCount++;
+                const readyProgress = progressStart + ((progressEnd - progressStart) * (completedCount / headings.length));
+                showUnifiedProgress(Math.round(readyProgress), `이미지 생성 중... (${completedCount}/${headings.length})`, `\"${heading.title}\" 이미지 생성 완료`);
+                appendLog(`✅ [${i + 1}/${headings.length}] "${String(headingTitle).substring(0, 20)}" 이미지 준비됨(한꺼번에 받음)`);
+                return [{ ...gsReady, isThumbnail: false }];
+            }
+            appendLog(`🎨 [${i + 1}/${headings.length}] "${String(headingTitle).substring(0, 20)}" 이미지 생성 시작...`);
+            const imageItem = prebuiltItem || await buildBodyImageItem(heading, i);
+            const imageResult = await generateImagesWithCostSafety({
+                provider: imageSource,
+                imageModel,
+                items: [imageItem],
                 postTitle: imageArticleTitle,
                 postId: imagePostId,
                 isFullAuto: formData.mode === 'full-auto',
@@ -3323,9 +3340,49 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
             throw error;
         }
     };
+    // [2026-10-10] 젠스파크: 항목을 먼저 모두 만들어 한 번에 요청한다(4장씩 동시). 받은 칸은 generateOne 이 그대로 쓰고,
+    //   못 받은 칸·요청 실패는 지금처럼 1장씩 다시 만든다(끝까지 못 만들면 지금처럼 발행 중단). 쇼핑커넥트는 위 배치 경로라 여기 안 온다.
+    let prebuiltItems = [];
+    if (imageSource === 'genspark' && headings.length >= 2 && !isFullAutoStopRequested()) {
+        try {
+            for (let i = 0; i < headings.length && !isFullAutoStopRequested(); i++) prebuiltItems.push(await buildBodyImageItem(headings[i], i));
+        }
+        catch (gsBuildError) {
+            // 프롬프트 준비가 실패하면 1장씩 경로가 같은 단계에서 지금처럼 오류를 기록하고 멈춘다.
+            console.warn('[AI Images] 젠스파크 한꺼번에 요청 준비 실패 → 1장씩:', gsBuildError);
+            prebuiltItems = [];
+        }
+    }
+    if (prebuiltItems.length === headings.length && prebuiltItems.length >= 2) {
+        appendLog(`🚀 젠스파크: 소제목 이미지 ${prebuiltItems.length}장을 한 번에 요청합니다 (최대 4장 동시).`);
+        try {
+            const gsSemiResult = await generateImagesWithCostSafety({
+                provider: imageSource,
+                imageModel,
+                items: prebuiltItems,
+                postTitle: imageArticleTitle,
+                postId: imagePostId,
+                isFullAuto: formData.mode === 'full-auto',
+                longRunImageGeneration: true,
+                isContinuousMode: !!isContinuousMode,
+                isShoppingConnect: isShoppingConnect,
+                collectedImages: collectedImages,
+                thumbnailTextInclude: false,
+                imageFallbackPolicy,
+                allowPartialResults: true,
+                imageGenerationTimeoutMs: getFullAutoBodyImageTimeoutMs(imageSource, prebuiltItems.length),
+            });
+            gsSemiPrefetched = gsPrefetchMatchImages(prebuiltItems, prebuiltItems.map((_item, i) => i), Array.isArray(gsSemiResult?.images) ? gsSemiResult.images : []);
+            const gsSemiMissing = prebuiltItems.length - gsSemiPrefetched.size;
+            appendLog(`✅ 젠스파크: ${gsSemiPrefetched.size}/${prebuiltItems.length}장 받음${gsSemiMissing > 0 ? ` — 못 받은 ${gsSemiMissing}칸은 1장씩 다시 만듭니다` : ''}${gsSemiPrefetched.size === 0 && gsSemiResult?.message ? ` (${String(gsSemiResult.message).substring(0, 160)})` : ''}`);
+        }
+        catch (gsSemiError) {
+            appendLog(`⚠️ 젠스파크 한꺼번에 요청 실패 — 1장씩 만듭니다: ${String(gsSemiError?.message || gsSemiError).substring(0, 160)}`);
+        }
+    }
     const results = [];
     for (let i = 0; i < headings.length; i++) {
-        results.push(await generateOne(headings[i], i));
+        results.push(await generateOne(headings[i], i, prebuiltItems[i] || null));
     }
     const images = results.flat();
     const finalImagesWithThumbnail = [

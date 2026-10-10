@@ -32,6 +32,33 @@ describe('generateImagesForAutomation — 젠스파크 미리 한꺼번에', () 
     expect(loopHead.indexOf('gsPrefetched.get(itemIndex)')).toBeLessThan(loopHead.indexOf('checkBatchTimeout()'));
   });
 
+  // [2026-10-10 사장님] 반자동·이미지 관리 탭도 한 번에.
+  it('반자동(generateAIImagesForHeadings): 항목을 먼저 모두 만들어 한 번에 요청하고, 받은 칸은 다시 만들지 않는다', () => {
+    const flow = read('renderer/modules/fullAutoFlow.ts');
+    const fn = flow.slice(flow.indexOf('async function generateAIImagesForHeadings'), flow.indexOf('const PUBLISH_AUTOMATION_TIMEOUT_MS'));
+    expect(fn).toMatch(/const buildBodyImageItem = async \(heading, i\) => \{/);
+    expect(fn).toMatch(/if \(imageSource === 'genspark' && headings\.length >= 2 && !isFullAutoStopRequested\(\)\) \{/);
+    expect(fn).toMatch(/items: prebuiltItems,[\s\S]*?allowPartialResults: true,/);
+    expect(fn).toMatch(/gsSemiPrefetched = gsPrefetchMatchImages\(prebuiltItems,/);
+    // 받은 칸은 생성 호출 전에 돌려준다.
+    const one = fn.slice(fn.indexOf('const generateOne = async (heading, i, prebuiltItem = null) => {'));
+    expect(one.indexOf('gsSemiPrefetched.get(i)')).toBeGreaterThan(0);
+    expect(one.indexOf('gsSemiPrefetched.get(i)')).toBeLessThan(one.indexOf('items: [imageItem]'));
+    expect(one).toMatch(/const imageItem = prebuiltItem \|\| await buildBodyImageItem\(heading, i\);/);
+    expect(fn).toMatch(/generateOne\(headings\[i\], i, prebuiltItems\[i\] \|\| null\)/);
+    expect(flow).toMatch(/from '\.\.\/\.\.\/image\/fullAuto\/gensparkBodyPrefetch\.js'/);
+  });
+
+  it('이미지 관리 탭 AI 이미지 생성: 쇼핑이 아니면 한 번에 요청, 받은 칸은 엔진 분기보다 먼저 쓴다', () => {
+    const tab = read('renderer/modules/headingImageGen.ts');
+    expect(tab).toMatch(/if \(imageSource === 'genspark' && filteredHeadings\.length >= 2 && !isShoppingConnectForCurrentPost\(\)\) \{/);
+    expect(tab).toMatch(/items: gsTabItems,[\s\S]*?allowPartialResults: true,/);
+    expect(tab).toMatch(/gsTabPrefetched = gsPrefetchMatchImages\(gsTabItems,/);
+    expect(tab).toMatch(/const gsTabReady = gsTabPrefetched\.get\(i\);\s*if \(gsTabReady\) \{[\s\S]*?\} else if \(isShoppingConnectForCurrentPost\(\)\) \{/);
+    expect(tab.indexOf('items: gsTabItems')).toBeLessThan(tab.indexOf('results.push(await generateOne(filteredHeadings[i], i));'));
+    expect(tab).toMatch(/from '\.\.\/\.\.\/image\/fullAuto\/gensparkBodyPrefetch\.js'/);
+  });
+
   it('판단 파일을 렌더러 묶음(copy-static)에 등록한다 — 빠지면 빌드는 통과하고 화면에서만 터진다', () => {
     expect(read('../scripts/copy-static.mjs')).toMatch(/label: 'image\/fullAuto\/gensparkBodyPrefetch\.js'/);
     expect(mam).toMatch(/from '\.\.\/\.\.\/image\/fullAuto\/gensparkBodyPrefetch\.js'/);

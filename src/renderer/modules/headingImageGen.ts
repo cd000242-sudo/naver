@@ -10,6 +10,7 @@ import { beginImagePreviewBatch, endImagePreviewBatch, setImagePreviewBatchSlot 
 import { hideAppProgressModal, showAppProgressModal } from '../utils/appProgressModal.js';
 import { extractSemiAutoDocumentFromBody } from '../utils/semiAutoHeadingExtractor.js';
 import { attachImagePickerPreview } from './imagePickerPreview.js';
+import { gsPrefetchMatchImages } from '../../image/fullAuto/gensparkBodyPrefetch.js';
  
 
 // --- Global declarations (exposed by renderer.ts via window) ---
@@ -1357,6 +1358,9 @@ export function initHeadingImageGeneration(): void {
                         : '';
         void providerForLock;
         const shouldRunSequentially = true;
+        // [2026-10-10] 젠스파크: 소제목 이미지를 먼저 한 번에 요청한다(4장씩 동시, 아래 반복 직전). 받은 칸은 generateOne 이
+        //   그대로 쓰고, 못 받은 칸만 아래 엔진 분기가 지금처럼 1장씩 다시 만든다.
+        let gsTabPrefetched = new Map<number, any>();
 
         const generateOne = async (heading: any, i: number): Promise<any | null> => {
           try {
@@ -1398,13 +1402,18 @@ export function initHeadingImageGeneration(): void {
             }
 
             let imageUrl: string;
+            const gsTabReady = gsTabPrefetched.get(i);
 
+            if (gsTabReady) {
+              // 젠스파크로 한꺼번에 받은 칸 — 다시 만들지 않는다.
+              imageUrl = gsTabReady.previewDataUrl || gsTabReady.filePath;
+              appendLog(`  ✨ 젠스파크: 한꺼번에 받은 이미지를 씁니다`, 'images-log-output');
             // Shopping-connect guard (v1.6.3 재설계):
             //   쇼핑 커넥트 모드일 때는 엔진 허용 여부와 무관하게 이 블록으로 일원화.
             //   - 허용 엔진(nano-banana-pro, openai-image): collectedImages를 img2img 참조로 주입
             //   - 차단 엔진(imagefx, leonardo, deepinfra 등): provider는 유지하되 main guard에서 수집이미지로 전환
             //   둘 다 isShoppingConnect: true + collectedImages 주입으로 통일.
-            if (isShoppingConnectForCurrentPost()) {
+            } else if (isShoppingConnectForCurrentPost()) {
               const isBlocked = shouldBlockEngineForShoppingConnect(imageSource);
               if (isBlocked) {
                 appendLog(`  🛒 쇼핑커넥트: 수집 이미지 직접 사용 (${imageSource} 차단, 오버레이 적용)`, 'images-log-output');
@@ -1707,6 +1716,34 @@ export function initHeadingImageGeneration(): void {
             return null;
           }
         };
+
+        if (imageSource === 'genspark' && filteredHeadings.length >= 2 && !isShoppingConnectForCurrentPost()) {
+          const gsTabItems = filteredHeadings.map((heading: any, i: number) => ({
+            heading: heading.title,
+            prompt: heading.prompt,
+            englishPrompt: heading.prompt,
+            isThumbnail: false,
+            allowText: false,
+            diversityIndex: i,
+            ...resolveReferenceImageForHeading(String(heading.title || '').trim()),
+          }));
+          appendLog(`🚀 젠스파크: 소제목 이미지 ${gsTabItems.length}장을 한 번에 요청합니다 (최대 4장 동시).`, 'images-log-output');
+          gsTabItems.forEach((_item: any, i: number) => liveImagePreview.updateItem(i, 'generating'));
+          try {
+            const gsTabResult = await generateImagesWithCostSafety({
+              provider: imageSource,
+              items: gsTabItems,
+              postTitle: blogTitle,
+              isFullAuto: true,
+              allowPartialResults: true,
+            });
+            gsTabPrefetched = gsPrefetchMatchImages(gsTabItems, gsTabItems.map((_item: any, i: number) => i), Array.isArray(gsTabResult?.images) ? gsTabResult.images : []);
+            const gsTabMissing = gsTabItems.length - gsTabPrefetched.size;
+            appendLog(`✅ 젠스파크: ${gsTabPrefetched.size}/${gsTabItems.length}장 받음${gsTabMissing > 0 ? ` — 못 받은 ${gsTabMissing}칸은 1장씩 다시 만듭니다` : ''}${gsTabPrefetched.size === 0 && gsTabResult?.message ? ` (${String(gsTabResult.message).substring(0, 160)})` : ''}`, 'images-log-output');
+          } catch (gsTabError) {
+            appendLog(`⚠️ 젠스파크 한꺼번에 요청 실패 — 1장씩 만듭니다: ${String((gsTabError as Error)?.message || gsTabError).substring(0, 160)}`, 'images-log-output');
+          }
+        }
 
         const results: Array<any | null> = [];
         if (shouldRunSequentially) {

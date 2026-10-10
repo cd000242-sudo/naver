@@ -165,6 +165,14 @@ export function checkGensparkLogin(
 }
 
 /**
+ * [2026-10-10 실측] 엔진을 고르면 로그인 확인이 숨은 창을 연다(바쁜 PC 에선 수십 초). 그 사이 생성을 시작하면 "이미 열려 있음"으로
+ *   바로 실패했다 — 생성은 진행 중인 확인이 끝나길 기다렸다가(성공하면 그 창이 생성용으로 남는다) 시작한다. 확인이 없으면 바로 끝난다.
+ */
+export async function waitForGensparkLoginCheck(): Promise<void> {
+  if (checkPromise) await checkPromise.catch(() => undefined);
+}
+
+/**
  * 보이는 로그인 창을 열고 사람이 직접 로그인하길 기다린다(3초마다, 최대 10분).
  * 성공하면 창을 화면 밖으로 숨겨 생성용으로 이어 받는다. 숨기지 못하면 로그인은 디스크에 남기고 창을 닫는다.
  */

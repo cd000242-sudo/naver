@@ -16,7 +16,7 @@ import {
   isGensparkGenerationAborted,
   tryBeginGensparkGeneration,
 } from './gensparkSession.js';
-import { prepareGensparkGenerationPage } from './gensparkLogin.js';
+import { prepareGensparkGenerationPage, waitForGensparkLoginCheck } from './gensparkLogin.js';
 import { submitGensparkPrompt } from './gensparkSubmit.js';
 import { checkGensparkJob, fetchGensparkImageBytes } from './gensparkCollect.js';
 import { GENSPARK_ORIGIN } from './gensparkSelectors.js';
@@ -68,6 +68,8 @@ export function createGensparkRuntime(): GensparkRuntime {
   return {
     withSession: (model, fn) =>
       enqueueGensparkGeneration(async () => {
+        // 엔진 선택 직후의 로그인 상태 확인과 부딪치지 않게 끝나길 기다린다(사람이 연 로그인 창은 아래에서 지금처럼 멈춘다).
+        await waitForGensparkLoginCheck();
         if (!tryBeginGensparkGeneration()) {
           throw new GensparkError(GENSPARK_PROFILE_IN_USE, '로그인 확인 또는 다른 생성이 진행 중');
         }

@@ -783,7 +783,7 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             });
             gsPrefetched = gsPrefetchMatchImages(itemsForGeneration, gsPrefetchIndexes, Array.isArray(gsPrefetchResult?.images) ? gsPrefetchResult.images : []);
             const gsMissing = gsPrefetchIndexes.length - gsPrefetched.size;
-            onProgress?.(`✅ [run #${runId}] 젠스파크: ${gsPrefetched.size}/${gsPrefetchIndexes.length}장 받음${gsMissing > 0 ? ` — 못 받은 ${gsMissing}칸은 1장씩 다시 만듭니다` : ''}`);
+            onProgress?.(`✅ [run #${runId}] 젠스파크: ${gsPrefetched.size}/${gsPrefetchIndexes.length}장 받음${gsMissing > 0 ? ` — 못 받은 ${gsMissing}칸은 1장씩 다시 만듭니다` : ''}${gsPrefetched.size === 0 && gsPrefetchResult?.message ? ` (${String(gsPrefetchResult.message).substring(0, 160)})` : ''}`);
         }
         catch (gsPrefetchError) {
             // 로그인·모델·보안 확인 오류는 1장씩 해도 같으므로 아래 루프가 같은 오류를 만나 지금처럼 멈춘다.
