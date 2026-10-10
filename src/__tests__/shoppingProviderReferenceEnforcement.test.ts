@@ -67,7 +67,9 @@ describe('shopping provider reference enforcement', () => {
       originalUrl: 'https://expired.example/product.png',
     }, { fetchRemote, allowedLocalRoots: [os.tmpdir()] });
 
-    expect(loaded?.source).toBe(fs.realpathSync(localPath));
+    // The loader uses fs.promises.realpath (native), which expands Windows 8.3 names such as RUNNER~1;
+    // the JS fs.realpathSync keeps them, so compare with the native variant.
+    expect(loaded?.source).toBe(fs.realpathSync.native(localPath));
     expect(loaded?.buffer.equals(localBytes)).toBe(true);
     expect(fetchRemote).not.toHaveBeenCalled();
   });
@@ -176,7 +178,7 @@ describe('shopping provider reference enforcement', () => {
       { allowedLocalRoots: [path.dirname(managedPath)] },
     );
 
-    expect(loaded?.source).toBe(fs.realpathSync(managedPath));
+    expect(loaded?.source).toBe(fs.realpathSync.native(managedPath));
     expect(loaded?.mimeType).toBe('image/png');
   });
 
