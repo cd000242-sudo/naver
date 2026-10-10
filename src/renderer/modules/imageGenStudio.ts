@@ -14,6 +14,7 @@ import {
   downloadAll,
 } from './imageGenStudioLightbox.js';
 import { wireSelectDropshotRow, wireSelectFlowRow } from './dropshotLoginUi.js';
+import { gsWireSelectRow } from './gensparkLoginUi.js';
 import {
   getSelectedEngine,
   populateEngineSelect,
@@ -51,6 +52,8 @@ export function initImageGenStudio(): void {
     checkBtnId: 'imgstudio-ds-check-btn',
     statusId: 'imgstudio-ds-status',
   });
+  // [2026-10-10] 젠스파크 로그인·모델 행
+  gsWireSelectRow({ selectId: 'imgstudio-engine', prefix: 'imgstudio' });
   wireSelectFlowRow({
     selectId: 'imgstudio-engine',
     rowId: 'imgstudio-flow-login',

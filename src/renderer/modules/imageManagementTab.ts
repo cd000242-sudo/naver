@@ -8,6 +8,7 @@
 import { toastManager } from '../utils/uiManagers.js';
 import { readRawPipelineSettings } from './pipelineConfig.js';
 import { bindAllStaticDropshotLoginUis } from './dropshotLoginUi.js';
+import { gsBindAllStaticUis } from './gensparkLoginUi.js';
 // ✅ [v2.10.288] subImageMode import 제거 — esbuild 회귀 차단. window 통해 호출.
 type SubImageMode = 'ai' | 'collected';
 function setSubImageMode(mode: SubImageMode): void {
@@ -111,6 +112,7 @@ function ensureImageFxSwitchButton(imageSourceSelect: HTMLSelectElement, show: b
 
 export async function initImageManagementTab(): Promise<void> {
   // [2026-07-31] 드롭샷/Flow 로그인 버튼 배선 — 이 호출이 없어 클릭이 무반응이었다.
+  try { gsBindAllStaticUis(); } catch (e) { console.warn('[ImageManagementTab] 젠스파크 UI 배선 실패:', e); }
   try { bindAllStaticDropshotLoginUis(); } catch (e) { console.warn('[ImageManagementTab] 로그인 UI 배선 실패:', e); }
   // 2026-06-14: Flow/Prodia are selectable again for existing users.
   // ImageFX remains hidden; only stale ImageFX selections migrate to dropshot.
@@ -384,7 +386,9 @@ export async function initImageManagementTab(): Promise<void> {
 
       console.log(`[ImageSource] 드롭다운 선택: ${selectedSource}`);
 
-      if (selectedSource === 'nano-banana-2') {
+      if (selectedSource === 'genspark') {
+        appendLog('✅ ✨ 젠스파크가 선택되었습니다. — 전용 창에서 직접 로그인 후 사용 · 모델은 아래 목록에서 선택(크레딧 차감 모델은 확인창)');
+      } else if (selectedSource === 'nano-banana-2') {
         appendLog('✅ 🍌 나노바나나2(Gemini 3.1 Flash Image)가 선택되었습니다. — Gemini API 키 필요, 장당 ₩97 | 한글 가능');
       } else if (selectedSource === 'saved') {
         const confirmed = window.confirm(
@@ -510,6 +514,7 @@ export async function initImageManagementTab(): Promise<void> {
           'leonardoai': 'linear-gradient(135deg, #ea580c, #dc2626)',
           'imagefx': 'linear-gradient(135deg, #10b981, #059669)',
           'flow': 'linear-gradient(135deg, #22c55e, #16a34a)',
+          'genspark': 'linear-gradient(135deg, #8b5cf6, #6d28d9)',
           'local-folder': 'linear-gradient(135deg, #4338ca, #6366f1)',
           'saved': 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
         };

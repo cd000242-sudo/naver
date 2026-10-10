@@ -37,7 +37,7 @@ const MULTI_ACCOUNT_SAFE_10_PLUS_INTERVAL_SEC = 420;
 const MULTI_ACCOUNT_SAFE_50_PLUS_INTERVAL_SEC = 600;
 const MULTI_ACCOUNT_UI_IMAGE_MIN_INTERVAL_SEC = 480;
 const MULTI_ACCOUNT_SLOW_IMAGE_MIN_INTERVAL_SEC = 420;
-const MULTI_ACCOUNT_UI_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx']);
+const MULTI_ACCOUNT_UI_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx', 'genspark']);
 const MULTI_ACCOUNT_SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai']);
 const FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS = 7 * 60 * 1000;
 const FLOW_AUTOMATION_BATCH_MAX_TIMEOUT_MS = 18 * 60 * 1000;
@@ -855,12 +855,16 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
                 lastError = error;
                 const errMsg = lastError.message || '';
                 console.warn(`[generateImagesForAutomation] ${itemIndex + 1}/${_displayCount} 시도 ${attempt}/${MAX_RETRIES} 실패:`, errMsg);
-                if (errMsg.includes('[ImageFX]') && (errMsg.includes('시간당 한도') ||
+                // [2026-10-10] 젠스파크: 로그인·모델·보안확인 오류는 같은 계정으로 다시 해도 같으므로 즉시 중단
+                const isUnrecoverableGenspark = errMsg.includes('[젠스파크]') && (errMsg.includes('로그인') ||
+                    errMsg.includes('모델') ||
+                    errMsg.includes('보안'));
+                if (isUnrecoverableGenspark || (errMsg.includes('[ImageFX]') && (errMsg.includes('시간당 한도') ||
                     errMsg.includes('한도를 초과') ||
                     errMsg.includes('세션이 만료') ||
                     errMsg.includes('접근이 거부') ||
-                    errMsg.includes('안전 필터'))) {
-                    console.warn(`[generateImagesForAutomation] ⛔ 회복 불가능한 ImageFX 오류 → 이미지 생성 중단`);
+                    errMsg.includes('안전 필터')))) {
+                    console.warn(`[generateImagesForAutomation] ⛔ 회복 불가능한 이미지 엔진 오류 → 이미지 생성 중단`);
                     onProgress?.(`⛔ ${errMsg.substring(0, 200)}`);
                     if (continueOnImageFailure) {
                         // Same engine, same account: every later slot would fail the same way.

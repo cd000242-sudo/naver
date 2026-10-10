@@ -38,7 +38,7 @@ describe('R1-2: 이미지 엔진 select 무시 → 최고가 대체 과금 차�
 
   it('dropshot·nano-banana-2·nano-banana 분기가 존재한다', () => {
     const branches = src.match(
-      /imageSource === 'dropshot' \|\| imageSource === 'nano-banana-2' \|\| imageSource === 'nano-banana'/g,
+      /imageSource === 'dropshot' \|\| (?:imageSource === 'genspark' \|\| )?imageSource === 'nano-banana-2' \|\| imageSource === 'nano-banana'/g,
     );
     // 일괄 생성 + 개별 재생성 두 경로 모두
     expect(branches?.length).toBe(2);

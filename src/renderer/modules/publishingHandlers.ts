@@ -1726,7 +1726,7 @@ const SEQUENTIAL_MULTI_ACCOUNT_SAFE_10_PLUS_INTERVAL_SEC = 420;
 const SEQUENTIAL_MULTI_ACCOUNT_SAFE_50_PLUS_INTERVAL_SEC = 600;
 const SEQUENTIAL_MULTI_ACCOUNT_UI_IMAGE_MIN_INTERVAL_SEC = 480;
 const SEQUENTIAL_MULTI_ACCOUNT_SLOW_IMAGE_MIN_INTERVAL_SEC = 420;
-const SEQUENTIAL_MULTI_ACCOUNT_UI_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx']);
+const SEQUENTIAL_MULTI_ACCOUNT_UI_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx', 'genspark']);
 const SEQUENTIAL_MULTI_ACCOUNT_SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai']);
 
 function formatPublishInterval(seconds: number): string {

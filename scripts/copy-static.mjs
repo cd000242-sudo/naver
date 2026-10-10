@@ -357,6 +357,11 @@ try {
   // implementations must be inlined before every renderer consumer.
   const rendererRuntimeDependencyFiles = [
     {
+      // [2026-10-10] 젠스파크 모델 표 — gensparkLoginUi 가 값으로 가져온다(순수 파일, import 없음).
+      label: 'image/genspark/gensparkModels.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'genspark', 'gensparkModels.js'),
+    },
+    {
       // [2026-09-10] 에이전트 모델 후보 목록 — agentModelSelect 가 값으로 가져온다.
       //   렌더러 밖(runtime/) 모듈이라 등록하지 않으면 tsc/빌드는 통과하고 화면에서만 터진다.
       label: 'runtime/agentModelPolicy.js',
@@ -604,6 +609,8 @@ try {
     'imageGenStudioCore.js',
     'imageGenStudioLightbox.js',
     'dropshotLoginUi.js',
+    // [2026-10-10] 젠스파크 로그인·모델 행
+    'gensparkLoginUi.js',
       'articleTableComposer.js',
       'contentPolicyDashboard.js',
       'revenueOperationsDashboard.js',

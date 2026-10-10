@@ -6,6 +6,8 @@
  */
 
 import { bindDropshotLogin, refreshDropshotLoginStatus } from '../modules/dropshotLoginUi.js';
+// [2026-10-10] 젠스파크 로그인·모델 행
+import { gsRowHtml, gsApplyEngineToRow } from '../modules/gensparkLoginUi.js';
 
 /** 연동 상태 줄은 계정 이메일·서버 메시지를 그대로 넣으므로 이스케이프한다. */
 function escapeHtmlForStatus(value: string): string {
@@ -59,6 +61,7 @@ export type ActiveImageSource =
   | 'imagefx'
   | 'flow'
   | 'dropshot'
+  | 'genspark'
   | 'local-folder';
 
 /**
@@ -116,6 +119,7 @@ export const SOURCE_NAMES: Record<GlobalImageSource, string> = {
   'imagefx': 'ImageFX (Google Labs, 제한 가능)',
   'flow': '🍌 Flow (Nano Banana 2)',
   'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)',
+  'genspark': '✨ 젠스파크 (모델 선택 · 로그인 필요)',
   'local-folder': '📂 내 폴더'
 };
 
@@ -340,7 +344,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   // ✅ [v2.10.302] dall-e-3 제거 — UI 완전 폐기 (v2.10.295 UI option 삭제 + v2.10.302 write 차단)
   //   기존 위험: 사용자가 서브 모달에서 dall-e-3 카드 클릭 시 VALID_AI_SOURCES 통과해 localStorage 저장 →
   //              imageGenerator.ts:335 마이그레이션 분기 진입. 폐기 표시인데 실질 진입 경로 잔존.
-  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'dropshot', 'local-folder'];
+  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'dropshot', 'genspark', 'local-folder'];
   if (VALID_AI_SOURCES.includes(normalized)) {
     safeLocalStorageSet('fullAutoImageSource', normalized);
     console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${normalized}`);
@@ -369,7 +373,7 @@ export function getFullAutoImageSource(): GlobalImageSource {
   // ✅ [v2.10.302] dall-e-3 제거 (UI 완전 폐기) + falai/prodia/stability/pollinations는 UI 미노출이나
   //   기존 사용자 localStorage 호환성을 위해 read VALID에는 유지 — write VALID_AI_SOURCES만 제거.
   // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
-  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'dropshot', 'local-folder'];
+  const VALID_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'falai', 'prodia', 'stability', 'pollinations', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'dropshot', 'genspark', 'local-folder'];
 
   // 정규화 read (별칭이 저장돼있으면 정식 키로 변환)
   const fullAutoSaved = normalizeImageSource(safeLocalStorageGet('fullAutoImageSource'));
@@ -745,6 +749,9 @@ export function createHeadingImageModal(): void {
               </div>
             </div>
 
+            <!-- [2026-10-10] 젠스파크 선택 시 로그인 창·모델 선택 -->
+            ${gsRowHtml('hsettings')}
+
             <!-- ✅ [2026-01-26] 이미지 스타일 선택 버튼 (실사/애니메이션) -->
             <button type="button" class="premium-setting-btn" id="open-image-style-btn">
               <div style="display: flex; align-items: center; gap: 14px;">
@@ -993,6 +1000,12 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 1.5rem;">🍌</div>
             <div style="font-size: 12px; font-weight: 600; color: #92400e;">리더스 나노바나나 무제한</div>
             <div style="font-size: 10px; color: #a16207;">구독자 무제한 · 추가비용 0원 · 로그인 필요</div>
+          </label>
+          <!-- [2026-10-10] 젠스파크 (모델 선택 · 로그인 필요) -->
+          <label class="source-option" data-value="genspark" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #8b5cf6; background: linear-gradient(135deg, #ede9fe, #ddd6fe); text-align: center; transition: all 0.2s; position: relative;">
+            <div style="font-size: 1.5rem;">✨</div>
+            <div style="font-size: 12px; font-weight: 600; color: #5b21b6;">젠스파크</div>
+            <div style="font-size: 10px; color: #6d28d9;">모델 선택 · 로그인 필요</div>
           </label>
           <label class="source-option" data-value="local-folder" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #e0e7ff, #c7d2fe); text-align: center; transition: all 0.2s; position: relative;">
             <div style="font-size: 1.5rem;">📂</div>
@@ -1512,6 +1525,8 @@ export function createHeadingImageModal(): void {
     checkBtnId: 'hsettings-ds-check-btn',
     statusId: 'hsettings-ds-status',
   });
+  // [2026-10-10] 젠스파크 행 배선(현재 엔진이 아니면 숨김 유지)
+  gsApplyEngineToRow('hsettings', safeLocalStorageGet('globalImageSource') || '');
 
   // ✅ AI 엔진 서브 모달 확인 버튼
   document.getElementById('image-source-confirm')?.addEventListener('click', async () => {
@@ -1565,6 +1580,8 @@ export function createHeadingImageModal(): void {
         checkBtnId: 'hsettings-ds-check-btn',
         statusId: 'hsettings-ds-status',
       });
+      // [2026-10-10] 확정된 엔진이 젠스파크면 로그인·모델 행 노출
+      gsApplyEngineToRow('hsettings', selectedSourceValue);
     }
     // ✅ [SPEC-DROPSHOT-2026 3단계] Google 계정 연동은 imagefx/flow 선택 시에만 노출
     {
@@ -2748,6 +2765,8 @@ export function openHeadingImageModal(): void {
         checkBtnId: 'hsettings-ds-check-btn',
         statusId: 'hsettings-ds-status',
       });
+      // [2026-10-10] 현재 엔진이 젠스파크면 로그인·모델 행 노출
+      gsApplyEngineToRow('hsettings', currentSource);
     }
     // ✅ [SPEC-DROPSHOT-2026 3단계] Google 계정 연동은 imagefx/flow 선택 시에만 노출
     {

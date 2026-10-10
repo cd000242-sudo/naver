@@ -364,6 +364,8 @@ import { initStartupEngineGate } from './modules/startupEngineGate.js';
 import { initImageGenStudio } from './modules/imageGenStudio.js';
 // ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 로그인/확인 UI (엔진 선택 시 노출)
 import { wireSelectDropshotRow, wireSelectFlowRow } from './modules/dropshotLoginUi.js';
+// [2026-10-10] 젠스파크 로그인·모델 행
+import { gsWireSelectRow, gsLoadModelFromConfig } from './modules/gensparkLoginUi.js';
 import { initImageLibrary, loadLibraryImages, useLibraryImage, switchToTab, generateFavoritesContent, generateTemplatesContent, getEnhancedTemplates } from './modules/contentPreviewAndLibrary.js';
 declare let thumbnailBackgroundImage: string | null;
 declare let thumbnailBackgroundDataUrl: string | null;
@@ -11037,6 +11039,9 @@ wireSelectDropshotRow({
   checkBtnId: 'mgmt-ds-check-btn',
   statusId: 'mgmt-ds-status',
 });
+// [2026-10-10] 이미지 관리 탭 엔진 셀렉터 — 젠스파크 선택 시 로그인·모델 행 노출
+gsWireSelectRow({ selectId: 'image-source-select', prefix: 'mgmt' });
+void gsLoadModelFromConfig();
 wireSelectFlowRow({
   selectId: 'image-source-select',
   rowId: 'mgmt-flow-login',

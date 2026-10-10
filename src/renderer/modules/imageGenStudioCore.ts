@@ -23,6 +23,7 @@ const STUDIO_ENGINES: readonly StudioEngine[] = [
   { value: 'flow', label: '🍌 Flow (Google Labs)', costKrw: 0, note: 'Google Labs UI 자동화 · 로그인 필요 · 순차 생성' },
   { value: 'prodia', label: '⚡ Prodia', costKrw: 14, note: 'Prodia API · 빠른 저비용 이미지 생성 · API 키 필요' },
   { value: 'dropshot', label: '🍌 리더스 나노바나나 무제한', costKrw: 0, note: '구독자 무제한 · 추가비용 0원 (Pro 월 구독료 별도)' },
+  { value: 'genspark', label: '✨ 젠스파크 (모델 선택)', costKrw: 0, note: '로그인 필요 · 4장씩 병렬' },
 ];
 
 /**

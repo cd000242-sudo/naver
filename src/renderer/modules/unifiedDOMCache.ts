@@ -154,7 +154,7 @@ const UnifiedDOMCache = {
       'nano-banana': 'nano-banana-2',
     };
     // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
-    const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'dropshot', 'falai', 'pollinations', 'local-folder', 'saved'];
+    const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'dropshot', 'genspark', 'falai', 'pollinations', 'local-folder', 'saved'];
 
     const normalizeSource = (raw: string | null): string | null => {
       if (!raw || raw === 'undefined' || raw === 'null') return null;

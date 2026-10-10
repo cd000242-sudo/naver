@@ -263,7 +263,7 @@ function cancellableSleep(ms: number): Promise<boolean> {
 const SAFE_PUBLISH_MIN_INTERVAL_SEC = 300; // 🔒 절대 최소 5분 (장기 발행 하드 플로어)
 const IMAGE_HEAVY_SAFE_PUBLISH_MIN_INTERVAL_SEC = 420;
 const UI_AUTOMATION_SAFE_PUBLISH_MIN_INTERVAL_SEC = 480;
-const UI_AUTOMATION_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx']);
+const UI_AUTOMATION_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx', 'genspark']);
 const SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai']);
 let _continuousPublishCount = 0;           // 현재 세션 발행 횟수 (쿨다운 계산용)
 let _consecutiveFailCount = 0;             // ✅ [2026-03-21] 연속 실패 전용 카운터

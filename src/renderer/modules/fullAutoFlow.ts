@@ -2996,6 +2996,7 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         'imagefx': 'ImageFX (Google Labs, 제한 가능)',
         'flow': 'Flow (Nano Banana Pro, AI Pro 무료)',
         'dropshot': '리더스 나노바나나 무제한',
+        'genspark': '젠스파크',
         'nano-banana': '나노바나나',
         'nano-banana-2': '나노바나나2',
         'openai-image': 'OpenAI DALL-E',

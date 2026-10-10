@@ -768,7 +768,7 @@ async function applyImageToHeading(image: any, headingTitle: string, headingInde
 //   only when NAVER was picked. Anything else is refused with a visible message — never a silent switch.
 //   (Before: nano-banana-2 / nano-banana / flow / imagefx / dropshot fell through to a NAVER search.)
 const IMAGE_REGENERATE_ENGINES = new Set([
-  'nano-banana-2', 'nano-banana-pro', 'nano-banana', 'flow', 'imagefx', 'dropshot',
+  'nano-banana-2', 'nano-banana-pro', 'nano-banana', 'flow', 'imagefx', 'dropshot', 'genspark',
   'openai-image', 'leonardoai', 'deepinfra', 'prodia', 'naver',
 ]);
 

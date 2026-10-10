@@ -78,9 +78,10 @@ const DEFAULT_IMAGE_STABILIZE_MS = 3_000;
 const LONG_RUN_IMAGE_STABILIZE_MS = 8_000;
 const UI_AUTOMATION_IMAGE_STABILIZE_MS = 15_000;
 const FLOW_IMAGE_STABILIZE_MS = 45_000;
-const UI_AUTOMATION_IMAGE_PROVIDERS = new Set(['dropshot', 'flow', 'imagefx']);
+const UI_AUTOMATION_IMAGE_PROVIDERS = new Set(['dropshot', 'flow', 'imagefx', 'genspark']);
 const SLOW_IMAGE_PROVIDERS = new Set([
   'dropshot',
+  'genspark',
   'flow',
   'imagefx',
   'nano-banana-pro',
