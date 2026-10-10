@@ -214,9 +214,13 @@
   outline-offset: 4px;
 }
 
-#tab-images { scroll-margin: 24px; }
+/* [2026-10-11] 위쪽 고정 버튼 줄(높이 약 32px) 아래로 오게 56px 띄운다. */
+#tab-images,
+#prompts-container { scroll-margin-top: 56px; }
 #tab-images.image-shortcut-highlight,
-#tab-images:focus-visible {
+#tab-images:focus-visible,
+#prompts-container.image-shortcut-highlight,
+#prompts-container:focus-visible {
   outline: 3px solid #60a5fa;
   outline-offset: 4px;
 }

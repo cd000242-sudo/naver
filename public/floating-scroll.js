@@ -55,15 +55,20 @@ function ensureTopShortcutBar() {
     const panel = document.getElementById('tab-images');
     if (!tab || !panel) return;
     tab.click();
+    // [2026-10-11 사장님] 소제목별 "이미지 프롬프트" 카드 목록(이미지 관리)으로 바로 간다. 카드가 없으면 탭 맨 위.
+    document.getElementById('images-subtab-manage')?.click();
     window.requestAnimationFrame(() => {
       if (!panel.getClientRects().length) return;
+      const list = document.getElementById('prompts-container');
+      const target = list && list.getClientRects().length && list.querySelector('.prompt-item') ? list : panel;
+      if (target === list) list.tabIndex = -1;
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      panel.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'start' });
-      // 패널에 포커스를 둔다 — Enter 를 반복해도 아무 버튼도 눌리지 않고 이동만 한다.
-      panel.focus({ preventScroll: true });
-      panel.classList.add('image-shortcut-highlight');
+      target.scrollIntoView({ behavior: reduceMotion ? 'instant' : 'smooth', block: 'start' });
+      // 포커스는 목록(또는 패널)에 둔다 — Enter 를 반복해도 아무 버튼도 눌리지 않고 이동만 한다.
+      target.focus({ preventScroll: true });
+      target.classList.add('image-shortcut-highlight');
       window.clearTimeout(highlightTimer);
-      highlightTimer = window.setTimeout(() => panel.classList.remove('image-shortcut-highlight'), 2200);
+      highlightTimer = window.setTimeout(() => target.classList.remove('image-shortcut-highlight'), 2200);
     });
   });
 })();

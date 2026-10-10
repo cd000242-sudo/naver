@@ -190,6 +190,17 @@ describe('B. 바로가기 두 개 — 위쪽 고정 줄(비용표 왼쪽)', () =
     expect(block).toMatch(/box-sizing: border-box;/);
   });
 
+  // [2026-10-11 사장님] "이미지 바로가기를 누르면 소제목별 이미지 프롬프트 카드 화면으로 오게."
+  it('이미지 바로가기: 이미지 관리 하위 탭 → 프롬프트 카드 목록(없으면 탭 맨 위)으로, 위쪽 버튼 줄 아래에 맞춘다', () => {
+    const start = js.indexOf('(function initImageShortcut()');
+    const body = js.slice(start, js.indexOf('// 플로팅 버튼 스크롤 따라다니기'));
+    expect(body).toContain("document.getElementById('images-subtab-manage')?.click();");
+    expect(body.indexOf("getElementById('images-subtab-manage')")).toBeGreaterThan(body.indexOf('tab.click()'));
+    expect(body).toMatch(/const target = list && list\.getClientRects\(\)\.length && list\.querySelector\('\.prompt-item'\) \? list : panel;/);
+    expect(body).toContain('target.focus({ preventScroll: true })');
+    expect(css).toMatch(/#tab-images,\n#prompts-container \{ scroll-margin-top: 56px; \}/);
+  });
+
   it('이미지 바로가기: images 탭 클릭 → 패널 맨 위 스크롤 → 패널 포커스 → 강조, 발행 버튼은 누르지 않는다', () => {
     const start = js.indexOf('(function initImageShortcut()');
     const body = js.slice(start, js.indexOf('// 플로팅 버튼 스크롤 따라다니기'));
@@ -200,7 +211,6 @@ describe('B. 바로가기 두 개 — 위쪽 고정 줄(비용표 왼쪽)', () =
     expect(body).toContain("document.getElementById('tab-images')");
     expect(body).toContain('tab.click()');
     expect(body).toMatch(/behavior: reduceMotion \? 'instant' : 'smooth', block: 'start'/);
-    expect(body).toContain('panel.focus({ preventScroll: true })');
     expect(body).toContain('image-shortcut-highlight');
     expect(body).not.toContain('unified-publish-btn');
     // 발행 바로가기 동작은 그대로

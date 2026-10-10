@@ -135,3 +135,37 @@ test('the shortcuts sit in the top row left of ⚙ and the cost button, same hei
 
   await page.screenshot({ path: path.join(__dirname, '../tmp/image-shortcut-small.png') });
 });
+
+// [2026-10-11 사장님] "이미지 바로가기를 누르면 소제목별 이미지 프롬프트 카드 화면으로 오게."
+test('with prompt cards the image shortcut opens 이미지 관리 and lands on the card list below the top row', async () => {
+  // 소제목 카드가 있는 상태를 화면 요소로만 흉내 낸다(생성·발행 없음).
+  await page.evaluate(() => {
+    const list = document.getElementById('prompts-container')!;
+    list.style.display = 'block';
+    if (!list.querySelector('.prompt-item[data-e2e]')) {
+      const card = document.createElement('div');
+      card.className = 'prompt-item';
+      card.dataset.e2e = '1';
+      card.style.height = '600px';
+      card.textContent = '이미지 프롬프트: 시험 카드';
+      list.prepend(card);
+    }
+  });
+  // 이미지 생성 하위 탭에 있다가 다른 탭에서 눌러도 이미지 관리로 돌아온다.
+  await page.locator('.tab-button[data-tab="images"]').focus();
+  await page.keyboard.press('Enter');
+  await page.locator('#images-subtab-generate').click();
+  await expect(page.locator('#images-subpanel-manage')).toBeHidden();
+  await page.locator('.tab-button[data-tab="main"]').focus();
+  await page.keyboard.press('Enter');
+  await page.locator('#image-shortcut-btn').click();
+  await expect(page.locator('#images-subpanel-manage')).toBeVisible();
+  const list = page.locator('#prompts-container');
+  await expect(list).toBeFocused();
+  const listBox = await box(list);
+  const costBox = await box(page.locator('#reopen-price-info-btn'));
+  // 위쪽 버튼 줄 바로 아래에서 카드 목록이 시작한다.
+  expect(listBox.y).toBeGreaterThanOrEqual(costBox.y + costBox.height);
+  expect(listBox.y).toBeLessThan(120);
+  expect(await page.evaluate(() => (window as any).__imageShortcutPublishClicks)).toBe(0);
+});
