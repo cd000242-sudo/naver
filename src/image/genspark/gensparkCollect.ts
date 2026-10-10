@@ -2,7 +2,7 @@
 // [2026-10-10] 젠스파크 작업 화면 확인(checkGensparkJob)과 이미지 내려받기(downloadGensparkImage).
 //   서버는 화면을 떠나도 계속 생성하므로, 작업 주소로 돌아가 결과 이미지(/api/files/s/<id>)를 수거한다.
 import { writeImageFile } from '../imageUtils.js';
-import { readGensparkJobImages, readGensparkPageSignals } from './gensparkSelectors';
+import { GENSPARK_ORIGIN, readGensparkJobImages, readGensparkPageSignals } from './gensparkSelectors';
 import {
   GENSPARK_CHALLENGE,
   GENSPARK_DOWNLOAD_FAILED,
@@ -10,7 +10,6 @@ import {
   GENSPARK_LOGIN_REQUIRED,
   GENSPARK_RATE_LIMITED,
   GENSPARK_JOB_FAILED,
-  GENSPARK_SUBMIT_FAILED,
   GensparkError,
 } from './gensparkErrors';
 import type { GensparkCollectResult, GensparkGeneratedImage, GensparkJob, GensparkPageLike } from './gensparkTypes';
@@ -43,6 +42,41 @@ export async function fetchGensparkImageBytes(url: string): Promise<{
 }
 
 /**
+ * [2026-10-10 실측] 작업 화면 하나는 데이터 요청 30여 개(3.2MB)라 바쁜 PC 에선 열기만 30초+였다. 결과는 /api/project?id= 하나에
+ *   있다(0.5초): 갤러리 assets_gallery[].generated_asset_uri, 그림 작업 media_task_results[].status/url. data.status 는 대화 단계라
+ *   시작하자마자 FINISHED 이므로 보지 않는다. 화면에 보이는 그림 주소만 쓴다(url_nowatermark 는 쓰지 않음).
+ *   page.evaluate 로 직렬화되므로 자기완결. 같은 출처(쿠키) 화면에서만 부른다.
+ */
+export async function fetchGensparkProjectResult(jobId: string): Promise<{ ok: boolean; images: string[]; failed: boolean }> {
+  try {
+    const res = await fetch('/api/project?id=' + encodeURIComponent(jobId), { credentials: 'include' });
+    if (!res.ok) return { ok: false, images: [], failed: false };
+    const body = await res.json();
+    const state = body && body.data && body.data.session_state;
+    if (!state || typeof state !== 'object') return { ok: false, images: [], failed: false };
+    const images: string[] = [];
+    const add = (value: unknown): void => {
+      const url = String(value || '');
+      if (url.indexOf('/api/files/s/') >= 0 && images.indexOf(url) < 0) images.push(url);
+    };
+    for (const asset of Array.isArray(state.assets_gallery) ? state.assets_gallery : []) add(asset && asset.generated_asset_uri);
+    let failed = false;
+    for (const message of Array.isArray(state.messages) ? state.messages : []) {
+      const results = message && message.session_state && message.session_state.media_task_results;
+      if (!results || typeof results !== 'object') continue;
+      for (const result of Object.values(results) as Array<{ status?: unknown; url?: unknown }>) {
+        const status = String((result && result.status) || '');
+        if (/fail|error/i.test(status)) failed = true;
+        if (/success/i.test(status)) add(result.url);
+      }
+    }
+    return { ok: true, images, failed };
+  } catch {
+    return { ok: false, images: [], failed: false };
+  }
+}
+
+/**
  * 작업 화면을 열어 결과를 확인한다. seenUrls = 이번 실행에서 이미 받은 이미지 주소(호출자가 받은 뒤 추가한다).
  * 새 주소가 있으면 done(화면 순서 첫 번째), 전부 이미 받은 주소면 failed(중복), 없으면 pending, 실패 문구면 failed.
  * 로그인 풀림·보안 확인은 배치 전체를 멈추는 오류로 던진다.
@@ -54,6 +88,18 @@ export async function checkGensparkJob(
   deps?: GensparkCollectDeps,
 ): Promise<GensparkCollectResult> {
   const sleep = deps?.sleep ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
+  // 1) 가벼운 확인 — 작업 화면을 열지 않고 결과 데이터만 묻는다. 못 하면(형식 변경·로그인 풀림) 아래 화면 확인으로.
+  if (String(page.url() || '').startsWith(GENSPARK_ORIGIN)) {
+    const light = await page.evaluate(fetchGensparkProjectResult, job.jobId).catch(() => null);
+    if (light && light.ok) {
+      const fresh = light.images.filter((u) => !seenUrls.has(u));
+      if (fresh.length > 0) return { status: 'done', imageUrl: fresh[0] };
+      if (light.images.length > 0) return { status: 'failed', reason: `${GENSPARK_DUPLICATE_IMAGE}: 이미 받은 이미지 주소만 보임` };
+      if (light.failed) return { status: 'failed', reason: `${GENSPARK_JOB_FAILED}: 그림 작업 실패 표시` };
+      return { status: 'pending' };
+    }
+  }
+  // 2) 화면 확인
   try {
     await page.goto(job.jobUrl, { waitUntil: 'domcontentloaded', timeout: 30_000 });
   } catch (error) {

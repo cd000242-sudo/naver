@@ -193,6 +193,34 @@ describe('checkGensparkJob', () => {
     expect(await checkGensparkJob(page, job, new Set(), { sleep })).toEqual({ status: 'done', imageUrl: A });
   });
 
+  // [2026-10-10 실측] 작업 화면 하나에 데이터 요청 30여 개(3.2MB) — 바쁜 PC 에선 30초+. 결과는 /api/project 하나(0.5초)에 있다.
+  describe('가벼운 확인(/api/project, 화면을 열지 않음)', () => {
+    const onSite = { url: 'https://www.genspark.ai/ai_image' };
+    it('그림 주소가 있으면 done — 작업 화면을 열지 않는다', async () => {
+      const { page } = setup({ ...onSite, projectResult: { ok: true, images: [A, B], failed: false } });
+      expect(await checkGensparkJob(page, job, new Set([A]), { sleep })).toEqual({ status: 'done', imageUrl: B });
+      expect(page.calls.gotos).toEqual([]);
+    });
+    it('아직 없으면 pending, 실패 표시면 failed, 받은 주소뿐이면 중복 실패 — 모두 화면을 열지 않는다', async () => {
+      const pending = setup({ ...onSite, projectResult: { ok: true, images: [], failed: false } });
+      expect(await checkGensparkJob(pending.page, job, new Set(), { sleep })).toEqual({ status: 'pending' });
+      const failed = setup({ ...onSite, projectResult: { ok: true, images: [], failed: true } });
+      expect((await checkGensparkJob(failed.page, job, new Set(), { sleep })).status).toBe('failed');
+      const dup = setup({ ...onSite, projectResult: { ok: true, images: [A], failed: false } });
+      expect((await checkGensparkJob(dup.page, job, new Set([A]), { sleep })).reason).toContain('GENSPARK_DUPLICATE_IMAGE');
+      expect([...pending.page.calls.gotos, ...failed.page.calls.gotos, ...dup.page.calls.gotos]).toEqual([]);
+    });
+    it('가벼운 확인이 안 되면(형식 변경·로그인 풀림) 지금처럼 작업 화면을 열어 확인한다', async () => {
+      const { page } = setup({ ...onSite, projectResult: { ok: false, images: [], failed: false }, jobImages: [A] });
+      expect(await checkGensparkJob(page, job, new Set(), { sleep })).toEqual({ status: 'done', imageUrl: A });
+      expect(page.calls.gotos).toEqual([job.jobUrl]);
+    });
+    it('젠스파크 화면이 아니면(같은 출처 쿠키 없음) 가벼운 확인을 건너뛴다', async () => {
+      const { page } = setup({ projectResult: { ok: true, images: [B], failed: false }, jobImages: [A] });
+      expect(await checkGensparkJob(page, job, new Set(), { sleep })).toEqual({ status: 'done', imageUrl: A });
+    });
+  });
+
   it('이미지도 신호도 없으면 pending, 실패 문구면 failed', async () => {
     expect((await checkGensparkJob(setup().page, job, new Set(), { sleep })).status).toBe('pending');
     const f = setup({ signals: { hasComposer: false, loginRequired: false, challenge: false, rateLimited: false, failed: true } });

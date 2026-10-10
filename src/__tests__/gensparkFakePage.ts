@@ -12,7 +12,7 @@ import {
   readGensparkSelectedModel,
   readGensparkSettingsMenu,
 } from '../image/genspark/gensparkSelectors';
-import { fetchGensparkImageBytes } from '../image/genspark/gensparkCollect';
+import { fetchGensparkImageBytes, fetchGensparkProjectResult } from '../image/genspark/gensparkCollect';
 import type { GensparkPageLike } from '../image/genspark/gensparkTypes';
 
 export interface FakeMenuItem { label: string; creditFree: boolean; needsInput: boolean; isNew: boolean }
@@ -47,6 +47,8 @@ export interface FakeState {
   jobImagesAfterReads: number;
   /** 앞으로 goto 를 몇 번 실패시킬지(바쁜 PC 에서 화면 열기 시간 초과 흉내) */
   gotoFails: number;
+  /** /api/project 가벼운 확인 결과(기본 ok:false → 작업 화면을 여는 기존 경로) */
+  projectResult: { ok: boolean; images: string[]; failed: boolean };
 }
 
 export function newFakeState(): FakeState {
@@ -72,6 +74,7 @@ export function newFakeState(): FakeState {
     focusFails: false,
     jobImagesAfterReads: 0,
     gotoFails: 0,
+    projectResult: { ok: false, images: [], failed: false },
   };
 }
 
@@ -143,6 +146,7 @@ export function createFakePage(state: FakeState): FakePage {
       if (fn === readGensparkJobImages) return ++jobImageReads > state.jobImagesAfterReads ? state.jobImages : [];
       if (fn === locateGensparkPoint) return locate(arg as never);
       if (fn === fetchGensparkImageBytes) return state.fetchResult;
+      if (fn === fetchGensparkProjectResult) return state.projectResult;
       throw new Error('가짜 page: 모르는 evaluate 함수');
     }) as GensparkPageLike['evaluate'],
     mouse: {
