@@ -4,8 +4,10 @@
 import {
   GENSPARK_RATIO_LABELS,
   GENSPARK_SELECTORS,
+  focusGensparkComposer,
   locateGensparkPoint,
   readGensparkComposer,
+  readGensparkMenuState,
   readGensparkModelMenu,
   readGensparkSelectedModel,
   readGensparkSettingsMenu,
@@ -72,6 +74,9 @@ async function clickFirstOf(page: GensparkPageLike, reqs: GensparkPointRequest[]
 export async function gensparkCloseMenu(page: GensparkPageLike): Promise<void> {
   try {
     await page.keyboard.press('Escape');
+    // [2026-10-10 실측] 이 메뉴는 Escape 로 안 닫히고 남아 입력창·전송 버튼을 덮었다 — 남아 있으면 페이지 큰 제목을 눌러 닫는다.
+    const state = await page.evaluate(readGensparkMenuState);
+    if (state.openMenus > 0 && state.neutral) await page.mouse.click(state.neutral.x, state.neutral.y);
   } catch {
     // 메뉴 닫기는 최선 노력 — 실패해도 이어서 진행한다
   }
@@ -185,20 +190,24 @@ export async function gensparkFillComposer(
 ): Promise<void> {
   const expected = gensparkNormalizePrompt(prompt);
   if (!expected) throw new GensparkError(GENSPARK_SUBMIT_FAILED, '프롬프트가 비어 있음');
+  let lastSeen = '';
   for (let attempt = 0; attempt < 2; attempt++) {
     if (!(await clickPoint(page, { selector: GENSPARK_SELECTORS.composer }))) {
       throw new GensparkError(GENSPARK_COMPOSER_NOT_FOUND);
     }
-    await page.keyboard.press('Control+A');
+    // [2026-10-10 실측] 눌러도 포커스가 안 들어간 적이 있다(입력창 0자) — 직접 포커스를 주고 기존 글을 선택한 뒤 지운다.
+    if (!(await page.evaluate(focusGensparkComposer))) throw new GensparkError(GENSPARK_COMPOSER_NOT_FOUND, '입력창에 포커스를 줄 수 없음');
     await page.keyboard.press('Backspace');
     await page.keyboard.insertText(expected);
     await gensparkPause(deps);
     const state = await page.evaluate(readGensparkComposer);
     if (!state.found) throw new GensparkError(GENSPARK_COMPOSER_NOT_FOUND);
     if (gensparkNormalizePrompt(state.value) === expected) return;
-    deps.log(`[젠스파크] 입력값 불일치 — 지우고 다시 입력 (${attempt + 1}/2)`);
+    // [2026-10-10] 원인을 볼 수 있게 글자 수·입력창 개수만 남긴다(프롬프트 원문은 남기지 않음).
+    lastSeen = `넣은 글 ${expected.length}자, 입력창 ${gensparkNormalizePrompt(state.value).length}자, 입력창 ${state.count ?? '?'}개`;
+    deps.log(`[젠스파크] 입력값 불일치 — 지우고 다시 입력 (${attempt + 1}/2) · ${lastSeen}`);
   }
-  throw new GensparkError(GENSPARK_COMPOSER_NOT_FOUND, '입력한 글이 입력창 값과 다름');
+  throw new GensparkError(GENSPARK_COMPOSER_NOT_FOUND, `입력한 글이 입력창 값과 다름 (${lastSeen})`);
 }
 
 /** 전송 버튼을 마우스로 누른다. 주 셀렉터가 없으면 대체 셀렉터를 차례로. */

@@ -2,9 +2,11 @@
 //   evaluate 는 화면 읽기 함수의 "참조"를 보고 고정 상태에서 답한다(직렬화 없음). 좌표는 대상 번호로 쓰고, 클릭 때 동작을 실행한다.
 import {
   GENSPARK_SELECTORS,
+  focusGensparkComposer,
   locateGensparkPoint,
   readGensparkComposer,
   readGensparkJobImages,
+  readGensparkMenuState,
   readGensparkModelMenu,
   readGensparkPageSignals,
   readGensparkSelectedModel,
@@ -37,6 +39,12 @@ export interface FakeState {
   fetchResult: unknown;
   /** 마우스로 누를 수 없게 할 대상 종류(찾지 못함 흉내) */
   missingTargets: string[];
+  /** true 면 Escape 를 눌러도 메뉴가 안 닫힌다(2026-10-10 실측 흉내) */
+  escapeIgnored: boolean;
+  /** true 면 입력창에 포커스를 줄 수 없다 */
+  focusFails: boolean;
+  /** 작업 화면 이미지가 몇 번째 읽기부터 보일지(0=바로, 2026-10-10 실측: 열고 1~4초 뒤) */
+  jobImagesAfterReads: number;
 }
 
 export function newFakeState(): FakeState {
@@ -58,6 +66,9 @@ export function newFakeState(): FakeState {
     jobImages: [],
     fetchResult: null,
     missingTargets: [],
+    escapeIgnored: false,
+    focusFails: false,
+    jobImagesAfterReads: 0,
   };
 }
 
@@ -72,6 +83,7 @@ export function createFakePage(state: FakeState): FakePage {
   let polls = 0;
   let insertCount = 0;
   let selectAll = false;
+  let jobImageReads = 0;
 
   const point = (name: string, run: () => void) => {
     targets.push({ name, run });
@@ -110,8 +122,17 @@ export function createFakePage(state: FakeState): FakePage {
       if (fn === readGensparkModelMenu) return state.menuOpen ? state.menuItems : [];
       if (fn === readGensparkSettingsMenu) return state.settingsOpen ? { ratios: state.ratios, counts: state.counts } : { ratios: [], counts: [] };
       if (fn === readGensparkComposer) return { found: state.composerFound, value: state.composerValue };
+      if (fn === focusGensparkComposer) {
+        if (!state.composerFound || state.focusFails) return false;
+        selectAll = true;
+        return true;
+      }
+      if (fn === readGensparkMenuState) {
+        const openMenus = Number(state.menuOpen) + Number(state.settingsOpen);
+        return { openMenus, neutral: point('neutral', () => { state.menuOpen = false; state.settingsOpen = false; }) };
+      }
       if (fn === readGensparkPageSignals) return { url: state.url, ...state.signals };
-      if (fn === readGensparkJobImages) return state.jobImages;
+      if (fn === readGensparkJobImages) return ++jobImageReads > state.jobImagesAfterReads ? state.jobImages : [];
       if (fn === locateGensparkPoint) return locate(arg as never);
       if (fn === fetchGensparkImageBytes) return state.fetchResult;
       throw new Error('가짜 page: 모르는 evaluate 함수');
@@ -135,7 +156,7 @@ export function createFakePage(state: FakeState): FakePage {
         calls.keys.push(key);
         if (key === 'Control+A') selectAll = true;
         if (key === 'Backspace' && selectAll) { state.composerValue = ''; selectAll = false; }
-        if (key === 'Escape') { state.menuOpen = false; state.settingsOpen = false; }
+        if (key === 'Escape' && !state.escapeIgnored) { state.menuOpen = false; state.settingsOpen = false; }
       },
     },
     async bringToFront() { calls.bringToFront += 1; },

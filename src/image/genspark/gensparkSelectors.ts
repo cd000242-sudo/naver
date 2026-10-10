@@ -74,7 +74,7 @@ export interface GensparkMenuModelItem {
 }
 export interface GensparkSettingOption { label: string; selected: boolean }
 export interface GensparkSettingsMenu { ratios: GensparkSettingOption[]; counts: GensparkSettingOption[] }
-export interface GensparkComposerState { found: boolean; value: string }
+export interface GensparkComposerState { found: boolean; value: string; count?: number }
 export interface GensparkPageSignals {
   url: string;
   hasComposer: boolean;
@@ -171,9 +171,39 @@ export function readGensparkJobImages(): string[] {
 }
 
 /** 입력창 존재 여부와 현재 값. */
+/**
+ * [2026-10-10 실측] 입력창을 마우스로 눌러도 남아 있는 메뉴가 덮으면 포커스가 안 들어가 글이 사라졌다(입력창 0자).
+ * 직접 포커스를 주고 기존 글을 모두 선택한다 — 이어서 Backspace·insertText. page.evaluate 로 직렬화되므로 자기완결.
+ */
+export function focusGensparkComposer(): boolean {
+  const all = Array.from(document.querySelectorAll('textarea.search-input')) as HTMLTextAreaElement[];
+  const visible = all.filter((el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0; });
+  const el = visible[0] || all[0];
+  if (!el) return false;
+  el.focus();
+  el.setSelectionRange(0, el.value.length);
+  return document.activeElement === el;
+}
+
+/** 열린 채 남은 메뉴(follower)가 있는지와, 눌러서 메뉴를 닫을 빈 자리(페이지 큰 제목)의 좌표. 자기완결. */
+export function readGensparkMenuState(): { openMenus: number; neutral: { x: number; y: number } | null } {
+  const openMenus = Array.from(document.querySelectorAll('.v-binder-follower-content')).filter((el) => {
+    const r = el.getBoundingClientRect();
+    return r.width > 0 && r.height > 0 && (el.querySelector('.model-container, .ratio-option, .size-option') !== null);
+  }).length;
+  const title = document.querySelector('[class*="text-[32px]"]') as HTMLElement | null;
+  const r = title ? title.getBoundingClientRect() : null;
+  const neutral = r && r.width > 0 && r.height > 0 ? { x: Math.round(r.left + Math.min(r.width / 2, 40)), y: Math.round(r.top + r.height / 2) } : null;
+  return { openMenus, neutral };
+}
+
 export function readGensparkComposer(): GensparkComposerState {
-  const el = document.querySelector('textarea.search-input') as HTMLTextAreaElement | null;
-  return { found: !!el, value: el ? String(el.value || '') : '' };
+  // [2026-10-10 실측] 같은 이름의 입력창이 여러 개일 수 있다 — 방금 누른(포커스된) 창, 없으면 보이는 창을 읽는다.
+  const all = Array.from(document.querySelectorAll('textarea.search-input')) as HTMLTextAreaElement[];
+  const active = document.activeElement as HTMLTextAreaElement | null;
+  const visible = all.filter((el) => { const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0; });
+  const el = (active && all.indexOf(active) >= 0) ? active : (visible[0] || all[0] || null);
+  return { found: !!el, value: el ? String(el.value || '') : '', count: all.length };
 }
 
 /**
@@ -192,9 +222,14 @@ export function readGensparkPageSignals(): GensparkPageSignals {
   const hit = (text: string, words: string[]): boolean => words.some((w) => lower(text).includes(lower(w)));
 
   let challenge = hit(document.title || '', challengeWords);
-  if (document.querySelector('iframe[src*="challenges.cloudflare.com"], iframe[src*="recaptcha"], iframe[src*="hcaptcha"]')) {
-    challenge = true;
-  }
+  // [2026-10-10 실측] 작업 화면엔 보이지 않는 reCAPTCHA 틀(size=invisible, 0×0, hidden)이 늘 있다 — 보이는 확인 틀만 센다.
+  const frames = Array.from(document.querySelectorAll<HTMLIFrameElement>('iframe[src*="challenges.cloudflare.com"], iframe[src*="recaptcha"], iframe[src*="hcaptcha"]'));
+  if (frames.some((f) => {
+    const st = getComputedStyle(f);
+    const b = f.getBoundingClientRect();
+    return !/[?&]size=invisible(&|$)/.test(f.src || '') && st.visibility !== 'hidden' && st.display !== 'none'
+      && b.width >= 30 && b.height >= 30 && b.bottom > 0 && b.right > 0 && b.top < window.innerHeight && b.left < window.innerWidth;
+  })) challenge = true;
   let rateLimited = false;
   let failed = false;
   let loginButton = false;
@@ -220,13 +255,16 @@ export function readGensparkPageSignals(): GensparkPageSignals {
  *   긴 목록의 아래 항목은 scrollIntoView(center) 한 뒤 좌표를 잰다. 그래도 보이지 않거나 크기 0 이면 null.
  */
 export function locateGensparkPoint(req: GensparkPointRequest): { x: number; y: number } | null {
-  const scope = req.scope ? document.querySelector(req.scope) : document;
-  if (!scope) return null;
+  // [2026-10-10 실측] 한 번 연 메뉴의 follower 상자가 페이지에 남는다 — querySelector(첫 상자)로 범위를 잡으면
+  //   설정 메뉴를 열어도 옛 모델 메뉴 안에서 찾다가 실패했다. 범위에 맞는 상자를 전부 뒤진다.
+  const scopes: ParentNode[] = req.scope ? Array.from(document.querySelectorAll(req.scope)) : [document];
+  if (!scopes.length) return null;
   const boxOf = (el: Element): { x: number; y: number } | null => {
     const r = (el as HTMLElement).getBoundingClientRect();
     return r.width > 0 && r.height > 0 ? { x: Math.round(r.left + r.width / 2), y: Math.round(r.top + r.height / 2) } : null;
   };
-  for (const el of Array.from(scope.querySelectorAll(req.selector))) {
+  const candidates = scopes.flatMap((scope) => Array.from(scope.querySelectorAll(req.selector)));
+  for (const el of candidates) {
     if (req.label !== undefined) {
       const lines: string[] = [];
       const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);

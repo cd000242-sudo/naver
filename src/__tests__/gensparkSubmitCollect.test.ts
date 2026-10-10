@@ -85,6 +85,34 @@ describe('submitGensparkPrompt', () => {
     expect(state.sendClicked).toBe(false);
   });
 
+  it('입력창에 포커스를 줄 수 없으면 GENSPARK_COMPOSER_NOT_FOUND 이고 글을 넣지 않는다', async () => {
+    const { state, page, deps } = setup({ focusFails: true });
+    expect(await codeOf(submitGensparkPrompt(page, req, model('gpt-image-2.5'), deps))).toBe('GENSPARK_COMPOSER_NOT_FOUND');
+    expect(page.calls.inserts).toEqual([]);
+    expect(state.sendClicked).toBe(false);
+  });
+
+  it('기존 글이 있으면 포커스로 전체 선택한 뒤 지우고 새 글만 남긴다', async () => {
+    const { state, page, deps } = setup({ composerValue: '지난번 글' });
+    await submitGensparkPrompt(page, req, model('gpt-image-2.5'), deps);
+    expect(state.composerValue).toBe('첫 줄 둘째 줄 셋째 줄');
+  });
+
+  it('Escape 로 안 닫히는 설정 메뉴는 빈 곳을 눌러 닫은 뒤 입력한다 (2026-10-10 실측)', async () => {
+    const { state, page, deps } = setup({ escapeIgnored: true, ratios: [{ label: '1:1', selected: false }, { label: '16:9', selected: true }] });
+    await submitGensparkPrompt(page, req, model('gpt-image-2.5'), deps);
+    const clicks = page.calls.clicks;
+    expect(clicks).toContain('neutral');
+    expect(clicks.indexOf('neutral')).toBeLessThan(clicks.indexOf('composer'));
+    expect(state.settingsOpen).toBe(false);
+  });
+
+  it('메뉴가 Escape 로 닫히면 빈 곳은 누르지 않는다', async () => {
+    const { page, deps } = setup({ ratios: [{ label: '1:1', selected: false }, { label: '16:9', selected: true }] });
+    await submitGensparkPrompt(page, req, model('gpt-image-2.5'), deps);
+    expect(page.calls.clicks).not.toContain('neutral');
+  });
+
   it('종횡비를 바꾸고 생성 횟수가 1 이 아니면 1 을 누른다', async () => {
     const { state, page, deps } = setup({
       counts: [{ label: '1', selected: false }, { label: '2', selected: true }, { label: '4', selected: false }],
@@ -142,6 +170,20 @@ describe('checkGensparkJob', () => {
     const r = await checkGensparkJob(page, job, new Set([A]), { sleep });
     expect(r.status).toBe('failed');
     expect(r.reason).toContain('GENSPARK_DUPLICATE_IMAGE');
+  });
+
+  it('작업 화면이 늦게 그려져도 기다렸다가 done (2026-10-10 실측: 열고 약 4초 뒤)', async () => {
+    const { page } = setup({ jobImages: [A], jobImagesAfterReads: 8 });
+    expect(await checkGensparkJob(page, job, new Set(), { sleep })).toEqual({ status: 'done', imageUrl: A });
+    expect(page.calls.gotos).toEqual([job.jobUrl]);
+  });
+
+  it('기다리는 시간은 settleMs 를 넘지 않는다', async () => {
+    const waits: number[] = [];
+    const { page } = setup({ jobImages: [A], jobImagesAfterReads: 100 });
+    const r = await checkGensparkJob(page, job, new Set(), { sleep: async (ms) => { waits.push(ms); }, settleMs: 2_000 });
+    expect(r.status).toBe('pending');
+    expect(waits.reduce((a, b) => a + b, 0)).toBeLessThanOrEqual(2_000);
   });
 
   it('이미지도 신호도 없으면 pending, 실패 문구면 failed', async () => {

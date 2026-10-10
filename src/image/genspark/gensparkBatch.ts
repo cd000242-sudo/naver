@@ -118,11 +118,13 @@ export async function runGensparkBatch(
     const used = attempts.get(position) ?? 0;
     if (used <= maxRetry - 1 && maxRetry > 0) {
       attempts.set(position, used + 1);
-      deps.log(`[젠스파크] ${req.index + 1}번 실패 → 같은 모델로 다시 보냅니다. (${used + 1}/${maxRetry})`);
+      deps.log(`[젠스파크] ${req.index + 1}번 실패 → 같은 모델로 다시 보냅니다. (${used + 1}/${maxRetry}) · ${toFailure(req.index, error).message}`);
       queue.unshift(position);
       return;
     }
-    failures.push(toFailure(req.index, error));
+    const failure = toFailure(req.index, error);
+    deps.log(`[젠스파크] ${req.index + 1}번 최종 실패 · ${failure.message}`);
+    failures.push(failure);
   };
 
   const stopIfRequested = (): boolean => {

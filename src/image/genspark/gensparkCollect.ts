@@ -19,7 +19,7 @@ const MIN_IMAGE_BYTES = 1024;
 
 export interface GensparkCollectDeps {
   sleep(ms: number): Promise<void>;
-  /** 작업 화면이 그려지길 기다리는 시간(기본 1초) */
+  /** 작업 화면이 그려지길 기다리는 최대 시간(기본 8초, 0.5초 간격으로 다시 읽음) */
   settleMs?: number;
 }
 
@@ -60,9 +60,11 @@ export async function checkGensparkJob(
     throw new GensparkError(GENSPARK_SUBMIT_FAILED, `작업 화면 이동 실패: ${(error as Error)?.message || error}`);
   }
 
+  // [2026-10-10 실측] 작업 화면은 열고 1~4초 뒤에야 결과가 그려진다 — 1초 한 번만 보면 늘 '진행 중'으로 오판했다.
+  const settleMs = deps?.settleMs ?? 8_000;
   let images = await page.evaluate(readGensparkJobImages);
-  if (images.length === 0) {
-    await sleep(deps?.settleMs ?? 1_000);
+  for (let waited = 0; images.length === 0 && waited + 500 <= settleMs; waited += 500) {
+    await sleep(500);
     images = await page.evaluate(readGensparkJobImages);
   }
   if (images.length > 0) {
