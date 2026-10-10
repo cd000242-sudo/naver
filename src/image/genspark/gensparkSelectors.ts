@@ -18,6 +18,10 @@ export const GENSPARK_SELECTORS = Object.freeze({
   settingsButton: '.model-button.aspect-ratio-selector',
   menuRoot: '.v-binder-follower-content',
   modelItem: '.model-container',
+  /** [2026-10-10] 모델 항목의 실제 눌릴 몸체(.model-container 는 display:contents 라 크기 0) */
+  modelBody: '.model',
+  /** [2026-10-10] 실측: 종횡비 항목(선택은 class selected) */
+  ratioOption: '.ratio-option',
   sizeOption: '.size-option',
 });
 
@@ -116,21 +120,34 @@ export function readGensparkSelectedModel(): string | null {
   return text || null;
 }
 
-/** 열린 설정 메뉴의 종횡비 항목과 생성 횟수(.size-option). selected 는 해당 요소 또는 바로 위 부모의 class. */
+/**
+ * 열린 설정 메뉴의 종횡비(.ratio-option 1순위, 글자 기반 보조)와 생성 횟수(.size-option).
+ * [2026-10-10] 실측: 선택은 해당 요소의 class selected(보조로 바로 위 부모도 본다).
+ */
 export function readGensparkSettingsMenu(): GensparkSettingsMenu {
   const ratios: GensparkSettingOption[] = [];
   const counts: GensparkSettingOption[] = [];
   const hasSelected = (el: Element): boolean =>
     el.classList.contains('selected') || (!!el.parentElement && el.parentElement.classList.contains('selected'));
   const ratioPattern = /^(자동 크기|\d{1,2}:\d{1,2})$/;
+  const textOf = (el: Element): string => (el.textContent || '').replace(/\s+/g, ' ').trim();
   for (const root of Array.from(document.querySelectorAll('.v-binder-follower-content'))) {
     for (const el of Array.from(root.querySelectorAll('.size-option'))) {
-      const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+      const text = textOf(el);
       if (/^\d+$/.test(text)) counts.push({ label: text, selected: el.classList.contains('selected') });
+    }
+    const primary: GensparkSettingOption[] = [];
+    for (const el of Array.from(root.querySelectorAll('.ratio-option'))) {
+      const text = textOf(el);
+      if (ratioPattern.test(text)) primary.push({ label: text, selected: hasSelected(el) });
+    }
+    if (primary.length > 0) {
+      ratios.push(...primary);
+      continue;
     }
     for (const el of Array.from(root.querySelectorAll('*'))) {
       if (el.children.length > 0 && !el.classList.contains('size-option')) continue;
-      const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+      const text = textOf(el);
       if (ratioPattern.test(text)) ratios.push({ label: text, selected: hasSelected(el) });
     }
   }
@@ -199,11 +216,16 @@ export function readGensparkPageSignals(): GensparkPageSignals {
 /**
  * 마우스 클릭용 중심 좌표. 젠스파크 모델·설정 버튼은 DOM click() 이 무반응이라 CDP 마우스로 눌러야 한다.
  * label 이 있으면 그 요소의 첫 줄('New' 줄 제외)이 정확히 일치하는 것만, scope 가 있으면 그 안에서만 찾는다.
- * 보이지 않거나 크기 0 이면 null.
+ * [2026-10-10] 실측: .model-container 는 display:contents(크기 0)라 눌릴 수 없다 → 크기가 0이면 안쪽 .model 몸체를 대신 쓰고,
+ *   긴 목록의 아래 항목은 scrollIntoView(center) 한 뒤 좌표를 잰다. 그래도 보이지 않거나 크기 0 이면 null.
  */
 export function locateGensparkPoint(req: GensparkPointRequest): { x: number; y: number } | null {
   const scope = req.scope ? document.querySelector(req.scope) : document;
   if (!scope) return null;
+  const boxOf = (el: Element): { x: number; y: number } | null => {
+    const r = (el as HTMLElement).getBoundingClientRect();
+    return r.width > 0 && r.height > 0 ? { x: Math.round(r.left + r.width / 2), y: Math.round(r.top + r.height / 2) } : null;
+  };
   for (const el of Array.from(scope.querySelectorAll(req.selector))) {
     if (req.label !== undefined) {
       const lines: string[] = [];
@@ -215,8 +237,18 @@ export function locateGensparkPoint(req: GensparkPointRequest): { x: number; y: 
       const first = lines[0] === 'New' ? lines[1] : lines[0];
       if (first !== req.label) continue;
     }
-    const r = (el as HTMLElement).getBoundingClientRect();
-    if (r.width > 0 && r.height > 0) return { x: Math.round(r.left + r.width / 2), y: Math.round(r.top + r.height / 2) };
+    // 크기가 0인 껍데기(display: contents)면 안쪽 .model 몸체를 누를 대상으로 삼는다
+    let target: Element = el;
+    const own = (el as HTMLElement).getBoundingClientRect();
+    if (!(own.width > 0 && own.height > 0)) {
+      const body = el.querySelector(':scope > .model') || el.querySelector('.model');
+      if (body) target = body;
+    }
+    if (typeof (target as HTMLElement).scrollIntoView === 'function') {
+      (target as HTMLElement).scrollIntoView({ block: 'center' });
+    }
+    const point = boxOf(target);
+    if (point) return point;
   }
   return null;
 }

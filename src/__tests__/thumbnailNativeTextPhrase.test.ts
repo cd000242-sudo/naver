@@ -76,7 +76,7 @@ describe('wiring', () => {
   it('imageGenerator names the phrase only for engines that draw Korean themselves, in the brief and on the item', () => {
     const src = readFileSync(join(__dirname, '..', 'imageGenerator.ts'), 'utf-8');
     // Other engines get a text-free image — the app overlays the short phrase on them once.
-    expect(src).toMatch(/const thumbnailText = item\.isThumbnail === true && allowText && isKoreanTextSupportedEngine\(normalizedProvider\)\s*\?\s*\(item\.thumbnailText \|\| resolveThumbnailOverlayText\(/);
+    expect(src).toMatch(/const thumbnailText = item\.isThumbnail === true && allowText && isKoreanTextSupportedEngine\(normalizedProvider, engineModelHint\)\s*\?\s*\(item\.thumbnailText \|\| resolveThumbnailOverlayText\(/);
     expect(src).toMatch(/\.\.\.\(thumbnailText \? \{ thumbnailText \} : \{\}\),/);
   });
 

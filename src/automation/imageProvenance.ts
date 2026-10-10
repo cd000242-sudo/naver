@@ -26,6 +26,7 @@ const AI_PROVIDER_PATTERNS = [
   'deepinfra',
   'leonardoai',
   'dropshot',
+  'genspark', // [2026-10-10] 젠스파크 AI 생성 이미지
   'img2img',
   'ai-generated',
 ] as const;

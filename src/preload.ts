@@ -1306,6 +1306,11 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('dropshot:check-login'),
   dropshotLogin: (): Promise<{ loggedIn: boolean; message: string; phase: string; ready: boolean; code?: string }> =>
     ipcRenderer.invoke('dropshot:login'),
+  // [2026-10-10] 젠스파크 — 로그인 확인/로그인 창 (dropshot 과 같은 응답 모양)
+  checkGensparkLogin: (): Promise<{ loggedIn: boolean; message: string; phase: string; ready: boolean; code?: string }> =>
+    ipcRenderer.invoke('genspark:check-login'),
+  openGensparkLogin: (): Promise<{ loggedIn: boolean; message: string; phase: string; ready: boolean; code?: string }> =>
+    ipcRenderer.invoke('genspark:open-login'),
   // ✅ [v1.4.80] Flow 연결 테스트 (Nano Banana Pro)
   testFlowConnection: (): Promise<{ ok: boolean; message: string; userInfo?: { email?: string; name?: string } }> =>
     ipcRenderer.invoke('flow:testConnection'),

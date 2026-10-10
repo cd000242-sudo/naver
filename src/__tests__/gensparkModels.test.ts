@@ -39,9 +39,9 @@ describe('gensparkModels', () => {
     expect(gensparkDefaultModel().creditFree).toBe(true);
   });
 
-  it('한글을 직접 그리는 모델은 4개뿐', () => {
+  it('한글을 직접 그리는 모델은 5개뿐(10/10 실측: Flash Lite 포함)', () => {
     const korean = gensparkListModels().filter((m) => m.drawsKorean).map((m) => m.menuLabel).sort();
-    expect(korean).toEqual(['GPT Image 2', 'GPT Image 2.5', 'Nano Banana 2.1', 'Nano Banana Pro']);
+    expect(korean).toEqual(['GPT Image 2', 'GPT Image 2.5', 'Nano Banana 2 Flash Lite', 'Nano Banana 2.1', 'Nano Banana Pro']);
   });
 
   it('New 배지 모델 3개', () => {

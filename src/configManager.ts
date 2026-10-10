@@ -245,6 +245,8 @@ export interface AppConfig {
   //    gpt-image-2.5-flare/sunburst = 2026-09 신모델 — xhigh/max 는 2.5 계열에서만 유효)
   openaiImageModel?: 'gpt-image-2.5-flare' | 'gpt-image-2.5-sunburst';
   openaiImageQuality?: 'low' | 'medium' | 'high' | 'xhigh' | 'max' | 'auto';
+  // [2026-10-10] 젠스파크 이미지 모델 id(gensparkModels 의 id). 모르는 값도 그대로 두고 생성기가 GENSPARK_MODEL_NOT_FOUND 로 멈춘다.
+  gensparkImageModel?: string;
   // ✅ USD→KRW 환율 (이미지 비용 원화 표시용, 기본 1400)
   usdToKrwRate?: number;
   // 이미지 설정 프리셋
@@ -520,6 +522,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
           'customImageSavePath',
           'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
+          'gensparkImageModel',
         ];
         let mergedCount = 0;
         /*
@@ -666,6 +669,10 @@ export async function loadConfig(): Promise<AppConfig> {
       //    so a missing/corrupt config can never silently select the expensive option.
       // [2026-10-10] 목록 밖·옛 값(gpt-image-1/1.5/2)은 기본값 Sunburst 로 — 계정별 settings 파일도 이 경로를 탄다.
       openaiImageModel: normalizeOpenaiImageModel(parsed.openaiImageModel),
+      // [2026-10-10] 젠스파크 모델: 문자열이면 그대로(모르는 값을 조용히 바꾸지 않는다), 아니면 미지정 → 기본 모델
+      gensparkImageModel: typeof parsed.gensparkImageModel === 'string' && parsed.gensparkImageModel.trim()
+        ? parsed.gensparkImageModel.trim()
+        : undefined,
       openaiImageQuality: ['low', 'medium', 'high', 'xhigh', 'max', 'auto'].includes(parsed.openaiImageQuality)
         ? parsed.openaiImageQuality
         : 'medium',
@@ -1022,6 +1029,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         'perplexityModel', 'geminiModel', 'leonardoaiModel',
         // ✅ OpenAI 이미지 모델·품질·환율 — 부분 saveConfig로 인한 silent 손실 차단
         'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
+        'gensparkImageModel', // [2026-10-10] 부분 저장 시 젠스파크 모델 선택 보존
         'userDisplayName', 'userEmail',
         // ✅ [v2.10.58] 비용 절감 토글 4종 보존
         'costSaverMode', 'useCompressedPrompt', 'useCrawlSummary', 'subWorkProvider',

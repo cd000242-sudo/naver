@@ -32,7 +32,7 @@ const GENSPARK_MODELS: readonly GensparkModelEntry[] = Object.freeze([
   // 무료(무제한) 8개
   gensparkMakeModel('gpt-image-2.5', 'GPT Image 2.5', true, true),
   gensparkMakeModel('gpt-image-2', 'GPT Image 2', true, true),
-  gensparkMakeModel('nano-banana-2-flash-lite', 'Nano Banana 2 Flash Lite', true),
+  gensparkMakeModel('nano-banana-2-flash-lite', 'Nano Banana 2 Flash Lite', true, true),
   gensparkMakeModel('seedream-v5-lite', 'Bytedance Seedream v5 Lite', true),
   gensparkMakeModel('z-image-turbo', 'Z-Image Turbo', true),
   gensparkMakeModel('krea-2-turbo', 'Krea 2 Turbo', true),

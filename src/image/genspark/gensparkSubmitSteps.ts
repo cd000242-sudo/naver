@@ -157,9 +157,10 @@ export async function gensparkEnsureSettings(
       await gensparkCloseMenu(page);
       return;
     }
-    // 종횡비 항목은 .size-option 이거나 글자만 가진 말단 요소 — 둘 다 시도한다
+    // [2026-10-10] 종횡비 항목은 .ratio-option 이 1순위, 보조로 .size-option·글자만 가진 말단 요소
     const ok = !ratioOption.selected
       ? await clickFirstOf(page, [
+          { selector: GENSPARK_SELECTORS.ratioOption, label: ratio, scope },
           { selector: GENSPARK_SELECTORS.sizeOption, label: ratio, scope },
           { selector: ':not(:has(*))', label: ratio, scope },
         ])

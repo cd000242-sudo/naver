@@ -138,6 +138,19 @@ export const DROPSHOT: ImageEngineSpec = {
   freeTierNote: 'Pro 구독자 무제한 · 이미지당 추가비용 0원 (Dropshot Pro 구독료 월 74,000~99,000원은 사이트에서 별도 결제)',
 };
 
+/** 젠스파크 — genspark.ai 이미지 UI 자동화 ([2026-10-10] 기본 GPT Image 2.5 무제한, 설정에서 모델 선택) */
+export const GENSPARK: ImageEngineSpec = {
+  value: 'genspark',
+  label: '젠스파크',
+  tagline: 'UI 자동화 · 한글 텍스트 가능 · 로그인 필요 · 여러 모델 선택',
+  model: 'genspark/gpt-image-2.5',
+  forceModelKey: null,
+  costKrw: 0,
+  koreanText: true,
+  icon: '✨',
+  freeTierNote: '젠스파크 무제한(No credit cost) 모델은 이미지당 추가비용 0원이며 크레딧 차감 모델은 설정에서 따로 고른 경우에만 쓰입니다. 로그인 세션이 필요합니다.',
+};
+
 /** AI 생성엔진 카탈로그 — 그리드/드롭다운 노출 순서 */
 // [2026-10-10] 사용자에게 보이는 목록에서 나노바나나 프로·2.5는 뺐다 (스펙 상수와 NANO_PROVIDER_TO_MODEL_KEY는 옛 값 호환용으로 유지).
 export const IMAGE_ENGINE_CATALOG: ImageEngineSpec[] = [
@@ -146,6 +159,7 @@ export const IMAGE_ENGINE_CATALOG: ImageEngineSpec[] = [
   FLOW,
   PRODIA,
   DROPSHOT,
+  GENSPARK,
 ];
 
 /** provider 값 → 엔진 스펙 조회 */

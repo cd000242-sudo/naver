@@ -173,7 +173,7 @@ export async function generateImagesWithThumbnailDirector(
   const realPriority = isRealAssetPriorityTopic(title, options.category);
   const route = qualityMode === 'high' ? resolveIssueVisionRoute(context.config) : null;
   const log = (message: string) => console.log(message);
-  const engineDrawsText = drawsKoreanTextItself(provider);
+  const engineDrawsText = drawsKoreanTextItself(provider, (context.config as { gensparkImageModel?: unknown } | undefined)?.gensparkImageModel);
   // [2026-10-08 사장님] When the engine will draw the title poster, only photos the user put in outrank it —
   //   auto-collected photos give way. Not on real-photo-first topics (people, events, products, places):
   //   an AI poster may not show a real person, so the collected photo stays first there.

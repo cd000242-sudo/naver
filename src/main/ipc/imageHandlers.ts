@@ -17,6 +17,12 @@ import { sanitizeDropshotErrorMessage } from '../../image/dropshotBrowser.js';
 import { trackChild, untrackChild } from '../../runtime/childProcessRegistry.js';
 import { resolveStylePreviewEngine } from '../../image/stylePreviewEnginePolicy.js';
 
+// [2026-10-10] 젠스파크 로그인 결과를 dropshot 과 같은 응답 모양({loggedIn,message,phase,ready,code})으로 맞춘다.
+function toGensparkLoginReply(status: { state: string; message: string; code?: string }) {
+    const loggedIn = status.state === 'logged-in';
+    return { loggedIn, message: status.message, phase: status.state, ready: loggedIn, code: status.code };
+}
+
 // ffmpeg-static 경로 (GIF 변환용)
 let ffmpegPath: string | null = null;
 try {
@@ -107,6 +113,26 @@ export function registerImageHandlers(ctx: IpcContext): void {
             return await dropshotLogin();
         } catch (error: any) {
             return { loggedIn: false, message: `로그인 실패: ${sanitizeDropshotErrorMessage(error)}` };
+        }
+    });
+
+    // [2026-10-10] 젠스파크 — 로그인 세션 확인 (화면 밖 창, 생성·로그인 중이면 BUSY)
+    safeHandle('genspark:check-login', async () => {
+        try {
+            const { checkGensparkLogin } = await import('../../image/genspark/gensparkLogin.js');
+            return toGensparkLoginReply(await checkGensparkLogin());
+        } catch (error: any) {
+            return { loggedIn: false, message: `세션 확인 실패: ${error?.message || error}`, phase: 'unknown', ready: false };
+        }
+    });
+
+    // [2026-10-10] 젠스파크 — 로그인 창 표시(사람이 직접 로그인, 최대 10분)
+    safeHandle('genspark:open-login', async () => {
+        try {
+            const { openGensparkLoginWindow } = await import('../../image/genspark/gensparkLogin.js');
+            return toGensparkLoginReply(await openGensparkLoginWindow());
+        } catch (error: any) {
+            return { loggedIn: false, message: `로그인 실패: ${error?.message || error}`, phase: 'unknown', ready: false };
         }
     });
 

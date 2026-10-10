@@ -20,6 +20,12 @@ import {
   abortDropshotGenerations,
   closeAllDropshotContexts,
 } from './image/dropshotSession.js';
+// [2026-10-10] 젠스파크 (UI 자동화, 사용자 명시 선택 시만)
+import { generateWithGenspark } from './image/genspark/gensparkGenerator.js';
+import {
+  abortGensparkGenerations,
+  closeAllGensparkContexts,
+} from './image/genspark/gensparkSession.js';
 
 import { downloadAndSaveImage } from './image/imageUtils.js';
 import { getImageErrorMessage } from './image/imageErrorMessages.js';
@@ -71,6 +77,8 @@ export async function abortImageGeneration(): Promise<void> {
   // Invalidate running and queued Dropshot requests before closing their page.
   // Otherwise a Target-closed retry can reopen the browser after the user stops.
   abortDropshotGenerations();
+  // [2026-10-10] 젠스파크도 같은 이유로 먼저 epoch 를 무효화한다(닫힌 창으로 재시도가 되살아나지 않게).
+  abortGensparkGenerations();
   const cleanupTasks = [
     {
       label: 'Nano Banana',
@@ -94,6 +102,13 @@ export async function abortImageGeneration(): Promise<void> {
       label: 'Dropshot',
       run: async (): Promise<void> => {
         await closeAllDropshotContexts();
+      },
+    },
+    {
+      label: 'Genspark',
+      run: async (): Promise<void> => {
+        // 로그인 중인 사람이 보는 창은 중지 때 닫지 않는다
+        await closeAllGensparkContexts({ keepLoginWindows: true });
       },
     },
   ];
@@ -252,6 +267,17 @@ async function readHeadingImageTextSetting(): Promise<boolean> {
   }
 }
 
+/** [2026-10-10] config.gensparkImageModel 을 그대로 읽는다(모르는 값도 보정하지 않음). 읽지 못하면 undefined → 기본 모델. */
+async function readGensparkModelSetting(): Promise<string | undefined> {
+  try {
+    const { loadConfig } = await import('./configManager.js');
+    const value = (await loadConfig())?.gensparkImageModel;
+    return typeof value === 'string' && value.trim() ? value.trim() : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 function shouldApplyThumbnailTextOverlay(
   img: GeneratedImage,
   index: number,
@@ -269,8 +295,8 @@ function shouldApplyThumbnailTextOverlay(
  * (image/director/koreanTextEngines: nano-banana-2/pro, flow, openai-image, dropshot).
  * ✅ [v2.10.335] The old 'nano-banana'(2.5) breaks Korean → text-free image + app overlay.
  */
-function isKoreanTextSupportedEngine(engine: string): boolean {
-  return drawsKoreanTextItself(engine);
+function isKoreanTextSupportedEngine(engine: string, model?: string): boolean {
+  return drawsKoreanTextItself(engine, model);
 }
 
 /**
@@ -289,8 +315,9 @@ export function markEngineDrawnThumbnailText(
   images: GeneratedImage[],
   provider: string,
   items?: ReadonlyArray<{ heading?: string; isThumbnail?: boolean; allowText?: boolean }>,
+  engineModel?: string,
 ): GeneratedImage[] {
-  if (!isKoreanTextSupportedEngine(provider) || !Array.isArray(items)) return images;
+  if (!isKoreanTextSupportedEngine(provider, engineModel) || !Array.isArray(items)) return images;
   return images.map((img) => {
     const item = items.find((candidate) => candidate?.heading === img?.heading);
     return item?.isThumbnail === true && item?.allowText === true ? withTextInImage(img) : img;
@@ -302,12 +329,13 @@ export async function applyKoreanTextOverlayIfNeeded(
   provider: string,
   postTitle?: string,
   thumbnailTextInclude?: boolean,
-  items?: { heading: string }[]  // 미사용 (호환성 유지)
+  items?: { heading: string }[],  // 미사용 (호환성 유지)
+  engineModel?: string // [2026-10-10] 젠스파크처럼 모델마다 한글 표현력이 다른 엔진용(선택)
 ): Promise<GeneratedImage[]> {
   // 나노바나나프로는 한글 텍스트 지원 → 오버레이 불필요
-  if (isKoreanTextSupportedEngine(provider)) {
+  if (isKoreanTextSupportedEngine(provider, engineModel)) {
     console.log(`[ImageGenerator] 📝 ${provider}는 한글 텍스트 네이티브 지원 → 오버레이 스킵`);
-    return markEngineDrawnThumbnailText(images, provider, items);
+    return markEngineDrawnThumbnailText(images, provider, items, engineModel);
   }
 
   // thumbnailTextInclude가 false면 오버레이 불필요
@@ -427,6 +455,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     'imagefx': 'ImageFX (Google Labs, 계정/IP 제한 가능)',
     'flow': 'Flow (Nano Banana 2, AI Pro 무료)', // ✅ [v1.5.4]
     'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)', // ✅ [v2.11.7]
+    'genspark': '젠스파크', // [2026-10-10]
     'naver': '네이버 이미지 검색',
     'local-folder': '내 폴더',
   };
@@ -464,7 +493,8 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       console.warn('[이미지생성] OpenAI 이미지 모델 config 조회 실패:', e);
     }
   }
-  const modelSuffix = options.imageModel ? ` · 모델 ${options.imageModel}` : '';
+  // [2026-10-10] 젠스파크는 렌더러가 실어 보내는 OpenAI 모델(options.imageModel)을 쓰지 않는다 — 표시도 생략
+  const modelSuffix = options.imageModel && normalizedProvider !== 'genspark' ? ` · 모델 ${options.imageModel}` : '';
   console.log(`[이미지생성] 🎨 선택된 AI 이미지 생성 엔진: ${displayName}${modelSuffix}`);
 
   assertProviderFn(normalizedProvider as ImageProvider);
@@ -565,14 +595,16 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   // [2026-10-08 사장님] "소제목 이미지에 소제목 글자 넣기" — read here so every article flow (single, continuous,
   //   multi-account, heading regeneration) gets the same answer without each renderer path carrying it.
   //   Only article section images (never the studio or tools) and never shopping product-reference images.
+  // [2026-10-10] 젠스파크의 한글 표현력은 고른 모델에 따라 다르다 — 설정 모델을 한 번 읽어 판정에 쓴다.
+  const engineModelHint = normalizedProvider === 'genspark' ? await readGensparkModelSetting() : undefined;
   const headingTextEligible = options.articleSectionImages === true
     && options.isShoppingConnect !== true
-    && isKoreanTextSupportedEngine(normalizedProvider)
+    && isKoreanTextSupportedEngine(normalizedProvider, engineModelHint)
     && generationSourceItems.some((item) => item.isThumbnail !== true);
   const headingImageTextOn = headingTextEligible && await readHeadingImageTextSetting();
   const mappedItems = generationSourceItems
     .map((item, idx) => {
-      const headingText = resolveHeadingImageText(item, normalizedProvider, headingImageTextOn);
+      const headingText = resolveHeadingImageText(item, normalizedProvider, headingImageTextOn, engineModelHint);
       const allowText = shouldAllowTextForImageItem(item, options) || headingText !== null;
       const basePrompt = String(item.englishPrompt || item.prompt || '').trim();
       const legacyPrompt = options.isShoppingConnect
@@ -592,7 +624,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       // [SPEC-NAVER-IMAGE-2026 V1 §9] An engine that draws Korean itself gets the short phrase, never the
       //   whole title — in the brief and on the item (GPT Image renders it from the item). Other engines get
       //   a text-free image and the app overlays the phrase once.
-      const thumbnailText = item.isThumbnail === true && allowText && isKoreanTextSupportedEngine(normalizedProvider)
+      const thumbnailText = item.isThumbnail === true && allowText && isKoreanTextSupportedEngine(normalizedProvider, engineModelHint)
         ? (item.thumbnailText || resolveThumbnailOverlayText(String(options.postTitle || articleTitle || '')))
         : undefined;
       const visualRole = sectionRoles[idx];
@@ -921,6 +953,34 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       const rawMsg = (dropshotError as Error).message || '';
       console.warn(`[ImageGenerator] ⚠️ 리더스 나노바나나 무제한 실패:`, rawMsg);
       throw new Error(`[리더스 나노바나나 무제한] 이미지 생성 실패: ${rawMsg}\n\n💡 가능한 원인:\n1. Dropshot Pro 구독 미완료 또는 만료\n2. 로그인 세션 만료 (재로그인 필요)\n3. Dropshot UI 구조 변경\n4. 브라우저 실행 실패 (Chrome/Edge 설치 필요)\n5. Dropshot 모델 서버 일시 장애`);
+    }
+  }
+
+  // [2026-10-10] 젠스파크 (genspark) — 사용자 명시 선택 시만. auto/폴백 체인 제외, 실패하면 다른 엔진으로 넘기지 않고 멈춘다.
+  //   렌더러가 실어 보내는 options.imageModel(OpenAI 모델)은 무시하고 config.gensparkImageModel 만 쓴다(생성기가 직접 읽음).
+  if (normalizedProvider === 'genspark') {
+    try {
+      console.log(`[이미지생성] ✨ 젠스파크로 ${items.length}개 이미지 생성 시작...`);
+      const gensparkImages = await generateWithGenspark(
+        items,
+        options.postTitle,
+        options.postId,
+        options.stopCheck,
+        onImageGenerated,
+      );
+      if (gensparkImages.length === 0) {
+        throw new Error('젠스파크 0건 반환 — 로그인/세션 확인 필요');
+      }
+      console.log(`[이미지생성] ✅ 젠스파크로 ${gensparkImages.length}개 이미지 생성 완료!`);
+      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(gensparkImages, {
+        requestedProvider,
+        actualProvider: 'genspark',
+        policy: fallbackPolicy,
+      }), 'genspark', options.postTitle, options.thumbnailTextInclude, items, engineModelHint));
+    } catch (gensparkError) {
+      const rawMsg = (gensparkError as Error).message || '';
+      console.warn(`[ImageGenerator] ⚠️ 젠스파크 실패:`, rawMsg);
+      throw new Error(`[젠스파크] 이미지 생성 실패: ${rawMsg}`);
     }
   }
 

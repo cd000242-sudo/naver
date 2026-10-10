@@ -40,8 +40,8 @@ const NANO_SPECS: Record<string, typeof NANO_BANANA_2> = {
 };
 
 describe('Stage 4 — 카탈로그 무결성', () => {
-  it('카탈로그는 노출 엔진 4종 + dropshot(UI 자동화) = 5개 엔진을 가진다', () => {
-    expect(IMAGE_ENGINE_CATALOG.map((e) => e.value).sort()).toEqual([...ENGINE_VALUES, 'dropshot'].sort());
+  it('카탈로그는 노출 엔진 4종 + dropshot·genspark(UI 자동화) = 6개 엔진을 가진다', () => {
+    expect(IMAGE_ENGINE_CATALOG.map((e) => e.value).sort()).toEqual([...ENGINE_VALUES, 'dropshot', 'genspark'].sort());
   });
 
   it('[2026-10-10] 카탈로그(사용자 목록)에 나노바나나 프로·2.5가 없다', () => {
@@ -52,7 +52,7 @@ describe('Stage 4 — 카탈로그 무결성', () => {
 
   it('모든 엔진의 model ID는 VERIFIED_IMAGE_MODELS에 속한다 (가짜 ID 차단)', () => {
     for (const engine of IMAGE_ENGINE_CATALOG) {
-      if (engine.value === 'dropshot' || engine.value === 'flow' || engine.value === 'prodia') continue; // UI/legacy engines do not use VERIFIED_IMAGE_MODELS IDs
+      if (engine.value === 'dropshot' || engine.value === 'genspark' || engine.value === 'flow' || engine.value === 'prodia') continue; // UI/legacy engines do not use VERIFIED_IMAGE_MODELS IDs
       expect(isVerifiedImageModel(engine.model), `${engine.value} → ${engine.model}`).toBe(true);
     }
   });

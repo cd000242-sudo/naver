@@ -276,6 +276,7 @@ import { initAutoUpdater, initAutoUpdaterEarly, setUpdaterLoginWindow, isUpdatin
 import { resetFlowState } from './image/flowGenerator.js';
 import { cleanupImageFxBrowser } from './image/imageFxGenerator.js';
 import { closeAllDropshotContexts as closeDropshotBrowserContexts } from './image/dropshotSession.js';
+import { closeAllGensparkContexts as closeGensparkBrowserContexts } from './image/genspark/gensparkSession.js'; // [2026-10-10]
 
 // ✅ [리팩토링] 새로운 모듈화된 유틸리티 및 서비스
 // ✅ [리팩토링] 새로운 모듈화된 유틸리티 및 서비스
@@ -3874,9 +3875,10 @@ ipcMain.handle('app:resetTransientState', async () => {
     resetFlowState(),
     cleanupImageFxBrowser(),
     closeDropshotBrowserContexts(),
+    closeGensparkBrowserContexts(),
   ]);
   const failed = results
-    .map((r, i) => (r.status === 'rejected' ? ['Flow', 'ImageFX', 'Dropshot'][i] : ''))
+    .map((r, i) => (r.status === 'rejected' ? ['Flow', 'ImageFX', 'Dropshot', 'Genspark'][i] : ''))
     .filter(Boolean);
   if (failed.length > 0) console.warn(`[Main] 전체 초기화 — 컨텍스트 정리 일부 실패: ${failed.join(', ')}`);
   else console.log('[Main] 전체 초기화 — 이미지 브라우저 컨텍스트 정리 완료');
@@ -5781,7 +5783,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
             const headingImageMode = options?.headingImageMode || 'all';
             const isThumbnailOnly = options?.thumbnailOnly === true;
             const normalizedImageProvider = String(imageProvider || '').trim();
-            const isUiAutomationImageProvider = ['dropshot', 'flow', 'imagefx'].includes(normalizedImageProvider);
+            const isUiAutomationImageProvider = ['dropshot', 'flow', 'imagefx', 'genspark'].includes(normalizedImageProvider);
             const isSlowImageProvider = ['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai'].includes(normalizedImageProvider);
             const imageEngineStabilizeDelayMs = isUiAutomationImageProvider ? 15_000 : isSlowImageProvider ? 8_000 : 3_000;
             const waitForImageEngineStabilization = async (phase: string) => {
@@ -10364,10 +10366,11 @@ async function _runFullCleanup(reason: string): Promise<void> {
     ]);
 
     if (showModal) _notifyCleanupModal({ phase: 'progress', message: '이미지 브라우저 컨텍스트 정리 중...' });
-    const [flowContextClean, imageFxContextClean, dropshotContextsClean] = await Promise.all([
+    const [flowContextClean, imageFxContextClean, dropshotContextsClean, gensparkContextsClean] = await Promise.all([
       runCleanupStep('Flow context', () => resetFlowState()),
       runCleanupStep('ImageFX context', () => cleanupImageFxBrowser()),
       runCleanupStep('Dropshot contexts', () => closeDropshotBrowserContexts()),
+      runCleanupStep('Genspark contexts', () => closeGensparkBrowserContexts()), // [2026-10-10]
     ]);
 
     if (showModal) _notifyCleanupModal({ phase: 'progress', message: '자식 프로세스와 타이머 정리 중...' });
@@ -10387,6 +10390,7 @@ async function _runFullCleanup(reason: string): Promise<void> {
       && flowContextClean
       && imageFxContextClean
       && dropshotContextsClean
+      && gensparkContextsClean
       && trackedChildrenClean;
 
     const backgroundCleanupSteps = [

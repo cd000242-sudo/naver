@@ -86,7 +86,7 @@ export function createFakePage(state: FakeState): FakePage {
       return item && state.menuOpen ? point(`model:${req.label}`, () => { state.selected = item.label; state.menuOpen = false; }) : null;
     }
     if (req.selector === S.settingsButton) return missing('settingsButton') ? null : point('settingsButton', () => { state.settingsOpen = true; });
-    if (req.selector === S.sizeOption || req.selector === ':not(:has(*))') {
+    if (req.selector === S.ratioOption || req.selector === S.sizeOption || req.selector === ':not(:has(*))') {
       const list = state.ratios.find((o) => o.label === req.label) ? state.ratios : state.counts;
       const opt = list.find((o) => o.label === req.label);
       if (!opt || !state.settingsOpen) return null;

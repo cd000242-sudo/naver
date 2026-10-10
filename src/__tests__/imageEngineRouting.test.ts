@@ -120,7 +120,7 @@ describe('v1.4.80 — 이미지 엔진 라우팅 매트릭스', () => {
     it("isKoreanTextSupportedEngine에 'flow' 포함 (Nano Banana Pro 기반)", () => {
       // [2026-09-23] The list moved to image/director/koreanTextEngines (shared with the thumbnail director).
       const code = read('imageGenerator.ts');
-      expect(code).toMatch(/function isKoreanTextSupportedEngine[\s\S]{0,200}?return drawsKoreanTextItself\(engine\);/);
+      expect(code).toMatch(/function isKoreanTextSupportedEngine[\s\S]{0,200}?return drawsKoreanTextItself\(engine, model\);/);
       expect(read('image/director/koreanTextEngines.ts')).toMatch(/'flow',/);
     });
 

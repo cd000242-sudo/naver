@@ -10,6 +10,7 @@ import {
   readGensparkModelMenu,
   readGensparkPageSignals,
   readGensparkSelectedModel,
+  locateGensparkPoint,
   readGensparkSettingsMenu,
 } from '../image/genspark/gensparkSelectors';
 
@@ -87,6 +88,67 @@ describe('readGensparkSettingsMenu', () => {
     expect(menu.counts).toEqual([
       { label: '1', selected: false }, { label: '2', selected: true }, { label: '4', selected: false },
     ]);
+  });
+});
+
+describe('readGensparkSettingsMenu — 실측 클래스(.ratio-option / .size-option)', () => {
+  it('.ratio-option 을 1순위로 읽고 selected 를 반영한다', () => {
+    document.body.innerHTML = `
+      <div class="v-binder-follower-content">
+        <div class="ratio-option selected"><span>자동 크기</span></div>
+        <div class="ratio-option"><span>16:9</span></div>
+        <div class="ratio-option">1:1</div>
+        <div class="size-option selected">1</div>
+        <div class="size-option">2</div>
+        <div class="size-option">4</div>
+      </div>`;
+    const menu = readGensparkSettingsMenu();
+    expect(menu.ratios).toEqual([
+      { label: '자동 크기', selected: true }, { label: '16:9', selected: false }, { label: '1:1', selected: false },
+    ]);
+    expect(menu.counts.map((c) => c.label)).toEqual(['1', '2', '4']);
+    expect(menu.counts[0].selected).toBe(true);
+  });
+});
+
+describe('locateGensparkPoint — display: contents 껍데기 + 안쪽 .model', () => {
+  const rect = (l: number, t: number, w: number, h: number) =>
+    () => ({ left: l, top: t, width: w, height: h, right: l + w, bottom: t + h, x: l, y: t, toJSON: () => ({}) }) as DOMRect;
+  beforeEach(() => {
+    document.body.innerHTML = `
+      <div class="v-binder-follower-content">
+        <div class="model-container" id="shell1"><div class="model" id="body1"><div>New</div><div>Nano Banana 2.1</div></div></div>
+        <div class="model-container" id="shell2"><div class="model" id="body2"><div>GPT Image 2.5</div><div>No credit cost</div></div></div>
+        <div class="model-container" id="shell3"><div class="model" id="body3"><div>GPT Image 2</div></div></div>
+      </div>`;
+    // 껍데기는 크기 0, 안쪽 .model 만 실제 크기(약 385×93)
+    for (const id of ['shell1', 'shell2', 'shell3']) {
+      (document.getElementById(id) as HTMLElement).getBoundingClientRect = rect(0, 0, 0, 0);
+    }
+    (document.getElementById('body1') as HTMLElement).getBoundingClientRect = rect(100, 200, 385, 93);
+    (document.getElementById('body2') as HTMLElement).getBoundingClientRect = rect(100, 300, 385, 93);
+    (document.getElementById('body3') as HTMLElement).getBoundingClientRect = rect(100, 400, 385, 93);
+  });
+
+  it('껍데기가 아니라 안쪽 .model 의 중심 좌표를 돌려준다(라벨 정확 일치, New 줄 건너뜀)', () => {
+    const req = { selector: '.model-container', scope: '.v-binder-follower-content' };
+    expect(locateGensparkPoint({ ...req, label: 'GPT Image 2.5' })).toEqual({ x: 293, y: 347 });
+    expect(locateGensparkPoint({ ...req, label: 'Nano Banana 2.1' })).toEqual({ x: 293, y: 247 });
+    // 'GPT Image 2' 는 'GPT Image 2.5' 와 다른 항목
+    expect(locateGensparkPoint({ ...req, label: 'GPT Image 2' })).toEqual({ x: 293, y: 447 });
+    expect(locateGensparkPoint({ ...req, label: 'GPT Image' })).toBeNull();
+  });
+
+  it('누르기 전에 scrollIntoView(center) 로 화면 안에 가져온다', () => {
+    const calls: unknown[] = [];
+    (document.getElementById('body3') as HTMLElement).scrollIntoView = ((arg: unknown) => { calls.push(arg); }) as never;
+    locateGensparkPoint({ selector: '.model-container', label: 'GPT Image 2', scope: '.v-binder-follower-content' });
+    expect(calls).toEqual([{ block: 'center' }]);
+  });
+
+  it('껍데기도 몸체도 크기 0 이면 null', () => {
+    (document.getElementById('body2') as HTMLElement).getBoundingClientRect = rect(0, 0, 0, 0);
+    expect(locateGensparkPoint({ selector: '.model-container', label: 'GPT Image 2.5', scope: '.v-binder-follower-content' })).toBeNull();
   });
 });
 
