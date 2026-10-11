@@ -105,22 +105,23 @@ test('환경설정 진입 응답 시간 < 1500ms', async () => {
     if ((await collectLongTasks(mainWindow, 1000)).length === 0) break;
   }
 
-  // 모달은 늘 78~134ms 에 뜬다(실측). 느린 쪽은 Playwright 의 클릭 전 '요소 안정' 확인: 메인 창이 다른 창에 가려지면
-  //   backgroundThrottling 으로 프레임이 초당 1회가 되어 두 프레임 확인에만 ~2초(클릭 236ms↔2,104ms 변동). 창을 앞으로 가져오고
-  //   안정 대기 없이 눌러, 앱의 응답 시간만 잰다.
-  await mainWindow.bringToFront().catch(() => undefined);
-  const t0 = Date.now();
-  await settingsBtn.click({ force: true });
-  // 환경설정 모달이 보이거나 settings 영역이 표시될 때까지 대기
-  try {
-    await mainWindow.waitForSelector('.modal-overlay.show, #settings-modal.show, .settings-container.visible', {
-      state: 'visible',
-      timeout: 1500,
-    });
-  } catch {
-    // 모달 셀렉터 다양성 대응 — 정확한 셀렉터 미발견 시 LongTask만 측정
-  }
-  const elapsed = Date.now() - t0;
+  // 모달은 늘 78~134ms 에 뜬다(실측). 느린 쪽은 Playwright 쪽이었다: 메인 창이 다른 창에 가려지면 backgroundThrottling 으로
+  //   프레임이 초당 1회가 되어, 클릭 전 '요소 안정' 확인과 '보일 때까지 대기'(프레임 단위 폴링)가 각각 ~1초씩 걸렸다
+  //   (게이트 2,728ms·1,619ms vs 단독 420ms). 그래서 페이지 안에서 잰다: 클릭 → 모달 속성 변화를 MutationObserver(프레임·
+  //   타이머 조절과 무관)로 받아 performance.now() 로 계산. 창이 최소화돼 있어도 같은 값이 나온다(재현 실험).
+  const elapsed = await mainWindow.evaluate(() => new Promise<number>((resolve) => {
+    const button = document.querySelector<HTMLElement>('[data-open-settings], #settings-btn')!;
+    const modal = document.querySelector<HTMLElement>('#settings-modal');
+    const shown = () => Boolean(document.querySelector('.modal-overlay.show, #settings-modal.show, .settings-container.visible'))
+      && (!modal || getComputedStyle(modal).display !== 'none');
+    const t0 = performance.now();
+    const finish = () => resolve(performance.now() - t0);
+    const observer = new MutationObserver(() => { if (shown()) { observer.disconnect(); finish(); } });
+    observer.observe(document.body, { attributes: true, subtree: true, childList: true, attributeFilter: ['class', 'style', 'aria-hidden'] });
+    setTimeout(() => { observer.disconnect(); finish(); }, 1500); // 상한: 1.5초 안에 안 뜨면 그 값으로 실패한다
+    button.click();
+    if (shown()) { observer.disconnect(); finish(); }
+  }));
   console.log(`[FreezeGuard] 환경설정 진입 응답 시간: ${elapsed}ms`);
   expect(elapsed).toBeLessThan(1500);
 
