@@ -23,7 +23,7 @@ function harness() {
     waitForSelector: vi.fn(async () => undefined), waitForFunction: vi.fn(async () => { throw Error('Legacy cross-origin DOM access fails'); }) };
   const state: any = { page, browser: {}, options: { naverId: 'test' }, ensurePage: () => page,
     ensureNotCancelled: () => { if (state.cancelRequested) throw Error('cancelled'); },
-    ensureDialogHandler: vi.fn(), resolveRunOptions: () => ({}), log: vi.fn(),
+    ensureDialogHandler: vi.fn(), revealTypingWindow: vi.fn(async () => undefined), resolveRunOptions: () => ({}), log: vi.fn(),
     switchToMainFrame: vi.fn(async () => { throw stop; }),
     // 진입 계약만 본다 — 재시작 1회 감싸개는 editorEntryRestart.test.ts 에서 따로 본다.
     enterEditorWithOneRestart: async (entry: (deferPause: boolean) => Promise<void>) => entry(false),

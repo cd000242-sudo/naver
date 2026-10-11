@@ -60,7 +60,7 @@ function harness(mode: 'success' | 'no-dom-image' | 'upload-error' | 'partial-up
   const state: any = {
     page, browser: { close: vi.fn() }, options: { naverId: 'fixture' }, DELAYS: { MEDIUM: 0 },
     log: vi.fn(), delay: vi.fn(async () => undefined), ensureNotCancelled: vi.fn(),
-    ensurePage: () => page, ensureDialogHandler: vi.fn(), resolveRunOptions: () => resolved,
+    ensurePage: () => page, ensureDialogHandler: vi.fn(), revealTypingWindow: vi.fn(async () => undefined), resolveRunOptions: () => resolved,
     navigateToBlogWrite: vi.fn(async () => { events.push('enter'); }),
     // 진입 계약만 본다 — 재시작 1회 감싸개는 editorEntryRestart.test.ts 에서 따로 본다.
     enterEditorWithOneRestart: async (entry: (deferPause: boolean) => Promise<void>) => entry(false),

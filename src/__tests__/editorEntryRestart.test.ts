@@ -128,7 +128,7 @@ describe('크롬 재시작 함수', () => {
     const state: any = {
       options: { naverId: 'acct' }, browser: {}, page: {}, mainFrame: {}, cursor: {},
       delay: vi.fn(async () => { order.push('wait'); }), ensureNotCancelled: vi.fn(),
-      setupBrowser: vi.fn(async () => { order.push('setup'); }), ensureDialogHandler: vi.fn(() => order.push('dialogs')),
+      setupBrowser: vi.fn(async () => { order.push('setup'); }), ensureDialogHandler: vi.fn(() => order.push('dialogs')), revealTypingWindow: vi.fn(async () => undefined),
     };
     await method('restartBrowserForEditorEntry', { browserSessionManager: manager }).call(state);
     expect(manager.closeSession).toHaveBeenCalledWith('acct', true);

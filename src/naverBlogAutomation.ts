@@ -140,6 +140,7 @@ import {
   SAVE_BUTTON_TEXT_CANDIDATES,
 } from './automation/publishSaveButtonPolicy.js';
 import { waitForDraftSaveSignal } from './automation/draftSaveConfirmation.js';
+import { revealBrowserWindow, type WindowCdp } from './automation/browserWindowReveal.js';
 import { resolveNaverRunOptions } from './automation/runOptionsPolicy.js';
 import {
   beginMainProcessEditorCommitCandidate,
@@ -2053,6 +2054,15 @@ export class NaverBlogAutomation {
     this.ensureNotCancelled();
     await this.setupBrowser();
     this.ensureDialogHandler();
+    await this.revealTypingWindow();
+  }
+
+  /**
+   * [2026-10-11 사장님] "발행할 때마다 타이핑 크롬 창이 맨 앞으로 뜨게" — every publish mode passes here.
+   * The previous publish hid the window; never let a failure here stop the publish.
+   */
+  private async revealTypingWindow(): Promise<void> {
+    if (await this.showBrowserWindow().catch(() => false)) this.log('🪟 타이핑 크롬 창을 앞으로 띄웠습니다.');
   }
 
   async navigateToBlogWrite(options: { deferPause?: boolean } = {}): Promise<void> {
@@ -6464,6 +6474,7 @@ export class NaverBlogAutomation {
         await this.setupBrowser();
       }
       this.ensureDialogHandler();
+      await this.revealTypingWindow();
       this.deferredFrameStop = false;
       this.editorEnteredThisRun = false;
       // [2026-10-09 사장님 선택] 로그인을 못 알아보거나 글쓰기 창을 못 찾으면 크롬을 다시 띄워 한 번 더 들어간다(비밀번호 입력 없음).
@@ -6770,9 +6781,8 @@ export class NaverBlogAutomation {
       await page.bringToFront().catch(() => undefined);
       const client = await page.createCDPSession();
       try {
-        const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
-        await client.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'minimized' } });
-        await client.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'normal' } });
+        // [2026-10-11] The old minimized -> normal toggle left a window parked at -32000 off screen (live check).
+        await revealBrowserWindow(client as unknown as WindowCdp);
       } finally {
         await client.detach().catch(() => undefined);
       }
@@ -7024,6 +7034,7 @@ export class NaverBlogAutomation {
     // setupBrowser()는 세션 재사용 시 early-return하여 핸들러 등록을 건너뛸 수 있음
     // → run()에서 확정적으로 등록하여 어떤 경로든 dialog 자동 수락 보장
      this.ensureDialogHandler();
+     await this.revealTypingWindow();
 
      try {
        this.deferredFrameStop = false;

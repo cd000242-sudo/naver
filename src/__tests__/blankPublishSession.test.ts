@@ -24,6 +24,7 @@ function harness(name: string, initial: string, existingBrowser = true) {
     ensurePage: () => state.page,
     ensureNotCancelled: () => { if (state.cancelRequested) throw new Error('사용자가 자동화를 취소했습니다.'); },
     ensureDialogHandler: vi.fn(() => events.push('dialogs')),
+    revealTypingWindow: vi.fn(async () => undefined),
     navigateToBlogWrite: vi.fn(async () => { events.push('navigate'); current = 'https://blog.naver.com/test_account?Redirect=Write'; }),
     loginToNaver: vi.fn(async () => { events.push('login'); return verify(); }),
     switchToMainFrame: vi.fn(async () => { events.push('frame'); throw stopBeforeInput; }),
