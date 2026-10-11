@@ -25,6 +25,17 @@ const TIMING_LABEL = { NOW: '지금 작성', NEXT: '일정 전 작성', ALWAYS: 
 const kst = (iso: string) => Number.isFinite(Date.parse(iso)) ? new Date(iso).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '시간 확인 필요';
 const kstDay = (iso: string) => new Date(iso).toLocaleDateString('en-CA', { timeZone: 'Asia/Seoul' });
 
+/** 제목 후보 한 줄 복사(2026-10-11 사장님 "얘네들 제목들도 복사 버튼") — 라벨 안이라 누를 때 라디오 선택은 안 바꾼다. */
+function CopyTitle({ text }: { text: string }) {
+    const [done, setDone] = useState('');
+    const copy = async (event: { preventDefault(): void; stopPropagation(): void }) => {
+        event.preventDefault(); event.stopPropagation();
+        try { await navigator.clipboard.writeText(text); setDone('복사됨'); } catch { setDone('선택해 복사해 주세요'); }
+        window.setTimeout(() => setDone(''), 1500);
+    };
+    return <button type="button" className="tb-title-copy" onClick={(event) => void copy(event)} aria-label={`제목 복사: ${text}`}>{done || '복사'}</button>;
+}
+
 export function BriefCard({ brief, featured = false, onAnalyze }: { brief: TopicBriefView; featured?: boolean; onAnalyze?: (keyword: string) => void }) {
     const groupId = useId();
     const seoTitles = brief.guide.seoTitles.length ? brief.guide.seoTitles : brief.titles.map(title => title.text);
@@ -48,7 +59,7 @@ export function BriefCard({ brief, featured = false, onAnalyze }: { brief: Topic
         <p className="tb-volume-note">{briefVolumeDetail(brief.core)}</p>
         <p className="tb-measurement-note">{brief.core.serpFacing === null ? '상위 검색 결과 미측정' : `상위 10개 중 핵심어를 포함한 제목 ${brief.core.serpFacing}개`} · 노출 보장 아님{!brief.alternative && ' · 대안 키워드 미확보'}</p>
         <section className="tb-summary"><h4>무슨 일이 있었나요</h4><p>{brief.summary}</p></section>
-        <fieldset className="tb-titles"><legend>제목 후보</legend><h4>네이버 SEO 제목 <small>{brief.guide.seoTitles.length ? '검색 의도 중심' : '기존 제목 후보 · 적합성 확인'}</small></h4>{seoTitles.map((title, index) => <label key={`seo-${index}`}><input type="radio" name={`${groupId}-title`} checked={selectedTitle === title} onChange={() => setSelectedTitle(title)} /><span className="tb-title-kind">검색</span><span>{title}</span></label>)}<h4>네이버 홈판 제목 <small>따옴표 스타터 · 후킹형</small></h4>{brief.guide.homeTitles.length ? brief.guide.homeTitles.map((title,index) => <label key={`home-${index}`}><input type="radio" name={`${groupId}-title`} checked={selectedTitle === title} onChange={() => setSelectedTitle(title)} /><span className="tb-title-kind tb-home-title">홈판</span><span>{title}</span></label>) : <p className="tb-muted">확인된 내용에 맞춘 홈판 제목을 아직 확보하지 못했습니다.</p>}</fieldset>
+        <fieldset className="tb-titles"><legend>제목 후보</legend><h4>네이버 SEO 제목 <small>{brief.guide.seoTitles.length ? '검색 의도 중심' : '기존 제목 후보 · 적합성 확인'}</small></h4>{seoTitles.map((title, index) => <label key={`seo-${index}`}><input type="radio" name={`${groupId}-title`} checked={selectedTitle === title} onChange={() => setSelectedTitle(title)} /><span className="tb-title-kind">검색</span><span>{title}</span><CopyTitle text={title} /></label>)}<h4>네이버 홈판 제목 <small>따옴표 스타터 · 후킹형</small></h4>{brief.guide.homeTitles.length ? brief.guide.homeTitles.map((title,index) => <label key={`home-${index}`}><input type="radio" name={`${groupId}-title`} checked={selectedTitle === title} onChange={() => setSelectedTitle(title)} /><span className="tb-title-kind tb-home-title">홈판</span><span>{title}</span><CopyTitle text={title} /></label>) : <p className="tb-muted">확인된 내용에 맞춘 홈판 제목을 아직 확보하지 못했습니다.</p>}</fieldset>
         <section className="tb-direction"><h4>글을 쓰는 방향</h4><p>{brief.guide.direction || brief.angle || '원문에서 대상·조건·시점을 확인하고 독자가 해결할 질문부터 설명하세요.'}</p></section>
         <div className="tb-guide-columns"><section><h4>반드시 넣을 내용</h4>{list(brief.guide.mustInclude.length ? brief.guide.mustInclude : brief.outline, '대상, 적용 조건, 기준일과 원문에서 확인한 사실을 포함하세요.')}</section><section className="tb-avoid"><h4>넣지 말아야 할 내용</h4>{list(brief.guide.avoid, '확인되지 않은 금액·일정, 누구나 가능하다는 단정, 해보지 않은 경험담은 쓰지 마세요.')}</section></div>
         <section className="tb-related"><h4>같이 넣을 말 · 키워드</h4>{terms.length ? <div>{terms.map(term => {const metric = brief.related.find(item => item.keyword === term);return <a key={term} href={naverSearchUrl(term)} target="_blank" rel="noreferrer">{term}{metric && <small title={briefVolumeDetail(metric)}>{briefVolumeLabel(metric)}</small>}</a>;})}</div> : <p className="tb-muted">관련 검색어 미확보 · 원문의 용어를 확인하세요.</p>}</section>
