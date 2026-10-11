@@ -54,8 +54,12 @@ export function createLdbDestinations(deps: Dependencies) {
     categories,
     select: (value: unknown) => queued(async () => { const selected = await resolve(value); await deps.deliver([], selected); return { accountId: selected.accountId, categoryId: selected.categoryId }; }),
     send: (posts: unknown[], value?: unknown) => queued(async () => {
+      const startedAt = Date.now();
       const selected = value === undefined ? undefined : await resolve(value);
+      const resolvedAt = Date.now();
       const imported = await deps.deliver(posts, selected);
+      // [2026-10-11] Each handoff re-reads the blog's categories from Naver; log it apart from the app-side work.
+      if (posts.length) console.log(`[LDB 배치] 카테고리 확인 ${resolvedAt - startedAt}ms · 이미지 저장·앱 반영 ${Date.now() - resolvedAt}ms`);
       return { imported, ...(selected ? { selection: { accountId: selected.accountId, categoryId: selected.categoryId } } : {}) };
     }),
   };

@@ -55,17 +55,32 @@ interface DeliveryWindow {
   webContents: DeliveryTarget;
   isDestroyed: () => boolean;
   isMinimized: () => boolean;
+  isVisible?: () => boolean;
+  isFocused?: () => boolean;
   restore: () => void;
   show: () => void;
   moveTop: () => void;
   focus: () => void;
 }
 
+/**
+ * [2026-10-11] The app window state when an LDB handoff arrives. A hidden app window is throttled by Chromium
+ * (backgroundThrottling stays on for games), so the timing log records it next to the duration.
+ */
+export function describeLdbWindowState(window: Pick<DeliveryWindow, 'isMinimized' | 'isVisible' | 'isFocused'>): string {
+  if (window.isMinimized()) return '최소화';
+  if (window.isVisible && !window.isVisible()) return '숨김';
+  return window.isFocused?.() ? '보임(앞)' : '보임(다른 창이 앞)';
+}
+
 /** Reveal only a completed article/image handoff, never a background account refresh. */
 export async function deliverLdbPostsToWindow(window: DeliveryWindow | null | undefined, ipcMain: DeliveryIpc,
   posts: unknown[], timeoutMs = 20_000, destination?: LdbResolvedDestination): Promise<number> {
   if (!window || window.isDestroyed()) throw new Error('앱 화면이 준비되지 않았습니다.');
+  const windowState = describeLdbWindowState(window);
+  const startedAt = Date.now();
   const imported = await deliverLdbPosts(window.webContents, ipcMain, posts, timeoutMs, destination);
+  if (posts.length) console.log(`[LDB 배치] 앱 화면 반영 ${Date.now() - startedAt}ms · 받을 때 앱 창: ${windowState}`);
   if (posts.length) {
     if (window.isDestroyed()) throw new Error('앱 화면이 닫혔습니다. 앱을 다시 열어주세요.');
     if (window.isMinimized()) window.restore();

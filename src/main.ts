@@ -4973,7 +4973,9 @@ const startLdbBridgeIfEnabled = createSerializedRefresh(async () => {
         let drafts: unknown[] = [];
         if (posts.length) {
           const { getImageSaveBasePath } = await import('./image/imageUtils.js');
+          const savingAt = Date.now();
           drafts = await materializeLdbImages(posts, await getImageSaveBasePath(), app.getPath('downloads'));
+          console.log(`[LDB 배치] 이미지 파일 저장 ${Date.now() - savingAt}ms`);
         }
         return deliverLdbPostsToWindow(mainWindow, ipcMain, drafts, 20_000, destination);
       };
