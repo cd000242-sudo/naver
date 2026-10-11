@@ -1,16 +1,16 @@
 {
-  "publishedAt": "2026-10-10T09:00:39.828Z",
+  "publishedAt": "2026-10-10T21:33:55.517Z",
   "generator": "issue-niche-board",
   "schedule": "매일 05·11·17시(KST) 갱신",
   "measured": {
     "issues": 18,
     "candidates": 240,
     "niche": 0,
-    "preemption": 5,
+    "preemption": 9,
     "pending": 0
   },
   "freeSample": {
-    "day": "2026-10-10",
+    "day": "2026-10-11",
     "keywords": [
       "레이예스 응원가"
     ]
@@ -171,7 +171,7 @@
         ],
         "label": "❄️ 시즌성",
         "recommendation": "시즌 임박 신호. 2주 안에 작성해서 시즌 동안 트래픽 확보",
-        "measuredAt": "2026-10-10T09:00:40.602Z"
+        "measuredAt": "2026-10-10T21:33:56.262Z"
       },
       "kinCount": 14,
       "kinTop": [
@@ -215,6 +215,104 @@
   ],
   "observations": [
     {
+      "keyword": "민도희 맥심",
+      "issue": "민도희",
+      "topic": "민도희",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 79,
+      "documentCountMeasured": true,
+      "searchVolume": 10,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "검색량 10",
+        "문서수 79",
+        "선점 후보 — 경쟁 문서 79건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "응사 민도희, 15개월 알바 접고 캐나다 연수 떠난다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "민도희 맥심 화보부터 15개월 만의 캐나다 연수까지",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "민도희 맥심 화보 찾다가 배우 프로필까지 내려가서 한참 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "민도희 프로필",
+          "searchVolume": 1070,
+          "frame": "generic"
+        },
+        {
+          "keyword": "민도희 배우",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "민도희 프로필",
+          "searchVolume": 1070,
+          "documentCount": 528,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "민도희 배우",
+          "searchVolume": 10,
+          "documentCount": 4039,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": [
+        {
+          "title": "맥심모델이름",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=314&docId=245617567&answerNo=2",
+          "views": 5871,
+          "answers": 2
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-10T21:28:32.475Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
       "keyword": "폴란드 김한나 근황",
       "issue": "폴란드",
       "topic": "폴란드",
@@ -252,7 +350,7 @@
         }
       ],
       "whySearch": {
-        "text": "폴란드 학교에서 15세 흉기 난동으로 1명이 숨지고 2명이 다쳤다",
+        "text": "폴란드서 나흘새 3번째 학교 내 흉기 공격, 3명 부상",
         "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
       },
       "intentLabel": "분류 안 됨",
@@ -260,7 +358,7 @@
       "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
       "titles": {
         "home": {
-          "text": "폴란드 김한나 근황 들려오는데 요즘 지내는 곳이 좀 뜻밖이더라고요",
+          "text": "폴란드 김한나 근황 요즘 어떻게 지내나 찾아봤더니 좀 뜻밖이더라고요",
           "frame": "ai",
           "basis": "메인+서브+후킹 (실측 근거)"
         }
@@ -271,7 +369,688 @@
       "kinCount": 0,
       "kinTop": null,
       "monetize": null,
-      "measuredAt": "2026-10-10T08:56:34.845Z",
+      "measuredAt": "2026-10-10T21:28:32.475Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "충장축제 오리지널 퍼레이드",
+      "issue": "충장축제 오리지널 퍼레이드",
+      "topic": "충장축제 오리지널 퍼레이드",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": false,
+      "origin": "head",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 23,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "unknown",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 23",
+        "선점 후보 — 경쟁 문서 23건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "금남로에서 13개 동 주민들이 오리지널 퍼레이드 펼쳐 화제",
+        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "충장축제 오리지널 퍼레이드 금남로 13개 동 관람 시간",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "충장축제 오리지널 퍼레이드 일정만 믿고 금남로 갔다가 끝까지 자리 못 뜬 이유가 있더라",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "충장축제",
+          "searchVolume": 49640,
+          "frame": "generic"
+        },
+        {
+          "keyword": "충장축제 일정",
+          "searchVolume": 1020,
+          "frame": "schedule"
+        },
+        {
+          "keyword": "충장축제 퍼레이드",
+          "searchVolume": 690,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "충장축제",
+          "searchVolume": 49640,
+          "documentCount": 28090,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "충장축제 일정",
+          "searchVolume": 1020,
+          "documentCount": 5035,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "충장축제 퍼레이드",
+          "searchVolume": 690,
+          "documentCount": 3363,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "충장축제 주차",
+          "searchVolume": 680,
+          "documentCount": 5389,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "충장축제 프로그램",
+          "searchVolume": 70,
+          "documentCount": 5970,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "충장축제 퍼레이드 시간",
+          "searchVolume": 40,
+          "documentCount": 2038,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-10T21:28:32.475Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "민도희 복귀 시점",
+      "issue": "민도희",
+      "topic": "민도희",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "연수 후 복귀 궁금",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 22,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 22",
+        "선점 후보 — 경쟁 문서 22건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 연수 후 복귀 궁금"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "응사 민도희, 15개월 알바 접고 캐나다 연수 떠난다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "민도희 복귀 시점, 15개월 알바 접고 캐나다 간 근황",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "민도희 복귀 시점 찾다가 요즘 근황 보고 좀 의외라 다시 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "민도희 근황",
+          "searchVolume": 60,
+          "frame": "generic"
+        },
+        {
+          "keyword": "민도희 배우",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "민도희 근황",
+          "searchVolume": 60,
+          "documentCount": 1509,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "민도희 배우",
+          "searchVolume": 10,
+          "documentCount": 4039,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-10T21:28:32.475Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "민도희 연예인병",
+      "issue": "민도희",
+      "topic": "민도희",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 76,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 76",
+        "선점 후보 — 경쟁 문서 76건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "응사 민도희, 15개월 알바 접고 캐나다 연수 떠난다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "민도희 연예인병, 15개월 카페 알바 접고 캐나다 연수 떠난 근황",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "민도희 연예인병 소문 돌던 배우라는데 근황 찾아보다 좀 멋쩍어졌어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "민도희 근황",
+          "searchVolume": 60,
+          "frame": "generic"
+        },
+        {
+          "keyword": "민도희 배우",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "민도희 근황",
+          "searchVolume": 60,
+          "documentCount": 1509,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "민도희 배우",
+          "searchVolume": 10,
+          "documentCount": 4039,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-10T21:28:32.475Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "민도희 캐나다",
+      "issue": "민도희",
+      "topic": "민도희",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 124,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 124",
+        "선점 후보 — 경쟁 문서 124건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "응사 민도희, 15개월 알바 접고 캐나다 연수 떠난다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "민도희 캐나다 연수 15개월 카페 알바 접은 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "민도희 캐나다 연수 간다길래 근황 찾다가 응사 그 시절까지 다시 봤네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "민도희 프로필",
+          "searchVolume": 1070,
+          "frame": "generic"
+        },
+        {
+          "keyword": "민도희 근황",
+          "searchVolume": 60,
+          "frame": "generic"
+        },
+        {
+          "keyword": "민도희 배우",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "민도희 프로필",
+          "searchVolume": 1070,
+          "documentCount": 528,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "민도희 근황",
+          "searchVolume": 60,
+          "documentCount": 1509,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "민도희 배우",
+          "searchVolume": 10,
+          "documentCount": 4039,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 0,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-10T21:28:32.475Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "민도희 유학",
+      "issue": "민도희",
+      "topic": "민도희",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "derived",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 133,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 133",
+        "선점 후보 — 경쟁 문서 133건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "응사 민도희, 15개월 알바 접고 캐나다 연수 떠난다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "민도희 유학, 15개월 카페 알바 접고 캐나다 간 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "민도희 유학 떠난다길래 근황 찾아봤더니 배우 되기 전 이력이 더 눈에 들어오네요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "민도희 근황",
+          "searchVolume": 60,
+          "frame": "generic"
+        },
+        {
+          "keyword": "민도희 배우",
+          "searchVolume": 10,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "민도희 근황",
+          "searchVolume": 60,
+          "documentCount": 1509,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "민도희 배우",
+          "searchVolume": 10,
+          "documentCount": 4039,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 1,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-10T21:28:32.475Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "민도희 차기작",
+      "issue": "민도희",
+      "topic": "민도희",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "next-wave",
+      "originReason": "복귀 작품 관심",
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 170,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "stable",
+      "isHot": false,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 170",
+        "선점 후보 — 경쟁 문서 170건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "next-wave",
+          "text": "다음 물결 — 복귀 작품 관심"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        }
+      ],
+      "whySearch": {
+        "text": "응사 민도희, 15개월 알바 접고 캐나다 연수 떠난다",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "민도희 차기작 없이 15개월 공백 끝 캐나다 연수 가는 이유",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "민도희 차기작 궁금해서 근황 찾아봤는데 요즘 이렇게 지내고 있더라고요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "민도희 근황",
+          "searchVolume": 60,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "민도희 근황",
+          "searchVolume": 60,
+          "documentCount": 1509,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 2,
+      "kinTop": null,
+      "monetize": null,
+      "measuredAt": "2026-10-10T21:28:32.475Z",
+      "recommendationStatus": "observe",
+      "exclusionReason": "demand-unverified"
+    },
+    {
+      "keyword": "레알 마드리드 Clip",
+      "issue": "레알 마드리드",
+      "topic": "레알 마드리드",
+      "lane": "realtime",
+      "issueType": "fresh",
+      "isDerived": true,
+      "origin": "autocomplete",
+      "originReason": null,
+      "verdict": "preemption",
+      "preemptionKind": "no-demand",
+      "serp": null,
+      "documentCount": 160,
+      "documentCountMeasured": true,
+      "searchVolume": null,
+      "searchVolumeLt10": true,
+      "hasLiveDemand": false,
+      "demandStatus": "unknown",
+      "demandRatio": 0,
+      "issueStatus": "declining",
+      "isHot": true,
+      "frontalDocCount": 0,
+      "freshFrontalCount": 0,
+      "reasons": [
+        "문서수 160",
+        "선점 후보 — 경쟁 문서 160건, 수요 미검출"
+      ],
+      "evidence": [
+        {
+          "code": "autocomplete",
+          "text": "네이버 자동완성 실측 — 사람들이 이미 치는 말"
+        },
+        {
+          "code": "empty-field",
+          "text": "정면으로 다룬 글 0건 (최근 0건)"
+        },
+        {
+          "code": "fresh",
+          "text": "이슈 자체가 지금 뜨는 중(HOT)"
+        }
+      ],
+      "whySearch": {
+        "text": "이강인 AT마드리드 9월의 선수 선정, 발베르데 복귀",
+        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
+      },
+      "intentLabel": "분류 안 됨",
+      "adsenseFit": null,
+      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
+      "titles": {
+        "seo": {
+          "text": "레알 마드리드 Clip 발베르데 복귀 이강인 태클 논란",
+          "frame": "ai",
+          "basis": "실측 풀 근거 AI 작성"
+        },
+        "home": {
+          "text": "레알 마드리드 Clip 다음 경기 일정 보고 달력을 다시 봤어요",
+          "frame": "ai",
+          "basis": "메인+서브+후킹 (실측 근거)"
+        }
+      },
+      "subKeywords": [
+        {
+          "keyword": "레알 마드리드 일정",
+          "searchVolume": 20850,
+          "frame": "schedule"
+        },
+        {
+          "keyword": "레알 마드리드 순위",
+          "searchVolume": 14390,
+          "frame": "recommend"
+        },
+        {
+          "keyword": "레알 마드리드 경기",
+          "searchVolume": 1160,
+          "frame": "generic"
+        }
+      ],
+      "keywordPool": [
+        {
+          "keyword": "레알 마드리드 일정",
+          "searchVolume": 20850,
+          "documentCount": 56355,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "레알 마드리드 순위",
+          "searchVolume": 14390,
+          "documentCount": 49331,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "레알 마드리드 경기",
+          "searchVolume": 1160,
+          "documentCount": 256182,
+          "source": "ai-verified"
+        },
+        {
+          "keyword": "레알 마드리드 이강인",
+          "searchVolume": 180,
+          "documentCount": 20119,
+          "source": "ai-verified"
+        }
+      ],
+      "trend": null,
+      "kinCount": 11,
+      "kinTop": [
+        {
+          "title": "MBC ESPN에서 레알vs마르세유 하고 하이라이트에서 나온음악모....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=30204&docId=55774061&answerNo=1",
+          "views": 1104,
+          "answers": 1
+        },
+        {
+          "title": "바르셀로나vs레알 마드리드 동영상인데 BGM좀 알려주세요(내....",
+          "link": "https://kin.naver.com/qna/detail.naver?dirId=1001010202&docId=131560240&answerNo=1",
+          "views": 209,
+          "answers": 1
+        }
+      ],
+      "monetize": null,
+      "measuredAt": "2026-10-10T21:28:32.475Z",
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified"
     },
@@ -386,7 +1165,8 @@
       "monetize": null,
       "measuredAt": "2026-10-10T08:56:34.845Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "데이터센터 전문 퍼머스",
@@ -448,7 +1228,8 @@
       "monetize": null,
       "measuredAt": "2026-10-10T08:56:34.845Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "오픈AI 닷츠 이용방법",
@@ -538,7 +1319,8 @@
       "monetize": null,
       "measuredAt": "2026-10-10T08:56:34.845Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "아르텍스 공개 중단",
@@ -624,7 +1406,8 @@
       "monetize": null,
       "measuredAt": "2026-10-10T08:56:34.845Z",
       "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified"
+      "exclusionReason": "demand-unverified",
+      "carried": true
     },
     {
       "keyword": "이태성 외지주",
@@ -3140,862 +3923,413 @@
       "recommendationStatus": "observe",
       "exclusionReason": "demand-unverified",
       "carried": true
-    },
-    {
-      "keyword": "서피스 랩톱 울트라",
-      "issue": "서피스 랩톱 울트라",
-      "topic": "서피스 랩톱 울트라",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 275,
-      "documentCountMeasured": true,
-      "searchVolume": 50,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "검색량 50",
-        "문서수 275",
-        "선점 후보 — 경쟁 문서 275건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MS가 엔비디아 RTX 스파크를 탑재한 AI 노트북 '서피스 랩톱 울트라'를 공개해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "서피스 랩톱 울트라 스펙과 맥북 프로 가격·성능 비교",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "서피스 랩톱 울트라가 맥북 프로를 겨냥했다는데 의외로 갈리는 지점",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 4,
-      "kinTop": [
-        {
-          "title": "엘지 울트라pc 14U390",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10102&docId=364102432&answerNo=2",
-          "views": 115,
-          "answers": 3
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-08T21:28:56.807Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "저커버그 부부의 바이오허브",
-      "issue": "저커버그 부부의 바이오허브",
-      "topic": "저커버그 부부의 바이오허브",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 109,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 109",
-        "선점 후보 — 경쟁 문서 109건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "미 정부와 구글이 저커버그 부부의 바이오허브에 2.4조 AI 생물학 프로젝트로 합류해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "저커버그 부부의 바이오허브, 미 정부·구글 합류한 AI 생물학 데이터",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "저커버그 부부의 바이오허브에 챈 저커버그 이니셔티브가 돈 쏟는 이유가 있더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "챈 저커버그 이니셔티브",
-          "searchVolume": 50,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "챈 저커버그 이니셔티브",
-          "searchVolume": 50,
-          "documentCount": 423,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-08T21:28:56.807Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "주우크라 대사 본국",
-      "issue": "주우크라 대사 본국",
-      "topic": "주우크라 대사 본국",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 2,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 1,
-      "freshFrontalCount": 1,
-      "reasons": [
-        "문서수 2",
-        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 1건 (최근 1건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "외교부가 북한군 포로 공개에 항의해 주우크라이나 대사를 본국 소환했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "주우크라 대사 본국 소환 이유, 북한군 포로 공개 항의 배경",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "주우크라 대사 본국 소환 소식에 다들 북한군 포로부터 찾더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:43:28.262Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "리퀴드 ai d1-3b",
-      "issue": "리퀴드 AI",
-      "topic": "리퀴드 AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 2,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 2",
-        "선점 후보 — 경쟁 문서 2건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 모델 d1-3B를 출시했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리퀴드 ai d1-3b 10배 큰 모델 제친 멀티모달 성능",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리퀴드 ai d1-3b 덩치 10배 모델 제쳤다는데 많이들 놓치는 부분",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:43:28.262Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "d1-3b 사양",
-      "issue": "d1-3B",
-      "topic": "d1-3B",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 37,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 37",
-        "선점 후보 — 경쟁 문서 37건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 의사결정 모델 d1-3B를 출시했다.",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "d1-3b 사양 10배 큰 체급 제친 멀티모달 모델 성능",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "d1-3b 사양 봤는데 멀티모달로 10배 체급을 제친 게 의외네요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 143,
-      "kinTop": [
-        {
-          "title": "배트필드 하드라인 사양 질문",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=10102&docId=227421491&answerNo=1",
-          "views": 569,
-          "answers": 1
-        },
-        {
-          "title": "오버워치 할려는데 사양좀봐주세요",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20313&docId=257498220&answerNo=1",
-          "views": 217,
-          "answers": 4
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:43:28.262Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "mai 코드 1.1",
-      "issue": "MAI-코드-1.1",
-      "topic": "MAI-코드-1.1",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 93,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 93",
-        "선점 후보 — 경쟁 문서 93건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "MS가 서피스 랩톱 울트라 출시에 맞춰 코딩 AI MAI-코드-1.1 플래시를 공개했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "mai 코드 1.1 플래시 가격 4분의 1로 낮춘 배경",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "mai 코드 1.1 플래시 가격 4분의 1 됐는데 코파일럿이랑 뭐가 다른지",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 3,
-      "kinTop": [
-        {
-          "title": "rl크래프트 종료코드1",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=20411&docId=458352857&answerNo=1",
-          "views": 294,
-          "answers": 1
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:43:28.262Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "CPTPP 가입 보류",
-      "issue": "CPTPP 가입 보류",
-      "topic": "CPTPP 가입 보류",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 242,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 242",
-        "선점 후보 — 경쟁 문서 242건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이 대통령이 농어민 신뢰 회복 우선으로 연내 가입신청 보류를 지시했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "CPTPP 가입 보류 이유와 1년 지연 시 6조 손실 쟁점",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "CPTPP 가입 보류되고 나서 CPTPP 가입국 목록 다시 들여다봤어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "CPTPP 뜻",
-          "searchVolume": 7710,
-          "frame": "generic"
-        },
-        {
-          "keyword": "CPTPP 가입국",
-          "searchVolume": 280,
-          "frame": "generic"
-        },
-        {
-          "keyword": "CPTPP 회원국",
-          "searchVolume": 140,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "CPTPP 뜻",
-          "searchVolume": 7710,
-          "documentCount": 1637,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "CPTPP 가입국",
-          "searchVolume": 280,
-          "documentCount": 537,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "CPTPP 회원국",
-          "searchVolume": 140,
-          "documentCount": 3097,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "CPTPP 한국 가입",
-          "searchVolume": 130,
-          "documentCount": 6310,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:43:28.262Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "리퀴드 ai 멀티모달",
-      "issue": "리퀴드 AI",
-      "topic": "리퀴드 AI",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 223,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 223",
-        "선점 후보 — 경쟁 문서 223건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 체급을 제친 멀티모달 모델 d1-3B를 출시했다.",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "리퀴드 ai 멀티모달 d1-3B 10배 체급 제친 모델",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "리퀴드 ai 멀티모달 d1-3B가 10배 큰 모델을 제쳤다는데 여기서 갈리더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 1,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:43:28.262Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "d1-3b 매개변수",
-      "issue": "d1-3B",
-      "topic": "d1-3B",
-      "lane": "tech",
-      "issueType": "fresh",
-      "isDerived": true,
-      "origin": "derived",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 29,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": false,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": false,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 29",
-        "선점 후보 — 경쟁 문서 29건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        }
-      ],
-      "whySearch": {
-        "text": "리퀴드 AI가 10배 큰 모델을 제친 멀티모달 의사결정 모델 d1-3B를 출시해서",
-        "basis": "뉴스 헤드라인 5건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "seo": {
-          "text": "d1-3b 매개변수 규모와 10배 큰 모델 이긴 이유",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "d1-3b 매개변수 생각보다 작은데 10배 큰 모델을 이겼다더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "알레스 페레이라",
-      "issue": "알레스 페레이라",
-      "topic": "알레스 페레이라",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 59,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 59",
-        "선점 후보 — 경쟁 문서 59건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "UFC 챔피언 알렉스 페레이라가 한국을 찾아 팬미팅·세미나를 열어서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "분류 안 됨",
-      "adsenseFit": null,
-      "adsenseReason": "의도·CPC·광고 실측 부족 — 판정하지 않는다",
-      "titles": {
-        "home": {
-          "text": "알레스 페레이라가 존 존스전 먼저 꺼낸 이유 들어보니 좀 다르더라고요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": null,
-      "keywordPool": null,
-      "trend": null,
-      "kinCount": 37,
-      "kinTop": [
-        {
-          "title": "알렉스 페레이라",
-          "link": "https://kin.naver.com/qna/detail.naver?dirId=100405&docId=470755165&answerNo=0",
-          "views": 18,
-          "answers": null
-        }
-      ],
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
-    },
-    {
-      "keyword": "CPTPP 가입 말라",
-      "issue": "CPTPP 가입 말라",
-      "topic": "CPTPP 가입 말라",
-      "lane": "realtime",
-      "issueType": "fresh",
-      "isDerived": false,
-      "origin": "head",
-      "originReason": null,
-      "verdict": "preemption",
-      "preemptionKind": "no-demand",
-      "serp": null,
-      "documentCount": 299,
-      "documentCountMeasured": true,
-      "searchVolume": null,
-      "searchVolumeLt10": true,
-      "hasLiveDemand": false,
-      "demandStatus": "unknown",
-      "demandRatio": 0,
-      "issueStatus": "unknown",
-      "isHot": true,
-      "frontalDocCount": 0,
-      "freshFrontalCount": 0,
-      "reasons": [
-        "문서수 299",
-        "선점 후보 — 경쟁 문서 299건, 수요 미검출"
-      ],
-      "evidence": [
-        {
-          "code": "empty-field",
-          "text": "정면으로 다룬 글 0건 (최근 0건)"
-        },
-        {
-          "code": "fresh",
-          "text": "이슈 자체가 지금 뜨는 중(HOT)"
-        }
-      ],
-      "whySearch": {
-        "text": "이재명 대통령이 연내 CPTPP 가입 신청을 하지 말라고 지시해서",
-        "basis": "뉴스 헤드라인 6건 근거 · 에이전트 추론(헤드라인 밖 사실 검증 탈락)"
-      },
-      "intentLabel": "거래",
-      "adsenseFit": false,
-      "adsenseReason": "거래형 검색 — 구매 직전이라 광고 클릭이 거의 없다",
-      "titles": {
-        "seo": {
-          "text": "CPTPP 가입 말라, 李 연내 신청 보류 지시 배경과 농어민 쟁점",
-          "frame": "ai",
-          "basis": "실측 풀 근거 AI 작성"
-        },
-        "home": {
-          "text": "CPTPP 가입 말라더니 CPTPP 가입국 명단 보다가 좀 멈칫했어요",
-          "frame": "ai",
-          "basis": "메인+서브+후킹 (실측 근거)"
-        }
-      },
-      "subKeywords": [
-        {
-          "keyword": "CPTPP 뜻",
-          "searchVolume": 7710,
-          "frame": "generic"
-        },
-        {
-          "keyword": "CPTPP 가입국",
-          "searchVolume": 280,
-          "frame": "generic"
-        }
-      ],
-      "keywordPool": [
-        {
-          "keyword": "CPTPP 뜻",
-          "searchVolume": 7710,
-          "documentCount": 1636,
-          "source": "ai-verified"
-        },
-        {
-          "keyword": "CPTPP 가입국",
-          "searchVolume": 280,
-          "documentCount": 537,
-          "source": "ai-verified"
-        }
-      ],
-      "trend": null,
-      "kinCount": 0,
-      "kinTop": null,
-      "monetize": null,
-      "measuredAt": "2026-10-08T09:19:40.023Z",
-      "recommendationStatus": "observe",
-      "exclusionReason": "demand-unverified",
-      "carried": true
     }
   ],
   "rejectedCount": 0,
   "issues": [
     {
-      "issue": "김경문 감독 한화",
-      "issueType": "entertainment",
+      "issue": "충장축제 오리지널 퍼레이드",
+      "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": true,
-      "why": "계약 마지막 해 가을야구 실패로 한화를 떠난다",
+      "isHot": false,
+      "why": "금남로에서 13개 동 주민들이 오리지널 퍼레이드 펼쳐 화제",
       "headlines": [
         {
-          "title": "“오늘이 마지막 경기” 깜짝 발표…김경문 감독, 한화 떠난다",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-10-10T08:35:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/025/0003556942?sid=103"
-        },
-        {
-          "title": "'준우승 5번' 김경문 감독, 한화 떠난다",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-10T07:17:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/055/0001394433"
-        },
-        {
-          "title": "'준우승 5번' 김경문 감독, 한화 떠난다…끝내 못 푼 우승의 한",
+          "title": "충장축제 오리지널 퍼레이드 펼치는 주민들",
           "press": "yna.co.kr",
-          "publishedAt": "2026-10-10T06:50:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/001/0016368386"
+          "publishedAt": "2026-10-10T13:46:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016368511?sid=102"
+        },
+        {
+          "title": "즐거운 충장축제 퍼레이드",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-10T13:29:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014244553?sid=102"
+        },
+        {
+          "title": "화려하게 펼쳐지는 충장축제 오리지널 퍼레이드",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-10T13:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016368521?sid=102"
         }
       ],
       "concentrated": [
         {
-          "keyword": "김경문",
+          "keyword": "충장축제",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "김지원",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "rising",
+      "isHot": true,
+      "why": "김지원 주연 의학드라마 '닥터X' 첫 방송 호평",
+      "headlines": [
+        {
+          "title": "수술방 들어간 김지원, 얼굴 갈아 끼웠다[스경연예연구소]",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-10-10T09:34:00.000Z",
+          "link": "https://m.entertain.naver.com/article/144/0001143241"
+        },
+        {
+          "title": "김지원vs김유정, 안방서 맞붙는다",
+          "press": "edaily.co.kr",
+          "publishedAt": "2026-10-09T23:36:00.000Z",
+          "link": "https://m.entertain.naver.com/article/018/0006385017"
+        },
+        {
+          "title": "김지원, 의사 가운도 이렇게 잘 어울려..“히히 집에 간다” 깜찍",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-10-10T13:36:00.000Z",
+          "link": "https://m.entertain.naver.com/article/109/0005621665"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "김지원 나무위키",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "김경문 감독",
+          "keyword": "김지원 드라마",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김지원 닥터x",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김지원 배우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김지원 지창욱",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김지원 유퀴즈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "유퀴즈 김지원",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "김지원 팬미팅",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "청주공항 보조배터리 화재",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": false,
+      "why": "청주발 제주항공 이륙 직전 보조배터리 불, 168명 대피",
+      "headlines": [
+        {
+          "title": "또 기내 보조배터리 화재…청주공항 이륙대기 승객 168명 전원 대피",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-10T12:56:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005424378?sid=102"
+        },
+        {
+          "title": "청주공항 이륙 전 승객 보조배터리에서 불…인명피해 없어",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-10T11:42:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016368480?sid=101"
+        },
+        {
+          "title": "청주공항서 이륙 직전 보조배터리 불…168명 전원 대피",
+          "press": "news.sbs.co.kr",
+          "publishedAt": "2026-10-10T12:08:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/055/0001394467?sid=102"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "로또 당첨",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "로또 1245회 1등 10명 모두 자동, 각 30억 당첨",
+      "headlines": [
+        {
+          "title": "로또 1등 30억 당첨자 10명 모두가 ‘자동’…명당 판매처 보니",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-10T12:52:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005746599?sid=102"
+        },
+        {
+          "title": "\"30억 대박\" 로또 1등 '10명'...모두 '자동', 당첨 번호는?",
+          "press": "mt.co.kr",
+          "publishedAt": "2026-10-10T12:38:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/008/0005424377?sid=102"
+        },
+        {
+          "title": "로또 1245회 당첨번호 ‘4·5·25·28·32·42’…1등 당첨금 30억원",
+          "press": "khan.co.kr",
+          "publishedAt": "2026-10-10T11:46:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/032/0003475452?sid=102"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "로또 당첨 확률",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "로또 당첨 꿈",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "이강인 아틀레티코 벤치",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "발목 부상 여파로 이강인 8경기 만에 벤치 시작",
+      "headlines": [
+        {
+          "title": "'발목 부상' 여파인가? 이강인 8경기 만에 벤치서 시작…아틀레티코, 알...",
+          "press": "mydaily.co.kr",
+          "publishedAt": "2026-10-10T13:42:00.000Z",
+          "link": "https://m.sports.naver.com/wfootball/article/117/0004113956"
+        },
+        {
+          "title": "'이강인 교체 출전' 아틀레티코, 10명이 뛴 알라베스에 2-1 승리",
+          "press": "stoo.com",
+          "publishedAt": "2026-10-10T16:18:00.000Z",
+          "link": "http://www.stoo.com/article.php?aid=109300086593"
+        },
+        {
+          "title": "[오피셜] 발목 부상의 여파? 휴식?…이강인, 알라베스전은 선발 아닌 벤...",
+          "press": "sports.khan.co.kr",
+          "publishedAt": "2026-10-10T14:09:00.000Z",
+          "link": "https://m.sports.naver.com/wfootball/article/144/0001143259"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "SNS 소통 지속할",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "unknown",
+      "isHot": true,
+      "why": "이 대통령 '품격 없다 비난해도 SNS 소통 계속'",
+      "headlines": [
+        {
+          "title": "이 대통령, \"노무현 전 대통령도 댓글 소통... SNS 계속 할 것\"",
+          "press": "mediatoday.co.kr",
+          "publishedAt": "2026-10-10T14:01:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/006/0000138147?sid=100"
+        },
+        {
+          "title": "李대통령 \"품격 없다 비난해도 SNS 소통 계속…조롱당하던 盧 떠올라\"",
+          "press": "fnnews.com",
+          "publishedAt": "2026-10-10T14:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/014/0005587213?sid=100"
+        },
+        {
+          "title": "이광수도 푹 빠졌다…아이돌 넘어 배우로 확장된 '대소통의 시대' [N초점...",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-09T22:30:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009219595"
+        }
+      ],
+      "concentrated": [],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "민도희",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": false,
+      "why": "응사 민도희, 15개월 알바 접고 캐나다 연수 떠난다",
+      "headlines": [
+        {
+          "title": "'응사' 민도희, 결국 한국 떠난다",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-10T15:00:00.000Z",
+          "link": "https://m.entertain.naver.com/article/003/0014244568"
+        },
+        {
+          "title": "“좋은 기회 진짜 왔다”…긴공백 끝 한국 떠나는 ‘응사’ 민도희, 무...",
+          "press": "mk.co.kr",
+          "publishedAt": "2026-10-06T07:41:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/009/0005744633?sid=103"
+        },
+        {
+          "title": "\"무섭긴 하지만\"..민도희, 공백기 끝 돌연 韓 떠난다",
+          "press": "osen.co.kr",
+          "publishedAt": "2026-10-06T14:41:00.000Z",
+          "link": "https://m.entertain.naver.com/article/109/0005619341"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "민도희 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민도희 근황",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민도희 키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민도희 결혼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민도희 나이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민도희 논란",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민도희 맥심",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "민도희 배우",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [
+        {
+          "keyword": "민도희 복귀 시점",
+          "reason": "연수 후 복귀 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "민도희 차기작",
+          "reason": "복귀 작품 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "민도희 유학 이유",
+          "reason": "돌연 결정 배경",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
+      "rowCount": 0
+    },
+    {
+      "issue": "사랑이",
+      "issueType": "fresh",
+      "lane": "realtime",
+      "issueStatus": "stable",
+      "isHot": true,
+      "why": "장동윤·김승윤 오늘 결혼, 웨딩화보 공개",
+      "headlines": [
+        {
+          "title": "\"내 사랑, 나의 뮤즈\" 장동윤·김승윤 오늘(10일) 결혼",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-10-10T04:28:00.000Z",
+          "link": "https://m.entertain.naver.com/article/437/0000515028"
+        },
+        {
+          "title": "'결혼' 장동윤♥김승윤, 웨딩화보 공개…\"나의 사랑, 나의 뮤즈\" [N샷]",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-10T06:19:00.000Z",
+          "link": "https://m.entertain.naver.com/article/421/0009219861"
+        },
+        {
+          "title": "“홍상수, 어떤 여성 사랑하던 남자에서 아버지로” 김민희와 관계 언급...",
+          "press": "seoul.co.kr",
+          "publishedAt": "2026-10-10T14:30:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/081/0003687683?sid=103"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "사랑이 온다",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "드라마 사랑이 온다",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑이 온다 출연진",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑이 온다 몇부작",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑이 온다 19회",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑이 온다 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑이 온다 줄거리",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "사랑이 온다 시청률",
           "searchVolume": null,
           "origin": "autocomplete"
         }
@@ -4008,8 +4342,8 @@
       "issueType": "fresh",
       "lane": "realtime",
       "issueStatus": "unknown",
-      "isHot": true,
-      "why": "잇단 AI 오작동 사고에 미 정부가 사고 신고를 의무화했다",
+      "isHot": false,
+      "why": "미국, AI 사고 신고 의무화…자율규제서 선회",
       "headlines": [
         {
           "title": "美, AI 사고 신고 의무화…\"중대 국가안보 의무\"",
@@ -4018,16 +4352,16 @@
           "link": "https://n.news.naver.com/mnews/article/003/0014244356?sid=104"
         },
         {
+          "title": "앤트로픽 AI, 美 경찰에 미제 살인 허위 제보…두 달 뒤 당국 통보",
+          "press": "segye.com",
+          "publishedAt": "2026-10-10T10:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004165523?sid=104"
+        },
+        {
           "title": "트럼프 AI기업에 으름장...“사고내면 즉각 피해 책임”",
           "press": "mk.co.kr",
           "publishedAt": "2026-10-10T00:57:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/009/0005746518?sid=101"
-        },
-        {
-          "title": "美 정부, AI 사고 신고 의무화…자율규제 중심에서 선회",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-10-10T06:38:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000540816?sid=105"
         }
       ],
       "concentrated": [],
@@ -4035,355 +4369,265 @@
       "rowCount": 0
     },
     {
-      "issue": "코르티스",
+      "issue": "레알 마드리드",
       "issueType": "fresh",
       "lane": "realtime",
+      "issueStatus": "declining",
+      "isHot": true,
+      "why": "이강인 AT마드리드 9월의 선수 선정, 발베르데 복귀",
+      "headlines": [
+        {
+          "title": "AT마드리드 팬 선정 9월의 선수 이강인 \"동료들에게 고맙다\"",
+          "press": "newsis.com",
+          "publishedAt": "2026-10-10T01:37:00.000Z",
+          "link": "https://m.sports.naver.com/wfootball/article/003/0014244166"
+        },
+        {
+          "title": "이강인 '마녀사냥' 실패! 레알 마드리드 '거짓 부상' 발표, 아틀레티코...",
+          "press": "mydaily.co.kr",
+          "publishedAt": "2026-10-10T18:28:00.000Z",
+          "link": "https://m.sports.naver.com/wfootball/article/117/0004113971"
+        },
+        {
+          "title": "AT 마드리드 9월의 선수상 받은 이강인 \"동료들에게 고맙다\"",
+          "press": "news1.kr",
+          "publishedAt": "2026-10-10T02:23:00.000Z",
+          "link": "https://m.sports.naver.com/wfootball/article/421/0009219685"
+        }
+      ],
+      "concentrated": [
+        {
+          "keyword": "레알 마드리드 선수단",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레알 마드리드 유니폼",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레알 마드리드 나무위키",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레알 마드리드 일정",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레알 마드리드 스쿼드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레알 마드리드 코리아",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레알 마드리드 바람막이",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "레알 마드리드 선수",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
+      "nextWave": [],
+      "rowCount": 0
+    },
+    {
+      "issue": "엔비디아",
+      "issueType": "fresh",
+      "lane": "tech",
       "issueStatus": "stable",
-      "isHot": true,
-      "why": "코르티스가 F1 싱가포르 GP 메인 무대에서 6만 관객과 공연했다",
-      "headlines": [
-        {
-          "title": "코르티스, F1 싱가포르 메인 무대 질주…6만 관객 달궜다",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-10T06:05:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014244367"
-        },
-        {
-          "title": "코르티스, F1 싱가포르 GP 메인 무대 접수",
-          "press": "bntnews.co.kr",
-          "publishedAt": "2026-10-10T06:16:00.000Z",
-          "link": "https://www.bntnews.co.kr/article/view/bnt202610100068"
-        },
-        {
-          "title": "코르티스, F1 싱가포르서 6만 관객 열광… K팝 대표로 무대 올라",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-10T08:01:00.000Z",
-          "link": "https://m.entertain.naver.com/article/018/0006385419"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "코르티스 주훈",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코르티스 건호",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코르티스 성현",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코르티스 제임스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코르티스 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코르티스 redred",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코르티스 마틴",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "코르티스 엄성현",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "코르티스 컴백",
-          "reason": "다음 신곡",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "코르티스 내한",
-          "reason": "국내 무대",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "코르티스 투어 일정",
-          "reason": "다음 공연지",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "구준엽",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "rising",
-      "isHot": true,
-      "why": "구준엽이 故서희원 생일에 묘소를 찾아 한국에 안 돌아간다고 밝혔다",
-      "headlines": [
-        {
-          "title": "구준엽 “한국 안돌아간다”…故서희원 생일에 묘소 지키며 눈물",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-10-08T08:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/025/0003556678?sid=103"
-        },
-        {
-          "title": "“한국 안 돌아가”…수척해진 구준엽, 故서희원 생일에 묘소 찾아 ‘눈...",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-08T01:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005745753?sid=103"
-        },
-        {
-          "title": "'서희원과 사별' 구준엽, 한국 돌아갈 생각 묻자 \"없다\"",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-08T06:34:00.000Z",
-          "link": "https://m.entertain.naver.com/article/003/0014242429"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "구준엽 서희원",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구준엽 근황",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구준엽 와이프",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구준엽 상속",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구준엽 나무위키",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구준엽 사주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구준엽 결혼",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "구준엽 나이",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [
-        {
-          "keyword": "구준엽 한국 복귀",
-          "reason": "언제 돌아오나",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "구준엽 활동",
-          "reason": "재개 여부",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
-      "rowCount": 0
-    },
-    {
-      "issue": "ssg 대 kia",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "KIA가 NC에 역전승해 준PO 직행에 다가섰고 SSG와 3위를 다툰다",
-      "headlines": [
-        {
-          "title": "KIA, NC 잡고 준PO 직행에 성큼… LG는 롯데에 충격 대패",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-09T08:41:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/018/0006384843"
-        },
-        {
-          "title": "KIA, NC에 역전승…'준PO 직행 보인다!'",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-09T11:43:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/055/0001394329"
-        },
-        {
-          "title": "치열한 3위 경쟁… KIA·LG 중 누구",
-          "press": "chosun.com",
-          "publishedAt": "2026-10-09T15:34:00.000Z",
-          "link": "https://m.sports.naver.com/kbaseball/article/023/0004003018"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "아르텍스 공개 중단",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
       "isHot": false,
-      "why": "한국 금융권 해킹에 악용된 중국 AI 아르텍스가 공개 개발을 중단했다",
+      "why": "엔비디아, AI 스타트업 리플렉션 추가투자·인수 협상중",
       "headlines": [
         {
-          "title": "한국 금융권 해킹에 등장한 '아르텍스' 결국 공개 중단",
+          "title": "\"엔비디아, AI 스타트업 리플렉션에 추가 투자·인수 협상중\"",
           "press": "yna.co.kr",
-          "publishedAt": "2026-10-10T01:59:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016368174?sid=105"
+          "publishedAt": "2026-10-10T20:13:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016368593?sid=104"
         },
         {
-          "title": "한국 금융권 해킹 공격에 쓰인 '아르텍스', 공개 중단",
+          "title": "엔비디아도 못 간 길‥빅테크 최초 100조 돌파",
+          "press": "imnews.imbc.com",
+          "publishedAt": "2026-10-08T21:51:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/214/0001528040?sid=101"
+        },
+        {
+          "title": "엔비디아도 못 한 걸 삼성전자가…3분기 영업익 '100조 돌파'",
           "press": "news.jtbc.co.kr",
-          "publishedAt": "2026-10-10T06:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/437/0000515035?sid=104"
-        },
-        {
-          "title": "금융권 해킹에 쓰인 '아르텍스', 공개 중단…中 개발자 \"악용 우려\"",
-          "press": "news.tvchosun.com",
-          "publishedAt": "2026-10-10T05:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/448/0000644077?sid=101"
+          "publishedAt": "2026-10-08T01:49:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/437/0000514668?sid=101"
         }
       ],
       "concentrated": [
         {
-          "keyword": "아르텍스",
+          "keyword": "엔비디아 주가",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 마곡",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 주식",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 회장",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 그래픽카드",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 ai",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 실적",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "엔비디아 시총",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
+      "nextWave": [
+        {
+          "keyword": "엔비디아 다음 인수",
+          "reason": "추가 투자처 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
-      "issue": "중국 EU 하이브리드",
+      "issue": "디시전-1",
       "issueType": "fresh",
-      "lane": "realtime",
+      "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "중국이 EU행 하이브리드차 수출을 줄이고 희토류 수출허가 편의를 주기로 했다",
+      "why": "MS, 에이전트 의사결정 특화 모델 '디시전-1' 공개",
       "headlines": [
         {
-          "title": "中, EU에 하이브리드차 수출 줄이기로…희토류 수출허가 편의(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-09T14:53:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016367964?sid=104"
+          "title": "MS, 에이전트 의사결정 특화 모델 '디시전-1' 공개…오픈AI도 API 정식 출...",
+          "press": "aitimes.com",
+          "publishedAt": "2026-10-10T09:54:00.000Z",
+          "link": "https://www.aitimes.com/news/articleView.html?idxno=216107"
         },
         {
-          "title": "\"EU, 보호주의 자제해야\"…中관영지, 유럽 향해 뼈 있는 경고",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-10T07:56:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005341024?sid=104"
+          "title": "구창모가 KIA 2026 명운을 가른다, 벌써 6번째 만남…김도영도 고전했다...",
+          "press": "mydaily.co.kr",
+          "publishedAt": "2026-10-08T08:30:00.000Z",
+          "link": "https://m.sports.naver.com/kbaseball/article/117/0004113602"
         },
         {
-          "title": "중국산 하이브리드 수출 절반 낮췄지만…EU, 1.5조 적자해법 고심",
-          "press": "sedaily.com",
-          "publishedAt": "2026-10-10T01:06:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/011/0004669812?sid=104"
+          "title": "오픈AIAWS도 참전, Jev가 터뜨린 ‘디시전 AI’ 전쟁",
+          "press": "byline.network",
+          "publishedAt": "2026-10-02T06:34:00.000Z",
+          "link": "https://byline.network/?p=9004111222622174"
         }
       ],
       "concentrated": [],
-      "nextWave": [],
+      "nextWave": [
+        {
+          "keyword": "디시전-1 성능",
+          "reason": "벤치마크 결과 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
-      "issue": "첫 홀 버디",
+      "issue": "MS",
       "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "유현조가 버디 11개로 단독 선두에 올랐다",
-      "headlines": [
-        {
-          "title": "버디만 11개…유현조, 단독 선두 도약",
-          "press": "news.sbs.co.kr",
-          "publishedAt": "2026-10-09T11:50:00.000Z",
-          "link": "https://m.sports.naver.com/golf/article/055/0001394333"
-        },
-        {
-          "title": "[포토]최민경,첫 홀 버디 들어가라",
-          "press": "edaily.co.kr",
-          "publishedAt": "2026-10-09T09:09:00.000Z",
-          "link": "https://m.sports.naver.com/golf/article/018/0006384888"
-        },
-        {
-          "title": "유현조, HJ중공업·동부건설 챔피언십 2R 단독 1위…버디 11개(종합)",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-09T11:52:00.000Z",
-          "link": "https://m.sports.naver.com/golf/article/001/0016367946"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "첫홀 버디 뜻",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "첫홀",
-          "searchVolume": null,
-          "origin": "related"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0
-    },
-    {
-      "issue": "사우디 후티 공습",
-      "issueType": "fresh",
-      "lane": "realtime",
+      "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "공항 공격을 받은 사우디가 후티 군사목표물 136개를 파괴했다",
+      "why": "미국, MS·어도비 외국인 근로자 영주권 후원 중단",
       "headlines": [
         {
-          "title": "사우디, 예멘 후티 반군에 공습…\"군사 목표물 136개 파괴\"",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-10T07:46:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005424367?sid=104"
+          "title": "美, MS 등 빅테크의 '외국인 노동자 영주권 신청' 배제",
+          "press": "yna.co.kr",
+          "publishedAt": "2026-10-08T17:11:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016367102?sid=104"
         },
         {
-          "title": "공항 공격받은 사우디, 후티에 대규모 공습…“136곳 파괴”",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-10T07:20:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005746562?sid=104"
-        },
-        {
-          "title": "사우디 \"후티 겨냥 대규모 작전…136개 군사목표물 파괴\"",
+          "title": "美 \"MS·어도비 전문직 근로자 영주권 후원 자격 중단\"",
           "press": "newsis.com",
-          "publishedAt": "2026-10-10T08:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014244455?sid=104"
+          "publishedAt": "2026-10-08T18:50:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/003/0014243061?sid=104"
+        },
+        {
+          "title": "美, MS·어도비 외국인 근로자 영주권 '제동'",
+          "press": "hankyung.com",
+          "publishedAt": "2026-10-09T08:48:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/015/0005340892?sid=104"
         }
       ],
-      "concentrated": [],
+      "concentrated": [
+        {
+          "keyword": "ms 뜻",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스",
+          "searchVolume": 20930,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 365",
+          "searchVolume": 9720,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 영구",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 오피스 무료",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 정품인증방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 쿠키허용방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        },
+        {
+          "keyword": "ms 로그아웃 방법",
+          "searchVolume": null,
+          "origin": "autocomplete"
+        }
+      ],
       "nextWave": [],
       "rowCount": 0
     },
@@ -4393,7 +4637,7 @@
       "lane": "tech",
       "issueStatus": "unknown",
       "isHot": false,
-      "why": "물리 법칙을 실시간 예측하는 월드 모델 오딧세이-3가 공개됐다",
+      "why": "물리 법칙 실시간 예측 월드 모델 '오딧세이-3' 공개",
       "headlines": [
         {
           "title": "물리 법칙 실시간 예측하는 월드 모델 '오딧세이-3' 공개...\"벤치마크 최...",
@@ -4426,7 +4670,15 @@
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
+      "nextWave": [
+        {
+          "keyword": "오딧세이-3 체험",
+          "reason": "사용 방법 관심",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -4435,7 +4687,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "트럼프가 백악관 새 대변인에 보수 평론가 자카리아를 임명했다",
+      "why": "트럼프, 백악관 새 대변인에 40대 워킹맘 자카리아 임명",
       "headlines": [
         {
           "title": "트럼프, 백악관 대변인에 자카리아 임명 발표",
@@ -4498,7 +4750,15 @@
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
+      "nextWave": [
+        {
+          "keyword": "백악관 한국 입장",
+          "reason": "한미관계 발언 주목",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -4507,7 +4767,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "우크라이나가 '러시아의 구글' 얀덱스 데이터센터를 이틀째 공격했다",
+      "why": "우크라, '러시아 구글' 얀덱스 AI 데이터센터 연일 공격",
       "headlines": [
         {
           "title": "우크라, '러시아 구글' 얀덱스 데이터센터 연일 공격",
@@ -4522,10 +4782,10 @@
           "link": "https://n.news.naver.com/mnews/article/020/0003753975?sid=101"
         },
         {
-          "title": "‘러시아의 구글’ 데이터센터 피격…우크라 드론 공습 이어져",
-          "press": "biz.heraldcorp.com",
-          "publishedAt": "2026-10-09T12:40:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/016/0002707406?sid=104"
+          "title": "구글 핏빗 엣지, 10월 12일 공개 예고…유출 사양은 AMOLED에 배터리 7일",
+          "press": "wikitree.co.kr",
+          "publishedAt": "2026-10-10T20:12:00.000Z",
+          "link": "https://www.wikitree.co.kr/articles/1165222"
         }
       ],
       "concentrated": [
@@ -4560,13 +4820,13 @@
           "origin": "autocomplete"
         },
         {
-          "keyword": "구글 원",
+          "keyword": "구글 주식",
           "searchVolume": null,
           "origin": "autocomplete"
         },
         {
-          "keyword": "구글 폼",
-          "searchVolume": null,
+          "keyword": "구글 스칼라",
+          "searchVolume": 16150,
           "origin": "autocomplete"
         }
       ],
@@ -4579,25 +4839,25 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": "폴란드 학교에서 15세 흉기 난동으로 1명이 숨지고 2명이 다쳤다",
+      "why": "폴란드서 나흘새 3번째 학교 내 흉기 공격, 3명 부상",
       "headlines": [
         {
-          "title": "폴란드 학교서 19살 흉기 난동…10명 부상",
+          "title": "폴란드서 나흘새 3번째 학교 내 흉기 공격…3명 부상",
           "press": "yna.co.kr",
-          "publishedAt": "2026-10-07T17:21:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016364493?sid=104"
-        },
-        {
-          "title": "러, 우크라에 융단 폭격 33명 사망…이틀 연속 폴란드 교내 칼부림",
-          "press": "mbn.co.kr",
-          "publishedAt": "2026-10-09T10:47:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001972675?sid=104"
+          "publishedAt": "2026-10-10T16:14:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016368577?sid=104"
         },
         {
           "title": "[성남 소식] 폴란드 방산협회와 기술협력 협약 체결",
           "press": "sidae.com",
           "publishedAt": "2026-10-10T05:04:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/417/0001160490?sid=102"
+        },
+        {
+          "title": "러, 우크라에 융단 폭격 33명 사망…이틀 연속 폴란드 교내 칼부림",
+          "press": "mbn.co.kr",
+          "publishedAt": "2026-10-09T10:47:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/057/0001972675?sid=104"
         }
       ],
       "concentrated": [
@@ -4642,7 +4902,22 @@
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [],
+      "nextWave": [
+        {
+          "keyword": "폴란드 흉기 용의자",
+          "reason": "가해자 정보 궁금",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        },
+        {
+          "keyword": "폴란드 치안",
+          "reason": "연쇄 사건 배경",
+          "searchVolume": null,
+          "documentCount": null,
+          "onBoard": false
+        }
+      ],
       "rowCount": 0
     },
     {
@@ -4651,7 +4926,7 @@
       "lane": "tech",
       "issueStatus": "stable",
       "isHot": false,
-      "why": null,
+      "why": "앤트로픽 AI, 미제 살인사건 경찰에 허위 제보 논란",
       "headlines": [
         {
           "title": "AI가 경찰에 미제사건 가짜 제보까지…앤트로픽, 뒤늦게 확인",
@@ -4660,16 +4935,16 @@
           "link": "https://n.news.naver.com/mnews/article/001/0016368070?sid=104"
         },
         {
-          "title": "AI에 사람 취급?…앤트로픽, AI 모욕하는 이용자 차단한다",
-          "press": "mbn.mk.co.kr",
-          "publishedAt": "2026-10-10T06:17:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/057/0001972723?sid=104"
-        },
-        {
           "title": "금융권 연쇄 해킹 도구 지목된 AI '아르텍스' 결국 비공개 전환",
           "press": "hankookilbo.com",
           "publishedAt": "2026-10-10T07:43:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/469/0000958665?sid=104"
+        },
+        {
+          "title": "앤트로픽 AI, 美 경찰에 미제 살인 허위 제보…두 달 뒤 당국 통보",
+          "press": "segye.com",
+          "publishedAt": "2026-10-10T10:21:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/022/0004165523?sid=104"
         }
       ],
       "concentrated": [
@@ -4714,102 +4989,46 @@
           "origin": "autocomplete"
         }
       ],
-      "nextWave": [
-        {
-          "keyword": "오픈AI 상장일",
-          "reason": "IPO 시점",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오픈AI 주가",
-          "reason": "매수 방법",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        },
-        {
-          "keyword": "오픈AI 경쟁사",
-          "reason": "앤트로픽 비교",
-          "searchVolume": null,
-          "documentCount": null,
-          "onBoard": false
-        }
-      ],
+      "nextWave": [],
       "rowCount": 0
     },
     {
-      "issue": "스페이스X",
+      "issue": "아르텍스 공개 중단",
       "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "stable",
+      "lane": "realtime",
+      "issueStatus": "unknown",
       "isHot": false,
-      "why": "스페이스X가 저대역 주파수를 11조원에 인수해 미 이동통신 시장에 진출한다",
+      "why": "한국 금융권 해킹에 악용된 중국 AI 아르텍스가 공개 개발을 중단했다",
       "headlines": [
         {
-          "title": "스페이스X, 저대역 주파수 11조원에 인수…이동통신업계 긴장",
+          "title": "한국 금융권 해킹에 등장한 '아르텍스' 결국 공개 중단",
           "press": "yna.co.kr",
-          "publishedAt": "2026-10-09T20:37:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016367990?sid=104"
+          "publishedAt": "2026-10-10T01:59:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/001/0016368174?sid=105"
         },
         {
-          "title": "스페이스X, 저대역 주파수 11조원에 인수 추진…통신업계 긴장",
-          "press": "newsis.com",
-          "publishedAt": "2026-10-09T21:07:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/003/0014244011?sid=104"
+          "title": "한국 금융권 해킹 공격에 쓰인 '아르텍스', 공개 중단",
+          "press": "news.jtbc.co.kr",
+          "publishedAt": "2026-10-10T06:06:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/437/0000515035?sid=104"
         },
         {
-          "title": "스페이스X, 저대역 주파수 인수 후 美 통신사 시총 80조 증발",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-10T00:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005424328?sid=101"
+          "title": "금융권 해킹에 쓰인 '아르텍스', 공개 중단…中 개발자 \"악용 우려\"",
+          "press": "news.tvchosun.com",
+          "publishedAt": "2026-10-10T05:25:00.000Z",
+          "link": "https://n.news.naver.com/mnews/article/448/0000644077?sid=101"
         }
       ],
       "concentrated": [
         {
-          "keyword": "스페이스x 주가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x 관련주",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x 발사 일정",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x 스타쉽",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x 발사",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x 전망",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x 공모가",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        },
-        {
-          "keyword": "스페이스x ai",
+          "keyword": "아르텍스",
           "searchVolume": null,
           "origin": "autocomplete"
         }
       ],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "데이터센터 전문 퍼머스",
@@ -4846,7 +5065,8 @@
         }
       ],
       "nextWave": [],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "앤트로픽",
@@ -4926,7 +5146,8 @@
           "onBoard": false
         }
       ],
-      "rowCount": 0
+      "rowCount": 0,
+      "carried": true
     },
     {
       "issue": "이율린",
@@ -5640,44 +5861,6 @@
       "carried": true
     },
     {
-      "issue": "리퀴드 AI",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "리퀴드 AI가 10배 큰 체급을 제친 d1-3B 모델을 출시했다",
-      "headlines": [
-        {
-          "title": "LG전자 '美 AI센터 냉각설비' 5조 계약 따냈다",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-05T13:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005339332?sid=101"
-        },
-        {
-          "title": "리퀴드 AI, 10배 큰 체급 제친 멀티모달 의사결정 모델 'd1-3B' 출시",
-          "press": "aitimes.com",
-          "publishedAt": "2026-10-08T07:52:00.000Z",
-          "link": "https://www.aitimes.com/news/articleView.html?idxno=216087"
-        },
-        {
-          "title": "[기획] 韓에 연구소·수백명 채용… 리사 수의 특별한 ‘K-AI 러브콜’",
-          "press": "dt.co.kr",
-          "publishedAt": "2026-10-07T10:14:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/029/0003052077?sid=101"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "리퀴드",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
       "issue": "MAI-코드-1.1",
       "issueType": "fresh",
       "lane": "tech",
@@ -5702,204 +5885,6 @@
           "press": "news1.kr",
           "publishedAt": "2026-10-08T05:41:00.000Z",
           "link": "https://n.news.naver.com/mnews/article/421/0009217776?sid=105"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "서피스 랩톱 울트라",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "MS가 엔비디아 RTX 스파크를 탑재한 AI 노트북 '서피스 랩톱 울트라'를 공개해서",
-      "headlines": [
-        {
-          "title": "MS, 엔비디아 RTX 스파크 탑재 ‘서피스 랩톱 울트라’ 공개",
-          "press": "zdnet.co.kr",
-          "publishedAt": "2026-10-08T03:18:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/092/0002440299?sid=105"
-        },
-        {
-          "title": "MS, RTX 스파크 탑재한 ‘서피스 랩톱 울트라’ 출시… 맥북 프로와 경쟁",
-          "press": "biz.chosun.com",
-          "publishedAt": "2026-10-08T07:09:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/366/0001196966?sid=105"
-        },
-        {
-          "title": "“느리고 비싼 맥북을 왜 사죠?”…MS·엔비디아 합작 AI노트북 성능이",
-          "press": "mk.co.kr",
-          "publishedAt": "2026-10-08T12:54:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/009/0005746228?sid=105"
-        }
-      ],
-      "concentrated": [
-        {
-          "keyword": "서피스",
-          "searchVolume": null,
-          "origin": "autocomplete"
-        }
-      ],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "저커버그 부부의 바이오허브",
-      "issueType": "fresh",
-      "lane": "tech",
-      "issueStatus": "unknown",
-      "isHot": false,
-      "why": "미 정부와 구글이 저커버그 부부의 바이오허브에 2.4조 AI 생물학 프로젝트로 합류해서",
-      "headlines": [
-        {
-          "title": "\"AI로 질병예방\"…美정부·구글, 저커버그의 바이오허브에 합류",
-          "press": "yna.co.kr",
-          "publishedAt": "2026-10-08T05:13:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/001/0016366029?sid=104"
-        },
-        {
-          "title": "\"AI로 질병예방\"‥美정부·구글, 저커버그의 바이오허브에 합류",
-          "press": "imnews.imbc.com",
-          "publishedAt": "2026-10-08T05:28:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/214/0001527907?sid=104"
-        },
-        {
-          "title": "\"AI로 질병 예방\"...미 정부·구글, 저커버그의 바이오허브에 합류",
-          "press": "ytn.co.kr",
-          "publishedAt": "2026-10-08T05:41:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/052/0002416311?sid=104"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "CPTPP 가입 보류",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "이 대통령이 농어민 신뢰 회복 우선으로 연내 가입신청 보류를 지시했다.",
-      "headlines": [
-        {
-          "title": "이 대통령, CPTPP 연내 가입신청 보류 지시",
-          "press": "ohmynews.com",
-          "publishedAt": "2026-10-08T08:01:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/047/0002531640?sid=100"
-        },
-        {
-          "title": "李 “CPTPP 연내 가입신청 말라…농어민과 충분히 대화”",
-          "press": "donga.com",
-          "publishedAt": "2026-10-08T07:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003753732?sid=100"
-        },
-        {
-          "title": "4번째 CPTPP 가입 시도, 또 급제동…1년 밀리면 6조 '기회 손실'",
-          "press": "hankyung.com",
-          "publishedAt": "2026-10-08T08:48:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/015/0005340658?sid=101"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "주우크라 대사 본국",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "외교부가 북한군 포로 공개에 항의해 주우크라이나 대사를 본국 소환했다.",
-      "headlines": [
-        {
-          "title": "외교부 “주우크라 대사 본국 소환”…‘북한군 포로 공개’ 항의",
-          "press": "joongang.co.kr",
-          "publishedAt": "2026-10-08T08:25:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/025/0003556685?sid=100"
-        },
-        {
-          "title": "외교부, 주우크라 대사 본국 소환 결정…北 포로 갈등 지속",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-10-08T08:57:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000540683?sid=100"
-        },
-        {
-          "title": "정부, 주우크라 대사 본국 소환…北 포로 송환 공개에 항의 차원",
-          "press": "seoul.co.kr",
-          "publishedAt": "2026-10-08T08:24:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/081/0003687315?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "CPTPP 가입 말라",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "이재명 대통령이 연내 CPTPP 가입 신청을 하지 말라고 지시해서",
-      "headlines": [
-        {
-          "title": "李 “CPTPP 연내 가입신청 말라…농어민과 충분히 대화”",
-          "press": "donga.com",
-          "publishedAt": "2026-10-08T07:22:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/020/0003753732?sid=100"
-        },
-        {
-          "title": "李 대통령 \"연내 CPTPP 가입 신청 말라\"…지속 대화 당부",
-          "press": "news.tf.co.kr",
-          "publishedAt": "2026-10-08T07:43:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/629/0000540627?sid=100"
-        },
-        {
-          "title": "李대통령, 연내 CPTPP 가입 신청 말라 지시…\"신뢰 회복 우선\"",
-          "press": "mt.co.kr",
-          "publishedAt": "2026-10-08T07:23:00.000Z",
-          "link": "https://n.news.naver.com/mnews/article/008/0005424000?sid=100"
-        }
-      ],
-      "concentrated": [],
-      "nextWave": [],
-      "rowCount": 0,
-      "carried": true
-    },
-    {
-      "issue": "알레스 페레이라",
-      "issueType": "fresh",
-      "lane": "realtime",
-      "issueStatus": "unknown",
-      "isHot": true,
-      "why": "UFC 챔피언 알렉스 페레이라가 한국을 찾아 팬미팅·세미나를 열어서",
-      "headlines": [
-        {
-          "title": "페레이라, 1회 원샷 원킬. 아데산야 KO시켰다더니 진짜네-UFC 276",
-          "press": "maniareport.com",
-          "publishedAt": "2022-07-03T03:29:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/425/0000130326"
-        },
-        {
-          "title": "페레이라 놀란 팬? 러시아 무술 세계 2위 이상수 [인터뷰]",
-          "press": "mk.co.kr",
-          "publishedAt": "2024-11-30T15:01:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/410/0001039078"
-        },
-        {
-          "title": "UFC 페레이라 “존 존스와 대결, 서로가 원해” [인터뷰]",
-          "press": "mk.co.kr",
-          "publishedAt": "2024-11-22T15:01:00.000Z",
-          "link": "https://m.sports.naver.com/general/article/410/0001037516"
         }
       ],
       "concentrated": [],
