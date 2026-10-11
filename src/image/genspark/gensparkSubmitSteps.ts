@@ -12,7 +12,7 @@ import {
   readGensparkSelectedModel,
   readGensparkSettingsMenu,
 } from './gensparkSelectors';
-import type { GensparkPointRequest } from './gensparkSelectors';
+import type { GensparkMenuModelItem, GensparkPointRequest } from './gensparkSelectors';
 import {
   GENSPARK_COMPOSER_NOT_FOUND,
   GENSPARK_MODEL_CREDIT_CHANGED,
@@ -50,6 +50,45 @@ export async function gensparkWaitFor<T>(
     if (deps.now() >= deadline) return null;
     await deps.sleep(intervalMs);
   }
+}
+
+/** 메뉴 항목의 비교·기록용 요약(이름 + 무제한 배지). */
+function gensparkMenuSnapshot(items: GensparkMenuModelItem[]): string {
+  return items.map((m) => `${m.label}${m.creditFree ? '(무제한)' : ''}`).join(', ');
+}
+
+/**
+ * 모델 메뉴를 "두 번 연속 같은 내용"으로 읽을 때까지 기다린다. 끝내 비어 있으면 null.
+ * [2026-10-11 실측] 항목이 하나라도 보이면 바로 읽던 탓에 'No credit cost' 배지가 아직 안 그려진 순간을 읽어
+ *   무제한 모델을 크레딧 차감으로 오판(GENSPARK_MODEL_CREDIT_CHANGED)했다 — 37초 뒤 같은 모델이 그대로 성공.
+ */
+export async function gensparkReadSettledMenu(
+  page: GensparkPageLike,
+  deps: Pick<GensparkSubmitDeps, 'now' | 'sleep'>,
+  timeoutMs = 5_000,
+  intervalMs = 250,
+): Promise<GensparkMenuModelItem[] | null> {
+  let previous: string | null = null;
+  return gensparkWaitFor(deps, timeoutMs, intervalMs, async () => {
+    const items = await page.evaluate(readGensparkModelMenu);
+    const snapshot = items.length > 0 ? gensparkMenuSnapshot(items) : null;
+    const settled = snapshot !== null && snapshot === previous;
+    previous = snapshot;
+    return settled ? items : null;
+  });
+}
+
+/** 크레딧 표시가 앱 표와 다를 때, 배지가 늦게 붙는 경우를 대비해 최대 3초 더 읽어 같아지는지 본다. */
+async function gensparkCreditSettles(
+  page: GensparkPageLike,
+  model: GensparkModelEntry,
+  deps: Pick<GensparkSubmitDeps, 'now' | 'sleep'>,
+): Promise<boolean> {
+  const agreed = await gensparkWaitFor(deps, 3_000, 500, async () => {
+    const again = (await page.evaluate(readGensparkModelMenu)).find((m) => m.label === model.menuLabel);
+    return again && again.creditFree === model.creditFree ? true : null;
+  });
+  return agreed === true;
 }
 
 /** 동작 사이 0.4~0.9초 무작위 간격. */
@@ -94,10 +133,7 @@ export async function gensparkEnsureModel(
   if (!(await clickPoint(page, { selector: GENSPARK_SELECTORS.modelButton }))) {
     throw new GensparkError(GENSPARK_MODEL_NOT_FOUND, '모델 버튼을 찾지 못함');
   }
-  const menu = await gensparkWaitFor(deps, 5_000, 250, async () => {
-    const items = await page.evaluate(readGensparkModelMenu);
-    return items.length > 0 ? items : null;
-  });
+  const menu = await gensparkReadSettledMenu(page, deps);
   if (!menu) throw new GensparkError(GENSPARK_MODEL_NOT_FOUND, '모델 목록이 열리지 않음');
 
   const entry = menu.find((m) => m.label === model.menuLabel);
@@ -105,7 +141,8 @@ export async function gensparkEnsureModel(
     await gensparkCloseMenu(page);
     throw new GensparkError(GENSPARK_MODEL_NOT_FOUND, model.menuLabel);
   }
-  if (entry.creditFree !== model.creditFree) {
+  if (entry.creditFree !== model.creditFree && !(await gensparkCreditSettles(page, model, deps))) {
+    deps.log(`[젠스파크] 모델 메뉴(크레딧 불일치 확정): ${gensparkMenuSnapshot(await page.evaluate(readGensparkModelMenu))}`);
     await gensparkCloseMenu(page);
     throw new GensparkError(
       GENSPARK_MODEL_CREDIT_CHANGED,
