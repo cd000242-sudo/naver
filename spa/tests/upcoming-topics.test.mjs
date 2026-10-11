@@ -50,3 +50,11 @@ test('배선 — 홈판 탭 맨 위에 미리 써 둘 소재 칸 · 잰 사실�
   assert.match(panel, /미리 써 둘 소재/);
   assert.doesNotMatch(panel, /확률|예상\s*(트래픽|수익|방문)|뜰\s*가능성/);
 });
+
+// 2026-10-11 사장님 "미리 선점은 접었다 폈다 할 수 있게, 처음에는 접어 놔"
+test('미리 써 둘 소재 칸 — 처음엔 접힘, 머리줄 버튼(aria-expanded)으로 펼친다', () => {
+  const panel = readFileSync(new URL('../src/components/leword/homefeed/UpcomingTopicsPanel.tsx', import.meta.url), 'utf8');
+  assert.match(panel, /const \[open, setOpen\] = useState\(false\)/);
+  assert.match(panel, /aria-expanded=\{open\}/);
+  assert.match(panel, /\{open && </);
+});

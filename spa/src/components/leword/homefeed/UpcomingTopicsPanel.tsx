@@ -44,6 +44,8 @@ export default function UpcomingTopicsPanel() {
   const [board, setBoard] = useState<UpcomingBoard | null>(null);
   const [limit, setLimit] = useState(6);
   const [now, setNow] = useState(() => Date.now());
+  // 처음엔 접어 둔다(2026-10-11 사장님 "미리 선점은 접었다 폈다 할 수 있게, 처음에는 접어 놔")
+  const [open, setOpen] = useState(false);
   useEffect(() => {
    const controller = new AbortController();
    fetch('/data/upcoming-topics.json', { cache: 'no-store', signal: controller.signal })
@@ -53,11 +55,18 @@ export default function UpcomingTopicsPanel() {
   }, []);
   const cards = useMemo(() => upcomingView(board, now), [board, now]);
   if (!cards.length) return null;
-  return <section className="hfu-panel" aria-label="미리 써 둘 소재">
-   <header><div><span className="hfb-eyebrow">PREWRITE RADAR</span><h3>미리 써 둘 소재 <small>앞으로 {board?.windowDays ?? 7}일</small></h3>
-    <p>경기 · 방송 일정 기사에서 첫 발탁 · 데뷔 · 복귀 · 첫 방송처럼 <b>처음</b> 주목받는 사람을 짚었습니다. 블로그 문서가 적은 사람부터 — 미리 써 두고 그 순간에 올리세요.</p></div></header>
-   <div className="hfu-list">{cards.slice(0, limit).map((c) => <EventCard key={c.id} c={c} now={now}/>)}</div>
-   {cards.length > limit && <button type="button" className="hfb-more" onClick={() => setLimit((n) => n + 6)}>소재 더 보기 · {limit}/{cards.length}</button>}
-   <p className="hfb-caption">사람 · 신호는 기사 문장에 그대로 있는 것만 실었습니다. 문서 수 · 검색량은 수집 시각의 실측입니다.</p>
+  const people = cards.reduce((n, c) => n + c.watch.length, 0);
+  return <section className={`hfu-panel${open ? ' is-open' : ''}`} aria-label="미리 써 둘 소재">
+   <button type="button" className="hfu-toggle" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
+    <span className="hfb-eyebrow">PREWRITE RADAR</span>
+    <span className="hfu-toggle-title">미리 써 둘 소재 <small>앞으로 {board?.windowDays ?? 7}일 · 사건 {cards.length}개 · 주목할 사람 {people}명</small></span>
+    <span className="hfu-toggle-action">{open ? '접기 ▲' : '펼치기 ▼'}</span>
+   </button>
+   {open && <>
+    <p className="hfu-intro">경기 · 방송 일정 기사에서 첫 발탁 · 데뷔 · 복귀 · 첫 방송처럼 <b>처음</b> 주목받는 사람을 짚었습니다. 블로그 문서가 적은 사람부터 — 미리 써 두고 그 순간에 올리세요.</p>
+    <div className="hfu-list">{cards.slice(0, limit).map((c) => <EventCard key={c.id} c={c} now={now}/>)}</div>
+    {cards.length > limit && <button type="button" className="hfb-more" onClick={() => setLimit((n) => n + 6)}>소재 더 보기 · {limit}/{cards.length}</button>}
+    <p className="hfb-caption">사람 · 신호는 기사 문장에 그대로 있는 것만 실었습니다. 문서 수 · 검색량은 수집 시각의 실측입니다.</p>
+   </>}
   </section>;
 }
