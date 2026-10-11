@@ -17,6 +17,7 @@ import {
   untrackDropshotContext,
 } from './dropshotSession.js';
 import { sanitizeUserVisibleError } from '../runtime/userVisibleError.js';
+import { detectDropshotSubscriptionPrompt, stepDropshotCountDown } from './dropshotControlsDom.js';
 
 export const BOARD_URL =
   'https://aistudio.dropshot.io/ko/workspace/board?panel=image&imageModelName=google/nano-banana-pro';
@@ -857,6 +858,13 @@ export async function ensureDropshotControls(
       }
     });
 
+    // [2026-10-11 live DOM] The count is a "— N장 +" stepper now (input[type=number] is gone): press "줄이기" until 1장.
+    for (let attempt = 0; attempt < 9; attempt++) {
+      const step = await page.evaluate(stepDropshotCountDown);
+      if (!step.clicked) { if (step.count !== null) onLog?.(`[dropshot] image count: ${step.count}`); break; }
+      await new Promise((resolve) => setTimeout(resolve, 250));
+    }
+
     // 1. Enable unlimited mode toggle. Dropshot changes its switch markup often,
     // so identify the target by nearby "unlimited" copy when possible and fall
     // back to the single visible switch only when there is no ambiguity.
@@ -926,8 +934,11 @@ export async function ensureDropshotControls(
     const state = await waitForDropshotControlConfirmation(page);
     const switchConfirmed = state.unlimitedModeOn === true;
     if (!switchConfirmed || !state.zeroCost) {
+      // [2026-10-11 live DOM] Without a Pro/Team plan the switch click opens a subscription dialog; say so instead of a bare coin message.
+      const prompt = await page.evaluate(detectDropshotSubscriptionPrompt).catch(() => null);
+      const why = prompt ? ' 드롭샷이 구독 안내 창을 띄웠습니다 — 이 계정에 Pro·Team 구독이 없거나 만료된 상태입니다. 드롭샷에서 구독 후 다시 시도하세요.' : '';
       throw new Error(
-        `Dropshot unlimited/zero-cost mode was not confirmed; refusing to generate to avoid coin spend. ` +
+        `Dropshot unlimited/zero-cost mode was not confirmed; refusing to generate to avoid coin spend.${why} ` +
           `switch=${state.unlimitedModeOn}, zeroCost=${state.zeroCost}, button="${state.generateButtonText || '(none)'}"`,
       );
     }
