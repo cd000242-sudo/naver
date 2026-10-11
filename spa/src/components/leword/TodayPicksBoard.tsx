@@ -66,7 +66,7 @@ interface TodayPicks {
 
 const num = (value: number) => value.toLocaleString('ko-KR');
 const ratioText = (ratio: number) => (ratio >= 100 ? Math.round(ratio).toLocaleString('ko-KR') : ratio >= 10 ? ratio.toFixed(1) : ratio.toFixed(2));
-const SOURCE_LABEL: Record<string, string> = { hint: '힌트', biztp: '업종', month: '월', event: '시즌', section: '블로그섹션', shopping: '쇼핑', preemption: '황금 보드' };
+const SOURCE_LABEL: Record<string, string> = { hint: '힌트', biztp: '업종', month: '월', event: '시즌', section: '블로그섹션', shopping: '쇼핑', preemption: '황금 보드', related: '연관 확장' };
 const kst = (iso: string) => new Date(iso).toLocaleString('ko-KR', {
     timeZone: 'Asia/Seoul', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit',
 });
