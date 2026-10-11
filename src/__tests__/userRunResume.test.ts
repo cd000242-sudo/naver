@@ -147,11 +147,12 @@ describe('wiring: only a pressed semi-auto publish re-checks', () => {
     expect(read('renderer/modules/fullAutoFlow.ts')).toContain('_userPressedPublish: formData._semiAutoMode === true && window.isContinuousMode !== true,');
   });
 
-  it('run() re-checks before the guarded run, registers stealth before the check navigates, and never types credentials', () => {
+  it('run() re-checks before the guarded run, registers no stealth supplement, and never types credentials', () => {
     const src = read('naverBlogAutomation.ts');
     expect(src).toMatch(/if \(runOptions\.resumeOnUserRun !== true\) return this\.withAccountExecution\(\(\) => this\.runAccountInternal\(runOptions\)\);\s*const deps = this\.userRunResumeDeps\(\);\s*await resumePausedAccountForUserRun\(deps\);/);
     expect(src).toContain('throw await explainUserRunStop(error, deps);');
-    expect(src).toMatch(/this\.page = session\.page;\s*await this\.setupStealthSupplements\(\)/);
+    expect(src).toContain('this.page = session.page;');
+    expect(src).not.toContain('setupStealthSupplements'); // [2026-10-11] the window reports this PC as-is
     expect(src).toContain('showLogin: () => browserSessionManager.openForUser(id),');
     expect(src).toContain('verify: () => browserSessionManager.verifyAccountForUser(id),');
   });

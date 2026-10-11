@@ -20,44 +20,28 @@ const NBA_PATH = path.join(PROJECT_ROOT, 'src/naverBlogAutomation.ts');
 
 const readSrc = (p: string) => fs.readFileSync(p, 'utf-8');
 
-// ═══════════════════════════════════════════════════════════════════
-// T3: stealth plugin + navigator.webdriver evasion 보호
-// ═══════════════════════════════════════════════════════════════════
-describe('T3: stealth plugin navigator.webdriver evasion', () => {
-  it('browserSessionManager.ts가 puppeteer-extra-plugin-stealth를 import해야 함', () => {
-    const src = readSrc(BSM_PATH);
-    expect(src).toMatch(/import\s+\w+\s+from\s+['"]puppeteer-extra-plugin-stealth['"]/);
+// ═════════════════════════════════════════════════
+// T3: 발행 크롬은 지문 위장 없이 이 PC 그대로 — 자동화 표시 제거만 유지
+//   [2026-10-11 사장님 승인] 스텔스 플러그인·webdriver=undefined 덮어쓰기가 실제로는 "다른·변조된 기계" 신호였다
+//   (실측 81항목 중 26 다름). 이전 T3 는 그 위장을 박제하고 있었으므로 반대로 뒤집는다.
+// ═════════════════════════════════════════════════
+describe('T3: 발행 크롬에 스텔스 플러그인·webdriver 덮어쓰기가 없다', () => {
+  it('browserSessionManager.ts 와 naverBlogAutomation.ts 는 puppeteer-extra-plugin-stealth 를 쓰지 않는다', () => {
+    const src = readSrc(BSM_PATH) + readSrc(NBA_PATH);
+    expect(src).not.toMatch(/from\s+['"]puppeteer-extra-plugin-stealth['"]/);
+    expect(src).not.toMatch(/puppeteer\.use\(/);
+    expect(src).not.toMatch(/enabledEvasions/);
   });
 
-  it('stealthPlugin.enabledEvasions.add(\'navigator.webdriver\') 호출이 있어야 함', () => {
-    const src = readSrc(BSM_PATH);
-    // 명시적 등록 또는 default enabled 모두 안전. 명시적 보호 패턴 검증.
-    expect(src).toMatch(/enabledEvasions\.add\(['"]navigator\.webdriver['"]\)/);
-  });
-
-  it('puppeteer.use(stealthPlugin) 호출이 단일 위치(browserSessionManager)에만 존재', () => {
-    const bsmSrc = readSrc(BSM_PATH);
-    const nbaSrc = readSrc(NBA_PATH);
-    // browserSessionManager: 활성 puppeteer.use(stealthPlugin) 있어야
-    expect(bsmSrc).toMatch(/puppeteer\.use\(stealthPlugin\)/);
-    // naverBlogAutomation: 활성 puppeteer.use(...) 없어야 (주석 처리 OK — v2.10.357 fix)
-    const activeUse = nbaSrc.split('\n').filter((line) => {
-      const trimmed = line.trim();
-      if (trimmed.startsWith('//')) return false;
-      return /puppeteer\.use\(StealthPlugin\(\)\)/.test(line);
-    });
-    expect(activeUse).toHaveLength(0);
-  });
-
-  it('--disable-blink-features=AutomationControlled launch arg 보호', () => {
+  it('--disable-blink-features=AutomationControlled 와 --enable-automation 제외는 유지한다 (유일한 자동화 표시 제거)', () => {
     const src = readSrc(BSM_PATH);
     expect(src).toMatch(/disable-blink-features=AutomationControlled/);
+    expect(src).toContain("ignoreDefaultArgs: ['--enable-automation']");
   });
 
-  it('navigator.webdriver = undefined 수동 보완 코드 보호', () => {
+  it('navigator.webdriver 를 undefined 로 덮어쓰지 않는다 (진짜 크롬은 false 를 보고한다)', () => {
     const src = readSrc(BSM_PATH) + readSrc(NBA_PATH);
-    // evaluateOnNewDocument 또는 직접 정의로 webdriver=undefined 보장
-    expect(src).toMatch(/navigator\.webdriver|webdriver.*undefined|Object\.defineProperty.*webdriver/);
+    expect(src).not.toMatch(/Object\.defineProperty\(navigator,\s*['"]webdriver['"]/);
   });
 });
 

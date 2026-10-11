@@ -108,7 +108,7 @@ const btn = await waitForElement(frame, SELECTORS.publish.confirmPublishButton, 
 - `renderer.ts` is 13,000+ lines — use modules/ for new UI features
 - Package manager: npm
 - Cross-platform: Windows primary, macOS secondary
-- Stealth mode: puppeteer-extra-plugin-stealth for anti-detection
+- 발행 크롬(browserSessionManager·naverBlogAutomation)은 지문 위장 없음 — 이 PC 그대로 보고 (2026-10-11 실측: 위장이 "다른·변조된 기계"로 보여 보호조치 원인). 자동화 플래그 제거만 유지. 크롤러·이미지 엔진의 stealth 플러그인은 별개
 - Korean language content — maintain Korean UI strings
 - Humanizer default = **LIGHT** (2026-09-22 결정, 2026-07-30 "전 모드 strong" 지침 폐기). `strong` 은 `config.humanizerIntensity` 명시 선택만. 어떤 강도에서도 숫자·금액·날짜·정책명·기관명·제품명·인물명·고유명사·직접 인용은 변경 금지
 - 236+ unit tests via vitest (`npx vitest run`)

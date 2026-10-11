@@ -7,14 +7,15 @@
  * - CAPTCHA 최소화를 위한 세션 지속성
  */
 
-import puppeteer from 'puppeteer-extra';
-import StealthPlugin from 'puppeteer-extra-plugin-stealth';
-import { Browser, Page, Frame } from 'puppeteer';
+// [2026-10-11] Plain puppeteer, not puppeteer-extra: that singleton carries the stealth plugin other modules register
+//   (crawlers, table images), which kept spoofing this window after its own registration was removed.
+import puppeteer, { Browser, Page, Frame } from 'puppeteer';
 import * as path from 'path';
 import * as os from 'os';
 import { createHash } from 'crypto';
 import { promises as fs } from 'fs';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
+import { withKoreanAcceptLanguages } from './automation/profileLanguagePolicy.js';
 import { emitSessionEvent } from './session/sessionEventLogger.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
 import { resolveCommitTimeBlock, resolveServerSessionProbeVerdict, SERVER_SESSION_PROBE_URL } from './automation/serverSessionProbePolicy.js';
@@ -29,27 +30,9 @@ import { decideBlogIdentity, type BlogIdentityDecision } from './automation/blog
 import { getBlogIdentityStore, type BlogIdentityStore } from './automation/blogIdentityStore.js';
 import { blogMismatchStopMessage } from './automation/expectedBlogIdentity.js';
 
-// ✅ [2026-03-27 FIX] Stealth Plugin — 모든 evasion 모듈 명시적 활성화
-// 기본 설정에서 일부 모듈(chrome.csi 등)이 비활성화되어 있을 수 있으므로 명시적으로 설정
-const stealthPlugin = StealthPlugin();
-// 사용 가능한 모든 evasion 활성화 확인
-stealthPlugin.enabledEvasions.add('chrome.app');
-stealthPlugin.enabledEvasions.add('chrome.csi');
-stealthPlugin.enabledEvasions.add('chrome.loadTimes');
-stealthPlugin.enabledEvasions.add('chrome.runtime');
-stealthPlugin.enabledEvasions.add('defaultArgs');
-stealthPlugin.enabledEvasions.add('iframe.contentWindow');
-stealthPlugin.enabledEvasions.add('media.codecs');
-stealthPlugin.enabledEvasions.add('navigator.hardwareConcurrency');
-stealthPlugin.enabledEvasions.add('navigator.languages');
-stealthPlugin.enabledEvasions.add('navigator.permissions');
-stealthPlugin.enabledEvasions.add('navigator.plugins');
-stealthPlugin.enabledEvasions.add('navigator.webdriver');
-stealthPlugin.enabledEvasions.add('sourceurl');
-stealthPlugin.enabledEvasions.add('user-agent-override');
-stealthPlugin.enabledEvasions.add('webgl.vendor');
-stealthPlugin.enabledEvasions.add('window.outerdimensions');
-puppeteer.use(stealthPlugin);
+// [2026-10-11] No stealth plugin. Measured against the user's own Chrome, the evasions (fake GPU, cores, memory,
+//   UA brands, permissions, WebRTC) made this window look like a different, tampered machine on the same account —
+//   the root of Naver's account-protection prompts. Only the automation flag is dropped (ignoreDefaultArgs below).
 
 export interface SessionInfo {
     accountId: string;
@@ -217,56 +200,6 @@ class BrowserSessionManager {
     }
 
     /**
-     * 계정별 고정 프로필 정보 (CAPTCHA 방지용 일관성 유지)
-     */
-    private getAccountConsistentProfile(accountId: string): {
-        userAgent: string | null;
-        screen: { width: number; height: number };
-        webGL: { vendor: string; renderer: string };
-        hardwareConcurrency: number;
-        deviceMemory: number;
-        timezoneId: string;
-        locale: string;
-    } {
-        const seed = accountId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-
-        // ✅ [2026-03-27 FIX] UA 하드코딩 제거 — Stealth Plugin이 실제 Chrome 버전을 자동 감지
-        // 이전: 하드코딩된 Chrome 133~135 → 실제 설치된 Chrome과 불일치하여 봇 감지 유발
-        // 현재: null → Stealth Plugin의 기본 UA 사용 (실제 바이너리 버전과 자동 동기화)
-        const userAgent: string | null = null; // Stealth Plugin에 위임
-
-        const screenConfigs = [
-            { width: 1920, height: 1080 },
-            { width: 1536, height: 864 },
-            { width: 1440, height: 900 },
-            { width: 1366, height: 768 }
-        ];
-        const screen = screenConfigs[seed % screenConfigs.length];
-
-        const webGLConfigs = [
-            { vendor: 'Intel Inc.', renderer: 'Intel Iris OpenGL Engine' },
-            { vendor: 'Intel Inc.', renderer: 'Intel(R) UHD Graphics 630' },
-            { vendor: 'NVIDIA Corporation', renderer: 'GeForce GTX 1060/PCIe/SSE2' },
-            { vendor: 'Google Inc. (Intel)', renderer: 'ANGLE (Intel, Intel(R) UHD Graphics 630)' },
-        ];
-        const webGL = webGLConfigs[seed % webGLConfigs.length];
-
-        // ✅ [2026-05-26 v2.10.363 SPEC-NAVER-PROTECTION-2026 P3 Fingerprint 다양화]
-        //   기존: 전 계정 동일 hardwareConcurrency/deviceMemory (브라우저 default) → 다계정 동시 발행 시 즉시 탐지
-        //   수정: 계정별 hash 기반 일관 값 (안정성 유지) + 풀에서 분산 (격리)
-        //   2번째 hash로 webGL/screen과 독립적으로 선택 (상관관계 차단)
-        const hash2 = Math.imul(seed, 0x9e3779b9) >>> 0; // golden ratio hash (다른 차원 격리)
-        const hwcOptions = [4, 8, 12, 16]; // 일반적인 CPU 코어 수 (2는 너무 적음, 32+ 드뭄)
-        const dmOptions = [4, 8, 16];      // 일반적인 RAM GB (1/2는 봇 시그니처, 32는 게이밍 PC)
-        const hardwareConcurrency = hwcOptions[hash2 % hwcOptions.length];
-        const deviceMemory = dmOptions[(hash2 >>> 4) % dmOptions.length];
-        const timezoneId = 'Asia/Seoul';
-        const locale = 'ko-KR';
-
-        return { userAgent, screen, webGL, hardwareConcurrency, deviceMemory, timezoneId, locale };
-    }
-
-    /**
      * 세션 가져오기 또는 생성
      */
     async getOrCreateSession(accountId: string, headless: boolean = false, accountProxyUrl?: string, options: { userInitiated?: boolean } = {}): Promise<SessionInfo> {
@@ -395,7 +328,6 @@ class BrowserSessionManager {
         // 프로필 Preferences 파일을 직접 수정하여 비밀번호 저장을 완전히 차단
         await this.ensurePasswordManagerDisabled(profileDir);
 
-        const profile = this.getAccountConsistentProfile(accountId);
         const chromeExecutablePath = findChromeExecutable() || null;
         // ✅ [2026-05-25 v2.10.357 P1] Chrome 폴백 명시 로그 — Phase A2 진단 발견
         //   findChromeExecutable() === null이면 Puppeteer 번들 Chromium 폴백 → stealth UA 버전이
@@ -411,22 +343,14 @@ class BrowserSessionManager {
         let proxyAuth: { username: string; password: string } | null = null;
         const launchArgs = [
                 '--disable-blink-features=AutomationControlled',
-                // ✅ [2026-05-26 v2.10.362 SPEC-NAVER-PROTECTION-2026 P1 Fix 1.3] WebRTC IP leak 차단
-                //   STUN/UDP로 실제 IP가 자바스크립트로 노출되는 것을 차단 (proxy 사용해도 누출되는 봇 시그니처).
-                //   browserleaks.com/webrtc 등 fingerprint 사이트가 봇 점수 결정에 활용.
-                //   --force-webrtc-ip-handling-policy: proxy되지 않은 UDP 차단
-                //   --enforce-webrtc-ip-permission-check: WebRTC 권한 강제 (사용자 명시 없이 IP 노출 안 됨)
-                '--force-webrtc-ip-handling-policy=disable_non_proxied_udp',
-                '--enforce-webrtc-ip-permission-check',
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
                 '--disable-infobars',
-                `--window-size=${profile.screen.width},${profile.screen.height}`,
                 '--start-maximized',
                 '--window-position=0,0',
                 // ✅ [2026-03-27 FIX] --disable-web-security 제거 — JS로 감지 가능한 봇 footprint
                 // ✅ [2026-03-27 FIX] --disable-site-isolation-trials 제거 — 일반 Chrome과 다른 보안 설정
-                // ✅ [2026-03-27 FIX] --disable-gpu 제거 — WebGL 스푸핑(GTX 1060 등)과 논리적 모순
+                // ✅ [2026-03-27 FIX] --disable-gpu 제거 — 실제 GPU 를 헤드풀 크롬 그대로 보고한다
                 // ✅ [2026-03-27 FIX] --disable-extensions 제거 — 일반 사용자도 확장 프로그램을 사용함
                 '--disable-dev-shm-usage',
                 '--no-first-run',
@@ -441,12 +365,6 @@ class BrowserSessionManager {
                 '--disable-renderer-backgrounding',
                 '--disable-backgrounding-occluded-windows',
                 '--lang=ko-KR',
-                // ✅ [v1.4.79 P0-WebRTC] 프록시 사용 시 실제 IP 노출 방지 (WebRTC leak 차단)
-                //   네이버가 JS로 STUN 요청하면 프록시 우회해서 실제 IP가 노출됨 → 반드시 차단
-                //   disable_non_proxied_udp: STUN/ICE가 프록시 거치지 않으면 차단
-                //   WebRTC는 VoIP 아닌 이상 블로그 자동화에 불필요하므로 완전 비활성화가 안전
-                '--force-webrtc-ip-handling-policy=disable_non_proxied_udp',
-                '--webrtc-ip-handling-policy=disable_non_proxied_udp',
                 // ✅ [v2.11.144 FIX] --disable-features는 하나로 합쳐야 한다.
                 //   Chrome은 같은 스위치가 중복되면 마지막 것만 채택하므로, 예전에 위쪽에 있던
                 //   '--disable-features=IsolateOrigins,site-per-process,PasswordManager,
@@ -455,11 +373,13 @@ class BrowserSessionManager {
                 //   PasswordManager만 복구한다. IsolateOrigins/site-per-process는 사이트 격리를
                 //   실제로 끄게 되어 2026-03-27 안티핑거프린팅 결정(일반 Chrome과 동일하게 유지)과
                 //   충돌하고, 쿠키 관련 2종도 세션 동작을 바꾸므로 별도 검토 후 반영한다.
-                '--disable-features=WebRtcHideLocalIpsWithMdns,PasswordManager',
+                '--disable-features=PasswordManager',
         ];
 
         // ✅ [2026-03-22] 프록시 서버 인자 추가 (SmartProxy 인증 분리 처리)
         if (proxyUrl) {
+            // Only behind a proxy: stop WebRTC from leaking the real IP. Without a proxy the real Chrome behaviour stays.
+            launchArgs.push('--force-webrtc-ip-handling-policy=disable_non_proxied_udp', '--enforce-webrtc-ip-permission-check');
             try {
                 const parsedProxy = new URL(proxyUrl);
                 const proxyServer = `${parsedProxy.protocol}//${parsedProxy.hostname}:${parsedProxy.port}`;
@@ -480,6 +400,7 @@ class BrowserSessionManager {
 
         const launchOptions: Parameters<typeof puppeteer.launch>[0] = {
             headless,
+            defaultViewport: null, // the page is the real window: real size and device scale factor
             userDataDir: profileDir,
             protocolTimeout: 300000,
             args: launchArgs,
@@ -534,85 +455,8 @@ class BrowserSessionManager {
             console.log(`[BrowserSessionManager] 🔐 프록시 인증 설정 완료 (user: ${proxyAuth.username.substring(0, 5)}...)`);
         }
 
-        // ✅ [2026-03-27 FIX] UA: Stealth Plugin 기본값 사용 시 setUserAgent 스킵
-        if (profile.userAgent) {
-          await page.setUserAgent(profile.userAgent);
-        }
-        // 언어 설정은 유지 (한국어 사이트 접근)
-        await page.setExtraHTTPHeaders({
-            'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
-        });
-
-        await page.emulateTimezone(profile.timezoneId).catch((tzErr) => {
-            console.warn('[BrowserSessionManager] ⚠️ timezone 설정 실패 (무시):', (tzErr as Error).message);
-        });
-
-        await page.setViewport({
-            width: profile.screen.width,
-            height: profile.screen.height - 100,
-            deviceScaleFactor: 1,
-        });
-
-        // ✅ [2026-03-27 FIX] 최소 Stealth 보조 — window.chrome 오버라이드 제거됨
-        // 이전: window.chrome을 불완전하게 직접 정의 → Stealth Plugin과 충돌하여 독특한 fingerprint 생성
-        // 현재: webdriver 제거 + 언어/플랫폼/하드웨어 정보만 설정, 나머지는 Stealth Plugin에 위임
-        await page.evaluateOnNewDocument((hw: any) => {
-            // navigator.webdriver 제거 (Stealth Plugin과 함께 이중 방어)
-            Object.defineProperty(navigator, 'webdriver', { get: () => undefined, configurable: true });
-            // 기본 환경 정보 (한국어 환경 일관성)
-            Object.defineProperty(navigator, 'language', { get: () => hw.locale || 'ko-KR', configurable: true });
-            Object.defineProperty(navigator, 'languages', { get: () => ['ko-KR', 'ko', 'en-US', 'en'] });
-            Object.defineProperty(navigator, 'platform', { get: () => 'Win32' });
-            // ✅ [2026-05-26 v2.10.363 SPEC-NAVER-PROTECTION-2026 P3] 계정별 hash 기반 다양화
-            //   기존: 전 계정 8/8 하드코딩 → 다계정 동시 발행 시 동일 신호로 즉시 봇 탐지
-            //   수정: profile.hardwareConcurrency / deviceMemory (계정별 안정·계정간 분산)
-            Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => hw.hardwareConcurrency || 8 });
-            Object.defineProperty(navigator, 'deviceMemory', { get: () => hw.deviceMemory || 8 });
-            // ✅ [2026-05-26 v2.10.382 SPEC-NAVER-PROTECTION-2026 P3 fingerprint completeness]
-            //   screen.colorDepth/pixelDepth: 모던 디스플레이 = 24 (Headless Chromium default는 24지만
-            //   일부 환경에서 30/32로 노출되어 fingerprint hash 변화 → 강제 통일로 안정화).
-            //   navigator.maxTouchPoints: 데스크탑 = 0 (puppeteer default가 환경 따라 다름 → 0 고정).
-            Object.defineProperty(screen, 'colorDepth', { get: () => 24, configurable: true });
-            Object.defineProperty(screen, 'pixelDepth', { get: () => 24, configurable: true });
-            Object.defineProperty(navigator, 'maxTouchPoints', { get: () => 0, configurable: true });
-            // ✅ WebGL 스푸핑 유지 (GPU 활성화 상태이므로 모순 없음)
-            const webGL = hw.webGL;
-            const getParameterOriginal = WebGLRenderingContext.prototype.getParameter;
-            WebGLRenderingContext.prototype.getParameter = function (parameter: number) {
-                if (parameter === 37445) return webGL.vendor;
-                if (parameter === 37446) return webGL.renderer;
-                return getParameterOriginal.call(this, parameter);
-            };
-            // ✅ [v1.4.79 P0-WebRTC] JS 레벨 WebRTC IP 누출 완전 차단
-            //   Chrome launch arg로 ICE non-proxied UDP 차단했지만, 일부 페이지가 STUN 서버 강제 요청 시
-            //   여전히 candidate에 실제 IP가 노출될 수 있어 API 자체를 가짜로 덮어씀
-            try {
-                const FakePC = function () {
-                    return {
-                        createDataChannel: () => ({ close: () => {} }),
-                        createOffer: () => Promise.reject(new Error('WebRTC disabled')),
-                        createAnswer: () => Promise.reject(new Error('WebRTC disabled')),
-                        setLocalDescription: () => Promise.reject(new Error('WebRTC disabled')),
-                        setRemoteDescription: () => Promise.reject(new Error('WebRTC disabled')),
-                        addIceCandidate: () => Promise.reject(new Error('WebRTC disabled')),
-                        close: () => {},
-                        addEventListener: () => {},
-                        removeEventListener: () => {},
-                        getStats: () => Promise.resolve(new Map()),
-                    };
-                } as any;
-                FakePC.generateCertificate = () => Promise.reject(new Error('WebRTC disabled'));
-                (window as any).RTCPeerConnection = FakePC;
-                (window as any).webkitRTCPeerConnection = FakePC;
-                (window as any).mozRTCPeerConnection = FakePC;
-                // WebRTC data channel 스텁
-                (window as any).RTCDataChannel = function () { return {}; };
-                // MediaDevices.enumerateDevices()도 빈 배열 반환 (장치 fingerprint 차단)
-                if (navigator.mediaDevices) {
-                    navigator.mediaDevices.enumerateDevices = () => Promise.resolve([]);
-                }
-            } catch { /* 구형 브라우저 무시 */ }
-        }, profile);
+        // [2026-10-11] No UA, language, timezone, viewport or page-level overrides: this window reports the PC exactly
+        //   as the user's own Chrome does (before: 26 of 81 fingerprint fields differed — a "different, tampered device").
 
         const sessionInfo: SessionInfo = {
             accountId,
@@ -1329,8 +1173,11 @@ class BrowserSessionManager {
                 // 파일이 없거나 파싱 실패 시 빈 객체로 시작
             }
 
+            // [2026-10-11] Seed the Korean accept languages the user's own Chrome has (see profileLanguagePolicy).
+            const language = withKoreanAcceptLanguages(prefs);
+            prefs = language.prefs;
             // 비밀번호 매니저 관련 설정 비활성화
-            const needsUpdate =
+            const needsUpdate = language.changed ||
                 prefs.credentials_enable_service !== false ||
                 prefs.profile?.password_manager_enabled !== false;
 

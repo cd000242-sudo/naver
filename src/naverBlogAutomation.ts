@@ -1,14 +1,12 @@
 // ✅ puppeteer-extra + stealth plugin 적용 (봇 감지 완벽 우회)
-import puppeteer from 'puppeteer-extra';
 import { randomUUID } from 'node:crypto';
 import { getPublicationCommitJournal } from './automation/publicationCommitJournal.js';
 import { getAccountExecutionGuard, AccountExecutionGuardError, ACCOUNT_PAUSE_CODES, type AccountPauseCode } from './automation/accountExecutionGuard.js';
 import { waitForLoginRedirectToSettle, isRestartRecoverableEntryError, describeUrlForLog } from './automation/editorEntryRecovery.js';
 import { explainUserRunStop, resumePausedAccountForUserRun, type UserRunResumeDeps } from './automation/userRunResume.js';
 import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
-// ✅ [2026-05-25 v2.10.357] StealthPlugin import 제거 — browserSessionManager.ts에서 단일 등록
-// import StealthPlugin from 'puppeteer-extra-plugin-stealth';
-import { Browser, Dialog, Frame, Page, ElementHandle, KeyInput } from 'puppeteer';
+// [2026-10-11] Plain puppeteer (see browserSessionManager): no puppeteer-extra global plugins on the publish window.
+import puppeteer, { Browser, Dialog, Frame, Page, ElementHandle, KeyInput } from 'puppeteer';
 import type { StructuredContent, ImagePlan } from './contentGenerator.js';
 import * as path from 'path';
 import * as os from 'os';
@@ -26,8 +24,7 @@ import { extractProsConsWithGemini } from './image/geminiTableExtractor.js';
 import { browserSessionManager, type SessionInfo } from './browserSessionManager.js';
 // [v2.10.113] 명시적 쿠키 파일 복원 — userDataDir 보조 안전망. 저장은 서버 확인 직후 browserSessionManager 가 한다.
 import { restoreCookies as restoreCookiesFromFile } from './sessionPersistence.js';
-import { buildNaverAutomationProfile, hashAutomationAccountId, type NaverAutomationProfile } from './automation/accountProfilePolicy.js';
-import { detectChromeFullVersion } from './automation/chromeVersionDetector.js';
+import { hashAutomationAccountId } from './automation/accountProfilePolicy.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
 import { readImageProvenance, resetImageProvenanceLedger, resolveAiMarkTarget } from './automation/imageProvenance.js';
 // [v2.10.285] 봇 감지 backoff + 로그인 자연 대기 (계정별 자동 보호)
@@ -294,9 +291,7 @@ async function smartTypeWithAutoHighlight(
 
 // ✅ [2026-05-25 v2.10.357 P1 FIX] Stealth Plugin 이중 등록 제거
 //   Phase A1 진단 발견: browserSessionManager.ts:39에서 이미 등록 완료.
-//   이중 등록 시 두 번째 등록이 새 enabledEvasions 인스턴스로 첫 번째 명시적 add를 무효화 가능 → evasion 비결정적.
 //   해결: 단일 등록 (browserSessionManager.ts)만 유지. import도 정리.
-// puppeteer.use(StealthPlugin());  // 제거: 이중 등록 회피 (browserSessionManager.ts:39에서 단일 등록)
 
 export interface AutomationOptions {
   getExpectedBlogId?: (naverId: string) => string;
@@ -547,40 +542,6 @@ export class NaverBlogAutomation {
     return path.join(this.ACCOUNT_PROFILE_BASE, accountHash);
   }
 
-  // 계정별 고정 프로필 (UA + 해상도)
-  /** 실행될 Chrome 의 실제 전체 버전. 비어 있으면 폴백 풀이 쓰인다. */
-  private detectedChromeVersion = '';
-
-  /**
-   * 브라우저를 띄우기 직전에 호출한다. 실제로 실행할 바이너리를 그대로 넘겨
-   * UA 가 그 브라우저와 어긋나지 않게 한다. 실패해도 진행을 막지 않는다.
-   */
-  private async prepareChromeVersion(executablePath?: string): Promise<void> {
-    if (this.detectedChromeVersion) return;
-    try {
-      const resolved = executablePath || puppeteer.executablePath();
-      this.detectedChromeVersion = await detectChromeFullVersion(async () => resolved);
-      if (this.detectedChromeVersion) {
-        this.log(`🧭 Chrome 실제 버전 감지: ${this.detectedChromeVersion} — UA 를 여기에 맞춥니다`);
-      } else {
-        this.log('⚠️ Chrome 버전 감지 실패 — 폴백 UA 풀 사용 (실제 브라우저와 어긋날 수 있음)');
-      }
-    } catch (error) {
-      this.log(`⚠️ Chrome 버전 감지 오류: ${(error as Error).message}`);
-    }
-  }
-
-  private getAccountConsistentProfile(): NaverAutomationProfile {
-    // ✅ [2026-05-25 v2.10.357 P0 FIX] Chrome 버전 풀 최신화 (145~149)
-    //   Phase A 5팀 진단 발견: 기존 풀 131~135 vs 사용자 실제 Chrome 148 → 14버전 차이
-    //   → 네이버 서버측 UA 파싱에서 즉시 봇 신호 분류 (95% 멈춤·캡차 root cause)
-    //   해결: 최근 1~2개월 출시된 안정 버전으로 풀 교체. 미래에는 동적 binary 감지로 전환 예정.
-    //   환경 변수 CHROME_VERSION_HINT로 override 가능 (사용자 Chrome 정확한 버전 명시 시)
-    // [2026-08-19] 고정 풀 대신 실제로 실행될 Chrome 버전을 쓴다.
-    //   풀(145~149)은 실측 크롬 151 과 어긋나 있었고, 시스템 크롬을 띄운 위에
-    //   다른 버전이라고 적힌 UA 를 씌우는 상태였다. 감지값은 로그인 전에 채워둔다.
-    return buildNaverAutomationProfile(this.options.naverId, this.detectedChromeVersion);
-  }
 
   private randomInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -635,181 +596,8 @@ export class NaverBlogAutomation {
     await this.delay(delay);
   }
 
-  /**
-   * ✅ [2026-03-27] Stealth 보완 스크립트 (세션 재사용 시에도 재적용 가능한 독립 메서드)
-   * - Canvas/Audio fingerprint 노이즈
-   * - Screen 정보 오버라이드
-   * - WebGL renderer/vendor 스푸핑 (C-1)
-   * - navigator.hardwareConcurrency/deviceMemory 오버라이드
-   * - CDP Network.setUserAgentOverride + brands 알고리즘
-   * - Viewport 설정
-   */
-  private async setupStealthSupplements(): Promise<void> {
-    if (!this.page) return;
-
-    const profile = this.getAccountConsistentProfile();
-
-    // evaluateOnNewDocument — 새 네비게이션 시 자동 주입
-    await this.page.evaluateOnNewDocument((hw: any) => {
-      try {
-        const spoofNative = (fn: Function, name: string) => {
-          const nativeStr = `function ${name}() { [native code] }`;
-          fn.toString = () => nativeStr;
-          fn.toLocaleString = () => nativeStr;
-          const toStrNative = 'function toString() { [native code] }';
-          fn.toString.toString = () => toStrNative;
-          fn.toLocaleString.toString = () => toStrNative;
-        };
-
-        // navigator.connection
-        const connRtt = 30 + Math.floor((Date.now() % 50));
-        const connDownlink = 5 + ((Date.now() % 100) / 10);
-        Object.defineProperty(navigator, 'connection', {
-          get: () => ({ effectiveType: '4g', rtt: connRtt, downlink: connDownlink, saveData: false }),
-        });
-
-        // ✅ [C-1] navigator.hardwareConcurrency / deviceMemory (서버 코어수 노출 방지)
-        const cores = [4, 8, 12, 16];
-        const memory = [4, 8, 16];
-        const coreSeed = (hw.screen.width * 7 + hw.screen.height * 13) % cores.length;
-        const memSeed = (hw.screen.width * 11 + hw.screen.height * 3) % memory.length;
-        Object.defineProperty(navigator, 'hardwareConcurrency', { get: () => cores[coreSeed] });
-        Object.defineProperty(navigator, 'deviceMemory', { get: () => memory[memSeed] });
-
-        // Canvas fingerprint (비파괴 방식)
-        const canvasSeed = Date.now() % 65536;
-        const origToDataURL = HTMLCanvasElement.prototype.toDataURL;
-        HTMLCanvasElement.prototype.toDataURL = function (type?: string) {
-          if (type === 'image/png' || !type) {
-            try {
-              const tmp = document.createElement('canvas');
-              tmp.width = this.width; tmp.height = this.height;
-              const ctx = tmp.getContext('2d');
-              if (ctx) {
-                ctx.drawImage(this, 0, 0);
-                const img = ctx.getImageData(0, 0, tmp.width, tmp.height);
-                for (let i = 0; i < img.data.length; i += 4) {
-                  if (((canvasSeed * (i + 1) * 31) % 1000) < 1) img.data[i] ^= 1;
-                }
-                ctx.putImageData(img, 0, 0);
-                return origToDataURL.call(tmp, type);
-              }
-            } catch (e) { console.debug('[Stealth] Canvas fingerprint spoof 실패:', e); }
-          }
-          return origToDataURL.apply(this, arguments as any);
-        };
-        spoofNative(HTMLCanvasElement.prototype.toDataURL, 'toDataURL');
-
-        // Audio fingerprint
-        const audioSeed = canvasSeed ^ 0xA5A5;
-        const origGetChannelData = AudioBuffer.prototype.getChannelData;
-        AudioBuffer.prototype.getChannelData = function (channel: number) {
-          const data = origGetChannelData.call(this, channel);
-          for (let i = 0; i < data.length; i += 100) {
-            data[i] += (((audioSeed * (i + 1) * 17) % 10000) - 5000) / 50000000;
-          }
-          return data;
-        };
-        spoofNative(AudioBuffer.prototype.getChannelData, 'getChannelData');
-
-        // Screen
-        const screen = hw.screen;
-        Object.defineProperty(window.screen, 'width', { get: () => screen.width });
-        Object.defineProperty(window.screen, 'height', { get: () => screen.height });
-        Object.defineProperty(window.screen, 'availWidth', { get: () => screen.width });
-        Object.defineProperty(window.screen, 'availHeight', { get: () => screen.height - 40 });
-        Object.defineProperty(window.screen, 'colorDepth', { get: () => 24 });
-        Object.defineProperty(window.screen, 'pixelDepth', { get: () => 24 });
-
-        // ✅ [C-1] WebGL renderer/vendor 스푸핑
-        const getParameterOrig = WebGLRenderingContext.prototype.getParameter;
-        WebGLRenderingContext.prototype.getParameter = function (param: number) {
-          const UNMASKED_VENDOR = 0x9245;
-          const UNMASKED_RENDERER = 0x9246;
-          if (param === UNMASKED_VENDOR) return 'Google Inc. (NVIDIA)';
-          if (param === UNMASKED_RENDERER) return 'ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER Direct3D11 vs_5_0 ps_5_0, D3D11)';
-          return getParameterOrig.call(this, param);
-        };
-        spoofNative(WebGLRenderingContext.prototype.getParameter, 'getParameter');
-
-        // WebGL2도 동일 적용
-        if (typeof WebGL2RenderingContext !== 'undefined') {
-          const getParam2Orig = WebGL2RenderingContext.prototype.getParameter;
-          WebGL2RenderingContext.prototype.getParameter = function (param: number) {
-            if (param === 0x9245) return 'Google Inc. (NVIDIA)';
-            if (param === 0x9246) return 'ANGLE (NVIDIA, NVIDIA GeForce GTX 1660 SUPER Direct3D11 vs_5_0 ps_5_0, D3D11)';
-            return getParam2Orig.call(this, param);
-          };
-          spoofNative(WebGL2RenderingContext.prototype.getParameter, 'getParameter');
-        }
-      } catch (e) { console.debug('[Stealth] Fingerprint 전체 spoof 실패:', e); }
-    }, profile);
-
-    // CDP UA override + brands
-    const userAgent = profile.userAgent;
-    const chromeVersion = userAgent.match(/Chrome\/(\d+)/)?.[1] || '134';
-    // UA 는 축약형이라 전체 빌드가 없다 — UA-CH 에는 실제 빌드를 넣는다(실제 Chrome 동작).
-    const fullChromeVersion = profile.fullVersion || `${chromeVersion}.0.0.0`;
-
-    const seed = parseInt(chromeVersion);
-    const brandOrders = [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
-    const order = brandOrders[seed % 6];
-    const escapedChars = [' ', ' ', ';'];
-    const greaseyBrand = `${escapedChars[order[0]]}Not${escapedChars[order[1]]}A${escapedChars[order[2]]}Brand`;
-    const brands: { brand: string; version: string }[] = [];
-    brands[order[0]] = { brand: greaseyBrand, version: '99' };
-    brands[order[1]] = { brand: 'Chromium', version: chromeVersion };
-    brands[order[2]] = { brand: 'Google Chrome', version: chromeVersion };
-
-    const fullBrands: { brand: string; version: string }[] = [];
-    fullBrands[order[0]] = { brand: greaseyBrand, version: '99.0.0.0' };
-    fullBrands[order[1]] = { brand: 'Chromium', version: fullChromeVersion };
-    fullBrands[order[2]] = { brand: 'Google Chrome', version: fullChromeVersion };
-
-    let cdpClient: any = null;
-    try {
-      cdpClient = await this.page.createCDPSession();
-      await cdpClient.send('Network.setUserAgentOverride', {
-        userAgent,
-        platform: 'Win32',
-        acceptLanguage: 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-        userAgentMetadata: {
-          brands, fullVersionList: fullBrands, fullVersion: fullChromeVersion,
-          platform: 'Windows', platformVersion: '15.0.0',
-          architecture: 'x86', model: '', mobile: false, bitness: '64', wow64: false,
-        },
-      });
-      this.log(`🔧 Stealth 보완: Chrome/${chromeVersion} + WebGL + Screen ${profile.screen.width}x${profile.screen.height}`);
-    } catch (cdpError) {
-      this.log(`⚠️ CDP UA 설정 실패: ${(cdpError as Error).message}`);
-    } finally {
-      // ✅ [M-4] CDP 세션 detach (리소스 누수 방지)
-      if (cdpClient) {
-        try { await cdpClient.detach(); } catch (e) { console.debug('[CDP] 세션 detach 실패 (이미 닫힘):', (e as Error).message); }
-      }
-    }
-
-    // Client Hints 헤더
-    try {
-      const brandsHeader = brands.map(b => `"${b.brand}";v="${b.version}"`).join(', ');
-      await this.page.setExtraHTTPHeaders({
-        'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Sec-CH-UA': brandsHeader,
-        'Sec-CH-UA-Mobile': '?0',
-        'Sec-CH-UA-Platform': '"Windows"',
-      });
-    } catch (e) { console.debug('[Browser] Client Hints 헤더 설정 실패:', (e as Error).message); }
-
-    // Viewport
-    await this.page.setViewport({
-      width: profile.screen.width,
-      height: profile.screen.height - 100,
-      deviceScaleFactor: 1, hasTouch: false, isLandscape: true, isMobile: false,
-    });
-
-    this.page.setDefaultNavigationTimeout(this.options.navigationTimeoutMs ?? 60000);
-    this.page.setDefaultTimeout(60000);
-  }
+  // [2026-10-11] The stealth supplement (fake GPU/canvas/connection, CDP UA brands, fake viewport) is gone: the window
+  //   reports this PC as the user's own Chrome does. Measured before: 26 of 81 fingerprint fields differed.
 
   // ✅ [2026-03-27] detectCaptcha() 데드코드 제거됨
   // 캡차 감지는 loginToNaver() 내부 루프에서 인라인으로 처리
@@ -1370,8 +1158,6 @@ export class NaverBlogAutomation {
           // ✅ [2026-03-26] 최소화된 브라우저 창 복원 (이전 발행 후 최소화 상태일 수 있음)
           await this.restoreBrowserWindow();
 
-          // ✅ [2026-03-27 FIX] C-3: 세션 재사용 시에도 stealth 보완 스크립트 재적용
-          await this.setupStealthSupplements();
 
           return; // 세션 재사용 성공!
         } catch {
@@ -1389,7 +1175,6 @@ export class NaverBlogAutomation {
           this.page = freshSession.page;
           this.cursor = createGhostCursor(this.page);
           // ✅ [2026-03-27 FIX] C-3: 세션 재생성 시에도 stealth 보완 스크립트 적용
-          await this.setupStealthSupplements();
           this.log('✅ 세션 재생성 완료 (stealth + proxy 적용됨)');
           return;
         }
@@ -1477,12 +1262,10 @@ export class NaverBlogAutomation {
         }
 
         const chromeExecutablePath = findChromeExecutable();
-        await this.prepareChromeVersion(chromeExecutablePath);
-        const profile = this.getAccountConsistentProfile();
-        const screenRes = profile.screen;
 
         const launchOptions: Parameters<typeof puppeteer.launch>[0] = {
           headless: this.options.headless ?? false,
+          defaultViewport: null, // the page is the real window: real size and device scale factor
           slowMo: this.options.slowMo ?? 0,
           userDataDir: this.accountProfileDir,  // ✅ 계정별 독립 프로필 (핵심!)
           protocolTimeout: 300000,
@@ -1492,17 +1275,9 @@ export class NaverBlogAutomation {
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-infobars',
-            `--window-size=${screenRes.width},${screenRes.height}`,
             '--start-maximized',
             '--window-position=0,0',
 
-            // ✅ [2026-03-27 FIX] 리스크22: --disable-features 하나로 통합 (Chrome은 마지막 값만 사용)
-            '--disable-features=IsolateOrigins,site-per-process,AutomationControlled,ThirdPartyCookieBlocking,SameSiteByDefaultCookies,CookiesWithoutSameSiteMustBeSecure,TranslateUI',
-
-            // ✅ [2026-03-27 FIX] 리스크36: WebRTC IP 누출 방지 (프록시 사용 시 로컬 IP 노출 차단)
-            '--enforce-webrtc-ip-permission-check',
-            '--webrtc-ip-handling-policy=disable_non_proxied_udp',
-            '--disable-site-isolation-trials',
 
             // ✅ 성능 최적화 (봇 감지와 무관한 것만 유지)
             '--disable-dev-shm-usage',
@@ -1532,6 +1307,8 @@ export class NaverBlogAutomation {
         let proxyAuth: { username: string; password: string } | null = null;
 
         if (proxyUrl) {
+            // Only behind a proxy: stop WebRTC from leaking the real IP. Without a proxy the real Chrome behaviour stays.
+            (launchOptions.args as string[]).push('--enforce-webrtc-ip-permission-check', '--webrtc-ip-handling-policy=disable_non_proxied_udp');
             try {
                 const parsedProxy = new URL(proxyUrl);
                 const proxyServer = `${parsedProxy.protocol}//${parsedProxy.hostname}:${parsedProxy.port}`;
@@ -1675,159 +1452,8 @@ export class NaverBlogAutomation {
         throw new Error('브라우저 페이지가 초기화되지 않았습니다.');
       }
 
-      // ✅ 계정별 고정 프로필 가져오기
-      const profile = this.getAccountConsistentProfile();
-
-      // Stealth Plugin이 이미 처리하는 17개 evasion 외 보완 항목만 유지
-      await this.page.evaluateOnNewDocument((hw: any) => {
-        try {
-          // native code toString 위장 유틸리티
-          const spoofNative = (fn: Function, name: string) => {
-            const nativeStr = `function ${name}() { [native code] }`;
-            fn.toString = () => nativeStr;
-            fn.toLocaleString = () => nativeStr;
-            const toStrNative = 'function toString() { [native code] }';
-            fn.toString.toString = () => toStrNative;
-            fn.toLocaleString.toString = () => toStrNative;
-          };
-
-          // 1. navigator.connection (세션 고정값)
-          const connRtt = 30 + Math.floor((Date.now() % 50));
-          const connDownlink = 5 + ((Date.now() % 100) / 10);
-          Object.defineProperty(navigator, 'connection', {
-            get: () => ({
-              effectiveType: '4g',
-              rtt: connRtt,
-              downlink: connDownlink,
-              saveData: false,
-            }),
-          });
-
-          // 2. Canvas fingerprint (세션 시드 기반 결정적 노이즈, 비파괴 방식)
-          const canvasSeed = Date.now() % 65536;
-          const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
-          HTMLCanvasElement.prototype.toDataURL = function (type?: string) {
-            if (type === 'image/png' || !type) {
-              try {
-                // ✅ 비파괴: 임시 Canvas에 복사 후 노이즈 적용 (원본 보존)
-                const tmpCanvas = document.createElement('canvas');
-                tmpCanvas.width = this.width;
-                tmpCanvas.height = this.height;
-                const tmpCtx = tmpCanvas.getContext('2d');
-                if (tmpCtx) {
-                  tmpCtx.drawImage(this, 0, 0);
-                  const imageData = tmpCtx.getImageData(0, 0, tmpCanvas.width, tmpCanvas.height);
-                  for (let i = 0; i < imageData.data.length; i += 4) {
-                    const noise = ((canvasSeed * (i + 1) * 31) % 1000) < 1 ? 1 : 0;
-                    imageData.data[i] = imageData.data[i] ^ noise;
-                  }
-                  tmpCtx.putImageData(imageData, 0, 0);
-                  return originalToDataURL.call(tmpCanvas, type);
-                }
-              } catch (e) { console.debug('[Stealth] Canvas toDataURL spoof 실패:', e); }
-            }
-            return originalToDataURL.apply(this, arguments as any);
-          };
-          spoofNative(HTMLCanvasElement.prototype.toDataURL, 'toDataURL');
-
-          // 3. AudioContext fingerprint (세션 시드 기반 결정적 노이즈)
-          const audioSeed = canvasSeed ^ 0xA5A5;
-          const originalGetChannelData = AudioBuffer.prototype.getChannelData;
-          AudioBuffer.prototype.getChannelData = function (channel: number) {
-            const data = originalGetChannelData.call(this, channel);
-            for (let i = 0; i < data.length; i += 100) {
-              const noise = (((audioSeed * (i + 1) * 17) % 10000) - 5000) / 50000000;
-              data[i] = data[i] + noise;
-            }
-            return data;
-          };
-          spoofNative(AudioBuffer.prototype.getChannelData, 'getChannelData');
-
-          // 4. Screen 정보 (계정별 고정)
-          const screen = hw.screen;
-          Object.defineProperty(window.screen, 'width', { get: () => screen.width });
-          Object.defineProperty(window.screen, 'height', { get: () => screen.height });
-          Object.defineProperty(window.screen, 'availWidth', { get: () => screen.width });
-          Object.defineProperty(window.screen, 'availHeight', { get: () => screen.height - 40 });
-          Object.defineProperty(window.screen, 'colorDepth', { get: () => 24 });
-          Object.defineProperty(window.screen, 'pixelDepth', { get: () => 24 });
-        } catch (e) {
-          // 보완 스크립트 실패해도 페이지 로딩은 계속 진행
-        }
-      }, profile);
-
-      // CDP Network.setUserAgentOverride로 UA + metadata 통합 설정 (Stealth와 동일 메커니즘)
-      const userAgent = profile.userAgent;
-      const chromeVersion = userAgent.match(/Chrome\/(\d+)/)?.[1] || '134';
-      // UA 축약형 대응 — UA-CH 에는 실제 빌드를 넣는다.
-      const fullChromeVersion = profile.fullVersion || `${chromeVersion}.0.0.0`;
-
-      // Chrome 공식 brands 순서 알고리즘 (Chromium 소스코드 기반)
-      const seed = parseInt(chromeVersion);
-      const brandOrders = [
-        [0, 1, 2], [0, 2, 1], [1, 0, 2],
-        [1, 2, 0], [2, 0, 1], [2, 1, 0]
-      ];
-      const order = brandOrders[seed % 6];
-      const escapedChars = [' ', ' ', ';'];
-      const greaseyBrand = `${escapedChars[order[0]]}Not${escapedChars[order[1]]}A${escapedChars[order[2]]}Brand`;
-      const brands: { brand: string; version: string }[] = [];
-      brands[order[0]] = { brand: greaseyBrand, version: '99' };
-      brands[order[1]] = { brand: 'Chromium', version: chromeVersion };
-      brands[order[2]] = { brand: 'Google Chrome', version: chromeVersion };
-
-      const fullBrands: { brand: string; version: string }[] = [];
-      fullBrands[order[0]] = { brand: greaseyBrand, version: '99.0.0.0' };
-      fullBrands[order[1]] = { brand: 'Chromium', version: fullChromeVersion };
-      fullBrands[order[2]] = { brand: 'Google Chrome', version: fullChromeVersion };
-
-      try {
-        const cdpClient = await this.page.createCDPSession();
-        await cdpClient.send('Network.setUserAgentOverride', {
-          userAgent: userAgent,
-          platform: 'Win32',
-          acceptLanguage: 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-          userAgentMetadata: {
-            brands: brands,
-            fullVersionList: fullBrands,
-            fullVersion: fullChromeVersion,
-            platform: 'Windows',
-            platformVersion: '15.0.0',
-            architecture: 'x86',
-            model: '',
-            mobile: false,
-            bitness: '64',
-            wow64: false,
-          },
-        });
-        this.log(`🔧 User-Agent: Chrome/${chromeVersion} (CDP + Chrome brands algorithm)`);
-      } catch (cdpError) {
-        // CDP 실패 시 fallback: Stealth이 기본 UA를 설정하므로 로그만 남김
-        this.log(`⚠️ CDP UA 설정 실패 (Stealth 기본값 사용): ${(cdpError as Error).message}`);
-      }
-
-      // Client Hints 헤더 (CDP brands와 일치)
-      try {
-        const brandsHeader = brands.map(b => `"${b.brand}";v="${b.version}"`).join(', ');
-        await this.page.setExtraHTTPHeaders({
-          'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-          'Sec-CH-UA': brandsHeader,
-          'Sec-CH-UA-Mobile': '?0',
-          'Sec-CH-UA-Platform': '"Windows"',
-        });
-      } catch (headerError) {
-        this.log(`⚠️ HTTP 헤더 설정 실패: ${(headerError as Error).message}`);
-      }
-
-      const screenRes = profile.screen;
-      await this.page.setViewport({
-        width: screenRes.width,
-        height: screenRes.height - 100,
-        deviceScaleFactor: 1,
-        hasTouch: false,
-        isLandscape: true,
-        isMobile: false,
-      });
+      // [2026-10-11] No page-level overrides, CDP UA/brand override, client-hint headers or fake viewport: the window
+      //   reports this PC as the user's own Chrome does.
 
       this.page.setDefaultNavigationTimeout(this.options.navigationTimeoutMs ?? 60000);
       this.page.setDefaultTimeout(60000);
@@ -6864,7 +6490,6 @@ export class NaverBlogAutomation {
         // does before its first navigation (setupBrowser reuses this same page afterwards).
         this.browser = session.browser;
         this.page = session.page;
-        await this.setupStealthSupplements().catch(() => undefined);
       },
       resume: (verify) => guard.resume(id, verify),
       verify: () => browserSessionManager.verifyAccountForUser(id),

@@ -23,21 +23,12 @@ describe('v1.4.79 P0 — 프록시 100% 보장 강화', () => {
       expect(code).toMatch(/--force-webrtc-ip-handling-policy=disable_non_proxied_udp/);
     });
 
-    it('WebRtcHideLocalIpsWithMdns 비활성화', () => {
-      expect(code).toMatch(/--disable-features=WebRtcHideLocalIpsWithMdns/);
-    });
-
-    it('JS 레벨 RTCPeerConnection 덮어쓰기 스텁 존재', () => {
-      expect(code).toMatch(/window as any\)\.RTCPeerConnection\s*=\s*FakePC/);
-    });
-
-    it('webkitRTCPeerConnection, mozRTCPeerConnection도 차단', () => {
-      expect(code).toMatch(/webkitRTCPeerConnection\s*=\s*FakePC/);
-      expect(code).toMatch(/mozRTCPeerConnection\s*=\s*FakePC/);
-    });
-
-    it('mediaDevices.enumerateDevices가 빈 배열 반환하도록 스텁', () => {
-      expect(code).toMatch(/enumerateDevices\s*=\s*\(\)\s*=>\s*Promise\.resolve\(\[\]\)/);
+    // [2026-10-11] JS-level WebRTC/mediaDevices stubs and the mDNS feature switch are gone: measured against the user's
+    //   own Chrome they marked this window as a tampered device. IP-leak protection stays as launch flags, proxy only.
+    it('WebRTC IP 차단 인자는 프록시 블록 안에만 있고, JS 레벨 가짜 함수는 없다', () => {
+      const launch = code.slice(code.indexOf('const launchArgs = ['), code.indexOf('const launchOptions: Parameters<typeof puppeteer.launch>[0]'));
+      expect(launch.slice(0, launch.indexOf('if (proxyUrl) {'))).not.toMatch(/webrtc/i);
+      expect(code).not.toMatch(/WebRtcHideLocalIpsWithMdns|RTCPeerConnection\s*=\s*FakePC|enumerateDevices\s*=\s*\(\)\s*=>/);
     });
   });
 

@@ -24,8 +24,8 @@ const fake = vi.hoisted(() => {
   const browser = { connected: true, newPage: async () => page, pages: async () => [page], process: () => null, on: () => {} };
   return { page, browser, launch: vi.fn(async () => browser) };
 });
-vi.mock('puppeteer-extra', () => ({ default: { use: vi.fn(), launch: fake.launch } }));
-vi.mock('puppeteer-extra-plugin-stealth', () => ({ default: () => ({ enabledEvasions: new Set() }) }));
+// [2026-10-11] The publish window launches plain puppeteer (no puppeteer-extra stealth), so that is what gets faked.
+vi.mock('puppeteer', () => ({ default: { launch: fake.launch }, TimeoutError: class extends Error {} }));
 vi.mock('../session/sessionEventLogger.js', () => ({ emitSessionEvent: vi.fn() }));
 vi.mock('../crawler/utils/proxyManager.js', () => ({ getProxyUrl: async () => undefined }));
 vi.mock('../automation/chromeExecutablePolicy.js', () => ({ findChromeExecutable: () => null }));

@@ -42,9 +42,9 @@ describe('browserSessionManager launch flags', () => {
     expect(features.split(',')).toContain('PasswordManager');
   });
 
-  it('still disables the WebRTC mDNS local-IP feature', () => {
+  it('keeps WebRtcHideLocalIpsWithMdns enabled like real Chrome (2026-10-11: no fingerprint deviation)', () => {
     const [features] = occurrencesOf('--disable-features');
-    expect(features.split(',')).toContain('WebRtcHideLocalIpsWithMdns');
+    expect(features.split(',')).not.toContain('WebRtcHideLocalIpsWithMdns');
   });
 
   it('does not silently re-enable site-isolation disabling (2026-03-27 결정)', () => {
