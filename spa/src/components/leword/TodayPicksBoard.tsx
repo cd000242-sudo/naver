@@ -5,6 +5,7 @@ import { TabIntro } from './LewordShared';
 import { formatKst, formatMinutes, judgeFreshness } from '../../lib/boardFreshness';
 import { moneyTitle, won, type MoneyBid } from './moneyBid';
 import { FREE_PICK_ROWS, pickCountText, pickFreshnessLabel, summarizePickTopic, visiblePickRows } from '../../lib/todayPicksModel';
+import { archiveDays } from '../../lib/todayPicksArchive.mjs';
 
 /**
  * 오늘의 네이버 추천키워드 — 사이드 메뉴에서 실검 틈새키워드와 키워드 분석 **사이의 서브탭**,
@@ -86,15 +87,33 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
     const [data, setData] = useState<TodayPicks | null>(null);
     const [error, setError] = useState('');
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
+    /*
+     * 날짜 탭(2026-10-11 사장님 "어제 꺼는 어떻게 보니?") — 판이 매일 새 키워드로 바뀌니(어제 실린 말 금지) 지난 판을 날짜별로 본다.
+     * null = 오늘 판(/data/today-picks.json), 날짜 = 보관본(/data/today-picks-archive/날짜.json, 7일).
+     */
+    const [day, setDay] = useState<string | null>(null);
+    const [archiveIndex, setArchiveIndex] = useState<unknown>(null);
 
     useEffect(() => {
         let alive = true;
-        fetch('/data/today-picks.json', { cache: 'no-cache' })
+        fetch('/data/today-picks-archive/index.json', { cache: 'no-cache' })
+            .then((response) => (response.ok ? response.json() : null))
+            .then((json) => { if (alive) setArchiveIndex(json); })
+            .catch(() => { /* 보관함이 없으면 날짜 탭을 안 그린다 */ });
+        return () => { alive = false; };
+    }, []);
+
+    useEffect(() => {
+        let alive = true;
+        setError('');
+        fetch(day ? `/data/today-picks-archive/${day}.json` : '/data/today-picks.json', { cache: 'no-cache' })
             .then((response) => (response.ok ? response.json() : Promise.reject(new Error(`HTTP ${response.status}`))))
             .then((json) => { if (alive) setData(json as TodayPicks); })
             .catch((cause: unknown) => { if (alive) setError(cause instanceof Error ? cause.message : String(cause)); });
         return () => { alive = false; };
-    }, []);
+    }, [day]);
+    const pastDays = useMemo(() => archiveDays(archiveIndex, nowMs ?? Date.now()), [archiveIndex, nowMs]);
+    const dayLabel = pastDays.find((item) => item.day === day)?.label ?? '';
 
     const minRatio = data?.minRatio ?? 1;
     const topics = useMemo(() => (data?.topics ?? []).filter((topic) => topic.rows.length > 0), [data]);
@@ -126,7 +145,17 @@ export default function TodayPicksBoard({ onAnalyze, topic, onTopics, onTopicCha
             <h2 id="lw-picks-title" hidden>오늘의 네이버 추천키워드</h2>
             <TabIntro title="오늘의 네이버 추천키워드" desc={summary} source={SOURCE_LINE} />
 
-            {data && freshness.isLate && freshness.dueAt !== null && (
+            {pastDays.length > 0 && (
+                <div className="lw-picks-topics" role="tablist" aria-label="날짜">
+                    <button type="button" role="tab" aria-selected={!day} className={`lw-picks-topic-btn${!day ? ' is-active' : ''}`} onClick={() => setDay(null)}>오늘</button>
+                    {pastDays.map((item) => (
+                        <button key={item.day} type="button" role="tab" aria-selected={day === item.day} className={`lw-picks-topic-btn${day === item.day ? ' is-active' : ''}`} onClick={() => setDay(item.day)}>{item.label}</button>
+                    ))}
+                </div>
+            )}
+            {day && data && <p className="lw-note">{dayLabel} 판입니다 — 지난 날짜의 추천이라 지금 검색량 · 문서수와 다를 수 있습니다. 매일 판은 전날과 겹치지 않게 새 키워드로 바뀝니다.</p>}
+
+            {!day && data && freshness.isLate && freshness.dueAt !== null && (
                 <p className="lw-note lw-note-limit" aria-label="회차 지연 안내">
                     {formatKst(freshness.dueAt)} 회차가 예정보다 {formatMinutes(freshness.lateMinutes)} 늦고 있습니다 — 예약이 늦게 도는 날이 있어 자동으로 다시 돌립니다. 그동안은 위 판이 가장 최근 것입니다.
                 </p>
