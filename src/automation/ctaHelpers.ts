@@ -190,7 +190,7 @@ export async function insertEnhancedCta(
         self.log(`   ⏳ 링크 카드 로딩 대기 중...`);
         const ctaCardReady = await self.waitForLinkCard(15000, 500);
         if (ctaCardReady && typeof self.removeBareUrlTextAfterLinkCard === 'function') {
-            await self.removeBareUrlTextAfterLinkCard();
+            await self.removeBareUrlTextAfterLinkCard(url);
         }
 
         // ✅ [2026-03-20] 이전글 삽입은 editorHelpers.ts에서 일원화 처리 (이중 삽입 방지)
@@ -305,7 +305,7 @@ export async function insertCtaLink(
                 ? await self.waitForLinkCard(12000, 500)
                 : false;
             if (cardReady && typeof self.removeBareUrlTextAfterLinkCard === 'function') {
-                await self.removeBareUrlTextAfterLinkCard();
+                await self.removeBareUrlTextAfterLinkCard(finalUrl);
             }
         }
 

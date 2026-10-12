@@ -5,6 +5,7 @@ import { getAccountExecutionGuard, AccountExecutionGuardError, ACCOUNT_PAUSE_COD
 import { waitForLoginRedirectToSettle, isRestartRecoverableEntryError, describeUrlForLog } from './automation/editorEntryRecovery.js';
 import { explainUserRunStop, resumePausedAccountForUserRun, type UserRunResumeDeps } from './automation/userRunResume.js';
 import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
+import { removeBareUrlParagraphs } from './automation/bareUrlCleanupDom.js';
 // [2026-10-11] Plain puppeteer (see browserSessionManager): no puppeteer-extra global plugins on the publish window.
 import puppeteer, { Browser, Dialog, Frame, Page, ElementHandle, KeyInput } from 'puppeteer';
 import type { StructuredContent, ImagePlan } from './contentGenerator.js';
@@ -894,52 +895,10 @@ export class NaverBlogAutomation {
     return false;
   }
 
-  private async removeBareUrlTextAfterLinkCard(): Promise<void> {
+  /** [2026-10-13] Only the paragraph holding `targetUrl` goes (see bareUrlCleanupDom.ts for why). */
+  private async removeBareUrlTextAfterLinkCard(targetUrl?: string): Promise<void> {
     const frame = await this.getAttachedFrame();
-    const removed = await frame.evaluate(() => {
-      const cardSelectors = [
-        '.se-oglink',
-        '.se-module-oglink',
-        '.se-oembed',
-        '.se-module-oembed',
-        '.se-link-preview',
-        '[data-module="oglink"]',
-        '[class*="oglink"]',
-        '[class*="oembed"]',
-        '.se-section-oglink',
-      ];
-      const hasLinkCard = cardSelectors.some(selector => document.querySelector(selector));
-      if (!hasLinkCard) return 0;
-
-      const urlOnlyPattern = /^(?:\s|👉|▶|→|:|-|｜|\||\(|\)|\[|\]|바로가기|보기|자세히|관련|공식|사이트|이전글|보러가기|더보기)*https?:\/\/\S+(?:\s|👉|▶|→|:|-|｜|\||\(|\)|\[|\]|바로가기|보기|자세히|관련|공식|사이트|이전글|보러가기|더보기)*$/i;
-      const paragraphs = Array.from(document.querySelectorAll('.se-text-paragraph, .se-module-text p, [contenteditable="true"] p')) as HTMLElement[];
-      let removedCount = 0;
-
-      for (const paragraph of paragraphs) {
-        if (cardSelectors.some(selector => paragraph.closest(selector))) continue;
-        const text = (paragraph.innerText || paragraph.textContent || '').replace(/\s+/g, ' ').trim();
-        if (!text || !/https?:\/\//i.test(text)) continue;
-        if (!urlOnlyPattern.test(text)) continue;
-
-        const container = paragraph.closest('.se-component') as HTMLElement | null;
-        const removable = container && !cardSelectors.some(selector => container.matches(selector) || container.closest(selector))
-          ? container
-          : paragraph;
-        removable.remove();
-        removedCount += 1;
-      }
-
-      if (removedCount > 0) {
-        const editorRoot = document.querySelector('.se-main-container, .se-section-text, [contenteditable="true"]') as HTMLElement | null;
-        if (editorRoot) {
-          for (const eventType of ['input', 'change', 'keyup', 'blur']) {
-            editorRoot.dispatchEvent(new Event(eventType, { bubbles: true, cancelable: true }));
-          }
-        }
-      }
-
-      return removedCount;
-    });
+    const removed = await frame.evaluate(removeBareUrlParagraphs, String(targetUrl || '').trim() || undefined);
 
     if (removed > 0) {
       this.log(`   ✅ 링크카드 생성 후 URL 원문 ${removed}개 정리 완료`);
@@ -5780,8 +5739,8 @@ export class NaverBlogAutomation {
       });
     }).catch(() => { });
 
-    // URL이 없으면 텍스트만 표시
-    const finalUrl = url || '#';
+    // [2026-10-13] No link → text only. The old '#' placeholder was typed as a literal "👉 #" line.
+    const finalUrl = String(url || '').trim() === '#' ? '' : String(url || '').trim();
 
     // ✅ [수정] CTA 텍스트에서 줄바꿈 문자 제거 (형식 깨짐 방지)
     const cleanText = text.replace(/[\r\n]+/g, ' ').trim();
@@ -5799,8 +5758,10 @@ export class NaverBlogAutomation {
         this.log(`   → 소제목 아래 CTA 텍스트 삽입 중... (후킹+링크만)`);
         await safeKeyboardType(page, `🔗 ${cleanText}`, { delay: 10 });
         await page.keyboard.press('Enter');
-        await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
-        await page.keyboard.press('Enter');
+        if (finalUrl) {
+          await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
+          await page.keyboard.press('Enter');
+        }
       } else {
         this.log(`   → 하단 위치에 CTA 텍스트 삽입 중...`);
         await safeKeyboardType(page, divider, { delay: 5 });
@@ -5809,14 +5770,16 @@ export class NaverBlogAutomation {
         await safeKeyboardType(page, `🔗 ${cleanText}`, { delay: 10 });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
-        await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
-        await page.keyboard.press('Enter');
+        if (finalUrl) {
+          await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
+          await page.keyboard.press('Enter');
+        }
       }
 
-      if (finalUrl && finalUrl !== '#') {
+      if (finalUrl) {
         const cardReady = await this.waitForLinkCard(12000, 500);
         if (cardReady) {
-          await this.removeBareUrlTextAfterLinkCard();
+          await this.removeBareUrlTextAfterLinkCard(finalUrl);
         }
       }
 

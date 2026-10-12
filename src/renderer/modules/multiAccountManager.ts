@@ -2063,9 +2063,11 @@ async function initMultiAccountPublishModal() {
             }
             return info;
         })() : undefined;
-        const ctaType = document.getElementById('ma-setting-cta-type')?.value || 'none';
         const ctaUrl = document.getElementById('ma-setting-cta-url')?.value?.trim() || '';
         const ctaText = document.getElementById('ma-setting-cta-text')?.value?.trim() || '';
+        // [2026-10-13] A URL/text typed while the type select still says 'none' is a CTA, not a request to skip it.
+        const ctaTypeSelected = document.getElementById('ma-setting-cta-type')?.value || 'none';
+        const ctaType = ctaTypeSelected === 'none' && (ctaUrl || ctaText) ? 'custom' : ctaTypeSelected;
         const includeThumbnailText = document.getElementById('ma-setting-include-thumbnail-text')?.checked || false;
         const useAiImage = document.getElementById('ma-setting-use-ai-image')?.checked ?? true;
         const createProductThumbnail = document.getElementById('ma-setting-create-product-thumbnail')?.checked ?? false;
@@ -4101,9 +4103,15 @@ async function initMultiAccountPublishModal() {
                         ctaPosition: queueItem?.formData?.ctaPosition || queueItem?.ctaPosition || 'bottom',
                         ctas: (() => {
                             const fromForm = Array.isArray(queueItem?.formData?.ctas) ? queueItem.formData.ctas : [];
+                            // [2026-10-13] Keep per-CTA position and give link-only CTAs a default label instead of dropping them.
                             const list = fromForm
-                                .map((c) => ({ text: String(c?.text || '').trim(), link: String(c?.link || '').trim() || undefined }))
-                                .filter((c) => Boolean(c.text));
+                                .map((c) => {
+                                    const link = String(c?.link || '').trim() || undefined;
+                                    const text = String(c?.text || '').trim() || (link ? '자세히 보러가기' : '');
+                                    const position = String(c?.position || '').trim() || undefined;
+                                    return { text, link, position };
+                                })
+                                .filter((c) => Boolean(c.text || c.link));
                             if (list.length > 0)
                                 return list;
                             const t = String((queueItem?.formData?.ctaText ?? queueItem.ctaText) || '').trim();
@@ -4907,21 +4915,32 @@ function initMainAccountSelector() {
         try {
             const container = document.getElementById('unified-cta-items-container');
             if (container && Array.isArray(session.ctas)) {
+                // [2026-10-13] Build rows through the shared "+ CTA 추가" button so each row carries the position
+                //   select (.unified-cta-pos); the hand-rolled template here had no select, so positions died on
+                //   every account switch, and link-only rows were dropped.
                 container.innerHTML = '';
+                const addCtaBtn = document.getElementById('unified-add-cta-btn');
                 for (const c of session.ctas) {
                     const text = String(c?.text || '').trim();
                     const link = String(c?.link || '').trim();
-                    if (!text)
+                    const position = String(c?.position || '').trim();
+                    if (!text && !link)
                         continue;
-                    const row = document.createElement('div');
-                    row.className = 'unified-cta-item';
-                    row.style.cssText = 'display:flex; gap:0.5rem; align-items:center; margin-bottom:0.5rem;';
-                    row.innerHTML = `
-            <input type="text" class="unified-cta-text" placeholder="CTA 텍스트" style="flex:1; padding: 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.9rem; background: var(--bg-primary);" value="${escapeHtml(text)}">
-            <input type="url" class="unified-cta-link" placeholder="링크 URL" style="flex:1; padding: 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.9rem; background: var(--bg-primary);" value="${escapeHtml(link)}">
-            <button type="button" class="unified-cta-remove" style="padding:0.5rem 0.75rem; background: rgba(239,68,68,0.15); color:#ef4444; border: 1px solid rgba(239,68,68,0.35); border-radius: 8px; cursor:pointer;">✕</button>
-          `;
-                    container.appendChild(row);
+                    if (addCtaBtn)
+                        addCtaBtn.click();
+                    const rows = container.querySelectorAll('.unified-cta-item');
+                    const row = rows[rows.length - 1];
+                    if (!row)
+                        continue;
+                    const textInput = row.querySelector('.unified-cta-text');
+                    const linkInput = row.querySelector('.unified-cta-link');
+                    const posSelect = row.querySelector('.unified-cta-pos');
+                    if (textInput)
+                        textInput.value = text || '자세히 보러가기';
+                    if (linkInput)
+                        linkInput.value = link;
+                    if (posSelect)
+                        posSelect.value = position;
                 }
             }
         }

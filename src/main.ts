@@ -9972,7 +9972,13 @@ app.whenReady().then(async () => {
                 hashtags: postData.hashtags || [],
                 images: images,
                 publishMode: 'publish', // ✅ 즉시 발행 (예약이 아님!)
-                toneStyle: postData.toneStyle || 'professional'
+                toneStyle: postData.toneStyle || 'professional',
+                // [2026-10-13] The saved post's CTAs were never replayed here — scheduled posts went out without them.
+                ctas: Array.isArray(postData.ctas) ? postData.ctas : undefined,
+                ctaText: postData.ctaText || undefined,
+                ctaLink: postData.ctaLink || undefined,
+                ctaPosition: postData.ctaPosition || undefined,
+                skipCta: postData.skipCta === true,
               };
 
               console.log(`[Scheduler] 자동화 실행 시작: ${postData.title}`);

@@ -14,12 +14,19 @@ export type EditorTailPlanInput = {
   readonly skipCta?: boolean;
   readonly hashtags?: readonly string[];
   readonly hashtagLimit?: number;
+  // [2026-10-13] How many headings the post really has. A CTA aimed at heading-5 in a 3-heading post used to
+  //   vanish (no section matched and the bottom filter excluded it); with the count known it lands at the bottom.
+  readonly headingCount?: number;
 };
 
 export type EditorTailPlan = {
   readonly effectiveCtas: EditorTailCta[];
   readonly bottomCtas: EditorTailCta[];
   readonly skippedDuplicateCtaCount: number;
+  /** CTAs whose link repeats an earlier CTA's link — only the first is kept (one link card per URL). */
+  readonly skippedSameLinkCtaCount: number;
+  /** CTAs whose heading slot does not exist in this post — routed to the bottom instead of lost. */
+  readonly headingOverflowCtaCount: number;
   readonly isHeadingPosition: boolean;
   readonly previousPost: {
     readonly url: string;
@@ -80,6 +87,25 @@ export function shouldInsertPlaceAtTail(
   return !alreadyHandled;
 }
 
+/** True when `position` names a heading slot the post does not have (unknown count → never missing). */
+export function isHeadingSlotMissing(position: string, headingCount: number | undefined): boolean {
+  const match = /^heading-(\d+)$/.exec(position);
+  if (!match || !Number.isFinite(headingCount)) return false;
+  return Number(match[1]) > Math.max(0, Math.floor(headingCount as number));
+}
+
+/** Keeps the first CTA for each link; CTAs without a link are never collapsed. */
+export function dedupeCtasByLink(ctas: readonly EditorTailCta[]): EditorTailCta[] {
+  const seen = new Set<string>();
+  return ctas.filter((cta) => {
+    const key = normalizeComparableUrl(cta?.link);
+    if (!key) return true;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 /** [v2.11.142] CTAs that belong under heading N (1-based) — per-CTA position with global fallback. */
 export function selectSectionCtas(
   ctas: readonly EditorTailCta[] | undefined,
@@ -119,22 +145,30 @@ export function planEditorTail(input: EditorTailPlanInput): EditorTailPlan {
   const skippedBecauseAffiliateDuplicate =
     Boolean(previousPostComparable) && previousPostComparable === affiliateComparable;
 
-  const effectiveCtas = previousPostComparable
+  const withoutPreviousPost = previousPostComparable
     ? initialCtas.filter((cta) => normalizeComparableUrl(cta?.link) !== previousPostComparable)
     : initialCtas;
-  const skippedDuplicateCtaCount = initialCtas.length - effectiveCtas.length;
+  const skippedDuplicateCtaCount = initialCtas.length - withoutPreviousPost.length;
+  const effectiveCtas = dedupeCtasByLink(withoutPreviousPost);
+  const skippedSameLinkCtaCount = withoutPreviousPost.length - effectiveCtas.length;
   const isHeadingPosition = isHeadingCtaPosition(input.ctaPosition);
   // [v2.11.142] Per-CTA positions: bottom CTAs are the ones whose EFFECTIVE position
   // (own > global > 'bottom') is not a heading slot. A mixed set now works — some CTAs
   // land under headings (inserted in the section loop) and the rest at the bottom.
+  // [2026-10-13] A heading slot beyond the post's heading count has no section to receive it → bottom.
+  const overflows = (cta: EditorTailCta): boolean =>
+    isHeadingSlotMissing(resolveCtaPosition(cta, input.ctaPosition), input.headingCount);
   const bottomCtas = !input.skipCta
-    ? effectiveCtas.filter((cta) => !isHeadingCtaPosition(resolveCtaPosition(cta, input.ctaPosition)))
+    ? effectiveCtas.filter((cta) => !isHeadingCtaPosition(resolveCtaPosition(cta, input.ctaPosition)) || overflows(cta))
     : [];
+  const headingOverflowCtaCount = input.skipCta ? 0 : effectiveCtas.filter(overflows).length;
 
   return {
     effectiveCtas,
     bottomCtas,
     skippedDuplicateCtaCount,
+    skippedSameLinkCtaCount,
+    headingOverflowCtaCount,
     isHeadingPosition,
     previousPost: {
       url: previousPostUrl,

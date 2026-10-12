@@ -3637,12 +3637,15 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         appendLog(`📢 CTA 버튼 포함: "${ctaText}"`);
     }
     const resolvedCtas = (() => {
+        // [2026-10-13] Keep per-CTA position and give link-only CTAs a default label instead of dropping them.
         const list = (Array.isArray(formData?.ctas) ? formData.ctas : [])
-            .map((c) => ({
-            text: String(c?.text || '').trim(),
-            link: String(c?.link || '').trim() || undefined,
-        }))
-            .filter((c) => Boolean(c?.text));
+            .map((c) => {
+            const link = String(c?.link || '').trim() || undefined;
+            const text = String(c?.text || '').trim() || (link ? '자세히 보러가기' : '');
+            const position = String(c?.position || '').trim() || undefined;
+            return { text, link, position };
+        })
+            .filter((c) => Boolean(c?.text || c?.link));
         if (list.length > 0)
             return list;
         const t = String(ctaText || '').trim();

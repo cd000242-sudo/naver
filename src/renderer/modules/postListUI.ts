@@ -1424,13 +1424,17 @@ async function loadGeneratedPostToFieldsUnlocked(postId: string): Promise<void> 
         const addCtaBtn = document.getElementById('unified-add-cta-btn');
         if (addCtaBtn) addCtaBtn.click();
         // 마지막 추가된 CTA 필드에 값 설정
-        const ctaItems = ctaItemsContainer.querySelectorAll('.cta-item');
+        // [2026-10-13] Rows are '.unified-cta-item' (renderer.ts appendCtaRow); '.cta-item' never matched, so
+        //   every restored CTA came back as an empty row.
+        const ctaItems = ctaItemsContainer.querySelectorAll('.unified-cta-item');
         const lastCtaItem = ctaItems[ctaItems.length - 1];
         if (lastCtaItem) {
-          const textInput = lastCtaItem.querySelector('input[data-field="text"], input:first-of-type') as HTMLInputElement;
-          const linkInput = lastCtaItem.querySelector('input[data-field="link"], input:last-of-type') as HTMLInputElement;
+          const textInput = lastCtaItem.querySelector('.unified-cta-text') as HTMLInputElement | null;
+          const linkInput = lastCtaItem.querySelector('.unified-cta-link') as HTMLInputElement | null;
+          const posSelect = lastCtaItem.querySelector('.unified-cta-pos') as HTMLSelectElement | null;
           if (textInput) textInput.value = cta.text || '';
           if (linkInput) linkInput.value = cta.link || '';
+          if (posSelect) posSelect.value = cta.position || '';
         }
       }
       appendLog(`📎 CTA ${(post as any).ctas.length}개 복원`);

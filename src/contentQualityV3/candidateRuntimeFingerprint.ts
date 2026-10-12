@@ -62,6 +62,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/accountPauseLog.ts',
   'src/automation/accountProfilePolicy.ts',
   'src/automation/bannerPhrasePool.ts',
+  'src/automation/bareUrlCleanupDom.ts',
   'src/automation/blogIdentityPolicy.ts',
   'src/automation/blogIdentityStore.ts',
   'src/automation/bodyArtifactCleanup.ts',

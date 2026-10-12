@@ -75,7 +75,7 @@ export async function insertPreviousPostTailBlock(
   });
 
   if (cardReady && typeof self.removeBareUrlTextAfterLinkCard === 'function') {
-    await self.removeBareUrlTextAfterLinkCard();
+    await self.removeBareUrlTextAfterLinkCard(previousPostUrl);
   }
 
   if (cardReady) {
@@ -244,6 +244,20 @@ export async function applyTailHashtagsAfterCards(input: {
   }
 }
 
+/**
+ * [2026-10-13] A bottom CTA without a link (e.g. "댓글로 문의 주세요") used to be skipped silently in SEO mode.
+ * It is plain text, so no link card is awaited: separator, label, blank line.
+ */
+export async function insertTailTextBlock(input: { self: any; page: Page; label: string }): Promise<void> {
+  const { self, page, label } = input;
+  await page.keyboard.press('Enter');
+  await safeKeyboardType(page, PREVIOUS_POST_SEPARATOR, { delay: 5 });
+  await page.keyboard.press('Enter');
+  await safeKeyboardType(page, label, { delay: 10 });
+  await page.keyboard.press('Enter');
+  await self.delay?.(300);
+}
+
 export async function insertTailLinkCardBlock(input: {
   self: any;
   page: Page;
@@ -269,7 +283,7 @@ export async function insertTailLinkCardBlock(input: {
     : false;
 
   if (cardReady && typeof self.removeBareUrlTextAfterLinkCard === 'function') {
-    await self.removeBareUrlTextAfterLinkCard();
+    await self.removeBareUrlTextAfterLinkCard(url);
   }
 
   return { cardReady };

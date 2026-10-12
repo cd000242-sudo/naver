@@ -1930,7 +1930,8 @@ export function initContinuousPublishingV2(): void {
         modalCtaContainer.querySelectorAll('.continuous-modal-cta-item').forEach(row => {
           const text = (row.querySelector('.cm-cta-text') as HTMLInputElement)?.value?.trim() || '';
           const link = (row.querySelector('.cm-cta-link') as HTMLInputElement)?.value?.trim() || '';
-          if (text || link) items.push({ text, link: link || undefined });
+          // [2026-10-13] Link-only rows keep a default label — downstream filters drop CTAs with empty text.
+          if (text || link) items.push({ text: text || '자세히 보러가기', link: link || undefined });
         });
         return items;
       };
@@ -2099,7 +2100,7 @@ export function initContinuousPublishingV2(): void {
             contentMode: (contentModeSelect?.value || 'seo') as any,
             toneStyle: toneStyleSelect?.value || 'professional',
             imageSource: imageSourceSelect?.value || getFullAutoImageSource(),
-            ctaType: ctaTypeSelect?.value || 'none',
+            ctaType: resolveQueueCtaType(ctaTypeSelect?.value, modalCtas.length, ctaUrlInput?.value, ctaTextInput?.value),
             ctaUrl: firstCta.link || ctaUrlInput?.value || '',
             ctaText: firstCta.text || ctaTextInput?.value || '',
             ctas: modalCtas.length > 0 ? modalCtas : undefined,
@@ -2934,9 +2935,16 @@ function addItemToQueueV2Impl(): void {
   const publishMode = (publishModeRadio?.value || 'publish') as 'publish' | 'draft' | 'schedule';
 
   // CTA 정보 수집
-  const ctaType = (document.getElementById('continuous-cta-type') as HTMLSelectElement)?.value || 'none';
   const ctaUrl = (document.getElementById('continuous-cta-url') as HTMLInputElement)?.value?.trim() || '';
   const ctaText = (document.getElementById('continuous-cta-text') as HTMLInputElement)?.value?.trim() || '';
+  // [2026-10-13] CTA rows typed into the detail modal used to be discarded whenever the type select stayed 'none'.
+  const modalCtaCountForType = (((window as any)._getModalCtaItems?.() || []) as unknown[]).length;
+  const ctaType = resolveQueueCtaType(
+    (document.getElementById('continuous-cta-type') as HTMLSelectElement)?.value,
+    modalCtaCountForType,
+    ctaUrl,
+    ctaText,
+  );
 
   // ✅ 카테고리 및 콘텐츠 모드 수집
   // [FIX] 카테고리는 상세설정 모달의 hidden input에서 가져오기 (continuous-category-select는 존재하지 않음)
@@ -5212,9 +5220,10 @@ async function startContinuousPublishingV2(): Promise<void> {
             ? (item.previousPostTitle && !item.ctaText?.startsWith('📖') ? `📖 추천 글: ${item.previousPostTitle}` : item.ctaText)
             : item.ctaText,
           // ✅ ctaType에 따른 skipCta 및 ctas 설정 (다중 CTA + 위치 지원)
-          skipCta: item.ctaType === 'none',
-          ctas: item.ctaType !== 'none' && item.ctas && item.ctas.length > 0
-            ? item.ctas.map(c => ({ link: c.link, text: c.text || '자세히 보러가기', position: item.ctaPosition || 'bottom' }))
+          // [2026-10-13] Rows the user typed win over a stale 'none' type; per-row position (if any) is kept.
+          skipCta: item.ctaType === 'none' && !(Array.isArray(item.ctas) && item.ctas.length > 0),
+          ctas: Array.isArray(item.ctas) && item.ctas.length > 0
+            ? item.ctas.map(c => ({ link: c.link, text: c.text || '자세히 보러가기', position: (c as { position?: string }).position || item.ctaPosition || 'bottom' }))
             : (item.ctaType === 'custom' && item.ctaUrl ? [{
                 link: item.ctaUrl,
                 text: item.ctaText || '자세히 보러가기',
@@ -5969,3 +5978,14 @@ export async function runRealFullAutoTest() {
 (window as any).runRealFullAutoTest = runRealFullAutoTest;
 (window as any).showImageModal = showImageModal; // ✅ 이미지 크게 보기
 (window as any).showHeadingImagesModal = showHeadingImagesModal;
+
+/**
+ * [2026-10-13] Effective CTA type for a queue item. The detail modal's type select defaults to 'none', and users
+ * who typed CTA rows (or a URL/text) without touching it lost every CTA — rows typed are the stronger signal.
+ */
+function resolveQueueCtaType(selected: string | undefined, modalCtaCount: number, ctaUrl?: string, ctaText?: string): string {
+  const type = String(selected || 'none');
+  if (type !== 'none') return type;
+  const hasInput = modalCtaCount > 0 || Boolean(String(ctaUrl || '').trim()) || Boolean(String(ctaText || '').trim());
+  return hasInput ? 'custom' : 'none';
+}

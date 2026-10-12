@@ -38,13 +38,29 @@ export function normalizeScheduleDateForRunOptions(runOptions: Record<string, an
   return scheduleDate;
 }
 
-export function normalizeCtas(runOptions: Record<string, any>): Array<{ text: string; link: string }> {
+// [2026-10-13] A CTA typed with a link but no text used to be dropped here; it now carries this default label
+//   (the same one the tail inserter and the continuous-publish queue already use).
+export const DEFAULT_CTA_TEXT = '자세히 보러가기';
+
+/** Per-CTA position as the UI emits it: 'bottom' | 'heading-N'. Anything else means "follow the global setting". */
+export function normalizeCtaPosition(value: unknown): string | undefined {
+  const position = String(value || '').trim();
+  return position === 'bottom' || /^heading-\d+$/.test(position) ? position : undefined;
+}
+
+export type NormalizedCta = { text: string; link: string; position?: string };
+
+export function normalizeCtas(runOptions: Record<string, any>): NormalizedCta[] {
   const ctasFromInput = Array.isArray(runOptions.ctas) ? runOptions.ctas : [];
+  // [2026-10-13] Keep `position` — dropping it here meant every CTA fell back to the global position and
+  //   the per-CTA "N번 소제목 아래" choice (v2.11.142) never reached the editor.
   const list = ctasFromInput
-    .map((c) => ({
-      text: String(c?.text || '').trim(),
-      link: String(c?.link || '').trim(),
-    }))
+    .map((c) => {
+      const link = String(c?.link || '').trim();
+      const text = String(c?.text || '').trim() || (link ? DEFAULT_CTA_TEXT : '');
+      const position = normalizeCtaPosition(c?.position);
+      return position ? { text, link, position } : { text, link };
+    })
     .filter((c) => c.text);
 
   if (list.length > 0) return list;

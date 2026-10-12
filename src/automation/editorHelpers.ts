@@ -37,6 +37,7 @@ import {
 } from './bodyTextCleanupPolicy.js';
 import {
   getExpectedLinkCardMin,
+  normalizeComparableUrl,
   planEditorTail,
   selectSectionCtas,
 } from './editorTailPlan.js';
@@ -59,6 +60,7 @@ import {
   applyTailHashtagsAfterCards,
   insertPreviousPostTailBlock,
   insertTailLinkCardBlock,
+  insertTailTextBlock,
 } from './editorTailActions.js';
 import { insertOfficialSiteTailBlock } from './editorOfficialSiteTail.js';
 import { getFtcDisclosureTemplateId } from './ftcDisclosurePresets.js';
@@ -2613,10 +2615,18 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       ctaPosition: resolved.ctaPosition,
       skipCta: resolved.skipCta,
       hashtags: resolved.hashtags,
+      // [2026-10-13] Lets a CTA aimed at a heading this post does not have fall back to the bottom.
+      headingCount: headings.length,
     });
     effectiveCtas = tailPlan.effectiveCtas;
     if (tailPlan.skippedDuplicateCtaCount > 0) {
       self.log(`   ⏭️ 이전글과 동일 URL CTA ${tailPlan.skippedDuplicateCtaCount}개 스킵 — 이전글 블록 하나만 삽입 (중복 방지)`);
+    }
+    if (tailPlan.skippedSameLinkCtaCount > 0) {
+      self.log(`   ⏭️ 같은 링크 CTA ${tailPlan.skippedSameLinkCtaCount}개 스킵 — 링크마다 카드 하나만 삽입`);
+    }
+    if (tailPlan.headingOverflowCtaCount > 0) {
+      self.log(`   ↘️ 소제목 ${headings.length}개를 넘는 위치의 CTA ${tailPlan.headingOverflowCtaCount}개 → 하단에 삽입`);
     }
 
     // [v2.11.142] CTA별 위치: heading 위치 CTA는 섹션 루프에서 이미 삽입됨.
@@ -2628,12 +2638,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     effectiveCtas = tailPlan.bottomCtas;
     if (!resolved.skipCta && effectiveCtas.length > 0) {
       const ctaPosition = 'bottom';
-
-      // ✅ [2026-01-19 버그 수정] 쇼핑커넥트 모드에서는 CTA를 1개로 제한 (링크카드 중복 방지)
-      if (resolved.affiliateLink && effectiveCtas.length > 1) {
-        self.log(`   ⚠️ [쇼핑커넥트] CTA ${effectiveCtas.length}개 → 1개로 제한 (링크카드 중복 방지)`);
-        effectiveCtas = [effectiveCtas[0]]; // 첫 번째 CTA만 사용
-      }
+      // [2026-10-13] The 2026-01-19 "shopping mode keeps only the first CTA" cap is gone: duplicate link cards are
+      //   prevented by planEditorTail's per-link dedupe, so extra CTAs the user typed are inserted below the banner.
 
       // ✅ [수정] 제휴 마케팅 고지 문구는 최상단(첫 번째 섹션)에서 삽입됨
       // 이전: CTA 앞에 삽입 → 변경: 글 최상단(1번 소제목 위)에 삽입
@@ -2679,16 +2685,28 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             tailLinkCardReady = true;
           } else {
             // ✅ 추가 CTA들: 배너 없이 구분선 + 후킹 + 링크만 (사용자 추가 CTA)
-            self.log(`   📎 [추가 CTA ${i}] \"${c.text}\" → ${c.link || '#'}`);
             const page = self.ensurePage();
-
-            const ctaResult = await insertTailLinkCardBlock({
-              self,
-              page,
-              label: `📎 ${c.text}`,
-              url: c.link || '#',
-            });
-            const appliedCtaText = normalizeAppliedCtaText(c.text);
+            const repeatsAffiliateLink = Boolean(c.link)
+              && normalizeComparableUrl(c.link) === normalizeComparableUrl(resolved.affiliateLink);
+            if (repeatsAffiliateLink) {
+              // [2026-10-13] The banner above already carries this link — a second card would duplicate it.
+              self.log(`   ⏭️ [추가 CTA ${i}] \"${c.text}\" 는 제휴링크와 같아 건너뜀 (배너가 이미 담음)`);
+            } else if (c.link) {
+              self.log(`   📎 [추가 CTA ${i}] \"${c.text}\" → ${c.link}`);
+              const ctaResult = await insertTailLinkCardBlock({
+                self,
+                page,
+                label: `📎 ${c.text}`,
+                url: c.link,
+              });
+              tailLinkCardInserted = true;
+              tailLinkCardReady = tailLinkCardReady || ctaResult.cardReady;
+            } else if (c.text) {
+              // [2026-10-13] No link → plain text block instead of typing a literal '#' URL.
+              self.log(`   📎 [추가 CTA ${i}] \"${c.text}\" (링크 없음 → 문구만)`);
+              await insertTailTextBlock({ self, page, label: `📎 ${c.text}` });
+            }
+            const appliedCtaText = repeatsAffiliateLink ? '' : normalizeAppliedCtaText(c.text);
             if (appliedCtaText) {
               recordMainProcessEditorCommitSemantic(resolved, {
                 kind: 'user-supplement',
@@ -2696,8 +2714,6 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                 text: appliedCtaText,
               });
             }
-            tailLinkCardInserted = true;
-            tailLinkCardReady = tailLinkCardReady || ctaResult.cardReady;
           }
 
           // ✅ 마지막 CTA 후: 이전글 삽입
@@ -2737,6 +2753,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             });
             tailLinkCardInserted = true;
             tailLinkCardReady = tailLinkCardReady || ctaResult.cardReady;
+          } else if (c.text) {
+            // [2026-10-13] A CTA without a link is still the user's text — it used to be skipped here.
+            self.log(`   📎 [일반 CTA ${i + 1}] \"${c.text}\" (링크 없음 → 문구만)`);
+            await insertTailTextBlock({ self, page, label: `📎 ${c.text}` });
+            recordMainProcessEditorCommitSemantic(resolved, {
+              kind: 'user-supplement',
+              supplementKind: 'cta',
+              text: c.text,
+            });
           }
 
 
@@ -2898,12 +2923,19 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     if (resolved.ctas.length > 0 || resolved.ctaText) {
       self.log('\n🔍 CTA 버튼 최종 확인 중...');
       const frame = (await self.getAttachedFrame());
-      const finalCheck = await self.verifyCtaInsertion(frame, resolved.ctas[0]?.text || resolved.ctaText || '');
+      // [2026-10-13] Check every CTA text, not only the first — a lost 2nd/3rd CTA was invisible here.
+      const ctaTexts: string[] = (resolved.ctas.length > 0 ? resolved.ctas : [{ text: resolved.ctaText }])
+        .map((c: { text?: string }) => String(c?.text || '').trim())
+        .filter(Boolean);
+      const missing: string[] = [];
+      for (const text of ctaTexts) {
+        if (!(await self.verifyCtaInsertion(frame, text))) missing.push(text);
+      }
 
-      if (finalCheck) {
-        self.log('✅ CTA 버튼이 정상적으로 삽입되었습니다.');
+      if (missing.length === 0) {
+        self.log(`✅ CTA ${ctaTexts.length}개가 정상적으로 삽입되었습니다.`);
       } else {
-        self.log('⚠️ CTA 버튼이 확인되지 않습니다. 발행 후 브라우저에서 직접 확인해주세요.');
+        self.log(`⚠️ CTA ${missing.length}/${ctaTexts.length}개가 확인되지 않습니다: ${missing.map((t) => `"${t}"`).join(', ')} — 발행 후 브라우저에서 직접 확인해주세요.`);
         self.log('💡 만약 버튼이 보이지 않으면, 네이버 블로그 에디터에서 직접 링크를 추가해주세요.');
       }
     }

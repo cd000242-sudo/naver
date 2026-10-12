@@ -1054,7 +1054,8 @@ function readUnifiedCtasFromUi(): Array<{ text: string; link?: string; position?
       const text = String(textEl?.value || '').trim();
       const link = String(linkEl?.value || '').trim();
       const position = String(posEl?.value || '').trim();
-      if (text) items.push({ text, link: link || undefined, position: position || undefined });
+      // [2026-10-13] A row with only a link used to be dropped here (user typed 3 links, got 1 CTA).
+      if (text || link) items.push({ text: text || '자세히 보러가기', link: link || undefined, position: position || undefined });
     }
   }
 
